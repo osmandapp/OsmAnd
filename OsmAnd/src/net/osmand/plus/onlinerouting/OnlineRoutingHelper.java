@@ -11,8 +11,10 @@ import net.osmand.plus.Version;
 import net.osmand.plus.onlinerouting.engine.EngineType;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.OnlineRoutingResponse;
+import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.util.Algorithms;
 
@@ -41,7 +43,6 @@ import static net.osmand.util.Algorithms.isEmpty;
 
 public class OnlineRoutingHelper {
 
-	private static final int CONNECTION_TIMEOUT = 30000;
 	private static final Log LOG = PlatformUtil.getLog(OnlineRoutingHelper.class);
 
 	private final OsmandApplication app;
@@ -98,23 +99,29 @@ public class OnlineRoutingHelper {
 
 	@Nullable
 	public OnlineRoutingResponse calculateRouteOnline(@Nullable String stringKey, @NonNull List<LatLon> path,
-	                                                  @Nullable Float startBearing, boolean leftSideNavigation, boolean initialCalculation,
-	                                                  @Nullable RouteCalculationProgress calculationProgress) throws IOException, JSONException {
+	                                                  @NonNull RouteCalculationParams params) throws IOException, JSONException {
 		OnlineRoutingEngine engine = getEngineByKey(stringKey);
-		return engine != null ? calculateRouteOnline(engine, path, startBearing, leftSideNavigation,
-				initialCalculation, calculationProgress) : null;
+		return engine != null ? calculateRouteOnline(engine, path, params) : null;
 	}
 
 	@Nullable
 	public OnlineRoutingResponse calculateRouteOnline(@NonNull OnlineRoutingEngine engine, @NonNull List<LatLon> path,
-	                                                  @Nullable Float startBearing, boolean leftSideNavigation, boolean initialCalculation,
-													  @Nullable RouteCalculationProgress calculationProgress) throws IOException, JSONException {
-		String url = engine.getFullUrl(path, startBearing);
-		String method = engine.getHTTPMethod();
-		String body = engine.getRequestBody(path, startBearing);
-		Map<String, String> headers = engine.getRequestHeaders();
-		String content = makeRequest(url, method, body, headers);
-		return engine.parseResponse(content, app, leftSideNavigation, initialCalculation, calculationProgress);
+	                                                  @NonNull RouteCalculationParams params) throws IOException, JSONException {
+		boolean leftSideNavigation = params.leftSide;
+		boolean initialCalculation = params.initialCalculation;
+		@Nullable RouteCalculationProgress calculationProgress = params.calculationProgress;
+		@Nullable Float startBearing = params.start.hasBearing() ? params.start.getBearing() : null;
+
+		if (params.gpxFile == null || initialCalculation) {
+			String url = engine.getFullUrl(path, startBearing);
+			String method = engine.getHTTPMethod();
+			String body = engine.getRequestBody(path, startBearing);
+			Map<String, String> headers = engine.getRequestHeaders();
+			String content = makeRequest(url, method, body, headers);
+			return engine.responseByContent(app, content, leftSideNavigation, initialCalculation, calculationProgress);
+		} else {
+			return engine.responseByGpxFile(app, params.gpxFile, initialCalculation, calculationProgress); // run 2nd phase
+		}
 	}
 
 	@NonNull
@@ -131,7 +138,8 @@ public class OnlineRoutingHelper {
 		HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(app));
 		connection.setRequestMethod(method);
-		connection.setConnectTimeout(CONNECTION_TIMEOUT);
+		connection.setConnectTimeout(AndroidNetworkUtils.CONNECT_TIMEOUT);
+		connection.setReadTimeout(AndroidNetworkUtils.READ_TIMEOUT);
 		// set custom headers
 		if (headers != null) {
 			for (String key :  headers.keySet()) {
@@ -271,5 +279,14 @@ public class OnlineRoutingHelper {
 		} else {
 			settings.ONLINE_ROUTING_ENGINES.set(null);
 		}
+	}
+
+	public boolean wasOnlineEngineWithApproximationUsed() {
+		for (OnlineRoutingEngine engine : cachedEngines.values()) {
+			if (engine.isOnlineEngineWithApproximation()) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

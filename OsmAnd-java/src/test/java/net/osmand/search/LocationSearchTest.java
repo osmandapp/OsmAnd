@@ -88,7 +88,16 @@ public class LocationSearchTest {
 		search("43°38′ 79°23′13.7″E", new LatLon(43 + 38/60f,79 + 23/60f + 13.7/3600f));
 		search("43°38′23\" 79°23′13.7″E", new LatLon(43 + 38/60f + 23/3600f,79 + 23/60f + 13.7/3600f));
 	}
-	
 
-	
+	@Test
+	public void testCommaLatLonSearch() throws IOException {
+		
+		search("33,95060 °S, 151,14453° E", new LatLon(-33.95060, 151.14453));
+		search("33,95060, 151,14453", new LatLon(33.95060, 151.14453));
+		search("33,95060 151,14453", new LatLon(33.95060,151.14453));
+
+		search("15,1235 S, 23,1244 W", new LatLon(-15.1235, -23.1244));
+		search("-15,1235, 23,1244", new LatLon(-15.1235, 23.1244));
+//		search("15,1235 S, 23,1244", new LatLon(-15.1235, 23.1244));
+	}
 }

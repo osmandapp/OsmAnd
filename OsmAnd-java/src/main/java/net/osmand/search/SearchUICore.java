@@ -289,6 +289,13 @@ public class SearchUICore {
 									|| (subType1.startsWith("route_hiking_") && subType1.endsWith("n_poi"))) {
 								similarityRadius = 50000;
 							}
+							final String ROUTE_ID = "route_id";
+							final String ROUTE_TRACK = "route_track";
+							final String ROUTE_TYPE_PREFIX = "activities_";
+							if (Algorithms.stringsEqual(a1.getAdditionalInfo(ROUTE_ID), a2.getAdditionalInfo(ROUTE_ID))
+								&& (subType1.startsWith(ROUTE_TYPE_PREFIX) || subType1.equals(ROUTE_TRACK))) {
+								similarityRadius = 50000;
+							}
 						}
 					} else if (ObjectType.isAddress(r1.objectType) && ObjectType.isAddress(r2.objectType)) {
 						similarityRadius = 100;
@@ -395,8 +402,7 @@ public class SearchUICore {
 		SearchAmenityTypesAPI searchAmenityTypesAPI = new SearchAmenityTypesAPI(poiTypes);
 		apis.add(searchAmenityTypesAPI);
 		apis.add(new SearchAmenityByTypeAPI(poiTypes, searchAmenityTypesAPI));
-		SearchBuildingAndIntersectionsByStreetAPI streetsApi =
-				new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI();
+		SearchBuildingAndIntersectionsByStreetAPI streetsApi = new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI();
 		apis.add(streetsApi);
 		SearchStreetByCityAPI cityApi = new SearchCoreFactory.SearchStreetByCityAPI(streetsApi);
 		apis.add(cityApi);
@@ -488,6 +494,12 @@ public class SearchUICore {
 
 	public SearchPhrase resetPhrase(String text) {
 		this.phrase = this.phrase.generateNewPhrase(text, searchSettings);
+		return this.phrase;
+	}
+	
+	public SearchPhrase resetPhrase(SearchResult result) {
+		this.phrase = this.phrase.generateNewPhrase("", searchSettings);
+		this.phrase.addResult(result, this.phrase);
 		return this.phrase;
 	}
 	
@@ -823,10 +835,12 @@ public class SearchUICore {
 		@Override
 		public boolean publish(SearchResult object) {
 			if (phrase != null && object.otherNames != null && !phrase.getFirstUnknownNameStringMatcher().matches(object.localeName)) {
-				for (String s : object.otherNames) {
-					if (phrase.getFirstUnknownNameStringMatcher().matches(s)) {
-						object.alternateName = s;
-						break;
+				if (Algorithms.isEmpty(object.alternateName)) {
+					for (String s : object.otherNames) {
+						if (phrase.getFirstUnknownNameStringMatcher().matches(s)) {
+							object.alternateName = s;
+							break;
+						}
 					}
 				}
 				if (Algorithms.isEmpty(object.alternateName) && object.object instanceof Amenity) {

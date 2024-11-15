@@ -2,7 +2,7 @@ package net.osmand.plus.myplaces.tracks.controller;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.shared.gpx.data.TrackFolder;
 
 import java.io.File;
 

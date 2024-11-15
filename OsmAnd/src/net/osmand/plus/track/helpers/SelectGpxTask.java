@@ -7,12 +7,12 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities;
+import net.osmand.plus.shared.SharedUtil;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.shared.io.KFile;
 
-import java.io.File;
 import java.util.List;
 
 public class SelectGpxTask extends AsyncTask<Void, SelectedGpxFile, Void> {
@@ -55,7 +55,7 @@ public class SelectGpxTask extends AsyncTask<Void, SelectedGpxFile, Void> {
 			} else {
 				selectedGpxFile = selectionHelper.getSelectedFileByPath(path);
 				if (selectedGpxFile == null) {
-					GPXFile gpxFile = GPXUtilities.loadGPXFile(new File(path));
+					GpxFile gpxFile = SharedUtil.loadGpxFile(new KFile(path));
 					selectedGpxFile = selectionHelper.selectGpxFile(gpxFile, selectionParams);
 				} else {
 					selectionHelper.updateSelected(true, selectedGpxFile);

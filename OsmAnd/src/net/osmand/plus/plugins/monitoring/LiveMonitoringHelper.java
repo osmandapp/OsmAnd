@@ -14,6 +14,7 @@ import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -203,8 +204,8 @@ public class LiveMonitoringHelper {
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 			URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(),
 					url.getPath(), url.getQuery(), url.getRef());
-			urlConnection.setConnectTimeout(15000);
-			urlConnection.setReadTimeout(15000);
+			urlConnection.setConnectTimeout(AndroidNetworkUtils.CONNECT_TIMEOUT);
+			urlConnection.setReadTimeout(AndroidNetworkUtils.READ_TIMEOUT);
 			log.info("Monitor " + uri);
 			if (urlConnection.getResponseCode() / 100 != 2) {
 				String msg = urlConnection.getResponseCode() + " : " + //$NON-NLS-1$//$NON-NLS-2$

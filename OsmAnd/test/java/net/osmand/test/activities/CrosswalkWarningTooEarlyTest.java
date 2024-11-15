@@ -43,13 +43,12 @@ import java.util.List;
 @RunWith(AndroidJUnit4.class)
 public class CrosswalkWarningTooEarlyTest extends AndroidTest {
 
+	private static final int SPEED_KM_PER_HOUR = 80;
 	private static final LatLon START = new LatLon(45.92051, 35.20653);
 	private static final LatLon END = new LatLon(45.91741, 35.21372);
-	public static final int SPEED_KM_PER_HOUR = 80;
 
 	@Rule
-	public ActivityScenarioRule<MapActivity> mActivityScenarioRule =
-			new ActivityScenarioRule<>(MapActivity.class);
+	public ActivityScenarioRule<MapActivity> scenarioRule = new ActivityScenarioRule<>(MapActivity.class);
 
 	@Before
 	@Override

@@ -202,6 +202,13 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		};
 	}
 
+	@Override
+	protected void updateResources() {
+		super.updateResources();
+		cleanupResources();
+		data.clearCache();
+	}
+
 	private Set<PoiUIFilter> collectFilters() {
 		Set<PoiUIFilter> calculatedFilters = new TreeSet<>(filters);
 		if (showTravel) {

@@ -21,13 +21,14 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.base.BaseOsmAndDialogFragment
 import net.osmand.plus.myplaces.tracks.DialogClosedListener
-import net.osmand.plus.myplaces.tracks.TrackFiltersHelper
+import net.osmand.shared.gpx.filters.TrackFiltersHelper
 import net.osmand.plus.myplaces.tracks.filters.ListFilterAdapter
-import net.osmand.plus.myplaces.tracks.filters.ListTrackFilter
-import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener
+import net.osmand.shared.gpx.SmartFolderUpdateListener
 import net.osmand.plus.myplaces.tracks.filters.TrackFilterPropertiesAdapter
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.widgets.dialogbutton.DialogButton
+import net.osmand.shared.gpx.filters.ListTrackFilter
+import net.osmand.shared.gpx.data.SmartFolder
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 
 class FilterAllVariantsListFragment : BaseOsmAndDialogFragment(), SmartFolderUpdateListener {
@@ -39,18 +40,18 @@ class FilterAllVariantsListFragment : BaseOsmAndDialogFragment(), SmartFolderUpd
 			manager: FragmentManager,
 			filter: ListTrackFilter,
 			dialogClosedListener: DialogClosedListener?,
-			selectedItemsListener: NewSelectedItemsListener) {
+			selectedItemsListener: NewSelectedItemsListener,
+			nightMode: Boolean
+		) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 				val initialFilter =
-					TrackFiltersHelper.createFilter(app, filter.trackFilterType, null)
+					TrackFiltersHelper.createFilter(filter.trackFilterType, null)
 				if (initialFilter !is ListTrackFilter) {
 					throw IllegalArgumentException("Filter should be subclass from ListTrackFilter")
 				}
 				initialFilter.initWithValue(filter)
-				val nightMode = app.daynightHelper.isNightMode(true)
 				val currentFilter =
 					TrackFiltersHelper.createFilter(
-						app,
 						filter.trackFilterType,
 						null) as ListTrackFilter
 				currentFilter.initWithValue(filter)
@@ -72,7 +73,7 @@ class FilterAllVariantsListFragment : BaseOsmAndDialogFragment(), SmartFolderUpd
 	}
 
 	lateinit var initialFilter: ListTrackFilter
-	lateinit var adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
+	lateinit var adapter: ListFilterAdapter
 
 	var progressBar: ProgressBar? = null
 	private var showButton: DialogButton? = null
@@ -169,7 +170,7 @@ class FilterAllVariantsListFragment : BaseOsmAndDialogFragment(), SmartFolderUpd
 			setNavigationOnClickListener {
 				closeWithoutApply()
 			}
-			setTitle(currentChangesFilter.trackFilterType.nameResId)
+			setTitle(currentChangesFilter.trackFilterType.getName())
 		}
 	}
 
@@ -193,6 +194,7 @@ class FilterAllVariantsListFragment : BaseOsmAndDialogFragment(), SmartFolderUpd
 	}
 
 	private fun setupList(view: View) {
+		adapter.nightMode = nightMode;
 		val recyclerView = view.findViewById<RecyclerView>(R.id.filters_list)
 		recyclerView.layoutManager = LinearLayoutManager(app)
 		recyclerView.itemAnimator = null
@@ -223,5 +225,20 @@ class FilterAllVariantsListFragment : BaseOsmAndDialogFragment(), SmartFolderUpd
 
 	interface NewSelectedItemsListener {
 		fun setSelectedItemsDiff(allSelectedItems: List<String>, selectedItems: List<String>)
+	}
+
+	override fun onSmartFoldersUpdated() {
+	}
+
+	override fun onSmartFolderUpdated(smartFolder: SmartFolder) {
+	}
+
+	override fun onSmartFolderRenamed(smartFolder: SmartFolder) {
+	}
+
+	override fun onSmartFolderSaved(smartFolder: SmartFolder) {
+	}
+
+	override fun onSmartFolderCreated(smartFolder: SmartFolder) {
 	}
 }

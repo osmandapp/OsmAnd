@@ -6,6 +6,7 @@ import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_CLOUD;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRECIPITATION;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_TEMPERATURE;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_ANIMATION;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_SPEED;
 import static net.osmand.plus.plugins.weather.enums.WeatherForecastDownloadState.FINISHED;
 
@@ -23,6 +24,8 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.local.LocalIndexHelper;
 import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.plugins.weather.WeatherWebClient.DownloadState;
+import net.osmand.plus.plugins.weather.WeatherWebClient.WeatherWebClientListener;
 import net.osmand.plus.plugins.weather.containers.WeatherTotalCacheSize;
 import net.osmand.plus.plugins.weather.units.WeatherUnit;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -32,8 +35,8 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +51,8 @@ public class WeatherHelper {
 	private final Map<Short, WeatherBand> weatherBands = new LinkedHashMap<>();
 	private final AtomicInteger bandsSettingsVersion = new AtomicInteger(0);
 	private final WeatherTotalCacheSize totalCacheSize;
+	private List<WeakReference<WeatherWebClientListener>> downloadStateListeners = new ArrayList<>();
+	private WeatherWebClient webClient;
 
 	private WeatherTileResourcesManager weatherTileResourcesManager;
 
@@ -62,6 +67,7 @@ public class WeatherHelper {
 		weatherBands.put(WEATHER_BAND_WIND_SPEED, WeatherBand.withWeatherBand(app, WEATHER_BAND_WIND_SPEED));
 		weatherBands.put(WEATHER_BAND_CLOUD, WeatherBand.withWeatherBand(app, WEATHER_BAND_CLOUD));
 		weatherBands.put(WEATHER_BAND_PRECIPITATION, WeatherBand.withWeatherBand(app, WEATHER_BAND_PRECIPITATION));
+		weatherBands.put(WEATHER_BAND_WIND_ANIMATION, WeatherBand.withWeatherBand(app, WEATHER_BAND_WIND_ANIMATION));
 	}
 
 	@NonNull
@@ -106,20 +112,23 @@ public class WeatherHelper {
 	}
 
 	public void updateMapPresentationEnvironment(@NonNull MapRendererContext mapRenderer) {
-		if (weatherTileResourcesManager != null) {
+		MapPresentationEnvironment environment = mapRenderer.getMapPresentationEnvironment();
+		if (weatherTileResourcesManager != null || environment == null) {
 			return;
 		}
 		File cacheDir = getForecastCacheDir();
 		String projResourcesPath = app.getAppPath(null).getAbsolutePath();
 		int tileSize = 256;
-		MapPresentationEnvironment mapPresentationEnvironment = mapRenderer.getMapPresentationEnvironment();
-		float densityFactor = mapPresentationEnvironment.getDisplayDensityFactor();
-
-		WeatherWebClient webClient = new WeatherWebClient();
+		float densityFactor = environment.getDisplayDensityFactor();
+		if (webClient != null) {
+			webClient.cleanupResources();
+		}
+		webClient = new WeatherWebClient();
 		WeatherTileResourcesManager weatherTileResourcesManager = new WeatherTileResourcesManager(
 				new BandIndexGeoBandSettingsHash(), cacheDir.getAbsolutePath(), projResourcesPath,
 				tileSize, densityFactor, webClient.instantiateProxy(true)
 		);
+		webClient.setDownloadStateListener(this::onDownloadStateChanged);
 		webClient.swigReleaseOwnership();
 		weatherTileResourcesManager.setBandSettings(getBandSettings(weatherTileResourcesManager));
 		this.weatherTileResourcesManager = weatherTileResourcesManager;
@@ -195,7 +204,7 @@ public class WeatherHelper {
 	}
 
 	@NonNull
-	public BandIndexGeoBandSettingsHash getBandSettings(@NonNull WeatherTileResourcesManager weatherResourcesManager) {
+	public BandIndexGeoBandSettingsHash getBandSettings(@NonNull WeatherTileResourcesManager resourcesManager) {
 		BandIndexGeoBandSettingsHash bandSettings = new BandIndexGeoBandSettingsHash();
 
 		for (WeatherBand band : weatherBands.values()) {
@@ -209,16 +218,41 @@ public class WeatherHelper {
 				String contourStyleName = band.getContourStyleName();
 				String colorProfilePath = app.getAppPath(band.getColorFilePath()).getAbsolutePath();
 				MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
-				MapPresentationEnvironment mapPresentationEnvironment =
-						mapContext != null ? mapContext.getMapPresentationEnvironment() : null;
-				ZoomLevelDoubleListHash contourLevels = band.getContourLevels(
-						weatherResourcesManager, mapPresentationEnvironment);
+				MapPresentationEnvironment environment = mapContext != null ? mapContext.getMapPresentationEnvironment() : null;
+				ZoomLevelDoubleListHash contourLevels = band.getContourLevels(resourcesManager, environment);
+
 				GeoBandSettings settings = new GeoBandSettings(unit, unitFormatGeneral, unitFormatPrecise,
 						internalUnit, opacity, colorProfilePath, contourStyleName, contourLevels);
 				bandSettings.set(band.getBandIndex(), settings);
 			}
 		}
 		return bandSettings;
+	}
+
+	private void onDownloadStateChanged(@NonNull DownloadState downloadState, int activeRequestsCounter) {
+		List<WeakReference<WeatherWebClientListener>> listeners = downloadStateListeners;
+		for (WeakReference<WeatherWebClientListener> ref : listeners) {
+			WeatherWebClientListener listener = ref.get();
+			if (listener != null) {
+				listener.onDownloadStateChanged(downloadState, activeRequestsCounter);
+			}
+		}
+	}
+
+	public void addDownloadStateListener(@NonNull WeatherWebClientListener listener) {
+		downloadStateListeners = Algorithms.updateWeakReferencesList(downloadStateListeners, listener, true);
+	}
+
+	public void removeDownloadStateListener(@NonNull WeatherWebClientListener listener) {
+		downloadStateListeners = Algorithms.updateWeakReferencesList(downloadStateListeners, listener, false);
+	}
+
+	public int getActiveRequestsCount() {
+		return webClient != null ? webClient.getActiveRequestsCount() : 0;
+	}
+
+	public boolean isProcessingTiles() {
+		return weatherTileResourcesManager != null && weatherTileResourcesManager.isProcessingTiles();
 	}
 
 	public int getBandsSettingsVersion() {

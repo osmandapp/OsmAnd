@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -27,8 +27,8 @@
 		android:paddingBottom="@dimen/content_padding_small"
 		android:textColor="?android:textColorPrimary"
 		android:textSize="@dimen/dialog_header_text_size"
-		osmand:lineHeight="@dimen/welcome_header_text_size"
-		osmand:typeface="@string/font_roboto_medium"
+		app:lineHeight="@dimen/welcome_header_text_size"
+		app:typefaceWeight="medium"
 		tools:text="@string/backup_delete_all_data" />
 
 	<net.osmand.plus.widgets.TextViewEx
@@ -41,8 +41,8 @@
 		android:paddingBottom="@dimen/content_padding_small"
 		android:textColor="?android:textColorPrimary"
 		android:textSize="@dimen/default_list_text_size"
-		osmand:lineHeight="@dimen/default_title_line_height"
-		osmand:typeface="@string/font_roboto_regular"
+		app:lineHeight="@dimen/default_title_line_height"
+		android:textStyle="normal"
 		tools:text="@string/backup_delete_all_data_warning" />
 
 </LinearLayout>

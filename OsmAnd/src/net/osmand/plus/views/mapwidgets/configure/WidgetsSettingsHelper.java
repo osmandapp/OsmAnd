@@ -70,7 +70,7 @@ public class WidgetsSettingsHelper {
 		settings.TRANSPARENT_MAP_THEME.resetModeToDefault(appMode);
 		mapButtonsHelper.getCompassButtonState().getVisibilityPref().resetModeToDefault(appMode);
 		settings.SHOW_DISTANCE_RULER.resetModeToDefault(appMode);
-		mapButtonsHelper.resetQuickActionsForMode(appMode);
+		mapButtonsHelper.resetButtonStatesForMode(appMode, mapButtonsHelper.getAllButtonsStates());
 	}
 
 	public void copyConfigureScreenSettings(@NonNull ApplicationMode fromAppMode) {
@@ -80,7 +80,11 @@ public class WidgetsSettingsHelper {
 		copyPrefFromAppMode(settings.TRANSPARENT_MAP_THEME, fromAppMode);
 		copyPrefFromAppMode(mapButtonsHelper.getCompassButtonState().getVisibilityPref(), fromAppMode);
 		copyPrefFromAppMode(settings.SHOW_DISTANCE_RULER, fromAppMode);
-		mapButtonsHelper.copyQuickActionsFromMode(settings.getApplicationMode(), fromAppMode);
+		copyPrefFromAppMode(settings.POSITION_PLACEMENT_ON_MAP, fromAppMode);
+		copyPrefFromAppMode(settings.DISTANCE_BY_TAP_TEXT_SIZE, fromAppMode);
+		copyPrefFromAppMode(settings.SHOW_SPEEDOMETER, fromAppMode);
+		copyPrefFromAppMode(settings.SPEEDOMETER_SIZE, fromAppMode);
+		mapButtonsHelper.copyButtonStatesFromMode(appMode, fromAppMode, mapButtonsHelper.getAllButtonsStates());
 	}
 
 	public void copyWidgetsForPanel(@NonNull ApplicationMode fromAppMode, @NonNull WidgetsPanel panel) {
@@ -115,6 +119,9 @@ public class WidgetsSettingsHelper {
 				}
 
 				if (!Algorithms.isEmpty(widgetIdToAdd)) {
+					String customId = !widgetIdToAdd.equals(defaultWidgetInfo.key) ? widgetIdToAdd : null;
+					widgetInfoToCopy.widget.copySettingsFromMode(fromAppMode, appMode, customId);
+
 					if (previousPage != widgetInfoToCopy.pageIndex || newPagedOrder.size() == 0) {
 						previousPage = widgetInfoToCopy.pageIndex;
 						newPagedOrder.add(new ArrayList<>());

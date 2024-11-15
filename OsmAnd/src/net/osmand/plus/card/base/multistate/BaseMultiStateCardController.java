@@ -1,6 +1,5 @@
 package net.osmand.plus.card.base.multistate;
 
-import static net.osmand.plus.utils.ColorUtilities.getDisabledTextColor;
 import static net.osmand.plus.utils.ColorUtilities.getPrimaryTextColor;
 
 import android.view.View;
@@ -39,16 +38,15 @@ public abstract class BaseMultiStateCardController implements IMultiStateCardCon
 		boolean nightMode = card.isNightMode();
 		List<PopUpMenuItem> items = new ArrayList<>();
 		for (CardState state : getCardStates()) {
-			boolean available = isCardStateAvailable(state);
-			int color = available ? getPrimaryTextColor(app, nightMode) : getDisabledTextColor(app, nightMode);
-
-			items.add(new PopUpMenuItem.Builder(app)
-					.setTitle(state.toHumanString(app))
-					.showTopDivider(state.isShowTopDivider())
-					.setTitleColor(color)
-					.setTag(state)
-					.create()
-			);
+			if (isCardStateAvailable(state)) {
+				items.add(new PopUpMenuItem.Builder(app)
+						.setTitle(state.toHumanString(app))
+						.showTopDivider(state.isShowTopDivider())
+						.setTitleColor(getPrimaryTextColor(app, nightMode))
+						.setTag(state)
+						.create()
+				);
+			}
 		}
 		PopUpMenuDisplayData data = new PopUpMenuDisplayData();
 		data.anchorView = view;

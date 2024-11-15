@@ -1,18 +1,25 @@
 package net.osmand.plus.track.helpers;
 
-import static net.osmand.gpx.GpxParameter.SPLIT_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.SPLIT_TYPE;
 
 import android.os.AsyncTask;
-import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.gpx.GpxParameter;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.track.helpers.GpxReaderTask.GpxDbReaderCallback;
+import net.osmand.shared.gpx.DataItem;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxDatabase;
+import net.osmand.shared.data.StringIntPair;
+import net.osmand.shared.gpx.GpxDbUtils;
+import net.osmand.shared.gpx.GpxDirItem;
+import net.osmand.shared.gpx.GpxParameter;
+import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -23,20 +30,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.stream.Collectors;
 
+@Deprecated
 public class GpxDbHelper implements GpxDbReaderCallback {
 	private static final Log LOG = PlatformUtil.getLog(GpxDbHelper.class);
 	private final OsmandApplication app;
-	private final GPXDatabase database;
+	private final GpxDatabase database;
 
-	private final Map<File, GpxDirItem> dirItems = new ConcurrentHashMap<>();
-	private final Map<File, GpxDataItem> dataItems = new ConcurrentHashMap<>();
+	private final Map<KFile, GpxDirItem> dirItems = new ConcurrentHashMap<>();
+	private final Map<KFile, GpxDataItem> dataItems = new ConcurrentHashMap<>();
 
-	private final ConcurrentLinkedQueue<File> readingItems = new ConcurrentLinkedQueue<>();
-	private final Map<File, GpxDataItem> readingItemsMap = new ConcurrentHashMap<>();
-	private final Map<File, GpxDataItemCallback> readingItemsCallbacks = new ConcurrentHashMap<>();
+	private final ConcurrentLinkedQueue<KFile> readingItems = new ConcurrentLinkedQueue<>();
+	private final Map<KFile, GpxDataItem> readingItemsMap = new ConcurrentHashMap<>();
+	private final Map<KFile, GpxDataItemCallback> readingItemsCallbacks = new ConcurrentHashMap<>();
 
 	private GpxReaderTask readerTask;
+	public static long readTrackItemCount = 0;
 
 	public interface GpxDataItemCallback {
 
@@ -49,7 +59,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 
 	public GpxDbHelper(@NonNull OsmandApplication app) {
 		this.app = app;
-		database = new GPXDatabase(app);
+		database = new GpxDatabase();
 	}
 
 	public void loadItems() {
@@ -59,32 +69,27 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 
 	public void loadGpxItems() {
 		long start = System.currentTimeMillis();
-		long batchTime = System.currentTimeMillis();
 		List<GpxDataItem> items = getItems();
 
-		int counter = 0;
-		for (GpxDataItem item : items) {
-			File file = item.getFile();
-			if (file.exists()) {
-				putToCache(item);
+		Map<KFile, Boolean> fileExistenceMap = items.stream().collect(
+				Collectors.toMap(GpxDataItem::getFile, item -> item.getFile().exists()));
+
+		items.forEach(item -> {
+			KFile file = item.getFile();
+			if (Boolean.TRUE.equals(fileExistenceMap.get(file))) {
+				dataItems.put(file, item);
 			} else {
 				remove(file);
 			}
-			counter++;
-			if (counter % 100 == 0) {
-				long endTime = System.currentTimeMillis();
-				LOG.info("Loading tracks batch. took " + (endTime - batchTime) + "ms");
-				batchTime = endTime;
-			}
-		}
-		LOG.info("Time to loadGpxItems " + (System.currentTimeMillis() - start) + " ms items count " + items.size());
+		});
+		LOG.info("Time to loadGpxItems " + (System.currentTimeMillis() - start) + " ms, " + items.size() + " items");
 	}
 
 	public void loadGpxDirItems() {
 		long start = System.currentTimeMillis();
 		List<GpxDirItem> items = getDirItems();
 		for (GpxDirItem item : items) {
-			File file = item.getFile();
+			KFile file = item.getFile();
 			if (file.exists()) {
 				putToCache(item);
 			} else {
@@ -95,7 +100,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	}
 
 	private void putToCache(@NonNull DataItem item) {
-		File file = item.getFile();
+		KFile file = item.getFile();
 		if (item instanceof GpxDataItem) {
 			dataItems.put(file, (GpxDataItem) item);
 		} else if (item instanceof GpxDirItem) {
@@ -103,8 +108,8 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		}
 	}
 
-	private void removeFromCache(@NonNull File file) {
-		if (GpxUiHelper.isGpxFile(file)) {
+	private void removeFromCache(@NonNull KFile file) {
+		if (GpxDbUtils.INSTANCE.isGpxFile(file)) {
 			dataItems.remove(file);
 		} else {
 			dirItems.remove(file);
@@ -112,9 +117,13 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	}
 
 	public boolean rename(@NonNull File currentFile, @NonNull File newFile) {
+		return rename(SharedUtil.kFile(currentFile), SharedUtil.kFile(newFile));
+	}
+
+	public boolean rename(@NonNull KFile currentFile, @NonNull KFile newFile) {
 		boolean success = database.rename(currentFile, newFile);
 		if (success) {
-			GpxDataItem newItem = new GpxDataItem(app, newFile);
+			GpxDataItem newItem = new GpxDataItem(newFile);
 			GpxDataItem oldItem = dataItems.get(currentFile);
 			if (oldItem != null) {
 				newItem.copyData(oldItem);
@@ -132,14 +141,27 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		return res;
 	}
 
+	public boolean updateDataItemParameter(@NonNull DataItem item,
+	                                       @NonNull GpxParameter parameter,
+	                                       @Nullable Object value) {
+		item.setParameter(parameter, value);
+		boolean res = database.updateDataItemParameter(item, parameter, value);
+		putToCache(item);
+		return res;
+	}
+
 	public boolean remove(@NonNull File file) {
+		return remove(SharedUtil.kFile(file));
+	}
+
+	public boolean remove(@NonNull KFile file) {
 		boolean res = database.remove(file);
 		removeFromCache(file);
 		return res;
 	}
 
 	public boolean remove(@NonNull DataItem item) {
-		File file = item.getFile();
+		KFile file = item.getFile();
 		boolean res = database.remove(file);
 		removeFromCache(file);
 		return res;
@@ -160,7 +182,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 
 	@NonNull
 	public List<GpxDataItem> getItems() {
-		return database.getGpxDataItems();
+		return database.getGpxDataItemsBlocking();
 	}
 
 	@NonNull
@@ -169,11 +191,10 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	}
 
 	@NonNull
-	public List<Pair<String, Integer>> getStringIntItemsCollection(@NonNull String columnName,
+	public List<StringIntPair> getStringIntItemsCollection(@NonNull String columnName,
 	                                                               boolean includeEmptyValues,
 	                                                               boolean sortByName,
 	                                                               boolean sortDescending) {
-
 		return database.getStringIntItemsCollection(columnName,
 				includeEmptyValues,
 				sortByName,
@@ -195,12 +216,17 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 
 	@NonNull
 	public GpxDirItem getGpxDirItem(@NonNull File file) {
+		return getGpxDirItem(SharedUtil.kFile(file));
+	}
+
+	@NonNull
+	public GpxDirItem getGpxDirItem(@NonNull KFile file) {
 		GpxDirItem item = dirItems.get(file);
 		if (item == null) {
 			item = database.getGpxDirItem(file);
 		}
 		if (item == null) {
-			item = new GpxDirItem(app, file);
+			item = new GpxDirItem(file);
 			add(item);
 		}
 		return item;
@@ -208,22 +234,28 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 
 	@Nullable
 	public GpxDataItem getItem(@NonNull File file, @Nullable GpxDataItemCallback callback) {
-		if (file.getPath().isEmpty()) {
+		return getItem(SharedUtil.kFile(file), callback);
+	}
+
+	@Nullable
+	public GpxDataItem getItem(@NonNull KFile file, @Nullable GpxDataItemCallback callback) {
+		if (file.path().isEmpty()) {
 			return null;
 		}
 		GpxDataItem item = dataItems.get(file);
-		if (GpxDbUtils.isAnalyseNeeded(item) && !isGpxReading(file)) {
+		if (GpxDbUtils.INSTANCE.isAnalyseNeeded(item) && !isGpxReading(file)) {
+			readTrackItemCount++;
 			readGpxItem(file, item, callback);
 		}
 		return item;
 	}
 
 	public boolean hasGpxDataItem(@NonNull File file) {
-		return dataItems.containsKey(file);
+		return dataItems.containsKey(SharedUtil.kFile(file));
 	}
 
 	public boolean hasGpxDirItem(@NonNull File file) {
-		return dirItems.containsKey(file);
+		return dirItems.containsKey(SharedUtil.kFile(file));
 	}
 
 	@NonNull
@@ -240,12 +272,12 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	}
 
 	private void updateDefaultAppearance(@NonNull GpxDataItem item, boolean updateExistingValues) {
-		File file = item.getFile();
-		File dir = file.getParentFile();
+		KFile file = item.getFile();
+		KFile dir = file.getParentFile();
 		if (dir != null) {
 			GpxDirItem dirItem = getGpxDirItem(dir);
 
-			for (GpxParameter parameter : GpxParameter.getAppearanceParameters()) {
+			for (GpxParameter parameter : GpxParameter.Companion.getAppearanceParameters()) {
 				Object value = item.getParameter(parameter);
 				Object defaultValue = dirItem.getParameter(parameter);
 				if (defaultValue != null && (updateExistingValues || value == null)) {
@@ -261,13 +293,13 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		return readerTask == null || !readerTask.isReading();
 	}
 
-	private boolean isGpxReading(@NonNull File file) {
+	private boolean isGpxReading(@NonNull KFile file) {
 		GpxReaderTask analyser = this.readerTask;
 		return readingItems.contains(file) || (analyser != null && file.equals(analyser.getFile()));
 	}
 
-	private void readGpxItem(@NonNull File file, @Nullable GpxDataItem item, @Nullable GpxDataItemCallback callback) {
-		readingItemsMap.put(file, item != null ? item : new GpxDataItem(app, file));
+	private void readGpxItem(@NonNull KFile file, @Nullable GpxDataItem item, @Nullable GpxDataItemCallback callback) {
+		readingItemsMap.put(file, item != null ? item : new GpxDataItem(file));
 		if (callback != null) {
 			readingItemsCallbacks.put(file, callback);
 		}
@@ -290,7 +322,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	}
 
 	@NonNull
-	protected GPXDatabase getGPXDatabase() {
+	protected GpxDatabase getGPXDatabase() {
 		return database;
 	}
 

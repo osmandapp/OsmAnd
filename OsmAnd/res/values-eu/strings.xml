@@ -20,7 +20,6 @@
     <string name="driving_region_us">EEBB</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Europa, Asia, Hego Amerika eta antzekoak</string>
-    <string name="driving_region_uk">Erresuma Batua, India eta antzekoak</string>
     <string name="speak_title">Iragarri…</string>
     <string name="speak_descr">Ezarri iragarpenak: Kaleen izenak, trafiko abisuak (geldialdi behartuak, abiadura murriztaileak), Abiadura-kameren iragarpena, eta abiadura mugak.</string>
     <string name="speak_street_names">Kaleen izenak (TTS)</string>
@@ -256,27 +255,7 @@
 \nOsmAnd aktiboki garatua izaten ari da eta proiektuaren prozesuak dituen garatze, programatze eta funtzionalitate berrien probak egiteko behar den finantziazio laguntzetan ere oinarritzen da. OsmAnd+ erosiz gero, aplikazioa are zirraragarria izatea laguntzen duzu! Ezaugarri berriak finantzatzea edo dohaintza orokor bat egitea posible da osman.net-en.</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapak &amp; Nabigazioa</string>
     <string name="osmand_plus_short_description_80_chars">Lineaz Kanpoko eta Sare Bidezko OSM Mapetarako Mapa Ikusle eta Nabigatzaile Mugikor Globala</string>
-    <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions)
-\n
-\nOsmAnd+ kode irekiko nabigaziorako aplikazioa da, OpenStreetMap-eko (OSM) mota askotako munduko mapetara sarbidearekin. Mapa guztiak (bektore edo tesela mapak) telefonoaren memoria txartelean gorde daitezke, lineaz kanpoko erabilpena bermatzeko. OsmAnd-ek ere lineaz kanpoko eta sareko ibilbide-kalkulua eskaintzen du, txandakako ahots gidaritzarekin.
-\n
-\nOsmAnd+ aplikazioaren ordaindutako bertsioa da, hau erosiz gero proiektua aurrera eramaten laguntzen ari zara, ezaugarri berrien garapena finantzatzen, eta gainera, azken eguneraketak jasoko dituzu.
-\n
-\nEzaugarri nagusi batzuk:
-\n- Lineaz kanpoko erabateko erabilpena (bektore edo tesela mapak gorde ondoren aukeratu daitezken karpetetan)
-\n- Lineaz kanpoko mundu guztiko mapa konpaktuak eskuragarri
-\n- Muga gabeko herrialde edo eskualdeetako mapen deskarga, aplikaziotik zuzenean
-\n- Lineaz kanpoko WIkipedia-ko erabilpena (deskargatu Wikipedia-ko POIak), turismorako erabilgarriak
-\n- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interes puntuak (POI), gogokoak,  garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak eta topografia-ezaugarriak sestra-kurbak/erliebearen itzala/malda bezalakoak
-\n
-\n- Lineaz kanpoko helbide eta lekuen bilatzailea (POI-ak)
-\n- Lineaz kanpoko ibilbide-kalkulua distantzia ertainetarako
-\n- Kotxea, bizikleta eta oinezkoentzat modua:
-\n- Aukerazko egun/gau ikuspegi automatizatua
-\n- Aukerazko abiaduraren araberako maparen zooma
-\n- Aukerazko maparen lerrokatzea, iparrorratzaren edo norabidearen araberakoa
-\n- Aukerazko errei gidaritza, abiadura muga bistaratzea, grabaketa edo ahots bihurgailua motorra⏎ ⇥
-\n"</string>
+    <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions)\n\n\n\nOsmAnd+ kode irekiko nabigaziorako aplikazioa da, OpenStreetMap-eko (OSM) mota askotako munduko mapetara sarbidearekin. Mapa guztiak (bektore edo tesela mapak) telefonoaren memoria txartelean gorde daitezke, lineaz kanpoko erabilpena bermatzeko. OsmAnd-ek ere lineaz kanpoko eta sareko ibilbide-kalkulua eskaintzen du, txandakako ahots gidaritzarekin.\n\n\n\nOsmAnd+ aplikazioaren ordaindutako bertsioa da, hau erosiz gero proiektua aurrera eramaten laguntzen ari zara, ezaugarri berrien garapena finantzatzen, eta gainera, azken eguneraketak jasoko dituzu.\n\n\n\nEzaugarri nagusi batzuk:\n\n- Lineaz kanpoko erabateko erabilpena (bektore edo tesela mapak gorde ondoren aukeratu daitezken karpetetan)\n\n- Lineaz kanpoko mundu guztiko mapa konpaktuak eskuragarri\n\n- Muga gabeko herrialde edo eskualdeetako mapen deskarga, aplikaziotik zuzenean\n\n- Lineaz kanpoko WIkipedia-ko erabilpena (deskargatu Wikipedia-ko POIak), turismorako erabilgarriak\n\n- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interes puntuak (POI), gogokoak,  garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak eta topografia-ezaugarriak sestra-kurbak/erliebearen itzala/malda bezalakoak\n\n- Lineaz kanpoko helbide eta lekuen bilatzailea (POI-ak)\n\n- Lineaz kanpoko ibilbide-kalkulua distantzia ertainetarako\n\n- Kotxea, bizikleta eta oinezkoentzat modua:\n\n- Aukerazko egun/gau ikuspegi automatizatua\n\n- Aukerazko abiaduraren araberako maparen zooma\n\n- Aukerazko maparen lerrokatzea, iparrorratzaren edo norabidearen araberakoa\n\n- Aukerazko errei gidaritza, abiadura muga bistaratzea, grabaketa edo ahots bihurgailua motorra⏎ ⇥\n\n"</string>
     <string name="filterpoi_activity">Sortu interesguneen iragazkia</string>
     <string name="recalculate_route_to_your_location">Garraio modua:</string>
     <string name="select_navigation_mode">Garraio modua:</string>
@@ -1472,7 +1451,6 @@
     <string name="waypoint_visit_before">Bisitatu aurretik</string>
     <string name="simulate_your_location">Simulatu zure kokapena</string>
     <string name="drawer">Zerrenda soila</string>
-    <string name="short_location_on_map">Lat %1$s\nLon %2$s</string>
     <string name="tips_and_tricks_descr">Maiz egindako galderak, azken aldaketak, eta bestelakoak.</string>
     <string name="routing_settings_2">Nabigazio ezarpenak</string>
     <string name="shared_string_deselect">Desautatu</string>
@@ -1784,7 +1762,7 @@
     <string name="rendering_value_bicycle_name">Bizikleta</string>
     <string name="rendering_value_pedestrian_name">Oinez</string>
     <string name="rendering_attr_hideAccess_name">Sarbide murrizketak</string>
-    <string name="rendering_attr_showAccess_name">Erakutsi sarbide murrizketak</string>
+    <string name="rendering_attr_showAccess_name">Erakutsi sarbide- eta bidesari-murrizketak</string>
     <string name="local_index_select_gpx_file">Hautatu arrastoa</string>
     <string name="sort_by_distance">Ordenatu distantziaren arabera</string>
     <string name="sort_by_name">Ordenatu izenaren arabera</string>
@@ -2072,21 +2050,12 @@
     <string name="configure_screen_quick_action">Ekintza azkarra</string>
     <string name="quick_action_item_action">%d ekintza</string>
     <string name="quick_action_item_screen">%d pantaila</string>
-    <string name="quick_action_add_marker">Gehitu mapa-markatzailea</string>
-    <string name="quick_action_add_poi">Gehitu POI</string>
-    <string name="quick_action_map_style">Aldatu maparen estiloa</string>
     <string name="quick_action_map_style_switch">Mapa \"%s\" estilora aldatu da.</string>
-    <string name="quick_action_take_audio_note">Audio-ohar berria</string>
-    <string name="quick_action_take_video_note">Bideo-oharra berria</string>
-    <string name="quick_action_take_photo_note">Argazki-oharra berria</string>
-    <string name="quick_action_add_osm_bug">Gehitu OSM oharra</string>
     <string name="quick_action_navigation_voice">Ahotsa bai/ez</string>
     <string name="quick_action_navigation_voice_off">Desmututu ahotsa</string>
     <string name="quick_action_navigation_voice_on">Mututu ahotsa</string>
-    <string name="quick_action_add_parking">Gehitu aparkalekua</string>
     <string name="quick_action_new_action">Gehitu ekintza</string>
     <string name="quick_action_edit_action">Editatu ekintza</string>
-    <string name="quick_action_add_favorite">Gehitu gogokoa</string>
     <string name="dialog_add_action_title">Gehitu ekintza</string>
     <string name="quick_actions_delete">Ezabatu ekintza</string>
     <string name="quick_actions_delete_text">\"%s\" ekintza ezabatu\?</string>
@@ -2118,17 +2087,14 @@
     <string name="quick_action_map_style_action">Gehitu mapa estilo bat</string>
     <string name="quick_action_empty_param_error">Bete parametro guztiak</string>
     <string name="quick_action_map_styles">Mapa-estiloak</string>
-    <string name="quick_action_map_overlay">Aldatu maparen gain-azala</string>
     <string name="quick_action_map_overlay_title">Maparen gain-azalak</string>
     <string name="quick_action_map_overlay_action">Gehitu gain-azala</string>
     <string name="quick_action_map_overlay_switch">Maparen gain-azala \"%s\"(e)ra aldatu da.</string>
     <string name="quick_action_map_underlay_switch">Maparen azpi-azal \"%s\"(e)ra aldatu da.</string>
-    <string name="quick_action_map_underlay">Aldatu maparen azpi-azala</string>
     <string name="quick_action_map_underlay_title">Maparen azpi-azalak</string>
     <string name="quick_action_map_underlay_action">Gehitu azpi-azala</string>
     <string name="quick_action_interim_dialog">Erakutsi barne elkarrizketa-koadroa</string>
     <string name="quick_action_duplicate">Ekintza azkarraren izena bikoiztua dago</string>
-    <string name="quick_action_map_source">Aldatu maparen iturria</string>
     <string name="quick_action_map_source_title">Mapa-iturriak</string>
     <string name="quick_action_map_source_action">Gehitu mapa-iturria</string>
     <string name="quick_action_map_source_switch">Mapa-iturria \"%s\"(e)ra aldatu da.</string>
@@ -2197,9 +2163,6 @@
     <string name="quick_action_auto_zoom_desc">Abiaduraren araberako zoom automatikoa gaitu edo desgaitzeko botoia.</string>
     <string name="quick_action_auto_zoom_on">Gaitu zoom automatikoa</string>
     <string name="quick_action_auto_zoom_off">Desgaitu zoom automatikoa</string>
-    <string name="quick_action_add_destination">Ezarri helburua</string>
-    <string name="quick_action_replace_destination">Ordeztu helburua</string>
-    <string name="quick_action_add_first_intermediate">Gehitu lehen tartekoa</string>
     <string name="quick_action_add_destination_desc">Pantailaren erdiko puntua bidaiaren helburua bihurtzeko botoia, aurretik beste helburu bat balego hura tarteko helburu bihurtzen da.</string>
     <string name="quick_action_replace_destination_desc">Pantailaren erdiko puntua ibilbidearen helmuga bihurtzeko botoia, aurretik helbururik balego ordeztu egingo da.</string>
     <string name="quick_action_add_first_intermediate_desc">Pantailaren erdiko puntua tarteko lehen helburua bihurtzeko botoia.</string>
@@ -2266,7 +2229,7 @@
     <string name="shared_string_to">Nora</string>
     <string name="mapillary_menu_date_from">Nondik</string>
     <string name="mapillary_menu_descr_dates">Ikusi gehitutako argazkiak soilik</string>
-    <string name="mapillary_menu_title_dates">Data</string>
+    <string name="shared_string_date">Data</string>
     <string name="mapillary_menu_edit_text_hint">Idatzi erabiltzaile-izena</string>
     <string name="mapillary_menu_descr_username">Ikusi erabiltzaile honek gehitutako argazkiak:</string>
     <string name="mapillary_menu_title_username">Erabiltzaile-izena</string>
@@ -3626,7 +3589,6 @@
     <string name="details_dialog_decr">Erakutsi edo ezkutatu maparen xehetasun gehigarriak</string>
     <string name="shared_string_night_map">Gauerako mapa</string>
     <string name="shared_string_done">Egina</string>
-    <string name="quick_action_remove_next_destination">Ezabatu hurrengo norako puntua</string>
     <string name="use_volume_buttons_as_zoom">Bolumen botoiak zoom egiteko</string>
     <string name="quick_action_remove_next_destination_descr">Zure ibilbidean hurrengo helmuga ezabatzen du. Azken helmuga hori bada, nabigazioa geldituko da.</string>
     <string name="plugin_wikipedia_description">Lortu interesguneei buruzko informazioa Wikipediatik, leku eta helmugei buruzko artikuluak biltzen dituen lineaz kanpoko sakelako gidan.</string>
@@ -3768,7 +3730,6 @@
     <string name="message_you_need_add_two_points_to_show_graphs">Gehitu gutxienez bi puntu</string>
     <string name="sign_in_with_open_street_map">Hasi saioa OpenStreetMap-ekin</string>
     <string name="context_menu_item_add_waypoint">Gehitu arrastoaren bide-puntua</string>
-    <string name="quick_action_add_gpx">Gehitu arrastoaren bide-puntua</string>
     <string name="map_widget_monitoring">Bidaiaren grabaketa</string>
     <string name="marker_save_as_track">Gorde arrasto-fitxategi gisa</string>
     <string name="follow_track">Jarraitu arrastoa</string>
@@ -3802,7 +3763,6 @@
     <string name="message_graph_will_be_available_after_recalculation">Itxaron mesedez.
 \nIbilbidea birkalkulatu ondoren grafikoa eskuragarri egongo da.</string>
     <string name="shared_string_local_maps">Tokiko mapak</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="icon_group_special">Berezia</string>
     <string name="icon_group_transport">Garraioa</string>
     <string name="icon_group_service">Zerbitzua</string>
@@ -5041,37 +5001,7 @@
     <string name="simulation_position_description">Hautatu kokapena mugitzeko iturri gisa erabiliko den arrasto-fitxategi bat.</string>
     <string name="empty_tracks">Ez duzu arrasto-fitxategirik.</string>
     <string name="display_position_automatic_descr">Maparen orientazioaren araberakoa da: behea mugimenduaren noranzkorako, erdigunea beste guztientzat.</string>
-    <string name="release_4_4">"• \"Arrastoak\" menua hobetu da \"Konfiguratu mapa\" atalean
-\n
-\n • Testuinguru-menuak interesguneen izen lokalizatuak bistaratzen ditu orain
-\n
-\n • Ibilbidea esteka bidez partekatzeko aukera gehitu da
-\n
-\n • \"Itsas milia/oinak\" luzera-unitatea gehitu da
-\n
-\n • Maparen orientazioak modu finko berria gehitu du
-\n
-\n • Hasierako pantaila sinplifikatua
-\n
-\n • Kokapen finkoa pantaila zatitu moduan Android Auto-n
-\n
-\n • \"Abiadura/Malda\" grafikoa gehitu da pista aztertzeko
-\n
-\n • Android 13-k aplikazioaren hizkuntza aukeraketa sistemaren ezarpenetara eraman du
-\n
-\n • Leku beganoak bistaratzeko arazoak konpondu dira
-\n
-\n  • \"Overlay\" edo \"Underlay\" mapa gisa erabiltzen diren lineako fitxak deskargatzeko aukera gehitu da
-\n
-\n • Unitate inperialen laguntza gehitu da \"Ibilgailuen parametroetarako\"
-\n
-\n • Ziklomotor profil berria
-\n
-\n • \"Bistaratzeko posizioa\" aukera berria gehitu du \"Automatiko\"
-\n
-\n • Okertu, zoom eta biratzeko mapa keinuak konpondu dira
-\n
-\n"</string>
+    <string name="release_4_4">"• \"Arrastoak\" menua hobetu da \"Konfiguratu mapa\" atalean\n\n\n\n\n\n • Testuinguru-menuak interesguneen izen lokalizatuak bistaratzen ditu orain\n\n\n\n\n\n • Ibilbidea esteka bidez partekatzeko aukera gehitu da\n\n\n\n\n\n • \"Itsas milia/oinak\" luzera-unitatea gehitu da\n\n\n\n\n\n • Maparen orientazioak modu finko berria gehitu du\n\n\n\n\n\n • Hasierako pantaila sinplifikatua\n\n\n\n\n\n • Kokapen finkoa pantaila zatitu moduan Android Auto-n\n\n\n\n\n\n • \"Abiadura/Malda\" grafikoa gehitu da pista aztertzeko\n\n\n\n\n\n • Android 13-k aplikazioaren hizkuntza aukeraketa sistemaren ezarpenetara eraman du\n\n\n\n\n\n • Leku beganoak bistaratzeko arazoak konpondu dira\n\n\n\n\n\n  • \"Overlay\" edo \"Underlay\" mapa gisa erabiltzen diren lineako fitxak deskargatzeko aukera gehitu da\n\n\n\n\n\n • Unitate inperialen laguntza gehitu da \"Ibilgailuen parametroetarako\"\n\n\n\n\n\n • Ziklomotor profil berria\n\n\n\n\n\n • \"Bistaratzeko posizioa\" aukera berria gehitu du \"Automatiko\"\n\n\n\n\n\n • Okertu, zoom eta biratzeko mapa keinuak konpondu dira\n\n\n\n"</string>
     <string name="switch_folder">Aldatu karpeta</string>
     <string name="cloud_version_confirm_delete">\"%1$s\" OsmAnd Cloud-etik ezabatu\?</string>
     <string name="shared_string_delete_file">Ezabatu fitxategia</string>
@@ -5326,7 +5256,6 @@
     <string name="write_heading_description">Gorde goiburua arrasto-puntu bakoitzean grabatzen ari zaren bitartean</string>
     <string name="write_bearing_description">Gorde norabidea arrasto-puntu bakoitzean grabatzen ari zaren bitartean</string>
     <string name="write_bearing">Idatzi norabidea</string>
-    <string name="rendering_attr_alpineHiking_name">Zailtasunen sailkapena</string>
     <string name="shared_string_included">Barne</string>
     <string name="feature_available_as_part_of_plan">%1$s eskuragarri dago %2$s planaren barruan</string>
     <string name="write_heading">Idatzi goiburua</string>
@@ -5567,7 +5496,7 @@
     <string name="shared_string_show_icon">Erakutsi ikonoa</string>
     <string name="map_is_up_to_date">%1$s mapa eguneratuta dago.</string>
     <string name="shared_string_loading">Kargatzen</string>
-    <string name="delete_smart_folder_dialog_message">Honek \"%1$s\" karpeta adimenduna ezabatuko du.</string>
+    <string name="delete_smart_folder_dialog_message">Honek \"%1$s\" karpeta adimenduna ezabatuko du. (Ez da arrastorik ezabatuko.)</string>
     <string name="sort_size_ascending">Tamaina txikikoa lehenik</string>
     <string name="trash_alert_card_desc">Zakarrontziko elementuak %1$s egun igaro ondoren ezabatuko dira.</string>
     <string name="discard_filter_changes_prompt">Iragazki guztiak berrezarri?</string>
@@ -5647,7 +5576,29 @@
     <string name="upward_gradient">Goranzko gradientea</string>
     <string name="top_and_bottom">Goian eta behean</string>
     <string name="title_3d_track">3D arrastoa</string>
-    <string name="release_4_8">• 4.8rako prest egon</string>
+    <string name="release_4_8">• \"Altitudea\" lurraren koloreztatzeko aukera berria
+\n
+\n • Kolore paleta pertsonalizatuak lur, arrasto eta ibilbideetarako
+\n
+\n • Kokapen-ikonoetarako 3D aldaera
+\n
+\n • Ekintza azkarrak kanpoko teklatuei eslei dakizkieke orain
+\n
+\n • Eguraldia: interfazea freskatu, haizearen animazioa gehitu da
+\n
+\n • 3D arrastoen hobekuntzak: bistaratzeko eta koloreztatzeko aukera berriak
+\n
+\n • Ibilbide turistikoen aukeraketa hedatua mapan
+\n
+\n• Aplikazioaren gaiaren aukera gehitu da mapa modua jarraitzeko
+\n
+\n • Pistaren estatistikak, ordenatzea eta bilaketa konpondu ditu
+\n
+\n • OSM edizioa: saioa hasteko/pasahitza baimentzeko metodoa ezabatu da
+\n
+\n • Android 14 abiarazteko sistema partekatzeko orrira aldatzea
+\n
+\n</string>
     <string name="shared_string_scale">Eskala</string>
     <string name="upload_local_versions">Kargatu tokiko bertsioak</string>
     <string name="download_cloud_versions">Deskargatu hodeiko bertsioak</string>
@@ -5711,4 +5662,216 @@
 \n
 \n</string>
     <string name="lang_ta_in">Tamilera (India)</string>
+    <string name="track_vertical_exaggeration_description">Eskalaren balioa aldatuz gero, 3D pistaren altuera alda dezakezu.</string>
+    <string name="disable_map_layers_descr">Desgaitu mapa bektorialaren gaineko mapa-geruza guztiak (berrabiarazi behar da).</string>
+    <string name="steps_per_minute_unit">UM</string>
+    <string name="gpx_approximation_geo_cpp">Geometrian oinarritutako (C++, azkarra)</string>
+    <string name="disable_map_layers">Desgaitu mapa geruzak</string>
+    <string name="height_legend_description">Altitude kolore-mapak erabiltzen dira erliebea ikusteko.</string>
+    <string name="allow_display_on_top">Baimendu goiko bistaratzea</string>
+    <string name="allow_display_on_top_description">Baimendu mapako testuak bata bestearen gainean bistaratzea</string>
+    <string name="show_debug_info">Erakutsi arazketa-informazioa</string>
+    <string name="show_debug_info_description">Bistaratu mapako testu bakoitzaren kokapenari buruzko informazio grafikoa</string>
+    <string name="map_text">Mapako testuak</string>
+    <string name="routing_attr_avoid_cobblestone_name">Saihestu harlauzak</string>
+    <string name="routing_attr_avoid_cobblestone_description">Saihestu harlauzak</string>
+    <string name="play_weather_forecast">Erreproduzitu eguraldiaren iragarpena</string>
+    <string name="change_terrain_color_scheme">Aldatu Lurraren kolore-eskema</string>
+    <string name="travel_topics">Bidaiaen gaiak</string>
+    <string name="quick_action_map_overlay">Gaineko geruza</string>
+    <string name="rendering_avg_info">Errendatze-estatistikak (batez beste 1/5/15 minutu)</string>
+    <string name="quick_action_location_by_gpx">GPX bidezko kokapena</string>
+    <string name="quick_action_terrain_color_scheme">Lurraren kolore-eskema</string>
+    <string name="quick_action_move_map_left">Mapa ezkerrera</string>
+    <string name="quick_action_move_map_right">Mapa eskuinera</string>
+    <string name="quick_action_move_map_down">Mapa behera</string>
+    <string name="quick_action_move_map_up">Mapa gora</string>
+    <string name="quick_action_new_route">Ibilbide berria</string>
+    <string name="quick_action_previous_app_profile">Aplikazioaren profila aurrekora</string>
+    <string name="quick_action_next_app_profile">Aplikazioaren profila hurrengora</string>
+    <string name="shared_string_simulate">Simulatu</string>
+    <string name="quick_action_remove_next_destination">Hurrengo helmuga puntua</string>
+    <string name="energy_avg_info_description">Bateriaren maila minutuko: %1$s
+\nEnergia-kontsumoa (mAh): %2$s</string>
+    <string name="rendering_avg_info_description">FPS azken 1k fotogramen arabera: %1$s
+\nCPU oinarrizkoa: %2$s
+\nGPU 1k: %3$s
+\nIDLE 1k: %4$s</string>
+    <string name="energy_avg_info">Energia-estatistikak (batez beste 1 / 5 / 15 minutu)</string>
+    <string name="quick_action_map_style">Mapa estiloa</string>
+    <string name="quick_action_directions_from">Abiapuntua</string>
+    <string name="quick_action_destination">Helmuga</string>
+    <string name="quick_action_to_my_location">Nire kokapenera</string>
+    <string name="shared_string_create">Sortu</string>
+    <string name="shared_string_replace">Ordeztu</string>
+    <string name="app_profile">Aplikazioaren profila</string>
+    <string name="shared_string_set">Ezarri</string>
+    <string name="quick_action_display_position_in_center">Bistaratzeko posizioa beti erdian</string>
+    <string name="quick_action_terrain">Lurraren kolorazio mota</string>
+    <string name="quick_action_map_underlay">Azpiko geruza</string>
+    <string name="quick_action_video_note">Bideo-oharra</string>
+    <string name="quick_action_verb_show_hide">Erakutsi / Ezkutatu</string>
+    <string name="quick_action_verb_pause_resume">Pausatu / Berrekin</string>
+    <string name="quick_action_verb_turn_on_off">Piztu / Itzali</string>
+    <string name="quick_action_verb_start_stop">Hasi / Gelditu</string>
+    <string name="quick_action_photo_note">Argazki-oharra</string>
+    <string name="quick_action_track_waypoint">Jarraitu bide-puntua</string>
+    <string name="quick_action_parking_place">Aparkalekua</string>
+    <string name="quick_action_first_intermediate">Lehenengo geldiunea</string>
+    <string name="quick_action_audio_note">Audio-oharra</string>
+    <string name="weather_screen">Eguraldiaren pantaila</string>
+    <string name="choose_map_orientation">Aukeratu maparen orientazioa</string>
+    <string name="daynight_mode_app_theme_summary">Maparen pantaila aplikazioaren gai orokorrarekin bat dator: eguneko modua gai argi baterako eta gaueko modua gai ilun baterako</string>
+    <string name="daynight_mode_sensor_summary">Gailuaren argi-sentsorea erabiltzen du gai argiak eta ilunak giroko argi-mailen arabera aldatzeko.</string>
+    <string name="weather_source_ecmwf_description">Epe Ertaineko Eguraldi Iragarpenen Europako Zentroa</string>
+    <string name="weather_source_GFS_description">Eguraldia Iragartzeko Zentro Nazionaletako Iragarpen Sistema Globala</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="data_source">Datu-iturria</string>
+    <string name="weather_data_sources_prompt">OsmAnd-ek bi iturritatik eskaintzen ditu eguraldiaren datuak:</string>
+    <string name="backup_error_failed_to_transfer_file">Ezin izan dira hodeiko fitxategiak transferitu.</string>
+    <string name="clear_all_key_shortcuts_summary">Hautatutako motarako tekla-esleipen guztiak kenduko dira.</string>
+    <string name="contact_support_retry">Saiatu berriro edo jarri laguntzarekin harremanetan</string>
+    <string name="clear_all_key_shortcuts">Garbitu laster-tekla guztiak</string>
+    <string name="key_assignment_add_key">Gehitu tekla</string>
+    <string name="key_assignment_add_action">Gehitu ekintza</string>
+    <string name="action_icon">Ekintzaren ikonoa</string>
+    <string name="missing_maps_ignore">Erabili deskargatutako mapak</string>
+    <string name="missing_maps_ignore_details">Deskargatutako mapek zure ibilbidea hartzen dute? Nabigatu haiekin ingurua ezagutzen baduzu.</string>
+    <string name="clear_key_assignment_summary">Hautatutako ekintzarako tekla-esleipena garbituko da.</string>
+    <string name="shared_string_key">Tekla</string>
+    <string name="assigned_keys">Esleitutako teklak</string>
+    <string name="profile_icon">Profilaren ikonoa</string>
+    <string name="rendering_value_dark_orange_name">Laranja iluna</string>
+    <string name="wall_height">Hormaren altuera</string>
+    <string name="shared_string_all_icons">Ikono guztiak</string>
+    <string name="rendering_value_pale_name">Zurbila</string>
+    <string name="resting_position_icon_summary">Mugitzen ez zarenean bistaratzen da ikonoa.</string>
+    <string name="navigation_position_icon_summary">Nabigatzen edo mugitzen ari zaren bitartean bistaratzen da ikonoa.</string>
+    <string name="navigation_position_icon">Nabigazio-posizioaren ikonoa</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Eguneko eta gaueko gaien artean automatikoki aldatzen da eguzkiaren eta ilunabarraren orduetan oinarrituta.</string>
+    <string name="daynight_mode_night_summary">Mapa gai ilun batean bistaratzen du beti, gaueko edo argi gutxiko baldintzetarako egokia.</string>
+    <string name="key_event_action_continuous_zoom_out">Etengabe txikiagotu</string>
+    <string name="key_event_action_continuous_zoom_in">Etengabe handiagotu</string>
+    <string name="remove_key_assignment_summary">Hautatutako ekintzarako tekla-esleipena kenduko da.</string>
+    <string name="remove_key_assignment">Kendu tekla-esleipena</string>
+    <string name="daynight_mode_day_summary">Mapa gai argi batean bistaratzen du beti, egunez ikusteko aproposa.</string>
+    <string name="daynight_mode_app_theme">Aplikazioaren gaia</string>
+    <string name="user_palette">Erabiltzailearen paleta</string>
+    <string name="shared_string_modify">Aldatu</string>
+    <string name="shared_string_colors">Koloreak</string>
+    <string name="no_assigned_keys_desc">Hautatu ekintza bat eta esleitu tekla bat \'Gehitu\' botoia sakatuta.</string>
+    <string name="no_assigned_keys">Ez dago esleitutako teklarik</string>
+    <string name="new_key_assignment">Tekla esleipen berria</string>
+    <string name="key_name_pattern">\"%1$s\" tekla</string>
+    <string name="map_settings_weather_wind_animation">Haizearen animazioa</string>
+    <string name="tomorrow">Bihar</string>
+    <string name="driving_region_india">India</string>
+    <string name="auto_25_chars_route_tshr">Biratu bizkor eskuinera</string>
+    <string name="auto_25_chars_route_tslr">Biratu poliki eskuinera</string>
+    <string name="auto_25_chars_route_tl">Biratu ezkerrera</string>
+    <string name="auto_25_chars_route_tshl">Biratu bizkor ezkerrera</string>
+    <string name="auto_25_chars_route_tsll">Biratu poliki ezkerrera</string>
+    <string name="view_angle">Ikuspegiaren angelua</string>
+    <string name="location_radius_description">Uneko kokapenaren zehaztasuna adierazten duen eremu zirkularra erakusten du</string>
+    <string name="view_angle_description">Une honetan aurrez aurreko kono-formako eremua bistaratzen du</string>
+    <string name="hugerock_promo">Hugerock promozioa %1$s hilabetez</string>
+    <string name="hugerock_promo_description">Doako sarbidea funtzioetara, besteak beste, mapen deskarga mugagabea, 3D erliebea eta abar %1$s hilabetez</string>
+    <string name="shared_string_automatically">Automatikoki</string>
+    <string name="ask_every_time">Galdetu aldiro</string>
+    <string name="detailed_track_guidance">Arrastoaren gida zehatza</string>
+    <string name="detailed_track_guidance_description">OsmAnd-ek zure arrastoa inguruko errepideekin bateratuko du, urratsez urratseko jarraibideak hobetzeko.</string>
+    <string name="quick_action_routes_summary">Etengailu bat %1$s mapan erakusteko edo ezkutatzeko.</string>
+    <string name="auto_25_chars_route_tr">Biratu eskuinera</string>
+    <string name="auto_25_chars_route_tu">Eman buelta</string>
+    <string name="resting_position">Atseden-posizioa</string>
+    <string name="navigation_position">Nabigazio-posizioa</string>
+    <string name="resting_navigation_position">Atseden eta nabigazio posizioa</string>
+    <string name="driving_region_uk">Erresuma Batua eta antzekoak</string>
+    <string name="compass_click_north_is_up">Orientazio modua aldatzeko, mantendu sakatuta</string>
+    <string name="auto_25_chars_route_kl">Mantendu ezkerrean</string>
+    <string name="auto_25_chars_route_kr">Mantendu eskuinean</string>
+    <string name="location_radius">Kokapen erradioa</string>
+    <string name="resting_position_icon">Atseden-kokapenaren ikonoa</string>
+    <string name="rendering_avg_info_details">FPS azken 1.000 fotogramen arabera: %1$s
+\nCPU (lauzak): %2$s
+\nCPU (inaktibo-denbora): %3$s
+\nCPU (GPU zain): %4$s</string>
+    <string name="rendering_attr_alpineHiking_name">Mendi-ibilbideen zailtasun maila</string>
+    <string name="add_widget_above">Gehitu trepeta goian</string>
+    <string name="add_widget_below">Gehitu trepeta behean</string>
+    <string name="add_widget_to_the_right">Gehitu trepeta eskuinean</string>
+    <string name="add_widget_to_the_left">Gehitu trepeta ezkerrean</string>
+    <string name="delete_widget">Trepeta ezabatu?</string>
+    <string name="delete_widget_description">Trepeta hau ezabatu egingo da. Geroago berrezarri dezakezu Konfiguratu pantailan.</string>
+    <string name="help_article_map_tracks_name">Pistak</string>
+    <string name="route_roundabout_exit">Hartu %1$d irteera</string>
+    <string name="app_mode_suv">SUV</string>
+    <string name="graph_axis">Grafikoaren ardatza</string>
+    <string name="y_axis_description">Hautatu gehienez bi aukera Y ardatzerako.</string>
+    <string name="help_article_map_routes_name">Ibilbideak</string>
+    <string name="quick_action_drawer_title">Alboko menua</string>
+    <string name="quick_action_search_view_desc">Bilaketa-ikuspegia ireki edo ixteko etengailua.</string>
+    <string name="quick_action_search_view_title">Bilaketa ikuspegia</string>
+    <string name="quick_action_navigation_view_desc">Nabigazio-ikuspegia irekitzeko edo ixteko etengailua.</string>
+    <string name="quick_action_navigation_view_title">Nabigazio ikuspegia</string>
+    <string name="quick_action_switch_compass_desc">Etengailu bat maparen orientazioa aldatzeko.</string>
+    <string name="corner_radius">Biraketa erradioa</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="shared_string_interface">Interfazea</string>
+    <string name="quick_action_previous_screen_desc">Etengailu bat aurreko pantailara nabigatzeko.</string>
+    <string name="quick_action_previous_screen_title">Aurreko pantaila</string>
+    <string name="quick_action_verb_navigate">Nabigatu</string>
+    <string name="quick_action_drawer_desc">Alboko menua erakusteko edo ezkutatzeko etengailua.</string>
+    <string name="battery_saving_mode">Bateria aurrezteko modua</string>
+    <string name="background_opacity">Atzeko planoaren opakutasuna</string>
+    <string name="navigation_action_descr">Nabigazioa irekitzen du.</string>
+    <string name="map_3d_mode_action_descr">Aldatu maparen inklinazioa.</string>
+    <string name="search_action_descr">Bilaketa irekitzen du.</string>
+    <string name="raster_layers_action_descr">Aldatu raster geruzak</string>
+    <string name="contour_layers_action_descr">Aldatu sestra-geruzak</string>
+    <string name="change_zoom_action_descr">Aldatu maparen zooma.</string>
+    <string name="drawer_button_description">Menu nagusia irekitzen du.</string>
+    <string name="configure_map_description">Aldatu maparen estiloa, geruzak edo bestelako ezarpenak.</string>
+    <string name="my_location_action_descr">Zentratzen du mapa zure uneko kokapenean.</string>
+    <string name="obd_widget_vehicle_speed">Ibilgailuaren abiadura</string>
+    <string name="obd_widget_engine_speed">Motorraren birak</string>
+    <string name="obd_fuel_consumption_rate_l_h">Erregai-kontsumo tasa (l/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor">Erregai-kontsumo tasa (sentsorea)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Ibilgailuen erregai-kontsumo-tasa erakusten du sentsorearen arabera (l/h)</string>
+    <string name="obd_fuel_level_liter">Erregai maila (l)</string>
+    <string name="obd_fuel_level_percent">Erregai maila (%)</string>
+    <string name="obd_fuel_left_liter">Geratzen den erregaia (l)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Ibilgailuen erregai-kontsumo-tasa erakusten du kalkuluen arabera (l/h)</string>
+    <string name="obd_fuel_left_percent">Geratzen den erregaia (%)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Erregai-kontsumo-tasa l/h</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">Erregaiaren kontsumo-tasa %/h</string>
+    <string name="route_guidance_desc">Ibilbideen orientazioa denbora errealean eskaintzen du, hurrengo biraketarako distantzia, errepidearen izena, uneko kalearen izena eta erreiaren informazioa barne. Trepetak aktibo daude nabigazioan zehar.</string>
+    <string name="route_guidance">Ibilbide-gida</string>
+    <string name="obd_fuel_left_km">geratzen den erregaia (km)</string>
+    <string name="obd_fuel_consumption_rate_scanner">Erregai-kontsumo-tasa (obd)</string>
+    <string name="obd_bluetooth_off_description">Aktibatu Bluetooth-a, bilatu eta konektatu eskanerrak.</string>
+    <string name="obd_searching_text_description">Mesedez, eduki gailua eskanerretik gertu. Ziurtatu ibilgailuaren motorra martxan dagoela.</string>
+    <string name="obd_nothing_found_description">Mesedez, egiaztatu honako hau:\n – Ziurtatu Bluetootha aktibatuta dagoela\n – Ibilgailuaren motorra martxan dagoela\n – Ziurtatu zure gailua eskanerraren eremuan dagoela.</string>
+    <string name="obd_nothing_found_text">Ez da eskanerrik aurkitu</string>
+    <string name="obd_device_forget_sensor_description">Eskanerra zerrendatik kenduko da. Eskaner hau berriro parekatu ahal izango duzu edozein unetan.</string>
+    <string name="shared_string_bluetooth">Bluetooth-a</string>
+    <string name="connect_obd_instructions_step">1. Konektatu eskanerra zure ibilgailuaren OBD-II atakara.\n\n 2. Piztu ibilgailuaren motorra\n\n 3. Gaitu Bluetootha zure gailuan\n\n 4. Sakatu \'%1$s\' eta hautatu zure eskanerra zerrendatik.</string>
+    <string name="liter">l</string>
+    <string name="obd_searching_text">Eskanerrak bilatzen</string>
+    <string name="obd_device_forget_sensor">Ahaztu eskanerra</string>
+    <string name="speedometer_maximum">Gehienezkoa</string>
+    <string name="percent_hour">%/h</string>
+    <string name="screen_is_locked_by_external_button">Ukipen-pantaila blokeatuta dago. Desblokeatzeko, sakatu %1$s botoia, edo sakatu pantailako botoia.</string>
+    <string name="screen_is_unlocked">Ukipen-pantaila desblokeatuta dago.</string>
+    <string name="screen_is_locked_by_action_button">Ukipen-pantaila blokeatuta dago. Sakatu botoia desblokeatzeko.</string>
+    <string name="obd_vehicle_info">Ibilgailuaren informazioa</string>
+    <string name="connect_obd_instructions_title">OsmAnd-ek Bluetooth konexioak onartzen ditu OBD-II eskanerretarako.</string>
+    <string name="obd_how_to_connect">Nola konektatu:</string>
+    <string name="connect_obd_instructions_step1">Konektatu eskanerra zure ibilgailuaren OBD-II atakara.</string>
+    <string name="connect_obd_instructions_step2">Piztu ibilgailuaren motorra</string>
+    <string name="connect_obd_instructions_step3">Gaitu Bluetootha zure gailuan</string>
+    <string name="connect_obd_instructions_step4">Sakatu \'Konektatu\' eta hautatu zure eskanerra zerrendatik.</string>
+    <string name="learn_more_about_obd_sensors">Lortu informazio gehiago sentsoreei buruz.</string>
+    <string name="release_4_9">• Pantaila osoko galeria-ikustaile bat gehitu da Wikimediako irudietarako\n\n • \"Ibilgailuen neurketak\" plugin berri bat aurkeztu du ibilgailuen errendimendua OBD-II protokoloa erabiliz kontrolatzeko\n\n • Arrastoei jarduerak esleitzeko eta horren arabera iragazteko gaitasuna gehitu da\n\n • Bidaiak grabatzeko eta ukipen-pantaila blokeatzeko ekintza azkar berriak ezarri dira\n\n • Maparen botoiaren itxura pertsonalizagarria eta sareta zehatza sartu ditu\n\n • Testuinguru-menua eta \"Berrezarri batez besteko abiadura\" ekintza bat gehitu ditu trepetetan\n\n • Ibilbide geruza berria gehitu da \"Motocros ibilbideak\"\n\n • \"Auto-grabatu arrastoa nabigazioan\" konpondu da\n\n • Arazoa konpondu da RTL-n iraulitako koordenatuekin\n\n • Unean grabatutako arrastoetarako galdutako sentsoreen datuak konpondu dira\n\n • Hautatutako punturako inguruko eremuei buruzko informazioa gehitu da\n\n • Ekintza azkarra gehitu da OSM edizioen ikusgarritasuna kontrolatzeko\n\n • Lurra koloreztatzeko aukeren ikusgarritasun parametro bereiziak\n\n • Saka daitekeen ikono bat gehitu da sarbidea edo beste errepide edo bide-atributu batzuk bistaratzeko</string>
 </resources>

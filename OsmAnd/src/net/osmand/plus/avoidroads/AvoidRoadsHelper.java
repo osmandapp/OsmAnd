@@ -24,8 +24,8 @@ import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.MapUtils;
 
-import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -35,7 +35,7 @@ public class AvoidRoadsHelper {
 
 	private final OsmandApplication app;
 	private final DirectionPointsHelper pointsHelper;
-	private final List<AvoidRoadInfo> impassableRoads = new ArrayList<>();
+	private final List<AvoidRoadInfo> impassableRoads = new LinkedList<>();
 
 	public AvoidRoadsHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -248,7 +248,7 @@ public class AvoidRoadsHelper {
 		}
 		if (roadAdded) {
 			app.getSettings().updateImpassableRoadInfo(roadInfo);
-			impassableRoads.add(roadInfo);
+			impassableRoads.add(0, roadInfo);
 		} else {
 			LatLon location = getLocation(roadInfo);
 			if (location != null) {

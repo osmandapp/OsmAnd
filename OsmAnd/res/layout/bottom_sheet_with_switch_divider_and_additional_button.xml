@@ -44,7 +44,7 @@
 				android:maxLines="1"
 				android:textColor="?attr/active_color_basic"
 				android:textSize="@dimen/default_desc_text_size"
-				app:typeface="@string/font_roboto_medium"
+				app:typefaceWeight="medium"
 				tools:text="Some title" />
 
 			<com.google.android.material.switchmaterial.SwitchMaterial

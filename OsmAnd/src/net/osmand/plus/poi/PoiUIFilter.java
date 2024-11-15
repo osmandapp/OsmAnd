@@ -31,6 +31,7 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.search.core.CustomSearchPoiFilter;
+import net.osmand.search.core.TopIndexFilter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser;
@@ -55,6 +56,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	public static final String USER_PREFIX = "user_";
 	public static final String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id";
 	public static final String BY_NAME_FILTER_ID = USER_PREFIX + "by_name";
+	public static final String TOP_WIKI_FILTER_ID = STD_PREFIX + OSM_WIKI_CATEGORY;
 	public static final int INVALID_ORDER = -1;
 
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<>();
@@ -79,6 +81,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	protected String filterByName;
 	protected String savedFilterByName;
 	protected List<Amenity> currentSearchResult;
+	protected String filterByKey = null;
 
 	private boolean deleted;
 
@@ -100,6 +103,23 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 			}
 			updateTypesToAccept(type);
 		}
+	}
+
+	public PoiUIFilter(TopIndexFilter topIndexFilter, @Nullable Map<PoiCategory, LinkedHashSet<String>> acceptedTypes, @NonNull OsmandApplication app) {
+		this.app = app;
+		isStandardFilter = true;
+		standardIconId = topIndexFilter.getIconResource();
+		filterId = topIndexFilter.getFilterId();
+		this.name = topIndexFilter.getName();
+		poiTypes = app.getPoiTypes();
+
+		if (acceptedTypes == null) {
+			initSearchAll();
+		} else {
+			this.acceptedTypes.putAll(acceptedTypes);
+		}
+		updatePoiAdditionals();
+		updateAcceptedTypeOrigins();
 	}
 
 	// search by name standard
@@ -164,7 +184,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	}
 
 	public boolean isTopWikiFilter() {
-		return filterId.equals(STD_PREFIX + OSM_WIKI_CATEGORY);
+		return filterId.equals(TOP_WIKI_FILTER_ID);
 	}
 
 	public boolean isRoutesFilter() {
@@ -196,6 +216,10 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		updateFilterResults();
 	}
 
+	public void setFilterByKey(String key) {
+		filterByKey = key;
+	}
+
 	public void removeUnsavedFilterByName() {
 		filterByName = savedFilterByName;
 		updateFilterResults();
@@ -204,7 +228,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	public void updateFilterResults() {
 		List<Amenity> prev = currentSearchResult;
 		if (prev != null) {
-			AmenityNameFilter nameFilter = getNameFilter(filterByName);
+			AmenityNameFilter nameFilter = getNameFilter();
 			List<Amenity> newResults = new ArrayList<>();
 			for (Amenity a : prev) {
 				if (nameFilter.accept(a)) {
@@ -370,11 +394,14 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 				bottomLatitude, rightLongitude, zoom, true, wrapResultMatcher(matcher));
 	}
 
-	public PoiFilterUtils.AmenityNameFilter getNameFilter(String filter) {
-		if (Algorithms.isEmpty(filter)) {
+	public PoiFilterUtils.AmenityNameFilter getNameFilter() {
+		if (Algorithms.isEmpty(filterByName)) {
 			return a -> true;
 		}
-		String[] items = filter.split(" ");
+		if (!Algorithms.isEmpty(filterByKey)) {
+			return getKeyNameFilter(filterByKey, filterByName);
+		}
+		String[] items = filterByName.split(" ");
 		boolean allTime = false;
 		boolean open = false;
 		List<PoiType> poiAdditionalsFilter = null;
@@ -425,6 +452,13 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 				return false;
 			}
 			return acceptedAnyFilterOfEachCategory(amenity, selectedFilters);
+		};
+	}
+
+	public PoiFilterUtils.AmenityNameFilter getKeyNameFilter(String key, String value) {
+		return amenity -> {
+			String val = amenity.getAdditionalInfo(key);
+			return val != null && val.equals(value);
 		};
 	}
 
@@ -569,7 +603,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 
 	@Override
 	public ResultMatcher<Amenity> wrapResultMatcher(@Nullable ResultMatcher<Amenity> matcher) {
-		PoiFilterUtils.AmenityNameFilter nm = getNameFilter(filterByName);
+		PoiFilterUtils.AmenityNameFilter nm = getNameFilter();
 		Set<String> searchedPois = new TreeSet<>();
 		return new ResultMatcher<Amenity>() {
 

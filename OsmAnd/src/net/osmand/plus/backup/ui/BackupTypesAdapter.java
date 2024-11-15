@@ -1,6 +1,6 @@
 package net.osmand.plus.backup.ui;
 
-import android.graphics.Typeface;
+
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +16,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.settings.backend.ExportCategory;
@@ -26,6 +26,7 @@ import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.fragments.ExportSettingsAdapter;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
 import net.osmand.util.Algorithms;
@@ -74,9 +75,8 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		SettingsCategoryItems items = itemsMap.get(category);
 
 		String name = app.getString(category.getTitleId());
-		Typeface typeface = FontCache.getRobotoMedium(app);
 		TextView titleTv = view.findViewById(R.id.title);
-		titleTv.setText(UiUtilities.createCustomFontSpannable(typeface, name, name));
+		titleTv.setText(UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(), name, name));
 
 		TextView description = view.findViewById(R.id.description);
 		description.setText(getCategoryDescr(category));
@@ -139,7 +139,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		ImageView proIcon = view.findViewById(R.id.pro_icon);
 		boolean showProIcon = !InAppPurchaseUtils.isExportTypeAvailable(app, exportType) && !cloudRestore;
 		setupChildIcon(view, exportType.getIconId(), selected && !showProIcon);
-		proIcon.setImageResource(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day);
+		proIcon.setImageResource(PurchasingUtils.getProFeatureIconId(nightMode));
 		view.setOnClickListener(view1 -> {
 			compoundButton.performClick();
 			if (listener != null) {

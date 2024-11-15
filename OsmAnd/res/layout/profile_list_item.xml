@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
- xmlns:osmand="http://schemas.android.com/apk/res-auto"
+ xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/profile_settings"
 	android:layout_width="match_parent"
@@ -79,7 +79,7 @@
 					android:paddingLeft="@dimen/setting_profile_item_switch_margin"
 					android:paddingEnd="10dp"
 					android:paddingRight="10dp"
-					osmand:srcCompat="@drawable/ic_action_additional_option"
+					app:srcCompat="@drawable/ic_action_additional_option"
 					android:tint="@color/icon_color_default_light" />
 
 				<androidx.appcompat.widget.SwitchCompat

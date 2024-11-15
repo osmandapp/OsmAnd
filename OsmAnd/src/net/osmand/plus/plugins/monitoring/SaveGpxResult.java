@@ -2,7 +2,7 @@ package net.osmand.plus.plugins.monitoring;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 
 import java.util.List;
 import java.util.Map;
@@ -10,9 +10,9 @@ import java.util.Map;
 public class SaveGpxResult {
 
 	private final List<String> warnings;
-	private final Map<String, GPXFile> gpxFilesByName;
+	private final Map<String, GpxFile> gpxFilesByName;
 
-	public SaveGpxResult(@NonNull List<String> warnings, @NonNull Map<String, GPXFile> gpxFilesByName) {
+	public SaveGpxResult(@NonNull List<String> warnings, @NonNull Map<String, GpxFile> gpxFilesByName) {
 		this.warnings = warnings;
 		this.gpxFilesByName = gpxFilesByName;
 	}
@@ -23,7 +23,7 @@ public class SaveGpxResult {
 	}
 
 	@NonNull
-	public Map<String, GPXFile> getGpxFilesByName() {
+	public Map<String, GpxFile> getGpxFilesByName() {
 		return gpxFilesByName;
 	}
 }

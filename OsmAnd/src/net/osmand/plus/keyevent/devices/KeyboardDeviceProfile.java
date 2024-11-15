@@ -51,8 +51,8 @@ public class KeyboardDeviceProfile extends PredefinedInputDeviceProfile {
 
 		// Other default keycodes
 		addAssignment(list, EmitNavigationHintCommand.ID, KeyEvent.KEYCODE_DPAD_CENTER);
-		addAssignment(list, ToggleDrawerCommand.ID, KeyEvent.KEYCODE_MENU);
-		addAssignment(list, ActivityBackPressedCommand.ID, KeyEvent.KEYCODE_BACK);
+		addAssignment(list, ToggleDrawerCommand.ID, KeyEvent.KEYCODE_M);
+		addAssignment(list, ActivityBackPressedCommand.ID, KeyEvent.KEYCODE_ESCAPE, KeyEvent.KEYCODE_BACK);
 
 		PluginsHelper.addCommonKeyEventAssignments(list);
 		return list;

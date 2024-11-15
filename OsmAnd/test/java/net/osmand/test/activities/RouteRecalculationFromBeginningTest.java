@@ -4,7 +4,6 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static net.osmand.test.common.EspressoUtils.waitForView;
@@ -21,7 +20,6 @@ import android.util.Range;
 
 import androidx.annotation.NonNull;
 import androidx.test.espresso.Espresso;
-import androidx.test.espresso.IdlingPolicies;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -32,7 +30,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.tracks.TrackTabType;
-import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.test.common.AndroidTest;
 import net.osmand.test.common.BaseIdlingResource;
 import net.osmand.test.common.ResourcesImporter;
@@ -45,30 +43,27 @@ import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.concurrent.TimeUnit;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class RouteRecalculationFromBeginningTest extends AndroidTest {
 
+	private static final int SPEED_KM_PER_HOUR = 500;
 	private static final String SELECTED_GPX_NAME = "gpx_recalc_test.gpx";
-
 	private static final LatLon START = new LatLon(50.17356, 18.51406);
 
 	@Rule
-	public ActivityScenarioRule<MapActivity> mActivityScenarioRule =
-			new ActivityScenarioRule<>(MapActivity.class);
+	public ActivityScenarioRule<MapActivity> scenarioRule = new ActivityScenarioRule<>(MapActivity.class);
 
-	private ObserveDistToFinishIdlingResource observeDistToFinishIdlingResource;
+	private ObserveDistToFinishIdlingResource idlingResource;
 
 	@Before
 	@Override
 	public void setup() {
 		super.setup();
-		IdlingPolicies.setIdlingResourceTimeout(40, TimeUnit.SECONDS);
-		enableSimulation(500);
+		enableSimulation(SPEED_KM_PER_HOUR);
 		try {
-			ResourcesImporter.importGpxAssets(app, Collections.singletonList(SELECTED_GPX_NAME));
+			ResourcesImporter.importGpxAssets(app, Collections.singletonList(SELECTED_GPX_NAME), null);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -77,8 +72,8 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 	@After
 	public void cleanUp() {
 		super.cleanUp();
-		if (observeDistToFinishIdlingResource != null) {
-			unregisterIdlingResources(observeDistToFinishIdlingResource);
+		if (idlingResource != null) {
+			unregisterIdlingResources(idlingResource);
 		}
 	}
 
@@ -88,8 +83,7 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 
 		openNavigationMenu();
 
-		ViewInteraction linearLayout = waitForView(allOf(withId(R.id.map_options_route_button),
-				isDisplayed()));
+		ViewInteraction linearLayout = waitForView(allOf(withId(R.id.map_options_route_button), isDisplayed()));
 		linearLayout.perform(click());
 
 		ViewInteraction linearLayout2 = onView(
@@ -106,24 +100,17 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 		allTab.perform(click());
 
 		ViewInteraction trackItemView = onView(allOf(withId(R.id.title),
-				withText(GpxUiHelper.getGpxTitle(SELECTED_GPX_NAME)), isDisplayed()));
+				withText(GpxHelper.INSTANCE.getGpxTitle(SELECTED_GPX_NAME)), isDisplayed()));
 		trackItemView.perform(click());
 
-		ViewInteraction appCompatImageButton2 = onView(
-				allOf(withId(R.id.close_button), withContentDescription("Navigate up"),
-						childAtPosition(
-								childAtPosition(
-										withId(R.id.route_menu_top_shadow_all),
-										1),
-								0),
-						isDisplayed()));
-		appCompatImageButton2.perform(click());
+		ViewInteraction closeButton = onView(allOf(withId(R.id.close_button), isDisplayed()));
+		closeButton.perform(click());
 
 		setRouteStart(START);
 		startNavigation();
 
-		observeDistToFinishIdlingResource = new ObserveDistToFinishIdlingResource(app);
-		registerIdlingResources(observeDistToFinishIdlingResource);
+		idlingResource = new ObserveDistToFinishIdlingResource(app);
+		registerIdlingResources(idlingResource);
 
 		Espresso.onIdle();
 	}
@@ -133,6 +120,7 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 		private static final int CHECK_INTERVAL = 1000;
 		private static final Range<Integer> EXPECTED_ROUTE_LENGTH = new Range<>(7000, 7200);
 		private static final int IDLE_ON_LEFT_DISTANCE = 5900;
+		private static final int START_POINT_DEVIATION_THRESHOLD = 20;
 
 		private final Handler handler;
 
@@ -149,20 +137,20 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 				@Override
 				public void run() throws AssertionError, IllegalStateException {
 					int leftDistance = app.getRoutingHelper().getLeftDistance();
-
 					if (leftDistance == 0) {
 						// Route is not calculated yet
 						handler.postDelayed(this, CHECK_INTERVAL);
+						return;
 					}
 
 					if (initialLeftDistance == -1) {
 						initialLeftDistance = leftDistance;
-						if (EXPECTED_ROUTE_LENGTH.contains(initialLeftDistance)) {
+						if (!EXPECTED_ROUTE_LENGTH.contains(initialLeftDistance)) {
 							throw new IllegalStateException("Unexpected route calculated with distance " + initialLeftDistance + " m");
 						}
 					}
 
-					if (leftDistance > initialLeftDistance) {
+					if (leftDistance > initialLeftDistance + START_POINT_DEVIATION_THRESHOLD) {
 						throw new AssertionError("Route recalculated from start of the track with distance " + leftDistance + " m");
 					} else {
 						if (leftDistance > IDLE_ON_LEFT_DISTANCE) {

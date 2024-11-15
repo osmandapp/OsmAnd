@@ -43,7 +43,7 @@ import java.util.Map;
 
 public abstract class SettingsHelper {
 
-	public static final int VERSION = 2;
+	public static final int VERSION = 3;
 
 	public static final String EXPORT_TYPE_LIST_KEY = "export_type_list_key";
 	public static final String REPLACE_KEY = "replace";

@@ -57,7 +57,7 @@ public class ConfigureButtonsCard extends MapBaseCard {
 	}
 
 	private void setupCustomWidgetsButton() {
-		List<QuickActionButtonState> buttons = mapButtonsHelper.getButtonsStates();
+		List<QuickActionButtonState> buttons = mapButtonsHelper.getQuickActionButtonsStates();
 		List<QuickActionButtonState> enabledButtons = mapButtonsHelper.getEnabledButtonsStates();
 
 		boolean enabled = !enabledButtons.isEmpty();
@@ -99,12 +99,7 @@ public class ConfigureButtonsCard extends MapBaseCard {
 
 	@NonNull
 	public List<MapButtonState> getDefaultButtonsStates() {
-		List<MapButtonState> list = new ArrayList<>();
-
-		list.add(mapButtonsHelper.getMap3DButtonState());
-		list.add(mapButtonsHelper.getCompassButtonState());
-
-		return list;
+		return new ArrayList<>(mapButtonsHelper.getDefaultButtonsStates());
 	}
 
 	public static void setupButton(@NonNull View view, @NonNull String title, @Nullable String description,

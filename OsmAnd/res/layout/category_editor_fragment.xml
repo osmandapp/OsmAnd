@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -17,7 +16,7 @@
 		android:background="?attr/list_background_color"
 		android:contentInsetStart="@dimen/toolbar_inset_start_with_navigation"
 		app:titleTextAppearance="@style/ToolbarTitle"
-		osmand:titleTextColor="?android:textColorPrimary"
+		app:titleTextColor="?android:textColorPrimary"
 		tools:navigationIcon="@drawable/ic_action_close"
 		tools:title="@string/favorite_category_add_new_title" />
 
@@ -66,7 +65,7 @@
 							android:letterSpacing="@dimen/text_button_letter_spacing"
 							android:maxLines="4"
 							android:selectAllOnFocus="true"
-							osmand:lineHeight="@dimen/default_title_line_height" />
+							app:lineHeight="@dimen/default_title_line_height" />
 
 					</com.google.android.material.textfield.TextInputLayout>
 
@@ -141,22 +140,10 @@
 						android:layout_height="1dp"
 						android:background="?attr/divider_color_basic" />
 
-					<net.osmand.plus.widgets.TextViewEx
-						style="@style/TitleStyle.Medium"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:layout_marginStart="@dimen/content_padding"
-						android:layout_marginTop="@dimen/content_padding_small"
-						android:layout_marginEnd="@dimen/content_padding"
-						android:text="@string/select_icon_profile_dialog_title"
-						android:textColor="?android:textColorPrimary" />
-
 					<FrameLayout
 						android:id="@+id/icons_card_container"
 						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:layout_marginTop="@dimen/content_padding_small"
-						android:layout_marginBottom="@dimen/content_padding_half" />
+						android:layout_height="wrap_content" />
 
 					<View
 						android:layout_width="match_parent"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:osmand="http://schemas.android.com/apk/res-auto"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:background="?attr/bg_color"
@@ -29,7 +29,7 @@
                 android:paddingStart="@dimen/content_padding"
                 android:text="@string/marker_save_as_track"
                 android:textAppearance="@style/TextAppearance.ListItemTitle"
-                osmand:typeface="@string/font_roboto_medium"/>
+                app:typefaceWeight="medium"/>
 
             <TextView
                 android:id="@+id/save_as_track_description"
@@ -73,7 +73,7 @@
                 android:textAllCaps="true"
                 android:textColor="?attr/color_dialog_buttons"
                 android:textSize="@dimen/default_desc_text_size"
-                android:textStyle="bold"/>
+                app:typefaceWeight="medium"/>
 
             <View
                 android:layout_width="1dp"
@@ -92,7 +92,7 @@
                 android:textAllCaps="true"
                 android:textColor="?attr/color_dialog_buttons"
                 android:textSize="@dimen/default_desc_text_size"
-                android:textStyle="bold"/>
+                app:typefaceWeight="medium"/>
 
         </LinearLayout>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
 			android:paddingRight="@dimen/content_padding"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
-			osmand:typeface="@string/font_roboto_medium"
+			app:typefaceWeight="medium"
 			tools:ignore="UnusedAttribute"
 			tools:text="@string/routeInfo_roadClass_name"
 			android:paddingEnd="@dimen/content_padding"
@@ -58,7 +58,7 @@
 				android:text="@string/rendering_category_details"
 				android:textColor="?attr/active_color_basic"
 				android:textSize="@dimen/default_desc_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				app:typefaceWeight="medium"
 				tools:ignore="UnusedAttribute"
 				android:paddingStart="@dimen/bottom_sheet_content_margin_small"
 				android:paddingEnd="@dimen/bottom_sheet_content_margin_small" />

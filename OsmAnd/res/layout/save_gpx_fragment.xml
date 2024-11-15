@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/bg_color"
@@ -13,7 +13,7 @@
 		android:text="@string/track_saved"
 		android:textColor="?android:textColorPrimary"
 		android:textSize="@dimen/default_list_text_size"
-		osmand:typeface="@string/font_roboto_medium" />
+		app:typefaceWeight="medium" />
 
 	<net.osmand.plus.widgets.OsmandTextFieldBoxes
 		android:id="@+id/name_text_box"
@@ -24,9 +24,9 @@
 		android:paddingEnd="@dimen/content_padding"
 		android:paddingRight="@dimen/content_padding"
 		android:paddingBottom="@dimen/content_padding_small"
-		osmand:hasClearButton="true"
-		osmand:secondaryColor="?android:textColorSecondary"
-		osmand:labelText="@string/gpx_file_name">
+		app:hasClearButton="true"
+		app:secondaryColor="?android:textColorSecondary"
+		app:labelText="@string/gpx_file_name">
 
 		<studio.carbonylgroup.textfieldboxes.ExtendedEditText
 			android:id="@+id/name_edit_text"

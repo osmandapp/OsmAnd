@@ -1,23 +1,22 @@
 package net.osmand.plus.profiles.data;
 
+
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.TextPaint;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.widgets.style.CustomClickableSpan;
 
 import java.util.List;
@@ -41,9 +40,8 @@ public class PredefinedProfilesGroup extends ProfilesGroup {
 	public CharSequence getDescription(@NonNull OsmandApplication ctx, boolean nightMode) {
 		String fullDescription = ctx.getString(R.string.provided_by, description);
 		int color = ColorUtilities.getActiveColor(ctx, nightMode);
-		Typeface typeface = FontCache.getRobotoMedium(ctx);
 		String url = description.toString();
-		SpannableString spannable = UiUtilities.createCustomFontSpannable(typeface, fullDescription, url);
+		SpannableString spannable = UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(), fullDescription, url);
 		int startInd = fullDescription.indexOf(url);
 		spannable.setSpan(new ForegroundColorSpan(color), startInd, startInd + url.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 

@@ -31,9 +31,11 @@ public enum WidgetGroup {
 	DEVELOPER_OPTIONS(R.string.developer_widgets, 0, R.drawable.widget_developer_day, R.drawable.widget_developer_night, 0),
 	ALTITUDE(R.string.altitude, R.string.map_widget_altitude_desc, R.drawable.widget_altitude_day, R.drawable.widget_altitude_night, 0),
 	ANT_PLUS(R.string.external_sensor_widgets, 0, R.drawable.widget_sensor_external_day, R.drawable.widget_sensor_external_night, 0),
+	VEHICLE_METRICS(R.string.obd_widget_group, 0, R.drawable.widget_obd_vehicle_info_day, R.drawable.widget_obd_vehicle_info_night, 0),
 	WEATHER(R.string.shared_string_weather, R.string.weather_widget_group_desc, R.drawable.widget_weather_umbrella_day, R.drawable.widget_weather_umbrella_night, 0),
 	SUNRISE_SUNSET(R.string.map_widget_sun_position, R.string.map_widget_group_sunrise_sunset_desc, R.drawable.widget_sunset_day, R.drawable.widget_sunset_night, 0),
-	GLIDE(R.string.map_widget_group_glide_ratio, R.string.map_widget_group_glide_desc, R.drawable.widget_glide_ratio_to_target_day, R.drawable.widget_glide_ratio_to_target_night, 0);
+	GLIDE(R.string.map_widget_group_glide_ratio, R.string.map_widget_group_glide_desc, R.drawable.widget_glide_ratio_to_target_day, R.drawable.widget_glide_ratio_to_target_night, 0),
+	ROUTE_GUIDANCE(R.string.route_guidance, R.string.route_guidance_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, R.string.docs_widget_route_maneuvers);
 
 	@StringRes
 	public final int titleId;
@@ -62,7 +64,7 @@ public enum WidgetGroup {
 	public List<WidgetType> getWidgets() {
 		List<WidgetType> widgets = new ArrayList<>();
 		for (WidgetType widget : WidgetType.values()) {
-			if (this == widget.getGroup()) {
+			if (this == widget.getGroup() || this == widget.getVerticalGroup()) {
 				widgets.add(widget);
 			}
 		}

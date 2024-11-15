@@ -21,12 +21,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
@@ -86,7 +86,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 
 		String title = app.getString(category.getTitleId());
 		TextView titleTv = group.findViewById(R.id.title_tv);
-		titleTv.setText(UiUtilities.createCustomFontSpannable(FontCache.getRobotoMedium(app), title, title));
+		titleTv.setText(UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(), title, title));
 
 		TextView subTextTv = group.findViewById(R.id.sub_text_tv);
 		subTextTv.setText(getCategoryDescr(category, exportMode));

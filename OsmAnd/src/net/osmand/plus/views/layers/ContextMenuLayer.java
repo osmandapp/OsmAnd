@@ -148,8 +148,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public void initLayer(@NonNull OsmandMapTileView view) {
 		super.initLayer(view);
 
-		Context context = getContext();
-		contextMarker = new ImageView(context);
+		Context context = AndroidUtils.createDisplayContext(getContext());
+		contextMarker = new ImageView(AndroidUtils.createDisplayContext(context));
 		contextMarker.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 		Drawable markerDrawable = AppCompatResources.getDrawable(context, R.drawable.map_pin_context_menu);
 		contextMarker.setImageDrawable(markerDrawable);
@@ -173,6 +173,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		int height = (int) (contextMarker.getDrawable().getMinimumHeight() * scale);
 		contextMarker.layout(0, 0, width, height);
 		contextMarkerImage = getScaledBitmap(R.drawable.map_pin_context_menu, scale);
+	}
+
+	@Override
+	protected void updateResources() {
+		super.updateResources();
+		updateContextMarker();
 	}
 
 	public Object getSelectedObject() {

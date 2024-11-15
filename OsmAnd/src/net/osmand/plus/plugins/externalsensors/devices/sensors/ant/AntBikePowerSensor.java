@@ -1,7 +1,7 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ant;
 
-import static net.osmand.gpx.GPXUtilities.DECIMAL_FORMAT;
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_BIKE_POWER;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_BIKE_POWER;
+import static net.osmand.util.Algorithms.DECIMAL_FORMAT;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

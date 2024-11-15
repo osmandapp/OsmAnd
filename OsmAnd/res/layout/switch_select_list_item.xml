@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:osmand="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginRight="@dimen/list_content_padding"
-        osmand:srcCompat="@drawable/ic_action_info_dark"
+        app:srcCompat="@drawable/ic_action_info_dark"
 	    android:layout_marginEnd="@dimen/list_content_padding" />
 
     <LinearLayout

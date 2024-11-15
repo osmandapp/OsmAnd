@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -28,7 +28,7 @@
 		android:text="@string/shared_string_description"
 		android:textColor="?android:textColorSecondary"
 		android:textSize="@dimen/default_desc_text_size"
-		osmand:typeface="@string/font_roboto_medium" />
+		app:typefaceWeight="medium" />
 
 	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/main_image"
@@ -58,7 +58,7 @@
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
 			android:lineSpacingMultiplier="1.1"
-			osmand:typeface="@string/font_roboto_regular"
+			android:textStyle="normal"
 			tools:text="Amsterdam is the Netherlands' capital and financial, cultural and creative centre with more than 850,000 inhabitants. Amsterdam is known for the canals that criss-cross the city, its impressive architecture and more than 1,500 bridges. The city has a heritage dating back to the Dutch Golden Age in the 17th century as well as a diverse art scene and a bustling nightlife."/>
 
 		<FrameLayout
@@ -84,13 +84,13 @@
 					android:paddingStart="@dimen/bottom_sheet_content_padding_small"
 					android:paddingEnd="@dimen/bottom_sheet_content_padding_small"
 					android:drawablePadding="@dimen/bottom_sheet_content_padding_small"
-					osmand:drawableStartCompat="@drawable/ic_action_read_article"
-					osmand:drawableLeftCompat="@drawable/ic_action_read_article"
-					osmand:drawableTint="?attr/wikivoyage_active_color"
+					app:drawableStartCompat="@drawable/ic_action_read_article"
+					app:drawableLeftCompat="@drawable/ic_action_read_article"
+					app:drawableTint="?attr/wikivoyage_active_color"
 					android:text="@string/context_menu_read_full"
 					android:textColor="?attr/wikivoyage_active_color"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium" />
+					app:typefaceWeight="medium" />
 
 			</FrameLayout>
 
@@ -112,13 +112,13 @@
 					android:paddingStart="@dimen/bottom_sheet_content_padding_small"
 					android:paddingEnd="@dimen/bottom_sheet_content_padding_small"
 					android:drawablePadding="@dimen/bottom_sheet_content_padding_small"
-					osmand:drawableRightCompat="@drawable/ic_action_edit_dark"
-					osmand:drawableEndCompat="@drawable/ic_action_edit_dark"
-					osmand:drawableTint="?attr/wikivoyage_active_color"
+					app:drawableRightCompat="@drawable/ic_action_edit_dark"
+					app:drawableEndCompat="@drawable/ic_action_edit_dark"
+					app:drawableTint="?attr/wikivoyage_active_color"
 					android:text="@string/shared_string_edit"
 					android:textColor="?attr/wikivoyage_active_color"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium" />
+					app:typefaceWeight="medium" />
 
 			</FrameLayout>
 
@@ -145,13 +145,13 @@
 			android:paddingStart="@dimen/bottom_sheet_content_padding_small"
 			android:paddingEnd="@dimen/bottom_sheet_content_padding_small"
 			android:drawablePadding="@dimen/dialog_button_height"
-			osmand:drawableStartCompat="@drawable/ic_action_add"
-			osmand:drawableLeftCompat="@drawable/ic_action_add"
-			osmand:drawableTint="?attr/wikivoyage_active_color"
+			app:drawableStartCompat="@drawable/ic_action_add"
+			app:drawableLeftCompat="@drawable/ic_action_add"
+			app:drawableTint="?attr/wikivoyage_active_color"
 			android:text="@string/add_description"
 			android:textColor="?attr/wikivoyage_active_color"
 			android:textSize="@dimen/default_list_text_size"
-			osmand:typeface="@string/font_roboto_medium" />
+			app:typefaceWeight="medium" />
 
 	</FrameLayout>
 

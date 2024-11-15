@@ -59,7 +59,7 @@
                 android:textAllCaps="true"
                 android:textColor="?attr/color_dialog_buttons"
                 android:textSize="@dimen/default_desc_text_size"
-                android:textStyle="bold"/>
+                app:typefaceWeight="medium"/>
         </FrameLayout>
 
     </LinearLayout>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
 					android:maxLines="2"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"
-					osmand:typeface="@string/font_roboto_regular"
+					android:textStyle="normal"
 					tools:text="Amsterdam" />
 
 				<LinearLayout
@@ -78,7 +78,7 @@
 						android:letterSpacing="@dimen/description_letter_spacing"
 						android:textColor="?attr/active_color_basic"
 						android:textSize="@dimen/default_sub_text_size"
-						osmand:lineHeight="@dimen/default_desc_line_height"
+						app:lineHeight="@dimen/default_desc_line_height"
 						tools:text="100500 km" />
 
 				</LinearLayout>

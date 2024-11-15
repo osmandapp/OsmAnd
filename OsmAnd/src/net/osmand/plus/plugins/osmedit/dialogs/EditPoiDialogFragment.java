@@ -1,7 +1,6 @@
 package net.osmand.plus.plugins.osmedit.dialogs;
 
 import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
-import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.ORIGINAL_POI_TYPE_TAG;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -18,24 +17,9 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.util.TypedValue;
-import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.WindowManager;
+import android.view.*;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,6 +28,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -91,15 +76,8 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
@@ -157,7 +135,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		view = themedInflater.inflate(R.layout.fragment_edit_poi, container, false);
 
 		if (savedInstanceState != null) {
-			Map<String, String> map = (Map<String, String>) AndroidUtils.getSerializable(savedInstanceState, TAGS_LIST, HashMap.class);
+			Map<String, String> map = (Map<String, String>) AndroidUtils.getSerializable(savedInstanceState, TAGS_LIST, LinkedHashMap.class);
 			editPoiData.updateTags(map);
 		}
 
@@ -375,7 +353,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
-		outState.putSerializable(TAGS_LIST, (Serializable) editPoiData.getTagValues());
+		outState.putSerializable(TAGS_LIST, (Serializable) new LinkedHashMap<>(editPoiData.getTagValues()));
 		super.onSaveInstanceState(outState);
 	}
 
@@ -490,12 +468,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 			if (offlineEdit && !Algorithms.isEmpty(poiTypeTag)) {
 				entity.putTagNoLC(POI_TYPE_TAG, poiTypeTag);
-				if (poiTypeTag != null) {
-					PoiType originalPoiType = editPoiData.getAllTranslatedSubTypes().get(poiTypeTag.trim().toLowerCase());
-					if (originalPoiType != null) {
-						entity.putTagNoLC(ORIGINAL_POI_TYPE_TAG, originalPoiType.getCategory().getDefaultTag());
-					}
-				}
 			}
 			String actionString = action == Action.CREATE ? getString(R.string.default_changeset_add) : getString(R.string.default_changeset_edit);
 			comment = actionString + " " + poiTypeTag;

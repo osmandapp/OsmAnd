@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/content_padding"
             android:layout_marginRight="@dimen/content_padding"
-            osmand:srcCompat="@drawable/ic_action_cloud_upload_colored" />
+            app:srcCompat="@drawable/ic_action_cloud_upload_colored" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -46,7 +46,7 @@
                     android:paddingTop="@dimen/content_padding_small"
                     android:paddingBottom="@dimen/content_padding_small"
                     android:textSize="@dimen/default_list_text_size"
-                    osmand:typeface="@string/font_roboto_regular"
+                    android:textStyle="normal"
                     tools:text="@string/osmand_cloud" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -56,7 +56,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="@dimen/content_padding"
                     android:layout_marginLeft="@dimen/content_padding"
-                    osmand:srcCompat="@drawable/ic_action_osmand_maps_plus" />
+                    app:srcCompat="@drawable/ic_action_osmand_maps_plus" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/tertiary_icon"
@@ -65,7 +65,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/content_padding"
                     android:layout_marginRight="@dimen/content_padding"
-                    osmand:srcCompat="@drawable/ic_action_osmand_pro_logo_colored" />
+                    app:srcCompat="@drawable/ic_action_osmand_pro_logo_colored" />
 
             </LinearLayout>
 

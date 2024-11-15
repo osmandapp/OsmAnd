@@ -9,7 +9,7 @@ import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;

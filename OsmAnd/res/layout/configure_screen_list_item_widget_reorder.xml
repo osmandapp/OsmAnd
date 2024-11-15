@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
 		android:paddingBottom="@dimen/content_padding_half"
 		android:textColor="?android:textColorPrimary"
 		android:textSize="@dimen/default_list_text_size"
-		osmand:typeface="@string/font_roboto_regular"
+		android:textStyle="normal"
 		tools:text="@string/poi_aerialway_transport" />
 
 	<androidx.appcompat.widget.AppCompatImageView
@@ -55,6 +55,6 @@
 		android:paddingEnd="@dimen/content_padding"
 		android:paddingRight="@dimen/content_padding"
 		android:tint="?attr/secondary_icon_color"
-		osmand:srcCompat="@drawable/ic_action_item_move" />
+		app:srcCompat="@drawable/ic_action_item_move" />
 
 </LinearLayout>

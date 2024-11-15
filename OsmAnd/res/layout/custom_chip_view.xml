@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/buttons_container"
 	android:layout_width="wrap_content"
-	android:minWidth="@dimen/favorites_icon_outline_size"
+	android:minWidth="@dimen/acceptable_touch_radius"
+	android:minHeight="@dimen/acceptable_touch_radius"
 	android:layout_height="wrap_content"
 	android:gravity="center"
 	android:orientation="horizontal"
 	android:layout_marginEnd="@dimen/content_padding_half">
 
-	<LinearLayout
+	<FrameLayout
 		android:id="@+id/button"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/dialog_button_height"
+		android:layout_gravity="center_vertical"
+		android:minHeight="@dimen/dialog_button_height"
+		android:layout_height="wrap_content"
 		android:orientation="vertical">
 
 		<LinearLayout
 			android:id="@+id/button_container"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
 			android:duplicateParentState="true"
+			android:layout_gravity="center_vertical"
 			android:orientation="horizontal"
 			android:paddingHorizontal="@dimen/content_padding"
 			tools:ignore="UselessParent">
@@ -39,17 +43,17 @@
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/chip_title"
 				android:layout_width="wrap_content"
-				android:layout_height="match_parent"
+				android:layout_height="wrap_content"
 				android:layout_gravity="center"
 				android:drawablePadding="@dimen/content_padding_half"
 				android:duplicateParentState="true"
 				android:gravity="center"
 				android:textSize="@dimen/default_desc_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				app:typefaceWeight="medium"
 				tools:text="Button" />
 
 		</LinearLayout>
 
-	</LinearLayout>
+	</FrameLayout>
 
 </FrameLayout>

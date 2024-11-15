@@ -1,6 +1,7 @@
 package net.osmand.plus.utils;
 
 
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.BLUETOOTH;
 import static android.Manifest.permission.BLUETOOTH_ADMIN;
 import static android.Manifest.permission.BLUETOOTH_CONNECT;
@@ -9,9 +10,9 @@ import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 import static android.graphics.Paint.FILTER_BITMAP_FLAG;
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static android.util.TypedValue.COMPLEX_UNIT_SP;
+import static android.view.WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.bluetooth.BluetoothAdapter;
@@ -29,15 +30,12 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ClipDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.StateListDrawable;
-import android.graphics.drawable.VectorDrawable;
+import android.graphics.drawable.*;
+import android.hardware.display.DisplayManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.StatFs;
@@ -53,27 +51,13 @@ import android.text.style.ImageSpan;
 import android.text.style.URLSpan;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
-import android.view.DisplayCutout;
-import android.view.Gravity;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
-import android.view.ViewTreeObserver;
+import android.view.*;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.AttrRes;
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DimenRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
+import androidx.annotation.*;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.app.ActivityCompat;
@@ -87,11 +71,13 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
+import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
+import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.views.OsmandMap;
+import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -101,16 +87,7 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -205,7 +182,7 @@ public class AndroidUtils {
 		int height = (int) (drawable.getIntrinsicHeight() * scale);
 		width += width % 2 == 1 ? 1 : 0;
 		height += height % 2 == 1 ? 1 : 0;
-		return createScaledBitmap(drawable, width, height);
+		return scaleBitmap(drawableToBitmap(drawable), width, height, true);
 	}
 
 	public static Bitmap createScaledBitmap(@NonNull Drawable drawable, int width, int height) {
@@ -664,13 +641,22 @@ public class AndroidUtils {
 		return (int) height;
 	}
 
+	public static float dpToPxF(@NonNull Context ctx, float dp) {
+		Resources r = ctx.getResources();
+		return TypedValue.applyDimension(COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics());
+	}
+
 	public static int dpToPx(@NonNull Context ctx, float dp) {
 		Resources r = ctx.getResources();
-		return (int) TypedValue.applyDimension(
-				COMPLEX_UNIT_DIP,
-				dp,
-				r.getDisplayMetrics()
-		);
+		return (int) TypedValue.applyDimension(COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics());
+	}
+
+	public static float pxToDpF(@NonNull Context ctx, int px) {
+		if (VERSION.SDK_INT >= VERSION_CODES.UPSIDE_DOWN_CAKE) {
+			return TypedValue.deriveDimension(COMPLEX_UNIT_DIP, px, ctx.getResources().getDisplayMetrics());
+		} else {
+			return px / dpToPxF(ctx, 1);
+		}
 	}
 
 	public static int dpToPxAuto(@NonNull Context ctx, float dp) {
@@ -710,6 +696,26 @@ public class AndroidUtils {
 		TypedValue outValue = new TypedValue();
 		ctx.getResources().getValue(resId, outValue, true);
 		return outValue.getFloat();
+	}
+
+	@DrawableRes
+	public static int getActivityIconId(@NonNull OsmandApplication app, @Nullable RouteActivity activity) {
+		return activity != null
+				? getDrawableId(app, activity.getIconName(), R.drawable.ic_action_info_dark)
+				: R.drawable.ic_action_activity;
+	}
+
+	public static boolean hasDrawableId(@NonNull OsmandApplication app, @NonNull String iconName) {
+		return getDrawableId(app, iconName, 0) != 0;
+	}
+
+	@DrawableRes
+	public static int getDrawableId(@NonNull OsmandApplication app, @NonNull String iconName, @DrawableRes int defRes) {
+		int iconId = getDrawableId(app, iconName);
+		if (iconId <= 0) {
+			iconId = RenderingIcons.getBigIconResourceId(iconName);
+		}
+		return iconId > 0 ? iconId : defRes;
 	}
 
 	public static int getDrawableId(OsmandApplication app, String id) {
@@ -849,6 +855,15 @@ public class AndroidUtils {
 	@NonNull
 	public static Rect getViewBoundOnScreen(@NonNull View view) {
 		int[] pixel = getLocationOnScreen(view);
+		int left = pixel[0];
+		int top = pixel[1];
+		return new Rect(left, top, left + view.getWidth(), top + view.getHeight());
+	}
+
+	@NonNull
+	public static Rect getViewBoundOnWindow(@NonNull View view) {
+		int[] pixel = new int[2];
+		view.getLocationInWindow(pixel);
 		int left = pixel[0];
 		int top = pixel[1];
 		return new Rect(left, top, left + view.getWidth(), top + view.getHeight());
@@ -1013,6 +1028,10 @@ public class AndroidUtils {
 
 	public static boolean isSupportRTL() {
 		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1;
+	}
+
+	public static boolean isLayoutMirrored(@NonNull View view) {
+		return ViewCompat.getLayoutDirection(view) == ViewCompat.LAYOUT_DIRECTION_RTL;
 	}
 
 	public static boolean isLayoutRtl(Context ctx) {
@@ -1201,7 +1220,21 @@ public class AndroidUtils {
 		return value != null ? value : propertyValue;
 	}
 
-	public static String getActivityTypeStringPropertyName(Context ctx, String propertyName, String defValue) {
+	@DrawableRes
+	public static int getActivityTypeIcon(@NonNull Context ctx, @NonNull OsmRouteType activityType) {
+		int iconId = ctx.getResources().getIdentifier("mx_" + activityType.getIcon(), "drawable", ctx.getPackageName());
+		return iconId != 0 ? iconId : R.drawable.mx_special_marker;
+	}
+
+	@NonNull
+	public static String getActivityTypeTitle(@NonNull Context ctx, @NonNull OsmRouteType activityType) {
+		return getActivityTypeStringPropertyName(ctx, activityType.getName(),
+				Algorithms.capitalizeFirstLetterAndLowercase(activityType.getName()));
+	}
+
+	@NonNull
+	public static String getActivityTypeStringPropertyName(@NonNull Context ctx, @NonNull String propertyName,
+	                                                       @NonNull String defValue) {
 		String value = getStringByProperty(ctx, "activity_type_" + propertyName + "_name");
 		return value != null ? value : defValue;
 	}
@@ -1265,7 +1298,8 @@ public class AndroidUtils {
 					hasPermission(context, BLUETOOTH_CONNECT);
 		} else {
 			return hasPermission(context, BLUETOOTH) &&
-					hasPermission(context, BLUETOOTH_ADMIN);
+					hasPermission(context, BLUETOOTH_ADMIN) &&
+					hasPermission(context, ACCESS_FINE_LOCATION);
 		}
 	}
 
@@ -1275,6 +1309,10 @@ public class AndroidUtils {
 	private static final int BLUETOOTH_CONNECT_REQUEST_CODE = 5;
 
 	public static boolean requestBLEPermissions(@NonNull Activity activity) {
+		return requestBLEPermissions(activity, BLUETOOTH_CONNECT_REQUEST_CODE);
+	}
+
+	public static boolean requestBLEPermissions(@NonNull Activity activity, int requestCode) {
 		List<String> permissions = new ArrayList<>();
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
 			if (!AndroidUtils.hasPermission(activity, BLUETOOTH_SCAN)) {
@@ -1290,18 +1328,29 @@ public class AndroidUtils {
 			if (!AndroidUtils.hasPermission(activity, BLUETOOTH_ADMIN)) {
 				permissions.add(BLUETOOTH_ADMIN);
 			}
+			if (!AndroidUtils.hasPermission(activity, ACCESS_FINE_LOCATION)) {
+				permissions.add(ACCESS_FINE_LOCATION);
+			}
 		}
 		if (!Algorithms.isEmpty(permissions)) {
 			ActivityCompat.requestPermissions(
 					activity,
 					permissions.toArray(new String[0]),
-					BLUETOOTH_CONNECT_REQUEST_CODE);
+					requestCode);
 
 		}
 		return Algorithms.isEmpty(permissions);
 	}
 
 	public static final int POST_NOTIFICATIONS_REQUEST_CODE = 6;
+
+	public static boolean hasPostNotificationPermission(@NonNull Context context) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			return ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED;
+		} else {
+			return true;
+		}
+	}
 
 	public static void requestNotificationPermissionIfNeeded(@NonNull FragmentActivity activity) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -1322,91 +1371,10 @@ public class AndroidUtils {
 		}
 	}
 
-	public static View.OnTouchListener getMoveFabOnTouchListener(@NonNull OsmandApplication app, @Nullable MapActivity mapActivity, @NonNull ImageView fabButton, @NonNull FabMarginPreference preference) {
-		return new View.OnTouchListener() {
-			private int initialMarginX = 0;
-			private int initialMarginY = 0;
-			private float initialTouchX = 0;
-			private float initialTouchY = 0;
-
-			@SuppressLint("ClickableViewAccessibility")
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				if (mapActivity == null) {
-					return false;
-				}
-				switch (event.getAction()) {
-					case MotionEvent.ACTION_DOWN:
-						setUpInitialValues(v, event);
-						return true;
-					case MotionEvent.ACTION_UP:
-						fabButton.setOnTouchListener(null);
-						fabButton.setPressed(false);
-						fabButton.setScaleX(1);
-						fabButton.setScaleY(1);
-						fabButton.setAlpha(1f);
-						FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) v.getLayoutParams();
-						if (AndroidUiHelper.isOrientationPortrait(mapActivity))
-							preference.setPortraitFabMargin(params.rightMargin, params.bottomMargin);
-						else
-							preference.setLandscapeFabMargin(params.rightMargin, params.bottomMargin);
-						return true;
-					case MotionEvent.ACTION_MOVE:
-						if (initialMarginX == 0 && initialMarginY == 0 && initialTouchX == 0 && initialTouchY == 0)
-							setUpInitialValues(v, event);
-
-						int padding = calculateTotalSizePx(app, R.dimen.map_button_margin);
-						FrameLayout parent = (FrameLayout) v.getParent();
-						FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) v.getLayoutParams();
-
-						int deltaX = (int) (initialTouchX - event.getRawX());
-						int deltaY = (int) (initialTouchY - event.getRawY());
-
-						int newMarginX = interpolate(initialMarginX + deltaX, v.getWidth(), parent.getWidth() - padding * 2);
-						int newMarginY = interpolate(initialMarginY + deltaY, v.getHeight(), parent.getHeight() - padding * 2);
-
-						if (v.getHeight() + newMarginY <= parent.getHeight() - padding * 2 && newMarginY > 0)
-							param.bottomMargin = newMarginY;
-
-						if (v.getWidth() + newMarginX <= parent.getWidth() - padding * 2 && newMarginX > 0) {
-							param.rightMargin = newMarginX;
-						}
-
-						v.setLayoutParams(param);
-
-						return true;
-				}
-				return false;
-			}
-
-			private int interpolate(int value, int divider, int boundsSize) {
-				if (value <= divider && value > 0)
-					return value * value / divider;
-				else {
-					int leftMargin = boundsSize - value - divider;
-					if (leftMargin <= divider && value < boundsSize - divider)
-						return leftMargin - (leftMargin * leftMargin / divider) + value;
-					else
-						return value;
-				}
-			}
-
-			private void setUpInitialValues(View v, MotionEvent event) {
-				FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) v.getLayoutParams();
-
-				initialMarginX = params.rightMargin;
-				initialMarginY = params.bottomMargin;
-
-				initialTouchX = event.getRawX();
-				initialTouchY = event.getRawY();
-			}
-		};
-	}
-
-	public static int calculateTotalSizePx(OsmandApplication app, @DimenRes int... dimensId) {
+	public static int calculateTotalSizePx(@NonNull Context context, @DimenRes int... dimensId) {
 		int result = 0;
 		for (int id : dimensId) {
-			result += app.getResources().getDimensionPixelSize(id);
+			result += context.getResources().getDimensionPixelSize(id);
 		}
 		return result;
 	}
@@ -1415,5 +1383,59 @@ public class AndroidUtils {
 		BluetoothManager bluetoothManager = context.getSystemService(BluetoothManager.class);
 		BluetoothAdapter bluetoothAdapter = bluetoothManager.getAdapter();
 		return bluetoothAdapter != null && bluetoothAdapter.isEnabled();
+	}
+
+	public static Display getDisplay(@NonNull Context context) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+			OsmandMap osmandMap = app.getOsmandMap();
+			if (osmandMap != null) {
+				MapActivity activity = osmandMap.getMapView().getMapActivity();
+				if (activity != null) {
+					return activity.getDisplay();
+				}
+			}
+			DisplayManager manager = (DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE);
+			return manager.getDisplay(Display.DEFAULT_DISPLAY);
+		} else {
+			WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+			return manager.getDefaultDisplay();
+		}
+	}
+
+	@NonNull
+	public static Context createDisplayContext(@NonNull Context context) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+			return context.createDisplayContext(getDisplay(context))
+					.createWindowContext(TYPE_APPLICATION_OVERLAY, null);
+		}
+		return context;
+	}
+
+	@NonNull
+	public static int[] getRelativeMargins(@NonNull View parentView, @NonNull View view) {
+		int[] childLocation = new int[2];
+		int[] parentLocation = new int[2];
+
+		view.getLocationInWindow(childLocation);
+		parentView.getLocationInWindow(parentLocation);
+
+		int topMargin = childLocation[1] - parentLocation[1];
+		int leftMargin = childLocation[0] - parentLocation[0];
+
+		int childWidth = view.getWidth();
+		int childHeight = view.getHeight();
+
+		int parentWidth = parentView.getWidth();
+		int parentHeight = parentView.getHeight();
+
+		int rightMargin = (parentWidth - leftMargin - childWidth);
+		int bottomMargin = (parentHeight - topMargin - childHeight);
+
+		if (isLayoutRtl(parentView.getContext())) {
+			return new int[] {rightMargin, topMargin, leftMargin, bottomMargin};
+		} else {
+			return new int[] {leftMargin, topMargin, rightMargin, bottomMargin};
+		}
 	}
 }

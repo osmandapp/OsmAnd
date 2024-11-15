@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.audionotes;
 
+import static android.Manifest.permission.RECORD_AUDIO;
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_AUDIO_NOTE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_PHOTO_NOTE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_VIDEO_NOTE;
@@ -15,7 +17,6 @@ import android.app.Activity;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
@@ -27,6 +28,7 @@ import android.media.AudioManager;
 import android.media.CamcorderProfile;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.media.MediaRecorder.AudioEncoder;
 import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Build;
@@ -59,8 +61,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
+import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -99,15 +101,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 
 public class AudioVideoNotesPlugin extends OsmandPlugin {
@@ -139,10 +133,12 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public static final int VIDEO_QUALITY_DEFAULT = CamcorderProfile.QUALITY_HIGH; // High (highest res)
 	public static final int AUDIO_FORMAT_DEFAULT = MediaRecorder.AudioEncoder.AAC; // AAC
 	public static final int AUDIO_BITRATE_DEFAULT = 64 * 1024; // 64 kbps
+	public static final int AUDIO_SAMPLE_RATE_DEFAULT = 48 * 1000; // 48 kHz
 	public final CommonPreference<Integer> AV_VIDEO_FORMAT;
 	public final CommonPreference<Integer> AV_VIDEO_QUALITY;
 	public final CommonPreference<Integer> AV_AUDIO_FORMAT;
 	public final CommonPreference<Integer> AV_AUDIO_BITRATE;
+	public final CommonPreference<Integer> AV_AUDIO_SAMPLE_RATE;
 
 	public static final int AV_DEFAULT_ACTION_AUDIO = 0;
 	public static final int AV_DEFAULT_ACTION_VIDEO = 1;
@@ -578,6 +574,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		AV_VIDEO_QUALITY = registerIntPreference("av_video_quality", VIDEO_QUALITY_DEFAULT);
 		AV_AUDIO_FORMAT = registerIntPreference("av_audio_format", AUDIO_FORMAT_DEFAULT);
 		AV_AUDIO_BITRATE = registerIntPreference("av_audio_bitrate", AUDIO_BITRATE_DEFAULT);
+		AV_AUDIO_SAMPLE_RATE = registerIntPreference("av_audio_sample_rate", AUDIO_SAMPLE_RATE_DEFAULT);
 		// camera picture size:
 		AV_CAMERA_PICTURE_SIZE = registerIntPreference("av_camera_picture_size", AV_PHOTO_SIZE_DEFAULT);
 		// camera focus type:
@@ -761,17 +758,17 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	protected MapWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
-		switch (widgetType) {
-			case AV_NOTES_ON_REQUEST:
-				return new AudioVideoNotesWidget(mapActivity, widgetType, AV_DEFAULT_ACTION.CHOOSE, customId, widgetsPanel);
-			case AV_NOTES_RECORD_AUDIO:
-				return new AudioVideoNotesWidget(mapActivity, widgetType, AV_DEFAULT_ACTION.AUDIO, customId, widgetsPanel);
-			case AV_NOTES_RECORD_VIDEO:
-				return new AudioVideoNotesWidget(mapActivity, widgetType, AV_DEFAULT_ACTION.VIDEO, customId, widgetsPanel);
-			case AV_NOTES_TAKE_PHOTO:
-				return new AudioVideoNotesWidget(mapActivity, widgetType, AV_DEFAULT_ACTION.TAKEPICTURE, customId, widgetsPanel);
-		}
-		return null;
+		return switch (widgetType) {
+			case AV_NOTES_ON_REQUEST ->
+					new AudioVideoNotesWidget(mapActivity, widgetType, AV_DEFAULT_ACTION.CHOOSE, customId, widgetsPanel);
+			case AV_NOTES_RECORD_AUDIO ->
+					new AudioVideoNotesWidget(mapActivity, widgetType, AV_DEFAULT_ACTION.AUDIO, customId, widgetsPanel);
+			case AV_NOTES_RECORD_VIDEO ->
+					new AudioVideoNotesWidget(mapActivity, widgetType, AV_DEFAULT_ACTION.VIDEO, customId, widgetsPanel);
+			case AV_NOTES_TAKE_PHOTO ->
+					new AudioVideoNotesWidget(mapActivity, widgetType, AV_DEFAULT_ACTION.TAKEPICTURE, customId, widgetsPanel);
+			default -> null;
+		};
 	}
 
 	public void makeAction(@NonNull MapActivity mapActivity, int actionId) {
@@ -793,7 +790,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		AlertDialog.Builder ab = new AlertDialog.Builder(UiUtilities.getThemedContext(mapActivity, nightMode));
 		ab.setItems(
-				new String[]{mapActivity.getString(R.string.recording_context_menu_arecord),
+				new String[] {mapActivity.getString(R.string.recording_context_menu_arecord),
 						mapActivity.getString(R.string.recording_context_menu_vrecord),
 						mapActivity.getString(R.string.recording_context_menu_precord),}, (dialog, which) -> {
 					int action = which == 0 ? AV_DEFAULT_ACTION_AUDIO : (which == 1 ? AV_DEFAULT_ACTION_VIDEO
@@ -941,10 +938,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 	}
 
-	public void recordVideo(double lat, double lon, @NonNull MapActivity mapActivity,
-							boolean forceExternal) {
-		if (ActivityCompat.checkSelfPermission(mapActivity, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
-				&& ActivityCompat.checkSelfPermission(mapActivity, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
+	public void recordVideo(double lat, double lon, @NonNull MapActivity mapActivity, boolean forceExternal) {
+		if (ActivityCompat.checkSelfPermission(mapActivity, Manifest.permission.CAMERA) == PERMISSION_GRANTED
+				&& ActivityCompat.checkSelfPermission(mapActivity, RECORD_AUDIO) == PERMISSION_GRANTED) {
 			if (AV_EXTERNAL_RECORDER.get() || forceExternal) {
 				captureVideoExternal(lat, lon, mapActivity);
 			} else {
@@ -957,8 +953,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		} else {
 			actionLat = lat;
 			actionLon = lon;
-			ActivityCompat.requestPermissions(mapActivity, new String[]{Manifest.permission.CAMERA,
-					Manifest.permission.RECORD_AUDIO}, CAMERA_FOR_VIDEO_REQUEST_CODE);
+			ActivityCompat.requestPermissions(mapActivity, new String[] {Manifest.permission.CAMERA,
+					RECORD_AUDIO}, CAMERA_FOR_VIDEO_REQUEST_CODE);
 		}
 
 	}
@@ -1194,22 +1190,25 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		return res;
 	}
 
-	public void recordAudio(double lat, double lon, @NonNull MapActivity mapActivity) {
-		if (ActivityCompat.checkSelfPermission(mapActivity, Manifest.permission.RECORD_AUDIO)
-				== PackageManager.PERMISSION_GRANTED) {
-
+	public void recordAudio(double lat, double lon, @NonNull MapActivity activity) {
+		if (ActivityCompat.checkSelfPermission(activity, RECORD_AUDIO) == PERMISSION_GRANTED) {
 			initRecMenu(AVActionType.REC_AUDIO, lat, lon);
+
+			int audioEncoder = AV_AUDIO_FORMAT.get();
+			File file = getBaseFileName(lat, lon, app, THREEGP_EXTENSION);
+
 			MediaRecorder mr = new MediaRecorder();
-			File f = getBaseFileName(lat, lon, app, THREEGP_EXTENSION);
 			mr.setAudioSource(MediaRecorder.AudioSource.MIC);
 			mr.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-			mr.setAudioEncoder(AV_AUDIO_FORMAT.get());
+			mr.setAudioEncoder(audioEncoder);
 			mr.setAudioEncodingBitRate(AV_AUDIO_BITRATE.get());
-			mr.setOutputFile(f.getAbsolutePath());
-
+			mr.setOutputFile(file.getAbsolutePath());
+			if (audioEncoder == AudioEncoder.AAC) {
+				mr.setAudioSamplingRate(AV_AUDIO_SAMPLE_RATE.get());
+			}
 			muteStreamMusicAndOutputGuidance();
 			try {
-				runMediaRecorder(mapActivity, mr, f);
+				runMediaRecorder(activity, mr, file);
 			} catch (Exception e) {
 				unmuteStreamMusicAndOutputGuidance();
 				log.error("Error starting audio recorder ", e);
@@ -1219,9 +1218,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		} else {
 			actionLat = lat;
 			actionLon = lon;
-			ActivityCompat.requestPermissions(mapActivity,
-					new String[]{Manifest.permission.RECORD_AUDIO},
-					AUDIO_REQUEST_CODE);
+			ActivityCompat.requestPermissions(activity, new String[] {RECORD_AUDIO}, AUDIO_REQUEST_CODE);
 		}
 	}
 
@@ -1241,21 +1238,17 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			am.adjustStreamVolume(voiceGuidanceOutput, AudioManager.ADJUST_UNMUTE, 0);
 	}
 
-	public void takePhoto(double lat, double lon, @NonNull MapActivity mapActivity,
-						  boolean forceInternal, boolean forceExternal) {
-		if (ActivityCompat.checkSelfPermission(mapActivity, Manifest.permission.CAMERA)
-				== PackageManager.PERMISSION_GRANTED) {
+	public void takePhoto(double lat, double lon, @NonNull MapActivity activity, boolean forceInternal, boolean forceExternal) {
+		if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) == PERMISSION_GRANTED) {
 			if ((!AV_EXTERNAL_PHOTO_CAM.get() || forceInternal) && !forceExternal) {
-				takePhotoInternalOrExternal(lat, lon, mapActivity);
+				takePhotoInternalOrExternal(lat, lon, activity);
 			} else {
-				takePhotoExternal(lat, lon, mapActivity);
+				takePhotoExternal(lat, lon, activity);
 			}
 		} else {
 			actionLat = lat;
 			actionLon = lon;
-			ActivityCompat.requestPermissions(mapActivity,
-					new String[]{Manifest.permission.CAMERA},
-					CAMERA_FOR_PHOTO_REQUEST_CODE);
+			ActivityCompat.requestPermissions(activity, new String[] {Manifest.permission.CAMERA}, CAMERA_FOR_PHOTO_REQUEST_CODE);
 		}
 	}
 
@@ -1899,24 +1892,22 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void handleRequestPermissionsResult(int requestCode, String[] permissions,
-											   int[] grantResults) {
+	public void handleRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 		runAction = -1;
 		if (requestCode == CAMERA_FOR_VIDEO_REQUEST_CODE) {
-			if (grantResults[0] == PackageManager.PERMISSION_GRANTED
-					&& grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+			if (grantResults[0] == PERMISSION_GRANTED && grantResults[1] == PERMISSION_GRANTED) {
 				runAction = AV_DEFAULT_ACTION_VIDEO;
 			} else {
 				app.showToastMessage(R.string.no_camera_permission);
 			}
 		} else if (requestCode == CAMERA_FOR_PHOTO_REQUEST_CODE) {
-			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+			if (grantResults[0] == PERMISSION_GRANTED) {
 				runAction = AV_DEFAULT_ACTION_TAKEPICTURE;
 			} else {
 				app.showToastMessage(R.string.no_camera_permission);
 			}
 		} else if (requestCode == AUDIO_REQUEST_CODE) {
-			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+			if (grantResults[0] == PERMISSION_GRANTED) {
 				runAction = AV_DEFAULT_ACTION_AUDIO;
 			} else {
 				app.showToastMessage(R.string.no_microphone_permission);

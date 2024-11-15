@@ -126,9 +126,9 @@ public class BackupUtils {
 		if (item.getType().name().equals(type)) {
 			if (name.equals(itemFileName)) {
 				return true;
-			} else if (item instanceof FileSettingsItem) {
-				FileSettingsItem fileItem = (FileSettingsItem) item;
-				if (name.startsWith(fileItem.getSubtype().getSubtypeFolder())) {
+			} else if (item instanceof FileSettingsItem fileItem) {
+				String subtypeFolder = fileItem.getSubtype().getSubtypeFolder();
+				if (subtypeFolder != null && name.startsWith(subtypeFolder)) {
 					if (fileItem.getFile().isDirectory() && !itemFileName.endsWith("/")) {
 						return name.startsWith(itemFileName + "/");
 					} else {

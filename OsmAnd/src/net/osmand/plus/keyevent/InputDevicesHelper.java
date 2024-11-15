@@ -15,6 +15,7 @@ import net.osmand.plus.keyevent.listener.InputDevicesEventListener;
 import net.osmand.plus.keyevent.devices.CustomInputDeviceProfile;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
+import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
@@ -25,6 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -205,42 +207,53 @@ public class InputDevicesHelper {
 		}
 	}
 
-	public void updateAssignmentKeyCode(@NonNull ApplicationMode appMode, @NonNull String deviceId,
-	                                    @NonNull String assignmentId, int oldKeyCode, int newKeyCode) {
+	public void addAssignment(@NonNull ApplicationMode appMode, @NonNull String deviceId,
+	                          @NonNull KeyAssignment assignment) {
 		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
 		CustomInputDeviceProfile device = devicesCollection.getCustomDeviceById(deviceId);
 		if (device != null) {
-			device.updateAssignmentKeyCode(assignmentId, oldKeyCode, newKeyCode);
-			syncSettings(devicesCollection, EventType.UPDATE_ASSIGNMENT_KEYCODE);
+			device.addAssignment(assignment);
+			syncSettings(devicesCollection, EventType.ADD_ASSIGNMENT);
 		}
 	}
 
-	public void addAssignmentKeyCode(@NonNull ApplicationMode appMode, @NonNull String deviceId,
-	                                 @NonNull String assignmentId, int keyCode) {
+	public void updateAssignment(@NonNull ApplicationMode appMode, @NonNull String deviceId,
+	                             @NonNull String assignmentId, @NonNull QuickAction action,
+	                             @NonNull List<Integer> keyCodes) {
 		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
 		CustomInputDeviceProfile device = devicesCollection.getCustomDeviceById(deviceId);
 		if (device != null) {
-			device.addAssignmentKeyCode(assignmentId, keyCode);
-			syncSettings(devicesCollection, EventType.ADD_ASSIGNMENT_KEYCODE);
+			device.updateAssignment(assignmentId, action, keyCodes);
+			syncSettings(devicesCollection, EventType.UPDATE_ASSIGNMENT);
 		}
 	}
 
-	public void clearAssignmentKeyCodes(@NonNull ApplicationMode appMode, @NonNull String deviceId,
-	                                    @NonNull String assignmentId) {
+	public void removeKeyAssignmentCompletely(@NonNull ApplicationMode appMode, @NonNull String deviceId,
+	                                          @NonNull String assignmentId) {
 		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
 		CustomInputDeviceProfile device = devicesCollection.getCustomDeviceById(deviceId);
 		if (device != null) {
-			device.clearAssignmentKeyCodes(assignmentId);
-			syncSettings(devicesCollection, EventType.CLEAR_ASSIGNMENT_KEYCODES);
+			device.removeKeyAssignmentCompletely(assignmentId);
+			syncSettings(devicesCollection, EventType.REMOVE_KEY_ASSIGNMENT_COMPLETELY);
 		}
 	}
 
-	public void resetAllAssignments(@NonNull ApplicationMode appMode, @NonNull String deviceId) {
+	public void saveUpdatedAssignmentsList(@NonNull ApplicationMode appMode, @NonNull String deviceId,
+	                                       @NonNull List<KeyAssignment> assignments) {
 		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
 		CustomInputDeviceProfile device = devicesCollection.getCustomDeviceById(deviceId);
 		if (device != null) {
-			device.resetAllAssignments();
-			syncSettings(devicesCollection, EventType.RESET_ASSIGNMENTS);
+			device.saveUpdatedAssignmentsList(assignments);
+			syncSettings(devicesCollection, EventType.SAVE_UPDATED_ASSIGNMENTS_LIST);
+		}
+	}
+
+	public void clearAllAssignments(@NonNull ApplicationMode appMode, @NonNull String deviceId) {
+		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
+		CustomInputDeviceProfile device = devicesCollection.getCustomDeviceById(deviceId);
+		if (device != null) {
+			device.clearAllAssignments();
+			syncSettings(devicesCollection, EventType.CLEAR_ALL_ASSIGNMENTS);
 		}
 	}
 
@@ -312,7 +325,7 @@ public class InputDevicesHelper {
 		JSONObject json = new JSONObject();
 		ApplicationMode appMode = devicesCollection.getAppMode();
 		try {
-			writeToJson(json, devicesCollection.getCustomDevices());
+			writeToJson(app, json, devicesCollection.getCustomDevices());
 			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.setModeValue(appMode, json.toString());
 		} catch (JSONException e) {
 			LOG.debug("Error while writing custom devices to JSON ", e);
@@ -329,7 +342,7 @@ public class InputDevicesHelper {
 		JSONArray jsonArray = json.getJSONArray("items");
 		for (int i = 0; i < jsonArray.length(); i++) {
 			try {
-				res.add(new CustomInputDeviceProfile(jsonArray.getJSONObject(i)).initialize(app));
+				res.add(new CustomInputDeviceProfile(app, jsonArray.getJSONObject(i)).initialize(app));
 			} catch (JSONException e) {
 				LOG.debug("Error while reading a custom device from JSON ", e);
 			}
@@ -337,11 +350,11 @@ public class InputDevicesHelper {
 		return res;
 	}
 
-	private static void writeToJson(@NonNull JSONObject json,
+	private static void writeToJson(@NonNull OsmandApplication app, @NonNull JSONObject json,
 	                                @NonNull List<InputDeviceProfile> customDevices) throws JSONException {
 		JSONArray jsonArray = new JSONArray();
 		for (InputDeviceProfile device : customDevices) {
-			jsonArray.put(((CustomInputDeviceProfile) device).toJson());
+			jsonArray.put(((CustomInputDeviceProfile) device).toJson(app));
 		}
 		json.put("items", jsonArray);
 	}

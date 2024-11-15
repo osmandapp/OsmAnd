@@ -688,7 +688,6 @@
     <string name="map_rendering_engine_v1">Leagan 1</string>
     <string name="save_track_external_sensors_data">Sonraí</string>
     <string name="stop_download_desc">Níl an íoslódáil críochnaithe. Má bhriseann tú anois í, ní bheidh tú in ann ach páirt de na tíleanna a fheiceáil.</string>
-    <string name="quick_action_add_favorite">Cuir ceanán leis</string>
     <string name="bg_service_screen_lock">Glasáil</string>
     <string name="amenity_type_administrative">Riaracháin</string>
     <string name="map_is_up_to_date">Tá an léarscáil %1$s cothrom le dáta.</string>
@@ -1071,7 +1070,7 @@
     <string name="profile_type_custom_string">Próifíl saincheaptha</string>
     <string name="simplified_track">Conair shimplí</string>
     <string name="shared_string_allow">Ceadaigh</string>
-    <string name="mapillary_menu_title_dates">Dáta</string>
+    <string name="shared_string_date">Dáta</string>
     <string name="prefer_in_routing_title">Is fearr liom…</string>
     <string name="app_mode_skiing">Sciáil</string>
     <string name="movement_speed">Luas gluaiseachta</string>
@@ -1147,7 +1146,6 @@
     <string name="shared_string_trip">Turas</string>
     <string name="average_altitude">Airde mheánach</string>
     <string name="subcategories">Fochatagóirí</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="south_abbreviation">D</string>
     <string name="regular_price">Gnáthphraghas</string>
     <string name="shared_string_read">Léigh</string>
@@ -1703,7 +1701,7 @@
     <string name="empty_state_av_notes">Déan nótaí!</string>
     <string name="storage_free_space">Spás ar fáil</string>
     <string name="coordinate_input">Iontráil na gcomhordanáidí</string>
-    <string name="sort_duration_ascending">Fad ama is lú ar dtús</string>
+    <string name="sort_duration_ascending">An fad ama is lú ar dtús</string>
     <string name="interrupt_music">Cuir ceol ar sos</string>
     <string name="make_active">Cumasaigh</string>
     <string name="shared_string_close_the_dialog">Dún an dialóg</string>
@@ -1786,7 +1784,6 @@
     <string name="local_openstreetmap_uploadall">Uaslódáil uile</string>
     <string name="daynight_mode_sensor">Braiteoir solais</string>
     <string name="use_location">Úsáid mo shuíomh</string>
-    <string name="quick_action_add_destination">Socraigh an ceann scríbe</string>
     <string name="show_all_tracks">Taispeáin gach conair</string>
     <string name="amenity_type_osmwiki">Vicipéid (as líne)</string>
     <string name="continuous_rendering">Rindreáil leanúnach</string>
@@ -2217,4 +2214,21 @@
     <string name="dangerous_goods">Earraí contúirteacha</string>
     <string name="may_be_used_if_there_is_shortcut">Is féidir a úsáid má tá aicearra ann</string>
     <string name="shared_string_copyright">Cóipcheart</string>
+    <string name="weather_source_ecmwf_description">Airmheán Eorpach um Réamhaisnéisí Aimsire Meántréimhseacha (ECMWF)</string>
+    <string name="cache_size">Méid na taisce</string>
+    <string name="driving_region_india">An India</string>
+    <string name="auto_25_chars_route_tslr">Cas beagáinín ar dheis</string>
+    <string name="auto_25_chars_route_tl">Cas ar chlé</string>
+    <string name="no_visible_tracks">Níl aon bhealach ar an léarscáil</string>
+    <string name="ask_every_time">Fiafraigh i gcónaí</string>
+    <string name="auto_25_chars_route_tr">Cas ar dheis</string>
+    <string name="auto_25_chars_route_tshr">Cas go géar ar dheis</string>
+    <string name="auto_25_chars_route_tshl">Cas go géar ar chlé</string>
+    <string name="auto_25_chars_route_tu">Déan U-chasadh</string>
+    <string name="shared_string_original">Bunaidh</string>
+    <string name="shared_string_automatically">Go hUathoibríoch</string>
+    <string name="auto_25_chars_route_tsll">Cas beagáinín ar chlé</string>
+    <string name="speak_route_deviation">Fógraigh malairt ón slí</string>
+    <string name="auto_25_chars_route_kl">Tiomáin ar chlé</string>
+    <string name="auto_25_chars_route_kr">Tiomáin ar dheis</string>
 </resources>

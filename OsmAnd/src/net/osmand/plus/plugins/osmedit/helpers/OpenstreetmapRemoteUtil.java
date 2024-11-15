@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.osmedit.helpers;
 
 import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
+import static net.osmand.osm.edit.Entity.REMOVE_TAG_PREFIX;
 
 import android.util.Xml;
 import android.widget.Toast;
@@ -11,6 +12,7 @@ import com.github.scribejava.core.model.Response;
 
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.Building;
 import net.osmand.data.LatLon;
@@ -34,6 +36,7 @@ import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthAuthorizationAdapter;
+import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -151,7 +154,8 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 	private String performBasicAuthRequest(String url, String requestMethod, String requestBody, String userOperation) throws IOException {
 		HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
-		connection.setConnectTimeout(15000);
+		connection.setConnectTimeout(AndroidNetworkUtils.CONNECT_TIMEOUT);
+		connection.setReadTimeout(AndroidNetworkUtils.READ_TIMEOUT);
 		connection.setRequestMethod(requestMethod);
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(ctx)); //$NON-NLS-1$
 		StringBuilder responseBody = new StringBuilder();
@@ -278,7 +282,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		for (String k : entity.getTagKeySet()) {
 			String val = entity.getTag(k);
 			if (val.length() == 0 || k.length() == 0 || POI_TYPE_TAG.equals(k) ||
-					k.startsWith(Entity.REMOVE_TAG_PREFIX) || k.contains(Entity.REMOVE_TAG_PREFIX))
+					k.startsWith(REMOVE_TAG_PREFIX) || k.contains(REMOVE_TAG_PREFIX))
 				continue;
 			ser.startTag(null, "tag"); //$NON-NLS-1$
 			ser.attribute(null, "k", k); //$NON-NLS-1$
@@ -402,7 +406,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				// merge non existing tags
 				Map<String, String> updatedTags = new HashMap<>();
 				for (String tagKey : entity.getTagKeySet()) {
-					if (tagKey != null && !deletedTag(n, tagKey)) {
+					if (tagKey != null && !isDeletedTag(n, tagKey)) {
 						addIfNotNull(tagKey, entity.getTag(tagKey), updatedTags);
 					}
 				}
@@ -439,8 +443,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 		} catch (IOException | NullPointerException | XmlPullParserException e) {
 			log.error("Loading entity failed " + entityId, e); //$NON-NLS-1$
-			Toast.makeText(ctx, ctx.getResources().getString(R.string.shared_string_io_error),
-					Toast.LENGTH_LONG).show();
+			ctx.runInUIThread(() -> Toast.makeText(ctx, R.string.shared_string_io_error, Toast.LENGTH_LONG).show());
 		}
 		return null;
 	}
@@ -451,18 +454,18 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		}
 	}
 
-	private boolean deletedTag(Entity entity, String tag) {
-		return entity.getTagKeySet().contains(Entity.REMOVE_TAG_PREFIX + tag);
+	public static boolean isDeletedTag(@NonNull Entity entity, @NonNull String tag) {
+		return entity.getTagKeySet().contains(REMOVE_TAG_PREFIX + tag);
 	}
 
 	@Override
 	public Entity loadEntity(@NonNull MapObject object) {
-		EntityType type = OsmEditingPlugin.getOsmEntityType(object);
+		EntityType type = ObfConstants.getOsmEntityType(object);
 		if (type == null || type == EntityType.RELATION) {
 			return null;
 		}
 		boolean isWay = type == EntityType.WAY;
-		long entityId = OsmEditingPlugin.getOsmObjectId(object);
+		long entityId = ObfConstants.getOsmObjectId(object);
 		try {
 			String api = isWay ? "api/0.6/way/" : "api/0.6/node/";
 			String res = sendRequest(getSiteApi() + api + entityId, "GET", null,

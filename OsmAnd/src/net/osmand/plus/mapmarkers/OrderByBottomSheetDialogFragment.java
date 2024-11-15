@@ -1,16 +1,21 @@
 package net.osmand.plus.mapmarkers;
 
+import static net.osmand.plus.mapmarkers.MapMarkersComparator.BY_DATE_ADDED_ASC;
+import static net.osmand.plus.mapmarkers.MapMarkersComparator.BY_DATE_ADDED_DESC;
+import static net.osmand.plus.mapmarkers.MapMarkersComparator.BY_DISTANCE_ASC;
+import static net.osmand.plus.mapmarkers.MapMarkersComparator.BY_DISTANCE_DESC;
+import static net.osmand.plus.mapmarkers.MapMarkersComparator.BY_NAME;
+
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.View;
 
-import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkersSortByDef;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.mapmarkers.MapMarkersComparator.MapMarkersSortByDef;
 
 public class OrderByBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -33,14 +38,11 @@ public class OrderByBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 				.setIcon(getContentIcon(R.drawable.ic_action_sort_by_name))
 				.setTitle(getString(R.string.shared_string_name))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (listener != null) {
-							listener.onMapMarkersOrderByModeChanged(MapMarkersHelper.BY_NAME);
-						}
-						dismiss();
+				.setOnClickListener(v -> {
+					if (listener != null) {
+						listener.onMapMarkersOrderByModeChanged(BY_NAME);
 					}
+					dismiss();
 				})
 				.create();
 		items.add(byNameItem);
@@ -51,14 +53,11 @@ public class OrderByBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 				.setIcon(distanceIcon)
 				.setTitle(getString(R.string.distance_nearest))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (listener != null) {
-							listener.onMapMarkersOrderByModeChanged(MapMarkersHelper.BY_DISTANCE_ASC);
-						}
-						dismiss();
+				.setOnClickListener(v -> {
+					if (listener != null) {
+						listener.onMapMarkersOrderByModeChanged(BY_DISTANCE_ASC);
 					}
+					dismiss();
 				})
 				.create();
 		items.add(distNearestItem);
@@ -67,14 +66,11 @@ public class OrderByBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 				.setIcon(distanceIcon)
 				.setTitle(getString(R.string.distance_farthest))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (listener != null) {
-							listener.onMapMarkersOrderByModeChanged(MapMarkersHelper.BY_DISTANCE_DESC);
-						}
-						dismiss();
+				.setOnClickListener(v -> {
+					if (listener != null) {
+						listener.onMapMarkersOrderByModeChanged(BY_DISTANCE_DESC);
 					}
+					dismiss();
 				})
 				.create();
 		items.add(distFarthestItem);
@@ -85,14 +81,11 @@ public class OrderByBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 				.setIcon(dateIcon)
 				.setTitle(getString(R.string.date_added) + " (" + getString(R.string.ascendingly) + ")")
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (listener != null) {
-							listener.onMapMarkersOrderByModeChanged(MapMarkersHelper.BY_DATE_ADDED_ASC);
-						}
-						dismiss();
+				.setOnClickListener(v -> {
+					if (listener != null) {
+						listener.onMapMarkersOrderByModeChanged(BY_DATE_ADDED_ASC);
 					}
+					dismiss();
 				})
 				.create();
 		items.add(dateAscItem);
@@ -101,14 +94,11 @@ public class OrderByBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 				.setIcon(dateIcon)
 				.setTitle(getString(R.string.date_added) + " (" + getString(R.string.descendingly) + ")")
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (listener != null) {
-							listener.onMapMarkersOrderByModeChanged(MapMarkersHelper.BY_DATE_ADDED_DESC);
-						}
-						dismiss();
+				.setOnClickListener(v -> {
+					if (listener != null) {
+						listener.onMapMarkersOrderByModeChanged(BY_DATE_ADDED_DESC);
 					}
+					dismiss();
 				})
 				.create();
 		items.add(dateDescItem);

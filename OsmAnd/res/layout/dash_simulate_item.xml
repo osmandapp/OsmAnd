@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/list_content_padding"
             android:layout_marginTop="@dimen/favorites_icon_top_margin"
-            osmand:srcCompat="@drawable/ic_action_polygom_dark"
+            app:srcCompat="@drawable/ic_action_polygom_dark"
             android:visibility="gone"
 	        android:layout_marginStart="@dimen/list_content_padding" />
 
@@ -59,7 +59,7 @@
             android:layout_height="@dimen/list_item_height"
             android:layout_gravity="center_vertical"
             android:background="?attr/dashboard_button"
-            osmand:srcCompat="@drawable/ic_action_rec_stop"
+            app:srcCompat="@drawable/ic_action_rec_stop"
             tools:visibility="visible" />
     </LinearLayout>
 

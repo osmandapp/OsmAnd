@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
-import net.osmand.router.RouteColorize.ColorizationType;
+import net.osmand.shared.routing.RouteColorize.ColorizationType;
 
 public enum GradientScaleType {
 

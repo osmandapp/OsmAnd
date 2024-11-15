@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -56,8 +56,8 @@
 						android:layout_gravity="center_vertical"
 						android:layout_marginVertical="@dimen/text_margin_small"
 						android:layout_marginEnd="@dimen/context_menu_subtitle_margin"
-						osmand:srcCompat="@drawable/ic_action_altitude_ascent_16"
-						osmand:tint="?attr/secondary_icon_color" />
+						app:srcCompat="@drawable/ic_action_altitude_ascent_16"
+						app:tint="?attr/secondary_icon_color" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/uphill"
@@ -83,8 +83,8 @@
 						android:layout_gravity="center_vertical"
 						android:layout_marginVertical="@dimen/text_margin_small"
 						android:layout_marginEnd="@dimen/context_menu_subtitle_margin"
-						osmand:srcCompat="@drawable/ic_action_altitude_descent_16"
-						osmand:tint="?attr/secondary_icon_color" />
+						app:srcCompat="@drawable/ic_action_altitude_descent_16"
+						app:tint="?attr/secondary_icon_color" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/downhill"
@@ -154,8 +154,8 @@
 				android:id="@+id/details_button"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				osmand:dialogButtonType="stroked"
-				osmand:dialogButtonTitle="@string/shared_string_details"/>
+				app:dialogButtonType="stroked"
+				app:dialogButtonTitle="@string/shared_string_details"/>
 
 		</FrameLayout>
 

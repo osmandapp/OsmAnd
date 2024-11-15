@@ -88,7 +88,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	public static final String TAG = RouteParametersFragment.class.getSimpleName();
 
 	public static final String RELIEF_SMOOTHNESS_FACTOR = "relief_smoothness_factor";
-	private static final String AVOID_ROUTING_PARAMETER_PREFIX = "avoid_";
+	public static final String AVOID_ROUTING_PARAMETER_PREFIX = "avoid_";
 	private static final String PREFER_ROUTING_PARAMETER_PREFIX = "prefer_";
 	public static final String HAZMAT_CATEGORY_USA_PREFIX = "hazmat_category_usa_";
 	private static final String ROUTE_PARAMETERS_INFO = "route_parameters_info";
@@ -234,7 +234,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 			getPreferenceScreen().addPreference(straightAngle);
 		}
 
-		addDivider(screen);
+		addDividerPref();
 		setupRouteRecalcHeader(screen);
 		setupSelectRouteRecalcDistance(screen);
 		setupReverseDirectionRecalculation(screen);
@@ -381,12 +381,6 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		}
 	}
 
-	private void addDivider(PreferenceScreen screen) {
-		Preference divider = new Preference(requireContext());
-		divider.setLayoutResource(R.layout.simple_divider_item);
-		screen.addPreference(divider);
-	}
-
 	private void setupReverseDirectionRecalculation(PreferenceScreen screen) {
 		OsmandPreference<Boolean> preference = settings.DISABLE_WRONG_DIRECTION_RECALC;
 		SwitchPreferenceEx switchPreference = createSwitchPreferenceEx(preference.getId(),
@@ -406,7 +400,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	}
 
 	private void setupDevelopmentCategoryPreferences(PreferenceScreen screen, ApplicationMode mode) {
-		addDivider(screen);
+		addDividerPref();
 		setupDevelopmentCategoryHeader(screen);
 		if (mode.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT)) {
 			setupOsmLiveForPublicTransportPref();

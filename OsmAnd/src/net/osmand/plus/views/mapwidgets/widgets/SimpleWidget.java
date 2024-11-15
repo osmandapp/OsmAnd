@@ -19,29 +19,39 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsContextMenu;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportMultiRow;
+import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
 import net.osmand.plus.views.mapwidgets.widgetstates.SimpleWidgetState;
 import net.osmand.plus.settings.enums.WidgetSize;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
 
-public abstract class SimpleWidget extends TextInfoWidget {
+import java.util.List;
+
+public abstract class SimpleWidget extends TextInfoWidget implements ISupportWidgetResizing, ISupportMultiRow {
 
 	private final SimpleWidgetState widgetState;
 
 	private TextView widgetNameTextView;
 	private boolean verticalWidget;
 	private boolean isFullRow;
-	private MapInfoLayer.TextState textState;
+	protected MapInfoLayer.TextState textState;
+	@Nullable
+	protected String customId;
 
 	public SimpleWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(mapActivity, widgetType);
 		widgetState = new SimpleWidgetState(app, customId, widgetType);
+		this.customId = customId;
 
 		WidgetsPanel selectedPanel = panel != null ? panel : widgetType.getPanel(customId != null ? customId : widgetType.id, settings);
 		setVerticalWidget(selectedPanel);
@@ -52,10 +62,19 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		LinearLayout container = (LinearLayout) view;
 		container.removeAllViews();
 
-		int layoutId = verticalWidget ? getProperVerticalLayoutId(widgetState) : R.layout.map_hud_widget;
+		int layoutId = getContentLayoutId();
 		UiUtilities.getInflater(mapActivity, nightMode).inflate(layoutId, container);
 		findViews();
 		updateWidgetView();
+		view.setOnLongClickListener(v -> {
+			WidgetsContextMenu.showMenu(v, mapActivity, widgetType, customId, getWidgetActions(), verticalWidget, nightMode);
+			return true;
+		});
+	}
+
+	@LayoutRes
+	protected int getContentLayoutId() {
+		return verticalWidget ? getProperVerticalLayoutId(widgetState) : R.layout.map_hud_widget;
 	}
 
 	public void updateValueAlign(boolean fullRow) {
@@ -125,6 +144,11 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		return widgetState.getShowIconPref();
 	}
 
+	@Override
+	public boolean allowResize() {
+		return isVerticalWidget();
+	}
+
 	@NonNull
 	public OsmandPreference<WidgetSize> getWidgetSizePref() {
 		return widgetState.getWidgetSizePref();
@@ -163,6 +187,11 @@ public abstract class SimpleWidget extends TextInfoWidget {
 
 		updateInfo(null);
 		updateWidgetView();
+	}
+
+	@Nullable
+	protected List<PopUpMenuItem> getWidgetActions() {
+		return null;
 	}
 
 	@Override
@@ -204,6 +233,13 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	@Nullable
 	protected String getWidgetName() {
 		return widgetType != null ? getString(widgetType.titleId) : null;
+	}
+
+	@Override
+	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId) {
+		if (widgetState != null) {
+			widgetState.copyPrefsFromMode(sourceAppMode, appMode, customId);
+		}
 	}
 
 	@Nullable
@@ -260,18 +296,22 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	public void updateColors(@NonNull MapInfoLayer.TextState textState) {
 		this.textState = textState;
 		if (verticalWidget) {
-			nightMode = textState.night;
-			textView.setTextColor(textState.textColor);
-			smallTextView.setTextColor(textState.secondaryTextColor);
-			widgetNameTextView.setTextColor(textState.secondaryTextColor);
-			int iconId = getIconId();
-			if (iconId != 0) {
-				setImageDrawable(iconId);
-			}
-			view.findViewById(R.id.widget_bg).setBackgroundResource(textState.widgetBackgroundId);
+			updateVerticalWidgetColors(textState);
 		} else {
 			super.updateColors(textState);
 		}
+	}
+
+	protected void updateVerticalWidgetColors(@NonNull MapInfoLayer.TextState textState) {
+		nightMode = textState.night;
+		textView.setTextColor(textState.textColor);
+		smallTextView.setTextColor(textState.secondaryTextColor);
+		widgetNameTextView.setTextColor(textState.secondaryTextColor);
+		int iconId = getIconId();
+		if (iconId != 0) {
+			setImageDrawable(iconId);
+		}
+		view.findViewById(R.id.widget_bg).setBackgroundResource(textState.widgetBackgroundId);
 	}
 
 	@Override

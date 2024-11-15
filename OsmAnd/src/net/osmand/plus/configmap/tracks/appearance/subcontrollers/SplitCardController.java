@@ -1,7 +1,7 @@
 package net.osmand.plus.configmap.tracks.appearance.subcontrollers;
 
-import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
-import static net.osmand.gpx.GpxParameter.SPLIT_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.SPLIT_INTERVAL;
+import static net.osmand.shared.gpx.GpxParameter.SPLIT_TYPE;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,7 +55,8 @@ public class SplitCardController extends BaseMultiStateCardController {
 	}
 
 	@Override
-	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode) {
+	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container,
+	                              boolean nightMode, boolean usedOnMap) {
 		if (selectedState.getTag() == null) {
 			if (container.getChildCount() == 0) {
 				LayoutInflater inflater = UiUtilities.getInflater(activity, nightMode);

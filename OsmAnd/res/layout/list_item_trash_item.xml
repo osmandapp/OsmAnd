@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -45,8 +45,8 @@
 					android:letterSpacing="@dimen/text_button_letter_spacing"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"
-					osmand:fontFamily="@string/font_roboto_regular"
-					osmand:lineHeight="@dimen/default_title_line_height"
+					android:textStyle="normal"
+					app:lineHeight="@dimen/default_title_line_height"
 					tools:text="Favorites" />
 
 				<LinearLayout
@@ -70,8 +70,8 @@
 						android:letterSpacing="@dimen/description_letter_spacing"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:fontFamily="@string/font_roboto_regular"
-						osmand:lineHeight="@dimen/default_desc_line_height"
+						android:textStyle="normal"
+						app:lineHeight="@dimen/default_desc_line_height"
 						tools:text="Deleted: Dec 13, 12:53" />
 
 				</LinearLayout>
@@ -85,7 +85,7 @@
 				android:layout_gravity="center_vertical"
 				android:layout_marginLeft="@dimen/content_padding"
 				android:layout_marginRight="@dimen/content_padding"
-				osmand:srcCompat="@drawable/ic_overflow_menu_white" />
+				app:srcCompat="@drawable/ic_overflow_menu_white" />
 
 			<me.zhanghai.android.materialprogressbar.MaterialProgressBar
 				android:id="@+id/progress_bar"
@@ -96,9 +96,9 @@
 				android:layout_marginLeft="@dimen/text_margin_small"
 				android:layout_marginRight="@dimen/text_margin_small"
 				android:indeterminate="false"
-				osmand:mpb_progressStyle="circular"
-				osmand:mpb_setBothDrawables="true"
-				osmand:mpb_useIntrinsicPadding="false" />
+				app:mpb_progressStyle="circular"
+				app:mpb_setBothDrawables="true"
+				app:mpb_useIntrinsicPadding="false" />
 
 		</LinearLayout>
 

@@ -8,10 +8,10 @@ import static net.osmand.plus.AppInitEvents.NATIVE_OPEN_GL_INITIALIZED;
 import static net.osmand.plus.chooseplan.OsmAndFeature.WEATHER;
 import static net.osmand.plus.download.DownloadActivityType.WEATHER_FORECAST;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_CLOUD;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_NOTHING;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRECIPITATION;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_TEMPERATURE;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_UNDEFINED;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_SPEED;
 import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_CLOUD_CONTOURS_LINES_ATTR;
 import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_PRECIPITATION_CONTOURS_LINES_ATTR;
@@ -57,6 +57,7 @@ import net.osmand.plus.plugins.weather.actions.ShowHidePrecipitationLayerAction;
 import net.osmand.plus.plugins.weather.actions.ShowHideTemperatureLayerAction;
 import net.osmand.plus.plugins.weather.actions.ShowHideWindLayerAction;
 import net.osmand.plus.plugins.weather.dialogs.WeatherForecastFragment;
+import net.osmand.plus.plugins.weather.enums.WeatherSource;
 import net.osmand.plus.plugins.weather.widgets.WeatherWidget;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -108,7 +109,7 @@ public class WeatherPlugin extends OsmandPlugin {
 	private Date forecastDate;
 
 	@WeatherBandType
-	private short currentConfigureBand = WEATHER_BAND_UNDEFINED;
+	private short currentConfigureBand = WEATHER_BAND_NOTHING;
 
 	public WeatherPlugin(@NonNull OsmandApplication app) {
 		super(app);
@@ -446,7 +447,7 @@ public class WeatherPlugin extends OsmandPlugin {
 		weatherLayerLow = new WeatherRasterLayer(app, WeatherLayer.LOW);
 		weatherLayerHigh = new WeatherRasterLayer(app, WeatherLayer.HIGH);
 		weatherContourLayer = new WeatherContourLayer(app);
-		updateLayersDate();
+		updateLayersDate(false, false);
 	}
 
 	public void setWeatherEnabled(boolean enable) {
@@ -465,6 +466,14 @@ public class WeatherPlugin extends OsmandPlugin {
 
 	public boolean isContoursEnabled() {
 		return weatherSettings.weatherContoursEnabled.get();
+	}
+
+	public WeatherSource getWeatherSource() {
+		return WeatherSource.Companion.getWeatherSourceBySettingsValue(weatherSettings.weatherSource.get());
+	}
+
+	public void setWeatherSource(WeatherSource source) {
+		weatherSettings.weatherSource.set(source.getSettingValue());
 	}
 
 	public boolean isAnyWeatherContourLinesEnabled() {
@@ -545,18 +554,29 @@ public class WeatherPlugin extends OsmandPlugin {
 		return forecastDate != null;
 	}
 
-	public void setForecastDate(@Nullable Date date) {
+	public void setForecastDate(@Nullable Date date, boolean forAnimation, boolean resetPeriod) {
 		forecastDate = date;
-		updateLayersDate();
+		updateLayersDate(forAnimation, resetPeriod);
 	}
 
-	private void updateLayersDate() {
-		long time = forecastDate != null ? forecastDate.getTime() : System.currentTimeMillis();
+	public void prepareForDayAnimation(@NonNull Date date) {
+		forecastDate = date;
+		long time = forecastDate.getTime();
 		if (weatherLayerLow != null) {
-			weatherLayerLow.setDateTime(time);
+			weatherLayerLow.setDateTime(time, true, false);
 		}
 		if (weatherLayerHigh != null) {
-			weatherLayerHigh.setDateTime(time);
+			weatherLayerHigh.setDateTime(time, true, false);
+		}
+	}
+
+	private void updateLayersDate(boolean forAnimation, boolean resetPeriod) {
+		long time = forecastDate != null ? forecastDate.getTime() : System.currentTimeMillis();
+		if (weatherLayerLow != null) {
+			weatherLayerLow.setDateTime(time, forAnimation, resetPeriod);
+		}
+		if (weatherLayerHigh != null) {
+			weatherLayerHigh.setDateTime(time, forAnimation, resetPeriod);
 		}
 		if (weatherContourLayer != null) {
 			weatherContourLayer.setDateTime(time);

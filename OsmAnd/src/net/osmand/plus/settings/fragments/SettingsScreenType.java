@@ -8,9 +8,12 @@ import net.osmand.plus.plugins.development.DevelopmentSettingsFragment;
 import net.osmand.plus.plugins.externalsensors.ExternalSettingsWriteToTrackSettingsFragment;
 import net.osmand.plus.plugins.externalsensors.dialogs.ExternalDevicesListFragment;
 import net.osmand.plus.plugins.monitoring.MonitoringSettingsFragment;
+import net.osmand.plus.plugins.odb.dialogs.OBDDevicesListFragment;
+import net.osmand.plus.plugins.odb.dialogs.OBDMainFragment;
 import net.osmand.plus.plugins.osmedit.fragments.OsmEditingFragment;
 import net.osmand.plus.plugins.weather.dialogs.WeatherSettingsFragment;
 import net.osmand.plus.settings.datastorage.DataStorageFragment;
+import net.osmand.plus.settings.fragments.profileappearance.ProfileAppearanceFragment;
 import net.osmand.plus.settings.fragments.voice.VoiceAnnouncesFragment;
 
 public enum SettingsScreenType {
@@ -32,7 +35,7 @@ public enum SettingsScreenType {
 	DATA_STORAGE(DataStorageFragment.class.getName(), false, null, R.xml.data_storage, R.layout.global_preference_toolbar),
 	DIALOGS_AND_NOTIFICATIONS_SETTINGS(DialogsAndNotificationsSettingsFragment.class.getName(), false, null, R.xml.dialogs_and_notifications_preferences, R.layout.global_preference_toolbar),
 	HISTORY_SETTINGS(HistorySettingsFragment.class.getName(), false, null, R.xml.history_preferences, R.layout.global_preference_toolbar),
-	PROFILE_APPEARANCE(ProfileAppearanceFragment.TAG, true, null, R.xml.profile_appearance, R.layout.profile_preference_toolbar),
+	PROFILE_APPEARANCE(ProfileAppearanceFragment.TAG, true, null, R.xml.profile_appearance_screen, R.layout.profile_preference_toolbar),
 	OPEN_STREET_MAP_EDITING(OsmEditingFragment.class.getName(), false, null, R.xml.osm_editing, R.layout.global_preference_toolbar),
 	MULTIMEDIA_NOTES(MultimediaNotesFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.multimedia_notes, R.layout.profile_preference_toolbar),
 	MONITORING_SETTINGS(MonitoringSettingsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.monitoring_settings, R.layout.profile_preference_toolbar),
@@ -41,6 +44,8 @@ public enum SettingsScreenType {
 	DEVELOPMENT_SETTINGS(DevelopmentSettingsFragment.class.getName(), false, null, R.xml.development_settings, R.layout.global_preference_toolbar),
 	SIMULATION_NAVIGATION(SimulationNavigationSettingFragment.class.getName(), true, ApplyQueryType.NONE, R.xml.simulation_navigation_setting, R.layout.profile_preference_toolbar_with_switch),
 	ANT_PLUS_SETTINGS(ExternalDevicesListFragment.class.getName(), false, null, R.xml.antplus_settings, R.layout.global_preference_toolbar),
+	VEHICLE_METRICS_SETTINGS(OBDDevicesListFragment.class.getName(), false, null, R.xml.antplus_settings, R.layout.global_preference_toolbar),
+	VEHICLE_CONNECTED_METRICS_SETTINGS(OBDMainFragment.class.getName(), false, null, R.xml.antplus_settings, R.layout.global_preference_toolbar),
 	WEATHER_SETTINGS(WeatherSettingsFragment.class.getName(), true, ApplyQueryType.SNACK_BAR, R.xml.weather_settings, R.layout.profile_preference_toolbar),
 	EXTERNAL_SETTINGS_WRITE_TO_TRACK_SETTINGS(ExternalSettingsWriteToTrackSettingsFragment.class.getName(), true, ApplyQueryType.BOTTOM_SHEET, R.xml.external_sensors_write_to_track_settings, R.layout.profile_preference_toolbar),
 	DANGEROUS_GOODS(DangerousGoodsFragment.class.getName(), true, ApplyQueryType.NONE, R.xml.dangerous_goods_parameters, R.layout.global_preference_toolbar),

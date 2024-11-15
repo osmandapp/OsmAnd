@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -41,7 +41,7 @@
                         android:text="@string/tag_poi_name"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="@dimen/default_desc_text_size"
-                        osmand:typeface="@string/font_roboto_regular"
+                        android:textStyle="normal"
 	                    android:layout_marginEnd="16dp"
 	                    android:layout_marginStart="16dp" />
 
@@ -60,7 +60,7 @@
                         android:layout_marginBottom="4dp"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="@dimen/default_desc_text_size"
-                        osmand:typeface="@string/font_roboto_medium"
+                        app:typefaceWeight="medium"
                         tools:text="very very very long poi name"
 	                    android:layout_marginStart="16dp"
 	                    android:layout_marginEnd="16dp" />
@@ -86,7 +86,7 @@
                         android:text="@string/tag_poi_amenity"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="@dimen/default_desc_text_size"
-                        osmand:typeface="@string/font_roboto_regular"
+                        android:textStyle="normal"
 	                    android:layout_marginStart="16dp"
 	                    android:layout_marginEnd="16dp" />
 
@@ -103,7 +103,7 @@
                         android:layout_marginRight="16dp"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="@dimen/default_desc_text_size"
-                        osmand:typeface="@string/font_roboto_medium"
+                        app:typefaceWeight="medium"
                         tools:text="landmark"
 	                    android:layout_marginEnd="16dp"
 	                    android:layout_marginStart="16dp" />
@@ -125,7 +125,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/add_tag"
                 android:textSize="@dimen/default_sub_text_size"
-                osmand:typeface="@string/font_roboto_medium"
+                app:typefaceWeight="medium"
 	            android:layout_marginStart="12dp" />
         </LinearLayout>
     </FrameLayout>

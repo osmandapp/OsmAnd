@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -83,7 +83,7 @@
 			android:id="@+id/icon"
 			android:layout_width="@dimen/bottom_sheet_descr_height"
 			android:layout_height="@dimen/bottom_sheet_descr_height"
-			osmand:srcCompat="@drawable/widget_lanes_day" />
+			app:srcCompat="@drawable/widget_lanes_day" />
 
 	</LinearLayout>
 
@@ -96,7 +96,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/abp__shadow_height"
 			android:scaleType="fitXY"
-			osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
+			app:srcCompat="@drawable/bg_shadow_list_bottom" />
 
 		<ScrollView
 			android:layout_width="match_parent"
@@ -128,7 +128,7 @@
 			android:layout_height="@dimen/abp__shadow_height"
 			android:layout_gravity="bottom"
 			android:scaleType="fitXY"
-			osmand:srcCompat="@drawable/bg_shadow_list_top" />
+			app:srcCompat="@drawable/bg_shadow_list_top" />
 
 	</FrameLayout>
 

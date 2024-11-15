@@ -21,7 +21,6 @@ import net.osmand.plus.card.base.multistate.BaseMultiStateCardController;
 import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.base.simple.DescriptionCard;
 import net.osmand.plus.card.base.slider.moded.ModedSliderCard;
-import net.osmand.plus.card.color.IControlsColorProvider;
 import net.osmand.plus.card.width.WidthComponentController;
 import net.osmand.plus.card.width.WidthMode;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
@@ -86,7 +85,7 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 
 	@Override
 	public void onBindCardContent(@NonNull FragmentActivity activity,
-	                              @NonNull ViewGroup container, boolean nightMode) {
+	                              @NonNull ViewGroup container, boolean nightMode, boolean usedOnMap) {
 		if (selectedState.getTag() == null) {
 			bindSummaryCard(activity, container, nightMode);
 		} else {

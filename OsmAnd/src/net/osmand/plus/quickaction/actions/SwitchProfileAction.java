@@ -37,9 +37,10 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 
 	public static final QuickActionType TYPE = new QuickActionType(SWITCH_PROFILE_ACTION_ID,
 			"profile.change", SwitchProfileAction.class)
-			.nameRes(R.string.change_application_profile)
+			.nameRes(R.string.app_profile)
 			.iconRes(R.drawable.ic_action_manage_profiles)
-			.category(QuickActionType.NAVIGATION);
+			.category(QuickActionType.SETTINGS)
+			.nameActionRes(R.string.shared_string_change);
 
 	public SwitchProfileAction() {
 		super(TYPE);

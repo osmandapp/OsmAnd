@@ -28,7 +28,7 @@ import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely
 import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.configmap.tracks.ConfirmDefaultAppearanceBottomSheet;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 

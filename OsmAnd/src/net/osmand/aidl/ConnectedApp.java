@@ -9,6 +9,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
@@ -267,12 +268,17 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 			this.widgetId = widgetId;
 
 			updateInfo(null);
-			setOnClickListener(v -> {
+			setOnClickListener(getOnClickListener());
+		}
+
+		@Override
+		protected OnClickListener getOnClickListener() {
+			return v -> {
 				AidlMapWidgetWrapper widget = getWidgetData(widgetId);
 				if (widget != null && widget.getIntentOnClick() != null) {
 					AndroidUtils.startActivityIfSafe(app, widget.getIntentOnClick());
 				}
-			});
+			};
 		}
 
 		@Override

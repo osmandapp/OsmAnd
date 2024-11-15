@@ -19,7 +19,6 @@ import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.card.base.headed.IHeadedCardController;
 import net.osmand.plus.card.base.headed.IHeadedContentCard;
 import net.osmand.plus.card.base.slider.moded.ModedSliderCard;
-import net.osmand.plus.card.color.IControlsColorProvider;
 import net.osmand.plus.card.width.WidthComponentController;
 import net.osmand.plus.card.width.WidthMode;
 import net.osmand.plus.track.TrackDrawInfo;

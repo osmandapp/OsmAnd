@@ -64,6 +64,9 @@ public class RenderingRule {
 						attributesRef = new RenderingRule[attributes.size()];
 					}
 					attributesRef[i] = storage.getRenderingAttributeRule(vl.substring(1));
+					if (attributesRef[i] == null) {
+						attributesRef[i] = storage.getRenderingAssociationRule(vl.substring(1));
+					}
 				} else if (property.isString()) {
 					intProperties[i] = storage.getDictionaryValue(vl);
 				} else {
@@ -129,7 +132,7 @@ public class RenderingRule {
 	}
 	
 	protected RenderingRule getAttrProp(int ind) {
-		if(attributesRef == null) {
+		if (attributesRef == null) {
 			return null;
 		}
 		return attributesRef[ind];
@@ -231,19 +234,21 @@ public class RenderingRule {
 
 	protected void printAttrs(StringBuilder bls, boolean in) {
 		for(RenderingRuleProperty p : getProperties()){
-			if(p.isInputProperty() != in) {
+			if (p.isInputProperty() != in) {
 				continue;
 			}
 			bls.append(" ").append(p.getAttrName()).append("= ");
-			if(p.isString()){
+			if (attributesRef != null && attributesRef[getPropertyIndex(p.getAttrName())] != null) {
+				bls.append(attributesRef[getPropertyIndex(p.getAttrName())]);
+			} else if (p.isString()) {
 				bls.append("\"").append(getStringPropertyValue(p.getAttrName())).append("\"");
-			} else if(p.isFloat()){
+			} else if (p.isFloat()) {
 				bls.append(getFloatPropertyValue(p.getAttrName()));
-			} else if(p.isColor()){
+			} else if (p.isColor()) {
 				bls.append(getColorPropertyValue(p.getAttrName()));
-			} else if(p.isIntParse()){
+			} else if (p.isIntParse()) {
 				bls.append(getIntPropertyValue(p.getAttrName()));
-			} 
+			}
 		}
 	}
 }

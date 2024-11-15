@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_fav"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -22,14 +22,14 @@
             android:id="@+id/fav_text"
             style="@style/DashboardSubHeader"
             android:text="@string/shared_string_my_favorites"
-            osmand:typeface="@string/font_roboto_medium" />
+            app:typefaceWeight="medium" />
 
         <net.osmand.plus.widgets.ButtonEx
             android:id="@+id/show_all"
             style="@style/DashboardGeneralButton"
             android:text="@string/shared_string_show_all"
-            osmand:textAllCapsCompat="true"
-            osmand:typeface="@string/font_roboto_medium" />
+            android:textAllCaps="true"
+            app:typefaceWeight="medium" />
     </LinearLayout>
 
     <LinearLayout

@@ -960,7 +960,6 @@
     <string name="driving_region_japan">Japão</string>
     <string name="driving_region_us">Estados Unidos</string>
     <string name="driving_region_europe_asia">Europa, Ásia, América Latina e similares</string>
-    <string name="driving_region_uk">Reino Unido, Índia e similares</string>
     <string name="speak_title">Avisar por voz…</string>
     <string name="speak_descr">Configure os avisos por voz de nomes de ruas, avisos para afrouxar (sinal de STOP, lombas), radares e limites de velocidade.</string>
     <string name="speak_street_names">Nomes das ruas (TTS)</string>
@@ -1419,7 +1418,7 @@
     <string name="shared_string_waypoints">Pontos de rota</string>
     <string name="shared_string_dismiss">Cancelar</string>
     <string name="rendering_category_others">Outros atributos do mapa</string>
-    <string name="rendering_attr_showAccess_name">Mostrar restrições de acesso e de portagem</string>
+    <string name="rendering_attr_showAccess_name">Mostrar restrições de acesso</string>
     <string name="rendering_attr_showSurfaceGrade_name">Mostrar qualidade da via</string>
     <string name="rendering_attr_showSurfaces_name">Mostrar superfície da via</string>
     <string name="rendering_attr_moreDetailed_name">Mais detalhes</string>
@@ -1873,7 +1872,7 @@
     <string name="shared_string_to">Para</string>
     <string name="mapillary_menu_date_from">De</string>
     <string name="mapillary_menu_descr_dates">Ver apenas imagens adicionadas</string>
-    <string name="mapillary_menu_title_dates">Data</string>
+    <string name="shared_string_date">Data</string>
     <string name="mapillary_menu_edit_text_hint">Introduza o nome de utilizador</string>
     <string name="mapillary_menu_descr_username">Ver imagens adicionadas apenas por</string>
     <string name="mapillary_menu_title_username">Nome de utilizador</string>
@@ -1933,9 +1932,6 @@
     <string name="quick_action_auto_zoom_desc">Botão para ativar ou desativar a ampliação automática controlada pela velocidade.</string>
     <string name="quick_action_auto_zoom_on">Ativar a ampliação automática</string>
     <string name="quick_action_auto_zoom_off">Desativar a ampliação automática</string>
-    <string name="quick_action_add_destination">Definir destino</string>
-    <string name="quick_action_replace_destination">Substituir destino</string>
-    <string name="quick_action_add_first_intermediate">Adicionar primeiro intermédio</string>
     <string name="quick_action_add_destination_desc">Um botão para centrar o ecrã no destino da rota, um destino selecionado anteriormente tornar-se-ia o último destino intermédio.</string>
     <string name="quick_action_replace_destination_desc">Um botão para centrar o ecrã no novo destino da rota, substituindo o destino selecionado anteriormente (se houver).</string>
     <string name="quick_action_add_first_intermediate_desc">Um botão para centrar o ecrã no primeiro destino intermédio.</string>
@@ -2180,7 +2176,6 @@
     <string name="in_app_purchase_desc">Pagamento de uma só vez</string>
     <string name="in_app_purchase_desc_ex">Uma vez comprado, estará sempre disponível para si.</string>
     <string name="purchase_unlim_title">Comprar - %1$s</string>
-    <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Descarregamentos ilimitados</string>
     <string name="wikipedia_offline">Wikipédia offline</string>
     <string name="unlock_all_features">Desbloquear todas as características do OsmAnd</string>
@@ -2378,7 +2373,7 @@
     <string name="lang_nb">Bokmål norueguês</string>
     <string name="lang_vo">Volapuque</string>
     <string name="lang_th">Tailandês</string>
-    <string name="lang_te">Telugu</string>
+    <string name="lang_te">Telugo</string>
     <string name="lang_nn">Novo norueguês</string>
     <string name="lang_new">Neuari / Nepal bhasa</string>
     <string name="lang_ms">Malásio</string>
@@ -2389,7 +2384,7 @@
     <string name="lang_ast">Asturiano</string>
     <string name="lang_hsb">Alto sorábio</string>
     <string name="lang_kab">Cabila</string>
-    <string name="lang_ber">Berber</string>
+    <string name="lang_ber">Berbere</string>
     <string name="disable_recording_once_app_killed">Parar gravação em segundo plano</string>
     <string name="plugin_nautical_descr">Enriquece o mapa com informações sobre rotas de navegação, luzes de navegação, zonas de perigo náutico, zonas com restrições de navegação ou atracação, etc. Para utilizar, descarregue os respetivos mapas náuticos e ative o estilo \"Mapa Náutico\" em \"Configurar mapa\".
 \n
@@ -2666,21 +2661,12 @@
     <string name="configure_screen_quick_action">Botão de ação rápida</string>
     <string name="quick_action_item_action">Ação %d</string>
     <string name="quick_action_item_screen">Ecrã %d</string>
-    <string name="quick_action_add_marker">Adicionar marcador de mapa</string>
-    <string name="quick_action_add_poi">Adicionar POI</string>
-    <string name="quick_action_map_style">Mudar estilo do mapa</string>
     <string name="quick_action_map_style_switch">O estilo do mapa foi alterado para \"%s\".</string>
-    <string name="quick_action_take_audio_note">Nova nota de áudio</string>
-    <string name="quick_action_take_video_note">Nova nota de vídeo</string>
-    <string name="quick_action_take_photo_note">Nova nota de fotografia</string>
-    <string name="quick_action_add_osm_bug">Adicionar nota OSM</string>
     <string name="quick_action_navigation_voice">Ativar/desativar voz</string>
     <string name="quick_action_navigation_voice_off">Ativar voz</string>
     <string name="quick_action_navigation_voice_on">Desativar voz</string>
-    <string name="quick_action_add_parking">Adicionar local de estacionamento</string>
     <string name="quick_action_new_action">Adicionar ação</string>
     <string name="quick_action_edit_action">Editar botão de ação rápida</string>
-    <string name="quick_action_add_favorite">Adicionar favorito</string>
     <string name="dialog_add_action_title">Adicionar ação</string>
     <string name="quick_actions_delete">Eliminar botão de ação rápida</string>
     <string name="quick_actions_delete_text">Eliminar a ação rápida \"%s\"\?</string>
@@ -2718,15 +2704,12 @@
     <string name="quick_action_map_style_action">Adicionar um estilo de mapa</string>
     <string name="quick_action_empty_param_error">Preencha todos os parâmetros</string>
     <string name="quick_action_map_styles">Estilos de mapa</string>
-    <string name="quick_action_map_overlay">Mudar mapa da camada superior</string>
     <string name="quick_action_map_overlay_title">Mapas na camada superior</string>
     <string name="quick_action_map_overlay_action">Adicionar camada superior</string>
     <string name="quick_action_map_overlay_switch">O mapa da camada superior foi alterado para \"%s\".</string>
     <string name="quick_action_map_underlay_switch">O mapa da camada inferior foi alterado para \"%s\".</string>
-    <string name="quick_action_map_underlay">Mudar mapa da camada inferior</string>
     <string name="quick_action_map_underlay_title">Mapas das camadas inferiores</string>
     <string name="quick_action_map_underlay_action">Adicionar mapa da camada inferior</string>
-    <string name="quick_action_map_source">Alterar origem do mapa</string>
     <string name="quick_action_map_source_title">Origens dos mapas</string>
     <string name="quick_action_map_source_action">Adicionar origem do mapa</string>
     <string name="quick_action_map_source_switch">A origem do mapa foi alterada para \"%s\".</string>
@@ -2803,7 +2786,7 @@
     <string name="shared_string_degrees">Graus</string>
     <string name="angular_measeurement">Unidade angular</string>
     <string name="angular_measeurement_descr">Mudar em que o azimute é medido.</string>
-    <string name="avoid_pt_types_descr">Selecione os tipos de transporte público a evitar para a navegação:</string>
+    <string name="avoid_pt_types_descr">Selecionar tipos de transportes públicos a evitar para a navegação:</string>
     <string name="quick_action_day_night_mode">Modo %s</string>
     <string name="avoid_pt_types">Evitar tipos de transporte…</string>
     <string name="shared_string_walk">A pé</string>
@@ -2860,7 +2843,7 @@
     <string name="use_osm_live_public_transport">Transportes públicos OsmAnd Live</string>
     <string name="time_of_day">Hora do dia</string>
     <string name="by_transport_type">Por %1$s</string>
-    <string name="step_by_step">Curva a curva</string>
+    <string name="step_by_step">Passo a passo</string>
     <string name="routeInfo_road_types_name">Tipos de estrada</string>
     <string name="exit_at">Sair em</string>
     <string name="shared_string_swap">Trocar</string>
@@ -3034,7 +3017,7 @@
 \n</string>
     <string name="app_mode_personal_transporter">Transporte pessoal</string>
     <string name="app_mode_monowheel">Monoroda</string>
-    <string name="app_mode_scooter">Scooter</string>
+    <string name="app_mode_scooter">Lambreta</string>
     <string name="precision_hdop_and_vdop">Precisão horizontal: %1$s, vertical: %2$s</string>
     <string name="precision_hdop">Precisão horizontal: %s</string>
     <string name="app_mode_offroad">Todo o terreno</string>
@@ -3175,7 +3158,7 @@
     <string name="rendering_attr_piste_difficulty_intermediate_name">Intermédio</string>
     <string name="rendering_attr_piste_difficulty_advanced_name">Avançado</string>
     <string name="rendering_attr_piste_difficulty_expert_name">Especialista</string>
-    <string name="rendering_attr_piste_difficulty_freeride_name">Freeride</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Estilo livre</string>
     <string name="rendering_attr_piste_difficulty_extreme_name">Extremo</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Indefinido</string>
     <string name="routeInfo_piste_difficulty_name">Dificuldade da pista</string>
@@ -3497,7 +3480,6 @@
     <string name="wiki_menu_download_descr">São necessários mapas adicionais para visualizar os POIs da Wikipédia no mapa.</string>
     <string name="select_wikipedia_article_langs">Selecione os idiomas dos artigos da Wikipédia no mapa. Pode mudar para qualquer idioma disponível enquanto lê um artigo da Wikipédia.</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
-    <string name="tracker_item">OsmAnd tracker</string>
     <string name="quick_action_item">Botão de ações rápidas</string>
     <string name="radius_ruler_item">Régua radial</string>
     <string name="measure_distance_item">Medir distância</string>
@@ -3623,7 +3605,6 @@
 \nToque em \"%2$s\" e todos os dados relacionados a radares de velocidade (alertas, notificações, POIs) serão eliminados até que o OsmAnd seja completamente reinstalado.</string>
     <string name="plugin_wikipedia_description">Obter informações sobre pontos de interesse da Wikipédia. Um guia de bolso offline para ver artigos sobre locais e destinos.</string>
     <string name="app_mode_motor_scooter">Scooter</string>
-    <string name="quick_action_remove_next_destination">Eliminar o próximo ponto de destino</string>
     <string name="search_download_wikipedia_maps">Descarregar mapas da Wikipédia</string>
     <string name="additional_actions_descr">Aceda a estas ações tocando no botão “%1$s”.</string>
     <string name="shared_string_uninstall">Desinstalar</string>
@@ -3718,14 +3699,13 @@
     <string name="plan_route_change_route_type_after">Alterar o tipo de rota após</string>
     <string name="street_level_imagery">Imagens das ruas</string>
     <string name="plan_route_exit_dialog_descr">Descartar todas as alterações na rota planeada\?</string>
-    <string name="in_case_of_reverse_direction">Na direção inversa</string>
+    <string name="in_case_of_reverse_direction">Em caso de inversão de direção</string>
     <string name="shared_string_gpx_route">Rota de trilho</string>
     <string name="shared_string_gpx_files">Trilhos</string>
     <string name="marker_save_as_track">Guardar como ficheiro de trilho</string>
     <string name="add_segment_to_the_track">Adicionar a um ficheiro de trilho</string>
     <string name="empty_state_my_tracks_desc">Importar ou gravar ficheiros de trilho</string>
     <string name="empty_state_my_tracks">Adicionar ficheiros de trilho</string>
-    <string name="quick_action_add_gpx">Ponto de passagem</string>
     <string name="show_gpx">Trilhos</string>
     <string name="shared_string_save_as_gpx">Guardar como novo ficheiro de trilho</string>
     <string name="save_track_to_gpx_globally">Registar o trilho num ficheiro GPX</string>
@@ -3798,7 +3778,6 @@
     <string name="message_need_calculate_route_before_show_graph">Dados de %1$s disponíveis apenas em estradas, calcule uma rota usando \"Rota entre pontos\" para ver os gráficos.</string>
     <string name="message_graph_will_be_available_after_recalculation">Aguarde um momento.
 \nO gráfico estará disponível após a rota ser recalculada.</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s – %2$s</string>
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">O OsmAnd utiliza o MGRS, que é semelhante ao formato UTM NATO.</string>
@@ -3825,7 +3804,7 @@
     <string name="sign_in_with_open_street_map">Iniciar sessão com OpenStreetMap</string>
     <string name="use_login_password">Usar o nome do utilizador e palavra-passe</string>
     <string name="login_account">Conta</string>
-    <string name="user_login">Login</string>
+    <string name="user_login">Iniciar sessão</string>
     <string name="markers_history">Histórico de marcadores</string>
     <string name="send_files_to_openstreetmap">Enviar ficheiro de GPX para o OpenStreetMap</string>
     <string name="enter_text_separated">Introduza etiquetas separadas por vírgula.</string>
@@ -4300,7 +4279,7 @@
     <string name="travel_route_types">Tipos de rotas</string>
     <string name="sample_wikivoyage">Exemplo do Wikivoyage</string>
     <string name="shared_string_mini">mini</string>
-    <string name="horseback_riding">Equitação</string>
+    <string name="horseback_riding">Andar a cavalo</string>
     <string name="routing_attr_only_permitted_ways_name">Vias com permissão expressa</string>
     <string name="routing_attr_only_permitted_ways_description">Usar apenas vias (trilhos, caminhos) com utilização permitida assinalada</string>
     <string name="routing_attr_prefer_horse_routes_description">Preferir percursos que podem ser utilizador a cavalo</string>
@@ -4385,7 +4364,7 @@
     <string name="display_route_tracks_as_poi">Mostrar trilhos como POI</string>
     <string name="delete_history_items_descr">Eliminar os itens selecionados do histórico\?</string>
     <string name="delete_history_items">Eliminar %1$s itens do histórico\?</string>
-    <string name="quick_action_toggle_preference">Um alternador para alterar a preferência.</string>
+    <string name="quick_action_toggle_preference">Um selector para alterar a preferência.</string>
     <string name="copying_file">A copiar o ficheiro %1$s…</string>
     <string name="from_to_with_params">De %1$s para %2$s</string>
     <string name="progress_complete">%1$s completo</string>
@@ -4519,7 +4498,7 @@
     <string name="move_map_to_select_area">Mova o mapa para selecionar a área necessária.</string>
     <string name="rendering_attr_showFitnessTrails_description">Mostrar trilhos de fitness</string>
     <string name="rendering_attr_showFitnessTrails_name">Trilhos de fitness</string>
-    <string name="routeInfo_horse_scale_name">Dificuldade dos percursos equestres</string>
+    <string name="routeInfo_horse_scale_name">Dificuldade dos trilhos equestres</string>
     <string name="routing_attr_carriage_restrictions_name">Restrições de carruagem</string>
     <string name="rendering_attr_showTrainRoutes_name">Rotas de comboio</string>
     <string name="simulation_real_mode_desc">Em trechos de estradas retas, a velocidade será próxima da velocidade máxima permitida.
@@ -4534,7 +4513,7 @@
     <string name="simulation_preview_mode_desc">A velocidade da simulação será a máxima em retas e diminuirá apenas nos cruzamentos.</string>
     <string name="rendering_attr_showRunningRoutes_name">Rotas para correr</string>
     <string name="rendering_attr_showRunningRoutes_description">Mostrar rotas para correr</string>
-    <string name="routeInfo_horse_scale_description">Mostrar percursos equestres de acordo com a sua dificuldade</string>
+    <string name="routeInfo_horse_scale_description">Mostrar trilhos equestres de acordo com a sua dificuldade</string>
     <string name="rendering_attr_horse_scale_common_name">Comum</string>
     <string name="rendering_attr_horse_scale_demanding_name">Exigente</string>
     <string name="rendering_attr_horse_scale_difficult_name">Difícil</string>
@@ -4668,7 +4647,7 @@
     <string name="average_speed_widget_desc">Mostra a velocidade média da viagem atual.</string>
     <string name="map_widget_average_speed">Velocidade média</string>
     <string name="routing_attr_goods_restrictions_description">Considerar permissões de acesso a veículos ligeiros de mercadorias</string>
-    <string name="transport_hazmat_title">Transporte de materiais perigosos</string>
+    <string name="transport_hazmat_title">Transporte de matérias perigosas</string>
     <string name="transport_hazmat_yes_desc">Selecione a categoria aplicável.</string>
     <string name="import_as_one_track">Importar como um só trilho</string>
     <string name="use_latin_name_if_missing">Usar nome latino se faltar</string>
@@ -4734,7 +4713,7 @@
     <string name="compass_visible_if_map_rotated">Visível se o mapa estiver rodado</string>
     <string name="compass_always_hidden">Sempre oculto</string>
     <string name="compass_visible_if_map_rotated_desc">Oculto quando o Norte está acima</string>
-    <string name="compass_click_desc">Dica: toque no botão da bússola para alterar o modo de orientação do mapa.</string>
+    <string name="compass_click_desc">Toque 2 vezes no botão da bússola para alterar o modo de orientação do mapa.</string>
     <string name="rendering_attr_depthContourWidth_description">Largura da curva de nível de profundidade</string>
     <string name="auto_25_chars_route_tl_kl">Vire à esquerda e mantenha-se na esquerda</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostra trilhos específicos para bicicletas de montanha.</string>
@@ -4927,7 +4906,7 @@
     <string name="air_pressure_widget_desc">Mostra a pressão do ar para o centro do mapa atual.</string>
     <string name="weather_widget_group_desc">Um conjunto de widgets que mostram várias informações meteorológicas.</string>
     <string name="weather_pressure_hpa">hPa</string>
-    <string name="weather_pressure_hectopascals">Hectopascals</string>
+    <string name="weather_pressure_hectopascals">Hectopascais</string>
     <string name="weather_pressure_inches_of_mercury">Polegadas de mercúrio</string>
     <string name="weather_pressure_millimeters_of_mercury">Milímetros de mercúrio</string>
     <string name="weather_prefs_descr">Previsão de 24 horas e 7 dias, atualizada a cada 3 horas</string>
@@ -4956,7 +4935,7 @@
     <string name="wind_layer">Camada de ventos</string>
     <string name="cloud_layer">Camada de nuvens</string>
     <string name="precipitation_layer">Camada de precipitação</string>
-    <string name="mtb_imba_full">International Mountain Bicycling Association</string>
+    <string name="mtb_imba_full">Associação Internacional de Ciclismo de Montanha</string>
     <string name="mtb_scale">Escala MTB</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_segment_classification">Classificação de segmento</string>
@@ -5021,7 +5000,7 @@
     <string name="sound_beep_simple">Bipe: simples</string>
     <string name="sound_beep_simple_loud">Bipe: simples e alto</string>
     <string name="last_synchronized">Última sincronização</string>
-    <string name="display_position_automatic_descr">Depende da orientação do mapa: a parte inferior para a direção do movimento, o centro para tudo o resto.</string>
+    <string name="display_position_automatic_descr">Depende da orientação do mapa: em baixo para a direção do movimento, ao centro para todas as outras.</string>
     <string name="shared_string_select_recent">Selecionar recente</string>
     <string name="change_appearance">Alterar aparência</string>
     <string name="shared_string_kilograms">quilogramas</string>
@@ -5212,7 +5191,7 @@
     <string name="save_track_external_sensors_data">Dados</string>
     <string name="tracks_empty_folder">Pasta vazia</string>
     <string name="track_not_recorded">Não gravado</string>
-    <string name="delete_track_folder_dialog_message">Isto eliminará a pasta \"%1$s\" e todos os trilhos (%2$s) incluídos.</string>
+    <string name="delete_track_folder_dialog_message">Isto irá eliminar a pasta \"%1$s\" e todos os %2$s trilhos nela contidas.</string>
     <string name="delete_folder_question">Eliminar pasta\?</string>
     <string name="delete_folder">Eliminar pasta</string>
     <string name="show_all_tracks_on_the_map">Mostrar todos os trilhos no mapa</string>
@@ -5331,9 +5310,8 @@
     <string name="routing_attr_hazmat_category_usa_6_name">Substâncias tóxicas e infecciosas</string>
     <string name="routing_attr_hazmat_category_usa_7_name">Substâncias radioativas</string>
     <string name="routing_attr_hazmat_category_usa_8_name">Substâncias corrosivas</string>
-    <string name="dangerous_goods_description">Em algumas estradas e túneis é proibido o transporte de materiais perigosos.</string>
+    <string name="dangerous_goods_description">Em algumas estradas e túneis, o transporte de materiais perigosos é proibido.</string>
     <string name="write_bearing_description">Guardar a direção em cada ponto do trilho durante a gravação</string>
-    <string name="rendering_attr_alpineHiking_name">Classificação de dificuldade</string>
     <string name="rendering_value_sacScale_name">SAC</string>
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="feature_available_as_part_of_plan">%1$s disponível como parte do plano %2$s</string>
@@ -5499,7 +5477,7 @@
     <string name="shared_string_delete_immediately">Eliminar imediatamente</string>
     <string name="shared_string_loading">A carregar</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
-    <string name="delete_smart_folder_dialog_message">Isto eliminará a pasta inteligente \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">Isto irá remover a pasta inteligente \"%1$s\". (Nenhum trilho será eliminado.)</string>
     <string name="shared_string_is_deleted">%1$s foi eliminado.</string>
     <string name="sort_size_ascending">Tamanho pequeno primeiro</string>
     <string name="help_article_widgets_info_widgets_name">Widgets informativos</string>
@@ -5622,13 +5600,13 @@
     <string name="sorted_sufolders_toast">As subpastas em \"%1$s\" são ordenadas por: \"%2$s\"</string>
     <string name="special_routing_cpp">Tipo de roteamento especial</string>
     <string name="default_buttons">Botões predefinidos</string>
-    <string name="custom_map_button_name_present">Este botão já está presente</string>
+    <string name="custom_map_button_name_present">Este botão já existe</string>
     <string name="add_button">Adicionar botão</string>
     <string name="custom_buttons">Botões personalizados</string>
     <string name="speed_limit_warning">Aviso de limite de velocidade</string>
     <string name="shared_string_limit">Limite</string>
     <string name="when_exceeded">Quando excedido</string>
-    <string name="speedometer_description">Mostra a velocidade atual detetada pelo GPS</string>
+    <string name="speedometer_description">Mostra a sua velocidade atual conforme indicada pelo GPS</string>
     <string name="help_article_setup_a_route_name">Configurar uma rota</string>
     <string name="rendering_attr_padusDisplayMode_description">Por tipo de acesso ou nome do gestor</string>
     <string name="rendering_value_access_name">Por tipo de acesso</string>
@@ -5687,7 +5665,29 @@
     <string name="shared_string_changes">Alterações</string>
     <string name="change_default_tracks_appearance_confirmation">Aplicar alterações aos trilhos existentes na pasta ou apenas aos novos?</string>
     <string name="apply_only_to_new">Aplicar apenas a novos</string>
-    <string name="release_4_8">• A ser preparado para 4.8</string>
+    <string name="release_4_8">• Nova opção de coloração do terreno \"Altitude\"
+\n
+\n • Paletas de cores personalizadas para terreno, trilhos e rotas
+\n
+\n • Variante 3D para ícones de posição de localização
+\n
+\n • As ações rápidas podem agora ser atribuídas a teclados externos
+\n
+\n • Previsão meteorológica: atualização da interface do utilizador, adição de animação do vento
+\n
+\n • Melhorias nos percursos 3D: novas opções de visualização e coloração
+\n
+\n • Seleção alargada de percursos turísticos no mapa
+\n
+\n • Adicionada a opção de tema da aplicação para seguir o modo de mapa
+\n
+\n • Correção das estatísticas dos percursos, ordenação e pesquisa
+\n
+\n • Edição OSM: método de autorização de login/palavra-passe eliminado
+\n
+\n • Mudança para a folha de partilha do sistema a partir do Android 14
+\n
+\n</string>
     <string name="shared_string_scale">Escala</string>
     <string name="relief_3d_download_description">São necessários mapas adicionais para visualizar o terreno no mapa.</string>
     <string name="vertical_exaggeration_description">Ao alterar o valor da escala, o relevo 3D é realçado.</string>
@@ -5714,7 +5714,7 @@
     <string name="upward_gradient">Gradiente ascendente</string>
     <string name="title_3d_track">Trilho 3D</string>
     <string name="explore_3d_track_description">Explore o trilho em 3D interativo! Visualize a altura, a velocidade e muito mais diretamente no mapa.</string>
-    <string name="maps_that_also_be_used">Mapas que também podem ser utilizados: %1$s</string>
+    <string name="maps_that_also_be_used">Mapas que também serão utilizados: %1$s</string>
     <string name="required_maps_calculate_online_summary">A lista de mapas em falta baseia-se no percurso em linha reta. Para obter uma lista exata de mapas, o OsmAnd pode pré-calcular o seu percurso online.</string>
     <string name="fixed_height">Altura fixa</string>
     <string name="getting_list_of_required_maps">A obter lista de mapas necessários…</string>
@@ -5728,4 +5728,255 @@
     <string name="map_text">Textos do mapa</string>
     <string name="routing_attr_avoid_cobblestone_name">Evitar pedras irregulares</string>
     <string name="routing_attr_avoid_cobblestone_description">Evitar pedras irregulares</string>
+    <string name="steps_per_minute_unit">PPM</string>
+    <string name="disable_map_layers">Desativar camadas de mapas</string>
+    <string name="disable_map_layers_descr">Desativar todas as camadas de mapas por cima do mapa vetorial (é necessário reiniciar).</string>
+    <string name="height_legend_description">São utilizados mapas de cores de altitude para visualizar o relevo.</string>
+    <string name="wall_height">Altura da parede</string>
+    <string name="missing_maps_ignore">Usar mapas descarregados</string>
+    <string name="change_terrain_color_scheme">Alterar o esquema de cores do terreno</string>
+    <string name="clear_all_key_shortcuts_summary">Todas as atribuições de teclas para o tipo selecionado serão removidas.</string>
+    <string name="no_assigned_keys">Sem teclas atribuídas</string>
+    <string name="shared_string_key">Tecla</string>
+    <string name="new_key_assignment">Nova atribuição de teclas</string>
+    <string name="key_name_pattern">Tecla \"%1$s\"</string>
+    <string name="key_assignment_add_key">Adicionar tecla</string>
+    <string name="travel_topics">Tópicos de viagem</string>
+    <string name="play_weather_forecast">Reproduzir a previsão meteorológica</string>
+    <string name="rendering_value_dark_orange_name">Laranja escuro</string>
+    <string name="clear_key_assignment_summary">A atribuição de teclas para a ação selecionada será apagada.</string>
+    <string name="key_assignment_add_action">Adicionar ação</string>
+    <string name="backup_error_failed_to_transfer_file">Falha na transferência dos ficheiros da nuvem.</string>
+    <string name="contact_support_retry">Tente novamente ou contacte o apoio ao cliente</string>
+    <string name="user_palette">Paleta do utilizador</string>
+    <string name="shared_string_colors">Cores</string>
+    <string name="clear_all_key_shortcuts">Limpar todos os atalhos de teclado</string>
+    <string name="no_assigned_keys_desc">Selecione uma ação e atribua uma tecla tocando no botão \"Adicionar\".</string>
+    <string name="action_icon">Ícone da ação</string>
+    <string name="assigned_keys">Teclas atribuídas</string>
+    <string name="missing_maps_ignore_details">Os mapas descarregados cobrem o seu percurso? Navegue com eles se estiver familiarizado com a zona.</string>
+    <string name="daynight_mode_app_theme_summary">O ecrã do mapa ajusta-se ao tema geral da aplicação - modo dia para um tema claro e modo noite para um tema escuro</string>
+    <string name="daynight_mode_sensor_summary">Utiliza o sensor de luz do dispositivo para alternar entre temas claros e escuros de acordo com os níveis de luz ambiente.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Muda automaticamente entre temas diurnos e noturnos com base nas horas locais do nascer e do pôr do sol.</string>
+    <string name="daynight_mode_night_summary">Apresenta sempre o mapa num tema escuro, adequado para condições noturnas ou de fraca luminosidade.</string>
+    <string name="daynight_mode_day_summary">Apresenta sempre o mapa num tema claro, ideal para a visibilidade durante o dia.</string>
+    <string name="daynight_mode_app_theme">Tema da aplicação</string>
+    <string name="key_event_action_continuous_zoom_out">Diminuição contínua da ampliação</string>
+    <string name="key_event_action_continuous_zoom_in">Aumento contínuo da ampliação</string>
+    <string name="remove_key_assignment_summary">A atribuição da tecla para a ação selecionada será removida.</string>
+    <string name="remove_key_assignment">Remover atribuição de tecla</string>
+    <string name="map_settings_weather_wind_animation">Animação do vento</string>
+    <string name="tomorrow">Amanhã</string>
+    <string name="data_source">Fonte de dados</string>
+    <string name="weather_data_sources_prompt">O OsmAnd fornece a previsão meteorológica de duas fontes:</string>
+    <string name="weather_source_ecmwf_description">Centro Europeu de Previsão do Tempo a Médio Prazo</string>
+    <string name="weather_source_GFS_description">Sistema de Previsão Global dos Centros Nacionais de Previsão Ambiental</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="shared_string_modify">Alterar</string>
+    <string name="quick_action_map_overlay">Camada superior</string>
+    <string name="shared_string_create">Criar</string>
+    <string name="choose_map_orientation">Escolha a orientação do mapa</string>
+    <string name="quick_action_location_by_gpx">Localização por GPX</string>
+    <string name="quick_action_terrain_color_scheme">Esquema de cores do terreno</string>
+    <string name="quick_action_to_my_location">Para a minha localização</string>
+    <string name="quick_action_move_map_left">Mapa para a esquerda</string>
+    <string name="quick_action_destination">Destino</string>
+    <string name="quick_action_move_map_right">Mapa para a direita</string>
+    <string name="quick_action_move_map_down">Mapa para baixo</string>
+    <string name="quick_action_move_map_up">Mapa para cima</string>
+    <string name="quick_action_previous_app_profile">Perfil anterior da aplicação</string>
+    <string name="shared_string_replace">Substituir</string>
+    <string name="shared_string_simulate">Simular</string>
+    <string name="quick_action_audio_note">Nota de áudio</string>
+    <string name="quick_action_video_note">Nota de vídeo</string>
+    <string name="quick_action_photo_note">Nota de foto</string>
+    <string name="quick_action_track_waypoint">Ponto de passagem do trilho</string>
+    <string name="quick_action_parking_place">Local de estacionamento</string>
+    <string name="quick_action_verb_pause_resume">Pausa / retomar</string>
+    <string name="quick_action_verb_turn_on_off">Ativar / desativar</string>
+    <string name="rendering_value_pale_name">Pálido</string>
+    <string name="energy_avg_info">Estatísticas de energia (média de 1 / 5 / 15 minutos)</string>
+    <string name="energy_avg_info_description">Nível da bateria por minuto: %1$s
+\nConsumo de energia (mAh): %2$s</string>
+    <string name="rendering_avg_info">Estatísticas de renderização (média de 1 / 5 / 15 minutos)</string>
+    <string name="rendering_avg_info_description">FPS dos últimos 1k fotogramas: %1$s
+\nCPU básico: %2$s
+\nGPU 1k: %3$s
+\nINATIVO 1k: %4$s</string>
+    <string name="quick_action_directions_from">Ponto inicial</string>
+    <string name="quick_action_new_route">Nova rota</string>
+    <string name="quick_action_next_app_profile">Perfil seguinte da aplicação</string>
+    <string name="app_profile">Perfil da aplicação</string>
+    <string name="shared_string_set">Definir</string>
+    <string name="quick_action_display_position_in_center">Posição do ecrã sempre no centro</string>
+    <string name="quick_action_terrain">Tipo de colorização do terreno</string>
+    <string name="quick_action_first_intermediate">Primeiro intermédio</string>
+    <string name="quick_action_verb_show_hide">Mostrar / ocultar</string>
+    <string name="weather_screen">Ecrã de previsão meteorológica</string>
+    <string name="quick_action_verb_start_stop">Iniciar / parar</string>
+    <string name="shared_string_all_icons">Todos os ícones</string>
+    <string name="profile_icon">Ícone do perfil</string>
+    <string name="navigation_position_icon_summary">Ícone apresentado enquanto está a navegar ou a deslocar-se.</string>
+    <string name="navigation_position_icon">Ícone de posição de navegação</string>
+    <string name="resting_position_icon_summary">Ícone apresentado quando não está em movimento.</string>
+    <string name="resting_position_icon">Ícone da posição parado</string>
+    <string name="quick_action_remove_next_destination">Próximo ponto de destino</string>
+    <string name="quick_action_map_style">Estilo do mapa</string>
+    <string name="quick_action_map_underlay">Camada inferior</string>
+    <string name="auto_25_chars_route_kl">Mantenha-se à esquerda</string>
+    <string name="auto_25_chars_route_kr">Mantenha-se à direita</string>
+    <string name="auto_25_chars_route_tr">Vire à direita</string>
+    <string name="auto_25_chars_route_tshr">Vire bruscamente à direita</string>
+    <string name="auto_25_chars_route_tslr">Vire ligeiramente à direita</string>
+    <string name="auto_25_chars_route_tl">Vire à esquerda</string>
+    <string name="auto_25_chars_route_tshl">Vire bruscamente à esquerda</string>
+    <string name="auto_25_chars_route_tsll">Vire ligeiramente à esquerda</string>
+    <string name="auto_25_chars_route_tu">Faça inversão de marcha</string>
+    <string name="resting_position">Posição de repouso</string>
+    <string name="navigation_position">Posição de navegação</string>
+    <string name="resting_navigation_position">Posição de repouso e navegação</string>
+    <string name="view_angle_description">Apresenta a área em forma de cone para a qual está atualmente virado</string>
+    <string name="view_angle">Ângulo de visão</string>
+    <string name="location_radius_description">Mostra a área circular que representa a precisão da sua localização atual</string>
+    <string name="location_radius">Raio de localização</string>
+    <string name="rendering_avg_info_details">FPS dos últimos 1k fotogramas: %1$s
+\nCPU (mosaicos): %2$s
+\nCPU (tempo de inatividade): %3$s
+\nCPU (à espera da GPU): %4$s</string>
+    <string name="driving_region_uk">Reino Unido e similares</string>
+    <string name="ask_every_time">Perguntar todas as vezes</string>
+    <string name="detailed_track_guidance">Orientação pormenorizada do trilho</string>
+    <string name="shared_string_automatically">Automaticamente</string>
+    <string name="hugerock_promo">Promoção Hugerock para %1$s meses</string>
+    <string name="detailed_track_guidance_description">O OsmAnd faz corresponder o seu trajeto a estradas próximas para uma melhor orientação curva a curva.</string>
+    <string name="quick_action_routes_summary">Uma opção para mostrar ou ocultar %1$s no mapa.</string>
+    <string name="hugerock_promo_description">Acesso gratuito a funcionalidades, incluindo descarregamentos ilimitados de mapas, relevo 3D, etc. por %1$s /mês</string>
+    <string name="driving_region_india">Índia</string>
+    <string name="compass_click_north_is_up">Para alterar o modo de orientação, clique e mantenha premido</string>
+    <string name="add_widget_to_the_left">Adicionar widget à esquerda</string>
+    <string name="add_widget_below">Adicionar widget abaixo</string>
+    <string name="route_roundabout_exit">Saia em %1$d</string>
+    <string name="add_widget_above">Adicionar widget acima</string>
+    <string name="add_widget_to_the_right">Adicionar widget à direita</string>
+    <string name="help_article_map_tracks_name">Trilhos</string>
+    <string name="help_article_map_routes_name">Rotas</string>
+    <string name="rendering_attr_alpineHiking_name">Grau de dificuldade de trilhos pedestres</string>
+    <string name="delete_widget_description">Este widget será eliminado. Pode restaurá-lo mais tarde no ecrã Configurar.</string>
+    <string name="delete_widget">Eliminar o widget?</string>
+    <string name="app_mode_suv">Todo-terreno (SUV)</string>
+    <string name="graph_axis">Eixo do gráfico</string>
+    <string name="y_axis_description">Selecione até duas opções para o eixo Y.</string>
+    <string name="quick_action_previous_screen_desc">Um botão alternador para navegar para o ecrã anterior.</string>
+    <string name="quick_action_previous_screen_title">Ecrã anterior</string>
+    <string name="quick_action_verb_navigate">Navegar</string>
+    <string name="quick_action_drawer_desc">Um botão alternador para mostrar ou ocultar o menu lateral.</string>
+    <string name="quick_action_drawer_title">Menu lateral</string>
+    <string name="quick_action_search_view_desc">Um botão alternador para abrir ou mostrar o ecrã de pesquisa.</string>
+    <string name="quick_action_navigation_view_title">Ecrã de navegação</string>
+    <string name="quick_action_switch_compass_desc">Um botão alternador para alterar a orientação do mapa.</string>
+    <string name="quick_action_search_view_title">Ecrã de pesquisa</string>
+    <string name="quick_action_navigation_view_desc">Um botão alternador para abrir ou fechar o ecrã de navegação.</string>
+    <string name="battery_saving_mode">Modo de economia de bateria</string>
+    <string name="shared_string_interface">Interface</string>
+    <string name="background_opacity">Opacidade do fundo</string>
+    <string name="corner_radius">Raio do canto</string>
+    <string name="search_action_descr">Abre a pesquisa.</string>
+    <string name="navigation_action_descr">Abre a navegação.</string>
+    <string name="my_location_action_descr">Centraliza o mapa na sua posição atual.</string>
+    <string name="drawer_button_description">Abre o menu principal.</string>
+    <string name="raster_layers_action_descr">Alterar camadas raster</string>
+    <string name="contour_layers_action_descr">Alterar camadas de contornos</string>
+    <string name="change_zoom_action_descr">Alterar ampliação do mapa.</string>
+    <string name="map_3d_mode_action_descr">Alterar inclinação do mapa.</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Mostrar trilhos de terra para bicicletas</string>
+    <string name="configure_map_description">Alterar o estilo do mapa, as camadas ou outras configurações.</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="type_of_activity">Tipo de atividade</string>
+    <string name="change_activity">Alterar atividade</string>
+    <string name="shared_string_decrease">Diminuir</string>
+    <string name="shared_string_increase">Aumentar</string>
+    <string name="shared_string_source">Origem</string>
+    <string name="unit_volt">V</string>
+    <string name="wikimedia">Wikimedia</string>
+    <string name="open_in_browser">Abrir no navegador</string>
+    <string name="no_photos_available">Não existem fotografias disponíveis</string>
+    <string name="obd_fuel_type_diesel">Gasóleo</string>
+    <string name="obd_fuel_type_lpg">GPL</string>
+    <string name="obd_fuel_type_ethanol">Etanol</string>
+    <string name="obd_fuel_type_cng">GNV</string>
+    <string name="obd_fuel_type_propane">Propano</string>
+    <string name="obd_fuel_type_electric">Elétrico</string>
+    <string name="obd_fuel_type_bifuel_gasoline">Funcionamento bicombustível a gasolina</string>
+    <string name="obd_fuel_type_bifuel_electricity">Funcionamento bicombustível a eletricidade</string>
+    <string name="obd_fuel_type_bifuel_electric_combustion">Funcionamento bicombustível elétrico e combustão</string>
+    <string name="obd_fuel_type_hybrid_gasoline">Híbrido a gasolina</string>
+    <string name="obd_fuel_type_bifuel_cng">Funcionamento bicombustível a GNV</string>
+    <string name="obd_fuel_type_bifuel_propane">Funcionamento bicombustível a propano</string>
+    <string name="obd_widget_group">Métricas do veículo</string>
+    <string name="obd_fuel_type_hydrogen">Hidrogénio</string>
+    <string name="obd_fuel_type_unknown">Tipo de combustível desconhecido</string>
+    <string name="shared_string_obd">OBD</string>
+    <string name="percent_unit">%</string>
+    <string name="obd_rpm">RPM</string>
+    <string name="rpm_unit">rpm</string>
+    <string name="track_does_not_contain_data_to_save">O trilho não contém dados para guardar.</string>
+    <string name="quick_action_finish_trip_recording_summary">Um botão para guardar o trilho GPX e terminar a gravação da viagem.</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Viagem gravada e continuação</string>
+    <string name="movies_list">Lista de vídeos</string>
+    <string name="shared_string_no_internet_connection">Sem ligação à Internet</string>
+    <string name="no_internet_descr">Verifique a sua ligação e tente novamente.</string>
+    <string name="obd_fuel_type_methanol">Metanol</string>
+    <string name="obd_fuel_type_bifuel_methanol">Funcionamento bicombustível a metanol</string>
+    <string name="obd_fuel_type_hybrid_ethanol">Híbrido a etanol</string>
+    <string name="obd_fuel_type_hybrid_diesel">Híbrido a gasóleo</string>
+    <string name="obd_fuel_type_hybrid_regenerative">Híbrido regenerativo</string>
+    <string name="obd_fuel_type_bifuel_hydrogen">Hidrogénio em funcionamento bicombustível</string>
+    <string name="obd_fuel_type_hybrid_hydrogen">Híbrido a hidrogénio</string>
+    <string name="vehicle_metrics_plugin_settings">Configurações de métricas do veículo</string>
+    <string name="lock_screen_description">Ativa ou desativa a funcionalidade do ecrã tátil para evitar toques acidentais</string>
+    <string name="lock_screen">Bloquear ecrã</string>
+    <string name="start_trip_recording_first_m">Inicie primeiro a gravação da viagem.</string>
+    <string name="quick_action_new_trip_segment">Um botão para iniciar um novo segmento na gravação de um trilho GPX a decorrer.</string>
+    <string name="new_segment_started_m">Começou a gravar um novo segmento de trilho.</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">Um botão para guardar a viagem gravada atual como um ficheiro GPX e continuar a gravar um novo trilho sem interrupção.</string>
+    <string name="help_article_personal_color_palette_schemes_name">Esquemas de cores</string>
+    <string name="obd_vin">VIN</string>
+    <string name="obd_vin_desc">Código VIN através do OBD</string>
+    <string name="third_links">Hiperligações de terceiros</string>
+    <string name="reset_average_speed">Repor velocidade média</string>
+    <string name="unknown_bt_device">Dispositivo desconhecido</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Trilhos para motos fora de estrada</string>
+    <string name="obd_fuel_type_not_provided">Não foi indicado o tipo de combustível</string>
+    <string name="obd_fuel_type_gasoline">Gasolina</string>
+    <string name="quick_action_showhide_osm_edits_descr">Botão para mostrar ou ocultar as edições locais do OSM no mapa.</string>
+    <string name="quick_action_verb_start_pause">Iniciar / pausar</string>
+    <string name="no_photos_available_descr">Ainda não foram adicionadas fotografias de utilizadores a este local</string>
+    <string name="obd_fuel_type_bifuel_ethanol">Funcionamento bicombustível a etanol</string>
+    <string name="obd_fuel_type_bifuel_lpg">Funcionamento bicombustível a GPL</string>
+    <string name="obd_fuel_type_hybrid_electric">Híbrido elétrico</string>
+    <string name="obd_fuel_type_hybrid_electric_combustion">Híbrido elétrico e motor a combustão</string>
+    <string name="liter_per_hour">L/h</string>
+    <string name="new_trip_segment">Novo segmento de viagem</string>
+    <string name="quick_action_start_pause_recording">Um botão para iniciar, pausar ou retomar a gravação do trilho GPX.</string>
+    <string name="release_4_9">• Adicionado um visualizador de galeria de ecrã inteiropara imagens Wikimedia\n\n • Introduzido um novo complemento “Métricas do veículo” para monitorizar o desempenho do veículo utilizando o protocolo OBD-II\n\n • Adicionada a capacidade de atribuir atividades a trilhos e filtrá-los em conformidade\n\n • Implementação de novas ações rápidas para gravação de viagens e bloqueio do ecrã tátil\n\n • Introdução de um aspeto personalizável do botão do mapa e de uma grelha precisa\n\n • Adicionado um menu de contexto e uma ação “Repor a velocidade média” aos widgets\n\n • Adicionada uma nova camada de percurso “Trilhos de motas fora de estrada”\n\n • Corrigido o “Registo automático de trajeto durante a navegação”\n\n • Corrigido o problema com coordenadas invertidas em RTL\n\n • Corrigida a falta de dados do sensor para o percurso atualmente gravado\n\n • Adicionada informação sobre as áreas circundantes para o ponto selecionado\n\n • Adicionada ação rápida para controlar a visibilidade das edições OSM\n\n • Parâmetros de visibilidade separados para as opções de colorização do terreno\n\n • Adicionado um ícone que pode ser tocado para mostrar o acesso ou outros atributos de estradas ou caminhos\n\n</string>
+    <string name="obd_fuel_level_desc">Mostra o nível de combustível do veículo através do sensor OBD</string>
+    <string name="obd_air_intake_temp">Temperatura do ar de admissão</string>
+    <string name="obd_ambient_air_temp">Temperatura do ar ambiente</string>
+    <string name="obd_engine_coolant_temp">Temperatura do líquido de arrefecimento do motor</string>
+    <string name="obd_fuel_level">Nível de combustível</string>
+    <string name="obd_fuel_consumption_rate">Taxa de consumo de combustível</string>
+    <string name="obd_fuel_consumption_rate_desc">Mostra a taxa de consumo de combustível do veículo com base no OBD e localização</string>
+    <string name="obd_fuel_left_distance">Combustível restante (distância)</string>
+    <string name="obd_fuel_type">Tipo de combustível</string>
+    <string name="obd_plugin_name">Métricas do veículo</string>
+    <string name="obd_support">Suporte OBD</string>
+    <string name="obd_rpm_desc">Mostra as RPM do tacómetro do veículo através do sensor OBD</string>
+    <string name="tracker_item">Rastreador OsmAnd</string>
+    <string name="wikivoyage_offline">Wikivoyage offline</string>
+    <string name="obd_fuel_type_desc">Mostra o tipo de combustível do veículo através do sensor OBD</string>
+    <string name="obd_battery_voltage">Voltagem da bateria</string>
+    <string name="obd_plugin_description">Acede às informações do seu veículo através do protocolo OBD</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="obd_fuel_left_distance_desc">Mostra a distância que o veículo pode percorrer com o nível de combustível restante no sensor OBD</string>
 </resources>

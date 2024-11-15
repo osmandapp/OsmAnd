@@ -201,7 +201,7 @@ public class HazmatCategoryBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	@Override
-	public void onDismiss(@NonNull @NotNull DialogInterface dialog) {
+	public void onDismiss(@NonNull DialogInterface dialog) {
 		super.onDismiss(dialog);
 		Activity activity = getActivity();
 		if (activity != null && !activity.isChangingConfigurations()) {

@@ -99,7 +99,7 @@
     <string name="poi_trash_disposal">Kante za smeće</string>
     <string name="poi_education">Edukacija</string>
     <string name="poi_administrative">Administracija</string>
-    <string name="poi_healthcare">Zdravstvo</string>
+    <string name="poi_healthcare">Zdravstvene usluge</string>
     <string name="poi_office">Kancelarije</string>
     <string name="poi_sport">Sport</string>
     <string name="poi_tourism">Turizam</string>
@@ -138,7 +138,7 @@
     <string name="poi_boutique">Butik</string>
     <string name="poi_camera">Fotoaparati i sočiva</string>
     <string name="poi_carpet">Tepisi</string>
-    <string name="poi_chemist">Drogerija</string>
+    <string name="poi_chemist">Apoteka</string>
     <string name="poi_clothes">Odeća</string>
     <string name="poi_clothes_children">Odeća za decu</string>
     <string name="poi_shoes">Cipele</string>
@@ -168,7 +168,7 @@
     <string name="poi_photo">Foto radnja</string>
     <string name="poi_second_hand">Polovne stvari</string>
     <string name="poi_sports">Sportska oprema</string>
-    <string name="poi_ticket">Prodaja karata</string>
+    <string name="poi_ticket">Biletarnica</string>
     <string name="poi_tobacco">Duvan</string>
     <string name="poi_toys">Igračke</string>
     <string name="poi_tyres">Auto gume</string>
@@ -205,7 +205,7 @@
     <string name="poi_fire_hydrant">Hidrant</string>
     <string name="poi_fire_hose">Vatrogasno crevo</string>
     <string name="poi_ambulance_station">Ambulanta</string>
-    <string name="poi_ses_station">SES stanica</string>
+    <string name="poi_disaster_response">Stanica za reagovanje na katastrofe</string>
     <string name="poi_emergency_access_point">Tačka za okupljanje u slučaju nužde</string>
     <string name="poi_ford">Zaliv</string>
     <string name="poi_mountain_pass">Planinski prolaz</string>
@@ -1409,7 +1409,7 @@
     <string name="poi_tactile_paving">Taktilno popločavanje</string>
     <string name="poi_brushless">Bez četkica</string>
     <string name="poi_observatory_designation">Označeno</string>
-    <string name="poi_pharmacy_dispensing">Apoteka (na recept)</string>
+    <string name="poi_pharmacy_dispensing">Lekovi na recept</string>
     <string name="poi_denomination">Veroispovest</string>
     <string name="poi_backcountry">Zabit</string>
     <string name="poi_beauty_salon_service">Servis</string>
@@ -1796,7 +1796,7 @@
     <string name="poi_payment_icsf_yes">IC Stored Fare - da</string>
     <string name="poi_payment_wire_transfer_yes">Vajer transferi</string>
     <string name="poi_payment_wire_transfer_no">Vajer transferi se ne prihvataju</string>
-    <string name="poi_events_venue">Mesta događaja</string>
+    <string name="poi_events_venue">Svečana sala</string>
     <string name="poi_diet_kosher_no">Košer ishrana: ne</string>
     <string name="poi_diet_halal_filter_yes">Halal</string>
     <string name="poi_diet_halal_only">Halal samo</string>
@@ -1810,7 +1810,7 @@
     <string name="poi_drive_in_yes">Da;Ulazak autom</string>
     <string name="poi_drive_in_no">Ulazak kolima: ne</string>
     <string name="poi_drive_through_yes">Da;Prolazak autom</string>
-    <string name="poi_drive_through_no">Prolazak kroz: ne</string>
+    <string name="poi_drive_through_no">Kupovina iz auta: ne</string>
     <string name="poi_brewery_additional">Ime pivare</string>
     <string name="poi_microbrewery_yes">Da;Kraft pivare</string>
     <string name="poi_microbrewery_no">Ne mikropivara</string>
@@ -2236,7 +2236,7 @@
     <string name="poi_step_condition_uneven">Stanje stepenika: različito</string>
     <string name="poi_step_condition_rough">Stanje stepenika: grubo</string>
     <string name="poi_cairn">Gomila kamenja</string>
-    <string name="poi_defibrillator">Defibrilator</string>
+    <string name="poi_defibrillator">Defibrilator;AED</string>
     <string name="poi_defibrillator_yes">Defibrilator: da</string>
     <string name="poi_tomb_war_grave">Tip: ratno groblje</string>
     <string name="poi_tomb_tumulus">Tip: humka</string>
@@ -2841,7 +2841,7 @@
     <string name="poi_health_person_type_paramedic">Uloga zdravstvenog radnika: bolničar</string>
     <string name="poi_health_person_type_nurse">Uloga zdravstvenog radnika: medicinska sestra</string>
     <string name="poi_health_person_type_midwife">Uloga zdravstvenog radnika: babica</string>
-    <string name="poi_health_person_type_healer">Uloga zdravstvenog radnika: iscelitelj</string>
+    <string name="poi_health_person_type_healer">Uloga zdravstvenog radnika: lekar</string>
     <string name="poi_health_person_type_assistant">Uloga zdravstvenog radnika: asistent</string>
     <string name="poi_fire_hydrant_type_wall">Zid</string>
     <string name="poi_fire_hydrant_type_pond">Pond</string>
@@ -3625,7 +3625,7 @@
     <string name="poi_volcano_type_stratovolcano">Stratovulkan</string>
     <string name="poi_volcano_type_scoria">Šljaka</string>
     <string name="poi_url">URL</string>
-    <string name="poi_parking_space">Parking mesto</string>
+    <string name="poi_parking_space">Parking prostor</string>
     <string name="poi_grave">Spomen grobnica</string>
     <string name="poi_community_gender_mixed">Pol zajednice: mešoviti</string>
     <string name="poi_community_gender_male">Pol zajednice: muški</string>
@@ -3939,7 +3939,7 @@
     <string name="poi_us_maps_recreation_area_activity">Rekreativna oblast</string>
     <string name="poi_healthcare_speciality_clinic">Klinika</string>
     <string name="poi_healthcare_speciality_psychotherapist">Psihoterapija</string>
-    <string name="poi_healthcare_speciality_laboratory">Specijalnost u zdravstvu: laborant</string>
+    <string name="poi_healthcare_speciality_laboratory">Specijalnost u zdravstvu: laboratorija</string>
     <string name="poi_water_filter">Voda; Pijaća voda</string>
     <string name="poi_socket_schuko_voltage">Utičnica: Šuko: napon</string>
     <string name="poi_socket_schuko_voltage_medium">Srednji</string>
@@ -4866,4 +4866,36 @@
     <string name="poi_indoor_seating_no">Nema sedećih mesta</string>
     <string name="poi_indoor_seating_bar_table">Barski sto</string>
     <string name="poi_property_management">Upravljanje imovinom</string>
+    <string name="poi_engineer">Inženjerska kancelarija</string>
+    <string name="poi_mcdonalds">MekDonald</string>
+    <string name="poi_cash_in_yes">Da</string>
+    <string name="poi_cash_in_no">Ne</string>
+    <string name="poi_cash_in_customers">Korisnici</string>
+    <string name="poi_diet_pescetarian_no">Pesketarska dieta: ne</string>
+    <string name="poi_cash_in">Keš depozit</string>
+    <string name="poi_osmand_access_main_tag">Pristup</string>
+    <string name="poi_payment_parco_no">Parko se ne prima</string>
+    <string name="poi_payment_parkster_yes">Parkster</string>
+    <string name="poi_payment_parkster_no">Parkster se ne prima</string>
+    <string name="poi_payment_parco_yes">Parko</string>
+    <string name="poi_osmand_foot_prohibited_tunnel">Tunel zabranjen za pešake</string>
+    <string name="poi_osmand_bicycle_prohibited_tunnel">Tunel zabranjen za bicikliste</string>
+    <string name="poi_route_article">Članci o putovanjima</string>
+    <string name="poi_route_article_point">Tačke na putovanjima</string>
+    <string name="poi_route_track">Druge rute</string>
+    <string name="poi_route_track_point">Tačke drugih ruta</string>
+    <string name="poi_activities_bicycle">Bicikl</string>
+    <string name="poi_activities_trekking">Pešačenje</string>
+    <string name="poi_activities_running">Trčanje</string>
+    <string name="poi_activities_pedestrian">Hodanje</string>
+    <string name="poi_activities_kayak">Sportovi na vodi</string>
+    <string name="poi_activities_skiing">Zimski sportovi</string>
+    <string name="poi_activities_inline_skates">Koturaljke</string>
+    <string name="poi_activities_horse">Jahanje konja</string>
+    <string name="poi_activities_snowmobile">Motorne sanke</string>
+    <string name="poi_activities_fitness">Staze za trčanje</string>
+    <string name="poi_activities_mountain_bike">Brdski biciklizam</string>
+    <string name="poi_name_etymology">Etimologija imena</string>
+    <string name="poi_name_left">Naziv leve strane</string>
+    <string name="poi_name_right">Naziv desne strane</string>
 </resources>

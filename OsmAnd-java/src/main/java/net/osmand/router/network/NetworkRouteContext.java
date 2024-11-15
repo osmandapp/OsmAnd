@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -196,6 +197,8 @@ public class NetworkRouteContext {
 
 	private NetworkRoutesTile loadRoutingDataTile(SearchRequest<RouteDataObject> req, long tileId) throws IOException {
 		NetworkRoutesTile osmcRoutesTile = new NetworkRoutesTile(tileId);
+		HashSet<Long> deletedIds = new HashSet<>();
+		Map<Long, RouteRegion> usedIds = new HashMap<>();
 		for (Map.Entry<BinaryMapIndexReader, List<RouteSubregion>> readerSubregions : readers.entrySet()) {
 			req.clearSearchResults();
 			long nt = System.nanoTime();
@@ -216,12 +219,25 @@ public class NetworkRouteContext {
 						if (obj == null) {
 							continue;
 						}
+						if (deletedIds.contains(obj.id)) {
+							// live-updates, osmand_change=delete
+							continue;
+						}
+						if (obj.isRoadDeleted()) {
+							deletedIds.add(obj.id);
+							continue;
+						}
+						if (usedIds.containsKey(obj.id) && usedIds.get(obj.id) != obj.region) {
+							// live-update, changed tags
+							continue;
+						}
 						stats.loadedObjects++;
 						List<RouteKey> keys = filter.convert(obj);
 						for (RouteKey rk : keys) {
 							stats.loadedRoutes++;
 							osmcRoutesTile.add(obj, rk);
 						}
+						usedIds.put(obj.id, obj.region);
 					}
 				}
 			}

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="@dimen/card_row_min_height"
 	android:gravity="center_vertical"
@@ -19,7 +18,7 @@
 		android:text="@string/select_folder"
 		android:textColor="?android:textColorSecondary"
 		android:textSize="@dimen/default_desc_text_size"
-		osmand:typeface="@string/font_roboto_regular"
+		android:textStyle="normal"
 		android:paddingStart="@dimen/content_padding"
 		android:paddingEnd="@dimen/content_padding" />
 
@@ -40,6 +39,6 @@
 		android:textColor="?attr/color_dialog_buttons"
 		app:drawableEndCompat="@drawable/ic_action_markers_list"
 		app:drawableTint="?attr/active_color_basic"
-		osmand:typeface="@string/font_roboto_medium" />
+		app:typefaceWeight="medium" />
 
 </LinearLayout>

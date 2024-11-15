@@ -2,6 +2,8 @@ package net.osmand.plus.configmap.tracks;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.shared.gpx.TrackItem;
+
 import java.util.Set;
 
 public interface TrackItemsContainer {

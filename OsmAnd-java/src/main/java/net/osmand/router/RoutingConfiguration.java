@@ -63,6 +63,9 @@ public class RoutingConfiguration {
 
 	// 1.6 Time to calculate all access restrictions based on conditions
 	public long routeCalculationTime = 0;
+
+	// 1.6.1. Apply "unlimited" :conditional tags (used by HHRoutingShortcutCreator)
+	public Map<String, String> ambiguousConditionalTags;
 	
 	// 1.7 Maximum visited segments
 	public int MAX_VISITED = -1;
@@ -84,6 +87,9 @@ public class RoutingConfiguration {
 
 	// Parameter to smoother the track itself (could be 0 if it's not recorded track)
 	public float smoothenPointsNoRoute = 5;
+
+	public boolean showMinorTurns = false;
+
 
 	public QuadTree<DirectionPoint> getDirectionPoints() {
 		return directionPoints;
@@ -469,7 +475,17 @@ public class RoutingConfiguration {
 	private static void addSubclause(RoutingRule rr, RouteAttributeContext ctx) {
 		boolean not = "ifnot".equals(rr.tagName);
 		if(!Algorithms.isEmpty(rr.param)) {
-			ctx.getLastRule().registerAndParamCondition(rr.param, not);
+			if (rr.param.contains(",")) {
+				String[] params = rr.param.split(",");
+				for (String p : params) {
+					p = p.trim();
+					if (!Algorithms.isEmpty(p)) {
+						ctx.getLastRule().registerAndParamCondition(p, not);
+					}
+				}
+			} else {
+				ctx.getLastRule().registerAndParamCondition(rr.param, not);
+			}
 		}
 		if (!Algorithms.isEmpty(rr.t)) {
 			ctx.getLastRule().registerAndTagValueCondition(rr.t, Algorithms.isEmpty(rr.v) ? null : rr.v, not);

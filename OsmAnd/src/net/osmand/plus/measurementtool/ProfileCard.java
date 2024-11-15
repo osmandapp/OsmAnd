@@ -1,5 +1,7 @@
 package net.osmand.plus.measurementtool;
 
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
+
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +13,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 
 public class ProfileCard extends MapBaseCard {
 
@@ -39,8 +37,7 @@ public class ProfileCard extends MapBaseCard {
 
 	@Override
 	protected void updateContent() {
-		List<ApplicationMode> modes = new ArrayList<>(ApplicationMode.values(app));
-		modes.remove(ApplicationMode.DEFAULT);
+		List<ApplicationMode> modes = ApplicationMode.getModesForRouting(app);
 		Iterator<ApplicationMode> iterator = modes.iterator();
 		while (iterator.hasNext()) {
 			ApplicationMode mode = iterator.next();

@@ -2,8 +2,8 @@ package net.osmand.plus.track.fragments.controller;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.OsmandApplication;
@@ -27,15 +27,15 @@ public class EditWptDescriptionController extends EditPointDescriptionController
 		OsmandApplication app = activity.getMyApplication();
 		SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedGPXFile(wpt);
 		if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
-			GPXFile gpx = selectedGpxFile.getGpxFile();
-			if (gpx.showCurrentTrack) {
+			GpxFile gpx = selectedGpxFile.getGpxFile();
+			if (gpx.isShowCurrentTrack()) {
 				SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
 				savingTrackHelper.updatePointData(wpt, wpt.getLatitude(), wpt.getLongitude(), editedText,
-						wpt.name, wpt.category, wpt.getColor(), wpt.getIconName(), wpt.getBackgroundType());
+						wpt.getName(), wpt.getCategory(), wpt.getColor(), wpt.getIconName(), wpt.getBackgroundType());
 			} else {
 				WptPt wptRes = wpt;
-				wptRes.desc = editedText;
-				gpx.updateWptPt(wpt, wptRes);
+				wptRes.setDesc(editedText);
+				gpx.updateWptPt(wpt, wptRes, true);
 				SaveGpxHelper.saveGpx(gpx);
 			}
 			LatLon latLon = new LatLon(wpt.getLatitude(), wpt.getLongitude());
@@ -47,6 +47,6 @@ public class EditWptDescriptionController extends EditPointDescriptionController
 	@Override
 	public String getTitle() {
 		WptPt wpt = (WptPt) getContextMenuObject();
-		return wpt != null ? wpt.name : super.getTitle();
+		return wpt != null ? wpt.getName() : super.getTitle();
 	}
 }

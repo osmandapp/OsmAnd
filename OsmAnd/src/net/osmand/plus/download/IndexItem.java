@@ -192,7 +192,7 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 			return (FileNameTranslationHelper.HILL_SHADE + "_" + getBasename()).replace("_", " ");
 		} else if (type == DownloadActivityType.SLOPE_FILE) {
 			return (FileNameTranslationHelper.SLOPE + "_" + getBasename()).replace('_', ' ');
-		} else if (type == DownloadActivityType.HEIGHTMAP_FILE_LEGACY || type == DownloadActivityType.GEOTIFF_FILE) {
+		} else if (type == DownloadActivityType.GEOTIFF_FILE) {
 			return (FileNameTranslationHelper.HEIGHTMAP + "_" + getBasename()).replace('_', ' ');
 		} else {
 			return getBasename();
@@ -230,7 +230,6 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		return outdated
 				&& getType() != DownloadActivityType.HILLSHADE_FILE
 				&& getType() != DownloadActivityType.SLOPE_FILE
-				&& getType() != DownloadActivityType.HEIGHTMAP_FILE_LEGACY
 				&& getType() != DownloadActivityType.GEOTIFF_FILE;
 	}
 

@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+@Deprecated
 public class GPXTrackAnalysis {
 
 	public static final Log LOG = PlatformUtil.getLog(GPXTrackAnalysis.class);
@@ -57,8 +58,8 @@ public class GPXTrackAnalysis {
 	public double top = 0;
 	public double bottom = 0;
 
-	public List<PointAttributes> pointAttributes;
-	public Set<String> availableAttributes;
+	public List<PointAttributes> pointAttributes = new ArrayList<>();
+	public Set<String> availableAttributes = new HashSet<>();
 
 	public boolean hasSpeedInTrack = false;
 

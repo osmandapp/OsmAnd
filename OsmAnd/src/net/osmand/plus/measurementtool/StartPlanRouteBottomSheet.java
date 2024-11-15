@@ -160,7 +160,7 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 
 	void finishImport(boolean success) {
 		if (success) {
-			dismiss();
+			dismissAllowingStateLoss();
 		}
 	}
 

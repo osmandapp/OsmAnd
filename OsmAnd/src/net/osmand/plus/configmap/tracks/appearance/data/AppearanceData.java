@@ -5,7 +5,8 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GpxParameter;
+import net.osmand.plus.shared.SharedUtil;
+import net.osmand.shared.gpx.GpxParameter;
 import net.osmand.util.Algorithms;
 
 import java.util.HashMap;
@@ -32,10 +33,9 @@ public class AppearanceData {
 	}
 
 	@Nullable
-	@SuppressWarnings("unchecked")
 	public <T> T getParameter(@NonNull GpxParameter parameter) {
 		Pair<Boolean, Object> pair = map.get(parameter);
-		return pair != null ? ((Class<T>) parameter.getTypeClass()).cast(pair.second) : null;
+		return pair != null ? SharedUtil.castGpxParameter(parameter, pair.second) : null;
 	}
 
 	public boolean setParameter(@NonNull GpxParameter parameter, @Nullable Object value) {
@@ -65,7 +65,7 @@ public class AppearanceData {
 	}
 
 	public boolean shouldResetAnything() {
-		for (GpxParameter parameter : GpxParameter.getAppearanceParameters()) {
+		for (GpxParameter parameter : GpxParameter.Companion.getAppearanceParameters()) {
 			if (shouldResetParameter(parameter)) {
 				return true;
 			}
@@ -74,7 +74,8 @@ public class AppearanceData {
 	}
 
 	public boolean isValidValue(@NonNull GpxParameter parameter, @Nullable Object value) {
-		return parameter.isAppearanceParameter() && (value == null || parameter.getTypeClass() == value.getClass());
+		return parameter.isAppearanceParameter()
+				&& (value == null || SharedUtil.isGpxParameterClass(parameter, value.getClass()));
 	}
 
 	private void notifyAppearanceModified() {

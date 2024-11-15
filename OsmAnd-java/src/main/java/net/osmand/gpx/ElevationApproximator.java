@@ -40,8 +40,7 @@ public abstract class ElevationApproximator {
 
 		boolean[] survived = new boolean[pointsCount];
 		int lastSurvived = 0;
-		survived[0] = true;
-		int survidedCount = 1;
+		int survidedCount = 0;
 		for (int i = 1; i < pointsCount - 1; i++) {
 			double prevEle = getPointElevation(lastSurvived);
 			double ele = getPointElevation(i);
@@ -52,15 +51,13 @@ public abstract class ElevationApproximator {
 				survidedCount++;
 			}
 		}
-		survived[pointsCount - 1] = true;
-		survidedCount++;
-		if (survidedCount < 4) {
+		if (survidedCount < 2) {
 			return false;
 		}
 
 		lastSurvived = 0;
-		survidedCount = 1;
-		for (int i = 1; i < pointsCount; i++) {
+		survidedCount = 0;
+		for (int i = 1; i < pointsCount - 1; i++) {
 			if (!survived[i]) {
 				continue;
 			}
@@ -76,19 +73,20 @@ public abstract class ElevationApproximator {
 			lastSurvived = i;
 			survidedCount++;
 		}
-		if (survidedCount < 4) {
+		if (survidedCount < 2) {
 			return false;
 		}
-
-		double[] distances = new double[survidedCount];
-		double[] elevations = new double[survidedCount];
+		survived[0] = true;
+		survived[pointsCount - 1] = true;
+		double[] distances = new double[survidedCount + 2];
+		double[] elevations = new double[survidedCount + 2];
 		int k = 0;
 		lastSurvived = 0;
 		for (int i = 0; i < pointsCount; i++) {
-			if (!survived[i] || k == survidedCount) {
+			if (!survived[i] ) {
 				continue;
 			}
-			distances[k] = lastSurvived == i ? 0 :
+			distances[k] = lastSurvived == 0 ? 0 :
 					MapUtils.getDistance(getPointLatitude(i), getPointLongitude(i),
 					getPointLatitude(lastSurvived), getPointLongitude(lastSurvived));
 			elevations[k] = getPointElevation(i);

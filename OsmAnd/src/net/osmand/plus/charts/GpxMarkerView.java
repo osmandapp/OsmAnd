@@ -22,7 +22,7 @@ import com.github.mikephil.charting.utils.MPPointF;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;

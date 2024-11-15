@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?attr/bg_color"
     android:minHeight="60dp"
     tools:layout_height="60dp">
@@ -107,7 +107,7 @@
         android:textSize="@dimen/default_list_text_size"
         android:textColor="@color/buy_button_color"
         android:text="@string/shared_string_get"
-        osmand:textAllCapsCompat="true"
+        android:textAllCaps="true"
 	    android:paddingEnd="18dp"
 	    android:paddingStart="18dp" />
 

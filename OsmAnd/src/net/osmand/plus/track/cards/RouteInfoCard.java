@@ -10,8 +10,8 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import net.osmand.data.LatLon;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.OsmRouteType;
@@ -20,7 +20,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
+import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
@@ -45,9 +45,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
-import static net.osmand.plus.utils.AndroidUtils.getActivityTypeStringPropertyName;
-import static net.osmand.plus.utils.AndroidUtils.getStringByProperty;
-import static net.osmand.util.Algorithms.capitalizeFirstLetterAndLowercase;
 
 public class RouteInfoCard extends MapBaseCard {
 
@@ -63,12 +60,12 @@ public class RouteInfoCard extends MapBaseCard {
 
 
 	private final RouteKey routeKey;
-	private final GPXFile gpxFile;
+	private final GpxFile gpxFile;
 
 	public RouteInfoCard(
 			@NonNull MapActivity activity,
 			@NonNull RouteKey routeKey,
-			@NonNull GPXFile gpxFile
+			@NonNull GpxFile gpxFile
 	) {
 		super(activity);
 		this.routeKey = routeKey;
@@ -85,11 +82,7 @@ public class RouteInfoCard extends MapBaseCard {
 		LinearLayout container = view.findViewById(R.id.items_container);
 		container.removeAllViews();
 
-		RouteKey routeKey = this.routeKey;
-		String routeTypeName = routeKey.type.getName();
-
-		String routeTypeToDisplay = capitalizeFirstLetterAndLowercase(routeTypeName);
-		routeTypeToDisplay = getActivityTypeStringPropertyName(app, routeTypeName, routeTypeToDisplay);
+		String routeTypeToDisplay = AndroidUtils.getActivityTypeTitle(app, routeKey.type);
 		addInfoRow(container, app.getString(R.string.layer_route), routeTypeToDisplay, false, false);
 
 		for (TagsRow row : getRows()) {
@@ -245,7 +238,7 @@ public class RouteInfoCard extends MapBaseCard {
 		List<LatLon> points = new ArrayList<>();
 		if (gpxFile != null) {
 			for (WptPt wptPt : gpxFile.getAllPoints()) {
-				points.add(new LatLon(wptPt.lat, wptPt.lon));
+				points.add(new LatLon(wptPt.getLat(), wptPt.getLon()));
 			}
 		}
 		return points;
@@ -291,14 +284,14 @@ public class RouteInfoCard extends MapBaseCard {
 					return app.getString(translatableKey.getValue());
 				}
 			}
-			return poiType != null ? poiType.getTranslation() : capitalizeFirstLetterAndLowercase(key);
+			return poiType != null ? poiType.getTranslation() : Algorithms.capitalizeFirstLetterAndLowercase(key);
 		}
 
 		@NonNull
 		public String getFormattedValue(@NonNull OsmandApplication app, @NonNull OsmRouteType routeType) {
 			switch (key) {
 				case "network":
-					String network = getStringByProperty(app, "poi_route_" + routeType.getName() + "_" + value + "_poi");
+					String network = AndroidUtils.getStringByProperty(app, "poi_route_" + routeType.getName() + "_" + value + "_poi");
 					return Algorithms.isEmpty(network) ? value : network;
 				case "wikipedia":
 					return WikiAlgorithms.getWikiUrl(value);
@@ -341,7 +334,7 @@ public class RouteInfoCard extends MapBaseCard {
 				}
 			}
 
-			Locale preferredLocale = AmenityMenuBuilder.getPreferredNameLocale(app, localeIds);
+			Locale preferredLocale = LocaleHelper.getPreferredNameLocale(app, localeIds);
 			String preferredLocaleId = preferredLocale != null ? preferredLocale.getLanguage() : null;
 			boolean finalHasNativeName = hasNativeName;
 

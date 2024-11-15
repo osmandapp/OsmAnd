@@ -1,5 +1,6 @@
 package net.osmand.plus.measurementtool;
 
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -16,7 +17,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -26,10 +26,11 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.OptionsDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleDividerItem;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -55,7 +56,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 		View titleView = UiUtilities.getInflater(getContext(), nightMode)
 				.inflate(R.layout.bottom_sheet_item_with_descr_pad_32dp, null, false);
 		TextView title = titleView.findViewById(R.id.title);
-		title.setTypeface(FontCache.getRobotoMedium(getActivity()));
+		title.setTypeface(FontCache.getMediumFont());
 
 		BaseBottomSheetItem titleItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getDescription(true))
@@ -348,7 +349,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 	@NonNull
 	private String getTitle() {
 		int pos = editingCtx.getSelectedPointPosition();
-		String pointName = editingCtx.getPoints().get(pos).name;
+		String pointName = editingCtx.getPoints().get(pos).getName();
 		if (!TextUtils.isEmpty(pointName)) {
 			return pointName;
 		}
@@ -368,7 +369,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 		int pos = editingCtx.getSelectedPointPosition();
 		List<WptPt> points = editingCtx.getPoints();
 		WptPt pt = points.get(pos);
-		String pointDesc = pt.desc;
+		String pointDesc = pt.getDesc();
 		if (!TextUtils.isEmpty(pointDesc)) {
 			description.append(pointDesc);
 		} else if (pos < 1 && before) {
@@ -377,12 +378,12 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 			float distance = getTrimmedDistance(editingCtx, before);
 			description.append(OsmAndFormatter.getFormattedDistance(distance, app));
 		}
-		double elevation = pt.ele;
+		double elevation = pt.getEle();
 		if (!Double.isNaN(elevation)) {
 			description.append("  ").append((getString(R.string.altitude)).charAt(0)).append(": ");
 			description.append(OsmAndFormatter.getFormattedAlt(elevation, app));
 		}
-		float speed = (float) pt.speed;
+		float speed = (float) pt.getSpeed();
 		if (speed != 0) {
 			description.append("  ").append((getString(R.string.shared_string_speed)).charAt(0)).append(": ");
 			description.append(OsmAndFormatter.getFormattedSpeed(speed, app));
@@ -412,7 +413,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 			boolean routeSegmentBuilt = segment != null && segment.getDistance() > 0;
 			dist += routeSegmentBuilt
 					? segment.getDistance()
-					: MapUtils.getDistance(first.lat, first.lon, second.lat, second.lon);
+					: MapUtils.getDistance(first.getLat(), first.getLon(), second.getLat(), second.getLon());
 		}
 
 		return dist;

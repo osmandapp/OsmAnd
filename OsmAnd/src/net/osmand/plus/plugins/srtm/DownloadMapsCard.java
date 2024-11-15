@@ -3,7 +3,6 @@ package net.osmand.plus.plugins.srtm;
 import static net.osmand.plus.download.DownloadActivityType.GEOTIFF_FILE;
 import static net.osmand.plus.download.DownloadActivityType.HILLSHADE_FILE;
 import static net.osmand.plus.download.DownloadActivityType.SLOPE_FILE;
-import static net.osmand.plus.plugins.srtm.TerrainMode.HILLSHADE;
 
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -196,7 +195,7 @@ public class DownloadMapsCard {
 		if (plugin != null && plugin.generateTerrainFrom3DMaps()) {
 			return GEOTIFF_FILE;
 		} else {
-			return srtmPlugin.getTerrainMode() == HILLSHADE ? HILLSHADE_FILE : SLOPE_FILE;
+			return srtmPlugin.getTerrainMode().isHillshade() ? HILLSHADE_FILE : SLOPE_FILE;
 		}
 	}
 

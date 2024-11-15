@@ -6,7 +6,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -36,6 +35,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.QuickAction.QuickActionSelectionListener;
 import net.osmand.plus.quickaction.actions.NewAction;
+import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -88,7 +88,9 @@ public class QuickActionsWidget extends LinearLayout {
 
 	public void updateActions() {
 		QuickActionButtonState buttonState = selectedButton.getButtonState();
-		setActions(new ArrayList<>(buttonState.getQuickActions()));
+		if (buttonState != null) {
+			setActions(new ArrayList<>(buttonState.getQuickActions()));
+		}
 	}
 
 	public void setActions(@NonNull List<QuickAction> actions) {
@@ -193,14 +195,15 @@ public class QuickActionsWidget extends LinearLayout {
 	}
 
 	private View createPageView(@NonNull ViewGroup container, int position) {
+		Context context = getContext();
 		boolean light = settings.isLightContent() && !app.getDaynightHelper().isNightMode();
-		LayoutInflater inflater = UiUtilities.getInflater(container.getContext(), !light);
+		LayoutInflater inflater = UiUtilities.getInflater(context, !light);
 
 		View page = inflater.inflate(R.layout.quick_action_widget_page, container, false);
 		GridLayout gridLayout = page.findViewById(R.id.grid);
 
 		QuickActionButtonState buttonState = selectedButton.getButtonState();
-		boolean land = !AndroidUiHelper.isOrientationPortrait((Activity) getContext());
+		boolean land = !AndroidUiHelper.isOrientationPortrait(context);
 		int maxItems = actions.size() == 1 ? 1 : ACTIONS_PER_PAGE;
 
 		for (int i = 0; i < maxItems; i++) {
@@ -211,7 +214,7 @@ public class QuickActionsWidget extends LinearLayout {
 						actions.get(i + (position * ACTIONS_PER_PAGE)));
 
 				((ImageView) view.findViewById(imageView))
-						.setImageResource(action.getIconRes(app));
+						.setImageResource(action.getIconRes(context));
 
 				((TextView) view.findViewById(R.id.title))
 						.setText(action.getActionText(app));
@@ -235,7 +238,7 @@ public class QuickActionsWidget extends LinearLayout {
 					if (action instanceof NewAction) {
 						QuickActionListFragment.showInstance(activity, buttonState);
 					} else {
-						CreateEditActionDialog.showInstance(fragmentManager, buttonState, action);
+						AddQuickActionController.showCreateEditActionDialog(app, fragmentManager, buttonState, action);
 					}
 					return true;
 				});
@@ -294,7 +297,7 @@ public class QuickActionsWidget extends LinearLayout {
 		AnimatorSet set = new AnimatorSet();
 		List<Animator> animators = new ArrayList<>();
 
-		int[] coordinates = AndroidUtils.getCenterViewCoordinates(selectedButton.getView());
+		int[] coordinates = AndroidUtils.getCenterViewCoordinates(selectedButton);
 
 		int centerX = getWidth() / 2;
 		int centerY = getHeight() / 2;

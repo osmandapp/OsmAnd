@@ -31,7 +31,7 @@
 			android:layout_height="wrap_content"
 			android:textColor="?android:textColorSecondary"
 			android:textSize="@dimen/default_desc_text_size"
-			app:typeface="@string/font_roboto_regular"
+			android:textStyle="normal"
 			tools:text="@string/shared_string_size" />
 
 		<net.osmand.plus.widgets.TextViewEx
@@ -40,7 +40,7 @@
 			android:layout_height="wrap_content"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
-			app:typeface="@string/font_roboto_regular"
+			android:textStyle="normal"
 			tools:text="9.7 mb" />
 
 	</LinearLayout>

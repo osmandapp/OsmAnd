@@ -1,25 +1,6 @@
 package net.osmand.plus.dashboard;
 
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.CONFIGURE_MAP;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.CONTOUR_LINES;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.CYCLE_ROUTES;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.DASHBOARD;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.DIFFICULTY_CLASSIFICATION;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.HIKING_ROUTES;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.MAPILLARY;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.MTB_ROUTES;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.NAUTICAL_DEPTH;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.OSM_NOTES;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.OVERLAY_MAP;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.RELIEF_3D;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TERRAIN;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TRANSPORT_LINES;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TRAVEL_ROUTES;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.UNDERLAY_MAP;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WEATHER;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WEATHER_CONTOURS;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WEATHER_LAYER;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WIKIPEDIA;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.*;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -35,20 +16,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewAnimationUtils;
+import android.view.ViewGroup;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AbsListView;
+import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
-import android.widget.ProgressBar;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
@@ -69,9 +43,9 @@ import net.osmand.data.ValueHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.configmap.AlpineHikingScaleFragment;
 import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.configmap.CycleRoutesFragment;
-import net.osmand.plus.configmap.DifficultyClassificationFragment;
 import net.osmand.plus.configmap.HikingRoutesFragment;
 import net.osmand.plus.configmap.MtbRoutesFragment;
 import net.osmand.plus.configmap.TravelRoutesFragment;
@@ -108,6 +82,7 @@ import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
@@ -155,7 +130,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	private final MapActivity mapActivity;
 	private ImageView actionButton;
-	private View compassButton;
+	private MapButton compassButton;
 	private FrameLayout dashboardView;
 
 	private ArrayAdapter<?> listAdapter;
@@ -212,7 +187,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		WEATHER_CONTOURS,
 		NAUTICAL_DEPTH,
 		MTB_ROUTES,
-		DIFFICULTY_CLASSIFICATION
+		ALPINE_HIKING
 	}
 
 	private final Map<DashboardActionButtonType, DashboardActionButton> actionButtons = new HashMap<>();
@@ -348,7 +323,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			tv.setText(R.string.osm_notes);
 		} else if (isCurrentType(TERRAIN)) {
 			tv.setText(R.string.shared_string_terrain);
-		}else if (isCurrentType(RELIEF_3D)) {
+		} else if (isCurrentType(RELIEF_3D)) {
 			tv.setText(R.string.relief_3d);
 		} else if (isCurrentType(WIKIPEDIA)) {
 			tv.setText(R.string.shared_string_wikipedia);
@@ -376,7 +351,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			tv.setText(R.string.nautical_depth);
 		} else if (isCurrentType(MTB_ROUTES)) {
 			tv.setText(R.string.app_mode_mountain_bicycle);
-		} else if (isCurrentType(DIFFICULTY_CLASSIFICATION)) {
+		} else if (isCurrentType(ALPINE_HIKING)) {
 			tv.setText(R.string.rendering_attr_alpineHiking_name);
 		}
 		ImageView edit = dashboardView.findViewById(R.id.toolbar_edit);
@@ -579,9 +554,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			} else {
 				hideActionButton();
 				if (isCurrentType(CONFIGURE_MAP)) {
-					int btnSizePx = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_small_button_size);
-					compassButton = mapActivity.getMapLayers().getMapControlsLayer()
-							.moveCompassButton(dashboardView, getActionButtonLayoutParams(btnSizePx));
+					int size = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_small_button_size);
+					compassButton = dashboardView.findViewById(R.id.map_compass_button);
+					compassButton.setVisibility(View.VISIBLE);
+					compassButton.setLayoutParams(getActionButtonLayoutParams(size));
+					mapActivity.getMapLayers().getMapControlsLayer().addCustomMapButton(compassButton);
 				}
 			}
 			updateDownloadBtn();
@@ -607,7 +584,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					NauticalDepthContourFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(TERRAIN)) {
 					TerrainFragment.showInstance(fragmentManager);
-				}else if (isCurrentType(RELIEF_3D)) {
+				} else if (isCurrentType(RELIEF_3D)) {
 					Relief3DFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(WEATHER)) {
 					WeatherMainFragment.showInstance(fragmentManager);
@@ -617,8 +594,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					WeatherContoursFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(MTB_ROUTES)) {
 					MtbRoutesFragment.showInstance(fragmentManager);
-				} else if (isCurrentType(DIFFICULTY_CLASSIFICATION)) {
-					DifficultyClassificationFragment.showInstance(fragmentManager);
+				} else if (isCurrentType(ALPINE_HIKING)) {
+					AlpineHikingScaleFragment.showInstance(fragmentManager);
 				}
 				scrollView.setVisibility(View.VISIBLE);
 				listViewLayout.setVisibility(View.GONE);
@@ -685,7 +662,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		}
 		if (isNoCurrentType(CONFIGURE_MAP, CONTOUR_LINES, TERRAIN, CYCLE_ROUTES, HIKING_ROUTES,
 				TRAVEL_ROUTES, OSM_NOTES, WIKIPEDIA, TRANSPORT_LINES, WEATHER, WEATHER_LAYER,
-				WEATHER_CONTOURS, NAUTICAL_DEPTH, MTB_ROUTES, DIFFICULTY_CLASSIFICATION)) {
+				WEATHER_CONTOURS, NAUTICAL_DEPTH, MTB_ROUTES, ALPINE_HIKING)) {
 			listView.setDivider(dividerDrawable);
 			listView.setDividerHeight(AndroidUtils.dpToPx(mapActivity, 1f));
 		} else {
@@ -793,7 +770,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			refreshFragment(MapillaryFiltersFragment.TAG);
 		} else if (isCurrentType(TERRAIN)) {
 			refreshFragment(TerrainFragment.TAG);
-		}else if (isCurrentType(RELIEF_3D)) {
+		} else if (isCurrentType(RELIEF_3D)) {
 			refreshFragment(Relief3DFragment.TAG);
 		} else if (isCurrentType(CYCLE_ROUTES)) {
 			refreshFragment(CycleRoutesFragment.TAG);
@@ -813,9 +790,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			refreshFragment(NauticalDepthContourFragment.TAG);
 		} else if (isCurrentType(MTB_ROUTES)) {
 			refreshFragment(MtbRoutesFragment.TAG);
-		} else if (isCurrentType(DIFFICULTY_CLASSIFICATION)) {
-			refreshFragment(DifficultyClassificationFragment.TAG);
-		} else {
+		} else if (isCurrentType(ALPINE_HIKING)) {
+			refreshFragment(AlpineHikingScaleFragment.TAG);
+		} else if (listAdapter != null) {
 			listAdapter.notifyDataSetChanged();
 		}
 	}
@@ -993,7 +970,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	private void hide(boolean animation) {
 		if (compassButton != null) {
-			mapActivity.getMapLayers().getMapControlsLayer().restoreCompassButton();
+			mapActivity.getMapLayers().getMapControlsLayer().clearCustomMapButtons();
 			compassButton = null;
 		}
 		if (!animation) {
@@ -1048,7 +1025,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		return isCurrentType(
 				CONFIGURE_MAP, MAPILLARY, TERRAIN, RELIEF_3D, CYCLE_ROUTES, HIKING_ROUTES,
 				TRAVEL_ROUTES, TRANSPORT_LINES, WEATHER, WEATHER_LAYER,
-				WEATHER_CONTOURS, NAUTICAL_DEPTH, MTB_ROUTES, DIFFICULTY_CLASSIFICATION
+				WEATHER_CONTOURS, NAUTICAL_DEPTH, MTB_ROUTES, ALPINE_HIKING
 		);
 	}
 
@@ -1204,13 +1181,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			double scale = mapActivity.getResources().getDisplayMetrics().density;
 			int originalPosition = mFlexibleSpaceImageHeight - (int) (64 * scale);
 			int minTop = mFlexibleBlurSpaceHeight + (int) (5 * scale);
-			FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) compassButton.getLayoutParams();
+			MarginLayoutParams lp = (MarginLayoutParams) compassButton.getLayoutParams();
 			if (minTop > originalPosition - scrollY) {
 				hideActionButton();
 			} else {
 				compassButton.setVisibility(View.VISIBLE);
 				lp.topMargin = originalPosition - scrollY;
-				((FrameLayout) compassButton.getParent()).updateViewLayout(compassButton, lp);
+				((ViewGroup) compassButton.getParent()).updateViewLayout(compassButton, lp);
 			}
 		}
 	}

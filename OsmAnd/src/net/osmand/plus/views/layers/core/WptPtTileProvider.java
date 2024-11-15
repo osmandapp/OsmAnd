@@ -6,7 +6,7 @@ import android.graphics.Bitmap;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapTiledCollectionProvider;
@@ -39,8 +39,8 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
 
    private final QListPointI points31 = new QListPointI();
    private final List<MapLayerData> mapLayerDataList = new ArrayList<>();
-   private final Map<Integer, Bitmap> bigBitmapCache = new ConcurrentHashMap<>();
-   private final Map<Integer, Bitmap> smallBitmapCache = new ConcurrentHashMap<>();
+   private final Map<Long, Bitmap> bigBitmapCache = new ConcurrentHashMap<>();
+   private final Map<Long, Bitmap> smallBitmapCache = new ConcurrentHashMap<>();
 
    private MapTiledCollectionProvider providerInstance;
    private final PointI offset;
@@ -117,9 +117,9 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
          return SwigUtilities.nullSkImage();
       }
       Bitmap bitmap;
+      long key = data.getKey();
       if (isFullSize) {
-         int bigBitmapKey = data.getKey();
-         bitmap = bigBitmapCache.get(bigBitmapKey);
+         bitmap = bigBitmapCache.get(key);
          if (bitmap == null) {
             PointImageDrawable pointImageDrawable;
             if (data.hasMarker) {
@@ -128,16 +128,15 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
                pointImageDrawable = PointImageUtils.getFromPoint(ctx, data.color, data.withShadow, data.wptPt);
             }
             bitmap = pointImageDrawable.getBigMergedBitmap(data.textScale, data.history);
-            bigBitmapCache.put(bigBitmapKey, bitmap);
+            bigBitmapCache.put(key, bitmap);
          }
       } else {
-         int smallBitmapKey = data.getKey();
-         bitmap = smallBitmapCache.get(smallBitmapKey);
+         bitmap = smallBitmapCache.get(key);
          if (bitmap == null) {
             PointImageDrawable pointImageDrawable = PointImageUtils.getFromPoint(ctx, data.color,
                     data.withShadow, data.wptPt);
             bitmap = pointImageDrawable.getSmallMergedBitmap(data.textScale);
-            smallBitmapCache.put(smallBitmapKey, bitmap);
+            smallBitmapCache.put(key, bitmap);
          }
       }
       return bitmap != null ? NativeUtilities.createSkImageFromBitmap(bitmap) : SwigUtilities.nullSkImage();
@@ -146,7 +145,7 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
    @Override
    public String getCaption(int index) {
       MapLayerData data = index < mapLayerDataList.size() ? mapLayerDataList.get(index) : null;
-      return data != null ? data.wptPt.name : "";
+      return data != null ? data.wptPt.getName() : "";
    }
 
    @Override
@@ -215,13 +214,9 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
          this.textScale = textScale;
       }
 
-      int getKey() {
-         long hash = ((long) color << 6) + ((long) wptPt.hashCode() << 4) + ((withShadow ? 1 : 0) << 3)
+      long getKey() {
+         return ((long) color << 6) + ((long) wptPt.hashCode() << 4) + ((withShadow ? 1 : 0) << 3)
                  + ((hasMarker ? 1 : 0) << 2) + (int) (textScale * 10) + (history ? 1 : 0);
-         if (hash >= Integer.MAX_VALUE || hash <= Integer.MIN_VALUE) {
-            return (int) (hash >> 4);
-         }
-         return (int) hash;
       }
    }
 }

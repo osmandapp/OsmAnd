@@ -1,6 +1,7 @@
 package net.osmand.plus.helpers;
 
 import static net.osmand.plus.backup.BackupListeners.OnRegisterDeviceListener;
+import static net.osmand.plus.configmap.tracks.PreselectedTabParams.CALLING_FRAGMENT_TAG;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_NAME;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_TYPE;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.SELECT_ALL_ITEMS_ON_TAB;
@@ -26,10 +27,10 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.gpx.GPXUtilities.PointsGroup;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.map.TileSourceManager;
-import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializeListener;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -52,13 +53,16 @@ import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.dialogs.EditFavoriteGroupDialogFragment;
+import net.osmand.plus.notifications.GpxNotification;
 import net.osmand.plus.plugins.PluginsFragment;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.ExportSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
@@ -558,11 +562,12 @@ public class IntentHelper {
 			Bundle extras = intent.getExtras();
 			if (extras != null && intent.hasExtra(PRESELECTED_TRACKS_TAB_NAME) && intent.hasExtra(PRESELECTED_TRACKS_TAB_TYPE)) {
 				String name = extras.getString(PRESELECTED_TRACKS_TAB_NAME, TrackTabType.ALL.name());
+				String callingFragmentTag = extras.getString(CALLING_FRAGMENT_TAG, null);
 				TrackTabType type = AndroidUtils.getSerializable(extras, PRESELECTED_TRACKS_TAB_TYPE, TrackTabType.class);
 				boolean selectAllItems = intent.getBooleanExtra(SELECT_ALL_ITEMS_ON_TAB, false);
 
 				PreselectedTabParams params = new PreselectedTabParams(name, type != null ? type : TrackTabType.ALL, selectAllItems);
-				TracksTabsFragment.showInstance(mapActivity.getSupportFragmentManager(), params);
+				TracksTabsFragment.showInstance(mapActivity.getSupportFragmentManager(), params, callingFragmentTag);
 				clearIntent(intent);
 			}
 			if (intent.hasExtra(ExportSettingsFragment.SELECTED_TYPES)) {
@@ -577,8 +582,16 @@ public class IntentHelper {
 				BackupAuthorizationFragment.showInstance(mapActivity.getSupportFragmentManager());
 				clearIntent(intent);
 			}
+			if (intent.hasExtra(GpxNotification.OSMAND_START_GPX_SERVICE_ACTION)) {
+				OsmandMonitoringPlugin plugin = PluginsHelper.getActivePlugin(OsmandMonitoringPlugin.class);
+				if (plugin != null) {
+					plugin.startGPXMonitoring(null);
+					plugin.updateWidgets();
+				}
+				clearIntent(intent);
+			}
 			if (intent.getExtras() != null) {
-				if (extras.containsKey(ChoosePlanFragment.OPEN_CHOOSE_PLAN)) {
+				if (extras != null && extras.containsKey(ChoosePlanFragment.OPEN_CHOOSE_PLAN)) {
 					String featureValue = extras.getString(ChoosePlanFragment.CHOOSE_PLAN_FEATURE);
 					if (!Algorithms.isEmpty(featureValue)) {
 						try {

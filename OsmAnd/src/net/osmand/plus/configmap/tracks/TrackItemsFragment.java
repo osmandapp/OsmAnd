@@ -18,6 +18,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.track.BaseTracksTabsFragment;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.util.MapUtils;
 
 import java.util.Set;

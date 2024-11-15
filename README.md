@@ -89,6 +89,7 @@ The project experiences continuous improvement by all such forms of developer an
 The project progress also relies on financial contributions to fund the development, coding, and testing of new functionality.
 By buying OsmAnd+ and subscribing to OsmAnd Pro (see https://osmand.net/docs/user/purchases/), you help the application become even more awesome!
 
+The technical documentation on how to build OsmAnd can be found at https://www.osmand.net/docs/technical/build-osmand/
 
 #### Map Coverage and Quality - How Good is OSM Data?
 

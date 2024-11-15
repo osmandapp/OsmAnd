@@ -22,30 +22,25 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.controls.MapHudLayout.SizeChangeListener;
+import net.osmand.plus.views.controls.MapHudLayout.ViewChangeProvider;
+import net.osmand.plus.views.controls.MapHudLayout.VisibilityChangeListener;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportMultiRow;
+import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
 import net.osmand.plus.views.mapwidgets.widgets.LanesWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapMarkersBarWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
-import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
-public class VerticalWidgetPanel extends LinearLayout {
+public class VerticalWidgetPanel extends LinearLayout implements WidgetsContainer, ViewChangeProvider {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -53,6 +48,8 @@ public class VerticalWidgetPanel extends LinearLayout {
 
 	private Map<Integer, Row> visibleRows = new HashMap<>();
 	private boolean topPanel;
+	private SizeChangeListener sizeListener;
+	private VisibilityChangeListener visibilityListener;
 	private boolean nightMode;
 
 	public VerticalWidgetPanel(@NonNull Context context) {
@@ -232,22 +229,22 @@ public class VerticalWidgetPanel extends LinearLayout {
 
 	private void updateValueAlign(List<MapWidgetInfo> widgetsInRow, int visibleViewsInRowCount) {
 		for (MapWidgetInfo widgetInfo : widgetsInRow) {
-			if (widgetInfo.widget instanceof SimpleWidget) {
-				((SimpleWidget) widgetInfo.widget).updateValueAlign(visibleViewsInRowCount <= 1);
+			if (widgetInfo.widget instanceof ISupportMultiRow supportMultiRow) {
+				supportMultiRow.updateValueAlign(visibleViewsInRowCount <= 1);
 			}
 		}
 	}
 
 	private void updateFullRowState(List<MapWidgetInfo> widgetsInRow, int visibleViewsInRowCount) {
 		for (MapWidgetInfo widgetInfo : widgetsInRow) {
-			if (widgetInfo.widget instanceof SimpleWidget) {
-				((SimpleWidget) widgetInfo.widget).updateFullRowState(visibleViewsInRowCount <= 1);
+			if (widgetInfo.widget instanceof ISupportMultiRow supportMultiRow) {
+				supportMultiRow.updateFullRowState(visibleViewsInRowCount <= 1);
 			}
 		}
 	}
 
 	@NonNull
-	private List<Set<MapWidgetInfo>> getWidgetsToShow(ApplicationMode mode, List<MapWidget> widgetsToShow) {
+	protected List<Set<MapWidgetInfo>> getWidgetsToShow(ApplicationMode mode, List<MapWidget> widgetsToShow) {
 		Set<MapWidgetInfo> allPanelWidget = widgetRegistry.getWidgetsForPanel(getWidgetsPanel());
 
 		Map<Integer, Set<MapWidgetInfo>> rowWidgetMap = new TreeMap<>();
@@ -263,7 +260,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 	}
 
 	private void addWidgetViewToPage(@NonNull Map<Integer, Set<MapWidgetInfo>> mapInfoWidgets,
-									 int pageIndex, @NonNull MapWidgetInfo mapWidgetInfo) {
+	                                 int pageIndex, @NonNull MapWidgetInfo mapWidgetInfo) {
 		Set<MapWidgetInfo> widgetsViews = mapInfoWidgets.get(pageIndex);
 		if (widgetsViews == null) {
 			widgetsViews = new TreeSet<>();
@@ -298,8 +295,38 @@ public class VerticalWidgetPanel extends LinearLayout {
 		return topPanel ? WidgetsPanel.TOP : WidgetsPanel.BOTTOM;
 	}
 
+	public boolean isTopPanel() {
+		return topPanel;
+	}
+
 	private void addVerticalDivider(@NonNull ViewGroup container) {
 		inflate(UiUtilities.getThemedContext(getContext(), nightMode), R.layout.vertical_divider, container);
+	}
+
+	@Override
+	public void setSizeListener(@Nullable SizeChangeListener listener) {
+		this.sizeListener = listener;
+	}
+
+	@Override
+	public void setVisibilityListener(@Nullable VisibilityChangeListener listener) {
+		this.visibilityListener = listener;
+	}
+
+	@Override
+	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+		super.onSizeChanged(w, h, oldw, oldh);
+		if (sizeListener != null) {
+			sizeListener.onSizeChanged(this, w, h, oldw, oldh);
+		}
+	}
+
+	@Override
+	protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
+		super.onVisibilityChanged(changedView, visibility);
+		if (visibilityListener != null) {
+			visibilityListener.onVisibilityChanged(changedView, visibility);
+		}
 	}
 
 	private class Row {
@@ -390,12 +417,10 @@ public class VerticalWidgetPanel extends LinearLayout {
 		}
 
 		private void setupWidgetSize(@NonNull MapWidgetInfo firstWidgetInfo, @NonNull MapWidgetInfo widgetInfo) {
-			if (firstWidgetInfo.widget instanceof SimpleWidget && widgetInfo.widget instanceof SimpleWidget) {
-				SimpleWidget firstSimpleWidget = (SimpleWidget) firstWidgetInfo.widget;
-				SimpleWidget simpleWidget = (SimpleWidget) widgetInfo.widget;
-				if (firstSimpleWidget.getWidgetSizePref().get() != simpleWidget.getWidgetSizePref().get()) {
-					simpleWidget.getWidgetSizePref().set(firstSimpleWidget.getWidgetSizePref().get());
-					simpleWidget.recreateView();
+			if (firstWidgetInfo.widget instanceof ISupportWidgetResizing firstResizableWidget && widgetInfo.widget instanceof ISupportWidgetResizing secondResizableWidget) {
+				if (firstResizableWidget.getWidgetSizePref().get() != secondResizableWidget.getWidgetSizePref().get()) {
+					secondResizableWidget.getWidgetSizePref().set(firstResizableWidget.getWidgetSizePref().get());
+					secondResizableWidget.recreateView();
 				}
 			}
 		}

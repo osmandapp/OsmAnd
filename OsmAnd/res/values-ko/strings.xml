@@ -678,7 +678,6 @@
     <string name="driving_region_us">미국</string>
     <string name="driving_region_canada">캐나다</string>
     <string name="driving_region_europe_asia">한국 &amp; 유럽</string>
-    <string name="driving_region_uk">영국, 인도, 호주 및 기타</string>
     <string name="speak_title">안내…</string>
     <string name="speak_descr">거리 이름, 교통 경고(강제 정지, 속도 범프), 속도 카메라 경고, 제한 속도를 알리기 위해  구성합니다</string>
     <string name="speak_street_names">도로명 (TTS)</string>
@@ -909,19 +908,7 @@
 \nOsmAnd+ 를 구입, 또는 특정 새로운 기능에 자금을 지원하거나 osmand.net 에 일반 후원을 부탁드립니다. "</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ 지도 및 내비게이션</string>
     <string name="osmand_plus_short_description_80_chars">글로벌 모바일 지도보기 및 오프라인 및 온라인 OSM 지도를 위한 운행</string>
-    <string name="osmand_plus_long_description_1000_chars">" OsmAnd + (OSM 자동 안내 및 안내 ) OsmAnd + 글로벌 OpenStreetMap의 다양한 (OSM) 데이터에 접근할 수 있는 오픈 소스 운행 응용 프로그램입니다. 모든 지도 데이터 (벡터 또는 타일 맵 ) 오프라인 사용에 대한 휴대 전화 메모리 카드에 저장할 수 있습니다. OsmAnd 또한 턴-바이-턴 안내 등의 오프라인 및 온라인 라우팅 기능을 제공합니다. OsmAnd+는 프로젝트를 지원하는 새로운 기능의 개발을 투자하고, 최신 업데이트를 받을 수 있도록 구입하여 사용할 수 있는 유료 응용 프로그램 버전입니다.
-\n\n핵심 기능 중 일부 :
-\n- 전체 오프라인 기능 (선택 폴더 에 저장 다운로드 벡터 또는 타일 지도 )
-\n- 컴팩트 오프라인 벡터는 전 세계 에서 사용할 수 매핑
-\n- 국가 또는 지역의 무제한 다운로드가 응용 프로그램에서 직접 매핑
-\n- 관광 오프라인 위키 백과 기능 (다운로드 위키 백과 관심 장소 )\n- GPX 또는 탐색 트랙 , 관광 명소 등 가능한 여러 지도 레이어 의 중첩 , 즐겨 찾기 , 등고선 , 대중 교통 정류장 , 사용자 정의 투명성 추가 지도
-\n- 주소 및 장소에 대한 오프라인 검색 장소 (POI )
-\n- 짧은 거리를 위한 오프라인 라우팅( 실험 )
-\n- 자동차, 자전거, 보행자 모드 :
-\n- 선택적 자동 주간/야간 모드 전환
-\n- 선택적인 속도에 의존하는 지도 줌
-\n- 나침반이나 방향에 따라 맵 정렬
-\n- 선택적 차선 안내 , 제한 속도 표시, 기록 및 TTS 음색 "</string>
+    <string name="osmand_plus_long_description_1000_chars">" OsmAnd + (OSM 자동 안내 및 안내 ) OsmAnd + 글로벌 OpenStreetMap의 다양한 (OSM) 데이터에 접근할 수 있는 오픈 소스 운행 응용 프로그램입니다. 모든 지도 데이터 (벡터 또는 타일 맵 ) 오프라인 사용에 대한 휴대 전화 메모리 카드에 저장할 수 있습니다. OsmAnd 또한 턴-바이-턴 안내 등의 오프라인 및 온라인 라우팅 기능을 제공합니다. OsmAnd+는 프로젝트를 지원하는 새로운 기능의 개발을 투자하고, 최신 업데이트를 받을 수 있도록 구입하여 사용할 수 있는 유료 응용 프로그램 버전입니다.\n\n\n핵심 기능 중 일부 :\n\n- 전체 오프라인 기능 (선택 폴더 에 저장 다운로드 벡터 또는 타일 지도 )\n\n- 컴팩트 오프라인 벡터는 전 세계 에서 사용할 수 매핑\n\n- 국가 또는 지역의 무제한 다운로드가 응용 프로그램에서 직접 매핑\n\n- 관광 오프라인 위키 백과 기능 (다운로드 위키 백과 관심 장소 )\n- GPX 또는 탐색 트랙 , 관광 명소 등 가능한 여러 지도 레이어 의 중첩 , 즐겨 찾기 , 등고선 , 대중 교통 정류장 , 사용자 정의 투명성 추가 지도\n\n- 주소 및 장소에 대한 오프라인 검색 장소 (POI )\n\n- 짧은 거리를 위한 오프라인 라우팅( 실험 )\n\n- 자동차, 자전거, 보행자 모드 :\n\n- 선택적 자동 주간/야간 모드 전환\n\n- 선택적인 속도에 의존하는 지도 줌\n\n- 나침반이나 방향에 따라 맵 정렬\n\n- 선택적 차선 안내 , 제한 속도 표시, 기록 및 TTS 음색 "</string>
     <string name="filterpoi_activity">POI 필터 만들기</string>
     <string name="select_navigation_mode">전송 모드 선택</string>
     <string name="day_night_info_description">일출: %1$s \n일몰: %2$s</string>
@@ -2805,7 +2792,6 @@
     <string name="external_sensors_plugin_description">외부 센서에 액세스하여 심박수, 자전거 속도, 사이클링 파워 또는 케이던스 등을 읽습니다. 장치가 ANT+ 무선 개인 네트워크 프로토콜을 통해 각 센서에 연결되어 있어야 합니다.</string>
     <string name="shared_string_identifiers">활동추적</string>
     <string name="custom_search">사용자 지정 검색</string>
-    <string name="quick_action_add_favorite">즐겨찾기 추가</string>
     <string name="auto_backup_title">자동-백업</string>
     <string name="shared_string_weather">날씨</string>
     <string name="explore_weather_forecast">일기 예보를 탐색하십시오.</string>
@@ -2974,7 +2960,6 @@
     <string name="upload_all">모두 업로드하기</string>
     <string name="cloud_recent_changes">변경 사항</string>
     <string name="rendering_attr_whiteWaterSports_name">급류 스포츠</string>
-    <string name="rendering_attr_alpineHiking_name">난이도 등급</string>
     <string name="cloud_conflicts">충돌</string>
     <string name="cloud_all_changes_uploaded">모든 변경사항이 업로드됨</string>
     <string name="sync_now">지금 동기화</string>
@@ -3955,7 +3940,6 @@
     <string name="token_is_not_valid">토큰은 유효하지 않습니다</string>
     <string name="check_for_updates">업데이트 확인</string>
     <string name="download_cloud_version">클라우드 버전 다운로드</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="select_layer">레이어 선택</string>
     <string name="beats_per_minute_short">bpm</string>
     <string name="ant_plus_searching">찾는 중</string>
@@ -4082,7 +4066,6 @@
     <string name="compass_visible_if_map_rotated">지도가 회전된 경우 표시</string>
     <string name="shared_string_hidden">숨김</string>
     <string name="development">개발</string>
-    <string name="quick_action_add_gpx">트랙 웨이 포인트 추가</string>
     <string name="step_by_step">턴-바이-턴</string>
     <string name="routeInfo_road_types_name">도로 유형</string>
     <string name="developer_plugin">Developer 플러그인</string>
@@ -4326,7 +4309,7 @@
     <string name="routing_attr_freeride_policy_name">오프-피스트</string>
     <string name="map_settings_weather_temp">온도</string>
     <string name="trip_recording_duration_widget_desc">현재 기록된 이동 시간을 표시합니다.</string>
-    <string name="mapillary_menu_title_dates">일자</string>
+    <string name="shared_string_date">일자</string>
     <string name="map_settings_weather_air_pressure">공기의 압력</string>
     <string name="map_settings_weather_precip">제출하기</string>
     <string name="routing_attr_allow_expert_name">전문 경로 허용</string>
@@ -4844,7 +4827,6 @@
     <string name="app_mode_wheelchair_forward">휠체어 앞으로</string>
     <string name="app_mode_enduro_motorcycle">엔듀로 오토바이</string>
     <string name="please_provide_point_name_error">포인트의 이름을 제공</string>
-    <string name="quick_action_remove_next_destination">다음 목적지 지점을 삭제</string>
     <string name="vessel_height_warning_link">세트 배 고도</string>
     <string name="shared_string_meters">미터</string>
     <string name="screen_timeout_descr">\"%1$s\"이 켜지면 활동 시간은 그것에 달려 있습니다.</string>
@@ -5144,4 +5126,24 @@
     <string name="delete_actions_button_confirmation">\"%1$s\"를 삭제하시겠습니까?</string>
     <string name="delete_actions_button">삭제 버튼</string>
     <string name="give_permission">권한 부여</string>
+    <string name="shared_string_changes">변경하기</string>
+    <string name="track_vertical_exaggeration_description">스케일 값을 변경하면 3D 트랙 높이를 변경할 수 있습니다.</string>
+    <string name="use_terrain_maps_summary">고도 데이터를 위한 지형지도를 사용합니다. 지오메트리는 변경되지 않습니다.</string>
+    <string name="use_nearby_roads">인근 도로 사용</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd는 인근 도로 또는 지형지도에서 고도 데이터를 검색 할 수 있습니다.</string>
+    <string name="modify_the_search_query">검색을 변경하십시오.</string>
+    <string name="quick_action_map_style_switch">맵 스타일은 \"%s\"로 변경됩니다.</string>
+    <string name="quick_action_map_overlay_switch">지도 오버레이가 \"%s\"로 변경되었습니다.</string>
+    <string name="last_map_change">마지막지도 변경: %s</string>
+    <string name="quick_action_map_underlay_switch">지도 언레이는 \"%s\"로 변경됩니다.</string>
+    <string name="change_default_appearance_confirmation">%1$s의 기본 외관 변경?</string>
+    <string name="use_terrain_maps">Terrain 지도 사용</string>
+    <string name="use_nearby_roads_summary">도로 및 고도 데이터를 찾을 수있는 오프라인지도를 사용합니다. 트랙 형상을 조정할 수 있습니다.</string>
+    <string name="shared_string_unchanged">변경되지 않음</string>
+    <string name="allow_display_on_top">상단에 표시 허용</string>
+    <string name="allow_display_on_top_description">지도 텍스트를 서로 위에 표시할 수 있습니다.</string>
+    <string name="show_debug_info">debug 정보 표시</string>
+    <string name="map_text">지도 텍스트</string>
+    <string name="routing_attr_avoid_cobblestone_name">Cobblestone를 피하십시오</string>
+    <string name="routing_attr_avoid_cobblestone_description">Cobblestone를 피하십시오</string>
 </resources>

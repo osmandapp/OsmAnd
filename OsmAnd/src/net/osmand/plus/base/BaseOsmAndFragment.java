@@ -82,6 +82,13 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 		}
 	}
 
+	public void updateStatusBar() {
+		Activity activity = getActivity();
+		if (activity != null) {
+			updateStatusBar(activity);
+		}
+	}
+
 	protected void updateStatusBar(@NonNull Activity activity) {
 		int colorId = getStatusBarColorId();
 		if (colorId != -1) {

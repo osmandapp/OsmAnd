@@ -276,4 +276,8 @@
     <string name="status_widget_title">Status van OsmAnd Tracker</string>
     <string name="buffer_time_descr">Maximale tijd om punten in de buffer op te slaan</string>
     <string name="buffer_time">Bewaartermijn voor de buffer</string>
+    <string name="location_source">Locatiebron</string>
+    <string name="location_source_summary">Standaard gebruikt OsmAnd, geïnstalleerd vanuit Google Play, Google Play Services om de locatie te bepalen.
+\n
+\nAls je onnauwkeurige locatie-informatie krijgt of een apparaat zonder Google Play Services gebruikt, probeer dan over te schakelen naar de Android API</string>
 </resources>

@@ -1,10 +1,15 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
 
 android {
-	compileSdk 33
-	buildToolsVersion = "33.0.2"
+	compileSdk 34
+	buildToolsVersion = "34.0.0"
+	namespace = "net.osmand.telegram"
+
+	compileOptions {
+		sourceCompatibility = JavaVersion.VERSION_17
+		targetCompatibility = JavaVersion.VERSION_17
+	}
 
 	sourceSets {
 		main {
@@ -21,8 +26,8 @@ android {
 
 	defaultConfig {
 		applicationId "net.osmand.telegram"
-		minSdkVersion 15
-		targetSdkVersion 33
+		minSdkVersion 24
+		targetSdkVersion 34
 		multiDexEnabled true
 		versionCode 1
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
@@ -55,6 +60,7 @@ android {
 			dimension "abi"
 		}
 	}
+
 	signingConfigs {
 		development {
 			storeFile file("../keystores/debug.keystore")
@@ -92,46 +98,68 @@ android {
 	packagingOptions {
 		exclude 'META-INF/proguard/androidx-annotations.pro'
 	}
+	buildFeatures {
+		aidl true
+	}
+
+	applicationVariants.configureEach {
+		def variant = it
+		def taskName = variant.name.capitalize()
+		def mergeAssetsTaskName = "merge${taskName}Assets"
+		tasks.named(mergeAssetsTaskName).configure { osmandTask ->
+			println(osmandTask.getName())
+			osmandTask.dependsOn(collectFonts)
+		}
+		def mapSourceSetPathsName= "map${taskName}SourceSetPaths"
+		tasks.named(mapSourceSetPathsName).configure { osmandTask ->
+			println(osmandTask.getName())
+		}
+	}
+
 }
 
-task downloadTdLibzip {
+tasks.register('downloadTdLibzip') {
 	doLast {
-		ant.get(src: 'https://core.telegram.org/tdlib/tdlib.zip', dest: 'tdlib.zip', skipexisting: 'true')
+		ant.get(src: 'https://osmand.net/uploads/libs/tdlib.zip', dest: 'tdlib.zip', skipexisting: 'true')
 		ant.unzip(src: 'tdlib.zip', dest: 'tdlib/')
 	}
 }
 
-task copyNativeLibs(type: Copy) {
+tasks.register('copyNativeLibs', Copy) {
 	dependsOn downloadTdLibzip
-	from "tdlib/libtd/src/main/libs"
+	from "tdlib/tdlib/libs"
 	into "libs"
 }
 
-task copyJavaSources(type: Copy) {
+tasks.register('copyJavaSources', Copy) {
 	dependsOn downloadTdLibzip
-	from "tdlib/libtd/src/main/java/org/drinkless/td"
-	into "src/org/drinkless/td"
+	from "tdlib/tdlib/java"
+	into "src"
 }
 
-task downloadPrebuiltTelegram {
+tasks.register('downloadPrebuiltTelegram') {
 	dependsOn downloadTdLibzip, copyNativeLibs, copyJavaSources
 }
 
-task collectFonts(type: Copy) {
+tasks.register('collectFonts', Copy) {
 	from "../../resources/fonts"
 	from "../../resources/fonts-telegram"
 	into "assets/fonts"
 	include "*.ttf"
 }
 
-task collectExternalResources {
+tasks.register('collectExternalResources') {
 	dependsOn collectFonts
 }
 
 afterEvaluate {
-	android.applicationVariants.all { variant ->
-		variant.javaCompiler.dependsOn(downloadPrebuiltTelegram, collectExternalResources)
-		variant.preBuild.dependsOn(downloadPrebuiltTelegram)
+	android.applicationVariants.configureEach { variant ->
+		variant.javaCompileProvider.configure { compileTask ->
+			compileTask.dependsOn downloadPrebuiltTelegram, collectExternalResources
+		}
+		variant.preBuildProvider.configure { preBuildTask ->
+			preBuildTask.dependsOn downloadPrebuiltTelegram
+		}
 	}
 }
 
@@ -151,5 +179,5 @@ dependencies {
 		exclude group: 'com.android.support'
 	}
 
-	implementation 'com.google.android.gms:play-services-location:21.0.1'
+	implementation 'com.google.android.gms:play-services-location:21.3.0'
 }

@@ -46,10 +46,10 @@
 		tools:icon="@drawable/ic_action_car_dark" />
 
 	<Preference
+		android:icon="@drawable/ic_action_appearance"
 		android:key="customize_route_line"
 		android:layout="@layout/preference_customize_route_line"
-		android:title="@string/customize_route_line"
-		android:icon="@drawable/ic_action_appearance" />
+		android:title="@string/customize_route_line" />
 
 	<PreferenceCategory
 		android:key="other"
@@ -61,5 +61,11 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/map_during_navigation"
 		app:fragment="net.osmand.plus.settings.fragments.MapDuringNavigationFragment" />
+
+	<Preference
+		android:key="detailed_track_guidance"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/detailed_track_guidance"
+		tools:icon="@drawable/ic_action_attach_track" />
 
 </PreferenceScreen>

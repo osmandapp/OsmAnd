@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.track.CachedTrackParams;
 import net.osmand.router.RouteSegmentResult;
@@ -16,12 +16,12 @@ import java.util.List;
 
 public class ParseGpxRouteTask extends AsyncTask<Void, Void, List<RouteSegmentResult>> {
 
-	private final GPXFile gpxFile;
+	private final GpxFile gpxFile;
 	private final CachedTrackParams trackParams;
 	private final ParseGpxRouteListener listener;
 	private final int selectedSegment;
 
-	public ParseGpxRouteTask(@NonNull GPXFile gpxFile, @NonNull CachedTrackParams trackParams,
+	public ParseGpxRouteTask(@NonNull GpxFile gpxFile, @NonNull CachedTrackParams trackParams,
 	                         int selectedSegment, @Nullable ParseGpxRouteListener listener) {
 		this.gpxFile = gpxFile;
 		this.trackParams = trackParams;

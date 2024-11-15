@@ -61,10 +61,8 @@ public class TripRecordingDiscardBottomSheet extends MenuBottomSheetDialogFragme
 					@Override
 					public void onClick(View v) {
 						if (plugin != null && app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-							plugin.stopRecording();
-							app.getNotificationHelper().refreshNotifications();
+							plugin.stopRecording(true);
 						}
-						app.getSavingTrackHelper().clearRecordedData(true);
 						dismiss();
 
 						Fragment target = getTargetFragment();

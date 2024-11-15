@@ -8,10 +8,10 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.R;
-import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.shared.routing.ColoringType;
 
-public abstract class MultiColoringGeometryWayContext extends GeometryWayContext {
+public abstract class MultiColoringGeometryWayContext extends CommonGeometryWayContext {
 
 	private static final int SHADOW_COLOR = 0x80000000;
 
@@ -59,6 +59,7 @@ public abstract class MultiColoringGeometryWayContext extends GeometryWayContext
 
 	@NonNull
 	protected abstract ColoringType getDefaultColoringType();
+	protected abstract String getDefaultGradientPalette();
 
 	@NonNull
 	public Paint getBorderPaint() {

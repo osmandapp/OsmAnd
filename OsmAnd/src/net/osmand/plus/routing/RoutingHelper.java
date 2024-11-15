@@ -3,7 +3,6 @@ package net.osmand.plus.routing;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
 import net.osmand.Location;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
@@ -23,12 +22,13 @@ import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.router.GpxRouteApproximation;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
-import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -83,7 +83,6 @@ public class RoutingHelper {
 	private long deviateFromRouteDetected;
 	//private long wrongMovementDetected = 0;
 	private boolean voiceRouterStopped;
-	private long lastCarNavUpdateTime;
 
 	public boolean isDeviatedFromRoute() {
 		return isDeviatedFromRoute;
@@ -111,7 +110,7 @@ public class RoutingHelper {
 		return provider;
 	}
 
-	void resetRouteWasFinished() {
+	public void resetRouteWasFinished() {
 		routeWasFinished = false;
 	}
 
@@ -145,6 +144,18 @@ public class RoutingHelper {
 
 	public String getLastRouteCalcErrorShort() {
 		return routeRecalculationHelper.getLastRouteCalcErrorShort();
+	}
+
+	public void resumeNavigation() {
+		setRoutePlanningMode(false);
+		setFollowingMode(true);
+		setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
+	}
+
+	public void pauseNavigation() {
+		setRoutePlanningMode(true);
+		setFollowingMode(false);
+		setPauseNavigation(true);
 	}
 
 	public void setPauseNavigation(boolean pause) {
@@ -218,6 +229,7 @@ public class RoutingHelper {
 			}
 		});
 		this.finalLocation = newFinalLocation;
+		this.lastGoodRouteLocation = null;
 		this.intermediatePoints = newIntermediatePoints;
 		routeRecalculationHelper.stopCalculation();
 		if (newFinalLocation == null) {
@@ -277,11 +289,11 @@ public class RoutingHelper {
 	}
 
 	public boolean isCurrentGPXRouteV2() {
-		return currentGPXRoute != null && RouteExporter.OSMAND_ROUTER_V2.equals(currentGPXRoute.getFile().author);
+		return currentGPXRoute != null && RouteExporter.OSMAND_ROUTER_V2.equals(currentGPXRoute.getFile().getAuthor());
 	}
 
 	@Nullable
-	public GPXFile getCurrentGPX() {
+	public GpxFile getCurrentGPX() {
 		return currentGPXRoute != null ? currentGPXRoute.getFile() : null;
 	}
 
@@ -467,10 +479,11 @@ public class RoutingHelper {
 					locationProjection = RoutingHelperUtils.getProject(currentLocation, previousRouteLocation,
 							currentRouteLocation);
 					if (settings.SNAP_TO_ROAD.get() && currentRoute + 1 < routeNodes.size()) {
+						boolean previewNextTurn = settings.PREVIEW_NEXT_TURN.get();
 						Location nextRouteLocation = routeNodes.get(currentRoute + 1);
 						RoutingHelperUtils.approximateBearingIfNeeded(this,
-								locationProjection, currentLocation,
-								previousRouteLocation, currentRouteLocation, nextRouteLocation);
+								locationProjection, currentLocation, previousRouteLocation,
+								currentRouteLocation, nextRouteLocation, previewNextTurn);
 					}
 				}
 			}
@@ -617,10 +630,8 @@ public class RoutingHelper {
 
 		// 5. Update car navigation
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
-		NavigationService navigationService = app.getNavigationService();
-		if (carNavigationSession != null && navigationService != null && System.currentTimeMillis() - lastCarNavUpdateTime > 1000) {
-			lastCarNavUpdateTime = System.currentTimeMillis();
-			app.runInUIThread(() -> navigationService.updateCarNavigation(currentLocation));
+		if (carNavigationSession != null) {
+			app.runInUIThread(() -> carNavigationSession.updateCarNavigation(currentLocation));
 		}
 		return false;
 	}
@@ -792,7 +803,7 @@ public class RoutingHelper {
 
 	@NonNull
 	public synchronized CurrentStreetName getCurrentName(NextDirectionInfo n) {
-		return CurrentStreetName.getCurrentName(this, n);
+		return new CurrentStreetName(this, n);
 	}
 
 	public RouteSegmentResult getCurrentSegmentResult() {
@@ -901,11 +912,11 @@ public class RoutingHelper {
 		return route;
 	}
 
-	public GPXFile generateGPXFileWithRoute(String name) {
+	public GpxFile generateGPXFileWithRoute(String name) {
 		return generateGPXFileWithRoute(route, name);
 	}
 
-	public GPXFile generateGPXFileWithRoute(RouteCalculationResult route, String name) {
+	public GpxFile generateGPXFileWithRoute(RouteCalculationResult route, String name) {
 		return provider.createOsmandRouterGPX(route, app, name);
 	}
 

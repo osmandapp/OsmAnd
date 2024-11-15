@@ -103,6 +103,12 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 			PurchaseItemCard purchaseCard = new PurchaseItemCard(activity, purchaseHelper, purchase);
 			purchaseCard.setListener(PurchasesFragment.this);
 			cardsContainer.addView(purchaseCard.build(activity));
+		} else if (Version.isHugerockBuild()) {
+			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
+			PurchaseUiData purchase = PurchaseUiDataUtils.createHugerockPurchaseUiData(app);
+			PurchaseItemCard purchaseCard = new PurchaseItemCard(activity, purchaseHelper, purchase);
+			purchaseCard.setListener(PurchasesFragment.this);
+			cardsContainer.addView(purchaseCard.build(activity));
 		}
 
 		boolean hasMainPurchases = !Algorithms.isEmpty(mainPurchases);

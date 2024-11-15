@@ -19,17 +19,19 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.gpx.GPXFile;
+import net.osmand.plus.shared.SharedUtil;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.configmap.tracks.TrackTab;
 import net.osmand.plus.configmap.tracks.TracksAdapter.ItemVisibilityCallback;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.plus.track.data.TrackFolder;
-import net.osmand.plus.track.helpers.GpxDataItem;
+import net.osmand.shared.gpx.data.TrackFolder;
+import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -93,15 +95,23 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 	}
 
 	@Override
+	public void loadTracksProgress(@NonNull TrackItem... items) {
+	}
+
+	@Override
 	public void tracksLoaded(@NonNull TrackFolder folder) {
-		trackTabsHelper.updateItems(folder);
 	}
 
 	@Override
 	public void loadTracksFinished(@NonNull TrackFolder folder) {
+		trackTabsHelper.updateItems(folder);
 		AndroidUiHelper.updateVisibility(progressBar, false);
 		updateTrackTabs();
 		updateTabsContent();
+	}
+
+	@Override
+	public void deferredLoadTracksFinished(@NonNull TrackFolder folder) {
 	}
 
 	@Override
@@ -136,7 +146,8 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 		if (fileSelectionListener instanceof CallbackWithObject) {
 			((CallbackWithObject<String>) fileSelectionListener).processResult(firstTrackItem.getPath());
 		} else if (fileSelectionListener instanceof GpxFileSelectionListener) {
-			GpxSelectionHelper.getGpxFile(requireActivity(), firstTrackItem.getFile(), true, result -> {
+			KFile file = firstTrackItem.getFile();
+			GpxSelectionHelper.getGpxFile(requireActivity(), file == null ? null : SharedUtil.jFile(file), true, result -> {
 				((GpxFileSelectionListener) fileSelectionListener).onSelectGpxFile(result);
 				return true;
 			});
@@ -198,7 +209,7 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 	}
 
 	public interface GpxFileSelectionListener {
-		void onSelectGpxFile(@NonNull GPXFile gpxFile);
+		void onSelectGpxFile(@NonNull GpxFile gpxFile);
 	}
 
 	public interface GpxDataItemSelectionListener {

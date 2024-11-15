@@ -48,7 +48,7 @@
 		android:paddingEnd="@dimen/content_padding_half"
 		android:paddingRight="@dimen/content_padding_half"
 		android:textColor="?attr/active_color_basic"
-		app:typeface="@string/font_roboto_medium"
+		app:typefaceWeight="medium"
 		tools:text="@string/favorite" />
 
 </FrameLayout>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -15,124 +15,7 @@
 		android:layout_height="match_parent"
 		android:orientation="vertical">
 
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="?attr/appbar_and_list_background_color"
-			android:elevation="2dp"
-			android:orientation="vertical">
-
-			<ImageButton
-				android:id="@+id/close_button"
-				style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
-				android:layout_width="@dimen/toolbar_height"
-				android:layout_height="@dimen/toolbar_height"
-				android:contentDescription="@string/access_shared_string_navigate_up"
-				android:tint="?attr/default_icon_color"
-				osmand:srcCompat="@drawable/ic_arrow_back" />
-
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:orientation="horizontal">
-
-				<ImageView
-					android:id="@+id/widget_icon"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginLeft="@dimen/content_padding"
-					android:layout_marginRight="@dimen/content_padding"
-					android:background="@drawable/bg_widget_type_icon_light"
-					android:scaleType="center"
-					tools:src="@drawable/widget_sensor_distance_day" />
-
-				<LinearLayout
-					android:layout_width="match_parent"
-					android:layout_height="match_parent"
-					android:orientation="vertical">
-
-					<TextView
-						android:id="@+id/device_name"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:textSize="@dimen/dialog_header_text_size"
-						osmand:typeface="@string/font_roboto_medium"
-						tools:text="Wohoo" />
-
-					<LinearLayout
-						android:layout_width="wrap_content"
-						android:layout_height="0dp"
-						android:layout_weight="1"
-						android:orientation="horizontal">
-
-						<ImageView
-							android:id="@+id/connection_state_icon"
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:layout_gravity="bottom"
-							tools:src="@drawable/ic_action_signal_high" />
-
-						<TextView
-							android:id="@+id/connection_state"
-							android:layout_width="match_parent"
-							android:layout_height="match_parent"
-							android:layout_marginStart="@dimen/content_padding_small_half"
-							android:gravity="bottom|start"
-							android:textColor="?android:textColorSecondary"
-							android:textSize="@dimen/default_desc_text_size"
-							tools:text="Disconnected" />
-
-					</LinearLayout>
-
-				</LinearLayout>
-
-			</LinearLayout>
-
-			<FrameLayout
-				android:id="@+id/pair_btn"
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/dialog_button_height"
-				android:layout_margin="@dimen/content_padding">
-
-				<FrameLayout
-					android:id="@+id/button_container"
-					android:layout_width="match_parent"
-					android:layout_height="match_parent"
-					android:duplicateParentState="true"
-					tools:ignore="UselessParent">
-
-					<net.osmand.plus.widgets.TextViewEx
-						android:id="@+id/button_text"
-						android:layout_width="match_parent"
-						android:layout_height="match_parent"
-						android:layout_gravity="center"
-						android:drawablePadding="@dimen/content_padding_half"
-						android:duplicateParentState="true"
-						android:gravity="center"
-						android:paddingStart="@dimen/content_padding_small"
-						android:paddingLeft="@dimen/content_padding_small"
-						android:paddingEnd="@dimen/content_padding_small"
-						android:paddingRight="@dimen/content_padding_small"
-						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_medium"
-						tools:text="Pair"
-						tools:visibility="gone" />
-
-					<me.zhanghai.android.materialprogressbar.MaterialProgressBar
-						android:id="@+id/progress_bar"
-						style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
-						android:layout_width="120dp"
-						android:layout_height="4dp"
-						android:layout_gravity="center"
-						android:indeterminate="true"
-						android:visibility="gone"
-						osmand:mpb_progressStyle="horizontal"
-						osmand:mpb_useIntrinsicPadding="false"
-						tools:visibility="visible" />
-
-				</FrameLayout>
-			</FrameLayout>
-		</LinearLayout> <!--HEADER-->
+		<include layout="@layout/connected_device_card" />
 
 		<ScrollView
 			android:layout_width="match_parent"
@@ -161,7 +44,7 @@
 						android:padding="@dimen/content_padding"
 						android:text="@string/external_device_details_information"
 						android:textSize="@dimen/default_list_text_size"
-						osmand:typeface="@string/font_roboto_medium" />
+						app:typefaceWeight="medium" />
 
 					<LinearLayout
 						android:id="@+id/connection_type_container"
@@ -249,13 +132,13 @@
 						android:padding="@dimen/content_padding"
 						android:text="@string/external_device_details_received_data"
 						android:textSize="@dimen/default_list_text_size"
-						osmand:typeface="@string/font_roboto_medium" />
+						app:typefaceWeight="medium" />
 
 					<androidx.recyclerview.widget.RecyclerView
 						android:id="@+id/received_data"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						osmand:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+						app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 						tools:listitem="@layout/device_characteristic_item" />
 
 				</LinearLayout>
@@ -276,7 +159,7 @@
 						android:padding="@dimen/content_padding"
 						android:text="@string/shared_string_settings"
 						android:textSize="@dimen/default_list_text_size"
-						osmand:typeface="@string/font_roboto_medium" />
+						app:typefaceWeight="medium" />
 
 					<LinearLayout
 						android:id="@+id/name_property_container"
@@ -319,7 +202,7 @@
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:layoutDirection="inherit"
-						osmand:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+						app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 					<LinearLayout
 						android:id="@+id/forget_device_container"

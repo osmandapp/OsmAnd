@@ -14,6 +14,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -71,6 +72,12 @@ public class GlideTargetWidget extends GlideBaseWidget {
 			return getString(isInTargetAltitudeState() ? R.string.target_elevation : R.string.glide_ratio_to_target);
 		}
 		return widgetType != null ? getString(widgetType.titleId) : null;
+	}
+
+	@Override
+	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId) {
+		super.copySettingsFromMode(sourceAppMode, appMode, customId);
+		widgetState.copyPrefsFromMode(sourceAppMode, appMode, customId);
 	}
 
 	private void updateTargetAltitude() {

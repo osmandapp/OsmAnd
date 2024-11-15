@@ -32,6 +32,7 @@ public interface OsmAndCustomizationConstants {
 	String DRAWER_BUILDS_ID = DRAWER_ITEM_ID_SCHEME + "builds";
 	String DRAWER_DIVIDER_ID = DRAWER_ITEM_ID_SCHEME + "divider";
 	String DRAWER_OSMAND_VERSION_ID = DRAWER_ITEM_ID_SCHEME + "osmand_version";
+	String DRAWER_VEHICLE_METRICS_ID = DRAWER_ITEM_ID_SCHEME + "vehicle_metrics";
 
 	// Configure Map:
 	String CONFIGURE_MAP_ITEM_ID_SCHEME = "map.configure.";
@@ -136,6 +137,7 @@ public interface OsmAndCustomizationConstants {
 	String PLUGIN_ACCESSIBILITY = "osmand.accessibility";
 	String PLUGIN_WIKIPEDIA = "osmand.wikipedia";
 	String PLUGIN_ANT_PLUS = "osmand.antplus";
+	String PLUGIN_VEHICLE_METRICS = "osmand.vehicle.metrics";
 	String PLUGIN_WEATHER = "osmand.weather";
 
 	//Settings:
@@ -198,6 +200,7 @@ public interface OsmAndCustomizationConstants {
 	String FRAGMENT_SEND_ANALYTICS_ID = FRAGMENT_ID + "send_analytics";
 	String FRAGMENT_DRAWER_ID = FRAGMENT_ID + "drawer";
 	String FRAGMENT_TRIPLTEK_PROMO_ID = FRAGMENT_ID + "tripltek_promo";
+	String FRAGMENT_HUGEROCK_PROMO_ID = FRAGMENT_ID + "hugerock_promo";
 
 	//Map Context Menu rows:
 	String MAP_CONTEXT_MENU_ROWS = "context.menu.rows.";

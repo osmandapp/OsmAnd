@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -20,24 +20,24 @@
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/toolbar_height_expanded"
 			android:background="?attr/actionModeBackground"
-			osmand:collapsedTitleTextAppearance="@style/AppBarTitle"
-			osmand:expandedTitleGravity="start|bottom"
-			osmand:expandedTitleMarginBottom="@dimen/content_padding_small"
-			osmand:expandedTitleMarginEnd="@dimen/content_padding"
-			osmand:expandedTitleMarginStart="@dimen/content_padding"
-			osmand:expandedTitleTextAppearance="@style/AppBarTitle"
-			osmand:layout_scrollFlags="scroll|exitUntilCollapsed">
+			app:collapsedTitleTextAppearance="@style/AppBarTitle"
+			app:expandedTitleGravity="start|bottom"
+			app:expandedTitleMarginBottom="@dimen/content_padding_small"
+			app:expandedTitleMarginEnd="@dimen/content_padding"
+			app:expandedTitleMarginStart="@dimen/content_padding"
+			app:expandedTitleTextAppearance="@style/AppBarTitle"
+			app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
 			<androidx.appcompat.widget.Toolbar
 				android:id="@+id/toolbar"
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/toolbar_height"
 				android:minHeight="@dimen/toolbar_height"
-				osmand:layout_collapseMode="pin"
-				osmand:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
-				osmand:title="@string/map_updates_for_mappers"
-				osmand:titleMarginEnd="0dp"
-				osmand:titleMarginStart="0dp">
+				app:layout_collapseMode="pin"
+				app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
+				app:title="@string/map_updates_for_mappers"
+				app:titleMarginEnd="0dp"
+				app:titleMarginStart="0dp">
 
 			</androidx.appcompat.widget.Toolbar>
 
@@ -48,7 +48,7 @@
 	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		osmand:layout_behavior="@string/appbar_scrolling_view_behavior">
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 		<androidx.core.widget.NestedScrollView
 			android:id="@+id/scroll_view"
@@ -78,7 +78,7 @@
 						android:lineSpacingMultiplier="@dimen/info_description_line_spacing_multiplier"
 						android:textColor="?android:textColorPrimary"
 						android:textSize="@dimen/default_list_text_size"
-						osmand:typeface="@string/font_roboto_medium"
+						app:typefaceWeight="medium"
 						tools:text="Available until 10 August"
 						tools:textColor="?attr/active_color_basic" />
 
@@ -91,7 +91,7 @@
 						android:lineSpacingMultiplier="@dimen/info_description_line_spacing_multiplier"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_regular"
+						android:textStyle="normal"
 						tools:text="@string/enough_contributions_descr" />
 
 				</LinearLayout>
@@ -122,7 +122,7 @@
 						android:text="@string/shared_string_contributions"
 						android:textColor="?android:textColorPrimary"
 						android:textSize="@dimen/default_list_text_size"
-						osmand:typeface="@string/font_roboto_medium" />
+						app:typefaceWeight="medium" />
 
 					<androidx.appcompat.widget.AppCompatImageView
 						android:id="@+id/icon"
@@ -132,7 +132,7 @@
 						android:layout_marginLeft="@dimen/content_padding"
 						android:layout_marginRight="@dimen/content_padding"
 						android:tint="?attr/active_color_basic"
-						osmand:srcCompat="@drawable/ic_action_external_link" />
+						app:srcCompat="@drawable/ic_action_external_link" />
 
 				</LinearLayout>
 
@@ -179,7 +179,7 @@
 							android:text="@string/shared_string_refresh"
 							android:textColor="?attr/text_color_tab_active"
 							android:textSize="@dimen/text_button_text_size"
-							osmand:typeface="@string/font_roboto_regular" />
+							android:textStyle="normal" />
 
 					</FrameLayout>
 
@@ -192,7 +192,7 @@
 						android:text="@string/contributions_may_calculate_with_delay"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_regular" />
+						android:textStyle="normal" />
 
 				</LinearLayout>
 
@@ -206,7 +206,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/abp__shadow_height"
 			android:scaleType="fitXY"
-			osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
+			app:srcCompat="@drawable/bg_shadow_list_bottom" />
 
 	</FrameLayout>
 

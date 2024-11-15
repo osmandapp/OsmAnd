@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -49,14 +49,14 @@
 					android:text="@string/shared_string_appearance"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"
-					osmand:typeface="@string/font_roboto_medium" />
+					app:typefaceWeight="medium" />
 
 				<androidx.appcompat.widget.AppCompatImageView
 					android:id="@+id/track_icon"
 					android:layout_width="@dimen/standard_icon_size"
 					android:layout_height="@dimen/standard_icon_size"
 					android:layout_gravity="center_vertical"
-					osmand:srcCompat="@drawable/ic_action_gpx_width_bold"
+					app:srcCompat="@drawable/ic_action_gpx_width_bold"
 					tools:tint="@color/icon_color_default_light" />
 
 			</LinearLayout>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -38,7 +37,7 @@
 				android:text="@string/osm_live"
 				android:textColor="?attr/active_color_basic"
 				android:textSize="@dimen/default_list_text_size"
-				osmand:typeface="@string/font_roboto_medium" />
+				app:typefaceWeight="medium" />
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/purchase_type"
@@ -47,7 +46,7 @@
 				android:textColor="?android:attr/textColorSecondary"
 				android:textSize="@dimen/default_desc_text_size"
 				android:visibility="gone"
-				osmand:typeface="@string/font_roboto_regular"
+				android:textStyle="normal"
 				tools:text="@string/annual_subscription"
 				tools:visibility="visible" />
 
@@ -58,7 +57,7 @@
 				android:textColor="?android:attr/textColorSecondary"
 				android:textSize="@dimen/default_desc_text_size"
 				android:visibility="gone"
-				osmand:typeface="@string/font_roboto_regular"
+				android:textStyle="normal"
 				tools:text="@string/next_billing_date"
 				tools:visibility="visible" />
 
@@ -70,7 +69,7 @@
 				android:paddingHorizontal="@dimen/content_padding_small"
 				android:paddingVertical="@dimen/content_padding_small_half"
 				android:textColor="?attr/app_bar_primary_item_color"
-				osmand:typeface="@string/font_roboto_medium"
+				app:typefaceWeight="medium"
 				tools:background="@drawable/bg_osmand_live_active"
 				tools:text="@string/osm_live_active" />
 
@@ -91,7 +90,7 @@
 					android:text="@string/renew_subscription"
 					android:textColor="?attr/colorPrimary"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium"
+					app:typefaceWeight="medium"
 					tools:background="@drawable/btn_solid_border_light" />
 
 			</FrameLayout>

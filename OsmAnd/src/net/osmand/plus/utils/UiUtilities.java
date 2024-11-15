@@ -149,6 +149,10 @@ public class UiUtilities {
 		return getLayeredIcon(background, foreground);
 	}
 
+	public void clearCache() {
+		drawableCache.clear();
+	}
+
 	public static Drawable getLayeredIcon(Drawable... icons) {
 		return new LayerDrawable(icons);
 	}
@@ -720,7 +724,7 @@ public class UiUtilities {
 		}
 
 		int color = TopToolbarController.NO_COLOR;
-		boolean mapControlsVisible = activity.findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE;
+		boolean mapControlsVisible = activity.findViewById(R.id.map_hud_layout).getVisibility() == View.VISIBLE;
 		boolean topToolbarVisible = mapLayers.getMapInfoLayer().isTopToolbarViewVisible();
 		boolean night = app.getDaynightHelper().isNightModeForMapControls();
 

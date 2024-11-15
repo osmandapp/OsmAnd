@@ -49,7 +49,7 @@ public class MapButtonViewHolder extends RecyclerView.ViewHolder {
 
 		ApplicationMode appMode = settings.getApplicationMode();
 		int color = enabled ? appMode.getProfileColor(nightMode) : ColorUtilities.getDefaultIconColor(app, nightMode);
-		icon.setImageDrawable(buttonState.getIcon(nightMode, false, color));
+		icon.setImageDrawable(buttonState.getIcon(color, nightMode, false));
 
 		setupListItemBackground(appMode, nightMode);
 		AndroidUiHelper.updateVisibility(description, true);

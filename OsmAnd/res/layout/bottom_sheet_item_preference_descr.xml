@@ -12,7 +12,7 @@
 	android:paddingRight="@dimen/content_padding"
 	android:paddingBottom="@dimen/gpx_small_text_margin"
 	android:textAppearance="@style/TextAppearance.ListItemTitle"
-	app:typeface="@string/font_roboto_regular"
+	android:textStyle="normal"
 	tools:text="@string/auto_zoom_map_descr"
 	android:paddingEnd="@dimen/content_padding"
 	android:paddingStart="@dimen/content_padding" />

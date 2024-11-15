@@ -50,7 +50,7 @@ public class MultiStateCard extends BaseCard implements IMultiStateCard {
 		bindSelectedStateContent();
 	}
 
-	private void updateCardTitle() {
+	protected void updateCardTitle() {
 		TextView tvTitle = view.findViewById(R.id.card_title);
 		tvTitle.setText(controller.getCardTitle());
 	}
@@ -69,7 +69,7 @@ public class MultiStateCard extends BaseCard implements IMultiStateCard {
 
 	private void bindSelectedStateContent() {
 		ViewGroup contentContainer = view.findViewById(R.id.content);
-		controller.onBindCardContent(activity, contentContainer, nightMode);
+		controller.onBindCardContent(activity, contentContainer, nightMode, usedOnMap);
 	}
 
 	@Override

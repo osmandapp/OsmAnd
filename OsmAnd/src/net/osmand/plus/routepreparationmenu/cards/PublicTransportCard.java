@@ -1,5 +1,6 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
+
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -16,21 +17,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.TransportRoute;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.transport.TransportStopRoute;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
-import net.osmand.router.TransportRouteResult;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
+import net.osmand.router.TransportRouteResult;
 import net.osmand.util.Algorithms;
 
 import java.util.Iterator;
@@ -219,8 +220,7 @@ public class PublicTransportCard extends MapBaseCard {
 		}
 
 		SpannableString firstLineDesc = new SpannableString(firstLine);
-		Typeface typeface = FontCache.getRobotoMedium(app);
-		firstLineDesc.setSpan(new CustomTypefaceSpan(typeface), firstLine.indexOf(name), firstLine.indexOf(name) + name.length(), 0);
+		firstLineDesc.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), firstLine.indexOf(name), firstLine.indexOf(name) + name.length(), 0);
 		firstLineDesc.setSpan(new ForegroundColorSpan(getMainFontColor()), firstLine.indexOf(name), firstLine.indexOf(name) + name.length(), 0);
 
 		return firstLineDesc;
@@ -228,7 +228,7 @@ public class PublicTransportCard extends MapBaseCard {
 
 	private SpannableString getSecondLineDescrSpan(List<TransportRouteResultSegment> segments) {
 		TransportRoutingHelper transportRoutingHelper = app.getTransportRoutingHelper();
-		Typeface typeface = FontCache.getRobotoMedium(app);
+		Typeface typeface = FontCache.getMediumFont();
 		int walkTimeReal = transportRoutingHelper.getWalkingTime(segments);
 		int walkTimePT = (int) routeResult.getWalkTime();
 		int walkTime = walkTimeReal > 0 ? walkTimeReal : walkTimePT;

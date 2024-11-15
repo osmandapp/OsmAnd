@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -30,7 +30,7 @@
 					android:layout_height="@dimen/toolbar_height"
 					android:layout_gravity="center"
 					android:contentDescription="@string/back"
-					osmand:srcCompat="@drawable/ic_arrow_back" />
+					app:srcCompat="@drawable/ic_arrow_back" />
 
 				<include layout="@layout/search_text_layout" />
 
@@ -72,8 +72,8 @@
 				android:id="@+id/selection_button"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				osmand:dialogButtonType="tertiary"
-				osmand:dialogButtonUseUppercaseTitle="true"
+				app:dialogButtonType="tertiary"
+				app:dialogButtonUseUppercaseTitle="true"
 				tools:dialogButtonTitle="@string/shared_string_select_all" />
 
 			<View
@@ -85,9 +85,9 @@
 				android:id="@+id/apply_button"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				osmand:dialogButtonTitle="@string/shared_string_apply"
-				osmand:dialogButtonType="tertiary"
-				osmand:dialogButtonUseUppercaseTitle="true" />
+				app:dialogButtonTitle="@string/shared_string_apply"
+				app:dialogButtonType="tertiary"
+				app:dialogButtonUseUppercaseTitle="true" />
 
 
 		</LinearLayout>

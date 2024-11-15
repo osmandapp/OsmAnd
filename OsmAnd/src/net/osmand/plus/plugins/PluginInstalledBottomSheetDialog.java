@@ -5,7 +5,6 @@ import static net.osmand.plus.download.SrtmDownloadItem.getAbbreviationInScopes;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -14,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
@@ -33,11 +33,11 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
@@ -90,9 +90,8 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 				.create();
 		items.add(titleItem);
 
-		Typeface typeface = FontCache.getRobotoMedium(getContext());
 		SpannableString pluginTitleSpan = new SpannableString(plugin.getName());
-		pluginTitleSpan.setSpan(new CustomTypefaceSpan(typeface), 0, pluginTitleSpan.length(), 0);
+		pluginTitleSpan.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), 0, pluginTitleSpan.length(), 0);
 		Drawable pluginIcon = plugin.getLogoResource();
 		if (pluginIcon.getConstantState() != null) {
 			pluginIcon = pluginIcon.getConstantState().newDrawable().mutate();
@@ -188,8 +187,10 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 			Activity activity = getActivity();
 			PluginsHelper.enablePlugin(activity, app, plugin, false);
 
-			if (activity instanceof PluginStateListener) {
-				((PluginStateListener) activity).onPluginStateChanged(plugin);
+			for (Fragment fragment : getParentFragmentManager().getFragments()) {
+				if (fragment instanceof PluginStateListener) {
+					((PluginStateListener) fragment).onPluginStateChanged(plugin);
+				}
 			}
 		}
 	}

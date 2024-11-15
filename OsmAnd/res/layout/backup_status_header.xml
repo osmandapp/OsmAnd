@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -37,10 +37,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?android:textColorPrimary"
-                osmand:layout_constraintBottom_toTopOf="@+id/description"
-                osmand:layout_constraintStart_toStartOf="parent"
-                osmand:layout_constraintTop_toTopOf="parent"
-                osmand:layout_constraintVertical_chainStyle="spread"
+                app:layout_constraintBottom_toTopOf="@+id/description"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="spread"
                 tools:text="@string/last_sync" />
 
             <net.osmand.plus.widgets.TextViewEx
@@ -49,9 +49,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?android:textColorSecondary"
-                osmand:layout_constraintBottom_toTopOf="@+id/progress_bar"
-                osmand:layout_constraintStart_toStartOf="parent"
-                osmand:layout_constraintTop_toBottomOf="@+id/title"
+                app:layout_constraintBottom_toTopOf="@+id/progress_bar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title"
                 tools:text="14 hours ago" />
 
 
@@ -62,13 +62,13 @@
                 android:layout_height="4dp"
                 android:layout_marginTop="8dp"
                 android:indeterminate="false"
-                osmand:layout_constraintBottom_toBottomOf="parent"
-                osmand:layout_constraintEnd_toEndOf="parent"
-                osmand:layout_constraintStart_toStartOf="parent"
-                osmand:layout_constraintTop_toBottomOf="@+id/description"
-                osmand:mpb_progressStyle="horizontal"
-                osmand:mpb_setBothDrawables="true"
-                osmand:mpb_useIntrinsicPadding="false" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/description"
+                app:mpb_progressStyle="horizontal"
+                app:mpb_setBothDrawables="true"
+                app:mpb_useIntrinsicPadding="false" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

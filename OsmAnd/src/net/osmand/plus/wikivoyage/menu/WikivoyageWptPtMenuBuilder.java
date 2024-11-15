@@ -4,7 +4,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.WptPtMenuBuilder;
@@ -29,7 +29,7 @@ public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 	}
 
 	public void updateDescriptionTokens(@NonNull WptPt wpt) {
-		descTokens = getDescriptionTokens(wpt.desc, KEY_PHONE, KEY_EMAIL, KEY_WORKING_HOURS, KEY_PRICE, KEY_DIRECTIONS);
+		descTokens = getDescriptionTokens(wpt.getDesc(), KEY_PHONE, KEY_EMAIL, KEY_WORKING_HOURS, KEY_PRICE, KEY_DIRECTIONS);
 	}
 
 	@Override
@@ -53,9 +53,9 @@ public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 					null, phones, 0,
 					false, null, false, 0, false, true, false, null, false);
 		}
-		if (!Algorithms.isEmpty(wpt.link)) {
+		if (!Algorithms.isEmpty(wpt.getLink())) {
 			buildRow(view, R.drawable.ic_world_globe_dark,
-					null, wpt.link, 0,
+					null, wpt.getLink(), 0,
 					false, null, false, 0, true, null, false);
 		}
 		if (!Algorithms.isEmpty(emails)) {

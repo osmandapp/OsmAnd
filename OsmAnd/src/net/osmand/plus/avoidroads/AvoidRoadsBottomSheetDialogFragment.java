@@ -37,6 +37,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.router.GeneralRouter;
+import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -63,7 +64,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	private DirectionPointsHelper pointsHelper;
 	private RoutingOptionsHelper routingOptionsHelper;
 
-	private HashMap<String, Boolean> routingParametersMap;
+	private Map<String, Boolean> routingParametersMap;
 	private List<AvoidRoadInfo> removedImpassableRoads;
 	private final List<String> enabledFiles = new ArrayList<>();
 	private LinearLayout stylesContainer;
@@ -111,7 +112,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			enabledFiles.addAll(selectedFileNames);
 		}
 		if (routingParametersMap == null) {
-			routingParametersMap = getRoutingParametersMap(app);
+			routingParametersMap = getRoutingParametersMap();
 		}
 		if (removedImpassableRoads == null) {
 			removedImpassableRoads = new ArrayList<>();
@@ -298,7 +299,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putSerializable(AVOID_ROADS_TYPES_KEY, routingParametersMap);
+		outState.putSerializable(AVOID_ROADS_TYPES_KEY, (Serializable) routingParametersMap);
 		outState.putSerializable(AVOID_ROADS_OBJECTS_KEY, (Serializable) removedImpassableRoads);
 		outState.putStringArrayList(ENABLED_FILES_IDS, (ArrayList<String>) enabledFiles);
 		outState.putBoolean(HIDE_IMPASSABLE_ROADS_KEY, hideImpassableRoads);
@@ -351,15 +352,12 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	}
 
 	@NonNull
-	private HashMap<String, Boolean> getRoutingParametersMap(OsmandApplication app) {
-		HashMap<String, Boolean> res = new HashMap<>();
-		List<GeneralRouter.RoutingParameter> avoidParameters = routingOptionsHelper.getAvoidRoutingPrefsForAppMode(app.getRoutingHelper().getAppMode());
-
-		for (GeneralRouter.RoutingParameter parameter : avoidParameters) {
-			CommonPreference<Boolean> preference = app.getSettings().getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
-			res.put(parameter.getId(), preference.getModeValue(app.getRoutingHelper().getAppMode()));
+	private HashMap<String, Boolean> getRoutingParametersMap() {
+		HashMap<String, Boolean> map = new HashMap<>();
+		Map<RoutingParameter, Boolean> parameters = routingOptionsHelper.getAvoidParametersWithStates(app);
+		for (Map.Entry<RoutingParameter, Boolean> entry : parameters.entrySet()) {
+			map.put(entry.getKey().getId(), entry.getValue());
 		}
-
-		return res;
+		return map;
 	}
 }

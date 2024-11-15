@@ -16,6 +16,12 @@ import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterOtherViewHolder
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterRangeViewHolder
 import net.osmand.plus.myplaces.tracks.filters.viewholders.ListFilterViewHolder
 import net.osmand.plus.utils.UiUtilities
+import net.osmand.shared.gpx.filters.DateTrackFilter
+import net.osmand.shared.gpx.filters.FilterType
+import net.osmand.shared.gpx.filters.ListTrackFilter
+import net.osmand.shared.gpx.filters.OtherTrackFilter
+import net.osmand.shared.gpx.filters.RangeTrackFilter
+import net.osmand.shared.gpx.filters.TextTrackFilter
 
 class FiltersAdapter(
 	private val app: OsmandApplication,
@@ -30,7 +36,7 @@ class FiltersAdapter(
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 		val inflater = UiUtilities.getInflater(parent.context, nightMode)
 
-		return when (FilterType.values()[viewType]) {
+		return when (FilterType.entries[viewType]) {
 			FilterType.TEXT -> {
 				val view = inflater.inflate(R.layout.filter_name_item, parent, false)
 				FilterNameViewHolder(view, nightMode)

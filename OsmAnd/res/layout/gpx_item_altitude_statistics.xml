@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:orientation="vertical"
 	android:layout_width="match_parent"
@@ -44,7 +44,7 @@
 					android:background="@null"
 					android:textColor="?android:attr/textColorPrimary"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium"
+					app:typefaceWeight="medium"
 					tools:text="40 m" />
 
 			</LinearLayout>
@@ -54,7 +54,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="@dimen/poi_icon_size"
 				android:layout_marginTop="@dimen/subHeaderPadding"
-				osmand:srcCompat="@drawable/ic_action_altitude_average_16" />
+				app:srcCompat="@drawable/ic_action_altitude_average_16" />
 
 		</LinearLayout>
 
@@ -88,7 +88,7 @@
 					android:background="@null"
 					android:textColor="?android:attr/textColorPrimary"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium"
+					app:typefaceWeight="medium"
 					tools:text="30m - 53m" />
 
 			</LinearLayout>
@@ -98,7 +98,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="@dimen/poi_icon_size"
 				android:layout_marginTop="@dimen/subHeaderPadding"
-				osmand:srcCompat="@drawable/ic_action_altitude_average_16" />
+				app:srcCompat="@drawable/ic_action_altitude_average_16" />
 
 		</LinearLayout>
 
@@ -159,7 +159,7 @@
 					android:background="@null"
 					android:textColor="?android:attr/textColorPrimary"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium"
+					app:typefaceWeight="medium"
 					tools:text="174" />
 
 			</LinearLayout>
@@ -169,7 +169,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="@dimen/poi_icon_size"
 				android:layout_marginTop="@dimen/subHeaderPadding"
-				osmand:srcCompat="@drawable/ic_action_altitude_ascent_16" />
+				app:srcCompat="@drawable/ic_action_altitude_ascent_16" />
 
 		</LinearLayout>
 
@@ -203,7 +203,7 @@
 					android:background="@null"
 					android:textColor="?android:attr/textColorPrimary"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium"
+					app:typefaceWeight="medium"
 					tools:text="164" />
 
 			</LinearLayout>
@@ -213,7 +213,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="@dimen/poi_icon_size"
 				android:layout_marginTop="@dimen/subHeaderPadding"
-				osmand:srcCompat="@drawable/ic_action_altitude_descent_16" />
+				app:srcCompat="@drawable/ic_action_altitude_descent_16" />
 
 		</LinearLayout>
 

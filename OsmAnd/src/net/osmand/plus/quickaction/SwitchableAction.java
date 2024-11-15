@@ -3,7 +3,6 @@ package net.osmand.plus.quickaction;
 import static net.osmand.plus.utils.AndroidUtils.isLayoutRtl;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -11,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
@@ -30,10 +30,11 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickActionListFragment.OnStartDragListener;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.OnItemMoveCallback;
 import net.osmand.plus.views.controls.maphudbuttons.QuickActionButton;
+import net.osmand.plus.views.layers.MapQuickActionLayer;
+import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -160,17 +161,23 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	public abstract String getNextSelectedItem(OsmandApplication app);
 
 	protected void showChooseDialog(@NonNull MapActivity mapActivity) {
-		MapLayers mapLayers = mapActivity.getMapLayers();
-		QuickActionButton selectedButton = mapLayers.getMapQuickActionLayer().getSelectedButton();
-		if (selectedButton != null) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		MapQuickActionLayer layer = mapActivity.getMapLayers().getMapQuickActionLayer();
+
+		QuickActionButton button = layer.getSelectedButton();
+		QuickActionButtonState buttonState = button != null ? button.getButtonState() : null;
+		if (buttonState == null) {
+			buttonState = app.getMapButtonsHelper().getButtonStateByAction(this);
+		}
+		if (buttonState != null) {
 			FragmentManager manager = mapActivity.getSupportFragmentManager();
-			SelectMapViewQuickActionsBottomSheet.showInstance(manager, selectedButton.getButtonState(), id);
+			SelectMapViewQuickActionsBottomSheet.showInstance(manager, buttonState, id);
 		}
 	}
 
 	public String getNextItemFromSources(@NonNull OsmandApplication app,
-	                                     @NonNull List<Pair<String, String>> sources,
-	                                     @NonNull String defValue) {
+										 @NonNull List<Pair<String, String>> sources,
+										 @NonNull String defValue) {
 		if (!Algorithms.isEmpty(sources)) {
 			String currentSource = getSelectedItem(app);
 			if (sources.size() > 1) {
@@ -217,10 +224,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 
-			Drawable icon = app.getUIUtilities().getPaintedIcon(
-					getItemIconRes(app, item), getItemIconColor(app, item));
-			holder.icon.setImageDrawable(icon);
-
+			setIcon(app, item, holder.icon, holder.iconProgressBar);
 			holder.title.setText(getItemName(context, item));
 
 			holder.handleView.setOnTouchListener((v, event) -> {
@@ -327,6 +331,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 			public ImageView handleView;
 			public ImageView closeBtn;
 			public ImageView icon;
+			public ProgressBar iconProgressBar;
 
 			public ItemHolder(View itemView) {
 				super(itemView);
@@ -335,6 +340,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 				handleView = itemView.findViewById(R.id.handle_view);
 				closeBtn = itemView.findViewById(R.id.closeImageButton);
 				icon = itemView.findViewById(R.id.imageView);
+				iconProgressBar = itemView.findViewById(R.id.iconProgressBar);
 			}
 		}
 	}
@@ -344,6 +350,11 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	protected abstract void saveListToParams(List<T> list);
 
 	protected abstract String getItemName(Context context, T item);
+
+	protected void setIcon(@NonNull OsmandApplication app, T item, @NonNull ImageView imageView, @NonNull ProgressBar iconProgressBar) {
+		imageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(
+				getItemIconRes(app, item), getItemIconColor(app, item)));
+	}
 
 	@DrawableRes
 	protected int getItemIconRes(Context context, T item) {

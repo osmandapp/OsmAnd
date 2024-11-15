@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -44,7 +43,7 @@
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_header_text_size"
 					app:lineHeight="@dimen/default_title_line_height"
-					app:typeface="@string/font_roboto_medium"
+					app:typefaceWeight="medium"
 					tools:text="@string/shared_string_toolbar" />
 
 				<ImageButton
@@ -62,6 +61,20 @@
 		</androidx.appcompat.widget.Toolbar>
 
 	</com.google.android.material.appbar.AppBarLayout>
+
+	<FrameLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/toolbar_height">
+
+		<include
+			layout="@layout/map_compass_button"
+			android:layout_width="@dimen/map_small_button_size"
+			android:layout_height="@dimen/map_small_button_size"
+			android:layout_marginStart="@dimen/map_button_margin"
+			android:layout_marginTop="@dimen/map_small_button_margin" />
+
+	</FrameLayout>
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -120,9 +133,9 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginHorizontal="@dimen/content_padding"
-				osmand:dialogButtonHeight="@dimen/dialog_button_height"
-				osmand:dialogButtonTitle="@string/shared_string_apply"
-				osmand:dialogButtonTopMargin="@dimen/content_padding" />
+				app:dialogButtonHeight="@dimen/dialog_button_height"
+				app:dialogButtonTitle="@string/shared_string_apply"
+				app:dialogButtonTopMargin="@dimen/content_padding" />
 
 		</LinearLayout>
 

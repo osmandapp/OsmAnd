@@ -3,16 +3,17 @@ package net.osmand.plus.views.layers.geometry;
 import android.graphics.Path;
 import android.graphics.PointF;
 
-import net.osmand.core.jni.QListFloat;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.views.layers.geometry.GeometryWayDrawer.DrawPathData31;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import gnu.trove.list.array.TByteArrayList;
 
 public class GeometryWayPathAlgorithms {
@@ -142,46 +143,53 @@ public class GeometryWayPathAlgorithms {
 		return pathsData;
 	}
 
-	public static List<GeometryWayDrawer.DrawPathData31> calculatePath(@NonNull List<GeometryWayPoint> points) {
-		List<GeometryWayDrawer.DrawPathData31> pathsData = new ArrayList<>();
+	public static List<DrawPathData31> calculatePath(@NonNull List<GeometryWayPoint> points) {
+		List<DrawPathData31> pathsData = new ArrayList<>();
 		GeometryWayPoint firstPoint = points.get(0);
 		GeometryWayStyle<?> style = points.get(0).style;
 		List<Integer> ind = new ArrayList<>();
 		List<Integer> tx = new ArrayList<>();
 		List<Integer> ty = new ArrayList<>();
 		List<Float> heights = new ArrayList<>();
+		List<Float> distances = new ArrayList<>();
 		ind.add(firstPoint.index);
 		tx.add(firstPoint.tx31);
 		ty.add(firstPoint.ty31);
 		heights.add(firstPoint.height);
+		distances.add(0f);
 		for (int i = 1; i < points.size(); i++) {
 			GeometryWayPoint pnt = points.get(i);
 			ind.add(pnt.index);
 			tx.add(pnt.tx31);
 			ty.add(pnt.ty31);
 			heights.add(pnt.height);
+			distances.add((float) pnt.distance);
 			if (style != null) {
 				GeometryWayStyle<?> newStyle = pnt.style;
 				if (!style.equals(newStyle) || newStyle.isUnique()) {
-					GeometryWayDrawer.DrawPathData31 newPathData = new GeometryWayDrawer.DrawPathData31(ind, tx, ty, style);
+					DrawPathData31 newPathData = new DrawPathData31(ind, tx, ty, style);
 					newPathData.heights = heights;
+					newPathData.distances = distances;
 					pathsData.add(newPathData);
 					ind = new ArrayList<>();
 					tx = new ArrayList<>();
 					ty = new ArrayList<>();
 					heights = new ArrayList<>();
+					distances = new ArrayList<>();
 					ind.add(pnt.index);
 					tx.add(pnt.tx31);
 					ty.add(pnt.ty31);
 					heights.add(pnt.height);
+					distances.add(0f);
 					style = newStyle;
 				}
 			}
 		}
 		if (tx.size() > 1) {
-			GeometryWayDrawer.DrawPathData31 newPathData = new GeometryWayDrawer.DrawPathData31(ind, tx, ty, style);
-			pathsData.add(newPathData);
+			DrawPathData31 newPathData = new DrawPathData31(ind, tx, ty, style);
 			newPathData.heights = heights;
+			newPathData.distances = distances;
+			pathsData.add(newPathData);
 		}
 		return pathsData;
 	}

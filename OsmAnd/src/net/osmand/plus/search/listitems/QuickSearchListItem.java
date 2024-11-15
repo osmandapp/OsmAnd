@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.City.CityType;
@@ -19,9 +20,8 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.Street;
 import net.osmand.data.WptLocationPoint;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
@@ -120,12 +120,12 @@ public class QuickSearchListItem {
 
 	public String getTypeName() {
 		String typeName = getTypeName(app, searchResult);
-		String[] alternateName = new String[]{searchResult.alternateName};
+		String alternateName = searchResult.alternateName;
 		if (searchResult.object instanceof Amenity) {
-			((Amenity) searchResult.object).getAdditionalInfoAndCollectCategories(
-					app.getPoiTypes(), null, null, alternateName);
+			Amenity amenity = (Amenity) searchResult.object;
+			alternateName = amenity.getTranslation(app.getPoiTypes(), searchResult.alternateName);
 		}
-		return (alternateName[0] != null ? alternateName[0] + " • " : "") + typeName;
+		return alternateName != null ? typeName + " • " + alternateName : typeName;
 	}
 
 	public static String getTypeName(OsmandApplication app, SearchResult searchResult) {
@@ -171,8 +171,10 @@ public class QuickSearchListItem {
 				if (searchResult.relatedObject != null) {
 					Street relatedStreet = (Street) searchResult.relatedObject;
 					if (relatedStreet.getCity() != null) {
-						return searchResult.localeRelatedObjectName + ", "
-								+ relatedStreet.getCity().getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true);
+						String relObj = searchResult.localeRelatedObjectName;
+						String cityName = relatedStreet.getCity().getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true);
+						String res = relObj.contains(cityName) ? relObj : relObj + ", " + cityName;
+						return res.replace("<", "").replace(">", "");
 					} else {
 						return searchResult.localeRelatedObjectName;
 					}
@@ -208,19 +210,14 @@ public class QuickSearchListItem {
 					}
 				} else if (searchResult.object instanceof CustomSearchPoiFilter) {
 					res = ((CustomSearchPoiFilter) searchResult.object).getName();
+				} else if (searchResult.object instanceof SearchPoiAdditionalFilter) {
+					String name = ((SearchPoiAdditionalFilter) searchResult.object).getName();
+					res = name;
 				}
 				return res;
 			case POI:
 				Amenity amenity = (Amenity) searchResult.object;
-				PoiCategory pc = amenity.getType();
-				PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
-				String typeStr = amenity.getSubType();
-				if (pt != null) {
-					typeStr = pt.getTranslation();
-				} else if (typeStr != null) {
-					typeStr = Algorithms.capitalizeFirstLetterAndLowercase(typeStr.replace('_', ' '));
-				}
-				return typeStr;
+				return amenity.getSubTypeStr();
 			case LOCATION:
 				LatLon latLon = searchResult.location;
 				if (latLon != null && searchResult.localeRelatedObjectName == null) {
@@ -248,15 +245,15 @@ public class QuickSearchListItem {
 				}
 			case WPT:
 				StringBuilder sb = new StringBuilder();
-				GPXFile gpx = (GPXFile) searchResult.relatedObject;
+				GpxFile gpx = (GpxFile) searchResult.relatedObject;
 				if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
 					sb.append(searchResult.localeRelatedObjectName);
 				}
-				if (gpx != null && !Algorithms.isEmpty(gpx.path)) {
+				if (gpx != null && !Algorithms.isEmpty(gpx.getPath())) {
 					if (sb.length() > 0) {
 						sb.append(", ");
 					}
-					sb.append(new File(gpx.path).getName());
+					sb.append(new File(gpx.getPath()).getName());
 				}
 				return sb.toString();
 			case MAP_MARKER:
@@ -345,6 +342,9 @@ public class QuickSearchListItem {
 					if (filter != null) {
 						iconId = getCustomFilterIconRes(filter);
 					}
+				} else if (searchResult.object instanceof SearchPoiAdditionalFilter) {
+					SearchPoiAdditionalFilter filter = (SearchPoiAdditionalFilter) searchResult.object;
+					iconId = RenderingIcons.getBigIconResourceId(filter.getIconResource());
 				}
 				if (iconId > 0) {
 					return getIcon(app, iconId);
@@ -516,7 +516,7 @@ public class QuickSearchListItem {
 				pointDescription.setIconName("ic_action_intersection");
 				break;
 			case WPT:
-				GPXUtilities.WptPt wpt = (GPXUtilities.WptPt) object;
+				WptPt wpt = (WptPt) object;
 				pointDescription = new WptLocationPoint(wpt).getPointDescription(app);
 				break;
 		}

@@ -37,6 +37,7 @@ public class FileNameTranslationHelper {
 	public static final String SLOPE = "Slope";
 	public static final String HEIGHTMAP = "Heightmap";
 	public static final String SEA_DEPTH = "Depth_";
+	public static final String TRAVEL_TOPICS = "travel_topics";
 
 	public static String getFileNameWithRegion(OsmandApplication app, String fileName) {
 		return getFileName(app, app.getResourceManager().getOsmandRegions(), fileName);
@@ -334,6 +335,8 @@ public class FileNameTranslationHelper {
 			return ctx.getString(R.string.index_name_south_america);
 		} else if (WorldRegion.ANTARCTICA_REGION_ID.equalsIgnoreCase(filename)) {
 			return ctx.getString(R.string.index_name_antarctica);
+		} else if (TRAVEL_TOPICS.equalsIgnoreCase(filename)) {
+			return ctx.getString(R.string.travel_topics);
 		}
 		return null;
 	}

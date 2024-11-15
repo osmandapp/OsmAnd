@@ -66,6 +66,11 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/default_speed_system" />
 
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="unit_of_volume"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/unit_of_volume" />
+
 	<Preference
 		android:key="precise_distance_numbers"
 		android:layout="@layout/preference_with_descr"
@@ -106,13 +111,6 @@
 		android:summaryOff="@string/shared_string_off"
 		android:summaryOn="@string/shared_string_on"
 		android:title="@string/use_magnetic_sensor" />
-
-    <net.osmand.plus.settings.preferences.SwitchPreferenceEx
-        android:key="fix_north_map"
-        android:layout="@layout/preference_with_descr_dialog_and_switch"
-        android:summaryOff="@string/shared_string_off"
-        android:summaryOn="@string/shared_string_on"
-        android:title="@string/fix_north_up" />
 
     <net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="map_empty_state_allowed"

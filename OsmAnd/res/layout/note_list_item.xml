@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -34,7 +34,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/content_padding"
             android:layout_marginRight="@dimen/content_padding"
-            osmand:srcCompat="@drawable/ic_type_audio"
+            app:srcCompat="@drawable/ic_type_audio"
 	        android:layout_marginStart="@dimen/content_padding"
 	        android:layout_marginEnd="@dimen/content_padding" />
 
@@ -80,7 +80,7 @@
             android:contentDescription="@string/shared_string_more"
             android:focusable="false"
             android:padding="@dimen/content_padding"
-            osmand:srcCompat="@drawable/ic_overflow_menu_white"/>
+            app:srcCompat="@drawable/ic_overflow_menu_white"/>
 
     </LinearLayout>
 

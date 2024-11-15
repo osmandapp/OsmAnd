@@ -23,8 +23,9 @@ public class RenderingRuleStorageProperties {
 	public static final String ATTR_STRING_VALUE = "attrStringValue";
 	public static final String TEST = "test";
 	public static final String DISABLE = "disable";
-	
-	
+
+	public static final String ASSOCIATION = "association";
+
 	
 	public static final String INTERSECTION_MARGIN = "intersectionMargin";
 	public static final String INTERSECTION_SIZE_FACTOR = "intersectionSizeFactor";
@@ -100,7 +101,8 @@ public class RenderingRuleStorageProperties {
 	public static final String ADD_POINT = "addPoint";
 	public static final String ORDER_BY_DENSITY = "orderByDensity";
 
-	
+	public RenderingRuleProperty R_ASSOCIATION;
+
 	public RenderingRuleProperty R_TEST;
 	public RenderingRuleProperty R_DISABLE;
 	public RenderingRuleProperty R_ATTR_INT_VALUE;
@@ -228,6 +230,7 @@ public class RenderingRuleStorageProperties {
 		R_NAME_TAG = registerRuleInternal(RenderingRuleProperty.createInputStringProperty(NAME_TAG));
 		R_NAME_TAG2 = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(NAME_TAG2));
 
+		R_ASSOCIATION = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(ASSOCIATION));
 		R_DISABLE = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(DISABLE));
 		R_ATTR_INT_VALUE = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(ATTR_INT_VALUE));
 		R_ATTR_BOOL_VALUE = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(ATTR_BOOL_VALUE));

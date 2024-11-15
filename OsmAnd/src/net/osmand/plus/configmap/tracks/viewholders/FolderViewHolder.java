@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -49,7 +49,7 @@ public class FolderViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void bindView(@NonNull TrackFolder trackFolder, boolean showDivider) {
-		title.setText(trackFolder.getName(app));
+		title.setText(trackFolder.getName());
 		imageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, ColorUtilities.getDefaultIconColor(app, nightMode)));
 
 		int margin = app.getResources().getDimensionPixelSize(R.dimen.content_padding);

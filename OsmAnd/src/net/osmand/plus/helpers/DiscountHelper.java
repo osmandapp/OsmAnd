@@ -3,7 +3,6 @@ package net.osmand.plus.helpers;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
@@ -517,7 +516,7 @@ public class DiscountHelper {
 		private static int parseColor(String key, JSONObject obj) {
 			String color = obj.optString(key);
 			if (!color.isEmpty()) {
-				return Color.parseColor(color);
+				return Algorithms.parseColor(color);
 			}
 			return -1;
 		}

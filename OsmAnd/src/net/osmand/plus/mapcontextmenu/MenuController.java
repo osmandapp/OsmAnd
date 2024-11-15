@@ -23,7 +23,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.SpecialPointType;
 import net.osmand.data.TransportStop;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
@@ -152,6 +152,10 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		if (mapContextMenu != null) {
 			mapContextMenu.updateLayout();
 		}
+	}
+
+	public String getPreferredMapLangLC() {
+		return getPreferredMapLang().toLowerCase();
 	}
 
 	public String getPreferredMapLang() {

@@ -41,6 +41,11 @@ public class ZoomLevelWidgetState extends WidgetState {
 		registerTypePreference(customId).setModeValue(appMode, getZoomLevelType());
 	}
 
+	@Override
+	public void copyPrefsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId){
+		registerTypePreference(customId).setModeValue(appMode, typePreference.getModeValue(sourceAppMode));
+	}
+
 	@NonNull
 	public OsmandPreference<ZoomLevelType> getZoomLevelTypePref() {
 		return typePreference;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -86,7 +86,7 @@
 				android:text="@string/shared_string_continue"
 				android:textColor="@color/card_and_list_background_light"
 				android:textSize="@dimen/text_button_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				app:typefaceWeight="medium"
 				android:paddingEnd="@dimen/content_padding"
 				android:paddingStart="@dimen/content_padding" />
 

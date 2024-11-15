@@ -3467,7 +3467,7 @@
     <string name="poi_ford_stepping_stones">معبر حجري</string>
     <string name="poi_ford">مخاضة (مجرى الماء فوق الطريق)</string>
     <string name="poi_emergency_access_point">نقطة وصول الطوارئ</string>
-    <string name="poi_ses_station">محطة SES</string>
+    <string name="poi_disaster_response">محطة SES</string>
     <string name="poi_ambulance_station">محطة إسعاف</string>
     <string name="poi_grit_bin">سلة حصى</string>
     <string name="poi_fire_water_pond">احتياطي مياه إطفاء الحرائق</string>

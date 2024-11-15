@@ -23,7 +23,7 @@
 		android:textAppearance="@style/TextAppearance.ListItemCategoryTitle"
 		android:textColor="?android:textColorPrimary"
 		android:textSize="@dimen/default_list_text_size"
-		app:typeface="@string/font_roboto_medium"
+		app:typefaceWeight="medium"
 		tools:text="Title" />
 
 	<androidx.appcompat.widget.AppCompatImageView

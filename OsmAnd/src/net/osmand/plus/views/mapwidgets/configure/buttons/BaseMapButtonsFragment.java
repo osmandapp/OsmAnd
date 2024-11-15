@@ -63,10 +63,6 @@ public abstract class BaseMapButtonsFragment extends BaseOsmAndFragment implemen
 		ImageView backButton = toolbar.findViewById(R.id.back_button);
 		backButton.setOnClickListener(v -> dismiss());
 		backButton.setImageDrawable(getContentIcon(AndroidUtils.getNavigationIconResId(app)));
-
-		ImageView optionsButton = toolbar.findViewById(R.id.options_button);
-		optionsButton.setOnClickListener(this::showOptionsMenu);
-		optionsButton.setImageDrawable(getContentIcon(R.drawable.ic_overflow_menu_white));
 	}
 
 	protected void setupContent(@NonNull View view) {
@@ -85,8 +81,6 @@ public abstract class BaseMapButtonsFragment extends BaseOsmAndFragment implemen
 
 	@NonNull
 	protected abstract List<MapButtonState> getAdapterItems();
-
-	protected abstract void showOptionsMenu(@NonNull View view);
 
 	protected void dismiss() {
 		FragmentActivity activity = getActivity();

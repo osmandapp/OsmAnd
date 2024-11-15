@@ -6,28 +6,23 @@
 
 	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/outline"
-		android:layout_width="56dp"
-		android:layout_height="56dp"
-		app:srcCompat="@drawable/circle_contour_bg_light" />
+		android:layout_width="@dimen/favorites_icon_outline_size"
+		android:layout_height="@dimen/favorites_icon_outline_size"
+		app:srcCompat="@drawable/bg_point_circle_contour" />
 
 	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/background"
-		android:layout_width="48dp"
-		android:layout_height="48dp"
-		android:layout_margin="4dp"
+		android:layout_width="@dimen/favorites_icon_size"
+		android:layout_height="@dimen/favorites_icon_size"
+		android:layout_gravity="center"
 		android:background="@drawable/circle_background_light" />
 
 	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/checkMark"
-		android:layout_width="24dp"
-		android:layout_height="24dp"
-		android:layout_marginLeft="16dp"
-		android:layout_marginTop="16dp"
-		android:layout_marginRight="4dp"
-		android:layout_marginBottom="4dp"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_gravity="center"
 		android:clickable="false"
-		app:srcCompat="@drawable/ic_action_done"
-		android:layout_marginStart="16dp"
-		android:layout_marginEnd="4dp" />
+		app:srcCompat="@drawable/ic_action_done" />
 
 </FrameLayout>

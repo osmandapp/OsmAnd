@@ -46,7 +46,7 @@
 				android:maxLines="2"
 				android:textColor="?attr/app_bar_primary_item_color"
 				android:textSize="@dimen/dialog_header_text_size"
-				app:typeface="@string/font_roboto_medium"
+				app:typefaceWeight="medium"
 				tools:text="@string/routing_settings_2" />
 
 			<LinearLayout

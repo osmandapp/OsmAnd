@@ -1,5 +1,11 @@
 package net.osmand.plus.plugins.development;
 
+import android.content.Context;
+import android.content.IntentFilter;
+import android.os.BatteryManager;
+import android.os.Handler;
+import android.os.Looper;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
@@ -7,8 +13,8 @@ import com.github.mikephil.charting.charts.LineChart;
 
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXTrackAnalysis.TrackPointsAnalyser;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -34,6 +40,7 @@ import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.simulation.DashSimulateFragment;
+import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.AutoZoomBySpeedHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
@@ -47,6 +54,8 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -71,6 +80,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public final OsmandPreference<Boolean> ALLOW_SYMBOLS_DISPLAY_ON_TOP;
 	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
 	private final StateChangedListener<Boolean> symbolsDebugInfoListener;
+	private final StateChangedListener<Boolean> batterySavingModeListener;
 
 	public OsmandDevelopmentPlugin(@NonNull OsmandApplication app) {
 		super(app);
@@ -84,6 +94,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_TARGET_DISTANCE, noAppMode);
 
 		pluginPreferences.add(settings.SAFE_MODE);
+		pluginPreferences.add(settings.BATTERY_SAVING_MODE);
+		pluginPreferences.add(settings.SIMULATE_OBD_DATA);
 		pluginPreferences.add(settings.DEBUG_RENDERING_INFO);
 		pluginPreferences.add(settings.SHOULD_SHOW_FREE_VERSION_BANNER);
 		pluginPreferences.add(settings.TRANSPARENT_STATUS_BAR);
@@ -98,7 +110,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 		useRasterSQLiteDbListener = change -> {
 			SRTMPlugin plugin = getSrtmPlugin();
-			if (plugin != null && plugin.isTerrainLayerEnabled() && (plugin.isHillshadeMode() || plugin.isSlopeMode())) {
+			if (plugin != null && plugin.isTerrainLayerEnabled()) {
 				plugin.updateLayers(app, null);
 			}
 		};
@@ -113,6 +125,15 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		};
 		SHOW_SYMBOLS_DEBUG_INFO.addListener(symbolsDebugInfoListener);
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP.addListener(symbolsDebugInfoListener);
+
+		batterySavingModeListener = change -> {
+			OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+			MapRendererView mapRenderer = mapView.getMapRenderer();
+			if (mapRenderer != null) {
+				mapView.applyBatterySavingModeSetting(mapRenderer);
+			}
+		};
+		settings.BATTERY_SAVING_MODE.addListener(batterySavingModeListener);
 	}
 
 	@Override
@@ -220,12 +241,21 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public boolean init(@NonNull OsmandApplication app, @Nullable Activity activity) {
+		super.init(app, activity);
+		avgStatsEnabled = true;
+		avgStatsCollector();
+		return true;
+	}
+
+	@Override
 	public void disable(@NonNull OsmandApplication app) {
 		OsmEditingPlugin osmPlugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		if (osmPlugin != null && osmPlugin.OSM_USE_DEV_URL.get()) {
 			osmPlugin.OSM_USE_DEV_URL.set(false);
 			app.getOsmOAuthHelper().resetAuthorization();
 		}
+		avgStatsEnabled = false;
 		super.disable(app);
 	}
 
@@ -246,13 +276,13 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void getAvailableGPXDataSetTypes(@NonNull GPXTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
+	public void getAvailableGPXDataSetTypes(@NonNull GpxTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
 		AutoZoomBySpeedHelper.addAvailableGPXDataSetTypes(app, analysis, availableTypes);
 	}
 
 	@Nullable
 	@Override
-	public OrderedLineDataSet getOrderedLineDataSet(@NonNull LineChart chart, @NonNull GPXTrackAnalysis analysis, @NonNull GPXDataSetType graphType, @NonNull GPXDataSetAxisType chartAxisType, boolean calcWithoutGaps, boolean useRightAxis) {
+	public OrderedLineDataSet getOrderedLineDataSet(@NonNull LineChart chart, @NonNull GpxTrackAnalysis analysis, @NonNull GPXDataSetType graphType, @NonNull GPXDataSetAxisType chartAxisType, boolean calcWithoutGaps, boolean useRightAxis) {
 		return AutoZoomBySpeedHelper.getOrderedLineDataSet(app, chart, analysis, graphType, chartAxisType,
 				calcWithoutGaps, useRightAxis);
 	}
@@ -261,5 +291,113 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	@Override
 	protected TrackPointsAnalyser getTrackPointsAnalyser() {
 		return AutoZoomBySpeedHelper.getTrackPointsAnalyser(app);
+	}
+
+	private boolean avgStatsEnabled = false;
+	private final int AVG_STATS_INTERVAL_SECONDS = 10;
+	private final int AVG_STATS_LIFETIME_MINUTES = 15;
+	private Handler avgStatsHandler = new Handler(Looper.getMainLooper());
+	private List<AvgStatsEntry> avgStats = new ArrayList<>();
+
+	protected class AvgStatsEntry {
+		private long timestamp;
+		protected float energyConsumption;
+		protected float batteryLevel;
+		protected float cpuBasic;
+		protected float fps1k;
+		protected float idle1k;
+		protected float gpu1k;
+
+		private AvgStatsEntry(OsmandApplication app) {
+			MapRendererView renderer = app.getOsmandMap().getMapView().getMapRenderer();
+			if (renderer != null) {
+				this.timestamp = System.currentTimeMillis();
+
+				this.fps1k = renderer.getFrameRateLast1K();
+				this.idle1k = renderer.getIdleTimePartLast1K();
+				this.gpu1k = renderer.getGPUWaitTimePartLast1K();
+
+				float cpuBasic = renderer.getBasicThreadsCPULoad();
+				this.cpuBasic = cpuBasic > 0 ? cpuBasic : 0; // NaN
+
+				Intent batteryIntent;
+				if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+					batteryIntent = app.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED), Context.RECEIVER_NOT_EXPORTED);
+				} else {
+					batteryIntent = app.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+				}
+				if (batteryIntent != null) {
+					int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+					int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+					this.batteryLevel = level != -1 && scale > 0 ? (float) (level * 100) / scale : 0;
+				}
+
+				final int EMULATOR_CURRENT_NOW_STUB = 900000;
+				BatteryManager mBatteryManager = (BatteryManager) app.getSystemService(Context.BATTERY_SERVICE);
+				int mBatteryCurrent = mBatteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW);
+				this.energyConsumption = mBatteryCurrent == EMULATOR_CURRENT_NOW_STUB ? 0 : mBatteryCurrent;
+			}
+		}
+
+		private AvgStatsEntry(List<AvgStatsEntry> allEntries, int periodMinutes) {
+			if (!allEntries.isEmpty()) {
+				this.batteryLevel = minuteBatteryUsage(allEntries, periodMinutes);
+				this.fps1k = avgFloat(allEntries, periodMinutes, entry -> entry.fps1k);
+				this.gpu1k = avgFloat(allEntries, periodMinutes, entry -> entry.gpu1k);
+				this.idle1k = avgFloat(allEntries, periodMinutes, entry -> entry.idle1k);
+				this.cpuBasic = avgFloat(allEntries, periodMinutes, entry -> entry.cpuBasic);
+				this.energyConsumption = avgFloat(allEntries, periodMinutes, entry -> entry.energyConsumption);
+			}
+		}
+
+		private float avgFloat(List<AvgStatsEntry> allEntries, int periodMinutes, Function<AvgStatsEntry, Float> getter) {
+			long earliestTimestamp = System.currentTimeMillis() - periodMinutes * 60 * 1000;
+			final float[] pairSumCounter = { 0, 0 }; // sum, counter
+			allEntries.forEach(entry -> {
+				if (entry.timestamp > 0 && entry.timestamp >= earliestTimestamp) {
+					pairSumCounter[0] += getter.apply(entry);
+					pairSumCounter[1]++;
+				}
+			});
+			return pairSumCounter[1] > 0 ? (pairSumCounter[0] / pairSumCounter[1]) : 0;
+		}
+
+		private float minuteBatteryUsage(List<AvgStatsEntry> allEntries, int periodMinutes) {
+			long earliestTimestamp = System.currentTimeMillis() - periodMinutes * 60 * 1000;
+			for (int i = 0; i < allEntries.size(); i++) {
+				long nowTimestamp = System.currentTimeMillis();
+				long timestamp = allEntries.get(i).timestamp;
+				if (timestamp > 0 && timestamp >= earliestTimestamp && nowTimestamp > timestamp) {
+					float pastBattery = allEntries.get(i).batteryLevel;
+					float freshBattery = allEntries.get(allEntries.size() - 1).batteryLevel;
+					return (float) ((double) (freshBattery - pastBattery) / (double) (nowTimestamp - timestamp) * 1000 * 60);
+				}
+			}
+			return 0;
+		}
+	}
+
+	private void avgStatsCleanup() {
+		long expirationTimestamp = System.currentTimeMillis() - (long)(AVG_STATS_LIFETIME_MINUTES * 60 * 1000);
+		long delayedCleanupTimestamp = System.currentTimeMillis() - (long)(AVG_STATS_LIFETIME_MINUTES * 60 * 1000 * 2);
+		if (!avgStats.isEmpty() && avgStats.get(0).timestamp < delayedCleanupTimestamp) {
+			avgStats = avgStats.stream().filter(entry -> entry.timestamp >= expirationTimestamp).collect(Collectors.toList());
+		}
+	}
+
+	private void avgStatsCollector() {
+		if (avgStatsEnabled) {
+			avgStatsCleanup();
+
+			List<AvgStatsEntry> nextAvgStats = new ArrayList<>(avgStats);
+			nextAvgStats.add(new AvgStatsEntry(app));
+			avgStats = nextAvgStats;
+
+			avgStatsHandler.postDelayed(this::avgStatsCollector, AVG_STATS_INTERVAL_SECONDS * 1000);
+		}
+	}
+
+	protected AvgStatsEntry getAvgStats(int periodMinutes) {
+		return new AvgStatsEntry(avgStats, periodMinutes);
 	}
 }

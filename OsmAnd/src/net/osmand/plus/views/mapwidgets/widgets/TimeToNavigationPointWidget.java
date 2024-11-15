@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -75,6 +76,12 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 	@Override
 	public WidgetState getWidgetState() {
 		return widgetState;
+	}
+
+	@Override
+	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId) {
+		super.copySettingsFromMode(sourceAppMode, appMode, customId);
+		widgetState.copyPrefsFromMode(sourceAppMode, appMode, customId);
 	}
 
 	@Override

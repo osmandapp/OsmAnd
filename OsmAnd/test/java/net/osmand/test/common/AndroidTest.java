@@ -1,6 +1,15 @@
 package net.osmand.test.common;
 
+import static java.util.concurrent.TimeUnit.MINUTES;
+
 import android.content.Context;
+
+import androidx.annotation.NonNull;
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.IdlingPolicies;
+import androidx.test.espresso.IdlingRegistry;
+import androidx.test.espresso.IdlingResource;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -8,12 +17,6 @@ import net.osmand.plus.settings.enums.SimulationMode;
 
 import org.junit.After;
 import org.junit.Before;
-
-import androidx.annotation.NonNull;
-import androidx.test.espresso.Espresso;
-import androidx.test.espresso.IdlingRegistry;
-import androidx.test.espresso.IdlingResource;
-import androidx.test.platform.app.InstrumentationRegistry;
 
 public abstract class AndroidTest {
 
@@ -25,14 +28,15 @@ public abstract class AndroidTest {
 	public void setup() {
 		Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
 		app = ((OsmandApplication) context.getApplicationContext());
+		settings = app.getSettings();
 
 		EspressoUtils.grantPermissions(app);
+		IdlingPolicies.setIdlingResourceTimeout(5, MINUTES);
 
 		appInitIdlingResource = new AppInitIdlingResource(app);
 		registerIdlingResources(appInitIdlingResource);
-		Espresso.onIdle();
 
-		settings = app.getSettings();
+		Espresso.onIdle();
 	}
 
 	@After

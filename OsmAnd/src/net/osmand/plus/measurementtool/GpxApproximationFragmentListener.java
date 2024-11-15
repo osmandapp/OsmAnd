@@ -1,8 +1,8 @@
 package net.osmand.plus.measurementtool;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
+import net.osmand.router.GpxRouteApproximation;
 
 import java.util.List;
 

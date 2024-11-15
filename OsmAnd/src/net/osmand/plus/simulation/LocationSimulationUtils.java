@@ -9,8 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Location;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.settings.enums.SimulationMode;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -104,7 +104,7 @@ public class LocationSimulationUtils {
 	}
 
 	@NonNull
-	protected static List<SimulatedLocation> getSimulatedLocationsForGpx(@NonNull GPXFile gpxFile, int firstLocationOffset) {
+	protected static List<SimulatedLocation> getSimulatedLocationsForGpx(@NonNull GpxFile gpxFile, int firstLocationOffset) {
 		double distanceFromStart = 0;
 		List<SimulatedLocation> locations = new ArrayList<>();
 		List<WptPt> points = gpxFile.getAllSegmentsPoints();
@@ -116,27 +116,27 @@ public class LocationSimulationUtils {
 						prevLocation.getLongitude(), location.getLatitude(), location.getLongitude());
 			}
 			if (distanceFromStart >= firstLocationOffset) {
-				Location l = new Location(SIMULATED_PROVIDER_GPX, location.lat, location.lon);
-				if (location.time > 0) {
-					l.setTime(location.time);
+				Location l = new Location(SIMULATED_PROVIDER_GPX, location.getLat(), location.getLon());
+				if (location.getTime() > 0) {
+					l.setTime(location.getTime());
 				}
-				if (location.speed > 0) {
-					l.setSpeed((float) location.speed);
+				if (location.getSpeed() > 0) {
+					l.setSpeed((float) location.getSpeed());
 				} else {
 					String sp = location.getExtensionsToRead().get("speed");
 					if (!Algorithms.isEmpty(sp)) {
 						l.setSpeed((float) Algorithms.parseDoubleSilently(sp, 0));
 					}
 				}
-				if (!Double.isNaN(location.hdop)) {
-					l.setAccuracy((float) location.hdop);
+				if (!Double.isNaN(location.getHdop())) {
+					l.setAccuracy((float) location.getHdop());
 				}
 				String br = location.getExtensionsToRead().get("bearing");
 				if (!Algorithms.isEmpty(br)) {
 					l.setBearing((float) Algorithms.parseDoubleSilently(br, 0));
 				}
-				if (!Double.isNaN(location.ele)) {
-					l.setAltitude(location.ele);
+				if (!Double.isNaN(location.getEle())) {
+					l.setAltitude(location.getEle());
 				}
 				locations.add(new SimulatedLocation(l, SIMULATED_PROVIDER_GPX));
 			}

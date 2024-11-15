@@ -76,7 +76,7 @@ public class QuickActionsSettingsItem extends SettingsItem {
 
 	@Override
 	public boolean exists() {
-		return mapButtonsHelper.getButtonStateById(buttonState.getId()) != null;
+		return mapButtonsHelper.getActionButtonStateById(buttonState.getId()) != null;
 	}
 
 	@Override
@@ -88,7 +88,7 @@ public class QuickActionsSettingsItem extends SettingsItem {
 	public void apply() {
 		if (exists()) {
 			if (shouldReplace) {
-				QuickActionButtonState state = mapButtonsHelper.getButtonStateById(buttonState.getId());
+				QuickActionButtonState state = mapButtonsHelper.getActionButtonStateById(buttonState.getId());
 				if (state != null) {
 					mapButtonsHelper.removeQuickActionButtonState(state);
 				}
@@ -133,6 +133,23 @@ public class QuickActionsSettingsItem extends SettingsItem {
 				buttonState = new QuickActionButtonState(app, id);
 				buttonState.setName(object.getString("name"));
 				buttonState.setEnabled(object.getBoolean("enabled"));
+
+				String iconName = object.optString("icon");
+				if (!Algorithms.isEmpty(iconName)) {
+					buttonState.getIconPref().set(iconName);
+				}
+				int size = object.optInt("size", -1);
+				if (size > 0) {
+					buttonState.getSizePref().set(size);
+				}
+				int cornerRadius = object.optInt("corner_radius", -1);
+				if (cornerRadius >= 0) {
+					buttonState.getCornerRadiusPref().set(cornerRadius);
+				}
+				float opacity = (float) object.optDouble("opacity", -1);
+				if (opacity >= 0) {
+					buttonState.getOpacityPref().set(opacity);
+				}
 			} else {
 				buttonState = new QuickActionButtonState(app, DEFAULT_BUTTON_ID);
 			}
@@ -150,6 +167,19 @@ public class QuickActionsSettingsItem extends SettingsItem {
 			jsonObject.put("id", buttonState.getId());
 			jsonObject.put("name", buttonState.hasCustomName() ? buttonState.getName() : "");
 			jsonObject.put("enabled", buttonState.isEnabled());
+
+			if (buttonState.getIconPref().isSet()) {
+				jsonObject.put("icon", buttonState.getIconPref().get());
+			}
+			if (buttonState.getSizePref().isSet()) {
+				jsonObject.put("size", buttonState.getSizePref().get());
+			}
+			if (buttonState.getCornerRadiusPref().isSet()) {
+				jsonObject.put("corner_radius", buttonState.getCornerRadiusPref().get());
+			}
+			if (buttonState.getOpacityPref().isSet()) {
+				jsonObject.put("opacity", buttonState.getOpacityPref().get());
+			}
 			json.put("buttonState", jsonObject);
 		} catch (JSONException e) {
 			warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));

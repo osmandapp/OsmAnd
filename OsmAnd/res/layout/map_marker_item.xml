@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/package_delivered_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
@@ -25,7 +25,7 @@
         android:layout_width="56dp"
         android:layout_height="25dp"
         android:layout_gravity="center_vertical"
-        osmand:srcCompat="@drawable/ic_action_favorite"/>
+        app:srcCompat="@drawable/ic_action_favorite"/>
 
     <LinearLayout
         android:layout_width="0dp"
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="4dp"
-                osmand:srcCompat="@drawable/ic_direction_arrow"
+                app:srcCompat="@drawable/ic_direction_arrow"
                 android:visibility="gone"
 	            android:layout_marginEnd="4dp" />
 
@@ -120,7 +120,7 @@
         android:contentDescription="@string/shared_string_more"
         android:focusable="false"
         android:scaleType="center"
-        osmand:srcCompat="@drawable/ic_actions_menu"
+        app:srcCompat="@drawable/ic_actions_menu"
         android:visibility="gone"
 	    android:layout_marginEnd="2dp" />
 
@@ -134,7 +134,7 @@
         android:contentDescription="@string/shared_string_delete"
         android:focusable="false"
         android:scaleType="center"
-        osmand:srcCompat="@drawable/ic_action_remove_dark"
+        app:srcCompat="@drawable/ic_action_remove_dark"
 	    android:layout_marginEnd="2dp" />
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -147,7 +147,7 @@
         android:clickable="false"
         android:focusable="false"
         android:scaleType="center"
-        osmand:srcCompat="@drawable/ic_flat_list_dark"
+        app:srcCompat="@drawable/ic_flat_list_dark"
         android:visibility="gone"
 	    android:layout_marginEnd="2dp" />
 

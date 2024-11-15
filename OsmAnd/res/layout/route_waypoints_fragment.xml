@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/plan_route_info"
 	android:layout_width="match_parent"
@@ -37,7 +37,7 @@
 					android:paddingRight="@dimen/bottom_sheet_icon_margin"
 					android:paddingStart="@dimen/content_padding"
 					android:scaleType="center"
-					osmand:srcCompat="@drawable/ic_arrow_back"
+					app:srcCompat="@drawable/ic_arrow_back"
 					android:visibility="visible" />
 
 				<net.osmand.plus.widgets.TextViewEx
@@ -51,7 +51,7 @@
 					android:text="@string/shared_string_target_points"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"
-					osmand:typeface="@string/font_roboto_medium"/>
+					app:typefaceWeight="medium"/>
 
 			</LinearLayout>
 
@@ -70,7 +70,7 @@
 				android:text="@string/shared_string_sort"
 				android:textColor="?attr/active_color_basic"
 				android:textSize="@dimen/text_button_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				app:typefaceWeight="medium"
 				tools:ignore="UnusedAttribute"
 				android:paddingEnd="16dp"
 				android:paddingStart="16dp" />
@@ -131,7 +131,7 @@
 						android:text="@string/shared_string_add"
 						android:textSize="@dimen/text_button_text_size"
 						android:textColor="?attr/active_color_basic"
-						osmand:typeface="@string/font_roboto_medium"
+						app:typefaceWeight="medium"
 						tools:drawableLeft="@drawable/ic_action_plus"
 						tools:ignore="UnusedAttribute"
 						android:paddingEnd="8dp"
@@ -169,7 +169,7 @@
 						android:textColor="?attr/active_color_basic"
 						android:text="@string/shared_string_clear_all"
 						android:textSize="@dimen/text_button_text_size"
-						osmand:typeface="@string/font_roboto_medium"
+						app:typefaceWeight="medium"
 						tools:drawableLeft="@drawable/ic_action_clear_all"
 						tools:ignore="UnusedAttribute"
 						tools:drawableStart="@drawable/ic_action_clear_all"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
                         android:layout_gravity="center"
                         style="@style/Widget.AppCompat.Button.Borderless"
                         tools:background="@color/color_warning"
-                        osmand:srcCompat="@drawable/ic_action_remove_dark"/>
+                        app:srcCompat="@drawable/ic_action_remove_dark"/>
 
                 </LinearLayout>
 

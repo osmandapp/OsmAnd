@@ -29,6 +29,6 @@
 		android:text="@string/new_device_account"
 		android:textColor="?attr/active_color_basic"
 		android:textSize="@dimen/default_list_text_size"
-		app:typeface="@string/font_roboto_medium" />
+		app:typefaceWeight="medium" />
 
 </LinearLayout>

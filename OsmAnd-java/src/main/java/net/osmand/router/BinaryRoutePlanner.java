@@ -137,6 +137,10 @@ public class BinaryRoutePlanner {
 						finalSegment = new MultiFinalRouteSegment((FinalRouteSegment) segment);
 					} 
 					((MultiFinalRouteSegment) finalSegment).all.add((FinalRouteSegment) segment);
+					TLongObjectHashMap<RouteSegment> visitedSegments = (forwardSearch ? visitedDirectSegments : visitedOppositeSegments);
+					if (!visitedSegments.containsKey(calculateRoutePointId(segment))) {
+						visitedSegments.put(calculateRoutePointId(segment), segment);
+					}
 					skipSegment = true;
 				} else {
 					finalSegment = (FinalRouteSegment) segment;
@@ -164,7 +168,8 @@ public class BinaryRoutePlanner {
 					println("  " + segment.segEnd + ">> Already visited by minimum");
 				}
 				skipSegment = true;
-			} else if (cst.cost + 0.1 < minCost[forwardSearch ? 1 : 0] && ASSERT_CHECKS && ctx.calculationMode != RouteCalculationMode.COMPLEX) {
+			} else if (cst.cost + 5.0 < minCost[forwardSearch ? 1 : 0] && ASSERT_CHECKS && ctx.calculationMode != RouteCalculationMode.COMPLEX) {
+				// squareRootDist doesn't follow Triangle-inequality and it breaks A* algorithm. Maximum error on the optimal route could be constant (5.0)
 				if (ctx.config.heuristicCoefficient <= 1) {
 					throw new IllegalStateException(cst.cost + " < ???  " + minCost[forwardSearch ? 1 : 0]);
 				}
@@ -457,7 +462,10 @@ public class BinaryRoutePlanner {
 
 		double distTimeOnRoadToPass = calcRoutingSegmentTimeOnlyDist(ctx.getRouter(), segment);
 		// calculate possible obstacle plus time
-		double obstacle = ctx.getRouter().defineRoutingObstacle(road, segmentInd, prevSegmentInd > segmentInd);
+		double obstacle = 0;
+		if (segment.distanceFromStart >= 0 || !reverseWaySearch) { // ignore last point for reverse
+			obstacle = ctx.getRouter().defineRoutingObstacle(road, segmentInd, prevSegmentInd > segmentInd);
+		}
 		if (obstacle < 0) {
 			return -1;
 		}
@@ -508,20 +516,18 @@ public class BinaryRoutePlanner {
 			currentSegment = nextCurrentSegment;
 			nextCurrentSegment = null;
 
-			// 1. calculate obstacle for passing this segment 
+			// 1. check if segment was already visited in opposite direction
+			// We check before we calculate segmentTime (to not calculate it twice with opposite and calculate turns onto each segment).
+			boolean bothDirVisited = checkIfOppositeSegmentWasVisited(ctx, reverseWaySearch, graphSegments, currentSegment, oppositeSegments, boundaries);
+			
+			// 2. calculate obstacle for passing this segment (after  visiting cause obstacle is at the end of the segment) 
 			float segmentAndObstaclesTime = (float) calculateRouteSegmentTime(ctx, reverseWaySearch, currentSegment);
-			if (segmentAndObstaclesTime < 0) {
+			if (segmentAndObstaclesTime < 0) { 
 				break;
 			}
 			// calculate new start segment time as we're going to assign to put to visited segments
 			float distFromStartPlusSegmentTime = currentSegment.distanceFromStart + segmentAndObstaclesTime;
 			
-			// 2. check if segment was already visited in opposite direction
-			// We check before we calculate segmentTime (to not calculate it twice with opposite and calculate turns
-			// onto each segment).
-			boolean bothDirVisited = checkIfOppositeSegmentWasVisited(ctx, reverseWaySearch, graphSegments,
-					currentSegment, oppositeSegments, boundaries);
- 			
 			// 3. upload segment itself to visited segments
 			long nextPntId = calculateRoutePointId(currentSegment);
 			RouteSegment existingSegment = visitedSegments.put(nextPntId, currentSegment);

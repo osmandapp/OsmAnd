@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="@dimen/route_info_control_buttons_height"
@@ -26,7 +26,7 @@
 			android:paddingRight="16dp"
 			android:text="@string/shared_string_cancel"
 			android:textSize="@dimen/text_button_text_size"
-			osmand:typeface="@string/font_roboto_medium"
+			app:typefaceWeight="medium"
 			tools:ignore="UnusedAttribute"
 			android:paddingEnd="16dp"
 			android:paddingStart="16dp" />
@@ -71,7 +71,7 @@
 			android:paddingRight="@dimen/route_info_icon_padding_left"
 			android:text="@string/shared_string_control_start"
 			android:textSize="@dimen/text_button_text_size"
-			osmand:typeface="@string/font_roboto_medium"
+			app:typefaceWeight="medium"
 			tools:drawableLeft="@drawable/ic_action_start_navigation"
 			tools:ignore="UnusedAttribute"
 			android:paddingStart="@dimen/route_info_icon_padding_left"

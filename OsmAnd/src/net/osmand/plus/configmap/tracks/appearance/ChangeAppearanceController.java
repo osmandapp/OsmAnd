@@ -1,7 +1,8 @@
 package net.osmand.plus.configmap.tracks.appearance;
 
-import static net.osmand.gpx.GpxParameter.COLOR;
-import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.COLOR;
+import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
 
 import android.os.AsyncTask;
 
@@ -10,14 +11,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.gpx.GpxParameter;
+import net.osmand.shared.gpx.GpxParameter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
+import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData.AppearanceChangedListener;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.ArrowsCardController;
@@ -69,11 +71,17 @@ public class ChangeAppearanceController implements IDialogController, IColorCard
 	@Override
 	public void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
 		data.setParameter(COLORING_TYPE, coloringStyle != null ? coloringStyle.getId() : null);
+		data.setParameter(COLOR_PALETTE, PaletteGradientColor.DEFAULT_NAME);
 	}
 
 	@Override
 	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
-		data.setParameter(COLOR, paletteColor.getColor());
+		if (paletteColor instanceof PaletteGradientColor) {
+			data.setParameter(COLOR_PALETTE, ((PaletteGradientColor) paletteColor).getPaletteName());
+		} else {
+			data.setParameter(COLOR_PALETTE, PaletteGradientColor.DEFAULT_NAME);
+			data.setParameter(COLOR, paletteColor.getColor());
+		}
 	}
 
 	public boolean hasAnyChangesToCommit() {
@@ -136,7 +144,7 @@ public class ChangeAppearanceController implements IDialogController, IColorCard
 	@NonNull
 	private AppearanceData buildAppearanceData() {
 		AppearanceData data = new AppearanceData();
-		for (GpxParameter parameter : GpxParameter.getAppearanceParameters()) {
+		for (GpxParameter parameter : GpxParameter.Companion.getAppearanceParameters()) {
 			data.setParameter(parameter, null);
 		}
 		return data;

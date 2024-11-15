@@ -27,6 +27,7 @@ import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
+import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.DistanceDuringNavigationBottomSheet;
@@ -34,8 +35,10 @@ import net.osmand.plus.settings.controllers.CompassModeDialogController;
 import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.CompassMode;
-import net.osmand.plus.settings.enums.MetricsConstants;
-import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.plus.settings.enums.VolumeUnit;
+import net.osmand.router.GeneralRouter;
+import net.osmand.shared.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.UiUtilities;
@@ -60,13 +63,13 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		setupCoordinatesFormatPref();
 		setupAngularUnitsPref();
 		setupSpeedSystemPref();
+		setupUnitOfVolumePref();
 		setupPreciseDistanceNumbersPref();
 
 		setupVolumeButtonsAsZoom();
 		setupKalmanFilterPref();
 		setupMagneticFieldSensorPref();
 		setupMapEmptyStateAllowedPref();
-		setupNotRotateNorthUpPref();
 		setupAnimatePositionPref();
 		setupExternalInputDevicePref();
 		setupTrackballForMovementsPref();
@@ -155,7 +158,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		Integer[] entryValues = new Integer[metricsConstants.length];
 
 		for (int i = 0; i < entries.length; i++) {
-			entries[i] = metricsConstants[i].toHumanString(app);
+			entries[i] = metricsConstants[i].toHumanString();
 			entryValues[i] = metricsConstants[i].ordinal();
 		}
 
@@ -201,7 +204,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		Integer[] entryValues = new Integer[speedConstants.length];
 
 		for (int i = 0; i < entries.length; i++) {
-			entries[i] = speedConstants[i].toHumanString(app);
+			entries[i] = speedConstants[i].toHumanString();
 			entryValues[i] = speedConstants[i].ordinal();
 		}
 
@@ -210,6 +213,41 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		speedSystem.setEntryValues(entryValues);
 		speedSystem.setDescription(R.string.default_speed_system_descr);
 		speedSystem.setIcon(getActiveIcon(R.drawable.ic_action_speed));
+	}
+
+	private void setupUnitOfVolumePref() {
+		boolean hidePref = false;
+		ApplicationMode mode = getSelectedAppMode();
+		RouteService routeService = mode.getRouteService();
+		if (routeService == RouteService.OSMAND) {
+			GeneralRouter router = app.getRouter(mode);
+			if (router != null) {
+				GeneralRouter.GeneralRouterProfile routerProfile = router.getProfile();
+				hidePref = routerProfile == null
+						|| routerProfile == GeneralRouter.GeneralRouterProfile.PEDESTRIAN
+						|| routerProfile == GeneralRouter.GeneralRouterProfile.BICYCLE
+						|| routerProfile == GeneralRouter.GeneralRouterProfile.HORSEBACKRIDING
+						|| routerProfile == GeneralRouter.GeneralRouterProfile.SKI;
+			}
+		}
+		ListPreferenceEx unitOfVolumePref = findPreference(settings.UNIT_OF_VOLUME.getId());
+		if (hidePref) {
+			unitOfVolumePref.setVisible(false);
+		} else {
+			VolumeUnit[] unitValues = VolumeUnit.values();
+			String[] entries = new String[unitValues.length];
+			Integer[] entryValues = new Integer[unitValues.length];
+
+			for (int i = 0; i < entries.length; i++) {
+				entries[i] = unitValues[i].toHumanString(app);
+				entryValues[i] = unitValues[i].ordinal();
+			}
+
+			unitOfVolumePref.setEntries(entries);
+			unitOfVolumePref.setEntryValues(entryValues);
+			unitOfVolumePref.setDescription(R.string.unit_of_volume_description);
+			unitOfVolumePref.setIcon(getActiveIcon(R.drawable.ic_action_fuel_tank));
+		}
 	}
 
 	private void setupPreciseDistanceNumbersPref() {
@@ -246,13 +284,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		mapEmptyStateAllowedPref.setTitle(getString(R.string.tap_on_map_to_hide_interface));
 		mapEmptyStateAllowedPref.setDescription(getString(R.string.tap_on_map_to_hide_interface_descr));
 	}
-
-	private void setupNotRotateNorthUpPref() {
-		SwitchPreferenceEx mapEmptyStateAllowedPref = findPreference(settings.FIXED_NORTH_MAP.getId());
-		mapEmptyStateAllowedPref.setTitle(getString(R.string.fix_north_up));
-		mapEmptyStateAllowedPref.setDescription(getString(R.string.fix_north_up_descr));
-	}
-
 
 	private void setupAnimatePositionPref() {
 		SwitchPreferenceEx animateMyLocation = findPreference(settings.ANIMATE_MY_LOCATION.getId());

@@ -1,34 +1,48 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.QUICK_SEARCH_HUD_ID;
+import static net.osmand.plus.search.ShowQuickSearchMode.NEW_IF_EXPIRED;
+
+import android.content.Context;
+import android.util.AttributeSet;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.search.ShowQuickSearchMode;
+import net.osmand.plus.helpers.MapFragmentsHelper;
+import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
+import net.osmand.plus.views.mapwidgets.configure.buttons.QuickSearchButtonState;
 
 public class QuickSearchButton extends MapButton {
 
-	public QuickSearchButton(@NonNull MapActivity mapActivity) {
-		super(mapActivity, mapActivity.findViewById(R.id.map_search_button), QUICK_SEARCH_HUD_ID, false);
-		setIconId(R.drawable.ic_action_search_dark);
-		setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark);
-		setBackground(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
+	private final QuickSearchButtonState buttonState;
+
+	public QuickSearchButton(@NonNull Context context) {
+		this(context, null);
+	}
+
+	public QuickSearchButton(@NonNull Context context, @Nullable AttributeSet attrs) {
+		this(context, attrs, 0);
+	}
+
+	public QuickSearchButton(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+		super(context, attrs, defStyleAttr);
+		buttonState = app.getMapButtonsHelper().getQuickSearchButtonState();
+
 		setOnClickListener(v -> {
-			mapActivity.getFragmentsHelper().dismissCardDialog();
-			mapActivity.getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
+			MapFragmentsHelper fragmentsHelper = mapActivity.getFragmentsHelper();
+			fragmentsHelper.dismissCardDialog();
+			fragmentsHelper.showQuickSearch(NEW_IF_EXPIRED, false);
 		});
+	}
+
+	@Nullable
+	@Override
+	public MapButtonState getButtonState() {
+		return buttonState;
 	}
 
 	@Override
 	protected boolean shouldShow() {
-		return !isRouteDialogOpened() && visibilityHelper.shouldShowTopButtons();
-	}
-
-
-	@Override
-	public void refresh() {
-		updateVisibility(shouldShow());
+		return !routeDialogOpened && visibilityHelper.shouldShowTopButtons();
 	}
 }

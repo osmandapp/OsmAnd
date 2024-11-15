@@ -153,6 +153,10 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		return getIcon(id, ColorUtilities.getDefaultIconColorId(nightMode));
 	}
 
+	protected Drawable getPaintedContentIcon(@DrawableRes int id) {
+		return getPaintedIcon(id, ColorUtilities.getDefaultIconColor(requiredMyApplication(), nightMode));
+	}
+
 	protected Drawable getActiveIcon(@DrawableRes int id) {
 		return getIcon(id, getActiveColorId());
 	}

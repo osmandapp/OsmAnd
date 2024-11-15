@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 
 import java.util.TreeMap;
 
@@ -101,6 +101,10 @@ public class PointImageUtils {
 	                                             @DrawableRes int iconId, @NonNull BackgroundType type) {
 		iconId = iconId == 0 ? DEFAULT_UI_ICON_ID : iconId;
 		return getOrCreate(context, new PointImageInfo(type, color, iconId, synced, withShadow));
+	}
+
+	public static void clearCache() {
+		DRAWABLE_CACHE.clear();
 	}
 
 	public static class PointImageInfo {

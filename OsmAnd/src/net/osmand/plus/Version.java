@@ -26,6 +26,7 @@ public class Version {
 	private static final Log log = PlatformUtil.getLog(Version.class);
 
 	public static final String TRIPLTEK_NAME = "TRIPLTEK";
+	public static final String HUGEROCK_NAME = "Hugerock";
 	public static final String FULL_VERSION_NAME = "net.osmand.plus";
 	private static final String FREE_VERSION_NAME = "net.osmand";
 	private static final String FREE_DEV_VERSION_NAME = "net.osmand.dev";
@@ -33,6 +34,9 @@ public class Version {
 
 	private final String appName;
 	private final String appVersion;
+
+	private static Boolean openGlEsVersionSupported;
+	private static Boolean openGlExists;
 
 	public static boolean isHuawei() {
 		return getBuildFlavor().contains("huawei");
@@ -156,7 +160,8 @@ public class Version {
 				|| InAppPurchaseUtils.isLiveUpdatesAvailable(app)
 				|| InAppPurchaseUtils.isMapsPlusAvailable(app)
 				|| InAppPurchaseUtils.isOsmAndProAvailable(app)
-				|| InAppPurchaseUtils.isTripltekPromoAvailable(app);
+				|| InAppPurchaseUtils.isTripltekPromoAvailable(app)
+				|| InAppPurchaseUtils.isHugerockPromoAvailable(app);
 	}
 
 	public static boolean isDeveloperVersion(@NonNull OsmandApplication app) {
@@ -168,7 +173,12 @@ public class Version {
 	}
 
 	public static boolean isTripltekBuild() {
-		return CollectionUtils.equalsToAny(TRIPLTEK_NAME, Build.BRAND, Build.MANUFACTURER);
+		return TRIPLTEK_NAME.equalsIgnoreCase(Build.BRAND) || TRIPLTEK_NAME.equalsIgnoreCase(Build.MANUFACTURER);
+	}
+
+	public static boolean isHugerockBuild() {
+		return HUGEROCK_NAME.equalsIgnoreCase(Build.BRAND) || HUGEROCK_NAME.equalsIgnoreCase(Build.MANUFACTURER)
+				|| "alps".equalsIgnoreCase(Build.BRAND) && "SOTEN".equalsIgnoreCase(Build.MANUFACTURER);
 	}
 
 	public static String getVersionForTracker(@NonNull OsmandApplication app) {
@@ -185,17 +195,22 @@ public class Version {
 		if (!NativeCore.isAvailable() || isQnxOperatingSystem() || !isOpenGlEsVersionSupported(app)) {
 			return false;
 		}
-		File nativeLibraryDir = new File(app.getApplicationInfo().nativeLibraryDir);
-		if (checkOpenGlExists(nativeLibraryDir)) return true;
-		// check opengl doesn't work correctly on some devices when native libs are not unpacked
+		if (openGlExists == null) {
+			File nativeLibraryDir = new File(app.getApplicationInfo().nativeLibraryDir);
+			openGlExists = checkOpenGlExists(nativeLibraryDir);
+			// check opengl doesn't work correctly on some devices when native libs are not unpacked
+		}
 		return true;
 	}
 
 	public static boolean isOpenGlEsVersionSupported(@NonNull OsmandApplication app) {
-		ActivityManager activityManager = (ActivityManager) app.getSystemService(Context.ACTIVITY_SERVICE);
-		ConfigurationInfo deviceConfigurationInfo = activityManager.getDeviceConfigurationInfo();
-		int majorVersion = (deviceConfigurationInfo.reqGlEsVersion & 0xffff0000) >> 16;
-		return majorVersion >= 3;
+		if (openGlEsVersionSupported == null) {
+			ActivityManager activityManager = (ActivityManager) app.getSystemService(Context.ACTIVITY_SERVICE);
+			ConfigurationInfo deviceConfigurationInfo = activityManager.getDeviceConfigurationInfo();
+			int majorVersion = (deviceConfigurationInfo.reqGlEsVersion & 0xffff0000) >> 16;
+			openGlEsVersionSupported = majorVersion >= 3;
+		}
+		return openGlEsVersionSupported;
 	}
 
 	public static boolean isQnxOperatingSystem() {

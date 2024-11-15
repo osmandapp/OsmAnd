@@ -116,7 +116,7 @@
     <string name="poi_fire_hose">Požiarna hadica</string>
     <string name="poi_fire_water_pond">Požiarna nádrž</string>
     <string name="poi_grit_bin">Kontajner na posypový materiál</string>
-    <string name="poi_ses_station">Stanica civilnej ochrany</string>
+    <string name="poi_disaster_response">Stanica civilnej ochrany</string>
     <string name="poi_emergency_access_point">Bod príchodu záchrany</string>
     <string name="poi_ford">Brod</string>
     <string name="poi_mountain_pass">Horský priesmyk</string>
@@ -1966,7 +1966,7 @@
     <string name="poi_wheelchair_accessibility">Prístupnosť invalidným vozíkom</string>
     <string name="poi_observatory_designation">Použitie</string>
     <string name="poi_events_venue">Dejisko podujatí</string>
-    <string name="poi_diet_pescetarian_yes">Pescetariánske jedlá (rybacie)</string>
+    <string name="poi_diet_pescetarian_yes">Pescetariánske jedlá (z mäsa len ryby)</string>
     <string name="poi_chimney">Komín</string>
     <string name="poi_bench_yes">Áno;Lavička</string>
     <string name="poi_maxwidth">Maximálna šírka</string>
@@ -2008,7 +2008,7 @@
     <string name="poi_ramp_stroller_no">Rampa pre detské kočíky: nie</string>
     <string name="poi_ramp_bicycle_no">Rampa pre bicykle: nie</string>
     <string name="poi_ramp_luggage_no">Rampa pre batožinu: nie</string>
-    <string name="poi_defibrillator">Defibrilátor</string>
+    <string name="poi_defibrillator">Defibrilátor;AED</string>
     <string name="poi_site_type_city">Veľkomesto</string>
     <string name="poi_prison_camp">Bývalý väzenský tábor</string>
     <string name="poi_concentration_camp">Typ: koncentračný tábor</string>
@@ -2435,7 +2435,7 @@
     <string name="poi_social_facility_for_senior">Seniori</string>
     <string name="poi_social_facility_for_child">Deti</string>
     <string name="poi_social_facility_for_orphan">Siroty</string>
-    <string name="poi_social_facility_for_disabled">Invalidi</string>
+    <string name="poi_social_facility_for_disabled">Telesne postihnutí</string>
     <string name="poi_social_facility_for_mental_health">Pacienti s duševnými poruchami</string>
     <string name="poi_social_facility_for_juvenile">Mladiství</string>
     <string name="poi_social_facility_for_homeless">Bezdomovci</string>
@@ -2874,7 +2874,7 @@
     <string name="poi_animal_shelter_horse">Kone</string>
     <string name="poi_animal_shelter_mammal">Cicavce</string>
     <string name="poi_animal_shelter_fish">Ryby</string>
-    <string name="poi_information_route_marker">Turistická/trasová značka</string>
+    <string name="poi_information_route_marker">Turistická/trasová značka zobrazujúca smer</string>
     <string name="poi_bridge_movable_swing">Typ pohyblivého mostu: otočný</string>
     <string name="poi_bridge_movable_lift">Typ pohyblivého mostu: zdvíhací</string>
     <string name="poi_bridge_movable_drawbridge">Typ pohyblivého mostu: padací</string>
@@ -3334,7 +3334,7 @@
     <string name="poi_surface_clay">Antuka</string>
     <string name="poi_generator_source_biomass">Zdroj energie: biomasa</string>
     <string name="poi_snowmobile_filter">Prístup snežným skútrom</string>
-    <string name="poi_access_bus">Prístup autobusom</string>
+    <string name="poi_access_bus">Prístup autobusom verejnej dopravy</string>
     <string name="poi_access_caravan">Prístup karavanom</string>
     <string name="poi_access_motorhome">Prístup obytným autom</string>
     <string name="poi_access_trailer">Prístup s prívesom</string>
@@ -3418,7 +3418,7 @@
     <string name="poi_psv_yes">Prístup vozidiel verejnej prepravy osôb: áno</string>
     <string name="poi_psv_designated">Prístup vozidiel verejnej prepravy osôb: určený</string>
     <string name="poi_psv_no">Prístup vozidiel verejnej prepravy osôb: nie</string>
-    <string name="poi_bus_no">Prístup autobusov: nie</string>
+    <string name="poi_bus_no">Prístup autobusov verejnej dopravy: nie</string>
     <string name="poi_tourist_bus_yes">Prístup turistických autobusov: áno</string>
     <string name="poi_tourist_bus_designated">Prístup turistických autobusov: určený</string>
     <string name="poi_tourist_bus_no">Prístup turistických autobusov: nie</string>
@@ -3460,8 +3460,8 @@
     <string name="poi_hgv_delivery">Zásobovanie;Vstup pre zásobovacie vozidlá</string>
     <string name="poi_goods_yes">Áno;Malé obchodné vozidlá</string>
     <string name="poi_goods_designated">Určené;Určené pre malé obchodné vozidlá</string>
-    <string name="poi_disabled_yes">Áno;Invalidi</string>
-    <string name="poi_disabled_designated">Určené;Určené pre invalidov</string>
+    <string name="poi_disabled_yes">Áno;Vozíčkari</string>
+    <string name="poi_disabled_designated">Určené;Určené pre vozíčkarov</string>
     <string name="poi_health_food">Zdravé jedlo</string>
     <string name="poi_craft_builder">Staviteľ</string>
     <string name="poi_craft_distillery">Pálenica/Výrobca destilátov</string>
@@ -4499,4 +4499,14 @@
     <string name="poi_shop_general">Obchod so zmiešaným tovarom</string>
     <string name="poi_cuisine_fish">Ryby</string>
     <string name="poi_indoor_seating_no">Žiadne vnútorné sedenie</string>
+    <string name="poi_wetland_string_bog">Žilnaté vrchovisko</string>
+    <string name="poi_property_management">Správca nehnuteľností/majetku</string>
+    <string name="poi_mcdonalds">McDonald\'s</string>
+    <string name="poi_engineer">Kancelária inžiniera/konštruktéra</string>
+    <string name="poi_via">Cez</string>
+    <string name="poi_cash_in">Vklad hotovosti</string>
+    <string name="poi_cash_in_customers">Zákazníci</string>
+    <string name="poi_cash_in_yes">Áno</string>
+    <string name="poi_cash_in_no">Nie</string>
+    <string name="poi_diet_pescetarian_no">Pescetariánska diéta (z mäsa len ryby): nie</string>
 </resources>

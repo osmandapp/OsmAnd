@@ -284,7 +284,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 
 						MapButtonsHelper mapButtonsHelper = app.getMapButtonsHelper();
 						QuickActionButtonState buttonState = settingsItem.getButtonState();
-						QuickActionButtonState state = mapButtonsHelper.getButtonStateById(buttonState.getId());
+						QuickActionButtonState state = mapButtonsHelper.getActionButtonStateById(buttonState.getId());
 						if (state != null) {
 							for (QuickAction action : buttonState.getQuickActions()) {
 								QuickAction savedAction = state.getQuickAction(action.getType(), action.getName(app), action.getParams());

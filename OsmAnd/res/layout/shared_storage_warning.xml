@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -18,7 +18,7 @@
 		android:focusable="false"
 		android:groupIndicator="@android:color/transparent"
 		android:listSelector="@android:color/transparent"
-		osmand:layout_behavior="@string/appbar_scrolling_view_behavior">
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -45,8 +45,8 @@
 					android:text="@string/shared_storage_migration_descr"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"
-					osmand:lineHeight="@dimen/default_title_line_height"
-					osmand:typeface="@string/font_roboto_regular" />
+					app:lineHeight="@dimen/default_title_line_height"
+					android:textStyle="normal" />
 
 				<include layout="@layout/simple_divider_item" />
 
@@ -67,7 +67,7 @@
 						android:text="1"
 						android:textColor="?attr/active_color_basic"
 						android:textSize="@dimen/default_list_text_size_large"
-						osmand:typeface="@string/font_roboto_medium" />
+						app:typefaceWeight="medium" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/shared_storage_first_step"
@@ -79,8 +79,8 @@
 						android:text="@string/shared_storage_first_step"
 						android:textColor="?android:textColorPrimary"
 						android:textSize="@dimen/default_list_text_size"
-						osmand:lineHeight="@dimen/default_title_line_height"
-						osmand:typeface="@string/font_roboto_regular" />
+						app:lineHeight="@dimen/default_title_line_height"
+						android:textStyle="normal" />
 
 				</LinearLayout>
 
@@ -103,7 +103,7 @@
 						android:text="2"
 						android:textColor="?attr/active_color_basic"
 						android:textSize="@dimen/default_list_text_size_large"
-						osmand:typeface="@string/font_roboto_medium" />
+						app:typefaceWeight="medium" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/shared_storage_second_step"
@@ -115,8 +115,8 @@
 						android:text="@string/shared_storage_second_step"
 						android:textColor="?android:textColorPrimary"
 						android:textSize="@dimen/default_list_text_size"
-						osmand:lineHeight="@dimen/default_title_line_height"
-						osmand:typeface="@string/font_roboto_regular" />
+						app:lineHeight="@dimen/default_title_line_height"
+						android:textStyle="normal" />
 
 				</LinearLayout>
 
@@ -139,7 +139,7 @@
 						android:text="3"
 						android:textColor="?attr/active_color_basic"
 						android:textSize="@dimen/default_list_text_size_large"
-						osmand:typeface="@string/font_roboto_medium" />
+						app:typefaceWeight="medium" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/shared_storage_third_step"
@@ -151,8 +151,8 @@
 						android:text="@string/shared_storage_third_step"
 						android:textColor="?android:textColorPrimary"
 						android:textSize="@dimen/default_list_text_size"
-						osmand:lineHeight="@dimen/default_title_line_height"
-						osmand:typeface="@string/font_roboto_regular" />
+						app:lineHeight="@dimen/default_title_line_height"
+						android:textStyle="normal" />
 
 				</LinearLayout>
 
@@ -170,8 +170,8 @@
 					<androidx.appcompat.widget.AppCompatImageView
 						android:layout_width="@dimen/standard_icon_size"
 						android:layout_height="@dimen/standard_icon_size"
-						osmand:srcCompat="@drawable/ic_action_info_dark"
-						osmand:tint="?attr/default_icon_color" />
+						app:srcCompat="@drawable/ic_action_info_dark"
+						app:tint="?attr/default_icon_color" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/shared_storage_last_step"
@@ -183,8 +183,8 @@
 						android:text="@string/shared_storage_last_step"
 						android:textColor="?android:textColorPrimary"
 						android:textSize="@dimen/default_list_text_size"
-						osmand:lineHeight="@dimen/default_title_line_height"
-						osmand:typeface="@string/font_roboto_regular" />
+						app:lineHeight="@dimen/default_title_line_height"
+						android:textStyle="normal" />
 
 				</LinearLayout>
 
@@ -220,8 +220,8 @@
 					android:text="@string/storage_found_files_size"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"
-					osmand:lineHeight="@dimen/default_title_line_height"
-					osmand:typeface="@string/font_roboto_regular" />
+					app:lineHeight="@dimen/default_title_line_height"
+					android:textStyle="normal" />
 
 				<net.osmand.plus.widgets.TextViewEx
 					android:id="@+id/found_files_descr"
@@ -235,8 +235,8 @@
 					android:text="@string/storage_found_files_descr"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"
-					osmand:lineHeight="@dimen/default_title_line_height"
-					osmand:typeface="@string/font_roboto_regular" />
+					app:lineHeight="@dimen/default_title_line_height"
+					android:textStyle="normal" />
 
 			</LinearLayout>
 
@@ -260,24 +260,24 @@
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/bottom_sheet_big_item_height"
 			android:background="?attr/actionModeBackground"
-			osmand:collapsedTitleTextAppearance="@style/AppBarTitle"
-			osmand:expandedTitleGravity="start|bottom"
-			osmand:expandedTitleMarginBottom="@dimen/content_padding_small"
-			osmand:expandedTitleMarginEnd="@dimen/content_padding"
-			osmand:expandedTitleMarginStart="@dimen/content_padding"
-			osmand:expandedTitleTextAppearance="@style/AppBarTitle"
-			osmand:layout_scrollFlags="scroll|exitUntilCollapsed">
+			app:collapsedTitleTextAppearance="@style/AppBarTitle"
+			app:expandedTitleGravity="start|bottom"
+			app:expandedTitleMarginBottom="@dimen/content_padding_small"
+			app:expandedTitleMarginEnd="@dimen/content_padding"
+			app:expandedTitleMarginStart="@dimen/content_padding"
+			app:expandedTitleTextAppearance="@style/AppBarTitle"
+			app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
 			<androidx.appcompat.widget.Toolbar
 				android:id="@+id/toolbar"
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/toolbar_height"
 				android:minHeight="@dimen/toolbar_height"
-				osmand:layout_collapseMode="pin"
-				osmand:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
-				osmand:title="@string/shared_storage_migration"
-				osmand:titleMarginEnd="0dp"
-				osmand:titleMarginStart="0dp">
+				app:layout_collapseMode="pin"
+				app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
+				app:title="@string/shared_storage_migration"
+				app:titleMarginEnd="0dp"
+				app:titleMarginStart="0dp">
 
 			</androidx.appcompat.widget.Toolbar>
 

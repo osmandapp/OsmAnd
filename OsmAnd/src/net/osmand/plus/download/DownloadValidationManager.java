@@ -2,8 +2,8 @@ package net.osmand.plus.download;
 
 import static net.osmand.plus.Version.FULL_VERSION_NAME;
 
-import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -221,24 +221,32 @@ public class DownloadValidationManager {
 		@NonNull
 		@Override
 		public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-			String msgTx = getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "");
-			AlertDialog.Builder msg = new AlertDialog.Builder(requireActivity());
-			msg.setTitle(R.string.free_version_title);
-			msg.setMessage(msgTx);
+			FragmentActivity activity = requireActivity();
+			OsmandApplication app = (OsmandApplication) activity.getApplication();
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+			builder.setTitle(R.string.free_version_title);
+			builder.setMessage(getFreeVersionMessage(app));
+
 			if (Version.isMarketEnabled()) {
-				msg.setPositiveButton(R.string.install_paid, (dialog, which) -> {
-					Activity activity = getActivity();
-					if (activity != null) {
-						Uri uri = Uri.parse(Version.getUrlWithUtmRef((OsmandApplication) activity.getApplication(), FULL_VERSION_NAME));
+				builder.setPositiveButton(R.string.install_paid, (dialog, which) -> {
+					Context context = getContext();
+					if (context != null) {
+						Uri uri = Uri.parse(Version.getUrlWithUtmRef(app, FULL_VERSION_NAME));
 						Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-						AndroidUtils.startActivityIfSafe(activity, intent);
+						AndroidUtils.startActivityIfSafe(context, intent);
 					}
 				});
-				msg.setNegativeButton(R.string.shared_string_cancel, null);
+				builder.setNegativeButton(R.string.shared_string_cancel, null);
 			} else {
-				msg.setNeutralButton(R.string.shared_string_ok, null);
+				builder.setNeutralButton(R.string.shared_string_ok, null);
 			}
-			return msg.create();
+			return builder.create();
 		}
+	}
+
+	@NonNull
+	public static String getFreeVersionMessage(@NonNull Context context) {
+		return context.getString(R.string.free_version_message, String.valueOf(MAXIMUM_AVAILABLE_FREE_DOWNLOADS));
 	}
 }

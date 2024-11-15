@@ -5,252 +5,146 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.card.color.palette.main.PaletteColorsComparator;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.util.Algorithms;
-import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
-public class ColorsCollection {
+public abstract class ColorsCollection {
 
-	private static final Log LOG = PlatformUtil.getLog(ColorsCollection.class);
+	protected static final Log LOG = PlatformUtil.getLog(ColorsCollection.class);
 
-	private final ApplicationMode appMode;
-	private final List<PaletteColor> paletteColors;
-	private final CommonPreference<String> palettePreference;
-	private final CommonPreference<String> customColorsPreference;
-
-	public ColorsCollection(@NonNull ColorsCollectionBundle bundle) {
-		this.appMode = bundle.appMode;
-		this.palettePreference = bundle.palettePreference;
-		this.customColorsPreference = bundle.customColorsPreference;
-		this.paletteColors = loadPaletteColors(bundle);
-	}
+	protected final List<PaletteColor> originalOrder = new ArrayList<>();
+	protected final List<PaletteColor> lastUsedOrder = new LinkedList<>();
 
 	@Nullable
 	public PaletteColor findPaletteColor(@ColorInt int colorInt) {
-		for (PaletteColor paletteColor : paletteColors) {
+		return findPaletteColor(colorInt, false);
+	}
+
+	@Nullable
+	public PaletteColor findPaletteColor(@ColorInt int colorInt, boolean registerIfNotFound) {
+		for (PaletteColor paletteColor : originalOrder) {
 			if (paletteColor.getColor() == colorInt) {
 				return paletteColor;
 			}
 		}
-		return null;
+		return registerIfNotFound ? addNewColor(colorInt, false) : null;
 	}
 
 	@NonNull
 	public List<PaletteColor> getColors(@NonNull PaletteSortingMode sortingMode) {
-		List<PaletteColor> sortedPaletteColors = new ArrayList<>(this.paletteColors);
-		Collections.sort(sortedPaletteColors, new PaletteColorsComparator(sortingMode));
-		return sortedPaletteColors;
+		return new ArrayList<>(sortingMode == PaletteSortingMode.ORIGINAL ? originalOrder : lastUsedOrder);
+	}
+
+	public void setColors(@NonNull List<PaletteColor> originalColors,
+	                      @NonNull List<PaletteColor> lastUsedColors) {
+		this.originalOrder.clear();
+		this.lastUsedOrder.clear();
+		this.originalOrder.addAll(originalColors);
+		this.lastUsedOrder.addAll(lastUsedColors);
+		saveColors();
 	}
 
 	@NonNull
 	public PaletteColor duplicateColor(@NonNull PaletteColor paletteColor) {
-		PaletteColor colorDuplicate = paletteColor.duplicate();
-		if (paletteColor.isCustom()) {
-			int index = paletteColors.indexOf(paletteColor);
-			if (index >= 0 && index < paletteColors.size()) {
-				paletteColors.add(index + 1, colorDuplicate);
-			} else {
-				paletteColors.add(colorDuplicate);
-			}
+		PaletteColor duplicate = paletteColor.duplicate();
+		addColorDuplicate(originalOrder, paletteColor, duplicate);
+		addColorDuplicate(lastUsedOrder, paletteColor, duplicate);
+		saveColors();
+		return duplicate;
+	}
+
+	private void addColorDuplicate(@NonNull List<PaletteColor> list,
+	                               @NonNull PaletteColor original,
+	                               @NonNull PaletteColor duplicate) {
+		int index = list.indexOf(original);
+		if (index >= 0 && index < list.size()) {
+			list.add(index + 1, duplicate);
 		} else {
-			paletteColors.add(colorDuplicate);
+			list.add(duplicate);
 		}
-		syncSettings();
-		return colorDuplicate;
 	}
 
 	public boolean askRemoveColor(@NonNull PaletteColor paletteColor) {
-		if (paletteColor.isCustom()) {
-			paletteColors.remove(paletteColor);
-			syncSettings();
+		if (originalOrder.remove(paletteColor)) {
+			lastUsedOrder.remove(paletteColor);
+			saveColors();
 			return true;
 		}
 		return false;
 	}
 
 	@Nullable
-	public PaletteColor addOrUpdateColor(@Nullable PaletteColor oldColor, @ColorInt int newColor) {
-		if (oldColor == null) {
-			return addNewColor(newColor);
-		}
-		if (oldColor.isCustom()) {
-			updateColor(oldColor, newColor);
-			return oldColor;
-		}
-		return null;
+	public PaletteColor addOrUpdateColor(@Nullable PaletteColor oldColor,
+	                                     @ColorInt int newColor) {
+		return oldColor == null ? addNewColor(newColor, true) : updateColor(oldColor, newColor);
 	}
 
 	@NonNull
-	private PaletteColor addNewColor(@ColorInt int newColor) {
-		long now = System.currentTimeMillis();
-		String id = PaletteColor.generateId(now);
-		PaletteColor paletteColor = new PaletteColor(id, newColor, now);
-		paletteColors.add(paletteColor);
-		paletteColor.setLastUsedTime(now);
-		syncSettings();
+	private PaletteColor addNewColor(@ColorInt int newColor, boolean updateLastUsedOrder) {
+		PaletteColor paletteColor = new PaletteColor(newColor);
+		originalOrder.add(paletteColor);
+		if (updateLastUsedOrder) {
+			lastUsedOrder.add(0, paletteColor);
+		} else {
+			lastUsedOrder.add(paletteColor);
+		}
+		saveColors();
 		return paletteColor;
 	}
 
-	private void updateColor(@NonNull PaletteColor paletteColor, @ColorInt int newColor) {
+	@NonNull
+	private PaletteColor updateColor(@NonNull PaletteColor paletteColor, @ColorInt int newColor) {
 		paletteColor.setColor(newColor);
-		syncSettings();
+		saveColors();
+		return paletteColor;
 	}
 
+	public void addAllUniqueColors(@NonNull Collection<Integer> colorInts) {
+		List<PaletteColor> originalOrder = getColors(PaletteSortingMode.ORIGINAL);
+		List<PaletteColor> lastUsedOrder = getColors(PaletteSortingMode.LAST_USED_TIME);
+		Set<Integer> presentColors = new HashSet<>();
+		for (PaletteColor paletteColor : originalOrder) {
+			presentColors.add(paletteColor.getColor());
+		}
+		for (int colorInt : colorInts) {
+			if (!presentColors.contains(colorInt)) {
+				PaletteColor paletteColor = new PaletteColor(colorInt);
+				originalOrder.add(paletteColor);
+				lastUsedOrder.add(paletteColor);
+			}
+		}
+		setColors(originalOrder, lastUsedOrder);
+	}
 
 	public void askRenewLastUsedTime(@Nullable PaletteColor paletteColor) {
 		if (paletteColor != null) {
-			renewLastUsedTime(Collections.singletonList(paletteColor));
+			lastUsedOrder.remove(paletteColor);
+			lastUsedOrder.add(0, paletteColor);
+			saveColors();
 		}
 	}
 
-	public void renewLastUsedTime(@NonNull List<PaletteColor> paletteColors) {
-		long now = System.currentTimeMillis();
-		for (PaletteColor paletteColor : paletteColors) {
-			paletteColor.setLastUsedTime(now++);
-		}
-		syncSettings();
-	}
-
-	@NonNull
-	private List<PaletteColor> loadPaletteColors(@NonNull ColorsCollectionBundle bundle) {
-		List<PaletteColor> paletteColors = bundle.paletteColors;
-		if (paletteColors == null) {
-			paletteColors = loadPaletteColors(bundle.predefinedColors);
-		}
-		return paletteColors;
-	}
-
-	@NonNull
-	private List<PaletteColor> loadPaletteColors(@Nullable List<PaletteColor> predefinedColors) {
-		List<PaletteColor> paletteColors;
-		if (customColorsPreference != null) {
-			List<PaletteColor> savedPredefinedColors = readPaletteColors(palettePreference);
-			List<PaletteColor> savedCustomColors = readPaletteColors(customColorsPreference);
-			paletteColors = CollectionUtils.asOneList(savedPredefinedColors, savedCustomColors);
-		} else {
-			paletteColors = readPaletteColors(palettePreference);
-		}
-		predefinedColors = predefinedColors != null ? new ArrayList<>(predefinedColors) : new ArrayList<>();
-		return mergePredefinedAndSavedColors(predefinedColors, paletteColors);
-	}
-
-	@NonNull
-	private List<PaletteColor> readPaletteColors(@NonNull CommonPreference<String> preference) {
-		String jsonAsString;
-		if (appMode == null) {
-			jsonAsString = preference.get();
-		} else {
-			jsonAsString = preference.getModeValue(appMode);
-		}
-		List<PaletteColor> paletteColors = new ArrayList<>();
-		if (!Algorithms.isEmpty(jsonAsString)) {
-			try {
-				paletteColors = readFromJson(new JSONObject(jsonAsString));
-			} catch (JSONException e) {
-				LOG.debug("Error while reading palette colors from JSON ", e);
-			}
-		}
-		return paletteColors;
-	}
-
-	@NonNull
-	private static List<PaletteColor> readFromJson(@NonNull JSONObject json) throws JSONException {
-		if (!json.has("colors")) {
-			return new ArrayList<>();
-		}
-		List<PaletteColor> res = new ArrayList<>();
-		JSONArray jsonArray = json.getJSONArray("colors");
-		for (int i = 0; i < jsonArray.length(); i++) {
-			try {
-				res.add(new PaletteColor(jsonArray.getJSONObject(i)));
-			} catch (JSONException e) {
-				LOG.debug("Error while reading a palette color from JSON ", e);
-			} catch (IllegalArgumentException e) {
-				LOG.error("Error while trying to parse color from its HEX value ", e);
-			}
-		}
-		return res;
-	}
-
-	@NonNull
-	private static List<PaletteColor> mergePredefinedAndSavedColors(@NonNull List<PaletteColor> allColors,
-	                                                                @NonNull List<PaletteColor> savedColors) {
-		Map<String, PaletteColor> cachedPredefinedColors = new HashMap<>();
-		for (PaletteColor predefinedColor : allColors) {
-			cachedPredefinedColors.put(predefinedColor.getId(), predefinedColor);
-		}
-		for (PaletteColor color : savedColors) {
-			if (color.isDefault()) {
-				PaletteColor defaultColor = cachedPredefinedColors.get(color.getId());
-				if (defaultColor != null) {
-					defaultColor.setLastUsedTime(color.getLastUsedTime());
-				}
-			} else {
-				allColors.add(color);
-			}
-		}
-		return allColors;
-	}
-
-	public void saveToPreferences() {
-		syncSettings();
-	}
-
-	private void syncSettings() {
-		if (customColorsPreference != null) {
-			// Save custom and predefined colors separately
-			List<PaletteColor> predefinedColors = new ArrayList<>();
-			List<PaletteColor> customColors = new ArrayList<>();
-			for (PaletteColor paletteColor : paletteColors) {
-				if (paletteColor.isDefault()) {
-					predefinedColors.add(paletteColor);
-				} else {
-					customColors.add(paletteColor);
-				}
-			}
-			syncSettings(palettePreference, predefinedColors);
-			syncSettings(customColorsPreference, customColors);
-		} else {
-			// Save custom and predefined colors into the same preference
-			syncSettings(palettePreference, paletteColors);
-		}
-	}
-
-	private void syncSettings(@NonNull CommonPreference<String> preference,
-	                          @NonNull List<PaletteColor> paletteColors) {
-		JSONObject json = new JSONObject();
+	protected void loadColors() {
 		try {
-			writeToJson(json, paletteColors);
-			String jsonAsString = json.toString();
-			if (appMode == null) {
-				preference.set(jsonAsString);
-			} else {
-				preference.setModeValue(appMode, jsonAsString);
-			}
-		} catch (JSONException e) {
-			LOG.debug("Error while writing palette colors into JSON ", e);
+			originalOrder.clear();
+			lastUsedOrder.clear();
+			loadColorsInLastUsedOrder();
+			originalOrder.addAll(lastUsedOrder);
+			originalOrder.sort((a, b) -> Double.compare(a.getIndex(), b.getIndex()));
+		} catch (Exception e) {
+			LOG.error("Error when trying to read file: " + e.getMessage());
 		}
 	}
 
-	private static void writeToJson(@NonNull JSONObject jsonObject,
-	                                @NonNull List<PaletteColor> paletteColors) throws JSONException {
-		JSONArray jsonArray = new JSONArray();
-		for (PaletteColor paletteColor : paletteColors) {
-			jsonArray.put(paletteColor.toJson());
-		}
-		jsonObject.put("colors", jsonArray);
-	}
+	protected abstract void loadColorsInLastUsedOrder() throws IOException;
+
+	protected abstract void saveColors();
 }

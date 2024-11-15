@@ -10,7 +10,384 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="shared_string_engine">Engine</string>
+    <string name="vehicle_metrics_recording_description">Select the parameters to be recorded in the GPX file.</string>
+    <string name="auto_zoom_3d_angle">Auto zoom 3D angle</string>
+    <string name="av_audio_sample_rate">Audio sample rate</string>
+    <string name="av_audio_sample_rate_descr">Select audio sample rate.</string>
+    <string name="connect_new_scanner">Connect new scanner</string>
+    <string name="release_5_0" translatable="false"></string>
+    <string name="preview_next_turn">Preview next turn</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Track vital vehicle data using the OBD-II protocol. Monitor key metrics like speed, engine RPM, fuel consumption, and more.</string>
+    <string name="vehicle_metrics_obd_ii">Vehicle Metrics (OBD-II)</string>
+	<string name="shared_string_hour">Hour</string>
+	<string name="ltr_or_rtl_combine_via_per">%1$s per %2$s</string>
+	<string name="shared_string_volume">Volume</string>
+	<string name="obd_engine_runtime_desc">Shows shows how long the engine has been running since it was started.</string>
+	<string name="obd_engine_runtime">Engine Runtime</string>
+	<string name="obd_battery_voltage_desc">Shows the voltage level of the vehicle\'s battery</string>
+	<string name="obd_fuel_pressure_desc">Shows the pressure within the fuel system</string>
+	<string name="obd_throttle_position">Throttle Position</string>
+	<string name="obd_throttle_position_desc">Shows the angle of the throttle plate in the throttle body.</string>
+	<string name="obd_calculated_engine_load_desc">Shows the percentage of the engine’s available power being used at a given moment.</string>
+	<string name="obd_calculated_engine_load">Calculated Engine Load</string>
+	<string name="obd_engine_coolant_temp_desc">Shows the temperature of the engine’s coolant</string>
+	<string name="obd_speed_desc">Shows speed from the Vehicle Speed Sensor (VSS).</string>
+	<string name="obd_engine_oil_temperature_desc">Shows the temperature of the engine oil.</string>
+	<string name="obd_engine_oil_temperature">Engine Oil Temperature</string>
+	<string name="obd_ambient_air_temp_desc">Shows the temperature outside the vehicle.</string>
+	<string name="obd_air_intake_temp_desc">Shows the temperature of the air entering the engine intake manifold.</string>
+	<string name="obd_fuel_consumption_rate_sensor_type">Use selected units in name.</string>
+	<string name="remaining_fuel_description">Shows the amount of fuel left in the vehicle\'s tank</string>
+	<string name="remaining_fuel">Remaining fuel</string>
+	<string name="obd_fuel_consumption_desc">Shows the rate of fuel usage by the engine, calculated based on remaining fuel, tank size, and distance covered as determined by GPS.</string>
+	<string name="obd_fuel_consumption">Fuel consumption</string>
+	<string name="reset_average_value">Reset average value</string>
+	<string name="average_value_slider_description">Select the time interval for measuring the average value.</string>
+	<string name="average_temperature_slider_description">Select the time interval for measuring the average temperature.</string>
+	<string name="shared_string_instant">Instant</string>
+	<string name="current_temperature">Current temperature</string>
+	<string name="average_temperature">Average temperature</string>
+    <string name="show_minor_turns_descr">Lanes will be displayed on all passing intersections regardless voice instructions</string>
+    <string name="show_minor_turns">Display on minor intersections when navigating straight</string>
+    <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
+    <string name="fuel_tank_capacity_description">Enter your tank capacity to accurately track fuel levels and consumption</string>
+    <string name="fuel_tank_capacity">Fuel tank capacity</string>
+    <string name="shared_strings_dimensions">Dimensions</string>
+    <string name="litres">Litres</string>
+    <string name="us_gallons_unit">gal</string>
+    <string name="imperial_gallons">Imperial gallons</string>
+    <string name="us_gallons">US gallons</string>
+    <string name="unit_of_volume_description">Selected units will be applied to all volume-related data in the current profile.</string>
+    <string name="unit_of_volume">Unit of volume</string>
+    <string name="record_obd_data">Record vehicle metrics</string>
+    <string name="dynamic_icon_type_summary">Icon changes based on action state.</string>
+    <string name="shared_string_dynamic">Dynamic</string>
+    <string name="obd_connected_to_device">Connected to %s</string>
+    <string name="obd_not_connected_to_device">Disconnected from %s</string>
+    <string name="obd_connecting_to_device">Connecting to %s</string>
+    <string name="bt_start_pair_failed">Can\'t initiate pairing with device</string>
+    <string name="speedometer_maximum">Maximum</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">Shows vehicle fuel consumption rate based on calculations (%/h)</string>
+    <string name="l_100km">l/100km</string>
+    <string name="obd_fuel_consumption_rate_l_km">Fuel consumption rate (l/km)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Shows vehicle fuel consumption rate based on calculations (l/km)</string>
+    <string name="simulate_obd">Simulate obd data</string>
+    <string name="kpa_unit">kPa</string>
+    <string name="obd_fuel_pressure">Fuel pressure</string>
+    <string name="liter">l</string>
+    <string name="percent_hour">%/h</string>
+    <string name="obd_fuel_consumption_rate_l_h">Fuel consumption rate (l/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor">Fuel consumption rate (sensor)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Shows vehicle fuel consumption rate based on calculations (l/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Shows vehicle fuel consumption rate based on sensor (l/h)</string>
 
+    <string name="obd_fuel_level_liter">Fuel level (l)</string>
+    <string name="obd_fuel_level_percent">Fuel level (%)</string>
+    <string name="obd_fuel_left_percent">Fuel left (%)</string>
+    <string name="obd_fuel_left_liter">Fuel left (l)</string>
+    <string name="obd_fuel_left_km">Fuel left (km)</string>
+    <string name="obd_fuel_consumption_rate_scanner">Fuel consumption rate (obd)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Fuel consumption rate l/h</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">Fuel consumption rate %/h</string>
+
+    <string name="route_guidance_desc">Provides real-time route guidance, including distance to the next turn, road name, current street name, and lane information. Widgets are active during navigation.</string>
+	<string name="route_guidance">Route guidance</string>
+    <string name="obd_widget_vehicle_speed">Vehicle speed</string>
+    <string name="obd_widget_engine_speed">Engine speed</string>
+    <string name="obd_nothing_found_description">Please check the following:\n
+– Ensure Bluetooth is turned on\n
+– Vehicle engine is running\n
+– Make sure your device is within range of the scanner.</string>
+    <string name="obd_nothing_found_text">No scanners found</string>
+    <string name="obd_bluetooth_off_description">Turn on Bluetooth find and connect scanners.</string>
+    <string name="obd_searching_text_description">Please keep your device close to the scanner. Ensure the vehicle\'s engine is running.</string>
+    <string name="obd_searching_text">Searching for scanners</string>
+    <string name="obd_device_forget_sensor">Forget scanner</string>
+    <string name="obd_device_forget_sensor_description">Scanner will be removed from the list.
+You will be able to pair this scanner again at any time.</string>
+    <string name="shared_string_bluetooth">Bluetooth</string>
+    <string name="obd_vehicle_info">Vehicle info</string>
+    <string name="connect_obd_instructions_title">OsmAnd supports Bluetooth connections to OBD-II scanners.</string>
+    <string name="obd_how_to_connect">How to connect:</string>
+    <string name="connect_obd_instructions_step">1. Connect the scanner to your vehicle\'s OBD-II port.\n\n
+2. Turn on your vehicle\'s engine\n\n
+3. Enable Bluetooth on your device\n\n
+4. Tap \'%1$s\' and select your scanner from the list.</string>
+    <string name="connect_obd_instructions_step1">Connect the scanner to your vehicle\'s OBD-II port.</string>
+    <string name="connect_obd_instructions_step2">Turn on your vehicle\'s engine</string>
+    <string name="connect_obd_instructions_step3">Enable Bluetooth on your device</string>
+    <string name="connect_obd_instructions_step4">Tap \'%1$s,\' and select your scanner from the list.</string>
+    <string name="learn_more_about_obd_sensors">Learn more about sensors.</string>
+    <string name="screen_is_locked_by_external_button">Touch screen is locked. To unlock, press the "%1$s" button, or tap the on-screen button.</string>
+    <string name="screen_is_unlocked">Touch screen is unlocked.</string>
+    <string name="screen_is_locked_by_action_button">Touch screen is locked. Tap on button to unlock.</string>
+    <string name="release_4_9">
+        • Added a full-screen gallery viewer for Wikimedia images\n\n
+        • Introduced a new plugin \"Vehicle Metrics\" to monitor vehicle performance using the OBD-II protocol\n\n
+        • Added the ability to assign activities to tracks and filter them accordingly\n\n
+        • Implemented new quick actions for trip recording and touchscreen lock\n\n
+        • Introduced customizable map button appearance and a precise grid\n\n
+        • Added a context menu and a \"Reset average speed\" action to widgets\n\n
+        • Added new route layer \"Dirt Bike trails\"\n\n
+        • Fixed \"Auto-record track during navigation\"\n\n
+        • Fixed issue with flipped coordinates in RTL\n\n
+        • Fixed missed sensor data for currently recording track\n\n
+        • Added information about surrounding areas for the selected point\n\n
+        • Added quick action to control visibility of OSM Edits\n\n
+        • Separated visibility parameters for Terrain colorization options\n\n
+        • Added a tappable icon to display access or other road or path attributes\n\n
+    </string>
+    <string name="quick_action_showhide_osm_edits_descr">Button to show or hide local OSM edits on the map.</string>
+	<string name="liter_per_hour">l/h</string>
+	<string name="lock_screen_description">Enables or disables touch screen functionality to prevent accidental taps</string>
+	<string name="lock_screen">Lock screen</string>
+    <string name="track_does_not_contain_data_to_save">Track doesn\'t contain data to save.</string>
+    <string name="quick_action_finish_trip_recording_summary">A button to save the GPX track and finish trip recording.</string>
+    <string name="start_trip_recording_first_m">Please start trip recording first.</string>
+    <string name="new_segment_started_m">Started recording a new track segment.</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">A button to save the current recorded trip as a GPX file and continue recording a new track without interruption.</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Recorded Trip &amp; Continue</string>
+    <string name="quick_action_new_trip_segment">A button to start a new segment in the ongoing GPX track recording.</string>
+    <string name="new_trip_segment">New trip segment</string>
+    <string name="quick_action_start_pause_recording">A button to start, pause or resume recording of the GPX track.</string>
+    <string name="quick_action_verb_start_pause">Start / Pause</string>
+	<string name="help_article_personal_color_palette_schemes_name">Color Schemes</string>
+	<string name="movies_list">Movies list</string>
+	<string name="third_links">Third Links</string>
+	<string name="reset_average_speed">Reset average speed</string>
+	<string name="unknown_bt_device">Unknown device</string>
+	<string name="obd_vin">VIN</string>
+	<string name="obd_vin_desc">VIN code over OBD</string>
+    <string name="unit_volt">V</string>
+	<string name="wikimedia">Wikimedia</string>
+	<string name="open_in_browser">Open in browser</string>
+	<string name="shared_string_source">Source</string>
+	<string name="shared_string_no_internet_connection">No internet connection</string>
+	<string name="no_internet_descr">Please check your connection and try again.</string>
+	<string name="no_photos_available_descr">No user photos have been added to this location yet</string>
+	<string name="no_photos_available">No photos available</string>
+    <string name="shared_string_decrease">Decrease</string>
+    <string name="shared_string_increase">Increase</string>
+    <string name="raster_layers_action_descr">Change raster layers</string>
+    <string name="contour_layers_action_descr">Change contour layers</string>
+    <string name="change_zoom_action_descr">Change map zoom.</string>
+    <string name="search_action_descr">Opens Search.</string>
+    <string name="navigation_action_descr">Opens Navigation.</string>
+    <string name="my_location_action_descr">Centers map on your current location.</string>
+    <string name="map_3d_mode_action_descr">Change map tilt.</string>
+    <string name="drawer_button_description">Opens the main menu.</string>
+    <string name="configure_map_description">Change map style, layers, or other settings.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Dirt bike trails</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Show dirt bike trails</string>
+    <string name="type_of_activity">Type of activity</string>
+    <string name="change_activity">Change activity</string>
+    <string name="obd_fuel_type_not_provided">No fuel type provided</string>
+    <string name="obd_fuel_type_gasoline">Gasoline</string>
+    <string name="obd_fuel_type_methanol">Methanol</string>
+    <string name="obd_fuel_type_ethanol">Ethanol</string>
+    <string name="obd_fuel_type_diesel">Diesel</string>
+    <string name="obd_fuel_type_lpg">LPG</string>
+    <string name="obd_fuel_type_cng">CNG</string>
+    <string name="obd_fuel_type_propane">Propane</string>
+    <string name="obd_fuel_type_electric">Electric</string>
+    <string name="obd_fuel_type_bifuel_gasoline">Bifuel running Gasoline</string>
+    <string name="obd_fuel_type_bifuel_methanol">Bifuel running Methanol</string>
+    <string name="obd_fuel_type_bifuel_ethanol">Bifuel running Ethanol</string>
+    <string name="obd_fuel_type_bifuel_lpg">Bifuel running LPG</string>
+    <string name="obd_fuel_type_bifuel_cng">Bifuel running CNG</string>
+    <string name="obd_fuel_type_bifuel_propane">Bifuel running Propane</string>
+    <string name="obd_fuel_type_bifuel_electricity">Bifuel running Electricity</string>
+    <string name="obd_fuel_type_bifuel_electric_combustion">Bifuel running Electric and Combustion Engine</string>
+    <string name="obd_fuel_type_hybrid_gasoline">Hybrid Gasoline</string>
+    <string name="obd_fuel_type_hybrid_ethanol">Hybrid Ethanol</string>
+    <string name="obd_fuel_type_hybrid_diesel">Hybrid Diesel</string>
+    <string name="obd_fuel_type_hybrid_electric">Hybrid Electric</string>
+    <string name="obd_fuel_type_hybrid_electric_combustion">Hybrid Electric and Combustion Engine</string>
+    <string name="obd_fuel_type_hybrid_regenerative">Hybrid Regenerative</string>
+    <string name="obd_fuel_type_bifuel_hydrogen">Bifuel running Hydrogen</string>
+    <string name="obd_fuel_type_hybrid_hydrogen">Hybrid Hydrogen</string>
+    <string name="obd_fuel_type_hydrogen">Hydrogen</string>
+    <string name="obd_fuel_type_unknown">Unknown Fuel Type</string>
+
+    <string name="shared_string_obd">OBD</string>
+    <string name="obd_widget_group">Vehicle Metrics</string>
+    <string name="vehicle_metrics_plugin_settings">Vehicle Metrics settings</string>
+    <string name="percent_unit">%</string>
+    <string name="obd_rpm">RPM</string>
+    <string name="rpm_unit">rpm</string>
+    <string name="obd_rpm_desc">Shows vehicle tachometer RPM over OBD sensor</string>
+    <string name="obd_fuel_level_desc">Shows vehicle fuel level over OBD sensor</string>
+    <string name="obd_fuel_left_distance_desc">Shows distance vehicle can drive on left fuel level over OBD sensor</string>
+    <string name="obd_fuel_type_desc">Shows vehicle fuel type over OBD sensor</string>
+    <string name="obd_air_intake_temp">Intake temperature</string>
+    <string name="obd_ambient_air_temp">Ambient temperature</string>
+    <string name="obd_battery_voltage">Battery voltage</string>
+    <string name="obd_engine_coolant_temp">Coolant temperature</string>
+    <string name="obd_fuel_level">Fuel Efficiency (%)</string>
+    <string name="obd_fuel_consumption_rate">Fuel consumption rate</string>
+    <string name="obd_fuel_consumption_rate_desc">Shows vehicle fuel consumption rate based on OBD an location</string>
+    <string name="obd_fuel_left_distance">Fuel left (distance)</string>
+    <string name="obd_fuel_left_liters">Fuel left (liters)</string>
+    <string name="obd_fuel_type">Fuel type</string>
+
+
+    <string name="obd_plugin_name">Vehicle Metrics</string>
+    <string name="obd_plugin_description">Monitor key vehicle metrics using the OBD-II protocol. Access data including:
+* Engine speed
+* Fuel consumption
+* Remaining fuel
+* Distance since engine start
+* Intake temperature
+* Ambient temperature
+* Coolant temperature
+* Vehicle speed
+* Battery percentage</string>
+    <string name="obd_support">OBD support</string>
+    <string name="background_opacity">Background opacity</string>
+    <string name="corner_radius">Corner radius</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="shared_string_interface">Interface</string>
+    <string name="quick_action_previous_screen_desc">A toggle to navigate to the previous screen.</string>
+    <string name="quick_action_previous_screen_title">Previous screen</string>
+    <string name="quick_action_verb_navigate">Navigate</string>
+    <string name="quick_action_drawer_desc">A toggle to show or hide side menu.</string>
+    <string name="quick_action_drawer_title">Side menu</string>
+    <string name="quick_action_search_view_desc">A toggle to open or close search view.</string>
+    <string name="quick_action_search_view_title">Search view</string>
+    <string name="quick_action_navigation_view_desc">A toggle to open or close navigation view.</string>
+    <string name="quick_action_navigation_view_title">Navigation view</string>
+    <string name="quick_action_switch_compass_desc">A toggle to switch map orientation.</string>
+    <string name="app_mode_suv">SUV</string>
+	<string name="graph_axis">Graph axis</string>
+	<string name="y_axis_description">Select up to two options for Y-Axis.</string>
+	<string name="delete_widget_description">This widget will be deleted. You can restore it later in Configure Screen.</string>
+	<string name="delete_widget">Delete widget?</string>
+	<string name="add_widget_below">Add widget below</string>
+	<string name="add_widget_above">Add widget above</string>
+	<string name="add_widget_to_the_right">Add widget to the right</string>
+	<string name="add_widget_to_the_left">Add widget to the left</string>
+	<string name="route_roundabout_exit">Take %1$d exit</string>
+	<string name="help_article_map_tracks_name">Tracks</string>
+	<string name="help_article_map_routes_name">Routes</string>
+	<string name="compass_click_north_is_up">To change orientation mode click and hold</string>
+	<string name="shared_string_automatically">Automatically</string>
+	<string name="ask_every_time">Ask every time</string>
+	<string name="detailed_track_guidance">Detailed track guidance</string>
+	<string name="detailed_track_guidance_description">OsmAnd will match your track to nearby roads for enhanced turn-by-turn guidance.</string>
+	<string name="quick_action_routes_summary">A toggle to show or hide %1$s on the map.</string>
+	<string name="hugerock_promo">Hugerock Promo for %1$s months</string>
+	<string name="hugerock_promo_description">Free access to features including unlimited map downloads, 3D relief etc. for %1$s month</string>
+	<string name="driving_region_uk">UK and similar</string>
+	<string name="driving_region_india">India</string>
+	<string name="auto_25_chars_route_kl">Keep left</string>
+	<string name="auto_25_chars_route_kr">Keep right</string>
+	<string name="auto_25_chars_route_tr">Turn right</string>
+	<string name="auto_25_chars_route_tshr">Turn sharply right</string>
+	<string name="auto_25_chars_route_tslr">Turn slightly right</string>
+	<string name="auto_25_chars_route_tl">Turn left</string>
+	<string name="auto_25_chars_route_tshl">Turn sharply left</string>
+	<string name="auto_25_chars_route_tsll">Turn slightly left</string>
+	<string name="auto_25_chars_route_tu">Make U-turn</string>
+	<string name="resting_position">Resting position</string>
+	<string name="navigation_position">Navigation position</string>
+	<string name="resting_navigation_position">Rest &amp; navigation position</string>
+	<string name="view_angle_description">Displays the cone-shaped area you\'re currently facing</string>
+	<string name="view_angle">View angle</string>
+	<string name="location_radius_description">Shows the circular area representing your current location accuracy</string>
+	<string name="location_radius">Location radius</string>
+    <string name="rendering_value_pale_name">Pale</string>
+    <string name="choose_map_orientation">Choose map orientation</string>
+    <string name="energy_avg_info">Energy statistics (average 1 / 5 / 15 minutes)</string>
+    <string name="energy_avg_info_description">Battery level per minute: %1$s\nEnergy consumption (mAh): %2$s</string>
+    <string name="rendering_avg_info">Rendering statistics (average 1 / 5 / 15 minutes)</string>
+    <string name="rendering_avg_info_details">FPS by last 1k frames: %1$s\nCPU (tiles): %2$s\nCPU (idle time): %3$s\nCPU (waits GPU): %4$s</string>
+    <string name="quick_action_location_by_gpx">Location by GPX</string>
+    <string name="quick_action_terrain_color_scheme">Terrain color scheme</string>
+    <string name="quick_action_directions_from">Start point</string>
+    <string name="quick_action_destination">Destination</string>
+    <string name="quick_action_remove_next_destination">Next destination point</string>
+    <string name="quick_action_to_my_location">To My Location</string>
+    <string name="quick_action_move_map_left">Map to the left</string>
+    <string name="quick_action_move_map_right">Map to the right</string>
+    <string name="quick_action_move_map_down">Map down</string>
+    <string name="quick_action_move_map_up">Map up</string>
+    <string name="quick_action_new_route">New route</string>
+    <string name="quick_action_previous_app_profile">App profile to previous</string>
+    <string name="quick_action_next_app_profile">App profile to next</string>
+    <string name="app_profile">App profile</string>
+    <string name="shared_string_set">Set</string>
+    <string name="shared_string_create">Create</string>
+    <string name="shared_string_replace">Replace</string>
+    <string name="shared_string_simulate">Simulate</string>
+    <string name="quick_action_display_position_in_center">Display position always in center</string>
+    <string name="quick_action_terrain">Terrain colorization type</string>
+    <string name="quick_action_map_underlay">Underlay</string>
+    <string name="quick_action_map_overlay">Overlay</string>
+    <string name="quick_action_map_style">Map style</string>
+    <string name="quick_action_first_intermediate">First intermediate</string>
+    <string name="quick_action_audio_note">Audio note</string>
+    <string name="quick_action_video_note">Video note</string>
+    <string name="quick_action_photo_note">Photo note</string>
+    <string name="quick_action_track_waypoint">Track waypoint</string>
+    <string name="quick_action_parking_place">Parking place</string>
+    <string name="quick_action_verb_show_hide">Show / Hide</string>
+    <string name="quick_action_verb_pause_resume">Pause / Resume</string>
+    <string name="quick_action_verb_turn_on_off">Turn On / Off</string>
+    <string name="quick_action_verb_start_stop">Start / Stop</string>
+    <string name="weather_screen">Weather screen</string>
+    <string name="shared_string_all_icons">All icons</string>
+    <string name="profile_icon">Profile icon</string>
+    <string name="navigation_position_icon_summary">Icon displayed while you\'re navigating or moving.</string>
+    <string name="navigation_position_icon">Navigation position icon</string>
+    <string name="resting_position_icon_summary">Icon displayed when you\'re not moving.</string>
+    <string name="resting_position_icon">Resting position icon</string>
+    <string name="data_source">Data Source</string>
+    <string name="weather_data_sources_prompt">OsmAnd provides weather data from two sources:</string>
+    <string name="weather_source_ecmwf_description">European Centre for Medium-Range Weather Forecasts</string>
+    <string name="weather_source_GFS_description">Global Forecast System from National Centers for Environmental Prediction</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="daynight_mode_app_theme_summary">The map\'s display aligns with the app\'s overall theme—day mode for a light theme and night mode for a dark theme</string>
+    <string name="daynight_mode_sensor_summary">Uses the device\'s light sensor to toggle between light and dark themes according to ambient light levels.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Automatically switches between day and night themes based on local sunrise and sunset times.</string>
+    <string name="daynight_mode_night_summary">Always displays the map in a dark theme, suited for nighttime or low-light conditions.</string>
+    <string name="daynight_mode_day_summary">Always displays the map in a light theme, ideal for daytime visibility.</string>
+    <string name="daynight_mode_app_theme">App theme</string>
+    <string name="key_event_action_continuous_zoom_out">Continuous zoom out</string>
+    <string name="key_event_action_continuous_zoom_in">Continuous zoom in</string>
+    <string name="remove_key_assignment_summary">Key assignment for the selected action will be removed.</string>
+    <string name="remove_key_assignment">Remove key assignment</string>
+    <string name="map_settings_weather_wind_animation">Wind animation</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="shared_string_modify">Modify</string>
+    <string name="missing_maps_ignore">Use downloaded maps</string>
+    <string name="missing_maps_ignore_details">Downloaded maps cover your route? Navigate with them if you\'re familiar with the area.</string>
+    <string name="backup_error_failed_to_transfer_file">Failed to transfer cloud file(s).</string>
+    <string name="contact_support_retry">Try again or contact support</string>
+    <string name="rendering_value_dark_orange_name">Dark orange</string>
+    <string name="user_palette">User palette</string>
+    <string name="shared_string_colors">Colors</string>
+    <string name="wall_height">Wall height</string>
+    <string name="change_terrain_color_scheme">Change Terrain color scheme</string>
+    <string name="play_weather_forecast">Play weather forecast</string>
+    <string name="travel_topics">Travel topics</string>
+    <string name="clear_key_assignment_summary">Key assignment for the selected action will be cleared.</string>
+    <string name="clear_all_key_shortcuts_summary">All key assignments for the selected type will be removed.</string>
+    <string name="clear_all_key_shortcuts">Clear all key shortcuts</string>
+    <string name="no_assigned_keys_desc">Select an action and assign a key by tapping the \'Add\' button.</string>
+    <string name="no_assigned_keys">No assigned keys</string>
+    <string name="shared_string_key">Key</string>
+    <string name="new_key_assignment">New key assignment</string>
+    <string name="key_name_pattern">Key \"%1$s\"</string>
+    <string name="key_assignment_add_key">Add key</string>
+    <string name="key_assignment_add_action">Add action</string>
+    <string name="disable_map_layers">Disable map layers</string>
+    <string name="disable_map_layers_descr">Disable all map layers above the vector map (restart required).</string>
+    <string name="height_legend_description">Altitude color maps are used to visualize relief.</string>
+    <string name="action_icon">Action icon</string>
+    <string name="assigned_keys">Assigned Keys</string>
+    <string name="steps_per_minute_unit">SPM</string>
     <string name="allow_display_on_top">Allow display on top</string>
     <string name="allow_display_on_top_description">Allow displaying map texts on top of each other</string>
     <string name="show_debug_info">Show debug information</string>
@@ -19,7 +396,17 @@
     <string name="routing_attr_avoid_cobblestone_name">Avoid cobblestone</string>
     <string name="routing_attr_avoid_cobblestone_description">Avoid cobblestone</string>
     <string name="release_4_8">
-        • To be prepared for 4.8
+        • New terrain colorization option \"Altitude\"\n\n
+        • Custom color palettes for terrain, tracks, and routes\n\n
+        • 3D variant for location position icons\n\n
+        • Quick Actions can now be assigned to external keyboards\n\n
+        • Weather: UI refresh, added wind animation\n\n
+        • 3D Track Improvements: new visualization and colorization options\n\n
+        • Expanded selection of tourist routes on the map\n\n
+        • Added app theme option to follow map mode\n\n
+        • Fixed track stats, sorting &amp; search\n\n
+        • OSM Editing: deleted login / password authorization method\n\n
+        • Switching to system share sheet starting Android 14\n\n
     </string>
     <string name="track_vertical_exaggeration_description">By changing the scale value, you can change 3D track height.</string>
     <string name="visualized_by">Visualized by</string>
@@ -33,7 +420,7 @@
     <string name="top_and_bottom">Top and bottom</string>
     <string name="title_3d_track">3D Track</string>
     <string name="explore_3d_track_description">Explore the track in interactive 3D! Visualize height, speed, and more directly on the map.</string>
-    <string name="maps_that_also_be_used">Maps that also be used: %1$s</string>
+    <string name="maps_that_also_be_used">Maps that will also be used: %1$s</string>
     <string name="getting_list_of_required_maps">Getting a list of required maps…</string>
     <string name="required_maps_calculate_online_summary">The list of missing maps is based on the straight line route. To get an accurate list of maps, OsmAnd can pre-calculate your route online.</string>
     <string name="required_maps">Required Maps</string>
@@ -237,7 +624,7 @@
     <string name="discard_filter_changes_prompt">Reset all filters?</string>
     <string name="smart_folder_saved">Smart Folder saved</string>
     <string name="edit_filter">Edit filter</string>
-    <string name="delete_smart_folder_dialog_message">This will delete \"%1$s\" smart folder.</string>
+    <string name="delete_smart_folder_dialog_message">This will remove smart folder \"%1$s\". (No tracks will be deleted.)</string>
     <string name="smart_folder_name_present">Such smart folder already present</string>
     <string name="empty_name">Empty name</string>
     <string name="add_smart_folder">Add smart folder</string>
@@ -387,7 +774,7 @@
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="rendering_value_caiScale_description">Club Alpino Italiano (Italian Alpine Club)</string>
     <string name="rendering_attr_alpineHiking_description">Difficulty classification types for the routes.</string>
-    <string name="rendering_attr_alpineHiking_name">Difficulty classification</string>
+    <string name="rendering_attr_alpineHiking_name">Hiking trails difficulty grade</string>
     <string name="shared_string_checked">Checked</string>
     <string name="shared_string_not_checked">Not checked</string>
     <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
@@ -472,7 +859,7 @@
     <string name="there_are_no_connected_sensors_of_this_type">There are no connected sensors of this type</string>
     <string name="external_sensors_not_found">Sensors not found</string>
     <string name="external_sensors_source_of_data">Source of data</string>
-    <string name="delete_track_folder_dialog_message">This will delete \"%1$s\" folder and all tracks (%2$s) included.</string>
+    <string name="delete_track_folder_dialog_message">This will delete folder \"%1$s\" and all %2$s tracks contained.</string>
     <string name="delete_folder_question">Delete folder?</string>
     <string name="delete_folder">Delete folder</string>
     <string name="show_all_tracks_on_the_map">Show all tracks on the map</string>
@@ -595,7 +982,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="metric_lbs">lbs</string>
     <string name="app_mode_moped">Moped</string>
     <string name="selected_value">Selected value</string>
-    <string name="sort_duration_ascending">Shorter duration first</string>
+    <string name="sort_duration_ascending">Shortest duration first</string>
     <string name="sort_duration_descending">Longest duration first</string>
     <string name="sort_distance_ascending">Shortest distance first</string>
     <string name="sort_distance_descending">Longest distance first</string>
@@ -933,7 +1320,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="compass_visible_if_map_rotated">Visible if map is rotated</string>
     <string name="compass_always_hidden">Always hidden</string>
     <string name="compass_always_visible">Always visible</string>
-    <string name="compass_click_desc">Hint: Tap the compass button to switch the map orientation mode.</string>
+    <string name="compass_click_desc">Double tap the compass button to switch the map orientation mode.</string>
     <string name="compass_desc">Shows direction to north.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Depth contour lines color scheme</string>
     <string name="rendering_attr_depthContourWidth_description">Depth contour line width</string>
@@ -1831,7 +2218,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="follow_track">Follow track</string>
     <string name="marker_save_as_track">Save as track file</string>
     <string name="map_widget_monitoring">Trip recording</string>
-    <string name="quick_action_add_gpx">Add track waypoint</string>
     <string name="context_menu_item_add_waypoint">Add track waypoint</string>
     <string name="empty_state_my_tracks_desc">Import or record track files</string>
     <string name="empty_state_my_tracks">Add track files</string>
@@ -1886,7 +2272,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="please_provide_point_name_error">Please provide a name for the point</string>
     <string name="use_volume_buttons_as_zoom">Volume buttons as zoom</string>
     <string name="use_volume_buttons_as_zoom_descr">Control the map-zoom level using the volume buttons on the device.</string>
-    <string name="quick_action_remove_next_destination">Delete next destination point</string>
     <string name="app_mode_inline_skates">Inline skates</string>
     <string name="speed_cameras_removed_descr">This device doesn\'t have speed cameras.</string>
     <string name="shared_string_uninstall_and_restart">Uninstall and Restart</string>
@@ -3032,7 +3417,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="shared_string_to">To</string>
     <string name="mapillary_menu_date_from">From</string>
     <string name="mapillary_menu_descr_dates">Only view added images</string>
-    <string name="mapillary_menu_title_dates">Date</string>
+    <string name="shared_string_date">Date</string>
     <string name="mapillary_menu_edit_text_hint">Type username</string>
     <string name="mapillary_menu_descr_username">View only images added by</string>
     <string name="mapillary_menu_title_username">Username</string>
@@ -3093,9 +3478,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="quick_action_auto_zoom_desc">Button to turn speed-controlled auto-zooming on or off.</string>
     <string name="quick_action_auto_zoom_on">Turn on auto-zooming</string>
     <string name="quick_action_auto_zoom_off">Turn off auto-zooming</string>
-    <string name="quick_action_add_destination">Set destination</string>
-    <string name="quick_action_replace_destination">Replace destination</string>
-    <string name="quick_action_add_first_intermediate">Add first intermediate</string>
     <string name="quick_action_add_destination_desc">A button to make the screen center the route destination, a previously selected destination would become the last intermediate destination.</string>
     <string name="quick_action_directions_from_desc">A button to make the screen center the point of departure. Will then ask to set destination or trigger the route calculation.</string>
     <string name="quick_action_replace_destination_desc">A button to make the screen center the new route destination, replacing the previously selected destination (if any).</string>
@@ -4027,8 +4409,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="rendering_attr_buildings15zoom_name">Buildings on zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">More details</string>
     <string name="rendering_attr_lessDetailed_name">Fewer details</string>
-    <string name="rendering_attr_hideAccess_name">Access restrictions</string>
-    <string name="rendering_attr_showAccess_name">Show access and toll restrictions</string>
+    <string name="rendering_attr_showAccess_name">Show access restrictions</string>
     <string name="rendering_attr_showSurfaceGrade_name">Show road quality</string>
     <string name="rendering_attr_showSurfaces_name">Show road surface</string>
     <string name="rendering_attr_showCycleRoutes_name">Cycle routes</string>
@@ -4239,7 +4620,6 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="driving_region_us">United States</string>
     <string name="driving_region_canada">Canada</string>
     <string name="driving_region_europe_asia">Europe, Asia, Latin America, and similar</string>
-    <string name="driving_region_uk">UK, India, and similar</string>
     <string name="driving_region_australia">Australia</string>
     <string name="speak_title">Announce…</string>
     <string name="speak_descr">Set up announcement of street names, traffic warnings (forced stops, speed bumps), speed camera warnings, and speed limits.</string>
@@ -4967,6 +5347,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="search_offline_clear_search">New Search</string>
     <string name="map_text_size_descr">Text size for names on the map:</string>
     <string name="map_text_size">Map font size</string>
+    <string name="battery_saving_mode">Battery saving mode</string>
     <string name="trace_rendering">Performance debug info</string>
     <string name="trace_rendering_descr">Display the rendering and navigation performance.</string>
     <string name="installing_new_resources">Unpacking new data…</string>
@@ -5482,21 +5863,12 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="configure_screen_quick_action">Quick action</string>
     <string name="quick_action_item_action">Action %d</string>
     <string name="quick_action_item_screen">Screen %d</string>
-    <string name="quick_action_add_marker">Add map marker</string>
-    <string name="quick_action_add_poi">Add POI</string>
-    <string name="quick_action_map_style">Change map style</string>
     <string name="quick_action_map_style_switch">Map style changed to \"%s\".</string>
-    <string name="quick_action_take_audio_note">New audio note</string>
-    <string name="quick_action_take_video_note">New video note</string>
-    <string name="quick_action_take_photo_note">New photo note</string>
-    <string name="quick_action_add_osm_bug">Add OSM Note</string>
     <string name="quick_action_navigation_voice">Voice on/off</string>
     <string name="quick_action_navigation_voice_off">Unmute Voice</string>
     <string name="quick_action_navigation_voice_on">Mute Voice</string>
-    <string name="quick_action_add_parking">Add parking place</string>
     <string name="quick_action_new_action">Add action</string>
     <string name="quick_action_edit_action">Edit action</string>
-    <string name="quick_action_add_favorite">Add Favorite</string>
     <string name="dialog_add_action_title">Add action</string>
     <string name="quick_actions_delete">Delete action</string>
     <string name="quick_actions_delete_text">Delete the \"%s\" action?</string>
@@ -5538,15 +5910,12 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="quick_action_map_style_action">Add a map style</string>
     <string name="quick_action_empty_param_error">Fill out all parameters</string>
     <string name="quick_action_map_styles">Map styles</string>
-    <string name="quick_action_map_overlay">Change map overlay</string>
     <string name="quick_action_map_overlay_title">Map overlays</string>
     <string name="quick_action_map_overlay_action">Add overlay</string>
     <string name="quick_action_map_overlay_switch">Map overlay changed to \"%s\".</string>
     <string name="quick_action_map_underlay_switch">Map underlay changed to \"%s\".</string>
-    <string name="quick_action_map_underlay">Change map underlay</string>
     <string name="quick_action_map_underlay_title">Map underlays</string>
     <string name="quick_action_map_underlay_action">Add underlay</string>
-    <string name="quick_action_map_source">Change map source</string>
     <string name="quick_action_map_source_title">Map sources</string>
     <string name="quick_action_map_source_action">Add map source</string>
     <string name="quick_action_map_source_switch">Map source changed to \"%s\".</string>

@@ -18,9 +18,9 @@ import net.osmand.plus.quickaction.QuickActionType;
 public class NavDirectionsFromAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(NAV_DIRECTIONS_FROM_ACTION_ID,
-			"nav.directions", NavDirectionsFromAction.class).
-			nameRes(R.string.context_menu_item_directions_from).iconRes(R.drawable.ic_action_route_direction_from_here).nonEditable().
-			category(QuickActionType.NAVIGATION);
+			"nav.directions", NavDirectionsFromAction.class)
+			.nameRes(R.string.quick_action_directions_from).iconRes(R.drawable.ic_action_route_direction_from_here).nonEditable()
+			.category(QuickActionType.NAVIGATION).nameActionRes(R.string.shared_string_set);
 
 	public NavDirectionsFromAction() {
 		super(TYPE);

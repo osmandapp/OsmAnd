@@ -24,6 +24,7 @@ public class CoordinatesMapCenterWidget extends CoordinatesBaseWidget {
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
+		super.updateInfo(drawSettings);
 		boolean visible = mapActivity.getWidgetsVisibilityHelper().shouldShowTopCoordinatesWidget();
 
 		updateVisibility(visible);

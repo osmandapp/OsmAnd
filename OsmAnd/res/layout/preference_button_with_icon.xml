@@ -38,7 +38,7 @@
 			android:layout_marginRight="@dimen/content_padding_small_half"
 			android:layout_marginBottom="@dimen/content_padding_small_half"
 			android:letterSpacing="@dimen/description_letter_spacing"
-			app:typeface="@string/font_roboto_medium"
+			app:typefaceWeight="medium"
 			tools:text="Title"
 			tools:textColor="?attr/active_color_basic" />
 

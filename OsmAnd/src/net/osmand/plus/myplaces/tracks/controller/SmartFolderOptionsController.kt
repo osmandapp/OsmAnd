@@ -11,10 +11,10 @@ import net.osmand.plus.base.dialog.data.DisplayItem
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemClicked
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider
 import net.osmand.plus.settings.bottomsheets.CustomizableOptionsBottomSheet
-import net.osmand.plus.track.data.SmartFolder
 import net.osmand.plus.widgets.alert.AlertDialogData
 import net.osmand.plus.widgets.alert.AlertDialogExtra
 import net.osmand.plus.widgets.alert.CustomAlert
+import net.osmand.shared.gpx.data.SmartFolder
 import net.osmand.util.Algorithms
 
 class SmartFolderOptionsController(
@@ -36,8 +36,8 @@ class SmartFolderOptionsController(
 		iconsCache.getActiveIcon(R.drawable.ic_action_folder_smart, app.daynightHelper.isNightMode)
 		displayData.addDisplayItem(
 			DisplayItem()
-				.setTitle(smartFolder.getName(app))
-				.setDescription("${smartFolder.trackItems.size} ${app.getString(R.string.shared_string_tracks)}")
+				.setTitle(smartFolder.getName())
+				.setDescription("${smartFolder.getTrackItems().size} ${app.getString(R.string.shared_string_tracks)}")
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_72dp)
 				.setIcon(
 					iconsCache.getActiveIcon(
@@ -129,7 +129,7 @@ class SmartFolderOptionsController(
 				}
 			}
 			val caption = activity.getString(R.string.enter_new_name)
-			CustomAlert.showInput(dialogData, activity, smartFolder.getName(app), caption)
+			CustomAlert.showInput(dialogData, activity, smartFolder.getName(), caption)
 		}
 	}
 
@@ -157,7 +157,7 @@ class SmartFolderOptionsController(
 					app.smartFolderHelper.deleteSmartFolder(smartFolder)
 					onSmartFolderDeleted()
 				}
-			val folderName = smartFolder.getName(ctx)
+			val folderName = smartFolder.getName()
 			val message =
 				ctx.getString(R.string.delete_smart_folder_dialog_message, folderName)
 			CustomAlert.showSimpleMessage(dialogData, message)

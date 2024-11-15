@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.OsmAndFormatter;
 
 public class SensorDistanceWidgetDataField extends SensorWidgetDataField {

@@ -29,7 +29,7 @@
 			android:paddingRight="@dimen/content_padding"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
-			app:typeface="@string/font_roboto_regular"
+			android:textStyle="normal"
 			tools:text="@string/plugin_disabled_descr"
 			android:paddingEnd="@dimen/content_padding"
 			android:paddingStart="@dimen/content_padding" />

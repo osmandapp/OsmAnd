@@ -10,7 +10,6 @@ public class GeometryWayPoint {
 	public GeometryWayStyle<?> style;
 
 	public GeometryWayPoint() {
-
 	}
 
 	public GeometryWayPoint(int ind, float tx, float ty) {

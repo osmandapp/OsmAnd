@@ -9,10 +9,7 @@
             android:name="net.osmand.plus.activities.MapActivity"
             android:theme="@style/FirstSplashScreenNightlyFree"
             tools:replace="android:theme"/>
-        <service
-            android:name="net.osmand.plus.NavigationService"
-            android:process="net.osmand.dev"
-            tools:replace="android:process"/>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="net.osmand.dev.fileprovider"

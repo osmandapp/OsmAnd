@@ -20,9 +20,10 @@ import net.osmand.plus.quickaction.QuickActionType;
 public class OpenWeatherAction extends QuickAction {
 	public static final QuickActionType TYPE = new QuickActionType(OPEN_WEATHER_ACTION_ID,
 			"weather.forecast.open", OpenWeatherAction.class)
-			.nameRes(R.string.open_weather_action)
+			.nameRes(R.string.weather_screen)
+			.nameActionRes(R.string.shared_string_open)
 			.iconRes(R.drawable.ic_action_umbrella).nonEditable()
-			.category(QuickActionType.OPEN);
+			.category(QuickActionType.CONFIGURE_MAP);
 
 	public OpenWeatherAction() {
 		super(TYPE);

@@ -30,8 +30,8 @@ import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.enums.MetricsConstants;
-import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.shared.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -364,7 +364,7 @@ public class WaypointHelper {
 		if (mxspeed != 0 && loc != null && loc.hasSpeed() && mxspeed != RouteDataObject.NONE_MAX_SPEED) {
 			if (loc.getSpeed() > mxspeed + delta) {
 				int speed;
-				if (constants.imperial) {
+				if (constants.getImperial()) {
 					speed = Math.round(mxspeed * 3.6f / 1.6f);
 				} else {
 					speed = Math.round(mxspeed * 3.6f);

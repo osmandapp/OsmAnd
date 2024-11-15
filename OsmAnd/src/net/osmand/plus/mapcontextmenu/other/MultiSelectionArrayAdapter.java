@@ -1,13 +1,10 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import static net.osmand.plus.utils.AndroidUtils.dpToPx;
-import static net.osmand.plus.utils.AndroidUtils.getActivityTypeStringPropertyName;
 import static net.osmand.plus.utils.ColorUtilities.getDividerColor;
 import static net.osmand.plus.utils.ColorUtilities.getListBgColorId;
 import static net.osmand.plus.utils.ColorUtilities.getPrimaryTextColor;
 import static net.osmand.plus.utils.ColorUtilities.getSecondaryTextColor;
 import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
-import static net.osmand.util.Algorithms.capitalizeFirstLetterAndLowercase;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -97,10 +94,10 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MenuObject> {
 		// Text line 2
 		TextView line2 = convertView.findViewById(R.id.context_menu_line2);
 		line2.setTextColor(getSecondaryTextColor(context, nightMode));
-		line2.setText(getSecondLineText(item));
+		line2.setText(MenuObjectUtils.getSecondLineText(item));
 		Drawable slIcon = item.getTypeIcon();
 		line2.setCompoundDrawablesWithIntrinsicBounds(slIcon, null, null, null);
-		line2.setCompoundDrawablePadding(dpToPx(context, 5f));
+		line2.setCompoundDrawablePadding(AndroidUtils.dpToPx(context, 5f));
 
 		// Divider
 		View divider = convertView.findViewById(R.id.divider);
@@ -119,27 +116,6 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MenuObject> {
 			icon = iconId != 0 ? iconsCache.getIcon(iconId, iconColorId) : null;
 		}
 		return icon;
-	}
-
-	private String getSecondLineText(MenuObject item) {
-		StringBuilder line2Str = new StringBuilder(item.getTypeStr());
-		if (item.getObject() instanceof Pair) {
-			Pair<?, ?> pair = (Pair<?, ?>) item.getObject();
-			if (pair.first instanceof RouteKey) {
-				RouteKey key = (RouteKey) pair.first;
-				String tag = key.type.getName();
-				String routeType = getActivityTypeStringPropertyName(item.getMyApplication(), tag, capitalizeFirstLetterAndLowercase(tag));
-				line2Str.append(" - ").append(routeType);
-			}
-		}
-		String streetStr = item.getStreetStr();
-		if (!Algorithms.isEmpty(streetStr) && !item.displayStreetNameInTitle()) {
-			if (line2Str.length() > 0) {
-				line2Str.append(", ");
-			}
-			line2Str.append(streetStr);
-		}
-		return line2Str.toString();
 	}
 
 	private void onItemClicked(int position) {

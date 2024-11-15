@@ -8,7 +8,6 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
-import net.osmand.router.RouteColorize;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -29,6 +28,9 @@ import java.io.InterruptedIOException;
 import java.io.OutputStream;
 import java.lang.ref.WeakReference;
 import java.security.MessageDigest;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -57,6 +59,8 @@ public class Algorithms {
 	
 	private static final char[] CHARS_TO_NORMALIZE_KEY = {'’'};
 	private static final char[] CHARS_TO_NORMALIZE_VALUE = {'\''};
+
+	public static final NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#", new DecimalFormatSymbols(Locale.US));
 
 	private static final String HTML_PATTERN = "<(\"[^\"]*\"|'[^']*'|[^'\">])*>";
 
@@ -1183,43 +1187,6 @@ public class Algorithms {
 		return false;
 	}
 
-	public static int[] stringToGradientPalette(String str, String gradientScaleType) {
-		boolean isSlope = "gradient_slope_color".equals(gradientScaleType);
-		if (isBlank(str)) {
-			return isSlope ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
-		}
-		String[] arr = str.split(" ");
-		if (arr.length < 2) {
-			return isSlope ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
-		}
-		int[] colors = new int[arr.length];
-		try {
-			for (int i = 0; i < arr.length; i++) {
-				colors[i] = parseColor(arr[i]);
-			}
-		} catch (IllegalArgumentException e) {
-			return isSlope ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
-		}
-		return colors;
-	}
-
-	public static String gradientPaletteToString(int[] palette, String gradientScaleType) {
-		boolean isSlope = "gradient_slope_color".equals(gradientScaleType);
-		int[] src;
-		if (palette != null && palette.length >= 2) {
-			src = palette;
-		} else {
-			src = isSlope ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
-		}
-		StringBuilder stringPalette = new StringBuilder();
-		for (int i = 0; i < src.length; i++) {
-			stringPalette.append(colorToString(src[i]));
-			if (i + 1 != src.length) {
-				stringPalette.append(" ");
-			}
-		}
-		return stringPalette.toString();
-	}
 
 	public static boolean isUrl(String value) {
 		String[] urlPrefixes = new String[] {"http://", "https://", "HTTP://", "HTTPS://"};

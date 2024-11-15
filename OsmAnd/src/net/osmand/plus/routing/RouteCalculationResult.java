@@ -15,15 +15,16 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.QuadRect;
-import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.ExitInfo;
+import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -39,7 +40,10 @@ public class RouteCalculationResult {
 
 	private static final double DISTANCE_CLOSEST_TO_INTERMEDIATE = 3000;
 	private static final double DISTANCE_THRESHOLD_TO_INTERMEDIATE = 25;
-	private static final double DISTANCE_THRESHOLD_TO_INTRODUCE_FIRST_AND_LAST_POINTS = 50;
+	private static final double DISTANCE_THRESHOLD_TO_INTRODUCE_FIRST_AND_LAST_POINTS = 15;
+
+	public static final String FIRST_LAST_LOCATION_PROVIDER = "FirstLastLocationProvider";
+
 	// could not be null and immodifiable!
 	private final List<Location> locations;
 	private final List<RouteDirectionInfo> directions;
@@ -59,13 +63,7 @@ public class RouteCalculationResult {
 	protected List<RouteDirectionInfo> cacheAgreggatedDirections;
 	protected List<LocationPoint> locationPoints = new ArrayList<>();
 
-	protected List<WorldRegion> missingMaps;
-	protected List<WorldRegion> mapsToUpdate;
-	protected List<WorldRegion> usedMaps;
-
-	protected List<LatLon> missingMapsPoints;
-
-	protected RoutingContext missingMapsRoutingContext;
+	protected MissingMapsCalculationResult missingMapsCalculationResult;
 
 	// params
 	protected final ApplicationMode appMode;
@@ -73,6 +71,7 @@ public class RouteCalculationResult {
 	protected final double routeRecalcDistance;
 	protected final double routeVisibleAngle;
 	protected final boolean initialCalculation;
+	protected GpxFile gpxFile;
 
 	// Note always currentRoute > get(currentDirectionInfo).routeOffset, 
 	//         but currentRoute <= get(currentDirectionInfo+1).routeOffset 
@@ -144,12 +143,17 @@ public class RouteCalculationResult {
 			this.routeVisibleAngle = 0;
 		}
 		this.initialCalculation = params.initialCalculation;
+		this.gpxFile = params.gpxFile;
 	}
 
-	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end,
-	                              List<LatLon> intermediates, OsmandApplication ctx, boolean leftSide,
-	                              RoutingContext rctx, List<LocationPoint> waypoints, ApplicationMode mode,
-								  boolean calculateFirstAndLastPoint, boolean initialCalculation) {
+	public RouteCalculationResult(List<RouteSegmentResult> list, RouteCalculationParams params, RoutingContext rctx,
+	                              List<LocationPoint> waypoints, boolean calculateFirstAndLastPoint) {
+		OsmandApplication ctx = params.ctx;
+		ApplicationMode mode = params.mode;
+		Location start = params.start;
+		LatLon end = params.end;
+		List <LatLon> intermediates = params.intermediates;
+
 		if (rctx != null) {
 			this.routingTime = rctx.routingTime;
 			this.visitedSegments = rctx.getVisitedSegments();
@@ -191,7 +195,8 @@ public class RouteCalculationResult {
 		this.routeRecalcDistance = ctx.getSettings().ROUTE_RECALCULATION_DISTANCE.getModeValue(mode);
 		this.routeVisibleAngle = routeService == RouteService.STRAIGHT ?
 				ctx.getSettings().ROUTE_STRAIGHT_ANGLE.getModeValue(mode) : 0;
-		this.initialCalculation = initialCalculation;
+		this.initialCalculation = params.initialCalculation;
+		this.gpxFile = params.gpxFile;
 	}
 
 	public ApplicationMode getAppMode() {
@@ -206,43 +211,16 @@ public class RouteCalculationResult {
 		return alarmInfo;
 	}
 
-	public List<WorldRegion> getMissingMaps() {
-		return missingMaps;
+	public void setMissingMapsCalculationResult(MissingMapsCalculationResult missingMapsCalculationResult) {
+		this.missingMapsCalculationResult = missingMapsCalculationResult;
 	}
 
-	public void setMissingMaps(List<WorldRegion> missingMaps,
-							   List<WorldRegion> mapsToUpdate,List<WorldRegion> usedMaps,
-							   RoutingContext ctx, List<LatLon> points) {
-		this.missingMaps = missingMaps;
-		this.mapsToUpdate = mapsToUpdate;
-		this.usedMaps = usedMaps;
-		if(Algorithms.isEmpty(this.missingMaps) && Algorithms.isEmpty(this.mapsToUpdate)) {
-			this.missingMapsRoutingContext = null;
-			this.missingMapsPoints = null;
-		} else {
-			this.missingMapsPoints = points;
-			this.missingMapsRoutingContext = ctx;
-		}
-	}
-
-	public RoutingContext getMissingMapsRoutingContext() {
-		return missingMapsRoutingContext;
-	}
-
-	public List<LatLon> getMissingMapsPoints() {
-		return missingMapsPoints;
-	}
-
-	public List<WorldRegion> getMapsToUpdate() {
-		return mapsToUpdate;
-	}
-
-	public List<WorldRegion> getUsedMaps() {
-		return usedMaps;
+	public MissingMapsCalculationResult getMissingMapsCalculationResult() {
+		return missingMapsCalculationResult;
 	}
 
 	public boolean hasMissingMaps() {
-		return !Algorithms.isEmpty(missingMaps) || !Algorithms.isEmpty(mapsToUpdate);
+		return missingMapsCalculationResult != null && missingMapsCalculationResult.hasMissingMaps();
 	}
 
 	public boolean isInitialCalculation() {
@@ -833,7 +811,12 @@ public class RouteCalculationResult {
 	public static void checkForDuplicatePoints(List<Location> locations, List<RouteDirectionInfo> directions) {
 		// 
 		for (int i = 0; i < locations.size() - 1; ) {
-			if (locations.get(i).distanceTo(locations.get(i + 1)) == 0) {
+			Location loc = locations.get(i);
+			Location nextLoc = locations.get(i + 1);
+			if (loc.distanceTo(nextLoc) == 0) {
+				if (FIRST_LAST_LOCATION_PROVIDER.equals(loc.getProvider())) {
+					nextLoc.setProvider(FIRST_LAST_LOCATION_PROVIDER);
+				}
 				locations.remove(i);
 				if (directions != null) {
 					for (RouteDirectionInfo info : directions) {
@@ -899,17 +882,19 @@ public class RouteCalculationResult {
 											   List<RouteSegmentResult> segs, Location start) {
 		Location firstLocation = Algorithms.isEmpty(locations) ? null : locations.get(0);
 		if (firstLocation != null && firstLocation.distanceTo(start) > DISTANCE_THRESHOLD_TO_INTRODUCE_FIRST_AND_LAST_POINTS) {
+			Location startLocation = new Location(start);
+			startLocation.setProvider(FIRST_LAST_LOCATION_PROVIDER);
 			// Start location can have wrong altitude
 			double firstValidAltitude = getFirstValidAltitude(locations);
 			if (!Double.isNaN(firstValidAltitude)) {
-				start.setAltitude(firstValidAltitude);
+				startLocation.setAltitude(firstValidAltitude);
 			}
 
 			// add start point
-			locations.add(0, start);
+			locations.add(0, startLocation);
 			// Add artificial route segment
 			if (segs != null) {
-				RouteSegmentResult straightSegment = generateStraightLineSegment(start, firstLocation);
+				RouteSegmentResult straightSegment = generateStraightLineSegment(startLocation, firstLocation);
 				segs.add(0, straightSegment);
 			}
 			if (directions != null && !directions.isEmpty()) {
@@ -940,11 +925,7 @@ public class RouteCalculationResult {
 											  List<RouteSegmentResult> segs, LatLon end) {
 		if (!locations.isEmpty()) {
 			Location lastFoundLocation = locations.get(locations.size() - 1);
-
-			Location endLocation = new Location(lastFoundLocation.getProvider());
-			endLocation.setLatitude(end.getLatitude());
-			endLocation.setLongitude(end.getLongitude());
-
+			Location endLocation = new Location(FIRST_LAST_LOCATION_PROVIDER, end.getLatitude(), end.getLongitude());
 			if (lastFoundLocation.distanceTo(endLocation) > DISTANCE_THRESHOLD_TO_INTRODUCE_FIRST_AND_LAST_POINTS) {
 				int type = TurnType.C;
 				if (directions != null && !directions.isEmpty()) {
@@ -967,7 +948,7 @@ public class RouteCalculationResult {
 						directions.add(info);
 					}
 				}
-				
+
 				// add end point
 				locations.add(endLocation);
 				// Add artificial route segment
@@ -1484,6 +1465,10 @@ public class RouteCalculationResult {
 	public void updateNextVisiblePoint(int nextPoint, Location mp) {
 		currentStraightAnglePoint = mp;
 		currentStraightAngleRoute = nextPoint;
+	}
+
+	public GpxFile getGpxFile() {
+		return gpxFile;
 	}
 
 	public static class NextDirectionInfo {

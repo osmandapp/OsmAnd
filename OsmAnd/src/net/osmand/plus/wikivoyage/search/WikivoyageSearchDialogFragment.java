@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -63,6 +64,16 @@ public class WikivoyageSearchDialogFragment extends WikiBaseDialogFragment {
 
 		searchEt = toolbar.findViewById(R.id.searchEditText);
 		searchEt.setHint(R.string.shared_string_search);
+		searchEt.setOnEditorActionListener((v, actionId, event) -> {
+			if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+				String newQueryText = searchQuery + " ";
+				searchEt.setText(newQueryText);
+				searchEt.setSelection(newQueryText.length());
+				AndroidUtils.hideSoftKeyboard(getActivity(), searchEt);
+				return true;
+			}
+			return false;
+		});
 		searchEt.addTextChangedListener(new SimpleTextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {

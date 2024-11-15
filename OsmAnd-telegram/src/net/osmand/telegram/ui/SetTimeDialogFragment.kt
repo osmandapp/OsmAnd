@@ -22,7 +22,7 @@ import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.telegram.utils.OsmandLocationUtils
 import net.osmand.telegram.utils.UiUtils
 import net.osmand.util.MapUtils
-import org.drinkless.td.libcore.telegram.TdApi
+import org.drinkless.tdlib.TdApi
 import java.util.*
 import java.util.concurrent.TimeUnit
 

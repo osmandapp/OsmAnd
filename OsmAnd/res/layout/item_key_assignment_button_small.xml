@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:layout_gravity="center_vertical"
+	android:background="?attr/bg_keybinding">
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/description"
+		style="@style/DescStyle.Medium"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="@color/preference_category_title"
+		android:layout_marginVertical="@dimen/context_menu_subtitle_margin"
+		android:layout_marginHorizontal="@dimen/content_padding_medium"
+		tools:text="Summary" />
+
+</FrameLayout>

@@ -15,7 +15,7 @@ import androidx.core.app.ActivityCompat;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -206,7 +206,7 @@ public class MapActionsHelper {
 		}
 	}
 
-	public void buildRouteByGivenGpx(GPXFile gpxFile) {
+	public void buildRouteByGivenGpx(GpxFile gpxFile) {
 		MapActivity activity = layer.getMapActivity();
 		MapActions mapActions = activity != null ? activity.getMapActions() : app.getOsmandMap().getMapActions();
 		mapActions.enterRoutePlanningModeGivenGpx(gpxFile, null, null, true, true, HEADER_ONLY);

@@ -10,8 +10,8 @@
     <string name="si_kmh">Kilometer per jam</string>
     <string name="km_h">km/j</string>
     <string name="m_s">m/d</string>
-    <string name="min_km">men/km</string>
-    <string name="min_mile">men/m</string>
+    <string name="min_km">mnt/km</string>
+    <string name="min_mile">mnt/m</string>
     <string name="yard">yd</string>
     <string name="shared_string_welcome">Selamat datang</string>
     <string name="shared_string_authorization_descr">Masukkan nomor telepon Telegram Anda dengan format internasional</string>
@@ -149,7 +149,6 @@
     <string name="buffer_time">Waktu kadaluwarsa buffer</string>
     <string name="time_zone_descr">Pilih zona waktu untuk ditampilkan pada pesan lokasi Anda.</string>
     <string name="set_time_timeline_descr">Pilih waktu untuk ditampilkan</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="min_logging_accuracy_descr">Saring: tidak ada pencatatan kecuali akurasi dicapai</string>
     <string name="proxy_port">Port</string>
     <string name="shared_string_error">Terjadi kesalahan</string>
@@ -279,4 +278,5 @@
     <string name="location_source_summary">Secara bawaan, OsmAnd terpasang dari Google Play menggunakan Layanan Google Play untuk menentukan lokasi.
 \n
 \nJika Anda mendapatkan informasi lokasi yang tidak akurat atau menggunakan perangkat tanpa Layanan Google Play, cobalah ganti ke API Android</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
 </resources>

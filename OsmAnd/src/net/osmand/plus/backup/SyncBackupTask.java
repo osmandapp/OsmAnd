@@ -121,11 +121,10 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 				Collections.emptyList(), Collections.singletonList(item), this);
 	}
 
-	public void downloadItem(@NonNull SettingsItem item, @NonNull RemoteFilesType filesType,
-	                          boolean shouldReplace, boolean restoreDeleted) {
+	public void downloadItem(@NonNull SettingsItem item, @NonNull RemoteFilesType type, boolean shouldReplace, boolean restoreDeleted) {
 		item.setShouldReplace(shouldReplace);
 		String name = BackupUtils.getItemFileName(item);
-		networkSettingsHelper.importSettings(name, Collections.singletonList(item), filesType, true, shouldReplace, restoreDeleted, this);
+		networkSettingsHelper.importSettings(name, Collections.singletonList(item), type, true, shouldReplace, restoreDeleted, this);
 	}
 
 	private void uploadNewItems() {

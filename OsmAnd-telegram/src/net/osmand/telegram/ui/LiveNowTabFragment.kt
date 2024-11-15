@@ -32,7 +32,7 @@ import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.telegram.utils.UiUtils.UpdateLocationViewCache
 import net.osmand.util.MapUtils
-import org.drinkless.td.libcore.telegram.TdApi
+import org.drinkless.tdlib.TdApi
 import java.util.*
 
 private const val CHAT_VIEW_TYPE = 0

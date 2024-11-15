@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
 			android:text="@string/navigate_to_track_descr"
 			android:textColor="@color/preference_category_title"
 			android:textSize="@dimen/default_desc_text_size"
-			osmand:typeface="@string/font_roboto_medium" />
+			app:typefaceWeight="medium" />
 
 		<include
 			android:id="@+id/pass_whole_route_container"

@@ -426,7 +426,7 @@
 \n
 \nPodètz cambiar aquesta opcion quand volètz dins Configuracion &gt; Vida privada e seguretat.</string>
     <string name="profile_alert_need_routing_type_msg">Per plaser, seleccionatz la mena de navigacion per lo perfiu novèu</string>
-    <string name="select_base_profile_dialog_message">Començatz vòstre perfiu personalizat d\'un perfiu predeterminat de l\'aplicacion, es eu que fixa la configuracion basica per visibilitat predeterminada, leis extensions e leis unitats de velocitat de distància. Vaicí lei perfius d\'aplicacion predeterminats, amb d’exemples de personalizacion que se pòdon ajustar:</string>
+    <string name="select_base_profile_dialog_message">Començatz vòstre perfiu personalizat d\'un perfiu predeterminat de l\'aplicacion, es eu que predetermina la visibilitat deis clavelets e leis unitats de mesura de la velocitat e distància. Vaicí lei perfius d\'aplicacion per defaut, amb d’exemples de personalizacion que se pòdon ajustar :</string>
     <string name="base_profile_descr_bicycle">Bicicleta de montanha, ciclomotor, cavau</string>
     <string name="increase_search_radius_to">Aumenta lo rai de recèrca fins %1$s</string>
     <string name="send_search_query">Volètz mandar leis informacions de la recèca \?</string>
@@ -533,7 +533,7 @@
     <string name="access_arrival_time">Orari d\'arribada</string>
     <string name="add_as_first_destination_point">Ajustar per premier pas de destinacion intermediària</string>
     <string name="map_widget_intermediate_distance">Etapa intermediària</string>
-    <string name="map_widget_transparent">Widgets transparents</string>
+    <string name="map_widget_transparent">Clavelets transparents</string>
     <string name="from_to_with_params">De %1$s a %2$s</string>
     <string name="show_parameter_seekbar">Mostrar la barra de recherca dei paramètres</string>
     <string name="shared_string_previous">Precedent</string>
@@ -661,7 +661,6 @@
     <string name="select_color">Chausissètz la color</string>
     <string name="day_off_label">Barrat</string>
     <string name="explore_wikipedia_offline">Explorar la Wiquipèdia fòra de linha.</string>
-    <string name="quick_action_remove_next_destination">Suprimir lo ponch d’etapa pus pròche</string>
     <string name="track_show_start_finish_icons">Mostrar lei icònas de començament e de fin</string>
     <string name="shared_string_terrain">Relèu</string>
     <string name="rendering_attr_showLez_name">Mostrar lei zònas d\'escampament bas</string>
@@ -836,7 +835,6 @@
     <string name="av_settings">Configuracion de son/ video</string>
     <string name="download_select_map_types">Autrei mapas</string>
     <string name="show_poi_over_map_description">Mostrar la darriera superposicion de PDI emplegada.</string>
-    <string name="quick_action_map_overlay">Modificar la superposicion de la mapa</string>
     <string name="layer_underlay">Mapa de fons…</string>
     <string name="map_underlay_descr">Chausissètz la mapa de fons</string>
     <string name="map_overlay">Mapa superpausada</string>
@@ -930,7 +928,6 @@
     <string name="keep_informing_descr">Tornar anonciar leis indicacions de navigacion a intervales regulars.</string>
     <string name="shared_string_get">Obtenir</string>
     <string name="quick_favorites_name_preset">Configuracion dau nom</string>
-    <string name="quick_action_map_underlay">Modificar lo fons de la mapa</string>
     <string name="gps_filter_precision">Precision GPS</string>
     <string name="is_disabled">%1$s es desactivat</string>
     <string name="history_actions_descr">Podètz exportar l\'istoric dins un fichier.</string>
@@ -1055,7 +1052,6 @@
     <string name="navigation_item_description">Configuracion de la navigacion.</string>
     <string name="activate_seamarks_plugin">Activatz l\'ajust \'Mapas marinas\'</string>
     <string name="activate_srtm_plugin">Activatz l\'ajust \'Corbas de nivèu\'</string>
-    <string name="quick_action_add_marker">Ajustar un marcador de mapa</string>
     <string name="quick_action_navigation_voice_on">Desactivar la votz</string>
     <string name="quick_favorites_show_favorites_dialog">Mostrar la finèstra dei Preferéncias</string>
     <string name="quick_action_add_marker_descr">Un boton per ajustar un marcador de mapa au centre de l\'ecran.</string>
@@ -1308,7 +1304,6 @@
     <string name="rendering_attr_appMode_name">Mòde de representacion</string>
     <string name="rendering_attr_contourLines_name">Mostrar lei corbas de nivèu</string>
     <string name="rendering_attr_hmRendered_description">Augmenta la quantitat de detalhs visibles sus la mapa.</string>
-    <string name="quick_action_map_style">Modificar la representacion de la mapa</string>
     <string name="quick_action_map_style_switch">Representacion de la mapa modificada en \"%s\".</string>
     <string name="quick_action_map_style_action">Ajustatz un mòde de representacion de la mapa</string>
     <string name="quick_action_map_styles">Representacions de la mapa</string>
@@ -1887,7 +1882,6 @@
     <string name="app_mode_kayak">Caiac</string>
     <string name="icon_group_travel">Viatge</string>
     <string name="icon_group_symbols">Simbòl</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="message_graph_will_be_available_after_recalculation">Esperatz.
 \nLo grafic serà disponible après lo recalcul dau percors.</string>
     <string name="use_live_routing">Donadas d\'OsmAnd Live</string>
@@ -1959,7 +1953,6 @@
     <string name="gpx_monitoring_stop">Pausar l\'enregistrament dau viatge</string>
     <string name="delete_address">Escafar l\'adreiça</string>
     <string name="map_widget_monitoring">Enregistrament dau percors</string>
-    <string name="quick_action_add_gpx">Ajustar un ponch d\'etapa a la traça</string>
     <string name="follow_track_descr">Chausir un fichier de traças a seguir</string>
     <string name="empty_state_my_tracks">Ajustar de fichiers de traças</string>
     <string name="shared_string_gpx_route">Traça d\'un percors</string>
@@ -2115,7 +2108,7 @@
     <string name="app_mode_car">Automobila</string>
     <string name="app_mode_default">Mapa de basa</string>
     <string name="no_poi_for_category">Ponch d\'interès non trobat</string>
-    <string name="rendering_attr_lightDetail_name">Menut dau Senhau lumenós</string>
+    <string name="rendering_attr_lightDetail_name">Menú dau Senhau lumenós</string>
     <string name="rendering_value_sectors_name">Sectors</string>
     <string name="modified_file">Fichier modificat</string>
     <string name="upload_all">Tot telecargar</string>
@@ -2274,7 +2267,6 @@
 \n
 \nIndicatz-o a l\'equipa de supòrt per aprefondir la causa.</string>
     <string name="save_heading_descr">Sauvar l’orientacion de cada ponch de la traça quora s’enregistra.</string>
-    <string name="driving_region_uk">Reiaume Unit, Índia e semblant</string>
     <string name="map_widget_parking">Aparcament</string>
     <string name="position_on_map_bottom">En bas</string>
     <string name="animate_my_location">Animar sa posicion</string>
@@ -2353,4 +2345,78 @@
     <string name="max_speed">Velocitat maximala</string>
     <string name="default_speed_system_descr">Definissètz l\'unitat de velocitat.</string>
     <string name="speed_limit_exceed_message">Chausissètz la valor de tolerància dau limit de velocitat, partent de laquala recebretz un avís vocau.</string>
+    <string name="help_article_navigation_auto_car_name">Android Auto</string>
+    <string name="help_article_navigation_routing_osmand_routing_name">A prepaus dei guidatges OsmAnd</string>
+    <string name="help_article_navigation_routing_public_transport_navigation_name">Percors amb lei transpòrts publics</string>
+    <string name="help_article_navigation_routing_straight_line_routing_name">Endrechiera</string>
+    <string name="help_article_purchases_android_name">Cròmpas Android</string>
+    <string name="copy_build_version">Copiar la version dei compilacions</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">Anóncias vocalas / Notificacions</string>
+    <string name="simulation_preview_mode_desc">La velocitat de simulation serà maximala dins lei seccions drechas e baissarà ai crosaments.</string>
+    <string name="help_article_navigation_routing_name">Paramètres dau percors</string>
+    <string name="help_article_start_with_main_menu_name">Menú principau</string>
+    <string name="weather_widget_group_desc">Un ensems de clavelets que mòstran leis informacions de la color dau cèu.</string>
+    <string name="bottom_widgets_panel">Panèu inferior</string>
+    <string name="simulation_real_mode_desc">Sus lei seccions drechas dei rotas, la velocitat serà pròcha de la velocitat maximala permesa. 
+\nAi crotz de camins, la simulacion alentirà. 
+\nD\'autreis alentiments s\'aplicaràn segon lei fuòcs tricolòrs, leis estòps, eca.</string>
+    <string name="help_article_navigation_setup_gpx_navigation_name">Seguir una traça</string>
+    <string name="help_article_widgets_markers_name">Clavelets de marcadors</string>
+    <string name="help_article_plan_route_coordinate_input_name">Ajustar de coordonadas</string>
+    <string name="help_article_widgets_info_widgets_name">Clavelets d\'informacions</string>
+    <string name="help_article_widgets_map_buttons_name">Claveles de la mapa</string>
+    <string name="developer_widgets">Clavelets per lei desvelopaires</string>
+    <string name="search_favorites">Recercar de favorits</string>
+    <string name="shared_string_menu">Menú</string>
+    <string name="shared_string_widgets">Clavelets</string>
+    <string name="help_article_search_search_all_name">Tot recercar</string>
+    <string name="help_article_plan_route_web_name">Planificador de percors en linha</string>
+    <string name="help_article_map_legend_ski_map_name">Rendut de Mapa d\'Esquí</string>
+    <string name="help_article_navigation_routing_pedestrian_routing_name">Percors d\'a pès</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Aquestei clavelets indican quora lo soleu se lèva e tremonta.</string>
+    <string name="no_widgets_descr">Ajustar un ò mai clavelet(s) partent de la lista de clavelets disponibles.</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">Calcul dau percors amb una barca</string>
+    <string name="help_article_navigation_routing_direct_to_point_routing_name">Corsa dirècta (barca)</string>
+    <string name="help_article_navigation_setup_markers_navigation_name">Seguir de marcadors</string>
+    <string name="help_article_personal_profiles_name">Perfius (paramètres)</string>
+    <string name="ui_customization_short_descr">Elements de representacion, menú contextuau</string>
+    <string name="help_article_personal_import_export_name">Impòrt / Expòrt</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">Calcul dau percors a bicicleta (VTT)</string>
+    <string name="help_article_map_raster_maps_name">Mapas raster (en linha / fòra de linha)</string>
+    <string name="help_article_map_track_context_menu_name">Menú contextuau dei traças</string>
+    <string name="help_article_map_legend_nautical_map_name">Rendut de Mapa nautica</string>
+    <string name="help_article_map_legend_osmand_name">Rendut OsmAnd</string>
+    <string name="help_article_map_interact_with_map_name">Interagir amb la mapa</string>
+    <string name="help_article_map_map_context_menu_name">Menú contextuau de la mapa</string>
+    <string name="help_article_map_tracks_on_map_name">Traças e percors</string>
+    <string name="help_article_map_vector_maps_name">Mapas vectorialas (Renduts de mapas)</string>
+    <string name="help_article_navigation_car_play_name">Carplay</string>
+    <string name="help_article_navigation_guidance_name">Guidatge</string>
+    <string name="help_article_navigation_routing_car_based_routing_name">Percors amb la veitura (camion, mòto)</string>
+    <string name="help_article_navigation_routing_moped_routing_name">Percors amb lo ciclomotor</string>
+    <string name="help_article_purchases_ios_name">Cròmpas iOS</string>
+    <string name="help_article_search_search_poi_name">Recercar de POI (ponchs d\'interès)</string>
+    <string name="help_article_start_with_name">Començar amb OsmAnd</string>
+    <string name="help_article_start_with_first_steps_name">Premiers pas</string>
+    <string name="help_article_troubleshooting_general_name">Generau</string>
+    <string name="help_article_troubleshooting_track_recording_issues_name">Enregistrar la traça</string>
+    <string name="help_article_widgets_nav_widgets_name">Clavelets de guidatge</string>
+    <string name="no_widgets_here_yet">Pas encar de clavelets aicí</string>
+    <string name="choose_audio_stream_descr">Seleccionatz lo canau audio per reprodurre lo guidatge vocau.</string>
+    <string name="help_article_navigation_routing_horse_routing_name">Percots a cavau</string>
+    <string name="help_article_navigation_setup_route_details_name">Percors per lo menut</string>
+    <string name="help_article_navigation_setup_route_navigation_name">Preparacion dau percors</string>
+    <string name="help_article_personal_name">Mei donadas</string>
+    <string name="help_article_personal_storage_name">Archivar</string>
+    <string name="help_article_plan_route_name">Planificar un percors</string>
+    <string name="help_article_search_search_coordinates_name">Recercar de coordonadas</string>
+    <string name="help_article_troubleshooting_crash_logs_name">Jornau deis anomalias</string>
+    <string name="help_article_map_point_layers_on_map_name">Ponchs sus la mapa</string>
+    <string name="plugin_mapillary_descr">Fornís la vista au plan de la carriera. Se mancan d\'imatges, lei podètz ajustar vosautres e permetre a d\'autres de ne\'n beneficiar. Per activar la jaça Mapillary pron d\'activar \"Imatges de carrieras\" dins lo menú de Configuracion.</string>
+    <string name="tracker_item">OsmAnd Traçador</string>
+    <string name="route_maneuvers_desc">Lei clavelets de percors son activats dau temps de la navigacion e mòstran leis informacions de distància, l\'ora d\'arribada ò de partença, lei crosaments, l\'orientacion, lo nom de la carriera, leis informaions sus la via, la velocitat maximala, leis avís, lei POI e lei ponchs intermediaris.</string>
+    <string name="navigation_points_desc">Lei clavelets de percors son activats dau temps de la navigacion e mòstran leis informacions de distància, l\'ora d\'arribada ò de temps restant, lei crosaments que vènon, l\'orientacion, lo nom de la carriera, leis informaions sus la via, la velocitat maximala, leis avís, lei POI e lei ponchs intermediaris.</string>
+    <string name="map_widget_group_glide_desc">Lei clavelets mòstan la deriva a respècte de la destinacon ò la deriva mejana de la corsa correnta.</string>
+    <string name="shared_string_accessibility">Accessibilitat</string>
+    <string name="help_article_widgets_name">Clavelets de la mapa</string>
 </resources>

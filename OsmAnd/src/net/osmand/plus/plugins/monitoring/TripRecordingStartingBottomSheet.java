@@ -9,7 +9,6 @@ import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.update
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
@@ -31,13 +30,13 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.SideMenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.ItemType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 
 public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogFragment {
@@ -145,8 +144,7 @@ public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogF
 			}
 		}
 		String textAll = getString(R.string.ltr_or_rtl_combine_via_colon, text, textValue);
-		Typeface typeface = FontCache.getRobotoMedium(app);
-		SpannableString spannableString = UiUtilities.createCustomFontSpannable(typeface, textAll, textValue);
+		SpannableString spannableString = UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(intervalValueView.getTypeface()), textAll, textValue);
 		intervalValueView.setText(spannableString);
 	}
 

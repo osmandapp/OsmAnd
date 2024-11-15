@@ -885,7 +885,6 @@
     <string name="driving_region_us">ஐக்கிய மாநிலங்கள்</string>
     <string name="driving_region_canada">கனடா</string>
     <string name="driving_region_europe_asia">ஐரோப்பா, ஆசியா, இலத்தீன் அமெரிக்கா, மற்றும் ஒத்த</string>
-    <string name="driving_region_uk">இங்கிலாந்து, இந்தியா, மற்றும் ஒத்த</string>
     <string name="driving_region_australia">ஆஸ்திரேலியா</string>
     <string name="speak_title">அறிவிக்கவும் …</string>
     <string name="speak_descr">தெரு பெயர்கள், போக்குவரத்து எச்சரிக்கைகள் (கட்டாயமாக நிறுத்தங்கள், வேகம் புடைப்புகள்), வேக கேமரா எச்சரிக்கை, வேக வரம்புகள் ஆகியவற்றை அறிவிக்க கட்டமைக்கவும்.</string>
@@ -1036,8 +1035,7 @@
     <string name="gpx_option_reverse_route">ஜிபிஎக்ஸ் திசையை பின்னோக்கு</string>
     <string name="gpx_option_destination_point">நடப்பு இலக்கு பயன்படுத்தவும்</string>
     <string name="gpx_option_from_start_point">முழு பாதையில் செல்க</string>
-    <string name="switch_to_vector_map_to_see">"
-\n"</string>
+    <string name="switch_to_vector_map_to_see">\n\n</string>
     <string name="choose_audio_stream">குரல் வழிநடத்துதல் வெளியீடு</string>
     <string name="voice_stream_voice_call">தொலைபேசி அழைப்பு ஆடியோ (கார் BT ஸ்டீரியோவை குறுக்கிடவும்)</string>
     <string name="voice_stream_notification">அறிவிப்பு ஆடியோ</string>

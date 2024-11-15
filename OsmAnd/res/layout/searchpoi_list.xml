@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
                 android:layout_height="@dimen/directionIconSize"
                 android:layout_marginTop="1sp"
                 android:layout_gravity="center_vertical"
-                osmand:srcCompat="@drawable/ic_direction_arrow"
+                app:srcCompat="@drawable/ic_direction_arrow"
                 tools:visiblity="visible" />
 
             <TextView
@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="@dimen/gpx_small_icon_margin"
-                osmand:srcCompat="@drawable/ic_action_time_16"
+                app:srcCompat="@drawable/ic_action_time_16"
 	            android:layout_marginEnd="@dimen/gpx_small_icon_margin" />
 
             <TextView

@@ -53,11 +53,32 @@
 		android:title="@string/debugging_and_development" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="simulate_obd_data"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/simulate_obd" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="battery_saving"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/battery_saving_mode" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="debug_rendering"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/trace_rendering" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="disable_map_layers"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/disable_map_layers" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="transparent_status_bar"
@@ -181,6 +202,30 @@
 		android:selectable="false"
 		android:title="@string/day_night_info"
 		tools:summary="@string/day_night_info_description" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<Preference
+		android:key="energy_avg_info"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/energy_avg_info"
+		tools:summary="@string/energy_avg_info_description" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<Preference
+		android:key="rendering_avg_info"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/rendering_avg_info"
+		tools:summary="@string/rendering_avg_info_details" />
 
 	<Preference
 		android:layout="@layout/simple_divider_item"

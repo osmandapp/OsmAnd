@@ -29,7 +29,7 @@ import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_DIR
 import net.osmand.telegram.utils.GRAYSCALE_PHOTOS_EXT
 import net.osmand.telegram.utils.OsmandApiUtils
-import org.drinkless.td.libcore.telegram.TdApi
+import org.drinkless.tdlib.TdApi
 import java.io.File
 import java.lang.ref.WeakReference
 import java.util.*

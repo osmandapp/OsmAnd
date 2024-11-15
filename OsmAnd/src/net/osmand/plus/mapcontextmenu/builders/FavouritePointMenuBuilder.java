@@ -55,23 +55,13 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 
 	private void acquireAmenityExtensions() {
 		AmenityExtensionsHelper helper = new AmenityExtensionsHelper(app);
-		acquireAmenity(helper);
 
-		amenityExtensions.putAll(point.getAmenityExtensions());
-		if (amenity != null) {
-			amenityExtensions.putAll(helper.getAmenityExtensions(amenity));
-		}
-	}
-
-	private void acquireAmenity(@NonNull AmenityExtensionsHelper helper) {
 		String amenityOriginName = point.getAmenityOriginName();
-		String poiType = point.getAmenityOriginPoiType();
-
 		if (amenityOriginName != null) {
 			amenity = helper.findAmenity(amenityOriginName, point.getLatitude(), point.getLongitude());
-		} else if (!Algorithms.isEmpty(poiType)) {
-			amenity = helper.findAmenityByPoiType(poiType, point.getLatitude(), point.getLongitude());
 		}
+		amenityExtensions.putAll(helper.getUpdatedAmenityExtensions(point.getAmenityExtensions(),
+				point.getAmenityOriginName(), point.getLatitude(), point.getLongitude()));
 	}
 
 	@Nullable
@@ -94,6 +84,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
+		boolean light = isLightContent();
 		buildDateRow(view, point.getTimestamp());
 		buildCommentRow(view, point.getComment());
 
@@ -120,6 +111,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	}
 
 	private void buildGroupFavouritesView(@NonNull View view) {
+		boolean light = isLightContent();
 		FavoriteGroup favoriteGroup = app.getFavoritesHelper().getGroup(point);
 		if (favoriteGroup != null && !Algorithms.isEmpty(favoriteGroup.getPoints())) {
 			int color = favoriteGroup.getColor() == 0 ? getColor(R.color.color_favorite) : favoriteGroup.getColor();

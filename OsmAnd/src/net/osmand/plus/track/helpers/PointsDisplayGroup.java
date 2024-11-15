@@ -4,13 +4,13 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 
 class PointsDisplayGroup extends GpxDisplayGroup {
 
-	public PointsDisplayGroup(@NonNull GPXFile gpxFile) {
+	public PointsDisplayGroup(@NonNull GpxFile gpxFile) {
 		super(gpxFile, -1);
 	}
 
@@ -28,7 +28,7 @@ class PointsDisplayGroup extends GpxDisplayGroup {
 
 	@Override
 	@NonNull
-	protected GpxDisplayGroup newInstance(@NonNull GPXFile gpxFile) {
+	protected GpxDisplayGroup newInstance(@NonNull GpxFile gpxFile) {
 		return new PointsDisplayGroup(gpxFile);
 	}
 

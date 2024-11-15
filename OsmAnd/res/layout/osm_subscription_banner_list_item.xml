@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
 		android:layout_height="wrap_content"
 		android:layout_marginEnd="@dimen/content_padding"
 		android:layout_marginRight="@dimen/content_padding"
-		osmand:srcCompat="@drawable/ic_action_osmand_pro_logo_colored" />
+		app:srcCompat="@drawable/ic_action_osmand_pro_logo_colored" />
 
 	<LinearLayout
 		android:layout_width="0dp"
@@ -38,7 +38,7 @@
 			android:text="@string/osmand_pro"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
-			osmand:typeface="@string/font_roboto_medium" />
+			app:typefaceWeight="medium" />
 
 		<TextView
 			android:id="@+id/description"
@@ -56,8 +56,8 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center"
 			android:layout_marginTop="@dimen/content_padding_small"
-			osmand:cardCornerRadius="3dp"
-			osmand:cardElevation="0dp"
+			app:cardCornerRadius="3dp"
+			app:cardElevation="0dp"
 			tools:cardBackgroundColor="@color/active_buttons_and_links_trans_dark">
 
 			<LinearLayout
@@ -81,7 +81,7 @@
 					android:text="@string/get_it"
 					android:textColor="?attr/colorPrimary"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium" />
+					app:typefaceWeight="medium" />
 
 				<androidx.appcompat.widget.AppCompatImageView
 					android:id="@+id/additional_button_icon"
@@ -90,7 +90,7 @@
 					android:layout_marginStart="@dimen/content_padding_small"
 					android:layout_marginLeft="@dimen/content_padding_small"
 					android:tint="?attr/active_color_basic"
-					osmand:srcCompat="@drawable/ic_arrow_forward" />
+					app:srcCompat="@drawable/ic_arrow_forward" />
 
 			</LinearLayout>
 

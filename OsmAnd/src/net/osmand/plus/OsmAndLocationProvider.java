@@ -62,8 +62,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class OsmAndLocationProvider implements SensorEventListener {
 
-	public static final int REQUEST_LOCATION_PERMISSION = 100;
+	public static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmAndLocationProvider.class);
 
+	public static final int REQUEST_LOCATION_PERMISSION = 100;
 
 	public interface OsmAndLocationListener {
 		void updateLocation(net.osmand.Location location);
@@ -82,7 +83,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	private static final float ACCURACY_FOR_GPX_AND_ROUTING = 50;
 
-	private static final int NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS = 12000;
+	public static final int NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS = 12000;
 
 	private static final long LOCATION_TIMEOUT_TO_BE_STALE = 1000 * 60 * 2; // 2 minutes
 	private static final long STALE_LOCATION_TIMEOUT_TO_BE_GONE = 1000 * 60 * 20; // 20 minutes
@@ -103,6 +104,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private long timeToNotUseOtherGPS;
 	private net.osmand.Location cachedLocation;
 	private net.osmand.Location customLocation;
+	private net.osmand.Location prevLocation;
 
 	private boolean sensorRegistered;
 	private final float[] mGravs = new float[3];
@@ -157,6 +159,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public void resumeAllUpdates() {
+		LOG.info(">>>> resumeAllUpdates");
+
 		registerOrUnregisterCompassListener(true);
 
 		if (app.getSettings().isInternetConnectionAvailable()) {
@@ -196,7 +200,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 					@Override
 					public void onLocationResult(@NonNull List<net.osmand.Location> locations) {
 						if (!locations.isEmpty() && !useOnlyGPS() && !locationSimulation.isRouteAnimating()) {
-							setLocation(locations.get(locations.size() - 1));
+ 							setLocation(locations.get(locations.size() - 1));
 						}
 					}
 				});
@@ -347,7 +351,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		return loc != null && (!loc.hasAccuracy() || loc.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING * 3 / 2);
 	}
 
-	private boolean isRunningOnEmulator() {
+	public static boolean isRunningOnEmulator() {
 		return Build.DEVICE.equals("generic");
 	}
 
@@ -489,13 +493,15 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (app.getRoutingHelper().isFollowingMode()) {
 			return true;
 		}
-		if ((System.currentTimeMillis() - lastTimeGPSLocationFixed) < NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS) {
+		if (lastTimeGPSLocationFixed > 0 && (System.currentTimeMillis() - lastTimeGPSLocationFixed) < NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS) {
 			return true;
 		}
 		return isRunningOnEmulator();
 	}
 
 	private void stopLocationRequests() {
+		LOG.info(">>>> stopLocationRequests");
+
 		gpsInfo.reset();
 		LocationManager service = (LocationManager) app.getSystemService(LOCATION_SERVICE);
 		if (gpsStatusListener != null) {
@@ -611,13 +617,14 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (customLocation != null && timeToNotUseOtherGPS >= System.currentTimeMillis()) {
 			return location == null || !Algorithms.stringsEqual(customLocation.getProvider(), location.getProvider());
 		}
-		return false;
+		return prevLocation != null && location != null && prevLocation.getTime() == location.getTime();
 	}
 
 	public void setLocationFromService(net.osmand.Location location) {
 		if (locationSimulation.isRouteAnimating() || shouldIgnoreLocation(location)) {
 			return;
 		}
+		prevLocation = location;
 		if (location != null) {
 			lastTimeLocationFixed = System.currentTimeMillis();
 			notifyGpsLocationRecovered();
@@ -633,6 +640,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		routingHelper.updateLocation(location);
 		app.getWaypointHelper().locationChanged(location);
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
+		LOG.info(">>>> setLocationFromService carNavigationSession=" + carNavigationSession);
 		if (carNavigationSession != null && carNavigationSession.hasStarted()) {
 			carNavigationSession.updateLocation(location);
 			net.osmand.Location updatedLocation = location;
@@ -655,6 +663,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (shouldIgnoreLocation(location)) {
 			return;
 		}
+		prevLocation = location;
 		if (location == null) {
 			gpsInfo.reset();
 		}

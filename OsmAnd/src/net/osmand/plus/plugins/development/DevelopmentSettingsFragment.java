@@ -71,7 +71,10 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		Preference debuggingAndDevelopment = findPreference("debugging_and_development");
 		debuggingAndDevelopment.setIconSpaceReserved(false);
 
+		setupBatterySavingModePref();
+		setupSimulateOBDDataPref();
 		setupDebugRenderingInfoPref();
+		setupDisableMapLayersPref();
 		setupSimulateInitialStartupPref();
 		setupFullscreenMapDrawingModePref();
 		setupShouldShowFreeVersionBannerPref();
@@ -91,6 +94,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		setupNativeAppAllocatedMemoryPref();
 		setupAgpsDataDownloadedPref();
 		setupDayNightInfoPref();
+		setupLoadAvgInfoPref();
 
 		setupResetToDefaultButton();
 	}
@@ -121,10 +125,28 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		simulateYourLocation.setSummary(sim.isRouteAnimating() ? R.string.shared_string_in_progress : R.string.simulate_your_location_descr);
 	}
 
+	private void setupBatterySavingModePref() {
+		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.BATTERY_SAVING_MODE.getId());
+		debugRenderingInfo.setDescription(getString(R.string.battery_saving_mode));
+		debugRenderingInfo.setIconSpaceReserved(false);
+	}
+
+	private void setupSimulateOBDDataPref() {
+		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.SIMULATE_OBD_DATA.getId());
+		debugRenderingInfo.setDescription(getString(R.string.simulate_obd));
+		debugRenderingInfo.setIconSpaceReserved(false);
+	}
+
 	private void setupDebugRenderingInfoPref() {
 		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.DEBUG_RENDERING_INFO.getId());
 		debugRenderingInfo.setDescription(getString(R.string.trace_rendering_descr));
 		debugRenderingInfo.setIconSpaceReserved(false);
+	}
+
+	private void setupDisableMapLayersPref() {
+		SwitchPreferenceEx disableMapLayers = findPreference(settings.DISABLE_MAP_LAYERS.getId());
+		disableMapLayers.setDescription(getString(R.string.disable_map_layers_descr));
+		disableMapLayers.setIconSpaceReserved(false);
 	}
 
 	private void setupSimulateInitialStartupPref() {
@@ -243,6 +265,35 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		String sunset = sunriseSunset != null ? DATE_FORMAT.format(sunriseSunset.getSunset()) : "null";
 		dayNightInfo.setSummary(getString(R.string.day_night_info_description, sunrise, sunset));
 		dayNightInfo.setIconSpaceReserved(false);
+	}
+
+	private void setupLoadAvgInfoPref() {
+		OsmandDevelopmentPlugin.AvgStatsEntry m1 = plugin.getAvgStats(1);
+		OsmandDevelopmentPlugin.AvgStatsEntry m5 = plugin.getAvgStats(5);
+		OsmandDevelopmentPlugin.AvgStatsEntry m15 = plugin.getAvgStats(15);
+
+		final int AUTO_DETECT_MICROAMPERES = 10000;
+		// Samsung's BatteryManager API reported instantaneous and
+		// average battery current in milliamperes (mA) rather than
+		// in microamperes (µA) as specified in the API documentation.
+		if (Math.abs(m1.energyConsumption) > AUTO_DETECT_MICROAMPERES) m1.energyConsumption /= 1000;
+		if (Math.abs(m5.energyConsumption) > AUTO_DETECT_MICROAMPERES) m5.energyConsumption /= 1000;
+		if (Math.abs(m15.energyConsumption) > AUTO_DETECT_MICROAMPERES) m15.energyConsumption /= 1000;
+
+		String fps = String.format("%.0f / %.0f / %.0f", m1.fps1k, m5.fps1k, m15.fps1k);
+		String gpu = String.format("%.2f / %.2f / %.2f", m1.gpu1k, m5.gpu1k, m15.gpu1k);
+		String idle = String.format("%.2f / %.2f / %.2f", m1.idle1k, m5.idle1k, m15.idle1k);
+		String cpu = String.format("%.2f / %.2f / %.2f", m1.cpuBasic, m5.cpuBasic, m15.cpuBasic);
+		String battery = String.format("%.2f%% / %.2f%% / %.2f%%", m1.batteryLevel, m5.batteryLevel, m15.batteryLevel);
+		String energy = String.format("%.0f / %.0f / %.0f", m1.energyConsumption, m5.energyConsumption, m15.energyConsumption);
+
+		Preference energyAvgInfo = findPreference("energy_avg_info");
+		energyAvgInfo.setSummary(getString(R.string.energy_avg_info_description, battery, energy));
+		energyAvgInfo.setIconSpaceReserved(false);
+
+		Preference renderingAvgInfo = findPreference("rendering_avg_info");
+		renderingAvgInfo.setSummary(getString(R.string.rendering_avg_info_details, fps, cpu, idle, gpu));
+		renderingAvgInfo.setIconSpaceReserved(false);
 	}
 
 	private void setupResetToDefaultButton() {

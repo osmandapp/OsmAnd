@@ -8,8 +8,6 @@ import androidx.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.profiles.LocationIcon;
-import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.utils.AndroidUtils;

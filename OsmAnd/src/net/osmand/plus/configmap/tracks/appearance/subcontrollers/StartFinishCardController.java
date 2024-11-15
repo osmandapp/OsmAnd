@@ -1,6 +1,6 @@
 package net.osmand.plus.configmap.tracks.appearance.subcontrollers;
 
-import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.shared.gpx.GpxParameter.SHOW_START_FINISH;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +42,8 @@ public class StartFinishCardController extends BaseMultiStateCardController {
 	}
 
 	@Override
-	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode) {
+	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container,
+	                              boolean nightMode, boolean usedOnMap) {
 		container.setVisibility(View.GONE);
 	}
 

@@ -15,6 +15,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -140,6 +141,11 @@ public class MapScrollHelper {
 			osmandMap.setMapLocation(y, x);
 			renderer.resumeSymbolsUpdate();
 		}
+	}
+
+	public void scrollMapAction(@NonNull ScrollDirection direction){
+		scrollMap(Collections.singleton(direction));
+		stopScroll();
 	}
 
 	private void threadSleep() {

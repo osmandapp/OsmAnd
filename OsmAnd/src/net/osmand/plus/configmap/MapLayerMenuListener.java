@@ -14,7 +14,6 @@ import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.transport.TransportLinesMenu;
@@ -71,12 +70,11 @@ final class MapLayerMenuListener extends OnRowItemClick {
 		}
 		int itemId = item.getTitleId();
 		if (itemId == R.string.layer_poi) {
-			PoiUIFilter wiki = poiFiltersHelper.getTopWikiPoiFilter();
-			poiFiltersHelper.clearSelectedPoiFilters(wiki);
+			poiFiltersHelper.clearGeneralSelectedPoiFilters();
 			if (isChecked) {
 				showPoiFilterDialog(uiAdapter, item);
 			} else {
-				item.setDescription(poiFiltersHelper.getSelectedPoiFiltersName(wiki));
+				item.setDescription(poiFiltersHelper.getGeneralSelectedPoiFiltersName());
 			}
 		} else if (itemId == R.string.layer_amenity_label) {
 			settings.SHOW_POI_LABEL.set(isChecked);
@@ -116,19 +114,18 @@ final class MapLayerMenuListener extends OnRowItemClick {
 
 	private void showPoiFilterDialog(@Nullable OnDataChangeUiAdapter uiAdapter, @NonNull ContextMenuItem item) {
 		PoiFiltersHelper poiFiltersHelper = mapActivity.getMyApplication().getPoiFilters();
-		PoiUIFilter wiki = poiFiltersHelper.getTopWikiPoiFilter();
 		MapLayers.DismissListener dismissListener = () -> {
 			PoiFiltersHelper pf = mapActivity.getMyApplication().getPoiFilters();
-			boolean selected = pf.isShowingAnyPoi(wiki);
+			boolean selected = pf.isShowingAnyGeneralPoi();
 			item.setSelected(selected);
-			item.setDescription(pf.getSelectedPoiFiltersName(wiki));
+			item.setDescription(pf.getGeneralSelectedPoiFiltersName());
 			item.setColor(mapActivity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 			if (uiAdapter != null) {
 				uiAdapter.onDataSetChanged();
 			}
 		};
 		MapLayers mapLayers = mapActivity.getMapLayers();
-		boolean isMultiChoice = poiFiltersHelper.getSelectedPoiFilters(wiki).size() > 1;
+		boolean isMultiChoice = poiFiltersHelper.getGeneralSelectedPoiFilters().size() > 1;
 		if (isMultiChoice) {
 			mapLayers.showMultiChoicePoiFilterDialog(mapActivity, dismissListener);
 		} else {

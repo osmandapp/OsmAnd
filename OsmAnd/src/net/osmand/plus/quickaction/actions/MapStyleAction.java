@@ -40,7 +40,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 	public static final QuickActionType TYPE = new QuickActionType(MAP_STYLE_ACTION_ID,
 			"mapstyle.change", MapStyleAction.class).
 			nameRes(R.string.quick_action_map_style).iconRes(R.drawable.ic_map).
-			category(QuickActionType.CONFIGURE_MAP);
+			category(QuickActionType.CONFIGURE_MAP).nameActionRes(R.string.shared_string_change);
 
 
 	public MapStyleAction() {

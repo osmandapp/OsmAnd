@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:id="@+id/free_favorites_backup_card"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -15,7 +15,7 @@
 		android:layout_height="wrap_content"
 		android:layout_marginTop="@dimen/content_padding_small"
 		android:layout_marginEnd="@dimen/content_padding"
-		osmand:srcCompat="@drawable/ic_action_folder_cloud_colored" />
+		app:srcCompat="@drawable/ic_action_folder_cloud_colored" />
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -43,7 +43,7 @@
 					android:text="@string/free_favorites_backup"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="16sp"
-					osmand:typeface="@string/font_roboto_medium" />
+					app:typefaceWeight="medium" />
 
 				<TextView
 					android:layout_width="wrap_content"
@@ -62,7 +62,7 @@
 				android:layout_marginRight="@dimen/content_padding_small"
 				android:background="@null"
 				android:contentDescription="@string/shared_string_close"
-				osmand:srcCompat="@drawable/ic_action_cancel" />
+				app:srcCompat="@drawable/ic_action_cancel" />
 
 		</LinearLayout>
 
@@ -73,11 +73,11 @@
 			android:layout_margin="@dimen/content_padding"
 			android:layout_marginBottom="@dimen/content_padding"
 			android:layout_weight="0"
-			osmand:dialogButtonHeight="@dimen/dialog_button_height"
-			osmand:dialogButtonTitle="@string/get_osmand_cloud"
-			osmand:dialogButtonTopMargin="@dimen/content_padding_small"
-			osmand:dialogButtonTouchableHeight="@dimen/bottom_sheet_list_item_height"
-			osmand:dialogButtonType="secondaryActive" />
+			app:dialogButtonHeight="@dimen/dialog_button_height"
+			app:dialogButtonTitle="@string/get_osmand_cloud"
+			app:dialogButtonTopMargin="@dimen/content_padding_small"
+			app:dialogButtonTouchableHeight="@dimen/bottom_sheet_list_item_height"
+			app:dialogButtonType="secondaryActive" />
 
 	</LinearLayout>
 

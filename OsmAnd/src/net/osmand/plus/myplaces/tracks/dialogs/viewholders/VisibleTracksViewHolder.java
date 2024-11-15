@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
-import net.osmand.plus.track.data.TracksGroup;
+import net.osmand.shared.gpx.data.TracksGroup;
 
 public class VisibleTracksViewHolder extends TracksGroupViewHolder {
 
@@ -19,7 +19,7 @@ public class VisibleTracksViewHolder extends TracksGroupViewHolder {
 	public void bindView(@NonNull TracksGroup tracksGroup, boolean showDivider) {
 		super.bindView(tracksGroup, showDivider);
 
-		title.setText(tracksGroup.getName(app));
+		title.setText(tracksGroup.getName());
 		icon.setImageDrawable(uiUtilities.getActiveIcon(R.drawable.ic_show_on_map, nightMode));
 
 		int count = tracksGroup.getTrackItems().size();

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="?attr/bg_color"
@@ -20,8 +20,8 @@
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/toolbar_height"
 			android:fitsSystemWindows="true"
-			osmand:layout_collapseMode="pin"
-			osmand:title="@string/external_sensors_plugin_name">
+			app:layout_collapseMode="pin"
+			app:title="@string/external_sensors_plugin_name">
 
 		</androidx.appcompat.widget.Toolbar>
 
@@ -30,7 +30,7 @@
 	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		osmand:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+		app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
 		<LinearLayout
 			android:id="@+id/devices_content"
@@ -47,7 +47,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="0dp"
 				android:layout_weight="1"
-				osmand:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+				app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 			<include
 				android:id="@+id/pair_btn_additional"

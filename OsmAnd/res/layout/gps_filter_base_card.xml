@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/activity_background_basic">
@@ -48,7 +48,7 @@
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_list_text_size"
 				android:letterSpacing="@dimen/text_button_letter_spacing"
-				osmand:typeface="@string/font_roboto_medium" />
+				app:typefaceWeight="medium" />
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/up_down_button"
@@ -57,7 +57,7 @@
 				android:layout_marginStart="@dimen/title_padding"
 				android:layout_marginEnd="@dimen/title_padding"
 				android:tint="?attr/default_icon_color"
-				osmand:srcCompat="@drawable/ic_action_arrow_up" />
+				app:srcCompat="@drawable/ic_action_arrow_up" />
 
 		</LinearLayout>
 
@@ -76,8 +76,8 @@
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_list_text_size"
 				android:letterSpacing="@dimen/text_button_letter_spacing"
-				osmand:lineHeight="@dimen/default_title_line_height"
-				osmand:typeface="@string/font_roboto_regular" />
+				app:lineHeight="@dimen/default_title_line_height"
+				android:textStyle="normal" />
 
 			<LinearLayout
 				android:id="@+id/action_buttons_container"

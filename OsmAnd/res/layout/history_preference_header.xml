@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -39,8 +39,8 @@
 				android:maxLines="1"
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_list_text_size"
-				osmand:lineHeight="@dimen/default_title_line_height"
-				osmand:typeface="@string/font_roboto_regular"
+				app:lineHeight="@dimen/default_title_line_height"
+				android:textStyle="normal"
 				tools:text="Some title" />
 
 			<androidx.appcompat.widget.AppCompatCheckBox

@@ -1469,6 +1469,15 @@ public class BinaryMapIndexReader {
 		return list;
 	}
 
+	public List<PoiSubType> getTopIndexSubTypes() throws IOException {
+		List<PoiSubType> list = new ArrayList<>();
+		for (PoiRegion poiIndex : poiIndexes) {
+			poiAdapter.initCategories(poiIndex);
+			list.addAll(poiIndex.topIndexSubTypes);
+		}
+		return list;
+	}
+
 	public List<Amenity> searchPoi(SearchRequest<Amenity> req) throws IOException {
 		req.numberOfVisitedObjects = 0;
 		req.numberOfAcceptedObjects = 0;
@@ -1617,9 +1626,14 @@ public class BinaryMapIndexReader {
 		request.resultMatcher = resultMatcher;
 		return request;
 	}
-	
-	public static SearchRequest<Amenity> buildSearchPoiRequest(int sleft, int sright, int stop, int sbottom, int zoom, 
-			SearchPoiTypeFilter poiTypeFilter, ResultMatcher<Amenity> matcher){
+
+	public static SearchRequest<Amenity> buildSearchPoiRequest(int sleft, int sright, int stop, int sbottom, int zoom,
+	                                                           SearchPoiTypeFilter poiTypeFilter, ResultMatcher<Amenity> matcher) {
+		return 	buildSearchPoiRequest(sleft, sright, stop, sbottom, zoom, poiTypeFilter, null, matcher);
+	}
+
+	public static SearchRequest<Amenity> buildSearchPoiRequest(int sleft, int sright, int stop, int sbottom, int zoom,
+	                                                           SearchPoiTypeFilter poiTypeFilter, SearchPoiAdditionalFilter poiTopIndexAdditionalFilter, ResultMatcher<Amenity> matcher){
 		SearchRequest<Amenity> request = new SearchRequest<Amenity>();
 		request.left = sleft;
 		request.right = sright;
@@ -1627,6 +1641,7 @@ public class BinaryMapIndexReader {
 		request.bottom = sbottom;
 		request.zoom = zoom;
 		request.poiTypeFilter = poiTypeFilter;
+		request.poiAdditionalFilter = poiTopIndexAdditionalFilter;
 		request.resultMatcher = matcher;
 
 		return request;
@@ -1716,6 +1731,12 @@ public class BinaryMapIndexReader {
 		public boolean isEmpty();
 	}
 
+	public static interface SearchPoiAdditionalFilter {
+		public boolean accept(PoiSubType poiSubType, String value);
+		String getName();
+		String getIconResource();
+	}
+
 	public static class MapObjectStat {
 		public int lastStringNamesSize;
 		public int lastObjectIdSize;
@@ -1784,6 +1805,7 @@ public class BinaryMapIndexReader {
 		SearchFilter searchFilter = null;
 
 		SearchPoiTypeFilter poiTypeFilter = null;
+		SearchPoiAdditionalFilter poiAdditionalFilter;
 
 		// cache information
 		TIntArrayList cacheCoordinates = new TIntArrayList();
@@ -2253,10 +2275,12 @@ public class BinaryMapIndexReader {
 	private static boolean testAddressSearch = false;
 	private static boolean testAddressSearchName = false;
 	private static boolean testAddressJustifySearch = false;
-	private static boolean testPoiSearch = true;
+	private static boolean testPoiSearch = false;
 	private static boolean testPoiSearchOnPath = false;
 	private static boolean testTransportSearch = false;
-	
+	private static boolean testPoiRouteByName = true;
+	private static boolean testPoiRouteByType = true;
+
 	private static int sleft = MapUtils.get31TileNumberX(27.55079);
 	private static int sright = MapUtils.get31TileNumberX(27.55317);
 	private static int stop = MapUtils.get31TileNumberY(53.89378);
@@ -2297,10 +2321,22 @@ public class BinaryMapIndexReader {
 			PoiRegion poiRegion = reader.getPoiIndexes().get(0);
 			if (testPoiSearch) {
 				testPoiSearch(reader, poiRegion);
-				testPoiSearchByName(reader);
+				testPoiSearchByName(reader, "central ukraine", 0, 0);
 			}
 			if (testPoiSearchOnPath) {
 				testSearchOnthePath(reader);
+			}
+		}
+
+		if (testPoiRouteByName || testPoiRouteByType) {
+			int y = MapUtils.get31TileNumberY(36.023431);
+			int x = MapUtils.get31TileNumberX(14.298406);
+			if (testPoiRouteByName) {
+				testPoiSearchByName(reader, "Gozo Coastal Walk", x, y); // Malta - Gozo Island - osm_hiking track
+			}
+			if (testPoiRouteByType) {
+				testPoiSearchByType(reader, "routes", "osm_hiking", x, y);
+//				testPoiSearchByType(reader, "routes", null, x, y);
 			}
 		}
 
@@ -2414,16 +2450,49 @@ public class BinaryMapIndexReader {
 		}
 		return res;
 	}
+	private static void testPoiSearchByType(BinaryMapIndexReader reader, String askType, String askSubType, int x, int y) throws IOException {
+		println("Searching by type/subtype...");
 
-	private static void testPoiSearchByName(BinaryMapIndexReader reader) throws IOException {
+		SearchRequest<Amenity> req = buildSearchPoiRequest(x, y, "", 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
+				new SearchPoiTypeFilter() {
+					@Override
+					public boolean accept(PoiCategory type, String subcategory) {
+						return type.getKeyName().equals(askType) && (askSubType == null || subcategory.equals(askSubType));
+					}
+					@Override
+					public boolean isEmpty() {
+						return false;
+					}
+				}, null, null);
+
+		reader.searchPoi(req);
+		for (Amenity a : req.getSearchResults()) {
+			int distance = 0;
+			if (x > 0 && y > 0) {
+				distance = (int)MapUtils.getDistance(a.getLocation(),
+						MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
+			}
+			println(a.getType().getTranslation() +
+					" " + a.getSubType() + " " + a.getName() + " " + a.getLocation() +
+					(distance > 0 ? (" Dist " + distance + " m") : ""));
+		}
+	}
+
+	private static void testPoiSearchByName(BinaryMapIndexReader reader, String query, int x, int y) throws IOException {
 		println("Searching by name...");
-		SearchRequest<Amenity> req = buildSearchPoiRequest(0, 0, "central ukraine",
+		SearchRequest<Amenity> req = buildSearchPoiRequest(x, y, query,
 				0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, null);
 		
 		reader.searchPoiByName(req);
 		for (Amenity a : req.getSearchResults()) {
+			int distance = 0;
+			if (x > 0 && y > 0) {
+				distance = (int)MapUtils.getDistance(a.getLocation(),
+						MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
+			}
 			println(a.getType().getTranslation() +
-					" " + a.getSubType() + " " + a.getName() + " " + a.getLocation());
+					" " + a.getSubType() + " " + a.getName() + " " + a.getLocation() +
+					(distance > 0 ? (" Dist " + distance + " m") : ""));
 		}
 	}
 

@@ -18,6 +18,7 @@ import net.osmand.map.ITileSource;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.avoidroads.AvoidRoadInfo;
+import net.osmand.plus.helpers.ColorsPaletteUtils;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.ItineraryType;
@@ -33,11 +34,11 @@ import net.osmand.plus.profiles.data.RoutingProfilesResources;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
+import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -132,7 +133,7 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 			} else if (currentItem instanceof QuickActionButtonState) {
 				QuickActionButtonState buttonState = (QuickActionButtonState) currentItem;
 				itemHolder.title.setText(buttonState.getName());
-				itemHolder.icon.setImageDrawable(buttonState.getIcon(nightMode, false, ColorUtilities.getColor(app, activeColorRes)));
+				itemHolder.icon.setImageDrawable(buttonState.getIcon(ColorUtilities.getColor(app, activeColorRes), nightMode, false));
 			} else if (currentItem instanceof PoiUIFilter) {
 				PoiUIFilter filter = (PoiUIFilter) currentItem;
 				itemHolder.title.setText(filter.getName());
@@ -150,7 +151,7 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 				} else if (file.getAbsolutePath().contains(IndexConstants.ROUTING_PROFILES_DIR)) {
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
 				} else if (file.getAbsolutePath().contains(IndexConstants.GPX_INDEX_DIR)) {
-					itemHolder.title.setText(GpxUiHelper.getGpxTitle(file.getName()));
+					itemHolder.title.setText(GpxHelper.INSTANCE.getGpxTitle(file.getName()));
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_route_distance, activeColorRes));
 				} else if (file.getAbsolutePath().contains(IndexConstants.AV_INDEX_DIR)) {
 					int iconId = AudioVideoNotesPlugin.getIconIdForRecordingFile(file);
@@ -161,6 +162,10 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(iconId, activeColorRes));
 				} else if (fileSubtype == FileSubtype.FAVORITES_BACKUP) {
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_folder_favorites, activeColorRes));
+				} else if (fileSubtype == FileSubtype.COLOR_PALETTE) {
+					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(fileSubtype.getIconId(), activeColorRes));
+					itemHolder.title.setText(ColorsPaletteUtils.getPaletteName(file));
+					itemHolder.subTitle.setText(ColorsPaletteUtils.getPaletteTypeName(app, file));
 				} else if (fileSubtype.isMap()
 						|| fileSubtype == FileSubtype.TTS_VOICE
 						|| fileSubtype == FileSubtype.VOICE) {

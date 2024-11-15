@@ -1,11 +1,6 @@
 package net.osmand.osm;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 
 public class PoiCategory extends PoiFilter {
@@ -16,7 +11,7 @@ public class PoiCategory extends PoiFilter {
 	private String defaultTag;
 
 	public PoiCategory(MapPoiTypes registry, String keyName, int regId) {
-		super(registry, null, keyName);
+		super(registry, null, keyName, null);
 		this.regId = regId;
 	}
 
@@ -83,5 +78,27 @@ public class PoiCategory extends PoiFilter {
 		return basemapPoi.contains(pt);
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null || getClass() != obj.getClass()) {
+			return false;
+		}
+		PoiCategory other = (PoiCategory) obj;
+		return regId == other.regId &&
+				(Objects.equals(keyName, other.keyName)) &&
+				(Objects.equals(defaultTag, other.defaultTag));
+	}
+	
+	@Override
+	public int hashCode() {
+		int result = 8;
+		result = 88 * result + (keyName != null ? keyName.hashCode() : 0);
+		result = 88 * result + regId;
+		result = 88 * result + (defaultTag != null ? defaultTag.hashCode() : 0);
+		return result;
+	}
 	
 }

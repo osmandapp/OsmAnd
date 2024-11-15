@@ -41,7 +41,7 @@ public class CachedOsmandIndexes {
 	private boolean hasChanged = false;
 	public static final String INDEXES_DEFAULT_FILENAME = "indexes.cache";
 
-	public static final int VERSION = 4;// synchronize with binaryRead.cpp CACHE_VERSION
+	public static final int VERSION = 5;// synchronize with binaryRead.cpp CACHE_VERSION
 
 	public FileIndex addToCache(BinaryMapIndexReader reader, File f) {
 		hasChanged = true;

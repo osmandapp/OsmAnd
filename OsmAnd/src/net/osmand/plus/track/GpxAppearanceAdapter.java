@@ -1,5 +1,6 @@
 package net.osmand.plus.track;
 
+import static net.osmand.plus.configmap.ConfigureMapMenu.COLOR_ATTR;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 import static net.osmand.plus.track.GpxAppearanceAdapter.GpxAppearanceAdapterType.TRACK_COLOR;
@@ -15,10 +16,9 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXUtilities;
+import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.configmap.ConfigureMapMenu;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -140,7 +140,7 @@ public class GpxAppearanceAdapter extends ArrayAdapter<AppearanceListItem> {
 				trackWidthProp = renderer.PROPS.getCustomRule(CURRENT_TRACK_WIDTH_ATTR);
 			}
 			if (adapterType == GpxAppearanceAdapterType.TRACK_COLOR || adapterType == GpxAppearanceAdapterType.TRACK_WIDTH_COLOR) {
-				trackColorProp = renderer.PROPS.getCustomRule(ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR);
+				trackColorProp = renderer.PROPS.getCustomRule(CURRENT_TRACK_COLOR_ATTR);
 			}
 		}
 
@@ -165,7 +165,7 @@ public class GpxAppearanceAdapter extends ArrayAdapter<AppearanceListItem> {
 		}
 		if (trackColorProp != null) {
 			for (int j = 0; j < trackColorProp.getPossibleValues().length; j++) {
-				AppearanceListItem item = new AppearanceListItem(ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR,
+				AppearanceListItem item = new AppearanceListItem(CURRENT_TRACK_COLOR_ATTR,
 						trackColorProp.getPossibleValues()[j],
 						AndroidUtils.getRenderingStringPropertyValue(app, trackColorProp.getPossibleValues()[j]),
 						parseTrackColor(renderer, trackColorProp.getPossibleValues()[j]));
@@ -194,16 +194,16 @@ public class GpxAppearanceAdapter extends ArrayAdapter<AppearanceListItem> {
 		if (gpxRule != null && gpxRule.getIfElseChildren().size() > 0) {
 			List<RenderingRule> rules = gpxRule.getIfElseChildren().get(0).getIfElseChildren();
 			for (RenderingRule r : rules) {
-				String cName = r.getStringPropertyValue(ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR);
+				String cName = r.getStringPropertyValue(CURRENT_TRACK_COLOR_ATTR);
 				if (!Algorithms.isEmpty(cName) && cName.equals(colorName)) {
-					return r.getIntPropertyValue(ConfigureMapMenu.COLOR_ATTR);
+					return r.getIntPropertyValue(COLOR_ATTR);
 				}
 				if (cName == null && defaultColor == -1) {
-					defaultColor = r.getIntPropertyValue(ConfigureMapMenu.COLOR_ATTR);
+					defaultColor = r.getIntPropertyValue(COLOR_ATTR);
 				}
 			}
 		}
-		return GPXUtilities.parseColor(colorName, defaultColor);
+		return GpxUtilities.INSTANCE.parseColor(colorName, defaultColor);
 	}
 
 	public static String parseTrackColorName(RenderingRulesStorage renderer, int color) {
@@ -214,8 +214,8 @@ public class GpxAppearanceAdapter extends ArrayAdapter<AppearanceListItem> {
 		if (gpxRule != null && gpxRule.getIfElseChildren().size() > 0) {
 			List<RenderingRule> rules = gpxRule.getIfElseChildren().get(0).getIfElseChildren();
 			for (RenderingRule r : rules) {
-				String cName = r.getStringPropertyValue(ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR);
-				if (!Algorithms.isEmpty(cName) && color == r.getIntPropertyValue(ConfigureMapMenu.COLOR_ATTR)) {
+				String cName = r.getStringPropertyValue(CURRENT_TRACK_COLOR_ATTR);
+				if (!Algorithms.isEmpty(cName) && color == r.getIntPropertyValue(COLOR_ATTR)) {
 					return cName;
 				}
 			}
