@@ -72,6 +72,7 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
+import net.osmand.util.GeoParsedPoint;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -373,18 +374,8 @@ public class MapSelectionHelper {
 		if (value == null) {
 			return null;
 		}
-		String[] s = value.split(" ");
-		if (s.length != 2) {
-			return null;
-		}
-		try {
-			double lat = Double.parseDouble(s[0]);
-			double lon = Double.parseDouble(s[1]);
-			return new LatLon(lat, lon);
-		} catch (NumberFormatException e) {
-			log.error("Couldn't parse " + TAG_POI_LAT_LON + "=" + value + " " + e.getMessage());
-		}
-		return null;
+		GeoParsedPoint p = MapUtils.decodeShortLinkString(value);
+		return new LatLon(p.getLatitude(), p.getLongitude());
 	}
 
 	@Nullable
