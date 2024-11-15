@@ -51,7 +51,6 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 			RoutePreviewScreen(carContext, settingsAction, result, true)
 		) { obj: Any? ->
 			obj?.let {
-				onSearchResultSelected(result)
 				startNavigation()
 				finish()
 			}
@@ -64,9 +63,7 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 	private fun startNavigation() {
 		app.osmandMap.mapLayers.mapActionsHelper.startNavigation()
 		val session = app.carNavigationSession
-		if (session != null && session.hasStarted()) {
-			session.startNavigation()
-		}
+		session?.startNavigation()
 	}
 
 	protected fun createSearchAction() = Action.Builder()
@@ -99,9 +96,10 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 			if (!mapRect.hasInitialState()) {
 				val mapView = app.osmandMap.mapView
 				val tb = mapView.rotatedTileBox
-				tb.setCenterLocation(tb.centerPixelX.toFloat() / tb.pixWidth, 0.5f )
+				tb.setCenterLocation(tb.centerPixelX.toFloat() / tb.pixWidth, 0.5f)
 				tb.rotate = 0f;
-				mapView.fitRectToMap(tb,
+				mapView.fitRectToMap(
+					tb,
 					mapRect.left, mapRect.right, mapRect.top, mapRect.bottom,
 					0, 0, true, true
 				)
