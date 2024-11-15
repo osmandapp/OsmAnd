@@ -2,8 +2,6 @@ package net.osmand.plus.auto.screens;
 
 import static net.osmand.search.core.ObjectType.GPX_TRACK;
 
-import android.os.Handler;
-import android.os.Looper;
 import android.text.SpannableString;
 
 import androidx.annotation.NonNull;
@@ -37,7 +35,6 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.enums.CompassMode;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -98,7 +95,6 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		this.searchResult = searchResult;
 		this.calculateRoute =  calculateRoute;
 		getLifecycle().addObserver(this);
-		calculating = calculateRoute;
 	}
 
 	private void prepareRoute() {
@@ -226,7 +222,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 			listBuilder.addItem(row);
 		}
 		RoutePreviewNavigationTemplate.Builder builder = new RoutePreviewNavigationTemplate.Builder();
-		if (calculating) {
+		if (getApp().getRoutingHelper().isRouteBeingCalculated()) {
 			builder.setLoading(true);
 		} else {
 			builder.setLoading(false);
@@ -282,7 +278,6 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 	public void routeWasFinished() {
 	}
 
-
 	@Override
 	protected void adjustMapToRect(@NonNull LatLon location, @NonNull QuadRect mapRect) {
 		OsmandMapTileView mapView = getApp().getOsmandMap().getMapView();
@@ -290,5 +285,6 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		getApp().getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 		mapView.setRotate(0f, true);
 		super.adjustMapToRect(location, mapRect);
+		getApp().getMapViewTrackingUtilities().getMapDisplayPositionManager().updateMapDisplayPosition();
 	}
 }
