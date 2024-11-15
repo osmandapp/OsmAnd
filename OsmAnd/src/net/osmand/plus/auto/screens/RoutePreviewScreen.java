@@ -154,14 +154,14 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 
 	@Override
 	public void onCreate(@NonNull LifecycleOwner owner) {
-		getApp().getRoutingHelper().addListener(this);
-		getApp().getTargetPointsHelper().addListener(stateChangedListener);
-		prevMapLinkedToLocation = getApp().getMapViewTrackingUtilities().isMapLinkedToLocation();
-		OsmandMapTileView mapView = getApp().getOsmandMap().getMapView();
-		savedCompassMode = getApp().getSettings().getCompassMode();
+		OsmandApplication app = getApp();
+		app.getRoutingHelper().addListener(this);
+		app.getTargetPointsHelper().addListener(stateChangedListener);
+		prevMapLinkedToLocation = app.getMapViewTrackingUtilities().isMapLinkedToLocation();
+		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+		savedCompassMode = app.getSettings().getCompassMode();
 		prevZoom = mapView.getBaseZoom();
 		prevRotationAngle = mapView.getRotate();
-		getApp().getSettings().setCompassMode(CompassMode.NORTH_IS_UP);
 		prevElevationAngle = mapView.normalizeElevationAngle(mapView.getElevationAngle());
 		NavigationSession navigationSession = getSession();
 		if (calculateRoute) {
@@ -285,10 +285,8 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 
 	@Override
 	protected void adjustMapToRect(@NonNull LatLon location, @NonNull QuadRect mapRect) {
-		OsmandMapTileView mapView = getApp().getOsmandMap().getMapView();
-		mapView.setElevationAngle(90f);
-		getApp().getMapViewTrackingUtilities().setMapLinkedToLocation(false);
-		mapView.setRotate(0f, true);
+//		OsmandMapTileView mapView = getApp().getOsmandMap().getMapView();
+//		mapView.setElevationAngle(90f);
 		super.adjustMapToRect(location, mapRect);
 	}
 }
