@@ -71,6 +71,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -160,6 +161,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				int z = (int) Math.floor(zoom + Math.log(getMapDensity()) / Math.log(2));
 
 				List<Amenity> res = new ArrayList<>();
+				Set<String> deduplicateByRouteId = new HashSet<>();
 				PoiFilterUtils.combineStandardPoiFilters(calculatedFilters, app);
 				for (PoiUIFilter filter : calculatedFilters) {
 					List<Amenity> amenities = filter.searchAmenities(latLonBounds.top, latLonBounds.left,
@@ -175,24 +177,17 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 									return isInterrupted();
 								}
 							});
-					if (filter.isRouteTrackFilter()) {
-						for (Amenity amenity : amenities) {
-							boolean hasRoute = false;
+					for (Amenity amenity : amenities) {
+						if (amenity.isRouteTrack()) {
 							String routeId = amenity.getRouteId();
-							if (!Algorithms.isEmpty(routeId)) {
-								for (Amenity a : res) {
-									if (routeId.equals(a.getRouteId())) {
-										hasRoute = true;
-										break;
-									}
+							if (routeId != null) {
+								if (deduplicateByRouteId.contains(routeId)) {
+									continue;
 								}
-							}
-							if (!hasRoute) {
-								res.add(amenity);
+								deduplicateByRouteId.add(routeId);
 							}
 						}
-					} else {
-						res.addAll(amenities);
+						res.add(amenity);
 					}
 				}
 

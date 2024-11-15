@@ -2,6 +2,8 @@ package net.osmand.data;
 
 import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
 import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ACTIVITIES_PREFIX;
+import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
@@ -547,6 +549,10 @@ public class Amenity extends MapObject {
 
 	public boolean isPrivateAccess() {
 		return PRIVATE_VALUE.equals(getTagContent(ACCESS_PRIVATE_TAG));
+	}
+
+	public boolean isRouteTrack() {
+		return subType != null && (subType.equals(ROUTE_TRACK) || subType.startsWith(ROUTE_ACTIVITIES_PREFIX));
 	}
 
 	public JSONObject toJSON() {

@@ -267,16 +267,11 @@ public class TravelObfHelper implements TravelHelper {
 				}));
 	}
 
-	private boolean isRouteTrackAmenity(Amenity amenity) {
-		return amenity.getSubType() != null &&
-				(amenity.getSubType().equals(ROUTE_TRACK) || amenity.getSubType().startsWith(ROUTE_ACTIVITIES_PREFIX));
-	}
-
 	@Nullable
 	private TravelArticle cacheTravelArticles(File file, Amenity amenity, String lang, boolean readPoints, @Nullable GpxReadCallback callback) {
 		TravelArticle article = null;
 		Map<String, TravelArticle> articles;
-		if (isRouteTrackAmenity(amenity)) {
+		if (amenity.isRouteTrack()) {
 			articles = readRoutePoint(file, amenity);
 		} else {
 			articles = readArticles(file, amenity);
@@ -1140,7 +1135,7 @@ public class TravelObfHelper implements TravelHelper {
 							@Override
 							public boolean publish(Amenity amenity) {
 								if (amenity.getRouteId().equals(article.getRouteId())) {
-									if (isRouteTrackAmenity(amenity)) {
+									if (amenity.isRouteTrack()) {
 										for (String key : amenity.getAdditionalInfoKeys()) {
 											if (key.startsWith(OBF_GPX_EXTENSION_TAG_PREFIX)) {
 												String tag = key.replaceFirst(OBF_GPX_EXTENSION_TAG_PREFIX, "");
