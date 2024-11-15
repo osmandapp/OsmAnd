@@ -5693,4 +5693,6 @@
     <string name="av_audio_sample_rate_descr">Vælg lydsamplingsfrekvens.</string>
     <string name="connect_new_scanner">Tilslut ny scanner</string>
     <string name="auto_zoom_3d_angle">Auto-zoom 3D-vinkel</string>
+    <string name="shared_string_engine">Motor</string>
+    <string name="vehicle_metrics_recording_description">Vælg de parametre, der skal registreres i GPX-filen.</string>
 </resources>
