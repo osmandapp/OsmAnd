@@ -1689,14 +1689,19 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		double border = 0.85;
 		int dx = marginLeftPx;
 		int dy = marginTopPx;
-		int tbw = (int) ((tileBoxWidthPx > 0 ? tileBoxWidthPx : tb.getPixWidth()) * border);
-		int tbh = (int) ((tileBoxHeightPx > 0 ? tileBoxHeightPx : tb.getPixHeight()) * border);
-		dx -= (tbw - tb.getPixWidth())  / 2;
-		dy -= (tbh - tb.getPixHeight()) / 2;
-		tb.setPixelDimensions(tbw, tbh);
+		int tbw = (tileBoxWidthPx > 0 ? tileBoxWidthPx : tb.getPixWidth());
+		int tbh = (tileBoxHeightPx > 0 ? tileBoxHeightPx : tb.getPixHeight());
+		if (isLayoutRtl()) {
+			dx = -dx;
+		} else {
+			dx -= (tbw - tb.getPixWidth()) ;
+		}
+//		dy -= (tbh - tb.getPixHeight()) / 2; // this to make margin from top
+		dx += (int) (tbw * (1 - border) / 2);
+		dy += (int) (tbh * (1 - border) / 2);
+		tb.setPixelDimensions((int) (tbw * border), (int) (tbh * border));
 		tb.setCenterLocation(0.5f, 0.5f);
-		fitRectToMap(tb, left, right, top, bottom,
-				isLayoutRtl() ? dx : -dx, -dy, true, false);
+		fitRectToMap(tb, left, right, top, bottom, -dx, -dy, true, false);
 	}
 
 	public boolean fullyContains(RotatedTileBox tb, double left, double top, double right, double bottom) {
