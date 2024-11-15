@@ -350,6 +350,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	}
 
 	private void processNavigationIntent(@NonNull Uri uri) {
+		Log.d(TAG, "processNavigationIntent: ");
 		GeoParsedPoint point = GeoPointParserUtil.parse(uri.toString());
 		if (point != null) {
 			CarContext context = getCarContext();
@@ -378,7 +379,8 @@ public class NavigationSession extends Session implements NavigationListener, Os
 				});
 			} else {
 				String text = point.isGeoAddress() ? point.getQuery() : uri.toString();
-				screenManager.pushForResult(new SearchResultsScreen(context, settingsAction, text), (obj) -> {});
+				screenManager.pushForResult(new SearchResultsScreen(context, settingsAction, text), (obj) -> {
+				});
 			}
 		}
 	}
@@ -415,7 +417,10 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	}
 
 	public void startNavigation() {
-		createNavigationScreen();
+		if (navigationScreen == null) {
+			createNavigationScreen();
+		}
+		Log.d(TAG, "startNavigation: NavigationSession");
 		getCarContext().getCarService(ScreenManager.class).push(navigationScreen);
 	}
 
@@ -497,10 +502,11 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			screenManager.popToRoot();
 			screenManager.pushForResult(new RoutePreviewScreen(context, settingsAction, result, false), (obj) -> {
 				if (obj != null) {
-					app.getOsmandMap().getMapLayers().getMapActionsHelper().startNavigation();
+					Log.d(TAG, "Nav Session openPreview result: ");
 					if (hasStarted()) {
 						startNavigation();
 					}
+					app.getOsmandMap().getMapLayers().getMapActionsHelper().startNavigation();
 				}
 			});
 		}
@@ -624,6 +630,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	 * Starts navigation.
 	 */
 	public void startCarNavigation() {
+		Log.d(TAG, "startCarNavigation: ");
 		if (navigationManager != null) {
 			navigationManager.navigationStarted();
 			carNavigationActive = true;

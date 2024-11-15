@@ -1,7 +1,5 @@
 package net.osmand.plus.auto.screens
 
-import android.graphics.Rect
-import android.util.Log
 import androidx.car.app.CarContext
 import androidx.car.app.Screen
 import androidx.car.app.constraints.ConstraintManager
@@ -61,9 +59,9 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 	}
 
 	private fun startNavigation() {
-		app.osmandMap.mapLayers.mapActionsHelper.startNavigation()
 		val session = app.carNavigationSession
 		session?.startNavigation()
+		app.osmandMap.mapLayers.mapActionsHelper.startNavigation()
 	}
 
 	protected fun createSearchAction() = Action.Builder()
