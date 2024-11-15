@@ -121,11 +121,9 @@
 		android:title="@string/shared_string_activity"
 		tools:icon="@drawable/ic_action_activity" />
 
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+	<Preference
 		android:key="record_obd_data"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_disabled"
-		android:summaryOn="@string/shared_string_enabled"
+		android:layout="@layout/preference_with_descr"
 		android:title="@string/record_obd_data"
 		tools:icon="@drawable/ic_action_car_info" />
 

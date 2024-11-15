@@ -315,6 +315,19 @@ public class OsmandSettings {
 				}
 				return false;
 			}
+		} else if (preference instanceof ListStringPreference listStringPreference) {
+			if (value instanceof List<?> || (value == null && listStringPreference.isNullSupported(mode))) {
+				if (value == null) {
+					listStringPreference.setStringsListForProfile(mode,null);
+				} else {
+					List<?> list = (List<?>) value;
+					boolean isListOfString = list.stream().allMatch(element -> element instanceof String);
+					if (isListOfString) {
+						List<String> listOfString = (List<String>) list;
+						listStringPreference.setStringsListForProfile(mode, listOfString);
+					}
+				}
+			}
 		} else if (preference instanceof StringPreference stringPref) {
 			if (value instanceof String || (value == null && stringPref.isNullSupported(mode))) {
 				return stringPref.setModeValue(mode, (String) value);
@@ -1728,7 +1741,6 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> SHOW_TRIP_REC_NOTIFICATION = new BooleanPreference(this, "show_trip_recording_notification", true).makeProfile();
 
-	public final CommonPreference<Boolean> RECORD_OBD_DATA = new BooleanPreference(this, "record_obd_data", false).makeProfile();
 
 	public final CommonPreference<Boolean> LIVE_MONITORING = new BooleanPreference(this, "live_monitoring", false).makeProfile();
 
