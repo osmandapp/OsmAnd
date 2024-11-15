@@ -93,6 +93,8 @@ public class MapSelectionHelper {
 	private static final int AMENITY_SEARCH_RADIUS_FOR_RELATION = 500;
 	private static final int TILE_SIZE = 256;
 
+	private static final String TAG_POI_LAT_LON = "osmand_poi_lat_lon";
+
 	private final OsmandApplication app;
 	private final OsmandMapTileView view;
 	private final MapLayers mapLayers;
@@ -343,11 +345,17 @@ public class MapSelectionHelper {
 							}
 							IOnPathMapSymbol onPathMapSymbol = getOnPathMapSymbol(symbolInfo);
 							if (onPathMapSymbol == null) {
-								amenity = getAmenity(result.objectLatLon, obfMapObject);
+								LatLon latLon = result.objectLatLon;
+								if (tags.containsKey(TAG_POI_LAT_LON)) {
+									LatLon l = parsePoiLatLon(tags.get(TAG_POI_LAT_LON));
+									latLon = l == null ? latLon : l;
+									tags.remove(TAG_POI_LAT_LON);
+								}
+								amenity = getAmenity(latLon, obfMapObject);
 								if (amenity != null) {
 									amenity.setMapIconName(getMapIconName(symbolInfo));
 								} else if (!isRoute) {
-									addRenderedObject(result, symbolInfo, obfMapObject);
+									addRenderedObject(result, symbolInfo, obfMapObject, tags);
 								}
 							}
 						}
@@ -361,6 +369,25 @@ public class MapSelectionHelper {
 	}
 
 	@Nullable
+	private LatLon parsePoiLatLon(String value) {
+		if (value == null) {
+			return null;
+		}
+		String[] s = value.split(" ");
+		if (s.length != 2) {
+			return null;
+		}
+		try {
+			double lat = Double.parseDouble(s[0]);
+			double lon = Double.parseDouble(s[1]);
+			return new LatLon(lat, lon);
+		} catch (NumberFormatException e) {
+			log.error("Couldn't parse " + TAG_POI_LAT_LON + "=" + value + " " + e.getMessage());
+		}
+		return null;
+	}
+
+	@Nullable
 	private String getMapIconName(MapSymbolInformation symbolInfo) {
 		RasterMapSymbol rasterMapSymbol = getRasterMapSymbol(symbolInfo);
 		if (rasterMapSymbol != null && rasterMapSymbol.getContentClass() == MapSymbol.ContentClass.Icon) {
@@ -370,7 +397,7 @@ public class MapSelectionHelper {
 	}
 
 	private void addRenderedObject(@NonNull MapSelectionResult result, @NonNull MapSymbolInformation symbolInfo,
-	                               @NonNull ObfMapObject obfMapObject) {
+	                               @NonNull ObfMapObject obfMapObject, Map<String, String> tags) {
 		RasterMapSymbol rasterMapSymbol = getRasterMapSymbol(symbolInfo);
 		if (rasterMapSymbol != null) {
 			RenderedObject renderedObject = new RenderedObject();
@@ -389,6 +416,9 @@ public class MapSelectionHelper {
 			}
 			if (rasterMapSymbol.getContentClass() == MapSymbol.ContentClass.Icon) {
 				renderedObject.setIconRes(rasterMapSymbol.getContent());
+			}
+			for (Map.Entry<String, String> entry : tags.entrySet()) {
+				renderedObject.putTag(entry.getKey(), entry.getValue());
 			}
 			result.selectedObjects.put(renderedObject, null);
 		}
