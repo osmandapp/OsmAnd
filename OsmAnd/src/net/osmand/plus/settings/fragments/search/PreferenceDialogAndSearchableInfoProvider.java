@@ -14,7 +14,7 @@ class PreferenceDialogAndSearchableInfoProvider implements de.KnollFrank.lib.set
 			final Preference preference,
 			final PreferenceFragmentCompat hostOfPreference) {
 		// FK-TODO: handle more preference dialogs, which shall be searchable
-		// FK-FIXME: when OsmAnd development plugin is activated (or deactivated) then recompute PreferenceGraph in order to take into account (or forget) the preferences of this plugin.
+		// FK-FIXME: when some OsmAnd plugin (e.g. development plugin) is activated (or deactivated) then recompute PreferenceGraph in order to take into account (or forget) the preferences of this plugin for search.
 		return hostOfPreference instanceof final SearchablePreferenceDialogProvider searchablePreferenceDialogProvider ?
 				searchablePreferenceDialogProvider.getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(preference) :
 				Optional.empty();
