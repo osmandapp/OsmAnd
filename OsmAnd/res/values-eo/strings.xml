@@ -5765,4 +5765,6 @@
     <string name="av_audio_sample_rate_descr">Elekti specimen-rapidon (samplorapidon) de sondosiero.</string>
     <string name="preview_next_turn">Antaŭvidi sekvan kurbiĝon</string>
     <string name="connect_new_scanner">Konekti novan skanilon</string>
+    <string name="vehicle_metrics_recording_description">Elekti parametrojn por registri al la GPX-dosiero.</string>
+    <string name="shared_string_engine">Motoro</string>
 </resources>
