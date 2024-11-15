@@ -381,7 +381,9 @@ public class MapSelectionHelper {
 			double lat = Double.parseDouble(s[0]);
 			double lon = Double.parseDouble(s[1]);
 			return new LatLon(lat, lon);
-		} catch (NumberFormatException e) {}
+		} catch (NumberFormatException e) {
+			log.error("Couldn't parse " + TAG_POI_LAT_LON + "=" + value + " " + e.getMessage());
+		}
 		return null;
 	}
 
