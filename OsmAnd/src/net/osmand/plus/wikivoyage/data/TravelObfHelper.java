@@ -4,6 +4,7 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.data.Amenity.REF;
 import static net.osmand.data.Amenity.ROUTE;
 import static net.osmand.data.Amenity.ROUTE_ID;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ACTIVITIES_PREFIX;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
@@ -266,11 +267,16 @@ public class TravelObfHelper implements TravelHelper {
 				}));
 	}
 
+	private boolean isRouteTrackAmenity(Amenity amenity) {
+		return amenity.getSubType() != null &&
+				(amenity.getSubType().equals(ROUTE_TRACK) || amenity.getSubType().startsWith(ROUTE_ACTIVITIES_PREFIX));
+	}
+
 	@Nullable
 	private TravelArticle cacheTravelArticles(File file, Amenity amenity, String lang, boolean readPoints, @Nullable GpxReadCallback callback) {
 		TravelArticle article = null;
 		Map<String, TravelArticle> articles;
-		if (ROUTE_TRACK.equals(amenity.getSubType())) {
+		if (isRouteTrackAmenity(amenity)) {
 			articles = readRoutePoint(file, amenity);
 		} else {
 			articles = readArticles(file, amenity);
@@ -322,13 +328,16 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@NonNull
-	public static SearchPoiTypeFilter getSearchFilter(String... filterSubcategory) {
+	public static SearchPoiTypeFilter getSearchFilter(String... filterSubcategories) {
 		return new SearchPoiTypeFilter() {
 			@Override
 			public boolean accept(PoiCategory type, String subcategory) {
-				for (String filterSubcategory : filterSubcategory) {
-					if (subcategory.equals(filterSubcategory)) {
+				for (String filter : filterSubcategories) {
+					if (subcategory.equals(filter)) {
 						return true;
+					}
+					if (ROUTE_TRACK.equals(filter) && subcategory.startsWith(ROUTE_ACTIVITIES_PREFIX)) {
+						return true; // include routes:activites_xxx by routes:route_track filter
 					}
 				}
 				return false;
@@ -1131,7 +1140,7 @@ public class TravelObfHelper implements TravelHelper {
 							@Override
 							public boolean publish(Amenity amenity) {
 								if (amenity.getRouteId().equals(article.getRouteId())) {
-									if (ROUTE_TRACK.equals(amenity.getSubType())) {
+									if (isRouteTrackAmenity(amenity)) {
 										for (String key : amenity.getAdditionalInfoKeys()) {
 											if (key.startsWith(OBF_GPX_EXTENSION_TAG_PREFIX)) {
 												String tag = key.replaceFirst(OBF_GPX_EXTENSION_TAG_PREFIX, "");
