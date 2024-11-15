@@ -143,7 +143,6 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 			String title = Algorithms.isEmpty(name) ? typeName : name;
 			routeRows.add(new Row.Builder().setTitle(title).addText(description).build());
 			this.routeRows = routeRows;
-			calculating = app.getRoutingHelper().isRouteBeingCalculated();
 			invalidate();
 		}
 	}
