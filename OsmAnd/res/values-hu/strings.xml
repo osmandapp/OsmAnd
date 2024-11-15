@@ -5546,7 +5546,7 @@
     <string name="connect_obd_instructions_title">Az OsmAnd támogatja a Bluetooth-kapcsolatot használó OBD-II eszközöket.</string>
     <string name="connect_obd_instructions_step2">Indítsa el a jármű motorját</string>
     <string name="connect_obd_instructions_step3">Engedélyezze a Bluetooth-t a telefonján</string>
-    <string name="connect_obd_instructions_step4">Koppintson a „Kapcsolódásra” és válassza ki az OBD-olvasót a listáról.</string>
+    <string name="connect_obd_instructions_step4">Koppintson a „%1$s”-ra és válassza ki az OBD-olvasót a listáról.</string>
     <string name="learn_more_about_obd_sensors">Tudjon meg többet az érzékelőkről.</string>
     <string name="obd_fuel_left_liters">Maradék üzemanyag (liter)</string>
     <string name="obd_vehicle_info">Jármű információ</string>

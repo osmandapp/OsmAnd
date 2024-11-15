@@ -6080,4 +6080,5 @@
     <string name="obd_ambient_air_temp_desc">Показує температуру ззовні автомобіля.</string>
     <string name="obd_engine_coolant_temp_desc">Показує температуру охолоджувальної рідини двигуна</string>
     <string name="obd_air_intake_temp_desc">Показує температуру повітря, що надходить у впускний колектор двигуна.</string>
+    <string name="auto_zoom_3d_angle">Автомасштаб кута 3D</string>
 </resources>
