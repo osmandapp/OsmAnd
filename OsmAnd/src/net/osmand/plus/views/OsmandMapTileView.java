@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
 
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
@@ -105,6 +106,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private static final int MIN_ZOOM_LIMIT = 1;
 	private static final int MIN_ZOOM_LEVEL_TO_ADJUST_CAMERA_TILT = 3;
 	private static final int MAX_ZOOM_LIMIT = 17;
+
+	private static final long ANIMATION_PREVIEW_TIME = 1400;
 
 	private boolean MEASURE_FPS;
 	private final FPSMeasurement main = new FPSMeasurement();
@@ -1700,7 +1703,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 		dy += tb.getCenterPixelY() - tb.getPixHeight() / 2;
 		tb.setPixelDimensions(tbw, tbh);
-		fitRectToMap(tb, left, right, top, bottom, dx, dy, true);
+		fitRectToMap(tb, left, right, top, bottom, dx, dy, true, false);
 	}
 
 	public boolean fullyContains(RotatedTileBox tb, double left, double top, double right, double bottom) {
@@ -1718,7 +1721,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void fitRectToMap(RotatedTileBox tb, double left, double right, double top, double bottom,
-	                         int dx, int dy, boolean useSmallZoom) {
+	                         int dx, int dy, boolean useSmallZoom, 	boolean rotate) {
 		float zoomStep = useSmallZoom ? 0.1f : 1f;
 		double clat = bottom / 2 + top / 2;
 		double clon = left / 2 + right / 2;
@@ -1738,14 +1741,19 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			zoom.partialChangeZoom(-zoomStep);
 			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
-		if (dy != 0 || dx != 0) {
-			float x = tb.getPixWidth() / 2f + dx;
-			float y = tb.getPixHeight() / 2f + dy;
-			clat = tb.getLatFromPixel(x, y);
-			clon = tb.getLonFromPixel(x, y);
+		float x = currentViewport.getCenterPixelX() + dx;
+		float y = currentViewport.getCenterPixelY() + dy;
+		clat = tb.getLatFromPixel(x, y);
+		clon = tb.getLonFromPixel(x, y);
+		if (rotate) {
+			animatedDraggingThread.startMoving(clat, clon,
+					new Pair<>(new Zoom.ComplexZoom(zoom.getBaseZoom(), zoom.getZoomFloatPart()), 0f),
+					true, 0f, 90, ANIMATION_PREVIEW_TIME, false, null
+			);
+		} else {
+			animatedDraggingThread.startMoving(clat, clon, zoom.getBaseZoom(), zoom.getZoomFloatPart());
 		}
 
-		animatedDraggingThread.startMoving(clat, clon, zoom.getBaseZoom(), zoom.getZoomFloatPart());
 	}
 
 	public RotatedTileBox getTileBox(int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx) {
