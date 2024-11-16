@@ -779,7 +779,7 @@
     <string name="bg_service_sleep_mode_on">Parar
 \n servicio en modo reposo</string>
     <string name="int_continuosly">Continuamente</string>
-    <string name="screen_is_locked">Pulsar el icono del candado para desbloquear</string>
+    <string name="screen_is_locked">Pulsar el ícono del candado para desbloquear</string>
     <string name="map_widget_top_text">Nombre de calle</string>
     <string name="map_widget_config">Configurar pantalla</string>
     <string name="map_widget_back_to_loc">Dónde estoy</string>
@@ -2489,7 +2489,7 @@
     <string name="osc_file_desc">OSC - adecuado para exportar a OpenStreetMap.</string>
     <string name="shared_string_gpx_file">Archivo GPX</string>
     <string name="osc_file">Archivo OSC</string>
-    <string name="choose_file_type">Elegir tipo de archivo</string>
+    <string name="choose_file_type">Elegí el tipo de archivo</string>
     <string name="osm_edits_export_desc">Exportar como notas de OSM, PDI o ambos.</string>
     <string name="all_data">Todos los datos</string>
     <string name="osm_notes">Notas de OSM</string>
@@ -2553,8 +2553,8 @@
     <string name="select_travel_book">Marcar un libro de viaje</string>
     <string name="shared_string_travel_book">Libro de viajes</string>
     <string name="download_images">Descargar imágenes</string>
-    <string name="purchase_dialog_title">Elegir plan</string>
-    <string name="purchase_dialog_travel_description">Comprar uno de los siguientes elementos para recibir la característica de la guía turística sin conexión:</string>
+    <string name="purchase_dialog_title">Elegí el plan</string>
+    <string name="purchase_dialog_travel_description">Comprá uno de los siguientes elementos para recibir la característica de la guía turística sin conexión:</string>
     <string name="purchase_dialog_subtitle">Elegí el elemento adecuado</string>
     <string name="wikivoyage_travel_guide_descr">Las guías de los sitios más interesantes del planeta, dentro de OsmAnd y sin conexión a Internet.</string>
     <string name="wikivoyage_travel_guide">Guías turísticas</string>
@@ -2573,7 +2573,7 @@
     <string name="update_is_available">Actualización disponible</string>
     <string name="download_file">Descargar archivo</string>
     <string name="start_editing_card_image_text">La guía turística libre global que cualquiera puede editar.</string>
-    <string name="welcome_to_open_beta_description">Las guías turísticas, se basan actualmente en Wikiviajes. Prueba todas las características durante las pruebas beta abiertas, de forma gratuita.</string>
+    <string name="welcome_to_open_beta_description">Las guías turísticas, se basan actualmente en Wikiviajes. Probá todas las características durante las pruebas beta abiertas, de forma gratuita.</string>
     <string name="start_editing_card_description">Podés y debés editar cualquier artículo en Wikiviajes. Compartí tu conocimiento, experiencia, talento y atención.</string>
     <string name="start_editing">Comenzar edición</string>
     <string name="get_unlimited_access">Obtener acceso ilimitado</string>
@@ -2801,7 +2801,7 @@
     <string name="public_transport_type">Tipo de transporte</string>
     <string name="searching_gps">Buscando GPS</string>
     <string name="coordinates_widget">Widget de coordenadas</string>
-    <string name="rate_dialog_descr">Por favor, comparte tus comentarios y califica nuestro trabajo en Google Play.</string>
+    <string name="rate_dialog_descr">Por favor, compartí tus comentarios y calificá nuestro trabajo en Google Play.</string>
     <string name="shared_string_privacy_policy">Política de privacidad</string>
     <string name="help_us_make_osmand_better">Ayudanos a mejorar OsmAnd</string>
     <string name="make_osmand_better_descr">Permití que OsmAnd recopile y procese datos de uso anónimos de la aplicación. No recopilamos datos sobre las ubicaciones que ves en el mapa. \n \nPodés cambiar esto en cualquier momento en «Ajustes → Privacidad y seguridad».</string>
@@ -2828,7 +2828,7 @@
     <string name="base_profile_descr_ski">Esquí</string>
     <string name="show_compass_ruler">Mostrar regla de brújula</string>
     <string name="hide_compass_ruler">Ocultar regla de brújula</string>
-    <string name="select_icon_profile_dialog_title">Elegir icono</string>
+    <string name="select_icon_profile_dialog_title">Elegir ícono</string>
     <string name="settings_routing_mode_string">Modo: %s</string>
     <string name="settings_derived_routing_mode_string">Modo de usuario, derivado de: %s</string>
     <string name="routing_profile_ski">Esquí</string>
@@ -2900,7 +2900,7 @@
     <string name="shared_string_crash">Error</string>
     <string name="last_launch_crashed">OsmAnd falló la última vez. Por favor, ayudanos a mejorar OsmAnd compartiendo el mensaje de error.</string>
     <string name="app_mode_ufo">Ovni</string>
-    <string name="release_3_4">• Perfiles de aplicación: crea un perfil personalizado según tus necesidades, con un icono y color personalizado\n\n• Ahora puedes personalizar las velocidades predefinidas, máximas y mínimas de cualquier perfil\n\n• Se ha añadido un widget para las coordenadas actuales\n\n• Se añadieron opciones para mostrar la brújula y una regla radial en el mapa\n\n• Se ha corregido la grabación de trazas en segundo plano\n\n• Se mejoraron las descargas de mapas en segundo plano\n\n• Se ha vuelto a añadir la opción «Encender pantalla»\n\n• Se ha corregido la selección de idioma de Wikipedia\n\n• Se ha corregido el comportamiento de los botones de la brújula durante la navegación\n\n• Otras correcciones de errores</string>
+    <string name="release_3_4">• Perfiles de aplicación: creá un perfil personalizado según tus necesidades, con un ícono y color personalizado\n\n• Ahora podés personalizar las velocidades predefinidas, máximas y mínimas de cualquier perfil\n\n• Se agregó un widget para las coordenadas actuales\n\n• Se agregaron opciones para mostrar la brújula y una regla radial en el mapa\n\n• Se corrigió la grabación de trazas en segundo plano\n\n• Se mejoraron las descargas de mapas en segundo plano\n\n• Se volvió a añadir la opción «Encender pantalla»\n\n• Se corrigió la elección del idioma de Wikipedia\n\n• Se corrigió el comportamiento de los botones de la brújula durante la navegación\n\n• Otras correcciones de errores</string>
     <string name="app_mode_personal_transporter">Transportador personal</string>
     <string name="app_mode_monowheel">Monociclo</string>
     <string name="app_mode_scooter">Escúter (motoneta)</string>
@@ -2915,7 +2915,7 @@
     <string name="routing_attr_max_num_changes_description">Especificá el número máximo de transbordos</string>
     <string name="routing_attr_max_num_changes_name">Número de transbordos</string>
     <string name="turn_screen_on_router">Despertar al girar</string>
-    <string name="turn_screen_on_time_descr">Define durante cuánto tiempo debe estar encendida la pantalla.</string>
+    <string name="turn_screen_on_time_descr">Definí durante cuánto tiempo debe encenderse la pantalla.</string>
     <string name="turn_screen_on_sensor">Usar sensor de proximidad</string>
     <string name="turn_screen_on_sensor_descr">Al mover la mano por la pantalla, se encenderá.</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Grado 1</string>
@@ -3150,7 +3150,7 @@
     <string name="monitoring_prefs_descr">Navegación, precisión de registro</string>
     <string name="multimedia_notes_prefs_descr">Tamaño de imagen, calidad de audio y video</string>
     <string name="osm_editing_prefs_descr">Inicio de sesión, contraseña, edición sin conexión</string>
-    <string name="accessibility_prefs_descr">Elegir icono, color y nombre</string>
+    <string name="accessibility_prefs_descr">Elegir ícono, color y nombre</string>
     <string name="live_monitoring_descr">Permite compartir la ubicación actual usando la grabación de viaje.</string>
     <string name="live_monitoring">Seguimiento en línea</string>
     <string name="save_track_logging_accuracy">Precisión de registro</string>
@@ -3165,8 +3165,8 @@
     <string name="osm_editing">Edición de OSM</string>
     <string name="osm_edits_view_descr">Ve todas las ediciones aún no subidas o errores de OSM en «%1$s». Los cambios ya cargados no se mostrarán más.</string>
     <string name="app_mode_osm">OSM</string>
-    <string name="select_nav_icon_descr">El icono se muestra mientras se navega o se mueve.</string>
-    <string name="select_map_icon_descr">El icono se muestra en reposo.</string>
+    <string name="select_nav_icon_descr">El ícono se muestra mientras se navega o se mueve.</string>
+    <string name="select_map_icon_descr">El ícono se muestra en reposo.</string>
     <string name="logcat_buffer_descr">Comprobá y compartí los registros detallados de la aplicación</string>
     <string name="search_offline_geo_error">No se puede analizar la geointención «%s».</string>
     <string name="permission_is_required">Se necesita permiso para usar esta opción.</string>
@@ -3211,11 +3211,11 @@
 \n
 \nSi se activa, OsmAnd usará los ajustes de tiempo de espera del sistema.</string>
     <string name="clear_recorded_data">Vaciar datos grabados</string>
-    <string name="release_3_6">• Perfiles: ahora puedes cambiar el orden, definir el icono para el mapa, cambiar todos los ajustes para los perfiles base y restaurarlos de nuevo a los valores predefinidos\n\n• Se han añadido los números de salida en la navegación\n\n• Se han rediseñado los ajustes de los complementos\n\n• Se ha rediseñado la pantalla de ajustes, para un acceso rápido a todos los perfiles\n\n• Se ha añadido la opción de copiar los ajustes de otro perfil\n\n• Se ha añadido la posibilidad de cambiar el orden u ocultar las categorías de PDI en la búsqueda\n\n• Se han alineado correctamente en el mapa los iconos de PDI\n\n• Se han añadido datos del amanecer y atardecer en «Configurar mapa»\n\n• Se han añadido iconos de «Casa» y «Trabajo» en el mapa\n\n• Se ha añadido soporte para las múltiples lineas de descripción en «Ajustes»\n\n• Se ha añadido la correcta transliteración en el mapa de Japón\n\n• Se ha añadido el mapa de la Antártida</string>
+    <string name="release_3_6">• Perfiles: ahora podés cambiar el orden, definir el ícono para el mapa, cambiar todos los ajustes para los perfiles base y restaurarlos de nuevo a los valores predefinidos\n\n• Se agregaron los números de salida en la navegación\n\n• Se rediseñaron los ajustes de los complementos\n\n• Se rediseñó la pantalla de ajustes, para un acceso rápido a todos los perfiles\n\n• Se agregó la opción de copiar los ajustes de otro perfil\n\n• Se agregó la posibilidad de cambiar el orden u ocultar las categorías de PDI en la búsqueda\n\n• Los íconos de PDI se alinearon correctamente en el mapa\n\n• Se agregaron datos del amanecer y atardecer en «Configurar mapa»\n\n• Se agregaron íconos de «Casa» y «Trabajo» en el mapa\n\n• Se agregó soporte para las múltiples lineas de descripción en «Ajustes»\n\n• Se agregó la correcta transliteración en el mapa de Japón\n\n• Se agregó el mapa de la Antártida</string>
     <string name="copy_coordinates">Copiar coordenadas</string>
     <string name="routing_profile_direct_to">Directo al punto</string>
     <string name="sort_by_category">Ordenar por categoría</string>
-    <string name="please_provide_profile_name_message">Proporciona un nombre para el perfil</string>
+    <string name="please_provide_profile_name_message">Escribí un nombre para el perfil</string>
     <string name="open_settings">Abrir los ajustes</string>
     <string name="plugin_disabled">Complemento desactivado</string>
     <string name="plugin_disabled_descr">Este complemento es una aplicación independiente, desactivarlo no lo quita.
@@ -3270,7 +3270,7 @@
     <string name="shared_string_terrain">Terreno</string>
     <string name="hillshade_description">El mapa de sombreado usa sombras oscuras para mostrar las laderas, picos y tierras bajas.</string>
     <string name="slope_description">La pendiente usa colores para visualizar la inclinación del terreno.</string>
-    <string name="terrain_slider_description">Define los niveles de zum mínimo y máximo donde se mostrará la capa.</string>
+    <string name="terrain_slider_description">Definí los niveles de zum mínimo y máximo donde mostrar la capa.</string>
     <string name="hillshade_download_description">Se necesitan mapas adicionales para ver el sombreado en el mapa.</string>
     <string name="slope_download_description">Se necesitan mapas adicionales para ver las pendientes en el mapa.</string>
     <string name="slope_read_more">Más información sobre las pendientes en «%1$s».</string>
@@ -3283,12 +3283,12 @@
     <string name="quick_action_terrain_descr">Un botón que muestra u oculta la capa topográfica en el mapa.</string>
     <string name="delete_description">Borrar descripción</string>
     <string name="add_description">Añadir descripción</string>
-    <string name="select_group">Elegir grupo</string>
-    <string name="select_shape">Elegir forma</string>
+    <string name="select_group">Elegí el grupo</string>
+    <string name="select_shape">Elegí la forma</string>
     <string name="shared_string_circle">Círculo</string>
     <string name="shared_string_square">Cuadrado</string>
     <string name="recalculate_route_in_deviation">Recalcular ruta en caso de desviación</string>
-    <string name="select_distance_route_will_recalc">Elige la distancia después de la cual la ruta será recalculada.</string>
+    <string name="select_distance_route_will_recalc">Elegí la distancia después de la cual la ruta se recalculará.</string>
     <string name="recalculate_route_distance_promo">La ruta será recalculada si la distancia a la ubicación actual es mayor que el valor elegido.</string>
     <string name="shared_string_octagon">Octágono</string>
     <string name="app_mode_ski_touring">Esquí de travesía</string>
@@ -3467,7 +3467,7 @@
     <string name="plan_a_route">Planificar ruta</string>
     <string name="add_to_a_track">Añadir a una traza</string>
     <string name="add_hidden_group_info">El punto agregado se encuentra en «%s». Desocultá el grupo elegido para mostrarlo en el mapa.</string>
-    <string name="track_show_start_finish_icons">Mostrar los iconos de inicio y fin</string>
+    <string name="track_show_start_finish_icons">Mostrar los íconos de inicio y fin</string>
     <string name="select_track_width">Elegí la anchura</string>
     <string name="gpx_split_interval_descr">Elegí el intervalo de la traza en el que se mostrarán las marcas con la distancia o el tiempo.</string>
     <string name="gpx_split_interval_none_descr">Elegí la opción de división deseada: por tiempo o por distancia.</string>
@@ -3744,7 +3744,7 @@
     <string name="temporary_conditional_routing_descr">Usar las restricciones viales que están activas ahora en el mapa</string>
     <string name="routing_attr_short_way_description">Ruta optimizada más corta (bajo consumo)</string>
     <string name="routing_attr_driving_style_description">Elegí el propósito de la conducción para obtener la ruta más corta, más rápida o más segura</string>
-    <string name="snap_to_road_descr">El icono de la ubicación actual será ajustado a la ruta de navegación</string>
+    <string name="snap_to_road_descr">El ícono de la ubicación actual será ajustado a la ruta de navegación</string>
     <string name="restart">Reiniciar</string>
     <string name="shared_strings_all_regions">Todas las regiones</string>
     <string name="delete_number_files_question">¿Borrar %1$d archivos\?</string>
@@ -4157,7 +4157,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Muestra etiquetas con información no obvia sobre algún elemento (note)</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas «note» (nota)</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Iconos en zums bajos</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualización esquemática de iconos en zums bajos</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualización esquemática de íconos en zums bajos</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Aumentar visibilidad de los túneles fluviales</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Aumenta la visibilidad de los túneles fluviales</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetas «fixme» (arréglame)</string>
@@ -4865,7 +4865,7 @@
     <string name="free_favorites_backup_description">Registrate en OsmAnd Cloud para obtener una copia de seguridad gratuita de los favoritos y ajustes.</string>
     <string name="free_favorites_backup">Copia de seguridad gratuita de favoritos</string>
     <string name="get_osmand_cloud">Obtener OsmAnd Cloud</string>
-    <string name="release_4_5">• Sensores BLE/ANT+: Se ha mejorado la conexión, escritura y visualización de los datos recibidos en GPX\n\n• Copia de seguridad gratuita de los favoritos y los ajustes básicos en «OsmAnd Cloud»\n\n• Nuevo formato para mapas topográficos con soporte para el relieve 3D\n\n• Gestión de trazas: se ha actualizado la interfaz de usuario, se ha añadido una clasificación y se admiten las carpetas anidadas\n\n• Android Auto: nuevo menú de inicio para acceder a los favoritos, trazas y categorías de PDI\n\n• Se ha mejorado la lista de widgets para el panel superior/inferior\n\n• Nuevo perfil «Tren», permite calcular rutas ferroviarias\n\n• Las curvas de nivel funcionan con cualquier «Repositorio de mapa»\n\n• Se ha ampliado la lista de acciones predefinidas para teclados externos\n\n• Nuevos archivos de rutas personalizados y se ha añadido opciones para borrar o sobrescribir la ruta\n\n• Se ha añadido la opción para «Anunciar desvío de la ruta»\n\n• Pantalla de inicio: se ha añadido la opción para restaurar el estado de OsmAnd desde un archivo externo\n\n• Se ha añadido distintas clases de «Materiales peligrosos» para la navegación de camiones en Norteamérica\n\n• Se ha añadido soporte de «Vía ferrata» para las rutas peatonales\n\n• Se ha añadido la escala «CAI» para la clasificación de dificultad de las rutas\n\n• Se ha corregido la elección del idioma por aplicación\n\n• Se ha añadido soporte para iconos temáticos\n\n• OsmAnd Cloud: Se ha añadido la opción de borrar la cuenta\n\n• Accesibilidad: se ha cambiado el tamaño del objetivo táctil de los botones a 48 dp; se ha solucionado el problema de la visibilidad de la interfaz de usuario del mapa para los lectores de pantalla\n\n• Se han revisado las indicaciones de voz en japonés\n\n• Se ha mejorado la evaluación de los cambios de altitud y pendiente</string>
+    <string name="release_4_5">• Sensores BLE/ANT+: Se ha mejorado la conexión, escritura y visualización de los datos recibidos en GPX\n\n• Copia de seguridad gratuita de los favoritos y los ajustes básicos en «OsmAnd Cloud»\n\n• Nuevo formato para mapas topográficos con soporte para el relieve 3D\n\n• Gestión de trazas: se ha actualizado la interfaz de usuario, se ha añadido una clasificación y se admiten las carpetas anidadas\n\n• Android Auto: nuevo menú de inicio para acceder a los favoritos, trazas y categorías de PDI\n\n• Se ha mejorado la lista de widgets para el panel superior/inferior\n\n• Nuevo perfil «Tren», permite calcular rutas ferroviarias\n\n• Las curvas de nivel funcionan con cualquier «Repositorio de mapa»\n\n• Se ha ampliado la lista de acciones predefinidas para teclados externos\n\n• Nuevos archivos de rutas personalizados y se ha añadido opciones para borrar o sobrescribir la ruta\n\n• Se ha añadido la opción para «Anunciar desvío de la ruta»\n\n• Pantalla de inicio: se ha añadido la opción para restaurar el estado de OsmAnd desde un archivo externo\n\n• Se ha añadido distintas clases de «Materiales peligrosos» para la navegación de camiones en Norteamérica\n\n• Se ha añadido soporte de «Vía ferrata» para las rutas peatonales\n\n• Se ha añadido la escala «CAI» para la clasificación de dificultad de las rutas\n\n• Se ha corregido la elección del idioma por aplicación\n\n• Se ha añadido soporte para íconos temáticos\n\n• OsmAnd Cloud: Se ha añadido la opción de borrar la cuenta\n\n• Accesibilidad: se ha cambiado el tamaño del objetivo táctil de los botones a 48 dp; se ha solucionado el problema de la visibilidad de la interfaz de usuario del mapa para los lectores de pantalla\n\n• Se han revisado las indicaciones de voz en japonés\n\n• Se ha mejorado la evaluación de los cambios de altitud y pendiente</string>
     <string name="free_account">Cuenta gratuita</string>
     <string name="folder_export_empty_error">Nada que exportar, la carpeta está vacía</string>
     <string name="routing_attr_allow_via_ferrata_name">Ruta de montaña (Vía ferrata)</string>
@@ -5023,7 +5023,7 @@
     <string name="sort_country_name_descending">Nombre del país: Z – A</string>
     <string name="delete_map_description">¿Borrar el mapa «%1$s»?</string>
     <string name="maps_and_resources">Mapas y recursos</string>
-    <string name="shared_string_show_icon">Mostrar icono</string>
+    <string name="shared_string_show_icon">Mostrar ícono</string>
     <string name="smart_folder_name_present">Esta carpeta inteligente, ya se encuentra presente</string>
     <string name="smart_folder_saved">Carpeta inteligente guardada</string>
     <string name="add_smart_folder">Añadir carpeta inteligente</string>
@@ -5215,7 +5215,7 @@
     <string name="use_terrain_maps">Usar mapas del terreno</string>
     <string name="use_nearby_roads_summary">Usa el mapa sin conexión para encontrar caminos cercanos y datos de elevación. La geometría de la traza puede ajustarse.</string>
     <string name="use_nearby_roads">Usar caminos cercanos</string>
-    <string name="release_4_8">• Nueva opción de coloración del terreno «Altitud»\n\n• Paletas de colores personalizadas para el terreno, las trazas y las rutas\n\n• Se ha añadido una variante en 3D, para los iconos de la ubicación\n\n• Las acciones rápidas ahora se pueden asignar a teclados externos\n\n• Meteorología: actualización de la interfaz de usuario y adición de la animación del viento\n\n• Se han mejorado las trazas en 3D: nuevas opciones de visualización y coloración\n\n• Se han ampliado las rutas turísticas en el mapa\n\n• Se ha añadido la opción de aspecto de la aplicación, para seguir el modo del mapa\n\n• Se han corregido las estadísticas de las trazas, el ordenamiento y la búsqueda\n\n• Edición de OSM: se ha borrado el método de autorización de usuario / contraseña\n\n• Desde Android 14, se ha cambiado el modo para compartir del sistema</string>
+    <string name="release_4_8">• Nueva opción de coloración del terreno «Altitud»\n\n• Paletas de colores personalizadas para el terreno, las trazas y las rutas\n\n• Se ha añadido una variante en 3D, para los íconos de la ubicación\n\n• Las acciones rápidas ahora se pueden asignar a teclados externos\n\n• Meteorología: actualización de la interfaz de usuario y adición de la animación del viento\n\n• Se han mejorado las trazas en 3D: nuevas opciones de visualización y coloración\n\n• Se han ampliado las rutas turísticas en el mapa\n\n• Se ha añadido la opción de aspecto de la aplicación, para seguir el modo del mapa\n\n• Se han corregido las estadísticas de las trazas, el ordenamiento y la búsqueda\n\n• Edición de OSM: se ha borrado el método de autorización de usuario / contraseña\n\n• Desde Android 14, se ha cambiado el modo para compartir del sistema</string>
     <string name="change_default_tracks_appearance_confirmation">¿Aplicar cambios a las trazas existentes en la carpeta o sólo a las nuevas?</string>
     <string name="delete_actions_button_confirmation">¿Borrar «%1$s» con todas sus acciones añadidas?</string>
     <string name="delete_actions_button">Borrar botón</string>
@@ -5268,7 +5268,7 @@
     <string name="key_name_pattern">Tecla «%1$s»</string>
     <string name="key_assignment_add_key">Añadir tecla</string>
     <string name="assigned_keys">Teclas asignadas</string>
-    <string name="action_icon">Añadir icono</string>
+    <string name="action_icon">Añadir ícono</string>
     <string name="user_palette">Paleta del usuario</string>
     <string name="shared_string_colors">Colores</string>
     <string name="backup_error_failed_to_transfer_file">Error al transferir archivos de la nube.</string>
@@ -5337,7 +5337,7 @@
 \nGPU (1k): %3$s
 \nInactivo (1k): %4$s</string>
     <string name="choose_map_orientation">Elegí la orientación del mapa</string>
-    <string name="shared_string_all_icons">Todos los iconos</string>
+    <string name="shared_string_all_icons">Todos los íconos</string>
     <string name="navigation_position_icon_summary">Icono que se muestra al navegar o moverse.</string>
     <string name="navigation_position_icon">Icono de la ubicación al navegar</string>
     <string name="resting_position_icon_summary">Icono que se muestra en reposo.</string>
@@ -5596,4 +5596,5 @@
     <string name="obd_engine_oil_temperature">Temperatura del aceite del motor</string>
     <string name="obd_speed_desc">Muestra la velocidad del sensor de velocidad del vehículo (VSS).</string>
     <string name="obd_fuel_pressure_desc">Muestra la presión dentro del sistema de combustible</string>
+    <string name="shared_string_engine">Motor</string>
 </resources>
