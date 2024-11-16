@@ -4895,4 +4895,7 @@
     <string name="poi_payment_parco_no">Parco malakceptata</string>
     <string name="poi_payment_parkster_yes">Parkster</string>
     <string name="poi_payment_parkster_no">Parkster malakceptata</string>
+    <string name="poi_name_etymology">Etimologio de nomo</string>
+    <string name="poi_name_left">Nomo (maldekstra flanko)</string>
+    <string name="poi_name_right">Nomo (dekstra flanko)</string>
 </resources>
