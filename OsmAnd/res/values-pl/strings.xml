@@ -5729,4 +5729,15 @@
     <string name="obd_fuel_pressure_desc">Pokazuje ciśnienie w układzie paliwowym</string>
     <string name="obd_fuel_consumption_rate_sensor">Wskaźnik zużycia paliwa (czujnik)</string>
     <string name="obd_battery_voltage_desc">Pokazuje poziom napięcia akumulatora pojazdu</string>
+    <string name="obd_fuel_consumption_rate_sensor_type">Użyj wybranych jednostek w nazwie.</string>
+    <string name="route_guidance_desc">Zapewnia w czasie rzeczywistym wskazówki dotyczące trasy, w tym odległość do następnego zakrętu, nazwę drogi, nazwę bieżącej ulicy i informacje o pasie. Widżety są aktywne podczas nawigacji.</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Ukryj granice gruntów publicznych</string>
+    <string name="obd_plugin_name">Metryki pojazdu</string>
+    <string name="rendering_attr_alpineHiking_name">Stopień trudności szlaków turystycznych</string>
+    <string name="help_article_setup_a_route_name">Ustaw trasę</string>
+    <string name="help_article_personal_color_palette_schemes_name">Schematy kolorów</string>
+    <string name="help_article_map_routes_name">Trasy</string>
+    <string name="rendering_value_managerName_name">Według nazwy menedżera</string>
+    <string name="rendering_value_access_name">Według typu dostępu</string>
+    <string name="rendering_attr_padusDisplayMode_description">Według typu dostępu lub nazwy menedżera</string>
 </resources>
