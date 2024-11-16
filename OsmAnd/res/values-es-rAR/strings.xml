@@ -2685,7 +2685,7 @@
     <string name="choose_track_file_to_follow">Elige el archivo de la traza a seguir</string>
     <string name="voice_announcements">Indicaciones por voz</string>
     <string name="intermediate_destinations">Destinos intermedios</string>
-    <string name="arrive_at_time">Llegará a las %1$s</string>
+    <string name="arrive_at_time">Llegás a las %1$s</string>
     <string name="cubic_m">m³</string>
     <string name="metric_ton">ton</string>
     <string name="shared_string_capacity">Capacidad</string>
