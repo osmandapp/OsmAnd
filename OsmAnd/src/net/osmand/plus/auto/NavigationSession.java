@@ -528,7 +528,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 					if (!locations.isEmpty()) {
 						Location location = locations.get(locations.size() - 1);
 						lastTimeGPSLocationFixed = System.currentTimeMillis();
-						locationProvider.setLocationFromService(location);
+						if (!settings.MAP_ACTIVITY_ENABLED) {
+							locationProvider.setLocationFromService(location);
+						}
 					}
 				}
 			});
@@ -537,7 +539,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 				locationServiceHelper.requestNetworkLocationUpdates(new LocationCallback() {
 					@Override
 					public void onLocationResult(@NonNull List<net.osmand.Location> locations) {
-						if (!locations.isEmpty() && !useOnlyGPS()) {
+						if (!settings.MAP_ACTIVITY_ENABLED && !locations.isEmpty() && !useOnlyGPS()) {
 							locationProvider.setLocationFromService(locations.get(locations.size() - 1));
 						}
 					}
