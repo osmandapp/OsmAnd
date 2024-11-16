@@ -6047,4 +6047,8 @@
     <string name="obd_fuel_consumption_desc">Menunjukkan tingkat penggunaan bahan bakar oleh mesin, dihitung berdasarkan sisa bahan bakar, ukuran tangki, dan jarak yang ditempuh sebagaimana ditentukan oleh GPS.</string>
     <string name="obd_speed_desc">Menampilkan kecepatan dari Sensor Kecepatan Kendaraan (VSS).</string>
     <string name="obd_air_intake_temp_desc">Menunjukkan suhu udara yang masuk ke masukan manifold mesin.</string>
+    <string name="av_audio_sample_rate">Laju sampel audio</string>
+    <string name="av_audio_sample_rate_descr">Pilih laju sampel audio.</string>
+    <string name="auto_zoom_3d_angle">Perbesar sudut 3D otomatis</string>
+    <string name="connect_new_scanner">Hubungkan pemindai baru</string>
 </resources>

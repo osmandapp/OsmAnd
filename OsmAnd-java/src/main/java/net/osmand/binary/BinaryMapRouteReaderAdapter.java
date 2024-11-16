@@ -198,13 +198,30 @@ public class BinaryMapRouteReaderAdapter {
 			return 0;
 		}
 
+		public Integer getMaxIntegerConditionalValue() {
+			if (conditional()) {
+				int maxValue = Integer.MIN_VALUE;
+				for (RouteTypeCondition c : conditions) {
+					try {
+						int value = Integer.parseInt(c.value);
+						if (value > maxValue) {
+							maxValue = value;
+						}
+					} catch(NumberFormatException e) {
+						continue;
+					}
+				}
+				return maxValue > Integer.MIN_VALUE ? maxValue : null;
+			}
+			return null;
+		}
+
 		public float maxSpeed(int profile) {
 			if (type == (MAXSPEED + profile)) {
 				return floatValue;
 			}
 			return -1;
 		}
-		
 
 		public int lanes() {
 			if (type == LANES) {

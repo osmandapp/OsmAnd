@@ -463,6 +463,12 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		}
 	}
 
+
+	@Nullable
+	public Rect getVisibleArea() {
+		return visibleArea;
+	}
+
 	public double getVisibleAreaWidth() {
 		return visibleArea != null ? visibleArea.width() : 0f;
 	}

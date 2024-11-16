@@ -4898,4 +4898,7 @@
     <string name="poi_activities_running">Трчање</string>
     <string name="poi_activities_fitness">Стазе за трчање</string>
     <string name="poi_activities_inline_skates">Котураљке</string>
+    <string name="poi_name_etymology">Етимологија имена</string>
+    <string name="poi_name_left">Назив леве стране</string>
+    <string name="poi_name_right">Назив десне стране</string>
 </resources>

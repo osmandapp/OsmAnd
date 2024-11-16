@@ -160,19 +160,11 @@ public class OsmAndFormatter {
 		return formattedTime;
 	}
 
-	public static String getFormattedTimeShort(long seconds, boolean useCurrentTime, boolean shouldShowDay) {
-		Calendar calendar = Calendar.getInstance();
-		if (useCurrentTime) {
-			calendar.setTimeInMillis(System.currentTimeMillis() + seconds * 1000);
-		} else {
-			calendar.setTimeInMillis(seconds * 1000);
-		}
-		Date date = calendar.getTime();
-		String formattedTime = shortTimeFormatter.format(date, twelveHoursFormat);
-		if (shouldShowDay) {
-			formattedTime += " " + localDaysStr[calendar.get(Calendar.DAY_OF_WEEK)];
-		}
-		return formattedTime;
+	public static String getFormattedTimeRuntime(int seconds) {
+		int totalMinutes = (seconds / 60);
+		int hours = totalMinutes / 60;
+		int minutes = totalMinutes % 60;
+		return String.format(Locale.US, "%d:%02d", hours, minutes);
 	}
 
 	public static DateFormat getDateFormat(@NonNull Context context) {

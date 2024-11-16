@@ -71,7 +71,7 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	protected ButtonAppearanceParams customAppearanceParams;
 
 	protected int strokeWidth;
-	protected int shadowRadius;
+	protected float shadowRadius;
 	protected float shadowPadding;
 
 	protected boolean nightMode;
@@ -112,7 +112,7 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 		this.settings = app.getSettings();
 		this.uiUtilities = app.getUIUtilities();
 		this.strokeWidth = AndroidUtils.dpToPx(context, 1);
-		this.shadowRadius = AndroidUtils.dpToPx(context, 2);
+		this.shadowRadius = AndroidUtils.dpToPxF(context, 2);
 		this.shadowPadding = AndroidUtils.dpToPxF(context, 4);
 		this.imageView = setupImageView(context, attrs, defStyleAttr, defStyleRes);
 
@@ -365,13 +365,17 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 
 	protected void drawShadow(@NotNull Canvas canvas) {
 		canvas.save();
+
+		int width = getWidth();
+		int height = getHeight();
+		int padding = (int) shadowPadding;
 		int radius = AndroidUtils.dpToPx(getContext(), appearanceParams.getCornerRadius());
+
 		clipPath.reset();
-		clipPath.addRoundRect(shadowPadding, shadowPadding, getWidth() - shadowPadding,
-				getHeight() - shadowPadding, radius, radius, Direction.CW);
+		clipPath.addRoundRect(padding, padding, width - padding, height - padding, radius, radius, Direction.CW);
 
 		canvas.clipPath(clipPath, DIFFERENCE);
-		shadowDrawable.setBounds(0, 0, getRight() - getLeft(), getBottom() - getTop());
+		shadowDrawable.setBounds(0, 0, width, height);
 		shadowDrawable.draw(canvas);
 		canvas.restore();
 	}
@@ -412,7 +416,7 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	}
 
 	public float getFrameSize() {
-		return getImageSize() + shadowPadding * 2;
+		return (int) getImageSize() + ((int) shadowPadding) * 2;
 	}
 
 	public float getImageSize() {

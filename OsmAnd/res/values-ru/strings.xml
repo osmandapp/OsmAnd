@@ -608,7 +608,7 @@
     <string name="poi_filter_custom_filter">Пользовательский фильтр</string>
     <string name="poi_filter_food_shop">Продуктовые магазины</string>
     <string name="poi_filter_for_tourists">Для туристов</string>
-    <string name="poi_filter_fuel">Заправки</string>
+    <string name="poi_filter_fuel">Топливо</string>
     <string name="poi_filter_namefinder">NameFinder (Интернет)</string>
     <string name="reading_cached_tiles">Чтение кеша карт…</string>
     <string name="version_index_is_big_for_memory">Недостаточно памяти для локальной карты «{0}»</string>
@@ -6076,4 +6076,7 @@
     <string name="obd_fuel_pressure_desc">Виджет показывает давление в топливной системе</string>
     <string name="obd_air_intake_temp_desc">Виджет показывает температуру воздуха, поступающего во впускной коллектор двигателя.</string>
     <string name="preview_next_turn">Предпросмотр следующего поворота</string>
+    <string name="connect_new_scanner">Подключить новый сканер</string>
+    <string name="vehicle_metrics_recording_description">Выберите параметры, которые необходимо записать в GPX-файл.</string>
+    <string name="shared_string_engine">Двигатель</string>
 </resources>

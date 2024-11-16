@@ -5872,7 +5872,7 @@
     <string name="release_4_9">• Vollbild-Galerie-Viewer für Wikimedia-Bilder hinzugefügt\n\n • Neue Erweiterung „Fahrzeugdaten“ zur Überwachung der Fahrzeugleistung unter Verwendung des OBD-II-Protokolls eingeführt\n\n • Möglichkeit hinzugefügt, Aktivitäten zu Spuren zuzuordnen und sie entsprechend zu filtern\n\n • Neue Schnellaktionen für die Aufzeichnung von Fahrten und die Touchscreen-Sperre implementiert\n\n • Anpassbare Kartenschaltfläche und präzises Raster eingeführt\n\n • Kontextmenü und Aktion „Durchschnittsgeschwindigkeit zurücksetzen“ zu Widgets hinzugefügt\n\n • Neue Routenebene „Dirtbike-Strecken“ hinzugefügt\n\n • „Automatische Aufzeichnung des Tracks während der Navigation“ korrigiert\n\n • Problem mit umgedrehten Koordinaten in RTL behoben\n\n • Fehlende Sensordaten für die aktuell aufgezeichnete Strecke behoben\n\n • Informationen über die Umgebung des ausgewählten Punktes hinzugefügt\n\n • Schnellaktion zur Kontrolle der Sichtbarkeit von OSM-Bearbeitungen hinzugefügt\n\n • Sichtbarkeitsparameter für die Terrain-Einfärbungsoptionen separiert\n\n • Antippbares Symbol hinzugefügt, um Zufahrtswege oder andere Straßen- oder Pfadattribute anzuzeigen</string>
     <string name="screen_is_locked_by_external_button">Der Touchscreen ist gesperrt. Um die Sperre aufzuheben, drücken Sie die Taste %1$s oder tippen Sie auf die Schaltfläche auf dem Bildschirm.</string>
     <string name="screen_is_unlocked">Der Touchscreen ist entsperrt.</string>
-    <string name="screen_is_locked_by_action_button">Der Touchscreen ist gesperrt. Tippen Sie zum Entsperren auf die Schaltfläche.</string>
+    <string name="screen_is_locked_by_action_button">Der Touchscreen ist gesperrt. Tippe zum Entsperren auf die Schaltfläche.</string>
     <string name="connect_obd_instructions_step1">Den Scanner an den OBD-II-Anschluss Ihres Fahrzeugs anschließen.</string>
     <string name="connect_obd_instructions_step2">Den Motor Ihres Fahrzeugs einschalten</string>
     <string name="learn_more_about_obd_sensors">Mehr über Sensoren erfahren.</string>
@@ -5967,4 +5967,10 @@
     <string name="obd_engine_runtime_desc">Zeigt an, wie lange der Motor seit dem Starten gelaufen ist.</string>
     <string name="obd_throttle_position">Drosselklappenstellung</string>
     <string name="shared_string_volume">Menge</string>
+    <string name="av_audio_sample_rate">Audio-Samplerate</string>
+    <string name="av_audio_sample_rate_descr">Wähle die Audio- Samplerate.</string>
+    <string name="connect_new_scanner">Neuen Scanner verbinden</string>
+    <string name="preview_next_turn">Vorschau der nächsten Abbiegung</string>
+    <string name="auto_zoom_3d_angle">Autozoom 3D-Winkel</string>
+    <string name="shared_string_engine">Motor</string>
 </resources>

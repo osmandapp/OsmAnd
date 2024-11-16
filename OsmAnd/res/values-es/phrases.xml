@@ -4895,4 +4895,7 @@
     <string name="poi_route_track">Otras rutas</string>
     <string name="poi_route_track_point">Otros puntos de la ruta</string>
     <string name="poi_activities_skiing">Deportes de invierno</string>
+    <string name="poi_name_left">Nombre en el lado izquierdo</string>
+    <string name="poi_name_etymology">Etimología del nombre</string>
+    <string name="poi_name_right">Nombre en el lado derecho</string>
 </resources>

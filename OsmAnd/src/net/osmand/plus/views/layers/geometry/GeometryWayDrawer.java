@@ -280,7 +280,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 
 		builder.setShouldShowArrows(showPathBitmaps);
 		if (pathBitmap != null) {
-			builder.setScreenScale(1f)
+			builder.setScreenScale(getContext().getDensity())
 					.setPathIconStep(bitmapStep)
 					.setPathIcon(NativeUtilities.createSkImageFromBitmap(pathBitmap))
 					.setPathIconOnSurface(bitmapOnSurface);

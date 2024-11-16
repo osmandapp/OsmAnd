@@ -14,43 +14,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.NativeLibrary.RenderedObject;
-import net.osmand.core.jni.ElevationConfiguration;
+import net.osmand.core.jni.*;
 import net.osmand.core.jni.ElevationConfiguration.SlopeAlgorithm;
 import net.osmand.core.jni.ElevationConfiguration.VisualizationStyle;
-import net.osmand.core.jni.GeoTiffCollection;
 import net.osmand.core.jni.IGeoTiffCollection.RasterType;
-import net.osmand.core.jni.IMapTiledSymbolsProvider;
-import net.osmand.core.jni.IObfsCollection;
-import net.osmand.core.jni.IRasterMapLayerProvider;
-import net.osmand.core.jni.MapObject;
-import net.osmand.core.jni.MapObjectList;
-import net.osmand.core.jni.MapObjectsSymbolsProvider;
-import net.osmand.core.jni.MapPresentationEnvironment;
 import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
-import net.osmand.core.jni.MapPrimitivesProvider;
 import net.osmand.core.jni.MapPrimitivesProvider.Mode;
-import net.osmand.core.jni.MapPrimitiviser;
-import net.osmand.core.jni.MapRasterLayerProvider_Software;
-import net.osmand.core.jni.MapStylesCollection;
-import net.osmand.core.jni.ObfMapObject;
-import net.osmand.core.jni.ObfMapObjectsProvider;
-import net.osmand.core.jni.ObfsCollection;
-import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.QListFloat;
-import net.osmand.core.jni.QListPointI;
-import net.osmand.core.jni.QStringList;
-import net.osmand.core.jni.QStringStringHash;
-import net.osmand.core.jni.QVectorPointI;
-import net.osmand.core.jni.ResolvedMapStyle;
-import net.osmand.core.jni.SqliteHeightmapTileProvider;
-import net.osmand.core.jni.SwigUtilities;
-import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
-import net.osmand.osm.AbstractPoiType;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
@@ -87,7 +59,7 @@ public class MapRendererContext {
 	public static final int OBF_CONTOUR_LINES_RASTER_LAYER = 6000;
 	public static final int OBF_SYMBOL_SECTION = 1;
 	public static final int WEATHER_CONTOURS_SYMBOL_SECTION = 2;
-	private static boolean IGNORE_CORE_PRELOADED_STYLES = false; // enable to debug default.render.xml changes
+	public static boolean IGNORE_CORE_PRELOADED_STYLES = false; // enable to debug default.render.xml changes
 
 	private final OsmandApplication app;
 
