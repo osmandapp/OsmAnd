@@ -1,7 +1,5 @@
 package net.osmand.plus.auto.screens
 
-import android.graphics.Rect
-import android.util.Log
 import androidx.car.app.CarContext
 import androidx.car.app.Screen
 import androidx.car.app.constraints.ConstraintManager
