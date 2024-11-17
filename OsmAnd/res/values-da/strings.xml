@@ -689,7 +689,7 @@
     <string name="poi_error_io_error_template">I/O-fejl under udførelsen af handling {0}.</string>
     <string name="poi_error_unexpected_template">Kunne ikke udføre handling {0}.</string>
     <string name="poi_action_succeded_template">Handling {0} fuldført.</string>
-    <string name="poi_action_change">ændre</string>
+    <string name="poi_action_change">skift</string>
     <string name="poi_action_add">tilføj</string>
     <string name="poi_remove_success">Slettet</string>
     <string name="poi_remove_title">Slet interessepunkt</string>
@@ -2177,7 +2177,7 @@
 \n • Antarktis: *  
 \n De fleste lande i verden kan hentes!  
 \n Få pålidelig navigation - det være sig Frankrig, Tyskland, Mexico, Storbritannien, Spanien, Holland, USA, Rusland, Brasilien eller andre.</string>
-    <string name="osmand_plus_extended_description_part7">Bidrag direkte til OSM   \n • Rapporter fejl i data   \n • Overfør GPX-spor direkte til OSM   \n • Tilføj IP\'er og overfør dem direkte til OSM (eller senere, hvis offline)   \n • Valgfri turoptagelse også i baggrundstilstand (mens enheden er i dvaletilstand) \n  OsmAnd er aktivt udviklet Open source-software. Alle kan bidrage til appen ved rapporterer programfejl, forbedre oversættelser eller kodning nye funktioner. Derudover er projektet afhængig af økonomiske bidrag til finansiering af kodning og afprøvning af nye funktionaliteter</string>
+    <string name="osmand_plus_extended_description_part7">Bidrag direkte til OSM   \n • Rapporter fejl i data   \n • Overfør GPX-spor direkte til OSM   \n • Tilføj IP\'er og overfør dem direkte til OSM (eller senere, hvis offline)   \n • Valgfri turoptagelse også i baggrundstilstand (mens enheden er i dvaletilstand) \n  OsmAnd er aktivt udviklet Open source-software. Alle kan bidrage til appen ved rapporterer programfejl, forbedre oversættelser eller kodning nye funktioner. Derudover er projektet afhængig af økonomiske bidrag til finansiering af kodning og afprøvning af nye funktionaliteter.</string>
     <string name="osmand_extended_description_part2">GPS-navigation \n • Vælg mellem offline (ingen roamingtakster i udlandet) eller online (hurtigere) tilstand \n • Sving-for-sving stemmevejledning (indspillet og syntetiseret stemmer) \n • Rutens genberegnes ved afvigelse   \n • Banevejledning, gadenavne, og forventet ankomsttidspunkt vil hjælpe undervejs \n • For at gøre rejsen mere sikker, skifter dag-/nat-tilstand automatisk \n • Vælg at vise hastighedsgrænser, og få påmindelser, hvis de overskrides \n • Kortzoom tilpasser sig hastigheden \n • Søg destination efter adresse, efter type (fx: parkering, restaurant, hotel, tankstation, museum), eller ved geografiskekoordinater \n • Understøtter mellemliggende punkter på ruten \n • Optag eller overfør et GPX-spor og følg det</string>
     <string name="osmand_extended_description_part3">Kort \n • Viser IP\'er (interessepunkter) i nærheden \n • Justerer kortet til bevægelsesretning (eller kompas) \n • Viser hvor man er og hvad der kigges på \n • Del placering, så andre kan finde dig \n • Gem vigtige steder i \'Favoritter\' \n • Giver mulighed for at vælge, hvordan navne vises på kortet: på engelsk, lokal eller fonetisk stavemåde . \n• Viser specialiserede online kortfliser, satellitvisning (fra Bing), forskellige overlejringer som touring/navigation GPX-spor og yderligere lag med tilpasselig gennemsigtighed</string>
     <string name="osmand_extended_description_part4">Skikort 
@@ -2195,14 +2195,7 @@
 \n OsmAnd+ er den betalte appversion. Ved køb af denne støtter du projektet og udviklingen af nye funktioner, og modtager de seneste opdateringer.
 \n
 \n Nogle af de vigtigste funktioner:</string>
-    <string name="osmand_plus_extended_description_part2">Navigation
-\n  • Arbejder online (hurtig) eller offline (ingen roamingtakster, i udlandet)
-\n  • Sving-for-sving stemmevejledning (indspillede og syntetiseret stemmer)
-\n  • Valgfri vognbaneskift, gadenavn visning, og forventet ankomsttidspunkt
-\n  • Understøtter mellemliggende punkter på ruten
-\n  • Automatisk genberegning, ved afvigelse fra ruten
-\n  • Søg efter steder efter adresse, efter type (fx: restaurant, hotel, tankstation, museum), eller ved geografiske koordinater
-\n</string>
+    <string name="osmand_plus_extended_description_part2">"Navigation \n  • Arbejder online (hurtig) eller offline (ingen roamingtakster, i udlandet) \n  • Sving-for-sving stemmevejledning (indspillede og syntetiseret stemmer) \n  • Valgfri vognbaneskift, gadenavn visning, og forventet ankomsttidspunkt \n  • Understøtter mellemliggende punkter på ruten \n  • Automatisk genberegning, ved afvigelse fra ruten \n  • Søg efter steder efter adresse, efter type (fx: restaurant, hotel, tankstation, museum), eller ved geografiske koordinater "</string>
     <string name="osmand_plus_extended_description_part3">Kortvisning   \n • Vis position og orientering   \n • Juster eventuelt kortet efter kompas eller bevægelsesretning   \n • Gem de vigtigste steder som foretrukne   \n • Vis IP\'er (interessepunktr) i nærheden   \n • Vis specialiserede online kortfliser, satellitvisning (fra Bing), forskellige overlejringer som touring/navigation GPX-spor og yderligere lag med justerbar gennemsigtighed   \n • Vis valgfrit stednavne på engelsk, lokal eller fonetisk stavemåde</string>
     <string name="osmand_plus_extended_description_part4">Brug OSM og Wikipedia data  
 \n • Information af høj kvalitet fra de bedste samarbejdsprojekter i verden  
@@ -2914,7 +2907,7 @@
     <string name="shared_string_crash">Nedbrud</string>
     <string name="last_launch_crashed">Sidste kørsel af OsmAnd mislykkedes. Hjælp med at forbedre OsmAnd ved at dele fejlmeddelelsen.</string>
     <string name="app_mode_ufo">UFO</string>
-    <string name="release_3_4">• App-profiler: opret en brugerdefineret profil med en brugerdefineret ikon og farve \n \n • Tilpas enhver profilers standard- og min/max hastigheder \n \n • Tilføjet et modul til de aktuelle koordinater \n \n • Tilføjede muligheder for at vise kompasset og en radiuslineal på kortet \n \n • Rettet logføring af baggrundsspor \n \n • Forbedret hentning af kort i baggrunden \n \n • Rettet Wikipedia sprogvalg \n \n • Rettet kompasknappens opførsel under navigationen \n \n • Andre fejlrettelser</string>
+    <string name="release_3_4">• App-profiler: opret en brugerdefineret profil med en brugerdefineret ikon og farve\n\n • Tilpas enhver profilers standard- og min/max hastigheder\n\n •Tilføjet et modul til de aktuelle koordinater\n\n • Tilføjede muligheder for at vise kompasset og en radiuslineal på kortet\n\n • Rettet logføring af baggrundsspor\n\n • Forbedret hentning af kort i baggrunden\n\n • Returned \'Turn screen on\' option\n\n • Rettet Wikipedia sprogvalg\n\n • Rettet kompasknappens opførsel under navigationen\n\n • Andre fejlrettelser</string>
     <string name="app_mode_personal_transporter">Person transport</string>
     <string name="app_mode_monowheel">Monohjul</string>
     <string name="app_mode_scooter">Scooter</string>
@@ -5544,7 +5537,7 @@
     <string name="obd_fuel_type_bifuel_electric_combustion">To-brændstofkøretøj, der kører på el- og forbrændingsmotor</string>
     <string name="obd_fuel_type_bifuel_hydrogen">To-brændstofkøretøj, der kører på brint</string>
     <string name="shared_string_obd">OBD (Diagnoseudtag)</string>
-    <string name="obd_speed_desc">Viser hastighed fra køretøjets hastighedssensor (VVS)</string>
+    <string name="obd_speed_desc">Viser hastighed fra køretøjets hastighedssensor (VVS).</string>
     <string name="obd_rpm_desc">Viser køretøjets omdrejningstæller O/M via OBD-sensor</string>
     <string name="obd_air_intake_temp_desc">Viser temperaturen på den luft, der kommer ind i motorens indsugningsmanifold.</string>
     <string name="obd_rpm">O/M</string>
@@ -5605,7 +5598,7 @@
     <string name="obd_vehicle_info">Info om køretøj</string>
     <string name="obd_how_to_connect">Sådan får du forbindelse:</string>
     <string name="connect_obd_instructions_step1">Tilslut scanneren til køretøjets OBD-II-stik.</string>
-    <string name="connect_obd_instructions_step4">Tryk på \"Opret forbindelse,\" og vælg din scanner på listen.</string>
+    <string name="connect_obd_instructions_step4">Tryk på \'%1$s,\' og vælg din scanner på listen.</string>
     <string name="learn_more_about_obd_sensors">Få mere at vide om sensorer.</string>
     <string name="obd_fuel_left_liters">Resterende brændstof (liter)</string>
     <string name="route_guidance_desc">Giver rutevejledning i realtid, herunder afstand til næste sving, vejnavn, aktuelt gadenavn og oplysninger om vognbane. Moduler er aktive under navigation.</string>
@@ -5684,7 +5677,7 @@
     <string name="obd_engine_runtime_desc">Viser, hvor længe motoren har kørt, siden den blev startet.</string>
     <string name="obd_calculated_engine_load">Beregnet motorbelastning</string>
     <string name="obd_calculated_engine_load_desc">Viser den procentdel af motorens tilgængelige effekt, der bruges på et givet tidspunkt.</string>
-    <string name="obd_engine_oil_temperature">Temperatur på motorolien.</string>
+    <string name="obd_engine_oil_temperature">Temperatur på motorolien</string>
     <string name="obd_engine_oil_temperature_desc">Viser temperaturen på motorolien.</string>
     <string name="obd_ambient_air_temp_desc">Viser temperaturen uden for køretøjet.</string>
     <string name="obd_battery_voltage_desc">Viser spændingsniveauet på køretøjets batteri</string>
@@ -5695,4 +5688,6 @@
     <string name="auto_zoom_3d_angle">Auto-zoom 3D-vinkel</string>
     <string name="shared_string_engine">Motor</string>
     <string name="vehicle_metrics_recording_description">Vælg de parametre, der skal registreres i GPX-filen.</string>
+    <string name="obd_throttle_position">Gasspjældets position</string>
+    <string name="obd_throttle_position_desc">Viser vinklen på gasspjældspladen i gasspjældshuset.</string>
 </resources>

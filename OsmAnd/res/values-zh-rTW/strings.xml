@@ -692,7 +692,7 @@
     <string name="loading_postcodes">正在載入郵遞區號…</string>
     <string name="loading_streets">正在載入街道…</string>
     <string name="loading_cities">正在載入縣市…</string>
-    <string name="poi">POI</string>
+    <string name="poi">興趣點</string>
     <string name="error_occurred_saving_gpx">無法儲存 GPX 檔案。</string>
     <string name="error_calculating_route">無法計算路線。</string>
     <string name="error_calculating_route_occured">無法計算路線。</string>
@@ -1003,7 +1003,7 @@
     <string name="about_settings_descr">版本訊息、授權、專案成員</string>
     <string name="base_world_map">全球底圖</string>
     <string name="map_magnifier">地圖放大鏡</string>
-    <string name="auto_zoom_none">不自動縮放</string>
+    <string name="auto_zoom_none">不要自動縮放</string>
     <string name="auto_zoom_close">近距</string>
     <string name="auto_zoom_far">中距</string>
     <string name="auto_zoom_farthest">遠距</string>
@@ -4365,7 +4365,7 @@
     <string name="routing_attr_avoid_4wd_only_name">避開四輪驅動道路</string>
     <string name="colour_of_circles">圓圈顏色</string>
     <string name="compass_on_circles">圓圈上的指南針</string>
-    <string name="distance_circles">距離圓圈</string>
+    <string name="distance_circles">距離-圓圈</string>
     <string name="circle_settings">圓圈設定</string>
     <string name="routing_attr_allow_private_for_truck_description">允許卡車進入私人區域。</string>
     <string name="routing_attr_allow_private_for_truck_name">允許私人進入（卡車）</string>
@@ -5672,4 +5672,6 @@
     <string name="av_audio_sample_rate">音訊採樣速率</string>
     <string name="auto_zoom_3d_angle">自動縮放 3D 角度</string>
     <string name="av_audio_sample_rate_descr">選取音訊採樣速率。</string>
+    <string name="vehicle_metrics_recording_description">選擇要在 GPX 檔案記錄的參數。</string>
+    <string name="shared_string_engine">引擎</string>
 </resources>
