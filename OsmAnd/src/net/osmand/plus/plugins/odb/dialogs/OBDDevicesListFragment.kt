@@ -198,7 +198,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	}
 
 	override fun onDisconnect(device: BTDeviceInfo) {
-		vehicleMetricsPlugin?.disconnect()
+		vehicleMetricsPlugin?.disconnect(true)
 	}
 
 	override fun onConnect(device: BTDeviceInfo) {
