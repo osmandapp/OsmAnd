@@ -146,6 +146,7 @@ public class TripHelper {
 				timeDistances = new AnnounceTimeDistances(routingHelper.getAppMode(), app);
 			}
 			// Do not show too far
+			// (nextTurnDistance != nextDirInfo.distanceTo && nextDirInfo.distanceTo > 150))
 			if (nextDirInfo.directionInfo.getTurnType() == null ||
 					timeDistances.tooFarToDisplayLanes(nextDirInfo.directionInfo.getTurnType(), nextDirInfo.distanceTo)) {
 				lanes = null;

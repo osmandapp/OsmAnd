@@ -285,8 +285,6 @@ public class AnnounceTimeDistances {
 		return builder;
 	}
 
-	public boolean
-
 	private void makeBold(SpannableStringBuilder b, String word) {
 		int end = b.length();
 		int start = end - word.length();
