@@ -59,9 +59,7 @@ import net.osmand.plus.auto.screens.SettingsScreen;
 import net.osmand.plus.helpers.LocationCallback;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.RestoreNavigationHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.routing.IRouteInformationListener;
@@ -292,15 +290,14 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		if (ACTION_NAVIGATE.equals(action)) {
 			CarToast.makeText(getCarContext(), "Navigation intent: " + intent.getDataString(), CarToast.LENGTH_LONG).show();
 		}
-		landingScreen = new LandingScreen(getCarContext(), settingsAction);
 
+		landingScreen = new LandingScreen(getCarContext(), settingsAction);
 		OsmandApplication app = getApp();
 		if (!InAppPurchaseUtils.isAndroidAutoAvailable(app)) {
 			getCarContext().getCarService(ScreenManager.class).push(landingScreen);
 			requestPurchaseScreen = new RequestPurchaseScreen(getCarContext());
 			return requestPurchaseScreen;
 		}
-
 		if (!isLocationPermissionAvailable()) {
 			getCarContext().getCarService(ScreenManager.class).push(landingScreen);
 			return new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback);
@@ -420,8 +417,10 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	}
 
 	private void createNavigationScreen() {
-		navigationScreen = new NavigationScreen(getCarContext(), settingsAction, this);
-		navigationCarSurface.setCallback(navigationScreen);
+		if (navigationScreen == null) {
+			navigationScreen = new NavigationScreen(getCarContext(), settingsAction, this);
+			navigationCarSurface.setCallback(navigationScreen);
+		}
 	}
 
 	@Override
