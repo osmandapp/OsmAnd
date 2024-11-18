@@ -4,6 +4,7 @@ import static net.osmand.plus.settings.enums.CompassMode.COMPASS_DIRECTION;
 import static net.osmand.plus.settings.enums.CompassMode.MANUALLY_ROTATED;
 import static net.osmand.plus.settings.enums.CompassMode.NORTH_IS_UP;
 import static net.osmand.plus.views.AnimateDraggingMapThread.SKIP_ANIMATION_DP_THRESHOLD;
+import static net.osmand.plus.views.OsmandMapTileView.DEFAULT_ELEVATION_ANGLE;
 
 import android.os.AsyncTask;
 import android.view.Display;
@@ -345,7 +346,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				? autoZoomBySpeedHelper.getAutoZoomParams(mapRenderer.getZoom(), autoZoom, fixedZoomDuration)
 				: null;
 
-		int elevationAngle = zoomParams != null ? settings.AUTO_ZOOM_3D_ANGLE.get() : 0;
+		int elevationAngle = 0;
+		if (zoomParams != null && mapView.getElevationAngle() != DEFAULT_ELEVATION_ANGLE) {
+			elevationAngle  = settings.AUTO_ZOOM_3D_ANGLE.get();
+		}
 		mapView.getAnimatedDraggingThread().startMoving(
 				location.getLatitude(), location.getLongitude(), zoomParams,
 				false, rotation, elevationAngle, movingTime, false,
