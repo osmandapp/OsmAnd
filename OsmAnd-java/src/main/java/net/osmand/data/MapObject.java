@@ -391,6 +391,16 @@ public abstract class MapObject implements Comparable<MapObject> {
 	}
 
 	public static boolean isNameLangTag(String tag) {
-		return tag.startsWith("name:") && !(tag.startsWith("name:signed"));
+		if (tag.startsWith("name:")) {
+			// languages code <= 3
+			if (tag.length() <= "name:".length() + 3) {
+				return true;
+			}
+			int l = tag.indexOf("-");
+			if (l <= "name:".length() + 3) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
