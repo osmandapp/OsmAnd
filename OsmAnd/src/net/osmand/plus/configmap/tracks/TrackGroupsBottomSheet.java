@@ -100,7 +100,7 @@ public class TrackGroupsBottomSheet extends BaseBottomSheetDialogFragment {
 				int adapterPosition = holder.getAdapterPosition();
 				if (adapterPosition != RecyclerView.NO_POSITION && target instanceof TracksTabsFragment) {
 					TrackTab tab = trackTabs.get(adapterPosition);
-					((TracksTabsFragment) target).setSelectedTab(tab.getTypeName());
+					((TracksTabsFragment) target).setSelectedTab(tab.getId());
 				}
 				dismiss();
 			});

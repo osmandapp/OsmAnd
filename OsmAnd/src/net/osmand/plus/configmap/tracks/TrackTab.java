@@ -1,5 +1,7 @@
 package net.osmand.plus.configmap.tracks;
 
+import static net.osmand.plus.configmap.tracks.TrackTabType.SMART_FOLDER;
+
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -11,15 +13,14 @@ import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.gpx.data.TracksGroup;
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrackTab implements ComparableTracksGroup {
-
-	public static final String SMART_FOLDER_TAB_NAME_PREFIX = "SMART_FOLDER___";
+public class TrackTab implements TracksGroup, ComparableTracksGroup {
 
 	@NonNull
 	public final TrackTabType type;
@@ -41,13 +42,29 @@ public class TrackTab implements ComparableTracksGroup {
 	public TrackTab(@NonNull SmartFolder smartFolder) {
 		this.directory = null;
 		this.smartFolder = smartFolder;
-		this.type = TrackTabType.SMART_FOLDER;
+		this.type = SMART_FOLDER;
 	}
 
 	public TrackTab(@NonNull TrackTabType type) {
 		this.directory = null;
 		this.smartFolder = null;
 		this.type = type;
+	}
+
+	@NonNull
+	@Override
+	public String getId() {
+		return switch (type) {
+			case FOLDER -> directory != null ? TrackPathUtil.getRelativePath(directory) : "";
+			case SMART_FOLDER -> smartFolder != null ? smartFolder.getId() : "";
+			default -> type.name();
+		};
+	}
+
+	@NonNull
+	@Override
+	public String getName() {
+		return null;
 	}
 
 	@Nullable
@@ -95,15 +112,6 @@ public class TrackTab implements ComparableTracksGroup {
 	}
 
 	@NonNull
-	public String getTypeName() {
-		return switch (type) {
-			case FOLDER -> directory != null ? directory.getName() : "";
-			case SMART_FOLDER -> smartFolder != null ? SMART_FOLDER_TAB_NAME_PREFIX + smartFolder.getDirName() : "";
-			default -> type.name();
-		};
-	}
-
-	@NonNull
 	public List<TrackItem> getTrackItems() {
 		List<TrackItem> trackItems = new ArrayList<>();
 		for (Object object : items) {
@@ -139,6 +147,6 @@ public class TrackTab implements ComparableTracksGroup {
 	@NonNull
 	@Override
 	public String toString() {
-		return "TrackTab{name=" + getTypeName() + "}";
+		return "TrackTab{name=" + getId() + "}";
 	}
 }

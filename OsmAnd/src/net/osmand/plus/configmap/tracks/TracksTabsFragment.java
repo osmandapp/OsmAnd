@@ -277,10 +277,10 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 
 	private void applyPreselectedParams() {
 		if (preselectedTabParams != null) {
-			String tabName = preselectedTabParams.getPreselectedTabName(app, getSortedTrackTabs());
-			TrackTab trackTab = getTab(tabName);
+			String tabId = preselectedTabParams.getPreselectedTabId();
+			TrackTab trackTab = getTab(tabId);
 			if (trackTab != null) {
-				setSelectedTab(tabName);
+				setSelectedTab(tabId);
 
 				if (preselectedTabParams.shouldSelectAll()) {
 					itemsSelectionHelper.onItemsSelected(trackTab.getTrackItems(), true);

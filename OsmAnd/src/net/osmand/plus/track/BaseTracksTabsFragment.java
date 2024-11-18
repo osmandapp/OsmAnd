@@ -174,11 +174,11 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 		return trackTabs.isEmpty() ? null : trackTabs.get(viewPager.getCurrentItem());
 	}
 
-	public void setSelectedTab(@NonNull String name) {
+	public void setSelectedTab(@NonNull String id) {
 		List<TrackTab> trackTabs = getSortedTrackTabs();
 		for (int i = 0; i < trackTabs.size(); i++) {
 			TrackTab tab = trackTabs.get(i);
-			if (Algorithms.stringsEqual(tab.getTypeName(), name)) {
+			if (Algorithms.stringsEqual(tab.getId(), id)) {
 				viewPager.setCurrentItem(i);
 				break;
 			}
@@ -186,9 +186,9 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 	}
 
 	@Nullable
-	public TrackTab getTab(@NonNull String name) {
+	public TrackTab getTab(@NonNull String id) {
 		for (TrackTab trackTab : getSortedTrackTabs()) {
-			if (Algorithms.stringsEqual(name, trackTab.getTypeName())) {
+			if (Algorithms.stringsEqual(id, trackTab.getId())) {
 				return trackTab;
 			}
 		}

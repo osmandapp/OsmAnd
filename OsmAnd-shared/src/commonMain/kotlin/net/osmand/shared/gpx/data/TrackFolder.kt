@@ -37,6 +37,10 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 		lastModified = folder.lastModified
 	}
 
+	override fun getId(): String {
+		return relativePath
+	}
+
 	override fun getName(): String {
 		return GpxHelper.getFolderName(dirFile, false)
 	}

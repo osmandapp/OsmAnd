@@ -8,6 +8,8 @@ import net.osmand.shared.gpx.filters.TrackFilterSerializer
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis
 import net.osmand.shared.util.KCollectionUtils
 
+const val ID_PREFIX = "SMART_FOLDER___"
+
 @Serializable
 class SmartFolder(@Serializable var folderName: String) : TracksGroup, ComparableTracksGroup {
 
@@ -24,6 +26,10 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 
 	@Transient
 	private var folderAnalysis: TrackFolderAnalysis? = null
+
+	override fun getId(): String {
+		return ID_PREFIX + folderName
+	}
 
 	override fun getName() = folderName
 
