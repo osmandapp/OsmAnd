@@ -66,6 +66,7 @@ import okio.sink
 import okio.source
 import org.json.JSONObject
 import java.util.UUID
+import kotlin.jvm.Throws
 
 class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadStatusListener {
 	private var mapActivity: MapActivity? = null
@@ -307,7 +308,6 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 
 	@MainThread
 	fun disconnect(forgetCurrentDeviceConnected: Boolean) {
-		LOG.debug("disconnect $forgetCurrentDeviceConnected")
 		obdDispatcher?.stopReading()
 		val lastConnectedDeviceInfo = connectedDeviceInfo
 		connectedDeviceInfo = null
@@ -355,7 +355,6 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	@SuppressLint("MissingPermission")
 	@MainThread
 	private fun connectToObdInternal(activity: Activity, deviceInfo: BTDeviceInfo) {
-		LOG.debug("connectToObd $deviceInfo reconnectCount $currentReconnectAttempt")
 		if (connectionState != OBDConnectionState.DISCONNECTED) {
 			disconnect(false)
 		}
@@ -363,6 +362,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		if (currentReconnectAttempt <= 0) {
 			return
 		}
+		LOG.debug("connectToObd $deviceInfo reconnectCount $currentReconnectAttempt")
 		if (BLEUtils.isBLEEnabled(activity)) {
 			if (AndroidUtils.hasBLEPermission(activity)) {
 				onConnecting(deviceInfo)
@@ -435,6 +435,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 				socket = connectedDevice.createRfcommSocketToServiceRecord(uuid)
 			}
 
+			@Throws(IOException::class)
 			override fun connect(): Pair<Source, Sink>? {
 				socket?.apply {
 					connect()
