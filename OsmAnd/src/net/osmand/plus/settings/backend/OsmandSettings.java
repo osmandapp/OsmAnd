@@ -318,7 +318,7 @@ public class OsmandSettings {
 		} else if (preference instanceof ListStringPreference listStringPreference) {
 			if (value instanceof List<?> || (value == null && listStringPreference.isNullSupported(mode))) {
 				if (value == null) {
-					listStringPreference.setStringsListForProfile(mode,null);
+					listStringPreference.setStringsListForProfile(mode, null);
 				} else {
 					List<?> list = (List<?>) value;
 					boolean isListOfString = list.stream().allMatch(element -> element instanceof String);
