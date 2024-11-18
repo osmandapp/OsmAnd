@@ -1,10 +1,8 @@
 package net.osmand.shared.util
 
-import kotlinx.coroutines.runBlocking
+import co.touchlab.stately.collections.ConcurrentMutableMap
 import net.osmand.shared.data.KLatLon
 import kotlin.math.*
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
 import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.extensions.toDegrees
 import net.osmand.shared.extensions.toRadians
@@ -490,6 +488,8 @@ object KMapUtils {
 	}
 
 	const val EQUATOR = 1 shl 30
+	const val EARTH_CIRCUMFERENCE = EARTH_RADIUS_A * PI * 2;
+	const val HALF_EARTH_CIRCUMFERENCE = EARTH_CIRCUMFERENCE / 2;
 	fun squareDist31TileMetric(x1: Int, y1: Int, x2: Int, y2: Int): Double {
 		val top1 = y1 > EQUATOR
 		val top2 = y2 > EQUATOR
@@ -497,53 +497,52 @@ object KMapUtils {
 			val mx = x1 / 2 + x2 / 2
 			val d1 = sqrt(squareDist31TileMetric(mx, EQUATOR, x2, y2))
 			val d2 = sqrt(squareDist31TileMetric(mx, EQUATOR, x1, y1))
-			return (d1 + d2).pow(2.0)
+			if (d1 + d2 > HALF_EARTH_CIRCUMFERENCE) {
+				return (EARTH_CIRCUMFERENCE - (d1 + d2)).pow(2)
+			} else {
+				return (d1 + d2).pow(2)
+			}
 		}
 		val ymidx = y1 / 2 + y2 / 2
-		val tw = runBlocking { getTileWidth(ymidx) }
+		val tw = getTileWidth(ymidx)
 
 		val dy = (y1 - y2) * tw
 		val dx = (x2 - x1) * tw
-		return dx * dx + dy * dy
+		val xyDist = dx * dx + dy * dy
+
+		if (xyDist > HALF_EARTH_CIRCUMFERENCE.pow(2)) {
+			return (EARTH_CIRCUMFERENCE - sqrt(xyDist)).pow(2);
+		} else {
+			return xyDist
+		}
 	}
 
 	private const val PRECISION_ZOOM = 14
-	private val DIST_CACHE = mutableMapOf<Int, Double>()
-	private val distCacheMutex = Mutex()
-	private suspend fun getTileWidth(y31: Int): Double {
+	private val DIST_CACHE = ConcurrentMutableMap<Int, Double>()
+	private fun getTileWidth(y31: Int): Double {
 		val y = y31 / (1.0 * (1 shl (31 - PRECISION_ZOOM)))
 		var tileY = y.toInt()
 		val ry = y - tileY
 		var d: Double? = null
 		var dp: Double? = null
-		try {
-			d = DIST_CACHE[tileY]
-		} catch (e: RuntimeException) {
-		}
+		d = DIST_CACHE[tileY]
 		if (d == null) {
-			distCacheMutex.withLock {
-				val td = getTileDistanceWidth(
-					get31LatitudeY(tileY shl (31 - PRECISION_ZOOM)),
-					PRECISION_ZOOM.toDouble()
-				) / (1 shl (31 - PRECISION_ZOOM))
-				d = td
-				DIST_CACHE[tileY] = td
-			}
+			val td = getTileDistanceWidth(
+				get31LatitudeY(tileY shl (31 - PRECISION_ZOOM)),
+				PRECISION_ZOOM.toDouble()
+			) / (1 shl (31 - PRECISION_ZOOM))
+			d = td
+			DIST_CACHE[tileY] = td
 		}
 		tileY += 1
-		try {
-			dp = DIST_CACHE[tileY]
-		} catch (_: RuntimeException) {
-		}
+		dp = DIST_CACHE[tileY]
 		if (dp == null) {
-			distCacheMutex.withLock {
-				val tdp = getTileDistanceWidth(
-					get31LatitudeY(tileY shl (31 - PRECISION_ZOOM)),
-					PRECISION_ZOOM.toDouble()
-				) / (1 shl (31 - PRECISION_ZOOM))
-				dp = tdp
-				DIST_CACHE[tileY] = tdp
-			}
+			val tdp = getTileDistanceWidth(
+				get31LatitudeY(tileY shl (31 - PRECISION_ZOOM)),
+				PRECISION_ZOOM.toDouble()
+			) / (1 shl (31 - PRECISION_ZOOM))
+			dp = tdp
+			DIST_CACHE[tileY] = tdp
 		}
 		return ry * dp!! + (1 - ry) * d!!
 	}
@@ -717,5 +716,105 @@ object KMapUtils {
 			dist *= if (iteration % 2 == 1) mult1 else mult2
 		}
 		return dist
+	}
+
+	fun getEllipsoidDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
+		// Based on http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf
+		// using the "Inverse Formula" (section 4)
+		var lat1 = lat1
+		var lon1 = lon1
+		var lat2 = lat2
+		var lon2 = lon2
+		val MAXITERS = 20
+		// Convert lat/long to radians
+		lat1 *= PI / 180.0
+		lat2 *= PI / 180.0
+		lon1 *= PI / 180.0
+		lon2 *= PI / 180.0
+
+		val a = 6378137.0 // WGS84 major axis
+		val b = 6356752.3142 // WGS84 semi-major axis
+		val f = (a - b) / a
+		val aSqMinusBSqOverBSq = (a * a - b * b) / (b * b)
+
+		val L = lon2 - lon1
+		var A = 0.0
+		val U1: Double = atan((1.0 - f) * tan(lat1))
+		val U2: Double = atan((1.0 - f) * tan(lat2))
+
+		val cosU1: Double = cos(U1)
+		val cosU2: Double = cos(U2)
+		val sinU1: Double = sin(U1)
+		val sinU2: Double = sin(U2)
+		val cosU1cosU2 = cosU1 * cosU2
+		val sinU1sinU2 = sinU1 * sinU2
+
+		var sigma = 0.0
+		var deltaSigma = 0.0
+		var cosSqAlpha = 0.0
+		var cos2SM = 0.0
+		var cosSigma = 0.0
+		var sinSigma = 0.0
+		var cosLambda = 0.0
+		var sinLambda = 0.0
+
+		var lambda = L // initial guess
+		for (iter in 0 until MAXITERS) {
+			val lambdaOrig = lambda
+			cosLambda = cos(lambda)
+			sinLambda = sin(lambda)
+			val t1 = cosU2 * sinLambda
+			val t2 = cosU1 * sinU2 - sinU1 * cosU2 * cosLambda
+			val sinSqSigma = t1 * t1 + t2 * t2 // (14)
+			sinSigma = sqrt(sinSqSigma)
+			cosSigma = sinU1sinU2 + cosU1cosU2 * cosLambda // (15)
+			sigma = atan2(sinSigma, cosSigma) // (16)
+			val sinAlpha = if ((sinSigma == 0.0)) 0.0 else cosU1cosU2 * sinLambda / sinSigma // (17)
+			cosSqAlpha = 1.0 - sinAlpha * sinAlpha
+			cos2SM = if ((cosSqAlpha == 0.0)) 0.0 else cosSigma - 2.0 * sinU1sinU2 / cosSqAlpha // (18)
+
+			val uSquared = cosSqAlpha * aSqMinusBSqOverBSq // defn
+			A = 1 + (uSquared / 16384.0) *  // (3)
+					(4096.0 + uSquared *
+							(-768 + uSquared * (320.0 - 175.0 * uSquared)))
+			val B = (uSquared / 1024.0) *  // (4)
+					(256.0 + uSquared *
+							(-128.0 + uSquared * (74.0 - 47.0 * uSquared)))
+			val C = (f / 16.0) *
+					cosSqAlpha *
+					(4.0 + f * (4.0 - 3.0 * cosSqAlpha)) // (10)
+			val cos2SMSq = cos2SM * cos2SM
+			deltaSigma = B * sinSigma *  // (6)
+					(cos2SM + (B / 4.0) *
+							(cosSigma * (-1.0 + 2.0 * cos2SMSq) -
+									(B / 6.0) * cos2SM *
+									(-3.0 + 4.0 * sinSigma * sinSigma) *
+									(-3.0 + 4.0 * cos2SMSq)))
+
+			lambda = L +
+					(1.0 - C) * f * sinAlpha *
+					(sigma + C * sinSigma *
+							(cos2SM + C * cosSigma *
+									(-1.0 + 2.0 * cos2SM * cos2SM))) // (11)
+
+			val delta = (lambda - lambdaOrig) / lambda
+			if (abs(delta) < 1.0e-12) {
+				break
+			}
+		}
+
+//		var initialBearing = atan2(
+//			cosU2 * sinLambda,
+//			cosU1 * sinU2 - sinU1 * cosU2 * cosLambda
+//		) as Double
+//		initialBearing *= (180.0 / PI).toDouble()
+//
+//		var finalBearing = atan2(
+//			cosU1 * sinLambda,
+//			-sinU1 * cosU2 + cosU1 * sinU2 * cosLambda
+//		) as Double
+//		finalBearing *= (180.0 / PI).toDouble()
+
+		return (b * A * (sigma - deltaSigma)).toDouble()
 	}
 }
