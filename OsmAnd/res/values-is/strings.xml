@@ -5552,7 +5552,7 @@
     <string name="obd_how_to_connect">Hvernig skal tengjast:</string>
     <string name="connect_obd_instructions_step1">Tengdu skynjarann við OBD-II gátt farartækisins.</string>
     <string name="connect_obd_instructions_step2">Ræstu vél farartækisins</string>
-    <string name="connect_obd_instructions_step4">Ýttu á \'Tengjast,\' og veldu skynjarann þinn úr listanum.</string>
+    <string name="connect_obd_instructions_step4">Ýttu á \'%1$s,\' og veldu skynjarann þinn úr listanum.</string>
     <string name="learn_more_about_obd_sensors">Læra meira um skynjara.</string>
     <string name="screen_is_locked_by_external_button">Snertiskjárinn er læstur. Til að aflæsa honum skaltu ýta á %1$s-hnappinn eða hnappinn á skjánum.</string>
     <string name="screen_is_unlocked">Snertiskjárinn er ólæstur.</string>
@@ -5640,4 +5640,11 @@
     <string name="shared_strings_dimensions">Stærðir</string>
     <string name="litres">Lítrar</string>
     <string name="us_gallons_unit">gal</string>
+    <string name="vehicle_metrics_recording_description">Veldu breyturnar sem ætti að skrá í GPX-skrána.</string>
+    <string name="auto_zoom_3d_angle">Þrívíddarhorn sjálfvirks aðdráttar</string>
+    <string name="av_audio_sample_rate">Safntíðni hljóðs</string>
+    <string name="av_audio_sample_rate_descr">Veldu safntíðni hljóðs.</string>
+    <string name="connect_new_scanner">Tengja nýjan skynjara</string>
+    <string name="shared_string_engine">Vél</string>
+    <string name="preview_next_turn">Forskoða næstu beygju</string>
 </resources>
