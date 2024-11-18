@@ -24,6 +24,8 @@ object TrackFilterSerializer : KSerializer<List<BaseTrackFilter>?> {
 		} else {
 			val listEncoder = encoder.beginCollection(descriptor, value.size)
 			value.forEach { filter ->
+				//Implementing new filter subclass (child of child of BaseTrackFilter) need to add it to
+				// SmartFolderHelper -> trackFilterSerializersModule in order to serialize correctly
 				listEncoder.encodeSerializableElement(
 					descriptor, 0, BaseTrackFilter.serializer(), filter
 				)

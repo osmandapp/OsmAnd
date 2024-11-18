@@ -2,12 +2,16 @@ package net.osmand.shared.gpx
 
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.modules.SerializersModule
+import kotlinx.serialization.modules.polymorphic
+import kotlinx.serialization.modules.subclass
 import net.osmand.shared.KAsyncTask
 import net.osmand.shared.api.KStateChangedListener
 import net.osmand.shared.api.SettingsAPI
 import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.data.SmartFolder
 import net.osmand.shared.gpx.filters.BaseTrackFilter
+import net.osmand.shared.gpx.filters.FolderTrackFilter
 import net.osmand.shared.gpx.filters.TrackFilterList
 import net.osmand.shared.gpx.filters.TrackFiltersHelper
 import net.osmand.shared.io.KFile
@@ -30,10 +34,17 @@ object SmartFolderHelper {
 		}
 	}
 
+	private val trackFilterSerializersModule = SerializersModule {
+		polymorphic(BaseTrackFilter::class) {
+			subclass(FolderTrackFilter::class)
+		}
+	}
+
 	val json = Json {
 		isLenient = true
 		ignoreUnknownKeys = true
 		classDiscriminator = "className"
+		serializersModule = trackFilterSerializersModule
 	}
 
 	init {
