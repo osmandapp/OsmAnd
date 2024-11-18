@@ -564,6 +564,10 @@ public final class CodedInputStream {
   /** See setSizeLimit() */
   // ! osmand change !
   private long sizeLimit = DEFAULT_SIZE_LIMIT;
+	// FIXME this part not ready to be merged to master (delete)
+  private boolean READ_SEEK;
+  public static int READ_BYTES;
+  public static int READ_BLOCKS;
 
   private static final int DEFAULT_RECURSION_LIMIT = 64;
   // ! osmand change !
@@ -774,6 +778,11 @@ public final class CodedInputStream {
     	bufferSize = (int) Math.min(remain, buffer.length);
     	if(bufferSize > 0) {
     		raf.readFully(buffer, 0, bufferSize);
+			if (READ_SEEK) {
+				READ_BLOCKS++;
+				READ_SEEK = false;
+			}
+    		READ_BYTES += bufferSize;
     	} else {
     		bufferSize = -1;
     	}
@@ -896,6 +905,11 @@ public final class CodedInputStream {
         	final int n;
         	// osmand change
         	if(raf != null) {
+        		READ_BYTES += chunk.length - pos;
+        		if (READ_SEEK) {
+    				READ_BLOCKS++;
+    				READ_SEEK = false;
+    			}
         		raf.readFully(chunk, pos, chunk.length - pos);
         		n = chunk.length - pos;
         	} else {
@@ -960,6 +974,7 @@ public final class CodedInputStream {
       if(raf != null) {
          bufferPos = 0;
          bufferSize = 0;
+         READ_SEEK = true; 
          raf.seek(raf.getFilePointer() + (size - pos));
          totalBytesRetired = raf.getFilePointer();
       } else {
@@ -985,6 +1000,7 @@ public final class CodedInputStream {
 		  }
 		  bufferPos = (int) (pointer - totalBytesRetired);
 	  } else {
+		  READ_SEEK = true;
 		  totalBytesRetired = pointer;
 		  bufferSizeAfterLimit = 0;
 		  raf.seek(pointer);

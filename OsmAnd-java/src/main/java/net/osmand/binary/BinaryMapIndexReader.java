@@ -92,6 +92,7 @@ public class BinaryMapIndexReader {
 	public static final int SHIFT_COORDINATES = 5;
 	public static final int LABEL_ZOOM_ENCODE = 31 - SHIFT_COORDINATES;
 	private final static Log log = PlatformUtil.getLog(BinaryMapIndexReader.class);
+	public static int DEPTH_CACHE = 7;
 	public static boolean READ_STATS = false;
 	public static final SearchPoiTypeFilter ACCEPT_ALL_POI_TYPE_FILTER = new SearchPoiTypeFilter() {
 		@Override
@@ -1115,9 +1116,6 @@ public class BinaryMapIndexReader {
 			SearchRequest<BinaryMapDataObject> req, List<MapTree> foundSubtrees) throws IOException {
 		int init = 0;
 		req.numberOfReadSubtrees++;
-		if (current.depth < 7) {
-			current.children = new ArrayList<>();
-		}
 		while (true) {
 			if (req.isCancelled()) {
 				return;
@@ -1167,7 +1165,9 @@ public class BinaryMapIndexReader {
 				break;
 			case MapDataBox.BOXES_FIELD_NUMBER :
 				// left, ... already initialized
-				
+				if (current.depth < DEPTH_CACHE && current.children == null) {
+					current.children = new ArrayList<>();
+				}
 				MapTree child = new MapTree();
 				child.length = readInt();
 				child.depth = current.depth + 1;
@@ -1179,7 +1179,7 @@ public class BinaryMapIndexReader {
 				searchMapTreeBounds(child, current, req, foundSubtrees);
 				codedIS.popLimit(oldLimit);
 				codedIS.seek(child.filePointer + child.length);
-				if(current.children != null) {
+				if (current.children != null) {
 					current.children.add(child);
 				}
 				break;
