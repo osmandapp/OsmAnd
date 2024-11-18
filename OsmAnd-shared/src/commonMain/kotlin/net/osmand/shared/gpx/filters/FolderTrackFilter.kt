@@ -1,12 +1,15 @@
 package net.osmand.shared.gpx.filters
 
+import kotlinx.serialization.Serializable
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.filters.TrackFilterType.FOLDER
 
-open class FolderTrackFilter(
-	filterChangedListener: FilterChangedListener?
-) :
-	ListTrackFilter(FOLDER, filterChangedListener) {
+@Serializable
+open class FolderTrackFilter : ListTrackFilter {
+
+	constructor(filterChangedListener: FilterChangedListener?) : super(
+		FOLDER,
+		filterChangedListener)
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
 		val trackItemPropertyValue = getTrackPropertyValue(trackItem)
