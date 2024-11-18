@@ -117,43 +117,11 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		mapActivity: MapActivity, widgetsInfos: MutableList<MapWidgetInfo?>,
 		appMode: ApplicationMode) {
 		val creator = WidgetInfoCreator(app, appMode)
-		val speedWidget: MapWidget = createMapWidgetForParams(mapActivity, WidgetType.OBD_SPEED)
-		widgetsInfos.add(creator.createWidgetInfo(speedWidget))
-		val rpmWidget: MapWidget = createMapWidgetForParams(mapActivity, WidgetType.OBD_RPM)
-		widgetsInfos.add(creator.createWidgetInfo(rpmWidget))
-		val airIntakeTempWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_AIR_INTAKE_TEMP)
-		widgetsInfos.add(creator.createWidgetInfo(airIntakeTempWidget))
-		val ambientAirTempWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_AMBIENT_AIR_TEMP)
-		widgetsInfos.add(creator.createWidgetInfo(ambientAirTempWidget))
-		val batteryVoltageWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_BATTERY_VOLTAGE)
-		widgetsInfos.add(creator.createWidgetInfo(batteryVoltageWidget))
-		val remainingFuelWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_REMAINING_FUEL)
-		widgetsInfos.add(creator.createWidgetInfo(remainingFuelWidget))
-		val fuelConsumptionWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_CONSUMPTION)
-		widgetsInfos.add(creator.createWidgetInfo(fuelConsumptionWidget))
-		val engineCoolantTempWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_ENGINE_COOLANT_TEMP)
-		widgetsInfos.add(creator.createWidgetInfo(engineCoolantTempWidget))
-		val engineRuntimeWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_ENGINE_RUNTIME)
-		widgetsInfos.add(creator.createWidgetInfo(engineRuntimeWidget))
-		val fuelPressureWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_PRESSURE)
-		widgetsInfos.add(creator.createWidgetInfo(fuelPressureWidget))
-		val oilTemperatureWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.ENGINE_OIL_TEMPERATURE)
-		widgetsInfos.add(creator.createWidgetInfo(oilTemperatureWidget))
-		val calculatedEngineLoadWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_CALCULATED_ENGINE_LOAD)
-		widgetsInfos.add(creator.createWidgetInfo(calculatedEngineLoadWidget))
-		val throttlePositionWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_THROTTLE_POSITION)
-		widgetsInfos.add(creator.createWidgetInfo(throttlePositionWidget))
+		for (widgetType in WidgetType.getObdTypes()) {
+			val obdWidget: MapWidget =
+				createMapWidgetForParams(mapActivity, widgetType)
+			widgetsInfos.add(creator.createWidgetInfo(obdWidget))
+		}
 	}
 
 	override fun createMapWidgetForParams(
