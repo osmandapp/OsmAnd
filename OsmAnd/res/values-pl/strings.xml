@@ -1937,7 +1937,7 @@
     <string name="access_autoannounce_period_descr">Określa minimalny odstęp czasu pomiędzy powiadomieniami.</string>
     <string name="access_autoannounce_period">Okres powiadomień</string>
     <string name="move_marker_bottom_sheet_title">Proszę przesunąć mapę, aby zmienić położenie znacznika</string>
-    <string name="change_markers_position">Zmień położenie znacznika</string>
+    <string name="change_markers_position">Przesuń znacznik</string>
     <string name="current_track">Bieżąca trasa</string>
     <string name="app_mode_bus">Autobus</string>
     <string name="app_mode_train">Pociąg</string>
@@ -2509,7 +2509,7 @@
     <string name="north_abbreviation">Pn.</string>
     <string name="optional_point_name">Dodatkowa nazwa punktu</string>
     <string name="transport_nearby_routes_within">Najbliższe trasy w obrębie</string>
-    <string name="transport_nearby_routes">W ciągu</string>
+    <string name="transport_nearby_routes">Część obszaru</string>
     <string name="enter_the_file_name">Proszę wprowadzić nazwę pliku.</string>
     <string name="map_import_error">Błąd importowania mapy</string>
     <string name="map_imported_successfully">Zaimportowano mapę</string>
@@ -5740,4 +5740,11 @@
     <string name="rendering_value_managerName_name">Według nazwy menedżera</string>
     <string name="rendering_value_access_name">Według typu dostępu</string>
     <string name="rendering_attr_padusDisplayMode_description">Według typu dostępu lub nazwy menedżera</string>
+    <string name="open_in_browser">Otwórz w przeglądarce</string>
+    <string name="no_photos_available_descr">Użytkownicy nie dodali zdjęć dla tego położenia</string>
+    <string name="shared_string_no_internet_connection">Brak połączenia z Internetem</string>
+    <string name="my_location_action_descr">Wyśrodkowuje mapę na aktualnym położeniu.</string>
+    <string name="shared_string_decrease">Zmniejsz</string>
+    <string name="shared_string_increase">Zwiększ</string>
+    <string name="no_photos_available">Brak dostępnych zdjęć</string>
 </resources>
