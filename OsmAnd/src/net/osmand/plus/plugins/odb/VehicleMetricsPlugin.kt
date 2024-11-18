@@ -66,12 +66,16 @@ import okio.sink
 import okio.source
 import org.json.JSONObject
 import java.util.UUID
+import kotlin.jvm.Throws
 
 class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadStatusListener {
 	private var mapActivity: MapActivity? = null
 
 	private val handler = Handler(Looper.getMainLooper())
 	private val RECONNECT_DELAY = 5000L
+	private val RECONNECT_ATTEMPTS_COUNT = 10
+	private var currentReconnectAttempt = 0
+
 	private var connectionState = OBDConnectionState.DISCONNECTED
 
 	val USED_OBD_DEVICES =
@@ -79,8 +83,9 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	val LAST_CONNECTED_OBD_DEVICE =
 		registerStringPreference("last_connected_obd_device", "").makeGlobal().cache()
 
-	val TRIP_RECORDING_VEHICLE_METRICS : ListStringPreference =
-		registerListStringPreference("trip_recording_vehicle_metrics", null, ";").makeProfile().makeShared() as ListStringPreference
+	val TRIP_RECORDING_VEHICLE_METRICS: ListStringPreference =
+		registerListStringPreference("trip_recording_vehicle_metrics", null, ";").makeProfile()
+			.makeShared() as ListStringPreference
 
 	private val uuid =
 		UUID.fromString("00001101-0000-1000-8000-00805f9b34fb") // Standard UUID for SPP
@@ -260,7 +265,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 
 	private val simulateOBDListener = StateChangedListener<Boolean> { enabled ->
 		if (!enabled) {
-			disconnect()
+			disconnect(true)
 		}
 	}
 
@@ -302,11 +307,13 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	}
 
 	@MainThread
-	fun disconnect() {
+	fun disconnect(forgetCurrentDeviceConnected: Boolean) {
 		obdDispatcher?.stopReading()
 		val lastConnectedDeviceInfo = connectedDeviceInfo
 		connectedDeviceInfo = null
-		setLastConnectedDevice(null)
+		if (forgetCurrentDeviceConnected) {
+			setLastConnectedDevice(null)
+		}
 		onDisconnected(lastConnectedDeviceInfo)
 	}
 
@@ -339,12 +346,23 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		}
 	}
 
-	@SuppressLint("MissingPermission")
 	@MainThread
 	fun connectToObd(activity: Activity, deviceInfo: BTDeviceInfo) {
+		currentReconnectAttempt = RECONNECT_ATTEMPTS_COUNT
+		connectToObdInternal(activity, deviceInfo)
+	}
+
+	@SuppressLint("MissingPermission")
+	@MainThread
+	private fun connectToObdInternal(activity: Activity, deviceInfo: BTDeviceInfo) {
 		if (connectionState != OBDConnectionState.DISCONNECTED) {
-			disconnect()
+			disconnect(false)
 		}
+		currentReconnectAttempt--
+		if (currentReconnectAttempt <= 0) {
+			return
+		}
+		LOG.debug("connectToObd $deviceInfo reconnectCount $currentReconnectAttempt")
 		if (BLEUtils.isBLEEnabled(activity)) {
 			if (AndroidUtils.hasBLEPermission(activity)) {
 				onConnecting(deviceInfo)
@@ -417,16 +435,13 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 				socket = connectedDevice.createRfcommSocketToServiceRecord(uuid)
 			}
 
+			@Throws(IOException::class)
 			override fun connect(): Pair<Source, Sink>? {
-				try {
-					socket?.apply {
-						connect()
-						if (isConnected) {
-							return Pair(inputStream.source(), outputStream.sink())
-						}
+				socket?.apply {
+					connect()
+					if (isConnected) {
+						return Pair(inputStream.source(), outputStream.sink())
 					}
-				} catch (error: IOException) {
-					LOG.error("Can't connect to device. $error")
 				}
 				return null
 			}
@@ -499,8 +514,8 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	}
 
 	override fun onIOError() {
-		handler.post { disconnect() }
 		handler.removeCallbacksAndMessages(null)
+		handler.post { disconnect(false) }
 		handler.postDelayed({ reconnectObd() }, RECONNECT_DELAY)
 	}
 
@@ -508,7 +523,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		mapActivity?.let {
 			val lastConnectedDevice = getLastConnectedDevice()
 			if (connectedDeviceInfo == null && lastConnectedDevice != null) {
-				connectToObd(it, lastConnectedDevice)
+				connectToObdInternal(it, lastConnectedDevice)
 			}
 		}
 	}
@@ -898,11 +913,13 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	override fun attachAdditionalInfoToRecordedTrack(location: Location, json: JSONObject) {
 		super.attachAdditionalInfoToRecordedTrack(location, json)
 		val mode = app.settings.applicationMode
-		val commandNames: List<String>? = TRIP_RECORDING_VEHICLE_METRICS.getStringsListForProfile(mode)
+		val commandNames: List<String>? =
+			TRIP_RECORDING_VEHICLE_METRICS.getStringsListForProfile(mode)
 		val selectedCommands: List<OBDCommand> = commandNames?.mapNotNull {
 			OBDCommand.getCommand(it)
 		} ?: emptyList()
-		if (!Algorithms.isEmpty(selectedCommands) && InAppPurchaseUtils.isVehicleMetricsAvailable(app)) {
+		if (!Algorithms.isEmpty(selectedCommands) && InAppPurchaseUtils.isVehicleMetricsAvailable(
+				app)) {
 			val rawData = obdDispatcher?.getRawData()
 			rawData?.let { data ->
 				for (command in data.keys) {
@@ -924,6 +941,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		super.onCarNavigationSessionCreated()
 		val activity = mapActivity
 		val lastConnectedDevice = getLastConnectedDevice()
+		LOG.debug("onCarNavigationSessionCreated $connectionState $lastConnectedDevice ${activity != null}")
 		if (connectionState == OBDConnectionState.DISCONNECTED && lastConnectedDevice != null && activity != null) {
 			connectToObd(activity, lastConnectedDevice)
 		}
