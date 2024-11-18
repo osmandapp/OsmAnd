@@ -139,6 +139,21 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		val engineCoolantTempWidget: MapWidget =
 			createMapWidgetForParams(mapActivity, WidgetType.OBD_ENGINE_COOLANT_TEMP)
 		widgetsInfos.add(creator.createWidgetInfo(engineCoolantTempWidget))
+		val engineRuntimeWidget: MapWidget =
+			createMapWidgetForParams(mapActivity, WidgetType.OBD_ENGINE_RUNTIME)
+		widgetsInfos.add(creator.createWidgetInfo(engineRuntimeWidget))
+		val fuelPressureWidget: MapWidget =
+			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_PRESSURE)
+		widgetsInfos.add(creator.createWidgetInfo(fuelPressureWidget))
+		val oilTemperatureWidget: MapWidget =
+			createMapWidgetForParams(mapActivity, WidgetType.ENGINE_OIL_TEMPERATURE)
+		widgetsInfos.add(creator.createWidgetInfo(oilTemperatureWidget))
+		val calculatedEngineLoadWidget: MapWidget =
+			createMapWidgetForParams(mapActivity, WidgetType.OBD_CALCULATED_ENGINE_LOAD)
+		widgetsInfos.add(creator.createWidgetInfo(calculatedEngineLoadWidget))
+		val throttlePositionWidget: MapWidget =
+			createMapWidgetForParams(mapActivity, WidgetType.OBD_THROTTLE_POSITION)
+		widgetsInfos.add(creator.createWidgetInfo(throttlePositionWidget))
 	}
 
 	override fun createMapWidgetForParams(
