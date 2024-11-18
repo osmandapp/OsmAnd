@@ -89,7 +89,7 @@ public class OsmAndFormatter {
 	public static final int SWISS_GRID_FORMAT = LocationConvert.SWISS_GRID_FORMAT;
 	public static final int SWISS_GRID_PLUS_FORMAT = LocationConvert.SWISS_GRID_PLUS_FORMAT;
 	private static final char DELIMITER_DEGREES = '°';
-	private static final char DELIMITER_MINUTES = '′';
+	private static final char DELIMITER_MINUTES = '\'';
 	private static final char DELIMITER_SECONDS = '″';
 
 	private static final char NORTH = 'N';
