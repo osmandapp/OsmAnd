@@ -25,6 +25,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
+import net.osmand.IndexConstants;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -305,7 +306,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 	protected void addTrackItem(@NonNull TrackItem item) {
 		trackTabsHelper.addTrackItem(item);
 		updateTrackTabs();
-		setSelectedTab("import");
+		setSelectedTab(IndexConstants.GPX_IMPORT_DIR);
 		updateTabsContent();
 		updateButtonsState();
 	}

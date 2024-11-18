@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.IndexConstants;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
@@ -126,7 +127,7 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 	protected void addTrackItem(@NonNull TrackItem item) {
 		trackTabsHelper.addTrackItem(item);
 		updateTrackTabs();
-		setSelectedTab("import");
+		setSelectedTab(IndexConstants.GPX_IMPORT_DIR);
 		updateTabsContent();
 	}
 
