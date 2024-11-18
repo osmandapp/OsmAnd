@@ -472,4 +472,15 @@ public enum WidgetType {
 	public static String getDuplicateWidgetId(@NonNull String widgetId) {
 		return getDefaultWidgetId(widgetId) + DELIMITER + System.currentTimeMillis();
 	}
+
+	@NonNull
+	public static List<WidgetType> getObdTypes() {
+		List<WidgetType> obdWidgets = new ArrayList<>();
+		for (WidgetType widgetType : values()) {
+			if (VEHICLE_METRICS == widgetType.getGroup()) {
+				obdWidgets.add(widgetType);
+			}
+		}
+		return obdWidgets;
+	}
 }
