@@ -50,6 +50,13 @@ public class TrackSortModesCollection {
 		cachedSortModes.put(id, sortMode);
 	}
 
+	public void replaceKey(@NonNull String oldKey, @NonNull String newKey) {
+		TracksSortMode sortMode = cachedSortModes.remove(oldKey);
+		if (sortMode != null) {
+			cachedSortModes.put(newKey, sortMode);
+		}
+	}
+
 	public void clearSurplusKeys(@NonNull Collection<String> validKeys) {
 		Set<String> keysToClear = new HashSet<>();
 		for (String key : cachedSortModes.keySet()) {
