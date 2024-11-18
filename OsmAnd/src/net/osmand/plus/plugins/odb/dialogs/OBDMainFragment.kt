@@ -49,7 +49,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 	private val handler = Handler(Looper.getMainLooper())
 	private val items = mutableListOf<Any>()
 
-	private var adapter: OBDMainFragmentAdapter? = null
+	private lateinit var adapter: OBDMainFragmentAdapter
 	private var progress: View? = null
 
 	private lateinit var device: BTDeviceInfo
@@ -60,7 +60,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		arguments?.apply {
-			val connectedDevice = vehicleMetricsPlugin?.getConnectedDeviceInfo()
+			val connectedDevice = vehicleMetricsPlugin.getConnectedDeviceInfo()
 			val deviceName = getString(DEVICE_NAME_KEY) ?: ""
 			val deviceAddress = getString(DEVICE_ADDRESS_KEY) ?: ""
 			device = if (connectedDevice != null &&
@@ -107,7 +107,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 	private fun setupList(view: View) {
 		adapter = OBDMainFragmentAdapter(app, nightMode, requireMapActivity(), device, this)
 		view.findViewById<RecyclerView>(R.id.recycler_view)?.adapter = adapter
-		adapter?.items = ArrayList(items)
+		adapter.items = ArrayList(items)
 	}
 
 	private fun setupConnectionState(view: View) {
@@ -168,7 +168,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 				pairBtnTextColorId = connectedStateBtnTextColor
 				pairBtnTextId = R.string.external_device_details_disconnect
 				pairButton.setOnClickListener {
-					vehicleMetricsPlugin?.disconnect()
+					vehicleMetricsPlugin.disconnect()
 				}
 			}
 
@@ -185,7 +185,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 				pairBtnTextColorId = disconnectedStateBtnTextColor
 				pairBtnTextId = R.string.external_device_details_connect
 				pairButton.setOnClickListener {
-					vehicleMetricsPlugin?.connectToObd(requireActivity(), device)
+					vehicleMetricsPlugin.connectToObd(requireActivity(), device)
 				}
 			}
 		}
@@ -260,9 +260,9 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 		items.forEach {
 			if (it is OBDDataItem) {
 				val widget = it.widget
-				val value = vehicleMetricsPlugin?.getWidgetValue(widget)
-				val unit = vehicleMetricsPlugin?.getWidgetUnit(widget)
-				adapter?.let { obdAdapter ->
+				val value = vehicleMetricsPlugin.getWidgetValue(widget)
+				val unit = vehicleMetricsPlugin.getWidgetUnit(widget)
+				adapter.let { obdAdapter ->
 					val savedValue = obdAdapter.lastSavedValueMap[widget]
 					if (!savedValue?.first.equals(value) or !savedValue?.second.equals(unit)) {
 						obdAdapter.notifyItemChanged(
@@ -279,7 +279,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 		super.onResume()
 		updateEnable = true
 		startHandler()
-		vehicleMetricsPlugin?.setConnectionStateListener(this)
+		vehicleMetricsPlugin.setConnectionStateListener(this)
 	}
 
 	private fun startHandler() {
@@ -294,7 +294,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 	override fun onPause() {
 		super.onPause()
 		updateEnable = false
-		vehicleMetricsPlugin?.setConnectionStateListener(null)
+		vehicleMetricsPlugin.setConnectionStateListener(null)
 	}
 
 	companion object {
@@ -321,17 +321,11 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 
 	override fun onNameChanged() {
 		view?.findViewById<TextView>(R.id.device_name)?.text = device.name
-		adapter?.notifyDataSetChanged()
+		adapter.notifyDataSetChanged()
 	}
 
 	override fun onForgetSensorConfirmed(deviceId: String) {
-		vehicleMetricsPlugin?.removeDeviceToUsedOBDDevicesList(deviceId)
+		vehicleMetricsPlugin.removeDeviceToUsedOBDDevicesList(deviceId)
 		view?.let { setupUI(it) }
-	}
-
-	override fun updateNightMode() {
-		super.updateNightMode()
-		adapter?.nightMode = nightMode
-		adapter?.notifyDataSetChanged()
 	}
 }

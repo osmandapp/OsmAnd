@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout.LayoutParams
 import android.widget.LinearLayout.VISIBLE
+import android.widget.LinearLayout.GONE
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +19,7 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
 import net.osmand.plus.plugins.odb.dialogs.ForgetOBDDeviceDialog
 import net.osmand.plus.plugins.odb.dialogs.OBDMainFragment
+import net.osmand.plus.plugins.odb.dialogs.OBDMainFragment.OBDDataItem
 import net.osmand.plus.plugins.odb.dialogs.RenameOBDDialog
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
@@ -109,9 +111,9 @@ class OBDMainFragmentAdapter(
 				}
 			}
 			holder.bindView(title)
-		} else if (holder is CharacteristicHolder && item is OBDMainFragment.OBDDataItem) {
+		} else if (holder is CharacteristicHolder && item is OBDDataItem) {
 			var showDivider = false
-			if (items.size > position + 1 && items[position + 1] is OBDMainFragment.OBDDataItem) {
+			if (items.size > position + 1 && items[position + 1] is OBDDataItem) {
 				showDivider = true
 			}
 			holder.bindView(item, showDivider)
@@ -130,10 +132,10 @@ class OBDMainFragmentAdapter(
 		payloads: List<Any?>
 	) {
 		val item = items[position]
-		if (!Algorithms.isEmpty(payloads) && payloads[0] is Int && item is OBDMainFragment.OBDDataItem) {
+		if (!Algorithms.isEmpty(payloads) && payloads[0] is Int && item is OBDDataItem) {
 			if (holder is CharacteristicHolder && payloads[0] == UPDATE_VALUE_PAYLOAD_TYPE) {
 				var showDivider = false
-				if (items.size > position + 1 && items[position + 1] is OBDMainFragment.OBDDataItem) {
+				if (items.size > position + 1 && items[position + 1] is OBDDataItem) {
 					showDivider = true
 				}
 				holder.bindViewValues(item.widget, showDivider)
@@ -147,7 +149,7 @@ class OBDMainFragmentAdapter(
 		val item = items[position]
 		if (item is Int) {
 			return item
-		} else if (item is OBDMainFragment.OBDDataItem) {
+		} else if (item is OBDDataItem) {
 			return DATA_TYPE
 		}
 		throw java.lang.IllegalArgumentException("Unsupported view type")
@@ -193,7 +195,7 @@ class OBDMainFragmentAdapter(
 		private val view: View = itemView
 
 		fun bindView(
-			dataItem: OBDMainFragment.OBDDataItem,
+			dataItem: OBDDataItem,
 			showDivider: Boolean,
 		) {
 			if (plugin == null) {
@@ -202,14 +204,13 @@ class OBDMainFragmentAdapter(
 			val widget = dataItem.widget
 			view.setBackgroundColor(ColorUtilities.getListBgColor(mapActivity, nightMode))
 			titleView.text = widget.type.getTitle()
+			icon.visibility = if (dataItem.dataType.icon == null) GONE else VISIBLE
 			dataItem.dataType.icon?.let {
-				icon.visibility = VISIBLE
 				val iconColor = ColorUtilities.getDefaultIconColor(app, nightMode)
 				val paintedIcon = app.uiUtilities.getPaintedIcon(dataItem.dataType.icon, iconColor)
 				icon.setImageDrawable(paintedIcon)
 			}
 			updateValue(widget)
-
 			AndroidUiHelper.updateVisibility(divider, showDivider)
 		}
 
@@ -273,17 +274,12 @@ class OBDMainFragmentAdapter(
 		private val view: View = itemView
 
 		fun bindView() {
-			val isDevicePaired: Boolean
 			val developmentPlugin = PluginsHelper.getPlugin(
 				OsmandDevelopmentPlugin::class.java
 			)
-			isDevicePaired =
-				if (developmentPlugin?.isEnabled == true && app.settings.SIMULATE_OBD_DATA.get()) {
-					true
-				} else {
-					plugin?.isPaired(mapActivity, device) ?: false
-				}
-
+			val isDevicePaired =
+				(developmentPlugin?.isEnabled == true && app.settings.SIMULATE_OBD_DATA.get())
+						|| plugin?.isPaired(mapActivity, device) == true
 			forgetButton = view.findViewById(R.id.forget_device_container)
 			forgetButtonText = view.findViewById(R.id.forget_btn)
 			forgetButtonIcon = view.findViewById(R.id.forget_icon)
