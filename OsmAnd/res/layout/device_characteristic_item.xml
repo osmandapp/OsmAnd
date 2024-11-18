@@ -17,6 +17,14 @@
 		android:paddingRight="@dimen/content_padding"
 		android:paddingBottom="@dimen/content_padding_half">
 
+		<ImageView
+			android:id="@+id/icon"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginVertical="@dimen/content_padding_small"
+			android:layout_marginEnd="@dimen/content_padding_double"
+			android:visibility="gone" />
+
 		<TextView
 			android:id="@+id/title"
 			android:layout_width="0dp"

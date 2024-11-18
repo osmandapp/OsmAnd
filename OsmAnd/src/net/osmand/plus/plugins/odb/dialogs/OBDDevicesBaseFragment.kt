@@ -19,7 +19,8 @@ import net.osmand.plus.utils.ColorUtilities
 
 abstract class OBDDevicesBaseFragment : BaseOsmAndFragment() {
 
-	protected val vehicleMetricsPlugin = PluginsHelper.getPlugin(VehicleMetricsPlugin::class.java)
+	protected val vehicleMetricsPlugin =
+		PluginsHelper.requirePlugin(VehicleMetricsPlugin::class.java)
 
 	@get:LayoutRes
 	protected abstract val layoutId: Int
