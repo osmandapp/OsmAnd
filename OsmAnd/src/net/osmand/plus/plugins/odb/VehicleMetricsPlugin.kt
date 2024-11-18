@@ -66,6 +66,7 @@ import okio.sink
 import okio.source
 import org.json.JSONObject
 import java.util.UUID
+import kotlin.jvm.Throws
 
 class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadStatusListener {
 	private var mapActivity: MapActivity? = null
@@ -121,28 +122,11 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		mapActivity: MapActivity, widgetsInfos: MutableList<MapWidgetInfo?>,
 		appMode: ApplicationMode) {
 		val creator = WidgetInfoCreator(app, appMode)
-		val speedWidget: MapWidget = createMapWidgetForParams(mapActivity, WidgetType.OBD_SPEED)
-		widgetsInfos.add(creator.createWidgetInfo(speedWidget))
-		val rpmWidget: MapWidget = createMapWidgetForParams(mapActivity, WidgetType.OBD_RPM)
-		widgetsInfos.add(creator.createWidgetInfo(rpmWidget))
-		val airIntakeTempWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_AIR_INTAKE_TEMP)
-		widgetsInfos.add(creator.createWidgetInfo(airIntakeTempWidget))
-		val ambientAirTempWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_AMBIENT_AIR_TEMP)
-		widgetsInfos.add(creator.createWidgetInfo(ambientAirTempWidget))
-		val batteryVoltageWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_BATTERY_VOLTAGE)
-		widgetsInfos.add(creator.createWidgetInfo(batteryVoltageWidget))
-		val remainingFuelWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_REMAINING_FUEL)
-		widgetsInfos.add(creator.createWidgetInfo(remainingFuelWidget))
-		val fuelConsumptionWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_FUEL_CONSUMPTION)
-		widgetsInfos.add(creator.createWidgetInfo(fuelConsumptionWidget))
-		val engineCoolantTempWidget: MapWidget =
-			createMapWidgetForParams(mapActivity, WidgetType.OBD_ENGINE_COOLANT_TEMP)
-		widgetsInfos.add(creator.createWidgetInfo(engineCoolantTempWidget))
+		for (widgetType in WidgetType.getObdTypes()) {
+			val obdWidget: MapWidget =
+				createMapWidgetForParams(mapActivity, widgetType)
+			widgetsInfos.add(creator.createWidgetInfo(obdWidget))
+		}
 	}
 
 	override fun createMapWidgetForParams(
@@ -324,7 +308,6 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 
 	@MainThread
 	fun disconnect(forgetCurrentDeviceConnected: Boolean) {
-		LOG.debug("disconnect $forgetCurrentDeviceConnected")
 		obdDispatcher?.stopReading()
 		val lastConnectedDeviceInfo = connectedDeviceInfo
 		connectedDeviceInfo = null
@@ -372,7 +355,6 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	@SuppressLint("MissingPermission")
 	@MainThread
 	private fun connectToObdInternal(activity: Activity, deviceInfo: BTDeviceInfo) {
-		LOG.debug("connectToObd $deviceInfo reconnectCount $currentReconnectAttempt")
 		if (connectionState != OBDConnectionState.DISCONNECTED) {
 			disconnect(false)
 		}
@@ -380,6 +362,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		if (currentReconnectAttempt <= 0) {
 			return
 		}
+		LOG.debug("connectToObd $deviceInfo reconnectCount $currentReconnectAttempt")
 		if (BLEUtils.isBLEEnabled(activity)) {
 			if (AndroidUtils.hasBLEPermission(activity)) {
 				onConnecting(deviceInfo)
@@ -452,6 +435,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 				socket = connectedDevice.createRfcommSocketToServiceRecord(uuid)
 			}
 
+			@Throws(IOException::class)
 			override fun connect(): Pair<Source, Sink>? {
 				socket?.apply {
 					connect()
