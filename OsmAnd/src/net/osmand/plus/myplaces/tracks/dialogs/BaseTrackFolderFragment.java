@@ -32,6 +32,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.IndexConstants;
+import net.osmand.plus.configmap.tracks.TrackSortModesCollection;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
@@ -60,7 +61,6 @@ import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTr
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -81,10 +81,8 @@ import net.osmand.shared.util.KAlgorithms;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment implements FragmentStateHolder,
@@ -330,13 +328,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	@NonNull
 	@Override
 	public TracksSortMode getTracksSortMode() {
-		Map<String, String> sortModes = settings.getTrackSortModes();
-		for (Entry<String, String> entry : sortModes.entrySet()) {
-			if (KAlgorithms.INSTANCE.stringsEqual(entry.getKey(), getSortEntryId())) {
-				return TracksSortMode.getByValue(entry.getValue());
-			}
-		}
-		return TracksSortMode.getDefaultSortMode();
+		return settings.getTrackSortModes().requireSortMode(getSortEntryId());
 	}
 
 	@Nullable
@@ -350,50 +342,47 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		if (sortSubFolders) {
 			sortSubFolder(sortMode);
 		} else {
-			Map<String, String> sortModes = settings.getTrackSortModes();
 			TracksGroup folder = smartFolder != null ? smartFolder : selectedFolder;
-			sortModes.put(folder.getId(), sortMode.name());
-			settings.saveTabsSortModes(sortModes);
+			TrackSortModesCollection sortModes = settings.getTrackSortModes();
+			sortModes.setSortMode(folder.getId(), sortMode);
+			sortModes.syncSettings();
 			updateContent();
 		}
 	}
 
-	private void sortSubFolder(TracksSortMode sortMode) {
-		OsmandSettings settings = app.getSettings();
-		Map<String, String> sortModes = settings.getTrackSortModes();
+	private void sortSubFolder(@NonNull TracksSortMode sortMode) {
+		TrackSortModesCollection sortModes = settings.getTrackSortModes();
 		sortFolders(selectedFolder, sortModes, sortMode);
-		settings.saveTabsSortModes(sortModes);
+		sortModes.syncSettings();
 
 		app.showToastMessage(app.getString(R.string.sorted_sufolders_toast, selectedFolder.getName(), app.getString(sortMode.getNameId())));
 	}
 
-	private void sortFolders(@NonNull TrackFolder trackFolder, @NonNull Map<String, String> tabsSortModes,
+	private void sortFolders(@NonNull TrackFolder trackFolder, @NonNull TrackSortModesCollection sortModes,
 	                         @NonNull TracksSortMode sortMode) {
 		for (TrackFolder folder : trackFolder.getFlattenedSubFolders()) {
-			tabsSortModes.put(folder.getId(), sortMode.name());
+			sortModes.setSortMode(folder.getId(), sortMode);
 		}
 	}
 
-	private void removeSurplusTabsSortModes() {
+	private void removeSurplusSortModes() {
 		if (!rootFolder.getDirFile().equals(app.getAppPathKt(IndexConstants.GPX_INDEX_DIR))) {
 			// Execute only from tracks root folder to not lose valid entries
 			return;
 		}
-		Map<String, String> result = new HashMap<>();
-		OsmandSettings settings = app.getSettings();
-		Map<String, String> oldSortModes = settings.getTrackSortModes();
-
-		result.put(TrackTabType.ON_MAP.name(), oldSortModes.get(TrackTabType.ON_MAP.name()));
-		result.put(TrackTabType.ALL.name(), oldSortModes.get(TrackTabType.ALL.name()));
-		result.put(rootFolder.getId(), oldSortModes.get(rootFolder.getId()));
+		Set<String> validKeys = new HashSet<>();
+		validKeys.add(TrackTabType.ON_MAP.name());
+		validKeys.add(TrackTabType.ALL.name());
+		validKeys.add(rootFolder.getId());
 		for (TrackFolder folder : rootFolder.getFlattenedSubFolders()) {
-			result.put(folder.getId(), oldSortModes.get(folder.getId()));
+			validKeys.add(folder.getId());
 		}
 		for (SmartFolder folder : app.getSmartFolderHelper().getSmartFolders()) {
-			String key = folder.getId();
-			result.put(key, oldSortModes.get(key));
+			validKeys.add(folder.getId());
 		}
-		settings.saveTabsSortModes(result);
+		TrackSortModesCollection sortModes = settings.getTrackSortModes();
+		sortModes.clearSurplusKeys(validKeys);
+		sortModes.syncSettings();
 	}
 
 	@Override
@@ -507,13 +496,13 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	@Override
 	public void onFolderRenamed(@NonNull File newDir) {
 		updateContent();
-		removeSurplusTabsSortModes();
+		removeSurplusSortModes();
 	}
 
 	@Override
 	public void onFolderDeleted() {
 		reloadTracks();
-		removeSurplusTabsSortModes();
+		removeSurplusSortModes();
 	}
 
 	@Override

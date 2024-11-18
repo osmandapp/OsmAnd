@@ -20,7 +20,6 @@ import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.data.DisplayItem;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemClicked;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
-import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.settings.bottomsheets.CustomizableOptionsBottomSheet;
 import net.osmand.shared.gpx.data.TrackFolder;
@@ -37,11 +36,9 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
-public class TrackFolderOptionsController extends BaseDialogController implements IDisplayDataProvider,
-		IDialogItemClicked, TrackFolderOptionsListener {
+public class TrackFolderOptionsController extends BaseDialogController
+		implements IDisplayDataProvider, IDialogItemClicked, TrackFolderOptionsListener {
 
 	private final static Log LOG = PlatformUtil.getLog(TrackFolderOptionsController.class);
 
@@ -175,15 +172,7 @@ public class TrackFolderOptionsController extends BaseDialogController implement
 		if (oldDir.renameTo(newDir)) {
 			trackFolder.setDirFile(SharedUtil.kFile(newDir));
 			trackFolder.resetCachedData();
-
-			List<File> files = new ArrayList<>();
-			for (TrackItem trackItem : trackFolder.getFlattenedTrackItems()) {
-				KFile file = trackItem.getFile();
-				if (file != null) {
-					files.add(SharedUtil.jFile(file));
-				}
-			}
-			FileUtils.updateMovedGpxFiles(app, files, oldDir, newDir);
+			FileUtils.updateMovedTrackFolder(app, trackFolder, oldDir, newDir);
 
 			dialogManager.askRefreshDialogCompletely(PROCESS_ID);
 

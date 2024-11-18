@@ -8,7 +8,6 @@ import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_SORT_TRACKS;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.IndexConstants;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.shared.gpx.GpxFile;
@@ -316,32 +315,27 @@ public class TrackTabsHelper {
 	}
 
 	public void loadTabsSortModes() {
-		Map<String, String> sortModes = settings.getTrackSortModes();
-		if (!Algorithms.isEmpty(sortModes)) {
-			for (Entry<String, String> entry : sortModes.entrySet()) {
-				TrackTab trackTab = trackTabs.get(entry.getKey());
-				if (trackTab != null) {
-					trackTab.setSortMode(TracksSortMode.getByValue(entry.getValue()));
-				}
+		TrackSortModesCollection sortModes = settings.getTrackSortModes();
+		for (Entry<String, TrackTab> entry : trackTabs.entrySet()) {
+			TracksSortMode sortMode = sortModes.getSortMode(entry.getKey());
+			if (sortMode != null) {
+				TrackTab trackTab = entry.getValue();
+				trackTab.setSortMode(sortMode);
 			}
 		}
 	}
 
 	public void saveTabsSortModes() {
-		Map<String, String> tabsSortModes = settings.getTrackSortModes();
+		TrackSortModesCollection sortModes = settings.getTrackSortModes();
 		for (TrackTab trackTab : trackTabs.values()) {
-			String id = trackTab.getId();
-			String sortType = trackTab.getSortMode().name();
-			tabsSortModes.put(id, sortType);
+			sortModes.setSortMode(trackTab.getId(), trackTab.getSortMode());
 		}
-		settings.saveTabsSortModes(tabsSortModes);
+		sortModes.syncSettings();
 	}
 
 	@NonNull
 	private TracksSortMode getRootSortMode() {
-		String rootDir = TrackPathUtil.getRelativePath(app.getAppPath(IndexConstants.GPX_INDEX_DIR));
-		String key = settings.getTrackSortModes().get(rootDir);
-		return key != null ? TracksSortMode.getByValue(key) : TracksSortMode.getDefaultSortMode();
+		return settings.getTrackSortModes().getRootSortMode();
 	}
 
 	@NonNull

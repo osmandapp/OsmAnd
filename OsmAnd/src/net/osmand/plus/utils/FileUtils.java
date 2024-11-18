@@ -24,7 +24,10 @@ import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.primitives.Metadata;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
@@ -172,6 +175,18 @@ public class FileUtils {
 				SaveGpxHelper.saveGpx(gpxFile);
 			}
 		}
+	}
+
+	public static void updateMovedTrackFolder(@NonNull OsmandApplication app, @NonNull TrackFolder trackFolder,
+	                                          @NonNull File srcDir, @NonNull File destDir) {
+		List<File> files = new ArrayList<>();
+		for (TrackItem trackItem : trackFolder.getFlattenedTrackItems()) {
+			KFile file = trackItem.getFile();
+			if (file != null) {
+				files.add(SharedUtil.jFile(file));
+			}
+		}
+		updateMovedGpxFiles(app, files, srcDir, destDir);
 	}
 
 	public static void updateMovedGpxFiles(@NonNull OsmandApplication app, @NonNull List<File> files,
