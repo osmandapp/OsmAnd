@@ -250,12 +250,13 @@ public class TrackTabsHelper {
 		KFile file = item.getFile();
 		if (file != null && file.getParentFile() != null) {
 			KFile dir = file.getParentFile();
-			if(dir != null) {
-				TrackTab trackTab = trackTabs.get(TrackPathUtil.getRelativePath(dir));
+			if (dir != null) {
+				String folderId = TrackFolderUtil.getTrackFolderId(dir);
+				TrackTab trackTab = trackTabs.get(folderId);
 				if (trackTab == null) {
 					trackTab = new TrackTab(SharedUtil.jFile(dir));
 					trackTab.items.add(TYPE_SORT_TRACKS);
-					trackTabs.put(trackTab.getId(), trackTab);
+					trackTabs.put(folderId, trackTab);
 				}
 				trackTab.items.add(item);
 				return trackTab;

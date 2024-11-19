@@ -8,10 +8,11 @@ import net.osmand.shared.gpx.filters.TrackFilterSerializer
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis
 import net.osmand.shared.util.KCollectionUtils
 
-const val ID_PREFIX = "SMART_FOLDER___"
-
 @Serializable
 class SmartFolder(@Serializable var folderName: String) : TracksGroup, ComparableTracksGroup {
+	companion object {
+		const val ID_PREFIX = "SMART_FOLDER___"
+	}
 
 	@Transient
 	private var trackItems: List<TrackItem>? = null

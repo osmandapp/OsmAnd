@@ -38,7 +38,7 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 	}
 
 	override fun getId(): String {
-		return relativePath
+		return getRelativePath(true)
 	}
 
 	override fun getName(): String {
@@ -54,14 +54,19 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 	}
 
 	val relativePath: String
-		get() {
-			val dirName = getDirName()
-			val parentFolder = getParentFolder()
-			return if (parentFolder != null && !parentFolder.isRootFolder) parentFolder.relativePath + "/" + dirName else dirName
-		}
+		get() = getRelativePath(false)
 
 	val isRootFolder: Boolean
 		get() = getParentFolder() == null
+
+	private fun getRelativePath(includeRootFolder: Boolean): String {
+		val dirName = getDirName()
+		val parentFolder = getParentFolder()
+		return if (parentFolder != null && (!parentFolder.isRootFolder || includeRootFolder))
+			parentFolder.relativePath + "/" + dirName else dirName
+	}
+
+	fun getRootFolder(): TrackFolder = getParentFolder()?.getRootFolder() ?: this
 
 	fun getParentFolder(): TrackFolder? {
 		return parentFolder

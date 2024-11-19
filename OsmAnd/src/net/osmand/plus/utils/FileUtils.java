@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.configmap.tracks.TrackPathUtil;
+import net.osmand.plus.configmap.tracks.TrackFolderUtil;
 import net.osmand.plus.configmap.tracks.TrackSortModesCollection;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
@@ -182,8 +182,8 @@ public class FileUtils {
 	public static void updateMovedTrackFolder(@NonNull OsmandApplication app, @NonNull TrackFolder trackFolder,
 	                                          @NonNull File srcDir, @NonNull File destDir) {
 		TrackSortModesCollection sortModes = app.getSettings().getTrackSortModes();
-		String oldKey = TrackPathUtil.getRelativePath(srcDir);
-		String newKey = TrackPathUtil.getRelativePath(destDir);
+		String oldKey = TrackFolderUtil.getTrackFolderId(srcDir);
+		String newKey = TrackFolderUtil.getTrackFolderId(destDir);
 		sortModes.replaceKey(oldKey, newKey);
 		sortModes.syncSettings();
 

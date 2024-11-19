@@ -55,7 +55,7 @@ public class TrackTab implements TracksGroup, ComparableTracksGroup {
 	@Override
 	public String getId() {
 		return switch (type) {
-			case FOLDER -> directory != null ? TrackPathUtil.getRelativePath(directory) : "";
+			case FOLDER -> directory != null ? TrackFolderUtil.getTrackFolderId(directory) : "";
 			case SMART_FOLDER -> smartFolder != null ? smartFolder.getId() : "";
 			default -> type.name();
 		};

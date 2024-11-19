@@ -31,7 +31,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
-import net.osmand.IndexConstants;
 import net.osmand.plus.configmap.tracks.TrackSortModesCollection;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
@@ -81,7 +80,6 @@ import net.osmand.shared.util.KAlgorithms;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -366,23 +364,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	private void removeSurplusSortModes() {
-		if (!rootFolder.getDirFile().equals(app.getAppPathKt(IndexConstants.GPX_INDEX_DIR))) {
-			// Execute only from tracks root folder to not lose valid entries
-			return;
-		}
-		Set<String> validKeys = new HashSet<>();
-		validKeys.add(TrackTabType.ON_MAP.name());
-		validKeys.add(TrackTabType.ALL.name());
-		validKeys.add(rootFolder.getId());
-		for (TrackFolder folder : rootFolder.getFlattenedSubFolders()) {
-			validKeys.add(folder.getId());
-		}
-		for (SmartFolder folder : app.getSmartFolderHelper().getSmartFolders()) {
-			validKeys.add(folder.getId());
-		}
-		TrackSortModesCollection sortModes = settings.getTrackSortModes();
-		sortModes.clearSurplusKeys(validKeys);
-		sortModes.syncSettings();
+		settings.getTrackSortModes().askSyncWithUpgrade(app, rootFolder);
 	}
 
 	@Override
