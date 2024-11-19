@@ -35,7 +35,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Handler;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -446,15 +448,7 @@ public class OsmandSettings {
 
 	public boolean switchAppMode(boolean next) {
 		ApplicationMode appMode = getApplicationMode();
-		List<ApplicationMode> enabledModes = ApplicationMode.values(ctx);
-		int indexOfCurrent = enabledModes.indexOf(appMode);
-		int indexOfNext;
-		if (next) {
-			indexOfNext = indexOfCurrent < enabledModes.size() - 1 ? indexOfCurrent + 1 : 0;
-		} else {
-			indexOfNext = indexOfCurrent > 0 ? indexOfCurrent - 1 : enabledModes.size() - 1;
-		}
-		ApplicationMode nextAppMode = enabledModes.get(indexOfNext);
+		ApplicationMode nextAppMode = getSwitchedAppMode(appMode, next);
 		if (appMode != nextAppMode && setApplicationMode(nextAppMode)) {
 			String pattern = ctx.getString(R.string.application_profile_changed);
 			String message = String.format(pattern, nextAppMode.toHumanString());
@@ -462,6 +456,49 @@ public class OsmandSettings {
 			return true;
 		}
 		return false;
+	}
+
+	public ApplicationMode getSwitchedAppMode(ApplicationMode selectedMode, boolean next) {
+		List<ApplicationMode> enabledModes = ApplicationMode.values(ctx);
+		int indexOfCurrent = enabledModes.indexOf(selectedMode);
+		int indexOfNext;
+		if (next) {
+			indexOfNext = indexOfCurrent < enabledModes.size() - 1 ? indexOfCurrent + 1 : 0;
+		} else {
+			indexOfNext = indexOfCurrent > 0 ? indexOfCurrent - 1 : enabledModes.size() - 1;
+		}
+		return enabledModes.get(indexOfNext);
+	}
+
+	private final Handler delayedSwitchProfileHandler = new Handler();
+	private ApplicationMode delayedSwitchProfile;
+	private Toast delayedSwitchProfileToast;
+
+	public void delayedSwitchAppMode(boolean next) {
+		ApplicationMode appMode = getApplicationMode();
+
+		if (delayedSwitchProfile == null) {
+			delayedSwitchProfile = getApplicationMode();
+		}
+		delayedSwitchProfile = getSwitchedAppMode(delayedSwitchProfile, next);
+
+		if (delayedSwitchProfileToast != null) {
+			delayedSwitchProfileToast.cancel();
+		}
+		String patternDelayedSwitch = ctx.getString(R.string.selected_delayed_profile);
+		String messageDelayedSwitch = String.format(patternDelayedSwitch, delayedSwitchProfile.toHumanString());
+		delayedSwitchProfileToast = Toast.makeText(ctx, messageDelayedSwitch, Toast.LENGTH_SHORT);
+		delayedSwitchProfileToast.show();
+
+		delayedSwitchProfileHandler.removeCallbacksAndMessages(null);
+		delayedSwitchProfileHandler.postDelayed(() -> {
+			if (appMode != delayedSwitchProfile && setApplicationMode(delayedSwitchProfile)) {
+				String pattern = ctx.getString(R.string.application_profile_changed);
+				String message = String.format(pattern, delayedSwitchProfile.toHumanString());
+				ctx.showShortToastMessage(message);
+			}
+			delayedSwitchProfile = null;
+		}, 3500);
 	}
 
 	public boolean setApplicationMode(ApplicationMode appMode) {

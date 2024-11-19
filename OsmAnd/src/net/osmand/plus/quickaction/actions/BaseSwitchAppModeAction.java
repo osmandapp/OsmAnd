@@ -32,11 +32,7 @@ public abstract class BaseSwitchAppModeAction extends QuickAction {
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
 		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
-		if (shouldChangeForward()) {
-			settings.switchAppModeToNext();
-		} else {
-			settings.switchAppModeToPrevious();
-		}
+		settings.delayedSwitchAppMode(shouldChangeForward());
 	}
 
 	@Override
