@@ -5559,7 +5559,7 @@
     <string name="obd_fuel_left_distance">Brændstof tilbage (afstand)</string>
     <string name="obd_fuel_type">Brændstoftype</string>
     <string name="obd_plugin_description">Overvåg vigtige køretøjsmålinger ved hjælp af OBD-II-protokollen. Få adgang til data, herunder: * Motorens omdrejningshastighed * Brændstofforbrug * Resterende brændstof * Afstand siden motorstart * Indtagstemperatur * Omgivelsestemperatur * Kølevæskes temperatur * Køretøjets hastighed * Batteriprocent</string>
-    <string name="obd_plugin_name">Køretøjsparametre</string>
+    <string name="obd_plugin_name">Målinger af køretøj</string>
     <string name="unknown_bt_device">Ukendt enhed</string>
     <string name="obd_vin">VIN</string>
     <string name="obd_vin_desc">VIN-kode via OBD</string>
