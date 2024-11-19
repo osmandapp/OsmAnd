@@ -1746,12 +1746,25 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (rotate) {
 //			animatedDraggingThread.startMoving(clat, clon, zoom.getBaseZoom(), zoom.getZoomFloatPart());
 //			LOG.debug("Target animation - " + zoom.getBaseZoom() + " " + zoom.getZoomFloatPart());
-			animatedDraggingThread.animateToPreview(clat, clon,
+			animateToState(clat, clon,
 					zoom, 0f, 90f, ANIMATION_PREVIEW_TIME, false);
 		} else {
 			animatedDraggingThread.startMoving(clat, clon, zoom.getBaseZoom(), zoom.getZoomFloatPart());
 		}
 
+	}
+
+	public void animateToState(double clat, double clon, float zoom,
+	                           float finalRotation, float elevationAngle, long animationDuration, boolean notifyListener) {
+		Zoom z = new Zoom((int)zoom, zoom - (int)zoom, getMinZoom(), getMaxZoom());
+		animatedDraggingThread.animateToPreview(clat, clon,
+				z, finalRotation, elevationAngle, animationDuration, notifyListener);
+	}
+
+	public void animateToState(double clat, double clon, @NonNull Zoom zoom,
+	                           float finalRotation, float elevationAngle, long animationDuration, boolean notifyListener) {
+		animatedDraggingThread.animateToPreview(clat, clon,
+				zoom, finalRotation, elevationAngle, animationDuration, notifyListener);
 	}
 
 	public RotatedTileBox getTileBox(int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx) {

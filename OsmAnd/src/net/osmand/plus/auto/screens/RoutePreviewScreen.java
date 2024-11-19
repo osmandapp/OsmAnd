@@ -68,11 +68,11 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 	@Nullable
 	private GpxFile routeGpxFile;
 
-	private CompassMode savedCompassMode = CompassMode.NORTH_IS_UP;
 	private float prevElevationAngle = 90;
 	private float prevRotationAngle = 0;
 	private int prevZoom = 15;
 	private boolean prevMapLinkedToLocation = false;
+	private static final long ANIMATION_RETURN_FROM_PREVIEW_TIME = 1500;
 
 	private boolean calculateRoute = false;
 
@@ -96,7 +96,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		super(carContext);
 		this.settingsAction = settingsAction;
 		this.searchResult = searchResult;
-		this.calculateRoute =  calculateRoute;
+		this.calculateRoute = calculateRoute;
 		getLifecycle().addObserver(this);
 		calculating = calculateRoute;
 	}
@@ -162,7 +162,6 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		app.getTargetPointsHelper().addListener(stateChangedListener);
 		prevMapLinkedToLocation = app.getMapViewTrackingUtilities().isMapLinkedToLocation();
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
-		savedCompassMode = app.getSettings().getCompassMode();
 		prevZoom = mapView.getBaseZoom();
 		prevRotationAngle = mapView.getRotate();
 		prevElevationAngle = mapView.normalizeElevationAngle(mapView.getElevationAngle());
@@ -200,22 +199,11 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 
 	@Override
 	public void onStop(@NonNull LifecycleOwner owner) {
-		if(getApp().getSettings().getCompassMode() != savedCompassMode) {
-			getApp().getSettings().setCompassMode(savedCompassMode);
-		}
 		OsmandMapTileView mapView = getApp().getOsmandMap().getMapView();
-		if (mapView.getElevationAngle() != prevElevationAngle) {
-			mapView.setElevationAngle(prevElevationAngle);
-		}
-		if (mapView.getRotate() != prevRotationAngle) {
-			mapView.setRotate(prevRotationAngle, true);
-		}
-		if (mapView.getZoom() != prevZoom) {
-			mapView.setIntZoom(prevZoom);
-		}
 		if (prevMapLinkedToLocation != getApp().getMapViewTrackingUtilities().isMapLinkedToLocation()) {
 			getApp().getMapViewTrackingUtilities().setMapLinkedToLocation(prevMapLinkedToLocation);
 		}
+		mapView.animateToState(mapView.getLatitude(), mapView.getLongitude(), (float)prevZoom, prevRotationAngle, prevElevationAngle, ANIMATION_RETURN_FROM_PREVIEW_TIME, false);
 	}
 
 	@NonNull
@@ -283,11 +271,5 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 
 	@Override
 	public void routeWasFinished() {
-	}
-
-
-	@Override
-	protected void adjustMapToRect(@NonNull LatLon location, @NonNull QuadRect mapRect) {
-		super.adjustMapToRect(location, mapRect);
 	}
 }
