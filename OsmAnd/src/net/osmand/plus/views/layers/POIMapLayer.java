@@ -609,14 +609,14 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 					if (article == null) {
 						return true;
 					}
-					travelHelper.openTrackMenu(article, mapActivity, name, amenity.getLocation());
+					travelHelper.openTrackMenu(article, mapActivity, name, amenity.getLocation(), false);
 					return true;
 				} else if (amenity.isRouteTrack()) {
 					TravelGpx travelGpx = travelHelper.searchGpx(amenity.getLocation(), amenity.getRouteId(), amenity.getRef());
 					if (travelGpx == null) {
 						return true;
 					}
-					travelHelper.openTrackMenu(travelGpx, mapActivity, amenity.getRouteId(), amenity.getLocation());
+					travelHelper.openTrackMenu(travelGpx, mapActivity, amenity.getRouteId(), amenity.getLocation(), false);
 					return true;
 				}
 			}

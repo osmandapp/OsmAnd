@@ -154,7 +154,7 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 			String name = getObjectName(pair).getName();
 			String fileName = Algorithms.convertToPermittedFileName(name.endsWith(GPX_FILE_EXT) ? name : name + GPX_FILE_EXT);
 			File file = new File(FileUtils.getTempDir(app), fileName);
-			GpxUiHelper.saveAndOpenGpx(activity, file, gpxFile, wptPt, null, pair.first);
+			GpxUiHelper.saveAndOpenGpx(activity, file, gpxFile, wptPt, null, pair.first, false);
 		}
 	}
 

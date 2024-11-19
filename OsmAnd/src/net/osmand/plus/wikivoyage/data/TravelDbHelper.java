@@ -725,8 +725,7 @@ public class TravelDbHelper implements TravelHelper {
 
 	@Override
 	public void openTrackMenu(@NonNull TravelArticle article, @NonNull MapActivity mapActivity,
-							  @NonNull String gpxFileName, @NonNull LatLon location) {
-
+							  @NonNull String gpxFileName, @NonNull LatLon location, boolean adjustMapPosition) {
 	}
 
 	@NonNull

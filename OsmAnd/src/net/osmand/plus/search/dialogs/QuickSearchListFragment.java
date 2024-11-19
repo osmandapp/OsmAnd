@@ -16,7 +16,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.IndexConstants;
+import net.osmand.data.Amenity;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.wikivoyage.data.TravelGpx;
+import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -175,24 +178,39 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	public void showResult(SearchResult searchResult) {
 		showResult = false;
 		if (searchResult.objectType == ObjectType.GPX_TRACK) {
-			GPXInfo gpxInfo = (GPXInfo) searchResult.relatedObject;
-			if (dialogFragment.getSearchType().isTargetPoint()) {
-				File file = gpxInfo.getFile();
-				if (file != null) {
-					selectTrack(file);
-				}
-			} else {
-				showTrackMenuFragment(gpxInfo);
-			}
+			showGpxTrackResult(searchResult);
 		} else if (searchResult.location != null) {
-			Pair<PointDescription, Object> pair = QuickSearchListItem.getPointDescriptionObject(app, searchResult);
+			showResultWithLocation(searchResult);
+		}
+	}
 
-			dialogFragment.hideToolbar();
-			dialogFragment.hide();
+	private void showResultWithLocation(SearchResult searchResult) {
+		Pair<PointDescription, Object> pair = QuickSearchListItem.getPointDescriptionObject(app, searchResult);
 
+		dialogFragment.hideToolbar();
+		dialogFragment.hide();
+
+		if (pair.second instanceof Amenity && ((Amenity) pair.second).isRouteTrack()) {
+			Amenity amenity = (Amenity) pair.second;
+			TravelHelper travelHelper = app.getTravelHelper();
+			TravelGpx travelGpx = travelHelper.searchGpx(amenity.getLocation(), amenity.getRouteId(), amenity.getRef());
+			travelHelper.openTrackMenu(travelGpx, getMapActivity(), amenity.getRouteId(), amenity.getLocation(), true);
+		} else {
 			showOnMap(getMapActivity(), dialogFragment,
 					searchResult.location.getLatitude(), searchResult.location.getLongitude(),
 					searchResult.preferredZoom, pair.first, pair.second);
+		}
+	}
+
+	private void showGpxTrackResult(SearchResult searchResult) {
+		GPXInfo gpxInfo = (GPXInfo) searchResult.relatedObject;
+		if (dialogFragment.getSearchType().isTargetPoint()) {
+			File file = gpxInfo.getFile();
+			if (file != null) {
+				selectTrack(file);
+			}
+		} else {
+			showTrackMenuFragment(gpxInfo);
 		}
 	}
 

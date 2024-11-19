@@ -105,7 +105,7 @@ public class AmenityMenuController extends MenuController {
 		String name = amenity.getTagContent(Amenity.ROUTE_NAME);
 		TravelArticle article = travelHelper.getArticleByTitle(name, lang, true, null);
 		if (article != null) {
-			travelHelper.openTrackMenu(article, mapActivity, name, amenity.getLocation());
+			travelHelper.openTrackMenu(article, mapActivity, name, amenity.getLocation(), false);
 		}
 	}
 

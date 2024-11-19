@@ -711,7 +711,7 @@ public class TravelObfHelper implements TravelHelper {
 
 	@Override
 	public void openTrackMenu(@NonNull TravelArticle article, @NonNull MapActivity mapActivity,
-	                          @NonNull String gpxFileName, @NonNull LatLon latLon) {
+	                          @NonNull String gpxFileName, @NonNull LatLon latLon, boolean adjustMapPosition) {
 		GpxReadCallback callback = new GpxReadCallback() {
 			@Override
 			public void onGpxFileReading() {
@@ -726,7 +726,7 @@ public class TravelObfHelper implements TravelHelper {
 
 					String name = gpxFileName.endsWith(GPX_FILE_EXT) ? gpxFileName : gpxFileName + GPX_FILE_EXT;
 					File file = new File(FileUtils.getTempDir(app), name);
-					GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, wptPt, article.getAnalysis(), null);
+					GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, wptPt, article.getAnalysis(), null, adjustMapPosition);
 				}
 			}
 		};
