@@ -79,6 +79,7 @@ import net.osmand.util.GeoParsedPoint;
 import net.osmand.util.GeoPointParserUtil;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -704,8 +705,12 @@ public class NavigationSession extends Session implements NavigationListener, Os
 						}
 					}
 					if (event == ROUTING_CONFIG_INITIALIZED) {
-						if (app.getRegions() != null) {
-							restoreNavigationHelper.checkRestoreRoutingMode();
+						try {
+							if (PlatformUtil.getOsmandRegions() != null) {
+								restoreNavigationHelper.checkRestoreRoutingMode();
+							}
+						} catch (IOException e) {
+							LOG.warn("getOsmandRegions", e);
 						}
 					}
 				}
