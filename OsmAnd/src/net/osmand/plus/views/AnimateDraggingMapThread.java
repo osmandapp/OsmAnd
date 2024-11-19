@@ -245,7 +245,6 @@ public class AnimateDraggingMapThread implements TouchListener {
 			stopAnimatingSync();
 		}
 		boolean skipAnimation = animationDuration == 0;
-
 		final MapRendererView mapRenderer = tileView.getMapRenderer();
 		MapAnimator animator = getAnimator();
 		if (skipAnimation || animationsDisabled || mapRenderer == null || animator == null) {
@@ -260,24 +259,29 @@ public class AnimateDraggingMapThread implements TouchListener {
 				if (animation != null) {
 					animator.cancelAnimation(animation);
 				}
+				animation = animator.getCurrentAnimation(userInteractionAnimationKey, a);
+				if (animation != null) {
+					animator.cancelAnimation(animation);
+				}
 			}
 			float fullDuration = animationDuration / 1000f ;
-			float rotateAnimation = fullDuration / 4;
-			float duration = fullDuration - rotateAnimation;
+			float rotateDuration = fullDuration / 4;
+			float duration = fullDuration - rotateDuration;
 			PointI finish31 = NativeUtilities.calculateTarget31(mapRenderer, finalLat, finalLon, false);
-			animator.animateTargetTo(finish31, duration, TimingFunction.EaseInQuadratic, locationServicesAnimationKey);
-			animator.animateZoomTo(zoom.getBaseZoom() + zoom.getZoomFloatPart(), duration,
-					TimingFunction.EaseOutQuadratic, locationServicesAnimationKey);
-			animator.animateElevationAngleTo(elevationAngle, duration,
-					TimingFunction.Linear, locationServicesAnimationKey);
-//			animator.animateAzimuthBy(elevationAngle, finalRotation,
-//					TimingFunction.Linear, locationServicesAnimationKey);
 			startThreadAnimating(() -> {
+				animator.animateAzimuthTo(finalRotation, rotateDuration, TimingFunction.Linear, userInteractionAnimationKey);
+				animatingMapRotation = true;
+				animatingMapAnimator();
+				animatingMapRotation = false;
+
 				animatingMapZoom = true;
 				animatingMapMove = true;
 				animatingMapTilt = true;
-				animatingMapRotation = true;
-				animatingRotateInThread(finalRotation, rotateAnimation, notifyListener);
+				animator.animateTargetTo(finish31, duration, TimingFunction.EaseInQuadratic, userInteractionAnimationKey);
+				animator.animateZoomTo(zoom.getBaseZoom() + zoom.getZoomFloatPart(), duration,
+						TimingFunction.EaseOutQuadratic, userInteractionAnimationKey);
+				animator.animateElevationAngleTo(elevationAngle, duration,
+						TimingFunction.Linear, userInteractionAnimationKey);
 				setTargetValues(zoom.getBaseZoom(), zoom.getZoomFloatPart(), finalLat, finalLon);
 				animatingMapAnimator();
 				animatingMapZoom = false;
