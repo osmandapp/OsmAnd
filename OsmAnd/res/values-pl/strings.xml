@@ -3909,7 +3909,7 @@
     <string name="routing_engine_vehicle_type_cycling_electric">Jazda na rowerze elektrycznym</string>
     <string name="routing_engine_vehicle_type_cycling_mountain">Kolarstwo górskie</string>
     <string name="routing_engine_vehicle_type_cycling_road">Kolarstwo szosowe</string>
-    <string name="routing_engine_vehicle_type_cycling_regular">Regularna jazda na rowerze</string>
+    <string name="routing_engine_vehicle_type_cycling_regular">Zwykła jazda na rowerze</string>
     <string name="routing_engine_vehicle_type_hgv">Duży pojazd dostawczy</string>
     <string name="routing_engine_vehicle_type_small_truck">Mała ciężarówka</string>
     <string name="routing_engine_vehicle_type_truck">Ciężarówka</string>
@@ -4415,7 +4415,7 @@
     <string name="migration_files_present">%1$d plik(i) (%2$s) już obecny w miejscu docelowym \"%3$s\" i nie nadpisany.</string>
     <string name="map_marker_options">Opcje znaczników mapy</string>
     <string name="shared_string_size">Rozmiar</string>
-    <string name="created_on">Utworzono na</string>
+    <string name="created_on">Utworzono</string>
     <string name="show_parameter_seekbar">Pokaż pasek wyszukiwania parametrów</string>
     <string name="shared_string_grade">Stopień</string>
     <string name="storage_found_files_size">Znaleziono %1$s plików %2$s</string>
