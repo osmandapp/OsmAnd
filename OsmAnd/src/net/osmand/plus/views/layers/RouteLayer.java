@@ -515,9 +515,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 					Location currentRouteLocation = locations.get(currentAnimatedRoute);
 					lastProjection = RoutingHelperUtils.getProject(
 							currentLocation, previousRouteLocation, currentRouteLocation);
-					if (Algorithms.objectEquals(previousRouteLocation, currentRouteLocation)) {
-						lastBearing = currentRouteLocation.getBearing();
-					} else {
+					lastBearing = lastProjection.getBearing();
+					if (!MapUtils.areLatLonEqual(previousRouteLocation, currentRouteLocation)) {
 						lastBearing = MapUtils.normalizeDegrees360(previousRouteLocation.bearingTo(currentRouteLocation));
 					}
 					if (app.getSettings().SNAP_TO_ROAD.get() && currentAnimatedRoute + 1 < locations.size()) {
@@ -538,7 +537,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				}
 			} else {
 				lastProjection = straight || routeUpdated ? helper.getLastFixedLocation() : helper.getLastProjection();
-				lastBearing = lastProjection != null ? lastProjection.getBearing() : lastRouteBearing;
+				lastBearing = lastProjection != null && lastProjection.hasBearing() ? lastProjection.getBearing() : lastRouteBearing;
 				startLocationIndex = route.getCurrentStraightAngleRoute();
 			}
 			lastRouteBearing = lastBearing;
