@@ -265,20 +265,20 @@ public class AnimateDraggingMapThread implements TouchListener {
 			float rotateAnimation = fullDuration / 4;
 			float duration = fullDuration - rotateAnimation;
 			PointI finish31 = NativeUtilities.calculateTarget31(mapRenderer, finalLat, finalLon, false);
-			animator.animateTargetTo(finish31, duration, TimingFunction.Linear, locationServicesAnimationKey);
+			animator.animateTargetTo(finish31, duration, TimingFunction.EaseInQuadratic, locationServicesAnimationKey);
 			animator.animateZoomTo(zoom.getBaseZoom() + zoom.getZoomFloatPart(), duration,
 					TimingFunction.EaseOutQuadratic, locationServicesAnimationKey);
 			animator.animateElevationAngleTo(elevationAngle, duration,
 					TimingFunction.Linear, locationServicesAnimationKey);
-			animator.animateAzimuthBy(elevationAngle, finalRotation,
-					TimingFunction.Linear, locationServicesAnimationKey);
+//			animator.animateAzimuthBy(elevationAngle, finalRotation,
+//					TimingFunction.Linear, locationServicesAnimationKey);
 			startThreadAnimating(() -> {
-				animatingRotateInThread(finalRotation, rotateAnimation, notifyListener);
-//				setTargetValues(zoom.getBaseZoom(), zoom.getZoomFloatPart(), finalLat, finalLon);
 				animatingMapZoom = true;
 				animatingMapMove = true;
 				animatingMapTilt = true;
 				animatingMapRotation = true;
+				animatingRotateInThread(finalRotation, rotateAnimation, notifyListener);
+				setTargetValues(zoom.getBaseZoom(), zoom.getZoomFloatPart(), finalLat, finalLon);
 				animatingMapAnimator();
 				animatingMapZoom = false;
 				animatingMapMove = false;
