@@ -12,6 +12,7 @@ import net.osmand.data.LatLon
 import net.osmand.data.QuadRect
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
+import net.osmand.plus.views.Zoom
 import net.osmand.search.core.SearchResult
 import net.osmand.util.Algorithms
 
@@ -20,7 +21,7 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 
 	protected var prevElevationAngle = 90f
 	protected var prevRotationAngle = 0f
-	protected var prevZoom = 15
+	protected var prevZoom: Zoom? = null
 	protected var prevMapLinkedToLocation = false
 	protected val ANIMATION_RETURN_FROM_PREVIEW_TIME = 1500
 
@@ -100,7 +101,6 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 		app.carNavigationSession?.navigationCarSurface?.let { surfaceRenderer ->
 			if (!mapRect.hasInitialState()) {
 				val mapView = app.osmandMap.mapView
-				mapView.elevationAngle = 90f
 				val tb = mapView.rotatedTileBox
 				tb.setCenterLocation(tb.centerPixelX.toFloat() / tb.pixWidth, 0.5f)
 				tb.rotate = 0f;
@@ -132,7 +132,7 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 		mapView.animateToState(
 			lastKnownLocation?.latitude ?: mapView.latitude,
 			lastKnownLocation?.longitude ?: mapView.longitude,
-			prevZoom.toFloat(),
+			prevZoom ?: mapView.currentZoom,
 			prevRotationAngle,
 			prevElevationAngle,
 			ANIMATION_RETURN_FROM_PREVIEW_TIME.toLong(),
@@ -142,7 +142,7 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 	override fun onStart(owner: LifecycleOwner) {
 		val mapView = app.osmandMap.mapView
 		prevMapLinkedToLocation = app.mapViewTrackingUtilities.isMapLinkedToLocation
-		prevZoom = mapView.baseZoom
+		prevZoom = mapView.currentZoom
 		prevRotationAngle = mapView.rotate
 		prevElevationAngle = mapView.normalizeElevationAngle(mapView.elevationAngle)
 	}
