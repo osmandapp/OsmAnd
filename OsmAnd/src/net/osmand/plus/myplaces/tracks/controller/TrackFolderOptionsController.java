@@ -223,6 +223,8 @@ public class TrackFolderOptionsController extends BaseDialogController
 
 	@Override
 	public void onFolderDeleted() {
+		FileUtils.updateAfterDeleteTrackFolder(app, trackFolder);
+
 		// Close options dialog after folder deleted
 		dialogManager.askDismissDialog(PROCESS_ID);
 

@@ -19,13 +19,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class TrackSortModesCollection {
 
 	private static final String ROOT_FOLDER = IndexConstants.GPX_INDEX_DIR;
 	private static final String SEPARATOR = ",,";
 
-	private final Map<String, TracksSortMode> cachedSortModes = new HashMap<>();
+	private final Map<String, TracksSortMode> cachedSortModes = new ConcurrentHashMap<>();
 	private final ListStringPreference preference;
 
 	public TrackSortModesCollection(@NonNull OsmandSettings settings) {
@@ -103,14 +104,20 @@ public class TrackSortModesCollection {
 		}
 	}
 
-	public void updateMovedTrackFolder(@NonNull OsmandApplication app,
-	                                   @NonNull TrackFolder trackFolder, @NonNull File oldDir) {
+	public void updateAfterMoveTrackFolder(@NonNull OsmandApplication app,
+	                                       @NonNull TrackFolder trackFolder, @NonNull File oldDir) {
 		String previousId = getFolderId(oldDir.getAbsolutePath());
 		TracksSortMode sortMode = getSortMode(previousId);
 		if (sortMode != null) {
 			setSortMode(trackFolder.getId(), sortMode);
 			askSyncWithUpgrade(app, trackFolder, true);
 		}
+	}
+
+	public void updateAfterDeleteTrackFolder(@NonNull OsmandApplication app,
+	                                         @NonNull TrackFolder trackFolder) {
+		cachedSortModes.remove(trackFolder.getId());
+		askSyncWithUpgrade(app, trackFolder, true);
 	}
 
 	public void syncSettings() {
