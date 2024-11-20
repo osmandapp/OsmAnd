@@ -21,7 +21,6 @@ import androidx.car.app.model.Template;
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.IconCompat;
-import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.data.FavouritePoint;
@@ -31,8 +30,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.TripUtils;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.FavouritesLayer;
@@ -161,7 +158,7 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 		getApp().getOsmandMap().getMapLayers().getMapActionsHelper().startNavigation();
 		NavigationSession session = getApp().getCarNavigationSession();
 		if (session != null && session.hasStarted()) {
-			session.startNavigation();
+			session.startNavigationScreen();
 		}
 	}
 
