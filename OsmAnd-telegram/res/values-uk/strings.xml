@@ -135,7 +135,7 @@
     <string name="mile">миля</string>
     <string name="km">км</string>
     <string name="m">м</string>
-    <string name="nm">nmi</string>
+    <string name="nm">BMI</string>
     <string name="min_mile">хв/м</string>
     <string name="min_km">хв/км</string>
     <string name="nm_h">nmi/год</string>
