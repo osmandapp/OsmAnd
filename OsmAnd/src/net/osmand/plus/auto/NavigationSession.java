@@ -129,7 +129,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	private CarContext carContext;
 	private NavigationManager navigationManager;
-	private boolean carNavigationActive;
+	private boolean carNavigationShouldBeActive; // it could set true before init navigationManager
 	private TripHelper tripHelper;
 
 	NavigationSession() {
@@ -433,7 +433,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		}
 		getCarContext().getCarService(ScreenManager.class).push(navigationScreen);
 		// navigation already started
-		if (routingHelper.isFollowingMode() && routingHelper.isRouteCalculated() && !carNavigationActive) {
+		if (routingHelper.isFollowingMode() && routingHelper.isRouteCalculated() && !carNavigationShouldBeActive) {
 			startCarNavigation();
 		}
 	}
@@ -618,8 +618,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 					}
 				}
 			});
-			// Uncomment if navigating
-			// mNavigationManager.navigationStarted();
+			if (carNavigationShouldBeActive) {
+				navigationManager.navigationStarted();
+			}
 		} else {
 			this.navigationManager = null;
 		}
@@ -643,8 +644,8 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	public void startCarNavigation() {
 		if (navigationManager != null) {
 			navigationManager.navigationStarted();
-			carNavigationActive = true;
 		}
+		carNavigationShouldBeActive = true;
 	}
 
 	/**
@@ -660,7 +661,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 								navigationScreen.stopTrip();
 							}
 						}
-						carNavigationActive = false;
+						carNavigationShouldBeActive = false;
 						navigationManager.navigationEnded();
 					}
 				}
@@ -670,7 +671,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	public void updateCarNavigation(Location currentLocation) {
 		OsmandApplication app = getApp();
 		TripHelper tripHelper = this.tripHelper;
-		if (carNavigationActive && navigationManager != null && tripHelper != null
+		if (carNavigationShouldBeActive && navigationManager != null && tripHelper != null
 				&& routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
 			NavigationSession carNavigationSession = app.getCarNavigationSession();
 			if (carNavigationSession != null) {
@@ -702,10 +703,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 				}
 			}
 		}
-	}
-
-	public boolean isCarNavigationActive() {
-		return carNavigationActive;
 	}
 
 	private void checkAppInitialization(@NonNull RestoreNavigationHelper restoreNavigationHelper) {
