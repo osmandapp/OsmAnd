@@ -55,6 +55,8 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.util.Algorithms;
 
+import java.util.List;
+
 public class SpeedometerWidget {
 
 	private final static int PREVIEW_VALUE = 85;
@@ -128,6 +130,7 @@ public class SpeedometerWidget {
 	private String cachedSpeedLimitText;
 	private boolean lastNightMode;
 	private Integer cachedMetricSystem;
+	private DrivingRegion cachedRegion;
 
 	@Nullable
 	private Bitmap widgetBitmap;
@@ -158,20 +161,23 @@ public class SpeedometerWidget {
 			return;
 		}
 
+		boolean isUsaOrCanada = isUsaOrCanadaRegion();
 		LinearLayout.LayoutParams speedLimitValueParams = (LinearLayout.LayoutParams) speedLimitValueView.getLayoutParams();
 		speedLimitValueParams.setMargins(0, 0, 0, 0);
 		speedLimitValueView.setLayoutParams(speedLimitValueParams);
-		AndroidUiHelper.updateVisibility(speedLimitDescription, false);
+		AndroidUiHelper.updateVisibility(speedLimitDescription, isUsaOrCanada);
 		WidgetSize newWidgetSize = settings.SPEEDOMETER_SIZE.getModeValue(mode);
-		if (previousWidgetSize == newWidgetSize) {
+		DrivingRegion newDrivingRegion = settings.DRIVING_REGION.getModeValue(mode);
+		if (previousWidgetSize == newWidgetSize && cachedRegion == newDrivingRegion) {
 			return;
 		}
 		previousWidgetSize = newWidgetSize;
+		cachedRegion = newDrivingRegion;
 
 		LinearLayout.LayoutParams speedLimitLayoutParams = (LinearLayout.LayoutParams) speedLimitContainer.getLayoutParams();
 		speedLimitLayoutParams.gravity = Gravity.CENTER;
 		LinearLayout.LayoutParams speedometerLayoutParams = (LinearLayout.LayoutParams) speedometerContainer.getLayoutParams();
-		if (isUsaOrCanadaRegion()) {
+		if (isUsaOrCanada) {
 			speedLimitValueParams.height = LinearLayout.LayoutParams.WRAP_CONTENT;
 		} else {
 			speedLimitValueParams.height = LinearLayout.LayoutParams.MATCH_PARENT;
@@ -190,7 +196,7 @@ public class SpeedometerWidget {
 				speedLimitLayoutParams.height = dpToPx(SPEED_LIMIT_SIZE_M);
 				speedLimitLayoutParams.width = dpToPx(SPEED_LIMIT_SIZE_M);
 				speedLimitValueView.setTextSize(TypedValue.COMPLEX_UNIT_SP, SPEED_LIMIT_TEXT_SIZE_M);
-				speedLimitPadding = isUsaOrCanadaRegion() ? dpToPx(SPEED_LIMIT_CONTAINER_US_PADDING_M) : 0;
+				speedLimitPadding = isUsaOrCanada ? dpToPx(SPEED_LIMIT_CONTAINER_US_PADDING_M) : 0;
 				speedLimitContainer.setPadding(speedLimitPadding, speedLimitPadding, speedLimitPadding, speedLimitPadding);
 				speedLimitContainer.setLayoutParams(speedLimitLayoutParams);
 				speedLimitDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, SPEED_LIMIT_DESCRIPTION_SIZE_USUAL);
@@ -204,7 +210,7 @@ public class SpeedometerWidget {
 
 				speedLimitLayoutParams.height = dpToPx(SPEED_LIMIT_SIZE_L);
 				speedLimitLayoutParams.width = dpToPx(SPEED_LIMIT_SIZE_L);
-				speedLimitPadding = isUsaOrCanadaRegion() ? dpToPx(SPEED_LIMIT_CONTAINER_US_PADDING_L) : 0;
+				speedLimitPadding = isUsaOrCanada ? dpToPx(SPEED_LIMIT_CONTAINER_US_PADDING_L) : 0;
 				speedLimitContainer.setPadding(speedLimitPadding, speedLimitPadding, speedLimitPadding, speedLimitPadding);
 				speedLimitContainer.setLayoutParams(speedLimitLayoutParams);
 				speedLimitValueView.setTextSize(TypedValue.COMPLEX_UNIT_SP, SPEED_LIMIT_TEXT_SIZE_L);
@@ -219,7 +225,7 @@ public class SpeedometerWidget {
 
 				speedLimitLayoutParams.height = dpToPx(SPEED_LIMIT_SIZE_S);
 				speedLimitLayoutParams.width = dpToPx(SPEED_LIMIT_SIZE_S);
-				speedLimitPadding = isUsaOrCanadaRegion() ? dpToPx(SPEED_LIMIT_CONTAINER_US_PADDING_S) : 0;
+				speedLimitPadding = isUsaOrCanada ? dpToPx(SPEED_LIMIT_CONTAINER_US_PADDING_S) : 0;
 				speedLimitContainer.setPadding(speedLimitPadding, speedLimitPadding, speedLimitPadding, speedLimitPadding);
 				speedLimitContainer.setLayoutParams(speedLimitLayoutParams);
 				speedLimitValueView.setTextSize(TypedValue.COMPLEX_UNIT_SP, SPEED_LIMIT_TEXT_SIZE_S);
@@ -357,12 +363,12 @@ public class SpeedometerWidget {
 	}
 
 	public boolean isMetricUpdateNeeded() {
-		boolean updateNeeded;
 		int metricSystem = app.getSettings().METRIC_SYSTEM.get().ordinal();
-		updateNeeded = cachedMetricSystem == null || cachedMetricSystem != metricSystem;
-		cachedMetricSystem = metricSystem;
-
-		return updateNeeded;
+		if (cachedMetricSystem == null || cachedMetricSystem != metricSystem) {
+			cachedMetricSystem = metricSystem;
+			return true;
+		}
+		return false;
 	}
 
 	private boolean shouldShowWidget() {
@@ -450,14 +456,7 @@ public class SpeedometerWidget {
 		float y;
 		if (isUsaOrCanadaRegion()) {
 			Rect contentRect = getSpeedlimitContentRect(alertRect, newWidgetSize, density);
-			float halfTextHeight = textBounds.height() / 2.0f;
-			float totalWeight = SPEED_LIMIT_DESCRIPTION_WEIGHT + SPEED_LIMIT_VALUE_WEIGHT;
-
-			float calculatedValueFrameTextHeight = calculateFrameTextHeight(SPEED_LIMIT_VALUE_WEIGHT, totalWeight, contentRect.height());
-			float calculatedDescriptionFrameTextHeight = calculateFrameTextHeight(SPEED_LIMIT_DESCRIPTION_WEIGHT, totalWeight, contentRect.height());
-			float frameCenterPosition = calculatedValueFrameTextHeight / 2 + calculatedDescriptionFrameTextHeight + halfTextHeight;
-
-			y = frameCenterPosition + contentRect.top;
+			y = calculateYWeightPose(contentRect, SPEED_LIMIT_VALUE_WEIGHT, List.of(SPEED_LIMIT_DESCRIPTION_WEIGHT), List.of(SPEED_LIMIT_DESCRIPTION_WEIGHT), textBounds);
 		} else {
 			y = alertRect.top + (float) alertRect.height() / 2 + (float) textBounds.height() / 2;
 		}
@@ -487,15 +486,26 @@ public class SpeedometerWidget {
 		Rect textBounds = new Rect();
 		textPaint.getTextBounds(textLimitDescription, 0, textLimitDescription.length(), textBounds);
 		float xDescr = contentRect.left + (float) contentRect.width() / 2 - textPaint.measureText(textLimitDescription) / 2;
-
-		float halfTextHeight = textBounds.height() / 2.0f;
-		float totalWeight = SPEED_LIMIT_DESCRIPTION_WEIGHT + SPEED_LIMIT_VALUE_WEIGHT;
-
-		float calculatedFrameTextHeight = calculateFrameTextHeight(SPEED_LIMIT_DESCRIPTION_WEIGHT, totalWeight, contentRect.height());
-		float frameCenterPosition = (calculatedFrameTextHeight / 2) + halfTextHeight;
-		float yDescr = frameCenterPosition + contentRect.top;
+		float yDescr = calculateYWeightPose(contentRect, SPEED_LIMIT_DESCRIPTION_WEIGHT, List.of(SPEED_LIMIT_VALUE_WEIGHT), null, textBounds);
 
 		canvas.drawText(textLimitDescription, xDescr, yDescr, textPaint);
+	}
+
+	private float calculateYWeightPose(@NonNull Rect contentRect, int frameWeight, @NonNull List<Integer> otherWeights,
+	                                   @Nullable List<Integer> frameWeightsAbove, @NonNull Rect textBounds) {
+		float halfTextHeight = textBounds.height() / 2.0f;
+		float totalWeight = frameWeight + otherWeights.stream().reduce(0, Integer::sum);
+
+		float totalHeightAbove = 0;
+		if (frameWeightsAbove != null) {
+			for (Integer weight : frameWeightsAbove) {
+				totalHeightAbove += calculateFrameTextHeight(weight, totalWeight, contentRect.height());
+			}
+		}
+
+		float calculatedFrameTextHeight = calculateFrameTextHeight(frameWeight, totalWeight, contentRect.height());
+		float frameCenterPosition = calculatedFrameTextHeight / 2 + totalHeightAbove + halfTextHeight;
+		return frameCenterPosition + contentRect.top;
 	}
 
 	private Rect getSpeedlimitContentRect(@NonNull Rect speedlimitRect, @NonNull WidgetSize newWidgetSize, float density) {
@@ -508,10 +518,11 @@ public class SpeedometerWidget {
 			} else {
 				padding = SPEED_LIMIT_CONTAINER_US_PADDING_L;
 			}
-			return new Rect((int) (speedlimitRect.left + padding * density),
-					(int) (speedlimitRect.top + padding * density),
-					(int) (speedlimitRect.right - padding * density),
-					(int) (speedlimitRect.bottom - padding * density));
+			float scaledPadding = padding * density;
+			return new Rect((int) (speedlimitRect.left + scaledPadding),
+					(int) (speedlimitRect.top + scaledPadding),
+					(int) (speedlimitRect.right - scaledPadding),
+					(int) (speedlimitRect.bottom - scaledPadding));
 		} else {
 			return speedlimitRect;
 		}
@@ -657,15 +668,10 @@ public class SpeedometerWidget {
 	}
 
 	private void setSpeedLimitDescription() {
-		boolean visible = false;
-		if (isUsaOrCanadaRegion()) {
-			if (speedLimitDescription != null) {
-				String textLimitDescription = app.getString(isCanadaRegion() ? R.string.speedometer_maximum : R.string.shared_string_limit).toUpperCase();
-				speedLimitDescription.setText(textLimitDescription);
-				visible = true;
-			}
+		if (isUsaOrCanadaRegion() && speedLimitDescription != null) {
+			String textLimitDescription = app.getString(isCanadaRegion() ? R.string.speedometer_maximum : R.string.shared_string_limit).toUpperCase();
+			speedLimitDescription.setText(textLimitDescription);
 		}
-		AndroidUiHelper.updateVisibility(speedLimitDescription, visible);
 	}
 
 	private boolean isUsaOrCanadaRegion() {
