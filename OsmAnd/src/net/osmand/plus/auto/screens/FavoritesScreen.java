@@ -57,7 +57,6 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 
 	@Nullable
 	private FavoriteGroup selectedGroup;
-	private CompassMode initialCompassMode;
 
 	public FavoritesScreen(
 			@NonNull CarContext carContext,
@@ -66,24 +65,20 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 		super(carContext);
 		this.settingsAction = settingsAction;
 		selectedGroup = group;
-		getLifecycle().addObserver(new DefaultLifecycleObserver() {
-			@Override
-			public void onDestroy(@NonNull LifecycleOwner owner) {
-				DefaultLifecycleObserver.super.onDestroy(owner);
-				getFavouritesLayer().setCustomMapObjects(null);
-				getFavouritesLayer().customObjectsDelegate = null;
-				getApp().getOsmandMap().getMapView().backToLocation();
-				if (initialCompassMode != null) {
-					getApp().getMapViewTrackingUtilities().switchCompassModeTo(initialCompassMode);
-				}
-			}
+		getLifecycle().addObserver(this);
+	}
 
-			@Override
-			public void onStart(@NonNull LifecycleOwner owner) {
-				DefaultLifecycleObserver.super.onStart(owner);
-				getFavouritesLayer().customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
-			}
-		});
+	@Override
+	public void onDestroy(@NonNull LifecycleOwner owner) {
+		super.onDestroy(owner);
+		getFavouritesLayer().setCustomMapObjects(null);
+		getFavouritesLayer().customObjectsDelegate = null;
+	}
+
+	@Override
+	public void onStart(@NonNull LifecycleOwner owner) {
+		super.onStart(owner);
+		getFavouritesLayer().customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
 	}
 
 	private FavouritesLayer getFavouritesLayer() {
@@ -115,11 +110,6 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 		List<FavouritePoint> limitedFavoritesPoints = favoritesPoints.subList(0, Math.min(favoritesPointsSize, getContentLimit() - 1));
 		getApp().getOsmandMap().getMapLayers().getFavouritesLayer().setCustomMapObjects(limitedFavoritesPoints);
 		QuadRect mapRect = new QuadRect();
-		if (!Algorithms.isEmpty(limitedFavoritesPoints)) {
-			OsmandSettings settings = getApp().getSettings();
-			initialCompassMode = settings.getCompassMode();
-			getApp().getMapViewTrackingUtilities().switchCompassModeTo(CompassMode.NORTH_IS_UP);
-		}
 		for (FavouritePoint point : limitedFavoritesPoints) {
 			double longitude = point.getLongitude();
 			double latitude = point.getLatitude();
@@ -143,7 +133,7 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 							CarLocation.create(point.getLatitude(), point.getLongitude())).build()).build())
 					.build());
 		}
-		// adjustMapToRect(location, mapRect);
+		adjustMapToRect(location, mapRect);
 	}
 
 	private void onClickFavorite(@NonNull FavouritePoint point) {

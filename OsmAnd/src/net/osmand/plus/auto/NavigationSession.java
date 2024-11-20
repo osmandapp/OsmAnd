@@ -161,6 +161,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		SurfaceRenderer navigationCarSurface = this.navigationCarSurface;
 		if (navigationCarSurface != null) {
 			navigationCarSurface.setMapView(hasStarted() ? mapView : null);
+			if (mapView != null) {
+				navigationCarSurface.handleRecenter();
+			}
 		}
 	}
 
