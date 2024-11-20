@@ -272,12 +272,18 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 
 	public void setupObdRecordingPref() {
 		Preference preference = findPreference(RECORD_OBD_DATA);
+
+		@ColorRes int iconColor = isNightMode() ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
+		int iconId = R.drawable.ic_action_car_info;
+		Drawable prefIcon = getIcon(iconId, iconColor);
 		String summary = app.getString(R.string.shared_string_none);;
+
 		VehicleMetricsPlugin plugin = PluginsHelper.getPlugin(VehicleMetricsPlugin.class);
 		if (plugin != null) {
 			List<String> enabledCommands = plugin.getTRIP_RECORDING_VEHICLE_METRICS().getStringsListForProfile(getSelectedAppMode());
 			if (!Algorithms.isEmpty(enabledCommands)) {
 				summary = String.valueOf(enabledCommands.size());
+				prefIcon = getActiveIcon(iconId);
 			}
 		}
 		preference.setSummary(summary);
@@ -288,8 +294,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		preference.setVisible(purchased && PluginsHelper.isEnabled(VehicleMetricsPlugin.class));
 		promo.setVisible(!purchased);
 
-		int iconId = R.drawable.ic_action_car_info;
-		preference.setIcon(getPersistentPrefIcon(iconId));
+		preference.setIcon(prefIcon);
 		promo.setIcon(getContentIcon(iconId));
 	}
 
