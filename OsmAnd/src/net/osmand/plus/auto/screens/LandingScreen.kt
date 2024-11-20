@@ -127,10 +127,11 @@ class LandingScreen(
                         app.routingHelper.resumeNavigation()
                     }
                     carNavigationSession.startNavigation()
-                    val navigationScreen = carNavigationSession.navigationScreen
-                    navigationScreen?.let {
-                        screenManager.push(navigationScreen)
-                    }
+                    // duplicate code from startNavigation
+//                    val navigationScreen = carNavigationSession.navigationScreen
+//                    navigationScreen?.let {
+//                        screenManager.push(navigationScreen)
+//                    }
                 }
             }
             .build()
