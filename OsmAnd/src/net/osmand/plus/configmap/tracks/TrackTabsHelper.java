@@ -251,7 +251,7 @@ public class TrackTabsHelper {
 		if (file != null && file.getParentFile() != null) {
 			KFile dir = file.getParentFile();
 			if (dir != null) {
-				String folderId = TrackFolderUtil.getTrackFolderId(dir);
+				String folderId = TrackSortModesCollection.getFolderId(dir.absolutePath());
 				TrackTab trackTab = trackTabs.get(folderId);
 				if (trackTab == null) {
 					trackTab = new TrackTab(SharedUtil.jFile(dir));

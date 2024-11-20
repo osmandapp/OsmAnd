@@ -12,6 +12,7 @@ import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.Objects;
 
 public class TrackSortModesCollection {
 
+	private static final String ROOT_FOLDER = IndexConstants.GPX_INDEX_DIR;
 	private static final String SEPARATOR = ",,";
 
 	private final Map<String, TracksSortMode> cachedSortModes = new HashMap<>();
@@ -33,7 +35,7 @@ public class TrackSortModesCollection {
 
 	@NonNull
 	public TracksSortMode getRootSortMode() {
-		return requireSortMode(IndexConstants.GPX_INDEX_DIR);
+		return requireSortMode(ROOT_FOLDER);
 	}
 
 	@NonNull
@@ -45,9 +47,11 @@ public class TrackSortModesCollection {
 	@Nullable
 	public TracksSortMode getSortMode(@Nullable String id) {
 		TracksSortMode sortMode = cachedSortModes.get(id);
-		if (sortMode == null && id != null && TrackFolderUtil.isStandardFolderId(id)) {
-			String oldId = TrackFolderUtil.getOutdatedStandardFolderId(id);
-			sortMode = cachedSortModes.get(oldId);
+		if (sortMode == null && id != null && isFolderIdV2(id)) {
+			String idV1 = getFolderIdV1(id);
+			if (idV1 != null) {
+				sortMode = cachedSortModes.get(idV1);
+			}
 		}
 		return sortMode;
 	}
@@ -56,25 +60,24 @@ public class TrackSortModesCollection {
 		cachedSortModes.put(id, sortMode);
 	}
 
-	public void replaceKey(@NonNull String oldKey, @NonNull String newKey) {
-		TracksSortMode sortMode = cachedSortModes.remove(oldKey);
-		if (sortMode != null) {
-			cachedSortModes.put(newKey, sortMode);
-		}
+	public void askSyncWithUpgrade(@NonNull OsmandApplication app, @NonNull TrackFolder trackFolder) {
+		askSyncWithUpgrade(app, trackFolder, false);
 	}
 
-	public void askSyncWithUpgrade(@NonNull OsmandApplication app, @NonNull TrackFolder trackFolder) {
-		if (askUpgradeStoredKeys(app, trackFolder.getRootFolder())) {
+	public void askSyncWithUpgrade(@NonNull OsmandApplication app, @NonNull TrackFolder trackFolder,
+	                               boolean forceSync) {
+		if (askUpgradeCachedKeys(app, trackFolder) || forceSync) {
 			syncSettings();
 		}
 	}
 
 	/**
 	 * Removes surplus keys and upgrades outdated ones.
-	 * Then saves sort modes with upgraded keys to the preferences.
+	 * Upgraded keys will use folder relative path as a key (V2) instead of folder name (V1).
 	 */
-	public boolean askUpgradeStoredKeys(@NonNull OsmandApplication app, @NonNull TrackFolder rootFolder) {
-		if (!Objects.equals(rootFolder.getDirFile(), app.getAppPathKt(IndexConstants.GPX_INDEX_DIR))) {
+	private boolean askUpgradeCachedKeys(@NonNull OsmandApplication app, @NonNull TrackFolder trackFolder) {
+		TrackFolder rootFolder = trackFolder.getRootFolder();
+		if (!Objects.equals(rootFolder.getDirFile(), app.getAppPathKt(ROOT_FOLDER))) {
 			// Execute only from tracks root folder to not lose valid entries
 			return false;
 		}
@@ -100,6 +103,16 @@ public class TrackSortModesCollection {
 		}
 	}
 
+	public void updateMovedTrackFolder(@NonNull OsmandApplication app,
+	                                   @NonNull TrackFolder trackFolder, @NonNull File oldDir) {
+		String previousId = getFolderId(oldDir.getAbsolutePath());
+		TracksSortMode sortMode = getSortMode(previousId);
+		if (sortMode != null) {
+			setSortMode(trackFolder.getId(), sortMode);
+			askSyncWithUpgrade(app, trackFolder, true);
+		}
+	}
+
 	public void syncSettings() {
 		saveToPreference();
 	}
@@ -122,5 +135,21 @@ public class TrackSortModesCollection {
 			tokens.add(entry.getKey() + SEPARATOR + entry.getValue().name());
 		}
 		preference.setStringsList(tokens);
+	}
+
+	@NonNull
+	public static String getFolderId(@NonNull String absolutePath) {
+		int index = absolutePath.indexOf(ROOT_FOLDER);
+		return index > 0 ? absolutePath.substring(index) : absolutePath;
+	}
+
+	private static boolean isFolderIdV2(@NonNull String id) {
+		return id.startsWith(ROOT_FOLDER);
+	}
+
+	@Nullable
+	private static String getFolderIdV1(@NonNull String idV2) {
+		int index = idV2.lastIndexOf(File.separator);
+		return index > 0 ? idV2.substring(index + 1) : null;
 	}
 }
