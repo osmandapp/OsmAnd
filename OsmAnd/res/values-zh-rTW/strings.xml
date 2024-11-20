@@ -4217,7 +4217,7 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">低縮放程度的圖示</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">低縮放程度圖示的示意圖</string>
     <string name="rendering_attr_showWaterwayTunnels_name">不要隱藏水路隧道</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">不要隱藏水路隧道</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">增加水路隧道的可見度</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme 標籤</string>
     <string name="shared_string_open_street_map">開放街圖</string>
     <string name="rendering_value_category_name">類別</string>
@@ -5541,7 +5541,7 @@
     <string name="obd_fuel_consumption_rate_desc">顯示以 OBD 感應器位置為基礎的油耗</string>
     <string name="obd_fuel_left_distance">剩餘燃料（距離）</string>
     <string name="obd_fuel_type">燃料類型</string>
-    <string name="obd_plugin_name">車輛指標</string>
+    <string name="obd_plugin_name">車輛尺度</string>
     <string name="obd_plugin_description">使用 OBD-II 通訊協定監控主要車輛指標。存取的資料包括 * 引擎速度 * 油耗 * 剩餘燃料 * 引擎啟動距離 * 進氣溫度 * 環境溫度 * 冷卻溫度 * 車速 * 電池百分比</string>
     <string name="obd_support">OBD 支援</string>
     <string name="obd_vin">車輛識別號碼</string>
@@ -5559,7 +5559,7 @@
     <string name="new_trip_segment">新旅程區段</string>
     <string name="quick_action_start_pause_recording">開始、暫停或繼續 GPX 軌跡錄製的按鈕。</string>
     <string name="quick_action_verb_start_pause">開始 / 暫停</string>
-    <string name="help_article_personal_color_palette_schemes_name">配色方案</string>
+    <string name="help_article_personal_color_palette_schemes_name">顏色配置</string>
     <string name="movies_list">電影清單</string>
     <string name="third_links">第三個連結</string>
     <string name="track_does_not_contain_data_to_save">軌跡不包含要儲存的資料。</string>
