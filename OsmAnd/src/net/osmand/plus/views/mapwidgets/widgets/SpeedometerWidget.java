@@ -456,7 +456,7 @@ public class SpeedometerWidget {
 		float y;
 		if (isUsaOrCanadaRegion()) {
 			Rect contentRect = getSpeedlimitContentRect(alertRect, newWidgetSize, density);
-			y = calculateYWeightPose(contentRect, SPEED_LIMIT_VALUE_WEIGHT, List.of(SPEED_LIMIT_DESCRIPTION_WEIGHT), List.of(SPEED_LIMIT_DESCRIPTION_WEIGHT), textBounds);
+			y = calculateYWeightPose(contentRect, SPEED_LIMIT_VALUE_WEIGHT, List.of(SPEED_LIMIT_DESCRIPTION_WEIGHT, SPEED_LIMIT_VALUE_WEIGHT), List.of(SPEED_LIMIT_DESCRIPTION_WEIGHT), textBounds);
 		} else {
 			y = alertRect.top + (float) alertRect.height() / 2 + (float) textBounds.height() / 2;
 		}
@@ -486,19 +486,19 @@ public class SpeedometerWidget {
 		Rect textBounds = new Rect();
 		textPaint.getTextBounds(textLimitDescription, 0, textLimitDescription.length(), textBounds);
 		float xDescr = contentRect.left + (float) contentRect.width() / 2 - textPaint.measureText(textLimitDescription) / 2;
-		float yDescr = calculateYWeightPose(contentRect, SPEED_LIMIT_DESCRIPTION_WEIGHT, List.of(SPEED_LIMIT_VALUE_WEIGHT), null, textBounds);
+		float yDescr = calculateYWeightPose(contentRect, SPEED_LIMIT_DESCRIPTION_WEIGHT, List.of(SPEED_LIMIT_VALUE_WEIGHT, SPEED_LIMIT_DESCRIPTION_WEIGHT), null, textBounds);
 
 		canvas.drawText(textLimitDescription, xDescr, yDescr, textPaint);
 	}
 
-	private float calculateYWeightPose(@NonNull Rect contentRect, int frameWeight, @NonNull List<Integer> otherWeights,
-	                                   @Nullable List<Integer> frameWeightsAbove, @NonNull Rect textBounds) {
+	private float calculateYWeightPose(@NonNull Rect contentRect, int frameWeight, @NonNull List<Integer> allWeights,
+	                                   @Nullable List<Integer> weightsAbove, @NonNull Rect textBounds) {
 		float halfTextHeight = textBounds.height() / 2.0f;
-		float totalWeight = frameWeight + otherWeights.stream().reduce(0, Integer::sum);
+		float totalWeight = allWeights.stream().reduce(0, Integer::sum);
 
 		float totalHeightAbove = 0;
-		if (frameWeightsAbove != null) {
-			for (Integer weight : frameWeightsAbove) {
+		if (weightsAbove != null) {
+			for (Integer weight : weightsAbove) {
 				totalHeightAbove += calculateFrameTextHeight(weight, totalWeight, contentRect.height());
 			}
 		}
