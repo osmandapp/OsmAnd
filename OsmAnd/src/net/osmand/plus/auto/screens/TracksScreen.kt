@@ -46,31 +46,26 @@ class TracksScreen(
 	val gpxDbHelper: GpxDbHelper = app.gpxDbHelper
 	private var loadedGpxFiles = HashMap<TrackItem, SelectedGpxFile>()
 	private lateinit var loadTracksTask: LoadTracksTask
-	private var initialCompassMode: CompassMode? = null
 
     init {
-        lifecycle.addObserver(object : DefaultLifecycleObserver {
-            override fun onCreate(owner: LifecycleOwner) {
-                super.onCreate(owner)
-                loadTracksTask = LoadTracksTask()
-                loadTracksTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
-            }
+		lifecycle.addObserver(this)
+	}
 
-			override fun onDestroy(owner: LifecycleOwner) {
-				super.onDestroy(owner)
-				app.osmandMap.mapLayers.gpxLayer.setCustomMapObjects(null)
-				app.osmandMap.mapLayers.gpxLayer.customObjectsDelegate = null
-				app.osmandMap.mapView.backToLocation()
-				initialCompassMode?.let {
-					app.mapViewTrackingUtilities.switchCompassModeTo(it)
-				}
-			}
+	override fun onCreate(owner: LifecycleOwner) {
+		super.onCreate(owner)
+		loadTracksTask = LoadTracksTask()
+		loadTracksTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+	}
 
-	        override fun onStart(owner: LifecycleOwner) {
-		        recenterMap()
-		        app.osmandMap.mapLayers.gpxLayer.customObjectsDelegate = CustomMapObjects()
-	        }
-        })
+	override fun onDestroy(owner: LifecycleOwner) {
+		super.onDestroy(owner)
+		app.osmandMap.mapLayers.gpxLayer.setCustomMapObjects(null)
+		app.osmandMap.mapLayers.gpxLayer.customObjectsDelegate = null
+	}
+
+	override fun onStart(owner: LifecycleOwner) {
+		super.onStart(owner)
+		app.osmandMap.mapLayers.gpxLayer.customObjectsDelegate = CustomMapObjects()
 	}
 
 	private inner class LoadTracksTask : AsyncTask<Unit, Unit, Unit>() {
@@ -131,10 +126,6 @@ class TracksScreen(
 		val selectedGpxFiles = ArrayList<SelectedGpxFile>()
 		val tracks = trackTab.trackItems.subList(0, tracksSize.coerceAtMost(contentLimit - 1))
 		val mapRect = KQuadRect()
-		if (!Algorithms.isEmpty(tracks)) {
-			initialCompassMode = app.settings.compassMode
-			app.mapViewTrackingUtilities.switchCompassModeTo(CompassMode.NORTH_IS_UP)
-		}
 		for (track in tracks) {
 			val gpxFile = loadedGpxFiles[track]
 			gpxFile?.let {

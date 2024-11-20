@@ -68,14 +68,8 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 	@Nullable
 	private GpxFile routeGpxFile;
 
-	private float prevElevationAngle = 90;
-	private float prevRotationAngle = 0;
-	private int prevZoom = 15;
-	private boolean prevMapLinkedToLocation = false;
-	private static final long ANIMATION_RETURN_FROM_PREVIEW_TIME = 1500;
 
-	private boolean calculateRoute = false;
-
+	private boolean calculateRoute;
 	private boolean calculating;
 
 	private final StateChangedListener<Void> stateChangedListener = new StateChangedListener<Void>() {
@@ -84,7 +78,6 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 			if (routeGpxFile != null) {
 				QuadRect mapRect = new QuadRect();
 				Algorithms.extendRectToContainRect(mapRect, SharedUtil.jQuadRect(routeGpxFile.getRect()));
-
 				adjustMapToRect(getApp().getMapViewTrackingUtilities().getDefaultLocation(), mapRect);
 			}
 		}
@@ -157,15 +150,10 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 
 	@Override
 	public void onCreate(@NonNull LifecycleOwner owner) {
+		super.onCreate(owner);
 		OsmandApplication app = getApp();
 		app.getRoutingHelper().addListener(this);
 		app.getTargetPointsHelper().addListener(stateChangedListener);
-		prevMapLinkedToLocation = app.getMapViewTrackingUtilities().isMapLinkedToLocation();
-		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
-		prevZoom = mapView.getBaseZoom();
-		prevRotationAngle = mapView.getRotate();
-		prevElevationAngle = mapView.normalizeElevationAngle(mapView.getElevationAngle());
-		NavigationSession navigationSession = getSession();
 		if (calculateRoute) {
 			prepareRoute();
 		} else {
@@ -186,24 +174,10 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 	}
 
 	@Override
-	public void onStart(@NonNull LifecycleOwner owner) {
-		recenterMap();
-	}
-
-	@Override
 	public void onResume(@NonNull LifecycleOwner owner) {
 		if (getApp().getRoutingHelper().isRouteCalculated()) {
 			zoomMapToRoute();
 		}
-	}
-
-	@Override
-	public void onStop(@NonNull LifecycleOwner owner) {
-		OsmandMapTileView mapView = getApp().getOsmandMap().getMapView();
-		if (prevMapLinkedToLocation != getApp().getMapViewTrackingUtilities().isMapLinkedToLocation()) {
-			getApp().getMapViewTrackingUtilities().setMapLinkedToLocation(prevMapLinkedToLocation);
-		}
-		mapView.animateToState(mapView.getLatitude(), mapView.getLongitude(), (float)prevZoom, prevRotationAngle, prevElevationAngle, ANIMATION_RETURN_FROM_PREVIEW_TIME, false);
 	}
 
 	@NonNull
