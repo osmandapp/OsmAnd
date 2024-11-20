@@ -189,7 +189,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	public void onStart(@NonNull LifecycleOwner owner) {
 		OsmandApplication app = getApp();
 		routingHelper.addListener(this);
-
 		defaultAppMode = settings.getApplicationMode();
 		if (!isAppModeDerivedFromCar(defaultAppMode)) {
 			List<ApplicationMode> availableAppModes = ApplicationMode.values(app);
@@ -214,7 +213,12 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	@Override
 	public void onResume(@NonNull LifecycleOwner owner) {
-		showRoutePreview();
+		if (routingHelper.isFollowingMode() && routingHelper.isRouteCalculated()) {
+			startNavigation();
+//			updateCarNavigation(routingHelper.getLastFixedLocation());
+		} else {
+			showRoutePreview();
+		}
 	}
 
 	@Override
@@ -415,16 +419,22 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	}
 
 	public void startNavigation() {
-		createNavigationScreen();
-		getCarContext().getCarService(ScreenManager.class).push(navigationScreen);
-	}
-
-	private void createNavigationScreen() {
+		if (navigationScreen != null) {
+			CarContext context = getCarContext();
+			ScreenManager screenManager = context.getCarService(ScreenManager.class);
+			Screen top = screenManager.getTop();
+			if (top instanceof NavigationScreen) {
+				return;
+			}
+		}
 		if (navigationScreen == null) {
 			navigationScreen = new NavigationScreen(getCarContext(), settingsAction, this);
 			navigationCarSurface.setCallback(navigationScreen);
 		}
+		startCarNavigation();
+		getCarContext().getCarService(ScreenManager.class).push(navigationScreen);
 	}
+
 
 	@Override
 	public void stopNavigation() {
@@ -471,7 +481,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		ScreenManager screenManager = context.getCarService(ScreenManager.class);
 		Screen top = screenManager.getTop();
 		TargetPoint pointToNavigate = app.getTargetPointsHelper().getPointToNavigate();
-		if (app.getRoutingHelper().isRouteCalculated() && !settings.FOLLOW_THE_ROUTE.get()
+		if (app.getRoutingHelper().isRouteCalculated() && !app.getRoutingHelper().isFollowingMode()
 				&& pointToNavigate != null && !(top instanceof RoutePreviewScreen)) {
 			SearchResult result = new SearchResult();
 			result.location = new LatLon(pointToNavigate.getLatitude(), pointToNavigate.getLongitude());
