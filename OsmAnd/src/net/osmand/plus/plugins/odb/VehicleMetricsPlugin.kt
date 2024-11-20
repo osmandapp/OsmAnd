@@ -66,14 +66,14 @@ import okio.sink
 import okio.source
 import org.json.JSONObject
 import java.util.UUID
-import kotlin.jvm.Throws
 
 class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadStatusListener {
 	private var mapActivity: MapActivity? = null
 
 	private val handler = Handler(Looper.getMainLooper())
 	private val RECONNECT_DELAY = 5000L
-	private val RECONNECT_ATTEMPTS_COUNT = 10
+	private val RECONNECT_ATTEMPTS_COUNT = 3
+	private val RECALCULATE_RECONNECT_ATTEMPTS_COUNT = 1
 	private var currentReconnectAttempt = 0
 
 	private var connectionState = OBDConnectionState.DISCONNECTED
@@ -359,7 +359,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			disconnect(false)
 		}
 		currentReconnectAttempt--
-		if (currentReconnectAttempt <= 0) {
+		if (currentReconnectAttempt < 0) {
 			return
 		}
 		LOG.debug("connectToObd $deviceInfo reconnectCount $currentReconnectAttempt")
@@ -708,9 +708,16 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 
 	override fun mapActivityCreate(activity: MapActivity) {
 		super.mapActivityCreate(activity)
+		connectToLastConnectedDevice(activity, RECONNECT_ATTEMPTS_COUNT)
+	}
+
+	private fun connectToLastConnectedDevice(activity: MapActivity, attemptsCount: Int) {
 		val lastConnectedDevice = getLastConnectedDevice()
-		if (connectedDeviceInfo == null && lastConnectedDevice != null) {
-			connectToObd(activity, lastConnectedDevice)
+		val registry = app.osmandMap.mapLayers.mapWidgetRegistry
+		if (connectedDeviceInfo == null && lastConnectedDevice != null && registry.allWidgets.any {
+				it.widget is OBDTextWidget &&  it.isEnabledForAppMode(app.settings.applicationMode)}) {
+			currentReconnectAttempt = attemptsCount
+			connectToObdInternal(activity, lastConnectedDevice)
 		}
 	}
 
@@ -944,6 +951,12 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		LOG.debug("onCarNavigationSessionCreated $connectionState $lastConnectedDevice ${activity != null}")
 		if (connectionState == OBDConnectionState.DISCONNECTED && lastConnectedDevice != null && activity != null) {
 			connectToObd(activity, lastConnectedDevice)
+		}
+	}
+
+	override fun newRouteIsCalculated(newRoute: Boolean) {
+		mapActivity?.let {
+			connectToLastConnectedDevice(it, RECALCULATE_RECONNECT_ATTEMPTS_COUNT)
 		}
 	}
 }
