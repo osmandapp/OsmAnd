@@ -119,13 +119,19 @@ public class BaseResizableWidgetSettingFragment extends WidgetSettingsBaseFragme
 
 	private void updateRowWidgets(@NonNull MapWidgetInfo widgetInfo) {
 		MapActivity activity = getMapActivity();
-		if (activity != null) {
-			List<Set<MapWidgetInfo>> widgets = widgetRegistry.getPagedWidgetsForPanel(activity,
-					appMode, widgetInfo.getWidgetPanel(), AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE);
+		if (activity == null) {
+			return;
+		}
+		List<Set<MapWidgetInfo>> widgets = widgetRegistry.getPagedWidgetsForPanel(activity,
+				appMode, widgetInfo.getWidgetPanel(), AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE);
 
-			Set<MapWidgetInfo> rowMapWidgetsInfo = widgets.get(widgetInfo.pageIndex);
-			rowMapWidgetsInfo.remove(widgetInfo);
-			applySizeSettingToWidgetsInRow(rowMapWidgetsInfo);
+		for (Set<MapWidgetInfo> rowMapWidgetsInfo : widgets) {
+			for (MapWidgetInfo info : rowMapWidgetsInfo) {
+				if (info == widgetInfo) {
+					applySizeSettingToWidgetsInRow(rowMapWidgetsInfo);
+					return;
+				}
+			}
 		}
 	}
 
