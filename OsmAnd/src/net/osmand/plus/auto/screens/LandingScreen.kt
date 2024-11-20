@@ -126,7 +126,7 @@ class LandingScreen(
                     if (app.routingHelper.isRouteCalculated) {
                         app.routingHelper.resumeNavigation()
                     }
-                    carNavigationSession.startNavigation()
+                    carNavigationSession.startNavigationScreen()
                     // duplicate code from startNavigation
 //                    val navigationScreen = carNavigationSession.navigationScreen
 //                    navigationScreen?.let {

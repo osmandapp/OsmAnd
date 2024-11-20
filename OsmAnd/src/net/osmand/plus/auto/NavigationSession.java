@@ -215,7 +215,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	@Override
 	public void onResume(@NonNull LifecycleOwner owner) {
 		if (routingHelper.isFollowingMode() && routingHelper.isRouteCalculated()) {
-			startNavigation();
+			startNavigationScreen();
 //			updateCarNavigation(routingHelper.getLastFixedLocation());
 		} else {
 			showRoutePreview();
@@ -377,7 +377,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 					if (obj != null) {
 						getApp().getOsmandMap().getMapLayers().getMapActionsHelper().startNavigation();
 						if (hasStarted()) {
-							startNavigation();
+							startNavigationScreen();
 						}
 					}
 				});
@@ -419,7 +419,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		return requestLocationPermission();
 	}
 
-	public void startNavigation() {
+	public void startNavigationScreen() {
 		if (navigationScreen != null) {
 			CarContext context = getCarContext();
 			ScreenManager screenManager = context.getCarService(ScreenManager.class);
@@ -432,8 +432,11 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			navigationScreen = new NavigationScreen(getCarContext(), settingsAction, this);
 			navigationCarSurface.setCallback(navigationScreen);
 		}
-		startCarNavigation();
 		getCarContext().getCarService(ScreenManager.class).push(navigationScreen);
+		// navigation already started
+		if (routingHelper.isFollowingMode() && routingHelper.isRouteCalculated() && !carNavigationActive) {
+			startCarNavigation();
+		}
 	}
 
 
@@ -512,7 +515,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 				if (obj != null) {
 					app.getOsmandMap().getMapLayers().getMapActionsHelper().startNavigation();
 					if (hasStarted()) {
-						startNavigation();
+						startNavigationScreen();
 					}
 				}
 			});
@@ -674,7 +677,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			if (carNavigationSession != null) {
 				NavigationScreen navigationScreen = carNavigationSession.getNavigationScreen();
 				if (navigationScreen == null) {
-					carNavigationSession.startNavigation();
+					carNavigationSession.startNavigationScreen();
 					navigationScreen = carNavigationSession.getNavigationScreen();
 				}
 				if (navigationScreen != null) {
