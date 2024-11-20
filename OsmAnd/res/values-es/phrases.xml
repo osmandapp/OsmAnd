@@ -4898,4 +4898,5 @@
     <string name="poi_name_left">Nombre en el lado izquierdo</string>
     <string name="poi_name_etymology">Etimología del nombre</string>
     <string name="poi_name_right">Nombre en el lado derecho</string>
+    <string name="poi_climbing_boulder">escalada en bloque</string>
 </resources>

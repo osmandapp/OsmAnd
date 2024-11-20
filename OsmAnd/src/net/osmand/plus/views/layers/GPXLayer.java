@@ -23,7 +23,6 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.*;
 import net.osmand.core.jni.GpxAdditionalIconsProvider.SplitLabel;
@@ -48,6 +47,7 @@ import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.CachedTrack;
 import net.osmand.plus.track.CachedTrackParams;
 import net.osmand.plus.track.Gpx3DLinePositionType;
@@ -57,16 +57,8 @@ import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.fragments.GpsFilterFragment;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
-import net.osmand.plus.track.helpers.GpxAppearanceHelper;
-import net.osmand.plus.views.corenative.NativeCoreContext;
-import net.osmand.shared.gpx.GpxDbHelper;
-import net.osmand.plus.track.helpers.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxDisplayItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.GpxUtils;
-import net.osmand.plus.track.helpers.ParseGpxRouteTask;
+import net.osmand.plus.track.helpers.*;
 import net.osmand.plus.track.helpers.ParseGpxRouteTask.ParseGpxRouteListener;
-import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -78,6 +70,7 @@ import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.Renderable.CurrentTrack;
 import net.osmand.plus.views.Renderable.RenderableSegment;
 import net.osmand.plus.views.Renderable.StandardTrack;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IMoveObjectProvider;
@@ -92,12 +85,8 @@ import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.shared.data.KQuadRect;
-import net.osmand.shared.gpx.ColoringPurpose;
-import net.osmand.shared.gpx.GpxDataItem;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities;
-import net.osmand.shared.gpx.GradientScaleType;
-import net.osmand.shared.gpx.GpxHelper;
+import net.osmand.shared.gpx.GpxDbHelper;
+import net.osmand.shared.gpx.*;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.io.KFile;
@@ -782,8 +771,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				String gradientColorPalette = getTrackGradientPalette(selectedGpxFile.getGpxFile());
 
 				if (!showArrows || coloringType.isRouteInfoAttribute()
-						|| !KQuadRect.Companion.trivialOverlap(kCorrectedQuadRect, GpxUtilities.INSTANCE.calculateTrackBounds(
-								selectedGpxFile.getPointsToDisplay()))) {
+						|| !KQuadRect.Companion.trivialOverlap(kCorrectedQuadRect,
+						GpxUtilities.INSTANCE.calculateTrackBounds(selectedGpxFile.getPointsToDisplay()))) {
 					continue;
 				}
 				String width = gpxAppearanceHelper.getTrackWidth(gpxFile, defaultWidthPref.get());
@@ -1755,27 +1744,33 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	@Override
-	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position,
+	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon latLon,
 	                                   @Nullable ApplyMovedObjectCallback callback) {
-		if (o instanceof WptPt objectInMotion) {
-			SelectedGpxFile selectedGpxFile = pointFileMap.get(objectInMotion);
+		if (o instanceof WptPt wptPt) {
+			SelectedGpxFile selectedGpxFile = pointFileMap.get(wptPt);
 			if (selectedGpxFile != null) {
 				GpxFile gpxFile = selectedGpxFile.getGpxFile();
-				WptPt wptInfo = new WptPt(position.getLatitude(), position.getLongitude(), objectInMotion.getDesc(), objectInMotion.getName(), objectInMotion.getCategory(),
-						Algorithms.colorToString(objectInMotion.getColor()), objectInMotion.getIconName(), objectInMotion.getBackgroundType());
-				gpxFile.updateWptPt(objectInMotion, wptInfo, true);
-				syncGpx(gpxFile);
 				if (gpxFile.isShowCurrentTrack()) {
+					app.getSavingTrackHelper().updatePointData(wptPt, latLon.getLatitude(), latLon.getLongitude(),
+							wptPt.getDesc(), wptPt.getName(), wptPt.getCategory(), wptPt.getColor(),
+							wptPt.getIconName(), wptPt.getBackgroundType());
+
 					if (callback != null) {
-						callback.onApplyMovedObject(true, objectInMotion);
+						callback.onApplyMovedObject(true, wptPt);
 					}
 				} else {
+					WptPt newPoint = new WptPt(latLon.getLatitude(), latLon.getLongitude(), wptPt.getDesc(),
+							wptPt.getName(), wptPt.getCategory(), Algorithms.colorToString(wptPt.getColor()),
+							wptPt.getIconName(), wptPt.getBackgroundType());
+
+					gpxFile.updateWptPt(wptPt, newPoint, true);
 					SaveGpxHelper.saveGpx(new File(gpxFile.getPath()), gpxFile, errorMessage -> {
 						if (callback != null) {
-							callback.onApplyMovedObject(errorMessage == null, objectInMotion);
+							callback.onApplyMovedObject(errorMessage == null, wptPt);
 						}
 					});
 				}
+				syncGpx(gpxFile);
 			}
 		} else if (callback != null) {
 			callback.onApplyMovedObject(false, o);

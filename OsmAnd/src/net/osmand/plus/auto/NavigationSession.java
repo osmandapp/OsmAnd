@@ -59,9 +59,7 @@ import net.osmand.plus.auto.screens.SettingsScreen;
 import net.osmand.plus.helpers.LocationCallback;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.RestoreNavigationHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.routing.IRouteInformationListener;
@@ -81,6 +79,7 @@ import net.osmand.util.GeoParsedPoint;
 import net.osmand.util.GeoPointParserUtil;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -292,15 +291,14 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		if (ACTION_NAVIGATE.equals(action)) {
 			CarToast.makeText(getCarContext(), "Navigation intent: " + intent.getDataString(), CarToast.LENGTH_LONG).show();
 		}
-		landingScreen = new LandingScreen(getCarContext(), settingsAction);
 
+		landingScreen = new LandingScreen(getCarContext(), settingsAction);
 		OsmandApplication app = getApp();
 		if (!InAppPurchaseUtils.isAndroidAutoAvailable(app)) {
 			getCarContext().getCarService(ScreenManager.class).push(landingScreen);
 			requestPurchaseScreen = new RequestPurchaseScreen(getCarContext());
 			return requestPurchaseScreen;
 		}
-
 		if (!isLocationPermissionAvailable()) {
 			getCarContext().getCarService(ScreenManager.class).push(landingScreen);
 			return new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback);
@@ -420,8 +418,10 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	}
 
 	private void createNavigationScreen() {
-		navigationScreen = new NavigationScreen(getCarContext(), settingsAction, this);
-		navigationCarSurface.setCallback(navigationScreen);
+		if (navigationScreen == null) {
+			navigationScreen = new NavigationScreen(getCarContext(), settingsAction, this);
+			navigationCarSurface.setCallback(navigationScreen);
+		}
 	}
 
 	@Override
@@ -705,8 +705,12 @@ public class NavigationSession extends Session implements NavigationListener, Os
 						}
 					}
 					if (event == ROUTING_CONFIG_INITIALIZED) {
-						if (app.getRegions() != null) {
-							restoreNavigationHelper.checkRestoreRoutingMode();
+						try {
+							if (PlatformUtil.getOsmandRegions() != null) {
+								restoreNavigationHelper.checkRestoreRoutingMode();
+							}
+						} catch (IOException e) {
+							LOG.warn("getOsmandRegions", e);
 						}
 					}
 				}

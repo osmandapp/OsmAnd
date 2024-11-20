@@ -2247,7 +2247,7 @@
     <string name="edit_name">Editar nombre</string>
     <string name="save_poi_too_many_uppercase">El nombre contiene demasiadas mayúsculas. ¿Continuar?</string>
     <string name="srtm_color_scheme">Esquema de color</string>
-    <string name="show_from_zoom_level">La vista inicia desde el nivel de zum</string>
+    <string name="show_from_zoom_level">Mostrar desde el nivel de zum</string>
     <string name="routing_attr_allow_private_name">Permitir el acceso privado</string>
     <string name="routing_attr_allow_private_description">Permite acceder a áreas privadas.</string>
     <string name="display_zoom_level">Nivel de zum de pantalla: %1$s</string>
@@ -2917,7 +2917,7 @@
     <string name="routing_attr_max_num_changes_description">Especifica el número máximo de transbordos</string>
     <string name="routing_attr_max_num_changes_name">Número de transbordos</string>
     <string name="turn_screen_on_router">Despertar al girar</string>
-    <string name="turn_screen_on_time_descr">Define durante cuánto tiempo debe estar encendida la pantalla.</string>
+    <string name="turn_screen_on_time_descr">Define durante cuánto tiempo debe encenderse la pantalla.</string>
     <string name="turn_screen_on_sensor">Usar sensor de proximidad</string>
     <string name="turn_screen_on_sensor_descr">Al mover la mano por la pantalla, se encenderá.</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Grado 1</string>
@@ -3216,7 +3216,7 @@
     <string name="copy_coordinates">Copiar coordenadas</string>
     <string name="routing_profile_direct_to">Directo al punto</string>
     <string name="sort_by_category">Ordenar por categoría</string>
-    <string name="please_provide_profile_name_message">Proporciona un nombre para el perfil</string>
+    <string name="please_provide_profile_name_message">Escribe un nombre para el perfil</string>
     <string name="open_settings">Abrir los ajustes</string>
     <string name="plugin_disabled">Complemento desactivado</string>
     <string name="plugin_disabled_descr">Este complemento es una aplicación independiente, desactivarlo no lo quita.

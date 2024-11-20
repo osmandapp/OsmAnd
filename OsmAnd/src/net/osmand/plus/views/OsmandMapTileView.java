@@ -107,7 +107,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private static final int MIN_ZOOM_LEVEL_TO_ADJUST_CAMERA_TILT = 3;
 	private static final int MAX_ZOOM_LIMIT = 17;
 
-	private static final long ANIMATION_PREVIEW_TIME = 1400;
+	private static final long ANIMATION_PREVIEW_TIME = 1500;
 
 	private boolean MEASURE_FPS;
 	private final FPSMeasurement main = new FPSMeasurement();
@@ -1744,10 +1744,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		clat = tb.getLatFromPixel(x, y);
 		clon = tb.getLonFromPixel(x, y);
 		if (rotate) {
-			animatedDraggingThread.startMoving(clat, clon,
-					new Pair<>(new Zoom.ComplexZoom(zoom.getBaseZoom(), zoom.getZoomFloatPart()), 0f),
-					true, 0f, 90, ANIMATION_PREVIEW_TIME, false, null
-			);
+//			animatedDraggingThread.startMoving(clat, clon, zoom.getBaseZoom(), zoom.getZoomFloatPart());
+//			LOG.debug("Target animation - " + zoom.getBaseZoom() + " " + zoom.getZoomFloatPart());
+			animatedDraggingThread.animateToPreview(clat, clon,
+					zoom, 0f, 90f, ANIMATION_PREVIEW_TIME, false);
 		} else {
 			animatedDraggingThread.startMoving(clat, clon, zoom.getBaseZoom(), zoom.getZoomFloatPart());
 		}

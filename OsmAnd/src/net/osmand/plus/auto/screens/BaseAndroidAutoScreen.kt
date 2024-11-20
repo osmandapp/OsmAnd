@@ -1,7 +1,5 @@
 package net.osmand.plus.auto.screens
 
-import android.graphics.Rect
-import android.util.Log
 import androidx.car.app.CarContext
 import androidx.car.app.Screen
 import androidx.car.app.constraints.ConstraintManager
@@ -90,7 +88,7 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 
 	protected open fun adjustMapToRect(location: LatLon, mapRect: QuadRect) {
 		app.mapViewTrackingUtilities.isMapLinkedToLocation = false
-		app.getSettings().setCompassMode(CompassMode.NORTH_IS_UP);
+//		app.getSettings().setCompassMode(CompassMode.NORTH_IS_UP);
 		Algorithms.extendRectToContainPoint(mapRect, location.longitude, location.latitude)
 		app.carNavigationSession?.navigationCarSurface?.let { surfaceRenderer ->
 			if (!mapRect.hasInitialState()) {

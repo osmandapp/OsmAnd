@@ -1003,7 +1003,7 @@
     <string name="favourites_remove_dialog_msg">إزالة النقطة المفضلة \'%s\' ؟</string>
     <string name="favourites_remove_dialog_success">تم بنجاح حذف النقطة المفضلة {0}.</string>
     <string name="osmand_parking_hour">س</string>
-    <string name="shared_string_minute_lowercase">د</string>
+    <string name="shared_string_minute_lowercase">دقيقة</string>
     <string name="shared_string_video">فيديو</string>
     <string name="shared_string_photo">صورة</string>
     <string name="route_points">نقاط الطريق</string>
@@ -3912,15 +3912,7 @@
     <string name="plan_route_split_before">تقسيم قبل</string>
     <string name="plan_route_split_after">تقسيم بعد</string>
     <string name="plan_route_add_new_segment">إضافة شريحة جديدة</string>
-    <string name="release_3_9">• خيار مضاف لتصدير واستيراد جميع البيانات بما في ذلك الإعدادات والموارد والأماكن الخاصة بي 
-\n 
-\n • مخطط الطريق: الرسوم البيانية لأجزاء المسار مع الطريق ، إضافة القدرة على إنشاء وتحرير مقاطع مسارات متعددة 
-\n 
-\n • تمت إضافة طريقة مصادقة آلية OAuth ل OpenStreetMap ، وواجهة مستخدم محسنة لمربعات حوار OSM 
-\n 
-\n • دعم ألوان مخصصة للمفضلة ونقاط لمسار الطريق
-\n
-\n</string>
+    <string name="release_3_9">• خيار مضاف لتصدير واستيراد جميع البيانات بما في ذلك الإعدادات والموارد والأماكن الخاصة بي \n \n • مخطط الطريق: الرسوم البيانية لأجزاء المسار مع الطريق ، إضافة القدرة على إنشاء وتحرير مقاطع مسارات متعددة \n \n • تمت إضافة طريقة مصادقة آلية OAuth ل OpenStreetMap ، وواجهة مستخدم محسنة لمربعات حوار OSM \n \n • دعم ألوان مخصصة للمفضلة ونقاط لمسار الطريق</string>
     <string name="profile_type_osmand_string">وضع الاستعراض</string>
     <string name="profile_type_user_string">ملف تعريف المستخدم</string>
     <string name="reverse_all_points">عكس جميع النقاط</string>
@@ -4061,19 +4053,7 @@
     <string name="customize_route_line">تخصيص خط المسار</string>
     <string name="shared_string_route_line">خط المسار</string>
     <string name="specify_color_for_map_mode">حدد اللون لوضع الخريطة %1$s.</string>
-    <string name="release_4_0_beta">• خيار إضافي لتنزيل خطوط الكنتور بالقدم
-\n
-\n • مخطط الطريق الأفقي: علامات التبويب المضافة للتبديل بين النقاط أو الرسوم البيانية
-\n
-\n • تم نقل تحديثات OsmAnd Live إلى \"التنزيلات&gt; التحديثات\"
-\n
-\n • يمكن الآن تلوين المسارات حسب الارتفاع أو السرعة أو الانحدار.
-\n
-\n • خيار مضاف لتغيير مظهر خط المسار.
-\n
-\n • تحديث مربع حوار \"تسجيل الرحلة\"
-\n
-\n</string>
+    <string name="release_4_0_beta">• خيار إضافي لتنزيل خطوط الكنتور بالقدم \n \n • مخطط الطريق الأفقي: علامات التبويب المضافة للتبديل بين النقاط أو الرسوم البيانية \n \n • تم نقل تحديثات OsmAnd Live إلى \"التنزيلات&gt; التحديثات\" \n \n • يمكن الآن تلوين المسارات حسب الارتفاع أو السرعة أو الانحدار. \n \n • خيار مضاف لتغيير مظهر خط المسار. \n \n • تحديث مربع حوار \"تسجيل الرحلة\"</string>
     <string name="osmand_live">OsmAnd لايف</string>
     <string name="next_billing_date">تاريخ الفاتورة التالية: %1$s</string>
     <string name="in_grace_period">في فترة سماح</string>
@@ -4232,27 +4212,7 @@
     <string name="backup_error_user_is_not_registered">المستخدم مع هذا البريد الإلكتروني غير مسجل</string>
     <string name="backup_error_no_valid_subscription">لا يوجد اشتراك صالح</string>
     <string name="enter_verification_code">إدخال كلمة مرور لمرة واحدة</string>
-    <string name="release_4_0">• احتياطية سحابة
-\n
-\n • تمت إضافة الوضع الليلي لثيم الخريطة \"Topo\"
-\n
-\n • خيار إضافي لتنزيل خطوط الكنتور المحيطية بوحدة القدم
-\n
-\n • يمكن الآن تلوين المسارات حسب الارتفاع، السرعة أو المنحدر
-\n
-\n • تحديث مربع حوار \"تسجيل الرحلة\"
-\n
-\n • تم نقل خاصية المسافة عبر النقر من مسطرة نصف القطر إلى خيار منفصل
-\n
-\n • تخطيط المسار: يمكنك الآن تغيير خيارات الملاحة، الوصول إلى اعدادات الخريطة والبحث دون مغادرة تخطيط الطريق
-\n
-\n • شاشة \"شراء\" جديدة مع معلومات شراء مفصلة
-\n
-\n • خيار مضاف لتغيير مظهر خط المسار
-\n
-\n • تم نقل تحديثات OsmAnd Live إلى \"التنزيلات&gt; التحديثات\"
-\n
-\n</string>
+    <string name="release_4_0">• احتياطية سحابة \n \n • تمت إضافة الوضع الليلي لثيم الخريطة \"Topo\" \n \n • خيار إضافي لتنزيل خطوط الكنتور المحيطية بوحدة القدم \n \n • يمكن الآن تلوين المسارات حسب الارتفاع، السرعة أو المنحدر \n \n • تحديث مربع حوار \"تسجيل الرحلة\" \n \n • تم نقل خاصية المسافة عبر النقر من مسطرة نصف القطر إلى خيار منفصل \n \n • تخطيط المسار: يمكنك الآن تغيير خيارات الملاحة، الوصول إلى اعدادات الخريطة والبحث دون مغادرة تخطيط الطريق \n \n • شاشة \"شراء\" جديدة مع معلومات شراء مفصلة \n \n • خيار مضاف لتغيير مظهر خط المسار \n \n • تم نقل تحديثات OsmAnd Live إلى \"التنزيلات&gt; التحديثات\"</string>
     <string name="duration_moment_ago">قبل قليل</string>
     <string name="logout_from_osmand_cloud">تسجيل الخروج من سحابة أوسماند</string>
     <string name="logout_from_osmand_cloud_decsr">تسجيل الخروج؟
@@ -4621,15 +4581,7 @@
     <string name="snackbar_page_removed">تمت إزالة \"الصفحة %1$s\".</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">لاتذهب للطرق الزلقة</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">متوسط</string>
-    <string name="release_4_2">• إعادة تصميم الودجت: الشكل والمظهر الجديد ، والمجموعة حسب الصفحات ، وتغيير الترتيب والجمع بينهما كما تريد.
-\n
-\n• مسارات المشي لمسافات طويلة / ركوب الدراجات / السفر: اضغط على رمز الطريق واحصل على معلومات كاملة حول الطريق.
-\n
-\n• المجموعات المفضلة: تعيين المظهر الافتراضي للنقاط الجديدة في المجموعة
-\n
-\n• إصلاحات: التحديث التلقائي لخرائط البلاط عبر الإنترنت
-\n
-\n</string>
+    <string name="release_4_2">• إعادة تصميم الودجت: الشكل والمظهر الجديد ، والمجموعة حسب الصفحات ، وتغيير الترتيب والجمع بينهما كما تريد. \n \n• مسارات المشي لمسافات طويلة / ركوب الدراجات / السفر: اضغط على رمز الطريق واحصل على معلومات كاملة حول الطريق. \n \n• المجموعات المفضلة: تعيين المظهر الافتراضي للنقاط الجديدة في المجموعة \n \n• إصلاحات: التحديث التلقائي لخرائط الطبقات عبر الإنترنت</string>
     <string name="turn_on_public_transport_description">قم بالتفعيل لعرض طرق النقل العام على الخريطة.</string>
     <string name="coordinates_widget_secondary_desc">يمكن تغيير تنسيق الإحداثيات في %1$s – %2$s – %3$s.</string>
     <string name="widget_secondary_desc_part_of">جزء من المكون الإضافي %1$s.</string>
@@ -4870,31 +4822,7 @@
     <string name="shared_string_identifiers">معرفات</string>
     <string name="shared_string_terms_of_use">شروط الاستخدام</string>
     <string name="shared_string_cross_buy">شراء عبر</string>
-    <string name="release_4_3">• طريقة عرض الخرائط بشكل أسرع ، مع عرض 3D
-\n
-\n • حركة سلسة لتغييرات الموقع أثناء الحركة
-\n
-\n • ويدجت جديد مع إحداثيات مركز الخريطة
-\n
-\n • تمت إضافة خيار حجم النص \"مسافة بالنقر\"
-\n
-\n • إضافة خيار ودجت \"علامة الخريطة\" لتغيير سلوك النقر
-\n
-\n • خيار \"وضع العرض\" ثابت
-\n
-\n • GPX: تم إضافة دعم لعلامات \"link\" و \"cmt\" و \"desc\" وأي ملحقات مخصصة
-\n
-\n • إعادة تنظيم قائمة \"الخرائط البحرية\"
-\n
-\n • دعم إضافي لأجهزة الاستشعار ANT +
-\n
-\n • خيار مضاف لتعطيل UUID
-\n
-\n• توقعات السرعة الافتراضية القابلة للتعديل للمشي المعتمد على الارتفاع
-\n
-\n• إخراج الصوت الثابت وسلوك شريط تمرير الصوت
-\n
-\n</string>
+    <string name="release_4_3">• طريقة عرض الخرائط بشكل أسرع ، مع عرض 3D \n \n • حركة سلسة لتغييرات الموقع أثناء الحركة \n \n • ويدجت جديد مع إحداثيات مركز الخريطة \n \n • تمت إضافة خيار حجم النص \"مسافة بالنقر\" \n \n • إضافة خيار ودجت \"علامة الخريطة\" لتغيير سلوك النقر \n \n • خيار \"وضع العرض\" ثابت \n \n • GPX: تم إضافة دعم لعلامات \"link\" و \"cmt\" و \"desc\" وأي ملحقات مخصصة \n \n • إعادة تنظيم قائمة \"الخرائط البحرية\" \n \n • دعم إضافي لأجهزة الاستشعار ANT + \n \n • خيار مضاف لتعطيل UUID \n \n• توقعات السرعة الافتراضية القابلة للتعديل للمشي المعتمد على الارتفاع \n \n• إخراج الصوت الثابت وسلوك شريط تمرير الصوت</string>
     <string name="external_sensors_support">دعم المستشعرات الخارجية</string>
     <string name="speak_gps_signal_status">الإشعار عند فقدان إشارة GPS أو استردادها</string>
     <string name="speak_route_recalculation">الإشعارعن إعادة حساب المسار</string>
@@ -5087,37 +5015,7 @@
     <string name="movement_speed">سرعة الحركة</string>
     <string name="simulation_position_description">حدد ملف المسار الذي سيتم استخدامه كمصدر لنقل الموقع.</string>
     <string name="shared_string_add_manually">إضافة يدويا…</string>
-    <string name="release_4_4">• تحسين قائمة \"المسارات\" في \"تكوين الخريطة\"
-\n
-\n• عرض قائمة خيارات الآن أسماء مترجمة لنقاط الاهتمام
-\n
-\n• تم إضافة خيار لمشاركة المسار عن طريق الرابط
-\n
-\n• تم إضافة وحدة طول \"أميال بحرية / قدم\"
-\n
-\n• اتجاه الخريطة وضعا ثابتا جديدا
-\n
-\n• شاشة بدء مبسطة
-\n
-\n• موقع AFixed في وضع اندرويد أوتو
-\n
-\n• تمت إضافة الرسم البياني \"السرعة / المنحدر\" لتحليل المسار
-\n
-\n• نقل اختيار لغة التطبيق في أندرويد 13 إلى إعدادات النظام
-\n
-\n• تم إصلاح المشكلات المتعلقة بعرض أماكن الغطاء النباتي
-\n
-\n• إمكانية إضافية لتنزيل الطبقات عبر الإنترنت المستخدم كخرائط \"تراكب\" أو \"أساسية\"
-\n
-\n• دعم إضافي للوحدات العالمية \"معاييرالسيارة\"
-\n
-\n• ملف تعريف الدراجة الجديد
-\n
-\n• \"موضع العرض\" أضاف خيار جديد \"تلقائي\"
-\n
-\n• إيماءات خريطة ثابتة للإمالة والتكبير والتدوير
-\n
-\n</string>
+    <string name="release_4_4">• تحسين قائمة \"المسارات\" في \"تكوين الخريطة\" \n \n• عرض قائمة خيارات الآن أسماء مترجمة لنقاط الاهتمام \n \n• تم إضافة خيار لمشاركة المسار عن طريق الرابط \n \n• تم إضافة وحدة طول \"أميال بحرية / قدم\" \n \n• اتجاه الخريطة وضعا ثابتا جديدا \n \n• شاشة بدء مبسطة \n \n• موقع AFixed في وضع اندرويد أوتو \n \n• تمت إضافة الرسم البياني \"السرعة / المنحدر\" لتحليل المسار \n \n• نقل اختيار لغة التطبيق في أندرويد 13 إلى إعدادات النظام \n \n• تم إصلاح المشكلات المتعلقة بعرض أماكن الغطاء النباتي \n \n• إمكانية إضافية لتنزيل الطبقات عبر الإنترنت المستخدم كخرائط \"تراكب\" أو \"أساسية\" \n \n• دعم إضافي للوحدات العالمية \"معاييرالسيارة\" \n \n• ملف تعريف الدراجة الجديد \n \n• \"موضع العرض\" أضاف خيار جديد \"تلقائي\" \n \n• إيماءات خريطة ثابتة للإمالة والتكبير والتدوير</string>
     <string name="sort_duration_ascending">أقصر مدة أولا</string>
     <string name="sort_duration_descending">أطول مدة أولا</string>
     <string name="sort_distance_ascending">أقصر مسافة أولا</string>
@@ -5263,8 +5161,8 @@
     <string name="error_calculate">نتيجة الحساب فارغة</string>
     <string name="calculate_offline_altitude_descr">حساب الارتفاع في وضع عدم الاتصال ، بناء على بيانات خريطة التضاريس (ثلاثية الأبعاد). يمكن مقارنة الاختلافات مع الارتفاع المسجل بالجهاز كتصحيح للارتفاع.</string>
     <string name="calculate_offline">حساب دون اتصال بالنت</string>
-    <string name="power_watts_unit">واتس</string>
-    <string name="revolutions_per_minute_unit">.RPM</string>
+    <string name="power_watts_unit">واط</string>
+    <string name="revolutions_per_minute_unit">دورة بالدقيقة</string>
     <string name="shared_string_close_the_dialog">إغلاق مربع الحوار</string>
     <string name="terrain_map">خريطة التضاريس (3D)</string>
     <string name="relief_3d_description">امتلك وراقب نموذج مقياس لمنطقتك أو القارة بأكملها.</string>
@@ -5296,49 +5194,7 @@
     <string name="verify_account_deletion_descr">نحن بحاجة للتحقق من حسابك قبل حذفه.
 \n
 \nالرجاء إدخال عنوان البريد الإلكتروني الذي قمت بالتسجيل به. سيتم إرسال كلمة مرور لمرة واحدة للخطوة التالية.</string>
-    <string name="release_4_5">• مستشعرات BLE / ANT +: إعادة الاتصال وكتابة وعرض البيانات المستلمة إلى GPX
-\n
-\n • نسخ احتياطي مجاني للمفضلة والإعدادات على \"أوسماند كلاود\"
-\n
-\n • تنسيق جديد لخرائط التضاريس مع دعم التضاريس ثلاثية الأبعاد
-\n
-\n • إدارة المسارات: تحديث واجهة المستخدم والتصنيف ودعم المجلدات المتداخلة
-\n
-\n • أندرويد أوتو: قائمة بدء جديدة للوصول إلى المفضلة والمسارات وفئات النقاط
-\n
-\n • قائمة واحدة من عناصرالودجت للوحة العلوية / السفلية
-\n
-\n • ملف تعريف \"قطار\" جديد ، يسمح لحساب طرق السكك الحديدية
-\n
-\n • تعمل خطوط الكنتور مع أي \"مصدر خريطة\"
-\n
-\n • قائمة موسعة من الإجراءات الافتراضية للوحات المفاتيح الخارجية
-\n
-\n • ملفات التوجيه المخصصة ، إضافة خيارات للحذف أو الاستبدال
-\n
-\n • تمت إضافة خيار \"الإشعار عن الانحراف عن المسار\"
-\n
-\n • شاشة البدء: خيار مضاف لاستعادة حالة أوسماند من الملف
-\n
-\n • تمت إضافة فئات \"المواد الخطرة\" الخاصة بالشاحنات في أمريكا الشمالية
-\n
-\n • دعم إضافي لـ \"تسلق فراتا\" لتوجيه المشاة
-\n
-\n • تمت إضافة مقياس \"CAI\" لتصنيف صعوبة المسارات
-\n
-\n • تحديد لغة ثابتة لكل تطبيق
-\n
-\n • دعم إضافي للرموز ذات السمات
-\n
-\n • أوسماند كلاود: إضافة خيار حذف الحساب
-\n
-\n • إمكانية الوصول: تم تغيير حجم هدف اللمس للأزرار إلى 48 dp ؛ تم إصلاح المشكلة مع واجهة مستخدم الخريطة المرئية لقارئات الشاشة
-\n
-\n • تمت إعادة صياغة المطالبات الصوتية اليابانية
-\n
-\n • تغيير الارتفاع وإعادة صياغة تقييم الانحدار
-\n
-\n</string>
+    <string name="release_4_5">• مستشعرات BLE / ANT +: إعادة الاتصال وكتابة وعرض البيانات المستلمة إلى GPX \n \n • نسخ احتياطي مجاني للمفضلة والإعدادات على \"أوسماند كلاود\" \n \n • تنسيق جديد لخرائط التضاريس مع دعم التضاريس ثلاثية الأبعاد \n \n • إدارة المسارات: تحديث واجهة المستخدم والتصنيف ودعم المجلدات المتداخلة \n \n • أندرويد أوتو: قائمة بدء جديدة للوصول إلى المفضلة والمسارات وفئات النقاط \n \n • قائمة واحدة من عناصرالودجت للوحة العلوية / السفلية \n \n • ملف تعريف \"قطار\" جديد ، يسمح لحساب طرق السكك الحديدية \n \n • تعمل خطوط الكنتور مع أي \"مصدر خريطة\" \n \n • قائمة موسعة من الإجراءات الافتراضية للوحات المفاتيح الخارجية \n \n • ملفات التوجيه المخصصة ، إضافة خيارات للحذف أو الاستبدال \n \n • تمت إضافة خيار \"الإشعار عن الانحراف عن المسار\" \n \n • شاشة البدء: خيار مضاف لاستعادة حالة أوسماند من الملف \n \n • تمت إضافة فئات \"المواد الخطرة\" الخاصة بالشاحنات في أمريكا الشمالية \n \n • دعم إضافي لـ \"تسلق فراتا\" لتوجيه المشاة \n \n • تمت إضافة مقياس \"CAI\" لتصنيف صعوبة المسارات \n \n • تحديد لغة ثابتة لكل تطبيق \n \n • دعم إضافي للرموز ذات السمات \n \n • أوسماند كلاود: إضافة خيار حذف الحساب \n \n • إمكانية الوصول: تم تغيير حجم هدف اللمس للأزرار إلى 48 dp ؛ تم إصلاح المشكلة مع واجهة مستخدم الخريطة المرئية لقارئات الشاشة \n \n • تمت إعادة صياغة المطالبات الصوتية اليابانية \n \n • تغيير الارتفاع وإعادة صياغة تقييم الانحدار</string>
     <string name="slope_legend_description">يستخدم الانحدار الألوان لتصور انحدار التضاريس. يمكنك قراءة المزيد عن المنحدرات في %1$s.</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">استخدام طبقة للانحدار والتضاريس</string>
     <string name="cache_size">حجم ذاكرة التخزين المؤقت</string>
@@ -5462,29 +5318,7 @@
     <string name="help_article_start_with_name">ابدأ مع أوسماند</string>
     <string name="help_article_plan_route_name">تخطيط الطريق</string>
     <string name="help_article_plan_route_coordinate_input_name">إدخال إحداثية</string>
-    <string name="release_4_6">• أندررويد أوتو: تمت إضافة الوضع ثلاثي الأبعاد
-\n
-\n • المسارات: خيارات المرشحات والمجلدات الذكية، والذاكرة المحسنة للملفات الأكبر حجمًا
-\n
-\n • تعزيز الويدجت العلوي والسفلي لاستيعاب كافة الإضافات
-\n
-\n • تحسين إدارة الموارد المحلية
-\n
-\n • تعيين زر قابل للتخصيص لوحدات التحكم الخارجية
-\n
-\n • أدوات جديدة: \"نسبة الانحدار\" و\"موضع الشمس\"
-\n
-\n • أوسماند كلاود: يمكنك الآن الوصول إلى الملفات المحذوفة
-\n
-\n • تحسين تلوين المسار في وضع المنحدر مع تدرج متماثل جديد
-\n
-\n • حل المشكلات المتعلقة بشريط الحالة الشفاف
-\n
-\n • تمت إضافة الدعم لعنصر درجة الحرارة ANT+
-\n
-\n • خيار ودجت \"ذاكرة الوصول العشوائي المتوفرة\".
-\n
-\n</string>
+    <string name="release_4_6">• أندررويد أوتو: تمت إضافة الوضع ثلاثي الأبعاد \n \n • المسارات: خيارات المرشحات والمجلدات الذكية، والذاكرة المحسنة للملفات الأكبر حجمًا \n \n • تعزيز الويدجت العلوي والسفلي لاستيعاب كافة الإضافات \n \n • تحسين إدارة الموارد المحلية \n \n • تعيين زر قابل للتخصيص لوحدات التحكم الخارجية \n \n • أدوات جديدة: \"نسبة الانحدار\" و\"موضع الشمس\" \n \n • أوسماند كلاود: يمكنك الآن الوصول إلى الملفات المحذوفة \n \n • تحسين تلوين المسار في وضع المنحدر مع تدرج متماثل جديد \n \n • حل المشكلات المتعلقة بشريط الحالة الشفاف \n \n • تمت إضافة الدعم لعنصر درجة الحرارة ANT+ \n \n • خيار ودجت \"ذاكرة الوصول العشوائي المتوفرة\".</string>
     <string name="app_mode_baby_transport">عربة الطفل</string>
     <string name="live_monitoring_adress_descr">حدد عنوان الويب مع بناء جملة المعيار: lat = {0} ، lon = {1} ، الطابع الزمني = {2} ، hdop = {3} ، الارتفاع = {4} ، السرعة = {5} ، التحمل = {6}.</string>
     <string name="sensor_temperature_desc">درجة الحرارة من جهاز الاستشعار</string>
@@ -5694,25 +5528,7 @@
 \nاختر \"%1$s\" للأرقام الدقيقة، أو \"%2$s\" لتسهيل القراءة.</string>
     <string name="round_up">تقريب</string>
     <string name="map_widget_map_scale">مقياس الخريطة</string>
-    <string name="release_4_7">• ويدجت\"عداد السرعة\" الجديدة المتوافقة مع أندرويد أوتو
-\n
-\n • تكوين شاشة الخريطة عن طريق إضافة أزرار \"الإجراء السريع\" المتعددة
-\n
-\n • تحسين إمكانية قراءة البيانات في الرسوم البيانية
-\n
-\n • تمت إضافة المرشحات حسب بيانات الاستشعار للمسارات
-\n
-\n• تحسين تخصيص المظهر لمجموعة من المسارات
-\n
-\n • تمت إضافة دعم لعلامات GPX الإضافية
-\n
-\n • تخصيص \"المسافة أثناء التنقل\": اختر بين الأرقام الدقيقة أو التقريبية
-\n
-\n • واجهة مستخدم موحدة لاختيار المسار
-\n
-\n • تم تحويل تسجيل الدخول إلى OpenStreetMap إلى OAuth 2.0
-\n
-\n</string>
+    <string name="release_4_7">• ويدجت\"عداد السرعة\" الجديدة المتوافقة مع أندرويد أوتو \n \n • تكوين شاشة الخريطة عن طريق إضافة أزرار \"الإجراء السريع\" المتعددة \n \n • تحسين إمكانية قراءة البيانات في الرسوم البيانية \n \n • تمت إضافة المرشحات حسب بيانات الاستشعار للمسارات \n \n• تحسين تخصيص المظهر لمجموعة من المسارات \n \n • تمت إضافة دعم لعلامات GPX الإضافية \n \n • تخصيص \"المسافة أثناء التنقل\": اختر بين الأرقام الدقيقة أو التقريبية \n \n • واجهة مستخدم موحدة لاختيار المسار \n \n • تم تحويل تسجيل الدخول إلى OpenStreetMap إلى OAuth 2.0</string>
     <string name="track_vertical_exaggeration_description">من خلال تغيير قيمة المقياس، يمكنك تغيير ارتفاع المسار ثلاثي الأبعاد.</string>
     <string name="missing_maps_description">بعض الخرائط المطلوبة لهذا المسار مفقودة أو غير محدثة. يرجى تنزيل هذه الخرائط أو تحديثها.</string>
     <string name="route_line_use_coloring_speed">يتم تلوين خط الطريق حسب سرعة الحركة.</string>
@@ -5769,29 +5585,7 @@
     <string name="map_text">نصوص الخريطة</string>
     <string name="routing_attr_avoid_cobblestone_name">تجنب الحصى</string>
     <string name="routing_attr_avoid_cobblestone_description">تجنب الحصى</string>
-    <string name="release_4_8">• خيار تلوين التضاريس الجديد \"الارتفاع\"
-\n
-\n • لوحات الألوان المخصصة للتضاريس، والمسارات، والطرق
-\n
-\n • متغير ثلاثي الأبعاد لأيقونات موضع الموقع
-\n
-\n • يمكن الآن تخصيص الإجراءات السريعة للوحات المفاتيح الخارجية
-\n
-\n • الطقس: تحديث واجهة المستخدم، وأضاف الرسوم المتحركة الرياح
-\n
-\n • تحسينات المسار ثلاثي الأبعاد: خيارات التصور والتلوين الجديدة
-\n
-\n • توسيع نطاق اختيار الطرق السياحية على الخريطة
-\n
-\n • تمت إضافة خيار موضوع التطبيق لمتابعة وضع الخريطة
-\n
-\n • احصائيات المسار الثابت، والفرز والبحث
-\n
-\n • تحرير OSM: حذف طريقة ترخيص تسجيل الدخول / كلمة المرور
-\n
-\n • التبديل إلى صفحة مشاركة النظام بدءا من Android 14
-\n
-\n</string>
+    <string name="release_4_8">• خيار تلوين التضاريس الجديد \"الارتفاع\" \n \n • لوحات الألوان المخصصة للتضاريس، والمسارات، والطرق \n \n • متغير ثلاثي الأبعاد لأيقونات موضع الموقع \n \n • يمكن الآن تخصيص الإجراءات السريعة للوحات المفاتيح الخارجية \n \n • الطقس: تحديث واجهة المستخدم، وأضاف الرسوم المتحركة الرياح \n \n • تحسينات المسار ثلاثي الأبعاد: خيارات التصور والتلوين الجديدة \n \n • توسيع نطاق اختيار الطرق السياحية على الخريطة \n \n • تمت إضافة خيار موضوع التطبيق لمتابعة وضع الخريطة \n \n • احصائيات المسار الثابت، والفرز والبحث \n \n • تحرير OSM: حذف طريقة ترخيص تسجيل الدخول / كلمة المرور \n \n • التبديل إلى صفحة مشاركة النظام بدءا من Android 14</string>
     <string name="quick_action_move_map_right">الخريطة إلى اليمين</string>
     <string name="quick_action_move_map_left">الخريطة إلى اليسار</string>
     <string name="shared_string_replace">استبدال</string>
@@ -6000,7 +5794,7 @@
     <string name="vehicle_metrics_plugin_settings">إعدادات مقاييس السيارة</string>
     <string name="obd_air_intake_temp">درجة حرارة الهواء الداخل</string>
     <string name="liter_per_hour">l/h</string>
-    <string name="release_4_9">• تمت إضافة عارض ملء الشاشة لصور ويكيميديا\n\n• تم تقديم مكون إضافي جديد \"مقاييس المركبات\" لمراقبة أداء المركبات باستخدام بروتوكول OBD-II\n\n• تمت إضافة القدرة على تعيين الأنشطة للمسارات وتصفيتها وفقًا لذلك\n\n• تم تنفيذ إجراءات سريعة جديدة لتسجيل الرحلة وقفل شاشة اللمس\n\n• تم تقديم مظهر زر خريطة قابل للتخصيص وشبكة دقيقة\n\n• تمت إضافة قائمة سياقية وإجراء \"إعادة تعيين متوسط السرعة\" إلى الأدوات\n\n• تمت إضافة طبقة مسار جديدة \"مسارات الدراجات النارية\"\n\n• تم إصلاح \"التسجيل التلقائي للمسار أثناء التنقل\"\n\n• تم إصلاح مشكلة الإحداثيات المقلوبة في RTL\n\n• تم إصلاح بيانات المستشعر المفقودة للتسجيل الحالي للمسار\n\n• تمت إضافة معلومات حول المناطق المحيطة بالنقطة المحددة\n\n• تمت إضافة إجراء سريع للتحكم في رؤية تعديلات OSM\n\n• أدوات رؤية منفصلة لخيارات تلوين التضاريس\n\n• تمت إضافة أيقونة قابلة للنقر لعرض الوصول أو سمات الطريق أو المسار الأخرى\n\n</string>
+    <string name="release_4_9">• تمت إضافة عارض ملء الشاشة لصور ويكيميديا\n\n• تم تقديم مكون إضافي جديد \"مقاييس المركبات\" لمراقبة أداء المركبات باستخدام بروتوكول OBD-II\n\n• تمت إضافة القدرة على تعيين الأنشطة للمسارات وتصفيتها وفقًا لذلك\n\n• تم تنفيذ إجراءات سريعة جديدة لتسجيل الرحلة وقفل شاشة اللمس\n\n• تم تقديم مظهر زر خريطة قابل للتخصيص وشبكة دقيقة\n\n• تمت إضافة قائمة سياقية وإجراء \"إعادة تعيين متوسط السرعة\" إلى الأدوات\n\n• تمت إضافة طبقة مسار جديدة \"مسارات الدراجات النارية\"\n\n• تم إصلاح \"التسجيل التلقائي للمسار أثناء التنقل\"\n\n• تم إصلاح مشكلة الإحداثيات المقلوبة في RTL\n\n• تم إصلاح بيانات المستشعر المفقودة للتسجيل الحالي للمسار\n\n• تمت إضافة معلومات حول المناطق المحيطة بالنقطة المحددة\n\n• تمت إضافة إجراء سريع للتحكم في رؤية تعديلات OSM\n\n• أدوات رؤية منفصلة لخيارات تلوين التضاريس\n\n• تمت إضافة أيقونة قابلة للنقر لعرض الوصول أو سمات الطريق أو المسار الأخرى</string>
     <string name="third_links">الروابط الثالثة</string>
     <string name="reset_average_speed">إعادة ضبط متوسط السرعة</string>
     <string name="unknown_bt_device">جهاز غير معروف</string>
@@ -6046,4 +5840,93 @@
     <string name="quick_action_switch_compass_desc">مفتاح تبديل لتبديل اتجاه الخريطة.</string>
     <string name="quick_action_drawer_title">القائمة الجانبية</string>
     <string name="route_guidance_desc">يوفر إرشادات طريق مباشرةً، بما في ذلك المسافة إلى المنعطف التالي واسم الطريق واسم الشارع الحالي ومعلومات المسار. تكون الأدوات نشطة أثناء التنقل.</string>
+    <string name="wunderlinq_datagrid">شبكة بيانات WunderLINQ</string>
+    <string name="obd_nothing_found_text">لا يوجد ماسحات</string>
+    <string name="vehicle_metrics_obd_ii">مقاييس السيارة (OBD-II)</string>
+    <string name="ltr_or_rtl_combine_via_per">%1$s لكل%2$s</string>
+    <string name="shared_string_volume">Volume</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">تتبع بيانات السيارة الحيوية باستخدام بروتوكول OBD-II. راقب المقاييس الرئيسية مثل السرعة ودورات المحرك واستهلاك الوقود والمزيد.</string>
+    <string name="shared_string_hour">ساعة</string>
+    <string name="shared_string_instant">فوري</string>
+    <string name="show_minor_turns">عرض على التقاطعات الثانوية عند القيادة بشكل مستقيم</string>
+    <string name="show_minor_turns_descr">سيتم عرض المسارات على جميع التقاطعات المارة بغض النظر عن التعليمات الصوتية</string>
+    <string name="obd_searching_text">البحث عن الماسحات الضوئية</string>
+    <string name="obd_bluetooth_off_description">قم بتشغيل البلوتوث للبحث عن الماسحات الضوئية وتوصيلها.</string>
+    <string name="obd_searching_text_description">يرجى إبقاء جهازك قريبًا من الماسح الضوئي. تأكد من تشغيل محرك السيارة.</string>
+    <string name="obd_device_forget_sensor">حذف الماسح الضوئي</string>
+    <string name="obd_device_forget_sensor_description">سيتم إزالة الماسح الضوئي من القائمة. ستتمكن من إقران هذا الماسح الضوئي مرة أخرى في أي وقت.</string>
+    <string name="connect_obd_instructions_step">1. قم بتوصيل الماسح الضوئي بمنفذ OBD-II في سيارتك.\n\n2. قم بتشغيل محرك سيارتك\n\n3. قم بتمكين البلوتوث على جهازك\n\n4. انقر فوق \"%1$s\" وحدد الماسح الضوئي الخاص بك من القائمة.</string>
+    <string name="obd_speed_desc">يعرض السرعة من خلال مستشعر سرعة السيارة (VSS).</string>
+    <string name="obd_battery_voltage_desc">يعرض مستوى الجهد الكهربي لبطارية السيارة</string>
+    <string name="obd_engine_coolant_temp_desc">يظهر درجة حرارة سائل تبريد المحرك</string>
+    <string name="obd_fuel_level_liter">مستوى الوقود (لتر)</string>
+    <string name="obd_nothing_found_description">يرجى التحقق مما يلي:\n- تأكد من تشغيل البلوتوث\n- تشغيل محرك السيارة\n- تأكد من أن جهازك ضمن نطاق الماسح الضوئي.</string>
+    <string name="l_100km">لـ/100كم</string>
+    <string name="obd_calculated_engine_load">حمولة المحرك المحسوبة</string>
+    <string name="obd_fuel_consumption_rate_l_h">معدل استهلاك الوقود (لتر/ساعة)</string>
+    <string name="obd_fuel_consumption_rate_sensor">معدل استهلاك الوقود (المستشعر)</string>
+    <string name="obd_fuel_left_liter">الوقود المتبقي (لتر)</string>
+    <string name="obd_fuel_left_km">الوقود المتبقي (كم)</string>
+    <string name="obd_fuel_consumption_rate_scanner">معدل استهلاك الوقود (OBD)</string>
+    <string name="obd_air_intake_temp_desc">يعرض درجة حرارة الهواء الداخل إلى مجمع سحب المحرك.</string>
+    <string name="dynamic_icon_type_summary">تتغير الأيقونة استنادًا إلى حالة الإجراء.</string>
+    <string name="obd_connected_to_device">متصّل بـ %s</string>
+    <string name="obd_engine_runtime">مدة تشغيل المحرك</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">يعرض معدل استهلاك الوقود للمركبة بناءً على الحسابات (لتر/كم)</string>
+    <string name="obd_engine_oil_temperature">درجة حرارة زيت المحرك</string>
+    <string name="obd_calculated_engine_load_desc">يعرض النسبة المئوية للطاقة المتوفرة للمحرك والتي يتم استخدامها في لحظة معينة.</string>
+    <string name="obd_fuel_consumption_desc">يظهر معدل استخدام الوقود بواسطة المحرك، والذي يتم حسابه على أساس الوقود المتبقي وحجم الخزان والمسافة المقطوعة كما هو محدد بواسطة نظام تحديد المواقع العالمي (GPS).</string>
+    <string name="obd_not_connected_to_device">تم قطع الاتصال بـ %s</string>
+    <string name="average_temperature">متوسط درجة الحرارة</string>
+    <string name="record_obd_data">تسجيل مقاييس السيارة</string>
+    <string name="obd_fuel_pressure">ضغط الوقود</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">يظهر معدل استهلاك الوقود للمركبة بناءً على الحسابات (لتر/ساعة)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">يعرض معدل استهلاك الوقود للمركبة بناءً على المستشعر (لتر/ساعة)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">معدل استهلاك الوقود لتر/ساعة</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">معدل استهلاك الوقود %/ساعة</string>
+    <string name="route_guidance">توجيه الطريق</string>
+    <string name="obd_widget_vehicle_speed">سرعة السيارة</string>
+    <string name="obd_widget_engine_speed">سرعة المحرك</string>
+    <string name="speedometer_maximum">الحد الاقصي</string>
+    <string name="percent_hour">%/ساعة</string>
+    <string name="auto_zoom_3d_angle">تكبير تلقائي بزاوية ثلاثية الأبعاد</string>
+    <string name="av_audio_sample_rate">معدل عينة الصوت</string>
+    <string name="obd_fuel_consumption_rate_sensor_type">استخدم الوحدات المحددة في الاسم.</string>
+    <string name="simulate_obd">محاكاة بيانات obd</string>
+    <string name="shared_string_engine">المحرك</string>
+    <string name="vehicle_metrics_recording_description">حدد القيم التي سيتم تسجيلها في ملف GPX.</string>
+    <string name="av_audio_sample_rate_descr">حدد معدل عينة الصوت.</string>
+    <string name="connect_new_scanner">جهاز مسح جديد</string>
+    <string name="preview_next_turn">معاينة المنعطف التالي</string>
+    <string name="obd_engine_runtime_desc">يعرض مدة تشغيل المحرك.</string>
+    <string name="obd_fuel_pressure_desc">يعرض الضغط داخل نظام الوقود</string>
+    <string name="obd_throttle_position">موضع الخانق</string>
+    <string name="obd_throttle_position_desc">يعرض زاوية لوحة الخانق في جسم الخانق.</string>
+    <string name="remaining_fuel_description">يظهر كمية الوقود المتبقية في خزان السيارة</string>
+    <string name="obd_fuel_consumption">استهلاك الوقود</string>
+    <string name="reset_average_value">إعادة تعيين القيمة المتوسطة</string>
+    <string name="current_temperature">درجة الحرارة الحالية</string>
+    <string name="obd_connecting_to_device">الاتصال بـ %s</string>
+    <string name="bt_start_pair_failed">لا يمكن الاقتران بالجهاز</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">يعرض معدل استهلاك وقود السيارة بناءً على الحسابات (%/ساعة)</string>
+    <string name="obd_fuel_consumption_rate_l_km">معدل استهلاك الوقود (لتر/كم)</string>
+    <string name="kpa_unit">كيلو باسكال</string>
+    <string name="liter">لتر</string>
+    <string name="obd_fuel_level_percent">مستوى الوقود (%)</string>
+    <string name="obd_fuel_left_percent">الوقود المتبقي (%)</string>
+    <string name="obd_engine_oil_temperature_desc">يعرض درجة حرارة زيت المحرك.</string>
+    <string name="average_temperature_slider_description">حدد الفاصل الزمني لقياس درجة الحرارة المتوسطة.</string>
+    <string name="remaining_fuel">الوقود المتبقي</string>
+    <string name="average_value_slider_description">حدد الفاصل الزمني لقياس القيمة المتوسطة.</string>
+    <string name="shared_string_dynamic">ديناميك</string>
+    <string name="fuel_tank_capacity_description">أدخل سعة خزان الوقود لديك لتتبع مستويات الوقود والاستهلاك بدقة</string>
+    <string name="fuel_tank_capacity">سعة خزان الوقود</string>
+    <string name="shared_strings_dimensions">الأبعاد</string>
+    <string name="litres">لترات</string>
+    <string name="us_gallons_unit">جالون</string>
+    <string name="imperial_gallons">جالون إمبراطوري</string>
+    <string name="us_gallons">جالون أمريكي</string>
+    <string name="unit_of_volume_description">سيتم تطبيق الوحدات المحددة على كافة البيانات المتعلقة بالحجم في الملف الشخصي الحالي.</string>
+    <string name="unit_of_volume">وحدة الحجم</string>
+    <string name="obd_ambient_air_temp_desc">يعرض درجة الحرارة خارج السيارة.</string>
 </resources>

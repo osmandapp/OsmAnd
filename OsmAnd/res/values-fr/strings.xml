@@ -5646,4 +5646,21 @@
     <string name="unit_of_volume_description">Les unités sélectionnées seront utilisées pour toutes les données de volume dans le profil actuel.</string>
     <string name="unit_of_volume">Unité de volume</string>
     <string name="wunderlinq_datagrid">Grille de données WunderLINQ</string>
+    <string name="vehicle_metrics_obd_ii">Mesures du véhicule (OBD-II)</string>
+    <string name="shared_string_hour">Heure</string>
+    <string name="ltr_or_rtl_combine_via_per">%1$s par %2$s</string>
+    <string name="shared_string_volume">Volume</string>
+    <string name="remaining_fuel">Carburant restant</string>
+    <string name="obd_fuel_consumption">Consommation de carburant</string>
+    <string name="shared_string_instant">Instantané</string>
+    <string name="reset_average_value">Effacer la valeur moyenne</string>
+    <string name="current_temperature">Température actuelle</string>
+    <string name="average_temperature">Température moyenne</string>
+    <string name="preview_next_turn">Aperçu de la prochaine bifurcation</string>
+    <string name="obd_engine_oil_temperature">Température de l\'huile moteur</string>
+    <string name="av_audio_sample_rate_descr">Sélectionnez le taux d\'échantillonnage audio.</string>
+    <string name="connect_new_scanner">Connecter un nouveau scanner</string>
+    <string name="vehicle_metrics_recording_description">Sélectionnez les informations à enregistrer dans le fichier GPX.</string>
+    <string name="av_audio_sample_rate">Taux d’échantillonnage audio</string>
+    <string name="shared_string_engine">Moteur</string>
 </resources>

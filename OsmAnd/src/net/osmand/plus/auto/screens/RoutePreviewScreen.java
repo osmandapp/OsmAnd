@@ -288,8 +288,6 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 
 	@Override
 	protected void adjustMapToRect(@NonNull LatLon location, @NonNull QuadRect mapRect) {
-//		OsmandMapTileView mapView = getApp().getOsmandMap().getMapView();
-//		mapView.setElevationAngle(90f);
 		super.adjustMapToRect(location, mapRect);
 	}
 }

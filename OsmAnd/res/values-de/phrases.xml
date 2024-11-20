@@ -4895,4 +4895,7 @@
     <string name="poi_activities_fitness">Fitness-Parcour</string>
     <string name="poi_activities_inline_skates">Inline-Skate</string>
     <string name="poi_activities_mountain_bike">Mountainbiken</string>
+    <string name="poi_name_etymology">Namensetymologie</string>
+    <string name="poi_name_left">Name der linken Seite</string>
+    <string name="poi_name_right">Name der rechten Seite</string>
 </resources>

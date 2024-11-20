@@ -171,8 +171,8 @@
     <string name="si_mi_feet">Miglia/piedi</string>
     <string name="si_mi_yard">Miglia/iarde</string>
     <string name="si_km_m">Chilometri/metri</string>
-    <string name="yard">yd</string>
-    <string name="foot">ft</string>
+    <string name="yard">yarda</string>
+    <string name="foot">piede</string>
     <string name="mile_per_hour">mi/h</string>
     <string name="mile">km</string>
     <string name="send_location_way_choose_title">Condividi la posizione usando</string>
@@ -1487,7 +1487,7 @@
     <string name="storage_directory">Posizione di memorizzazione delle mappe</string>
     <string name="shared_string_copy">Copia</string>
     <string name="storage_directory_internal_app">Memoria interna dell\'applicazione</string>
-    <string name="rendering_value__name">Default</string>
+    <string name="rendering_value__name">Predefinito</string>
     <string name="rendering_value_highContrastRoads_name">Strade ad alto contrasto</string>
     <string name="storage_directory_multiuser">Memorizzazione multiutente</string>
     <string name="rendering_attr_hideHouseNumbers_name">Numeri civici</string>
@@ -3432,7 +3432,7 @@
     <string name="lang_pnb">Pangiabi</string>
     <string name="lang_ne">Nepalese</string>
     <string name="lang_nap">Napoletano</string>
-    <string name="lang_my">Burmese</string>
+    <string name="lang_my">Birmano</string>
     <string name="lang_mn">Mongolo</string>
     <string name="lang_min">Minangkabau</string>
     <string name="lang_mg">Malgascio</string>
@@ -3610,7 +3610,7 @@
     <string name="message_need_calculate_route_before_show_graph">%1$s dati disponibili solo sulle strade, calcola un percorso utilizzando \"Percorso tra punti\" per visualizzare il grafico.</string>
     <string name="message_graph_will_be_available_after_recalculation">Attendere prego... 
 \nIl grafo sarà disponibile dopo il ricalcolo del percorso.</string>
-    <string name="navigate_point_mgrs">MGRS</string>
+    <string name="navigate_point_mgrs">MGRS (Military Grid Reference System)</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd utilizza MGRS, che è simile al formato UTM NATO.</string>
     <string name="shared_string_local_maps">Mappe locali</string>
@@ -5571,7 +5571,7 @@
     <string name="obd_fuel_left_km">Carburante rimasto (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Tasso di consumo di carburante (obd)</string>
     <string name="obd_device_forget_sensor_description">Lo scanner verrà rimosso dalla lista. Sarà possibile accoppiare nuovamente questo scanner in qualsiasi momento.</string>
-    <string name="connect_obd_instructions_step2">2. Avviare il motore del veicolo</string>
+    <string name="connect_obd_instructions_step2">Avviare il motore del veicolo</string>
     <string name="connect_obd_instructions_title">OsmAnd supporta le connessioni Bluetooth agli scanner OBD-II.</string>
     <string name="obd_throttle_position_desc">Mostra l\'angolo della piastra di accelerazione nel corpo farfallato.</string>
     <string name="route_guidance_desc">Fornisce la guida in tempo reale del percorso, compresa la distanza alla svolta successiva, il nome della strada, il nome della strada percorsa e le informazioni sulla corsia. I widget sono attivi durante la navigazione.</string>
@@ -5592,7 +5592,7 @@
     <string name="obd_nothing_found_description">Si prega di controllare quanto segue:\n – Assicurarsi che il Bluetooth sia acceso\n – Motore del veicolo in esecuzione\n – Assicurarsi che il dispositivo sia all\'interno della gamma dello scanner.</string>
     <string name="obd_vehicle_info">Informazioni sul veicolo</string>
     <string name="learn_more_about_obd_sensors">Scopri di più sui sensori.</string>
-    <string name="screen_is_locked_by_action_button">Il touch screen è bloccato. Premere il pulsante per sbloccare.</string>
+    <string name="screen_is_locked_by_action_button">Il touch screen è bloccato. Tocca il pulsante per sbloccarlo.</string>
     <string name="obd_calculated_engine_load">Carico Calcolato sul Motore</string>
     <string name="obd_fuel_pressure">Pressione del carburante</string>
     <string name="obd_fuel_pressure_desc">Mostra la pressione del carburante del veicolo</string>
@@ -5601,15 +5601,15 @@
     <string name="obd_engine_oil_temperature_desc">Mostra la temperatura dell\'olio motore.</string>
     <string name="liter">l</string>
     <string name="obd_device_forget_sensor">Dimentica lo scanner</string>
-    <string name="connect_obd_instructions_step1">1. Collegare lo scanner alla porta OBD-II del veicolo.</string>
-    <string name="connect_obd_instructions_step3">3. Abilitare il Bluetooth sul dispositivo</string>
-    <string name="connect_obd_instructions_step4">4. Tocca \'Connetti\' e selezionare lo scanner dall\'elenco.</string>
+    <string name="connect_obd_instructions_step1">Collegare lo scanner alla porta OBD-II del veicolo.</string>
+    <string name="connect_obd_instructions_step3">Abilitare il Bluetooth sul dispositivo</string>
+    <string name="connect_obd_instructions_step4">Tocca \'%1$s,\' e selezionare lo scanner dall\'elenco.</string>
     <string name="screen_is_unlocked">Il touch screen è sbloccato.</string>
     <string name="screen_is_locked_by_external_button">Il touch screen è bloccato. Per sbloccare, premere il tasto %1$s o toccare il pulsante sullo schermo.</string>
     <string name="unit_of_volume_description">Le unità selezionate verranno applicate a tutti i dati relativi al volume nel profilo corrente.</string>
     <string name="unit_of_volume">Unità di volume</string>
     <string name="l_100km">l/100 km</string>
-    <string name="lock_screen">Blocco scherno</string>
+    <string name="lock_screen">Schermata di blocco</string>
     <string name="track_does_not_contain_data_to_save">La traccia non contiene dati da salvare.</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Traccia i dati vitali del veicolo utilizzando il protocollo OBD-II. Monitorate le metriche chiave come la velocità, il numero di giri del motore, il consumo di carburante e altro ancora.</string>
     <string name="vehicle_metrics_obd_ii">Metriche Veicolo (OBD-II)</string>
@@ -5655,7 +5655,7 @@
     <string name="obd_engine_coolant_temp">Temperatura liquido raffreddamento</string>
     <string name="obd_support">Supporto OBD</string>
     <string name="obd_fuel_level">Efficienza Carburante (%)</string>
-    <string name="lock_screen_description">Abilita o disabilita la funzionalità del touch screen per evitare tocchi accidentali</string>
+    <string name="lock_screen_description">Abilita o disabilita il touch screen per evitare tocchi accidentali</string>
     <string name="new_trip_segment">Nuovo tratto del percorso</string>
     <string name="quick_action_start_pause_recording">Un pulsante per avviare, mettere in pausa o riprendere la registrazione del percorso GPX.</string>
     <string name="quick_action_save_recorded_trip_and_continue">Percorso registrato e proseguimento</string>
@@ -5671,4 +5671,9 @@
     <string name="liter_per_hour">l/h</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Sentieri per bici da sterrato</string>
     <string name="obd_fuel_left_liters">Carburante rimanente (litri)</string>
+    <string name="av_audio_sample_rate">Frequenza di campionamento audio</string>
+    <string name="av_audio_sample_rate_descr">Seleziona la frequenza di campionamento audio.</string>
+    <string name="connect_new_scanner">Connetti il nuovo scanner</string>
+    <string name="vehicle_metrics_recording_description">Seleziona i parametri da salvare nel file GPX.</string>
+    <string name="shared_string_engine">Motore</string>
 </resources>

@@ -107,9 +107,14 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 
 	override fun onStart() {
 		super.onStart()
-		pairedDevicesAdapter.items =
-			vehicleMetricsPlugin?.getPairedOBDDevicesList(requireActivity()) ?: emptyList()
-		updateCurrentStateView()
+		vehicleMetricsPlugin.let { plugin ->
+			val usedDevices = plugin.getUsedOBDDevicesList()
+			pairedDevicesAdapter.items = plugin.getPairedOBDDevicesList(requireActivity())
+				.filterNot { pairedDevice ->
+					usedDevices.any { usedDevice -> usedDevice.address == pairedDevice.address }
+				}
+			updateCurrentStateView()
+		}
 	}
 
 	override fun onCreateView(
@@ -130,9 +135,9 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 
 	private fun startSearch() {
 		activity?.let {
-			vehicleMetricsPlugin?.setScanDevicesListener(this)
+			vehicleMetricsPlugin.setScanDevicesListener(this)
 			if (AndroidUtils.hasBLEPermission(it)) {
-				vehicleMetricsPlugin?.searchUnboundDevices(it)
+				vehicleMetricsPlugin.searchUnboundDevices(it)
 			} else {
 				AndroidUtils.requestBLEPermissions(
 					it,
@@ -143,7 +148,7 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 
 	override fun onPause() {
 		super.onPause()
-		vehicleMetricsPlugin?.setScanDevicesListener(null)
+		vehicleMetricsPlugin.setScanDevicesListener(null)
 	}
 
 	override fun onDestroyView() {
@@ -192,7 +197,7 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 
 	override fun onDevicePaired(pairedDevice: BTDeviceInfo) {
 		if (pairingDevice?.address == pairedDevice.address) {
-			vehicleMetricsPlugin?.connectToObd(requireActivity(), pairedDevice)
+			vehicleMetricsPlugin.connectToObd(requireActivity(), pairedDevice)
 			activity?.onBackPressed()
 		}
 	}
@@ -207,7 +212,7 @@ class OBDDevicesSearchFragment : OBDDevicesBaseFragment(),
 
 	override fun onConnect(device: BTDeviceInfo) {
 		activity?.let {
-			vehicleMetricsPlugin?.let { plugin ->
+			vehicleMetricsPlugin.let { plugin ->
 				if (plugin.isPaired(it, device)) {
 					plugin.connectToObd(requireActivity(), device)
 					it.onBackPressed()

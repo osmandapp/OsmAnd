@@ -6,6 +6,8 @@ import androidx.car.app.CarContext
 import androidx.car.app.model.*
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import net.osmand.plus.R
 import net.osmand.plus.auto.NavigationSession
 
@@ -14,6 +16,14 @@ class LandingScreen(
     private val settingsAction: Action) : BaseAndroidAutoScreen(carContext) {
     @DrawableRes
     private var compassResId = R.drawable.ic_compass_niu
+
+    init {
+        lifecycle.addObserver(object : DefaultLifecycleObserver {
+            override fun onResume(owner: LifecycleOwner) {
+                app.carNavigationSession?.updateCarNavigation(app.locationProvider.lastKnownLocation)
+            }
+        })
+    }
 
     override fun onGetTemplate(): Template {
         val listBuilder = ItemList.Builder()

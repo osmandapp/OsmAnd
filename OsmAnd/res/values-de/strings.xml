@@ -5744,7 +5744,7 @@
     <string name="detailed_track_guidance_description">OsmAnd gleicht Ihren Track mit nahe gelegenen Straßen ab, um die Abbiegehinweise zu verbessern.</string>
     <string name="quick_action_routes_summary">Ein Schalter, um %1$s auf der Karte anzuzeigen oder auszublenden.</string>
     <string name="compass_click_north_is_up">Um den Ausrichtungsmodus zu ändern, klicken und halten Sie</string>
-    <string name="help_article_map_tracks_name">Strecken</string>
+    <string name="help_article_map_tracks_name">Tracks</string>
     <string name="help_article_map_routes_name">Routen</string>
     <string name="route_roundabout_exit">%1$d. Ausfahrt nehmen</string>
     <string name="add_widget_below">Widget unten hinzufügen</string>
@@ -5968,9 +5968,10 @@
     <string name="obd_throttle_position">Drosselklappenstellung</string>
     <string name="shared_string_volume">Menge</string>
     <string name="av_audio_sample_rate">Audio-Samplerate</string>
-    <string name="av_audio_sample_rate_descr">Wähle die Audio- Samplerate.</string>
+    <string name="av_audio_sample_rate_descr">Wähle die Audio-Samplerate.</string>
     <string name="connect_new_scanner">Neuen Scanner verbinden</string>
     <string name="preview_next_turn">Vorschau der nächsten Abbiegung</string>
     <string name="auto_zoom_3d_angle">Autozoom 3D-Winkel</string>
     <string name="shared_string_engine">Motor</string>
+    <string name="vehicle_metrics_recording_description">Wählen Sie die Parameter aus, die in der GPX-Datei aufgezeichnet werden sollen.</string>
 </resources>
