@@ -5880,4 +5880,5 @@
     <string name="rendering_attr_showDirtbikeTrails_description">Arată trasee de biciclete de teren</string>
     <string name="drawer_button_description">Deschide meniul principal.</string>
     <string name="configure_map_description">Modificare stil hartă, straturi sau alte setări.</string>
+    <string name="shared_string_engine">Motor</string>
 </resources>
