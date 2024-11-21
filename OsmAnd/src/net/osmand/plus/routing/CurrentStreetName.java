@@ -66,10 +66,8 @@ public class CurrentStreetName {
 				shields = RoadShield.create(rs.getObject());
 				if (Algorithms.isEmpty(text) && shields.isEmpty()) {
 					text = getRouteSegmentStreetName(routingHelper, rs, true);
-					isSet = !Algorithms.isEmpty(text);
-				} else {
-					isSet = true;
 				}
+				isSet = !Algorithms.isEmpty(text) || !shields.isEmpty();
 			}
 		}
 		// 3. display next road street name if this one empty
