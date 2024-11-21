@@ -264,7 +264,7 @@
     <string name="app_settings">إعدادات التطبيق</string>
     <string name="save_current_track">حفظ المسار الحالي</string>
     <string name="shared_string_settings">إعدادات</string>
-    <string name="map_magnifier">حجم الخريطة</string>
+    <string name="map_magnifier">مُكبِّر الخريطة</string>
     <string name="base_world_map">خريطة العالم العامة</string>
     <string name="local_index_tile_data_expire">الانتهاء (دقائق): %1$s</string>
     <string name="local_index_tile_data_downloadable">قابل للتحميل: %1$s</string>

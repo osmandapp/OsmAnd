@@ -5458,9 +5458,9 @@
     <string name="quick_action_routes_summary">Прекидач за приказ или сакривање %1$s на карти.</string>
     <string name="shared_string_automatically">Самостално</string>
     <string name="compass_click_north_is_up">Да бисте променили режим оријентације, кликните и држите</string>
-    <string name="help_article_map_routes_name">Путање</string>
+    <string name="help_article_map_routes_name">Руте</string>
     <string name="route_roundabout_exit">Идите на излаз %1$d</string>
-    <string name="help_article_map_tracks_name">Трагови</string>
+    <string name="help_article_map_tracks_name">Путање</string>
     <string name="add_widget_above">Додај справицу изнад</string>
     <string name="add_widget_below">Додај справицу испод</string>
     <string name="add_widget_to_the_right">Додај справицу десно</string>
@@ -5566,7 +5566,7 @@
     <string name="new_trip_segment">Нови део путовања</string>
     <string name="quick_action_start_pause_recording">Дугме за покретање, застанак или наставак снимања стазе ГПКС-а.</string>
     <string name="quick_action_verb_start_pause">Покрени / застани</string>
-    <string name="help_article_personal_color_palette_schemes_name">Образаци боја</string>
+    <string name="help_article_personal_color_palette_schemes_name">Шеме боја</string>
     <string name="track_does_not_contain_data_to_save">Траг не садржи податке за чување.</string>
     <string name="quick_action_finish_trip_recording_summary">Дугме за чување стазе ГПКС-а и завршетак снимања путовања.</string>
     <string name="start_trip_recording_first_m">Прво започните снимање путовања.</string>

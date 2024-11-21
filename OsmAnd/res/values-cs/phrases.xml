@@ -4895,4 +4895,8 @@
     <string name="poi_activities_fitness">Fitness stezky</string>
     <string name="poi_activities_inline_skates">Inline brusle</string>
     <string name="poi_activities_mountain_bike">Horská cyklistika</string>
+    <string name="poi_name_etymology">Původ názvu</string>
+    <string name="poi_name_right">Název pravé strany</string>
+    <string name="poi_name_left">Název levé strany</string>
+    <string name="poi_climbing_boulder">Boulder na lezení</string>
 </resources>

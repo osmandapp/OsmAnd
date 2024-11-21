@@ -1795,7 +1795,7 @@
     <string name="item_removed">Elemento quitado</string>
     <string name="n_items_removed">elementos borrados</string>
     <string name="shared_string_undo_all">Deshacer todo</string>
-    <string name="rendering_attr_hideIcons_name">Iconos de PDI</string>
+    <string name="rendering_attr_hideIcons_name">Íconos de PDI</string>
     <string name="switch_start_finish">Invertir puntos de partida y destino</string>
     <string name="number_of_contributors">Número de editores</string>
     <string name="number_of_edits">Número de ediciones</string>
@@ -2888,7 +2888,7 @@
     <string name="routing_attr_freeride_policy_description">Los senderos libres y fuera de pista son rutas y pasajes no oficiales. Típicamente descuidados, no mantenidos y no controlados por la noche. Entrar bajo su propio riesgo.</string>
     <string name="process_downloading_service">Servicio de descarga de OsmAnd</string>
     <string name="shared_string_color_magenta">Magenta</string>
-    <string name="shared_string_icon">Icono</string>
+    <string name="shared_string_icon">Ícono</string>
     <string name="collected_data">Datos recopilados</string>
     <string name="press_again_to_change_the_map_orientation">Pulsá de nuevo para cambiar la orientación del mapa</string>
     <string name="shared_string_min_speed">Velocidad mín.</string>
@@ -3125,15 +3125,15 @@
     <string name="shared_string_downloading_formatted">Descargando %s</string>
     <string name="rendering_value_thick_name">Grueso</string>
     <string name="desert_render_descr">Para desiertos y otras zonas escasamente pobladas. Más detallado.</string>
-    <string name="select_navigation_icon">Icono de la ubicación mientras se mueve</string>
-    <string name="select_map_icon">Icono de la ubicación en reposo</string>
+    <string name="select_navigation_icon">Ícono de la ubicación mientras se mueve</string>
+    <string name="select_map_icon">Ícono de la ubicación en reposo</string>
     <string name="delete_profiles_descr">Al pulsar en «Aplicar», los perfiles borrados se perderán completamente.</string>
     <string name="master_profile">Perfil principal</string>
     <string name="select_color">Elegir el color</string>
     <string name="edit_profiles_descr">Los perfiles predefinidos de OsmAnd no se pueden borrar, sino desactivar (en la pantalla anterior) u ordenarse en la parte inferior.</string>
     <string name="edit_profiles">Editar perfiles</string>
     <string name="profile_appearance">Aspecto del perfil</string>
-    <string name="choose_icon_color_name">Icono, color y nombre</string>
+    <string name="choose_icon_color_name">Ícono, color y nombre</string>
     <string name="reorder_profiles">Editar la lista de perfiles</string>
     <string name="selected_profile">Perfil marcado</string>
     <string name="reset_confirmation_descr">Al pulsar en «%1$s», se descartan todos los cambios.</string>
@@ -3547,7 +3547,7 @@
     <string name="sort_last_modified">Último modificado</string>
     <string name="sort_name_descending">Nombre: Z – A</string>
     <string name="sort_name_ascending">Nombre: A – Z</string>
-    <string name="start_finish_icons">Iconos de inicio y fin</string>
+    <string name="start_finish_icons">Íconos de inicio y fin</string>
     <string name="contour_lines_thanks">Gracias por comprar «Topografía»</string>
     <string name="osm_live_payment_desc_hw">La suscripción se cobra por el período elegido. Podés cancelarlo en AppGallery en cualquier momento.</string>
     <string name="osm_live_payment_subscription_management_hw">El pago se carga en la cuenta de AppGallery al confirmar la compra. \n \nLa suscripción se renueva automáticamente a menos que se cancele antes de la fecha de renovación. \n \nGestioná o cancelá las suscripciones cuando quieras, en los ajustes de AppGallery.</string>
@@ -4156,7 +4156,7 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Muestra etiquetas que solicitan más atención (fixme)</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Muestra etiquetas con información no obvia sobre algún elemento (note)</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas «note» (nota)</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Iconos en zums bajos</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Íconos en zums bajos</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualización esquemática de íconos en zums bajos</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Aumentar visibilidad de los túneles fluviales</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Aumenta la visibilidad de los túneles fluviales</string>
@@ -5338,12 +5338,12 @@
 \nInactivo (1k): %4$s</string>
     <string name="choose_map_orientation">Elegí la orientación del mapa</string>
     <string name="shared_string_all_icons">Todos los íconos</string>
-    <string name="navigation_position_icon_summary">Icono que se muestra al navegar o moverse.</string>
-    <string name="navigation_position_icon">Icono de la ubicación al navegar</string>
-    <string name="resting_position_icon_summary">Icono que se muestra en reposo.</string>
-    <string name="resting_position_icon">Icono de la ubicación al estar en reposo</string>
+    <string name="navigation_position_icon_summary">Ícono que se muestra al navegar o moverse.</string>
+    <string name="navigation_position_icon">Ícono de la ubicación al navegar</string>
+    <string name="resting_position_icon_summary">Ícono que se muestra en reposo.</string>
+    <string name="resting_position_icon">Ícono de la ubicación al estar en reposo</string>
     <string name="rendering_value_pale_name">Pálido</string>
-    <string name="profile_icon">Icono del perfil</string>
+    <string name="profile_icon">Ícono del perfil</string>
     <string name="navigation_position">Ubicación al navegar</string>
     <string name="resting_navigation_position">Ubicación en reposo y al navegar</string>
     <string name="view_angle">Ángulo de visión</string>
@@ -5528,14 +5528,14 @@
     <string name="obd_fuel_consumption_rate_sensor_desc">Muestra la tasa de consumo del combustible del vehículo según el sensor (l/h)</string>
     <string name="obd_fuel_left_percent">Combustible restante (%)</string>
     <string name="obd_fuel_left_liter">Combustible restante (l)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">Tasa de consumo del combustible en l/h</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Tasa de consumo del combustible (l/h)</string>
     <string name="obd_fuel_consumption_rate_l_h">Tasa de consumo del combustible (l/h)</string>
     <string name="obd_fuel_consumption_rate_l_h_desc">Muestra la tasa de consumo del combustible del vehículo según los cálculos (l/h)</string>
     <string name="obd_fuel_level_liter">Nivel de combustible (l)</string>
     <string name="obd_fuel_left_km">Combustible restante (km)</string>
     <string name="obd_fuel_level_percent">Nivel de combustible (%)</string>
     <string name="obd_fuel_consumption_rate_scanner">Tasa de consumo del combustible (obd)</string>
-    <string name="obd_fuel_consumption_rate_percent_hour">Tasa de consumo del combustible en %/h</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">Tasa de consumo del combustible (%/h)</string>
     <string name="liter">l</string>
     <string name="speedometer_maximum">Máximo</string>
     <string name="percent_hour">%/h</string>
@@ -5597,4 +5597,10 @@
     <string name="obd_speed_desc">Muestra la velocidad del sensor de velocidad del vehículo (VSS).</string>
     <string name="obd_fuel_pressure_desc">Muestra la presión dentro del sistema de combustible</string>
     <string name="shared_string_engine">Motor</string>
+    <string name="preview_next_turn">Previsualizar próximo giro</string>
+    <string name="vehicle_metrics_recording_description">Marcá los parámetros a guardar en el archivo GPX.</string>
+    <string name="auto_zoom_3d_angle">Zum automático del ángulo 3D</string>
+    <string name="av_audio_sample_rate">Tasa de muestra del audio</string>
+    <string name="av_audio_sample_rate_descr">Marcá la tasa de muestra del audio.</string>
+    <string name="connect_new_scanner">Conectar nuevo escáner</string>
 </resources>

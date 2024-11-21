@@ -4895,4 +4895,8 @@
     <string name="poi_payment_parco_no">Паркомісце не прийнято</string>
     <string name="poi_payment_parco_yes">Паркомісце</string>
     <string name="poi_payment_parkster_no">Паркер не прийнято</string>
+    <string name="poi_name_etymology">Етимологія імені</string>
+    <string name="poi_name_left">Назва лівої сторони</string>
+    <string name="poi_name_right">Назва правої сторони</string>
+    <string name="poi_climbing_boulder">Сходження на валун</string>
 </resources>

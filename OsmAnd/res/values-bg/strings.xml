@@ -3912,7 +3912,7 @@
     <string name="collected_data_descr">Определете каква информация да споделяте с OsmAnd.</string>
     <string name="sorted_sufolders_toast">Папките в „%1$s“ са сортирани по: „%2$s“</string>
     <string name="shared_string_activity">Дейност</string>
-    <string name="sort_subfolders">Сортиране на подпапки</string>
+    <string name="sort_subfolders">Сортиране на вложени папки</string>
     <string name="shared_string_additional">Допълнителни</string>
     <string name="settings_privacy_and_security">Поверителност и защита</string>
     <string name="privacy_and_security_change_descr">Докоснете „Разрешаване“ ако сте съгласни с нашата %1$s</string>
@@ -4466,4 +4466,6 @@
     <string name="lock_screen">Заключване на екрана</string>
     <string name="screen_is_locked_by_action_button">Екранът е заключен. Докоснете бутона, за да го отключите.</string>
     <string name="screen_is_unlocked">Екранът е отключен.</string>
+    <string name="help_article_map_tracks_name">Трасета</string>
+    <string name="help_article_personal_color_palette_schemes_name">Цветови теми</string>
 </resources>

@@ -5236,7 +5236,7 @@
     <string name="save_track_external_sensors_data">Podaci</string>
     <string name="calculate_offline_altitude_descr">Izračunaj nadmorsku visinu, bez interneta, na temelju podataka mape terena (3D). Razlike u odnosu na nadmorsku visinu snimljenu uređajem mogu se koristiti kao korekcija visine.</string>
     <string name="sorted_sufolders_toast">Podfolder u “%1$s” i razvrstan prema: “%2$s”</string>
-    <string name="sort_subfolders">Sortiranje podfildera</string>
+    <string name="sort_subfolders">Sortiranje podfoldera</string>
     <string name="shared_string_activity">Aktivnost</string>
     <string name="shared_string_keywords">Ključne reči</string>
     <string name="shared_string_additional">Dodatni</string>
@@ -5462,7 +5462,7 @@
     <string name="detailed_track_guidance_description">OsmAnd prilagođava tvoju rutu s obližnjim putevima za bolju, detaljniju navigaciju.</string>
     <string name="quick_action_routes_summary">Prekidač za prikaz ili skrivanje %1$s na mapi.</string>
     <string name="compass_click_north_is_up">Da bi promenio režim orijentacije, klikni i drži</string>
-    <string name="help_article_map_tracks_name">Snimljne rute</string>
+    <string name="help_article_map_tracks_name">Putanje</string>
     <string name="help_article_map_routes_name">Rute</string>
     <string name="route_roundabout_exit">Izađi na %1$d izlaz</string>
     <string name="add_widget_above">Dodaj widžet iznad</string>
@@ -5556,7 +5556,7 @@
     <string name="obd_fuel_consumption_rate_desc">Prikazuje stopu potrošnje goriva vozila na osnovu OBD lokacije</string>
     <string name="obd_fuel_left_distance">Preostalo gorivo (rastojanje)</string>
     <string name="obd_fuel_type">Tip goriva</string>
-    <string name="obd_plugin_name">Statistike vozila</string>
+    <string name="obd_plugin_name">Metrika vozila</string>
     <string name="obd_support">OBD podrška</string>
     <string name="obd_plugin_description">Pratite ključne metrike vozila koristeći OBD-II protokol. Pristup podacima uključujući: * Brzina motora * Potrošnja goriva * Preostalo gorivo * Razdaljina od pokretanja motora * Usisna temperatura * Temperatura okoline * Temperatura rashladne tečnosti * Brzina vozila * Procenat baterije</string>
     <string name="obd_fuel_left_distance_desc">Pokazuje razdaljinu koju vozilo može da pređe sa preostalim gorivom preko OBD senzora</string>
