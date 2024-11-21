@@ -4884,15 +4884,15 @@
     <string name="poi_route_article_point">Body na cestách</string>
     <string name="poi_route_track">Další trasy</string>
     <string name="poi_route_track_point">Další body trasy</string>
-    <string name="poi_activities_bicycle">Kolo</string>
-    <string name="poi_activities_trekking">Pěší turistika</string>
-    <string name="poi_activities_running">Běh</string>
-    <string name="poi_activities_pedestrian">Chůze</string>
-    <string name="poi_activities_kayak">Vodní sporty</string>
-    <string name="poi_activities_horse">Jízda na koni</string>
-    <string name="poi_activities_skiing">Zimní sporty</string>
-    <string name="poi_activities_snowmobile">Sněžný skútr</string>
-    <string name="poi_activities_fitness">Fitness stezky</string>
-    <string name="poi_activities_inline_skates">Inline brusle</string>
-    <string name="poi_activities_mountain_bike">Horská cyklistika</string>
+    <string name="poi_routes_bicycle">Kolo</string>
+    <string name="poi_routes_trekking">Pěší turistika</string>
+    <string name="poi_routes_running">Běh</string>
+    <string name="poi_routes_pedestrian">Chůze</string>
+    <string name="poi_routes_kayak">Vodní sporty</string>
+    <string name="poi_routes_horse">Jízda na koni</string>
+    <string name="poi_routes_skiing">Zimní sporty</string>
+    <string name="poi_routes_snowmobile">Sněžný skútr</string>
+    <string name="poi_routes_fitness">Fitness stezky</string>
+    <string name="poi_routes_inline_skates">Inline brusle</string>
+    <string name="poi_routes_mountain_bike">Horská cyklistika</string>
 </resources>
