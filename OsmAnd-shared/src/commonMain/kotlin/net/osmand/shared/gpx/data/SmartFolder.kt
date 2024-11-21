@@ -59,7 +59,7 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 		return analysis
 	}
 
-	override fun getDirName() = folderName
+	override fun getDirName(useExtendedName: Boolean) = folderName
 
 	override fun lastModified() = creationTime
 

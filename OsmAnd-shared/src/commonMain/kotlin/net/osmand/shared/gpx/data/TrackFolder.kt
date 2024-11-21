@@ -5,7 +5,6 @@ import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.KAlgorithms
-import net.osmand.shared.util.KCollectionUtils
 import kotlin.math.max
 
 class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
@@ -37,9 +36,7 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 		lastModified = folder.lastModified
 	}
 
-	override fun getId(): String {
-		return getRelativePath(true)
-	}
+	override fun getId() = getRelativePath(true)
 
 	override fun getName(): String {
 		return GpxHelper.getFolderName(dirFile, false)
@@ -58,13 +55,6 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 
 	val isRootFolder: Boolean
 		get() = getParentFolder() == null
-
-	private fun getRelativePath(includeRootFolder: Boolean): String {
-		val dirName = getDirName()
-		val parentFolder = getParentFolder()
-		return if (parentFolder != null && (!parentFolder.isRootFolder || includeRootFolder))
-			parentFolder.relativePath + "/" + dirName else dirName
-	}
 
 	fun getRootFolder(): TrackFolder = getParentFolder()?.getRootFolder() ?: this
 
@@ -153,8 +143,15 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 		return analysis
 	}
 
-	override fun getDirName(): String {
-		return dirFile.name()
+	override fun getDirName(useExtendedName: Boolean): String {
+		return if (useExtendedName) relativePath else dirFile.name()
+	}
+
+	private fun getRelativePath(includeRootFolder: Boolean): String {
+		val dirName = dirFile.name()
+		val parent = getParentFolder()
+		val includeParent = parent != null && (!parent.isRootFolder || includeRootFolder)
+		return if (includeParent) parent!!.getRelativePath(includeRootFolder) + "/" + dirName else dirName
 	}
 
 	fun getLastModified(): Long {

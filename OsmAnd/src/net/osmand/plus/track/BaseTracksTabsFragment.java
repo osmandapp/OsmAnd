@@ -131,7 +131,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 				TextView textView = customView.findViewById(android.R.id.text1);
 				textView.setPadding(sidePadding, textView.getPaddingTop(), sidePadding, textView.getPaddingBottom());
 				textView.setTextColor(AndroidUtils.createColorStateList(android.R.attr.state_selected, activeColor, textColor));
-				textView.setText(trackTab.getName(app));
+				textView.setText(trackTab.getName());
 				return customView;
 			}
 

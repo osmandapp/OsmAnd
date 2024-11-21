@@ -162,7 +162,7 @@ public class TrackFolderOptionsController extends BaseDialogController
 				}
 			});
 			String caption = activity.getString(R.string.enter_new_name);
-			CustomAlert.showInput(dialogData, activity, trackFolder.getDirName(), caption);
+			CustomAlert.showInput(dialogData, activity, trackFolder.getDirName(false), caption);
 		}
 	}
 

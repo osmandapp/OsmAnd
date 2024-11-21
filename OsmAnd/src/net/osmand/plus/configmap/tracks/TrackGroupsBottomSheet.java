@@ -86,7 +86,7 @@ public class TrackGroupsBottomSheet extends BaseBottomSheetDialogFragment {
 		public void onBindViewHolder(@NonNull TrackGroupViewHolder holder, int position) {
 			TrackTab trackTab = trackTabs.get(position);
 
-			holder.title.setText(trackTab.getName(app, true));
+			holder.title.setText(trackTab.getDirName(true));
 
 			boolean selected = trackTab == selectedTab;
 			int colorId = selected ? activeColorId : defaultColorId;

@@ -1,5 +1,6 @@
 package net.osmand.plus.configmap.tracks;
 
+import static net.osmand.plus.configmap.tracks.TrackTabType.FOLDER;
 import static net.osmand.plus.configmap.tracks.TrackTabType.SMART_FOLDER;
 
 import android.content.Context;
@@ -30,25 +31,42 @@ public class TrackTab implements TracksGroup, ComparableTracksGroup {
 	public final File directory;
 	@Nullable
 	public final SmartFolder smartFolder;
+	public final String initialName;
 
 	private TracksSortMode sortMode = TracksSortMode.getDefaultSortMode();
 
-	public TrackTab(@NonNull File directory) {
+	public TrackTab(@NonNull Context context, @NonNull File directory) {
+		this(context, directory, null, FOLDER);
+	}
+
+	public TrackTab(@NonNull Context context, @NonNull SmartFolder smartFolder) {
+		this(context, null, smartFolder, SMART_FOLDER);
+	}
+
+	public TrackTab(@NonNull Context context, @NonNull TrackTabType type) {
+		this(context, null, null, type);
+	}
+
+	private TrackTab(@NonNull Context context, @Nullable File directory,
+	                 @Nullable SmartFolder smartFolder, @NonNull TrackTabType type) {
 		this.directory = directory;
-		this.smartFolder = null;
-		this.type = TrackTabType.FOLDER;
-	}
-
-	public TrackTab(@NonNull SmartFolder smartFolder) {
-		this.directory = null;
 		this.smartFolder = smartFolder;
-		this.type = SMART_FOLDER;
+		this.type = type;
+		this.initialName = createInitialName(context);
 	}
 
-	public TrackTab(@NonNull TrackTabType type) {
-		this.directory = null;
-		this.smartFolder = null;
-		this.type = type;
+	@NonNull
+	private String createInitialName(@NonNull Context context) {
+		if (type.titleId != -1) {
+			return context.getString(type.titleId);
+		}
+		if (directory != null) {
+			return GpxUiHelper.getFolderName(context, directory);
+		}
+		if (smartFolder != null) {
+			return smartFolder.getFolderName();
+		}
+		return "";
 	}
 
 	@NonNull
@@ -59,12 +77,6 @@ public class TrackTab implements TracksGroup, ComparableTracksGroup {
 			case SMART_FOLDER -> smartFolder != null ? smartFolder.getId() : "";
 			default -> type.name();
 		};
-	}
-
-	@NonNull
-	@Override
-	public String getName() {
-		return null;
 	}
 
 	@Nullable
@@ -85,30 +97,17 @@ public class TrackTab implements TracksGroup, ComparableTracksGroup {
 	}
 
 	@NonNull
-	public String getName(@NonNull Context context) {
-		return getName(context, false);
-	}
-
-	@NonNull
-	public String getName(@NonNull Context context, boolean includeParentDir) {
-		return type.titleId != -1 ? context.getString(type.titleId) : getDirName(includeParentDir);
-	}
-
-	@NonNull
 	@Override
-	public String getDirName() {
+	public String getName() {
 		return getDirName(false);
 	}
 
 	@NonNull
-	public String getDirName(boolean includeParentName) {
-		if (directory != null) {
-			return GpxUiHelper.getFolderName(directory, includeParentName);
-		}
-		if (smartFolder != null) {
-			return smartFolder.getDirName();
-		}
-		return "";
+	@Override
+	public String getDirName(boolean useExtendedName) {
+		return directory != null && useExtendedName
+				? GpxUiHelper.getExtendedFolderName(directory, initialName)
+				: initialName;
 	}
 
 	@NonNull

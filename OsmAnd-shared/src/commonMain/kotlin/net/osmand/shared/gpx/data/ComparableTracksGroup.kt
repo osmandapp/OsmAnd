@@ -4,6 +4,6 @@ import net.osmand.shared.gpx.filters.TrackFolderAnalysis
 
 interface ComparableTracksGroup {
 	fun getFolderAnalysis(): TrackFolderAnalysis?
-	fun getDirName(): String
+	fun getDirName(useExtendedName: Boolean): String
 	fun lastModified(): Long
 }

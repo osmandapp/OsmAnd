@@ -51,7 +51,7 @@ class TrackFolderLoaderTask(
 		if (!shouldLoadFolder(cachedRootFolder)) return cachedRootFolder!!
 
 		val start = currentTimeMillis()
-		log.info("Start loading tracks in ${folder.getDirName()}")
+		log.info("Start loading tracks in ${folder.getDirName(true)}")
 
 		folder.clearData()
 		loadingTime = currentTimeMillis()

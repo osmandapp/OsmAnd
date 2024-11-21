@@ -58,9 +58,9 @@ public class TrackTabsHelper {
 	}
 
 	@NonNull
-	public List<TrackTab> getSortedTrackTabs(boolean checkParentName) {
+	public List<TrackTab> getSortedTrackTabs(boolean useExtendedName) {
 		List<TrackTab> result = new ArrayList<>(trackTabs.values());
-		result.sort(new TracksComparator(getRootSortMode(), getDefaultLocation(), checkParentName));
+		result.sort(new TracksComparator(getRootSortMode(), getDefaultLocation(), useExtendedName));
 		return result;
 	}
 
@@ -94,7 +94,7 @@ public class TrackTabsHelper {
 		updateTrackTabs(trackTabs);
 	}
 
-	public void updateItems(@NonNull TrackFolder folder){
+	public void updateItems(@NonNull TrackFolder folder) {
 		List<TrackItem> allTrackItems = new ArrayList<>(folder.getFlattenedTrackItems());
 		if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get() || gpxSelectionHelper.getSelectedCurrentRecordingTrack() != null) {
 			SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
@@ -134,7 +134,7 @@ public class TrackTabsHelper {
 
 	@NonNull
 	private TrackTab getTracksOnMapTab() {
-		TrackTab trackTab = new TrackTab(TrackTabType.ON_MAP);
+		TrackTab trackTab = new TrackTab(app, TrackTabType.ON_MAP);
 		trackTab.items.addAll(getOnMapTabItems());
 		return trackTab;
 	}
@@ -147,7 +147,7 @@ public class TrackTabsHelper {
 
 	@NonNull
 	private TrackTab getAllTracksTab() {
-		TrackTab trackTab = new TrackTab(TrackTabType.ALL);
+		TrackTab trackTab = new TrackTab(app, TrackTabType.ALL);
 		trackTab.items.addAll(getAllTabItems());
 		return trackTab;
 	}
@@ -177,7 +177,7 @@ public class TrackTabsHelper {
 
 	@NonNull
 	private TrackTab getFoldersTab(@NonNull TrackFolder folder) {
-		TrackTab trackTab = new TrackTab(TrackTabType.FOLDERS);
+		TrackTab trackTab = new TrackTab(app, TrackTabType.FOLDERS);
 		trackTab.items.add(TYPE_SORT_TRACKS);
 		trackTab.items.addAll(folder.getSubFolders());
 		trackTab.items.addAll(folder.getTrackItems());
@@ -237,7 +237,7 @@ public class TrackTabsHelper {
 	private List<TrackTab> getAllSmartFoldersTabs() {
 		List<TrackTab> smartFoldersTabs = new ArrayList<>();
 		for (SmartFolder folder : app.getSmartFolderHelper().getSmartFolders()) {
-			TrackTab folderTab = new TrackTab(folder);
+			TrackTab folderTab = new TrackTab(app, folder);
 			folderTab.items.add(TYPE_SORT_TRACKS);
 			folderTab.items.addAll(folder.getTrackItems());
 			smartFoldersTabs.add(folderTab);
@@ -254,7 +254,7 @@ public class TrackTabsHelper {
 				String folderId = TrackSortModesCollection.getFolderId(dir.absolutePath());
 				TrackTab trackTab = trackTabs.get(folderId);
 				if (trackTab == null) {
-					trackTab = new TrackTab(SharedUtil.jFile(dir));
+					trackTab = new TrackTab(app, SharedUtil.jFile(dir));
 					trackTab.items.add(TYPE_SORT_TRACKS);
 					trackTabs.put(folderId, trackTab);
 				}
