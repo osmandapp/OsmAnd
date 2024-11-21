@@ -19,7 +19,6 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.shared.gpx.data.ComparableTracksGroup;
-import net.osmand.shared.gpx.filters.TrackFolderAnalysis;
 import net.osmand.shared.data.KLatLon;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
@@ -76,8 +75,16 @@ public class TracksComparator implements Comparator<Object> {
 		if (o2 instanceof VisibleTracksGroup) {
 			return 1;
 		}
-		if (o1 instanceof ComparableTracksGroup) {
-			return o2 instanceof ComparableTracksGroup ? compareTrackFolders((ComparableTracksGroup) o1, (ComparableTracksGroup) o2) : -1;
+		if (o1 instanceof ComparableTracksGroup folder1) {
+			if (o2 instanceof ComparableTracksGroup folder2) {
+				int order1 = folder1.getDefaultOrder();
+				int order2 = folder2.getDefaultOrder();
+				if (order1 != order2) {
+					return Integer.compare(order1, order2);
+				}
+				return compareTrackFolders(folder1, folder2);
+			}
+			return -1;
 		}
 		if (o2 instanceof ComparableTracksGroup) {
 			return 1;
@@ -89,49 +96,33 @@ public class TracksComparator implements Comparator<Object> {
 	}
 
 	private int compareTrackFolders(@NonNull ComparableTracksGroup folder1, @NonNull ComparableTracksGroup folder2) {
-		if (folder1 instanceof TrackTab tab1 && folder2 instanceof TrackTab tab2) {
-			if (tab1.type != tab2.type) {
-				return Integer.compare(tab1.type.ordinal(), tab2.type.ordinal());
-			}
-		}
-		TrackFolderAnalysis analysis1;
-		TrackFolderAnalysis analysis2;
+		int multiplier;
 		switch (sortMode) {
-			case NAME_ASCENDING:
-			case NAME_DESCENDING: {
-				int sign = sortMode == NAME_ASCENDING ? 1 : -1;
-				return sign * compareTrackFolderNames(folder1, folder2);
+			case NAME_ASCENDING, NAME_DESCENDING: {
+				multiplier = sortMode == NAME_ASCENDING ? 1 : -1;
+				return multiplier * compareTrackFolderNames(folder1, folder2);
 			}
-			case LAST_MODIFIED:
-			case DATE_ASCENDING:
-			case DATE_DESCENDING: {
-				int sign = sortMode == DATE_DESCENDING ? -1 : 1;
-				return sign * compareFolderFilesByLastModified(folder1, folder2);
+
+			case LAST_MODIFIED, DATE_ASCENDING, DATE_DESCENDING: {
+				multiplier = sortMode == DATE_DESCENDING ? -1 : 1;
+				return multiplier * compareFolderFilesByLastModified(folder1, folder2);
 			}
-			case DISTANCE_ASCENDING:
-			case DISTANCE_DESCENDING: {
-				analysis1 = folder1.getFolderAnalysis();
-				analysis2 = folder2.getFolderAnalysis();
-				if (analysis1 != null && analysis2 != null) {
-					float dist1 = analysis1.getTotalDistance();
-					float dist2 = analysis2.getTotalDistance();
-					if (Math.abs(dist1 - dist2) >= EQUIVALENT_TOLERANCE) {
-						int sign = sortMode == DISTANCE_ASCENDING ? 1 : -1;
-						return sign * Float.compare(dist1, dist2);
-					}
+
+			case DISTANCE_ASCENDING, DISTANCE_DESCENDING: {
+				float dist1 = folder1.getFolderAnalysis().getTotalDistance();
+				float dist2 = folder2.getFolderAnalysis().getTotalDistance();
+				if (Math.abs(dist1 - dist2) >= EQUIVALENT_TOLERANCE) {
+					multiplier = sortMode == DISTANCE_ASCENDING ? 1 : -1;
+					return multiplier * Float.compare(dist1, dist2);
 				}
 			}
-			case DURATION_ASCENDING:
-			case DURATION_DESCENDING: {
-				analysis1 = folder1.getFolderAnalysis();
-				analysis2 = folder2.getFolderAnalysis();
-				if (analysis1 != null && analysis2 != null) {
-					int timeSpan1 = analysis1.getTimeSpan();
-					int timeSpan2 = analysis2.getTimeSpan();
-					if (timeSpan1 != timeSpan2) {
-						int sign = sortMode == DURATION_ASCENDING ? 1 : -1;
-						return sign * Long.compare(timeSpan1, timeSpan2);
-					}
+
+			case DURATION_ASCENDING, DURATION_DESCENDING: {
+				int timeSpan1 = folder1.getFolderAnalysis().getTimeSpan();
+				int timeSpan2 = folder2.getFolderAnalysis().getTimeSpan();
+				if (timeSpan1 != timeSpan2) {
+					multiplier = sortMode == DURATION_ASCENDING ? 1 : -1;
+					return multiplier * Long.compare(timeSpan1, timeSpan2);
 				}
 			}
 		}

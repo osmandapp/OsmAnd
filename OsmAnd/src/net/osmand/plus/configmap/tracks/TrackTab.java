@@ -34,6 +34,7 @@ public class TrackTab implements TracksGroup, ComparableTracksGroup {
 	public final String initialName;
 
 	private TracksSortMode sortMode = TracksSortMode.getDefaultSortMode();
+	private TrackFolderAnalysis analysis = null;
 
 	public TrackTab(@NonNull Context context, @NonNull File directory) {
 		this(context, directory, null, FOLDER);
@@ -79,12 +80,16 @@ public class TrackTab implements TracksGroup, ComparableTracksGroup {
 		};
 	}
 
-	@Nullable
+	@NonNull
 	@Override
 	public TrackFolderAnalysis getFolderAnalysis() {
-		// Analysis should be prepared and accessible here.
-		// It's needed for proper sorting order on UI.
-		return null;
+		// Note: To avoid excessive calculations that could slow down the UI,
+		// analysis is not recalculated when folder or track parameters change.
+		// For example after file deletion or moving to another directory.
+		if (analysis == null) {
+			analysis = smartFolder != null ? smartFolder.getFolderAnalysis() : new TrackFolderAnalysis(this);
+		}
+		return analysis;
 	}
 
 	@NonNull
@@ -108,6 +113,11 @@ public class TrackTab implements TracksGroup, ComparableTracksGroup {
 		return directory != null && useExtendedName
 				? GpxUiHelper.getExtendedFolderName(directory, initialName)
 				: initialName;
+	}
+
+	@Override
+	public int getDefaultOrder() {
+		return type.ordinal();
 	}
 
 	@NonNull
