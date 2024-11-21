@@ -101,6 +101,6 @@ public class TravelGpx extends TravelArticle {
 	@NonNull
 	@Override
 	public String getMainFilterString() {
-		return ROUTE_TRACK; // considered together with ROUTE_ACTIVITIES_PREFIX
+		return ROUTE_TRACK; // considered together with ROUTES_PREFIX
 	}
 }

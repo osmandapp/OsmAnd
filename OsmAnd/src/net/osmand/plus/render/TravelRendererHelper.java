@@ -3,7 +3,7 @@ package net.osmand.plus.render;
 import static net.osmand.IProgress.EMPTY_PROGRESS;
 import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.WIKIVOYAGE_INDEX_DIR;
-import static net.osmand.osm.MapPoiTypes.ROUTE_ACTIVITIES_PREFIX;
+import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
@@ -276,7 +276,7 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 			PoiCategory routes = app.getPoiTypes().getRoutes();
 			for (PoiType subType : routes.getPoiTypes()) {
 				String subTypeKeyName = subType.getKeyName();
-				if (subTypeKeyName.startsWith(ROUTE_ACTIVITIES_PREFIX)) {
+				if (subTypeKeyName.startsWith(ROUTES_PREFIX)) {
 					routeTrackFilters.add(app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + subTypeKeyName));
 				}
 			}

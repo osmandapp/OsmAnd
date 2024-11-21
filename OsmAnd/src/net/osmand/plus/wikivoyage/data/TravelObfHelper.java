@@ -4,7 +4,7 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.data.Amenity.REF;
 import static net.osmand.data.Amenity.ROUTE;
 import static net.osmand.data.Amenity.ROUTE_ID;
-import static net.osmand.osm.MapPoiTypes.ROUTE_ACTIVITIES_PREFIX;
+import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
@@ -332,8 +332,8 @@ public class TravelObfHelper implements TravelHelper {
 					if (subcategory.equals(filter)) {
 						return true;
 					}
-					if (ROUTE_TRACK.equals(filter) && subcategory.startsWith(ROUTE_ACTIVITIES_PREFIX)) {
-						return true; // include routes:activites_xxx by routes:route_track filter
+					if (ROUTE_TRACK.equals(filter) && subcategory.startsWith(ROUTES_PREFIX)) {
+						return true; // include routes:routes_xxx by routes:route_track filter
 					}
 				}
 				return false;

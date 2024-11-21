@@ -2,7 +2,7 @@ package net.osmand.data;
 
 import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
 import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
-import static net.osmand.osm.MapPoiTypes.ROUTE_ACTIVITIES_PREFIX;
+import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 
 import net.osmand.Location;
@@ -552,7 +552,7 @@ public class Amenity extends MapObject {
 	}
 
 	public boolean isRouteTrack() {
-		return subType != null && (subType.equals(ROUTE_TRACK) || subType.startsWith(ROUTE_ACTIVITIES_PREFIX));
+		return subType != null && (subType.equals(ROUTE_TRACK) || subType.startsWith(ROUTES_PREFIX));
 	}
 
 	public JSONObject toJSON() {

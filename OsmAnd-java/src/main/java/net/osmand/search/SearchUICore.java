@@ -1,7 +1,7 @@
 package net.osmand.search;
 
 import static net.osmand.data.Amenity.ROUTE_ID;
-import static net.osmand.osm.MapPoiTypes.ROUTE_ACTIVITIES_PREFIX;
+import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 
 import net.osmand.CallbackWithObject;
@@ -294,7 +294,7 @@ public class SearchUICore {
 								similarityRadius = 50000;
 							}
 							if (Algorithms.stringsEqual(a1.getAdditionalInfo(ROUTE_ID), a2.getAdditionalInfo(ROUTE_ID))
-								&& (subType1.startsWith(ROUTE_ACTIVITIES_PREFIX) || subType1.equals(ROUTE_TRACK))) {
+								&& (subType1.startsWith(ROUTES_PREFIX) || subType1.equals(ROUTE_TRACK))) {
 								similarityRadius = 50000;
 							}
 						}
