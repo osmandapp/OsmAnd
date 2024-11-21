@@ -34,7 +34,7 @@ public class BaseResizableWidgetSettingFragment extends WidgetSettingsBaseFragme
 	protected static final String WIDGET_TYPE_KEY = "widget_type_key";
 
 	public OsmandPreference<WidgetSize> widgetSizePref;
-	private WidgetType widgetType;
+	protected WidgetType widgetType;
 	@Nullable
 	private MapWidgetInfo widgetInfo;
 

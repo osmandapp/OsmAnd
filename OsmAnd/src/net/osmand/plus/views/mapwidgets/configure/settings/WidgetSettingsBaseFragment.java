@@ -177,7 +177,7 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 			manager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, tag)
 					.addToBackStack(tag)
-					.commitAllowingStateLoss();
+					.commit();
 		}
 	}
 }
