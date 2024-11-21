@@ -354,6 +354,8 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 							mapRendererContext.setMapRendererView(null);
 						}
 						offscreenMapRendererView = new AtlasMapRendererView(carContext);
+						offscreenMapRendererView.setMapRendererSetupOptionsConfigurator(
+								mapRendererSetupOptions -> mapRendererSetupOptions.setMaxNumberOfRasterMapLayersInBatch(1));
 						offscreenMapRendererView.setupRenderer(carContext, getWidth(), getHeight(), mapRendererView);
 						offscreenMapRendererView.setMinZoomLevel(ZoomLevel.swigToEnum(mapView.getMinZoom()));
 						offscreenMapRendererView.setMaxZoomLevel(ZoomLevel.swigToEnum(mapView.getMaxZoom()));
