@@ -5624,7 +5624,7 @@
     <string name="kpa_unit">kPa</string>
     <string name="simulate_obd">Simuler des données OBD</string>
     <string name="obd_fuel_consumption_rate_l_km">Consommation de carburant (l/km)</string>
-    <string name="obd_engine_runtime_desc">Affiche la durée de fonctionnement du moteur du véhicule à partir du scanneur OBD</string>
+    <string name="obd_engine_runtime_desc">Affiche la durée de fonctionnement du moteur du véhicule à partir du scanneur OBD.</string>
     <string name="obd_throttle_position_desc">Affiche la pression de carburant du véhicule (pression de gauge) à partir du scanner obd</string>
     <string name="obd_throttle_position">Position de l\'accélérateur</string>
     <string name="obd_fuel_pressure">Pression de carburant</string>
@@ -5673,4 +5673,8 @@
     <string name="average_value_slider_description">Sélectionnez la durée sur laquelle calculer la valeur moyenne.</string>
     <string name="obd_engine_oil_temperature_desc">Affiche la température de l\'huile moteur.</string>
     <string name="average_temperature_slider_description">Sélectionnez la durée sur laquelle calculer la température moyenne.</string>
+    <string name="remaining_fuel_description">Affiche la quantité de carburant restant dans le réservoir du véhicule</string>
+    <string name="obd_ambient_air_temp_desc">Affiche la température de l\'air extérieur.</string>
+    <string name="obd_calculated_engine_load">Charge moteur calculée</string>
+    <string name="obd_engine_runtime">Durée de fonctionnement du moteur</string>
 </resources>
