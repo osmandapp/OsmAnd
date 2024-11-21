@@ -47,6 +47,7 @@ public class TrackSortModesCollection {
 
 	@Nullable
 	public TracksSortMode getSortMode(@Nullable String id) {
+		id = removeExtraFileSeparator(id);
 		TracksSortMode sortMode = cachedSortModes.get(id);
 		if (sortMode == null && id != null && isFolderIdV2(id)) {
 			String idV1 = getFolderIdV1(id);
@@ -58,15 +59,11 @@ public class TrackSortModesCollection {
 	}
 
 	public void setSortMode(@NonNull String id, @NonNull TracksSortMode sortMode) {
+		id = removeExtraFileSeparator(id);
 		cachedSortModes.put(id, sortMode);
 	}
 
-	public void askSyncWithUpgrade(@NonNull OsmandApplication app, @NonNull TrackFolder trackFolder) {
-		askSyncWithUpgrade(app, trackFolder, false);
-	}
-
-	public void askSyncWithUpgrade(@NonNull OsmandApplication app, @NonNull TrackFolder trackFolder,
-	                               boolean forceSync) {
+	public void askSyncWithUpgrade(@NonNull OsmandApplication app, @NonNull TrackFolder trackFolder, boolean forceSync) {
 		if (askUpgradeCachedKeys(app, trackFolder) || forceSync) {
 			syncSettings();
 		}
@@ -98,6 +95,7 @@ public class TrackSortModesCollection {
 	}
 
 	private void putUpgradedKey(@NonNull Map<String, TracksSortMode> map, @NonNull String id) {
+		id = removeExtraFileSeparator(id);
 		TracksSortMode sortMode = getSortMode(id);
 		if (sortMode != null) {
 			map.put(id, sortMode);
@@ -158,5 +156,15 @@ public class TrackSortModesCollection {
 	private static String getFolderIdV1(@NonNull String idV2) {
 		int index = idV2.lastIndexOf(File.separator);
 		return index > 0 ? idV2.substring(index + 1) : null;
+	}
+
+	@Nullable
+	private static String removeExtraFileSeparator(@Nullable String id) {
+		// Ensure consistency by removing trailing File.separator from relative paths
+		// before querying or saving to settings to avoid key mismatches.
+		if (id != null && id.endsWith(File.separator)) {
+			return id.substring(0, id.length() - 1);
+		}
+		return id;
 	}
 }
