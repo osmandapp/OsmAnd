@@ -100,16 +100,20 @@ public class MapRendererContext {
 	 *
 	 * @param mapRendererView Reference to MapRendererView
 	 */
-	public void setMapRendererView(@Nullable MapRendererView mapRendererView) {
-		boolean update = (this.mapRendererView != mapRendererView);
-		if (update && this.mapRendererView != null)
-			this.mapRendererView.stopRenderer();
-		this.mapRendererView = mapRendererView;
-		if (!update) {
+	public synchronized void setMapRendererView(@Nullable MapRendererView mapRendererView) {
+		if (this.mapRendererView == mapRendererView) {
 			return;
 		}
+		this.mapRendererView = mapRendererView;
 		if (mapRendererView != null) {
 			applyCurrentContextToView();
+		}
+	}
+
+	public synchronized void releaseMapRendererView(@Nullable MapRendererView mapRendererView) {
+		if (this.mapRendererView != null && (mapRendererView == null || this.mapRendererView == mapRendererView)) {
+			this.mapRendererView.stopRenderer();
+			this.mapRendererView = null;
 		}
 	}
 
@@ -391,11 +395,9 @@ public class MapRendererContext {
 			heightmapsActive = false;
 		}
 	}
-	public void resetHeightmapProvider() {
-		MapRendererView mapRendererView = this.mapRendererView;
-		if (mapRendererView != null) {
-			mapRendererView.resetElevationDataProvider();
-		}
+
+	public void presetMapRendererOptions(@NonNull MapRendererView mapRendererView) {
+		mapRendererView.setupOptions.setMaxNumberOfRasterMapLayersInBatch(1);
 	}
 
 	private void updateObfMapRasterLayerProvider(@NonNull MapPrimitivesProvider mapPrimitivesProvider,
@@ -433,8 +435,6 @@ public class MapRendererContext {
 		if (mapRendererView == null) {
 			return;
 		}
-		mapRendererView.setMapRendererSetupOptionsConfigurator(
-				mapRendererSetupOptions -> mapRendererSetupOptions.setMaxNumberOfRasterMapLayersInBatch(1));
 		if (mapRendererView instanceof AtlasMapRendererView) {
 			cachedReferenceTileSize = getReferenceTileSize();
 			((AtlasMapRendererView) mapRendererView).setReferenceTileSizeOnScreenInPixels(cachedReferenceTileSize);

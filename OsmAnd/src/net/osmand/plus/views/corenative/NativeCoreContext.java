@@ -9,6 +9,7 @@ import net.osmand.IndexConstants;
 import net.osmand.core.android.CoreResourcesFromAndroidAssets;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererContext.ProviderType;
+import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.NativeCore;
 import net.osmand.core.jni.Logger;
 import net.osmand.core.jni.MapStylesCollection;
@@ -110,9 +111,9 @@ public class NativeCoreContext {
 
 	public static void setMapRendererContext(@NonNull OsmandApplication app, float density) {
 		if (mapRendererContext != null) {
-			if (mapRendererContext.getDensity() == density)
+			if (mapRendererContext.getDensity() == density) {
 				return;
-			mapRendererContext.setMapRendererView(null);
+			}
 		}
 		mapRendererContext = new MapRendererContext(app, density);
 		mapRendererContext.setupObfMap(new MapStylesCollection(), obfsCollectionsByProviderType);

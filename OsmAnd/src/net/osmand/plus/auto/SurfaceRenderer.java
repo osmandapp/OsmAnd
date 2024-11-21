@@ -1,6 +1,7 @@
 package net.osmand.plus.auto;
 
 import static net.osmand.plus.views.OsmandMapTileView.DEFAULT_ELEVATION_ANGLE;
+import static net.osmand.plus.views.MapViewWithLayers.SYMBOLS_UPDATE_INTERVAL;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -32,6 +33,7 @@ import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.views.CarSurfaceView;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -331,39 +333,54 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 			setupOffscreenRenderer();
 	}
 
-	public void setupOffscreenRenderer() {
+	public synchronized void setupOffscreenRenderer() {
 		Log.i(TAG, "setupOffscreenRenderer");
 		if (getApp().useOpenGlRenderer()) {
 			if (surface != null && surface.isValid()) {
 				if (offscreenMapRendererView != null) {
 					MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
 					if (mapRendererContext != null) {
-						if (mapRendererContext.getMapRendererView() == offscreenMapRendererView)
+						if (mapRendererContext.getMapRendererView() == offscreenMapRendererView) {
 							return;
+						}
 						offscreenMapRendererView = null;
 					}
 				}
 				if (offscreenMapRendererView == null) {
-					MapRendererView mapRendererView = null;
 					MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
 					if (mapRendererContext != null) {
-						if (mapView != null && mapView.getMapRenderer() != null)
-							mapView.setMapRenderer(null);
-						if (mapRendererContext.getMapRendererView() != null) {
-							mapRendererView = mapRendererContext.getMapRendererView();
-							mapRendererContext.setMapRendererView(null);
+						MapRendererView mapRendererView = null;
+						MapActivity mapActivity = getApp().getOsmandMap().getMapView().getMapActivity();
+						boolean keepRenderer = mapActivity != null && !mapActivity.isActivityStopped();
+						if (mapView != null && mapView.getMapRenderer() != null) {
+							if (keepRenderer) {
+								mapView.detachMapRenderer();
+							} else {
+								mapView.setMapRenderer(null);
+							}
 						}
-						offscreenMapRendererView = new AtlasMapRendererView(carContext);
-						offscreenMapRendererView.setupRenderer(carContext, getWidth(), getHeight(), mapRendererView);
-						offscreenMapRendererView.setMinZoomLevel(ZoomLevel.swigToEnum(mapView.getMinZoom()));
-						offscreenMapRendererView.setMaxZoomLevel(ZoomLevel.swigToEnum(mapView.getMaxZoom()));
-						offscreenMapRendererView.setAzimuth(0);
-						mapView.setMinAllowedElevationAngle(MIN_ALLOWED_ELEVATION_ANGLE_AA);
-						float elevationAngle = mapView.normalizeElevationAngle(getApp().getSettings().getLastKnownMapElevation());
+						if (mapRendererContext.getMapRendererView() != null) {
+							if (keepRenderer) {
+								mapRendererView = mapRendererContext.getMapRendererView();
+								mapRendererContext.setMapRendererView(null);
+							} else {
+								mapRendererContext.releaseMapRendererView(null);
+							}
+						}
 						NativeCoreContext.setMapRendererContext(getApp(), surfaceView.getDensity());
 						mapRendererContext = NativeCoreContext.getMapRendererContext();
 						if (mapRendererContext != null) {
+							offscreenMapRendererView = new AtlasMapRendererView(carContext);
+							mapRendererContext.presetMapRendererOptions(offscreenMapRendererView);
+							offscreenMapRendererView.setupRenderer(carContext, getWidth(), getHeight(), mapRendererView);
+							offscreenMapRendererView.setMinZoomLevel(ZoomLevel.swigToEnum(mapView.getMinZoom()));
+							offscreenMapRendererView.setMaxZoomLevel(ZoomLevel.swigToEnum(mapView.getMaxZoom()));
+							offscreenMapRendererView.setAzimuth(0);
+							offscreenMapRendererView.setSymbolsUpdateInterval(SYMBOLS_UPDATE_INTERVAL);
+							offscreenMapRendererView.enableBatterySavingMode();
 							mapRendererContext.setMapRendererView(offscreenMapRendererView);
+							mapView.setMinAllowedElevationAngle(MIN_ALLOWED_ELEVATION_ANGLE_AA);
+							float elevationAngle = mapView.normalizeElevationAngle(getApp().getSettings().getLastKnownMapElevation());
 							mapView.setMapRenderer(offscreenMapRendererView);
 							mapView.setElevationAngle(elevationAngle);
 							mapView.addElevationListener(this);
@@ -372,28 +389,35 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 							offscreenMapRendererView.addListener(this);
 							mapView.getAnimatedDraggingThread().toggleAnimations();
 						}
-						offscreenMapRendererView.enableBatterySavingMode();
 					}
 				}
 			}
 		}
 	}
 
-	public void stopOffscreenRenderer() {
+	public synchronized void stopOffscreenRenderer() {
 		Log.i(TAG, "stopOffscreenRenderer");
 		if (offscreenMapRendererView != null) {
-			AtlasMapRendererView offscreenMapRendererView = this.offscreenMapRendererView;
-			this.offscreenMapRendererView = null;
+			MapActivity mapActivity = getApp().getOsmandMap().getMapView().getMapActivity();
+			boolean keepRenderer = mapActivity != null && !mapActivity.isActivityStopped();
 			if (mapView != null) {
 				mapView.removeElevationListener(this);
 				mapView.getAnimatedDraggingThread().toggleAnimations();
 				if (mapView.getMapRenderer() == offscreenMapRendererView) {
-					mapView.setMapRenderer(null);
+					if (keepRenderer) {
+						mapView.detachMapRenderer();
+					} else {
+						mapView.setMapRenderer(null);
+					}
 				}
 			}
-			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
-			if (mapRendererContext != null && mapRendererContext.getMapRendererView() == offscreenMapRendererView)
-				offscreenMapRendererView.stopRenderer();
+			if (!keepRenderer) {
+				MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+				if (mapRendererContext != null) {
+					mapRendererContext.releaseMapRendererView(offscreenMapRendererView);
+				}
+			}
+			offscreenMapRendererView = null;
 		}
 	}
 

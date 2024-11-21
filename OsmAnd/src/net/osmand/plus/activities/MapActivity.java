@@ -793,6 +793,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
+	public boolean isActivityStopped() {
+		return stopped;
+	}
+
 	public boolean isActivityDestroyed() {
 		return mIsDestroyed;
 	}
