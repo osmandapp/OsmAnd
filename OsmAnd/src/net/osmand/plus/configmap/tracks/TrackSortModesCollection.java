@@ -82,6 +82,7 @@ public class TrackSortModesCollection {
 		Map<String, TracksSortMode> upgradedCache = new HashMap<>();
 		putUpgradedKey(upgradedCache, TrackTabType.ON_MAP.name());
 		putUpgradedKey(upgradedCache, TrackTabType.ALL.name());
+		putUpgradedKey(upgradedCache, TrackTabType.FOLDERS.name());
 		putUpgradedKey(upgradedCache, rootFolder.getId());
 		for (TrackFolder folder : rootFolder.getFlattenedSubFolders()) {
 			putUpgradedKey(upgradedCache, folder.getId());

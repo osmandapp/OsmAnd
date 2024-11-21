@@ -125,9 +125,9 @@ public class TrackTabsHelper {
 		processVisibleTracks();
 		processRecentlyVisibleTracks();
 		trackTabs.clear();
-		trackTabs.put(app.getString(R.string.shared_string_visible), getTracksOnMapTab());
-		trackTabs.put(app.getString(R.string.shared_string_all_tracks), getAllTracksTab());
-		trackTabs.put(app.getString(R.string.shared_string_folders), getFoldersTab(folder));
+		trackTabs.put(TrackTabType.ON_MAP.name(), getTracksOnMapTab());
+		trackTabs.put(TrackTabType.ALL.name(), getAllTracksTab());
+		trackTabs.put(TrackTabType.FOLDERS.name(), getFoldersTab(folder));
 		loadTabsSortModes();
 		sortTrackTabs();
 	}
