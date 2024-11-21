@@ -96,7 +96,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 		if (externalFilter != null) {
 			return new SearchTracksAdapter(app, trackItems, nightMode, selectionMode, externalFilter);
 		} else {
-			TracksSearchFilter filter = new TracksSearchFilter(app, trackItems, currentFolder);
+			TracksSearchFilter filter = new TracksSearchFilter(app, trackItems, currentFolder, null);
 			return new SearchTracksAdapter(app, trackItems, nightMode, selectionMode, filter);
 		}
 	}
