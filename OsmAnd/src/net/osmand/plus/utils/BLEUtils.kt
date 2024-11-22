@@ -28,10 +28,15 @@ object BLEUtils {
 
 	@SuppressLint("MissingPermission")
 	fun BluetoothDevice.getAliasName(context: Context): String {
+		return getAliasNameOrNull() ?: context.getString(R.string.unknown_bt_device)
+	}
+
+	@SuppressLint("MissingPermission")
+	fun BluetoothDevice.getAliasNameOrNull(): String? {
 		return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 			alias
 		} else {
 			name
-		} ?: context.getString(R.string.unknown_bt_device)
+		}
 	}
 }

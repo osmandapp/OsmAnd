@@ -65,14 +65,6 @@ class SettingsAPIImpl(private val app: OsmandApplication) : SettingsAPI {
 		}
 	}
 
-	override fun getAppModeFloatPreference(name: String): Float? {
-		val mode = app.settings.APPLICATION_MODE.get()
-		return when (val pref = app.settings.getPreference(name)) {
-			is FloatPreference -> if (mode != null) pref.getModeValue(mode) else pref.get()
-			else -> null
-		}
-	}
-
 	override fun setFloatPreference(name: String, value: Float) {
 		val pref = app.settings.getPreference(name)
 		if (pref is FloatPreference) pref.set(value)

@@ -10,7 +10,13 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="shared_string_engine">Engine</string>
+    <string name="vehicle_metrics_recording_description">Select the parameters to be recorded in the GPX file.</string>
+    <string name="auto_zoom_3d_angle">Auto zoom 3D angle</string>
+    <string name="av_audio_sample_rate">Audio sample rate</string>
+    <string name="av_audio_sample_rate_descr">Select audio sample rate.</string>
+    <string name="connect_new_scanner">Connect new scanner</string>
+    <string name="preview_next_turn">Preview next turn</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Track vital vehicle data using the OBD-II protocol. Monitor key metrics like speed, engine RPM, fuel consumption, and more.</string>
     <string name="vehicle_metrics_obd_ii">Vehicle Metrics (OBD-II)</string>
 	<string name="shared_string_hour">Hour</string>
@@ -107,10 +113,10 @@ You will be able to pair this scanner again at any time.</string>
 2. Turn on your vehicle\'s engine\n\n
 3. Enable Bluetooth on your device\n\n
 4. Tap \'%1$s\' and select your scanner from the list.</string>
-    <string name="connect_obd_instructions_step1">1. Connect the scanner to your vehicle\'s OBD-II port.</string>
-    <string name="connect_obd_instructions_step2">2. Turn on your vehicle\'s engine</string>
-    <string name="connect_obd_instructions_step3">3. Enable Bluetooth on your device</string>
-    <string name="connect_obd_instructions_step4">4. Tap \'Connect,\' and select your scanner from the list.</string>
+    <string name="connect_obd_instructions_step1">Connect the scanner to your vehicle\'s OBD-II port.</string>
+    <string name="connect_obd_instructions_step2">Turn on your vehicle\'s engine</string>
+    <string name="connect_obd_instructions_step3">Enable Bluetooth on your device</string>
+    <string name="connect_obd_instructions_step4">Tap \'%1$s,\' and select your scanner from the list.</string>
     <string name="learn_more_about_obd_sensors">Learn more about sensors.</string>
     <string name="screen_is_locked_by_external_button">Touch screen is locked. To unlock, press the "%1$s" button, or tap the on-screen button.</string>
     <string name="screen_is_unlocked">Touch screen is unlocked.</string>

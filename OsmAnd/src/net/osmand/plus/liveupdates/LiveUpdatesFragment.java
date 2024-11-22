@@ -263,7 +263,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		container.addView(button);
 
 		toolbarSwitchContainer = appBarLayout.findViewById(R.id.toolbar_switch_container);
-		updateToolbarSwitch(settings.IS_LIVE_UPDATES_ON.get());
+		updateToolbarSwitch(InAppPurchaseUtils.isLiveUpdatesAvailable(app) && settings.IS_LIVE_UPDATES_ON.get());
 	}
 
 	private void updateToolbarSwitch(boolean isChecked) {

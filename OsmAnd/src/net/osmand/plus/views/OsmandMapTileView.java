@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
 
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
@@ -105,6 +106,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private static final int MIN_ZOOM_LIMIT = 1;
 	private static final int MIN_ZOOM_LEVEL_TO_ADJUST_CAMERA_TILT = 3;
 	private static final int MAX_ZOOM_LIMIT = 17;
+
+	private static final long ANIMATION_PREVIEW_TIME = 1500;
 
 	private boolean MEASURE_FPS;
 	private final FPSMeasurement main = new FPSMeasurement();
@@ -1682,7 +1685,23 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void fitRectToMap(double left, double right, double top, double bottom,
 	                         int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx) {
-		fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, marginTopPx, marginLeftPx, true);
+		RotatedTileBox tb = currentViewport.copy();
+		double border = 0.85;
+		int dx = marginLeftPx;
+		int dy = marginTopPx;
+		int tbw = (tileBoxWidthPx > 0 ? tileBoxWidthPx : tb.getPixWidth());
+		int tbh = (tileBoxHeightPx > 0 ? tileBoxHeightPx : tb.getPixHeight());
+		if (isLayoutRtl()) {
+			dx = -dx;
+		} else {
+			dx -= (tbw - tb.getPixWidth()) ;
+		}
+//		dy -= (tbh - tb.getPixHeight()) / 2; // this to make margin from top
+		dx += (int) (tbw * (1 - border) / 2);
+		dy += (int) (tbh * (1 - border) / 2);
+		tb.setPixelDimensions((int) (tbw * border), (int) (tbh * border));
+		tb.setCenterLocation(0.5f, 0.5f);
+		fitRectToMap(tb, left, right, top, bottom, -dx, -dy, true, false);
 	}
 
 	public boolean fullyContains(RotatedTileBox tb, double left, double top, double right, double bottom) {
@@ -1699,28 +1718,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return true;
 	}
 
-	public void fitRectToMap(double left, double right, double top, double bottom,
-	                         int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx, boolean useSmallZoom) {
-		RotatedTileBox tb = currentViewport.copy();
+	public void fitRectToMap(RotatedTileBox tb, double left, double right, double top, double bottom,
+	                         int dx, int dy, boolean useSmallZoom, 	boolean rotate) {
 		float zoomStep = useSmallZoom ? 0.1f : 1f;
-		double border = 0.8;
-		int dx = 0;
-		int dy = 0;
-		int tbw = (int) (tb.getPixWidth() * border);
-		int tbh = (int) (tb.getPixHeight() * border);
-		if (tileBoxWidthPx > 0) {
-			tbw = (int) (tileBoxWidthPx * border);
-			if (marginLeftPx > 0) {
-				int offset = (tb.getPixWidth() - tileBoxWidthPx) / 2 - marginLeftPx;
-				dx = isLayoutRtl() ? -offset : offset;
-			}
-		} else if (tileBoxHeightPx > 0) {
-			tbh = (int) (tileBoxHeightPx * border);
-			dy = (tb.getPixHeight() - tileBoxHeightPx) / 2 - marginTopPx;
-		}
-		dy += tb.getCenterPixelY() - tb.getPixHeight() / 2;
-		tb.setPixelDimensions(tbw, tbh);
-
 		double clat = bottom / 2 + top / 2;
 		double clon = left / 2 + right / 2;
 		tb.setLatLonCenter(clat, clon);
@@ -1731,21 +1731,31 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			zoom.partialChangeZoom(-zoomStep);
 			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
-		zoom.partialChangeZoom(zoomStep);
 		while (zoom.isZoomInAllowed() && fullyContains(tb, left, top, right, bottom)) {
 			zoom.partialChangeZoom(zoomStep);
 			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
-		zoom.partialChangeZoom(-zoomStep);
-		tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
-		if (dy != 0 || dx != 0) {
-			float x = tb.getPixWidth() / 2f + dx;
-			float y = tb.getPixHeight() / 2f + dy;
-			clat = tb.getLatFromPixel(x, y);
-			clon = tb.getLonFromPixel(x, y);
+		if (zoom.isZoomOutAllowed()) {
+			zoom.partialChangeZoom(-zoomStep);
+			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
+		}
+		float x = currentViewport.getCenterPixelX() + dx;
+		float y = currentViewport.getCenterPixelY() + dy;
+		clat = tb.getLatFromPixel(x, y);
+		clon = tb.getLonFromPixel(x, y);
+		if (rotate) {
+			animateToState(clat, clon,
+					zoom, 0f, 90f, ANIMATION_PREVIEW_TIME, false);
+		} else {
+			animatedDraggingThread.startMoving(clat, clon, zoom.getBaseZoom(), zoom.getZoomFloatPart());
 		}
 
-		animatedDraggingThread.startMoving(clat, clon, zoom.getBaseZoom(), zoom.getZoomFloatPart());
+	}
+
+	public void animateToState(double clat, double clon, @NonNull Zoom zoom,
+	                           float finalRotation, float elevationAngle, long animationDuration, boolean notifyListener) {
+		animatedDraggingThread.animateToPreview(clat, clon,
+				zoom, finalRotation, elevationAngle, animationDuration, notifyListener);
 	}
 
 	public RotatedTileBox getTileBox(int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx) {
@@ -2200,7 +2210,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			} else {
 				startZooming = true;
 			}
-			if (mapGestureAllowed(MapGestureType.TWO_POINTERS_ROTATION)) {
+			if (mapGestureAllowed(MapGestureType.TWO_POINTERS_ROTATION) && isAngleOverThreshold(Math.abs(relAngle), Math.abs(deltaZoom))) {
 				startRotating = true;
 			} else {
 				relAngle = 0;
@@ -2208,6 +2218,20 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 			if (deltaZoom != 0 || relAngle != 0) {
 				changeZoomPosition((float) deltaZoom, relAngle);
+			}
+		}
+
+		private boolean isAngleOverThreshold(float angle, double deltaZoom) {
+			if (startRotating) {
+				return true;
+			} else if (!startZooming) {
+				return Math.abs(angle) >= ZONE_0_ANGLE_THRESHOLD;
+			} else if (deltaZoom >= ZONE_2_ZOOM_THRESHOLD) {
+				return Math.abs(angle) >= ZONE_3_ANGLE_THRESHOLD;
+			} else if (deltaZoom >= ZONE_1_ZOOM_THRESHOLD) {
+				return Math.abs(angle) >= ZONE_2_ANGLE_THRESHOLD;
+			} else {
+				return Math.abs(angle) >= ZONE_1_ANGLE_THRESHOLD;
 			}
 		}
 

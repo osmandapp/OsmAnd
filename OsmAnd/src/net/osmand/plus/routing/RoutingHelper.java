@@ -479,10 +479,11 @@ public class RoutingHelper {
 					locationProjection = RoutingHelperUtils.getProject(currentLocation, previousRouteLocation,
 							currentRouteLocation);
 					if (settings.SNAP_TO_ROAD.get() && currentRoute + 1 < routeNodes.size()) {
+						boolean previewNextTurn = settings.PREVIEW_NEXT_TURN.get();
 						Location nextRouteLocation = routeNodes.get(currentRoute + 1);
 						RoutingHelperUtils.approximateBearingIfNeeded(this,
-								locationProjection, currentLocation,
-								previousRouteLocation, currentRouteLocation, nextRouteLocation);
+								locationProjection, currentLocation, previousRouteLocation,
+								currentRouteLocation, nextRouteLocation, previewNextTurn);
 					}
 				}
 			}

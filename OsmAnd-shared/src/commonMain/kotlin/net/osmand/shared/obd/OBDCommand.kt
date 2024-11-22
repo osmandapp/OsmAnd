@@ -39,5 +39,14 @@ enum class OBDCommand(
 			}
 			return null
 		}
+
+		fun getCommand(name: String): OBDCommand? {
+			for (type in entries) {
+				if (type.name.equals(name, true)) {
+					return type
+				}
+			}
+			return null
+		}
 	}
 }

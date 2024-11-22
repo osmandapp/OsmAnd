@@ -2,6 +2,8 @@ package net.osmand.plus.auto.screens;
 
 import static net.osmand.search.core.ObjectType.GPX_TRACK;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.text.SpannableString;
 
 import androidx.annotation.NonNull;
@@ -19,22 +21,29 @@ import androidx.car.app.navigation.model.RoutePreviewNavigationTemplate;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
+
+import net.osmand.PlatformUtil;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.TripUtils;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.StateChangedListener;
+import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.ValueHolder;
-import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.settings.enums.CompassMode;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.search.core.SearchResult;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -47,6 +56,8 @@ import java.util.List;
 public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements IRouteInformationListener,
 		DefaultLifecycleObserver {
 
+	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(RoutePreviewScreen.class);
+
 	@NonNull
 	private final Action settingsAction;
 	@NonNull
@@ -57,6 +68,9 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 	@Nullable
 	private GpxFile routeGpxFile;
 
+
+	private boolean calculateRoute;
+	private boolean calculating;
 
 	private final StateChangedListener<Void> stateChangedListener = new StateChangedListener<Void>() {
 		@Override
@@ -69,22 +83,24 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		}
 	};
 
-	private boolean calculating;
 
 	public RoutePreviewScreen(@NonNull CarContext carContext, @NonNull Action settingsAction,
-	                          @NonNull SearchResult searchResult) {
+	                          @NonNull SearchResult searchResult, boolean calculateRoute) {
 		super(carContext);
 		this.settingsAction = settingsAction;
 		this.searchResult = searchResult;
-
+		this.calculateRoute = calculateRoute;
 		getLifecycle().addObserver(this);
-		calculating = true;
+		calculating = calculateRoute;
 	}
 
 	private void prepareRoute() {
 		if (searchResult.objectType == GPX_TRACK) {
 			GPXInfo gpxInfo = ((GPXInfo) searchResult.relatedObject);
 			File file = gpxInfo.getFile();
+			if (file == null) {
+				return;
+			}
 			SelectedGpxFile selectedGpxFile = getApp().getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath());
 			if (selectedGpxFile == null) {
 				GpxFileLoaderTask.loadGpxFile(file, null, gpxFile -> {
@@ -127,19 +143,21 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 			String title = Algorithms.isEmpty(name) ? typeName : name;
 			routeRows.add(new Row.Builder().setTitle(title).addText(description).build());
 			this.routeRows = routeRows;
-			calculating = false;
+			calculating = app.getRoutingHelper().isRouteBeingCalculated();
 			invalidate();
 		}
 	}
 
 	@Override
 	public void onCreate(@NonNull LifecycleOwner owner) {
-		getApp().getRoutingHelper().addListener(this);
-		getApp().getTargetPointsHelper().addListener(stateChangedListener);
-		if (getApp().getRoutingHelper().isRouteCalculated()) {
-			updateRoute(true);
-		} else {
+		super.onCreate(owner);
+		OsmandApplication app = getApp();
+		app.getRoutingHelper().addListener(this);
+		app.getTargetPointsHelper().addListener(stateChangedListener);
+		if (calculateRoute) {
 			prepareRoute();
+		} else {
+			updateRoute(true);
 		}
 	}
 
@@ -156,8 +174,10 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 	}
 
 	@Override
-	public void onStart(@NonNull LifecycleOwner owner) {
-		recenterMap();
+	public void onResume(@NonNull LifecycleOwner owner) {
+		if (getApp().getRoutingHelper().isRouteCalculated()) {
+			zoomMapToRoute();
+		}
 	}
 
 	@NonNull
@@ -204,12 +224,16 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 
 	@Override
 	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
+		zoomMapToRoute();
+		updateRoute(newRoute);
+	}
+
+	private void zoomMapToRoute() {
 		RoutingHelper rh = getApp().getRoutingHelper();
 		QuadRect mapRect = RoutingHelperUtils.getRouteRect(getApp(), rh.getRoute());
 		if (mapRect != null) {
 			adjustMapToRect(getApp().getMapViewTrackingUtilities().getDefaultLocation(), mapRect);
 		}
-		updateRoute(newRoute);
 	}
 
 	@Override
@@ -221,11 +245,5 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 
 	@Override
 	public void routeWasFinished() {
-	}
-
-	public void tryToStartNavigation() {
-		if (!calculating) {
-			onNavigate();
-		}
 	}
 }

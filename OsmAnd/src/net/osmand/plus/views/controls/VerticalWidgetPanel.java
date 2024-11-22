@@ -45,8 +45,7 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final MapWidgetRegistry widgetRegistry;
-
-	private Map<Integer, Row> visibleRows = new HashMap<>();
+	private final List<Row> visibleRows = new ArrayList<>();
 	private boolean topPanel;
 	private SizeChangeListener sizeListener;
 	private VisibilityChangeListener visibilityListener;
@@ -84,6 +83,7 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 	private void init() {
 		removeAllViews();
 
+		visibleRows.clear();
 		ApplicationMode appMode = settings.getApplicationMode();
 		List<MapWidget> flatOrderedWidgets = new ArrayList<>();
 		List<Set<MapWidgetInfo>> pagedWidgets = getWidgetsToShow(appMode, flatOrderedWidgets);
@@ -92,13 +92,13 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 			List<MapWidgetInfo> rowWidgets = new ArrayList<>(pagedWidgets.get(i));
 			Row row = new Row(rowWidgets, flatOrderedWidgets);
 			addView(row.view);
-			visibleRows.put(i, row);
+			visibleRows.add(row);
 		}
 		updateRows();
 	}
 
 	private boolean isAnyRowVisible() {
-		for (Row row : visibleRows.values()) {
+		for (Row row : visibleRows) {
 			if (row.isAnyWidgetVisible()) {
 				return true;
 			}
@@ -118,7 +118,7 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 
 	public void update(@Nullable DrawSettings drawSettings) {
 		nightMode = drawSettings != null ? drawSettings.isNightMode() : nightMode;
-		Map<Integer, Row> newRows = new HashMap<>();
+		List<Row> newRows = new ArrayList<>();
 
 		ApplicationMode appMode = settings.getApplicationMode();
 		List<MapWidget> flatOrderedWidgets = new ArrayList<>();
@@ -127,7 +127,7 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 		for (int i = 0; i < pagedWidgets.size(); i++) {
 			List<MapWidgetInfo> rowWidgets = new ArrayList<>(pagedWidgets.get(i));
 			Row row = new Row(rowWidgets, flatOrderedWidgets);
-			newRows.put(i, row);
+			newRows.add(row);
 		}
 
 		PagesDiffUtilCallback diffUtilCallback = new PagesDiffUtilCallback(visibleRows, newRows);
@@ -147,22 +147,15 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 					}
 					row.setupRow(i == count - 1);
 					addView(row.view, position + i);
+					visibleRows.add(position + i , row);
 				}
-				visibleRows = newRows;
 				applyShadow();
 				updateVisibility();
 			}
 
 			@Override
 			public void onRemoved(int position, int count) {
-				List<View> viewsToDelete = new ArrayList<>();
-				for (int i = 0; i < count; i++) {
-					viewsToDelete.add(getChildAt(position + i));
-				}
-				for (View view : viewsToDelete) {
-					removeView(view);
-				}
-				visibleRows = newRows;
+				removeRows(position, count);
 				applyShadow();
 				updateVisibility();
 			}
@@ -173,15 +166,15 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 
 			@Override
 			public void onChanged(int position, int count, @Nullable Object payload) {
+				removeRows(position, count);
 				for (int i = 0; i < count; i++) {
-					removeViewAt(position + i);
 					Row row = newRows.get(position + i);
 					if (row != null) {
 						row.setupRow(i == count - 1);
 						addView(row.view, position + i);
+						visibleRows.add(position + i, row);
 					}
 				}
-				visibleRows = newRows;
 				applyShadow();
 				updateVisibility();
 			}
@@ -189,8 +182,24 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 		updateVisibility();
 	}
 
+	private void removeRows(int position, int count) {
+		List<View> viewsToDelete = new ArrayList<>();
+		List<Row> rowsToDelete = new ArrayList<>();
+		for (int i = 0; i < count; i++) {
+			viewsToDelete.add(getChildAt(position + i));
+			rowsToDelete.add(visibleRows.get(position + i));
+		}
+
+		for (View view : viewsToDelete) {
+			removeView(view);
+		}
+		for (Row row : rowsToDelete) {
+			visibleRows.remove(row);
+		}
+	}
+
 	public void updateRow(@NonNull MapWidget widget) {
-		Iterator<Row> rowIterator = visibleRows.values().iterator();
+		Iterator<Row> rowIterator = visibleRows.iterator();
 		while (rowIterator.hasNext()) {
 			Row row = rowIterator.next();
 			for (MapWidgetInfo widgetInfo : row.enabledMapWidgets) {
@@ -204,13 +213,13 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 	}
 
 	private void updateDividerColors(boolean nightMode) {
-		for (Row row : visibleRows.values()) {
+		for (Row row : visibleRows) {
 			row.updateDividerColor(nightMode);
 		}
 	}
 
 	public void updateRows() {
-		Iterator<Row> rowIterator = visibleRows.values().iterator();
+		Iterator<Row> rowIterator = visibleRows.iterator();
 		while (rowIterator.hasNext()) {
 			Row row = rowIterator.next();
 			row.updateRow(!rowIterator.hasNext());
@@ -437,10 +446,10 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 
 	private static class PagesDiffUtilCallback extends DiffUtil.Callback {
 
-		private final Map<Integer, Row> oldRows;
-		private final Map<Integer, Row> newRows;
+		private final List<Row> oldRows;
+		private final List<Row> newRows;
 
-		public PagesDiffUtilCallback(@NonNull Map<Integer, Row> oldRows, @NonNull Map<Integer, Row> newRows) {
+		public PagesDiffUtilCallback(@NonNull List<Row> oldRows, @NonNull List<Row> newRows) {
 			this.oldRows = oldRows;
 			this.newRows = newRows;
 		}
@@ -462,8 +471,14 @@ public class VerticalWidgetPanel extends LinearLayout implements WidgetsContaine
 
 		@Override
 		public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-			Row oldRow = oldRows.get(oldItemPosition);
-			Row newRow = newRows.get(newItemPosition);
+			Row oldRow = null;
+			Row newRow = null;
+			if (oldItemPosition < oldRows.size()) {
+				oldRow = oldRows.get(oldItemPosition);
+			}
+			if (newItemPosition < newRows.size()) {
+				newRow = newRows.get(newItemPosition);
+			}
 			List<MapWidgetInfo> oldMapWidgets = oldRow != null ? oldRow.enabledMapWidgets : Collections.emptyList();
 			List<MapWidgetInfo> newMapWidgets = newRow != null ? newRow.enabledMapWidgets : Collections.emptyList();
 			return Algorithms.objectEquals(oldMapWidgets, newMapWidgets);

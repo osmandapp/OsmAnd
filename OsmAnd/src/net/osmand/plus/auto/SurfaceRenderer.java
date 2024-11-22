@@ -46,7 +46,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRendererViewListener, ElevationListener {
 	private static final String TAG = "SurfaceRenderer";
 
-	public static final float MIN_ALLOWED_ELEVATION_ANGLE_AA = 30;
+	public static final float MIN_ALLOWED_ELEVATION_ANGLE_AA = 20;
 
 	private static final double VISIBLE_AREA_MIN_DETECTION_SIZE = 1.025;
 	private static final int MAP_RENDER_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 7;
@@ -354,6 +354,8 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 							mapRendererContext.setMapRendererView(null);
 						}
 						offscreenMapRendererView = new AtlasMapRendererView(carContext);
+						offscreenMapRendererView.setMapRendererSetupOptionsConfigurator(
+								mapRendererSetupOptions -> mapRendererSetupOptions.setMaxNumberOfRasterMapLayersInBatch(1));
 						offscreenMapRendererView.setupRenderer(carContext, getWidth(), getHeight(), mapRendererView);
 						offscreenMapRendererView.setMinZoomLevel(ZoomLevel.swigToEnum(mapView.getMinZoom()));
 						offscreenMapRendererView.setMaxZoomLevel(ZoomLevel.swigToEnum(mapView.getMaxZoom()));
@@ -461,6 +463,12 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		} finally {
 			surface.unlockCanvasAndPost(canvas);
 		}
+	}
+
+
+	@Nullable
+	public Rect getVisibleArea() {
+		return visibleArea;
 	}
 
 	public double getVisibleAreaWidth() {

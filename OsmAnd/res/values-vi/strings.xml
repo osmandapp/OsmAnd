@@ -1174,7 +1174,7 @@
     <string name="obd_nothing_found_description">Vui lòng kiểm tra những thứ sau:\n – Đảm bảo rằng Bluetooth được bật\n – Động cơ của xe đang chạy\n – Đảm bảo rằng thiết bị của bạn nằm trong vùng của máy quét.</string>
     <string name="obd_device_forget_sensor_description">Máy quét sẽ bị loại bỏ khởi danh sách. Bạn có thể ghép nối lại với máy quét này bất kỳ lúc nào.</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
-    <string name="connect_obd_instructions_step3">3. Bật Bluetooth trên thiết bị của bạn</string>
+    <string name="connect_obd_instructions_step3">Bật Bluetooth trên thiết bị của bạn</string>
     <string name="screen_is_unlocked">Màn hình cảm ứng được mở khoá.</string>
     <string name="screen_is_locked_by_external_button">Màn hình cảm ứng bị khoá. Để mở khoá, nhấn nút %1$s, hoặc chạm vào nút trên màn hình.</string>
     <string name="obd_support">Hỗ trợ OBD</string>
@@ -1291,7 +1291,7 @@
     <string name="obd_bluetooth_off_description">Bật Bluetooth để tìm và kết nối với máy quét.</string>
     <string name="obd_searching_text_description">Vui lòng giữ thiết bị của bạn gần máy quét. Đảm bảo rằng động cơ xe đang hoạt động.</string>
     <string name="connect_obd_instructions_step">1. Kết nối máy quét tới cổng OBD-II trên xe của bạn.\n\n 2. Bật động cơ xe\n\n 3. Bật Bluetooth trên thiết bị của bạn\n\n 4. Chạm vào \'%1$s\' và chọn máy quét của bạn từ danh sách.</string>
-    <string name="connect_obd_instructions_step4">4. Chạm vào \'Kết nối\' và chọn máy quét của bạn từ danh sách.</string>
+    <string name="connect_obd_instructions_step4">Chạm vào \'Kết nối\' và chọn máy quét của bạn từ danh sách.</string>
     <string name="learn_more_about_obd_sensors">Tìm hiểu thêm về các cảm biến.</string>
     <string name="screen_is_locked_by_action_button">Màn hình cảm ứng bị khoá. Chạm vào nút để mở khoá.</string>
     <string name="unit_volt">V</string>
@@ -1320,8 +1320,8 @@
     <string name="shared_storage_first_step">Nhấn \"%1$s\".\nTrình quản lý tệp mở nơi cần tìm và mở thư mục osmand.</string>
     <string name="folder_access_denied">Cần cấp quyền để truy cập đến thư mục đã chọn.</string>
     <string name="obd_how_to_connect">Cách kết nối:</string>
-    <string name="connect_obd_instructions_step1">1. Kết nối máy quét tới cổng OBD-II trên xe của bạn.</string>
-    <string name="connect_obd_instructions_step2">2. Bật động cơ xe</string>
+    <string name="connect_obd_instructions_step1">Kết nối máy quét tới cổng OBD-II trên xe của bạn.</string>
+    <string name="connect_obd_instructions_step2">Bật động cơ xe</string>
     <string name="obd_vehicle_info">Thông tin xe</string>
     <string name="connect_obd_instructions_title">OsmAnd hỗ trợ kết nối Bluetooth tới những máy quét OBD-II.</string>
     <string name="routing_attr_avoid_cobblestone_name">Tránh đá cuội</string>

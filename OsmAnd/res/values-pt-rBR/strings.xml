@@ -5931,7 +5931,7 @@
     <string name="obd_fuel_type_bifuel_lpg">Funcionamento bicombustível a GLP</string>
     <string name="obd_vehicle_info">Informação do veículo</string>
     <string name="obd_how_to_connect">Como conectar:</string>
-    <string name="connect_obd_instructions_step3">3. Ative o Bluetooth no seu dispositivo</string>
+    <string name="connect_obd_instructions_step3">Ative o Bluetooth no seu dispositivo</string>
     <string name="learn_more_about_obd_sensors">Saiba mais sobre sensores.</string>
     <string name="screen_is_locked_by_action_button">A tela sensível ao toque está bloqueada. Toque no botão para desbloquear.</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Trilhas de terra para bicicletas</string>
@@ -5971,10 +5971,10 @@
     <string name="obd_fuel_consumption_rate_percent_hour">Taxa de consumo de combustível %/h</string>
     <string name="third_links">Links de terceiros</string>
     <string name="obd_fuel_type_bifuel_hydrogen">Hidrogénio em funcionamento bicombustível</string>
-    <string name="connect_obd_instructions_step2">2. Ligue o motor do seu veículo</string>
+    <string name="connect_obd_instructions_step2">Ligue o motor do seu veículo</string>
     <string name="connect_obd_instructions_title">O OsmAnd suporta conexões Bluetooth com scanners OBD-II.</string>
-    <string name="connect_obd_instructions_step1">1. Conecte o scanner à porta OBD-II do seu veículo.</string>
-    <string name="connect_obd_instructions_step4">4. Toque em \'Conectar\' e selecione o scanner na lista.</string>
+    <string name="connect_obd_instructions_step1">Conecte o scanner à porta OBD-II do seu veículo.</string>
+    <string name="connect_obd_instructions_step4">Toque em \'Conectar\' e selecione o scanner na lista.</string>
     <string name="vehicle_metrics_plugin_settings">Configurações de métricas do veículo</string>
     <string name="obd_rpm_desc">Mostra as RPM do tacômetro do veículo pelo sensor OBD</string>
     <string name="screen_is_locked_by_external_button">A tela sensível ao toque está bloqueada. Para desbloquear, pressione o botão %1$s ou toque no botão na tela.</string>

@@ -64,12 +64,7 @@ class POICategoriesScreen(
     private fun onClickPOICategory(group: PoiUIFilter) {
         selectedPOIGroup = group
         Handler(Looper.getMainLooper()).post {
-            screenManager.push(
-                POIScreen(
-                    carContext,
-                    settingsAction,
-                    group)
-            )
+            screenManager.push(POIScreen(carContext, settingsAction, group))
         }
     }
 

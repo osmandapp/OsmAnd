@@ -2,26 +2,6 @@ package net.osmand.shared.obd
 
 
 object OBDUtils {
-	const val INVALID_RESPONSE_CODE = "-1"
-
-	fun parseSupportedCommandsResponse(response: String): String {
-		val responseParts = response.trim().split(" ")
-
-		if (responseParts.size >= 3 && responseParts[0] == "41") {
-			var supportedPIDs = ""
-			for (i in 2 until responseParts.size) {
-				val byteValue = responseParts[i].toInt(16)
-				for (bitIndex in 0..7) {
-					if ((byteValue and (1 shl (7 - bitIndex))) != 0) {
-						val pidNumber = ((i - 2) * 8) + bitIndex + 1
-						supportedPIDs += (" ${pidNumber.toString(16)}")
-					}
-				}
-			}
-			return supportedPIDs
-		}
-		return INVALID_RESPONSE_CODE
-	}
 
 	fun parseRpmResponse(response: IntArray): OBDDataField<Any> {
 		val result = (response[0] * 256 + response[1]) / 4
