@@ -4902,4 +4902,9 @@
     <string name="poi_name_left">Назив леве стране</string>
     <string name="poi_name_right">Назив десне стране</string>
     <string name="poi_climbing_boulder">Стена успона</string>
+    <string name="poi_camp_site_serviced">Услужно</string>
+    <string name="poi_camp_site_type">Тип кампа</string>
+    <string name="poi_camp_site_basic">Основно</string>
+    <string name="poi_camp_site_standard">Стандардно</string>
+    <string name="poi_camp_site_deluxe">Делукс</string>
 </resources>

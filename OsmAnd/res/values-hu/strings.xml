@@ -2612,7 +2612,7 @@
     <string name="send_search_query_description">Keresését és tartózkodási helyét elküldjük ide: „%1$s”.
 \n 
 \n Nem gyűjtünk személyes adatokat, a keresési adatokat csak a kereső algoritmus fejlesztéséhez használjuk fel.</string>
-    <string name="transport_nearby_routes">Ezen belül:</string>
+    <string name="transport_nearby_routes">Ezen belül található:</string>
     <string name="shared_string_launch">Indítás</string>
     <string name="lang_gn_py">guarani</string>
     <string name="osmand_extended_description_part2">GPS navigáció \n • Válasszon az offline (nincs roamingdíj külföldön) vagy online (gyorsabb) mód között \n • Kanyaronkénti hangutasítások vezetik végig az úton (felvett ill. előállított hangok) \n • Az útvonalterv újratervezésre kerül, ha eltér attól \n • Sávvezérlés, utcanevek, és becsült érkezési idő segít az úton \n • Az út biztonságosabbá tételéhez a nappali/éjszakai mód automatikusan vált \n • Sebességhatárok megjelenítése, és értesítés, ha túllépi azt \n • A térkép nagyítási szintje követi a sebességet \n • Célkeresés cím, típus (például: parkoló, étterem, hotel, benzinkút, múzeum), vagy földrajzi koordináták szerint \n • Köztes pontok támogatása az útitervben \n • Saját GPX sávok rögzítése, vagy azok feltöltése és követése</string>

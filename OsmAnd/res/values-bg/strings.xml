@@ -4468,4 +4468,11 @@
     <string name="screen_is_unlocked">Екранът е отключен.</string>
     <string name="help_article_map_tracks_name">Трасета</string>
     <string name="help_article_personal_color_palette_schemes_name">Цветови теми</string>
+    <string name="vehicle_metrics_obd_ii">Показатели за превозно средство (OBD-II)</string>
+    <string name="ltr_or_rtl_combine_via_per">%1$s за %2$s</string>
+    <string name="shared_string_volume">Обем</string>
+    <string name="shared_string_hour">Час</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Проследявайте жизненоважни данни за превозното средство с помощта на протокола OBD-II. Наблюдавайте ключови показатели като скорост, обороти на двигателя, разход на гориво и др.</string>
+    <string name="shared_string_engine">Двигател</string>
+    <string name="vehicle_metrics_recording_description">Изберете параметрите, които да бъдат записани в GPX файл.</string>
 </resources>
