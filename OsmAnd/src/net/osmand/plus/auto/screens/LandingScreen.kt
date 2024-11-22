@@ -125,15 +125,7 @@ class LandingScreen(
             .setBrowsable(true)
             .setOnClickListener {
                 app.carNavigationSession?.let { carNavigationSession ->
-                    if (app.routingHelper.isRouteCalculated) {
-                        app.routingHelper.resumeNavigation()
-                    }
                     carNavigationSession.startNavigationScreen()
-                    // duplicate code from startNavigation
-//                    val navigationScreen = carNavigationSession.navigationScreen
-//                    navigationScreen?.let {
-//                        screenManager.push(navigationScreen)
-//                    }
                 }
             }
             .build()
