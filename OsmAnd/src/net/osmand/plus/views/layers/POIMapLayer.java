@@ -604,7 +604,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				if (subType.equals(ROUTE_ARTICLE)) {
 					String lang = app.getLanguage();
 					lang = amenity.getContentLanguage(Amenity.DESCRIPTION, lang, "en");
-					String name = amenity.getName(lang);
+					String name = amenity.getGpxFileName(lang);
 					TravelArticle article = travelHelper.getArticleByTitle(name, lang, true, null);
 					if (article == null) {
 						return true;
@@ -616,7 +616,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 					if (travelGpx == null) {
 						return true;
 					}
-					travelHelper.openTrackMenu(travelGpx, mapActivity, amenity.getRouteId(), amenity.getLocation(), false);
+					travelHelper.openTrackMenu(travelGpx, mapActivity, amenity.getGpxFileName(null), amenity.getLocation(), false);
 					return true;
 				}
 			}

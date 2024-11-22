@@ -194,7 +194,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 			Amenity amenity = (Amenity) pair.second;
 			TravelHelper travelHelper = app.getTravelHelper();
 			TravelGpx travelGpx = travelHelper.searchGpx(amenity.getLocation(), amenity.getRouteId(), amenity.getRef());
-			travelHelper.openTrackMenu(travelGpx, getMapActivity(), amenity.getRouteId(), amenity.getLocation(), true);
+			travelHelper.openTrackMenu(travelGpx, getMapActivity(), amenity.getGpxFileName(null), amenity.getLocation(), true);
 		} else {
 			showOnMap(getMapActivity(), dialogFragment,
 					searchResult.location.getLatitude(), searchResult.location.getLongitude(),

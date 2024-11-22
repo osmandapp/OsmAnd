@@ -127,6 +127,10 @@ public class TravelArticle {
 		return routeId;
 	}
 
+	public String getGpxFileName() {
+		return !Algorithms.isEmpty(title) ? title : routeId;
+	}
+
 	public String getRouteSource() {
 		return routeSource;
 	}

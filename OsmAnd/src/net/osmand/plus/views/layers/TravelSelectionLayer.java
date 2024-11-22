@@ -75,7 +75,7 @@ public class TravelSelectionLayer extends OsmandMapLayer implements IContextMenu
 
 					WptPt wptPt = selectedGpxPoint.getSelectedPoint();
 					TravelHelper travelHelper = app.getTravelHelper();
-					travelHelper.openTrackMenu(travelGpx, mapActivity, travelGpx.getRouteId(),
+					travelHelper.openTrackMenu(travelGpx, mapActivity, travelGpx.getGpxFileName(),
 							new LatLon(wptPt.getLat(), wptPt.getLon()), false);
 					return true;
 				}

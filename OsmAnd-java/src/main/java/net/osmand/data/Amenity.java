@@ -3,6 +3,8 @@ package net.osmand.data;
 import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
 import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
 import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 
 import net.osmand.Location;
@@ -447,6 +449,20 @@ public class Amenity extends MapObject {
 
 	public String getRouteId() {
 		return getAdditionalInfo(ROUTE_ID);
+	}
+
+	public String getGpxFileName(String lang) {
+		final String gpxFileName = lang != null ? getName(lang) : getEnName(true);
+		if (!Algorithms.isEmpty(gpxFileName)) {
+			return gpxFileName;
+		}
+		if (!Algorithms.isEmpty(getRouteId())) {
+			return getRouteId();
+		}
+		if (!Algorithms.isEmpty(getSubType())) {
+			return getType().getKeyName() + " " + getSubType();
+		}
+		return getType().getKeyName();
 	}
 
 	public String getStrictTagContent(String tag, String lang) {
