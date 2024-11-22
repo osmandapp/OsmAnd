@@ -32,7 +32,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.configmap.tracks.TrackSortModesCollection;
-import net.osmand.IndexConstants;
 import net.osmand.plus.myplaces.tracks.DialogClosedListener;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
