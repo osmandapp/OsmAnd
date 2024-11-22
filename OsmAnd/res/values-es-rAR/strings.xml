@@ -2384,7 +2384,7 @@
     <string name="shared_string_markers">Marcadores</string>
     <string name="coordinates_format">Formato de coordenadas</string>
     <string name="use_system_keyboard">Usar teclado del sistema</string>
-    <string name="fast_coordinates_input_descr">Elige el formato de ingreso de las coordenadas. Pulsa en «Opciones» para cambiarlo.</string>
+    <string name="fast_coordinates_input_descr">Elegí el formato de ingreso de las coordenadas. Pulsá en «Opciones» para cambiarlo.</string>
     <string name="fast_coordinates_input">Ingreso rápido de coordenadas</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Sin caminos de hielo ni vados</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Evita caminos con hielo y vados.</string>
@@ -2428,14 +2428,14 @@
     <string name="empty_state_markers_active">¡Crea marcadores del mapa!</string>
     <string name="empty_state_markers_active_desc">Pulsá en «Sitios» y luego sobre la bandera del marcador.</string>
     <string name="empty_state_markers_groups">Importar grupos</string>
-    <string name="empty_state_markers_groups_desc">Importar grupos de favoritos o puntos de referencia, como marcadores.</string>
+    <string name="empty_state_markers_groups_desc">Importá grupos de favoritos o puntos de referencia, como marcadores.</string>
     <string name="empty_state_markers_history_desc">Los marcadores descartados aparecerán en esta pantalla.</string>
     <string name="shared_string_two">Dos</string>
     <string name="shared_string_one">Uno</string>
-    <string name="show_guide_line_descr">Muestra líneas direccionales desde su ubicación hasta los marcadores activos.</string>
+    <string name="show_guide_line_descr">Muestra líneas direccionales desde tu ubicación hasta los marcadores activos.</string>
     <string name="show_arrows_descr">Muestra una o dos flechas indicando la dirección a los marcadores activos.</string>
-    <string name="distance_indication_descr">Elige cómo mostrar la distancia a los marcadores activos.</string>
-    <string name="active_markers_descr">Define el número de indicadores de dirección.</string>
+    <string name="distance_indication_descr">Elegí cómo mostrar la distancia a los marcadores activos.</string>
+    <string name="active_markers_descr">Definí el número de indicadores de dirección.</string>
     <string name="appearance_on_the_map">Aspecto en el mapa</string>
     <string name="looking_for_tracks_with_waypoints">Buscando trazas con puntos de referencia</string>
     <string name="shared_string_more_without_dots">Más</string>
