@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.Log;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -353,12 +354,15 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 				builder.setDestinationTravelEstimate(destinationTravelEstimate);
 			}
 			if (isRerouting()) {
+				Log.d("AA_navigation", "onGetTemplate: isRerouting()");
 				builder.setNavigationInfo(new RoutingInfo.Builder().setLoading(true).build());
 			} else if (arrived) {
+				Log.d("AA_navigation", "onGetTemplate: arrived");
 				MessageInfo messageInfo = new MessageInfo.Builder(
 						getCarContext().getString(R.string.arrived_at_destination)).build();
 				builder.setNavigationInfo(messageInfo);
 			} else if (!Algorithms.isEmpty(steps)) {
+				Log.d("AA_navigation", "onGetTemplate: !isEmpty(steps)");
 				RoutingInfo.Builder info = new RoutingInfo.Builder();
 				Step firstStep = steps.get(0);
 				Step.Builder currentStep = new Step.Builder();
@@ -433,6 +437,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 	}
 
 	private void goBack() {
+		Log.d("AA_navigation", "NavScreen goBack: ");
 		finish();
 		// Test
 		//getScreenManager().pushForResult(new SearchResultsScreen(getCarContext(), settingsAction, surfaceRenderer, "cafe"), (obj) -> { });

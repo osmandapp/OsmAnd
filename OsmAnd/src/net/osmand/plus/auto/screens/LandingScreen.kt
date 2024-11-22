@@ -1,5 +1,6 @@
 package net.osmand.plus.auto.screens
 
+import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.car.app.CarContext
@@ -26,6 +27,7 @@ class LandingScreen(
     init {
         lifecycle.addObserver(object : DefaultLifecycleObserver {
             override fun onResume(owner: LifecycleOwner) {
+                Log.d("AA_navigation", "LandingScreen onResume: ")
                 app.carNavigationSession?.updateCarNavigation(app.locationProvider.lastKnownLocation)
             }
         })
