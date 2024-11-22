@@ -2426,7 +2426,7 @@
     <string name="add_group">Añadir un grupo</string>
     <string name="add_group_descr">Importar grupos desde Favoritos o puntos de referencia GPX.</string>
     <string name="empty_state_markers_active">¡Crea marcadores del mapa!</string>
-    <string name="empty_state_markers_active_desc">Pulsá en «Sitios» y luego pulsá la bandera del marcador.</string>
+    <string name="empty_state_markers_active_desc">Pulsá en «Sitios» y luego sobre la bandera del marcador.</string>
     <string name="empty_state_markers_groups">Importar grupos</string>
     <string name="empty_state_markers_groups_desc">Importar grupos de favoritos o puntos de referencia, como marcadores.</string>
     <string name="empty_state_markers_history_desc">Los marcadores descartados aparecerán en esta pantalla.</string>
