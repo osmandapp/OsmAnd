@@ -36,7 +36,7 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 		lastModified = folder.lastModified
 	}
 
-	override fun getId() = getRelativePath(true)
+	override fun getId() = relativePath
 
 	override fun getName(): String {
 		return GpxHelper.getFolderName(dirFile, false)
@@ -51,7 +51,15 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 	}
 
 	val relativePath: String
-		get() = getRelativePath(false)
+		get() =
+			if (!isRootFolder) {
+				val dirName = dirFile.name()
+				val parent = getParentFolder()
+				if (parent?.isRootFolder == false) parent.relativePath + "/" + dirName else dirName
+			} else {
+				""
+			}
+
 
 	val isRootFolder: Boolean
 		get() = getParentFolder() == null
@@ -145,13 +153,6 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 
 	override fun getDirName(useExtendedName: Boolean): String {
 		return if (useExtendedName) relativePath else dirFile.name()
-	}
-
-	private fun getRelativePath(includeRootFolder: Boolean): String {
-		val dirName = dirFile.name()
-		val parent = getParentFolder()
-		val includeParent = parent != null && (!parent.isRootFolder || includeRootFolder)
-		return if (includeParent) parent!!.getRelativePath(includeRootFolder) + "/" + dirName else dirName
 	}
 
 	fun getLastModified(): Long {

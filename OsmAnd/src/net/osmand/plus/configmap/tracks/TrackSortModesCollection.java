@@ -37,7 +37,7 @@ public class TrackSortModesCollection {
 
 	@NonNull
 	public TracksSortMode getRootSortMode() {
-		return requireSortMode(ROOT_FOLDER);
+		return requireSortMode("");
 	}
 
 	@NonNull
@@ -50,11 +50,9 @@ public class TrackSortModesCollection {
 	public TracksSortMode getSortMode(@Nullable String id) {
 		id = removeExtraFileSeparator(id);
 		TracksSortMode sortMode = cachedSortModes.get(id);
-		if (sortMode == null && id != null && isFolderIdV2(id)) {
+		if (sortMode == null) {
 			String idV1 = getFolderIdV1(id);
-			if (idV1 != null) {
-				sortMode = cachedSortModes.get(idV1);
-			}
+			return idV1 != null ? cachedSortModes.get(idV1) : null;
 		}
 		return sortMode;
 	}
@@ -148,17 +146,19 @@ public class TrackSortModesCollection {
 	@NonNull
 	public static String getFolderId(@NonNull String absolutePath) {
 		int index = absolutePath.indexOf(ROOT_FOLDER);
+		if (index > 0) {
+			index += ROOT_FOLDER.length();
+		}
 		return index > 0 ? absolutePath.substring(index) : absolutePath;
 	}
 
-	private static boolean isFolderIdV2(@NonNull String id) {
-		return id.startsWith(ROOT_FOLDER);
-	}
-
 	@Nullable
-	private static String getFolderIdV1(@NonNull String idV2) {
-		int index = idV2.lastIndexOf(File.separator);
-		return index > 0 ? idV2.substring(index + 1) : null;
+	private static String getFolderIdV1(@Nullable String id) {
+		if (id != null && id.isEmpty()) {
+			return removeExtraFileSeparator(ROOT_FOLDER);
+		}
+		int index = id != null ? id.lastIndexOf(File.separator) : -1;
+		return index > 0 ? id.substring(index + 1) : null;
 	}
 
 	@Nullable
