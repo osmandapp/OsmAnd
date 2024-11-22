@@ -190,11 +190,15 @@ public class FileUtils {
 		}
 		updateMovedGpxFiles(app, files, srcDir, destDir);
 
-		app.getSettings().getTrackSortModes().updateAfterMoveTrackFolder(app, trackFolder, srcDir);
+		OsmandSettings settings = app.getSettings();
+		TrackSortModesCollection sortModes = settings.getTrackSortModes(trackFolder);
+		sortModes.updateAfterMoveTrackFolder(trackFolder, srcDir);
 	}
 
 	public static void updateAfterDeleteTrackFolder(@NonNull OsmandApplication app, @NonNull TrackFolder trackFolder) {
-		app.getSettings().getTrackSortModes().updateAfterDeleteTrackFolder(app, trackFolder);
+		OsmandSettings settings = app.getSettings();
+		TrackSortModesCollection sortModes = settings.getTrackSortModes(trackFolder);
+		sortModes.updateAfterDeleteTrackFolder(trackFolder);
 	}
 
 	private static void updateMovedGpxFiles(@NonNull OsmandApplication app, @NonNull List<File> files,

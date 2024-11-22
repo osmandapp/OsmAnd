@@ -20,6 +20,9 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.configmap.tracks.SelectTrackTabsHelper;
+import net.osmand.plus.configmap.tracks.TrackTabsHelper;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
@@ -95,6 +98,12 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 		viewPager.setCurrentItem(0);
 	}
 
+	@NonNull
+	@Override
+	protected TrackTabsHelper createTrackTabsHelper(@NonNull OsmandApplication app) {
+		return new SelectTrackTabsHelper(app);
+	}
+
 	@Override
 	public void loadTracksProgress(@NonNull TrackItem... items) {
 	}
@@ -105,7 +114,7 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 
 	@Override
 	public void loadTracksFinished(@NonNull TrackFolder folder) {
-		trackTabsHelper.updateItems(folder);
+		trackTabsHelper.updateTrackItems(folder);
 		AndroidUiHelper.updateVisibility(progressBar, false);
 		updateTrackTabs();
 		updateTabsContent();

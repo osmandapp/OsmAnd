@@ -28,6 +28,7 @@ public class TrackSortModesCollection {
 
 	private final Map<String, TracksSortMode> cachedSortModes = new ConcurrentHashMap<>();
 	private final ListStringPreference preference;
+	private boolean keysUpgraded = false;
 
 	public TrackSortModesCollection(@NonNull OsmandSettings settings) {
 		this.preference = settings.TRACKS_TABS_SORT_MODES;
@@ -63,9 +64,12 @@ public class TrackSortModesCollection {
 		cachedSortModes.put(id, sortMode);
 	}
 
-	public void askSyncWithUpgrade(@NonNull OsmandApplication app, @NonNull TrackFolder trackFolder, boolean forceSync) {
-		if (askUpgradeCachedKeys(app, trackFolder) || forceSync) {
-			syncSettings();
+	public void askUpgradeKeysWithSync(@NonNull OsmandApplication app, @Nullable TrackFolder folder) {
+		if (folder != null && !keysUpgraded) {
+			if (askUpgradeCachedKeys(app, folder)) {
+				keysUpgraded = true;
+				syncSettings();
+			}
 		}
 	}
 
@@ -103,20 +107,18 @@ public class TrackSortModesCollection {
 		}
 	}
 
-	public void updateAfterMoveTrackFolder(@NonNull OsmandApplication app,
-	                                       @NonNull TrackFolder trackFolder, @NonNull File oldDir) {
+	public void updateAfterMoveTrackFolder(@NonNull TrackFolder trackFolder, @NonNull File oldDir) {
 		String previousId = getFolderId(oldDir.getAbsolutePath());
 		TracksSortMode sortMode = getSortMode(previousId);
 		if (sortMode != null) {
 			setSortMode(trackFolder.getId(), sortMode);
-			askSyncWithUpgrade(app, trackFolder, true);
+			syncSettings();
 		}
 	}
 
-	public void updateAfterDeleteTrackFolder(@NonNull OsmandApplication app,
-	                                         @NonNull TrackFolder trackFolder) {
+	public void updateAfterDeleteTrackFolder(@NonNull TrackFolder trackFolder) {
 		cachedSortModes.remove(trackFolder.getId());
-		askSyncWithUpgrade(app, trackFolder, true);
+		syncSettings();
 	}
 
 	public void syncSettings() {

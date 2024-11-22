@@ -131,7 +131,7 @@ class TracksFoldersScreen(
     }
 
     override fun loadTracksFinished(folder: TrackFolder) {
-        trackTabsHelper.updateTrackItems(folder.getFlattenedTrackItems())
+        trackTabsHelper.updateTrackItems(folder)
         invalidate()
     }
 

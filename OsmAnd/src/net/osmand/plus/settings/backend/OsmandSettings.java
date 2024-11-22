@@ -97,6 +97,7 @@ import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.shared.gpx.ColoringPurpose;
+import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.obd.OBDDataComputer;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.shared.settings.enums.MetricsConstants;
@@ -2039,14 +2040,20 @@ public class OsmandSettings {
 	public final CommonPreference<TracksSortMode> SEARCH_TRACKS_SORT_MODE = new EnumStringPreference<>(this, "search_tracks_sort_mode", TracksSortMode.getDefaultSortMode(), TracksSortMode.values());
 	public final ListStringPreference TRACKS_TABS_SORT_MODES = (ListStringPreference) new ListStringPreference(this, "tracks_tabs_sort_modes", null, ";;").makeGlobal().makeShared().cache();
 
-	private TrackSortModesCollection trackSortModesCollection = null;
+	private TrackSortModesCollection trackSortModes = null;
 
 	@NonNull
 	public TrackSortModesCollection getTrackSortModes() {
-		if (trackSortModesCollection == null) {
-			trackSortModesCollection = new TrackSortModesCollection(this);
+		return getTrackSortModes(null);
+	}
+
+	@NonNull
+	public TrackSortModesCollection getTrackSortModes(@Nullable TrackFolder trackFolder) {
+		if (trackSortModes == null) {
+			trackSortModes = new TrackSortModesCollection(this);
 		}
-		return trackSortModesCollection;
+		trackSortModes.askUpgradeKeysWithSync(ctx, trackFolder);
+		return trackSortModes;
 	}
 
 	public final OsmandPreference<Boolean> ANIMATE_MY_LOCATION = new BooleanPreference(this, "animate_my_location", true).makeProfile().cache();
