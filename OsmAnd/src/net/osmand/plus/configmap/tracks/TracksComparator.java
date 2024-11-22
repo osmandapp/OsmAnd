@@ -77,10 +77,10 @@ public class TracksComparator implements Comparator<Object> {
 		}
 		if (o1 instanceof ComparableTracksGroup folder1) {
 			if (o2 instanceof ComparableTracksGroup folder2) {
-				int order1 = folder1.getDefaultOrder();
-				int order2 = folder2.getDefaultOrder();
-				if (order1 != order2) {
-					return Integer.compare(order1, order2);
+				int predefinedOrder1 = folder1.getDefaultOrder();
+				int predefinedOrder2 = folder2.getDefaultOrder();
+				if (predefinedOrder1 != predefinedOrder2) {
+					return Integer.compare(predefinedOrder1, predefinedOrder2);
 				}
 				return compareTrackFolders(folder1, folder2);
 			}

@@ -326,7 +326,8 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	@NonNull
 	@Override
 	public TracksSortMode getTracksSortMode() {
-		return settings.getTrackSortModes().requireSortMode(getSortEntryId());
+		TrackSortModesCollection sortModes = settings.getTrackSortModes(rootFolder);
+		return sortModes.requireSortMode(getSortEntryId());
 	}
 
 	@Nullable
@@ -341,7 +342,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 			sortSubFolder(sortMode);
 		} else {
 			TracksGroup folder = smartFolder != null ? smartFolder : selectedFolder;
-			TrackSortModesCollection sortModes = settings.getTrackSortModes();
+			TrackSortModesCollection sortModes = settings.getTrackSortModes(rootFolder);
 			sortModes.setSortMode(folder.getId(), sortMode);
 			sortModes.syncSettings();
 			updateContent();
@@ -349,14 +350,15 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	private void sortSubFolder(@NonNull TracksSortMode sortMode) {
-		TrackSortModesCollection sortModes = settings.getTrackSortModes();
+		TrackSortModesCollection sortModes = settings.getTrackSortModes(rootFolder);
 		sortFolders(selectedFolder, sortModes, sortMode);
 		sortModes.syncSettings();
 
 		app.showToastMessage(app.getString(R.string.sorted_sufolders_toast, selectedFolder.getName(), app.getString(sortMode.getNameId())));
 	}
 
-	private void sortFolders(@NonNull TrackFolder trackFolder, @NonNull TrackSortModesCollection sortModes,
+	private void sortFolders(@NonNull TrackFolder trackFolder,
+	                         @NonNull TrackSortModesCollection sortModes,
 	                         @NonNull TracksSortMode sortMode) {
 		for (TrackFolder folder : trackFolder.getFlattenedSubFolders()) {
 			sortModes.setSortMode(folder.getId(), sortMode);

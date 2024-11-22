@@ -306,7 +306,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 	protected void addTrackItem(@NonNull TrackItem item) {
 		trackTabsHelper.addTrackItem(item);
 		updateTrackTabs();
-		setSelectedTab(IndexConstants.GPX_IMPORT_DIR);
+		setSelectedTab("import");
 		updateTabsContent();
 		updateButtonsState();
 	}

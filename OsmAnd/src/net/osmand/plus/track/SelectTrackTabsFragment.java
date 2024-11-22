@@ -136,7 +136,7 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 	protected void addTrackItem(@NonNull TrackItem item) {
 		trackTabsHelper.addTrackItem(item);
 		updateTrackTabs();
-		setSelectedTab(IndexConstants.GPX_IMPORT_DIR);
+		setSelectedTab("import");
 		updateTabsContent();
 	}
 
@@ -170,7 +170,7 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 	@Nullable
 	@Override
 	public TrackTab getTab(@NonNull String id) {
-		for (TrackTab trackTab : getSortedTrackTabs()) {
+		for (TrackTab trackTab : getTrackTabs()) {
 			if (Algorithms.stringsEqual(id, trackTab.getId())) {
 				updateTrackItemsVisibility(trackTab);
 				return trackTab;

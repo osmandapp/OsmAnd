@@ -59,19 +59,19 @@ public class TrackTabsHelper {
 
 	@NonNull
 	public List<TrackTab> getSortedTrackTabs(boolean useExtendedName) {
-		List<TrackTab> result = new ArrayList<>(trackTabs.values());
+		List<TrackTab> result = getTrackTabs();
 		result.sort(new TracksComparator(getRootSortMode(), getDefaultLocation(), useExtendedName));
 		return result;
+	}
+
+	@NonNull
+	public List<TrackTab> getTrackTabs() {
+		return new ArrayList<>(trackTabs.values());
 	}
 
 	@Nullable
 	public TrackTab getTrackTab(@NonNull String id) {
 		return trackTabs.get(id);
-	}
-
-	@NonNull
-	public Map<String, TrackTab> getTrackTabs() {
-		return trackTabs;
 	}
 
 	@NonNull

@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
@@ -107,7 +108,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		importHelper = app.getImportHelper();
-		trackTabsHelper = new TrackTabsHelper(app);
+		trackTabsHelper = createTrackTabsHelper(app);
 		gpxSelectionHelper = app.getSelectedGpxHelper();
 		itemsSelectionHelper = trackTabsHelper.getItemsSelectionHelper();
 	}
@@ -154,17 +155,27 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 	}
 
 	@NonNull
+	protected TrackTabsHelper createTrackTabsHelper(@NonNull OsmandApplication app) {
+		return new TrackTabsHelper(app);
+	}
+
+	@NonNull
+	public List<TrackTab> getTrackTabs() {
+		return trackTabsHelper.getTrackTabs();
+	}
+
+	@NonNull
 	public List<TrackTab> getSortedTrackTabs() {
 		return getSortedTrackTabs(false);
 	}
 
 	@NonNull
-	public List<TrackTab> getSortedTrackTabs(boolean checkParentName) {
-		return trackTabsHelper.getSortedTrackTabs(checkParentName);
+	public List<TrackTab> getSortedTrackTabs(boolean useExtendedName) {
+		return trackTabsHelper.getSortedTrackTabs(useExtendedName);
 	}
 
 	protected void setViewPagerAdapter(@NonNull ViewPager pager, List<TrackTab> items) {
-		adapter = new TracksTabAdapter(app, getChildFragmentManager(), items);
+		adapter = new TracksTabAdapter(getChildFragmentManager(), items);
 		pager.setAdapter(adapter);
 	}
 
@@ -187,7 +198,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 
 	@Nullable
 	public TrackTab getTab(@NonNull String id) {
-		for (TrackTab trackTab : getSortedTrackTabs()) {
+		for (TrackTab trackTab : getTrackTabs()) {
 			if (Algorithms.stringsEqual(id, trackTab.getId())) {
 				return trackTab;
 			}
@@ -242,7 +253,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 	}
 
 	protected void updateTrackTabs() {
-		adapter.setTrackTabs(trackTabsHelper.getTrackTabs());
+		adapter.setTrackTabs(trackTabsHelper.getSortedTrackTabs(false));
 	}
 
 	@Override
