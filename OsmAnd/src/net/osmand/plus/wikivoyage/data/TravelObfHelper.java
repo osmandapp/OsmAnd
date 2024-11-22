@@ -14,10 +14,13 @@ import static net.osmand.plus.wikivoyage.data.TravelGpx.AVERAGE_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELEVATION_DOWN;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELEVATION_UP;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DISTANCE;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ELE_GRAPH;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.MAX_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.MIN_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_RADIUS;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.START_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.USER;
+import static net.osmand.shared.gpx.GpxUtilities.OSM_PREFIX;
 import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_BACKGROUNDS;
 import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_COLORS;
 import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_DELIMITER;
@@ -91,6 +94,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -306,12 +310,18 @@ public class TravelObfHelper implements TravelHelper {
 		travelGpx.activityType = Algorithms.emptyIfNull(amenity.getTagContent(ACTIVITY_TYPE));
 		travelGpx.ref = Algorithms.emptyIfNull(amenity.getRef());
 		try {
-			travelGpx.totalDistance = Float.parseFloat(Algorithms.emptyIfNull(amenity.getTagContent(DISTANCE)));
-			travelGpx.diffElevationUp = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(DIFF_ELEVATION_UP)));
-			travelGpx.diffElevationDown = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(DIFF_ELEVATION_DOWN)));
-			travelGpx.maxElevation = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(MAX_ELEVATION)));
-			travelGpx.minElevation = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(MIN_ELEVATION)));
-			travelGpx.avgElevation = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(AVERAGE_ELEVATION)));
+			travelGpx.totalDistance = Float.parseFloat(Objects.requireNonNullElse(
+					amenity.getTagContent(DISTANCE), "0"));
+			travelGpx.diffElevationUp = Double.parseDouble(Objects.requireNonNullElse(
+					amenity.getTagContent(DIFF_ELEVATION_UP), "0"));
+			travelGpx.diffElevationDown = Double.parseDouble(Objects.requireNonNullElse(
+					amenity.getTagContent(DIFF_ELEVATION_DOWN), "0"));
+			travelGpx.minElevation = Double.parseDouble(Objects.requireNonNullElse(
+					amenity.getTagContent(MIN_ELEVATION), "0"));
+			travelGpx.avgElevation = Double.parseDouble(Objects.requireNonNullElse(
+					amenity.getTagContent(AVERAGE_ELEVATION), "0"));
+			travelGpx.maxElevation = Double.parseDouble(Objects.requireNonNullElse(
+					amenity.getTagContent(MAX_ELEVATION), "0"));
 			String radius = amenity.getTagContent(ROUTE_RADIUS);
 			if (radius != null) {
 				travelGpx.routeRadius = MapUtils.convertCharToDist(radius.charAt(0), TRAVEL_GPX_CONVERT_FIRST_LETTER,
@@ -1224,13 +1234,14 @@ public class TravelObfHelper implements TravelHelper {
 					point.setLon(MapUtils.get31LongitudeX(segment.getPoint31XTile(i)));
 					trkSegment.getPoints().add(point);
 				}
-				String ele_graph = segment.getTagValue("ele_graph");
+				String ele_graph = segment.getTagValue(ELE_GRAPH);
 				if (!Algorithms.isEmpty(ele_graph)) {
 					hasAltitude = true;
 					List<Integer> heightRes = KMapAlgorithms.INSTANCE.decodeIntHeightArrayGraph(ele_graph, 3);
 					double startEle = 0;
 					try {
-						startEle = Double.parseDouble(segment.getTagValue("start_ele"));
+						startEle = Double.parseDouble(Objects.requireNonNullElse(
+								segment.getTagValue(START_ELEVATION), "0"));
 					} catch (NumberFormatException e) {
 						LOG.debug(e.getMessage(), e);
 					}
