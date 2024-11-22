@@ -25,10 +25,10 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.local.LocalIndexHelper;
-import net.osmand.plus.download.local.LocalItemType;
-import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.SrtmDownloadItem;
+import net.osmand.plus.download.local.LocalIndexHelper;
+import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper;
@@ -201,12 +201,12 @@ public class MapDataMenuController extends MenuController {
 	}
 
 	private boolean isLiveUpdatesOn() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			return mapActivity.getMyApplication().getSettings().IS_LIVE_UPDATES_ON.get();
-		} else {
-			return false;
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			OsmandApplication app = activity.getMyApplication();
+			return InAppPurchaseUtils.isLiveUpdatesAvailable(app) && app.getSettings().IS_LIVE_UPDATES_ON.get();
 		}
+		return false;
 	}
 
 	@Override
@@ -660,7 +660,7 @@ public class MapDataMenuController extends MenuController {
 				} else if (item.getType() == LocalItemType.ROAD_DATA) {
 					parent = app.getAppPath(IndexConstants.ROADS_INDEX_DIR);
 				} else if (item.getType() == LocalItemType.TILES_DATA) {
-					 if (fileName.endsWith(IndexConstants.TIF_EXT)) {
+					if (fileName.endsWith(IndexConstants.TIF_EXT)) {
 						parent = app.getAppPath(IndexConstants.GEOTIFF_DIR);
 					} else {
 						parent = app.getAppPath(IndexConstants.TILES_INDEX_DIR);

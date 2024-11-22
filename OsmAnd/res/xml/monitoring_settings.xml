@@ -124,7 +124,7 @@
 	<Preference
 		android:key="record_obd_data"
 		android:layout="@layout/preference_with_descr"
-		android:title="@string/record_obd_data"
+		android:title="@string/obd_widget_group"
 		tools:icon="@drawable/ic_action_car_info" />
 
 	<Preference

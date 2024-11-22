@@ -124,6 +124,8 @@ public class MapViewWithLayers extends FrameLayout {
 			} else {
 				atlasMapRendererView.handleOnCreate(null);
 			}
+			atlasMapRendererView.setMapRendererSetupOptionsConfigurator(
+					mapRendererSetupOptions -> mapRendererSetupOptions.setMaxNumberOfRasterMapLayersInBatch(1));
 			atlasMapRendererView.setupRenderer(getContext(), 0, 0, mapRendererView);
 			atlasMapRendererView.setMinZoomLevel(ZoomLevel.swigToEnum(mapView.getMinZoom()));
 			atlasMapRendererView.setMaxZoomLevel(ZoomLevel.swigToEnum(mapView.getMaxZoom()));
