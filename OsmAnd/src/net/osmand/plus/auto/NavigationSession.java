@@ -437,6 +437,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		if (routingHelper.isFollowingMode() && routingHelper.isRouteCalculated() && !carNavigationShouldBeActive) {
 			startCarNavigation();
 		}
+		if (routingHelper.isRouteCalculated()) {
+			routingHelper.resumeNavigation(); // to update navigate session immediately with location
+		}
 	}
 
 
