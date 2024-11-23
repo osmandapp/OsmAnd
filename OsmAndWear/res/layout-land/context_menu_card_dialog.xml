@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:osmand="http://schemas.android.com/apk/res-auto"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
-              android:layout_width="match_parent"
+              android:layout_width="@dimen/dashboard_land_width"
               android:layout_height="match_parent"
     android:layout_marginStart="0dp"
     android:layout_marginTop="0dp"
@@ -35,7 +35,7 @@
                 android:contentDescription="@string/shared_string_close"
                 android:tint="@color/card_and_list_background_light"
                 android:translationX="25dp"
-                osmand:srcCompat="@drawable/ic_action_remove_dark" />
+                app:srcCompat="@drawable/ic_action_remove_dark" />
 
             <LinearLayout
                 android:id="@+id/title_layout"
@@ -81,7 +81,7 @@
                 android:layout_height="56dp"
                 android:layout_gravity="top"
                 android:contentDescription="@string/shared_string_more"
-                osmand:srcCompat="@drawable/ic_overflow_menu_white"
+                app:srcCompat="@drawable/ic_overflow_menu_white"
                 android:visibility="gone"/>
 
         </LinearLayout>

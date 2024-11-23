@@ -2,6 +2,7 @@ package net.osmand.plus.importfiles.ui;
 
 import static net.osmand.plus.track.cards.TrackPointsCard.setupLocationData;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
@@ -26,7 +27,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
-import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -50,13 +51,13 @@ class TrackPointsAdapter extends OsmandBaseExpandableListAdapter {
 
 	private final boolean nightMode;
 
-	TrackPointsAdapter(@NonNull OsmandApplication app, @Nullable Set<WptPt> selectedPoints, boolean nightMode) {
-		this.app = app;
+	TrackPointsAdapter(@NonNull Context context, @Nullable Set<WptPt> selectedPoints, boolean nightMode) {
+		this.app = (OsmandApplication) context.getApplicationContext();
 		this.nightMode = nightMode;
 		this.selectedPoints = selectedPoints;
 		inflater = UiUtilities.getInflater(app, nightMode);
 		uiUtilities = app.getUIUtilities();
-		viewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
+		viewCache = UpdateLocationUtils.getUpdateLocationViewCache(context);
 	}
 
 	public void setListener(@Nullable OnItemSelectedListener listener) {
@@ -138,7 +139,7 @@ class TrackPointsAdapter extends OsmandBaseExpandableListAdapter {
 		WptPt point = getChild(groupPosition, childPosition);
 
 		TextView title = view.findViewById(R.id.title);
-		title.setText(point.name);
+		title.setText(point.getName());
 
 		CompoundButton compoundButton = view.findViewById(R.id.compound_button);
 		compoundButton.setChecked(selectedPoints.contains(point));
@@ -157,7 +158,7 @@ class TrackPointsAdapter extends OsmandBaseExpandableListAdapter {
 			color = ContextCompat.getColor(app, R.color.gpx_color_point);
 		}
 		ImageView icon = view.findViewById(R.id.icon);
-		icon.setImageDrawable(PointImageDrawable.getFromWpt(app, color, false, point));
+		icon.setImageDrawable(PointImageUtils.getFromPoint(app, color, false, point));
 
 		setupLocationData(viewCache, view, point);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.list_divider), childPosition != 0);

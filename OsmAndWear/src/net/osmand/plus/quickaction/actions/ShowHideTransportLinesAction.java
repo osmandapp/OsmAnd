@@ -20,7 +20,7 @@ public class ShowHideTransportLinesAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(SHOW_HIDE_TRANSPORT_LINES_ACTION_ID,
 			"transport.showhide", ShowHideTransportLinesAction.class)
-			.nameActionRes(R.string.quick_action_show_hide_title)
+			.nameActionRes(R.string.quick_action_verb_show_hide)
 			.nameRes(R.string.poi_filter_public_transport)
 			.iconRes(R.drawable.ic_action_transport_bus).nonEditable()
 			.category(QuickActionType.CONFIGURE_MAP);
@@ -54,7 +54,7 @@ public class ShowHideTransportLinesAction extends QuickAction {
 	}
 
 	@Override
-	public String getActionText(OsmandApplication app) {
+	public String getActionText(@NonNull OsmandApplication app) {
 		String nameRes = app.getString(getNameRes());
 		String actionName = isActionWithSlash(app) ? app.getString(R.string.shared_string_hide) : app.getString(R.string.shared_string_show);
 		return app.getString(R.string.ltr_or_rtl_combine_via_dash, actionName, nameRes);

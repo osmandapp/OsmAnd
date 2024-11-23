@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -22,12 +22,12 @@
 			android:layout_width="@dimen/standard_icon_size"
 			android:layout_height="@dimen/standard_icon_size"
 			android:layout_gravity="center"
-			android:layout_marginStart="@dimen/content_padding"
 			android:layout_marginLeft="@dimen/content_padding"
 			android:layout_marginTop="@dimen/bottom_sheet_icon_margin"
-			android:layout_marginEnd="@dimen/content_padding"
 			android:layout_marginRight="@dimen/content_padding"
 			android:layout_marginBottom="@dimen/bottom_sheet_icon_margin"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginStart="@dimen/content_padding"
 			android:translationX="25dp" />
 
 		<LinearLayout
@@ -49,7 +49,7 @@
 				android:singleLine="true"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_list_text_size"
-				osmand:typeface="@string/font_roboto_regular" />
+				android:textStyle="normal" />
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@android:id/summary"
@@ -59,7 +59,7 @@
 				android:maxLines="4"
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_desc_text_size"
-				osmand:typeface="@string/font_roboto_regular" />
+				android:textStyle="normal" />
 
 		</LinearLayout>
 
@@ -70,11 +70,11 @@
 			android:background="@null"
 			android:clickable="false"
 			android:focusable="false"
-			android:paddingStart="@dimen/content_padding"
 			android:paddingLeft="@dimen/content_padding"
-			android:paddingEnd="@dimen/content_padding"
 			android:paddingRight="@dimen/content_padding"
-			android:translationX="-15dp" />
+			android:paddingEnd="@dimen/content_padding"
+			android:translationX="-15dp"
+			android:paddingStart="@dimen/content_padding" />
 
 	</LinearLayout>
 

@@ -55,6 +55,9 @@ public class ZipWriter extends AbstractWriter {
 
 	protected ZipEntry createNewEntry(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
 									  @NonNull String fileName) {
+		if (fileName.startsWith(File.separator)) {
+			fileName = fileName.substring(1);
+		}
 		ZipEntry entry = new ZipEntry(fileName);
 		if (itemWriter.getItem() instanceof FileSettingsItem) {
 			FileSettingsItem fileSettingsItem = (FileSettingsItem) itemWriter.getItem();

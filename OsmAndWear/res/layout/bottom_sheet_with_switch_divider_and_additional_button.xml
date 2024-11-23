@@ -46,7 +46,7 @@
 				android:textColor="?attr/active_color_basic"
 				android:textSize="11sp"
 				android:translationX="20dp"
-				app:typeface="@string/font_roboto_medium"
+				app:typefaceWeight="medium"
 				tools:text="Some title" />
 
 			<com.google.android.material.switchmaterial.SwitchMaterial
@@ -54,6 +54,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
+				android:layout_marginStart="@dimen/bottom_sheet_content_margin"
 				android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
 				android:layout_marginRight="20dp"
 				android:clickable="false"

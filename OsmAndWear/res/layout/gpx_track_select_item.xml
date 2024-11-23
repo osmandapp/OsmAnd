@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
 		android:contentDescription="@string/shared_string_icon"
 		android:translationX="25dp"
 		android:visibility="visible"
-		osmand:srcCompat="@drawable/ic_action_polygom_dark" />
+		app:srcCompat="@drawable/ic_action_polygom_dark" />
 
 	<LinearLayout
 		android:layout_width="0dp"
@@ -61,7 +61,7 @@
 				android:layout_height="wrap_content"
 				android:layout_marginEnd="@dimen/content_padding_half"
 				android:layout_marginRight="@dimen/content_padding_half"
-				osmand:srcCompat="@drawable/ic_action_distance_16"
+				app:srcCompat="@drawable/ic_action_distance_16"
 				android:contentDescription="@string/distance" />
 
 			<TextView
@@ -79,7 +79,7 @@
 				android:layout_height="wrap_content"
 				android:layout_marginEnd="@dimen/content_padding_half"
 				android:layout_marginRight="@dimen/content_padding_half"
-				osmand:srcCompat="@drawable/ic_action_waypoint_16"
+				app:srcCompat="@drawable/ic_action_waypoint_16"
 				android:contentDescription="@string/track_points" />
 
 			<TextView
@@ -98,7 +98,7 @@
 				android:layout_height="wrap_content"
 				android:layout_marginEnd="@dimen/content_padding_half"
 				android:layout_marginRight="@dimen/content_padding_half"
-				osmand:srcCompat="@drawable/ic_action_time_16"
+				app:srcCompat="@drawable/ic_action_time_16"
 				android:contentDescription="@string/shared_string_time_moving" />
 
 			<TextView

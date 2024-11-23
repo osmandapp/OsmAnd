@@ -1,6 +1,11 @@
 package net.osmand.plus.routing;
 
+import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAvailableForDrawingRoute;
+import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAvailableInSubscription;
+
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.card.color.ColoringStyle;
+import net.osmand.shared.routing.ColoringType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,19 +28,22 @@ public class ColoringTypeAvailabilityCache {
 	                                   @NonNull ColoringType routeColoringType,
 	                                   @Nullable String routeInfoAttribute) {
 		if (!route.equals(prevRoute)) {
-			cache.clear();
+			resetCache();
 			prevRoute = route;
 		}
-
 		String key = routeColoringType.getName(routeInfoAttribute);
-
 		Boolean available = cache.get(key);
 		if (available == null) {
-			boolean drawing = routeColoringType.isAvailableForDrawingRoute(app, route, routeInfoAttribute);
-			boolean subscription = routeColoringType.isAvailableInSubscription(app, routeInfoAttribute, true);
+			ColoringStyle coloringStyle = new ColoringStyle(routeColoringType, routeInfoAttribute);
+			boolean drawing = isAvailableForDrawingRoute(app, coloringStyle, route);
+			boolean subscription = isAvailableInSubscription(app, coloringStyle, true);
 			available = drawing && subscription;
 			cache.put(key, available);
 		}
 		return available;
+	}
+
+	public void resetCache() {
+		cache.clear();
 	}
 }

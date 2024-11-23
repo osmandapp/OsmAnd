@@ -2,27 +2,28 @@ package net.osmand.plus.myplaces.tracks;
 
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab.OVERVIEW;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.SearchTracksAdapter;
-import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
@@ -30,15 +31,17 @@ import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvi
 import net.osmand.plus.myplaces.tracks.dialogs.BaseTrackFolderFragment;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.tracks.dialogs.TracksFilterFragment;
-import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter;
-import net.osmand.plus.myplaces.tracks.filters.FilterChangedListener;
-import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener;
-import net.osmand.plus.track.data.SmartFolder;
-import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.shared.gpx.SmartFolderUpdateListener;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.shared.gpx.filters.BaseTrackFilter;
+import net.osmand.shared.gpx.filters.FilterChangedListener;
+import net.osmand.shared.gpx.data.SmartFolder;
+import net.osmand.shared.gpx.data.TrackFolder;
+import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.io.KFile;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -89,11 +92,12 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	}
 
 	@NonNull
-	protected SearchTracksAdapter createAdapter(List<TrackItem> trackItems) {
+	protected SearchTracksAdapter createAdapter(@NonNull Context context, List<TrackItem> trackItems) {
 		if (externalFilter != null) {
 			return new SearchTracksAdapter(app, trackItems, nightMode, selectionMode, externalFilter);
 		} else {
-			return new SearchTracksAdapter(app, trackItems, nightMode, selectionMode, currentFolder);
+			TracksSearchFilter filter = new TracksSearchFilter(app, trackItems, currentFolder);
+			return new SearchTracksAdapter(app, trackItems, nightMode, selectionMode, filter);
 		}
 	}
 
@@ -116,14 +120,17 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 			boolean filtersChanged = false;
 			TracksSearchFilter searchFilter = (TracksSearchFilter) adapter.getFilter();
 			List<BaseTrackFilter> currentFilters = searchFilter.getAppliedFilters();
-			if (currentFilters.size() != smartFolder.getFilters().size()) {
-				filtersChanged = true;
-			} else {
-				for (BaseTrackFilter folderFilter : smartFolder.getFilters()) {
-					BaseTrackFilter currentFilter = searchFilter.getFilterByType(folderFilter.getFilterType());
-					if (currentFilter == null || !currentFilter.equals(folderFilter)) {
-						filtersChanged = true;
-						break;
+			List<BaseTrackFilter> filters = smartFolder.getFilters();
+			if (filters != null) {
+				if (currentFilters.size() != filters.size()) {
+					filtersChanged = true;
+				} else {
+					for (BaseTrackFilter folderFilter : filters) {
+						BaseTrackFilter currentFilter = searchFilter.getFilterByType(folderFilter.getTrackFilterType());
+						if (currentFilter == null || !currentFilter.equals(folderFilter)) {
+							filtersChanged = true;
+							break;
+						}
 					}
 				}
 			}
@@ -137,8 +144,9 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 		if (foldersHelper != null) {
 			Set<TrackItem> trackItemsToMove = new HashSet<>();
 			for (TrackItem trackItem : selectionHelper.getSelectedItems()) {
-				File itemFile = trackItem.getFile();
-				if (itemFile != null) {
+				KFile trackItemFile = trackItem.getFile();
+				if(trackItemFile != null) {
+					File itemFile = SharedUtil.jFile(trackItemFile);
 					File destFile = new File(dest, itemFile.getName());
 					if (destFile.exists() && itemFile.length() == destFile.length()
 							&& destFile.getAbsolutePath().equals(itemFile.getAbsolutePath()) && destFile.equals(itemFile)) {
@@ -204,7 +212,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 		selectButton.setOnClickListener(v -> {
 			Set<TrackItem> items = adapter.getFilteredItems();
 			selectionHelper.onItemsSelected(items, !areAllTracksSelected());
-			onTrackItemsSelected(items);
+			updateItems(items);
 		});
 
 		actionButton = view.findViewById(R.id.action_button);
@@ -286,7 +294,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 				if (activity != null) {
 					String screenName = getString(R.string.shared_string_tracks);
 					boolean temporary = app.getSelectedGpxHelper().getSelectedFileByPath(trackItem.getPath()) == null;
-					TrackMenuFragment.openTrack(activity, trackItem.getFile(), null, screenName, OVERVIEW, temporary);
+					TrackMenuFragment.openTrack(activity, trackItem.getFile() != null ? SharedUtil.jFile(trackItem.getFile()) : null, null, screenName, OVERVIEW, temporary);
 				}
 			}
 		};
@@ -375,9 +383,10 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 		}
 	}
 
+	@WorkerThread
 	@Override
 	public void onSmartFolderUpdated(@NonNull SmartFolder smartFolder) {
-		updateButtonsState();
+		app.runInUIThread(this::updateButtonsState);
 	}
 
 	@Override
@@ -389,11 +398,10 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	@Override
 	public void showFiltersDialog() {
 		FragmentManager manager = getFragmentManager();
-    TracksSearchFilter filter = (TracksSearchFilter) adapter.getFilter();
+		TracksSearchFilter filter = (TracksSearchFilter) adapter.getFilter();
 		filter.setCurrentFolder(currentFolder);
-		if (manager != null && filter instanceof TracksSearchFilter) {
-			TracksFilterFragment.Companion.showInstance(app, manager, getTargetFragment(), (TracksSearchFilter) filter, this, smartFolder, currentFolder);
-  
+		if (manager != null) {
+			TracksFilterFragment.Companion.showInstance(app, manager, getTargetFragment(), filter, this, smartFolder, currentFolder);
 		}
 	}
 
@@ -416,7 +424,11 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	}
 
 	@Override
-	public void onSmartFolderCreated(SmartFolder smartFolder) {
+	public void onSmartFolderCreated(@NonNull SmartFolder smartFolder) {
 		dismiss();
+	}
+
+	@Override
+	public void onSmartFolderRenamed(@NonNull SmartFolder smartFolder) {
 	}
 }

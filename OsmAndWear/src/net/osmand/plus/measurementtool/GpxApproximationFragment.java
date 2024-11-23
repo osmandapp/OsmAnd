@@ -21,7 +21,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -33,7 +33,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
-import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
+import net.osmand.router.GpxRouteApproximation;
 
 import org.apache.commons.logging.Log;
 
@@ -101,7 +101,7 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment implemen
 			mainView.findViewById(R.id.control_buttons).setLayoutParams(params);
 		}
 		runLayoutListener();
-		helper.calculateGpxApproximation(true);
+		helper.calculateGpxApproximationAsync(true);
 
 		ScrollView profileView = (ScrollView) getBottomScrollView();
 		profileView.postDelayed(() -> {

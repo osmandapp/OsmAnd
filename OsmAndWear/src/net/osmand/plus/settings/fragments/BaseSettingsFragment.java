@@ -29,21 +29,9 @@ import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.preference.EditTextPreference;
-import androidx.preference.ListPreference;
-import androidx.preference.MultiSelectListPreference;
-import androidx.preference.Preference;
+import androidx.preference.*;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.Preference.OnPreferenceClickListener;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceGroupAdapter;
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.PreferenceViewHolder;
-import androidx.preference.SwitchPreferenceCompat;
-import androidx.preference.TwoStatePreference;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.AppBarLayout;
@@ -213,19 +201,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				mapActivity.disableDrawer();
 			}
 		}
-
-		Activity activity = getActivity();
-		if (activity != null) {
-			int colorId = getStatusBarColorId();
-			if (colorId != -1) {
-				if (activity instanceof MapActivity) {
-					((MapActivity) activity).updateStatusBarColor();
-				} else {
-					statusBarColor = activity.getWindow().getStatusBarColor();
-					activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
-				}
-			}
-		}
+		updateStatusBar();
 	}
 
 	@Override
@@ -256,6 +232,25 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 	}
 
+	public void updateStatusBar() {
+		Activity activity = getActivity();
+		if (activity != null) {
+			updateStatusBar(activity);
+		}
+	}
+
+	protected void updateStatusBar(@NonNull Activity activity) {
+		int colorId = getStatusBarColorId();
+		if (colorId != -1) {
+			if (activity instanceof MapActivity) {
+				((MapActivity) activity).updateStatusBarColor();
+			} else {
+				statusBarColor = activity.getWindow().getStatusBarColor();
+				activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
+			}
+		}
+	}
+
 	@ColorRes
 	public int getStatusBarColorId() {
 		boolean nightMode = isNightMode();
@@ -267,6 +262,15 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			return ColorUtilities.getListBgColorId(nightMode);
 		} else {
 			return ColorUtilities.getStatusBarColorId(nightMode);
+		}
+	}
+
+	public boolean getContentStatusBarNightMode() {
+		boolean nightMode = isNightMode();
+		if (isProfileDependent()) {
+			return nightMode;
+		} else {
+			return true;
 		}
 	}
 
@@ -375,7 +379,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	protected abstract void setupPreferences();
 
-	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
 		if (preference.isSelectable()) {
 			View selectableView = holder.itemView.findViewById(R.id.selectable_list_item);
 			if (selectableView != null) {
@@ -859,6 +863,29 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 
 		return listPreference;
+	}
+
+	public void addDividerPref() {
+		getPreferenceScreen().addPreference(createDividerPref());
+	}
+
+	@NonNull
+	public Preference createDividerPref() {
+		Preference preference = new Preference(requireContext());
+		preference.setSelectable(false);
+		preference.setPersistent(false);
+		preference.setLayoutResource(R.layout.simple_divider_item);
+
+		return preference;
+	}
+
+	@NonNull
+	protected Preference requirePreference(@NonNull CharSequence key) {
+		Preference preference = findPreference(key);
+		if (preference == null) {
+			throw new IllegalArgumentException("Preference with key '" + key + "' not found.");
+		}
+		return preference;
 	}
 
 	public static boolean showInstance(@NonNull FragmentActivity activity, @NonNull SettingsScreenType screenType) {

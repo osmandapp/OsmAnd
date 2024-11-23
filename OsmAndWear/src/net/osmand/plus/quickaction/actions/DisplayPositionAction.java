@@ -25,7 +25,7 @@ public class DisplayPositionAction extends QuickAction {
 	public static final QuickActionType TYPE =
 			new QuickActionType(DISPLAY_POSITION_ACTION_ID, "display.position.switch", DisplayPositionAction.class)
 					.nameActionRes(R.string.shared_string_change)
-					.nameRes(R.string.always_center_position_on_map)
+					.nameRes(R.string.quick_action_display_position_in_center)
 					.iconRes(ENABLE_ICON_ID)
 					.nonEditable()
 					.category(QuickActionType.SETTINGS);
@@ -71,11 +71,13 @@ public class DisplayPositionAction extends QuickAction {
 
 	@Override
 	public String getActionText(@NonNull OsmandApplication app) {
+		String nameRes = app.getString(getNameRes());
+		String actionName;
 		if (getPreference(app).get() == 1) {
-			return app.getString(R.string.shared_string_disable);
+			actionName = app.getString(R.string.shared_string_disable);
 		} else {
-			return app.getString(R.string.shared_string_enable);
+			actionName = app.getString(R.string.shared_string_enable);
 		}
+		return app.getString(R.string.ltr_or_rtl_combine_via_dash, actionName, nameRes);
 	}
-
 }

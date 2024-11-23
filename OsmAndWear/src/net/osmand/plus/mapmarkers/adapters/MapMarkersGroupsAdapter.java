@@ -20,9 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.IndexConstants;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -83,7 +83,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	public MapMarkersGroupsAdapter(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		app = mapActivity.getMyApplication();
-		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
+		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(mapActivity);
 		nightMode = !app.getSettings().isLightContent();
 		updateShowDirectionMarkers();
 		createDisplayGroups();
@@ -218,13 +218,13 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		}
 	}
 
-	private GPXFile getGpxFile(String filePath) {
+	private GpxFile getGpxFile(String filePath) {
 		if (filePath != null) {
 			SelectedGpxFile selectedGpx = app.getSelectedGpxHelper().getSelectedFileByPath(filePath);
 			if (selectedGpx != null) {
 				return selectedGpx.getGpxFile();
 			}
-			return GPXUtilities.loadGPXFile(new File(filePath));
+			return SharedUtil.loadGpxFile(new File(filePath));
 		}
 		return null;
 	}
@@ -460,7 +460,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				}
 				CompoundButton.OnCheckedChangeListener checkedChangeListener = (compoundButton, enabled) -> {
 					MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
-					GPXFile[] gpxFile = new GPXFile[1];
+					GpxFile[] gpxFile = new GpxFile[1];
 					boolean disabled = !enabled;
 
 					if (groupIsDisabled && !group.wasShown() && group.getWptCategories().size() > 1) {
@@ -484,7 +484,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 							gpxFile[0] = selectedGpxFile.getGpxFile();
 						} else {
 							// TODO IO load in another thread ?
-							gpxFile[0] = GPXUtilities.loadGPXFile(new File(gpxPath));
+							gpxFile[0] = SharedUtil.loadGpxFile(new File(gpxPath));
 						}
 						switchGpxVisibility(gpxFile[0], selectedGpxFile, !disabled);
 					}
@@ -553,7 +553,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				categoriesViewHolder.title.setText(getGroupWptCategoriesString(group));
 				categoriesViewHolder.divider.setVisibility(View.VISIBLE);
 				categoriesViewHolder.button.setCompoundDrawablesWithIntrinsicBounds(
-						null, null, app.getUIUtilities().getIcon(R.drawable.ic_action_filter,
+						null, null, app.getUIUtilities().getIcon(R.drawable.ic_action_filter_dark,
 								nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light), null);
 				categoriesViewHolder.button.setOnClickListener(openChooseCategoriesDialog);
 				categoriesViewHolder.title.setOnClickListener(openChooseCategoriesDialog);
@@ -561,7 +561,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		}
 	}
 
-	private void switchGpxVisibility(@NonNull GPXFile gpxFile, @Nullable SelectedGpxFile selectedGpxFile, boolean visible) {
+	private void switchGpxVisibility(@NonNull GpxFile gpxFile, @Nullable SelectedGpxFile selectedGpxFile, boolean visible) {
 		GpxSelectionHelper gpxHelper = app.getSelectedGpxHelper();
 		if (!visible && selectedGpxFile != null && selectedGpxFile.selectedByUser) {
 			return;

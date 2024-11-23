@@ -58,6 +58,7 @@ import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -67,7 +68,6 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -199,8 +199,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 			}
 		};
 
-		Date date = OsmAndFormatter.getStartOfToday();
-		long dateTime = date.getTime();
+		long dateTime = OsmAndFormatter.getStartOfToday();
 		for (int i = 0; i < FORECAST_DATES_COUNT; i++) {
 			if (!isDownloadStateInProgress(regionId)) {
 				// download was canceled by user
@@ -440,11 +439,11 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 	}
 
 	public void registerWeatherCacheSizeChangeListener(@NonNull WeatherCacheSizeChangeListener listener) {
-		weatherCacheSizeChangeListeners = Algorithms.addToList(weatherCacheSizeChangeListeners, listener);
+		weatherCacheSizeChangeListeners = CollectionUtils.addToList(weatherCacheSizeChangeListeners, listener);
 	}
 
 	public void unregisterWeatherCacheSizeChangeListener(@NonNull WeatherCacheSizeChangeListener listener) {
-		weatherCacheSizeChangeListeners = Algorithms.removeFromList(weatherCacheSizeChangeListeners, listener);
+		weatherCacheSizeChangeListeners = CollectionUtils.removeFromList(weatherCacheSizeChangeListeners, listener);
 	}
 
 	public void removeLocalForecastAsync(@NonNull String regionId, boolean refreshMap, boolean notifyUserOnFinish) {
@@ -457,7 +456,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 
 	private void removeLocalForecast(@NonNull String[] regionIds, boolean refreshMap, boolean notifyUserOnFinish) {
 		List<String> regionIdsList = Arrays.asList(regionIds);
-		regionsRemoveInProgress = Algorithms.addAllToList(regionsRemoveInProgress, regionIdsList);
+		regionsRemoveInProgress = CollectionUtils.addAllToList(regionsRemoveInProgress, regionIdsList);
 
 		// notify before remove and after region ids were registered
 		runInUiThread(this::notifyOnRemoveLocalForecastEvent);
@@ -492,7 +491,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 				app.showToastMessage(app.getString(R.string.item_deleted, fileName));
 			}
 		}
-		regionsRemoveInProgress = Algorithms.removeAllFromList(regionsRemoveInProgress, regionIdsList);
+		regionsRemoveInProgress = CollectionUtils.removeAllFromList(regionsRemoveInProgress, regionIdsList);
 		app.getDownloadThread().updateLoadedFiles();
 
 		// notify after remove was completed and region ids were unregistered
@@ -514,11 +513,11 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 	}
 
 	public void registerRemoveLocalForecastListener(@NonNull RemoveLocalForecastListener listener) {
-		removeLocalForecastListeners = Algorithms.addToList(removeLocalForecastListeners, listener);
+		removeLocalForecastListeners = CollectionUtils.addToList(removeLocalForecastListeners, listener);
 	}
 
 	public void unregisterRemoveLocalForecastListener(@NonNull RemoveLocalForecastListener listener) {
-		removeLocalForecastListeners = Algorithms.removeFromList(removeLocalForecastListeners, listener);
+		removeLocalForecastListeners = CollectionUtils.removeFromList(removeLocalForecastListeners, listener);
 	}
 
 	public List<Long> getOfflineTileIds() {
@@ -550,8 +549,7 @@ public class OfflineForecastHelper implements ResetTotalWeatherCacheSizeListener
 			int daysGone = 0;
 			long lastUpdate = getPreferenceLastUpdate(regionId);
 			if (lastUpdate != -1) {
-				Date dayNow = OsmAndFormatter.getStartOfToday();
-				long passedTime = dayNow.getTime() - lastUpdate;
+				long passedTime = OsmAndFormatter.getStartOfToday() - lastUpdate;
 				daysGone = (int) (passedTime / DateUtils.DAY_IN_MILLIS);
 			}
 			outdated = daysGone >= 7;

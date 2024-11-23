@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
@@ -42,8 +41,6 @@
                         android:lines="1"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:layout_gravity="center"
-                        android:gravity="center"
                         android:text="@string/shared_string_filters"
                         android:textColor="@color/card_and_list_background_light"
                         android:textSize="@dimen/default_list_text_size_large"/>
@@ -118,8 +115,8 @@
             android:textColor="@color/card_and_list_background_light"
             android:textSize="@dimen/default_sub_text_size"
             android:text="@string/apply_filters"
-            osmand:typeface="@string/font_roboto_medium"
-            osmand:textAllCapsCompat="true"
+            app:typefaceWeight="medium"
+            android:textAllCaps="true"
 	        android:paddingStart="16dp"
 	        android:paddingEnd="16dp" />
 

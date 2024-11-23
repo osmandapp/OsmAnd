@@ -31,7 +31,7 @@ import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetA
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
-import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -89,10 +89,8 @@ public class WeatherSettingsFragment extends BaseSettingsFragment implements Wea
 		offlineForecastHelper = app.getOfflineForecastHelper();
 		Context ctx = requireContext();
 
-		Preference divider = new Preference(ctx);
-		divider.setLayoutResource(R.layout.simple_divider_item);
+		Preference divider = createDividerPref();
 		divider.setKey("weather_cache_divider");
-		divider.setSelectable(false);
 		addOnPreferencesScreen(divider);
 
 		PreferenceCategory category = new PreferenceCategory(ctx);
@@ -121,11 +119,8 @@ public class WeatherSettingsFragment extends BaseSettingsFragment implements Wea
 		Context context = requireContext();
 		int profileColor = getActiveProfileColor();
 
-		Preference divider = new Preference(context);
-		divider.setLayoutResource(R.layout.simple_divider_item);
+		Preference divider = createDividerPref();
 		divider.setKey("buttons_divider");
-		divider.setSelectable(false);
-		divider.setPersistent(false);
 		addOnPreferencesScreen(divider);
 
 		Preference resetToDefault = new Preference(context);
@@ -156,9 +151,9 @@ public class WeatherSettingsFragment extends BaseSettingsFragment implements Wea
 	}
 
 	@Override
-	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
 		String key = preference.getKey();
-		if (Algorithms.equalsToAny(key, WEATHER_ONLINE_CACHE, WEATHER_OFFLINE_CACHE)) {
+		if (CollectionUtils.equalsToAny(key, WEATHER_ONLINE_CACHE, WEATHER_OFFLINE_CACHE)) {
 			boolean forLocal = key.equals(WEATHER_OFFLINE_CACHE);
 			viewHolders.put(key, new WeatherTotalCacheSizeViewHolder(app, holder.itemView, forLocal));
 			updateCacheSizePreferences();

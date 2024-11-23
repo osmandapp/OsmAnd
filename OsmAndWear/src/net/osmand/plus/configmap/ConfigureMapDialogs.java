@@ -13,20 +13,19 @@ import androidx.appcompat.widget.AppCompatCheckedTextView;
 import androidx.appcompat.widget.SwitchCompat;
 
 import net.osmand.core.android.MapRendererContext;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.widgets.alert.AlertDialogData;
-import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
@@ -42,44 +41,47 @@ import gnu.trove.list.array.TIntArrayList;
 
 public class ConfigureMapDialogs {
 
-	protected static void showMapModeDialog(
-			@NonNull MapActivity activity, boolean nightMode
-	) {
-		OsmandApplication app = activity.getMyApplication();
-		OsmandSettings settings = app.getSettings();
-
-		OsmandMapTileView view = activity.getMapView();
-		int selectedIndex = settings.DAYNIGHT_MODE.get().ordinal();
-		String[] items = new String[DayNightMode.values().length];
-		for (int i = 0; i < items.length; i++) {
-			items[i] = DayNightMode.values()[i].toHumanString(app);
+	public static void showMapMagnifierDialog(@NonNull OsmandMapTileView view) {
+		OsmandPreference<Float> density = view.getSettings().MAP_DENSITY;
+		int p = (int) (density.get() * 100);
+		TIntArrayList tlist = new TIntArrayList(new int[] {25, 33, 50, 75, 100, 125, 150, 200, 300, 400});
+		List<String> values = new ArrayList<>();
+		int i = -1;
+		for (int k = 0; k <= tlist.size(); k++) {
+			boolean end = k == tlist.size();
+			if (i == -1) {
+				if ((end || p < tlist.get(k))) {
+					values.add(p + " %");
+					i = k;
+				} else if (p == tlist.get(k)) {
+					i = k;
+				}
+			}
+			if (k < tlist.size()) {
+				values.add(tlist.get(k) + " %");
+			}
+		}
+		if (values.size() != tlist.size()) {
+			tlist.insert(i, p);
 		}
 
-		AlertDialogData dialogData = new AlertDialogData(activity, nightMode)
-				.setTitle(R.string.daynight)
-				.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode))
-				.setNegativeButton(R.string.shared_string_dismiss, null);
-
-		CustomAlert.showSingleSelection(dialogData, items, selectedIndex, v -> {
-			int which = (int) v.getTag();
-			settings.DAYNIGHT_MODE.set(DayNightMode.values()[which]);
-			if (view.hasMapRenderer()) {
-				MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
-				if (mapRendererContext != null) {
-					boolean updatedNightMode = app.getDaynightHelper().isNightMode();
-					mapRendererContext.setNightMode(updatedNightMode);
-				}
-			} else {
-				activity.refreshMapComplete();
+		AlertDialog.Builder builder = new AlertDialog.Builder(view.requireMapActivity());
+		builder.setTitle(R.string.map_magnifier);
+		builder.setSingleChoiceItems(values.toArray(new String[0]), i, (dialog, which) -> {
+			int p1 = tlist.get(which);
+			density.set(p1 / 100.0f);
+			view.setComplexZoom(view.getZoom(), view.getSettingsMapDensity());
+			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+			if (mapContext != null) {
+				mapContext.updateMapSettings(true);
 			}
-			activity.getDashboard().refreshContent(false);
+			dialog.dismiss();
 		});
+		builder.show();
 	}
 
-	protected static void showMapMagnifierDialog(
-			@NonNull MapActivity activity, boolean nightMode,
-			@NonNull ContextMenuItem item, @NonNull OnDataChangeUiAdapter uiAdapter
-	) {
+	protected static void showMapMagnifierDialog(@NonNull MapActivity activity, boolean nightMode,
+	                                             @NonNull ContextMenuItem item, @NonNull OnDataChangeUiAdapter adapter) {
 		OsmandApplication app = activity.getMyApplication();
 		int profileColor = ColorUtilities.getAppModeColor(app, nightMode);
 		OsmandSettings settings = app.getSettings();
@@ -122,11 +124,8 @@ public class ConfigureMapDialogs {
 			if (mapContext != null) {
 				mapContext.updateMapSettings(true);
 			}
-			item.setDescription(
-					String.format(Locale.UK, "%.0f", 100f * activity.getMyApplication()
-							.getSettings().MAP_DENSITY.get())
-							+ " %");
-			uiAdapter.onDataSetInvalidated();
+			item.setDescription(String.format(Locale.UK, "%.0f", 100f * settings.MAP_DENSITY.get()) + " %");
+			adapter.onDataSetInvalidated();
 		});
 	}
 

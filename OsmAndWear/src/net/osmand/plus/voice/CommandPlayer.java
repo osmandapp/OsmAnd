@@ -1,7 +1,9 @@
 package net.osmand.plus.voice;
 
 import android.content.Context;
+import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,7 +51,7 @@ public abstract class CommandPlayer {
 	protected final ScriptableObject jsScope;
 	protected final VoiceRouter voiceRouter;
 
-	private AudioFocusHelper mAudioFocusHelper;
+	private AudioFocusHelper focusHelper;
 
 	protected final File voiceProviderDir;
 	protected final String language;
@@ -150,9 +152,9 @@ public abstract class CommandPlayer {
 		log.debug("requestAudioFocus");
 		streamType = app.getSettings().AUDIO_MANAGER_STREAM.getModeValue(app.getRoutingHelper().getAppMode());
 		updateAudioStream(streamType);
-		mAudioFocusHelper = createAudioFocusHelper();
-		if (mAudioFocusHelper != null && app != null) {
-			boolean audioFocusGranted = mAudioFocusHelper.requestAudFocus(app);
+		focusHelper = createAudioFocusHelper();
+		if (focusHelper != null && app != null) {
+			boolean audioFocusGranted = focusHelper.requestAudFocus(app);
 			if (audioFocusGranted && streamType == 0) {
 				startBluetoothSco();
 			}
@@ -168,32 +170,43 @@ public abstract class CommandPlayer {
 			return null;
 		}
 	}
-	
+
 	protected synchronized void abandonAudioFocus() {
 		log.debug("abandonAudioFocus");
 		if (streamType == 0 || bluetoothScoRunning) {
 			stopBluetoothSco();
 		}
-		if (app != null && mAudioFocusHelper != null) {
-			mAudioFocusHelper.abandonAudFocus(app);
+		if (app != null && focusHelper != null) {
+			focusHelper.abandonAudFocus(app);
 		}
-		mAudioFocusHelper = null;
+		focusHelper = null;
 	}
 
 	// Hardy, 2016-07-03: Establish a low quality BT SCO (Synchronous Connection-Oriented) link to interrupt e.g. a car stereo FM radio
+	// Hardy, 2024-07-23: Adjust for API Level 34 deprecation of startBluetoothSco(), stopBluetoothSco()
 	private synchronized void startBluetoothSco() {
 		try {
-			AudioManager mAudioManager = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
-			if (mAudioManager == null || !mAudioManager.isBluetoothScoAvailableOffCall()) {
+			AudioManager manager = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
+			if (manager == null || !manager.isBluetoothScoAvailableOffCall()) {
 				bluetoothScoRunning = false;
 				bluetoothScoStatus = "Reported not available.";
 				return;
 			}
 
-			mAudioManager.setMode(AudioManager.MODE_NORMAL);
-			mAudioManager.startBluetoothSco();
-			mAudioManager.setBluetoothScoOn(true);
-			mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+			manager.setMode(AudioManager.MODE_NORMAL);
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+				List<AudioDeviceInfo> devices = manager.getAvailableCommunicationDevices();
+				for (AudioDeviceInfo device : devices) {
+					if (device.getType() == AudioDeviceInfo.TYPE_BLUETOOTH_SCO) {
+						manager.setCommunicationDevice(device);
+						break;
+					}
+				}
+			} else {
+				manager.startBluetoothSco();
+			}
+			manager.setBluetoothScoOn(true);
+			manager.setMode(AudioManager.MODE_IN_COMMUNICATION);
 			bluetoothScoRunning = true;
 			bluetoothScoStatus = "Available, initialized OK.";
 		} catch (Exception e) {
@@ -204,11 +217,15 @@ public abstract class CommandPlayer {
 	}
 
 	private synchronized void stopBluetoothSco() {
-		AudioManager mAudioManager = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
-		if (mAudioManager != null) {
-			mAudioManager.setBluetoothScoOn(false);
-			mAudioManager.stopBluetoothSco();
-			mAudioManager.setMode(AudioManager.MODE_NORMAL);
+		AudioManager manager = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
+		if (manager != null) {
+			manager.setBluetoothScoOn(false);
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+				manager.clearCommunicationDevice();
+			} else {
+				manager.stopBluetoothSco();
+			}
+			manager.setMode(AudioManager.MODE_NORMAL);
 			bluetoothScoRunning = false;
 		}
 	}

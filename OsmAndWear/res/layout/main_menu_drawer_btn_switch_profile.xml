@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:id="@+id/profile_settings"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -16,12 +16,12 @@
 		android:id="@+id/bg_circle"
 		android:layout_width="@dimen/context_menu_big_icon_size"
 		android:layout_height="@dimen/context_menu_big_icon_size"
-		android:layout_marginStart="@dimen/content_padding_half"
 		android:layout_marginLeft="@dimen/content_padding_half"
-		android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 		android:layout_marginRight="@dimen/favorites_icon_right_margin"
-		android:background="?attr/bg_circle"
-		android:translationX="20dp">
+		android:layout_marginStart="@dimen/content_padding_half"
+		android:layout_marginEnd="@dimen/favorites_icon_right_margin"
+		android:translationX="20dp"
+		android:background="?attr/bg_circle">
 
 		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/icon"
@@ -57,7 +57,7 @@
 					android:layout_gravity="center_vertical|start"
 					android:ellipsize="end"
 					android:maxLines="2"
-					osmand:typeface="@string/font_roboto_medium"
+					app:typefaceWeight="medium"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"
 					tools:text="Bicycle" />
@@ -69,7 +69,7 @@
 					android:layout_gravity="center_vertical|start"
 					android:ellipsize="end"
 					android:maxLines="1"
-					osmand:typeface="@string/font_roboto_regular"
+					android:textStyle="normal"
 					android:textColor="?android:textColorSecondary"
 					android:textSize="@dimen/default_desc_text_size"
 					tools:text="Type: Bicycle" />
@@ -81,13 +81,13 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
-				android:layout_marginStart="@dimen/content_padding_half"
 				android:layout_marginLeft="@dimen/content_padding_half"
-				android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 				android:layout_marginRight="@dimen/favorites_icon_right_margin"
+				app:srcCompat="@drawable/ic_action_arrow_drop_down"
 				android:tint="?attr/default_icon_color"
 				android:translationX="-20dp"
-				osmand:srcCompat="@drawable/ic_action_arrow_drop_down" />
+				android:layout_marginStart="@dimen/content_padding_half"
+				android:layout_marginEnd="@dimen/favorites_icon_right_margin" />
 
 		</LinearLayout>
 

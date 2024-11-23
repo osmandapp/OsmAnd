@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
         android:focusable="false"
         android:translationX="25dp"
         android:translationY="15dp"
-        osmand:srcCompat="@drawable/ic_map" />
+        app:srcCompat="@drawable/ic_map" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -73,13 +73,15 @@
         android:id="@+id/options"
         android:layout_width="@dimen/list_item_height"
         android:layout_height="@dimen/list_item_height"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
         android:background="?attr/dashboard_button"
         android:contentDescription="@string/shared_string_more"
         android:focusable="false"
         android:translationX="-30dp"
-        osmand:srcCompat="@drawable/ic_overflow_menu_white" />
+        app:srcCompat="@drawable/ic_overflow_menu_white" />
 
     <View
         android:id="@+id/divider"

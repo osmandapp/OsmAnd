@@ -1,7 +1,5 @@
 package net.osmand.plus.routing;
 
-import static net.osmand.plus.routing.CurrentStreetName.*;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -26,7 +24,7 @@ import java.util.Map.Entry;
 public class RoutingHelperUtils {
 
 	private static final int CACHE_RADIUS = 100000;
-	public static final int MAX_BEARING_DEVIATION = 160;
+	public static final int MAX_BEARING_DEVIATION = 45;
 
 	@NonNull
 	public static String formatStreetName(@Nullable String name, @Nullable String ref, @Nullable String destination,
@@ -110,13 +108,40 @@ public class RoutingHelperUtils {
 		return locationProjection;
 	}
 
-	public static void approximateBearingIfNeeded(@NonNull RoutingHelper helper, @NonNull Location locationProjection,
-	                                              @NonNull Location loc, @NonNull Location from, @NonNull Location to) {
-		float bearingTo = MapUtils.normalizeDegrees360(from.bearingTo(to));
-		double projectDist = helper.getMaxAllowedProjectDist(loc);
-		if ((!loc.hasBearing() || Math.abs(loc.getBearing() - bearingTo) < MAX_BEARING_DEVIATION) &&
-				loc.distanceTo(locationProjection) < projectDist) {
-			locationProjection.setBearing(bearingTo);
+	public static void approximateBearingIfNeeded(@NonNull RoutingHelper routingHelper,
+	                                              @NonNull Location projection,
+	                                              @NonNull Location location,
+	                                              @NonNull Location previousRouteLocation,
+	                                              @NonNull Location currentRouteLocation,
+	                                              @NonNull Location nextRouteLocation,
+	                                              boolean previewNextTurn) {
+		double dist = location.distanceTo(projection);
+		double maxDist = routingHelper.getMaxAllowedProjectDist(currentRouteLocation);
+		if (dist >= maxDist) {
+			return;
+		}
+
+		float projectionOffsetN = (float) MapUtils.getProjectionCoeff(
+				location.getLatitude(), location.getLongitude(),
+				previousRouteLocation.getLatitude(), previousRouteLocation.getLongitude(),
+				currentRouteLocation.getLatitude(), currentRouteLocation.getLongitude());
+		float currentSegmentBearing = MapUtils.normalizeDegrees360(previousRouteLocation.bearingTo(currentRouteLocation));
+
+		float approximatedBearing = currentSegmentBearing;
+		if (previewNextTurn) {
+			float offset = projectionOffsetN * projectionOffsetN;
+			float nextSegmentBearing = MapUtils.normalizeDegrees360(currentRouteLocation.bearingTo(nextRouteLocation));
+			float segmentsBearingDelta = MapUtils.unifyRotationDiff(currentSegmentBearing, nextSegmentBearing) * offset;
+			approximatedBearing = MapUtils.normalizeDegrees360(currentSegmentBearing + segmentsBearingDelta);
+		}
+
+		boolean setApproximated = true;
+		if (location.hasBearing() && dist >= maxDist / 2) {
+			float rotationDiff = MapUtils.unifyRotationDiff(location.getBearing(), approximatedBearing);
+			setApproximated = Math.abs(rotationDiff) < MAX_BEARING_DEVIATION;
+		}
+		if (setApproximated) {
+			projection.setBearing(approximatedBearing);
 		}
 	}
 
@@ -152,12 +177,16 @@ public class RoutingHelperUtils {
 		// measuring without bearing could be really error prone (with last fixed location)
 		// this code has an effect on route recalculation which should be detected without mistakes
 		if (currentLocation.hasBearing() && nextRouteLocation != null) {
+			final float ASSUME_AS_INVALID_BEARING = 90.0f; // special case (possibly only in the Android emulator)
 			float bearingMotion = currentLocation.getBearing();
+			if (bearingMotion == ASSUME_AS_INVALID_BEARING) {
+				return false;
+			}
 			float bearingToRoute = prevRouteLocation != null
 					? prevRouteLocation.bearingTo(nextRouteLocation)
 					: currentLocation.bearingTo(nextRouteLocation);
 			double diff = MapUtils.degreesDiff(bearingMotion, bearingToRoute);
-			if (Math.abs(diff) > 60f) {
+			if (Math.abs(diff) > 90f) {
 				// require delay interval since first detection, to avoid false positive
 				//but leave out for now, as late detection is worse than false positive (it may reset voice router then cause bogus turn and u-turn prompting)
 				//if (wrongMovementDetected == 0) {
@@ -227,7 +256,8 @@ public class RoutingHelperUtils {
 	}
 
 	public static RoutingParameter getParameterForDerivedProfile(@NonNull String id, @NonNull ApplicationMode appMode, @NonNull GeneralRouter router) {
-		return getParametersForDerivedProfile(appMode, router).get(id);
+		Map<String, RoutingParameter> parameters = getParametersForDerivedProfile(appMode, router);
+		return parameters.get(id);
 	}
 
 	@NonNull

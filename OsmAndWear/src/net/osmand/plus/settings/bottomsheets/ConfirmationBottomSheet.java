@@ -85,9 +85,7 @@ public class ConfirmationBottomSheet extends MenuBottomSheetDialogFragment {
 		dismiss();
 	}
 
-	public static void showResetSettingsDialog(@NonNull FragmentManager manager,
-	                                           @NonNull Fragment target,
-	                                           @StringRes int titleId) {
+	public static void showResetSettingsDialog(@NonNull FragmentManager manager, @NonNull Fragment target, @StringRes int titleId) {
 		ConfirmationBottomSheet fragment = new ConfirmationBottomSheet();
 		fragment.usedOnMap = false;
 		fragment.title = target.getString(titleId);
@@ -110,8 +108,7 @@ public class ConfirmationBottomSheet extends MenuBottomSheetDialogFragment {
 		showInstance(fragment, manager, target, actionId);
 	}
 
-	private static void showInstance(@NonNull ConfirmationBottomSheet fragment,
-	                                 @NonNull FragmentManager manager,
+	private static void showInstance(@NonNull ConfirmationBottomSheet fragment, @NonNull FragmentManager manager,
 	                                 @NonNull Fragment target, int actionId) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			fragment.actionId = actionId;

@@ -1,5 +1,6 @@
 package net.osmand.plus.configmap;
 
+import static net.osmand.IProgress.EMPTY_PROGRESS;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
 
 import android.os.Bundle;
@@ -18,7 +19,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.IProgress;
 import net.osmand.OsmAndCollator;
 import net.osmand.map.OsmandRegions;
 import net.osmand.osm.MapPoiTypes;
@@ -29,7 +29,6 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.render.TravelRendererHelper;
-import net.osmand.plus.resources.ResourceManager.ReloadIndexesListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
@@ -270,16 +269,9 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 				updateRouteTypes();
 				updatePointCategories();
 
-				app.getResourceManager().reloadIndexesAsync(IProgress.EMPTY_PROGRESS, new ReloadIndexesListener() {
-					@Override
-					public void reloadIndexesStarted() {
-					}
-
-					@Override
-					public void reloadIndexesFinished(List<String> warnings) {
-						app.getOsmandMap().refreshMap(true);
-						app.getOsmandMap().getMapLayers().updateLayers((MapActivity) getMyActivity());
-					}
+				app.getResourceManager().reloadIndexesAsync(EMPTY_PROGRESS, warnings -> {
+					app.getOsmandMap().refreshMap(true);
+					app.getOsmandMap().getMapLayers().updateLayers((MapActivity) getMyActivity());
 				});
 			});
 			container.addView(itemView);

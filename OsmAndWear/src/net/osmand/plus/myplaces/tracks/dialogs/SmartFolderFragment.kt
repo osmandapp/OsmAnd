@@ -4,14 +4,14 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import net.osmand.plus.R
-import net.osmand.plus.configmap.tracks.TrackItem
+import net.osmand.shared.gpx.TrackItem
 import net.osmand.plus.myplaces.tracks.DialogClosedListener
 import net.osmand.plus.myplaces.tracks.EmptySmartFolderListener
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.myplaces.tracks.dialogs.TracksFilterFragment.Companion.showInstance
-import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener
-import net.osmand.plus.track.data.SmartFolder
-import net.osmand.plus.track.data.TracksGroup
+import net.osmand.shared.gpx.SmartFolderUpdateListener
+import net.osmand.shared.gpx.data.SmartFolder
+import net.osmand.shared.gpx.data.TracksGroup
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.widgets.popup.PopUpMenu
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
@@ -51,7 +51,7 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 		items.add(PopUpMenuItem.Builder(app)
 			.setTitleId(R.string.shared_string_select)
 			.setIcon(getContentIcon(R.drawable.ic_action_deselect_all))
-			.setOnClickListener { v: View? ->
+			.setOnClickListener {
 				smartFolder?.let {
 					showTracksSelection(
 						folder = it,
@@ -65,8 +65,8 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 		items.add(PopUpMenuItem.Builder(app)
 			.setTitleId(R.string.shared_string_refresh)
 			.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_update))
-			.setOnClickListener { v: View? ->
-				reloadTracks()
+			.setOnClickListener {
+				reloadTracks(true)
 			}
 			.showTopDivider(true)
 			.create())
@@ -74,7 +74,7 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 		items.add(PopUpMenuItem.Builder(app)
 			.setTitleId(R.string.edit_filter)
 			.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_filter_dark))
-			.setOnClickListener { v: View? ->
+			.setOnClickListener {
 				editFilters()
 			}
 			.showTopDivider(true)
@@ -113,18 +113,27 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 		app.smartFolderHelper.removeUpdateListener(this)
 	}
 
-	override fun getCurrentTrackGroup(): TracksGroup {
-		return smartFolder!!
+	override fun getCurrentTrackGroup(): TracksGroup? {
+		return smartFolder
 	}
 
+	@androidx.annotation.WorkerThread
 	override fun onSmartFolderUpdated(smartFolder: SmartFolder) {
 		if (this.smartFolder == smartFolder) {
-			updateContent()
+			app.runInUIThread { updateContent() }
 		}
 	}
 
+	override fun onSmartFolderRenamed(smartFolder: SmartFolder) {
+	}
+
+	override fun onSmartFolderSaved(smartFolder: SmartFolder) {
+	}
+
+	override fun onSmartFolderCreated(smartFolder: SmartFolder) {
+	}
+
 	override fun onSmartFoldersUpdated() {
-		super.onSmartFoldersUpdated()
 		val actualFolder = smartFolderHelper.getSmartFolder(smartFolder.folderName)
 		if (actualFolder != null && actualFolder != smartFolder) {
 			smartFolder = actualFolder
@@ -153,5 +162,4 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 	override fun onDialogClosed() {
 		updateContent()
 	}
-
 }

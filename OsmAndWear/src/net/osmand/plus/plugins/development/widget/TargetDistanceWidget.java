@@ -9,7 +9,7 @@ import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -35,9 +35,7 @@ public class TargetDistanceWidget extends SimpleWidget {
 		if (isUpdateNeeded() || targetDistance != cachedTargetDistance) {
 			cachedTargetDistance = targetDistance;
 			if (cachedTargetDistance > 0) {
-				MetricsConstants metricsConstants = settings.METRIC_SYSTEM.get();
-				OsmAndFormatter.FormattedValue formattedDistance = OsmAndFormatter.getFormattedDistanceValue(cachedTargetDistance,
-						app, false, metricsConstants);
+				OsmAndFormatter.FormattedValue formattedDistance = OsmAndFormatter.getFormattedDistanceValue(cachedTargetDistance, app);
 				setText(formattedDistance.value, formattedDistance.unit);
 			} else {
 				setText(NO_VALUE, null);
@@ -59,11 +57,6 @@ public class TargetDistanceWidget extends SimpleWidget {
 			}			
 		}
 		return 0;
-	}
-
-	private String formatDistance(float distanceInMeters) {
-		return OsmAndFormatter.getFormattedDistance(distanceInMeters, app, true,
-				MetricsConstants.KILOMETERS_AND_METERS);
 	}
 
 }

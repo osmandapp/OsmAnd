@@ -201,8 +201,8 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 		} else {
 			app.runInUIThread(() -> {
 				appBar.setExpanded(false, false);
-				connectedListAdapter.setItems(connectedDevices);
-				disconnectedListAdapter.setItems(disconnectedDevices);
+				connectedListAdapter.setItems(new ArrayList<>(connectedDevices));
+				disconnectedListAdapter.setItems(new ArrayList<>(disconnectedDevices));
 				contentView.setVisibility(View.VISIBLE);
 				emptyView.setVisibility(View.GONE);
 				boolean hasConnectedDevices = connectedDevices.size() > 0;
@@ -248,7 +248,7 @@ public class ExternalDevicesListFragment extends ExternalDevicesBaseFragment imp
 
 	@Override
 	public void onForget(@NonNull AbstractDevice<?> device) {
-		ForgetDeviceDialog.Companion.showInstance(requireActivity().getSupportFragmentManager(), this, device);
+		ForgetDeviceDialog.Companion.showInstance(requireActivity().getSupportFragmentManager(), this, device.getDeviceId());
 	}
 
 	@Override

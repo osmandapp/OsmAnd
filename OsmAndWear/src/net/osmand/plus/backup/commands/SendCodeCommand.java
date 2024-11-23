@@ -70,6 +70,7 @@ public class SendCodeCommand extends BackupCommand {
 		try {
 			json.putOpt("email", email);
 			json.putOpt("action", action);
+			json.putOpt("lang", getApp().getLocaleHelper().getLanguage());
 		} catch (JSONException e) {
 
 		}

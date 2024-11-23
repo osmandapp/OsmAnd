@@ -46,6 +46,7 @@ public class LanesWidget extends MapWidget {
 
 	private int cachedDist;
 	private int shadowRadius;
+	boolean specialPosition;
 
 	public LanesWidget(@NonNull MapActivity mapActivity) {
 		super(mapActivity, LANES);
@@ -71,7 +72,7 @@ public class LanesWidget extends MapWidget {
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
 		int imminent = -1;
 		int[] lanes = null;
-		int dist = 0;
+		int distance = 0;
 
 		boolean followingMode = routingHelper.isFollowingMode();
 		boolean deviatedFromRoute = routingHelper.isDeviatedFromRoute();
@@ -102,23 +103,38 @@ public class LanesWidget extends MapWidget {
 			if (turnType != null && !tooFar) {
 				lanes = directionInfo.directionInfo.getTurnType().getLanes();
 				imminent = directionInfo.imminent;
-				dist = directionInfo.distanceTo;
+				distance = directionInfo.distanceTo;
 			}
 		}
 
 		boolean visible = lanes != null && lanes.length > 0
 				&& !MapRouteInfoMenu.chooseRoutesVisible
 				&& !MapRouteInfoMenu.waypointsVisible
-				&& !MapRouteInfoMenu.followTrackVisible;
+				&& !MapRouteInfoMenu.followTrackVisible
+				&& !mapActivity.getWidgetsVisibilityHelper().shouldHideVerticalWidgets();
 		if (visible) {
-			updateLanes(lanes, imminent, dist);
+			updateLanes(lanes, imminent, distance);
 		}
 
-		AndroidUiHelper.updateVisibility(view, visible);
-		AndroidUiHelper.updateVisibility(lanesShadowText, visible && shadowRadius > 0);
+		updateVisibility(visible);
 	}
 
-	private void updateLanes(@NonNull int[] lanes, int imminent, int dist) {
+	@Override
+	public boolean updateVisibility(boolean visible) {
+		AndroidUiHelper.updateVisibility(lanesShadowText, visible && shadowRadius > 0);
+		boolean updatedVisibility = super.updateVisibility(visible);
+
+		if (specialPosition && updatedVisibility) {
+			ViewGroup specialContainer = getSpecialContainer();
+			specialContainer.removeAllViews();
+			if (visible) {
+				specialContainer.addView(view);
+			}
+		}
+		return updatedVisibility;
+	}
+
+	private void updateLanes(@NonNull int[] lanes, int imminent, int distance) {
 		boolean updateDrawable = !Arrays.equals(lanesDrawable.lanes, lanes) || (imminent == 0) != lanesDrawable.imminent;
 		if (updateDrawable) {
 			lanesDrawable.imminent = imminent == 0;
@@ -130,14 +146,16 @@ public class LanesWidget extends MapWidget {
 			lanesImage.invalidate();
 		}
 
-		if (cachedDist == 0 || Math.abs(cachedDist - dist) > DISTANCE_CHANGE_THRESHOLD) {
-			cachedDist = dist;
-			if (dist == 0) {
+		if (cachedDist == 0 || Math.abs(cachedDist - distance) > DISTANCE_CHANGE_THRESHOLD) {
+			cachedDist = distance;
+			if (distance == 0) {
 				lanesShadowText.setText("");
 				lanesText.setText("");
 			} else {
-				lanesShadowText.setText(OsmAndFormatter.getFormattedDistance(dist, app));
-				lanesText.setText(OsmAndFormatter.getFormattedDistance(dist, app));
+				String formattedDistance = OsmAndFormatter.getFormattedDistance(distance, app,
+						OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS);
+				lanesText.setText(formattedDistance);
+				lanesShadowText.setText(formattedDistance);
 			}
 			lanesShadowText.invalidate();
 			lanesText.invalidate();
@@ -160,8 +178,9 @@ public class LanesWidget extends MapWidget {
 		ViewGroup specialContainer = getSpecialContainer();
 		specialContainer.removeAllViews();
 
-		boolean specialPosition = followingWidgets.isEmpty();
+		specialPosition = followingWidgets.isEmpty();
 		if (specialPosition) {
+			specialContainer.removeAllViews();
 			specialContainer.addView(view);
 		} else {
 			container.addView(view);
@@ -172,7 +191,7 @@ public class LanesWidget extends MapWidget {
 	public void detachView(@NonNull WidgetsPanel widgetsPanel) {
 		super.detachView(widgetsPanel);
 		// Clear in case link to previous view of LanesWidget is lost
-		getSpecialContainer().removeAllViews();
+		getSpecialContainer().removeView(view);
 	}
 
 	@NonNull

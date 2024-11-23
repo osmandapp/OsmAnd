@@ -1,16 +1,6 @@
 package net.osmand.plus.utils;
 
-import static net.osmand.IndexConstants.DOWNLOAD_EXT;
-import static net.osmand.IndexConstants.GEOTIFF_DIR;
-import static net.osmand.IndexConstants.HEIGHTMAP_INDEX_DIR;
-import static net.osmand.IndexConstants.LIVE_INDEX_DIR;
-import static net.osmand.IndexConstants.MAPS_PATH;
-import static net.osmand.IndexConstants.NAUTICAL_INDEX_DIR;
-import static net.osmand.IndexConstants.ROADS_INDEX_DIR;
-import static net.osmand.IndexConstants.SRTM_INDEX_DIR;
-import static net.osmand.IndexConstants.TEMP_DIR;
-import static net.osmand.IndexConstants.WIKIVOYAGE_INDEX_DIR;
-import static net.osmand.IndexConstants.WIKI_INDEX_DIR;
+import static net.osmand.IndexConstants.*;
 import static net.osmand.plus.plugins.development.OsmandDevelopmentPlugin.DOWNLOAD_BUILD_NAME;
 import static net.osmand.util.Algorithms.XML_FILE_SIGNATURE;
 
@@ -22,14 +12,21 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dialogs.RenameFileBottomSheet;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.helpers.GpxDisplayHelper;
+import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.track.helpers.save.SaveGpxHelper;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -37,6 +34,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -138,15 +136,41 @@ public class FileUtils {
 	}
 
 	public static void updateRenamedGpx(@NonNull OsmandApplication app, @NonNull File src, @NonNull File dest) {
-		app.getGpxDbHelper().rename(src, dest);
-		app.getQuickActionRegistry().onRenameGpxFile(src.getAbsolutePath(), dest.getAbsolutePath());
+		GpxFile gpxFile = null;
+		app.getGpxDbHelper().rename(SharedUtil.kFile(src), SharedUtil.kFile(dest));
+		app.getMapButtonsHelper().onRenameGpxFile(src.getAbsolutePath(), dest.getAbsolutePath());
 
 		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
 		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(src.getAbsolutePath());
 		if (selectedGpxFile != null) {
-			selectedGpxFile.resetSplitProcessed();
-			selectedGpxFile.getGpxFile().path = dest.getAbsolutePath();
+			gpxFile = selectedGpxFile.getGpxFile();
+			gpxFile.setPath(dest.getAbsolutePath());
 			gpxSelectionHelper.updateSelectedGpxFile(selectedGpxFile);
+			GpxDisplayHelper gpxDisplayHelper = app.getGpxDisplayHelper();
+			gpxDisplayHelper.updateDisplayGroupsNames(selectedGpxFile);
+		}
+		updateGpxMetadata(gpxFile, dest);
+	}
+
+	private static void updateGpxMetadata(@Nullable GpxFile gpxFile, @NonNull File dest) {
+		String name = Algorithms.getFileNameWithoutExtension(dest.getName());
+		if (gpxFile != null) {
+			updateGpxMetadata(gpxFile, name);
+		} else {
+			GpxFileLoaderTask.loadGpxFile(dest, null, gpx -> {
+				updateGpxMetadata(gpx, name);
+				return true;
+			});
+		}
+	}
+
+	private static void updateGpxMetadata(@NonNull GpxFile gpxFile, @NonNull String name) {
+		if (gpxFile.isOsmAndOrigin()) {
+			Metadata metadata = gpxFile.getMetadata();
+			if (!Algorithms.stringsEqual(name, metadata.getName())) {
+				metadata.setName(name);
+				SaveGpxHelper.saveGpx(gpxFile);
+			}
 		}
 	}
 
@@ -173,7 +197,8 @@ public class FileUtils {
 						.hideFromMap().syncGroup().saveSelection();
 				helper.selectGpxFile(selected.getGpxFile(), params);
 			}
-			app.getGpxDbHelper().remove(file);
+			app.getGpxDbHelper().remove(SharedUtil.kFile(file));
+			app.getSmartFolderHelper().onGpxFileDeleted(SharedUtil.kFile(file));
 			return true;
 		}
 		return false;
@@ -281,12 +306,31 @@ public class FileUtils {
 		return path != null && path.startsWith(getTempDir(app).getAbsolutePath());
 	}
 
-	public static void collectDirFiles(@NonNull File file, @NonNull List<File> list) {
+	@NonNull
+	public static List<File> collectFiles(@NonNull File dir, boolean includeDirs) {
+		List<File> list = new ArrayList<>();
+		if (dir.isDirectory()) {
+			File[] files = dir.listFiles();
+			if (files != null) {
+				for (File file : files) {
+					collectFiles(file, list, includeDirs);
+				}
+			}
+		} else {
+			list.add(dir);
+		}
+		return list;
+	}
+
+	public static void collectFiles(@NonNull File file, @NonNull List<File> list, boolean includeDirs) {
 		if (file.isDirectory()) {
+			if (includeDirs) {
+				list.add(file);
+			}
 			File[] files = file.listFiles();
 			if (files != null) {
 				for (File subfolderFile : files) {
-					collectDirFiles(subfolderFile, list);
+					collectFiles(subfolderFile, list, includeDirs);
 				}
 			}
 		} else {
@@ -303,7 +347,7 @@ public class FileUtils {
 
 	public static void removeFilesWithExtensions(@NonNull File dir, boolean withSubdirs, @NonNull String... extensions) {
 		File[] files = dir.listFiles(pathname -> pathname.isDirectory()
-				? withSubdirs : Algorithms.endsWithAny(pathname.getName(), extensions));
+				? withSubdirs : CollectionUtils.endsWithAny(pathname.getName(), extensions));
 		if (files == null) {
 			return;
 		}
@@ -341,8 +385,22 @@ public class FileUtils {
 		FileUtils.removeFilesWithExtensions(app.getAppPath(NAUTICAL_INDEX_DIR), false, DOWNLOAD_EXT);
 		FileUtils.removeFilesWithExtensions(app.getAppPath(WIKI_INDEX_DIR), false, DOWNLOAD_EXT);
 		FileUtils.removeFilesWithExtensions(app.getAppPath(WIKIVOYAGE_INDEX_DIR), false, DOWNLOAD_EXT);
-		FileUtils.removeFilesWithExtensions(app.getAppPath(HEIGHTMAP_INDEX_DIR), false, DOWNLOAD_EXT);
 		FileUtils.removeFilesWithExtensions(app.getAppPath(GEOTIFF_DIR), false, DOWNLOAD_EXT);
+	}
+
+	public static boolean move(@NonNull File from, @NonNull File to) {
+		File parent = to.getParentFile();
+		if (parent != null && !parent.exists()) {
+			parent.mkdirs();
+		}
+		return from.renameTo(to);
+	}
+
+	@NonNull
+	public static File getBackupFileForCustomAppMode(@NonNull OsmandApplication app, @NonNull String appModeKey) {
+		String fileName = appModeKey + OSMAND_SETTINGS_FILE_EXT;
+		File backupDir = FileUtils.getExistingDir(app, BACKUP_INDEX_DIR);
+		return new File(backupDir, fileName);
 	}
 
 	public interface RenameCallback {

@@ -181,16 +181,16 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			MapLayers layers = mapActivity.getMapLayers();
 			if (settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.UNDERLAY &&
 					underlayLayer.getMap() != null || underlayLayer.getMapTileAdapter() != null) {
-				layers.getMapControlsLayer().showTransparencyBar(settings.MAP_TRANSPARENCY);
+				layers.getMapControlsLayer().getMapTransparencyHelper().showTransparencyBar(settings.MAP_TRANSPARENCY);
 			} else if (settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.OVERLAY &&
 					overlayLayer.getMap() != null || overlayLayer.getMapTileAdapter() != null) {
 				if (settings.SHOW_MAP_LAYER_PARAMETER.get()) {
-					layers.getMapControlsLayer().showParameterBar(overlayLayer);
+					layers.getMapControlsLayer().getMapTransparencyHelper().showParameterBar(overlayLayer);
 				} else {
-					layers.getMapControlsLayer().showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY);
+					layers.getMapControlsLayer().getMapTransparencyHelper().showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY);
 				}
 			} else {
-				layers.getMapControlsLayer().hideTransparencyBar();
+				layers.getMapControlsLayer().getMapTransparencyHelper().hideTransparencyBar();
 			}
 		}
 		app.getOsmandMap().getMapLayers().updateMapSource(mapView, settingsToWarnAboutMap);
@@ -625,8 +625,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		}
 		MapLayers mapLayers = mapActivity.getMapLayers();
 		ITileSource map = layer.getMap();
-		LayerTransparencySeekbarMode currentMapTypeSeekbarMode = type ==
-				OsmandRasterMapsPlugin.RasterMapType.OVERLAY
+		LayerTransparencySeekbarMode currentMapTypeSeekbarMode = type == RasterMapType.OVERLAY
 				? LayerTransparencySeekbarMode.OVERLAY
 				: LayerTransparencySeekbarMode.UNDERLAY;
 		if (map != null) {
@@ -638,7 +637,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			// hide seekbar
 			if (currentMapTypeSeekbarMode == settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get()) {
 				settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(LayerTransparencySeekbarMode.UNDEFINED);
-				mapLayers.getMapControlsLayer().hideTransparencyBar();
+				mapLayers.getMapControlsLayer().getMapTransparencyHelper().hideTransparencyBar();
 			}
 		} else {
 			settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(currentMapTypeSeekbarMode);

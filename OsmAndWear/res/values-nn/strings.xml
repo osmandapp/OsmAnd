@@ -417,7 +417,6 @@
     <string name="layer_map_appearance">Konfigurer skjerm</string>
     <string name="address_search_desc">Adressesøk</string>
     <string name="open_till">Open til</string>
-    <string name="rendering_attr_alpineHiking_name">Vanskegradsklassifisering</string>
     <string name="simulate_your_location">Simuler posisjonen din</string>
     <string name="map_widget_time">Tid att</string>
     <string name="simulation_constant_mode_title">Fastsett fart</string>
@@ -430,7 +429,6 @@
     <string name="map_widget_next_turn">Neste sving</string>
     <string name="map_widget_next_turn_small">Neste sving (liten)</string>
     <string name="day_night_info">Dag/natt-info</string>
-    <string name="quick_action_remove_next_destination">Slett neste destinasjonspunkt</string>
     <string name="error_avoid_specific_road">Inga omkøyring funne</string>
     <string name="reset_plugin_to_default">Tilbakestill programtilleggsinnstillingane til standard</string>
     <string name="replace_destination_point">Erstatt reisemålet</string>

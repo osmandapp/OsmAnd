@@ -1,17 +1,12 @@
 package net.osmand.plus.track.cards;
 
-import android.widget.CompoundButton;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.track.TrackDrawInfo;
 
-public class ShowStartFinishCard extends BaseCard {
+public class ShowStartFinishCard extends BaseSwitchCard {
 
 	private final TrackDrawInfo trackDrawInfo;
 
@@ -21,25 +16,17 @@ public class ShowStartFinishCard extends BaseCard {
 	}
 
 	@Override
-	public int getCardLayoutId() {
-		return R.layout.bottom_sheet_item_with_switch;
+	int getTitleId() {
+		return R.string.track_show_start_finish_icons;
 	}
 
 	@Override
-	protected void updateContent() {
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.icon), false);
+	protected boolean getChecked() {
+		return trackDrawInfo.isShowStartFinish();
+	}
 
-		TextView titleView = view.findViewById(R.id.title);
-		titleView.setText(R.string.track_show_start_finish_icons);
-
-		CompoundButton compoundButton = view.findViewById(R.id.compound_button);
-		compoundButton.setChecked(trackDrawInfo.isShowStartFinish());
-
-		view.setOnClickListener(v -> {
-			boolean checked = !compoundButton.isChecked();
-			compoundButton.setChecked(checked);
-			trackDrawInfo.setShowStartFinish(checked);
-			notifyCardPressed();
-		});
+	@Override
+	protected void setChecked(boolean checked) {
+		trackDrawInfo.setShowStartFinish(checked);
 	}
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/point_edit_layout"
 	android:layout_width="match_parent"
@@ -23,9 +22,9 @@
 			android:background="?attr/appbar_and_list_background_color"
 			app:contentInsetStartWithNavigation="@dimen/toolbar_inset_start_with_navigation"
 			app:titleTextAppearance="@style/ToolbarTitle"
-			osmand:titleTextColor="?android:textColorPrimary"
-			osmand:subtitleTextColor="?android:textColorPrimary"
-			osmand:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+			app:subtitleTextColor="?android:textColorPrimary"
+			app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+			app:titleTextColor="?android:textColorPrimary">
 
 			<ImageButton
 				android:id="@+id/toolbar_action"
@@ -59,11 +58,33 @@
 				<FrameLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_marginLeft="@dimen/content_padding"
-					android:layout_marginRight="@dimen/content_padding"
+					android:layout_marginStart="@dimen/content_padding"
 					android:layout_marginEnd="@dimen/content_padding"
-					android:layout_marginStart="@dimen/content_padding">
+					android:layout_marginBottom="@dimen/content_padding_small">
 
+					<androidx.appcompat.widget.AppCompatImageView
+						android:id="@+id/image"
+						android:layout_width="match_parent"
+						android:layout_height="@dimen/point_image_height"
+						android:background="@drawable/rounded_background_4dp" />
+
+					<androidx.appcompat.widget.AppCompatImageView
+						android:id="@+id/name_icon"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center"
+						android:contentDescription="@string/icon"
+						tools:srcCompat="@drawable/ic_action_home_dark" />
+
+				</FrameLayout>
+
+				<FrameLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="@dimen/content_padding"
+					android:layout_marginLeft="@dimen/content_padding"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:layout_marginRight="@dimen/content_padding">
 
 					<LinearLayout
 						android:layout_width="match_parent"
@@ -72,14 +93,14 @@
 						android:orientation="horizontal">
 
 						<com.google.android.material.textfield.TextInputLayout
-
 							android:id="@+id/name_caption"
 							style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
 							android:layout_width="0dp"
 							android:layout_height="wrap_content"
 							android:layout_weight="1"
 							android:hint="@string/shared_string_name"
-							app:boxBackgroundColor="@color/material_text_input_layout_bg">
+							app:boxBackgroundColor="@color/material_text_input_layout_bg"
+							app:endIconMode="clear_text">
 
 							<com.google.android.material.textfield.TextInputEditText
 								android:id="@+id/name_edit"
@@ -97,21 +118,12 @@
 								android:paddingEnd="@dimen/content_padding_small"
 								android:paddingRight="@dimen/content_padding_small"
 								android:scrollHorizontally="false"
+								android:selectAllOnFocus="true"
 								android:textSize="@dimen/default_list_text_size" />
 
 						</com.google.android.material.textfield.TextInputLayout>
 
 					</LinearLayout>
-
-					<androidx.appcompat.widget.AppCompatImageView
-						android:id="@+id/name_icon"
-						android:layout_width="@dimen/favorites_icon_size"
-						android:layout_height="@dimen/favorites_icon_size"
-						android:layout_gravity="end"
-						android:layout_margin="@dimen/content_padding_small"
-						android:contentDescription="@string/icon"
-						android:padding="@dimen/favorites_icon_padding"
-						app:srcCompat="@drawable/ic_action_home_dark" />
 
 				</FrameLayout>
 
@@ -128,14 +140,14 @@
 						style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
+						android:layout_marginStart="@dimen/content_padding"
 						android:layout_marginLeft="@dimen/content_padding"
+						android:layout_marginEnd="@dimen/content_padding"
 						android:layout_marginRight="@dimen/content_padding"
 						android:layout_weight="1"
 						android:hint="@string/shared_string_address"
 						app:boxBackgroundColor="@color/material_text_input_layout_bg"
-						app:hintAnimationEnabled="false"
-						android:layout_marginEnd="@dimen/content_padding"
-						android:layout_marginStart="@dimen/content_padding">
+						app:hintAnimationEnabled="false">
 
 						<com.google.android.material.textfield.TextInputEditText
 							android:id="@+id/address_edit"
@@ -152,6 +164,7 @@
 							android:textSize="@dimen/default_list_text_size" />
 
 					</com.google.android.material.textfield.TextInputLayout>
+
 				</LinearLayout>
 
 				<LinearLayout
@@ -181,7 +194,7 @@
 						android:paddingBottom="@dimen/content_padding_half"
 						android:text="@string/add_address"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_medium"
+						app:typefaceWeight="medium"
 						tools:text="@string/add_address" />
 
 					<ImageButton
@@ -202,11 +215,11 @@
 				<View
 					android:layout_width="match_parent"
 					android:layout_height="1dp"
-					android:layout_marginLeft="@dimen/content_padding"
-					android:layout_marginRight="@dimen/content_padding"
-					android:background="?attr/dashboard_divider"
 					android:layout_marginStart="@dimen/content_padding"
-					android:layout_marginEnd="@dimen/content_padding" />
+					android:layout_marginLeft="@dimen/content_padding"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:layout_marginRight="@dimen/content_padding"
+					android:background="?attr/dashboard_divider" />
 
 				<LinearLayout
 					android:id="@+id/description"
@@ -221,14 +234,14 @@
 						style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
+						android:layout_marginStart="@dimen/content_padding"
 						android:layout_marginLeft="@dimen/content_padding"
+						android:layout_marginEnd="@dimen/content_padding"
 						android:layout_marginRight="@dimen/content_padding"
 						android:layout_weight="1"
 						android:hint="@string/shared_string_description"
 						app:boxBackgroundColor="@color/material_text_input_layout_bg"
-						app:hintAnimationEnabled="false"
-						android:layout_marginStart="@dimen/content_padding"
-						android:layout_marginEnd="@dimen/content_padding">
+						app:hintAnimationEnabled="false">
 
 						<com.google.android.material.textfield.TextInputEditText
 							android:id="@+id/description_edit"
@@ -241,9 +254,10 @@
 							android:paddingLeft="@dimen/content_padding_small"
 							android:paddingEnd="@dimen/content_padding_small"
 							android:paddingRight="@dimen/content_padding_small"
-							android:textSize="@dimen/default_list_text_size"/>
+							android:textSize="@dimen/default_list_text_size" />
 
 					</com.google.android.material.textfield.TextInputLayout>
+
 				</LinearLayout>
 
 				<net.osmand.plus.widgets.TextViewEx
@@ -262,7 +276,7 @@
 					android:paddingRight="@dimen/content_padding_half"
 					android:text="@string/add_description"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium"
+					app:typefaceWeight="medium"
 					tools:text="@string/add_description" />
 
 				<View
@@ -288,16 +302,16 @@
 							android:layout_height="wrap_content"
 							android:layout_weight="1"
 							android:letterSpacing="@dimen/description_letter_spacing"
+							android:paddingStart="@dimen/content_padding"
 							android:paddingLeft="@dimen/content_padding"
 							android:paddingTop="@dimen/context_menu_first_line_top_margin"
+							android:paddingEnd="@dimen/content_padding"
 							android:paddingRight="@dimen/content_padding"
 							android:paddingBottom="@dimen/context_menu_first_line_top_margin"
 							android:text="@string/select_group"
 							android:textColor="?android:textColorSecondary"
 							android:textSize="@dimen/default_desc_text_size"
-							osmand:typeface="@string/font_roboto_medium"
-							android:paddingEnd="@dimen/content_padding"
-							android:paddingStart="@dimen/content_padding" />
+							app:typefaceWeight="medium" />
 
 						<LinearLayout
 							android:id="@+id/group_list_button"
@@ -318,7 +332,7 @@
 								android:text="@string/shared_string_list"
 								android:textColor="@color/preference_category_title"
 								android:textSize="@dimen/text_button_text_size"
-								osmand:typeface="@string/font_roboto_medium"
+								app:typefaceWeight="medium"
 								tools:ignore="UnusedAttribute" />
 
 							<androidx.appcompat.widget.AppCompatImageView
@@ -334,6 +348,7 @@
 								app:srcCompat="@drawable/ic_action_folder" />
 
 						</LinearLayout>
+
 					</LinearLayout>
 
 					<LinearLayout
@@ -357,6 +372,7 @@
 							tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 							tools:listitem="@layout/point_editor_group_select_item"
 							tools:orientation="horizontal" />
+
 					</LinearLayout>
 
 					<net.osmand.plus.widgets.TextViewEx
@@ -371,7 +387,8 @@
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
 						android:visibility="gone"
-						osmand:typeface="@string/font_roboto_regular" />
+						android:textStyle="normal" />
+
 				</LinearLayout>
 
 				<View
@@ -379,26 +396,10 @@
 					android:layout_height="1dp"
 					android:background="?attr/dashboard_divider" />
 
-				<net.osmand.plus.widgets.TextViewEx
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:letterSpacing="@dimen/description_letter_spacing"
-					android:paddingLeft="@dimen/content_padding"
-					android:paddingTop="@dimen/context_menu_first_line_top_margin"
-					android:paddingRight="@dimen/content_padding"
-					android:text="@string/select_icon_profile_dialog_title"
-					android:textColor="?android:textColorSecondary"
-					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium"
-					android:paddingEnd="@dimen/content_padding"
-					android:paddingStart="@dimen/content_padding" />
-
 				<FrameLayout
 					android:id="@+id/icons_card_container"
 					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="@dimen/content_padding_small"
-					android:layout_marginBottom="@dimen/content_padding_half" />
+					android:layout_height="wrap_content" />
 
 				<View
 					android:layout_width="match_parent"
@@ -415,16 +416,16 @@
 						android:layout_height="wrap_content"
 						android:layout_weight="1"
 						android:letterSpacing="@dimen/description_letter_spacing"
+						android:paddingStart="@dimen/content_padding"
 						android:paddingLeft="@dimen/content_padding"
 						android:paddingTop="@dimen/context_menu_first_line_top_margin"
+						android:paddingEnd="@dimen/content_padding"
 						android:paddingRight="@dimen/content_padding"
 						android:paddingBottom="@dimen/context_menu_first_line_top_margin"
 						android:text="@string/select_color"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_medium"
-						android:paddingStart="@dimen/content_padding"
-						android:paddingEnd="@dimen/content_padding" />
+						app:typefaceWeight="medium" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/color_name"
@@ -432,6 +433,7 @@
 						android:layout_height="wrap_content"
 						android:gravity="end"
 						android:letterSpacing="@dimen/description_letter_spacing"
+						android:paddingHorizontal="@dimen/content_padding"
 						android:paddingLeft="@dimen/content_padding"
 						android:paddingTop="@dimen/context_menu_first_line_top_margin"
 						android:paddingRight="@dimen/content_padding"
@@ -439,17 +441,14 @@
 						android:text="@string/select_color"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_medium"
-						android:paddingStart="@dimen/content_padding"
-						android:paddingEnd="@dimen/content_padding" />
+						app:typefaceWeight="medium" />
+
 				</LinearLayout>
 
 				<FrameLayout
 					android:id="@+id/colors_card_container"
 					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
-					android:layout_marginBottom="@dimen/content_padding_half" />
+					android:layout_height="wrap_content" />
 
 				<View
 					android:layout_width="match_parent"
@@ -466,16 +465,16 @@
 						android:layout_height="wrap_content"
 						android:layout_weight="1"
 						android:letterSpacing="@dimen/description_letter_spacing"
+						android:paddingStart="@dimen/content_padding"
 						android:paddingLeft="@dimen/content_padding"
 						android:paddingTop="@dimen/context_menu_first_line_top_margin"
+						android:paddingEnd="@dimen/content_padding"
 						android:paddingRight="@dimen/content_padding"
 						android:paddingBottom="@dimen/context_menu_first_line_top_margin"
 						android:text="@string/select_shape"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_medium"
-						android:paddingEnd="@dimen/content_padding"
-						android:paddingStart="@dimen/content_padding" />
+						app:typefaceWeight="medium" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/shape_name"
@@ -483,16 +482,17 @@
 						android:layout_height="wrap_content"
 						android:gravity="end"
 						android:letterSpacing="@dimen/description_letter_spacing"
+						android:paddingStart="@dimen/content_padding"
 						android:paddingLeft="@dimen/content_padding"
 						android:paddingTop="@dimen/context_menu_first_line_top_margin"
+						android:paddingEnd="@dimen/content_padding"
 						android:paddingRight="@dimen/content_padding"
 						android:paddingBottom="@dimen/context_menu_first_line_top_margin"
 						android:text="@string/select_shape"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:typeface="@string/font_roboto_medium"
-						android:paddingStart="@dimen/content_padding"
-						android:paddingEnd="@dimen/content_padding" />
+						app:typefaceWeight="medium" />
+
 				</LinearLayout>
 
 				<FrameLayout
@@ -593,6 +593,7 @@
 						android:text="@string/shared_string_delete"
 						android:textAppearance="@style/TextAppearance.ListItemCategoryTitle"
 						tools:text="@string/shared_string_delete" />
+
 				</LinearLayout>
 
 			</LinearLayout>
@@ -619,6 +620,7 @@
 				android:layout_height="@dimen/dialog_button_ex_height" />
 
 		</LinearLayout>
+
 	</LinearLayout>
 
 </FrameLayout>

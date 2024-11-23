@@ -31,7 +31,7 @@
 			android:text="@string/route_info"
 			android:textColor="?android:textColorSecondary"
 			android:translationX="25dp"
-			app:typeface="@string/font_roboto_medium" />
+			app:typefaceWeight="medium" />
 
 	</LinearLayout>
 

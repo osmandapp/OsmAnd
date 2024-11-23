@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import net.osmand.OnCompleteCallback;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.activities.MapActivity;
@@ -23,6 +24,7 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 	private LatLon latLon;
 	private final LinkedList<MenuObject> objects = new LinkedList<>();
 	private final Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
+	private final OnCompleteCallback onSearchAddressDone = this::updateDialogContent;
 
 	public MapMultiSelectionMenu(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
@@ -56,21 +58,11 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 		for (Map.Entry<Object, IContextMenuProvider> e : selectedObjects.entrySet()) {
 			Object selectedObj = e.getKey();
 			IContextMenuProvider contextObject = e.getValue();
-			LatLon ll = null;
-			PointDescription pointDescription = null;
 
-			if (contextObject != null) {
-				ll = contextObject.getObjectLocation(selectedObj);
-				pointDescription = contextObject.getObjectName(selectedObj);
+			MenuObject menuObject = MenuObjectUtils.createMenuObject(selectedObj, contextObject, latLon, getMapActivity());
+			if (menuObject.needStreetName()) {
+				menuObject.setOnSearchAddressDoneCallback(onSearchAddressDone);
 			}
-			if (ll == null) {
-				ll = latLon;
-			}
-			if (pointDescription == null) {
-				pointDescription = new PointDescription(latLon.getLatitude(), latLon.getLongitude());
-			}
-
-			MenuObject menuObject = new MenuObject(ll, pointDescription, selectedObj, getMapActivity());
 			objects.add(menuObject);
 
 			if (contextObject instanceof ContextMenuLayer.IContextMenuProviderSelection) {
@@ -156,5 +148,12 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 			}
 		}
 		selectedObjects.clear();
+	}
+
+	private void updateDialogContent() {
+		Fragment fragmentByTag = getFragmentByTag();
+		if (fragmentByTag instanceof MapMultiSelectionMenuFragment fragment) {
+			fragment.updateContent();
+		}
 	}
 }

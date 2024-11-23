@@ -8,6 +8,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.poi.PoiFilterUtils.AmenityNameFilter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
@@ -27,35 +28,32 @@ import java.util.Locale;
 
 public class NominatimPoiFilter extends PoiUIFilter {
 
-	private static final String FILTER_ID = "name_finder"; //$NON-NLS-1$
 	private static final Log log = PlatformUtil.getLog(NominatimPoiFilter.class);
-	private static final int MIN_SEARCH_DISTANCE_INDEX = 4;
+
+	private static final String FILTER_ID = "name_finder";
+	private static final String NOMINATIM_API = "https://nominatim.openstreetmap.org/search";
+	private static final int MIN_SEARCH_DISTANCE_ON_MAP = 20000;
 	private static final int LIMIT = 300;
 
-	private String lastError = ""; //$NON-NLS-1$
-	private final boolean addressQuery;
+	private String lastError = "";
+	private final boolean bboxSearch;
 	
-	public NominatimPoiFilter(OsmandApplication application, boolean addressQuery) {
+	public NominatimPoiFilter(OsmandApplication application, boolean noBbox) {
 		super(application);
-		this.addressQuery = addressQuery;
-		this.name = application.getString(R.string.poi_filter_nominatim);
-		if (addressQuery) {
-			this.name += " - " + application.getString(R.string.shared_string_address); 
-		} else {
-			this.name += " - " + application.getString(R.string.shared_string_places);
-		}
-		if (addressQuery) {
+		this.bboxSearch = !noBbox;
+		this.name = app.getString(R.string.poi_filter_nominatim);
+		if (!bboxSearch) {
+			this.name += " - " + app.getString(R.string.shared_string_address);
 			this.distanceToSearchValues = new double[] {500, 10000};
+			this.filterId = FILTER_ID + "_address";
 		} else {
+			this.name += " - " + app.getString(R.string.shared_string_places);
 			this.distanceToSearchValues = new double[] {1, 2, 5, 10, 20, 100, 500, 10000};
+			this.filterId = FILTER_ID + "_places";
 		}
-		this.filterId = FILTER_ID + (addressQuery ? "_address" : "_places");
 	}
 	
-	public boolean isPlacesQuery() {
-		return !addressQuery;
-	}
-	
+
 	@Override
 	public boolean isAutomaticallyIncreaseSearch() {
 		return false;
@@ -63,26 +61,15 @@ public class NominatimPoiFilter extends PoiUIFilter {
 	
 	// do nothing test jackdaw lane, oxford"
 	@Override
-	public AmenityNameFilter getNameFilter(String filter) {
-		return new AmenityNameFilter() {
-
-			@Override
-			public boolean accept(Amenity a) {
-				return true;
-			}
-		};
+	public AmenityNameFilter getNameFilter() {
+		return a -> true;
 	}
 	
 	@Override
 	protected List<Amenity> searchAmenitiesInternal(double lat, double lon, double topLatitude,
-			double bottomLatitude, double leftLongitude, double rightLongitude, int zoom, ResultMatcher<Amenity> matcher) {
-		int deviceApiVersion = android.os.Build.VERSION.SDK_INT;
-		String NOMINATIM_API;
-		if (deviceApiVersion >= android.os.Build.VERSION_CODES.GINGERBREAD) {
-			NOMINATIM_API = "https://nominatim.openstreetmap.org/search";
-		} else {
-			NOMINATIM_API = "http://nominatim.openstreetmap.org/search";
-		}
+	                                                double bottomLatitude, double leftLongitude,
+	                                                double rightLongitude, int zoom,
+	                                                ResultMatcher<Amenity> matcher) {
 		currentSearchResult = new ArrayList<>();
 		if (Algorithms.isEmpty(getFilterByName())) {
 			return currentSearchResult;
@@ -90,24 +77,25 @@ public class NominatimPoiFilter extends PoiUIFilter {
 
 		double baseDistY = MapUtils.getDistance(lat, lon, lat - 1, lon);
 		double baseDistX = MapUtils.getDistance(lat, lon, lat, lon - 1);
-		double distance = distanceToSearchValues[MIN_SEARCH_DISTANCE_INDEX] * 1000;
+		double distance = MIN_SEARCH_DISTANCE_ON_MAP;
 		topLatitude = Math.max(topLatitude, Math.min(lat + (distance / baseDistY), 84.));
 		bottomLatitude = Math.min(bottomLatitude, Math.max(lat - (distance / baseDistY), -84.));
 		leftLongitude = Math.min(leftLongitude, Math.max(lon - (distance / baseDistX), -180));
 		rightLongitude = Math.max(rightLongitude, Math.min(lon + (distance / baseDistX), 180));
 
-		String viewbox = "viewboxlbrt="+((float) leftLongitude)+","+((float) bottomLatitude)+","+((float) rightLongitude)+","+((float) topLatitude);
+		String viewbox = "viewboxlbrt=" + ((float) leftLongitude) + "," + ((float) bottomLatitude)
+				+ "," + ((float) rightLongitude) + "," + ((float) topLatitude);
 		try {
 			lastError = "";
-			String urlq ;
-			if(addressQuery) {
-				urlq = NOMINATIM_API + "?format=xml&addressdetails=0&accept-language="+ Locale.getDefault().getLanguage() 
-						+ "&q=" + URLEncoder.encode(getFilterByName());	
-			} else {
-				urlq = NOMINATIM_API + "?format=xml&addressdetails=1&limit=" + LIMIT
-						+ "&bounded=1&" + viewbox + "&q=" + URLEncoder.encode(getFilterByName());
+			String urlq = NOMINATIM_API + "?format=xml" +
+					"&addressdetails=0&accept-language=" + Locale.getDefault().getLanguage() +
+					"&q=" + URLEncoder.encode(getFilterByName()) +
+					"&addressdetails=1" + // nclude a breakdown of the address into elements
+					"&limit=" + LIMIT;
+			if (bboxSearch) {
+				urlq += "&bounded=1&" + viewbox;
 			}
-			log.info(urlq);
+			log.info("Online search: " + urlq);
 			URLConnection connection = NetworkUtils.getHttpURLConnection(urlq); //$NON-NLS-1$
 			InputStream stream = connection.getInputStream();
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
@@ -123,7 +111,7 @@ public class NominatimPoiFilter extends PoiUIFilter {
 						if (err != null && err.length() > 0) {
 							lastError = err;
 							stream.close();
-							return currentSearchResult;
+							break;
 						}
 					}
 					if (parser.getName().equals("place")) { //$NON-NLS-1$
@@ -180,6 +168,4 @@ public class NominatimPoiFilter extends PoiUIFilter {
 	public String getLastError() {
 		return lastError;
 	}
-	
-
 }

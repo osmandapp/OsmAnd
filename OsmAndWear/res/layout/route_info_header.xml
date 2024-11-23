@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
 				android:translationX="25dp"
-				osmand:srcCompat="@drawable/ic_action_route_distance" />
+				app:srcCompat="@drawable/ic_action_route_distance" />
 
 			<LinearLayout
 				android:layout_width="wrap_content"
@@ -48,7 +48,7 @@
 					android:background="@null"
 					android:textColor="@color/text_color_secondary_light"
 					android:textSize="@dimen/default_list_text_size"
-					osmand:typeface="@string/font_roboto_medium"
+					app:typefaceWeight="medium"
 					tools:text="26 km" />
 
 				<TextView
@@ -78,7 +78,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
-				osmand:srcCompat="@drawable/ic_action_time_span" />
+				app:srcCompat="@drawable/ic_action_time_span" />
 
 			<LinearLayout
 				android:layout_width="wrap_content"
@@ -94,7 +94,7 @@
 					android:background="@null"
 					android:textColor="@color/text_color_secondary_light"
 					android:textSize="@dimen/default_list_text_size"
-					osmand:typeface="@string/font_roboto_medium"
+					app:typefaceWeight="medium"
 					tools:text="20 min" />
 
 				<TextView
@@ -117,7 +117,7 @@
 		android:layout_height="wrap_content"
 		android:orientation="vertical">
 
-		<com.github.mikephil.charting.charts.LineChart
+		<com.github.mikephil.charting.charts.ElevationChart
 			android:id="@+id/chart"
 			android:layout_width="match_parent"
 			android:layout_height="120dp"
@@ -158,7 +158,7 @@
 				android:text="@string/rendering_category_details"
 				android:textColor="?attr/active_color_basic"
 				android:textSize="@dimen/text_button_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				app:typefaceWeight="medium"
 				tools:ignore="UnusedAttribute" />
 
 		</FrameLayout>
@@ -186,7 +186,7 @@
 				android:text="@string/shared_string_control_start"
 				android:textColor="@color/card_and_list_background_light"
 				android:textSize="@dimen/text_button_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				app:typefaceWeight="medium"
 				tools:ignore="UnusedAttribute" />
 
 		</FrameLayout>
@@ -214,7 +214,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
-				osmand:srcCompat="@drawable/ic_action_altitude_average" />
+				app:srcCompat="@drawable/ic_action_altitude_average" />
 
 			<LinearLayout
 				android:layout_width="wrap_content"
@@ -230,7 +230,7 @@
 					android:background="@null"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium"
+					app:typefaceWeight="medium"
 					tools:text="40 m" />
 
 				<TextView
@@ -259,7 +259,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
-				osmand:srcCompat="@drawable/ic_action_altitude_average" />
+				app:srcCompat="@drawable/ic_action_altitude_average" />
 
 			<LinearLayout
 				android:layout_width="wrap_content"
@@ -275,7 +275,7 @@
 					android:background="@null"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium"
+					app:typefaceWeight="medium"
 					tools:text="30m - 53m" />
 
 				<TextView
@@ -360,7 +360,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
-				osmand:srcCompat="@drawable/ic_action_altitude_ascent" />
+				app:srcCompat="@drawable/ic_action_altitude_ascent" />
 
 			<LinearLayout
 				android:layout_width="wrap_content"
@@ -376,7 +376,7 @@
 					android:background="@null"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium"
+					app:typefaceWeight="medium"
 					tools:text="174" />
 
 				<TextView
@@ -405,7 +405,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
-				osmand:srcCompat="@drawable/ic_action_altitude_descent" />
+				app:srcCompat="@drawable/ic_action_altitude_descent" />
 
 			<LinearLayout
 				android:layout_width="wrap_content"
@@ -421,7 +421,7 @@
 					android:background="@null"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_medium"
+					app:typefaceWeight="medium"
 					tools:text="164" />
 
 				<TextView
@@ -470,7 +470,7 @@
 				android:text="@string/analyze_on_map"
 				android:textColor="?attr/active_color_basic"
 				android:textSize="@dimen/text_button_text_size"
-				osmand:typeface="@string/font_roboto_medium"
+				app:typefaceWeight="medium"
 				tools:ignore="UnusedAttribute" />
 
 		</FrameLayout>

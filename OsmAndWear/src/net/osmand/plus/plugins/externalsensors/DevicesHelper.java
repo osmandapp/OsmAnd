@@ -35,12 +35,12 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.externalsensors.DevicesSettingsCollection.DevicePreferencesListener;
+import net.osmand.plus.plugins.externalsensors.DevicesSettingsCollection.DeviceSettings;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice.DeviceListener;
 import net.osmand.plus.plugins.externalsensors.devices.DeviceConnectionResult;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntAbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikePowerDevice;
-import net.osmand.plus.plugins.externalsensors.DevicesSettingsCollection.DeviceSettings;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikeSpeedCadenceDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikeSpeedDistanceDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntHeartRateDevice;
@@ -56,6 +56,7 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableP
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorDataField;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.BLEUtils;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.util.Algorithms;
 
@@ -93,7 +94,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	private boolean installAntPluginAsked;
 	private BluetoothAdapter bluetoothAdapter;
 	private BluetoothLeScanner bleScanner;
-	private ExternalSensorsPlugin externalSensorsPlugin;
+	private final ExternalSensorsPlugin externalSensorsPlugin;
 
 	DevicesHelper(@NonNull OsmandApplication app, @NonNull ExternalSensorsPlugin plugin) {
 		this.app = app;
@@ -236,7 +237,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 				return;
 			}
 			ScanRecord scanRecord = result.getScanRecord();
-			if (isSupportedBleDevice(scanRecord)) {
+			if (scanRecord != null && isSupportedBleDevice(scanRecord)) {
 				String address = result.getDevice().getAddress();
 				DevicesSettingsCollection.DeviceSettings settings = devicesSettingsCollection.getDeviceSettings(address);
 				String deviceName;
@@ -266,7 +267,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		}
 	};
 
-	private boolean isSupportedBleDevice(ScanRecord scanRecord) {
+	private boolean isSupportedBleDevice(@NonNull ScanRecord scanRecord) {
 		List<ParcelUuid> uuids = scanRecord.getServiceUuids();
 		if (uuids != null) {
 			for (ParcelUuid uuid : uuids) {
@@ -379,7 +380,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	}
 
 	@Nullable
-	AbstractDevice<?> getDevice(@NonNull String deviceId) {
+	AbstractDevice<?> getAnyDevice(@NonNull String deviceId) {
 		for (AbstractDevice<?> device : getDevices()) {
 			if (Algorithms.stringsEqual(device.getDeviceId(), deviceId)) {
 				return device;
@@ -482,7 +483,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		} else {
 			if (settings == null) {
 				if (!Algorithms.isEmpty(deviceId)) {
-					settings = DevicesSettingsCollection.createDeviceSettings(deviceId, device.getDeviceType(), device.getName(), true);
+					settings = DevicesSettingsCollection.createDeviceSettings(deviceId, device, true);
 					devicesSettingsCollection.setDeviceSettings(deviceId, settings);
 					updateDeviceProperties(device);
 					externalSensorsPlugin.onDevicePaired(device);
@@ -508,7 +509,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		DeviceSettings settings = devicesSettingsCollection.getDeviceSettings(deviceId);
 		if (settings == null) {
 			if (!Algorithms.isEmpty(deviceId)) {
-				settings = DevicesSettingsCollection.createDeviceSettings(deviceId, device.getDeviceType(), device.getName(), enabled);
+				settings = DevicesSettingsCollection.createDeviceSettings(deviceId, device, enabled);
 				devicesSettingsCollection.setDeviceSettings(deviceId, settings);
 			}
 		} else {
@@ -530,7 +531,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		DeviceSettings settings = devicesSettingsCollection.getDeviceSettings(deviceId);
 		if (settings == null) {
 			if (!Algorithms.isEmpty(deviceId)) {
-				settings = DevicesSettingsCollection.createDeviceSettings(deviceId, device.getDeviceType(), device.getName(), false);
+				settings = DevicesSettingsCollection.createDeviceSettings(deviceId, device, false);
 			}
 		}
 		if (settings != null) {
@@ -623,8 +624,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	}
 
 	public boolean isBLEEnabled() {
-		return activity != null && activity.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)
-				&& bluetoothAdapter != null && bluetoothAdapter.isEnabled();
+		return activity != null && BLEUtils.INSTANCE.isBLEEnabled(activity);
 	}
 
 	public boolean requestBLE() {

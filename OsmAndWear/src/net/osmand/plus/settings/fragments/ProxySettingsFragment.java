@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -65,12 +67,18 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 		TextView title = view.findViewById(R.id.switchButtonText);
 		title.setTextColor(ColorUtilities.getActiveColor(app, isNightMode()));
 
-		view.findViewById(R.id.action_button).setOnClickListener(v -> {
+		ViewGroup container = view.findViewById(R.id.actions_container);
+		int colorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(isNightMode());
+		ImageButton button = (ImageButton) inflater.inflate(R.layout.action_button, container, false);
+		button.setImageDrawable(getIcon(R.drawable.ic_action_help_online, colorId));
+		button.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				AndroidUtils.openUrl(activity, Uri.parse(getString(R.string.docs_proxy_settings)), isNightMode());
 			}
 		});
+		container.addView(button);
+
 		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(v -> switchProxyState());
 	}
 

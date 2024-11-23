@@ -24,9 +24,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -46,7 +46,6 @@ import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.gpx.GPXFile;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -73,14 +72,12 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton;
-import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton;
-import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.router.TransportRouteResult;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -89,7 +86,6 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -205,8 +201,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 								card.updateButtons();
 							}
 							if (fragment == current) {
-								updateZoomButtonsPos(fragment, fragment.getViewY(), true);
-								updatePagesViewPos(fragment, fragment.getViewY(), true);
+								updateElementsPosition(fragment);
 							}
 							Bundle args = fragment.getArguments();
 							if (args != null) {
@@ -222,6 +217,21 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		buildZoomButtons(view);
 		buildMenuButtons(view);
 		return view;
+	}
+
+	private void updateElementsPosition(@NonNull RouteDetailsFragment fragment) {
+		View fragmentView = fragment.getView();
+		if (fragmentView != null) {
+			fragmentView.getViewTreeObserver().addOnGlobalLayoutListener(
+					new ViewTreeObserver.OnGlobalLayoutListener() {
+						@Override
+						public void onGlobalLayout() {
+							fragmentView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+							updatePagesViewPos(fragment, fragment.getViewY(), true);
+							updateZoomButtonsPos(fragment, fragment.getViewY(), true);
+						}
+					});
+		}
 	}
 
 	@Override
@@ -270,7 +280,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
-			mapControlsLayer.removeMapButtons(Arrays.asList(ZOOM_IN_BUTTON_ID, ZOOM_OUT_BUTTON_ID, BACK_TO_LOC_BUTTON_ID));
+			mapControlsLayer.clearCustomMapButtons();
 		}
 	}
 
@@ -382,15 +392,10 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		View zoomButtonsView = view.findViewById(R.id.map_hud_controls);
 		this.zoomButtonsView = zoomButtonsView;
 
-		ImageButton zoomInButton = view.findViewById(R.id.map_zoom_in_button);
-		ImageButton zoomOutButton = view.findViewById(R.id.map_zoom_out_button);
-		ImageButton backToLocation = view.findViewById(R.id.map_my_location_button);
-
-		MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
-
-		mapControlsLayer.addMapButton(new ZoomInButton(mapActivity, zoomInButton, ZOOM_IN_BUTTON_ID));
-		mapControlsLayer.addMapButton(new ZoomOutButton(mapActivity, zoomOutButton, ZOOM_OUT_BUTTON_ID));
-		mapControlsLayer.addMapButton(new MyLocationButton(mapActivity, backToLocation, BACK_TO_LOC_BUTTON_ID, false));
+		MapControlsLayer controlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
+		controlsLayer.addCustomMapButton(view.findViewById(R.id.map_zoom_in_button));
+		controlsLayer.addCustomMapButton(view.findViewById(R.id.map_zoom_out_button));
+		controlsLayer.addCustomMapButton(view.findViewById(R.id.map_my_location_button));
 
 		AndroidUiHelper.updateVisibility(zoomButtonsView, true);
 	}
@@ -468,11 +473,11 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 				String fileName = null;
 				if (paramsBuilder != null && paramsBuilder.getFile() != null) {
-					GPXFile gpxFile = paramsBuilder.getFile();
-					if (!Algorithms.isEmpty(gpxFile.path)) {
-						fileName = Algorithms.getFileNameWithoutExtension(new File(gpxFile.path).getName());
-					} else if (!Algorithms.isEmpty(gpxFile.tracks)) {
-						fileName = gpxFile.tracks.get(0).name;
+					GpxFile gpxFile = paramsBuilder.getFile();
+					if (!Algorithms.isEmpty(gpxFile.getPath())) {
+						fileName = Algorithms.getFileNameWithoutExtension(new File(gpxFile.getPath()).getName());
+					} else if (!Algorithms.isEmpty(gpxFile.getTracks())) {
+						fileName = gpxFile.getTracks().get(0).getName();
 					}
 				}
 				if (Algorithms.isEmpty(fileName)) {
@@ -497,13 +502,13 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitle(getString(R.string.share_as_file))
 					.setIcon(getContentIcon(R.drawable.ic_action_file_routing))
-					.setOnClickListener(_view -> shareFile(app))
+					.setOnClickListener(menuItem -> shareFile(app))
 					.create());
 
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitle(getString(R.string.share_link))
 					.setIcon(getContentIcon(R.drawable.ic_action_link))
-					.setOnClickListener(_view -> shareLink(app))
+					.setOnClickListener(menuItem -> shareLink(app))
 					.create());
 
 			PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
@@ -544,8 +549,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		if (activity != null) {
 			RoutingHelper routingHelper = app.getRoutingHelper();
 			String trackName = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date());
-			GPXFile gpx = routingHelper.generateGPXFileWithRoute(trackName);
-			Uri fileUri = AndroidUtils.getUriForFile(app, new File(gpx.path));
+			GpxFile gpx = routingHelper.generateGPXFileWithRoute(trackName);
+			Uri fileUri = AndroidUtils.getUriForFile(app, new File(gpx.getPath()));
 			File dir = new File(app.getCacheDir(), "share");
 			if (!dir.exists()) {
 				dir.mkdir();
@@ -801,7 +806,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			if (!visible) {
 				mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(visibility);
 				if (!portrait) {
-					mapActivity.getMapView().setMapPositionX(1);
+					mapActivity.getMapPositionManager().setMapPositionShiftedX(true);
 				}
 			}
 			mapActivity.updateStatusBarColor();
@@ -887,7 +892,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		if (mapActivity != null) {
 			dismiss(false);
 			if (!mapActivity.getMyApplication().getRoutingHelper().isPublicTransportMode()) {
-				mapActivity.getMapLayers().getMapControlsLayer().startNavigation();
+				mapActivity.getMapLayers().getMapActionsHelper().startNavigation();
 			}
 		}
 	}

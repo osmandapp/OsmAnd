@@ -1,5 +1,9 @@
 package net.osmand.plus.myplaces;
 
+import static net.osmand.plus.backup.ui.BackupAuthorizationFragment.OPEN_BACKUP_AUTH;
+import static net.osmand.plus.helpers.MapFragmentsHelper.CLOSE_ALL_FRAGMENTS;
+import static net.osmand.plus.myplaces.favorites.dialogs.FavoritesSearchFragment.FAV_SEARCH_QUERY_KEY;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -17,7 +21,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
-import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
+import net.osmand.plus.myplaces.favorites.dialogs.FavoritesSearchFragment;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoritesTreeFragment;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment;
@@ -57,6 +61,7 @@ public class MyPlacesActivity extends TabActivity {
 		super.onCreate(savedInstanceState);
 
 		app.logEvent("myplaces_open");
+		app.getImportHelper().setUiActivity(this);
 
 		updateToolbar();
 		setContentView(R.layout.my_places);
@@ -67,17 +72,26 @@ public class MyPlacesActivity extends TabActivity {
 
 		if (savedInstanceState == null) {
 			Intent intent = getIntent();
-			if (intent != null && intent.hasExtra(MapActivity.INTENT_PARAMS)) {
-				intentParams = intent.getBundleExtra(MapActivity.INTENT_PARAMS);
-				int tabId = intentParams.getInt(TAB_ID, FAV_TAB);
-				int pagerItem = 0;
-				for (int n = 0; n < tabItems.size(); n++) {
-					if (tabItems.get(n).resId == tabId) {
-						pagerItem = n;
-						break;
-					}
+
+			if (intent != null) {
+				Bundle bundle = intent.getExtras();
+				if (bundle != null && bundle.containsKey(FAV_SEARCH_QUERY_KEY)) {
+					String searchQuery = bundle.getString(FAV_SEARCH_QUERY_KEY, "");
+					FavoritesSearchFragment.showInstance(this, searchQuery);
 				}
-				viewPager.setCurrentItem(pagerItem, false);
+
+				if (intent.hasExtra(MapActivity.INTENT_PARAMS)) {
+					intentParams = intent.getBundleExtra(MapActivity.INTENT_PARAMS);
+					int tabId = intentParams.getInt(TAB_ID, FAV_TAB);
+					int pagerItem = 0;
+					for (int n = 0; n < tabItems.size(); n++) {
+						if (tabItems.get(n).resId == tabId) {
+							pagerItem = n;
+							break;
+						}
+					}
+					viewPager.setCurrentItem(pagerItem, false);
+				}
 			}
 		}
 	}
@@ -202,15 +216,21 @@ public class MyPlacesActivity extends TabActivity {
 	public void showOnMap(@Nullable FragmentStateHolder fragment, double latitude, double longitude,
 	                      int zoom, PointDescription pointDescription, boolean addToHistory, Object toShow) {
 		settings.setMapLocationToShow(latitude, longitude, zoom, pointDescription, addToHistory, toShow);
+
+		Bundle args = new Bundle();
+		args.putBoolean(CLOSE_ALL_FRAGMENTS, true);
+
 		Bundle bundle = fragment != null ? fragment.storeState() : null;
-		MapActivity.launchMapActivityMoveToTop(this, bundle);
+		MapActivity.launchMapActivityMoveToTop(this, bundle, null, args);
 	}
 
 	public void showOsmAndCloud(@Nullable FragmentStateHolder fragment) {
+		Bundle args = new Bundle();
+		args.putBoolean(OPEN_BACKUP_AUTH, true);
+		args.putBoolean(CLOSE_ALL_FRAGMENTS, true);
+
 		Bundle bundle = fragment != null ? fragment.storeState() : null;
-		Bundle openScreenArguments = new Bundle();
-		openScreenArguments.putBoolean(BackupAuthorizationFragment.OPEN_BACKUP_AUTH, true);
-		MapActivity.launchMapActivityMoveToTop(this, bundle, null, openScreenArguments);
+		MapActivity.launchMapActivityMoveToTop(this, bundle, null, args);
 	}
 
 	@Nullable

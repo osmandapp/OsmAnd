@@ -28,10 +28,11 @@ public abstract class DownloadItem {
 		return type;
 	}
 
-	public void setRelatedGroup(DownloadResourceGroup relatedGroup) {
+	public void setRelatedGroup(@Nullable DownloadResourceGroup relatedGroup) {
 		this.relatedGroup = relatedGroup;
 	}
 
+	@Nullable
 	public DownloadResourceGroup getRelatedGroup() {
 		return relatedGroup;
 	}
@@ -41,20 +42,16 @@ public abstract class DownloadItem {
 		return getFormattedMb(ctx, getSizeToDownloadInMb());
 	}
 
-	public String getVisibleName(@NonNull Context ctx, OsmandRegions osmandRegions) {
-		return getVisibleName(ctx, osmandRegions, true);
+	public String getVisibleName(@NonNull Context ctx, @NonNull OsmandRegions regions) {
+		return getVisibleName(ctx, regions, true);
 	}
 
-	public String getVisibleName(@NonNull Context ctx, OsmandRegions osmandRegions, boolean includingParent) {
-		return getVisibleName(ctx, osmandRegions, includingParent, false);
+	public String getVisibleName(@NonNull Context ctx, @NonNull OsmandRegions regions, boolean includingParent) {
+		return getVisibleName(ctx, regions, includingParent, false);
 	}
 
-	public String getVisibleName(@NonNull Context ctx, OsmandRegions osmandRegions, boolean includingParent, boolean useShortName) {
-		return type.getVisibleName(this, ctx, osmandRegions, includingParent, useShortName);
-	}
-
-	public String getVisibleDescription(@NonNull OsmandApplication app) {
-		return type.getVisibleDescription(this, app);
+	public String getVisibleName(@NonNull Context ctx, @NonNull OsmandRegions regions, boolean includingParent, boolean useShortName) {
+		return type.getVisibleName(this, ctx, regions, includingParent, useShortName);
 	}
 
 	@NonNull

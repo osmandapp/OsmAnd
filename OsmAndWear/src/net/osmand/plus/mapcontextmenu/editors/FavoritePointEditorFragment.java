@@ -20,10 +20,10 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXUtilities.PointsGroup;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -34,7 +34,7 @@ import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.util.Algorithms;
 
 import java.util.LinkedHashMap;
@@ -143,7 +143,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	public void setPointsGroup(@NonNull PointsGroup group, boolean updateAppearance) {
 		Context ctx = getContext();
 		if (ctx != null) {
-			String groupIdName = FavoriteGroup.convertDisplayNameToGroupIdName(ctx, group.name);
+			String groupIdName = FavoriteGroup.convertDisplayNameToGroupIdName(ctx, group.getName());
 			this.group = favouritesHelper.getGroup(groupIdName);
 			super.setPointsGroup(group, updateAppearance);
 		}
@@ -333,7 +333,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			point.setIconId(getIconId());
 			point.setBackgroundType(getBackgroundType());
 		}
-		return PointImageDrawable.getFromFavorite(getMapActivity(), getColor(), false, point);
+		return PointImageUtils.getFromPoint(app, getColor(), false, point);
 	}
 
 	@ColorInt
@@ -362,10 +362,16 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 				}
 			}
 			for (PointsGroup group : hiddenCategories) {
-				pointsGroups.put(group.name, group);
+				pointsGroups.put(group.getName(), group);
 			}
 		}
 		return pointsGroups;
+	}
+
+	@NonNull
+	@Override
+	protected LatLon getPointCoordinates() {
+		return new LatLon(favorite.getLatitude(), favorite.getLongitude());
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package net.osmand.plus.render;
 
+import static net.osmand.IProgress.EMPTY_PROGRESS;
 import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.WIKIVOYAGE_INDEX_DIR;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
@@ -15,7 +16,6 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererContext;
@@ -24,7 +24,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RendererRegistry.IRendererLoadedEventListener;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.resources.ResourceManager.ReloadIndexesListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -169,16 +168,7 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 	}
 
 	private void reloadIndexes() {
-		app.getResourceManager().reloadIndexesAsync(IProgress.EMPTY_PROGRESS, new ReloadIndexesListener() {
-			@Override
-			public void reloadIndexesStarted() {
-			}
-
-			@Override
-			public void reloadIndexesFinished(List<String> warnings) {
-				app.getOsmandMap().refreshMap();
-			}
-		});
+		app.getResourceManager().reloadIndexesAsync(EMPTY_PROGRESS, warnings -> app.getOsmandMap().refreshMap());
 	}
 
 	public CommonPreference<Boolean> getFileVisibilityProperty(@NonNull String fileName) {

@@ -78,8 +78,10 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		View container = view.findViewById(R.id.item);
 		ItemViewHolder itemViewHolder = new ItemViewHolder(container, nightMode);
 		itemViewHolder.bindView(item, null, false);
+
 		TextView descriptionView = container.findViewById(R.id.description);
-		descriptionView.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, app.getString(R.string.last_synchronized), item.time));
+		descriptionView.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon,
+				app.getString(R.string.last_synchronized), BackupUiUtils.getTimeString(app, item.time)));
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.second_icon), false);
 	}
 

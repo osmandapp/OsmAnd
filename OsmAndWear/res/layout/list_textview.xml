@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          android:id="@+id/textView"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:textColor="?android:textColorPrimary"
-          android:textSize="@dimen/default_list_text_size_large"
-          android:textStyle="bold"
-          android:gravity="center_vertical"/>
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/textView"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:gravity="center_vertical"
+	android:textColor="?android:textColorPrimary"
+	android:textSize="@dimen/default_list_text_size_large"
+	app:typefaceWeight="medium" />

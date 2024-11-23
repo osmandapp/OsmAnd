@@ -1,5 +1,6 @@
 package net.osmand.plus.mapmarkers.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
@@ -17,13 +18,13 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
-import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 
 
 public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder> {
 
 	public static final String ADAPTER_POSITION_KEY = "adapter_position_key";
-	private GPXFile gpx;
+	private GpxFile gpx;
 
 	private final OsmandApplication app;
 
@@ -43,12 +44,12 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		this.actionsListener = actionsListener;
 	}
 	
-	public CoordinateInputAdapter(OsmandApplication app, GPXFile gpx) {
-		this.app = app;
+	public CoordinateInputAdapter(@NonNull Context context, GpxFile gpx) {
+		this.app = (OsmandApplication) context.getApplicationContext();
 		this.gpx = gpx;
 
 		uiUtilities = app.getUIUtilities();
-		updateViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
+		updateViewCache = UpdateLocationUtils.getUpdateLocationViewCache(context);
 		nightTheme = !app.getSettings().isLightContent();
 	}
 
@@ -65,7 +66,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		WptPt wpt = getItem(position);
 
 		holder.iconDirection.setVisibility(View.VISIBLE);
-		holder.icon.setImageDrawable(PointImageDrawable.getFromWpt(app, wpt.getColor(), false, wpt));
+		holder.icon.setImageDrawable(PointImageUtils.getFromPoint(app, wpt.getColor(), false, wpt));
 		holder.mainLayout.setBackgroundColor(ColorUtilities.getListBgColor(app, nightTheme));
 		holder.title.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightTheme));
 		holder.divider.setBackgroundColor(ContextCompat.getColor(app, nightTheme ? R.color.divider_color_dark : R.color.divider_color_light));
@@ -85,8 +86,8 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		holder.bottomShadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);
 		holder.divider.setVisibility((!singleItem && !lastItem) ? View.VISIBLE : View.GONE);
 
-		holder.title.setText(wpt.name);
-		UpdateLocationUtils.updateLocationView(app, updateViewCache, holder.iconDirection, holder.distance, wpt.lat, wpt.lon);
+		holder.title.setText(wpt.getName());
+		UpdateLocationUtils.updateLocationView(app, updateViewCache, holder.iconDirection, holder.distance, wpt.getLat(), wpt.getLon());
 	}
 
 	@Override
@@ -99,11 +100,11 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 	}
 
 	public WptPt getItem(int position) {
-		return gpx.getPoints().get(position);
+		return gpx.getPointsList().get(position);
 	}
 
 	public int getItemPosition(WptPt wptPt) {
-		return gpx.getPoints().indexOf(wptPt);
+		return gpx.getPointsList().indexOf(wptPt);
 	}
 
 	public void removeItem(int position) {
@@ -113,7 +114,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		}
 	}
 	
-	public void setGpx(GPXFile gpx) {
+	public void setGpx(GpxFile gpx) {
 		this.gpx = gpx;
 		notifyDataSetChanged();
 	}

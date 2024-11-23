@@ -68,12 +68,13 @@ public class KeySymbolMapper {
 		keySymbolMap.put(KeyEvent.KEYCODE_SPACE, "␣");
 		keySymbolMap.put(KeyEvent.KEYCODE_ENTER, "↵");
 		keySymbolMap.put(KeyEvent.KEYCODE_TAB, "⇥");
-		keySymbolMap.put(KeyEvent.KEYCODE_BACK, "⇦");
+		keySymbolMap.put(KeyEvent.KEYCODE_BACK, "Back");
 		keySymbolMap.put(KeyEvent.KEYCODE_SHIFT_LEFT, "⇧");
 		keySymbolMap.put(KeyEvent.KEYCODE_SHIFT_RIGHT, "⇧");
 		keySymbolMap.put(KeyEvent.KEYCODE_CAPS_LOCK, "⇪");
 		keySymbolMap.put(KeyEvent.KEYCODE_DEL, "⌫");
-		keySymbolMap.put(KeyEvent.KEYCODE_ESCAPE, "⎋");
+		keySymbolMap.put(KeyEvent.KEYCODE_ESCAPE, "Esc");
+		keySymbolMap.put(KeyEvent.KEYCODE_MENU, "Menu");
 		keySymbolMap.put(KeyEvent.KEYCODE_SEMICOLON, ";");
 		keySymbolMap.put(KeyEvent.KEYCODE_APOSTROPHE, "'");
 		keySymbolMap.put(KeyEvent.KEYCODE_SLASH, "/");

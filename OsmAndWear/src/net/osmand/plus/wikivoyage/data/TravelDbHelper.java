@@ -8,12 +8,11 @@ import androidx.annotation.Nullable;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -23,6 +22,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -235,7 +235,7 @@ public class TravelDbHelper implements TravelHelper {
 
 	@Override
 	@NonNull
-	public List<WikivoyageSearchResult> search(@NonNull String searchQuery) {
+	public List<WikivoyageSearchResult> search(@NonNull String searchQuery, int reqNumber) {
 		List<WikivoyageSearchResult> res = new ArrayList<>();
 		SQLiteConnection conn = openConnection();
 		String[] queries = searchQuery.replace('_', ' ').replace('/', ' ').split(" ");
@@ -698,7 +698,7 @@ public class TravelDbHelper implements TravelHelper {
 		res.aggregatedPartOf = cursor.getString(11);
 		try {
 			String gpxContent = Algorithms.gzipToString(cursor.getBlob(6));
-			res.gpxFile = GPXUtilities.loadGPXFile(new ByteArrayInputStream(gpxContent.getBytes("UTF-8")));
+			res.gpxFile = SharedUtil.loadGpxFile(new ByteArrayInputStream(gpxContent.getBytes("UTF-8")));
 		} catch (IOException e) {
 			LOG.error(e.getMessage(), e);
 		}
@@ -735,10 +735,10 @@ public class TravelDbHelper implements TravelHelper {
 	@NonNull
 	@Override
 	public File createGpxFile(@NonNull TravelArticle article) {
-		GPXFile gpx = article.getGpxFile();
+		GpxFile gpx = article.getGpxFile();
 		File file = application.getAppPath(IndexConstants.GPX_TRAVEL_DIR + getGPXName(article));
 		if (!file.exists()) {
-			GPXUtilities.writeGpxFile(file, gpx);
+			SharedUtil.writeGpxFile(file, gpx);
 		}
 		return file;
 	}

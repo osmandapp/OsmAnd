@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:orientation="vertical"
 	android:layout_marginStart="0dp"
@@ -26,7 +26,7 @@
 			android:gravity="center"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
-			osmand:typeface="@string/font_roboto_medium"
+			app:typefaceWeight="medium"
 			tools:text="Title" />
 
 		<Space
@@ -40,7 +40,7 @@
 			android:textColor="?android:textColorPrimary"
 			android:gravity="start"
 			android:textSize="@dimen/default_list_text_size"
-			osmand:typeface="@string/font_roboto_regular"
+			android:textStyle="normal"
 			tools:text="summary" />
 
 	</LinearLayout>
@@ -70,7 +70,7 @@
 			android:layout_weight="1"
 			android:textColor="?android:textColorSecondary"
 			android:textSize="@dimen/default_desc_text_size"
-			osmand:typeface="@string/font_roboto_regular"
+			android:textStyle="normal"
 			tools:text="0" />
 
 		<Space
@@ -83,7 +83,7 @@
 			android:layout_height="wrap_content"
 			android:textColor="?android:textColorSecondary"
 			android:textSize="@dimen/default_desc_text_size"
-			osmand:typeface="@string/font_roboto_regular"
+			android:textStyle="normal"
 			tools:text="100" />
 
 	</LinearLayout>

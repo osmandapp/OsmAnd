@@ -601,11 +601,11 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				for (InAppPurchaseData purchase : tokensToSend) {
 					purchaseInfoList.add(getPurchaseInfo(purchase));
 				}
-				onSkuDetailsResponseDone(purchaseInfoList, userRequested);
+				onProductDetailsResponseDone(purchaseInfoList, userRequested);
 			}
 
 			private void onSubscriptionExpired() {
-				if (!isDepthContoursPurchased(ctx)) {
+				if (!InAppPurchaseUtils.isDepthContoursPurchased(ctx)) {
 					ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(false);
 				}
 			}

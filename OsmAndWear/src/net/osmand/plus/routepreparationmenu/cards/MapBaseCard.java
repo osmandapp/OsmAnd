@@ -17,8 +17,8 @@ public abstract class MapBaseCard extends BaseCard {
 		this.mapActivity = mapActivity;
 	}
 
+	@NonNull
 	public MapActivity getMapActivity() {
 		return mapActivity;
 	}
-
 }

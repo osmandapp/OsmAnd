@@ -1,5 +1,6 @@
 package net.osmand.plus.configmap.tracks;
 
+import static net.osmand.plus.myplaces.tracks.TrackFoldersHelper.SORT_SUB_FOLDERS_KEY;
 import static net.osmand.plus.settings.enums.TracksSortMode.DATE_DESCENDING;
 import static net.osmand.plus.settings.enums.TracksSortMode.DISTANCE_ASCENDING;
 import static net.osmand.plus.settings.enums.TracksSortMode.LAST_MODIFIED;
@@ -100,8 +101,14 @@ public class SortByBottomSheet extends MenuBottomSheetDialogFragment {
 				Fragment target = getTargetFragment();
 				int adapterPosition = holder.getAdapterPosition();
 				if (adapterPosition != RecyclerView.NO_POSITION && target instanceof SortTracksListener) {
+					SortTracksListener sortTracksListener = (SortTracksListener) target;
+					boolean sortSubFolders = false;
+					Bundle bundle = getArguments();
+					if (bundle != null && bundle.containsKey(SORT_SUB_FOLDERS_KEY)){
+						sortSubFolders = bundle.getBoolean(SORT_SUB_FOLDERS_KEY);
+					}
 					TracksSortMode mode = sortModes.get(position);
-					((SortTracksListener) target).setTracksSortMode(mode);
+					sortTracksListener.setTracksSortMode(mode, sortSubFolders);
 				}
 				dismiss();
 			});
@@ -143,12 +150,20 @@ public class SortByBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull TracksSortMode sortMode,
-	                                @NonNull Fragment target, boolean usedOnMap) {
+									@NonNull Fragment target, boolean usedOnMap) {
+		showInstance(manager, sortMode, target, usedOnMap, false);
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull TracksSortMode sortMode,
+									@NonNull Fragment target, boolean usedOnMap, boolean sortSubFolders) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SortByBottomSheet fragment = new SortByBottomSheet();
 			fragment.tracksSortMode = sortMode;
 			fragment.setUsedOnMap(usedOnMap);
 			fragment.setTargetFragment(target, 0);
+			Bundle bundle = new Bundle();
+			bundle.putBoolean(SORT_SUB_FOLDERS_KEY, sortSubFolders);
+			fragment.setArguments(bundle);
 			fragment.show(manager, TAG);
 		}
 	}

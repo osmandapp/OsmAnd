@@ -49,7 +49,7 @@ public abstract class DistanceToPointWidget extends SimpleWidget {
 		LatLon pointToNavigate = getPointToNavigate();
 		if (pointToNavigate != null) {
 			int fZoom = Math.max(view.getZoom(), 15);
-			thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom, true);
+			thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom);
 		}
 	}
 
@@ -60,10 +60,10 @@ public abstract class DistanceToPointWidget extends SimpleWidget {
 			cachedMeters = distance;
 			if (cachedMeters <= DESTINATION_REACHED_THRESHOLD) {
 				cachedMeters = 0;
-				setText(null, null);
+				setText(isVerticalWidget() ? NO_VALUE : null, null);
 			} else {
 				FormattedValue formattedDistance = OsmAndFormatter
-						.getFormattedDistanceValue(cachedMeters, app, true, settings.METRIC_SYSTEM.get());
+						.getFormattedDistanceValue(cachedMeters, app, OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS);
 				setText(formattedDistance.value, formattedDistance.unit);
 			}
 		}

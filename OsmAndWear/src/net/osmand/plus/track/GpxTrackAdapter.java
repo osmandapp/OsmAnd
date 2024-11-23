@@ -13,22 +13,22 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.IndexConstants;
-import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.data.GPXInfo;
-import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.ChipsAdapter.OnSelectChipListener;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.shared.gpx.GpxHelper;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
-import java.io.File;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -132,7 +132,7 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 			}
 			GPXInfo info = gpxInfoList.get(listPosition);
 			GpxDataItem dataItem = getDataItem(info);
-			String itemTitle = GpxUiHelper.getGpxTitle(info.getFileName());
+			String itemTitle = GpxHelper.INSTANCE.getGpxTitle(info.getFileName());
 			if (!showFolderName) {
 				itemTitle = Algorithms.getFileWithoutDirs(itemTitle);
 			}
@@ -164,7 +164,7 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 	private void updateGpxInfoView(TrackViewHolder holder, String itemTitle, GPXInfo info, GpxDataItem dataItem, boolean currentlyRecordingTrack, OsmandApplication app) {
 		holder.title.setText(itemTitle.replace("/", " • ").trim());
-		GPXTrackAnalysis analysis = null;
+		GpxTrackAnalysis analysis = null;
 		if (currentlyRecordingTrack) {
 			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis(app);
 		} else if (dataItem != null) {
@@ -187,10 +187,10 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 		} else {
 			holder.readSection.setVisibility(View.VISIBLE);
 			holder.unknownSection.setVisibility(View.GONE);
-			holder.pointsCount.setText(String.valueOf(analysis.wptPoints));
-			holder.distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+			holder.pointsCount.setText(String.valueOf(analysis.getWptPoints()));
+			holder.distance.setText(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
 			if (analysis.isTimeSpecified()) {
-				holder.time.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()));
+				holder.time.setText(Algorithms.formatDuration(analysis.getDurationInSeconds(), app.accessibilityEnabled()));
 			} else {
 				holder.time.setText("");
 			}
@@ -203,7 +203,7 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 				notifyItemChanged(gpxInfoList.indexOf(info));
 			}
 		};
-		return app.getGpxDbHelper().getItem(new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), info.getFileName()), callback);
+		return app.getGpxDbHelper().getItem(new KFile(app.getAppPathKt(IndexConstants.GPX_INDEX_DIR), info.getFileName()), callback);
 	}
 
 	public void setAdapterListener(OnItemClickListener onItemClickListener) {

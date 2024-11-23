@@ -4,61 +4,29 @@ import static android.content.Context.LOCATION_SERVICE;
 
 import android.content.Context;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.location.LocationListenerCompat;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
-public class AndroidApiLocationServiceHelper extends LocationServiceHelper implements LocationListener {
+public class AndroidApiLocationServiceHelper extends LocationServiceHelper implements LocationListenerCompat {
 
 	private static final Log LOG = PlatformUtil.getLog(DayNightHelper.class);
 
-	private final OsmandApplication app;
-
 	private LocationCallback locationCallback;
-	private LocationCallback networkLocationCallback;
-	private final LinkedList<LocationListener> networkListeners = new LinkedList<>();
 
-	// Working with location checkListeners
-	private class NetworkListener implements LocationListener {
-
-		@Override
-		public void onLocationChanged(@NonNull Location location) {
-			LocationCallback locationCallback = AndroidApiLocationServiceHelper.this.networkLocationCallback;
-			if (locationCallback != null) {
-				net.osmand.Location l = convertLocation(location);
-				locationCallback.onLocationResult(l == null ? Collections.emptyList() : Collections.singletonList(l));
-			}
-		}
-
-		@Override
-		public void onProviderDisabled(@NonNull String provider) {
-		}
-
-		@Override
-		public void onProviderEnabled(@NonNull String provider) {
-		}
-
-		@Override
-		public void onStatusChanged(String provider, int status, Bundle extras) {
-		}
-	}
-
-	public AndroidApiLocationServiceHelper(@NonNull OsmandApplication app) {
-		this.app = app;
+	public AndroidApiLocationServiceHelper(OsmandApplication app) {
+		super(app);
 	}
 
 	@Override
@@ -89,7 +57,9 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 		LocationManager locationManager = (LocationManager) app.getSystemService(LOCATION_SERVICE);
 		List<String> providers = locationManager.getProviders(true);
 		for (String provider : providers) {
-			if (provider == null || provider.equals(LocationManager.GPS_PROVIDER)) {
+			if (provider == null
+					|| provider.equals(LocationManager.GPS_PROVIDER)
+					|| provider.equals(LocationManager.FUSED_PROVIDER)) {
 				continue;
 			}
 			try {
@@ -114,12 +84,7 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 			LOG.debug("Location service permission not granted", e);
 			throw e;
 		} finally {
-			while (!networkListeners.isEmpty()) {
-				LocationListener listener = networkListeners.poll();
-				if (listener != null) {
-					locationManager.removeUpdates(listener);
-				}
-			}
+			removeNetworkLocationUpdates();
 		}
 	}
 
@@ -150,11 +115,6 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 		return null;
 	}
 
-	@Nullable
-	private net.osmand.Location convertLocation(@Nullable Location location) {
-		return location == null ? null : OsmAndLocationProvider.convertLocation(location, app);
-	}
-
 	@Override
 	public void onLocationChanged(@NonNull Location location) {
 		LocationCallback locationCallback = this.locationCallback;
@@ -162,10 +122,6 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 			net.osmand.Location l = convertLocation(location);
 			locationCallback.onLocationResult(l == null ? Collections.emptyList() : Collections.singletonList(l));
 		}
-	}
-
-	@Override
-	public void onStatusChanged(String provider, int status, Bundle extras) {
 	}
 
 	@Override

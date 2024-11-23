@@ -17,8 +17,8 @@ import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.Location;
 import net.osmand.TspAnt;
 import net.osmand.data.LatLon;
@@ -42,6 +42,7 @@ import net.osmand.plus.measurementtool.SnapToRoadBottomSheetDialogFragment.SnapT
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.MapPosition;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -65,9 +66,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import static net.osmand.plus.settings.backend.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
-import static net.osmand.plus.settings.backend.OsmandSettings.MIDDLE_TOP_CONSTANT;
 
 public class PlanRouteFragment extends BaseOsmAndFragment
 		implements OsmAndLocationListener, IMapDisplayPositionProvider {
@@ -430,7 +428,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandMapTileView view = mapActivity.getMapView();
-			view.getAnimatedDraggingThread().startMoving(lat, lon, view.getZoom(), true);
+			view.getAnimatedDraggingThread().startMoving(lat, lon, view.getZoom());
 			if (planRouteContext.isMarkersListOpened()) {
 				planRouteContext.setAdjustMapOnStart(false);
 				showHideMarkersList();
@@ -521,7 +519,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 					}
 					planRouteContext.setNavigationFromMarkers(true);
 					dismiss();
-					mapActivity.getMapLayers().getMapControlsLayer().doRoute();
+					mapActivity.getMapLayers().getMapActionsHelper().doRoute();
 				}
 			}
 
@@ -705,10 +703,10 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 			boolean defaultMode = appMode == ApplicationMode.DEFAULT;
 
 			float dist = 0;
-			for (int i = 1; i < snapTrkSegment.points.size(); i++) {
-				WptPt pt1 = snapTrkSegment.points.get(i - 1);
-				WptPt pt2 = snapTrkSegment.points.get(i);
-				dist += MapUtils.getDistance(pt1.lat, pt1.lon, pt2.lat, pt2.lon);
+			for (int i = 1; i < snapTrkSegment.getPoints().size(); i++) {
+				WptPt pt1 = snapTrkSegment.getPoints().get(i - 1);
+				WptPt pt2 = snapTrkSegment.getPoints().get(i);
+				dist += MapUtils.getDistance(pt1.getLat(), pt1.getLon(), pt2.getLat(), pt2.getLon());
 			}
 			distanceTv.setText(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()) + (defaultMode ? "" : ","));
 
@@ -756,7 +754,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 			mapActivity.getMapLayers().getMapMarkersLayer().setRoute(planRouteContext.getSnapTrkSegment());
 			mapActivity.refreshMap();
 			if (adjustMap) {
-				showRouteOnMap(planRouteContext.getSnapTrkSegment().points);
+				showRouteOnMap(planRouteContext.getSnapTrkSegment().getPoints());
 			}
 		}
 	}
@@ -900,14 +898,15 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 
 	private void updateMapDisplayPosition() {
 		MapDisplayPositionManager manager = app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
-		manager.updateProviders(this, isInPlanRouteMode);
+		manager.updateMapPositionProviders(this, isInPlanRouteMode);
 		manager.updateMapDisplayPosition();
 	}
 
-	@Nullable @Override
-	public Integer getMapDisplayPosition() {
+	@Nullable
+	@Override
+	public MapPosition getMapDisplayPosition() {
 		if (isInPlanRouteMode) {
-			return portrait ? MIDDLE_TOP_CONSTANT : LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
+			return portrait ? MapPosition.MIDDLE_TOP : MapPosition.LANDSCAPE_MIDDLE_RIGHT;
 		}
 		return null;
 	}

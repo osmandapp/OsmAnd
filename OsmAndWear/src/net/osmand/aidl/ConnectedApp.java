@@ -9,6 +9,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
@@ -26,8 +27,10 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
-import net.osmand.plus.views.mapwidgets.SideWidgetInfo;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
@@ -183,52 +186,104 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 	                          @NonNull ApplicationMode appMode) {
 		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
 		for (AidlMapWidgetWrapper widgetData : widgets.values()) {
-			int iconId = AndroidUtils.getDrawableId(mapActivity.getMyApplication(), widgetData.getMenuIconName());
-			int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
-			String widgetKey = WIDGET_ID_PREFIX + widgetData.getId();
+			String baseWidgetId = widgetData.getId();
+			String widgetKey = WIDGET_ID_PREFIX + baseWidgetId;
 			WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
-
-			TextInfoWidget widget = createWidgetControl(mapActivity, widgetData.getId());
-			MapWidgetInfo widgetInfo = creator.createExternalWidget(widgetKey, widget, menuIconId,
-					widgetData.getMenuTitle(), defaultPanel, widgetData.getOrder());
-			((SideWidgetInfo) widgetInfo).setExternalProviderPackage(pack);
-
+			TextInfoWidget widget = createWidgetControl(mapActivity, baseWidgetId, defaultPanel);
+			MapWidgetInfo widgetInfo = createWidgetInfo(creator, widgetData, widget, widgetKey, defaultPanel);
 			widgetsInfos.add(widgetInfo);
-			widgetControls.put(widgetData.getId(), widget);
+			widgetControls.put(baseWidgetId, widget);
 		}
 	}
 
-	@NonNull
-	TextInfoWidget createWidgetControl(@NonNull MapActivity mapActivity, @NonNull String widgetId) {
-		return new AidlTextInfoWidget(mapActivity, widgetId);
+	@Nullable
+	public MapWidgetInfo askCreateWidgetInfo(@NonNull WidgetInfoCreator creator,
+	                                         @NonNull MapWidget widget,
+	                                         @NonNull String widgetId,
+	                                         @NonNull WidgetsPanel panel) {
+		for (AidlMapWidgetWrapper widgetData : widgets.values()) {
+			String widgetKey = WIDGET_ID_PREFIX + widgetData.getId();
+			if (widgetId.startsWith(widgetKey)) {
+				return createWidgetInfo(creator, widgetData, widget, widgetId, panel);
+			}
+		}
+		return null;
 	}
 
-	class AidlTextInfoWidget extends TextInfoWidget {
+	private MapWidgetInfo createWidgetInfo(@NonNull WidgetInfoCreator creator, @NonNull AidlMapWidgetWrapper widgetData,
+	                                       @NonNull MapWidget widget, @NonNull String widgetId,
+	                                       @NonNull WidgetsPanel widgetsPanel) {
+		int iconId = AndroidUtils.getDrawableId(app, widgetData.getMenuIconName());
+		int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
+
+		String title = widgetData.getMenuTitle();
+		MapWidgetInfo widgetInfo = creator.createExternalWidget(
+				widgetId, widget, menuIconId, title, widgetsPanel, widgetData.getOrder()
+		);
+		widgetInfo.setExternalProviderPackage(pack);
+		return widgetInfo;
+	}
+
+	@Nullable
+	public TextInfoWidget askCreateWidgetControl(@NonNull MapActivity mapActivity,
+	                                             @Nullable String widgetId,
+	                                             @Nullable WidgetsPanel panel) {
+		if (widgetId != null) {
+			for (AidlMapWidgetWrapper widgetData : widgets.values()) {
+				String widgetKey = WIDGET_ID_PREFIX + widgetData.getId();
+				if (widgetId.startsWith(widgetKey)) {
+					return createWidgetControl(mapActivity, widgetId, panel);
+				}
+			}
+		}
+		return null;
+	}
+
+	public AidlMapWidgetWrapper getWidgetData(@Nullable String widgetId) {
+		String dataId = null;
+		if (widgetId != null) {
+			dataId = WidgetType.getDefaultWidgetId(widgetId);
+			dataId = dataId.replace(WIDGET_ID_PREFIX, "");
+		}
+		return widgets.get(dataId);
+	}
+
+	@NonNull
+	TextInfoWidget createWidgetControl(@NonNull MapActivity mapActivity, @NonNull String widgetId,
+	                                   @Nullable WidgetsPanel widgetsPanel) {
+		return new AidlTextInfoWidget(mapActivity, widgetId, widgetsPanel);
+	}
+
+	class AidlTextInfoWidget extends SimpleWidget {
 
 		private final String widgetId;
-
 		private String cachedTxt;
 		private String cachedSubtext;
 		private Boolean cachedNight;
 		private Integer cachedIcon;
 		private boolean init = true;
 
-		public AidlTextInfoWidget(@NonNull MapActivity mapActivity, @NonNull String widgetId) {
-			super(mapActivity, null);
+		public AidlTextInfoWidget(@NonNull MapActivity mapActivity, @NonNull String widgetId, @Nullable WidgetsPanel widgetsPanel) {
+			super(mapActivity, WidgetType.AIDL_WIDGET, widgetId, widgetsPanel);
 			this.widgetId = widgetId;
 
 			updateInfo(null);
-			setOnClickListener(v -> {
-				AidlMapWidgetWrapper widget = widgets.get(widgetId);
-				if (widget != null && widget.getIntentOnClick() != null) {
-					AndroidUtils.startActivityIfSafe(app, widget.getIntentOnClick());
-				}
-			});
+			setOnClickListener(getOnClickListener());
 		}
 
 		@Override
-		public void updateInfo(@Nullable DrawSettings drawSettings) {
-			AidlMapWidgetWrapper widget = widgets.get(widgetId);
+		protected OnClickListener getOnClickListener() {
+			return v -> {
+				AidlMapWidgetWrapper widget = getWidgetData(widgetId);
+				if (widget != null && widget.getIntentOnClick() != null) {
+					AndroidUtils.startActivityIfSafe(app, widget.getIntentOnClick());
+				}
+			};
+		}
+
+		@Override
+		public void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
+			AidlMapWidgetWrapper widget = getWidgetData(widgetId);
 			if (widget != null) {
 				String txt = widget.getText();
 				String subtext = widget.getDescription();
@@ -253,6 +308,11 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 				setText(null, null);
 				setImageDrawable(null);
 			}
+		}
+
+		@Nullable
+		protected String getWidgetName() {
+			return getName();
 		}
 	}
 

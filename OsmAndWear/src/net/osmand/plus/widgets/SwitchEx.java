@@ -1,12 +1,11 @@
 package net.osmand.plus.widgets;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.ToggleButton;
 
 @Deprecated
-public class SwitchEx extends ToggleButton {
+public class SwitchEx extends androidx.appcompat.widget.AppCompatToggleButton {
+
 	public SwitchEx(Context context) {
 		super(context);
 	}
@@ -21,16 +20,5 @@ public class SwitchEx extends ToggleButton {
 		super(context, attrs, defStyleAttr);
 
 		TextViewEx.parseAttributes(this, attrs, defStyleAttr, 0);
-	}
-
-	@TargetApi(21)
-	public SwitchEx(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-		super(context, attrs, defStyleAttr, defStyleRes);
-
-		TextViewEx.parseAttributes(this, attrs, defStyleAttr, defStyleRes);
-	}
-
-	public void setAllCapsCompat(boolean allCaps) {
-		TextViewEx.setAllCapsCompat(this, allCaps);
 	}
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/list_background_color"
+	android:orientation="vertical">
+
+	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/category_title"
+		style="@style/TitleStyle.Medium"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingHorizontal="@dimen/content_padding"
+		android:paddingVertical="@dimen/content_padding_round_medium"
+		tools:text="Title" />
+
+	<net.osmand.plus.widgets.FlowLayout
+		android:id="@+id/icons_selector"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/content_padding"
+		android:layout_marginTop="@dimen/content_padding_small_half"
+		android:layout_marginBottom="@dimen/content_padding_small" />
+
+	<View
+		android:id="@+id/bottom_divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/divider_color_basic" />
+
+</LinearLayout>

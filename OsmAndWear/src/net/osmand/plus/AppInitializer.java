@@ -1,14 +1,9 @@
 package net.osmand.plus;
 
 import static net.osmand.IndexConstants.SETTINGS_DIR;
+import static net.osmand.plus.AppInitEvents.*;
 import static net.osmand.plus.AppVersionUpgradeOnInit.LAST_APP_VERSION;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastSuccessfulUpdateCheck;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.*;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -18,46 +13,37 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.UiThread;
-import androidx.annotation.WorkerThread;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
+import net.osmand.OnResultCallback;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
-import net.osmand.gpx.GPXUtilities;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.OsmandRegions.RegionTranslation;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.plus.avoidroads.AvoidRoadsHelper;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.configmap.routes.RouteLayersHelper;
 import net.osmand.plus.download.local.LocalIndexHelper;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.feedback.FeedbackHelper;
-import net.osmand.plus.helpers.AvoidSpecificRoads;
-import net.osmand.plus.helpers.DayNightHelper;
-import net.osmand.plus.helpers.LauncherShortcutsHelper;
-import net.osmand.plus.helpers.LockHelper;
-import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.helpers.*;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelperImpl;
-import net.osmand.plus.keyevent.InputDeviceHelper;
+import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.KeyEventHelper;
-import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
-import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
-import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -68,13 +54,12 @@ import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper;
 import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.render.TravelRendererHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
-import net.osmand.plus.routing.AvoidRoadsHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
@@ -82,7 +67,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
-import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -97,6 +81,7 @@ import net.osmand.plus.wikivoyage.data.TravelObfHelper;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 import net.osmand.util.OpeningHoursParser;
 
 import org.apache.commons.logging.Log;
@@ -106,6 +91,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -113,8 +99,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import btools.routingapp.IBRouterService;
 
 public class AppInitializer implements IProgress {
 
@@ -134,38 +118,9 @@ public class AppInitializer implements IProgress {
 	private long startTime;
 	private long startBgTime;
 	private boolean appInitializing = true;
+	private boolean routingConfigInitialized;
 	private String taskName;
 	private SharedPreferences startPrefs;
-
-	public enum InitEvents {
-		FAVORITES_INITIALIZED, NATIVE_INITIALIZED, NATIVE_OPEN_GL_INITIALIZED, TASK_CHANGED,
-		MAPS_INITIALIZED, POI_TYPES_INITIALIZED, POI_FILTERS_INITIALIZED, ASSETS_COPIED,
-		INIT_RENDERERS, RESTORE_BACKUPS, INDEX_REGION_BOUNDARIES, SAVE_GPX_TRACKS, LOAD_GPX_TRACKS,
-		ROUTING_CONFIG_INITIALIZED
-	}
-
-	static {
-		//Set old time format of GPX for Android 6.0 and lower
-		GPXUtilities.GPX_TIME_OLD_FORMAT = Build.VERSION.SDK_INT <= Build.VERSION_CODES.M;
-	}
-
-	public interface AppInitializeListener {
-
-		@WorkerThread
-		default void onStart(@NonNull AppInitializer init) {
-
-		}
-
-		@UiThread
-		default void onProgress(@NonNull AppInitializer init, @NonNull InitEvents event) {
-
-		}
-
-		@UiThread
-		default void onFinish(@NonNull AppInitializer init) {
-
-		}
-	}
 
 	public interface LoadRoutingFilesCallback {
 		void onRoutingFilesLoaded();
@@ -186,6 +141,10 @@ public class AppInitializer implements IProgress {
 
 	public boolean isAppInitializing() {
 		return appInitializing;
+	}
+
+	public boolean isRoutingConfigInitialized() {
+		return routingConfigInitialized;
 	}
 
 	@SuppressLint({"CommitPrefEdits", "ApplySharedPref"})
@@ -274,22 +233,21 @@ public class AppInitializer implements IProgress {
 		return false;
 	}
 
-	private void indexRegionsBoundaries(List<String> warnings) {
+	private void indexRegionsBoundaries(@NonNull List<String> warnings) {
 		File file = app.getAppPath("regions.ocbf");
 		try {
-			if (file != null) {
-				if (!file.exists()) {
-					Algorithms.streamCopy(OsmandRegions.class.getResourceAsStream("regions.ocbf"),
-							new FileOutputStream(file));
-				}
-				app.regions.prepareFile(file.getAbsolutePath());
-
+			if (!file.exists()) {
+				InputStream stream = OsmandRegions.class.getResourceAsStream("regions.ocbf");
+				Algorithms.streamCopy(stream, new FileOutputStream(file));
 			}
+			app.regions.prepareFile(file.getAbsolutePath());
+			PlatformUtil.setOsmandRegions(app.regions);
 		} catch (Exception e) {
 			warnings.add(e.getMessage());
 			file.delete(); // recreate file
 			LOG.error(e.getMessage(), e);
 		}
+		notifyEvent(INDEX_REGION_BOUNDARIES);
 	}
 
 	private void initPoiTypes() {
@@ -300,23 +258,23 @@ public class AppInitializer implements IProgress {
 			app.poiTypes.init();
 		}
 		app.poiTypes.setPoiTranslator(new MapPoiTypesTranslator(app));
+		notifyEvent(POI_TYPES_INITIALIZED);
 	}
 
 	public void onCreateApplication() {
 		// always update application mode to default
-		OsmandSettings osmandSettings = app.getSettings();
-		if (osmandSettings.FOLLOW_THE_ROUTE.get()) {
-			ApplicationMode savedMode = osmandSettings.readApplicationMode();
-			if (!osmandSettings.APPLICATION_MODE.get().getStringKey().equals(savedMode.getStringKey())) {
-				osmandSettings.setApplicationMode(savedMode);
+		OsmandSettings settings = app.getSettings();
+		if (settings.FOLLOW_THE_ROUTE.get()) {
+			ApplicationMode savedMode = settings.readApplicationMode();
+			if (!settings.APPLICATION_MODE.get().getStringKey().equals(savedMode.getStringKey())) {
+				settings.setApplicationMode(savedMode);
 			}
 		} else {
-			osmandSettings.setApplicationMode(osmandSettings.DEFAULT_APPLICATION_MODE.get());
+			settings.setApplicationMode(settings.DEFAULT_APPLICATION_MODE.get());
 		}
 		startTime = System.currentTimeMillis();
 		getLazyRoutingConfig();
 		app.applyTheme(app);
-		startupInit(app.reconnectToBRouter(), IBRouterService.class);
 		app.importHelper = startupInit(new ImportHelper(app), ImportHelper.class);
 		app.backupHelper = startupInit(new BackupHelper(app), BackupHelper.class);
 		app.inAppPurchaseHelper = startupInit(new InAppPurchaseHelperImpl(app), InAppPurchaseHelperImpl.class);
@@ -327,16 +285,15 @@ public class AppInitializer implements IProgress {
 		app.resourceManager = startupInit(new ResourceManager(app), ResourceManager.class);
 		app.locationProvider = startupInit(new OsmAndLocationProvider(app), OsmAndLocationProvider.class);
 		app.daynightHelper = startupInit(new DayNightHelper(app), DayNightHelper.class);
-		app.avoidSpecificRoads = startupInit(new AvoidSpecificRoads(app), AvoidSpecificRoads.class);
 		app.avoidRoadsHelper = startupInit(new AvoidRoadsHelper(app), AvoidRoadsHelper.class);
 		app.gpxDisplayHelper = startupInit(new GpxDisplayHelper(app), GpxDisplayHelper.class);
+		app.colorPaletteHelper = startupInit(new ColorPaletteHelper(app), ColorPaletteHelper.class);
 		app.savingTrackHelper = startupInit(new SavingTrackHelper(app), SavingTrackHelper.class);
 		app.analyticsHelper = startupInit(new AnalyticsHelper(app), AnalyticsHelper.class);
 		app.feedbackHelper = startupInit(new FeedbackHelper(app), FeedbackHelper.class);
 		app.notificationHelper = startupInit(new NotificationHelper(app), NotificationHelper.class);
 		app.liveMonitoringHelper = startupInit(new LiveMonitoringHelper(app), LiveMonitoringHelper.class);
 		app.selectedGpxHelper = startupInit(new GpxSelectionHelper(app), GpxSelectionHelper.class);
-		app.gpxDbHelper = startupInit(new GpxDbHelper(app), GpxDbHelper.class);
 		app.favoritesHelper = startupInit(new FavouritesHelper(app), FavouritesHelper.class);
 		app.waypointHelper = startupInit(new WaypointHelper(app), WaypointHelper.class);
 		app.aidlApi = startupInit(new OsmandAidlApi(app), OsmandAidlApi.class);
@@ -358,11 +315,11 @@ public class AppInitializer implements IProgress {
 		app.travelRendererHelper = startupInit(new TravelRendererHelper(app), TravelRendererHelper.class);
 
 		app.lockHelper = startupInit(new LockHelper(app), LockHelper.class);
-		app.inputDeviceHelper = startupInit(new InputDeviceHelper(app), InputDeviceHelper.class);
+		app.inputDeviceHelper = startupInit(new InputDevicesHelper(app), InputDevicesHelper.class);
 		app.keyEventHelper = startupInit(new KeyEventHelper(app), KeyEventHelper.class);
 		app.fileSettingsHelper = startupInit(new FileSettingsHelper(app), FileSettingsHelper.class);
 		app.networkSettingsHelper = startupInit(new NetworkSettingsHelper(app), NetworkSettingsHelper.class);
-		app.quickActionRegistry = startupInit(new QuickActionRegistry(app.getSettings()), QuickActionRegistry.class);
+		app.mapButtonsHelper = startupInit(new MapButtonsHelper(app), MapButtonsHelper.class);
 		app.osmOAuthHelper = startupInit(new OsmOAuthHelper(app), OsmOAuthHelper.class);
 		app.onlineRoutingHelper = startupInit(new OnlineRoutingHelper(app), OnlineRoutingHelper.class);
 		app.launcherShortcutsHelper = startupInit(new LauncherShortcutsHelper(app), LauncherShortcutsHelper.class);
@@ -372,7 +329,8 @@ public class AppInitializer implements IProgress {
 		app.averageGlideComputer = startupInit(new AverageGlideComputer(app), AverageGlideComputer.class);
 		app.weatherHelper = startupInit(new WeatherHelper(app), WeatherHelper.class);
 		app.dialogManager = startupInit(new DialogManager(), DialogManager.class);
-		app.smartFolderHelper = startupInit(new SmartFolderHelper(app), SmartFolderHelper.class);
+		app.routeLayersHelper = startupInit(new RouteLayersHelper(app), RouteLayersHelper.class);
+		app.model3dHelper = startupInit(new Model3dHelper(app), Model3dHelper.class);
 
 		initOpeningHoursParser();
 	}
@@ -431,7 +389,10 @@ public class AppInitializer implements IProgress {
 
 	@SuppressLint("StaticFieldLeak")
 	private void getLazyRoutingConfig() {
-		loadRoutingFiles(app, () -> notifyEvent(InitEvents.ROUTING_CONFIG_INITIALIZED));
+		loadRoutingFiles(app, () -> {
+			routingConfigInitialized = true;
+			notifyEvent(ROUTING_CONFIG_INITIALIZED);
+		});
 	}
 
 	public static void loadRoutingFiles(@NonNull OsmandApplication app, @Nullable LoadRoutingFilesCallback callback) {
@@ -470,7 +431,7 @@ public class AppInitializer implements IProgress {
 				if (!customConfigs.isEmpty()) {
 					app.getCustomRoutingConfigs().putAll(customConfigs);
 				}
-				app.avoidSpecificRoads.initRouteObjects(false);
+				app.avoidRoadsHelper.initRouteObjects(false);
 				if (callback != null) {
 					callback.onRoutingFilesLoaded();
 				}
@@ -529,37 +490,35 @@ public class AppInitializer implements IProgress {
 			notifyStart();
 			startBgTime = System.currentTimeMillis();
 			app.getRendererRegistry().initRenderers();
-			notifyEvent(InitEvents.INIT_RENDERERS);
+			notifyEvent(INIT_RENDERERS);
 			// native depends on renderers
 			initOpenGl();
-
 			// init poi types before indexes and before POI
 			initPoiTypes();
-			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);
 			app.resourceManager.reloadIndexesOnStart(this, warnings);
+			notifyEvent(INDEXES_RELOADED);
 			app.travelHelper.initializeDataOnAppStartup();
 			app.travelRendererHelper.updateVisibilityPrefs();
+			notifyEvent(TRAVEL_INITIALIZED);
 			// native depends on renderers
 			initNativeCore();
 			app.favoritesHelper.loadFavorites();
-			app.gpxDbHelper.loadGpxItems();
-			notifyEvent(InitEvents.FAVORITES_INITIALIZED);
+			notifyEvent(FAVORITES_INITIALIZED);
+			app.getGpxDbHelper().loadItemsBlocking();
+			notifyEvent(GPX_DB_INITIALIZED);
 			app.poiFilters.reloadAllPoiFilters();
 			app.poiFilters.loadSelectedPoiFilters();
-			notifyEvent(InitEvents.POI_FILTERS_INITIALIZED);
+			notifyEvent(POI_FILTERS_INITIALIZED);
 			indexRegionsBoundaries(warnings);
-			notifyEvent(InitEvents.INDEX_REGION_BOUNDARIES);
 			app.selectedGpxHelper.loadGPXTracks(this);
-			notifyEvent(InitEvents.LOAD_GPX_TRACKS);
+			notifyEvent(LOAD_GPX_TRACKS);
 			saveGPXTracks();
-			notifyEvent(InitEvents.SAVE_GPX_TRACKS);
-			// restore backuped favorites to normal file -> this is obsolete with new favorite concept
-			//restoreBackupForFavoritesFiles();
-			notifyEvent(InitEvents.RESTORE_BACKUPS);
 			app.mapMarkersHelper.syncAllGroups();
+			notifyEvent(MARKERS_GROUPS_SYNCED);
 			app.searchUICore.initSearchUICore();
-
+			notifyEvent(SEARCH_UI_CORE_INITIALIZED);
 			checkLiveUpdatesAlerts();
+			connectToBRouter();
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			warnings.add(e.getMessage());
@@ -579,29 +538,29 @@ public class AppInitializer implements IProgress {
 
 	private void checkLiveUpdatesAlerts() {
 		OsmandSettings settings = app.getSettings();
-		if (!settings.IS_LIVE_UPDATES_ON.get()) {
-			return;
-		}
-		LocalIndexHelper helper = new LocalIndexHelper(app);
-		List<LocalItem> fullMaps = helper.getLocalFullMaps(null);
-		AlarmManager alarmMgr = (AlarmManager) app.getSystemService(Context.ALARM_SERVICE);
-		for (LocalItem item : fullMaps) {
-			String fileName = item.getFileName();
-			if (!preferenceForLocalIndex(fileName, settings).get()) {
-				continue;
-			}
-			int updateFrequencyOrd = preferenceUpdateFrequency(fileName, settings).get();
-			UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyOrd];
-			long lastCheck = preferenceLastSuccessfulUpdateCheck(fileName, settings).get();
+		if (settings.IS_LIVE_UPDATES_ON.get()) {
+			LocalIndexHelper helper = new LocalIndexHelper(app);
+			AlarmManager manager = (AlarmManager) app.getSystemService(Context.ALARM_SERVICE);
 
-			if (System.currentTimeMillis() - lastCheck > updateFrequency.intervalMillis * 2) {
-				runLiveUpdate(app, fileName, false, null);
-				PendingIntent alarmIntent = getPendingIntent(app, fileName);
-				int timeOfDayOrd = preferenceTimeOfDayToUpdate(fileName, settings).get();
-				TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayOrd];
-				setAlarmForPendingIntent(alarmIntent, alarmMgr, updateFrequency, timeOfDayToUpdate);
+			for (LocalItem item : helper.getLocalFullMaps(null)) {
+				String fileName = item.getFileName();
+				if (!preferenceForLocalIndex(fileName, settings).get()) {
+					continue;
+				}
+				int updateFrequencyOrd = preferenceUpdateFrequency(fileName, settings).get();
+				UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyOrd];
+				long lastCheck = preferenceLastSuccessfulUpdateCheck(fileName, settings).get();
+
+				if (System.currentTimeMillis() - lastCheck > updateFrequency.intervalMillis * 2) {
+					runLiveUpdate(app, fileName, false, null);
+					PendingIntent alarmIntent = getPendingIntent(app, fileName);
+					int timeOfDayOrd = preferenceTimeOfDayToUpdate(fileName, settings).get();
+					TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayOrd];
+					setAlarmForPendingIntent(alarmIntent, manager, updateFrequency, timeOfDayToUpdate);
+				}
 			}
 		}
+		notifyEvent(LIVE_UPDATES_ALERTS_CHECKED);
 	}
 
 	private void saveGPXTracks() {
@@ -621,6 +580,7 @@ public class AppInitializer implements IProgress {
 		if (app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get() && PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
 			app.startNavigationService(NavigationService.USED_BY_GPX);
 		}
+		notifyEvent(SAVE_GPX_TRACKS);
 	}
 
 	private final ExecutorService initOpenglSingleThreadExecutor = Executors.newSingleThreadExecutor();
@@ -673,7 +633,7 @@ public class AppInitializer implements IProgress {
 				}
 			}
 
-			notifyEvent(InitEvents.NATIVE_OPEN_GL_INITIALIZED);
+			notifyEvent(NATIVE_OPEN_GL_INITIALIZED);
 		}
 	}
 
@@ -689,7 +649,12 @@ public class AppInitializer implements IProgress {
 				osmandSettings.NATIVE_RENDERING_FAILED.set(true);
 				startTask(app.getString(R.string.init_native_library), -1);
 				RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
-				NativeOsmandLibrary lib = NativeOsmandLibrary.getLibrary(storage, app);
+				if (storage == null) {
+					LOG.info("Current renderer could not be used!");
+					osmandSettings.SAFE_MODE.set(true);
+					warnings.add(app.getString(R.string.native_library_not_supported));
+				}
+				NativeOsmandLibrary lib = storage != null ? NativeOsmandLibrary.getLibrary(storage, app) : null;
 				boolean initialized = lib != null;
 				osmandSettings.NATIVE_RENDERING_FAILED.set(false);
 				if (initialized) {
@@ -702,7 +667,7 @@ public class AppInitializer implements IProgress {
 			}
 			app.getResourceManager().initMapBoundariesCacheNative();
 		}
-		notifyEvent(InitEvents.NATIVE_INITIALIZED);
+		notifyEvent(NATIVE_INITIALIZED);
 	}
 
 	public void notifyStart() {
@@ -719,8 +684,8 @@ public class AppInitializer implements IProgress {
 		});
 	}
 
-	public void notifyEvent(@NonNull InitEvents event) {
-		if (event != InitEvents.TASK_CHANGED) {
+	public void notifyEvent(@NonNull AppInitEvents event) {
+		if (event != TASK_CHANGED) {
 			long time = System.currentTimeMillis();
 			System.out.println("Initialized " + event + " in " + (time - startBgTime) + " ms");
 			startBgTime = time;
@@ -735,7 +700,7 @@ public class AppInitializer implements IProgress {
 	@Override
 	public void startTask(String taskName, int work) {
 		this.taskName = taskName;
-		notifyEvent(InitEvents.TASK_CHANGED);
+		notifyEvent(TASK_CHANGED);
 	}
 
 	@Override
@@ -753,7 +718,7 @@ public class AppInitializer implements IProgress {
 	@Override
 	public void finishTask() {
 		taskName = null;
-		notifyEvent(InitEvents.TASK_CHANGED);
+		notifyEvent(TASK_CHANGED);
 	}
 
 	public String getCurrentInitTaskName() {
@@ -789,15 +754,45 @@ public class AppInitializer implements IProgress {
 		}, "Initializing app").start();
 	}
 
+	public void addOnStartListener(@NonNull OnResultCallback<AppInitializer> callback) {
+		addListener(new AppInitializeListener() {
+			@Override
+			public void onStart(@NonNull AppInitializer init) {
+				callback.onResult(init);
+			}
+		});
+	}
+
+	public void addOnProgressListener(@NonNull AppInitEvents trackedEvent,
+	                                  @NonNull OnResultCallback<AppInitializer> callback) {
+		addListener(new AppInitializeListener() {
+			@Override
+			public void onProgress(@NonNull AppInitializer init, @NonNull AppInitEvents event) {
+				if (trackedEvent == event) {
+					callback.onResult(init);
+				}
+			}
+		});
+	}
+
+	public void addOnFinishListener(@NonNull OnResultCallback<AppInitializer> callback) {
+		addListener(new AppInitializeListener() {
+			@Override
+			public void onFinish(@NonNull AppInitializer init) {
+				callback.onResult(init);
+			}
+		});
+	}
+
 	public void addListener(@NonNull AppInitializeListener listener) {
-		listeners = Algorithms.addToList(listeners, listener);
+		listeners = CollectionUtils.addToList(listeners, listener);
 		if (!appInitializing) {
 			listener.onFinish(this);
 		}
 	}
 
 	public void removeListener(@NonNull AppInitializeListener listener) {
-		listeners = Algorithms.removeFromList(listeners, listener);
+		listeners = CollectionUtils.removeFromList(listeners, listener);
 	}
 
 	@Override
@@ -812,5 +807,10 @@ public class AppInitializer implements IProgress {
 			return cls;
 		}
 		return cls.substring(packageLen + 1);
+	}
+
+	private void connectToBRouter() {
+		app.reconnectToBRouter();
+		notifyEvent(BROUTER_INITIALIZED);
 	}
 }

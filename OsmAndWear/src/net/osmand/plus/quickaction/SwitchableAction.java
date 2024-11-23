@@ -3,8 +3,6 @@ package net.osmand.plus.quickaction;
 import static net.osmand.plus.utils.AndroidUtils.isLayoutRtl;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
@@ -26,12 +25,16 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dialogs.SelectMapViewQuickActionsBottomSheet;
+import net.osmand.plus.quickaction.QuickActionListFragment.OnStartDragListener;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
+import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.OnItemMoveCallback;
+import net.osmand.plus.views.controls.maphudbuttons.QuickActionButton;
+import net.osmand.plus.views.layers.MapQuickActionLayer;
+import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -71,21 +74,13 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		if (!getParams().isEmpty()) {
 			showDialog.setChecked(Boolean.valueOf(getParams().get(KEY_DIALOG)));
 		}
-		view.findViewById(R.id.saveButtonContainer).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				boolean selected = showDialog.isChecked();
-				showDialog.setChecked(!selected);
-			}
+		view.findViewById(R.id.saveButtonContainer).setOnClickListener(v -> {
+			boolean selected = showDialog.isChecked();
+			showDialog.setChecked(!selected);
 		});
 
 		RecyclerView list = view.findViewById(R.id.list);
-		adapter = new Adapter(mapActivity, new QuickActionListFragment.OnStartDragListener() {
-			@Override
-			public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
-				touchHelper.startDrag(viewHolder);
-			}
-		});
+		adapter = new Adapter(mapActivity, viewHolder -> touchHelper.startDrag(viewHolder));
 
 		ReorderItemTouchHelperCallback touchHelperCallback = new ReorderItemTouchHelperCallback(adapter);
 		touchHelper = new ItemTouchHelper(touchHelperCallback);
@@ -121,16 +116,16 @@ public abstract class SwitchableAction<T> extends QuickAction {
 			// RTL: A  <| MAIN (selected), MAIN <| B (selected)
 			// LTR: A (selected) |> MAIN , MAIN (selected) |>  B
 			itemName = (selectedMain ? "" : arrow) + getTranslatedItemName(app, mainItem) +
-					 (selectedMain ? arrow : "");
+					(selectedMain ? arrow : "");
 		} else {
 			String disabledItem = getDisabledItem(app);
 			String nextItem = getNextSelectedItem(app);
-			String mainItem = Algorithms.stringsEqual(nextItem, disabledItem) ? selectedItem : nextItem; 
+			String mainItem = Algorithms.stringsEqual(nextItem, disabledItem) ? selectedItem : nextItem;
 			boolean selectedMain = Algorithms.stringsEqual(mainItem, selectedItem);
 			// RTL: A  <| MAIN (selected), MAIN <| B (selected)
 			// LTR: A (selected) |> MAIN , MAIN (selected) |>  B
 			itemName = (selectedMain ? "" : ("\u2026" + arrow)) + getTranslatedItemName(app, mainItem) +
-					 (selectedMain ? (arrow + "\u2026") : "");
+					(selectedMain ? (arrow + "\u2026") : "");
 		}
 		return itemName;
 	}
@@ -165,17 +160,24 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	public abstract String getNextSelectedItem(OsmandApplication app);
 
-	protected void showChooseDialog(FragmentManager fm) {
-		SelectMapViewQuickActionsBottomSheet fragment = new SelectMapViewQuickActionsBottomSheet();
-		Bundle args = new Bundle();
-		args.putLong(KEY_ID, id);
-		fragment.setArguments(args);
-		fragment.show(fm, SelectMapViewQuickActionsBottomSheet.TAG);
+	protected void showChooseDialog(@NonNull MapActivity mapActivity) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		MapQuickActionLayer layer = mapActivity.getMapLayers().getMapQuickActionLayer();
+
+		QuickActionButton button = layer.getSelectedButton();
+		QuickActionButtonState buttonState = button != null ? button.getButtonState() : null;
+		if (buttonState == null) {
+			buttonState = app.getMapButtonsHelper().getButtonStateByAction(this);
+		}
+		if (buttonState != null) {
+			FragmentManager manager = mapActivity.getSupportFragmentManager();
+			SelectMapViewQuickActionsBottomSheet.showInstance(manager, buttonState, id);
+		}
 	}
 
 	public String getNextItemFromSources(@NonNull OsmandApplication app,
-	                                     @NonNull List<Pair<String, String>> sources,
-	                                     @NonNull String defValue) {
+										 @NonNull List<Pair<String, String>> sources,
+										 @NonNull String defValue) {
 		if (!Algorithms.isEmpty(sources)) {
 			String currentSource = getSelectedItem(app);
 			if (sources.size() > 1) {
@@ -199,16 +201,15 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		return null;
 	}
 
-	protected class Adapter extends RecyclerView.Adapter<Adapter.ItemHolder> implements ReorderItemTouchHelperCallback.OnItemMoveCallback {
+	protected class Adapter extends RecyclerView.Adapter<Adapter.ItemHolder> implements OnItemMoveCallback {
 
-		private List<T> itemsList = new ArrayList<>();
-		private final QuickActionListFragment.OnStartDragListener onStartDragListener;
 		private final Context context;
+		private final List<T> itemsList = new ArrayList<>();
+		private final OnStartDragListener dragListener;
 
-		public Adapter(Context context, QuickActionListFragment.OnStartDragListener onStartDragListener) {
+		public Adapter(@NonNull Context context, @NonNull OnStartDragListener dragListener) {
 			this.context = context;
-			this.onStartDragListener = onStartDragListener;
-			this.itemsList = new ArrayList<>();
+			this.dragListener = dragListener;
 		}
 
 		@Override
@@ -223,37 +224,25 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 
-			Drawable icon = app.getUIUtilities().getPaintedIcon(
-					getItemIconRes(app, item), getItemIconColor(app, item));
-			holder.icon.setImageDrawable(icon);
-
+			setIcon(app, item, holder.icon, holder.iconProgressBar);
 			holder.title.setText(getItemName(context, item));
 
-			holder.handleView.setOnTouchListener(new View.OnTouchListener() {
-				@Override
-				public boolean onTouch(View v, MotionEvent event) {
-					if (event.getActionMasked() ==
-							MotionEvent.ACTION_DOWN) {
-						onStartDragListener.onStartDrag(holder);
-					}
-					return false;
+			holder.handleView.setOnTouchListener((v, event) -> {
+				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+					dragListener.onStartDrag(holder);
 				}
+				return false;
 			});
 
-			holder.closeBtn.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
+			holder.closeBtn.setOnClickListener(v -> {
+				String oldTitle = getTitle(itemsList);
+				String defaultName = holder.handleView.getContext().getString(getNameRes());
 
-					String oldTitle = getTitle(itemsList);
-					String defaultName = holder.handleView.getContext().getString(getNameRes());
+				deleteItem(holder.getAdapterPosition());
 
-					deleteItem(holder.getAdapterPosition());
-
-					if (oldTitle.equals(title.getText().toString()) || title.getText().toString().equals(defaultName)) {
-
-						String newTitle = getTitle(itemsList);
-						title.setText(newTitle);
-					}
+				if (oldTitle.equals(title.getText().toString()) || title.getText().toString().equals(defaultName)) {
+					String newTitle = getTitle(itemsList);
+					title.setText(newTitle);
 				}
 			});
 		}
@@ -268,28 +257,22 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		}
 
 		public void deleteItem(int position) {
-
 			if (position == -1) {
 				return;
 			}
-
 			itemsList.remove(position);
 			notifyItemRemoved(position);
 		}
 
 		public void addItems(List<T> data) {
-
 			if (!itemsList.containsAll(data)) {
-
 				itemsList.addAll(data);
 				notifyDataSetChanged();
 			}
 		}
 
 		public void addItem(T item, Context context) {
-
 			if (!itemsList.contains(item)) {
-
 				String oldTitle = getTitle(itemsList);
 				String defaultName = context.getString(getNameRes());
 
@@ -299,7 +282,6 @@ public abstract class SwitchableAction<T> extends QuickAction {
 				notifyItemRangeInserted(oldSize, itemsList.size() - oldSize);
 
 				if (oldTitle.equals(title.getText().toString()) || title.getText().toString().equals(defaultName)) {
-
 					String newTitle = getTitle(itemsList);
 					title.setText(newTitle);
 				}
@@ -349,6 +331,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 			public ImageView handleView;
 			public ImageView closeBtn;
 			public ImageView icon;
+			public ProgressBar iconProgressBar;
 
 			public ItemHolder(View itemView) {
 				super(itemView);
@@ -357,6 +340,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 				handleView = itemView.findViewById(R.id.handle_view);
 				closeBtn = itemView.findViewById(R.id.closeImageButton);
 				icon = itemView.findViewById(R.id.imageView);
+				iconProgressBar = itemView.findViewById(R.id.iconProgressBar);
 			}
 		}
 	}
@@ -366,6 +350,11 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	protected abstract void saveListToParams(List<T> list);
 
 	protected abstract String getItemName(Context context, T item);
+
+	protected void setIcon(@NonNull OsmandApplication app, T item, @NonNull ImageView imageView, @NonNull ProgressBar iconProgressBar) {
+		imageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(
+				getItemIconRes(app, item), getItemIconColor(app, item)));
+	}
 
 	@DrawableRes
 	protected int getItemIconRes(Context context, T item) {
@@ -380,16 +369,13 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	}
 
 	@StringRes
-	protected abstract
-	int getAddBtnText();
+	protected abstract int getAddBtnText();
 
 	@StringRes
-	protected abstract
-	int getDiscrHint();
+	protected abstract int getDiscrHint();
 
 	@StringRes
-	protected abstract
-	int getDiscrTitle();
+	protected abstract int getDiscrTitle();
 
 	protected abstract String getListKey();
 

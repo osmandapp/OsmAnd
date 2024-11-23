@@ -1,6 +1,9 @@
 package net.osmand.plus.views.mapwidgets.configure.dialogs;
 
 import android.app.Activity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,10 +30,20 @@ public abstract class BaseWidgetFragment extends BaseOsmAndFragment implements I
 		}
 	}
 
+	protected void addVerticalSpace(@NonNull ViewGroup container, int space) {
+		View spaceView = new View(getContext());
+		spaceView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, space));
+		container.addView(spaceView);
+	}
+
 	@Override
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 		return nightMode ? R.color.status_bar_main_dark : R.color.activity_background_color_light;
+	}
+
+	public boolean getContentStatusBarNightMode() {
+		return nightMode;
 	}
 
 	@NonNull

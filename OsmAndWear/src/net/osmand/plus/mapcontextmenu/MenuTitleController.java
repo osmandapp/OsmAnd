@@ -229,5 +229,4 @@ public abstract class MenuTitleController {
 
 	protected void onSearchAddressDone() {
 	}
-
 }

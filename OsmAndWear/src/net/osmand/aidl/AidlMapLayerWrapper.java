@@ -1,5 +1,7 @@
 package net.osmand.aidl;
 
+import androidx.annotation.Nullable;
+
 import net.osmand.aidl.maplayer.AMapLayer;
 import net.osmand.aidl.maplayer.point.AMapPoint;
 
@@ -79,6 +81,7 @@ public class AidlMapLayerWrapper {
 		return new ArrayList<>(points.values());
 	}
 
+	@Nullable
 	public AidlMapPointWrapper getPoint(String pointId) {
 		return points.get(pointId);
 	}

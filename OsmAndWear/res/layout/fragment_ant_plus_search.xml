@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="?attr/bg_color"
@@ -21,13 +21,13 @@
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/toolbar_height"
 			android:minHeight="@dimen/toolbar_height"
-			osmand:layout_collapseMode="pin"
+			app:layout_collapseMode="pin"
 			android:gravity="center"
-			osmand:title="@string/ant_plus_searching"
-			osmand:titleMarginEnd="0dp"
-			osmand:titleMarginStart="60dp"
-			osmand:titleTextAppearance="@style/AppBarTitle"
-			osmand:titleTextColor="?attr/app_bar_primary_item_color">
+			app:title="@string/ant_plus_searching"
+			app:titleMarginEnd="0dp"
+			app:titleMarginStart="60dp"
+			app:titleTextAppearance="@style/AppBarTitle"
+			app:titleTextColor="?attr/app_bar_primary_item_color">
 
 		</androidx.appcompat.widget.Toolbar>
 
@@ -54,7 +54,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="1dp"
 				android:layout_marginBottom="48dp"
-				osmand:layout_constraintBottom_toTopOf="@+id/searching_text" />
+				app:layout_constraintBottom_toTopOf="@+id/searching_text" />
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:layout_width="0dp"
@@ -64,10 +64,10 @@
 				android:scaleType="centerCrop"
 				android:src="@drawable/ic_sensors_search"
 				android:tint="?attr/list_divider"
-				osmand:layout_constraintBottom_toBottomOf="@+id/guideline"
-				osmand:layout_constraintLeft_toLeftOf="parent"
-				osmand:layout_constraintRight_toRightOf="parent"
-				osmand:layout_constraintTop_toTopOf="@+id/guideline" />
+				app:layout_constraintBottom_toBottomOf="@+id/guideline"
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintRight_toRightOf="parent"
+				app:layout_constraintTop_toTopOf="@+id/guideline" />
 
 			<me.zhanghai.android.materialprogressbar.MaterialProgressBar
 				android:id="@+id/progressBar"
@@ -77,13 +77,13 @@
 				android:layout_gravity="center_vertical"
 				android:indeterminate="true"
 				android:visibility="visible"
-				osmand:layout_constraintBottom_toBottomOf="@+id/guideline"
-				osmand:layout_constraintLeft_toLeftOf="parent"
-				osmand:layout_constraintRight_toRightOf="parent"
-				osmand:layout_constraintTop_toTopOf="@+id/guideline"
-				osmand:mpb_progressStyle="circular"
-				osmand:mpb_setBothDrawables="true"
-				osmand:mpb_useIntrinsicPadding="false" />
+				app:layout_constraintBottom_toBottomOf="@+id/guideline"
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintRight_toRightOf="parent"
+				app:layout_constraintTop_toTopOf="@+id/guideline"
+				app:mpb_progressStyle="circular"
+				app:mpb_setBothDrawables="true"
+				app:mpb_useIntrinsicPadding="false" />
 
 			<TextView
 				android:id="@+id/searching_text"
@@ -96,11 +96,10 @@
 				android:text="@string/ant_plus_searching_text"
 				android:textColor="?android:textColor"
 				android:textSize="@dimen/default_list_text_size"
-				android:textStyle="bold"
-				osmand:layout_constraintLeft_toLeftOf="parent"
-				osmand:layout_constraintRight_toRightOf="parent"
-				osmand:layout_constraintTop_toTopOf="parent"
-				osmand:typeface="@string/font_roboto_medium" />
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintRight_toRightOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				app:typefaceWeight="medium" />
 
 			<TextView
 				android:id="@+id/no_bluetooth_description_searching"
@@ -116,10 +115,10 @@
 				android:text="@string/ant_plus_searching_text_description"
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_desc_text_size"
-				osmand:layout_constraintLeft_toLeftOf="parent"
-				osmand:layout_constraintRight_toRightOf="parent"
-				osmand:layout_constraintTop_toBottomOf="@+id/searching_text"
-				osmand:typeface="@string/font_roboto_medium" />
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintRight_toRightOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/searching_text"
+				app:typefaceWeight="medium" />
 
 
 		</androidx.constraintlayout.widget.ConstraintLayout> <!--SEARCHING-->
@@ -142,9 +141,9 @@
 				android:layout_marginBottom="@dimen/horizontal_divider_height"
 				android:src="@drawable/ic_action_sensor_find"
 				android:tint="?attr/default_icon_color"
-				osmand:layout_constraintBottom_toTopOf="@+id/nothing_found_text"
-				osmand:layout_constraintLeft_toLeftOf="parent"
-				osmand:layout_constraintRight_toRightOf="parent" />
+				app:layout_constraintBottom_toTopOf="@+id/nothing_found_text"
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintRight_toRightOf="parent" />
 
 			<TextView
 				android:id="@+id/nothing_found_text"
@@ -157,11 +156,10 @@
 				android:text="@string/ant_plus_nothing_found_text"
 				android:textColor="?android:textColor"
 				android:textSize="@dimen/default_list_text_size"
-				android:textStyle="bold"
-				osmand:layout_constraintLeft_toLeftOf="parent"
-				osmand:layout_constraintRight_toRightOf="parent"
-				osmand:layout_constraintTop_toTopOf="parent"
-				osmand:typeface="@string/font_roboto_medium" />
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintRight_toRightOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				app:typefaceWeight="medium" />
 
 			<TextView
 				android:id="@+id/nothing_found_description"
@@ -175,10 +173,10 @@
 				android:text="@string/ant_plus_nothing_found_description"
 				android:textColor="?android:textColorSecondary"
 				android:textSize="@dimen/default_desc_text_size"
-				osmand:layout_constraintLeft_toLeftOf="parent"
-				osmand:layout_constraintRight_toRightOf="parent"
-				osmand:layout_constraintTop_toBottomOf="@+id/nothing_found_text"
-				osmand:typeface="@string/font_roboto_medium" />
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintRight_toRightOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/nothing_found_text"
+				app:typefaceWeight="medium" />
 
 			<include
 				android:id="@+id/button_container"
@@ -186,9 +184,9 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="@dimen/content_padding"
-				osmand:layout_constraintLeft_toLeftOf="parent"
-				osmand:layout_constraintRight_toRightOf="parent"
-				osmand:layout_constraintTop_toBottomOf="@+id/nothing_found_description" />
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintRight_toRightOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/nothing_found_description" />
 
 		</androidx.constraintlayout.widget.ConstraintLayout> <!--NOTHING_FOUND-->
 
@@ -208,7 +206,7 @@
 				android:lineSpacingExtra="3sp"
 				android:textColor="@color/preference_category_title"
 				android:textSize="@dimen/default_desc_text_size"
-				osmand:typeface="@string/font_roboto_medium" />
+				app:typefaceWeight="medium" />
 
 			<androidx.recyclerview.widget.RecyclerView
 				android:id="@+id/found_devices_list"

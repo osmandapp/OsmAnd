@@ -3,6 +3,7 @@ package net.osmand.plus.plugins.externalsensors.dialogs
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorRes
@@ -83,14 +84,11 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
     }
 
     override fun setupToolbar(view: View) {
-        val closeButton = view.findViewById<View>(R.id.close_button)
-        if (closeButton != null) {
-            closeButton.setOnClickListener {
+        view.findViewById<ImageButton>(R.id.close_button).apply {
+            setOnClickListener {
                 requireActivity().onBackPressed()
             }
-            if (closeButton is ImageView) {
-                UiUtilities.rotateImageByLayoutDirection(closeButton)
-            }
+           setImageResource(AndroidUtils.getNavigationIconResId(context))
         }
     }
 
@@ -155,8 +153,8 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
             app.getString(connectedTextId),
             getConnectionTypeName()
         )
-        val connectionStateIcon: ImageView = view.findViewById(R.id.connection_state_icon)
-        connectionStateIcon.setImageDrawable(signalLevelIcon)
+        connectionState?.setCompoundDrawablesWithIntrinsicBounds(signalLevelIcon, null, null, null);
+
         var batteryLevelValue = device.batteryLevel.toString()
         batteryLevel?.text = batteryLevelValue
         if (device.batteryLevel == BATTERY_UNKNOWN_LEVEL_VALUE) {
@@ -288,7 +286,7 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
     }
 
     private fun onForgetDevice() {
-        showInstance(requireActivity().supportFragmentManager, this, device)
+        showInstance(requireActivity().supportFragmentManager, this, device.deviceId)
     }
 
     override fun onResume() {
@@ -374,6 +372,10 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
     override fun getStatusBarColorId(): Int {
         AndroidUiHelper.setStatusBarContentColor(view, nightMode)
         return if (nightMode) R.color.status_bar_main_dark else R.color.activity_background_color_light
+    }
+
+    override fun getContentStatusBarNightMode(): Boolean {
+        return nightMode
     }
 
     override fun onForgetSensorConfirmed(device: AbstractDevice<out AbstractSensor>) {

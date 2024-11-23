@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
@@ -94,7 +95,7 @@ public class TargetPointsHelper {
 		}
 
 		@SuppressLint("StringFormatInvalid")
-		public PointDescription getPointDescription(Context ctx) {
+		public PointDescription getPointDescription(@NonNull Context ctx) {
 			if (!intermediate) {
 				return new PointDescription(PointDescription.POINT_TYPE_TARGET, ctx.getString(R.string.destination_point, ""),
 						getOnlyName());
@@ -286,6 +287,7 @@ public class TargetPointsHelper {
 		}
 	}
 
+	@Nullable
 	public TargetPoint getPointToNavigate() {
 		return pointToNavigate;
 	}

@@ -2,43 +2,57 @@ package net.osmand.plus.widgets.popup;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.view.View;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.Nullable;
 
 public class PopUpMenuItem {
 
 	private final CharSequence title;
+	@ColorInt
+	private final Integer titleColor;
 	private final Drawable icon;
-	private final View.OnClickListener onClickListener;
+	private final OnPopUpMenuItemClickListener onClickListener;
 	@ColorInt
 	private final Integer compoundBtnColor;
 	private final boolean selected;
 	private final boolean showTopDivider;
+	private final Object tag;
 
 	private PopUpMenuItem(CharSequence title,
-	                     Drawable icon,
-	                     View.OnClickListener onClickListener,
-	                     Integer compoundBtnColor,
-	                     boolean selected,
-	                     boolean showTopDivider) {
+						  @ColorInt @Nullable Integer titleColor,
+	                      Drawable icon,
+	                      OnPopUpMenuItemClickListener onClickListener,
+	                      Integer compoundBtnColor,
+	                      boolean selected,
+	                      boolean showTopDivider,
+	                      Object tag) {
 		this.title = title;
+		this.titleColor = titleColor;
 		this.icon = icon;
 		this.onClickListener = onClickListener;
 		this.compoundBtnColor = compoundBtnColor;
 		this.selected = selected;
 		this.showTopDivider = showTopDivider;
+		this.tag = tag;
 	}
 
 	public CharSequence getTitle() {
 		return title;
 	}
 
+	@ColorInt
+	@Nullable
+	public Integer getTitleColor() {
+		return titleColor;
+	}
+
 	public Drawable getIcon() {
 		return icon;
 	}
 
-	public View.OnClickListener getOnClickListener() {
+	@Nullable
+	public OnPopUpMenuItemClickListener getOnClickListener() {
 		return onClickListener;
 	}
 
@@ -58,15 +72,26 @@ public class PopUpMenuItem {
 		return showTopDivider;
 	}
 
+	public Object getTag() {
+		return tag;
+	}
+
+	public boolean hasCustomization() {
+		return isShowCompoundBtn() || getTitleColor() != null;
+	}
+
 	public static class Builder {
 		private final Context ctx;
 		private CharSequence title;
+		@ColorInt
+		private Integer titleColor;
 		private Drawable icon;
-		private View.OnClickListener onClickListener;
+		private OnPopUpMenuItemClickListener onClickListener;
 		@ColorInt
 		private Integer compoundBtnColor;
 		private boolean selected;
 		private boolean showTopDivider;
+		private Object tag;
 
 		public Builder(Context ctx) {
 			this.ctx = ctx;
@@ -82,12 +107,17 @@ public class PopUpMenuItem {
 			return this;
 		}
 
+		public Builder setTitleColor(@ColorInt Integer titleColor) {
+			this.titleColor = titleColor;
+			return this;
+		}
+
 		public Builder setIcon(Drawable icon) {
 			this.icon = icon;
 			return this;
 		}
 
-		public Builder setOnClickListener(View.OnClickListener onClickListener) {
+		public Builder setOnClickListener(@Nullable OnPopUpMenuItemClickListener onClickListener) {
 			this.onClickListener = onClickListener;
 			return this;
 		}
@@ -107,8 +137,14 @@ public class PopUpMenuItem {
 			return this;
 		}
 
+		public Builder setTag(Object tag) {
+			this.tag = tag;
+			return this;
+		}
+
 		public PopUpMenuItem create() {
-			return new PopUpMenuItem(title, icon, onClickListener, compoundBtnColor, selected, showTopDivider);
+			return new PopUpMenuItem(title, titleColor, icon,
+					onClickListener, compoundBtnColor, selected, showTopDivider, tag);
 		}
 	}
 }

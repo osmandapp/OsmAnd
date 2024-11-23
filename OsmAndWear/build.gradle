@@ -36,11 +36,21 @@ android {
 		}
 	}
 
+	compileOptions {
+		sourceCompatibility = JavaVersion.VERSION_17
+		targetCompatibility = JavaVersion.VERSION_17
+		coreLibraryDesugaringEnabled true
+	}
+
+	kotlinOptions {
+		jvmTarget = "17"
+	}
+
 	defaultConfig {
-		minSdkVersion 23
-		versionCode 4600
+		minSdkVersion 24
+		versionCode 5000
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
-		versionName "4.6.0"
+		versionName "5.0.0"
 		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
 		versionName System.getenv("APK_VERSION_SUFFIX")? versionName + System.getenv("APK_VERSION_SUFFIX").toString(): versionName
 	}
@@ -102,6 +112,10 @@ android {
 		legacy {
 			jniLibs.srcDirs = ["libc++"]
 		}
+	}
+
+	buildFeatures {
+		aidl true
 	}
 
 	flavorDimensions "version", "coreversion", "abi"
@@ -170,16 +184,49 @@ android {
 		}
 	}
 
+	applicationVariants.configureEach {
+		def variant = it
+		def taskName = variant.name.capitalize()
+		def mergeAssetsTaskName = "merge${taskName}Assets"
+		tasks.named(mergeAssetsTaskName).configure { osmandTask ->
+			println(osmandTask.getName() + " merge assets")
+			osmandTask.dependsOn(collectExternalResources)
+		}
+		if (taskName.endsWith("Debug")) {
+			def mergeAndroidTestAssetsTaskName = "merge${taskName}AndroidTestAssets"
+			tasks.named(mergeAndroidTestAssetsTaskName).configure { osmandTask ->
+				println(osmandTask.getName() + " merge test assets")
+				osmandTask.dependsOn(collectExternalResources)
+			}
+		}
+		def mapSourceSetPathsName= "map${taskName}SourceSetPaths"
+		tasks.named(mapSourceSetPathsName).configure { osmandTask ->
+			println(osmandTask.getName())
+			osmandTask.dependsOn(copyMapShaderIcons)
+			osmandTask.dependsOn(copyMapPOIIcons)
+			osmandTask.dependsOn(copyLargePOIIcons)
+		}
+		def mergeResources= "merge${taskName}Resources"
+		tasks.named(mergeResources).configure { osmandTask ->
+			println(osmandTask.getName() + " merge resources")
+			osmandTask.dependsOn(collectExternalResources)
+		}
+	}
 }
 
 afterEvaluate {
-	android.applicationVariants.all { variant ->
+	android.applicationVariants.configureEach { variant ->
 		if (variant.name.contains('Opengldebug')) {
-			variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, copyOsmAndCoreWithJNI, cleanupDuplicatesInCore)
+			variant.javaCompileProvider.configure {
+				dependsOn collectExternalResources, buildOsmAndCore, copyOsmAndCoreWithJNI, cleanupDuplicatesInCore
+			}
 		} else {
-			variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
+			variant.javaCompileProvider.configure {
+				dependsOn collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore
+			}
 		}
 	}
+
 	Gradle gradle = getGradle()
 	String tskReqStr = gradle.getStartParameter().getTaskRequests().toString().toLowerCase()
 	if (tskReqStr.contains("huawei")) {
@@ -187,7 +234,7 @@ afterEvaluate {
 	}
 }
 
-task copyOsmAndCoreWithJNI() {
+tasks.register('copyOsmAndCoreWithJNI') {
 	dependsOn buildOsmAndCore
 	doLast {
 		file("libs/armeabi-v7a").mkdirs()
@@ -221,4 +268,5 @@ dependencies {
 
 	amazonFreeImplementation "com.amazon:in-app-purchasing:2.0.76@jar"
 	amazonFullImplementation "com.amazon:in-app-purchasing:2.0.76@jar"
+	coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.3")
 }

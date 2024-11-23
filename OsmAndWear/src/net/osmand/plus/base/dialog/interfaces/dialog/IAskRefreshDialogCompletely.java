@@ -5,6 +5,6 @@ import androidx.annotation.NonNull;
 /**
  * Initiates a request to completely refresh the dialog UI from outside.
  */
-public interface IAskRefreshDialogCompletely {
+public interface IAskRefreshDialogCompletely extends IDialog {
 	void onAskRefreshDialogCompletely(@NonNull String processId);
 }

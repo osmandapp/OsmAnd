@@ -12,11 +12,6 @@
 			android:theme="@style/FirstSplashScreenFree"
 			tools:replace="android:theme"/>
 
-		<service
-			android:name="net.osmand.plus.NavigationService"
-			tools:replace="android:process"
-			android:process="net.osmand"/>
-
 		<provider
 			android:name="androidx.core.content.FileProvider"
 			tools:replace="android:authorities"

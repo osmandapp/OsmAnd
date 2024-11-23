@@ -53,6 +53,10 @@ public class PopUpMenuArrayAdapter extends ArrayAdapter<PopUpMenuItem> {
 		if (item != null) {
 			TextView tvTitle = convertView.findViewById(R.id.title);
 			tvTitle.setText(item.getTitle());
+			Integer titleColor = item.getTitleColor();
+			if (titleColor != null) {
+				tvTitle.setTextColor(titleColor);
+			}
 			ImageView ivIcon = convertView.findViewById(R.id.icon);
 			Drawable icon = item.getIcon();
 			if (icon != null) {

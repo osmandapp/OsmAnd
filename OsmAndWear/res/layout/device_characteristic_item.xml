@@ -45,7 +45,20 @@
 			android:paddingBottom="@dimen/content_padding_half"
 			android:textColor="?android:textColorSecondary"
 			android:textSize="@dimen/default_list_text_size"
-			tools:text="20 km/h" />
+			tools:text="20" />
+
+		<TextView
+			android:id="@+id/unit"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:gravity="start"
+			android:layout_marginStart="@dimen/text_margin_small"
+			android:paddingTop="@dimen/content_padding_half"
+			android:paddingBottom="@dimen/content_padding_half"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="@dimen/default_list_text_size"
+			tools:text="km/h" />
 
 	</LinearLayout>
 

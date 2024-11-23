@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+	<item
+		android:id="@+id/weather_data_source"
+		android:contentDescription="@string/data_source"
+		android:icon="@drawable/ic_action_settings_outlined"
+		android:title="@string/data_source"
+		app:iconTint="?attr/icon_color_primary"
+		app:showAsAction="always" />
+</menu>

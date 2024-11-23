@@ -2,6 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:orientation="horizontal"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -33,20 +34,17 @@
             android:layout_gravity="center_vertical"
             android:textSize="@dimen/default_desc_text_size" />
 
-		<TextView
-			android:id="@+id/description"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"
-			android:layout_marginTop="2dp"
-			android:layout_marginEnd="16dp"
-			android:layout_marginRight="16dp"
-			android:gravity="right"
-			android:text="500 m"
-			android:textColor="@color/color_myloc_distance"
-			android:textSize="@dimen/default_desc_text_size"
-			android:textStyle="bold"
-			android:translationX="50dp" />
+        <net.osmand.plus.widgets.TextViewEx
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+	android:layout_marginTop="2dp"
+	android:layout_marginEnd="16dp"
+	android:layout_marginRight="16dp"
+	android:gravity="right"
+            android:text="500 m"
+	        android:translationX="50dp" />
 
     </LinearLayout>
 
@@ -71,7 +69,7 @@
             android:id="@+id/descriptionEx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
+            app:typefaceWeight="medium"
             android:textSize="@dimen/default_desc_text_size"
             android:textColor="@color/color_myloc_distance"
             android:layout_gravity="center_vertical"

@@ -2,15 +2,7 @@ package net.osmand.plus.liveupdates;
 
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.BINARY_ROAD_MAP_INDEX_EXT;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatShortDateTime;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastSuccessfulUpdateCheck;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.*;
 import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.getOsmandIconColorId;
 import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.getSecondaryIconColorId;
 
@@ -19,12 +11,10 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -32,13 +22,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
-import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
-import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
@@ -61,14 +50,10 @@ import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.liveupdates.LiveUpdatesClearBottomSheet.RefreshLiveUpdates;
-import net.osmand.plus.liveupdates.LiveUpdatesHelper.LiveUpdateListener;
-import net.osmand.plus.liveupdates.LiveUpdatesHelper.TimeOfDay;
-import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.OnLiveUpdatesForLocalChange;
 import net.osmand.plus.liveupdates.LoadLiveMapsTask.LocalIndexInfoAdapter;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -76,6 +61,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
 import net.osmand.plus.widgets.TextViewEx;
@@ -192,17 +178,13 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		AndroidUtils.setTextSecondaryColor(app, title, nightMode);
 		title.setText(R.string.latest_openstreetmap_update);
 		title.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_desc_text_size));
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			title.setLetterSpacing(AndroidUtils.getFloatValueFromRes(app, R.dimen.description_letter_spacing));
-		}
+		title.setLetterSpacing(AndroidUtils.getFloatValueFromRes(app, R.dimen.description_letter_spacing));
 
 		descriptionTime = timeContainer.findViewById(R.id.sub_title);
 		AndroidUtils.setTextPrimaryColor(app, descriptionTime, nightMode);
-		Typeface typeface = FontCache.getFont(app, getString(R.string.font_roboto_medium));
-		descriptionTime.setTypeface(typeface);
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			descriptionTime.setLetterSpacing(AndroidUtils.getFloatValueFromRes(app, R.dimen.description_letter_spacing));
-		}
+		descriptionTime.setTypeface(FontCache.getMediumFont());
+		descriptionTime.setLetterSpacing(AndroidUtils.getFloatValueFromRes(app, R.dimen.description_letter_spacing));
+
 		return view;
 	}
 
@@ -253,7 +235,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		}
 	}
 
-	protected void createToolbar(ViewGroup appBar) {
+	protected void createToolbar(@NonNull ViewGroup appBar) {
 		AppBarLayout appBarLayout = (AppBarLayout) UiUtilities.getInflater(getActivity(), nightMode)
 				.inflate(R.layout.global_preferences_toolbar_with_switch, appBar);
 
@@ -263,28 +245,22 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 
 		ImageView closeButton = toolbar.findViewById(R.id.close_button);
 		UiUtilities.rotateImageByLayoutDirection(closeButton);
-		closeButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		closeButton.setOnClickListener(v -> dismiss());
 
-		FrameLayout iconHelpContainer = toolbar.findViewById(R.id.action_button);
-		int iconColorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
-		AppCompatImageButton iconHelp = toolbar.findViewById(R.id.action_button_icon);
-		Drawable helpDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_help_online, iconColorResId);
-		iconHelp.setImageDrawable(helpDrawable);
-		iconHelpContainer.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Activity activity = getActivity();
-				if (activity != null) {
-					String docsUrl = getString(R.string.docs_osmand_live);
-					AndroidUtils.openUrl(activity, Uri.parse(docsUrl), nightMode);
-				}
+		LayoutInflater inflater = UiUtilities.getInflater(toolbar.getContext(), nightMode);
+		ViewGroup container = toolbar.findViewById(R.id.actions_container);
+
+		int colorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
+		ImageButton button = (ImageButton) inflater.inflate(R.layout.action_button, container, false);
+		button.setImageDrawable(getIcon(R.drawable.ic_action_help_online, colorId));
+		button.setOnClickListener(view -> {
+			Activity activity = getActivity();
+			if (activity != null) {
+				String docsUrl = getString(R.string.docs_osmand_live);
+				AndroidUtils.openUrl(activity, Uri.parse(docsUrl), nightMode);
 			}
 		});
+		container.addView(button);
 
 		toolbarSwitchContainer = appBarLayout.findViewById(R.id.toolbar_switch_container);
 		updateToolbarSwitch(settings.IS_LIVE_UPDATES_ON.get());
@@ -299,30 +275,27 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		switchView.setChecked(isChecked);
 		UiUtilities.setupCompoundButton(switchView, nightMode, CompoundButtonType.TOOLBAR);
 
-		toolbarSwitchContainer.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				boolean visible = !isChecked;
-				if (visible) {
-					if (InAppPurchaseUtils.isLiveUpdatesAvailable(app)) {
-						switchOnLiveUpdates();
-						updateToolbarSwitch(true);
-					} else {
-						updateToolbarSwitch(false);
-						app.showToastMessage(getString(R.string.osm_live_ask_for_purchase));
-
-						FragmentActivity activity = getActivity();
-						if (activity != null) {
-							ChoosePlanFragment.showInstance(activity, OsmAndFeature.HOURLY_MAP_UPDATES);
-						}
-					}
+		toolbarSwitchContainer.setOnClickListener(view -> {
+			boolean visible = !isChecked;
+			if (visible) {
+				if (InAppPurchaseUtils.isLiveUpdatesAvailable(app)) {
+					switchOnLiveUpdates();
+					updateToolbarSwitch(true);
 				} else {
-					settings.IS_LIVE_UPDATES_ON.set(false);
-					enableLiveUpdates(false);
 					updateToolbarSwitch(false);
+					app.showToastMessage(getString(R.string.osm_live_ask_for_purchase));
+
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						ChoosePlanFragment.showInstance(activity, OsmAndFeature.HOURLY_MAP_UPDATES);
+					}
 				}
-				updateList();
+			} else {
+				settings.IS_LIVE_UPDATES_ON.set(false);
+				enableLiveUpdates(false);
+				updateToolbarSwitch(false);
 			}
+			updateList();
 		});
 
 		TextView title = toolbarSwitchContainer.findViewById(R.id.switchButtonText);
@@ -532,8 +505,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 				subTitle.setText(subTitleText);
 				subTitle.setTextColor(ContextCompat.getColor(app, liveUpdateOn
 						? ColorUtilities.getActiveColorId(nightMode) : ColorUtilities.getSecondaryTextColorId(nightMode)));
-				Typeface typeface = FontCache.getFont(app, getString(R.string.font_roboto_medium));
-				subTitle.setTypeface(typeface);
+				subTitle.setTypeface(FontCache.getMediumFont());
 			}
 
 			Drawable statusDrawable = AppCompatResources.getDrawable(app, R.drawable.ic_map);
@@ -549,12 +521,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 
 			if (InAppPurchaseUtils.isLiveUpdatesAvailable(app)) {
 				compoundButton.setEnabled(liveUpdateOn);
-				compoundButton.setOnCheckedChangeListener(new SwitchCompat.OnCheckedChangeListener() {
-					@Override
-					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-						onUpdateLocalIndex(item, isChecked, LiveUpdatesFragment.this::runSort);
-					}
-				});
+				compoundButton.setOnCheckedChangeListener((buttonView, isChecked) -> onUpdateLocalIndex(item, isChecked, LiveUpdatesFragment.this::runSort));
 			} else {
 				compoundButton.setEnabled(false);
 			}

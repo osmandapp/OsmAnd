@@ -16,7 +16,7 @@
 	android:paddingBottom="@dimen/content_padding_half"
 	android:textColor="?attr/active_color_basic"
 	android:textSize="10sp"
-	app:typeface="@string/font_roboto_medium"
+	app:typefaceWeight="medium"
 	tools:text="@string/read_more"
 	android:paddingStart="@dimen/content_padding_half"
 	android:paddingEnd="@dimen/content_padding_half" />

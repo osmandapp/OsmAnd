@@ -13,16 +13,17 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.ui.ImportTracksAdapter.ImportTracksListener;
+import net.osmand.plus.myplaces.tracks.MapBitmapDrawerListener;
+import net.osmand.plus.myplaces.tracks.MapDrawParams;
 import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer;
-import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer.TrackBitmapDrawerListener;
-import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer.TracksDrawParams;
+import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxBlockStatisticsBuilder;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -35,7 +36,7 @@ class ImportTrackViewHolder extends ViewHolder {
 	final OsmandApplication app;
 	final UiUtilities uiUtilities;
 	final ImportTracksListener listener;
-	final TracksDrawParams drawParams;
+	final MapDrawParams drawParams;
 
 	final TextView title;
 	final TextView selectedTitle;
@@ -50,7 +51,7 @@ class ImportTrackViewHolder extends ViewHolder {
 
 	final boolean nightMode;
 
-	ImportTrackViewHolder(@NonNull View view, @NonNull TracksDrawParams drawParams,
+	ImportTrackViewHolder(@NonNull View view, @NonNull MapDrawParams drawParams,
 	                      @Nullable ImportTracksListener listener, boolean nightMode) {
 		super(view);
 		this.app = (OsmandApplication) view.getContext().getApplicationContext();
@@ -74,7 +75,7 @@ class ImportTrackViewHolder extends ViewHolder {
 	}
 
 	public void bindView(@NonNull ImportTrackItem item, @NonNull List<WptPt> points, boolean selected,
-	                     @Nullable TrackBitmapDrawerListener drawerListener) {
+	                     @Nullable MapBitmapDrawerListener drawerListener) {
 		setupHeaderRow(item);
 		setupPointsRow(item, points);
 		setupStatisticsRow(item);
@@ -83,7 +84,7 @@ class ImportTrackViewHolder extends ViewHolder {
 	}
 
 	private void setupStatisticsRow(@NonNull ImportTrackItem item) {
-		GPXTrackAnalysis analysis = item.selectedGpxFile.getTrackAnalysis(app);
+		GpxTrackAnalysis analysis = item.selectedGpxFile.getTrackAnalysis(app);
 		GpxBlockStatisticsBuilder builder = new GpxBlockStatisticsBuilder(app, item.selectedGpxFile, nightMode);
 		builder.setBlocksView(recyclerView, false);
 		builder.initStatBlocks(null, ColorUtilities.getActiveColor(app, nightMode), analysis);
@@ -124,12 +125,12 @@ class ImportTrackViewHolder extends ViewHolder {
 		pointsCounter.setText(app.getString(R.string.ltr_or_rtl_combine_via_slash, selectedPoints, allPoints));
 	}
 
-	private void drawTrackImage(@NonNull ImportTrackItem item, @Nullable TrackBitmapDrawerListener drawerListener) {
+	private void drawTrackImage(@NonNull ImportTrackItem item, @Nullable MapBitmapDrawerListener listener) {
 		if (item.bitmapDrawer == null) {
-			GPXFile gpxFile = item.selectedGpxFile.getGpxFile();
-			item.bitmapDrawer = new TrackBitmapDrawer(app, gpxFile, drawParams, null);
-			item.bitmapDrawer.setDrawEnabled(true);
-			item.bitmapDrawer.addListener(drawerListener);
+			GpxFile gpxFile = item.selectedGpxFile.getGpxFile();
+			item.bitmapDrawer = new TrackBitmapDrawer(app, drawParams, gpxFile, null);
+			item.bitmapDrawer.addListener(listener);
+			item.bitmapDrawer.setDefaultTrackColor(GpxAppearanceAdapter.getTrackColor(app));
 			item.bitmapDrawer.initAndDraw();
 		} else {
 			image.setClipToOutline(true);

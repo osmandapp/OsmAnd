@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +10,9 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
-import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.configmap.tracks.TrackItem;
-import net.osmand.plus.configmap.tracks.TracksComparator;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyFolderLoadingTracksViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.EmptySmartFolderLoadingTracksViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder;
@@ -34,17 +33,16 @@ import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TrackFolderViewHolder
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.VisibleTracksViewHolder;
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.plus.track.data.SmartFolder;
-import net.osmand.plus.track.data.TrackFolder;
-import net.osmand.plus.track.data.TrackFolderAnalysis;
-import net.osmand.plus.track.data.TracksGroup;
+import net.osmand.shared.gpx.data.SmartFolder;
+import net.osmand.shared.gpx.data.TrackFolder;
+import net.osmand.shared.gpx.filters.TrackFolderAnalysis;
+import net.osmand.shared.gpx.data.TracksGroup;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -86,10 +84,10 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private boolean selectionMode;
 	private boolean shouldShowFolder;
 
-	public TrackFoldersAdapter(@NonNull OsmandApplication app, boolean nightMode) {
-		this.app = app;
+	public TrackFoldersAdapter(@NonNull Context context, boolean nightMode) {
+		this.app = (OsmandApplication) context.getApplicationContext();
 		this.nightMode = nightMode;
-		locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
+		locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(context);
 		locationViewCache.arrowResId = R.drawable.ic_direction_arrow;
 		locationViewCache.arrowColor = ColorUtilities.getActiveIconColorId(nightMode);
 	}
@@ -97,19 +95,11 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public void setItems(@NonNull List<Object> items) {
 		this.items.clear();
 		this.items.addAll(items);
-		sortItems();
 		notifyDataSetChanged();
 	}
 
 	public void setSortMode(@NonNull TracksSortMode sortMode) {
 		this.sortMode = sortMode;
-		sortItems();
-		notifyDataSetChanged();
-	}
-
-	private void sortItems() {
-		LatLon latLon = app.getMapViewTrackingUtilities().getDefaultLocation();
-		Collections.sort(items, new TracksComparator(sortMode, latLon));
 	}
 
 	public void setSelectionMode(boolean selectionMode) {

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.track.data.TrackFolderAnalysis;
+import net.osmand.shared.gpx.filters.TrackFolderAnalysis;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
@@ -30,12 +30,12 @@ public class FolderStatsViewHolder extends RecyclerView.ViewHolder {
 
 	@NonNull
 	private String getFormattedStats(@NonNull TrackFolderAnalysis analysis) {
-		StringBuilder builder = new StringBuilder(app.getString(R.string.shared_string_tracks) + " - " + analysis.tracksCount + ", ");
-		appendField(builder, app.getString(R.string.distance), OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app), false);
-		appendField(builder, app.getString(R.string.shared_string_uphill), OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app), false);
-		appendField(builder, app.getString(R.string.shared_string_downhill), OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app), false);
-		appendField(builder, app.getString(R.string.duration), Algorithms.formatDuration(analysis.timeSpan, app.accessibilityEnabled()), false);
-		appendField(builder, app.getString(R.string.shared_string_size), AndroidUtils.formatSize(app, analysis.fileSize), true);
+		StringBuilder builder = new StringBuilder(app.getString(R.string.shared_string_tracks) + " - " + analysis.getTracksCount() + ", ");
+		appendField(builder, app.getString(R.string.distance), OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app), false);
+		appendField(builder, app.getString(R.string.shared_string_uphill), OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationUp(), app), false);
+		appendField(builder, app.getString(R.string.shared_string_downhill), OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationDown(), app), false);
+		appendField(builder, app.getString(R.string.duration), Algorithms.formatDuration(analysis.getTimeSpan(), app.accessibilityEnabled()), false);
+		appendField(builder, app.getString(R.string.shared_string_size), AndroidUtils.formatSize(app, analysis.getFileSize()), true);
 		return builder.toString();
 	}
 

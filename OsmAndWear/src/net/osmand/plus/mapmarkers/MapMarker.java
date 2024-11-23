@@ -6,7 +6,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
@@ -48,7 +48,7 @@ public class MapMarker implements LocationPoint {
 				ItineraryType.FAVOURITES;
 	}
 
-	public PointDescription getPointDescription(Context ctx) {
+	public PointDescription getPointDescription(@NonNull Context ctx) {
 		return new PointDescription(POINT_TYPE_MAP_MARKER, ctx.getString(R.string.map_marker), getOnlyName());
 	}
 

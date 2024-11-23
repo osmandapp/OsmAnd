@@ -25,14 +25,13 @@
             android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:text="@string/select_map_marker"
             android:textColor="?attr/app_bar_primary_item_color"
             android:textSize="12sp"
-            android:textStyle="bold"
             android:translationX="-20dp"
-            app:typeface="@string/font_roboto_regular" />
+            android:textStyle="normal"
+	        android:layout_marginStart="16dp" />
 
     </LinearLayout>
 

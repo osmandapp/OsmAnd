@@ -1,15 +1,17 @@
 package net.osmand.data;
 
+import static net.osmand.plus.myplaces.favorites.FavoriteGroup.PERSONAL_CATEGORY;
+import static net.osmand.plus.plugins.parking.ParkingPositionPlugin.PARKING_TYPE;
+
 import android.content.Context;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.myplaces.favorites.FavoriteGroup;
-import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
 import net.osmand.plus.settings.backend.preferences.BooleanPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 
@@ -31,19 +33,22 @@ public enum SpecialPointType {
 		this.iconId = iconId;
 	}
 
+	@NonNull
 	public String getName() {
 		return typeName;
 	}
 
+	@NonNull
 	public String getCategory() {
-		return FavoriteGroup.PERSONAL_CATEGORY;
+		return PERSONAL_CATEGORY;
 	}
 
+	@DrawableRes
 	public int getIconId(@NonNull Context ctx) {
 		if (this == PARKING) {
 			OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
-			OsmandPreference<?> parkingType = app.getSettings().getPreference(ParkingPositionPlugin.PARKING_TYPE);
-			if (parkingType instanceof BooleanPreference && ((BooleanPreference) parkingType).get()) {
+			OsmandPreference<?> preference = app.getSettings().getPreference(PARKING_TYPE);
+			if (preference instanceof BooleanPreference && ((BooleanPreference) preference).get()) {
 				return R.drawable.mx_special_parking_time_limited;
 			}
 			return iconId;
@@ -51,7 +56,18 @@ public enum SpecialPointType {
 		return iconId;
 	}
 
+	@NonNull
 	public String getHumanString(@NonNull Context ctx) {
 		return ctx.getString(resId);
+	}
+
+	@Nullable
+	public static SpecialPointType getByName(@NonNull String name) {
+		for (SpecialPointType type : values()) {
+			if (type.getName().equalsIgnoreCase(name)) {
+				return type;
+			}
+		}
+		return null;
 	}
 }

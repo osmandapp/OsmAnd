@@ -2,19 +2,23 @@ package net.osmand.plus.quickaction;
 
 
 import android.content.Context;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.util.Algorithms;
 
 import java.util.HashMap;
@@ -25,7 +29,7 @@ public class QuickAction {
 
     public interface QuickActionSelectionListener {
 
-        void onActionSelected(QuickAction action);
+        void onActionSelected(@NonNull QuickActionButtonState buttonState, @NonNull QuickAction action);
     }
     private static int SEQ;
 
@@ -35,7 +39,7 @@ public class QuickAction {
     private QuickActionType actionType;
 
     protected QuickAction() {
-        this(QuickActionRegistry.TYPE_ADD_ITEMS);
+        this(MapButtonsHelper.TYPE_ADD_ITEMS);
     }
 
     public QuickAction(QuickActionType type) {
@@ -78,13 +82,34 @@ public class QuickAction {
 		this.actionType = actionType;
 	}
 
-    public boolean isActionEditable() {
-        return actionType != null && actionType.isActionEditable();
-    }
+	public boolean isActionEditable() {
+		return actionType != null && actionType.isActionEditable();
+	}
 
-    public boolean isActionEnable(OsmandApplication app) {
-        return true;
-    }
+	public boolean isActionEnable(OsmandApplication app) {
+		return true;
+	}
+
+	public String getExtendedName(@NonNull Context context) {
+		return getExtendedName(context, true);
+	}
+
+	public String getExtendedName(@NonNull Context context, boolean useDash) {
+		return getExtendedName(context, useDash ? R.string.ltr_or_rtl_combine_via_dash : R.string.ltr_or_rtl_combine_via_space);
+	}
+
+	public String getExtendedName(@NonNull Context context, @StringRes int combineId) {
+		String name = getName(context);
+		if (name.equals(getRawName()) || !shouldUseExtendedName()) {
+			return name;
+		}
+		int actionNameRes = getActionNameRes();
+		if (actionNameRes != 0 && !name.contains(context.getString(actionNameRes))) {
+			String prefAction = context.getString(actionNameRes);
+			return context.getString(combineId, prefAction, name);
+		}
+		return name;
+	}
 
 	public String getName(@NonNull Context context) {
 		if (Algorithms.isEmpty(name) || !isActionEditable()) {
@@ -98,11 +123,16 @@ public class QuickAction {
 		return name;
 	}
 
+	protected boolean shouldUseExtendedName() {
+		return actionType != null && actionType.shouldUseExtendedName();
+	}
+
 	@NonNull
 	private String getDefaultName(@NonNull Context context) {
 		return getNameRes() != 0 ? context.getString(getNameRes()) : "";
 	}
 
+	@NonNull
 	public Map<String, String> getParams() {
         if (params == null) {
         	params = new HashMap<>();
@@ -127,7 +157,7 @@ public class QuickAction {
     }
 
     public String getActionText(@NonNull OsmandApplication app){
-        return getName(app);
+        return getExtendedName(app, false);
     }
 
 	public QuickActionType getActionType() {
@@ -146,6 +176,23 @@ public class QuickAction {
 		int centerPixX = tb.getCenterPixelX();
 		int centerPixY = tb.getCenterPixelY();
 		return NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tb, centerPixX, centerPixY);
+	}
+
+	public boolean onKeyDown(@NonNull MapActivity mapActivity, int keyCode, KeyEvent event) {
+		return true;
+	}
+
+	public boolean onKeyLongPress(@NonNull MapActivity mapActivity, int keyCode, KeyEvent event) {
+		return true;
+	}
+
+	public boolean onKeyUp(@NonNull MapActivity mapActivity, int keyCode, KeyEvent event) {
+		execute(mapActivity);
+		return true;
+	}
+
+	public boolean onKeyMultiple(@NonNull MapActivity mapActivity, int keyCode, int count, KeyEvent event) {
+		return true;
 	}
 
     public void execute(@NonNull MapActivity mapActivity) {

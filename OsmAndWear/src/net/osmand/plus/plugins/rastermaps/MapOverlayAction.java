@@ -39,7 +39,7 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 	public static final QuickActionType TYPE = new QuickActionType(MAP_OVERLAY_ACTION_ID,
 			"mapoverlay.change", MapOverlayAction.class).
 			nameRes(R.string.quick_action_map_overlay).iconRes(R.drawable.ic_layer_top).
-			category(QuickActionType.CONFIGURE_MAP);
+			category(QuickActionType.CONFIGURE_MAP).nameActionRes(R.string.shared_string_change);
 
 
 	public MapOverlayAction() {
@@ -106,7 +106,7 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 			if (sources.size() > 0) {
 				boolean showBottomSheetStyles = Boolean.parseBoolean(getParams().get(KEY_DIALOG));
 				if (showBottomSheetStyles) {
-					showChooseDialog(mapActivity.getSupportFragmentManager());
+					showChooseDialog(mapActivity);
 					return;
 				}
 				String nextItem = getNextSelectedItem(mapActivity.getMyApplication());
@@ -128,11 +128,11 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 					settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(LayerTransparencySeekbarMode.OVERLAY);
 				}
 				if (settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.OVERLAY) {
-					mapActivity.getMapLayers().getMapControlsLayer().showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY);
+					mapActivity.getMapLayers().getMapControlsLayer().getMapTransparencyHelper().showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY);
 				}
 			} else {
 				settings.MAP_OVERLAY.set(null);
-				mapActivity.getMapLayers().getMapControlsLayer().hideTransparencyBar();
+				mapActivity.getMapLayers().getMapControlsLayer().getMapTransparencyHelper().hideTransparencyBar();
 				settings.MAP_OVERLAY_PREVIOUS.set(null);
 			}
 			plugin.updateMapLayers(mapActivity, mapActivity, settings.MAP_OVERLAY);

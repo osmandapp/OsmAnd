@@ -14,12 +14,12 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -42,7 +42,7 @@ public class RouteStatisticCard extends MapBaseCard {
 	public static final int DETAILS_BUTTON_INDEX = 0;
 	public static final int START_BUTTON_INDEX = 1;
 
-	private final GPXFile gpxFile;
+	private final GpxFile gpxFile;
 	private final GpxDisplayItem gpxItem;
 	@Nullable
 	private OrderedLineDataSet slopeDataSet;
@@ -51,7 +51,7 @@ public class RouteStatisticCard extends MapBaseCard {
 	private final OnClickListener onAnalyseClickListener;
 	private CommonChartAdapter graphAdapter;
 
-	public RouteStatisticCard(MapActivity mapActivity, GPXFile gpxFile, OnClickListener onAnalyseClickListener) {
+	public RouteStatisticCard(MapActivity mapActivity, GpxFile gpxFile, OnClickListener onAnalyseClickListener) {
 		super(mapActivity);
 		this.gpxFile = gpxFile;
 		this.onAnalyseClickListener = onAnalyseClickListener;
@@ -59,7 +59,7 @@ public class RouteStatisticCard extends MapBaseCard {
 	}
 
 	@Nullable
-	public GPXFile getGpxFile() {
+	public GpxFile getGpxFile() {
 		return gpxFile;
 	}
 
@@ -141,19 +141,19 @@ public class RouteStatisticCard extends MapBaseCard {
 	}
 
 	private void buildSlopeInfo() {
-		GPXTrackAnalysis analysis = gpxFile.getAnalysis(0);
+		GpxTrackAnalysis analysis = gpxFile.getAnalysis(0);
 
 		buildHeader(analysis);
 		boolean hasElevationData = analysis.hasElevationData();
 		if (hasElevationData) {
-			((TextView) view.findViewById(R.id.average_text)).setText(OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app));
+			((TextView) view.findViewById(R.id.average_text)).setText(OsmAndFormatter.getFormattedAlt(analysis.getAvgElevation(), app));
 
-			String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
-			String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
+			String min = OsmAndFormatter.getFormattedAlt(analysis.getMinElevation(), app);
+			String max = OsmAndFormatter.getFormattedAlt(analysis.getMaxElevation(), app);
 			((TextView) view.findViewById(R.id.range_text)).setText(min + " - " + max);
 
-			String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
-			String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
+			String asc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationUp(), app);
+			String desc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationDown(), app);
 			((TextView) view.findViewById(R.id.descent_text)).setText(desc);
 			((TextView) view.findViewById(R.id.ascent_text)).setText(asc);
 
@@ -194,9 +194,9 @@ public class RouteStatisticCard extends MapBaseCard {
 		return graphAdapter;
 	}
 
-	private void buildHeader(GPXTrackAnalysis analysis) {
-		LineChart mChart = view.findViewById(R.id.chart);
-		ChartUtils.setupGPXChart(mChart, 24f, 16f, true);
+	private void buildHeader(GpxTrackAnalysis analysis) {
+		ElevationChart mChart = view.findViewById(R.id.chart);
+		ChartUtils.setupElevationChart(mChart);
 		graphAdapter = new CommonChartAdapter(app, mChart, true);
 
 		if (analysis.hasElevationData()) {

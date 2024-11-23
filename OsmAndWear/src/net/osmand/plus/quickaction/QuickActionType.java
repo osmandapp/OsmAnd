@@ -1,7 +1,11 @@
 package net.osmand.plus.quickaction;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
+
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -12,11 +16,14 @@ public class QuickActionType {
 	public static final int NAVIGATION = 2;
 	public static final int CONFIGURE_SCREEN = 3;
 	public static final int SETTINGS = 4;
-	public static final int OPEN = 5;
+	public static final int MAP_INTERACTIONS = 5;
+	public static final int MY_PLACES = 6;
+	public static final int INTERFACE = 7;
 
 	private final int id;
 	private final String stringId;
 	private boolean actionEditable;
+	private boolean forceUseExtendedName;
 	@StringRes
 	private int nameRes;
 	@StringRes
@@ -63,15 +70,17 @@ public class QuickActionType {
 		return this;
 	}
 
+	public QuickActionType forceUseExtendedName() {
+		forceUseExtendedName = true;
+		return this;
+	}
 
-
+	@NonNull
 	public QuickAction createNew() {
 		if(cl != null) {
 			try {
 				return cl.newInstance();
-			} catch (InstantiationException e) {
-				throw new UnsupportedOperationException(e);
-			} catch (IllegalAccessException e) {
+			} catch (InstantiationException | IllegalAccessException e) {
 				throw new UnsupportedOperationException(e);
 			}
 		} else {
@@ -79,21 +88,16 @@ public class QuickActionType {
 		}
 	}
 
-	public QuickAction createNew(QuickAction q) {
-		if(cl != null) {
+	@NonNull
+	public QuickAction createNew(@NonNull QuickAction action) {
+		if (cl != null) {
 			try {
-				return cl.getConstructor(QuickAction.class).newInstance(q);
-			} catch (InstantiationException e) {
-				throw new UnsupportedOperationException(e);
-			} catch (IllegalAccessException e) {
-				throw new UnsupportedOperationException(e);
-			} catch (NoSuchMethodException e) {
-				throw new UnsupportedOperationException(e);
-			} catch (InvocationTargetException e) {
+				return cl.getConstructor(QuickAction.class).newInstance(action);
+			} catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
 				throw new UnsupportedOperationException(e);
 			}
 		} else {
-			return new QuickAction(q);
+			return new QuickAction(action);
 		}
 	}
 
@@ -107,6 +111,10 @@ public class QuickActionType {
 
 	public boolean isActionEditable() {
 		return actionEditable;
+	}
+
+	public boolean shouldUseExtendedName() {
+		return !actionEditable || forceUseExtendedName;
 	}
 
 	public int getNameRes() {
@@ -123,5 +131,18 @@ public class QuickActionType {
 
 	public int getCategory() {
 		return category;
+	}
+
+	@NonNull
+	public String getFullName(@NonNull OsmandApplication app) {
+		String quickActionTypeName;
+		if (getActionNameRes() != 0) {
+			String name = app.getString(getNameRes());
+			String actionName = app.getString(getActionNameRes());
+			quickActionTypeName = app.getString(R.string.ltr_or_rtl_combine_via_dash, actionName, name);
+		} else {
+			quickActionTypeName = app.getString(getNameRes());
+		}
+		return quickActionTypeName;
 	}
 }

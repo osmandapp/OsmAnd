@@ -279,7 +279,7 @@
     <string name="poi_fire_water_pond">Δεξαμενή νερού κατάσβεσης</string>
     <string name="poi_grit_bin">Κάδος αλατιού</string>
     <string name="poi_ambulance_station">Σταθμός ασθενοφόρων</string>
-    <string name="poi_ses_station">Σταθμός SES</string>
+    <string name="poi_disaster_response">Σταθμός SES</string>
     <string name="poi_emergency_access_point">Σημείο επείσουσας πρόσβασης</string>
     <string name="poi_ford">Υδάτινο πέρασμα / Ιρλανδική διάβαση</string>
     <string name="poi_ford_stepping_stones">Πέρασμα με πέτρες</string>
@@ -3551,8 +3551,8 @@
     <string name="poi_park_ride_ferry">Πλοίο</string>
     <string name="poi_atm_yes">ATM: Ναι</string>
     <string name="poi_cash_withdrawal_bank_card">Ανάληψη μετρητών</string>
-    <string name="poi_bath_type">Πληκτρολογήστε</string>
-    <string name="poi_volcano_type">Πληκτρολογήστε</string>
+    <string name="poi_bath_type">Τύπος</string>
+    <string name="poi_volcano_type">Τύπος</string>
     <string name="poi_volcano_status">Κατάσταση</string>
     <string name="poi_mofa_yes">Ναι</string>
     <string name="poi_moped_designated">Δηλωμένη</string>
@@ -3772,8 +3772,8 @@
     <string name="poi_traffic_signals_vibration_yes">Ναι</string>
     <string name="poi_traffic_signals_vibration_no">Δόνηση: όχι</string>
     <string name="poi_pump_status_missing_beam">Κατάσταση αντλίας: ελλείπων βραχίονας</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">Αναρρόφηση</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Πιεσμένο</string>
+    <string name="poi_fire_hydrant_pressure_suction">Αναρρόφηση</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">Πιεσμένο</string>
     <string name="poi_water_source_groundwater">Υπόγεια ύδατα</string>
     <string name="poi_fire_hydrant_type_pipe">Σωλήνας</string>
     <string name="poi_drinking_water_refill_network">Δίκτυο ξαναγεμίσματος πόσιμου νερού</string>
@@ -3815,4 +3815,14 @@
     <string name="poi_ice_cream_filter">Παγωτό</string>
     <string name="poi_access_scooter">Πρόσβαση σκούτερ</string>
     <string name="poi_authentication_contactless">Ανέπαφη επαλήθευση</string>
+    <string name="poi_membership_filter">Απαιτείται συνδρομή</string>
+    <string name="poi_drinking_water_refill">Γέμισμα πόσιμου νερού</string>
+    <string name="poi_permanent_camping">Μόνιμη κατασκήνωση</string>
+    <string name="poi_antenna">Κεραία</string>
+    <string name="poi_escape_game">Παιχνίδι απόδρασης</string>
+    <string name="poi_us_maps_recreation_area_restrictions">Πληροφορίες περιορισμών</string>
+    <string name="poi_us_maps_recreation_area_accessibility_info">Πληροφορίες προσβασιμότητας</string>
+    <string name="poi_us_maps_recreation_area_activity_description">Περιγραφή δραστηριότητας</string>
+    <string name="poi_us_maps_recreation_area_reservation_info">Πληροφορίες κράτησης</string>
+    <string name="poi_reservation">Κράτηση</string>
 </resources>

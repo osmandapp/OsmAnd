@@ -1,48 +1,7 @@
 package net.osmand.plus.download.local;
 
-import static net.osmand.IndexConstants.BINARY_DEPTH_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_ROAD_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_WIKI_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.FONT_INDEX_EXT;
-import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.IndexConstants.HEIGHTMAP_SQLITE_EXT;
-import static net.osmand.IndexConstants.LIVE_INDEX_DIR;
-import static net.osmand.IndexConstants.NAUTICAL_INDEX_DIR;
-import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
-import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
-import static net.osmand.IndexConstants.ROUTING_PROFILES_DIR;
-import static net.osmand.IndexConstants.TIF_EXT;
-import static net.osmand.IndexConstants.TILES_INDEX_DIR;
-import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
-import static net.osmand.IndexConstants.WEATHER_EXT;
-import static net.osmand.IndexConstants.WEATHER_FORECAST_DIR;
-import static net.osmand.IndexConstants.ZIP_EXT;
-import static net.osmand.plus.download.local.LocalItemType.ACTIVE_MARKERS;
-import static net.osmand.plus.download.local.LocalItemType.CACHE;
-import static net.osmand.plus.download.local.LocalItemType.DEPTH_DATA;
-import static net.osmand.plus.download.local.LocalItemType.FAVORITES;
-import static net.osmand.plus.download.local.LocalItemType.FONT_DATA;
-import static net.osmand.plus.download.local.LocalItemType.ITINERARY_GROUPS;
-import static net.osmand.plus.download.local.LocalItemType.LIVE_UPDATES;
-import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
-import static net.osmand.plus.download.local.LocalItemType.MULTIMEDIA_NOTES;
-import static net.osmand.plus.download.local.LocalItemType.OSM_EDITS;
-import static net.osmand.plus.download.local.LocalItemType.OSM_NOTES;
-import static net.osmand.plus.download.local.LocalItemType.OTHER;
-import static net.osmand.plus.download.local.LocalItemType.PROFILES;
-import static net.osmand.plus.download.local.LocalItemType.RENDERING_STYLES;
-import static net.osmand.plus.download.local.LocalItemType.ROAD_DATA;
-import static net.osmand.plus.download.local.LocalItemType.ROUTING;
-import static net.osmand.plus.download.local.LocalItemType.TERRAIN_DATA;
-import static net.osmand.plus.download.local.LocalItemType.TILES_DATA;
-import static net.osmand.plus.download.local.LocalItemType.TRACKS;
-import static net.osmand.plus.download.local.LocalItemType.TTS_VOICE_DATA;
-import static net.osmand.plus.download.local.LocalItemType.VOICE_DATA;
-import static net.osmand.plus.download.local.LocalItemType.WEATHER_DATA;
-import static net.osmand.plus.download.local.LocalItemType.WIKI_AND_TRAVEL_MAPS;
+import static net.osmand.IndexConstants.*;
+import static net.osmand.plus.download.local.LocalItemType.*;
 import static net.osmand.plus.mapmarkers.MapMarkersDbHelper.DB_NAME;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.FAV_FILE_PREFIX;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX;
@@ -55,30 +14,50 @@ import static net.osmand.plus.settings.backend.OsmandSettings.CUSTOM_SHARED_PREF
 import static net.osmand.plus.settings.backend.OsmandSettings.SHARED_PREFERENCES_NAME;
 import static java.text.DateFormat.SHORT;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.map.ITileSource;
+import net.osmand.map.OsmandRegions;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.download.SrtmDownloadItem;
+import net.osmand.plus.download.local.dialogs.LiveGroupItem;
+import net.osmand.plus.helpers.ColorsPaletteUtils;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.mapmarkers.ItineraryDataHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.LocalSortMode;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
+import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 public class LocalItemUtils {
 
@@ -102,7 +81,7 @@ public class LocalItemUtils {
 		if (type == MULTIMEDIA_NOTES) {
 			item.setAttachedObject(new Recording(file));
 		} else if (type == TRACKS) {
-			item.setAttachedObject(app.getGpxDbHelper().getItem(file, item::setAttachedObject));
+			item.setAttachedObject(app.getGpxDbHelper().getItem(SharedUtil.kFile(file), item::setAttachedObject));
 		} else if (type == TILES_DATA) {
 			ITileSource template = null;
 			if (file.isDirectory() && TileSourceManager.isTileSourceMetaInfoExist(file)) {
@@ -115,7 +94,7 @@ public class LocalItemUtils {
 			}
 		} else if (type == PROFILES) {
 			String key = Algorithms.getFileNameWithoutExtension(fileName);
-			if (!Algorithms.equalsToAny(key, SHARED_PREFERENCES_NAME, CUSTOM_SHARED_PREFERENCES_PREFIX)) {
+			if (!CollectionUtils.equalsToAny(key, SHARED_PREFERENCES_NAME, CUSTOM_SHARED_PREFERENCES_PREFIX)) {
 				int index = key.lastIndexOf('.');
 				if (index != -1) {
 					key = key.substring(index + 1);
@@ -135,7 +114,7 @@ public class LocalItemUtils {
 
 	@NonNull
 	public static Date getInstalledDate(@NonNull OsmandApplication app, @NonNull File file, @NonNull LocalItemType type) {
-		if (Algorithms.equalsToAny(type, MAP_DATA, ROAD_DATA)) {
+		if (CollectionUtils.equalsToAny(type, MAP_DATA, ROAD_DATA)) {
 			ResourceManager resourceManager = app.getResourceManager();
 			String fileModifiedDate = resourceManager.getIndexFileNames().get(file.getName());
 			if (fileModifiedDate != null) {
@@ -210,7 +189,7 @@ public class LocalItemUtils {
 		} else if (name.endsWith(THREEGP_EXTENSION) || name.endsWith(MPEG4_EXTENSION) || name.endsWith(IMG_EXTENSION)) {
 			return MULTIMEDIA_NOTES;
 		} else if (path.contains(TILES_INDEX_DIR)) {
-			if (name.endsWith(SQLiteTileSource.EXT) || name.endsWith(HEIGHTMAP_SQLITE_EXT)) {
+			if (name.endsWith(SQLiteTileSource.EXT)) {
 				return TILES_DATA;
 			}
 			if (file.isDirectory()) {
@@ -228,17 +207,137 @@ public class LocalItemUtils {
 			return ROUTING;
 		} else if (name.endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT) || name.endsWith(BINARY_WIKI_MAP_INDEX_EXT)) {
 			return WIKI_AND_TRAVEL_MAPS;
-		} else if (path.contains(LIVE_INDEX_DIR)) {
+		} else if (path.contains(LIVE_INDEX_DIR) && path.endsWith(BINARY_MAP_INDEX_EXT)) {
 			return LIVE_UPDATES;
 		} else if (name.endsWith(BINARY_MAP_INDEX_EXT)) {
 			return name.endsWith(BINARY_ROAD_MAP_INDEX_EXT) ? ROAD_DATA : MAP_DATA;
 		} else if (path.startsWith(app.getCacheDir().getAbsolutePath()) && (path.contains(WEATHER_FORECAST_DIR)
 				|| path.contains(GEOTIFF_SQLITE_CACHE_DIR))) {
 			return file.isFile() ? CACHE : null;
+		} else if (path.contains(COLOR_PALETTE_DIR) && name.endsWith(TXT_EXT)) {
+			return COLOR_DATA;
 		}
 		if (file.isFile() && file.length() >= OTHER_MIN_SIZE) {
 			return OTHER;
 		}
 		return null;
+	}
+
+	@NonNull
+	public static CharSequence getItemName(@NonNull Context context, @NonNull LocalItem item) {
+		LocalItemType type = item.getType();
+		String fileName = item.getFileName();
+		Object attachedObject = item.getAttachedObject();
+
+		if (CollectionUtils.equalsToAny(type, OSM_EDITS, OSM_NOTES, ACTIVE_MARKERS)) {
+			return type.toHumanString(context);
+		} else if (type == CACHE) {
+			if (fileName.startsWith("heightmap")) {
+				return context.getString(R.string.relief_3d);
+			} else if (fileName.startsWith("height_cache")) {
+				return context.getString(R.string.altitude);
+			} else if (fileName.startsWith("hillshade")) {
+				return context.getString(R.string.shared_string_hillshade);
+			} else if (fileName.startsWith("slope")) {
+				return context.getString(R.string.shared_string_slope);
+			} else if (fileName.equals("weather_tiffs.db")) {
+				return context.getString(R.string.weather_online);
+			}
+		} else if (CollectionUtils.equalsToAny(type, VOICE_DATA, TTS_VOICE_DATA)) {
+			return FileNameTranslationHelper.getVoiceName(context, fileName);
+		} else if (type == MULTIMEDIA_NOTES) {
+			if (attachedObject instanceof Recording) {
+				return ((Recording) attachedObject).getName(context, true);
+			}
+		} else if (type == TRACKS) {
+			return GpxHelper.INSTANCE.getGpxTitle(fileName);
+		} else if (type == PROFILES) {
+			String key = Algorithms.getFileNameWithoutExtension(fileName);
+			if (CollectionUtils.equalsToAny(key, SHARED_PREFERENCES_NAME, CUSTOM_SHARED_PREFERENCES_PREFIX)) {
+				return context.getString(R.string.osmand_settings);
+			} else if (attachedObject instanceof ApplicationMode) {
+				return ((ApplicationMode) attachedObject).toHumanString();
+			}
+		} else if (type == RENDERING_STYLES) {
+			if (attachedObject instanceof String) {
+				return RendererRegistry.getRendererName(context, (String) attachedObject);
+			}
+		} else if (type == COLOR_DATA) {
+			return ColorsPaletteUtils.getPaletteName(item.getFile());
+		}
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		OsmandRegions regions = app.getResourceManager().getOsmandRegions();
+		boolean reversed = !getSortModePref(app, type).get().isCountryMode();
+
+		String divider = ", ";
+		String name = FileNameTranslationHelper.getFileName(context, regions, fileName, divider, true, reversed);
+		if (!Algorithms.isEmpty(name)) {
+			int index = name.indexOf(divider);
+			if (index != -1) {
+				int color = AndroidUtils.getColorFromAttr(context, android.R.attr.textColorSecondary);
+				return UiUtilities.createColorSpannable(name, color, name.substring(index));
+			}
+			return name;
+		}
+		return Algorithms.getFileNameWithoutExtension(fileName).replace('_', ' ');
+	}
+
+	@NonNull
+	public static String getItemDescription(@NonNull Context context, @NonNull LocalItem item) {
+		String formattedSize = item.getSizeDescription(context);
+		if (item.getType() == CACHE) {
+			return formattedSize;
+		} else if (item.getType() == COLOR_DATA) {
+			return ColorsPaletteUtils.getPaletteTypeName(context, item.getFile());
+		} else {
+			String formattedDate = getFormattedDate(new Date(item.getLastModified()));
+			return context.getString(R.string.ltr_or_rtl_combine_via_bold_point, formattedSize, formattedDate);
+		}
+	}
+
+	@NonNull
+	public static String getSizeDescription(@NonNull Context context, @NonNull Collection<BaseLocalItem> items) {
+		String formattedSize = AndroidUtils.formatSize(context, calculateItemsSize(items));
+		String prefix = isSizeCalculated(items) ? "" : "≥ ";
+		return prefix + formattedSize;
+	}
+
+	public static boolean isSizeCalculated(@NonNull Collection<BaseLocalItem> items) {
+		for (BaseLocalItem item : items) {
+			if (item instanceof LocalItem localItem && localItem.isSizeCalculationLimitReached()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static long calculateItemsSize(@NonNull Collection<BaseLocalItem> items) {
+		long size = 0;
+		for (BaseLocalItem item : items) {
+			size += item.getSize();
+		}
+		return size;
+	}
+
+	@NonNull
+	public static List<LocalItem> collectLocalItems(@NonNull Set<BaseLocalItem> items) {
+		List<LocalItem> localItems = new ArrayList<>();
+		for (BaseLocalItem item : items) {
+			if (item instanceof LocalItem) {
+				localItems.add((LocalItem) item);
+			} else if (item instanceof LiveGroupItem) {
+				localItems.addAll(((LiveGroupItem) item).getItems());
+			}
+		}
+		return localItems;
+	}
+
+	@NonNull
+	public static CommonPreference<LocalSortMode> getSortModePref(@NonNull OsmandApplication app, @NonNull LocalItemType type) {
+		OsmandSettings settings = app.getSettings();
+		String prefId = "local_" + type.name().toLowerCase(Locale.US) + "_sort_mode";
+		LocalSortMode defMode = LocalSortMode.getDefaultSortMode(type);
+		LocalSortMode[] supportedModes = LocalSortMode.getSupportedModes(type);
+		return settings.registerEnumStringPreference(prefId, defMode, supportedModes, LocalSortMode.class).makeGlobal().makeShared();
 	}
 }

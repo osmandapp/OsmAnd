@@ -13,9 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
+import net.osmand.OnResultCallback;
 import net.osmand.StateChangedListener;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
@@ -24,10 +23,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.MapDisplayPositionManager;
-import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPointChangedListener;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
@@ -49,6 +44,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.layers.ContextMenuLayer;
@@ -58,6 +54,8 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
@@ -65,7 +63,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class MapContextMenu extends MenuTitleController implements StateChangedListener<ApplicationMode>,
-		MapMarkerChangedListener, TargetPointChangedListener, IMapDisplayPositionProvider {
+		MapMarkerChangedListener, TargetPointChangedListener {
 
 	@Nullable
 	private MapActivity mapActivity;
@@ -216,7 +214,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return findMenuFragment() != null;
 	}
 
-	public void hideMenues() {
+	public void hideMenus() {
 		if (isVisible()) {
 			hide();
 		} else {
@@ -397,7 +395,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			menuController.clearPlainMenuItems();
 			menuController.addPlainMenuItems(typeStr, getPointDescription(), getLatLon());
 		}
-		updateMapDisplayPosition();
 		mapActivity.refreshMap();
 
 		if (object instanceof MapMarker) {
@@ -434,9 +431,11 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	                 @Nullable PointDescription pointDescription,
 	                 @Nullable Object object) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && init(latLon, pointDescription, object)) {
-			mapActivity.getMyApplication().logEvent("open_context_menu");
-			showInternal();
+		if (mapActivity != null) {
+			if (init(latLon, pointDescription, object)) {
+				mapActivity.getMyApplication().logEvent("open_context_menu");
+				showInternal();
+			}
 		}
 	}
 
@@ -536,7 +535,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			shouldUpdateMapDisplayPosition = false;
-			updateMapDisplayPosition();
 			MenuController menuController = getMenuController();
 			if (menuController != null) {
 				menuController.onHide();
@@ -937,7 +935,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			if (navigateInPedestrianMode()) {
 				mapActivity.getMyApplication().getSettings().setApplicationMode(ApplicationMode.PEDESTRIAN, false);
 			}
-			mapActivity.getMapLayers().getMapControlsLayer().navigateButton();
+			mapActivity.getMapLayers().getMapActionsHelper().navigateButton();
 		}
 	}
 
@@ -1160,10 +1158,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 			List<SelectedGpxFile> list = app.getSelectedGpxHelper().getSelectedGPXFiles();
 			boolean forceAddToCurrentTrack = PluginsHelper.isActive(OsmandMonitoringPlugin.class)
-					&& (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().showCurrentTrack));
+					&& (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().isShowCurrentTrack()));
 
 			if (forceAddToCurrentTrack) {
-				GPXFile gpxFile = app.getSavingTrackHelper().getCurrentGpx();
+				GpxFile gpxFile = app.getSavingTrackHelper().getCurrentGpx();
 				WptPtEditor wptPtPointEditor = getWptPtPointEditor();
 				if (wptPtPointEditor != null) {
 					wptPtPointEditor.add(gpxFile, getLatLon(), title, amenity);
@@ -1175,7 +1173,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public void addWptPt(@NonNull WptPt wptPt, @Nullable String categoryName, int categoryColor,
-	                     boolean skipDialog, @Nullable GPXFile gpxFile) {
+	                     boolean skipDialog, @Nullable GpxFile gpxFile) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			WptPtEditor wptPtPointEditor = getWptPtPointEditor();
@@ -1188,8 +1186,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			} else {
 				List<SelectedGpxFile> list
 						= mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
-				if (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().showCurrentTrack)) {
-					GPXFile currentGpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
+				if (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().isShowCurrentTrack())) {
+					GpxFile currentGpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
 					wptPtPointEditor.add(currentGpxFile, wptPt, categoryName, categoryColor, skipDialog);
 				} else {
 					addNewWptToGPXFile(wptPt, categoryName, categoryColor, skipDialog);
@@ -1211,12 +1209,12 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public void addNewWptToGPXFile(@NonNull WptPt wptPt, @Nullable String categoryName, int categoryColor, boolean skipDialog) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
+			CallbackWithObject<GpxFile[]> callbackWithObject = new CallbackWithObject<GpxFile[]>() {
 				@Override
-				public boolean processResult(GPXFile[] result) {
+				public boolean processResult(GpxFile[] result) {
 					MapActivity mapActivity = getMapActivity();
 					if (mapActivity != null) {
-						GPXFile gpxFile = result != null && result.length > 0
+						GpxFile gpxFile = result != null && result.length > 0
 								? result[0]
 								: mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
 						WptPtEditor wptPtPointEditor = getWptPtPointEditor();
@@ -1243,7 +1241,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		GpxUiHelper.selectSingleGPXFile(mapActivity, true, result -> {
 			MapActivity activity = getMapActivity();
 			if (activity != null) {
-				GPXFile gpxFile;
+				GpxFile gpxFile;
 				if (result != null && result.length > 0) {
 					gpxFile = result[0];
 				} else {
@@ -1475,12 +1473,13 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return menuController != null && menuController.displayDistanceDirection();
 	}
 
-	public CharSequence getFormattedAltitude() {
+	public void getFormattedAltitude(@NonNull OnResultCallback<String> callback) {
 		MenuController menuController = getMenuController();
 		if (menuController != null) {
-			return menuController.getFormattedAltitude();
+			menuController.getFormattedAltitude(callback);
+		} else {
+			callback.onResult(null);
 		}
-		return "";
 	}
 
 	public CharSequence getSubtypeStr() {
@@ -1590,24 +1589,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				fragmentRef.get().updateLocation(centerChanged, locationChanged, compassChanged);
 			}
 		});
-	}
-
-	private void updateMapDisplayPosition() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			MapDisplayPositionManager manager = mapActivity.getMapViewTrackingUtilities().getMapDisplayPositionManager();
-			manager.updateProviders(this, shouldUpdateMapDisplayPosition);
-			manager.updateMapDisplayPosition();
-		}
-	}
-
-	@Nullable
-	@Override
-	public Integer getMapDisplayPosition() {
-		if (shouldUpdateMapDisplayPosition) {
-			return OsmandSettings.CENTER_CONSTANT;
-		}
-		return null;
 	}
 
 	private abstract class MenuAction implements Runnable {

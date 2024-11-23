@@ -29,7 +29,6 @@
     <string name="driving_region_us">ЗША</string>
     <string name="driving_region_canada">Канада</string>
     <string name="driving_region_europe_asia">Еўропа, Азія, Лацінская Амерыка ды іншыя</string>
-    <string name="driving_region_uk">Вялікабрытанія, Індыія ды іншыя</string>
     <string name="speak_title">Агалошваць…</string>
     <string name="speak_descr">Наладжванне агалошвання назваў вуліц, дарожных апавяшчэнняў (вымушаныя прыпынкі, ляжачыя паліцэйскія), перасцярог пра камеры хуткасці, абмежаванні хуткасці.</string>
     <string name="speak_street_names">Назвы вуліц (TTS)</string>
@@ -2072,11 +2071,7 @@
     <string name="rendering_value_low_name">Нізкая</string>
     <string name="rendering_attr_hideWaterPolygons_name">Схаваць ваду</string>
     <string name="quick_action_item_screen">Экран %d</string>
-    <string name="quick_action_add_marker">Дадаць адзнаку</string>
-    <string name="quick_action_add_poi">Дадаць POI</string>
-    <string name="quick_action_map_style">Змяніць стыль мапы</string>
     <string name="quick_action_map_style_switch">Стыль мапы зменены на \"%s\".</string>
-    <string name="quick_action_add_parking">Дадаць месца паркоўкі</string>
     <string name="save_track_min_speed_descr">Фільтр: не запісваць пункты ніжэй гэтай хуткасці.</string>
     <string name="save_track_min_distance">Запіс мінімальнага зруху</string>
     <string name="save_track_min_distance_descr">Фільтр: вызначце мінімальную адлегласць ад пункта для запісу новага.</string>
@@ -2092,7 +2087,6 @@
     <string name="quick_action_item_action">Дзеянне %d</string>
     <string name="quick_action_new_action">Дадаць дзеянне</string>
     <string name="quick_action_edit_action">Рэдагаваць дзеянне</string>
-    <string name="quick_action_add_favorite">Дадаць ва ўлюбёныя</string>
     <string name="dialog_add_action_title">Дадаць дзеянне</string>
     <string name="quick_actions_delete">Выдаліць дзеянне</string>
     <string name="quick_actions_delete_text">Выдаліць дзеянне \"%s\"\?</string>
@@ -2115,9 +2109,6 @@
     <string name="quick_action_map_source_switch">Крыніца мапы змененая на \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Змяніць становішча кнопкі</string>
     <string name="shared_string_action_name">Назва дзеяння</string>
-    <string name="quick_action_take_audio_note">Новая гукавая нататка</string>
-    <string name="quick_action_take_video_note">Новая відэанататка</string>
-    <string name="quick_action_take_photo_note">Новая фотанататка</string>
     <string name="quick_action_navigation_voice_off">Уключыць Голас</string>
     <string name="quick_action_navigation_voice_on">Прыглушыць Голас</string>
     <string name="rendering_attr_depthContours_description">Паказваць контуры і пункты глыбіні.</string>
@@ -2153,7 +2144,6 @@
     <string name="auto_split_recording_descr">Пачаць новы сегмент пасля 6-хвіліннага перапынку, новы след — пасля 2-гадзіннага перапынку, ці новы файл пасля доўгага перапынку (як змяніляся дата).</string>
     <string name="lang_ber">Берберская</string>
     <string name="navigate_point_olc">Адкрыты код месцазнаходжання (OLC)</string>
-    <string name="quick_action_add_osm_bug">Дадаць OSM-нататку</string>
     <string name="quick_action_navigation_voice">Голас укл/адкл</string>
     <string name="quick_favorites_show_favorites_dialog">Паказаць дыялог улюбёных</string>
     <string name="quick_favorites_name_preset">Назва перадналад</string>
@@ -2175,15 +2165,12 @@
     <string name="quick_action_add_create_items">Стварэнне элементаў</string>
     <string name="quick_action_gpx_category_descr">Абярыце катэгорыю (неабавязкова).</string>
     <string name="quick_action_page_list_descr">Кнопка для гартання дадзенага спіса.</string>
-    <string name="quick_action_map_overlay">Змяніць накладзеную мапу</string>
     <string name="quick_action_map_overlay_title">Накладзеная мапа</string>
     <string name="quick_action_map_overlay_action">Дадаць мапу накладання</string>
     <string name="quick_action_map_overlay_switch">Накладная мапа змененая на \"%s\".</string>
     <string name="quick_action_map_underlay_switch">Падкладка мапы змененая на \"%s\".</string>
-    <string name="quick_action_map_underlay">Змяніць падкладку мапы</string>
     <string name="quick_action_map_underlay_title">Падкладка мапы</string>
     <string name="quick_action_map_underlay_action">Дадаць падкладку</string>
-    <string name="quick_action_map_source">Змяніць крыніцу мапы</string>
     <string name="quick_action_btn_tutorial_descr">Доўгі націск і перацягванне дазваляе змяніць пазіцыю на экране.</string>
     <string name="route_points_category_name">Павароты на маршруце</string>
     <string name="relief_smoothness_factor_descr">Пераважны рэльеф: раўнінны ці гарысты.</string>
@@ -2208,9 +2195,6 @@
     <string name="nearest_cities">Бліжэйшыя гарады</string>
     <string name="select_city">Абраць горад</string>
     <string name="select_postcode">Пошук паштовага індэкса</string>
-    <string name="quick_action_add_destination">Вызначыць пункт прызначэння</string>
-    <string name="quick_action_replace_destination">Замяніць пункт прызначэння</string>
-    <string name="quick_action_add_first_intermediate">Дадаць прамежкавы пункт</string>
     <string name="subscribe_email_error">Памылка</string>
     <string name="quick_action_auto_zoom_on">Уключыць аўтамаштабаванне мапы</string>
     <string name="quick_action_auto_zoom_off">Адключыць аўтамаштабаванне мапы</string>
@@ -2406,7 +2390,7 @@
     <string name="shared_string_to">Да</string>
     <string name="mapillary_menu_date_from">Ад</string>
     <string name="mapillary_menu_descr_dates">Паказваць толькі дададзеныя выявы</string>
-    <string name="mapillary_menu_title_dates">Дата</string>
+    <string name="shared_string_date">Дата</string>
     <string name="mapillary_menu_edit_text_hint">Увядзіце імя карыстальніка</string>
     <string name="mapillary_menu_descr_username">Паглядзець толькі выявы, дададзеныя</string>
     <string name="mapillary_menu_title_username">Імя карыстальніка</string>
@@ -3440,7 +3424,6 @@
     <string name="shared_string_uninstall_and_restart">Выдаліць і перазапусціць</string>
     <string name="speed_cameras_removed_descr">На гэтай прыладзе няма камер кантролю хуткасці.</string>
     <string name="app_mode_inline_skates">Ролікі</string>
-    <string name="quick_action_remove_next_destination">Выдаліць наступны пункт прызначэння</string>
     <string name="use_volume_buttons_as_zoom">Маштабаванне кнопкамі гучнасці</string>
     <string name="please_provide_point_name_error">Калі ласка, дайце пункту назву</string>
     <string name="quick_action_remove_next_destination_descr">Бягучы пункт прызначэння маршруту будзе выдалены. Калі гэта канцавы пункт прызначэння, то навігацыя спыніцца.</string>
@@ -3465,7 +3448,6 @@
     <string name="empty_state_my_tracks">Дадаць файлы слядоў</string>
     <string name="empty_state_my_tracks_desc">Імпартуйце альбо запішыце файлы следу</string>
     <string name="context_menu_item_add_waypoint">Дадаць пункт шляху</string>
-    <string name="quick_action_add_gpx">Дадаць пункт шляху</string>
     <string name="map_widget_monitoring">Запіс паездкі</string>
     <string name="marker_save_as_track">Захаваць як файл следу</string>
     <string name="number_of_gpx_files_selected_pattern">Абрана %s файлаў слядоў</string>
@@ -3814,7 +3796,6 @@
     <string name="message_graph_will_be_available_after_recalculation">Калі ласка, пачакайце.
 \nГрафік будзе даступны пасля пераразліку маршруту.</string>
     <string name="shared_string_local_maps">Лакальныя мапы</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="icon_group_amenity">Выгоды</string>
     <string name="icon_group_special">Адмысловыя</string>
     <string name="icon_group_transport">Транспарт</string>
@@ -4762,7 +4743,7 @@
     <string name="attach_roads_descr">Падладзьце свой след да дазволеных дарог, каб пракласці маршрут паміж пунктамі, і прывяжыце інструкцыі маршруту да следу.</string>
     <string name="available_as_part_of_subscription_plan">Даступна як частка падпіскі %1$s.</string>
     <string name="included_in_your_current_plan">Уключана ў ваш бягучы тарыфны план \"%1$s\"</string>
-    <string name="favorite_confirm_delete_group">Сапраўды хочаце выдаліць групу %1$s і ўсе ўключаныя пункты (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">Сапраўды хочаце выдаліць групу %1$s і ўсе ўключаныя пункты (%2$d)?</string>
     <string name="favorite_delete_group">Выдаліць групу</string>
     <string name="download_heightmap_maps">Мапа вышынь</string>
     <string name="display_position">Паказваць пазіцыю</string>
@@ -4909,7 +4890,7 @@
     <string name="external_device_characteristic_temperature">Тэмпература</string>
     <string name="external_device_details_information">Інфармацыя</string>
     <string name="ant_plus_open_settings">Адкрыць налады</string>
-    <string name="free_ride">Бясплатны праезд</string>
+    <string name="free_ride">Вольная язда</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Выкарыстоўваць растр sqltiedb для схілу / рэльефу</string>
     <string name="cache_size">Памер кэша</string>
     <string name="shared_string_avoid">Пазбягаць</string>
@@ -4998,11 +4979,11 @@
     <string name="osmand_cloud_deleting_account_descr">Праз некалькі хвілін усе вашы даныя і ўліковы запіс будуць выдалены з OsmAnd Cloud.
 \n
 \nУсе даныя на прыладзе застануцца некранутымі.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Вы ўпэўнены, што хочаце выдаліць уліковы запіс OsmAnd Cloud\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Вы ўпэўнены, што хочаце выдаліць уліковы запіс OsmAnd Cloud?
 \n
 \nГэта дзеянне нельга скасаваць.</string>
     <string name="osmand_cloud_deletion_all_data_warning">Усе даныя з OsmAnd Cloud будуць %1$s. Даныя на прыладзе застануцца некранутымі.</string>
-    <string name="delete_account_warning">Вы сапраўды хочаце выдаліць уліковы запіс %1$s\?</string>
+    <string name="delete_account_warning">Вы сапраўды хочаце выдаліць уліковы запіс %1$s?</string>
     <string name="delete_account">Выдаліць уліковы запіс</string>
     <string name="slope_legend_description">Карта схілаў выкарыстоўвае колеры для візуалізацыі крутасці рэльефу. Вы можаце прачытаць больш пра карту схілаў у %1$s.</string>
     <string name="external_device_characteristic_heart_rate">Частата сардэчнага рытму</string>
@@ -5046,7 +5027,7 @@
     <string name="speak_route_deviation">Апавясціць аб адхіленні ад маршруту</string>
     <string name="app_mode_climbing">Скалалазанне</string>
     <string name="external_device_details_received_data">Атрыманыя даныя</string>
-    <string name="nav_profile_confirm_delete">Вы сапраўды хочаце выдаліць \"%1$s\"\?</string>
+    <string name="nav_profile_confirm_delete">Вы сапраўды хочаце выдаліць \"%1$s\"?</string>
     <string name="external_device_low_battery">Нізкі зарад батарэі</string>
     <string name="file_already_exists_description">\"%1$s\". Файл з такой назвай ужо існуе. Замена перазапіша ўсе змяненні, зробленыя ў бягучай версіі.</string>
     <string name="file_already_exists">Файл ужо існуе</string>
@@ -5075,4 +5056,69 @@
     <string name="key_event_category_actions">Дзеянні</string>
     <string name="about_osmand">Пра OsmAnd</string>
     <string name="free_versions">Бясплатныя версіі</string>
+    <string name="shared_string_all_tracks">Усе сляды</string>
+    <string name="custom_buttons">Адвольныя кнопкі</string>
+    <string name="sorted_sufolders_toast">Укладзеныя папкі ў “%1$s” адсартаваныя паводле: “%2$s”</string>
+    <string name="default_buttons">Стандартныя кнопкі</string>
+    <string name="shared_string_additional">Дадаткова</string>
+    <string name="shared_string_keywords">Ключавыя словы</string>
+    <string name="speed_limit_warning">Папярэджанне аб абмежаванні хуткасці</string>
+    <string name="shared_string_limit">Абмежаванне</string>
+    <string name="speedometer_description">Паказвае вашу бягучую хуткасць, вызначаную праз GPS</string>
+    <string name="shared_string_speedometer">Спідометр</string>
+    <string name="shared_string_extensions">Пашырэнні</string>
+    <string name="shared_string_license">Ліцэнзія</string>
+    <string name="shared_string_copyright">Аўтарскае права</string>
+    <string name="gpx_approximation">Апраксімацыя GPX</string>
+    <string name="routing_type">Тып маршрутызацыі</string>
+    <string name="rendering_attr_padusDisplayMode_name">Рэжым адлюстравання зямель агульнага карыстання</string>
+    <string name="rendering_attr_padusDisplayMode_description">Паводле тыпу доступу або імя кіраўніка</string>
+    <string name="rendering_value_managerName_name">Паводле імя кіраўніка</string>
+    <string name="rendering_value_access_name">Паводле тыпу доступу</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Схаваць межы агульнадаступных зямель</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Схаваць межы агульнадаступных зямель, але пакінуць тэрыторыі</string>
+    <string name="sort_subfolders">Сартаваць укладзеныя папкі</string>
+    <string name="shared_string_activity">Актыўнасць</string>
+    <string name="add_button">Дадаць кнопку</string>
+    <string name="when_exceeded">Пры перавышэнні</string>
+    <string name="custom_map_button_name_present">Такая кнопка ўжо існуе</string>
+    <string name="shared_string_link">Спасылка</string>
+    <string name="shared_string_author">Аўтар</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="battery_optimization_settings">Налады аптымізацыі батарэі</string>
+    <string name="battery_optimization_banner_content">Аптымізацыя батарэі Android можа выклікаць прабелы і недакладнасці ў запісаных слядах.</string>
+    <string name="dont_ask_anymore">Больш не пытацца</string>
+    <string name="battery_optimization_desc">Аптымізацыя батарэі ў Android можа выклікаць прабелы і недакладнасці ў запісаных слядах.
+\n
+\nКалі ў вас узніклі якія-небудзь з гэтых праблем, вы можаце паспрабаваць змяніць выкарыстанне батарэі на \"Без абмежаванняў\".</string>
+    <string name="battery_optimization">Аптымізацыя батарэі</string>
+    <string name="download_to_device">Спампаваць на прыладу</string>
+    <string name="see_all_plans">Глядзець усе тарыфныя планы</string>
+    <string name="remove_widget_first">Калі ласка, спачатку выдаліце віджэт</string>
+    <string name="tripltek_promo_description">Бясплатны доступ да функцый, уключаючы неабмежаваныя спампоўкі карт, 3D-рэльеф і г.д., на працягу %1$s месяца(аў)</string>
+    <string name="row_number">Радок %1$s</string>
+    <string name="discard_changes_prompt">Скасаваць змены?</string>
+    <string name="show_toast_about_key_pressed">Паказваць апавяшчэнне пры націснутай клавішы</string>
+    <string name="key_event_action_toggle_drower">Паказаць/схаваць бакавое меню</string>
+    <string name="change_button">Змяніць кнопку</string>
+    <string name="deletion_error">Памылка выдалення</string>
+    <string name="tripltek_promo">Прома Tripltek на %1$s месяцаў</string>
+    <string name="add_row">Дадаць радок</string>
+    <string name="key_is_already_assigned_error">Клавіша \"%1$s\" ужо прызначана для дзеяння: \"%2$s\"</string>
+    <string name="key_event_category_map_interactions">Узаемадзеянні з картай</string>
+    <string name="key_event_action_take_media_note">Зрабіць мультымедыйную нататку</string>
+    <string name="clear_key_assignment">Ачысціць прызначэнне клавіш</string>
+    <string name="key_assignments">Прызначэнне клавіш</string>
+    <string name="press_button_to_link_with_action">Націсніце кнопку на сваёй прыладзе, каб прызначыць для яе дзеянне: %1$s</string>
+    <string name="key_event_action_activity_back_pressed">Націснута кнопка назад</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">Адкрыць набор даных WunderLINQ</string>
+    <string name="change_key_binding">Змяніць прывязку клавіш</string>
+    <string name="round_up">Акругленая</string>
+    <string name="fix_north_up">Зафіксаваць поўнач зверху</string>
+    <string name="maps_and_resources">Мапы і рэсурсы</string>
+    <string name="distance_during_navigation">Адлегласць падчас навігацыі</string>
+    <string name="precise">Дакладная</string>
+    <string name="distance_during_navigation_description">Выберыце спосаб адлюстравання інфармацыі аб адлегласці ў віджэтах навігацыі (адлегласць да пункту прызначэння, наступнага павароту, паласы).
+\n
+\n Выберыце «%1$s» для дакладных лічбаў або «%2$s» для больш зручнай чытальнасці.</string>
 </resources>

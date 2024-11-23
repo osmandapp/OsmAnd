@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.tracks;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.LayoutInflater;
@@ -9,7 +10,7 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import androidx.annotation.ColorRes;
+import androidx.annotation.ColorInt;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,7 +29,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.configmap.tracks.SearchTracksAdapter;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
-import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.configmap.tracks.TrackItemsContainer;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.EmptyTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
@@ -37,6 +38,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.MapUtils;
 
@@ -86,7 +88,7 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 
 		Fragment fragment = getTargetFragment();
 		List<TrackItem> trackItems = new ArrayList<>(selectionHelper.getAllItems());
-		adapter = createAdapter(trackItems);
+		adapter = createAdapter(view.getContext(), trackItems);
 		adapter.setTracksSortMode(getTracksSortMode());
 		adapter.setSortTracksListener(this);
 		adapter.setSelectionListener(getTrackSelectionListener());
@@ -119,8 +121,9 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 	}
 
 	@NonNull
-	protected SearchTracksAdapter createAdapter(List<TrackItem> trackItems) {
-		return new SearchTracksAdapter(app, trackItems, nightMode, selectionMode);
+	protected SearchTracksAdapter createAdapter(@NonNull Context context, List<TrackItem> trackItems) {
+		TracksSearchFilter filter = new TracksSearchFilter(app, trackItems);
+		return new SearchTracksAdapter(context, trackItems, nightMode, selectionMode, filter);
 	}
 
 	protected abstract void setupFragment(View view);
@@ -170,11 +173,11 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 	protected void setupToolbar(@NonNull View view) {
 		View appbar = view.findViewById(R.id.appbar);
 		ViewCompat.setElevation(appbar, 5.0f);
-		appbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_main_dark : R.color.app_bar_main_light));
-		setStatusBarBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.status_bar_main_dark : R.color.status_bar_main_light));
+		appbar.setBackgroundColor(ColorUtilities.getAppBarColor(app, nightMode));
+		setStatusBarBackgroundColor(ColorUtilities.getStatusBarColor(app, nightMode));
 	}
 
-	protected void setStatusBarBackgroundColor(@ColorRes int color) {
+	protected void setStatusBarBackgroundColor(@ColorInt int color) {
 		Window window = requireDialog().getWindow();
 		if (window != null) {
 			AndroidUiHelper.setStatusBarContentColor(window.getDecorView(), true);
@@ -214,7 +217,7 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 	}
 
 	@Override
-	public void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems) {
+	public void updateItems(@NonNull Set<TrackItem> trackItems) {
 		adapter.notifyDataSetChanged();
 		updateButtonsState();
 	}
@@ -300,7 +303,7 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 	}
 
 	@Override
-	public void setTracksSortMode(@NonNull TracksSortMode sortMode) {
+	public void setTracksSortMode(@NonNull TracksSortMode sortMode, boolean sortSubFolders) {
 		settings.SEARCH_TRACKS_SORT_MODE.set(sortMode);
 		adapter.setTracksSortMode(getTracksSortMode());
 	}

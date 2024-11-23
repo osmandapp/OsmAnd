@@ -175,9 +175,7 @@
     <string name="shared_string_no_thanks">Není potřeba</string>
     <string name="basemap_missing">Stáhněte základní mapu světa a získejte tak přehled o celém světě při nízké úrovni přiblížení.</string>
     <string name="vector_data_missing">Stáhněte (\'offline\') data, aby bylo možné používat mapy bez připojení k Internetu.</string>
-    <string name="local_index_gpx_info_show">"
-\n
-\nStiskněte a podržte pro možnosti"</string>
+    <string name="local_index_gpx_info_show">\n\nStiskněte a podržte pro možnosti</string>
     <string name="local_index_installed">Místní verze</string>
     <string name="local_index_items_backuped">Deaktivováno %1$d položek z %2$d.</string>
     <string name="local_index_items_deleted">Smazáno %1$d položek z %2$d.</string>
@@ -823,27 +821,7 @@
 \n - bez offline přístupu k bodům zájmu na Wikipedii
 \n
 \n OsmAnd je aktivně vyvíjen a náš projekt i jeho budoucí vývoj závisí na finančních příspěvcích. Prosím zvažte zakoupení verze OsmAnd+, sponzorování konkrétní nové funkce nebo obecný dar na https://osmand.net.</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
-\n
-\n OsmAnd+ je open source navigační program s přístupem k široké paletě celosvětových mapových dat OpenStreetMap (OSM). Veškerá mapová data (vektorová nebo rastrová) mohou být uložena na paměťové kartě telefonu pro offline použití. OsmAnd+ také nabízí offline a online navigaci včetně hlasových pokynů.
-\n
-\nOsmAnd+ je placená verze aplikace, jejím zakoupením sponzorujete projekt, vývoj nových funkcí a obdržíte nejnovější aktualizace.
-\n
-\n Výčet některých hlavních funkcí:
-\n - dokáže pracovat kompletně offline (vektorové nebo rastrové mapy lze uložit do úložiště zařízení)
-\n - kompaktní offline vektorové mapy celého světa dostupné zdarma
-\n - neomezené stahování národních nebo regionálních map přímo z aplikace
-\n - funkce offline Wikipedie (stažení informací o bodech zájmu z Wikipedie), vynikající pro turisty
-\n - možnost zobrazení několika vrstev mapy: GPX nebo navigační trasa, body zájmu, oblíbená místa, zastávky hromadné dopravy, dodatečné mapy s nastavitelnou průhledností, topografické údaje jako vrstevnice/stínování kopců/sklon svahů
-\n
-\n - offline vyhledávání adres a bodů zájmu
-\n - offline navigace na střední vzdálenosti
-\n - režim auto, kolo a pěší s volitelnými funkcemi:
-\n - přepínání denního a nočního zobrazení
-\n - automatické přibližování mapy podle rychlosti pohybu
-\n - otáčení mapy podle kompasu nebo směru pohybu
-\n - navádění do jízdních pruhů, zobrazení rychlostních limitů, nahrané i TTS hlasové pokyny
-\n</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) \n \n OsmAnd+ je open source navigační program s přístupem k široké paletě celosvětových mapových dat OpenStreetMap (OSM). Veškerá mapová data (vektorová nebo rastrová) mohou být uložena na paměťové kartě telefonu pro offline použití. OsmAnd+ také nabízí offline a online navigaci včetně hlasových pokynů. \n \nOsmAnd+ je placená verze aplikace, jejím zakoupením sponzorujete projekt, vývoj nových funkcí a obdržíte nejnovější aktualizace. \n \n Výčet některých hlavních funkcí: \n - dokáže pracovat kompletně offline (vektorové nebo rastrové mapy lze uložit do úložiště zařízení) \n - kompaktní offline vektorové mapy celého světa dostupné zdarma \n - neomezené stahování národních nebo regionálních map přímo z aplikace \n - funkce offline Wikipedie (stažení informací o bodech zájmu z Wikipedie), vynikající pro turisty \n - možnost zobrazení několika vrstev mapy: GPX nebo navigační trasa, body zájmu, oblíbená místa, zastávky hromadné dopravy, dodatečné mapy s nastavitelnou průhledností, topografické údaje jako vrstevnice/stínování kopců/sklon svahů \n \n - offline vyhledávání adres a bodů zájmu \n - offline navigace na střední vzdálenosti \n - režim auto, kolo a pěší s volitelnými funkcemi: \n - přepínání denního a nočního zobrazení \n - automatické přibližování mapy podle rychlosti pohybu \n - otáčení mapy podle kompasu nebo směru pohybu \n - navádění do jízdních pruhů, zobrazení rychlostních limitů, nahrané i TTS hlasové pokyny</string>
     <string name="map_widget_monitoring_services">Sledování polohy</string>
     <string name="no_route">Žádná cesta</string>
     <string name="delete_target_point">Smazat cíl</string>
@@ -1032,7 +1010,6 @@
     <string name="driving_region_us">Spojené státy</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Evropa, Asie, Latinská Amerika a podobné</string>
-    <string name="driving_region_uk">Spojené království, Indie a podobné</string>
     <string name="about_version">Verze:</string>
     <string name="shared_string_about">O aplikaci</string>
     <string name="about_settings_descr">Informace o verzi, licenci, členech projektu</string>
@@ -1213,9 +1190,7 @@
     <string name="gpx_selection_points">%1$s \nBody</string>
     <string name="gpx_selection_track">%1$s \nTrasa %2$s</string>
     <string name="shared_string_waypoint">Bod na trase</string>
-    <string name="selected_gpx_info_show">"
-\n
-\nStiskněte a podržte pro zobrazení na mapě"</string>
+    <string name="selected_gpx_info_show">\n\nStiskněte a podržte pro zobrazení na mapě</string>
     <string name="save_as_favorites_points">Uložit jako skupinu Oblíbených</string>
     <string name="select_destination_and_intermediate_points">Určete cíle</string>
     <string name="layer_amenity_label">Popisky bodů (body zájmu, Oblíbené)</string>
@@ -1252,7 +1227,7 @@
     <string name="rendering_attr_moreDetailed_name">Více detailů</string>
     <string name="rendering_attr_lessDetailed_name">Méně detailů</string>
     <string name="rendering_attr_hideAccess_name">Omezení přístupu</string>
-    <string name="rendering_attr_showAccess_name">Zobrazit omezení přístupu a mýtné</string>
+    <string name="rendering_attr_showAccess_name">Zobrazit omezení přístupu</string>
     <string name="rendering_attr_showSurfaceGrade_name">Zobrazit kvalitu cesty</string>
     <string name="rendering_attr_subwayMode_name">Trasy metra</string>
     <string name="pause_navigation">Pozastavit navigaci</string>
@@ -1272,7 +1247,7 @@
     <string name="arrival_distance_factor_early">Brzy</string>
     <string name="arrival_distance_factor_normally">Normální</string>
     <string name="arrival_distance_factor_late">Později</string>
-    <string name="arrival_distance_factor_at_last">V posledních metrech</string>
+    <string name="arrival_distance_factor_at_last">Velmi pozdě</string>
     <string name="av_camera_pic_size">Velikost fotografie</string>
     <string name="av_camera_pic_size_descr">Nastavte velikost obrázku fotoaparátu</string>
     <string name="shared_string_more">Více…</string>
@@ -1327,7 +1302,7 @@
     <string name="map_widget_top">Stavová lišta</string>
     <string name="map_widget_right">Pravý panel</string>
     <string name="map_widget_left">Levý panel</string>
-    <string name="shared_string_show">Ukázat</string>
+    <string name="shared_string_show">Zobrazit</string>
     <string name="configure_map">Nastavení mapy</string>
     <string name="rendering_category_others">Ostatní vlastnosti mapy</string>
     <string name="map_widget_appearance_rem">Zbývající prvky</string>
@@ -2065,21 +2040,12 @@
     <string name="configure_screen_quick_action">Rychlá akce</string>
     <string name="quick_action_item_action">Akce %d</string>
     <string name="quick_action_item_screen">Obrazovka %d</string>
-    <string name="quick_action_add_marker">Přidat mapovou značku</string>
-    <string name="quick_action_add_poi">Přidat POI</string>
-    <string name="quick_action_map_style">Změnit styl mapy</string>
     <string name="quick_action_map_style_switch">Styl mapy byl změněn na \"%s\".</string>
-    <string name="quick_action_take_audio_note">Nová zvuková poznámka</string>
-    <string name="quick_action_take_video_note">Nová video poznámka</string>
-    <string name="quick_action_take_photo_note">Nová foto poznámka</string>
-    <string name="quick_action_add_osm_bug">Přidat OSM poznámku</string>
     <string name="quick_action_navigation_voice">Hlas zapnout/vypnout</string>
     <string name="quick_action_navigation_voice_off">Zrušit ztlumení hlasu</string>
     <string name="quick_action_navigation_voice_on">Ztlumit hlas</string>
-    <string name="quick_action_add_parking">Přidat parkovací místo</string>
     <string name="quick_action_new_action">Přidat akci</string>
     <string name="quick_action_edit_action">Upravit akci</string>
-    <string name="quick_action_add_favorite">Přidat Oblíbené místo</string>
     <string name="dialog_add_action_title">Přidat akci</string>
     <string name="quick_actions_delete">Odstranit akci</string>
     <string name="quick_actions_delete_text">Odstranit akci \"%s\"\?</string>
@@ -2114,13 +2080,10 @@
     <string name="quick_action_map_style_action">Přidat styl mapy</string>
     <string name="quick_action_empty_param_error">Vyplňte všechny parametry</string>
     <string name="quick_action_map_styles">Styly mapy</string>
-    <string name="quick_action_map_overlay">Změnit překryvnou mapu</string>
     <string name="quick_action_map_overlay_title">Překryvy mapy</string>
     <string name="quick_action_map_overlay_action">Přidat překrytí</string>
-    <string name="quick_action_map_underlay">Změna mapy podkladu</string>
     <string name="quick_action_map_underlay_title">Mapa podkladu</string>
     <string name="quick_action_map_underlay_action">Přidat podklad</string>
-    <string name="quick_action_map_source">Změnit zdroj mapy</string>
     <string name="quick_action_map_source_title">Mapové zdroje</string>
     <string name="quick_action_map_source_action">Přidat zdroj mapy</string>
     <string name="quick_action_map_source_switch">Zdroj mapy změněn na \"%s\".</string>
@@ -2200,9 +2163,6 @@
     <string name="quick_action_auto_zoom_desc">Tlačítko pro zapnutí nebo vypnutí automatického přibližování mapy podle rychlosti.</string>
     <string name="quick_action_auto_zoom_on">Zapnout automatické přibližování</string>
     <string name="quick_action_auto_zoom_off">Vypnout automatické přibližování</string>
-    <string name="quick_action_add_destination">Zadat cíl</string>
-    <string name="quick_action_replace_destination">Nahradit cíl</string>
-    <string name="quick_action_add_first_intermediate">Přidat první mezicíl</string>
     <string name="quick_action_showhide_osmbugs_descr">Tlačítko pro zobrazení nebo skrytí OpenStreetMap poznámek na mapě.</string>
     <string name="sorted_by_distance">Seřazeno podle vzdálenosti</string>
     <string name="search_favorites">Hledat v Oblíbených</string>
@@ -2221,7 +2181,7 @@
     <string name="change_color">Změnit barvu</string>
     <string name="edit_name">Upravit název</string>
     <string name="animate_my_location">Animovat vlastní polohu</string>
-    <string name="animate_my_location_desc">Zapnout animovaný posun \'Mé polohy\' na mapě během navigace.</string>
+    <string name="animate_my_location_desc">Plynulý posun mapy během pohybu. Způsobuje malé zpoždění.</string>
     <string name="shared_string_overview">Přehled</string>
     <string name="select_street">Vyberte ulici</string>
     <string name="shared_string_in_name">v %1$s</string>
@@ -2275,7 +2235,7 @@
     <string name="shared_string_to">Do</string>
     <string name="mapillary_menu_date_from">Od</string>
     <string name="mapillary_menu_descr_dates">Zobrazit pouze přidané obrázky</string>
-    <string name="mapillary_menu_title_dates">Datum</string>
+    <string name="shared_string_date">Datum</string>
     <string name="mapillary_menu_edit_text_hint">Zadejte uživatelské jméno</string>
     <string name="mapillary_menu_descr_username">Zobrazit pouze obrázky přidané uživatelem</string>
     <string name="mapillary_menu_title_username">Uživatelské jméno</string>
@@ -2507,27 +2467,8 @@
     <string name="distance_farthest">Nejvzdálenější jako první</string>
     <string name="distance_nearest">Nejbližší jako první</string>
     <string name="rendering_attr_whiteWaterSports_name">Divoká voda</string>
-    <string name="osmand_extended_description_part2">GPS navigace 
-\n• Vyberte si mezi offline režimem (bez roamingových poplatků v zahraničí) a online režimem (rychlejší) 
-\n• Hlasová navigace vás povede krok za krokem vaší cestou (nahraný nebo syntetizovaný hlas) 
-\n• Při každém odchýlení se trasa přepočítá 
-\n• Pomůže vám navádění do jízdních pruhů, zobrazení názvů ulic a předpokládaný čas příjezdu 
-\n• Pro větší bezpečí se aplikace automaticky přepíná mezi denním a nočním režimem 
-\n• Můžete si zapnout zobrazování rychlostních limitů a upozornění při jejich překročení 
-\n• Přiblížení mapy se přizpůsobí rychlosti pohybu 
-\n• Hledejte cíle podle adresy, typu (např. parkoviště, restaurace, hotel, čerpací stanice, muzeum) či podle geografických souřadnic 
-\n• Do svého itineráře můžete přidávat mezicíle 
-\n• Zaznamenávejte nebo nahrajte svoji GPX trasu a následujte ji 
-\n</string>
-    <string name="osmand_extended_description_part3">Mapa
-\n• Zobrazuje POI (body zájmu) ve vašem okolí
-\n• Mapa se otáčí podle směru vašeho pohybu (nebo podle kompasu)
-\n• Ukazuje vaši polohu a směr, kterým se díváte
-\n• Svoji polohu můžete sdílet se svými přáteli
-\n• Důležitá místa si můžete uložit do složky \'Moje místa\'
-\n• Můžete si vybrat, jak se na mapě budou zobrazovat názvy: V angličtině, v místním jazyce nebo ve fonetickém přepisu
-\n• Zobrazuje specializované online dlaždice, satelitní mapy (z Bingu), různé překryvné informace jako navigační GPX trasy a další vrstvy s volitelnou průhledností
-\n</string>
+    <string name="osmand_extended_description_part2">GPS navigace \n• Vyberte si mezi offline režimem (bez roamingových poplatků v zahraničí) a online režimem (rychlejší) \n• Hlasová navigace vás povede krok za krokem vaší cestou (nahraný nebo syntetizovaný hlas) \n• Při každém odchýlení se trasa přepočítá \n• Pomůže vám navádění do jízdních pruhů, zobrazení názvů ulic a předpokládaný čas příjezdu \n• Pro větší bezpečí se aplikace automaticky přepíná mezi denním a nočním režimem \n• Můžete si zapnout zobrazování rychlostních limitů a upozornění při jejich překročení \n• Přiblížení mapy se přizpůsobí rychlosti pohybu \n• Hledejte cíle podle adresy, typu (např. parkoviště, restaurace, hotel, čerpací stanice, muzeum) či podle geografických souřadnic \n• Do svého itineráře můžete přidávat mezicíle \n• Zaznamenávejte nebo nahrajte svoji GPX trasu a následujte ji</string>
+    <string name="osmand_extended_description_part3">Mapa \n• Zobrazuje POI (body zájmu) ve vašem okolí \n• Mapa se otáčí podle směru vašeho pohybu (nebo podle kompasu) \n• Ukazuje vaši polohu a směr, kterým se díváte \n• Svoji polohu můžete sdílet se svými přáteli \n• Důležitá místa si můžete uložit do složky \'Moje místa\' \n• Můžete si vybrat, jak se na mapě budou zobrazovat názvy: V angličtině, v místním jazyce nebo ve fonetickém přepisu \n• Zobrazuje specializované online dlaždice, satelitní mapy (z Bingu), různé překryvné informace jako navigační GPX trasy a další vrstvy s volitelnou průhledností</string>
     <string name="osmand_extended_description_part4">Lyžování
 \nOsmAnd plugin Lyžařský mapový pohled zobrazuje lyžařské trasy podle stupně obtížnosti a také další informace jako polohy vleků a dalších zařízení.</string>
     <string name="osmand_extended_description_part5">Cyklistika
@@ -2536,18 +2477,8 @@
 \n• Vidíte svoji rychlost a nadmořskou výšku
 \n• Pomocí funkce GPX záznam si svůj výlet uložíte a můžete sdílet
 \n• Pomocí samostatného modulu si můžete na mapě zobrazit vrstevnice a stínování kopců</string>
-    <string name="osmand_extended_description_part6">Pěší výlety, procházky městem
-\n• Mapa zobrazuje pěší a turistické trasy
-\n• Wikipedie ve vašem zvoleném jazyce vám poskytne mnoho informací při procházce městem
-\n• Při pohybu v neznámém městě vám pomůže zobrazování názvů zastávek a tras veřejné dopravy (autobusy, tramvaje, vlaky)
-\n• GPS navigace v režimu Pěší vytvoří trasu cest vhodných pro chodce
-\n• Můžete otevřít GPX trasu a následovat ji nebo zaznamenat a sdílet svou vlastní
-\n</string>
-    <string name="osmand_extended_description_part7">Přispějte do OSM
-\n• Hlaste chyby v datech
-\n•Nahrávejte GPX trasy do OSM přímo z aplikace
-\n• Přidávejte body zájmu a rovnou je nahrávejte do OSM (nebo později, pokud jste zrovna offline)
-\n</string>
+    <string name="osmand_extended_description_part6">Pěší výlety, procházky městem \n• Mapa zobrazuje pěší a turistické trasy \n• Wikipedie ve vašem zvoleném jazyce vám poskytne mnoho informací při procházce městem \n• Při pohybu v neznámém městě vám pomůže zobrazování názvů zastávek a tras veřejné dopravy (autobusy, tramvaje, vlaky) \n• GPS navigace v režimu Pěší vytvoří trasu cest vhodných pro chodce \n• Můžete otevřít GPX trasu a následovat ji nebo zaznamenat a sdílet svou vlastní</string>
+    <string name="osmand_extended_description_part7">Přispějte do OSM \n• Hlaste chyby v datech \n•Nahrávejte GPX trasy do OSM přímo z aplikace \n• Přidávejte body zájmu a rovnou je nahrávejte do OSM (nebo později, pokud jste zrovna offline)</string>
     <string name="osmand_extended_description_part8">OsmAnd je aktivně vyvíjený open source software. Do aplikace může každý přispět hlášením chyb, vylepšováním překladů nebo programováním nových funkcí. Projekt je také závislý na finančních příspěvcích pro vývoj a testování nových funkcí.
 \n Přibližné pokrytí a kvalita map:
 \n • Západní Evropa: ****
@@ -2568,22 +2499,8 @@
 \nOsmAnd+ je placenou verzí aplikace. Jejím zakoupením podpoříte projekt, přispějete na vývoj nových funkcí a získáte nejnovější aktualizace.
 \n
 \nMezi hlavní funkce patří:</string>
-    <string name="osmand_plus_extended_description_part2">Navigace
-\n• Pracuje online (rychle) nebo i offline (bez roamingových poplatků v zahraničí)
-\n• Hlasová navigace krok za krokem (nahraný nebo syntetizovaný hlas)
-\n• Volitelné navádění do jízdních pruhů, zobrazení názvů ulic a předpokládaného čas příjezdu
-\n• Podporuje mezicíle v itineráři
-\n• Automatické přepočítání trasy při odchýlení
-\n• Hledání míst podle adresy, typu (např. restaurace, hotel, čerpací stanice, muzeum) či podle geografických souřadnic
-\n</string>
-    <string name="osmand_plus_extended_description_part3">Prohlížení mapy
-\n • Zobrazení vaší pozice a orientace
-\n • Volitelné otáčení podle směru vašeho pohybu (nebo podle kompasu)
-\n • Ukládání důležitých míst jako Oblíbených bodů
-\n • Zobrazení POI (bodů zájmu) ve vašem okolí
-\n • Zobrazení specializovaných online dlaždic, satelitních map (z Bingu), různých překryvných informací jako turistických/navigačních GPX stop a dalších vrstev s volitelnou průhledností
-\n• Názvy míst lze zobrazit v angličtině, v místním jazyce nebo ve fonetickém přepisu
-\n</string>
+    <string name="osmand_plus_extended_description_part2">Navigace \n• Pracuje online (rychle) nebo i offline (bez roamingových poplatků v zahraničí) \n• Hlasová navigace krok za krokem (nahraný nebo syntetizovaný hlas) \n• Volitelné navádění do jízdních pruhů, zobrazení názvů ulic a předpokládaného čas příjezdu \n• Podporuje mezicíle v itineráři \n• Automatické přepočítání trasy při odchýlení \n• Hledání míst podle adresy, typu (např. restaurace, hotel, čerpací stanice, muzeum) či podle geografických souřadnic</string>
+    <string name="osmand_plus_extended_description_part3">Prohlížení mapy \n • Zobrazení vaší pozice a orientace \n • Volitelné otáčení podle směru vašeho pohybu (nebo podle kompasu) \n • Ukládání důležitých míst jako Oblíbených bodů \n • Zobrazení POI (bodů zájmu) ve vašem okolí \n • Zobrazení specializovaných online dlaždic, satelitních map (z Bingu), různých překryvných informací jako turistických/navigačních GPX stop a dalších vrstev s volitelnou průhledností \n• Názvy míst lze zobrazit v angličtině, v místním jazyce nebo ve fonetickém přepisu</string>
     <string name="osmand_plus_extended_description_part4">Využívejte data OSM a Wikipedie
 \n • Kvalitní informace z nejlepších komunitních projektů na světě
 \n • OSM data dostupná podle země nebo regionu
@@ -2592,12 +2509,7 @@
 \n • Kompaktní vektorové offline mapy aktualizované nejméně jednou za měsíc
 \n
 \n• Výběr mezi kompletními daty regionu a pouze silniční mapou (například celá mapa Japonska zabírá 700 MB, silniční pouze 200 MB)</string>
-    <string name="osmand_plus_extended_description_part5">Bezpečnostní funkce
-\n• Volitelné automatické přepínání denního a nočního režimu
-\n• Volitelné zobrazení rychlostních limitů s upozorněním při překročení
-\n• Volitelné přiblížení mapy v závislosti na rychlosti
-\n• Sdílení polohy s přáteli
-\n</string>
+    <string name="osmand_plus_extended_description_part5">Bezpečnostní funkce \n• Volitelné automatické přepínání denního a nočního režimu \n• Volitelné zobrazení rychlostních limitů s upozorněním při překročení \n• Volitelné přiblížení mapy v závislosti na rychlosti \n• Sdílení polohy s přáteli</string>
     <string name="osmand_plus_extended_description_part6">Funkce pro cyklisty a pěší
 \n• Zobrazení pěších, turistických a cyklistických tras, skvělé pro venkovní aktivity
 \n• Speciální navigační režim a zobrazení pro cyklisty a chodce
@@ -2605,27 +2517,8 @@
 \n• Volitelný záznam výletu do lokálního souboru GPS nebo do online služby
 \n• Zobrazení rychlosti a nadmořské výšky
 \n• Zobrazení vrstevnic a stínování kopců (pomocí pluginů)</string>
-    <string name="osmand_plus_extended_description_part7">Přispívejte přímo do OSM 
-\n• Hlaste chyby v datech 
-\n• Nahrávejte GPX trasy do OSM přímo z aplikace 
-\n• Přidávejte body zájmu a rovnou je nahrávejte do OSM (nebo později, pokud jste zrovna offline) 
-\n• Záznam trasy funguje také na pozadí (když je zařízení v režimu spánku) 
-\nOsmAnd je aktivně vyvíjený open-source software. Do aplikace může každý přispět hlášením chyb, vylepšováním překladů nebo programováním nových funkcí. Projekt je také závislý na finančních příspěvcích pro programování a testování nových funkcí.
-\n</string>
-    <string name="osmand_plus_extended_description_part8">Přibližné pokrytí a kvalita map:
-\n • Západní Evropa: ****
-\n • Východní Evropa: ***
-\n • Rusko: ***
-\n • Severní Amerika: ***
-\n • Jižní Amerika: **
-\n • Asie: **
-\n • Japonsko a Korea: ***
-\n • Střední Východ: **
-\n • Afrika: **
-\n • Antarktida: *
-\n Mapy většiny států na zeměkouli jsou dostupné ke stažení
-\n Od Afghánistánu po Zimbabwe, od Austrálie po USA. Argentina, Brazílie, Kanada, Francie, Německo, Mexiko, Spojené království, Španělsko, …
-\n</string>
+    <string name="osmand_plus_extended_description_part7">Přispívejte přímo do OSM \n• Hlaste chyby v datech \n• Nahrávejte GPX trasy do OSM přímo z aplikace \n• Přidávejte body zájmu a rovnou je nahrávejte do OSM (nebo později, pokud jste zrovna offline) \n• Záznam trasy funguje také na pozadí (když je zařízení v režimu spánku) \nOsmAnd je aktivně vyvíjený open-source software. Do aplikace může každý přispět hlášením chyb, vylepšováním překladů nebo programováním nových funkcí. Projekt je také závislý na finančních příspěvcích pro programování a testování nových funkcí.</string>
+    <string name="osmand_plus_extended_description_part8">Přibližné pokrytí a kvalita map: \n • Západní Evropa: **** \n • Východní Evropa: *** \n • Rusko: *** \n • Severní Amerika: *** \n • Jižní Amerika: ** \n • Asie: ** \n • Japonsko a Korea: *** \n • Střední Východ: ** \n • Afrika: ** \n • Antarktida: * \n Mapy většiny států na zeměkouli jsou dostupné ke stažení \n Od Afghánistánu po Zimbabwe, od Austrálie po USA. Argentina, Brazílie, Kanada, Francie, Německo, Mexiko, Spojené království, Španělsko, …</string>
     <string name="group_deleted">Skupina smazána</string>
     <string name="clear_all_intermediates">Smazat všechny mezicíle</string>
     <string name="select_waypoints_category_description">Přidat všechny mezicíle na trase nebo vybrat jednotlivé kategorie.</string>
@@ -2660,7 +2553,7 @@
     <string name="delete_search_history">Vymazat historii hledání</string>
     <string name="download_images">Stáhnout obrázky</string>
     <string name="download_maps_travel">Cestovní průvodce</string>
-    <string name="shared_string_wikivoyage">Wikivoyage</string>
+    <string name="shared_string_wikivoyage" translatable="false">Wikivoyage</string>
     <string name="article_removed">Článek odstraněn</string>
     <string name="wikivoyage_search_hint">Hledejte stát, město nebo kraj</string>
     <string name="shared_string_read">Číst</string>
@@ -3398,7 +3291,6 @@
     <string name="app_mode_wheelchair">Invalidní vozík</string>
     <string name="app_mode_wheelchair_forward">Invalidní vozík vpřed</string>
     <string name="context_menu_item_add_waypoint">Přidat mezicíl</string>
-    <string name="quick_action_add_gpx">Přidat mezicíl</string>
     <string name="map_widget_monitoring">Záznam trasy</string>
     <string name="marker_save_as_track">Uložit jako soubor trasy</string>
     <string name="follow_track">Sledovat stopu</string>
@@ -3429,7 +3321,6 @@
     <string name="shared_string_uninstall_and_restart">Odinstalovat a restartovat</string>
     <string name="speed_cameras_removed_descr">Toto zařízení nemá rychlostní kamery.</string>
     <string name="app_mode_inline_skates">Inline brusle</string>
-    <string name="quick_action_remove_next_destination">Smazat následující cílový bod</string>
     <string name="use_volume_buttons_as_zoom_descr">Ovládat úroveň přiblížení mapy pomocí tlačítek hlasitosti zařízení.</string>
     <string name="use_volume_buttons_as_zoom">Tlačítka hlasitosti pro přibližování</string>
     <string name="threshold_distance">Mezní vzdálenost</string>
@@ -3465,21 +3356,7 @@
     <string name="shared_string_is_saved">je uloženo</string>
     <string name="one_point_error">Přidejte prosím alespoň dva body.</string>
     <string name="shared_string_redo">Znovu</string>
-    <string name="release_3_8">• Vylepšená funkce plánování trasy: umožňuje použít různé typy navigace pro úseky trasy a přidává stopy
-\n
-\n • Nové menu pro vzhled stop: zvolte barvu, tloušťku, směrové šipky, ikony startu a cíle
-\n
-\n • Vylepšená viditelnost bodů pro cyklistiku.
-\n
-\n • Stopy je nyní možné aktivovat, nabízejí kontextové menu se základními údaji.
-\n
-\n • Vylepšený algoritmus vyhledávání
-\n
-\n • Vylepšené možnosti následování stopy v navigaci
-\n
-\n • Opravené problémy s importem a exportem nastavení profilů
-\n
-\n</string>
+    <string name="release_3_8">• Vylepšená funkce plánování trasy: umožňuje použít různé typy navigace pro úseky trasy a přidává stopy \n \n • Nové menu pro vzhled stop: zvolte barvu, tloušťku, směrové šipky, ikony startu a cíle \n \n • Vylepšená viditelnost bodů pro cyklistiku. \n \n • Stopy je nyní možné aktivovat, nabízejí kontextové menu se základními údaji. \n \n • Vylepšený algoritmus vyhledávání \n \n • Vylepšené možnosti následování stopy v navigaci \n \n • Opravené problémy s importem a exportem nastavení profilů</string>
     <string name="sort_last_modified">Naposledy změněno</string>
     <string name="sort_name_descending">Název: Z – A</string>
     <string name="sort_name_ascending">Název: A – Z</string>
@@ -3495,7 +3372,6 @@
     <string name="message_need_calculate_route_before_show_graph">Údaje %1$s jsou dostupné pouze na cestách, pro jejich zobrazení musíte vypočítat trasu pomocí “Trasa mezi body”.</string>
     <string name="message_graph_will_be_available_after_recalculation">Prosím čekejte.
 \nGraf bude dostupný po přepočtu trasy.</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="pseudo_mercator_projection">Pseudo-Mercatorovo zobrazení</string>
     <string name="one_image_per_tile">Jeden obrazový soubor pro každou dlaždici</string>
     <string name="sqlite_db_file">Soubor SQLiteDB</string>
@@ -3563,31 +3439,7 @@
     <string name="use_system_screen_timeout">Použít systémový časový limit obrazovky</string>
     <string name="reset_to_default_category_button_promo">\"Obnovit do základního nastavení\" nastaví výchozí pořadí.</string>
     <string name="copy_coordinates">Kopírovat souřadnice</string>
-    <string name="release_3_6">• Profily: nyní můžete změnit pořadí, nastavit ikonu pro mapu, změnit všechna nastavení základních profilů a resetovat je zpět do výchozího stavu
-\n
-\n • V navigaci přibylo číslo výjezdu
-\n
-\n • Přepracovaná nastavení modulů
-\n
-\n • Přepracovaná obrazovka nastavení pro rychlý přístup ke všem profilům
-\n
-\n • Přidaná možnost kopírovat nastavení z jiného profilu
-\n
-\n • Přidaná možnost skrýt nebo změnit pořadí kategorií bodů zájmu při hledání
-\n
-\n • Zpřesněné umístění ikon bodů zájmu na mapě
-\n
-\n • Přidané údaje o východu a západu slunce v nastavení mapy
-\n
-\n • Přidané ikony Domov a Práce na mapě
-\n
-\n • Přidaná podpora pro víceřádkové popisy v nastavení
-\n
-\n • Přidaná správná transliterace v mapě Japonska
-\n
-\n • Přidaná mapa Antarktidy
-\n
-\n</string>
+    <string name="release_3_6">• Profily: nyní můžete změnit pořadí, nastavit ikonu pro mapu, změnit všechna nastavení základních profilů a resetovat je zpět do výchozího stavu \n \n • V navigaci přibylo číslo výjezdu \n \n • Přepracovaná nastavení modulů \n \n • Přepracovaná obrazovka nastavení pro rychlý přístup ke všem profilům \n \n • Přidaná možnost kopírovat nastavení z jiného profilu \n \n • Přidaná možnost skrýt nebo změnit pořadí kategorií bodů zájmu při hledání \n \n • Zpřesněné umístění ikon bodů zájmu na mapě \n \n • Přidané údaje o východu a západu slunce v nastavení mapy \n \n • Přidané ikony Domov a Práce na mapě \n \n • Přidaná podpora pro víceřádkové popisy v nastavení \n \n • Přidaná správná transliterace v mapě Japonska \n \n • Přidaná mapa Antarktidy</string>
     <string name="clear_recorded_data">Vymazat zaznamenaná data</string>
     <string name="routing_profile_direct_to">Přímo k bodu</string>
     <string name="ui_customization_description">Nastavte počet položek v \"Úvodním panelu\", \"Nastavení mapy\" a \"Kontextovém menu\".
@@ -3648,27 +3500,7 @@
     <string name="snowmobile_render_descr">Pro jízdu na sněžném vozidle na vyhrazených cestách.</string>
     <string name="select_base_profile_dialog_message">Vlastní profil založte na jednom ze základních profilů. Ten určí základní nastavení jako viditelnost nástrojů, jednotky rychlosti a vzdálenosti. Toto jsou základní profily aplikace a návrhy vlastních profilů, na které mohou být rozšířeny:</string>
     <string name="button_rate">Ohodnotit</string>
-    <string name="release_3_4">• Aplikační profily: Vytvořte si vlastní profil pro své potřeby, s vlastní ikonou i barvou
-\n
-\n• Možnost nastavení zvolené, minimální a maximální rychlosti v profilech
-\n
-\n• Přidaný nástroj s aktuálními souřadnicemi
-\n
-\n• Přidaná možnost zobrazit kompas a kruhové pravítko na mapě
-\n
-\n• Opravený záznam stopy na pozadí
-\n
-\n• Vylepšené stahování map na pozadí
-\n
-\n• Vrácené nastavení \'Zapnout obrazovku\'
-\n
-\n• Opravený výběr jazyka Wikipedie
-\n
-\n• Opravené chování tlačítka kompasu během navigace
-\n
-\n• Opravy dalších chyb
-\n
-\n</string>
+    <string name="release_3_4">• Aplikační profily: Vytvořte si vlastní profil pro své potřeby, s vlastní ikonou i barvou \n \n• Možnost nastavení zvolené, minimální a maximální rychlosti v profilech \n \n• Přidaný nástroj s aktuálními souřadnicemi \n \n• Přidaná možnost zobrazit kompas a kruhové pravítko na mapě \n \n• Opravený záznam stopy na pozadí \n \n• Vylepšené stahování map na pozadí \n \n• Vrácené nastavení \'Zapnout obrazovku\' \n \n• Opravený výběr jazyka Wikipedie \n \n• Opravené chování tlačítka kompasu během navigace \n \n• Opravy dalších chyb</string>
     <string name="map_look">Vzhled mapy</string>
     <string name="wake_time">Časový limit obrazovky po probuzení</string>
     <string name="coordinates_format_info">Zvolený formát bude použitý v celé aplikaci.</string>
@@ -3694,23 +3526,7 @@
     <string name="store_tracks_in_rec_directory">Ukládat stopy do složky \'rec</string>
     <string name="track_storage_directory_descrp">Stopy mohou být ukládány ve složce \'rec\' nebo v měsíčních či denních složkách.</string>
     <string name="track_storage_directory">Složka pro ukládání stop</string>
-    <string name="release_3_5">• Vylepšená nastavení aplikace a profilů. Nastavení jsou nyní uspořádána podle typu. Každý profil lze upravovat samostatně.
-\n
-\n• Nový dialog stahování map, který navrhuje mapy ke stažení během prohlížení
-\n
-\n• Opravy tmavého vzhledu
-\n
-\n• Opraveny některé chyby navigace
-\n
-\n• Aktualizovaná základní mapa s podrobnější sítí cest
-\n
-\n• Opraveny zaplavené oblasti ve světě
-\n
-\n• Lyžařská navigace: do detailů trasy byl přidán výškový profil a obtížnost
-\n
-\n• Opravy dalších chyb
-\n
-\n</string>
+    <string name="release_3_5">• Vylepšená nastavení aplikace a profilů. Nastavení jsou nyní uspořádána podle typu. Každý profil lze upravovat samostatně. \n \n• Nový dialog stahování map, který navrhuje mapy ke stažení během prohlížení \n \n• Opravy tmavého vzhledu \n \n• Opraveny některé chyby navigace \n \n• Aktualizovaná základní mapa s podrobnější sítí cest \n \n• Opraveny zaplavené oblasti ve světě \n \n• Lyžařská navigace: do detailů trasy byl přidán výškový profil a obtížnost \n \n• Opravy dalších chyb</string>
     <string name="apply_preference_to_all_profiles">Aplikovat tuto změnu na všechny profily nebo jen na vybraný profil.</string>
     <string name="quick_action_hillshade_descr">Tlačítko pro zobrazení nebo skrytí stínování svahů na mapě.</string>
     <string name="quick_action_contour_lines_descr">Tlačítko pro zobrazení nebo skrytí vrstevnic na mapě.</string>
@@ -3867,15 +3683,7 @@
     <string name="plan_route_split_before">Rozdělit před</string>
     <string name="plan_route_split_after">Rozdělit po</string>
     <string name="plan_route_add_new_segment">Přidat nový úsek</string>
-    <string name="release_3_9">• Přidána možnost exportovat a importovat všechna data včetně nastavení, zdrojů a oblíbených bodů
-\n
-\n• Plánování trasy: grafy pro úseky trasy; přidána možnost vytvářet a upravovat více úseků trasy
-\n
-\n• Přidána přihlašovací metoda OAuth pro OpenStreetMap, vylepšené uživatelské rozhraní pro OSM dialogy
-\n
-\n• Podpora pro vlastní barvy u oblíbených bodů a mezicílů trasy
-\n
-\n</string>
+    <string name="release_3_9">• Přidána možnost exportovat a importovat všechna data včetně nastavení, zdrojů a oblíbených bodů \n \n• Plánování trasy: grafy pro úseky trasy; přidána možnost vytvářet a upravovat více úseků trasy \n \n• Přidána přihlašovací metoda OAuth pro OpenStreetMap, vylepšené uživatelské rozhraní pro OSM dialogy \n \n• Podpora pro vlastní barvy u oblíbených bodů a mezicílů trasy</string>
     <string name="profile_type_osmand_string">Profil OsmAnd</string>
     <string name="profile_type_user_string">Uživatelský profil</string>
     <string name="reverse_all_points">Otočit všechny body</string>
@@ -4062,23 +3870,11 @@
     <string name="in_grace_period">V období tolerance</string>
     <string name="on_hold">Pozastaveno</string>
     <string name="expired">Expirovalo</string>
-    <string name="release_4_0_beta">• Přidaná možnost stáhnutí vrstevnic v stopách
-\n
-\n• Plánovač trasy: přidané přepínače mezi body a grafy
-\n
-\n• Aktualizace OsmAnd Live přesunuté do \"Stáhnout mapy &gt; Aktualizace\"
-\n
-\n• Stopy je nyní možné vybarvit podle nadmořské výšky, rychlosti nebo sklonu svahu.
-\n
-\n• Přidaná možnost změny vzhledu navigační trasy.
-\n
-\n• Vylepšené okno \"Záznam výletu\"
-\n
-\n</string>
+    <string name="release_4_0_beta">• Přidaná možnost stáhnutí vrstevnic v stopách \n \n• Plánovač trasy: přidané přepínače mezi body a grafy \n \n• Aktualizace OsmAnd Live přesunuté do \"Stáhnout mapy &gt; Aktualizace\" \n \n• Stopy je nyní možné vybarvit podle nadmořské výšky, rychlosti nebo sklonu svahu. \n \n• Přidaná možnost změny vzhledu navigační trasy. \n \n• Vylepšené okno \"Záznam výletu\"</string>
     <string name="update_all_maps_added">Aktualizovat všechny mapy přidané do %1$s\?</string>
     <string name="shared_string_feet">stopy</string>
     <string name="srtm_unit_format">Varianta vrstevnicových jednotek</string>
-    <string name="srtm_download_list_help_message">OsmAnd poskytuje data vrstevnic v metrech a stopách. Pro změnu formátu budete muset soubor znovu stáhnout.</string>
+    <string name="srtm_download_list_help_message">OsmAnd poskytuje data vrstevnic v metrech a stopách. Pro změnu formátu budete muset soubor znovu stáhnout.</string>
     <string name="srtm_download_single_help_message">Vyberte variantu. Chcete-li změnit formát, musíte soubor znovu stáhnout.</string>
     <string name="exit_number">Číslo výjezdu</string>
     <string name="announce_when_exceeded">Oznámení při překročení</string>
@@ -4146,27 +3942,7 @@
     <string name="backup_restore_now">Obnovit nyní</string>
     <string name="shared_string_purchased">Zakoupeno</string>
     <string name="explore_wikipedia_offline">Prozkoumejte Wikipedii offline.</string>
-    <string name="release_4_0">• Záloha do cloudu
-\n
-\n • Přidán noční režim pro styl mapy \"Topo\"
-\n
-\n • Přidána volba pro stažení vrstevnic ve stopách
-\n
-\n • Trasy mohou být vybarveny podle výšky, rychlosti a svahů
-\n
-\n • Aktualizován dialog \"Záznam cesty\"
-\n
-\n • Měření vzdálenosti dotykem byl přesunut z Kruhového pravítka do samostatného nastavení
-\n
-\n • Plánování trasy: Nyní můžete měnit možnosti navigace, přistupovat ke konfiguraci mapy a vyhledávat, bez nutnosti opuštění plánování trasy
-\n
-\n • Nová obrazovka \"Nákupy\" s podrobnými informacemi o nákupu
-\n
-\n • Přidána možnost změny vzhledu linie trasy
-\n
-\n • Aktualizace OsmAnd Live přesunuty do sekce \"Stáhnout mapy &gt; Aktualizace\"
-\n
-\n</string>
+    <string name="release_4_0">• Záloha do cloudu \n \n • Přidán noční režim pro styl mapy \"Topo\" \n \n • Přidána volba pro stažení vrstevnic ve stopách \n \n • Trasy mohou být vybarveny podle výšky, rychlosti a svahů \n \n • Aktualizován dialog \"Záznam cesty\" \n \n • Měření vzdálenosti dotykem byl přesunut z Kruhového pravítka do samostatného nastavení \n \n • Plánování trasy: Nyní můžete měnit možnosti navigace, přistupovat ke konfiguraci mapy a vyhledávat, bez nutnosti opuštění plánování trasy \n \n • Nová obrazovka \"Nákupy\" s podrobnými informacemi o nákupu \n \n • Přidána možnost změny vzhledu linie trasy \n \n • Aktualizace OsmAnd Live přesunuty do sekce \"Stáhnout mapy &gt; Aktualizace\"</string>
     <string name="walking_route_osmc_description">Obarvit trasy podle jejich individuální lokální barvy (pokud je nastavena v OpenStreetMap) a typu (mezinárodní, regionální, lokální).</string>
     <string name="routes_color_by_type">Obarvit trasy podle…</string>
     <string name="rendering_value_walkingRoutesOSMC_description">Obarví trasy podle jejich individuální lokální barvy (pokud je nastavena v OpenStreetMap) a turistického značení.</string>
@@ -4222,7 +3998,7 @@
     <string name="shared_storage_migration">Migrace sdíleného úložiště</string>
     <string name="icon_group_industrial">Průmysl</string>
     <string name="delete_history_items">Smazat %1$s položek historie\?</string>
-    <string name="quick_action_toggle_preference">Přepínač pro změnu nastavení.</string>
+    <string name="quick_action_toggle_preference">Přepínač pro změnu předvoleb.</string>
     <string name="approx_safe_mode_description">Provádět GPX aproximaci pomocí pomalejšího kódu pro Android místo nativního kódu.</string>
     <string name="use_external_timestamps_description">Použít časové značky online navigační služby pro úpravu odhadovaného času a průměrné rychlosti</string>
     <string name="search_history_is_disabled_descr">V nastavení můžete zapnout historii vyhledávání.</string>
@@ -4258,31 +4034,7 @@
     <string name="android_auto_map_placeholder_title">Mapa je zobrazená na obrazovce vozidla.</string>
     <string name="location_access_request_action">Povolit přístup</string>
     <string name="android_auto_map_placeholder_descr">Odpojte své zařízení od Android Auto, abyste zobrazili mapu v aplikaci.</string>
-    <string name="release_4_1">• Prvotní podpora pro Android Auto
-\n
-\n• Aktualizace uživatelského rozhraní pro vyhledávání souřadnic UTM
-\n
-\n• Filtr GPS pro GPX stopy
-\n
-\n• Nástroj nadmořské výšky (Pro)
-\n
-\n• Oblíbené: přidána možnost zobrazit naposledy použité ikony
-\n
-\n• Plánování cesty: po spuštění použije právě vybraný profil
-\n
-\n• Opravena vrstva Mapillary, modul je nyní ve výchozím stavu vypnutý
-\n
-\n• Přidána obrazovka pro správu historie všech činností v aplikaci
-\n
-\n• Orientace mapy se již po restartu aplikace neresetuje
-\n
-\n• Vylepšené vykreslování výškových značek SRTM
-\n
-\n• Opraveny arabské mapové popisky
-\n
-\n• Opraveny různé chyby výpočtu trasy
-\n
-\n</string>
+    <string name="release_4_1">• Prvotní podpora pro Android Auto \n \n• Aktualizace uživatelského rozhraní pro vyhledávání souřadnic UTM \n \n• Filtr GPS pro GPX stopy \n \n• Nástroj nadmořské výšky (Pro) \n \n• Oblíbené: přidána možnost zobrazit naposledy použité ikony \n \n• Plánování cesty: po spuštění použije právě vybraný profil \n \n• Opravena vrstva Mapillary, modul je nyní ve výchozím stavu vypnutý \n \n• Přidána obrazovka pro správu historie všech činností v aplikaci \n \n• Orientace mapy se již po restartu aplikace neresetuje \n \n• Vylepšené vykreslování výškových značek SRTM \n \n• Opraveny arabské mapové popisky \n \n• Opraveny různé chyby výpočtu trasy</string>
     <string name="cancel_anytime_in_amazon_app">Zrušte kdykoliv v aplikaci Amazon</string>
     <string name="display_route_tracks">Zobrazit stopy</string>
     <string name="use_external_timestamps">Použít externí časové značky</string>
@@ -4364,7 +4116,6 @@
     <string name="continue_with">Pokračovat s %1$s</string>
     <string name="you_can_get_feature_as_part_of_pattern">Získejte “%1$s” jako součást předplatného (%2$s). Srovnání:</string>
     <string name="nautical_depth">Námořní hloubka</string>
-    <string name="offline_wikivoyage">Offline Wikivoyage</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedie a Wikivoyage offline</string>
     <string name="unlimited_map_downloads">Neomezený počet map ke stažení</string>
     <string name="purchases_feature_desc_combined_wiki">Prozkoumejte články Wikipedie bez připojení na internet. Offline data jsou rozdělena podle zemí a dostupná ve všech jazycích.</string>
@@ -4472,8 +4223,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Zobrazit značky poznámek</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikony při malém přiblížení</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematické zobrazení ikon při malém přiblížení</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Tunely vodních cest</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Neskrývat tunely vodních cest</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Zvýšit viditelnost tunelů vodních cest</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Zvýšit viditelnost tunelů vodních cest</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_seabedDetail_name">Detaily mořského dna</string>
     <string name="rendering_value_category_name">Kategorie</string>
@@ -4580,7 +4331,6 @@
     <string name="rendering_attr_showMtbScale_description">Zobrazit trasy podle jejich stupnice MTB.</string>
     <string name="rendering_attr_showMtbScale_name">Zobrazit stupnici MTB</string>
     <string name="co2_mission">Emise CO2</string>
-    <string name="import_export">Import/export</string>
     <string name="export_to_file">Export do souboru</string>
     <string name="shared_string_expires">Platnost končí</string>
     <string name="shared_string_purchased_on">Zakoupeno dne</string>
@@ -4676,31 +4426,7 @@
     <string name="weather_pressure_hpa">hPa</string>
     <string name="show_map_symbols_desc">Text, dopravní značky a další.</string>
     <string name="purchases_feature_desc_external_sensors">Zobrazení a záznam dat z externích senzorů: rychlost kola, výkon kola, kadence a tepová frekvence.</string>
-    <string name="release_4_3">- Nový, rychlejší engine pro vykreslování map verze 2 (OpenGL) se zobrazením 2,5D
-\n
-\n - Plynulá animace změn polohy při pohybu
-\n
-\n - Nové nástroje pro souřadnice středu mapy a nadmořskou výšku zeměpisné polohy
-\n
-\n - \"Vzdálenost klepnutím\": přidány možnosti velikosti textu
-\n
-\n - Nástroj \"Mapová značka\": přidána možnost změny chování při kliknutí
-\n
-\n - Opravena možnost \"Umístění polohy\"
-\n
-\n - GPX: přidána podpora pro značky \"link\", \"cmt\", \"desc\" a pro libovolná vlastní rozšíření
-\n
-\n - Reorganizace seznamu \"Námořní mapy\"
-\n
-\n - Přidána podpora pro senzory ANT+
-\n
-\n - Přidána možnost zakázat stahování UUID
-\n
-\n - Předpověď výchozí rychlosti nastavitelná pro časy výletů v závislosti na nadmořské výšce při chůzi/běhu
-\n
-\n - Opraven zvukový výstup a chování posuvníku hlasitosti
-\n
-\n</string>
+    <string name="release_4_3">- Nový, rychlejší engine pro vykreslování map verze 2 (OpenGL) se zobrazením 2,5D \n \n - Plynulá animace změn polohy při pohybu \n \n - Nové nástroje pro souřadnice středu mapy a nadmořskou výšku zeměpisné polohy \n \n - \"Vzdálenost klepnutím\": přidány možnosti velikosti textu \n \n - Nástroj \"Mapová značka\": přidána možnost změny chování při kliknutí \n \n - Opravena možnost \"Umístění polohy\" \n \n - GPX: přidána podpora pro značky \"link\", \"cmt\", \"desc\" a pro libovolná vlastní rozšíření \n \n - Reorganizace seznamu \"Námořní mapy\" \n \n - Přidána podpora pro senzory ANT+ \n \n - Přidána možnost zakázat stahování UUID \n \n - Předpověď výchozí rychlosti nastavitelná pro časy výletů v závislosti na nadmořské výšce při chůzi/běhu \n \n - Opraven zvukový výstup a chování posuvníku hlasitosti</string>
     <string name="map_center_widget">Souřadnice: Střed mapy</string>
     <string name="weather_widgets_secondary_desc">Jednotky měření lze změnit v nastavení modulu Počasí.</string>
     <string name="weather_pressure_inhg">inHg</string>
@@ -4726,7 +4452,6 @@
     <string name="determine_location">Umožněte nám určit vaši polohu</string>
     <string name="weather_precip_in">v</string>
     <string name="display_position_automatic_descr">Závisí na orientaci mapy: dole pro režim ve směru pohybu, uprostřed pro všechny ostatní.</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Změnit vzhled %1$s stop\?</string>
     <string name="no_visible_tracks_description">Vyberte stopy k zobrazení na mapě.</string>
     <string name="no_visible_tracks">Žádné stopy na mapě</string>
     <string name="recently_visible">Nedávno viditelné %1$s</string>
@@ -4762,7 +4487,7 @@
     <string name="routing_attr_goods_restrictions_description">Zohlednit omezení vjezdu pro lehká nákladní vozidla (zboží)</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Zobrazit trasy pro MTB IMBA</string>
     <string name="transport_hazmat_yes_desc">Vyberte příslušnou kategorii.</string>
-    <string name="routing_attr_hazmat_category_name">Přeprava nebezpečných materiálů</string>
+    <string name="routing_attr_hazmat_category_name">Kategorie nebezpečného nákladu</string>
     <string name="transport_hazmat_no_desc">Silnice a tunely mohou omezovat přepravu nebezpečných materiálů.</string>
     <string name="trip_recording_downhill_widget_desc">Zobrazuje součet všech klesání aktuálně zaznamenané jízdy.</string>
     <string name="distance_to_intermediate_widget_desc">Widget zobrazuje vzdálenost, která zbývá do prvního mezilehlého bodu. Po překročení mezilehlých bodů se vzdálenost aktualizuje k dalšímu mezilehlému bodu.</string>
@@ -4826,7 +4551,7 @@
     <string name="altitude_correction">Korekce nadmořské výšky</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Nevyjíždějte mimo sjezdovky</string>
     <string name="map_marker_average_speed_desc">Zadejte časový interval pro průměrování rychlosti (používá se pro odhad času příjezdu).</string>
-    <string name="map_widget_zoom_level">Zoom level</string>
+    <string name="map_widget_zoom_level">Úroveň přiblížení</string>
     <string name="external_sensors_plugin_name">Externí senzory</string>
     <string name="external_sensors_plugin_description">Přístup k externím senzorům, které snímají např. srdeční tep, rychlost jízdy na kole, výkon nebo kadenci. Vyžaduje, aby vaše zařízení bylo připojeno k příslušným senzorům prostřednictvím protokolu bezdrátové osobní sítě ANT+.</string>
     <string name="marker_1st">První značka</string>
@@ -4895,7 +4620,7 @@
     <string name="compass_visible_if_map_rotated">Viditelný, pokud je mapa otočena</string>
     <string name="compass_always_hidden">Vždy skrytý</string>
     <string name="compass_always_visible">Vždy viditelný</string>
-    <string name="compass_click_desc">Tip: Klepnutím na tlačítko kompasu přepněte režim orientace mapy.</string>
+    <string name="compass_click_desc">Dvojitým klepnutím na tlačítko kompasu přepnete režim orientace mapy.</string>
     <string name="compass_desc">Ukazuje směr k severu.</string>
     <string name="download_complete">Stahování dokončeno</string>
     <string name="marker_2nd">Druhá značka</string>
@@ -4921,7 +4646,7 @@
     <string name="routing_attr_difficulty_preference_intermediate_name">Středně pokročilý</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">Trolejbusové linky</string>
     <string name="rendering_attr_showShareTaxiRoutes_name">Trasy kyvadlové dopravy</string>
-    <string name="favorite_confirm_delete_group">Opravdu chcete odstranit skupinu \"%1$s\" a všechny zahrnuté body (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">Odstranit skupinu \"%1$s\" a všechny zahrnuté body (%2$d)?</string>
     <string name="trip_recording_duration_widget_desc">Zobrazuje aktuálně zaznamenaný čas jízdy.</string>
     <string name="true_bearing_wdiget_desc">Úhel mezi skutečným severem a cílovým bodem pozorovaným z vaší polohy.</string>
     <string name="time_to_destination_widget_desc">Widget zobrazuje \"Čas příjezdu\" nebo \"Čas do odjezdu\" do posledního cílového bodu. Čas je během navigace neustále aktualizován a rovná se času na trase z aktuální polohy.</string>
@@ -5006,15 +4731,7 @@
     <string name="shared_string_speed">Rychlost</string>
     <string name="app_mode_mountain_bicycle">Horské kolo</string>
     <string name="turn_on_public_transport_description">Zapnutím zobrazíte na mapě trasy veřejné dopravy.</string>
-    <string name="release_4_2">- Přepracování nástrojů na obrazovce: nový vzhled a funkce, seskupení podle stránek, změna pořadí a kombinování podle potřeby.
-\n
-\n - Turistické / cyklistické / cestovní trasy: klepněte na symbol trasy a získejte úplné informace o trase.
-\n
-\n - Oblíbené skupiny: nastavení výchozího vzhledu pro nové body ve skupině.
-\n
-\n - Opravy: automatická online aktualizace dlaždicových map.
-\n
-\n</string>
+    <string name="release_4_2">- Přepracování nástrojů na obrazovce: nový vzhled a funkce, seskupení podle stránek, změna pořadí a kombinování podle potřeby. \n \n - Turistické / cyklistické / cestovní trasy: klepněte na symbol trasy a získejte úplné informace o trase. \n \n - Oblíbené skupiny: nastavení výchozího vzhledu pro nové body ve skupině. \n \n - Opravy: automatická online aktualizace dlaždicových map</string>
     <string name="on_with_params">%1$s na %2$s</string>
     <string name="map_widget_distance_to_destination">Vzdálenost do cíle</string>
     <string name="map_widget_current_speed">Aktuální rychlost</string>
@@ -5043,37 +4760,7 @@
     <string name="movement_speed">Rychlost pohybu</string>
     <string name="simulation_position_description">Vyberte soubor stopy, který bude použit jako zdroj pro přesun polohy.</string>
     <string name="shared_string_add_manually">Přidejte ručně…</string>
-    <string name="release_4_4">• Vylepšená nabídka \"Stopy\" v \"Nastavení mapy\"
-\n
-\n • Kontextová nabídka nyní zobrazuje lokalizované názvy bodů zájmu
-\n
-\n • Přidána možnost sdílení trasy pomocí odkazu
-\n
-\n • Přidána jednotka délky \"Námořní míle/stopa\".
-\n
-\n • Přidán nový pevný režim orientace mapy
-\n
-\n • Zjednodušená úvodní obrazovka
-\n
-\n • Opraveno umístění polohy v režimu rozdělené obrazovky v systému Android Auto
-\n
-\n • Přidán graf \"Rychlost/Sklon\" pro analýzu trasy
-\n
-\n • Systém Android 13 přesunul výběr jazyka aplikace do nastavení systému
-\n
-\n • Opraveny problémy se zobrazováním veganských míst
-\n
-\n • Přidána možnost stahování online dlaždic používaných jako překryvné nebo podkladové mapy
-\n
-\n • Přidána podpora imperiálních jednotek pro \"Parametry vozidla\"
-\n
-\n • Nový profil Moped
-\n
-\n • Do položky \"Zobrazení polohy\" byla přidána nová možnost \"Automaticky\"
-\n
-\n • Opravena gesta pro naklápění, přibližování a otáčení mapy
-\n
-\n</string>
+    <string name="release_4_4">• Vylepšená nabídka \"Stopy\" v \"Nastavení mapy\" \n \n • Kontextová nabídka nyní zobrazuje lokalizované názvy bodů zájmu \n \n • Přidána možnost sdílení trasy pomocí odkazu \n \n • Přidána jednotka délky \"Námořní míle/stopa\". \n \n • Přidán nový pevný režim orientace mapy \n \n • Zjednodušená úvodní obrazovka \n \n • Opraveno umístění polohy v režimu rozdělené obrazovky v systému Android Auto \n \n • Přidán graf \"Rychlost/Sklon\" pro analýzu trasy \n \n • Systém Android 13 přesunul výběr jazyka aplikace do nastavení systému \n \n • Opraveny problémy se zobrazováním veganských míst \n \n • Přidána možnost stahování online dlaždic používaných jako překryvné nebo podkladové mapy \n \n • Přidána podpora imperiálních jednotek pro \"Parametry vozidla\" \n \n • Nový profil Moped \n \n • Do položky \"Zobrazení polohy\" byla přidána nová možnost \"Automaticky\" \n \n • Opravena gesta pro naklápění, přibližování a otáčení mapy</string>
     <string name="enable_3d_maps">Povolit 3D mapy</string>
     <string name="generate_hillshade_from_3d_maps">Generovat rastrové mapy stínování kopců z 3D map</string>
     <string name="sort_distance_ascending">Nejkratší vzdálenost jako první</string>
@@ -5081,7 +4768,7 @@
     <string name="sort_date_ascending">Nejnovější datum jako první</string>
     <string name="sort_date_descending">Nejstarší datum jako první</string>
     <string name="selected_value">Vybraná hodnota</string>
-    <string name="sort_duration_ascending">Kratší doba trvání jako první</string>
+    <string name="sort_duration_ascending">Nejkratší doba trvání jako první</string>
     <string name="sort_duration_descending">Delší doba trvání jako první</string>
     <string name="clear_online_cache_description">Tím vymažete veškerou mezipaměť pro online dlaždice počasí.</string>
     <string name="clear_online_cache">Smazat online mezipaměť</string>
@@ -5110,7 +4797,7 @@
     <string name="weather_download_error">Nepodařilo se stáhnout %1$s dlaždic.</string>
     <string name="proxy_port_max_warning">Maximální hodnota portu je %1$s</string>
     <string name="external_device_low_battery">Slabá baterie</string>
-    <string name="external_device_forget_sensor_description">Senzor bude ze seznamu odstraněn. Tento senzor budete moci kdykoli znovu spárovat.</string>
+    <string name="external_device_forget_sensor_description">Senzor bude ze seznamu odstraněn. Tento snímač budete moci kdykoli znovu spárovat.</string>
     <string name="external_device_disconnected">Odpojeno</string>
     <string name="external_device_connected">Připojeno</string>
     <string name="external_device_forget_sensor">Zapomenout senzor</string>
@@ -5146,7 +4833,7 @@
     <string name="ant_plus_bluetooth_off">Bluetooth je vypnuté</string>
     <string name="ant_plus_bluetooth_off_description">Zapněte vyhledání Bluetooth a spárujte senzory.</string>
     <string name="ant_plus_searching_text">Hledání senzorů</string>
-    <string name="ant_plus_searching_text_description">Zařízení držte v blízkosti senzoru. Senzor je třeba aktivovat, aby jej aplikace OsmAnd našla.</string>
+    <string name="ant_plus_searching_text_description">Zařízení držte v blízkosti snímače. Snímač je třeba aktivovat, aby jej aplikace OsmAnd našla.</string>
     <string name="ant_plus_help_title">Nevím, jaký typ senzoru mám</string>
     <string name="ant_plus_searching">Hledání</string>
     <string name="ant_plus_pair_new_sensor">Spárování nového senzoru</string>
@@ -5163,7 +4850,7 @@
 \n- Senzor je aktivován
 \n- Toto zařízení je umístěno v blízkosti senzoru</string>
     <string name="ant_plus_pair_new_sensor_ble">Párování senzoru Bluetooth LE</string>
-    <string name="delete_track_folder_dialog_message">Tím se odstraní složka \"%1$s\" a všechny stopy (%2$s) v ní obsažené.</string>
+    <string name="delete_track_folder_dialog_message">Tím se odstraní složka \"%1$s\" a všech %2$s stop v ní obsažených.</string>
     <string name="delete_folder_question">Smazat složku\?</string>
     <string name="delete_folder">Smazat složku</string>
     <string name="show_all_tracks_on_the_map">Zobrazit všechny stopy na mapě</string>
@@ -5217,14 +4904,14 @@
     <string name="beats_per_minute_short">bpm</string>
     <string name="osmand_cloud_delete_account_confirmation">Smazat účet\?</string>
     <string name="action_cannot_be_undone">Tuto akci nelze vzít zpět.</string>
-    <string name="delete_account_warning">Opravdu chcete odstranit účet %1$s\?</string>
+    <string name="delete_account_warning">Odstranit účet %1$s?</string>
     <string name="shared_string_deleting">Mazání</string>
     <string name="backup_error_delete_account_email_match">E-mail neodpovídá přihlašovacímu jménu</string>
     <string name="osmand_cloud_deleting_account_descr">Během několika okamžiků budou všechna vaše data a účet z OsmAnd Cloud odstraněny.
 \n
 \nVšechna data v zařízení zůstanou nedotčena.</string>
     <string name="osmand_cloud_deleted_account_descr">Účet a všechna data byla z OsmAnd Cloud odstraněna.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Opravdu chcete smazat účet OsmAnd Cloud\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Smazat účet OsmAnd Cloud?
 \n
 \nTuto akci nelze vzít zpět.</string>
     <string name="verify_account_deletion_descr">Před smazáním vašeho účtu jej musíme ověřit.
@@ -5258,49 +4945,7 @@
     <string name="cache_size">Velikost mezipaměti</string>
     <string name="shared_string_avoid">Vyhnout se</string>
     <string name="may_be_used_if_there_is_shortcut">Může být použito, pokud existuje zkratka</string>
-    <string name="release_4_5">• BLE/ANT+ senzory: přepracované připojení, zapisování a prohlížení přijatých dat v GPX
-\n
-\n• Bezplatné zálohování oblíbených bodů a nastavení do \"OsmAnd Cloud\"
-\n
-\n• Nový formát terénních map s podporou 3D reliéfu
-\n
-\n• Správa stop: aktualizované uživatelské rozhraní, přidáno třídění, podpora vnořených složek
-\n
-\n• Android Auto: nové úvodní menu pro přístup k oblíbeným bodům, stopám a kategoriím bodů zájmu
-\n
-\n• Jeden seznam widgetů pro horní i dolní panel
-\n
-\n• Nový profil \"Vlak\", umožňuje výpočet vlakových tras
-\n
-\n• Vrstevnice fungují s libovolným zdrojem map
-\n
-\n• Rozšířený seznam výchozích akcí pro externí klávesnice
-\n
-\n• Uživatelsky definované soubory s navigací, přidána možnost smazat nebo přepsat
-\n
-\n• Přidána možnost \"Ohlásit odchylku od trasy\"
-\n
-\n• Úvodní obrazovka: přidána možnost obnovit stav OsmAnd ze souboru
-\n
-\n• Přidány třídy nebezpečných materiálů pro navigování kamionů v Severní Americe
-\n
-\n• Přidána podpora ferrat pro pěší navigaci
-\n
-\n• Přidána stupnice CAI pro klasifikaci obtížnosti tras
-\n
-\n• Opravena volba jazyka pro aplikaci
-\n
-\n• Přidána podpora pro tematické ikony
-\n
-\n• OsmAnd Cloud: přidána možnost smazat účet
-\n
-\n• Přístupnost: velikost tlačítek pro dotyk změněna na 48 dp; opravena chyba s mapovým rozhraním viditelným pro čtečky obrazovky
-\n
-\n• Přepracována hlasová oznámení v japonštině
-\n
-\n• Přepracováno vyhodnocení změn nadmořské výšky a sklonu
-\n
-\n</string>
+    <string name="release_4_5">• BLE/ANT+ senzory: přepracované připojení, zapisování a prohlížení přijatých dat v GPX \n \n• Bezplatné zálohování oblíbených bodů a nastavení do \"OsmAnd Cloud\" \n \n• Nový formát terénních map s podporou 3D reliéfu \n \n• Správa stop: aktualizované uživatelské rozhraní, přidáno třídění, podpora vnořených složek \n \n• Android Auto: nové úvodní menu pro přístup k oblíbeným bodům, stopám a kategoriím bodů zájmu \n \n• Jeden seznam widgetů pro horní i dolní panel \n \n• Nový profil \"Vlak\", umožňuje výpočet vlakových tras \n \n• Vrstevnice fungují s libovolným zdrojem map \n \n• Rozšířený seznam výchozích akcí pro externí klávesnice \n \n• Uživatelsky definované soubory s navigací, přidána možnost smazat nebo přepsat \n \n• Přidána možnost \"Ohlásit odchylku od trasy\" \n \n• Úvodní obrazovka: přidána možnost obnovit stav OsmAnd ze souboru \n \n• Přidány třídy nebezpečných materiálů pro navigování kamionů v Severní Americe \n \n• Přidána podpora ferrat pro pěší navigaci \n \n• Přidána stupnice CAI pro klasifikaci obtížnosti tras \n \n• Opravena volba jazyka pro aplikaci \n \n• Přidána podpora pro tematické ikony \n \n• OsmAnd Cloud: přidána možnost smazat účet \n \n• Přístupnost: velikost tlačítek pro dotyk změněna na 48 dp; opravena chyba s mapovým rozhraním viditelným pro čtečky obrazovky \n \n• Přepracována hlasová oznámení v japonštině \n \n• Přepracováno vyhodnocení změn nadmořské výšky a sklonu</string>
     <string name="free_settings_backup">Bezplatné zálohování nastavení</string>
     <string name="routing_attr_allow_via_ferrata_description">Horská cesta vybavená jisticími lany, stupačkami, žebříky a lávkami.</string>
     <string name="free_favorites_backup_description">Zaregistrujte se do OsmAnd Cloud a získejte bezplatné zálohování oblíbených bodů a nastavení.</string>
@@ -5312,7 +4957,7 @@
     <string name="shared_string_ear_lobe">Ušní lalok</string>
     <string name="shared_string_foot">Noha</string>
     <string name="poi_categories">Kategorie bodů zájmu</string>
-    <string name="nav_profile_confirm_delete">Opravdu chcete smazat \"%1$s\"\?</string>
+    <string name="nav_profile_confirm_delete">Smazat \"%1$s\"?</string>
     <string name="number_of_tracks">%1$s stop</string>
     <string name="search_track_by_name">Hledat stopu podle názvu</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Sekundární zařízení budou odpojena od OsmAnd Cloud a ztratí přístup k placeným funkcím.</string>
@@ -5322,7 +4967,6 @@
     <string name="rendering_attr_alpineHiking_description">Typy klasifikace tras podle obtížnosti.</string>
     <string name="rendering_value_sacScale_description">Švýcarský alpinistický klub</string>
     <string name="rendering_value_caiScale_description">Club Alpino Italiano (italský alpinistický klub)</string>
-    <string name="rendering_attr_alpineHiking_name">Klasifikace podle obížnosti</string>
     <string name="rendering_value_sacScale_name">SAC</string>
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="write_bearing_description">Ukládat azimut každého bodu stopy během záznamu</string>
@@ -5348,23 +4992,7 @@
     <string name="help_article_map_map_context_menu_name">Kontextová nabídka mapy</string>
     <string name="help_article_map_point_layers_on_map_name">Body na mapě</string>
     <string name="help_article_map_legend_nautical_map_name">Styl námořní mapy</string>
-    <string name="release_4_6">• Přidán widget \"Glide Ratio\"
-\n
-\n• Přidány filtry a chytré složky pro stopy
-\n
-\n• Přidány řádky pro horní a dolní panely widgetů s podporou všech widgetů
-\n
-\n• Přidána podpora pro widget teploty ANT+
-\n
-\n• Vylepšená správa paměti pro velké stopy GPX
-\n
-\n• Aktualizovaná správa místních zdrojů v sekci Stažené soubory
-\n
-\n• Přidán widget \"Dostupná paměť RAM\"
-\n
-\n• Opraveny problémy s průhledným stavovým řádkem
-\n
-\n</string>
+    <string name="release_4_6">• Android Auto: Přidán 3D režim \n \n• Stopy: Přidány filtry a chytré složky, paměť optimalizována pro velké soubory \n \n• Vylepšený horní a dolní panel nástrojů \n \n• Vylepšená správa lokálních zdrojů \n \n• Nastavitelné funkce tlačítek v externích ovladačích \n \n• Nové nástroje \"Klouzavý poměr\" a \"Pozice slunce\" \n \n• OsmAnd Cloud: Nově přístupné smazané soubory \n \n• Vylepšené obarvení stop novým symetrickým gradientem v režimu Svahy \n \n• Opraveny problémy s průhledným stavovým řádkem \n \n• Přidána podpora pro nástroj teploty ANT+ \n \n• Přidán nástroj \"Dostupná paměť RAM\"</string>
     <string name="app_mode_baby_transport">Přeprava dětí</string>
     <string name="sensor_temperature_desc">Zobrazuje teplotu ze snímače</string>
     <string name="shared_string_temperature">Teplota</string>
@@ -5382,7 +5010,7 @@
     <string name="help_article_purchases_giveaway_name">Dárek</string>
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
     <string name="standard_maps">Standardní mapy</string>
-    <string name="max_altitude">Max. výška</string>
+    <string name="max_altitude">Max. nadmořská výška</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">Hlasové výzvy / upozornění</string>
     <string name="track_filter_date_selected_format">%s - %s</string>
     <string name="shared_string_created">Vytvořeno</string>
@@ -5391,8 +5019,8 @@
     <string name="help_article_navigation_routing_direct_to_point_routing_name">Navigace přímo do bodu (Loď)</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Obrazovka mapy při navigaci</string>
     <string name="filter_by_name">Filtrovat podle názvu</string>
-    <string name="shared_string_reset_all">Resetovat vše</string>
-    <string name="help_article_navigation_guidance_name">Průvodce</string>
+    <string name="shared_string_reset_all">Obnovit vše</string>
+    <string name="help_article_navigation_guidance_name">Navigační průvodce</string>
     <string name="help_article_personal_profiles_name">Profily (Nastavení)</string>
     <string name="help_article_navigation_routing_car_based_routing_name">Navigace automobilů (nákladních automobilů, motocyklů)</string>
     <string name="help_article_navigation_setup_route_details_name">Detaily trasy</string>
@@ -5432,13 +5060,13 @@
     <string name="help_article_search_search_all_name">Vyhledat vše</string>
     <string name="help_article_personal_storage_name">Úložiště</string>
     <string name="sort_country_name_descending">Název země: Z – A</string>
-    <string name="delete_map_description">Opravdu chcete odstranit mapu %1$s\?</string>
+    <string name="delete_map_description">Odstranit mapu %1$s?</string>
     <string name="maps_and_resources">Mapy a zdroje</string>
     <string name="help_article_navigation_routing_osmand_routing_name">O OsmAnd navigaci</string>
     <string name="empty_smart_folder_title">Žádná odpovídající trasa</string>
     <string name="smart_folder_name_present">Taková chytrá složka již existuje</string>
     <string name="help_article_search_search_coordinates_name">Hledat souřadnice</string>
-    <string name="empty_smart_folder_description">Zde se automaticky zobrazí všechny odpovídající trasy</string>
+    <string name="empty_smart_folder_description">Odpovídající trasy se zobrazí zde</string>
     <string name="configure_filter">Nastavit filtr</string>
     <string name="smart_folder_saved">Chytrá složka uložena</string>
     <string name="no_config_smart_folder_title">Není nastaveno</string>
@@ -5449,9 +5077,598 @@
     <string name="save_as_smart_folder">Uložit jako chytrou složku</string>
     <string name="shared_string_show_icon">Zobrazit ikonu</string>
     <string name="shared_string_loading">Načítání</string>
-    <string name="delete_smart_folder_dialog_message">Tím se odstraní chytrá složka \"%1$s\".</string>
-    <string name="discard_filter_changes_prompt">Opravdu chcete resetovat všechny filtry\?</string>
+    <string name="delete_smart_folder_dialog_message">Tím se odstraní chytrá složka \"%1$s\". (Žádné stopy nebudou smazány.)</string>
+    <string name="discard_filter_changes_prompt">Obnovit všechny filtry?</string>
     <string name="no_config_smart_folder_description">Chytré složky umožňují seskupovat trasy podle použitých filtrů</string>
     <string name="loading_tracks">Znovu načítání tras</string>
     <string name="searching_matching_tracks">Vyhledat všechny odpovídající trasy</string>
+    <string name="any_connected">Jakýkoliv připojený</string>
+    <string name="any_connected_with_device">Jakýkoliv připojený: %s</string>
+    <string name="add_new_button">Přidat nové tlačítko</string>
+    <string name="use_v1_auto_zoom">Krokové automatické přiblížení (stará verze)</string>
+    <string name="zoom_animated">Plynulé přiblížení</string>
+    <string name="zoom_non_animated">Neanimované přiblížení</string>
+    <string name="button_already_assigned_to_this_action">Tlačítko je již k této akci přiřazené.</string>
+    <string name="rendering_attr_showToll_description">Zobrazit mýtná omezení na cestách</string>
+    <string name="rendering_attr_showToll_name">Zobrazit mýtná omezení</string>
+    <string name="tripltek_promo">Tripltek promo na %1$s měsíců</string>
+    <string name="tripltek_promo_description">Bezplatný přístup k funkcím včetně neomezeného stahování map, 3D reliéfu atd. na %1$s měsíců</string>
+    <string name="key_assignments">Přiřazení kláves</string>
+    <string name="see_all_plans">Zobrazit všechny typy předplatného</string>
+    <string name="press_button_to_link_with_action">Na svém zařízení stiskněte tlačítko, které má být přiřazeno k akci: %1$s</string>
+    <string name="shared_string_button">Tlačítko</string>
+    <string name="shared_string_action">Akce</string>
+    <string name="key_event_action_toggle_drower">Zobrazit/skrýt boční menu</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">Otevřít datovou tabulku WunderLINQ</string>
+    <string name="topography_maps">Topografické mapy</string>
+    <string name="clear_key_assignment">Vymazat přiřazení klávesy</string>
+    <string name="clear_key_assignment_desc">Přiřazení klávesy ke zvolené akci bude odstraněno a nastaveno na \"Žádné\".</string>
+    <string name="key_event_category_map_interactions">Interakce s mapou</string>
+    <string name="shared_string_next_event">Následující událost</string>
+    <string name="change_button">Změnit tlačítko</string>
+    <string name="download_to_device">Stáhnout do zařízení</string>
+    <string name="add_row">Přidat řádek</string>
+    <string name="shared_string_reassign">Znovu přiřadit</string>
+    <string name="target_elevation">Nadmořská výška cíle</string>
+    <string name="shared_string_eta">Odhadovaný čas příjezdu</string>
+    <string name="discard_changes_prompt">Zrušit změny?</string>
+    <string name="reset_key_assignments_desc">Přiřazení všech kláves pro vybraný typ bude odstraněno.</string>
+    <string name="reset_key_assignments">Odstranit přiřazení kláves</string>
+    <string name="precise_distance_numbers">Přesné hodnoty vzdálenosti</string>
+    <string name="map_widget_sun_position">Poloha slunce</string>
+    <string name="previous_row_has_complex_widget">Na předchozím řádku je komplexní nástroj</string>
+    <string name="key_assignments_already_cleared_message">Přiřazení všech kláves bylo odstraněno</string>
+    <string name="remove_widget_first">Nejdříve odstraňte nástroj</string>
+    <string name="show_toast_about_key_pressed">Zobrazit notifikaci o stisknuté klávese</string>
+    <string name="change_key_binding">Změnit přiřazení kláves</string>
+    <string name="key_event_category_actions">Akce</string>
+    <string name="key_event_action_take_media_note">Pořídit multimediální poznámku</string>
+    <string name="deletion_error">Chyba mazání</string>
+    <string name="row_number">Řádek %1$s</string>
+    <string name="shared_string_rows">Řádky</string>
+    <string name="complex_widget_alert">Nástroj %1$s může být umístěný pouze na samostatném řádku.</string>
+    <string name="shared_string_road_maps">Silniční mapy</string>
+    <string name="map_widget_sun_position_desc">Zobrazuje čas do východu nebo západu slunce.</string>
+    <string name="key_is_already_assigned_error">Klávesa \"%1$s\" je již přiřazená k akci: \"%2$s\"</string>
+    <string name="key_event_action_zoom_out">Oddálit</string>
+    <string name="enable_to_use_external_input_device">Zapněte pro možnost použití externího vstupního zařízení s OsmAnd</string>
+    <string name="delete_all_items">Smazat všechny položky</string>
+    <string name="shared_string_delete_immediately">Odstranit okamžitě</string>
+    <string name="restore_from_trash">Obnovit z koše</string>
+    <string name="shared_string_show_less">Zobrazit méně</string>
+    <string name="key_event_action_activity_back_pressed">Stisknutý návrat z aktivity</string>
+    <string name="key_event_action_move_left">Posunout doleva</string>
+    <string name="help_article_search_search_poi_name">Hledat body zájmu</string>
+    <string name="open_issue_on_github">Otevřít hlášení na GitHubu</string>
+    <string name="help_article_troubleshooting_general_name">Všeobecné</string>
+    <string name="help_article_troubleshooting_track_recording_issues_name">Záznam stop</string>
+    <string name="key_event_action_move_up">Posunout nahoru</string>
+    <string name="key_event_action_previous_app_profile">Předchozí profil aplikace</string>
+    <string name="key_event_action_change_map_orientation">Změnit orientaci mapy</string>
+    <string name="trash_is_empty_banner_desc">Soubory odstraněné z OsmAnd Cloud zde budou k dispozici ještě %1$s dní poté.</string>
+    <string name="all_folders">Všechny adresáře</string>
+    <string name="wheel_circumference">Obvod kola</string>
+    <string name="external_sensor_name_property_description">Název snímače</string>
+    <string name="copy_build_version">Kopírovat verzi sestavení</string>
+    <string name="shared_string_checked">Zvoleno</string>
+    <string name="key_event_action_zoom_in">Přiblížit</string>
+    <string name="key_event_action_next_app_profile">Následující profil aplikace</string>
+    <string name="key_event_action_open_search_view">Otevřít vyhledávání</string>
+    <string name="key_event_action_open_navigation_view">Otevřít navigaci</string>
+    <string name="shared_string_empty_trash">Vyprázdnit koš</string>
+    <string name="trash_alert_card_desc">Položky v koši budou odstraněny po %1$s dnech.</string>
+    <string name="cloud_trash_clear_confirmation">Natrvalo smazat všechny položky z koše?</string>
+    <string name="about_osmand">O aplikaci OsmAnd</string>
+    <string name="report_an_issues">Nahlásit problém</string>
+    <string name="key_event_action_move_to_my_location">Přesunout na moji polohu</string>
+    <string name="remove_type_q">Odstranit typ \"%1$s\"?</string>
+    <string name="shared_string_not_checked">Nezvoleno</string>
+    <string name="cloud_item_restored">%1$s je obnoveno do cloudu.</string>
+    <string name="shared_string_delete_item">Smazat položku</string>
+    <string name="trash_is_empty">Koš je prázdný</string>
+    <string name="help_article_widgets_map_buttons_name">Mapová tlačítka</string>
+    <string name="send_crash_log_descr">Obsahuje pouze informace o pádech aplikace</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d stopa)</item>
+        <item quantity="few">%1$d (%2$d stopy)</item>
+        <item quantity="other">%1$d (%2$d stop)</item>
+    </plurals>
+    <string name="user_guide">Uživatelská příručka</string>
+    <string name="key_event_action_move_right">Posunout doprava</string>
+    <string name="delete_trash_item_confirmation_desc">Smazat \"%1$s\" natrvalo?</string>
+    <string name="shared_string_trash">Koš</string>
+    <string name="help_article_start_with_main_menu_name">Hlavní menu</string>
+    <string name="help_article_start_with_name">Začínáme s OsmAnd</string>
+    <string name="help_article_start_with_first_steps_name">První kroky</string>
+    <string name="most_viewed">Nejčastěji prohlížené</string>
+    <string name="help_article_troubleshooting_crash_logs_name">Záznamy o pádech aplikace</string>
+    <string name="help_article_widgets_info_widgets_name">Informační nástroje</string>
+    <string name="help_article_widgets_markers_name">Nástroje pro značky</string>
+    <string name="help_article_widgets_nav_widgets_name">Navigační nástroje</string>
+    <string name="help_article_widgets_radius_ruler_name">Kruhové pravítko a pravítko</string>
+    <string name="key_event_action_emit_navigation_hint">Vydat navigační pokyn</string>
+    <string name="telegram_chats">Telegram chaty</string>
+    <string name="github_discussion">Diskuse na GitHubu</string>
+    <string name="free_versions_descr">Stáhnout a nainstalovat bezplatnou verzi OsmAnd</string>
+    <string name="free_versions">Bezplatné verze</string>
+    <string name="contact_us">Kontaktujte nás</string>
+    <string name="lang_zh_hans">Zjednodušená čínština</string>
+    <string name="lang_zh_hant">Tradiční čínština</string>
+    <string name="dont_ask_anymore">Příště se neptat</string>
+    <string name="battery_optimization_settings">Nastavení optimalizace baterie</string>
+    <string name="battery_optimization_desc">Optimalizace baterie v Androidu může zapříčinit mezery a nepřesnosti v zaznamenaných trasách.
+\n
+\nPokud máte tyto problémy, můžete zkusit změnit využití baterie na \'Neomezeno.\'</string>
+    <string name="battery_optimization">Optimalizace baterie</string>
+    <string name="shared_string_extensions">Rozšíření</string>
+    <string name="shared_string_license">Licence</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="shared_string_all_tracks">Všechny stopy</string>
+    <string name="key_event_action_move_down">Posunout dolů</string>
+    <string name="add_new_type">Přidat nový typ</string>
+    <string name="key_bindings">Přiřazení kláves</string>
+    <string name="external_input_device_title">Externí vstupní zařízení</string>
+    <string name="not_specified">Není specifikováno</string>
+    <string name="shared_string_is_deleted">%1$s je smazáno.</string>
+    <string name="root_folder">Kořenový adresář</string>
+    <string name="folder">Složka</string>
+    <string name="help_article_troubleshooting_maps_data_name">Mapy a data</string>
+    <string name="help_article_widgets_name">Mapové nástroje</string>
+    <string name="shared_string_setup">Nastavení</string>
+    <string name="telegram_chats_descr">Přidejte se k jedné z našich lokálních skupin na Telegramu.</string>
+    <string name="open_issue_on_github_descr">Položte otázku, navrhněte funkci</string>
+    <string name="send_logcat_log_descr">Soubor s podrobným záznamem</string>
+    <string name="battery_optimization_banner_content">Optimalizace baterie v Androidu může zapříčinit mezery a nepřesnosti v zaznamenaných trasách.</string>
+    <string name="shared_string_link">Odkaz</string>
+    <string name="shared_string_copyright">Autorská práva</string>
+    <string name="shared_string_author">Autor</string>
+    <string name="rendering_attr_padusDisplayMode_name">Zobrazovací mód veřejných prostranství</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Skrýt hranice veřejných prostranství ale nechat oblasti</string>
+    <string name="sorted_sufolders_toast">Podsložky v \"%1$s\" jsou seřazeny podle: \"%2$s\"</string>
+    <string name="avg_sensor_cadence">Kadence jízdního kola, průměr</string>
+    <string name="avg_sensor_speed">Snímač rychlosti, průměrná</string>
+    <string name="help_article_setup_a_route_name">Připravit trasu</string>
+    <string name="special_routing_cpp">Speciální směrovací typ</string>
+    <string name="speed_limit_warning">Varování o rychlostním limitu</string>
+    <string name="shared_string_limit">Omezení</string>
+    <string name="when_exceeded">Po překročení</string>
+    <string name="speedometer_description">Ukazuje vaší momentální rychlost podle dat z GPS</string>
+    <string name="shared_string_speedometer">Tachometr</string>
+    <string name="custom_map_button_name_present">Takové tlačítko už tu je</string>
+    <string name="add_button">Přidat tlačítko</string>
+    <string name="custom_buttons">Vlastní tlačítka</string>
+    <string name="shared_string_additional">Dodatečný</string>
+    <string name="sort_subfolders">Seřadit podsložky</string>
+    <string name="shared_string_activity">Aktivita</string>
+    <string name="shared_string_keywords">Klíčová slova</string>
+    <string name="max_sensor_heartrate">Tepová frekvence, max</string>
+    <string name="avg_sensor_heartrate">Tepová frekvence, průměrná</string>
+    <string name="max_sensor_cadence">Kadence jízdního kola, max</string>
+    <string name="max_sensor_bycicle_power">Výkon jízdního kola, max</string>
+    <string name="avg_sensor_bycicle_power">Výkon jízdního kola, průměr</string>
+    <string name="max_sensor_temperature">Teplota, max</string>
+    <string name="avg_sensor_temperature">Teplota, průměr</string>
+    <string name="max_sensor_speed">Snímač rychlosti, max</string>
+    <string name="rendering_attr_padusDisplayMode_description">Podle typu přístupu nebo jména manažera</string>
+    <string name="rendering_value_access_name">Podle typu přístupu</string>
+    <string name="rendering_value_managerName_name">Podle jména manažera</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Skrýt hranice veřejných prostranství</string>
+    <string name="default_buttons">Výchozí tlačítka</string>
+    <string name="release_4_7">• Nový nástroj \"Tachometr\" kompatibilní s Android Auto \n \n• Možnost nastavení obrazovky přidáním více tlačítek \"rychlé akce\" \n \n• Vylepšená čitelnost dat v grafech \n \n• Přidané filtry pro stopy podle dat ze snímačů \n \n• Vylepšené přizpůsobení vzhledu pro skupiny stop \n \n• Přidaná podpora dalších GPX značek \n \n• Nastavitelná \"Vzdálenost během navigace\": zvolte mezi přesnými nebo zaokrouhlenými čísly \n \n• Sjednocené rozhraní pro výběr stop \n \n• Přihlášení do OpenStreetMap přepnuto na OAuth 2.0</string>
+    <string name="shared_sting_all_colors">Všechny barvy</string>
+    <string name="auto_zoom_smooth">Plynulé</string>
+    <string name="auto_zoom_discrete">Skokové</string>
+    <string name="auto_zoom">Automatické přiblížení</string>
+    <string name="routing_type">Typ plánování trasy</string>
+    <string name="routing_type_a_star_2_phase">A* 2-fázový</string>
+    <string name="routing_type_a_star_classic">A* klasický</string>
+    <string name="java_safe">Java (bezpečné)</string>
+    <string name="gpx_approximation">Aproximace GPX</string>
+    <string name="unchanged_parameter_summary">Každá stopa si uchová své vlastní parametry.</string>
+    <string name="distance_during_navigation">Vzdálenost během navigace</string>
+    <string name="upload_local_versions">Odeslat lokální verze</string>
+    <string name="download_cloud_versions">Stáhnout verze z cloudu</string>
+    <string name="distance_during_navigation_description">Zvolte, jakým způsobem se bude zobrazovat informace o vzdálenosti v navigačních nástrojích (vzdálenost k bodu, příští odbočka, jízdní pruhy).
+\n
+\nVyberte “%1$s” pro přesná čísla nebo “%2$s” pro lepší čitelnost.</string>
+    <string name="shared_string_unchanged">Nezměněné</string>
+    <string name="map_widget_map_scale">Měřítko mapy</string>
+    <string name="precise">Přesná</string>
+    <string name="round_up">Zaokrouhlená</string>
+    <string name="lang_ta_in">Tamilština (Indie)</string>
+    <string name="delete_actions_button_confirmation">Opravdu chcete odstranit \"%1$s\" se všemi přidanými akcemi?</string>
+    <string name="delete_actions_button">Tlačítko Smazat</string>
+    <string name="release_4_8">• Nová možnost pre obarvení terénu podle \"nadmořské výšky\" \n \n • Vlastní palety barev pro terén, stopy a trasy \n \n • 3D verze ikon polohy \n \n • Rychlé akce mohou být přiřazené k externím klávesám \n \n • Počasí: změna rozhraní, přidána animace větru \n \n • Vylepšení 3D stop: nové možnosti zobrazení a obarvení \n \n • Rozšířený výběr turistických tras na mapě \n \n • Přidána možnost, aby motiv aplikace sledoval režim mapy \n \n • Opraveny statistiky stop, jejich řazení a vyhledávání \n \n • Úpravy OSM: odstraněné přihlašování pomocí jména a hesla \n \n • Od Androidu 14 se používá systémový panel sdílení</string>
+    <string name="use_terrain_maps_summary">Používá terénní mapy pro údaje o nadmořské výšce. Geometrie trasy zůstává nezměněna.</string>
+    <string name="shared_string_osm_id">OSM ID</string>
+    <string name="relief_3d_download_description">Pro zobrazení terénu na mapě jsou potřeba další mapy.</string>
+    <string name="shared_string_scale">Měřítko</string>
+    <string name="missing_maps_ignore">Použít stažené mapy</string>
+    <string name="weather_data_sources_prompt">OsmAnd poskytuje data o počasí ze dvou zdrojů:</string>
+    <string name="weather_source_ecmwf_description">Evropské centrum pro střednědobé předpovědi počasí</string>
+    <string name="weather_source_GFS_description">Globální předpovědní systém od Národních center pro environmentální předpovědi</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="data_source">Zdroj dat</string>
+    <string name="navigation_position">Během navigace</string>
+    <string name="auto_25_chars_route_tu">Otočte se</string>
+    <string name="resting_position">V klidu</string>
+    <string name="resting_navigation_position">V klidu i během navigace</string>
+    <string name="view_angle_description">Zobrazí oblast ve tvaru kužele, kam se právě díváte</string>
+    <string name="view_angle">Zorný úhel</string>
+    <string name="location_radius">Poloměr polohy</string>
+    <string name="quick_action_remove_next_destination">Další cílový bod</string>
+    <string name="location_radius_description">Zobrazí oblast ve tvaru kruhu znázorňující přesnost vaší aktuální polohy</string>
+    <string name="quick_action_to_my_location">K mojí poloze</string>
+    <string name="quick_action_move_map_left">Mapa doleva</string>
+    <string name="quick_action_map_underlay">Podklad</string>
+    <string name="choose_map_orientation">Zvolte orientaci mapy</string>
+    <string name="shared_string_automatically">Automaticky</string>
+    <string name="ask_every_time">Pokaždé se zeptat</string>
+    <string name="detailed_track_guidance">Detailní navádění stopou</string>
+    <string name="quick_action_routes_summary">Přepínač pro zobrazení nebo skrytí %1$s na mapě.</string>
+    <string name="hugerock_promo">Promoakce Hugerock na %1$s měsíců</string>
+    <string name="hugerock_promo_description">Bezplatný přístup k funkcím včetně neomezeného stahování map, 3D reliéfu atd. na %1$s měsíců</string>
+    <string name="driving_region_india">Indie</string>
+    <string name="auto_25_chars_route_tr">Odbočte doprava</string>
+    <string name="auto_25_chars_route_tshr">Odbočte ostře doprava</string>
+    <string name="auto_25_chars_route_tslr">Odbočte mírně doprava</string>
+    <string name="auto_25_chars_route_tl">Odbočte doleva</string>
+    <string name="auto_25_chars_route_tshl">Odbočte ostře doleva</string>
+    <string name="auto_25_chars_route_tsll">Odbočte mírně doleva</string>
+    <string name="energy_avg_info">Statistika energie (průměr za 1 / 5 / 15 minut)</string>
+    <string name="energy_avg_info_description">Úroveň baterie za minutu: %1$s
+\nSpotřeba energie (mAh): %2$s</string>
+    <string name="rendering_avg_info">Statistika vykreslování (průměr za 1 / 5 / 15 minut)</string>
+    <string name="quick_action_location_by_gpx">Poloha podle GPX</string>
+    <string name="quick_action_move_map_up">Mapa nahoru</string>
+    <string name="quick_action_new_route">Nová trasa</string>
+    <string name="quick_action_map_overlay">Překryv</string>
+    <string name="rendering_value_pale_name">Světlá</string>
+    <string name="quick_action_terrain_color_scheme">Barevné schéma terénu</string>
+    <string name="quick_action_directions_from">Výchozí bod</string>
+    <string name="quick_action_destination">Cílový bod</string>
+    <string name="quick_action_move_map_right">Mapa doprava</string>
+    <string name="quick_action_move_map_down">Mapa dolů</string>
+    <string name="quick_action_map_style">Styl mapy</string>
+    <string name="driving_region_uk">Velká Británie a podobné země</string>
+    <string name="auto_25_chars_route_kl">Držte se vlevo</string>
+    <string name="auto_25_chars_route_kr">Držte se vpravo</string>
+    <string name="rendering_avg_info_details">FPS za posledních 1000 snímků: %1$s
+\nCPU (dlaždice): %2$s
+\nCPU (nečinnost): %3$s
+\nCPU (čeká na GPU): %4$s</string>
+    <string name="quick_action_parking_place">Parkovací místo</string>
+    <string name="quick_action_verb_show_hide">Zobrazit / skrýt</string>
+    <string name="shared_string_replace">Nahradit</string>
+    <string name="quick_action_track_waypoint">Bod trasy</string>
+    <string name="quick_action_verb_turn_on_off">Zapnout / vypnout</string>
+    <string name="shared_string_set">Nastavit</string>
+    <string name="shared_string_colors">Barvy</string>
+    <string name="routing_attr_avoid_cobblestone_description">Vyhnout se dlažbě</string>
+    <string name="required_maps">Vyžadované mapy</string>
+    <string name="wall_height">Výška zdi</string>
+    <string name="rendering_value_dark_orange_name">Tmavě oranžová</string>
+    <string name="vertical_exaggeration">Vertikální zvýraznění</string>
+    <string name="vertical_exaggeration_description">Změnou hodnoty měřítka můžete zvýraznit 3D reliéf.</string>
+    <string name="map_settings_weather_wind_animation">Animace větru</string>
+    <string name="routing_attr_avoid_cobblestone_name">Vyhnout se dlažbě</string>
+    <string name="quick_action_verb_start_stop">Spustit / Zastavit</string>
+    <string name="shared_string_all_icons">Všechny ikony</string>
+    <string name="profile_icon">Ikona profilu</string>
+    <string name="route_roundabout_exit">Použijte %1$d. výjezd</string>
+    <string name="help_article_map_tracks_name">Stopy</string>
+    <string name="weather_screen">Obrazovka počasí</string>
+    <string name="app_profile">Profil aplikace</string>
+    <string name="quick_action_display_position_in_center">Zobrazit polohu vždy uprostřed</string>
+    <string name="shared_string_simulate">Simulovat</string>
+    <string name="quick_action_video_note">Videopoznámka</string>
+    <string name="quick_action_audio_note">Audiopoznámka</string>
+    <string name="quick_action_photo_note">Fotopoznámka</string>
+    <string name="quick_action_verb_pause_resume">Pozastavit / Pokračovat</string>
+    <string name="shared_string_create">Vytvořit</string>
+    <string name="help_article_map_routes_name">Trasy</string>
+    <string name="compass_click_north_is_up">Klepněte a držte pro změnu režimu orientace</string>
+    <string name="quick_action_terrain">Typ obarvení terénu</string>
+    <string name="quick_action_first_intermediate">První mezicíl</string>
+    <string name="navigation_position_icon_summary">Ikona zobrazená během navigace nebo pohybu.</string>
+    <string name="add_widget_below">Přidat widget níže</string>
+    <string name="add_widget_above">Přidat widget nad</string>
+    <string name="add_widget_to_the_right">Přidat widget vpravo</string>
+    <string name="add_widget_to_the_left">Přidat widget vlevo</string>
+    <string name="daynight_mode_sensor_summary">Použije světelný senzor zařízení pro přepínání mezi světlým a tmavým režimem podle úrovně okolního světla.</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Automaticky přepíná mezi denním a nočním režimem podle místního času východu a západu slunce.</string>
+    <string name="daynight_mode_night_summary">Vždy zobrazí mapu ve tmavém režimu, vhodné v noci a v podmínkách se slabým osvětlením.</string>
+    <string name="daynight_mode_app_theme_summary">Zobrazení mapy se přizpůsobí obecnému motivu aplikace — denní režim pro světlý motiv a noční režim pro tmavý motiv</string>
+    <string name="daynight_mode_day_summary">Vždy zobrazí mapu ve světlém režimu, vhodné pro viditelnost během dne.</string>
+    <string name="daynight_mode_app_theme">Motiv aplikace</string>
+    <string name="key_assignment_add_key">Přidat klávesu</string>
+    <string name="show_debug_info_description">Zobrazit grafické informace o umístění jednotlivých textů mapy</string>
+    <string name="upward_gradient">Sklon vzhůru</string>
+    <string name="change_default_tracks_appearance_confirmation">Použít změny na stávající stopy ve složce, nebo pouze na nové?</string>
+    <string name="backup_error_failed_to_transfer_file">Přenos souborů v cloudu se nezdařil.</string>
+    <string name="contact_support_retry">Zkuste to znovu nebo kontaktujte podporu</string>
+    <string name="clear_all_key_shortcuts_summary">Všechna přiřazení kláves pro vybraný typ budou odstraněna.</string>
+    <string name="no_assigned_keys">Žádné přiřazené klávesy</string>
+    <string name="action_icon">Ikona akce</string>
+    <string name="assigned_keys">Přiřazené klávesy</string>
+    <string name="map_text">Texty na mapě</string>
+    <string name="top">Nahoře</string>
+    <string name="bottom">Dole</string>
+    <string name="title_3d_track">3D stopa</string>
+    <string name="missing_maps_description">Některé offline mapy potřebné pro tuto trasu chybí nebo nejsou aktuální. Stáhněte si nebo aktualizujte tyto mapy.</string>
+    <string name="missing_maps_header">Chybějící nebo zastaralé mapy</string>
+    <string name="use_terrain_maps">Použití map terénu</string>
+    <string name="retrieve_elevation_data_summary">Aplikace OsmAnd dokáže načíst údaje o nadmořské výšce z okolních cest nebo terénních map.</string>
+    <string name="apply_only_to_new">Platí jen pro nové</string>
+    <string name="shared_string_changes">Změny</string>
+    <string name="gpx_approximation_geo_java">Na základě geometrie (Java, rychlé)</string>
+    <string name="key_name_pattern">Klávesa \"%1$s\"</string>
+    <string name="key_assignment_add_action">Přidat akci</string>
+    <string name="new_key_assignment">Nové přiřazení kláves</string>
+    <string name="top_and_bottom">Nahoře a dole</string>
+    <string name="wall_color">Barva zdi</string>
+    <string name="use_nearby_roads">Použít blízké cesty</string>
+    <string name="detailed_track_guidance_description">Aplikace OsmAnd přiřadí vaši trasu k okolním cestám, abyste měli lepší navigaci krok za krokem.</string>
+    <string name="change_terrain_color_scheme">Změnit barevné schéma terénu</string>
+    <string name="play_weather_forecast">Přehrát předpověď počasí</string>
+    <string name="quick_action_previous_app_profile">Profil aplikace k předchozí</string>
+    <string name="quick_action_next_app_profile">Profil aplikace k další</string>
+    <string name="missing_maps_ignore_details">Pokrývají stažené mapy vaši trasu? Navigujte podle nich, pokud oblast dobře znáte.</string>
+    <string name="show_debug_info">Zobrazit informace o ladění</string>
+    <string name="route_line_use_coloring_speed">Linie trasy je barevně odlišena podle rychlosti pohybu.</string>
+    <string name="gpx_approximation_geo_cpp">Na základě geometrie (C++, rychlé)</string>
+    <string name="shared_string_key">Klávesa</string>
+    <string name="use_3d_track_visualization">3D vizualizace</string>
+    <string name="change_default_appearance_confirmation">Změnit výchozí vzhled %1$s?</string>
+    <string name="visualized_by">Vizualizováno</string>
+    <string name="maps_that_also_be_used">Mapy, které budou rovněž použity: %1$s</string>
+    <string name="use_nearby_roads_summary">Používá offline mapu k vyhledání blízkých cest a údajů o nadmořské výšce. Může upravit geometrii trati.</string>
+    <string name="required_maps_calculate_online_summary">Seznam chybějících map je založen na přímé trase. Chcete-li získat přesný seznam map, může OsmAnd předem vypočítat trasu online.</string>
+    <string name="gpx_approximation_java">Na základě navigace (Java)</string>
+    <string name="gpx_approximation_cpp">Na základě navigace (C++)</string>
+    <string name="allow_display_on_top">Povolit zobrazení nahoře</string>
+    <string name="height_legend_description">K vizualizaci reliéfu se používají barevné mapy nadmořských výšek.</string>
+    <string name="travel_topics">Cestovní témata</string>
+    <string name="allow_display_on_top_description">Povolit zobrazování textů mapy nad sebou</string>
+    <string name="track_vertical_exaggeration_description">Změnou hodnoty měřítka můžete měnit výšku 3D trasy.</string>
+    <string name="fix_north_up">Zapnout funkci Pevný sever nahoře</string>
+    <string name="fix_north_up_descr">Neotáčet mapu pomocí gest v orientaci mapy Sever nahoře</string>
+    <string name="route_line_use_coloring_altitude">Linie trasy je barevně odlišena podle nadmořské výšky.</string>
+    <string name="key_event_action_continuous_zoom_out">Plynulé oddálení</string>
+    <string name="key_event_action_continuous_zoom_in">Plynulé přiblížení</string>
+    <string name="remove_key_assignment_summary">Přiřazení kláves pro vybranou akci bude odstraněno.</string>
+    <string name="remove_key_assignment">Odstranit přiřazení kláves</string>
+    <string name="explore_3d_track_description">Prozkoumejte trať v interaktivním 3D! Vizualizujte výšku, rychlost a další údaje přímo na mapě.</string>
+    <string name="tomorrow">Zítra</string>
+    <string name="disable_map_layers">Vypnout mapové vrstvy</string>
+    <string name="disable_map_layers_descr">Vypnout všechny vrstvy mapy nad vektorovou mapou (nutný restart).</string>
+    <string name="fixed_height">Pevná výška</string>
+    <string name="downward_gradient">Spád dolů</string>
+    <string name="track_line">Linie trasy</string>
+    <string name="getting_list_of_required_maps">Získávání seznamu požadovaných map…</string>
+    <string name="user_palette">Uživatelská paleta</string>
+    <string name="clear_key_assignment_summary">Přiřazení kláves pro vybranou akci bude vymazáno.</string>
+    <string name="shared_string_modify">Změnit</string>
+    <string name="navigation_position_icon">Ikona navigační pozice</string>
+    <string name="resting_position_icon_summary">Ikona se zobrazuje, když se nepohybujete.</string>
+    <string name="resting_position_icon">Ikona klidové polohy</string>
+    <string name="clear_all_key_shortcuts">Vymazat všechny klávesové zkratky</string>
+    <string name="no_assigned_keys_desc">Vyberte akci a přiřaďte jí klávesu klepnutím na tlačítko \"Přidat\".</string>
+    <string name="steps_per_minute_unit">SPM</string>
+    <string name="delete_widget">Smazat widget?</string>
+    <string name="delete_widget_description">Tento widget bude odstraněn. Později jej můžete obnovit v okně Konfigurace.</string>
+    <string name="battery_saving_mode">Režim úspory baterie</string>
+    <string name="rendering_attr_alpineHiking_name">Stupeň obtížnosti turistických tras</string>
+    <string name="raster_layers_action_descr">Změnit rastrové vrstvy</string>
+    <string name="configure_map_description">Změna stylu mapy, vrstev nebo jiných nastavení.</string>
+    <string name="change_activity">Změnit aktivitu</string>
+    <string name="background_opacity">Neprůhlednost pozadí</string>
+    <string name="app_mode_suv">SUV</string>
+    <string name="graph_axis">Osa grafu</string>
+    <string name="y_axis_description">Vyberte až dvě možnosti pro osu Y.</string>
+    <string name="shared_string_decrease">Snížit</string>
+    <string name="shared_string_increase">Zvýšit</string>
+    <string name="contour_layers_action_descr">Změnit obrysové vrstvy</string>
+    <string name="change_zoom_action_descr">Změnit přiblížení mapy.</string>
+    <string name="search_action_descr">Otevře hledání.</string>
+    <string name="my_location_action_descr">Vystředí mapu na vaší aktuální polohu.</string>
+    <string name="navigation_action_descr">Otevře navigaci.</string>
+    <string name="map_3d_mode_action_descr">Změní náklon mapy.</string>
+    <string name="drawer_button_description">Otevře hlavní nabídku.</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Zobrazit stezky pro terénní kola</string>
+    <string name="type_of_activity">Typ aktivity</string>
+    <string name="quick_action_drawer_desc">Přepínač pro zobrazení nebo skrytí postranní nabídky.</string>
+    <string name="corner_radius">Poloměr rohu</string>
+    <string name="quick_action_verb_navigate">Navigace</string>
+    <string name="quick_action_drawer_title">Boční menu</string>
+    <string name="quick_action_navigation_view_title">Zobrazení navigace</string>
+    <string name="shared_string_dp">dp</string>
+    <string name="quick_action_previous_screen_desc">Přepínač k přechodu na předchozí obrazovku.</string>
+    <string name="shared_string_interface">Rozhraní</string>
+    <string name="quick_action_previous_screen_title">Předchozí obrazovka</string>
+    <string name="quick_action_search_view_desc">Přepínač pro otevření nebo zavření zobrazení vyhledávání.</string>
+    <string name="quick_action_search_view_title">Zobrazení hledání</string>
+    <string name="quick_action_navigation_view_desc">Přepínač pro otevření nebo zavření navigačního zobrazení.</string>
+    <string name="quick_action_switch_compass_desc">Přepínač pro přepínání orientace mapy.</string>
+    <string name="wikimedia">Wikimedia</string>
+    <string name="open_in_browser">Otevřít v prohlížeči</string>
+    <string name="shared_string_source">Zdroj</string>
+    <string name="shared_string_no_internet_connection">Není připojení k internetu</string>
+    <string name="no_internet_descr">Zkontrolujte připojení a zkuste to znovu.</string>
+    <string name="no_photos_available_descr">K této lokalitě zatím nebyly přidány žádné uživatelské fotografie</string>
+    <string name="no_photos_available">Nejsou dostupné žádné fotografie</string>
+    <string name="quick_action_finish_trip_recording_summary">Tlačítko pro uložení trasy GPX a ukončení záznamu cesty.</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Zaznamenaná cesta a pokračování</string>
+    <string name="track_does_not_contain_data_to_save">Trasa neobsahuje data, která by bylo možné uložit.</string>
+    <string name="start_trip_recording_first_m">Nejprve spusťte záznam cesty.</string>
+    <string name="new_segment_started_m">Zahájení nahrávání nového segmentu trasy.</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">Tlačítko pro uložení aktuální zaznamenané cesty jako souboru GPX a pokračování v nahrávání nové trasy bez přerušení.</string>
+    <string name="quick_action_new_trip_segment">Tlačítko pro spuštění nového segmentu v probíhajícím záznamu stopy GPX.</string>
+    <string name="unit_volt">V</string>
+    <string name="obd_fuel_type_methanol">Metanol</string>
+    <string name="obd_fuel_type_bifuel_propane">Hybridní pohon na Propan</string>
+    <string name="obd_fuel_type_bifuel_electricity">Hybridní pohon na elektřinu</string>
+    <string name="obd_fuel_type_hydrogen">Vodík</string>
+    <string name="percent_unit">%</string>
+    <string name="obd_fuel_level_desc">Zobrazuje hladinu paliva ve vozidle přes snímač OBD</string>
+    <string name="obd_fuel_left_distance_desc">Ukazuje vzdálenost, kterou může vozidlo ujet na zbývající hladinu paliva přes snímač OBD</string>
+    <string name="obd_fuel_type_desc">Zobrazuje typ paliva vozidla přes snímač OBD</string>
+    <string name="obd_engine_coolant_temp">Teplota chladicí kapaliny</string>
+    <string name="obd_fuel_level">Spotřeba paliva (%)</string>
+    <string name="obd_plugin_name">Metriky vozidel</string>
+    <string name="obd_plugin_description">Sledování klíčových parametrů vozidla pomocí protokolu OBD-II. Přístup k datům včetně: * Otáčky motoru * Spotřeba paliva * Zbývající palivo * Vzdálenost od nastartování motoru * Teplota sání * Teplota okolí * Teplota chladicí kapaliny * Rychlost vozidla * Procento baterie</string>
+    <string name="obd_support">Podpora OBD</string>
+    <string name="obd_ambient_air_temp">Teplota okolí</string>
+    <string name="obd_battery_voltage">Napětí baterie</string>
+    <string name="new_trip_segment">Nový úsek cesty</string>
+    <string name="quick_action_verb_start_pause">Spustit / Pozastavit</string>
+    <string name="help_article_personal_color_palette_schemes_name">Barevná schémata</string>
+    <string name="movies_list">Seznam filmů</string>
+    <string name="third_links">Odkazy jinam</string>
+    <string name="reset_average_speed">Reset průměrné rychlosti</string>
+    <string name="unknown_bt_device">Neznámé zařízení</string>
+    <string name="obd_fuel_type_not_provided">Typ paliva není uveden</string>
+    <string name="obd_fuel_type_gasoline">Benzín</string>
+    <string name="obd_fuel_type_ethanol">Etanol</string>
+    <string name="obd_fuel_type_electric">Elektřina</string>
+    <string name="obd_fuel_type_bifuel_gasoline">Hybridní pohon na benzín</string>
+    <string name="obd_fuel_type_bifuel_methanol">Hybridní pohon na Methanol</string>
+    <string name="obd_fuel_type_bifuel_ethanol">Hybridní pohon na Ethanol</string>
+    <string name="obd_fuel_type_bifuel_electric_combustion">Hybridní elektrický a spalovací motor</string>
+    <string name="obd_fuel_type_hybrid_gasoline">Hybridní benzínový</string>
+    <string name="obd_fuel_type_hybrid_ethanol">Hybridní ethanolový</string>
+    <string name="obd_fuel_type_hybrid_diesel">Hybridní dieselový</string>
+    <string name="obd_fuel_type_hybrid_hydrogen">Hybridní vodíkový</string>
+    <string name="obd_fuel_type_unknown">Neznámý typ paliva</string>
+    <string name="obd_air_intake_temp">Teplota na vstupu</string>
+    <string name="obd_fuel_consumption_rate">Míra spotřeby paliva</string>
+    <string name="obd_fuel_type">Typ paliva</string>
+    <string name="import_export">Import/export</string>
+    <string name="obd_fuel_type_diesel">Nafta</string>
+    <string name="obd_fuel_type_lpg">LPG</string>
+    <string name="obd_fuel_type_cng">CNG</string>
+    <string name="obd_fuel_type_propane">Propan</string>
+    <string name="obd_fuel_type_bifuel_lpg">Hybridní pohon na LPG</string>
+    <string name="obd_fuel_type_bifuel_cng">Hybridní pohon na CNG</string>
+    <string name="obd_fuel_type_hybrid_electric">Hybridní elektrický</string>
+    <string name="obd_fuel_consumption_rate_desc">Zobrazuje míru spotřeby paliva vozidla na základě umístění OBD</string>
+    <string name="obd_rpm_desc">Zobrazuje otáčky otáčkoměru vozidla přes snímač OBD</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="offline_wikivoyage">Offline Wikivoyage</string>
+    <string name="lock_screen_description">Povoluje nebo zakazuje funkce dotykové obrazovky, aby se zabránilo náhodnému klepnutí</string>
+    <string name="lock_screen">Uzamčení obrazovky</string>
+    <string name="obd_vin">VIN</string>
+    <string name="quick_action_start_pause_recording">Tlačítko pro spuštění, pozastavení nebo obnovení záznamu stopy GPX.</string>
+    <string name="obd_vin_desc">VIN kód přes OBD</string>
+    <string name="obd_fuel_type_hybrid_electric_combustion">Hybridní elektrický a spalovací motor</string>
+    <string name="obd_fuel_type_hybrid_regenerative">Hybridní regenerativní</string>
+    <string name="shared_string_obd">OBD</string>
+    <string name="obd_widget_group">Metriky vozidel</string>
+    <string name="obd_fuel_left_distance">Zbývající palivo (vzdálenost)</string>
+    <string name="obd_fuel_type_bifuel_hydrogen">Hybridní na vodík</string>
+    <string name="vehicle_metrics_plugin_settings">Nastavení metrik vozidla</string>
+    <string name="obd_rpm">RPM</string>
+    <string name="rpm_unit">rpm</string>
+    <string name="quick_action_showhide_osm_edits_descr">Tlačítko pro zobrazení nebo skrytí místních úprav OSM na mapě.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Stezky pro terénní kola</string>
+    <string name="obd_vehicle_info">Info o vozidle</string>
+    <string name="obd_how_to_connect">Postup připojení:</string>
+    <string name="connect_obd_instructions_step1">Připojte skener k portu OBD-II vozidla.</string>
+    <string name="connect_obd_instructions_step2">Nastartujte motor vozidla</string>
+    <string name="connect_obd_instructions_step3">Povolte v zařízení Bluetooth</string>
+    <string name="connect_obd_instructions_step4">Klepněte na možnost „Připojit“ a vyberte skener ze seznamu.</string>
+    <string name="obd_fuel_left_liters">Zbývající palivo (litry)</string>
+    <string name="shared_string_bluetooth">Bluetooth</string>
+    <string name="connect_obd_instructions_title">OsmAnd podporuje připojení Bluetooth ke skenerům OBD-II.</string>
+    <string name="learn_more_about_obd_sensors">Další informace o senzorech.</string>
+    <string name="liter_per_hour">l/h</string>
+    <string name="screen_is_locked_by_external_button">Dotyková obrazovka je uzamčená. Chcete-li odemknout, stiskněte tlačítko %1$s nebo klepněte na tlačítko na obrazovce.</string>
+    <string name="screen_is_unlocked">Dotyková obrazovka je odemčená.</string>
+    <string name="screen_is_locked_by_action_button">Dotyková obrazovka je uzamčená. Klepnutím na tlačítko odemkněte.</string>
+    <string name="release_4_9">- Přidán celoobrazovkový prohlížeč galerií pro obrázky Wikimedia\n\n - Zavedení nového zásuvného modulu „Metriky vozidla“ pro sledování výkonu vozidla pomocí protokolu OBD-II.\n\n - Přidána možnost přiřazovat činnosti ke stopám a podle toho je filtrovat\n\n - Implementovány nové rychlé akce pro záznam jízdy a uzamčení dotykové obrazovky\n\n - Zaveden přizpůsobitelný vzhled tlačítek mapy a přesná mřížka\n\n - Přidána kontextová nabídka a akce „Obnovit průměrnou rychlost“ k widgetům\n\n - Přidána nová vrstva tras „Dirt Bike trails“\n\n - Opravena funkce „Automatický záznam trasy během navigace“\n\n - Opraven problém s převrácenými souřadnicemi v jazyce RTL\n\n - Opravena chybějící data snímačů pro aktuálně zaznamenávanou trasu\n\n - Přidány informace o okolních oblastech pro vybraný bod\n\n - Přidána rychlá akce pro kontrolu viditelnosti úprav OSM\n\n - Oddělené parametry viditelnosti pro možnosti zabarvení terénu\n\n - Přidána ikona pro zobrazení přístupu nebo jiných atributů silnice či cesty, na kterou lze klepnout</string>
+    <string name="route_guidance_desc">Poskytuje navádění trasy v reálném čase, včetně vzdálenosti k další odbočce, názvu silnice, názvu aktuální ulice a informací o jízdních pruzích. Widgety jsou aktivní během navigace.</string>
+    <string name="obd_nothing_found_description">Zkontrolujte prosím následující:\n – Ujistěte se, že je Bluetooth zapnutý\n – Motor vozidla běží\n – Ujistěte se, že je vaše zařízení v dosahu skeneru.</string>
+    <string name="obd_bluetooth_off_description">Zapněte Bluetooth hledání a připojení skenerů.</string>
+    <string name="obd_searching_text_description">Udržujte své zařízení blízko skeneru. Ujistěte se, že motor vozidla běží.</string>
+    <string name="obd_device_forget_sensor_description">Skener bude odstraněn ze seznamu. Tento skener budete moci kdykoli znovu spárovat.</string>
+    <string name="speedometer_maximum">Maximum</string>
+    <string name="liter">l</string>
+    <string name="obd_nothing_found_text">Skener nenalezen</string>
+    <string name="obd_searching_text">Hledání skenerů</string>
+    <string name="obd_device_forget_sensor">Zapomenout skener</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">Zobrazuje spotřebu paliva vozidla na základě výpočtů (%/h)</string>
+    <string name="l_100km">l/100km</string>
+    <string name="obd_fuel_consumption_rate_l_km">Spotřeba paliva (l/km)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Zobrazuje spotřebu paliva vozidla na základě výpočtů (l/km)</string>
+    <string name="simulate_obd">Simulace dat obd</string>
+    <string name="kpa_unit">kPa</string>
+    <string name="obd_fuel_pressure">Tlak paliva</string>
+    <string name="percent_hour">%/h</string>
+    <string name="obd_fuel_consumption_rate_l_h">Spotřeba paliva (l/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor">Spotřeba paliva (senzor)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Zobrazuje spotřebu paliva vozidla na základě výpočtů (l/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Zobrazuje spotřebu paliva vozidla na základě senzoru (l/h)</string>
+    <string name="obd_fuel_level_liter">Hladina paliva (l)</string>
+    <string name="obd_fuel_level_percent">Hladina paliva (%)</string>
+    <string name="obd_fuel_left_percent">Zbývá palivo (%)</string>
+    <string name="obd_fuel_left_liter">Zbývá palivo (l)</string>
+    <string name="obd_fuel_left_km">Zbývá palivo (km)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Spotřeba paliva l/h</string>
+    <string name="obd_fuel_consumption_rate_scanner">Spotřeba paliva (obd)</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">Spotřeba paliva %/h</string>
+    <string name="route_guidance">Navádění po trase</string>
+    <string name="obd_widget_vehicle_speed">Rychlost vozidla</string>
+    <string name="obd_widget_engine_speed">Otáčky motoru</string>
+    <string name="connect_obd_instructions_step">1. Připojte skener k portu OBD-II vašeho vozidla.\n\n 2. Zapněte motor vašeho vozidla\n\n 3. Povolte na svém zařízení Bluetooth\n\n 4. Klepněte na \'%1$s\' a vyberte svůj skener ze seznamu.</string>
+    <string name="obd_connected_to_device">Připojeno k %s</string>
+    <string name="obd_not_connected_to_device">Odpojeno od %s</string>
+    <string name="bt_start_pair_failed">Nelze zahájit párování se zařízením</string>
+    <string name="dynamic_icon_type_summary">Ikona se mění podle stavu akce.</string>
+    <string name="shared_string_dynamic">Dynamický</string>
+    <string name="obd_connecting_to_device">Připojení k %s</string>
+    <string name="shared_strings_dimensions">Rozměry</string>
+    <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
+    <string name="fuel_tank_capacity_description">Zadejte objem nádrže, abyste mohli přesně sledovat stav paliva a jeho spotřebu</string>
+    <string name="fuel_tank_capacity">Objem palivové nádrže</string>
+    <string name="obd_engine_oil_temperature_desc">Ukazuje teplotu motorového oleje.</string>
+    <string name="obd_throttle_position_desc">Ukazuje úhel škrticí klapky v tělese škrticí klapky.</string>
+    <string name="vehicle_metrics_obd_ii">Metriky vozidla (OBD-II)</string>
+    <string name="ltr_or_rtl_combine_via_per">%1$s za %2$s</string>
+    <string name="shared_string_volume">Objem</string>
+    <string name="obd_calculated_engine_load">Vypočtené zatížení motoru</string>
+    <string name="obd_engine_oil_temperature">Teplota motorového oleje</string>
+    <string name="remaining_fuel">Zbývající palivo</string>
+    <string name="obd_fuel_consumption">Spotřeba paliva</string>
+    <string name="reset_average_value">Reset průměrné hodnoty</string>
+    <string name="average_temperature_slider_description">Zvolte časový interval pro měření průměrné teploty.</string>
+    <string name="shared_string_instant">Okamžitý</string>
+    <string name="current_temperature">Aktuální teplota</string>
+    <string name="show_minor_turns">Zobrazení na menších křižovatkách při přímé navigaci</string>
+    <string name="litres">Litry</string>
+    <string name="imperial_gallons_unit">imp gal</string>
+    <string name="imperial_gallons">Imperiální galony</string>
+    <string name="us_gallons">US galony</string>
+    <string name="record_obd_data">Záznam metrik vozidla</string>
+    <string name="shared_string_hour">Hodiny</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Sledování důležitých údajů o vozidle pomocí protokolu OBD-II. Sledujte klíčové ukazatele, jako je rychlost, otáčky motoru, spotřeba paliva a další.</string>
+    <string name="obd_fuel_consumption_rate_sensor_type">Použít vybrané jednotky v názvu.</string>
+    <string name="remaining_fuel_description">Zobrazuje zbývající množství paliva v nádrži vozidla</string>
+    <string name="average_value_slider_description">Vyberte časový interval pro měření průměrné hodnoty.</string>
+    <string name="obd_fuel_consumption_desc">Zobrazuje míru spotřeby paliva v motoru vypočítanou na základě zbývajícího paliva, velikosti nádrže a ujeté vzdálenosti podle GPS.</string>
+    <string name="average_temperature">Průměrná teplota</string>
+    <string name="show_minor_turns_descr">Na všech průjezdních křižovatkách se zobrazí jízdní pruhy bez ohledu na hlasové pokyny</string>
+    <string name="us_gallons_unit">gal</string>
+    <string name="unit_of_volume_description">Vybrané jednotky se použijí na všechna data související s objemem v aktuálním profilu.</string>
+    <string name="obd_fuel_pressure_desc">Ukazuje tlak v palivovém systému</string>
+    <string name="obd_battery_voltage_desc">Zobrazuje úroveň napětí baterie vozidla</string>
+    <string name="obd_engine_runtime_desc">Ukazuje, jak dlouho motor běží od jeho nastartování.</string>
+    <string name="obd_throttle_position">Poloha škrticí klapky</string>
+    <string name="obd_calculated_engine_load_desc">Zobrazuje procento výkonu motoru, které je v daném okamžiku k dispozici.</string>
+    <string name="obd_engine_runtime">Provozní doba motoru</string>
+    <string name="obd_speed_desc">Zobrazuje rychlost ze snímače rychlosti vozidla (VSS).</string>
+    <string name="obd_air_intake_temp_desc">Ukazuje teplotu vzduchu vstupujícího do sacího potrubí motoru.</string>
+    <string name="unit_of_volume">Jednotka objemu</string>
+    <string name="obd_engine_coolant_temp_desc">Ukazuje teplotu chladicí kapaliny motoru</string>
+    <string name="obd_ambient_air_temp_desc">Zobrazuje teplotu vně vozidla.</string>
 </resources>

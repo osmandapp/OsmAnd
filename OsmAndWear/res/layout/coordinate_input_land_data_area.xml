@@ -2,7 +2,7 @@
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:id="@+id/data_area"
 	android:layout_width="0dp"
 	android:layout_height="match_parent"
@@ -40,17 +40,23 @@
 			android:gravity="center_vertical"
 			android:letterSpacing="@dimen/text_button_letter_spacing"
 			android:maxLines="1"
-			android:paddingStart="@dimen/bottom_sheet_content_margin"
 			android:paddingLeft="@dimen/bottom_sheet_content_margin"
 			android:paddingTop="@dimen/context_menu_padding_margin_tiny"
-			android:paddingEnd="@dimen/bottom_sheet_content_padding_small"
 			android:paddingRight="@dimen/bottom_sheet_content_padding_small"
 			android:paddingBottom="@dimen/context_menu_padding_margin_tiny"
 			android:text="@string/shared_string_cancel"
 			android:textColor="?attr/wikivoyage_active_color"
 			android:textSize="@dimen/text_button_text_size"
 			android:translationX="25dp"
-			osmand:typeface="@string/font_roboto_medium" />
+			app:typefaceWeight="medium"
+			android:paddingEnd="@dimen/bottom_sheet_content_padding_small"
+			android:paddingStart="@dimen/bottom_sheet_content_margin" />
+
+		<View
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1"/>
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/add_marker_button"
@@ -73,7 +79,7 @@
 			android:textColor="?attr/wikivoyage_active_color"
 			android:textSize="@dimen/text_button_text_size"
 			android:translationX="50dp"
-			osmand:typeface="@string/font_roboto_medium"
+			app:typefaceWeight="medium"
 			tools:drawableEnd="@drawable/ic_action_type_add"
 			tools:drawableRight="@drawable/ic_action_type_add"
 			tools:drawableTint="?attr/wikivoyage_active_color"

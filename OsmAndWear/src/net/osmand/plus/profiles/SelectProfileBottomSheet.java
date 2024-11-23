@@ -1,8 +1,8 @@
 package net.osmand.plus.profiles;
 
+
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -26,19 +26,19 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import net.osmand.plus.profiles.data.RoutingDataObject;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ProgressWithTitleItem;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.profiles.data.ProfileDataObject;
+import net.osmand.plus.profiles.data.RoutingDataObject;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
@@ -131,9 +131,8 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 		itemView.findViewById(R.id.icon).setVisibility(View.GONE);
 		itemView.findViewById(R.id.description).setVisibility(View.GONE);
 
-		Typeface typeface = FontCache.getRobotoMedium(app);
 		String title = getString(titleId);
-		SpannableString spannable = UiUtilities.createCustomFontSpannable(typeface, title, title, title);
+		SpannableString spannable = UiUtilities.createCustomFontSpannable(FontCache.getMediumFont(), title, title, title);
 		int activeColor = ContextCompat.getColor(app, getActiveColorId());
 		ForegroundColorSpan colorSpan = new ForegroundColorSpan(activeColor);
 		spannable.setSpan(colorSpan, 0, title.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

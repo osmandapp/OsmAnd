@@ -36,6 +36,7 @@
 	<asset source="voice/it/it_tts.js" destination="voice/it-tts/it_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/ja/ja_tts.js" destination="voice/ja-tts/ja_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/ko/ko_tts.js" destination="voice/ko-tts/ko_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/lt/lt_tts.js" destination="voice/lt-tts/lt_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/lv/lv_tts.js" destination="voice/lv-tts/lv_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/nl/nl_tts.js" destination="voice/nl-tts/nl_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/pl/pl_tts.js" destination="voice/pl-tts/pl_tts.js" mode="overwriteOnlyIfExists" />
@@ -49,6 +50,7 @@
 	<asset source="voice/sr/sr_tts.js" destination="voice/sr-tts/sr_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/sv/sv_tts.js" destination="voice/sv-tts/sv_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/sw/sw_tts.js" destination="voice/sw-tts/sw_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/ta-in/ta-in_tts.js" destination="voice/ta-in-tts/ta-in_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/tr/tr_tts.js" destination="voice/tr-tts/tr_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/uk/uk_tts.js" destination="voice/uk-tts/uk_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/zh/zh_tts.js" destination="voice/zh-tts/zh_tts.js" mode="overwriteOnlyIfExists" />
@@ -78,6 +80,7 @@
 	<asset source="voice/it/it_tts.js" destination="voice/it/it_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/ja/ja_tts.js" destination="voice/ja/ja_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/ko/ko_tts.js" destination="voice/ko/ko_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/lt/lt_tts.js" destination="voice/lt/lt_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/lv/lv_tts.js" destination="voice/lv/lv_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/nl/nl_tts.js" destination="voice/nl/nl_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/pl/pl_tts.js" destination="voice/pl/pl_tts.js" mode="overwriteOnlyIfExists" />
@@ -91,6 +94,7 @@
 	<asset source="voice/sr/sr_tts.js" destination="voice/sr/sr_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/sv/sv_tts.js" destination="voice/sv/sv_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/sw/sw_tts.js" destination="voice/sw/sw_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/ta-in/ta-in_tts.js" destination="voice/ta-in/ta-in_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/tr/tr_tts.js" destination="voice/tr/tr_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/uk/uk_tts.js" destination="voice/uk/uk_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/zh/zh_tts.js" destination="voice/zh/zh_tts.js" mode="overwriteOnlyIfExists" />
@@ -110,19 +114,77 @@
 	<asset source="fonts/65_NotoSansNastaliqUrdu-Regular.ttf" destination="fonts/65_NotoSansNastaliqUrdu-Regular.ttf" mode="alwaysOverwriteOrCopy" />
 	<asset source="fonts/DroidSansFallback.ttf" destination="fonts/DroidSansFallback.ttf" mode="alwaysOverwriteOrCopy" />
 
-	<asset source="sounds/camera_click.ogg" destination="sounds/camera_click.ogg" mode="copyOnlyIfDoesNotExist" />
+	<asset source="sounds/camera_click.ogg" destination="sounds/camera_click.ogg" mode="copyOnlyIfDoesNotExist" version="01.01.2024"/>
 
 	<asset source="World_basemap_mini.obf" destination="World_basemap_mini.obf" mode="alwaysOverwriteOrCopy" />
-	<asset source="Default_wikivoyage.travel.obf" destination="travel/Default_wikivoyage.travel.obf" mode="copyOnlyIfDoesNotExist" />
-	<asset source="proj.db" destination="proj.db" mode="copyOnlyIfDoesNotExist" />
-	<asset source="weather/cloud_color.txt" destination="weather/cloud_color.txt" mode="copyOnlyIfDoesNotExist" />
-	<asset source="weather/precip_color.txt" destination="weather/precip_color.txt" mode="copyOnlyIfDoesNotExist" />
-	<asset source="weather/pressure_color.txt" destination="weather/pressure_color.txt" mode="copyOnlyIfDoesNotExist" />
-	<asset source="weather/temperature_color.txt" destination="weather/temperature_color.txt" mode="copyOnlyIfDoesNotExist" />
-	<asset source="weather/wind_color.txt" destination="weather/wind_color.txt" mode="copyOnlyIfDoesNotExist" />
+	<asset source="proj.db" destination="proj.db" mode="copyOnlyIfDoesNotExist" version="01.01.2024"/>
 
-	<!-- Heightmap color profiles -->
-	<asset source="heightmap/color_slope.txt" destination="heightmap/color_slope.txt" mode="copyOnlyIfDoesNotExist" />
-	<asset source="heightmap/hillshade_main.txt" destination="heightmap/hillshade_main.txt" mode="copyOnlyIfDoesNotExist" />
-	<asset source="heightmap/slopes_main.txt" destination="heightmap/slopes_main.txt" mode="copyOnlyIfDoesNotExist" />
+	<!-- Color palettes -->
+	<!-- Terrain -->
+    <asset source="color-palette/hillshade_color_default.txt" destination="color-palette/hillshade_color_default.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+    <asset source="color-palette/hillshade_main_default.txt" destination="color-palette/hillshade_main_default.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="color-palette/hillshade_color_hillshade_plains.txt" destination="color-palette/hillshade_color_hillshade_plains.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+    <asset source="color-palette/hillshade_main_hillshade_plains.txt" destination="color-palette/hillshade_main_hillshade_plains.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+
+    <asset source="color-palette/slope_default.txt" destination="color-palette/slope_default.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="color-palette/slope_avalanche.txt" destination="color-palette/slope_avalanche.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="color-palette/slope_slope_plains.txt" destination="color-palette/slope_slope_plains.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+    
+	<asset source="color-palette/height_altitude_default.txt" destination="color-palette/height_altitude_default.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="color-palette/height_altitude_-50_150.txt" destination="color-palette/height_altitude_-50_150.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="color-palette/height_altitude_-50_2000.txt" destination="color-palette/height_altitude_-50_2000.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="color-palette/height_altitude_0_200.txt" destination="color-palette/height_altitude_0_200.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="color-palette/height_altitude_0_500.txt" destination="color-palette/height_altitude_0_500.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="color-palette/height_altitude_0_1000.txt" destination="color-palette/height_altitude_0_1000.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="color-palette/height_altitude_0_2000.txt" destination="color-palette/height_altitude_0_2000.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="color-palette/height_altitude_0_3000.txt" destination="color-palette/height_altitude_0_3000.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="color-palette/height_altitude_0_4000.txt" destination="color-palette/height_altitude_0_4000.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="color-palette/height_altitude_100_300.txt" destination="color-palette/height_altitude_100_300.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="color-palette/height_altitude_100_500.txt" destination="color-palette/height_altitude_100_500.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="color-palette/height_altitude_300_1000.txt" destination="color-palette/height_altitude_300_1000.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="color-palette/height_altitude_500_1500.txt" destination="color-palette/height_altitude_500_1500.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="color-palette/height_altitude_500_2500.txt" destination="color-palette/height_altitude_500_2500.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="color-palette/height_altitude_1000_3000.txt" destination="color-palette/height_altitude_1000_3000.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="color-palette/height_altitude_1000_4000.txt" destination="color-palette/height_altitude_1000_4000.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="color-palette/height_altitude_2000_4000.txt" destination="color-palette/height_altitude_2000_4000.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+	<asset source="color-palette/height_altitude_4000_6500.txt" destination="color-palette/height_altitude_4000_6500.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+
+	<!-- Weather -->
+    <asset source="color-palette/weather_cloud.txt" destination="color-palette/weather_cloud.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+    <asset source="color-palette/weather_precip.txt" destination="color-palette/weather_precip.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+    <asset source="color-palette/weather_pressure.txt" destination="color-palette/weather_pressure.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+    <asset source="color-palette/weather_temperature.txt" destination="color-palette/weather_temperature.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+    <asset source="color-palette/weather_wind.txt" destination="color-palette/weather_wind.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+
+	<!-- Route -->
+    <asset source="color-palette/route_elevation_default.txt" destination="color-palette/route_elevation_default.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+    <asset source="color-palette/route_slope_default.txt" destination="color-palette/route_slope_default.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+    <asset source="color-palette/route_speed_default.txt" destination="color-palette/route_speed_default.txt" mode="copyOnlyIfDoesNotExist" version="16.07.2024"/>
+    <asset source="color-palette/user_palette_default.txt" destination="color-palette/user_palette_default.txt" mode="copyOnlyIfDoesNotExist" version="01.01.2024"/>
+
+	<!-- Models -->
+	<asset source="models/map_bicycle_location/map_bicycle_location.mtl" destination="models/map_bicycle_location/map_bicycle_location.mtl" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+	<asset source="models/map_bicycle_location/map_bicycle_location.obj" destination="models/map_bicycle_location/map_bicycle_location.obj" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+	<asset source="models/map_bicycle_location/map_bicycle_location.png" destination="models/map_bicycle_location/map_bicycle_location.png" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+
+	<asset source="models/map_car_bearing/map_car_bearing.mtl" destination="models/map_car_bearing/map_car_bearing.mtl" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+	<asset source="models/map_car_bearing/map_car_bearing.obj" destination="models/map_car_bearing/map_car_bearing.obj" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+	<asset source="models/map_car_bearing/map_car_bearing.png" destination="models/map_car_bearing/map_car_bearing.png" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+
+	<asset source="models/map_car_location/map_car_location.mtl" destination="models/map_car_location/map_car_location.mtl" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+	<asset source="models/map_car_location/map_car_location.obj" destination="models/map_car_location/map_car_location.obj" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+	<asset source="models/map_car_location/map_car_location.png" destination="models/map_car_location/map_car_location.png" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+
+	<asset source="models/map_default_location/map_default_location.mtl" destination="models/map_default_location/map_default_location.mtl" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+	<asset source="models/map_default_location/map_default_location.obj" destination="models/map_default_location/map_default_location.obj" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+	<asset source="models/map_default_location/map_default_location.png" destination="models/map_default_location/map_default_location.png" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+
+	<asset source="models/map_navigation_car/map_navigation_car.mtl" destination="models/map_navigation_car/map_navigation_car.mtl" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+	<asset source="models/map_navigation_car/map_navigation_car.obj" destination="models/map_navigation_car/map_navigation_car.obj" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+	<asset source="models/map_navigation_car/map_navigation_car.png" destination="models/map_navigation_car/map_navigation_car.png" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+
+	<asset source="models/map_navigation_nautical/map_navigation_nautical.mtl" destination="models/map_navigation_nautical/map_navigation_nautical.mtl" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+	<asset source="models/map_navigation_nautical/map_navigation_nautical.obj" destination="models/map_navigation_nautical/map_navigation_nautical.obj" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+	<asset source="models/map_navigation_nautical/map_navigation_nautical.png" destination="models/map_navigation_nautical/map_navigation_nautical.png" mode="copyOnlyIfDoesNotExist" version="23.07.2024"/>
+
 </assets>

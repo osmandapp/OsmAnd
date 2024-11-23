@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:osmand="http://schemas.android.com/apk/res-auto"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/LinearLayout1"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/shared_string_move_down"
         android:translationX="25dp"
-        osmand:srcCompat="@drawable/ic_action_down_dark" />
+        app:srcCompat="@drawable/ic_action_down_dark" />
 
     <TextView
         android:id="@+id/title"
@@ -38,6 +38,6 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/shared_string_move_up"
         android:translationX="-25dp"
-        osmand:srcCompat="@drawable/ic_action_up_dark" />
+        app:srcCompat="@drawable/ic_action_up_dark" />
 
 </LinearLayout>

@@ -28,7 +28,7 @@ public class PairedDevicesAdapter extends FoundDevicesAdapter {
 	@Override
 	public void onBindViewHolder(@NonNull FoundDeviceViewHolder holder, int position) {
 		super.onBindViewHolder(holder, position);
-		AbstractDevice<?> device = items.get(position);
+		AbstractDevice<?> device = (AbstractDevice<?>)items.get(position);
 		holder.menuIcon.setVisibility(View.VISIBLE);
 		holder.menuIcon.setOnClickListener(v -> showOptionsMenu(v, device));
 		holder.itemView.setOnClickListener(v -> {

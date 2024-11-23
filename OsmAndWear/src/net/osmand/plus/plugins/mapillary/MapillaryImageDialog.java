@@ -169,7 +169,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		if (latLon != null) {
 			if (animated) {
 				mapView.getAnimatedDraggingThread().startMoving(
-						latLon.getLatitude(), latLon.getLongitude(), mapView.getZoom(), true);
+						latLon.getLatitude(), latLon.getLongitude(), mapView.getZoom());
 			} else {
 				mapActivity.getMyApplication().getOsmandMap().setMapLocation(latLon.getLatitude(), latLon.getLongitude());
 			}

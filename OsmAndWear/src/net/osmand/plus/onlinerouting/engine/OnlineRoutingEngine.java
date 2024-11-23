@@ -5,7 +5,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -107,15 +107,11 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 
 	public boolean shouldApproximateRoute() {
 		String value = get(EngineParameter.APPROXIMATION_ROUTING_PROFILE);
-		return !Algorithms.isEmpty(value) || shouldNetworkApproximateRoute();
+		return !Algorithms.isEmpty(value);
 	}
 
-	public boolean shouldNetworkApproximateRoute() {
-		String value = get(EngineParameter.NETWORK_APPROXIMATE_ROUTE);
-		if (!Algorithms.isEmpty(value)) {
-			return Boolean.parseBoolean(value);
-		}
-		return false;
+	public boolean isOnlineEngineWithApproximation() {
+		return get(EngineParameter.CUSTOM_URL) != null && shouldApproximateRoute();
 	}
 
 	@Nullable
@@ -177,9 +173,12 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	}
 
 	@Nullable
-	public abstract OnlineRoutingResponse parseResponse(@NonNull String content, @NonNull OsmandApplication app,
-	                                                    boolean leftSideNavigation, boolean initialCalculation,
-	                                                    @Nullable RouteCalculationProgress calculationProgress) throws JSONException;
+	public abstract OnlineRoutingResponse responseByContent(@NonNull OsmandApplication app, @NonNull String content,
+	                                                        boolean leftSideNavigation, boolean initialCalculation,
+	                                                        @Nullable RouteCalculationProgress calculationProgress) throws JSONException;
+
+	public abstract OnlineRoutingResponse responseByGpxFile(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile,
+	                                                        boolean initialCalculation, @Nullable RouteCalculationProgress calculationProgress);
 
 	public abstract boolean isResultOk(@NonNull StringBuilder errorMessage,
 	                                   @NonNull String content) throws JSONException;
@@ -322,7 +321,7 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		private List<Location> route;
 		private List<RouteDirectionInfo> directions;
 
-		private GPXFile gpxFile;
+		private GpxFile gpxFile;
 		private boolean calculatedTimeSpeed;
 
 		// constructor for JSON responses
@@ -332,7 +331,7 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		}
 
 		// constructor for GPX responses
-		public OnlineRoutingResponse(GPXFile gpxFile, boolean calculatedTimeSpeed) {
+		public OnlineRoutingResponse(GpxFile gpxFile, boolean calculatedTimeSpeed) {
 			this.gpxFile = gpxFile;
 			this.calculatedTimeSpeed = calculatedTimeSpeed;
 		}
@@ -345,7 +344,7 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 			return directions;
 		}
 
-		public GPXFile getGpxFile() {
+		public GpxFile getGpxFile() {
 			return gpxFile;
 		}
 

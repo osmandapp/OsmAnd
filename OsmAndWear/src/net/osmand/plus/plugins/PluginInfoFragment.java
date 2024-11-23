@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -126,7 +127,6 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 			if (plugin.isEnabled() != isChecked) {
 				if (PluginsHelper.enablePlugin(getActivity(), app, plugin, isChecked)) {
 					updateState();
-
 					Fragment target = getTargetFragment();
 					if (target instanceof PluginStateListener) {
 						((PluginStateListener) target).onPluginStateChanged(plugin);
@@ -135,10 +135,21 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 			}
 		});
 		Button getButton = mainView.findViewById(R.id.plugin_get);
-		getButton.setText(plugin.isPaid() ? R.string.shared_string_get : R.string.shared_string_install);
-		getButton.setOnClickListener(v -> {
-			ChoosePlanUtils.onGetPlugin(getActivity(), plugin);
-		});
+		if (plugin.isOnline()) {
+			getButton.setText(R.string.shared_string_install);
+			getButton.setOnClickListener(v -> {
+				PluginsHelper.installPlugin(getActivity(), plugin, () -> {
+					dismiss();
+					Fragment target = getTargetFragment();
+					if (target instanceof PluginStateListener) {
+						((PluginStateListener) target).onPluginInstalled(plugin);
+					}
+				});
+			});
+		} else {
+			getButton.setText(plugin.isPaid() && !plugin.isOnline() ? R.string.shared_string_get : R.string.shared_string_install);
+			getButton.setOnClickListener(v -> ChoosePlanUtils.onGetPlugin(getActivity(), plugin));
+		}
 
 		updateState();
 		return mainView;
@@ -157,6 +168,9 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 			return null;
 		}
 		OsmandPlugin plugin = PluginsHelper.getPlugin(pluginId);
+		if (plugin == null) {
+			plugin = PluginsHelper.getOnlinePlugin(pluginId);
+		}
 		if (plugin == null) {
 			log.error("Plugin '" + EXTRA_PLUGIN_ID + "' not found");
 			return null;
@@ -180,10 +194,16 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		Button getButton = mainView.findViewById(R.id.plugin_get);
 		Button settingsButton = mainView.findViewById(R.id.plugin_settings);
 		settingsButton.setCompoundDrawablesWithIntrinsicBounds(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_settings), null, null, null);
+		View pluginHeader = mainView.findViewById(R.id.plugin_header);
 		View installHeader = mainView.findViewById(R.id.plugin_install_header);
+		FrameLayout imageLayout = mainView.findViewById(R.id.plugin_image_layout);
 
-		if (plugin.isLocked()) {
+		if (plugin.isLocked() || plugin.isOnline()) {
 			getButton.setVisibility(View.VISIBLE);
+			if (plugin.isOnline()) {
+				pluginHeader.setVisibility(View.GONE);
+				imageLayout.setPadding(0, 0, 0, AndroidUtils.dpToPx(app, 16f));
+			}
 			settingsButton.setVisibility(View.GONE);
 			installHeader.setVisibility(View.VISIBLE);
 			View worldGlobeIcon = installHeader.findViewById(R.id.ic_world_globe);

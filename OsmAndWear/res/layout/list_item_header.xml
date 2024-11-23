@@ -35,7 +35,7 @@
                 android:layout_marginRight="@dimen/content_padding"
                 android:translationX="25dp"
                 android:visibility="gone"
-                tools:visibility="visible" />
+                tools:visibility="visible"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/title_text_view"

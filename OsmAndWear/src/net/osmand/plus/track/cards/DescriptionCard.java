@@ -15,8 +15,8 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.Metadata;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -39,11 +39,11 @@ import static net.osmand.plus.wikivoyage.WikivoyageUtils.ARTICLE_TITLE;
 public class DescriptionCard extends MapBaseCard {
 
 	private final Fragment targetFragment;
-	private final GPXFile gpxFile;
+	private final GpxFile gpxFile;
 
 	public DescriptionCard(@NonNull MapActivity mapActivity,
 	                       @NonNull Fragment targetFragment,
-	                       @NonNull GPXFile gpxFile) {
+	                       @NonNull GpxFile gpxFile) {
 		super(mapActivity);
 		this.gpxFile = gpxFile;
 		this.targetFragment = targetFragment;
@@ -56,9 +56,9 @@ public class DescriptionCard extends MapBaseCard {
 
 	@Override
 	public void updateContent() {
-		String title = gpxFile.metadata.getArticleTitle();
-		String imageUrl = getMetadataImageLink(gpxFile.metadata);
-		String descriptionHtml = gpxFile.metadata.getDescription();
+		String title = gpxFile.getMetadata().getArticleTitle();
+		String imageUrl = getMetadataImageLink(gpxFile.getMetadata());
+		String descriptionHtml = gpxFile.getMetadata().getDescription();
 
 		setupImage(imageUrl);
 
@@ -67,7 +67,7 @@ public class DescriptionCard extends MapBaseCard {
 		} else {
 			showDescription(title, imageUrl, descriptionHtml);
 		}
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.shadow), gpxFile.showCurrentTrack);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.shadow), gpxFile.isShowCurrentTrack());
 	}
 
 	private void showAddBtn() {
@@ -95,7 +95,7 @@ public class DescriptionCard extends MapBaseCard {
 		View readBtn = view.findViewById(R.id.btn_read_full);
 		setupButton(readBtn);
 		readBtn.setOnClickListener(v -> {
-			Map<String, String> extensions = gpxFile.metadata.getExtensionsToRead();
+			Map<String, String> extensions = gpxFile.getMetadata().getExtensionsToRead();
 			if (!Algorithms.isEmpty(extensions)) {
 				String articleTitle = extensions.get(ARTICLE_TITLE);
 				String lang = extensions.get(ARTICLE_LANG);
@@ -155,7 +155,7 @@ public class DescriptionCard extends MapBaseCard {
 
 	@Nullable
 	public static String getMetadataImageLink(@NonNull Metadata metadata) {
-		String link = metadata.link;
+		String link = metadata.getLink();
 		if (!TextUtils.isEmpty(link)) {
 			String lowerCaseLink = link.toLowerCase();
 			if (lowerCaseLink.contains(".jpg")

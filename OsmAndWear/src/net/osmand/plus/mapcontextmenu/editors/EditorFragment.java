@@ -2,7 +2,7 @@ package net.osmand.plus.mapcontextmenu.editors;
 
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
-import static net.osmand.gpx.GPXUtilities.DEFAULT_ICON_NAME;
+import static net.osmand.shared.gpx.GpxUtilities.DEFAULT_ICON_NAME;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -34,28 +34,31 @@ import net.osmand.data.BackgroundType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.card.base.multistate.MultiStateCard;
+import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
+import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
+import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.card.icon.OnIconsPaletteListener;
+import net.osmand.plus.mapcontextmenu.editors.controller.EditorColorController;
+import net.osmand.plus.mapcontextmenu.editors.icon.EditorIconController;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.measurementtool.ExitBottomSheetDialogFragment;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
-import net.osmand.plus.track.cards.ColorsCard;
-import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public abstract class EditorFragment extends BaseOsmAndFragment implements ColorPickerListener, CardListener {
+public abstract class EditorFragment extends BaseOsmAndFragment
+		implements CardListener, OnColorsPaletteListener, OnIconsPaletteListener<String> {
 
-	protected IconsCard iconsCard;
-	protected ColorsCard colorsCard;
 	protected ShapesCard shapesCard;
 
 	protected View view;
@@ -85,14 +88,13 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 		return iconName;
 	}
 
-	public void setIconName(@NonNull String iconName) {
-		this.iconName = iconName;
+	public void setIconName(@Nullable String iconName) {
+		this.iconName = iconName != null ? iconName : DEFAULT_ICON_NAME;
 	}
 
 	@DrawableRes
 	public int getIconId() {
-		int iconId = RenderingIcons.getBigIconResourceId(iconName);
-		return iconId != 0 ? iconId : DEFAULT_UI_ICON_ID;
+		return AndroidUtils.getDrawableId(app, iconName, DEFAULT_UI_ICON_ID);
 	}
 
 	public void setIcon(@DrawableRes int iconId) {
@@ -172,6 +174,16 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 		view.getViewTreeObserver().removeOnGlobalLayoutListener(getOnGlobalLayoutListener());
 	}
 
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		FragmentActivity activity = getActivity();
+		if (activity != null && !activity.isChangingConfigurations()) {
+			EditorColorController.onDestroy(app);
+			EditorIconController.onDestroy(app);
+		}
+	}
+
 	private void setupToolbar() {
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		toolbar.setTitle(getToolbarTitle());
@@ -249,29 +261,23 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	private void createIconSelector() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			iconsCard = new IconsCard(mapActivity, getIconId(), getPreselectedIconName(), getColor());
-			iconsCard.setListener(this);
-			ViewGroup shapesCardContainer = view.findViewById(R.id.icons_card_container);
-			shapesCardContainer.addView(iconsCard.build(mapActivity));
+			EditorIconController iconController = getIconController();
+			ViewGroup iconsCardContainer = view.findViewById(R.id.icons_card_container);
+			iconsCardContainer.addView(new MultiStateCard(mapActivity, iconController.getCardController()) {
+				@Override
+				public int getCardLayoutId() {
+					return R.layout.card_select_editor_icon;
+				}
+			}.build());
 		}
 	}
 
 	private void createColorSelector() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			List<Integer> colors = new ArrayList<>();
-			for (int color : ColorDialogs.pallette) {
-				colors.add(color);
-			}
-			int customColor = getColor();
-			if (!ColorDialogs.isPaletteColor(customColor)) {
-				colors.add(customColor);
-			}
-			colorsCard = new ColorsCard(mapActivity, null, this, getColor(),
-					colors, app.getSettings().CUSTOM_TRACK_COLORS, true);
-			colorsCard.setListener(this);
+			ColorsPaletteCard colorsPaletteCard = new ColorsPaletteCard(mapActivity, getColorController());
 			ViewGroup colorsCardContainer = view.findViewById(R.id.colors_card_container);
-			colorsCardContainer.addView(colorsCard.build(view.getContext()));
+			colorsCardContainer.addView(colorsPaletteCard.build(view.getContext()));
 		}
 	}
 
@@ -288,29 +294,37 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 
 	@Override
 	public void onCardPressed(@NonNull BaseCard card) {
-		if (card instanceof IconsCard) {
-			setIcon(iconsCard.getSelectedIconId());
-		} else if (card instanceof ColorsCard) {
-			setColor(colorsCard.getSelectedColor());
-			updateContent();
-		} else if (card instanceof ShapesCard) {
+		if (card instanceof ShapesCard) {
 			setBackgroundType(shapesCard.getSelectedShape());
 			updateSelectedShapeText();
 		}
 	}
 
 	@Override
-	public void onColorSelected(Integer prevColor, int newColor) {
-		colorsCard.onColorSelected(prevColor, newColor);
-		setColor(colorsCard.getSelectedColor());
+	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
+		setColor(paletteColor.getColor());
 		updateContent();
+	}
+
+	@Override
+	public void onIconSelectedFromPalette(@Nullable String icon) {
+		setIconName(icon);
+		updateContent();
+	}
+
+	@NonNull
+	private ColorsPaletteController getColorController() {
+		return EditorColorController.getInstance(app, this, getColor());
+	}
+
+	@NonNull
+	private EditorIconController getIconController() {
+		return EditorIconController.getInstance(app, this, iconName);
 	}
 
 	protected void updateContent() {
 		updateSelectedColorText();
-
-		colorsCard.setSelectedColor(color);
-		iconsCard.updateSelectedIcon(color, iconName);
+		getIconController().updateAccentColor(color);
 		shapesCard.updateSelectedShape(color, backgroundType);
 	}
 
@@ -319,15 +333,8 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	}
 
 	protected void updateSelectedColorText() {
-		((TextView) view.findViewById(R.id.color_name)).setText(ColorDialogs.getColorName(color));
-	}
-
-	@Override
-	public void onCardLayoutNeeded(@NonNull BaseCard card) {
-	}
-
-	@Override
-	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
+		ColorsPaletteController controller = getColorController();
+		((TextView) view.findViewById(R.id.color_name)).setText(controller.getColorName(color));
 	}
 
 	@DrawableRes
@@ -357,13 +364,17 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	}
 
 	protected void addLastUsedIcon(@NonNull String iconName) {
-		iconsCard.addLastUsedIcon(iconName);
+		getIconController().addIconToLastUsed(iconName);
 	}
 
 	@Override
 	public int getStatusBarColorId() {
 		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 		return ColorUtilities.getListBgColorId(nightMode);
+	}
+
+	public boolean getContentStatusBarNightMode() {
+		return nightMode;
 	}
 
 	protected void showKeyboard() {
@@ -384,6 +395,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	}
 
 	protected void savePressed() {
+		getColorController().refreshLastUsedTime();
 		save(true);
 	}
 

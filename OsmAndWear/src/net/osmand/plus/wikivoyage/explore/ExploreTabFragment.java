@@ -172,7 +172,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 					}
 				}
 			}
-			if (!isOnlyDefaultTravelBookPresent()) {
+			if (!isTravelGuidesRepositoryEmpty()) {
 				TravelButtonCard travelButtonCard = new TravelButtonCard(app, nightMode);
 				travelButtonCard.setListener(new TravelNeededMapsCard.CardListener() {
 					@Override
@@ -235,7 +235,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 	}
 
 	private void addIndexItemCards(List<IndexItem> mainIndexItem, List<IndexItem> neededIndexItems) {
-		if (isOnlyDefaultTravelBookPresent()) {
+		if (isTravelGuidesRepositoryEmpty()) {
 			this.mainIndexItems.clear();
 			this.mainIndexItems.addAll(mainIndexItem);
 			addDownloadUpdateCard();
@@ -245,9 +245,9 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 		addNeededMapsCard();
 	}
 
-	private boolean isOnlyDefaultTravelBookPresent() {
+	private boolean isTravelGuidesRepositoryEmpty() {
 		if (!app.isApplicationInitializing()) {
-			return app.getResourceManager().isOnlyDefaultTravelBookPresent();
+			return app.getResourceManager().isTravelGuidesRepositoryEmpty();
 		}
 		return true;
 	}

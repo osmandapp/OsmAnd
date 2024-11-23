@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXUtilities.PointsGroup;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -41,7 +41,7 @@ public class SelectFavouriteGroupBottomSheet extends SelectPointsCategoryBottomS
 		FavouritesHelper helper = app.getFavoritesHelper();
 		for (FavoriteGroup favoriteGroup : helper.getFavoriteGroups()) {
 			PointsGroup pointsGroup = favoriteGroup.toPointsGroup(app);
-			pointsGroups.put(pointsGroup.name, pointsGroup);
+			pointsGroups.put(pointsGroup.getName(), pointsGroup);
 		}
 	}
 

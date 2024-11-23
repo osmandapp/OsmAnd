@@ -21,15 +21,15 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.charts.ChartUtils;
@@ -68,7 +68,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 	private MeasurementEditingContext editingCtx;
 	private RefreshMapCallback refreshMapCallback;
-	private GPXTrackAnalysis analysis;
+	private GpxTrackAnalysis analysis;
 	private GpxDisplayItem gpxItem;
 
 	private OnScrollChangedListener scrollChangedListener;
@@ -104,7 +104,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 		setupScrollListener();
 
-		LineChart lineChart = view.findViewById(R.id.line_chart);
+		ElevationChart lineChart = view.findViewById(R.id.line_chart);
 		HorizontalBarChart barChart = view.findViewById(R.id.horizontal_chart);
 		commonGraphAdapter = new CommonChartAdapter(app, lineChart, true);
 		customGraphAdapter = new CustomChartAdapter(app, barChart, true);
@@ -289,11 +289,11 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 			int progressSize = app.getResources().getDimensionPixelSize(R.dimen.icon_size_double);
 			String buttonText = app.getString(R.string.shared_string_cancel);
 			showMessage(null, desc, INVALID_ID, progressSize);
-			showButton(buttonText, v -> fragment.stopCalculatingHeightMapTask(), true);
+			showButton(buttonText, v -> fragment.stopCalculatingHeightMapTask(true), true);
 		} else if (visibleType.canBeCalculated() && !visibleType.hasData()) {
 			String title = app.getString(R.string.no_altitude_data);
-			String desc = app.getString(R.string.no_altitude_data_desc, visibleType.getTitle());
-			showMessage(title, desc, R.drawable.ic_action_altitude_average, 0);
+			String desc = app.getString(R.string.retrieve_elevation_data_summary);
+			showMessage(title, desc, R.drawable.ic_action_desert, 0);
 			showCalculateAltitudeButton(true);
 		} else if (visibleType.hasData()) {
 			showGraph();
@@ -304,7 +304,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 	}
 
 	private void showCalculateAltitudeButton(boolean addStartPadding) {
-		showButton(app.getString(R.string.calculate_altitude), v -> fragment.getAltitudeClick(), addStartPadding);
+		showButton(app.getString(R.string.get_altitude_data), v -> fragment.getAltitudeClick(), addStartPadding);
 	}
 
 	private void showMessage(@Nullable String title,
@@ -342,7 +342,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 		View buttonDivider = buttonContainer.findViewById(R.id.button_divider);
 		MarginLayoutParams layoutParams = (MarginLayoutParams) buttonDivider.getLayoutParams();
-		layoutParams.setMarginStart(addStartPadding ? getDimen(R.dimen.content_padding) : 0);
+		layoutParams.setMarginStart(addStartPadding ? getDimen(R.dimen.list_content_padding_large) : 0);
 		buttonDivider.setLayoutParams(layoutParams);
 
 		TextView title = buttonContainer.findViewById(R.id.btn_text);
@@ -370,7 +370,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 	private void updateData() {
 		chartTypes.clear();
 
-		GPXFile gpxFile = fragment.generateGpxFile();
+		GpxFile gpxFile = fragment.generateGpxFile();
 		analysis = gpxFile.getAnalysis(0);
 		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, MEASUREMENT_TOOL, analysis);
 
@@ -499,7 +499,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 		@Override
 		public LineData getChartData() {
-			ChartUtils.setupGPXChart(commonGraphAdapter.getChart(), 24f, 16f, true);
+			ChartUtils.setupElevationChart(commonGraphAdapter.getChart());
 			List<ILineDataSet> dataSets = ChartUtils.getDataSets(commonGraphAdapter.getChart(),
 					app, analysis, firstType, secondType, false);
 			return new LineData(dataSets);

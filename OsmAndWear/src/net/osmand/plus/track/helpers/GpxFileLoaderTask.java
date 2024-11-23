@@ -1,7 +1,5 @@
 package net.osmand.plus.track.helpers;
 
-import static net.osmand.gpx.GPXUtilities.loadGPXFile;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -10,7 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.gpx.GPXFile;
+import net.osmand.plus.shared.SharedUtil;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
 
@@ -19,11 +18,11 @@ import java.io.InputStream;
 import java.lang.ref.WeakReference;
 
 @SuppressWarnings("deprecation")
-public class GpxFileLoaderTask extends AsyncTask<Void, Void, GPXFile> {
+public class GpxFileLoaderTask extends AsyncTask<Void, Void, GpxFile> {
 
 	private final File file;
 	private final InputStream inputStream;
-	private final CallbackWithObject<GPXFile> callback;
+	private final CallbackWithObject<GpxFile> callback;
 
 	private final WeakReference<Activity> activityRef;
 	private ProgressDialog progressDialog;
@@ -33,7 +32,7 @@ public class GpxFileLoaderTask extends AsyncTask<Void, Void, GPXFile> {
 	 */
 	public static void loadGpxFile(@NonNull File file,
 	                               @Nullable Activity progressContext,
-	                               @Nullable CallbackWithObject<GPXFile> callback) {
+	                               @Nullable CallbackWithObject<GpxFile> callback) {
 		new GpxFileLoaderTask(file, progressContext, callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
@@ -42,7 +41,7 @@ public class GpxFileLoaderTask extends AsyncTask<Void, Void, GPXFile> {
 	 */
 	public static void loadGpxFile(@NonNull InputStream inputStream,
 	                               @Nullable Activity progressContext,
-	                               @Nullable CallbackWithObject<GPXFile> callback) {
+	                               @Nullable CallbackWithObject<GpxFile> callback) {
 		new GpxFileLoaderTask(inputStream, progressContext, callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
@@ -51,7 +50,7 @@ public class GpxFileLoaderTask extends AsyncTask<Void, Void, GPXFile> {
 	 */
 	public GpxFileLoaderTask(@NonNull File file,
 	                         @Nullable Activity progressContext,
-	                         @Nullable CallbackWithObject<GPXFile> callback) {
+	                         @Nullable CallbackWithObject<GpxFile> callback) {
 		this.file = file;
 		this.inputStream = null;
 		this.callback = callback;
@@ -60,7 +59,7 @@ public class GpxFileLoaderTask extends AsyncTask<Void, Void, GPXFile> {
 
 	private GpxFileLoaderTask(@NonNull InputStream inputStream,
 	                          @Nullable Activity progressContext,
-	                          @Nullable CallbackWithObject<GPXFile> callback) {
+	                          @Nullable CallbackWithObject<GpxFile> callback) {
 		this.file = null;
 		this.inputStream = inputStream;
 		this.callback = callback;
@@ -79,12 +78,13 @@ public class GpxFileLoaderTask extends AsyncTask<Void, Void, GPXFile> {
 	}
 
 	@Override
-	protected GPXFile doInBackground(Void... voids) {
-		return file != null ? loadGPXFile(file) : loadGPXFile(inputStream);
+	protected GpxFile doInBackground(Void... voids) {
+		return file != null
+				? SharedUtil.loadGpxFile(file) : SharedUtil.loadGpxFile(inputStream);
 	}
 
 	@Override
-	protected void onPostExecute(GPXFile gpxFile) {
+	protected void onPostExecute(GpxFile gpxFile) {
 		if (progressDialog != null && AndroidUtils.isActivityNotDestroyed(activityRef.get())) {
 			progressDialog.dismiss();
 		}

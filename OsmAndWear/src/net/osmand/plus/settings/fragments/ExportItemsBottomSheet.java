@@ -19,11 +19,12 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -32,7 +33,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SimpleDividerItem;
 import net.osmand.plus.download.SrtmDownloadItem;
-import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.helpers.ColorsPaletteUtils;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.ItineraryType;
@@ -47,24 +48,27 @@ import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.profiles.data.RoutingProfilesResources;
-import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
-import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.GlobalSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
 import net.osmand.plus.settings.fragments.ExportSettingsAdapter.OnItemSelectedListener;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
-import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
+import net.osmand.shared.gpx.GpxHelper;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
 
@@ -79,13 +83,13 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 	public static final String TAG = ExportItemsBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(ExportItemsBottomSheet.class);
 
-	private static final String SETTINGS_TYPE_KEY = "settings_type_key";
+	private static final String EXPORT_TYPE_KEY = "export_type_key";
 	private static final String EXPORT_MODE_KEY = "export_mode_key";
 
 	private OsmandApplication app;
 	private UiUtilities uiUtilities;
 
-	private ExportSettingsType type;
+	private ExportType type;
 	private final List<Object> allItems = new ArrayList<>();
 	private final List<Object> selectedItems = new ArrayList<>();
 
@@ -101,12 +105,12 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		super.onCreate(savedInstanceState);
 		if (savedInstanceState != null) {
 			exportMode = savedInstanceState.getBoolean(EXPORT_MODE_KEY);
-			type = ExportSettingsType.valueOf(savedInstanceState.getString(SETTINGS_TYPE_KEY));
+			type = ExportType.valueOf(savedInstanceState.getString(EXPORT_TYPE_KEY));
 		}
 		Fragment target = getTargetFragment();
 		if (target instanceof BaseSettingsListFragment) {
 			BaseSettingsListFragment fragment = (BaseSettingsListFragment) target;
-			List<Object> items = fragment.getItemsForType(type);
+			List<?> items = fragment.getItemsForType(type);
 			if (items != null) {
 				allItems.addAll(items);
 			}
@@ -133,19 +137,16 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 					.setChecked(selectedItems.contains(object))
 					.setButtonTintList(AndroidUtils.createCheckedColorStateList(app, secondaryColorRes, activeColorRes))
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							boolean checked = !item[0].isChecked();
-							item[0].setChecked(checked);
-							if (checked) {
-								selectedItems.add(item[0].getTag());
-							} else {
-								selectedItems.remove(item[0].getTag());
-							}
-							updateTitleView();
-							setupBottomSheetItem(item[0], item[0].getTag());
+					.setOnClickListener(v -> {
+						boolean checked = !item[0].isChecked();
+						item[0].setChecked(checked);
+						if (checked) {
+							selectedItems.add(item[0].getTag());
+						} else {
+							selectedItems.remove(item[0].getTag());
 						}
+						updateTitleView();
+						setupBottomSheetItem(item[0], item[0].getTag());
 					})
 					.setTag(object);
 			item[0] = builder.create();
@@ -163,7 +164,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(EXPORT_MODE_KEY, exportMode);
-		outState.putString(SETTINGS_TYPE_KEY, type.name());
+		outState.putString(EXPORT_TYPE_KEY, type.name());
 	}
 
 	private BaseBottomSheetItem createTitleItem() {
@@ -174,19 +175,16 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		selectedSize = view.findViewById(R.id.selected_size);
 		TextView textView = view.findViewById(R.id.title);
 		textView.setText(type.getTitleId());
-		view.findViewById(R.id.select_all_button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				checkBox.performClick();
-				boolean checked = checkBox.getState() == CHECKED;
-				if (checked) {
-					selectedItems.addAll(allItems);
-				} else {
-					selectedItems.clear();
-				}
-				updateTitleView();
-				updateItems();
+		view.findViewById(R.id.select_all_button).setOnClickListener(v -> {
+			checkBox.performClick();
+			boolean checked = checkBox.getState() == CHECKED;
+			if (checked) {
+				selectedItems.addAll(allItems);
+			} else {
+				selectedItems.clear();
 			}
+			updateTitleView();
+			updateItems();
 		});
 		setupDescription(view);
 		updateTitleView();
@@ -204,12 +202,14 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, checkBoxColor)));
 
 		String description;
-		if (type == ExportSettingsType.OFFLINE_MAPS && !selectedItems.isEmpty()) {
+		String allItemsSize = String.valueOf(allItems.size());
+		String selectedItemsSize = String.valueOf(selectedItems.size());
+		if (type != null && type.isMap() && !selectedItems.isEmpty()) {
 			String size = AndroidUtils.formatSize(app, calculateSelectedItemsSize());
-			String selected = getString(R.string.ltr_or_rtl_combine_via_slash, selectedItems.size(), allItems.size());
+			String selected = getString(R.string.ltr_or_rtl_combine_via_slash, selectedItemsSize, allItemsSize);
 			description = getString(R.string.ltr_or_rtl_combine_via_comma, selected, size);
 		} else {
-			description = getString(R.string.ltr_or_rtl_combine_via_slash, selectedItems.size(), allItems.size());
+			description = getString(R.string.ltr_or_rtl_combine_via_slash, selectedItemsSize, allItemsSize);
 		}
 		selectedSize.setText(description);
 	}
@@ -259,12 +259,12 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		dismiss();
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, @NonNull ExportSettingsType type,
+	public static void showInstance(@NonNull FragmentManager fm, @NonNull ExportType exportType,
 	                                @NonNull BaseSettingsListFragment target, boolean exportMode) {
 		try {
 			if (!fm.isStateSaved() && fm.findFragmentByTag(TAG) == null) {
 				ExportItemsBottomSheet fragment = new ExportItemsBottomSheet();
-				fragment.type = type;
+				fragment.type = exportType;
 				fragment.exportMode = exportMode;
 				fragment.setTargetFragment(target, 0);
 				fragment.show(fm, TAG);
@@ -274,14 +274,13 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-	private String setupDescription(View view) {
+	private void setupDescription(@NonNull View view) {
 		TextView description = view.findViewById(R.id.title_description);
-		if (type == ExportSettingsType.FAVORITES) {
+		if (type == ExportType.FAVORITES) {
 			description.setText(R.string.select_groups_for_import);
 		} else {
 			description.setText(R.string.select_items_for_import);
 		}
-		return null;
 	}
 
 	private void setupBottomSheetItem(BottomSheetItemWithCompoundButton item, Object object) {
@@ -325,10 +324,10 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 			int iconRes = profileIconRes != 0 ? profileIconRes : R.drawable.ic_world_globe_dark;
 			item.setIcon(uiUtilities.getPaintedIcon(iconRes, actualIconColor));
-		} else if (object instanceof QuickAction) {
-			QuickAction quickAction = (QuickAction) object;
-			item.setTitle(quickAction.getName(app));
-			item.setIcon(uiUtilities.getIcon(quickAction.getIconRes(), getItemIconColor(object)));
+		} else if (object instanceof QuickActionButtonState) {
+			QuickActionButtonState buttonState = (QuickActionButtonState) object;
+			item.setTitle(buttonState.getName());
+			item.setIcon(buttonState.getIcon(ColorUtilities.getColor(app, getItemIconColor(object)), nightMode, false));
 		} else if (object instanceof PoiUIFilter) {
 			PoiUIFilter poiUIFilter = (PoiUIFilter) object;
 			item.setTitle(poiUIFilter.getName());
@@ -348,7 +347,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			setupBottomSheetItemForFile(item, settingsItem.getFile());
 		} else if (object instanceof AvoidRoadInfo) {
 			AvoidRoadInfo avoidRoadInfo = (AvoidRoadInfo) object;
-			item.setTitle(avoidRoadInfo.name);
+			item.setTitle(avoidRoadInfo.getName(app));
 			item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_alert, getItemIconColor(object)));
 		} else if (object instanceof OsmNotesPoint) {
 			OsmNotesPoint osmNotesPoint = (OsmNotesPoint) object;
@@ -370,17 +369,17 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			item.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_folder, color));
 			int points = group.getPoints().size();
 			String itemsDescr = getString(R.string.shared_string_gpx_points);
-			item.setDescription(getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, points));
+			item.setDescription(getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, String.valueOf(points)));
 		} else if (object instanceof GlobalSettingsItem) {
 			GlobalSettingsItem globalSettingsItem = (GlobalSettingsItem) object;
 			item.setTitle(globalSettingsItem.getPublicName(app));
 			item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_settings, getItemIconColor(object)));
 		} else if (object instanceof MapMarkersGroup) {
 			MapMarkersGroup markersGroup = (MapMarkersGroup) object;
-			if (ExportSettingsType.ACTIVE_MARKERS.name().equals(markersGroup.getId())) {
+			if (ExportType.ACTIVE_MARKERS.name().equals(markersGroup.getId())) {
 				item.setTitle(getString(R.string.map_markers));
 				item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_flag, getItemIconColor(object)));
-			} else if (ExportSettingsType.HISTORY_MARKERS.name().equals(markersGroup.getId())) {
+			} else if (ExportType.HISTORY_MARKERS.name().equals(markersGroup.getId())) {
 				item.setTitle(getString(R.string.markers_history));
 				item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_history, getItemIconColor(object)));
 			} else {
@@ -397,7 +396,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 			int selectedMarkers = markersGroup.getMarkers().size();
 			String itemsDescr = getString(R.string.shared_string_items);
-			item.setDescription(getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, selectedMarkers));
+			item.setDescription(getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, String.valueOf(selectedMarkers)));
 		} else if (object instanceof HistoryEntry) {
 			HistoryEntry historyEntry = (HistoryEntry) object;
 			item.setTitle(historyEntry.getName().getName());
@@ -433,6 +432,10 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			item.setDescription(AndroidUtils.formatSize(app, file.length()));
 		} else if (fileSubtype == FileSubtype.FAVORITES_BACKUP) {
 			item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_folder_favorites, getItemIconColor(item.getTag())));
+		} else if (fileSubtype == FileSubtype.COLOR_PALETTE) {
+			item.setTitle(ColorsPaletteUtils.getPaletteName(file));
+			item.setDescription(ColorsPaletteUtils.getPaletteTypeName(app, file));
+			item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_file_color_palette, getItemIconColor(item.getTag())));
 		} else if (fileSubtype.isMap()
 				|| fileSubtype == FileSettingsItem.FileSubtype.TTS_VOICE
 				|| fileSubtype == FileSettingsItem.FileSubtype.VOICE) {
@@ -452,7 +455,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void setupBottomSheetItemForGpx(BottomSheetItemWithCompoundButton item, File file, @Nullable GpxAppearanceInfo appearanceInfo) {
-		item.setTitle(GpxUiHelper.getGpxTitle(file.getName()));
+		item.setTitle(GpxHelper.INSTANCE.getGpxTitle(file.getName()));
 		item.setDescription(getTrackDescr(file, file.lastModified(), file.length(), appearanceInfo));
 		item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_route_distance, getItemIconColor(item.getTag())));
 	}
@@ -507,12 +510,12 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private String getTrackDescrForDataItem(@NonNull GpxDataItem dataItem) {
-		GPXTrackAnalysis analysis = dataItem.getAnalysis();
+		GpxTrackAnalysis analysis = dataItem.getAnalysis();
 		if (analysis != null) {
-			File parent = dataItem.getFile().getParentFile();
-			String folder = Algorithms.capitalizeFirstLetter(parent.getName());
-			String dist = OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app);
-			String points = analysis.wptPoints + " " + getString(R.string.shared_string_gpx_points).toLowerCase();
+			KFile parent = dataItem.getFile().getParentFile();
+			String folder = Algorithms.capitalizeFirstLetter(parent.name());
+			String dist = OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app);
+			String points = analysis.getWptPoints() + " " + getString(R.string.shared_string_gpx_points).toLowerCase();
 			String descr = getString(R.string.ltr_or_rtl_combine_via_bold_point, folder, dist);
 			return getString(R.string.ltr_or_rtl_combine_via_comma, descr, points);
 		}
@@ -520,7 +523,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private GpxDataItem getDataItem(File file, @Nullable GpxDataItemCallback callback) {
-		return app.getGpxDbHelper().getItem(file, callback);
+		return app.getGpxDbHelper().getItem(SharedUtil.kFile(file), callback);
 	}
 
 	private String getMapDescription(File file) {
@@ -530,6 +533,10 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			return getString(R.string.download_roads_only_item);
 		} else if (file.getName().endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
 			return getString(R.string.download_wikipedia_maps);
+		} else if (file.getName().endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
+			return getString(R.string.download_maps_travel);
+		} else if (file.getName().endsWith(IndexConstants.TIF_EXT)) {
+			return getString(R.string.shared_string_terrain);
 		} else if (SrtmDownloadItem.isSrtmFile(file.getName())) {
 			return getString(R.string.download_srtm_maps);
 		} else if (file.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {

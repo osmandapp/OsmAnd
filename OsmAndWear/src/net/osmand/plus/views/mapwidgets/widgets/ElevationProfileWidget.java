@@ -3,6 +3,7 @@ package net.osmand.plus.views.mapwidgets.widgets;
 import static net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer.ROUTE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.ELEVATION_PROFILE;
 
+import android.content.Context;
 import android.graphics.Matrix;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis.AxisDependency;
 import com.github.mikephil.charting.data.DataSet;
@@ -31,10 +33,13 @@ import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
 import net.osmand.gpx.ElevationDiffsCalculator;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.plus.charts.ElevationChartAppearance;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.views.layers.MapInfoLayer.TextState;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.charts.ChartUtils;
@@ -70,11 +75,11 @@ public class ElevationProfileWidget extends MapWidget {
 	private View uphillView;
 	private View downhillView;
 	private View gradeView;
-	private LineChart chart;
+	private ElevationChart chart;
 
 	private GpxDisplayItem gpxItem;
 	private TrkSegment segment;
-	private GPXFile gpx;
+	private GpxFile gpx;
 	private float toMetersMultiplier;
 	private Location myLocation;
 	private List<WptPt> allPoints;
@@ -208,6 +213,33 @@ public class ElevationProfileWidget extends MapWidget {
 		}
 	}
 
+	@Override
+	public void updateColors(@NonNull TextState textState) {
+		super.updateColors(textState);
+		int primaryTextColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
+		int secondaryTextColor = ColorUtilities.getSecondaryTextColor(app, nightMode);
+		int dividerColorBasic = ColorUtilities.getDividerColor(app, nightMode);
+		int bgColor = ColorUtilities.getListBgColor(app, nightMode);
+
+		View[] statisticBlocks = new View[] {uphillView, downhillView, gradeView};
+		for (View block : statisticBlocks) {
+			((TextView) block.findViewById(R.id.widget_text)).setTextColor(primaryTextColor);
+			((TextView) block.findViewById(R.id.widget_text_small)).setTextColor(secondaryTextColor);
+			((TextView) block.findViewById(R.id.title)).setTextColor(secondaryTextColor);
+		}
+		View[] dividers = new View[] {
+				view.findViewById(R.id.statistics_block_divider_1),
+				view.findViewById(R.id.statistics_block_divider_2)
+		};
+		for (View divider : dividers) {
+			divider.setBackgroundColor(dividerColorBasic);
+		}
+		view.findViewById(R.id.elevation_profile_widget_background).setBackgroundColor(bgColor);
+		if (chart != null) {
+			updateChartAppearance(chart);
+		}
+	}
+
 	private boolean updateSettings() {
 		RouteCalculationResult route = app.getRoutingHelper().getRoute();
 		boolean routeChanged = this.route != route;
@@ -221,7 +253,7 @@ public class ElevationProfileWidget extends MapWidget {
 
 	private void setupChart() {
 		gpx = GpxUiHelper.makeGpxFromLocations(route.getImmutableAllLocations(), app);
-		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
+		GpxTrackAnalysis analysis = gpx.getAnalysis(0);
 		allPoints = gpx.getAllSegmentsPoints();
 		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, ROUTE, analysis);
 		firstVisiblePointIndex = -1;
@@ -229,14 +261,8 @@ public class ElevationProfileWidget extends MapWidget {
 		slopeDataSet = null;
 
 		chart = view.findViewById(R.id.line_chart);
-		UiUtilities iconsCache = app.getUIUtilities();
-		ApplicationMode appMode = app.getSettings().getApplicationMode();
-		int profileColor = appMode.getProfileColor(isNightMode());
-		Drawable markerIcon = iconsCache.getPaintedIcon(R.drawable.ic_action_location_color, profileColor);
-		ChartUtils.setupGPXChart(chart, 24f, 16f, true, markerIcon);
-		chart.setHighlightPerTapEnabled(false);
-		chart.setHighlightPerDragEnabled(false);
 		BaseCommonChartAdapter chartAdapter = new BaseCommonChartAdapter(app, chart, true);
+		updateChartAppearance(chart);
 
 		if (analysis.hasElevationData()) {
 			List<ILineDataSet> dataSets = new ArrayList<>();
@@ -343,6 +369,22 @@ public class ElevationProfileWidget extends MapWidget {
 				app.runInUIThread(() -> updateWidgets());
 			}
 		});
+	}
+
+	private void updateChartAppearance(@NonNull ElevationChart chart) {
+		UiUtilities iconsCache = app.getUIUtilities();
+		ApplicationMode appMode = settings.getApplicationMode();
+		int profileColor = appMode.getProfileColor(isNightMode());
+		Context themedContext = UiUtilities.getThemedContext(chart.getContext(), nightMode);
+		Drawable markerIcon = iconsCache.getPaintedIcon(R.drawable.ic_action_location_color, profileColor);
+
+		ElevationChartAppearance appearance = new ElevationChartAppearance();
+		appearance.setContext(themedContext);
+		appearance.setMarkerIcon(markerIcon);
+		ChartUtils.setupElevationChart(chart, appearance);
+
+		chart.setHighlightPerTapEnabled(false);
+		chart.setHighlightPerDragEnabled(false);
 	}
 
 	private Highlight locationHighlight;
@@ -464,12 +506,12 @@ public class ElevationProfileWidget extends MapWidget {
 			ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator() {
 				@Override
 				public double getPointDistance(int index) {
-					return points.get(index).distance;
+					return points.get(index).getDistance();
 				}
 
 				@Override
 				public double getPointElevation(int index) {
-					return points.get(index).ele;
+					return points.get(index).getEle();
 				}
 
 				@Override

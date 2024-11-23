@@ -25,6 +25,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -109,6 +110,11 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
 		recreateView();
+	}
+
+	@Override
+	public void onGpxSelectionInProgress(@NonNull SelectedGpxFile selectedGpxFile) {
+		onRefreshItem(GPX_FILES_ID);
 	}
 
 	@Override

@@ -12,7 +12,6 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.onlinerouting.ui.OnlineRoutingEngineFragment;
 import net.osmand.plus.profiles.data.ProfileDataObject;
 import net.osmand.plus.profiles.data.ProfilesGroup;
 import net.osmand.plus.profiles.data.RoutingDataObject;
@@ -26,7 +25,6 @@ import java.util.List;
 public class SelectOnlineApproxProfileBottomSheet extends SelectProfileBottomSheet {
 
 	public static final String SELECTED_DERIVED_PROFILE_KEY = "selected_derived_profile";
-	public static final String NETWORK_KEY = "network_key";
 
 	private RoutingDataUtils dataUtils;
 	private List<ProfilesGroup> profileGroups = new ArrayList<>();
@@ -38,14 +36,13 @@ public class SelectOnlineApproxProfileBottomSheet extends SelectProfileBottomShe
 	                                @Nullable ApplicationMode appMode,
 	                                @Nullable String selectedItemKey,
 	                                @Nullable String selectedDerivedProfile,
-	                                boolean networkApproximateRoute, boolean usedOnMap) {
+	                                boolean usedOnMap) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
 			SelectOnlineApproxProfileBottomSheet fragment = new SelectOnlineApproxProfileBottomSheet();
 			Bundle args = new Bundle();
 			args.putString(SELECTED_KEY, selectedItemKey);
 			args.putString(SELECTED_DERIVED_PROFILE_KEY, selectedDerivedProfile);
-			args.putBoolean(NETWORK_KEY, networkApproximateRoute);
 			fragment.setArguments(args);
 			fragment.setUsedOnMap(usedOnMap);
 			fragment.setAppMode(appMode);
@@ -59,7 +56,6 @@ public class SelectOnlineApproxProfileBottomSheet extends SelectProfileBottomShe
 		super.onCreate(savedInstanceState);
 		Bundle args = getArguments();
 		if (args != null) {
-			networkApproximateRoute = args.getBoolean(NETWORK_KEY);
 			selectedDerivedProfile = args.getString(SELECTED_DERIVED_PROFILE_KEY, null);
 		}
 	}
@@ -70,7 +66,6 @@ public class SelectOnlineApproxProfileBottomSheet extends SelectProfileBottomShe
 		items.add(new LongDescriptionItem(getString(R.string.select_base_profile_dialog_title)));
 		addCheckableItem(R.string.shared_string_none, Algorithms.isEmpty(selectedItemKey) && !networkApproximateRoute, v -> {
 			Bundle args = new Bundle();
-			args.putBoolean(NETWORK_KEY, false);
 			args.putString(PROFILE_KEY_ARG, "");
 			Fragment target = getTargetFragment();
 			if (target instanceof OnSelectProfileCallback) {
@@ -78,16 +73,7 @@ public class SelectOnlineApproxProfileBottomSheet extends SelectProfileBottomShe
 			}
 			dismiss();
 		});
-		addCheckableItem(R.string.network_provider, networkApproximateRoute, v -> {
-			Bundle args = new Bundle();
-			args.putBoolean(NETWORK_KEY, true);
-			args.putString(PROFILE_KEY_ARG, "");
-			Fragment target = getTargetFragment();
-			if (target instanceof OnlineRoutingEngineFragment) {
-				((OnlineRoutingEngineFragment) target).onProfileSelected(args);
-			}
-			dismiss();
-		});
+
 		createProfilesList();
 	}
 

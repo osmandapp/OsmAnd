@@ -18,6 +18,14 @@ public class ScreenItem {
 		this(type, null);
 	}
 
+	public int getType() {
+		return type;
+	}
+
+	public Object getValue() {
+		return value;
+	}
+
 	public int getId() {
 		int id = type * TYPES_SHIFT;
 		return value != null ? id + value.hashCode() : id;

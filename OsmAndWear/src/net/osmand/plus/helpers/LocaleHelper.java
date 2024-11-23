@@ -3,18 +3,25 @@ package net.osmand.plus.helpers;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Build;
 import android.text.format.DateFormat;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.os.ConfigurationCompat;
+import androidx.core.os.LocaleListCompat;
 
+import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.ConfigureMapUtils;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -25,19 +32,42 @@ public class LocaleHelper {
 	private final OsmandApplication app;
 
 	private final Locale defaultLocale;
+	private final StateChangedListener<String> localeListener;
+
 	private Locale preferredLocale;
 	private Resources localizedResources;
+	private Configuration localizedConf;
 
 	public LocaleHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.defaultLocale = Locale.getDefault();
+		localeListener = change -> preferredLocaleChanged();
+	}
+
+	private void preferredLocaleChanged() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			String preferredLocale = app.getSettings().PREFERRED_LOCALE.get();
+			if (!Algorithms.isEmpty(preferredLocale)) {
+				Locale locale = new Locale(preferredLocale);
+				Locale.setDefault(locale);
+				app.runInUIThread(() -> AppCompatDelegate.setApplicationLocales(LocaleListCompat.create(locale)));
+			}
+		}
 	}
 
 	public void checkPreferredLocale() {
-		Configuration config = app.getBaseContext().getResources().getConfiguration();
+		OsmandSettings settings = app.getSettings();
+		String locale = settings.PREFERRED_LOCALE.get();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+			String currentLocale = Locale.getDefault().toString();
+			if (!Algorithms.stringsEqual(currentLocale, locale)) {
+				locale = currentLocale;
+				settings.PREFERRED_LOCALE.set(locale);
+			}
+		}
+		settings.PREFERRED_LOCALE.addListener(localeListener);
 
-		String pl = app.getSettings().PREFERRED_LOCALE.get();
-		String[] splitScript = pl.split("\\+");
+		String[] splitScript = locale.split("\\+");
 		String script = (splitScript.length > 1) ? splitScript[1] : "";
 		String[] splitCountry = splitScript[0].split("_");
 		String lang = splitCountry[0];
@@ -47,9 +77,9 @@ public class LocaleHelper {
 			Locale.Builder builder = new Locale.Builder();
 			lang = backwardCompatibleNonIsoCodes(lang);
 			String langLowerCase = lang.toLowerCase();
-			for (String locale : Locale.getISOLanguages()) {
-				if (locale.toLowerCase().equals(langLowerCase)) {
-					builder.setLanguage(lang);
+			for (String isoLang : Locale.getISOLanguages()) {
+				if (isoLang.toLowerCase().equals(langLowerCase)) {
+					builder.setLanguage(isoLang);
 					break;
 				}
 			}
@@ -63,7 +93,7 @@ public class LocaleHelper {
 		}
 
 		Locale selectedLocale = null;
-
+		Configuration config = app.getBaseContext().getResources().getConfiguration();
 		if (!Algorithms.isEmpty(lang) && !config.locale.equals(preferredLocale)) {
 			selectedLocale = preferredLocale;
 		} else if (Algorithms.isEmpty(lang) && defaultLocale != null && Locale.getDefault() != defaultLocale) {
@@ -79,9 +109,9 @@ public class LocaleHelper {
 
 			Resources resources = app.getBaseContext().getResources();
 			resources.updateConfiguration(config, resources.getDisplayMetrics());
-			Configuration conf = new Configuration(config);
-			conf.locale = selectedLocale;
-			localizedResources = app.createConfigurationContext(conf).getResources();
+			localizedConf = new Configuration(config);
+			localizedConf.locale = selectedLocale;
+
 		}
 	}
 
@@ -118,7 +148,11 @@ public class LocaleHelper {
 	}
 
 	@Nullable
-	public Resources getLocalizedResources() {
+	public Resources getLocalizedResources(Context ctx, Resources ctxRes) {
+		if (localizedResources == null && localizedConf != null
+				|| (localizedResources != null && localizedResources.getDisplayMetrics().density != ctxRes.getDisplayMetrics().density)) {
+			localizedResources = ctx.createConfigurationContext(localizedConf).getResources();
+		}
 		return localizedResources;
 	}
 
@@ -175,6 +209,32 @@ public class LocaleHelper {
 		configuration = new Configuration(configuration);
 		configuration.setLocale(locale);
 		return app.createConfigurationContext(configuration);
+	}
+
+	@Nullable
+	public static Locale getPreferredNameLocale(@NonNull OsmandApplication app, @NonNull Collection<String> localeIds) {
+		String preferredLocaleId = app.getSettings().PREFERRED_LOCALE.get();
+		Locale availablePreferredLocale = getAvailablePreferredLocale(localeIds);
+
+		return localeIds.contains(preferredLocaleId)
+				? new Locale(preferredLocaleId)
+				: availablePreferredLocale;
+	}
+
+	@Nullable
+	private static Locale getAvailablePreferredLocale(@NonNull Collection<String> localeIds) {
+		LocaleListCompat deviceLanguages = ConfigurationCompat.getLocales(Resources.getSystem().getConfiguration());
+
+		for (int index = 0; index < deviceLanguages.size(); index++) {
+			Locale locale = deviceLanguages.get(index);
+			if (locale != null) {
+				String localeId = locale.getLanguage();
+				if (localeIds.contains(localeId)) {
+					return locale;
+				}
+			}
+		}
+		return null;
 	}
 
 	@NonNull
@@ -246,7 +306,7 @@ public class LocaleHelper {
 		languages.put("sk", ctx.getString(R.string.lang_sk));
 		languages.put("sl", ctx.getString(R.string.lang_sl));
 		languages.put("sr", ctx.getString(R.string.lang_sr));
-		languages.put("sr+Latn", ctx.getString(R.string.lang_sr_latn) + incompleteSuffix);
+		languages.put("sr+Latn", ctx.getString(R.string.lang_sr_latn));
 		languages.put("sv", ctx.getString(R.string.lang_sv));
 		languages.put("tr", ctx.getString(R.string.lang_tr));
 		languages.put("uk", ctx.getString(R.string.lang_uk));

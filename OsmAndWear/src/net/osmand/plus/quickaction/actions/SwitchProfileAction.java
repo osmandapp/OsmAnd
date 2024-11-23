@@ -23,6 +23,8 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.views.controls.maphudbuttons.QuickActionButton;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -35,9 +37,10 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 
 	public static final QuickActionType TYPE = new QuickActionType(SWITCH_PROFILE_ACTION_ID,
 			"profile.change", SwitchProfileAction.class)
-			.nameRes(R.string.change_application_profile)
+			.nameRes(R.string.app_profile)
 			.iconRes(R.drawable.ic_action_manage_profiles)
-			.category(QuickActionType.NAVIGATION);
+			.category(QuickActionType.SETTINGS)
+			.nameActionRes(R.string.shared_string_change);
 
 	public SwitchProfileAction() {
 		super(TYPE);
@@ -97,7 +100,7 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 
 		boolean showDialog = Boolean.parseBoolean(getParams().get(KEY_DIALOG));
 		if (showDialog) {
-			showChooseDialog(mapActivity.getSupportFragmentManager());
+			showChooseDialog(mapActivity);
 			return;
 		}
 		String nextProfile = getNextSelectedItem(mapActivity.getMyApplication());
@@ -110,7 +113,12 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 		if (appMode != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
 			app.getSettings().setApplicationMode(appMode);
-			app.getQuickActionRegistry().setQuickActionFabState(true);
+
+			MapLayers mapLayers = mapActivity.getMapLayers();
+			QuickActionButton selectedButton = mapLayers.getMapQuickActionLayer().getSelectedButton();
+			if (selectedButton != null) {
+				app.getMapButtonsHelper().setQuickActionFabState(selectedButton.getButtonState(), true);
+			}
 
 			String message = String.format(mapActivity.getString(
 					R.string.application_profile_changed), appMode.toHumanString());

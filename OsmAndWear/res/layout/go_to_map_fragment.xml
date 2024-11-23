@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
                     android:layout_height="56dp"
                     android:scaleType="center"
                     tools:background="@color/color_warning"
-                    tools:src="@drawable/ic_map" />
+                    tools:src="@drawable/ic_map"/>
 
             </LinearLayout>
 
@@ -65,7 +65,7 @@
                         android:layout_height="44dp"
                         android:layout_gravity="center"
                         android:contentDescription="@string/shared_string_close"
-                        osmand:srcCompat="@drawable/ic_action_remove_dark"
+                        app:srcCompat="@drawable/ic_action_remove_dark"
                         tools:background="@color/color_warning" />
 
                 </LinearLayout>

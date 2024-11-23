@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.ChartTouchListener;
@@ -36,7 +36,7 @@ public class ChartAdapterHelper {
 			return;
 		}
 
-		LineChart mainChart = mainGraphAdapter.getChart();
+		ElevationChart mainChart = mainGraphAdapter.getChart();
 		@SuppressLint("ClickableViewAccessibility")
 		View.OnTouchListener mainChartTouchListener = (v, ev) -> {
 			if (mainView != null) {
@@ -102,7 +102,7 @@ public class ChartAdapterHelper {
 	                                           @NonNull MapActivity mapActivity,
 	                                           @NonNull TrackDetailsMenu detailsMenu) {
 		RefreshMapCallback refreshMapCallback = (fitTrackOnMap, forceFit, recalculateXAxis) -> {
-			LineChart chart = graphAdapter.getChart();
+			ElevationChart chart = graphAdapter.getChart();
 			OsmandApplication app = mapActivity.getMyApplication();
 			if (!app.getRoutingHelper().isFollowingMode()) {
 				detailsMenu.refreshChart(chart, fitTrackOnMap, forceFit, recalculateXAxis);

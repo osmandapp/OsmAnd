@@ -7,7 +7,6 @@ import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment.SELECTED_FOLDER_KEY;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
@@ -17,7 +16,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
@@ -33,15 +31,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.PlatformUtil;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.configmap.tracks.TracksFragment;
+import net.osmand.plus.configmap.tracks.TracksTabsFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.GpxImportListener;
+import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.importfiles.tasks.CollectTracksTask;
 import net.osmand.plus.importfiles.tasks.CollectTracksTask.CollectTracksListener;
@@ -52,14 +50,13 @@ import net.osmand.plus.importfiles.ui.ImportTracksAdapter.ImportTracksListener;
 import net.osmand.plus.importfiles.ui.SelectPointsFragment.PointsSelectionListener;
 import net.osmand.plus.importfiles.ui.SelectTrackDirectoryBottomSheet.FolderSelectionListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
-import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer.TracksDrawParams;
+import net.osmand.plus.myplaces.tracks.MapDrawParams;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
-import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -82,7 +79,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	private final List<ImportTrackItem> trackItems = new ArrayList<>();
 	private final Set<ImportTrackItem> selectedTracks = new HashSet<>();
 
-	private GPXFile gpxFile;
+	private GpxFile gpxFile;
 	private String fileName;
 	private String selectedFolder;
 	private long fileSize;
@@ -278,7 +275,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 		super.onDestroyView();
 		for (ImportTrackItem item : trackItems) {
 			if (item.bitmapDrawer != null) {
-				item.bitmapDrawer.setDrawEnabled(false);
+				item.bitmapDrawer.setDrawingAllowed(false);
 			}
 			item.bitmap = null;
 			item.bitmapDrawer = null;
@@ -308,16 +305,14 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	}
 
 	@NonNull
-	private TracksDrawParams getTracksDrawParams() {
-		WindowManager mgr = (WindowManager) app.getSystemService(Context.WINDOW_SERVICE);
+	private MapDrawParams getTracksDrawParams() {
 		DisplayMetrics metrics = new DisplayMetrics();
-		mgr.getDefaultDisplay().getMetrics(metrics);
+		AndroidUtils.getDisplay(requireContext()).getMetrics(metrics);
 
-		int color = GpxAppearanceAdapter.getTrackColor(app);
 		int width = metrics.widthPixels - AndroidUtils.dpToPx(app, 32);
 		int height = getResources().getDimensionPixelSize(R.dimen.track_image_height);
 
-		return new TracksDrawParams(metrics.density, width, height, color);
+		return new MapDrawParams(metrics.density, width, height);
 	}
 
 	@Override
@@ -380,7 +375,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	public void onTrackItemPointsSelected(@NonNull ImportTrackItem item) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			SelectPointsFragment.showInstance(activity.getSupportFragmentManager(), item, gpxFile.getPoints(), this);
+			SelectPointsFragment.showInstance(activity.getSupportFragmentManager(), item, gpxFile.getPointsList(), this);
 		}
 	}
 
@@ -449,7 +444,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 			}
 
 			@Override
-			public void onGpxSaved(@Nullable String error, @NonNull GPXFile gpxFile) {
+			public void onGpxSaved(@Nullable String error, @NonNull GpxFile gpxFile) {
 				app.runInUIThread(() -> {
 					if (importListener != null) {
 						importListener.onSaveComplete(error == null, gpxFile);
@@ -468,9 +463,9 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 
 	private void dismissAndOpenTracks() {
 		FragmentActivity activity = getActivity();
-		TracksFragment tracksFragment = null;
+		TracksTabsFragment tracksFragment = null;
 		if (activity instanceof MapActivity) {
-			tracksFragment = ((MapActivity) activity).getFragmentsHelper().getFragment(TracksFragment.TAG);
+			tracksFragment = ((MapActivity) activity).getFragmentsHelper().getFragment(TracksTabsFragment.TAG);
 		}
 		if (!(activity instanceof MyPlacesActivity) && tracksFragment == null) {
 			openTracksTabInMyPlaces();
@@ -503,7 +498,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager,
-	                                @NonNull GPXFile gpxFile,
+	                                @NonNull GpxFile gpxFile,
 	                                @NonNull String fileName,
 	                                @Nullable String selectedFolder,
 	                                @Nullable GpxImportListener importListener,

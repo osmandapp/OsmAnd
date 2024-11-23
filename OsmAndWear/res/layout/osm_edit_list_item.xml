@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:osmand="http://schemas.android.com/apk/res-auto"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
@@ -23,19 +23,19 @@
 	    android:layout_marginEnd="@dimen/dialog_elements_vertical_margin"
 	    android:layout_marginStart="@dimen/dialog_elements_vertical_margin" />
 
-	<androidx.appcompat.widget.AppCompatImageView
-		android:id="@+id/iconImageView"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center_vertical"
-		android:layout_marginStart="3dp"
-		android:layout_marginLeft="3dp"
-		android:layout_marginEnd="@dimen/dialog_elements_vertical_margin"
-		android:layout_marginRight="@dimen/dialog_elements_vertical_margin"
-		android:gravity="center_vertical"
-		android:maxLines="2"
-		android:textSize="@dimen/default_desc_text_size"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iconImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="@dimen/dialog_elements_vertical_margin"
+        android:gravity="center_vertical"
+        android:maxLines="2"
 		android:translationX="-25dp"
-		osmand:srcCompat="@drawable/ic_action_remove_dark" />
+        app:srcCompat="@drawable/ic_action_remove_dark"
+        android:textSize="@dimen/default_desc_text_size"
+	    android:layout_marginEnd="@dimen/dialog_elements_vertical_margin"
+	    android:layout_marginStart="3dp" />
 
 </LinearLayout>

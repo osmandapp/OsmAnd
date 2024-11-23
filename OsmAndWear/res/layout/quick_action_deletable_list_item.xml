@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
             android:scaleType="centerInside"
             android:tint="?attr/secondary_icon_color"
             android:translationX="25dp"
-            osmand:srcCompat="@drawable/ic_action_item_move" />
+            app:srcCompat="@drawable/ic_action_item_move" />
 
         <TextView
             android:id="@+id/title"
@@ -54,7 +54,7 @@
             android:scaleType="centerInside"
             android:tint="?attr/secondary_icon_color"
             android:translationX="-25dp"
-            osmand:srcCompat="@drawable/ic_action_remove_dark" />
+            app:srcCompat="@drawable/ic_action_remove_dark" />
 
     </LinearLayout>
 

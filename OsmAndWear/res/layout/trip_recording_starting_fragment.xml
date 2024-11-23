@@ -24,7 +24,7 @@
 		android:text="@string/monitoring_settings"
 		android:textSize="@dimen/default_list_text_size"
 		android:gravity="center"
-		app:typeface="@string/font_roboto_medium" />
+		app:typefaceWeight="medium" />
 
 	<include
 		android:id="@+id/show_track_on_map"

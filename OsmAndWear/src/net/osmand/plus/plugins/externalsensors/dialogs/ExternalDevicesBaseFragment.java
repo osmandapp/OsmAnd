@@ -52,6 +52,10 @@ public abstract class ExternalDevicesBaseFragment extends BaseOsmAndFragment {
 		return nightMode ? R.color.status_bar_main_dark : R.color.status_bar_main_light;
 	}
 
+	public boolean getContentStatusBarNightMode() {
+		return true;
+	}
+
 	@Override
 	protected boolean isUsedOnMap() {
 		return true;

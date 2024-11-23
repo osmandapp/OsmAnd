@@ -12,7 +12,7 @@ import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;

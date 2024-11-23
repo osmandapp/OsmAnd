@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
+
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -15,15 +17,13 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.R;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.R;
+import net.osmand.plus.settings.enums.DrivingRegion;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-
-
-import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
 public class ScreenAlertsFragment extends BaseSettingsFragment {
 
@@ -36,18 +36,42 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 	protected void setupPreferences() {
 		Preference showRoutingAlarmsInfo = findPreference(SHOW_ROUTING_ALARMS_INFO);
 		SwitchPreferenceCompat showTrafficWarnings = findPreference(settings.SHOW_TRAFFIC_WARNINGS.getId());
+		SwitchPreferenceCompat showSpeedLimitWarnings = findPreference(settings.SHOW_SPEED_LIMIT_WARNINGS.getId());
 		SwitchPreferenceCompat showPedestrian = findPreference(settings.SHOW_PEDESTRIAN.getId());
 		SwitchPreferenceCompat showTunnels = findPreference(settings.SHOW_TUNNELS.getId());
 
 		showRoutingAlarmsInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 		showTrafficWarnings.setIcon(getIcon(R.drawable.list_warnings_traffic_calming));
+		int speedLimitIcon = getSpeedLimitIcon();
+		showSpeedLimitWarnings.setIcon(speedLimitIcon);
 		showPedestrian.setIcon(getIcon(R.drawable.list_warnings_pedestrian));
 		showTunnels.setIcon(getIcon(R.drawable.list_warnings_tunnel));
 
-		setupScreenAlertsImage();
 		setupShowCamerasPref();
 		setupSpeedCamerasAlert();
 		enableDisablePreferences(settings.SHOW_ROUTING_ALARMS.getModeValue(getSelectedAppMode()));
+	}
+
+	private int getSpeedLimitIcon() {
+		int speedLimitIcon;
+		if (isUsaRegion()) {
+			speedLimitIcon = R.drawable.list_warnings_speed_limit_us;
+		} else if (isCanadaRegion()) {
+			speedLimitIcon = R.drawable.list_warnings_speed_limit_ca;
+		} else {
+			speedLimitIcon = R.drawable.list_warnings_limit;
+		}
+		return speedLimitIcon;
+	}
+
+	private boolean isUsaRegion() {
+		ApplicationMode mode = app.getSettings().getApplicationMode();
+		return settings.DRIVING_REGION.getModeValue(mode) == DrivingRegion.US;
+	}
+
+	private boolean isCanadaRegion() {
+		ApplicationMode mode = app.getSettings().getApplicationMode();
+		return settings.DRIVING_REGION.getModeValue(mode) == DrivingRegion.CANADA;
 	}
 
 	@Override
@@ -93,7 +117,7 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
 
 		String key = preference.getKey();
@@ -114,10 +138,8 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-			Preference routeParametersImage = findPreference(SCREEN_ALERTS_IMAGE);
-			updatePreference(routeParametersImage);
-		}
+		updatePreference(findPreference(SCREEN_ALERTS_IMAGE));
+
 		if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(preference.getKey())) {
 			SpeedCamerasBottomSheet.showInstance(requireActivity().getSupportFragmentManager(), this);
 		}
@@ -129,13 +151,6 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 		if (prefId.equals(settings.SPEED_CAMERAS_UNINSTALLED.getId())) {
 			setupShowCamerasPref();
 			setupSpeedCamerasAlert();
-		}
-	}
-
-	private void setupScreenAlertsImage() {
-		Preference routeParametersImage = findPreference(SCREEN_ALERTS_IMAGE);
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
-			routeParametersImage.setVisible(false);
 		}
 	}
 

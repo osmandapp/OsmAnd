@@ -45,7 +45,7 @@ public class NetworkWriter extends AbstractWriter {
 	@Override
 	public void write(@NonNull SettingsItem item) throws IOException {
 		String error;
-		String fileName = BackupHelper.getItemFileName(item);
+		String fileName = BackupUtils.getItemFileName(item);
 		SettingsItemWriter<? extends SettingsItem> itemWriter = item.getWriter();
 		if (itemWriter != null) {
 			try {
@@ -137,7 +137,7 @@ public class NetworkWriter extends AbstractWriter {
 		SettingsItem item = itemWriter.getItem();
 		if (item instanceof FileSettingsItem) {
 			FileSettingsItem settingsItem = (FileSettingsItem) item;
-			return BackupHelper.isDefaultObfMap(backupHelper.getApp(), settingsItem, fileName);
+			return BackupUtils.isDefaultObfMap(backupHelper.getApp(), settingsItem, fileName);
 		}
 		return false;
 	}
@@ -158,7 +158,7 @@ public class NetworkWriter extends AbstractWriter {
 		OnUploadFileListener uploadListener = getUploadDirListener(item, fileName, (int) (size / 1024));
 		for (File file : filesToUpload) {
 			item.setFileToWrite(file);
-			String name = BackupHelper.getFileItemName(file, item);
+			String name = BackupUtils.getFileItemName(file, item);
 			String error = uploadItemFile(itemWriter, name, uploadListener);
 			if (error != null) {
 				return error;
@@ -189,7 +189,7 @@ public class NetworkWriter extends AbstractWriter {
 			public void onFileUploadDone(@NonNull String type, @NonNull String fileName, long uploadTime, @Nullable String error) {
 				if (item instanceof FileSettingsItem) {
 					FileSettingsItem fileItem = (FileSettingsItem) item;
-					String itemFileName = BackupHelper.getFileItemName(fileItem);
+					String itemFileName = BackupUtils.getFileItemName(fileItem);
 					if (backupHelper.getApp().getAppPath(itemFileName).isDirectory()) {
 						backupHelper.updateFileUploadTime(item.getType().name(), itemFileName, uploadTime);
 					}
@@ -243,7 +243,7 @@ public class NetworkWriter extends AbstractWriter {
 			public void onFileUploadDone(@NonNull String type, @NonNull String fileName, long uploadTime, @Nullable String error) {
 				if (item instanceof FileSettingsItem) {
 					FileSettingsItem fileItem = (FileSettingsItem) item;
-					String itemFileName = BackupHelper.getFileItemName(fileItem);
+					String itemFileName = BackupUtils.getFileItemName(fileItem);
 					if (backupHelper.getApp().getAppPath(itemFileName).isDirectory()) {
 						backupHelper.updateFileUploadTime(item.getType().name(), itemFileName, uploadTime);
 					}

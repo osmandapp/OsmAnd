@@ -2,14 +2,15 @@ package net.osmand.plus.settings.fragments;
 
 import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
 import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
+import static net.osmand.plus.settings.enums.RoutingType.HH_JAVA;
 import static net.osmand.plus.settings.fragments.DangerousGoodsFragment.getHazmatUsaClass;
 import static net.osmand.plus.settings.fragments.SettingsScreenType.DANGEROUS_GOODS;
 import static net.osmand.plus.utils.AndroidUtils.getRoutingStringPropertyName;
+import static net.osmand.router.GeneralRouter.ALLOW_VIA_FERRATA;
 import static net.osmand.router.GeneralRouter.GOODS_RESTRICTIONS;
 import static net.osmand.router.GeneralRouter.HAZMAT_CATEGORY;
 import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
 import static net.osmand.router.GeneralRouter.USE_SHORTEST_WAY;
-import static net.osmand.router.GeneralRouter.ALLOW_VIA_FERRATA;
 
 import android.app.Activity;
 import android.content.Context;
@@ -56,7 +57,10 @@ import net.osmand.plus.settings.bottomsheets.GoodsRestrictionsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.HazmatCategoryBottomSheet;
 import net.osmand.plus.settings.bottomsheets.RecalculateRouteInDeviationBottomSheet;
 import net.osmand.plus.settings.controllers.ViaFerrataDialogController;
+import net.osmand.plus.settings.enums.ApproximationType;
 import net.osmand.plus.settings.enums.DrivingRegion;
+import net.osmand.plus.settings.enums.RoutingType;
+import net.osmand.plus.settings.preferences.ListParameters;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -64,6 +68,10 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.popup.PopUpMenu;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
@@ -80,7 +88,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	public static final String TAG = RouteParametersFragment.class.getSimpleName();
 
 	public static final String RELIEF_SMOOTHNESS_FACTOR = "relief_smoothness_factor";
-	private static final String AVOID_ROUTING_PARAMETER_PREFIX = "avoid_";
+	public static final String AVOID_ROUTING_PARAMETER_PREFIX = "avoid_";
 	private static final String PREFER_ROUTING_PARAMETER_PREFIX = "prefer_";
 	public static final String HAZMAT_CATEGORY_USA_PREFIX = "hazmat_category_usa_";
 	private static final String ROUTE_PARAMETERS_INFO = "route_parameters_info";
@@ -136,7 +144,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
 
 		String key = preference.getKey();
@@ -151,6 +159,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 				imageView.setImageDrawable(layerDrawable);
 			}
 		}
+		holder.itemView.setTag(preference);
 	}
 
 	private void setupTimeConditionalRoutingPref() {
@@ -195,27 +204,6 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		getPreferenceScreen().addPreference(useOsmLiveForRouting);
 	}
 
-	private void setupDisableComplexRoutingPref() {
-		SwitchPreferenceEx disableComplexRouting = createSwitchPreferenceEx(settings.DISABLE_COMPLEX_ROUTING.getId(),
-				R.string.use_two_phase_routing, R.layout.preference_with_descr_dialog_and_switch);
-		disableComplexRouting.setDescription(getString(R.string.complex_routing_descr));
-		disableComplexRouting.setSummaryOn(R.string.shared_string_enabled);
-		disableComplexRouting.setSummaryOff(R.string.shared_string_disabled);
-		disableComplexRouting.setIconSpaceReserved(true);
-		getPreferenceScreen().addPreference(disableComplexRouting);
-	}
-
-	private void setupFastRecalculationPref() {
-		SwitchPreferenceEx useFastRecalculation = createSwitchPreferenceEx(settings.USE_FAST_RECALCULATION.getId(),
-				R.string.use_fast_recalculation, R.layout.preference_with_descr_dialog_and_switch);
-		useFastRecalculation.setDescription(getString(R.string.use_fast_recalculation_desc));
-		useFastRecalculation.setSummaryOn(R.string.shared_string_enabled);
-		useFastRecalculation.setSummaryOff(R.string.shared_string_disabled);
-		useFastRecalculation.setIcon(getPersistentPrefIcon(R.drawable.ic_action_route_part));
-		useFastRecalculation.setIconSpaceReserved(true);
-		getPreferenceScreen().addPreference(useFastRecalculation);
-	}
-
 	private void setupRoutingPrefs() {
 		OsmandApplication app = getMyApplication();
 		if (app == null) {
@@ -240,13 +228,13 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 			straightAngle.setPersistent(false);
 			straightAngle.setKey(settings.ROUTE_STRAIGHT_ANGLE.getId());
 			straightAngle.setTitle(getString(R.string.recalc_angle_dialog_title));
-			straightAngle.setSummary(String.format(getString(R.string.shared_string_angle_param), (int) am.getStrAngle()));
+			straightAngle.setSummary(getString(R.string.shared_string_angle_param, String.valueOf((int) am.getStrAngle())));
 			straightAngle.setLayoutResource(R.layout.preference_with_descr);
 			straightAngle.setIcon(getRoutingPrefIcon(ROUTING_RECALC_DISTANCE));
 			getPreferenceScreen().addPreference(straightAngle);
 		}
 
-		addDivider(screen);
+		addDividerPref();
 		setupRouteRecalcHeader(screen);
 		setupSelectRouteRecalcDistance(screen);
 		setupReverseDirectionRecalculation(screen);
@@ -283,6 +271,8 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 						&& !param.equals(GeneralRouter.VEHICLE_WEIGHT)
 						&& !param.equals(GeneralRouter.VEHICLE_WIDTH)
 						&& !param.equals(GeneralRouter.MOTOR_TYPE)
+						&& !param.equals(GeneralRouter.MAX_AXLE_LOAD)
+						&& !param.equals(GeneralRouter.WEIGHT_RATING)
 						&& !param.equals(GeneralRouter.VEHICLE_LENGTH)) {
 					otherRoutingParameters.add(routingParameter);
 				}
@@ -348,7 +338,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		} else {
 			ListParameters listParameters = populateListParameters(ctx, p);
 			OsmandPreference<String> pref = settings.getCustomRoutingProperty(p.getId(), p.getDefaultString());
-			ListPreferenceEx preference = createListPreferenceEx(ctx, pref.getId(), listParameters.names, listParameters.values, title, R.layout.preference_with_descr);
+			ListPreferenceEx preference = createListPreferenceEx(ctx, pref.getId(), listParameters.localizedNames, listParameters.values, title, R.layout.preference_with_descr);
 			preference.setDescription(description);
 			return preference;
 		}
@@ -372,7 +362,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 				names[j] = getRoutingStringPropertyName(ctx, id, name);
 			}
 		}
-		return new ListParameters(names, sVls);
+		return new ListParameters(descriptions, names, sVls);
 	}
 
 	private void setupOtherBooleanParameterSummary(ApplicationMode am, RoutingParameter p, TwoStatePreference preference) {
@@ -389,12 +379,6 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 			preference.setSummaryOn(R.string.shared_string_on);
 			preference.setSummaryOff(R.string.shared_string_off);
 		}
-	}
-
-	private void addDivider(PreferenceScreen screen) {
-		Preference divider = new Preference(requireContext());
-		divider.setLayoutResource(R.layout.simple_divider_item);
-		screen.addPreference(divider);
 	}
 
 	private void setupReverseDirectionRecalculation(PreferenceScreen screen) {
@@ -415,19 +399,18 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		screen.addPreference(routingCategory);
 	}
 
-	private void setupDevelopmentCategoryPreferences(PreferenceScreen screen, ApplicationMode am) {
-		addDivider(screen);
+	private void setupDevelopmentCategoryPreferences(PreferenceScreen screen, ApplicationMode mode) {
+		addDividerPref();
 		setupDevelopmentCategoryHeader(screen);
-		if (am.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT)) {
+		if (mode.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT)) {
 			setupOsmLiveForPublicTransportPref();
 			setupNativePublicTransport();
 		} else {
+			setupRoutingTypePref();
+			setupApproximationTypePref();
+			setupAutoZoomPref();
 			setupOsmLiveForRoutingPref();
-			if (am.isDerivedRoutingFrom(ApplicationMode.CAR)) {
-				setupDisableComplexRoutingPref();
-			}
 		}
-		setupFastRecalculationPref();
 	}
 
 	private void setupDevelopmentCategoryHeader(PreferenceScreen screen) {
@@ -435,6 +418,121 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		developmentCategory.setLayoutResource(R.layout.preference_category_with_descr);
 		developmentCategory.setTitle(R.string.development);
 		screen.addPreference(developmentCategory);
+	}
+
+	private void setupAutoZoomPref() {
+		Preference preference = new Preference(requireContext());
+		preference.setKey(settings.USE_DISCRETE_AUTO_ZOOM.getId());
+		preference.setTitle(R.string.auto_zoom);
+		preference.setLayoutResource(R.layout.preference_with_descr);
+		preference.setIcon(getContentIcon(R.drawable.ic_action_magnifier_plus));
+		preference.setSummary(settings.USE_DISCRETE_AUTO_ZOOM.get() ? R.string.auto_zoom_discrete : R.string.auto_zoom_smooth);
+		getPreferenceScreen().addPreference(preference);
+	}
+
+	private void showAutoZoomDialog(@NonNull Preference preference) {
+		boolean discrete = settings.USE_DISCRETE_AUTO_ZOOM.getModeValue(getSelectedAppMode());
+
+		List<PopUpMenuItem> items = new ArrayList<>();
+		items.add(new PopUpMenuItem.Builder(preference.getContext())
+				.setTitleId(R.string.auto_zoom_discrete)
+				.setSelected(discrete)
+				.showCompoundBtn(getActiveProfileColor())
+				.setOnClickListener(itemView -> onPreferenceChange(preference, true))
+				.create());
+
+		items.add(new PopUpMenuItem.Builder(preference.getContext())
+				.setTitleId(R.string.auto_zoom_smooth)
+				.setSelected(!discrete)
+				.showCompoundBtn(getActiveProfileColor())
+				.setOnClickListener(itemView -> onPreferenceChange(preference, false))
+				.create());
+
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = getListView().findViewWithTag(preference);
+		displayData.menuItems = items;
+		displayData.nightMode = isNightMode();
+		displayData.widthMode = PopUpMenuWidthMode.STANDARD;
+		PopUpMenu.show(displayData);
+	}
+
+	private void showRoutingTypeDialog(@NonNull Preference preference) {
+		List<PopUpMenuItem> items = new ArrayList<>();
+
+		RoutingType selectedType = settings.ROUTING_TYPE.getModeValue(getSelectedAppMode());
+
+		for (RoutingType type : RoutingType.values()) {
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitleId(type.getTitleId())
+					.setSelected(selectedType == type)
+					.showTopDivider(type == HH_JAVA)
+					.showCompoundBtn(getActiveProfileColor())
+					.setOnClickListener(v -> onPreferenceChange(preference, type))
+					.create());
+		}
+
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = getListView().findViewWithTag(preference);
+		displayData.menuItems = items;
+		displayData.nightMode = isNightMode();
+		displayData.widthMode = PopUpMenuWidthMode.STANDARD;
+		PopUpMenu.show(displayData);
+	}
+
+	private void setupRoutingTypePref() {
+		RoutingType[] types = RoutingType.values();
+		String[] names = new String[types.length];
+		Integer[] values = new Integer[types.length];
+
+		for (int i = 0; i < names.length; i++) {
+			RoutingType type = types[i];
+			values[i] = type.ordinal();
+			names[i] = type.toHumanString(app);
+		}
+
+		ListPreferenceEx preference = createListPreferenceEx(settings.ROUTING_TYPE.getId(), names,
+				values, R.string.routing_type, R.layout.preference_with_descr);
+		preference.setIcon(getContentIcon(R.drawable.ic_action_route_points));
+		getPreferenceScreen().addPreference(preference);
+	}
+
+	private void showApproximationTypeDialog(@NonNull Preference preference) {
+		List<PopUpMenuItem> items = new ArrayList<>();
+
+		ApproximationType selectedType = settings.APPROXIMATION_TYPE.getModeValue(getSelectedAppMode());
+
+		for (ApproximationType type : ApproximationType.values()) {
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitleId(type.getTitleId())
+					.setSelected(selectedType == type)
+					.showCompoundBtn(getActiveProfileColor())
+					.setOnClickListener(v -> onPreferenceChange(preference, type))
+					.create());
+		}
+
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = getListView().findViewWithTag(preference);
+		displayData.menuItems = items;
+		displayData.nightMode = isNightMode();
+		displayData.widthMode = PopUpMenuWidthMode.STANDARD;
+		PopUpMenu.show(displayData);
+	}
+
+	private void setupApproximationTypePref() {
+		ApproximationType[] types = ApproximationType.values();
+		String[] names = new String[types.length];
+		Integer[] values = new Integer[types.length];
+
+		for (int i = 0; i < names.length; i++) {
+			ApproximationType type = types[i];
+			values[i] = type.ordinal();
+			names[i] = type.toHumanString(app);
+		}
+
+		ListPreferenceEx preference = createListPreferenceEx(settings.APPROXIMATION_TYPE.getId(), names,
+				values, R.string.gpx_approximation, R.layout.preference_with_descr);
+		preference.setIcon(getContentIcon(R.drawable.ic_action_attach_track));
+		getPreferenceScreen().addPreference(preference);
 	}
 
 	@Override
@@ -450,7 +548,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 				String selectedValue = hazmatPreference.getModeValue(appMode);
 				boolean enabled = settings.HAZMAT_TRANSPORTING_ENABLED.getModeValue(appMode);
 				Integer selectedValueIndex = enabled ? hazmatParameters.findIndexOfValue(selectedValue) : null;
-				HazmatCategoryBottomSheet.showInstance(manager, this, HAZMAT_TRANSPORTING_ENABLED, appMode, false, hazmatParameters.names, hazmatParameters.values, selectedValueIndex);
+				HazmatCategoryBottomSheet.showInstance(manager, this, HAZMAT_TRANSPORTING_ENABLED, appMode, false, hazmatParameters.localizedNames, hazmatParameters.values, selectedValueIndex);
 			}
 		} else if (GOODS_RESTRICTIONS_PREFERENCE.equals(prefId)) {
 			FragmentManager manager = getFragmentManager();
@@ -467,6 +565,8 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 			}
 		} else if (DANGEROUS_GOODS_USA.equals(prefId)) {
 			BaseSettingsFragment.showInstance(requireActivity(), DANGEROUS_GOODS, appMode, new Bundle(), this);
+		} else if (settings.USE_DISCRETE_AUTO_ZOOM.getId().equals(prefId)) {
+			showAutoZoomDialog(preference);
 		}
 		return super.onPreferenceClick(preference);
 	}
@@ -474,23 +574,25 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	@Override
 	public void onDisplayPreferenceDialog(Preference preference) {
 		String prefId = preference.getKey();
-		if (prefId.equals(settings.ROUTE_RECALCULATION_DISTANCE.getId())) {
-			FragmentManager manager = getFragmentManager();
+		ApplicationMode appMode = getSelectedAppMode();
+		FragmentManager manager = getFragmentManager();
+
+		if (settings.ROUTE_RECALCULATION_DISTANCE.getId().equals(prefId)) {
 			if (manager != null) {
 				RecalculateRouteInDeviationBottomSheet.showInstance(manager, prefId, this, false, getSelectedAppMode());
 			}
 		} else if (!reliefFactorParameters.isEmpty() && prefId.equals(ROUTING_PREFERENCE_PREFIX + USE_HEIGHT_OBSTACLES)) {
-			FragmentManager manager = getFragmentManager();
 			if (manager != null) {
-				ApplicationMode appMode = getSelectedAppMode();
 				ElevationDateBottomSheet.showInstance(manager, appMode, this, false);
 			}
 		} else if (AVOID_ROUTING_PARAMETER_PREFIX.equals(prefId)) {
-			FragmentManager manager = getFragmentManager();
 			if (manager != null) {
-				ApplicationMode appMode = getSelectedAppMode();
 				AvoidRoadsPreferencesBottomSheet.showInstance(manager, prefId, this, appMode, false, isProfileDependent());
 			}
+		} else if (settings.ROUTING_TYPE.getId().equals(prefId)) {
+			showRoutingTypeDialog(preference);
+		} else if (settings.APPROXIMATION_TYPE.getId().equals(prefId)) {
+			showApproximationTypeDialog(preference);
 		} else {
 			super.onDisplayPreferenceDialog(preference);
 		}
@@ -558,7 +660,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		}
 		String summary = String.format(getString(R.string.ltr_or_rtl_combine_via_bold_point),
 				enabled ? getString(R.string.shared_string_enabled) : getString(R.string.shared_string_disabled),
-				OsmAndFormatter.getFormattedDistance(allowedValue, app, false));
+				OsmAndFormatter.getFormattedDistance(allowedValue, app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS));
 		switchPref.setSummary(summary);
 		switchPref.setChecked(enabled);
 	}
@@ -662,7 +764,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		String description;
 		if (selectedValueIndex >= 0) {
 			String yes = getString(R.string.shared_string_yes);
-			String name = hazmatParameters.names[selectedValueIndex];
+			String name = hazmatParameters.localizedNames[selectedValueIndex];
 			description = getString(R.string.ltr_or_rtl_combine_via_comma, yes, name);
 			icon = getIcon(R.drawable.ic_action_hazmat_limit_colored);
 		} else {
@@ -749,12 +851,11 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		if ((settings.DISABLE_COMPLEX_ROUTING.getId().equals(preference.getKey()) ||
-				settings.DISABLE_WRONG_DIRECTION_RECALC.getId().equals(preference.getKey())) &&
-				newValue instanceof Boolean) {
-			return onConfirmPreferenceChange(preference.getKey(), !(Boolean) newValue, getApplyQueryType()); // pref ui was inverted
+		String prefId = preference.getKey();
+		if (settings.DISABLE_WRONG_DIRECTION_RECALC.getId().equals(prefId) && newValue instanceof Boolean) {
+			return onConfirmPreferenceChange(prefId, !(Boolean) newValue, getApplyQueryType()); // pref ui was inverted
 		}
-		return onConfirmPreferenceChange(preference.getKey(), newValue, getApplyQueryType());
+		return onConfirmPreferenceChange(prefId, newValue, getApplyQueryType());
 	}
 
 	@Override
@@ -954,28 +1055,6 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 				return getPersistentPrefIcon(R.drawable.ic_action_reverse_direction);
 			default:
 				return null;
-		}
-	}
-
-	public static class ListParameters {
-
-		public final String[] names;
-		public final Object[] values;
-
-		public ListParameters(String[] names, Object[] values) {
-			this.names = names;
-			this.values = values;
-		}
-
-		public int findIndexOfValue(Object value) {
-			if (value != null && values != null) {
-				for (int i = 0; i < values.length; i++) {
-					if (values[i].equals(value)) {
-						return i;
-					}
-				}
-			}
-			return -1;
 		}
 	}
 }

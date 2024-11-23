@@ -123,7 +123,7 @@ class ExternalDevicesSearchFragment : ExternalDevicesBaseFragment(), ScanDevices
                 foundDevicesCountView?.text =
                     String.format(formatString, devices.size)
             }
-            adapter.setItems(devices)
+            adapter.setItems(devices as List<Any>)
         }
     }
 

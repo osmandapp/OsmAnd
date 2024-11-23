@@ -1,12 +1,12 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.settings.bottomsheets.DistanceDuringNavigationBottomSheet.*;
 import static net.osmand.plus.settings.fragments.SettingsScreenType.EXTERNAL_INPUT_DEVICE;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +17,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
 import net.osmand.data.PointDescription;
@@ -24,19 +25,20 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
-import net.osmand.plus.keyevent.InputDeviceHelper;
+import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
+import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.bottomsheets.DistanceDuringNavigationBottomSheet;
 import net.osmand.plus.settings.controllers.CompassModeDialogController;
-import net.osmand.plus.settings.controllers.MapFocusDialogController;
 import net.osmand.plus.settings.enums.AngularConstants;
-import net.osmand.plus.settings.enums.MapFocus;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.CompassMode;
-import net.osmand.plus.settings.enums.MetricsConstants;
-import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.plus.settings.enums.VolumeUnit;
+import net.osmand.router.GeneralRouter;
+import net.osmand.shared.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.UiUtilities;
@@ -53,7 +55,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	protected void setupPreferences() {
 		setupAppThemePref();
 		setupRotateMapPref();
-		setupPositionPlacementOnMapPref();
 		setupMapScreenOrientationPref();
 		setupTurnScreenOnPref();
 
@@ -62,6 +63,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		setupCoordinatesFormatPref();
 		setupAngularUnitsPref();
 		setupSpeedSystemPref();
+		setupUnitOfVolumePref();
+		setupPreciseDistanceNumbersPref();
 
 		setupVolumeButtonsAsZoom();
 		setupKalmanFilterPref();
@@ -119,20 +122,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		}
 	}
 
-	private void setupPositionPlacementOnMapPref() {
-		ApplicationMode appMode = getSelectedAppMode();
-		CommonPreference<Integer> preference = settings.POSITION_PLACEMENT_ON_MAP;
-		int value = preference.getModeValue(appMode);
-		MapFocus mapFocus = MapFocus.getByValue(value);
-
-		Preference uiPreference = findPreference(preference.getId());
-		if (uiPreference != null) {
-			Drawable icon = getActiveIcon(mapFocus.getIconId());
-			uiPreference.setIcon(icon);
-			uiPreference.setSummary(mapFocus.getTitleId());
-		}
-	}
-
 	private void setupMapScreenOrientationPref() {
 		ListPreferenceEx mapScreenOrientation = findPreference(settings.MAP_SCREEN_ORIENTATION.getId());
 		mapScreenOrientation.setEntries(new String[] {getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)});
@@ -169,7 +158,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		Integer[] entryValues = new Integer[metricsConstants.length];
 
 		for (int i = 0; i < entries.length; i++) {
-			entries[i] = metricsConstants[i].toHumanString(app);
+			entries[i] = metricsConstants[i].toHumanString();
 			entryValues[i] = metricsConstants[i].ordinal();
 		}
 
@@ -215,7 +204,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		Integer[] entryValues = new Integer[speedConstants.length];
 
 		for (int i = 0; i < entries.length; i++) {
-			entries[i] = speedConstants[i].toHumanString(app);
+			entries[i] = speedConstants[i].toHumanString();
 			entryValues[i] = speedConstants[i].ordinal();
 		}
 
@@ -224,6 +213,49 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		speedSystem.setEntryValues(entryValues);
 		speedSystem.setDescription(R.string.default_speed_system_descr);
 		speedSystem.setIcon(getActiveIcon(R.drawable.ic_action_speed));
+	}
+
+	private void setupUnitOfVolumePref() {
+		boolean hidePref = false;
+		ApplicationMode mode = getSelectedAppMode();
+		RouteService routeService = mode.getRouteService();
+		if (routeService == RouteService.OSMAND) {
+			GeneralRouter router = app.getRouter(mode);
+			if (router != null) {
+				GeneralRouter.GeneralRouterProfile routerProfile = router.getProfile();
+				hidePref = routerProfile == null
+						|| routerProfile == GeneralRouter.GeneralRouterProfile.PEDESTRIAN
+						|| routerProfile == GeneralRouter.GeneralRouterProfile.BICYCLE
+						|| routerProfile == GeneralRouter.GeneralRouterProfile.HORSEBACKRIDING
+						|| routerProfile == GeneralRouter.GeneralRouterProfile.SKI;
+			}
+		}
+		ListPreferenceEx unitOfVolumePref = findPreference(settings.UNIT_OF_VOLUME.getId());
+		if (hidePref) {
+			unitOfVolumePref.setVisible(false);
+		} else {
+			VolumeUnit[] unitValues = VolumeUnit.values();
+			String[] entries = new String[unitValues.length];
+			Integer[] entryValues = new Integer[unitValues.length];
+
+			for (int i = 0; i < entries.length; i++) {
+				entries[i] = unitValues[i].toHumanString(app);
+				entryValues[i] = unitValues[i].ordinal();
+			}
+
+			unitOfVolumePref.setEntries(entries);
+			unitOfVolumePref.setEntryValues(entryValues);
+			unitOfVolumePref.setDescription(R.string.unit_of_volume_description);
+			unitOfVolumePref.setIcon(getActiveIcon(R.drawable.ic_action_fuel_tank));
+		}
+	}
+
+	private void setupPreciseDistanceNumbersPref() {
+		ApplicationMode selectedMode = getSelectedAppMode();
+		Preference preference = findPreference(settings.PRECISE_DISTANCE_NUMBERS.getId());
+		DistanceDuringNavigationMode enabledMode = settings.PRECISE_DISTANCE_NUMBERS.getModeValue(selectedMode) ? DistanceDuringNavigationMode.PRECISE : DistanceDuringNavigationMode.ROUND_UP;
+		preference.setSummary(getString(enabledMode.nameId));
+		preference.setIcon(getActiveIcon(enabledMode.iconId));
 	}
 
 	private void setupVolumeButtonsAsZoom() {
@@ -267,14 +299,16 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private String getExternalInputDeviceSummary() {
-		InputDeviceHelper deviceHelper = app.getInputDeviceHelper();
-		InputDeviceProfile inputDevice = deviceHelper.getEnabledDevice(getSelectedAppMode());
+		ApplicationMode appMode = getSelectedAppMode();
+		InputDevicesHelper deviceHelper = app.getInputDeviceHelper();
+		InputDeviceProfile inputDevice = deviceHelper.getCustomizationDevice(appMode);
 		return inputDevice != null ? inputDevice.toHumanString(app) : getString(R.string.shared_string_disabled);
 	}
 
 	private Drawable getExternalInputDeviceIcon() {
-		InputDeviceHelper deviceHelper = app.getInputDeviceHelper();
-		return deviceHelper.getEnabledDevice(getSelectedAppMode()) != null
+		ApplicationMode appMode = getSelectedAppMode();
+		InputDevicesHelper deviceHelper = app.getInputDeviceHelper();
+		return deviceHelper.getCustomizationDevice(appMode) != null
 				? getActiveIcon(R.drawable.ic_action_keyboard)
 				: getContentIcon(R.drawable.ic_action_keyboard_disabled);
 	}
@@ -335,9 +369,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 							desc.setVisibility(View.GONE);
 						}
 						title.setChecked(position == selected);
-						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-							UiUtilities.setupCompoundButtonDrawable(app, isNightMode(), getActiveProfileColor(), title.getCheckMarkDrawable());
-						}
+						UiUtilities.setupCompoundButtonDrawable(app, isNightMode(), getActiveProfileColor(), title.getCheckMarkDrawable());
 						return v;
 					}
 				};
@@ -392,14 +424,14 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 			showSingleSelectionDialog(CompassModeDialogController.PROCESS_ID, controller);
 			controller.setCallback(this);
 			return true;
-		} else if (key.equals(settings.POSITION_PLACEMENT_ON_MAP.getId())) {
-			MapFocusDialogController controller = new MapFocusDialogController(app, appMode);
-			showSingleSelectionDialog(MapFocusDialogController.PROCESS_ID, controller);
-			controller.setCallback(this);
-			return true;
 		} else if (key.equals(settings.EXTERNAL_INPUT_DEVICE.getId())) {
 			BaseSettingsFragment.showInstance(requireActivity(), EXTERNAL_INPUT_DEVICE, appMode, new Bundle(), this);
 			return true;
+		} else if (key.equals(settings.PRECISE_DISTANCE_NUMBERS.getId())) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				DistanceDuringNavigationBottomSheet.showInstance(fragmentManager, preference.getKey(), this, getSelectedAppMode(), false);
+			}
 		}
 		return super.onPreferenceClick(preference);
 	}
@@ -412,11 +444,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		if (controller instanceof CompassModeDialogController) {
 			((CompassModeDialogController) controller).setCallback(this);
 		}
-
-		controller = dialogManager.findController(MapFocusDialogController.PROCESS_ID);
-		if (controller instanceof MapFocusDialogController) {
-			((MapFocusDialogController) controller).setCallback(this);
-		}
 	}
 
 	@Override
@@ -428,6 +455,14 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 			} else if (settings.MAP_SCREEN_ORIENTATION.getId().equals(prefId)) {
 				preference.setIcon(getMapScreenOrientationIcon());
 			}
+		}
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		if (!requireActivity().isChangingConfigurations()) {
+			app.getInputDeviceHelper().releaseCustomizationCollection();
 		}
 	}
 

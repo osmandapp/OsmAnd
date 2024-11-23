@@ -6,8 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.plugins.CustomOsmandPlugin;
-import net.osmand.plus.download.CustomRegion;
+import net.osmand.plus.plugins.custom.CustomOsmandPlugin;
+import net.osmand.plus.plugins.custom.CustomRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;

@@ -20,9 +20,10 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.plus.OsmAndLocationSimulation;
+import net.osmand.plus.shared.SharedUtil;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -32,8 +33,8 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.quickaction.CreateEditActionDialog;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.quickaction.SelectTrackFileDialogFragment;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.track.SelectTrackTabsFragment;
+import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
@@ -43,6 +44,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
+import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -50,9 +52,10 @@ import java.io.File;
 public class LocationSimulationAction extends QuickAction implements FileSelected {
 
 	public static final QuickActionType TYPE = new QuickActionType(LOCATION_SIMULATION_ACTION_ID, "location.simulation", LocationSimulationAction.class)
-			.nameRes(R.string.simulate_location_by_gpx)
+			.nameRes(R.string.quick_action_location_by_gpx)
 			.iconRes(R.drawable.ic_action_start_navigation).nonEditable()
-			.category(QuickActionType.NAVIGATION);
+			.category(QuickActionType.NAVIGATION)
+			.nameActionRes(R.string.shared_string_simulate);
 
 	public static final String KEY_USE_SELECTED_GPX_FILE = "use_selected_gpx_file";
 	public static final String KEY_GPX_FILE_PATH = "gpx_file_path";
@@ -118,13 +121,13 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 		return super.getActionNameRes();
 	}
 
-	private void startStopSimulation(@Nullable GPXFile gpxFile, @NonNull MapActivity mapActivity) {
+	private void startStopSimulation(@Nullable GpxFile gpxFile, @NonNull MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
 		if (sim.isRouteAnimating()) {
 			sim.startStopGpxAnimation(mapActivity);
 		} else if (gpxFile != null && gpxFile.hasTrkPt()) {
-			sim.startAnimationThread(app, gpxFile, (int) cutOffValue, true, speedUpValue);
+			sim.startSimulationThread(app, gpxFile, (int) cutOffValue, true, speedUpValue);
 		}
 	}
 
@@ -207,14 +210,14 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 
 		boolean currentTrack = gpxFilePath.isEmpty();
 		File file = new File(gpxFilePath);
-		String gpxName = currentTrack ? app.getString(R.string.current_track) : GpxUiHelper.getGpxTitle(file.getName());
+		String gpxName = currentTrack ? app.getString(R.string.current_track) : GpxHelper.INSTANCE.getGpxTitle(file.getName());
 		SelectedGpxFile selectedGpxFile = currentTrack
 				? app.getSavingTrackHelper().getCurrentTrack()
 				: app.getSelectedGpxHelper().getSelectedFileByPath(gpxFilePath);
 		if (selectedGpxFile != null) {
 			setupGpxTrackInfo(trackInfoContainer, gpxName, selectedGpxFile.getTrackAnalysis(app), app);
 		} else {
-			GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(file, item -> {
+			GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(SharedUtil.kFile(file), item -> {
 				if (item.getAnalysis() != null) {
 					setupGpxTrackInfo(trackInfoContainer, gpxName, item.getAnalysis(), app);
 				}
@@ -227,7 +230,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 
 	private void setupGpxTrackInfo(@NonNull View trackInfoContainer,
 	                               @NonNull String gpxName,
-	                               @NonNull GPXTrackAnalysis analysis,
+	                               @NonNull GpxTrackAnalysis analysis,
 	                               @NonNull OsmandApplication app) {
 		UiUtilities iconsCache = app.getUIUtilities();
 
@@ -241,12 +244,12 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 		ImageView distanceIcon = trackInfoContainer.findViewById(R.id.distance_icon);
 		TextView distanceText = trackInfoContainer.findViewById(R.id.distance);
 		distanceIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_distance_16));
-		distanceText.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+		distanceText.setText(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
 
 		ImageView waypointsIcon = trackInfoContainer.findViewById(R.id.points_icon);
 		TextView waypointsCountText = trackInfoContainer.findViewById(R.id.points_count);
 		waypointsIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_waypoint_16));
-		waypointsCountText.setText(String.valueOf(analysis.wptPoints));
+		waypointsCountText.setText(String.valueOf(analysis.getWptPoints()));
 
 		ImageView timeIcon = trackInfoContainer.findViewById(R.id.time_icon);
 		if (analysis.isTimeSpecified()) {
@@ -254,17 +257,17 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 			timeIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_16));
 
 			TextView timeText = trackInfoContainer.findViewById(R.id.time);
-			int duration = (int) (analysis.timeSpan / 1000);
+			int duration = analysis.getDurationInSeconds();
 			timeText.setText(Algorithms.formatDuration(duration, app.accessibilityEnabled()));
 		} else {
 			AndroidUiHelper.updateVisibility(timeIcon, false);
 		}
 
-		setupCutOffSlider(trackInfoContainer.getRootView(), app, (int) (analysis.totalDistance / CUTOFF_STEP_SIZE) * CUTOFF_STEP_SIZE);
+		setupCutOffSlider(trackInfoContainer.getRootView(), app, (int) (analysis.getTotalDistance() / CUTOFF_STEP_SIZE) * CUTOFF_STEP_SIZE);
 	}
 
 	private void showSelectTrackFileDialog(@NonNull MapActivity mapActivity, CallbackWithObject<String> onFileSelect) {
-		SelectTrackFileDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), getDialog(mapActivity), onFileSelect);
+		SelectTrackTabsFragment.showInstance(mapActivity.getSupportFragmentManager(), onFileSelect != null ? onFileSelect : getDialog(mapActivity));
 	}
 
 	private void setupSpeedUpSlider(@NonNull View container, @NonNull OsmandApplication app) {
@@ -305,7 +308,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 	}
 
 	@Override
-	public String getActionText(OsmandApplication app) {
+	public String getActionText(@NonNull OsmandApplication app) {
 		OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
 		if (sim.isRouteAnimating()) {
 			return app.getString(R.string.stop_navigation_service);
@@ -397,7 +400,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 
 	private void getGpxFile(@NonNull String gpxFilePath,
 	                        @NonNull MapActivity mapActivity,
-	                        @NonNull CallbackWithObject<GPXFile> onGpxFileAvailable) {
+	                        @NonNull CallbackWithObject<GpxFile> onGpxFileAvailable) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		if (gpxFilePath.isEmpty()) {
 			onGpxFileAvailable.processResult(app.getSavingTrackHelper().getCurrentGpx());
@@ -406,7 +409,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 			if (selectedGpxFile != null) {
 				onGpxFileAvailable.processResult(selectedGpxFile.getGpxFile());
 			} else {
-				CallbackWithObject<GPXFile[]> onGpxFileLoaded = gpxFiles -> {
+				CallbackWithObject<GpxFile[]> onGpxFileLoaded = gpxFiles -> {
 					onGpxFileAvailable.processResult(gpxFiles[0]);
 					return true;
 				};

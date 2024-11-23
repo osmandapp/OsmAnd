@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
- xmlns:osmand="http://schemas.android.com/apk/res-auto"
+ xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/prev_route_card"
 	android:layout_width="match_parent"
@@ -19,7 +19,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:scaleType="fitXY"
-			osmand:srcCompat="@drawable/bg_shadow_list_top" />
+			app:srcCompat="@drawable/bg_shadow_list_top" />
 
 	</LinearLayout>
 
@@ -59,6 +59,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:minHeight="40dp"
+			android:paddingTop="@dimen/list_header_padding"
 			android:paddingBottom="@dimen/list_header_padding"
 			android:background="?attr/selectableItemBackground"
 			android:gravity="center_vertical"
@@ -72,7 +73,7 @@
 				android:layout_marginLeft="@dimen/list_content_padding"
 				android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 				android:layout_marginRight="@dimen/favorites_icon_right_margin"
-				osmand:srcCompat="@drawable/ic_action_previous_route"
+				app:srcCompat="@drawable/ic_action_previous_route"
 				android:tint="@color/icon_color_default_light" />
 
 			<LinearLayout
@@ -98,6 +99,7 @@
 					android:id="@+id/destination_title"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:layout_marginTop="5dp"
 					android:textColor="?android:textColorPrimary"
 					android:ellipsize="end"
 					android:letterSpacing="@dimen/text_button_letter_spacing"
@@ -121,7 +123,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:scaleType="fitXY"
-			osmand:srcCompat="@drawable/bg_shadow_list_bottom" />
+			app:srcCompat="@drawable/bg_shadow_list_bottom" />
 
 	</LinearLayout>
 

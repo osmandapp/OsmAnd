@@ -9,6 +9,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_DESCRIPTIO
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_PROMO_ID;
 import static net.osmand.plus.download.DownloadActivityType.GEOTIFF_FILE;
+import static net.osmand.plus.plugins.srtm.CollectColorPalletTask.CollectColorPalletListener;
 import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 
 import android.app.Activity;
@@ -38,7 +39,6 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
@@ -74,29 +74,23 @@ public class SRTMPlugin extends OsmandPlugin {
 	public static final String CONTOUR_WIDTH_ATTR = "contourWidth";
 	public static final String CONTOUR_DENSITY_ATTR = "contourDensity";
 
-	public static final String SLOPE_MAIN_COLOR_FILENAME = "slopes_main.txt";
-	public static final String HILLSHADE_MAIN_COLOR_FILENAME = "hillshade_main.txt";
-	public static final String SLOPE_SECONDARY_COLOR_FILENAME = "color_slope.txt";
-
 	public static final int TERRAIN_MIN_SUPPORTED_ZOOM = 4;
 	public static final int TERRAIN_MAX_SUPPORTED_ZOOM = 19;
 
-	public final CommonPreference<Integer> HILLSHADE_MIN_ZOOM;
-	public final CommonPreference<Integer> HILLSHADE_MAX_ZOOM;
-	public final CommonPreference<Integer> HILLSHADE_TRANSPARENCY;
+	public static final float MIN_VERTICAL_EXAGGERATION = 1.0f;
+	public static final float MAX_VERTICAL_EXAGGERATION = 3.0f;
 
-	public final CommonPreference<Integer> SLOPE_MIN_ZOOM;
-	public final CommonPreference<Integer> SLOPE_MAX_ZOOM;
-	public final CommonPreference<Integer> SLOPE_TRANSPARENCY;
 
 	public final CommonPreference<Boolean> TERRAIN;
-	public final CommonPreference<TerrainMode> TERRAIN_MODE;
+	public final CommonPreference<String> TERRAIN_MODE;
+
 
 	public final CommonPreference<String> CONTOUR_LINES_ZOOM;
 
 	private final StateChangedListener<Boolean> enable3DMapsListener;
 	private final StateChangedListener<Boolean> terrainListener;
-	private final StateChangedListener<TerrainMode> terrainModeListener;
+	private final StateChangedListener<String> terrainModeListener;
+	private final StateChangedListener<Float> verticalExaggerationListener;
 
 	private TerrainLayer terrainLayer;
 
@@ -108,16 +102,10 @@ public class SRTMPlugin extends OsmandPlugin {
 	public SRTMPlugin(OsmandApplication app) {
 		super(app);
 
-		HILLSHADE_MIN_ZOOM = registerIntPreference("hillshade_min_zoom", 3).makeProfile();
-		HILLSHADE_MAX_ZOOM = registerIntPreference("hillshade_max_zoom", 17).makeProfile();
-		HILLSHADE_TRANSPARENCY = registerIntPreference("hillshade_transparency", 100).makeProfile();
-
-		SLOPE_MIN_ZOOM = registerIntPreference("slope_min_zoom", 3).makeProfile();
-		SLOPE_MAX_ZOOM = registerIntPreference("slope_max_zoom", 17).makeProfile();
-		SLOPE_TRANSPARENCY = registerIntPreference("slope_transparency", 80).makeProfile();
 
 		TERRAIN = registerBooleanPreference("terrain_layer", true).makeProfile();
-		TERRAIN_MODE = registerEnumStringPreference("terrain_mode", TerrainMode.HILLSHADE, TerrainMode.values(), TerrainMode.class).makeProfile();
+		TerrainMode[] tms = TerrainMode.values(app);
+		TERRAIN_MODE = registerStringPreference("terrain_mode", tms.length == 0 ? "" : tms[0].getKeyName()).makeProfile();
 
 		CONTOUR_LINES_ZOOM = registerStringPreference("contour_lines_zoom", null).makeProfile().cache();
 
@@ -144,6 +132,13 @@ public class SRTMPlugin extends OsmandPlugin {
 			}
 		});
 		TERRAIN_MODE.addListener(terrainModeListener);
+		verticalExaggerationListener = scale -> {
+			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+			if (mapContext != null) {
+				mapContext.updateVerticalExaggerationScale();
+			}
+		};
+		app.getSettings().VERTICAL_EXAGGERATION_SCALE.addListener(verticalExaggerationListener);
 	}
 
 	@Override
@@ -212,14 +207,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	@Override
 	public boolean init(@NonNull OsmandApplication app, Activity activity) {
 		OsmandSettings settings = app.getSettings();
-		CommonPreference<String> pref = settings.getCustomRenderProperty("contourLines");
-		if (pref.get().isEmpty()) {
-			for (ApplicationMode m : ApplicationMode.allPossibleValues()) {
-				if (pref.getModeValue(m).isEmpty()) {
-					pref.setModeValue(m, "13");
-				}
-			}
-		}
+		settings.getCustomRenderProperty(CONTOUR_LINES_ATTR).setDefaultValue("13");
 		return true;
 	}
 
@@ -235,6 +223,24 @@ public class SRTMPlugin extends OsmandPlugin {
 		}
 	}
 
+	@Override
+	public void setEnabled(boolean enabled) {
+		super.setEnabled(enabled);
+		MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+		if (mapRendererContext != null) {
+			updateMapPresentationEnvironment(mapRendererContext);
+		}
+	}
+
+	// If enabled, map should be rendered with elevation data (in 3D)
+	public boolean is3DMapsEnabled() {
+		return is3DReliefAllowed() && settings.ENABLE_3D_MAPS.get();
+	}
+
+	public boolean is3DReliefAllowed() {
+		return app.useOpenGlRenderer() && InAppPurchaseUtils.is3dMapsAvailable(app);
+	}
+
 	public boolean isTerrainLayerEnabled() {
 		return TERRAIN.get();
 	}
@@ -243,106 +249,63 @@ public class SRTMPlugin extends OsmandPlugin {
 		TERRAIN.set(enabled);
 	}
 
-	public boolean isSlopeMode() {
-		return getTerrainMode() == TerrainMode.SLOPE;
-	}
 
 	public boolean isHillshadeMode() {
-		return getTerrainMode() == TerrainMode.HILLSHADE;
+		return getTerrainMode().isHillshade();
 	}
 
 	public TerrainMode getTerrainMode() {
-		return TERRAIN_MODE.get();
+		return TerrainMode.getByKey(TERRAIN_MODE.get());
 	}
 
 	public void setTerrainMode(TerrainMode mode) {
-		TERRAIN_MODE.set(mode);
+		TERRAIN_MODE.set(mode.getKeyName());
 	}
 
 	public void setTerrainTransparency(int transparency, TerrainMode mode) {
-		switch (mode) {
-			case HILLSHADE:
-				HILLSHADE_TRANSPARENCY.set(transparency);
-				break;
-			case SLOPE:
-				SLOPE_TRANSPARENCY.set(transparency);
-				break;
-		}
+		mode.setTransparency(transparency);
 	}
 
 	public void setTerrainZoomValues(int minZoom, int maxZoom, TerrainMode mode) {
-		switch (mode) {
-			case HILLSHADE:
-				HILLSHADE_MIN_ZOOM.set(minZoom);
-				HILLSHADE_MAX_ZOOM.set(maxZoom);
-				break;
-			case SLOPE:
-				SLOPE_MIN_ZOOM.set(minZoom);
-				SLOPE_MAX_ZOOM.set(maxZoom);
-				break;
-		}
+		mode.setZoomValues(minZoom, maxZoom);
+	}
+
+	public static float normalizeVerticalExaggerationScale(float scale) {
+		return Math.max(MIN_VERTICAL_EXAGGERATION, Math.min(MAX_VERTICAL_EXAGGERATION, scale));
+	}
+
+	public float getVerticalExaggerationScale() {
+		return normalizeVerticalExaggerationScale(app.getSettings().VERTICAL_EXAGGERATION_SCALE.get());
+	}
+
+	public void setVerticalExaggerationScale(float scale) {
+		app.getSettings().VERTICAL_EXAGGERATION_SCALE.set(normalizeVerticalExaggerationScale(scale));
 	}
 
 	public int getTerrainTransparency() {
-		switch (getTerrainMode()) {
-			case HILLSHADE:
-				return HILLSHADE_TRANSPARENCY.get();
-			case SLOPE:
-				return SLOPE_TRANSPARENCY.get();
-		}
-		return 100;
+		return getTerrainMode().getTransparency();
 	}
 
 	public void resetZoomLevelsToDefault() {
-		switch (getTerrainMode()) {
-			case HILLSHADE:
-				HILLSHADE_MIN_ZOOM.resetToDefault();
-				HILLSHADE_MAX_ZOOM.resetToDefault();
-				break;
-			case SLOPE:
-				SLOPE_MIN_ZOOM.resetToDefault();
-				SLOPE_MAX_ZOOM.resetToDefault();
-				break;
-		}
+		getTerrainMode().resetZoomsToDefault();
 	}
 
 	public void resetTransparencyToDefault() {
-		switch (getTerrainMode()) {
-			case HILLSHADE:
-				HILLSHADE_TRANSPARENCY.resetToDefault();
-				break;
-			case SLOPE:
-				SLOPE_TRANSPARENCY.resetToDefault();
-				break;
-		}
+		getTerrainMode().resetTransparencyToDefault();
+	}
+
+	public void resetVerticalExaggerationToDefault() {
+		app.getSettings().VERTICAL_EXAGGERATION_SCALE.resetToDefault();
 	}
 
 	public int getTerrainMinZoom() {
 		int minSupportedZoom = TERRAIN_MIN_SUPPORTED_ZOOM;
-		int minZoom = minSupportedZoom;
-		switch (getTerrainMode()) {
-			case HILLSHADE:
-				minZoom = HILLSHADE_MIN_ZOOM.get();
-				break;
-			case SLOPE:
-				minZoom = SLOPE_MIN_ZOOM.get();
-				break;
-		}
-		return Math.max(minSupportedZoom, minZoom);
+		return Math.max(minSupportedZoom, getTerrainMode().getMinZoom());
 	}
 
 	public int getTerrainMaxZoom() {
 		int maxSupportedZoom = TERRAIN_MAX_SUPPORTED_ZOOM;
-		int maxZoom = maxSupportedZoom;
-		switch (getTerrainMode()) {
-			case HILLSHADE:
-				maxZoom = HILLSHADE_MAX_ZOOM.get();
-				break;
-			case SLOPE:
-				maxZoom = SLOPE_MAX_ZOOM.get();
-				break;
-		}
-		return Math.min(maxSupportedZoom, maxZoom);
+		return Math.min(maxSupportedZoom, getTerrainMode().getMaxZoom());
 	}
 
 	public static boolean isContourLinesLayerEnabled(OsmandApplication app) {
@@ -393,9 +356,6 @@ public class SRTMPlugin extends OsmandPlugin {
 				addTerrainDescriptionItem(adapter, mapActivity);
 			} else {
 				createContextMenuItems(adapter, mapActivity);
-				if (app.useOpenGlRenderer()) {
-					add3DReliefItem(adapter, mapActivity);
-				}
 			}
 			NauticalMapsPlugin nauticalPlugin = PluginsHelper.getPlugin(NauticalMapsPlugin.class);
 			if (nauticalPlugin != null) {
@@ -426,7 +386,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		ItemClickListener listener = new OnRowItemClick() {
 
 			@Override
-			public boolean onRowItemClick(@NonNull @NotNull OnDataChangeUiAdapter uiAdapter, @NonNull @NotNull View view, @NonNull @NotNull ContextMenuItem item) {
+			public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter, @NonNull View view, @NonNull ContextMenuItem item) {
 				int[] viewCoordinates = AndroidUtils.getCenterViewCoordinates(view);
 				int itemId = item.getTitleId();
 				if (itemId == R.string.download_srtm_maps) {
@@ -434,6 +394,13 @@ public class SRTMPlugin extends OsmandPlugin {
 					return false;
 				} else if (itemId == R.string.shared_string_terrain) {
 					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.TERRAIN, viewCoordinates);
+					return false;
+				} else if (itemId == R.string.relief_3d) {
+					if (InAppPurchaseUtils.is3dMapsAvailable(app)) {
+						mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.RELIEF_3D, viewCoordinates);
+					} else {
+						ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.RELIEF_3D);
+					}
 					return false;
 				}
 				return true;
@@ -473,6 +440,18 @@ public class SRTMPlugin extends OsmandPlugin {
 						updateLayers(mapActivity, mapActivity);
 						mapActivity.refreshMapComplete();
 					});
+				} else if (itemId == R.string.relief_3d) {
+					if (InAppPurchaseUtils.is3dMapsAvailable(app)) {
+						settings.ENABLE_3D_MAPS.set(isChecked);
+						item.setColor(app, isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+						item.setSelected(isChecked);
+						item.setDescription(app.getString(isChecked ? R.string.shared_string_on : R.string.shared_string_off));
+						uiAdapter.onDataSetChanged();
+
+						app.runInUIThread(() -> app.getOsmandMap().getMapLayers().getMapInfoLayer().recreateAllControls(mapActivity));
+					} else {
+						ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.RELIEF_3D);
+					}
 				}
 				return true;
 			}
@@ -494,12 +473,10 @@ public class SRTMPlugin extends OsmandPlugin {
 					.setListener(listener));
 		}
 		boolean terrainEnabled = TERRAIN.get();
-		TerrainMode terrainMode = TERRAIN_MODE.get();
+		TerrainMode terrainMode = TerrainMode.getByKey(TERRAIN_MODE.get());
 		adapter.addItem(new ContextMenuItem(TERRAIN_ID)
 				.setTitleId(R.string.shared_string_terrain, mapActivity)
-				.setDescription(app.getString(terrainMode == TerrainMode.HILLSHADE
-						? R.string.shared_string_hillshade
-						: R.string.download_slope_maps))
+				.setDescription(terrainMode.getType().getName(app))
 				.setSelected(terrainEnabled)
 				.setColor(app, terrainEnabled ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_hillshade_dark)
@@ -508,35 +485,26 @@ public class SRTMPlugin extends OsmandPlugin {
 				.setListener(listener)
 
 		);
+		if (app.useOpenGlRenderer()) {
+			add3DReliefItem(adapter, mapActivity, listener);
+		}
 	}
 
-	private void add3DReliefItem(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity activity) {
+	private void add3DReliefItem(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity activity, @NonNull ItemClickListener listener) {
 		ContextMenuItem item = new ContextMenuItem(RELIEF_3D_ID)
 				.setTitleId(R.string.relief_3d, app)
 				.setIcon(R.drawable.ic_action_3d_relief)
-				.setListener((uiAdapter, view, contextItem, isChecked) -> {
-					if (InAppPurchaseUtils.is3dMapsAvailable(app)) {
-						settings.ENABLE_3D_MAPS.set(isChecked);
-						contextItem.setColor(app, isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-						contextItem.setSelected(isChecked);
-						contextItem.setDescription(app.getString(isChecked ? R.string.shared_string_on : R.string.shared_string_off));
-						uiAdapter.onDataSetChanged();
-
-						app.runInUIThread(() -> app.getOsmandMap().getMapLayers().getMapInfoLayer().recreateAllControls(activity));
-					} else {
-						ChoosePlanFragment.showInstance(activity, OsmAndFeature.RELIEF_3D);
-					}
-					return false;
-				});
+				.setListener(listener);
 
 		boolean enabled3DMode = settings.ENABLE_3D_MAPS.get();
 		if (!InAppPurchaseUtils.is3dMapsAvailable(app)) {
 			boolean nightMode = isNightMode(activity, app);
 			item.setUseNaturalSecondIconColor(true);
-			item.setSecondaryIcon(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day);
+			item.setSecondaryIcon(PurchasingUtils.getProFeatureIconId(nightMode));
 		} else {
 			item.setColor(app, enabled3DMode ? R.color.osmand_orange : INVALID_ID);
 			item.setSelected(enabled3DMode);
+			item.setSecondaryIcon(R.drawable.ic_action_additional_option);
 			item.setDescription(app.getString(enabled3DMode ? R.string.shared_string_on : R.string.shared_string_off));
 		}
 		adapter.addItem(item);
@@ -667,6 +635,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		List<QuickActionType> quickActionTypes = new ArrayList<>();
 		quickActionTypes.add(ContourLinesAction.TYPE);
 		quickActionTypes.add(TerrainAction.TYPE);
+		quickActionTypes.add(TerrainColorSchemeAction.TYPE);
 		return quickActionTypes;
 	}
 
@@ -698,5 +667,10 @@ public class SRTMPlugin extends OsmandPlugin {
 	public void updateMapPresentationEnvironment(@NonNull MapRendererContext mapRendererContext) {
 		mapRendererContext.updateElevationConfiguration();
 		mapRendererContext.recreateHeightmapProvider();
+		mapRendererContext.updateVerticalExaggerationScale();
+	}
+
+	public void getTerrainModeIcon(@NonNull String modeKey, @NonNull CollectColorPalletListener listener) {
+		app.getColorPaletteHelper().getColorPaletteAsync(modeKey, listener);
 	}
 }

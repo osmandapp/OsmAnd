@@ -1,5 +1,6 @@
 package net.osmand.plus.search;
 
+import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 
 import android.view.View;
@@ -10,17 +11,15 @@ import androidx.annotation.Nullable;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -49,6 +48,7 @@ import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
@@ -158,25 +158,18 @@ public class QuickSearchHelper implements ResourceListener {
 	}
 
 	public void setRepositoriesForSearchUICore(OsmandApplication app) {
-		BinaryMapIndexReader[] binaryMapIndexReaderArray = app.getResourceManager().getQuickSearchFiles();
+		List<String> ignoreExtensions = new ArrayList<>();
+		if (!app.getSettings().SHOW_TRAVEL.get()) {
+			ignoreExtensions.add(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT);
+		}
+		BinaryMapIndexReader[] binaryMapIndexReaderArray = app.getResourceManager().getQuickSearchFiles(ignoreExtensions);
 		core.getSearchSettings().setOfflineIndexes(Arrays.asList(binaryMapIndexReaderArray));
 		core.getSearchSettings().setRegions(app.getRegions());
 	}
 
 	public Amenity findAmenity(String name, double lat, double lon, String lang, boolean transliterate) {
 		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
-		List<Amenity> amenities = app.getResourceManager().searchAmenities(
-				new SearchPoiTypeFilter() {
-					@Override
-					public boolean accept(PoiCategory type, String subcategory) {
-						return true;
-					}
-
-					@Override
-					public boolean isEmpty() {
-						return false;
-					}
-				}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
+		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true);
 
 		MapPoiTypes types = app.getPoiTypes();
 		for (Amenity amenity : amenities) {
@@ -224,16 +217,16 @@ public class QuickSearchHelper implements ResourceListener {
 
 			List<SelectedGpxFile> list = app.getSelectedGpxHelper().getSelectedGPXFiles();
 			for (SelectedGpxFile selectedGpx : list) {
-				for (WptPt point : selectedGpx.getGpxFile().getPoints()) {
+				for (WptPt point : selectedGpx.getGpxFile().getPointsList()) {
 					SearchResult sr = new SearchResult(phrase);
-					sr.localeName = point.name;
+					sr.localeName = point.getName();
 					sr.object = point;
 					sr.priority = SEARCH_WPT_OBJECT_PRIORITY;
 					sr.objectType = ObjectType.WPT;
 					sr.location = new LatLon(point.getLatitude(), point.getLongitude());
 					//sr.localeRelatedObjectName = app.getRegions().getCountryName(sr.location);
 					sr.relatedObject = selectedGpx.getGpxFile();
-					sr.preferredZoom = 17;
+					sr.preferredZoom = SearchCoreFactory.PREFERRED_WPT_ZOOM;
 					if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
 						resultMatcher.publish(sr);
 					} else {
@@ -284,7 +277,7 @@ public class QuickSearchHelper implements ResourceListener {
 					sr.object = group;
 					sr.priority = SEARCH_FAVORITE_CATEGORY_PRIORITY;
 					sr.objectType = ObjectType.FAVORITE_GROUP;
-					sr.preferredZoom = 17;
+					sr.preferredZoom = SearchCoreFactory.PREFERRED_FAVORITES_GROUP_ZOOM;
 					if (phrase.getFirstUnknownNameStringMatcher().matches(sr.localeName)) {
 						if (group.getPoints().size() < 5) {
 							for (FavouritePoint point : group.getPoints()) {
@@ -294,7 +287,7 @@ public class QuickSearchHelper implements ResourceListener {
 								srp.priority = SEARCH_FAVORITE_OBJECT_PRIORITY;
 								srp.objectType = ObjectType.FAVORITE;
 								srp.location = new LatLon(point.getLatitude(), point.getLongitude());
-								srp.preferredZoom = 17;
+								srp.preferredZoom = SearchCoreFactory.PREFERRED_FAVORITE_ZOOM;
 								resultMatcher.publish(srp);
 							}
 						} else {
@@ -342,7 +335,7 @@ public class QuickSearchHelper implements ResourceListener {
 				sr.priority = SEARCH_FAVORITE_OBJECT_PRIORITY;
 				sr.objectType = ObjectType.FAVORITE;
 				sr.location = new LatLon(point.getLatitude(), point.getLongitude());
-				sr.preferredZoom = 17;
+				sr.preferredZoom = SearchCoreFactory.PREFERRED_FAVORITE_ZOOM;
 				if (phrase.isLastWord(ObjectType.FAVORITE_GROUP)) {
 					FavoriteGroup group = (FavoriteGroup) phrase.getLastSelectedWord().getResult().object;
 					if (group != null && !point.getCategory().equals(group.getName())) {
@@ -384,7 +377,7 @@ public class QuickSearchHelper implements ResourceListener {
 		public SearchOnlineApi(OsmandApplication app) {
 			super(ObjectType.ONLINE_SEARCH);
 			this.app = app;
-			this.filter = app.getPoiFilters().getNominatimPOIFilter();
+			this.filter = app.getPoiFilters().getNominatimAddressFilter();
 		}
 
 		@Override
@@ -429,7 +422,7 @@ public class QuickSearchHelper implements ResourceListener {
 			sr.priority = SEARCH_ONLINE_AMENITY_PRIORITY;
 			sr.objectType = ObjectType.POI;
 			sr.location = amenity.getLocation();
-			sr.preferredZoom = 17;
+			sr.preferredZoom = SearchCoreFactory.PREFERRED_POI_ZOOM;
 			return sr;
 		}
 
@@ -524,7 +517,7 @@ public class QuickSearchHelper implements ResourceListener {
 				result.object = entry;
 				result.objectType = ObjectType.RECENT_OBJ;
 				result.location = new LatLon(entry.getLat(), entry.getLon());
-				result.preferredZoom = 17;
+				result.preferredZoom = SearchCoreFactory.PREFERRED_DEFAULT_RECENT_ZOOM;
 			}
 			return result;
 		}
@@ -558,7 +551,7 @@ public class QuickSearchHelper implements ResourceListener {
 				searchResult.localeName = GpxUiHelper.getGpxFileRelativePath(app, gpxInfo.getFileName());
 				searchResult.relatedObject = gpxInfo;
 				searchResult.priority = SEARCH_TRACK_OBJECT_PRIORITY;
-				searchResult.preferredZoom = 17;
+				searchResult.preferredZoom = SearchCoreFactory.PREFERRED_GPX_FILE_ZOOM;
 				if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
 					resultMatcher.publish(searchResult);
 				} else {
@@ -651,7 +644,7 @@ public class QuickSearchHelper implements ResourceListener {
 				searchResult.localeName = name;
 				searchResult.relatedObject = indexItem;
 				searchResult.priority = SEARCH_INDEX_ITEM_PRIORITY;
-				searchResult.preferredZoom = 17;
+				searchResult.preferredZoom = SearchCoreFactory.PREFERRED_INDEX_ITEM_ZOOM;
 				resultMatcher.publish(searchResult);
 			}
 
@@ -707,8 +700,7 @@ public class QuickSearchHelper implements ResourceListener {
 		controller.setOnCloseButtonClickListener(v -> hidePoiFilterOnMap(mapActivity, controller, action));
 		controller.setTitle(filter.getName());
 		PoiFiltersHelper helper = mapActivity.getMyApplication().getPoiFilters();
-		helper.clearSelectedPoiFilters();
-		helper.addSelectedPoiFilter(filter);
+		helper.replaceSelectedPoiFilters(filter);
 		mapActivity.showTopToolbar(controller);
 		mapActivity.refreshMap();
 	}
@@ -717,7 +709,7 @@ public class QuickSearchHelper implements ResourceListener {
 	                                       @NonNull TopToolbarController controller,
 	                                       @Nullable Runnable action) {
 		mapActivity.hideTopToolbar(controller);
-		mapActivity.getMyApplication().getPoiFilters().clearSelectedPoiFilters();
+		mapActivity.getMyApplication().getPoiFilters().restoreSelectedPoiFilters();
 		mapActivity.refreshMap();
 		if (action != null) {
 			action.run();

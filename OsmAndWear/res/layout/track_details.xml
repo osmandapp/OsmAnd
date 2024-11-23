@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/plan_route_info"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -47,7 +47,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/list_content_padding"
                         android:layout_marginRight="@dimen/list_content_padding"
-                        osmand:srcCompat="@drawable/ic_action_altitude_average"
+                        app:srcCompat="@drawable/ic_action_altitude_average"
 	                    android:layout_marginEnd="@dimen/list_content_padding"
 	                    android:layout_marginStart="@dimen/list_content_padding" />
 
@@ -67,7 +67,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginRight="8dp"
-                        osmand:srcCompat="@drawable/ic_action_arrow_drop_down"
+                        app:srcCompat="@drawable/ic_action_arrow_drop_down"
 	                    android:layout_marginEnd="8dp" />
 
                 </LinearLayout>
@@ -98,7 +98,7 @@
                         android:layout_marginEnd="@dimen/list_content_padding"
                         android:layout_marginRight="@dimen/list_content_padding"
                         android:translationX="-15dp"
-                        osmand:srcCompat="@drawable/ic_action_marker_dark" />
+                        app:srcCompat="@drawable/ic_action_marker_dark" />
 
                     <TextView
                         android:id="@+id/x_axis_title"
@@ -119,7 +119,7 @@
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
                         android:translationX="-20dp"
-                        osmand:srcCompat="@drawable/ic_action_arrow_drop_down" />
+                        app:srcCompat="@drawable/ic_action_arrow_drop_down" />
 
                 </LinearLayout>
 
@@ -140,7 +140,7 @@
                 android:background="?attr/bg_color"
                 android:paddingTop="8dp">
 
-                <com.github.mikephil.charting.charts.LineChart
+                <com.github.mikephil.charting.charts.ElevationChart
                     android:id="@+id/chart"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"

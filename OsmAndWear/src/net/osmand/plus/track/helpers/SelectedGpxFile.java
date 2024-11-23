@@ -3,17 +3,20 @@ package net.osmand.plus.track.helpers;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.core.jni.PointI;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.core.jni.AreaI;
+import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.TrackArea;
 import net.osmand.data.QuadRect;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -21,9 +24,7 @@ import net.osmand.util.MapUtils;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 public class SelectedGpxFile {
@@ -31,12 +32,11 @@ public class SelectedGpxFile {
 	public boolean notShowNavigationDialog;
 	public boolean selectedByUser = true;
 
-	protected GPXFile gpxFile;
-	protected GPXTrackAnalysis trackAnalysis;
+	protected GpxFile gpxFile;
+	protected GpxTrackAnalysis trackAnalysis;
 
-	protected Set<String> hiddenGroups = new HashSet<>();
 	protected List<TrkSegment> processedPointsToDisplay = new ArrayList<>();
-	protected List<GpxDisplayGroup> displayGroups;
+	protected List<GpxDisplayGroup> splitGroups;
 
 	@NonNull
 	protected QuadRect bounds = new QuadRect();
@@ -54,10 +54,10 @@ public class SelectedGpxFile {
 
 	private FilteredSelectedGpxFile filteredSelectedGpxFile;
 
-	public void setGpxFile(@NonNull GPXFile gpxFile, @NonNull OsmandApplication app) {
+	public void setGpxFile(@NonNull GpxFile gpxFile, @NonNull OsmandApplication app) {
 		this.gpxFile = gpxFile;
-		if (!Algorithms.isEmpty(gpxFile.tracks)) {
-			this.color = gpxFile.tracks.get(0).getColor(0);
+		if (!Algorithms.isEmpty(gpxFile.getTracks())) {
+			this.color = gpxFile.getTracks().get(0).getColor(0);
 		}
 		processPoints(app);
 		if (filteredSelectedGpxFile != null) {
@@ -66,39 +66,39 @@ public class SelectedGpxFile {
 	}
 
 	public boolean isLoaded() {
-		return gpxFile.modifiedTime != -1;
+		return gpxFile.getModifiedTime() != -1;
 	}
 
-	public GPXTrackAnalysis getTrackAnalysis(OsmandApplication app) {
-		if (modifiedTime != gpxFile.modifiedTime) {
+	public GpxTrackAnalysis getTrackAnalysis(OsmandApplication app) {
+		if (modifiedTime != gpxFile.getModifiedTime()) {
 			update(app);
 		}
 		return trackAnalysis;
 	}
 
-	public GPXTrackAnalysis getTrackAnalysisToDisplay(OsmandApplication app) {
+	public GpxTrackAnalysis getTrackAnalysisToDisplay(OsmandApplication app) {
 		return filteredSelectedGpxFile != null
 				? filteredSelectedGpxFile.getTrackAnalysis(app)
 				: getTrackAnalysis(app);
 	}
 
-	public void setTrackAnalysis(@NonNull GPXTrackAnalysis trackAnalysis) {
+	public void setTrackAnalysis(@NonNull GpxTrackAnalysis trackAnalysis) {
 		this.trackAnalysis = trackAnalysis;
 	}
 
-	public void setDisplayGroups(@Nullable List<GpxDisplayGroup> displayGroups) {
-		this.displayGroups = displayGroups;
+	public void setSplitGroups(@Nullable List<GpxDisplayGroup> splitGroups) {
+		this.splitGroups = splitGroups;
 		this.splitProcessed = true;
 	}
 
 	protected void update(@NonNull OsmandApplication app) {
-		modifiedTime = gpxFile.modifiedTime;
-		pointsModifiedTime = gpxFile.pointsModifiedTime;
+		modifiedTime = gpxFile.getModifiedTime();
+		pointsModifiedTime = gpxFile.getPointsModifiedTime();
 
-		long fileTimestamp = Algorithms.isEmpty(gpxFile.path)
+		long fileTimestamp = Algorithms.isEmpty(gpxFile.getPath())
 				? System.currentTimeMillis()
-				: new File(gpxFile.path).lastModified();
-		trackAnalysis = gpxFile.getAnalysis(fileTimestamp);
+				: new File(gpxFile.getPath()).lastModified();
+		trackAnalysis = gpxFile.getAnalysis(fileTimestamp, null, null, PluginsHelper.getTrackPointsAnalyser());
 
 		updateSplit(app);
 
@@ -108,7 +108,7 @@ public class SelectedGpxFile {
 	}
 
 	private void updateSplit(@NonNull OsmandApplication app) {
-		displayGroups = null;
+		splitGroups = null;
 		if (showCurrentTrack) {
 			splitProcessed = true;
 		} else {
@@ -122,7 +122,7 @@ public class SelectedGpxFile {
 	public void processPoints(@NonNull OsmandApplication app) {
 		update(app);
 
-		processedPointsToDisplay = gpxFile.proccessPoints();
+		processedPointsToDisplay = gpxFile.processPoints();
 		routePoints = false;
 		if (processedPointsToDisplay.isEmpty()) {
 			processedPointsToDisplay = gpxFile.processRoutePoints();
@@ -147,7 +147,7 @@ public class SelectedGpxFile {
 			return filteredSelectedGpxFile.getPointsToDisplay();
 		} else if (joinSegments) {
 			return gpxFile != null && gpxFile.getGeneralTrack() != null
-					? gpxFile.getGeneralTrack().segments
+					? gpxFile.getGeneralTrack().getSegments()
 					: Collections.emptyList();
 		} else {
 			return processedPointsToDisplay;
@@ -167,12 +167,13 @@ public class SelectedGpxFile {
 			lastSegment = processedPointsToDisplay.get(processedPointsToDisplay.size() - 1);
 		}
 
-		lastSegment.points.add(point);
+		lastSegment.getPoints().add(point);
 
 		boolean hasCalculatedBounds = !bounds.hasInitialState();
 		if (hasCalculatedBounds) {
 			// Update already calculated bounds without iterating all points
-			GPXUtilities.updateBounds(bounds, Collections.singletonList(point), 0);
+			GpxUtilities.INSTANCE.updateBounds(
+					SharedUtil.kQuadRect(bounds), Collections.singletonList(point), 0);
 		} else {
 			updateBounds();
 		}
@@ -182,8 +183,8 @@ public class SelectedGpxFile {
 			if (area == null) {
 				area = new TrackArea();
 			}
-			int x31 = MapUtils.get31TileNumberX(point.lon);
-			int y31 = MapUtils.get31TileNumberY(point.lat);
+			int x31 = MapUtils.get31TileNumberX(point.getLon());
+			int y31 = MapUtils.get31TileNumberY(point.getLat());
 			area.add(new PointI(x31, y31));
 		}
 	}
@@ -214,7 +215,7 @@ public class SelectedGpxFile {
 	}
 
 	protected final void updateBounds() {
-		bounds = GPXUtilities.calculateTrackBounds(processedPointsToDisplay);
+		bounds = SharedUtil.jQuadRect(GpxUtilities.INSTANCE.calculateTrackBounds(processedPointsToDisplay));
 	}
 
 	protected final void updateArea(boolean hasMapRenderer) {
@@ -225,44 +226,39 @@ public class SelectedGpxFile {
 
 		area = new TrackArea();
 		for (TrkSegment segment : processedPointsToDisplay) {
-			for (WptPt point : segment.points) {
-				int x31 = MapUtils.get31TileNumberX(point.lon);
-				int y31 = MapUtils.get31TileNumberY(point.lat);
+			for (WptPt point : segment.getPoints()) {
+				int x31 = MapUtils.get31TileNumberX(point.getLongitude());
+				int y31 = MapUtils.get31TileNumberY(point.getLatitude());
 				area.add(new PointI(x31, y31));
 			}
 		}
 	}
 
-	public Set<String> getHiddenGroups() {
-		return Collections.unmodifiableSet(hiddenGroups);
-	}
-
 	public int getHiddenGroupsCount() {
-		return hiddenGroups.size();
+		int counter = 0;
+		for (PointsGroup group : new ArrayList<>(gpxFile.getPointsGroups().values())) {
+			if (group.isHidden()) {
+				counter++;
+			}
+		}
+		return counter;
 	}
 
-	public void addHiddenGroups(@Nullable String group) {
-		hiddenGroups.add(Algorithms.isBlank(group) ? null : group);
-	}
-
-	public void removeHiddenGroups(@Nullable String group) {
-		hiddenGroups.remove(Algorithms.isBlank(group) ? null : group);
-	}
-
-	public boolean isGroupHidden(@Nullable String group) {
-		return hiddenGroups.contains(Algorithms.isBlank(group) ? null : group);
+	public boolean isGroupHidden(@Nullable String name) {
+		PointsGroup pointsGroup = gpxFile.getPointsGroups().get(name != null ? name : "");
+		return pointsGroup != null && pointsGroup.isHidden();
 	}
 
 	@NonNull
-	public GPXFile getGpxFile() {
+	public GpxFile getGpxFile() {
 		return gpxFile;
 	}
 
-	public GPXFile getGpxFileToDisplay() {
+	public GpxFile getGpxFileToDisplay() {
 		return filteredSelectedGpxFile != null ? filteredSelectedGpxFile.getGpxFile() : gpxFile;
 	}
 
-	public GPXFile getModifiableGpxFile() {
+	public GpxFile getModifiableGpxFile() {
 		// call process points after
 		return gpxFile;
 	}
@@ -305,24 +301,24 @@ public class SelectedGpxFile {
 		}
 	}
 
-	public List<GpxDisplayGroup> getDisplayGroups(@NonNull OsmandApplication app) {
-		if (modifiedTime != gpxFile.modifiedTime) {
+	public List<GpxDisplayGroup> getSplitGroups(@NonNull OsmandApplication app) {
+		if (modifiedTime != gpxFile.getModifiedTime()) {
 			update(app);
 		}
 		if (!splitProcessed) {
 			updateSplit(app);
 		}
-		return filteredSelectedGpxFile != null ? filteredSelectedGpxFile.getDisplayGroups(app) : displayGroups;
+		return filteredSelectedGpxFile != null ? filteredSelectedGpxFile.getSplitGroups(app) : splitGroups;
 	}
 
-	public void setDisplayGroups(List<GpxDisplayGroup> displayGroups, OsmandApplication app) {
+	public void setSplitGroups(List<GpxDisplayGroup> displayGroups, OsmandApplication app) {
 		if (filteredSelectedGpxFile != null) {
-			filteredSelectedGpxFile.setDisplayGroups(displayGroups, app);
+			filteredSelectedGpxFile.setSplitGroups(displayGroups, app);
 		} else {
 			this.splitProcessed = true;
-			this.displayGroups = displayGroups;
+			this.splitGroups = displayGroups;
 
-			if (modifiedTime != gpxFile.modifiedTime) {
+			if (modifiedTime != gpxFile.getModifiedTime()) {
 				update(app);
 			}
 		}
@@ -334,9 +330,8 @@ public class SelectedGpxFile {
 	}
 
 	@NonNull
-	public FilteredSelectedGpxFile createFilteredSelectedGpxFile(@NonNull OsmandApplication app,
-	                                                             @Nullable GpxDataItem gpxDataItem) {
-		filteredSelectedGpxFile = new FilteredSelectedGpxFile(app, this, gpxDataItem);
+	public FilteredSelectedGpxFile createFilteredSelectedGpxFile(@NonNull OsmandApplication app, @Nullable GpxDataItem item) {
+		filteredSelectedGpxFile = new FilteredSelectedGpxFile(app, this, item);
 		return filteredSelectedGpxFile;
 	}
 

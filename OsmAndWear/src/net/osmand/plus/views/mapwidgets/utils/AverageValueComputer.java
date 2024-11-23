@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.SimulationProvider;
+import net.osmand.plus.simulation.SimulationProvider;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.util.ArrayList;

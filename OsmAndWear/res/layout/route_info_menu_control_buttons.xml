@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_marginStart="0dp"
@@ -20,20 +20,19 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:background="?attr/selectableItemBackground"
+			android:textColor="?attr/active_color_basic"
 			android:ellipsize="end"
-			android:gravity="end"
+			android:gravity="center"
 			android:letterSpacing="@dimen/text_button_letter_spacing"
 			android:maxLines="1"
-			android:paddingStart="16dp"
 			android:paddingLeft="16dp"
-			android:paddingEnd="16dp"
 			android:paddingRight="16dp"
 			android:text="@string/shared_string_cancel"
-			android:textColor="?attr/active_color_basic"
 			android:textSize="@dimen/text_button_text_size"
-			android:translationY="10dp"
-			osmand:typeface="@string/font_roboto_medium"
-			tools:ignore="UnusedAttribute" />
+			app:typefaceWeight="medium"
+			tools:ignore="UnusedAttribute"
+			android:paddingEnd="16dp"
+			android:paddingStart="16dp" />
 
 	</FrameLayout>
 
@@ -78,7 +77,6 @@
 			android:text="@string/shared_string_control_start"
 			android:textColor="?attr/active_color_basic"
 			android:textSize="14sp"
-			osmand:typeface="@string/font_roboto_medium"
 			tools:drawableLeft="@drawable/ic_action_start_navigation"
 			tools:drawableStart="@drawable/ic_action_start_navigation"
 			tools:ignore="UnusedAttribute" />

@@ -1,10 +1,12 @@
 package net.osmand.plus.track.helpers;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.settings.enums.TracksSortByMode;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.Arrays;
@@ -12,9 +14,9 @@ import java.util.Arrays;
 public class GPXFolderUtils {
 
 	@NonNull
-	public static String getSubfolderTitle(@NonNull File file, @NonNull String subfolder) {
+	public static String getSubfolderTitle(@NonNull File file,  @Nullable String subfolder) {
 		String name = file.getName();
-		return subfolder.isEmpty() ? name : subfolder + File.separator + name;
+		return Algorithms.isEmpty(subfolder) ? name : subfolder + File.separator + name;
 	}
 
 	@NonNull

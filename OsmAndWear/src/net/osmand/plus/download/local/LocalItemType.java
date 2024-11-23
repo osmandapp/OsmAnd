@@ -9,8 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.ExportSettingsType;
-import net.osmand.util.Algorithms;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
+import net.osmand.util.CollectionUtils;
 
 public enum LocalItemType {
 
@@ -36,6 +36,7 @@ public enum LocalItemType {
 	ACTIVE_MARKERS(R.string.map_markers, R.drawable.ic_action_flag_stroke),
 	HISTORY_MARKERS(R.string.shared_string_history, R.drawable.ic_action_history),
 	ITINERARY_GROUPS(R.string.shared_string_itinerary, R.drawable.ic_action_flag_stroke),
+	COLOR_DATA(R.string.shared_string_colors, R.drawable.ic_action_file_color_palette),
 	PROFILES(R.string.shared_string_profiles, R.drawable.ic_action_manage_profiles),
 	OTHER(R.string.shared_string_other, R.drawable.ic_action_settings);
 
@@ -49,14 +50,19 @@ public enum LocalItemType {
 		this.iconId = iconId;
 	}
 
-	@NonNull
-	public String toHumanString(@NonNull Context ctx) {
-		return ctx.getString(titleId);
+	@StringRes
+	public int getTitleId() {
+		return titleId;
 	}
 
 	@DrawableRes
 	public int getIconId() {
 		return iconId;
+	}
+
+	@NonNull
+	public String toHumanString(@NonNull Context ctx) {
+		return ctx.getString(titleId);
 	}
 
 	@NonNull
@@ -72,22 +78,22 @@ public enum LocalItemType {
 	}
 
 	public boolean isSettingsCategory() {
-		return Algorithms.equalsToAny(this, PROFILES, OTHER);
+		return CollectionUtils.equalsToAny(this, COLOR_DATA, PROFILES, OTHER);
 	}
 
 	public boolean isMyPlacesCategory() {
-		return Algorithms.equalsToAny(this, FAVORITES, TRACKS, OSM_EDITS, OSM_NOTES,
+		return CollectionUtils.equalsToAny(this, FAVORITES, TRACKS, OSM_EDITS, OSM_NOTES,
 				MULTIMEDIA_NOTES, ACTIVE_MARKERS, HISTORY_MARKERS, ITINERARY_GROUPS);
 	}
 
 	public boolean isResourcesCategory() {
-		return Algorithms.equalsToAny(this, MAP_DATA, ROAD_DATA, LIVE_UPDATES, TERRAIN_DATA,
+		return CollectionUtils.equalsToAny(this, MAP_DATA, ROAD_DATA, LIVE_UPDATES, TERRAIN_DATA,
 				WIKI_AND_TRAVEL_MAPS, DEPTH_DATA, WEATHER_DATA, TILES_DATA, RENDERING_STYLES,
 				ROUTING, TTS_VOICE_DATA, VOICE_DATA, FONT_DATA, CACHE);
 	}
 
 	public boolean isDownloadType() {
-		return Algorithms.equalsToAny(this, MAP_DATA, ROAD_DATA, TILES_DATA, TERRAIN_DATA,
+		return CollectionUtils.equalsToAny(this, MAP_DATA, ROAD_DATA, TILES_DATA, TERRAIN_DATA,
 				DEPTH_DATA, WIKI_AND_TRAVEL_MAPS, WEATHER_DATA, TTS_VOICE_DATA, VOICE_DATA, FONT_DATA);
 	}
 
@@ -96,27 +102,36 @@ public enum LocalItemType {
 	}
 
 	public boolean isDeletionSupported() {
-		return isDownloadType();
+		return isDownloadType() || this == LIVE_UPDATES || this == CACHE
+				|| ExportType.findBy(this) != null && this != PROFILES;
 	}
 
 	public boolean isBackupSupported() {
-		return Algorithms.equalsToAny(this, MAP_DATA, ROAD_DATA, WIKI_AND_TRAVEL_MAPS, TERRAIN_DATA, DEPTH_DATA);
+		return CollectionUtils.equalsToAny(this, MAP_DATA, ROAD_DATA, WIKI_AND_TRAVEL_MAPS, TERRAIN_DATA, DEPTH_DATA);
 	}
 
 	public boolean isRenamingSupported() {
 		return this != TILES_DATA && isDownloadType();
 	}
 
-	public boolean isMapsSortingSupported() {
-		return Algorithms.equalsToAny(this, MAP_DATA, ROAD_DATA);
+	public boolean isSortingSupported() {
+		return isMyPlacesCategory() || isResourcesCategory();
+	}
+
+	public boolean isSortingByCountrySupported() {
+		return CollectionUtils.equalsToAny(this, MAP_DATA, ROAD_DATA);
+	}
+
+	public boolean isDerivedFromAssets() {
+		return CollectionUtils.equalsToAny(this, TTS_VOICE_DATA, COLOR_DATA, FONT_DATA);
 	}
 
 	@Nullable
-	public ExportSettingsType getExportSettingsType() {
-		if (this == TILES_DATA) {
-			return ExportSettingsType.MAP_SOURCES;
-		} else if (this == RENDERING_STYLES) {
-			return ExportSettingsType.CUSTOM_RENDER_STYLE;
+	public static LocalItemType getByName(@Nullable String name) {
+		for (LocalItemType type : values()) {
+			if (type.name().equalsIgnoreCase(name)) {
+				return type;
+			}
 		}
 		return null;
 	}

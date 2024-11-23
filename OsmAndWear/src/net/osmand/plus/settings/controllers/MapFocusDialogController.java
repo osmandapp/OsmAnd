@@ -3,22 +3,24 @@ package net.osmand.plus.settings.controllers;
 import static net.osmand.plus.base.dialog.data.DialogExtra.BACKGROUND_COLOR;
 import static net.osmand.plus.base.dialog.data.DialogExtra.SELECTED_INDEX;
 import static net.osmand.plus.base.dialog.data.DialogExtra.TITLE;
-import static net.osmand.plus.settings.fragments.ApplyQueryType.BOTTOM_SHEET;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.BaseDialogController;
+import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.data.DisplayItem;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemSelected;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSheet;
 import net.osmand.plus.settings.enums.MapFocus;
-import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -29,7 +31,6 @@ public class MapFocusDialogController extends BaseDialogController
 
 	private final ApplicationMode appMode;
 	private final OsmandSettings settings;
-	private OnConfirmPreferenceChange preferenceChangeCallback;
 
 	public MapFocusDialogController(@NonNull OsmandApplication app,
 	                                @NonNull ApplicationMode appMode) {
@@ -41,10 +42,6 @@ public class MapFocusDialogController extends BaseDialogController
 	@NonNull @Override
 	public String getProcessId() {
 		return PROCESS_ID;
-	}
-
-	public void setCallback(@NonNull OnConfirmPreferenceChange preferenceChangeCallback) {
-		this.preferenceChangeCallback = preferenceChangeCallback;
 	}
 
 	@Nullable
@@ -77,8 +74,8 @@ public class MapFocusDialogController extends BaseDialogController
 			displayData.addDisplayItem(item);
 		}
 
-		int selectedValue = settings.POSITION_PLACEMENT_ON_MAP.getModeValue(appMode);
-		int selectedItemIndex = MapFocus.getByValue(selectedValue).ordinal();
+		int value = settings.POSITION_PLACEMENT_ON_MAP.getModeValue(appMode);
+		int selectedItemIndex = MapFocus.valueOf(value).ordinal();
 		displayData.putExtra(SELECTED_INDEX, selectedItemIndex);
 		return displayData;
 	}
@@ -87,10 +84,19 @@ public class MapFocusDialogController extends BaseDialogController
 	public void onDialogItemSelected(@NonNull String processId, @NonNull DisplayItem selected) {
 		Object newValue = selected.getTag();
 		if (newValue instanceof MapFocus) {
-			String prefId = settings.POSITION_PLACEMENT_ON_MAP.getId();
 			MapFocus mapFocus = (MapFocus) newValue;
-			Object value = mapFocus.getValue();
-			preferenceChangeCallback.onConfirmPreferenceChange(prefId, value, BOTTOM_SHEET);
+			settings.POSITION_PLACEMENT_ON_MAP.setModeValue(appMode, mapFocus.getValue());
 		}
+	}
+
+	public static void showDialog(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		MapFocusDialogController controller = new MapFocusDialogController(app, appMode);
+
+		DialogManager dialogManager = app.getDialogManager();
+		dialogManager.register(PROCESS_ID, controller);
+
+		FragmentManager manager = mapActivity.getSupportFragmentManager();
+		CustomizableSingleSelectionBottomSheet.showInstance(manager, PROCESS_ID, true);
 	}
 }

@@ -91,7 +91,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:scaleType="center"
-                        tools:src="@drawable/ic_action_rec_stop" />
+                        tools:src="@drawable/ic_action_rec_stop"/>
 
                     <TextView
                         android:id="@+id/centerButtonText"

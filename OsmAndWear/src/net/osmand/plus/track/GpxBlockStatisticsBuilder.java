@@ -22,8 +22,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.PlatformUtil;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.charts.GPXDataSetType;
@@ -37,6 +35,8 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.TextViewEx;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -58,7 +58,7 @@ public class GpxBlockStatisticsBuilder {
 
 	private RecyclerView blocksView;
 	private final SelectedGpxFile selectedGpxFile;
-	private GPXTrackAnalysis analysis;
+	private GpxTrackAnalysis analysis;
 
 	private BlockStatisticsAdapter adapter;
 	private final List<StatBlock> items = new ArrayList<>();
@@ -68,6 +68,7 @@ public class GpxBlockStatisticsBuilder {
 	private final Handler handler = new Handler();
 	private Runnable updatingItems;
 	private boolean updateRunning;
+	private boolean showShortStat;
 
 	public GpxBlockStatisticsBuilder(OsmandApplication app, SelectedGpxFile selectedGpxFile, boolean nightMode) {
 		this.app = app;
@@ -81,6 +82,9 @@ public class GpxBlockStatisticsBuilder {
 
 	public void setBlocksClickable(boolean blocksClickable) {
 		this.blocksClickable = blocksClickable;
+	}
+	public void setShowShortStat(boolean showShortStat) {
+		this.showShortStat = showShortStat;
 	}
 
 	public void setBlocksView(RecyclerView blocksView, boolean isParentExpandable) {
@@ -105,16 +109,16 @@ public class GpxBlockStatisticsBuilder {
 
 	@Nullable
 	public GpxDisplayItem getDisplayItem() {
-		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
+		GpxFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 		return GpxUiHelper.makeGpxDisplayItem(app, gpxFile, GPX, analysis);
 	}
 
-	private GPXFile getGPXFile() {
+	private GpxFile getGPXFile() {
 		return selectedGpxFile.getGpxFileToDisplay();
 	}
 
 	public void initStatBlocks(@Nullable SegmentActionsListener actionsListener, @ColorInt int activeColor,
-	                           @Nullable GPXTrackAnalysis analysis) {
+	                           @Nullable GpxTrackAnalysis analysis) {
 		initItems(analysis);
 		adapter = new BlockStatisticsAdapter(getDisplayItem(), actionsListener, activeColor);
 		adapter.setItems(items);
@@ -155,8 +159,8 @@ public class GpxBlockStatisticsBuilder {
 		initItems(null);
 	}
 
-	public void initItems(@Nullable GPXTrackAnalysis initAnalysis) {
-		GPXFile gpxFile = getGPXFile();
+	public void initItems(@Nullable GpxTrackAnalysis initAnalysis) {
+		GpxFile gpxFile = getGPXFile();
 		if (app == null || gpxFile == null) {
 			return;
 		}
@@ -164,10 +168,10 @@ public class GpxBlockStatisticsBuilder {
 		if (initAnalysis == null) {
 			withoutGaps = true;
 			if (gpxFile.equals(app.getSavingTrackHelper().getCurrentGpx())) {
-				GPXFile currentGpx = app.getSavingTrackHelper().getCurrentTrack().getGpxFile();
+				GpxFile currentGpx = app.getSavingTrackHelper().getCurrentTrack().getGpxFile();
 				analysis = currentGpx.getAnalysis(0);
 				withoutGaps = !selectedGpxFile.isJoinSegments()
-						&& (Algorithms.isEmpty(currentGpx.tracks) || currentGpx.tracks.get(0).generalTrack);
+						&& (Algorithms.isEmpty(currentGpx.getTracks()) || currentGpx.getTracks().get(0).isGeneralTrack());
 			} else {
 				GpxDisplayItem displayItem = getDisplayItem();
 				if (displayItem != null) {
@@ -180,16 +184,32 @@ public class GpxBlockStatisticsBuilder {
 		}
 		items.clear();
 		if (analysis != null) {
+			if (showShortStat) {
+				float totalDistance = withoutGaps ? analysis.getTotalDistanceWithoutGaps() : analysis.getTotalDistance();
+				float timeSpan = withoutGaps ? analysis.getTimeSpanWithoutGaps() : analysis.getTimeSpan();
+				prepareDataDistance(totalDistance);
+				prepareDataTimeSpan(timeSpan);
+
+				String asc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationUp(), app);
+				String desc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationDown(), app);
+				prepareDataAscent(asc);
+				prepareDataDescent(desc);
+
+				String avg = OsmAndFormatter.getFormattedSpeed(analysis.getAvgSpeed(), app);
+				prepareDataAverageSpeed(avg);
+				return;
+			}
+
 			if (tabItem == null) {
-				float totalDistance = withoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
-				String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
-				String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
-				String minElevation = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
-				String maxElevation = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
-				String avg = OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app);
-				String maxSpeed = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
-				float timeSpan = withoutGaps ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
-				long timeMoving = withoutGaps ? analysis.timeMovingWithoutGaps : analysis.timeMoving;
+				float totalDistance = withoutGaps ? analysis.getTotalDistanceWithoutGaps() : analysis.getTotalDistance();
+				String asc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationUp(), app);
+				String desc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationDown(), app);
+				String minElevation = OsmAndFormatter.getFormattedAlt(analysis.getMinElevation(), app);
+				String maxElevation = OsmAndFormatter.getFormattedAlt(analysis.getMaxElevation(), app);
+				String avg = OsmAndFormatter.getFormattedSpeed(analysis.getAvgSpeed(), app);
+				String maxSpeed = OsmAndFormatter.getFormattedSpeed(analysis.getMaxSpeed(), app);
+				float timeSpan = withoutGaps ? analysis.getTimeSpanWithoutGaps() : analysis.getTimeSpan();
+				long timeMoving = withoutGaps ? analysis.getTimeMovingWithoutGaps() : analysis.getTimeMoving();
 				prepareDataDistance(totalDistance);
 				prepareDataAscent(asc);
 				prepareDataDescent(desc);
@@ -201,10 +221,10 @@ public class GpxBlockStatisticsBuilder {
 			} else {
 				switch (tabItem) {
 					case GPX_TAB_ITEM_GENERAL: {
-						float totalDistance = withoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
-						float timeSpan = withoutGaps ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
-						Date start = new Date(analysis.startTime);
-						Date end = new Date(analysis.endTime);
+						float totalDistance = withoutGaps ? analysis.getTotalDistanceWithoutGaps() : analysis.getTotalDistance();
+						float timeSpan = withoutGaps ? analysis.getTimeSpanWithoutGaps() : analysis.getTimeSpan();
+						Date start = new Date(analysis.getStartTime());
+						Date end = new Date(analysis.getEndTime());
 						prepareDataDistance(totalDistance);
 						prepareDataTimeSpan(timeSpan);
 						prepareDataStartTime(start);
@@ -212,10 +232,10 @@ public class GpxBlockStatisticsBuilder {
 						break;
 					}
 					case GPX_TAB_ITEM_ALTITUDE: {
-						String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
-						String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
-						String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
-						String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
+						String min = OsmAndFormatter.getFormattedAlt(analysis.getMinElevation(), app);
+						String max = OsmAndFormatter.getFormattedAlt(analysis.getMaxElevation(), app);
+						String asc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationUp(), app);
+						String desc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationDown(), app);
 						prepareDataAverageAltitude();
 						prepareDataAltitudeRange(min, max);
 						prepareDataAscent(asc);
@@ -223,10 +243,10 @@ public class GpxBlockStatisticsBuilder {
 						break;
 					}
 					case GPX_TAB_ITEM_SPEED: {
-						String avg = OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app);
-						String max = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
-						long timeMoving = withoutGaps ? analysis.timeMovingWithoutGaps : analysis.timeMoving;
-						float totalDistanceMoving = withoutGaps ? analysis.totalDistanceMovingWithoutGaps : analysis.totalDistanceMoving;
+						String avg = OsmAndFormatter.getFormattedSpeed(analysis.getAvgSpeed(), app);
+						String max = OsmAndFormatter.getFormattedSpeed(analysis.getMaxSpeed(), app);
+						long timeMoving = withoutGaps ? analysis.getTimeMovingWithoutGaps() : analysis.getTimeMoving();
+						float totalDistanceMoving = withoutGaps ? analysis.getTotalDistanceMovingWithoutGaps() : analysis.getTotalDistanceMoving();
 						prepareDataAverageSpeed(avg);
 						prepareDataMaximumSpeed(max);
 						prepareDataTimeMoving(timeMoving);
@@ -244,7 +264,7 @@ public class GpxBlockStatisticsBuilder {
 	}
 
 	public void prepareDataAverageAltitude() {
-		prepareData(app.getString(R.string.average_altitude), OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app),
+		prepareData(app.getString(R.string.average_altitude), OsmAndFormatter.getFormattedAlt(analysis.getAvgElevation(), app),
 				R.drawable.ic_action_altitude_average_16, GPXDataSetType.ALTITUDE, null, ItemType.ITEM_ALTITUDE);
 	}
 
@@ -317,13 +337,13 @@ public class GpxBlockStatisticsBuilder {
 		StatBlock statBlock = new StatBlock(title, value, imageResId, imageColorId, firstType, secondType, itemType);
 		switch (statBlock.itemType) {
 			case ITEM_DISTANCE: {
-				if (analysis.totalDistance != 0f) {
+				if (analysis.getTotalDistance() != 0f) {
 					items.add(statBlock);
 				}
 				break;
 			}
 			case ITEM_DISTANCE_MOVING: {
-				if (analysis.totalDistanceMoving != 0f) {
+				if (analysis.getTotalDistanceMoving() != 0f) {
 					items.add(statBlock);
 				}
 				break;
@@ -341,7 +361,7 @@ public class GpxBlockStatisticsBuilder {
 				break;
 			}
 			case ITEM_TIME: {
-				if (analysis.timeSpan > 0) {
+				if (analysis.getTimeSpan() > 0) {
 					items.add(statBlock);
 				}
 				break;
@@ -441,7 +461,7 @@ public class GpxBlockStatisticsBuilder {
 			holder.itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					GPXTrackAnalysis analysis = displayItem != null ? displayItem.analysis : null;
+					GpxTrackAnalysis analysis = displayItem != null ? displayItem.analysis : null;
 					if (blocksClickable && analysis != null && actionsListener != null) {
 						ArrayList<GPXDataSetType> list = new ArrayList<>();
 						if (analysis.hasElevationData() || analysis.isSpeedSpecified() || analysis.hasSpeedData()) {

@@ -47,6 +47,7 @@ public class RegisterUserCommand extends BackupCommand {
 		Map<String, String> params = new HashMap<>();
 		params.put("email", email);
 		params.put("login", String.valueOf(login));
+		params.put("lang", getApp().getLocaleHelper().getLanguage());
 		String orderId = Algorithms.isEmpty(promoCode) ? getHelper().getOrderId() : promoCode;
 		if (!Algorithms.isEmpty(orderId)) {
 			params.put("orderid", orderId);

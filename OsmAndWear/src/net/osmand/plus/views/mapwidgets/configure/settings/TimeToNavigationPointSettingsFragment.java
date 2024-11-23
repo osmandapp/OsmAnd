@@ -121,6 +121,7 @@ public class TimeToNavigationPointSettingsFragment extends BaseSimpleWidgetSetti
 
 	@Override
 	protected void applySettings() {
+		super.applySettings();
 		arrivalTimeOtherwiseTimeToGoPref.setModeValue(appMode, arrivalTimeOtherwiseTimeToGo);
 	}
 

@@ -11,6 +11,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.view.menu.MenuPopupHelper;
 import androidx.appcompat.widget.ListPopupWindow;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.view.MenuCompat;
@@ -30,7 +31,8 @@ public class PopUpMenu {
 		this.displayData = displayData;
 	}
 
-	private ListPopupWindow createListPopupWindow() {
+	@NonNull
+	private ListPopupWindow createCustomListPopUpWindow() {
 		View anchorView = displayData.anchorView;
 		boolean nightMode = displayData.nightMode;
 		PopUpMenuWidthMode widthMode = displayData.widthMode;
@@ -60,7 +62,7 @@ public class PopUpMenu {
 		float compoundBtnWidth = contentPadding * 3;
 
 		float additional = iconPartWidth;
-		if (widthMode == PopUpMenuWidthMode.STANDARD) {
+		if (widthMode == PopUpMenuWidthMode.STANDARD && displayData.showCompound) {
 			additional += compoundBtnWidth;
 		}
 		int totalWidth = (int) (Math.max(itemWidth, minWidth) + additional);
@@ -71,22 +73,21 @@ public class PopUpMenu {
 		listPopupWindow.setContentWidth(totalWidth);
 		listPopupWindow.setModal(true);
 		listPopupWindow.setAdapter(adapter);
-		if (shouldShowAsDropDown(ctx)) {
-			listPopupWindow.setDropDownGravity(Gravity.START | Gravity.TOP);
-			listPopupWindow.setVerticalOffset(-anchorView.getHeight() + contentPaddingHalf);
-		} else {
-			listPopupWindow.setDropDownGravity(Gravity.START | Gravity.BOTTOM);
-			listPopupWindow.setVerticalOffset(anchorView.getHeight() - contentPaddingHalf);
+		if (displayData.customDropDown) {
+			if (shouldShowAsDropDown(ctx)) {
+				listPopupWindow.setDropDownGravity(Gravity.START | Gravity.TOP);
+				listPopupWindow.setVerticalOffset(-anchorView.getHeight() + contentPaddingHalf);
+			} else {
+				listPopupWindow.setDropDownGravity(Gravity.START | Gravity.BOTTOM);
+				listPopupWindow.setVerticalOffset(anchorView.getHeight() - contentPaddingHalf);
+			}
 		}
 		if (displayData.bgColor != 0) {
 			listPopupWindow.setBackgroundDrawable(new ColorDrawable(displayData.bgColor));
 		}
 		listPopupWindow.setOnItemClickListener((parent, view, position, id) -> {
 			if (position < menuItems.size()) {
-				View.OnClickListener listener = menuItems.get(position).getOnClickListener();
-				if (listener != null) {
-					listener.onClick(view);
-				}
+				notifyItemClicked(displayData, menuItems.get(position));
 			}
 			listPopupWindow.dismiss();
 		});
@@ -115,40 +116,47 @@ public class PopUpMenu {
 		return resources.getDimensionPixelSize(resId);
 	}
 
-	public static void show(@NonNull PopUpMenuDisplayData displayData) {
-		boolean useCustomPopUp = false;
-		for (PopUpMenuItem item : displayData.menuItems) {
-			if (item.isShowCompoundBtn()) {
-				useCustomPopUp = true;
-				break;
-			}
+	private static void notifyItemClicked(@NonNull PopUpMenuDisplayData displayData,
+	                                      @NonNull PopUpMenuItem menuItem) {
+		OnPopUpMenuItemClickListener listener = menuItem.getOnClickListener();
+		if (listener == null) {
+			listener = displayData.onItemClickListener;
 		}
+		if (listener != null) {
+			listener.onPopUpItemClicked(menuItem);
+		}
+	}
 
-		if (useCustomPopUp) {
-			PopUpMenu popUpMenu = new PopUpMenu(displayData);
-			popUpMenu.createListPopupWindow().show();
-		} else {
-			View view = displayData.anchorView;
-			PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
-			MenuBuilder menuBuilder = (MenuBuilder) popupMenu.getMenu();
-			menuBuilder.setOptionalIconsVisible(true);
-			MenuCompat.setGroupDividerEnabled(menuBuilder, true);
+	private static void showNativePopUpMenu(@NonNull PopUpMenuDisplayData displayData) {
+		View view = displayData.anchorView;
+		PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+		MenuBuilder menuBuilder = (MenuBuilder) popupMenu.getMenu();
+		menuBuilder.setOptionalIconsVisible(true);
+		MenuCompat.setGroupDividerEnabled(menuBuilder, true);
 
-			int groupId = 1;
-			for (int i = 0; i < displayData.menuItems.size(); i++) {
-				PopUpMenuItem popupMenuItem = displayData.menuItems.get(i);
-				if (popupMenuItem.shouldShowTopDivider()) {
-					groupId++;
-				}
-				MenuItem menuItem = popupMenu.getMenu().add(groupId, i, Menu.NONE, popupMenuItem.getTitle());
-				menuItem.setIcon(popupMenuItem.getIcon());
-				menuItem.setOnMenuItemClickListener(item -> {
-					popupMenuItem.getOnClickListener().onClick(view);
-					popupMenu.dismiss();
-					return true;
-				});
+		int groupId = 1;
+		for (int i = 0; i < displayData.menuItems.size(); i++) {
+			PopUpMenuItem popupMenuItem = displayData.menuItems.get(i);
+			if (popupMenuItem.shouldShowTopDivider()) {
+				groupId++;
 			}
-			popupMenu.show();
+			MenuItem menuItem = popupMenu.getMenu().add(groupId, i, Menu.NONE, popupMenuItem.getTitle());
+			menuItem.setIcon(popupMenuItem.getIcon());
+			menuItem.setOnMenuItemClickListener(item -> {
+				notifyItemClicked(displayData, popupMenuItem);
+				popupMenu.dismiss();
+				return true;
+			});
+		}
+		popupMenu.show();
+	}
+
+	public static void show(@NonNull PopUpMenuDisplayData displayData) {
+		if (displayData.hasCustomizations()) {
+			PopUpMenu popUpMenu = new PopUpMenu(displayData);
+			popUpMenu.createCustomListPopUpWindow().show();
+		} else {
+			showNativePopUpMenu(displayData);
 		}
 	}
 }

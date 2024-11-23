@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.util.Algorithms;
@@ -36,11 +37,14 @@ public class DevicesSettingsCollection {
 		boolean enabled;
 		Map<DeviceChangeableProperty, String> additionalParams = new LinkedHashMap<>();
 
-		public DeviceSettings(String deviceId, DeviceType deviceType, String name, boolean deviceEnabled) {
+		public DeviceSettings(String deviceId, @NonNull AbstractDevice<?> device, boolean deviceEnabled) {
 			this.deviceId = deviceId;
-			this.deviceType = deviceType;
+			this.deviceType = device.getDeviceType();
 			this.enabled = deviceEnabled;
-			additionalParams.put(DeviceChangeableProperty.NAME, name);
+			additionalParams.put(DeviceChangeableProperty.NAME, device.getName());
+			for(DeviceChangeableProperty property : device.getChangeableProperties()) {
+				additionalParams.put(property, property.getDefValue());
+			}
 		}
 
 		public Map<DeviceChangeableProperty, String> getParams() {
@@ -108,8 +112,8 @@ public class DevicesSettingsCollection {
 	public DeviceSettings getDeviceSettings(@NonNull String deviceId) {
 		return settings.get(deviceId);
 	}
-	public static DeviceSettings createDeviceSettings(String deviceId, DeviceType deviceType, String name, boolean deviceEnabled) {
-		return new DeviceSettings(deviceId, deviceType, name, deviceEnabled);
+	public static DeviceSettings createDeviceSettings(String deviceId, @NonNull AbstractDevice<?> device, boolean deviceEnabled) {
+		return new DeviceSettings(deviceId, device, deviceEnabled);
 	}
 
 	public void setDeviceSettings(@NonNull String deviceId, @Nullable DeviceSettings deviceSettings) {

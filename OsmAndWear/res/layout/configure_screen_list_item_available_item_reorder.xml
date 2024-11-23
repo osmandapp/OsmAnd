@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -57,9 +57,9 @@
 				android:paddingTop="@dimen/content_padding_half"
 				android:paddingBottom="@dimen/content_padding_half"
 				android:textColor="?android:textColorPrimary"
+				android:textStyle="normal"
 				android:textSize="8sp"
 				android:translationX="-10dp"
-				osmand:typeface="@string/font_roboto_regular"
 				tools:text="@string/poi_aerialway_transport" />
 
 			<ImageButton
@@ -69,9 +69,9 @@
 				android:layout_height="@dimen/standard_icon_size"
 				android:layout_marginStart="@dimen/title_padding"
 				android:layout_marginEnd="@dimen/content_padding"
+				app:srcCompat="@drawable/ic_action_info"
 				android:translationX="-30dp"
-				osmand:srcCompat="@drawable/ic_action_info"
-				osmand:tint="?default_icon_color"
+				app:tint="?default_icon_color"
 				tools:ignore="ContentDescription" />
 
 		</LinearLayout>

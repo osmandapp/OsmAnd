@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
@@ -24,10 +25,12 @@ import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.myplaces.tracks.dialogs.BaseTrackFolderFragment;
 import net.osmand.plus.myplaces.tracks.dialogs.ScreenPositionData;
 import net.osmand.plus.myplaces.tracks.dialogs.TracksSelectionFragment;
-import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.io.KFile;
 
 import java.util.Collections;
 import java.util.Set;
@@ -73,15 +76,15 @@ public class SearchTrackItemsFragment extends SearchTrackBaseFragment implements
 		selectionButton.setOnClickListener(v -> {
 			Set<TrackItem> items = adapter.getFilteredItems();
 			selectionHelper.onItemsSelected(items, !areAllTracksSelected());
-			onTrackItemsSelected(items);
+			updateItems(items);
 		});
 		updateButtonsState();
 	}
 
 	private void saveChanges() {
 		Fragment fragment = getTargetFragment();
-		if (fragment instanceof TracksFragment) {
-			TracksFragment tracksFragment = (TracksFragment) fragment;
+		if (fragment instanceof TracksTabsFragment) {
+			TracksTabsFragment tracksFragment = (TracksTabsFragment) fragment;
 			ItemsSelectionHelper<TrackItem> originalHelper = tracksFragment.getSelectionHelper();
 			originalHelper.syncWith(selectionHelper);
 			tracksFragment.saveChanges();
@@ -162,7 +165,8 @@ public class SearchTrackItemsFragment extends SearchTrackBaseFragment implements
 				if (activity != null) {
 					String screenName = getString(R.string.shared_string_tracks);
 					boolean temporary = app.getSelectedGpxHelper().getSelectedFileByPath(trackItem.getPath()) == null;
-					TrackMenuFragment.openTrack(activity, trackItem.getFile(), null, screenName, OVERVIEW, temporary);
+					KFile kFile = trackItem.getFile();
+					TrackMenuFragment.openTrack(activity, kFile == null ? null : SharedUtil.jFile(kFile), null, screenName, OVERVIEW, temporary);
 				}
 			}
 		};

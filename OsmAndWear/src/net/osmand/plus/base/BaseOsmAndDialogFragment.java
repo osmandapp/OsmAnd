@@ -3,16 +3,23 @@ package net.osmand.plus.base;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.RequestMapThemeParams;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
 public abstract class BaseOsmAndDialogFragment extends DialogFragment {
@@ -44,6 +51,30 @@ public abstract class BaseOsmAndDialogFragment extends DialogFragment {
 		return false;
 	}
 
+	@NonNull
+	protected View inflate(@LayoutRes int layoutRedId) {
+		return inflate(layoutRedId, null);
+	}
+
+	@NonNull
+	protected View inflate(@LayoutRes int layoutResId, @Nullable ViewGroup root) {
+		return inflate(layoutResId, root, false);
+	}
+
+	@NonNull
+	protected View inflate(@LayoutRes int layoutResId, @Nullable ViewGroup root, boolean attachToRoot) {
+		return themedInflater.inflate(layoutResId, root, attachToRoot);
+	}
+
+	protected int getDimension(int id) {
+		return app.getResources().getDimensionPixelSize(id);
+	}
+
+	@ColorInt
+	protected int getColor(@ColorRes int colorId) {
+		return ColorUtilities.getColor(app, colorId);
+	}
+
 	protected Drawable getPaintedContentIcon(@DrawableRes int id, @ColorInt int color) {
 		return iconsCache.getPaintedIcon(id, color);
 	}
@@ -61,6 +92,7 @@ public abstract class BaseOsmAndDialogFragment extends DialogFragment {
 	}
 
 	protected boolean isNightMode(boolean usedOnMap) {
-		return app.getDaynightHelper().isNightMode(usedOnMap);
+		RequestMapThemeParams params = new RequestMapThemeParams().markIgnoreExternalProvider();
+		return app.getDaynightHelper().isNightMode(usedOnMap, params);
 	}
 }

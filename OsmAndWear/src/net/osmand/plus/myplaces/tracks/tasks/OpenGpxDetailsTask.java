@@ -11,10 +11,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.data.PointDescription;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.Track;
-import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.plus.R;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.Track;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.charts.GPXDataSetType;
@@ -22,17 +21,17 @@ import net.osmand.plus.track.SplitTrackAsyncTask;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
+import net.osmand.plus.track.helpers.TrackDisplayGroup;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplayItem> {
 
-	private final GPXFile gpxFile;
+	private final GpxFile gpxFile;
 	private final WptPt selectedPoint;
 
-	public OpenGpxDetailsTask(@NonNull FragmentActivity activity, @NonNull GPXFile gpxFile, @Nullable WptPt selectedPoint) {
+	public OpenGpxDetailsTask(@NonNull FragmentActivity activity, @NonNull GpxFile gpxFile, @Nullable WptPt selectedPoint) {
 		super(activity);
 		this.gpxFile = gpxFile;
 		this.selectedPoint = selectedPoint;
@@ -47,8 +46,8 @@ public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplay
 		if (generalTrack != null) {
 			gpxFile.addGeneralTrack();
 			gpxDisplayGroup = buildGeneralGpxDisplayGroup(gpxFile, generalTrack);
-		} else if (!gpxFile.tracks.isEmpty()) {
-			gpxDisplayGroup = buildGeneralGpxDisplayGroup(gpxFile, gpxFile.tracks.get(0));
+		} else if (!gpxFile.getTracks().isEmpty()) {
+			gpxDisplayGroup = buildGeneralGpxDisplayGroup(gpxFile, gpxFile.getTracks().get(0));
 		}
 		List<GpxDisplayItem> items = null;
 		if (gpxDisplayGroup != null) {
@@ -61,21 +60,16 @@ public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplay
 	}
 
 	@NonNull
-	private GpxDisplayGroup buildGeneralGpxDisplayGroup(@NonNull GPXFile gpxFile, @NonNull Track track) {
+	private GpxDisplayGroup buildGeneralGpxDisplayGroup(@NonNull GpxFile gpxFile, @NonNull Track track) {
 		String name = GpxDisplayHelper.getGroupName(app, gpxFile);
-
-		GpxDisplayGroup group = new GpxDisplayGroup(gpxFile);
-		group.setGpxName(name);
+		TrackDisplayGroup group = new TrackDisplayGroup(gpxFile, track, true);
+		group.applyName(app, name);
 		group.setColor(track.getColor(gpxFile.getColor(0)));
-		group.setType(GpxDisplayItemType.TRACK_SEGMENT);
-		group.setTrack(track);
-		group.setName(app.getString(R.string.gpx_selection_track, name, ""));
 		String description = "";
-		if (track.name != null && !track.name.isEmpty()) {
-			description = track.name + " " + description;
+		if (track.getName() != null && !track.getName().isEmpty()) {
+			description = track.getName() + " " + description;
 		}
 		group.setDescription(description);
-		group.setGeneralTrack(true);
 		SplitTrackAsyncTask.processGroupTrack(app, group, null, false);
 		return group;
 	}
@@ -98,7 +92,7 @@ public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplay
 				gpxItem.chartTypes = list.toArray(new GPXDataSetType[0]);
 			}
 			gpxItem.locationOnMap = selectedPoint;
-			settings.setMapLocationToShow(gpxItem.locationStart.lat, gpxItem.locationStart.lon,
+			settings.setMapLocationToShow(gpxItem.locationStart.getLat(), gpxItem.locationStart.getLon(),
 					settings.getLastKnownMapZoom(),
 					new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
 					false,

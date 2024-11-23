@@ -1,20 +1,20 @@
 package net.osmand.plus.utils;
 
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.PointF;
 import android.os.AsyncTask;
 import android.util.Pair;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import net.osmand.OnResultCallback;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.ColorARGB;
 import net.osmand.core.jni.FColorARGB;
 import net.osmand.core.jni.FColorRGB;
+import net.osmand.core.jni.IconData;
+import net.osmand.core.jni.OsmAndCore;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.SingleSkImage;
 import net.osmand.core.jni.SwigUtilities;
@@ -26,12 +26,17 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.plugins.weather.OfflineForecastHelper;
 import net.osmand.plus.utils.HeightsResolverTask.HeightsResolverCallback;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class NativeUtilities {
 
@@ -472,6 +477,23 @@ public class NativeUtilities {
 		return new PointI(x31, y31);
 	}
 
+	public static float getLocationHeightOrZero(@NonNull MapRendererView mapRenderer, @NonNull PointI location31, @NonNull LatLon location, boolean readGeotiff) {
+		float height = mapRenderer.getLocationHeightInMeters(location31);
+		if (height > MIN_ALTITUDE_VALUE) {
+			return height;
+		} else if (readGeotiff) {
+			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+			if (mapRendererContext != null) {
+				List<LatLon> locations = new ArrayList<LatLon>();
+				locations.add(location);
+				float[] heights = mapRendererContext.calculateHeights(locations);
+				if (heights != null && heights.length > 0)
+					return heights[0];
+			}
+		}
+		return 0.0f;
+	}
+
 	@Nullable
 	public static Pair<PointF, PointF> clipLineInVisibleRect(@NonNull MapRendererView mapRenderer,
 	                                                         @NonNull RotatedTileBox tileBox,
@@ -519,5 +541,12 @@ public class NativeUtilities {
 					OfflineForecastHelper.getTileY(tileId)));
 		}
 		return qTileIds;
+	}
+
+	@Nullable
+	public static Bitmap createBitmap(@NonNull IconData iconData) {
+		Bitmap bitmap = Bitmap.createBitmap(iconData.getWidth(), iconData.getHeight(), Config.ARGB_8888);
+		boolean ok = OsmAndCore.copyPixels(iconData.getBitmap(), bitmap);
+		return ok ? bitmap : null;
 	}
 }

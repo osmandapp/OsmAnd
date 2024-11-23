@@ -4,8 +4,7 @@ import static net.osmand.plus.measurementtool.MeasurementEditingContext.DEFAULT_
 import static net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.RouteBetweenPointsDialogType.WHOLE_ROUTE_CALCULATION;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.BOTTOM_SHEET_HEIGHT_DP;
 import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
-import static net.osmand.plus.utils.UiUtilities.CustomRadioButtonType.END;
-import static net.osmand.plus.utils.UiUtilities.CustomRadioButtonType.START;
+import static net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -20,7 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -31,11 +29,12 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBehaviourDialogFragment {
@@ -93,14 +92,12 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBeha
 		customRadioButton = mainView.findViewById(R.id.custom_radio_buttons);
 		customRadioButton.setMinimumHeight(getResources().getDimensionPixelSize(R.dimen.route_info_control_buttons_height));
 
-		TextView allModeButton = mainView.findViewById(R.id.right_button);
-		TextView singleModeButton = mainView.findViewById(R.id.left_button);
+		TextRadioItem allMode = createRadioButton(RouteBetweenPointsDialogMode.ALL, getButtonText(RouteBetweenPointsDialogMode.ALL));
+		TextRadioItem singleMode = createRadioButton(RouteBetweenPointsDialogMode.SINGLE, getButtonText(RouteBetweenPointsDialogMode.SINGLE));
 
-		allModeButton.setText(getButtonText(RouteBetweenPointsDialogMode.ALL));
-		singleModeButton.setText(getButtonText(RouteBetweenPointsDialogMode.SINGLE));
-
-		allModeButton.setOnClickListener(v -> setDefaultDialogMode(RouteBetweenPointsDialogMode.ALL));
-		singleModeButton.setOnClickListener(v -> setDefaultDialogMode(RouteBetweenPointsDialogMode.SINGLE));
+		TextToggleButton radioGroup = new TextToggleButton(app, customRadioButton, nightMode);
+		radioGroup.setItems(singleMode, allMode);
+		radioGroup.setSelectedItem(defaultDialogMode == RouteBetweenPointsDialogMode.ALL ? allMode : singleMode);
 
 		LinearLayout container = mainView.findViewById(R.id.navigation_types_container);
 		createProfileRows(container);
@@ -110,6 +107,15 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBeha
 
 		updateModeButtons();
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(mainView).create());
+	}
+
+	private TextRadioItem createRadioButton(@NonNull RouteBetweenPointsDialogMode dialogMode, @NonNull String title) {
+		TextRadioItem item = new TextRadioItem(title);
+		item.setOnClickListener((radioItem, view) -> {
+			setDefaultDialogMode(dialogMode);
+			return true;
+		});
+		return item;
 	}
 
 	private void createRecalculateAllRow(@NonNull ViewGroup container) {
@@ -133,8 +139,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBeha
 	}
 
 	private void createProfileRows(@NonNull ViewGroup container) {
-		List<ApplicationMode> modes = new ArrayList<>(ApplicationMode.values(app));
-		modes.remove(ApplicationMode.DEFAULT);
+		List<ApplicationMode> modes = ApplicationMode.getModesForRouting(app);
 
 		View.OnClickListener onClickListener = view -> {
 			ApplicationMode mode = DEFAULT_APP_MODE;
@@ -203,8 +208,6 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBeha
 	}
 
 	public void updateModeButtons() {
-		UiUtilities.updateCustomRadioButtons(getMyApplication(), customRadioButton, nightMode,
-				defaultDialogMode == RouteBetweenPointsDialogMode.SINGLE ? START : END);
 		btnDescription.setText(getButtonDescr(defaultDialogMode));
 	}
 
@@ -299,7 +302,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBeha
 		if (dialogMode == RouteBetweenPointsDialogMode.SINGLE) {
 			WptPt selectedPoint = points.get(pos);
 			WptPt second = points.get(before ? pos - 1 : pos + 1);
-			dist += MapUtils.getDistance(selectedPoint.lat, selectedPoint.lon, second.lat, second.lon);
+			dist += MapUtils.getDistance(selectedPoint.getLat(), selectedPoint.getLon(), second.getLat(), second.getLon());
 		} else {
 			int startIdx;
 			int endIdx;
@@ -313,7 +316,7 @@ public class RouteBetweenPointsBottomSheetDialogFragment extends BottomSheetBeha
 			for (int i = startIdx; i <= endIdx; i++) {
 				WptPt first = points.get(i - 1);
 				WptPt second = points.get(i);
-				dist += MapUtils.getDistance(first.lat, first.lon, second.lat, second.lon);
+				dist += MapUtils.getDistance(first.getLat(), first.getLon(), second.getLat(), second.getLon());
 			}
 		}
 		return OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication());

@@ -2,6 +2,9 @@ package net.osmand.plus.settings.backend.preferences;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -133,6 +136,8 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	public boolean setModeValue(ApplicationMode mode, T obj) {
 		if (global) {
 			return set(obj);
+		} else if (mode == null) {
+			return false;
 		}
 
 		Object profilePrefs = settings.getProfilePreferences(mode);
@@ -151,18 +156,22 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		return valueSaved;
 	}
 
-	public T getProfileDefaultValue(ApplicationMode mode) {
+	public T getProfileDefaultValue(@Nullable ApplicationMode mode) {
 		if (global) {
 			return defaultValue;
 		}
 		if (defaultValues != null && defaultValues.containsKey(mode)) {
 			return defaultValues.get(mode);
 		}
-		ApplicationMode pt = mode.getParent();
-		if (pt != null) {
-			return getProfileDefaultValue(pt);
+		ApplicationMode parentMode = mode != null ? mode.getParent() : null;
+		if (parentMode != null) {
+			return getProfileDefaultValue(parentMode);
 		}
 		return defaultValue;
+	}
+
+	public void setDefaultValue(T defaultValue) {
+		this.defaultValue = defaultValue;
 	}
 
 	public final boolean hasDefaultValues() {
@@ -174,7 +183,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	}
 
 	public T getDefaultValue() {
-		return getProfileDefaultValue(settings.APPLICATION_MODE.get());
+		return getProfileDefaultValue(getApplicationMode());
 	}
 
 	@Override
@@ -183,9 +192,11 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	}
 
 	@Override
-	public T getModeValue(ApplicationMode mode) {
+	public T getModeValue(@Nullable ApplicationMode mode) {
 		if (global) {
 			return get();
+		} else if (mode == null) {
+			return defaultValue;
 		}
 		OsmandPlugin plugin = getRelatedPlugin();
 		if (plugin != null && plugin.disablePreferences()) {
@@ -211,7 +222,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 
 	@Override
 	public final void resetToDefault() {
-		T o = getProfileDefaultValue(settings.APPLICATION_MODE.get());
+		T o = getProfileDefaultValue(getApplicationMode());
 		set(o);
 	}
 
@@ -283,6 +294,14 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		return pluginId != null ? PluginsHelper.getPlugin(pluginId) : null;
 	}
 
+	public boolean isNullSupported() {
+		return isNullSupported(getApplicationMode());
+	}
+
+	public boolean isNullSupported(@NonNull ApplicationMode mode) {
+		return isGlobal() ? getDefaultValue() == null : getProfileDefaultValue(mode) == null;
+	}
+
 	protected String getLastModifiedTimeId() {
 		return id + "_last_modified";
 	}
@@ -327,8 +346,14 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	}
 
 	@Override
-	public final String asStringModeValue(ApplicationMode m) {
+	public final String asStringModeValue(@Nullable ApplicationMode m) {
 		T v = getModeValue(m);
 		return toString(v);
+	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return getId();
 	}
 }

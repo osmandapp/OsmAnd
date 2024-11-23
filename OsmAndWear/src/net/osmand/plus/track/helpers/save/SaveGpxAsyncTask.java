@@ -5,18 +5,18 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
+import net.osmand.plus.shared.SharedUtil;
+import net.osmand.shared.gpx.GpxFile;
 
 import java.io.File;
 
 public class SaveGpxAsyncTask extends AsyncTask<Void, Void, Exception> {
 
 	private final File file;
-	private final GPXFile gpx;
+	private final GpxFile gpx;
 	private final SaveGpxListener saveGpxListener;
 
-	public SaveGpxAsyncTask(@NonNull File file, @NonNull GPXFile gpx,
+	public SaveGpxAsyncTask(@NonNull File file, @NonNull GpxFile gpx,
 	                        @Nullable SaveGpxListener saveGpxListener) {
 		this.gpx = gpx;
 		this.file = file;
@@ -32,7 +32,7 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, Exception> {
 
 	@Override
 	protected Exception doInBackground(Void... params) {
-		return GPXUtilities.writeGpxFile(file, gpx);
+		return SharedUtil.writeGpxFile(file, gpx);
 	}
 
 	@Override

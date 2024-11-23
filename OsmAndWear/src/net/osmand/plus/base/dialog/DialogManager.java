@@ -16,14 +16,15 @@ import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemClicked;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemSelected;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
+import net.osmand.plus.base.dialog.interfaces.controller.IOnDialogDismissed;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
-import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter;
-import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
+import net.osmand.shared.gpx.SmartFolderHelper;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.AlertDialogExtra;
 import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.shared.gpx.filters.BaseTrackFilter;
 import net.osmand.util.Algorithms;
 
 import java.util.HashMap;
@@ -65,6 +66,13 @@ public class DialogManager {
 			return ((IDisplayDataProvider) controller).getDisplayData(processId);
 		}
 		return null;
+	}
+
+	public void onDialogDismissed(@NonNull String processId, @NonNull FragmentActivity activity) {
+		IDialogController controller = controllers.get(processId);
+		if (controller instanceof IOnDialogDismissed) {
+			((IOnDialogDismissed) controller).onDialogDismissed(activity);
+		}
 	}
 
 	public void onDialogItemSelected(@NonNull String processId, @NonNull DisplayItem item) {

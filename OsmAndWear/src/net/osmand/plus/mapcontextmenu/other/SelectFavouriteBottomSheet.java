@@ -46,7 +46,7 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 	private static final int SORT_TYPE_NAME = 2;
 	private static final int SORT_TYPE_CATEGORY = 3;
 
-	protected OsmandApplication mApp;
+	protected OsmandApplication app;
 	protected FavouritesHelper mFavouritesHelper;
 	private final List<FavouritePoint> mPoints = new ArrayList<>();
 
@@ -65,12 +65,12 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 
 	@Override
 	public void createMenuItems(@Nullable Bundle savedInstanceState) {
-		mApp = getMyApplication();
+		app = getMyApplication();
 		if (savedInstanceState != null && savedInstanceState.getBoolean(IS_SORTED)) {
 			mSortByDist = savedInstanceState.getInt(SORTED_BY_TYPE);
 		}
-		mAdapter = new FavouritesAdapter(mApp, mPoints);
-		mFavouritesHelper = mApp.getFavoritesHelper();
+		mAdapter = new FavouritesAdapter(requireContext(), mPoints);
+		mFavouritesHelper = app.getFavoritesHelper();
 		if (mFavouritesHelper.isFavoritesLoaded()) {
 			loadFavorites();
 		} else {
@@ -143,9 +143,9 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 
 	private void sortFavourites() {
 		Collator inst = Collator.getInstance();
-		Location stale = mApp.getLocationProvider().getLastStaleKnownLocation();
+		Location stale = app.getLocationProvider().getLastStaleKnownLocation();
 		LatLon latLon = stale != null ? new LatLon(stale.getLatitude(), stale.getLongitude()) :
-				mApp.getMapViewTrackingUtilities().getMapLocation();
+				app.getMapViewTrackingUtilities().getMapLocation();
 
 		Collections.sort(mPoints, (lhs, rhs) -> {
 			if (mSortByDist == SORT_TYPE_DIST && latLon != null) {
@@ -251,7 +251,7 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 		super.onPause();
 		stopLocationUpdate();
 		if (mFavouritesListener != null) {
-			mApp.getFavoritesHelper().removeListener(mFavouritesListener);
+			app.getFavoritesHelper().removeListener(mFavouritesListener);
 			mFavouritesListener = null;
 		}
 	}

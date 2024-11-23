@@ -2,7 +2,6 @@ package net.osmand.plus.backup.ui.status;
 
 import static net.osmand.plus.backup.NetworkSettingsHelper.BACKUP_ITEMS_KEY;
 import static net.osmand.plus.backup.NetworkSettingsHelper.RESTORE_ITEMS_KEY;
-import static net.osmand.plus.backup.NetworkSettingsHelper.SYNC_ITEMS_KEY;
 
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -24,7 +23,6 @@ import net.osmand.plus.backup.ExportBackupTask;
 import net.osmand.plus.backup.ExportBackupTask.ItemProgressInfo;
 import net.osmand.plus.backup.ImportBackupTask;
 import net.osmand.plus.backup.NetworkSettingsHelper;
-import net.osmand.plus.backup.SyncBackupTask;
 import net.osmand.plus.backup.ui.ChangeItemActionsBottomSheet;
 import net.osmand.plus.backup.ui.ChangesTabFragment;
 import net.osmand.plus.backup.ui.ChangesTabFragment.CloudChangeItem;
@@ -84,7 +82,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 			}
 		} : null;
 		itemView.setOnClickListener(listener);
-		boolean enabled = listener != null && !isSyncing(item);
+		boolean enabled = listener != null && !settingsHelper.isSyncing(item.fileName);
 		itemView.setEnabled(enabled);
 		if (enabled) {
 			setupSelectableBackground();
@@ -99,7 +97,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 			progressBar.setMax(progressInfo.getWork());
 			progressBar.setProgress(progressInfo.getValue());
 		}
-		boolean syncing = isSyncing(item);
+		boolean syncing = settingsHelper.isSyncing(item.fileName);
 		AndroidUiHelper.updateVisibility(secondIcon, item.synced || !syncing);
 		AndroidUiHelper.updateVisibility(progressBar, !item.synced && syncing);
 	}
@@ -120,14 +118,6 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 			return exportTask.getItemProgressInfo(item.settingsItem.getType().name(), item.fileName);
 		}
 		return null;
-	}
-
-	private boolean isSyncing(@NonNull CloudChangeItem item) {
-		SyncBackupTask syncTask = settingsHelper.getSyncTask(item.fileName);
-		if (syncTask == null) {
-			syncTask = settingsHelper.getSyncTask(SYNC_ITEMS_KEY);
-		}
-		return syncTask != null;
 	}
 
 	private void setupSelectableBackground() {

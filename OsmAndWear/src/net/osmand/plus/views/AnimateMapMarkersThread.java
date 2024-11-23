@@ -136,6 +136,16 @@ public class AnimateMapMarkersThread {
 		}
 	}
 
+	public void animateModel3dDirectionTo(@NonNull MapMarker mapMarker, float direction, long animationDuration) {
+		MapRendererView mapRenderer = getMapRenderer();
+		MapMarkersAnimator animator = getAnimator();
+		if (mapRenderer != null && animator != null) {
+			animator.animateModel3DDirectionTo(mapMarker, (float) Utilities.normalizedAngleDegrees(direction),
+					animationDuration / 1000f, TimingFunction.Linear);
+			startThreadAnimating(() -> animatingMapMarkersAnimator(mapRenderer));
+		}
+	}
+
 	public void animatePositionAndDirectionTo(@NonNull MapMarker mapMarker, @NonNull PointI target31, long positionAnimationDuration,
 	                                          @NonNull SWIGTYPE_p_void iconKey, float direction, long directionAnimationDuration) {
 		MapRendererView mapRenderer = getMapRenderer();

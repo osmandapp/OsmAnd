@@ -1,7 +1,9 @@
 package net.osmand.plus.widgets.multistatetoggle;
 
-import android.graphics.Color;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +23,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
+
+	protected static final float BACKGROUND_ALPHA = 0.1f;
+	protected static final float BACKGROUND_STROKE_ALPHA = 0.5f;
 
 	protected final OsmandApplication app;
 	protected final UiUtilities uiUtilities;
@@ -56,8 +62,18 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		initView();
 	}
 
+	@NonNull
+	public List<_Radio> getItems() {
+		return items;
+	}
+
 	public final void setSelectedItem(int itemIndex) {
 		_Radio selectedItem = itemIndex < 0 || itemIndex >= items.size() ? null : items.get(itemIndex);
+		setSelectedItem(selectedItem);
+	}
+
+	public final void setSelectedItemByTag(@Nullable Object tag) {
+		_Radio selectedItem = findItemByTag(tag);
 		setSelectedItem(selectedItem);
 	}
 
@@ -70,45 +86,40 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		return items.indexOf(selectedItem);
 	}
 
+	@Nullable
+	public _Radio findItemByTag(@Nullable Object tag) {
+		for (_Radio item : items) {
+			if (Objects.equals(item.getTag(), tag)) {
+				return item;
+			}
+		}
+		return null;
+	}
+
 	private void initView() {
 		buttons.clear();
 		dividers.clear();
 		container.removeAllViews();
 		for (int i = 0; i < items.size(); i++) {
 			createBtn(items.get(i));
-			if (!isLastItem(i)) {
-				createDivider();
-			}
 		}
 		updateView();
 	}
 
 	private void createBtn(@NonNull _Radio item) {
-		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		Context context = container.getContext();
+		LayoutInflater inflater = UiUtilities.getInflater(context, nightMode);
 		ViewGroup button = (ViewGroup) inflater.inflate(
 				getRadioItemLayoutId(), container, false);
-		button.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				OnRadioItemClickListener l = item.getListener();
-				if (l != null && l.onRadioItemClick(item, container)) {
-					setSelectedItem(item);
-				}
+		button.setOnClickListener(v -> {
+			OnRadioItemClickListener l = item.getListener();
+			if (l != null && l.onRadioItemClick(item, container)) {
+				setSelectedItem(item);
 			}
 		});
 		initItemView(button, item);
 		buttons.add(button);
 		container.addView(button);
-	}
-
-	private void createDivider() {
-		int dividerColor = ColorUtilities.getStrokedButtonsOutlineColor(app, nightMode);
-		int width = AndroidUtils.dpToPx(app, 1.0f);
-		View divider = new View(app);
-		divider.setLayoutParams(new ViewGroup.LayoutParams(width, ViewGroup.LayoutParams.MATCH_PARENT));
-		divider.setBackgroundColor(dividerColor);
-		dividers.add(divider);
-		container.addView(divider);
 	}
 
 	public void setItemsEnabled(boolean enable) {
@@ -118,49 +129,73 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		updateView();
 	}
 
-	private void updateView() {
+	public void updateView() {
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		int defaultColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		int textColorPrimary = ColorUtilities.getPrimaryTextColor(app, nightMode);
 		int textColorSecondary = ColorUtilities.getSecondaryTextColor(app, nightMode);
 
+		int selectedItemIndex = getSelectedItemIndex();
 		int radius = AndroidUtils.dpToPx(app, 4);
 		float[] leftBtnRadii = {radius, radius, 0, 0, 0, 0, radius, radius};
 		float[] rightBtnRadii = {0, 0, radius, radius, radius, radius, 0, 0};
 		float[] internalBtnRadii = {0, 0, 0, 0, 0, 0, 0, 0};
 		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(app);
 
-		showAllDividers();
-
 		for (int i = 0; i < items.size(); i++) {
 			_Radio item = items.get(i);
 			ViewGroup button = buttons.get(i);
+			View borderBackgroundView = getBorderBackgroundView(button);
+
 			boolean enabled = item.isEnabled();
 			button.setEnabled(enabled);
 			int textColor = enabled ? textColorPrimary : textColorSecondary;
 			int selectedBgColor = enabled ? activeColor : defaultColor;
+			int contentColor = item.getCustomColor() != null ? item.getCustomColor() : activeColor;
+			int itemColor = enabled ? contentColor : defaultColor;
 			GradientDrawable background = new GradientDrawable();
-			background.setColor(ColorUtilities.getColorWithAlpha(selectedBgColor, 0.1f));
-			background.setStroke(AndroidUtils.dpToPx(app, 1.5f), ColorUtilities.getColorWithAlpha(selectedBgColor, 0.5f));
 
-			if (selectedItem == item) {
-				if (i == 0) {
-					background.setCornerRadii(isLayoutRtl ? rightBtnRadii : leftBtnRadii);
-					hideDividers(0);
-				} else if (isLastItem(i)) {
-					background.setCornerRadii(isLayoutRtl ? leftBtnRadii : rightBtnRadii);
-					hideDividers(dividers.size() - 1);
-				} else {
-					background.setCornerRadii(internalBtnRadii);
-					hideDividers(i - 1, i);
-				}
-				button.setBackground(background);
-				updateItemView(button, item, textColor);
+			if (i == 0) {
+				background.setCornerRadii(isLayoutRtl ? rightBtnRadii : leftBtnRadii);
+			} else if (isLastItem(i)) {
+				background.setCornerRadii(isLayoutRtl ? leftBtnRadii : rightBtnRadii);
 			} else {
-				button.setBackgroundColor(Color.TRANSPARENT);
-				updateItemView(button, item, selectedBgColor);
+				background.setCornerRadii(internalBtnRadii);
 			}
+			if (selectedItem == item) {
+				background.setColor(ColorUtilities.getColorWithAlpha(selectedBgColor, BACKGROUND_ALPHA));
+				background.setStroke(AndroidUtils.dpToPx(app, 1.5f), ColorUtilities.getColorWithAlpha(selectedBgColor, BACKGROUND_STROKE_ALPHA));
+				borderBackgroundView.setBackground(background);
+				updateItemView(button, item, true, textColor);
+			} else {
+				LayerDrawable layerDrawable = new LayerDrawable(new GradientDrawable[]{background});
+				setupLayerInset(i, selectedItemIndex, radius, layerDrawable);
+				background.setStroke(AndroidUtils.dpToPx(app, 1.5f), ColorUtilities.getStrokedButtonsOutlineColor(app, nightMode));
+				borderBackgroundView.setBackground(layerDrawable);
+				updateItemView(button, item, false, itemColor);
+			}
+			String contentDescription = item.getContentDescription();
+			if (contentDescription != null) {
+				button.setContentDescription(contentDescription);
+			}
+			Drawable selectedDrawable = UiUtilities.getColoredSelectableDrawable(app, selectedBgColor, BACKGROUND_ALPHA);
+			borderBackgroundView.setForeground(selectedDrawable);
 		}
+	}
+
+	private void setupLayerInset(int currentItemIndex, int selectedItemIndex, int radius, @NonNull LayerDrawable layerDrawable) {
+		int hideSide = radius * -1;
+		if (currentItemIndex == 0) {
+			layerDrawable.setLayerInset(0, 0, 0, selectedItemIndex == currentItemIndex + 1 ? hideSide : 0, 0);
+		} else if (isLastItem(currentItemIndex)) {
+			layerDrawable.setLayerInset(0, hideSide, 0, 0, 0);
+		} else {
+			layerDrawable.setLayerInset(0, hideSide, 0, selectedItemIndex == currentItemIndex + 1 ? hideSide : 0, 0);
+		}
+	}
+
+	protected View getBorderBackgroundView(@NonNull ViewGroup button){
+		return button;
 	}
 
 	protected abstract int getRadioItemLayoutId();
@@ -168,21 +203,7 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 	protected abstract void initItemView(@NonNull ViewGroup view, @NonNull _Radio item);
 
 	protected abstract void updateItemView(@NonNull ViewGroup view, @NonNull _Radio item,
-	                                       @ColorInt int color);
-
-	private void showAllDividers() {
-		for (View divider : dividers) {
-			divider.setVisibility(View.VISIBLE);
-		}
-	}
-
-	private void hideDividers(int... dividerIndexes) {
-		for (int dividerIndex : dividerIndexes) {
-			if (dividerIndex >= 0 && dividerIndex < dividers.size()) {
-				dividers.get(dividerIndex).setVisibility(View.GONE);
-			}
-		}
-	}
+	                                       boolean selected, @ColorInt int color);
 
 	private boolean isLastItem(int index) {
 		return index == items.size() - 1;

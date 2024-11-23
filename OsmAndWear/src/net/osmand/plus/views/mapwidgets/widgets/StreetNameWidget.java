@@ -2,7 +2,6 @@ package net.osmand.plus.views.mapwidgets.widgets;
 
 import static net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import static net.osmand.plus.views.mapwidgets.WidgetType.STREET_NAME;
-
 import static java.lang.Math.min;
 
 import android.graphics.Bitmap;
@@ -34,15 +33,16 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.CurrentPositionHelper;
+import net.osmand.plus.helpers.LocationPointWrapper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
-import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
+import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.render.TextDrawInfo;
 import net.osmand.plus.render.TextRenderer;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.ShowAlongTheRouteBottomSheet;
 import net.osmand.plus.routing.CurrentStreetName;
-import net.osmand.plus.routing.CurrentStreetName.RoadShield;
+import net.osmand.plus.routing.RoadShield;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
@@ -65,6 +65,8 @@ public class StreetNameWidget extends MapWidget {
 	public static final int MAX_SHIELDS_QUANTITY = 3;
 
 	private final WaypointHelper waypointHelper;
+	private final RendererRegistry rendererRegistry;
+
 	private LocationPointWrapper lastPoint;
 
 	private final TextView addressText;
@@ -88,6 +90,7 @@ public class StreetNameWidget extends MapWidget {
 		super(mapActivity, STREET_NAME);
 
 		waypointHelper = app.getWaypointHelper();
+		rendererRegistry = app.getRendererRegistry();
 
 		addressText = view.findViewById(R.id.map_address_text);
 		addressTextShadow = view.findViewById(R.id.map_address_text_shadow);
@@ -112,10 +115,9 @@ public class StreetNameWidget extends MapWidget {
 			turnDrawable.setColor(turnArrowColorId);
 		}
 
-		boolean hideStreetName = mapActivity.isTopToolbarActive()
-				|| mapActivity.shouldHideTopControls()
-				|| MapRouteInfoMenu.chooseRoutesVisible
-				|| MapRouteInfoMenu.waypointsVisible;
+		boolean hideStreetName = MapRouteInfoMenu.chooseRoutesVisible
+				|| MapRouteInfoMenu.waypointsVisible
+				|| mapActivity.getWidgetsVisibilityHelper().shouldHideVerticalWidgets();
 		if (hideStreetName) {
 			updateVisibility(false);
 		} else if (showClosestWaypointFirstInAddress && updateWaypoint()) {
@@ -134,7 +136,7 @@ public class StreetNameWidget extends MapWidget {
 			AndroidUiHelper.updateVisibility(addressTextShadow, shadowRadius > 0);
 
 			List<RoadShield> shields = streetName.shields;
-			if (!shields.isEmpty() && !shields.equals(cachedRoadShields)) {
+			if (!shields.isEmpty() && !shields.equals(cachedRoadShields) && rendererRegistry.getCurrentSelectedRenderer() != null) {
 				if (setRoadShield(shields)) {
 					AndroidUiHelper.updateVisibility(shieldImagesContainer, true);
 					int indexOf = streetName.text.indexOf("»");
@@ -224,22 +226,27 @@ public class StreetNameWidget extends MapWidget {
 			int maxShields = min(shields.size(), MAX_SHIELDS_QUANTITY);
 			for (int i = 0; i < maxShields; i++) {
 				RoadShield shield = shields.get(i);
-				isShieldSet |= setShieldImage(shield);
+				isShieldSet |= setShieldImage(shield, mapActivity, shieldImagesContainer, isNightMode());
 			}
 			return isShieldSet;
 		}
 		return false;
 	}
 
-	private boolean setShieldImage(@NonNull RoadShield shield) {
+	public static boolean setShieldImage(@NonNull RoadShield shield, @NonNull MapActivity mapActivity,
+	                                     @NonNull LinearLayout shieldImagesContainer, boolean nightMode) {
+		OsmandApplication app = mapActivity.getMyApplication();
 		RouteDataObject object = shield.getRdo();
 		StringBuilder additional = shield.getAdditional();
 		String shieldValue = shield.getValue();
 		String shieldTag = shield.getTag();
 		int[] types = object.getTypes();
 		RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
+		if (storage == null) {
+			return false;
+		}
 		RenderingRuleSearchRequest rreq = app.getResourceManager().getRenderer()
-				.getSearchRequestWithAppliedCustomRules(storage, isNightMode());
+				.getSearchRequestWithAppliedCustomRules(storage, nightMode);
 
 		for (int type : types) {
 			RouteTypeRule routeTypeRule = object.region.quickGetEncodingRule(type);
@@ -293,7 +300,7 @@ public class StreetNameWidget extends MapWidget {
 		textRenderer.drawShieldIcon(rc, canvas, text, text.getShieldResIcon());
 		textRenderer.drawWrappedText(canvas, text, 20f);
 
-		ImageView imageView = new ImageView(view.getContext());
+		ImageView imageView = new ImageView(mapActivity);
 		int viewSize = AndroidUtils.dpToPx(app, 40f);
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(viewWidthPx, viewSize);
 		int padding = AndroidUtils.dpToPx(app, 4f);
@@ -397,7 +404,7 @@ public class StreetNameWidget extends MapWidget {
 		return mapActivity.findViewById(R.id.street_name_widget_special_container);
 	}
 
-	private static class StreetNameWidgetParams {
+	static class StreetNameWidgetParams {
 
 		private final OsmandApplication app;
 		private final OsmandSettings settings;

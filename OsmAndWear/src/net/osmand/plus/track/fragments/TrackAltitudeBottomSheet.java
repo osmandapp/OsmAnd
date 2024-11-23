@@ -23,7 +23,7 @@ import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
@@ -50,15 +50,15 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment impl
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(getString(R.string.get_altitude_data)));
-		createAttachToRoadsItem();
+		createUseNearbyRoadsItem();
 		if (InAppPurchaseUtils.is3dMapsAvailable(app)) {
 			int margin = getResources().getDimensionPixelSize(R.dimen.divider_color_light_margin_start);
 			DividerItem dividerItem = new DividerItem(app);
 			dividerItem.setMargins(margin, 0, 0, 0);
 			items.add(dividerItem);
 
-			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-			if (plugin != null && plugin.isRelief3dAllowed()) {
+			SRTMPlugin plugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
+			if (plugin != null && plugin.is3DReliefAllowed()) {
 				createOfflineItem();
 			} else {
 				createOnlineItem();
@@ -68,10 +68,10 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment impl
 		}
 	}
 
-	private void createAttachToRoadsItem() {
+	private void createUseNearbyRoadsItem() {
 		BaseBottomSheetItem attachToRoadsItem = new BottomSheetItemWithDescription.Builder()
-				.setDescription(getString(R.string.track_attach_to_the_roads_descr))
-				.setTitle(getString(R.string.attach_to_the_roads))
+				.setDescription(getString(R.string.use_nearby_roads_summary))
+				.setTitle(getString(R.string.use_nearby_roads))
 				.setIcon(getActiveIcon(R.drawable.ic_action_attach_track))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_active)
 				.setOnClickListener(v -> {
@@ -104,9 +104,9 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment impl
 
 	private void createOfflineItem() {
 		BaseBottomSheetItem attachToRoadsItem = new BottomSheetItemWithDescription.Builder()
-				.setDescription(getString(R.string.calculate_offline_altitude_descr))
-				.setTitle(getString(R.string.calculate_offline))
-				.setIcon(getActiveIcon(R.drawable.ic_action_world_globe))
+				.setDescription(getString(R.string.use_terrain_maps_summary))
+				.setTitle(getString(R.string.use_terrain_maps))
+				.setIcon(getActiveIcon(R.drawable.ic_action_terrain))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_active)
 				.setOnClickListener(v -> {
 					Fragment fragment = getTargetFragment();

@@ -5,15 +5,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.osm.RouteActivityType;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -23,8 +22,6 @@ import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-
-import static net.osmand.util.Algorithms.capitalizeFirstLetterAndLowercase;
 
 public class TravelGpxCard extends BaseTravelCard {
 
@@ -56,10 +53,10 @@ public class TravelGpxCard extends BaseTravelCard {
 			holder.user.setText(article.user);
 			String activityTypeKey = article.activityType;
 			if (!Algorithms.isEmpty(activityTypeKey)) {
-				RouteActivityType activityType = RouteActivityType.getOrCreateTypeFromName(activityTypeKey);
-				int activityTypeIcon = getActivityTypeIcon(activityType);
+				OsmRouteType activityType = OsmRouteType.getOrCreateTypeFromName(activityTypeKey);
+				int activityTypeIcon = AndroidUtils.getActivityTypeIcon(app, activityType);
 				holder.activityTypeIcon.setImageDrawable(getActiveIcon(activityTypeIcon));
-				holder.activityType.setText(getActivityTypeTitle(activityType));
+				holder.activityType.setText(AndroidUtils.getActivityTypeTitle(app, activityType));
 				holder.activityTypeLabel.setVisibility(View.VISIBLE);
 			}
 			holder.distance.setText(OsmAndFormatter.getFormattedDistance(article.totalDistance, app));
@@ -77,7 +74,7 @@ public class TravelGpxCard extends BaseTravelCard {
 									}
 
 									@Override
-									public void onGpxFileRead(@Nullable GPXFile gpxFile) {
+									public void onGpxFileRead(@Nullable GpxFile gpxFile) {
 										File file = app.getTravelHelper().createGpxFile(article);
 										TrackMenuFragment.openTrack(activity, file, null);
 									}
@@ -92,17 +89,6 @@ public class TravelGpxCard extends BaseTravelCard {
 			holder.divider.setVisibility(isLastItem ? View.GONE : View.VISIBLE);
 			holder.shadow.setVisibility(isLastItem ? View.VISIBLE : View.GONE);
 		}
-	}
-
-	@DrawableRes
-	private int getActivityTypeIcon(RouteActivityType activityType) {
-		int iconId = app.getResources().getIdentifier("mx_" + activityType.getIcon(), "drawable", app.getPackageName());
-		return iconId != 0 ? iconId : R.drawable.mx_special_marker;
-	}
-
-	private String getActivityTypeTitle(RouteActivityType activityType) {
-		return AndroidUtils.getActivityTypeStringPropertyName(app, activityType.getName(),
-				capitalizeFirstLetterAndLowercase(activityType.getName()));
 	}
 
 	private void updateSaveButton(TravelGpxVH holder) {

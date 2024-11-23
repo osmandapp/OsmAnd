@@ -1,1 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources/>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="poi_zero_waste_no">Bez otpada: ne</string>
+    <string name="poi_zero_waste_only">Bez otpada: samo</string>
+    <string name="poi_ice_cream_yes">Da;Sladoled</string>
+    <string name="poi_butcher_pork">Svinjetina</string>
+    <string name="poi_coffee_yes">Da;Kafa</string>
+    <string name="poi_butcher_poultry">Živina</string>
+    <string name="poi_butcher_beef">Govedina</string>
+    <string name="poi_butcher_horse">Konjsko meso</string>
+    <string name="poi_butcher_halal">Halal</string>
+    <string name="poi_butcher_lamb">Jagnjetina</string>
+    <string name="poi_distillery">Destilerija</string>
+    <string name="poi_reusable_packaging_accept_no">Vešekratna ambalaža: ne</string>
+    <string name="poi_reusable_packaging_accept_only">Vešekratna ambalaža: samo</string>
+    <string name="poi_reusable_packaging_offer_only">Ponuda višekratne ambalaže: samo</string>
+    <string name="poi_zero_waste_yes">Bez otpada: da</string>
+    <string name="poi_reusable_packaging_offer_yes">Ponuda višekratne ambalaže: da</string>
+    <string name="poi_reusable_packaging_offer_no">Ponuda višekratne ambalaže: ne</string>
+    <string name="poi_coffee_no">Ne</string>
+    <string name="poi_origin">Poreklo</string>
+    <string name="poi_reusable_packaging_accept_yes">Vešekratna ambalaža: da</string>
+</resources>

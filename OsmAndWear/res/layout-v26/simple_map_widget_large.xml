@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/widget_bg"
 	android:layout_width="match_parent"
 	android:layout_height="@dimen/simple_widget_large_height"
-	android:orientation="vertical">
+	android:orientation="vertical"
+	android:paddingHorizontal="16dp"
+	android:paddingTop="6dp"
+	android:paddingBottom="3dp">
 
 	<LinearLayout
 		android:id="@+id/container"
@@ -18,10 +21,12 @@
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
+			android:gravity="bottom"
+			android:layoutDirection="rtl"
 			android:orientation="horizontal">
 
 			<TextView
-				android:id="@+id/widget_name"
+				android:id="@+id/widget_text_small"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
@@ -33,21 +38,24 @@
 				android:layout_marginStart="25dp"
 				android:textColor="@color/text_color_secondary_light"
 				android:textSize="@dimen/simple_widget_description_text_size"
-				tools:text="Widget name" />
+				tools:text="Unit" />
 
 			<TextView
-				android:id="@+id/widget_text_small"
-				android:layout_width="wrap_content"
+				android:id="@+id/widget_name"
+				android:layout_width="0dp"
 				android:layout_height="wrap_content"
+				android:gravity="bottom|start"
+				android:layout_marginStart="3dp"
 				android:layout_weight="1"
-				android:gravity="end"
+				android:ellipsize="end"
+				android:includeFontPadding="false"
 				android:letterSpacing="0.06"
 				android:lineSpacingExtra="-2sp"
 				android:maxLines="1"
 				android:textAllCaps="true"
 				android:textColor="@color/text_color_secondary_light"
 				android:textSize="@dimen/simple_widget_description_text_size"
-				tools:text="Unit" />
+				tools:text="Widget name" />
 
 		</LinearLayout>
 
@@ -61,7 +69,7 @@
 				android:layout_height="@dimen/map_widget_icon"
 				android:layout_gravity="start|center_vertical"
 				android:gravity="center"
-				osmand:srcCompat="@drawable/ic_action_remove_dark" />
+				app:srcCompat="@drawable/ic_action_remove_dark" />
 
 			<TextView
 				android:id="@+id/widget_text"
@@ -70,9 +78,12 @@
 				android:layout_gravity="center"
 				android:layout_marginHorizontal="36dp"
 				android:autoSizeMaxTextSize="@dimen/simple_widget_value_large_size"
-				android:autoSizeMinTextSize="@dimen/simple_widget_value_small_size"
+				android:autoSizeMinTextSize="@dimen/simple_widget_value_minimum_size"
 				android:autoSizeStepGranularity="2sp"
 				android:autoSizeTextType="uniform"
+				android:ellipsize="none"
+				android:gravity="center_vertical|start"
+				android:includeFontPadding="false"
 				android:letterSpacing="0.04"
 				android:maxLines="1"
 				android:textColor="@color/text_color_primary_light"

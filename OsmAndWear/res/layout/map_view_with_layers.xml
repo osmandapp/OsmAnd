@@ -26,7 +26,7 @@
 		android:contentDescription="@string/shared_string_map"
 		android:visibility="gone" />
 
-	<net.osmand.plus.auto.AndroidAutoMapPlaceholderView
+	<net.osmand.plus.auto.views.AndroidAutoMapPlaceholderView
 		android:id="@+id/AndroidAutoPlaceholder"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"

@@ -12,10 +12,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
+import net.osmand.plus.auto.NavigationCarAppService;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.firstusage.FirstUsageWizardFragment;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.views.layers.MapControlsLayer;
+import net.osmand.plus.views.layers.MapActionsHelper;
 
 public class MapPermissionsResultCallback implements OnRequestPermissionsResultCallback {
 
@@ -36,9 +37,14 @@ public class MapPermissionsResultCallback implements OnRequestPermissionsResultC
 
 			PluginsHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-			MapControlsLayer mcl = activity.getMapView().getLayerByClass(MapControlsLayer.class);
-			if (mcl != null) {
-				mcl.onRequestPermissionsResult(requestCode, permissions, grantResults);
+			MapActionsHelper controlsHelper = activity.getMapLayers().getMapActionsHelper();
+			if (controlsHelper != null) {
+				controlsHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
+			}
+
+			OnRequestPermissionsResultCallback aaCallback = app.getAndroidAutoPermissionRequestResultListener();
+			if (aaCallback != null) {
+				aaCallback.onRequestPermissionsResult(requestCode, permissions, grantResults);
 			}
 
 			if (requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE

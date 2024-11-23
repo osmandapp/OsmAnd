@@ -119,6 +119,12 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 	}
 
 	@Override
+	protected void updateResources() {
+		super.updateResources();
+		updateBitmaps(true);
+	}
+
+	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
 		super.onPrepareBufferImage(canvas, tileBox, drawSettings);
 		updateBitmaps(false);

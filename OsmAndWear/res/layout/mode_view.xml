@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/route_info_modes_height"
-    android:layout_height="@dimen/route_info_modes_height"
+             android:layout_width="@dimen/route_info_modes_height"
+             android:layout_height="@dimen/route_info_modes_height"
+             xmlns:tools="http://schemas.android.com/tools"
     android:translationX="50dp">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -12,12 +12,12 @@
         android:layout_gravity="center"
         tools:src="@drawable/ic_dashboard" />
 
-
+    
     <View
         android:id="@+id/selection"
+        android:layout_gravity="bottom"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_gravity="bottom"
         android:background="@color/osmand_orange"
         android:focusable="false" />
 

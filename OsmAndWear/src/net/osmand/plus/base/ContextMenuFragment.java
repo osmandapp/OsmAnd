@@ -50,9 +50,9 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
-import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvider;
+import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeProvider;
 
-public abstract class ContextMenuFragment extends BaseOsmAndFragment implements MapControlsThemeInfoProvider {
+public abstract class ContextMenuFragment extends BaseOsmAndFragment implements MapControlsThemeProvider {
 
 	public static class MenuState {
 		public static final int HEADER_ONLY = 1;
@@ -146,7 +146,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	public abstract boolean isHeaderViewDetached();
 
 	public int getLandscapeWidth() {
-		return 465+15;
+		return getResources().getDimensionPixelSize(R.dimen.dashboard_land_width);
 	}
 
 	public int getLandscapeNoShadowWidth() {
@@ -1046,7 +1046,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			int currentZoom = mapActivity.getMapView().getZoom();
-			mapActivity.getMapView().getAnimatedDraggingThread().startMoving(latLon.getLatitude(), latLon.getLongitude(), Math.max(15, currentZoom), true);
+			mapActivity.getMapView().getAnimatedDraggingThread().startMoving(latLon.getLatitude(), latLon.getLongitude(), Math.max(15, currentZoom));
 		}
 	}
 

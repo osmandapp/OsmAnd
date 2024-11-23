@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
-import net.osmand.router.RouteColorize.ColorizationType;
+import net.osmand.shared.routing.RouteColorize.ColorizationType;
 
 public enum GradientScaleType {
 
@@ -59,7 +59,7 @@ public enum GradientScaleType {
 	}
 
 	@Nullable
-	public static GradientScaleType getGradientTypeByName(@NonNull String name) {
+	public static GradientScaleType getGradientTypeByName(@Nullable String name) {
 		for (GradientScaleType scaleType : values()) {
 			if (scaleType.name().equalsIgnoreCase(name)) {
 				return scaleType;

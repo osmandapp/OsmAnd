@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent"
+	android:layout_width="0dp"
 	android:layout_height="wrap_content"
 	android:layout_weight="1"
 	android:orientation="vertical">
@@ -20,14 +20,16 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:background="@null"
-			android:duplicateParentState="true"
-			android:gravity="center"
-			android:paddingStart="@dimen/content_padding_half"
+			android:gravity="center_vertical"
 			android:paddingLeft="@dimen/content_padding_half"
+			android:paddingRight="@dimen/content_padding_half"
 			android:textAllCaps="true"
 			android:textSize="11sp"
-			osmand:typeface="@string/font_roboto_medium"
-			tools:text="Button" />
+			app:typefaceWeight="medium"
+			android:duplicateParentState="true"
+			tools:text="Button"
+			android:paddingStart="@dimen/content_padding_half"
+			android:paddingEnd="@dimen/content_padding_half" />
 
 	</LinearLayout>
 

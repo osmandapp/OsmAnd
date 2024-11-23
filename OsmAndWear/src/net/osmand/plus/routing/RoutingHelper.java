@@ -3,7 +3,6 @@ package net.osmand.plus.routing;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
 import net.osmand.Location;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
@@ -23,12 +22,13 @@ import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.router.GpxRouteApproximation;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
-import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -49,6 +49,7 @@ public class RoutingHelper {
 	// 3) calculate max allowed deviation before route recalculation * multiplier
 	private static final float POS_TOLERANCE = 60; // 60m or 30m + accuracy
 	private static final float POS_TOLERANCE_DEVIATION_MULTIPLIER = 2;
+	private static final int MAX_POSSIBLE_SPEED = 140;// 504 km/h
 
 	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
 	private List<WeakReference<IRoutingDataUpdateListener>> updateListeners = new LinkedList<>();
@@ -73,6 +74,7 @@ public class RoutingHelper {
 	private List<LatLon> intermediatePoints;
 	private Location lastProjection;
 	private Location lastFixedLocation;
+	private Location lastGoodRouteLocation;
 	private boolean routeWasFinished;
 	private ApplicationMode mode;
 	private boolean deviceHasBearing;
@@ -81,7 +83,6 @@ public class RoutingHelper {
 	private long deviateFromRouteDetected;
 	//private long wrongMovementDetected = 0;
 	private boolean voiceRouterStopped;
-	private long lastCarNavUpdateTime;
 
 	public boolean isDeviatedFromRoute() {
 		return isDeviatedFromRoute;
@@ -109,7 +110,7 @@ public class RoutingHelper {
 		return provider;
 	}
 
-	void resetRouteWasFinished() {
+	public void resetRouteWasFinished() {
 		routeWasFinished = false;
 	}
 
@@ -143,6 +144,18 @@ public class RoutingHelper {
 
 	public String getLastRouteCalcErrorShort() {
 		return routeRecalculationHelper.getLastRouteCalcErrorShort();
+	}
+
+	public void resumeNavigation() {
+		setRoutePlanningMode(false);
+		setFollowingMode(true);
+		setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
+	}
+
+	public void pauseNavigation() {
+		setRoutePlanningMode(true);
+		setFollowingMode(false);
+		setPauseNavigation(true);
 	}
 
 	public void setPauseNavigation(boolean pause) {
@@ -216,6 +229,7 @@ public class RoutingHelper {
 			}
 		});
 		this.finalLocation = newFinalLocation;
+		this.lastGoodRouteLocation = null;
 		this.intermediatePoints = newIntermediatePoints;
 		routeRecalculationHelper.stopCalculation();
 		if (newFinalLocation == null) {
@@ -226,14 +240,6 @@ public class RoutingHelper {
 			setFollowingMode(false);
 		}
 		transportRoutingHelper.clearCurrentRoute(newFinalLocation);
-	}
-
-	public synchronized boolean isMissingMapsOnlineSearching() {
-		return routeRecalculationHelper.isMissingMapsSearching();
-	}
-
-	public synchronized boolean startMissingMapsOnlineSearch() {
-		return routeRecalculationHelper.startMissingMapsOnlineSearch();
 	}
 
 	private synchronized void finishCurrentRoute() {
@@ -283,11 +289,11 @@ public class RoutingHelper {
 	}
 
 	public boolean isCurrentGPXRouteV2() {
-		return currentGPXRoute != null && RouteExporter.OSMAND_ROUTER_V2.equals(currentGPXRoute.getFile().author);
+		return currentGPXRoute != null && RouteExporter.OSMAND_ROUTER_V2.equals(currentGPXRoute.getFile().getAuthor());
 	}
 
 	@Nullable
-	public GPXFile getCurrentGPX() {
+	public GpxFile getCurrentGPX() {
 		return currentGPXRoute != null ? currentGPXRoute.getFile() : null;
 	}
 
@@ -408,7 +414,7 @@ public class RoutingHelper {
 
 			// 0. Route empty or needs to be extended? Then re-calculate route.
 			if (route.isEmpty()) {
-				calculateRoute = !route.hasMissingMaps();
+				calculateRoute = !route.hasMissingMaps() || isLocationJumping(currentLocation, targetPointsChanged);
 			} else {
 				// 1. Update current route position status according to latest received location
 				boolean finished = updateCurrentRouteStatus(currentLocation, posTolerance);
@@ -424,8 +430,12 @@ public class RoutingHelper {
 
 				// 2. Analyze if we need to recalculate route
 				// >100m off current route (sideways) or parameter (for Straight line)
-				if (currentRoute > 0 && allowableDeviation > 0) {
-					distOrth = RoutingHelperUtils.getOrthogonalDistance(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
+				if (allowableDeviation > 0) {
+					if (currentRoute == 0) {
+						distOrth = currentLocation.distanceTo(routeNodes.get(currentRoute)); // deviation at the start
+					} else {
+						distOrth = RoutingHelperUtils.getOrthogonalDistance(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
+					}
 					if (distOrth > allowableDeviation) {
 						log.info("Recalculate route, because correlation  : " + distOrth); //$NON-NLS-1$
 						isDeviatedFromRoute = true;
@@ -464,16 +474,24 @@ public class RoutingHelper {
 
 				// calculate projection of current location
 				if (currentRoute > 0 && !inRecalc) {
-					locationProjection = RoutingHelperUtils.getProject(currentLocation, routeNodes.get(currentRoute - 1),
-							routeNodes.get(currentRoute));
-					if (settings.APPROXIMATE_BEARING.get()) {
-						RoutingHelperUtils.approximateBearingIfNeeded(this, locationProjection,
-								currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
+					Location previousRouteLocation = routeNodes.get(currentRoute - 1);
+					Location currentRouteLocation = routeNodes.get(currentRoute);
+					locationProjection = RoutingHelperUtils.getProject(currentLocation, previousRouteLocation,
+							currentRouteLocation);
+					if (settings.SNAP_TO_ROAD.get() && currentRoute + 1 < routeNodes.size()) {
+						boolean previewNextTurn = settings.PREVIEW_NEXT_TURN.get();
+						Location nextRouteLocation = routeNodes.get(currentRoute + 1);
+						RoutingHelperUtils.approximateBearingIfNeeded(this,
+								locationProjection, currentLocation, previousRouteLocation,
+								currentRouteLocation, nextRouteLocation, previewNextTurn);
 					}
 				}
 			}
 			lastFixedLocation = currentLocation;
 			lastProjection = locationProjection;
+			if (!route.isEmpty()) {
+				lastGoodRouteLocation = currentLocation;
+			}
 		}
 
 		if (calculateRoute) {
@@ -489,6 +507,18 @@ public class RoutingHelper {
 		} else {
 			return currentLocation;
 		}
+	}
+
+	private boolean isLocationJumping(Location currentLocation, boolean targetPointsChanged) {
+		if (route.hasMissingMaps() && lastGoodRouteLocation != null && !targetPointsChanged) {
+			double time = currentLocation.getTime() - lastGoodRouteLocation.getTime();
+			double dist = currentLocation.distanceTo(lastGoodRouteLocation);
+			if (time > 0) {
+				double speed = dist / (time / 1000);
+				return speed > MAX_POSSIBLE_SPEED;
+			}
+		}
+		return false;
 	}
 
 	public double getMaxAllowedProjectDist(@NonNull Location location) {
@@ -600,10 +630,8 @@ public class RoutingHelper {
 
 		// 5. Update car navigation
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
-		NavigationService navigationService = app.getNavigationService();
-		if (carNavigationSession != null && navigationService != null && System.currentTimeMillis() - lastCarNavUpdateTime > 1000) {
-			lastCarNavUpdateTime = System.currentTimeMillis();
-			app.runInUIThread(() -> navigationService.updateCarNavigation(currentLocation));
+		if (carNavigationSession != null) {
+			app.runInUIThread(() -> carNavigationSession.updateCarNavigation(currentLocation));
 		}
 		return false;
 	}
@@ -643,7 +671,8 @@ public class RoutingHelper {
 						deviceHasBearing = true;
 					}
 					// lastFixedLocation.bearingTo -  gives artefacts during u-turn, so we avoid for devices with bearing
-					if (currentLocation.hasBearing() || (!deviceHasBearing && lastFixedLocation != null)) {
+					if ((currentRoute > 0 || newCurrentRoute > 0) &&
+							(currentLocation.hasBearing() || (!deviceHasBearing && lastFixedLocation != null))) {
 						float bearingToRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
 						float bearingRouteNext = routeNodes.get(newCurrentRoute).bearingTo(routeNodes.get(newCurrentRoute + 1));
 						float bearingMotion = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation
@@ -774,7 +803,7 @@ public class RoutingHelper {
 
 	@NonNull
 	public synchronized CurrentStreetName getCurrentName(NextDirectionInfo n) {
-		return CurrentStreetName.getCurrentName(this, n);
+		return new CurrentStreetName(this, n);
 	}
 
 	public RouteSegmentResult getCurrentSegmentResult() {
@@ -883,11 +912,11 @@ public class RoutingHelper {
 		return route;
 	}
 
-	public GPXFile generateGPXFileWithRoute(String name) {
+	public GpxFile generateGPXFileWithRoute(String name) {
 		return generateGPXFileWithRoute(route, name);
 	}
 
-	public GPXFile generateGPXFileWithRoute(RouteCalculationResult route, String name) {
+	public GpxFile generateGPXFileWithRoute(RouteCalculationResult route, String name) {
 		return provider.createOsmandRouterGPX(route, app, name);
 	}
 
@@ -899,8 +928,8 @@ public class RoutingHelper {
 		return provider.generateGpxPoints(env, gctx, locationsHolder);
 	}
 
-	public GpxRouteApproximation calculateGpxApproximation(RoutingEnvironment env, GpxRouteApproximation gctx, List<GpxPoint> points, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
-		return provider.calculateGpxPointsApproximation(env, gctx, points, resultMatcher);
+	public GpxRouteApproximation calculateGpxApproximation(RoutingEnvironment env, GpxRouteApproximation gctx, List<GpxPoint> points, ResultMatcher<GpxRouteApproximation> resultMatcher, boolean useExternalTimestamps) throws IOException, InterruptedException {
+		return provider.calculateGpxPointsApproximation(env, gctx, points, resultMatcher, useExternalTimestamps);
 	}
 
 	public void notifyIfRouteIsCalculated() {

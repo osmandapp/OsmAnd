@@ -1,29 +1,11 @@
 package net.osmand.plus.download.local;
 
-import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
-import static net.osmand.IndexConstants.BINARY_ROAD_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_WIKI_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.FONT_INDEX_DIR;
-import static net.osmand.IndexConstants.GEOTIFF_DIR;
-import static net.osmand.IndexConstants.HEIGHTMAP_INDEX_DIR;
-import static net.osmand.IndexConstants.HEIGHTMAP_SQLITE_EXT;
-import static net.osmand.IndexConstants.HIDDEN_BACKUP_DIR;
-import static net.osmand.IndexConstants.HIDDEN_DIR;
-import static net.osmand.IndexConstants.MAPS_PATH;
-import static net.osmand.IndexConstants.NAUTICAL_INDEX_DIR;
-import static net.osmand.IndexConstants.ROADS_INDEX_DIR;
-import static net.osmand.IndexConstants.SQLITE_EXT;
-import static net.osmand.IndexConstants.SRTM_INDEX_DIR;
-import static net.osmand.IndexConstants.TIF_EXT;
-import static net.osmand.IndexConstants.TILES_INDEX_DIR;
-import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
-import static net.osmand.IndexConstants.WIKIVOYAGE_INDEX_DIR;
-import static net.osmand.IndexConstants.WIKI_INDEX_DIR;
+import static net.osmand.IndexConstants.*;
+import static net.osmand.plus.download.local.LocalItemType.COLOR_DATA;
 import static net.osmand.plus.download.local.LocalItemType.DEPTH_DATA;
 import static net.osmand.plus.download.local.LocalItemType.FONT_DATA;
 import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
+import static net.osmand.plus.download.local.LocalItemType.ROAD_DATA;
 import static net.osmand.plus.download.local.LocalItemType.TERRAIN_DATA;
 import static net.osmand.plus.download.local.LocalItemType.TILES_DATA;
 import static net.osmand.plus.download.local.LocalItemType.TTS_VOICE_DATA;
@@ -45,15 +27,17 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.SrtmDownloadItem;
+import net.osmand.plus.download.local.dialogs.LiveGroupItem;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 
-public class LocalOperationTask extends AsyncTask<LocalItem, LocalItem, String> {
+public class LocalOperationTask extends AsyncTask<BaseLocalItem, BaseLocalItem, String> {
 
 	private final OsmandApplication app;
 	private final OperationType type;
@@ -73,17 +57,17 @@ public class LocalOperationTask extends AsyncTask<LocalItem, LocalItem, String> 
 	}
 
 	@Override
-	protected void onProgressUpdate(LocalItem... values) {
+	protected void onProgressUpdate(BaseLocalItem... values) {
 		if (listener != null) {
 			listener.onOperationProgress(type, values);
 		}
 	}
 
 	@Override
-	protected String doInBackground(LocalItem... params) {
+	protected String doInBackground(BaseLocalItem... params) {
 		int count = 0;
 		int total = 0;
-		for (LocalItem item : params) {
+		for (BaseLocalItem item : params) {
 			if (!isCancelled()) {
 				boolean success = processItem(item);
 				total++;
@@ -112,6 +96,23 @@ public class LocalOperationTask extends AsyncTask<LocalItem, LocalItem, String> 
 		if (listener != null) {
 			listener.onOperationFinished(type, result);
 		}
+	}
+
+	private boolean processItem(@NonNull BaseLocalItem item) {
+		if (item instanceof LocalItem) {
+			return processItem((LocalItem) item);
+		} else if (item instanceof LiveGroupItem) {
+			LiveGroupItem groupItem = (LiveGroupItem) item;
+
+			boolean success = false;
+			for (LocalItem localItem : groupItem.getItems()) {
+				if (!isCancelled()) {
+					success |= processItem(localItem);
+				}
+			}
+			return success;
+		}
+		return false;
 	}
 
 	private boolean processItem(@NonNull LocalItem item) {
@@ -157,12 +158,12 @@ public class LocalOperationTask extends AsyncTask<LocalItem, LocalItem, String> 
 	}
 
 	private boolean restoreItem(@NonNull LocalItem item) {
-		return move(item.getFile(), getFileToRestore(item));
+		return FileUtils.move(item.getFile(), getFileToRestore(item));
 	}
 
 	private boolean backupItem(@NonNull LocalItem item) {
 		File file = item.getFile();
-		boolean success = move(file, getFileToBackup(item));
+		boolean success = FileUtils.move(file, getFileToBackup(item));
 		if (success) {
 			app.getResourceManager().closeFile(file.getName());
 		}
@@ -176,14 +177,6 @@ public class LocalOperationTask extends AsyncTask<LocalItem, LocalItem, String> 
 			clearMapillaryTiles(item);
 		}
 		return source != null;
-	}
-
-	private boolean move(@NonNull File from, @NonNull File to) {
-		File parent = to.getParentFile();
-		if (parent != null && !parent.exists()) {
-			parent.mkdirs();
-		}
-		return from.renameTo(to);
 	}
 
 	@NonNull
@@ -205,15 +198,11 @@ public class LocalOperationTask extends AsyncTask<LocalItem, LocalItem, String> 
 			if (item.isHidden(app)) {
 				parent = app.getAppInternalPath(HIDDEN_DIR);
 			} else if (item.getType() == MAP_DATA) {
-				if (fileName.endsWith(BINARY_ROAD_MAP_INDEX_EXT)) {
-					parent = app.getAppPath(ROADS_INDEX_DIR);
-				} else {
-					parent = app.getAppPath(MAPS_PATH);
-				}
+				parent = app.getAppPath(MAPS_PATH);
+			} else if (item.getType() == ROAD_DATA) {
+				parent = app.getAppPath(ROADS_INDEX_DIR);
 			} else if (item.getType() == TILES_DATA) {
-				if (fileName.endsWith(HEIGHTMAP_SQLITE_EXT)) {
-					parent = app.getAppPath(HEIGHTMAP_INDEX_DIR);
-				} else if (fileName.endsWith(TIF_EXT)) {
+				if (fileName.endsWith(TIF_EXT)) {
 					parent = app.getAppPath(GEOTIFF_DIR);
 				} else {
 					parent = app.getAppPath(TILES_INDEX_DIR);
@@ -239,6 +228,8 @@ public class LocalOperationTask extends AsyncTask<LocalItem, LocalItem, String> 
 						|| fileName.endsWith(BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
 					parent = app.getAppPath(WIKIVOYAGE_INDEX_DIR);
 				}
+			} else if (item.getType() == COLOR_DATA) {
+				parent = app.getAppPath(COLOR_PALETTE_DIR);
 			}
 			return new File(parent, fileName);
 		}
@@ -295,7 +286,7 @@ public class LocalOperationTask extends AsyncTask<LocalItem, LocalItem, String> 
 
 		}
 
-		default void onOperationProgress(@NonNull OperationType type, @NonNull LocalItem... items) {
+		default void onOperationProgress(@NonNull OperationType type, @NonNull BaseLocalItem... items) {
 
 		}
 

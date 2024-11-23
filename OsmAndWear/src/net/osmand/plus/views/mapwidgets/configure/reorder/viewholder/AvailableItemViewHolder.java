@@ -68,17 +68,15 @@ public class AvailableItemViewHolder extends ViewHolder implements UnmovableItem
 		public String key;
 		public String title;
 		public MapWidgetInfo info;
-		public int order;
 		public int iconId;
 
 		public AvailableWidgetUiInfo() {
 		}
 
-		public AvailableWidgetUiInfo(@NonNull AddedWidgetUiInfo addedWidgetUiInfo, int order) {
+		public AvailableWidgetUiInfo(@NonNull AddedWidgetUiInfo addedWidgetUiInfo) {
 			this.key = addedWidgetUiInfo.key;
 			this.title = addedWidgetUiInfo.title;
 			this.info = addedWidgetUiInfo.info;
-			this.order = order;
 			this.iconId = addedWidgetUiInfo.iconId;
 		}
 	}

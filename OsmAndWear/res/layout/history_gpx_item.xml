@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
 				android:layout_marginLeft="@dimen/content_padding"
 				android:layout_marginRight="@dimen/content_padding"
 				android:translationX="25dp"
-				osmand:srcCompat="@drawable/ic_action_polygom_dark" />
+				app:srcCompat="@drawable/ic_action_polygom_dark" />
 
 			<LinearLayout
 				android:id="@+id/name_and_read_section_container"
@@ -51,8 +51,8 @@
 					android:letterSpacing="@dimen/text_button_letter_spacing"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"
-					osmand:lineHeight="@dimen/default_title_line_height"
-					osmand:typeface="@string/font_roboto_regular"
+					app:lineHeight="@dimen/default_title_line_height"
+					android:textStyle="normal"
 					tools:text="@string/current_track" />
 
 				<LinearLayout
@@ -72,7 +72,7 @@
 						android:layout_height="@dimen/content_padding"
 						android:layout_marginEnd="@dimen/content_padding_small_half"
 						android:layout_marginRight="@dimen/content_padding_small_half"
-						osmand:srcCompat="@drawable/ic_action_distance_16" />
+						app:srcCompat="@drawable/ic_action_distance_16" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/distance"
@@ -84,8 +84,8 @@
 						android:maxLines="1"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:lineHeight="@dimen/default_desc_line_height"
-						osmand:typeface="@string/font_roboto_regular"
+						app:lineHeight="@dimen/default_desc_line_height"
+						android:textStyle="normal"
 						tools:text="13 km" />
 
 					<androidx.appcompat.widget.AppCompatImageView
@@ -94,7 +94,7 @@
 						android:layout_height="@dimen/content_padding"
 						android:layout_marginEnd="@dimen/content_padding_small_half"
 						android:layout_marginRight="@dimen/content_padding_small_half"
-						osmand:srcCompat="@drawable/ic_action_time_16" />
+						app:srcCompat="@drawable/ic_action_time_16" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/time"
@@ -106,8 +106,8 @@
 						android:maxLines="1"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:lineHeight="@dimen/default_desc_line_height"
-						osmand:typeface="@string/font_roboto_regular"
+						app:lineHeight="@dimen/default_desc_line_height"
+						android:textStyle="normal"
 						tools:text="1:23:56" />
 
 					<androidx.appcompat.widget.AppCompatImageView
@@ -116,7 +116,7 @@
 						android:layout_height="@dimen/content_padding"
 						android:layout_marginEnd="@dimen/content_padding_small_half"
 						android:layout_marginRight="@dimen/content_padding_small_half"
-						osmand:srcCompat="@drawable/ic_action_waypoint_16" />
+						app:srcCompat="@drawable/ic_action_waypoint_16" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/points_count"
@@ -126,8 +126,8 @@
 						android:maxLines="1"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:lineHeight="@dimen/default_desc_line_height"
-						osmand:typeface="@string/font_roboto_regular"
+						app:lineHeight="@dimen/default_desc_line_height"
+						android:textStyle="normal"
 						tools:text="14" />
 
 				</LinearLayout>

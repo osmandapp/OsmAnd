@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,17 +26,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
-import net.osmand.gpx.GPXUtilities.PointsGroup;
+import net.osmand.data.LatLon;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.myplaces.tracks.MapBitmapDrawerListener;
+import net.osmand.plus.myplaces.tracks.MapDrawParams;
+import net.osmand.plus.myplaces.tracks.PointBitmapDrawer;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -48,6 +53,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 	private TextView addAddressBtn;
 	private TextView addToHiddenGroupInfo;
 	private ImageView deleteAddressIcon;
+	private ImageView image;
 	private ImageView nameIcon;
 	private GroupAdapter groupListAdapter;
 	private RecyclerView groupRecyclerView;
@@ -57,6 +63,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 	private EditText addressEdit;
 
 	protected PointsGroup selectedGroup;
+	protected PointBitmapDrawer pointDrawer;
 	protected boolean skipConfirmationDialog;
 
 	@Override
@@ -94,6 +101,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 		TextInputLayout nameCaption = view.findViewById(R.id.name_caption);
 		nameCaption.setHint(getString(R.string.shared_string_name));
 
+		image = view.findViewById(R.id.image);
 		nameIcon = view.findViewById(R.id.name_icon);
 		addressEdit = view.findViewById(R.id.address_edit);
 		descriptionEdit = view.findViewById(R.id.description_edit);
@@ -214,6 +222,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 			descriptionEdit.getParent().requestDisallowInterceptTouchEvent(true);
 			return false;
 		});
+		drawPointImage();
 
 		return view;
 	}
@@ -287,7 +296,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 	@Override
 	public void onCardPressed(@NonNull BaseCard card) {
 		super.onCardPressed(card);
-		if (card instanceof ShapesCard || card instanceof IconsCard) {
+		if (card instanceof ShapesCard) {
 			updateNameIcon();
 		}
 	}
@@ -306,7 +315,7 @@ public abstract class PointEditorFragment extends EditorFragment {
 
 	@NonNull
 	public String getSelectedCategory() {
-		return selectedGroup != null ? selectedGroup.name : "";
+		return selectedGroup != null ? selectedGroup.getName() : "";
 	}
 
 	@Override
@@ -314,6 +323,9 @@ public abstract class PointEditorFragment extends EditorFragment {
 		PointEditor editor = getEditor();
 		if (!wasSaved() && editor != null && !editor.isNew() && !cancelled) {
 			save(false);
+		}
+		if (pointDrawer != null) {
+			pointDrawer.setDrawingAllowed(false);
 		}
 		super.onDestroyView();
 	}
@@ -337,12 +349,12 @@ public abstract class PointEditorFragment extends EditorFragment {
 	public void setPointsGroup(@NonNull PointsGroup group, boolean updateAppearance) {
 		this.selectedGroup = group;
 		if (updateAppearance) {
-			setColor(group.color);
-			setIconName(group.iconName);
-			setBackgroundType(group.backgroundType);
+			setColor(group.getColor());
+			setIconName(group.getIconName());
+			setBackgroundType(group.getBackgroundType());
 			updateContent();
 		}
-		AndroidUiHelper.updateVisibility(addToHiddenGroupInfo, !isCategoryVisible(group.name));
+		AndroidUiHelper.updateVisibility(addToHiddenGroupInfo, !isCategoryVisible(group.getName()));
 	}
 
 	private boolean shouldUpdateAppearance() {
@@ -361,6 +373,33 @@ public abstract class PointEditorFragment extends EditorFragment {
 			position = groupListAdapter.items.size() == itemPosition + 1 ? itemPosition + 1 : itemPosition;
 		}
 		groupRecyclerView.scrollToPosition(position);
+	}
+
+	protected void drawPointImage() {
+		LatLon latLon = getPointCoordinates();
+		MapDrawParams params = getMapDrawParams();
+		pointDrawer = new PointBitmapDrawer(app, params, latLon);
+		pointDrawer.addListener(new MapBitmapDrawerListener() {
+			@Override
+			public void onBitmapDrawn(boolean success) {
+				if (image != null) {
+					image.setClipToOutline(true);
+					image.setImageBitmap(pointDrawer.getMapBitmap());
+				}
+			}
+		});
+		pointDrawer.initAndDraw();
+	}
+
+	@NonNull
+	private MapDrawParams getMapDrawParams() {
+		DisplayMetrics metrics = new DisplayMetrics();
+		AndroidUtils.getDisplay(requireContext()).getMetrics(metrics);
+
+		int width = metrics.widthPixels - AndroidUtils.dpToPx(app, 32);
+		int height = getResources().getDimensionPixelSize(R.dimen.point_image_height);
+
+		return new MapDrawParams(metrics.density, width, height);
 	}
 
 	protected String getLastUsedGroup() {
@@ -395,6 +434,9 @@ public abstract class PointEditorFragment extends EditorFragment {
 	@NonNull
 	protected abstract Map<String, PointsGroup> getPointsGroups();
 
+	@NonNull
+	protected abstract LatLon getPointCoordinates();
+
 	protected abstract String getAddressInitValue();
 
 	protected abstract String getDescriptionInitValue();
@@ -410,13 +452,13 @@ public abstract class PointEditorFragment extends EditorFragment {
 	protected String getCategoryTextValue() {
 		RecyclerView recyclerView = view.findViewById(R.id.group_recycler_view);
 		if (recyclerView.getAdapter() != null && selectedGroup != null) {
-			if (isPersonalCategoryDisplayName(requireContext(), selectedGroup.name)) {
+			if (isPersonalCategoryDisplayName(requireContext(), selectedGroup.getName())) {
 				return PERSONAL_CATEGORY;
 			}
-			if (Algorithms.stringsEqual(selectedGroup.name, getDefaultCategoryName())) {
+			if (Algorithms.stringsEqual(selectedGroup.getName(), getDefaultCategoryName())) {
 				return "";
 			}
-			return selectedGroup.name;
+			return selectedGroup.getName();
 		}
 		return "";
 	}
@@ -485,8 +527,8 @@ public abstract class PointEditorFragment extends EditorFragment {
 					notifyItemChanged(previousSelectedPosition);
 				});
 				PointsGroup group = items.get(position);
-				holder.groupName.setText(group.name);
-				holder.pointsCounter.setText(String.valueOf(group.points.size()));
+				holder.groupName.setText(group.getName());
+				holder.pointsCounter.setText(String.valueOf(group.getPoints().size()));
 				int strokeColor;
 				int strokeWidth;
 				if (Algorithms.objectEquals(selectedGroup, items.get(position))) {
@@ -504,8 +546,8 @@ public abstract class PointEditorFragment extends EditorFragment {
 				}
 				int color;
 				int iconID;
-				if (isCategoryVisible(group.name)) {
-					color = group.color == 0 ? getDefaultColor() : group.color;
+				if (isCategoryVisible(group.getName())) {
+					color = group.getColor() == 0 ? getDefaultColor() : group.getColor();
 					iconID = R.drawable.ic_action_folder;
 					holder.groupName.setTypeface(null, Typeface.NORMAL);
 				} else {

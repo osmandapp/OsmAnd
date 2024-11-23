@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -12,7 +12,7 @@
 		android:id="@+id/nested_scroll"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		osmand:layout_behavior="@string/appbar_scrolling_view_behavior">
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 		<LinearLayout
 			android:layout_width="match_parent"
@@ -74,10 +74,10 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:background="?attr/selectableItemBackground"
-					osmand:setSubText="@string/keep_both_desc"
-					osmand:setSubTextColor="?android:textColorSecondary"
-					osmand:setText="@string/keep_both"
-					osmand:setTextColor="?attr/active_color_basic" />
+					app:setSubText="@string/keep_both_desc"
+					app:setSubTextColor="?android:textColorSecondary"
+					app:setText="@string/keep_both"
+					app:setTextColor="?attr/active_color_basic" />
 
 			</FrameLayout>
 
@@ -91,10 +91,10 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:background="?attr/selectableItemBackground"
-					osmand:setSubText="@string/replace_all_desc"
-					osmand:setSubTextColor="?android:textColorTertiaryInverse"
-					osmand:setText="@string/replace_all"
-					osmand:setTextColor="?attr/dlg_btn_primary_text" />
+					app:setSubText="@string/replace_all_desc"
+					app:setSubTextColor="?android:textColorTertiaryInverse"
+					app:setText="@string/replace_all"
+					app:setTextColor="?attr/dlg_btn_primary_text" />
 
 			</FrameLayout>
 
@@ -115,23 +115,23 @@
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/toolbar_height_expanded"
 			android:background="?attr/actionModeBackground"
-			osmand:expandedTitleMarginBottom="@dimen/content_padding_small"
-			osmand:expandedTitleMarginEnd="@dimen/content_padding"
-			osmand:expandedTitleMarginStart="@dimen/content_padding"
-			osmand:collapsedTitleTextAppearance="@style/AppBarTitle"
-			osmand:expandedTitleGravity="start|bottom"
-			osmand:expandedTitleTextAppearance="@style/AppBarTitle"
-			osmand:layout_scrollFlags="scroll|exitUntilCollapsed">
+			app:expandedTitleMarginBottom="@dimen/content_padding_small"
+			app:expandedTitleMarginEnd="@dimen/content_padding"
+			app:expandedTitleMarginStart="@dimen/content_padding"
+			app:collapsedTitleTextAppearance="@style/AppBarTitle"
+			app:expandedTitleGravity="start|bottom"
+			app:expandedTitleTextAppearance="@style/AppBarTitle"
+			app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
 			<androidx.appcompat.widget.Toolbar
 				android:id="@+id/toolbar"
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/toolbar_height"
 				android:minHeight="@dimen/toolbar_height"
-				osmand:titleMarginEnd="0dp"
-				osmand:titleMarginStart="0dp"
-				osmand:layout_collapseMode="pin"
-				osmand:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
+				app:titleMarginEnd="0dp"
+				app:titleMarginStart="0dp"
+				app:layout_collapseMode="pin"
+				app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
 				tools:title="@string/import_duplicates_title">
 
 			</androidx.appcompat.widget.Toolbar>
@@ -145,9 +145,9 @@
 			android:layout_height="5dp"
 			android:visibility="gone"
 			android:indeterminate="true"
-			osmand:mpb_progressStyle="horizontal"
-			osmand:mpb_setBothDrawables="true"
-			osmand:mpb_useIntrinsicPadding="false"
+			app:mpb_progressStyle="horizontal"
+			app:mpb_setBothDrawables="true"
+			app:mpb_useIntrinsicPadding="false"
 			tools:visibility="visible" />
 
 	</com.google.android.material.appbar.AppBarLayout>

@@ -1,5 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/change_color_view"
     android:layout_width="match_parent"
@@ -25,7 +25,7 @@
         android:layout_marginRight="@dimen/list_content_padding"
         android:translationX="30dp"
         android:translationY="-2dp"
-        osmand:srcCompat="@drawable/ic_action_favorite" />
+        app:srcCompat="@drawable/ic_action_favorite" />
 
     <LinearLayout
         android:layout_width="0dp"

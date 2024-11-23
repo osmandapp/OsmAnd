@@ -9,42 +9,34 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 
 	private static final Log log = PlatformUtil.getLog(LoadArticlesTask.class);
 
-	private static final String HELP_SITEMAP_FILE_NAME = "sitemap.xml";
-	private static final String HELP_LINKS_FILE_NAME = "help-links-android.json";
-
-	private static final String SITEMAP_URL = SERVER_URL + "/sitemap.xml";
-	private static final String HELP_LINKS_URL = SERVER_URL + "/help-links-android.json";
+	private static final String HELP_STRUCTURE_FILE_NAME = "help-structure.json";
 	public static final String DOCS_LINKS_URL = SERVER_URL + "/docs/user/";
+	private static final String HELP_LINKS_URL = SERVER_URL + "/" + HELP_STRUCTURE_FILE_NAME;
 
 	private final OsmandApplication app;
 
-	private final HelpArticleNode articleNode = new HelpArticleNode(DOCS_LINKS_URL);
+	private final Map<String, HelpArticle> topArticles = new LinkedHashMap<>();
 	private final Map<String, String> telegramChats = new LinkedHashMap<>();
 	private final Map<String, String> popularArticles = new LinkedHashMap<>();
 
@@ -65,42 +57,70 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 
 	@Override
 	protected Void doInBackground(Void... voids) {
-		loadPopularArticles();
-		loadSitemapArticles();
+		loadHelpStructure();
 		return null;
 	}
 
-	private void loadPopularArticles() {
-		File file = new File(getHelpDir(), HELP_LINKS_FILE_NAME);
+	private void loadHelpStructure() {
+		File file = new File(getHelpDir(), HELP_STRUCTURE_FILE_NAME);
 		if (file.exists()) {
-			parsePopularArticles(file);
+			parseHelpStructure(file);
 		} else {
 			String error = AndroidNetworkUtils.downloadFile(HELP_LINKS_URL, file, false, null);
 			if (error == null) {
-				parsePopularArticles(file);
+				parseHelpStructure(file);
 			} else {
 				log.error(error);
 			}
 		}
 	}
 
-	private void parsePopularArticles(@NonNull File file) {
+	private void parseHelpStructure(@NonNull File file) {
 		try {
 			StringBuilder builder = Algorithms.readFromInputStream(new FileInputStream(file));
 			JSONObject jsonObject = new JSONObject(builder.toString());
 
-			JSONObject json = jsonObject.optJSONObject("telegramChats");
-			if (json != null) {
-				collectGroupItems(json, telegramChats);
+			JSONArray jsonArray = jsonObject.optJSONArray("articles");
+			if (jsonArray != null) {
+				buildArticlesHierarchy(parseArticles(jsonArray));
 			}
-			json = jsonObject.optJSONObject("popularArticles");
-			if (json != null) {
-				collectGroupItems(json, popularArticles);
+			JSONObject android = jsonObject.optJSONObject("android");
+			if (android != null) {
+				JSONObject json = android.optJSONObject("popularArticles");
+				if (json != null) {
+					collectGroupItems(json, popularArticles);
+				}
+				json = android.optJSONObject("telegramChats");
+				if (json != null) {
+					collectGroupItems(json, telegramChats);
+				}
 			}
-		} catch (JSONException | IOException e) {
+		} catch (Exception e) {
 			file.delete();
 			log.error(e);
 		}
+	}
+
+	private void buildArticlesHierarchy(@NonNull List<HelpArticle> articles) {
+		List<HelpArticle> lastArticlesPerLevel = new ArrayList<>();
+		for (HelpArticle article : articles) {
+			processArticle(article, lastArticlesPerLevel);
+		}
+	}
+
+	private void processArticle(@NonNull HelpArticle article, @NonNull List<HelpArticle> lastArticlesPerLevel) {
+		while (lastArticlesPerLevel.size() < article.level) {
+			lastArticlesPerLevel.add(null);
+		}
+		if (article.level == 2) {
+			topArticles.put(article.label, article);
+		} else {
+			HelpArticle parent = lastArticlesPerLevel.get(article.level - 2);
+			if (parent != null) {
+				parent.articles.put(article.label, article);
+			}
+		}
+		lastArticlesPerLevel.set(article.level - 1, article);
 	}
 
 	private void collectGroupItems(@NonNull JSONObject json, @NonNull Map<String, String> map) throws JSONException {
@@ -111,72 +131,24 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 		}
 	}
 
-	private void loadSitemapArticles() {
-		File file = new File(getHelpDir(), HELP_SITEMAP_FILE_NAME);
-		if (file.exists()) {
-			processSitemapArticles(file);
-		} else {
-			String error = AndroidNetworkUtils.downloadFile(SITEMAP_URL, file, false, null);
-			if (error == null) {
-				processSitemapArticles(file);
-			} else {
-				log.error(error);
-			}
-		}
-	}
-
-	private void processSitemapArticles(@NonNull File file) {
-		List<String> links = parseSitemapLinks(file);
-		for (String url : links) {
-			addArticle(articleNode, url);
-		}
-	}
-
-	private void addArticle(@NonNull HelpArticleNode currentNode, @NonNull String url) {
-		String[] parts = url.replace(DOCS_LINKS_URL, "").split("/");
-
-		for (String part : parts) {
-			if (!Algorithms.isEmpty(part)) {
-				HelpArticleNode articleNode = currentNode.articles.get(part);
-				if (articleNode == null) {
-					articleNode = new HelpArticleNode(currentNode.url + part + "/");
-					currentNode.articles.put(part, articleNode);
-				}
-				currentNode = articleNode;
-			}
-		}
-	}
-
 	@NonNull
-	private List<String> parseSitemapLinks(@NonNull File file) {
-		List<String> links = new ArrayList<>();
+	private List<HelpArticle> parseArticles(@NonNull JSONArray array) throws JSONException {
+		List<HelpArticle> articles = new ArrayList<>();
+		for (int i = 0; i < array.length(); i++) {
+			JSONObject object = array.getJSONObject(i);
 
-		InputStream stream = null;
-		try {
-			stream = new FileInputStream(file);
-			XmlPullParser parser = PlatformUtil.newXMLPullParser();
-			parser.setInput(stream, "UTF-8");
+			String url = object.optString("url");
+			boolean hasUrl = !Algorithms.isEmpty(url);
+			url = hasUrl ? SERVER_URL + url : "";
 
-			int tok;
-			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
-				if (tok == XmlPullParser.START_TAG) {
-					String tag = parser.getName();
-					if ("url".equals(tag)) {
-						Map<String, String> values = GPXUtilities.readTextMap(parser, tag);
-						String url = values.get("loc");
-						if (url != null && url.startsWith(DOCS_LINKS_URL)) {
-							links.add(url);
-						}
-					}
-				}
+			boolean available = object.optBoolean("android", true);
+			if (available && (url.startsWith(DOCS_LINKS_URL) || !hasUrl)) {
+				int level = object.optInt("level");
+				String label = object.optString("label");
+				articles.add(new HelpArticle(url, label, level));
 			}
-		} catch (IOException | XmlPullParserException e) {
-			file.delete();
-			log.error(e);
-		} finally {
-			Algorithms.closeStream(stream);
 		}
-		return links;
+		return articles;
 	}
 
 	@NonNull
@@ -191,7 +163,7 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected void onPostExecute(Void unused) {
 		if (listener != null) {
-			listener.downloadFinished(articleNode, popularArticles, telegramChats);
+			listener.downloadFinished(topArticles, popularArticles, telegramChats);
 		}
 	}
 
@@ -199,6 +171,6 @@ public class LoadArticlesTask extends AsyncTask<Void, Void, Void> {
 
 		void downloadStarted();
 
-		void downloadFinished(@NonNull HelpArticleNode articleNode, @NonNull Map<String, String> popularArticles, @NonNull Map<String, String> telegramChats);
+		void downloadFinished(@NonNull Map<String, HelpArticle> articles, @NonNull Map<String, String> popularArticles, @NonNull Map<String, String> telegramChats);
 	}
 }

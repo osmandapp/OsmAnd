@@ -124,7 +124,7 @@ public class GoodsRestrictionsBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	@Override
-	public void onDismiss(@NonNull @NotNull DialogInterface dialog) {
+	public void onDismiss(@NonNull DialogInterface dialog) {
 		super.onDismiss(dialog);
 		Activity activity = getActivity();
 		if (hasChangesToApply && activity != null && !activity.isChangingConfigurations()) {

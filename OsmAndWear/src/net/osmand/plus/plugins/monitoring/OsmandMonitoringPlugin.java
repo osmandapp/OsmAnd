@@ -18,7 +18,12 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.ValueHolder;
-import net.osmand.gpx.GPXFile;
+import net.osmand.plus.plugins.monitoring.actions.FinishTripRecordingAction;
+import net.osmand.plus.plugins.monitoring.actions.SaveRecordedTripAndContinueAction;
+import net.osmand.plus.plugins.monitoring.actions.StartNewTripSegmentAction;
+import net.osmand.plus.plugins.monitoring.actions.TripRecordingAction;
+import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
 import net.osmand.plus.OsmandApplication;
@@ -33,6 +38,7 @@ import net.osmand.plus.plugins.monitoring.widgets.TripRecordingTimeWidget;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
+import net.osmand.plus.settings.controllers.BatteryOptimizationController;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
@@ -167,7 +173,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		this.mapActivity = activity;
 		if (showDialogWhenActivityResumed) {
 			showDialogWhenActivityResumed = false;
-			showTripRecordingDialog(mapActivity);
+			askShowTripRecordingDialog(mapActivity);
 		}
 	}
 
@@ -228,21 +234,47 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return app.getSavingTrackHelper().getCurrentTrack();
 	}
 
-	public boolean wasTrackMonitored() {
-		return settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
-	}
-
-	public boolean hasDataToSave() {
-		return app.getSavingTrackHelper().hasDataToSave();
-	}
-
-	public void showTripRecordingDialog(@NonNull FragmentActivity activity) {
+	public void askShowTripRecordingDialog(@NonNull FragmentActivity activity) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
-		if (hasDataToSave() || wasTrackMonitored()) {
+		if (hasDataToSave() || isRecordingTrack()) {
 			TripRecordingBottomSheet.showInstance(fragmentManager);
 		} else {
-			TripRecordingStartingBottomSheet.showTripRecordingDialog(app, activity);
+			askStartRecording(activity);
 		}
+	}
+
+	public void askStartRecording(@NonNull FragmentActivity activity) {
+		BatteryOptimizationController.askShowDialog(activity, true, this::askStartRecordingStep2);
+	}
+
+	private void askStartRecordingStep2(@NonNull FragmentActivity activity) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (!manager.isStateSaved()) {
+			if (settings.SHOW_TRIP_REC_START_DIALOG.get()) {
+				TripRecordingStartingBottomSheet.showInstance(manager);
+			} else {
+				startRecording(activity);
+			}
+		}
+	}
+
+	public void startRecording(@Nullable FragmentActivity activity) {
+		app.getSavingTrackHelper().startNewSegment();
+		setRecordingTrack(true);
+		app.startNavigationService(NavigationService.USED_BY_GPX);
+
+		if (activity != null) {
+			AndroidUtils.requestNotificationPermissionIfNeeded(activity);
+		}
+	}
+
+	public boolean finishRecording() {
+		if (mapActivity != null && hasDataToSave()) {
+			saveCurrentTrack(null, mapActivity);
+			app.getNotificationHelper().refreshNotifications();
+			return true;
+		}
+		return false;
 	}
 
 	public void saveCurrentTrack() {
@@ -293,8 +325,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 				FragmentActivity fragmentActivity = activityRef != null ? activityRef.get() : mapActivity;
 				if (result != null && AndroidUtils.isActivityNotDestroyed(fragmentActivity)) {
-					Map<String, GPXFile> gpxFilesByName = result.getGpxFilesByName();
-					GPXFile gpxFile = null;
+					Map<String, GpxFile> gpxFilesByName = result.getGpxFilesByName();
+					GpxFile gpxFile = null;
 					File file = null;
 					if (!Algorithms.isEmpty(gpxFilesByName)) {
 						String gpxFileName = gpxFilesByName.keySet().iterator().next();
@@ -305,7 +337,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 					boolean gpxFileNonEmpty = gpxFile != null && (gpxFile.hasTrkPt() || gpxFile.hasWptPt());
 					if (fileExists && gpxFileNonEmpty) {
 						if (openTrack) {
-							TrackMenuFragment.openTrack(mapActivity, file, null);
+							TrackMenuFragment.openTrack(fragmentActivity, file, null);
 						} else {
 							FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
 							SaveGPXBottomSheet.showInstance(fragmentManager, file.getAbsolutePath());
@@ -348,8 +380,29 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		}
 	}
 
+	public void pauseOrResumeRecording() {
+		if (isRecordingTrack()) {
+			setRecordingTrack(false);
+			NavigationService navigationService = app.getNavigationService();
+			if (navigationService != null) {
+				navigationService.stopIfNeeded(app, NavigationService.USED_BY_GPX);
+			}
+		} else {
+			setRecordingTrack(true);
+			app.startNavigationService(NavigationService.USED_BY_GPX);
+			if (mapActivity != null) {
+				AndroidUtils.requestNotificationPermissionIfNeeded(mapActivity);
+			}
+		}
+	}
+
 	public void stopRecording() {
-		settings.SAVE_GLOBAL_TRACK_TO_GPX.set(false);
+		stopRecording(false);
+	}
+
+	public void stopRecording(boolean clearData) {
+		setRecordingTrack(false);
+		app.getSavingTrackHelper().onStopRecording(clearData);
 		if (app.getNavigationService() != null) {
 			app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_GPX);
 		}
@@ -357,6 +410,18 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	public boolean isSaving() {
 		return isSaving;
+	}
+
+	public void setRecordingTrack(boolean recording) {
+		settings.SAVE_GLOBAL_TRACK_TO_GPX.set(recording);
+	}
+
+	public boolean isRecordingTrack() {
+		return settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
+	}
+
+	public boolean hasDataToSave() {
+		return app.getSavingTrackHelper().hasDataToSave();
 	}
 
 	public boolean isLiveMonitoringEnabled() {
@@ -373,8 +438,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		if (choice.value || activity == null) {
 			Runnable runnable = () -> {
 				app.getSavingTrackHelper().startNewSegment();
+				setRecordingTrack(true);
 				settings.SAVE_GLOBAL_TRACK_INTERVAL.set(vs.value);
-				settings.SAVE_GLOBAL_TRACK_TO_GPX.set(true);
 				settings.SAVE_GLOBAL_TRACK_REMEMBER.set(choice.value);
 
 				if (activity != null) {
@@ -384,12 +449,22 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			};
 			runnable.run();
 		} else {
-			TripRecordingStartingBottomSheet.showTripRecordingDialog(app, activity);
+			askStartRecording(activity);
 		}
 	}
 
 	@Override
 	public DashFragmentData getCardFragment() {
 		return DashTrackFragment.FRAGMENT_DATA;
+	}
+
+	@Override
+	protected List<QuickActionType> getQuickActionTypes() {
+		List<QuickActionType> quickActionTypes = new ArrayList<>();
+		quickActionTypes.add(TripRecordingAction.TYPE);
+		quickActionTypes.add(StartNewTripSegmentAction.TYPE);
+		quickActionTypes.add(SaveRecordedTripAndContinueAction.TYPE);
+		quickActionTypes.add(FinishTripRecordingAction.TYPE);
+		return quickActionTypes;
 	}
 }

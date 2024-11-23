@@ -117,13 +117,10 @@ public class DashNavigationFragment extends DashBaseFragment {
 		play.setContentDescription(getString(toContinueNavigation ? R.string.continue_navigation :
 			R.string.pause_navigation));
 		play.setOnClickListener(v -> {
-			if(routingHelper.isRoutePlanningMode()) {
-				routingHelper.setRoutePlanningMode(false);
-				routingHelper.setFollowingMode(true);
+			if (routingHelper.isRoutePlanningMode()) {
+				routingHelper.resumeNavigation();
 			} else {
-				routingHelper.setRoutePlanningMode(true);
-				routingHelper.setFollowingMode(false);
-				routingHelper.setPauseNavigation(true);
+				routingHelper.pauseNavigation();
 			}
 			updatePlayButton(routingHelper, map, play);
 			AndroidUtils.requestNotificationPermissionIfNeeded(map);

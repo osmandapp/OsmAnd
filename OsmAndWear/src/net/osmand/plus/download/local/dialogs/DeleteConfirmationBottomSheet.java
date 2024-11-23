@@ -14,7 +14,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
-import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.quickaction.ConfirmationBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
@@ -23,7 +23,7 @@ public class DeleteConfirmationBottomSheet extends MenuBottomSheetDialogFragment
 
 	public static final String TAG = ConfirmationBottomSheet.class.getSimpleName();
 
-	private LocalItem localItem;
+	private BaseLocalItem localItem;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -66,7 +66,7 @@ public class DeleteConfirmationBottomSheet extends MenuBottomSheetDialogFragment
 		return true;
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull Fragment target, @NonNull LocalItem localItem) {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull Fragment target, @NonNull BaseLocalItem localItem) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			DeleteConfirmationBottomSheet fragment = new DeleteConfirmationBottomSheet();
 			fragment.localItem = localItem;
@@ -77,6 +77,6 @@ public class DeleteConfirmationBottomSheet extends MenuBottomSheetDialogFragment
 	}
 
 	public interface ConfirmDeletionListener {
-		void onDeletionConfirmed(@NonNull LocalItem localItem);
+		void onDeletionConfirmed(@NonNull BaseLocalItem localItem);
 	}
 }

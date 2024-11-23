@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_marginStart="0dp"
@@ -46,7 +46,7 @@
 			android:contentDescription="@string/shared_string_back"
 			android:tint="?attr/text_color_tab_active_white"
 			android:translationX="25dp"
-			osmand:srcCompat="@drawable/ic_arrow_back" />
+			app:srcCompat="@drawable/ic_arrow_back" />
 
 		<LinearLayout
 			android:id="@+id/toolbar_options_flow_bg"
@@ -82,8 +82,8 @@
 				android:background="@drawable/btn_circle_transparent_full"
 				android:contentDescription="@string/print_route"
 				android:scaleType="center"
-				android:tint="?attr/text_color_tab_active_white"
-				osmand:srcCompat="@drawable/ic_action_gprint_dark" />
+				app:srcCompat="@drawable/ic_action_gprint_dark"
+				android:tint="?attr/text_color_tab_active_white" />
 
 			<androidx.appcompat.widget.AppCompatImageButton
 				android:id="@+id/save_as_gpx_flow"
@@ -92,8 +92,8 @@
 				android:background="@drawable/btn_circle_transparent_full"
 				android:contentDescription="@string/shared_string_save_as_gpx"
 				android:scaleType="center"
-				android:tint="?attr/text_color_tab_active_white"
-				osmand:srcCompat="@drawable/ic_action_gsave_dark" />
+				app:srcCompat="@drawable/ic_action_gsave_dark"
+				android:tint="?attr/text_color_tab_active_white" />
 
 			<androidx.appcompat.widget.AppCompatImageButton
 				android:id="@+id/share_as_gpx_flow"
@@ -102,8 +102,8 @@
 				android:background="@drawable/btn_circle_transparent_full"
 				android:contentDescription="@string/share_route_as_gpx"
 				android:scaleType="center"
-				android:tint="?attr/text_color_tab_active_white"
-				osmand:srcCompat="@drawable/ic_action_gshare_dark" />
+				app:srcCompat="@drawable/ic_action_gshare_dark"
+				android:tint="?attr/text_color_tab_active_white" />
 
 		</LinearLayout>
 
@@ -140,7 +140,7 @@
 					android:background="?attr/selectableItemBackgroundBorderless"
 					android:contentDescription="@string/shared_string_close"
 					android:scaleType="center"
-					osmand:srcCompat="@drawable/ic_arrow_back"
+					app:srcCompat="@drawable/ic_arrow_back"
 					android:tint="?attr/text_color_tab_active_white"
 					android:layout_marginEnd="@dimen/content_padding"
 					android:layout_marginStart="@dimen/content_padding" />
@@ -166,7 +166,7 @@
 					android:singleLine="true"
 					android:textColor="?attr/searchbar_text"
 					android:textSize="@dimen/default_list_text_size_large"
-					osmand:typeface="@string/font_roboto_medium" />
+					app:typefaceWeight="medium" />
 
 			</LinearLayout>
 
@@ -190,7 +190,7 @@
 					android:background="?attr/selectableItemBackgroundBorderless"
 					android:contentDescription="@string/print_route"
 					android:scaleType="center"
-					osmand:srcCompat="@drawable/ic_action_gprint_dark"
+					app:srcCompat="@drawable/ic_action_gprint_dark"
 					android:tint="?attr/text_color_tab_active_white" />
 
 				<androidx.appcompat.widget.AppCompatImageView
@@ -200,7 +200,7 @@
 					android:background="?attr/selectableItemBackgroundBorderless"
 					android:contentDescription="@string/shared_string_save_as_gpx"
 					android:scaleType="center"
-					osmand:srcCompat="@drawable/ic_action_gsave_dark"
+					app:srcCompat="@drawable/ic_action_gsave_dark"
 					android:tint="?attr/text_color_tab_active_white" />
 
 				<androidx.appcompat.widget.AppCompatImageView
@@ -210,7 +210,7 @@
 					android:background="?attr/selectableItemBackgroundBorderless"
 					android:contentDescription="@string/share_route_as_gpx"
 					android:scaleType="center"
-					osmand:srcCompat="@drawable/ic_action_gshare_dark"
+					app:srcCompat="@drawable/ic_action_gshare_dark"
 					android:tint="?attr/text_color_tab_active_white" />
 
 			</LinearLayout>
@@ -222,7 +222,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="top"
 			android:scaleType="fitXY"
-			osmand:srcCompat="@drawable/bg_contextmenu_shadow" />
+			app:srcCompat="@drawable/bg_contextmenu_shadow" />
 
 	</LinearLayout>
 

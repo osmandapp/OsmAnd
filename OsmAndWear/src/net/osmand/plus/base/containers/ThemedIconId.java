@@ -4,8 +4,8 @@ import androidx.annotation.DrawableRes;
 
 public class ThemedIconId {
 
-	private int iconDayId;
-	private int iconNightId;
+	private final int iconDayId;
+	private final int iconNightId;
 
 	public ThemedIconId(@DrawableRes int iconDayId, @DrawableRes int iconNightId) {
 		this.iconDayId = iconDayId;
@@ -20,8 +20,7 @@ public class ThemedIconId {
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (o instanceof ThemedIconId) {
-			ThemedIconId that = (ThemedIconId) o;
+		if (o instanceof ThemedIconId that) {
 			return iconDayId == that.iconDayId
 					&& iconNightId == that.iconNightId;
 		}

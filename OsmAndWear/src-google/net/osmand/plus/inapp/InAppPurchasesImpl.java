@@ -5,7 +5,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.android.billingclient.api.SkuDetails;
+import com.android.billingclient.api.ProductDetails;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -443,10 +443,10 @@ public class InAppPurchasesImpl extends InAppPurchases {
 
 	public static class InAppPurchaseLiveUpdatesOldSubscription extends InAppSubscription {
 
-		private final SkuDetails details;
+		private final ProductDetails details;
 
-		InAppPurchaseLiveUpdatesOldSubscription(@NonNull SkuDetails details) {
-			super(LIVE_UPDATES_ID, details.getSku());
+		InAppPurchaseLiveUpdatesOldSubscription(@NonNull ProductDetails details) {
+			super(LIVE_UPDATES_ID, details.getProductId());
 			this.details = details;
 		}
 

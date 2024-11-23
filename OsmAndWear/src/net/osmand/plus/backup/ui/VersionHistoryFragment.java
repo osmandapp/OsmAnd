@@ -8,8 +8,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.backup.UserNotRegisteredException;
 import net.osmand.plus.backup.ui.ClearTypesBottomSheet.BackupClearType;
-import net.osmand.plus.settings.backend.ExportSettingsCategory;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.ExportCategory;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
 
 import org.apache.commons.logging.Log;
@@ -39,34 +39,34 @@ public class VersionHistoryFragment extends BaseBackupTypesFragment {
 	}
 
 	@Override
-	protected Map<ExportSettingsType, List<?>> getSelectedItems() {
-		Map<ExportSettingsType, List<?>> selectedItemsMap = new EnumMap<>(ExportSettingsType.class);
-		for (ExportSettingsType type : ExportSettingsType.values()) {
-			if (backupHelper.getVersionHistoryTypePref(type).get()) {
-				selectedItemsMap.put(type, getItemsForType(type));
+	protected Map<ExportType, List<?>> getSelectedItems() {
+		Map<ExportType, List<?>> selectedItemsMap = new EnumMap<>(ExportType.class);
+		for (ExportType exportType : ExportType.values()) {
+			if (backupHelper.getVersionHistoryTypePref(exportType).get()) {
+				selectedItemsMap.put(exportType, getItemsForType(exportType));
 			}
 		}
 		return selectedItemsMap;
 	}
 
 	@Override
-	public void onCategorySelected(ExportSettingsCategory category, boolean selected) {
-		super.onCategorySelected(category, selected);
+	public void onCategorySelected(ExportCategory exportCategory, boolean selected) {
+		super.onCategorySelected(exportCategory, selected);
 
-		SettingsCategoryItems categoryItems = dataList.get(category);
-		for (ExportSettingsType type : categoryItems.getTypes()) {
-			backupHelper.getVersionHistoryTypePref(type).set(selected);
+		SettingsCategoryItems categoryItems = dataList.get(exportCategory);
+		for (ExportType exportType : categoryItems.getTypes()) {
+			backupHelper.getVersionHistoryTypePref(exportType).set(selected);
 		}
 	}
 
 	@Override
-	public void onTypeSelected(ExportSettingsType type, boolean selected) {
-		super.onTypeSelected(type, selected);
-		backupHelper.getVersionHistoryTypePref(type).set(selected);
+	public void onTypeSelected(@NonNull ExportType exportType, boolean selected) {
+		super.onTypeSelected(exportType, selected);
+		backupHelper.getVersionHistoryTypePref(exportType).set(selected);
 	}
 
 	@Override
-	public void onClearTypesConfirmed(@NonNull List<ExportSettingsType> types) {
+	public void onClearTypesConfirmed(@NonNull List<ExportType> types) {
 		try {
 			updateProgressVisibility(true);
 			backupHelper.deleteOldFiles(types);

@@ -1,15 +1,15 @@
 package net.osmand.plus.settings.backend;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.preference.PreferenceDataStore;
+
 import net.osmand.plus.settings.backend.preferences.BooleanPreference;
 import net.osmand.plus.settings.backend.preferences.FloatPreference;
 import net.osmand.plus.settings.backend.preferences.IntPreference;
 import net.osmand.plus.settings.backend.preferences.LongPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.preferences.StringPreference;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.preference.PreferenceDataStore;
 
 import java.util.Set;
 
@@ -50,8 +50,7 @@ public class OsmAndPreferencesDataStore extends PreferenceDataStore {
 
 	@Override
 	public void putBoolean(String key, boolean value) {
-		if (osmandSettings.DISABLE_COMPLEX_ROUTING.getId().equals(key)
-				|| osmandSettings.DISABLE_WRONG_DIRECTION_RECALC.getId().equals(key)) {
+		if (osmandSettings.DISABLE_WRONG_DIRECTION_RECALC.getId().equals(key)) {
 			osmandSettings.setPreference(key, !value, appMode);
 		} else {
 			osmandSettings.setPreference(key, value, appMode);
@@ -115,8 +114,7 @@ public class OsmAndPreferencesDataStore extends PreferenceDataStore {
 		OsmandPreference<?> preference = osmandSettings.getPreference(key);
 		if (preference instanceof BooleanPreference) {
 			BooleanPreference booleanPreference = (BooleanPreference) preference;
-			if (osmandSettings.DISABLE_COMPLEX_ROUTING.getId().equals(booleanPreference.getId())
-					|| osmandSettings.DISABLE_WRONG_DIRECTION_RECALC.getId().equals(booleanPreference.getId())) {
+			if (osmandSettings.DISABLE_WRONG_DIRECTION_RECALC.getId().equals(booleanPreference.getId())) {
 				return !booleanPreference.getModeValue(appMode);
 			}
 			return booleanPreference.getModeValue(appMode);

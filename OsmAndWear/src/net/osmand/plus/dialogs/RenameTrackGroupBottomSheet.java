@@ -1,5 +1,8 @@
 package net.osmand.plus.dialogs;
 
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType.TRACK_POINTS;
+import static net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType.TRACK_ROUTE_POINTS;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -9,22 +12,28 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.PointsGroup;
 import net.osmand.PlatformUtil;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
+import net.osmand.shared.gpx.primitives.Route;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
-import net.osmand.plus.myplaces.tracks.tasks.UpdateGpxCategoryTask;
-import net.osmand.plus.myplaces.tracks.tasks.UpdateGpxCategoryTask.UpdateGpxListener;
+import net.osmand.plus.myplaces.tracks.tasks.UpdatePointsGroupsTask;
+import net.osmand.plus.myplaces.tracks.tasks.UpdatePointsGroupsTask.UpdateGpxListener;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
+import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
+import java.util.Collections;
+import java.util.Map;
 
 public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 
@@ -53,10 +62,19 @@ public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 	}
 
 	private void renameGroupName() {
-		GPXFile gpxFile = group.getGpxFile();
-		PointsGroup pointsGroup = gpxFile.getPointsGroups().get(group.getName());
-		if (pointsGroup != null) {
-			updateGpx(gpxFile, pointsGroup);
+		GpxFile gpxFile = group.getGpxFile();
+		GpxDisplayItemType type = group.getType();
+		if (TRACK_POINTS == type) {
+			PointsGroup pointsGroup = gpxFile.getPointsGroups().get(group.getName());
+			if (pointsGroup != null) {
+				updateGpx(gpxFile, pointsGroup);
+			}
+		} else if (TRACK_ROUTE_POINTS == type) {
+			Route route = gpxFile.getRouteByName(group.getDescription());
+			if (route != null && !Algorithms.stringsEqual(route.getName(), groupName)) {
+				route.setName(groupName);
+				SaveGpxHelper.saveGpx(gpxFile);
+			}
 		}
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof OnGroupNameChangeListener) {
@@ -65,15 +83,14 @@ public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 		dismiss();
 	}
 
-	private void updateGpx(@NonNull GPXFile gpxFile, @NonNull PointsGroup pointsGroup) {
+	private void updateGpx(@NonNull GpxFile gpxFile, @NonNull PointsGroup group) {
 		MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity != null) {
 			UpdateGpxListener listener = getUpdateGpxListener(mapActivity);
-			PointsGroup newGroup = new PointsGroup(groupName, pointsGroup.iconName,
-					pointsGroup.backgroundType, pointsGroup.color);
+			PointsGroup newGroup = new PointsGroup(groupName, group.getIconName(), group.getBackgroundType(), group.getColor());
+			Map<String, PointsGroup> groups = Collections.singletonMap(group.getName(), newGroup);
 
-			UpdateGpxCategoryTask task = new UpdateGpxCategoryTask(mapActivity, gpxFile, pointsGroup.name,
-					newGroup, listener, false);
+			UpdatePointsGroupsTask task = new UpdatePointsGroupsTask(mapActivity, gpxFile, groups, listener);
 			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}

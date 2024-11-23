@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:osmand="http://schemas.android.com/apk/res-auto"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               xmlns:tools="http://schemas.android.com/tools"
@@ -32,32 +32,32 @@
 
             <TextView
                 android:id="@+id/context_menu_line1"
-                style="@style/TextAppearance.ContextMenuTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/search_address_building"
-                android:translationX="50dp" />
+                android:translationX="50dp" 
+                style="@style/TextAppearance.ContextMenuTitle"/>
 
             <TextView
                 android:id="@+id/context_menu_line2"
-                style="@style/TextAppearance.ContextMenuSubtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/context_menu_second_line_top_margin"
                 android:text="@string/other_location"
-                android:translationX="10dp" />
+                android:translationX="10dp" 
+                style="@style/TextAppearance.ContextMenuSubtitle"/>
 
 
         </LinearLayout>
 
         <LinearLayout
+            android:paddingTop="@dimen/multi_selection_menu_padding_top"
             android:id="@+id/context_menu_icon_layout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:paddingTop="@dimen/multi_selection_menu_padding_top"
-            android:translationX="-50dp">
+                android:translationX="-50dp" >
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/context_menu_icon_view"
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:minWidth="@dimen/standard_icon_size"
                 android:minHeight="@dimen/standard_icon_size"
-                osmand:srcCompat="@drawable/ic_action_building_number"
+                app:srcCompat="@drawable/ic_action_building_number"
                 tools:tint="?attr/default_icon_color" />
 
         </LinearLayout>

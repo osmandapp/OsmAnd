@@ -9,7 +9,9 @@ import android.graphics.Paint.Style;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
-import net.osmand.plus.routing.ColoringType;
+import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
+import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
+import net.osmand.shared.routing.ColoringType;
 
 public class GpxGeometryWayContext extends MultiColoringGeometryWayContext {
 
@@ -42,6 +44,12 @@ public class GpxGeometryWayContext extends MultiColoringGeometryWayContext {
 	@Override
 	protected ColoringType getDefaultColoringType() {
 		return ColoringType.TRACK_SOLID;
+	}
+
+	@NonNull
+	@Override
+	protected String getDefaultGradientPalette() {
+		return PaletteGradientColor.DEFAULT_NAME;
 	}
 
 	@Override

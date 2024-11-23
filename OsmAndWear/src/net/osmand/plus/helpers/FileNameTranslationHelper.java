@@ -15,6 +15,7 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import org.apache.commons.logging.Log;
@@ -36,6 +37,7 @@ public class FileNameTranslationHelper {
 	public static final String SLOPE = "Slope";
 	public static final String HEIGHTMAP = "Heightmap";
 	public static final String SEA_DEPTH = "Depth_";
+	public static final String TRAVEL_TOPICS = "travel_topics";
 
 	public static String getFileNameWithRegion(OsmandApplication app, String fileName) {
 		return getFileName(app, app.getResourceManager().getOsmandRegions(), fileName);
@@ -65,11 +67,13 @@ public class FileNameTranslationHelper {
 			basename = basename.replace(HILL_SHADE + " ", "");
 			return getTerrainName(ctx, regions, basename, R.string.download_hillshade_maps);
 		} else if (fileName.startsWith(HEIGHTMAP)) {
-			basename = basename.replace(HEIGHTMAP + " ", "").replace(" ", "_");
-			return regions.getLocaleName(basename.trim(), true);
+			basename = basename.replace(HEIGHTMAP + " ", "");
+			return getTerrainName(ctx, regions, basename, R.string.terrain_map);
 		} else if (fileName.startsWith(SLOPE)) {
 			basename = basename.replace(SLOPE + " ", "");
 			return getTerrainName(ctx, regions, basename, R.string.download_slope_maps);
+		} else if (SrtmDownloadItem.isSrtmFile(fileName)) {
+			return getTerrainName(ctx, regions, basename, R.string.download_srtm_maps);
 		} else if (fileName.length() == 2) { //voice recorded files
 			String name = getStringFromResName(ctx, "lang_" + fileName);
 			if (name != null) {
@@ -164,11 +168,11 @@ public class FileNameTranslationHelper {
 		return null;
 	}
 
-	public static String getFontName(String basename) {
+	public static String getFontName(@NonNull String basename) {
 		return basename.replace('-', ' ').replace('_', ' ');
 	}
 
-	private static String getBasename(Context ctx, String fileName) {
+	public static String getBasename(@NonNull Context ctx, @NonNull String fileName) {
 		if (fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)) {
 			return fileName.substring(0, fileName.length() - IndexConstants.EXTRA_ZIP_EXT.length());
 		}
@@ -331,6 +335,8 @@ public class FileNameTranslationHelper {
 			return ctx.getString(R.string.index_name_south_america);
 		} else if (WorldRegion.ANTARCTICA_REGION_ID.equalsIgnoreCase(filename)) {
 			return ctx.getString(R.string.index_name_antarctica);
+		} else if (TRAVEL_TOPICS.equalsIgnoreCase(filename)) {
+			return ctx.getString(R.string.travel_topics);
 		}
 		return null;
 	}

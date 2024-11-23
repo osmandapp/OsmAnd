@@ -1,19 +1,27 @@
 package net.osmand.plus.track.helpers;
 
+import static net.osmand.shared.gpx.GpxParameter.MAX_FILTER_ALTITUDE;
+import static net.osmand.shared.gpx.GpxParameter.MAX_FILTER_HDOP;
+import static net.osmand.shared.gpx.GpxParameter.MAX_FILTER_SPEED;
+import static net.osmand.shared.gpx.GpxParameter.MIN_FILTER_ALTITUDE;
+import static net.osmand.shared.gpx.GpxParameter.MIN_FILTER_SPEED;
+import static net.osmand.shared.gpx.GpxParameter.SMOOTHING_THRESHOLD;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.track.helpers.GPXDatabase.GpxDataItem;
 import net.osmand.plus.track.helpers.GpsFilterHelper.AltitudeFilter;
 import net.osmand.plus.track.helpers.GpsFilterHelper.HdopFilter;
 import net.osmand.plus.track.helpers.GpsFilterHelper.SmoothingFilter;
 import net.osmand.plus.track.helpers.GpsFilterHelper.SpeedFilter;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxDbHelper;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.io.KFile;
 
-import java.io.File;
 import java.util.List;
 
 public class FilteredSelectedGpxFile extends SelectedGpxFile {
@@ -35,12 +43,11 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 
 	public FilteredSelectedGpxFile(@NonNull OsmandApplication app,
 	                               @NonNull SelectedGpxFile sourceSelectedGpxFile,
-	                               @Nullable GpxDataItem gpxDataItem) {
+	                               @Nullable GpxDataItem dataItem) {
 		this.sourceSelectedGpxFile = sourceSelectedGpxFile;
 		this.joinSegments = sourceSelectedGpxFile.joinSegments;
-		this.hiddenGroups = sourceSelectedGpxFile.getHiddenGroups();
 
-		setGpxFile(GpsFilterHelper.copyGpxFile(app, sourceSelectedGpxFile.gpxFile), app);
+		setGpxFile(sourceSelectedGpxFile.gpxFile.clone(), app);
 		if (joinSegments) {
 			gpxFile.addGeneralTrack();
 		}
@@ -49,16 +56,16 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		speedFilter = new SpeedFilter(app, sourceSelectedGpxFile);
 		altitudeFilter = new AltitudeFilter(app, sourceSelectedGpxFile);
 		hdopFilter = new HdopFilter(app, sourceSelectedGpxFile);
-		if (gpxDataItem != null) {
-			smoothingFilter.updateValue(gpxDataItem.getSmoothingThreshold());
-			speedFilter.updateValues(gpxDataItem.getMinFilterSpeed(), gpxDataItem.getMaxFilterSpeed());
-			altitudeFilter.updateValues(gpxDataItem.getMinFilterAltitude(), gpxDataItem.getMaxFilterAltitude());
-			hdopFilter.updateValue(gpxDataItem.getMaxFilterHdop());
+		if (dataItem != null) {
+			smoothingFilter.updateValue(dataItem.getParameter(SMOOTHING_THRESHOLD));
+			speedFilter.updateValues(dataItem.getParameter(MIN_FILTER_SPEED), dataItem.getParameter(MAX_FILTER_SPEED));
+			altitudeFilter.updateValues(dataItem.getParameter(MIN_FILTER_ALTITUDE), dataItem.getParameter(MAX_FILTER_ALTITUDE));
+			hdopFilter.updateValue(dataItem.getParameter(MAX_FILTER_HDOP));
 		}
 	}
 
 	@Override
-	public void setGpxFile(@NonNull GPXFile gpxFile, @NonNull OsmandApplication app) {
+	public void setGpxFile(@NonNull GpxFile gpxFile, @NonNull OsmandApplication app) {
 		super.setGpxFile(gpxFile, app);
 		leftPointsCount = calculatePointsCount(gpxFile);
 		totalPointsCount = calculatePointsCount(getSourceSelectedGpxFile().getGpxFile());
@@ -66,7 +73,7 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 
 	@Override
 	protected void update(@NonNull OsmandApplication app) {
-		GPXTrackAnalysis sourceAnalysis = sourceSelectedGpxFile.trackAnalysis;
+		GpxTrackAnalysis sourceAnalysis = sourceSelectedGpxFile.trackAnalysis;
 		smoothingFilter.updateAnalysis(sourceAnalysis);
 		speedFilter.updateAnalysis(sourceAnalysis);
 		altitudeFilter.updateAnalysis(sourceAnalysis);
@@ -74,12 +81,12 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		app.getGpsFilterHelper().filterGpxFile(this, false);
 	}
 
-	public void updateGpxFile(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile) {
+	public void updateGpxFile(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile) {
 		this.gpxFile = gpxFile;
-		if (gpxFile.tracks.size() > 0) {
-			color = gpxFile.tracks.get(0).getColor(0);
+		if (gpxFile.getTracks().size() > 0) {
+			color = gpxFile.getTracks().get(0).getColor(0);
 		}
-		modifiedTime = gpxFile.modifiedTime;
+		modifiedTime = gpxFile.getModifiedTime();
 		processPoints(app);
 
 		leftPointsCount = calculatePointsCount(gpxFile);
@@ -88,16 +95,16 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 
 	@Override
 	public void processPoints(@NonNull OsmandApplication app) {
-		processedPointsToDisplay = gpxFile.proccessPoints();
+		processedPointsToDisplay = gpxFile.processPoints();
 		updateBounds();
 		updateArea(hasMapRenderer(app));
 	}
 
-	private int calculatePointsCount(@NonNull GPXFile gpxFile) {
+	private int calculatePointsCount(@NonNull GpxFile gpxFile) {
 		int count = 0;
 		List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
 		for (TrkSegment segment : segments) {
-			count += segment.points.size();
+			count += segment.getPoints().size();
 		}
 		return count;
 	}
@@ -109,11 +116,17 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		hdopFilter.reset();
 
 		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
-		GpxDataItem gpxDataItem = gpxDbHelper.getItem(new File(gpxFile.path));
-		if (gpxDataItem != null) {
-			gpxDbHelper.resetGpsFilters(gpxDataItem);
-		}
+		GpxDataItem item = gpxDbHelper.getItem(new KFile(gpxFile.getPath()));
+		if (item != null) {
+			item.setParameter(SMOOTHING_THRESHOLD, Double.NaN);
+			item.setParameter(MIN_FILTER_SPEED, Double.NaN);
+			item.setParameter(MAX_FILTER_SPEED, Double.NaN);
+			item.setParameter(MIN_FILTER_ALTITUDE, Double.NaN);
+			item.setParameter(MAX_FILTER_ALTITUDE, Double.NaN);
+			item.setParameter(MAX_FILTER_HDOP, Double.NaN);
 
+			gpxDbHelper.updateDataItem(item);
+		}
 		app.getGpsFilterHelper().filterGpxFile(this, true);
 	}
 
@@ -121,7 +134,7 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 	@Override
 	public List<TrkSegment> getPointsToDisplay() {
 		return joinSegments && gpxFile != null && gpxFile.getGeneralTrack() != null
-				? gpxFile.getGeneralTrack().segments
+				? gpxFile.getGeneralTrack().getSegments()
 				: processedPointsToDisplay;
 	}
 
@@ -158,10 +171,15 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		return hdopFilter;
 	}
 
-	public static boolean isGpsFiltersConfigValid(@NonNull GpxDataItem dataItem) {
-		double sum = dataItem.getSmoothingThreshold() + dataItem.getMinFilterSpeed()
-				+ dataItem.getMaxFilterSpeed() + dataItem.getMinFilterAltitude()
-				+ dataItem.getMaxFilterAltitude() + dataItem.getMaxFilterHdop();
+	public static boolean isGpsFiltersConfigValid(@NonNull GpxDataItem item) {
+		double smoothingThreshold = item.getParameter(SMOOTHING_THRESHOLD);
+		double minFilterSpeed = item.getParameter(MIN_FILTER_SPEED);
+		double maxFilterSpeed = item.getParameter(MAX_FILTER_SPEED);
+		double minFilterAltitude = item.getParameter(MIN_FILTER_ALTITUDE);
+		double maxFilterAltitude = item.getParameter(MAX_FILTER_ALTITUDE);
+		double maxFilterHdop = item.getParameter(MAX_FILTER_HDOP);
+
+		double sum = smoothingThreshold + minFilterSpeed + maxFilterSpeed + minFilterAltitude + maxFilterAltitude + maxFilterHdop;
 		return !Double.isNaN(sum) && sum != 0;
 	}
 }

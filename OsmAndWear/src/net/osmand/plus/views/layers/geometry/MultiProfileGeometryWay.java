@@ -8,8 +8,8 @@ import android.graphics.PathMeasure;
 import android.graphics.PointF;
 import android.util.Pair;
 
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -101,14 +101,14 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 
 	private void setStyles(List<TrkSegment> segments, List<Way> ways, List<GeometryWayStyle<?>> styles) {
 		for (TrkSegment segment : segments) {
-			List<WptPt> points = segment.points;
+			List<WptPt> points = segment.getPoints();
 			for (int i = 0; i < points.size() - 1; i++) {
 				setStylesInternal(points, i, ways, styles);
 			}
 			styles.add(new GeometryMultiProfileWayStyle(getContext(), new ArrayList<>(), 0, 0, true));
 			Way way = new Way(-1);
 			WptPt last = points.get(points.size() - 1);
-			way.addNode(new Node(last.lat, last.lon, -1));
+			way.addNode(new Node(last.getLat(), last.getLon(), -1));
 			ways.add(way);
 		}
 	}
@@ -142,20 +142,20 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 		List<LatLon> routePoints = new ArrayList<>();
 
 		if (roadSegmentData == null || Algorithms.isEmpty(roadSegmentData.getPoints())) {
-			routePoints.add(new LatLon(start.lat, start.lon));
-			routePoints.add(new LatLon(end.lat, end.lon));
+			routePoints.add(new LatLon(start.getLat(), start.getLon()));
+			routePoints.add(new LatLon(end.getLat(), end.getLon()));
 		} else {
 			List<WptPt> points = roadSegmentData.getPoints();
 			if (points.get(0).getLatitude() != start.getLatitude() && points.get(0).getLongitude() != start.getLongitude()) {
-				routePoints.add(new LatLon(start.lat, start.lon));
+				routePoints.add(new LatLon(start.getLat(), start.getLon()));
 			}
 			for (WptPt routePt : roadSegmentData.getPoints()) {
-				routePoints.add(new LatLon(routePt.lat, routePt.lon));
+				routePoints.add(new LatLon(routePt.getLat(), routePt.getLon()));
 			}
 			int lastIdx = routePoints.size() - 1;
 			if (routePoints.get(lastIdx).getLatitude() != end.getLatitude()
 					&& routePoints.get(lastIdx).getLongitude() != end.getLongitude()) {
-				routePoints.add(new LatLon(end.lat, end.lon));
+				routePoints.add(new LatLon(end.getLat(), end.getLon()));
 			}
 		}
 		return routePoints;

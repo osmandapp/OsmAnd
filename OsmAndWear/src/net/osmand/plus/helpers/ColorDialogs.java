@@ -107,17 +107,6 @@ public class ColorDialogs {
 		return colors[index];
 	}
 
-	public static int getColorByTag(String tag) {
-		String t = tag.toLowerCase();
-		for (int i = 0; i < paletteColorTags.length; i++) {
-			String colorTag = paletteColorTags[i];
-			if (colorTag.equals(t)) {
-				return pallette[i];
-			}
-		}
-		return 0;
-	}
-
 	public static void setupColorSpinnerEx(Context ctx, int selectedColor, Spinner colorSpinner,
 	                                       TIntArrayList colors, OnItemSelectedListener listener) {
 		colors.add(pallette);
@@ -188,27 +177,5 @@ public class ColorDialogs {
 			d.setColorFilter(color, PorterDuff.Mode.SRC_IN);
 		}
 		return d;
-	}
-
-	public static int getColorName(@ColorInt int color) {
-		int colorName = R.string.custom_color;
-		for (int i = 0; i < pallette.length; i++) {
-			if (pallette[i] == color) {
-				colorName = paletteColors[i];
-				break;
-			}
-		}
-		return colorName;
-	}
-
-	public static boolean isPaletteColor(@ColorInt int color) {
-		boolean isPaletteColor = false;
-		for (int i = 0; i < pallette.length; i++) {
-			if (pallette[i] == color) {
-				isPaletteColor = true;
-				break;
-			}
-		}
-		return isPaletteColor;
 	}
 }

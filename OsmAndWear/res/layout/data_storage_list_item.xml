@@ -6,7 +6,7 @@
 	android:layout_marginStart="0dp"
 	android:layout_marginTop="0dp"
 	android:layout_marginEnd="0dp"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto">
+	xmlns:app="http://schemas.android.com/apk/res-auto">
 
 	<LinearLayout
 		android:id="@+id/selectable_list_item"
@@ -29,7 +29,7 @@
 				android:layout_marginLeft="@dimen/content_padding"
 				android:layout_marginRight="@dimen/content_padding"
 				android:layout_gravity="center"
-				osmand:srcCompat="@drawable/mm_storage_tank"
+				app:srcCompat="@drawable/mm_storage_tank"
 				tools:tint="?attr/default_icon_color"
 				android:layout_marginEnd="@dimen/content_padding"
 				android:layout_marginStart="@dimen/content_padding" />
@@ -49,7 +49,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:textSize="@dimen/default_list_text_size"
-					osmand:typeface="@string/font_roboto_regular"
+					android:textStyle="normal"
 					android:textColor="?android:textColorPrimary"
 					tools:text="Internal application memory"/>
 
@@ -58,9 +58,9 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:textSize="@dimen/default_desc_text_size"
-					osmand:typeface="@string/font_roboto_regular"
+					android:textStyle="normal"
 					android:textColor="?android:textColorSecondary"
-					osmand:lineHeight="@dimen/default_desc_line_height"
+					app:lineHeight="@dimen/default_desc_line_height"
 					tools:text="Free 1,34  •  14,6 / 16 Gb"/>
 
 			</LinearLayout>
@@ -70,12 +70,12 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginEnd="@dimen/content_padding"
-				android:background="@null"
-				android:clickable="true"
-				android:focusable="true"
 				android:paddingStart="@dimen/content_padding"
 				android:paddingEnd="@dimen/content_padding"
-				android:translationX="-20dp" />
+				android:background="@null"
+				android:translationX="-20dp"
+				android:clickable="true"
+				android:focusable="true" />
 
 		</LinearLayout>
 
@@ -92,7 +92,7 @@
 				android:layout_marginHorizontal="@dimen/content_padding"
 				android:translationY="-25dp"
 				android:visibility="invisible"
-				osmand:srcCompat="@drawable/mm_storage_tank" />
+				app:srcCompat="@drawable/mm_storage_tank" />
 
 			<LinearLayout
 				android:orientation="vertical"
@@ -108,9 +108,9 @@
 					android:layout_height="wrap_content"
 					android:textSize="@dimen/default_desc_text_size"
 					android:paddingRight="@dimen/content_padding"
-					osmand:typeface="@string/font_roboto_regular"
+					android:textStyle="normal"
 					android:textColor="?android:textColorSecondary"
-					osmand:lineHeight="@dimen/default_desc_line_height"
+					app:lineHeight="@dimen/default_desc_line_height"
 					tools:text="@string/internal_app_storage_description"
 					android:paddingEnd="@dimen/content_padding" />
 
@@ -120,8 +120,8 @@
 					android:layout_height="wrap_content"
 					android:layout_marginEnd="@dimen/content_padding"
 					android:visibility="gone"
-					osmand:dialogButtonTitle="@string/shared_string_migration"
-					osmand:dialogButtonType="secondary"
+					app:dialogButtonTitle="@string/shared_string_migration"
+					app:dialogButtonType="secondary"
 					tools:visibility="visible" />
 
 				<FrameLayout

@@ -59,7 +59,7 @@
                 android:focusable="false"
                 android:gravity="center_vertical"
                 android:visibility="gone"
-                tools:visibility="visible" />
+                tools:visibility="visible"/>
 
             <!-- android:button="@drawable/ic_btn_wocheckbox" -->
             <androidx.appcompat.widget.AppCompatCheckBox

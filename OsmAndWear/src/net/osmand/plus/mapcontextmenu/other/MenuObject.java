@@ -2,6 +2,8 @@ package net.osmand.plus.mapcontextmenu.other;
 
 import androidx.annotation.Nullable;
 
+import net.osmand.NativeLibrary;
+import net.osmand.OnCompleteCallback;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.activities.MapActivity;
@@ -20,12 +22,17 @@ public class MenuObject extends MenuTitleController {
 	private MapActivity mapActivity;
 	@Nullable
 	private MenuController controller;
+	@Nullable
+	private OnCompleteCallback onSearchAddressDone;
 
 	MenuObject(LatLon latLon, PointDescription pointDescription, Object object, @Nullable MapActivity mapActivity) {
 		this.latLon = latLon;
 		this.pointDescription = pointDescription;
 		this.object = object;
 		this.mapActivity = mapActivity;
+		if (object instanceof NativeLibrary.RenderedObject) {
+			this.order = ((NativeLibrary.RenderedObject) object).getOrder();
+		}
 		init();
 	}
 
@@ -40,6 +47,10 @@ public class MenuObject extends MenuTitleController {
 
 	protected void deinit() {
 		controller = null;
+	}
+
+	public void setOnSearchAddressDoneCallback(@Nullable OnCompleteCallback onSearchAddressDone) {
+		this.onSearchAddressDone = onSearchAddressDone;
 	}
 
 	@Override
@@ -82,6 +93,13 @@ public class MenuObject extends MenuTitleController {
 
 	@Override
 	protected boolean needStreetName() {
-		return false;
+		return controller != null && controller.needStreetName();
+	}
+
+	@Override
+	protected void onSearchAddressDone() {
+		if (onSearchAddressDone != null) {
+			onSearchAddressDone.onComplete();
+		}
 	}
 }

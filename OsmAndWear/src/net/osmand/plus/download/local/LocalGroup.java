@@ -3,14 +3,20 @@ package net.osmand.plus.download.local;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.utils.AndroidUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LocalGroup {
 
 	private final LocalItemType type;
-	private final List<LocalItem> items = new ArrayList<>();
+	private final Map<String, BaseLocalItem> items = new HashMap<>();
 
 	public LocalGroup(@NonNull LocalItemType type) {
 		this.type = type;
@@ -21,9 +27,14 @@ public class LocalGroup {
 		return type;
 	}
 
+	@Nullable
+	public BaseLocalItem getItem(@NonNull String key) {
+		return items.get(key);
+	}
+
 	@NonNull
-	public List<LocalItem> getItems() {
-		return items;
+	public List<BaseLocalItem> getItems() {
+		return new ArrayList<>(items.values());
 	}
 
 	@NonNull
@@ -31,19 +42,24 @@ public class LocalGroup {
 		return type.toHumanString(context);
 	}
 
-	public void addItem(@NonNull LocalItem localItem) {
-		items.add(localItem);
+	public void addItem(@NonNull String key, @NonNull BaseLocalItem item) {
+		items.put(key, item);
 	}
 
-	public void removeItem(@NonNull LocalItem localItem) {
-		items.remove(localItem);
+	public void removeItem(@NonNull OsmandApplication app, @NonNull BaseLocalItem item) {
+		if (item instanceof LocalItem) {
+			items.remove(((LocalItem) item).getFileName());
+		} else {
+			items.remove(item.getName(app).toString());
+		}
+	}
+
+	@NonNull
+	public String getSizeDescription(@NonNull Context context) {
+		return LocalItemUtils.getSizeDescription(context, items.values());
 	}
 
 	public long getSize() {
-		long size = 0;
-		for (LocalItem item : items) {
-			size += item.getSize();
-		}
-		return size;
+		return LocalItemUtils.calculateItemsSize(items.values());
 	}
 }

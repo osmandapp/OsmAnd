@@ -20,8 +20,8 @@ public class ParkingAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(PARKING_ACTION_ID,
 			"parking.add", ParkingAction.class).
-			nameRes(R.string.quick_action_add_parking).iconRes(R.drawable.ic_action_parking_dark).nonEditable().
-			category(QuickActionType.CREATE_CATEGORY);
+			nameRes(R.string.quick_action_parking_place).iconRes(R.drawable.ic_action_parking_dark).nonEditable().
+			category(QuickActionType.MY_PLACES).nameActionRes(R.string.shared_string_add);
 
 	public ParkingAction() {
 		super(TYPE);

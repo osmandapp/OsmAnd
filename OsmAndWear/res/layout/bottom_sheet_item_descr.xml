@@ -18,5 +18,4 @@
 	android:layout_marginStart="40dp"
 	android:layout_marginTop="0dp"
 	android:layout_marginEnd="40dp"
-	app:typeface="@string/font_roboto_regular"
 	tools:text="@string/auto_zoom_map_descr" />

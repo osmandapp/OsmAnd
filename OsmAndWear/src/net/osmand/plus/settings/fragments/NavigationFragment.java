@@ -40,6 +40,7 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 	public static final String NAVIGATION_TYPE = "navigation_type";
 
 	private static final String CUSTOMIZE_ROUTE_LINE = "customize_route_line";
+	private static final String DETAILED_TRACK_GUIDANCE = "detailed_track_guidance";
 
 	private RoutingProfilesHolder routingProfiles;
 	private RoutingDataUtils routingDataUtils;
@@ -91,6 +92,7 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 		setupSpeakRoutingAlarmsPref();
 		setupVehicleParametersPref();
 		showHideCustomizeRouteLinePref();
+		showTrackGuidancePref();
 	}
 
 	private void setupNavigationTypePref() {
@@ -125,6 +127,12 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 		}
 	}
 
+	public void showTrackGuidancePref() {
+		Preference preference = requirePreference(DETAILED_TRACK_GUIDANCE);
+		preference.setIcon((getContentIcon(R.drawable.ic_action_attach_track)));
+		preference.setSummary(settings.DETAILED_TRACK_GUIDANCE.getModeValue(getSelectedAppMode()).getNameRes());
+	}
+
 	@Override
 	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
 		if (settings.VOICE_MUTE.getId().equals(prefId) && newValue instanceof Boolean) {
@@ -138,18 +146,16 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
-		if (NAVIGATION_TYPE.equals(prefId)) {
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
 			ApplicationMode appMode = getSelectedAppMode();
-			String selected = appMode != null ? appMode.getRoutingProfile() : null;
-			if (getActivity() != null) {
-				SelectNavProfileBottomSheet.showInstance(
-						getActivity(), this, getSelectedAppMode(), selected, false);
-			}
-		} else if (CUSTOMIZE_ROUTE_LINE.equals(prefId)) {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				ApplicationMode appMode = getSelectedAppMode();
-				RouteLineAppearanceFragment.showInstance(mapActivity, appMode);
+			if (NAVIGATION_TYPE.equals(prefId)) {
+				String selected = appMode.getRoutingProfile();
+				SelectNavProfileBottomSheet.showInstance(activity, this, appMode, selected, false);
+			} else if (CUSTOMIZE_ROUTE_LINE.equals(prefId)) {
+				RouteLineAppearanceFragment.showInstance(activity, appMode);
+			} else if (DETAILED_TRACK_GUIDANCE.equals(prefId)) {
+				DetailedTrackGuidanceFragment.showInstance(activity, appMode, this);
 			}
 		}
 		return false;

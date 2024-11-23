@@ -217,7 +217,7 @@ public class DataStorageHelper {
 			}
 
 			@Override
-			public void reloadIndexesFinished(List<String> warnings) {
+			public void reloadIndexesFinished(@NonNull List<String> warnings) {
 				try {
 					if (progress != null && progress.getDialog().isShowing()) {
 						progress.getDialog().dismiss();

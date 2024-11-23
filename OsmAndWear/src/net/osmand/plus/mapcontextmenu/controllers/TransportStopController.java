@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
+import static net.osmand.util.MapUtils.ROUNDING_ERROR;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -27,12 +29,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static net.osmand.util.MapUtils.ROUNDING_ERROR;
-
 public class TransportStopController extends MenuController {
 
-	public static final int SHOW_STOPS_RADIUS_METERS = 150;
+	public static final int SHOW_STOPS_RADIUS_METERS_UI = 150;
+	public static final int SHOW_STOPS_RADIUS_METERS = SHOW_STOPS_RADIUS_METERS_UI * 6 / 5;
 	public static final int SHOW_SUBWAY_STOPS_FROM_ENTRANCES_RADIUS_METERS = 400;
+	public static final int MAX_DISTANCE_BETWEEN_AMENITY_AND_LOCAL_STOPS = 20;
 
 	private TransportStop transportStop;
 	private final List<TransportStopRoute> routesNearby = new ArrayList<>();
@@ -40,8 +42,8 @@ public class TransportStopController extends MenuController {
 	private TransportStopType topType;
 
 	public TransportStopController(@NonNull MapActivity mapActivity,
-								   @NonNull PointDescription pointDescription,
-								   @NonNull TransportStop transportStop) {
+	                               @NonNull PointDescription pointDescription,
+	                               @NonNull TransportStop transportStop) {
 		super(new TransportStopMenuBuilder(mapActivity, transportStop), pointDescription, mapActivity);
 		this.transportStop = transportStop;
 		processRoutes();
@@ -86,7 +88,7 @@ public class TransportStopController extends MenuController {
 	protected List<TransportStopRoute> getSubTransportStopRoutes(boolean nearby) {
 		return nearby ? routesNearby : routesOnTheSameExit;
 	}
-	
+
 	@Override
 	public boolean needStreetName() {
 		return Algorithms.isEmpty(getNameStr());
@@ -100,7 +102,12 @@ public class TransportStopController extends MenuController {
 	@NonNull
 	@Override
 	public String getNameStr() {
-		return transportStop.getName(getPreferredMapLang(), isTransliterateNames());
+		Amenity amenity = transportStop.getAmenity();
+		if (amenity == null) {
+			return transportStop.getName(getPreferredMapLang(), isTransliterateNames());
+		} else {
+			return amenity.getName(getPreferredMapLang(), isTransliterateNames());
+		}
 	}
 
 	@NonNull
@@ -131,9 +138,11 @@ public class TransportStopController extends MenuController {
 			ArrayList<TransportStop> nearbyTransportStops = new ArrayList<>(transportStop.getNearbyTransportStops());
 
 			addTransportStopRoutes(app, transportStopsSameExit, routesOnTheSameExit, useEnglishNames);
-			addTransportStopRoutes(app, nearbyTransportStops, routesNearby, useEnglishNames);
-
 			sortTransportStopRoutes(routesOnTheSameExit);
+			if (topType == null && !Algorithms.isEmpty(routesOnTheSameExit)) {
+				topType = routesOnTheSameExit.get(0).type;
+			}
+			addTransportStopRoutes(app, nearbyTransportStops, routesNearby, useEnglishNames);
 			sortTransportStopRoutes(routesNearby);
 		}
 	}
@@ -234,7 +243,8 @@ public class TransportStopController extends MenuController {
 	@Nullable
 	public static TransportStop findBestTransportStopForAmenity(OsmandApplication app, Amenity amenity) {
 		TransportStopAggregated stopAggregated;
-		boolean isSubwayEntrance = amenity.getSubType().equals("subway_entrance");
+		boolean isSubwayEntrance = "subway_entrance".equals(amenity.getSubType())
+				|| "public_transport_station".equals(amenity.getSubType());
 
 		LatLon loc = amenity.getLocation();
 		int radiusMeters = isSubwayEntrance ? SHOW_SUBWAY_STOPS_FROM_ENTRANCES_RADIUS_METERS : SHOW_STOPS_RADIUS_METERS;
@@ -255,6 +265,7 @@ public class TransportStopController extends MenuController {
 				stop.setTransportStopAggregated(stopAggregated);
 				String stopName = stop.getName().toLowerCase();
 				if (((stopName.contains(amenityName) || amenityName.contains(stopName))
+						&& MapUtils.getDistance(stop.getLocation(), loc) < MAX_DISTANCE_BETWEEN_AMENITY_AND_LOCAL_STOPS
 						&& (nearestStop == null
 						|| nearestStop.getLocation().equals(stop.getLocation())))
 						|| stop.getLocation().equals(loc)) {
@@ -299,19 +310,30 @@ public class TransportStopController extends MenuController {
 	private static TransportStopAggregated processTransportStopsForAmenity(List<TransportStop> transportStops, Amenity amenity) {
 		TransportStopAggregated stopAggregated = new TransportStopAggregated();
 		stopAggregated.setAmenity(amenity);
+		List<TransportStop> amenityStops = new ArrayList<>();
+		if ("subway_entrance".equals(amenity.getSubType())) {
+			amenityStops = findSubwayStopsForAmenityExit(transportStops, amenity.getLocation());
+		}
 		LatLon amenityLocation = amenity.getLocation();
 		for (TransportStop stop : transportStops) {
 			stop.setTransportStopAggregated(stopAggregated);
-			List<TransportStopExit> stopExits = stop.getExits();
-			boolean stopOnSameExitAdded = false;
-			for (TransportStopExit exit : stopExits) {
-				if (MapUtils.getDistance(exit.getLocation(), amenityLocation) < ROUNDING_ERROR) {
-					stopOnSameExitAdded = true;
-					stopAggregated.addLocalTransportStop(stop);
-					break;
+			boolean stopAddedAsLocal = false;
+			if ("public_transport_station".equals(amenity.getSubType()) && (stop.getName().equals(amenity.getName()) ||
+					stop.getEnName(false).equals(amenity.getEnName(false)))) {
+				stopAggregated.addLocalTransportStop(stop);
+				stopAddedAsLocal = true;
+			} else {
+				for (TransportStopExit exit : stop.getExits()) {
+					LatLon exitLocation = exit.getLocation();
+					if (MapUtils.getDistance(exitLocation, amenityLocation) < ROUNDING_ERROR
+							|| hasCommonExit(exitLocation, amenityStops)) {
+						stopAddedAsLocal = true;
+						stopAggregated.addLocalTransportStop(stop);
+						break;
+					}
 				}
 			}
-			if (!stopOnSameExitAdded && MapUtils.getDistance(stop.getLocation(), amenityLocation)
+			if (!stopAddedAsLocal && MapUtils.getDistance(stop.getLocation(), amenityLocation)
 					<= SHOW_SUBWAY_STOPS_FROM_ENTRANCES_RADIUS_METERS) {
 				stopAggregated.addNearbyTransportStop(stop);
 			}
@@ -319,6 +341,31 @@ public class TransportStopController extends MenuController {
 		sortTransportStopsExits(amenityLocation, stopAggregated.getLocalTransportStops());
 		sortTransportStopsExits(amenityLocation, stopAggregated.getNearbyTransportStops());
 		return stopAggregated;
+	}
+
+	private static boolean hasCommonExit(@NonNull LatLon exitLocation, @NonNull List<TransportStop> amenityStops) {
+		for (TransportStop amenityStop : amenityStops) {
+			for (TransportStopExit amenityExit : amenityStop.getExits()) {
+				if (MapUtils.getDistance(amenityExit.getLocation(), exitLocation) < ROUNDING_ERROR) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@NonNull
+	private static List<TransportStop> findSubwayStopsForAmenityExit(@NonNull List<TransportStop> transportStops,
+	                                                                 @NonNull LatLon amenityExitLocation) {
+		List<TransportStop> foundStops = new ArrayList<>();
+		for (TransportStop stop : transportStops) {
+			for (TransportStopExit exit : stop.getExits()) {
+				if (MapUtils.getDistance(exit.getLocation(), amenityExitLocation) < ROUNDING_ERROR) {
+					foundStops.add(stop);
+				}
+			}
+		}
+		return foundStops;
 	}
 
 	private static boolean checkSameRoute(List<TransportStopRoute> stopRoutes, TransportRoute route) {

@@ -8,7 +8,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.highlight.Highlight;
@@ -16,7 +16,7 @@ import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
-import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -28,7 +28,7 @@ import net.osmand.plus.utils.UiUtilities;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CommonChartAdapter extends BaseChartAdapter<LineChart, LineData, GpxDisplayItem> {
+public class CommonChartAdapter extends BaseChartAdapter<ElevationChart, LineData, GpxDisplayItem> {
 
 	private Highlight highlight;
 	private final Map<String, ExternalValueSelectedListener> externalValueSelectedListeners = new HashMap<>();
@@ -36,7 +36,7 @@ public class CommonChartAdapter extends BaseChartAdapter<LineChart, LineData, Gp
 
 	private GPXTabItemType gpxGraphType;
 
-	public CommonChartAdapter(OsmandApplication app, LineChart chart, boolean usedOnMap) {
+	public CommonChartAdapter(OsmandApplication app, ElevationChart chart, boolean usedOnMap) {
 		super(app, chart, usedOnMap);
 	}
 
@@ -134,7 +134,7 @@ public class CommonChartAdapter extends BaseChartAdapter<LineChart, LineData, Gp
 		}
 		AndroidUiHelper.updateVisibility(bottomInfoContainer, true);
 
-		GPXTrackAnalysis analysis = additionalData.analysis;
+		GpxTrackAnalysis analysis = additionalData.analysis;
 
 		if (gpxGraphType == GPXTabItemType.GPX_TAB_ITEM_GENERAL) {
 			attachGeneralStatistics(analysis);
@@ -145,13 +145,13 @@ public class CommonChartAdapter extends BaseChartAdapter<LineChart, LineData, Gp
 		}
 	}
 
-	private void attachGeneralStatistics(@NonNull GPXTrackAnalysis analysis) {
+	private void attachGeneralStatistics(@NonNull GpxTrackAnalysis analysis) {
 		LayoutInflater inflater = createThemedInflater();
 		View generalStatistics = inflater.inflate(R.layout.gpx_item_general_statistics, bottomInfoContainer, false);
 		GPXItemPagerAdapter.updateGeneralTabInfo(generalStatistics, app, analysis, false, false);
 		GPXItemPagerAdapter.setupGeneralStatisticsIcons(generalStatistics, app.getUIUtilities());
 
-		boolean timeDefined = analysis.timeSpan > 0;
+		boolean timeDefined = analysis.getTimeSpan() > 0;
 		AndroidUiHelper.updateVisibility(generalStatistics.findViewById(R.id.list_divider), timeDefined);
 		AndroidUiHelper.updateVisibility(generalStatistics.findViewById(R.id.bottom_line_blocks), timeDefined);
 		if (timeDefined) {
@@ -161,7 +161,7 @@ public class CommonChartAdapter extends BaseChartAdapter<LineChart, LineData, Gp
 		bottomInfoContainer.addView(generalStatistics);
 	}
 
-	private void attachAltitudeStatistics(@NonNull GPXTrackAnalysis analysis) {
+	private void attachAltitudeStatistics(@NonNull GpxTrackAnalysis analysis) {
 		LayoutInflater inflater = createThemedInflater();
 		View altitudeStatistics = inflater.inflate(R.layout.gpx_item_altitude_statistics, bottomInfoContainer, false);
 		GPXItemPagerAdapter.updateAltitudeTabInfo(altitudeStatistics, app, analysis);
@@ -169,7 +169,7 @@ public class CommonChartAdapter extends BaseChartAdapter<LineChart, LineData, Gp
 		bottomInfoContainer.addView(altitudeStatistics);
 	}
 
-	private void attachSpeedStatistics(@NonNull GPXTrackAnalysis analysis) {
+	private void attachSpeedStatistics(@NonNull GpxTrackAnalysis analysis) {
 		LayoutInflater inflater = createThemedInflater();
 		View speedStatistics = inflater.inflate(R.layout.gpx_item_speed_statistics, bottomInfoContainer, false);
 		GPXItemPagerAdapter.updateSpeedTabInfo(speedStatistics, app, analysis, false, false);

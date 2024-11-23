@@ -1,8 +1,10 @@
 package net.osmand.plus.notifications;
 
+import android.app.Service;
 import android.content.Intent;
 import android.os.AsyncTask;
 
+import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 import net.osmand.plus.OsmandApplication;
@@ -24,10 +26,6 @@ public class DownloadNotification extends OsmandNotification {
 	}
 
 	@Override
-	public void init() {
-	}
-
-	@Override
 	public NotificationType getType() {
 		return NotificationType.DOWNLOAD;
 	}
@@ -39,14 +37,15 @@ public class DownloadNotification extends OsmandNotification {
 
 	@Override
 	public boolean isActive() {
-		DownloadService service = app.getDownloadService();
-		return isEnabled() && service != null;
+		DownloadIndexesThread downloadThread = app.getDownloadThread();
+		return downloadThread.isDownloading();
 	}
 
 	@Override
-	public boolean isEnabled() {
-		DownloadIndexesThread downloadThread = app.getDownloadThread();
-		return downloadThread.isDownloading();
+	public boolean isUsedByService(@Nullable Service service) {
+		DownloadService downloadService = service instanceof DownloadService
+				? (DownloadService) service : app.getDownloadService();
+		return downloadService != null;
 	}
 
 	@Override
@@ -57,7 +56,7 @@ public class DownloadNotification extends OsmandNotification {
 	}
 
 	@Override
-	public NotificationCompat.Builder buildNotification(boolean wearable) {
+	public NotificationCompat.Builder buildNotification(@Nullable Service service, boolean wearable) {
 		icon = android.R.drawable.stat_sys_download;
 		ongoing = true;
 		DownloadIndexesThread downloadThread = app.getDownloadThread();

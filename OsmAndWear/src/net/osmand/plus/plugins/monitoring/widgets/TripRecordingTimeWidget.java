@@ -8,9 +8,10 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.controllers.BatteryOptimizationController;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -37,14 +38,20 @@ public class TripRecordingTimeWidget extends SimpleWidget {
 
 	@Override
 	protected View.OnClickListener getOnClickListener() {
-		return v -> {
-			if (cachedTimeSpan > 0) {
-				Bundle params = new Bundle();
-				params.putString(TrackMenuFragment.OPEN_TAB_NAME, TrackMenuTab.TRACK.name());
-				TrackMenuFragment.showInstance(mapActivity, savingTrackHelper.getCurrentTrack(), null,
-						null, null, params);
-			}
-		};
+		return v -> askShowBatteryOptimizationDialog();
+	}
+
+	private void askShowBatteryOptimizationDialog() {
+		BatteryOptimizationController.askShowDialog(mapActivity, true, activity -> askShowTrackMenuDialog());
+	}
+
+	private void askShowTrackMenuDialog() {
+		if (cachedTimeSpan > 0) {
+			Bundle params = new Bundle();
+			params.putString(TrackMenuFragment.OPEN_TAB_NAME, TrackMenuTab.TRACK.name());
+			TrackMenuFragment.showInstance(mapActivity, savingTrackHelper.getCurrentTrack(), null,
+					null, null, params);
+		}
 	}
 
 	@Override
@@ -59,10 +66,10 @@ public class TripRecordingTimeWidget extends SimpleWidget {
 
 	private float getTimeSpan() {
 		SelectedGpxFile currentTrack = savingTrackHelper.getCurrentTrack();
-		GPXFile gpxFile = currentTrack.getGpxFile();
+		GpxFile gpxFile = currentTrack.getGpxFile();
 		boolean withoutGaps = !currentTrack.isJoinSegments()
-				&& (Algorithms.isEmpty(gpxFile.tracks) || gpxFile.tracks.get(0).generalTrack);
-		GPXTrackAnalysis analysis = currentTrack.getTrackAnalysis(app);
-		return withoutGaps ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
+				&& (Algorithms.isEmpty(gpxFile.getTracks()) || gpxFile.getTracks().get(0).isGeneralTrack());
+		GpxTrackAnalysis analysis = currentTrack.getTrackAnalysis(app);
+		return withoutGaps ? analysis.getTimeSpanWithoutGaps() : analysis.getTimeSpan();
 	}
 }

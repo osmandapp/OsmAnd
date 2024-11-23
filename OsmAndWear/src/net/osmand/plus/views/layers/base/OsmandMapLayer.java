@@ -2,24 +2,16 @@ package net.osmand.plus.views.layers.base;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.Paint;
+import android.graphics.*;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
-import android.graphics.Path;
-import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.view.MotionEvent;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
@@ -54,13 +46,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public abstract class OsmandMapLayer implements MapRendererViewListener {
 	private static final Log LOG = PlatformUtil.getLog(OsmandMapLayer.class);
@@ -75,6 +61,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	protected OsmandMapTileView view;
 	protected boolean mapActivityInvalidated;
 	protected boolean mapRendererChanged;
+	protected boolean invalidated;
 
 	protected List<LatLon> fullObjectsLatLon;
 	protected List<LatLon> smallObjectsLatLon;
@@ -83,6 +70,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	protected MapMarkersCollection mapMarkersCollection;
 	protected PointI movableObject;
 	protected int pointsOrder = 0;
+	protected float density = 0f;
 
 	public static class CustomMapObjects<T> {
 		protected List<T> customMapObjects;
@@ -98,7 +86,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		}
 
 		public void setCustomMapObjects(List<T> customMapObjects) {
-			if(this.customMapObjects != customMapObjects){
+			if (this.customMapObjects != customMapObjects) {
 				isChanged = true;
 			}
 			this.customMapObjects = customMapObjects;
@@ -126,7 +114,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	}
 
 	public int getBaseOrder() {
-		return (int)((view != null ? view.getZorder(this) : 10f) * -100000f);
+		return (int) ((view != null ? view.getZorder(this) : 10f) * -100000f);
 	}
 
 	public int getPointsOrder() {
@@ -134,7 +122,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	}
 
 	public void setPointsOrder(float pointsZorder) {
-		this.pointsOrder = (int)(pointsZorder * -100000f);
+		this.pointsOrder = (int) (pointsZorder * -100000f);
 	}
 
 	@NonNull
@@ -159,6 +147,10 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	@Nullable
 	public MapActivity getMapActivity() {
 		return mapActivity;
+	}
+
+	public void setInvalidated(boolean invalidated) {
+		this.invalidated = invalidated;
 	}
 
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
@@ -235,6 +227,15 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		if (mapRenderer != null && areMapRendererViewEventsAllowed()) {
 			mapRenderer.addListener(this);
 		}
+		float density = getContext().getResources().getDisplayMetrics().density;
+		if (this.density != density) {
+			this.density = density;
+			updateResources();
+		}
+	}
+
+	protected void updateResources() {
+
 	}
 
 	@Override
@@ -338,23 +339,33 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	}
 
 	@NonNull
-	public static QuadTree<QuadRect> initBoundIntersections(RotatedTileBox tileBox) {
-		QuadRect bounds = new QuadRect(0, 0, tileBox.getPixWidth(), tileBox.getPixHeight());
+	public static QuadTree<QuadRect> initBoundIntersections(@NonNull RotatedTileBox tileBox) {
+		return initBoundIntersections(tileBox.getPixWidth(), tileBox.getPixHeight());
+	}
+
+	@NonNull
+	public static QuadTree<QuadRect> initBoundIntersections(float width, float height) {
+		QuadRect bounds = new QuadRect(0, 0, width, height);
 		bounds.inset(-bounds.width() / 4, -bounds.height() / 4);
 		return new QuadTree<>(bounds, 4, 0.6f);
 	}
 
-	public static boolean intersects(QuadTree<QuadRect> boundIntersections, float x, float y, float width, float height) {
-		List<QuadRect> result = new ArrayList<>();
+	public static boolean intersects(@NonNull QuadTree<QuadRect> boundIntersections, float x, float y, float width, float height) {
 		QuadRect visibleRect = calculateRect(x, y, width, height);
-		boundIntersections.queryInBox(new QuadRect(visibleRect.left, visibleRect.top, visibleRect.right, visibleRect.bottom), result);
-		for (QuadRect r : result) {
-			if (QuadRect.intersects(r, visibleRect)) {
+		return intersects(boundIntersections, visibleRect, true);
+	}
+
+	public static boolean intersects(@NonNull QuadTree<QuadRect> boundIntersections, @NonNull QuadRect visibleRect, boolean insert) {
+		List<QuadRect> result = new ArrayList<>();
+		boundIntersections.queryInBox(new QuadRect(visibleRect), result);
+		for (QuadRect rect : result) {
+			if (QuadRect.intersects(rect, visibleRect)) {
 				return true;
 			}
 		}
-		boundIntersections.insert(visibleRect,
-				new QuadRect(visibleRect.left, visibleRect.top, visibleRect.right, visibleRect.bottom));
+		if (insert) {
+			boundIntersections.insert(visibleRect, new QuadRect(visibleRect));
+		}
 		return false;
 	}
 
@@ -406,12 +417,12 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		return (int) textScale * radiusPoi;
 	}
 
-	public static void setMapButtonIcon(@NonNull ImageView imageView, @NonNull Drawable icon) {
+	public static void setMapButtonIcon(@NonNull ImageView imageView, @Nullable Drawable icon, @NonNull ScaleType scaleType) {
 		int btnSizePx = imageView.getLayoutParams().height;
 		int iconSizePx = imageView.getContext().getResources().getDimensionPixelSize(R.dimen.map_widget_icon);
 		int iconPadding = (btnSizePx - iconSizePx) / 2;
 		imageView.setPadding(iconPadding, iconPadding, iconPadding, iconPadding);
-		imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+		imageView.setScaleType(scaleType);
 		imageView.setImageDrawable(icon);
 	}
 
@@ -422,7 +433,8 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 
 	protected Bitmap getScaledBitmap(@DrawableRes int drawableId, float scale) {
 		OsmandApplication app = getApplication();
-		Bitmap bitmap = BitmapFactory.decodeResource(app.getResources(), drawableId);
+		MapActivity activity = getMapActivity();
+		Bitmap bitmap = BitmapFactory.decodeResource(activity == null ? app.getResources() : activity.getResources(), drawableId);
 		if (bitmap != null && scale != 1f && scale > 0) {
 			bitmap = AndroidUtils.scaleBitmap(bitmap,
 					(int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);
@@ -830,7 +842,8 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 					if (queriedBoxContains(queriedBox, extendedBox)) {
 						return null;
 					}
-					return calculateResult(extendedBox.getLatLonBounds(), extendedBox.getZoom());
+					QuadRect bounds = extendedBox.getLatLonBounds();
+					return bounds != null ? calculateResult(bounds, extendedBox.getZoom()) : null;
 				}
 			}
 

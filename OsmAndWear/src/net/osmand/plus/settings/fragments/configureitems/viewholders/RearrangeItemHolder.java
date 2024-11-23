@@ -1,34 +1,8 @@
 package net.osmand.plus.settings.fragments.configureitems.viewholders;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_AV_NOTES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BACKUP_RESTORE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_FAVORITES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_OSM_EDITS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRACKS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_GPX_WAYPOINT;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_AUDIO_NOTE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_EDIT_GPX_WP;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MODIFY_OSM_NOTE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_PHOTO_NOTE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_VIDEO_NOTE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_SOURCE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.RECORDING_LAYER;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
+import static android.graphics.Typeface.DEFAULT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.*;
 
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 import android.view.View;
@@ -45,9 +19,9 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.fragments.configureitems.MenuItemsAdapterListener;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.UnmovableItem;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
@@ -57,8 +31,6 @@ public class RearrangeItemHolder extends ViewHolder implements UnmovableItem {
 
 	private final OsmandApplication app;
 	private final UiUtilities uiUtilities;
-	private final Typeface robotoMedium;
-	private final Typeface robotoRegular;
 
 	@ColorInt
 	private final int textColor;
@@ -79,8 +51,6 @@ public class RearrangeItemHolder extends ViewHolder implements UnmovableItem {
 		uiUtilities = app.getUIUtilities();
 		activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		textColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
-		robotoMedium = FontCache.getFont(app, app.getString(R.string.font_roboto_medium));
-		robotoRegular = FontCache.getFont(app, app.getString(R.string.font_roboto_regular));
 		this.nightMode = nightMode;
 
 		title = itemView.findViewById(R.id.title);
@@ -100,7 +70,7 @@ public class RearrangeItemHolder extends ViewHolder implements UnmovableItem {
 
 		title.setText(getTitle(item));
 		title.setTextColor(isDivider ? activeColor : textColor);
-		title.setTypeface(isDivider ? robotoMedium : robotoRegular);
+		title.setTypeface(isDivider ? FontCache.getMediumFont() : DEFAULT);
 
 		description.setText(getDescription(id));
 

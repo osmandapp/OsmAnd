@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -45,12 +45,12 @@
 			android:gravity="center"
 			android:maxLines="1"
 			android:text="@string/all_folders"
-			android:textAppearance="@style/TextAppearance.ListItemTitle"
 			android:textSize="11sp"
-			osmand:typeface="@string/font_roboto_regular"
+			android:textAppearance="@style/TextAppearance.ListItemTitle"
+			android:textStyle="normal"
 			tools:text="Some title" />
 
-		<androidx.appcompat.widget.SwitchCompat
+		<net.osmand.view.ThreeStateCheckbox
 			android:id="@+id/toggle_item"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"

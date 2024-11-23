@@ -14,7 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -222,7 +222,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 	}
 
 	private static String getFormattedDistance(@NonNull OsmandApplication app, float value) {
-		return OsmAndFormatter.getFormattedDistance(value, app, false);
+		return OsmAndFormatter.getFormattedDistance(value, app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS);
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target,

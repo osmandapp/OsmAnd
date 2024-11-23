@@ -1,5 +1,5 @@
 <LinearLayout
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             android:paddingStart="25dp"
             android:contentDescription="@string/shared_string_close"
             android:translationX="25dp"
-            osmand:srcCompat="@drawable/ic_action_remove_dark" />
+            app:srcCompat="@drawable/ic_action_remove_dark" />
 
         <EditText
             android:id="@+id/searchEditText"

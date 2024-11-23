@@ -57,6 +57,8 @@ public class RendererRegistry {
 	public static final String OSMASSISTANT_RENDER = "OSM Assistant";
 	public static final String PUBLICTRANSPORTROUTES_RENDER = "Public transport routes";
 
+	public static boolean IGNORE_CACHED_STYLES = false; // enable to overwrite RENDERERS_DIR styles (debug)
+
 	private final OsmandApplication app;
 
 	private RenderingRulesStorage defaultRender;
@@ -92,6 +94,7 @@ public class RendererRegistry {
 		internalRenderers.put(PUBLICTRANSPORTROUTES_RENDER, "publictransportroutes" + ADDON_RENDERER_INDEX_EXT);
 	}
 
+	@Nullable
 	public RenderingRulesStorage defaultRender() {
 		if (defaultRender == null) {
 			defaultRender = getRenderer(DEFAULT_RENDER);
@@ -242,7 +245,7 @@ public class RendererRegistry {
 				name = DEFAULT_RENDER;
 			}
 			File fl = getFileForInternalStyle(name);
-			if (fl.exists()) {
+			if (fl.exists() && !IGNORE_CACHED_STYLES) {
 				is = new FileInputStream(fl);
 			} else {
 				copyFileForInternalStyle(name);
@@ -413,6 +416,7 @@ public class RendererRegistry {
 		return "";
 	}
 
+	@Nullable
 	public RenderingRulesStorage getCurrentSelectedRenderer() {
 		if (currentSelectedRender == null) {
 			return defaultRender();

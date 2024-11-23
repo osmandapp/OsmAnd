@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
-import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.AndroidUtils;
@@ -20,9 +20,9 @@ import java.util.Locale;
 
 public class LocalItemInfoCard extends BaseCard {
 
-	private final LocalItem localItem;
+	private final BaseLocalItem localItem;
 
-	public LocalItemInfoCard(@NonNull FragmentActivity activity, @NonNull LocalItem localItem) {
+	public LocalItemInfoCard(@NonNull FragmentActivity activity, @NonNull BaseLocalItem localItem) {
 		super(activity, false);
 		this.localItem = localItem;
 	}
@@ -40,11 +40,13 @@ public class LocalItemInfoCard extends BaseCard {
 		setupRow(container.findViewById(R.id.type), getString(R.string.shared_string_type), type, false);
 
 		DateFormat format = new SimpleDateFormat("dd.MM.yyyy, HH:mm", Locale.getDefault());
-		String date = format.format(localItem.getFile().lastModified());
+		String date = format.format(localItem.getLastModified());
 		setupRow(container.findViewById(R.id.data), getString(R.string.shared_string_created), date, false);
 
-		String size = AndroidUtils.formatSize(app, localItem.getSize());
-		setupRow(container.findViewById(R.id.size), getString(R.string.shared_string_size), size, true);
+		long size = localItem.getSize();
+		View sizeRow = container.findViewById(R.id.size);
+		AndroidUiHelper.updateVisibility(sizeRow, size > 0);
+		setupRow(sizeRow, getString(R.string.shared_string_size), localItem.getSizeDescription(app), true);
 	}
 
 	private void setupRow(@NonNull View view, @Nullable String title, @Nullable String description, boolean lastItem) {

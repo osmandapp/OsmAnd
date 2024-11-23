@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
-import android.graphics.Typeface;
+import static android.graphics.Typeface.DEFAULT;
+
 import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
 
@@ -16,7 +17,6 @@ import net.osmand.data.TransportStop;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.FavouritePointMenuBuilder;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
@@ -25,7 +25,7 @@ import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.transport.TransportStopRoute;
-import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
@@ -132,7 +132,7 @@ public class FavouritePointMenuController extends MenuController {
 	public Drawable getRightIcon() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			return PointImageDrawable.getFromFavorite(mapActivity.getMyApplication(),
+			return PointImageUtils.getFromPoint(mapActivity.getMyApplication(),
 					mapActivity.getMyApplication().getFavoritesHelper().getColorWithCategory(fav,
 							ContextCompat.getColor(mapActivity, R.color.color_favorite)), false, fav);
 		} else {
@@ -161,9 +161,8 @@ public class FavouritePointMenuController extends MenuController {
 	public CharSequence getSubtypeStr() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && !Algorithms.isEmpty(fav.getAddress())) {
-			Typeface typeface = FontCache.getRobotoRegular(mapActivity);
 			SpannableString addressSpannable = new SpannableString(fav.getAddress());
-			addressSpannable.setSpan(new CustomTypefaceSpan(typeface), 0, addressSpannable.length(), 0);
+			addressSpannable.setSpan(new CustomTypefaceSpan(DEFAULT), 0, addressSpannable.length(), 0);
 
 			return addressSpannable;
 		} else {

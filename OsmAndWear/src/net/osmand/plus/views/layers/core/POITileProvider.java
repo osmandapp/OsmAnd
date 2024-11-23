@@ -30,11 +30,12 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.TileBoxRequest;
 import net.osmand.util.Algorithms;
@@ -76,7 +77,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 			if (ROUTE_ARTICLE_POINT.equals(amenity.getSubType())) {
 				String colorStr = amenity.getColor();
 				if (colorStr != null) {
-					color = ColorDialogs.getColorByTag(colorStr);
+					color = DefaultColors.valueOf(colorStr);
 				}
 			}
 			return color != 0 ? color : ContextCompat.getColor(ctx, R.color.osmand_orange);
@@ -96,13 +97,13 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 					id = RenderingIcons.getIconNameForAmenity(amenity);
 				}
 				if (id != null) {
-					PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx, getColor(),
+					PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx, getColor(),
 							true, RenderingIcons.getResId(id));
 					pointImageDrawable.setAlpha(0.8f);
 					bitmap = pointImageDrawable.getBigMergedBitmap(textScale, false);
 				}
 			} else {
-				PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx, getColor(), true);
+				PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx, getColor(), true);
 				pointImageDrawable.setAlpha(0.8f);
 				bitmap = pointImageDrawable.getSmallMergedBitmap(textScale);
 			}

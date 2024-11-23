@@ -1,19 +1,21 @@
 package net.osmand.plus.track.helpers;
 
+import static net.osmand.plus.track.helpers.GpxDisplayGroup.getTrackDisplayGroup;
+
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 
 public class GpxDisplayItem {
 
-	public GPXTrackAnalysis analysis;
+	public GpxTrackAnalysis analysis;
 	public GpxDisplayGroup group;
 
 	public WptPt locationStart;
@@ -40,14 +42,12 @@ public class GpxDisplayItem {
 	public Matrix chartMatrix;
 	public float chartHighlightPos = -1f;
 
-	public GpxDisplayItem() {
-	}
-
-	public GpxDisplayItem(@NonNull GPXTrackAnalysis analysis) {
+	public GpxDisplayItem(@Nullable GpxTrackAnalysis analysis) {
 		this.analysis = analysis;
 	}
 
 	public boolean isGeneralTrack() {
-		return group != null && group.isGeneralTrack();
+		TrackDisplayGroup trackGroup = getTrackDisplayGroup(group);
+		return trackGroup != null && trackGroup.isGeneralTrack();
 	}
 }

@@ -1,5 +1,7 @@
 package net.osmand.plus.track;
 
+import androidx.annotation.NonNull;
+
 public class GpxSelectionParams {
 
 	private boolean showOnMap;
@@ -103,7 +105,13 @@ public class GpxSelectionParams {
 		return this;
 	}
 
+	@NonNull
 	public static GpxSelectionParams newInstance() {
 		return new GpxSelectionParams();
+	}
+
+	@NonNull
+	public static GpxSelectionParams getDefaultSelectionParams() {
+		return newInstance().showOnMap().selectedByUser().syncGroup().addToHistory().addToMarkers().saveSelection();
 	}
 }

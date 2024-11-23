@@ -1,8 +1,8 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors.ble;
 
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_CADENCE;
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_DISTANCE;
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_SPEED;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_CADENCE;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_DISTANCE;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_SPEED;
 
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
@@ -59,7 +59,7 @@ public class BLERunningSensor extends BLEAbstractSensor {
 		@Override
 		public List<SensorDataField> getDataFields() {
 			return Collections.singletonList(
-					new SensorDataField(R.string.external_device_characteristic_cadence, -1, cadence));
+					new SensorDataField(R.string.external_device_characteristic_cadence, R.string.steps_per_minute_unit, cadence));
 		}
 
 		@NonNull
@@ -73,7 +73,7 @@ public class BLERunningSensor extends BLEAbstractSensor {
 		@Override
 		public List<SensorWidgetDataField> getWidgetFields() {
 			return Collections.singletonList(
-					new SensorWidgetDataField(SensorWidgetDataFieldType.BIKE_CADENCE, R.string.external_device_characteristic_cadence, -1, cadence));
+					new SensorWidgetDataField(SensorWidgetDataFieldType.BIKE_CADENCE, R.string.external_device_characteristic_cadence, R.string.steps_per_minute_unit, cadence));
 		}
 
 		@NonNull

@@ -1,7 +1,5 @@
 package net.osmand.plus.mapcontextmenu;
 
-import static net.osmand.plus.download.DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -12,15 +10,9 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.NativeLibrary.RenderedObject;
+import net.osmand.OnResultCallback;
 import net.osmand.aidl.AidlMapPointWrapper;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.core.android.MapRendererView;
@@ -31,6 +23,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.SpecialPointType;
 import net.osmand.data.TransportStop;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
@@ -43,7 +36,7 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.helpers.AvoidSpecificRoads;
+import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapseExpandListener;
@@ -71,7 +64,6 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNoteMenuController;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryImage;
 import net.osmand.plus.plugins.mapillary.MapillaryMenuController;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer.OpenStreetNote;
@@ -79,6 +71,7 @@ import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.menu.EditPOIMenuController;
 import net.osmand.plus.plugins.osmedit.menu.OsmBugMenuController;
 import net.osmand.plus.plugins.parking.ParkingPositionMenuController;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.resources.SearchOsmandRegionTask;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.transport.TransportStopRoute;
@@ -93,6 +86,14 @@ import net.osmand.util.OpeningHoursParser.OpeningHours;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+
+import static net.osmand.plus.download.DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
 
 public abstract class MenuController extends BaseMenuController implements CollapseExpandListener {
 
@@ -151,6 +152,10 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		if (mapContextMenu != null) {
 			mapContextMenu.updateLayout();
 		}
+	}
+
+	public String getPreferredMapLangLC() {
+		return getPreferredMapLang().toLowerCase();
 	}
 
 	public String getPreferredMapLang() {
@@ -231,8 +236,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				if (pointDescription.isMyLocation()) {
 					menuController = new MyLocationMenuController(mapActivity, pointDescription);
 				}
-			} else if (object instanceof AvoidSpecificRoads.AvoidRoadInfo) {
-				menuController = new ImpassibleRoadsMenuController(mapActivity, pointDescription, (AvoidSpecificRoads.AvoidRoadInfo) object);
+			} else if (object instanceof AvoidRoadInfo) {
+				menuController = new ImpassibleRoadsMenuController(mapActivity, pointDescription, (AvoidRoadInfo) object);
 			} else if (object instanceof RenderedObject) {
 				menuController = new RenderedObjectMenuController(mapActivity, pointDescription, (RenderedObject) object);
 			} else if (object instanceof MapillaryImage) {
@@ -489,18 +494,23 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return false;
 	}
 
-	public String getFormattedAltitude() {
-		Double altitude = null;
-		OsmandApplication app = null;
+	public void getFormattedAltitude(@NonNull OnResultCallback<String> callback) {
 		MapActivity activity = getMapActivity();
-		OsmandDevelopmentPlugin devPlugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-		if (activity != null && devPlugin != null && devPlugin.is3DMapsEnabled()) {
-			app = activity.getMyApplication();
+		SRTMPlugin srtmPlugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
+		if (activity != null && srtmPlugin != null && srtmPlugin.is3DReliefAllowed()) {
+			OsmandApplication app = activity.getMyApplication();
 			OsmandMapTileView mapView = activity.getMapView();
 			MapRendererView mapRenderer = mapView.getMapRenderer();
-			altitude = NativeUtilities.getAltitudeForLatLon(mapRenderer, getLatLon());
+			NativeUtilities.getAltitudeForLatLon(mapRenderer, getLatLon(), altitude -> {
+				if (altitude != null) {
+					callback.onResult(OsmAndFormatter.getFormattedAlt(altitude, app));
+				} else {
+					callback.onResult(null);
+				}
+			});
+		} else {
+			callback.onResult(null);
 		}
-		return altitude != null ? OsmAndFormatter.getFormattedAlt(altitude, app) : null;
 	}
 
 	public int getRightIconId() {

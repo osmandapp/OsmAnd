@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/add_gpx_point_bottom_sheet"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -25,7 +25,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginEnd="0dp"
         android:padding="0dp"
-        osmand:srcCompat="@drawable/ic_action_photo_dark"/>
+        app:srcCompat="@drawable/ic_action_photo_dark"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,10 +44,10 @@
             android:layout_marginStart="50dp"
             android:textSize="@dimen/default_list_text_size"
             android:layout_marginLeft="@dimen/content_padding"
-            android:layout_marginTop="@dimen/content_padding"
-            android:layout_marginEnd="@dimen/content_padding"
             android:layout_marginRight="@dimen/content_padding"
-            tools:text="@string/waypoint_one" />
+            android:layout_marginTop="@dimen/content_padding"
+            tools:text="@string/waypoint_one"
+            android:layout_marginEnd="@dimen/content_padding" />
 
         <TextView
             android:id="@+id/description"

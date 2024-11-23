@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/authorize_container"
 	android:layout_width="match_parent"
@@ -14,9 +14,9 @@
 		android:focusable="true"
 		android:focusableInTouchMode="true"
 		android:minHeight="@dimen/favorites_list_item_height"
-		osmand:labelText="Email"
-		osmand:primaryColor="@color/coordinate_input_edit_text_activated"
-		osmand:secondaryColor="@color/text_color_tertiary_light">
+		app:labelText="Email"
+		app:primaryColor="@color/coordinate_input_edit_text_activated"
+		app:secondaryColor="@color/text_color_tertiary_light">
 
 		<studio.carbonylgroup.textfieldboxes.ExtendedEditText
 			android:id="@+id/edit_text"
@@ -38,9 +38,9 @@
 		android:focusable="true"
 		android:focusableInTouchMode="true"
 		android:minHeight="@dimen/favorites_list_item_height"
-		osmand:labelText="@string/backup_promocode"
-		osmand:primaryColor="@color/coordinate_input_edit_text_activated"
-		osmand:secondaryColor="@color/text_color_tertiary_light">
+		app:labelText="@string/backup_promocode"
+		app:primaryColor="@color/coordinate_input_edit_text_activated"
+		app:secondaryColor="@color/text_color_tertiary_light">
 
 		<studio.carbonylgroup.textfieldboxes.ExtendedEditText
 			android:id="@+id/promocode_edit_text"
@@ -64,17 +64,17 @@
 		android:textColor="@color/osmand_live_cancelled"
 		android:textSize="@dimen/default_sub_text_size"
 		android:visibility="gone"
-		osmand:lineHeight="@dimen/default_desc_text_size"
-		osmand:typeface="@string/font_roboto_regular"
+		app:lineHeight="@dimen/default_desc_text_size"
+		android:textStyle="normal"
 		tools:text="Error text" />
 
 	<net.osmand.plus.widgets.dialogbutton.DialogButton
 		android:id="@+id/button"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		osmand:dialogButtonType="secondaryActive"
-		osmand:dialogButtonTopMargin="@dimen/content_padding_small"
-		osmand:dialogButtonHeight="@dimen/bottom_sheet_list_item_height"
+		app:dialogButtonType="secondaryActive"
+		app:dialogButtonTopMargin="@dimen/content_padding_small"
+		app:dialogButtonHeight="@dimen/bottom_sheet_list_item_height"
 		tools:dialogButtonTitle="@string/cloud_email_already_registered"/>
 
 </LinearLayout>

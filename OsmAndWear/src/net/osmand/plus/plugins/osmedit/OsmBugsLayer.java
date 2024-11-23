@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.PlatformUtil;
@@ -40,6 +39,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.OsmBugsTileProvider;
@@ -170,7 +170,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 						} else {
 							backgroundColorRes = R.color.osm_bug_resolved_icon_color;
 						}
-						PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+						PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
 								ContextCompat.getColor(ctx, backgroundColorRes), true,
 								false, DEFAULT_UI_ICON_ID, BackgroundType.COMMENT);
 						pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
@@ -195,7 +195,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 						backgroundColorRes = R.color.osm_bug_resolved_icon_color;
 					}
 					BackgroundType backgroundType = BackgroundType.COMMENT;
-					PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+					PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
 							ContextCompat.getColor(ctx, backgroundColorRes), true, false, iconId,
 							backgroundType);
 					int offsetY = backgroundType.getOffsetY(ctx, textScale);

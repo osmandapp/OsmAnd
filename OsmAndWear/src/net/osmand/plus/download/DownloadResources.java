@@ -16,11 +16,13 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.custom.CustomRegion;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResource;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -182,8 +184,6 @@ public class DownloadResources extends DownloadResourceGroup {
 				IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT, indexFileNames);
 		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR),
 				IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT, indexFileNames);
-		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.HEIGHTMAP_INDEX_DIR),
-				IndexConstants.HEIGHTMAP_SQLITE_EXT, indexFileNames);
 		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.GEOTIFF_DIR),
 				IndexConstants.TIF_EXT, indexFileNames);
 
@@ -410,10 +410,6 @@ public class DownloadResources extends DownloadResourceGroup {
 				}
 				continue;
 			}
-			if (type == DownloadActivityType.HEIGHTMAP_FILE_LEGACY) {
-				// Hide heightmaps of sqlite format
-				continue;
-			}
 			if (type == DownloadActivityType.HILLSHADE_FILE || type == DownloadActivityType.SLOPE_FILE) {
 				OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
 				if (app.useOpenGlRenderer() && plugin != null && !plugin.USE_RASTER_SQLITEDB.get()) {
@@ -431,7 +427,7 @@ public class DownloadResources extends DownloadResourceGroup {
 			} else {
 				String fileName = item.getFileName();
 				if (fileName.contains("World")) {
-					if (Algorithms.startsWithAny(fileName.toLowerCase(), WORLD_SEAMARKS_KEY, WORLD_SEAMARKS_OLD_KEY)) {
+					if (CollectionUtils.startsWithAny(fileName.toLowerCase(), WORLD_SEAMARKS_KEY, WORLD_SEAMARKS_OLD_KEY)) {
 						nauticalWorldwideMaps.addItem(item);
 					} else {
 						worldMaps.addItem(item);

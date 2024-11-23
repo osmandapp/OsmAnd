@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -35,7 +35,9 @@
 				android:layout_gravity="center_vertical"
 				android:layout_weight="1"
 				android:orientation="vertical"
+				android:paddingLeft="@dimen/content_padding"
 				android:paddingTop="@dimen/content_padding_small"
+				android:paddingRight="@dimen/content_padding"
 				android:paddingBottom="@dimen/content_padding_small">
 
 				<net.osmand.plus.widgets.TextViewEx
@@ -45,8 +47,8 @@
 					android:letterSpacing="@dimen/text_button_letter_spacing"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/default_list_text_size"
-					osmand:fontFamily="@string/font_roboto_regular"
-					osmand:lineHeight="@dimen/default_title_line_height"
+					android:textStyle="normal"
+					app:lineHeight="@dimen/default_title_line_height"
 					tools:text="Favorites" />
 
 				<LinearLayout
@@ -59,6 +61,7 @@
 						android:layout_width="@dimen/small_icon_size"
 						android:layout_height="@dimen/small_icon_size"
 						android:layout_gravity="center_vertical"
+						android:layout_marginEnd="@dimen/content_padding_half"
 						android:src="@drawable/ic_action_cloud"
 						android:tint="?attr/secondary_icon_color" />
 
@@ -69,8 +72,8 @@
 						android:letterSpacing="@dimen/description_letter_spacing"
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
-						osmand:fontFamily="@string/font_roboto_regular"
-						osmand:lineHeight="@dimen/default_desc_line_height"
+						android:textStyle="normal"
+						app:lineHeight="@dimen/default_desc_line_height"
 						tools:text="Deleted: Dec 13, 12:53" />
 
 				</LinearLayout>
@@ -82,7 +85,9 @@
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"
 				android:layout_gravity="center_vertical"
-				osmand:srcCompat="@drawable/ic_overflow_menu_white" />
+				android:layout_marginLeft="@dimen/content_padding"
+				android:layout_marginRight="@dimen/content_padding"
+				app:srcCompat="@drawable/ic_overflow_menu_white" />
 
 			<me.zhanghai.android.materialprogressbar.MaterialProgressBar
 				android:id="@+id/progress_bar"
@@ -92,9 +97,9 @@
 				android:layout_gravity="center_vertical"
 				android:layout_marginRight="20dp"
 				android:indeterminate="false"
-				osmand:mpb_progressStyle="circular"
-				osmand:mpb_setBothDrawables="true"
-				osmand:mpb_useIntrinsicPadding="false" />
+				app:mpb_progressStyle="circular"
+				app:mpb_setBothDrawables="true"
+				app:mpb_useIntrinsicPadding="false" />
 
 		</LinearLayout>
 

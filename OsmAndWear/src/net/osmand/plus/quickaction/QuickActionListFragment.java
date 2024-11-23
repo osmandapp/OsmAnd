@@ -1,6 +1,8 @@
 package net.osmand.plus.quickaction;
 
+import static net.osmand.plus.quickaction.AddQuickActionFragment.QUICK_ACTION_BUTTON_KEY;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
+import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -14,7 +16,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,12 +38,12 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.quickaction.ConfirmationBottomSheet.OnConfirmButtonClickListener;
-import net.osmand.plus.quickaction.QuickActionRegistry.QuickActionUpdatesListener;
+import net.osmand.plus.quickaction.MapButtonsHelper.QuickActionUpdatesListener;
+import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -49,7 +53,14 @@ import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.OnItemMoveCallback;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.UnmovableItem;
 import net.osmand.plus.views.layers.MapQuickActionLayer;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.AlertDialogExtra;
+import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.plus.widgets.popup.PopUpMenu;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.util.Algorithms;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -84,13 +95,21 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
 	private QuickActionAdapter adapter;
 	private ItemTouchHelper touchHelper;
-	private QuickActionRegistry quickActionRegistry;
+	private MapButtonsHelper mapButtonsHelper;
+	private QuickActionButtonState buttonState;
 	private final ArrayList<Long> actionsToDelete = new ArrayList<>();
 	private int screenType = SCREEN_TYPE_REORDER;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		mapButtonsHelper = app.getMapButtonsHelper();
+
+		Bundle args = getArguments();
+		String key = args != null ? args.getString(QUICK_ACTION_BUTTON_KEY) : null;
+		if (key != null) {
+			buttonState = mapButtonsHelper.getActionButtonStateById(key);
+		}
 		if (savedInstanceState != null) {
 			long[] array = savedInstanceState.getLongArray(ACTIONS_TO_DELETE_KEY);
 			if (array != null) {
@@ -137,7 +156,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 		View btnSelectAll = bottomPanel.findViewById(R.id.select_all);
 		View btnDelete = bottomPanel.findViewById(R.id.delete);
 
-		btnSelectAll.setOnClickListener(view1 -> {
+		btnSelectAll.setOnClickListener(v -> {
 			actionsToDelete.clear();
 			for (QuickAction action : adapter.getQuickActions()) {
 				actionsToDelete.add(action.id);
@@ -146,11 +165,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 			updateToolbarTitle();
 		});
 
-		btnDelete.setOnClickListener(view12 -> showConfirmDeleteActionsBottomSheet(getMapActivity()));
-		UiUtilities.setupDialogButton(nightMode, btnDelete,
-				DialogButtonType.SECONDARY, R.string.shared_string_delete);
-
-		quickActionRegistry = app.getQuickActionRegistry();
+		btnDelete.setOnClickListener(v -> showConfirmDeleteActionsBottomSheet(getMapActivity()));
+		UiUtilities.setupDialogButton(nightMode, btnDelete, SECONDARY, R.string.shared_string_delete);
 
 		toolbar = view.findViewById(R.id.toolbar);
 		navigationIcon = toolbar.findViewById(R.id.close_button);
@@ -186,11 +202,11 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 	private void setUpToolbar() {
 		TextView tvTitle = toolbar.findViewById(R.id.toolbar_title);
 		tvTitle.setTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode));
-		boolean isWidgetVisibleOnMap = app.getQuickActionRegistry().isQuickActionOn();
+
 		updateToolbarTitle();
 		updateToolbarNavigationIcon();
-		updateToolbarActionButton();
-		updateToolbarSwitch(isWidgetVisibleOnMap);
+		updateToolbarActions();
+		updateToolbarSwitch(buttonState.isEnabled());
 	}
 
 	private void updateToolbarNavigationIcon() {
@@ -214,12 +230,9 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	private void updateListItems() {
-		MapActivity ma = getMapActivity();
-		OsmandApplication app = ma.getMyApplication();
-		List<QuickAction> actions = quickActionRegistry.getFilteredQuickActions();
-
-		updateToolbarActionButton();
+		updateToolbarActions();
 		List<ListItem> items = new ArrayList<>();
+		List<QuickAction> actions = buttonState.getQuickActions();
 		if (actions.size() > 0) {
 			items.add(new ListItem(ItemType.LIST_DIVIDER));
 			int screen = 0;
@@ -249,7 +262,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 										actionsToDelete.add(action.id);
 									}
 								}
-								showConfirmDeleteActionsBottomSheet(ma);
+								showConfirmDeleteActionsBottomSheet(getMapActivity());
 							})));
 		}
 		items.add(new ListItem(ItemType.BOTTOM_SHADOW));
@@ -279,33 +292,119 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 		updateVisibility();
 	}
 
-	private void updateToolbarActionButton() {
-		View deleteIconContainer = toolbar.findViewById(R.id.action_button);
-		ImageView deletingModeIcon = toolbar.findViewById(R.id.action_button_icon);
-		int activeButtonsColorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
-		boolean hasActiveQuickActions = quickActionRegistry.getQuickActions().size() > 0;
-		int activeColor = ContextCompat.getColor(app, activeButtonsColorResId);
-		int deleteIconColor = hasActiveQuickActions ? activeColor :
-				ColorUtilities.getColorWithAlpha(activeColor, 0.25f);
-		Drawable deleteIcon = getPaintedContentIcon(
-				R.drawable.ic_action_delete_dark, deleteIconColor);
-		deletingModeIcon.setImageDrawable(deleteIcon);
-		deleteIconContainer.setOnClickListener(view -> changeScreenType(SCREEN_TYPE_DELETE));
-		deleteIconContainer.setEnabled(hasActiveQuickActions);
+	private void updateToolbarActions() {
+		ViewGroup container = toolbar.findViewById(R.id.actions_container);
+		container.removeAllViews();
+
+		LayoutInflater inflater = UiUtilities.getInflater(toolbar.getContext(), nightMode);
+		createDeleteActionsButton(inflater, container);
+		createOptionsButton(inflater, container);
+	}
+
+	private void createDeleteActionsButton(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
+		boolean hasActions = buttonState.getQuickActions().size() > 0;
+		int activeColor = ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode);
+		int color = hasActions ? activeColor : ColorUtilities.getColorWithAlpha(activeColor, 0.25f);
+
+		ImageButton button = (ImageButton) inflater.inflate(R.layout.action_button, container, false);
+		button.setEnabled(hasActions);
+		button.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_delete_dark, color));
+		button.setOnClickListener(view -> changeScreenType(SCREEN_TYPE_DELETE));
+		container.addView(button);
+	}
+
+	private void createOptionsButton(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
+		int color = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
+
+		ImageButton button = (ImageButton) inflater.inflate(R.layout.action_button, container, false);
+		button.setImageDrawable(getIcon(R.drawable.ic_overflow_menu_white, color));
+		button.setOnClickListener(this::showOptionsMenu);
+		button.setContentDescription(getString(R.string.shared_string_more_actions));
+		container.addView(button);
+	}
+
+	private void showOptionsMenu(@NonNull View view) {
+		List<PopUpMenuItem> items = new ArrayList<>();
+		Context context = view.getContext();
+
+		items.add(new PopUpMenuItem.Builder(context)
+				.setTitleId(R.string.shared_string_appearance)
+				.setIcon(getContentIcon(R.drawable.ic_action_appearance))
+				.setOnClickListener(v -> showAppearanceDialog()).create());
+
+		items.add(new PopUpMenuItem.Builder(context)
+				.setTitleId(R.string.shared_string_rename)
+				.setIcon(getContentIcon(R.drawable.ic_action_edit_outlined))
+				.setOnClickListener(v -> showRenameDialog()).create());
+
+		items.add(new PopUpMenuItem.Builder(context)
+				.showTopDivider(true)
+				.setTitleId(R.string.shared_string_delete)
+				.setIcon(getContentIcon(R.drawable.ic_action_delete_outlined))
+				.setOnClickListener(v -> showDeleteDialog()).create());
+
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = view;
+		displayData.menuItems = items;
+		displayData.nightMode = nightMode;
+		PopUpMenu.show(displayData);
+	}
+
+	private void showAppearanceDialog() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			FragmentManager manager = activity.getSupportFragmentManager();
+			MapButtonAppearanceFragment.showInstance(manager, buttonState);
+		}
+	}
+
+	private void showRenameDialog() {
+		FragmentActivity activity = requireActivity();
+		AlertDialogData dialogData = new AlertDialogData(activity, nightMode);
+		dialogData.setTitle(R.string.shared_string_rename);
+		dialogData.setNegativeButton(R.string.shared_string_cancel, null);
+		dialogData.setPositiveButton(R.string.shared_string_save, (dialog, which) -> {
+			Object extra = dialogData.getExtra(AlertDialogExtra.EDIT_TEXT);
+			if (extra instanceof EditText) {
+				String name = ((EditText) extra).getText().toString().trim();
+				if (Algorithms.isBlank(name)) {
+					app.showToastMessage(R.string.empty_name);
+				} else if (!mapButtonsHelper.isActionButtonNameUnique(name)) {
+					app.showToastMessage(R.string.custom_map_button_name_present);
+				} else {
+					buttonState.setName(name);
+					mapButtonsHelper.onButtonStateChanged(buttonState);
+				}
+			}
+		});
+		String caption = getString(R.string.enter_new_name);
+		CustomAlert.showInput(dialogData, activity, buttonState.getName(), caption);
+	}
+
+	private void showDeleteDialog() {
+		FragmentActivity activity = requireActivity();
+		AlertDialogData data = new AlertDialogData(activity, nightMode)
+				.setTitle(R.string.delete_actions_button)
+				.setNeutralButton(R.string.shared_string_cancel, null)
+				.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
+					mapButtonsHelper.removeQuickActionButtonState(buttonState);
+					activity.onBackPressed();
+				});
+
+		int color = ColorUtilities.getSecondaryTextColor(app, nightMode);
+		String message = getString(R.string.delete_actions_button_confirmation, buttonState.getName());
+		CustomAlert.showSimpleMessage(data, UiUtilities.createColorSpannable(message, color, message));
 	}
 
 	private void updateToolbarTitle() {
 		if (toolbar != null) {
 			TextView tvTitle = toolbar.findViewById(R.id.toolbar_title);
 			if (screenType == SCREEN_TYPE_REORDER) {
-				tvTitle.setText(getString(R.string.configure_screen_quick_action));
+				tvTitle.setText(buttonState.getName());
 			} else if (screenType == SCREEN_TYPE_DELETE) {
-				int selectedCount = actionsToDelete.size();
-				String title = String.format(
-						getString(R.string.ltr_or_rtl_combine_via_colon),
-						getString(R.string.shared_string_selected),
-						selectedCount);
-				tvTitle.setText(title);
+				String count = String.valueOf(actionsToDelete.size());
+				String selected = getString(R.string.shared_string_selected);
+				tvTitle.setText(getString(R.string.ltr_or_rtl_combine_via_colon, selected, count));
 			}
 		}
 	}
@@ -330,14 +429,11 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	private void setWidgetVisibilityOnMap(boolean visible) {
-		app.getQuickActionRegistry().setQuickActionFabState(visible);
+		mapButtonsHelper.setQuickActionFabState(buttonState, visible);
 
-		MapActivity activity = getMapActivity();
-		if (activity != null) {
-			MapQuickActionLayer mil = activity.getMapLayers().getMapQuickActionLayer();
-			if (mil != null) {
-				mil.refreshLayer();
-			}
+		MapQuickActionLayer layer = app.getOsmandMap().getMapLayers().getMapQuickActionLayer();
+		if (layer != null) {
+			layer.refreshLayer();
 		}
 	}
 
@@ -345,14 +441,14 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 	public void onResume() {
 		super.onResume();
 		getMapActivity().disableDrawer();
-		quickActionRegistry.addUpdatesListener(this);
+		mapButtonsHelper.addUpdatesListener(this);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		getMapActivity().enableDrawer();
-		quickActionRegistry.removeUpdatesListener(this);
+		mapButtonsHelper.removeUpdatesListener(this);
 	}
 
 	@Override
@@ -376,12 +472,13 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	private void saveQuickActions() {
-		quickActionRegistry.updateQuickActions(adapter.getQuickActions());
+		mapButtonsHelper.updateQuickActions(buttonState, adapter.getQuickActions());
 	}
 
 	@Override
 	public void onActionsUpdated() {
 		updateListItems();
+		updateToolbarTitle();
 	}
 
 	@Override
@@ -392,7 +489,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 			if (screenType == SCREEN_TYPE_DELETE) {
 				changeScreenType(SCREEN_TYPE_REORDER);
 			} else if (screenType == SCREEN_TYPE_REORDER) {
-				updateToolbarActionButton();
+				updateToolbarActions();
 			}
 		}
 	}
@@ -479,13 +576,11 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 					h.deleteBtn.setClickable(true);
 					h.deleteBtn.setFocusable(true);
 					h.itemContainer.setOnClickListener(view -> {
-						CreateEditActionDialog dialog = CreateEditActionDialog.newInstance(action.id);
-						FragmentManager fm = getFragmentManager();
-						if (fm != null && !dialog.isStateSaved()) {
-							dialog.show(fm, CreateEditActionDialog.TAG);
+						FragmentManager manager = getFragmentManager();
+						if (manager != null) {
+							AddQuickActionController.showCreateEditActionDialog(app, manager, buttonState, action);
 						}
 					});
-
 				} else if (screenType == SCREEN_TYPE_DELETE) {
 					h.moveButton.setVisibility(View.GONE);
 					h.deleteIcon.setVisibility(View.GONE);
@@ -511,13 +606,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 				List<QuickAction> actions = getQuickActions();
 				int actionGlobalPosition = actions.indexOf(action);
 				int actionPosition = actionGlobalPosition % ITEMS_IN_GROUP + 1;
-				String name = action.getName(app);
-				if (action.getActionNameRes() != 0 && !name.contains(getString(action.getActionNameRes()))) {
-					String prefAction = getString(action.getActionNameRes());
-					h.title.setText(getString(R.string.ltr_or_rtl_combine_via_dash, prefAction, action.getName(app)));
-				} else {
-					h.title.setText(name);
-				}
+				h.title.setText(action.getExtendedName(app));
 				h.subTitle.setText(getResources().getString(R.string.quick_action_item_action, actionPosition));
 				h.icon.setImageDrawable(getContentIcon(action.getIconRes(app)));
 
@@ -698,8 +787,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 			}
 		}
 
-		private class DescriptionVH extends RecyclerView.ViewHolder
-				implements ReorderItemTouchHelperCallback.UnmovableItem {
+		private class DescriptionVH extends RecyclerView.ViewHolder implements UnmovableItem {
 
 			private final TextView tvDescription;
 
@@ -714,8 +802,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 			}
 		}
 
-		private class ListDividerVH extends RecyclerView.ViewHolder
-				implements ReorderItemTouchHelperCallback.UnmovableItem {
+		private class ListDividerVH extends RecyclerView.ViewHolder implements UnmovableItem {
 
 			public ListDividerVH(View itemView) {
 				super(itemView);
@@ -727,8 +814,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 			}
 		}
 
-		private class BottomShadowVH extends RecyclerView.ViewHolder
-				implements ReorderItemTouchHelperCallback.UnmovableItem {
+		private class BottomShadowVH extends RecyclerView.ViewHolder implements UnmovableItem {
 
 			public BottomShadowVH(View itemView) {
 				super(itemView);
@@ -740,8 +826,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 			}
 		}
 
-		private class ButtonVH extends RecyclerView.ViewHolder
-				implements ReorderItemTouchHelperCallback.UnmovableItem {
+		private class ButtonVH extends RecyclerView.ViewHolder implements UnmovableItem {
 
 			private final View container;
 			private final ImageView icon;
@@ -772,7 +857,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 		BUTTON
 	}
 
-	private static class ListItem {
+	public static class ListItem {
 		ItemType type;
 		Object value;
 
@@ -803,9 +888,9 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	private void showAddQuickActionDialog() {
-		FragmentManager fm = getFragmentManager();
-		if (fm != null) {
-			AddQuickActionDialog.showInstance(fm, false);
+		FragmentManager manager = getFragmentManager();
+		if (manager != null) {
+			AddQuickActionController.showAddQuickActionDialog(app, manager, buttonState);
 		}
 	}
 
@@ -832,24 +917,15 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 				R.string.shared_string_delete, usedOnMap);
 	}
 
-	public static void showInstance(@NonNull FragmentActivity activity) {
-		showInstance(activity, false);
-	}
-
-	public static void showInstance(@NonNull FragmentActivity activity, boolean animate) {
-		FragmentManager fm = activity.getSupportFragmentManager();
-		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
-			int slideInAnim = 0;
-			int slideOutAnim = 0;
-			OsmandApplication app = ((OsmandApplication) activity.getApplication());
-			if (animate && !app.getSettings().DO_NOT_USE_ANIMATIONS.get()) {
-				slideInAnim = R.anim.slide_in_bottom;
-				slideOutAnim = R.anim.slide_out_bottom;
-			}
+	public static void showInstance(@NonNull FragmentActivity activity, @NonNull QuickActionButtonState buttonState) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			Bundle args = new Bundle();
+			args.putString(QUICK_ACTION_BUTTON_KEY, buttonState.getId());
 
 			QuickActionListFragment fragment = new QuickActionListFragment();
-			fm.beginTransaction()
-					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
+			fragment.setArguments(args);
+			manager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();

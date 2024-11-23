@@ -660,9 +660,7 @@ public class MapDataMenuController extends MenuController {
 				} else if (item.getType() == LocalItemType.ROAD_DATA) {
 					parent = app.getAppPath(IndexConstants.ROADS_INDEX_DIR);
 				} else if (item.getType() == LocalItemType.TILES_DATA) {
-					if (fileName.endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT)) {
-						parent = app.getAppPath(IndexConstants.HEIGHTMAP_INDEX_DIR);
-					} else if (fileName.endsWith(IndexConstants.TIF_EXT)) {
+					 if (fileName.endsWith(IndexConstants.TIF_EXT)) {
 						parent = app.getAppPath(IndexConstants.GEOTIFF_DIR);
 					} else {
 						parent = app.getAppPath(IndexConstants.TILES_INDEX_DIR);

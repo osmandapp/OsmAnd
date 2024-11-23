@@ -1,75 +1,110 @@
 package net.osmand.plus.views.mapwidgets;
 
+import static net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType.CONTEXT_MENU;
+
+import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.AttributeSet;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.controls.MapHudLayout.SizeChangeListener;
+import net.osmand.plus.views.controls.MapHudLayout.ViewChangeProvider;
+import net.osmand.plus.views.controls.MapHudLayout.VisibilityChangeListener;
 import net.osmand.plus.views.mapwidgets.TopToolbarController.TopToolbarControllerType;
 
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class TopToolbarView {
+public class TopToolbarView extends FrameLayout implements ViewChangeProvider {
 
-	private final MapActivity mapActivity;
+	private final OsmandApplication app;
+	private final UiUtilities uiUtilities;
 
 	private final LinkedList<TopToolbarController> controllers = new LinkedList<>();
-	private final TopToolbarController defaultController = new TopToolbarController(TopToolbarControllerType.CONTEXT_MENU);
+	private final TopToolbarController defaultController = new TopToolbarController(CONTEXT_MENU);
 
-	private final View topBar;
-	private final View topBarLayout;
-	private final View topBarBottomView;
-	private final View topBarTitleLayout;
-	private final ImageButton backButton;
-	private final TextView titleView;
-	private final TextView descrView;
-	private final ImageButton refreshButton;
-	private final ImageButton closeButton;
-	private final TextView saveView;
-	private final TextView textBtn;
-	private final SwitchCompat topBarSwitch;
-	private final View shadowView;
+	private MapActivity mapActivity;
+
+	private View topBarLayout;
+	private View topBarBottomView;
+	private View topBarTitleLayout;
+	private ImageButton backButton;
+	private TextView titleView;
+	private TextView descrView;
+	private ImageButton refreshButton;
+	private ImageButton closeButton;
+	private TextView saveView;
+	private TextView textBtn;
+	private SwitchCompat topBarSwitch;
+	private View shadowView;
+
+	private SizeChangeListener sizeListener;
+	private VisibilityChangeListener visibilityListener;
+
 	private boolean nightMode;
 
-	public TopToolbarView(@NonNull MapActivity mapActivity) {
-		this.mapActivity = mapActivity;
-
-		topBar = mapActivity.findViewById(R.id.widget_top_bar);
-		topBarLayout = mapActivity.findViewById(R.id.widget_top_bar_layout);
-		topBarBottomView = mapActivity.findViewById(R.id.widget_top_bar_bottom_view);
-		topBarTitleLayout = mapActivity.findViewById(R.id.widget_top_bar_title_layout);
-		backButton = mapActivity.findViewById(R.id.widget_top_bar_back_button);
-		refreshButton = mapActivity.findViewById(R.id.widget_top_bar_refresh_button);
-		closeButton = mapActivity.findViewById(R.id.widget_top_bar_close_button);
-		titleView = mapActivity.findViewById(R.id.widget_top_bar_title);
-		saveView = mapActivity.findViewById(R.id.widget_top_bar_save);
-		textBtn = mapActivity.findViewById(R.id.widget_top_bar_text_btn);
-		descrView = mapActivity.findViewById(R.id.widget_top_bar_description);
-		topBarSwitch = mapActivity.findViewById(R.id.widget_top_bar_switch);
-		shadowView = mapActivity.findViewById(R.id.widget_top_bar_shadow);
-		AndroidUiHelper.updateVisibility(topBar, false);
+	public TopToolbarView(@NonNull Context context) {
+		this(context, null);
 	}
 
+	public TopToolbarView(@NonNull Context context, @Nullable AttributeSet attrs) {
+		this(context, attrs, 0);
+	}
+
+	public TopToolbarView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+		this(context, attrs, defStyleAttr, 0);
+	}
+
+	public TopToolbarView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+		super(context, attrs, defStyleAttr, defStyleRes);
+
+		this.app = (OsmandApplication) context.getApplicationContext();
+		this.uiUtilities = app.getUIUtilities();
+	}
+
+	@Override
+	protected void onFinishInflate() {
+		super.onFinishInflate();
+
+		topBarLayout = findViewById(R.id.widget_top_bar_layout);
+		topBarBottomView = findViewById(R.id.widget_top_bar_bottom_view);
+		topBarTitleLayout = findViewById(R.id.widget_top_bar_title_layout);
+		backButton = findViewById(R.id.widget_top_bar_back_button);
+		refreshButton = findViewById(R.id.widget_top_bar_refresh_button);
+		closeButton = findViewById(R.id.widget_top_bar_close_button);
+		titleView = findViewById(R.id.widget_top_bar_title);
+		saveView = findViewById(R.id.widget_top_bar_save);
+		textBtn = findViewById(R.id.widget_top_bar_text_btn);
+		descrView = findViewById(R.id.widget_top_bar_description);
+		topBarSwitch = findViewById(R.id.widget_top_bar_switch);
+		shadowView = findViewById(R.id.widget_top_bar_shadow);
+	}
+
+	@NonNull
 	public MapActivity getMapActivity() {
 		return mapActivity;
 	}
 
-	public View getTopBar() {
-		return topBar;
+	public void setMapActivity(@NonNull MapActivity mapActivity) {
+		this.mapActivity = mapActivity;
 	}
 
 	public boolean isTopToolbarViewVisible() {
-		return topBar.getVisibility() == View.VISIBLE;
+		return getVisibility() == View.VISIBLE;
 	}
 
 	public View getTopBarLayout() {
@@ -140,7 +175,7 @@ public class TopToolbarView {
 			}
 		}
 		controllers.add(controller);
-		mapActivity.getMapLayers().getMapMarkersLayer().getMarkersWidgetsHelper().setCustomLatLon(null);
+		app.getOsmandMap().getMapLayers().getMapMarkersLayer().getMarkersWidgetsHelper().setCustomLatLon(null);
 		updateColors();
 		updateInfo();
 	}
@@ -173,15 +208,16 @@ public class TopToolbarView {
 			initToolbar(defaultController);
 			defaultController.updateToolbar(this);
 		}
-		boolean updated = AndroidUiHelper.updateVisibility(topBar, controller != null && !MapRouteInfoMenu.chooseRoutesVisible && !MapRouteInfoMenu.waypointsVisible &&
-				(!mapActivity.getContextMenu().isVisible() || controller.getType() == TopToolbarController.TopToolbarControllerType.CONTEXT_MENU));
+		boolean visible = controller != null && !MapRouteInfoMenu.chooseRoutesVisible
+				&& !MapRouteInfoMenu.waypointsVisible && (!mapActivity.getContextMenu().isVisible() || controller.getType() == CONTEXT_MENU);
+
+		boolean updated = AndroidUiHelper.updateVisibility(this, visible);
 		if (updated) {
 			mapActivity.updateStatusBarColor();
 		}
 	}
 
 	public void updateColors(TopToolbarController controller) {
-		UiUtilities uiUtils = mapActivity.getMyApplication().getUIUtilities();
 		controller.nightMode = nightMode;
 
 		boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
@@ -219,23 +255,23 @@ public class TopToolbarView {
 			backButton.setImageDrawable(null);
 		} else {
 			if (backBtnIconClr != -1) {
-				backButton.setImageDrawable(uiUtils.getPaintedIcon(backBtnIconId, backBtnIconClr));
+				backButton.setImageDrawable(uiUtilities.getPaintedIcon(backBtnIconId, backBtnIconClr));
 			} else {
-				backButton.setImageDrawable(uiUtils.getIcon(backBtnIconId, backBtnIconClrId));
+				backButton.setImageDrawable(uiUtilities.getIcon(backBtnIconId, backBtnIconClrId));
 			}
 		}
 		if (closeBtnIconId == 0) {
 			closeButton.setImageDrawable(null);
 		} else {
-			closeButton.setImageDrawable(uiUtils.getIcon(closeBtnIconId, closeBtnIconClrId));
+			closeButton.setImageDrawable(uiUtilities.getIcon(closeBtnIconId, closeBtnIconClrId));
 		}
 		if (refreshBtnIconId == 0) {
 			refreshButton.setImageDrawable(null);
 		} else {
-			refreshButton.setImageDrawable(uiUtils.getIcon(refreshBtnIconId, refreshBtnIconClrId));
+			refreshButton.setImageDrawable(uiUtilities.getIcon(refreshBtnIconId, refreshBtnIconClrId));
 		}
-		int titleColor = titleTextClr != -1 ? titleTextClr : mapActivity.getColor(titleTextClrId);
-		int descrColor = descrTextClr != -1 ? descrTextClr : mapActivity.getColor(descrTextClrId);
+		int titleColor = titleTextClr != -1 ? titleTextClr : getContext().getColor(titleTextClrId);
+		int descrColor = descrTextClr != -1 ? descrTextClr : getContext().getColor(descrTextClrId);
 		titleView.setTextColor(titleColor);
 		descrView.setTextColor(descrColor);
 		saveView.setTextColor(titleColor);
@@ -261,8 +297,8 @@ public class TopToolbarView {
 		}
 		if (controller.saveViewVisible) {
 			if (controller.saveViewTextId != -1) {
-				saveView.setText(mapActivity.getString(controller.saveViewTextId));
-				saveView.setContentDescription(mapActivity.getString(controller.saveViewTextId));
+				saveView.setText(getContext().getString(controller.saveViewTextId));
+				saveView.setContentDescription(getContext().getString(controller.saveViewTextId));
 			}
 			if (saveView.getVisibility() == View.GONE) {
 				saveView.setVisibility(View.VISIBLE);
@@ -300,5 +336,31 @@ public class TopToolbarView {
 
 	public boolean isNightMode() {
 		return nightMode;
+	}
+
+	@Override
+	public void setSizeListener(@Nullable SizeChangeListener listener) {
+		this.sizeListener = listener;
+	}
+
+	@Override
+	public void setVisibilityListener(@Nullable VisibilityChangeListener listener) {
+		this.visibilityListener = listener;
+	}
+
+	@Override
+	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+		super.onSizeChanged(w, h, oldw, oldh);
+		if (sizeListener != null) {
+			sizeListener.onSizeChanged(this, w, h, oldw, oldh);
+		}
+	}
+
+	@Override
+	protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
+		super.onVisibilityChanged(changedView, visibility);
+		if (visibilityListener != null) {
+			visibilityListener.onVisibilityChanged(changedView, visibility);
+		}
 	}
 }
