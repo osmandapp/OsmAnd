@@ -45,6 +45,7 @@ public class AisObjectMenuBuilder extends MenuBuilder {
 
     private View buildAisRow(View view, String prefixText, String aisType, int aisTypeColor, String aisValue,
                             String suffixText, int textLinesLimit, boolean matchWidthDivider) {
+        boolean light = isLightContent();
 
         if (!isFirstRow()) {
             buildRowDivider(view);
