@@ -4898,4 +4898,8 @@
     <string name="poi_name_etymology">Namensetymologie</string>
     <string name="poi_name_left">Name der linken Seite</string>
     <string name="poi_name_right">Name der rechten Seite</string>
+    <string name="poi_camp_site_type">Campingplatz-Typ</string>
+    <string name="poi_camp_site_serviced">Betreut</string>
+    <string name="poi_camp_site_deluxe">Deluxe</string>
+    <string name="poi_camp_site_standard">Standard</string>
 </resources>
