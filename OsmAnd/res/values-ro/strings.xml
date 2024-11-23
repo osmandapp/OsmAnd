@@ -5881,4 +5881,12 @@
     <string name="drawer_button_description">Deschide meniul principal.</string>
     <string name="configure_map_description">Modificare stil hartă, straturi sau alte setări.</string>
     <string name="shared_string_engine">Motor</string>
+    <string name="obd_engine_runtime">Timp de execuție motor</string>
+    <string name="obd_engine_runtime_desc">Afișează cât timp a funcționat motorul de când a fost pornit.</string>
+    <string name="obd_battery_voltage_desc">Afișează nivelul de tensiune al bateriei autovehiculului</string>
+    <string name="vehicle_metrics_recording_description">Selectați parametrii care urmează să fie înregistrați în fișierul GPX.</string>
+    <string name="auto_zoom_3d_angle">Auto zoom 3D unghi</string>
+    <string name="av_audio_sample_rate">Rata de eșantionare audio</string>
+    <string name="av_audio_sample_rate_descr">Selectați frecvența de eșantionare audio.</string>
+    <string name="connect_new_scanner">Conectați noul scaner</string>
 </resources>
