@@ -1673,7 +1673,7 @@
     <string name="poi_ramp_bicycle_no">Rampa per biciclette: no</string>
     <string name="poi_step_count">Conteggio dei passi</string>
     <string name="poi_step_condition_uneven">Passo condizione: irregolare</string>
-    <string name="poi_defibrillator">Defibrillatore</string>
+    <string name="poi_defibrillator">Defibrillatore;DAE</string>
     <string name="poi_defibrillator_yes">Defibrillatore: sì</string>
     <string name="poi_tomb_war_grave">Tipo: tomba di guerra</string>
     <string name="poi_tomb_tumulus">Tipo: tumulus</string>
@@ -2029,10 +2029,10 @@
     <string name="poi_direction_all">Direzione: tutte</string>
     <string name="poi_winter_room_yes">Ricovero invernale: sì</string>
     <string name="poi_winter_room_no">Ricovero invernale: no</string>
-    <string name="poi_reservation_required">Prenotazione: necessaria</string>
-    <string name="poi_reservation_recommended">Prenotazione: consigliata</string>
-    <string name="poi_reservation_yes">Prenotazione: sì</string>
-    <string name="poi_reservation_no">Prenotazione: no</string>
+    <string name="poi_reservation_required">Necessaria</string>
+    <string name="poi_reservation_recommended">Consigliata</string>
+    <string name="poi_reservation_yes">Sì</string>
+    <string name="poi_reservation_no">No</string>
     <string name="poi_backcountry">Nessuna struttura</string>
     <string name="poi_cafeteria">Caffetteria</string>
     <string name="poi_zoo_type">Tipo</string>
@@ -2105,7 +2105,7 @@
     <string name="poi_direction_down">Direzione: sotto</string>
     <string name="poi_direction_entrance">Direzione: entrata</string>
     <string name="poi_direction_exit">Direzione: uscita</string>
-    <string name="poi_reservation_members_only">Prenotazione: solo membri</string>
+    <string name="poi_reservation_members_only">Solo membri</string>
     <string name="poi_motorcycle_type">Tipo di moto</string>
     <string name="poi_trade">Negozio materiali da costruzione</string>
     <string name="poi_energy">Negozio forniture di energia</string>
@@ -2809,7 +2809,7 @@
     <string name="poi_historic_civilization_nuragic">Civiltà: nuragica (XVIII sec. a.C. - II sec. d.C.)</string>
     <string name="poi_historic_civilization_ancient_roman">Civiltà: antica romana (753 a.C. - 284 d.C.)</string>
     <string name="poi_tomb_columbarium">Tipo: colombario</string>
-    <string name="poi_tomb_vault">Tipo: caveau</string>
+    <string name="poi_tomb_vault">Tipo: cappella</string>
     <string name="poi_deaf_description">Descrizione per non udenti</string>
     <string name="poi_product_charcoal">Prodotto: carbone</string>
     <string name="poi_product_leather">Prodotto: pelle</string>
@@ -3386,7 +3386,7 @@
     <string name="poi_bridge_movable_swing">Tipo ponte mobile: altalena</string>
     <string name="poi_hiking_filter">Adatto per l\'escursionismo</string>
     <string name="poi_notice">Avviso, segnale marittimo</string>
-    <string name="poi_leaf_type_needleleaved">Foglia agugliata</string>
+    <string name="poi_leaf_type_needleleaved">Aghifoglia</string>
     <string name="poi_windfall">Manna</string>
     <string name="poi_diaper_table_count">Numero fasciatoi</string>
     <string name="poi_memorial_koshinto">Koshinto</string>
@@ -3439,7 +3439,7 @@
     <string name="poi_industrial_brickyard">Tipo: fornace</string>
     <string name="poi_quango">Quango</string>
     <string name="poi_castle_type_shiro">Tipo castello: shiro</string>
-    <string name="poi_social_facility_outreach">Presenza</string>
+    <string name="poi_social_facility_outreach">Assistenza sociale</string>
     <string name="poi_historic_civilization_hernici">Civiltà: ernici</string>
     <string name="poi_historic_civilization_helladic">Civiltà: elladica</string>
     <string name="poi_historic_civilization_minoan">Civiltà: minoica</string>
@@ -3754,7 +3754,7 @@
     <string name="poi_socket_tesla_supercharger_voltage">Socket: Tesla Supercharger: tensione</string>
     <string name="poi_socket_tesla_standard_voltage">Socket: Tesla standard: tensione</string>
     <string name="poi_generator_type_rbmk_1500">Tipo generatore: RBMK-1500</string>
-    <string name="poi_access_yes">L\'accesso è permesso</string>
+    <string name="poi_access_yes">Accesso libero</string>
     <string name="poi_fuel_lng">LNG</string>
     <string name="poi_socket_cee_blue">Socket: CEE blu</string>
     <string name="poi_direction_north">Direzione nord</string>
@@ -4374,4 +4374,28 @@
     <string name="poi_toilets_position_squat">Posizione della toilette: turca</string>
     <string name="poi_toilets_position_urinal">Positizione della toilette: orinale</string>
     <string name="poi_toilets_position_seated">Posizione sulla toilette: seduta</string>
+    <string name="poi_cash_withdrawal_purchase_required_no">Prelievo contanti: acquisto non necessario</string>
+    <string name="poi_borough">Borough</string>
+    <string name="poi_city_block">Isolato</string>
+    <string name="poi_cuisine_soba">Soba</string>
+    <string name="poi_cuisine_empanada">Empanada</string>
+    <string name="poi_cuisine_diner">Tavola calda</string>
+    <string name="poi_map_size_site">Dimensioni mappa: sito</string>
+    <string name="poi_fire_hydrant_style_wsh">Tipo idrante: wsh</string>
+    <string name="poi_fire_hydrant_flow_capacity">Capacità di flusso dell\'idrante</string>
+    <string name="poi_pump_type_beam_pump">Tipo di pompa: a bilanciere</string>
+    <string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">Scopo esplosione: applicazione industriale, stimolazione petrolio</string>
+    <string name="poi_animal_shelter_purpose_release_no">Reintroduzione: no</string>
+    <string name="poi_animal_shelter_purpose_release_yes">Reintroduzione: sì</string>
+    <string name="poi_cash_withdrawal_purchase_required_yes">Prelievo contanti: acquisto richiesto</string>
+    <string name="poi_volcano_type_stratovolcano">Stratovulcano</string>
+    <string name="poi_crossing_saltire_yes">Croce di Sant\'Andrea</string>
+    <string name="poi_crossing_saltire_no">Croce di Sant\'Andrea: no</string>
+    <string name="poi_pump_type_india_mk_2_3">Tipo di pompa: India Mk II o III&gt;</string>
+    <string name="poi_mofa_no">Accesso ai ciclomotori: no</string>
+    <string name="poi_camp_site_type">Tipo di accampamento</string>
+    <string name="poi_cash_withdrawal_currency">Valuta prelievo contanti</string>
+    <string name="poi_fire_hydrant_type_dry_barrel">Serbatoio secco</string>
+    <string name="poi_fire_hydrant_position_lane">Corsia</string>
+    <string name="poi_nuclear_explosion_body_wave_magnitude">Magnitudo dell\'onda d\'urto</string>
 </resources>
