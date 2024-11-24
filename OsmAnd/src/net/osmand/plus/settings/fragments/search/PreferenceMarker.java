@@ -15,6 +15,6 @@ public class PreferenceMarker {
 	}
 
 	public static boolean isPreferenceConnectedToPlugin(final SearchablePreferencePOJO preference, final Class<? extends OsmandPlugin> plugin) {
-		return plugin.getName().equals(preference.extras().getString(KEY));
+		return plugin.getName().equals(preference.getExtras().getString(KEY));
 	}
 }
