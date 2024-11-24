@@ -58,9 +58,9 @@ public class TrackTabsHelper {
 	}
 
 	@NonNull
-	public List<TrackTab> getSortedTrackTabs(boolean useExtendedName) {
+	public List<TrackTab> getSortedTrackTabs(boolean useSubdirs) {
 		List<TrackTab> result = getTrackTabs();
-		result.sort(new TracksComparator(getRootSortMode(), getDefaultLocation(), useExtendedName));
+		result.sort(new TracksComparator(getRootSortMode(), getDefaultLocation(), useSubdirs));
 		return result;
 	}
 
@@ -88,7 +88,7 @@ public class TrackTabsHelper {
 		processRecentlyVisibleTracks();
 
 		updateTrackTabs(rootFolder);
-		loadTabsSortModes(rootFolder);
+		loadTabsSortModes();
 		sortTrackTabsContent();
 	}
 
@@ -241,7 +241,7 @@ public class TrackTabsHelper {
 		if (file != null && file.getParentFile() != null) {
 			KFile dir = file.getParentFile();
 			if (dir != null) {
-				String folderId = TrackSortModesCollection.getFolderId(dir.absolutePath());
+				String folderId = TrackSortModesHelper.getFolderId(dir.absolutePath());
 				TrackTab trackTab = trackTabs.get(folderId);
 				if (trackTab == null) {
 					trackTab = new TrackTab(app, SharedUtil.jFile(dir));
@@ -305,8 +305,8 @@ public class TrackTabsHelper {
 		}
 	}
 
-	public void loadTabsSortModes(@NonNull TrackFolder folder) {
-		TrackSortModesCollection sortModes = settings.getTrackSortModes(folder);
+	public void loadTabsSortModes() {
+		TrackSortModesHelper sortModes = app.getTrackSortModesHelper();
 		for (Entry<String, TrackTab> entry : trackTabs.entrySet()) {
 			TracksSortMode sortMode = sortModes.getSortMode(entry.getKey());
 			if (sortMode != null) {
@@ -317,16 +317,16 @@ public class TrackTabsHelper {
 	}
 
 	public void saveTabsSortModes() {
-		TrackSortModesCollection sortModes = settings.getTrackSortModes();
+		TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
 		for (TrackTab trackTab : trackTabs.values()) {
-			sortModes.setSortMode(trackTab.getId(), trackTab.getSortMode());
+			sortModesHelper.setSortMode(trackTab.getId(), trackTab.getSortMode());
 		}
-		sortModes.syncSettings();
+		sortModesHelper.syncSettings();
 	}
 
 	@NonNull
 	private TracksSortMode getRootSortMode() {
-		return settings.getTrackSortModes().getRootSortMode();
+		return app.getTrackSortModesHelper().getRootFolderSortMode();
 	}
 
 	@NonNull

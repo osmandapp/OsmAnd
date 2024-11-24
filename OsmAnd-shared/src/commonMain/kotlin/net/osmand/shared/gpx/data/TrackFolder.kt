@@ -151,8 +151,8 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 		return analysis
 	}
 
-	override fun getDirName(useExtendedName: Boolean): String {
-		return if (useExtendedName) relativePath else dirFile.name()
+	override fun getDirName(includingSubdirs: Boolean): String {
+		return if (includingSubdirs) relativePath else dirFile.name()
 	}
 
 	fun getLastModified(): Long {

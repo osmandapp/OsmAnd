@@ -203,7 +203,7 @@ public class GpxUiHelper {
 	}
 
 	@NonNull
-	public static String getExtendedFolderName(@NonNull File directory, @NonNull String initialName) {
+	public static String getFolderPath(@NonNull File directory, @NonNull String initialName) {
 		String name = directory.getName() + File.separator;
 		File parent = directory.getParentFile();
 		String parentName = parent != null ? parent.getName() + File.separator : "";

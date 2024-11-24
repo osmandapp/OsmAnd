@@ -12,8 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.configmap.tracks.TrackSortModesCollection;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -190,15 +189,13 @@ public class FileUtils {
 		}
 		updateMovedGpxFiles(app, files, srcDir, destDir);
 
-		OsmandSettings settings = app.getSettings();
-		TrackSortModesCollection sortModes = settings.getTrackSortModes(trackFolder);
-		sortModes.updateAfterMoveTrackFolder(trackFolder, srcDir);
+		TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
+		sortModesHelper.updateAfterMoveTrackFolder(trackFolder, srcDir);
 	}
 
 	public static void updateAfterDeleteTrackFolder(@NonNull OsmandApplication app, @NonNull TrackFolder trackFolder) {
-		OsmandSettings settings = app.getSettings();
-		TrackSortModesCollection sortModes = settings.getTrackSortModes(trackFolder);
-		sortModes.updateAfterDeleteTrackFolder(trackFolder);
+		TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
+		sortModesHelper.updateAfterDeleteTrackFolder(trackFolder);
 	}
 
 	private static void updateMovedGpxFiles(@NonNull OsmandApplication app, @NonNull List<File> files,

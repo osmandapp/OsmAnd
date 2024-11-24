@@ -170,8 +170,8 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 	}
 
 	@NonNull
-	public List<TrackTab> getSortedTrackTabs(boolean useExtendedName) {
-		return trackTabsHelper.getSortedTrackTabs(useExtendedName);
+	public List<TrackTab> getSortedTrackTabs(boolean useSubdirs) {
+		return trackTabsHelper.getSortedTrackTabs(useSubdirs);
 	}
 
 	protected void setViewPagerAdapter(@NonNull ViewPager pager, List<TrackTab> items) {

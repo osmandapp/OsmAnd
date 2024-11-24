@@ -74,7 +74,7 @@ public class TrackTab implements TracksGroup, ComparableTracksGroup {
 	@Override
 	public String getId() {
 		return switch (type) {
-			case FOLDER -> directory != null ? TrackSortModesCollection.getFolderId(directory.getAbsolutePath()) : "";
+			case FOLDER -> directory != null ? TrackSortModesHelper.getFolderId(directory.getAbsolutePath()) : "";
 			case SMART_FOLDER -> smartFolder != null ? smartFolder.getId() : "";
 			default -> type.name();
 		};
@@ -109,9 +109,9 @@ public class TrackTab implements TracksGroup, ComparableTracksGroup {
 
 	@NonNull
 	@Override
-	public String getDirName(boolean useExtendedName) {
-		return directory != null && useExtendedName
-				? GpxUiHelper.getExtendedFolderName(directory, initialName)
+	public String getDirName(boolean includingSubdirs) {
+		return directory != null && includingSubdirs
+				? GpxUiHelper.getFolderPath(directory, initialName)
 				: initialName;
 	}
 

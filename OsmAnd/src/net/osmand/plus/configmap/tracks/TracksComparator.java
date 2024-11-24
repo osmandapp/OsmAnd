@@ -35,7 +35,7 @@ public class TracksComparator implements Comparator<Object> {
 	public final TrackTab trackTab;
 	public final TracksSortMode sortMode;
 	public final Collator collator = OsmAndCollator.primaryCollator();
-	private boolean useExtendedName = false;
+	private boolean useSubdirs = false;
 
 	public TracksComparator(@NonNull TrackTab trackTab, @NonNull LatLon latLon) {
 		this.trackTab = trackTab;
@@ -44,9 +44,9 @@ public class TracksComparator implements Comparator<Object> {
 	}
 
 	public TracksComparator(@NonNull TracksSortMode sortMode,
-	                        @NonNull LatLon latLon, boolean useExtendedName) {
+	                        @NonNull LatLon latLon, boolean useSubdirs) {
 		this(sortMode, latLon);
-		this.useExtendedName = useExtendedName;
+		this.useSubdirs = useSubdirs;
 	}
 
 	public TracksComparator(@NonNull TracksSortMode sortMode, @NonNull LatLon latLon) {
@@ -303,7 +303,7 @@ public class TracksComparator implements Comparator<Object> {
 
 	private int compareTrackFolderNames(@NonNull ComparableTracksGroup folder1,
 	                                    @NonNull ComparableTracksGroup folder2) {
-		return compareNames(folder1.getDirName(useExtendedName), folder2.getDirName(useExtendedName));
+		return compareNames(folder1.getDirName(useSubdirs), folder2.getDirName(useSubdirs));
 	}
 
 	private int compareNames(@NonNull String item1, @NonNull String item2) {

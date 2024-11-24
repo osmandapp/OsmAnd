@@ -8,35 +8,32 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class TrackSortModesCollection {
+public class TrackSortModesHelper {
 
 	private static final String ROOT_FOLDER = IndexConstants.GPX_INDEX_DIR;
 	private static final String SEPARATOR = ",,";
 
 	private final Map<String, TracksSortMode> cachedSortModes = new ConcurrentHashMap<>();
 	private final ListStringPreference preference;
-	private boolean keysUpgraded = false;
 
-	public TrackSortModesCollection(@NonNull OsmandSettings settings) {
-		this.preference = settings.TRACKS_TABS_SORT_MODES;
-		loadFromPreference();
+	public TrackSortModesHelper(@NonNull OsmandApplication app) {
+		OsmandSettings settings = app.getSettings();
+		preference = settings.TRACKS_TABS_SORT_MODES;
+		loadFromPreference(app);
 	}
 
 	@NonNull
-	public TracksSortMode getRootSortMode() {
+	public TracksSortMode getRootFolderSortMode() {
 		return requireSortMode("");
 	}
 
@@ -49,12 +46,7 @@ public class TrackSortModesCollection {
 	@Nullable
 	public TracksSortMode getSortMode(@Nullable String id) {
 		id = removeExtraFileSeparator(id);
-		TracksSortMode sortMode = cachedSortModes.get(id);
-		if (sortMode == null) {
-			String idV1 = getFolderIdV1(id);
-			return idV1 != null ? cachedSortModes.get(idV1) : null;
-		}
-		return sortMode;
+		return cachedSortModes.get(id);
 	}
 
 	public void setSortMode(@NonNull String id, @NonNull TracksSortMode sortMode) {
@@ -62,47 +54,9 @@ public class TrackSortModesCollection {
 		cachedSortModes.put(id, sortMode);
 	}
 
-	public void askUpgradeKeysWithSync(@NonNull OsmandApplication app, @Nullable TrackFolder folder) {
-		if (folder != null && !keysUpgraded) {
-			if (askUpgradeCachedKeys(app, folder)) {
-				keysUpgraded = true;
-				syncSettings();
-			}
-		}
-	}
-
-	/**
-	 * Removes surplus keys and upgrades outdated ones.
-	 * Upgraded keys will use folder relative path as a key (V2) instead of folder name (V1).
-	 */
-	private boolean askUpgradeCachedKeys(@NonNull OsmandApplication app, @NonNull TrackFolder trackFolder) {
-		TrackFolder rootFolder = trackFolder.getRootFolder();
-		if (!Objects.equals(rootFolder.getDirFile(), app.getAppPathKt(ROOT_FOLDER))) {
-			// Execute only from tracks root folder to not lose valid entries
-			return false;
-		}
-		Map<String, TracksSortMode> upgradedCache = new HashMap<>();
-		putUpgradedKey(upgradedCache, TrackTabType.ON_MAP.name());
-		putUpgradedKey(upgradedCache, TrackTabType.ALL.name());
-		putUpgradedKey(upgradedCache, TrackTabType.FOLDERS.name());
-		putUpgradedKey(upgradedCache, rootFolder.getId());
-		for (TrackFolder folder : rootFolder.getFlattenedSubFolders()) {
-			putUpgradedKey(upgradedCache, folder.getId());
-		}
-		for (SmartFolder folder : app.getSmartFolderHelper().getSmartFolders()) {
-			putUpgradedKey(upgradedCache, folder.getId());
-		}
+	public void setSortModes(@NonNull Map<String, TracksSortMode> sortModes) {
 		cachedSortModes.clear();
-		cachedSortModes.putAll(upgradedCache);
-		return true;
-	}
-
-	private void putUpgradedKey(@NonNull Map<String, TracksSortMode> map, @NonNull String id) {
-		id = removeExtraFileSeparator(id);
-		TracksSortMode sortMode = getSortMode(id);
-		if (sortMode != null) {
-			map.put(id, sortMode);
-		}
+		cachedSortModes.putAll(sortModes);
 	}
 
 	public void updateAfterMoveTrackFolder(@NonNull TrackFolder trackFolder, @NonNull File oldDir) {
@@ -123,7 +77,7 @@ public class TrackSortModesCollection {
 		saveToPreference();
 	}
 
-	private void loadFromPreference() {
+	private void loadFromPreference(@NonNull OsmandApplication app) {
 		List<String> tokens = preference.getStringsList();
 		if (!Algorithms.isEmpty(tokens)) {
 			for (String token : tokens) {
@@ -132,6 +86,7 @@ public class TrackSortModesCollection {
 					cachedSortModes.put(tokenParts[0], TracksSortMode.getByValue(tokenParts[1]));
 				}
 			}
+			UpgradeTrackSortModeKeysAlgorithm.execute(app, this);
 		}
 	}
 
@@ -150,15 +105,6 @@ public class TrackSortModesCollection {
 			index += ROOT_FOLDER.length();
 		}
 		return index > 0 ? absolutePath.substring(index) : absolutePath;
-	}
-
-	@Nullable
-	private static String getFolderIdV1(@Nullable String id) {
-		if (id != null && id.isEmpty()) {
-			return removeExtraFileSeparator(ROOT_FOLDER);
-		}
-		int index = id != null ? id.lastIndexOf(File.separator) : -1;
-		return index > 0 ? id.substring(index + 1) : null;
 	}
 
 	@Nullable
