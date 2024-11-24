@@ -2,11 +2,13 @@ package net.osmand.plus.views.layers;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
+import static net.osmand.data.Amenity.ROUTE;
 import static net.osmand.data.Amenity.ROUTE_ID;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 import static net.osmand.osm.OsmRouteType.HIKING;
 import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.TRAVEL_OSM_ID_TAG;
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
 import static net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
 import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
@@ -357,7 +359,7 @@ public class MapSelectionHelper {
 									latLon = l == null ? latLon : l;
 									tags.remove(TAG_POI_LAT_LON);
 								}
-								amenity = getAmenity(latLon, obfMapObject);
+								amenity = getAmenity(latLon, obfMapObject, tags);
 								if (amenity != null) {
 									amenity.setMapIconName(getMapIconName(symbolInfo));
 								} else if (!isOsmRoute && !isTravelGpx) {
@@ -438,12 +440,15 @@ public class MapSelectionHelper {
 		return null;
 	}
 
-	private Amenity getAmenity(LatLon latLon, ObfMapObject obfMapObject) {
+	private Amenity getAmenity(LatLon latLon, ObfMapObject obfMapObject, Map<String, String> tags) {
 		Amenity amenity;
 		List<String> names = getValues(obfMapObject.getCaptionsInAllLanguages());
 		String caption = obfMapObject.getCaptionInNativeLanguage();
 		if (!caption.isEmpty()) {
 			names.add(caption);
+		}
+		if (!Algorithms.isEmpty(tags) && tags.containsKey(TRAVEL_OSM_ID_TAG) && "point".equals(tags.get(ROUTE))) {
+			names.add(tags.get(TRAVEL_OSM_ID_TAG)); // additional attribute for TravelGpx points (osm_id)
 		}
 		long id = obfMapObject.getId().getId().longValue();
 		amenity = findAmenity(app, latLon, names, id);
@@ -711,8 +716,12 @@ public class MapSelectionHelper {
 	public static Amenity findAmenityByName(@NonNull List<Amenity> amenities, @Nullable List<String> names) {
 		if (!Algorithms.isEmpty(names)) {
 			for (Amenity amenity : amenities) {
+				String travelOsmId = amenity.isRoutePoint() ? amenity.getAdditionalInfo(TRAVEL_OSM_ID_TAG) : null;
 				for (String name : names) {
 					if (name.equals(amenity.getName()) && !amenity.isClosed()) {
+						return amenity;
+					}
+					if (travelOsmId != null && name.equals(travelOsmId)) {
 						return amenity;
 					}
 				}

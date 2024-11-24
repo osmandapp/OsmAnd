@@ -6,6 +6,7 @@ import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
+import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
 
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
@@ -569,6 +570,10 @@ public class Amenity extends MapObject {
 
 	public boolean isRouteTrack() {
 		return subType != null && (subType.equals(ROUTE_TRACK) || subType.startsWith(ROUTES_PREFIX));
+	}
+
+	public boolean isRoutePoint() {
+		return subType != null && (subType.equals(ROUTE_TRACK_POINT) || subType.equals(ROUTE_ARTICLE_POINT));
 	}
 
 	public JSONObject toJSON() {

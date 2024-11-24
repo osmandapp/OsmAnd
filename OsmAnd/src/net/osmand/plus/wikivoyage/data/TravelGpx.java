@@ -32,6 +32,7 @@ public class TravelGpx extends TravelArticle {
 	public static final String ROUTE_RADIUS = "route_radius";
 	public static final String USER = "user";
 	public static final String ACTIVITY_TYPE = "route_activity_type";
+	public static final String TRAVEL_OSM_ID_TAG = "osm_id";
 
 	public String user;
 	public String activityType;
