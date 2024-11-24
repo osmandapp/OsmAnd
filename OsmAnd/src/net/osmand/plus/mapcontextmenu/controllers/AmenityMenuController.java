@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
+import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
 
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
@@ -25,6 +26,7 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
+import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
@@ -69,7 +71,8 @@ public class AmenityMenuController extends MenuController {
 					new MapMarkerMenuController(mapActivity, marker.getPointDescription(mapActivity), marker);
 			leftTitleButtonController = markerMenuController.getLeftTitleButtonController();
 			rightTitleButtonController = markerMenuController.getRightTitleButtonController();
-		} else if (amenity.getSubType().equals(ROUTE_ARTICLE_POINT)) {
+		} else if (amenity.getSubType().equals(ROUTE_ARTICLE_POINT) ||
+				amenity.getSubType().equals(ROUTE_TRACK_POINT)) {
 			TitleButtonController openTrackButtonController = new TitleButtonController() {
 				@Override
 				public void buttonPressed() {
@@ -101,11 +104,18 @@ public class AmenityMenuController extends MenuController {
 
 	void openTrack(MapActivity mapActivity) {
 		TravelHelper travelHelper = mapActivity.getMyApplication().getTravelHelper();
-		String lang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
-		String name = amenity.getTagContent(Amenity.ROUTE_NAME);
-		TravelArticle article = travelHelper.getArticleByTitle(name, lang, true, null);
-		if (article != null) {
-			travelHelper.openTrackMenu(article, mapActivity, name, amenity.getLocation(), false);
+		if (amenity.getSubType().equals(ROUTE_ARTICLE_POINT)) {
+			String lang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
+			String name = amenity.getTagContent(Amenity.ROUTE_NAME);
+			TravelArticle article = travelHelper.getArticleByTitle(name, lang, true, null);
+			if (article != null) {
+				travelHelper.openTrackMenu(article, mapActivity, name, amenity.getLocation(), false);
+			}
+		} else if (amenity.getSubType().equals(ROUTE_TRACK_POINT)) {
+			TravelGpx travelGpx = travelHelper.searchGpx(amenity.getLocation(), amenity.getRouteId(), amenity.getRef());
+			if (travelGpx != null) {
+				travelHelper.openTrackMenu(travelGpx, mapActivity, travelGpx.getTitle(), amenity.getLocation(), false);
+			}
 		}
 	}
 
