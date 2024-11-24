@@ -5889,4 +5889,14 @@
     <string name="av_audio_sample_rate">Rata de eșantionare audio</string>
     <string name="av_audio_sample_rate_descr">Selectați frecvența de eșantionare audio.</string>
     <string name="connect_new_scanner">Conectați noul scaner</string>
+    <string name="vehicle_metrics_obd_ii">Parametrii vehiculului (OBD-II)</string>
+    <string name="obd_throttle_position">Poziția accelerației</string>
+    <string name="obd_throttle_position_desc">Indică unghiul plăcii de accelerație în corpul accelerației.</string>
+    <string name="shared_string_hour">Oră</string>
+    <string name="ltr_or_rtl_combine_via_per">%1$s per %2$s</string>
+    <string name="shared_string_volume">Volum</string>
+    <string name="obd_fuel_pressure_desc">Indică presiunea din sistemul de alimentare</string>
+    <string name="obd_calculated_engine_load_desc">Afișează procentul de putere disponibilă a motorului utilizat la un moment dat.</string>
+    <string name="preview_next_turn">Previzualizați rândul următor</string>
+    <string name="remaining_fuel_description">Afișează cantitatea de combustibil rămasă în rezervorul autovehiculului</string>
 </resources>
