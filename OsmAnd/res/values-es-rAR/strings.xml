@@ -1950,7 +1950,7 @@
     <string name="skip_map_downloading_desc">Sin mapas descargados. Podés elegir uno de la lista o descargarlos después a través de «Menú - %1$s».</string>
     <string name="search_another_country">Elegí otra región</string>
     <string name="search_map">Buscando mapas…</string>
-    <string name="first_usage_wizard_desc">Deja que OsmAnd determine tu ubicación y sugiera mapas a descargar para esa región.</string>
+    <string name="first_usage_wizard_desc">Dejá que OsmAnd determine tu ubicación y sugiera mapas a descargar para esa región.</string>
     <string name="location_not_found">Ubicación no encontrada</string>
     <string name="no_inet_connection">Sin conexión a Internet</string>
     <string name="no_inet_connection_desc_map">Necesario para descargar mapas.</string>
@@ -1959,7 +1959,7 @@
     <string name="storage_place_description">Almacenamiento de datos de OsmAnd (para mapas, archivos de trazas, etc.): %1$s.</string>
     <string name="give_permission">Conceder permiso</string>
     <string name="allow_access_location">Permitir el acceso a la ubicación</string>
-    <string name="first_usage_greeting">Obtén direcciones y descubre sitios nuevos sin una conexión a Internet</string>
+    <string name="first_usage_greeting">Obtené direcciones y descubrí sitios nuevos sin una conexión a Internet</string>
     <string name="si_mi_meters">Millas/metros</string>
     <string name="get_for">Obtener por %1$s</string>
     <string name="osm_live_banner_desc">Obtené descargas ilimitadas de mapas, con actualizaciones semanales, diarias o incluso cada hora.</string>
@@ -1968,7 +1968,7 @@
     <string name="osm_live_payment_desc">La suscripción se cobra por el período elegido. Podés cancelarla en cualquier momento en Google Play.</string>
     <string name="donation_to_osm">Donaciones a la comunidad de OSM</string>
     <string name="donation_to_osm_desc">Parte de tu donación se envía a los colaboradores de OSM. El costo de la suscripción sigue siendo el mismo.</string>
-    <string name="osm_live_subscription_desc">La suscripción permite actualizaciones cada hora, día o semana y descargas ilimitadas de mapas de todo el mundo.</string>
+    <string name="osm_live_subscription_desc">La suscripción permite actualizaciones cada hora, día o semana y descargas ilimitadas de mapas en todo el mundo.</string>
     <string name="driving_region_australia">Australia</string>
     <string name="shared_string_filters">Filtros</string>
     <string name="apply_filters">Aplicar filtros</string>
