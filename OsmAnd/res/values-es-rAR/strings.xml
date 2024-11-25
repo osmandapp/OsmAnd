@@ -390,7 +390,7 @@
     <string name="plugin_nautical_descr">Enriquecé el mapa con información sobre rutas náuticas, marcas de navegación náutica, áreas marinas peligrosas, zonas restringidas para navegar o atracar, etc. Para usarlo, descargá los respectivos mapas náuticos y activá el estilo «Mapa náutico» en «Configurar mapa». \n \nSeguí leyendo en %1$s.</string>
     <string name="plugin_ski_descr">Diseñado para navegar en áreas deportivas de invierno. Ve las pistas de esquí, los remontes, etc. con líneas coloreadas que indican el nivel de complejidad. Para usarlo, activá este complemento, pulsá en «Configurar mapa» y elegí el estilo de mapa «Invierno y esquí».</string>
     <string name="audionotes_plugin_description">Tomá notas de audio, fotografía y/o video durante un viaje, usando un botón en el mapa o el menú contextual de la ubicación.</string>
-    <string name="osmand_parking_plugin_description">Registrá dónde estacionaste el vehículo y creá un recordatorio sobre la expiración del mismo. Para colocar el marcador, elegí un lugar en el mapa, luego andá a «Acciones» y pulsá «Añadir estacionamiento».</string>
+    <string name="osmand_parking_plugin_description">Registrá dónde estacionaste el vehículo y creá un recordatorio sobre la expiración del mismo. Para colocar el marcador, elegí un lugar en el mapa, luego en «Acciones» pulsá en «Añadir estacionamiento».</string>
     <string name="osmand_distance_planning_plugin_description">Creá caminos pulsando el mapa, usando o modificando archivos GPX existentes, para planificar un viaje y medir la distancia entre puntos. El resultado puede guardarse como un archivo GPX y usarse luego para la orientación.</string>
     <string name="osmand_accessibility_description">Activá las funciones de accesibilidad del dispositivo, directamente en OsmAnd. Esto facilita por ejemplo, el ajuste de la velocidad de la voz para voces de texto a voz, la configuración de navegación del pad direccional, usar la rueda de desplazamiento para el control del zum, o la retroalimentación de texto a voz, por ejemplo, para anunciar la ubicación automáticamente.</string>
     <string name="osm_editing_plugin_description">Hacé contribuciones en OpenStreetMap, un proyecto de mapeo de dominio público, global, libre, abierto e impulsado por la comunidad. \n \nEn nuestro sitio web, podés encontrar una guía de cómo colaborar en el mapa - %1$s.</string>
@@ -555,10 +555,7 @@
     <string name="plugin_distance_point">Punto</string>
     <string name="gpx_file_name">Nombre del archivo GPX</string>
     <string name="gpx_saved_sucessfully">Archivo GPX guardado en {0}</string>
-    <string name="use_distance_measurement_help">* Pulsa para marcar un punto. 
-\n * Mantén pulsado el mapa para quitar el punto anterior. 
-\n * Mantén pulsado en un punto para ver e incluir la descripción. 
-\n * Pulsa el widget de medición para ver más acciones.</string>
+    <string name="use_distance_measurement_help">* Pulsá para marcar un punto. \n * Mantené pulsado el mapa para quitar el punto anterior. \n * Mantené pulsado en un punto para ver e incluir la descripción. \n * Pulsá el widget de medición para ver más acciones.</string>
     <string name="distance_measurement_start_editing">Comenzar edición</string>
     <string name="distance_measurement_finish_editing">Terminar edición</string>
     <string name="distance_measurement_finish_subtrack">Iniciar subtraza nueva</string>
