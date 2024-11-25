@@ -925,7 +925,7 @@
     <string name="auto_announce_on">Iniciar anuncios automáticos</string>
     <string name="auto_announce_off">Parar anuncios automáticos</string>
     <string name="i_am_here">Estoy aquí</string>
-    <string name="zoom_by_trackball_descr">Cambia el zum del mapa a través del movimiento horizontal de la rueda de desplazamiento.</string>
+    <string name="zoom_by_trackball_descr">Cambiá el zum del mapa a través del movimiento horizontal de la rueda de desplazamiento.</string>
     <string name="zoom_by_trackball">Usar la rueda de desplazamiento para controlar el zum</string>
     <string name="accessibility_preferences_descr">Preferencias de accesibilidad.</string>
     <string name="arrival_distance_factor_early">Lejos</string>
@@ -1049,7 +1049,7 @@
     <string name="shared_string_name">Nombre</string>
     <string name="favourites_edit_dialog_category">Categoría</string>
     <string name="shared_string_no_thanks">No, gracias</string>
-    <string name="basemap_missing">Descarga el mapa base mundial para una vista general global en zums pequeños.</string>
+    <string name="basemap_missing">Descargá el mapa base mundial para una vista general global en zums pequeños.</string>
     <string name="vector_data_missing">Descarga los datos («sin conexión») para usar los mapas sin conexión.</string>
     <string name="shared_string_release">Liberado</string>
     <string name="local_index_installed">Versión local</string>
@@ -2135,7 +2135,7 @@
     <string name="routing_attr_driving_style_safety_name">Preferir caminos secundarios</string>
     <string name="relief_smoothness_factor_descr">Terreno preferido: llano o empinado.</string>
     <string name="do_not_send_anonymous_app_usage">No enviar estadísticas de uso anónimas de la aplicación</string>
-    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd recopila información sobre las secciones que abres en la aplicación. No recopilamos datos de ubicación, ingresos en la aplicación o datos relacionados con las áreas que visualizas, buscas o descargas.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd recopila información sobre las secciones abiertas en la aplicación. No recopilamos datos de ubicación, ingresos en la aplicación o datos relacionados con las áreas que mirás, buscás o descargás.</string>
     <string name="do_not_show_startup_messages">Ocultar mensajes de inicio</string>
     <string name="do_not_show_startup_messages_desc">Oculta los descuentos de la aplicación y los mensajes especiales de eventos locales.</string>
     <string name="parking_options">Opciones de estacionamiento</string>
@@ -2146,7 +2146,7 @@
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OSM, en todo el mundo y de alta calidad.
 \n
 \n Disfruta del navegador por voz y óptico, la visualización de PDI (puntos de interés), la creación y gestión de trazas GPX, usando la visualización de las curvas de nivel y la información topográfica (mediante un complemento), elige entre los modos de automóvil, bicicleta o peatón, edita en OSM y mucho más.</string>
-    <string name="osmand_extended_description_part2">Navegación GPS\n• Elegí entre los modos sin conexión (sin cargos de roaming al viajar al extranjero) o en línea (más rápido)\n• La guía por voz giro-a-giro te guía a lo largo del camino (voces grabadas y sintetizadas)\n• La ruta se recalcula al salirse de la misma\n• Guía de carriles, nombres de calles y tiempo estimado al destino, te ayudará a lo largo de la ruta\n• Para hacer tu viaje seguro, los modos diurno/nocturno se alternan automáticamente\n• Muestra los límites de velocidad y obtén un aviso al excederte del mismo\n• El zum del mapa se ajusta a la velocidad\n• Buscá destinos por dirección, por tipo (por ejemplo: estacionamientos, restaurantes, hoteles, estaciones de servicio, museos), o por coordenadas geográficas\n• Admite puntos intermedios en el itinerario\n• Grabá tu viaje o subí una traza GPX y seguila</string>
+    <string name="osmand_extended_description_part2">Navegación GPS\n• Elegí entre los modos sin conexión (sin cargos de roaming al viajar al extranjero) o en línea (más rápido)\n• La guía por voz giro-a-giro te guía a lo largo del camino (voces grabadas y sintetizadas)\n• La ruta se recalcula al salirse de la misma\n• Guía de carriles, nombres de calles y tiempo estimado al destino, te ayudará a lo largo de la ruta\n• Para hacer tu viaje seguro, los modos diurno/nocturno se alternan automáticamente\n• Mostrá los límites de velocidad y obtené un aviso al excederte del mismo\n• El zum del mapa se ajusta a la velocidad\n• Buscá destinos por dirección, por tipo (por ejemplo: estacionamientos, restaurantes, hoteles, estaciones de servicio, museos), o por coordenadas geográficas\n• Admite puntos intermedios en el itinerario\n• Grabá tu viaje o subí una traza GPX y seguila</string>
     <string name="osmand_extended_description_part3">Mapa\n• Muestra PDI (puntos de interés) a tu alrededor\n• Ajusta el mapa a la dirección del movimiento (o brújula)\n• Muestra tu ubicación y la dirección hacia dónde miras\n• Comparte la ubicación para que tus amigos te encuentren\n• Guarda sitios importantes en «Mis favoritos»\n• Permite elegir cómo mostrar los nombres en el mapa: En inglés, local, u ortografía fonética\n• Muestra teselas en línea especiales, vista satelital (de Bing), diferentes superposiciones como trazas de travesía/navegación GPX y capas adicionales con transparencia personalizable</string>
     <string name="osmand_extended_description_part4">Esquí
 \nEl complemento de OsmAnd para el estilo del mapa invernal, muestra trazas con nivel de complejidad y alguna información adicional, como la ubicación de los ascensores y otras instalaciones invernales.</string>
@@ -2182,7 +2182,7 @@
 \n • Mapas vectoriales reducidos sin conexión, actualizados al menos una vez cada mes
 \n
 \n • Elige entre datos completos de la región o sólo la red de rutas (Ejemplo: Todo Japón tiene 700 MB o sólo 200 MB para la red de rutas)</string>
-    <string name="osmand_plus_extended_description_part5">Funciones de seguridad\n• (Opcional) El modo diurno/nocturno se alterna automáticamente\n• (Opcional) Visualización del límite de velocidad, con aviso al excederte\n• (Opcional) Zum del mapa según la velocidad\n• Comparte la ubicación para que tus amigos puedan encontrarte</string>
+    <string name="osmand_plus_extended_description_part5">Funciones de seguridad\n• (Opcional) El modo diurno/nocturno se alterna automáticamente\n• (Opcional) Visualización del límite de velocidad, con aviso al excederte\n• (Opcional) Zum del mapa según la velocidad\n• Compartí la ubicación para que tus amigos puedan encontrarte</string>
     <string name="osmand_plus_extended_description_part6">Funciones de ciclismo y peatón
 \n • Visualización de caminos para caminar, senderismo y ciclismo, ideal para actividades al aire libre
 \n • Navegación especial y modos de visualización para bicicletas y peatones
