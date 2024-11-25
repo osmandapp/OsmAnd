@@ -1420,7 +1420,7 @@
     <string name="search_address_street_option">Intersección de calle</string>
     <string name="context_menu_item_update_map">Actualizar mapa</string>
     <string name="context_menu_item_create_poi">Crear PDI</string>
-    <string name="add_favorite_dialog_top_text">Ingresá nombre del favorito</string>
+    <string name="add_favorite_dialog_top_text">Ingresá el nombre del favorito</string>
     <string name="add_favorite_dialog_default_favourite_name">Favorito</string>
     <string name="add_favorite_dialog_favourite_added_template">Punto favorito «{0}» añadido.</string>
     <string name="favourites_context_menu_edit">Editar favorito</string>
@@ -1467,7 +1467,7 @@
     <string name="av_camera_pic_size">Tamaño de fotografía</string>
     <string name="av_camera_pic_size_descr">Define el tamaño de la fotografía</string>
     <string name="navigation_intent_invalid">Formato inválido: %s</string>
-    <string name="plugin_install_needs_network">Debes conectarte a Internet para instalar este complemento.</string>
+    <string name="plugin_install_needs_network">Conectate a Internet para instalar este complemento.</string>
     <string name="shared_string_get">Obtener</string>
     <string name="routing_attr_avoid_borders_description">Evita cruzar las fronteras nacionales</string>
     <string name="routing_attr_height_name">Altura</string>
@@ -1546,7 +1546,7 @@
     <string name="rate_this_app">Calificá la aplicación</string>
     <string name="rate_this_app_long">Por favor, calificá OsmAnd en Google Play</string>
     <string name="user_hates_app_get_feedback">Decinos por qué.</string>
-    <string name="user_hates_app_get_feedback_long">Por favor, háganos saber cualquier sugerencia.</string>
+    <string name="user_hates_app_get_feedback_long">Por favor, hacenos saber cualquier sugerencia.</string>
     <string name="download_live_updates">Actualizaciones en vivo</string>
     <string name="failed_to_upload">Subida fallida</string>
     <string name="delete_change">Borrar cambio</string>
@@ -1580,7 +1580,7 @@
     <string name="add_opening_hours">Añadir horario de atención</string>
     <string name="poi_dialog_poi_type">Tipo de PDI</string>
     <string name="number_of_rows_in_dash">Número de filas en el panel %1$s</string>
-    <string name="please_specify_poi_type">Especifica el tipo de PDI.</string>
+    <string name="please_specify_poi_type">Indicá el tipo de PDI.</string>
     <string name="working_days">Días laborales</string>
     <string name="recent_places">Sitios recientes</string>
     <string name="favourites">Favoritos</string>
