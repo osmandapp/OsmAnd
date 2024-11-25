@@ -1975,7 +1975,7 @@
     <string name="save_filter">Guardar filtro</string>
     <string name="delete_filter">Borrar filtro</string>
     <string name="new_filter">Nuevo filtro</string>
-    <string name="new_filter_desc">Ingresa el nombre del nuevo filtro, que se añadirá en tu pestaña «Categorías».</string>
+    <string name="new_filter_desc">Ingresá el nombre del nuevo filtro, que se añadirá en tu pestaña «Categorías».</string>
     <string name="lang_kab">Cabilio</string>
     <string name="selected_categories">Categorías elegidas</string>
     <string name="create_custom_poi">Crear filtro personalizado</string>
@@ -1988,7 +1988,7 @@
     <string name="rendering_attr_contourColorScheme_name">Esquema de color de las curvas de nivel</string>
     <string name="rendering_attr_surfaceIntegrity_name">Integridad de la superficie del camino</string>
     <string name="christmas_poi">PDI navideño</string>
-    <string name="christmas_desc">Anticipando los días festivos de Navidad y Año Nuevo, puedes elegir mostrar los puntos de interés asociados como árboles navideños, tiendas, etc.</string>
+    <string name="christmas_desc">Anticipando las fiestas de Navidad y Año Nuevo, podés elegir mostrar los puntos de interés asociados como árboles navideños, tiendas, etc.</string>
     <string name="christmas_desc_q">¿Mostrar los PDI navideños?</string>
     <string name="save_track_min_speed">Velocidad mínima del registro</string>
     <string name="save_track_min_speed_descr">Filtro: No registrar puntos por debajo de esta velocidad.</string>
