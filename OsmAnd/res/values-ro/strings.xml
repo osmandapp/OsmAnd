@@ -5899,4 +5899,8 @@
     <string name="obd_calculated_engine_load_desc">Afișează procentul de putere disponibilă a motorului utilizat la un moment dat.</string>
     <string name="preview_next_turn">Previzualizați rândul următor</string>
     <string name="remaining_fuel_description">Afișează cantitatea de combustibil rămasă în rezervorul autovehiculului</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Urmăriți datele vitale ale vehiculului utilizând protocolul OBD-II. Monitorizați parametrii cheie precum viteza, turația motorului, consumul de combustibil și multe altele.</string>
+    <string name="obd_calculated_engine_load">Sarcina calculată a motorului</string>
+    <string name="obd_engine_coolant_temp_desc">Indică temperatura lichidului de răcire al motorului</string>
+    <string name="obd_speed_desc">Indică viteza de la senzorul de viteză al vehiculului (VSS).</string>
 </resources>
