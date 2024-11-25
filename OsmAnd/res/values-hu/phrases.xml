@@ -414,7 +414,7 @@
     <string name="poi_basketball">Kosárlabda</string>
     <string name="poi_beachvolleyball">Strandröplabda</string>
     <string name="poi_bmx">BMX</string>
-    <string name="poi_diving">Búvárkodás</string>
+    <string name="poi_diving">Műugrás</string>
     <string name="poi_cycling">Kerékpározás</string>
     <string name="poi_equestrian">Lovassport</string>
     <string name="poi_golf">Golf</string>
@@ -754,7 +754,7 @@
     <string name="poi_climbing">Sziklamászás</string>
     <string name="poi_cricket">Krikett</string>
     <string name="poi_croquet">Krokett</string>
-    <string name="poi_scuba_diving">Búvárkodás</string>
+    <string name="poi_scuba_diving">Palackos búvárkodás</string>
     <string name="poi_dog_racing">Kutyaverseny</string>
     <string name="poi_field_hockey">Gyeplabda</string>
     <string name="poi_gymnastics">Torna</string>
@@ -3757,7 +3757,7 @@
     <string name="poi_volcano_number_of_eruptions">Kitörések száma</string>
     <string name="poi_paintball">Paintball</string>
     <string name="poi_memorial_ghost_bike">Emlékkerékpár</string>
-    <string name="poi_dive_centre">Palackos búvárkodási központ</string>
+    <string name="poi_dive_centre">Búvárközpont</string>
     <string name="poi_sms">SMS</string>
     <string name="poi_video_telephone">Videó</string>
     <string name="poi_sms_yes">igen;SMS</string>
