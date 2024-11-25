@@ -621,11 +621,11 @@
     <string name="av_use_external_recorder">Usar grabadora externa</string>
     <string name="av_use_external_camera_descr">Usá la aplicación del sistema para fotografiar.</string>
     <string name="av_use_external_camera">Usar aplicación de la cámara</string>
-    <string name="av_settings_descr">Configura los ajustes de audio y video.</string>
+    <string name="av_settings_descr">Configurá los ajustes de audio y video.</string>
     <string name="av_settings">Ajustes de notas multimedia</string>
     <string name="recording_error">Error de grabación</string>
     <string name="recording_camera_not_available">Cámara no disponible</string>
-    <string name="recording_is_recorded">Grabando audio/video. Para pararlo, pulsar el widget A/V.</string>
+    <string name="recording_is_recorded">Grabando audio/video. Para pararlo, pulsá el widget A/V.</string>
     <string name="recording_playing">Reproduciendo audio de la grabación indicada.\n%1$s</string>
     <string name="recording_open_external_player">Abrir reproductor externo</string>
     <string name="recording_delete_confirm">¿Borrar este elemento?</string>
@@ -640,7 +640,7 @@
     <string name="recording_default_name">Grabación</string>
     <string name="map_widget_av_notes">Notas multimedia</string>
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
-    <string name="audionotes_location_not_defined">Pulsa «Usar ubicación…» para añadir una nota a la ubicación.</string>
+    <string name="audionotes_location_not_defined">Pulsá «Usar ubicación…» para añadir una nota a la ubicación.</string>
     <string name="map_widget_audionotes">Notas de audio</string>
     <string name="download_select_map_types">Otros mapas</string>
     <string name="download_roads_only_item">Sólo caminos</string>
@@ -655,14 +655,14 @@
     <string name="no_buildings_found">No se encontraron edificios.</string>
     <string name="incremental_search_city">Buscar ciudades incrementalmente</string>
     <string name="search_villages_and_postcodes">Buscar más pueblos o códigos postales</string>
-    <string name="rendering_attr_showRoadMaps_description">Elige cuando mostrar mapas viales:</string>
+    <string name="rendering_attr_showRoadMaps_description">Elegí cuándo mostrar mapas viales:</string>
     <string name="rendering_attr_showRoadMaps_name">Mapas viales</string>
     <string name="safe_mode_description">Ejecutar aplicación en modo seguro (más lento).</string>
     <string name="safe_mode">Modo seguro</string>
     <string name="native_library_not_running">Ejecutando aplicación en modo seguro (desactivar en «Ajustes»).</string>
     <string name="close_changeset">Cerrar conjunto de cambios</string>
     <string name="zxing_barcode_scanner_not_found">Aplicación ZXing Barcode Scanner no instalada. ¿Buscar en Google Play?</string>
-    <string name="rendering_attr_roadColors_description">Elige un esquema de color vial:</string>
+    <string name="rendering_attr_roadColors_description">Elegí un esquema de color vial:</string>
     <string name="rendering_attr_roadColors_name">Esquema de color del camino</string>
     <string name="map_widget_show_destination_arrow">Mostrar dirección de destino</string>
     <string name="enable_plugin_monitoring_services">Activá el complemento «Grabación de viaje» para usar los servicios de registro de ubicación (grabación GPX, seguimiento en línea)</string>
@@ -699,7 +699,7 @@
     <string name="poi_filter_for_tourists">Para turistas</string>
     <string name="poi_filter_fuel">Combustible</string>
     <string name="show_warnings_title">Mostrar alertas…</string>
-    <string name="show_warnings_descr">Configura advertencias de tráfico (límites de velocidad, paradas forzosas, lomadas, túneles), radares de velocidad, e información de carriles.</string>
+    <string name="show_warnings_descr">Configurá advertencias de tráfico (límites de velocidad, paradas forzosas, lomadas, túneles), radares de velocidad, e información de carriles.</string>
     <string name="use_compass_navigation_descr">Usá la brújula si no se detecta el rumbo.</string>
     <string name="use_compass_navigation">Usar brújula</string>
     <string name="avoid_motorway">Sin autopistas</string>
@@ -2127,21 +2127,14 @@
     <string name="routing_attr_relief_smoothness_factor_name">Elegí la fluctuación de elevación</string>
     <string name="right_side_navigation">Circular por la derecha</string>
     <string name="shared_string_automatic">Automático</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OSM, en todo el mundo y de alta calidad.
-\n
-\n Disfruta del navegador por voz y óptico, la visualización de PDI (puntos de interés), la creación y gestión de trazas GPX, usando la visualización de las curvas de nivel y la información topográfica (mediante un complemento), elige entre los modos de automóvil, bicicleta o peatón, edita en OSM y mucho más.</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OSM, en todo el mundo y de alta calidad. \n \n Disfrutá del navegador por voz y óptico, la visualización de PDI (puntos de interés), la creación y gestión de trazas GPX, usando la visualización de las curvas de nivel y la información topográfica (mediante un complemento), elegí entre los modos de automóvil, bicicleta o peatón, editá en OSM y mucho más.</string>
     <string name="osmand_extended_description_part2">Navegación GPS\n• Elegí entre los modos sin conexión (sin cargos de roaming al viajar al extranjero) o en línea (más rápido)\n• La guía por voz giro-a-giro te guía a lo largo del camino (voces grabadas y sintetizadas)\n• La ruta se recalcula al salirse de la misma\n• Guía de carriles, nombres de calles y tiempo estimado al destino, te ayudará a lo largo de la ruta\n• Para hacer tu viaje seguro, los modos diurno/nocturno se alternan automáticamente\n• Mostrá los límites de velocidad y obtené un aviso al excederte del mismo\n• El zum del mapa se ajusta a la velocidad\n• Buscá destinos por dirección, por tipo (por ejemplo: estacionamientos, restaurantes, hoteles, estaciones de servicio, museos), o por coordenadas geográficas\n• Admite puntos intermedios en el itinerario\n• Grabá tu viaje o subí una traza GPX y seguila</string>
     <string name="osmand_extended_description_part3">Mapa\n• Mostrá los PDI (puntos de interés) a tu alrededor\n• Ajustá el mapa a la dirección del movimiento (o brújula)\n• Mostrá tu ubicación y la dirección hacia dónde mirás\n• Compartí la ubicación para que tus amigos te encuentren\n• Guardá sitios importantes en «Mis favoritos»\n• Elegí cómo mostrar los nombres en el mapa: En inglés, local, u ortografía fonética\n• Mostrá las teselas en línea especiales, vista satelital (de Bing), diferentes superposiciones como trazas de travesía/navegación GPX y capas adicionales con transparencia personalizable</string>
     <string name="osmand_extended_description_part4">Esquí
 \nEl complemento de OsmAnd para el estilo del mapa invernal, muestra trazas con nivel de complejidad y alguna información adicional, como la ubicación de los ascensores y otras instalaciones invernales.</string>
-    <string name="osmand_extended_description_part5">Ciclismo
-\n• Encuentra rutas de ciclismo en el mapa
-\n• La navegación GPS en el modo bicicleta, construye la ruta usando rutas de ciclismo
-\n• Vea la velocidad y altitud
-\n• La opción de grabación GPX, permite grabar el viaje y compartirlo
-\n• Mediante un complemento adicional, puedes activar las curvas de nivel y el sombreado</string>
-    <string name="osmand_extended_description_part6">Caminata, senderismo, turismo de ciudad\n• El mapa muestra las rutas para caminar y de senderismo\n• Wikipedia en el idioma de preferencia, puede decir mucho durante una visita turística\n• Las paradas de transporte público (autobús, tranvía, tren), incluyendo los nombres de línea, ayuda a navegar en una nueva ciudad\n• Navegación GPS en el modo peatón, construye la ruta usando rutas de senderismo\n• Sube y sigue una ruta GPX o graba y comparte tus propias rutas</string>
-    <string name="osmand_extended_description_part7">Contribuye con OSM\n• Informa sobre problemas de datos en el mapa\n• Sube trazas GPX a OSM directamente desde la aplicación\n• Añade PDI y súbelos directamente a OSM (o más tarde, si no estás conectado)</string>
+    <string name="osmand_extended_description_part5">Ciclismo \n• Encontrá rutas de ciclismo en el mapa \n• La navegación GPS en el modo bicicleta, construye la ruta usando rutas de ciclismo \n• Mirá la velocidad y altitud \n• La opción de grabación GPX, permite grabar el viaje y compartirlo \n• Mediante un complemento adicional, podés activar las curvas de nivel y el sombreado</string>
+    <string name="osmand_extended_description_part6">Caminata, senderismo, turismo de ciudad\n• El mapa muestra las rutas para caminar y de senderismo\n• Wikipedia en el idioma de preferencia, puede decir mucho durante una visita turística\n• Las paradas de transporte público (autobús, tranvía, tren), incluyendo los nombres de línea, ayudan a navegar en una nueva ciudad\n• Navegación GPS en el modo peatón, construye la ruta usando rutas de senderismo\n• Subí y seguí una ruta GPX o grabá y compartí tus propias rutas</string>
+    <string name="osmand_extended_description_part7">Contribuí con OSM\n• Informá sobre problemas de datos en el mapa\n• Subí trazas GPX a OSM directamente desde la aplicación\n• Añadí PDI y subilos directamente a OSM (o más tarde, si no estás conectado)</string>
     <string name="osmand_extended_description_part8">OsmAnd es un software de código abierto, activamente desarrollado. Cualquiera puede contribuir con la aplicación informando sobre errores, mejorando las traducciones o desarrollando nuevas funciones. Además, el proyecto también depende de contribuciones financieras para financiar el desarrollo y las pruebas de nuevas funcionalidades.
 \n Cobertura y calidad aproximada del mapa: 
 \n • Europa Occidental: **** 
