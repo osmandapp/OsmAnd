@@ -617,9 +617,9 @@
     <string name="av_widget_action">Acción predefinida del widget</string>
     <string name="av_video_format_descr">Formato de salida del video:</string>
     <string name="av_video_format">Formato de salida del video</string>
-    <string name="av_use_external_recorder_descr">Usá la grabadora del sistema para video.</string>
+    <string name="av_use_external_recorder_descr">Usá la grabadora del sistema para filmar.</string>
     <string name="av_use_external_recorder">Usar grabadora externa</string>
-    <string name="av_use_external_camera_descr">Usa la aplicación del sistema para fotografías.</string>
+    <string name="av_use_external_camera_descr">Usá la aplicación del sistema para fotografiar.</string>
     <string name="av_use_external_camera">Usar aplicación de la cámara</string>
     <string name="av_settings_descr">Configura los ajustes de audio y video.</string>
     <string name="av_settings">Ajustes de notas multimedia</string>
@@ -665,9 +665,9 @@
     <string name="rendering_attr_roadColors_description">Elige un esquema de color vial:</string>
     <string name="rendering_attr_roadColors_name">Esquema de color del camino</string>
     <string name="map_widget_show_destination_arrow">Mostrar dirección de destino</string>
-    <string name="enable_plugin_monitoring_services">Activa el complemento «Grabación de viaje» para usar los servicios de registro de ubicación (grabación GPX, seguimiento en línea)</string>
+    <string name="enable_plugin_monitoring_services">Activá el complemento «Grabación de viaje» para usar los servicios de registro de ubicación (grabación GPX, seguimiento en línea)</string>
     <string name="non_optimal_route_calculation">Calcular ruta posiblemente no óptima en largas distancias</string>
-    <string name="gps_not_available">Activa el GPS en los ajustes</string>
+    <string name="gps_not_available">Activá el GPS en los ajustes</string>
     <string name="map_widget_monitoring_services">Servicios de registro</string>
     <string name="no_route">Sin ruta</string>
     <string name="delete_target_point">Quitar destino</string>
@@ -700,7 +700,7 @@
     <string name="poi_filter_fuel">Combustible</string>
     <string name="show_warnings_title">Mostrar alertas…</string>
     <string name="show_warnings_descr">Configura advertencias de tráfico (límites de velocidad, paradas forzosas, lomadas, túneles), radares de velocidad, e información de carriles.</string>
-    <string name="use_compass_navigation_descr">Usa la brújula cuando no se detecta el rumbo.</string>
+    <string name="use_compass_navigation_descr">Usá la brújula si no se detecta el rumbo.</string>
     <string name="use_compass_navigation">Usar brújula</string>
     <string name="avoid_motorway">Sin autopistas</string>
     <string name="auto_zoom_map_descr">Nivel de zum según la velocidad (mientras el mapa se sincroniza con la ubicación actual).</string>
@@ -2131,7 +2131,7 @@
 \n
 \n Disfruta del navegador por voz y óptico, la visualización de PDI (puntos de interés), la creación y gestión de trazas GPX, usando la visualización de las curvas de nivel y la información topográfica (mediante un complemento), elige entre los modos de automóvil, bicicleta o peatón, edita en OSM y mucho más.</string>
     <string name="osmand_extended_description_part2">Navegación GPS\n• Elegí entre los modos sin conexión (sin cargos de roaming al viajar al extranjero) o en línea (más rápido)\n• La guía por voz giro-a-giro te guía a lo largo del camino (voces grabadas y sintetizadas)\n• La ruta se recalcula al salirse de la misma\n• Guía de carriles, nombres de calles y tiempo estimado al destino, te ayudará a lo largo de la ruta\n• Para hacer tu viaje seguro, los modos diurno/nocturno se alternan automáticamente\n• Mostrá los límites de velocidad y obtené un aviso al excederte del mismo\n• El zum del mapa se ajusta a la velocidad\n• Buscá destinos por dirección, por tipo (por ejemplo: estacionamientos, restaurantes, hoteles, estaciones de servicio, museos), o por coordenadas geográficas\n• Admite puntos intermedios en el itinerario\n• Grabá tu viaje o subí una traza GPX y seguila</string>
-    <string name="osmand_extended_description_part3">Mapa\n• Muestra PDI (puntos de interés) a tu alrededor\n• Ajusta el mapa a la dirección del movimiento (o brújula)\n• Muestra tu ubicación y la dirección hacia dónde miras\n• Comparte la ubicación para que tus amigos te encuentren\n• Guarda sitios importantes en «Mis favoritos»\n• Permite elegir cómo mostrar los nombres en el mapa: En inglés, local, u ortografía fonética\n• Muestra teselas en línea especiales, vista satelital (de Bing), diferentes superposiciones como trazas de travesía/navegación GPX y capas adicionales con transparencia personalizable</string>
+    <string name="osmand_extended_description_part3">Mapa\n• Mostrá los PDI (puntos de interés) a tu alrededor\n• Ajustá el mapa a la dirección del movimiento (o brújula)\n• Mostrá tu ubicación y la dirección hacia dónde mirás\n• Compartí la ubicación para que tus amigos te encuentren\n• Guardá sitios importantes en «Mis favoritos»\n• Elegí cómo mostrar los nombres en el mapa: En inglés, local, u ortografía fonética\n• Mostrá las teselas en línea especiales, vista satelital (de Bing), diferentes superposiciones como trazas de travesía/navegación GPX y capas adicionales con transparencia personalizable</string>
     <string name="osmand_extended_description_part4">Esquí
 \nEl complemento de OsmAnd para el estilo del mapa invernal, muestra trazas con nivel de complejidad y alguna información adicional, como la ubicación de los ascensores y otras instalaciones invernales.</string>
     <string name="osmand_extended_description_part5">Ciclismo
