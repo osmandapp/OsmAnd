@@ -5748,4 +5748,7 @@
     <string name="shared_string_increase">Zwiększ</string>
     <string name="no_photos_available">Brak dostępnych zdjęć</string>
     <string name="shared_string_volume">Objętość</string>
+    <string name="obd_throttle_position">Pozycja pedału przyśpieszenia</string>
+    <string name="record_obd_data">Rejestruj metryki pojazdu</string>
+    <string name="unit_of_volume_description">Wybrane jednostki zostaną zastosowane do wszystkich danych powiązanych z objętością w aktualnie wybranym profilu.</string>
 </resources>
