@@ -470,37 +470,6 @@ public class OsmandSettings {
 		return enabledModes.get(indexOfNext);
 	}
 
-	private final Handler delayedSwitchProfileHandler = new Handler();
-	private ApplicationMode delayedSwitchProfile;
-	private Toast delayedSwitchProfileToast;
-
-	public void delayedSwitchAppMode(boolean next) {
-		ApplicationMode appMode = getApplicationMode();
-
-		if (delayedSwitchProfile == null) {
-			delayedSwitchProfile = getApplicationMode();
-		}
-		delayedSwitchProfile = getSwitchedAppMode(delayedSwitchProfile, next);
-
-		if (delayedSwitchProfileToast != null) {
-			delayedSwitchProfileToast.cancel();
-		}
-		String patternDelayedSwitch = ctx.getString(R.string.selected_delayed_profile);
-		String messageDelayedSwitch = String.format(patternDelayedSwitch, delayedSwitchProfile.toHumanString());
-		delayedSwitchProfileToast = Toast.makeText(ctx, messageDelayedSwitch, Toast.LENGTH_SHORT);
-		delayedSwitchProfileToast.show();
-
-		delayedSwitchProfileHandler.removeCallbacksAndMessages(null);
-		delayedSwitchProfileHandler.postDelayed(() -> {
-			if (appMode != delayedSwitchProfile && setApplicationMode(delayedSwitchProfile)) {
-				String pattern = ctx.getString(R.string.application_profile_changed);
-				String message = String.format(pattern, delayedSwitchProfile.toHumanString());
-				ctx.showShortToastMessage(message);
-			}
-			delayedSwitchProfile = null;
-		}, 3500);
-	}
-
 	public boolean setApplicationMode(ApplicationMode appMode) {
 		return setApplicationMode(appMode, true);
 	}
