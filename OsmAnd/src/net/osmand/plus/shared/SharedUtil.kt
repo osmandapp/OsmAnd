@@ -249,7 +249,7 @@ object SharedUtil {
 		jSegment.name = segment.name
 		jSegment.generalSegment = segment.generalSegment
 		val jPoints: MutableList<GPXUtilities.WptPt> = ArrayList()
-		for (point in segment.points) {
+		segment.points.forEach { point ->
 			jPoints.add(jWptPt(point))
 		}
 		jSegment.points = jPoints
