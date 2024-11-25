@@ -1965,10 +1965,10 @@
     <string name="osm_live_banner_desc">Obtenga descargas ilimitadas de mapas, añadiendo actualizaciones semanales, diarias o incluso por hora.</string>
     <string name="osmand_plus_banner_desc">Descargas ilimitadas de mapas, actualizaciones y complemento de Wikipedia.</string>
     <string name="get_it">Obtener</string>
-    <string name="osm_live_payment_desc">La suscripción se cobra por el período elegido. Puedes cancelarlo en cualquier momento en Google Play.</string>
+    <string name="osm_live_payment_desc">La suscripción se cobra por el período elegido. Podés cancelarla en cualquier momento en Google Play.</string>
     <string name="donation_to_osm">Donaciones a la comunidad de OSM</string>
-    <string name="donation_to_osm_desc">Parte de tu donación se envía a los colaboradores de OSM. El costo de la suscripción sigue siendo la misma.</string>
-    <string name="osm_live_subscription_desc">La suscripción permite actualizaciones cada hora, día o semana y descargas ilimitadas para los mapas de todo el mundo.</string>
+    <string name="donation_to_osm_desc">Parte de tu donación se envía a los colaboradores de OSM. El costo de la suscripción sigue siendo el mismo.</string>
+    <string name="osm_live_subscription_desc">La suscripción permite actualizaciones cada hora, día o semana y descargas ilimitadas de mapas de todo el mundo.</string>
     <string name="driving_region_australia">Australia</string>
     <string name="shared_string_filters">Filtros</string>
     <string name="apply_filters">Aplicar filtros</string>
