@@ -969,7 +969,7 @@
     <string name="use_magnetic_sensor_descr">Wykorzystuje czujnik pola magnetycznego zamiast czujnika orientacji, w celu określania kierunku kompasu.</string>
     <string name="use_magnetic_sensor">Używanie czujnika magnetycznego</string>
     <string name="local_indexes_cat_srtm">Poziomice</string>
-    <string name="use_kalman_filter_compass_descr">Zmniejsza hałas w odczytach kompasu, ale dodaje bezwładność.</string>
+    <string name="use_kalman_filter_compass_descr">Zmniejsza zakłócenia w odczytach kompasu, ale dodaje bezwładność.</string>
     <string name="use_kalman_filter_compass">Używanie filtra Kalmana</string>
     <string name="wait_current_task_finished">Proszę zaczekać, aż bieżące zadanie zostanie zakończone</string>
     <string name="shared_string_downloading">Pobieranie…</string>
@@ -5747,4 +5747,5 @@
     <string name="shared_string_decrease">Zmniejsz</string>
     <string name="shared_string_increase">Zwiększ</string>
     <string name="no_photos_available">Brak dostępnych zdjęć</string>
+    <string name="shared_string_volume">Objętość</string>
 </resources>
