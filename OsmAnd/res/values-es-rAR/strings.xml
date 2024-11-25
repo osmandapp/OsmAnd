@@ -1940,15 +1940,15 @@
     <string name="route_stops_before">%1$s parada(s) anterior(es)</string>
     <string name="rendering_attr_hideOverground_name">Objetos en superficie</string>
     <string name="replace_favorite_confirmation">¿Reemplazar el favorito «%1$s»\?</string>
-    <string name="routing_attr_short_way_name">Ruta de bajo consumo (corta)</string>
+    <string name="routing_attr_short_way_name">Ruta corta (bajo consumo)</string>
     <string name="shared_string_change">Cambiar</string>
     <string name="get_started">Empezar</string>
     <string name="update_all_maps_now">¿Actualizar todos los mapas ahora?</string>
     <string name="clear_tile_data">Limpiar todas las teselas</string>
     <string name="search_my_location">Encontrar mi ubicación</string>
     <string name="skip_map_downloading">Omitir descargas de mapas</string>
-    <string name="skip_map_downloading_desc">Sin mapas descargados. Puedes elegir uno de la lista o descargarlos luego a través de «Menú - %1$s».</string>
-    <string name="search_another_country">Elegir otra región</string>
+    <string name="skip_map_downloading_desc">Sin mapas descargados. Podés elegir uno de la lista o descargarlos después a través de «Menú - %1$s».</string>
+    <string name="search_another_country">Elegí otra región</string>
     <string name="search_map">Buscando mapas…</string>
     <string name="first_usage_wizard_desc">Deja que OsmAnd determine tu ubicación y sugiera mapas a descargar para esa región.</string>
     <string name="location_not_found">Ubicación no encontrada</string>
@@ -1962,7 +1962,7 @@
     <string name="first_usage_greeting">Obtén direcciones y descubre sitios nuevos sin una conexión a Internet</string>
     <string name="si_mi_meters">Millas/metros</string>
     <string name="get_for">Obtener por %1$s</string>
-    <string name="osm_live_banner_desc">Obtenga descargas ilimitadas de mapas, añadiendo actualizaciones semanales, diarias o incluso por hora.</string>
+    <string name="osm_live_banner_desc">Obtené descargas ilimitadas de mapas, con actualizaciones semanales, diarias o incluso cada hora.</string>
     <string name="osmand_plus_banner_desc">Descargas ilimitadas de mapas, actualizaciones y complemento de Wikipedia.</string>
     <string name="get_it">Obtener</string>
     <string name="osm_live_payment_desc">La suscripción se cobra por el período elegido. Podés cancelarla en cualquier momento en Google Play.</string>
