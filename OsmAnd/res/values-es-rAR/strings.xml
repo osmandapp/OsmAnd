@@ -1982,7 +1982,7 @@
     <string name="custom_search">Búsqueda personalizada</string>
     <string name="subcategories">Subcategorías</string>
     <string name="translit_names">Transliterar nombres</string>
-    <string name="search_hint">Ingresa nombre de ciudad, dirección o PDI</string>
+    <string name="search_hint">Ingresá la ciudad, dirección o PDI</string>
     <string name="rendering_value_light_brown_name">Marrón claro</string>
     <string name="rendering_value_dark_brown_name">Marrón oscuro</string>
     <string name="rendering_attr_contourColorScheme_name">Esquema de color de las curvas de nivel</string>
@@ -2007,7 +2007,7 @@
     <string name="trip_rec_notification_settings_desc">Muestra una notificación del sistema que permite iniciar la grabación de viaje.</string>
     <string name="shared_string_notifications">Notificaciones</string>
     <string name="gpx_no_tracks_title">Sin archivos de trazas aún</string>
-    <string name="gpx_no_tracks_title_folder">También podés añadir archivos de trazas a la carpeta</string>
+    <string name="gpx_no_tracks_title_folder">También podés agregar archivos de trazas a la carpeta</string>
     <string name="gpx_add_track">Añadir más…</string>
     <string name="shared_string_appearance">Aspecto</string>
     <string name="rendering_value_fine_name">Muy fino</string>
