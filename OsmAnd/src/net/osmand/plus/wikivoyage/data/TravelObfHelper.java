@@ -72,6 +72,7 @@ import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.RouteActivityHelper;
+import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -1220,8 +1221,10 @@ public class TravelObfHelper implements TravelHelper {
 					gpxFileExtensions.put(OSM_PREFIX + "type", "route");
 					gpxFileExtensions.put(OSM_PREFIX + "route", osmValue);
 					RouteActivityHelper helper = app.getRouteActivityHelper();
-					// TODO wrong way round
-					gpxFileExtensions.put(GpxUtilities.ACTIVITY_TYPE, subType.replace(ROUTES_PREFIX, ""));
+					RouteActivity activity = helper.findActivityByTag(osmValue);
+					if (activity != null) {
+						gpxFileExtensions.put(GpxUtilities.ACTIVITY_TYPE, activity.getId());
+					}
 				}
 			}
 		}
@@ -1312,11 +1315,12 @@ public class TravelObfHelper implements TravelHelper {
 			gpxFile.getTracks().add(track);
 			gpxFile.setRef(article.ref);
 			gpxFile.setHasAltitude(hasAltitude);
-			gpxFile.getExtensionsToWrite().putAll(gpxFileExtensions);
 			if (gpxFileExtensions.containsKey(GpxUtilities.ACTIVITY_TYPE)) {
 				gpxFile.getMetadata().getExtensionsToWrite()
 						.put(GpxUtilities.ACTIVITY_TYPE, gpxFileExtensions.get(GpxUtilities.ACTIVITY_TYPE));
+				gpxFileExtensions.remove(GpxUtilities.ACTIVITY_TYPE); // activities live in the metadata
 			}
+			gpxFile.getExtensionsToWrite().putAll(gpxFileExtensions); // finally
 		}
 		reconstructPointsGroups(gpxFile, pgNames, pgIcons, pgColors, pgBackgrounds); // create groups before points
 		if (!pointList.isEmpty()) {
