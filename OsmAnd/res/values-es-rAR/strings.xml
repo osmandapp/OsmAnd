@@ -2259,7 +2259,7 @@
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Widget de Mapillary</string>
     <string name="mapillary_widget_descr">Permite realizar contribuciones rápidas a Mapillary.</string>
-    <string name="mapillary_descr">Fotos a nivel de calle en línea para todos. Descubrí sitios, colaborá, capturá el mundo.</string>
+    <string name="mapillary_descr">Fotos a nivel de calle en línea para todos. Descubrí sitios, colaborá y capturá el mundo.</string>
     <string name="shared_string_add_photos">Agregar fotos</string>
     <string name="mapillary_action_descr">Compartí tus imágenes a nivel de calle a través de Mapillary.</string>
     <string name="plugin_mapillary_descr">Imágenes de vistas a nivel de calle. También podés contribuir vos mismo. Para ver los datos existentes como una capa en el mapa, activá las «Imágenes a nivel de calle» en el menú «Configurar mapa».</string>
