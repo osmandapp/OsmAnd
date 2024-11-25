@@ -2967,7 +2967,7 @@
     <string name="years_5">Años</string>
     <string name="months_3">Tres meses</string>
     <string name="price_free">Gratis</string>
-    <string name="get_discount_title">Obtén %1$d %2$s a %3$s de descuento.</string>
+    <string name="get_discount_title">Obtené %1$d %2$s a %3$s de descuento.</string>
     <string name="get_discount_first_part">%1$s durante el primer %2$s</string>
     <string name="get_discount_first_few_part">%1$s durante el primer %2$s</string>
     <string name="get_discount_second_part">Luego %1$s</string>
