@@ -82,8 +82,7 @@ public abstract class MapWidget {
 	public void copySettingsFromMode(@NonNull ApplicationMode sourceAppMode, @NonNull ApplicationMode appMode, @Nullable String customId) {
 	}
 
-	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel widgetsPanel,
-						   @NonNull List<MapWidget> followingWidgets) {
+	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel, @NonNull List<MapWidget> followingWidgets) {
 		container.addView(view);
 	}
 

@@ -5880,4 +5880,27 @@
     <string name="rendering_attr_showDirtbikeTrails_description">Arată trasee de biciclete de teren</string>
     <string name="drawer_button_description">Deschide meniul principal.</string>
     <string name="configure_map_description">Modificare stil hartă, straturi sau alte setări.</string>
+    <string name="shared_string_engine">Motor</string>
+    <string name="obd_engine_runtime">Timp de execuție motor</string>
+    <string name="obd_engine_runtime_desc">Afișează cât timp a funcționat motorul de când a fost pornit.</string>
+    <string name="obd_battery_voltage_desc">Afișează nivelul de tensiune al bateriei autovehiculului</string>
+    <string name="vehicle_metrics_recording_description">Selectați parametrii care urmează să fie înregistrați în fișierul GPX.</string>
+    <string name="auto_zoom_3d_angle">Auto zoom 3D unghi</string>
+    <string name="av_audio_sample_rate">Rata de eșantionare audio</string>
+    <string name="av_audio_sample_rate_descr">Selectați frecvența de eșantionare audio.</string>
+    <string name="connect_new_scanner">Conectați noul scaner</string>
+    <string name="vehicle_metrics_obd_ii">Parametrii vehiculului (OBD-II)</string>
+    <string name="obd_throttle_position">Poziția accelerației</string>
+    <string name="obd_throttle_position_desc">Indică unghiul plăcii de accelerație în corpul accelerației.</string>
+    <string name="shared_string_hour">Oră</string>
+    <string name="ltr_or_rtl_combine_via_per">%1$s per %2$s</string>
+    <string name="shared_string_volume">Volum</string>
+    <string name="obd_fuel_pressure_desc">Indică presiunea din sistemul de alimentare</string>
+    <string name="obd_calculated_engine_load_desc">Afișează procentul de putere disponibilă a motorului utilizat la un moment dat.</string>
+    <string name="preview_next_turn">Previzualizați rândul următor</string>
+    <string name="remaining_fuel_description">Afișează cantitatea de combustibil rămasă în rezervorul autovehiculului</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Urmăriți datele vitale ale vehiculului utilizând protocolul OBD-II. Monitorizați parametrii cheie precum viteza, turația motorului, consumul de combustibil și multe altele.</string>
+    <string name="obd_calculated_engine_load">Sarcina calculată a motorului</string>
+    <string name="obd_engine_coolant_temp_desc">Indică temperatura lichidului de răcire al motorului</string>
+    <string name="obd_speed_desc">Indică viteza de la senzorul de viteză al vehiculului (VSS).</string>
 </resources>

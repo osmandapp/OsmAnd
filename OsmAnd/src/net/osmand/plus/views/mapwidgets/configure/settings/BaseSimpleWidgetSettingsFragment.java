@@ -35,29 +35,19 @@ public class BaseSimpleWidgetSettingsFragment extends BaseResizableWidgetSetting
 	private boolean isWidgetVertical = false;
 
 	public CommonPreference<Boolean> shouldShowIconPref;
-	private WidgetType widgetType;
 	@Nullable
 	private MapWidgetInfo widgetInfo;
 
 	private boolean showIcon;
 
-	public void setWidgetType(WidgetType widgetType) {
-		this.widgetType = widgetType;
-	}
-
 	@Override
 	protected void initParams(@NonNull Bundle bundle) {
 		super.initParams(bundle);
 		widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
-		if (widgetInfo != null && widgetInfo.widget instanceof SimpleWidget) {
-			SimpleWidget simpleWidget = (SimpleWidget) widgetInfo.widget;
+		if (widgetInfo != null && widgetInfo.widget instanceof SimpleWidget simpleWidget) {
 			isWidgetVertical = simpleWidget.isVerticalWidget();
 			shouldShowIconPref = simpleWidget.shouldShowIconPref();
 			showIcon = bundle.containsKey(SHOW_ICON_KEY) ? bundle.getBoolean(SHOW_ICON_KEY) : shouldShowIconPref.get();
-		}
-		String type = bundle.getString(WIDGET_TYPE_KEY);
-		if (widgetType == null && type != null) {
-			widgetType = WidgetType.getById(type);
 		}
 	}
 
@@ -65,12 +55,6 @@ public class BaseSimpleWidgetSettingsFragment extends BaseResizableWidgetSetting
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(SHOW_ICON_KEY, showIcon);
-	}
-
-	@NonNull
-	@Override
-	public WidgetType getWidget() {
-		return widgetType;
 	}
 
 	@Override

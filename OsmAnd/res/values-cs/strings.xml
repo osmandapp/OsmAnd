@@ -5516,7 +5516,7 @@
     <string name="obd_fuel_type_desc">Zobrazuje typ paliva vozidla přes snímač OBD</string>
     <string name="obd_engine_coolant_temp">Teplota chladicí kapaliny</string>
     <string name="obd_fuel_level">Spotřeba paliva (%)</string>
-    <string name="obd_plugin_name">Metriky vozidel</string>
+    <string name="obd_plugin_name">Metriky vozidla</string>
     <string name="obd_plugin_description">Sledujte klíčové parametry vozidla pomocí protokolu OBD-II. Přístup k datům zahrnuje: * Otáčky motoru * Spotřeba paliva * Zbývající palivo * Vzdálenost od nastartování motoru * Teplota sání * Teplota okolí * Teplota chladicí kapaliny * Rychlost vozidla * Procento baterie</string>
     <string name="obd_support">Podpora OBD</string>
     <string name="obd_ambient_air_temp">Teplota okolí</string>
@@ -5556,8 +5556,8 @@
     <string name="obd_rpm_desc">Zobrazuje otáčky otáčkoměru vozidla přes snímač OBD</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="offline_wikivoyage">Offline Wikivoyage</string>
-    <string name="lock_screen_description">Povoluje nebo zakazuje funkce dotykové obrazovky, aby se zabránilo náhodnému klepnutí</string>
-    <string name="lock_screen">Uzamčení obrazovky</string>
+    <string name="lock_screen_description">Zapne nebo vypne funkce dotykové obrazovky, aby se zabránilo nechtěným klepnutím</string>
+    <string name="lock_screen">Zamknout obrazovku</string>
     <string name="obd_vin">VIN</string>
     <string name="quick_action_start_pause_recording">Tlačítko pro spuštění, pozastavení nebo obnovení záznamu stopy GPX.</string>
     <string name="obd_vin_desc">VIN kód přes OBD</string>
@@ -5585,7 +5585,7 @@
     <string name="liter_per_hour">l/h</string>
     <string name="screen_is_locked_by_external_button">Dotyková obrazovka je uzamčená. Chcete-li odemknout, stiskněte tlačítko %1$s nebo klepněte na tlačítko na obrazovce.</string>
     <string name="screen_is_unlocked">Dotyková obrazovka je odemčená.</string>
-    <string name="screen_is_locked_by_action_button">Dotyková obrazovka je uzamčená. Klepnutím na tlačítko odemkněte.</string>
+    <string name="screen_is_locked_by_action_button">Dotyková obrazovka je zamčená. Klepnutím ji odemknete.</string>
     <string name="release_4_9">• Přidán celoobrazovkový prohlížeč galerií pro obrázky Wikimedia\n\n • Přidán nový modul „Metriky vozidla“ pro sledování výkonu vozidla pomocí protokolu OBD-II.\n\n • Přidána možnost přiřazovat činnosti ke stopám a podle toho je filtrovat\n\n • Implementovány nové rychlé akce pro záznam jízdy a uzamčení dotykové obrazovky\n\n • Zaveden přizpůsobitelný vzhled tlačítek mapy a přesná mřížka\n\n • Přidána kontextová nabídka a akce „Obnovit průměrnou rychlost“ k widgetům\n\n • Přidána nová vrstva tras „Trasy pro terénní kola“\n\n • Opravena funkce „Automatický záznam trasy během navigace“\n\n • Opraven problém s převrácenými souřadnicemi v jazyce RTL\n\n • Opravena chybějící data snímačů pro aktuálně zaznamenávanou stopu\n\n • Přidány informace o okolních oblastech pro vybraný bod\n\n • Přidána rychlá akce pro ovládání viditelnosti úprav OSM\n\n • Oddělené parametry viditelnosti pro možnosti zabarvení terénu\n\n • Přidána ikona pro zobrazení přístupu nebo jiných atributů silnice či cesty, na kterou lze klepnout</string>
     <string name="route_guidance_desc">Poskytuje navádění trasy v reálném čase, včetně vzdálenosti k další odbočce, názvu silnice, názvu aktuální ulice a informací o jízdních pruzích. Widgety jsou aktivní během navigace.</string>
     <string name="obd_nothing_found_description">Zkontrolujte prosím následující:\n – Ujistěte se, že je Bluetooth zapnutý\n – Motor vozidla běží\n – Ujistěte se, že je vaše zařízení v dosahu skeneru.</string>
@@ -5671,4 +5671,11 @@
     <string name="unit_of_volume">Jednotka objemu</string>
     <string name="obd_engine_coolant_temp_desc">Ukazuje teplotu chladicí kapaliny motoru</string>
     <string name="obd_ambient_air_temp_desc">Zobrazuje teplotu vně vozidla.</string>
+    <string name="preview_next_turn">Ukázat příští odbočku</string>
+    <string name="av_audio_sample_rate">Vzorkovací frekvence zvuku</string>
+    <string name="av_audio_sample_rate_descr">Vyberte vzorkovací frekvenci zvuku.</string>
+    <string name="connect_new_scanner">Připojit nový skener</string>
+    <string name="shared_string_engine">Motor</string>
+    <string name="vehicle_metrics_recording_description">Vyberte parametry, které se mají zaznamenat do GPX souboru.</string>
+    <string name="auto_zoom_3d_angle">Úhel automatického 3D zoomu</string>
 </resources>

@@ -1814,7 +1814,7 @@
     <string name="starting_point">Початок маршруту</string>
     <string name="shared_string_not_selected">Не вибрано</string>
     <string name="rec_split_clip_length">Тривалість кліпу</string>
-    <string name="nm">nmi</string>
+    <string name="nm">BMI</string>
     <string name="nm_h">вузлів</string>
     <string name="update_time">Час оновлення</string>
     <string name="updates_size">Розмір оновлення</string>
@@ -5196,7 +5196,7 @@
     <string name="tracks_empty_folder">Порожня тека</string>
     <string name="track_not_recorded">Не записано</string>
     <string name="shared_string_new_track">Новий трек</string>
-    <string name="shared_string_visible_on_map">Показати на мапі</string>
+    <string name="shared_string_visible_on_map">Видно на карті</string>
     <string name="delete_track_folder_dialog_message">Теку \"%1$s\" буде видалено разом з усіма %2$s треками, що в ній містяться.</string>
     <string name="delete_folder_question">Вилучити теку\?</string>
     <string name="delete_folder">Вилучити теку</string>
@@ -5336,11 +5336,11 @@
     <string name="help_article_map_vector_maps_name">Векторні мапи (стилі мапи)</string>
     <string name="help_article_navigation_guidance_name">Навігаційні вказівки</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">Голосові вказівки / сповіщення</string>
-    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="help_article_navigation_routing_brouter_name">Брюкер</string>
     <string name="help_article_navigation_routing_car_based_routing_name">Автомаршрути (вантажівки, мотоцикли)</string>
     <string name="help_article_navigation_routing_online_routing_name">Онлайн-маршрутизація</string>
     <string name="help_article_map_map_context_menu_name">Контекстне меню мапи</string>
-    <string name="help_article_navigation_car_play_name">CarPlay</string>
+    <string name="help_article_navigation_car_play_name">Автомобільні ігри</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Екран мапи під час навігації</string>
     <string name="help_article_navigation_routing_name">Параметри маршруту</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Про маршрутизацію OsmAnd</string>
@@ -5407,7 +5407,7 @@
     <string name="sensor_temperature_desc">Показує температуру з сенсорів</string>
     <string name="with_waypoints">З маршрутними точками</string>
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
-    <string name="max_altitude">Максимальна висота</string>
+    <string name="max_altitude">Максимальна висоті</string>
     <string name="track_filter_date_selected_format">%s - %s</string>
     <string name="app_mode_paragliding">Парапланеризм</string>
     <string name="app_mode_baby_transport">Транспортування дітей</string>
@@ -5484,13 +5484,13 @@
     <string name="change_button">Змінити кнопку</string>
     <string name="enable_to_use_external_input_device">Увімкнути зовнішній пристрій введення з OsmAnd</string>
     <string name="key_event_action_change_map_orientation">Змінити орієнтацію мапи</string>
-    <string name="root_folder">Коренева тека</string>
+    <string name="root_folder">Коренева папка</string>
     <string name="key_event_action_previous_app_profile">Попередній профіль</string>
     <string name="show_toast_about_key_pressed">Показувати сповіщення про натиснуту кнопку</string>
     <string name="shared_string_rows">Рядки</string>
     <string name="key_event_action_move_left">Вліво</string>
     <string name="restore_from_trash">Відновити зі смітника</string>
-    <string name="all_folders">Усі теки</string>
+    <string name="all_folders">Всі папки</string>
     <string name="press_button_to_link_with_action">Натисніть кнопку на вашому пристрої, щоб призначити її дії: %1$s</string>
     <string name="deletion_error">Помилка видалення</string>
     <string name="key_event_action_move_right">Вправо</string>
@@ -5614,8 +5614,8 @@
     <string name="change_default_tracks_appearance_confirmation">Застосувати зміни до наявних треків у теці чи лише до нових?</string>
     <string name="unchanged_parameter_summary">Кожен трек збереже свої параметри.</string>
     <string name="shared_string_unchanged">Без змін</string>
-    <string name="map_widget_map_scale">Масштаб мапи</string>
-    <string name="max_sensor_speed">Максимальна швидкість датчика</string>
+    <string name="map_widget_map_scale">Масштаб карти</string>
+    <string name="max_sensor_speed">Швидкість датчика, макс</string>
     <string name="shared_string_scale">масштаб</string>
     <string name="use_terrain_maps_summary">Використовує карти місцевості для даних про висоту. Геометрія треку залишається незмінною.</string>
     <string name="use_terrain_maps">Використовувати мапи місцевості</string>
@@ -5630,8 +5630,8 @@
     <string name="relief_3d_download_description">Для перегляду Місцевість на мапі потрібні додаткові мапи.</string>
     <string name="vertical_exaggeration_description">Змінюючи значення масштабу, ви можете підкреслити 3D-рельєф.</string>
     <string name="vertical_exaggeration">Вертикальне перебільшення</string>
-    <string name="max_sensor_cadence">Максимальна частота обертання педалей на велосипеді</string>
-    <string name="avg_sensor_cadence">Середня частота обертання педалей на велосипеді</string>
+    <string name="max_sensor_cadence">Каденція велосипеда, макс</string>
+    <string name="avg_sensor_cadence">Каденція велосипеда, середня</string>
     <string name="lang_ta_in">Тамільська (Індія)</string>
     <string name="shared_sting_all_colors">Всі кольори</string>
     <string name="routing_type_a_star_classic">A* класичний</string>
@@ -5640,7 +5640,7 @@
     <string name="java_safe">Java (Безпечно)</string>
     <string name="gpx_approximation">Наближення GPX</string>
     <string name="routing_type">Тип маршрутизації</string>
-    <string name="avg_sensor_bycicle_power">Середня потужність велосипеда</string>
+    <string name="avg_sensor_bycicle_power">Потужність велосипеда середня</string>
     <string name="rendering_attr_padusDisplayMode_name">Режим відображення земель загального користування</string>
     <string name="routing_type_a_star_2_phase">A* 2-фазний</string>
     <string name="gpx_approximation_geo_java">На основі геометрії (Java, швидко)</string>
@@ -5653,8 +5653,8 @@
     <string name="rendering_attr_padusDisplayMode_description">За типом доступу або іменем менеджера</string>
     <string name="rendering_value_access_name">За типом доступу</string>
     <string name="rendering_value_managerName_name">За іменем менеджера</string>
-    <string name="max_sensor_bycicle_power">Максимальна потужність велосипеда</string>
-    <string name="avg_sensor_speed">Середня швидкість датчика</string>
+    <string name="max_sensor_bycicle_power">Потужність велосипеда, макс</string>
+    <string name="avg_sensor_speed">Швидкість сенсора середня</string>
     <string name="release_4_8">• Нова опція забарвлення місцевості \"Висота\"
 \n
 \n • Власні палітри кольорів для місцевості, треків та маршрутів
@@ -5860,12 +5860,12 @@
     <string name="ask_every_time">Запитувати щоразу</string>
     <string name="shared_string_automatically">Автоматично</string>
     <string name="compass_click_north_is_up">Затисніть, щоб змінити режим орієнтації</string>
-    <string name="help_article_map_routes_name">Маршрути</string>
+    <string name="help_article_map_routes_name">маршрути</string>
     <string name="add_widget_to_the_left">Додати віджет зліва</string>
     <string name="add_widget_below">Додати віджет знизу</string>
     <string name="add_widget_to_the_right">Додати віджет справа</string>
     <string name="add_widget_above">Додати віджет зверху</string>
-    <string name="help_article_map_tracks_name">Треки</string>
+    <string name="help_article_map_tracks_name">Доріжки</string>
     <string name="delete_widget">Видалити віджет?</string>
     <string name="battery_saving_mode">Режим енергоощадження</string>
     <string name="delete_widget_description">Цей віджет буде видалено. Ви можете відновити його пізніше у Налаштуваннях екрана.</string>
@@ -5964,7 +5964,7 @@
     <string name="obd_fuel_type_unknown">Невідомий тип пального</string>
     <string name="obd_fuel_level_desc">Віджет показує рівень пального в машині за датчиком OBD</string>
     <string name="obd_fuel_consumption_rate_desc">Віджет показує споживання пального машиною на основі даних OBD про розташування</string>
-    <string name="lock_screen">Блокування екрану</string>
+    <string name="lock_screen">Екран блокування</string>
     <string name="quick_action_verb_start_pause">Старт / Пауза</string>
     <string name="help_article_personal_color_palette_schemes_name">Кольорові схеми</string>
     <string name="quick_action_finish_trip_recording_summary">Кнопка для збереження GPX-треку і завершення запису подорожі.</string>
@@ -6036,12 +6036,12 @@
     <string name="obd_device_forget_sensor_description">Сканер буде видалено зі списку. Ви зможете знову додати цей сканер до списку в будь-який час.</string>
     <string name="connect_obd_instructions_title">OsmAnd підтримує Bluetooth-з\'єднання зі сканерами OBD-II.</string>
     <string name="obd_how_to_connect">Як підключитися:</string>
-    <string name="connect_obd_instructions_step1">1. Підключіть сканер до порту OBD-II вашого автомобіля.</string>
-    <string name="connect_obd_instructions_step2">2. Увімкніть двигун автомобіля</string>
-    <string name="connect_obd_instructions_step3">3. Увімкніть Bluetooth на вашому пристрої</string>
+    <string name="connect_obd_instructions_step1">Підключення сканера до порту OBD-II.</string>
+    <string name="connect_obd_instructions_step2">Увімкніть двигун автомобіля</string>
+    <string name="connect_obd_instructions_step3">Увімкнути Bluetooth на пристрої</string>
     <string name="learn_more_about_obd_sensors">Дізнайтеся більше про датчики.</string>
     <string name="obd_fuel_left_liters">Залишок пального (літри)</string>
-    <string name="connect_obd_instructions_step4">4. Торкніться \"Підключити\" і виберіть ваш сканер зі списку.</string>
+    <string name="connect_obd_instructions_step4">Натисніть \"%1$s,\" і виберіть сканер зі списку.</string>
     <string name="fuel_tank_capacity_description">Введіть об\'єм резервуара, щоб точно відстежувати рівень та витрату пального</string>
     <string name="fuel_tank_capacity">Ємність паливного бака</string>
     <string name="shared_strings_dimensions">Розміри</string>
@@ -6081,4 +6081,10 @@
     <string name="obd_engine_coolant_temp_desc">Показує температуру охолоджувальної рідини двигуна</string>
     <string name="obd_air_intake_temp_desc">Показує температуру повітря, що надходить у впускний колектор двигуна.</string>
     <string name="auto_zoom_3d_angle">Автомасштаб кута 3D</string>
+    <string name="preview_next_turn">Попередній перегляд</string>
+    <string name="av_audio_sample_rate">Швидкість вибірки аудіо</string>
+    <string name="vehicle_metrics_recording_description">Виберіть параметри для запису в файлі GPX.</string>
+    <string name="av_audio_sample_rate_descr">Виберіть рівень звуку.</string>
+    <string name="connect_new_scanner">Підключення нового сканера</string>
+    <string name="shared_string_engine">Двигуни</string>
 </resources>

@@ -6079,4 +6079,6 @@
     <string name="connect_new_scanner">Подключить новый сканер</string>
     <string name="vehicle_metrics_recording_description">Выберите параметры, которые необходимо записать в GPX-файл.</string>
     <string name="shared_string_engine">Двигатель</string>
+    <string name="av_audio_sample_rate">Частота дискретизации звука</string>
+    <string name="av_audio_sample_rate_descr">Выберите частоту дискретизации звука.</string>
 </resources>

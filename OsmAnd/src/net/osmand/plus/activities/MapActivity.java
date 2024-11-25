@@ -88,6 +88,7 @@ import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.MapAccessibilityActions;
 import net.osmand.plus.render.UpdateVectorRendererAsyncTask;
@@ -1536,6 +1537,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (newRoute && rh.isFollowingMode() && !sim.isRouteAnimating()) {
 				sim.startStopRouteAnimation(this);
 			}
+		}
+		for (OsmandPlugin plugin: PluginsHelper.getEnabledPlugins()) {
+			plugin.newRouteIsCalculated(newRoute);
 		}
 	}
 

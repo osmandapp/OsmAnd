@@ -3,6 +3,9 @@ package net.osmand.shared.util
 import co.touchlab.stately.collections.ConcurrentMutableMap
 import net.osmand.shared.data.KLatLon
 import kotlin.math.*
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.extensions.toDegrees
 import net.osmand.shared.extensions.toRadians
@@ -816,5 +819,45 @@ object KMapUtils {
 //		finalBearing *= (180.0 / PI).toDouble()
 
 		return (b * A * (sigma - deltaSigma)).toDouble()
+	}
+
+	fun decodeShortLinkString(s: String): KGeoParsedPoint {
+		// convert old shortlink format to current one
+		var s = s
+		s = s.replace("@".toRegex(), "~")
+		var i = 0
+		var x: Long = 0
+		var y: Long = 0
+		var z = -8
+
+		i = 0
+		while (i < s.length) {
+			var digit = -1
+			val c = s[i]
+			for (j in intToBase64.indices)
+				if (c == intToBase64[j]) {
+					digit = j
+					break
+				}
+			if (digit < 0) break
+			if (digit < 0) break
+			// distribute 6 bits into x and y
+			x = x shl 3
+			y = y shl 3
+			for (j in 2 downTo 0) {
+				x = x or (if ((digit and (1 shl (j + j + 1))) == 0) 0 else (1 shl j)).toLong()
+				y = y or (if ((digit and (1 shl (j + j))) == 0) 0 else (1 shl j)).toLong()
+			}
+			z += 3
+			i++
+		}
+		val lon: Double = x * 2.0.pow((2 - 3 * i).toDouble()) * 90.0 - 180
+		val lat: Double = y * 2.0.pow((2 - 3 * i).toDouble()) * 45.0 - 90
+		// adjust z
+		if (i < s.length && s[i] == '-') {
+			z -= 2
+			if (i + 1 < s.length && s[i + 1] == '-') z++
+		}
+		return KGeoParsedPoint(lat, lon, z)
 	}
 }

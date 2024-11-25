@@ -5624,7 +5624,7 @@
     <string name="kpa_unit">kPa</string>
     <string name="simulate_obd">Simuler des données OBD</string>
     <string name="obd_fuel_consumption_rate_l_km">Consommation de carburant (l/km)</string>
-    <string name="obd_engine_runtime_desc">Affiche la durée de fonctionnement du moteur du véhicule à partir du scanneur OBD</string>
+    <string name="obd_engine_runtime_desc">Affiche la durée de fonctionnement du moteur du véhicule à partir du scanneur OBD.</string>
     <string name="obd_throttle_position_desc">Affiche la pression de carburant du véhicule (pression de gauge) à partir du scanner obd</string>
     <string name="obd_throttle_position">Position de l\'accélérateur</string>
     <string name="obd_fuel_pressure">Pression de carburant</string>
@@ -5663,4 +5663,18 @@
     <string name="vehicle_metrics_recording_description">Sélectionnez les informations à enregistrer dans le fichier GPX.</string>
     <string name="av_audio_sample_rate">Taux d’échantillonnage audio</string>
     <string name="shared_string_engine">Moteur</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Suivez les données du véhicule en utilisant le protocole OBD-II comme la vitesse, le régime moteur, la consommation de carburant et plus encore.</string>
+    <string name="obd_air_intake_temp_desc">Affiche la température de l\'air entrant dans le collecteur moteur.</string>
+    <string name="obd_fuel_pressure_desc">Affiche la pression du circuit de carburant</string>
+    <string name="obd_speed_desc">Affichage la vitesse provenant du capteur de vitesse du véhicule (VSS).</string>
+    <string name="obd_engine_coolant_temp_desc">Affiche la température du liquide de refroidissement du moteur</string>
+    <string name="obd_battery_voltage_desc">Affiche la tension de la batterie du véhicule</string>
+    <string name="obd_calculated_engine_load_desc">Affiche le pourcentage instantanée de puissance moteur disponible.</string>
+    <string name="average_value_slider_description">Sélectionnez la durée sur laquelle calculer la valeur moyenne.</string>
+    <string name="obd_engine_oil_temperature_desc">Affiche la température de l\'huile moteur.</string>
+    <string name="average_temperature_slider_description">Sélectionnez la durée sur laquelle calculer la température moyenne.</string>
+    <string name="remaining_fuel_description">Affiche la quantité de carburant restant dans le réservoir du véhicule</string>
+    <string name="obd_ambient_air_temp_desc">Affiche la température de l\'air extérieur.</string>
+    <string name="obd_calculated_engine_load">Charge moteur calculée</string>
+    <string name="obd_engine_runtime">Durée de fonctionnement du moteur</string>
 </resources>

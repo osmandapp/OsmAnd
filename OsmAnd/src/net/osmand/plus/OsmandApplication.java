@@ -724,9 +724,9 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void setCarNavigationSession(@Nullable NavigationSession carNavigationSession) {
 		this.carNavigationSession = carNavigationSession;
-		if(carNavigationSession != null) {
+		if (carNavigationSession != null) {
 			List<OsmandPlugin> enabledPlugins = PluginsHelper.getEnabledPlugins();
-			for (OsmandPlugin plugin: enabledPlugins) {
+			for (OsmandPlugin plugin : enabledPlugins) {
 				plugin.onCarNavigationSessionCreated();
 			}
 		}

@@ -318,7 +318,7 @@ public class OsmandSettings {
 		} else if (preference instanceof ListStringPreference listStringPreference) {
 			if (value instanceof List<?> || (value == null && listStringPreference.isNullSupported(mode))) {
 				if (value == null) {
-					listStringPreference.setStringsListForProfile(mode,null);
+					listStringPreference.setStringsListForProfile(mode, null);
 				} else {
 					List<?> list = (List<?>) value;
 					boolean isListOfString = list.stream().allMatch(element -> element instanceof String);
@@ -2872,7 +2872,7 @@ public class OsmandSettings {
 	}
 
 	public final CommonPreference<Boolean> IS_QUICK_ACTION_TUTORIAL_SHOWN = new BooleanPreference(this, "quick_action_tutorial", false).makeGlobal().makeShared();
-	public final ListStringPreference QUICK_ACTION_BUTTONS = (ListStringPreference) new ListStringPreference(this, "quick_action_buttons", DEFAULT_BUTTON_ID + ";", ";").makeGlobal().makeShared().storeLastModifiedTime();
+	public final ListStringPreference QUICK_ACTION_BUTTONS = (ListStringPreference) new ListStringPreference(this, "quick_action_buttons", DEFAULT_BUTTON_ID + ";", ";").makeGlobal();
 
 
 	/**

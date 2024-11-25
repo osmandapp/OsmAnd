@@ -27,16 +27,18 @@ import net.osmand.plus.myplaces.tracks.DialogClosedListener
 import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.myplaces.tracks.filters.FiltersAdapter
-import net.osmand.shared.gpx.SmartFolderHelper
-import net.osmand.shared.gpx.SmartFolderUpdateListener
-import net.osmand.shared.gpx.data.TrackFolder
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities.getStatusBarSecondaryColor
 import net.osmand.plus.widgets.dialogbutton.DialogButton
-import net.osmand.shared.gpx.filters.BaseTrackFilter
-import net.osmand.shared.gpx.filters.FilterChangedListener
-import net.osmand.shared.gpx.data.SmartFolder
+import net.osmand.shared.gpx.SmartFolderHelper
+import net.osmand.shared.gpx.SmartFolderUpdateListener
 import net.osmand.shared.gpx.TrackItem
+import net.osmand.shared.gpx.data.SmartFolder
+import net.osmand.shared.gpx.data.TrackFolder
+import net.osmand.shared.gpx.filters.BaseTrackFilter
+import net.osmand.shared.gpx.filters.DateTrackFilter
+import net.osmand.shared.gpx.filters.FilterChangedListener
+import net.osmand.shared.gpx.filters.TrackFilterType
 import net.osmand.util.Algorithms
 
 class TracksFilterFragment : BaseOsmAndDialogFragment(),
@@ -56,8 +58,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 				(foundFragment as TracksFilterFragment).dialog?.dismiss()
 			}
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-				val initialFilter = TracksSearchFilter(app, arrayListOf())
-				initialFilter.initSelectedFilters(filter.appliedFilters)
+				val initialFilter = TracksSearchFilter(app, arrayListOf(), filter.appliedFilters)
 				val fragment = TracksFilterFragment()
 				fragment.setTargetFragment(target, 0)
 				fragment.initialFilterState = initialFilter

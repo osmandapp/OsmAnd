@@ -39,6 +39,7 @@ import net.osmand.plus.feedback.FeedbackHelper;
 import net.osmand.plus.helpers.*;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelperImpl;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
@@ -535,10 +536,9 @@ public class AppInitializer implements IProgress {
 			}
 		}
 	}
-
 	private void checkLiveUpdatesAlerts() {
 		OsmandSettings settings = app.getSettings();
-		if (settings.IS_LIVE_UPDATES_ON.get()) {
+		if (InAppPurchaseUtils.isLiveUpdatesAvailable(app) && settings.IS_LIVE_UPDATES_ON.get()) {
 			LocalIndexHelper helper = new LocalIndexHelper(app);
 			AlarmManager manager = (AlarmManager) app.getSystemService(Context.ALARM_SERVICE);
 

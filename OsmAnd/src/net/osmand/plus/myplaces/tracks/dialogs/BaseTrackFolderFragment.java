@@ -34,6 +34,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.IndexConstants;
+import net.osmand.plus.myplaces.tracks.DialogClosedListener;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
@@ -578,13 +579,12 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	@Override
-	public void showEditFiltersDialog(@NonNull SmartFolder folder) {
+	public void showEditFiltersDialog(@NonNull SmartFolder folder, @Nullable DialogClosedListener dialogClosedListener) {
 		FragmentManager manager = getFragmentManager();
 		ArrayList<TrackItem> trackItems = new ArrayList<>(smartFolderHelper.getAllAvailableTrackItems());
-		TracksSearchFilter filter = new TracksSearchFilter(app, trackItems);
-		filter.initSelectedFilters(folder.getFilters());
+		TracksSearchFilter filter = new TracksSearchFilter(app, trackItems, folder.getFilters());
 		if (manager != null) {
-			TracksFilterFragment.Companion.showInstance(app, manager, this, filter, null, folder, null);
+			TracksFilterFragment.Companion.showInstance(app, manager, this, filter, dialogClosedListener, folder, null);
 		}
 	}
 
