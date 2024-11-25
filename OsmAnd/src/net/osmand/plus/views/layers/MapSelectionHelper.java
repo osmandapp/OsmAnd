@@ -477,8 +477,9 @@ public class MapSelectionHelper {
 
 	private boolean isUniqueGpx(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
 	                            @NonNull TravelGpx travelGpx) {
+		String travelGpxFileName = travelGpx.getGpxFileName() + GPX_FILE_EXT;
 		String tracksDir = app.getAppPath(IndexConstants.GPX_TRAVEL_DIR).getPath();
-		File file = new File(tracksDir, travelGpx.getRouteId() + GPX_FILE_EXT);
+		File file = new File(tracksDir, travelGpxFileName);
 		if (file.exists()) {
 			return false;
 		}
@@ -487,6 +488,12 @@ public class MapSelectionHelper {
 					&& ((Pair<?, ?>) entry.getKey()).first instanceof TravelGpx) {
 				TravelGpx object = (TravelGpx) ((Pair<?, ?>) entry.getKey()).first;
 				if (travelGpx.equals(object)) {
+					return false;
+				}
+			}
+			if (entry.getKey() instanceof SelectedGpxPoint && entry.getValue() instanceof GPXLayer) {
+				SelectedGpxPoint selectedGpxPoint = (SelectedGpxPoint) entry.getKey();
+				if (selectedGpxPoint.getSelectedGpxFile().getGpxFile().getPath().endsWith(travelGpxFileName)) {
 					return false;
 				}
 			}
