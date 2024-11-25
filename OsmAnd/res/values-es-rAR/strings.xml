@@ -795,7 +795,7 @@
     <string name="osmand_parking_time_limit_title">Definir tiempo límite del estacionamiento</string>
     <string name="osmand_parking_delete_confirm">¿Borrar el marcador de estacionamiento?</string>
     <string name="osmand_parking_delete">Quitar marcador de estacionamiento</string>
-    <string name="osmand_parking_choose_type">Elige el tipo de estacionamiento</string>
+    <string name="osmand_parking_choose_type">Elegí el tipo de estacionamiento</string>
     <string name="osmand_parking_lim_text">Tiempo limitado</string>
     <string name="osmand_parking_no_lim_text">Tiempo ilimitado</string>
     <string name="osmand_parking_add_event">Añadir una notificación al calendario</string>
@@ -846,10 +846,10 @@
     <string name="local_indexes_cat_tile">Mapas de teselas en línea y en caché</string>
     <string name="local_indexes_cat_map">Mapas descargados (vectores)</string>
     <string name="index_settings_descr">Descarga y gestiona mapas sin conexión almacenados en el dispositivo.</string>
-    <string name="map_online_plugin_is_not_installed">Activa el complemento «Mapas en línea», para elegir diferentes repositorios de mapas</string>
+    <string name="map_online_plugin_is_not_installed">Activá el complemento «Mapas en línea», para elegir diferentes repositorios de mapas</string>
     <string name="map_online_data">Mapas en línea y teselas</string>
     <string name="map_online_data_descr">Usa mapas en línea (descarga y guarda teselas en la tarjeta de memoria).</string>
-    <string name="online_map_settings_descr">Elige los repositorios de teselas de mapas en línea o en caché.</string>
+    <string name="online_map_settings_descr">Elegí los repositorios de teselas de mapas en línea o en caché.</string>
     <string name="plugins_screen">Complementos</string>
     <string name="prefs_plugins_descr">Los complementos activan ajustes avanzados y funcionalidades adicionales.</string>
     <string name="prefs_plugins">Complementos</string>
@@ -862,10 +862,10 @@
     <string name="gpx_visibility_txt">Visibilidad</string>
     <string name="gpx_tags_txt">Etiquetas</string>
     <string name="shared_string_description">Descripción</string>
-    <string name="validate_gpx_upload_name_pwd">Indica el nombre de usuario y contraseña de OSM para subir archivos GPX.</string>
+    <string name="validate_gpx_upload_name_pwd">Indicá el nombre de usuario y contraseña de OSM para subir archivos GPX.</string>
     <string name="default_buttons_support">Soporte</string>
     <string name="support_new_features">Soporte de nuevas funciones</string>
-    <string name="support_new_features_descr">Dona para ver nuevas funciones implementadas en la aplicación.</string>
+    <string name="support_new_features_descr">Doná para ver nuevas funciones implementadas en la aplicación.</string>
     <string name="show_ruler_level">Mostrar escala</string>
     <string name="info_button">Información</string>
     <string name="back_to_location">Volver a la ubicación</string>
@@ -908,7 +908,7 @@
     <string name="direction_style_sidewise">Según el lado (8 sectores)</string>
     <string name="direction_style_clockwise">Según el reloj (12 sectores)</string>
     <string name="settings_direction_style">Estilo de dirección</string>
-    <string name="settings_direction_style_descr">Elige el estilo para expresar direcciones relativas al moverse</string>
+    <string name="settings_direction_style_descr">Elegí el estilo para expresar direcciones relativas al moverse</string>
     <string name="auto_announce_on">Iniciar anuncios automáticos</string>
     <string name="auto_announce_off">Parar anuncios automáticos</string>
     <string name="i_am_here">Estoy aquí</string>
@@ -920,12 +920,12 @@
     <string name="arrival_distance_factor_late">Cerca</string>
     <string name="arrival_distance_factor_at_last">Muy tarde</string>
     <string name="arrival_distance">Anuncio de llegada</string>
-    <string name="arrival_distance_descr">¿Cuándo quieres el anuncio de llegada?</string>
-    <string name="rendering_out_of_memory">Sin memoria suficiente para mostrar el área elegida</string>
+    <string name="arrival_distance_descr">¿Cuándo querés el anuncio de llegada?</string>
+    <string name="rendering_out_of_memory">Memoria insuficiente para mostrar el área elegida</string>
     <string name="use_fluorescent_overlays">Usar superpuestos fluorescentes</string>
     <string name="use_fluorescent_overlays_descr">Usa colores fluorescentes para mostrar trazas y rutas.</string>
     <string name="offline_edition">Edición sin conexión</string>
-    <string name="offline_edition_descr">Si se activa la edición sin conexión, los cambios serán guardados localmente primero y serán cargados por solicitud, de lo contrario los cambios serán cargados de inmediato.</string>
+    <string name="offline_edition_descr">Si activás la edición sin conexión, los cambios se guardarán localmente primero y se cargarán a pedido; de lo contrario, los cambios se cargarán de inmediato.</string>
     <string name="update_poi_does_not_change_indexes">Los cambios de PDI dentro de la aplicación no afectan a los archivos de mapa descargados; en su lugar, los cambios se guardan como un archivo en el dispositivo.</string>
     <string name="local_openstreetmap_uploading">Subiendo…</string>
     <string name="local_openstreetmap_were_uploaded">Se enviaron {0} PDI/notas de OSM</string>
@@ -939,7 +939,7 @@
     <string name="live_monitoring_interval">Intervalo del seguimiento en línea</string>
     <string name="live_monitoring_url_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="live_monitoring_url">Dirección web del seguimiento en línea</string>
-    <string name="gpx_monitoring_disabled_warn">Registra trazas usando el widget GPX o mediante la opción «Grabar viaje».</string>
+    <string name="gpx_monitoring_disabled_warn">Registrá trazas usando el widget GPX o mediante la opción «Grabar viaje».</string>
     <string name="show_current_gpx_title">Mostrar traza actual</string>
     <string name="free_version_message">Existen %1$s mapas para descargar o actualizar.</string>
     <string name="free_version_title">Versión gratuita</string>
@@ -962,7 +962,7 @@
     <string name="index_name_tts_voice">Indicaciones por voz (TTS, preferido)</string>
     <string name="amenity_type_osmwiki">Wikipedia (sin conexión)</string>
     <string name="amenity_type_user_defined">Definido por el usuario</string>
-    <string name="fav_export_confirmation">Ya existe un archivo con los favoritos exportados previamente. ¿Quieres sustituirlo\?</string>
+    <string name="fav_export_confirmation">Ya existe un archivo con los favoritos exportados previamente. ¿Querés sustituirlo?</string>
     <string name="profile_settings">Ajustes de perfiles específicos</string>
     <string name="routing_settings">Navegación</string>
     <string name="routing_settings_descr">Indica las opciones de navegación.</string>
@@ -975,7 +975,7 @@
     <string name="user_password">Contraseña</string>
     <string name="osmand_service">Modo reposo</string>
     <string name="osmand_service_descr">OsmAnd se ejecuta en modo reposo con la pantalla apagada.</string>
-    <string name="download_files_not_enough_space">Sin espacio suficiente para descargar %1$s MB (disponible: %2$s).</string>
+    <string name="download_files_not_enough_space">Espacio insuficiente para descargar %1$s MB (disponible: %2$s).</string>
     <string name="download_files_question_space">¿Descargar {0} archivo(s)\?
 \n Utilizado {1} MB (de {2} MB).</string>
     <string name="use_transparent_map_theme">Tema transparente</string>
@@ -983,7 +983,7 @@
     <string name="init_native_library">Inicializando biblioteca nativa…</string>
     <string name="choose_auto_follow_route">Centrado automático del mapa</string>
     <string name="choose_auto_follow_route_descr">Tiempo hasta que la vista del mapa vuelve a sincronizarse con la ubicación actual.</string>
-    <string name="keep_informing_never">Sólo manualmente (pulsa la flecha)</string>
+    <string name="keep_informing_never">Sólo manualmente (pulsá la flecha)</string>
     <string name="keep_informing_descr">Repite instrucciones de navegación a intervalos regulares.</string>
     <string name="keep_informing">Repetir instrucciones de navegación</string>
     <string name="auto_follow_route_navigation">Centrar automáticamente al navegar</string>
@@ -1009,7 +1009,7 @@
     <string name="old_poi_file_should_be_deleted">El archivo de datos del PDI «%1$s» es redundante y puede quitarse.</string>
     <string name="update_poi_file_not_found">El archivo local para guardar cambios de PDI, no se ha encontrado ni creado.</string>
     <string name="button_upgrade_osmandplus">Actualizar a OsmAnd+</string>
-    <string name="map_version_changed_info">Descarga la nueva versión de la aplicación, para poder usar los nuevos archivos de mapas.</string>
+    <string name="map_version_changed_info">Descargá la nueva versión de la aplicación, para poder usar los nuevos archivos de mapas.</string>
     <string name="poi_filter_nominatim">Nominatim en línea</string>
     <string name="search_position_current_location_search">Buscando ubicación…</string>
     <string name="search_position_current_location_found">Mi ubicación (encontrada)</string>
@@ -1022,7 +1022,7 @@
     <string name="route_successfully_saved_at">Ruta guardada como «%1$s».</string>
     <string name="filename_input">Nombre del archivo:</string>
     <string name="file_with_name_already_exist">Ya existe un archivo con el mismo nombre.</string>
-    <string name="local_index_upload_gpx_description">Envía archivos GPX a la comunidad OSM, mejorando los mapas.</string>
+    <string name="local_index_upload_gpx_description">Enviá archivos GPX a la comunidad OSM, mejorando los mapas.</string>
     <string name="local_index_items_uploaded">%1$d de %2$d elemento(s) enviado(s).</string>
     <string name="local_index_mi_upload_gpx">Enviar a OSM</string>
     <string name="show_more_map_detail">Mostrar más detalle del mapa</string>
@@ -1037,14 +1037,14 @@
     <string name="favourites_edit_dialog_category">Categoría</string>
     <string name="shared_string_no_thanks">No, gracias</string>
     <string name="basemap_missing">Descargá el mapa base mundial para una vista general global en zums pequeños.</string>
-    <string name="vector_data_missing">Descarga los datos («sin conexión») para usar los mapas sin conexión.</string>
+    <string name="vector_data_missing">Descargá los datos («sin conexión») para usar los mapas sin conexión.</string>
     <string name="shared_string_release">Liberado</string>
     <string name="local_index_installed">Versión local</string>
     <string name="local_index_items_backuped">%1$d de %2$d elemento(s) desactivado(s).</string>
     <string name="local_index_items_deleted">%1$d de %2$d elemento(s) borrado(s).</string>
     <string name="local_index_items_restored">%1$d de %2$d elemento(s) activado(s).</string>
     <string name="local_index_no_items_to_do">Sin elementos para «%1$s»</string>
-    <string name="local_index_action_do">¿Quieres %1$s %2$s elemento(s)?</string>
+    <string name="local_index_action_do">¿Querés %1$s %2$s elemento(s)?</string>
     <string name="local_index_descr_title">Gestionar mapas.</string>
     <string name="local_index_mi_restore">Activar</string>
     <string name="local_index_mi_backup">Desactivar</string>
@@ -1071,12 +1071,10 @@
     <string name="gpx_option_reverse_route">Invertir la dirección de la traza</string>
     <string name="gpx_option_destination_point">Usar destino actual</string>
     <string name="gpx_option_from_start_point">Pasar a lo largo de la traza completa</string>
-    <string name="switch_to_vector_map_to_see">Mapa vectorial presente para esta ubicación. 
-\n\t 
-\n\tPara usarlo activa «Menú» → «Configurar mapa» → «Repositorio de mapas…» → «Mapas vectoriales sin conexión».</string>
+    <string name="switch_to_vector_map_to_see">Mapa vectorial presente para esta ubicación. \n\t \n\tPara usarlo activá «Menú» → «Configurar mapa» → «Repositorio de mapas…» → «Mapas vectoriales sin conexión».</string>
     <string name="choose_audio_stream">Salida de indicaciones por voz</string>
-    <string name="choose_audio_stream_descr">Elige que altavoz reproducirá indicaciones por voz.</string>
-    <string name="voice_stream_voice_call">Audio de llamada telefónica (para altavoces estéreos con Bluetooth)</string>
+    <string name="choose_audio_stream_descr">Elegí qué altavoz reproducirá las indicaciones por voz.</string>
+    <string name="voice_stream_voice_call">Audio de llamada telefónica (para altavoces estéreo con Bluetooth)</string>
     <string name="voice_stream_notification">Notificación auditiva</string>
     <string name="voice_stream_music">Audio de multimedia o navegación</string>
     <string name="warning_tile_layer_not_downloadable">La aplicación no puede descargar la capa del mapa «%1$s», reinstalarla podría ayudar.</string>
@@ -1089,9 +1087,9 @@
     <string name="map_underlay_descr">Elegir mapa subyacente</string>
     <string name="layer_overlay">Mapa superpuesto…</string>
     <string name="map_overlay">Mapa superpuesto</string>
-    <string name="map_overlay_descr">Elige el mapa superpuesto</string>
+    <string name="map_overlay_descr">Elegí el mapa superpuesto</string>
     <string name="tile_source_already_installed">Mapa ya instalado, «Ajustes» se actualizará.</string>
-    <string name="select_tile_source_to_install">Elige los repositorios de mapas (teselas):</string>
+    <string name="select_tile_source_to_install">Elegí los repositorios de mapas (teselas):</string>
     <string name="internet_not_available">Imposible realizar la operación sin una conexión a Internet.</string>
     <string name="install_more">Añadir más…</string>
     <string name="level_to_switch_vector_raster_descr">Usar mapas vectoriales, más allá de este nivel.</string>
@@ -1114,7 +1112,7 @@
     <string name="mile">mi</string>
     <string name="send_location_way_choose_title">Compartir ubicación usando</string>
     <string name="send_location_sms_pattern">Ubicación: %1$s\n%2$s</string>
-    <string name="send_location_email_pattern">Para ver la ubicación, sigue el enlace web «%1$s» o el enlace interno de Android «%2$s»</string>
+    <string name="send_location_email_pattern">Para ver la ubicación, seguí el enlace web «%1$s» o el enlace interno de Android «%2$s»</string>
     <string name="send_location">Enviar ubicación</string>
     <string name="context_menu_item_share_location">Compartir ubicación</string>
     <string name="add_waypoint_dialog_added">Punto GPX «{0}» añadido</string>
@@ -1167,7 +1165,7 @@
     <string name="select_build_to_install">Instalar compilación de OsmAnd</string>
     <string name="gps_status_app_not_found">La aplicación «GPS Status» no está instalada. ¿Buscar en la tienda de aplicaciones?</string>
     <string name="voice_is_not_available_msg">Sin indicaciones por voz disponible, vaya a «Ajustes» → «Ajustes de navegación», elige el perfil → «Indicaciones por voz» y luego elige o descarga un paquete de indicaciones por voz.</string>
-    <string name="voice_is_not_available_title">Elige un paquete de indicaciones por voz</string>
+    <string name="voice_is_not_available_title">Elegí un paquete de indicaciones por voz</string>
     <string name="daynight_mode_day">Diurno</string>
     <string name="daynight_mode_night">Nocturno</string>
     <string name="daynight_mode_auto">Amanecer/atardecer</string>
@@ -1290,7 +1288,7 @@
     <string name="transport_search_after">Itinerario siguiente</string>
     <string name="transport_search_before">Itinerario anterior</string>
     <string name="transport_finish_search">Finalizar búsqueda</string>
-    <string name="transport_stop_to_go_out">Elige la parada donde que bajarse</string>
+    <string name="transport_stop_to_go_out">Elegí la parada donde te querés bajar</string>
     <string name="transport_to_go_after">distancia previa</string>
     <string name="transport_to_go_before">distancia siguiente</string>
     <string name="transport_stops_to_pass">paradas a pasar</string>
@@ -1355,7 +1353,7 @@
     <string name="error_calculating_route">No se pudo calcular la ruta.</string>
     <string name="error_calculating_route_occured">No se pudo calcular la ruta.</string>
     <string name="empty_route_calculated">La ruta calculada está vacía.</string>
-    <string name="arrived_at_destination">Has llegado.</string>
+    <string name="arrived_at_destination">Llegaste.</string>
     <string name="invalid_locations">Coordenadas inválidas</string>
     <string name="go_back_to_osmand">Volver al mapa</string>
     <string name="loading_data">Cargando datos…</string>
@@ -1372,20 +1370,20 @@
     <string name="update_tile">Actualizar</string>
     <string name="reload_tile">Recargar tesela</string>
     <string name="mark_point">Objetivo</string>
-    <string name="use_english_names_descr">Elige entre nombres locales o en inglés.</string>
+    <string name="use_english_names_descr">Elegí entre nombres locales o en inglés.</string>
     <string name="use_english_names">Usar nombres en inglés en los mapas</string>
     <string name="app_settings">Ajustes de la aplicación</string>
     <string name="search_address">Buscar dirección</string>
-    <string name="choose_building">Elige el edificio</string>
-    <string name="choose_street">Elige la calle</string>
-    <string name="choose_city">Elige la ciudad o el código postal</string>
-    <string name="ChooseCountry">Elige el país</string>
+    <string name="choose_building">Elegí el edificio</string>
+    <string name="choose_street">Elegí la calle</string>
+    <string name="choose_city">Elegí la ciudad o el código postal</string>
+    <string name="ChooseCountry">Elegí el país</string>
     <string name="show_view_angle">Mostrar dirección de visualización</string>
     <string name="map_view_3d_descr">Activa la vista 3D del mapa.</string>
     <string name="map_view_3d">Visión 3D del mapa</string>
     <string name="show_poi_over_map_description">Muestra la última superposición de PDI usada.</string>
     <string name="show_poi_over_map">Mostrar superposición de PDI</string>
-    <string name="map_tile_source_descr">Elige el repositorio de los mapas en línea o teselas en caché.</string>
+    <string name="map_tile_source_descr">Elegí el repositorio de los mapas en línea o teselas en caché.</string>
     <string name="map_tile_source">Repositorio de teselas del mapa</string>
     <string name="map_source">Repositorio del mapa</string>
     <string name="use_internet">Usar Internet</string>
@@ -1407,7 +1405,7 @@
     <string name="app_mode_pedestrian">Peatón</string>
     <string name="position_on_map_center">Centro</string>
     <string name="position_on_map_bottom">Abajo</string>
-    <string name="navigate_point_top_text">Ingresa la latitud y longitud en el formato elegido (G - grados, M - minutos, S - segundos)</string>
+    <string name="navigate_point_top_text">Ingresá la latitud y longitud en el formato elegido (G - grados, M - minutos, S - segundos)</string>
     <string name="navigate_point_latitude">Latitud</string>
     <string name="navigate_point_longitude">Longitud</string>
     <string name="navigate_point_format_D">GGG.GGGGG</string>
@@ -1422,7 +1420,7 @@
     <string name="search_address_street_option">Intersección de calle</string>
     <string name="context_menu_item_update_map">Actualizar mapa</string>
     <string name="context_menu_item_create_poi">Crear PDI</string>
-    <string name="add_favorite_dialog_top_text">Ingresa nombre del favorito</string>
+    <string name="add_favorite_dialog_top_text">Ingresá nombre del favorito</string>
     <string name="add_favorite_dialog_default_favourite_name">Favorito</string>
     <string name="add_favorite_dialog_favourite_added_template">Punto favorito «{0}» añadido.</string>
     <string name="favourites_context_menu_edit">Editar favorito</string>
