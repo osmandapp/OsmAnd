@@ -1975,7 +1975,7 @@
     <string name="save_filter">Guardar filtro</string>
     <string name="delete_filter">Borrar filtro</string>
     <string name="new_filter">Nuevo filtro</string>
-    <string name="new_filter_desc">Ingresá el nombre del nuevo filtro, que se añadirá en tu pestaña «Categorías».</string>
+    <string name="new_filter_desc">Ingresá el nombre del nuevo filtro, que se añadirá en la pestaña de «Categorías».</string>
     <string name="lang_kab">Cabilio</string>
     <string name="selected_categories">Categorías elegidas</string>
     <string name="create_custom_poi">Crear filtro personalizado</string>
