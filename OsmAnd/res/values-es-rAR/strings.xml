@@ -392,17 +392,7 @@
 \nLos datos subyacentes provienen de SRTM y ASTER.
 \n
 \nVéase - %1$s.</string>
-    <string name="plugin_touringview_descr">Activando esta vista cambia el estilo del mapa OsmAnd a la «Vista turística», que es una vista de alto detalle especial para viajeros y conductores profesionales.
-\n
-\nEsta vista proporciona, en cualquier nivel de zum del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente carreteras, senderos, caminos y marcas de orientación).
-\n
-\nTambién representa claramente todos los tipos de caminos sin ambigüedades por códigos de color, que es útil, por ejemplo, cuando se conducen vehículos grandes.
-\n
-\nY proporciona opciones especiales de turismo, como mostrar las rutas ciclistas o rutas de montaña alpina.
-\n
-\nNo es necesario descargar un mapa especial, la vista es creada a partir de nuestros mapas estándar.
-\n
-\nEsta vista puede revertirse desactivando de nuevo aquí, o cambiando el «Estilo del mapa» desde «Configurar mapa» cuando lo desees.</string>
+    <string name="plugin_touringview_descr">Activando esta vista, el estilo del mapa OsmAnd cambia a la «Vista turística», una vista de alto detalle especial para viajeros y conductores profesionales. \n \nEsta vista proporciona, en cualquier nivel de zoom del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente carreteras, senderos, caminos y marcas de orientación). \n \nTambién representa claramente todos los tipos de caminos sin ambigüedades por códigos de color, útil, por ejemplo, cuando se conducen vehículos grandes. \n \nY proporciona opciones especiales de turismo, como mostrar las rutas ciclistas o rutas de montaña alpina. \n \nNo es necesario descargar un mapa especial, la vista se crea a partir de nuestros mapas estándar. \n \nEsta vista puede revertirse desactivando de nuevo aquí, o cambiando el «Estilo del mapa» desde «Configurar mapa» cuando lo desees.</string>
     <string name="plugin_nautical_descr">Enriquece el mapa con información sobre rutas náuticas, marcas de navegación náutica, áreas marinas peligrosas, zonas restringidas para navegar o atracar, etc. Para usarlo, descarga los respectivos mapas náuticos y activa el estilo «Mapa náutico» en «Configurar mapa».
 \n
 \nVéase - %1$s.</string>
@@ -1675,7 +1665,7 @@
     <string name="go_to_map">Mostrar mapa</string>
     <string name="shared_string_qr_code">Código QR</string>
     <string name="enter_country_name">Escribe el nombre del país</string>
-    <string name="world_map_download_descr">El mapa base mundial (abarca todo el mundo en zums pequeños), falta o está desactualizado. Considera descargarlo para una vista global.</string>
+    <string name="world_map_download_descr">El mapa base mundial (abarca todo el mundo en zums pequeños), falta o está desactualizado. Considerá descargarlo para una vista global.</string>
     <string name="new_version">Nueva versión</string>
     <string name="begin_with_osmand_menu_group">Primeros pasos con OsmAnd</string>
     <string name="features_menu_group">Características</string>
@@ -2231,13 +2221,13 @@
     <string name="quick_action_replace_destination_desc">Un botón para hacer del centro de pantalla el nuevo destino de ruta, reemplazando el anterior destino (si existe).</string>
     <string name="quick_action_add_first_intermediate_desc">Un botón para hacer del centro de pantalla el primer destino intermedio.</string>
     <string name="shared_string_paused">Pausado</string>
-    <string name="type_city_town">Escribe la ciudad, pueblo o localidad</string>
-    <string name="type_postcode">Escribe el código postal</string>
+    <string name="type_city_town">Escribí la ciudad, pueblo o localidad</string>
+    <string name="type_postcode">Escribí el código postal</string>
     <string name="nearest_cities">Ciudades cercanas</string>
-    <string name="select_city">Elegir la ciudad o pueblo</string>
+    <string name="select_city">Elegí la ciudad o pueblo</string>
     <string name="select_postcode">Buscar por código postal</string>
-    <string name="type_address">Escribe la dirección</string>
-    <string name="select_street">Elegir la calle</string>
+    <string name="type_address">Escribí la dirección</string>
+    <string name="select_street">Elegí la calle</string>
     <string name="shared_string_in_name">en %1$s</string>
     <string name="shared_string_overview">Resumen</string>
     <string name="animate_my_location">Ubicación propia animada</string>
@@ -2252,11 +2242,11 @@
     <string name="routing_attr_allow_private_description">Permite acceder a áreas privadas.</string>
     <string name="display_zoom_level">Nivel de zum de pantalla: %1$s</string>
     <string name="route_is_too_long_v2">Para largas distancias: Añade destinos intermedios si no se encuentra ninguna ruta en 10 minutos.</string>
-    <string name="srtm_menu_download_descr">Descarga el mapa de «Curvas de nivel» de esta región.</string>
+    <string name="srtm_menu_download_descr">Descargá el mapa de «Curvas de nivel» de esta región.</string>
     <string name="shared_string_plugin">Complemento</string>
-    <string name="srtm_purchase_header">Compra e instala el complemento «Topografía» para mostrar áreas verticales graduadas.</string>
-    <string name="hillshade_menu_download_descr">Descarga la capa superpuesta del mapa «Sombreado» para mostrar el sombreado vertical.</string>
-    <string name="hillshade_purchase_header">Instala el complemento «Topografía» para mostrar las áreas verticales graduadas.</string>
+    <string name="srtm_purchase_header">Comprá e instalá el complemento «Topografía» para mostrar áreas verticales graduadas.</string>
+    <string name="hillshade_menu_download_descr">Descargá la capa superpuesta del mapa «Sombreado» para mostrar el sombreado vertical.</string>
+    <string name="hillshade_purchase_header">Instalá el complemento «Topografía» para mostrar las áreas verticales graduadas.</string>
     <string name="hide_from_zoom_level">Ocultar desde el nivel de zum</string>
     <string name="quick_action_showhide_osmbugs_descr">Un botón que muestra u oculta las notas de OSM en el mapa.</string>
     <string name="sorted_by_distance">Ordenados por distancia</string>
@@ -2264,7 +2254,7 @@
     <string name="restart_search">Reiniciar búsqueda</string>
     <string name="increase_search_radius">Aumentar radio de búsqueda</string>
     <string name="nothing_found">Nada encontrado</string>
-    <string name="nothing_found_descr">Cambiar la búsqueda o aumentar su radio.</string>
+    <string name="nothing_found_descr">Cambiá la búsqueda o aumentá su radio.</string>
     <string name="private_access_routing_req">El destino se ubica en un área de acceso privado. ¿Permitir el uso de caminos privados para este viaje\?</string>
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Widget de Mapillary</string>
@@ -2272,7 +2262,7 @@
     <string name="mapillary_descr">Fotos a nivel de calle en línea para todos. Descubrí sitios, colaborá, capturá el mundo.</string>
     <string name="shared_string_add_photos">Agregar fotos</string>
     <string name="mapillary_action_descr">Compartí tus imágenes a nivel de calle a través de Mapillary.</string>
-    <string name="plugin_mapillary_descr">Imágenes de vistas a nivel de calle. También puedes contribuir tú mismo. Para ver los datos existentes como una capa en el mapa, activa las «Imágenes a nivel de calle» en el menú «Configurar mapa».</string>
+    <string name="plugin_mapillary_descr">Imágenes de vistas a nivel de calle. También podés contribuir vos mismo. Para ver los datos existentes como una capa en el mapa, activá las «Imágenes a nivel de calle» en el menú «Configurar mapa».</string>
     <string name="online_photos">Fotos en línea</string>
     <string name="no_photos_descr">Sin fotos aquí.</string>
     <string name="shared_string_install">Instalar</string>
