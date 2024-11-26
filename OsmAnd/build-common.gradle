@@ -153,7 +153,7 @@ tasks.register('collectVoiceAssets', Sync) {
 }
 
 tasks.register('collectFonts', Copy) {
-	from "../../resources/rendering_styles/fonts"
+	from "../../rendering_styles/fonts"
 //	from "../../resources/rendering_styles/fonts/OpenSans"
 	into "assets/fonts"
 	include "*.ttf"
