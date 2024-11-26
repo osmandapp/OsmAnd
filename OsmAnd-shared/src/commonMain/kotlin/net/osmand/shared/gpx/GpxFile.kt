@@ -755,27 +755,27 @@ class GpxFile : GpxExtensions {
 		val dest = GpxFile(this.author)
 		dest.metadata = Metadata(this.metadata)
 		val tracks = dest.tracks
-		for (track in this.tracks) {
+		for (track in this.tracks.toList()) {
 			tracks.add(cloneTrack(track))
 		}
 		val routes = dest.routes
-		for (route in this.routes) {
+		for (route in this.routes.toList()) {
 			routes.add(cloneRoute(route))
 		}
 		val points = mutableListOf<WptPt>()
-		for (point in this.points) {
+		for (point in this.points.toList()) {
 			points.add(WptPt(point))
 		}
 		dest.setPointsList(points)
 
 		dest.pointsGroups = LinkedHashMap()
 		val pointsGroups = dest.pointsGroups
-		for ((key, value) in this.pointsGroups.entries) {
+		for ((key, value) in this.pointsGroups.toMap().entries) {
 			pointsGroups[key] = clonePointsGroup(value)
 		}
 		dest.pointsGroups = pointsGroups
 
-		dest.addRouteKeyTags(this.getRouteKeyTags())
+		dest.addRouteKeyTags(this.getRouteKeyTags().toMap())
 
 		dest.path = this.path
 		dest.showCurrentTrack = this.showCurrentTrack
@@ -793,7 +793,7 @@ class GpxFile : GpxExtensions {
 		dest.desc = source.desc
 		dest.generalTrack = source.generalTrack
 		val trkSegments = mutableListOf<TrkSegment>()
-		for (segment in source.segments) {
+		for (segment in source.segments.toList()) {
 			trkSegments.add(cloneTrkSegment(segment))
 		}
 		dest.segments = trkSegments
@@ -806,7 +806,7 @@ class GpxFile : GpxExtensions {
 		dest.name = source.name
 		dest.desc = source.desc
 		val points = mutableListOf<WptPt>()
-		for (point in source.points) {
+		for (point in source.points.toList()) {
 			points.add(WptPt(point))
 		}
 		dest.points = points
@@ -818,7 +818,7 @@ class GpxFile : GpxExtensions {
 		val dest = PointsGroup(source.name, source.iconName, source.backgroundType, source.color)
 		dest.hidden = source.hidden
 		val points = mutableListOf<WptPt>()
-		for (point in source.points) {
+		for (point in source.points.toList()) {
 			points.add(WptPt(point))
 		}
 		dest.points = points
@@ -830,17 +830,17 @@ class GpxFile : GpxExtensions {
 		dest.name = source.name
 		dest.generalSegment = source.generalSegment
 		val kPoints = mutableListOf<WptPt>()
-		for (point in source.points) {
+		for (point in source.points.toList()) {
 			kPoints.add(WptPt(point))
 		}
 		dest.points = kPoints
 		val routeSegments = mutableListOf<RouteSegment>()
-		for (rs in source.routeSegments) {
+		for (rs in source.routeSegments.toList()) {
 			routeSegments.add(cloneRouteSegment(rs))
 		}
 		dest.routeSegments = routeSegments
 		val routeTypes = mutableListOf<RouteType>()
-		for (rt in source.routeTypes) {
+		for (rt in source.routeTypes.toList()) {
 			routeTypes.add(cloneRouteType(rt))
 		}
 		dest.routeTypes = routeTypes

@@ -69,18 +69,18 @@
     <string name="bt_start_pair_failed">Can\'t initiate pairing with device</string>
     <string name="speedometer_maximum">Maximum</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Shows vehicle fuel consumption rate based on calculations (%/h)</string>
-    <string name="l_100km">l/100km</string>
-    <string name="obd_fuel_consumption_rate_l_km">Fuel consumption rate (l/km)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Shows vehicle fuel consumption rate based on calculations (l/km)</string>
+    <string name="l_100km">L/100km</string>
+    <string name="obd_fuel_consumption_rate_l_km">Fuel consumption rate (L/km)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Shows vehicle fuel consumption rate based on calculations (L/km)</string>
     <string name="simulate_obd">Simulate obd data</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Fuel pressure</string>
     <string name="liter">l</string>
     <string name="percent_hour">%/h</string>
-    <string name="obd_fuel_consumption_rate_l_h">Fuel consumption rate (l/h)</string>
+    <string name="obd_fuel_consumption_rate_l_h">Fuel consumption rate (L/h)</string>
     <string name="obd_fuel_consumption_rate_sensor">Fuel consumption rate (sensor)</string>
-    <string name="obd_fuel_consumption_rate_l_h_desc">Shows vehicle fuel consumption rate based on calculations (l/h)</string>
-    <string name="obd_fuel_consumption_rate_sensor_desc">Shows vehicle fuel consumption rate based on sensor (l/h)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Shows vehicle fuel consumption rate based on calculations (L/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Shows vehicle fuel consumption rate based on sensor (L/h)</string>
 
     <string name="obd_fuel_level_liter">Fuel level (l)</string>
     <string name="obd_fuel_level_percent">Fuel level (%)</string>
@@ -88,7 +88,7 @@
     <string name="obd_fuel_left_liter">Fuel left (l)</string>
     <string name="obd_fuel_left_km">Fuel left (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Fuel consumption rate (obd)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">Fuel consumption rate l/h</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Fuel consumption rate L/h</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Fuel consumption rate %/h</string>
 
     <string name="route_guidance_desc">Provides real-time route guidance, including distance to the next turn, road name, current street name, and lane information. Widgets are active during navigation.</string>
@@ -139,7 +139,7 @@ You will be able to pair this scanner again at any time.</string>
         • Added a tappable icon to display access or other road or path attributes\n\n
     </string>
     <string name="quick_action_showhide_osm_edits_descr">Button to show or hide local OSM edits on the map.</string>
-	<string name="liter_per_hour">l/h</string>
+	<string name="liter_per_hour">L/h</string>
 	<string name="lock_screen_description">Enables or disables touch screen functionality to prevent accidental taps</string>
 	<string name="lock_screen">Lock screen</string>
     <string name="track_does_not_contain_data_to_save">Track doesn\'t contain data to save.</string>
@@ -233,16 +233,11 @@ You will be able to pair this scanner again at any time.</string>
 
 
     <string name="obd_plugin_name">Vehicle Metrics</string>
-    <string name="obd_plugin_description">Monitor key vehicle metrics using the OBD-II protocol. Access data including:
-* Engine speed
-* Fuel consumption
-* Remaining fuel
-* Distance since engine start
-* Intake temperature
-* Ambient temperature
-* Coolant temperature
-* Vehicle speed
-* Battery percentage</string>
+    <string name="obd_plugin_description">Monitor key vehicle metrics using the OBD-II protocol. Access data including:\n
+    • Engine speed, Engine Runtime, Calculated Engine Load \n
+    • Fuel consumption, Fuel pressure, Remaining fuel\n
+    • Intake temperature, Ambient temperature, Coolant temperature, Engine Oil Temperature\n
+    • Vehicle speed, Throttle Position, Battery voltage\n</string>
     <string name="obd_support">OBD support</string>
     <string name="background_opacity">Background opacity</string>
     <string name="corner_radius">Corner radius</string>

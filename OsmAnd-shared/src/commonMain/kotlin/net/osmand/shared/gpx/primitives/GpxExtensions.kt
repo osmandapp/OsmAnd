@@ -50,7 +50,7 @@ open class GpxExtensions {
 	}
 
 	fun copyExtensions(e: GpxExtensions) {
-		val extensionsToRead = e.getExtensionsToRead()
+		val extensionsToRead = e.getExtensionsToRead().toMap()
 		if (extensionsToRead.isNotEmpty()) {
 			getExtensionsToWrite().putAll(extensionsToRead)
 		}

@@ -179,6 +179,7 @@ object SharedUtil {
 
 	@JvmStatic
 	fun jGpxFile(gpxFile: GpxFile): GPXFile {
+		val gpxFile = gpxFile.clone()
 		val jGpxFile = GPXFile(gpxFile.author)
 		jGpxFile.path = gpxFile.path
 		jGpxFile.metadata = jMetadata(gpxFile.metadata)

@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
@@ -84,6 +85,8 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 
 	private boolean deleted;
 
+	private SearchPoiAdditionalFilter additionalFilter;
+
 	// constructor for standard filters
 	public PoiUIFilter(@Nullable AbstractPoiType type, @NonNull OsmandApplication app, @NonNull String idSuffix) {
 		this.app = app;
@@ -111,6 +114,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		filterId = topIndexFilter.getFilterId();
 		this.name = topIndexFilter.getName();
 		poiTypes = app.getPoiTypes();
+		additionalFilter = topIndexFilter;
 
 		if (acceptedTypes == null) {
 			initSearchAll();
@@ -385,7 +389,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	                                                double bottomLatitude, double leftLongitude,
 	                                                double rightLongitude, int zoom,
 	                                                ResultMatcher<Amenity> matcher) {
-		return app.getResourceManager().searchAmenities(this, topLatitude, leftLongitude,
+		return app.getResourceManager().searchAmenities(this, additionalFilter, topLatitude, leftLongitude,
 				bottomLatitude, rightLongitude, zoom, true, wrapResultMatcher(matcher));
 	}
 

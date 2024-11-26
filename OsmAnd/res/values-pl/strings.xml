@@ -969,7 +969,7 @@
     <string name="use_magnetic_sensor_descr">Wykorzystuje czujnik pola magnetycznego zamiast czujnika orientacji, w celu określania kierunku kompasu.</string>
     <string name="use_magnetic_sensor">Używanie czujnika magnetycznego</string>
     <string name="local_indexes_cat_srtm">Poziomice</string>
-    <string name="use_kalman_filter_compass_descr">Zmniejsza hałas w odczytach kompasu, ale dodaje bezwładność.</string>
+    <string name="use_kalman_filter_compass_descr">Zmniejsza zakłócenia w odczytach kompasu, ale dodaje bezwładność.</string>
     <string name="use_kalman_filter_compass">Używanie filtra Kalmana</string>
     <string name="wait_current_task_finished">Proszę zaczekać, aż bieżące zadanie zostanie zakończone</string>
     <string name="shared_string_downloading">Pobieranie…</string>
@@ -5403,7 +5403,7 @@
     <string name="empty_name">Pusta nazwa</string>
     <string name="edit_filter">Edycja filtra</string>
     <string name="save_as_smart_folder">Zapisz jako mądry folder</string>
-    <string name="delete_smart_folder_dialog_message">Spowoduje to usunięcie mądrego folderu „%1$s”.</string>
+    <string name="delete_smart_folder_dialog_message">Spowoduje to usunięcie inteligentnego folderu „%1$s”. (Żadne ścieżki nie zostaną usunięte.)</string>
     <string name="release_4_5">• Czujniki BLE/ANT+: przerobione połączenie, zapis i przeglądanie otrzymanych danych do GPX
 \n
 \n • Bezpłatna kopia zapasowa ulubionych i ustawień w „OsmAnd Cloud”
@@ -5457,7 +5457,7 @@
     <string name="no_config_smart_folder_description">Mądre foldery pozwalają grupować trasy według zastosowanych filtrów</string>
     <string name="loading_tracks">Ponowne wczytywanie tras</string>
     <string name="searching_matching_tracks">Wyszukaj wszystkie pasujące trasy</string>
-    <string name="cloud_trash_clear_confirmation">Czy na pewno chcesz trwale usunąć wszystkie elementy z Kosza? Tej czynności nie można cofnąć.</string>
+    <string name="cloud_trash_clear_confirmation">Trwale usunąć wszystkie elementy z kosza?</string>
     <string name="restore_from_trash">Przywróć z kosza</string>
     <string name="delete_all_items">Usuń wszystkie elementy</string>
     <string name="trash_is_empty_banner_desc">Pliki usunięte z OsmAnd Cloud będą dostępne tutaj przez %1$s dni.</string>
@@ -5678,7 +5678,7 @@
     <string name="upward_gradient">Nachylenie w górę</string>
     <string name="route_line_use_coloring_speed">Linia trasy jest kolorowana według prędkości ruchu.</string>
     <string name="change_default_tracks_appearance_confirmation">Zastosować zmiany do istniejących ścieżek w folderze czy tylko do nowych?</string>
-    <string name="fix_north_up_descr">Nie obracaj mapy za pomocą gestów w orientacji północnej.</string>
+    <string name="fix_north_up_descr">Nie obracaj mapy za pomocą gestów w orientacji Północ na górze</string>
     <string name="upload_local_versions">Prześlij wersje lokalne</string>
     <string name="download_cloud_versions">Pobieranie wersji chmurowych</string>
     <string name="weather_source_GFS_description">Globalny system prognoz z Krajowych Centrów Prognoz Środowiskowych</string>
@@ -5747,4 +5747,26 @@
     <string name="shared_string_decrease">Zmniejsz</string>
     <string name="shared_string_increase">Zwiększ</string>
     <string name="no_photos_available">Brak dostępnych zdjęć</string>
+    <string name="shared_string_volume">Objętość</string>
+    <string name="obd_throttle_position">Pozycja pedału przepustnicy</string>
+    <string name="record_obd_data">Rejestruj metryki pojazdu</string>
+    <string name="unit_of_volume_description">Wybrane jednostki zostaną zastosowane do wszystkich danych powiązanych z objętością w aktualnie wybranym profilu.</string>
+    <string name="shared_string_engine">Silnik</string>
+    <string name="quick_action_remove_next_destination">Następny punkt docelowy</string>
+    <string name="reset_average_value">Zresetuj średnią wartość</string>
+    <string name="obd_fuel_consumption">Zużycie paliwa</string>
+    <string name="driving_region_uk">Wielka Brytania i podobne</string>
+    <string name="tracker_item">OsmAnd tracker</string>
+    <string name="quick_action_map_style">Styl mapy</string>
+    <string name="obd_engine_oil_temperature">Temperatura oleju silnikowego</string>
+    <string name="quick_action_photo_note">Uwaga fotograficzna</string>
+    <string name="auto_zoom_3d_angle">Automatyczny zoom kąta 3D</string>
+    <string name="av_audio_sample_rate">Częstotliwość próbkowania dźwięku</string>
+    <string name="av_audio_sample_rate_descr">Wybierz częstotliwość próbkowania dźwięku.</string>
+    <string name="connect_new_scanner">Podłącz nowy skaner</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="obd_engine_coolant_temp_desc">Pokazuje temperaturę płynu chłodzącego silnik</string>
+    <string name="quick_action_map_overlay">Nakładka</string>
+    <string name="vehicle_metrics_recording_description">Wybierz parametry, które mają zostać zapisane w pliku GPX.</string>
+    <string name="battery_saving_mode">Tryb oszczędzania baterii</string>
 </resources>

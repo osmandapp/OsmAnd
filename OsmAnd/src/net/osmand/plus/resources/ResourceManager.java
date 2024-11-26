@@ -27,6 +27,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.binary.CachedOsmandIndexes;
 import net.osmand.data.Amenity;
@@ -1176,18 +1177,30 @@ public class ResourceManager {
 
 	@NonNull
 	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter, QuadRect rect, boolean includeTravel) {
-		return searchAmenities(filter, rect.top, rect.left, rect.bottom, rect.right, -1, includeTravel, null);
+		return searchAmenities(filter, null, rect.top, rect.left, rect.bottom, rect.right, -1, includeTravel, null);
 	}
 
 	@NonNull
-	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter, double topLatitude,
-	                                     double leftLongitude, double bottomLatitude,
-	                                     double rightLongitude, int zoom, boolean includeTravel,
-	                                     ResultMatcher<Amenity> matcher) {
+	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter, double top,
+										 double left, double bottom,
+										 double right, int zoom, boolean includeTravel,
+										 ResultMatcher<Amenity> matcher) {
+		return searchAmenities(filter, null, top, left, bottom, right, zoom, includeTravel, matcher);
+	}
+
+	@NonNull
+	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter, SearchPoiAdditionalFilter additionalFilter, double topLatitude,
+										 double leftLongitude, double bottomLatitude,
+										 double rightLongitude, int zoom, boolean includeTravel,
+										 ResultMatcher<Amenity> matcher) {
 		List<Amenity> amenities = new ArrayList<>();
 		searchAmenitiesInProgress = true;
 		try {
-			if (!filter.isEmpty()) {
+			boolean isEmpty = filter.isEmpty();
+			if (isEmpty && additionalFilter != null) {
+				filter = null;
+			}
+			if (!isEmpty || additionalFilter != null) {
 				int top31 = MapUtils.get31TileNumberY(topLatitude);
 				int left31 = MapUtils.get31TileNumberX(leftLongitude);
 				int bottom31 = MapUtils.get31TileNumberY(bottomLatitude);
@@ -1199,7 +1212,7 @@ public class ResourceManager {
 					}
 					if (index != null && index.checkContainsInt(top31, left31, bottom31, right31)) {
 						List<Amenity> r = index.searchAmenities(top31,
-								left31, bottom31, right31, zoom, filter, matcher);
+								left31, bottom31, right31, zoom, filter, additionalFilter, matcher);
 						if (r != null) {
 							amenities.addAll(r);
 						}
