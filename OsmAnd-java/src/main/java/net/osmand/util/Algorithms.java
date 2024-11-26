@@ -1349,4 +1349,26 @@ public class Algorithms {
 		return resultList.toArray(new String[resultList.size()]);
 	}
 
+	public static String trimNonAlphabetChars(String word) {
+		int start = 0;
+		int end = word.length();
+		for (int i = 0; i < word.length(); i++) {
+			char c = word.charAt(i);
+			if (!Character.isDigit(c) && !Character.isLetter(c)) {
+				start = i;
+			} else {
+				break;
+			}
+		}
+		for (int i = word.length() - 1; i > 0; i--) {
+			char c = word.charAt(i);
+			if (!Character.isDigit(c) && !Character.isLetter(c)) {
+				end = i;
+			} else {
+				break;
+			}
+		}
+		return word.substring(start, end);
+	}
+
 }
