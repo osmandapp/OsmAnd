@@ -36,6 +36,8 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.profileappearance.ProfileAppearanceFragment;
 import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandler;
 import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandlerProvider;
+import net.osmand.plus.settings.fragments.search.SearchDatabaseStatusHandler;
+import net.osmand.plus.settings.fragments.search.SetStringPreference;
 import net.osmand.plus.settings.fragments.search.SettingsSearchButtonHelper;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.settings.purchase.PurchasesFragment;
@@ -306,7 +308,10 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		final SettingsSearchButtonHelper settingsSearchButtonHelper =
 				new SettingsSearchButtonHelper(
 						this,
-						R.id.fragmentContainer);
+						R.id.fragmentContainer,
+						new SearchDatabaseStatusHandler(
+								new SetStringPreference(
+										app.getSettings().PLUGINS_COVERED_BY_SETTINGS_SEARCH)));
 		settingsSearchButtonHelper.configureSearchPreferenceButton(view.findViewById(R.id.action_button));
 	}
 }

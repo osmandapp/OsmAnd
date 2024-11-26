@@ -84,10 +84,37 @@ import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.menuitems.ContextMenuItemsSettings;
 import net.osmand.plus.settings.backend.menuitems.DrawerMenuItemsSettings;
 import net.osmand.plus.settings.backend.menuitems.MainContextMenuItemsSettings;
-import net.osmand.plus.settings.backend.preferences.*;
+import net.osmand.plus.settings.backend.preferences.BooleanAccessibilityPreference;
+import net.osmand.plus.settings.backend.preferences.BooleanPreference;
+import net.osmand.plus.settings.backend.preferences.BooleanStringPreference;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.ContextMenuItemsPreference;
+import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
+import net.osmand.plus.settings.backend.preferences.FloatPreference;
+import net.osmand.plus.settings.backend.preferences.IntPreference;
+import net.osmand.plus.settings.backend.preferences.ListStringPreference;
+import net.osmand.plus.settings.backend.preferences.LongPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.backend.preferences.PreferenceWithListener;
+import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 import net.osmand.plus.settings.backend.storages.IntermediatePointsStorage;
-import net.osmand.plus.settings.enums.*;
+import net.osmand.plus.settings.enums.AngularConstants;
+import net.osmand.plus.settings.enums.ApproximationType;
+import net.osmand.plus.settings.enums.AutoZoomMap;
+import net.osmand.plus.settings.enums.CompassMode;
+import net.osmand.plus.settings.enums.DayNightMode;
+import net.osmand.plus.settings.enums.DistanceByTapTextSize;
+import net.osmand.plus.settings.enums.DrivingRegion;
+import net.osmand.plus.settings.enums.HistorySource;
+import net.osmand.plus.settings.enums.LocationSource;
+import net.osmand.plus.settings.enums.MarkerDisplayOption;
+import net.osmand.plus.settings.enums.RoutingType;
+import net.osmand.plus.settings.enums.SimulationMode;
+import net.osmand.plus.settings.enums.SpeedLimitWarningState;
+import net.osmand.plus.settings.enums.TrackApproximationType;
+import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
@@ -95,10 +122,10 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.shared.settings.enums.MetricsConstants;
-import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.shared.routing.ColoringType;
+import net.osmand.shared.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -107,8 +134,19 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.StringTokenizer;
 
 public class OsmandSettings {
 
@@ -1622,6 +1660,7 @@ public class OsmandSettings {
 
 	public final CommonPreference<String> GRADIENT_PALETTES = new StringPreference(this, "gradient_color_palettes", null).makeGlobal().makeShared();
 	public final ListStringPreference LAST_USED_FAV_ICONS = (ListStringPreference) new ListStringPreference(this, "last_used_favorite_icons", null, ",").makeShared().makeGlobal();
+	public final ListStringPreference PLUGINS_COVERED_BY_SETTINGS_SEARCH = (ListStringPreference) new ListStringPreference(this, "plugins_covered_by_settings_search", null, ",").makeGlobal().makeShared();
 
 	public final CommonPreference<Integer> SAVE_TRACK_INTERVAL = new IntPreference(this, "save_track_interval", 5000).makeProfile();
 
@@ -2394,7 +2433,7 @@ public class OsmandSettings {
 	}
 
 	public void setMapLocationToShow(double latitude, double longitude, int zoom, PointDescription pointDescription,
-	                                 boolean addToHistory, Object toShow) {
+									 boolean addToHistory, Object toShow) {
 		SettingsEditor edit = settingsAPI.edit(globalPreferences);
 		edit.putFloat(MAP_LAT_TO_SHOW, (float) latitude);
 		edit.putFloat(MAP_LON_TO_SHOW, (float) longitude);

@@ -18,11 +18,14 @@ public class SettingsSearchButtonHelper {
 
 	private final BaseSettingsFragment rootSearchPreferenceFragment;
 	private final @IdRes int fragmentContainerViewId;
+	private final SearchDatabaseStatusHandler searchDatabaseStatusHandler;
 
 	public SettingsSearchButtonHelper(final BaseSettingsFragment rootSearchPreferenceFragment,
-									  final @IdRes int fragmentContainerViewId) {
+									  final @IdRes int fragmentContainerViewId,
+									  final SearchDatabaseStatusHandler searchDatabaseStatusHandler) {
 		this.rootSearchPreferenceFragment = rootSearchPreferenceFragment;
 		this.fragmentContainerViewId = fragmentContainerViewId;
+		this.searchDatabaseStatusHandler = searchDatabaseStatusHandler;
 	}
 
 	public void configureSearchPreferenceButton(final ImageView searchPreferenceButton) {
@@ -33,7 +36,13 @@ public class SettingsSearchButtonHelper {
 
 	private void onClickShowSearchPreferenceFragment(final ImageView searchPreferenceButton) {
 		final SearchPreferenceFragments searchPreferenceFragments = createSearchPreferenceFragments();
-		searchPreferenceButton.setOnClickListener(v -> searchPreferenceFragments.showSearchPreferenceFragment());
+		searchPreferenceButton.setOnClickListener(v -> {
+			if (!searchDatabaseStatusHandler.isSearchDatabaseUpToDate()) {
+				searchPreferenceFragments.rebuildSearchDatabase();
+				searchDatabaseStatusHandler.setSearchDatabaseUpToDate();
+			}
+			searchPreferenceFragments.showSearchPreferenceFragment();
+		});
 	}
 
 	private SearchPreferenceFragments createSearchPreferenceFragments() {
