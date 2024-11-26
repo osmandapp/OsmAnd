@@ -5196,7 +5196,7 @@
     <string name="tracks_empty_folder">Порожня тека</string>
     <string name="track_not_recorded">Не записано</string>
     <string name="shared_string_new_track">Новий трек</string>
-    <string name="shared_string_visible_on_map">Показати на мапі</string>
+    <string name="shared_string_visible_on_map">Видно на карті</string>
     <string name="delete_track_folder_dialog_message">Теку \"%1$s\" буде видалено разом з усіма %2$s треками, що в ній містяться.</string>
     <string name="delete_folder_question">Вилучити теку\?</string>
     <string name="delete_folder">Вилучити теку</string>
