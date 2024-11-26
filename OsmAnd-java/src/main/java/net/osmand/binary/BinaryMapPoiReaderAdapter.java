@@ -973,7 +973,7 @@ public class BinaryMapPoiReaderAdapter {
 					}
 				}
 				subtype = poiTypes.replaceDeprecatedSubtype(type, subtype);
-				if (req.poiTypeFilter.accept(type, subtype)) {
+				if (req.poiTypeFilter != null && req.poiTypeFilter.accept(type, subtype)) {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 					return true;
 				}
