@@ -5509,7 +5509,7 @@
     <string name="obd_fuel_consumption_rate_desc">Megjeleníti az üzemanyag-fogyasztást az OBD adatai alapján</string>
     <string name="obd_fuel_left_distance">Maradék üzemanyag (távolság)</string>
     <string name="obd_fuel_type">Üzemanyagtípus</string>
-    <string name="obd_plugin_description">Kövesse nyomon a legfontosabb járműmutatókat az OBD-II protokoll segítségével. Hozzáférhet az alábbi adatokhoz: * Motor fordulatszám * Üzemanyag-fogyasztás * Maradék üzemanyag * A motor indítása óta megtett távolság * Beszívott levegő hőmérséklete * Környezeti hőmérséklet * Hűtőfolyadék hőmérséklete * A jármű sebessége * Akkumulátor töltöttsége</string>
+    <string name="obd_plugin_description">Kövesse nyomon a legfontosabb járműmutatókat az OBD-II protokoll segítségével. Hozzáférhet az alábbi adatokhoz:\n• Motor fordulatszám, a motor indítása óta eltelt idő, számított motorterhelés\n• Üzemanyag-fogyasztás, üzemanyag nyomása, maradék üzemanyag\n• Beszívott levegő hőmérséklete, környezeti hőmérséklet, hűtőfolyadék hőmérséklete, motorolaj hőmérséklete\n• Jármű sebessége, fojtószelep pozíciója, akkumulátor töltöttsége\n</string>
     <string name="obd_support">OBD támogatás</string>
     <string name="obd_plugin_name">Járműmetrika</string>
     <string name="obd_fuel_type_bifuel_hydrogen">Hidrogénnel működő Bifuel</string>
