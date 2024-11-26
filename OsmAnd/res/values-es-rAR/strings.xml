@@ -2366,8 +2366,8 @@
     <string name="empty_state_markers_history_desc">Los marcadores descartados aparecerán en esta pantalla.</string>
     <string name="shared_string_two">Dos</string>
     <string name="shared_string_one">Uno</string>
-    <string name="show_guide_line_descr">Muestra líneas direccionales desde tu ubicación hasta los marcadores activos.</string>
-    <string name="show_arrows_descr">Muestra una o dos flechas indicando la dirección a los marcadores activos.</string>
+    <string name="show_guide_line_descr">Mostrá líneas direccionales desde tu ubicación hasta los marcadores activos.</string>
+    <string name="show_arrows_descr">Mostrá una o dos flechas indicando la dirección a los marcadores activos.</string>
     <string name="distance_indication_descr">Elegí cómo mostrar la distancia a los marcadores activos.</string>
     <string name="active_markers_descr">Definí el número de indicadores de dirección.</string>
     <string name="appearance_on_the_map">Aspecto en el mapa</string>
