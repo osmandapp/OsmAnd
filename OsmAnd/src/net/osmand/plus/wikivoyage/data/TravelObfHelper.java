@@ -1290,6 +1290,12 @@ public class TravelObfHelper implements TravelHelper {
 			if (!Algorithms.isEmpty(article.description)) {
 				gpxFile.getMetadata().setDesc(article.description);
 			}
+			final String[] cleanupByPresenceTags = { "ref", "name", "description" }; // osm_ref_present, etc
+			for (String tag : cleanupByPresenceTags) {
+				if (!gpxFileExtensions.containsKey("osm_" + tag + "_present")) {
+					gpxFileExtensions.remove(OSM_PREFIX + tag);
+				}
+			}
 		} else {
 			String description = article.getDescription();
 			String title = FileUtils.isValidFileName(description) ? description : article.getTitle();
@@ -1328,7 +1334,9 @@ public class TravelObfHelper implements TravelHelper {
 			}
 			gpxFile.setTracks(new ArrayList<>());
 			gpxFile.getTracks().add(track);
-			gpxFile.setRef(article.ref);
+			if (!(article instanceof TravelGpx)) {
+				gpxFile.setRef(article.ref);
+			}
 			gpxFile.setHasAltitude(hasAltitude);
 			if (gpxFileExtensions.containsKey(GpxUtilities.ACTIVITY_TYPE)) {
 				gpxFile.getMetadata().getExtensionsToWrite()
