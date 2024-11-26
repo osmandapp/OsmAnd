@@ -328,7 +328,7 @@ public class RouteDataObject {
 				int k = kt[i];
 				if (region.routeEncodingRules.size() > k) {
 					if (refTag.equals(region.routeEncodingRules.get(k).getTag())) {
-						return names.get(k);
+						return clearRef(names.get(k));
 					}
 					if (refTagDefault.equals(region.routeEncodingRules.get(k).getTag())) {
 						refDefault = names.get(k);
@@ -336,7 +336,7 @@ public class RouteDataObject {
 				}
 			}
 			if (refDefault != null) {
-				return refDefault;
+				return clearRef(refDefault);
 			}
 			//return names.get(region.refTypeRule);
 		}
@@ -1167,5 +1167,17 @@ public class RouteDataObject {
 			}
 		}
 		return false;
+	}
+
+	private String clearRef(String ref) {
+		String[] arr = ref.split(";");
+		String res = "";
+		for (String s : arr) {
+			if (!res.isEmpty()) {
+				res += ";";
+			}
+			res += s;
+		}
+		return res;
 	}
 }
