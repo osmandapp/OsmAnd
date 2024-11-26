@@ -110,6 +110,12 @@ public class MapRendererContext {
 		}
 	}
 
+	public synchronized void suspendMapRendererView(@Nullable MapRendererView mapRendererView) {
+		if (this.mapRendererView != null && (mapRendererView == null || this.mapRendererView == mapRendererView)) {
+			this.mapRendererView.handleOnPause();
+		}
+	}
+
 	public synchronized void releaseMapRendererView(@Nullable MapRendererView mapRendererView) {
 		if (this.mapRendererView != null && (mapRendererView == null || this.mapRendererView == mapRendererView)) {
 			this.mapRendererView.stopRenderer();

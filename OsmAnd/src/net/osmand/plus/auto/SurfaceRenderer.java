@@ -339,10 +339,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 			if (surface != null && surface.isValid()) {
 				if (offscreenMapRendererView != null) {
 					MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
-					if (mapRendererContext != null) {
-						if (mapRendererContext.getMapRendererView() == offscreenMapRendererView) {
-							return;
-						}
+					if (mapRendererContext != null && mapRendererContext.getMapRendererView() != offscreenMapRendererView) {
 						offscreenMapRendererView = null;
 					}
 				}
@@ -350,22 +347,12 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 					MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
 					if (mapRendererContext != null) {
 						MapRendererView mapRendererView = null;
-						MapActivity mapActivity = getApp().getOsmandMap().getMapView().getMapActivity();
-						boolean keepRenderer = mapActivity != null && !mapActivity.isActivityStopped();
 						if (mapView != null && mapView.getMapRenderer() != null) {
-							if (keepRenderer) {
-								mapView.detachMapRenderer();
-							} else {
-								mapView.setMapRenderer(null);
-							}
+							mapView.detachMapRenderer();
 						}
 						if (mapRendererContext.getMapRendererView() != null) {
-							if (keepRenderer) {
 								mapRendererView = mapRendererContext.getMapRendererView();
 								mapRendererContext.setMapRendererView(null);
-							} else {
-								mapRendererContext.releaseMapRendererView(null);
-							}
 						}
 						NativeCoreContext.setMapRendererContext(getApp(), surfaceView.getDensity());
 						mapRendererContext = NativeCoreContext.getMapRendererContext();
@@ -398,24 +385,16 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	public synchronized void stopOffscreenRenderer() {
 		Log.i(TAG, "stopOffscreenRenderer");
 		if (offscreenMapRendererView != null) {
-			MapActivity mapActivity = getApp().getOsmandMap().getMapView().getMapActivity();
-			boolean keepRenderer = mapActivity != null && !mapActivity.isActivityStopped();
 			if (mapView != null) {
 				mapView.removeElevationListener(this);
 				mapView.getAnimatedDraggingThread().toggleAnimations();
 				if (mapView.getMapRenderer() == offscreenMapRendererView) {
-					if (keepRenderer) {
-						mapView.detachMapRenderer();
-					} else {
-						mapView.setMapRenderer(null);
-					}
+					mapView.detachMapRenderer();
 				}
 			}
-			if (!keepRenderer) {
-				MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
-				if (mapRendererContext != null) {
-					mapRendererContext.releaseMapRendererView(offscreenMapRendererView);
-				}
+			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+			if (mapRendererContext != null) {
+				 mapRendererContext.suspendMapRendererView(offscreenMapRendererView);
 			}
 			offscreenMapRendererView = null;
 		}
