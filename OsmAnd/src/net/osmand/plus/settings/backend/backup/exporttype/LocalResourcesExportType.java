@@ -2,12 +2,15 @@ package net.osmand.plus.settings.backend.backup.exporttype;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.local.LocalIndexHelper;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.resources.AssetsCollection;
 import net.osmand.plus.resources.ResourceManager;
+
+import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +19,8 @@ import java.util.Collections;
 import java.util.List;
 
 abstract class LocalResourcesExportType extends AbstractFileExportType {
+
+	private static final Log LOG = PlatformUtil.getLog(LocalResourcesExportType.class);
 
 	@NonNull
 	protected List<File> collectLocalResources(@NonNull OsmandApplication app) {
@@ -62,7 +67,8 @@ abstract class LocalResourcesExportType extends AbstractFileExportType {
 				Long version = assets.getVersionTime(file);
 				return version == null || version == file.lastModified();
 			}
-		} catch (IOException ignored) {
+		} catch (IOException e) {
+			LOG.error(e);
 		}
 		return false;
 	}
