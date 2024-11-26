@@ -5,6 +5,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.IdRes;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 
@@ -22,27 +23,32 @@ public class SettingsSearchButtonHelper {
 
 	public SettingsSearchButtonHelper(final BaseSettingsFragment rootSearchPreferenceFragment,
 									  final @IdRes int fragmentContainerViewId,
-									  final SearchDatabaseStatusHandler searchDatabaseStatusHandler) {
+									  final OsmandApplication app) {
 		this.rootSearchPreferenceFragment = rootSearchPreferenceFragment;
 		this.fragmentContainerViewId = fragmentContainerViewId;
-		this.searchDatabaseStatusHandler = searchDatabaseStatusHandler;
+		this.searchDatabaseStatusHandler =
+				new SearchDatabaseStatusHandler(
+						new SetStringPreference(
+								app.getSettings().PLUGINS_COVERED_BY_SETTINGS_SEARCH));
 	}
 
-	public void configureSearchPreferenceButton(final ImageView searchPreferenceButton) {
-		onClickShowSearchPreferenceFragment(searchPreferenceButton);
-		searchPreferenceButton.setImageDrawable(rootSearchPreferenceFragment.getIcon(R.drawable.searchpreference_ic_search));
-		searchPreferenceButton.setVisibility(View.VISIBLE);
+	public void configureSettingsSearchButton(final ImageView settingsSearchButton) {
+		onClickShowSearchPreferenceFragment(settingsSearchButton);
+		settingsSearchButton.setImageDrawable(rootSearchPreferenceFragment.getIcon(R.drawable.searchpreference_ic_search));
+		settingsSearchButton.setVisibility(View.VISIBLE);
 	}
 
 	private void onClickShowSearchPreferenceFragment(final ImageView searchPreferenceButton) {
 		final SearchPreferenceFragments searchPreferenceFragments = createSearchPreferenceFragments();
-		searchPreferenceButton.setOnClickListener(v -> {
-			if (!searchDatabaseStatusHandler.isSearchDatabaseUpToDate()) {
-				searchPreferenceFragments.rebuildSearchDatabase();
-				searchDatabaseStatusHandler.setSearchDatabaseUpToDate();
-			}
-			searchPreferenceFragments.showSearchPreferenceFragment();
-		});
+		searchPreferenceButton.setOnClickListener(v -> showSearchPreferenceFragment(searchPreferenceFragments));
+	}
+
+	private void showSearchPreferenceFragment(final SearchPreferenceFragments searchPreferenceFragments) {
+		if (!searchDatabaseStatusHandler.isSearchDatabaseUpToDate()) {
+			searchPreferenceFragments.rebuildSearchDatabase();
+			searchDatabaseStatusHandler.setSearchDatabaseUpToDate();
+		}
+		searchPreferenceFragments.showSearchPreferenceFragment();
 	}
 
 	private SearchPreferenceFragments createSearchPreferenceFragments() {
@@ -65,7 +71,7 @@ public class SettingsSearchButtonHelper {
 	private SearchConfiguration createSearchConfiguration() {
 		return new SearchConfiguration(
 				fragmentContainerViewId,
-				Optional.empty(),
+				Optional.of("Search Settings"),
 				rootSearchPreferenceFragment.getClass());
 	}
 }

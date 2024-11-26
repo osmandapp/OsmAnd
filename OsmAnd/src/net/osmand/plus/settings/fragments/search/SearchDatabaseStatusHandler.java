@@ -6,7 +6,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class SearchDatabaseStatusHandler {
+class SearchDatabaseStatusHandler {
 
 	private final SetStringPreference pluginsCoveredBySettingsSearch;
 
