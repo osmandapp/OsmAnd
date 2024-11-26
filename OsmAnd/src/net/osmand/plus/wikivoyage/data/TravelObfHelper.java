@@ -1141,15 +1141,30 @@ public class TravelObfHelper implements TravelHelper {
 		}
 	}
 
+	// Do not clutter GPX with tags that are only used to display OBF data.
 	private static final Set<String> avoidAmenityGpxTags = Set.of(
 			"date",
 			"distance",
 			"route_id",
 			"route_name",
-			"route_radius"
+			"route_radius",
+			"avg_ele",
+			"min_ele",
+			"max_ele",
+			"start_ele",
+			"ele_graph",
+			"diff_ele_up",
+			"diff_ele_down",
+			"avg_speed",
+			"min_speed",
+			"max_speed",
+			"time_moving",
+			"time_moving_no_gaps",
+			"time_span",
+			"time_span_no_gaps"
 	);
 
-	// name, ref, type, route will be processed in a special way
+	// Keep important tags. Note: name, ref, type, and route tags will be processed in a special way.
 	private static final Set<String> keepAsIsAmenityGpxTags = Set.of(
 			"osm_id",
 			"relation_gpx",
