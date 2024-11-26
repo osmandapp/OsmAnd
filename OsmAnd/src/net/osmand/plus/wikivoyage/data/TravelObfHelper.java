@@ -99,6 +99,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import gnu.trove.set.TLongSet;
@@ -1270,7 +1271,7 @@ public class TravelObfHelper implements TravelHelper {
 	@Nullable
 	private synchronized GpxFile buildGpxFile(@NonNull List<BinaryMapIndexReader> readers, TravelArticle article) {
 		List<BinaryMapDataObject> segmentList = new ArrayList<>();
-		Map<String, String> gpxFileExtensions = new HashMap<>();
+		Map<String, String> gpxFileExtensions = new TreeMap<>();
 		List<Amenity> pointList = new ArrayList<>();
 		List<String> pgNames = new ArrayList<>();
 		List<String> pgIcons = new ArrayList<>();
