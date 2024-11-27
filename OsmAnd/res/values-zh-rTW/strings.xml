@@ -5542,7 +5542,7 @@
     <string name="obd_fuel_left_distance">剩餘燃料（距離）</string>
     <string name="obd_fuel_type">燃料類型</string>
     <string name="obd_plugin_name">車輛尺度</string>
-    <string name="obd_plugin_description">使用 OBD-II 通訊協定監控主要車輛指標。存取的資料包括 * 引擎速度 * 油耗 * 剩餘燃料 * 引擎啟動距離 * 進氣溫度 * 環境溫度 * 冷卻溫度 * 車速 * 電池百分比</string>
+    <string name="obd_plugin_description">使用 OBD-II 通訊協定監控主要車輛指標：\n • 引擎速度、引擎運作時間、計算得出的引擎負載 \n • 燃料消耗率、燃料壓力、剩餘燃料\n • 進氣溫度、環境溫度、冷卻劑溫度、引擎機油溫度\n • 車速、油門位置、電池電壓\n</string>
     <string name="obd_support">OBD 支援</string>
     <string name="obd_vin">車輛識別號碼</string>
     <string name="obd_vin_desc">透過 OBD 讀取 VIN 碼</string>
@@ -5564,7 +5564,7 @@
     <string name="third_links">第三個連結</string>
     <string name="track_does_not_contain_data_to_save">軌跡不包含要儲存的資料。</string>
     <string name="tracker_item">OsmAnd 追蹤程式</string>
-    <string name="lock_screen_description">啟用或關閉觸控螢幕功能來避免誤觸。</string>
+    <string name="lock_screen_description">啟用或關閉觸控螢幕功能來避免誤觸</string>
     <string name="lock_screen">鎖定螢幕</string>
     <string name="quick_action_showhide_osm_edits_descr">在地圖上顯示或隱藏在地 OSM 編輯的按鈕。</string>
     <string name="rendering_attr_showDirtbikeTrails_name">顯示越野車路線</string>

@@ -4422,7 +4422,7 @@
     <string name="obd_fuel_type_bifuel_gasoline">Двугоривен: бензин</string>
     <string name="obd_fuel_type_bifuel_propane">Двугоривен: пропан-бутан</string>
     <string name="obd_fuel_type_bifuel_electricity">Двугоривен: електричество</string>
-    <string name="obd_plugin_description">Наблюдавайте ключови показатели на превозното средство чрез протокола OBD-II. Предоставя данни, включително: * Скорост на двигателя * Разход на гориво * Оставащо гориво * Разстояние отзапалването на двигателя * Температура на входящ въздух * Температура на околната среда * Температура на охлаждащата течност * Скорост на превозното средство * Заряд на акумулатора</string>
+    <string name="obd_plugin_description">Наблюдавайте ключови показатели на превозното средство чрез протокола OBD-II. Предоставя данни, включително:\n • Скорост на двигателя, време на работа на двигателя, изчислено натоварване на двигателя\n • Разход на гориво, налягане на горивото, оставащо гориво\n • Температура на входящия въздух, температура на околната среда, температура на охлаждащата течност, температура на маслото на двигателя\n • Скорост на превозното средство, позиция на дроселовата клапа, напрежение на акумулатора\n</string>
     <string name="percent_unit">%</string>
     <string name="rpm_unit">об/мин</string>
     <string name="vehicle_metrics_plugin_settings">Настройки показатели превозно средство</string>
@@ -4475,4 +4475,7 @@
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Проследявайте жизненоважни данни за превозното средство с помощта на протокола OBD-II. Наблюдавайте ключови показатели като скорост, обороти на двигателя, разход на гориво и др.</string>
     <string name="shared_string_engine">Двигател</string>
     <string name="vehicle_metrics_recording_description">Изберете параметрите, които да бъдат записани в GPX файл.</string>
+    <string name="reset_average_speed">Нулиране на средната скорост</string>
+    <string name="start_trip_recording_first_m">Първо започнете да записвате пътуване.</string>
+    <string name="quick_action_showhide_osm_edits_descr">Бутон, превключващ местните редакции на OSM в картата.</string>
 </resources>
