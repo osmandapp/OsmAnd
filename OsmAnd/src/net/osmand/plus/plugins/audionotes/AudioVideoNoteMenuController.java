@@ -2,7 +2,7 @@ package net.osmand.plus.plugins.audionotes;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.media.MediaScannerConnection;
+import android.net.Uri;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.LatLon;
@@ -186,26 +186,20 @@ public class AudioVideoNoteMenuController extends MenuController {
 	public void share(LatLon latLon, String title, String address) {
 		MapActivity mapActivity = getMapActivity();
 		if (mIsFileAvailable && mapActivity != null) {
-			String path = mRecording.getFile().getAbsolutePath();
-			MediaScannerConnection.scanFile(mapActivity, new String[] {path},
-					null, (p, uri) -> {
-						MapActivity activity = getMapActivity();
-						if (activity != null) {
-							Intent shareIntent = new Intent(Intent.ACTION_SEND);
-							if (mRecording.isPhoto()) {
-								shareIntent.setType("image/*");
-							} else if (mRecording.isAudio()) {
-								shareIntent.setType("audio/*");
-							} else if (mRecording.isVideo()) {
-								shareIntent.setType("video/*");
-							}
-							shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-							shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-							Intent chooserIntent = Intent.createChooser(shareIntent,
-									activity.getString(R.string.share_note));
-							AndroidUtils.startActivityIfSafe(activity, shareIntent, chooserIntent);
-						}
-					});
+			Intent shareIntent = new Intent(Intent.ACTION_SEND);
+			if (mRecording.isPhoto()) {
+				shareIntent.setType("image/*");
+			} else if (mRecording.isAudio()) {
+				shareIntent.setType("audio/*");
+			} else if (mRecording.isVideo()) {
+				shareIntent.setType("video/*");
+			}
+			Uri uri = AndroidUtils.getUriForFile(mapActivity, mRecording.getFile().getAbsoluteFile());
+			shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+			shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+			shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+			Intent chooserIntent = Intent.createChooser(shareIntent, getString(R.string.share_note));
+			AndroidUtils.startActivityIfSafe(mapActivity, shareIntent, chooserIntent);
 		} else {
 			super.share(latLon, title, "");
 		}
