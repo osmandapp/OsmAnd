@@ -328,7 +328,7 @@ public class RouteDataObject {
 				int k = kt[i];
 				if (region.routeEncodingRules.size() > k) {
 					if (refTag.equals(region.routeEncodingRules.get(k).getTag())) {
-						return clearRef(names.get(k));
+						return Algorithms.splitAndClearRepeats(names.get(k), ";");
 					}
 					if (refTagDefault.equals(region.routeEncodingRules.get(k).getTag())) {
 						refDefault = names.get(k);
@@ -336,7 +336,7 @@ public class RouteDataObject {
 				}
 			}
 			if (refDefault != null) {
-				return clearRef(refDefault);
+				return Algorithms.splitAndClearRepeats(refDefault, ";");
 			}
 			//return names.get(region.refTypeRule);
 		}
@@ -1017,6 +1017,14 @@ public class RouteDataObject {
 		}
 	}
 
+	private static void assertEqual(String vl, String exp) {
+		if (!exp.equals(vl)) {
+			System.err.println("FAIL " + vl + " != " + exp);
+		} else {
+			System.out.println("OK " + vl);
+		}
+	}
+
 	public static void main(String[] args) {
 		assertTrueLength("10 km", 10000);
 		assertTrueLength("0.01 km", 10);
@@ -1037,6 +1045,10 @@ public class RouteDataObject {
 		assertTrueLength("14 feet", 4.2672f);
 		assertTrueLength("14 mile", 22530.76f);
 		assertTrueLength("14 cm", 0.14f);
+
+		assertEqual(Algorithms.splitAndClearRepeats("E 30;E 30;E 77;E 67;;;", ";"), "E 30;E 77;E 67");
+		assertEqual(Algorithms.splitAndClearRepeats("A2;S2;S7;S8;;;", ";"), "A2;S2;S7;S8");
+		assertEqual(Algorithms.splitAndClearRepeats("A2;A2;S2;;;S7;S8", ";"), "A2;S2;S7;S8");
 
 // 		float badValue = -1;
 // 		assertTrueLength("none", badValue);
@@ -1167,17 +1179,5 @@ public class RouteDataObject {
 			}
 		}
 		return false;
-	}
-
-	private String clearRef(String ref) {
-		String[] arr = ref.split(";");
-		String res = "";
-		for (String s : arr) {
-			if (!res.isEmpty()) {
-				res += ";";
-			}
-			res += s;
-		}
-		return res;
 	}
 }
