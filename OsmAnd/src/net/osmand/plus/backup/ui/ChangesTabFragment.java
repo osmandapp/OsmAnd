@@ -203,7 +203,6 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 		boolean local = tabType == RECENT_CHANGES_LOCAL;
 		SettingsItem settingsItem = getSettingsItem(local, localFile, remoteFile);
 		if (settingsItem != null) {
-
 			CloudChangeItem item = new CloudChangeItem();
 			item.title = BackupUiUtils.getItemName(app, settingsItem);
 			item.summary = localizedSummaryForOperation(operationType, localFile, remoteFile);
