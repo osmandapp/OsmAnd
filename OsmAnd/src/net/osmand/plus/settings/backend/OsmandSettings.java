@@ -1047,6 +1047,7 @@ public class OsmandSettings {
 			boolean overrideMetricSystem = !DRIVING_REGION_AUTOMATIC.getValue(prefs, DRIVING_REGION_AUTOMATIC.getDefaultValue());
 			if (overrideMetricSystem && val != null) {
 				METRIC_SYSTEM.setValue(prefs, val.defMetrics);
+				UNIT_OF_VOLUME.set(val.volumeUnit);
 			}
 			return super.setValue(prefs, val);
 		}
