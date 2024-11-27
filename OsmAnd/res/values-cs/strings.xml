@@ -5517,7 +5517,7 @@
     <string name="obd_engine_coolant_temp">Teplota chladicí kapaliny</string>
     <string name="obd_fuel_level">Spotřeba paliva (%)</string>
     <string name="obd_plugin_name">Metriky vozidla</string>
-    <string name="obd_plugin_description">Monitorujte klíčové metriky vozidla pomocí protokolu OBD-II. Přístupové údaje včetně:\n • Otáčky motoru, doba chodu motoru, vypočtené zatížení motoru\n • Spotřeba paliva, Tlak paliva, Zbývající palivo\n • Teplota sání, teplota okolí, teplota chladicí kapaliny, teplota motorového oleje\n • Rychlost vozidla, poloha škrticí klapky, napětí baterie\n</string>
+    <string name="obd_plugin_description">Monitorujte klíčové metriky vozidla pomocí protokolu OBD-II. Přístup k datům zahrnuje:\n • Otáčky motoru, doba běhu motoru, vypočtené zatížení motoru\n • Spotřeba paliva, tlak paliva, zbývající palivo\n • Teplota sání, teplota okolí, teplota chladicí kapaliny, teplota motorového oleje\n • Rychlost vozidla, poloha škrticí klapky, napětí baterie\n</string>
     <string name="obd_support">Podpora OBD</string>
     <string name="obd_ambient_air_temp">Teplota okolí</string>
     <string name="obd_battery_voltage">Napětí baterie</string>
