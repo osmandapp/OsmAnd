@@ -598,9 +598,13 @@ public class MapButtonsHelper {
 	}
 
 	@NonNull
+	public String createNewButtonStateId() {
+		return DEFAULT_BUTTON_ID + "_" + System.currentTimeMillis();
+	}
+
+	@NonNull
 	public QuickActionButtonState createNewButtonState() {
-		String id = DEFAULT_BUTTON_ID + "_" + System.currentTimeMillis();
-		return new QuickActionButtonState(app, id);
+		return new QuickActionButtonState(app, createNewButtonStateId());
 	}
 
 	public void addQuickActionButtonState(@NonNull QuickActionButtonState buttonState) {
