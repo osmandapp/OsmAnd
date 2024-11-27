@@ -628,9 +628,10 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		}
 	}
 
-	private void setProperZoom(){
+	private void setProperZoom() {
 		int zoom;
-		if ((wizardType == WizardType.MAP_DOWNLOAD || wizardType == WizardType.MAP_DOWNLOADED) && mapIndexItem != null) {
+		if (app.getResourceManager().isAnyMapInstalled() ||
+				((wizardType == WizardType.MAP_DOWNLOAD || wizardType == WizardType.MAP_DOWNLOADED) && mapIndexItem != null)) {
 			zoom = DOWNLOAD_MAP_ZOOM_LEVEL;
 		} else {
 			zoom = NO_MAP_ZOOM_LEVEL;
