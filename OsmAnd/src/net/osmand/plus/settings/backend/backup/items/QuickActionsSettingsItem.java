@@ -19,6 +19,7 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
+import net.osmand.plus.views.mapwidgets.configure.buttons.ButtonStateBean;
 import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.util.Algorithms;
 
@@ -36,14 +37,20 @@ public class QuickActionsSettingsItem extends SettingsItem {
 	private static final int APPROXIMATE_QUICK_ACTION_SIZE_BYTES = 135;
 
 	private MapButtonsHelper mapButtonsHelper;
+
+	private ButtonStateBean stateBean;
 	private QuickActionButtonState buttonState;
 
-	public QuickActionsSettingsItem(@NonNull OsmandApplication app, @Nullable QuickActionsSettingsItem baseItem, @NonNull QuickActionButtonState buttonState) {
+	public QuickActionsSettingsItem(@NonNull OsmandApplication app,
+			@Nullable QuickActionsSettingsItem baseItem,
+			@NonNull QuickActionButtonState buttonState) {
 		super(app, baseItem);
 		this.buttonState = buttonState;
+		this.stateBean = ButtonStateBean.toStateBean(buttonState);
 	}
 
-	public QuickActionsSettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+	public QuickActionsSettingsItem(@NonNull OsmandApplication app,
+			@NonNull JSONObject json) throws JSONException {
 		super(app, json);
 	}
 
@@ -88,7 +95,7 @@ public class QuickActionsSettingsItem extends SettingsItem {
 	public void apply() {
 		if (exists()) {
 			if (shouldReplace) {
-				QuickActionButtonState state = mapButtonsHelper.getActionButtonStateById(buttonState.getId());
+				QuickActionButtonState state = mapButtonsHelper.getActionButtonStateById(stateBean.id);
 				if (state != null) {
 					mapButtonsHelper.removeQuickActionButtonState(state);
 				}
@@ -96,15 +103,14 @@ public class QuickActionsSettingsItem extends SettingsItem {
 				renameButton();
 			}
 		}
+		stateBean.setupButtonState(buttonState);
 		mapButtonsHelper.addQuickActionButtonState(buttonState);
 	}
 
 	private void renameButton() {
-		String name = buttonState.getName();
-		QuickActionButtonState newButtonState = mapButtonsHelper.createNewButtonState();
-		newButtonState.setName(mapButtonsHelper.generateUniqueButtonName(name));
-		newButtonState.setEnabled(buttonState.isEnabled());
-		buttonState = newButtonState;
+		stateBean.id = mapButtonsHelper.createNewButtonStateId();
+		stateBean.name = mapButtonsHelper.generateUniqueButtonName(stateBean.name);
+		buttonState = new QuickActionButtonState(app, stateBean.id);
 	}
 
 	@NonNull
@@ -116,7 +122,7 @@ public class QuickActionsSettingsItem extends SettingsItem {
 	@NonNull
 	@Override
 	public String getPublicName(@NonNull Context ctx) {
-		return buttonState.hasCustomName() ? buttonState.getName() : ctx.getString(R.string.shared_string_quick_actions);
+		return Algorithms.isEmpty(stateBean.name) ? ctx.getString(R.string.shared_string_quick_actions) : stateBean.name;
 	}
 
 	@Override
@@ -131,26 +137,28 @@ public class QuickActionsSettingsItem extends SettingsItem {
 				JSONObject object = json.getJSONObject("buttonState");
 				String id = object.getString("id");
 				buttonState = new QuickActionButtonState(app, id);
-				buttonState.setName(object.getString("name"));
-				buttonState.setEnabled(object.getBoolean("enabled"));
+				stateBean = new ButtonStateBean(id);
+				stateBean.name = object.optString("name");
+				stateBean.enabled = object.getBoolean("enabled");
 
 				String iconName = object.optString("icon");
 				if (!Algorithms.isEmpty(iconName)) {
-					buttonState.getIconPref().set(iconName);
+					stateBean.icon = iconName;
 				}
 				int size = object.optInt("size", -1);
 				if (size > 0) {
-					buttonState.getSizePref().set(size);
+					stateBean.size = size;
 				}
 				int cornerRadius = object.optInt("corner_radius", -1);
 				if (cornerRadius >= 0) {
-					buttonState.getCornerRadiusPref().set(cornerRadius);
+					stateBean.cornerRadius = cornerRadius;
 				}
 				float opacity = (float) object.optDouble("opacity", -1);
 				if (opacity >= 0) {
-					buttonState.getOpacityPref().set(opacity);
+					stateBean.opacity = opacity;
 				}
 			} else {
+				stateBean = new ButtonStateBean(DEFAULT_BUTTON_ID);
 				buttonState = new QuickActionButtonState(app, DEFAULT_BUTTON_ID);
 			}
 		} catch (JSONException e) {
