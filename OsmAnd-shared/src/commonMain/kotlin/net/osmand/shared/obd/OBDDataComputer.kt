@@ -122,12 +122,12 @@ object OBDDataComputer {
 		SPEED(
 			false,
 			OBD_SPEED_COMMAND,
-			"shared_string_speed",
+			"obd_widget_vehicle_speed",
 			OBDComputerWidgetFormatter("%.0f")),
 		RPM(
 			false,
 			OBD_RPM_COMMAND,
-			"obd_rpm",
+			"obd_widget_engine_speed",
 			OBDComputerWidgetFormatter("%d")),
 		ENGINE_RUNTIME(
 			false,
@@ -142,7 +142,7 @@ object OBDDataComputer {
 		FUEL_LEFT_KM(
 			true,
 			OBD_FUEL_LEVEL_COMMAND,
-			"obd_fuel_left_distance",
+			"remaining_fuel",
 			OBDComputerWidgetFormatter("%.0f")),
 		CALCULATED_ENGINE_LOAD(
 			false,
@@ -157,12 +157,12 @@ object OBDDataComputer {
 		FUEL_LEFT_PERCENT(
 			false,
 			OBD_FUEL_LEVEL_COMMAND,
-			"obd_fuel_left_percent",
+			"remaining_fuel",
 			OBDComputerWidgetFormatter("%.1f")),
 		FUEL_LEFT_LITER(
 			false,
 			OBD_FUEL_LEVEL_COMMAND,
-			"obd_fuel_left_liter",
+			"remaining_fuel",
 			OBDComputerWidgetFormatter("%.1f")),
 		FUEL_CONSUMPTION_RATE_PERCENT_HOUR(
 			false,
