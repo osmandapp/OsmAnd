@@ -5841,9 +5841,7 @@
     <string name="obd_fuel_consumption_rate_sensor_desc">Ibilgailuen erregai-kontsumo-tasa erakusten du sentsorearen arabera (l/h)</string>
     <string name="obd_fuel_level_liter">Erregai maila (l)</string>
     <string name="obd_fuel_level_percent">Erregai maila (%)</string>
-    <string name="obd_fuel_left_liter">Geratzen den erregaia (l)</string>
     <string name="obd_fuel_consumption_rate_l_h_desc">Ibilgailuen erregai-kontsumo-tasa erakusten du kalkuluen arabera (l/h)</string>
-    <string name="obd_fuel_left_percent">Geratzen den erregaia (%)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Erregai-kontsumo-tasa l/h</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Erregaiaren kontsumo-tasa %/h</string>
     <string name="route_guidance_desc">Ibilbideen orientazioa denbora errealean eskaintzen du, hurrengo biraketarako distantzia, errepidearen izena, uneko kalearen izena eta erreiaren informazioa barne. Trepetak aktibo daude nabigazioan zehar.</string>

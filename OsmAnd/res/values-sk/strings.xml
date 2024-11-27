@@ -5555,7 +5555,6 @@
     <string name="obd_fuel_level_percent">Úroveň paliva (%)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Spotreba paliva l/h</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Spotreba paliva %/h</string>
-    <string name="obd_fuel_left_distance">Zostatok paliva (vzdialenosť)</string>
     <string name="obd_fuel_type">Typ paliva</string>
     <string name="speedometer_maximum">Maximum</string>
     <string name="simulate_obd">Simulovať OBD údaje</string>
@@ -5568,8 +5567,6 @@
     <string name="obd_fuel_left_liters">Zostatok paliva (litre)</string>
     <string name="kpa_unit">kPa</string>
     <string name="percent_hour">%/h</string>
-    <string name="obd_fuel_left_percent">Zostatok paliva (%)</string>
-    <string name="obd_fuel_left_liter">Zostatok paliva (l)</string>
     <string name="obd_fuel_left_km">Zostatok paliva (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Spotreba paliva (OBD)</string>
     <string name="record_obd_data">Nahrávať merania vozidla</string>

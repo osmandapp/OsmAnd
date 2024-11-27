@@ -5521,7 +5521,6 @@
     <string name="obd_air_intake_temp">Température d\'admission</string>
     <string name="obd_ambient_air_temp">Température ambiante</string>
     <string name="obd_fuel_level">Efficacité du carburant (%)</string>
-    <string name="obd_fuel_left_distance">Carburant restant (distance)</string>
     <string name="obd_fuel_type_not_provided">Type de carburant non spécifié</string>
     <string name="unit_volt">V</string>
     <string name="obd_fuel_type_methanol">Méthanol</string>
@@ -5540,7 +5539,6 @@
     <string name="obd_fuel_type_hydrogen">Hydrogène</string>
     <string name="percent_unit">%</string>
     <string name="rpm_unit">tr/min</string>
-    <string name="obd_rpm">Tours/minute</string>
     <string name="obd_rpm_desc">Affiche le régime du véhicule via le capteur OBD</string>
     <string name="obd_plugin_name">Mesures du véhicule</string>
     <string name="obd_fuel_consumption_rate">Taux de consommation de carburant</string>
@@ -5607,8 +5605,6 @@
     <string name="obd_fuel_consumption_rate_sensor_desc">Affiche la consommation de carburant du véhicule grâce à un capteur (l/h)</string>
     <string name="obd_fuel_level_liter">Niveau de carburant (l)</string>
     <string name="obd_fuel_level_percent">Niveau de carburant (%)</string>
-    <string name="obd_fuel_left_percent">Carburant restant (%)</string>
-    <string name="obd_fuel_left_liter">Carburant restant (l)</string>
     <string name="obd_fuel_left_km">Carburant restant (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Consommation de carburant (obd)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Consommation de carburant l/h</string>

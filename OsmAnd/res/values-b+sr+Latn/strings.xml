@@ -5542,7 +5542,6 @@
     <string name="obd_fuel_type_hybrid_electric">Hibridno Električno</string>
     <string name="obd_widget_group">Statistike vozila</string>
     <string name="percent_unit">%</string>
-    <string name="obd_rpm">RPM</string>
     <string name="rpm_unit">rpm</string>
     <string name="obd_rpm_desc">Prikazuje tahometarski RPM preko OBD senzora</string>
     <string name="obd_fuel_level_desc">Prikazuje nivo goriva u vozilu preko OBD senzora</string>
@@ -5554,7 +5553,6 @@
     <string name="obd_fuel_level">Efikasnost goriva (%)</string>
     <string name="obd_fuel_consumption_rate">Stopa potrošnje goriva</string>
     <string name="obd_fuel_consumption_rate_desc">Prikazuje stopu potrošnje goriva vozila na osnovu OBD lokacije</string>
-    <string name="obd_fuel_left_distance">Preostalo gorivo (rastojanje)</string>
     <string name="obd_fuel_type">Tip goriva</string>
     <string name="obd_plugin_name">Metrika vozila</string>
     <string name="obd_support">OBD podrška</string>
@@ -5612,7 +5610,6 @@
     <string name="obd_searching_text_description">Drži uređaj blizu skenera. Proveri da li radi motor vozila.</string>
     <string name="obd_fuel_consumption_rate_sensor">Potrošnja goriva (senzor)</string>
     <string name="obd_fuel_level_liter">Nivo goriva (l)</string>
-    <string name="obd_fuel_left_liter">Preostalo goriva (l)</string>
     <string name="obd_fuel_left_km">Preostalo goriva za (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Potrošnja goriva (OBD)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Potrošnja goriva l/h</string>
@@ -5620,7 +5617,6 @@
     <string name="obd_fuel_consumption_rate_l_h">Potrošnja goriva (l/h)</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Prikazuje potrošnju goriva na temelju senzora (l/h)</string>
     <string name="obd_fuel_consumption_rate_l_h_desc">Prikazuje potrošnju goriva na temelju proračuna (l/h)</string>
-    <string name="obd_fuel_left_percent">Preostalo goriva (%)</string>
     <string name="obd_fuel_level_percent">Nivo goriva (%)</string>
     <string name="liter">l</string>
     <string name="speedometer_maximum">Maksimum</string>

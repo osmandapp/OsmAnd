@@ -5742,7 +5742,6 @@
     <string name="obd_fuel_type_hybrid_electric">هجين كهربائي</string>
     <string name="obd_fuel_type_hydrogen">هيدروجين</string>
     <string name="obd_rpm_desc">يظهر عداد سرعة دوران السيارة RPM عبر مستشعر OBD</string>
-    <string name="obd_rpm">RPM</string>
     <string name="rpm_unit">دورة بالدقيقة</string>
     <string name="obd_fuel_left_distance_desc">يوضح المسافة التي يمكن للمركبة قطعها على مستوى الوقود الأيسر فوق مستشعر OBD</string>
     <string name="obd_fuel_level_desc">يعرض مستوى وقود السيارة عبر مستشعر OBD</string>
@@ -5803,7 +5802,6 @@
     <string name="obd_widget_group">مقاييس المركبات</string>
     <string name="screen_is_unlocked">تم فتح قفل شاشة اللمس.</string>
     <string name="screen_is_locked_by_action_button">شاشة اللمس مقفلة. اضغط على الزر لفتح القفل.</string>
-    <string name="obd_fuel_left_distance">الوقود المتبقي (المسافة)</string>
     <string name="obd_fuel_type">نوع الوقود</string>
     <string name="obd_plugin_name">مقاييس المركبات</string>
     <string name="shared_string_dp">dp</string>

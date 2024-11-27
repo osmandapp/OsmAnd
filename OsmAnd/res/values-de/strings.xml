@@ -5812,7 +5812,6 @@
     <string name="obd_fuel_type_hydrogen">Wasserstoff</string>
     <string name="shared_string_obd">OBD</string>
     <string name="percent_unit">%</string>
-    <string name="obd_rpm">Drehzahl</string>
     <string name="rpm_unit">U/min</string>
     <string name="unit_volt">V</string>
     <string name="obd_fuel_type_bifuel_lpg">Bifuel mit LPG</string>
@@ -5830,7 +5829,6 @@
     <string name="obd_ambient_air_temp">Umgebungstemperatur</string>
     <string name="obd_engine_coolant_temp">Kühlmitteltemperatur</string>
     <string name="obd_fuel_consumption_rate">Kraftstoffverbrauch</string>
-    <string name="obd_fuel_left_distance">Verbleibender Kraftstoff (Entfernung)</string>
     <string name="obd_fuel_type">Kraftstofftyp</string>
     <string name="obd_plugin_name">Fahrzeugdaten</string>
     <string name="obd_plugin_description">Überwachen Sie wichtige Fahrzeugdaten über das OBD-II-Protokoll. Zugriff auf Daten einschließlich: * Motordrehzahl * Kraftstoffverbrauch * Verbleibender Kraftstoff * Entfernung seit Motorstart * Ansaugtemperatur * Umgebungstemperatur * Kühlmitteltemperatur * Fahrzeuggeschwindigkeit * Batterieanteil</string>
@@ -5901,8 +5899,6 @@
     <string name="obd_fuel_consumption_rate_sensor_desc">Zeigt den vom Sensor gemessenen Kraftstoffverbrauch des Fahrzeugs an (l/h)</string>
     <string name="obd_fuel_level_liter">Kraftstoffstand (l)</string>
     <string name="obd_fuel_level_percent">Kraftstoffstand (%)</string>
-    <string name="obd_fuel_left_percent">Verbleibender Kraftstoff (%)</string>
-    <string name="obd_fuel_left_liter">Verbleibender Kraftstoff (l)</string>
     <string name="obd_fuel_left_km">Verbleibender Kraftstoff (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Kraftstoffverbrauch (OBD)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Kraftstoffverbrauch (l/h)</string>

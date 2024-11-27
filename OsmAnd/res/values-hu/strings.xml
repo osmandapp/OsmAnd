@@ -5495,7 +5495,6 @@
     <string name="obd_rpm_desc">A fordulatszámot mutatja OBD érzékelőn keresztül</string>
     <string name="obd_fuel_type_hybrid_electric_combustion">Hibrid elektromos és belső égésű motor</string>
     <string name="obd_fuel_type_hybrid_regenerative">Hibrid regeneratív</string>
-    <string name="obd_rpm">RPM</string>
     <string name="obd_widget_group">Járműmetrika</string>
     <string name="obd_fuel_level_desc">Az üzemanyagszintet mutatja OBD érzékelőn keresztül</string>
     <string name="obd_fuel_left_distance_desc">A maradék üzemanyaggal megtehető távolságot mutatja OBD érzékelőn keresztül</string>
@@ -5507,7 +5506,6 @@
     <string name="obd_fuel_level">Üzemanyag-hatékonyság (%)</string>
     <string name="obd_fuel_consumption_rate">Fogyasztás</string>
     <string name="obd_fuel_consumption_rate_desc">Megjeleníti az üzemanyag-fogyasztást az OBD adatai alapján</string>
-    <string name="obd_fuel_left_distance">Maradék üzemanyag (távolság)</string>
     <string name="obd_fuel_type">Üzemanyagtípus</string>
     <string name="obd_plugin_description">Kövesse nyomon a legfontosabb járműmutatókat az OBD-II protokoll segítségével. Hozzáférhet az alábbi adatokhoz:\n• Motor fordulatszám, a motor indítása óta eltelt idő, számított motorterhelés\n• Üzemanyag-fogyasztás, üzemanyag nyomása, maradék üzemanyag\n• Beszívott levegő hőmérséklete, környezeti hőmérséklet, hűtőfolyadék hőmérséklete, motorolaj hőmérséklete\n• Jármű sebessége, fojtószelep pozíciója, akkumulátor töltöttsége\n</string>
     <string name="obd_support">OBD támogatás</string>
@@ -5570,8 +5568,6 @@
     <string name="obd_fuel_consumption_rate_sensor_desc">Megjeleníti a jármű üzemanyag-fogyasztását liter/órában az érzékelő adatai alapján</string>
     <string name="obd_fuel_level_liter">Üzemanyagszint (l)</string>
     <string name="obd_fuel_level_percent">Üzemanyagszint (%)</string>
-    <string name="obd_fuel_left_percent">Maradék üzemanyag (%)</string>
-    <string name="obd_fuel_left_liter">Maradék üzemanyag (l)</string>
     <string name="obd_fuel_left_km">Megtehető táv (km)</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Fogyasztás (%/óra)</string>
     <string name="obd_fuel_consumption_rate_l_h">Fogyasztás (l/óra)</string>

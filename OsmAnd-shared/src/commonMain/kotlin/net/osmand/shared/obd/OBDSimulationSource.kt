@@ -18,7 +18,7 @@ class OBDSimulationSource {
 	private var fuelLeftLvl = 255
 	private var lastFuelChangedTime = 0L
 	private val NEW_DATA_PACK_DELAY = 2000L
-	private val CHANGE_FUEL_LV_TIMEOUT = 15000
+	private val CHANGE_FUEL_LV_TIMEOUT = 100000
 	private val log = LoggerFactory.getLogger("ODBSimulationSource")
 	private var showFuelPeak = true
 
@@ -55,13 +55,13 @@ class OBDSimulationSource {
 			}
 			val response = when (obdCommand) {
 				OBDCommand.OBD_VIN_COMMAND -> ""
-				OBDCommand.OBD_CALCULATED_ENGINE_LOAD_COMMAND -> toNormalizedHex(Random.nextInt())
+				OBDCommand.OBD_CALCULATED_ENGINE_LOAD_COMMAND -> toNormalizedHex(102)
 				OBDCommand.OBD_THROTTLE_POSITION_COMMAND -> toNormalizedHex(66)
 				OBDCommand.OBD_ENGINE_OIL_TEMPERATURE_COMMAND -> toNormalizedHex(130)
-				OBDCommand.OBD_FUEL_PRESSURE_COMMAND -> toNormalizedHex(11)
-				OBDCommand.OBD_BATTERY_VOLTAGE_COMMAND -> toNormalizedHex(300)
-				OBDCommand.OBD_AMBIENT_AIR_TEMPERATURE_COMMAND -> toNormalizedHex(12)
-				OBDCommand.OBD_RPM_COMMAND -> toNormalizedHex(1300)
+				OBDCommand.OBD_FUEL_PRESSURE_COMMAND -> toNormalizedHex(Random.nextInt(24500, 35000))
+				OBDCommand.OBD_BATTERY_VOLTAGE_COMMAND -> toNormalizedHex(12700)
+				OBDCommand.OBD_AMBIENT_AIR_TEMPERATURE_COMMAND -> toNormalizedHex(45)
+				OBDCommand.OBD_RPM_COMMAND -> toNormalizedHex(8000)
 				OBDCommand.OBD_ENGINE_RUNTIME_COMMAND -> toNormalizedHex(2000)
 				OBDCommand.OBD_SPEED_COMMAND -> toNormalizedHex(99)
 				OBDCommand.OBD_AIR_INTAKE_TEMP_COMMAND -> toNormalizedHex(100)

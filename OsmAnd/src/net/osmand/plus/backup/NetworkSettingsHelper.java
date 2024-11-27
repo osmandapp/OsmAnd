@@ -264,7 +264,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 			registerSyncBackupTask(key, syncTask);
 			switch (operation) {
 				case SYNC_OPERATION_DELETE -> {
-					if (remoteFile != null) {
+					if (remoteFile != null && !remoteFile.isDeleted()) {
 						if (remoteFile.item != null) {
 							syncTask.deleteItem(remoteFile.item);
 						}

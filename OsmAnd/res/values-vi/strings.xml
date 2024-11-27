@@ -1201,7 +1201,6 @@
     <string name="obd_fuel_type_hybrid_electric_combustion">Điện và động cơ đốt trong Lai</string>
     <string name="obd_fuel_type_bifuel_hydrogen">Hydrogen nhiên liệu kép</string>
     <string name="percent_unit">%</string>
-    <string name="obd_rpm">RPM</string>
     <string name="rpm_unit">rpm</string>
     <string name="obd_fuel_left_distance_desc">Hiện quãng đường xe đi được với mức nhiên liệu còn lại qua cảm biến OBD</string>
     <string name="obd_engine_coolant_temp">Nhiệt độ chất làm mát</string>
@@ -1376,7 +1375,6 @@
     <string name="obd_fuel_type_hydrogen">Hydrogen</string>
     <string name="obd_fuel_level">Hiệu suất nhiên liệu (%)</string>
     <string name="obd_ambient_air_temp">Nhiệt độ xung quanh</string>
-    <string name="obd_fuel_left_distance">Nhiên liệu còn lại (khoảng cách)</string>
     <string name="obd_battery_voltage">Điện áp pin</string>
     <string name="zoom_non_animated">Zoom không hoạt ảnh</string>
     <string name="rendering_attr_showToll_description">Hiện các hạn chế thu phí trên đường</string>
@@ -1424,8 +1422,6 @@
     <string name="other_location">Khác</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Áp suất nhiên liệu</string>
-    <string name="obd_fuel_left_percent">Nhiên liệu còn lại (%)</string>
-    <string name="obd_fuel_left_liter">Nhiên liệu còn lại (l)</string>
     <string name="obd_fuel_left_km">Nhiên liệu còn lại (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Mức tiêu thụ nhiên liệu (obd)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Mức tiêu thụ nhiên liệu l/h</string>

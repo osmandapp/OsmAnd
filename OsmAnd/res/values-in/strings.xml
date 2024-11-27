@@ -5850,7 +5850,6 @@
     <string name="shared_string_obd">OBD</string>
     <string name="obd_fuel_type_hybrid_hydrogen">Hidrogen hibrida</string>
     <string name="obd_widget_group">Metrik kendaraan</string>
-    <string name="obd_rpm">RPM</string>
     <string name="rpm_unit">rpm</string>
     <string name="obd_rpm_desc">Menampilkan tachometer RPM kendaraan melalui sensor OBD</string>
     <string name="obd_air_intake_temp">Suhu masukan</string>
@@ -5923,7 +5922,6 @@
     <string name="obd_fuel_level">Efisiensi bahan bakar (%)</string>
     <string name="obd_plugin_name">Metrik kendaraan</string>
     <string name="obd_fuel_consumption_rate">Tingkat konsumsi bahan bakar</string>
-    <string name="obd_fuel_left_distance">Bahan bakar tersisa (jarak)</string>
     <string name="obd_fuel_type_desc">Menampilkan jenis bahan bakar kendaraan melalui sensor OBD</string>
     <string name="obd_plugin_description">Pantau metrik kendaraan utama menggunakan protokol OBD-II. Akses data termasuk: * Kecepatan mesin * Konsumsi bahan bakar * Bahan bakar tersisa * Jarak sejak penilaian mesin * Suhu masukan * Suhu sekitar * Suhu pendingin * Kecepatan kendaraan * Persentase baterai</string>
     <string name="quick_action_previous_screen_desc">Saklar untuk navigasi ke layar sebelumnya.</string>
@@ -5972,8 +5970,6 @@
     <string name="obd_fuel_consumption_rate_sensor_desc">Menampilkan tingkat konsumsi bahan bakar kendaraan berdasarkan sensor (l/j)</string>
     <string name="obd_fuel_level_liter">Tingkat bahan bakar (l)</string>
     <string name="obd_fuel_level_percent">Tingkat bahan bakar (%)</string>
-    <string name="obd_fuel_left_percent">Bahan bakar tersisa (%)</string>
-    <string name="obd_fuel_left_liter">Bahan bakar tersisa (l)</string>
     <string name="obd_fuel_left_km">Bahan bakar tersisa (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Tingkat konsumsi bahan bakar (obd)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Tingkat konsumsi bahan bakar l/j</string>

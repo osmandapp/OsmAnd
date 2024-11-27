@@ -84,11 +84,9 @@
 
     <string name="obd_fuel_level_liter">Fuel level (l)</string>
     <string name="obd_fuel_level_percent">Fuel level (%)</string>
-    <string name="obd_fuel_left_percent">Fuel left (%)</string>
-    <string name="obd_fuel_left_liter">Fuel left (l)</string>
     <string name="obd_fuel_left_km">Fuel left (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Fuel consumption rate (obd)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">Fuel consumption rate L/h</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Fuel consumption rate</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Fuel consumption rate %/h</string>
 
     <string name="route_guidance_desc">Provides real-time route guidance, including distance to the next turn, road name, current street name, and lane information. Widgets are active during navigation.</string>
@@ -214,7 +212,6 @@ You will be able to pair this scanner again at any time.</string>
     <string name="obd_widget_group">Vehicle Metrics</string>
     <string name="vehicle_metrics_plugin_settings">Vehicle Metrics settings</string>
     <string name="percent_unit">%</string>
-    <string name="obd_rpm">RPM</string>
     <string name="rpm_unit">rpm</string>
     <string name="obd_rpm_desc">Shows vehicle tachometer RPM over OBD sensor</string>
     <string name="obd_fuel_level_desc">Shows vehicle fuel level over OBD sensor</string>
@@ -227,7 +224,6 @@ You will be able to pair this scanner again at any time.</string>
     <string name="obd_fuel_level">Fuel Efficiency (%)</string>
     <string name="obd_fuel_consumption_rate">Fuel consumption rate</string>
     <string name="obd_fuel_consumption_rate_desc">Shows vehicle fuel consumption rate based on OBD an location</string>
-    <string name="obd_fuel_left_distance">Fuel left (distance)</string>
     <string name="obd_fuel_left_liters">Fuel left (liters)</string>
     <string name="obd_fuel_type">Fuel type</string>
 

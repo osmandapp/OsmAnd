@@ -5531,11 +5531,9 @@
     <string name="obd_widget_group">Misure del veicolo</string>
     <string name="rpm_unit">giri/min</string>
     <string name="obd_fuel_consumption_rate">Tasso di consumo del carburante</string>
-    <string name="obd_fuel_left_distance">Carburante restante (distanza)</string>
     <string name="obd_fuel_type">Tipo di carburante</string>
     <string name="obd_plugin_name">Misure del veicolo</string>
     <string name="percent_unit">%</string>
-    <string name="obd_rpm">Giri/minuto</string>
     <string name="obd_rpm_desc">Mostra il tachimetro giri/minuto sopra il sensore OBD</string>
     <string name="fuel_tank_capacity_description">Inserisci la capacità del serbatoio per monitorare con precisione i livelli di carburante e il consumo</string>
     <string name="fuel_tank_capacity">Capacità serbatoio</string>

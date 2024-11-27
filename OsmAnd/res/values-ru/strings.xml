@@ -5935,7 +5935,6 @@
     <string name="percent_unit">%</string>
     <string name="shared_string_obd">OBD</string>
     <string name="obd_widget_group">Показатели ТС</string>
-    <string name="obd_rpm">Обороты</string>
     <string name="rpm_unit">об/мин</string>
     <string name="obd_rpm_desc">Виджет показывает обороты с тахометра транспортного средства по датчику OBD</string>
     <string name="unit_volt">В</string>
@@ -5945,7 +5944,6 @@
     <string name="obd_battery_voltage">Напряжение батареи</string>
     <string name="obd_fuel_level">Уровень топлива (%)</string>
     <string name="obd_fuel_consumption_rate">Расход топлива</string>
-    <string name="obd_fuel_left_distance">Остаток топлива (расстояние)</string>
     <string name="obd_fuel_type">Тип топлива</string>
     <string name="obd_plugin_description">Следите за основными показателями транспортного средства (ТС), используя протокол OBD-II. Получайте данные, включая: * Обороты двигателя * Расход топлива * Остаток топлива * Расстояние с момента запуска двигателя * Температура впуска * Температура окружающей среды * Температура охлаждающей жидкости * Скорость * Процент заряда батареи.</string>
     <string name="obd_fuel_level_desc">Виджет показывает уровень топлива в транспортном средстве по датчику OBD</string>
@@ -6007,8 +6005,6 @@
     <string name="obd_fuel_consumption_rate_sensor_desc">Виджет показывает расход топлива транспортного средства на основе показаний датчика (л/ч)</string>
     <string name="obd_fuel_level_liter">Уровень топлива (л)</string>
     <string name="obd_fuel_level_percent">Уровень топлива (%)</string>
-    <string name="obd_fuel_left_percent">Остаток топлива (%)</string>
-    <string name="obd_fuel_left_liter">Остаток топлива (л)</string>
     <string name="obd_fuel_left_km">Остаток топлива (км)</string>
     <string name="obd_fuel_consumption_rate_scanner">Расход топлива (OBD)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Расход топлива (л/ч)</string>
