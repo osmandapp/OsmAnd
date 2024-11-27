@@ -16,6 +16,9 @@ import net.osmand.shared.util.PlatformUtil
 
 object OBDDataComputer {
 
+	private const val LITER_KM_CONSUMPTION_LIMIT = 100
+	private const val LITER_HOUR_CONSUMPTION_LIMIT = 100
+
 	private val log = LoggerFactory.getLogger("OBDDataComputer")
 
 	private val osmAndSettings: SettingsAPI = PlatformUtil.getOsmAndContext().getSettings()
@@ -303,7 +306,12 @@ object OBDDataComputer {
 
 				FUEL_CONSUMPTION_RATE_LITER_HOUR -> {
 					if (locValues.size >= 2) {
-						getFuelTank() * calculateFuelConsumption(locValues) / 100
+						val result = getFuelTank() * calculateFuelConsumption(locValues) / 100
+						if(result > LITER_HOUR_CONSUMPTION_LIMIT) {
+							Float.NaN
+						} else {
+							result
+						}
 					} else if (locValues.size == 1) {
 						Float.NaN
 					} else {
@@ -322,7 +330,12 @@ object OBDDataComputer {
 							val distance = getDistanceForTimePeriod(first.timestamp, last.timestamp)
 							if (distance > 0) {
 								log.debug("l/100km. distance $distance; difLiter $difLiter; result ${100 * difLiter / (distance / 1000)}")
-								return 100 * difLiter / (distance / 1000)
+								val result = 100 * difLiter / (distance / 1000)
+								return if(result > LITER_KM_CONSUMPTION_LIMIT) {
+									Float.NaN
+								} else {
+									result
+								}
 							}
 						}
 						null
