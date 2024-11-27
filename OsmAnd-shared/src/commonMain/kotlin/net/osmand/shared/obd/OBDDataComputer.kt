@@ -334,7 +334,7 @@ object OBDDataComputer {
 								return if(result > LITER_KM_CONSUMPTION_LIMIT) {
 									Float.NaN
 								} else {
-									100 * difLiter / (distance / 1000)
+									result
 								}
 							}
 						}
