@@ -28,7 +28,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.util.Pair;
 
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
@@ -86,7 +85,6 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class OsmandMapTileView implements IMapDownloaderCallback {
@@ -332,17 +330,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void setupTouchDetectors(@NonNull Context ctx) {
-		gestureDetector = new GestureDetector(ctx, new MapTileViewOnGestureListener());
-		multiTouchSupport = new MultiTouchSupport(application, new MapTileViewMultiTouchZoomListener());
-		doubleTapScaleDetector = new DoubleTapScaleDetector(this, ctx, new MapTileViewMultiTouchZoomListener());
-		twoFingersTapDetector = new TwoFingerTapDetector() {
+		setGestureDetector(new GestureDetector(ctx, new MapTileViewOnGestureListener()));
+		setMultiTouchSupport(new MultiTouchSupport(application, new MapTileViewMultiTouchZoomListener()));
+		setDoubleTapScaleDetector(new DoubleTapScaleDetector(this, ctx, new MapTileViewMultiTouchZoomListener()));
+		setTwoFingersTapDetector(new TwoFingerTapDetector() {
 			@Override
 			public boolean onTouchEvent(MotionEvent event) {
 				int action = event.getAction();
 				int actionCode = action & MotionEvent.ACTION_MASK;
-				switch (actionCode) {
-					case MotionEvent.ACTION_DOWN:
-						blockTwoFingersTap = false;
+				if (actionCode == MotionEvent.ACTION_DOWN) {
+					blockTwoFingersTap = false;
 				}
 				return super.onTouchEvent(event);
 			}
@@ -363,14 +360,30 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					}
 				}
 			}
-		};
+		});
+	}
+
+	public void setDoubleTapScaleDetector(@Nullable DoubleTapScaleDetector detector) {
+		doubleTapScaleDetector = detector;
+	}
+
+	public void setTwoFingersTapDetector(@Nullable TwoFingerTapDetector detector) {
+		twoFingersTapDetector = detector;
+	}
+
+	public void setMultiTouchSupport(@Nullable MultiTouchSupport support) {
+		multiTouchSupport = support;
+	}
+
+	public void setGestureDetector(@Nullable GestureDetector detector) {
+		gestureDetector = detector;
 	}
 
 	public void clearTouchDetectors() {
-		gestureDetector = null;
-		multiTouchSupport = null;
-		doubleTapScaleDetector = null;
-		twoFingersTapDetector = null;
+		setGestureDetector(null);
+		setMultiTouchSupport(null);
+		setDoubleTapScaleDetector(null);
+		setTwoFingersTapDetector(null);
 	}
 
 	@NonNull
@@ -1694,7 +1707,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (isLayoutRtl()) {
 			dx = -dx;
 		} else {
-			dx -= (tbw - tb.getPixWidth()) ;
+			dx -= (tbw - tb.getPixWidth());
 		}
 //		dy -= (tbh - tb.getPixHeight()) / 2; // this to make margin from top
 		dx += (int) (tbw * (1 - border) / 2);
