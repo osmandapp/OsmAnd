@@ -1992,6 +1992,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
+	public void detachMapRenderer() {
+		if (mapRenderer != null) {
+			mapRenderer.removeAllSymbolsProviders();
+			mapRenderer.resetElevationDataProvider();
+			mapRenderer = null;
+		}
+	}
+
 	@Nullable
 	public MapRendererView getMapRenderer() {
 		return mapRenderer;
