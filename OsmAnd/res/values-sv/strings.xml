@@ -5591,7 +5591,6 @@
     <string name="percent_unit">%</string>
     <string name="lock_screen">Lås skärm</string>
     <string name="quick_action_start_pause_recording">Knapp för att starta, pausa och återuppta inspelning av GPX-spår.</string>
-    <string name="obd_rpm">varv/min</string>
     <string name="rpm_unit">varv/min</string>
     <string name="quick_action_showhide_osm_edits_descr">Knapp för att visa eller dölja lokala OSM-redigeringar på kartan.</string>
     <string name="lock_screen_description">Slår på/av pekskärm-funktionalitet för att förhindra oavsiktliga tryck</string>

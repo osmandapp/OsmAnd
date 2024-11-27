@@ -5924,7 +5924,6 @@
     <string name="obd_fuel_type_unknown">nekonata speco de brulaĵo</string>
     <string name="obd_widget_group">Statistikoj pri veturilo</string>
     <string name="percent_unit">%</string>
-    <string name="obd_rpm">Rivolua rapido</string>
     <string name="rpm_unit">riv./min</string>
     <string name="obd_fuel_level_desc">Montras nivelon de brulaĵo raportatan de OBD-sentilo</string>
     <string name="obd_fuel_left_distance_desc">Montras vetureblan distancon per la nuna brulaĵ-nivelo raportatan de OBD-sentilo</string>
@@ -5936,7 +5935,6 @@
     <string name="obd_plugin_name">Statistikoj pri veturilo</string>
     <string name="obd_fuel_consumption_rate">Konsum-rapido de brulaĵo</string>
     <string name="obd_fuel_consumption_rate_desc">Montras konsum-rapidon de brulaĵo raportatan de OBD-sentilo</string>
-    <string name="obd_fuel_left_distance">Brulaĵ-nivelo (distanco)</string>
     <string name="obd_fuel_type">Speco de brulaĵo</string>
     <string name="obd_plugin_description">Liveras informojn pri via veturilo raportatajn per la protokolo OBD.</string>
     <string name="obd_support">Subteno por OBD</string>

@@ -5545,7 +5545,6 @@
     <string name="obd_fuel_type_bifuel_hydrogen">To-brændstofkøretøj, der kører på brint</string>
     <string name="shared_string_obd">OBD (Diagnoseudtag)</string>
     <string name="obd_rpm_desc">Viser køretøjets omdrejningstæller RPM via OBD-sensor</string>
-    <string name="obd_rpm">RPM (Omdrejninger pr. minut)</string>
     <string name="rpm_unit">rpm</string>
     <string name="obd_fuel_level_desc">Viser køretøjets brændstofniveau via OBD-sensor</string>
     <string name="obd_fuel_left_distance_desc">Viser, hvor langt køretøjet kan køre på det resterende brændstofniveau via OBD-sensor</string>
@@ -5561,7 +5560,6 @@
     <string name="obd_engine_coolant_temp">Kølevæsketemperatur</string>
     <string name="obd_fuel_level">Brændstoføkonomi (%)</string>
     <string name="obd_fuel_consumption_rate">Brændstofforbrug</string>
-    <string name="obd_fuel_left_distance">Brændstof tilbage (afstand)</string>
     <string name="obd_fuel_type">Brændstoftype</string>
     <string name="obd_plugin_description">Overvåg vigtige køretøjsmålinger ved hjælp af OBD-II-protokollen. Få adgang til data, herunder: * Motorens omdrejningshastighed * Brændstofforbrug * Resterende brændstof * Afstand siden motorstart * Indtagstemperatur * Omgivelsestemperatur * Kølevæskes temperatur * Køretøjets hastighed * Batteriprocent</string>
     <string name="obd_plugin_name">Køretøjsparametre</string>
@@ -5624,8 +5622,6 @@
     <string name="obd_fuel_consumption_rate_sensor_desc">Viser køretøjets brændstofforbrug baseret på sensor (l/t)</string>
     <string name="obd_fuel_level_liter">Brændstofniveau (l)</string>
     <string name="obd_fuel_level_percent">Brændstofniveau (%)</string>
-    <string name="obd_fuel_left_percent">Brændstof tilbage (%)</string>
-    <string name="obd_fuel_left_liter">Brændstof tilbage (l)</string>
     <string name="obd_fuel_left_km">Brændstof tilbage (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Brændstofforbrug (obd)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Brændstofforbrug l/t</string>

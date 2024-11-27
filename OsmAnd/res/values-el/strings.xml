@@ -4428,7 +4428,6 @@
     <string name="shared_string_normal">Φυσιολογικό</string>
     <string name="shared_string_original">Αυθεντικό</string>
     <string name="display_position">Εμφάνιση θέσης</string>
-    <string name="obd_fuel_left_percent">Καύσιμο που έμεινε (%)</string>
     <string name="obd_fuel_consumption_rate_scanner">Ρυθμός κατανάλωσης καυσίμου (obd)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Ρυθμός κατανάλωσης καυσίμου l/h</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Ρυθμός κατανάλωσης καυσίμου %/h</string>
@@ -4438,7 +4437,6 @@
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Εμφανίζει τον ρυθμό κατανάλωσης καυσίμου του οχήματος βάσει υπολογισμών (%/h)</string>
     <string name="obd_fuel_level_liter">Επίπεδο καυσίμου (l)</string>
     <string name="obd_fuel_level_percent">Επίπεδο καυσίμου (%)</string>
-    <string name="obd_fuel_left_liter">Καύσιμο που έμεινε (l)</string>
     <string name="shared_string_increase">Αύξηση</string>
     <string name="connect_with_straight_line">Σύνδεση με ευθεία γραμμή</string>
     <string name="download_tiles">Λήψη πλακιδίων</string>
