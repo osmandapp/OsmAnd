@@ -67,6 +67,7 @@ import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -189,24 +190,27 @@ public class GpxUiHelper {
 	}
 
 	@NonNull
-	public static String getFolderName(@NonNull Context context, @NonNull File dir, boolean includeParentDir) {
-		String name = dir.getName();
+	public static String getFolderName(@NonNull Context context, @NonNull File directory) {
+		String name = directory.getName();
 		if (GPX_INDEX_DIR.equals(name + File.separator)) {
 			return context.getString(R.string.shared_string_tracks);
 		}
-		String dirPath = dir.getPath() + File.separator;
+		String dirPath = directory.getPath() + File.separator;
 		if (dirPath.endsWith(GPX_IMPORT_DIR) || dirPath.endsWith(GPX_RECORDED_INDEX_DIR)) {
 			return Algorithms.capitalizeFirstLetter(name);
 		}
-		if (includeParentDir) {
-			File parent = dir.getParentFile();
-			String parentName = parent != null ? parent.getName() : "";
-			if (!Algorithms.isEmpty(parentName) && !GPX_INDEX_DIR.equals(parentName + File.separator)) {
-				name = parentName + File.separator + name;
-			}
-			return name;
-		}
 		return name;
+	}
+
+	@NonNull
+	public static String getFolderPath(@NonNull File directory, @NonNull String initialName) {
+		String name = directory.getName() + File.separator;
+		File parent = directory.getParentFile();
+		String parentName = parent != null ? parent.getName() + File.separator : "";
+		if (!CollectionUtils.equalsToAny(GPX_INDEX_DIR, name, parentName)) {
+			return parentName + initialName;
+		}
+		return initialName;
 	}
 
 	@NonNull
