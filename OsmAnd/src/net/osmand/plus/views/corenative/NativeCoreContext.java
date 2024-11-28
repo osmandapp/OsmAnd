@@ -109,10 +109,8 @@ public class NativeCoreContext {
 	}
 
 	public static void setMapRendererContext(@NonNull OsmandApplication app, float density) {
-		if (mapRendererContext != null) {
-			if (mapRendererContext.getDensity() == density)
-				return;
-			mapRendererContext.setMapRendererView(null);
+		if (mapRendererContext != null && mapRendererContext.getDensity() == density) {
+			return;
 		}
 		mapRendererContext = new MapRendererContext(app, density);
 		mapRendererContext.setupObfMap(new MapStylesCollection(), obfsCollectionsByProviderType);
