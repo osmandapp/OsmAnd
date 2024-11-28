@@ -25,6 +25,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -70,8 +71,20 @@ import net.osmand.plus.feedback.RateUsHelper;
 import net.osmand.plus.feedback.RenderInitErrorBottomSheet;
 import net.osmand.plus.feedback.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.firstusage.FirstUsageWizardFragment;
-import net.osmand.plus.helpers.*;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.DayNightHelper;
+import net.osmand.plus.helpers.DiscountHelper;
+import net.osmand.plus.helpers.IntentHelper;
+import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.LockHelper.LockUIAdapter;
+import net.osmand.plus.helpers.MapAppInitializeListener;
+import net.osmand.plus.helpers.MapDisplayPositionManager;
+import net.osmand.plus.helpers.MapFragmentsHelper;
+import net.osmand.plus.helpers.MapPermissionsResultCallback;
+import net.osmand.plus.helpers.MapRouteCalculationProgressListener;
+import net.osmand.plus.helpers.MapScrollHelper;
+import net.osmand.plus.helpers.RestoreNavigationHelper;
+import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ui.ImportGpxBottomSheetDialogFragment;
@@ -104,7 +117,9 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomiz
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.MainSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
+import net.osmand.plus.settings.fragments.search.SettingsSearchButtonHelper;
 import net.osmand.plus.simulation.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.simulation.SimulatedLocation;
@@ -134,10 +149,25 @@ import org.apache.commons.logging.Log;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
+import de.KnollFrank.lib.settingssearch.common.Utils;
+import de.KnollFrank.lib.settingssearch.common.task.LongRunningTask;
+import de.KnollFrank.lib.settingssearch.common.task.OnUiThreadRunnerFactory;
+import de.KnollFrank.lib.settingssearch.db.preference.pojo.MergedPreferenceScreenData;
+import de.KnollFrank.lib.settingssearch.fragment.DefaultFragmentInitializer;
+import de.KnollFrank.lib.settingssearch.fragment.FragmentFactoryAndInitializer;
+import de.KnollFrank.lib.settingssearch.fragment.Fragments;
+import de.KnollFrank.lib.settingssearch.fragment.factory.FragmentFactoryAndInitializerWithCache;
+import de.KnollFrank.lib.settingssearch.results.recyclerview.FragmentContainerViewAdder;
+import de.KnollFrank.lib.settingssearch.search.MergedPreferenceScreenDataRepository;
+import de.KnollFrank.lib.settingssearch.search.SearchDatabaseDirectoryIO;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		IRouteInformationListener, AMapPointUpdateListener, MapMarkerChangedListener,
@@ -158,6 +188,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private static final TrackDetailsMenu trackDetailsMenu = new TrackDetailsMenu();
 	@Nullable
 	private static Intent prevActivityIntent = null;
+
+	private static final @IdRes int DUMMY_FRAGMENT_CONTAINER_VIEW_ID = View.generateViewId();
+	private Optional<LongRunningTask<MergedPreferenceScreenData>> createSearchDatabaseTask = Optional.empty();
 
 	private final List<ActivityResultListener> activityResultListeners = new ArrayList<>();
 
@@ -336,6 +369,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (!PluginsHelper.isDevelopment() || settings.TRANSPARENT_STATUS_BAR.get()) {
 			AndroidUtils.enterToFullScreen(this, getLayout());
 		}
+	}
+
+	public Optional<LongRunningTask<MergedPreferenceScreenData>> getCreateSearchDatabaseTask() {
+		return createSearchDatabaseTask;
 	}
 
 	@Override
@@ -694,7 +731,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						BaseSettingsFragment.showInstance(this, SettingsScreenType.DATA_STORAGE, null, args, null);
 					} else {
 						ActivityCompat.requestPermissions(this,
-								new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
+								new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
 								DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
 					}
 				}
@@ -926,6 +963,55 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		lockHelper.onStart();
 		getMyApplication().getNotificationHelper().showNotifications();
 		extendedMapActivity.onStart(this);
+		{
+			final var createSearchDatabaseTask = _getCreateSearchDatabaseTask();
+			this.createSearchDatabaseTask = Optional.of(createSearchDatabaseTask);
+			createSearchDatabaseTask.execute();
+		}
+	}
+
+	private LongRunningTask<MergedPreferenceScreenData> _getCreateSearchDatabaseTask() {
+		final var mergedPreferenceScreenDataRepository = getMergedPreferenceScreenDataRepository();
+		final Locale locale = Utils.geCurrentLocale(getResources());
+		return new LongRunningTask<>(
+				() -> mergedPreferenceScreenDataRepository.getMergedPreferenceScreenData(locale),
+				mergedPreferenceScreenData -> {
+				});
+	}
+
+	private MergedPreferenceScreenDataRepository getMergedPreferenceScreenDataRepository() {
+		FragmentContainerViewAdder.addInvisibleFragmentContainerViewWithIdToParent(
+				findViewById(android.R.id.content),
+				DUMMY_FRAGMENT_CONTAINER_VIEW_ID);
+		final SearchPreferenceFragments searchPreferenceFragments =
+				SettingsSearchButtonHelper.createSearchPreferenceFragments(
+						this::getCreateSearchDatabaseTask,
+						this,
+						DUMMY_FRAGMENT_CONTAINER_VIEW_ID,
+						MainSettingsFragment.class);
+		final DefaultFragmentInitializer preferenceDialogs =
+				new DefaultFragmentInitializer(
+						getSupportFragmentManager(),
+						DUMMY_FRAGMENT_CONTAINER_VIEW_ID,
+						OnUiThreadRunnerFactory.fromActivity(this));
+		return new MergedPreferenceScreenDataRepository(
+				new Fragments(
+						new FragmentFactoryAndInitializerWithCache(
+								new FragmentFactoryAndInitializer(
+										searchPreferenceFragments.fragmentFactory,
+										preferenceDialogs)),
+						this),
+				preferenceDialogs,
+				searchPreferenceFragments.iconResourceIdProvider,
+				searchPreferenceFragments.searchableInfoProvider,
+				searchPreferenceFragments.preferenceDialogAndSearchableInfoProvider,
+				searchPreferenceFragments.searchConfiguration.rootPreferenceFragment(),
+				searchPreferenceFragments.preferenceSearchablePredicate,
+				searchPreferenceFragments.preferenceConnected2PreferenceFragmentProvider,
+				searchPreferenceFragments.preferenceScreenGraphAvailableListener,
+				progress -> {
+				},
+				new SearchDatabaseDirectoryIO(this));
 	}
 
 	@Override
@@ -1210,9 +1296,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public static void launchMapActivityMoveToTop(@NonNull Context activity,
-	                                              @Nullable Bundle prevIntentParams,
-	                                              @Nullable Uri intentData,
-	                                              @Nullable Bundle intentParams) {
+												  @Nullable Bundle prevIntentParams,
+												  @Nullable Uri intentData,
+												  @Nullable Bundle intentParams) {
 		if (activity instanceof MapActivity) {
 			if (((MapActivity) activity).getDashboard().isVisible()) {
 				((MapActivity) activity).getDashboard().hideDashboard();

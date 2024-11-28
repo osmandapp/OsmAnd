@@ -4,16 +4,20 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.IdRes;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 
 import java.util.Optional;
+import java.util.function.Supplier;
 
 import de.KnollFrank.lib.settingssearch.client.SearchConfiguration;
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
+import de.KnollFrank.lib.settingssearch.common.task.LongRunningTask;
 import de.KnollFrank.lib.settingssearch.common.task.OnUiThreadRunnerFactory;
+import de.KnollFrank.lib.settingssearch.db.preference.pojo.MergedPreferenceScreenData;
 
 public class SettingsSearchButtonHelper {
 
@@ -38,26 +42,21 @@ public class SettingsSearchButtonHelper {
 		settingsSearchButton.setVisibility(View.VISIBLE);
 	}
 
-	private void onClickShowSearchPreferenceFragment(final ImageView searchPreferenceButton) {
-		final SearchPreferenceFragments searchPreferenceFragments = createSearchPreferenceFragments();
-		searchPreferenceButton.setOnClickListener(v -> showSearchPreferenceFragment(searchPreferenceFragments));
-	}
-
-	private void showSearchPreferenceFragment(final SearchPreferenceFragments searchPreferenceFragments) {
-		if (!searchDatabaseStatusHandler.isSearchDatabaseUpToDate()) {
-			searchPreferenceFragments.rebuildSearchDatabase();
-			searchDatabaseStatusHandler.setSearchDatabaseUpToDate();
-		}
-		searchPreferenceFragments.showSearchPreferenceFragment();
-	}
-
-	private SearchPreferenceFragments createSearchPreferenceFragments() {
+	public static SearchPreferenceFragments createSearchPreferenceFragments(
+			final Supplier<Optional<LongRunningTask<MergedPreferenceScreenData>>> getCreateSearchDatabaseTask,
+			final FragmentActivity fragmentActivity,
+			final @IdRes int fragmentContainerViewId,
+			final Class<? extends BaseSettingsFragment> rootPreferenceFragment) {
 		return SearchPreferenceFragments
 				.builder(
-						createSearchConfiguration(),
-						rootSearchPreferenceFragment.requireActivity().getSupportFragmentManager(),
-						rootSearchPreferenceFragment.requireContext(),
-						OnUiThreadRunnerFactory.fromActivity(rootSearchPreferenceFragment.requireActivity()))
+						new SearchConfiguration(
+								fragmentContainerViewId,
+								Optional.of("Search Settings"),
+								rootPreferenceFragment),
+						fragmentActivity.getSupportFragmentManager(),
+						fragmentActivity,
+						OnUiThreadRunnerFactory.fromActivity(fragmentActivity))
+				.withGetCreateSearchDatabaseTask(getCreateSearchDatabaseTask)
 				.withFragmentFactory(new FragmentFactory())
 				.withPreferenceConnected2PreferenceFragmentProvider(new PreferenceConnected2PreferenceFragmentProvider())
 				.withPrepareShow(new PrepareShow())
@@ -68,10 +67,21 @@ public class SettingsSearchButtonHelper {
 				.build();
 	}
 
-	private SearchConfiguration createSearchConfiguration() {
-		return new SearchConfiguration(
-				fragmentContainerViewId,
-				Optional.of("Search Settings"),
-				rootSearchPreferenceFragment.getClass());
+	private void onClickShowSearchPreferenceFragment(final ImageView searchPreferenceButton) {
+		final SearchPreferenceFragments searchPreferenceFragments =
+				createSearchPreferenceFragments(
+						Optional::empty,
+						rootSearchPreferenceFragment.requireActivity(),
+						fragmentContainerViewId,
+						rootSearchPreferenceFragment.getClass());
+		searchPreferenceButton.setOnClickListener(v -> showSearchPreferenceFragment(searchPreferenceFragments));
+	}
+
+	private void showSearchPreferenceFragment(final SearchPreferenceFragments searchPreferenceFragments) {
+		if (!searchDatabaseStatusHandler.isSearchDatabaseUpToDate()) {
+			searchPreferenceFragments.rebuildSearchDatabase();
+			searchDatabaseStatusHandler.setSearchDatabaseUpToDate();
+		}
+		searchPreferenceFragments.showSearchPreferenceFragment();
 	}
 }
