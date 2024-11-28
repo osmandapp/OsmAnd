@@ -8,16 +8,17 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxDbHelper;
-import net.osmand.shared.gpx.GpxDirItem;
 import net.osmand.shared.gpx.SmartFolderHelper;
 import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.io.KFile;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Removes surplus keys and upgrades outdated ones.
@@ -31,7 +32,7 @@ public class UpgradeTrackSortModeKeysAlgorithm {
 	private final TrackSortModesHelper sortModesHelper;
 
 	private UpgradeTrackSortModeKeysAlgorithm(@NonNull OsmandApplication app,
-	                                          @NonNull TrackSortModesHelper sortModesHelper) {
+			@NonNull TrackSortModesHelper sortModesHelper) {
 		this.app = app;
 		this.sortModesHelper = sortModesHelper;
 		this.gpxDbHelper = app.getGpxDbHelper();
@@ -39,7 +40,7 @@ public class UpgradeTrackSortModeKeysAlgorithm {
 	}
 
 	public static void execute(@NonNull OsmandApplication app,
-	                           @NonNull TrackSortModesHelper sortModesHelper) {
+			@NonNull TrackSortModesHelper sortModesHelper) {
 		new UpgradeTrackSortModeKeysAlgorithm(app, sortModesHelper).execute();
 	}
 
@@ -56,20 +57,31 @@ public class UpgradeTrackSortModeKeysAlgorithm {
 		putUpgradedKey(upgradedCache, TrackTabType.ON_MAP.name());
 		putUpgradedKey(upgradedCache, TrackTabType.ALL.name());
 		putUpgradedKey(upgradedCache, TrackTabType.FOLDERS.name());
-		List<GpxDirItem> gpxDirs = gpxDbHelper.getDirItems();
-		for (GpxDirItem gpxDir : gpxDirs) {
-			KFile directory = gpxDir.getFile();
-			String absolutePath = directory.absolutePath();
-			if (!absolutePath.endsWith(File.separator)) {
-				absolutePath += File.separator;
-			}
-			putUpgradedKey(upgradedCache, getFolderIdV2(absolutePath));
+		for (String id : getDirIds()) {
+			putUpgradedKey(upgradedCache, id);
 		}
 		for (SmartFolder folder : smartFolderHelper.getSmartFolders()) {
 			putUpgradedKey(upgradedCache, folder.getId());
 		}
 		sortModesHelper.setSortModes(upgradedCache);
 		sortModesHelper.syncSettings();
+	}
+
+	@NonNull
+	private Set<String> getDirIds() {
+		Set<String> ids = new HashSet<>();
+		for (GpxDataItem item : gpxDbHelper.getItems()) {
+			KFile file = item.getFile();
+			KFile dir = file.getParentFile();
+			if (dir != null) {
+				String path = dir.absolutePath();
+				if (!path.endsWith(File.separator)) {
+					path += File.separator;
+				}
+				ids.add(getFolderIdV2(path));
+			}
+		}
+		return ids;
 	}
 
 	private void putUpgradedKey(@NonNull Map<String, TracksSortMode> map, @NonNull String id) {
