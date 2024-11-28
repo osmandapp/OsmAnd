@@ -382,7 +382,8 @@ public class NavigationSession extends Session implements NavigationListener, Os
 				});
 			} else {
 				String text = point.isGeoAddress() ? point.getQuery() : uri.toString();
-				screenManager.pushForResult(new SearchResultsScreen(context, settingsAction, text), (obj) -> {});
+				screenManager.pushForResult(new SearchResultsScreen(context, settingsAction, text), (obj) -> {
+				});
 			}
 		}
 	}
@@ -435,9 +436,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		// navigation already started
 		if (routingHelper.isFollowingMode() && routingHelper.isRouteCalculated() && !carNavigationShouldBeActive) {
 			startCarNavigation();
-		}
-		if (routingHelper.isRouteCalculated()) {
-			routingHelper.resumeNavigation(); // to update navigate session immediately with location
+			updateCarNavigation(getApp().getLocationProvider().getLastKnownLocation());
 		}
 	}
 
@@ -468,7 +467,12 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	@Override
 	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
-		showRoutePreview();
+		if (routingHelper.isFollowingMode() && routingHelper.isRouteCalculated()) {
+			startNavigationScreen();
+			updateCarNavigation(getApp().getLocationProvider().getLastKnownLocation());
+		} else {
+			showRoutePreview();
+		}
 	}
 
 	@Override
@@ -597,15 +601,12 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	 */
 	public void setCarContext(@Nullable CarContext carContext) {
 		this.carContext = carContext;
-		Log.d("AA_navigation", "setCarContext " + carContext);
 		if (carContext != null) {
 			this.tripHelper = new TripHelper(getApp());
 			this.navigationManager = carContext.getCarService(NavigationManager.class);
-			Log.d("AA_navigation", "setCarContext navManager " + navigationManager);
 			this.navigationManager.setNavigationManagerCallback(new NavigationManagerCallback() {
 				@Override
 				public void onStopNavigation() {
-					Log.d("AA_navigation", "onStopNavigation " + routingHelper.isRouteCalculated() + "__" + routingHelper.isFollowingMode());
 					if (routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
 						routingHelper.pauseNavigation();
 					} else {
@@ -624,12 +625,10 @@ public class NavigationSession extends Session implements NavigationListener, Os
 					}
 				}
 			});
-			Log.d("AA_navigation", "setCarContext carNavigationShouldBeActive " + carNavigationShouldBeActive);
 			if (carNavigationShouldBeActive) {
 				navigationManager.navigationStarted();
 			}
 		} else {
-			Log.d("AA_navigation", "setCarContext navManager=null");
 			this.navigationManager = null;
 		}
 	}
@@ -638,7 +637,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	 * Clears the currently used {@link CarContext}.
 	 */
 	public void clearCarContext() {
-		Log.d("AA_navigation", "public void clearCarContext()");
 		carContext = null;
 		if (navigationManager != null) {
 			navigationManager.clearNavigationManagerCallback();
@@ -651,7 +649,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	 * Starts navigation.
 	 */
 	public void startCarNavigation() {
-		Log.d("AA_navigation", "startCarNavigation " + navigationManager);
 		if (navigationManager != null) {
 			navigationManager.navigationStarted();
 		}
@@ -663,7 +660,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	 */
 	public void stopCarNavigation() {
 		getApp().runInUIThread(() -> {
-			Log.d("AA_navigation", "stopCarNavigation navManager " + navigationManager);
 					if (navigationManager != null) {
 						NavigationSession carNavigationSession = getApp().getCarNavigationSession();
 						if (carNavigationSession != null) {
@@ -682,10 +678,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	public void updateCarNavigation(Location currentLocation) {
 		OsmandApplication app = getApp();
 		TripHelper tripHelper = this.tripHelper;
-		Log.d("AA_navigation", "Nav session active=" + carNavigationShouldBeActive +
-				" manager=" + navigationManager + " tripHelp=" + tripHelper +
-				" calculated=" + routingHelper.isRouteCalculated() +
-				" isFollowing=" + routingHelper.isFollowingMode());
 		if (carNavigationShouldBeActive && navigationManager != null && tripHelper != null
 				&& routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
 			NavigationSession carNavigationSession = app.getCarNavigationSession();

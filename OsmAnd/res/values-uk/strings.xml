@@ -5196,7 +5196,7 @@
     <string name="tracks_empty_folder">Порожня тека</string>
     <string name="track_not_recorded">Не записано</string>
     <string name="shared_string_new_track">Новий трек</string>
-    <string name="shared_string_visible_on_map">Показати на мапі</string>
+    <string name="shared_string_visible_on_map">Видно на карті</string>
     <string name="delete_track_folder_dialog_message">Теку \"%1$s\" буде видалено разом з усіма %2$s треками, що в ній містяться.</string>
     <string name="delete_folder_question">Вилучити теку\?</string>
     <string name="delete_folder">Вилучити теку</string>
@@ -5923,7 +5923,6 @@
     <string name="obd_fuel_type_bifuel_methanol">Двопаливний метанол</string>
     <string name="obd_fuel_type_bifuel_ethanol">Двопаливний етанол</string>
     <string name="percent_unit">%</string>
-    <string name="obd_rpm">Оберти</string>
     <string name="rpm_unit">об/хв</string>
     <string name="obd_rpm_desc">Віджет показує оберти з тахометра машини за датчиком OBD</string>
     <string name="obd_fuel_type_desc">Віджет показує тип пального машини за датчиком OBD</string>
@@ -5953,7 +5952,6 @@
     <string name="obd_engine_coolant_temp">t° охолоджувальної рідини двигуна</string>
     <string name="obd_fuel_level">Рівень пального (%)</string>
     <string name="obd_fuel_consumption_rate">Споживання пального</string>
-    <string name="obd_fuel_left_distance">Залишок пального (відстань)</string>
     <string name="reset_average_speed">Скинути середню швидкість</string>
     <string name="obd_vin_desc">VIN-код за OBD</string>
     <string name="obd_fuel_type_electric">Електрика</string>

@@ -45,7 +45,7 @@ public class QuickActionButtonState extends MapButtonState {
 	public QuickActionButtonState(@NonNull OsmandApplication app, @NonNull String id) {
 		super(app, id);
 		this.visibilityPref = addPreference(settings.registerBooleanPreference(id + "_state", false)).makeProfile();
-		this.namePref = addPreference(settings.registerStringPreference(id + "_name", null)).makeGlobal();
+		this.namePref = addPreference(settings.registerStringPreference(id + "_name", null)).makeGlobal().storeLastModifiedTime();
 		this.quickActionsPref = addPreference(settings.registerStringPreference(id + "_list", null)).makeGlobal().storeLastModifiedTime();
 		this.quickActionLayer = app.getOsmandMap().getMapLayers().getMapQuickActionLayer();
 	}
@@ -130,10 +130,11 @@ public class QuickActionButtonState extends MapButtonState {
 	}
 
 	public long getLastModifiedTime() {
-		return quickActionsPref.getLastModifiedTime();
+		return Math.max(namePref.getLastModifiedTime(), quickActionsPref.getLastModifiedTime());
 	}
 
 	public void setLastModifiedTime(long lastModifiedTime) {
+		namePref.setLastModifiedTime(lastModifiedTime);
 		quickActionsPref.setLastModifiedTime(lastModifiedTime);
 	}
 

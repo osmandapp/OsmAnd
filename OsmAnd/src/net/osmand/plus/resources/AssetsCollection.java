@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetEntry;
+import net.osmand.plus.voice.JsTtsCommandPlayer;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class AssetsCollection {
 
 	public AssetsCollection(@NonNull OsmandApplication app, @NonNull List<AssetEntry> assets) {
 		assets.forEach(asset -> map.put(asset.destination, asset));
-		this.basePath = app.getAppPath(null).getAbsolutePath();
+		this.basePath = app.getAppPath(null).getAbsolutePath() + "/";
 	}
 
 	@NonNull
@@ -52,12 +53,22 @@ public class AssetsCollection {
 
 	@Nullable
 	private AssetEntry getAssetEntry(@NonNull File file) {
-		return map.get(getRelativePath(file));
+		String path = getRelativePath(file);
+		AssetEntry entry = map.get(path);
+
+		if (entry == null && JsTtsCommandPlayer.isMyData(file)) {
+			File langFile = JsTtsCommandPlayer.getLangFile(file);
+			if (langFile != null) {
+				path = getRelativePath(langFile);
+				entry = map.get(path);
+			}
+		}
+		return entry;
 	}
 
 	@NonNull
 	private String getRelativePath(@NonNull File file) {
 		String path = file.getAbsolutePath();
-		return path.startsWith(basePath) ? path.substring(basePath.length() + 1) : path;
+		return path.replace(basePath, "");
 	}
 }

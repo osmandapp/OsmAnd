@@ -191,6 +191,7 @@ class OBDMainFragmentAdapter(
 		private val valueView: TextView = itemView.findViewById(R.id.value)
 		private val unitView: TextView = itemView.findViewById(R.id.unit)
 		private val divider: View = itemView.findViewById(R.id.divider)
+		private val shortDivider: View = itemView.findViewById(R.id.short_divider)
 		private val icon: ImageView = itemView.findViewById(R.id.icon)
 		private val view: View = itemView
 
@@ -211,7 +212,8 @@ class OBDMainFragmentAdapter(
 				icon.setImageDrawable(paintedIcon)
 			}
 			updateValue(widget)
-			AndroidUiHelper.updateVisibility(divider, showDivider)
+			AndroidUiHelper.updateVisibility(divider, false)
+			AndroidUiHelper.updateVisibility(shortDivider, showDivider)
 		}
 
 		fun bindViewValues(
@@ -219,7 +221,8 @@ class OBDMainFragmentAdapter(
 			showDivider: Boolean
 		) {
 			updateValue(widget)
-			AndroidUiHelper.updateVisibility(divider, showDivider)
+			AndroidUiHelper.updateVisibility(divider, false)
+			AndroidUiHelper.updateVisibility(shortDivider, showDivider)
 		}
 
 		private fun updateValue(

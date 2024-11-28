@@ -5422,14 +5422,12 @@
     <string name="obd_widget_group">Mælistærðir farartækis</string>
     <string name="percent_unit">%</string>
     <string name="rpm_unit">sn/mín</string>
-    <string name="obd_rpm">SN/MÍN</string>
     <string name="obd_air_intake_temp">Hitastig inntaks</string>
     <string name="obd_ambient_air_temp">Hitastig umhverfis</string>
     <string name="obd_battery_voltage">Rafhlöðuspenna</string>
     <string name="obd_engine_coolant_temp">Kælihitastig</string>
     <string name="obd_fuel_level">Nýtni eldsneytis (%%)</string>
     <string name="obd_fuel_consumption_rate">Eldsneytiseyðsla</string>
-    <string name="obd_fuel_left_distance">Eldsneyti eftir (vegalengd)</string>
     <string name="obd_fuel_type">Tegund eldsneytis</string>
     <string name="obd_plugin_name">Mælistærðir farartækis</string>
     <string name="obd_support">Stuðningur við OBD</string>
@@ -5566,8 +5564,6 @@
     <string name="obd_searching_text_description">Haltu tækinu þínu nálægt skynjaranum. Gakktu úr skugga um að vélin sé í gangi.</string>
     <string name="obd_widget_vehicle_speed">Hraði farartækis</string>
     <string name="kpa_unit">kPa</string>
-    <string name="obd_fuel_left_percent">Eldsneyti eftir (%)</string>
-    <string name="obd_fuel_left_liter">Eldsneyti eftir (l)</string>
     <string name="obd_fuel_left_km">Eldsneyti eftir (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Eldsneytiseyðsla (obd)</string>
     <string name="obd_device_forget_sensor_description">Skynjari verður fjarlægður af listanum. Þú munt geta parað þennan skynjara aftur hvenær sem er.</string>

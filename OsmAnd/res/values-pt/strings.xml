@@ -5918,7 +5918,6 @@
     <string name="obd_fuel_type_unknown">Tipo de combustível desconhecido</string>
     <string name="shared_string_obd">OBD</string>
     <string name="percent_unit">%</string>
-    <string name="obd_rpm">RPM</string>
     <string name="rpm_unit">rpm</string>
     <string name="track_does_not_contain_data_to_save">O trilho não contém dados para guardar.</string>
     <string name="quick_action_finish_trip_recording_summary">Um botão para guardar o trilho GPX e terminar a gravação da viagem.</string>
@@ -5967,7 +5966,6 @@
     <string name="obd_fuel_level">Nível de combustível</string>
     <string name="obd_fuel_consumption_rate">Taxa de consumo de combustível</string>
     <string name="obd_fuel_consumption_rate_desc">Mostra a taxa de consumo de combustível do veículo com base no OBD e localização</string>
-    <string name="obd_fuel_left_distance">Combustível restante (distância)</string>
     <string name="obd_fuel_type">Tipo de combustível</string>
     <string name="obd_plugin_name">Métricas do veículo</string>
     <string name="obd_support">Suporte OBD</string>
