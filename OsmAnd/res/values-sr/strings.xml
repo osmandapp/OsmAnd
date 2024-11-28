@@ -5611,7 +5611,7 @@
     <string name="obd_fuel_level_percent">Ниво горива (%)</string>
     <string name="obd_fuel_left_km">Преостало гориво (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Брзина потрошње горива (днв)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">Брзина потрошње горива L/h</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Брзина потрошње горива</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Брзина потрошње горива %/h</string>
     <string name="obd_fuel_consumption_rate_l_h">Брзина потрошње горива (L/h)</string>
     <string name="liter">l</string>

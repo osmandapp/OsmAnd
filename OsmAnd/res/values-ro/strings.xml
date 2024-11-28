@@ -5910,4 +5910,5 @@
     <string name="obd_air_intake_temp_desc">Indică temperatura aerului care intră în colectorul de admisie al motorului.</string>
     <string name="obd_engine_oil_temperature">Temperatura uleiului de motor</string>
     <string name="obd_fuel_consumption_desc">Afișează rata de utilizare a combustibilului de către motor, calculată pe baza combustibilului rămas, a dimensiunii rezervorului și a distanței parcurse determinate de GPS.</string>
+    <string name="obd_fuel_consumption">Consumul de combustibil</string>
 </resources>
