@@ -24,16 +24,19 @@ public class SettingsSearchButtonHelper {
 	private final BaseSettingsFragment rootSearchPreferenceFragment;
 	private final @IdRes int fragmentContainerViewId;
 	private final SearchDatabaseStatusHandler searchDatabaseStatusHandler;
+	private final Supplier<Optional<LongRunningTask<MergedPreferenceScreenData>>> getCreateSearchDatabaseTask;
 
 	public SettingsSearchButtonHelper(final BaseSettingsFragment rootSearchPreferenceFragment,
 									  final @IdRes int fragmentContainerViewId,
-									  final OsmandApplication app) {
+									  final OsmandApplication app,
+									  final Supplier<Optional<LongRunningTask<MergedPreferenceScreenData>>> getCreateSearchDatabaseTask) {
 		this.rootSearchPreferenceFragment = rootSearchPreferenceFragment;
 		this.fragmentContainerViewId = fragmentContainerViewId;
 		this.searchDatabaseStatusHandler =
 				new SearchDatabaseStatusHandler(
 						new SetStringPreference(
 								app.getSettings().PLUGINS_COVERED_BY_SETTINGS_SEARCH));
+		this.getCreateSearchDatabaseTask = getCreateSearchDatabaseTask;
 	}
 
 	public void configureSettingsSearchButton(final ImageView settingsSearchButton) {
@@ -70,7 +73,7 @@ public class SettingsSearchButtonHelper {
 	private void onClickShowSearchPreferenceFragment(final ImageView searchPreferenceButton) {
 		final SearchPreferenceFragments searchPreferenceFragments =
 				createSearchPreferenceFragments(
-						Optional::empty,
+						getCreateSearchDatabaseTask,
 						rootSearchPreferenceFragment.requireActivity(),
 						fragmentContainerViewId,
 						rootSearchPreferenceFragment.getClass());

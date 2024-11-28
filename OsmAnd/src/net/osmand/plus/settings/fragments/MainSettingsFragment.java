@@ -307,7 +307,8 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 				new SettingsSearchButtonHelper(
 						this,
 						R.id.fragmentContainer,
-						app);
+						app,
+						getMapActivity()::getCreateSearchDatabaseTask);
 		settingsSearchButtonHelper.configureSettingsSearchButton(view.findViewById(R.id.action_button));
 	}
 }

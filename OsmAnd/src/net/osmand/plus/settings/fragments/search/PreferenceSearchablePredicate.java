@@ -21,7 +21,7 @@ class PreferenceSearchablePredicate implements de.KnollFrank.lib.settingssearch.
 					R.layout.drawer_divider);
 
 	@Override
-	public boolean isPreferenceOfHostSearchable(final Preference preference, final PreferenceFragmentCompat host) {
+	public boolean isPreferenceSearchable(final Preference preference, final PreferenceFragmentCompat host) {
 		return !NON_SEARCHABLE_LAYOUT_RESIDS.contains(preference.getLayoutResource());
 	}
 }

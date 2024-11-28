@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -966,7 +967,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		{
 			final var createSearchDatabaseTask = _getCreateSearchDatabaseTask();
 			this.createSearchDatabaseTask = Optional.of(createSearchDatabaseTask);
-			createSearchDatabaseTask.execute();
+			createSearchDatabaseTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
 
