@@ -883,6 +883,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (infoCard != null) {
 			infoCard.updateContent();
 		}
+		if (metadataExtensionsCard != null) {
+			metadataExtensionsCard.updateContent();
+		}
 	}
 
 	private void updateCardsLayout() {

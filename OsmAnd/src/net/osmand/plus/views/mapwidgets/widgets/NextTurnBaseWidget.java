@@ -77,7 +77,8 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	private boolean isFullRow;
 	protected boolean verticalWidget;
 
-	public NextTurnBaseWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @NonNull WidgetType widgetType, @Nullable WidgetsPanel panel, boolean horizontalMini) {
+	public NextTurnBaseWidget(@NonNull MapActivity mapActivity, @Nullable String customId,
+			@NonNull WidgetType widgetType, @Nullable WidgetsPanel panel, boolean horizontalMini) {
 		super(mapActivity, widgetType);
 		this.horizontalMini = horizontalMini;
 		this.customId = customId;
@@ -179,7 +180,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		} else {
 			boolean vis = updateVisibility(turnType != null);
 			if (turnDrawable.setTurnType(turnType) || vis) {
-				turnDrawable.setTextPaint(topTextView.getPaint());
+				turnDrawable.setTextPaint(textPaint);
 				if (horizontalMini) {
 					setImageDrawable(turnDrawable, false);
 				} else {
@@ -342,8 +343,8 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			updateVerticalWidgetColors(textState);
 		} else {
 			super.updateColors(textState);
-			updateTextColor(topTextView, null, textState.textColor, textState.textShadowColor,
-					textState.textBold, textState.textShadowRadius);
+			updateTextColor(topTextView, null, textState.textColor,
+					textState.textShadowColor, textState.textBold, textState.textShadowRadius);
 
 			textPaint.set(topTextView.getPaint());
 			textPaint.setColor(textState.textColor);
