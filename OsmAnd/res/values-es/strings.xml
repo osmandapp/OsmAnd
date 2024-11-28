@@ -6004,7 +6004,7 @@
     <string name="obd_fuel_level_percent">Nivel de combustible (%)</string>
     <string name="obd_fuel_left_km">Combustible restante (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Tasa de consumo (obd)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">Consumo de combustible L/h</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Consumo de combustible</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Consumo de combustible %/h</string>
     <string name="liter">l</string>
     <string name="percent_hour">%/h</string>
