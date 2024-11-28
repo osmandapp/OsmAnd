@@ -1,10 +1,8 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.CALLING_FRAGMENT_TAG;
-import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_NAME;
-import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_TYPE;
+import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_ID;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.SELECT_ALL_ITEMS_ON_TAB;
-import static net.osmand.plus.configmap.tracks.TrackTab.SMART_FOLDER_TAB_NAME_PREFIX;
 import static net.osmand.plus.configmap.tracks.TrackTabType.FOLDER;
 import static net.osmand.plus.configmap.tracks.TrackTabType.SMART_FOLDER;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
@@ -33,7 +31,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
-import net.osmand.IndexConstants;
+import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
 import net.osmand.plus.myplaces.tracks.DialogClosedListener;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
@@ -63,7 +61,6 @@ import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTr
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -84,10 +81,7 @@ import net.osmand.shared.util.KAlgorithms;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment implements FragmentStateHolder,
@@ -333,23 +327,14 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	@NonNull
 	@Override
 	public TracksSortMode getTracksSortMode() {
-		Map<String, String> tabsSortModes = settings.getTrackSortModes();
-		for (Entry<String, String> entry : tabsSortModes.entrySet()) {
-			if (KAlgorithms.INSTANCE.stringsEqual(entry.getKey(), getSortEntryName())) {
-				return TracksSortMode.getByValue(entry.getValue());
-			}
-		}
-		return TracksSortMode.getDefaultSortMode();
+		TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
+		return sortModesHelper.requireSortMode(getSortEntryId());
 	}
 
-	protected String getSortEntryName() {
-		if (selectedFolder != null) {
-			return selectedFolder.getDirName();
-		}
-		if (smartFolder != null) {
-			return SMART_FOLDER_TAB_NAME_PREFIX + smartFolder.getName();
-		}
-		return null;
+	@Nullable
+	protected String getSortEntryId() {
+		TracksGroup folder = selectedFolder != null ? selectedFolder : smartFolder;
+		return folder != null ? folder.getId() : null;
 	}
 
 	@Override
@@ -357,53 +342,28 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		if (sortSubFolders) {
 			sortSubFolder(sortMode);
 		} else {
-			Map<String, String> tabsSortModes = settings.getTrackSortModes();
-			if (smartFolder != null) {
-				tabsSortModes.put(SMART_FOLDER_TAB_NAME_PREFIX + smartFolder.getFolderName(), sortMode.name());
-			} else {
-				tabsSortModes.put(selectedFolder.getDirName(), sortMode.name());
-			}
-			settings.saveTabsSortModes(tabsSortModes);
-
+			TracksGroup folder = smartFolder != null ? smartFolder : selectedFolder;
+			TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
+			sortModesHelper.setSortMode(folder.getId(), sortMode);
+			sortModesHelper.syncSettings();
 			updateContent();
 		}
 	}
 
-	private void sortSubFolder(TracksSortMode sortMode) {
-		OsmandSettings settings = app.getSettings();
-		Map<String, String> tabsSortModes = settings.getTrackSortModes();
-		sortFolders(selectedFolder, tabsSortModes, sortMode);
-		settings.saveTabsSortModes(tabsSortModes);
+	private void sortSubFolder(@NonNull TracksSortMode sortMode) {
+		TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
+		sortFolders(selectedFolder, sortModesHelper, sortMode);
+		sortModesHelper.syncSettings();
 
 		app.showToastMessage(app.getString(R.string.sorted_sufolders_toast, selectedFolder.getName(), app.getString(sortMode.getNameId())));
 	}
 
-	private void sortFolders(TrackFolder trackFolder, Map<String, String> tabsSortModes, TracksSortMode sortMode) {
+	private void sortFolders(@NonNull TrackFolder trackFolder,
+	                         @NonNull TrackSortModesHelper sortModesHelper,
+	                         @NonNull TracksSortMode sortMode) {
 		for (TrackFolder folder : trackFolder.getFlattenedSubFolders()) {
-			tabsSortModes.put(folder.getDirName(), sortMode.name());
+			sortModesHelper.setSortMode(folder.getId(), sortMode);
 		}
-	}
-
-	private void removeSurplusTabsSortModes() {
-		if (!rootFolder.getDirFile().equals(app.getAppPathKt(IndexConstants.GPX_INDEX_DIR))) {
-			// Execute only from tracks root folder to not lose valid entries
-			return;
-		}
-		OsmandSettings settings = app.getSettings();
-		Map<String, String> oldTabsSortModes = settings.getTrackSortModes();
-		Map<String, String> tabsSortModes = new HashMap<>();
-
-		tabsSortModes.put(TrackTabType.ON_MAP.name(), oldTabsSortModes.get(TrackTabType.ON_MAP.name()));
-		tabsSortModes.put(TrackTabType.ALL.name(), oldTabsSortModes.get(TrackTabType.ALL.name()));
-		tabsSortModes.put(rootFolder.getDirName(), oldTabsSortModes.get(rootFolder.getDirName()));
-		for (TrackFolder folder : rootFolder.getFlattenedSubFolders()) {
-			tabsSortModes.put(folder.getDirName(), oldTabsSortModes.get(folder.getDirName()));
-		}
-		for (SmartFolder folder : app.getSmartFolderHelper().getSmartFolders()) {
-			String key = SMART_FOLDER_TAB_NAME_PREFIX + folder.getFolderName();
-			tabsSortModes.put(key, oldTabsSortModes.get(key));
-		}
-		settings.saveTabsSortModes(tabsSortModes);
 	}
 
 	@Override
@@ -517,31 +477,28 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	@Override
 	public void onFolderRenamed(@NonNull File newDir) {
 		updateContent();
-		removeSurplusTabsSortModes();
 	}
 
 	@Override
 	public void onFolderDeleted() {
 		reloadTracks();
-		removeSurplusTabsSortModes();
 	}
 
 	@Override
 	public void showFolderTracksOnMap(@NonNull TrackFolder folder) {
-		showTracksVisibilityDialog(folder.getDirName(), FOLDER, true);
+		showTracksVisibilityDialog(folder.getId(), FOLDER, true);
 	}
 
 	@Override
 	public void showSmartFolderTracksOnMap(@NonNull SmartFolder smartFolder) {
-		showTracksVisibilityDialog(smartFolder.getFolderName(), SMART_FOLDER, true);
+		showTracksVisibilityDialog(smartFolder.getId(), SMART_FOLDER, true);
 	}
 
-	protected void showTracksVisibilityDialog(@NonNull String name, @NonNull TrackTabType type, boolean selectAll) {
+	protected void showTracksVisibilityDialog(@NonNull String id, @NonNull TrackTabType type, boolean selectAll) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			Bundle bundle = new Bundle();
-			bundle.putString(PRESELECTED_TRACKS_TAB_NAME, name);
-			bundle.putSerializable(PRESELECTED_TRACKS_TAB_TYPE, type);
+			bundle.putString(PRESELECTED_TRACKS_TAB_ID, id);
 			bundle.putBoolean(SELECT_ALL_ITEMS_ON_TAB, selectAll);
 			bundle.putString(CALLING_FRAGMENT_TAG, TAG);
 			MapActivity.launchMapActivityMoveToTop(activity, storeState(), null, bundle);

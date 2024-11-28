@@ -83,7 +83,7 @@ class TracksScreen(
         val title = if (trackTab.type == TrackTabType.ALL) {
             app.getString(R.string.sort_last_modified)
         } else {
-            trackTab.getName(app)
+            trackTab.getName()
         }
         val isLoading = loadTracksTask.status != AsyncTask.Status.FINISHED
         templateBuilder.setLoading(isLoading)

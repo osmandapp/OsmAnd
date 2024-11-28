@@ -32,6 +32,7 @@ import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.configmap.routes.RouteLayersHelper;
+import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
 import net.osmand.plus.download.local.LocalIndexHelper;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.feedback.AnalyticsHelper;
@@ -332,6 +333,7 @@ public class AppInitializer implements IProgress {
 		app.dialogManager = startupInit(new DialogManager(), DialogManager.class);
 		app.routeLayersHelper = startupInit(new RouteLayersHelper(app), RouteLayersHelper.class);
 		app.model3dHelper = startupInit(new Model3dHelper(app), Model3dHelper.class);
+		app.trackSortModesHelper = startupInit(new TrackSortModesHelper(app), TrackSortModesHelper.class);
 
 		initOpeningHoursParser();
 	}

@@ -109,7 +109,6 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.Map.Entry;
 
 public class OsmandSettings {
 
@@ -2053,39 +2052,6 @@ public class OsmandSettings {
 
 	public final CommonPreference<TracksSortMode> SEARCH_TRACKS_SORT_MODE = new EnumStringPreference<>(this, "search_tracks_sort_mode", TracksSortMode.getDefaultSortMode(), TracksSortMode.values());
 	public final ListStringPreference TRACKS_TABS_SORT_MODES = (ListStringPreference) new ListStringPreference(this, "tracks_tabs_sort_modes", null, ";;").makeGlobal().makeShared().cache();
-
-	@NonNull
-	public Map<String, String> getTrackSortModes() {
-		return getTrackSortModes(TRACKS_TABS_SORT_MODES.getStringsList());
-	}
-
-	public void saveTabsSortModes(@NonNull Map<String, String> tabsSortModes) {
-		List<String> sortModes = getPlainSortModes(tabsSortModes);
-		TRACKS_TABS_SORT_MODES.setStringsList(sortModes);
-	}
-
-	@NonNull
-	private Map<String, String> getTrackSortModes(@Nullable List<String> modes) {
-		Map<String, String> sortModes = new HashMap<>();
-		if (!Algorithms.isEmpty(modes)) {
-			for (String sortMode : modes) {
-				String[] tabSortMode = sortMode.split(",,");
-				if (tabSortMode.length == 2) {
-					sortModes.put(tabSortMode[0], tabSortMode[1]);
-				}
-			}
-		}
-		return sortModes;
-	}
-
-	@NonNull
-	private List<String> getPlainSortModes(@NonNull Map<String, String> tabsSortModes) {
-		List<String> sortTypes = new ArrayList<>();
-		for (Entry<String, String> entry : tabsSortModes.entrySet()) {
-			sortTypes.add(entry.getKey() + ",," + entry.getValue());
-		}
-		return sortTypes;
-	}
 
 	public final OsmandPreference<Boolean> ANIMATE_MY_LOCATION = new BooleanPreference(this, "animate_my_location", true).makeProfile().cache();
 
