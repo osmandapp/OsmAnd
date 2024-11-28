@@ -12,6 +12,7 @@ import androidx.core.location.LocationListenerCompat;
 import net.osmand.Location;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.util.Algorithms;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -29,7 +30,7 @@ public abstract class LocationServiceHelper {
 		@Override
 		public void onLocationChanged(@NonNull android.location.Location location) {
 			LocationCallback locationCallback = LocationServiceHelper.this.networkLocationCallback;
-			if (locationCallback != null) {
+			if (locationCallback != null && !(app.getRoutingHelper().isFollowingMode() && Algorithms.stringsEqual(location.getProvider(), "network"))) {
 				net.osmand.Location l = convertLocation(location);
 				locationCallback.onLocationResult(l == null ? Collections.emptyList() : Collections.singletonList(l));
 			}
