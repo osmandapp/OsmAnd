@@ -26,6 +26,8 @@ public class RouteDirectionInfo {
 
 	private String destinationName;
 
+	private String destinationRef;
+
 	private RouteDataObject routeDataObject;
 
 	@Nullable
@@ -132,4 +134,12 @@ public class RouteDirectionInfo {
 	public void setExitInfo(@Nullable ExitInfo exitInfo) {
 		this.exitInfo = exitInfo;
 	}
+
+    public String getDestinationRef() {
+        return destinationRef;
+    }
+
+    public void setDestinationRef(String destinationRef) {
+        this.destinationRef = destinationRef;
+    }
 }

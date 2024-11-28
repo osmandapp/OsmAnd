@@ -225,8 +225,8 @@ public class TripUtils {
 	}
 
 	@NonNull
-	public static CurrentStreetName getStreetName(@NonNull OsmandApplication app, @NonNull NextDirectionInfo info, @NonNull RouteDirectionInfo routeInfo) {
-		CurrentStreetName streetName = new CurrentStreetName(info);
+	public static CurrentStreetName getStreetName(@NonNull OsmandApplication app, @NonNull NextDirectionInfo info, @NonNull RouteDirectionInfo routeInfo, boolean useDestination) {
+		CurrentStreetName streetName = new CurrentStreetName(info, useDestination);
 		if (Algorithms.isEmpty(streetName.text)) {
 			streetName.text = getTurnDescription(app, info, routeInfo);
 		}

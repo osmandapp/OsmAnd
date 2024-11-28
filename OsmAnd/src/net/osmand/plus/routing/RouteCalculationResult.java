@@ -449,7 +449,8 @@ public class RouteCalculationResult {
 					String lang = ctx.getSettings().MAP_PREFERRED_LOCALE.get();
 					boolean transliterate = ctx.getSettings().MAP_TRANSLITERATE_NAMES.get();
 					info.setStreetName(current.getStreetName(lang, transliterate, list, lind));
-					info.setDestinationName(current.getDestinationName(lang, transliterate, list, lind));
+					info.setDestinationName(current.getDestinationName(lang, transliterate, list, lind, false));
+					info.setDestinationRef(current.getObject().getDestinationRef(lang, transliterate, current.isForwardDirection()));
 
 					RouteDataObject rdoWithShield = null;
 					RouteDataObject rdoWithoutShield = null;
@@ -491,8 +492,15 @@ public class RouteCalculationResult {
 					}
 				}
 
+				String destinationName = info.getDestinationName();
+				String destinationRef = info.getDestinationRef();
+				if (!Algorithms.isEmpty(destinationRef) && !Algorithms.isEmpty(destinationName)) {
+					destinationName = destinationRef + ", " + destinationName;
+				} else if (!Algorithms.isEmpty(destinationRef) && Algorithms.isEmpty(destinationName)) {
+					destinationName = destinationRef;
+				}
 				String description = toString(turn, ctx, false) + " " + RoutingHelperUtils.formatStreetName(info.getStreetName(),
-						info.getRef(), info.getDestinationName(), ctx.getString(R.string.towards));
+						info.getRef(), destinationName, ctx.getString(R.string.towards));
 				description = description.trim();
 				String[] pointNames = s.getObject().getPointNames(s.getStartPointIndex());
 				if (pointNames != null) {

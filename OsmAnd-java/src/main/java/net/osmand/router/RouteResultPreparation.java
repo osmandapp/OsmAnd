@@ -903,13 +903,13 @@ public class RouteResultPreparation {
 						if (!Algorithms.isEmpty(nm) || !Algorithms.isEmpty(ref)) {
 							streetName = String.format("onto %s %s " , nm, ref);
 						}
-						String to = result.get(prevSegment + 1).getDestinationName("", false, result, prevSegment + 1);
+						String to = result.get(prevSegment + 1).getDestinationName("", false, result, prevSegment + 1, true);
 						if(!Algorithms.isEmpty(to)) {
 							streetName = "to " + to; 
 						}
 					}
-					turnInfo.setDescription(String.format("%s %s and go %.1f km", mute, turn, dist / 1000.0),
-							String.format("%s %s %s and go %.1f km", mute, turn, streetName, dist / 1000.0));
+//					turnInfo.setDescription(String.format("%s %s and go %.1f km", mute, turn, dist / 1000.0),
+//							String.format("%s %s %s and go %.1f km", mute, turn, streetName, dist / 1000.0));
 				}
 				prevSegment = i;
 				dist = 0;
