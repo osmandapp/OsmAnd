@@ -311,6 +311,10 @@ public class LocalItemUtils {
 		return true;
 	}
 
+	public static boolean isSizeCalculating(@NonNull Context context, @NonNull LocalItem item) {
+		return LocalSizeController.isSizeCalculating(context, item);
+	}
+
 	public static long calculateItemsSize(@NonNull Collection<BaseLocalItem> items) {
 		long size = 0;
 		for (BaseLocalItem item : items) {

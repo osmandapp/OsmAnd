@@ -1,13 +1,10 @@
 package net.osmand.plus.download.local;
 
-import static net.osmand.plus.download.local.LocalItemType.TILES_DATA;
-
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
@@ -17,17 +14,16 @@ import java.util.Map;
 
 public class LocalItemsLoaderTask extends AsyncTask<Void, Void, Map<CategoryType, LocalCategory>> {
 
-	private static final long BYTES_IN_MB = 1024 * 1024;
-	private static final long TILES_SIZE_CALCULATION_LIMIT = 50 * BYTES_IN_MB;
-
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
+	private final LocalSizeController sizeController;
 	@Nullable
 	private final LoadItemsListener listener;
 
 	public LocalItemsLoaderTask(@NonNull OsmandApplication app, @Nullable LoadItemsListener listener) {
 		this.app = app;
 		this.settings = app.getSettings();
+		this.sizeController = LocalSizeController.requireInstance(app);
 		this.listener = listener;
 	}
 
@@ -53,17 +49,12 @@ public class LocalItemsLoaderTask extends AsyncTask<Void, Void, Map<CategoryType
 				.addDirectoryIfNotPresent(internalDir, false)
 				.addDirectoryIfNotPresent(externalDir, true)
 				.addForcedAddUnknownDirectory(noBackupDir)
-				.setSizeLimitCondition(localItem -> {
-					if (localItem.getType() == TILES_DATA) {
-						File file = localItem.getFile();
-						boolean isSQLite = file.getName().endsWith(IndexConstants.SQLITE_EXT);
-						return !isSQLite ? TILES_SIZE_CALCULATION_LIMIT : -1;
-					}
-					return null;
-				})
 				.build();
+		return CollectLocalIndexesAlgorithm.execute(collectingRules, this::onLocalItemAdded);
+	}
 
-		return CollectLocalIndexesAlgorithm.execute(collectingRules);
+	private void onLocalItemAdded(@NonNull LocalItem localItem) {
+		sizeController.updateLocalItemSizeIfNeeded(localItem);
 	}
 
 	@NonNull
