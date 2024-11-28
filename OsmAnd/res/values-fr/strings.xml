@@ -5609,8 +5609,8 @@
     <string name="obd_fuel_consumption_rate_scanner">Consommation de carburant (obd)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Consommation de carburant</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Consommation de carburant %/h</string>
-    <string name="obd_fuel_consumption_rate_l_h">Consommation d\'essence (L/h)</string>
-    <string name="obd_fuel_consumption_rate_sensor">Consommation d\'essence (capteur)</string>
+    <string name="obd_fuel_consumption_rate_l_h">Consommation de carburant (L/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor">Consommation de carburant (capteur)</string>
     <string name="speedometer_maximum">Maximum</string>
     <string name="liter">l</string>
     <string name="percent_hour">%/h</string>
@@ -5673,7 +5673,7 @@
     <string name="obd_ambient_air_temp_desc">Affiche la température de l\'air extérieur.</string>
     <string name="obd_calculated_engine_load">Charge moteur calculée</string>
     <string name="obd_engine_runtime">Durée de fonctionnement du moteur</string>
-    <string name="obd_fuel_consumption_desc">Affiche le taux d\'utilisation du carburant par le moteur, calculé en fonction du carburant restant, de la taille du réservoir et de la distance couverte selon le GPS.</string>
-    <string name="show_minor_turns_descr">Les voies seront affichées sur toutes les intersections passantes indépendamment des instructions vocales</string>
+    <string name="obd_fuel_consumption_desc">Affiche le taux de consommation du carburant par le moteur, calculé en fonction du carburant restant, de la taille du réservoir et de la distance parcourue selon le GPS.</string>
+    <string name="show_minor_turns_descr">Les voies seront affichées sur toutes les intersections rencontrées indépendamment des instructions vocales</string>
     <string name="show_minor_turns">Afficher sur les intersections mineures lors de la navigation en ligne droite</string>
 </resources>
