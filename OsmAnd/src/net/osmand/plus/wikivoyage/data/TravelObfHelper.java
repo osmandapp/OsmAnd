@@ -1167,7 +1167,7 @@ public class TravelObfHelper implements TravelHelper {
 	// Keep important tags. Note: name, ref, type, and route tags will be processed in a special way.
 	private static final Set<String> keepAsIsAmenityGpxTags = Set.of(
 			"osm_id",
-			"relation_gpx",
+			"use_osmc_colors",
 			"shield_" // prefix
 	);
 
