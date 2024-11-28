@@ -5617,7 +5617,7 @@
     <string name="obd_fuel_level_percent">Brændstofniveau (%)</string>
     <string name="obd_fuel_left_km">Brændstof tilbage (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Brændstofforbrug (obd)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">Brændstofforbrug L/t</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Brændstofforbrug</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Brændstofforbrug %/t</string>
     <string name="speedometer_maximum">Maksimum</string>
     <string name="percent_hour">%/t</string>
