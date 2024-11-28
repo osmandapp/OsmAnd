@@ -5684,4 +5684,6 @@
     <string name="vehicle_metrics_recording_description">Vælg de parametre, der skal registreres i GPX-filen.</string>
     <string name="obd_throttle_position">Gasspjældets position</string>
     <string name="obd_throttle_position_desc">Viser vinklen på gasspjældspladen i gasspjældshuset.</string>
+    <string name="obd_speed_desc">Viser hastighed fra køretøjets hastighedssensor (VVS).</string>
+    <string name="obd_air_intake_temp_desc">Viser temperaturen på den luft, der kommer ind i motorens indsugningsmanifold.</string>
 </resources>
