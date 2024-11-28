@@ -5612,7 +5612,7 @@
     <string name="obd_fuel_level_liter">Nivo goriva (l)</string>
     <string name="obd_fuel_left_km">Preostalo goriva za (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Potrošnja goriva (OBD)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">Potrošnja goriva L/h</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Brzina potrošnje goriva</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Potrošnja goriva %/h</string>
     <string name="obd_fuel_consumption_rate_l_h">Potrošnja goriva (L/h)</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Prikazuje potrošnju goriva na temelju senzora (L/h)</string>
