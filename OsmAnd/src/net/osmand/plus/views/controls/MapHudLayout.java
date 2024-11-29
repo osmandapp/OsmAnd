@@ -264,6 +264,9 @@ public class MapHudLayout extends FrameLayout {
 						position.isLeft(), position.isLeft() ? margins[0] : margins[2],
 						position.isTop(), position.isTop() ? margins[1] - statusBarHeight : margins[3] - statusBarHeight);
 			}
+		} else if (view instanceof RulerWidget) {
+			position.marginX = 0;
+			position.marginY = 0;
 		}
 		return position;
 	}
