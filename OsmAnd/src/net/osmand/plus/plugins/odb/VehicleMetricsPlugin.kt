@@ -738,7 +738,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			var isNan = (data is Float) && data.isNaN()
 			isNan = isNan || (data is Double) && data.isNaN()
 			if (isNan) {
-				return if (computerWidget.type == OBDDataComputer.OBDTypeWidget.FUEL_LEFT_KM) ">50" else "<50"
+				return "-"
 			}
 		}
 		val convertedData = when (computerWidget.type) {
