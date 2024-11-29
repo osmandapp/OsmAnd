@@ -159,7 +159,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				int z = (int) Math.floor(zoom + Math.log(getMapDensity()) / Math.log(2));
 
 				List<Amenity> res = new ArrayList<>();
-				Set<String> deduplicateByRouteId = new HashSet<>();
+				Set<String> uniqueRouteIds = new HashSet<>();
 				PoiFilterUtils.combineStandardPoiFilters(calculatedFilters, app);
 				for (PoiUIFilter filter : calculatedFilters) {
 					List<Amenity> amenities = filter.searchAmenities(latLonBounds.top, latLonBounds.left,
@@ -179,10 +179,10 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 						if (amenity.isRouteTrack()) {
 							String routeId = amenity.getRouteId();
 							if (routeId != null) {
-								if (deduplicateByRouteId.contains(routeId)) {
+								if (uniqueRouteIds.contains(routeId)) {
 									continue;
 								}
-								deduplicateByRouteId.add(routeId);
+								uniqueRouteIds.add(routeId);
 							}
 						}
 						res.add(amenity);
