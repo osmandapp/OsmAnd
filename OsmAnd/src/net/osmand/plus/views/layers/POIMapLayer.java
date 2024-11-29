@@ -178,11 +178,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 					for (Amenity amenity : amenities) {
 						if (amenity.isRouteTrack()) {
 							String routeId = amenity.getRouteId();
-							if (routeId != null) {
-								if (uniqueRouteIds.contains(routeId)) {
-									continue;
-								}
-								uniqueRouteIds.add(routeId);
+							if (routeId != null && !uniqueRouteIds.add(routeId)) {
+								continue; // duplicate
 							}
 						}
 						res.add(amenity);
