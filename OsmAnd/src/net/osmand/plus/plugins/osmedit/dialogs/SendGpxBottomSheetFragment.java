@@ -98,8 +98,9 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 
 	@Nullable
 	private String getFirstActivity() {
+		GpxDbHelper gpxDbHelper = requiredMyApplication().getGpxDbHelper();
 		for (File file : files) {
-			GpxDataItem gpxDataItem = requiredMyApplication().getGpxDbHelper().getItem(new KFile(file.getPath()));
+			GpxDataItem gpxDataItem = gpxDbHelper.getItem(new KFile(file.getPath()));
 			String activity = gpxDataItem != null ? gpxDataItem.getParameter(GpxParameter.ACTIVITY_TYPE) : null;
 
 			if (activity != null) {

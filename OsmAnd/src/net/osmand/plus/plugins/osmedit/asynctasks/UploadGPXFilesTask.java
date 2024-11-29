@@ -21,6 +21,7 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UploadGPXFilesTask extends AsyncTask<File, String, String> {
 
@@ -83,29 +84,32 @@ public class UploadGPXFilesTask extends AsyncTask<File, String, String> {
 	@NonNull
 	private String getGpxTags(@Nullable String activity) {
 		if (Algorithms.isEmpty(activity)) {
-			if (!Algorithms.isEmpty(defaultActivity) && commonTags.contains(defaultActivity)) {
-				return removeDefaultActivity();
-			}
-			return commonTags;
-		}
-
-		if (!commonTags.contains(activity)) {
-			if (!Algorithms.isEmpty(defaultActivity) && commonTags.contains(defaultActivity)) {
-				return commonTags.replace(defaultActivity, activity);
-			} else {
-				return commonTags + ", " + activity;
-			}
+			return removeDefaultActivity();
+		} else if (!commonTags.contains(activity)) {
+			return addActivity(activity);
 		}
 		return commonTags;
 	}
 
 	public String removeDefaultActivity() {
-		List<String> tagList = Arrays.stream(commonTags.split(","))
-				.map(String::trim)
-				.filter(tag -> !tag.equals(defaultActivity))
-				.toList();
+		String removedDefaultActivity = commonTags;
+		if (!Algorithms.isEmpty(defaultActivity) && commonTags.contains(defaultActivity)) {
+			List<String> tagList = Arrays.stream(commonTags.split(","))
+					.map(String::trim)
+					.filter(tag -> !tag.equals(defaultActivity))
+					.collect(Collectors.toList());
 
-		return String.join(", ", tagList);
+			removedDefaultActivity = String.join(", ", tagList);
+		}
+		return removedDefaultActivity;
+	}
+
+	public String addActivity(@Nullable String activity) {
+		if (!Algorithms.isEmpty(defaultActivity) && commonTags.contains(defaultActivity)) {
+			return commonTags.replace(defaultActivity, activity);
+		} else {
+			return commonTags + ", " + activity;
+		}
 	}
 
 	@Nullable
