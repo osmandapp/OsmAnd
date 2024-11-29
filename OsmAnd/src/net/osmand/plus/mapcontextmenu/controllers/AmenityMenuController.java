@@ -76,8 +76,7 @@ public class AmenityMenuController extends MenuController {
 					new MapMarkerMenuController(mapActivity, marker.getPointDescription(mapActivity), marker);
 			leftTitleButtonController = markerMenuController.getLeftTitleButtonController();
 			rightTitleButtonController = markerMenuController.getRightTitleButtonController();
-		} else if (amenity.getSubType().equals(ROUTE_ARTICLE_POINT) ||
-				amenity.getSubType().equals(ROUTE_TRACK_POINT)) {
+		} else if (amenity.isRoutePoint()) {
 			TitleButtonController openTrackButtonController = new TitleButtonController() {
 				@Override
 				public void buttonPressed() {
@@ -109,14 +108,14 @@ public class AmenityMenuController extends MenuController {
 
 	void openTrack(MapActivity mapActivity) {
 		TravelHelper travelHelper = mapActivity.getMyApplication().getTravelHelper();
-		if (amenity.getSubType().equals(ROUTE_ARTICLE_POINT)) {
+		if (ROUTE_ARTICLE_POINT.equals(amenity.getSubType())) {
 			String lang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
 			String name = amenity.getTagContent(Amenity.ROUTE_NAME);
 			TravelArticle article = travelHelper.getArticleByTitle(name, lang, true, null);
 			if (article != null) {
 				travelHelper.openTrackMenu(article, mapActivity, name, amenity.getLocation(), false);
 			}
-		} else if (amenity.getSubType().equals(ROUTE_TRACK_POINT)) {
+		} else if (ROUTE_TRACK_POINT.equals(amenity.getSubType())) {
 			TravelGpx travelGpx = travelHelper.searchGpx(amenity.getLocation(), amenity.getRouteId(), amenity.getRef());
 			if (travelGpx != null) {
 				travelHelper.openTrackMenu(travelGpx, mapActivity, travelGpx.getTitle(), amenity.getLocation(), false);
