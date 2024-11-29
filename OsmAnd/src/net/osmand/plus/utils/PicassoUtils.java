@@ -53,7 +53,7 @@ public class PicassoUtils {
 		}
 	}
 
-	public static PicassoUtils getPicasso(@NonNull OsmandApplication app) {
+	public synchronized static PicassoUtils getPicasso(@NonNull OsmandApplication app) {
 		if (INSTANCE == null) {
 			INSTANCE = new PicassoUtils(app);
 		}
