@@ -70,7 +70,6 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	private final RoutingHelper helper;
 	private final TransportRoutingHelper transportHelper;
-	private float lastRouteBearing;
 	private Location lastRouteProjection;
 
 	private final ChartPointsHelper chartPointsHelper;
@@ -231,10 +230,6 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		QuadRect correctedQuadRect = getCorrectedQuadRect(latlonRect);
 		drawLocations(tileBox, canvas, correctedQuadRect.top, correctedQuadRect.left,
 				correctedQuadRect.bottom, correctedQuadRect.right);
-	}
-
-	public float getLastRouteBearing() {
-		return lastRouteBearing;
 	}
 
 	@Nullable
@@ -475,11 +470,9 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			boolean shouldShowTurnArrows = shouldShowTurnArrows();
 
 			Location lastProjection;
-			float lastBearing;
 			int startLocationIndex;
 			if (directTo) {
 				lastProjection = null;
-				lastBearing = 0.0f;
 				startLocationIndex = 0;
 			} else if (route.getCurrentStraightAngleRoute() > 0) {
 				Location lastFixedLocation = helper.getLastFixedLocation();
@@ -519,28 +512,26 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 						previousRouteLocation = locations.get(currentRoute - 1);
 						currentRouteLocation = locations.get(currentRoute);
 					}
-					lastProjection = RoutingHelperUtils.getProject(
-							currentLocation, previousRouteLocation, currentRouteLocation);
-					lastBearing = lastProjection.getBearing();
-					if (!MapUtils.areLatLonEqual(previousRouteLocation, currentRouteLocation)) {
-						lastBearing = MapUtils.normalizeDegrees360(previousRouteLocation.bearingTo(currentRouteLocation));
-					}
-					if (app.getSettings().SNAP_TO_ROAD.get() && currentRoute + 1 < locations.size()) {
-						Location nextRouteLocation = locations.get(currentRoute + 1);
-						RoutingHelperUtils.approximateBearingIfNeeded(helper, lastProjection, currentLocation,
-								previousRouteLocation, currentRouteLocation, nextRouteLocation, true);
+					lastProjection = RoutingHelperUtils.getProject(currentLocation, previousRouteLocation, currentRouteLocation);
+					float calcbearing = !MapUtils.areLatLonEqual(previousRouteLocation, currentRouteLocation) ? previousRouteLocation.bearingTo(currentRouteLocation) :
+							previousRouteLocation.bearingTo(currentLocation);
+					lastProjection.setBearing(MapUtils.normalizeDegrees360(calcbearing));
+					if (currentLocation.distanceTo(lastProjection) > helper.getMaxAllowedProjectDist(currentLocation)) {
+						lastProjection = null;
+					} else if (app.getSettings().SNAP_TO_ROAD.get() && currentRoute + 1 < locations.size()) {
+						// Not needed here as this code for preview turns
+//						Location nextRouteLocation = locations.get(currentRoute + 1);
+//						RoutingHelperUtils.approximateBearingIfNeeded(helper, lastProjection, currentLocation,
+//								previousRouteLocation, currentRouteLocation, nextRouteLocation, true);
 					}
 				} else {
 					lastProjection = null;
-					lastBearing = 0.0f;
 				}
 				startLocationIndex = currentRoute;
 			} else {
 				lastProjection = straight || routeUpdated ? helper.getLastFixedLocation() : helper.getLastProjection();
-				lastBearing = lastProjection != null && lastProjection.hasBearing() ? lastProjection.getBearing() : lastRouteBearing;
 				startLocationIndex = route.getCurrentStraightAngleRoute();
 			}
-			lastRouteBearing = lastBearing;
 			lastRouteProjection = lastProjection;
 			boolean draw = true;
 			if (routeGeometry.hasMapRenderer()) {
