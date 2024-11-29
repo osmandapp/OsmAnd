@@ -1,7 +1,6 @@
 package net.osmand.plus.plugins.osmedit.dialogs;
 
 import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.OSMAND_TAG;
-import static net.osmand.plus.plugins.osmedit.asynctasks.UploadGPXFilesTask.DEFAULT_ACTIVITY_TAG;
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.OPEN_SETTINGS;
 import static net.osmand.plus.settings.fragments.SettingsScreenType.OPEN_STREET_MAP_EDITING;
 
@@ -36,6 +35,10 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxDbHelper;
+import net.osmand.shared.gpx.GpxParameter;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -54,6 +57,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 
 	private TextInputEditText tagsField;
 	private TextInputEditText messageField;
+	private String firstActivity;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -92,9 +96,28 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 		}
 	}
 
+	@Nullable
+	private String getFirstActivity() {
+		GpxDbHelper gpxDbHelper = requiredMyApplication().getGpxDbHelper();
+		for (File file : files) {
+			GpxDataItem gpxDataItem = gpxDbHelper.getItem(new KFile(file.getPath()));
+			String activity = gpxDataItem != null ? gpxDataItem.getParameter(GpxParameter.ACTIVITY_TYPE) : null;
+
+			if (!Algorithms.isEmpty(activity)) {
+				return activity;
+			}
+		}
+		return null;
+	}
+
 	@NonNull
 	private String getDefaultTags() {
-		return OSMAND_TAG + ", " + DEFAULT_ACTIVITY_TAG;
+		String defaultTags = OSMAND_TAG;
+		firstActivity = getFirstActivity();
+		if (!Algorithms.isEmpty(firstActivity)) {
+			return defaultTags + ", " + firstActivity;
+		}
+		return defaultTags;
 	}
 
 	private void setupVisibilityRow(@NonNull View view) {
@@ -160,7 +183,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 			String description = descrText != null ? descrText.toString() : "";
 			String tags = tagsText != null ? tagsText.toString() : "";
 
-			UploadGPXFilesTask task = new UploadGPXFilesTask(activity, description, tags, uploadVisibility, this);
+			UploadGPXFilesTask task = new UploadGPXFilesTask(activity, description, tags, uploadVisibility, this, firstActivity);
 			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, files);
 		}
 		dismiss();
