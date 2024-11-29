@@ -513,8 +513,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 			long locationTime = location.getTime();
 			if (Math.abs(time - locationTime) < LOCATION_TIME_INTERVAL_MS) {
 				time = locationTime;
-			}		app.getSavingTrackHelper().updateLocation(location, heading);
-
+			}
 		}
 		if (app.getRoutingHelper().isFollowingMode()) {
 			lastRoutingApplicationMode = settings.getApplicationMode();
