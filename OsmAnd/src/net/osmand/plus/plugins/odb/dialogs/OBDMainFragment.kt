@@ -37,6 +37,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 		RPM(OBDTypeWidget.RPM, R.drawable.ic_action_obd_engine_speed),
 		SPEED(OBDTypeWidget.SPEED, R.drawable.ic_action_obd_speed),
 		FUEL_CONSUMPTION_RATE_LITER_HOUR(OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR, R.drawable.ic_action_obd_fuel_consumption),
+		FUEL_CONSUMPTION_RATE_LITER_KM(OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM, R.drawable.ic_action_obd_fuel_consumption),
 		FUEL_LEFT_LITER(OBDTypeWidget.FUEL_LEFT_LITER, R.drawable.ic_action_obd_fuel_remaining),
 		CALCULATED_ENGINE_LOAD(OBDTypeWidget.CALCULATED_ENGINE_LOAD, R.drawable.ic_action_car_info),
 		FUEL_PRESSURE(OBDTypeWidget.FUEL_PRESSURE, R.drawable.ic_action_obd_fuel_pressure),
@@ -239,7 +240,7 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 		items.add(OBDMainFragmentAdapter.TITLE_RECEIVED_TYPE)
 		OBDDataType.entries.forEach {
 			if (it.widgetType != OBDTypeWidget.VIN) {
-				items.add(OBDDataItem(it, OBDDataComputer.registerWidget(it.widgetType, 0)))
+				items.add(OBDDataItem(it, OBDDataComputer.registerWidget(it.widgetType, it.widgetType.defaultAverageTime)))
 			}
 		}
 	}

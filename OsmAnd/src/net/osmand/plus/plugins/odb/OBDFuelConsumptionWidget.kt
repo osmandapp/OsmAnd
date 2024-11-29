@@ -45,7 +45,7 @@ class OBDFuelConsumptionWidget(
 		if (prefsChanged) {
 			if (widgetComputer.type != typeWidget
 				&& widgetComputer.averageTimeSeconds != 0
-				&& (widgetComputer.averageTimeSeconds != 5 * 60
+				&& (widgetComputer.averageTimeSeconds != typeWidget.defaultAverageTime
 						&& (typeWidget != OBDTypeWidget.FUEL_CONSUMPTION_RATE_PERCENT_HOUR
 						&& typeWidget != OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR
 						&& typeWidget != OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM))
