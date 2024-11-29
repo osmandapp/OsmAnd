@@ -191,7 +191,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public void showMapControlsIfHidden() {
-		if (!isMapControlsVisible()) {
+		MapActivity activity = getMapActivity();
+		if (!isMapControlsVisible() && activity != null) {
 			showMapControls();
 		}
 	}
