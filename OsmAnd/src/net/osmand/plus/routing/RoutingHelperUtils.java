@@ -109,12 +109,8 @@ public class RoutingHelperUtils {
 	}
 
 	public static void approximateBearingIfNeeded(@NonNull RoutingHelper routingHelper,
-	                                              @NonNull Location projection,
-	                                              @NonNull Location location,
-	                                              @NonNull Location previousRouteLocation,
-	                                              @NonNull Location currentRouteLocation,
-	                                              @NonNull Location nextRouteLocation,
-	                                              boolean previewNextTurn) {
+			@NonNull Location projection, @NonNull Location location, @NonNull Location previousRouteLocation, @NonNull Location currentRouteLocation,
+			@NonNull Location nextRouteLocation, boolean previewNextTurn) {
 		double dist = location.distanceTo(projection);
 		double maxDist = routingHelper.getMaxAllowedProjectDist(currentRouteLocation);
 		if (dist >= maxDist) {
