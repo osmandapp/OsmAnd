@@ -227,6 +227,6 @@ public class TripUtils {
 
 	@NonNull
 	public static CurrentStreetName getStreetName(@NonNull OsmandApplication app, @NonNull NextDirectionInfo info, @NonNull RouteDirectionInfo routeInfo) {
-        return new CurrentStreetName(info, true);
+		return new CurrentStreetName(info, true);
 	}
 }
