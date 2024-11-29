@@ -57,6 +57,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 
 	private TextInputEditText tagsField;
 	private TextInputEditText messageField;
+	private String firstActivity;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -97,21 +98,23 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 
 	@Nullable
 	private String getFirstActivity() {
-		String activity = null;
-		if (!Algorithms.isEmpty(files)) {
-			GpxDbHelper gpxDbHelper = requiredMyApplication().getGpxDbHelper();
-			GpxDataItem gpxDataItem = gpxDbHelper.getItem(new KFile(files[0].getPath()));
-			activity = gpxDataItem != null ? gpxDataItem.getParameter(GpxParameter.ACTIVITY_TYPE) : null;
+		for (File file : files) {
+			GpxDataItem gpxDataItem = requiredMyApplication().getGpxDbHelper().getItem(new KFile(file.getPath()));
+			String activity = gpxDataItem != null ? gpxDataItem.getParameter(GpxParameter.ACTIVITY_TYPE) : null;
+
+			if (activity != null) {
+				return activity;
+			}
 		}
-		return activity;
+		return null;
 	}
 
 	@NonNull
 	private String getDefaultTags() {
 		String defaultTags = OSMAND_TAG;
-		String activity = getFirstActivity();
-		if (!Algorithms.isEmpty(activity)) {
-			return defaultTags + ", " + activity;
+		firstActivity = getFirstActivity();
+		if (!Algorithms.isEmpty(firstActivity)) {
+			return defaultTags + ", " + firstActivity;
 		}
 		return defaultTags;
 	}
@@ -179,7 +182,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 			String description = descrText != null ? descrText.toString() : "";
 			String tags = tagsText != null ? tagsText.toString() : "";
 
-			UploadGPXFilesTask task = new UploadGPXFilesTask(activity, description, tags, uploadVisibility, this);
+			UploadGPXFilesTask task = new UploadGPXFilesTask(activity, description, tags, uploadVisibility, this, firstActivity);
 			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, files);
 		}
 		dismiss();
