@@ -1068,8 +1068,13 @@ public class TravelObfHelper implements TravelHelper {
 	@NonNull
 	@Override
 	public String getGPXName(@NonNull TravelArticle article) {
-		return article.getTitle().replace('/', '_').replace('\'', '_')
-				.replace('\"', '_') + GPX_FILE_EXT;
+		return article.getGpxFileName()
+				.replace('/', '_')
+				.replace('\'', '_')
+				.replace('\"', '_')
+				.replace('\r', '_')
+				.replace('\n', '_')
+				+ GPX_FILE_EXT;
 	}
 
 	@NonNull

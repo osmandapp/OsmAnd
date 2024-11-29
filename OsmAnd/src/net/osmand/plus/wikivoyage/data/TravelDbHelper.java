@@ -1,5 +1,7 @@
 package net.osmand.plus.wikivoyage.data;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
@@ -731,8 +733,13 @@ public class TravelDbHelper implements TravelHelper {
 	@NonNull
 	@Override
 	public String getGPXName(@NonNull TravelArticle article) {
-		return article.getTitle().replace('/', '_').replace('\'', '_')
-				.replace('\"', '_') + IndexConstants.GPX_FILE_EXT;
+		return article.getGpxFileName()
+				.replace('/', '_')
+				.replace('\'', '_')
+				.replace('\"', '_')
+				.replace('\r', '_')
+				.replace('\n', '_')
+				+ GPX_FILE_EXT;
 	}
 
 	@NonNull
