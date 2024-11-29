@@ -5769,4 +5769,6 @@
     <string name="quick_action_map_overlay">Nakładka</string>
     <string name="vehicle_metrics_recording_description">Wybierz parametry, które mają zostać zapisane w pliku GPX.</string>
     <string name="battery_saving_mode">Tryb oszczędzania baterii</string>
+    <string name="preview_next_turn">Podgląd następnego zakrętu</string>
+    <string name="obd_throttle_position_desc">Pokazuje kąt płyty przepustnicy w korpusie przepustnicy.</string>
 </resources>
