@@ -1699,7 +1699,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void fitRectToMap(double left, double right, double top, double bottom,
 	                         int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx) {
 		RotatedTileBox tb = currentViewport.copy();
-		double border = 0.8;
+
 		int dx = marginLeftPx;
 		int dy = marginTopPx;
 		int tbw = (tileBoxWidthPx > 0 ? tileBoxWidthPx : tb.getPixWidth());
@@ -1710,11 +1710,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			dx -= (tbw - tb.getPixWidth());
 		}
 //		dy -= (tbh - tb.getPixHeight()) / 2; // this to make margin from top
-		dx += (int) (tbw * (1 - border) / 2);
-		dy += (int) (tbh * (1 - border) / 2);
-		tb.setPixelDimensions((int) (tbw * border), (int) (tbh * border));
-		tb.setCenterLocation(0.5f, 0.5f);
-		fitRectToMap(tb, left, right, top, bottom, -dx, -dy, true, false);
+		fitRectToMap(tb, left, right, top, bottom, -dx, -dy, tbw, tbh, true, false);
 	}
 
 	public boolean fullyContains(RotatedTileBox tb, double left, double top, double right, double bottom) {
@@ -1732,7 +1728,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void fitRectToMap(RotatedTileBox tb, double left, double right, double top, double bottom,
-	                         int dx, int dy, boolean useSmallZoom, 	boolean rotate) {
+	                         int dx, int dy, int tbw, int tbh, boolean useSmallZoom, 	boolean rotate) {
+		double border = 0.8;
+		dx -= (int) (tbw * (1 - border) / 2);
+		dy -= (int) (tbh * (1 - border) / 2);
+		tb.setPixelDimensions((int) (tbw * border), (int) (tbh * border));
+		tb.setCenterLocation(0.5f, 0.5f);
 		float zoomStep = useSmallZoom ? 0.1f : 1f;
 		double clat = bottom / 2 + top / 2;
 		double clon = left / 2 + right / 2;
@@ -1748,10 +1749,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			zoom.partialChangeZoom(zoomStep);
 			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
+//		LOG.info(String.format("NOT CONTAINS %s - l=%.5f t=%.5f r=%.5f b=%.5f", tb, left, top, right, bottom));
 		if (zoom.isZoomOutAllowed()) {
 			zoom.partialChangeZoom(-zoomStep);
 			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
+//		LOG.info(String.format("CONTAINS %s - l=%.5f t=%.5f r=%.5f b=%.5f", tb, left, top, right, bottom));
 		float x = currentViewport.getCenterPixelX() + dx;
 		float y = currentViewport.getCenterPixelY() + dy;
 		clat = tb.getLatFromPixel(x, y);

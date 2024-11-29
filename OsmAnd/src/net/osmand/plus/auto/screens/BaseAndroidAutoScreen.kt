@@ -103,11 +103,12 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 				val mapView = app.osmandMap.mapView
 				val tb = mapView.rotatedTileBox
 				tb.setCenterLocation(tb.centerPixelX.toFloat() / tb.pixWidth, 0.5f)
+				tb.mapDensity = 1.0;
 				tb.rotate = 0f;
 				mapView.fitRectToMap(
 					tb,
 					mapRect.left, mapRect.right, mapRect.top, mapRect.bottom,
-					0, 0, true, true
+					0, 0, tb.pixWidth, tb.pixHeight, true, true
 				)
 				mapView.refreshMap()
 			}
