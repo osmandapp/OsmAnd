@@ -53,7 +53,7 @@ public class RoadShield {
 	public static List<RoadShield> createDestination(@Nullable RouteDataObject rdo, RouteDirectionInfo info) {
 		List<RoadShield> shields = create(rdo);
 		String destRef = info.getDestinationRef();
-		if (rdo != null && !Algorithms.isEmpty(destRef)) {
+		if (rdo != null && !Algorithms.isEmpty(destRef) && !shields.isEmpty()) {
 			String refs = Algorithms.splitAndClearRepeats(destRef, ";");
 			List<String> split = Arrays.asList(refs.split(";"));
 			Map<String, RoadShield> map = new HashMap<>();
@@ -68,10 +68,13 @@ public class RoadShield {
 			}
 
 			shields.clear();
+			if (tag == null) {
+				return shields;
+			}
 			for (String s : split) {
 				RoadShield shield = map.get(s);
 				if (shield == null) {
-					shield = new RoadShield(rdo, tag == null ? "route_road_" + s.length() + "_ref" : tag, s);
+					shield = new RoadShield(rdo, tag, s);
 					shield.additional = additional;
 				}
 				shields.add(shield);

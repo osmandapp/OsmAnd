@@ -107,6 +107,9 @@ public class CurrentStreetName {
 			} else {
 				shields = RoadShield.create(dataObject);
 			}
+			if (shields.isEmpty()) {
+				destinationName = info.directionInfo.getDestinationRefAndName();
+			}
 			text = RoutingHelperUtils.formatStreetName(name, ref, destinationName, "", shields);
 			turnType = info.directionInfo.getTurnType();
 			if (turnType == null) {
