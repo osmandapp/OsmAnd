@@ -473,11 +473,9 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				currentAnimatedRoute = 0;
 			}
 			Location lastProjection;
-			float lastBearing;
 			int startLocationIndex;
 			if (directTo) {
 				lastProjection = null;
-				lastBearing = 0.0f;
 				startLocationIndex = 0;
 			} else if (route.getCurrentStraightAngleRoute() > 0) {
 				Location lastFixedLocation = helper.getLastFixedLocation();
@@ -509,24 +507,22 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				int currentAnimatedRoute = helper.calculateCurrentRoute(currentLocation, posTolerance,
 						locations, this.currentAnimatedRoute, false);
 				// calculate projection of current location
-
 				if (currentAnimatedRoute > 0) {
 					Location previousRouteLocation = locations.get(currentAnimatedRoute - 1);
 					Location currentRouteLocation = locations.get(currentAnimatedRoute);
-					lastProjection = RoutingHelperUtils.getProject(
-							currentLocation, previousRouteLocation, currentRouteLocation);
-					lastBearing = lastProjection.getBearing();
+					lastProjection = RoutingHelperUtils.getProject(currentLocation, previousRouteLocation, currentRouteLocation);
 					if (!MapUtils.areLatLonEqual(previousRouteLocation, currentRouteLocation)) {
-						lastBearing = MapUtils.normalizeDegrees360(previousRouteLocation.bearingTo(currentRouteLocation));
+						lastProjection.setBearing(MapUtils.normalizeDegrees360(previousRouteLocation.bearingTo(currentRouteLocation)));
 					}
-					if (app.getSettings().SNAP_TO_ROAD.get() && currentAnimatedRoute + 1 < locations.size()) {
-						Location nextRouteLocation = locations.get(currentAnimatedRoute + 1);
-						RoutingHelperUtils.approximateBearingIfNeeded(helper, lastProjection, currentLocation,
-								previousRouteLocation, currentRouteLocation, nextRouteLocation, true);
+					if(currentLocation.distanceTo(lastProjection) > helper.getMaxAllowedProjectDist(currentLocation) / 2) {
+						lastProjection = null;
+					} else if (app.getSettings().SNAP_TO_ROAD.get() && currentAnimatedRoute + 1 < locations.size()) {
+//						Location nextRouteLocation = locations.get(currentAnimatedRoute + 1);
+//						RoutingHelperUtils.approximateBearingIfNeeded(helper, lastProjection, currentLocation,
+//								previousRouteLocation, currentRouteLocation, nextRouteLocation, true);
 					}
 				} else {
 					lastProjection = null;
-					lastBearing = 0.0f;
 				}
 				startLocationIndex = currentAnimatedRoute;
 				if (lastFixedLocationChanged) {
@@ -537,10 +533,12 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				}
 			} else {
 				lastProjection = straight || routeUpdated ? helper.getLastFixedLocation() : helper.getLastProjection();
-				lastBearing = lastProjection != null && lastProjection.hasBearing() ? lastProjection.getBearing() : lastRouteBearing;
+				if (lastProjection != null && !lastProjection.hasBearing()) {
+					lastProjection.setBearing(lastRouteBearing);
+				}
 				startLocationIndex = route.getCurrentStraightAngleRoute();
 			}
-			lastRouteBearing = lastBearing;
+			lastRouteBearing = lastProjection != null ? lastProjection.getBearing() : lastRouteBearing;
 			lastRouteProjection = lastProjection;
 			boolean draw = true;
 			if (routeGeometry.hasMapRenderer()) {
