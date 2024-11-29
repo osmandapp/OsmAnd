@@ -106,6 +106,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private static final int MAX_ZOOM_LIMIT = 17;
 
 	private static final long ANIMATION_PREVIEW_TIME = 1500;
+	private static final float ZOOM_STEP_TO_FIT = 0.1f;
+	private static final float MARGIN_PERCENT_TO_FIT = 0.8f;
 
 	private boolean MEASURE_FPS;
 	private final FPSMeasurement main = new FPSMeasurement();
@@ -1693,18 +1695,26 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void fitRectToMap(double left, double right, double top, double bottom,
 	                         int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx) {
-		fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, marginTopPx, 0);
+		RotatedTileBox tb = currentViewport.copy();
+		fitRectToMap(tb, left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx,
+				marginTopPx, 0, isLayoutRtl(), false);
 	}
 
 	public void fitRectToMap(double left, double right, double top, double bottom,
-	                         int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx) {
+			int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx) {
 		RotatedTileBox tb = currentViewport.copy();
-		double border = 0.85;
+		fitRectToMap(tb, left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx,
+				marginTopPx, marginLeftPx, isLayoutRtl(), false);
+	}
+
+	public void fitRectToMap(RotatedTileBox tb, double left, double right, double top, double bottom,
+			int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx, boolean rtl, boolean rotate) {
+		float border = MARGIN_PERCENT_TO_FIT;
 		int dx = marginLeftPx;
 		int dy = marginTopPx;
 		int tbw = (tileBoxWidthPx > 0 ? tileBoxWidthPx : tb.getPixWidth());
 		int tbh = (tileBoxHeightPx > 0 ? tileBoxHeightPx : tb.getPixHeight());
-		if (isLayoutRtl()) {
+		if (rtl) {
 			dx = -dx;
 		} else {
 			dx -= (tbw - tb.getPixWidth());
@@ -1714,26 +1724,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		dy += (int) (tbh * (1 - border) / 2);
 		tb.setPixelDimensions((int) (tbw * border), (int) (tbh * border));
 		tb.setCenterLocation(0.5f, 0.5f);
-		fitRectToMap(tb, left, right, top, bottom, -dx, -dy, true, false);
-	}
-
-	public boolean fullyContains(RotatedTileBox tb, double left, double top, double right, double bottom) {
-		// if at least one point is not inside the boundary, return false
-		if (!tb.containsLatLon(top, left)) {
-			return false;
-		} else if (!tb.containsLatLon(bottom, left)) {
-			return false;
-		} else if (!tb.containsLatLon(top, right)) {
-			return false;
-		} else if (!tb.containsLatLon(bottom, right)) {
-			return false;
-		}
-		return true;
-	}
-
-	public void fitRectToMap(RotatedTileBox tb, double left, double right, double top, double bottom,
-	                         int dx, int dy, boolean useSmallZoom, 	boolean rotate) {
-		float zoomStep = useSmallZoom ? 0.1f : 1f;
+		float zoomStep = ZOOM_STEP_TO_FIT;
 		double clat = bottom / 2 + top / 2;
 		double clon = left / 2 + right / 2;
 		tb.setLatLonCenter(clat, clon);
@@ -1752,8 +1743,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			zoom.partialChangeZoom(-zoomStep);
 			tb.setZoomAndAnimation(zoom.getBaseZoom(), 0, zoom.getZoomFloatPart());
 		}
-		float x = currentViewport.getCenterPixelX() + dx;
-		float y = currentViewport.getCenterPixelY() + dy;
+		float x = currentViewport.getCenterPixelX() - dx;
+		float y = currentViewport.getCenterPixelY() - dy;
 		clat = tb.getLatFromPixel(x, y);
 		clon = tb.getLonFromPixel(x, y);
 		if (rotate) {
@@ -1762,7 +1753,20 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		} else {
 			animatedDraggingThread.startMoving(clat, clon, zoom.getBaseZoom(), zoom.getZoomFloatPart());
 		}
+	}
 
+	public boolean fullyContains(RotatedTileBox tb, double left, double top, double right, double bottom) {
+		// if at least one point is not inside the boundary, return false
+		if (!tb.containsLatLon(top, left)) {
+			return false;
+		} else if (!tb.containsLatLon(bottom, left)) {
+			return false;
+		} else if (!tb.containsLatLon(top, right)) {
+			return false;
+		} else if (!tb.containsLatLon(bottom, right)) {
+			return false;
+		}
+		return true;
 	}
 
 	public void animateToState(double clat, double clon, @NonNull Zoom zoom,
