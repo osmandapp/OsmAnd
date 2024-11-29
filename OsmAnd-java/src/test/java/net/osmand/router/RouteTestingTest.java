@@ -167,7 +167,10 @@ public class RouteTestingTest {
 				System.out.println("This is test on hanging routing");
 				break;
 			}
+
+			checkRouteLength(params, routeSegments);
 			checkRoutingTime(ctx, params);
+
 			for (Entry<String, String> es : expectedResults.entrySet()) {
 				long id = RouterUtilTest.getRoadId(es.getKey());
 				switch (es.getValue()) {
@@ -209,5 +212,17 @@ public class RouteTestingTest {
 		}
 	}
 	
-	
+	private void checkRouteLength(Map<String, String> params, List<RouteSegmentResult> routeSegments) {
+		String min = params.get("minRouteLength");
+		String max = params.get("maxRouteLength");
+		float minRouteLength = min == null ? Float.NEGATIVE_INFINITY : Float.parseFloat(min);
+		float maxRouteLength = max == null ? Float.POSITIVE_INFINITY : Float.parseFloat(max);
+		float routeLength = 0;
+		for (RouteSegmentResult segment : routeSegments) {
+			routeLength += segment.getDistance();
+		}
+		Assert.assertTrue(
+				"Calculated route length " + routeLength + " is out of limits " + minRouteLength + "-" + maxRouteLength,
+				routeLength >= minRouteLength && routeLength <= maxRouteLength);
+	}
 }
