@@ -2304,7 +2304,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				int fHeight = viewHeight - y - AndroidUtils.getStatusBarHeight(getMapActivity());
 				tileBoxHeightPx = tb.getPixHeight() - fHeight;
 			}
-			getMapActivity().getMapView().fitRectToMap(r.left, r.right, r.top, r.bottom, tileBoxWidthPx, tileBoxHeightPx, 0, marginStartPx);
+			getMapActivity().getMapView().fitRectToMap(r.left, r.right, r.top, r.bottom,
+					tileBoxWidthPx, tileBoxHeightPx, 0, marginStartPx);
 			return true;
 		}
 		return false;
