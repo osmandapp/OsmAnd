@@ -567,7 +567,7 @@ public class PointLocationLayer extends OsmandMapLayer
 				result = routeLayer.getLastRouteBearing();
 			}
 		}
-		if (location == null) {
+		if (location == null || result == 0) {
 			location = locationProvider.getLastStaleKnownLocation();
 			if (location != null && location.hasBearing()) {
 				result = location.getBearing();
