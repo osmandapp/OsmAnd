@@ -614,6 +614,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				} else if (amenity.isRouteTrack()) {
 					TravelGpx travelGpx = travelHelper.searchGpx(amenity.getLocation(), amenity.getRouteId(), amenity.getRef());
 					if (travelGpx == null) {
+						log.error("showMenuAction() searchGpx() travelGpx is null");
 						return true;
 					}
 					travelHelper.openTrackMenu(travelGpx, mapActivity, amenity.getGpxFileName(null), amenity.getLocation(), false);

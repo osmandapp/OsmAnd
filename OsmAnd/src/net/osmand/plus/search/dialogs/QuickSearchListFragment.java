@@ -16,10 +16,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
+import net.osmand.plus.wikivoyage.data.TravelObfHelper;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -46,11 +48,14 @@ import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class QuickSearchListFragment extends OsmAndListFragment {
+	private static final Log LOG = PlatformUtil.getLog(QuickSearchListFragment.class);
 
 	protected OsmandApplication app;
 	private QuickSearchDialogFragment dialogFragment;
@@ -194,7 +199,11 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 			Amenity amenity = (Amenity) pair.second;
 			TravelHelper travelHelper = app.getTravelHelper();
 			TravelGpx travelGpx = travelHelper.searchGpx(amenity.getLocation(), amenity.getRouteId(), amenity.getRef());
-			travelHelper.openTrackMenu(travelGpx, getMapActivity(), amenity.getGpxFileName(null), amenity.getLocation(), true);
+			if (travelGpx != null) {
+				travelHelper.openTrackMenu(travelGpx, getMapActivity(), amenity.getGpxFileName(null), amenity.getLocation(), true);
+			} else {
+				LOG.error("showResultWithLocation() searchGpx() travelGpx is null");
+			}
 		} else {
 			showOnMap(getMapActivity(), dialogFragment,
 					searchResult.location.getLatitude(), searchResult.location.getLongitude(),

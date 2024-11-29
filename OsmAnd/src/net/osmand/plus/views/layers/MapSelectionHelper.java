@@ -471,6 +471,8 @@ public class MapSelectionHelper {
 			SelectedGpxPoint selectedGpxPoint = new SelectedGpxPoint(null, selectedPoint);
 			result.selectedObjects.put(new Pair<>(travelGpx, selectedGpxPoint), mapLayers.getTravelSelectionLayer());
 			return true;
+		} else if (travelGpx == null) {
+			log.error("addTravelGpx() searchGpx() travelGpx is null");
 		}
 		return false;
 	}
@@ -478,11 +480,6 @@ public class MapSelectionHelper {
 	private boolean isUniqueGpx(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
 	                            @NonNull TravelGpx travelGpx) {
 		String travelGpxFileName = travelGpx.getGpxFileName() + GPX_FILE_EXT;
-		String tracksDir = app.getAppPath(IndexConstants.GPX_TRAVEL_DIR).getPath();
-		File file = new File(tracksDir, travelGpxFileName);
-		if (file.exists()) {
-			return false;
-		}
 		for (Map.Entry<Object, IContextMenuProvider> entry : selectedObjects.entrySet()) {
 			if (entry.getKey() instanceof Pair && entry.getValue() instanceof GPXLayer
 					&& ((Pair<?, ?>) entry.getKey()).first instanceof TravelGpx) {

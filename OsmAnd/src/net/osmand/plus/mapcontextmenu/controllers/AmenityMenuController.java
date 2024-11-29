@@ -8,6 +8,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -28,12 +29,16 @@ import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
+import net.osmand.plus.wikivoyage.data.TravelObfHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
+
+import org.apache.commons.logging.Log;
 
 import java.util.List;
 
 public class AmenityMenuController extends MenuController {
+	private static final Log LOG = PlatformUtil.getLog(AmenityMenuController.class);
 
 	private Amenity amenity;
 	private final MapMarker marker;
@@ -115,6 +120,8 @@ public class AmenityMenuController extends MenuController {
 			TravelGpx travelGpx = travelHelper.searchGpx(amenity.getLocation(), amenity.getRouteId(), amenity.getRef());
 			if (travelGpx != null) {
 				travelHelper.openTrackMenu(travelGpx, mapActivity, travelGpx.getTitle(), amenity.getLocation(), false);
+			} else {
+				LOG.error("openTrack() searchGpx() travelGpx is null");
 			}
 		}
 	}
