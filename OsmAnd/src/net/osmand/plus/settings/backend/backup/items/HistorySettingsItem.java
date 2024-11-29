@@ -185,7 +185,7 @@ public abstract class HistorySettingsItem extends CollectionSettingsItem<History
 	@Nullable
 	@Override
 	public SettingsItemReader<? extends SettingsItem> getReader() {
-		return getJsonReader();
+		return getJsonReader(false);
 	}
 
 	@Nullable

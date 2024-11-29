@@ -5,8 +5,6 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.shared.SharedUtil;
-import net.osmand.shared.gpx.GpxFile;
 import net.osmand.IProgress;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -14,18 +12,14 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
+import net.osmand.plus.shared.SharedUtil;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -212,11 +206,11 @@ public abstract class SettingsItem {
 	public abstract SettingsItemWriter<? extends SettingsItem> getWriter();
 
 	@NonNull
-	protected SettingsItemReader<? extends SettingsItem> getJsonReader() {
-		return new SettingsItemReader<SettingsItem>(this) {
+	protected SettingsItemReader<? extends SettingsItem> getJsonReader(boolean allowEmptyJson) {
+		return new SettingsItemReader<>(this) {
 			@Override
 			public void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
-			                           @Nullable String entryName) throws IOException, IllegalArgumentException {
+					@Nullable String entryName) throws IOException, IllegalArgumentException {
 				StringBuilder buf = new StringBuilder();
 				try {
 					BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
@@ -228,8 +222,12 @@ public abstract class SettingsItem {
 					throw new IOException("Cannot read json body", e);
 				}
 				String json = buf.toString();
-				if (json.length() == 0) {
-					throw new IllegalArgumentException("Json body is empty");
+				if (json.isEmpty()) {
+					if (allowEmptyJson) {
+						return;
+					} else {
+						throw new IllegalArgumentException("Json body is empty");
+					}
 				}
 				try {
 					readItemsFromJson(new JSONObject(json));
@@ -242,7 +240,7 @@ public abstract class SettingsItem {
 
 	@NonNull
 	protected SettingsItemWriter<? extends SettingsItem> getJsonWriter() {
-		return new SettingsItemWriter<SettingsItem>(this) {
+		return new SettingsItemWriter<>(this) {
 			@Override
 			public void writeToStream(@NonNull OutputStream outputStream, @Nullable IProgress progress) throws IOException {
 				JSONObject json = writeItemsToJson(new JSONObject());

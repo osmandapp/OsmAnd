@@ -266,7 +266,7 @@ public class QuickActionsSettingsItem extends SettingsItem {
 	@Nullable
 	@Override
 	public SettingsItemReader<? extends SettingsItem> getReader() {
-		return getJsonReader();
+		return getJsonReader(true);
 	}
 
 	@Nullable
