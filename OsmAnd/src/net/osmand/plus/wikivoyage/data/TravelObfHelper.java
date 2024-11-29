@@ -312,26 +312,16 @@ public class TravelObfHelper implements TravelHelper {
 		travelGpx.user = Algorithms.emptyIfNull(amenity.getTagContent(USER));
 		travelGpx.activityType = Algorithms.emptyIfNull(amenity.getTagContent(ACTIVITY_TYPE));
 		travelGpx.ref = Algorithms.emptyIfNull(amenity.getRef());
-		try {
-			travelGpx.totalDistance = Float.parseFloat(Objects.requireNonNullElse(
-					amenity.getTagContent(DISTANCE), "0"));
-			travelGpx.diffElevationUp = Double.parseDouble(Objects.requireNonNullElse(
-					amenity.getTagContent(DIFF_ELEVATION_UP), "0"));
-			travelGpx.diffElevationDown = Double.parseDouble(Objects.requireNonNullElse(
-					amenity.getTagContent(DIFF_ELEVATION_DOWN), "0"));
-			travelGpx.minElevation = Double.parseDouble(Objects.requireNonNullElse(
-					amenity.getTagContent(MIN_ELEVATION), "0"));
-			travelGpx.avgElevation = Double.parseDouble(Objects.requireNonNullElse(
-					amenity.getTagContent(AVERAGE_ELEVATION), "0"));
-			travelGpx.maxElevation = Double.parseDouble(Objects.requireNonNullElse(
-					amenity.getTagContent(MAX_ELEVATION), "0"));
-			String radius = amenity.getTagContent(ROUTE_RADIUS);
-			if (radius != null) {
-				travelGpx.routeRadius = MapUtils.convertCharToDist(radius.charAt(0), TRAVEL_GPX_CONVERT_FIRST_LETTER,
-						TRAVEL_GPX_CONVERT_FIRST_DIST, TRAVEL_GPX_CONVERT_MULT_1, TRAVEL_GPX_CONVERT_MULT_2);
-			}
-		} catch (NumberFormatException e) {
-			LOG.debug(e.getMessage(), e);
+		travelGpx.totalDistance = Algorithms.parseFloatSilently(amenity.getTagContent(DISTANCE), 0);
+		travelGpx.diffElevationUp = Algorithms.parseDoubleSilently(amenity.getTagContent(DIFF_ELEVATION_UP), 0);
+		travelGpx.diffElevationDown = Algorithms.parseDoubleSilently(amenity.getTagContent(DIFF_ELEVATION_DOWN), 0);
+		travelGpx.minElevation = Algorithms.parseDoubleSilently(amenity.getTagContent(MIN_ELEVATION), 0);
+		travelGpx.avgElevation = Algorithms.parseDoubleSilently(amenity.getTagContent(AVERAGE_ELEVATION), 0);
+		travelGpx.maxElevation = Algorithms.parseDoubleSilently(amenity.getTagContent(MAX_ELEVATION), 0);
+		String radius = amenity.getTagContent(ROUTE_RADIUS);
+		if (radius != null) {
+			travelGpx.routeRadius = MapUtils.convertCharToDist(radius.charAt(0), TRAVEL_GPX_CONVERT_FIRST_LETTER,
+					TRAVEL_GPX_CONVERT_FIRST_DIST, TRAVEL_GPX_CONVERT_MULT_1, TRAVEL_GPX_CONVERT_MULT_2);
 		}
 		return travelGpx;
 	}
@@ -1326,13 +1316,7 @@ public class TravelObfHelper implements TravelHelper {
 				if (!Algorithms.isEmpty(ele_graph)) {
 					hasAltitude = true;
 					List<Integer> heightRes = KMapAlgorithms.INSTANCE.decodeIntHeightArrayGraph(ele_graph, 3);
-					double startEle = 0;
-					try {
-						startEle = Double.parseDouble(Objects.requireNonNullElse(
-								segment.getTagValue(START_ELEVATION), "0"));
-					} catch (NumberFormatException e) {
-						LOG.debug(e.getMessage(), e);
-					}
+					double startEle = Algorithms.parseDoubleSilently(segment.getTagValue(START_ELEVATION), 0);
 					KMapAlgorithms.INSTANCE.augmentTrkSegmentWithAltitudes(trkSegment, heightRes, startEle);
 				}
 				track.getSegments().add(trkSegment);
