@@ -123,6 +123,14 @@ public class TravelObfHelper implements TravelHelper {
 	private final List<Pair<File, Amenity>> foundAmenities = new ArrayList<>();
 	public volatile int requestNumber = 0;
 
+	// Do not clutter GPX with tags that are always generated.
+	private static final Set<String> avoidAmenityGpxTags = Set.of(
+			"date", "distance", "route_id", "route_name", "route_radius",
+			"avg_ele", "min_ele", "max_ele", "start_ele", "ele_graph", "diff_ele_up", "diff_ele_down",
+			"avg_speed", "min_speed", "max_speed", "time_moving", "time_moving_no_gaps", "time_span", "time_span_no_gaps"
+	);
+	// Keep important tags by prefix. Note: name, ref, type, and route tags are processed in a special way.
+	private static final Set<String> keepAsIsAmenityGpxTags = Set.of("osm_id", "use_osmc_colors", "shield_");
 
 	public TravelObfHelper(OsmandApplication app) {
 		this.app = app;
@@ -1135,36 +1143,6 @@ public class TravelObfHelper implements TravelHelper {
 			}
 		}
 	}
-
-	// Do not clutter GPX with tags that are only used to display OBF data.
-	private static final Set<String> avoidAmenityGpxTags = Set.of(
-			"date",
-			"distance",
-			"route_id",
-			"route_name",
-			"route_radius",
-			"avg_ele",
-			"min_ele",
-			"max_ele",
-			"start_ele",
-			"ele_graph",
-			"diff_ele_up",
-			"diff_ele_down",
-			"avg_speed",
-			"min_speed",
-			"max_speed",
-			"time_moving",
-			"time_moving_no_gaps",
-			"time_span",
-			"time_span_no_gaps"
-	);
-
-	// Keep important tags. Note: name, ref, type, and route tags will be processed in a special way.
-	private static final Set<String> keepAsIsAmenityGpxTags = Set.of(
-			"osm_id",
-			"use_osmc_colors",
-			"shield_" // prefix
-	);
 
 	@NonNull
 	private ResultMatcher<Amenity> matchPointsAndTags(TravelArticle article, List<Amenity> pointList, Map<String, String> gpxFileExtensions, List<String> pgNames, List<String> pgIcons, List<String> pgColors, List<String> pgBackgrounds) {
