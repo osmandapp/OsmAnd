@@ -459,7 +459,7 @@ public class RouteCalculationResult {
 						exitInfo.setRef(current.getObject().getExitRef());
 						exitInfo.setExitStreetName(current.getObject().getExitName());
 						info.setExitInfo(exitInfo);
-						if (routeInd > 0 && (exitInfo.getRef() != null || exitInfo.getExitStreetName() != null)) {
+						if (!exitInfo.isEmpty() && info.getDestinationRef() == null && routeInd > 0) {
 							// set ref and road name (or shield icon) from previous segment because exit point is not consist of highway ref
 							RouteSegmentResult previous;
 							previous = list.get(routeInd - 1);

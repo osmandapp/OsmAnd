@@ -22,4 +22,8 @@ public class ExitInfo {
     public void setExitStreetName(String exitStreetName) {
         this.exitStreetName = exitStreetName;
     }
+
+    public boolean isEmpty() {
+        return ref == null && exitStreetName == null;
+    }
 }
