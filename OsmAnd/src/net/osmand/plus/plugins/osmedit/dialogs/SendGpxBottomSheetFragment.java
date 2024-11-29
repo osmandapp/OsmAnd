@@ -1,7 +1,6 @@
 package net.osmand.plus.plugins.osmedit.dialogs;
 
 import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.OSMAND_TAG;
-import static net.osmand.plus.plugins.osmedit.asynctasks.UploadGPXFilesTask.DEFAULT_ACTIVITY_TAG;
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.OPEN_SETTINGS;
 import static net.osmand.plus.settings.fragments.SettingsScreenType.OPEN_STREET_MAP_EDITING;
 
@@ -36,6 +35,10 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxDbHelper;
+import net.osmand.shared.gpx.GpxParameter;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -92,9 +95,25 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 		}
 	}
 
+	@Nullable
+	private String getFirstActivity() {
+		String activity = null;
+		if (!Algorithms.isEmpty(files)) {
+			GpxDbHelper gpxDbHelper = requiredMyApplication().getGpxDbHelper();
+			GpxDataItem gpxDataItem = gpxDbHelper.getItem(new KFile(files[0].getPath()));
+			activity = gpxDataItem != null ? gpxDataItem.getParameter(GpxParameter.ACTIVITY_TYPE) : null;
+		}
+		return activity;
+	}
+
 	@NonNull
 	private String getDefaultTags() {
-		return OSMAND_TAG + ", " + DEFAULT_ACTIVITY_TAG;
+		String defaultTags = OSMAND_TAG;
+		String activity = getFirstActivity();
+		if (!Algorithms.isEmpty(activity)) {
+			return defaultTags + ", " + activity;
+		}
+		return defaultTags;
 	}
 
 	private void setupVisibilityRow(@NonNull View view) {
