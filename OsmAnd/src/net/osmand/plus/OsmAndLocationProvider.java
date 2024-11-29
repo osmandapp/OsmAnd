@@ -647,6 +647,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		scheduleCheckIfGpsLost(location);
 
 		RoutingHelper routingHelper = app.getRoutingHelper();
+		app.getSavingTrackHelper().updateLocation(location, heading);
 		app.getAverageSpeedComputer().updateLocation(location);
 		app.getAverageGlideComputer().updateLocation(location);
 		PluginsHelper.updateLocationPlugins(location);
