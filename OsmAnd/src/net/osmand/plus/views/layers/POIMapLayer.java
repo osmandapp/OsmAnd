@@ -610,11 +610,11 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 					return true;
 				} else if (amenity.isRouteTrack()) {
 					TravelGpx travelGpx = travelHelper.searchGpx(amenity.getLocation(), amenity.getRouteId(), amenity.getRef());
-					if (travelGpx == null) {
+					if (travelGpx != null) {
+						travelHelper.openTrackMenu(travelGpx, mapActivity, amenity.getGpxFileName(null), amenity.getLocation(), false);
+					} else {
 						log.error("showMenuAction() searchGpx() travelGpx is null");
-						return true;
 					}
-					travelHelper.openTrackMenu(travelGpx, mapActivity, amenity.getGpxFileName(null), amenity.getLocation(), false);
 					return true;
 				}
 			}
