@@ -246,7 +246,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		}
 	}
 
-	public void recreateTopWidgetsPanel() {
+	public void updateVerticalPanels() {
 		ApplicationMode appMode = settings.getApplicationMode();
 		widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
 
@@ -437,6 +437,8 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			widgetRegistry.updateWidgetsInfo(settings.getApplicationMode(), drawSettings);
 			leftWidgetsPanel.update(drawSettings);
 			rightWidgetsPanel.update(drawSettings);
+			topWidgetsPanel.update(drawSettings);
+			bottomWidgetsPanel.update(drawSettings);
 			topToolbarView.updateInfo();
 			alarmWidget.updateInfo(drawSettings, false);
 			speedometerWidget.updateInfo(drawSettings);
