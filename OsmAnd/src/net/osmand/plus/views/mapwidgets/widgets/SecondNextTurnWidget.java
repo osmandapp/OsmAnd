@@ -73,7 +73,7 @@ public class SecondNextTurnWidget extends NextTurnBaseWidget {
 				}
 			}
 			if (info != null && info.distanceTo > 0 && info.directionInfo != null) {
-				streetName = TripUtils.getStreetName(app, info, info.directionInfo, true);
+				streetName = TripUtils.getStreetName(app, info, info.directionInfo);
 				turnType = info.directionInfo.getTurnType();
 				turnImminent = info.imminent;
 				nextTurnDistance = info.distanceTo;

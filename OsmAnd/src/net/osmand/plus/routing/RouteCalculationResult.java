@@ -492,15 +492,8 @@ public class RouteCalculationResult {
 					}
 				}
 
-				String destinationName = info.getDestinationName();
-				String destinationRef = info.getDestinationRef();
-				if (!Algorithms.isEmpty(destinationRef) && !Algorithms.isEmpty(destinationName)) {
-					destinationName = destinationRef + ", " + destinationName;
-				} else if (!Algorithms.isEmpty(destinationRef) && Algorithms.isEmpty(destinationName)) {
-					destinationName = destinationRef;
-				}
 				String description = toString(turn, ctx, false) + " " + RoutingHelperUtils.formatStreetName(info.getStreetName(),
-						info.getRef(), destinationName, ctx.getString(R.string.towards));
+						info.getRef(), info.getDestinationRefAndName(), ctx.getString(R.string.towards));
 				description = description.trim();
 				String[] pointNames = s.getObject().getPointNames(s.getStartPointIndex());
 				if (pointNames != null) {

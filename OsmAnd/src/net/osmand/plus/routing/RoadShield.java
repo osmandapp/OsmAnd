@@ -77,7 +77,7 @@ public class RoadShield {
 				shields.add(shield);
 				map.remove(s);
 			}
-            shields.addAll(map.values());
+			shields.addAll(map.values());
 		}
 		return shields;
 	}
