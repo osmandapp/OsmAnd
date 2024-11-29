@@ -512,19 +512,17 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 						previousRouteLocation = locations.get(currentRoute - 1);
 						currentRouteLocation = locations.get(currentRoute);
 					}
-					lastProjection = RoutingHelperUtils.getProject(
-							currentLocation, previousRouteLocation, currentRouteLocation);
 					lastProjection = RoutingHelperUtils.getProject(currentLocation, previousRouteLocation, currentRouteLocation);
-					if (!MapUtils.areLatLonEqual(previousRouteLocation, currentRouteLocation)) {
-						lastProjection.setBearing(MapUtils.normalizeDegrees360(previousRouteLocation.bearingTo(currentRouteLocation)));
-					}
+					float calcbearing = !MapUtils.areLatLonEqual(previousRouteLocation, currentRouteLocation) ? previousRouteLocation.bearingTo(currentRouteLocation) :
+							previousRouteLocation.bearingTo(currentLocation);
+					lastProjection.setBearing(MapUtils.normalizeDegrees360(calcbearing));
 					if (currentLocation.distanceTo(lastProjection) > helper.getMaxAllowedProjectDist(currentLocation)) {
 						lastProjection = null;
 					} else if (app.getSettings().SNAP_TO_ROAD.get() && currentRoute + 1 < locations.size()) {
-						// TODO move to turn screen
-						Location nextRouteLocation = locations.get(currentRoute + 1);
-						RoutingHelperUtils.approximateBearingIfNeeded(helper, lastProjection, currentLocation,
-								previousRouteLocation, currentRouteLocation, nextRouteLocation, true);
+						// Not needed here as this code for preview turns
+//						Location nextRouteLocation = locations.get(currentRoute + 1);
+//						RoutingHelperUtils.approximateBearingIfNeeded(helper, lastProjection, currentLocation,
+//								previousRouteLocation, currentRouteLocation, nextRouteLocation, true);
 					}
 				} else {
 					lastProjection = null;
