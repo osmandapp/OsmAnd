@@ -156,6 +156,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Function;
 
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
 import de.KnollFrank.lib.settingssearch.common.Utils;
@@ -163,12 +164,8 @@ import de.KnollFrank.lib.settingssearch.common.task.LongRunningTask;
 import de.KnollFrank.lib.settingssearch.common.task.OnUiThreadRunnerFactory;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.MergedPreferenceScreenData;
 import de.KnollFrank.lib.settingssearch.fragment.DefaultFragmentInitializer;
-import de.KnollFrank.lib.settingssearch.fragment.FragmentFactoryAndInitializer;
-import de.KnollFrank.lib.settingssearch.fragment.Fragments;
-import de.KnollFrank.lib.settingssearch.fragment.factory.FragmentFactoryAndInitializerWithCache;
 import de.KnollFrank.lib.settingssearch.results.recyclerview.FragmentContainerViewAdder;
-import de.KnollFrank.lib.settingssearch.search.MergedPreferenceScreenDataRepository;
-import de.KnollFrank.lib.settingssearch.search.SearchDatabaseDirectoryIO;
+import de.KnollFrank.lib.settingssearch.search.progress.ProgressUpdateListener;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		IRouteInformationListener, AMapPointUpdateListener, MapMarkerChangedListener,
@@ -972,47 +969,32 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	private LongRunningTask<MergedPreferenceScreenData> _getCreateSearchDatabaseTask() {
-		final var mergedPreferenceScreenDataRepository = getMergedPreferenceScreenDataRepository();
-		final Locale locale = Utils.geCurrentLocale(getResources());
+		FragmentContainerViewAdder.addInvisibleFragmentContainerViewWithIdToParent(
+				findViewById(android.R.id.content),
+				DUMMY_FRAGMENT_CONTAINER_VIEW_ID);
 		return new LongRunningTask<>(
-				() -> mergedPreferenceScreenDataRepository.getMergedPreferenceScreenData(locale),
+				getMergedPreferenceScreenData(Utils.geCurrentLocale(getResources())),
 				mergedPreferenceScreenData -> {
 				});
 	}
 
-	private MergedPreferenceScreenDataRepository getMergedPreferenceScreenDataRepository() {
-		FragmentContainerViewAdder.addInvisibleFragmentContainerViewWithIdToParent(
-				findViewById(android.R.id.content),
-				DUMMY_FRAGMENT_CONTAINER_VIEW_ID);
+	private Function<ProgressUpdateListener, MergedPreferenceScreenData> getMergedPreferenceScreenData(final Locale locale) {
 		final SearchPreferenceFragments searchPreferenceFragments =
 				SettingsSearchButtonHelper.createSearchPreferenceFragments(
 						this::getCreateSearchDatabaseTask,
 						this,
 						DUMMY_FRAGMENT_CONTAINER_VIEW_ID,
 						MainSettingsFragment.class);
-		final DefaultFragmentInitializer preferenceDialogs =
-				new DefaultFragmentInitializer(
-						getSupportFragmentManager(),
-						DUMMY_FRAGMENT_CONTAINER_VIEW_ID,
-						OnUiThreadRunnerFactory.fromActivity(this));
-		return new MergedPreferenceScreenDataRepository(
-				new Fragments(
-						new FragmentFactoryAndInitializerWithCache(
-								new FragmentFactoryAndInitializer(
-										searchPreferenceFragments.fragmentFactory,
-										preferenceDialogs)),
-						this),
-				preferenceDialogs,
-				searchPreferenceFragments.iconResourceIdProvider,
-				searchPreferenceFragments.searchableInfoProvider,
-				searchPreferenceFragments.preferenceDialogAndSearchableInfoProvider,
-				searchPreferenceFragments.searchConfiguration.rootPreferenceFragment(),
-				searchPreferenceFragments.preferenceSearchablePredicate,
-				searchPreferenceFragments.preferenceConnected2PreferenceFragmentProvider,
-				searchPreferenceFragments.preferenceScreenGraphAvailableListener,
-				progress -> {
-				},
-				new SearchDatabaseDirectoryIO(this));
+		return progressDisplayer ->
+				searchPreferenceFragments
+						.createMergedPreferenceScreenDataRepository(
+								new DefaultFragmentInitializer(
+										getSupportFragmentManager(),
+										DUMMY_FRAGMENT_CONTAINER_VIEW_ID,
+										OnUiThreadRunnerFactory.fromActivity(this)),
+								this,
+								progressDisplayer)
+						.getMergedPreferenceScreenData(locale);
 	}
 
 	@Override
