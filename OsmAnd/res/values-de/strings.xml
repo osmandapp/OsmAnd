@@ -5075,7 +5075,7 @@
     <string name="offline_cache">Offline-Cache</string>
     <string name="shared_string_alt_name">Alternativer Name</string>
     <string name="shared_string_pounds">Pfund</string>
-    <string name="metric_lbs">Lbs</string>
+    <string name="metric_lbs">lbs</string>
     <string name="weather_forecast_is_outdated">Die Vorhersage ist veraltet.</string>
     <string name="shared_string_all_world">Die ganze Welt</string>
     <string name="weather_forecast">Wettervorhersage</string>
@@ -5870,7 +5870,7 @@
     <string name="release_4_9">• Vollbild-Galerie-Viewer für Wikimedia-Bilder hinzugefügt\n\n • Neue Erweiterung „Fahrzeugdaten“ zur Überwachung der Fahrzeugleistung unter Verwendung des OBD-II-Protokolls eingeführt\n\n • Möglichkeit hinzugefügt, Aktivitäten zu Spuren zuzuordnen und sie entsprechend zu filtern\n\n • Neue Schnellaktionen für die Aufzeichnung von Fahrten und die Touchscreen-Sperre implementiert\n\n • Anpassbare Kartenschaltfläche und präzises Raster eingeführt\n\n • Kontextmenü und Aktion „Durchschnittsgeschwindigkeit zurücksetzen“ zu Widgets hinzugefügt\n\n • Neue Routenebene „Dirtbike-Strecken“ hinzugefügt\n\n • „Automatische Aufzeichnung des Tracks während der Navigation“ korrigiert\n\n • Problem mit umgedrehten Koordinaten in RTL behoben\n\n • Fehlende Sensordaten für die aktuell aufgezeichnete Strecke behoben\n\n • Informationen über die Umgebung des ausgewählten Punktes hinzugefügt\n\n • Schnellaktion zur Kontrolle der Sichtbarkeit von OSM-Bearbeitungen hinzugefügt\n\n • Sichtbarkeitsparameter für die Terrain-Einfärbungsoptionen separiert\n\n • Antippbares Symbol hinzugefügt, um Zufahrtswege oder andere Straßen- oder Pfadattribute anzuzeigen</string>
     <string name="screen_is_locked_by_external_button">Der Touchscreen ist gesperrt. Um die Sperre aufzuheben, drücken Sie die Taste %1$s oder tippen Sie auf die Schaltfläche auf dem Bildschirm.</string>
     <string name="screen_is_unlocked">Der Touchscreen ist entsperrt.</string>
-    <string name="screen_is_locked_by_action_button">Der Touchscreen ist gesperrt. Tippe zum Entsperren auf die Schaltfläche.</string>
+    <string name="screen_is_locked_by_action_button">Der Touchscreen ist gesperrt. Tippen Sie zum Entsperren auf die Schaltfläche.</string>
     <string name="connect_obd_instructions_step1">Den Scanner an den OBD-II-Anschluss Ihres Fahrzeugs anschließen.</string>
     <string name="connect_obd_instructions_step2">Den Motor Ihres Fahrzeugs einschalten</string>
     <string name="learn_more_about_obd_sensors">Mehr über Sensoren erfahren.</string>
@@ -5888,7 +5888,7 @@
     <string name="obd_searching_text_description">Bitte halten Sie Ihr Gerät in der Nähe des Scanners. Stellen Sie sicher, dass der Motor des Fahrzeugs läuft.</string>
     <string name="obd_nothing_found_description">Bitte überprüfen Sie Folgendes:\n - Stellen Sie sicher, dass Bluetooth eingeschaltet ist.\n - Der Fahrzeugmotor läuft\n - Stellen Sie sicher, dass sich Ihr Gerät in Reichweite des Scanners befindet.</string>
     <string name="obd_device_forget_sensor_description">Der Scanner wird aus der Liste entfernt. Sie können diesen Scanner jederzeit wieder koppeln.</string>
-    <string name="connect_obd_instructions_step">1. Schließen Sie den Scanner an den OBD-II-Anschluss Ihres Fahrzeugs an.\n\n 2. Schalten Sie den Motor Ihres Fahrzeugs ein.\n\n 3. Aktivieren Sie Bluetooth auf Ihrem Gerät\n\n 4. Tippen Sie auf „%1$s“ und wählen Sie Ihren Scanner aus der Liste aus.</string>
+    <string name="connect_obd_instructions_step">1. Schließen Sie den Scanner an den OBD-II-Anschluss Ihres Fahrzeugs an.\n\n 2. Schalten Sie den Motor Ihres Fahrzeugs ein.\n\n 3. Aktivieren Sie Bluetooth auf Ihrem Gerät.\n\n 4. Tippen Sie auf „%1$s“ und wählen Sie Ihren Scanner aus der Liste aus.</string>
     <string name="route_guidance_desc">Bietet Routenführung in Echtzeit, einschließlich Entfernung bis zur nächsten Abbiegung, Straßenname, aktueller Straßenname und Fahrbahninformationen. Die Widgets sind während der Navigation aktiv.</string>
     <string name="obd_widget_vehicle_speed">Fahrzeuggeschwindigkeit</string>
     <string name="route_guidance">Routenführung</string>
@@ -5929,11 +5929,11 @@
     <string name="us_gallons">US gallons</string>
     <string name="unit_of_volume_description">Ausgewählte Einheiten werden auf alle volumenbezogenen Daten im aktuellen Profil angewendet.</string>
     <string name="unit_of_volume">Volumeneinheit</string>
-    <string name="record_obd_data">Fahrzeugmetriken aufzeichnen</string>
+    <string name="record_obd_data">Fahrzeugdaten aufzeichnen</string>
     <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
     <string name="obd_throttle_position_desc">Zeigt den Winkel der Drosselklappe im Drosselklappengehäuse an.</string>
-    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Verfolge wichtige Fahrzeugdaten über das OBD-II Protokoll. Überwache wichtige Daten wie Geschwindigkeit, Motordrehzahl, Kraftstoffverbrauch und mehr.</string>
-    <string name="vehicle_metrics_obd_ii">Fahrzeugmetriken (OBD-II)</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Verfolgen Sie wichtige Fahrzeugdaten über das OBD-II-Protokoll. Überwachen Sie wichtige Daten wie Geschwindigkeit, Motordrehzahl, Kraftstoffverbrauch und mehr.</string>
+    <string name="vehicle_metrics_obd_ii">Fahrzeugdaten (OBD-II)</string>
     <string name="shared_string_hour">Stunde</string>
     <string name="ltr_or_rtl_combine_via_per">%1$s pro %2$s</string>
     <string name="show_minor_turns">Anzeige an kleineren Kreuzungen bei Geradeausfahrt</string>
@@ -5951,9 +5951,9 @@
     <string name="obd_fuel_consumption_desc">Zeigt den Kraftstoffverbrauch des Motors an, der auf der Grundlage des verbleibenden Kraftstoffs, der Tankgröße und der per GPS ermittelten Entfernung berechnet wird.</string>
     <string name="current_temperature">Aktuelle Temperatur</string>
     <string name="show_minor_turns_descr">Die Fahrspuren werden an allen Kreuzungen mit Überholverbot angezeigt, unabhängig von den Sprachanweisungen</string>
-    <string name="average_value_slider_description">Wähle das Zeitintervall für die Messung des Durchschnittswerts.</string>
+    <string name="average_value_slider_description">Wählen Sie das Zeitintervall für die Messung des Durchschnittswerts.</string>
     <string name="shared_string_instant">Sofort</string>
-    <string name="average_temperature_slider_description">Wähle das Zeitintervall für die Messung der Durchschnittstemperatur.</string>
+    <string name="average_temperature_slider_description">Wählen Sie das Zeitintervall für die Messung der Durchschnittstemperatur.</string>
     <string name="obd_engine_runtime">Motorlaufzeit</string>
     <string name="obd_calculated_engine_load_desc">Zeigt den Prozentsatz der verfügbaren Motorleistung an, der zu einem bestimmten Zeitpunkt genutzt wird.</string>
     <string name="obd_calculated_engine_load">Berechnete Motorlast</string>
@@ -5964,7 +5964,7 @@
     <string name="obd_throttle_position">Drosselklappenstellung</string>
     <string name="shared_string_volume">Menge</string>
     <string name="av_audio_sample_rate">Audio-Samplerate</string>
-    <string name="av_audio_sample_rate_descr">Wähle die Audio-Samplerate.</string>
+    <string name="av_audio_sample_rate_descr">Wählen Sie die Audio-Samplerate.</string>
     <string name="connect_new_scanner">Neuen Scanner verbinden</string>
     <string name="preview_next_turn">Vorschau der nächsten Abbiegung</string>
     <string name="auto_zoom_3d_angle">Autozoom 3D-Winkel</string>
