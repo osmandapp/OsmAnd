@@ -6009,12 +6009,12 @@
     <string name="liter">l</string>
     <string name="percent_hour">%/h</string>
     <string name="speedometer_maximum">Máximo</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Mostrar el consumo de combustible (l/km)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Mostrar el consumo de combustible (l/100 km)</string>
     <string name="simulate_obd">Simular datos OBD</string>
     <string name="obd_fuel_pressure">Presión del combustible</string>
     <string name="l_100km">l/100km</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Muestra el consumo de combustible del vehículo (%/h)</string>
-    <string name="obd_fuel_consumption_rate_l_km">Consumo de combustible (l/km)</string>
+    <string name="obd_fuel_consumption_rate_l_km">Consumo de combustible (l/100 km)</string>
     <string name="kpa_unit">kPa</string>
     <string name="bt_start_pair_failed">No se puede iniciar el emparejamiento con el dispositivo</string>
     <string name="dynamic_icon_type_summary">El icono cambia según el estado de la acción.</string>

@@ -5631,8 +5631,8 @@
     <string name="liter">l</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Viser køretøjets brændstofforbrug baseret på beregninger (%/t)</string>
     <string name="l_100km">l/100 km</string>
-    <string name="obd_fuel_consumption_rate_l_km">Brændstofforbrug (l/km)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Viser køretøjets brændstofforbrug baseret på beregninger (l/km)</string>
+    <string name="obd_fuel_consumption_rate_l_km">Brændstofforbrug (l/100 km)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Viser køretøjets brændstofforbrug baseret på beregninger (l/100 km)</string>
     <string name="simulate_obd">Simulér obd-data</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Brændstoftryk</string>

@@ -14,6 +14,8 @@ import net.osmand.shared.util.Localization
 import net.osmand.shared.util.PlatformUtil
 
 
+private const val FUEL_CONSUMPTION_DEFAULT_AVERAGE_TIME = 5 * 60
+
 object OBDDataComputer {
 
 	private const val LITER_KM_CONSUMPTION_LIMIT = 100
@@ -120,7 +122,8 @@ object OBDDataComputer {
 		val locationNeeded: Boolean,
 		val requiredCommand: OBDCommand,
 		val nameId: String,
-		val formatter: OBDComputerWidgetFormatter
+		val formatter: OBDComputerWidgetFormatter,
+		val defaultAverageTime: Int = 0
 	) {
 		SPEED(
 			false,
@@ -170,15 +173,18 @@ object OBDDataComputer {
 		FUEL_CONSUMPTION_RATE_PERCENT_HOUR(
 			false,
 			OBD_FUEL_LEVEL_COMMAND,
-			"obd_fuel_consumption_rate_percent_hour", OBDComputerWidgetFormatter("%.1f")),
+			"obd_fuel_consumption_rate_percent_hour", OBDComputerWidgetFormatter("%.1f"),
+			FUEL_CONSUMPTION_DEFAULT_AVERAGE_TIME),
 		FUEL_CONSUMPTION_RATE_LITER_KM(
 			true,
 			OBD_FUEL_LEVEL_COMMAND,
-			"obd_fuel_consumption_rate_l_km", OBDComputerWidgetFormatter("%.1f")),
+			"obd_fuel_consumption_rate_l_km", OBDComputerWidgetFormatter("%.1f"),
+			FUEL_CONSUMPTION_DEFAULT_AVERAGE_TIME),
 		FUEL_CONSUMPTION_RATE_LITER_HOUR(
 			false,
 			OBD_FUEL_LEVEL_COMMAND,
-			"obd_fuel_consumption_rate_liter_hour", OBDComputerWidgetFormatter("%.1f")),
+			"obd_fuel_consumption_rate_liter_hour", OBDComputerWidgetFormatter("%.1f"),
+			FUEL_CONSUMPTION_DEFAULT_AVERAGE_TIME),
 		FUEL_CONSUMPTION_RATE_SENSOR(
 			false,
 			OBD_FUEL_CONSUMPTION_RATE_COMMAND,
@@ -307,7 +313,7 @@ object OBDDataComputer {
 				FUEL_CONSUMPTION_RATE_LITER_HOUR -> {
 					if (locValues.size >= 2) {
 						val result = getFuelTank() * calculateFuelConsumption(locValues) / 100
-						if(result > LITER_HOUR_CONSUMPTION_LIMIT) {
+						if (result > LITER_HOUR_CONSUMPTION_LIMIT) {
 							Float.NaN
 						} else {
 							result
@@ -331,7 +337,7 @@ object OBDDataComputer {
 							if (distance > 0) {
 								log.debug("l/100km. distance $distance; difLiter $difLiter; result ${100 * difLiter / (distance / 1000)}")
 								val result = 100 * difLiter / (distance / 1000)
-								return if(result > LITER_KM_CONSUMPTION_LIMIT) {
+								return if (result > LITER_KM_CONSUMPTION_LIMIT) {
 									Float.NaN
 								} else {
 									result

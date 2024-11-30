@@ -850,7 +850,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			}
 		}
 		val volumeUnit = settings.UNIT_OF_VOLUME.get().getUnitSymbol(app)
-		return app.getString(R.string.ltr_or_rtl_combine_via_slash, volumeUnit, distanceUnit)
+		return app.getString(R.string.ltr_or_rtl_combine_via_slash, volumeUnit, "100$distanceUnit")
 	}
 
 	private fun getFormatVolumePerDistance(litersPer100km: Number): Float {
