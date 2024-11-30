@@ -5831,7 +5831,7 @@
     <string name="obd_fuel_consumption_rate">Kraftstoffverbrauch</string>
     <string name="obd_fuel_type">Kraftstofftyp</string>
     <string name="obd_plugin_name">Fahrzeugdaten</string>
-    <string name="obd_plugin_description">Überwachen Sie wichtige Fahrzeugdaten über das OBD-II-Protokoll. Zugriff auf Daten einschließlich: * Motordrehzahl * Kraftstoffverbrauch * Verbleibender Kraftstoff * Entfernung seit Motorstart * Ansaugtemperatur * Umgebungstemperatur * Kühlmitteltemperatur * Fahrzeuggeschwindigkeit * Batterieanteil</string>
+    <string name="obd_plugin_description">Überwachung von wichtigen Fahrzeugdaten über das OBD-II-Protokoll. Zugriff auf Daten, einschließlich:\n - Motordrehzahl, Motorlaufzeit, berechnete Motorlast \n - Kraftstoffverbrauch, Kraftstoffdruck, verbleibender Kraftstoff\n - Ansaugtemperatur, Umgebungstemperatur, Kühlmitteltemperatur, Motoröltemperatur\n - Fahrzeuggeschwindigkeit, Drosselklappenstellung, Batteriespannung\n</string>
     <string name="obd_support">OBD-Unterstützung</string>
     <string name="obd_battery_voltage">Batteriespannung</string>
     <string name="obd_rpm_desc">Zeigt mithilfe des OBD-Sensors die Drehzahl des Fahrzeugtachos an</string>
@@ -5901,7 +5901,7 @@
     <string name="obd_fuel_level_percent">Kraftstoffstand (%)</string>
     <string name="obd_fuel_left_km">Verbleibender Kraftstoff (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Kraftstoffverbrauch (OBD)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">Kraftstoffverbrauch (l/h)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Kraftstoffverbrauch</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Kraftstoffverbrauch (%/h)</string>
     <string name="liter">l</string>
     <string name="percent_hour">%/h</string>

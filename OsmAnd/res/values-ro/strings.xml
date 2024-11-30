@@ -5911,4 +5911,6 @@
     <string name="obd_engine_oil_temperature">Temperatura uleiului de motor</string>
     <string name="obd_fuel_consumption_desc">Afișează rata de utilizare a combustibilului de către motor, calculată pe baza combustibilului rămas, a dimensiunii rezervorului și a distanței parcurse determinate de GPS.</string>
     <string name="obd_fuel_consumption">Consumul de combustibil</string>
+    <string name="average_value_slider_description">Selectați intervalul de timp pentru măsurarea valorii medii.</string>
+    <string name="reset_average_value">Resetarea valorii medii</string>
 </resources>
