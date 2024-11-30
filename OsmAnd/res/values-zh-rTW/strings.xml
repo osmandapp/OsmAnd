@@ -5600,7 +5600,7 @@
     <string name="obd_fuel_level_percent">油量 (%)</string>
     <string name="obd_fuel_left_km">剩餘燃料（公里）</string>
     <string name="obd_fuel_consumption_rate_scanner">燃料消耗率 (obd)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">燃料消耗率（公升/小時）</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">燃料消耗率</string>
     <string name="obd_fuel_consumption_rate_percent_hour">燃料消耗率（%/小時）</string>
     <string name="obd_fuel_consumption_rate_l_h">燃料消耗率（公升/小時）</string>
     <string name="speedometer_maximum">最大</string>
