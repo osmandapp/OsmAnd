@@ -5610,7 +5610,7 @@
     <string name="obd_fuel_level_liter">Hladina paliva (l)</string>
     <string name="obd_fuel_level_percent">Hladina paliva (%)</string>
     <string name="obd_fuel_left_km">Zbývá palivo (km)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">Spotřeba paliva L/h</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Míra spotřeby paliva</string>
     <string name="obd_fuel_consumption_rate_scanner">Spotřeba paliva (OBD)</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Spotřeba paliva %/h</string>
     <string name="route_guidance">Navádění po trase</string>
