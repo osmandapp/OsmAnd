@@ -15,7 +15,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -150,22 +149,15 @@ import org.apache.commons.logging.Log;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.function.Function;
 
-import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
-import de.KnollFrank.lib.settingssearch.common.Utils;
+import de.KnollFrank.lib.settingssearch.client.CreateSearchDatabaseTaskProvider;
 import de.KnollFrank.lib.settingssearch.common.task.AsyncTaskWithProgressUpdateListeners;
-import de.KnollFrank.lib.settingssearch.common.task.OnUiThreadRunnerFactory;
-import de.KnollFrank.lib.settingssearch.db.preference.pojo.MergedPreferenceScreenData;
-import de.KnollFrank.lib.settingssearch.fragment.DefaultFragmentInitializer;
-import de.KnollFrank.lib.settingssearch.results.recyclerview.FragmentContainerViewAdder;
-import de.KnollFrank.lib.settingssearch.search.progress.ProgressUpdateListener;
+import de.KnollFrank.lib.settingssearch.common.task.Tasks;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		IRouteInformationListener, AMapPointUpdateListener, MapMarkerChangedListener,
@@ -187,8 +179,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Nullable
 	private static Intent prevActivityIntent = null;
 
-	private static final @IdRes int DUMMY_FRAGMENT_CONTAINER_VIEW_ID = View.generateViewId();
-	private Optional<AsyncTaskWithProgressUpdateListeners<MergedPreferenceScreenData>> createSearchDatabaseTask = Optional.empty();
+	private static final @IdRes int FRAGMENT_CONTAINER_VIEW_ID = View.generateViewId();
+	private Optional<AsyncTaskWithProgressUpdateListeners<?>> createSearchDatabaseTask = Optional.empty();
 
 	private final List<ActivityResultListener> activityResultListeners = new ArrayList<>();
 
@@ -369,7 +361,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
-	public Optional<AsyncTaskWithProgressUpdateListeners<MergedPreferenceScreenData>> getCreateSearchDatabaseTask() {
+	public Optional<AsyncTaskWithProgressUpdateListeners<?>> getCreateSearchDatabaseTask() {
 		return createSearchDatabaseTask;
 	}
 
@@ -962,39 +954,17 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		getMyApplication().getNotificationHelper().showNotifications();
 		extendedMapActivity.onStart(this);
 		{
-			final var createSearchDatabaseTask = _getCreateSearchDatabaseTask();
-			this.createSearchDatabaseTask = Optional.of(createSearchDatabaseTask);
-			createSearchDatabaseTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			createSearchDatabaseTask =
+					Optional.of(
+							CreateSearchDatabaseTaskProvider.getCreateSearchDatabaseTask(
+									SettingsSearchButtonHelper.createSearchPreferenceFragments(
+											this::getCreateSearchDatabaseTask,
+											this,
+											FRAGMENT_CONTAINER_VIEW_ID,
+											MainSettingsFragment.class),
+									this));
+			Tasks.executeTaskInParallelWithOtherTasks(createSearchDatabaseTask.get());
 		}
-	}
-
-	private AsyncTaskWithProgressUpdateListeners<MergedPreferenceScreenData> _getCreateSearchDatabaseTask() {
-		FragmentContainerViewAdder.addInvisibleFragmentContainerViewWithIdToParent(
-				findViewById(android.R.id.content),
-				DUMMY_FRAGMENT_CONTAINER_VIEW_ID);
-		return new AsyncTaskWithProgressUpdateListeners<>(
-				getMergedPreferenceScreenData(Utils.geCurrentLocale(getResources())),
-				mergedPreferenceScreenData -> {
-				});
-	}
-
-	private Function<ProgressUpdateListener, MergedPreferenceScreenData> getMergedPreferenceScreenData(final Locale locale) {
-		final SearchPreferenceFragments searchPreferenceFragments =
-				SettingsSearchButtonHelper.createSearchPreferenceFragments(
-						this::getCreateSearchDatabaseTask,
-						this,
-						DUMMY_FRAGMENT_CONTAINER_VIEW_ID,
-						MainSettingsFragment.class);
-		return progressDisplayer ->
-				searchPreferenceFragments
-						.createMergedPreferenceScreenDataRepository(
-								new DefaultFragmentInitializer(
-										getSupportFragmentManager(),
-										DUMMY_FRAGMENT_CONTAINER_VIEW_ID,
-										OnUiThreadRunnerFactory.fromActivity(this)),
-								this,
-								progressDisplayer)
-						.getMergedPreferenceScreenData(locale);
 	}
 
 	@Override

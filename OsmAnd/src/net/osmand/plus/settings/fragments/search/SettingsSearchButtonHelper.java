@@ -16,27 +16,25 @@ import java.util.function.Supplier;
 import de.KnollFrank.lib.settingssearch.client.SearchConfiguration;
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
 import de.KnollFrank.lib.settingssearch.common.task.AsyncTaskWithProgressUpdateListeners;
-import de.KnollFrank.lib.settingssearch.common.task.OnUiThreadRunnerFactory;
-import de.KnollFrank.lib.settingssearch.db.preference.pojo.MergedPreferenceScreenData;
 
 public class SettingsSearchButtonHelper {
 
 	private final BaseSettingsFragment rootSearchPreferenceFragment;
 	private final @IdRes int fragmentContainerViewId;
 	private final SearchDatabaseStatusHandler searchDatabaseStatusHandler;
-	private final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<MergedPreferenceScreenData>>> getCreateSearchDatabaseTask;
+	private final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<?>>> createSearchDatabaseTaskSupplier;
 
 	public SettingsSearchButtonHelper(final BaseSettingsFragment rootSearchPreferenceFragment,
 									  final @IdRes int fragmentContainerViewId,
 									  final OsmandApplication app,
-									  final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<MergedPreferenceScreenData>>> getCreateSearchDatabaseTask) {
+									  final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<?>>> createSearchDatabaseTaskSupplier) {
 		this.rootSearchPreferenceFragment = rootSearchPreferenceFragment;
 		this.fragmentContainerViewId = fragmentContainerViewId;
 		this.searchDatabaseStatusHandler =
 				new SearchDatabaseStatusHandler(
 						new SetStringPreference(
 								app.getSettings().PLUGINS_COVERED_BY_SETTINGS_SEARCH));
-		this.getCreateSearchDatabaseTask = getCreateSearchDatabaseTask;
+		this.createSearchDatabaseTaskSupplier = createSearchDatabaseTaskSupplier;
 	}
 
 	public void configureSettingsSearchButton(final ImageView settingsSearchButton) {
@@ -46,7 +44,7 @@ public class SettingsSearchButtonHelper {
 	}
 
 	public static SearchPreferenceFragments createSearchPreferenceFragments(
-			final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<MergedPreferenceScreenData>>> getCreateSearchDatabaseTask,
+			final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<?>>> createSearchDatabaseTaskSupplier,
 			final FragmentActivity fragmentActivity,
 			final @IdRes int fragmentContainerViewId,
 			final Class<? extends BaseSettingsFragment> rootPreferenceFragment) {
@@ -57,9 +55,8 @@ public class SettingsSearchButtonHelper {
 								Optional.of("Search Settings"),
 								rootPreferenceFragment),
 						fragmentActivity.getSupportFragmentManager(),
-						fragmentActivity,
-						OnUiThreadRunnerFactory.fromActivity(fragmentActivity))
-				.withGetCreateSearchDatabaseTask(getCreateSearchDatabaseTask)
+						fragmentActivity)
+				.withCreateSearchDatabaseTaskSupplier(createSearchDatabaseTaskSupplier)
 				.withFragmentFactory(new FragmentFactory())
 				.withPreferenceConnected2PreferenceFragmentProvider(new PreferenceConnected2PreferenceFragmentProvider())
 				.withPrepareShow(new PrepareShow())
@@ -73,7 +70,7 @@ public class SettingsSearchButtonHelper {
 	private void onClickShowSearchPreferenceFragment(final ImageView searchPreferenceButton) {
 		final SearchPreferenceFragments searchPreferenceFragments =
 				createSearchPreferenceFragments(
-						getCreateSearchDatabaseTask,
+						createSearchDatabaseTaskSupplier,
 						rootSearchPreferenceFragment.requireActivity(),
 						fragmentContainerViewId,
 						rootSearchPreferenceFragment.getClass());
