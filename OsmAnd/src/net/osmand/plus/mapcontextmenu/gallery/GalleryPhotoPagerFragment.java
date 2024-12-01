@@ -192,6 +192,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 		if (imageCard instanceof WikiImageCard wikiImageCard) {
 			dateView.setVisibility(View.VISIBLE);
 			authorView.setVisibility(View.VISIBLE);
+			licenseView.setVisibility(View.VISIBLE);
 			Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
 			String date = metadata.getDate();
 			String author = metadata.getAuthor();
@@ -207,6 +208,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 		} else {
 			dateView.setVisibility(View.INVISIBLE);
 			authorView.setVisibility(View.INVISIBLE);
+			licenseView.setVisibility(View.INVISIBLE);
 		}
 
 		int iconId = imageCard.getTopIconId();
