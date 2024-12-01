@@ -160,7 +160,7 @@ import java.util.function.Function;
 
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
 import de.KnollFrank.lib.settingssearch.common.Utils;
-import de.KnollFrank.lib.settingssearch.common.task.LongRunningTask;
+import de.KnollFrank.lib.settingssearch.common.task.AsyncTaskWithProgressUpdateListeners;
 import de.KnollFrank.lib.settingssearch.common.task.OnUiThreadRunnerFactory;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.MergedPreferenceScreenData;
 import de.KnollFrank.lib.settingssearch.fragment.DefaultFragmentInitializer;
@@ -188,7 +188,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private static Intent prevActivityIntent = null;
 
 	private static final @IdRes int DUMMY_FRAGMENT_CONTAINER_VIEW_ID = View.generateViewId();
-	private Optional<LongRunningTask<MergedPreferenceScreenData>> createSearchDatabaseTask = Optional.empty();
+	private Optional<AsyncTaskWithProgressUpdateListeners<MergedPreferenceScreenData>> createSearchDatabaseTask = Optional.empty();
 
 	private final List<ActivityResultListener> activityResultListeners = new ArrayList<>();
 
@@ -369,7 +369,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
-	public Optional<LongRunningTask<MergedPreferenceScreenData>> getCreateSearchDatabaseTask() {
+	public Optional<AsyncTaskWithProgressUpdateListeners<MergedPreferenceScreenData>> getCreateSearchDatabaseTask() {
 		return createSearchDatabaseTask;
 	}
 
@@ -968,11 +968,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
-	private LongRunningTask<MergedPreferenceScreenData> _getCreateSearchDatabaseTask() {
+	private AsyncTaskWithProgressUpdateListeners<MergedPreferenceScreenData> _getCreateSearchDatabaseTask() {
 		FragmentContainerViewAdder.addInvisibleFragmentContainerViewWithIdToParent(
 				findViewById(android.R.id.content),
 				DUMMY_FRAGMENT_CONTAINER_VIEW_ID);
-		return new LongRunningTask<>(
+		return new AsyncTaskWithProgressUpdateListeners<>(
 				getMergedPreferenceScreenData(Utils.geCurrentLocale(getResources())),
 				mergedPreferenceScreenData -> {
 				});
