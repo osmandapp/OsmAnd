@@ -259,7 +259,8 @@ public class BinaryMapRouteReaderAdapter {
 				type = HIGHWAY_TYPE;
 			} else if(t.endsWith(":conditional") && v != null){
 				conditions = new ArrayList<RouteTypeCondition>();
-				String[] cts = v.split("\\);");
+
+				String[] cts = splitConditionalTagValue(v);
 				for(String c : cts) {
 					int ch = c.indexOf('@');
 					if (ch > 0) {
@@ -318,6 +319,25 @@ public class BinaryMapRouteReaderAdapter {
 					intValue = Integer.parseInt(v.substring(0, i));
 				}
 			}
+		}
+
+		private String[] splitConditionalTagValue(String v) {
+			// 50 @ (Mo-Th 22:00-05:00;Fr 19:00-05:00;Sa,Su); 50 @ winter; 30 @ snow
+			int parenthesis = 0;
+			char DELIMITER = '~';
+			char[] chars = v.toCharArray();
+			for (int i = 0; i < chars.length; i++) {
+				if (chars[i] == '(') {
+					parenthesis++;
+				}
+				if (chars[i] == ')') {
+					parenthesis--;
+				}
+				if (chars[i] == ';' && parenthesis == 0) {
+					chars[i] = DELIMITER;
+				}
+			}
+			return String.valueOf(chars).split(String.valueOf(DELIMITER));
 		}
 	}
 

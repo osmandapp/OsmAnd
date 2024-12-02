@@ -1715,7 +1715,9 @@ public class OpeningHoursParser {
 		TOKEN_DAY_WEEK(7),
 		TOKEN_HOUR_MINUTES (8),
 		TOKEN_OFF_ON(9),
-		TOKEN_COMMENT(10);
+		TOKEN_COMMENT(10),
+		TOKEN_SEASON(11),
+		TOKEN_WEATHER(12);
 
 		public final int ord;
 
@@ -1764,6 +1766,8 @@ public class OpeningHoursParser {
 		final String[] daysStr = new String[]{"mo", "tu", "we", "th", "fr", "sa", "su"};
 		final String[] monthsStr = new String[]{"jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"};
 		final String[] holidayStr = new String[]{"ph", "sh", "easter"};
+		final String[] seasonStr = new String[]{"winter", "summer"};
+		final String[] weatherStr = new String[]{"wet", "snow", "ice"};
 		String sunrise = "07:00";
 		String sunset = "21:00";
 		String endOfDay = "24:00";
@@ -1840,6 +1844,12 @@ public class OpeningHoursParser {
 			if (t.type == TokenType.TOKEN_UNKNOWN) {
 				findInArray(t, holidayStr, TokenType.TOKEN_HOLIDAY);
 			}
+			if (t.type == TokenType.TOKEN_UNKNOWN) {
+				findInArray(t, seasonStr, TokenType.TOKEN_SEASON);
+			}
+			if (t.type == TokenType.TOKEN_UNKNOWN) {
+				findInArray(t, weatherStr, TokenType.TOKEN_WEATHER);
+			}
 			if (t.type == TokenType.TOKEN_UNKNOWN && ("off".equals(t.text) || "closed".equals(t.text))) {
 				t.type = TokenType.TOKEN_OFF_ON;
 				t.mainNumber = 0;
@@ -1904,6 +1914,22 @@ public class OpeningHoursParser {
 			if (i == 0 && t != null && t.type == TokenType.TOKEN_UNKNOWN) {
 				// skip rule if the first token unknown
 				return;
+			}
+			if (t != null && t.type == TokenType.TOKEN_SEASON) {
+				// TODO convert @ winter @ summer into months?
+				if (i == 0) {
+					return;
+				} else {
+					continue;
+				}
+			}
+			if (t != null && t.type == TokenType.TOKEN_WEATHER) {
+				// currently unsupported
+				if (i == 0) {
+					return;
+				} else {
+					continue;
+				}
 			}
 			if (t == null || t.type.ord() > currentParse.ord()) {
 				presentTokens.add(currentParse);
