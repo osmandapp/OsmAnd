@@ -56,6 +56,7 @@ public class SettingsSearchButtonHelper {
 								rootPreferenceFragment),
 						fragmentActivity.getSupportFragmentManager(),
 						fragmentActivity)
+				.withSearchPreferenceFragmentUI(new SearchPreferenceFragmentUI())
 				.withCreateSearchDatabaseTaskSupplier(createSearchDatabaseTaskSupplier)
 				.withFragmentFactory(new FragmentFactory())
 				.withPreferenceConnected2PreferenceFragmentProvider(new PreferenceConnected2PreferenceFragmentProvider())
