@@ -5340,7 +5340,7 @@
     <string name="help_article_navigation_routing_car_based_routing_name">Автомаршрути (вантажівки, мотоцикли)</string>
     <string name="help_article_navigation_routing_online_routing_name">Онлайн-маршрутизація</string>
     <string name="help_article_map_map_context_menu_name">Контекстне меню мапи</string>
-    <string name="help_article_navigation_car_play_name">Автомобільні ігри</string>
+    <string name="help_article_navigation_car_play_name">CarPlay</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Екран мапи під час навігації</string>
     <string name="help_article_navigation_routing_name">Параметри маршруту</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Про маршрутизацію OsmAnd</string>
