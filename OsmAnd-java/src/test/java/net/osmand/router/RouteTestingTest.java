@@ -146,6 +146,7 @@ public class RouteTestingTest {
 			List<RouteSegmentResult> routeSegments = fe.searchRoute(ctx, te.getStartPoint(), te.getEndPoint(),
 					te.getTransitPoint()).detailed;
 			Set<Long> reachedSegments = new TreeSet<Long>();
+			Set<String> reachedSegmentPoints = new TreeSet<>();
 			Assert.assertNotNull(routeSegments);
 			int prevSegment = -1;
 			for (int i = 0; i <= routeSegments.size(); i++) {
@@ -159,7 +160,13 @@ public class RouteTestingTest {
 					prevSegment = i;
 				}
 				if (i < routeSegments.size()) {
-					reachedSegments.add(routeSegments.get(i).getObject().getId() >> (RouteResultPreparation.SHIFT_ID));
+					RouteSegmentResult seg = routeSegments.get(i);
+					long id = seg.getObject().getId() >> RouteResultPreparation.SHIFT_ID;
+					for (int point = Math.min(seg.getStartPointIndex(), seg.getEndPointIndex());
+					     point <= Math.max(seg.getStartPointIndex(), seg.getEndPointIndex()); point++) {
+						reachedSegmentPoints.add(id + ":" + point);
+					}
+					reachedSegments.add(id);
 				}
 			}
 			Map<String, String> expectedResults = te.getExpectedResults();
@@ -170,41 +177,33 @@ public class RouteTestingTest {
 			checkRoutingTime(ctx, params);
 			for (Entry<String, String> es : expectedResults.entrySet()) {
 				long id = RouterUtilTest.getRoadId(es.getKey());
+				int point = RouterUtilTest.getRoadStartPoint(es.getKey());
+				String pointInSegment = id + ":" + point;
 				switch (es.getValue()) {
 					case "false":
-						Assert.assertFalse("Expected segment " + id + " was wrongly reached in route segments "
-								+ reachedSegments, reachedSegments.contains(id));
+						if (point == -1) {
+							Assert.assertFalse("Expected segment " + id + " was wrongly reached in route segments "
+									+ reachedSegments, reachedSegments.contains(id));
+						} else {
+							Assert.assertTrue("Unexpected pointInSegment " + pointInSegment + " is found in "
+									+ reachedSegmentPoints, !reachedSegmentPoints.contains(pointInSegment));
+						}
 						break;
 					case "true":
-						Assert.assertTrue("Expected segment " + id + " weren't reached in route segments "
-								+ reachedSegments, reachedSegments.contains(id));
+						if (point == -1) {
+							Assert.assertTrue("Expected segment " + id + " weren't reached in route segments "
+									+ reachedSegments, reachedSegments.contains(id));
+						} else {
+							Assert.assertTrue("Expected pointInSegment " + pointInSegment + " is not found in "
+									+ reachedSegmentPoints, reachedSegmentPoints.contains(pointInSegment));
+						}
 						break;
 					case "visitedSegments":
 						Assert.assertTrue("Expected segments visit " + id + " less then actually visited segments "
 								+ ctx.getVisitedSegments(), ctx.getVisitedSegments() < id);
 						break;
-					default: // "ID": "+1,+2,-3,-4,-5,-0" (check exact point present/absent within the ID's segment)
-						int requestedPresentPoints = 0, foundPresentPoints = 0;
-						int requestedAbsentPoints = 0, foundAbsentPoints = 0;
-						for (String element : es.getValue().split(",")) {
-							int point = Math.abs(Integer.parseInt(element));
-							boolean negative = element.startsWith("-"); // allow "-0" to check
-							requestedPresentPoints += negative ? 0 : 1;
-							requestedAbsentPoints += negative ? 1 : 0;
-							for (RouteSegmentResult seg : routeSegments) {
-								if (seg.getObject().getId() / 64 == id) {
-									if (point >= Math.min(seg.getStartPointIndex(), seg.getEndPointIndex()) &&
-											point <= Math.max(seg.getStartPointIndex(), seg.getEndPointIndex())) {
-										foundPresentPoints += negative ? 0 : 1;
-										foundAbsentPoints += negative ? 1 : 0;
-									}
-								}
-							}
-						}
-						Assert.assertTrue("foundPresentPoints failed (found less than requested)",
-								requestedPresentPoints == 0 || foundPresentPoints >= requestedPresentPoints);
-						Assert.assertTrue("foundAbsentPoints failed (found more than zero)",
-								requestedAbsentPoints == 0 || foundAbsentPoints == 0);
+					default:
+						Assert.assertTrue("Invalid key " + es.getKey() + " value " + es.getValue(), false);
 						break;
 				}
 			}
