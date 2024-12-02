@@ -42,7 +42,6 @@ import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.banner.WidgetPromoBanner;
-import net.osmand.plus.views.mapwidgets.banner.WidgetPromoBanner.WidgetData;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
 import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsConfigurationChangeListener;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
@@ -114,8 +113,8 @@ public class WidgetInfoFragment extends BaseWidgetFragment implements WidgetsCon
 			throw new IllegalStateException("Failed to find widget by id: " + widgetId);
 		}
 		widgetType = widgetInfo.getWidgetType();
-		widgetGroup = widgetType == null ? null : widgetType.getGroup();
 		panel = widgetInfo.getWidgetPanel();
+		widgetGroup = widgetType == null ? null : widgetType.getGroup(panel);
 	}
 
 	private void setupToolbar() {
@@ -191,16 +190,15 @@ public class WidgetInfoFragment extends BaseWidgetFragment implements WidgetsCon
 	}
 
 	private void setupPromoBanner() {
-		MapActivity activity = getMapActivity();
+		MapActivity activity = requireMapActivity();
 		ViewGroup bannerContainer = view.findViewById(R.id.promo_banner_container);
 		View widgetContainer = view.findViewById(R.id.widget_item);
 		bannerContainer.setVisibility(View.VISIBLE);
 		widgetContainer.setVisibility(View.GONE);
 		bannerContainer.removeAllViews();
 
-		WidgetData widgetData = new WidgetData(widgetType.titleId, widgetType.dayIconId, widgetType.nightIconId);
-		WidgetPromoBanner banner = new WidgetPromoBanner(requireMapActivity(), widgetData, false);
-		bannerContainer.addView(banner.build(activity));
+		WidgetPromoBanner banner = new WidgetPromoBanner(activity, widgetType, false);
+		bannerContainer.addView(banner.build());
 	}
 
 	private void setupSecondaryDescription() {
@@ -262,8 +260,8 @@ public class WidgetInfoFragment extends BaseWidgetFragment implements WidgetsCon
 	}
 
 	private void openSettingsFragment() {
-		WidgetSettingsBaseFragment settingsFragment = widgetType == null ? null : widgetType.getSettingsFragment(app, widgetInfo);
-		if (settingsFragment == null) {
+		WidgetSettingsBaseFragment fragment = widgetType == null ? null : widgetType.getSettingsFragment(app, widgetInfo);
+		if (fragment == null) {
 			throw new IllegalStateException("Widget has no available settings");
 		}
 
@@ -274,7 +272,7 @@ public class WidgetInfoFragment extends BaseWidgetFragment implements WidgetsCon
 			args.putString(APP_MODE_KEY, appMode.getStringKey());
 			args.putString(WIDGET_ID_KEY, widgetInfo.key);
 
-			WidgetSettingsBaseFragment.showFragment(fragmentManager, args, this, settingsFragment);
+			WidgetSettingsBaseFragment.showFragment(fragmentManager, args, fragment, this);
 		}
 	}
 

@@ -16,19 +16,30 @@ import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
+import net.osmand.router.RoadSplitStructure.AttachedRoadInfo;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
-import net.osmand.router.RoadSplitStructure.*;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.MessageFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class RouteResultPreparation {
 
@@ -250,7 +261,7 @@ public class RouteResultPreparation {
 		ignorePrecedingStraightsOnSameIntersection(ctx.leftSideNavigation, result);
 		justifyUTurns(ctx.leftSideNavigation, result);
 		avoidKeepForThroughMoving(result);
-		muteAndRemoveTurns(result);
+		muteAndRemoveTurns(result, ctx);
 		addTurnInfoDescriptions(result);
 	}
 
@@ -893,7 +904,7 @@ public class RouteResultPreparation {
 						if (!Algorithms.isEmpty(nm) || !Algorithms.isEmpty(ref)) {
 							streetName = String.format("onto %s %s " , nm, ref);
 						}
-						String to = result.get(prevSegment + 1).getDestinationName("", false, result, prevSegment + 1);
+						String to = result.get(prevSegment + 1).getDestinationName("", false, result, prevSegment + 1, true);
 						if(!Algorithms.isEmpty(to)) {
 							streetName = "to " + to; 
 						}
@@ -1228,6 +1239,9 @@ public class RouteResultPreparation {
 					TurnType.setTertiaryTurn(lanes, i, TurnType.getPrimaryTurn(lanes[i]));
 					TurnType.setPrimaryTurn(lanes, i, singleTurn);
 				} else {
+					if (lanes.length == 1) {
+						return;
+					}
 					// disable lane
 					lanes[i] = lanes[i] - 1;
 				}
@@ -2214,7 +2228,7 @@ public class RouteResultPreparation {
 		}
 	}
 	
-	private void muteAndRemoveTurns(List<RouteSegmentResult> result) {
+	private void muteAndRemoveTurns(List<RouteSegmentResult> result, RoutingContext ctx) {
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult curr = result.get(i);
 			TurnType turnType = curr.getTurnType();
@@ -2230,6 +2244,9 @@ public class RouteResultPreparation {
 					continue;
 				}
 				turnType.setSkipToSpeak(true);
+				if (ctx.config.showMinorTurns) {
+					continue;
+				}
 				if (turnType.goAhead()) {
 					int uniqDirections = turnType.countDirections();
 					if (uniqDirections >= 3) {

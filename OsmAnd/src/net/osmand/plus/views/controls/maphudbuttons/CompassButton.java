@@ -14,8 +14,6 @@ import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,7 +44,6 @@ public class CompassButton extends MapButton {
 	private ViewPropertyAnimatorCompat hideAnimator;
 
 	private boolean forceHideCompass;
-	private boolean specialPosition;
 	private float mapRotation;
 
 	public CompassButton(@NonNull Context context) {
@@ -175,47 +172,15 @@ public class CompassButton extends MapButton {
 		CompassModeWidgetDialogController.showDialog(mapActivity);
 	}
 
-	@Nullable
-	public View moveToSpecialPosition(@NonNull ViewGroup container, @NonNull ViewGroup.LayoutParams params) {
-		ViewGroup parent = (ViewGroup) getParent();
-		if (parent != null) {
-			cancelHideAnimation();
-			specialPosition = true;
-			parent.removeView(this);
-			setLayoutParams(params);
-			container.addView(this);
-			return this;
-		}
-		return null;
-	}
-
-	public void moveToDefaultPosition() {
-		ViewGroup parent = (ViewGroup) getParent();
-		if (parent != null) {
-			specialPosition = false;
-			parent.removeView(this);
-			ViewGroup defaultContainer = mapActivity.findViewById(R.id.layers_compass_layout);
-			if (defaultContainer != null) {
-				int buttonSizePx = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_small_button_size);
-				int topMarginPx = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_small_button_margin);
-				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(buttonSizePx, buttonSizePx);
-				params.topMargin = topMarginPx;
-				setLayoutParams(params);
-				defaultContainer.addView(this);
-			}
-		}
-	}
-
 	@Override
 	protected boolean shouldShow() {
 		forceHideCompass = routeDialogOpened || visibilityHelper.shouldHideCompass();
 		if (forceHideCompass) {
 			return false;
-		} else if (!specialPosition) {
+		} else {
 			CompassVisibility visibility = buttonState.getVisibility();
 			return visibility == VISIBLE_IF_MAP_ROTATED ? mapActivity.getMapRotate() != 0 : visibility == ALWAYS_VISIBLE;
 		}
-		return true;
 	}
 
 	@Override
@@ -223,11 +188,9 @@ public class CompassButton extends MapButton {
 		if (visible) {
 			visible = app.getAppCustomization().isFeatureEnabled(getButtonId());
 		}
-		if (!specialPosition && visible != (getVisibility() == View.VISIBLE)) {
+		if (visible != (getVisibility() == View.VISIBLE)) {
 			if (visible) {
-				if (hideAnimator != null) {
-					hideAnimator.cancel();
-				}
+				cancelHideAnimation();
 				setVisibility(VISIBLE);
 				invalidate();
 			} else if (hideAnimator == null) {
@@ -241,7 +204,7 @@ public class CompassButton extends MapButton {
 			}
 			return true;
 		} else if (visible && hideAnimator != null) {
-			hideAnimator.cancel();
+			cancelHideAnimation();
 			setVisibility(VISIBLE);
 			invalidate();
 			return true;
@@ -250,10 +213,8 @@ public class CompassButton extends MapButton {
 	}
 
 	public void hideDelayed(long msec) {
-		if (!specialPosition && getVisibility() == VISIBLE) {
-			if (hideAnimator != null) {
-				hideAnimator.cancel();
-			}
+		if (getVisibility() == VISIBLE) {
+			cancelHideAnimation();
 			hideAnimator = ViewCompat.animate(this)
 					.alpha(0f)
 					.setDuration(250)

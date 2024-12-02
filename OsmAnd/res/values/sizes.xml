@@ -145,7 +145,7 @@
 	<dimen name="map_widget_icon">24dp</dimen>
 	<dimen name="map_widget_height">32dp</dimen>
 	<dimen name="map_widget_image">80dp</dimen>
-	<dimen name="map_button_spacing">11dp</dimen>
+	<dimen name="map_button_spacing">12dp</dimen>
 	<dimen name="map_button_spacing_land">6dp</dimen>
 	<dimen name="map_button_margin">6dp</dimen>
 	<dimen name="map_routing_progress_width">100dp</dimen>
@@ -284,6 +284,7 @@
 	<dimen name="content_padding_extra_large">72dp</dimen>
 	<dimen name="content_padding_large">48dp</dimen>
 	<dimen name="content_padding">16dp</dimen>
+	<dimen name="content_padding_double">32dp</dimen>
 	<dimen name="content_padding_small">12dp</dimen>
 	<dimen name="content_padding_half">8dp</dimen>
 	<dimen name="content_padding_small_half">6dp</dimen>

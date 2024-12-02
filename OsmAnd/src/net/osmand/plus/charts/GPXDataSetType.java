@@ -1,23 +1,22 @@
 package net.osmand.plus.charts;
 
-import android.content.Context;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_BIKE_POWER;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_CADENCE;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_HEART_RATE;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_SPEED;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE;
 
-import net.osmand.shared.gpx.GpxUtilities;
-import net.osmand.shared.gpx.PointAttributes;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import android.content.Context;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
-import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_BIKE_POWER;
-import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_CADENCE;
-import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_HEART_RATE;
-import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_SPEED;
-import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.shared.gpx.PointAttributes;
 
 public enum GPXDataSetType {
 
@@ -102,7 +101,7 @@ public enum GPXDataSetType {
 			case SENSOR_HEART_RATE -> app.getString(R.string.beats_per_minute_short);
 			case SENSOR_BIKE_POWER -> app.getString(R.string.power_watts_unit);
 			case SENSOR_BIKE_CADENCE -> app.getString(R.string.revolutions_per_minute_unit);
-			case SENSOR_TEMPERATURE, ZOOM_ANIMATED, ZOOM_NON_ANIMATED -> "";
+			case SENSOR_TEMPERATURE -> app.getString(R.string.degree_celsius);
 			default -> "";
 		};
 	}

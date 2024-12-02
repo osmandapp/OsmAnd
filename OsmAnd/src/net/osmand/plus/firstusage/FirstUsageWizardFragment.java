@@ -85,6 +85,8 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	public static final String FIRST_USAGE = "first_usage";
 	public static final String SHOW_OSMAND_WELCOME_SCREEN = "show_osmand_welcome_screen";
 	public static final int FIRST_USAGE_LOCATION_PERMISSION = 300;
+	private static final int NO_MAP_ZOOM_LEVEL = 9;
+	private static final int DOWNLOAD_MAP_ZOOM_LEVEL = 13;
 
 	private DownloadIndexesThread downloadThread;
 	private DownloadValidationManager validationManager;
@@ -266,7 +268,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 				wizardButton.setTitleId(R.string.go_to_map);
 
 				wizardButton.setOnClickListener(view -> {
-					showOnMap(new LatLon(location.getLatitude(), location.getLongitude()), 13);
+					showOnMap(new LatLon(location.getLatitude(), location.getLongitude()));
 				});
 				break;
 		}
@@ -300,7 +302,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		AppCompatButton skipButton = view.findViewById(R.id.skip_button);
 		skipButton.setOnClickListener(v -> {
 			if (location != null) {
-				showOnMap(new LatLon(location.getLatitude(), location.getLongitude()), 13);
+				showOnMap(new LatLon(location.getLatitude(), location.getLongitude()));
 			} else {
 				closeWizard();
 			}
@@ -532,11 +534,10 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		DataStorageHelper.updateDownloadIndexes(app);
 	}
 
-	private void showOnMap(LatLon mapCenter, int mapZoom) {
+	private void showOnMap(LatLon mapCenter) {
 		MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity != null) {
 			app.getOsmandMap().setMapLocation(mapCenter.getLatitude(), mapCenter.getLongitude());
-			app.getOsmandMap().getMapView().setIntZoom(mapZoom);
 		}
 		closeWizard();
 	}
@@ -627,8 +628,19 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		}
 	}
 
+	private void setProperZoom() {
+		int zoom;
+		if (app.getResourceManager().isAnyMapInstalled() || (mapIndexItem != null && app.getDownloadThread().isDownloading(mapIndexItem))) {
+			zoom = DOWNLOAD_MAP_ZOOM_LEVEL;
+		} else {
+			zoom = NO_MAP_ZOOM_LEVEL;
+		}
+		app.getOsmandMap().getMapView().setIntZoom(zoom);
+	}
+
 	public void closeWizard() {
 		app.getSettings().SHOW_OSMAND_WELCOME_SCREEN.set(false);
+		setProperZoom();
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			activity.getSupportFragmentManager()

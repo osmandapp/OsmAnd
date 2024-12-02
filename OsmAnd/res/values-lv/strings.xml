@@ -1823,15 +1823,7 @@ failu(s)?
     <string name="osm_user_stat">Labojumi %1$s, vieta %2$s, kopējie labojumi %3$s</string>
     <string name="osm_editors_ranking">OSM labotāju reitings</string>
     <string name="lang_nds">Zemvācu</string>
-    <string name="plugin_touringview_descr">"Tūrisma karte attēlo maksimāli daudz detaļas ceļotājiem un profesionālajiem braucējiem, īpaši izceļot ceļus, trekus, norādes un orientācijas zīmes.
-\n
-\nVisi ceļi, atkarībā no to tipa, ir iezīmēti ar atšķirīgām krāsām, ko īpaši novērtēs lielu kravu pārvadātāji.
-\n
-\nTāpat tiek nodrošinātas īpašas, uz tūrismu orientētas opcijas, kā veloceļiņu vai kalnu taciņu maršrutu rādīšana kartē.
-\n
-\nNav nepieciešama speciālas kartes lejupielāde.
-\n
-\nŠo karti var atkārtoti deaktivizēt šeit vai galvenajā izvēlē - kartes attēlošana. "</string>
+    <string name="plugin_touringview_descr">"Tūrisma karte attēlo maksimāli daudz detaļas ceļotājiem un profesionālajiem braucējiem, īpaši izceļot ceļus, trekus, norādes un orientācijas zīmes.\n\n\n\nVisi ceļi, atkarībā no to tipa, ir iezīmēti ar atšķirīgām krāsām, ko īpaši novērtēs lielu kravu pārvadātāji.\n\n\n\nTāpat tiek nodrošinātas īpašas, uz tūrismu orientētas opcijas, kā veloceļiņu vai kalnu taciņu maršrutu rādīšana kartē.\n\n\n\nNav nepieciešama speciālas kartes lejupielāde.\n\n\n\nŠo karti var atkārtoti deaktivizēt šeit vai galvenajā izvēlē - kartes attēlošana. "</string>
     <string name="map_mode">Apgaismojums</string>
     <string name="rendering_value_thin_name">Tievi</string>
     <string name="rendering_value_medium_name">Viduvēji</string>
@@ -1849,11 +1841,7 @@ failu(s)?
     <string name="full_report">Pilnais pārskats</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap lietotāja vārds un parole</string>
     <string name="osm_live_email_desc">Mums tas ir vajadzīgs, lai informētu jūs par ieguldījumiem</string>
-    <string name="plugin_nautical_descr">"Spraudnis papildina OsmaAnd kartes ar jūras kartēm kuģošanai, ūdenslēpošanai un citiem ūdens sporta veidiem.
-\n
-\nSpeciāls kartes papildinājums rāda navigācijas ceļus, zīmes un simbolus uz ūdens un iekšzemē krastu tuvumā. Katra navigācijas zīme ir aprakstīta, lai to varētu viegli indentificēt un ir dots skaidrojums par tās nozīmi (kategorija, izmēri, krāsa, secība, atsauces, u.t.t.).
-\n
-\nLai atgrieztos uz OsmAnd standarta kartēm, deaktivizējiet spraudni vai nomainiet karti galvenajā izvēlnē - kartes attēlošana. "</string>
+    <string name="plugin_nautical_descr">"Spraudnis papildina OsmaAnd kartes ar jūras kartēm kuģošanai, ūdenslēpošanai un citiem ūdens sporta veidiem.\n\n\n\nSpeciāls kartes papildinājums rāda navigācijas ceļus, zīmes un simbolus uz ūdens un iekšzemē krastu tuvumā. Katra navigācijas zīme ir aprakstīta, lai to varētu viegli indentificēt un ir dots skaidrojums par tās nozīmi (kategorija, izmēri, krāsa, secība, atsauces, u.t.t.).\n\n\n\nLai atgrieztos uz OsmAnd standarta kartēm, deaktivizējiet spraudni vai nomainiet karti galvenajā izvēlnē - kartes attēlošana. "</string>
     <string name="number_of_contributors">Līdzstrādnieku skaits</string>
     <string name="file_name_containes_illegal_char">Faila vārds satur neatļautas rakstu zīmes</string>
     <string name="access_default_color">Noklusētā krāsa</string>
@@ -2212,13 +2200,7 @@ Apraksta laukumu: %1$s x %2$s</string>
  • GPX ieraksta opcija ļaus ierakstīt un kopīgot maršrutu
  • Ar papildus spraudņu palīdzību būs iespējams attēlot kontūrlīnijas un kalnu ēnojumu
  "</string>
-    <string name="osmand_plus_extended_description_part5">"
- Drošības funkcijas
- • Optionāla automātiskā dienas/nakts režīma pārslēgšana
- • Optionāla ātruma limita attēlošana ar brīdinājumiem
- • Optionāla no ātruma atkarīga kartes mērogošana
- • Kopīgojiet savu atrašanās vietu, lai draugi var jūs atrast
- "</string>
+    <string name="osmand_plus_extended_description_part5">"\n Drošības funkcijas\n • Optionāla automātiskā dienas/nakts režīma pārslēgšana\n • Optionāla ātruma limita attēlošana ar brīdinājumiem\n • Optionāla no ātruma atkarīga kartes mērogošana\n • Kopīgojiet savu atrašanās vietu, lai draugi var jūs atrast\n "</string>
     <string name="save_poi_too_many_uppercase">Nosaukumā ir par daudz lielo burtu. Vai turpināt?</string>
     <string name="display_zoom_level">Mērogs: %1$s</string>
     <string name="quick_action_auto_zoom_on">Automērogošana ieslēgta</string>
@@ -2239,30 +2221,9 @@ Apraksta laukumu: %1$s x %2$s</string>
 \n • Jūs variet meklēt objektus pēc adreses, tipa (autostāvvietas, restorāni, viesnīcas, DUS, muzeji utt.) vai pēc ģeogrāfiskajām koordinātām
 \n • Atbalsta starppunktu pievienošanu maršrutā
 \n • Jūs variet ierakstīt pats savu vai augšupielādēt GPX treku un tam sekot</string>
-    <string name="osmand_extended_description_part3">"
- Karte
- • Rāda POIs (interešu punktus) jums apkārt
- • Pielāgo karti kustības virzienā (vai pēc kompasa)
- • Rāda, kur jūs atrodaties un uz kuru pusi esat pagriezies
- • Dalās ar jūsu atrašanās vietu, tā lai jūsu draugi var jūs atrast
- • Jūsu apmeklētās un svarīgās vietas tiek glabātas izlasē
- • Ļauj izvēlēties kā rādīt nosaukumus kartē: angļu valodā, vietējā vai fonētiski izrunātus
- • Rāda specializētas tiešsaistes bildes, satelīta attēlus (no Bing), dažādus virsklājus kā tūrisma/navigācijas GPX trekus un papildus klājumus ar maināmiem caurspīdīgumiem
- "</string>
-    <string name="osmand_extended_description_part6">"
- Pastaigas, pārgājieni, tūrisms
- • Karte parāda pastaigu un pārgājienu takas
- • Wikipēdija izvēlētajā valodā pastāstīs jums daudz kā kā jauna pilsētas pastaigās
- • Sabiedriskā transorta pieturas, ieskaitot peronu nosaukumus, ļaus droši pārvietoties svešā pilsētā
- • GPS navigācija kājāmgājēju režīmā veido maršrutus pa gājēju celiņiem
- • Jūs varat augšupielādēt un sekot GPX maršrutam vai ierakstīt un kopīgot pats savu
- "</string>
-    <string name="osmand_extended_description_part7">"
- Piedalīties OSM izstrādē
- • Ziņot par datu kļūdām
- • Caur aplikāciju augšupielādēt GPX trases uz OSM
- • Pievienot POIs un augšupielādēt tos uzreiz (vai vēlāk, ja esat bezsaistē) uz OSM
- "</string>
+    <string name="osmand_extended_description_part3">"\n Karte\n • Rāda POIs (interešu punktus) jums apkārt\n • Pielāgo karti kustības virzienā (vai pēc kompasa)\n • Rāda, kur jūs atrodaties un uz kuru pusi esat pagriezies\n • Dalās ar jūsu atrašanās vietu, tā lai jūsu draugi var jūs atrast\n • Jūsu apmeklētās un svarīgās vietas tiek glabātas izlasē\n • Ļauj izvēlēties kā rādīt nosaukumus kartē: angļu valodā, vietējā vai fonētiski izrunātus\n • Rāda specializētas tiešsaistes bildes, satelīta attēlus (no Bing), dažādus virsklājus kā tūrisma/navigācijas GPX trekus un papildus klājumus ar maināmiem caurspīdīgumiem\n "</string>
+    <string name="osmand_extended_description_part6">"\n Pastaigas, pārgājieni, tūrisms\n • Karte parāda pastaigu un pārgājienu takas\n • Wikipēdija izvēlētajā valodā pastāstīs jums daudz kā kā jauna pilsētas pastaigās\n • Sabiedriskā transorta pieturas, ieskaitot peronu nosaukumus, ļaus droši pārvietoties svešā pilsētā\n • GPS navigācija kājāmgājēju režīmā veido maršrutus pa gājēju celiņiem\n • Jūs varat augšupielādēt un sekot GPX maršrutam vai ierakstīt un kopīgot pats savu\n "</string>
+    <string name="osmand_extended_description_part7">"\n Piedalīties OSM izstrādē\n • Ziņot par datu kļūdām\n • Caur aplikāciju augšupielādēt GPX trases uz OSM\n • Pievienot POIs un augšupielādēt tos uzreiz (vai vēlāk, ja esat bezsaistē) uz OSM\n "</string>
     <string name="osmand_extended_description_part8">OsmAnd ir atvērtā koda lietotne, kas tiek aktīvi izstrādāta un pilnveidota. Ikviens var piedalīties tā izstrādē, ziņojot par kļūdām, uzlabojot tulkojumus vai kodējot jaunas papildiespējas. Šis projekts tiek nepārtraukti uzlabots, mijiedarbojoties aplikācijas izstrādātājiem ar tās lietotājiem. Projekta progress atkarīgs arī no finsansēm, lai atbalstītu kodēšanu un jaunas funkcionalitātes testēšanu.
 \n Aptuvenais karšu pārklājums un detalizācija:
 \n • Rietumeiropa: ****
@@ -2284,40 +2245,9 @@ Apraksta laukumu: %1$s x %2$s</string>
 \nOsmand+ ir maksas lietotnes versija. To nopērkot, jūs atbalstīsiet projektu, nodrošināsiet jaunu iespēju izstrādi un saņemsiet jaunākos atjauninājumus
 \n
 \nDažas no pamatiespējām:</string>
-    <string name="osmand_plus_extended_description_part2">"
- Navigācija
- • Darbojas tešsaistē (ātrāk) vai bezsaistē (bez viesabonēšanas maksas, kad esat ārvalstīs)
- • Turn-by-turn balss vadība (ierakstītās un sintizētās balsis)
- • optionāla ceļa joslu vadība, ielu nosaukumi un aprēķinātais ierašanās laiks
- • Atbalsta starppunktu pievienošanu maršrutā
- • Maršruts tiks pārveidots, ja būsiet novirzījušies no tā
- • Jūs variet meklēt objektus pēc adreses, tipa (parkingi, restorāni, viesnīcas, DUS, muzeji utt.) vai pēc ģeogrāfiskajām koordinātām
- "</string>
-    <string name="osmand_plus_extended_description_part3">"
- Kartes skatīšana
- • Rāda, kur jūs atrodaties un uz kuru pusi esat pagriezies
- • optionāli pielāgo karti pēc kompasa vai jūsu kustības virzienā
- • Saglabā izlasē jūsu izvēlētās vietas
- • Rāda POIs (interešu punktus) jums apkārt
- • Dalās ar jūsu atrašanās vietu, tā lai jūsu draugi var jūs atrast
- • Rāda specializētas tiešsaistes bildes, satelīta attēlus (no Bing), dažādus virsklājus kā tūrisma/navigācijas GPX trekus un papildus klājumus ar maināmiem caurspīdīgumiem
- • Optionāli rāda nosaukumus kartē angļu valodā, vietējā vai fonētiski izrunātus
- "</string>
-    <string name="osmand_plus_extended_description_part8">"
- Aptuvenais karšu pārklājums un detalizācija:
- • Rietumeiropa: ****
- • Austrumeiropa: ***
- • Krievija: ***
- • Ziemeļamerika: ***
- • Dienvidamerika: **
- • Āzija: **
- • Japāna &amp; Koreja: ***
- • Tuvie austrumi: **
- • Āfrika: **
- • Antarktīda: *
- Lejupielādei ir pieejamas kartes no gandrīz visām pasaules valstīm!
-No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīlija, Kanāda, Francija, Vācija, Meksika, Apvienotā Karaliste, Spānija, ...
- "</string>
+    <string name="osmand_plus_extended_description_part2">"\n Navigācija\n • Darbojas tešsaistē (ātrāk) vai bezsaistē (bez viesabonēšanas maksas, kad esat ārvalstīs)\n • Turn-by-turn balss vadība (ierakstītās un sintizētās balsis)\n • optionāla ceļa joslu vadība, ielu nosaukumi un aprēķinātais ierašanās laiks\n • Atbalsta starppunktu pievienošanu maršrutā\n • Maršruts tiks pārveidots, ja būsiet novirzījušies no tā\n • Jūs variet meklēt objektus pēc adreses, tipa (parkingi, restorāni, viesnīcas, DUS, muzeji utt.) vai pēc ģeogrāfiskajām koordinātām\n "</string>
+    <string name="osmand_plus_extended_description_part3">"\n Kartes skatīšana\n • Rāda, kur jūs atrodaties un uz kuru pusi esat pagriezies\n • optionāli pielāgo karti pēc kompasa vai jūsu kustības virzienā\n • Saglabā izlasē jūsu izvēlētās vietas\n • Rāda POIs (interešu punktus) jums apkārt\n • Dalās ar jūsu atrašanās vietu, tā lai jūsu draugi var jūs atrast\n • Rāda specializētas tiešsaistes bildes, satelīta attēlus (no Bing), dažādus virsklājus kā tūrisma/navigācijas GPX trekus un papildus klājumus ar maināmiem caurspīdīgumiem\n • Optionāli rāda nosaukumus kartē angļu valodā, vietējā vai fonētiski izrunātus\n "</string>
+    <string name="osmand_plus_extended_description_part8">"\n Aptuvenais karšu pārklājums un detalizācija:\n • Rietumeiropa: ****\n • Austrumeiropa: ***\n • Krievija: ***\n • Ziemeļamerika: ***\n • Dienvidamerika: **\n • Āzija: **\n • Japāna &amp; Koreja: ***\n • Tuvie austrumi: **\n • Āfrika: **\n • Antarktīda: *\n Lejupielādei ir pieejamas kartes no gandrīz visām pasaules valstīm!\nNo Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīlija, Kanāda, Francija, Vācija, Meksika, Apvienotā Karaliste, Spānija, ...\n "</string>
     <string name="osmand_plus_extended_description_part4">"
  Lieto OSM un Wikipēdijas datus
  • Augstas kvalitātes informācija no labākajiem sadarbības projektiem pasaulē
@@ -3413,13 +3343,7 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="speed_cameras_restart_descr">Lai dzēstu ātruma kameras datus, restartējiet lietotni.</string>
     <string name="customize_route_line">Personalizēt maršruta līniju</string>
     <string name="speed_camera_pois">Ātruma kameras POI\'s</string>
-    <string name="speed_cameras_legal_descr">"Dažās valstīs un reģionos brīdinājumi par ātruma kamerām ir aizliegti ar likumu.
-\n
-\nIzdariet izvēli, balstoties uz likuma prasībām jūs valstī..
-\n
-\nIzvēlieties %1$s un jūs saņemsiet brīdinājumus  par ātruma kamerām.
-\n
-\nIzvēlieties %2$s. Visi dati par ātruma kamerām: paziņojumi, brīdinājumi, POIs tiks izdzēsti līdz atkārtotai OsmAnd instalācijai."</string>
+    <string name="speed_cameras_legal_descr">"Dažās valstīs un reģionos brīdinājumi par ātruma kamerām ir aizliegti ar likumu.\n\n\n\nIzdariet izvēli, balstoties uz likuma prasībām jūs valstī..\n\n\n\nIzvēlieties %1$s un jūs saņemsiet brīdinājumus  par ātruma kamerām.\n\n\n\nIzvēlieties %2$s. Visi dati par ātruma kamerām: paziņojumi, brīdinājumi, POIs tiks izdzēsti līdz atkārtotai OsmAnd instalācijai."</string>
     <string name="speed_cameras_alert">Dažās valstīs brīdinājumi par ātruma kamerām ir aizliegti ar likumu.</string>
     <string name="speed_cameras_removed_descr">Šajā ierīcē nav ātruma kameru.</string>
 </resources>

@@ -8,13 +8,6 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
@@ -155,9 +148,9 @@ public class RouteGeometryWay extends
 	@Override
 	protected boolean addInitialPoint(RotatedTileBox tb,
 	                                  double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude,
-	                                  GeometryWayStyle<?> style, boolean previousVisible, Location lastPoint, int startLocationIndex) {
+	                                  GeometryWayStyle<?> style, Location lastPoint, int startLocationIndex) {
 		boolean added = super.addInitialPoint(tb, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-				style, previousVisible, lastPoint, startLocationIndex);
+				style, lastPoint, startLocationIndex);
 		if (added) {
 			if (currentCachedSegment == null) {
 				currentCachedSegment = new Segment();
@@ -172,9 +165,9 @@ public class RouteGeometryWay extends
 	protected List<List<DrawPathData31>> cutStartOfCachedPath(@NonNull MapRendererView mapRenderer,
 	                                                          @NonNull RotatedTileBox tb,
 	                                                          int startLocationIndex,
-	                                                          boolean previousVisible) {
-		List<List<DrawPathData31>> croppedPathData31 = super.cutStartOfCachedPath(mapRenderer, tb, startLocationIndex, previousVisible);
-		if (croppedPathData31 == null) {
+	                                                          Location lastProjection) {
+		List<List<DrawPathData31>> croppedPathData31 = super.cutStartOfCachedPath(mapRenderer, tb, startLocationIndex, lastProjection);
+		if (croppedPathData31 == null || !cachedSegments.isEmpty()) {
 			return null;
 		}
 
@@ -185,30 +178,25 @@ public class RouteGeometryWay extends
 			segment.indexes = new ArrayList<>();
 			segment.styles = new ArrayList<>();
 
-			for (int lineIndex = 0; lineIndex < segmentData.size(); lineIndex++) {
-				DrawPathData31 line = segmentData.get(lineIndex);
-
-				boolean lastLine = lineIndex + 1 == segmentData.size();
-				int endIndex = lastLine
-						? line.indexes.size()
-						: line.indexes.size() - 1;
+			for (int pathIndex = 0; pathIndex < segmentData.size(); pathIndex++) {
+				DrawPathData31 path31 = segmentData.get(pathIndex);
+				boolean lastPath = pathIndex + 1 == segmentData.size();
+				int endIndex = lastPath ? path31.indexes.size() : path31.indexes.size() - 1;
 				for (int i = 0; i < endIndex; i++) {
-					int index = line.indexes.get(i);
+					int index = path31.indexes.get(i);
 					if (index >= INITIAL_POINT_INDEX_SHIFT) {
-						int x31 = line.tx.get(i);
-						int y31 = line.ty.get(i);
+						int x31 = path31.tx.get(i);
+						int y31 = path31.ty.get(i);
 						double lat = MapUtils.get31LatitudeY(y31);
 						double lon = MapUtils.get31LongitudeX(x31);
 						segment.initialLocations.add(new Location("", lat, lon));
 					}
-
 					segment.indexes.add(index);
-					segment.styles.add(line.style);
+					segment.styles.add(path31.style);
 				}
 			}
 			segments.add(segment);
 		}
-
 		cachedSegments = segments;
 
 		return croppedPathData31;
@@ -436,8 +424,7 @@ public class RouteGeometryWay extends
 			}
 
 			GeometryWayStyle<?> style = segment.styles.get(pointOrder);
-			if (style instanceof GeometryGradientWayStyle<?>) {
-				GeometryGradientWayStyle<?> gradientStyle = (GeometryGradientWayStyle<?>) style;
+			if (style instanceof GeometryGradientWayStyle<?> gradientStyle) {
 				if (pointOrder + 1 == segment.styles.size()) {
 					return gradientStyle.nextColor;
 				} else {

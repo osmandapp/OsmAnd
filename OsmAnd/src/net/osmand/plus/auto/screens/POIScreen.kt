@@ -22,7 +22,7 @@ import net.osmand.data.Amenity
 import net.osmand.data.LatLon
 import net.osmand.data.QuadRect
 import net.osmand.plus.R
-import net.osmand.plus.auto.TripHelper
+import net.osmand.plus.auto.TripUtils
 import net.osmand.plus.poi.PoiUIFilter
 import net.osmand.plus.render.RenderingIcons
 import net.osmand.plus.settings.enums.CompassMode
@@ -46,23 +46,7 @@ class POIScreen(
 
     init {
         loadPOI()
-        lifecycle.addObserver(object : DefaultLifecycleObserver {
-            override fun onDestroy(owner: LifecycleOwner) {
-                super.onDestroy(owner)
-                app.osmandMap.mapLayers.poiMapLayer.setCustomMapObjects(null)
-                app.osmandMap.mapLayers.poiMapLayer.customObjectsDelegate = null
-                app.osmandMap.mapView.backToLocation()
-                initialCompassMode?.let {
-                    app.mapViewTrackingUtilities.switchCompassModeTo(it)
-                }
-            }
-
-            override fun onStart(owner: LifecycleOwner) {
-                super.onStart(owner)
-                app.osmandMap.mapLayers.poiMapLayer.customObjectsDelegate =
-                    OsmandMapLayer.CustomMapObjects()
-            }
-        })
+        lifecycle.addObserver(this)
     }
 
     override fun onGetTemplate(): Template {
@@ -144,7 +128,7 @@ class POIScreen(
                     location.latitude, location.longitude)
                 val address =
                     SpannableString(if (Algorithms.isEmpty(description)) " " else "  • $description")
-                val distanceSpan = DistanceSpan.create(TripHelper.getDistance(app, dist))
+                val distanceSpan = DistanceSpan.create(TripUtils.getDistance(app, dist))
                 address.setSpan(distanceSpan, 0, 1, Spanned.SPAN_INCLUSIVE_INCLUSIVE)
                 listBuilder.addItem(Row.Builder()
                     .setTitle(title)
@@ -183,4 +167,21 @@ class POIScreen(
         result.`object` = point.`object`
         openRoutePreview(settingsAction, result)
     }
+
+	override fun onDestroy(owner: LifecycleOwner) {
+		super.onDestroy(owner)
+		app.osmandMap.mapLayers.poiMapLayer.setCustomMapObjects(null)
+		app.osmandMap.mapLayers.poiMapLayer.customObjectsDelegate = null
+		app.osmandMap.mapView.backToLocation()
+		initialCompassMode?.let {
+			app.mapViewTrackingUtilities.switchCompassModeTo(it)
+		}
+	}
+
+	override fun onStart(owner: LifecycleOwner) {
+		super.onStart(owner)
+		app.osmandMap.mapLayers.poiMapLayer.customObjectsDelegate =
+			OsmandMapLayer.CustomMapObjects()
+
+	}
 }

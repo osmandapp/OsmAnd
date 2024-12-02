@@ -22,7 +22,7 @@ public class NavStartStopAction extends QuickAction {
 
 	private static final String KEY_DIALOG = "dialog";
 	public static final QuickActionType TYPE = new QuickActionType(NAV_START_STOP_ACTION_ID,
-			"nav.startstop", NavStartStopAction .class)
+			"nav.startstop", NavStartStopAction.class)
 			.nameRes(R.string.shared_string_navigation).iconRes(R.drawable.ic_action_start_navigation).nonEditable()
 			.category(QuickActionType.NAVIGATION)
 			.nameActionRes(R.string.quick_action_verb_start_stop);
@@ -88,14 +88,13 @@ public class NavStartStopAction extends QuickAction {
 
 	@Override
 	public int getIconRes(Context context) {
-		if (context instanceof MapActivity) {
-			RoutingHelper helper = ((MapActivity) context).getRoutingHelper();
-			if (!helper.isRoutePlanningMode() && !helper.isFollowingMode()) {
-				return ((MapActivity) context).getMapActions().getRouteMode().getIconRes();
-			}
-			return helper.getAppMode().getIconRes();
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		RoutingHelper helper = app.getRoutingHelper();
+
+		if (!helper.isRoutePlanningMode() && !helper.isFollowingMode() && context instanceof MapActivity activity) {
+			return activity.getMapActions().getRouteMode().getIconRes();
 		}
-		return super.getIconRes(context);
+		return helper.getAppMode().getIconRes();
 	}
 
 	@Override

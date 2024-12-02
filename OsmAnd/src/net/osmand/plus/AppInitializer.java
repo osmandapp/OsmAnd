@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
+import net.osmand.OnResultCallback;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.map.OsmandRegions;
@@ -31,6 +32,7 @@ import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.configmap.routes.RouteLayersHelper;
+import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
 import net.osmand.plus.download.local.LocalIndexHelper;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.feedback.AnalyticsHelper;
@@ -38,6 +40,7 @@ import net.osmand.plus.feedback.FeedbackHelper;
 import net.osmand.plus.helpers.*;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelperImpl;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
@@ -330,6 +333,7 @@ public class AppInitializer implements IProgress {
 		app.dialogManager = startupInit(new DialogManager(), DialogManager.class);
 		app.routeLayersHelper = startupInit(new RouteLayersHelper(app), RouteLayersHelper.class);
 		app.model3dHelper = startupInit(new Model3dHelper(app), Model3dHelper.class);
+		app.trackSortModesHelper = startupInit(new TrackSortModesHelper(app), TrackSortModesHelper.class);
 
 		initOpeningHoursParser();
 	}
@@ -534,10 +538,9 @@ public class AppInitializer implements IProgress {
 			}
 		}
 	}
-
 	private void checkLiveUpdatesAlerts() {
 		OsmandSettings settings = app.getSettings();
-		if (settings.IS_LIVE_UPDATES_ON.get()) {
+		if (InAppPurchaseUtils.isLiveUpdatesAvailable(app) && settings.IS_LIVE_UPDATES_ON.get()) {
 			LocalIndexHelper helper = new LocalIndexHelper(app);
 			AlarmManager manager = (AlarmManager) app.getSystemService(Context.ALARM_SERVICE);
 
@@ -751,6 +754,36 @@ public class AppInitializer implements IProgress {
 				applicationBgInitializing = false;
 			}
 		}, "Initializing app").start();
+	}
+
+	public void addOnStartListener(@NonNull OnResultCallback<AppInitializer> callback) {
+		addListener(new AppInitializeListener() {
+			@Override
+			public void onStart(@NonNull AppInitializer init) {
+				callback.onResult(init);
+			}
+		});
+	}
+
+	public void addOnProgressListener(@NonNull AppInitEvents trackedEvent,
+	                                  @NonNull OnResultCallback<AppInitializer> callback) {
+		addListener(new AppInitializeListener() {
+			@Override
+			public void onProgress(@NonNull AppInitializer init, @NonNull AppInitEvents event) {
+				if (trackedEvent == event) {
+					callback.onResult(init);
+				}
+			}
+		});
+	}
+
+	public void addOnFinishListener(@NonNull OnResultCallback<AppInitializer> callback) {
+		addListener(new AppInitializeListener() {
+			@Override
+			public void onFinish(@NonNull AppInitializer init) {
+				callback.onResult(init);
+			}
+		});
 	}
 
 	public void addListener(@NonNull AppInitializeListener listener) {

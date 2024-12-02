@@ -23,6 +23,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.CarToast;
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
@@ -30,6 +31,8 @@ import androidx.lifecycle.ProcessLifecycleOwner;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
+import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.shared.OsmAndContextImpl;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
@@ -157,6 +160,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	NavigationCarAppService navigationCarAppService;
 	NavigationSession carNavigationSession;
+	ActivityCompat.OnRequestPermissionsResultCallback androidAutoPermissionRequestResultListener;
 
 	private final SQLiteAPI sqliteAPI = new SQLiteAPIImpl(this);
 	private final OsmAndTaskManager taskManager = new OsmAndTaskManager(this);
@@ -218,6 +222,7 @@ public class OsmandApplication extends MultiDexApplication {
 	DialogManager dialogManager;
 	RouteLayersHelper routeLayersHelper;
 	Model3dHelper model3dHelper;
+	TrackSortModesHelper trackSortModesHelper;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -658,6 +663,11 @@ public class OsmandApplication extends MultiDexApplication {
 		return model3dHelper;
 	}
 
+	@NonNull
+	public TrackSortModesHelper getTrackSortModesHelper() {
+		return trackSortModesHelper;
+	}
+
 	public CommandPlayer getPlayer() {
 		return player;
 	}
@@ -698,6 +708,15 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	@Nullable
+	public ActivityCompat.OnRequestPermissionsResultCallback getAndroidAutoPermissionRequestResultListener() {
+		return androidAutoPermissionRequestResultListener;
+	}
+
+	public void setAndroidAutoPermissionRequestResultListener(@Nullable ActivityCompat.OnRequestPermissionsResultCallback callback) {
+		this.androidAutoPermissionRequestResultListener = callback;
+	}
+
+	@Nullable
 	public NavigationSession getCarNavigationSession() {
 		return carNavigationSession;
 	}
@@ -712,6 +731,12 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void setCarNavigationSession(@Nullable NavigationSession carNavigationSession) {
 		this.carNavigationSession = carNavigationSession;
+		if (carNavigationSession != null) {
+			List<OsmandPlugin> enabledPlugins = PluginsHelper.getEnabledPlugins();
+			for (OsmandPlugin plugin : enabledPlugins) {
+				plugin.onCarNavigationSessionCreated();
+			}
+		}
 	}
 
 	public void refreshCarScreen() {

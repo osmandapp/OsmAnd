@@ -85,11 +85,7 @@ class FilterParamsAdapter(
 				} else {
 					ColorUtilities.getDefaultIconColor(app, nightMode)
 				}
-				val iconId = if (routeActivity != null) {
-					AndroidUtils.getIconId(app, routeActivity.iconName)
-				} else {
-					R.drawable.ic_action_activity
-				}
+				val iconId = AndroidUtils.getActivityIconId(app, routeActivity)
 				return app.uiUtilities.getPaintedIcon(iconId, iconColor)
 			}
 

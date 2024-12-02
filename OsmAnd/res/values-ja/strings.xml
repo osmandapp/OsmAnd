@@ -895,11 +895,6 @@ POIの更新は利用できません</string>
     <string name="map_widget_audionotes">音声メモ</string>
     <string name="audionotes_plugin_description">マップ内ボタンや位置情報のコンテキストメニューから、旅行中の音声/写真/動画メモを取ることができます。</string>
     <string name="audionotes_plugin_name">音声/動画メモ</string>
-    <string name="srtm_plugin_description">等高線、起伏、勾配などの地形情報は、地形配置、起伏、航行の可能性などを視覚的に評価するのに役立ちます。地形情報は、勾配の陰影、等高線、勾配の度合いによる色付けでマップに表すことができます。
-\n
-\n基礎となるデータは、SRTM(スペースシャトル立体地形データ)およびASTER(資源探査用将来型センサ)に由来します。
-\n
-\n詳しくは、https://osmand.net/docs/user/plugins/contour-lines をご参照下さい。</string>
     <string name="srtm_plugin_name">等高線</string>
     <string name="download_select_map_types">他のマップ</string>
     <string name="download_srtm_maps">等高線</string>
@@ -2259,12 +2254,7 @@ POIの更新は利用できません</string>
 \n• 歩行者モードでのGPSナビゲーションは、徒歩移動向け経路を使用してルートを構築します
 \n• ルートなどの記録を含んだGPXファイルをアップロードしたり、フォローしたり、自分自身で共有することができます
 \n</string>
-    <string name="osmand_extended_description_part7">"
- OSMに寄与
- • データ、バグの報告ができます
- • GPX経路情報をアプリから直接OSMにアップロードできます
- • POIを追加してOSMに直接アップロードできます(オフラインの場合は後で行うことができます)
- "</string>
+    <string name="osmand_extended_description_part7">"\n OSMに寄与\n • データ、バグの報告ができます\n • GPX経路情報をアプリから直接OSMにアップロードできます\n • POIを追加してOSMに直接アップロードできます(オフラインの場合は後で行うことができます)\n "</string>
     <string name="osmand_extended_description_part8">OsmAndはオープンソースで現在も積極的に開発されています。バグを報告したり、翻訳を改善したり、新機能をコーディングしたりすることで、誰もがアプリの開発に貢献できます。またこのプロジェクトは、新機能のコーディングとテストに要する金銭面での貢献によっても支えられています。
 \n地図のおおよその範囲と品質(※注 *の数が多いほど内容が充実しています):
 \n• 西ヨーロッパ：****
@@ -2359,13 +2349,7 @@ POIの更新は利用できません</string>
 \n世界中のほとんどの国がダウンロード可能です！
 \nアフガニスタンからジンバブエへ、オーストラリアからアメリカへも…またアルゼンチン、ブラジル、カナダ、フランス、ドイツ、メキシコ、イギリス、スペイン等々…
 \n</string>
-    <string name="osmand_plus_extended_description_part7">"
- 直接OSMに寄与
- • データ、バグの報告ができます
- • GPX経路情報をアプリから直接OSMにアップロードできます
- • POIを追加してOSMに直接アップロードできます(オフラインの場合は後で行うことができます)
-　 OsmAndはオープンソースで積極的に開発されています。バグを報告したり、翻訳を改善したり、新しい機能をコーディングすることで、誰もがアプリケーションの開発に貢献できます。このような開発者とユーザーとのやりとりによって、プロジェクトは継続的に改善されています。プロジェクトの進捗状況は、資金調達と新しい機能のテストに大きく左右されます。
- "</string>
+    <string name="osmand_plus_extended_description_part7">"\n 直接OSMに寄与\n • データ、バグの報告ができます\n • GPX経路情報をアプリから直接OSMにアップロードできます\n • POIを追加してOSMに直接アップロードできます(オフラインの場合は後で行うことができます)\n　 OsmAndはオープンソースで積極的に開発されています。バグを報告したり、翻訳を改善したり、新しい機能をコーディングすることで、誰もがアプリケーションの開発に貢献できます。このような開発者とユーザーとのやりとりによって、プロジェクトは継続的に改善されています。プロジェクトの進捗状況は、資金調達と新しい機能のテストに大きく左右されます。\n "</string>
     <string name="save_poi_too_many_uppercase">この名前は大文字が多いようですが、続行しますか？</string>
     <string name="shared_string_add_photos">写真を追加</string>
     <string name="no_photos_descr">この近辺の写真はありません。</string>

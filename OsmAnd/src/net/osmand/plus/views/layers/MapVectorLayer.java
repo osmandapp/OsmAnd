@@ -1,11 +1,16 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.core.android.MapRendererContext.OBF_RASTER_LAYER;
+import static net.osmand.core.android.MapRendererContext.OBF_SYMBOL_SECTION;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererContext.ProviderType;
@@ -21,8 +26,6 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
 
-import androidx.annotation.NonNull;
-
 public class MapVectorLayer extends BaseMapLayer {
 
 	private final ResourceManager resourceManager;
@@ -32,6 +35,8 @@ public class MapVectorLayer extends BaseMapLayer {
 	private boolean visible;
 	private boolean cachedVisible = true;
 	private int cachedAlpha = -1;
+	private int cachedSymbolsAlpha = -1;
+	private int symbolsAlpha = 255;
 	private boolean cachedLabelsVisible;
 
 	public MapVectorLayer(@NonNull Context context) {
@@ -104,18 +109,17 @@ public class MapVectorLayer extends BaseMapLayer {
 		}
 	}
 
-	private void updateLayerProviderAlpha(int alpha) {
+	private void updateLayerProviderAlpha(int alpha, int symbolsAlpha) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
 			mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
-			mapRenderer.setMapLayerConfiguration(MapRendererContext.OBF_RASTER_LAYER, mapLayerConfiguration);
+			mapRenderer.setMapLayerConfiguration(OBF_RASTER_LAYER, mapLayerConfiguration);
 
 			boolean keepLabels = getApplication().getSettings().KEEP_MAP_LABELS_VISIBLE.get();
 			SymbolSubsectionConfiguration symbolSubsectionConfiguration = new SymbolSubsectionConfiguration();
-			symbolSubsectionConfiguration.setOpacityFactor(keepLabels ? 1.0f : ((float) alpha) / 255.0f);
-			mapRenderer.setSymbolSubsectionConfiguration(MapRendererContext.OBF_SYMBOL_SECTION,
-				symbolSubsectionConfiguration);
+			symbolSubsectionConfiguration.setOpacityFactor(keepLabels ? 1.0f : ((float) symbolsAlpha) / 255.0f);
+			mapRenderer.setSymbolSubsectionConfiguration(OBF_SYMBOL_SECTION, symbolSubsectionConfiguration);
 		}
 	}
 
@@ -132,6 +136,10 @@ public class MapVectorLayer extends BaseMapLayer {
 		int alpha = getAlpha();
 		boolean alphaChanged = cachedAlpha != alpha;
 		cachedAlpha = alpha;
+
+		int symbolsAlpha = getSymbolsAlpha();
+		boolean symbolsAlphaChanged = cachedSymbolsAlpha != symbolsAlpha;
+		cachedSymbolsAlpha = symbolsAlpha;
 
 		boolean labelsVisible = view.getSettings().KEEP_MAP_LABELS_VISIBLE.get();
 		boolean labelsVisibleChanged = cachedLabelsVisible != labelsVisible;
@@ -154,8 +162,8 @@ public class MapVectorLayer extends BaseMapLayer {
 					mapRendererContext.updateLocalization();
 				}
 			}
-			if ((mapRendererChanged || alphaChanged || visibleChanged || labelsVisibleChanged) && visible) {
-				updateLayerProviderAlpha(alpha);
+			if ((mapRendererChanged || alphaChanged || symbolsAlphaChanged || visibleChanged || labelsVisibleChanged) && visible) {
+				updateLayerProviderAlpha(alpha, symbolsAlpha);
 			}
 
 			if (mapActivityInvalidated || mapRendererChanged) {
@@ -217,10 +225,19 @@ public class MapVectorLayer extends BaseMapLayer {
 	@Override
 	public void setAlpha(int alpha) {
 		super.setAlpha(alpha);
+		setSymbolsAlpha(alpha);
 
 		if (paintImg != null) {
 			paintImg.setAlpha(alpha);
 		}
+	}
+
+	public int getSymbolsAlpha() {
+		return symbolsAlpha;
+	}
+
+	public void setSymbolsAlpha(int symbolsAlpha) {
+		this.symbolsAlpha = symbolsAlpha;
 	}
 
 	@Override

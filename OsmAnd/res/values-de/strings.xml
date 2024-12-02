@@ -376,7 +376,7 @@
     <string name="shared_string_no_thanks">Nicht verwendet</string>
     <string name="basemap_missing">Laden Sie die Basis-Weltkarte herunter, um einen Überblick über die ganze Welt bei niedrigen Vergrößerungsstufen zu erhalten.</string>
     <string name="vector_data_missing">Bitte Offline-Daten herunterladen, damit Karten offline verwendet werden können.</string>
-    <string name="local_index_gpx_info_show">\n\nFür Optionen lang tippen</string>
+    <string name="local_index_gpx_info_show">\n\nFür Optionen lange tippen</string>
     <string name="local_index_installed">Lokale Version</string>
     <string name="local_index_items_backuped">%1$d von %2$d Datei(en) deaktiviert.</string>
     <string name="local_index_items_deleted">%1$d von %2$d Datei(en) gelöscht.</string>
@@ -1215,7 +1215,7 @@
     <string name="rendering_attr_moreDetailed_name">Mehr Details</string>
     <string name="rendering_attr_lessDetailed_name">Weniger Details</string>
     <string name="rendering_attr_hideAccess_name">Zufahrtsbeschränkungen</string>
-    <string name="rendering_attr_showAccess_name">Zugangs- und Mautbeschränkungen anzeigen</string>
+    <string name="rendering_attr_showAccess_name">Zugangsbeschränkungen anzeigen</string>
     <string name="rendering_attr_showSurfaceGrade_name">Straßenqualität anzeigen</string>
     <string name="rendering_attr_showSurfaces_name">Straßenoberfläche anzeigen</string>
     <string name="rendering_attr_showCycleRoutes_name">Fahrradrouten</string>
@@ -1502,7 +1502,7 @@
     <string name="local_osm_changes_upload_all_confirm">%1$d Änderung(en) zu OSM hochladen\?</string>
     <string name="confirmation_to_clear_history">Verlauf löschen?</string>
     <string name="osmand_parking_hour">h</string>
-    <string name="shared_string_minute_lowercase">min</string>
+    <string name="shared_string_minute_lowercase">Min</string>
     <string name="osmand_parking_time_left">verbleibend</string>
     <string name="osm_changes_added_to_local_edits">Die Änderungen an den OSM-Daten wurden dem lokalen Änderungssatz hinzugefügt</string>
     <string name="shared_string_go">Los</string>
@@ -2383,7 +2383,7 @@
     <string name="mapillary_menu_descr_tile_cache">Kacheln neu laden, um nach Datumswerten zu suchen.</string>
     <string name="mapillary_menu_title_tile_cache">Kachelzwischenspeicher</string>
     <string name="wrong_user_name">Falscher Benutzername</string>
-    <string name="shared_string_to">Bis</string>
+    <string name="shared_string_to">Zu</string>
     <string name="mapillary_menu_date_from">Von</string>
     <string name="mapillary_menu_descr_dates">Nur hinzugefügte Bilder betrachten</string>
     <string name="shared_string_date">Datum</string>
@@ -2986,7 +2986,7 @@
     <string name="routing_attr_freeride_policy_name">Abseits der Piste</string>
     <string name="routing_attr_freeride_policy_description">Freerides und Strecken abseits der Piste sind inoffizielle Routen und Passagen. Typischerweise ungepflegt, nicht gewartet und abends nicht kontrolliert. Betreten auf eigene Gefahr.</string>
     <string name="press_again_to_change_the_map_orientation">Erneut antippen, um die Kartenausrichtung zu ändern</string>
-    <string name="quick_action_need_to_add_item_to_list">Mindestens ein Element der Liste in den „Schnellaktion“ Einstellungen hinzufügen</string>
+    <string name="quick_action_need_to_add_item_to_list">Mindestens ein Element in die Liste der Schnellaktionseinstellungen hinzufügen</string>
     <string name="shared_string_min_speed">Min. Geschwindigkeit</string>
     <string name="shared_string_max_speed">Max. Geschwindigkeit</string>
     <string name="default_speed_setting_title">Standardgeschwindigkeit</string>
@@ -5075,7 +5075,7 @@
     <string name="offline_cache">Offline-Cache</string>
     <string name="shared_string_alt_name">Alternativer Name</string>
     <string name="shared_string_pounds">Pfund</string>
-    <string name="metric_lbs">Lbs</string>
+    <string name="metric_lbs">lbs</string>
     <string name="weather_forecast_is_outdated">Die Vorhersage ist veraltet.</string>
     <string name="shared_string_all_world">Die ganze Welt</string>
     <string name="weather_forecast">Wettervorhersage</string>
@@ -5186,7 +5186,7 @@
     <string name="tracks_empty_folder">Leerer Ordner</string>
     <string name="track_not_recorded">Nicht aufgezeichnet</string>
     <string name="shared_string_new_track">Neuer Track</string>
-    <string name="shared_string_visible_on_map">Sichtbar auf der Karte</string>
+    <string name="shared_string_visible_on_map">Sichtbar auf Karte</string>
     <string name="delete_track_folder_dialog_message">Dies löscht den Ordner „%1$s“ und alle %2$s darin enthaltenen Tracks.</string>
     <string name="delete_folder">Ordner löschen</string>
     <string name="show_all_tracks_on_the_map">Alle Tracks auf der Karte anzeigen</string>
@@ -5199,7 +5199,7 @@
     <string name="error_calculate">Berechnungsergebnis ist leer</string>
     <string name="calculate_offline_altitude_descr">Höhe offline berechnen, basierend auf (3D) Daten der Höhenkarte. Unterschiede zur vom Gerät aufgezeichneten Höhe können als Höhenkorrektur verwendet werden.</string>
     <string name="power_watts_unit">Watt</string>
-    <string name="revolutions_per_minute_unit">U/min</string>
+    <string name="revolutions_per_minute_unit">Drehzahl</string>
     <string name="shared_string_close_the_dialog">Dialogfeld schließen</string>
     <string name="rendering_attr_lightDetail_description">Standard: Seezeichenname (Leuchtfeuer.Gruppe.Periode), Auswahl zusätzlicher Informationen zu den Sektoren 1 bis 3 oder Sektor 1,2,3,4,5 Leuchtfeuer</string>
     <string name="terrain_map">Geländekarte (3D)</string>
@@ -5241,49 +5241,7 @@
     <string name="free_settings_backup">Kostenlose Sicherung der Einstellungen</string>
     <string name="cache_size">Cachegröße</string>
     <string name="routing_attr_allow_via_ferrata_name">Bergroute (Klettersteig)</string>
-    <string name="release_4_5">• BLE/ANT+-Sensoren: Verbindung, Schreiben und Anzeigen empfangener Daten auf GPX überarbeitet
-\n
-\n • Kostenloses Backup für Favoriten und Einstellungen in „OsmAnd Cloud“
-\n
-\n • Neues Format für Geländekarten mit 3D-Reliefunterstützung
-\n
-\n • Tracks-Verwaltung: aktualisierte Benutzeroberfläche, Sortierung hinzugefügt, Unterstützung verschachtelter Ordner
-\n
-\n • Android Auto: neues Startmenü für den Zugriff auf Favoriten, Tracks und POI-Kategorien
-\n
-\n • Eine Liste von Widgets für das obere/untere Bedienfeld
-\n
-\n • Neues Profil „Bahn“, ermöglicht die Berechnung von Bahnstrecken
-\n
-\n • Konturlinien funktionieren mit jeder „Kartenquelle“
-\n
-\n • Erweiterte Liste von Standardaktionen für externe Tastaturen
-\n
-\n • Benutzerdefinierte Routing-Dateien, Optionen zum Löschen oder Überschreiben hinzugefügt
-\n
-\n • Option zu „Abweichung von der Route ankündigen“ hinzugefügt
-\n
-\n • Startbildschirm: Option „OsmAnd-Status aus Datei wiederherstellen“ hinzugefügt
-\n
-\n • „Gefährliche Materialien“-Klassen für Lkw-Navigation in Nordamerika hinzugefügt
-\n
-\n • Unterstützung von „Klettersteig“ für Fußgängerrouten hinzugefügt
-\n
-\n • „CAI“-Skala zur Schwierigkeitsklassifizierung der Routen hinzugefügt
-\n
-\n • Sprachauswahl pro App korrigiert
-\n
-\n • Unterstützung für thematische Symbole hinzugefügt
-\n
-\n • OsmAnd Cloud: Option zum Löschen eines Kontos hinzugefügt
-\n
-\n • Barrierefreiheit: Touch-Zielgröße für Schaltflächen auf 48 dpi geändert; Problem behoben, bei dem die Karten-Benutzeroberfläche für Bildschirmleseprogramme sichtbar war
-\n
-\n • Japanische Sprachansagen überarbeitet
-\n
-\n • Höhenänderung und Neigungsauswertung überarbeitet
-\n
-\n</string>
+    <string name="release_4_5">• BLE/ANT+-Sensoren: Verbindung, Schreiben und Anzeigen empfangener Daten auf GPX überarbeitet \n \n • Kostenloses Backup für Favoriten und Einstellungen in „OsmAnd Cloud“ \n \n • Neues Format für Geländekarten mit 3D-Reliefunterstützung \n \n • Tracks-Verwaltung: aktualisierte Benutzeroberfläche, Sortierung hinzugefügt, Unterstützung verschachtelter Ordner \n \n • Android Auto: neues Startmenü für den Zugriff auf Favoriten, Tracks und POI-Kategorien \n \n • Eine Liste von Widgets für das obere/untere Bedienfeld \n \n • Neues Profil „Bahn“, ermöglicht die Berechnung von Bahnstrecken \n \n • Konturlinien funktionieren mit jeder „Kartenquelle“ \n \n • Erweiterte Liste von Standardaktionen für externe Tastaturen \n \n • Benutzerdefinierte Routing-Dateien, Optionen zum Löschen oder Überschreiben hinzugefügt \n \n • Option zu „Abweichung von der Route ankündigen“ hinzugefügt \n \n • Startbildschirm: Option „OsmAnd-Status aus Datei wiederherstellen“ hinzugefügt \n \n • „Gefährliche Materialien“-Klassen für Lkw-Navigation in Nordamerika hinzugefügt \n \n • Unterstützung von „Klettersteig“ für Fußgängerrouten hinzugefügt \n \n • „CAI“-Skala zur Schwierigkeitsklassifizierung der Routen hinzugefügt \n \n • Sprachauswahl pro App korrigiert \n \n • Unterstützung für thematische Symbole hinzugefügt \n \n • OsmAnd Cloud: Option zum Löschen eines Kontos hinzugefügt \n \n • Barrierefreiheit: Touch-Zielgröße für Schaltflächen auf 48 dpi geändert; Problem behoben, bei dem die Karten-Benutzeroberfläche für Bildschirmleseprogramme sichtbar war \n \n • Japanische Sprachansagen überarbeitet \n \n • Höhenänderung und Neigungsauswertung überarbeitet</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Raster-SQLiteDB für Relief / Hangneigung verwenden</string>
     <string name="free_ride">Freifahrt</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Sprengstoffe</string>
@@ -5423,29 +5381,7 @@
     <string name="help_article_navigation_setup_markers_navigation_name">Navigieren nach Markierungen</string>
     <string name="smart_folder_saved">Intelligenter Ordner gespeichert</string>
     <string name="help_article_widgets_markers_name">Markierungs-Widgets</string>
-    <string name="release_4_6">• Android Auto: 3D-Modus hinzugefügt
-\n
-\n• Tracks: Filter und intelligente Ordner eingeführt, Speicheroptimierung für größere Dateien
-\n
-\n• Verbesserte obere und untere Widget-Leisten, um alle Widgets unterzubringen
-\n
-\n• Verbessertes lokales Ressourcenmanagement
-\n
-\n• Anpassbare Tastenbelegung für externe Controller
-\n
-\n• Neue Widgets: „Gleitzahl“ und „Sonnenposition“
-\n
-\n• OsmAnd Cloud: jetzt Zugriff auf gelöschte Dateien
-\n
-\n• Verbesserte Streckenfärbung im Hangneigungsmodus mit neuem symmetrischen Gradienten
-\n
-\n• Probleme mit transparenter Statusleiste behoben
-\n
-\n• Unterstützung für ANT+-Widget „Temperatur“ hinzugefügt
-\n
-\n• Widget „Verfügbarer RAM“ eingeführt
-\n
-\n</string>
+    <string name="release_4_6">• Android Auto: 3D-Modus hinzugefügt \n \n• Tracks: Filter und intelligente Ordner eingeführt, Speicheroptimierung für größere Dateien \n \n• Verbesserte obere und untere Widget-Leisten, um alle Widgets unterzubringen \n \n• Verbessertes lokales Ressourcenmanagement \n \n• Anpassbare Tastenbelegung für externe Controller \n \n• Neue Widgets: „Gleitzahl“ und „Sonnenposition“ \n \n• OsmAnd Cloud: jetzt Zugriff auf gelöschte Dateien \n \n• Verbesserte Streckenfärbung im Hangneigungsmodus mit neuem symmetrischen Gradienten \n \n• Probleme mit transparenter Statusleiste behoben \n \n• Unterstützung für ANT+-Widget „Temperatur“ hinzugefügt \n \n• Widget „Verfügbarer RAM“ eingeführt</string>
     <string name="help_article_map_tracks_on_map_name">Strecken und Routen</string>
     <string name="help_article_navigation_routing_direct_to_point_routing_name">Punkt-zu-Punkt-Routing (Boot)</string>
     <string name="app_mode_baby_transport">Kindertransport</string>
@@ -5494,7 +5430,7 @@
     <string name="all_folders">Alle Verzeichnisse</string>
     <string name="shared_string_show_less">Weniger anzeigen</string>
     <string name="folder">Verzeichnis</string>
-    <string name="not_specified">Nicht angegeben</string>
+    <string name="not_specified">Nicht spezifiziert</string>
     <string name="key_event_action_zoom_in">Hineinzoomen</string>
     <string name="key_event_action_change_map_orientation">Kartenorientierung ändern</string>
     <string name="press_button_to_link_with_action">Drücken Sie die Schaltfläche auf Ihrem Gerät, um sie der Aktion zuzuweisen: %1$s</string>
@@ -5611,7 +5547,7 @@
     <string name="rendering_attr_padusDisplayMode_name">Anzeigemodus für öffentliche Flächen</string>
     <string name="auto_zoom_smooth">Glatt</string>
     <string name="auto_zoom_discrete">Schrittweise</string>
-    <string name="auto_zoom">Auto-Zoom</string>
+    <string name="auto_zoom">Autozoom</string>
     <string name="java_safe">Java (sicher)</string>
     <string name="gpx_approximation">GPX-Annäherung</string>
     <string name="routing_type">Routing-Typ</string>
@@ -5619,25 +5555,7 @@
     <string name="routing_type_a_star_classic">A* classic</string>
     <string name="shared_sting_all_colors">Alle Farben</string>
     <string name="lang_ta_in">Tamilisch (Indien)</string>
-    <string name="release_4_7">• Neues Widget „Geschwindigkeitsmesser“, kompatibel mit Android Auto
-\n
-\n• Konfigurieren des Kartenbildschirms durch Hinzufügen mehrerer Schaltflächen für „Schnellaktionen“
-\n
-\n• Lesbarkeit der Daten in Diagrammen verbessert
-\n
-\n• Filter nach Sensordaten für Strecken hinzugefügt
-\n
-\n• Anpassung des Aussehens für Trackgruppen verbessert
-\n
-\n• Unterstützung für zusätzliche GPX-Tags hinzugefügt
-\n
-\n• „Distanz während der Navigation“ angepasst: Wahl zwischen präzisen oder gerundeten Zahlen
-\n
-\n• Benutzeroberfläche für die Streckenauswahl vereinheitlicht
-\n
-\n• OpenStreetMap-Login auf OAuth 2.0 umgestellt
-\n
-\n</string>
+    <string name="release_4_7">• Neues Widget „Geschwindigkeitsmesser“, kompatibel mit Android Auto \n \n• Konfigurieren des Kartenbildschirms durch Hinzufügen mehrerer Schaltflächen für „Schnellaktionen“ \n \n• Lesbarkeit der Daten in Diagrammen verbessert \n \n• Filter nach Sensordaten für Strecken hinzugefügt \n \n• Anpassung des Aussehens für Trackgruppen verbessert \n \n• Unterstützung für zusätzliche GPX-Tags hinzugefügt \n \n• „Distanz während der Navigation“ angepasst: Wahl zwischen präzisen oder gerundeten Zahlen \n \n• Benutzeroberfläche für die Streckenauswahl vereinheitlicht \n \n• OpenStreetMap-Login auf OAuth 2.0 umgestellt</string>
     <string name="round_up">Aufrunden</string>
     <string name="precise">Präzise</string>
     <string name="distance_during_navigation">Entfernung während der Navigation</string>
@@ -5646,7 +5564,7 @@
 \nWählen Sie „%1$s“ für exakte Zahlen oder „%2$s“ für eine leichtere Lesbarkeit.</string>
     <string name="download_cloud_versions">Cloud-Versionen herunterladen</string>
     <string name="upload_local_versions">Lokale Versionen hochladen</string>
-    <string name="map_widget_map_scale">Kartenmaßstab</string>
+    <string name="map_widget_map_scale">Maßstab</string>
     <string name="shared_string_unchanged">Unverändert</string>
     <string name="unchanged_parameter_summary">Jede Spur behält ihre eigenen Parameter.</string>
     <string name="gpx_approximation_cpp">Routingbasiert (C++)</string>
@@ -5659,29 +5577,7 @@
     <string name="change_default_tracks_appearance_confirmation">Änderungen auf vorhandene Tracks im Ordner oder nur auf neue Tracks anwenden?</string>
     <string name="shared_string_changes">Änderungen</string>
     <string name="apply_only_to_new">Nur für neue</string>
-    <string name="release_4_8">• Neue Geländefarboption „Höhe“
-\n
-\n• Benutzerdefinierte Farbpaletten für Gelände, Tracks und Routen
-\n
-\n• 3D-Variante für Standortpositionssymbole
-\n
-\n• Schnellaktionen können jetzt externen Tastaturen zugewiesen werden
-\n
-\n• Wetter: Benutzeroberfläche aktualisiert, Windanimation hinzugefügt
-\n
-\n• 3D-Track-Verbesserungen: neue Visualisierungs- und Farboptionen
-\n
-\n• Erweiterte Auswahl an Touristenrouten auf der Karte
-\n
-\n• App-Darstellungsoption hinzugefügt, um dem Kartenmodus zu folgen
-\n
-\n• Track-Statistiken, Sortierung und Suche korrigiert
-\n
-\n• OSM-Bearbeitung: Login-/Passwort-Authentifizierungsmethode gelöscht
-\n
-\n• Wechsel zum System-Share-Sheet ab Android 14
-\n
-\n</string>
+    <string name="release_4_8">• Neue Geländefarboption „Höhe“ \n \n• Benutzerdefinierte Farbpaletten für Gelände, Tracks und Routen \n \n• 3D-Variante für Standortpositionssymbole \n \n• Schnellaktionen können jetzt externen Tastaturen zugewiesen werden \n \n• Wetter: Benutzeroberfläche aktualisiert, Windanimation hinzugefügt \n \n• 3D-Track-Verbesserungen: neue Visualisierungs- und Farboptionen \n \n• Erweiterte Auswahl an Touristenrouten auf der Karte \n \n• App-Darstellungsoption hinzugefügt, um dem Kartenmodus zu folgen \n \n• Track-Statistiken, Sortierung und Suche korrigiert \n \n• OSM-Bearbeitung: Login-/Passwort-Authentifizierungsmethode gelöscht \n \n• Wechsel zum System-Share-Sheet ab Android 14</string>
     <string name="vertical_exaggeration">Vertikale Vergrößerung</string>
     <string name="relief_3d_download_description">Weitere Karten sind erforderlich, um Gelände auf der Karte anzuzeigen.</string>
     <string name="vertical_exaggeration_description">Durch Änderung des Skalenwerts können Sie das 3D-Profil hervorheben.</string>
@@ -5770,7 +5666,7 @@
     <string name="missing_maps_ignore_details">Decken heruntergeladene Karten Ihre Route ab? Navigieren Sie mit ihnen, wenn Sie sich in der Gegend auskennen.</string>
     <string name="quick_action_map_overlay">Überlagerung</string>
     <string name="quick_action_verb_turn_on_off">Einschalten / Ausschalten</string>
-    <string name="quick_action_terrain_color_scheme">Gelände Farbschema</string>
+    <string name="quick_action_terrain_color_scheme">Gelände-Farbschema</string>
     <string name="quick_action_move_map_right">Karte nach rechts</string>
     <string name="quick_action_previous_app_profile">App-Profil zum vorherigen</string>
     <string name="quick_action_first_intermediate">Erster Zwischenpunkt</string>
@@ -5804,7 +5700,7 @@
     <string name="quick_action_track_waypoint">Wegpunkt</string>
     <string name="energy_avg_info_description">Akkustand pro Minute: %1$s
 \nEnergieverbrauch (mAh): %2$s</string>
-    <string name="rendering_avg_info">Rendering-Statistiken (durchschnittlich 1 / 5 / 15 Minuten)</string>
+    <string name="rendering_avg_info">Rendering-Statistik (durchschnittlich 1 / 5 / 15 Minuten)</string>
     <string name="energy_avg_info">Energiestatistik (durchschnittlich 1 / 5 / 15 Minuten)</string>
     <string name="rendering_avg_info_description">FPS der letzten 1000 Frames: %1$s
 \nCPU-Basis: %2$s
@@ -5848,7 +5744,7 @@
     <string name="detailed_track_guidance_description">OsmAnd gleicht Ihren Track mit nahe gelegenen Straßen ab, um die Abbiegehinweise zu verbessern.</string>
     <string name="quick_action_routes_summary">Ein Schalter, um %1$s auf der Karte anzuzeigen oder auszublenden.</string>
     <string name="compass_click_north_is_up">Um den Ausrichtungsmodus zu ändern, klicken und halten Sie</string>
-    <string name="help_article_map_tracks_name">Strecken</string>
+    <string name="help_article_map_tracks_name">Tracks</string>
     <string name="help_article_map_routes_name">Routen</string>
     <string name="route_roundabout_exit">%1$d. Ausfahrt nehmen</string>
     <string name="add_widget_below">Widget unten hinzufügen</string>
@@ -5885,8 +5781,7 @@
     <string name="map_3d_mode_action_descr">Kartenneigung ändern.</string>
     <string name="drawer_button_description">Öffnet das Hauptmenü.</string>
     <string name="configure_map_description">Ändert den Kartenstil, Ebenen oder andere Einstellungen.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Dirtbike-Trails anzeigen</string>
-    <string name="rendering_attr_showDirtbikeTrails_description">Dirtbike-Trails anzeigen</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Dirtbike-Strecken anzeigen</string>
     <string name="type_of_activity">Art der Aktivität</string>
     <string name="change_activity">Aktivität ändern</string>
     <string name="shared_string_increase">Erhöhen</string>
@@ -5910,16 +5805,14 @@
     <string name="obd_fuel_type_bifuel_gasoline">Bifuel mit Benzin</string>
     <string name="obd_fuel_type_bifuel_methanol">Bifuel mit Methanol</string>
     <string name="obd_fuel_type_bifuel_ethanol">Bifuel mit Ethanol</string>
-    <string name="obd_fuel_type_bifuel_electric_combustion">Bifuel mit E-Motor und Verbrennungsmotor</string>
+    <string name="obd_fuel_type_bifuel_electric_combustion">Bifuel mit Elektro- und Verbrennungsmotor</string>
     <string name="obd_fuel_type_hybrid_electric">Hybrid elektrisch</string>
     <string name="obd_fuel_type_hybrid_electric_combustion">Hybrid aus Elektro- und Verbrennungsmotor</string>
     <string name="obd_fuel_type_bifuel_hydrogen">Bifuel mit Wasserstoff</string>
     <string name="obd_fuel_type_hydrogen">Wasserstoff</string>
     <string name="shared_string_obd">OBD</string>
     <string name="percent_unit">%</string>
-    <string name="obd_rpm">Drehzahl</string>
     <string name="rpm_unit">U/min</string>
-    <string name="obd_speed_desc">Geschwindigkeitsanzeige über OBD-Sensor</string>
     <string name="unit_volt">V</string>
     <string name="obd_fuel_type_bifuel_lpg">Bifuel mit LPG</string>
     <string name="obd_fuel_type_bifuel_cng">Bifuel mit CNG</string>
@@ -5928,34 +5821,29 @@
     <string name="obd_fuel_type_bifuel_electricity">Bifuel mit E-Motor</string>
     <string name="obd_fuel_type_hybrid_gasoline">Hybrid Benzin</string>
     <string name="obd_fuel_type_hybrid_diesel">Hybrid Diesel</string>
-    <string name="obd_fuel_type_hybrid_regenerative">Hybrid Regenerativ</string>
+    <string name="obd_fuel_type_hybrid_regenerative">Hybrid regenerativ</string>
     <string name="obd_fuel_type_hybrid_hydrogen">Hybrid Wasserstoff</string>
     <string name="obd_fuel_type_unknown">Unbekannter Kraftstoff</string>
-    <string name="obd_widget_group">Fahrzeugangaben</string>
-    <string name="obd_air_intake_temp">Ansauglufttemperatur</string>
-    <string name="obd_ambient_air_temp">Umgebungslufttemperatur</string>
-    <string name="obd_engine_coolant_temp">Kühlmitteltemperatur des Motors</string>
+    <string name="obd_widget_group">Fahrzeugdaten</string>
+    <string name="obd_air_intake_temp">Ansaugtemperatur</string>
+    <string name="obd_ambient_air_temp">Umgebungstemperatur</string>
+    <string name="obd_engine_coolant_temp">Kühlmitteltemperatur</string>
     <string name="obd_fuel_consumption_rate">Kraftstoffverbrauch</string>
-    <string name="obd_fuel_left_distance">Verbleibender Kraftstoff (Entfernung)</string>
     <string name="obd_fuel_type">Kraftstofftyp</string>
-    <string name="obd_plugin_name">Fahrzeugangaben</string>
-    <string name="obd_plugin_description">Zugriff auf Ihre Fahrzeuginformationen über das OBD-Protokoll</string>
-    <string name="obd_support">OBD Unterstützung</string>
+    <string name="obd_plugin_name">Fahrzeugdaten</string>
+    <string name="obd_plugin_description">Überwachung von wichtigen Fahrzeugdaten über das OBD-II-Protokoll. Zugriff auf Daten, einschließlich:\n - Motordrehzahl, Motorlaufzeit, berechnete Motorlast \n - Kraftstoffverbrauch, Kraftstoffdruck, verbleibender Kraftstoff\n - Ansaugtemperatur, Umgebungstemperatur, Kühlmitteltemperatur, Motoröltemperatur\n - Fahrzeuggeschwindigkeit, Drosselklappenstellung, Batteriespannung\n</string>
+    <string name="obd_support">OBD-Unterstützung</string>
     <string name="obd_battery_voltage">Batteriespannung</string>
     <string name="obd_rpm_desc">Zeigt mithilfe des OBD-Sensors die Drehzahl des Fahrzeugtachos an</string>
-    <string name="obd_air_intake_temp_desc">Zeigt mithilfe des OBD-Sensors die Ansauglufttemperatur des Fahrzeugs an</string>
-    <string name="obd_ambient_air_temp_desc">Zeigt mithilfe des OBD-Sensors die Umgebungslufttemperatur an</string>
-    <string name="obd_engine_coolant_temp_desc">Zeigt mithilfe des OBD-Sensors die Motorkühlmitteltemperatur an</string>
-    <string name="obd_battery_voltage_desc">Zeigt mithilfe des OBD-Sensors die Batteriespannung an</string>
-    <string name="obd_fuel_left_distance_desc">Zeigt mithilfe des OBD-Sensors an, wie weit das Fahrzeug mit dem linken Kraftstoffstand noch fahren kann</string>
+    <string name="obd_fuel_left_distance_desc">Zeigt mithilfe des OBD-Sensors an, wie weit das Fahrzeug mit dem verbliebenen Kraftstoffstand noch fahren kann</string>
     <string name="obd_fuel_level_desc">Zeigt mithilfe des OBD-Sensors den Kraftstoffstand des Fahrzeugs an</string>
     <string name="obd_fuel_type_desc">Zeigt mithilfe des OBD-Sensors die Kraftstoffart des Fahrzeugs an</string>
-    <string name="obd_fuel_level">Kraftstoffstand</string>
+    <string name="obd_fuel_level">Kraftstoffverbrauch (%)</string>
     <string name="obd_fuel_consumption_rate_desc">Zeigt den Kraftstoffverbrauch des Fahrzeugs basierend auf dem OBD-Standort an</string>
     <string name="unknown_bt_device">Unbekanntes Gerät</string>
-    <string name="obd_vin">VIN (Fahrzeug Identifizierung Nummer)</string>
+    <string name="obd_vin">VIN (Fahrgestell-Identifikationsnummer)</string>
     <string name="obd_vin_desc">VIN-Code über OBD</string>
-    <string name="vehicle_metrics_plugin_settings">Fahrzeugmetrik-Einstellungen</string>
+    <string name="vehicle_metrics_plugin_settings">Fahrzeugdaten-Einstellungen</string>
     <string name="reset_average_speed">Durchschnittliche Geschwindigkeit zurücksetzen</string>
     <string name="quick_action_verb_start_pause">Start / Pause</string>
     <string name="help_article_personal_color_palette_schemes_name">Farbschemen</string>
@@ -5977,4 +5865,109 @@
     <string name="new_segment_started_m">Die Aufzeichnung eines neuen Tracksegments wurde gestartet.</string>
     <string name="quick_action_new_trip_segment">Eine Schaltfläche zum Starten eines neuen Segments in der laufenden GPX-Track-Aufzeichnung.</string>
     <string name="quick_action_showhide_osm_edits_descr">Schaltfläche zum Ein- und Ausblenden von lokalen OSM-Bearbeitungen auf der Karte.</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Dirtbike-Strecken</string>
+    <string name="liter_per_hour">l/h</string>
+    <string name="release_4_9">• Vollbild-Galerie-Viewer für Wikimedia-Bilder hinzugefügt\n\n • Neue Erweiterung „Fahrzeugdaten“ zur Überwachung der Fahrzeugleistung unter Verwendung des OBD-II-Protokolls eingeführt\n\n • Möglichkeit hinzugefügt, Aktivitäten zu Spuren zuzuordnen und sie entsprechend zu filtern\n\n • Neue Schnellaktionen für die Aufzeichnung von Fahrten und die Touchscreen-Sperre implementiert\n\n • Anpassbare Kartenschaltfläche und präzises Raster eingeführt\n\n • Kontextmenü und Aktion „Durchschnittsgeschwindigkeit zurücksetzen“ zu Widgets hinzugefügt\n\n • Neue Routenebene „Dirtbike-Strecken“ hinzugefügt\n\n • „Automatische Aufzeichnung des Tracks während der Navigation“ korrigiert\n\n • Problem mit umgedrehten Koordinaten in RTL behoben\n\n • Fehlende Sensordaten für die aktuell aufgezeichnete Strecke behoben\n\n • Informationen über die Umgebung des ausgewählten Punktes hinzugefügt\n\n • Schnellaktion zur Kontrolle der Sichtbarkeit von OSM-Bearbeitungen hinzugefügt\n\n • Sichtbarkeitsparameter für die Terrain-Einfärbungsoptionen separiert\n\n • Antippbares Symbol hinzugefügt, um Zufahrtswege oder andere Straßen- oder Pfadattribute anzuzeigen</string>
+    <string name="screen_is_locked_by_external_button">Der Touchscreen ist gesperrt. Um die Sperre aufzuheben, drücken Sie die Taste %1$s oder tippen Sie auf die Schaltfläche auf dem Bildschirm.</string>
+    <string name="screen_is_unlocked">Der Touchscreen ist entsperrt.</string>
+    <string name="screen_is_locked_by_action_button">Der Touchscreen ist gesperrt. Tippen Sie zum Entsperren auf die Schaltfläche.</string>
+    <string name="connect_obd_instructions_step1">Den Scanner an den OBD-II-Anschluss Ihres Fahrzeugs anschließen.</string>
+    <string name="connect_obd_instructions_step2">Den Motor Ihres Fahrzeugs einschalten</string>
+    <string name="learn_more_about_obd_sensors">Mehr über Sensoren erfahren.</string>
+    <string name="connect_obd_instructions_step4">Auf „Verbinden“ tippen und den Scanner aus der Liste auswählen.</string>
+    <string name="connect_obd_instructions_title">OsmAnd unterstützt Bluetooth-Verbindungen zu OBD-II-Scannern.</string>
+    <string name="shared_string_bluetooth">Bluetooth</string>
+    <string name="obd_vehicle_info">Fahrzeuginformation</string>
+    <string name="obd_how_to_connect">Verbindung herstellen:</string>
+    <string name="connect_obd_instructions_step3">Bluetooth auf Ihrem Gerät aktivieren</string>
+    <string name="obd_fuel_left_liters">Verbleibender Kraftstoff (Liter)</string>
+    <string name="obd_nothing_found_text">Keine Scanner gefunden</string>
+    <string name="obd_bluetooth_off_description">Bluetooth einschalten, um Scanner zu finden und zu verbinden.</string>
+    <string name="obd_searching_text">Suche nach Scannern</string>
+    <string name="obd_device_forget_sensor">Scanner verwerfen</string>
+    <string name="obd_searching_text_description">Bitte halten Sie Ihr Gerät in der Nähe des Scanners. Stellen Sie sicher, dass der Motor des Fahrzeugs läuft.</string>
+    <string name="obd_nothing_found_description">Bitte überprüfen Sie Folgendes:\n - Stellen Sie sicher, dass Bluetooth eingeschaltet ist.\n - Der Fahrzeugmotor läuft\n - Stellen Sie sicher, dass sich Ihr Gerät in Reichweite des Scanners befindet.</string>
+    <string name="obd_device_forget_sensor_description">Der Scanner wird aus der Liste entfernt. Sie können diesen Scanner jederzeit wieder koppeln.</string>
+    <string name="connect_obd_instructions_step">1. Schließen Sie den Scanner an den OBD-II-Anschluss Ihres Fahrzeugs an.\n\n 2. Schalten Sie den Motor Ihres Fahrzeugs ein.\n\n 3. Aktivieren Sie Bluetooth auf Ihrem Gerät.\n\n 4. Tippen Sie auf „%1$s“ und wählen Sie Ihren Scanner aus der Liste aus.</string>
+    <string name="route_guidance_desc">Bietet Routenführung in Echtzeit, einschließlich Entfernung bis zur nächsten Abbiegung, Straßenname, aktueller Straßenname und Fahrbahninformationen. Die Widgets sind während der Navigation aktiv.</string>
+    <string name="obd_widget_vehicle_speed">Fahrzeuggeschwindigkeit</string>
+    <string name="route_guidance">Routenführung</string>
+    <string name="obd_widget_engine_speed">Motordrehzahl</string>
+    <string name="obd_fuel_consumption_rate_l_h">Kraftstoffverbrauch (l/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor">Kraftstoffverbrauch (Sensor)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Zeigt den berechneten Kraftstoffverbrauch des Fahrzeugs an (l/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Zeigt den vom Sensor gemessenen Kraftstoffverbrauch des Fahrzeugs an (l/h)</string>
+    <string name="obd_fuel_level_liter">Kraftstoffstand (l)</string>
+    <string name="obd_fuel_level_percent">Kraftstoffstand (%)</string>
+    <string name="obd_fuel_left_km">Verbleibender Kraftstoff (km)</string>
+    <string name="obd_fuel_consumption_rate_scanner">Kraftstoffverbrauch (OBD)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Kraftstoffverbrauch</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">Kraftstoffverbrauch (%/h)</string>
+    <string name="liter">l</string>
+    <string name="percent_hour">%/h</string>
+    <string name="speedometer_maximum">Maximum</string>
+    <string name="obd_fuel_consumption_rate_l_km">Kraftstoffverbrauch (l/100 km)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Zeigt den rechnerischen Kraftstoffverbrauch des Fahrzeugs an (l/100 km)</string>
+    <string name="simulate_obd">OBD-Daten simulieren</string>
+    <string name="obd_fuel_pressure">Kraftstoffdruck</string>
+    <string name="l_100km">l/100 km</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">Zeigt den rechnerischen Kraftstoffverbrauch des Fahrzeugs an (%/h)</string>
+    <string name="kpa_unit">kPa</string>
+    <string name="bt_start_pair_failed">Kopplung mit Gerät kann nicht gestartet werden</string>
+    <string name="shared_string_dynamic">Dynamisch</string>
+    <string name="obd_connecting_to_device">Verbindung zu %s herstellen</string>
+    <string name="obd_connected_to_device">Verbunden mit %s</string>
+    <string name="obd_not_connected_to_device">Getrennt von %s</string>
+    <string name="dynamic_icon_type_summary">Symbol ändert sich je nach Aktionsstatus.</string>
+    <string name="fuel_tank_capacity_description">Tankinhalt eingeben, um Kraftstoffstand und -verbrauch genau zu verfolgen</string>
+    <string name="shared_strings_dimensions">Abmessungen</string>
+    <string name="fuel_tank_capacity">Volumen des Kraftstofftanks</string>
+    <string name="litres">Liter</string>
+    <string name="imperial_gallons_unit">imp gal</string>
+    <string name="us_gallons_unit">gal</string>
+    <string name="imperial_gallons">Imperial gallons</string>
+    <string name="us_gallons">US gallons</string>
+    <string name="unit_of_volume_description">Ausgewählte Einheiten werden auf alle volumenbezogenen Daten im aktuellen Profil angewendet.</string>
+    <string name="unit_of_volume">Volumeneinheit</string>
+    <string name="record_obd_data">Fahrzeugdaten aufzeichnen</string>
+    <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
+    <string name="obd_throttle_position_desc">Zeigt den Winkel der Drosselklappe im Drosselklappengehäuse an.</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Verfolgen Sie wichtige Fahrzeugdaten über das OBD-II-Protokoll. Überwachen Sie wichtige Daten wie Geschwindigkeit, Motordrehzahl, Kraftstoffverbrauch und mehr.</string>
+    <string name="vehicle_metrics_obd_ii">Fahrzeugdaten (OBD-II)</string>
+    <string name="shared_string_hour">Stunde</string>
+    <string name="ltr_or_rtl_combine_via_per">%1$s pro %2$s</string>
+    <string name="show_minor_turns">Anzeige an kleineren Kreuzungen bei Geradeausfahrt</string>
+    <string name="obd_speed_desc">Zeigt die Geschwindigkeit des Fahrzeuggeschwindigkeitssensors (VSS) an.</string>
+    <string name="obd_air_intake_temp_desc">Zeigt die Temperatur der Luft an, die in den Ansaugkrümmer des Motors eintritt.</string>
+    <string name="obd_engine_coolant_temp_desc">Zeigt die Temperatur der Kühlflüssigkeit des Motors an</string>
+    <string name="obd_ambient_air_temp_desc">Zeigt die Temperatur außerhalb des Fahrzeugs an.</string>
+    <string name="obd_battery_voltage_desc">Zeigt den Spannungszustand der Fahrzeugbatterie an</string>
+    <string name="obd_fuel_consumption">Kraftstoffverbrauch</string>
+    <string name="reset_average_value">Durchschnittswert zurücksetzen</string>
+    <string name="obd_fuel_consumption_rate_sensor_type">Ausgewählte Einheiten im Namen verwenden.</string>
+    <string name="remaining_fuel">Verbleibender Kraftstoff</string>
+    <string name="remaining_fuel_description">Zeigt die verbleibende Kraftstoffmenge im Tank des Fahrzeugs an</string>
+    <string name="average_temperature">Durchschnittliche Temperatur</string>
+    <string name="obd_fuel_consumption_desc">Zeigt den Kraftstoffverbrauch des Motors an, der auf der Grundlage des verbleibenden Kraftstoffs, der Tankgröße und der per GPS ermittelten Entfernung berechnet wird.</string>
+    <string name="current_temperature">Aktuelle Temperatur</string>
+    <string name="show_minor_turns_descr">Die Fahrspuren werden an allen Kreuzungen mit Überholverbot angezeigt, unabhängig von den Sprachanweisungen</string>
+    <string name="average_value_slider_description">Wählen Sie das Zeitintervall für die Messung des Durchschnittswerts.</string>
+    <string name="shared_string_instant">Sofort</string>
+    <string name="average_temperature_slider_description">Wählen Sie das Zeitintervall für die Messung der Durchschnittstemperatur.</string>
+    <string name="obd_engine_runtime">Motorlaufzeit</string>
+    <string name="obd_calculated_engine_load_desc">Zeigt den Prozentsatz der verfügbaren Motorleistung an, der zu einem bestimmten Zeitpunkt genutzt wird.</string>
+    <string name="obd_calculated_engine_load">Berechnete Motorlast</string>
+    <string name="obd_engine_oil_temperature">Motoröltemperatur</string>
+    <string name="obd_fuel_pressure_desc">Zeigt den Druck im Kraftstoffsystem an</string>
+    <string name="obd_engine_oil_temperature_desc">Zeigt die Temperatur des Motoröls an.</string>
+    <string name="obd_engine_runtime_desc">Zeigt an, wie lange der Motor seit dem Starten gelaufen ist.</string>
+    <string name="obd_throttle_position">Drosselklappenstellung</string>
+    <string name="shared_string_volume">Menge</string>
+    <string name="av_audio_sample_rate">Audio-Samplerate</string>
+    <string name="av_audio_sample_rate_descr">Wählen Sie die Audio-Samplerate.</string>
+    <string name="connect_new_scanner">Neuen Scanner verbinden</string>
+    <string name="preview_next_turn">Vorschau der nächsten Abbiegung</string>
+    <string name="auto_zoom_3d_angle">Autozoom 3D-Winkel</string>
+    <string name="shared_string_engine">Motor</string>
+    <string name="vehicle_metrics_recording_description">Wählen Sie die Parameter aus, die in der GPX-Datei aufgezeichnet werden sollen.</string>
 </resources>

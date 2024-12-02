@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.backend.backup.items;
 
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.shared.gpx.GpxParameter.COLOR;
 import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
@@ -113,14 +114,14 @@ public class GpxSettingsItem extends FileSettingsItem {
 
 	@Override
 	public void delete() {
-		super.delete();
 		if (FileUtils.removeGpxFile(app, file)) {
-			File parentFile = file.getParentFile();
-			File gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-			if (parentFile != null && !parentFile.equals(gpxDir)) {
-				parentFile.delete();
+			File dir = file.getParentFile();
+			File gpxDir = app.getAppPath(GPX_INDEX_DIR);
+			if (dir != null && !dir.equals(gpxDir)) {
+				dir.delete();
 			}
 		}
+		super.delete();
 	}
 
 	private void updateGpxParams(@NonNull GpxDataItem dataItem) {

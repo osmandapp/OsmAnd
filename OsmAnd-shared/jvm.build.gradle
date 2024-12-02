@@ -44,6 +44,11 @@ kotlin {
                 implementation "commons-logging:commons-logging:$commonLoggingVersion"
             }
         }
+        commonTest {
+            dependencies {
+                implementation "org.jetbrains.kotlin:kotlin-test:2.0.0"
+            }
+        }
     }
 }
 

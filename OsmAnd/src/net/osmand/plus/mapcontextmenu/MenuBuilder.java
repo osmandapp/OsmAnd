@@ -72,7 +72,6 @@ import net.osmand.plus.mapcontextmenu.other.MenuObject;
 import net.osmand.plus.mapcontextmenu.other.MenuObjectUtils;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.dialogs.QuickSearchToolbarController;
@@ -304,9 +303,7 @@ public class MenuBuilder {
 		if (showTitleIfTruncated) {
 			buildTitleRow(view);
 		}
-		if (PluginsHelper.isEnabled(OsmandDevelopmentPlugin.class)) {
-			buildWithinRow(view);
-		}
+		buildWithinRow(view);
 		buildNearestWikiRow(view);
 		buildNearestPoiRow(view);
 		if (needBuildPlainMenuItems()) {
@@ -412,9 +409,9 @@ public class MenuBuilder {
 				Context context = viewGroup.getContext();
 				View rowContainer = createRowContainer(context, WITHIN_POLYGONS_ROW_KEY);
 				buildDetailsRow(rowContainer, getRowIcon(R.drawable.ic_action_pin_location),
-						app.getString(R.string.transport_nearby_routes),null,
+						app.getString(R.string.transport_nearby_routes), null,
 						MenuObjectUtils.getMenuObjectsNamesByComma(menuObjects),
-						getWithinCollapsableView(menuObjects),  true, null);
+						getWithinCollapsableView(menuObjects), true, null);
 				viewGroup.addView(rowContainer);
 			}
 		}
@@ -426,8 +423,16 @@ public class MenuBuilder {
 		for (int i = 0; i < menuObjects.size(); i++) {
 			MenuObject menuObject = menuObjects.get(i);
 			View container = createRowContainer(app, null);
+			String rowTextPrefix, rowText;
 			String title = menuObject.getTitleStr();
-			String textPrefix = MenuObjectUtils.getSecondLineText(menuObject);
+			if (title.contains(":")) {
+				String[] splitTitle = title.split(":", 2);
+				rowTextPrefix = splitTitle[0];
+				rowText = Algorithms.capitalizeFirstLetter(splitTitle[1].trim());
+			} else {
+				rowTextPrefix = MenuObjectUtils.getSecondLineText(menuObject);
+				rowText = title;
+			}
 			OnClickListener onClickListener = v -> {
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
@@ -436,7 +441,7 @@ public class MenuBuilder {
 					contextMenuLayer.showContextMenu(menuObject.getLatLon(), menuObject.getPointDescription(), menuObject.getObject(), contextObject);
 				}
 			};
-			buildDetailsRow(container, null, title, textPrefix, null, null, false, onClickListener);
+			buildDetailsRow(container, null, rowText, rowTextPrefix, null, null, false, onClickListener);
 			llv.addView(container);
 		}
 		return new CollapsableView(llv, this, true);
@@ -1381,13 +1386,11 @@ public class MenuBuilder {
 	protected void buildNearestWikiRow(ViewGroup viewGroup, SearchAmenitiesListener listener) {
 		WikipediaPlugin plugin = PluginsHelper.getEnabledPlugin(WikipediaPlugin.class);
 		if (plugin != null) {
+			PoiUIFilter wikiFilter = plugin.getTopWikiPoiFilter();
 			if (plugin.isLocked()) {
 				buildGetWikipediaBanner(viewGroup);
-			} else if (showNearestWiki && latLon != null) {
-				PoiUIFilter filter = app.getPoiFilters().getTopWikiPoiFilter();
-				if (filter != null) {
-					searchSortedAmenities(filter, latLon, listener);
-				}
+			} else if (showNearestWiki && latLon != null && wikiFilter != null) {
+				searchSortedAmenities(wikiFilter, latLon, listener);
 			}
 		}
 	}

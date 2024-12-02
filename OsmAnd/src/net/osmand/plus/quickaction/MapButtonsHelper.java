@@ -18,6 +18,7 @@ import net.osmand.plus.configmap.routes.actions.*;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.ShowHideMapillaryAction;
 import net.osmand.plus.quickaction.actions.*;
+import net.osmand.plus.quickaction.actions.special.OpenWunderLINQDatagridAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.mapwidgets.configure.buttons.*;
@@ -201,7 +202,7 @@ public class MapButtonsHelper {
 	}
 
 	@NonNull
-	public List<QuickActionButtonState> getButtonsStates() {
+	public List<QuickActionButtonState> getQuickActionButtonsStates() {
 		return quickActionStates;
 	}
 
@@ -211,6 +212,13 @@ public class MapButtonsHelper {
 				compassButtonState, drawerMenuButtonState, navigationMenuButtonState,
 				map3DButtonState, myLocationButtonState, zoomInButtonState, zoomOutButtonState
 		);
+	}
+
+	@NonNull
+	public List<MapButtonState> getAllButtonsStates() {
+		List<MapButtonState> list = new ArrayList<>(getQuickActionButtonsStates());
+		list.addAll(getDefaultButtonsStates());
+		return list;
 	}
 
 	@NonNull
@@ -389,6 +397,7 @@ public class MapButtonsHelper {
 		// interface
 		allTypes.add(OpenNavigationViewAction.TYPE);
 		allTypes.add(OpenSearchViewAction.TYPE);
+		allTypes.add(OpenWunderLINQDatagridAction.TYPE);
 		allTypes.add(ShowHideDrawerAction.TYPE);
 		allTypes.add(NavigatePreviousScreenAction.TYPE);
 		allTypes.add(LockScreenAction.TYPE);
@@ -433,15 +442,17 @@ public class MapButtonsHelper {
 		return list;
 	}
 
-	public void resetQuickActionsForMode(@NonNull ApplicationMode appMode) {
-		for (QuickActionButtonState buttonState : getButtonsStates()) {
-			buttonState.resetForMode(appMode);
+	public void resetButtonStatesForMode(@NonNull ApplicationMode mode, @NonNull List<MapButtonState> states) {
+		for (MapButtonState buttonState : states) {
+			buttonState.resetToDefault(mode);
 		}
 		updateActionTypes();
 	}
 
-	public void copyQuickActionsFromMode(@NonNull ApplicationMode toAppMode, @NonNull ApplicationMode fromAppMode) {
-		for (QuickActionButtonState buttonState : getButtonsStates()) {
+	public void copyButtonStatesFromMode(@NonNull ApplicationMode toAppMode,
+	                                     @NonNull ApplicationMode fromAppMode,
+	                                     @NonNull List<MapButtonState> states) {
+		for (MapButtonState buttonState : states) {
 			buttonState.copyForMode(fromAppMode, toAppMode);
 		}
 		updateActionTypes();
@@ -587,9 +598,13 @@ public class MapButtonsHelper {
 	}
 
 	@NonNull
+	public String createNewButtonStateId() {
+		return DEFAULT_BUTTON_ID + "_" + System.currentTimeMillis();
+	}
+
+	@NonNull
 	public QuickActionButtonState createNewButtonState() {
-		String id = DEFAULT_BUTTON_ID + "_" + System.currentTimeMillis();
-		return new QuickActionButtonState(app, id);
+		return new QuickActionButtonState(app, createNewButtonStateId());
 	}
 
 	public void addQuickActionButtonState(@NonNull QuickActionButtonState buttonState) {
@@ -600,6 +615,7 @@ public class MapButtonsHelper {
 
 	public void removeQuickActionButtonState(@NonNull QuickActionButtonState buttonState) {
 		settings.QUICK_ACTION_BUTTONS.removeValue(buttonState.getId());
+		buttonState.onButtonStateRemoved();
 		updateActiveActions();
 		notifyUpdates();
 	}

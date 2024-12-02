@@ -88,14 +88,13 @@ public abstract class EditorFragment extends BaseOsmAndFragment
 		return iconName;
 	}
 
-	public void setIconName(@NonNull String iconName) {
-		this.iconName = iconName;
+	public void setIconName(@Nullable String iconName) {
+		this.iconName = iconName != null ? iconName : DEFAULT_ICON_NAME;
 	}
 
 	@DrawableRes
 	public int getIconId() {
-		int iconId = RenderingIcons.getBigIconResourceId(iconName);
-		return iconId != 0 ? iconId : DEFAULT_UI_ICON_ID;
+		return AndroidUtils.getDrawableId(app, iconName, DEFAULT_UI_ICON_ID);
 	}
 
 	public void setIcon(@DrawableRes int iconId) {
@@ -308,7 +307,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment
 	}
 
 	@Override
-	public void onIconSelectedFromPalette(@NonNull String icon) {
+	public void onIconSelectedFromPalette(@Nullable String icon) {
 		setIconName(icon);
 		updateContent();
 	}

@@ -3,8 +3,15 @@ package net.osmand.plus.views.layers;
 import static net.osmand.util.MapUtils.HIGH_LATLON_PRECISION;
 
 import android.content.Context;
-import android.graphics.*;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint.Cap;
+import android.graphics.Path;
+import android.graphics.PointF;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.LayerDrawable;
 
 import androidx.annotation.NonNull;
@@ -36,7 +43,6 @@ import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.routing.TransportRoutingHelper;
-import net.osmand.shared.routing.*;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
@@ -48,6 +54,7 @@ import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWayContext;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWay;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWayContext;
 import net.osmand.router.TransportRouteResult;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -63,15 +70,13 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	private final RoutingHelper helper;
 	private final TransportRoutingHelper transportHelper;
-	private int currentAnimatedRoute;
-	private float lastRouteBearing;
 	private Location lastRouteProjection;
-	private Location lastFixedLocation;
 
 	private final ChartPointsHelper chartPointsHelper;
 	private TrackChartPoints trackChartPoints;
 
 	private RenderingLineAttributes attrsPT;
+	private RenderingLineAttributes attrsWPT;
 	private RenderingLineAttributes attrsW;
 
 	private RouteGeometryWayContext routeWayContext;
@@ -82,6 +87,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private final ColoringTypeAvailabilityCache coloringAvailabilityCache;
 
 	private LayerDrawable projectionIcon;
+
+	private boolean isCreated;
 
 	//OpenGL
 	private final RenderState renderState = new RenderState();
@@ -125,6 +132,15 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		attrsPT.paint2.setStrokeCap(Cap.BUTT);
 		attrsPT.paint2.setColor(Color.BLACK);
 
+		attrsWPT = new RenderingLineAttributes("walkingRouteLine");
+		attrsWPT.defaultWidth = (int) (12 * density);
+		attrsWPT.defaultWidth3 = (int) (7 * density);
+		attrsWPT.defaultColor = ContextCompat.getColor(getContext(), R.color.nav_track_walk_fill);
+		attrsWPT.paint3.setStrokeCap(Cap.BUTT);
+		attrsWPT.paint3.setColor(Color.WHITE);
+		attrsWPT.paint2.setStrokeCap(Cap.BUTT);
+		attrsWPT.paint2.setColor(Color.BLACK);
+
 		attrsW = new RenderingLineAttributes("walkingRouteLine");
 		attrsW.defaultWidth = (int) (12 * density);
 		attrsW.defaultWidth3 = (int) (7 * density);
@@ -138,7 +154,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	@Override
 	protected void initGeometries(float density) {
 		routeWayContext = new RouteGeometryWayContext(getContext(), density);
-		routeWayContext.updatePaints(nightMode, attrs);
+		routeWayContext.updatePaints(nightMode, attrs, attrsW);
 		routeGeometry = new RouteGeometryWay(routeWayContext);
 		routeGeometry.baseOrder = getBaseOrder();
 
@@ -173,7 +189,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		MapRendererView mapRenderer = getMapRenderer();
 		if ((helper.isPublicTransportMode() && transportHelper.getRoutes() != null) ||
 				(helper.getFinalLocation() != null && helper.getRoute().isCalculated())) {
-
+			isCreated = true;
 			updateRouteColoringType();
 			updateAttrs(settings, tileBox);
 			updateRouteColors(nightMode);
@@ -188,7 +204,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				}
 				drawXAxisPointsOpenGl(trackChartPoints, mapRenderer, tileBox);
 			}
-		} else {
+		} else if (isCreated) {
+			isCreated = false;
 			resetLayer();
 		}
 		mapActivityInvalidated = false;
@@ -213,10 +230,6 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		QuadRect correctedQuadRect = getCorrectedQuadRect(latlonRect);
 		drawLocations(tileBox, canvas, correctedQuadRect.top, correctedQuadRect.left,
 				correctedQuadRect.bottom, correctedQuadRect.right);
-	}
-
-	public float getLastRouteBearing() {
-		return lastRouteBearing;
 	}
 
 	@Nullable
@@ -330,15 +343,19 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		attrsPT.updatePaints(view.getApplication(), settings, tileBox);
 		attrsPT.isPaint3 = false;
 		attrsPT.isPaint2 = false;
-		attrsW.updatePaints(view.getApplication(), settings, tileBox);
+		attrsWPT.updatePaints(view.getApplication(), settings, tileBox);
 		attrsPT.isPaint3 = false;
 		attrsPT.isPaint2 = false;
+		attrsW.updatePaints(view.getApplication(), settings, tileBox);
+		float routeLineWidth = getRouteLineWidth(tileBox);
+		updatePaints |= attrsW.paint.getStrokeWidth() != routeLineWidth;
+		attrsW.paint.setStrokeWidth(routeLineWidth);
 
 		nightMode = settings != null && settings.isNightMode();
 
 		if (updatePaints) {
-			routeWayContext.updatePaints(nightMode, attrs);
-			publicTransportWayContext.updatePaints(nightMode, attrs, attrsPT, attrsW);
+			routeWayContext.updatePaints(nightMode, attrs, attrsW);
+			publicTransportWayContext.updatePaints(nightMode, attrs, attrsPT, attrsWPT);
 		}
 	}
 
@@ -446,27 +463,19 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 							routeColoringType : ColoringType.DEFAULT;
 			int routeLineColor = getRouteLineColor();
 			float routeLineWidth = getRouteLineWidth(tb);
-			boolean shouldShowDirectionArrows = previewRouteLineInfo == null
-					|| previewRouteLineInfo.shouldShowDirectionArrows();
+			boolean shouldShowDirectionArrows = shouldShowDirectionArrows();
 			routeGeometry.setRouteStyleParams(routeLineColor, routeLineWidth, shouldShowDirectionArrows,
-					directionArrowsColor, actualColoringType, routeInfoAttribute, routeGradientPalette);
+					getDirectionArrowsColor(), actualColoringType, routeInfoAttribute, routeGradientPalette);
 			boolean routeUpdated = routeGeometry.updateRoute(tb, route);
 			boolean shouldShowTurnArrows = shouldShowTurnArrows();
 
-			if (routeUpdated) {
-				currentAnimatedRoute = 0;
-			}
 			Location lastProjection;
-			float lastBearing;
 			int startLocationIndex;
 			if (directTo) {
 				lastProjection = null;
-				lastBearing = 0.0f;
 				startLocationIndex = 0;
 			} else if (route.getCurrentStraightAngleRoute() > 0) {
 				Location lastFixedLocation = helper.getLastFixedLocation();
-				boolean lastFixedLocationChanged = !MapUtils.areLatLonEqual(this.lastFixedLocation, lastFixedLocation);
-				this.lastFixedLocation = lastFixedLocation;
 				Location currentLocation = new Location(lastFixedLocation);
 				MapRendererView mapRenderer = getMapRenderer();
 				OsmandApplication app = getApplication();
@@ -488,45 +497,41 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 					currentLocation.setLongitude(tb.getLongitude());
 				}
 				List<Location> locations = route.getImmutableAllLocations();
-				float posTolerance = RoutingHelper.getPosTolerance(currentLocation.hasAccuracy()
-						? currentLocation.getAccuracy() : 0);
-				int currentAnimatedRoute = helper.calculateCurrentRoute(currentLocation, posTolerance,
-						locations, this.currentAnimatedRoute, false);
-				// calculate projection of current location
-
-				if (currentAnimatedRoute > 0) {
-					Location previousRouteLocation = locations.get(currentAnimatedRoute - 1);
-					Location currentRouteLocation = locations.get(currentAnimatedRoute);
-					lastProjection = RoutingHelperUtils.getProject(
-							currentLocation, previousRouteLocation, currentRouteLocation);
-					if (Algorithms.objectEquals(previousRouteLocation, currentRouteLocation)) {
-						lastBearing = currentRouteLocation.getBearing();
-					} else {
-						lastBearing = MapUtils.normalizeDegrees360(previousRouteLocation.bearingTo(currentRouteLocation));
+				int currentRoute = route.getCurrentRoute();
+				if (currentRoute > 0) {
+					Location previousRouteLocation = locations.get(currentRoute - 1);
+					Location currentRouteLocation = locations.get(currentRoute);
+					while (currentRoute > 1) {
+						double projCoeff = MapUtils.getProjectionCoeff(currentLocation.getLatitude(), currentLocation.getLongitude(),
+								previousRouteLocation.getLatitude(), previousRouteLocation.getLongitude(),
+								currentRouteLocation.getLatitude(), currentRouteLocation.getLongitude());
+						if (projCoeff != 0) {
+							break;
+						}
+						currentRoute--;
+						previousRouteLocation = locations.get(currentRoute - 1);
+						currentRouteLocation = locations.get(currentRoute);
 					}
-					if (app.getSettings().SNAP_TO_ROAD.get() && currentAnimatedRoute + 1 < locations.size()) {
-						Location nextRouteLocation = locations.get(currentAnimatedRoute + 1);
-						RoutingHelperUtils.approximateBearingIfNeeded(helper,
-								lastProjection, currentLocation,
-								previousRouteLocation, currentRouteLocation, nextRouteLocation);
+					lastProjection = RoutingHelperUtils.getProject(currentLocation, previousRouteLocation, currentRouteLocation);
+					float calcbearing = !MapUtils.areLatLonEqual(previousRouteLocation, currentRouteLocation) ? previousRouteLocation.bearingTo(currentRouteLocation) :
+							previousRouteLocation.bearingTo(currentLocation);
+					lastProjection.setBearing(MapUtils.normalizeDegrees360(calcbearing));
+					if (currentLocation.distanceTo(lastProjection) > helper.getMaxAllowedProjectDist(currentLocation)) {
+						lastProjection = null;
+					} else if (app.getSettings().SNAP_TO_ROAD.get() && currentRoute + 1 < locations.size()) {
+						// Not needed here as this code for preview turns
+//						Location nextRouteLocation = locations.get(currentRoute + 1);
+//						RoutingHelperUtils.approximateBearingIfNeeded(helper, lastProjection, currentLocation,
+//								previousRouteLocation, currentRouteLocation, nextRouteLocation, true);
 					}
 				} else {
 					lastProjection = null;
-					lastBearing = 0.0f;
 				}
-				startLocationIndex = currentAnimatedRoute;
-				if (lastFixedLocationChanged) {
-					if (currentAnimatedRoute > route.getCurrentRoute() + 1) {
-						currentAnimatedRoute = route.getCurrentRoute();
-					}
-					this.currentAnimatedRoute = currentAnimatedRoute;
-				}
+				startLocationIndex = currentRoute;
 			} else {
 				lastProjection = straight || routeUpdated ? helper.getLastFixedLocation() : helper.getLastProjection();
-				lastBearing = lastProjection != null ? lastProjection.getBearing() : lastRouteBearing;
 				startLocationIndex = route.getCurrentStraightAngleRoute();
 			}
-			lastRouteBearing = lastBearing;
 			lastRouteProjection = lastProjection;
 			boolean draw = true;
 			if (routeGeometry.hasMapRenderer()) {
@@ -643,11 +648,14 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			DISTANCE_ACTION = 110;
 		}
 		double actionDist = 0;
-		Location previousAction = null; 
+		Location previousAction = null;
 		List<ActionPoint> actionPoints = new ArrayList<>();
 		int prevFinishPoint = -1;
 		for (int routePoint = 0; routePoint < routeNodes.size(); routePoint++) {
 			Location loc = routeNodes.get(routePoint);
+			if (RouteCalculationResult.FIRST_LAST_LOCATION_PROVIDER.equals(loc.getProvider())) {
+				continue;
+			}
 			if (nf != null) {
 				int pnt = nf.routeEndPointOffset == 0 ? nf.routePointOffset : nf.routeEndPointOffset;
 				if(pnt < routePoint + cd ) {
@@ -912,14 +920,16 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		                             int currentRoute, int zoom,
 		                             boolean shouldShowTurnArrows, boolean shouldShowDirectionArrows) {
 			this.shouldRebuildRoute = this.coloringType != coloringType
-					|| this.routeColor != routeColor;
+					|| this.routeColor != routeColor
+					|| this.routeWidth != routeWidth
+					|| this.shouldShowDirectionArrows != shouldShowDirectionArrows;
 
 			this.shouldUpdateRoute = (!MapUtils.areLatLonEqual(this.lastProjection, lastProjection, HIGH_LATLON_PRECISION)
-					|| this.startLocationIndex != startLocationIndex
-					|| this.routeWidth != routeWidth
-					|| this.shouldShowDirectionArrows != shouldShowDirectionArrows)
+					|| this.startLocationIndex != startLocationIndex)
 					&& this.coloringType == coloringType
-					&& this.routeColor == routeColor;
+					&& this.routeColor == routeColor
+					&& this.routeWidth == routeWidth
+					&& this.shouldShowDirectionArrows == shouldShowDirectionArrows;
 
 			this.shouldUpdateActionPoints = this.shouldRebuildRoute
 					|| this.shouldUpdateRoute

@@ -70,7 +70,7 @@ public class WidgetsSettingsHelper {
 		settings.TRANSPARENT_MAP_THEME.resetModeToDefault(appMode);
 		mapButtonsHelper.getCompassButtonState().getVisibilityPref().resetModeToDefault(appMode);
 		settings.SHOW_DISTANCE_RULER.resetModeToDefault(appMode);
-		mapButtonsHelper.resetQuickActionsForMode(appMode);
+		mapButtonsHelper.resetButtonStatesForMode(appMode, mapButtonsHelper.getAllButtonsStates());
 	}
 
 	public void copyConfigureScreenSettings(@NonNull ApplicationMode fromAppMode) {
@@ -84,7 +84,7 @@ public class WidgetsSettingsHelper {
 		copyPrefFromAppMode(settings.DISTANCE_BY_TAP_TEXT_SIZE, fromAppMode);
 		copyPrefFromAppMode(settings.SHOW_SPEEDOMETER, fromAppMode);
 		copyPrefFromAppMode(settings.SPEEDOMETER_SIZE, fromAppMode);
-		mapButtonsHelper.copyQuickActionsFromMode(settings.getApplicationMode(), fromAppMode);
+		mapButtonsHelper.copyButtonStatesFromMode(appMode, fromAppMode, mapButtonsHelper.getAllButtonsStates());
 	}
 
 	public void copyWidgetsForPanel(@NonNull ApplicationMode fromAppMode, @NonNull WidgetsPanel panel) {

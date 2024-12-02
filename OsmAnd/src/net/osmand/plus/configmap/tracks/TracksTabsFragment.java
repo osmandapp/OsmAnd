@@ -25,6 +25,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
+import net.osmand.IndexConstants;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -228,7 +229,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 				selectionButton.setEnabled(!Algorithms.isEmpty(itemsSelectionHelper.getSelectedItems()) || notAllSelected);
 			}
 			applyButton.setEnabled(itemsSelectionHelper.hasItemsToApply());
-			TrackTab allTracksTab = trackTabsHelper.getTrackTabs().get(TrackTabType.ALL.name());
+			TrackTab allTracksTab = trackTabsHelper.getTrackTab(TrackTabType.ALL.name());
 			searchButton.setVisibility(allTracksTab == null ? View.GONE : View.VISIBLE);
 		}
 	}
@@ -262,7 +263,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 
 	@Override
 	public void loadTracksFinished(@NonNull TrackFolder folder) {
-		trackTabsHelper.updateTrackItems(folder.getFlattenedTrackItems());
+		trackTabsHelper.updateTrackItems(folder);
 		AndroidUiHelper.updateVisibility(progressBar, false);
 		updateTrackTabs();
 		applyPreselectedParams();
@@ -277,10 +278,10 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 
 	private void applyPreselectedParams() {
 		if (preselectedTabParams != null) {
-			String tabName = preselectedTabParams.getPreselectedTabName(app, getTrackTabs());
-			TrackTab trackTab = getTab(tabName);
+			String tabId = preselectedTabParams.getPreselectedTabId();
+			TrackTab trackTab = getTab(tabId);
 			if (trackTab != null) {
-				setSelectedTab(tabName);
+				setSelectedTab(tabId);
 
 				if (preselectedTabParams.shouldSelectAll()) {
 					itemsSelectionHelper.onItemsSelected(trackTab.getTrackItems(), true);

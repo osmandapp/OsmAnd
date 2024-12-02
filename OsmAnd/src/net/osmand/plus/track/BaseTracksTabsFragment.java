@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
@@ -61,7 +62,6 @@ import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -108,20 +108,20 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		importHelper = app.getImportHelper();
-		trackTabsHelper = new TrackTabsHelper(app);
+		trackTabsHelper = createTrackTabsHelper(app);
 		gpxSelectionHelper = app.getSelectedGpxHelper();
 		itemsSelectionHelper = trackTabsHelper.getItemsSelectionHelper();
 	}
 
 	protected void setupTabLayout(@NonNull View view) {
 		viewPager = view.findViewById(R.id.view_pager);
-		List<TrackTab> tabs = getTrackTabs();
+		List<TrackTab> tabs = getSortedTrackTabs();
 		tabLayout = view.findViewById(R.id.sliding_tabs);
 		tabLayout.setTabBackground(nightMode ? R.color.app_bar_main_dark : R.color.card_and_list_background_light);
 		tabLayout.setCustomTabProvider(new PagerSlidingTabStrip.CustomTabProvider() {
 			@Override
 			public View getCustomTabView(@NonNull ViewGroup parent, int position) {
-				TrackTab trackTab = getTrackTabs().get(position);
+				TrackTab trackTab = getSortedTrackTabs().get(position);
 
 				int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 				int textColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
@@ -132,7 +132,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 				TextView textView = customView.findViewById(android.R.id.text1);
 				textView.setPadding(sidePadding, textView.getPaddingTop(), sidePadding, textView.getPaddingBottom());
 				textView.setTextColor(AndroidUtils.createColorStateList(android.R.attr.state_selected, activeColor, textColor));
-				textView.setText(trackTab.getName(app));
+				textView.setText(trackTab.getName());
 				return customView;
 			}
 
@@ -155,26 +155,41 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 	}
 
 	@NonNull
+	protected TrackTabsHelper createTrackTabsHelper(@NonNull OsmandApplication app) {
+		return new TrackTabsHelper(app);
+	}
+
+	@NonNull
 	public List<TrackTab> getTrackTabs() {
-		return new ArrayList<>(trackTabsHelper.getTrackTabs().values());
+		return trackTabsHelper.getTrackTabs();
+	}
+
+	@NonNull
+	public List<TrackTab> getSortedTrackTabs() {
+		return getSortedTrackTabs(false);
+	}
+
+	@NonNull
+	public List<TrackTab> getSortedTrackTabs(boolean useSubdirs) {
+		return trackTabsHelper.getSortedTrackTabs(useSubdirs);
 	}
 
 	protected void setViewPagerAdapter(@NonNull ViewPager pager, List<TrackTab> items) {
-		adapter = new TracksTabAdapter(app, getChildFragmentManager(), items);
+		adapter = new TracksTabAdapter(getChildFragmentManager(), items);
 		pager.setAdapter(adapter);
 	}
 
 	@Nullable
 	public TrackTab getSelectedTab() {
-		List<TrackTab> trackTabs = getTrackTabs();
+		List<TrackTab> trackTabs = getSortedTrackTabs();
 		return trackTabs.isEmpty() ? null : trackTabs.get(viewPager.getCurrentItem());
 	}
 
-	public void setSelectedTab(@NonNull String name) {
-		List<TrackTab> trackTabs = getTrackTabs();
+	public void setSelectedTab(@NonNull String id) {
+		List<TrackTab> trackTabs = getSortedTrackTabs();
 		for (int i = 0; i < trackTabs.size(); i++) {
 			TrackTab tab = trackTabs.get(i);
-			if (Algorithms.stringsEqual(tab.getTypeName(), name)) {
+			if (Algorithms.stringsEqual(tab.getId(), id)) {
 				viewPager.setCurrentItem(i);
 				break;
 			}
@@ -182,9 +197,9 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 	}
 
 	@Nullable
-	public TrackTab getTab(@NonNull String name) {
+	public TrackTab getTab(@NonNull String id) {
 		for (TrackTab trackTab : getTrackTabs()) {
-			if (Algorithms.stringsEqual(name, trackTab.getTypeName())) {
+			if (Algorithms.stringsEqual(id, trackTab.getId())) {
 				return trackTab;
 			}
 		}
@@ -209,7 +224,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 	@Override
 	public void onResume() {
 		super.onResume();
-		List<TrackTab> tabs = getTrackTabs();
+		List<TrackTab> tabs = getSortedTrackTabs();
 		if (tabs.size() != tabSize) {
 			setTabs(tabs);
 		}
@@ -238,7 +253,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 	}
 
 	protected void updateTrackTabs() {
-		adapter.setTrackTabs(trackTabsHelper.getTrackTabs());
+		adapter.setTrackTabs(trackTabsHelper.getSortedTrackTabs(false));
 	}
 
 	@Override

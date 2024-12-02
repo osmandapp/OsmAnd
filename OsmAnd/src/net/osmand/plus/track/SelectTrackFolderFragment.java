@@ -181,7 +181,7 @@ public class SelectTrackFolderFragment extends BaseOsmAndDialogFragment implemen
 	}
 
 	private TrackTab getUpdatedTrackTab() {
-		TrackTab trackTab = new TrackTab(TrackTabType.FOLDERS);
+		TrackTab trackTab = new TrackTab(app, TrackTabType.FOLDERS);
 		List<TrackFolder> subFolders = currentTrackFolder.getSubFolders();
 		List<TrackItem> trackItems = currentTrackFolder.getTrackItems();
 		if (Algorithms.isEmpty(subFolders) && Algorithms.isEmpty(trackItems)) {

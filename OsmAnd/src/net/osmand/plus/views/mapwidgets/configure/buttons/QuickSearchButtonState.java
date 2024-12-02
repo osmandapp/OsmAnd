@@ -4,6 +4,8 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.QUICK_SEARCH_HUD_I
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.SMALL_SIZE_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.TRANSPARENT_ALPHA;
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_LEFT;
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_TOP;
 
 import androidx.annotation.NonNull;
 
@@ -11,6 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 
 public class QuickSearchButtonState extends MapButtonState {
 
@@ -18,7 +21,7 @@ public class QuickSearchButtonState extends MapButtonState {
 
 	public QuickSearchButtonState(@NonNull OsmandApplication app) {
 		super(app, QUICK_SEARCH_HUD_ID);
-		this.visibilityPref = settings.registerBooleanPreference(id + "_state", true).makeProfile();
+		this.visibilityPref = addPreference(settings.registerBooleanPreference(id + "_state", true)).makeProfile();
 	}
 
 	@NonNull
@@ -49,9 +52,20 @@ public class QuickSearchButtonState extends MapButtonState {
 		return R.layout.map_search_button;
 	}
 
+	@Override
+	public int getDefaultSize() {
+		return SMALL_SIZE_DP;
+	}
+
 	@NonNull
 	@Override
-	public ButtonAppearanceParams createDefaultAppearanceParams() {
-		return new ButtonAppearanceParams("ic_action_search_dark", SMALL_SIZE_DP, TRANSPARENT_ALPHA, ROUND_RADIUS_DP);
+	public String getDefaultIconName() {
+		return "ic_action_search_dark";
+	}
+
+	@NonNull
+	@Override
+	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position) {
+		return setupButtonPosition(position, POS_LEFT, POS_TOP, true, false);
 	}
 }

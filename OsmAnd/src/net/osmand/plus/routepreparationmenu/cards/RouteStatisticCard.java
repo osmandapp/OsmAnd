@@ -15,7 +15,6 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.github.mikephil.charting.charts.ElevationChart;
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
@@ -197,7 +196,7 @@ public class RouteStatisticCard extends MapBaseCard {
 
 	private void buildHeader(GpxTrackAnalysis analysis) {
 		ElevationChart mChart = view.findViewById(R.id.chart);
-		ChartUtils.setupElevationChart(mChart, 24f, 16f, true);
+		ChartUtils.setupElevationChart(mChart);
 		graphAdapter = new CommonChartAdapter(app, mChart, true);
 
 		if (analysis.hasElevationData()) {

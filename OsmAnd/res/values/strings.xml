@@ -10,8 +10,134 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="shared_string_engine">Engine</string>
+    <string name="vehicle_metrics_recording_description">Select the parameters to be recorded in the GPX file.</string>
+    <string name="auto_zoom_3d_angle">Auto zoom 3D angle</string>
+    <string name="av_audio_sample_rate">Audio sample rate</string>
+    <string name="av_audio_sample_rate_descr">Select audio sample rate.</string>
+    <string name="connect_new_scanner">Connect new scanner</string>
+    <string name="release_5_0" translatable="false"></string>
+    <string name="preview_next_turn">Preview next turn</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Track vital vehicle data using the OBD-II protocol. Monitor key metrics like speed, engine RPM, fuel consumption, and more.</string>
+    <string name="vehicle_metrics_obd_ii">Vehicle Metrics (OBD-II)</string>
+	<string name="shared_string_hour">Hour</string>
+	<string name="ltr_or_rtl_combine_via_per">%1$s per %2$s</string>
+	<string name="shared_string_volume">Volume</string>
+	<string name="obd_engine_runtime_desc">Shows shows how long the engine has been running since it was started.</string>
+	<string name="obd_engine_runtime">Engine Runtime</string>
+	<string name="obd_battery_voltage_desc">Shows the voltage level of the vehicle\'s battery</string>
+	<string name="obd_fuel_pressure_desc">Shows the pressure within the fuel system</string>
+	<string name="obd_throttle_position">Throttle Position</string>
+	<string name="obd_throttle_position_desc">Shows the angle of the throttle plate in the throttle body.</string>
+	<string name="obd_calculated_engine_load_desc">Shows the percentage of the engine’s available power being used at a given moment.</string>
+	<string name="obd_calculated_engine_load">Calculated Engine Load</string>
+	<string name="obd_engine_coolant_temp_desc">Shows the temperature of the engine’s coolant</string>
+	<string name="obd_speed_desc">Shows speed from the Vehicle Speed Sensor (VSS).</string>
+	<string name="obd_engine_oil_temperature_desc">Shows the temperature of the engine oil.</string>
+	<string name="obd_engine_oil_temperature">Engine Oil Temperature</string>
+	<string name="obd_ambient_air_temp_desc">Shows the temperature outside the vehicle.</string>
+	<string name="obd_air_intake_temp_desc">Shows the temperature of the air entering the engine intake manifold.</string>
+	<string name="obd_fuel_consumption_rate_sensor_type">Use selected units in name.</string>
+	<string name="remaining_fuel_description">Shows the amount of fuel left in the vehicle\'s tank</string>
+	<string name="remaining_fuel">Remaining fuel</string>
+	<string name="obd_fuel_consumption_desc">Shows the rate of fuel usage by the engine, calculated based on remaining fuel, tank size, and distance covered as determined by GPS.</string>
+	<string name="obd_fuel_consumption">Fuel consumption</string>
+	<string name="reset_average_value">Reset average value</string>
+	<string name="average_value_slider_description">Select the time interval for measuring the average value.</string>
+	<string name="average_temperature_slider_description">Select the time interval for measuring the average temperature.</string>
+	<string name="shared_string_instant">Instant</string>
+	<string name="current_temperature">Current temperature</string>
+	<string name="average_temperature">Average temperature</string>
+    <string name="show_minor_turns_descr">Lanes will be displayed on all passing intersections regardless voice instructions</string>
+    <string name="show_minor_turns">Display on minor intersections when navigating straight</string>
+    <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
+    <string name="fuel_tank_capacity_description">Enter your tank capacity to accurately track fuel levels and consumption</string>
+    <string name="fuel_tank_capacity">Fuel tank capacity</string>
+    <string name="shared_strings_dimensions">Dimensions</string>
+    <string name="litres">Litres</string>
+    <string name="us_gallons_unit">gal</string>
+    <string name="imperial_gallons">Imperial gallons</string>
+    <string name="us_gallons">US gallons</string>
+    <string name="unit_of_volume_description">Selected units will be applied to all volume-related data in the current profile.</string>
+    <string name="unit_of_volume">Unit of volume</string>
+    <string name="record_obd_data">Record vehicle metrics</string>
+    <string name="dynamic_icon_type_summary">Icon changes based on action state.</string>
+    <string name="shared_string_dynamic">Dynamic</string>
+    <string name="obd_connected_to_device">Connected to %s</string>
+    <string name="obd_not_connected_to_device">Disconnected from %s</string>
+    <string name="obd_connecting_to_device">Connecting to %s</string>
+    <string name="bt_start_pair_failed">Can\'t initiate pairing with device</string>
+    <string name="speedometer_maximum">Maximum</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">Shows vehicle fuel consumption rate based on calculations (%/h)</string>
+    <string name="l_100km">L/100km</string>
+    <string name="obd_fuel_consumption_rate_l_km">Fuel consumption rate (L/100 km)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Shows vehicle fuel consumption rate based on calculations (L/100 km)</string>
+    <string name="simulate_obd">Simulate obd data</string>
+    <string name="kpa_unit">kPa</string>
+    <string name="obd_fuel_pressure">Fuel pressure</string>
+    <string name="liter">l</string>
+    <string name="percent_hour">%/h</string>
+    <string name="obd_fuel_consumption_rate_l_h">Fuel consumption rate (L/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor">Fuel consumption rate (sensor)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Shows vehicle fuel consumption rate based on calculations (L/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Shows vehicle fuel consumption rate based on sensor (L/h)</string>
+
+    <string name="obd_fuel_level_liter">Fuel level (l)</string>
+    <string name="obd_fuel_level_percent">Fuel level (%)</string>
+    <string name="obd_fuel_left_km">Fuel left (km)</string>
+    <string name="obd_fuel_consumption_rate_scanner">Fuel consumption rate (obd)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Fuel consumption rate</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">Fuel consumption rate %/h</string>
+
+    <string name="route_guidance_desc">Provides real-time route guidance, including distance to the next turn, road name, current street name, and lane information. Widgets are active during navigation.</string>
+	<string name="route_guidance">Route guidance</string>
+    <string name="obd_widget_vehicle_speed">Vehicle speed</string>
+    <string name="obd_widget_engine_speed">Engine speed</string>
+    <string name="obd_nothing_found_description">Please check the following:\n
+– Ensure Bluetooth is turned on\n
+– Vehicle engine is running\n
+– Make sure your device is within range of the scanner.</string>
+    <string name="obd_nothing_found_text">No scanners found</string>
+    <string name="obd_bluetooth_off_description">Turn on Bluetooth find and connect scanners.</string>
+    <string name="obd_searching_text_description">Please keep your device close to the scanner. Ensure the vehicle\'s engine is running.</string>
+    <string name="obd_searching_text">Searching for scanners</string>
+    <string name="obd_device_forget_sensor">Forget scanner</string>
+    <string name="obd_device_forget_sensor_description">Scanner will be removed from the list.
+You will be able to pair this scanner again at any time.</string>
+    <string name="shared_string_bluetooth">Bluetooth</string>
+    <string name="obd_vehicle_info">Vehicle info</string>
+    <string name="connect_obd_instructions_title">OsmAnd supports Bluetooth connections to OBD-II scanners.</string>
+    <string name="obd_how_to_connect">How to connect:</string>
+    <string name="connect_obd_instructions_step">1. Connect the scanner to your vehicle\'s OBD-II port.\n\n
+2. Turn on your vehicle\'s engine\n\n
+3. Enable Bluetooth on your device\n\n
+4. Tap \'%1$s\' and select your scanner from the list.</string>
+    <string name="connect_obd_instructions_step1">Connect the scanner to your vehicle\'s OBD-II port.</string>
+    <string name="connect_obd_instructions_step2">Turn on your vehicle\'s engine</string>
+    <string name="connect_obd_instructions_step3">Enable Bluetooth on your device</string>
+    <string name="connect_obd_instructions_step4">Tap \'%1$s,\' and select your scanner from the list.</string>
+    <string name="learn_more_about_obd_sensors">Learn more about sensors.</string>
+    <string name="screen_is_locked_by_external_button">Touch screen is locked. To unlock, press the "%1$s" button, or tap the on-screen button.</string>
+    <string name="screen_is_unlocked">Touch screen is unlocked.</string>
+    <string name="screen_is_locked_by_action_button">Touch screen is locked. Tap on button to unlock.</string>
+    <string name="release_4_9">
+        • Added a full-screen gallery viewer for Wikimedia images\n\n
+        • Introduced a new plugin \"Vehicle Metrics\" to monitor vehicle performance using the OBD-II protocol\n\n
+        • Added the ability to assign activities to tracks and filter them accordingly\n\n
+        • Implemented new quick actions for trip recording and touchscreen lock\n\n
+        • Introduced customizable map button appearance and a precise grid\n\n
+        • Added a context menu and a \"Reset average speed\" action to widgets\n\n
+        • Added new route layer \"Dirt Bike trails\"\n\n
+        • Fixed \"Auto-record track during navigation\"\n\n
+        • Fixed issue with flipped coordinates in RTL\n\n
+        • Fixed missed sensor data for currently recording track\n\n
+        • Added information about surrounding areas for the selected point\n\n
+        • Added quick action to control visibility of OSM Edits\n\n
+        • Separated visibility parameters for Terrain colorization options\n\n
+        • Added a tappable icon to display access or other road or path attributes\n\n
+    </string>
     <string name="quick_action_showhide_osm_edits_descr">Button to show or hide local OSM edits on the map.</string>
-	<string name="liter_per_hour">l/h</string>
+	<string name="liter_per_hour">L/h</string>
 	<string name="lock_screen_description">Enables or disables touch screen functionality to prevent accidental taps</string>
 	<string name="lock_screen">Lock screen</string>
     <string name="track_does_not_contain_data_to_save">Track doesn\'t contain data to save.</string>
@@ -50,7 +176,7 @@
     <string name="map_3d_mode_action_descr">Change map tilt.</string>
     <string name="drawer_button_description">Opens the main menu.</string>
     <string name="configure_map_description">Change map style, layers, or other settings.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Show dirt bike trails</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Dirt bike trails</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Show dirt bike trails</string>
     <string name="type_of_activity">Type of activity</string>
     <string name="change_activity">Change activity</string>
@@ -86,30 +212,28 @@
     <string name="obd_widget_group">Vehicle Metrics</string>
     <string name="vehicle_metrics_plugin_settings">Vehicle Metrics settings</string>
     <string name="percent_unit">%</string>
-    <string name="obd_rpm">RPM</string>
     <string name="rpm_unit">rpm</string>
-    <string name="obd_speed_desc">Shows vehicle speed over OBD sensor</string>
     <string name="obd_rpm_desc">Shows vehicle tachometer RPM over OBD sensor</string>
-    <string name="obd_air_intake_temp_desc">Shows vehicle intake air temperature over OBD sensor</string>
-    <string name="obd_ambient_air_temp_desc">Shows ambient air temperature over OBD sensor</string>
-    <string name="obd_engine_coolant_temp_desc">Shows engine coolant temperature over OBD sensor</string>
-    <string name="obd_battery_voltage_desc">Shows battery voltage over OBD sensor</string>
     <string name="obd_fuel_level_desc">Shows vehicle fuel level over OBD sensor</string>
     <string name="obd_fuel_left_distance_desc">Shows distance vehicle can drive on left fuel level over OBD sensor</string>
     <string name="obd_fuel_type_desc">Shows vehicle fuel type over OBD sensor</string>
-    <string name="obd_air_intake_temp">Intake air temperature</string>
-    <string name="obd_ambient_air_temp">Ambient air temperature</string>
+    <string name="obd_air_intake_temp">Intake temperature</string>
+    <string name="obd_ambient_air_temp">Ambient temperature</string>
     <string name="obd_battery_voltage">Battery voltage</string>
-    <string name="obd_engine_coolant_temp">Engine coolant temperature</string>
-    <string name="obd_fuel_level">Fuel level</string>
+    <string name="obd_engine_coolant_temp">Coolant temperature</string>
+    <string name="obd_fuel_level">Fuel Efficiency (%)</string>
     <string name="obd_fuel_consumption_rate">Fuel consumption rate</string>
     <string name="obd_fuel_consumption_rate_desc">Shows vehicle fuel consumption rate based on OBD an location</string>
-    <string name="obd_fuel_left_distance">Fuel left (distance)</string>
+    <string name="obd_fuel_left_liters">Fuel left (liters)</string>
     <string name="obd_fuel_type">Fuel type</string>
 
 
     <string name="obd_plugin_name">Vehicle Metrics</string>
-    <string name="obd_plugin_description">Accesses you vehicle information over OBD protocol</string>
+    <string name="obd_plugin_description">Monitor key vehicle metrics using the OBD-II protocol. Access data including:\n
+    • Engine speed, Engine Runtime, Calculated Engine Load \n
+    • Fuel consumption, Fuel pressure, Remaining fuel\n
+    • Intake temperature, Ambient temperature, Coolant temperature, Engine Oil Temperature\n
+    • Vehicle speed, Throttle Position, Battery voltage\n</string>
     <string name="obd_support">OBD support</string>
     <string name="background_opacity">Background opacity</string>
     <string name="corner_radius">Corner radius</string>
@@ -203,7 +327,6 @@
     <string name="quick_action_verb_turn_on_off">Turn On / Off</string>
     <string name="quick_action_verb_start_stop">Start / Stop</string>
     <string name="weather_screen">Weather screen</string>
-
     <string name="shared_string_all_icons">All icons</string>
     <string name="profile_icon">Profile icon</string>
     <string name="navigation_position_icon_summary">Icon displayed while you\'re navigating or moving.</string>
@@ -4277,8 +4400,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="rendering_attr_buildings15zoom_name">Buildings on zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">More details</string>
     <string name="rendering_attr_lessDetailed_name">Fewer details</string>
-    <string name="rendering_attr_hideAccess_name">Access restrictions</string>
-    <string name="rendering_attr_showAccess_name">Show access and toll restrictions</string>
+    <string name="rendering_attr_showAccess_name">Show access restrictions</string>
     <string name="rendering_attr_showSurfaceGrade_name">Show road quality</string>
     <string name="rendering_attr_showSurfaces_name">Show road surface</string>
     <string name="rendering_attr_showCycleRoutes_name">Cycle routes</string>

@@ -198,7 +198,7 @@ public class OsmandMap {
 			} else {
 				tileBoxHeightPx = tb.getPixHeight() - leftBottomPaddingPx;
 			}
-			getMapView().fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, 0);
+			getMapView().fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, AndroidUtils.getStatusBarHeight(app));
 		}
 	}
 }

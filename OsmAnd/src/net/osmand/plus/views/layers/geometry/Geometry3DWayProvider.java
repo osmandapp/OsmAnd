@@ -4,14 +4,15 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.views.layers.geometry.GeometryWay.GeometryWayProvider;
 import net.osmand.shared.routing.RouteColorize;
+import net.osmand.shared.routing.RouteColorize.RouteColorizationPoint;
 
 import java.util.List;
 
 public class Geometry3DWayProvider implements GeometryWayProvider {
 
-	private final List<RouteColorize.RouteColorizationPoint> points;
+	private final List<RouteColorizationPoint> points;
 
-	public Geometry3DWayProvider(@NonNull List<RouteColorize.RouteColorizationPoint> points) {
+	public Geometry3DWayProvider(@NonNull List<RouteColorizationPoint> points) {
 		this.points = points;
 	}
 
@@ -36,6 +37,11 @@ public class Geometry3DWayProvider implements GeometryWayProvider {
 	@Override
 	public float getHeight(int index) {
 		return (float) points.get(index).getValue();
+	}
+
+	@Override
+	public boolean isFirstLastLocation(int index) {
+		return false;
 	}
 
 	@Override

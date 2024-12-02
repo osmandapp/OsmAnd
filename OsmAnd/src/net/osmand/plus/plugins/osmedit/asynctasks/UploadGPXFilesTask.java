@@ -8,35 +8,49 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.osmedit.OsmEditingPlugin.UploadVisibility;
+import net.osmand.plus.plugins.osmedit.UploadVisibility;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapRemoteUtil;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxDbHelper;
+import net.osmand.shared.gpx.GpxParameter;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class UploadGPXFilesTask extends AsyncTask<File, String, String> {
 
 	private final OsmandApplication app;
+	private final GpxDbHelper gpxDbHelper;
+	private final OpenstreetmapRemoteUtil remoteUtil;
 	private final WeakReference<Activity> activityRef;
 
-	private final String tags;
+	private final String commonTags;
 	private final String visibility;
 	private final String commonDescription;
+	private final String defaultActivity;
 	private final UploadGpxListener listener;
 
 	public UploadGPXFilesTask(@NonNull Activity activity,
 	                          @NonNull String commonDescription,
-	                          @NonNull String tags,
+	                          @NonNull String commonTags,
 	                          @Nullable UploadVisibility visibility,
-	                          @Nullable UploadGpxListener listener) {
+	                          @Nullable UploadGpxListener listener,
+	                          @Nullable String defaultActivity) {
 		app = (OsmandApplication) activity.getApplication();
+		this.gpxDbHelper = app.getGpxDbHelper();
+		this.remoteUtil = new OpenstreetmapRemoteUtil(app);
 		this.activityRef = new WeakReference<>(activity);
 		this.commonDescription = commonDescription;
-		this.tags = tags;
+		this.commonTags = commonTags;
 		this.visibility = visibility != null ? visibility.asUrlParam() : UploadVisibility.PRIVATE.asUrlParam();
 		this.listener = listener;
+		this.defaultActivity = defaultActivity;
 	}
 
 	@Override
@@ -45,11 +59,10 @@ public class UploadGPXFilesTask extends AsyncTask<File, String, String> {
 		int total = 0;
 		for (File file : params) {
 			if (!isCancelled() && file != null) {
-				OpenstreetmapRemoteUtil remoteUtil = new OpenstreetmapRemoteUtil(app);
-				String gpxDescription = Algorithms.isEmpty(commonDescription.trim())
-						? Algorithms.getFileNameWithoutExtension(file.getName())
-						: commonDescription;
-				String warning = remoteUtil.uploadGPXFile(tags, gpxDescription, visibility, file);
+				String activity = getGpxActivity(file);
+				String tags = getGpxTags(activity);
+				String description = getGpxDescription(file);
+				String warning = remoteUtil.uploadGPXFile(tags, description, visibility, file);
 				total++;
 				if (warning == null) {
 					count++;
@@ -59,6 +72,50 @@ public class UploadGPXFilesTask extends AsyncTask<File, String, String> {
 			}
 		}
 		return app.getString(R.string.local_index_items_uploaded, count, total);
+	}
+
+	@NonNull
+	private String getGpxDescription(@NonNull File file) {
+		return Algorithms.isEmpty(commonDescription.trim())
+				? Algorithms.getFileNameWithoutExtension(file.getName())
+				: commonDescription;
+	}
+
+	@NonNull
+	private String getGpxTags(@Nullable String activity) {
+		if (Algorithms.isEmpty(activity)) {
+			return removeDefaultActivity();
+		} else if (!commonTags.contains(activity)) {
+			return addActivity(activity);
+		}
+		return commonTags;
+	}
+
+	public String removeDefaultActivity() {
+		String removedDefaultActivity = commonTags;
+		if (!Algorithms.isEmpty(defaultActivity) && commonTags.contains(defaultActivity)) {
+			List<String> tagList = Arrays.stream(commonTags.split(","))
+					.map(String::trim)
+					.filter(tag -> !tag.equals(defaultActivity))
+					.collect(Collectors.toList());
+
+			removedDefaultActivity = String.join(", ", tagList);
+		}
+		return removedDefaultActivity;
+	}
+
+	public String addActivity(@Nullable String activity) {
+		if (!Algorithms.isEmpty(defaultActivity) && commonTags.contains(defaultActivity)) {
+			return commonTags.replace(defaultActivity, activity);
+		} else {
+			return commonTags + ", " + activity;
+		}
+	}
+
+	@Nullable
+	private String getGpxActivity(@NonNull File file) {
+		GpxDataItem item = gpxDbHelper.getItem(new KFile(file.getPath()));
+		return item != null ? item.getParameter(GpxParameter.ACTIVITY_TYPE) : null;
 	}
 
 	@Override

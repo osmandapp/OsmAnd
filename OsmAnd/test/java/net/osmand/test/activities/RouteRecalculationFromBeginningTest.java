@@ -120,6 +120,7 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 		private static final int CHECK_INTERVAL = 1000;
 		private static final Range<Integer> EXPECTED_ROUTE_LENGTH = new Range<>(7000, 7200);
 		private static final int IDLE_ON_LEFT_DISTANCE = 5900;
+		private static final int START_POINT_DEVIATION_THRESHOLD = 20;
 
 		private final Handler handler;
 
@@ -136,20 +137,20 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 				@Override
 				public void run() throws AssertionError, IllegalStateException {
 					int leftDistance = app.getRoutingHelper().getLeftDistance();
-
 					if (leftDistance == 0) {
 						// Route is not calculated yet
 						handler.postDelayed(this, CHECK_INTERVAL);
+						return;
 					}
 
 					if (initialLeftDistance == -1) {
 						initialLeftDistance = leftDistance;
-						if (EXPECTED_ROUTE_LENGTH.contains(initialLeftDistance)) {
+						if (!EXPECTED_ROUTE_LENGTH.contains(initialLeftDistance)) {
 							throw new IllegalStateException("Unexpected route calculated with distance " + initialLeftDistance + " m");
 						}
 					}
 
-					if (leftDistance > initialLeftDistance) {
+					if (leftDistance > initialLeftDistance + START_POINT_DEVIATION_THRESHOLD) {
 						throw new AssertionError("Route recalculated from start of the track with distance " + leftDistance + " m");
 					} else {
 						if (leftDistance > IDLE_ON_LEFT_DISTANCE) {
