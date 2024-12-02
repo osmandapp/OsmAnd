@@ -4509,4 +4509,7 @@
     <string name="poi_cash_in_yes">Áno</string>
     <string name="poi_cash_in_no">Nie</string>
     <string name="poi_diet_pescetarian_no">Pescetariánska diéta (z mäsa len ryby): nie</string>
+    <string name="poi_name_etymology">Pôvod názvu</string>
+    <string name="poi_name_left">Názov ľavej strany</string>
+    <string name="poi_name_right">Názov pravej strany</string>
 </resources>
