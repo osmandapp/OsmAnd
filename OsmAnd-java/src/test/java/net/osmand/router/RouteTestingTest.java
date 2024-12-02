@@ -183,19 +183,28 @@ public class RouteTestingTest {
 						Assert.assertTrue("Expected segments visit " + id + " less then actually visited segments "
 								+ ctx.getVisitedSegments(), ctx.getVisitedSegments() < id);
 						break;
-					default: // case ID:N to check exact point within the ID's segment
-						boolean isFound = false;
-						int point = Integer.parseInt(es.getValue());
-						for (RouteSegmentResult seg : routeSegments) {
-							if (seg.getObject().getId() / 64 == id) {
-								if (point >= Math.min(seg.getStartPointIndex(), seg.getEndPointIndex()) &&
-										point <= Math.max(seg.getStartPointIndex(), seg.getEndPointIndex())) {
-									isFound = true;
-									break;
+					default: // "ID": "+1,+2,-3,-4,-5,-0" (check exact point present/absent within the ID's segment)
+						int requestedPresentPoints = 0, foundPresentPoints = 0;
+						int requestedAbsentPoints = 0, foundAbsentPoints = 0;
+						for (String element : es.getValue().split(",")) {
+							int point = Math.abs(Integer.parseInt(element));
+							boolean negative = element.startsWith("-"); // allow "-0" to check
+							requestedPresentPoints += negative ? 0 : 1;
+							requestedAbsentPoints += negative ? 1 : 0;
+							for (RouteSegmentResult seg : routeSegments) {
+								if (seg.getObject().getId() / 64 == id) {
+									if (point >= Math.min(seg.getStartPointIndex(), seg.getEndPointIndex()) &&
+											point <= Math.max(seg.getStartPointIndex(), seg.getEndPointIndex())) {
+										foundPresentPoints += negative ? 0 : 1;
+										foundAbsentPoints += negative ? 1 : 0;
+									}
 								}
 							}
 						}
-						Assert.assertTrue("Expected point " + point + " is not found in segment " + id, isFound);
+						Assert.assertTrue("foundPresentPoints failed (found less than requested)",
+								requestedPresentPoints == 0 || foundPresentPoints >= requestedPresentPoints);
+						Assert.assertTrue("foundAbsentPoints failed (found more than zero)",
+								requestedAbsentPoints == 0 || foundAbsentPoints == 0);
 						break;
 				}
 			}
