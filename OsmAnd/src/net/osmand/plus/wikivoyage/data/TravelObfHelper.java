@@ -260,6 +260,9 @@ public class TravelObfHelper implements TravelHelper {
 			}
 			searchRadius *= 2;
 		} while (travelGpx == null && searchRadius < MAX_SEARCH_RADIUS);
+		if (travelGpx == null) {
+			LOG.error(String.format("searchGpx(%s, %s, %s) failed", location, filter, ref));
+		}
 		return travelGpx;
 	}
 
