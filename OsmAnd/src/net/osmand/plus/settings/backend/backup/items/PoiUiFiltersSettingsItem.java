@@ -210,7 +210,7 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 	@Nullable
 	@Override
 	public SettingsItemReader<? extends SettingsItem> getReader() {
-		return getJsonReader();
+		return getJsonReader(false);
 	}
 
 	@Nullable

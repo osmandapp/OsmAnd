@@ -499,7 +499,7 @@
     <string name="amenity_type_geocache">Geocache</string>
     <string name="amenity_type_healthcare">Sănătate</string>
     <string name="amenity_type_historic">Obiective istorice</string>
-    <string name="amenity_type_landuse">Parcuri și spații verzi</string>
+    <string name="amenity_type_landuse">Zonificare funcțională</string>
     <string name="amenity_type_leisure">Locuri de relaxare</string>
     <string name="amenity_type_man_made">Construcții tehnice</string>
     <string name="amenity_type_military">Obiective militare</string>
@@ -5910,4 +5910,9 @@
     <string name="obd_air_intake_temp_desc">Indică temperatura aerului care intră în colectorul de admisie al motorului.</string>
     <string name="obd_engine_oil_temperature">Temperatura uleiului de motor</string>
     <string name="obd_fuel_consumption_desc">Afișează rata de utilizare a combustibilului de către motor, calculată pe baza combustibilului rămas, a dimensiunii rezervorului și a distanței parcurse determinate de GPS.</string>
+    <string name="obd_fuel_consumption">Consumul de combustibil</string>
+    <string name="average_value_slider_description">Selectați intervalul de timp pentru măsurarea valorii medii.</string>
+    <string name="reset_average_value">Resetarea valorii medii</string>
+    <string name="average_temperature_slider_description">Selectați intervalul de timp pentru măsurarea temperaturii medii.</string>
+    <string name="current_temperature">Temperatura actuală</string>
 </resources>

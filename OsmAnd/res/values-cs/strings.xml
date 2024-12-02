@@ -5565,10 +5565,8 @@
     <string name="obd_fuel_type_hybrid_regenerative">Hybridní regenerativní</string>
     <string name="shared_string_obd">OBD</string>
     <string name="obd_widget_group">Metriky vozidel</string>
-    <string name="obd_fuel_left_distance">Zbývající palivo (vzdálenost)</string>
     <string name="obd_fuel_type_bifuel_hydrogen">Hybridní na vodík</string>
     <string name="vehicle_metrics_plugin_settings">Nastavení metrik vozidla</string>
-    <string name="obd_rpm">RPM</string>
     <string name="rpm_unit">rpm</string>
     <string name="quick_action_showhide_osm_edits_descr">Tlačítko pro zobrazení nebo skrytí místních úprav OSM na mapě.</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Stezky pro terénní kola</string>
@@ -5599,8 +5597,8 @@
     <string name="obd_device_forget_sensor">Zapomenout skener</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Zobrazuje spotřebu paliva vozidla na základě výpočtů (%/h)</string>
     <string name="l_100km">L/100km</string>
-    <string name="obd_fuel_consumption_rate_l_km">Spotřeba paliva (L/km)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Zobrazuje spotřebu paliva vozidla na základě výpočtů (L/km)</string>
+    <string name="obd_fuel_consumption_rate_l_km">Spotřeba paliva (L/100 km)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Zobrazuje spotřebu paliva vozidla na základě výpočtů (l/100 km)</string>
     <string name="simulate_obd">Simulace dat OBD</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Tlak paliva</string>
@@ -5611,10 +5609,8 @@
     <string name="obd_fuel_consumption_rate_sensor_desc">Zobrazuje spotřebu paliva vozidla na základě senzoru (L/h)</string>
     <string name="obd_fuel_level_liter">Hladina paliva (l)</string>
     <string name="obd_fuel_level_percent">Hladina paliva (%)</string>
-    <string name="obd_fuel_left_percent">Zbývá palivo (%)</string>
-    <string name="obd_fuel_left_liter">Zbývá palivo (l)</string>
     <string name="obd_fuel_left_km">Zbývá palivo (km)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">Spotřeba paliva L/h</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Míra spotřeby paliva</string>
     <string name="obd_fuel_consumption_rate_scanner">Spotřeba paliva (OBD)</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Spotřeba paliva %/h</string>
     <string name="route_guidance">Navádění po trase</string>

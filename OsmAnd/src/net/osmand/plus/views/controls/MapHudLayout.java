@@ -179,7 +179,7 @@ public class MapHudLayout extends FrameLayout {
 		for (Map.Entry<View, ButtonPositionSize> entry : widgetPositions.entrySet()) {
 			View view = entry.getKey();
 			if (view.getVisibility() == VISIBLE) {
-				ButtonPositionSize position = updateWidgetPosition(view, entry.getValue());
+				ButtonPositionSize position = createWidgetPosition(view);
 				map.put(view, position);
 			}
 		}

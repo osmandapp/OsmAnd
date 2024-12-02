@@ -14,7 +14,12 @@ import net.osmand.shared.util.Localization
 import net.osmand.shared.util.PlatformUtil
 
 
+private const val FUEL_CONSUMPTION_DEFAULT_AVERAGE_TIME = 5 * 60
+
 object OBDDataComputer {
+
+	private const val LITER_KM_CONSUMPTION_LIMIT = 100
+	private const val LITER_HOUR_CONSUMPTION_LIMIT = 100
 
 	private val log = LoggerFactory.getLogger("OBDDataComputer")
 
@@ -117,17 +122,18 @@ object OBDDataComputer {
 		val locationNeeded: Boolean,
 		val requiredCommand: OBDCommand,
 		val nameId: String,
-		val formatter: OBDComputerWidgetFormatter
+		val formatter: OBDComputerWidgetFormatter,
+		val defaultAverageTime: Int = 0
 	) {
 		SPEED(
 			false,
 			OBD_SPEED_COMMAND,
-			"shared_string_speed",
+			"obd_widget_vehicle_speed",
 			OBDComputerWidgetFormatter("%.0f")),
 		RPM(
 			false,
 			OBD_RPM_COMMAND,
-			"obd_rpm",
+			"obd_widget_engine_speed",
 			OBDComputerWidgetFormatter("%d")),
 		ENGINE_RUNTIME(
 			false,
@@ -142,7 +148,7 @@ object OBDDataComputer {
 		FUEL_LEFT_KM(
 			true,
 			OBD_FUEL_LEVEL_COMMAND,
-			"obd_fuel_left_distance",
+			"remaining_fuel",
 			OBDComputerWidgetFormatter("%.0f")),
 		CALCULATED_ENGINE_LOAD(
 			false,
@@ -157,25 +163,28 @@ object OBDDataComputer {
 		FUEL_LEFT_PERCENT(
 			false,
 			OBD_FUEL_LEVEL_COMMAND,
-			"obd_fuel_left_percent",
+			"remaining_fuel",
 			OBDComputerWidgetFormatter("%.1f")),
 		FUEL_LEFT_LITER(
 			false,
 			OBD_FUEL_LEVEL_COMMAND,
-			"obd_fuel_left_liter",
+			"remaining_fuel",
 			OBDComputerWidgetFormatter("%.1f")),
 		FUEL_CONSUMPTION_RATE_PERCENT_HOUR(
 			false,
 			OBD_FUEL_LEVEL_COMMAND,
-			"obd_fuel_consumption_rate_percent_hour", OBDComputerWidgetFormatter("%.1f")),
+			"obd_fuel_consumption_rate_percent_hour", OBDComputerWidgetFormatter("%.1f"),
+			FUEL_CONSUMPTION_DEFAULT_AVERAGE_TIME),
 		FUEL_CONSUMPTION_RATE_LITER_KM(
 			true,
 			OBD_FUEL_LEVEL_COMMAND,
-			"obd_fuel_consumption_rate_l_km", OBDComputerWidgetFormatter("%.1f")),
+			"obd_fuel_consumption_rate_l_km", OBDComputerWidgetFormatter("%.1f"),
+			FUEL_CONSUMPTION_DEFAULT_AVERAGE_TIME),
 		FUEL_CONSUMPTION_RATE_LITER_HOUR(
 			false,
 			OBD_FUEL_LEVEL_COMMAND,
-			"obd_fuel_consumption_rate_liter_hour", OBDComputerWidgetFormatter("%.1f")),
+			"obd_fuel_consumption_rate_liter_hour", OBDComputerWidgetFormatter("%.1f"),
+			FUEL_CONSUMPTION_DEFAULT_AVERAGE_TIME),
 		FUEL_CONSUMPTION_RATE_SENSOR(
 			false,
 			OBD_FUEL_CONSUMPTION_RATE_COMMAND,
@@ -303,7 +312,12 @@ object OBDDataComputer {
 
 				FUEL_CONSUMPTION_RATE_LITER_HOUR -> {
 					if (locValues.size >= 2) {
-						getFuelTank() * calculateFuelConsumption(locValues) / 100
+						val result = getFuelTank() * calculateFuelConsumption(locValues) / 100
+						if (result > LITER_HOUR_CONSUMPTION_LIMIT) {
+							Float.NaN
+						} else {
+							result
+						}
 					} else if (locValues.size == 1) {
 						Float.NaN
 					} else {
@@ -322,7 +336,12 @@ object OBDDataComputer {
 							val distance = getDistanceForTimePeriod(first.timestamp, last.timestamp)
 							if (distance > 0) {
 								log.debug("l/100km. distance $distance; difLiter $difLiter; result ${100 * difLiter / (distance / 1000)}")
-								return 100 * difLiter / (distance / 1000)
+								val result = 100 * difLiter / (distance / 1000)
+								return if (result > LITER_KM_CONSUMPTION_LIMIT) {
+									Float.NaN
+								} else {
+									result
+								}
 							}
 						}
 						null

@@ -5521,7 +5521,6 @@
     <string name="obd_air_intake_temp">Température d\'admission</string>
     <string name="obd_ambient_air_temp">Température ambiante</string>
     <string name="obd_fuel_level">Efficacité du carburant (%)</string>
-    <string name="obd_fuel_left_distance">Carburant restant (distance)</string>
     <string name="obd_fuel_type_not_provided">Type de carburant non spécifié</string>
     <string name="unit_volt">V</string>
     <string name="obd_fuel_type_methanol">Méthanol</string>
@@ -5540,7 +5539,6 @@
     <string name="obd_fuel_type_hydrogen">Hydrogène</string>
     <string name="percent_unit">%</string>
     <string name="rpm_unit">tr/min</string>
-    <string name="obd_rpm">Tours/minute</string>
     <string name="obd_rpm_desc">Affiche le régime du véhicule via le capteur OBD</string>
     <string name="obd_plugin_name">Mesures du véhicule</string>
     <string name="obd_fuel_consumption_rate">Taux de consommation de carburant</string>
@@ -5576,7 +5574,7 @@
     <string name="help_article_personal_color_palette_schemes_name">Jeux de couleurs</string>
     <string name="quick_action_showhide_osm_edits_descr">Bouton pour afficher ou masquer les modifications OSM apportées à la carte.</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Sentiers en terre pour vélos</string>
-    <string name="liter_per_hour">l/h</string>
+    <string name="liter_per_hour">L/h</string>
     <string name="release_4_9">• Ajout d\'une visionneuse de galerie plein écran pour les images Wikimédia\n\n• Introduction d\'un nouveau plugin \"Relevés du véhicule\" pour surveiller les performances du véhicule en utilisant le protocole OBD-II\n\n• Ajout de la possibilité d\'assigner des activités aux traces et de les filtrer en conséquence\n\n• Implémentation de nouvelles actions rapides pour l\'enregistrement des trajets et le verrouillage de l\'écran tactile\n\n• Introduction d\'un de bouton de carte personnalisable et d\'une grille précise\n\n• Ajout d\'un menu contextuel et d\'une action \"Réinitialiser la vitesse moyenne\" aux widgets\n\n• Ajout d\'une nouvelle couche d\'itinéraire \"Sentiers de terre pour vélos\"\n\n• Correction de l\'erreur \"Auto-enregistrement de la trace pendant la navigation\"\n\n• Correction du problème avec les coordonnées inversées en RTL\n\n• Correction des données manquantes du capteur pour la trace actuellement enregistrée\n\n•Ajout d\'informations sur les zones environnantes pour le point sélectionné\n\n• Ajout d\'une action rapide pour contrôler la visibilité des modifications OSM\n\n• Séparation des paramètres de visibilité pour les options de coloration du terrain\n\n• Ajout d\'une icône tactile pour afficher l\'accès ou d\'autres attributs des routes ou des sentiers</string>
     <string name="screen_is_unlocked">L\'écran tactile est déverrouillé.</string>
     <string name="screen_is_locked_by_action_button">L\'écran tactile est verrouillé. Appuyez sur le bouton pour déverrouiller.</string>
@@ -5603,18 +5601,16 @@
     <string name="obd_device_forget_sensor_description">Le scanner sera retiré de la liste. Vous pourrez ré-appairer ce scanner à tout moment.</string>
     <string name="obd_searching_text_description">Veuillez garder votre appareil à proximité du scanner. Assurez-vous que le moteur du véhicule est en marche.</string>
     <string name="connect_obd_instructions_step">1. Connectez le scanner au port OBD-II de votre véhicule.\n\n2. Allumez le moteur de votre véhicule\n\n3. Activez le Bluetooth sur votre appareil\n\n4. Appuyez sur « %1$s » et sélectionnez votre scanner dans la liste.</string>
-    <string name="obd_fuel_consumption_rate_l_h_desc">Affiche la consommation de carburant du véhicule basée sur des calculs (l/h)</string>
-    <string name="obd_fuel_consumption_rate_sensor_desc">Affiche la consommation de carburant du véhicule grâce à un capteur (l/h)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Affiche la consommation de carburant du véhicule basée sur des calculs (L/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Affiche la consommation de carburant du véhicule grâce à un capteur (L/h)</string>
     <string name="obd_fuel_level_liter">Niveau de carburant (l)</string>
     <string name="obd_fuel_level_percent">Niveau de carburant (%)</string>
-    <string name="obd_fuel_left_percent">Carburant restant (%)</string>
-    <string name="obd_fuel_left_liter">Carburant restant (l)</string>
     <string name="obd_fuel_left_km">Carburant restant (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Consommation de carburant (obd)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">Consommation de carburant l/h</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Consommation de carburant</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Consommation de carburant %/h</string>
-    <string name="obd_fuel_consumption_rate_l_h">Consommation d\'essence (l/h)</string>
-    <string name="obd_fuel_consumption_rate_sensor">Consommation d\'essence (capteur)</string>
+    <string name="obd_fuel_consumption_rate_l_h">Consommation de carburant (L/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor">Consommation de carburant (capteur)</string>
     <string name="speedometer_maximum">Maximum</string>
     <string name="liter">l</string>
     <string name="percent_hour">%/h</string>
@@ -5677,4 +5673,7 @@
     <string name="obd_ambient_air_temp_desc">Affiche la température de l\'air extérieur.</string>
     <string name="obd_calculated_engine_load">Charge moteur calculée</string>
     <string name="obd_engine_runtime">Durée de fonctionnement du moteur</string>
+    <string name="obd_fuel_consumption_desc">Affiche le taux de consommation du carburant par le moteur, calculé en fonction du carburant restant, de la taille du réservoir et de la distance parcourue selon le GPS.</string>
+    <string name="show_minor_turns_descr">Les voies seront affichées sur toutes les intersections rencontrées indépendamment des instructions vocales</string>
+    <string name="show_minor_turns">Afficher sur les intersections mineures lors de la navigation en ligne droite</string>
 </resources>

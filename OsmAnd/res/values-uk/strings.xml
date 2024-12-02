@@ -5923,7 +5923,6 @@
     <string name="obd_fuel_type_bifuel_methanol">Двопаливний метанол</string>
     <string name="obd_fuel_type_bifuel_ethanol">Двопаливний етанол</string>
     <string name="percent_unit">%</string>
-    <string name="obd_rpm">Оберти</string>
     <string name="rpm_unit">об/хв</string>
     <string name="obd_rpm_desc">Віджет показує оберти з тахометра машини за датчиком OBD</string>
     <string name="obd_fuel_type_desc">Віджет показує тип пального машини за датчиком OBD</string>
@@ -5953,7 +5952,6 @@
     <string name="obd_engine_coolant_temp">Температура охолоджувальної рідини</string>
     <string name="obd_fuel_level">Паливна ефективність (%)</string>
     <string name="obd_fuel_consumption_rate">Споживання пального</string>
-    <string name="obd_fuel_left_distance">Залишок пального (відстань)</string>
     <string name="reset_average_speed">Скинути середню швидкість</string>
     <string name="obd_vin_desc">VIN-код за OBD</string>
     <string name="obd_fuel_type_electric">Електрика</string>
@@ -6003,7 +6001,7 @@
     <string name="obd_connected_to_device">Під\'єднано до %s</string>
     <string name="dynamic_icon_type_summary">Піктограма змінюється залежно від стану дії.</string>
     <string name="l_100km">л/100 км</string>
-    <string name="obd_fuel_consumption_rate_l_km">Споживання палива (л/км)</string>
+    <string name="obd_fuel_consumption_rate_l_km">Витрата палива (л/100 км)</string>
     <string name="obd_not_connected_to_device">Від\'єднано від %s</string>
     <string name="obd_connecting_to_device">Під\'єднання до %s</string>
     <string name="obd_engine_runtime">Тривалість роботи двигуна</string>
@@ -6015,7 +6013,7 @@
     <string name="obd_engine_oil_temperature_desc">Показує температуру моторного масла.</string>
     <string name="obd_fuel_consumption_rate_l_h_desc">Показує витрату палива автомобіля на основі розрахунків (л/год)</string>
     <string name="record_obd_data">Реєструйте показники автомобіля</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Показує витрату палива автомобіля на основі розрахунків (л/км)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Показує витрату палива автомобіля на основі розрахунків (л/100 км)</string>
     <string name="simulate_obd">Імітація даних obd</string>
     <string name="obd_throttle_position">Положення дросельної заслінки</string>
     <string name="speedometer_maximum">Максимум</string>
@@ -6028,7 +6026,7 @@
     <string name="obd_fuel_left_percent">Залишок пального (%)</string>
     <string name="obd_fuel_left_liter">Залишок пального (л)</string>
     <string name="obd_fuel_consumption_rate_scanner">Витрата пального (у.п.)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">Витрата палива л/год</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Норма витрати палива</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Витрата палива %/год</string>
     <string name="obd_vehicle_info">Інформація про транспортний засіб</string>
     <string name="obd_searching_text">Пошук сканерів</string>

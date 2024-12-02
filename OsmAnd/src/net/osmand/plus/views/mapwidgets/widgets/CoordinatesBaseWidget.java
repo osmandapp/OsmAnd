@@ -286,7 +286,7 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 		if (updatedVisibility && widgetType.getPanel(settings) == WidgetsPanel.TOP) {
 			MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
 			if (mapInfoLayer != null) {
-				mapInfoLayer.recreateTopWidgetsPanel();
+				mapInfoLayer.updateVerticalPanels();
 			}
 			mapActivity.updateStatusBarColor();
 		}

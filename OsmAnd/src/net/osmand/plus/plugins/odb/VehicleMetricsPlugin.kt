@@ -738,7 +738,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			var isNan = (data is Float) && data.isNaN()
 			isNan = isNan || (data is Double) && data.isNaN()
 			if (isNan) {
-				return if (computerWidget.type == OBDDataComputer.OBDTypeWidget.FUEL_LEFT_KM) ">50" else "<50"
+				return "-"
 			}
 		}
 		val convertedData = when (computerWidget.type) {
@@ -850,7 +850,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			}
 		}
 		val volumeUnit = settings.UNIT_OF_VOLUME.get().getUnitSymbol(app)
-		return app.getString(R.string.ltr_or_rtl_combine_via_slash, volumeUnit, distanceUnit)
+		return app.getString(R.string.ltr_or_rtl_combine_via_slash, volumeUnit, "100$distanceUnit")
 	}
 
 	private fun getFormatVolumePerDistance(litersPer100km: Number): Float {

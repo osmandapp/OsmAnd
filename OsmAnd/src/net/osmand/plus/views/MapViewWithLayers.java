@@ -30,7 +30,7 @@ import net.osmand.plus.views.corenative.NativeCoreContext;
 
 public class MapViewWithLayers extends FrameLayout {
 
-	private static final int SYMBOLS_UPDATE_INTERVAL = 2000;
+	public static final int SYMBOLS_UPDATE_INTERVAL = 2000;
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -96,8 +96,8 @@ public class MapViewWithLayers extends FrameLayout {
 
 	private void resetMapRendererView() {
 		MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
-		if (mapRendererContext != null && atlasMapRendererView != null && mapRendererContext.getMapRendererView() == atlasMapRendererView)
-			mapRendererContext.setMapRendererView(null);
+		if (mapRendererContext != null && atlasMapRendererView != null)
+			mapRendererContext.releaseMapRendererView(atlasMapRendererView);
 	}
 
 	private void setupAtlasMapRendererView() {
@@ -124,12 +124,13 @@ public class MapViewWithLayers extends FrameLayout {
 			} else {
 				atlasMapRendererView.handleOnCreate(null);
 			}
-			atlasMapRendererView.setMapRendererSetupOptionsConfigurator(
-					mapRendererSetupOptions -> mapRendererSetupOptions.setMaxNumberOfRasterMapLayersInBatch(1));
+			mapRendererContext.presetMapRendererOptions(atlasMapRendererView);
 			atlasMapRendererView.setupRenderer(getContext(), 0, 0, mapRendererView);
 			atlasMapRendererView.setMinZoomLevel(ZoomLevel.swigToEnum(mapView.getMinZoom()));
 			atlasMapRendererView.setMaxZoomLevel(ZoomLevel.swigToEnum(mapView.getMaxZoom()));
 			atlasMapRendererView.setAzimuth(0);
+			atlasMapRendererView.removeAllSymbolsProviders();
+			atlasMapRendererView.resumeSymbolsUpdate();
 			float elevationAngle = mapView.normalizeElevationAngle(settings.getLastKnownMapElevation());
 			atlasMapRendererView.setElevationAngle(elevationAngle);
 			atlasMapRendererView.setSymbolsUpdateInterval(SYMBOLS_UPDATE_INTERVAL);

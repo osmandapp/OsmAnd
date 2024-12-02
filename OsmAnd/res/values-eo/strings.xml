@@ -5618,7 +5618,6 @@
     <string name="obd_fuel_type_unknown">nekonata speco de brulaĵo</string>
     <string name="obd_widget_group">Statistikoj pri veturilo</string>
     <string name="percent_unit">%</string>
-    <string name="obd_rpm">Rivolua rapido</string>
     <string name="rpm_unit">riv./min</string>
     <string name="obd_fuel_level_desc">Montras nivelon de brulaĵo raportatan de OBD-sentilo</string>
     <string name="obd_fuel_left_distance_desc">Montras vetureblan distancon per la nuna brulaĵ-nivelo raportatan de OBD-sentilo</string>
@@ -5630,9 +5629,8 @@
     <string name="obd_plugin_name">Statistikoj pri veturilo</string>
     <string name="obd_fuel_consumption_rate">Konsum-rapido de brulaĵo</string>
     <string name="obd_fuel_consumption_rate_desc">Montras konsum-rapidon de brulaĵo raportatan de OBD-sentilo</string>
-    <string name="obd_fuel_left_distance">Resta brulaĵo (distanco)</string>
     <string name="obd_fuel_type">Speco de brulaĵo</string>
-    <string name="obd_plugin_description">Ebligas kontroli parametrojn de aŭtomobilo per la protokolo OBD-II. Alireblaj datumoj:\n• rivolua rapido de motoro\n• konsumo de brulaĵo\n• resta brulaĵo\n• distanco ekde starto de motoro\n• temperaturo en eniga aer-kolektilo\n• temperaturo de ĉirkaŭaĵo\n• temperaturo de malvarmiga likvaĵo\n• rapido de veturilo\n• tensio de baterio</string>
+    <string name="obd_plugin_description">Ebligas kontroli parametrojn de aŭtomobilo per la protokolo OBD-II. Alireblaj datumoj:\n• rivolua rapido de motoro, ĝia labortempo, ĝia kalkulita ŝargo\n• konsumo de brulaĵo, premo de brula, resta brulaĵo\n• temperaturoj de: eniga aer-kolektilo, fono, malvarmiga likvaĵo, motoroleo\n• rapido de veturilo, pozicio de brulaĵ-valvo, tensio de baterio.\n</string>
     <string name="obd_support">Subteno por OBD</string>
     <string name="obd_fuel_type_hydrogen">hidrogeno</string>
     <string name="shared_string_obd">OBD</string>
@@ -5700,7 +5698,7 @@
     <string name="obd_engine_oil_temperature_desc">Montras temperaturon de motoroleo.</string>
     <string name="obd_fuel_left_percent">Resta brulaĵo (%)</string>
     <string name="obd_fuel_consumption_rate_scanner">Konsumo de brulaĵo (OBD)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">Konsumo de brulaĵo (l/h)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Konsumo de brulaĵo</string>
     <string name="percent_hour">%/h</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Montras konsumon de brulaĵo de via veturilo surbaze de sentilo (l/h)</string>
     <string name="obd_engine_oil_temperature">Temperaturo de motoroleo</string>

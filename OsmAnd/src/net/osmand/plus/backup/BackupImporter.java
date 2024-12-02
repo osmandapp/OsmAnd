@@ -253,7 +253,8 @@ class BackupImporter {
 			json.put("items", itemsJson);
 
 			List<RemoteFile> uniqueRemoteFiles = new ArrayList<>();
-			collectUniqueRemoteFiles(remoteFiles, uniqueRemoteFiles);
+			Map<String, RemoteFile> deletedRemoteFilesMap = new HashMap<>();
+			collectUniqueAndDeletedRemoteFiles(remoteFiles, uniqueRemoteFiles, deletedRemoteFilesMap);
 			operationLog.log("build uniqueRemoteFiles");
 
 			Set<String> remoteInfoNames = new HashSet<>();
@@ -284,6 +285,7 @@ class BackupImporter {
 				return Collections.emptyList();
 			}
 			updateFilesInfo(remoteItemFilesMap, settingsItemList, restoreDeleted);
+			updateFilesInfo(deletedRemoteFilesMap, settingsItemList, restoreDeleted);
 			items.addAll(settingsItemList);
 			operationLog.log("updateFilesInfo");
 			operationLog.finishOperation();
@@ -297,11 +299,18 @@ class BackupImporter {
 		return items;
 	}
 
-	private void collectUniqueRemoteFiles(@NonNull List<RemoteFile> remoteFiles, @NonNull List<RemoteFile> uniqueRemoteFiles) {
+	private void collectUniqueAndDeletedRemoteFiles(@NonNull List<RemoteFile> remoteFiles,
+			@NonNull List<RemoteFile> uniqueRemoteFiles,
+			@NonNull Map<String, RemoteFile> deletedRemoteFiles) {
 		Set<String> uniqueFileIds = new TreeSet<>();
 		for (RemoteFile rf : remoteFiles) {
 			String fileId = rf.getTypeNamePath();
-			if (!rf.isDeleted() && uniqueFileIds.add(fileId)) {
+			if (rf.isDeleted()) {
+				String fileName = rf.getTypeNamePath();
+				if (!fileName.endsWith(INFO_EXT) && !deletedRemoteFiles.containsKey(fileName)) {
+					deletedRemoteFiles.put(fileName, rf);
+				}
+			} else if (uniqueFileIds.add(fileId)) {
 				uniqueRemoteFiles.add(rf);
 			}
 		}
@@ -558,13 +567,15 @@ class BackupImporter {
 		for (SettingsItem settingsItem : settingsItemList) {
 			List<RemoteFile> foundRemoteFiles = getItemRemoteFiles(settingsItem, remoteFilesMap);
 			for (RemoteFile remoteFile : foundRemoteFiles) {
-				if (!restoreDeleted) {
-					settingsItem.setLastModifiedTime(remoteFile.getClienttimems());
-				}
 				remoteFile.item = settingsItem;
-				if (settingsItem instanceof FileSettingsItem) {
-					FileSettingsItem fileSettingsItem = (FileSettingsItem) settingsItem;
-					fileSettingsItem.setSize(remoteFile.getFilesize());
+
+				if (!remoteFile.isDeleted()) {
+					if (!restoreDeleted) {
+						settingsItem.setLastModifiedTime(remoteFile.getClienttimems());
+					}
+					if (settingsItem instanceof FileSettingsItem item) {
+						item.setSize(remoteFile.getFilesize());
+					}
 				}
 			}
 		}

@@ -35,7 +35,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryController.DownloadMetadataListener;
 import net.osmand.plus.utils.AndroidUtils;
@@ -193,6 +192,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 		if (imageCard instanceof WikiImageCard wikiImageCard) {
 			dateView.setVisibility(View.VISIBLE);
 			authorView.setVisibility(View.VISIBLE);
+			licenseView.setVisibility(View.VISIBLE);
 			Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
 			String date = metadata.getDate();
 			String author = metadata.getAuthor();
@@ -208,14 +208,13 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 		} else {
 			dateView.setVisibility(View.INVISIBLE);
 			authorView.setVisibility(View.INVISIBLE);
+			licenseView.setVisibility(View.INVISIBLE);
 		}
 
-		Drawable icon = app.getUIUtilities().getIcon(imageCard.getTopIconId());
-		if (icon != null) {
-			sourceView.setImageDrawable(icon);
-		} else {
-			sourceView.setVisibility(View.GONE);
-		}
+		int iconId = imageCard.getTopIconId();
+		Drawable icon = iconId != 0 ? app.getUIUtilities().getIcon(iconId) : null;
+		sourceView.setImageDrawable(icon);
+		AndroidUiHelper.updateVisibility(sourceView, icon != null);
 	}
 
 	private void setMetaData(@Nullable String author, @Nullable String date, @Nullable String license) {
@@ -395,7 +394,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 				startDownloading(fileName, url);
 			} else {
 				AndroidUtils.hasPermission(getMapActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
-				ActivityCompat.requestPermissions(getMapActivity(), new String[]{
+				ActivityCompat.requestPermissions(getMapActivity(), new String[] {
 						Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_EXTERNAL_STORAGE_PERMISSION);
 			}
 		}
