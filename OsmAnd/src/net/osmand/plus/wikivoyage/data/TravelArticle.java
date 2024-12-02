@@ -127,8 +127,20 @@ public class TravelArticle {
 		return routeId;
 	}
 
+	@NonNull
 	public String getGpxFileName() {
-		return !Algorithms.isEmpty(title) ? title : routeId;
+		String gpxFileName = !Algorithms.isEmpty(title) ? title : routeId;
+		if (gpxFileName != null) {
+			return gpxFileName
+				.replace('/', '_')
+				.replace('\'', '_')
+				.replace('\"', '_')
+				.replace('\r', '_')
+				.replace('\n', '_');
+		} else {
+			LOG.error("Empty travel article in " + this.file);
+			return "Travel Article File"; // @NonNull
+		}
 	}
 
 	public String getRouteSource() {
