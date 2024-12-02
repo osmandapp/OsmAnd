@@ -10,6 +10,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxDbHelper;
+import net.osmand.shared.gpx.GpxDirItem;
 import net.osmand.shared.gpx.SmartFolderHelper;
 import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.io.KFile;
@@ -72,14 +73,22 @@ public class UpgradeTrackSortModeKeysAlgorithm {
 		Set<String> result = new HashSet<>();
 		// add root directory
 		result.add("");
-		// collect all subdirectories which contains at least one gpx track
+		// collect all directories registered in tracks DB
+		Set<String> absolutePaths = new HashSet<>();
+		for (GpxDirItem item : gpxDbHelper.getDirItems()) {
+			KFile file = item.getFile();
+			absolutePaths.add(file.absolutePath());
+		}
+		// collect all subdirectories which contain at least one gpx track
 		for (GpxDataItem item : gpxDbHelper.getItems()) {
 			KFile file = item.getFile();
 			KFile directory = file.getParentFile();
 			if (directory != null) {
-				String path = directory.absolutePath();
-				result.add(getFolderIdV2(path));
+				absolutePaths.add(directory.absolutePath());
 			}
+		}
+		for (String absolutePath : absolutePaths) {
+			result.add(getFolderIdV2(absolutePath));
 		}
 		return result;
 	}
