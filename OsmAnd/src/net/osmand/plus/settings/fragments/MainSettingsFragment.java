@@ -175,14 +175,14 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 						new PreferenceFragmentHandler() {
 
 							@Override
-							public String getClassNameOfPreferenceFragment() {
-								return SettingsScreenType.CONFIGURE_PROFILE.fragmentName;
+							public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
+								return SettingsScreenType.CONFIGURE_PROFILE.fragmentClass.asSubclass(PreferenceFragmentCompat.class);
 							}
 
 							@Override
 							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Fragment target) {
 								return (PreferenceFragmentCompat) BaseSettingsFragment.createFragment(
-										getClassNameOfPreferenceFragment(),
+										getClassOfPreferenceFragment().getName(),
 										context,
 										applicationMode,
 										new Bundle(),
@@ -194,7 +194,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 								return BaseSettingsFragment.showFragment(
 										preferenceFragment,
 										requireActivity(),
-										getClassNameOfPreferenceFragment());
+										getClassOfPreferenceFragment().getName());
 							}
 						});
 	}

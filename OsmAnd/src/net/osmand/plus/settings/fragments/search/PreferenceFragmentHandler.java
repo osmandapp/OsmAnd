@@ -7,7 +7,7 @@ import androidx.preference.PreferenceFragmentCompat;
 
 public interface PreferenceFragmentHandler {
 
-	String getClassNameOfPreferenceFragment();
+	Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment();
 
 	PreferenceFragmentCompat createPreferenceFragment(Context context, final Fragment target);
 

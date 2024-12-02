@@ -599,14 +599,14 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 					new PreferenceFragmentHandler() {
 
 						@Override
-						public String getClassNameOfPreferenceFragment() {
-							return DANGEROUS_GOODS.fragmentName;
+						public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
+							return DANGEROUS_GOODS.fragmentClass.asSubclass(PreferenceFragmentCompat.class);
 						}
 
 						@Override
 						public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Fragment target) {
 							return (PreferenceFragmentCompat) BaseSettingsFragment.createFragment(
-									getClassNameOfPreferenceFragment(),
+									getClassOfPreferenceFragment().getName(),
 									context,
 									getSelectedAppMode(),
 									new Bundle(),
@@ -618,7 +618,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 							return BaseSettingsFragment.showFragment(
 									preferenceFragment,
 									requireActivity(),
-									getClassNameOfPreferenceFragment());
+									getClassOfPreferenceFragment().getName());
 						}
 					});
 		}

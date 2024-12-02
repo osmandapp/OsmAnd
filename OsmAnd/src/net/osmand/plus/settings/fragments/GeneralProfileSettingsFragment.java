@@ -419,14 +419,14 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 					new PreferenceFragmentHandler() {
 
 						@Override
-						public String getClassNameOfPreferenceFragment() {
-							return EXTERNAL_INPUT_DEVICE.fragmentName;
+						public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
+							return EXTERNAL_INPUT_DEVICE.fragmentClass.asSubclass(PreferenceFragmentCompat.class);
 						}
 
 						@Override
 						public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Fragment target) {
 							return (PreferenceFragmentCompat) BaseSettingsFragment.createFragment(
-									getClassNameOfPreferenceFragment(),
+									getClassOfPreferenceFragment().getName(),
 									context,
 									getSelectedAppMode(),
 									new Bundle(),
@@ -438,7 +438,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 							return BaseSettingsFragment.showFragment(
 									preferenceFragment,
 									requireActivity(),
-									getClassNameOfPreferenceFragment());
+									getClassOfPreferenceFragment().getName());
 						}
 					}
 			);

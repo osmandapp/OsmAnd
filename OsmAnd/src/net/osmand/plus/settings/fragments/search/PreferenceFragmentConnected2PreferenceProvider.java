@@ -5,14 +5,14 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import java.util.Optional;
 
-class PreferenceConnected2PreferenceFragmentProvider implements de.KnollFrank.lib.settingssearch.provider.PreferenceConnected2PreferenceFragmentProvider {
+class PreferenceFragmentConnected2PreferenceProvider implements de.KnollFrank.lib.settingssearch.provider.PreferenceFragmentConnected2PreferenceProvider {
 
 	@Override
-	public Optional<String> getClassNameOfConnectedPreferenceFragment(final Preference preference, final PreferenceFragmentCompat hostOfPreference) {
+	public Optional<Class<? extends PreferenceFragmentCompat>> getPreferenceFragmentConnected2Preference(Preference preference, final PreferenceFragmentCompat hostOfPreference) {
 		return hostOfPreference instanceof final PreferenceFragmentHandlerProvider preferenceFragmentHandlerProvider ?
 				preferenceFragmentHandlerProvider
 						.getPreferenceFragmentHandler(preference)
-						.map(PreferenceFragmentHandler::getClassNameOfPreferenceFragment) :
+						.map(PreferenceFragmentHandler::getClassOfPreferenceFragment) :
 				Optional.empty();
 	}
 }

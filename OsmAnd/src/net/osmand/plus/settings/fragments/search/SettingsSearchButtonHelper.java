@@ -60,7 +60,7 @@ public class SettingsSearchButtonHelper {
 				.withSearchResultsFragmentUI(new SearchResultsFragmentUI())
 				.withCreateSearchDatabaseTaskSupplier(createSearchDatabaseTaskSupplier)
 				.withFragmentFactory(new FragmentFactory())
-				.withPreferenceConnected2PreferenceFragmentProvider(new PreferenceConnected2PreferenceFragmentProvider())
+				.withPreferenceFragmentConnected2PreferenceProvider(new PreferenceFragmentConnected2PreferenceProvider())
 				.withPrepareShow(new PrepareShow())
 				.withSearchableInfoProvider(new SearchableInfoProvider())
 				.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
