@@ -93,6 +93,9 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	private int lastCheckMapCx;
 	private int lastCheckMapCy;
 	private int lastCheckMapZoom;
+	private int lastCheckDataHash;
+	private boolean firstTimeAppStart;
+	private boolean shouldUpdateForFirstUsage = false;
 
 	private static final int ZOOM_TO_SHOW_MAP_NAMES = 6;
 	private static final int ZOOM_AFTER_BASEMAP = 12;
@@ -180,6 +183,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		pathDownloaded = new Path();
 		pathSelected = new Path();
 		pathBackuped = new Path();
+
+		firstTimeAppStart = app.getAppInitializer().isFirstTime();
 
 		data = new MapLayerData<List<BinaryMapDataObject>>() {
 
@@ -292,15 +297,20 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	}
 
 	private void checkMapToDownload(RotatedTileBox tileBox, List<BinaryMapDataObject> currentObjects) {
+		checkForFirstUsage(currentObjects);
 		int zoom = tileBox.getZoom();
 		int cx = tileBox.getCenter31X();
 		int cy = tileBox.getCenter31Y();
-		if (lastCheckMapCx == cx && lastCheckMapCy == cy && lastCheckMapZoom == zoom) {
+		if (lastCheckMapCx == cx && lastCheckMapCy == cy && lastCheckMapZoom == zoom && !shouldUpdateForFirstUsage) {
 			return;
 		}
 		lastCheckMapCx = cx;
 		lastCheckMapCy = cy;
 		lastCheckMapZoom = zoom;
+		shouldUpdateForFirstUsage = false;
+		if (currentObjects != null) {
+			lastCheckDataHash = currentObjects.hashCode();
+		}
 
 		MapActivity mapActivity = getMapActivity();
 		if (app.getSettings().SHOW_DOWNLOAD_MAP_DIALOG.get()
@@ -385,6 +395,16 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		if (mapActivity != null) {
 			app.runInUIThread(() -> mapActivity.hideTopToolbar(TopToolbarControllerType.DOWNLOAD_MAP));
 		}
+	}
+
+	private void checkForFirstUsage(@Nullable List<BinaryMapDataObject> currentObjects) {
+		if (!shouldUpdateForFirstUsage) {
+			shouldUpdateForFirstUsage = firstTimeAppStart && currentObjects != null && lastCheckDataHash != currentObjects.hashCode();
+		}
+	}
+
+	public void setForceUpdateForFirstUsage(){
+		shouldUpdateForFirstUsage = true;
 	}
 
 	private void removeRegionObjectsFromList(@NonNull List<BinaryMapDataObject> list, @NonNull WorldRegion region) {
