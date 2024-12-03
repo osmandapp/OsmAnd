@@ -6,6 +6,8 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 
+import java.util.stream.Stream;
+
 import javax.annotation.Nullable;
 
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferencePOJO;
@@ -20,11 +22,16 @@ class IncludePreferenceInSearchResultsPredicate implements de.KnollFrank.lib.set
 
 	private static boolean isPreferenceConnectedToAnyInactivePlugin(final SearchablePreferencePOJO preference,
 																	final Class<? extends PreferenceFragmentCompat> hostOfPreference) {
+		return IncludePreferenceInSearchResultsPredicate
+				.getInactivePlugins()
+				.anyMatch(inactivePlugin -> isPreferenceConnectedToPlugin(preference, hostOfPreference, inactivePlugin));
+	}
+
+	private static Stream<OsmandPlugin> getInactivePlugins() {
 		return PluginsHelper
 				.getAvailablePlugins()
 				.stream()
-				.filter(plugin -> !plugin.isActive())
-				.anyMatch(inactivePlugin -> isPreferenceConnectedToPlugin(preference, hostOfPreference, inactivePlugin));
+				.filter(plugin -> !plugin.isActive());
 	}
 
 	private static boolean isPreferenceConnectedToPlugin(final SearchablePreferencePOJO preference,

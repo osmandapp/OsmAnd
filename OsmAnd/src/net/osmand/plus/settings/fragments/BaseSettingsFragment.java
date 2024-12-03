@@ -112,6 +112,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	private int statusBarColor = -1;
 	private boolean nightMode;
 	private boolean wasDrawerDisabled;
+	// FK-TODO: remove configureSettingsSearch?
 	private boolean configureSettingsSearch = false;
 
 	@Override
