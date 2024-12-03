@@ -118,6 +118,14 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 		coloringType = routeColoringType;
 	}
 
+	public float getCustomWidth() {
+		return this.customWidth;
+	}
+
+	public void updateCustomWidth(@NonNull float customWidth) {
+		this.customWidth = customWidth;
+	}
+
 	protected void updateStylesDashPattern(@Nullable float[] dashPattern) {
 		for (GeometryWayStyle<?> style : styleMap.values()) {
 			style.dashPattern = dashPattern;
