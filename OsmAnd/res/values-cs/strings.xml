@@ -5674,4 +5674,7 @@
     <string name="shared_string_engine">Motor</string>
     <string name="vehicle_metrics_recording_description">Vyberte parametry, které se mají zaznamenat do GPX souboru.</string>
     <string name="auto_zoom_3d_angle">Úhel automatického 3D zoomu</string>
+    <string name="location_interpolation_percent">Procento interpolace polohy</string>
+    <string name="location_interpolation_percent_desc">Nastavení procenta interpolace polohy během navigace po trase. Tento parametr snižuje zpoždění polohy na mapě během animace.</string>
+    <string name="shared_string_interpolation">Interpolace</string>
 </resources>
