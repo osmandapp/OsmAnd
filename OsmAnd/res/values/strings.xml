@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="selected_delayed_profile">Selected profile \"%s\"</string>
     <string name="shared_string_engine">Engine</string>
     <string name="vehicle_metrics_recording_description">Select the parameters to be recorded in the GPX file.</string>
     <string name="auto_zoom_3d_angle">Auto zoom 3D angle</string>
