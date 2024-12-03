@@ -114,6 +114,7 @@ class TrackFolderLoaderTask(
 
 					if (file.isDirectory()) {
 						val subfolder = TrackFolder(file, folder)
+						subfolder.dirItem = GpxDbHelper.getGpxDirItem(file)
 						launch {
 							log.info("Loading track subfolder = $subfolder")
 							scanFolder(subfolder, progress, trackItems)

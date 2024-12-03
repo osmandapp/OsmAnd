@@ -1,5 +1,6 @@
 package net.osmand.shared.gpx.data
 
+import net.osmand.shared.gpx.GpxDirItem
 import net.osmand.shared.gpx.GpxHelper
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis
@@ -17,6 +18,7 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 	private var flattenedSubFolders: List<TrackFolder>? = null
 	private var folderAnalysis: TrackFolderAnalysis? = null
 	private var lastModified: Long = -1
+	var dirItem: GpxDirItem? = null
 
 	init {
 		this.dirFile = dirFile
