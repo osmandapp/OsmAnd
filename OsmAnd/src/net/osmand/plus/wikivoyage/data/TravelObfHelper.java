@@ -130,7 +130,9 @@ public class TravelObfHelper implements TravelHelper {
 			"avg_speed", "min_speed", "max_speed", "time_moving", "time_moving_no_gaps", "time_span", "time_span_no_gaps"
 	);
 	// Keep important tags by prefix. Note: name, ref, type, and route tags are processed in a special way.
-	private static final Set<String> keepAsIsAmenityGpxTags = Set.of("osm_id", "use_osmc_colors", "shield_");
+	private static final Set<String> keepAsIsAmenityGpxTags = Set.of(
+			"osm_id", "flexible_line_width", "translucent_line_colors", "shield_"
+	);
 
 	public TravelObfHelper(OsmandApplication app) {
 		this.app = app;
