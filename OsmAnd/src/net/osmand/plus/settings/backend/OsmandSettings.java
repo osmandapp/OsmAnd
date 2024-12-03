@@ -3170,6 +3170,8 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> PT_SAFE_MODE = new BooleanPreference(this, "pt_safe_mode", false).makeProfile();
 	public final OsmandPreference<Boolean> NATIVE_RENDERING_FAILED = new BooleanPreference(this, "native_rendering_failed_init", false).makeGlobal();
 
+	public final CommonPreference<Integer> LOCATION_INTERPOLATION_PERCENT = new IntPreference(this, "location_interpolation_percent", 0).makeGlobal().makeShared();
+
 	public final OsmandPreference<Boolean> USE_OPENGL_RENDER = new BooleanPreference(this, "use_opengl_render", Build.VERSION.SDK_INT >= Build.VERSION_CODES.P).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Integer> OPENGL_RENDER_FAILED = new IntPreference(this, "opengl_render_failed_count", 0).makeGlobal().cache();
 

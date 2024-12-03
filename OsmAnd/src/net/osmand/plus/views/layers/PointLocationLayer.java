@@ -27,7 +27,15 @@ import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.*;
+import net.osmand.core.jni.AnimatedValue;
+import net.osmand.core.jni.FColorRGB;
+import net.osmand.core.jni.MapMarker;
+import net.osmand.core.jni.MapMarkerBuilder;
+import net.osmand.core.jni.MapMarkersCollection;
+import net.osmand.core.jni.Model3D;
+import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.SWIGTYPE_p_void;
+import net.osmand.core.jni.SwigUtilities;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -42,6 +50,7 @@ import net.osmand.plus.helpers.Model3dHelper;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
@@ -311,7 +320,8 @@ public class PointLocationLayer extends OsmandMapLayer
 		switch (currentMarkerState) {
 			case MOVE -> {
 				navigationMarker.setVisibility(!showHeading);
-				locationMarker.setVisibility(false);
+				// Tempoprary code for testing instant location on map
+				//locationMarker.setVisibility(true);
 				navigationMarkerWithHeading.setVisibility(showHeading);
 				locationMarkerWithHeading.setVisibility(false);
 				circleColor = showHeading
@@ -677,10 +687,26 @@ public class PointLocationLayer extends OsmandMapLayer
 			boolean dataChanged = !MapUtils.areLatLonEqual(prevLocation, location, HIGH_LATLON_PRECISION);
 			if (dataChanged) {
 				long movingTime = prevLocation != null ? location.getTime() - prevLocation.getTime() : 0;
-				updateMarker(location, null, isAnimateMyLocation() ? movingTime : 0);
+				if (prevLocation != null && settings.LOCATION_INTERPOLATION_PERCENT.get() > 0) {
+					List<Location> predictedLocations = RoutingHelperUtils.predictLocations(prevLocation, location,
+							movingTime / 1000.0, getApplication().getRoutingHelper().getRoute());
+					if (!predictedLocations.isEmpty()) {
+						// At the moment we get the first predicted location, but there may be several of them
+						Location predictedLocation = predictedLocations.get(0);
+						updateMarker(predictedLocation, null, isAnimateMyLocation() ? movingTime : 0);
+					}
+				} else {
+					updateMarker(location, null, isAnimateMyLocation() ? movingTime : 0);
+				}
 				prevLocation = location;
 			}
 		}
+		// Tempoprary code for testing instant location on map
+		//if (mapRenderer != null) {
+		//	PointI target31 = new PointI(MapUtils.get31TileNumberX(location.getLongitude()),
+		//			MapUtils.get31TileNumberY(location.getLatitude()));
+		//	locationMarker.marker.setPosition(target31);
+		//}
 	}
 
 	@Override
