@@ -13,7 +13,9 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+import de.KnollFrank.lib.settingssearch.client.SearchConfigBuilder;
 import de.KnollFrank.lib.settingssearch.client.SearchConfiguration;
+import de.KnollFrank.lib.settingssearch.client.SearchDatabaseConfigBuilder;
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
 import de.KnollFrank.lib.settingssearch.common.task.AsyncTaskWithProgressUpdateListeners;
 
@@ -56,16 +58,22 @@ public class SettingsSearchButtonHelper {
 								rootPreferenceFragment),
 						fragmentActivity.getSupportFragmentManager(),
 						fragmentActivity)
-				.withSearchPreferenceFragmentUI(new SearchPreferenceFragmentUI())
-				.withSearchResultsFragmentUI(new SearchResultsFragmentUI())
+				.withSearchDatabaseConfig(
+						new SearchDatabaseConfigBuilder()
+								.withFragmentFactory(new FragmentFactory())
+								.withPreferenceFragmentConnected2PreferenceProvider(new PreferenceFragmentConnected2PreferenceProvider())
+								.withSearchableInfoProvider(new SearchableInfoProvider())
+								.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
+								.withPreferenceSearchablePredicate(new PreferenceSearchablePredicate())
+								.build())
+				.withSearchConfig(
+						new SearchConfigBuilder()
+								.withSearchPreferenceFragmentUI(new SearchPreferenceFragmentUI())
+								.withSearchResultsFragmentUI(new SearchResultsFragmentUI())
+								.withPrepareShow(new PrepareShow())
+								.withIncludePreferenceInSearchResultsPredicate(new IncludePreferenceInSearchResultsPredicate())
+								.build())
 				.withCreateSearchDatabaseTaskSupplier(createSearchDatabaseTaskSupplier)
-				.withFragmentFactory(new FragmentFactory())
-				.withPreferenceFragmentConnected2PreferenceProvider(new PreferenceFragmentConnected2PreferenceProvider())
-				.withPrepareShow(new PrepareShow())
-				.withSearchableInfoProvider(new SearchableInfoProvider())
-				.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
-				.withPreferenceSearchablePredicate(new PreferenceSearchablePredicate())
-				.withIncludePreferenceInSearchResultsPredicate(new IncludePreferenceInSearchResultsPredicate())
 				.build();
 	}
 
