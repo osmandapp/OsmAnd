@@ -120,6 +120,11 @@ public class TrackTab implements TracksGroup, ComparableTracksGroup {
 		return type.ordinal();
 	}
 
+	public boolean isBaseFolder() {
+		String id = getId();
+		return id.isEmpty();
+	}
+
 	@NonNull
 	public List<TrackItem> getTrackItems() {
 		List<TrackItem> trackItems = new ArrayList<>();
