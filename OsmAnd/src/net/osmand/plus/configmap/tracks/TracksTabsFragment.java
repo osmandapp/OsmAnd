@@ -317,9 +317,9 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		if (trackTab != null) {
 			trackTab.setSortMode(sortMode);
 			trackTabsHelper.sortTrackTab(trackTab);
-			trackTabsHelper.saveTabsSortModes();
-			if (trackTab.isBaseTracksFolder()) {
-				// update track tabs order when root folder sort mode changed
+			trackTabsHelper.saveTabSortMode(trackTab);
+			// Update tabs order if sort mode changed for the "Tracks" base folder
+			if (trackTab.isBaseFolder()) {
 				setTabs(getSortedTrackTabs(), trackTab.getId());
 			}
 			updateTabsContent();

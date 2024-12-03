@@ -120,7 +120,7 @@ public class TrackTab implements TracksGroup, ComparableTracksGroup {
 		return type.ordinal();
 	}
 
-	public boolean isBaseTracksFolder() {
+	public boolean isBaseFolder() {
 		String id = getId();
 		return id.isEmpty();
 	}
