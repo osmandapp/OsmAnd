@@ -5517,7 +5517,7 @@
     <string name="no_photos_available">Nie sú dostupné žiadne fotografie</string>
     <string name="percent_unit">%</string>
     <string name="obd_plugin_name">Merania vozidla</string>
-    <string name="obd_plugin_description">Sledujte kľúčové parametre vozidla pomocou protokolu OBD-II. Získajte údaje vrátane: * Rýchlosť otáčok * Spotreba paliva * Zostávajúce palivo * Vzdialednosť od naštartovania motora * Teplota nasávania * Teplota okolia * Teplota chladiacej kvapaliny * Rýchlosť vozidla * Percento batérie</string>
+    <string name="obd_plugin_description">Sledujte kľúčové parametre vozidla pomocou protokolu OBD-II. Získajte údaje vrátane:\n • Rýchlosť otáčok, Čas behu motora, Vypočítaná záťaž motora\n • Spotreba paliva, Tlak v palive, Zostávajúce palivo\n • Teplota nasávania, Teplota okolia, Teplota chladiacej kvapaliny, Teplota motorového oleja\n • Rýchlosť vozidla, Pozícia škrtiacej klapky, Napätie batérie\n</string>
     <string name="vehicle_metrics_plugin_settings">Nastavenia Meraní vozidla</string>
     <string name="obd_support">Podpora OBD</string>
     <string name="offline_wikivoyage">Offline Wikivoyage</string>
@@ -5553,7 +5553,7 @@
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Zobrazuje rýchlosť spotreby paliva podľa výpočtov (%/h)</string>
     <string name="obd_fuel_pressure">Tlak paliva</string>
     <string name="obd_fuel_level_percent">Úroveň paliva (%)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">Spotreba paliva l/h</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Rýchlosť spotreby paliva</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Spotreba paliva %/h</string>
     <string name="obd_fuel_type">Typ paliva</string>
     <string name="speedometer_maximum">Maximum</string>
@@ -5621,4 +5621,11 @@
     <string name="obd_engine_coolant_temp">Teplota chladiacej kvapaliny</string>
     <string name="obd_engine_runtime_desc">Zobrazuje ako dlho motor beží od jeho naštartovania.</string>
     <string name="obd_engine_oil_temperature_desc">Zobrazuje teplotu motorového oleja.</string>
+    <string name="av_audio_sample_rate">Vzorkovacia frekvencia zvuku</string>
+    <string name="auto_zoom_3d_angle">Uhol automatického 3D priblíženia</string>
+    <string name="shared_string_engine">Motor</string>
+    <string name="vehicle_metrics_recording_description">Vyberte parametre, ktoré sa majú zaznamenať do súboru GPX.</string>
+    <string name="av_audio_sample_rate_descr">Zvoľte vzorkovaciu frekvenciu zvuku.</string>
+    <string name="connect_new_scanner">Pripojiť nový snímač</string>
+    <string name="preview_next_turn">Zobraziť nasledujúce odbočenie</string>
 </resources>

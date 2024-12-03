@@ -5616,10 +5616,10 @@
     <string name="percent_hour">%/h</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Affiche la consommation de carburant du véhicule basée sur des calculs (%/h)</string>
     <string name="l_100km">l/100km</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Affiche la consommation de carburant du véhicule basée sur des calculs (l/km)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Affiche la consommation de carburant du véhicule basée sur des calculs (L/100 km)</string>
     <string name="kpa_unit">kPa</string>
     <string name="simulate_obd">Simuler des données OBD</string>
-    <string name="obd_fuel_consumption_rate_l_km">Consommation de carburant (l/km)</string>
+    <string name="obd_fuel_consumption_rate_l_km">Consommation de carburant (L/100 km)</string>
     <string name="obd_engine_runtime_desc">Affiche la durée de fonctionnement du moteur du véhicule à partir du scanneur OBD.</string>
     <string name="obd_throttle_position_desc">Affiche la pression de carburant du véhicule (pression de gauge) à partir du scanner obd</string>
     <string name="obd_throttle_position">Position de l\'accélérateur</string>

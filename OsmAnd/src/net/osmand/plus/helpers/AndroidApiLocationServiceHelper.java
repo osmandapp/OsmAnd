@@ -59,6 +59,7 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 		for (String provider : providers) {
 			if (provider == null
 					|| provider.equals(LocationManager.GPS_PROVIDER)
+					|| provider.equals(LocationManager.PASSIVE_PROVIDER)
 					|| provider.equals(LocationManager.FUSED_PROVIDER)) {
 				continue;
 			}

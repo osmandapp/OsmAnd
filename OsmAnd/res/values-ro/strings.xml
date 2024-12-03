@@ -5915,4 +5915,11 @@
     <string name="reset_average_value">Resetarea valorii medii</string>
     <string name="average_temperature_slider_description">Selectați intervalul de timp pentru măsurarea temperaturii medii.</string>
     <string name="current_temperature">Temperatura actuală</string>
+    <string name="shared_string_instant">Instantanee</string>
+    <string name="average_temperature">Temperatura medie instantanee</string>
+    <string name="show_minor_turns_descr">Benzile de circulație vor fi afișate în toate intersecțiile de trecere, indiferent de instrucțiunile vocale</string>
+    <string name="fuel_tank_capacity">Capacitatea rezervorului de combustibil</string>
+    <string name="shared_strings_dimensions">Dimensiuni</string>
+    <string name="litres">Litri</string>
+    <string name="us_gallons_unit">galon</string>
 </resources>

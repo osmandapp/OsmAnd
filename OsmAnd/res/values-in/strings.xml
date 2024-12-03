@@ -5972,7 +5972,7 @@
     <string name="obd_fuel_level_percent">Tingkat bahan bakar (%)</string>
     <string name="obd_fuel_left_km">Bahan bakar tersisa (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Tingkat konsumsi bahan bakar (obd)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">Tingkat konsumsi bahan bakar L/j</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Tingkat konsumsi bahan bakar</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Tingkat konsumsi bahan bakar %/j</string>
     <string name="route_guidance_desc">Menyediakan panduan rute waktu nyata, termasuk jarak belokan berikutnya, nama jalan, nama jalan saat ini, dan informasi jalur. Widget aktif selama navigasi.</string>
     <string name="obd_nothing_found_text">Tidak ada pemindai yang ditemukan</string>
