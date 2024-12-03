@@ -31,6 +31,7 @@ import androidx.lifecycle.ProcessLifecycleOwner;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
+import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.shared.OsmAndContextImpl;
 import net.osmand.PlatformUtil;
@@ -221,6 +222,7 @@ public class OsmandApplication extends MultiDexApplication {
 	DialogManager dialogManager;
 	RouteLayersHelper routeLayersHelper;
 	Model3dHelper model3dHelper;
+	TrackSortModesHelper trackSortModesHelper;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -659,6 +661,11 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public Model3dHelper getModel3dHelper() {
 		return model3dHelper;
+	}
+
+	@NonNull
+	public TrackSortModesHelper getTrackSortModesHelper() {
+		return trackSortModesHelper;
 	}
 
 	public CommandPlayer getPlayer() {

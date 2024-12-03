@@ -109,7 +109,6 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.Map.Entry;
 
 public class OsmandSettings {
 
@@ -1377,7 +1376,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<String> PREFERRED_LOCALE = new StringPreference(this, "preferred_locale", "").makeGlobal().makeShared();
 
-	public final OsmandPreference<String> MAP_PREFERRED_LOCALE = new StringPreference(this, "map_preferred_locale", "").makeGlobal().makeShared().cache();
+	public final OsmandPreference<String> MAP_PREFERRED_LOCALE = new StringPreference(this, "map_preferred_locale", "").makeProfile().cache();
 	public final OsmandPreference<Boolean> MAP_TRANSLITERATE_NAMES = new BooleanPreference(this, "map_transliterate_names", false) {
 
 		public Boolean getDefaultValue() {
@@ -2053,39 +2052,6 @@ public class OsmandSettings {
 
 	public final CommonPreference<TracksSortMode> SEARCH_TRACKS_SORT_MODE = new EnumStringPreference<>(this, "search_tracks_sort_mode", TracksSortMode.getDefaultSortMode(), TracksSortMode.values());
 	public final ListStringPreference TRACKS_TABS_SORT_MODES = (ListStringPreference) new ListStringPreference(this, "tracks_tabs_sort_modes", null, ";;").makeGlobal().makeShared().cache();
-
-	@NonNull
-	public Map<String, String> getTrackSortModes() {
-		return getTrackSortModes(TRACKS_TABS_SORT_MODES.getStringsList());
-	}
-
-	public void saveTabsSortModes(@NonNull Map<String, String> tabsSortModes) {
-		List<String> sortModes = getPlainSortModes(tabsSortModes);
-		TRACKS_TABS_SORT_MODES.setStringsList(sortModes);
-	}
-
-	@NonNull
-	private Map<String, String> getTrackSortModes(@Nullable List<String> modes) {
-		Map<String, String> sortModes = new HashMap<>();
-		if (!Algorithms.isEmpty(modes)) {
-			for (String sortMode : modes) {
-				String[] tabSortMode = sortMode.split(",,");
-				if (tabSortMode.length == 2) {
-					sortModes.put(tabSortMode[0], tabSortMode[1]);
-				}
-			}
-		}
-		return sortModes;
-	}
-
-	@NonNull
-	private List<String> getPlainSortModes(@NonNull Map<String, String> tabsSortModes) {
-		List<String> sortTypes = new ArrayList<>();
-		for (Entry<String, String> entry : tabsSortModes.entrySet()) {
-			sortTypes.add(entry.getKey() + ",," + entry.getValue());
-		}
-		return sortTypes;
-	}
 
 	public final OsmandPreference<Boolean> ANIMATE_MY_LOCATION = new BooleanPreference(this, "animate_my_location", true).makeProfile().cache();
 
@@ -2872,7 +2838,7 @@ public class OsmandSettings {
 	}
 
 	public final CommonPreference<Boolean> IS_QUICK_ACTION_TUTORIAL_SHOWN = new BooleanPreference(this, "quick_action_tutorial", false).makeGlobal().makeShared();
-	public final ListStringPreference QUICK_ACTION_BUTTONS = (ListStringPreference) new ListStringPreference(this, "quick_action_buttons", DEFAULT_BUTTON_ID + ";", ";").makeGlobal().makeShared().storeLastModifiedTime();
+	public final ListStringPreference QUICK_ACTION_BUTTONS = (ListStringPreference) new ListStringPreference(this, "quick_action_buttons", DEFAULT_BUTTON_ID + ";", ";").makeGlobal();
 
 
 	/**
@@ -3203,6 +3169,8 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SAFE_MODE = new BooleanPreference(this, "safe_mode", false).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> PT_SAFE_MODE = new BooleanPreference(this, "pt_safe_mode", false).makeProfile();
 	public final OsmandPreference<Boolean> NATIVE_RENDERING_FAILED = new BooleanPreference(this, "native_rendering_failed_init", false).makeGlobal();
+
+	public final CommonPreference<Integer> LOCATION_INTERPOLATION_PERCENT = new IntPreference(this, "location_interpolation_percent", 0).makeGlobal().makeShared();
 
 	public final OsmandPreference<Boolean> USE_OPENGL_RENDER = new BooleanPreference(this, "use_opengl_render", Build.VERSION.SDK_INT >= Build.VERSION_CODES.P).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Integer> OPENGL_RENDER_FAILED = new IntPreference(this, "opengl_render_failed_count", 0).makeGlobal().cache();

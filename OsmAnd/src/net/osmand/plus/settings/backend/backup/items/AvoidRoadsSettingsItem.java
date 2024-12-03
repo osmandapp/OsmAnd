@@ -186,7 +186,7 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 	@Nullable
 	@Override
 	public SettingsItemReader<? extends SettingsItem> getReader() {
-		return getJsonReader();
+		return getJsonReader(false);
 	}
 
 	@Nullable

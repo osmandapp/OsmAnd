@@ -883,6 +883,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (infoCard != null) {
 			infoCard.updateContent();
 		}
+		if (metadataExtensionsCard != null) {
+			metadataExtensionsCard.updateContent();
+		}
 	}
 
 	private void updateCardsLayout() {
@@ -1389,7 +1392,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				tileBoxHeightPx = tb.getPixHeight() - fHeight;
 			}
 			if (r.getLeft() != 0 && r.getRight() != 0) {
-				mapActivity.getMapView().fitRectToMap(r.getLeft(), r.getRight(), r.getTop(), r.getBottom(), tileBoxWidthPx, tileBoxHeightPx, 0, marginStartPx);
+				mapActivity.getMapView().fitRectToMap(r.getLeft(), r.getRight(), r.getTop(), r.getBottom(),
+						tileBoxWidthPx, tileBoxHeightPx, 0, marginStartPx);
 			}
 			adjustMapPosition = false;
 		}

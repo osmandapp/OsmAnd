@@ -5532,7 +5532,6 @@
     <string name="obd_fuel_type_bifuel_hydrogen">Combustible dual con hidrógeno</string>
     <string name="vehicle_metrics_plugin_settings">Ajustes de estadísticas del vehículo</string>
     <string name="obd_battery_voltage">Voltaje de batería</string>
-    <string name="obd_fuel_left_distance">Combustible restante (distancia)</string>
     <string name="obd_fuel_type">Tipo de combustible</string>
     <string name="shared_string_decrease">Disminuir</string>
     <string name="shared_string_increase">Aumentar</string>
@@ -5565,7 +5564,6 @@
     <string name="obd_fuel_type_hybrid_gasoline">Híbrido a gasolina</string>
     <string name="obd_fuel_type_hybrid_electric_combustion">Híbrido eléctrico y a combustión</string>
     <string name="percent_unit">%</string>
-    <string name="obd_rpm">RPM</string>
     <string name="obd_fuel_left_distance_desc">Muestra la distancia a recorrer con el nivel de combustible restante según el sensor OBD</string>
     <string name="obd_fuel_type_desc">Muestra el tipo de combustible según el sensor OBD</string>
     <string name="obd_ambient_air_temp">Temperatura ambiente</string>
@@ -5599,8 +5597,6 @@
     <string name="obd_fuel_consumption_rate_sensor_desc">Muestra la tasa de consumo del combustible del vehículo según el sensor (l/h)</string>
     <string name="obd_fuel_level_liter">Nivel de combustible (l)</string>
     <string name="obd_fuel_level_percent">Nivel de combustible (%)</string>
-    <string name="obd_fuel_left_percent">Combustible restante (%)</string>
-    <string name="obd_fuel_left_liter">Combustible restante (l)</string>
     <string name="obd_fuel_left_km">Combustible restante (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Tasa de consumo del combustible (obd)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Tasa de consumo del combustible en l/h</string>

@@ -8,7 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -486,24 +486,24 @@ public class NotesFragment extends OsmAndListFragment implements FragmentStateHo
 		if (!recording.getFile().exists()) {
 			return;
 		}
-		MediaScannerConnection.scanFile(getActivity(), new String[] {recording.getFile().getAbsolutePath()},
-				null, (path, uri) -> {
-					Activity activity = getActivity();
-					if (activity != null) {
-						Intent shareIntent = new Intent(Intent.ACTION_SEND);
-						if (recording.isPhoto()) {
-							shareIntent.setType("image/*");
-						} else if (recording.isAudio()) {
-							shareIntent.setType("audio/*");
-						} else if (recording.isVideo()) {
-							shareIntent.setType("video/*");
-						}
-						shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-						shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-						Intent chooserIntent = Intent.createChooser(shareIntent, getString(R.string.share_note));
-						AndroidUtils.startActivityIfSafe(activity, shareIntent, chooserIntent);
-					}
-				});
+
+		Activity activity = getActivity();
+		if (activity != null) {
+			Intent shareIntent = new Intent(Intent.ACTION_SEND);
+			if (recording.isPhoto()) {
+				shareIntent.setType("image/*");
+			} else if (recording.isAudio()) {
+				shareIntent.setType("audio/*");
+			} else if (recording.isVideo()) {
+				shareIntent.setType("video/*");
+			}
+			Uri uri = AndroidUtils.getUriForFile(activity, recording.getFile().getAbsoluteFile());
+			shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+			shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+			shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+			Intent chooserIntent = Intent.createChooser(shareIntent, getString(R.string.share_note));
+			AndroidUtils.startActivityIfSafe(activity, shareIntent, chooserIntent);
+		}
 	}
 
 	private void showOnMap(Recording recording) {

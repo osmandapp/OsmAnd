@@ -328,7 +328,7 @@ public class RouteDataObject {
 				int k = kt[i];
 				if (region.routeEncodingRules.size() > k) {
 					if (refTag.equals(region.routeEncodingRules.get(k).getTag())) {
-						return names.get(k);
+						return Algorithms.splitAndClearRepeats(names.get(k), ";");
 					}
 					if (refTagDefault.equals(region.routeEncodingRules.get(k).getTag())) {
 						refDefault = names.get(k);
@@ -336,7 +336,7 @@ public class RouteDataObject {
 				}
 			}
 			if (refDefault != null) {
-				return refDefault;
+				return Algorithms.splitAndClearRepeats(refDefault, ";");
 			}
 			//return names.get(region.refTypeRule);
 		}

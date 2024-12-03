@@ -100,16 +100,26 @@ public class MapRendererContext {
 	 *
 	 * @param mapRendererView Reference to MapRendererView
 	 */
-	public void setMapRendererView(@Nullable MapRendererView mapRendererView) {
-		boolean update = (this.mapRendererView != mapRendererView);
-		if (update && this.mapRendererView != null)
-			this.mapRendererView.stopRenderer();
-		this.mapRendererView = mapRendererView;
-		if (!update) {
+	public synchronized void setMapRendererView(@Nullable MapRendererView mapRendererView) {
+		if (this.mapRendererView == mapRendererView) {
 			return;
 		}
+		this.mapRendererView = mapRendererView;
 		if (mapRendererView != null) {
 			applyCurrentContextToView();
+		}
+	}
+
+	public synchronized void suspendMapRendererView(@Nullable MapRendererView mapRendererView) {
+		if (this.mapRendererView != null && (mapRendererView == null || this.mapRendererView == mapRendererView)) {
+			this.mapRendererView.handleOnPause();
+		}
+	}
+
+	public synchronized void releaseMapRendererView(@Nullable MapRendererView mapRendererView) {
+		if (this.mapRendererView != null && (mapRendererView == null || this.mapRendererView == mapRendererView)) {
+			this.mapRendererView.stopRenderer();
+			this.mapRendererView = null;
 		}
 	}
 
@@ -428,13 +438,15 @@ public class MapRendererContext {
 		}
 	}
 
+	public void presetMapRendererOptions(@NonNull MapRendererView mapRendererView) {
+		mapRendererView.setupOptions.setMaxNumberOfRasterMapLayersInBatch(1);
+	}
+
 	private void applyCurrentContextToView() {
 		MapRendererView mapRendererView = this.mapRendererView;
 		if (mapRendererView == null) {
 			return;
 		}
-		mapRendererView.setMapRendererSetupOptionsConfigurator(
-				mapRendererSetupOptions -> mapRendererSetupOptions.setMaxNumberOfRasterMapLayersInBatch(1));
 		if (mapRendererView instanceof AtlasMapRendererView) {
 			cachedReferenceTileSize = getReferenceTileSize();
 			((AtlasMapRendererView) mapRendererView).setReferenceTileSizeOnScreenInPixels(cachedReferenceTileSize);
@@ -442,6 +454,7 @@ public class MapRendererContext {
 		updateElevationConfiguration();
 
 		if (obfMapRasterLayerProvider != null) {
+			mapRendererView.resetMapLayerProvider(providerType.layerIndex);
 			mapRendererView.setMapLayerProvider(providerType.layerIndex, obfMapRasterLayerProvider);
 		}
 		if (obfMapSymbolsProvider != null) {

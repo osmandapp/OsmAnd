@@ -546,7 +546,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				tileBoxHeightPx = tb.getPixHeight() - fHeight;
 			}
 			if (r.getLeft() != 0 && r.getRight() != 0) {
-				mapActivity.getMapView().fitRectToMap(r.getLeft(), r.getRight(), r.getTop(), r.getBottom(), tileBoxWidthPx, tileBoxHeightPx, 0, marginLeftPx);
+				mapActivity.getMapView().fitRectToMap(r.getLeft(), r.getRight(), r.getTop(), r.getBottom(),
+						tileBoxWidthPx, tileBoxHeightPx, 0, marginLeftPx);
 			}
 		}
 	}

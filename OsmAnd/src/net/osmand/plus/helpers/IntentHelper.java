@@ -2,8 +2,7 @@ package net.osmand.plus.helpers;
 
 import static net.osmand.plus.backup.BackupListeners.OnRegisterDeviceListener;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.CALLING_FRAGMENT_TAG;
-import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_NAME;
-import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_TYPE;
+import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_ID;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.SELECT_ALL_ITEMS_ON_TAB;
 import static net.osmand.plus.helpers.MapFragmentsHelper.CLOSE_ALL_FRAGMENTS;
 import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED_TYPES;
@@ -560,13 +559,12 @@ public class IntentHelper {
 				clearIntent(intent);
 			}
 			Bundle extras = intent.getExtras();
-			if (extras != null && intent.hasExtra(PRESELECTED_TRACKS_TAB_NAME) && intent.hasExtra(PRESELECTED_TRACKS_TAB_TYPE)) {
-				String name = extras.getString(PRESELECTED_TRACKS_TAB_NAME, TrackTabType.ALL.name());
+			if (extras != null && intent.hasExtra(PRESELECTED_TRACKS_TAB_ID)) {
+				String id = extras.getString(PRESELECTED_TRACKS_TAB_ID, TrackTabType.ALL.name());
 				String callingFragmentTag = extras.getString(CALLING_FRAGMENT_TAG, null);
-				TrackTabType type = AndroidUtils.getSerializable(extras, PRESELECTED_TRACKS_TAB_TYPE, TrackTabType.class);
 				boolean selectAllItems = intent.getBooleanExtra(SELECT_ALL_ITEMS_ON_TAB, false);
 
-				PreselectedTabParams params = new PreselectedTabParams(name, type != null ? type : TrackTabType.ALL, selectAllItems);
+				PreselectedTabParams params = new PreselectedTabParams(id, selectAllItems);
 				TracksTabsFragment.showInstance(mapActivity.getSupportFragmentManager(), params, callingFragmentTag);
 				clearIntent(intent);
 			}

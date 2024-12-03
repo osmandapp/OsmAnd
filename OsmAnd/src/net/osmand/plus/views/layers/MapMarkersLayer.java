@@ -15,6 +15,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextPaint;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Pair;
 import android.view.GestureDetector;
 import android.view.MotionEvent;

@@ -5687,7 +5687,6 @@
     <string name="obd_fuel_consumption_rate_l_h">Forbruk av drivstoff (l/t)</string>
     <string name="obd_fuel_level_liter">Tanknivå (l)</string>
     <string name="obd_fuel_level_percent">Tanknivå (%)</string>
-    <string name="obd_fuel_left_percent">Drivstoff igjen (%)</string>
     <string name="obd_fuel_consumption_rate_sensor">Forbruk av drivstoff (sensor)</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Viser kjøretøyets drivstoff-forbruk basert på sensor (l/t)</string>
     <string name="obd_fuel_consumption_rate_l_h_desc">Viser kjøretøyets drivstoff-forbruk basert på utregninger (l/t)</string>
@@ -5696,7 +5695,6 @@
     <string name="shared_string_bluetooth">Blåtann</string>
     <string name="obd_vehicle_info">Kjøretøyinfo</string>
     <string name="start_trip_recording_first_m">Start turopptak først.</string>
-    <string name="obd_fuel_left_liter">Drivstoff igjen (l)</string>
     <string name="obd_widget_engine_speed">Turtall</string>
     <string name="obd_nothing_found_text">Fant ingen skannere</string>
     <string name="screen_is_unlocked">Pekeskjerm opplåst.</string>

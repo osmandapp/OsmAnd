@@ -190,11 +190,12 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		PopUpMenu.show(displayData);
 	}
 
-	protected void setTabs(@NonNull List<TrackTab> tabs) {
+	@Override
+	protected void setTabs(@NonNull List<TrackTab> tabs, int preselectedTabIndex) {
 		tabSize = tabs.size();
 		setViewPagerAdapter(viewPager, tabs);
 		tabLayout.setViewPager(viewPager);
-		viewPager.setCurrentItem(0);
+		viewPager.setCurrentItem(preselectedTabIndex);
 		viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
 			@Override
 			public void onPageSelected(int position) {
@@ -228,7 +229,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 				selectionButton.setEnabled(!Algorithms.isEmpty(itemsSelectionHelper.getSelectedItems()) || notAllSelected);
 			}
 			applyButton.setEnabled(itemsSelectionHelper.hasItemsToApply());
-			TrackTab allTracksTab = trackTabsHelper.getTrackTabs().get(TrackTabType.ALL.name());
+			TrackTab allTracksTab = trackTabsHelper.getTrackTab(TrackTabType.ALL.name());
 			searchButton.setVisibility(allTracksTab == null ? View.GONE : View.VISIBLE);
 		}
 	}
@@ -262,7 +263,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 
 	@Override
 	public void loadTracksFinished(@NonNull TrackFolder folder) {
-		trackTabsHelper.updateTrackItems(folder.getFlattenedTrackItems());
+		trackTabsHelper.updateTrackItems(folder);
 		AndroidUiHelper.updateVisibility(progressBar, false);
 		updateTrackTabs();
 		applyPreselectedParams();
@@ -277,10 +278,10 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 
 	private void applyPreselectedParams() {
 		if (preselectedTabParams != null) {
-			String tabName = preselectedTabParams.getPreselectedTabName(app, getTrackTabs());
-			TrackTab trackTab = getTab(tabName);
+			String tabId = preselectedTabParams.getPreselectedTabId();
+			TrackTab trackTab = getTab(tabId);
 			if (trackTab != null) {
-				setSelectedTab(tabName);
+				setSelectedTab(tabId);
 
 				if (preselectedTabParams.shouldSelectAll()) {
 					itemsSelectionHelper.onItemsSelected(trackTab.getTrackItems(), true);
@@ -316,7 +317,11 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		if (trackTab != null) {
 			trackTab.setSortMode(sortMode);
 			trackTabsHelper.sortTrackTab(trackTab);
-			trackTabsHelper.saveTabsSortModes();
+			trackTabsHelper.saveTabSortMode(trackTab);
+			// Update tabs order if sort mode changed for the "Tracks" base folder
+			if (trackTab.isBaseFolder()) {
+				setTabs(getSortedTrackTabs(), trackTab.getId());
+			}
 			updateTabsContent();
 		}
 	}

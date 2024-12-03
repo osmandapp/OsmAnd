@@ -12,6 +12,7 @@ import net.osmand.data.LatLon
 import net.osmand.data.QuadRect
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
+import net.osmand.plus.auto.views.CarSurfaceView
 import net.osmand.plus.views.Zoom
 import net.osmand.search.core.SearchResult
 import net.osmand.util.Algorithms
@@ -102,13 +103,13 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 			if (!mapRect.hasInitialState()) {
 				val mapView = app.osmandMap.mapView
 				val tb = mapView.rotatedTileBox
-				tb.setCenterLocation(tb.centerPixelX.toFloat() / tb.pixWidth, 0.5f)
 				tb.rotate = 0f;
-				mapView.fitRectToMap(
-					tb,
-					mapRect.left, mapRect.right, mapRect.top, mapRect.bottom,
-					0, 0, true, true
-				)
+				tb.mapDensity = 1.0; //CarSurfaceView.CAR_DENSITY_SCALE.toDouble(); - strangely it works
+				val rtl = false; // panel is always on the left
+				val leftPanel =  tb.pixWidth / 2; // assume panel takes half screen
+				val tileBoxWidthPx = tb.pixWidth - leftPanel;
+				mapView.fitRectToMap(tb, mapRect.left, mapRect.right, mapRect.top, mapRect.bottom,
+					tileBoxWidthPx, 0, 0, 0, rtl, true)
 				mapView.refreshMap()
 			}
 		}

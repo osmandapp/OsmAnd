@@ -51,7 +51,7 @@ class TrackFolderLoaderTask(
 		if (!shouldLoadFolder(cachedRootFolder)) return cachedRootFolder!!
 
 		val start = currentTimeMillis()
-		log.info("Start loading tracks in ${folder.getDirName()}")
+		log.info("Start loading tracks in ${folder.getDirName(true)}")
 
 		folder.clearData()
 		loadingTime = currentTimeMillis()
@@ -114,6 +114,7 @@ class TrackFolderLoaderTask(
 
 					if (file.isDirectory()) {
 						val subfolder = TrackFolder(file, folder)
+						subfolder.dirItem = GpxDbHelper.getGpxDirItem(file)
 						launch {
 							log.info("Loading track subfolder = $subfolder")
 							scanFolder(subfolder, progress, trackItems)

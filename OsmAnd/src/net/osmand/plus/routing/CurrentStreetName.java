@@ -25,10 +25,17 @@ public class CurrentStreetName {
 	public List<RoadShield> shields = new ArrayList<>();
 	public String exitRef;
 
+	private boolean useDestination = false;
+
 	public CurrentStreetName() {
 	}
 
 	public CurrentStreetName(@NonNull NextDirectionInfo info) {
+		setupStreetName(info);
+	}
+
+	public CurrentStreetName(@NonNull NextDirectionInfo info, boolean useDestination) {
+		this.useDestination = useDestination;
 		setupStreetName(info);
 	}
 
@@ -55,10 +62,12 @@ public class CurrentStreetName {
 		boolean isSet = false;
 		// 1. turn is imminent
 		if (info.distanceTo > 0 && adt.isTurnStateActive(adt.getSpeed(l), info.distanceTo * 1.3, STATE_PREPARE_TURN)) {
+			useDestination = true;
 			isSet = setupStreetName(info);
 		}
 		// 2. display current road street name
 		if (!isSet) {
+			useDestination = false;
 			RouteSegmentResult rs = routingHelper.getCurrentSegmentResult();
 			if (rs != null) {
 				text = getRouteSegmentStreetName(routingHelper, rs, false);
@@ -93,8 +102,15 @@ public class CurrentStreetName {
 			isSet = !(Algorithms.isEmpty(name) && Algorithms.isEmpty(ref) && Algorithms.isEmpty(destinationName));
 
 			RouteDataObject dataObject = info.directionInfo.getRouteDataObject();
-			shields = RoadShield.create(dataObject);
-			text = RoutingHelperUtils.formatStreetName(name, ref, destinationName, "»", shields);
+			if (useDestination) {
+				shields = RoadShield.createDestination(dataObject, info.directionInfo);
+			} else {
+				shields = RoadShield.create(dataObject);
+			}
+			if (shields.isEmpty()) {
+				destinationName = info.directionInfo.getDestinationRefAndName();
+			}
+			text = RoutingHelperUtils.formatStreetName(name, ref, destinationName, "", shields);
 			turnType = info.directionInfo.getTurnType();
 			if (turnType == null) {
 				turnType = TurnType.valueOf(TurnType.C, false);

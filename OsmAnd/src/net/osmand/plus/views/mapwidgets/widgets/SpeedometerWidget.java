@@ -85,10 +85,17 @@ public class SpeedometerWidget {
 	private final static int SPEED_LIMIT_SIZE_M = 72;
 	private final static int SPEED_LIMIT_SIZE_L = 96;
 	private final static int SPEED_LIMIT_DESCRIPTION_SIZE_USUAL = 11;
-	private final static int SPEED_LIMIT_DESCRIPTION_SIZE_CANADA_S = 9;
+	private final static int SPEED_LIMIT_DESCRIPTION_SIZE_CANADA_S = 7;
+	private final static int SPEED_LIMIT_DESCRIPTION_SIZE_CANADA_M = 9;
 	private final static int SPEED_LIMIT_CONTAINER_US_PADDING_S = 7;
+	private final static int SPEED_LIMIT_CONTAINER_US_PADDING_BOTTOM_S = 5;
 	private final static int SPEED_LIMIT_CONTAINER_US_PADDING_M = 9;
+	private final static int SPEED_LIMIT_CONTAINER_US_PADDING_BOTTOM_M = 7;
 	private final static int SPEED_LIMIT_CONTAINER_US_PADDING_L = 12;
+	private final static int SPEED_LIMIT_CONTAINER_US_PADDING_BOTTOM_L = 9;
+	private final static int SPEED_LIMIT_CONTAINER_PADDING_S = 10;
+	private final static int SPEED_LIMIT_CONTAINER_PADDING_M = 12;
+	private final static int SPEED_LIMIT_CONTAINER_PADDING_L = 14;
 	private final static int SPEED_LIMIT_VALUE_WEIGHT = 2;
 	private final static int SPEED_LIMIT_DESCRIPTION_WEIGHT = 1;
 
@@ -162,9 +169,6 @@ public class SpeedometerWidget {
 		}
 
 		boolean isUsaOrCanada = isUsaOrCanadaRegion();
-		LinearLayout.LayoutParams speedLimitValueParams = (LinearLayout.LayoutParams) speedLimitValueView.getLayoutParams();
-		speedLimitValueParams.setMargins(0, 0, 0, 0);
-		speedLimitValueView.setLayoutParams(speedLimitValueParams);
 		AndroidUiHelper.updateVisibility(speedLimitDescription, isUsaOrCanada);
 		WidgetSize newWidgetSize = settings.SPEEDOMETER_SIZE.getModeValue(mode);
 		DrivingRegion newDrivingRegion = settings.DRIVING_REGION.getModeValue(mode);
@@ -177,13 +181,10 @@ public class SpeedometerWidget {
 		LinearLayout.LayoutParams speedLimitLayoutParams = (LinearLayout.LayoutParams) speedLimitContainer.getLayoutParams();
 		speedLimitLayoutParams.gravity = Gravity.CENTER;
 		LinearLayout.LayoutParams speedometerLayoutParams = (LinearLayout.LayoutParams) speedometerContainer.getLayoutParams();
-		if (isUsaOrCanada) {
-			speedLimitValueParams.height = LinearLayout.LayoutParams.WRAP_CONTENT;
-		} else {
-			speedLimitValueParams.height = LinearLayout.LayoutParams.MATCH_PARENT;
-		}
 
-		int speedLimitPadding;
+		int speedLimitPaddingTop;
+		int speedLimitPaddingBottom;
+		int speedLimitPaddingHorizontal;
 		speedLimitContainer.setLayoutParams(speedLimitLayoutParams);
 		switch (previousWidgetSize) {
 			case MEDIUM:
@@ -195,11 +196,13 @@ public class SpeedometerWidget {
 
 				speedLimitLayoutParams.height = dpToPx(SPEED_LIMIT_SIZE_M);
 				speedLimitLayoutParams.width = dpToPx(SPEED_LIMIT_SIZE_M);
-				speedLimitValueView.setTextSize(TypedValue.COMPLEX_UNIT_SP, SPEED_LIMIT_TEXT_SIZE_M);
-				speedLimitPadding = isUsaOrCanada ? dpToPx(SPEED_LIMIT_CONTAINER_US_PADDING_M) : 0;
-				speedLimitContainer.setPadding(speedLimitPadding, speedLimitPadding, speedLimitPadding, speedLimitPadding);
+				speedLimitValueView.setTextSize(TypedValue.COMPLEX_UNIT_SP, SPEEDOMETER_TEXT_SIZE_M);
+				speedLimitPaddingTop = dpToPx(isUsaOrCanada ? SPEED_LIMIT_CONTAINER_US_PADDING_M : SPEED_LIMIT_CONTAINER_PADDING_M);
+				speedLimitPaddingBottom = dpToPx(isUsaOrCanada ? SPEED_LIMIT_CONTAINER_US_PADDING_BOTTOM_M : SPEED_LIMIT_CONTAINER_PADDING_M);
+				speedLimitPaddingHorizontal = dpToPx(isUsaOrCanada ? SPEED_LIMIT_CONTAINER_US_PADDING_M : SPEED_LIMIT_CONTAINER_PADDING_M);
+				speedLimitContainer.setPadding(speedLimitPaddingHorizontal, speedLimitPaddingTop, speedLimitPaddingHorizontal, speedLimitPaddingBottom);
 				speedLimitContainer.setLayoutParams(speedLimitLayoutParams);
-				speedLimitDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, SPEED_LIMIT_DESCRIPTION_SIZE_USUAL);
+				speedLimitDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, isCanadaRegion() ? SPEED_LIMIT_DESCRIPTION_SIZE_CANADA_M : SPEED_LIMIT_DESCRIPTION_SIZE_USUAL);
 				break;
 			case LARGE:
 				speedometerLayoutParams.height = dpToPx(SPEEDOMETER_HEIGHT_L);
@@ -210,8 +213,10 @@ public class SpeedometerWidget {
 
 				speedLimitLayoutParams.height = dpToPx(SPEED_LIMIT_SIZE_L);
 				speedLimitLayoutParams.width = dpToPx(SPEED_LIMIT_SIZE_L);
-				speedLimitPadding = isUsaOrCanada ? dpToPx(SPEED_LIMIT_CONTAINER_US_PADDING_L) : 0;
-				speedLimitContainer.setPadding(speedLimitPadding, speedLimitPadding, speedLimitPadding, speedLimitPadding);
+				speedLimitPaddingTop = dpToPx(isUsaOrCanada ? SPEED_LIMIT_CONTAINER_US_PADDING_L : SPEED_LIMIT_CONTAINER_PADDING_L);
+				speedLimitPaddingBottom = dpToPx(isUsaOrCanada ?  SPEED_LIMIT_CONTAINER_US_PADDING_BOTTOM_L : SPEED_LIMIT_CONTAINER_PADDING_L);
+				speedLimitPaddingHorizontal = dpToPx(isUsaOrCanada ?  SPEED_LIMIT_CONTAINER_US_PADDING_L : SPEED_LIMIT_CONTAINER_PADDING_L);
+				speedLimitContainer.setPadding(speedLimitPaddingHorizontal, speedLimitPaddingTop, speedLimitPaddingHorizontal, speedLimitPaddingBottom);
 				speedLimitContainer.setLayoutParams(speedLimitLayoutParams);
 				speedLimitValueView.setTextSize(TypedValue.COMPLEX_UNIT_SP, SPEED_LIMIT_TEXT_SIZE_L);
 				speedLimitDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, SPEED_LIMIT_DESCRIPTION_SIZE_USUAL);
@@ -225,8 +230,10 @@ public class SpeedometerWidget {
 
 				speedLimitLayoutParams.height = dpToPx(SPEED_LIMIT_SIZE_S);
 				speedLimitLayoutParams.width = dpToPx(SPEED_LIMIT_SIZE_S);
-				speedLimitPadding = isUsaOrCanada ? dpToPx(SPEED_LIMIT_CONTAINER_US_PADDING_S) : 0;
-				speedLimitContainer.setPadding(speedLimitPadding, speedLimitPadding, speedLimitPadding, speedLimitPadding);
+				speedLimitPaddingTop = dpToPx(isUsaOrCanada ? SPEED_LIMIT_CONTAINER_US_PADDING_S : SPEED_LIMIT_CONTAINER_PADDING_S);
+				speedLimitPaddingBottom = dpToPx(isUsaOrCanada ? SPEED_LIMIT_CONTAINER_US_PADDING_BOTTOM_S : SPEED_LIMIT_CONTAINER_PADDING_S);
+				speedLimitPaddingHorizontal = dpToPx(isUsaOrCanada ? SPEED_LIMIT_CONTAINER_US_PADDING_S : SPEED_LIMIT_CONTAINER_PADDING_S);
+				speedLimitContainer.setPadding(speedLimitPaddingHorizontal, speedLimitPaddingTop, speedLimitPaddingHorizontal, speedLimitPaddingBottom);
 				speedLimitContainer.setLayoutParams(speedLimitLayoutParams);
 				speedLimitValueView.setTextSize(TypedValue.COMPLEX_UNIT_SP, SPEED_LIMIT_TEXT_SIZE_S);
 				speedLimitDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, isCanadaRegion() ? SPEED_LIMIT_DESCRIPTION_SIZE_CANADA_S : SPEED_LIMIT_DESCRIPTION_SIZE_USUAL);
