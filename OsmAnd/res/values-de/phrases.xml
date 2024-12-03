@@ -3101,7 +3101,7 @@
     <string name="poi_animal_shelter_purpose">Tierheimzweck</string>
     <string name="poi_owner">Eigentümer</string>
     <string name="poi_spaceport">Raumfahrtzentrum</string>
-    <string name="poi_lock_basin">Schiffsschleuse</string>
+    <string name="poi_lock_basin">Schleusenkammer</string>
     <string name="poi_animal_shelter_purpose_adoption_yes">Vermittlung: ja</string>
     <string name="poi_animal_shelter_purpose_adoption_no">Vermittlung: nein</string>
     <string name="poi_animal_shelter_purpose_release_yes">Auswilderung: ja</string>
@@ -4569,8 +4569,8 @@
     <string name="poi_draft">Fahrwasserstiefe</string>
     <string name="poi_boat_destination">Bootszugang: Anlieger</string>
     <string name="poi_boat_permissive">Bootszugang: zulässig</string>
-    <string name="poi_lock_ref">Referenz einer Schleuse</string>
-    <string name="poi_lock_height">Höhe einer Schleuse</string>
+    <string name="poi_lock_ref">Schleusen-Referenz</string>
+    <string name="poi_lock_height">Schleusenhöhe</string>
     <string name="poi_boat_designated">Bootszugang: ausgewiesen</string>
     <string name="poi_boat_private">Bootszugang: privat</string>
     <string name="poi_boat_yes">Bootszugang: ja</string>
