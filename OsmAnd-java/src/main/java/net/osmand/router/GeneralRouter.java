@@ -703,20 +703,10 @@ public class GeneralRouter implements VehicleRouter {
 			totalPenalty += Math.abs(ts - prevTs) / 2;
 		}
 		
-//		int[] pt = prev.getRoad().getPointTypes(prevSegmentEnd);
-//		if(pt != null) {
-//			RouteRegion reg = prev.getRoad().region;
-//			for (int i = 0; i < pt.length; i++) {
-//				RouteTypeRule r = reg.quickGetEncodingRule(pt[i]);
-//				if ("highway".equals(r.getTag()) && "traffic_signals".equals(r.getValue())) {
-//					// traffic signals don't add turn info
-//					return 0;
-//				}
-//			}
-//		}
 		if (shortestRoute) {
 			return totalPenalty;
 		}
+
 		if(segment.getRoad().roundabout() && !prev.getRoad().roundabout()) {
 			double rt = getRoundaboutTurn();
 			if(rt > 0) {
