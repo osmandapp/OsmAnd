@@ -1697,19 +1697,18 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	                         int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx) {
 		RotatedTileBox tb = currentViewport.copy();
 		fitRectToMap(tb, left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx,
-				marginTopPx, 0, isLayoutRtl(), false);
+				marginTopPx, 0, isLayoutRtl(), MARGIN_PERCENT_TO_FIT, false);
 	}
 
 	public void fitRectToMap(double left, double right, double top, double bottom,
 			int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx) {
 		RotatedTileBox tb = currentViewport.copy();
 		fitRectToMap(tb, left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx,
-				marginTopPx, marginLeftPx, isLayoutRtl(), false);
+				marginTopPx, marginLeftPx, isLayoutRtl(), MARGIN_PERCENT_TO_FIT, false);
 	}
 
 	public void fitRectToMap(RotatedTileBox tb, double left, double right, double top, double bottom,
-			int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx, boolean rtl, boolean rotate) {
-		float border = MARGIN_PERCENT_TO_FIT;
+			int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx, boolean rtl, float border, boolean rotate) {
 		int dx = marginLeftPx;
 		int dy = marginTopPx;
 		int tbw = (tileBoxWidthPx > 0 ? tileBoxWidthPx : tb.getPixWidth());
