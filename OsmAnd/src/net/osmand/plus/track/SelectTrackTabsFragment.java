@@ -91,11 +91,11 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 		toolbar.findViewById(R.id.back_button).setOnClickListener(v -> dismiss());
 	}
 
-	protected void setTabs(@NonNull List<TrackTab> tabs) {
+	protected void setTabs(@NonNull List<TrackTab> tabs, int preselectedTabIndex) {
 		tabSize = tabs.size();
 		setViewPagerAdapter(viewPager, tabs);
 		tabLayout.setViewPager(viewPager);
-		viewPager.setCurrentItem(0);
+		viewPager.setCurrentItem(preselectedTabIndex);
 	}
 
 	@NonNull

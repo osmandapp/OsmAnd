@@ -25,7 +25,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
-import net.osmand.IndexConstants;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -191,11 +190,12 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		PopUpMenu.show(displayData);
 	}
 
-	protected void setTabs(@NonNull List<TrackTab> tabs) {
+	@Override
+	protected void setTabs(@NonNull List<TrackTab> tabs, int preselectedTabIndex) {
 		tabSize = tabs.size();
 		setViewPagerAdapter(viewPager, tabs);
 		tabLayout.setViewPager(viewPager);
-		viewPager.setCurrentItem(0);
+		viewPager.setCurrentItem(preselectedTabIndex);
 		viewPager.addOnPageChangeListener(new SimpleOnPageChangeListener() {
 			@Override
 			public void onPageSelected(int position) {
@@ -318,6 +318,10 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 			trackTab.setSortMode(sortMode);
 			trackTabsHelper.sortTrackTab(trackTab);
 			trackTabsHelper.saveTabsSortModes();
+			if (trackTab.isBaseTracksFolder()) {
+				// update track tabs order when root folder sort mode changed
+				setTabs(getSortedTrackTabs(), trackTab.getId());
+			}
 			updateTabsContent();
 		}
 	}
