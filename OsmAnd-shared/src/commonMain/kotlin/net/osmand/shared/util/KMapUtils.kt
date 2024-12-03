@@ -758,4 +758,7 @@ object KMapUtils {
 		}
 		return KGeoParsedPoint(lat, lon, z)
 	}
+
+	fun interpolateLatLon(lat1: Double, lon1: Double, lat2: Double, lon2: Double, fraction: Double) =
+		KLatLon(lat1 + (lat2 - lat1) * fraction, lon1 + (lon2 - lon1) * fraction)
 }
