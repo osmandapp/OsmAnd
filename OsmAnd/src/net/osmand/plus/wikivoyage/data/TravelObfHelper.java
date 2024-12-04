@@ -125,13 +125,13 @@ public class TravelObfHelper implements TravelHelper {
 
 	// Do not clutter GPX with tags that are always generated.
 	private static final Set<String> avoidAmenityGpxTags = Set.of(
-			"date", "distance", "route_id", "route_name", "route_radius",
+			"date", "distance", "route_name", "route_radius",
 			"avg_ele", "min_ele", "max_ele", "start_ele", "ele_graph", "diff_ele_up", "diff_ele_down",
 			"avg_speed", "min_speed", "max_speed", "time_moving", "time_moving_no_gaps", "time_span", "time_span_no_gaps"
 	);
 	// Keep important tags by prefix. Note: name, ref, type, and route tags are processed in a special way.
 	private static final Set<String> keepAsIsAmenityGpxTags = Set.of(
-			"osm_id", "flexible_line_width", "translucent_line_colors", "shield_"
+			"route_id", "flexible_line_width", "translucent_line_colors", "shield_"
 	);
 
 	public TravelObfHelper(OsmandApplication app) {
