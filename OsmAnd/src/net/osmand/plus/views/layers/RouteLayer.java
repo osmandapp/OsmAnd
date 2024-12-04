@@ -141,7 +141,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		attrsWPT.paint2.setStrokeCap(Cap.BUTT);
 		attrsWPT.paint2.setColor(Color.BLACK);
 
-		attrsW = new RenderingLineAttributes("walkingRouteLine");
+		attrsW = new RenderingLineAttributes("straightWalkingRouteLine");
 		attrsW.defaultWidth = (int) (12 * density);
 		attrsW.defaultWidth3 = (int) (7 * density);
 		attrsW.defaultColor = ContextCompat.getColor(getContext(), R.color.nav_track_walk_fill);
@@ -497,21 +497,10 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 					currentLocation.setLongitude(tb.getLongitude());
 				}
 				List<Location> locations = route.getImmutableAllLocations();
-				int currentRoute = route.getCurrentRoute();
+				int currentRoute = route.getCurrentRouteForLocation(currentLocation);
 				if (currentRoute > 0) {
 					Location previousRouteLocation = locations.get(currentRoute - 1);
 					Location currentRouteLocation = locations.get(currentRoute);
-					while (currentRoute > 1) {
-						double projCoeff = MapUtils.getProjectionCoeff(currentLocation.getLatitude(), currentLocation.getLongitude(),
-								previousRouteLocation.getLatitude(), previousRouteLocation.getLongitude(),
-								currentRouteLocation.getLatitude(), currentRouteLocation.getLongitude());
-						if (projCoeff != 0) {
-							break;
-						}
-						currentRoute--;
-						previousRouteLocation = locations.get(currentRoute - 1);
-						currentRouteLocation = locations.get(currentRoute);
-					}
 					lastProjection = RoutingHelperUtils.getProject(currentLocation, previousRouteLocation, currentRouteLocation);
 					float calcbearing = !MapUtils.areLatLonEqual(previousRouteLocation, currentRouteLocation) ? previousRouteLocation.bearingTo(currentRouteLocation) :
 							previousRouteLocation.bearingTo(currentLocation);

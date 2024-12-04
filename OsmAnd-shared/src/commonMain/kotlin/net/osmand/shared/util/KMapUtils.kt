@@ -2,13 +2,10 @@ package net.osmand.shared.util
 
 import co.touchlab.stately.collections.ConcurrentMutableMap
 import net.osmand.shared.data.KLatLon
-import kotlin.math.*
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
 import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.extensions.toDegrees
 import net.osmand.shared.extensions.toRadians
+import kotlin.math.*
 
 /**
  * This utility class includes :
@@ -860,4 +857,7 @@ object KMapUtils {
 		}
 		return KGeoParsedPoint(lat, lon, z)
 	}
+
+	fun interpolateLatLon(lat1: Double, lon1: Double, lat2: Double, lon2: Double, fraction: Double) =
+		KLatLon(lat1 + (lat2 - lat1) * fraction, lon1 + (lon2 - lon1) * fraction)
 }

@@ -104,12 +104,12 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 				val mapView = app.osmandMap.mapView
 				val tb = mapView.rotatedTileBox
 				tb.rotate = 0f;
-				tb.mapDensity = 1.0; //CarSurfaceView.CAR_DENSITY_SCALE.toDouble(); - strangely it works
+				tb.mapDensity = surfaceRenderer.density.toDouble();
 				val rtl = false; // panel is always on the left
 				val leftPanel =  tb.pixWidth / 2; // assume panel takes half screen
 				val tileBoxWidthPx = tb.pixWidth - leftPanel;
 				mapView.fitRectToMap(tb, mapRect.left, mapRect.right, mapRect.top, mapRect.bottom,
-					tileBoxWidthPx, 0, 0, 0, rtl, true)
+					tileBoxWidthPx, 0, 0, 0, rtl, 0.9f,true)
 				mapView.refreshMap()
 			}
 		}

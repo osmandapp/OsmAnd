@@ -5686,4 +5686,7 @@
     <string name="connect_new_scanner">Konekti novan skanilon</string>
     <string name="vehicle_metrics_recording_description">Elekti parametrojn por registri al la GPX-dosiero.</string>
     <string name="shared_string_engine">Motoro</string>
+    <string name="location_interpolation_percent">Elcento de interpolo de pozicio</string>
+    <string name="location_interpolation_percent_desc">Agordi elcenton de alproksimigo de pozicio dum navigi laŭ kurso. Tiu ĉi parametro malpliigas prokraston vidigi vian movbildan pozicion sur la mapo.</string>
+    <string name="shared_string_interpolation">Interpolo</string>
 </resources>
