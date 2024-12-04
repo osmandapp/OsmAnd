@@ -15,16 +15,14 @@ import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceP
 class IncludePreferenceInSearchResultsPredicate implements de.KnollFrank.lib.settingssearch.provider.IncludePreferenceInSearchResultsPredicate {
 
 	@Override
-	public boolean includePreferenceInSearchResults(final SearchablePreferencePOJO preference,
-													final Class<? extends PreferenceFragmentCompat> hostOfPreference) {
-		return !isPreferenceConnectedToAnyInactivePlugin(preference, hostOfPreference);
+	public boolean includePreferenceInSearchResults(final SearchablePreferencePOJO preference) {
+		return !isPreferenceConnectedToAnyInactivePlugin(preference);
 	}
 
-	private static boolean isPreferenceConnectedToAnyInactivePlugin(final SearchablePreferencePOJO preference,
-																	final Class<? extends PreferenceFragmentCompat> hostOfPreference) {
+	private static boolean isPreferenceConnectedToAnyInactivePlugin(final SearchablePreferencePOJO preference) {
 		return IncludePreferenceInSearchResultsPredicate
 				.getInactivePlugins()
-				.anyMatch(inactivePlugin -> isPreferenceConnectedToPlugin(preference, hostOfPreference, inactivePlugin));
+				.anyMatch(inactivePlugin -> isPreferenceConnectedToPlugin(preference, inactivePlugin));
 	}
 
 	private static Stream<OsmandPlugin> getInactivePlugins() {
@@ -35,15 +33,14 @@ class IncludePreferenceInSearchResultsPredicate implements de.KnollFrank.lib.set
 	}
 
 	private static boolean isPreferenceConnectedToPlugin(final SearchablePreferencePOJO preference,
-														 final Class<? extends PreferenceFragmentCompat> hostOfPreference,
 														 final OsmandPlugin plugin) {
-		return isPreferenceOnSettingsScreen(hostOfPreference, plugin.getSettingsScreenType()) ||
+		return isPreferenceOnSettingsScreen(preference.getHost(), plugin.getSettingsScreenType()) ||
 				PreferenceMarker.isPreferenceConnectedToPlugin(preference, plugin.getClass());
 	}
 
 	private static boolean isPreferenceOnSettingsScreen(
 			final Class<? extends PreferenceFragmentCompat> preferenceFragment,
 			final @Nullable SettingsScreenType settingsScreenType) {
-		return settingsScreenType != null && settingsScreenType.fragmentName.equals(preferenceFragment.getName());
+		return settingsScreenType != null && settingsScreenType.fragmentClass.equals(preferenceFragment);
 	}
 }
