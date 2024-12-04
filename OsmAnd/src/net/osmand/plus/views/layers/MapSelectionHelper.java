@@ -719,17 +719,22 @@ public class MapSelectionHelper {
 	@Nullable
 	public static Amenity findAmenityByName(@NonNull List<Amenity> amenities, @Nullable List<String> names) {
 		if (!Algorithms.isEmpty(names)) {
-			for (Amenity amenity : amenities) {
-				String travelRouteId = amenity.isRoutePoint() ? amenity.getAdditionalInfo(TRAVEL_MAP_TO_POI_TAG) : null;
-				for (String name : names) {
-					if (name.equals(amenity.getName()) && !amenity.isClosed()) {
-						return amenity;
-					}
-					if (travelRouteId != null && name.equals(travelRouteId)) {
-						return amenity;
-					}
-				}
-			}
+			return amenities.stream()
+				.filter(amenity -> !amenity.isClosed())
+				.filter(amenity -> names.contains(amenity.getName()))
+				.findAny()
+				.orElseGet(() ->
+					amenities.stream()
+						.filter(amenity -> !amenity.isClosed())
+						.filter(amenity -> amenity.isRoutePoint())
+						.filter(amenity -> amenity.getName().isEmpty())
+						.filter(amenity -> {
+							String travelRouteId = amenity.getAdditionalInfo(TRAVEL_MAP_TO_POI_TAG);
+							return travelRouteId != null && names.contains(travelRouteId);
+						})
+						.findAny()
+						.orElse(null)
+				);
 		}
 		return null;
 	}
