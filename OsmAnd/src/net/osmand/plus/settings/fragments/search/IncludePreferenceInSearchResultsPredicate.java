@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.fragments.search;
 
-import androidx.preference.PreferenceFragmentCompat;
-
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
@@ -34,13 +32,12 @@ class IncludePreferenceInSearchResultsPredicate implements de.KnollFrank.lib.set
 
 	private static boolean isPreferenceConnectedToPlugin(final SearchablePreferencePOJO preference,
 														 final OsmandPlugin plugin) {
-		return isPreferenceOnSettingsScreen(preference.getHost(), plugin.getSettingsScreenType()) ||
+		return isPreferenceOnSettingsScreen(preference, plugin.getSettingsScreenType()) ||
 				PreferenceMarker.isPreferenceConnectedToPlugin(preference, plugin.getClass());
 	}
 
-	private static boolean isPreferenceOnSettingsScreen(
-			final Class<? extends PreferenceFragmentCompat> preferenceFragment,
-			final @Nullable SettingsScreenType settingsScreenType) {
-		return settingsScreenType != null && settingsScreenType.fragmentClass.equals(preferenceFragment);
+	private static boolean isPreferenceOnSettingsScreen(final SearchablePreferencePOJO preference,
+														final @Nullable SettingsScreenType settingsScreenType) {
+		return settingsScreenType != null && settingsScreenType.fragmentClass.equals(preference.getHost());
 	}
 }
