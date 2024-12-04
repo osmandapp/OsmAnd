@@ -51,7 +51,11 @@ public class TrackSortModesHelper {
 
 	public void setSortMode(@NonNull String id, @Nullable TracksSortMode sortMode) {
 		id = removeExtraFileSeparator(id);
-		cachedSortModes.put(id, sortMode);
+		if (sortMode != null) {
+			cachedSortModes.put(id, sortMode);
+		} else {
+			cachedSortModes.remove(id);
+		}
 	}
 
 	public void setSortModes(@NonNull Map<String, TracksSortMode> sortModes) {
@@ -97,9 +101,7 @@ public class TrackSortModesHelper {
 		List<String> tokens = new ArrayList<>();
 		for (Entry<String, TracksSortMode> entry : cachedSortModes.entrySet()) {
 			TracksSortMode value = entry.getValue();
-			if (value != null) {
-				tokens.add(entry.getKey() + SEPARATOR + value.name());
-			}
+			tokens.add(entry.getKey() + SEPARATOR + value.name());
 		}
 		preference.setStringsList(tokens);
 	}
