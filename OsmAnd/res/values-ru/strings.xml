@@ -6077,4 +6077,7 @@
     <string name="shared_string_engine">Двигатель</string>
     <string name="av_audio_sample_rate">Частота дискретизации звука</string>
     <string name="av_audio_sample_rate_descr">Выберите частоту дискретизации звука.</string>
+    <string name="location_interpolation_percent">Процент интерполяции местоположения</string>
+    <string name="shared_string_interpolation">Интерполяция</string>
+    <string name="location_interpolation_percent_desc">Установите процент интерполяции местоположения при навигации по маршруту. Этот параметр уменьшает задержку отображения вашего местоположения на карте во время анимации.</string>
 </resources>
