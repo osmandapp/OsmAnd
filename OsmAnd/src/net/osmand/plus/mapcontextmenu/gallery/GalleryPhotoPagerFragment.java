@@ -79,9 +79,10 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 	}
 
 	@Override
-	public void onMetadataDownloaded(@NonNull WikiImageCard imageCard) {
-		if (imageCard.getImageUrl().equals(getSelectedImageCard().getImageUrl())) {
-			Metadata metadata = imageCard.getWikiImage().getMetadata();
+	public void onMetadataUpdated() {
+		ImageCard card = getSelectedImageCard();
+		if (card instanceof WikiImageCard wikiImageCard) {
+			Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
 			setMetaData(metadata.getAuthor(), metadata.getDate(), metadata.getLicense());
 		}
 	}
@@ -142,6 +143,14 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 		return view;
 	}
 
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		if (controller != null) {
+			controller.addMetaDataListener(this);
+		}
+	}
+
 	private void preloadThumbNails() {
 		preloadThumbNails(true);
 		preloadThumbNails(false);
@@ -194,17 +203,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 			authorView.setVisibility(View.VISIBLE);
 			licenseView.setVisibility(View.VISIBLE);
 			Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
-			String date = metadata.getDate();
-			String author = metadata.getAuthor();
-			String license = metadata.getLicense();
-			if (!wikiImageCard.isMetaDataDownloaded() && (Algorithms.isEmpty(date) || date.equals("Unknown")
-					|| Algorithms.isEmpty(author) || author.equals("Unknown")
-					|| Algorithms.isEmpty(license) || license.equals("Unknown"))) {
-				controller.addMetaDataListener(this);
-				controller.downloadWikiMetaData(wikiImageCard);
-			} else {
-				setMetaData(metadata.getAuthor(), metadata.getDate(), metadata.getLicense());
-			}
+			setMetaData(metadata.getAuthor(), metadata.getDate(), metadata.getLicense());
 		} else {
 			dateView.setVisibility(View.INVISIBLE);
 			authorView.setVisibility(View.INVISIBLE);

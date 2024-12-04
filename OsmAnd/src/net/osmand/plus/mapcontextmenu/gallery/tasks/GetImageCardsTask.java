@@ -144,6 +144,12 @@ public class GetImageCardsTask extends AsyncTask<Void, Void, ImageCardsHolder> {
 		if (listener != null) {
 			listener.onFinish(holder);
 		}
+		downloadWikiMetaData(holder);
+	}
+
+	public void downloadWikiMetaData(@NonNull ImageCardsHolder holder) {
+		LoadImagesMetadataTask task = new LoadImagesMetadataTask(app, holder);
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public interface GetImageCardsListener {
