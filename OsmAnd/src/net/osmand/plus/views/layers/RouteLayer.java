@@ -141,7 +141,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		attrsWPT.paint2.setStrokeCap(Cap.BUTT);
 		attrsWPT.paint2.setColor(Color.BLACK);
 
-		attrsW = new RenderingLineAttributes("walkingRouteLine");
+		attrsW = new RenderingLineAttributes("straightWalkingRouteLine");
 		attrsW.defaultWidth = (int) (12 * density);
 		attrsW.defaultWidth3 = (int) (7 * density);
 		attrsW.defaultColor = ContextCompat.getColor(getContext(), R.color.nav_track_walk_fill);
