@@ -123,15 +123,15 @@ public class TravelObfHelper implements TravelHelper {
 	private final List<Pair<File, Amenity>> foundAmenities = new ArrayList<>();
 	public volatile int requestNumber = 0;
 
+	// Keep important tags by prefix. Note: name, ref, type, and route tags are processed in a special way.
+	private static final Set<String> saveAsIsAmenityGpxTags = Set.of(
+			"route_id", "flexible_line_width", "translucent_line_colors", "shield_"
+	);
 	// Do not clutter GPX with tags that are always generated.
-	private static final Set<String> avoidAmenityGpxTags = Set.of(
+	private static final Set<String> doNotSaveAmenityGpxTags = Set.of(
 			"date", "distance", "route_name", "route_radius",
 			"avg_ele", "min_ele", "max_ele", "start_ele", "ele_graph", "diff_ele_up", "diff_ele_down",
 			"avg_speed", "min_speed", "max_speed", "time_moving", "time_moving_no_gaps", "time_span", "time_span_no_gaps"
-	);
-	// Keep important tags by prefix. Note: name, ref, type, and route tags are processed in a special way.
-	private static final Set<String> keepAsIsAmenityGpxTags = Set.of(
-			"route_id", "flexible_line_width", "translucent_line_colors", "shield_"
 	);
 
 	public TravelObfHelper(OsmandApplication app) {
@@ -1169,15 +1169,19 @@ public class TravelObfHelper implements TravelHelper {
 								if (tag.startsWith(OBF_GPX_EXTENSION_TAG_PREFIX)) {
 									String gpxTag = tag.replaceFirst(OBF_GPX_EXTENSION_TAG_PREFIX, "");
 									gpxFileExtensions.put(gpxTag, value);
-								} else if (!avoidAmenityGpxTags.contains(tag)) {
-									String gpxTag = OSM_PREFIX + tag;
-									for (String prefix : keepAsIsAmenityGpxTags) {
+								} else if (!doNotSaveAmenityGpxTags.contains(tag)) {
+									boolean saveAsIs = false;
+									for (String prefix : saveAsIsAmenityGpxTags) {
 										if (tag.startsWith(prefix)) {
-											gpxTag = tag;
+											saveAsIs = true;
 											break;
 										}
 									}
-									gpxFileExtensions.put(gpxTag, value);
+									if (saveAsIs) {
+										gpxFileExtensions.put(tag, value);
+									} else if (amenity.hasOsmRouteId()) {
+										gpxFileExtensions.put(OSM_PREFIX + tag, value);
+									}
 								}
 							}
 						}
@@ -1205,8 +1209,10 @@ public class TravelObfHelper implements TravelHelper {
 			if (subType.startsWith(ROUTES_PREFIX)) {
 				String osmValue = amenity.getType().getPoiTypeByKeyName(subType).getOsmValue();
 				if (!Algorithms.isEmpty(osmValue)) {
-					gpxFileExtensions.put(OSM_PREFIX + "type", "route");
-					gpxFileExtensions.put(OSM_PREFIX + "route", osmValue);
+					if (amenity.hasOsmRouteId()) {
+						gpxFileExtensions.put(OSM_PREFIX + "type", "route");
+						gpxFileExtensions.put(OSM_PREFIX + "route", osmValue);
+					}
 					RouteActivityHelper helper = app.getRouteActivityHelper();
 					RouteActivity activity = helper.findActivityByTag(osmValue);
 					if (activity != null) {
@@ -1256,17 +1262,11 @@ public class TravelObfHelper implements TravelHelper {
 		if (article instanceof TravelGpx) {
 			gpxFile = new GpxFile(Version.getFullVersion(app));
 			gpxFile.getMetadata().setName(Objects.requireNonNullElse(article.title, article.routeId)); // path is name
-			if (!Algorithms.isEmpty(article.title)) {
+			if (!Algorithms.isEmpty(article.title) && article.hasOsmRouteId()) {
 				gpxFileExtensions.putIfAbsent(OSM_PREFIX + "name", article.title);
 			}
 			if (!Algorithms.isEmpty(article.description)) {
 				gpxFile.getMetadata().setDesc(article.description);
-			}
-			final String[] cleanupByPresenceTags = { "ref", "name", "description" }; // osm_ref_present, etc
-			for (String tag : cleanupByPresenceTags) {
-				if (!gpxFileExtensions.containsKey("osm_" + tag + "_present")) {
-					gpxFileExtensions.remove(OSM_PREFIX + tag);
-				}
 			}
 		} else {
 			String description = article.getDescription();
@@ -1307,7 +1307,7 @@ public class TravelObfHelper implements TravelHelper {
 			if (gpxFileExtensions.containsKey(GpxUtilities.ACTIVITY_TYPE)) {
 				gpxFile.getMetadata().getExtensionsToWrite()
 						.put(GpxUtilities.ACTIVITY_TYPE, gpxFileExtensions.get(GpxUtilities.ACTIVITY_TYPE));
-				gpxFileExtensions.remove(GpxUtilities.ACTIVITY_TYPE); // activities live in the metadata
+				gpxFileExtensions.remove(GpxUtilities.ACTIVITY_TYPE); // move activity to metadata
 			}
 			gpxFile.getExtensionsToWrite().putAll(gpxFileExtensions); // finally
 		}

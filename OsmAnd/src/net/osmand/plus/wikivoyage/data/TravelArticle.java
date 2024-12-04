@@ -127,6 +127,11 @@ public class TravelArticle {
 		return routeId;
 	}
 
+	public boolean hasOsmRouteId() {
+		String routeId = getRouteId();
+		return routeId != null && routeId.startsWith(Amenity.ROUTE_ID_OSM_PREFIX);
+	}
+
 	@NonNull
 	public String getGpxFileName() {
 		String gpxFileName = !Algorithms.isEmpty(title) ? title : routeId;
