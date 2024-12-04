@@ -7,11 +7,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import net.osmand.plus.OsmandApplication;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class TracksTabAdapter extends FragmentStatePagerAdapter {
 
@@ -35,6 +32,11 @@ public class TracksTabAdapter extends FragmentStatePagerAdapter {
 			return index >= 0 ? index : POSITION_NONE;
 		}
 		return POSITION_NONE;
+	}
+
+	@NonNull
+	public List<TrackTab> getTrackTabs() {
+		return trackTabs;
 	}
 
 	@Override
