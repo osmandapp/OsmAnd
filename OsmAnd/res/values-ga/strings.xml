@@ -5451,4 +5451,7 @@
     <string name="show_free_version_banner">Taispeáin meirge leagan saor in aisce</string>
     <string name="show_free_version_banner_description">Taispeáin an meirge leagan saor in aisce fiú sa leagan íoctha.</string>
     <string name="pick_up_till">Pioc suas go dtí</string>
+    <string name="location_interpolation_percent">Céatadán idirshuímh suímh</string>
+    <string name="location_interpolation_percent_desc">Socraigh an céatadán d\'idirshuíomh suímh le linn loingseoireachta bealaigh. Laghdaíonn an paraiméadar seo aga moille do shuíomh suímh ar an léarscáil le linn beochana.</string>
+    <string name="shared_string_interpolation">Idirshuíomh</string>
 </resources>
