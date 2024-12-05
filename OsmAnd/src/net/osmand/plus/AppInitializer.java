@@ -13,6 +13,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +23,7 @@ import net.osmand.IndexConstants;
 import net.osmand.OnResultCallback;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
+import net.osmand.core.android.NativeCore;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.OsmandRegions.RegionTranslation;
 import net.osmand.map.WorldRegion;
@@ -628,6 +630,7 @@ public class AppInitializer implements IProgress {
 				try {
 					settings.OPENGL_RENDER_FAILED.set(settings.OPENGL_RENDER_FAILED.get() + 1);
 					NativeCoreContext.init(app);
+					settings.USE_OPENGL_RENDER.setDefaultValue(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && NativeCore.is64Bit());
 					settings.OPENGL_RENDER_FAILED.set(0);
 				} catch (Throwable throwable) {
 					LOG.error("NativeCoreContext", throwable);
