@@ -555,10 +555,7 @@ public class MapActivityActions extends MapActions {
 				.setIcon(R.drawable.ic_action_gdirections_dark)
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_directions_open");
-					MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
-					if (mapControlsLayer != null) {
-						mapControlsLayer.getMapActionsHelper().doRoute();
-					}
+					mapActivity.getMapLayers().getMapActionsHelper().doRoute();
 					return true;
 				}));
 

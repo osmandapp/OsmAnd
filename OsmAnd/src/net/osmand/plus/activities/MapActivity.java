@@ -1310,9 +1310,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	@NonNull
-	public static MapRouteInfoMenu getMapRouteInfoMenu() {
-		return mapRouteInfoMenu;
-	}
+	public MapRouteInfoMenu getMapRouteInfoMenu() { return mapRouteInfoMenu; }
 
 	@NonNull
 	public TrackDetailsMenu getTrackDetailsMenu() {

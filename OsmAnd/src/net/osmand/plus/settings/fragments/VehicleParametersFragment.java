@@ -282,7 +282,9 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
 		super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
 		if (MOTOR_TYPE_PREF_ID.equals(prefId)) {
-			MapActivity.getMapRouteInfoMenu().updateMenu();
+			if (getActivity() instanceof MapActivity) {
+				((MapActivity) getActivity()).getMapRouteInfoMenu().updateMenu();
+			}
 		}
 	}
 

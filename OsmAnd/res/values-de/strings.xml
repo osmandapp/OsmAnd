@@ -5968,4 +5968,7 @@
     <string name="auto_zoom_3d_angle">Autozoom 3D-Winkel</string>
     <string name="shared_string_engine">Motor</string>
     <string name="vehicle_metrics_recording_description">Wählen Sie die Parameter aus, die in der GPX-Datei aufgezeichnet werden sollen.</string>
+    <string name="location_interpolation_percent_desc">Legt den Prozentsatz der Standortinterpolation während der Routennavigation fest. Dieser Parameter reduziert die Verzögerung der Position des Standorts auf der Karte während der Animation.</string>
+    <string name="shared_string_interpolation">Interpolation</string>
+    <string name="location_interpolation_percent">Prozentualer Anteil der Standortinterpolation</string>
 </resources>
