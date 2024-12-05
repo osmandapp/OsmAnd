@@ -45,7 +45,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final OsmandMapTileView mapView;
-	private final MapActionsHelper mapActionsHelper;
 	private final MapTransparencyHelper mapTransparencyHelper;
 
 	private View mapHudContainer;
@@ -69,13 +68,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		app = getApplication();
 		settings = app.getSettings();
 		mapView = app.getOsmandMap().getMapView();
-		mapActionsHelper = new MapActionsHelper(app);
-		mapTransparencyHelper = new MapTransparencyHelper(this);
-	}
 
-	@NonNull
-	public MapActionsHelper getMapActionsHelper() {
-		return mapActionsHelper;
+		mapTransparencyHelper = new MapTransparencyHelper(this);
 	}
 
 	@NonNull
@@ -86,7 +80,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 	@Override
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
-		mapActionsHelper.setMapActivity(mapActivity);
 		if (mapActivity != null) {
 			mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
 			visibilityHelper = mapActivity.getWidgetsVisibilityHelper();

@@ -62,10 +62,11 @@ public class NavigationMenuButtonState extends MapButtonState {
 	@Override
 	public String getDefaultIconName() {
 		int routePlanningBtnImage = app.getRoutingHelper().getAppMode().getIconRes();
-		if (routePlanningBtnImage != 0) {
+		boolean isFollowingMode = app.getRoutingHelper().isFollowingMode();
+		if (routePlanningBtnImage != 0 && app.getRoutingHelper().isRoutePlanningMode() && !isFollowingMode) {
 			return app.getResources().getResourceEntryName(routePlanningBtnImage);
 		}
-		boolean isFollowingMode = app.getRoutingHelper().isFollowingMode();
+
 		return isFollowingMode ? "ic_action_start_navigation" : "ic_action_gdirections_dark";
 	}
 
