@@ -40,19 +40,27 @@ public class MapActionsHelper {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
-	private final MapControlsLayer layer;
+
+	private MapActivity activity;
 
 	@Nullable
 	private LatLon requestedLatLon;
 
-	public MapActionsHelper(@NonNull MapControlsLayer layer) {
-		this.layer = layer;
-		this.app = layer.getApplication();
+	public MapActionsHelper(@NonNull OsmandApplication app) {
+		this.app = app;
 		this.settings = app.getSettings();
 	}
 
+	public void setMapActivity(MapActivity activity) {
+		this.activity = activity;
+	}
+
+	public MapActivity getMapActivity() {
+		return activity;
+	}
+
 	public void stopNavigation() {
-		MapActivity activity = layer.getMapActivity();
+		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			activity.getMapRouteInfoMenu().hide();
 			if (app.getRoutingHelper().isFollowingMode()) {
@@ -66,7 +74,7 @@ public class MapActionsHelper {
 	}
 
 	public void stopNavigationWithoutConfirm() {
-		MapActivity activity = layer.getMapActivity();
+		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			activity.getMapRouteInfoMenu().hide();
 			activity.getMapActions().stopNavigationWithoutConfirm();
@@ -74,14 +82,14 @@ public class MapActionsHelper {
 	}
 
 	public void showRouteInfoControlDialog() {
-		MapActivity activity = layer.getMapActivity();
+		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			activity.getMapRouteInfoMenu().showHideMenu();
 		}
 	}
 
 	public void showRouteInfoMenu() {
-		MapActivity activity = layer.getMapActivity();
+		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			activity.getMapRouteInfoMenu().setShowMenu(MapRouteInfoMenu.DEFAULT_MENU_STATE);
 		}
@@ -92,7 +100,7 @@ public class MapActionsHelper {
 	}
 
 	public void doNavigate() {
-		MapActivity activity = layer.getMapActivity();
+		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			activity.getMapRouteInfoMenu().hide();
 			startNavigation();
@@ -100,7 +108,7 @@ public class MapActionsHelper {
 	}
 
 	private void onNavigationClick() {
-		MapActivity activity = layer.getMapActivity();
+		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			MapRouteInfoMenu mapRouteInfoMenu = activity.getMapRouteInfoMenu();
 			mapRouteInfoMenu.cancelSelectionFromMap();
@@ -148,7 +156,7 @@ public class MapActionsHelper {
 	}
 
 	public void navigateButton() {
-		MapActivity activity = layer.getMapActivity();
+		MapActivity activity = getMapActivity();
 		if (activity == null) {
 			return;
 		}
@@ -190,7 +198,7 @@ public class MapActionsHelper {
 	}
 
 	private void startRoutePlanningWithDestination(LatLon latLon, PointDescription pointDescription, TargetPointsHelper targets) {
-		MapActivity activity = layer.getMapActivity();
+		MapActivity activity = getMapActivity();
 		MapActions mapActions = activity != null ? activity.getMapActions() : app.getOsmandMap().getMapActions();
 		boolean hasPointToStart = settings.restorePointToStart();
 		targets.navigateToPoint(latLon, true, -1, pointDescription);
@@ -207,13 +215,13 @@ public class MapActionsHelper {
 	}
 
 	public void buildRouteByGivenGpx(GpxFile gpxFile) {
-		MapActivity activity = layer.getMapActivity();
+		MapActivity activity = getMapActivity();
 		MapActions mapActions = activity != null ? activity.getMapActions() : app.getOsmandMap().getMapActions();
 		mapActions.enterRoutePlanningModeGivenGpx(gpxFile, null, null, true, true, HEADER_ONLY);
 	}
 
 	private PointDescription getPointDescriptionForTarget(@NonNull LatLon latLon) {
-		MapActivity activity = layer.getMapActivity();
+		MapActivity activity = getMapActivity();
 		MapContextMenu menu = activity != null ? activity.getContextMenu() : null;
 		return menu != null && menu.isActive() && latLon.equals(menu.getLatLon())
 				? menu.getPointDescriptionForTarget() : new PointDescription(POINT_TYPE_LOCATION, null);
@@ -224,7 +232,7 @@ public class MapActionsHelper {
 	}
 
 	public void addDestination(@NonNull LatLon latLon, @Nullable PointDescription pointDescription) {
-		MapActivity activity = layer.getMapActivity();
+		MapActivity activity = getMapActivity();
 		if (activity != null && !OsmAndLocationProvider.isLocationPermissionAvailable(activity)) {
 			requestedLatLon = latLon;
 			ActivityCompat.requestPermissions(activity, new String[] {ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION}, REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION);
@@ -249,7 +257,7 @@ public class MapActionsHelper {
 		if (latLon != null) {
 			RoutingHelper routingHelper = app.getRoutingHelper();
 			if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
-				MapActivity activity = layer.getMapActivity();
+				MapActivity activity = getMapActivity();
 				if (activity != null) {
 					activity.getContextMenu().close();
 				}
@@ -276,7 +284,7 @@ public class MapActionsHelper {
 			if (pointDescription == null) {
 				pointDescription = getPointDescriptionForTarget(latLon);
 			}
-			MapActivity activity = layer.getMapActivity();
+			MapActivity activity = getMapActivity();
 			if (activity != null) {
 				activity.getContextMenu().close();
 			}
@@ -288,7 +296,6 @@ public class MapActionsHelper {
 	}
 
 	public void switchToRouteFollowingLayout() {
-		layer.resetTouchEvent();
 		app.getRoutingHelper().setRoutePlanningMode(false);
 		app.getMapViewTrackingUtilities().switchRoutePlanningMode();
 		app.getOsmandMap().getMapView().refreshMap();
@@ -302,13 +309,12 @@ public class MapActionsHelper {
 		if (routingHelper.isFollowingMode()) {
 			switchToRouteFollowingLayout();
 		} else {
-			MapActivity activity = layer.getMapActivity();
+			MapActivity activity = getMapActivity();
 			if (!app.getTargetPointsHelper().checkPointToNavigateShort()) {
 				if (activity != null) {
 					activity.getMapRouteInfoMenu().show();
 				}
 			} else {
-				layer.resetTouchEvent();
 				app.logEvent("start_navigation");
 				app.getMapViewTrackingUtilities().backToLocationImpl(17, true);
 				settings.FOLLOW_THE_ROUTE.set(true);
@@ -351,7 +357,7 @@ public class MapActionsHelper {
 				pointType = PointType.WORK;
 				break;
 		}
-		MapActivity activity = layer.getMapActivity();
+		MapActivity activity = getMapActivity();
 		if (pointType != null && activity != null) {
 			activity.getMapRouteInfoMenu().selectAddress(name, new LatLon(latitude, longitude), pointType);
 		}

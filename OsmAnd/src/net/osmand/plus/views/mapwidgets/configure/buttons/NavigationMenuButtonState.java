@@ -61,7 +61,7 @@ public class NavigationMenuButtonState extends MapButtonState {
 	@NonNull
 	@Override
 	public String getDefaultIconName() {
-		int routePlanningBtnImage = MapActivity.getMapRouteInfoMenu().getRoutePlanningBtnImage();
+		int routePlanningBtnImage = app.getRoutingHelper().getAppMode().getIconRes();
 		if (routePlanningBtnImage != 0) {
 			return app.getResources().getResourceEntryName(routePlanningBtnImage);
 		}
