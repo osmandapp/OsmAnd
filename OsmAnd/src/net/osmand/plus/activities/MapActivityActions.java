@@ -144,25 +144,32 @@ public class MapActivityActions extends MapActions {
 	private static final int DRAWER_MODE_NORMAL = 0;
 	private static final int DRAWER_MODE_SWITCH_PROFILE = 1;
 
-	private final OsmandApplication app;
-	private final OsmandSettings settings;
-	private final MapActivity mapActivity;
 	private final RoutingDataUtils routingDataUtils;
 
-	@NonNull
-	private final ImageView drawerLogoHeader;
+	@Nullable
+	private ImageView drawerLogoHeader;
 
 	private int drawerMode = DRAWER_MODE_NORMAL;
+	@Nullable
+	private MapActivity mapActivity;
+	// FIXME check now it is nullable
+	// FIXME replace with field activity from super aclass
 
-	public MapActivityActions(@NonNull MapActivity mapActivity) {
-		super(mapActivity.getMyApplication());
-		this.app = mapActivity.getMyApplication();
-		this.settings = app.getSettings();
-		this.mapActivity = mapActivity;
+
+	public MapActivityActions(@NonNull OsmandApplication app) {
+		super(app);
 		this.routingDataUtils = new RoutingDataUtils(app);
-		this.drawerLogoHeader = new ImageView(mapActivity);
-		this.drawerLogoHeader.setPadding(-AndroidUtils.dpToPx(mapActivity, 8f),
-				AndroidUtils.dpToPx(mapActivity, 16f), 0, 0);
+	}
+
+	@Override
+	public void setMapActivity(MapActivity activity) {
+		super.setMapActivity(activity);
+		this.mapActivity = activity;
+		if (activity != null) {
+			this.drawerLogoHeader = new ImageView(activity);
+			this.drawerLogoHeader.setPadding(-AndroidUtils.dpToPx(activity, 8f),
+					AndroidUtils.dpToPx(activity, 16f), 0, 0);
+		}
 	}
 
 	public void addAsTarget(double latitude, double longitude, PointDescription pd) {
@@ -809,12 +816,13 @@ public class MapActivityActions extends MapActions {
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		ListView menuItemsListView = mapActivity.findViewById(R.id.menuItems);
 		menuItemsListView.setBackgroundColor(ColorUtilities.getListBgColor(mapActivity, nightMode));
-		menuItemsListView.removeHeaderView(drawerLogoHeader);
-		Bitmap navDrawerLogo = app.getAppCustomization().getNavDrawerLogo();
-
-		if (navDrawerLogo != null) {
-			drawerLogoHeader.setImageBitmap(navDrawerLogo);
-			menuItemsListView.addHeaderView(drawerLogoHeader);
+		if (drawerLogoHeader != null) {
+			menuItemsListView.removeHeaderView(drawerLogoHeader);
+			Bitmap navDrawerLogo = app.getAppCustomization().getNavDrawerLogo();
+			if (navDrawerLogo != null) {
+				drawerLogoHeader.setImageBitmap(navDrawerLogo);
+				menuItemsListView.addHeaderView(drawerLogoHeader);
+			}
 		}
 		menuItemsListView.setDivider(null);
 

@@ -164,7 +164,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private BroadcastReceiver screenOffReceiver;
 
-	private MapActivityActions mapActions;
 	private WidgetsVisibilityHelper mapWidgetsVisibilityHelper;
 
 	private ExtendedMapActivity extendedMapActivity;
@@ -230,7 +229,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.applyTheme(this);
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
-		getMyApplication().getOsmandMap().getMapActions().setMapActivity(this);
+		getMapActions().setMapActivity(this);
 		mapContextMenu.setMapActivity(this);
 		mapRouteInfoMenu.setMapActivity(this);
 		trackDetailsMenu.setMapActivity(this);
@@ -247,7 +246,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				SecondSplashScreenFragment.SHOW = false;
 			}
 		}
-		mapActions = new MapActivityActions(this);
 		mapWidgetsVisibilityHelper = new WidgetsVisibilityHelper(this);
 		dashboardOnMap.createDashboardView();
 		extendedMapActivity = new ExtendedMapActivity();
@@ -305,7 +303,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		checkAppInitialization();
 
-		mapActions.updateDrawerMenu();
+
+		getMapActions().updateDrawerMenu();
 
 		IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
 		screenOffReceiver = new ScreenOffReceiver();
@@ -1096,7 +1095,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 
 		mapLayers.updateLayers(this);
-		mapActions.updateDrawerMenu();
+
+		getMapActions().updateDrawerMenu();
 		updateNavigationBarColor();
 		//mapView.setComplexZoom(mapView.getZoom(), mapView.getSettingsMapDensity());
 		mapView.setMapDensity(mapView.getSettingsMapDensity());
@@ -1198,7 +1198,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public MapActivityActions getMapActions() {
-		return mapActions;
+		// TODO is it needed to cache this field for quick access? (it's singleton)
+		return getMyApplication().getOsmandMap().getMapActions();
 	}
 
 	public MapLayers getMapLayers() {
@@ -1337,7 +1338,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void openDrawer() {
 		if (isDrawerAvailable()) {
-			mapActions.updateDrawerMenu();
+			getMapActions().updateDrawerMenu();
 			boolean animate = !settings.DO_NOT_USE_ANIMATIONS.get();
 			drawerLayout.openDrawer(GravityCompat.START, animate);
 		}

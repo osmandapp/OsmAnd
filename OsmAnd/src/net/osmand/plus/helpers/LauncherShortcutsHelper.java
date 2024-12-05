@@ -175,7 +175,7 @@ public class LauncherShortcutsHelper {
 
 	private void navigateTo(@NonNull MapActivity mapActivity, @Nullable FavouritePoint point) {
 		if (point == null) {
-			mapActivity.getMapActions().doRoute(); // TODO is it different than app.getMapActions()
+			mapActivity.getMapActions().doRoute();
 		} else {
 			PointDescription description = point.getPointDescription(app);
 			LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());

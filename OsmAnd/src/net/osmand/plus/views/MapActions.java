@@ -49,14 +49,14 @@ public class MapActions {
 	private static final int REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION = 202;
 
 
-	private final OsmandApplication app;
-	private final OsmandSettings settings;
+	protected final OsmandApplication app;
+	protected final OsmandSettings settings;
 
 	@Nullable
-	private MapActivity activity;
+	protected MapActivity activity;
 
 	@Nullable
-	private LatLon requestedLatLon;
+	protected LatLon requestedLatLon;
 
 
 	public MapActions(@NonNull OsmandApplication app) {
