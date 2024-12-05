@@ -14,10 +14,7 @@ public class OpenNavigationDialogCommand extends KeyEventCommand {
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		MapActionsHelper controlsHelper = requireMapActivity().getMapLayers().getMapActionsHelper();
-		if (controlsHelper != null) {
-			controlsHelper.doRoute();
-		}
+		requireMapActivity().getMapActions().doRoute();
 		return true;
 	}
 

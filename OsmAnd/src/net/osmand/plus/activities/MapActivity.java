@@ -230,6 +230,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.applyTheme(this);
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
+		getMyApplication().getOsmandMap().getMapActions().setMapActivity(this);
 		mapContextMenu.setMapActivity(this);
 		mapRouteInfoMenu.setMapActivity(this);
 		trackDetailsMenu.setMapActivity(this);
@@ -251,6 +252,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		dashboardOnMap.createDashboardView();
 		extendedMapActivity = new ExtendedMapActivity();
 
+		getMapActions().setMapActivity(this);
 		getMapView().setMapActivity(this);
 		getMapLayers().setMapActivity(this);
 
@@ -945,6 +947,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onDestroy() {
 		super.onDestroy();
 		destroyProgressBarForRouting();
+		getMyApplication().getOsmandMap().getMapActions().setMapActivity(null);
 		getMapLayers().setMapActivity(null);
 		getMapView().setMapActivity(null);
 		mapContextMenu.setMapActivity(null);

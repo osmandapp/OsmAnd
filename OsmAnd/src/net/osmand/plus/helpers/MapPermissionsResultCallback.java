@@ -36,11 +36,7 @@ public class MapPermissionsResultCallback implements OnRequestPermissionsResultC
 			OsmandApplication app = activity.getMyApplication();
 
 			PluginsHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-			MapActionsHelper controlsHelper = activity.getMapLayers().getMapActionsHelper();
-			if (controlsHelper != null) {
-				controlsHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
-			}
+			activity.getMapActions().onRequestPermissionsResult(requestCode, permissions, grantResults);
 
 			OnRequestPermissionsResultCallback aaCallback = app.getAndroidAutoPermissionRequestResultListener();
 			if (aaCallback != null) {

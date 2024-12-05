@@ -405,7 +405,7 @@ public class MapActivityActions extends MapActions {
 	public void recalculateRoute(boolean showDialog) {
 		super.recalculateRoute(showDialog);
 		if (showDialog) {
-			app.getOsmandMap().getMapLayers().getMapActionsHelper().showRouteInfoMenu();
+			app.getOsmandMap().getMapActions().showRouteInfoMenu();
 		}
 	}
 
@@ -555,7 +555,7 @@ public class MapActivityActions extends MapActions {
 				.setIcon(R.drawable.ic_action_gdirections_dark)
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_directions_open");
-					mapActivity.getMapLayers().getMapActionsHelper().doRoute();
+					mapActivity.getMapActions().doRoute();
 					return true;
 				}));
 
