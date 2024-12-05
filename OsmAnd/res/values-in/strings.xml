@@ -6049,4 +6049,7 @@
     <string name="connect_new_scanner">Hubungkan pemindai baru</string>
     <string name="vehicle_metrics_recording_description">Pilih parameter untuk direkam dalam berkas GPX.</string>
     <string name="shared_string_engine">Mesin</string>
+    <string name="location_interpolation_percent">Persentase interpolasi lokasi</string>
+    <string name="shared_string_interpolation">Interpolasi</string>
+    <string name="location_interpolation_percent_desc">Tetapkan presentasi interpolasi lokasi saat navigasi rute. Parameter ini mengurangi kelambatan posisi lokasi di peta saat ada animasi.</string>
 </resources>
