@@ -25,7 +25,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.tracks.appearance.ChangeAppearanceController;
@@ -44,6 +43,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.BaseTracksTabsFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -270,6 +270,17 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		updateTabsContent();
 		updateButtonsState();
 		preselectedTabParams = null;
+	}
+
+	@Override
+	protected void updateTrackTabs() {
+		List<TrackTab> trackTabs = getSortedTrackTabs();
+		if (Algorithms.objectEquals(adapter.getTrackTabs(), trackTabs)) {
+			super.updateTrackTabs();
+		} else {
+			TrackTab tab = getSelectedTab();
+			setTabs(trackTabs, tab != null ? tab.getId() : null);
+		}
 	}
 
 	@Override
