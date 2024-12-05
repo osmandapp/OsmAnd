@@ -5640,4 +5640,7 @@
     <string name="auto_zoom_3d_angle">Automatikus zoom 3D szög</string>
     <string name="vehicle_metrics_recording_description">Válassza ki a GPX-fájlba elmentendő paramétereket.</string>
     <string name="shared_string_engine">Motor</string>
+    <string name="shared_string_interpolation">Interpoláció</string>
+    <string name="location_interpolation_percent">Hely interpolációs százaléka</string>
+    <string name="location_interpolation_percent_desc">Állítsa be a navigáció használata közbeni helyinterpoláció százalékos értékét. Ez a paraméter csökkenti a térképen az animálás során megjelenített pozíciójának lemaradását a tényleges helyzetéhez képest.</string>
 </resources>
