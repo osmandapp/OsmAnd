@@ -81,7 +81,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private static final long START_LOCATION_SIMULATION_DELAY = 2000;
 	private static final int UPCOMING_TUNNEL_DISTANCE = 250;
 
-	private static final float ACCURACY_FOR_GPX_AND_ROUTING = 50;
+	public  static final float ACCURACY_FOR_GPX_AND_ROUTING = 50;
 
 	public static final int NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS = 12000;
 
@@ -182,6 +182,11 @@ public class OsmAndLocationProvider implements SensorEventListener {
 						net.osmand.Location location = null;
 						if (!locations.isEmpty()) {
 							location = locations.get(locations.size() - 1);
+							if (useOnlyGPS() && location.hasAccuracy() &&
+									location.getAccuracy() > ACCURACY_FOR_GPX_AND_ROUTING) {
+								// fused provider could return network locations
+								return;
+							}
 							lastTimeGPSLocationFixed = System.currentTimeMillis();
 						}
 						if (!locationSimulation.isRouteAnimating()) {
@@ -348,7 +353,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public static boolean isPointAccurateForRouting(net.osmand.Location loc) {
-		return loc != null && (!loc.hasAccuracy() || loc.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING * 3 / 2);
+		return loc != null && (!loc.hasAccuracy() || loc.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING);
 	}
 
 	public static boolean isRunningOnEmulator() {
