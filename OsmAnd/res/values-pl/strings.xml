@@ -5771,4 +5771,12 @@
     <string name="battery_saving_mode">Tryb oszczędzania baterii</string>
     <string name="preview_next_turn">Podgląd następnego zakrętu</string>
     <string name="obd_throttle_position_desc">Pokazuje kąt płyty przepustnicy w korpusie przepustnicy.</string>
+    <string name="obd_calculated_engine_load_desc">Pokazuje procent dostępnej mocy silnika wykorzystywanej w danym momencie.</string>
+    <string name="obd_speed_desc">Pokazuje prędkość z czujnika prędkości pojazdu (VSS).</string>
+    <string name="obd_engine_oil_temperature_desc">Pokazuje temperaturę oleju silnikowego.</string>
+    <string name="obd_calculated_engine_load">Obliczone obciążenie silnika</string>
+    <string name="location_interpolation_percent_desc">Ustaw procent interpolacji lokalizacji podczas nawigacji po trasie. Ten parametr zmniejsza opóźnienie pozycji Twojej lokalizacji na mapie podczas animacji.</string>
+    <string name="obd_ambient_air_temp_desc">Pokazuje temperaturę na zewnątrz pojazdu.</string>
+    <string name="remaining_fuel_description">Pokazuje ilość paliwa pozostałego w zbiorniku pojazdu</string>
+    <string name="obd_air_intake_temp_desc">Pokazuje temperaturę powietrza wpływającego do kolektora dolotowego silnika.</string>
 </resources>
