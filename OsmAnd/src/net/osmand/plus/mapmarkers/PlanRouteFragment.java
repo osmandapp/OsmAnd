@@ -519,7 +519,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 					}
 					planRouteContext.setNavigationFromMarkers(true);
 					dismiss();
-					mapActivity.getMapLayers().getMapActionsHelper().doRoute();
+					mapActivity.getMapActions().doRoute();
 				}
 			}
 

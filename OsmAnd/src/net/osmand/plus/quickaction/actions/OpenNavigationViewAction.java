@@ -35,10 +35,7 @@ public class OpenNavigationViewAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-		MapActionsHelper controlsHelper = mapActivity.getMapLayers().getMapActionsHelper();
-		if (controlsHelper != null) {
-			controlsHelper.doRoute();
-		}
+		mapActivity.getMapActions().doRoute();
 	}
 
 	@Override

@@ -393,7 +393,7 @@ public class ExternalApiHelper {
 			} else if (API_CMD_STOP_NAVIGATION.equals(cmd)) {
 				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 				if (routingHelper.isPauseNavigation() || routingHelper.isFollowingMode()) {
-					mapActivity.getMapLayers().getMapActionsHelper().stopNavigationWithoutConfirm();
+					mapActivity.getMapActions().stopNavigationWithoutConfirm();
 					resultCode = Activity.RESULT_OK;
 				}
 			} else if (API_CMD_MUTE_NAVIGATION.equals(cmd)) {

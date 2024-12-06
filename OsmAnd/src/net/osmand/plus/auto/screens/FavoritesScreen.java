@@ -155,7 +155,7 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 	}
 
 	private void onRouteSelected(@NonNull SearchResult sr) {
-		getApp().getOsmandMap().getMapLayers().getMapActionsHelper().startNavigation();
+		getApp().getOsmandMap().getMapActions().startNavigation();
 		NavigationSession session = getApp().getCarNavigationSession();
 		if (session != null && session.hasStarted()) {
 			session.startNavigationScreen();

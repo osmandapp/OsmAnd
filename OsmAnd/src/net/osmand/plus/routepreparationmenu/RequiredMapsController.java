@@ -156,7 +156,7 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 	}
 
 	public void onDownloadButtonClicked(@NonNull MapActivity mapActivity) {
-		mapActivity.getMapLayers().getMapActionsHelper().stopNavigationWithoutConfirm();
+		mapActivity.getMapActions().stopNavigationWithoutConfirm();
 		mapActivity.getMapRouteInfoMenu().resetRouteCalculation();
 
 		List<IndexItem> indexes = new ArrayList<>();

@@ -33,7 +33,7 @@ public class NavAddFirstIntermediateAction extends QuickAction {
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
 		LatLon latLon = getMapLocation(mapActivity);
-		mapActivity.getMapLayers().getMapActionsHelper().addFirstIntermediate(latLon);
+		mapActivity.getMapActions().addFirstIntermediate(latLon);
 	}
 
 	@Override

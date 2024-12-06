@@ -842,7 +842,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			if (useRouteInfoMenu && !showWaypointOnMap) {
 				MapActivity mapActivity = (MapActivity) getActivity();
 				if (mapActivity != null) {
-					mapActivity.getMapLayers().getMapActionsHelper().showRouteInfoControlDialog();
+					mapActivity.getMapActions().showRouteInfoControlDialog();
 				}
 			}
 		} catch (Exception e) {

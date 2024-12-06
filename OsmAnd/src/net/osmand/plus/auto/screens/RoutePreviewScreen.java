@@ -111,7 +111,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 				buildRouteByGivenGpx(selectedGpxFile.getGpxFile());
 			}
 		} else {
-			getApp().getOsmandMap().getMapLayers().getMapActionsHelper().replaceDestination(
+			getApp().getOsmandMap().getMapActions().replaceDestination(
 					searchResult.location, QuickSearchListItem.getPointDescriptionObject(getApp(), searchResult).first);
 			invalidate();
 		}
@@ -119,7 +119,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 
 	private void buildRouteByGivenGpx(@NonNull GpxFile gpxFile) {
 		routeGpxFile = gpxFile;
-		getApp().getOsmandMap().getMapLayers().getMapActionsHelper().buildRouteByGivenGpx(gpxFile);
+		getApp().getOsmandMap().getMapActions().buildRouteByGivenGpx(gpxFile);
 		invalidate();
 	}
 

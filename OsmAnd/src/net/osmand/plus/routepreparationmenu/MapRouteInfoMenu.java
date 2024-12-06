@@ -1522,7 +1522,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				if (mapActivity.getPointToNavigate() != null) {
 					hide();
 				}
-				mapActivity.getMapLayers().getMapActionsHelper().startNavigation();
+				mapActivity.getMapActions().startNavigation();
 			}
 		}
 	}
@@ -1537,7 +1537,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private void clickRouteCancel() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			mapActivity.getMapLayers().getMapActionsHelper().stopNavigation();
+			mapActivity.getMapActions().stopNavigation();
 			resetRouteCalculation();
 		}
 	}
@@ -2354,7 +2354,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				mapActivity.refreshMap();
 				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), true);
 				if (switched) {
-					mapActivity.getMapLayers().getMapActionsHelper().switchToRouteFollowingLayout();
+					mapActivity.getMapActions().switchToRouteFollowingLayout();
 				}
 				if (mapActivity.getPointToNavigate() == null && !selectFromMapTouch && !selectFromTracks
 						&& !customizingRouteLine) {

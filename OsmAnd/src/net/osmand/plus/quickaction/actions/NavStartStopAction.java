@@ -42,10 +42,10 @@ public class NavStartStopAction extends QuickAction {
 			if (Boolean.parseBoolean(getParams().get(KEY_DIALOG))) {
 				DestinationReachedFragment.show(mapActivity);
 			} else {
-				mapActivity.getMapLayers().getMapActionsHelper().stopNavigation();
+				mapActivity.getMapActions().stopNavigation();
 			}
 		} else {
-			mapActivity.getMapLayers().getMapActionsHelper().doRoute();
+			mapActivity.getMapActions().doRoute();
 		}
 	}
 

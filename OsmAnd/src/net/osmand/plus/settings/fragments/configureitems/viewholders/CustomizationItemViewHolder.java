@@ -93,8 +93,8 @@ public class CustomizationItemViewHolder extends RecyclerView.ViewHolder {
 	private ContextMenuAdapter getContextMenuAdapter(@NonNull ScreenType screenType, @NonNull FragmentActivity activity) {
 		switch (screenType) {
 			case DRAWER:
-				MapActivityActions actions = new MapActivityActions((MapActivity) activity);
-				return actions.createMainOptionsMenu();
+				// TODO check if new instance actions really needed ? MapActivityActions actions = new MapActivityActions((MapActivity) activity);
+				return ((MapActivity) activity).getMapActions().createMainOptionsMenu();
 			case CONFIGURE_MAP:
 				ConfigureMapMenu configureMenu = new ConfigureMapMenu(app);
 				return configureMenu.createListAdapter((MapActivity) activity);

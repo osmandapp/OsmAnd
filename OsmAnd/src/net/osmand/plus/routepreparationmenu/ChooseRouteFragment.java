@@ -892,7 +892,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		if (mapActivity != null) {
 			dismiss(false);
 			if (!mapActivity.getMyApplication().getRoutingHelper().isPublicTransportMode()) {
-				mapActivity.getMapLayers().getMapActionsHelper().startNavigation();
+				mapActivity.getMapActions().startNavigation();
 			}
 		}
 	}

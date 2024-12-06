@@ -34,10 +34,7 @@ public class NavigationMenuButton extends MapButton {
 
 		setOnClickListener(v -> {
 			mapActivity.getFragmentsHelper().dismissCardDialog();
-			MapActionsHelper controlsHelper = app.getOsmandMap().getMapLayers().getMapActionsHelper();
-			if (controlsHelper != null) {
-				controlsHelper.doRoute();
-			}
+			app.getOsmandMap().getMapActions().doRoute();
 		});
 	}
 
