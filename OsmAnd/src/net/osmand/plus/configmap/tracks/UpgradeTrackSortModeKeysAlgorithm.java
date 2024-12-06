@@ -10,6 +10,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxDbHelper;
+import net.osmand.shared.gpx.GpxDirItem;
 import net.osmand.shared.gpx.SmartFolderHelper;
 import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.io.KFile;
@@ -57,7 +58,7 @@ public class UpgradeTrackSortModeKeysAlgorithm {
 		putUpgradedKey(upgradedCache, TrackTabType.ON_MAP.name());
 		putUpgradedKey(upgradedCache, TrackTabType.ALL.name());
 		putUpgradedKey(upgradedCache, TrackTabType.FOLDERS.name());
-		for (String id : getDirIds()) {
+		for (String id : collectStandardDirectoriesIds()) {
 			putUpgradedKey(upgradedCache, id);
 		}
 		for (SmartFolder folder : smartFolderHelper.getSmartFolders()) {
@@ -68,20 +69,28 @@ public class UpgradeTrackSortModeKeysAlgorithm {
 	}
 
 	@NonNull
-	private Set<String> getDirIds() {
-		Set<String> ids = new HashSet<>();
+	private Set<String> collectStandardDirectoriesIds() {
+		Set<String> result = new HashSet<>();
+		// add root directory
+		result.add("");
+		// collect all directories registered in tracks DB
+		Set<String> absolutePaths = new HashSet<>();
+		for (GpxDirItem item : gpxDbHelper.getDirItems()) {
+			KFile file = item.getFile();
+			absolutePaths.add(file.absolutePath());
+		}
+		// collect all subdirectories which contain at least one gpx track
 		for (GpxDataItem item : gpxDbHelper.getItems()) {
 			KFile file = item.getFile();
-			KFile dir = file.getParentFile();
-			if (dir != null) {
-				String path = dir.absolutePath();
-				if (!path.endsWith(File.separator)) {
-					path += File.separator;
-				}
-				ids.add(getFolderIdV2(path));
+			KFile directory = file.getParentFile();
+			if (directory != null) {
+				absolutePaths.add(directory.absolutePath());
 			}
 		}
-		return ids;
+		for (String absolutePath : absolutePaths) {
+			result.add(getFolderIdV2(absolutePath));
+		}
+		return result;
 	}
 
 	private void putUpgradedKey(@NonNull Map<String, TracksSortMode> map, @NonNull String id) {
@@ -91,6 +100,7 @@ public class UpgradeTrackSortModeKeysAlgorithm {
 		}
 	}
 
+	@Nullable
 	private TracksSortMode getSortMode(@NonNull String id) {
 		TracksSortMode sortMode = sortModesHelper.getSortMode(id);
 		if (sortMode == null) {

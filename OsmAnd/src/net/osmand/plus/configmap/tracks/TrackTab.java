@@ -9,13 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.shared.gpx.TrackItem;
 import net.osmand.shared.gpx.data.ComparableTracksGroup;
 import net.osmand.shared.gpx.data.SmartFolder;
 import net.osmand.shared.gpx.data.TrackFolder;
-import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.shared.gpx.TrackItem;
 import net.osmand.shared.gpx.data.TracksGroup;
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -120,6 +121,11 @@ public class TrackTab implements TracksGroup, ComparableTracksGroup {
 		return type.ordinal();
 	}
 
+	public boolean isBaseFolder() {
+		String id = getId();
+		return id.isEmpty();
+	}
+
 	@NonNull
 	public List<TrackItem> getTrackItems() {
 		List<TrackItem> trackItems = new ArrayList<>();
@@ -151,6 +157,23 @@ public class TrackTab implements TracksGroup, ComparableTracksGroup {
 			return smartFolder.lastModified();
 		}
 		return 0;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		TrackTab that = (TrackTab) o;
+		return Algorithms.stringsEqual(getId(), that.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return Algorithms.hash(getId());
 	}
 
 	@NonNull

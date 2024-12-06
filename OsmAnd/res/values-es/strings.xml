@@ -6073,4 +6073,7 @@
     <string name="auto_zoom_3d_angle">Escalado automático de ángulos 3D</string>
     <string name="vehicle_metrics_recording_description">Seleccione los parámetros que se registrarán en el archivo GPX .</string>
     <string name="shared_string_engine">Motor</string>
+    <string name="location_interpolation_percent">Porcentaje de interpolación de la ubicación</string>
+    <string name="location_interpolation_percent_desc">Establece el porcentaje de interpolación de la posición durante la navegación por la ruta. Este parámetro reduce el desfase de la posición de tu ubicación en el mapa durante la animación.</string>
+    <string name="shared_string_interpolation">Interpolación</string>
 </resources>

@@ -50,8 +50,7 @@ public class NavigationMenuButton extends MapButton {
 	@Override
 	protected void updateColors(boolean nightMode) {
 		if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()
-				|| routingHelper.isRouteBeingCalculated() || routingHelper.isRouteCalculated()
-				|| MapActivity.getMapRouteInfoMenu().getRoutePlanningBtnImage() != 0) {
+				|| routingHelper.isRouteBeingCalculated() || routingHelper.isRouteCalculated()) {
 			setIconColor(ColorUtilities.getColor(app, R.color.color_myloc_distance));
 		} else {
 			setIconColor(ColorUtilities.getMapButtonIconColor(app, nightMode));

@@ -80,6 +80,11 @@ public class PublicTransportGeometryWayContext extends CommonGeometryWayContext 
 	}
 
 	@Override
+	protected float getArrowMargin() {
+		return 2f * getDensity();
+	}
+
+	@Override
 	public void clearCustomColor() {
 		super.clearCustomColor();
 		attrsPT.customColor = 0;

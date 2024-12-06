@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager
 import net.osmand.plus.R
 import net.osmand.plus.myplaces.tracks.DialogClosedListener
 import net.osmand.plus.myplaces.tracks.EmptySmartFolderListener
+import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.widgets.popup.PopUpMenu
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData
@@ -152,5 +153,14 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 
 	override fun onDialogClosed() {
 		updateContent()
+	}
+
+	override fun getSelectionHelper(): ItemsSelectionHelper<TrackItem> {
+		return ItemsSelectionHelper<TrackItem>().apply {
+			val items = smartFolder.getTrackItems()
+			setAllItems(items)
+			setSelectedItems(items)
+			setOriginalSelectedItems(items)
+		}
 	}
 }

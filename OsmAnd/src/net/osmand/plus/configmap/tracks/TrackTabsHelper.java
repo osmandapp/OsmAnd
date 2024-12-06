@@ -306,14 +306,19 @@ public class TrackTabsHelper {
 	}
 
 	public void loadTabsSortModes() {
-		TrackSortModesHelper sortModes = app.getTrackSortModesHelper();
-		for (Entry<String, TrackTab> entry : trackTabs.entrySet()) {
-			TracksSortMode sortMode = sortModes.getSortMode(entry.getKey());
+		TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
+		for (TrackTab trackTab : trackTabs.values()) {
+			TracksSortMode sortMode = sortModesHelper.getSortMode(trackTab.getId());
 			if (sortMode != null) {
-				TrackTab trackTab = entry.getValue();
 				trackTab.setSortMode(sortMode);
 			}
 		}
+	}
+
+	public void saveTabSortMode(@NonNull TrackTab trackTab) {
+		TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
+		sortModesHelper.setSortMode(trackTab.getId(), trackTab.getSortMode());
+		sortModesHelper.syncSettings();
 	}
 
 	public void saveTabsSortModes() {

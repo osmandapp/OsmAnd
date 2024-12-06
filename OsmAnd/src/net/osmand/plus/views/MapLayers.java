@@ -63,6 +63,8 @@ public class MapLayers {
 	private final static String LAYER_ADD = "LAYER_ADD";
 
 	private final OsmandApplication app;
+
+	private final MapActionsHelper mapActionsHelper;
 	private final MapWidgetRegistry mapWidgetRegistry;
 
 	// the order of layer should be preserved ! when you are inserting new layer
@@ -97,6 +99,7 @@ public class MapLayers {
 	public MapLayers(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.mapWidgetRegistry = new MapWidgetRegistry(app);
+		this.mapActionsHelper = new MapActionsHelper(app);
 	}
 
 	@NonNull
@@ -225,6 +228,7 @@ public class MapLayers {
 	}
 
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
+		mapActionsHelper.setMapActivity(mapActivity);
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		for (OsmandMapLayer layer : mapView.getLayers()) {
 			MapActivity layerMapActivity = layer.getMapActivity();
@@ -646,9 +650,7 @@ public class MapLayers {
 		return mapControlsLayer;
 	}
 
-	public MapActionsHelper getMapActionsHelper() {
-		return mapControlsLayer.getMapActionsHelper();
-	}
+	public MapActionsHelper getMapActionsHelper() { return mapActionsHelper; }
 
 	public MapQuickActionLayer getMapQuickActionLayer() {
 		return mapQuickActionLayer;

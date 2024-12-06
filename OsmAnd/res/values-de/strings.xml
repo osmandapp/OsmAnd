@@ -3770,7 +3770,7 @@
     <string name="use_live_routing">OsmAnd Live Daten</string>
     <string name="complex_routing_descr">Zwei-Phasen-Routenberechnung für die Autonavigation.</string>
     <string name="use_native_pt">Native ÖPNV Entwicklung</string>
-    <string name="use_native_pt_desc">Wechseln zur Java (sicher) Berechnung des ÖPNV-Routings</string>
+    <string name="use_native_pt_desc">Wechseln zur ÖPNV-Routenberechnung mit Java (sicher)</string>
     <string name="osm_edit_logout_success">Abgemeldet</string>
     <string name="file_already_imported">Datei wurde bereits in OsmAnd importiert</string>
     <string name="perform_oauth_authorization">Anmeldung über OAuth</string>
@@ -4473,9 +4473,7 @@
     <string name="please_provide_group_name_message">Bitte benennen Sie die Gruppe.</string>
     <string name="exit_import">Beenden\?</string>
     <string name="import_tracks_descr">%1$s, enthält %2$s separate Tracks. Wählen Sie die zu importierenden Tracks aus.</string>
-    <string name="location_source_descr">Standardmäßig verwendet OsmAnd, wenn es von Google Play installiert wurde, %1$s zur Standortbestimmung.
-\n
-\nWenn Sie ungenaue Standortinformationen erhalten oder ein Gerät ohne %2$s verwenden, versuchen Sie, zu „%3$s“ zu wechseln</string>
+    <string name="location_source_descr">Standardmäßig verwendet OsmAnd, wenn es von Google Play installiert wurde, %1$s zur Standortbestimmung.\n\nWenn Sie ungenaue Standortinformationen erhalten oder ein Gerät ohne %2$s verwenden, versuchen Sie, zu „%3$s“ zu wechseln.</string>
     <string name="location_source">Standortquelle</string>
     <string name="points_selection_descr">Schließen und alle Änderungen verwerfen\?</string>
     <string name="exit_import_descr">Beenden, ohne die Änderungen zu speichern\?</string>
@@ -5970,4 +5968,7 @@
     <string name="auto_zoom_3d_angle">Autozoom 3D-Winkel</string>
     <string name="shared_string_engine">Motor</string>
     <string name="vehicle_metrics_recording_description">Wählen Sie die Parameter aus, die in der GPX-Datei aufgezeichnet werden sollen.</string>
+    <string name="location_interpolation_percent_desc">Legt den Prozentsatz der Standortinterpolation während der Routennavigation fest. Dieser Parameter reduziert die Verzögerung der Position des Standorts auf der Karte während der Animation.</string>
+    <string name="shared_string_interpolation">Interpolation</string>
+    <string name="location_interpolation_percent">Prozentualer Anteil der Standortinterpolation</string>
 </resources>

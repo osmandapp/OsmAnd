@@ -28,7 +28,7 @@
     <string name="activity_type_offroad_name">Easbhóthair</string>
     <string name="click_on_widget">Cliceáil ar an ngiuirléid</string>
     <string name="about_osmand">Faoi OsmAnd</string>
-    <string name="favorite_confirm_delete_group">Scrios grúpa \"%1$s\" agus gach pointe san áireamh (% 2$d)?</string>
+    <string name="favorite_confirm_delete_group">Scrios grúpa \"%1$s\" agus gach pointe san áireamh (%2$d)?</string>
     <string name="share_geo">geo:</string>
     <string name="amenity_type_entertainment">Siamsaíocht</string>
     <string name="osb_comment_dialog_message">Teachtaireacht</string>
@@ -2288,7 +2288,7 @@
     <string name="analyze_by_intervals">Déan anailís de réir eatraimh</string>
     <string name="quick_action_remove_next_destination_descr">Scrios an chéad cheann scríbe eile ar do bhealach. Más é sin an ceann scríbe deiridh, stopfaidh an nascleanúint.</string>
     <string name="create_edit_poi">Cruthaigh nó cuir POI in eagar</string>
-    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / % 2$s</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="shared_string_angle">Uillinn</string>
     <string name="travel_card_download_descr">Íoslódáil treoracha taistil Wikivoyage chun ailt faoi áiteanna ar fud an domhain a fheiceáil gan nasc leis an Idirlíon.</string>
     <string name="fast_coordinates_input">Ionchur comhordanáide tapa</string>
@@ -2534,7 +2534,7 @@
     <string name="plugin_prefs_reset_successful">Athchóiríodh gach socrú breiseáin mar réamhshocrú.</string>
     <string name="profile_prefs_reset_successful">Athchóiríodh gach socrú próifíle mar réamhshocrú.</string>
     <string name="monitoring_min_speed_descr">Is scagaire scoite íseal-luais é seo gan pointí a thaifeadadh faoi luas áirithe. D\'fhéadfadh sé seo cuma níos réidhe a chur ar rianta taifeadta nuair a bhreathnaítear orthu ar an léarscáil.</string>
-    <string name="ltr_or_rtl_combine_via_bold_point">%1$s • % 2$s</string>
+    <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="reorder_profiles">Cuir liosta na bpróifílí in eagar</string>
     <string name="exported_osmand_profile">OsmAgus próifíl: %1$s</string>
     <string name="routing_attr_prefer_unpaved_description">Is fearr leat bóithre gan phá.</string>
@@ -2572,7 +2572,7 @@
     <string name="route_stops_before">Stadann %1$s roimh</string>
     <string name="access_hint_enter_description">Iontráil cur síos.</string>
     <string name="map_mode">Mód léarscáile</string>
-    <string name="osm_user_stat">Athruithe %1$s, céim% 2$s, athruithe iomlána %3$s</string>
+    <string name="osm_user_stat">Athruithe %1$s, céim%2$s, athruithe iomlána %3$s</string>
     <string name="osm_live_subscription">Síntiús OsmAnd Live</string>
     <string name="osm_live_support_region">Réigiún tacaíochta</string>
     <string name="download_files_question_space">Íoslódáil {0} comhad(anna)?\n Úsáidfear {1} MB (de {2} MB).</string>
@@ -2665,7 +2665,7 @@
     <string name="copying_osmand_files">Comhaid sonraí OsmAnd á gcóipeáil…</string>
     <string name="copying_osmand_files_descr">OsmAgus comhaid sonraí á gcóipeáil chuig an gceann scríbe nua (%s)…</string>
     <string name="app_modes_choose_descr">Roghnaigh próifílí léirithe.</string>
-    <string name="available_downloads_left">% 1$d comhad fágtha le híoslódáil</string>
+    <string name="available_downloads_left">%1$d comhad fágtha le híoslódáil</string>
     <string name="download_using_mobile_internet">Gan a bheith ceangailte le Wi-Fi. Bain úsáid as an nasc reatha leis an Idirlíon le híoslódáil?</string>
     <string name="recording_can_not_be_played">Níorbh fhéidir taifeadadh a sheinm.</string>
     <string name="avoid_toll_roads">Gan dola-bhóithre</string>
@@ -2702,7 +2702,7 @@
     <string name="map_widget_gps_info">Eolas GPS</string>
     <string name="poi_filter_namefinder">Aimsitheoir Ainm Ar Líne</string>
     <string name="no_microphone_permission">Rochtain mic a dheonú.</string>
-    <string name="gpx_selection_track">%1$s \nAmhrán% 2$s</string>
+    <string name="gpx_selection_track">%1$s \nAmhrán%2$s</string>
     <string name="android_auto_map_placeholder_title">Taispeántar an léarscáil ar scáileán na feithicle.</string>
     <string name="show_guide_line_descr">Taispeáin líne treorach ó do sheasamh go dtí na suíomhanna marcóra gníomhacha.</string>
     <string name="energy_avg_info_description">Leibhéal an chadhnra sa nóiméad: %1$s\nTomhaltas fuinnimh (mAh): %2$s</string>
@@ -2758,7 +2758,7 @@
     <string name="shared_string_circle">Ciorcal</string>
     <string name="quick_action_terrain_descr">Cnaipe chun ciseal tír-raoin a thaispeáint nó a cheilt ar an léarscáil.</string>
     <string name="shared_string_transparency">Trédhearcacht</string>
-    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — % 2$s — % 3$s</string>
+    <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="route_recalculation_dist_descr">Déanfar an bealach a athríomh má tá an fad go dtí an bealach níos faide ná an paraiméadar sonraithe</string>
     <string name="sunrise_at">Éirí gréine ag %1$s</string>
     <string name="paste_Osmand_data_folder_path">Greamaigh cosán chuig an bhfillteán le sonraí OsmAnd</string>
@@ -2909,7 +2909,7 @@
     <string name="sett_parrot_ext_input">Parrot</string>
     <string name="av_video_format">Formáid aschuir físe</string>
     <string name="download_regular_maps">Léarscáil chaighdeánach</string>
-    <string name="continue_follow_previous_route_auto">Lean ar aghaidh tar éis nascleanúint neamhchríochnaithe roimhe seo? (% 1 soicind)</string>
+    <string name="continue_follow_previous_route_auto">Lean ar aghaidh tar éis nascleanúint neamhchríochnaithe roimhe seo? (%1$s soicind)</string>
     <string name="osmand_parking_add_event">Cuir fógra leis an bhfeidhmchlár Féilire</string>
     <string name="route_kr">Coinnigh ceart agus téigh</string>
     <string name="map_underlay">Léarscáil underlay</string>
@@ -3024,7 +3024,7 @@
     <string name="get_discount_first_few_part">%1$s don chéad %2$s</string>
     <string name="rendering_attr_showLez_name">Taispeáin Criosanna Astaíochta Íseal</string>
     <string name="turn_on_profile_desc">Cas próifíl feidhmchláir amháin ar a laghad air chun an socrú seo a úsáid.</string>
-    <string name="precision_hdop_and_vdop">Cruinneas cothrománach: %1$s, ingearach:% 2$s</string>
+    <string name="precision_hdop_and_vdop">Cruinneas cothrománach: %1$s, ingearach:%2$s</string>
     <string name="collected_data_descr">Sainmhínigh na sonraí a cheadaíonn tú OsmAnd a roinnt.</string>
     <string name="show_compass_ruler">Taispeáin rialóir compáis</string>
     <string name="select_base_profile_dialog_message">Bunaigh do phróifíl saincheaptha ar cheann de na próifílí réamhshocraithe app, sainmhíníonn sé seo an thus bunúsach cosúil le hinfheictheacht réamhshocraithe giuirléidí agus aonaid luais agus faid. Is iad seo na próifílí réamhshocraithe feidhmchláir, mar aon le samplaí de phróifílí saincheaptha is féidir iad a leathnú chuig:</string>
@@ -3086,7 +3086,7 @@
     <string name="driving_region_descr">Roghnaigh réigiún tiomána: SAM, an Eoraip, an Ríocht Aontaithe, an Áise, agus daoine eile.</string>
     <string name="speak_descr">Fógra a chur ar bun maidir le sráidainmneacha, rabhaidh tráchta (stadanna éigeantacha, cnapáin luais), rabhaidh cheamara luais, agus teorainneacha luais.</string>
     <string name="speak_speed_limit">Teorainn luais</string>
-    <string name="route_descr_lat_lon">Lat% 1$.3f, lon %2$.3f</string>
+    <string name="route_descr_lat_lon">Lat%1$.3f, lon %2$.3f</string>
     <string name="local_openstreetmap_act_title">Modhnuithe OSM</string>
     <string name="access_intermediate_arrival_time">Am teachta idirmheánach</string>
     <string name="recording_context_menu_precord">Tóg grianghraf</string>
@@ -3291,8 +3291,8 @@
     <string name="duplacate_widget_added_snackbar">Tá giuirléid dhúbailte á cur leis an liosta.</string>
     <string name="first_marker_widget_desc">Is féidir leat a chumrú an ghiuirléid a thaispeáint ar an t-achar nó am measta teacht ar chlé go dtí an marcóir chéad léarscáil.</string>
     <string name="default_appearance_desc">Beidh dath, deilbhín agus cruth réamhshocraithe i bhfeidhm ar na pointí is fearr leat breise sa ghrúpa.</string>
-    <string name="storage_copied_files_size">Comhad(í) %1$s próiseáilte,% 2$s</string>
-    <string name="location_access_request_result">Ceadaithe: %1$s Diúltaithe:% 2$s</string>
+    <string name="storage_copied_files_size">Comhad(í) %1$s próiseáilte,%2$s</string>
+    <string name="location_access_request_result">Ceadaithe: %1$s Diúltaithe:%2$s</string>
     <string name="routing_attr_allow_gate_description">Ceadaigh úsáid geataí</string>
     <string name="routing_attr_prefer_horse_routes_description">Bealaí capall is fearr leat</string>
     <string name="no_items_of_type_message">Níl aon mhíreanna den chineál seo agat</string>
@@ -3356,7 +3356,7 @@
     <string name="delete_widget">Scrios giuirléid?</string>
     <string name="delete_widget_description">Scriosfar an ghiuirléid seo. Is féidir leat é a chur ar ais níos déanaí sa Scáileán Cumraithe.</string>
     <string name="add_widget_to_the_right">Cuir giuirléid ar dheis</string>
-    <string name="hugerock_promo_description">Rochtain saor in aisce ar ghnéithe lena n-áirítear íoslódálacha léarscáil neamhtheoranta, faoiseamh 3D etc. le haghaidh% 1 $ s month</string>
+    <string name="hugerock_promo_description">Rochtain saor in aisce ar ghnéithe lena n-áirítear íoslódálacha léarscáil neamhtheoranta, faoiseamh 3D etc. le haghaidh %1$s month</string>
     <string name="location_radius_description">Taispeáin an limistéar ciorclach a léiríonn do chruinneas suímh reatha</string>
     <string name="location_radius">Ga suímh</string>
     <string name="quick_action_verb_turn_on_off">Cas Air / Off</string>
@@ -3393,7 +3393,7 @@
     <string name="edit_group">Cuir grúpa in eagar</string>
     <string name="traffic_warning">Rabhadh tráchta</string>
     <string name="map_widget_reset">Athshocraigh go réamhshocrú</string>
-    <string name="route_roundabout">Timpeallán: Tóg% 1$d amach agus téigh</string>
+    <string name="route_roundabout">Timpeallán: Tóg%1$d amach agus téigh</string>
     <string name="local_index_description">Tapáil aon mhír atá ann cheana chun tuilleadh sonraí a fheiceáil, tapáil le fada chun díghníomhachtú nó scriosadh. Sonraí reatha ar ghléas ( %1$s saor in aisce):</string>
     <string name="modify_transparency">Socraigh trédhearcacht (0 - trédhearcach, 255 - teimhneach)</string>
     <string name="search_near_map">Cuardaigh in aice le lár na léarscáile reatha</string>
@@ -3448,7 +3448,7 @@
     <string name="explore_wikipedia_offline">Déan iniúchadh ar Vicipéid as líne.</string>
     <string name="backup_dont_have_any_descr">Socraigh cúltaca uathoibríoch ionas nach gá duit a bheith buartha faoi shonraí caillte.</string>
     <string name="backup_error_subscription_was_used">Síntiús nó promo a úsáideann cuntas eile %1$s</string>
-    <string name="segments_count">Mír% 1$d</string>
+    <string name="segments_count">Mír%1$d</string>
     <string name="gpx_monitoring_start">Atosaigh taifeadadh turais</string>
     <string name="shared_string_hidden">Folaithe</string>
     <string name="settings_privacy_and_security_desc">Roghnaigh na sonraí a chomhroinneann tú</string>
@@ -3461,7 +3461,7 @@
     <string name="osb_comment_dialog_error">Níorbh fhéidir trácht a chur leis.</string>
     <string name="storage_directory_internal_app">Cuimhne inmheánach feidhmchláir</string>
     <string name="storage_directory_manual">Sonraithe de láimh</string>
-    <string name="short_location_on_map">Lat %1$s\nLon% 2$s</string>
+    <string name="short_location_on_map">Lat %1$s\nLon%2$s</string>
     <string name="live_monitoring_m">Rianú ar líne (GPX ag teastáil)</string>
     <string name="osmo_edit_color">Dath taispeána</string>
     <string name="install_paid">Leagan iomlán</string>
@@ -3555,7 +3555,7 @@
     <string name="obd_fuel_level">Éifeachtúlacht Breosla (%)</string>
     <string name="y_axis_description">Roghnaigh suas le dhá rogha le haghaidh Y-Axis.</string>
     <string name="add_widget_above">Cuir giuirléid leis thuas</string>
-    <string name="route_roundabout_exit">Tóg scoir% 1$d</string>
+    <string name="route_roundabout_exit">Tóg scoir%1$d</string>
     <string name="help_article_map_tracks_name">Amhráin</string>
     <string name="help_article_map_routes_name">Bealaí</string>
     <string name="detailed_track_guidance">Treoir mhionsonraithe maidir leis an rian</string>
@@ -3923,7 +3923,7 @@
     <string name="confirm_usage_speed_cameras">I go leor tíortha (an Ghearmáin, an Fhrainc, an Iodáil, agus tíortha eile) tá úsáid rabhaidh ceamara luais mídhleathach. Ní ghlacann OsmAnd le haon dliteanas má sháraíonn tú an dlí. Ná tapáil ar \'Tá\' ach amháin má tá tú incháilithe chun an ghné seo a úsáid.</string>
     <string name="welmode_download_maps">Íoslódáil léarscáileanna</string>
     <string name="current_route">Bealach reatha</string>
-    <string name="local_osm_changes_upload_all_confirm">Uasluchtaigh% 1$d athrú(í) go OSM?</string>
+    <string name="local_osm_changes_upload_all_confirm">Uasluchtaigh%1$d athrú(í) go OSM?</string>
     <string name="your_edits">Do chuid athruithe</string>
     <string name="waypoint_visit_before">Cuairt roimh</string>
     <string name="routing_settings_2">Socruithe nascleanúna</string>
@@ -3975,8 +3975,8 @@
     <string name="no_index_file_to_download">Níor aimsíodh íoslódálacha, seiceáil do nasc leis an Idirlíon.</string>
     <string name="delay_navigation_start">Tosaigh treoir cas-ar-cas go huathoibríoch</string>
     <string name="local_index_gpx_info_show">\n\nSconna fada le haghaidh roghanna</string>
-    <string name="gpx_info_distance">Fad: %1$s (% 2$s pointí)</string>
-    <string name="gpx_info_start_time">Am tosaithe:% 1$tF,% 1$tT</string>
+    <string name="gpx_info_distance">Fad: %1$s (%2$s pointí)</string>
+    <string name="gpx_info_start_time">Am tosaithe:%1$tF,%1$tT</string>
     <string name="gpx_info_avg_altitude">Meánairde: %1$s</string>
     <string name="gpx_info_asc_altitude">Sliocht/ascent: %1$s</string>
     <string name="index_item_world_seamarks">Seamarks domhanda</string>
@@ -4052,7 +4052,7 @@
     <string name="auto_follow_route_navigation_descr">Amharc léarscáile uathoibríoch-lár amháin agus nascleanúint á déanamh.</string>
     <string name="auto_follow_location_enabled">Amharc léarscáile uath-lárnaigh in úsáid.</string>
     <string name="data_to_search_poi_not_available">Íoslódáil sonraí as líne chun POInna a chuardach.</string>
-    <string name="favorite_delete_multiple">Scrios% 1$d Ceanáin agus% 2$d Na grúpaí is fearr leat?</string>
+    <string name="favorite_delete_multiple">Scrios%1$d Ceanáin agus %2$d Na grúpaí is fearr leat?</string>
     <string name="local_index_items_restored">%1$d de %2$d mír(í) gníomhachtaithe.</string>
     <string name="local_index_no_items_to_do">Gan míreanna go %1$s</string>
     <string name="map_text_size_descr">Méid an téacs d\'ainmneacha ar an léarscáil:</string>
@@ -4152,7 +4152,7 @@
     <string name="plugin_nautical_name">Amharc léarscáile farraige</string>
     <string name="free">%1$s saor in aisce</string>
     <string name="version_settings_descr">Íoslódáil tógann nightly.</string>
-    <string name="local_osm_changes_delete_all_confirm">Scrios athruithe% 1$d OSM?</string>
+    <string name="local_osm_changes_delete_all_confirm">Scrios athruithe%1$d OSM?</string>
     <string name="use_magnetic_sensor_descr">Maidir le léamh an chompáis, bain úsáid as an braiteoir maighnéadach in ionad an bhraiteora treoshuímh.</string>
     <string name="use_magnetic_sensor">Úsáid braiteoir maighnéadach</string>
     <string name="poi_dialog_poi_type">Cineál POI</string>
@@ -4269,7 +4269,7 @@
     <string name="max_level_download_tile_descr">Ná brabhsáil léarscáileanna ar líne le haghaidh leibhéil zúmála níos faide ná sin.</string>
     <string name="router_service">Seirbhís loingseoireachta</string>
     <string name="opening_hours">Uaireanta oscailte</string>
-    <string name="new_route_calculated_dist_dbg">Bealach: fad %1$s, am ródaire% 2$s \nRíomh:% 3$.1f soic,% 4$d bóithre,% 5$d tíleanna)</string>
+    <string name="new_route_calculated_dist_dbg">Bealach: fad %1$s, am ródaire%2$s \nRíomh:%3$.1f soic,%4$d bóithre,%5$d tíleanna)</string>
     <string name="previous_run_crashed">Last OsmAgus rith crashed. Tá logchomhad ag {0}. Tuairiscigh an cheist agus ceangail an logchomhad.</string>
     <string name="search_address_street_option">Sráid thrasnach</string>
     <string name="poi_dialog_comment_default">POI ag athrú</string>
@@ -4283,9 +4283,9 @@
     <string name="routing_attr_difficulty_preference_description">Is fearr bealaí den deacracht seo, cé go bhfuil ródú thar pistes níos deacra nó níos éasca fós indéanta más giorra.</string>
     <string name="current_speed_widget_desc">Taispeánann seo do luas reatha mar a thuairiscítear trí GPS.</string>
     <string name="exit_pan_mode_descr">Brúigh Roghnaigh chun an mód pan a scor</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — % 2$s</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="osm_editing_prefs_descr">Logáil isteach, pasfhocal, eagarthóireacht as líne</string>
-    <string name="files_failed">Níorbh fhéidir comhaid %1$d (% 2$s) a chóipeáil.</string>
+    <string name="files_failed">Níorbh fhéidir comhaid %1$d (%2$s) a chóipeáil.</string>
     <string name="public_transport_ped_route_title">Tá an bealach de shiúl na gcos thart ar %1$s, agus d\'fhéadfadh sé a bheith níos tapúla ná iompar poiblí</string>
     <string name="public_transport_try_ped">Bain triail as nascleanúint de shiúl na gcos.</string>
     <string name="send_search_query">Seol ceist chuardaigh?</string>
@@ -4317,7 +4317,7 @@
     <string name="navigate_point_format_DMS">DDD MM SS. S</string>
     <string name="trip_recording_distance_widget_desc">Taispeánann seo an t-achar turais atá taifeadta faoi láthair.</string>
     <string name="analytics_pref_title">Anailísíocht</string>
-    <string name="price_and_discount">%1$s • Sábháil% 2$s</string>
+    <string name="price_and_discount">%1$s • Sábháil%2$s</string>
     <string name="turn_screen_on_sensor_descr">Casfaidh do lámh trasna an scáileáin air.</string>
     <string name="rate_dialog_descr">Roinn d\'aiseolas le do thoil agus déan rátáil ar ár gcuid oibre ar Google Play.</string>
     <string name="shared_string_degrees">Céimeanna</string>
@@ -4333,7 +4333,7 @@
     <string name="store_tracks_in_monthly_directories">Stóráil rianta taifeadta i bhfillteáin mhíosúla</string>
     <string name="map_widget_ruler_control">Rialóir ga</string>
     <string name="gps_network_not_enabled">Tá an tseirbhís suímh as. Cas air?</string>
-    <string name="local_recordings_delete_all_confirm">Scrios nótaí% 1$d?</string>
+    <string name="local_recordings_delete_all_confirm">Scrios nótaí%1$d?</string>
     <string name="btn_advanced_mode">Mód Casta…</string>
     <string name="auto_announce_on">Tosaigh fógairt uathoibríoch</string>
     <string name="specified_dir_doesnt_exist">Níorbh fhéidir an fillteán sonraithe a aimsiú.</string>
@@ -4423,7 +4423,7 @@
     <string name="dialogs_and_notifications_descr">Preabfhuinneoga, dialóga agus fógraí a rialú.</string>
     <string name="added_profiles_descr">Próifílí curtha leis ag an mbreiseán</string>
     <string name="rendering_value_white_name">Bán</string>
-    <string name="swap_two_places">Babhtáil %1$s agus% 2$s</string>
+    <string name="swap_two_places">Babhtáil %1$s agus%2$s</string>
     <string name="shared_string_memory_used_mb_desc">Úsáidte %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Úsáidte %1$s kB</string>
     <string name="day">Lá</string>
@@ -4439,7 +4439,7 @@
     <string name="rendering_attr_surface_cobblestone_name">Cobblestone</string>
     <string name="rendering_attr_surface_paving_stones_name">Clocha pábhála</string>
     <string name="rendering_attr_surface_stone_name">Cloch</string>
-    <string name="osm_live_payment_month_cost_descr">% 1 $ s / mí</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / mí</string>
     <string name="send_search_query_description">Seolfar d\'iarratas cuardaigh chuig: \"%1$s\", mar aon le do shuíomh.\n\nNí bhailítear faisnéis phearsanta, ní gá ach sonraí cuardaigh a theastaíonn chun an cuardach a fheabhsú.</string>
     <string name="delete_search_history">Scrios stair chuardaigh</string>
     <string name="use_two_digits_longitude">Úsáid domhanfhad dhigit dhúbailte</string>
@@ -4496,7 +4496,7 @@
     <string name="vector_maps_may_display_faster_on_some_devices">Is dócha go dtaispeánfaidh léarscáileanna veicteora níos tapúla. B\'fhéidir nach n-oibreoidh sé go maith ar roinnt gléasanna.</string>
     <string name="index_name_netherlands">An Eoraip - An Ísiltír</string>
     <string name="open_street_map_login_descr">Ag teastáil le haghaidh aighneachtaí openstreetmap.org.</string>
-    <string name="download_files_not_enough_space">Níl go leor spáis saor in aisce chun %1$s MB a íoslódáil (saor in aisce:% 2$s).</string>
+    <string name="download_files_not_enough_space">Níl go leor spáis saor in aisce chun %1$s MB a íoslódáil (saor in aisce:%2$s).</string>
     <string name="show_more_map_detail">Taispeáin tuilleadh sonraí léarscáile</string>
     <string name="overlay_transparency_descr">Coigeartaigh trédhearcacht forleagan.</string>
     <string name="layer_underlay">Léarscáil underlay…</string>
@@ -4543,7 +4543,7 @@
     <string name="store_tracks_in_monthly_directories_descrp">Stóráil rianta taifeadta i bhfo-fhillteáin in aghaidh na míosa taifeadta (cosúil le 2018-01).</string>
     <string name="osm_live_enter_email">Iontráil seoladh ríomhphoist bailí</string>
     <string name="clear_updates_proposition_message">Bain nuashonruithe íoslódáilte agus téigh ar ais go dtí an buneagrán léarscáile</string>
-    <string name="location_on_map">Suíomh:\n Lat %1$s\n Lon% 2$s</string>
+    <string name="location_on_map">Suíomh:\n Lat %1$s\n Lon%2$s</string>
     <string name="index_item_nation_addresses">seoltaí ar fud na tíre</string>
     <string name="lang_sr_latn">Seirbis (laidin)</string>
     <string name="access_arrival_time">Am teachta</string>
@@ -4561,7 +4561,7 @@
     <string name="search_villages_and_postcodes">Cuardaigh níos mó sráidbhailte / cóid phoist</string>
     <string name="incremental_search_city">Cuardaigh an chathair de réir a chéile</string>
     <string name="rendering_attr_showRoadMaps_description">Roghnaigh cathain a thaispeánfar léarscáileanna bóithre amháin:</string>
-    <string name="day_night_info_description">Éirí Gréine: %1$s \nLuí gréine:% 2$s</string>
+    <string name="day_night_info_description">Éirí Gréine: %1$s \nLuí gréine:%2$s</string>
     <string name="renderers_descr">Roghnaigh cuma rindreála</string>
     <string name="app_mode_suv">SUV</string>
     <string name="graph_axis">Ais graf</string>
@@ -4707,8 +4707,8 @@
     <string name="routing_attr_length_description">Sonraigh fad na feithicle a cheadófar ar bhealaí.</string>
     <string name="uninstall_speed_cameras">Díshuiteáil ceamaraí luais</string>
     <string name="overwrite_profile_q">Tá \'%1$s\' ann cheana. Forscríobh?</string>
-    <string name="file_import_error">Earráid iompórtála%1$s:% 2$s</string>
-    <string name="data_storage_preference_summary">%1$s • % 2$s</string>
+    <string name="file_import_error">Earráid iompórtála%1$s:%2$s</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="change_osmand_data_folder_question">Athraigh fillteán sonraí OsmAnd?</string>
     <string name="rendering_attr_piste_difficulty_extreme_name">An-mhór</string>
     <string name="get_discount_title">Faigh %1$d%2$s ag%3$s as.</string>
@@ -5109,7 +5109,7 @@
     <string name="quick_action_navigation_view_title">Amharc nascleanúna</string>
     <string name="quick_action_switch_compass_desc">Scoránaigh chun treoshuíomh na léarscáile a athrú.</string>
     <string name="resting_navigation_position">An chuid eile &amp; suíomh nascleanúna</string>
-    <string name="tripltek_promo_description">Rochtain saor in aisce ar ghnéithe lena n-áirítear íoslódálacha léarscáil neamhtheoranta, faoiseamh 3D etc. le haghaidh% 1 $ s month</string>
+    <string name="tripltek_promo_description">Rochtain saor in aisce ar ghnéithe lena n-áirítear íoslódálacha léarscáil neamhtheoranta, faoiseamh 3D etc. le haghaidh %1$s month</string>
     <string name="map_widget_group_glide_ratio">Cóimheas glide</string>
     <string name="token_is_not_valid">Níl an comhartha bailí</string>
     <string name="generate_hillshade_from_3d_maps">Gin léarscáileanna raster hillshade ó léarscáileanna 3D</string>
@@ -5176,7 +5176,7 @@
     <string name="shared_string_remember_my_choice">Cuimhnigh ar rogha</string>
     <string name="use_english_names">Úsáid ainmneacha Béarla ar léarscáileanna</string>
     <string name="opening_at">Ag oscailt ag</string>
-    <string name="rendering_avg_info_details">FPS de réir na bhfrámaí 1k deireanacha: %1$s\nLAP (tíleanna): % 2$s\nLAP (am díomhaoin): %3$s\nLAP (fan GPU): % 4 $ s</string>
+    <string name="rendering_avg_info_details">FPS de réir na bhfrámaí 1k deireanacha: %1$s\nLAP (tíleanna): %2$s\nLAP (am díomhaoin): %3$s\nLAP (fan GPU): %4$s</string>
     <string name="quick_action_photo_note">Nóta grianghraf</string>
     <string name="maps_that_also_be_used">Mapaí a úsáidfear freisin: %1$s</string>
     <string name="relief_3d_download_description">Tá léarscáileanna breise ag teastáil chun tír-raon a fheiceáil ar an léarscáil.</string>
@@ -5232,9 +5232,9 @@
     <string name="shared_string_currently_recording_track">Rian á thaifeadadh faoi láthair</string>
     <string name="track_segments">Deighleáin amhráin</string>
     <string name="shared_string_online_maps">Léarscáileanna ar líne</string>
-    <string name="gpx_info_end_time">Am deiridh:% 1$tF,% 1$tT</string>
+    <string name="gpx_info_end_time">Am deiridh:%1$tF,%1$tT</string>
     <string name="gpx_saved_sucessfully">Sábháladh comhad GPX go {0}</string>
-    <string name="files_limit">% 1$d comhad fágtha</string>
+    <string name="files_limit">%1$d comhad fágtha</string>
     <string name="srtm_paid_version_msg">Smaoinigh ar íoc as an mbreiseán \'Topagrafaíocht\' chun tacú le tuilleadh forbartha.</string>
     <string name="avoid_unpaved">Gan aon bhóithre gan phá</string>
     <string name="first_time_msg">Go raibh maith agat as OsmAnd a úsáid. Íoslódáil sonraí réigiúnacha lena n-úsáid as líne trí \'Menu\' → \'Íoslódáil léarscáileanna\' chun léarscáileanna a fheiceáil, seoltaí a aimsiú, POInna a chuardach, iompar poiblí a aimsiú agus tuilleadh.</string>
@@ -5397,13 +5397,13 @@
     <string name="recalc_angle_dialog_descr">Taispeánfar deighleog dhíreach bhreise idir mo shuíomh agus mo bhealach ríofa go dtí go ndéanfar an bealach a athríomh</string>
     <string name="keep_both_desc">Cuirfear míreanna iompórtáilte leis an réimír</string>
     <string name="select_data_to_import">Roghnaigh na sonraí atá le hiompórtáil.</string>
-    <string name="update_all_maps_q">Nuashonraigh gach léarscáil (% 1$d)?</string>
+    <string name="update_all_maps_q">Nuashonraigh gach léarscáil (%1$d)?</string>
     <string name="track_storage_directory_descrp">Is féidir rianta a stóráil san fhillteán \'rec\', go míosúil, nó i bhfillteáin laethúla.</string>
     <string name="store_tracks_in_daily_directories">Taifead rianta i bhfillteáin laethúla</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Is fearr gan íoc thar bhóithre pábháilte le haghaidh ródú.</string>
     <string name="shared_string_memory_used_tb_desc">Úsáidte %1$s TB</string>
     <string name="update_all_maps">Nuashonraigh gach léarscáil</string>
-    <string name="points_delete_multiple">Scrios% 1$d pointe(í)?</string>
+    <string name="points_delete_multiple">Scrios%1$d pointe(í)?</string>
     <string name="route_points_category_name">Casann sé chun pas a fháil ar an mbealach seo</string>
     <string name="access_category_choice">Roghnaigh catagóir</string>
     <string name="storage_directory_readonly_desc">Athraigh go cuimhne inmheánach ós rud é go bhfuil an fillteán stórála sonraí roghnaithe cosanta ag scríobh. Roghnaigh comhadlann stórála inscríofa.</string>
@@ -5447,8 +5447,11 @@
     <string name="choose_building">Roghnaigh foirgneamh</string>
     <string name="choose_city">Roghnaigh cathair nó cód poist</string>
     <string name="poi_deleted_localy">Scriosfar POI nuair a uaslódálann tú do chuid athruithe</string>
-    <string name="downloading_number_of_files">Comhad% 1$d á íosluchtú…</string>
+    <string name="downloading_number_of_files">Comhad%1$d á íosluchtú…</string>
     <string name="show_free_version_banner">Taispeáin meirge leagan saor in aisce</string>
     <string name="show_free_version_banner_description">Taispeáin an meirge leagan saor in aisce fiú sa leagan íoctha.</string>
     <string name="pick_up_till">Pioc suas go dtí</string>
+    <string name="location_interpolation_percent">Céatadán idirshuímh suímh</string>
+    <string name="location_interpolation_percent_desc">Socraigh an céatadán d\'idirshuíomh suímh le linn loingseoireachta bealaigh. Laghdaíonn an paraiméadar seo aga moille do shuíomh suímh ar an léarscáil le linn beochana.</string>
+    <string name="shared_string_interpolation">Idirshuíomh</string>
 </resources>

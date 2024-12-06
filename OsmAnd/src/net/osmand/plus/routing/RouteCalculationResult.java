@@ -1162,6 +1162,27 @@ public class RouteCalculationResult {
 		return nextIntermediate;
 	}
 
+	public int getCurrentRouteForLocation(@NonNull Location location) {
+		int currentRoute = this.currentRoute;
+		if (currentRoute == 0) {
+			return 0;
+		}
+		Location previousRouteLocation = locations.get(currentRoute - 1);
+		Location currentRouteLocation = locations.get(currentRoute);
+		while (currentRoute > 1) {
+			double projCoeff = MapUtils.getProjectionCoeff(location.getLatitude(), location.getLongitude(),
+					previousRouteLocation.getLatitude(), previousRouteLocation.getLongitude(),
+					currentRouteLocation.getLatitude(), currentRouteLocation.getLongitude());
+			if (projCoeff != 0) {
+				break;
+			}
+			currentRoute--;
+			previousRouteLocation = locations.get(currentRoute - 1);
+			currentRouteLocation = locations.get(currentRoute);
+		}
+		return currentRoute;
+	}
+
 	@Nullable
 	public Location getLocationFromRouteDirection(RouteDirectionInfo info) {
 		if (info != null && locations != null && info.routePointOffset < locations.size()) {

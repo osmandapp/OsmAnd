@@ -5686,4 +5686,7 @@
     <string name="obd_throttle_position_desc">Viser vinklen på gasspjældspladen i gasspjældshuset.</string>
     <string name="obd_speed_desc">Viser hastighed fra køretøjets hastighedssensor (VVS).</string>
     <string name="obd_air_intake_temp_desc">Viser temperaturen på den luft, der kommer ind i motorens indsugningsmanifold.</string>
+    <string name="shared_string_interpolation">Interpolation</string>
+    <string name="location_interpolation_percent_desc">Indstil procentdelen af lokationsinterpolation under rutenavigation. Denne parameter reducerer forsinkelsen af din position på kortet under animation.</string>
+    <string name="location_interpolation_percent">Interpolation af placering i procent</string>
 </resources>

@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class TrackSortModesHelper {
 
-	private static final String ROOT_FOLDER = IndexConstants.GPX_INDEX_DIR;
+	private static final String ROOT_FOLDER_ID = "";
 	private static final String SEPARATOR = ",,";
 
 	private final Map<String, TracksSortMode> cachedSortModes = new ConcurrentHashMap<>();
@@ -34,27 +34,33 @@ public class TrackSortModesHelper {
 
 	@NonNull
 	public TracksSortMode getRootFolderSortMode() {
-		return requireSortMode("");
+		return requireSortMode(ROOT_FOLDER_ID);
 	}
 
 	@NonNull
 	public TracksSortMode requireSortMode(@Nullable String id) {
-		TracksSortMode sortMode = getSortMode(id);
+		TracksSortMode sortMode = id != null ? getSortMode(id) : null;
 		return sortMode != null ? sortMode : TracksSortMode.getDefaultSortMode();
 	}
 
 	@Nullable
-	public TracksSortMode getSortMode(@Nullable String id) {
+	public TracksSortMode getSortMode(@NonNull String id) {
 		id = removeExtraFileSeparator(id);
 		return cachedSortModes.get(id);
 	}
 
-	public void setSortMode(@NonNull String id, @NonNull TracksSortMode sortMode) {
+	public void setSortMode(@NonNull String id, @Nullable TracksSortMode sortMode) {
 		id = removeExtraFileSeparator(id);
-		cachedSortModes.put(id, sortMode);
+		if (sortMode != null) {
+			cachedSortModes.put(id, sortMode);
+		} else {
+			cachedSortModes.remove(id);
+		}
 	}
 
 	public void setSortModes(@NonNull Map<String, TracksSortMode> sortModes) {
+		// The extra file separator is not checked here to avoid redundant validations.
+		// It should be handled in the methods that call this one.
 		cachedSortModes.clear();
 		cachedSortModes.putAll(sortModes);
 	}
@@ -69,7 +75,7 @@ public class TrackSortModesHelper {
 	}
 
 	public void updateAfterDeleteTrackFolder(@NonNull TrackFolder trackFolder) {
-		cachedSortModes.remove(trackFolder.getId());
+		setSortMode(trackFolder.getId(), null);
 		syncSettings();
 	}
 
@@ -83,7 +89,8 @@ public class TrackSortModesHelper {
 			for (String token : tokens) {
 				String[] tokenParts = token.split(SEPARATOR);
 				if (tokenParts.length == 2) {
-					cachedSortModes.put(tokenParts[0], TracksSortMode.getByValue(tokenParts[1]));
+					String id = removeExtraFileSeparator(tokenParts[0]);
+					cachedSortModes.put(id, TracksSortMode.getByValue(tokenParts[1]));
 				}
 			}
 			UpgradeTrackSortModeKeysAlgorithm.execute(app, this);
@@ -93,25 +100,31 @@ public class TrackSortModesHelper {
 	private void saveToPreference() {
 		List<String> tokens = new ArrayList<>();
 		for (Entry<String, TracksSortMode> entry : cachedSortModes.entrySet()) {
-			tokens.add(entry.getKey() + SEPARATOR + entry.getValue().name());
+			TracksSortMode value = entry.getValue();
+			tokens.add(entry.getKey() + SEPARATOR + value.name());
 		}
 		preference.setStringsList(tokens);
 	}
 
 	@NonNull
 	public static String getFolderId(@NonNull String absolutePath) {
-		int index = absolutePath.indexOf(ROOT_FOLDER);
+		String basePath = IndexConstants.GPX_INDEX_DIR;
+		int index = absolutePath.indexOf(basePath);
 		if (index > 0) {
-			index += ROOT_FOLDER.length();
+			index += basePath.length();
+			String relativePath = absolutePath.substring(index);
+			return removeExtraFileSeparator(relativePath);
+		} else if (absolutePath.endsWith(removeExtraFileSeparator(basePath))) {
+			return ROOT_FOLDER_ID;
 		}
-		return index > 0 ? absolutePath.substring(index) : absolutePath;
+		return absolutePath;
 	}
 
-	@Nullable
-	private static String removeExtraFileSeparator(@Nullable String id) {
+	@NonNull
+	private static String removeExtraFileSeparator(@NonNull String id) {
 		// Ensure consistency by removing trailing File.separator from relative paths
 		// before querying or saving to settings to avoid key mismatches.
-		if (id != null && id.endsWith(File.separator)) {
+		if (id.endsWith(File.separator)) {
 			return id.substring(0, id.length() - 1);
 		}
 		return id;
