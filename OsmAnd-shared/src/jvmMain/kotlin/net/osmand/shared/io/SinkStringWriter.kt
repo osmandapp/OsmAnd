@@ -16,6 +16,13 @@ class SinkStringWriter(sink: Sink) : StringWriter() {
 	}
 
 	@Throws(IOException::class)
+	override fun write(str: String?) {
+		if (str != null) {
+			bufferedSink.writeUtf8(str)
+		}
+	}
+
+	@Throws(IOException::class)
 	override fun write(cbuf: CharArray, off: Int, len: Int) {
 		bufferedSink.writeUtf8(String(cbuf, off, len))
 	}

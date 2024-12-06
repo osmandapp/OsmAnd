@@ -2,6 +2,11 @@ package net.osmand.data;
 
 import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
 import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
+import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
+import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
+import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
 
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
@@ -48,6 +53,7 @@ public class Amenity extends MapObject {
 	public static final String IS_AGGR_PART = "is_aggr_part";
 	public static final String CONTENT_JSON = "content_json";
 	public static final String ROUTE_ID = "route_id";
+	public static final String ROUTE_ID_OSM_PREFIX = "OSM";
 	public static final String ROUTE_SOURCE = "route_source";
 	public static final String ROUTE_NAME = "route_name";
 	public static final String COLOR = "color";
@@ -447,6 +453,25 @@ public class Amenity extends MapObject {
 		return getAdditionalInfo(ROUTE_ID);
 	}
 
+	public boolean hasOsmRouteId() {
+		String routeId = getRouteId();
+		return routeId != null && routeId.startsWith(ROUTE_ID_OSM_PREFIX);
+	}
+
+	public String getGpxFileName(String lang) {
+		final String gpxFileName = lang != null ? getName(lang) : getEnName(true);
+		if (!Algorithms.isEmpty(gpxFileName)) {
+			return gpxFileName;
+		}
+		if (!Algorithms.isEmpty(getRouteId())) {
+			return getRouteId();
+		}
+		if (!Algorithms.isEmpty(getSubType())) {
+			return getType().getKeyName() + " " + getSubType();
+		}
+		return getType().getKeyName();
+	}
+
 	public String getStrictTagContent(String tag, String lang) {
 		if (lang != null) {
 			String translateName = getAdditionalInfo(tag + ":" + lang);
@@ -547,6 +572,14 @@ public class Amenity extends MapObject {
 
 	public boolean isPrivateAccess() {
 		return PRIVATE_VALUE.equals(getTagContent(ACCESS_PRIVATE_TAG));
+	}
+
+	public boolean isRouteTrack() {
+		return subType != null && (subType.equals(ROUTE_TRACK) || subType.startsWith(ROUTES_PREFIX));
+	}
+
+	public boolean isRoutePoint() {
+		return subType != null && (subType.equals(ROUTE_TRACK_POINT) || subType.equals(ROUTE_ARTICLE_POINT));
 	}
 
 	public JSONObject toJSON() {
