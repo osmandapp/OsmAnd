@@ -1411,14 +1411,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (dashboardOnMap.isVisible()) {
 			dashboardOnMap.onNewDownloadIndexes();
 		}
-		if (app.getAppInitializer().isFirstTime()) {
-			updateDownloadMapToolbar();
-		}
 		refreshMap();
-	}
-
-	private void updateDownloadMapToolbar(){
-		app.getOsmandMap().getMapLayers().getDownloadedRegionsLayer().setForceUpdateForFirstUsage();
 	}
 
 	@Override
