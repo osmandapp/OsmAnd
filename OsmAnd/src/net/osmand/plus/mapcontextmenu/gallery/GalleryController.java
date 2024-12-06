@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.gallery;
 
+import android.os.AsyncTask;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -9,21 +11,31 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
+import net.osmand.plus.mapcontextmenu.gallery.tasks.LoadImagesMetadataTask;
+import net.osmand.plus.wikipedia.WikiImageCard;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class GalleryController implements IDialogController {
 
 	public static final String PROCESS_ID = "gallery_context_controller";
+	private final OsmandApplication app;
 
 	private ImageCardsHolder currentCardsHolder;
 	private final List<WeakReference<DownloadMetadataListener>> listeners = new LinkedList<>();
+	private final Set<WikiImageCard> downloadingMetadata = new HashSet<>();
+
+	public GalleryController(@NonNull OsmandApplication app) {
+		this.app = app;
+	}
 
 	@NonNull
 	public List<ImageCard> getOnlinePhotoCards() {
@@ -39,21 +51,37 @@ public class GalleryController implements IDialogController {
 		return currentCardsHolder;
 	}
 
-	public void updateMetadata(@NonNull Map<String, Map<String, String>> metadataMap) {
-		if (currentCardsHolder != null) {
+	public void updateMetadata(@Nullable Map<String, Map<String, String>> metadataMap, @NonNull Set<WikiImageCard> cards) {
+		for (WikiImageCard card : cards) {
+			downloadingMetadata.remove(card);
+		}
+		if (currentCardsHolder != null && metadataMap != null) {
 			currentCardsHolder.updateWikiMetadata(metadataMap);
-			notifyMetaDataUpdated();
+			notifyMetaDataUpdated(metadataMap.keySet());
 		}
 	}
 
-	public void notifyMetaDataUpdated() {
+	public boolean isMetadataDownloading(@NonNull WikiImageCard card){
+		return downloadingMetadata.contains(card);
+	}
+
+	public void downloadWikiMetaData(@NonNull Set<WikiImageCard> cards) {
+		if (Algorithms.isEmpty(cards)) {
+			return;
+		}
+		downloadingMetadata.addAll(cards);
+		LoadImagesMetadataTask task = new LoadImagesMetadataTask(app, cards);
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	public void notifyMetaDataUpdated(@NonNull Set<String> updatedMediaTagImages) {
 		Iterator<WeakReference<DownloadMetadataListener>> it = listeners.iterator();
 		while (it.hasNext()) {
 			DownloadMetadataListener listener = it.next().get();
 			if (listener == null) {
 				it.remove();
 			} else {
-				listener.onMetadataUpdated();
+				listener.onMetadataUpdated(updatedMediaTagImages);
 			}
 		}
 	}
@@ -120,6 +148,6 @@ public class GalleryController implements IDialogController {
 	}
 
 	public interface DownloadMetadataListener {
-		void onMetadataUpdated();
+		void onMetadataUpdated(@NonNull Set<String> updatedMediaTagImages);
 	}
 }

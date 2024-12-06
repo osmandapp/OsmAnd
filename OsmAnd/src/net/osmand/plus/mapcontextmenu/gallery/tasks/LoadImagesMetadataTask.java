@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 public class LoadImagesMetadataTask extends AsyncTask<Void, Void, Map<String, Map<String, String>>> {
 
@@ -34,11 +35,11 @@ public class LoadImagesMetadataTask extends AsyncTask<Void, Void, Map<String, Ma
 	private static final String OSMAND_PARSE_URL = "https://osmand.net/search/parse-images-list-info?";
 
 	private final OsmandApplication app;
-	private final ImageCardsHolder holder;
+	private final Set<WikiImageCard> cards;
 	private Map<String, Map<String, String>> resultMap = null;
 
-	public LoadImagesMetadataTask(@NonNull OsmandApplication app, @NonNull ImageCardsHolder holder) {
-		this.holder = holder;
+	public LoadImagesMetadataTask(@NonNull OsmandApplication app, @NonNull Set<WikiImageCard> cards) {
+		this.cards = cards;
 		this.app = app;
 	}
 
@@ -97,14 +98,12 @@ public class LoadImagesMetadataTask extends AsyncTask<Void, Void, Map<String, Ma
 
 	private List<WikiImageInfo> getData() {
 		List<WikiImageInfo> data = new ArrayList<>();
-		for (ImageCard card : holder.getOrderedCards()) {
-			if (card instanceof WikiImageCard wikiImageCard) {
-				String title = wikiImageCard.getWikiImage().getWikiMediaTag();
-				long pageId = wikiImageCard.getWikiImage().getMediaId();
+		for (WikiImageCard card : cards) {
+			String title = card.getWikiImage().getWikiMediaTag();
+			long pageId = card.getWikiImage().getMediaId();
 
-				if (!Algorithms.isEmpty(title) && pageId != -1) {
-					data.add(new WikiImageInfo(title, pageId, null));
-				}
+			if (!Algorithms.isEmpty(title) && pageId != -1) {
+				data.add(new WikiImageInfo(title, pageId, null));
 			}
 		}
 		return data;
@@ -113,8 +112,8 @@ public class LoadImagesMetadataTask extends AsyncTask<Void, Void, Map<String, Ma
 	@Override
 	protected void onPostExecute(Map<String, Map<String, String>> result) {
 		GalleryController controller = (GalleryController) app.getDialogManager().findController(GalleryController.PROCESS_ID);
-		if (controller != null && result != null) {
-			controller.updateMetadata(result);
+		if (controller != null) {
+			controller.updateMetadata(result, cards);
 		}
 	}
 }

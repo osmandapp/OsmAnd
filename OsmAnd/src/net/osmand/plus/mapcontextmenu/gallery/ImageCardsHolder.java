@@ -108,6 +108,7 @@ public class ImageCardsHolder {
 				if (!Algorithms.isEmpty(description) && (Algorithms.isEmpty(metadata.getDescription()) || metadata.getDescription().equals("Unknown"))) {
 					metadata.setDescription(description);
 				}
+				wikiImageCard.setMetaDataDownloaded(true);
 			}
 		}
 	}

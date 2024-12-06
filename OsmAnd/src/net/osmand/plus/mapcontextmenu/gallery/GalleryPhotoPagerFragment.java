@@ -50,7 +50,9 @@ import net.osmand.util.Algorithms;
 import net.osmand.wiki.Metadata;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements DownloadMetadataListener {
 
@@ -79,9 +81,9 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 	}
 
 	@Override
-	public void onMetadataUpdated() {
+	public void onMetadataUpdated(@NonNull Set<String> updatedMediaTagImages) {
 		ImageCard card = getSelectedImageCard();
-		if (card instanceof WikiImageCard wikiImageCard) {
+		if (card instanceof WikiImageCard wikiImageCard && updatedMediaTagImages.contains(wikiImageCard.getWikiImage().getWikiMediaTag())) {
 			Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
 			setMetaData(metadata.getAuthor(), metadata.getDate(), metadata.getLicense());
 		}
@@ -126,7 +128,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 				boolean shouldPreloadNext = selectedPosition < position;
 				selectedPosition = position;
 				preloadThumbNails(shouldPreloadNext);
-				updateImageDescriptionRow(getSelectedImageCard());
+				updateImageDescriptionRow(getSelectedImageCard(), shouldPreloadNext);
 			}
 
 			@Override
@@ -139,7 +141,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 		setupToolbar(view);
 		setupOnBackPressedCallback();
 		preloadThumbNails();
-		updateImageDescriptionRow(getSelectedImageCard());
+		updateImageDescriptionRow(getSelectedImageCard(), null);
 		return view;
 	}
 
@@ -197,11 +199,58 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 		super.onSaveInstanceState(outState);
 	}
 
-	private void updateImageDescriptionRow(@NonNull ImageCard imageCard) {
+	private Set<WikiImageCard> getImagesToDownloadMetadata(@NonNull WikiImageCard wikiImageCard, @Nullable Boolean preloadNext){
+		Set<WikiImageCard> result = new HashSet<>();
+		List<ImageCard> imageCards = controller.getOnlinePhotoCards();
+		if (imageCards.size() <= 1) {
+			return result;
+		}
+
+		if (shouldDownloadMetadata(wikiImageCard)) {
+			result.add(wikiImageCard);
+		}
+		if (preloadNext == null) {
+			addImages(imageCards, result, false, 2);
+			addImages(imageCards, result, true, 2);
+		} else {
+			addImages(imageCards, result, preloadNext, 4);
+		}
+
+		return result;
+	}
+
+	private void addImages(@NonNull List<ImageCard> imageList, @NonNull Set<WikiImageCard> result, boolean next, int downloadCount) {
+		int direction = next ? 1 : -1;
+		for (int i = 1; i <= downloadCount; i++) {
+			int currentIndex = selectedPosition + (i * direction);
+			if (currentIndex >= 0 && currentIndex < imageList.size()) {
+				ImageCard card = imageList.get(currentIndex);
+				if (card instanceof WikiImageCard wikiImageCard && shouldDownloadMetadata(wikiImageCard)) {
+					result.add(wikiImageCard);
+				}
+			}
+		}
+	}
+
+	private boolean shouldDownloadMetadata(@NonNull WikiImageCard wikiImageCard){
+		Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
+		String date = metadata.getDate();
+		String author = metadata.getAuthor();
+		String license = metadata.getLicense();
+		return !wikiImageCard.isMetaDataDownloaded() && !controller.isMetadataDownloading(wikiImageCard)
+				&& (Algorithms.isEmpty(date) || date.equals("Unknown")
+				|| Algorithms.isEmpty(author) || author.equals("Unknown")
+				|| Algorithms.isEmpty(license) || license.equals("Unknown"));
+	}
+
+	private void updateImageDescriptionRow(@NonNull ImageCard imageCard, @Nullable Boolean preloadNext) {
 		if (imageCard instanceof WikiImageCard wikiImageCard) {
 			dateView.setVisibility(View.VISIBLE);
 			authorView.setVisibility(View.VISIBLE);
 			licenseView.setVisibility(View.VISIBLE);
+			controller.addMetaDataListener(this);
+			controller.downloadWikiMetaData(getImagesToDownloadMetadata(wikiImageCard, preloadNext));
+
 			Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
 			setMetaData(metadata.getAuthor(), metadata.getDate(), metadata.getLicense());
 		} else {
