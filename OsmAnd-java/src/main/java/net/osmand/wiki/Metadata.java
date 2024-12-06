@@ -5,6 +5,7 @@ public class Metadata {
 	private String date;
 	private String author;
 	private String license;
+	private String description;
 
 	public String getDate() {
 		return date;
@@ -28,5 +29,13 @@ public class Metadata {
 
 	public void setLicense(String license) {
 		this.license = license;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }
