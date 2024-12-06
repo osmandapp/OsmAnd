@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/list_background_color"
+	android:clickable="true"
+	android:focusable="true"
+	android:orientation="vertical">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<ImageButton
+					android:id="@+id/close_button"
+					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+					android:layout_width="@dimen/toolbar_height"
+					android:layout_height="@dimen/toolbar_height"
+					android:layout_gravity="center"
+					android:contentDescription="@string/back"
+					app:srcCompat="@drawable/ic_arrow_back" />
+
+				<FrameLayout
+					android:layout_width="0dp"
+					android:layout_height="@dimen/toolbar_height"
+					android:layout_weight="1"
+					android:layout_marginStart="@dimen/content_padding">
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:id="@+id/toolbar_title"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:ellipsize="end"
+						android:layout_gravity="center_vertical"
+						android:letterSpacing="@dimen/text_button_letter_spacing"
+						android:maxLines="2"
+						android:textColor="?attr/app_bar_primary_item_color"
+						android:textSize="@dimen/dialog_header_text_size"
+						app:typefaceWeight="medium"
+						tools:text="@string/routing_settings_2" />
+
+					<include
+						layout="@layout/search_text_layout"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent" />
+
+				</FrameLayout>
+
+				<ImageButton
+					android:id="@+id/action_button"
+					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+					android:layout_width="@dimen/toolbar_height"
+					android:layout_height="@dimen/toolbar_height"
+					android:layout_gravity="center"
+					android:contentDescription="@string/back"
+					app:srcCompat="@drawable/ic_action_search_dark" />
+
+			</LinearLayout>
+
+		</androidx.appcompat.widget.Toolbar>
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/recycler_view"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:clipToPadding="false"
+		android:orientation="vertical"
+		android:scrollbars="vertical" />
+
+</LinearLayout>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/list_background_color"
+	android:clickable="true"
+	android:focusable="true"
+	android:orientation="vertical">
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<me.zhanghai.android.materialprogressbar.MaterialProgressBar
+			android:id="@+id/progress_bar"
+			style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="4dp"
+			android:indeterminate="true"
+			android:visibility="gone"
+			app:mpb_progressStyle="horizontal"
+			app:mpb_setBothDrawables="true"
+			app:mpb_useIntrinsicPadding="false" />
+
+		<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+			android:id="@+id/swipe_refresh"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/recycler_view"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:clipToPadding="false"
+				android:orientation="vertical"
+				android:paddingBottom="@dimen/bottom_sheet_title_height"
+				android:scrollbars="vertical"
+				tools:listitem="@layout/track_list_item" />
+
+		</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+	</FrameLayout>
+
+</LinearLayout>
