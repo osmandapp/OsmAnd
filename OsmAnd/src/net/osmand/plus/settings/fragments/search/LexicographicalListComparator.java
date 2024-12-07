@@ -37,7 +37,8 @@ class LexicographicalListComparator<T> implements Comparator<List<T>> {
 		if (as.size() != bs.size()) {
 			throw new IllegalArgumentException();
 		}
-		return IntStream.range(0, as.size())
+		return IntStream
+				.range(0, as.size())
 				.mapToObj(i -> Pair.create(as.get(i), bs.get(i)))
 				.collect(Collectors.toList());
 	}
