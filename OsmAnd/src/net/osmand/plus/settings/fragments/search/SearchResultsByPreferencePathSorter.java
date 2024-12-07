@@ -13,11 +13,13 @@ import de.KnollFrank.lib.settingssearch.results.SearchablePreferencePOJOComparat
 
 class SearchResultsByPreferencePathSorter implements de.KnollFrank.lib.settingssearch.results.SearchResultsSorter {
 
+	private static final Comparator<SearchablePreferencePOJO> PREFERENCE_BY_PREFERENCE_PATH_COMPARATOR = getPreferenceByPreferencePathComparator();
+
 	@Override
 	public List<SearchablePreferencePOJO> sort(final Collection<SearchablePreferencePOJO> searchResults) {
 		return searchResults
 				.stream()
-				.sorted(getPreferenceByPreferencePathComparator())
+				.sorted(PREFERENCE_BY_PREFERENCE_PATH_COMPARATOR)
 				.collect(Collectors.toList());
 	}
 
