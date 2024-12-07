@@ -320,8 +320,6 @@ public class PointLocationLayer extends OsmandMapLayer
 		switch (currentMarkerState) {
 			case MOVE -> {
 				navigationMarker.setVisibility(!showHeading);
-				// Tempoprary code for testing instant location on map
-				//locationMarker.setVisibility(true);
 				navigationMarkerWithHeading.setVisibility(showHeading);
 				locationMarkerWithHeading.setVisibility(false);
 				circleColor = showHeading
@@ -687,7 +685,7 @@ public class PointLocationLayer extends OsmandMapLayer
 			boolean dataChanged = !MapUtils.areLatLonEqual(prevLocation, location, HIGH_LATLON_PRECISION);
 			if (dataChanged) {
 				long movingTime = prevLocation != null ? location.getTime() - prevLocation.getTime() : 0;
-				if (prevLocation != null && settings.LOCATION_INTERPOLATION_PERCENT.get() > 0) {
+				if (prevLocation != null && getApplication().getRoutingHelper().isFollowingMode() && settings.LOCATION_INTERPOLATION_PERCENT.get() > 0) {
 					List<Location> predictedLocations = RoutingHelperUtils.predictLocations(prevLocation, location,
 							movingTime / 1000.0, getApplication().getRoutingHelper().getRoute());
 					if (!predictedLocations.isEmpty()) {
@@ -701,12 +699,6 @@ public class PointLocationLayer extends OsmandMapLayer
 				prevLocation = location;
 			}
 		}
-		// Tempoprary code for testing instant location on map
-		//if (mapRenderer != null) {
-		//	PointI target31 = new PointI(MapUtils.get31TileNumberX(location.getLongitude()),
-		//			MapUtils.get31TileNumberY(location.getLatitude()));
-		//	locationMarker.marker.setPosition(target31);
-		//}
 	}
 
 	@Override
