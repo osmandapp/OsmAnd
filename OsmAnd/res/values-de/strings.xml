@@ -122,27 +122,7 @@
 \n OsmAnd wird aktiv weiterentwickelt und das Projekt benötigt Mittel für die Entwicklung, die Komplettierung und den Test neuer Funktionen. Bitte erwägen Sie den Kauf von OsmAnd+, die Förderung spezieller Funktionen oder eine allgemeine Spende auf https://osmand.net.</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Karten &amp; Navigation</string>
     <string name="osmand_plus_short_description_80_chars">Globale Landkarten- und Navigationsapp für Offline- und Online-OSM-Karten</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
-\n
-\nOsmAnd+ ist die Kaufversion der Open-Source Software Navigationsapp OsmAnd mit Zugriff auf eine Vielzahl öffentlich zugänglicher, weltweit verfügbarer OSM-Daten. Alle Karten (Vektor- oder Kachelformate) können lokal auf der Speicherkarte abgelegt und offline verwendet werden. Offline- und Online-Routing-Funktionalität wird ebenfalls angeboten, einschließlich einer Schritt-für-Schritt-Sprachführung.
-\n
-\nMit dem Kauf der kostenpflichtigen Version OsmAnd+ unterstützen Sie das Projekt, fördern seine Weiterentwicklung und erhalten stets die aktuellsten Daten.
-\n
-\nEinige der Kernfunktionen:
-\n - Komplette Offline-Funktionalität (Kartenmaterial kann auf dem Gerät abgelegt werden)
-\n - Kompakte Vektorkarten für die ganze Welt verfügbar
-\n - Unbeschränktes, direktes Herunterladen von Länder- oder Regionenkarten aus der App heraus
-\n - Offline-Wikipedia-Funktion (Anzeige von Wikipedia-POIs), sehr nützlich für Besichtigungstouren
-\n - Darstellung mehrerer überlagerter Kartenschichten wie GPX- oder Navigations-Tracks, POIs (Orte von Interesse), Favoriten, ÖPNV-Haltestellen, zusätzliche Karten mit wählbarer Transparenz, topografische Informationen wie Höhenlinien/Relief/Hangneigung
-\n
-\n - Offline-Adress- und POI-Suche
-\n - Offline-Navigation für mittlere Entfernungen
-\n - Auto-, Fahrrad- und Fußgänger-Modus mit optionalen Funktionen:
-\n - Automatische Tag-Nacht-Umschaltung der Anzeige
-\n - Geschwindigkeitsabhängiger Kartenmaßstab
-\n - Kartenausrichtung nach Kompass oder Bewegungsrichtung
-\n - Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommene oder TTS-Sprachansagen
-\n</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) \n \nOsmAnd+ ist die Kaufversion der Open-Source Software Navigationsapp OsmAnd mit Zugriff auf eine Vielzahl öffentlich zugänglicher, weltweit verfügbarer OSM-Daten. Alle Karten (Vektor- oder Kachelformate) können lokal auf der Speicherkarte abgelegt und offline verwendet werden. Offline- und Online-Routing-Funktionalität wird ebenfalls angeboten, einschließlich einer Schritt-für-Schritt-Sprachführung. \n \nMit dem Kauf der kostenpflichtigen Version OsmAnd+ unterstützen Sie das Projekt, fördern seine Weiterentwicklung und erhalten stets die aktuellsten Daten. \n \nEinige der Kernfunktionen: \n - Komplette Offline-Funktionalität (Kartenmaterial kann auf dem Gerät abgelegt werden) \n - Kompakte Vektorkarten für die ganze Welt verfügbar \n - Unbeschränktes, direktes Herunterladen von Länder- oder Regionenkarten aus der App heraus \n - Offline-Wikipedia-Funktion (Anzeige von Wikipedia-POIs), sehr nützlich für Besichtigungstouren \n - Darstellung mehrerer überlagerter Kartenschichten wie GPX- oder Navigations-Tracks, POIs (Orte von Interesse), Favoriten, ÖPNV-Haltestellen, zusätzliche Karten mit wählbarer Transparenz, topografische Informationen wie Höhenlinien/Relief/Hangneigung \n \n - Offline-Adress- und POI-Suche \n - Offline-Navigation für mittlere Entfernungen \n - Auto-, Fahrrad- und Fußgänger-Modus mit optionalen Funktionen: \n - Automatische Tag-Nacht-Umschaltung der Anzeige \n - Geschwindigkeitsabhängiger Kartenmaßstab \n - Kartenausrichtung nach Kompass oder Bewegungsrichtung \n - Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommene oder TTS-Sprachansagen</string>
     <string name="select_navigation_mode">Verkehrsmittel:</string>
     <string name="day_night_info_description">Sonnenaufgang: %1$s
 \nSonnenuntergang: %2$s</string>
@@ -169,7 +149,7 @@
 \n Jede dieser Karten kann als Hauptkarte (Basiskarte) oder als Überlagerung oder Hinterlegung anderen Basiskarten (wie die Offline-Vektorkarten von OsmAnd) angezeigt werden. Bestimmte Elemente der OsmAnd-Vektorkarten können über das Menü „Karte konfigurieren“ ausgeblendet werden, um die darunterliegende Karte besser sichtbar zu machen.
 \n
 \n Laden Sie Kachelkarten direkt herunter oder kopieren Sie sie als SQLite-Datenbankdateien in den Datenordner von OsmAnd, indem Sie eines der vielen Kartenvorbereitungstools von Drittanbietern verwenden.</string>
-    <string name="osmand_background_plugin_description">Zeigt die Einstellungen zum Einschalten der Hintergrundverfolgung und -Navigation durch regelmäßiges Aufwecken des GPS-Empfängers (bei ausgeschaltetem Bildschirm) an.</string>
+    <string name="osmand_background_plugin_description">Zeigt die Einstellungen zum Einschalten der Hintergrundaufzeichnung und -Navigation durch regelmäßiges Aufwecken des GPS-Empfängers (bei ausgeschaltetem Bildschirm) an.</string>
     <string name="osmand_accessibility_description">Macht die Bedienungshilfen des Geräts direkt in OsmAnd verfügbar. Dies erleichtert z. B. die Anpassung der Sprechgeschwindigkeit für Text-to-Speech-Stimmen, die Konfiguration der D-Pad-Navigation, die Verwendung eines Trackballs zur Zoomsteuerung oder für Text-to-Speech-Rückmeldung, um beispielsweise Ihre Position automatisch anzusagen.</string>
     <string name="osmand_development_plugin_description">Bietet Funktionen zum Testen und Debuggen von OsmAnd: Simulieren von Navigationsrouten, Überwachen der Bildschirmdarstellung, Prüfen der Leistung usw. Diese Erweiterung ist für die normale Nutzung der App nicht erforderlich.</string>
     <string name="plugins_screen">Erweiterungen</string>
@@ -1308,7 +1288,7 @@
     <string name="gpx_visibility_txt">Sichtbarkeit</string>
     <string name="gpx_tags_txt">Tags</string>
     <string name="shared_string_description">Beschreibung</string>
-    <string name="gpx_monitoring_disabled_warn">Aufzeichnung mit der Schaltfläche „GPX“ oder unter „Erweiterungen → Streckenaufzeichnung → Einstellungen“.</string>
+    <string name="gpx_monitoring_disabled_warn">Track aufzeichnen mit der Schaltfläche „GPX“ oder unter „Erweiterungen → Streckenaufzeichnung → Einstellungen“.</string>
     <string name="gpx_option_reverse_route">Trackrichtung umkehren</string>
     <string name="gpx_option_destination_point">Derzeitiges Ziel verwenden</string>
     <string name="gpx_option_from_start_point">Gesamten Track durchlaufen</string>
@@ -1328,9 +1308,7 @@
     <string name="shared_string_all">Alle</string>
     <string name="shared_string_waypoints">Wegpunkte</string>
     <string name="way_alarms">Verkehrswarnungen</string>
-    <string name="record_plugin_description">Zeichnen Sie Ihre Fahrten oder Trainings auf und analysieren Sie die Daten in Bezug auf Geschwindigkeit, kumulierte Anstiege und Abfahrten, Höhenprofil usw. Die aufgezeichneten Strecken können archiviert, mit Freunden geteilt, bearbeitet und nachbearbeitet werden.
-\n
-\nWeitere Informationen unter %1$s.</string>
+    <string name="record_plugin_description">Zeichnen Sie Ihre Fahrten oder Trainings auf und analysieren Sie die Daten in Bezug auf Geschwindigkeit, kumulierte Anstiege und Abfahrten, Höhenprofil usw. Die aufgezeichneten Tracks können archiviert, mit Freunden geteilt, bearbeitet und nachbearbeitet werden. \n \nWeitere Informationen unter %1$s.</string>
     <string name="route_descr_destination">Ziel</string>
     <string name="local_index_description">Um Einzelheiten zu einem Eintrag zu sehen, auf einen beliebigen Eintrag drücken. Um ihn zu deaktivieren oder zu löschen, lange drücken. Derzeit auf dem Gerät vorhandene Daten (%1$s frei):</string>
     <string name="text_size_descr">Karten-Schriftgröße festlegen.</string>
@@ -2104,7 +2082,7 @@
     <string name="quick_action_map_source_action">Kartenquelle hinzufügen</string>
     <string name="quick_action_map_source_switch">Kartenquelle wurde in „%s“ geändert.</string>
     <string name="quick_action_btn_tutorial_title">Schaltflächenposition ändern</string>
-    <string name="quick_action_category_descr">Kategorie, in der der Favorit gespeichert werden soll:</string>
+    <string name="quick_action_category_descr">Kategorie, in welche der Favorit gespeichert werden soll:</string>
     <string name="quick_action_gpx_category_descr">Wählen Sie eine beliebige Kategorie.</string>
     <string name="configure_screen_quick_action">Schnellaktion</string>
     <string name="quick_action_add_gpx_descr">Eine Schaltfläche, um einen GPX-Wegpunkt in der Bildschirmmitte einzufügen.</string>
@@ -2182,27 +2160,8 @@
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) ist eine Karten- und Navigationsapp mit Zugriff auf die kostenlosen, weltweiten und qualitativ hochwertigen OSM-Daten.
 \n
 \nGenießen Sie die akustische und visuelle Navigation, die Anzeige von POIs (Orte von Interesse), die Erstellung und Verwaltung von GPX-Tracks, die Darstellung von Höhenlinien und topografischen Informationen (durch eine Erweiterung), die Wahl zwischen Auto-, Fahrrad- oder Fußgängerbetrieb, die Möglichkeit, an OSM mitzuarbeiten und vieles mehr.</string>
-    <string name="osmand_extended_description_part2">GPS-Navigation
-\n • Sie haben die Wahl zwischen dem Offline-Betrieb (ohne Roaming-Gebühren, wenn Sie im Ausland sind) oder dem (schnelleren) Online-Betrieb
-\n • Die Sprachführung (mit aufgenommenen oder synthetischen Stimmen) begleitet Sie Schritt für Schritt auf Ihrem Weg
-\n • Ihre Route wird neu berechnet, sobald Sie von ihr abweichen
-\n • Fahrspurassistent, Straßennamen und voraussichtliche Ankunftszeit helfen Ihnen auf der Strecke
-\n • Zur Erhöhung Ihrer Reisesicherheit erfolgt ein automatischer Wechsel zwischen Tag- und Nachtmodus
-\n • Sie können wählen, ob Tempolimits angezeigt werden sollen, und ob Sie bei deren Überschreitung darauf hingewiesen werden wollen
-\n • Die Kartenvergrößerung passt sich Ihrer Geschwindigkeit an
-\n • Sie können Ziele nach Adresse, Typ (z. B. Parkplatz, Restaurant, Hotel, Tankstelle, Museum) oder geografischen Koordinaten suchen
-\n • Die Festlegung von Zwischenstopps entlang Ihrer Reiseroute ist möglich
-\n • Sie können Ihre GPX-Tracks aufzeichnen, einspielen und ihnen folgen
-\n</string>
-    <string name="osmand_extended_description_part3">Karten
-\n • zeigen POIs (Orte von Interesse) in Ihrer Umgebung an
-\n • richten sich nach Ihrer Bewegungsrichtung (oder dem Kompass) aus
-\n • zeigen an, wo Sie sind und worauf Sie sehen
-\n • übermitteln Ihre Position, damit Ihre Freunde Sie finden können
-\n • speichern Ihre wichtigsten Orte als Favoriten
-\n • lassen Ihnen die Wahl, wie Bezeichnungen auf der Karte angezeigt werden sollen: in Englisch, Landessprache oder phonetischer Schreibweise
-\n • stellen spezielle Online-Kacheln, Satellitenansichten (von Bing), verschiedene Overlays, wie GPX-Tracks zu Touren-/Routenverläufen und zusätzliche Ebenen mit einstellbarer Transparenz dar
-\n</string>
+    <string name="osmand_extended_description_part2">GPS-Navigation \n • Sie haben die Wahl zwischen dem Offline-Betrieb (ohne Roaming-Gebühren, wenn Sie im Ausland sind) oder dem (schnelleren) Online-Betrieb \n • Die Sprachführung (mit aufgenommenen oder synthetischen Stimmen) begleitet Sie Schritt für Schritt auf Ihrem Weg \n • Ihre Route wird neu berechnet, sobald Sie von ihr abweichen \n • Fahrspurassistent, Straßennamen und voraussichtliche Ankunftszeit helfen Ihnen auf der Strecke \n • Zur Erhöhung Ihrer Reisesicherheit erfolgt ein automatischer Wechsel zwischen Tag- und Nachtmodus \n • Sie können wählen, ob Tempolimits angezeigt werden sollen, und ob Sie bei deren Überschreitung darauf hingewiesen werden wollen \n • Die Kartenvergrößerung passt sich Ihrer Geschwindigkeit an \n • Sie können Ziele nach Adresse, Typ (z. B. Parkplatz, Restaurant, Hotel, Tankstelle, Museum) oder geografischen Koordinaten suchen \n • Die Festlegung von Zwischenstopps entlang Ihrer Reiseroute ist möglich \n • Sie können Ihre GPX-Tracks aufzeichnen, einspielen und ihnen folgen</string>
+    <string name="osmand_extended_description_part3">Karten \n • zeigen POIs (Orte von Interesse) in Ihrer Umgebung an \n • richten sich nach Ihrer Bewegungsrichtung (oder dem Kompass) aus \n • zeigen an, wo Sie sind und worauf Sie sehen \n • übermitteln Ihre Position, damit Ihre Freunde Sie finden können \n • speichern Ihre wichtigsten Orte als Favoriten \n • lassen Ihnen die Wahl, wie Bezeichnungen auf der Karte angezeigt werden sollen: in Englisch, Landessprache oder phonetischer Schreibweise \n • stellen spezielle Online-Kacheln, Satellitenansichten (von Bing), verschiedene Overlays, wie GPX-Tracks zu Touren-/Routenverläufen und zusätzliche Ebenen mit einstellbarer Transparenz dar</string>
     <string name="osmand_extended_description_part4">Skisport
 \n Die OsmAnd-Erweiterung „Skikarte“ ermöglicht Ihnen das Betrachten von Skirouten, deren Schwierigkeitsgrad und einiger zusätzlicher Informationen, wie die Lage von Liften und anderer Einrichtungen.</string>
     <string name="osmand_extended_description_part5">Radfahren
@@ -2211,18 +2170,8 @@
 \n • Sie können Ihre Geschwindigkeit und Höhe verfolgen
 \n • Die Möglichkeit der GPX-Aufzeichnung versetzt Sie in die Lage, Ihre Fahrt zu protokollieren und sie mit anderen zu teilen
 \n • Über ein Zusatzmodul können Sie Höhenlinien und das Geländerelief einschalten</string>
-    <string name="osmand_extended_description_part6">Laufen, Wandern, Stadtbesichtigung 
-\n • Die Karte zeigt Ihnen Fuß- und Wanderwege an 
-\n • Wikipedia, in der von Ihnen gewünschten Sprache, kann Ihnen eine Menge bei einer Stadtbesichtigung erzählen 
-\n • Haltestellen öffentlicher Verkehrsmittel (Bus, Tram, Bahn) inklusive der Linienbezeichnungen helfen Ihnen dabei, sich in einer neuen Stadt zurechtzufinden 
-\n • Die GPS-Navigation im Fußgänger-Modus berechnet Ihre Route anhand von Fußwegen 
-\n • Sie können GPX-Routen einspielen und ihnen folgen oder eigene aufzeichnen und mit anderen teilen
-\n</string>
-    <string name="osmand_extended_description_part7">OSM-Mitarbeit 
-\n • Melden Sie falsche Daten 
-\n • Übertragen Sie direkt aus der App GPX-Tracks an OSM 
-\n • Ergänzen Sie POIs und leiten Sie sie direkt (oder bei fehlender Netzverbindung später) an OSM weiter
-\n</string>
+    <string name="osmand_extended_description_part6">Laufen, Wandern, Stadtbesichtigung \n • Die Karte zeigt Ihnen Fuß- und Wanderwege an \n • Wikipedia, in der von Ihnen gewünschten Sprache, kann Ihnen eine Menge bei einer Stadtbesichtigung erzählen \n • Haltestellen öffentlicher Verkehrsmittel (Bus, Tram, Bahn) inklusive der Linienbezeichnungen helfen Ihnen dabei, sich in einer neuen Stadt zurechtzufinden \n • Die GPS-Navigation im Fußgänger-Modus berechnet Ihre Route anhand von Fußwegen \n • Sie können GPX-Routen einspielen und ihnen folgen oder eigene aufzeichnen und mit anderen teilen</string>
+    <string name="osmand_extended_description_part7">OSM-Mitarbeit \n • Melden Sie falsche Daten \n • Übertragen Sie direkt aus der App GPX-Tracks an OSM \n • Ergänzen Sie POIs und leiten Sie sie direkt (oder bei fehlender Netzverbindung später) an OSM weiter</string>
     <string name="osmand_extended_description_part8">OsmAnd ist quelloffen und wird stetig weiterentwickelt. Jeder kann durch Meldung von Fehlern, Verbesserung der Übersetzung oder Programmierung neuer Funktionen an der App mitarbeiten. Durch all diese Formen der Zusammenarbeit zwischen Entwickler und Anwender wird eine lebendige, kontinuierliche Verbesserung des Projekts gewährleistet. Darüber hinaus ist der Fortschritt des Projekts auch auf finanzielle Mitbeteiligung angewiesen, um die Programmierung und Testung neuer Funktionen fördern zu können.
 \nUngefähre Kartenabdeckung und -qualität:
 \n • Westeuropa: ****
@@ -2245,14 +2194,7 @@
 \n OsmAnd+ ist die Kaufversion. Durch ihren Erwerb unterstützen Sie das Projekt, fördern die Entwicklung neuer Funktionen und erhalten die neuesten Aktualisierungen.
 \n
 \n Einige der Hauptmerkmale:</string>
-    <string name="osmand_plus_extended_description_part2">Navigation
-\n • funktioniert online (schnell) oder offline (ohne Roaming-Gebühren im Ausland)
-\n • akustische Schritt-für-Schritt-Wegführung (mit aufgenommenen oder synthetischen Stimmen)
-\n • optional mit Fahrspurassistent, Straßennamenanzeige und geschätzter Ankunftszeit
-\n • unterstützt Zwischenstopps entlang der Reiseroute
-\n • automatische Routenneuberechnung, sobald Sie von ihr abweichen
-\n • Ortssuche nach Adresse, Typ (z. B. Restaurant, Hotel, Tankstelle, Museum) oder geografischen Koordinaten
-\n</string>
+    <string name="osmand_plus_extended_description_part2">Navigation \n • funktioniert online (schnell) oder offline (ohne Roaming-Gebühren im Ausland) \n • akustische Schritt-für-Schritt-Wegführung (mit aufgenommenen oder synthetischen Stimmen) \n • optional mit Fahrspurassistent, Straßennamenanzeige und geschätzter Ankunftszeit \n • unterstützt Zwischenstopps entlang der Reiseroute \n • automatische Routenneuberechnung, sobald Sie von ihr abweichen \n • Ortssuche nach Adresse, Typ (z. B. Restaurant, Hotel, Tankstelle, Museum) oder geografischen Koordinaten</string>
     <string name="osmand_plus_extended_description_part4">OSM- und Wikipedia-Datennutzung
 \n • Qualitativ hochwertige Informationen aus den besten Gemeinschaftsprojekten der Welt
 \n • OSM-Daten stehen pro Land oder Region zur Verfügung
@@ -2261,26 +2203,8 @@
 \n • Kompakte Offline-Vektorkarten, mindestens einmal pro Monat aktualisiert
 \n
 \n • Auswahl zwischen vollständigen Daten zu einer Region bzw. einfachen Daten zum Straßennetz (Beispiel: Japan insgesamt benötigt 700 MB, das Straßennetz nur 200 MB davon)</string>
-    <string name="osmand_plus_extended_description_part5">Sicherheitsfunktionen 
-\n • Optionales automatisches Umschalten der Tag-/Nachtansicht 
-\n • Optionale Tempolimit-Anzeige mit Warnung bei Überschreitung 
-\n • Optionale geschwindigkeitsabhängige Vergrößerung 
-\n • Positionsübermittlung, damit Freunde Sie finden können
-\n</string>
-    <string name="osmand_plus_extended_description_part8">Kartenabdeckung und ungefähre Kartenqualität:
-\n • Westeuropa: ****
-\n • Osteuropa: ***
-\n • Russland: ***
-\n • Nordamerika: ***
-\n • Südamerika: **
-\n • Asien: **
-\n • Japan und Korea: ***
-\n • Mittlerer Osten: **
-\n • Afrika: **
-\n • Antarktis: *
-\n Die meisten Länder rund um den Globus stehen zum Herunterladen bereit
-\n Von Afghanistan bis Simbabwe, von Australien bis in die USA. Argentinien, Brasilien, Kanada, Frankreich, Deutschland, Mexiko, Großbritannien, Spanien …
-\n</string>
+    <string name="osmand_plus_extended_description_part5">Sicherheitsfunktionen \n • Optionales automatisches Umschalten der Tag-/Nachtansicht \n • Optionale Tempolimit-Anzeige mit Warnung bei Überschreitung \n • Optionale geschwindigkeitsabhängige Vergrößerung \n • Positionsübermittlung, damit Freunde Sie finden können</string>
+    <string name="osmand_plus_extended_description_part8">Kartenabdeckung und ungefähre Kartenqualität: \n • Westeuropa: **** \n • Osteuropa: *** \n • Russland: *** \n • Nordamerika: *** \n • Südamerika: ** \n • Asien: ** \n • Japan und Korea: *** \n • Mittlerer Osten: ** \n • Afrika: ** \n • Antarktis: * \n Die meisten Länder rund um den Globus stehen zum Herunterladen bereit \n Von Afghanistan bis Simbabwe, von Australien bis in die USA. Argentinien, Brasilien, Kanada, Frankreich, Deutschland, Mexiko, Großbritannien, Spanien, …</string>
     <string name="osmand_plus_extended_description_part6">Funktionen für Radler und Fußgänger
 \n • Darstellung von Fuß-, Wander- und Radwegen, großartig für Outdoor-Aktivitäten
 \n • Spezielle Routenberechnung und Anzeigearten für Radler und Fußgänger
@@ -2288,21 +2212,8 @@
 \n • Wahlweise Streckenaufzeichnung als GPX-Datei auf dem Gerät oder bei einem Online-Dienst
 \n • Wahlweise Geschwindigkeits- und Höhenanzeige
 \n • Darstellung von Höhenlinien und Geländeschattierung (über Zusatzmodul)</string>
-    <string name="osmand_plus_extended_description_part7">Direkte Mitarbeit an OSM 
-\n • Fehler melden 
-\n • GPX-Tracks direkt aus der App an OSM weiterleiten 
-\n • POIs ergänzen und sie direkt (oder bei fehlender Netzverbindung später) zu OSM hochladen 
-\n • Wahlweise Streckenaufzeichnung auch im Hintergrund (im Ruhezustand des Gerätes) 
-\nOsmAnd ist quelloffen und wird stetig weiterentwickelt. Jeder kann durch Meldung von Fehlern, Verbesserung der Übersetzung, Programmierung neuer Funktionen oder Kontakt mit anderen Benutzern an der App mitarbeiten. Der Projektfortschritt hängt auch von finanziellen Beiträgen für die Programmierung und das Testen neuer Funktionen ab.
-\n</string>
-    <string name="osmand_plus_extended_description_part3">Kartenansicht
-\n • Positions- und Richtungsanzeige
-\n • Kartenausrichtung wahlweise nach Kompass oder Ihrer Bewegungsrichtung
-\n • Sicherung Ihrer wichtigsten Orte als Favoriten
-\n • Anzeige der POIs (Orte von Interesse) in Ihrer Umgebung
-\n • Anzeige spezieller Online-Kacheln, Satellitenansichten (von Bing), verschiedener Overlays wie GPX-Tracks zu Touren-/Routenverläufen und zusätzlicher Kartenebenen mit einstellbarer Transparenz
-\n • Anzeige von Ortsnamen wahlweise in Englisch, Landessprache oder phonetischer Schreibweise
-\n</string>
+    <string name="osmand_plus_extended_description_part7">Direkte Mitarbeit an OSM \n • Fehler melden \n • GPX-Tracks direkt aus der App an OSM weiterleiten \n • POIs ergänzen und sie direkt (oder bei fehlender Netzverbindung später) zu OSM hochladen \n • Wahlweise Streckenaufzeichnung auch im Hintergrund (im Ruhezustand des Gerätes) \nOsmAnd ist quelloffen und wird stetig weiterentwickelt. Jeder kann durch Meldung von Fehlern, Verbesserung der Übersetzung, Programmierung neuer Funktionen oder Kontakt mit anderen Benutzern an der App mitarbeiten. Der Projektfortschritt hängt auch von finanziellen Beiträgen für die Programmierung und das Testen neuer Funktionen ab.</string>
+    <string name="osmand_plus_extended_description_part3">Kartenansicht \n • Positions- und Richtungsanzeige \n • Kartenausrichtung wahlweise nach Kompass oder Ihrer Bewegungsrichtung \n • Sicherung Ihrer wichtigsten Orte als Favoriten \n • Anzeige der POIs (Orte von Interesse) in Ihrer Umgebung \n • Anzeige spezieller Online-Kacheln, Satellitenansichten (von Bing), verschiedener Overlays wie GPX-Tracks zu Touren-/Routenverläufen und zusätzlicher Kartenebenen mit einstellbarer Transparenz \n • Anzeige von Ortsnamen wahlweise in Englisch, Landessprache oder phonetischer Schreibweise</string>
     <string name="quick_action_auto_zoom">Automatische Vergrößerung</string>
     <string name="quick_action_auto_zoom_desc">Schaltfläche zum Ein- oder Ausschalten des geschwindigkeitsgesteuerten automatischen Zooms.</string>
     <string name="quick_action_auto_zoom_on">Automatische Vergrößerung einschalten</string>
@@ -2565,7 +2476,7 @@
     <string name="empty_state_markers_active_desc">Tippen Sie lang oder kurz auf „Orte“ und anschließend auf das Markierungszeichen.</string>
     <string name="empty_state_markers_groups_desc">Importieren Sie Favoritengruppen oder Wegpunkte als Markierungen.</string>
     <string name="show_guide_line_descr">Richtungsanzeiger von Ihrem Standort zu aktiven Markierungspunkten einblenden.</string>
-    <string name="show_arrows_descr">Ein oder zwei Pfeile anzeigen, die die Richtung zu den aktiven Markierungen angeben.</string>
+    <string name="show_arrows_descr">Ein oder zwei Pfeile anzeigen, welche die Richtung zu den aktiven Markierungen angeben.</string>
     <string name="distance_indication_descr">Wählen Sie aus, wie der Abstand zu aktiven Markierungen angezeigt werden soll.</string>
     <string name="active_markers_descr">Wählen Sie die Anzahl der Fahrtrichtungsanzeiger.</string>
     <string name="osm_recipient_stat">%1$s bearbeitet, Summe %2$s mBTC</string>
@@ -2995,27 +2906,7 @@
     <string name="new_profile">Neues Profil</string>
     <string name="shared_string_crash">Absturz</string>
     <string name="last_launch_crashed">Der letzte Start von OsmAnd ist fehlgeschlagen. Bitte helfen Sie uns, OsmAnd zu verbessern, indem Sie uns über diesen Fehler informieren.</string>
-    <string name="release_3_4">• App-Profile: Benutzerdefiniertes Profil nach den eigenen Bedürfnissen mit benutzerdefiniertem Symbol und in eigener Farbe anlegen.
-\n
-\n• Benutzerdefinierte Standard- und Min/Max-Geschwindigkeiten für jedes Profil jetzt möglich
-\n
-\n• Widgets mit aktuellen Koordinaten hinzugefügt
-\n
-\n• Optionen für die Anzeige des Kompasses auf der Karte mit einem Radiuslineal ergänzt
-\n
-\n• Track-Aufnahmen im Hintergrund korrigiert
-\n
-\n• Verbesserte Kartendownloads im Hintergrund
-\n
-\n• Option „Bildschirm einschalten“ wieder hinzugefügt
-\n
-\n• Die Sprachauswahl in Wikipedia wurde korrigiert
-\n
-\n• Das Verhalten der Kompasstaste während der Navigation wurde korrigiert
-\n
-\n• Weitere Fehlerbehebungen
-\n
-\n</string>
+    <string name="release_3_4">• App-Profile: Benutzerdefiniertes Profil nach den eigenen Bedürfnissen mit benutzerdefiniertem Symbol und in eigener Farbe anlegen. \n \n• Benutzerdefinierte Standard- und Min/Max-Geschwindigkeiten für jedes Profil jetzt möglich \n \n• Widgets mit aktuellen Koordinaten hinzugefügt \n \n• Optionen für die Anzeige des Kompasses auf der Karte mit einem Radiuslineal ergänzt \n \n• Track-Aufnahmen im Hintergrund korrigiert \n \n• Verbesserte Kartendownloads im Hintergrund \n \n• Option „Bildschirm einschalten“ wieder hinzugefügt \n \n• Die Sprachauswahl in Wikipedia wurde korrigiert \n \n• Das Verhalten der Kompasstaste während der Navigation wurde korrigiert \n \n• Weitere Fehlerbehebungen</string>
     <string name="app_mode_monowheel">Einreifen</string>
     <string name="app_mode_scooter">Motorroller</string>
     <string name="precision_hdop_and_vdop">Horizontale Genauigkeit: %1$s, vertikal: %2$s</string>
@@ -3193,23 +3084,7 @@
     <string name="routing_attr_prefer_unpaved_description">Unbefestigte Straßen bevorzugen.</string>
     <string name="update_all_maps">Alle Karten aktualisieren</string>
     <string name="update_all_maps_q">Alle (%1$d) Karten aktualisieren\?</string>
-    <string name="release_3_5">• Verbesserte Anwendungs- und Profil-Einstellungen. Die Einstellungen sind nun nach Typ geordnet. Jedes Profil kann separat angepasst werden. 
-\n 
-\n • Neuer Karten-Download-Dialog, der während des Stöberns eine Karte zum Download vorschlägt 
-\n 
-\n • Korrekturen am Nachtmodus 
-\n 
-\n • Behebung einiger Probleme mit der Routenführung rund um den Globus 
-\n 
-\n • Verbesserte Basiskarte mit detaillierterem Straßennetz 
-\n 
-\n • Überschwemmungsgebiete auf der Welt korrigiert 
-\n 
-\n • Ski-Routing: Höhenprofil und Routenschwierigkeitsgrad in den Routendetails ergänzt 
-\n 
-\n • Weitere Fehlerlösungen
-\n
-\n</string>
+    <string name="release_3_5">• Verbesserte Anwendungs- und Profil-Einstellungen. Die Einstellungen sind nun nach Typ geordnet. Jedes Profil kann separat angepasst werden. \n \n • Neuer Karten-Download-Dialog, der während des Stöberns eine Karte zum Download vorschlägt \n \n • Korrekturen am Nachtmodus \n \n • Behebung einiger Probleme mit der Routenführung rund um den Globus \n \n • Verbesserte Basiskarte mit detaillierterem Straßennetz \n \n • Überschwemmungsgebiete auf der Welt korrigiert \n \n • Ski-Routing: Höhenprofil und Routenschwierigkeitsgrad in den Routendetails ergänzt \n \n • Weitere Fehlerlösungen</string>
     <string name="apply_preference_to_all_profiles">Diese Änderung auf alle oder nur auf das ausgewählte Profil anwenden.</string>
     <string name="shared_preference">Geteilt</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Unbefestigte Straßen bevorzugen</string>
@@ -3296,7 +3171,7 @@
     <string name="permission_is_required">Für die Verwendung dieser Option ist eine Berechtigung erforderlich.</string>
     <string name="file_does_not_contain_routing_rules">Die Datei \'%1$s\' enthält keine Routing-Regeln. Bitte eine andere Datei wählen.</string>
     <string name="monitoring_min_speed_descr">Dies ist ein Filter, der Punkte unter einer gewissen Geschwindigkeit nicht aufzeichnet. Dadurch können aufgezeichnete Tracks auf der Karte gleichmäßiger aussehen.</string>
-    <string name="monitoring_min_speed_descr_side_effect">Nebeneffekt: Auf Ihrer Strecke fehlen alle Abschnitte, in denen das Mindestgeschwindigkeitskriterium nicht erfüllt wurde (z. B., wenn Sie Ihr Fahrrad einen steilen Hügel hinaufschieben). Außerdem wird es keine Informationen über Ruhezeiten wie Pausen geben. Dies hat Auswirkungen auf jede Analyse oder Nachbearbeitung, z. B., wenn Sie versuchen, die Gesamtlänge Ihrer Reise, die Zeit in Bewegung oder Ihre Durchschnittsgeschwindigkeit zu bestimmen.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Nebeneffekt: In ihrem Track fehlen alle Abschnitte, in denen das Mindestgeschwindigkeitskriterium nicht erfüllt wurde (z. B., wenn Sie Ihr Fahrrad einen steilen Hügel hinaufschieben). Außerdem wird es keine Informationen über Ruhezeiten wie Pausen geben. Dies hat Auswirkungen auf jede Analyse oder Nachbearbeitung, z. B., wenn Sie versuchen, die Gesamtlänge Ihrer Reise, die Zeit in Bewegung oder Ihre Durchschnittsgeschwindigkeit zu bestimmen.</string>
     <string name="plugin_global_prefs_info">Diese Erweiterungseinstellungen sind global und gelten für alle Profile</string>
     <string name="live_monitoring_time_buffer">Zeitpuffer</string>
     <string name="live_monitoring_tracking_interval">Aufzeichnungsintervall</string>
@@ -3334,34 +3209,10 @@
     <string name="monitoring_min_speed_descr_remark">Bemerkung: Geschwindigkeit &gt; 0 Kontrolle: Die meisten GPS-Chipsätze geben nur dann einen Geschwindigkeitswert an, wenn der Algorithmus feststellt, dass Sie in Bewegung sind, und keinen, wenn Sie nicht in Bewegung sind. Die Verwendung der Einstellung &gt; 0 in diesem Filter nutzt also gewissermaßen die Bewegungserkennung des GPS-Chipsatzes. Aber selbst wenn nicht zur Aufnahmezeit gefiltert wurde, verwenden wir diese Funktion in unserer GPX-Analyse, um die Distanz korrigiert zu bestimmen, das heißt, der in diesem Feld angezeigte Wert ist die während der Bewegung aufgezeichnete Distanz.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Nebeneffekt: Als Ergebnis der Filterung nach Genauigkeit können Punkte z. B. unter Brücken, unter Bäumen, zwischen hohen Gebäuden oder bei bestimmten Wetterbedingungen ganz fehlen.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Empfehlung: Es ist schwer vorherzusagen, was aufgezeichnet wird und was nicht, es ist vielleicht am besten, diesen Filter auszuschalten.</string>
-    <string name="monitoring_min_distance_descr">Wenn Sie diesen Filter aktivieren, können Sie eine zusätzliche Datenaufzeichnung vermeiden, wenn fast keine Bewegung erkannt wird. Außerdem wird das räumliche Erscheinungsbild von Spuren ohne weitere Bearbeitung verbessert.</string>
+    <string name="monitoring_min_distance_descr">Wenn Sie diesen Filter aktivieren, können Sie eine zusätzliche Datenaufzeichnung vermeiden, wenn fast keine Bewegung erkannt wird. Außerdem wird das räumliche Erscheinungsbild von Tracks ohne weitere Bearbeitung verbessert.</string>
     <string name="monitoring_min_distance_descr_side_effect">Nebeneffekte: Ruhezeiten werden nicht oder nur mit jeweils einem Punkt erfasst. Kleinere Bewegungen (z. B. zum Straßenrand, um eine mögliche Abzweigung zu markieren) können herausgefiltert werden. Beachten Sie, dass Ihre Datei weniger Informationen für die Nachbearbeitung enthält und gleichzeitig möglicherweise GPS-Artefakte aufgrund von schlechtem Empfang oder Chipsatz-Effekten vermieden werden können.</string>
     <string name="monitoring_min_distance_descr_recommendation">Empfehlung: Stellen Sie einen Versatz von 5 Metern ein, wenn Sie keine kleinen Details Ihrer Route aufzeichnen möchten und keine zusätzlichen Daten über Ihre Ruhezeit benötigen.</string>
-    <string name="release_3_6">• Profile: jetzt können Sie die Reihenfolge ändern, das Symbol für die Karte festlegen, alle Einstellungen für die Basisprofile ändern und sie wieder auf die Standardeinstellungen zurücksetzen
-\n
-\n • Nummer der Ausfahrt in der Navigation hinzugefügt.
-\n
-\n • Plugin-Einstellungen überarbeitet
-\n
-\n • Überarbeiteter Einstellungsbildschirm für schnellen Zugriff auf alle Profile
-\n
-\n • Option zum Kopieren von Einstellungen aus einem anderen Profil hinzugefügt
-\n
-\n • Es wurde die Möglichkeit hinzugefügt, die Reihenfolge zu ändern oder POI-Kategorien in der Suche auszublenden
-\n
-\n • POI-Symbole sind auf der Karte jetzt korrekt ausgerichtet
-\n
-\n • Sonnenuntergangs-/Sonnenaufgangsdaten zur Konfiguration der Karte hinzugefügt
-\n
-\n • Zuhause/Arbeitssymbole auf der Karte hinzugefügt
-\n
-\n • Unterstützung für mehrzeilige Beschreibung in Einstellungen hinzugefügt
-\n
-\n • Korrekte Transliteration in die Karte von Japan eingefügt
-\n
-\n • Karte der Antarktis hinzugefügt
-\n
-\n</string>
+    <string name="release_3_6">• Profile: jetzt können Sie die Reihenfolge ändern, das Symbol für die Karte festlegen, alle Einstellungen für die Basisprofile ändern und sie wieder auf die Standardeinstellungen zurücksetzen \n \n • Nummer der Ausfahrt in der Navigation hinzugefügt. \n \n • Plugin-Einstellungen überarbeitet \n \n • Überarbeiteter Einstellungsbildschirm für schnellen Zugriff auf alle Profile \n \n • Option zum Kopieren von Einstellungen aus einem anderen Profil hinzugefügt \n \n • Es wurde die Möglichkeit hinzugefügt, die Reihenfolge zu ändern oder POI-Kategorien in der Suche auszublenden \n \n • POI-Symbole sind auf der Karte jetzt korrekt ausgerichtet \n \n • Sonnenuntergangs-/Sonnenaufgangsdaten zur Konfiguration der Karte hinzugefügt \n \n • Zuhause/Arbeitssymbole auf der Karte hinzugefügt \n \n • Unterstützung für mehrzeilige Beschreibung in Einstellungen hinzugefügt \n \n • Korrekte Transliteration in die Karte von Japan eingefügt \n \n • Karte der Antarktis hinzugefügt</string>
     <string name="sort_by_category">Nach Kategorie sortieren</string>
     <string name="tracks_view_descr">Ihre aufgezeichneten Tracks befinden sich in %1$s oder im OsmAnd-Ordner.</string>
     <string name="please_provide_profile_name_message">Bitte geben Sie einen Namen für das Profil an</string>
@@ -3457,7 +3308,7 @@
     <string name="settings_item_read_error">Konnte nicht von \'%1$s\' lesen.</string>
     <string name="settings_item_write_error">Konnte nicht nach \'%1$s\' schreiben.</string>
     <string name="settings_item_import_error">Konnte nicht von \'%1$s\' importieren.</string>
-    <string name="select_track_file">Wählen Sie eine Pfad-Datei</string>
+    <string name="select_track_file">Wählen Sie eine Track-Datei</string>
     <string name="shared_string_languages">Sprachen</string>
     <string name="shared_string_language">Sprache</string>
     <string name="shared_string_all_languages">Alle Sprachen</string>
@@ -3737,21 +3588,7 @@
     <string name="pass_whole_track_descr">Trackpunkt, zu dem navigiert werden soll</string>
     <string name="nearest_point">Nächstgelegener Punkt</string>
     <string name="shared_string_redo">Wiederholen</string>
-    <string name="release_3_8">• Aktualisierte Funktion zum Planen einer Route: erlaubt die Verwendung verschiedener Navigationstypen pro Segment und die Einbeziehung von Tracks
-\n
-\n • Neues Menü zum Erscheinungsbild von Tracks: Wählen Sie Farbe, Dicke, Richtungspfeile, Start- und Zielsymbole
-\n
-\n • Verbesserte Darstellung von Fahrradknotenpunkten.
-\n
-\n • Tracks sind jetzt antippbar und haben ein Kontextmenü mit grundlegenden Informationen.
-\n
-\n • Verbesserte Suchalgorithmen
-\n
-\n • Verbesserte Trackverfolgungsoptionen in der Navigation
-\n
-\n • Probleme beim Import/Export von Profileinstellungen behoben
-\n
-\n</string>
+    <string name="release_3_8">• Aktualisierte Funktion zum Planen einer Route: erlaubt die Verwendung verschiedener Navigationstypen pro Segment und die Einbeziehung von Tracks \n \n • Neues Menü zum Erscheinungsbild von Tracks: Wählen Sie Farbe, Dicke, Richtungspfeile, Start- und Zielsymbole \n \n • Verbesserte Darstellung von Fahrradknotenpunkten. \n \n • Tracks sind jetzt antippbar und haben ein Kontextmenü mit grundlegenden Informationen. \n \n • Verbesserte Suchalgorithmen \n \n • Verbesserte Trackverfolgungsoptionen in der Navigation \n \n • Probleme beim Import/Export von Profileinstellungen behoben</string>
     <string name="sort_last_modified">Zuletzt geändert</string>
     <string name="sort_name_descending">Name: Z – A</string>
     <string name="sort_name_ascending">Name: A – Z</string>
@@ -3789,7 +3626,7 @@
     <string name="icon_group_travel">Reisen</string>
     <string name="icon_group_sport">Sport</string>
     <string name="icon_group_emergency">Notfall</string>
-    <string name="shared_string_graph">Graph</string>
+    <string name="shared_string_graph">Diagramm</string>
     <string name="icon_group_symbols">Symbole</string>
     <string name="shared_string_local_maps">Lokale Karten</string>
     <string name="icon_group_special">Spezial</string>
@@ -3814,7 +3651,7 @@
     <string name="gpx_upload_public_visibility_descr">„Öffentlich“ bedeutet, dass der Track öffentlich in Ihren GPS-Tracks und in öffentlichen GPS-Trackverzeichnissen mit Zeitstempeln in Rohform angezeigt wird. Die über die API bereitgestellten Daten verweisen nicht auf Ihre Trackseite. Die Zeitstempel der Trackpunkte sind nicht über die öffentliche GPS-API verfügbar und die Trackpunkte sind nicht chronologisch geordnet.</string>
     <string name="gpx_upload_identifiable_visibility_descr">„Identifizierbar“ bedeutet, dass der Track in Ihren GPS-Tracks und in öffentlichen GPS-Trackverzeichnissen angezeigt wird, d. h., andere Benutzer können den Track herunterladen und mit Ihrem Benutzernamen verknüpfen. Öffentliche, mit Zeitstempel versehene Trackpunkt-Daten von der GPS-API, die über die Trackpunkt-API bereitgestellt werden, verweisen auf Ihre ursprüngliche Trackseite.</string>
     <string name="gpx_upload_private_visibility_descr">„Privat“ bedeutet, dass der Track nicht in öffentlichen Verzeichnissen auftaucht, aber seine Trackpunkte in nicht chronologischer Reihenfolge über die öffentliche GPS-API ohne Zeitstempel verfügbar sind.</string>
-    <string name="gpx_upload_trackable_visibility_descr">„Verfolgbar“ bedeutet, dass die Spur nicht in öffentlichen Listen auftaucht, aber verarbeitete Trackpunkte mit Zeitstempeln (die nicht direkt mit Ihnen in Verbindung gebracht werden können) werden durch Downloads von der öffentlichen GPS-API angezeigt.</string>
+    <string name="gpx_upload_trackable_visibility_descr">„Verfolgbar“ bedeutet, dass der Teack nicht in öffentlichen Listen auftaucht, aber verarbeitete Trackpunkte mit Zeitstempeln (die nicht direkt mit Ihnen in Verbindung gebracht werden können) werden durch Downloads von der öffentlichen GPS-API angezeigt.</string>
     <string name="osm_edit_close_note">OSM-Hinweis schließen</string>
     <string name="osm_edit_comment_note">OSM-Hinweis kommentieren</string>
     <string name="osm_login_descr">Melden Sie sich mit der OAuth-Methode oder mit Ihrem OSM-Benutzernamen und -Passwort an.</string>
@@ -3849,15 +3686,7 @@
     <string name="app_mode_light_aircraft">Kleinflugzeug</string>
     <string name="plan_route_split_before">Teilen vor</string>
     <string name="plan_route_split_after">Teilen nach</string>
-    <string name="release_3_9">• Option zum Exportieren und Importieren aller Daten einschließlich Einstellungen, Ressourcen, meine Orte hinzugefügt
-\n
-\n• Route planen: Diagramme für Streckenabschnitte mit Route, und es wurde die Möglichkeit hinzugefügt, mehrere Streckenabschnitte zu erstellen und zu bearbeiten
-\n
-\n • OAuth-Authentifizierungsverfahren für OpenStreetMap hinzugefügt, verbesserte Benutzeroberfläche der OSM-Dialoge
-\n
-\n • Unterstützung benutzerdefinierter Farben für Favoriten und Track-Wegpunkte
-\n
-\n</string>
+    <string name="release_3_9">• Option zum Exportieren und Importieren aller Daten einschließlich Einstellungen, Ressourcen, meine Orte hinzugefügt \n \n• Route planen: Diagramme für Streckenabschnitte mit Route, und es wurde die Möglichkeit hinzugefügt, mehrere Streckenabschnitte zu erstellen und zu bearbeiten \n \n • OAuth-Authentifizierungsverfahren für OpenStreetMap hinzugefügt, verbesserte Benutzeroberfläche der OSM-Dialoge \n \n • Unterstützung benutzerdefinierter Farben für Favoriten und Track-Wegpunkte</string>
     <string name="plan_route_add_new_segment">Neues Segment hinzufügen</string>
     <string name="profile_type_osmand_string">OsmAnd-Profil</string>
     <string name="profile_type_user_string">Benutzerprofil</string>
@@ -3998,19 +3827,7 @@
     <string name="customize_route_line">Routenlinie anpassen</string>
     <string name="shared_string_route_line">Routenlinie</string>
     <string name="specify_color_for_map_mode">Legen Sie die Farbe für den Kartenmodus fest %1$s.</string>
-    <string name="release_4_0_beta">• Option zum Herunterladen von Höhenlinien in Fuß hinzugefügt
-\n
-\n• Routenplanung im Querformat: Registerkarten zum Umschalten zwischen Punkten oder Diagrammen hinzugefügt
-\n
-\n• OsmAnd Live-Updates nach \"Downloads &gt; Updates\" verschoben
-\n
-\n• Tracks können nun nach Höhe, Geschwindigkeit oder Steigung eingefärbt werden.
-\n
-\n• Option hinzugefügt, um das Aussehen der Navigationsroutenlinie zu ändern
-\n
-\n• Dialog \"Streckenaufzeichnung\" aktualisiert
-\n
-\n</string>
+    <string name="release_4_0_beta">• Option zum Herunterladen von Höhenlinien in Fuß hinzugefügt \n \n• Routenplanung im Querformat: Registerkarten zum Umschalten zwischen Punkten oder Diagrammen hinzugefügt \n \n• OsmAnd Live-Updates nach \"Downloads &gt; Updates\" verschoben \n \n• Tracks können nun nach Höhe, Geschwindigkeit oder Steigung eingefärbt werden. \n \n• Option hinzugefügt, um das Aussehen der Navigationsroutenlinie zu ändern \n \n• Dialog \"Streckenaufzeichnung\" aktualisiert</string>
     <string name="no_purchases">Sie haben keine Einkäufe</string>
     <string name="new_device_account">Neues Gerät / neues Konto</string>
     <string name="contact_support_description">Wenn Sie Fragen haben, kontaktieren Sie uns bitte unter %1$s.</string>
@@ -4129,7 +3946,7 @@
     <string name="routing_attr_allow_gate_name">Schranken benutzen</string>
     <string name="routing_attr_only_permitted_streets_description">Nur Straßen mit ausdrücklicher Genehmigung nutzen</string>
     <string name="routing_attr_only_permitted_streets_name">Nur Straßen mit Genehmigung nutzen</string>
-    <string name="routing_attr_only_permitted_ways_description">Nur Geländewege mit ausdrücklicher Genehmigung nutzen</string>
+    <string name="routing_attr_only_permitted_ways_description">Nur Wege (Forstwege, Pfade usw.) mit ausdrücklicher Genehmigung nutzen</string>
     <string name="routing_attr_only_permitted_ways_name">Nur Geländewege mit Genehmigung nutzen</string>
     <string name="routing_attr_prefer_horse_routes_description">Reitrouten bevorzugen</string>
     <string name="routing_attr_prefer_horse_routes_name">Reitrouten bevorzugen</string>
@@ -4179,27 +3996,7 @@
     <string name="backup_error_token_is_not_valid_or_expired">Ungültiges oder abgelaufenes Token</string>
     <string name="backup_error_no_valid_subscription">Kein gültiges Abonnement vorhanden</string>
     <string name="enter_verification_code">Einmalpasswort eingeben</string>
-    <string name="release_4_0">• Datensicherung in der Cloud
-\n
-\n • Nachtmodus für den Kartenstil \"Topo\" hinzugefügt
-\n
-\n • Option zum Herunterladen von Höhenlinien in Fuß zugefügt
-\n
-\n • Tracks können jetzt nach Höhe, Geschwindigkeit oder Neigung eingefärbt werden
-\n
-\n • Dialog \"Streckenaufzeichnung\" aktualisiert
-\n
-\n • Entfernung durch Antippen aus dem Radiuslineal in eine separate Option verschoben
-\n
-\n • Route planen: Sie können jetzt die Navigationsoptionen ändern, auf die Kartenkonfiguration zugreifen und suchen, ohne die Routenplanung zu verlassen
-\n
-\n • Neuer \"Kaufen\"-Bildschirm mit detaillierten Kaufinformationen
-\n
-\n • Option hinzugefügt, um das Aussehen der Routenlinie zu ändern
-\n
-\n • OsmAnd Live Updates nach \"Downloads &gt; Updates\" verschoben
-\n
-\n</string>
+    <string name="release_4_0">• Datensicherung in der Cloud \n \n • Nachtmodus für den Kartenstil \"Topo\" hinzugefügt \n \n • Option zum Herunterladen von Höhenlinien in Fuß zugefügt \n \n • Tracks können jetzt nach Höhe, Geschwindigkeit oder Neigung eingefärbt werden \n \n • Dialog \"Streckenaufzeichnung\" aktualisiert \n \n • Entfernung durch Antippen aus dem Radiuslineal in eine separate Option verschoben \n \n • Route planen: Sie können jetzt die Navigationsoptionen ändern, auf die Kartenkonfiguration zugreifen und suchen, ohne die Routenplanung zu verlassen \n \n • Neuer \"Kaufen\"-Bildschirm mit detaillierten Kaufinformationen \n \n • Option hinzugefügt, um das Aussehen der Routenlinie zu ändern \n \n • OsmAnd Live Updates nach \"Downloads &gt; Updates\" verschoben</string>
     <string name="duration_moment_ago">gerade eben</string>
     <string name="purchases_feature_desc_wikivoyage">Erkunden Sie Wikivoyage offline. Artikel sind nach Ländern und Regionen unterteilt und in allen Sprachen verfügbar.</string>
     <string name="backup_error_subscription_was_expired_descr">Ihr OsmAnd Pro-Abonnement ist abgelaufen. Erneuern Sie es, um die Datensicherung zu nutzen. Sie können weiterhin Daten aus der Cloud wiederherstellen.</string>
@@ -4297,31 +4094,7 @@
     <string name="icon_group_nautical">Nautisch</string>
     <string name="shared_string_articles">Artikel</string>
     <string name="included_categories">Enthaltene Kategorien</string>
-    <string name="release_4_1">• Erste Unterstützung für Android Auto hinzugefügt
-\n
-\n • Aktualisierung der Benutzeroberfläche für die Suche nach UTM-Koordinaten
-\n
-\n • GPS-Filter für GPX-Tracks
-\n
-\n • Höhen-Widget (Pro)
-\n
-\n • Favoriten: Möglichkeit zur Anzeige der zuletzt verwendeten Symbole hinzugefügt
-\n
-\n • Routenplanung: verwendet nach dem Start das ausgewählte Profil
-\n
-\n • Mapillary-Ebene korrigiert, das Modul ist nun standardmäßig deaktiviert
-\n
-\n • Anzeige zur Verwaltung des gesamten Verlaufs der App hinzugefügt
-\n
-\n • Die Kartenausrichtung wird nach dem Neustart der App nicht zurückgesetzt
-\n
-\n • Verbesserte Darstellung von SRTM-Höhenmarkierungen
-\n
-\n • Arabische Kartenbeschriftungen korrigiert
-\n
-\n • Verschiedene Routingprobleme behoben
-\n
-\n</string>
+    <string name="release_4_1">• Erste Unterstützung für Android Auto hinzugefügt \n \n • Aktualisierung der Benutzeroberfläche für die Suche nach UTM-Koordinaten \n \n • GPS-Filter für GPX-Tracks \n \n • Höhen-Widget (Pro) \n \n • Favoriten: Möglichkeit zur Anzeige der zuletzt verwendeten Symbole hinzugefügt \n \n • Routenplanung: verwendet nach dem Start das ausgewählte Profil \n \n • Mapillary-Ebene korrigiert, das Modul ist nun standardmäßig deaktiviert \n \n • Anzeige zur Verwaltung des gesamten Verlaufs der App hinzugefügt \n \n • Die Kartenausrichtung wird nach dem Neustart der App nicht zurückgesetzt \n \n • Verbesserte Darstellung von SRTM-Höhenmarkierungen \n \n • Arabische Kartenbeschriftungen korrigiert \n \n • Verschiedene Routingprobleme behoben</string>
     <string name="rendering_attr_natureReserves_name">Naturschutzgebiet</string>
     <string name="internal_app_storage_description">Interner Speicher, versteckt vor allen Benutzern und anderen Apps, sodass nur OsmAnd auf Ihre Daten zugreifen kann.</string>
     <string name="shared_string_details">Details</string>
@@ -4473,7 +4246,7 @@
     <string name="please_provide_group_name_message">Bitte benennen Sie die Gruppe.</string>
     <string name="exit_import">Beenden\?</string>
     <string name="import_tracks_descr">%1$s, enthält %2$s separate Tracks. Wählen Sie die zu importierenden Tracks aus.</string>
-    <string name="location_source_descr">Standardmäßig verwendet OsmAnd, wenn es von Google Play installiert wurde, %1$s zur Standortbestimmung.\n\nWenn Sie ungenaue Standortinformationen erhalten oder ein Gerät ohne %2$s verwenden, versuchen Sie, zu „%3$s“ zu wechseln.</string>
+    <string name="location_source_descr">Standardmäßig verwendet OsmAnd, wenn es von Google Play installiert wurde, %1$s zur Standortbestimmung.\n\nWenn Sie ungenaue Standortinformationen erhalten oder ein Gerät ohne %2$s verwenden, versuchen Sie, zu „%3$s“ zu wechseln</string>
     <string name="location_source">Standortquelle</string>
     <string name="points_selection_descr">Schließen und alle Änderungen verwerfen\?</string>
     <string name="exit_import_descr">Beenden, ohne die Änderungen zu speichern\?</string>
@@ -4557,15 +4330,7 @@
     <string name="routing_attr_difficulty_preference_no_preference_name">Keine Präferenz</string>
     <string name="routing_attr_difficulty_preference_advanced_name">Fortgeschrittene</string>
     <string name="available_widgets">Verfügbare Widgets</string>
-    <string name="release_4_2">- Neugestaltung der Widgets: neues Look-and-feel, nach Seiten gruppieren, Reihenfolge ändern und nach Belieben kombinieren.
-\n
-\n - Wander-/Rad-/Reiserouten: Tippen Sie auf das Routensymbol und erhalten Sie vollständige Informationen über die Route.
-\n
-\n - Favoritengruppen: Legen Sie die Standardanzeige für neue Punkte in der Gruppe fest.
-\n
-\n - Korrekturen: Online-Kachelkarten werden automatisch aktualisiert
-\n
-\n</string>
+    <string name="release_4_2">- Neugestaltung der Widgets: neues Look-and-feel, nach Seiten gruppieren, Reihenfolge ändern und nach Belieben kombinieren. \n \n - Wander-/Rad-/Reiserouten: Tippen Sie auf das Routensymbol und erhalten Sie vollständige Informationen über die Route. \n \n - Favoritengruppen: Legen Sie die Standardanzeige für neue Punkte in der Gruppe fest. \n \n - Korrekturen: Online-Kachelkarten werden automatisch aktualisiert</string>
     <string name="turn_on_public_transport_description">Einschalten, um die Routen der öffentlichen Verkehrsmittel auf der Karte anzuzeigen.</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Nicht von der Piste abweichen</string>
     <string name="routing_attr_freeride_policy_prefer_offpiste_name">Abseits der Piste bevorzugen</string>
@@ -4810,31 +4575,7 @@
     <string name="speak_gps_signal_status">GPS-Signalverlust und Wiederherstellung ankündigen</string>
     <string name="speak_route_recalculation">Neuberechnung der Route ankündigen</string>
     <string name="purchases_feature_desc_external_sensors">Daten von externen Sensoren anzeigen und aufzeichnen: Fahrradgeschwindigkeit, Fahrradleistung, Trittfrequenz und Herzfrequenz.</string>
-    <string name="release_4_3">• Neue, schnellere Version 2 (OpenGL) Karten-Rendering-Engine mit 2,5D-Ansicht
-\n
-\n • Reibungslose Animation von Ortswechseln während der Fahrt
-\n
-\n • Neue Widgets für Kartenzentrumskoordinaten und Höhe von Geolokalisierungen
-\n
-\n • „Entfernung zum Tippen“: Textgrößenoptionen hinzugefügt
-\n
-\n • Widget „Kartenmarkierung“: Option hinzugefügt, um das Klickverhalten zu ändern
-\n
-\n • Option \"Positionsbestimmung\" korrigiert
-\n
-\n • GPX: Unterstützung für \"link\", \"cmt\", \"desc\"-Tags und für alle benutzerdefinierten Erweiterungen hinzugefügt
-\n
-\n • Reorganisierte Liste \"Seekarten\".
-\n
-\n • Unterstützung für ANT+ Sensoren hinzugefügt
-\n
-\n • Option zum Deaktivieren der Download-UUID hinzugefügt
-\n
-\n • Anpassbare Geschwindigkeitsvorhersagen für höhenabhängige Geh-/Wander-/Renn-Zeiten
-\n
-\n • Audio-Ausgabe und Lautstärkeregler behoben
-\n
-\n</string>
+    <string name="release_4_3">• Neue, schnellere Version 2 (OpenGL) Karten-Rendering-Engine mit 2,5D-Ansicht \n \n • Reibungslose Animation von Ortswechseln während der Fahrt \n \n • Neue Widgets für Kartenzentrumskoordinaten und Höhe von Geolokalisierungen \n \n • „Entfernung zum Tippen“: Textgrößenoptionen hinzugefügt \n \n • Widget „Kartenmarkierung“: Option hinzugefügt, um das Klickverhalten zu ändern \n \n • Option \"Positionsbestimmung\" korrigiert \n \n • GPX: Unterstützung für \"link\", \"cmt\", \"desc\"-Tags und für alle benutzerdefinierten Erweiterungen hinzugefügt \n \n • Reorganisierte Liste \"Seekarten\". \n \n • Unterstützung für ANT+ Sensoren hinzugefügt \n \n • Option zum Deaktivieren der Download-UUID hinzugefügt \n \n • Anpassbare Geschwindigkeitsvorhersagen für höhenabhängige Geh-/Wander-/Renn-Zeiten \n \n • Audio-Ausgabe und Lautstärkeregler behoben</string>
     <string name="show_borders_of_downloaded_maps">Grenzen der heruntergeladenen Karten anzeigen</string>
     <string name="show_map_symbols">Kartensymbole anzeigen</string>
     <string name="show_map_symbols_desc">Text, Verkehrszeichen und andere.</string>
@@ -5021,37 +4762,7 @@
     <string name="shared_string_original">Original</string>
     <string name="movement_speed">Bewegungsgeschwindigkeit</string>
     <string name="simulation_position_description">Wählen Sie eine Trackdatei aus, die als Quelle für die Veränderung des Standorts verwendet werden soll.</string>
-    <string name="release_4_4">• Verbessertes Menü \"Tracks\" in \"Karte konfigurieren\".
-\n
-\n • Kontextmenü zeigt jetzt lokalisierte Namen für POI an
-\n
-\n • Option zum Teilen der Route per Link hinzugefügt
-\n
-\n • Längeneinheit \"Nautische Meilen/Fuß\" hinzugefügt
-\n
-\n • Kartenausrichtung wurde um einen festen Modus erweitert.
-\n
-\n • Vereinfachter Startbildschirm
-\n
-\n • Feste Standortposition im geteilten Bildschirm in Android Auto
-\n
-\n • Geschwindigkeits-/Neigungsdiagramm für die Streckenanalyse hinzugefügt
-\n
-\n • Android 13 hat die Sprachauswahl der App in die Systemeinstellungen verschoben
-\n
-\n • Probleme mit der Anzeige von veganen Orten behoben
-\n
-\n • Möglichkeit zum Herunterladen von Online-Kacheln, die als \"Overlay\"- oder \"Underlay\"-Karten verwendet werden, hinzugefügt
-\n
-\n• Unterstützung von imperialen Einheiten für \"Fahrzeugparameter\" hinzugefügt
-\n
-\n• Neues Moped-Profil
-\n
-\n• Neue Option \"Automatisch\" bei \"Positionsanzeige\" hinzugefügt
-\n
-\n• Kartengesten für Neigen, Zoomen und Drehen korrigiert
-\n
-\n</string>
+    <string name="release_4_4">• Verbessertes Menü \"Tracks\" in \"Karte konfigurieren\". \n \n • Kontextmenü zeigt jetzt lokalisierte Namen für POI an \n \n • Option zum Teilen der Route per Link hinzugefügt \n \n • Längeneinheit \"Nautische Meilen/Fuß\" hinzugefügt \n \n • Kartenausrichtung wurde um einen festen Modus erweitert. \n \n • Vereinfachter Startbildschirm \n \n • Feste Standortposition im geteilten Bildschirm in Android Auto \n \n • Geschwindigkeits-/Neigungsdiagramm für die Trackanalyse hinzugefügt \n \n • Android 13 hat die Sprachauswahl der App in die Systemeinstellungen verschoben \n \n • Probleme mit der Anzeige von veganen Orten behoben \n \n • Möglichkeit zum Herunterladen von Online-Kacheln, die als \"Overlay\"- oder \"Underlay\"-Karten verwendet werden, hinzugefügt \n \n• Unterstützung von imperialen Einheiten für \"Fahrzeugparameter\" hinzugefügt \n \n• Neues Moped-Profil \n \n• Neue Option \"Automatisch\" bei \"Positionsanzeige\" hinzugefügt \n \n• Kartengesten für Neigen, Zoomen und Drehen korrigiert</string>
     <string name="sort_duration_ascending">Kürzeste Dauer zuerst</string>
     <string name="sort_distance_descending">Längste Entfernung zuerst</string>
     <string name="sort_date_ascending">Neuestes Datum zuerst</string>
@@ -5379,11 +5090,11 @@
     <string name="help_article_navigation_setup_markers_navigation_name">Navigieren nach Markierungen</string>
     <string name="smart_folder_saved">Intelligenter Ordner gespeichert</string>
     <string name="help_article_widgets_markers_name">Markierungs-Widgets</string>
-    <string name="release_4_6">• Android Auto: 3D-Modus hinzugefügt \n \n• Tracks: Filter und intelligente Ordner eingeführt, Speicheroptimierung für größere Dateien \n \n• Verbesserte obere und untere Widget-Leisten, um alle Widgets unterzubringen \n \n• Verbessertes lokales Ressourcenmanagement \n \n• Anpassbare Tastenbelegung für externe Controller \n \n• Neue Widgets: „Gleitzahl“ und „Sonnenposition“ \n \n• OsmAnd Cloud: jetzt Zugriff auf gelöschte Dateien \n \n• Verbesserte Streckenfärbung im Hangneigungsmodus mit neuem symmetrischen Gradienten \n \n• Probleme mit transparenter Statusleiste behoben \n \n• Unterstützung für ANT+-Widget „Temperatur“ hinzugefügt \n \n• Widget „Verfügbarer RAM“ eingeführt</string>
-    <string name="help_article_map_tracks_on_map_name">Strecken und Routen</string>
+    <string name="release_4_6">• Android Auto: 3D-Modus hinzugefügt \n \n• Tracks: Filter und intelligente Ordner eingeführt, Speicheroptimierung für größere Dateien \n \n• Verbesserte obere und untere Widget-Leisten, um alle Widgets unterzubringen \n \n• Verbessertes lokales Ressourcenmanagement \n \n• Anpassbare Tastenbelegung für externe Controller \n \n• Neue Widgets: „Gleitzahl“ und „Sonnenposition“ \n \n• OsmAnd Cloud: jetzt Zugriff auf gelöschte Dateien \n \n• VerbesserteTrack Einfärbung im Hangneigungsmodus mit neuem symmetrischen Gradienten \n \n• Probleme mit transparenter Statusleiste behoben \n \n• Unterstützung für ANT+-Widget „Temperatur“ hinzugefügt \n \n• Widget „Verfügbarer RAM“ eingeführt</string>
+    <string name="help_article_map_tracks_on_map_name">Tracks und Routen</string>
     <string name="help_article_navigation_routing_direct_to_point_routing_name">Punkt-zu-Punkt-Routing (Boot)</string>
     <string name="app_mode_baby_transport">Kindertransport</string>
-    <string name="help_article_navigation_setup_gpx_navigation_name">Navigieren nach Strecke</string>
+    <string name="help_article_navigation_setup_gpx_navigation_name">Navigieren nach Track</string>
     <string name="add_smart_folder">Intelligenten Ordner hinzufügen</string>
     <string name="empty_name">Leerer Name</string>
     <string name="edit_filter">Filter bearbeiten</string>
@@ -5407,7 +5118,7 @@
         <item quantity="one">%1$d (%2$d Track)</item>
         <item quantity="other">%1$d (%2$d Tracks)</item>
     </plurals>
-    <string name="no_config_smart_folder_description">Intelligente Ordner ermöglichen das Gruppieren von Strecken anhand angewendeter Filter</string>
+    <string name="no_config_smart_folder_description">Intelligente Ordner ermöglichen das Gruppieren von Tracks anhand angewendeter Filter</string>
     <string name="loading_tracks">Tracks neu laden</string>
     <string name="searching_matching_tracks">Alle passenden Tracks suchen</string>
     <string name="cloud_trash_clear_confirmation">Alle Elemente im Papierkorb dauerhaft löschen?</string>
@@ -5564,7 +5275,7 @@
     <string name="upload_local_versions">Lokale Versionen hochladen</string>
     <string name="map_widget_map_scale">Maßstab</string>
     <string name="shared_string_unchanged">Unverändert</string>
-    <string name="unchanged_parameter_summary">Jede Spur behält ihre eigenen Parameter.</string>
+    <string name="unchanged_parameter_summary">Jede Track behält seine eigenen Parameter.</string>
     <string name="gpx_approximation_cpp">Routingbasiert (C++)</string>
     <string name="gpx_approximation_java">Routingbasiert (Java)</string>
     <string name="gpx_approximation_geo_java">Geometriebasiert (Java, schnell)</string>
@@ -5865,7 +5576,7 @@
     <string name="quick_action_showhide_osm_edits_descr">Schaltfläche zum Ein- und Ausblenden von lokalen OSM-Bearbeitungen auf der Karte.</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Dirtbike-Strecken</string>
     <string name="liter_per_hour">l/h</string>
-    <string name="release_4_9">• Vollbild-Galerie-Viewer für Wikimedia-Bilder hinzugefügt\n\n • Neue Erweiterung „Fahrzeugdaten“ zur Überwachung der Fahrzeugleistung unter Verwendung des OBD-II-Protokolls eingeführt\n\n • Möglichkeit hinzugefügt, Aktivitäten zu Spuren zuzuordnen und sie entsprechend zu filtern\n\n • Neue Schnellaktionen für die Aufzeichnung von Fahrten und die Touchscreen-Sperre implementiert\n\n • Anpassbare Kartenschaltfläche und präzises Raster eingeführt\n\n • Kontextmenü und Aktion „Durchschnittsgeschwindigkeit zurücksetzen“ zu Widgets hinzugefügt\n\n • Neue Routenebene „Dirtbike-Strecken“ hinzugefügt\n\n • „Automatische Aufzeichnung des Tracks während der Navigation“ korrigiert\n\n • Problem mit umgedrehten Koordinaten in RTL behoben\n\n • Fehlende Sensordaten für die aktuell aufgezeichnete Strecke behoben\n\n • Informationen über die Umgebung des ausgewählten Punktes hinzugefügt\n\n • Schnellaktion zur Kontrolle der Sichtbarkeit von OSM-Bearbeitungen hinzugefügt\n\n • Sichtbarkeitsparameter für die Terrain-Einfärbungsoptionen separiert\n\n • Antippbares Symbol hinzugefügt, um Zufahrtswege oder andere Straßen- oder Pfadattribute anzuzeigen</string>
+    <string name="release_4_9">• Vollbild-Galerie-Viewer für Wikimedia-Bilder hinzugefügt\n\n • Neue Erweiterung „Fahrzeugdaten“ zur Überwachung der Fahrzeugleistung unter Verwendung des OBD-II-Protokolls eingeführt\n\n • Möglichkeit hinzugefügt, Aktivitäten zu Tracks zuzuordnen und sie entsprechend zu filtern\n\n • Neue Schnellaktionen für die Aufzeichnung von Fahrten und die Touchscreen-Sperre implementiert\n\n • Anpassbare Kartenschaltfläche und präzises Raster eingeführt\n\n • Kontextmenü und Aktion „Durchschnittsgeschwindigkeit zurücksetzen“ zu Widgets hinzugefügt\n\n • Neue Routenebene „Dirtbike-Strecken“ hinzugefügt\n\n • „Automatische Aufzeichnung des Tracks während der Navigation“ korrigiert\n\n • Problem mit umgedrehten Koordinaten in RTL behoben\n\n • Fehlende Sensordaten für die aktuell aufgezeichnete Strecke behoben\n\n • Informationen über die Umgebung des ausgewählten Punktes hinzugefügt\n\n • Schnellaktion zur Kontrolle der Sichtbarkeit von OSM-Bearbeitungen hinzugefügt\n\n • Sichtbarkeitsparameter für die Terrain-Einfärbungsoptionen separiert\n\n • Antippbares Symbol hinzugefügt, um Zufahrtswege oder andere Straßen- oder Pfadattribute anzuzeigen</string>
     <string name="screen_is_locked_by_external_button">Der Touchscreen ist gesperrt. Um die Sperre aufzuheben, drücken Sie die Taste %1$s oder tippen Sie auf die Schaltfläche auf dem Bildschirm.</string>
     <string name="screen_is_unlocked">Der Touchscreen ist entsperrt.</string>
     <string name="screen_is_locked_by_action_button">Der Touchscreen ist gesperrt. Tippen Sie zum Entsperren auf die Schaltfläche.</string>
@@ -5923,8 +5634,8 @@
     <string name="litres">Liter</string>
     <string name="imperial_gallons_unit">imp gal</string>
     <string name="us_gallons_unit">gal</string>
-    <string name="imperial_gallons">Imperial gallons</string>
-    <string name="us_gallons">US gallons</string>
+    <string name="imperial_gallons">Imperiale Gallone</string>
+    <string name="us_gallons">US Gallone</string>
     <string name="unit_of_volume_description">Ausgewählte Einheiten werden auf alle volumenbezogenen Daten im aktuellen Profil angewendet.</string>
     <string name="unit_of_volume">Volumeneinheit</string>
     <string name="record_obd_data">Fahrzeugdaten aufzeichnen</string>
