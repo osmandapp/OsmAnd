@@ -72,6 +72,7 @@ public class SettingsSearchButtonHelper {
 								.withSearchResultsFragmentUI(new SearchResultsFragmentUI())
 								.withPrepareShow(new PrepareShow())
 								.withIncludePreferenceInSearchResultsPredicate(new IncludePreferenceInSearchResultsPredicate())
+								.withSearchResultsSorter(new SearchResultsByPreferencePathSorter())
 								.build())
 				.withCreateSearchDatabaseTaskSupplier(createSearchDatabaseTaskSupplier)
 				.build();
