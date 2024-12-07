@@ -88,10 +88,10 @@
     <string name="poi_filter_car_aid">Automehaničar</string>
     <string name="poi_filter_food_shop">Trgovina hranom</string>
     <string name="poi_filter_for_tourists">Za turiste</string>
-    <string name="poi_filter_fuel">Benzinska postaja</string>
-    <string name="show_warnings_title">Prikaži upozorenja-…</string>
+    <string name="poi_filter_fuel">Gorivo</string>
+    <string name="show_warnings_title">Prikaži upozorenja …</string>
     <string name="use_compass_navigation">Koristi kompas</string>
-    <string name="avoid_motorway">Izbjegavaj autoceste</string>
+    <string name="avoid_motorway">Izbjegni autoceste</string>
     <string name="show_warnings_descr">Konfiguracija prometnih upozorenja (ograničenja brzine, prisilno zaustavljanje, ležeći policajci), kontrola brzine i informacije</string>
     <string name="auto_zoom_map">Automatsko zumiranje karte</string>
     <string name="av_use_external_camera_descr">Koristite sistemsku aplikaciju za fotografiranje</string>
@@ -453,8 +453,8 @@
     <string name="amenity_type_landuse">Korištenje zemljišta</string>
     <string name="amenity_type_leisure">Slobodno vrijeme</string>
     <string name="amenity_type_military">Vojska</string>
-    <string name="amenity_type_natural">Priroda</string>
-    <string name="amenity_type_office">Uredi</string>
+    <string name="amenity_type_natural">Prirodno</string>
+    <string name="amenity_type_office">Ured</string>
     <string name="amenity_type_other">Ostalo</string>
     <string name="amenity_type_shop">Trgovine</string>
     <string name="amenity_type_tourism">Turizam</string>
@@ -876,24 +876,24 @@
     <string name="routing_attr_avoid_unpaved_name">Izbjegni neasfaltirane ceste</string>
     <string name="routing_attr_avoid_unpaved_description">Izbjegava neasfaltirane ceste</string>
     <string name="routing_attr_avoid_ferries_name">Izbjegni trajekte</string>
-    <string name="routing_attr_avoid_ferries_description">Izbjegavati trajekte</string>
-    <string name="routing_attr_avoid_motorway_name">Izbjegavati autoceste</string>
-    <string name="routing_attr_avoid_motorway_description">Izbjegavati autoceste</string>
-    <string name="routing_attr_weight_description">Odredi dozvoljenu težinu vozila na putovima.</string>
-    <string name="routing_attr_weight_name">Ograničenje težine</string>
+    <string name="routing_attr_avoid_ferries_description">Izbjegava trajekte</string>
+    <string name="routing_attr_avoid_motorway_name">Izbjegni autoceste</string>
+    <string name="routing_attr_avoid_motorway_description">Izbjegava autoceste</string>
+    <string name="routing_attr_weight_description">Odredi dozvoljenu težinu vozila na rutama.</string>
+    <string name="routing_attr_weight_name">Težina</string>
     <string name="android_19_location_disabled">Od KitKat inačice androida (4.4) ne možete preuzimati i ažurirati mape na prethodno mjesto pohrane (%s). Želite li dopustiti aplikaciji da kopira podatke na novo mjesto?
  
  Napomena : stare datoteke će ostati netaknute (ali ih možete obrisati).
  
  Napomena : neće biti moguće dijeliti datoteke između OsmAnd i OsmAnd+.</string>
-    <string name="copying_osmand_one_file_descr">Kopiranje datoteka (%s) na novo odredište …</string>
-    <string name="copying_osmand_files_descr">Kopiranje OsmAnd datoteka na novo odredište (%s)…</string>
-    <string name="copying_osmand_files">Kopiranje OsmAnd datoteka</string>
+    <string name="copying_osmand_one_file_descr">Kopiranje datoteke (%s) na novo odredište …</string>
+    <string name="copying_osmand_files_descr">Kopiranje OsmAnd datoteka na novo odredište (%s) …</string>
+    <string name="copying_osmand_files">Kopiranje OsmAnd datoteka …</string>
     <string name="calculate_osmand_route_gpx">Izračunaj OsmAnd offline rutu</string>
     <string name="app_mode_truck">Kamion</string>
     <string name="guidance_preferences_descr">Postavke navigacije</string>
-    <string name="speech_rate_descr">Odredite brzinu govora za TTS</string>
-    <string name="speech_rate">Brzina Govora</string>
+    <string name="speech_rate_descr">Odredi brzinu govora sustava čitanja teksta.</string>
+    <string name="speech_rate">Brzina govora</string>
     <string name="disable_complex_routing_descr">Onemogućiti 2-fazno usmjeravanje za automobilsku navigaciju</string>
     <string name="disable_complex_routing">Onemogućiti složenu usmjeravanje</string>
     <string name="local_index_tile_data_maxzoom">Maksimalni zoom: %1$s</string>
@@ -1253,9 +1253,9 @@
     <string name="use_displayed_track_for_navigation">Želite li koristiti prikazan zapis za vašu navigaciju?</string>
     <string name="route_preferences">Postavke rute</string>
     <string name="route_info">Informacije o ruti</string>
-    <string name="routing_attr_avoid_borders_description">Izbjegavajte prelazak granice u drugu zemlju</string>
+    <string name="routing_attr_avoid_borders_description">Izbjegava granične prijelaze</string>
     <string name="routing_attr_height_name">Visina</string>
-    <string name="routing_attr_height_description">Odredi visinu vozila koja je dozvoljena na putovima.</string>
+    <string name="routing_attr_height_description">Odredi dozvoljenu visinu vozila na rutama.</string>
     <string name="route_descr_destination">Odredište</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="close_changeset">Zatvori promjene</string>
@@ -1594,4 +1594,17 @@
     <string name="on_foot">Pješice</string>
     <string name="shared_string_markers">Oznake</string>
     <string name="app_mode_horse">Konj</string>
+    <string name="routing_attr_width_description">Odredi dozvoljenu širinu vozila na rutama.</string>
+    <string name="routing_attr_avoid_stairs_name">Izbjegni stepenice</string>
+    <string name="shared_string_meters">metri</string>
+    <string name="sort_country_name_descending">Ime zemlje: Z – A</string>
+    <string name="shared_string_width">Širina</string>
+    <string name="shared_string_tones">tone</string>
+    <string name="sort_country_name_ascending">Ime zemlje: A – Z</string>
+    <string name="routing_attr_avoid_stairs_description">Izbjegava stepenice</string>
+    <string name="routing_attr_avoid_borders_name">Izbjegni granične prijelaze</string>
+    <string name="routing_attr_width_name">Širina</string>
+    <string name="routing_attr_avoid_ferry_description">Izbjegava trajekte</string>
+    <string name="map_widget_map_rendering">Iscrtavanje karte</string>
+    <string name="shared_string_uninstall">Deinstaliraj</string>
 </resources>
