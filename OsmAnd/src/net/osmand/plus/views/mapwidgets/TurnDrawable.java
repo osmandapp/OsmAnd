@@ -25,6 +25,8 @@ public class TurnDrawable extends Drawable {
 	protected Paint paintRouteDirection;
 	protected Path pathForTurn = new Path();
 	protected Path pathForTurnOutlay = new Path();
+	private final Path originalPathForTurn = new Path();
+	private final Path originalPathForTurnOutlay = new Path();
 	protected TurnType turnType;
 	protected int turnImminent;
 	protected boolean deviatedFromRoute;
@@ -63,10 +65,15 @@ public class TurnDrawable extends Drawable {
 		float scaleX = bounds.width() / 72f;
 		float scaleY = bounds.height() / 72f;
 		m.setScale(scaleX, scaleY);
-		pathForTurn.transform(m, pathForTurn);
+
+		pathForTurn.set(originalPathForTurn);
+		pathForTurn.transform(m);
+
+		pathForTurnOutlay.set(originalPathForTurnOutlay);
+		pathForTurnOutlay.transform(m);
+
 		centerText.x = scaleX * centerText.x;
 		centerText.y = scaleY * centerText.y;
-		pathForTurnOutlay.transform(m, pathForTurnOutlay);
 	}
 
 	public int getTurnImminent() {
@@ -136,7 +143,7 @@ public class TurnDrawable extends Drawable {
 	public boolean setTurnType(@Nullable TurnType turnType) {
 		if (turnType != this.turnType && !getBounds().isEmpty()) {
 			this.turnType = turnType;
-			TurnPathHelper.calcTurnPath(pathForTurn, pathForTurnOutlay, turnType, null,
+			TurnPathHelper.calcTurnPath(originalPathForTurn, originalPathForTurnOutlay, turnType, null,
 					centerText, mini, false, true, false);
 			onBoundsChange(getBounds());
 			return true;

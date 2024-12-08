@@ -4,6 +4,7 @@ import static net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget.MAX_SHIE
 import static net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget.setShieldImage;
 import static java.lang.Math.min;
 
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 import android.view.Gravity;
@@ -354,6 +355,8 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	}
 
 	protected void updateVerticalWidgetColors(@NonNull TextState textState) {
+		int typefaceStyle = textState.textBold ? Typeface.BOLD : Typeface.NORMAL;
+
 		nightMode = textState.night;
 		int exitRefTextColorId = isNightMode()
 				? R.color.text_color_primary_dark
@@ -363,6 +366,9 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		distanceView.setTextColor(ContextCompat.getColor(app, exitRefTextColorId));
 		distanceSubView.setTextColor(ColorUtilities.getSecondaryTextColor(mapActivity, nightMode));
 		streetView.setTextColor(ColorUtilities.getSecondaryTextColor(mapActivity, nightMode));
+		distanceView.setTypeface(Typeface.DEFAULT, typefaceStyle);
+		distanceSubView.setTypeface(Typeface.DEFAULT, typefaceStyle);
+		streetView.setTypeface(Typeface.DEFAULT, typefaceStyle);
 
 		bg.setBackgroundResource(textState.widgetBackgroundId);
 	}
