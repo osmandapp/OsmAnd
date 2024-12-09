@@ -5670,4 +5670,7 @@
     <string name="av_audio_sample_rate_descr">選取音訊採樣速率。</string>
     <string name="vehicle_metrics_recording_description">選擇要在 GPX 檔案記錄的參數。</string>
     <string name="shared_string_engine">引擎</string>
+    <string name="location_interpolation_percent">位置內插百分比</string>
+    <string name="shared_string_interpolation">內插</string>
+    <string name="location_interpolation_percent_desc">設定路線導航時位置內插的百分比。此參數可減少動畫時您在地圖上位置的延遲。</string>
 </resources>
