@@ -20,7 +20,6 @@ import static net.osmand.plus.wikivoyage.data.TravelGpx.MIN_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_RADIUS;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.START_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.USER;
-import static net.osmand.shared.gpx.GpxUtilities.OSM_PREFIX;
 import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_BACKGROUNDS;
 import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_COLORS;
 import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_DELIMITER;
@@ -31,7 +30,6 @@ import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_FIRST_DIST;
 import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_FIRST_LETTER;
 import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_MULT_1;
 import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_MULT_2;
-import static net.osmand.shared.gpx.primitives.GpxExtensions.OBF_GPX_EXTENSION_TAG_PREFIX;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 import android.os.AsyncTask;
@@ -123,10 +121,6 @@ public class TravelObfHelper implements TravelHelper {
 	private final List<Pair<File, Amenity>> foundAmenities = new ArrayList<>();
 	public volatile int requestNumber = 0;
 
-	// Keep important tags by prefix. Note: name, ref, type, and route tags are processed in a special way.
-	private static final Set<String> saveAsIsAmenityGpxTags = Set.of(
-			"route_id", "flexible_line_width", "translucent_line_colors", "shield_"
-	);
 	// Do not clutter GPX with tags that are always generated.
 	private static final Set<String> doNotSaveAmenityGpxTags = Set.of(
 			"date", "distance", "route_radius",
@@ -1165,24 +1159,8 @@ public class TravelObfHelper implements TravelHelper {
 								} else if (OBF_POINTS_GROUPS_BACKGROUNDS.equals(tag)) {
 									pgBackgrounds.addAll(values);
 								}
-							} else {
-								if (tag.startsWith(OBF_GPX_EXTENSION_TAG_PREFIX)) {
-									String gpxTag = tag.replaceFirst(OBF_GPX_EXTENSION_TAG_PREFIX, "");
-									gpxFileExtensions.put(gpxTag, value);
-								} else if (!doNotSaveAmenityGpxTags.contains(tag)) {
-									boolean saveAsIs = false;
-									for (String prefix : saveAsIsAmenityGpxTags) {
-										if (tag.startsWith(prefix)) {
-											saveAsIs = true;
-											break;
-										}
-									}
-									if (saveAsIs) {
-										gpxFileExtensions.put(tag, value);
-									} else if (amenity.hasOsmRouteId()) {
-										gpxFileExtensions.put(OSM_PREFIX + tag, value);
-									}
-								}
+							} else if (!doNotSaveAmenityGpxTags.contains(tag)) {
+								gpxFileExtensions.put(tag, value);
 							}
 						}
 					} else if (ROUTE_TRACK_POINT.equals(amenity.getSubType())) {
@@ -1210,8 +1188,8 @@ public class TravelObfHelper implements TravelHelper {
 				String osmValue = amenity.getType().getPoiTypeByKeyName(subType).getOsmValue();
 				if (!Algorithms.isEmpty(osmValue)) {
 					if (amenity.hasOsmRouteId()) {
-						gpxFileExtensions.put(OSM_PREFIX + "type", "route");
-						gpxFileExtensions.put(OSM_PREFIX + "route", osmValue);
+						gpxFileExtensions.put("type", "route");
+						gpxFileExtensions.put("route", osmValue);
 					}
 					RouteActivityHelper helper = app.getRouteActivityHelper();
 					RouteActivity activity = helper.findActivityByTag(osmValue);
@@ -1263,7 +1241,7 @@ public class TravelObfHelper implements TravelHelper {
 			gpxFile = new GpxFile(Version.getFullVersion(app));
 			gpxFile.getMetadata().setName(Objects.requireNonNullElse(article.title, article.routeId)); // path is name
 			if (!Algorithms.isEmpty(article.title) && article.hasOsmRouteId()) {
-				gpxFileExtensions.putIfAbsent(OSM_PREFIX + "name", article.title);
+				gpxFileExtensions.putIfAbsent("name", article.title);
 			}
 			if (!Algorithms.isEmpty(article.description)) {
 				gpxFile.getMetadata().setDesc(article.description);
