@@ -315,7 +315,7 @@ public class Amenity extends MapObject {
 	private void printNames(String prefix, Map<String, String> stringMap, StringBuilder s) {
 		for (Entry<String, String> e : stringMap.entrySet()) {
 			if (e.getValue().startsWith(" gz ")) {
-				s.append(prefix).append(e.getKey()).append("='gzip ...'");
+				s.append(prefix).append(e.getKey()).append("='gzip ...' ");
 			} else {
 				s.append(prefix).append(e.getKey()).append("='").append(e.getValue()).append("' ");
 			}
