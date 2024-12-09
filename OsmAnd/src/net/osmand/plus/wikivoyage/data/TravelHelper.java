@@ -61,11 +61,13 @@ public interface TravelHelper {
 	@NonNull
 	ArrayList<String> getArticleLangs(@NonNull TravelArticleIdentifier articleId);
 
+	boolean isTravelGpxTags(@NonNull Map<String, String> tags);
+
 	@Nullable
 	TravelGpx searchGpx(@NonNull LatLon location, @Nullable String fileName, @Nullable String ref);
 
 	void openTrackMenu(@NonNull TravelArticle article, @NonNull MapActivity mapActivity,
-					   @NonNull String gpxFileName, @NonNull LatLon location);
+					   @NonNull String gpxFileName, @NonNull LatLon location, boolean adjustMapPosition);
 
 	@NonNull
 	String getGPXName(@NonNull TravelArticle article);
@@ -80,5 +82,4 @@ public interface TravelHelper {
 	String getWikivoyageFileName();
 
 	void saveOrRemoveArticle(@NonNull TravelArticle article, boolean save);
-
 }

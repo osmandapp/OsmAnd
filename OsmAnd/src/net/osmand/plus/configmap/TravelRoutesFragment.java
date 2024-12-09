@@ -297,7 +297,7 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 			updateItemView(tracksView, getString(R.string.display_route_tracks), R.drawable.ic_action_track_16,
 					selected, DescriptionType.VISIBLE_HIDDEN);
 			app.runInUIThread(() -> {
-				rendererHelper.updateRouteTrackFilter();
+				rendererHelper.updateRouteTrackFilters();
 				rendererHelper.updateRouteTypesVisibility();
 				app.getOsmandMap().refreshMap(true);
 				app.getOsmandMap().getMapLayers().updateLayers((MapActivity) getMyActivity());
@@ -316,7 +316,7 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 			updateItemView(tracksAsPoiView, getString(R.string.display_route_tracks_as_poi), R.drawable.ic_action_info_dark,
 					selected, DescriptionType.VISIBLE_HIDDEN);
 			app.runInUIThread(() -> {
-				rendererHelper.updateRouteTrackFilter();
+				rendererHelper.updateRouteTrackFilters();
 				rendererHelper.updateRouteTypesVisibility();
 				app.getOsmandMap().refreshMap(true);
 				app.getOsmandMap().getMapLayers().updateLayers((MapActivity) getMyActivity());

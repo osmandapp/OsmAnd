@@ -2,6 +2,7 @@ package net.osmand;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_GZ_FILE_EXT;
+import static net.osmand.data.Amenity.ROUTE_ID;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -696,7 +697,7 @@ public class NativeLibrary {
 
 		public String getRouteID() {
 			for (Map.Entry<String, String> entry : getTags().entrySet()) {
-				if ("route_id".equals(entry.getKey())) {
+				if (ROUTE_ID.equals(entry.getKey())) {
 					return entry.getValue();
 				}
 			}

@@ -16,7 +16,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
+import net.osmand.data.Amenity;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.wikivoyage.data.TravelGpx;
+import net.osmand.plus.wikivoyage.data.TravelHelper;
+import net.osmand.plus.wikivoyage.data.TravelObfHelper;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -43,11 +48,14 @@ import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class QuickSearchListFragment extends OsmAndListFragment {
+	private static final Log LOG = PlatformUtil.getLog(QuickSearchListFragment.class);
 
 	protected OsmandApplication app;
 	private QuickSearchDialogFragment dialogFragment;
@@ -175,24 +183,43 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	public void showResult(SearchResult searchResult) {
 		showResult = false;
 		if (searchResult.objectType == ObjectType.GPX_TRACK) {
-			GPXInfo gpxInfo = (GPXInfo) searchResult.relatedObject;
-			if (dialogFragment.getSearchType().isTargetPoint()) {
-				File file = gpxInfo.getFile();
-				if (file != null) {
-					selectTrack(file);
-				}
-			} else {
-				showTrackMenuFragment(gpxInfo);
-			}
+			showGpxTrackResult(searchResult);
 		} else if (searchResult.location != null) {
-			Pair<PointDescription, Object> pair = QuickSearchListItem.getPointDescriptionObject(app, searchResult);
+			showResultWithLocation(searchResult);
+		}
+	}
 
-			dialogFragment.hideToolbar();
-			dialogFragment.hide();
+	private void showResultWithLocation(SearchResult searchResult) {
+		Pair<PointDescription, Object> pair = QuickSearchListItem.getPointDescriptionObject(app, searchResult);
 
+		dialogFragment.hideToolbar();
+		dialogFragment.hide();
+
+		if (pair.second instanceof Amenity && ((Amenity) pair.second).isRouteTrack()) {
+			Amenity amenity = (Amenity) pair.second;
+			TravelHelper travelHelper = app.getTravelHelper();
+			TravelGpx travelGpx = travelHelper.searchGpx(amenity.getLocation(), amenity.getRouteId(), amenity.getRef());
+			if (travelGpx != null) {
+				travelHelper.openTrackMenu(travelGpx, getMapActivity(), amenity.getGpxFileName(null), amenity.getLocation(), true);
+			} else {
+				LOG.error("showResultWithLocation() searchGpx() travelGpx is null");
+			}
+		} else {
 			showOnMap(getMapActivity(), dialogFragment,
 					searchResult.location.getLatitude(), searchResult.location.getLongitude(),
 					searchResult.preferredZoom, pair.first, pair.second);
+		}
+	}
+
+	private void showGpxTrackResult(SearchResult searchResult) {
+		GPXInfo gpxInfo = (GPXInfo) searchResult.relatedObject;
+		if (dialogFragment.getSearchType().isTargetPoint()) {
+			File file = gpxInfo.getFile();
+			if (file != null) {
+				selectTrack(file);
+			}
+		} else {
+			showTrackMenuFragment(gpxInfo);
 		}
 	}
 

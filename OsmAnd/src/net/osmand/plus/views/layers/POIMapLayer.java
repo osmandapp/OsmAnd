@@ -1,8 +1,8 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.osm.MapPoiTypes.ROUTES;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
-import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 import static net.osmand.plus.utils.AndroidUtils.dpToPx;
 
 import android.app.Dialog;
@@ -69,6 +69,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -99,7 +100,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private boolean routeTrackAsPoiFilterEnabled;
 	private PoiUIFilter routeArticleFilter;
 	private PoiUIFilter routeArticlePointsFilter;
-	private PoiUIFilter routeTrackFilter;
+	private Set<PoiUIFilter> routeTrackFilters;
 	private String routeArticlePointsFilterByName;
 	private boolean fileVisibilityChanged;
 	public CustomMapObjects<Amenity> customObjectsDelegate;
@@ -119,7 +120,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		routeArticlePointsFilterEnabled = travelRendererHelper.getRouteArticlePointsProperty().get();
 		routeArticleFilter = travelRendererHelper.getRouteArticleFilter();
 		routeArticlePointsFilter = travelRendererHelper.getRouteArticlePointsFilter();
-		routeTrackFilter = travelRendererHelper.getRouteTrackFilter();
+		routeTrackFilters = travelRendererHelper.getRouteTrackFilters();
 		routeArticlePointsFilterByName = routeArticlePointsFilter != null ? routeArticlePointsFilter.getFilterByName() : null;
 
 		routingHelper.addListener(this);
@@ -158,6 +159,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				int z = (int) Math.floor(zoom + Math.log(getMapDensity()) / Math.log(2));
 
 				List<Amenity> res = new ArrayList<>();
+				Set<String> uniqueRouteIds = new HashSet<>();
 				PoiFilterUtils.combineStandardPoiFilters(calculatedFilters, app);
 				for (PoiUIFilter filter : calculatedFilters) {
 					List<Amenity> amenities = filter.searchAmenities(latLonBounds.top, latLonBounds.left,
@@ -173,24 +175,14 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 									return isInterrupted();
 								}
 							});
-					if (filter.isRouteTrackFilter()) {
-						for (Amenity amenity : amenities) {
-							boolean hasRoute = false;
+					for (Amenity amenity : amenities) {
+						if (amenity.isRouteTrack()) {
 							String routeId = amenity.getRouteId();
-							if (!Algorithms.isEmpty(routeId)) {
-								for (Amenity a : res) {
-									if (routeId.equals(a.getRouteId())) {
-										hasRoute = true;
-										break;
-									}
-								}
-							}
-							if (!hasRoute) {
-								res.add(amenity);
+							if (routeId != null && !uniqueRouteIds.add(routeId)) {
+								continue; // duplicate
 							}
 						}
-					} else {
-						res.addAll(amenities);
+						res.add(amenity);
 					}
 				}
 
@@ -224,9 +216,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				calculatedFilters.add(routeArticlePointsFilter);
 			}
 			boolean routeTrackAsPoiFilterEnabled = this.routeTrackAsPoiFilterEnabled;
-			PoiUIFilter routeTrackFilter = this.routeTrackFilter;
-			if (routeTrackAsPoiFilterEnabled && routeTrackFilter != null) {
-				calculatedFilters.add(routeTrackFilter);
+			if (routeTrackAsPoiFilterEnabled && this.routeTrackFilters != null) {
+				calculatedFilters.addAll(this.routeTrackFilters);
 			}
 		}
 		return calculatedFilters;
@@ -307,7 +298,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 					&& zoom >= START_ZOOM) {
 				return true;
 			}
-			if (travelRendererHelper.getRouteTracksAsPoiProperty().get() && routeTrackFilter != null) {
+			if (travelRendererHelper.getRouteTracksAsPoiProperty().get() && routeTrackFilters != null) {
 				return travelRendererHelper.getRouteTracksProperty().get()
 						? zoom >= START_ZOOM : zoom >= START_ZOOM_ROUTE_TRACK;
 			}
@@ -321,7 +312,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		} else {
 			boolean routeArticle = ROUTE_ARTICLE_POINT.equals(amenity.getSubType())
 					|| ROUTE_ARTICLE.equals(amenity.getSubType());
-			boolean routeTrack = ROUTE_TRACK.equals(amenity.getSubType());
+			boolean routeTrack = amenity.isRouteTrack();
 			if (routeArticle) {
 				return tileBox.getZoom() >= START_ZOOM;
 			}  else if (routeTrack) {
@@ -352,7 +343,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		boolean routeTrackAsPoiFilterEnabled = travelRendererHelper.getRouteTracksAsPoiProperty().get();
 		PoiUIFilter routeArticleFilter = travelRendererHelper.getRouteArticleFilter();
 		PoiUIFilter routeArticlePointsFilter = travelRendererHelper.getRouteArticlePointsFilter();
-		PoiUIFilter routeTrackFilter = travelRendererHelper.getRouteTrackFilter();
+		Set<PoiUIFilter> routeTrackFilters = travelRendererHelper.getRouteTrackFilters();
 		String routeArticlePointsFilterByName = routeArticlePointsFilter != null ? routeArticlePointsFilter.getFilterByName() : null;
 		boolean dataChanged = false;
 		if (this.filters != selectedPoiFilters
@@ -363,7 +354,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				|| this.routeTrackAsPoiFilterEnabled != routeTrackAsPoiFilterEnabled
 				|| this.routeArticleFilter != routeArticleFilter
 				|| this.routeArticlePointsFilter != routeArticlePointsFilter
-				|| this.routeTrackFilter != routeTrackFilter
+				|| this.routeTrackFilters != routeTrackFilters
 				|| this.fileVisibilityChanged
 				|| !Algorithms.stringsEqual(this.routeArticlePointsFilterByName, routeArticlePointsFilterByName)) {
 			this.filters = selectedPoiFilters;
@@ -374,7 +365,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			this.routeTrackAsPoiFilterEnabled = routeTrackAsPoiFilterEnabled;
 			this.routeArticleFilter = routeArticleFilter;
 			this.routeArticlePointsFilter = routeArticlePointsFilter;
-			this.routeTrackFilter = routeTrackFilter;
+			this.routeTrackFilters = routeTrackFilters;
 			this.routeArticlePointsFilterByName = routeArticlePointsFilterByName;
 			this.fileVisibilityChanged = false;
 			data.clearCache();
@@ -602,26 +593,30 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	public boolean showMenuAction(@Nullable Object object) {
 		OsmandApplication app = view.getApplication();
 		MapActivity mapActivity = view.getMapActivity();
-		TravelHelper travelHelper = app.getTravelHelper();
 		if (mapActivity != null && object instanceof Amenity) {
+			TravelHelper travelHelper = app.getTravelHelper();
 			Amenity amenity = (Amenity) object;
-			if (amenity.getSubType().equals(ROUTE_TRACK)) {
-				TravelGpx travelGpx = travelHelper.searchGpx(amenity.getLocation(), amenity.getRouteId(), amenity.getRef());
-				if (travelGpx == null) {
+			String subType = amenity.getSubType();
+			if (amenity.getType().getKeyName().equals(ROUTES)) {
+				if (subType.equals(ROUTE_ARTICLE)) {
+					String lang = app.getLanguage();
+					lang = amenity.getContentLanguage(Amenity.DESCRIPTION, lang, "en");
+					String name = amenity.getGpxFileName(lang);
+					TravelArticle article = travelHelper.getArticleByTitle(name, lang, true, null);
+					if (article == null) {
+						return true;
+					}
+					travelHelper.openTrackMenu(article, mapActivity, name, amenity.getLocation(), false);
+					return true;
+				} else if (amenity.isRouteTrack()) {
+					TravelGpx travelGpx = travelHelper.searchGpx(amenity.getLocation(), amenity.getRouteId(), amenity.getRef());
+					if (travelGpx != null) {
+						travelHelper.openTrackMenu(travelGpx, mapActivity, amenity.getGpxFileName(null), amenity.getLocation(), false);
+					} else {
+						log.error("showMenuAction() searchGpx() travelGpx is null");
+					}
 					return true;
 				}
-				travelHelper.openTrackMenu(travelGpx, mapActivity, amenity.getRouteId(), amenity.getLocation());
-				return true;
-			} else if (amenity.getSubType().equals(ROUTE_ARTICLE)) {
-				String lang = app.getLanguage();
-				lang = amenity.getContentLanguage(Amenity.DESCRIPTION, lang, "en");
-				String name = amenity.getName(lang);
-				TravelArticle article = travelHelper.getArticleByTitle(name, lang, true, null);
-				if (article == null) {
-					return true;
-				}
-				travelHelper.openTrackMenu(article, mapActivity, name, amenity.getLocation());
-				return true;
 			}
 		}
 		return false;
