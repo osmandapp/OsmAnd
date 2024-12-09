@@ -5588,7 +5588,7 @@
     <string name="imperial_gallons">Britaj galjonoj</string>
     <string name="us_gallons">Usonaj galjonoj</string>
     <string name="unit_of_volume_description">Elektata mezurunuo estos aplikita al ĉiuj volumen-rilataj datumoj en la elektita profilo.</string>
-    <string name="unit_of_volume">Mezurunuo de volumeno</string>
+    <string name="unit_of_volume">Unuo de volumeno</string>
     <string name="dynamic_icon_type_summary">Bildsimbolo ŝanĝiĝas laŭ stato de ago.</string>
     <string name="shared_string_dynamic">Dinamika</string>
     <string name="obd_connected_to_device">Konektita kun %s</string>

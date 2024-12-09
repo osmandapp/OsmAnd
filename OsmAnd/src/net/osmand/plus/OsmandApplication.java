@@ -521,7 +521,12 @@ public class OsmandApplication extends MultiDexApplication {
 			density = displayMetrics.density;
 			getUIUtilities().clearCache();
 			PointImageUtils.clearCache();
-			getOsmandMap().getMapView().updateDisplayMetrics(displayMetrics, displayMetrics.widthPixels, displayMetrics.heightPixels - AndroidUtils.getStatusBarHeight(this));
+
+			OsmandMap osmandMap = getOsmandMap();
+			if (osmandMap != null) {
+				osmandMap.getMapView().updateDisplayMetrics(displayMetrics, displayMetrics.widthPixels,
+						displayMetrics.heightPixels - AndroidUtils.getStatusBarHeight(this));
+			}
 		}
 
 		Locale preferredLocale = localeHelper.getPreferredLocale();

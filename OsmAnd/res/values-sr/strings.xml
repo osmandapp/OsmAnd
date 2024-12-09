@@ -5681,4 +5681,7 @@
     <string name="auto_zoom_3d_angle">Ауто зум 3Д угао</string>
     <string name="vehicle_metrics_recording_description">Изаберите параметре који ће бити снимљени у ГПКС фајлу.</string>
     <string name="shared_string_engine">Мотор</string>
+    <string name="shared_string_interpolation">Интерполација</string>
+    <string name="location_interpolation_percent_desc">Поставите проценат интерполације локације током руте. Овај параметар смањује кашњење положаја ваше локације на мапи, током анимације.</string>
+    <string name="location_interpolation_percent">Проценат интерполације позиције</string>
 </resources>
