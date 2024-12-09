@@ -311,7 +311,7 @@ public class TravelObfHelper implements TravelHelper {
 		TravelGpx travelGpx = new TravelGpx();
 		travelGpx.file = file;
 		String title = amenity.getName("en");
-		travelGpx.title = createTitle(Algorithms.isEmpty(title) ? amenity.getName() : title);
+		travelGpx.title = Algorithms.isEmpty(title) ? amenity.getName() : title;
 		travelGpx.lat = amenity.getLocation().getLatitude();
 		travelGpx.lon = amenity.getLocation().getLongitude();
 		travelGpx.description = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.DESCRIPTION));
@@ -1210,7 +1210,7 @@ public class TravelObfHelper implements TravelHelper {
 				if (object.getPointsLength() > 1) {
 					if (object.getTagValue(REF).equals(article.ref)
 							&& (object.getTagValue(ROUTE_ID).equals(article.routeId)
-							|| createTitle(object.getName()).equals(article.getTitle()))) {
+							|| object.getName().equals(article.getTitle()))) {
 						segmentList.add(object);
 					}
 				}
@@ -1313,11 +1313,6 @@ public class TravelObfHelper implements TravelHelper {
 				gpxFile.addPointsGroup(pg);
 			}
 		}
-	}
-
-	@NonNull
-	public String createTitle(@NonNull String name) {
-		return capitalizeFirstLetter(GpxHelper.INSTANCE.getGpxTitle(name));
 	}
 
 	private class GpxFileReader extends AsyncTask<Void, Void, GpxFile> {
