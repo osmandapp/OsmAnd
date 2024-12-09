@@ -575,4 +575,46 @@ public class MapActions {
 
 		return builder.toString();
 	}
+
+	public void startNavigationForSegment(@NonNull GpxFile gpxFile, int selectedSegment,
+			@NonNull MapActivity mapActivity) {
+		settings.GPX_SEGMENT_INDEX.set(selectedSegment);
+		settings.GPX_ROUTE_INDEX.resetToDefault();
+		startNavigationForGpx(gpxFile, mapActivity);
+		GPXRouteParamsBuilder paramsBuilder = routingHelper.getCurrentGPXRoute();
+		if (paramsBuilder != null) {
+			paramsBuilder.setSelectedSegment(selectedSegment);
+			routingHelper.onSettingsChanged(true);
+		}
+	}
+
+	public void startNavigationForRoute(@NonNull GpxFile gpxFile, int selectedRoute,
+			@NonNull MapActivity mapActivity) {
+		settings.GPX_ROUTE_INDEX.set(selectedRoute);
+		settings.GPX_SEGMENT_INDEX.resetToDefault();
+		startNavigationForGpx(gpxFile, mapActivity);
+		GPXRouteParamsBuilder paramsBuilder = routingHelper.getCurrentGPXRoute();
+		if (paramsBuilder != null) {
+			paramsBuilder.setSelectedRoute(selectedRoute);
+			routingHelper.onSettingsChanged(true);
+		}
+	}
+
+	public void startNavigationForGpx(@NonNull GpxFile gpxFile, @NonNull MapActivity mapActivity) {
+		MapActivityActions mapActions = mapActivity.getMapActions();
+		if (mapActivity.getMyApplication().getRoutingHelper().isFollowingMode()) {
+			WeakReference<MapActivity> activityRef = new WeakReference<>(mapActivity);
+			mapActions.stopNavigationActionConfirm(null, () -> {
+				MapActivity activity = activityRef.get();
+				if (activity != null) {
+					mapActions.enterRoutePlanningModeGivenGpx(gpxFile, null, null,
+							null, true, true, MenuState.HEADER_ONLY);
+				}
+			});
+		} else {
+			mapActions.stopNavigationWithoutConfirm();
+			mapActions.enterRoutePlanningModeGivenGpx(gpxFile, null, null,
+					null, true, true, MenuState.HEADER_ONLY);
+		}
+	}
 }

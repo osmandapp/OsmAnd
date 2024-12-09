@@ -1196,7 +1196,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					if (TrackSelectSegmentBottomSheet.shouldShowForGpxFile(gpxFileToDisplay)) {
 						TrackSelectSegmentBottomSheet.showInstance(fragmentManager, gpxFileToDisplay, this);
 					} else {
-						GpxNavigationHelper.startNavigationForGpx(gpxFileToDisplay, mapActivity);
+						mapActivity.getMapActions().startNavigationForGpx(gpxFileToDisplay, mapActivity);
 						dismiss();
 					}
 				}
@@ -1623,7 +1623,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public void onSegmentSelect(@NonNull GpxFile gpxFile, int selectedSegment) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			GpxNavigationHelper.startNavigationForSegment(gpxFile, selectedSegment, mapActivity);
+			mapActivity.getMapActions().startNavigationForSegment(gpxFile, selectedSegment, mapActivity);
 			dismiss();
 		}
 	}
@@ -1632,7 +1632,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public void onRouteSelected(@NonNull GpxFile gpxFile, int selectedRoute) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			GpxNavigationHelper.startNavigationForRoute(gpxFile, selectedRoute, mapActivity);
+			mapActivity.getMapActions().startNavigationForRoute(gpxFile, selectedRoute, mapActivity);
 			dismiss();
 		}
 	}

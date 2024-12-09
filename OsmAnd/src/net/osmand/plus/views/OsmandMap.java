@@ -9,7 +9,6 @@ import net.osmand.Location;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.SurfaceRenderer;

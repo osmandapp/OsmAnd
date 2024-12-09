@@ -7,10 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.views.layers.MapActionsHelper;
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
 import net.osmand.plus.views.mapwidgets.configure.buttons.NavigationMenuButtonState;
 

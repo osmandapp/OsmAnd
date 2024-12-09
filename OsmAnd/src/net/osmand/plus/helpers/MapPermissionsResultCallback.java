@@ -12,11 +12,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
-import net.osmand.plus.auto.NavigationCarAppService;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.firstusage.FirstUsageWizardFragment;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.views.layers.MapActionsHelper;
 
 public class MapPermissionsResultCallback implements OnRequestPermissionsResultCallback {
 
@@ -31,7 +29,8 @@ public class MapPermissionsResultCallback implements OnRequestPermissionsResultC
 	}
 
 	@Override
-	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+			@NonNull int[] grantResults) {
 		if (grantResults.length > 0) {
 			OsmandApplication app = activity.getMyApplication();
 

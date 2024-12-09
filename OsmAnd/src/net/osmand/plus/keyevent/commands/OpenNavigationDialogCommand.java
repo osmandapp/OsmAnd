@@ -6,7 +6,6 @@ import android.view.KeyEvent;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
-import net.osmand.plus.views.layers.MapActionsHelper;
 
 public class OpenNavigationDialogCommand extends KeyEventCommand {
 

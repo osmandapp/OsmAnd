@@ -37,7 +37,6 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.views.layers.MapActionsHelper;
 
 import org.apache.commons.logging.Log;
 
