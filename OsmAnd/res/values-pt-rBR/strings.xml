@@ -5891,7 +5891,6 @@
     <string name="obd_engine_coolant_temp">Temperatura do líquido de arrefecimento</string>
     <string name="obd_fuel_level">Eficiência de combustível (%)</string>
     <string name="obd_fuel_consumption_rate">Taxa de consumo de combustível</string>
-    <string name="obd_fuel_left_distance">Combustível restante (distância)</string>
     <string name="obd_fuel_type">Tipo de combustível</string>
     <string name="obd_plugin_name">Métricas de veículos</string>
     <string name="reset_average_speed">Redefinir velocidade média</string>
@@ -5948,7 +5947,6 @@
     <string name="obd_fuel_left_liters">Combustível restante (litros)</string>
     <string name="obd_fuel_type_hybrid_hydrogen">Hidrogênio híbrido</string>
     <string name="shared_string_obd">OBD</string>
-    <string name="obd_rpm">RPM</string>
     <string name="rpm_unit">rpm</string>
     <string name="obd_fuel_level_desc">Mostra o nível de combustível do veículo pelo sensor OBD</string>
     <string name="obd_fuel_left_distance_desc">Mostra a distância que o veículo pode percorrer com o nível de combustível esquerdo no sensor OBD</string>
@@ -5957,7 +5955,6 @@
     <string name="obd_fuel_consumption_rate_sensor_desc">Mostra a taxa de consumo de combustível do veículo com base no sensor (l/h)</string>
     <string name="obd_fuel_level_liter">Nível de combustível (l)</string>
     <string name="obd_fuel_level_percent">Nível de combustível (%)</string>
-    <string name="obd_fuel_left_liter">Combustível restante (l)</string>
     <string name="obd_fuel_left_km">Combustível restante (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Taxa de consumo de combustível (obd)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Taxa de consumo de combustível l/h</string>
@@ -5967,7 +5964,6 @@
     <string name="obd_fuel_consumption_rate_l_h">Taxa de consumo de combustível (l/h)</string>
     <string name="obd_fuel_consumption_rate_l_h_desc">Mostra a taxa de consumo de combustível do veículo com base em cálculos (l/h)</string>
     <string name="route_guidance_desc">Fornece orientação de rota em tempo real, incluindo distância até a próxima curva, nome da estrada, nome da rua atual e informações sobre a pista. Os widgets ficam ativos durante a navegação.</string>
-    <string name="obd_fuel_left_percent">Combustível restante (%)</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Taxa de consumo de combustível %/h</string>
     <string name="third_links">Links de terceiros</string>
     <string name="obd_fuel_type_bifuel_hydrogen">Hidrogénio em funcionamento bicombustível</string>

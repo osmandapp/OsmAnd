@@ -2081,7 +2081,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (isFollowTrackMode()) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
-				mapActivity.getMapLayers().getMapActionsHelper().showRouteInfoControlDialog();
+				mapActivity.getMapActions().showRouteInfoControlDialog();
 				dismiss(mapActivity);
 			}
 		} else {

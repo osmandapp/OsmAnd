@@ -79,6 +79,14 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		this.gradientPalette = gradientPalette;
 	}
 
+	public boolean getDrawDirectionArrows() {
+		return drawDirectionArrows;
+	}
+
+	public void updateDrawDirectionArrows(boolean drawDirectionArrows) {
+		this.drawDirectionArrows = drawDirectionArrows;
+	}
+
 	public void updateSegment(RotatedTileBox tb, List<WptPt> points,
 	                          List<RouteSegmentResult> routeSegments, boolean forceUpdate) {
 		if (coloringChanged || forceUpdate || tb.getMapDensity() != getMapDensity()

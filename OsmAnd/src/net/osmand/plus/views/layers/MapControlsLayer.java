@@ -45,7 +45,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final OsmandMapTileView mapView;
-	private final MapActionsHelper mapActionsHelper;
 	private final MapTransparencyHelper mapTransparencyHelper;
 
 	private View mapHudContainer;
@@ -55,6 +54,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private MapRouteInfoMenu mapRouteInfoMenu;
 	private long touchEvent;
+	private boolean touchPrevFolowingMode;
 	private final Set<String> themeInfoProviderTags = new HashSet<>();
 	private WidgetsVisibilityHelper visibilityHelper;
 
@@ -68,13 +68,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		app = getApplication();
 		settings = app.getSettings();
 		mapView = app.getOsmandMap().getMapView();
-		mapActionsHelper = new MapActionsHelper(this);
-		mapTransparencyHelper = new MapTransparencyHelper(this);
-	}
 
-	@NonNull
-	public MapActionsHelper getMapActionsHelper() {
-		return mapActionsHelper;
+		mapTransparencyHelper = new MapTransparencyHelper(this);
 	}
 
 	@NonNull
@@ -85,9 +80,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	@Override
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
-
 		if (mapActivity != null) {
-			mapRouteInfoMenu = MapActivity.getMapRouteInfoMenu();
+			mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
 			visibilityHelper = mapActivity.getWidgetsVisibilityHelper();
 			initMapButtons();
 			mapTransparencyHelper.initTransparencyBar();
@@ -108,9 +102,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
-	protected void resetTouchEvent() {
-		touchEvent = 0;
-	}
 
 	@Nullable
 	public MapHudLayout getMapHudLayout() {
@@ -191,7 +182,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public void showMapControlsIfHidden() {
-		if (!isMapControlsVisible()) {
+		MapActivity activity = getMapActivity();
+		if (!isMapControlsVisible() && activity != null) {
 			showMapControls();
 		}
 	}
@@ -327,10 +319,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 		boolean isRoutePlanningMode = isInRoutePlanningMode();
 		boolean isRouteFollowingMode = !isRoutePlanningMode && app.getRoutingHelper().isFollowingMode();
+		if (!touchPrevFolowingMode && isRouteFollowingMode) {
+			touchEvent = 0;
+		}
 		boolean isTimeToShowButtons = System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS;
+
 		boolean shouldShowRouteCalculationControls = isRoutePlanningMode || ((app.accessibilityEnabled() || isTimeToShowButtons) && isRouteFollowingMode);
 		boolean isRouteDialogOpened = mapRouteInfoMenu.isVisible() || (shouldShowRouteCalculationControls && mapRouteInfoMenu.needShowMenu());
-
+		touchPrevFolowingMode = isRouteFollowingMode;
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
 		boolean androidAutoAttached = carNavigationSession != null && carNavigationSession.hasStarted();
 		boolean showBottomMenuButtons = visibilityHelper.shouldShowBottomMenuButtons()

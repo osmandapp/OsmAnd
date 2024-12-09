@@ -260,8 +260,8 @@ public class WidgetInfoFragment extends BaseWidgetFragment implements WidgetsCon
 	}
 
 	private void openSettingsFragment() {
-		WidgetSettingsBaseFragment settingsFragment = widgetType == null ? null : widgetType.getSettingsFragment(app, widgetInfo);
-		if (settingsFragment == null) {
+		WidgetSettingsBaseFragment fragment = widgetType == null ? null : widgetType.getSettingsFragment(app, widgetInfo);
+		if (fragment == null) {
 			throw new IllegalStateException("Widget has no available settings");
 		}
 
@@ -272,7 +272,7 @@ public class WidgetInfoFragment extends BaseWidgetFragment implements WidgetsCon
 			args.putString(APP_MODE_KEY, appMode.getStringKey());
 			args.putString(WIDGET_ID_KEY, widgetInfo.key);
 
-			WidgetSettingsBaseFragment.showFragment(fragmentManager, args, this, settingsFragment);
+			WidgetSettingsBaseFragment.showFragment(fragmentManager, args, fragment, this);
 		}
 	}
 

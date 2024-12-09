@@ -43,17 +43,24 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 	private Map<TrackFilterType, List<TrackItem>> filterSpecificSearchResults = new HashMap<>();
 	@Nullable
 	private TrackFolder currentFolder;
+	@Nullable
+	private List<BaseTrackFilter> initialSelectedFilters;
 
 	private OsmandApplication app;
 
-	public TracksSearchFilter(@NonNull OsmandApplication app, @NonNull List<TrackItem> trackItems) {
-		this(app, trackItems, null);
+	public TracksSearchFilter(@NonNull OsmandApplication app, @NonNull List<TrackItem> trackItems, @Nullable List<BaseTrackFilter> initialSelectedFilters) {
+		this(app, trackItems, null, initialSelectedFilters);
 	}
 
-	public TracksSearchFilter(@NonNull OsmandApplication app, @NonNull List<TrackItem> trackItems, @Nullable TrackFolder currentFolder) {
+	public TracksSearchFilter(@NonNull OsmandApplication app, @NonNull List<TrackItem> trackItems) {
+		this(app, trackItems, null, null);
+	}
+
+	public TracksSearchFilter(@NonNull OsmandApplication app, @NonNull List<TrackItem> trackItems, @Nullable TrackFolder currentFolder, @Nullable List<BaseTrackFilter> initialSelectedFilters) {
 		this.app = app;
 		this.trackItems = trackItems;
 		this.currentFolder = currentFolder;
+		this.initialSelectedFilters = initialSelectedFilters;
 		initFilters(app);
 	}
 
@@ -73,12 +80,10 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 					dateFilter.setValueFrom(minDate);
 					dateFilter.setValueTo(now);
 				}
-				for (TrackFilterType trackFilterType : TrackFilterType.values()) {
+				for (TrackFilterType trackFilterType : TrackFilterType.getEntries()) {
 					switch (trackFilterType.getFilterType()) {
-						case RANGE:
-							updateRangeFilterMaxValue(trackFilterType);
-							break;
-						case SINGLE_FIELD_LIST:
+						case RANGE -> updateRangeFilterMaxValue(trackFilterType);
+						case SINGLE_FIELD_LIST -> {
 							ListTrackFilter filter = (ListTrackFilter) getFilterByType(trackFilterType);
 							if (filter != null) {
 								SingleFieldTrackFilterParams filterParams = (SingleFieldTrackFilterParams) trackFilterType.getAdditionalData();
@@ -95,9 +100,12 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 									}
 								}
 							}
-							break;
-						default:
-							break;
+						}
+						default -> {
+						}
+					}
+					if (initialSelectedFilters != null) {
+						fillFiltersWithValues(initialSelectedFilters);
 					}
 				}
 				return null;
@@ -261,11 +269,15 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 	public void initSelectedFilters(@Nullable List<BaseTrackFilter> selectedFilters) {
 		if (selectedFilters != null) {
 			initFilters(app);
-			for (BaseTrackFilter filter : getCurrentFilters()) {
-				for (BaseTrackFilter selectedFilter : selectedFilters) {
-					if (filter.getTrackFilterType() == selectedFilter.getTrackFilterType()) {
-						filter.initWithValue(selectedFilter);
-					}
+			fillFiltersWithValues(selectedFilters);
+		}
+	}
+
+	private void fillFiltersWithValues(@NonNull List<BaseTrackFilter> selectedFilters) {
+		for (BaseTrackFilter filter : getCurrentFilters()) {
+			for (BaseTrackFilter selectedFilter : selectedFilters) {
+				if (filter.getTrackFilterType() == selectedFilter.getTrackFilterType()) {
+					filter.initWithValue(selectedFilter);
 				}
 			}
 		}

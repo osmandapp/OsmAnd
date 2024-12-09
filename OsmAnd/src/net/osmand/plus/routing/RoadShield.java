@@ -4,9 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.binary.RouteDataObject;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class RoadShield {
@@ -41,6 +45,42 @@ public class RoadShield {
 					shield.additional = additional;
 				}
 			}
+		}
+		return shields;
+	}
+
+	@NonNull
+	public static List<RoadShield> createDestination(@Nullable RouteDataObject rdo, RouteDirectionInfo info) {
+		List<RoadShield> shields = create(rdo);
+		String destRef = info.getDestinationRef();
+		if (rdo != null && !Algorithms.isEmpty(destRef) && !shields.isEmpty()) {
+			String refs = Algorithms.splitAndClearRepeats(destRef, ";");
+			List<String> split = Arrays.asList(refs.split(";"));
+			Map<String, RoadShield> map = new HashMap<>();
+			String tag = null;
+			StringBuilder additional = new StringBuilder();
+			for (RoadShield s : shields) {
+				map.put(s.value, s);
+				if (split.contains(s.value)) {
+					tag = s.tag;
+				}
+				additional = s.additional;
+			}
+
+			shields.clear();
+			if (tag == null) {
+				return shields;
+			}
+			for (String s : split) {
+				RoadShield shield = map.get(s);
+				if (shield == null) {
+					shield = new RoadShield(rdo, tag, s);
+					shield.additional = additional;
+				}
+				shields.add(shield);
+				map.remove(s);
+			}
+			shields.addAll(map.values());
 		}
 		return shields;
 	}

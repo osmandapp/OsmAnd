@@ -66,7 +66,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 	@Override
 	protected Void doInBackground(Void... voids) {
 		long start = System.currentTimeMillis();
-		LOG.info("Start loading tracks in " + folder.getDirName());
+		LOG.info("Start loading tracks in " + folder.getDirName(true));
 
 		folder.clearData();
 		loadingTime = System.currentTimeMillis();

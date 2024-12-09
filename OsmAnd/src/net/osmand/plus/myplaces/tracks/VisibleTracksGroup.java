@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.shared.gpx.data.TracksGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -20,6 +21,12 @@ public class VisibleTracksGroup implements TracksGroup {
 	public VisibleTracksGroup(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.selectedGpxHelper = app.getSelectedGpxHelper();
+	}
+
+	@NonNull
+	@Override
+	public String getId() {
+		return TrackTabType.ON_MAP.name();
 	}
 
 	@NonNull

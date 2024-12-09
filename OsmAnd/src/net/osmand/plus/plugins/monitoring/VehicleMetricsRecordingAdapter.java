@@ -3,6 +3,7 @@ package net.osmand.plus.plugins.monitoring;
 import static net.osmand.plus.plugins.monitoring.VehicleMetricsRecordingFragment.*;
 
 import android.annotation.SuppressLint;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.shared.obd.OBDCommand;
@@ -185,11 +187,13 @@ public class VehicleMetricsRecordingAdapter extends RecyclerView.Adapter<Recycle
 	class CategoryHolder extends RecyclerView.ViewHolder {
 		private final View itemView;
 		private final TextView textView;
+		private final ImageView imageView;
 
 		public CategoryHolder(@NonNull View itemView) {
 			super(itemView);
 			this.itemView = itemView;
 			textView = itemView.findViewById(android.R.id.title);
+			imageView = itemView.findViewById(android.R.id.icon);
 		}
 
 		public void bindView(@NonNull VehicleMetricsRecordingCategory category) {
@@ -199,6 +203,13 @@ public class VehicleMetricsRecordingAdapter extends RecyclerView.Adapter<Recycle
 			int dp36 = getDimen(app, R.dimen.showAllButtonHeight);
 			itemView.setMinimumHeight(dp36);
 			textView.setText(category.titleId);
+
+			LinearLayout.LayoutParams currentImageParams = (LinearLayout.LayoutParams) imageView.getLayoutParams();
+			int size = app.getResources().getDimensionPixelSize(R.dimen.standard_icon_size);
+			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(size, size);
+			params.gravity = Gravity.CENTER;
+			params.setMargins(currentImageParams.leftMargin, currentImageParams.topMargin, AndroidUtils.dpToPx(app, 8), currentImageParams.bottomMargin);
+			imageView.setLayoutParams(params);
 		}
 	}
 

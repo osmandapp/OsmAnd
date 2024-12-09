@@ -3,6 +3,7 @@ package net.osmand.plus.backup;
 import static net.osmand.plus.backup.BackupHelper.INFO_EXT;
 import static net.osmand.plus.backup.BackupUtils.getRemoteFilesSettingsItems;
 import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_FILE_SIZE_BYTES;
+import static net.osmand.plus.settings.backend.backup.SettingsItemType.QUICK_ACTIONS;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +25,7 @@ import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -35,17 +37,8 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicInteger;
 
 class BackupImporter {
@@ -260,7 +253,8 @@ class BackupImporter {
 			json.put("items", itemsJson);
 
 			List<RemoteFile> uniqueRemoteFiles = new ArrayList<>();
-			collectUniqueRemoteFiles(remoteFiles, uniqueRemoteFiles);
+			Map<String, RemoteFile> deletedRemoteFilesMap = new HashMap<>();
+			collectUniqueAndDeletedRemoteFiles(remoteFiles, uniqueRemoteFiles, deletedRemoteFilesMap);
 			operationLog.log("build uniqueRemoteFiles");
 
 			Set<String> remoteInfoNames = new HashSet<>();
@@ -275,11 +269,13 @@ class BackupImporter {
 			collectNoInfoRemoteItemFiles(noInfoRemoteItemFiles, remoteItemFilesMap, remoteInfoNames);
 			operationLog.log("build noInfoRemoteItemFiles");
 
-			if (readItems) {
-				generateItemsJson(itemsJson, remoteInfoFilesMap, noInfoRemoteItemFiles);
-			} else {
-				generateItemsJson(itemsJson, remoteInfoFiles, noInfoRemoteItemFiles);
+			if (readItems || !Algorithms.isEmpty(remoteInfoFilesMap)) {
+				generateItemsJson(itemsJson, remoteInfoFilesMap, remoteInfoFiles);
 			}
+			if (!readItems) {
+				generateItemsJson(itemsJson, remoteInfoFiles);
+			}
+			addRemoteFilesToJson(itemsJson, noInfoRemoteItemFiles);
 			operationLog.log("generateItemsJson");
 
 			SettingsItemsFactory itemsFactory = new SettingsItemsFactory(backupHelper.getApp(), json);
@@ -289,6 +285,7 @@ class BackupImporter {
 				return Collections.emptyList();
 			}
 			updateFilesInfo(remoteItemFilesMap, settingsItemList, restoreDeleted);
+			updateFilesInfo(deletedRemoteFilesMap, settingsItemList, restoreDeleted);
 			items.addAll(settingsItemList);
 			operationLog.log("updateFilesInfo");
 			operationLog.finishOperation();
@@ -302,11 +299,18 @@ class BackupImporter {
 		return items;
 	}
 
-	private void collectUniqueRemoteFiles(@NonNull List<RemoteFile> remoteFiles, @NonNull List<RemoteFile> uniqueRemoteFiles) {
+	private void collectUniqueAndDeletedRemoteFiles(@NonNull List<RemoteFile> remoteFiles,
+			@NonNull List<RemoteFile> uniqueRemoteFiles,
+			@NonNull Map<String, RemoteFile> deletedRemoteFiles) {
 		Set<String> uniqueFileIds = new TreeSet<>();
 		for (RemoteFile rf : remoteFiles) {
 			String fileId = rf.getTypeNamePath();
-			if (!rf.isDeleted() && uniqueFileIds.add(fileId)) {
+			if (rf.isDeleted()) {
+				String fileName = rf.getTypeNamePath();
+				if (!fileName.endsWith(INFO_EXT) && !deletedRemoteFiles.containsKey(fileName)) {
+					deletedRemoteFiles.put(fileName, rf);
+				}
+			} else if (uniqueFileIds.add(fileId)) {
 				uniqueRemoteFiles.add(rf);
 			}
 		}
@@ -335,7 +339,8 @@ class BackupImporter {
 				}
 				UploadedFileInfo fileInfo = infoMap.get(remoteFile.getType() + "___" + origFileName);
 				long uploadTime = fileInfo != null ? fileInfo.getUploadTime() : 0;
-				if (readItems && (uploadTime != remoteFile.getUpdatetimems() || delete)) {
+				if (shouldDownloadOnCollecting(remoteFile, readItems)
+						&& (uploadTime != remoteFile.getUpdatetimems() || delete)) {
 					remoteInfoFilesMap.put(new File(tempDir, fileName), remoteFile);
 				}
 				String itemFileName = fileName.substring(0, fileName.length() - INFO_EXT.length());
@@ -402,9 +407,7 @@ class BackupImporter {
 		return res;
 	}
 
-	private void generateItemsJson(@NonNull JSONArray itemsJson,
-	                               @NonNull List<RemoteFile> remoteInfoFiles,
-	                               @NonNull List<RemoteFile> noInfoRemoteItemFiles) throws JSONException {
+	private void generateItemsJson(@NonNull JSONArray itemsJson, @NonNull List<RemoteFile> remoteInfoFiles) throws JSONException {
 		for (RemoteFile remoteFile : remoteInfoFiles) {
 			String fileName = remoteFile.getName();
 			fileName = fileName.substring(0, fileName.length() - INFO_EXT.length());
@@ -426,22 +429,23 @@ class BackupImporter {
 			itemJson.put("file", fileName);
 			itemsJson.put(itemJson);
 		}
-		addRemoteFilesToJson(itemsJson, noInfoRemoteItemFiles);
 	}
 
 	private void generateItemsJson(@NonNull JSONArray itemsJson,
-	                               @NonNull Map<File, RemoteFile> remoteInfoFiles,
-	                               @NonNull List<RemoteFile> noInfoRemoteItemFiles) throws JSONException, IOException {
+	                               @NonNull Map<File, RemoteFile> remoteInfoFilesMap,
+	                               @NonNull List<RemoteFile> remoteInfoFiles) throws JSONException, IOException {
 		List<FileDownloadTask> tasks = new ArrayList<>();
-		for (Entry<File, RemoteFile> fileEntry : remoteInfoFiles.entrySet()) {
-			tasks.add(new FileDownloadTask(fileEntry.getKey(), fileEntry.getValue()));
+		for (Entry<File, RemoteFile> fileEntry : remoteInfoFilesMap.entrySet()) {
+			RemoteFile remoteFile = fileEntry.getValue();
+			tasks.add(new FileDownloadTask(fileEntry.getKey(), remoteFile));
+			remoteInfoFiles.remove(remoteFile);
 		}
 		ThreadPoolTaskExecutor<FileDownloadTask> executor = createExecutor();
 		executor.run(tasks);
 
 		boolean hasDownloadErrors = hasDownloadErrors(tasks);
 		if (!hasDownloadErrors) {
-			for (File file : remoteInfoFiles.keySet()) {
+			for (File file : remoteInfoFilesMap.keySet()) {
 				String jsonStr = Algorithms.getFileAsString(file);
 				if (!Algorithms.isEmpty(jsonStr)) {
 					itemsJson.put(new JSONObject(jsonStr));
@@ -452,7 +456,11 @@ class BackupImporter {
 		} else {
 			throw new IOException("Error downloading items info");
 		}
-		addRemoteFilesToJson(itemsJson, noInfoRemoteItemFiles);
+	}
+
+	private boolean shouldDownloadOnCollecting(@NonNull RemoteFile remoteFile, boolean defValue) {
+		String type = remoteFile.getType();
+		return defValue || CollectionUtils.equalsToAny(type, QUICK_ACTIONS.name());
 	}
 
 	private void addRemoteFilesToJson(@NonNull JSONArray itemsJson, @NonNull List<RemoteFile> noInfoRemoteItemFiles) throws JSONException {
@@ -559,13 +567,15 @@ class BackupImporter {
 		for (SettingsItem settingsItem : settingsItemList) {
 			List<RemoteFile> foundRemoteFiles = getItemRemoteFiles(settingsItem, remoteFilesMap);
 			for (RemoteFile remoteFile : foundRemoteFiles) {
-				if (!restoreDeleted) {
-					settingsItem.setLastModifiedTime(remoteFile.getClienttimems());
-				}
 				remoteFile.item = settingsItem;
-				if (settingsItem instanceof FileSettingsItem) {
-					FileSettingsItem fileSettingsItem = (FileSettingsItem) settingsItem;
-					fileSettingsItem.setSize(remoteFile.getFilesize());
+
+				if (!remoteFile.isDeleted()) {
+					if (!restoreDeleted) {
+						settingsItem.setLastModifiedTime(remoteFile.getClienttimems());
+					}
+					if (settingsItem instanceof FileSettingsItem item) {
+						item.setSize(remoteFile.getFilesize());
+					}
 				}
 			}
 		}

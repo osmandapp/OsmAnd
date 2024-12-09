@@ -449,7 +449,8 @@ public class RouteCalculationResult {
 					String lang = ctx.getSettings().MAP_PREFERRED_LOCALE.get();
 					boolean transliterate = ctx.getSettings().MAP_TRANSLITERATE_NAMES.get();
 					info.setStreetName(current.getStreetName(lang, transliterate, list, lind));
-					info.setDestinationName(current.getDestinationName(lang, transliterate, list, lind));
+					info.setDestinationName(current.getDestinationName(lang, transliterate, list, lind, false));
+					info.setDestinationRef(current.getObject().getDestinationRef(lang, transliterate, current.isForwardDirection()));
 
 					RouteDataObject rdoWithShield = null;
 					RouteDataObject rdoWithoutShield = null;
@@ -458,7 +459,7 @@ public class RouteCalculationResult {
 						exitInfo.setRef(current.getObject().getExitRef());
 						exitInfo.setExitStreetName(current.getObject().getExitName());
 						info.setExitInfo(exitInfo);
-						if (routeInd > 0 && (exitInfo.getRef() != null || exitInfo.getExitStreetName() != null)) {
+						if (!exitInfo.isEmpty() && info.getDestinationRef() == null && routeInd > 0) {
 							// set ref and road name (or shield icon) from previous segment because exit point is not consist of highway ref
 							RouteSegmentResult previous;
 							previous = list.get(routeInd - 1);
@@ -492,7 +493,7 @@ public class RouteCalculationResult {
 				}
 
 				String description = toString(turn, ctx, false) + " " + RoutingHelperUtils.formatStreetName(info.getStreetName(),
-						info.getRef(), info.getDestinationName(), ctx.getString(R.string.towards));
+						info.getRef(), info.getDestinationRefAndName(), ctx.getString(R.string.towards));
 				description = description.trim();
 				String[] pointNames = s.getObject().getPointNames(s.getStartPointIndex());
 				if (pointNames != null) {
@@ -1159,6 +1160,27 @@ public class RouteCalculationResult {
 
 	public int getNextIntermediate() {
 		return nextIntermediate;
+	}
+
+	public int getCurrentRouteForLocation(@NonNull Location location) {
+		int currentRoute = this.currentRoute;
+		if (currentRoute == 0) {
+			return 0;
+		}
+		Location previousRouteLocation = locations.get(currentRoute - 1);
+		Location currentRouteLocation = locations.get(currentRoute);
+		while (currentRoute > 1) {
+			double projCoeff = MapUtils.getProjectionCoeff(location.getLatitude(), location.getLongitude(),
+					previousRouteLocation.getLatitude(), previousRouteLocation.getLongitude(),
+					currentRouteLocation.getLatitude(), currentRouteLocation.getLongitude());
+			if (projCoeff != 0) {
+				break;
+			}
+			currentRoute--;
+			previousRouteLocation = locations.get(currentRoute - 1);
+			currentRouteLocation = locations.get(currentRoute);
+		}
+		return currentRoute;
 	}
 
 	@Nullable

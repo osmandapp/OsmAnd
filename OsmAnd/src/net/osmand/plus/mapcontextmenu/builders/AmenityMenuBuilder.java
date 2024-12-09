@@ -21,7 +21,6 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
-import java.util.List;
 import java.util.Map;
 
 public class AmenityMenuBuilder extends MenuBuilder {
@@ -60,6 +59,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		buildNearestRows((ViewGroup) view);
 		rowsBuilder.buildNamesRow((ViewGroup) view, amenity.getAltNamesMap(), true);
 		rowsBuilder.buildNamesRow((ViewGroup) view, amenity.getNamesMap(true), false);
+		if (!rowsBuilder.isFirstRow()) {
+			firstRow = rowsBuilder.isFirstRow();
+		}
 	}
 
 	private void buildNearestRows(ViewGroup viewGroup) {
@@ -70,69 +72,61 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	private void buildNearestWiki(ViewGroup viewGroup) {
 		int position = viewGroup.getChildCount();
 		WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(viewGroup);
-		buildNearestWikiRow(viewGroup, new SearchAmenitiesListener() {
-			@Override
-			public void onFinish(List<Amenity> amenities) {
-				ViewGroup viewGroup = viewGroupRef.get();
-				if (viewGroup == null || Algorithms.isEmpty(amenities)) {
-					return;
-				}
-				String title = app.getString(R.string.wiki_around);
-				String count = "(" + amenities.size() + ")";
-				String text = app.getString(R.string.ltr_or_rtl_combine_via_space, title, count);
-
-				Context context = viewGroup.getContext();
-				AmenityInfoRow wikiInfo = new AmenityInfoRow(
-						NEAREST_WIKI_KEY, R.drawable.ic_plugin_wikipedia, null, text,
-						null, true, getCollapsableView(context, true, amenities, NEAREST_WIKI_KEY),
-						0, false, false, false, 1000, null, false, false, false, 0);
-
-				View amenitiesRow = createRowContainer(context, NEAREST_WIKI_KEY);
-
-				int insertIndex = position == 0 ? 0 : position + 1;
-
-				firstRow = insertIndex == 0 || isDividerAtPosition(viewGroup, insertIndex - 1);
-				rowsBuilder.buildAmenityRow(amenitiesRow, wikiInfo);
-				viewGroup.addView(amenitiesRow, insertIndex);
-
-				buildNearestRowDividerIfMissing(viewGroup, insertIndex);
+		buildNearestWikiRow(viewGroup, amenities -> {
+			ViewGroup group = viewGroupRef.get();
+			if (group == null || Algorithms.isEmpty(amenities)) {
+				return;
 			}
+			String title = app.getString(R.string.wiki_around);
+			String count = "(" + amenities.size() + ")";
+			String text = app.getString(R.string.ltr_or_rtl_combine_via_space, title, count);
+
+			Context context = group.getContext();
+			AmenityInfoRow wikiInfo = new AmenityInfoRow(
+					NEAREST_WIKI_KEY, R.drawable.ic_plugin_wikipedia, null, text,
+					null, true, getCollapsableView(context, true, amenities, NEAREST_WIKI_KEY),
+					0, false, false, false, 1000, null, false, false, false, 0);
+
+			View amenitiesRow = createRowContainer(context, NEAREST_WIKI_KEY);
+
+			firstRow = position == 0 || isDividerAtPosition(group, position - 1);
+			rowsBuilder.buildAmenityRow(amenitiesRow, wikiInfo);
+			group.addView(amenitiesRow, position);
+
+			buildNearestRowDividerIfMissing(group, position);
 		});
 	}
 
 	private void buildNearestPoi(ViewGroup viewGroup) {
 		int position = viewGroup.getChildCount();
 		WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(viewGroup);
-		buildNearestPoiRow(new SearchAmenitiesListener() {
-			@Override
-			public void onFinish(List<Amenity> amenities) {
-				ViewGroup viewGroup = viewGroupRef.get();
-				if (viewGroup == null) {
-					return;
-				}
-				String title = app.getString(R.string.speak_poi);
-				String type = "\"" + AmenityMenuController.getTypeStr(amenity) + "\"";
-				String count = "(" + amenities.size() + ")";
-				String text = app.getString(R.string.ltr_or_rtl_triple_combine_via_space, title, type, count);
-
-				Context context = viewGroup.getContext();
-				AmenityInfoRow poiInfo = new AmenityInfoRow(
-						NEAREST_POI_KEY, AmenityMenuController.getRightIconId(amenity), null, text,
-						null, true, getCollapsableView(context, true, amenities, NEAREST_POI_KEY),
-						0, false, false, false, 1000, null, false, false, false, 0);
-
-				View wikiRow = viewGroup.findViewWithTag(NEAREST_WIKI_KEY);
-				int insertIndex = wikiRow != null
-						? viewGroup.indexOfChild(wikiRow) + 1
-						: position == 0 ? 0 : position + 1;
-
-				View amenitiesRow = createRowContainer(context, NEAREST_POI_KEY);
-				firstRow = insertIndex == 0 || isDividerAtPosition(viewGroup, insertIndex - 1);
-				rowsBuilder.buildAmenityRow(amenitiesRow, poiInfo);
-				viewGroup.addView(amenitiesRow, insertIndex);
-
-				buildNearestRowDividerIfMissing(viewGroup, insertIndex);
+		buildNearestPoiRow(amenities -> {
+			ViewGroup group = viewGroupRef.get();
+			if (group == null) {
+				return;
 			}
+			String title = app.getString(R.string.speak_poi);
+			String type = "\"" + AmenityMenuController.getTypeStr(amenity) + "\"";
+			String count = "(" + amenities.size() + ")";
+			String text = app.getString(R.string.ltr_or_rtl_triple_combine_via_space, title, type, count);
+
+			Context context = group.getContext();
+			AmenityInfoRow poiInfo = new AmenityInfoRow(
+					NEAREST_POI_KEY, AmenityMenuController.getRightIconId(amenity), null, text,
+					null, true, getCollapsableView(context, true, amenities, NEAREST_POI_KEY),
+					0, false, false, false, 1000, null, false, false, false, 0);
+
+			View wikiRow = group.findViewWithTag(NEAREST_WIKI_KEY);
+			int insertIndex = wikiRow != null
+					? group.indexOfChild(wikiRow) + 1
+					: position;
+
+			View amenitiesRow = createRowContainer(context, NEAREST_POI_KEY);
+			firstRow = insertIndex == 0 || isDividerAtPosition(group, insertIndex - 1);
+			rowsBuilder.buildAmenityRow(amenitiesRow, poiInfo);
+			group.addView(amenitiesRow, insertIndex);
+
+			buildNearestRowDividerIfMissing(group, insertIndex);
 		});
 	}
 

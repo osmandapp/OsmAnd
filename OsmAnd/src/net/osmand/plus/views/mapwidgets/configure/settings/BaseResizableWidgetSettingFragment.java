@@ -12,11 +12,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SwitchCompat;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.utils.ColorUtilities;
@@ -33,14 +31,14 @@ public class BaseResizableWidgetSettingFragment extends WidgetSettingsBaseFragme
 	private static final String SELECTED_WIDGET_SIZE_ID_KEY = "selected_widget_id_size";
 	protected static final String WIDGET_TYPE_KEY = "widget_type_key";
 
-	public OsmandPreference<WidgetSize> widgetSizePref;
-	private WidgetType widgetType;
+	protected OsmandPreference<WidgetSize> widgetSizePref;
+	protected WidgetType widgetType;
 	@Nullable
 	private MapWidgetInfo widgetInfo;
 
 	private WidgetSize selectedWidgetSize;
 
-	public void setWidgetType(WidgetType widgetType) {
+	public void setWidgetType(@NonNull WidgetType widgetType) {
 		this.widgetType = widgetType;
 	}
 
@@ -108,7 +106,6 @@ public class BaseResizableWidgetSettingFragment extends WidgetSettingsBaseFragme
 			updateRowWidgets(widgetInfo);
 		}
 
-		widgetSizePref.set(selectedWidgetSize);
 		if (widgetInfo != null) {
 			if (widgetInfo.widget instanceof ISupportWidgetResizing widgetResizing) {
 				widgetResizing.recreateView();
@@ -119,13 +116,19 @@ public class BaseResizableWidgetSettingFragment extends WidgetSettingsBaseFragme
 
 	private void updateRowWidgets(@NonNull MapWidgetInfo widgetInfo) {
 		MapActivity activity = getMapActivity();
-		if (activity != null) {
-			List<Set<MapWidgetInfo>> widgets = widgetRegistry.getPagedWidgetsForPanel(activity,
-					appMode, widgetInfo.getWidgetPanel(), AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE);
+		if (activity == null) {
+			return;
+		}
+		List<Set<MapWidgetInfo>> widgets = widgetRegistry.getPagedWidgetsForPanel(activity,
+				appMode, widgetInfo.getWidgetPanel(), AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE);
 
-			Set<MapWidgetInfo> rowMapWidgetsInfo = widgets.get(widgetInfo.pageIndex);
-			rowMapWidgetsInfo.remove(widgetInfo);
-			applySizeSettingToWidgetsInRow(rowMapWidgetsInfo);
+		for (Set<MapWidgetInfo> rowMapWidgetsInfo : widgets) {
+			for (MapWidgetInfo info : rowMapWidgetsInfo) {
+				if (info == widgetInfo) {
+					applySizeSettingToWidgetsInRow(rowMapWidgetsInfo);
+					return;
+				}
+			}
 		}
 	}
 

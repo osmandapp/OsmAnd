@@ -883,6 +883,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (infoCard != null) {
 			infoCard.updateContent();
 		}
+		if (metadataExtensionsCard != null) {
+			metadataExtensionsCard.updateContent();
+		}
 	}
 
 	private void updateCardsLayout() {
@@ -1193,7 +1196,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					if (TrackSelectSegmentBottomSheet.shouldShowForGpxFile(gpxFileToDisplay)) {
 						TrackSelectSegmentBottomSheet.showInstance(fragmentManager, gpxFileToDisplay, this);
 					} else {
-						GpxNavigationHelper.startNavigationForGpx(gpxFileToDisplay, mapActivity);
+						mapActivity.getMapActions().startNavigationForGpx(gpxFileToDisplay, mapActivity);
 						dismiss();
 					}
 				}
@@ -1389,7 +1392,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				tileBoxHeightPx = tb.getPixHeight() - fHeight;
 			}
 			if (r.getLeft() != 0 && r.getRight() != 0) {
-				mapActivity.getMapView().fitRectToMap(r.getLeft(), r.getRight(), r.getTop(), r.getBottom(), tileBoxWidthPx, tileBoxHeightPx, 0, marginStartPx);
+				mapActivity.getMapView().fitRectToMap(r.getLeft(), r.getRight(), r.getTop(), r.getBottom(),
+						tileBoxWidthPx, tileBoxHeightPx, 0, marginStartPx);
 			}
 			adjustMapPosition = false;
 		}
@@ -1619,7 +1623,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public void onSegmentSelect(@NonNull GpxFile gpxFile, int selectedSegment) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			GpxNavigationHelper.startNavigationForSegment(gpxFile, selectedSegment, mapActivity);
+			mapActivity.getMapActions().startNavigationForSegment(gpxFile, selectedSegment, mapActivity);
 			dismiss();
 		}
 	}
@@ -1628,7 +1632,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public void onRouteSelected(@NonNull GpxFile gpxFile, int selectedRoute) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			GpxNavigationHelper.startNavigationForRoute(gpxFile, selectedRoute, mapActivity);
+			mapActivity.getMapActions().startNavigationForRoute(gpxFile, selectedRoute, mapActivity);
 			dismiss();
 		}
 	}

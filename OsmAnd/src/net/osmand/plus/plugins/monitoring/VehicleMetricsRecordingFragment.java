@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -82,6 +84,11 @@ public class VehicleMetricsRecordingFragment extends BaseOsmAndFragment {
 		updateNightMode();
 		View view = themedInflater.inflate(R.layout.vehicle_metrics_recording_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
+		Window window = requireMapActivity().getWindow();
+		if (window != null) {
+			window.setStatusBarColor(ContextCompat.getColor(requireMapActivity(), getStatusBarColorId()));
+			AndroidUiHelper.setStatusBarContentColor(window.getDecorView(), nightMode);
+		}
 
 		toolbar = view.findViewById(R.id.toolbar);
 		AppBarLayout appBarLayout = view.findViewById(R.id.app_bar);
@@ -108,7 +115,7 @@ public class VehicleMetricsRecordingFragment extends BaseOsmAndFragment {
 		}
 
 		updateSelectAllButton();
-		setupButtons(view);
+		setupButtons();
 		setupToolbar();
 		setupItems();
 
@@ -116,7 +123,7 @@ public class VehicleMetricsRecordingFragment extends BaseOsmAndFragment {
 	}
 
 	@SuppressLint("NotifyDataSetChanged")
-	private void setupButtons(@NonNull View view) {
+	private void setupButtons() {
 		selectAllButton.setOnClickListener(v -> {
 			if (areAllCommandsSelected()) {
 				selectedCommands.clear();

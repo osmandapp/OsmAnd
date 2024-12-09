@@ -1,9 +1,16 @@
 package net.osmand.plus.auto.screens
 
+import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.car.app.CarContext
-import androidx.car.app.model.*
+import androidx.car.app.model.Action
+import androidx.car.app.model.ActionStrip
+import androidx.car.app.model.CarIcon
+import androidx.car.app.model.Item
+import androidx.car.app.model.ItemList
+import androidx.car.app.model.Row
+import androidx.car.app.model.Template
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
@@ -117,14 +124,7 @@ class LandingScreen(
             .setBrowsable(true)
             .setOnClickListener {
                 app.carNavigationSession?.let { carNavigationSession ->
-                    if (app.routingHelper.isRouteCalculated) {
-                        app.routingHelper.resumeNavigation()
-                    }
-                    carNavigationSession.startNavigation()
-                    val navigationScreen = carNavigationSession.navigationScreen
-                    navigationScreen?.let {
-                        screenManager.push(navigationScreen)
-                    }
+                    carNavigationSession.startNavigationScreen()
                 }
             }
             .build()

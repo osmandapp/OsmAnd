@@ -354,7 +354,7 @@
     <string name="poi_craft_photographic_laboratory">Fotolabor</string>
     <string name="poi_physiotherapist">Physiotherapeut</string>
     <string name="poi_picnic_site">Picknickplatz</string>
-    <string name="poi_pier">Hafendamm</string>
+    <string name="poi_pier">Pier</string>
     <string name="poi_pitch">Sportplatz</string>
     <string name="poi_place_allotments">Kleingartensiedlung</string>
     <string name="poi_place_farm">Farm</string>
@@ -3101,7 +3101,7 @@
     <string name="poi_animal_shelter_purpose">Tierheimzweck</string>
     <string name="poi_owner">Eigentümer</string>
     <string name="poi_spaceport">Raumfahrtzentrum</string>
-    <string name="poi_lock_basin">Schiffsschleuse</string>
+    <string name="poi_lock_basin">Schleusenkammer</string>
     <string name="poi_animal_shelter_purpose_adoption_yes">Vermittlung: ja</string>
     <string name="poi_animal_shelter_purpose_adoption_no">Vermittlung: nein</string>
     <string name="poi_animal_shelter_purpose_release_yes">Auswilderung: ja</string>
@@ -4569,8 +4569,8 @@
     <string name="poi_draft">Fahrwasserstiefe</string>
     <string name="poi_boat_destination">Bootszugang: Anlieger</string>
     <string name="poi_boat_permissive">Bootszugang: zulässig</string>
-    <string name="poi_lock_ref">Referenz einer Schleuse</string>
-    <string name="poi_lock_height">Höhe einer Schleuse</string>
+    <string name="poi_lock_ref">Schleusen-Referenz</string>
+    <string name="poi_lock_height">Schleusenhöhe</string>
     <string name="poi_boat_designated">Bootszugang: ausgewiesen</string>
     <string name="poi_boat_private">Bootszugang: privat</string>
     <string name="poi_boat_yes">Bootszugang: ja</string>
@@ -4893,9 +4893,15 @@
     <string name="poi_activities_skiing">Wintersport</string>
     <string name="poi_activities_snowmobile">Schneemobil</string>
     <string name="poi_activities_fitness">Fitness-Parcour</string>
-    <string name="poi_activities_inline_skates">Inline-Skate</string>
+    <string name="poi_activities_inline_skates">Inlineskates</string>
     <string name="poi_activities_mountain_bike">Mountainbiken</string>
     <string name="poi_name_etymology">Namensetymologie</string>
     <string name="poi_name_left">Name der linken Seite</string>
     <string name="poi_name_right">Name der rechten Seite</string>
+    <string name="poi_camp_site_type">Campingplatz-Typ</string>
+    <string name="poi_camp_site_serviced">Betreut</string>
+    <string name="poi_camp_site_deluxe">De luxe</string>
+    <string name="poi_camp_site_standard">Standard</string>
+    <string name="poi_camp_site_basic">Einfach</string>
+    <string name="poi_climbing_boulder">Kletterfels</string>
 </resources>
