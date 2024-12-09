@@ -19,11 +19,11 @@ import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreferenceP
 class PreferencePathDisplayer implements de.KnollFrank.lib.settingssearch.results.recyclerview.PreferencePathDisplayer {
 
 	private final Context context;
-	private final Set<String> applicationModesKeys;
+	private final Set<String> applicationModeKeys;
 
-	public PreferencePathDisplayer(final Context context, final Set<String> applicationModesKeys) {
+	public PreferencePathDisplayer(final Context context, final Set<String> applicationModeKeys) {
 		this.context = context;
-		this.applicationModesKeys = applicationModesKeys;
+		this.applicationModeKeys = applicationModeKeys;
 	}
 
 	@Override
@@ -57,7 +57,7 @@ class PreferencePathDisplayer implements de.KnollFrank.lib.settingssearch.result
 	private boolean isApplicationMode(final SearchablePreferencePOJO preference) {
 		return preference
 				.getKey()
-				.filter(applicationModesKeys::contains)
+				.filter(applicationModeKeys::contains)
 				.isPresent();
 	}
 

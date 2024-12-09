@@ -10,10 +10,10 @@ import java.util.stream.Collectors;
 class PreferencePathDisplayerFactory {
 
 	public static de.KnollFrank.lib.settingssearch.results.recyclerview.PreferencePathDisplayer createPreferencePathDisplayer(final Context context) {
-		return new PreferencePathDisplayer(context, getApplicationModesKeys());
+		return new PreferencePathDisplayer(context, getApplicationModeKeys());
 	}
 
-	private static Set<String> getApplicationModesKeys() {
+	private static Set<String> getApplicationModeKeys() {
 		return ApplicationMode
 				.allPossibleValues()
 				.stream()
