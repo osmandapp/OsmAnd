@@ -37,15 +37,9 @@ class PreferencePathDisplayer implements de.KnollFrank.lib.settingssearch.result
 		return preferencePath
 				.preferences()
 				.stream()
-				.map(PreferencePathDisplayer::getTitle)
-				.collect(Collectors.toList());
-	}
-
-	private static SpannableString getTitle(final SearchablePreferencePOJO searchablePreferencePOJO) {
-		return searchablePreferencePOJO
-				.getTitle()
+				.map(preference -> preference.getTitle().orElse("?"))
 				.map(SpannableString::new)
-				.orElseGet(() -> new SpannableString("?"));
+				.collect(Collectors.toList());
 	}
 
 	private void highlightApplicationModeAtStartOfLongPreferencePath(final PreferencePath preferencePath, final List<SpannableString> titles) {
@@ -69,19 +63,19 @@ class PreferencePathDisplayer implements de.KnollFrank.lib.settingssearch.result
 				Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 	}
 
-	private static SpannableString join(final List<SpannableString> titles, final SpannableString delimiter) {
-		return appendAll(insert(titles, delimiter));
+	private static SpannableString join(final List<SpannableString> strings, final SpannableString delimiter) {
+		return concat(insertDelimiterBetweenElements(strings, delimiter));
 	}
 
-	private static <T> List<T> insert(final List<T> ts, final T delimiter) {
-		return ts
+	private static <T> List<T> insertDelimiterBetweenElements(final List<T> elements, final T delimiter) {
+		return elements
 				.stream()
 				.flatMap(t -> Stream.of(t, delimiter))
-				.limit(ts.size() * 2L - 1)
+				.limit(elements.size() * 2L - 1)
 				.collect(Collectors.toList());
 	}
 
-	private static SpannableString appendAll(final List<? extends CharSequence> charSequences) {
+	private static SpannableString concat(final List<? extends CharSequence> charSequences) {
 		final SpannableStringBuilder builder = new SpannableStringBuilder();
 		charSequences.forEach(builder::append);
 		return new SpannableString(builder);
