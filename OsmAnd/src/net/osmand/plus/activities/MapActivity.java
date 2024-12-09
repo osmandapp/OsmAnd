@@ -163,9 +163,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private final List<ActivityResultListener> activityResultListeners = new ArrayList<>();
 
 	private BroadcastReceiver screenOffReceiver;
-
 	private WidgetsVisibilityHelper mapWidgetsVisibilityHelper;
-
 	private ExtendedMapActivity extendedMapActivity;
 
 	// App variables
@@ -302,7 +300,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		mapViewWithLayers = findViewById(R.id.map_view_with_layers);
 
 		checkAppInitialization();
-
 
 		getMapActions().updateDrawerMenu();
 
@@ -946,7 +943,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onDestroy() {
 		super.onDestroy();
 		destroyProgressBarForRouting();
-		getMyApplication().getOsmandMap().getMapActions().setMapActivity(null);
+		getMapActions().setMapActivity(null);
 		getMapLayers().setMapActivity(null);
 		getMapView().setMapActivity(null);
 		mapContextMenu.setMapActivity(null);
@@ -1189,19 +1186,22 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return app.getOsmandMap().getMapView();
 	}
 
+	@NonNull
 	public MapViewTrackingUtilities getMapViewTrackingUtilities() {
 		return app.getMapViewTrackingUtilities();
 	}
 
+	@NonNull
 	public MapDisplayPositionManager getMapPositionManager() {
 		return app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
 	}
 
+	@NonNull
 	public MapActivityActions getMapActions() {
-		// TODO is it needed to cache this field for quick access? (it's singleton)
-		return getMyApplication().getOsmandMap().getMapActions();
+		return app.getOsmandMap().getMapActions();
 	}
 
+	@NonNull
 	public MapLayers getMapLayers() {
 		return app.getOsmandMap().getMapLayers();
 	}

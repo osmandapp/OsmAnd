@@ -13,32 +13,37 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 
-import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.OsmAndLocationProvider;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
-import net.osmand.plus.simulation.OsmAndLocationSimulation;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.shared.gpx.GpxFile;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityActions;
+import net.osmand.plus.base.ContextMenuFragment.MenuState;
+import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.plus.measurementtool.GpxApproximationParams;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.search.dialogs.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.simulation.OsmAndLocationSimulation;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.router.GeneralRouter;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.MapUtils;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class MapActions {
@@ -51,6 +56,9 @@ public class MapActions {
 
 	protected final OsmandApplication app;
 	protected final OsmandSettings settings;
+	protected final RoutingHelper routingHelper;
+	protected final TargetPointsHelper targetHelper;
+	protected final MapViewTrackingUtilities mapTrackingUtilities;
 
 	@Nullable
 	protected MapActivity activity;
@@ -62,16 +70,24 @@ public class MapActions {
 	public MapActions(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
+		this.routingHelper = app.getRoutingHelper();
+		this.targetHelper = app.getTargetPointsHelper();
+		this.mapTrackingUtilities = app.getMapViewTrackingUtilities();
 	}
 
-	public boolean hasUiContext() {
-		return false;
+	public void setMapActivity(@Nullable MapActivity activity) {
+		this.activity = activity;
+	}
+
+	@Nullable
+	public MapActivity getMapActivity() {
+		return activity;
 	}
 
 	public void setGPXRouteParams(@Nullable GpxFile gpxFile) {
 		app.logRoutingEvent("setGPXRouteParams result " + (gpxFile != null ? gpxFile.getPath() : null));
 		if (gpxFile == null) {
-			app.getRoutingHelper().setGpxParams(null);
+			routingHelper.setGpxParams(null);
 			settings.FOLLOW_THE_GPX_ROUTE.set(null);
 		} else {
 			GPXRouteParamsBuilder builder = new GPXRouteParamsBuilder(gpxFile, settings);
@@ -81,7 +97,7 @@ public class MapActions {
 			builder.setSelectedRoute(settings.GPX_ROUTE_INDEX.get());
 			builder.setPassWholeRoute(settings.GPX_PASS_WHOLE_ROUTE.get());
 
-			ApplicationMode appMode = app.getRoutingHelper().getAppMode();
+			ApplicationMode appMode = routingHelper.getAppMode();
 			if (!gpxFile.isAttachedToRoads() && settings.DETAILED_TRACK_GUIDANCE.getModeValue(appMode) == AUTOMATIC) {
 				GpxApproximationParams params = new GpxApproximationParams();
 				params.setAppMode(appMode);
@@ -90,21 +106,20 @@ public class MapActions {
 			}
 
 			List<Location> points = builder.getPoints(settings.getContext());
-			app.getRoutingHelper().setGpxParams(builder);
+			routingHelper.setGpxParams(builder);
 			settings.FOLLOW_THE_GPX_ROUTE.set(gpxFile.getPath());
 			if (!points.isEmpty()) {
 				Location startLoc = points.get(0);
 				Location finishLoc = points.get(points.size() - 1);
 				Location location = app.getLocationProvider().getLastKnownLocation();
 
-				TargetPointsHelper pointsHelper = app.getTargetPointsHelper();
-				pointsHelper.clearAllIntermediatePoints(false);
+				targetHelper.clearAllIntermediatePoints(false);
 				if (location == null || MapUtils.getDistance(location, startLoc) <= START_TRACK_POINT_MY_LOCATION_RADIUS_METERS) {
-					pointsHelper.clearStartPoint(false);
+					targetHelper.clearStartPoint(false);
 				} else {
-					pointsHelper.setStartPoint(new LatLon(startLoc.getLatitude(), startLoc.getLongitude()), false, null);
+					targetHelper.setStartPoint(new LatLon(startLoc.getLatitude(), startLoc.getLongitude()), false, null);
 				}
-				pointsHelper.navigateToPoint(new LatLon(finishLoc.getLatitude(), finishLoc.getLongitude()), false, -1);
+				targetHelper.navigateToPoint(new LatLon(finishLoc.getLatitude(), finishLoc.getLongitude()), false, -1);
 			}
 		}
 	}
@@ -113,30 +128,31 @@ public class MapActions {
 		enterRoutePlanningModeGivenGpx(null, from, fromName, true, true);
 	}
 
-	public void enterRoutePlanningModeGivenGpx(GpxFile gpxFile, LatLon from, PointDescription fromName,
-	                                           boolean useIntermediatePointsByDefault, boolean showMenu,
-	                                           @Nullable Boolean passWholeRoute) {
+	public void enterRoutePlanningModeGivenGpx(GpxFile gpxFile, LatLon from,
+			PointDescription fromName, boolean useIntermediatePointsByDefault, boolean showMenu,
+			@Nullable Boolean passWholeRoute) {
 		enterRoutePlanningModeGivenGpx(gpxFile, null, from, fromName,
 				useIntermediatePointsByDefault, showMenu,
 				MapRouteInfoMenu.DEFAULT_MENU_STATE, passWholeRoute);
 	}
 
-	public void enterRoutePlanningModeGivenGpx(GpxFile gpxFile, LatLon from, PointDescription fromName,
-	                                           boolean useIntermediatePointsByDefault, boolean showMenu) {
+	public void enterRoutePlanningModeGivenGpx(GpxFile gpxFile, LatLon from,
+			PointDescription fromName, boolean useIntermediatePointsByDefault, boolean showMenu) {
 		enterRoutePlanningModeGivenGpx(gpxFile, from, fromName, useIntermediatePointsByDefault, showMenu,
 				MapRouteInfoMenu.DEFAULT_MENU_STATE);
 	}
 
-	public void enterRoutePlanningModeGivenGpx(GpxFile gpxFile, LatLon from, PointDescription fromName,
-	                                           boolean useIntermediatePointsByDefault, boolean showMenu, int menuState) {
+	public void enterRoutePlanningModeGivenGpx(GpxFile gpxFile, LatLon from,
+			PointDescription fromName, boolean useIntermediatePointsByDefault, boolean showMenu,
+			int menuState) {
 		enterRoutePlanningModeGivenGpx(gpxFile, null, from, fromName, useIntermediatePointsByDefault, showMenu, menuState, null);
 	}
 
-	public void enterRoutePlanningModeGivenGpx(GpxFile gpxFile, ApplicationMode appMode, LatLon from, PointDescription fromName,
-	                                           boolean useIntermediatePointsByDefault, boolean showMenu, int menuState,
-	                                           @Nullable Boolean passWholeRoute) {
+	public void enterRoutePlanningModeGivenGpx(GpxFile gpxFile, ApplicationMode appMode,
+			LatLon from, PointDescription fromName,
+			boolean useIntermediatePointsByDefault, boolean showMenu, int menuState,
+			@Nullable Boolean passWholeRoute) {
 		settings.USE_INTERMEDIATE_POINTS_NAVIGATION.set(useIntermediatePointsByDefault);
-		TargetPointsHelper targets = app.getTargetPointsHelper();
 
 		if (gpxFile != null && gpxFile.hasRtePt() && appMode == null) {
 			WptPt routePoint = gpxFile.getRoutePoints().get(0);
@@ -149,7 +165,6 @@ public class MapActions {
 		if (app.getSettings().getApplicationMode() != ApplicationMode.DEFAULT) {
 			app.getSettings().setApplicationMode(mode, false);
 		}
-		RoutingHelper routingHelper = app.getRoutingHelper();
 		routingHelper.setAppMode(mode);
 		initVoiceCommandPlayer(mode, showMenu);
 		// save application mode controls
@@ -157,7 +172,7 @@ public class MapActions {
 		routingHelper.setFollowingMode(false);
 		routingHelper.setRoutePlanningMode(true);
 		// reset start point
-		targets.setStartPoint(from, false, fromName);
+		targetHelper.setStartPoint(from, false, fromName);
 		// then set gpx
 		setGPXRouteParams(gpxFile);
 		GPXRouteParamsBuilder currentGPXRoute = routingHelper.getCurrentGPXRoute();
@@ -166,12 +181,12 @@ public class MapActions {
 			currentGPXRoute.setPassWholeRoute(passWholeRoute);
 		}
 		// then update start and destination point
-		targets.updateRouteAndRefresh(true);
+		targetHelper.updateRouteAndRefresh(true);
 
-		app.getMapViewTrackingUtilities().switchRoutePlanningMode();
+		mapTrackingUtilities.switchRoutePlanningMode();
 		app.getOsmandMap().refreshMap(true);
 
-		if (targets.hasTooLongDistanceToNavigate()) {
+		if (targetHelper.hasTooLongDistanceToNavigate()) {
 			app.showToastMessage(R.string.route_is_too_long_v2);
 		}
 	}
@@ -183,26 +198,25 @@ public class MapActions {
 	public void recalculateRoute(boolean showDialog) {
 		app.logRoutingEvent("recalculateRoute showDialog " + showDialog);
 		settings.USE_INTERMEDIATE_POINTS_NAVIGATION.set(true);
-		TargetPointsHelper targets = app.getTargetPointsHelper();
 
 		ApplicationMode mode = getRouteMode();
 		//app.getSettings().setApplicationMode(mode, false);
-		app.getRoutingHelper().setAppMode(mode);
+		routingHelper.setAppMode(mode);
 		//Test for #2810: No need to init player here?
 		//app.initVoiceCommandPlayer(mapActivity, true, null, false, false);
 		// save application mode controls
 		settings.FOLLOW_THE_ROUTE.set(false);
-		app.getRoutingHelper().setFollowingMode(false);
-		app.getRoutingHelper().setRoutePlanningMode(true);
+		routingHelper.setFollowingMode(false);
+		routingHelper.setRoutePlanningMode(true);
 		// reset start point
-		targets.setStartPoint(null, false, null);
+		targetHelper.setStartPoint(null, false, null);
 		// then update start and destination point
-		targets.updateRouteAndRefresh(true);
+		targetHelper.updateRouteAndRefresh(true);
 
-		app.getMapViewTrackingUtilities().switchRoutePlanningMode();
+		mapTrackingUtilities.switchRoutePlanningMode();
 		app.getOsmandMap().refreshMap(true);
 
-		if (targets.hasTooLongDistanceToNavigate()) {
+		if (targetHelper.hasTooLongDistanceToNavigate()) {
 			app.showToastMessage(R.string.route_is_too_long_v2);
 		}
 	}
@@ -247,20 +261,11 @@ public class MapActions {
 		}
 	}
 
-
-	public void setMapActivity(MapActivity activity) {
-		this.activity = activity;
-	}
-
-	public MapActivity getMapActivity() {
-		return activity;
-	}
-
 	public void stopNavigation() {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			activity.getMapRouteInfoMenu().hide();
-			if (app.getRoutingHelper().isFollowingMode()) {
+			if (routingHelper.isFollowingMode()) {
 				activity.getMapActions().stopNavigationActionConfirm(null);
 			} else {
 				activity.getMapActions().stopNavigationWithoutConfirm();
@@ -303,9 +308,8 @@ public class MapActions {
 			mapRouteInfoMenu.cancelSelectionFromMap();
 			MapActivity.clearPrevActivityIntent();
 
-			RoutingHelper routingHelper = app.getRoutingHelper();
 			if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
-				TargetPointsHelper.TargetPoint start = app.getTargetPointsHelper().getPointToStart();
+				TargetPointsHelper.TargetPoint start = targetHelper.getPointToStart();
 				if (start != null) {
 					LatLon latLon = new LatLon(start.getLatitude(), start.getLongitude());
 					activity.getMapActions().enterRoutePlanningMode(latLon, start.getOriginalPointDescription());
@@ -318,7 +322,8 @@ public class MapActions {
 		}
 	}
 
-	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+	public void onRequestPermissionsResult(int requestCode, String[] permissions,
+			int[] grantResults) {
 		if ((requestCode == REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION
 				|| requestCode == REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION
 				|| requestCode == REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION)) {
@@ -359,12 +364,10 @@ public class MapActions {
 			PointDescription pointDescription = menu.getPointDescriptionForTarget();
 			menu.hide();
 
-			TargetPointsHelper targets = app.getTargetPointsHelper();
-			RoutingHelper routingHelper = app.getRoutingHelper();
 			if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
 				DirectionsDialogs.addWaypointDialogAndLaunchMap(activity, latLon.getLatitude(), latLon.getLongitude(), pointDescription);
-			} else if (targets.getIntermediatePoints().isEmpty()) {
-				startRoutePlanningWithDestination(latLon, pointDescription, targets);
+			} else if (targetHelper.getIntermediatePoints().isEmpty()) {
+				startRoutePlanningWithDestination(latLon, pointDescription, targetHelper);
 				menu.close();
 			} else {
 				AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -374,9 +377,9 @@ public class MapActions {
 						activity.getString(R.string.keep_intermediate_points)}, 0, (dialog, which) -> defaultVls[0] = which);
 				builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
 					if (defaultVls[0] == 0) {
-						targets.removeAllWayPoints(false, true);
+						targetHelper.removeAllWayPoints(false, true);
 					}
-					targets.navigateToPoint(latLon, true, -1, pointDescription);
+					targetHelper.navigateToPoint(latLon, true, -1, pointDescription);
 					activity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true, HEADER_ONLY);
 					menu.close();
 				});
@@ -386,7 +389,8 @@ public class MapActions {
 		}
 	}
 
-	private void startRoutePlanningWithDestination(LatLon latLon, PointDescription pointDescription, TargetPointsHelper targets) {
+	private void startRoutePlanningWithDestination(LatLon latLon, PointDescription pointDescription,
+			TargetPointsHelper targets) {
 		MapActivity activity = getMapActivity();
 		MapActions mapActions = activity != null ? activity.getMapActions() : app.getOsmandMap().getMapActions();
 		boolean hasPointToStart = settings.restorePointToStart();
@@ -418,42 +422,39 @@ public class MapActions {
 		addDestination(latLon, null);
 	}
 
-	public void addDestination(@NonNull LatLon latLon, @Nullable PointDescription pointDescription) {
+	public void addDestination(@NonNull LatLon latLon, @Nullable PointDescription description) {
 		MapActivity activity = getMapActivity();
 		if (activity != null && !OsmAndLocationProvider.isLocationPermissionAvailable(activity)) {
 			requestedLatLon = latLon;
-			ActivityCompat.requestPermissions(activity, new String[] {ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION}, REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION);
+			ActivityCompat.requestPermissions(activity, new String[] {ACCESS_FINE_LOCATION,
+					ACCESS_COARSE_LOCATION}, REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION);
 		} else {
-			if (pointDescription == null) {
-				pointDescription = getPointDescriptionForTarget(latLon);
+			if (description == null) {
+				description = getPointDescriptionForTarget(latLon);
 			}
 			if (activity != null) {
 				activity.getContextMenu().close();
 			}
-			TargetPointsHelper targets = app.getTargetPointsHelper();
-			RoutingHelper routingHelper = app.getRoutingHelper();
 			if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
-				targets.navigateToPoint(latLon, true, targets.getIntermediatePoints().size() + 1, pointDescription);
-			} else if (targets.getIntermediatePoints().isEmpty()) {
-				startRoutePlanningWithDestination(latLon, pointDescription, targets);
+				targetHelper.navigateToPoint(latLon, true, targetHelper.getIntermediatePoints().size() + 1, description);
+			} else if (targetHelper.getIntermediatePoints().isEmpty()) {
+				startRoutePlanningWithDestination(latLon, description, targetHelper);
 			}
 		}
 	}
 
-	public void addFirstIntermediate(LatLon latLon) {
+	public void addFirstIntermediate(@Nullable LatLon latLon) {
 		if (latLon != null) {
-			RoutingHelper routingHelper = app.getRoutingHelper();
 			if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
 				MapActivity activity = getMapActivity();
 				if (activity != null) {
 					activity.getContextMenu().close();
 				}
 				PointDescription pointDescription = getPointDescriptionForTarget(latLon);
-				TargetPointsHelper targets = app.getTargetPointsHelper();
 				if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
-					targets.navigateToPoint(latLon, true, 0, pointDescription);
-				} else if (targets.getIntermediatePoints().isEmpty()) {
-					startRoutePlanningWithDestination(latLon, pointDescription, targets);
+					targetHelper.navigateToPoint(latLon, true, 0, pointDescription);
+				} else if (targetHelper.getIntermediatePoints().isEmpty()) {
+					startRoutePlanningWithDestination(latLon, pointDescription, targetHelper);
 				}
 			} else {
 				addDestination(latLon);
@@ -465,31 +466,28 @@ public class MapActions {
 		replaceDestination(latLon, null);
 	}
 
-	public void replaceDestination(@NonNull LatLon latLon, @Nullable PointDescription pointDescription) {
-		RoutingHelper routingHelper = app.getRoutingHelper();
+	public void replaceDestination(@NonNull LatLon latLon, @Nullable PointDescription description) {
 		if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
-			if (pointDescription == null) {
-				pointDescription = getPointDescriptionForTarget(latLon);
+			if (description == null) {
+				description = getPointDescriptionForTarget(latLon);
 			}
 			MapActivity activity = getMapActivity();
 			if (activity != null) {
 				activity.getContextMenu().close();
 			}
-			TargetPointsHelper targets = app.getTargetPointsHelper();
-			targets.navigateToPoint(latLon, true, -1, pointDescription);
+			targetHelper.navigateToPoint(latLon, true, -1, description);
 		} else {
-			addDestination(latLon, pointDescription);
+			addDestination(latLon, description);
 		}
 	}
 
 	public void switchToRouteFollowingLayout() {
-		app.getRoutingHelper().setRoutePlanningMode(false);
-		app.getMapViewTrackingUtilities().switchRoutePlanningMode();
+		routingHelper.setRoutePlanningMode(false);
+		mapTrackingUtilities.switchRoutePlanningMode();
 		app.getOsmandMap().getMapView().refreshMap();
 	}
 
 	public void startNavigation() {
-		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (settings.getApplicationMode() != routingHelper.getAppMode()) {
 			settings.setApplicationMode(routingHelper.getAppMode(), false);
 		}
@@ -497,17 +495,17 @@ public class MapActions {
 			switchToRouteFollowingLayout();
 		} else {
 			MapActivity activity = getMapActivity();
-			if (!app.getTargetPointsHelper().checkPointToNavigateShort()) {
+			if (!targetHelper.checkPointToNavigateShort()) {
 				if (activity != null) {
 					activity.getMapRouteInfoMenu().show();
 				}
 			} else {
 				app.logEvent("start_navigation");
-				app.getMapViewTrackingUtilities().backToLocationImpl(17, true);
+				mapTrackingUtilities.backToLocationImpl(17, true);
 				settings.FOLLOW_THE_ROUTE.set(true);
 				routingHelper.setFollowingMode(true);
 				routingHelper.setRoutePlanningMode(false);
-				app.getMapViewTrackingUtilities().switchRoutePlanningMode();
+				mapTrackingUtilities.switchRoutePlanningMode();
 				routingHelper.notifyIfRouteIsCalculated();
 				if (!settings.simulateNavigation) {
 					routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
@@ -524,26 +522,16 @@ public class MapActions {
 		}
 	}
 
-	public void selectAddress(String name, double latitude, double longitude, QuickSearchDialogFragment.QuickSearchType searchType) {
-		MapRouteInfoMenu.PointType pointType = null;
-		switch (searchType) {
-			case START_POINT:
-				pointType = MapRouteInfoMenu.PointType.START;
-				break;
-			case DESTINATION:
-			case DESTINATION_AND_START:
-				pointType = MapRouteInfoMenu.PointType.TARGET;
-				break;
-			case INTERMEDIATE:
-				pointType = MapRouteInfoMenu.PointType.INTERMEDIATE;
-				break;
-			case HOME_POINT:
-				pointType = MapRouteInfoMenu.PointType.HOME;
-				break;
-			case WORK_POINT:
-				pointType = MapRouteInfoMenu.PointType.WORK;
-				break;
-		}
+	public void selectAddress(String name, double latitude, double longitude,
+			QuickSearchType searchType) {
+		PointType pointType = switch (searchType) {
+			case START_POINT -> PointType.START;
+			case DESTINATION, DESTINATION_AND_START -> PointType.TARGET;
+			case INTERMEDIATE -> PointType.INTERMEDIATE;
+			case HOME_POINT -> PointType.HOME;
+			case WORK_POINT -> PointType.WORK;
+			default -> null;
+		};
 		MapActivity activity = getMapActivity();
 		if (pointType != null && activity != null) {
 			activity.getMapRouteInfoMenu().selectAddress(name, new LatLon(latitude, longitude), pointType);
@@ -564,15 +552,14 @@ public class MapActions {
 				.append(addLeadingZero ? "0" : "")
 				.append(formattedZoomFloatPart);
 
-		double mapDensity = Math.abs(tileBox.getMapDensity());
-		if (mapDensity != 0) {
-			int mapDensity10 = (int) (mapDensity * 10);
+		double density = Math.abs(tileBox.getMapDensity());
+		if (density != 0) {
+			int mapDensity10 = (int) (density * 10);
 			builder.append(" ").append(mapDensity10 / 10);
 			if (mapDensity10 % 10 != 0) {
 				builder.append(".").append(mapDensity10 % 10);
 			}
 		}
-
 		return builder.toString();
 	}
 
