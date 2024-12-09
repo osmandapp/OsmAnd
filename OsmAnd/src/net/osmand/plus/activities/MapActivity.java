@@ -163,10 +163,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private final List<ActivityResultListener> activityResultListeners = new ArrayList<>();
 
 	private BroadcastReceiver screenOffReceiver;
-
-	private MapActivityActions mapActions;
 	private WidgetsVisibilityHelper mapWidgetsVisibilityHelper;
-
 	private ExtendedMapActivity extendedMapActivity;
 
 	// App variables
@@ -230,6 +227,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.applyTheme(this);
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
+		getMapActions().setMapActivity(this);
 		mapContextMenu.setMapActivity(this);
 		mapRouteInfoMenu.setMapActivity(this);
 		trackDetailsMenu.setMapActivity(this);
@@ -246,11 +244,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				SecondSplashScreenFragment.SHOW = false;
 			}
 		}
-		mapActions = new MapActivityActions(this);
 		mapWidgetsVisibilityHelper = new WidgetsVisibilityHelper(this);
 		dashboardOnMap.createDashboardView();
 		extendedMapActivity = new ExtendedMapActivity();
 
+		getMapActions().setMapActivity(this);
 		getMapView().setMapActivity(this);
 		getMapLayers().setMapActivity(this);
 
@@ -303,7 +301,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		checkAppInitialization();
 
-		mapActions.updateDrawerMenu();
+		getMapActions().updateDrawerMenu();
 
 		IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
 		screenOffReceiver = new ScreenOffReceiver();
@@ -945,6 +943,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onDestroy() {
 		super.onDestroy();
 		destroyProgressBarForRouting();
+		getMapActions().setMapActivity(null);
 		getMapLayers().setMapActivity(null);
 		getMapView().setMapActivity(null);
 		mapContextMenu.setMapActivity(null);
@@ -1093,7 +1092,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 
 		mapLayers.updateLayers(this);
-		mapActions.updateDrawerMenu();
+
+		getMapActions().updateDrawerMenu();
 		updateNavigationBarColor();
 		//mapView.setComplexZoom(mapView.getZoom(), mapView.getSettingsMapDensity());
 		mapView.setMapDensity(mapView.getSettingsMapDensity());
@@ -1186,18 +1186,22 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return app.getOsmandMap().getMapView();
 	}
 
+	@NonNull
 	public MapViewTrackingUtilities getMapViewTrackingUtilities() {
 		return app.getMapViewTrackingUtilities();
 	}
 
+	@NonNull
 	public MapDisplayPositionManager getMapPositionManager() {
 		return app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
 	}
 
+	@NonNull
 	public MapActivityActions getMapActions() {
-		return mapActions;
+		return app.getOsmandMap().getMapActions();
 	}
 
+	@NonNull
 	public MapLayers getMapLayers() {
 		return app.getOsmandMap().getMapLayers();
 	}
@@ -1334,7 +1338,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void openDrawer() {
 		if (isDrawerAvailable()) {
-			mapActions.updateDrawerMenu();
+			getMapActions().updateDrawerMenu();
 			boolean animate = !settings.DO_NOT_USE_ANIMATIONS.get();
 			drawerLayout.openDrawer(GravityCompat.START, animate);
 		}
