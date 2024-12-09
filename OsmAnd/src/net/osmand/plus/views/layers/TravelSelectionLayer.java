@@ -56,8 +56,13 @@ public class TravelSelectionLayer extends OsmandMapLayer implements IContextMenu
 			Pair<?, ?> pair = (Pair<?, ?>) o;
 			if (pair.first instanceof TravelGpx && pair.second instanceof SelectedGpxPoint) {
 				TravelGpx travelGpx = (TravelGpx) ((Pair<?, ?>) o).first;
-				String name = Algorithms.isEmpty(travelGpx.getDescription()) ? travelGpx.getTitle() : travelGpx.getDescription();
-				return new PointDescription(PointDescription.POINT_TYPE_GPX, name);
+				if (!Algorithms.isEmpty(travelGpx.getTitle())) {
+					return new PointDescription(PointDescription.POINT_TYPE_GPX, travelGpx.getTitle());
+				} else if (!Algorithms.isEmpty(travelGpx.getDescription())) {
+					return new PointDescription(PointDescription.POINT_TYPE_GPX, travelGpx.getDescription());
+				} else {
+					return new PointDescription(PointDescription.POINT_TYPE_GPX, travelGpx.getRouteId()); // nullable
+				}
 			}
 		}
 		return null;
