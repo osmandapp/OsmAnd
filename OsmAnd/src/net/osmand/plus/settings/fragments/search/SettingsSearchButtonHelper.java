@@ -68,6 +68,7 @@ public class SettingsSearchButtonHelper {
 								.build())
 				.withSearchConfig(
 						new SearchConfigBuilder()
+								.withPreferencePathDisplayer(PreferencePathDisplayerFactory.createPreferencePathDisplayer(fragmentActivity))
 								.withSearchPreferenceFragmentUI(new SearchPreferenceFragmentUI())
 								.withSearchResultsFragmentUI(new SearchResultsFragmentUI())
 								.withPrepareShow(new PrepareShow())

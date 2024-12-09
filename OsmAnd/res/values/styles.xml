@@ -171,14 +171,14 @@
     </style>
 
     <!-- Dialog popup -->
-    <style name="Animations"/>
+    <style name="Animations" />
 
     <style name="Animations.NoAnimation">
         <item name="android:windowEnterAnimation">@null</item>
         <item name="android:windowExitAnimation">@null</item>
     </style>
     <!-- PopDownMenu -->
-    <style name="Animations.PopDownMenu"/>
+    <style name="Animations.PopDownMenu" />
 
     <style name="Animations.PopDownMenu.Left">
         <item name="android:windowEnterAnimation">@anim/grow_from_topleft_to_bottomright</item>
@@ -196,7 +196,7 @@
     </style>
 
     <!-- PopUpMenu -->
-    <style name="Animations.PopUpMenu"/>
+    <style name="Animations.PopUpMenu" />
 
     <style name="Animations.PopUpMenu.Fade">
         <item name="android:windowEnterAnimation">@anim/popup_show</item>
@@ -426,5 +426,11 @@
 
     <style name="SearchPreferenceResultBackgroundColor">
         <item name="backgroundColor">#00FF00</item>
+    </style>
+
+    <style name="PreferencePathTextAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">#FF0000</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:typeface">normal</item>
     </style>
 </resources>
