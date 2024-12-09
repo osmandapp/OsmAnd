@@ -30,7 +30,6 @@ import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_FIRST_DIST;
 import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_FIRST_LETTER;
 import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_MULT_1;
 import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_MULT_2;
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 import android.os.AsyncTask;
 import android.text.TextUtils;
@@ -66,7 +65,6 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.shared.gpx.primitives.RouteActivity;
@@ -1188,8 +1186,7 @@ public class TravelObfHelper implements TravelHelper {
 				String osmValue = amenity.getType().getPoiTypeByKeyName(subType).getOsmValue();
 				if (!Algorithms.isEmpty(osmValue)) {
 					if (amenity.hasOsmRouteId()) {
-						gpxFileExtensions.put("type", "route");
-						gpxFileExtensions.put("route", osmValue);
+						gpxFileExtensions.put("route_type", osmValue); // instead of type and route tags
 					}
 					RouteActivityHelper helper = app.getRouteActivityHelper();
 					RouteActivity activity = helper.findActivityByTag(osmValue);
