@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="selected_delayed_profile">Selected profile \"%s\"</string>
     <string name="shared_string_interpolation">Interpolation</string>
     <string name="location_interpolation_percent">Location interpolation percentage</string>
     <string name="location_interpolation_percent_desc">Set the percentage of location interpolation during route navigation. This parameter reduces the lag of your location position on the map during animation.</string>

@@ -17,7 +17,6 @@ import net.osmand.CallbackWithObject;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.configmap.ConfigureMapMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -93,8 +92,7 @@ public class CustomizationItemViewHolder extends RecyclerView.ViewHolder {
 	private ContextMenuAdapter getContextMenuAdapter(@NonNull ScreenType screenType, @NonNull FragmentActivity activity) {
 		switch (screenType) {
 			case DRAWER:
-				MapActivityActions actions = new MapActivityActions((MapActivity) activity);
-				return actions.createMainOptionsMenu();
+				return ((MapActivity) activity).getMapActions().createNormalOptionsMenu();
 			case CONFIGURE_MAP:
 				ConfigureMapMenu configureMenu = new ConfigureMapMenu(app);
 				return configureMenu.createListAdapter((MapActivity) activity);

@@ -375,7 +375,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 				}
 				screenManager.pushForResult(new RoutePreviewScreen(context, settingsAction, result, true), (obj) -> {
 					if (obj != null) {
-						getApp().getOsmandMap().getMapLayers().getMapActionsHelper().startNavigation();
+						getApp().getOsmandMap().getMapActions().startNavigation();
 						if (hasStarted()) {
 							startNavigationScreen();
 						}
@@ -520,7 +520,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			screenManager.popToRoot();
 			screenManager.pushForResult(new RoutePreviewScreen(context, settingsAction, result, false), (obj) -> {
 				if (obj != null) {
-					app.getOsmandMap().getMapLayers().getMapActionsHelper().startNavigation();
+					app.getOsmandMap().getMapActions().startNavigation();
 					if (hasStarted()) {
 						startNavigationScreen();
 					}

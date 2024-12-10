@@ -9,6 +9,7 @@ import net.osmand.Location;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -28,7 +29,7 @@ public class OsmandMap {
 	private final MapViewTrackingUtilities mapViewTrackingUtilities;
 	private final OsmandMapTileView mapView;
 	private final MapLayers mapLayers;
-	private final MapActions mapActions;
+	private final MapActivityActions mapActions;
 	private final IMapDownloaderCallback downloaderCallback;
 
 	private List<RenderingViewSetupListener> renderingViewSetupListeners = new ArrayList<>();
@@ -51,7 +52,7 @@ public class OsmandMap {
 	public OsmandMap(@NonNull OsmandApplication app) {
 		this.app = app;
 		mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
-		mapActions = new MapActions(app);
+		mapActions = new MapActivityActions(app);
 
 		int width;
 		int height;
@@ -99,7 +100,7 @@ public class OsmandMap {
 	}
 
 	@NonNull
-	public MapActions getMapActions() {
+	public MapActivityActions getMapActions() {
 		return mapActions;
 	}
 
@@ -148,15 +149,14 @@ public class OsmandMap {
 
 	public float getMapDensity() {
 		float scale = app.getSettings().MAP_DENSITY.get();
-		return scale * getCarDensityScaleCoef();
+		return scale;// * getCarDensityScaleCoef();
 	}
 
 	public float getCarDensityScaleCoef() {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		if (mapView.isCarView()) {
 			float carViewDensity = mapView.getCarViewDensity();
-			float density = mapView.getDensity();
-			return carViewDensity / density;
+			return carViewDensity / 2f + 0.1f;
 		}
 		return 1f;
 	}
