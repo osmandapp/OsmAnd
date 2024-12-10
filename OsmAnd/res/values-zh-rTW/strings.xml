@@ -5673,4 +5673,5 @@
     <string name="location_interpolation_percent">位置內插百分比</string>
     <string name="shared_string_interpolation">內插</string>
     <string name="location_interpolation_percent_desc">設定路線導航時位置內插的百分比。此參數可減少動畫時您在地圖上位置的延遲。</string>
+    <string name="selected_delayed_profile">選定的設定檔「%s」</string>
 </resources>
