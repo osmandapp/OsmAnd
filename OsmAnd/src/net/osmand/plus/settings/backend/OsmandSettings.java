@@ -446,15 +446,7 @@ public class OsmandSettings {
 
 	public boolean switchAppMode(boolean next) {
 		ApplicationMode appMode = getApplicationMode();
-		List<ApplicationMode> enabledModes = ApplicationMode.values(ctx);
-		int indexOfCurrent = enabledModes.indexOf(appMode);
-		int indexOfNext;
-		if (next) {
-			indexOfNext = indexOfCurrent < enabledModes.size() - 1 ? indexOfCurrent + 1 : 0;
-		} else {
-			indexOfNext = indexOfCurrent > 0 ? indexOfCurrent - 1 : enabledModes.size() - 1;
-		}
-		ApplicationMode nextAppMode = enabledModes.get(indexOfNext);
+		ApplicationMode nextAppMode = getSwitchedAppMode(appMode, next);
 		if (appMode != nextAppMode && setApplicationMode(nextAppMode)) {
 			String pattern = ctx.getString(R.string.application_profile_changed);
 			String message = String.format(pattern, nextAppMode.toHumanString());
@@ -462,6 +454,18 @@ public class OsmandSettings {
 			return true;
 		}
 		return false;
+	}
+
+	public ApplicationMode getSwitchedAppMode(ApplicationMode selectedMode, boolean next) {
+		List<ApplicationMode> enabledModes = ApplicationMode.values(ctx);
+		int indexOfCurrent = enabledModes.indexOf(selectedMode);
+		int indexOfNext;
+		if (next) {
+			indexOfNext = indexOfCurrent < enabledModes.size() - 1 ? indexOfCurrent + 1 : 0;
+		} else {
+			indexOfNext = indexOfCurrent > 0 ? indexOfCurrent - 1 : enabledModes.size() - 1;
+		}
+		return enabledModes.get(indexOfNext);
 	}
 
 	public boolean setApplicationMode(ApplicationMode appMode) {

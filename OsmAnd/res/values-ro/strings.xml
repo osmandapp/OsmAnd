@@ -5922,4 +5922,5 @@
     <string name="shared_strings_dimensions">Dimensiuni</string>
     <string name="litres">Litri</string>
     <string name="us_gallons_unit">galon</string>
+    <string name="shared_string_interpolation">Interpolare</string>
 </resources>

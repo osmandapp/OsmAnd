@@ -1283,7 +1283,7 @@
     <string name="dynamic_icon_type_summary">Biểu tượng thay đổi dựa trên tình trạng của hành động.</string>
     <string name="shared_string_dynamic">Động</string>
     <string name="percent_hour">%/h</string>
-    <string name="obd_fuel_consumption_rate_l_h">Mức tiêu thụ nhiên liệu (l/h)</string>
+    <string name="obd_fuel_consumption_rate_l_h">Mức tiêu thụ nhiên liệu (L/h)</string>
     <string name="obd_fuel_level_liter">Mức nhiên liệu (l)</string>
     <string name="obd_fuel_level_percent">Mức nhiên liệu (%)</string>
     <string name="obd_widget_engine_speed">Tốc độ động cơ</string>
@@ -1345,8 +1345,8 @@
     <string name="obd_connected_to_device">Đã kết nối tới %s</string>
     <string name="obd_not_connected_to_device">Đã ngắt kết nối từ %s</string>
     <string name="obd_connecting_to_device">Đang kết nối tới %s</string>
-    <string name="obd_fuel_consumption_rate_l_h_desc">Hiện mức tiêu thụ nhiên liệu dựa trên tính toán (l/h)</string>
-    <string name="obd_fuel_consumption_rate_sensor_desc">Hiện mức tiêu thụ nhiên liệu dựa trên cảm biến (l/h)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Hiện mức tiêu thụ nhiên liệu dựa trên tính toán (L/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Hiện mức tiêu thụ nhiên liệu dựa trên cảm biến (L/h)</string>
     <string name="obd_searching_text">Đang tìm máy quét</string>
     <string name="obd_device_forget_sensor">Quên máy quét</string>
     <string name="change_activity">Thay đổi hoạt động</string>
@@ -2936,4 +2936,7 @@
     <string name="always_ask_waypoint_appearance_description">Chạm vào hành động này sẽ mở màn hình \"Thêm điểm dừng\" nơi bạn có thể thay đổi tên và giao diện.</string>
     <string name="obd_engine_oil_temperature_desc">Hiện nhiệt độ của dầu động cơ.</string>
     <string name="track_file_description">Chạm vào hành động này hiện những cung đường sẵn có.</string>
+    <string name="shared_string_engine">Động cơ</string>
+    <string name="shared_string_volume">Khối lượng</string>
+    <string name="selected_delayed_profile">Hồ sơ đã chọn \"%s\"</string>
 </resources>

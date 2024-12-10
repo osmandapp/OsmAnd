@@ -12,6 +12,7 @@ import java.util.PriorityQueue;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
 
+import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.TransportRoute;
@@ -22,6 +23,8 @@ import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 public class TransportRoutePlanner {
 	
 	private static final boolean MEASURE_TIME = false;
@@ -29,6 +32,7 @@ public class TransportRoutePlanner {
 	private static final int MIN_DIST_STOP_TO_GEOMETRY = 150;
 	public static final long GEOMETRY_WAY_ID = -1;
 	public static final long STOPS_WAY_ID = -2;
+	private final static Log LOG = PlatformUtil.getLog(TransportRoutePlanner.class);
 
 	public List<TransportRouteResult> buildRoute(TransportRoutingContext ctx, LatLon start, LatLon end) throws IOException, InterruptedException {
 		ctx.startCalcTime = System.currentTimeMillis();
@@ -41,6 +45,7 @@ public class TransportRoutePlanner {
 			endSegments.put(s.getId(), s);
 		}
 		if(startStops.size() == 0) {
+			LOG.info("Public transport. Start stop is empty");
 			return Collections.emptyList();
 		}
 		PriorityQueue<TransportRouteSegment> queue = new PriorityQueue<TransportRouteSegment>(startStops.size(), new SegmentsComparator(ctx));
@@ -581,6 +586,7 @@ public class TransportRoutePlanner {
 		TLongObjectHashMap<TransportStop> convertedStopsCache = new TLongObjectHashMap<>();
 
 		if (res.length == 0) {
+			LOG.info("Public transport. No route found");
 			return new ArrayList<TransportRouteResult>();
 		}
 		List<TransportRouteResult> convertedRes = new ArrayList<TransportRouteResult>();

@@ -935,7 +935,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			if (navigateInPedestrianMode()) {
 				mapActivity.getMyApplication().getSettings().setApplicationMode(ApplicationMode.PEDESTRIAN, false);
 			}
-			mapActivity.getMapLayers().getMapActionsHelper().navigateButton();
+			mapActivity.getMapActions().navigateButton();
 		}
 	}
 
@@ -1049,10 +1049,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public ContextMenuItemClickListener getContextMenuItemClickListener(ContextMenuAdapter menuAdapter) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
 			LatLon latLon = getLatLon();
-			return mapActivity.getMapActions().getContextMenuItemClickListener(latLon.getLatitude(), latLon.getLongitude(), menuAdapter);
+			return activity.getMapActions().getContextMenuItemClickListener(activity, latLon.getLatitude(), latLon.getLongitude(), menuAdapter);
 		}
 		return null;
 	}
