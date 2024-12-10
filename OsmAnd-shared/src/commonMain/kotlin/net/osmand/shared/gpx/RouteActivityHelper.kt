@@ -49,8 +49,11 @@ object RouteActivityHelper {
 		runAsync {
 			trackItems.forEach { trackItem ->
 				trackItem.getFile()?.let { file ->
-					val gpxFile = PlatformUtil.getOsmAndContext().getSelectedFileByPath(file.absolutePath())
-					if (gpxFile != null && gpxFile.error == null) {
+					var gpxFile = PlatformUtil.getOsmAndContext().getSelectedFileByPath(file.absolutePath())
+					if (gpxFile == null) {
+						gpxFile = GpxUtilities.loadGpxFile(file)
+					}
+					if (gpxFile.error == null) {
 						saveRouteActivityAsync(gpxFile, routeActivity)
 					}
 				}
