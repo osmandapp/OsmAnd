@@ -23,7 +23,7 @@ import static net.osmand.plus.wikivoyage.data.TravelGpx.USER;
 import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_BACKGROUNDS;
 import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_COLORS;
 import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_DELIMITER;
-import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_EMPTY_NAME_VALUE;
+import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_EMPTY_NAME_STUB;
 import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_ICONS;
 import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_NAMES;
 import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_PREFIX;
@@ -1310,7 +1310,7 @@ public class TravelObfHelper implements TravelHelper {
 				String icon = pgIcons.get(i);
 				String background = pgBackgrounds.get(i);
 				int color = KAlgorithms.INSTANCE.parseColor(pgColors.get(i));
-				if (name.isEmpty() || OBF_POINTS_GROUPS_EMPTY_NAME_VALUE.equals(name)) {
+				if (name.isEmpty() || OBF_POINTS_GROUPS_EMPTY_NAME_STUB.equals(name)) {
 					name = GpxFile.DEFAULT_WPT_GROUP_NAME; // follow current default
 				}
 				GpxUtilities.PointsGroup pg = new GpxUtilities.PointsGroup(name, icon, background, color);

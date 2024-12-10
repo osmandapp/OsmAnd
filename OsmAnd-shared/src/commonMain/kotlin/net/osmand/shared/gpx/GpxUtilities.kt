@@ -349,7 +349,7 @@ object GpxUtilities {
 			const val OBF_POINTS_GROUPS_ICONS = "points_groups_icons"
 			const val OBF_POINTS_GROUPS_COLORS = "points_groups_colors"
 			const val OBF_POINTS_GROUPS_BACKGROUNDS = "points_groups_backgrounds"
-			const val OBF_POINTS_GROUPS_EMPTY_NAME_VALUE = "." // stub to store empty points_groups_names
+			const val OBF_POINTS_GROUPS_EMPTY_NAME_STUB = "." // stub to store empty points_groups_names
 			const val OBF_POINTS_GROUPS_CATEGORY = "points_groups_category" // optional category of OBF-GPX point
 
 			fun parsePointsGroupAttributes(parser: XmlPullParser): PointsGroup {
