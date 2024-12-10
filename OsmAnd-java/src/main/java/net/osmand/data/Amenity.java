@@ -1,7 +1,6 @@
 package net.osmand.data;
 
-import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
-import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
+import static net.osmand.gpx.GPXUtilities.*;
 import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
@@ -353,9 +352,10 @@ public class Amenity extends MapObject {
 	}
 
 	public String getGpxIcon() {
-		return getAdditionalInfo(GPX_ICON);
+		String wikiVoyageIcon = getAdditionalInfo(GPX_ICON);
+		String travelGpxIcon = getAdditionalInfo(ICON_NAME_EXTENSION);
+		return Algorithms.isEmpty(wikiVoyageIcon) ? travelGpxIcon : wikiVoyageIcon;
 	}
-
 
 	public String getContentLanguage(String tag, String lang, String defLang) {
 		if (lang != null) {
