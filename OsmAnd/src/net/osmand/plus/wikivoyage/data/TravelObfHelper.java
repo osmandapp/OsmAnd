@@ -1139,27 +1139,31 @@ public class TravelObfHelper implements TravelHelper {
 	@NonNull
 	private ResultMatcher<Amenity> matchPointsAndTags(TravelArticle article, List<Amenity> pointList, Map<String, String> gpxFileExtensions, List<String> pgNames, List<String> pgIcons, List<String> pgColors, List<String> pgBackgrounds) {
 		return new ResultMatcher<Amenity>() {
+			boolean isAlreadyProcessed = false;
 			@Override
 			public boolean publish(Amenity amenity) {
 				if (amenity.getRouteId().equals(article.getRouteId())) {
-					reconstructGpxTagsFromAmenityType(amenity, gpxFileExtensions);
 					if (amenity.isRouteTrack()) {
-						for (String tag : amenity.getAdditionalInfoKeys()) {
-							String value = amenity.getAdditionalInfo(tag);
-							if (tag.startsWith(OBF_POINTS_GROUPS_PREFIX)) {
-								final String delimiter = OBF_POINTS_GROUPS_DELIMITER;
-								List<String> values = Arrays.asList(value.split(delimiter));
-								if (OBF_POINTS_GROUPS_NAMES.equals(tag)) {
-									pgNames.addAll(values);
-								} else if (OBF_POINTS_GROUPS_ICONS.equals(tag)) {
-									pgIcons.addAll(values);
-								} else if (OBF_POINTS_GROUPS_COLORS.equals(tag)) {
-									pgColors.addAll(values);
-								} else if (OBF_POINTS_GROUPS_BACKGROUNDS.equals(tag)) {
-									pgBackgrounds.addAll(values);
+						if (!isAlreadyProcessed) {
+							isAlreadyProcessed = true;
+							reconstructGpxTagsFromAmenityType(amenity, gpxFileExtensions);
+							for (String tag : amenity.getAdditionalInfoKeys()) {
+								String value = amenity.getAdditionalInfo(tag);
+								if (tag.startsWith(OBF_POINTS_GROUPS_PREFIX)) {
+									final String delimiter = OBF_POINTS_GROUPS_DELIMITER;
+									List<String> values = Arrays.asList(value.split(delimiter));
+									if (OBF_POINTS_GROUPS_NAMES.equals(tag)) {
+										pgNames.addAll(values);
+									} else if (OBF_POINTS_GROUPS_ICONS.equals(tag)) {
+										pgIcons.addAll(values);
+									} else if (OBF_POINTS_GROUPS_COLORS.equals(tag)) {
+										pgColors.addAll(values);
+									} else if (OBF_POINTS_GROUPS_BACKGROUNDS.equals(tag)) {
+										pgBackgrounds.addAll(values);
+									}
+								} else if (!doNotSaveAmenityGpxTags.contains(tag)) {
+									gpxFileExtensions.put(tag, value);
 								}
-							} else if (!doNotSaveAmenityGpxTags.contains(tag)) {
-								gpxFileExtensions.put(tag, value);
 							}
 						}
 					} else if (ROUTE_TRACK_POINT.equals(amenity.getSubType())) {
