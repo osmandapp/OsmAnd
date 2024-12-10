@@ -5684,4 +5684,5 @@
     <string name="shared_string_interpolation">Интерполација</string>
     <string name="location_interpolation_percent_desc">Поставите проценат интерполације локације током руте. Овај параметар смањује кашњење положаја ваше локације на мапи, током анимације.</string>
     <string name="location_interpolation_percent">Проценат интерполације позиције</string>
+    <string name="selected_delayed_profile">Изабрани профил \"%s\"</string>
 </resources>
