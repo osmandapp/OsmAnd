@@ -5689,4 +5689,5 @@
     <string name="location_interpolation_percent">Procenat interpolacije pozicije</string>
     <string name="shared_string_interpolation">Interpolacija</string>
     <string name="location_interpolation_percent_desc">Postavi procenat interpolacije lokacije tokom navigacije. Ovaj parametar smanjuje kašnjenje položaja tvoje lokacije na mapi tokom animacije.</string>
+    <string name="selected_delayed_profile">Izabrani profil \"%s\"</string>
 </resources>
