@@ -9,6 +9,7 @@ public class WikiImage {
 	private final String imageName;
 	private final String imageStubUrl;
 	private final String imageHiResUrl;
+	private long mediaId = -1;
 
 	private final Metadata metadata = new Metadata();
 
@@ -17,6 +18,14 @@ public class WikiImage {
 		this.imageName = imageName;
 		this.imageStubUrl = imageStubUrl;
 		this.imageHiResUrl = imageHiResUrl;
+	}
+
+	public void setMediaId(long mediaId) {
+		this.mediaId = mediaId;
+	}
+
+	public long getMediaId() {
+		return mediaId;
 	}
 
 	public String getUrlWithCommonAttributions() {
