@@ -17,7 +17,7 @@ import static net.osmand.plus.wikivoyage.data.TravelGpx.DISTANCE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ELE_GRAPH;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.MAX_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.MIN_ELEVATION;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_RADIUS;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_BBOX_RADIUS;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.START_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.USER;
 import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_BACKGROUNDS;
@@ -122,7 +122,7 @@ public class TravelObfHelper implements TravelHelper {
 
 	// Do not clutter GPX with tags that are always generated.
 	private static final Set<String> doNotSaveAmenityGpxTags = Set.of(
-			"date", "distance", "route_name", "route_radius",
+			"date", "distance", "route_name", "route_bbox_radius",
 			"avg_ele", "min_ele", "max_ele", "start_ele", "ele_graph", "diff_ele_up", "diff_ele_down",
 			"avg_speed", "min_speed", "max_speed", "time_moving", "time_moving_no_gaps", "time_span", "time_span_no_gaps"
 	);
@@ -324,7 +324,7 @@ public class TravelObfHelper implements TravelHelper {
 		travelGpx.minElevation = Algorithms.parseDoubleSilently(amenity.getTagContent(MIN_ELEVATION), 0);
 		travelGpx.avgElevation = Algorithms.parseDoubleSilently(amenity.getTagContent(AVERAGE_ELEVATION), 0);
 		travelGpx.maxElevation = Algorithms.parseDoubleSilently(amenity.getTagContent(MAX_ELEVATION), 0);
-		String radius = amenity.getTagContent(ROUTE_RADIUS);
+		String radius = amenity.getTagContent(ROUTE_BBOX_RADIUS);
 		if (radius != null) {
 			travelGpx.routeRadius = MapUtils.convertCharToDist(radius.charAt(0), TRAVEL_GPX_CONVERT_FIRST_LETTER,
 					TRAVEL_GPX_CONVERT_FIRST_DIST, TRAVEL_GPX_CONVERT_MULT_1, TRAVEL_GPX_CONVERT_MULT_2);
