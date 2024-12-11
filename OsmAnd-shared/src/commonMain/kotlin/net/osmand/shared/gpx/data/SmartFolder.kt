@@ -4,30 +4,35 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.filters.BaseTrackFilter
+import net.osmand.shared.gpx.filters.TrackFilterSerializer
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis
 import net.osmand.shared.util.KCollectionUtils
 
 @Serializable
 class SmartFolder(@Serializable var folderName: String) : TracksGroup, ComparableTracksGroup {
+	companion object {
+		const val ID_PREFIX = "SMART_FOLDER___"
+	}
 
 	@Transient
 	private var trackItems: List<TrackItem>? = null
 
-	constructor() : this("") {
-	}
+	constructor() : this("")
 
 	@Serializable
 	var creationTime = 0L
 
-	@Serializable
-	var filters: MutableList<BaseTrackFilter>? = null
+	@Serializable(with = TrackFilterSerializer::class)
+	var filters: List<BaseTrackFilter>? = null
 
 	@Transient
 	private var folderAnalysis: TrackFolderAnalysis? = null
 
-	override fun getName(): String {
-		return folderName
+	override fun getId(): String {
+		return ID_PREFIX + folderName
 	}
+
+	override fun getName() = folderName
 
 	override fun getTrackItems(): List<TrackItem> {
 		var trackItems = this.trackItems
@@ -54,13 +59,9 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 		return analysis
 	}
 
-	override fun getDirName(): String {
-		return folderName
-	}
+	override fun getDirName(includingSubdirs: Boolean) = folderName
 
-	override fun lastModified(): Long {
-		return creationTime
-	}
+	override fun lastModified() = creationTime
 
 	fun resetItems() {
 		trackItems = ArrayList()

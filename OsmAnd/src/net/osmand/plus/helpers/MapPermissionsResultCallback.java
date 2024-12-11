@@ -15,7 +15,6 @@ import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.firstusage.FirstUsageWizardFragment;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.views.layers.MapActionsHelper;
 
 public class MapPermissionsResultCallback implements OnRequestPermissionsResultCallback {
 
@@ -30,15 +29,17 @@ public class MapPermissionsResultCallback implements OnRequestPermissionsResultC
 	}
 
 	@Override
-	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+			@NonNull int[] grantResults) {
 		if (grantResults.length > 0) {
 			OsmandApplication app = activity.getMyApplication();
 
 			PluginsHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
+			activity.getMapActions().onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-			MapActionsHelper controlsHelper = activity.getMapLayers().getMapActionsHelper();
-			if (controlsHelper != null) {
-				controlsHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
+			OnRequestPermissionsResultCallback aaCallback = app.getAndroidAutoPermissionRequestResultListener();
+			if (aaCallback != null) {
+				aaCallback.onRequestPermissionsResult(requestCode, permissions, grantResults);
 			}
 
 			if (requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE

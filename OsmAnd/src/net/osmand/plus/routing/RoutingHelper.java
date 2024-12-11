@@ -9,7 +9,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.data.LatLon;
 import net.osmand.data.ValueHolder;
-import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -23,12 +22,13 @@ import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.GpxRouteApproximation;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -50,6 +50,7 @@ public class RoutingHelper {
 	private static final float POS_TOLERANCE = 60; // 60m or 30m + accuracy
 	private static final float POS_TOLERANCE_DEVIATION_MULTIPLIER = 2;
 	private static final int MAX_POSSIBLE_SPEED = 140;// 504 km/h
+	private static final boolean ENABLE_LOG_POS_PROCESSED = false;
 
 	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
 	private List<WeakReference<IRoutingDataUpdateListener>> updateListeners = new LinkedList<>();
@@ -110,7 +111,7 @@ public class RoutingHelper {
 		return provider;
 	}
 
-	void resetRouteWasFinished() {
+	public void resetRouteWasFinished() {
 		routeWasFinished = false;
 	}
 
@@ -366,16 +367,6 @@ public class RoutingHelper {
 		listeners = Algorithms.updateWeakReferencesList(listeners, lt, false);
 	}
 
-	public void updateLocation(Location currentLocation) {
-		if (settings.getPointToStart() == null && settings.getMyLocationToStart() == null && currentLocation != null) {
-			app.getTargetPointsHelper().setMyLocationPoint(
-					new LatLon(currentLocation.getLatitude(), currentLocation.getLongitude()), false, null);
-		}
-		if (isFollowingMode() || (settings.getPointToStart() == null && isRoutePlanningMode) ||
-				app.getLocationProvider().getLocationSimulation().isRouteAnimating()) {
-			setCurrentLocation(currentLocation, false);
-		}
-	}
 
 	public Location setCurrentLocation(Location currentLocation, boolean returnUpdatedLocation) {
 		return setCurrentLocation(currentLocation, returnUpdatedLocation, route, false);
@@ -479,10 +470,11 @@ public class RoutingHelper {
 					locationProjection = RoutingHelperUtils.getProject(currentLocation, previousRouteLocation,
 							currentRouteLocation);
 					if (settings.SNAP_TO_ROAD.get() && currentRoute + 1 < routeNodes.size()) {
+						boolean previewNextTurn = settings.PREVIEW_NEXT_TURN.get();
 						Location nextRouteLocation = routeNodes.get(currentRoute + 1);
 						RoutingHelperUtils.approximateBearingIfNeeded(this,
-								locationProjection, currentLocation,
-								previousRouteLocation, currentRouteLocation, nextRouteLocation);
+								locationProjection, currentLocation, previousRouteLocation,
+								currentRouteLocation, nextRouteLocation, previewNextTurn);
 					}
 				}
 			}
@@ -653,7 +645,7 @@ public class RoutingHelper {
 					routeNodes.get(newCurrentRoute + 1));
 			if (longDistance) {
 				if (newDist < dist) {
-					if (log.isDebugEnabled()) {
+					if (ENABLE_LOG_POS_PROCESSED) {
 						log.debug("Processed by distance : (new) " + newDist + " (old) " + dist); //$NON-NLS-1$//$NON-NLS-2$
 					}
 					processed = true;
@@ -662,7 +654,7 @@ public class RoutingHelper {
 				// newDist < posTolerance / 8 - 4-8 m (avoid distance 0 till next turn)
 				if (dist > posTolerance) {
 					processed = true;
-					if (log.isDebugEnabled()) {
+					if (ENABLE_LOG_POS_PROCESSED) {
 						log.debug("Processed by distance : " + newDist + " " + dist); //$NON-NLS-1$//$NON-NLS-2$
 					}
 				} else {
@@ -679,7 +671,7 @@ public class RoutingHelper {
 						double diff = Math.abs(MapUtils.degreesDiff(bearingMotion, bearingToRoute));
 						double diffToNext = Math.abs(MapUtils.degreesDiff(bearingMotion, bearingRouteNext));
 						if (diff > diffToNext) {
-							if (log.isDebugEnabled()) {
+							if (ENABLE_LOG_POS_PROCESSED) {
 								log.debug("Processed point bearing deltas : " + diff + " " + diffToNext);
 							}
 							processed = true;
@@ -802,7 +794,7 @@ public class RoutingHelper {
 
 	@NonNull
 	public synchronized CurrentStreetName getCurrentName(NextDirectionInfo n) {
-		return CurrentStreetName.getCurrentName(this, n);
+		return new CurrentStreetName(this, n);
 	}
 
 	public RouteSegmentResult getCurrentSegmentResult() {

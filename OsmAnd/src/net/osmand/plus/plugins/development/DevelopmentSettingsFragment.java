@@ -67,11 +67,13 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		routingCategory.setIconSpaceReserved(false);
 
 		setupSimulateYourLocationPref();
+		setupLocationInterpolationPref();
 
 		Preference debuggingAndDevelopment = findPreference("debugging_and_development");
 		debuggingAndDevelopment.setIconSpaceReserved(false);
 
 		setupBatterySavingModePref();
+		setupSimulateOBDDataPref();
 		setupDebugRenderingInfoPref();
 		setupDisableMapLayersPref();
 		setupSimulateInitialStartupPref();
@@ -124,9 +126,22 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		simulateYourLocation.setSummary(sim.isRouteAnimating() ? R.string.shared_string_in_progress : R.string.simulate_your_location_descr);
 	}
 
+	private void setupLocationInterpolationPref() {
+		int value = settings.LOCATION_INTERPOLATION_PERCENT.get();
+		Preference preference = findPreference(settings.LOCATION_INTERPOLATION_PERCENT.getId());
+		preference.setSummary(getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf(value), "%"));
+		preference.setIconSpaceReserved(false);
+	}
+
 	private void setupBatterySavingModePref() {
 		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.BATTERY_SAVING_MODE.getId());
 		debugRenderingInfo.setDescription(getString(R.string.battery_saving_mode));
+		debugRenderingInfo.setIconSpaceReserved(false);
+	}
+
+	private void setupSimulateOBDDataPref() {
+		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.SIMULATE_OBD_DATA.getId());
+		debugRenderingInfo.setDescription(getString(R.string.simulate_obd));
 		debugRenderingInfo.setIconSpaceReserved(false);
 	}
 
@@ -322,6 +337,11 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 				preference.setSummary(getAgpsDataDownloadedSummary());
 			}
 			return true;
+		} else if (settings.LOCATION_INTERPOLATION_PERCENT.getId().equals(prefId)) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				LocationInterpolationBottomSheet.showInstance(fragmentManager, preference.getKey(), this, getSelectedAppMode());
+			}
 		} else if (settings.MEMORY_ALLOCATED_FOR_ROUTING.getId().equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
@@ -338,7 +358,10 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 	@Override
 	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
-		if (prefId.equals(settings.MEMORY_ALLOCATED_FOR_ROUTING.getId())) {
+		if (prefId.equals(settings.LOCATION_INTERPOLATION_PERCENT.getId())) {
+			applyPreference(settings.LOCATION_INTERPOLATION_PERCENT.getId(), applyToAllProfiles, newValue);
+			setupLocationInterpolationPref();
+		} else if (prefId.equals(settings.MEMORY_ALLOCATED_FOR_ROUTING.getId())) {
 			applyPreference(settings.MEMORY_ALLOCATED_FOR_ROUTING.getId(), applyToAllProfiles, newValue);
 			setupMemoryAllocatedForRoutingPref();
 		} else {

@@ -20,6 +20,7 @@ public class CoordinatesCurrentLocationWidget extends CoordinatesBaseWidget {
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
+		super.updateInfo(drawSettings);
 		boolean visible = mapActivity.getWidgetsVisibilityHelper().shouldShowTopCoordinatesWidget();
 		updateVisibility(visible);
 		if (visible) {
@@ -35,6 +36,7 @@ public class CoordinatesCurrentLocationWidget extends CoordinatesBaseWidget {
 	private void showSearchingGpsMessage() {
 		AndroidUiHelper.updateVisibility(firstIcon, false);
 		AndroidUiHelper.updateVisibility(divider, false);
+		AndroidUiHelper.updateVisibility(firstContainer, true);
 		AndroidUiHelper.updateVisibility(secondContainer, false);
 		GPSInfo gpsInfo = locationProvider.getGPSInfo();
 		String message = getString(R.string.searching_gps) + "… " + gpsInfo.usedSatellites + "/" + gpsInfo.foundSatellites;

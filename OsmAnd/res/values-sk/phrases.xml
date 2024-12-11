@@ -116,7 +116,7 @@
     <string name="poi_fire_hose">Požiarna hadica</string>
     <string name="poi_fire_water_pond">Požiarna nádrž</string>
     <string name="poi_grit_bin">Kontajner na posypový materiál</string>
-    <string name="poi_ses_station">Stanica civilnej ochrany</string>
+    <string name="poi_disaster_response">Stanica civilnej ochrany</string>
     <string name="poi_emergency_access_point">Bod príchodu záchrany</string>
     <string name="poi_ford">Brod</string>
     <string name="poi_mountain_pass">Horský priesmyk</string>
@@ -2008,7 +2008,7 @@
     <string name="poi_ramp_stroller_no">Rampa pre detské kočíky: nie</string>
     <string name="poi_ramp_bicycle_no">Rampa pre bicykle: nie</string>
     <string name="poi_ramp_luggage_no">Rampa pre batožinu: nie</string>
-    <string name="poi_defibrillator">Defibrilátor</string>
+    <string name="poi_defibrillator">Defibrilátor;AED</string>
     <string name="poi_site_type_city">Veľkomesto</string>
     <string name="poi_prison_camp">Bývalý väzenský tábor</string>
     <string name="poi_concentration_camp">Typ: koncentračný tábor</string>
@@ -4509,4 +4509,28 @@
     <string name="poi_cash_in_yes">Áno</string>
     <string name="poi_cash_in_no">Nie</string>
     <string name="poi_diet_pescetarian_no">Pescetariánska diéta (z mäsa len ryby): nie</string>
+    <string name="poi_name_etymology">Pôvod názvu</string>
+    <string name="poi_name_left">Názov ľavej strany</string>
+    <string name="poi_name_right">Názov pravej strany</string>
+    <string name="poi_activities_bicycle">Bicyklovanie</string>
+    <string name="poi_activities_running">Beh</string>
+    <string name="poi_camp_site_basic">Základný</string>
+    <string name="poi_camp_site_standard">Štandardný</string>
+    <string name="poi_camp_site_deluxe">Luxusný</string>
+    <string name="poi_osmand_foot_prohibited_tunnel">Tunel zakázaný pre chodcov</string>
+    <string name="poi_route_track">Iné trasy</string>
+    <string name="poi_route_track_point">Body na iných trasách</string>
+    <string name="poi_activities_trekking">Turistika</string>
+    <string name="poi_activities_pedestrian">Chôdza</string>
+    <string name="poi_activities_kayak">Vodné športy</string>
+    <string name="poi_activities_horse">Jazda na koni</string>
+    <string name="poi_activities_skiing">Zimné športy</string>
+    <string name="poi_activities_snowmobile">Snežný skúter</string>
+    <string name="poi_activities_fitness">Fitnes trasy</string>
+    <string name="poi_activities_mountain_bike">Horská cyklistika</string>
+    <string name="poi_activities_inline_skates">Kolieskové korčule</string>
+    <string name="poi_route_article_point">Body na cestách</string>
+    <string name="poi_camp_site_serviced">So službami</string>
+    <string name="poi_osmand_bicycle_prohibited_tunnel">Tunel zakázaný pre cyklistov</string>
+    <string name="poi_route_article">Články o cestovaní</string>
 </resources>

@@ -84,6 +84,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
+		boolean light = isLightContent();
 		buildDateRow(view, point.getTimestamp());
 		buildCommentRow(view, point.getComment());
 
@@ -110,6 +111,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	}
 
 	private void buildGroupFavouritesView(@NonNull View view) {
+		boolean light = isLightContent();
 		FavoriteGroup favoriteGroup = app.getFavoritesHelper().getGroup(point);
 		if (favoriteGroup != null && !Algorithms.isEmpty(favoriteGroup.getPoints())) {
 			int color = favoriteGroup.getColor() == 0 ? getColor(R.color.color_favorite) : favoriteGroup.getColor();

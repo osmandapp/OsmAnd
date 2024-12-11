@@ -18,22 +18,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupExecutor.BackupExecutorListener;
-import net.osmand.plus.backup.BackupListeners.OnCollectLocalFilesListener;
-import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
-import net.osmand.plus.backup.BackupListeners.OnDownloadFileListListener;
-import net.osmand.plus.backup.BackupListeners.OnDownloadFileListener;
-import net.osmand.plus.backup.BackupListeners.OnGenerateBackupInfoListener;
-import net.osmand.plus.backup.BackupListeners.OnUpdateSubscriptionListener;
-import net.osmand.plus.backup.BackupListeners.OnUploadFileListener;
+import net.osmand.plus.backup.BackupListeners.*;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
-import net.osmand.plus.backup.commands.CheckCodeCommand;
-import net.osmand.plus.backup.commands.DeleteAccountCommand;
-import net.osmand.plus.backup.commands.DeleteAllFilesCommand;
-import net.osmand.plus.backup.commands.DeleteFilesCommand;
-import net.osmand.plus.backup.commands.DeleteOldFilesCommand;
-import net.osmand.plus.backup.commands.RegisterDeviceCommand;
-import net.osmand.plus.backup.commands.RegisterUserCommand;
-import net.osmand.plus.backup.commands.SendCodeCommand;
+import net.osmand.plus.backup.commands.*;
 import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
@@ -875,7 +862,7 @@ public class BackupHelper {
 						if (PluginsHelper.isDevelopment()) {
 							if (fileChangedRemotely || fileChangedLocally) {
 								LOG.debug("file to backup " + localFile + " " + remoteFile
-										+ " " + fileChangedRemotely + " fileChangedRemotely " + fileChangedLocally + "fileChangedLocally");
+										+ " fileChangedRemotely " + fileChangedRemotely + " fileChangedLocally " + fileChangedLocally);
 							}
 						}
 					} else if (!remoteFile.isDeleted()) {

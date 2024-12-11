@@ -1,13 +1,17 @@
 package net.osmand.shared.gpx
 
-import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.modules.SerializersModule
+import kotlinx.serialization.modules.polymorphic
+import kotlinx.serialization.modules.subclass
 import net.osmand.shared.KAsyncTask
 import net.osmand.shared.api.KStateChangedListener
 import net.osmand.shared.api.SettingsAPI
 import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.data.SmartFolder
 import net.osmand.shared.gpx.filters.BaseTrackFilter
+import net.osmand.shared.gpx.filters.FolderTrackFilter
 import net.osmand.shared.gpx.filters.TrackFilterList
 import net.osmand.shared.gpx.filters.TrackFiltersHelper
 import net.osmand.shared.io.KFile
@@ -30,9 +34,22 @@ object SmartFolderHelper {
 		}
 	}
 
+	private val trackFilterSerializersModule = SerializersModule {
+		polymorphic(BaseTrackFilter::class) {
+			subclass(FolderTrackFilter::class)
+		}
+	}
+
+	val json = Json {
+		isLenient = true
+		ignoreUnknownKeys = true
+		classDiscriminator = "className"
+		serializersModule = trackFilterSerializersModule
+	}
+
 	init {
-		osmAndSettings.registerPreference(TRACK_FILTERS_SETTINGS_PREF, "")
-		osmAndSettings.addPreferenceListener(TRACK_FILTERS_SETTINGS_PREF, settingsChangedListener)
+		osmAndSettings.registerPreference(TRACK_FILTERS_SETTINGS_PREF, "", true, true)
+		osmAndSettings.addStringPreferenceListener(TRACK_FILTERS_SETTINGS_PREF, settingsChangedListener)
 		readSettings()
 	}
 
@@ -44,9 +61,9 @@ object SmartFolderHelper {
 
 	private fun readSettings() {
 		val newCollection = ArrayList<SmartFolder>()
-		val settingsJson = osmAndSettings.getStringPreference(TRACK_FILTERS_SETTINGS_PREF, "")
+		val settingsJson = osmAndSettings.getStringPreference(TRACK_FILTERS_SETTINGS_PREF)
 		if (!KAlgorithms.isEmpty(settingsJson)) {
-			TrackFilterList.parseFilters(settingsJson)?.let { savedFilters ->
+			TrackFilterList.parseFilters(settingsJson!!)?.let { savedFilters ->
 				for (smartFolder in savedFilters) {
 					smartFolder.filters?.let {
 						val newFilters: MutableList<BaseTrackFilter> = mutableListOf()
@@ -101,7 +118,7 @@ object SmartFolderHelper {
 		val newFolder = SmartFolder(name)
 		newFolder.creationTime = currentTimeMillis()
 		newFolder.filters = enabledFilters
-		KCollectionUtils.addToList(smartFolderCollection, newFolder)
+		smartFolderCollection = KCollectionUtils.addToList(smartFolderCollection, newFolder)
 		updateSmartFolderItems(newFolder)
 		writeSettings()
 		notifyFolderCreatedListeners(newFolder)
@@ -151,7 +168,7 @@ object SmartFolderHelper {
 
 	private fun writeSettings() {
 		isWritingSettings = true
-		val json = Json.encodeToString(ListSerializer(SmartFolder.serializer()), smartFolderCollection)
+		val json = json.encodeToString(smartFolderCollection)
 		osmAndSettings.setStringPreference(TRACK_FILTERS_SETTINGS_PREF, json)
 		isWritingSettings = false
 	}

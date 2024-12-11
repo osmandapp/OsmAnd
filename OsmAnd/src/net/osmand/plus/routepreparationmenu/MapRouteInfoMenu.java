@@ -46,6 +46,14 @@ import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.*;
+import net.osmand.plus.routepreparationmenu.data.RouteMenuAppModes;
+import net.osmand.plus.routepreparationmenu.data.parameters.AvoidPTTypesRoutingParameter;
+import net.osmand.plus.routepreparationmenu.data.parameters.AvoidRoadsRoutingParameter;
+import net.osmand.plus.routepreparationmenu.data.parameters.LocalRoutingParameter;
+import net.osmand.plus.routepreparationmenu.data.parameters.LocalRoutingParameterGroup;
+import net.osmand.plus.routepreparationmenu.data.parameters.MuteSoundRoutingParameter;
+import net.osmand.plus.routepreparationmenu.data.parameters.OtherLocalRoutingParameter;
+import net.osmand.plus.routepreparationmenu.data.parameters.ShowAlongTheRouteItem;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -73,7 +81,6 @@ import net.osmand.plus.myplaces.favorites.FavoritesListener;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ConfigureAppModesBottomSheetDialogFragment;
-import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.*;
 import net.osmand.plus.routepreparationmenu.cards.*;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
@@ -461,7 +468,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					fragment.updateInfo();
 					if (!routeCalculationInProgress) {
 						fragment.hideRouteCalculationProgressBar();
-						openMenuAfterCalculation(fragment, app);
+						if (!app.getOsmandMap().getMapView().isCarView()) {
+							openMenuAfterCalculation(fragment, app);
+						}
 					}
 				}
 			}
@@ -1513,7 +1522,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				if (mapActivity.getPointToNavigate() != null) {
 					hide();
 				}
-				mapActivity.getMapLayers().getMapActionsHelper().startNavigation();
+				mapActivity.getMapActions().startNavigation();
 			}
 		}
 	}
@@ -1528,7 +1537,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private void clickRouteCancel() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			mapActivity.getMapLayers().getMapActionsHelper().stopNavigation();
+			mapActivity.getMapActions().stopNavigation();
 			resetRouteCalculation();
 		}
 	}
@@ -2345,7 +2354,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				mapActivity.refreshMap();
 				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), true);
 				if (switched) {
-					mapActivity.getMapLayers().getMapActionsHelper().switchToRouteFollowingLayout();
+					mapActivity.getMapActions().switchToRouteFollowingLayout();
 				}
 				if (mapActivity.getPointToNavigate() == null && !selectFromMapTouch && !selectFromTracks
 						&& !customizingRouteLine) {

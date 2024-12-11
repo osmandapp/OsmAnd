@@ -38,6 +38,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.util.TextDirectionUtil;
 
 import org.apache.commons.logging.Log;
 
@@ -173,7 +174,7 @@ public class ShareMenu extends BaseMenuController {
 
 		OsmandSettings settings = ((OsmandApplication) activity.getApplicationContext()).getSettings();
 		int format = settings.COORDINATES_FORMAT.get();
-		coordinates = OsmAndFormatter.getFormattedCoordinates(latLon.getLatitude(), latLon.getLongitude(), format);
+		coordinates = OsmAndFormatter.getFormattedCoordinates(latLon.getLatitude(), latLon.getLongitude(), format, false);
 	}
 
 	public static void startAction(@NonNull Context context, @NonNull ShareItem item,
@@ -245,7 +246,7 @@ public class ShareMenu extends BaseMenuController {
 	public static void sendMessage(@NonNull Context context, @NonNull String text) {
 		Intent intent = new Intent(Intent.ACTION_SEND);
 		intent.setAction(Intent.ACTION_SEND);
-		intent.putExtra(Intent.EXTRA_TEXT, text);
+		intent.putExtra(Intent.EXTRA_TEXT, TextDirectionUtil.clearDirectionMarks(text));
 		intent.setType("text/plain");
 		Intent chooserIntent = Intent.createChooser(intent, context.getString(R.string.send_location));
 		AndroidUtils.startActivityIfSafe(context, intent, chooserIntent);
@@ -268,9 +269,9 @@ public class ShareMenu extends BaseMenuController {
 	private static boolean copyToClipboard(@NonNull Context context, @NonNull String text,
 	                                       boolean showToast, int duration) {
 		Object object = context.getSystemService(Activity.CLIPBOARD_SERVICE);
-		if (object instanceof ClipboardManager) {
-			ClipboardManager clipboardManager = (ClipboardManager) object;
-			clipboardManager.setPrimaryClip(ClipData.newPlainText("", text));
+		if (object instanceof ClipboardManager clipboardManager) {
+			String cleanText = TextDirectionUtil.clearDirectionMarks(text);
+			clipboardManager.setPrimaryClip(ClipData.newPlainText("", cleanText));
 			if (showToast) {
 				String toastMessage = context.getString(R.string.copied_to_clipboard) + ":\n" + text;
 				Toast.makeText(context, toastMessage, duration).show();

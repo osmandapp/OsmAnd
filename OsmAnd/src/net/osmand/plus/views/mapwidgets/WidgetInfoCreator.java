@@ -8,6 +8,7 @@ import androidx.annotation.StringRes;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.mapwidgets.widgetinterfaces.IComplexWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
@@ -117,14 +118,16 @@ public class WidgetInfoCreator {
 	                                      @Nullable String message,
 	                                      int page,
 	                                      int order,
-										  @NonNull WidgetsPanel widgetPanel) {
-		if (widget instanceof SimpleWidget) {
-			SimpleWidget simpleWidget = ((SimpleWidget) widget);
+	                                      @NonNull WidgetsPanel widgetPanel) {
+		if (widget instanceof IComplexWidget) {
+			return new ComplexWidgetInfo(key, widget, daySettingsIconId, nightSettingIconId,
+					messageId, message, page, order, widgetPanel);
+		}
+		if (widget instanceof SimpleWidget simpleWidget) {
 			return new SimpleWidgetInfo(key, simpleWidget, daySettingsIconId, nightSettingIconId,
 					messageId, message, page, order, widgetPanel);
 		}
-		if (widget instanceof TextInfoWidget) {
-			TextInfoWidget textInfoWidget = ((TextInfoWidget) widget);
+		if (widget instanceof TextInfoWidget textInfoWidget) {
 			return new SideWidgetInfo(key, textInfoWidget, daySettingsIconId, nightSettingIconId,
 					messageId, message, page, order, widgetPanel);
 		} else {

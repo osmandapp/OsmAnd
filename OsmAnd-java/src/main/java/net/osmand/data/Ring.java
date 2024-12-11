@@ -1,6 +1,5 @@
 package net.osmand.data;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +12,7 @@ import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OsmMapUtils;
 import net.osmand.osm.edit.Way;
 import net.osmand.util.MapAlgorithms;
+
 
 /**
  * A ring is a list of CONTIGUOUS ways that form a simple boundary or an area. <p />

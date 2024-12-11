@@ -11,7 +11,7 @@ import java.util.List;
 
 import gnu.trove.list.array.TByteArrayList;
 
-class GradientPathGeometryZoom extends PathGeometryZoom {
+public class GradientPathGeometryZoom extends PathGeometryZoom {
 
 	public GradientPathGeometryZoom(GeometryWayProvider locationProvider, RotatedTileBox tb, boolean simplify,
 	                                @NonNull List<Integer> forceIncludedIndexes) {

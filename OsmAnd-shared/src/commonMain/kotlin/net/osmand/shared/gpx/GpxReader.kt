@@ -20,6 +20,7 @@ class GpxReader(private val adapter: GpxReaderAdapter)
 	}
 
 	private val database: GpxDatabase = GpxDbHelper.getGPXDatabase()
+	private var analyser = PlatformUtil.getTrackPointsAnalyser()
 	private var currentFile: KFile? = null
 	private var currentItem: GpxDataItem? = null
 
@@ -91,7 +92,6 @@ class GpxReader(private val adapter: GpxReaderAdapter)
 		val gpxFile = GpxUtilities.loadGpxFile(file, null, false)
 		val updatedItem = item ?: GpxDataItem(file)
 		if (gpxFile.error == null) {
-			val analyser = PlatformUtil.getOsmAndContext().getTrackPointsAnalyser()
 			updatedItem.setAnalysis(gpxFile.getAnalysis(file.lastModified(), null, null, analyser))
 			if (!updatedItem.isRegularTrack()) {
 				return updatedItem

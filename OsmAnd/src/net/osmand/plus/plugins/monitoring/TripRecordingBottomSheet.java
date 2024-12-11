@@ -217,20 +217,8 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 				blockStatisticsBuilder.runUpdatingStatBlocksIfNeeded();
 				handler.startChartUpdatesIfNotRunning();
 			}
-			if (isRecordingTrack) {
-				settings.SAVE_GLOBAL_TRACK_TO_GPX.set(false);
-				NavigationService navigationService = app.getNavigationService();
-				if (navigationService != null) {
-					navigationService.stopIfNeeded(app, NavigationService.USED_BY_GPX);
-				}
-			} else {
-				app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.set(true);
-				app.startNavigationService(NavigationService.USED_BY_GPX);
-
-				FragmentActivity activity = getMapActivity();
-				if (activity != null) {
-					AndroidUtils.requestNotificationPermissionIfNeeded(activity);
-				}
+			if (plugin != null) {
+				plugin.pauseOrResumeRecording();
 			}
 			updateStatus();
 			createItem(resumePauseButton, !isRecordingTrack ? ItemType.PAUSE : ItemType.RESUME);
@@ -241,10 +229,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		CardView finishButton = container.findViewById(R.id.button_center_right);
 		createItem(finishButton, ItemType.FINISH);
 		finishButton.setOnClickListener(v -> {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null && plugin != null && hasDataToSave()) {
-				plugin.saveCurrentTrack(null, mapActivity);
-				app.getNotificationHelper().refreshNotifications();
+			if (plugin != null && plugin.finishRecording()) {
 				dismiss();
 			}
 		});

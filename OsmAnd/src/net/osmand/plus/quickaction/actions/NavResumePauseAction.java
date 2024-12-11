@@ -68,14 +68,12 @@ public class NavResumePauseAction extends QuickAction {
 
 	@Override
 	public int getIconRes(Context context) {
-		if (context instanceof MapActivity) {
-			RoutingHelper helper = ((MapActivity) context).getRoutingHelper();
-			if (!helper.isRouteCalculated() || helper.isRoutePlanningMode()) {
-				return R.drawable.ic_play_dark;
-			}
-			return R.drawable.ic_pause;
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		RoutingHelper helper = app.getRoutingHelper();
+		if (!helper.isRouteCalculated() || helper.isRoutePlanningMode()) {
+			return R.drawable.ic_play_dark;
 		}
-		return super.getIconRes(context);
+		return R.drawable.ic_pause;
 	}
 
 	@Override

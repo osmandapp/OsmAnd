@@ -51,16 +51,17 @@ public class Map3DButton extends MapButton {
 	public void update() {
 		super.update();
 
-		boolean is3DMode = !buttonState.isDefaultElevationAngle();
-		setContentDescription(app.getString(is3DMode ? R.string.map_2d_mode_action : R.string.map_3d_mode_action));
+		boolean flatMode = buttonState.isFlatMapMode();
+		setContentDescription(app.getString(flatMode ? R.string.map_3d_mode_action : R.string.map_2d_mode_action));
 	}
 
 	@NonNull
 	private View.OnClickListener getOnCLickListener() {
 		OsmandMapTileView mapView = getMapView();
 		return view -> {
-			boolean defaultElevationAngle = buttonState.isDefaultElevationAngle();
-			float tiltAngle = defaultElevationAngle ? getElevationAngle(mapView.getZoom()) : DEFAULT_ELEVATION_ANGLE;
+			boolean flatMode = buttonState.isFlatMapMode();
+			float tiltAngle = mapView.normalizeElevationAngle(
+					flatMode ? getElevationAngle(mapView.getZoom()) : DEFAULT_ELEVATION_ANGLE);
 			animateDraggingMapThread.startTilting(tiltAngle, 0.0f);
 			mapView.refreshMap();
 		};
@@ -92,13 +93,12 @@ public class Map3DButton extends MapButton {
 
 	@Override
 	protected boolean shouldShow() {
-		boolean shouldShowFabButton = mapActivity.getWidgetsVisibilityHelper().shouldShowMap3DButton();
+		boolean shouldShowFabButton = visibilityHelper.shouldShowMap3DButton();
 		Map3DModeVisibility visibility = buttonState.getVisibility();
 
 		return app.useOpenGlRenderer() && shouldShowFabButton
 				&& (visibility == Map3DModeVisibility.VISIBLE
-				|| (visibility == Map3DModeVisibility.VISIBLE_IN_3D_MODE
-				&& !buttonState.isDefaultElevationAngle()));
+				|| (visibility == Map3DModeVisibility.VISIBLE_IN_3D_MODE && !buttonState.isFlatMapMode()));
 	}
 
 	@Override

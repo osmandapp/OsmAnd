@@ -1,6 +1,6 @@
 package net.osmand.shared.gpx.filters
 
-import kotlinx.serialization.json.Json
+import net.osmand.shared.gpx.SmartFolderHelper
 import net.osmand.shared.gpx.data.SmartFolder
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.LoggerFactory
@@ -12,7 +12,7 @@ object TrackFilterList {
 		var savedFilters: List<SmartFolder>? = null
 		if (!KAlgorithms.isEmpty(str)) {
 			try {
-				savedFilters = Json.decodeFromString<List<SmartFolder>?>(str)
+				savedFilters = SmartFolderHelper.json.decodeFromString<List<SmartFolder>?>(str)
 			} catch (e: Throwable) {
 				log.error("Failed to parse track filter: '$str'", e)
 			}

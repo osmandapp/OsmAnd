@@ -14,43 +14,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.NativeLibrary.RenderedObject;
-import net.osmand.core.jni.ElevationConfiguration;
+import net.osmand.core.jni.*;
 import net.osmand.core.jni.ElevationConfiguration.SlopeAlgorithm;
 import net.osmand.core.jni.ElevationConfiguration.VisualizationStyle;
-import net.osmand.core.jni.GeoTiffCollection;
 import net.osmand.core.jni.IGeoTiffCollection.RasterType;
-import net.osmand.core.jni.IMapTiledSymbolsProvider;
-import net.osmand.core.jni.IObfsCollection;
-import net.osmand.core.jni.IRasterMapLayerProvider;
-import net.osmand.core.jni.MapObject;
-import net.osmand.core.jni.MapObjectList;
-import net.osmand.core.jni.MapObjectsSymbolsProvider;
-import net.osmand.core.jni.MapPresentationEnvironment;
 import net.osmand.core.jni.MapPresentationEnvironment.LanguagePreference;
-import net.osmand.core.jni.MapPrimitivesProvider;
 import net.osmand.core.jni.MapPrimitivesProvider.Mode;
-import net.osmand.core.jni.MapPrimitiviser;
-import net.osmand.core.jni.MapRasterLayerProvider_Software;
-import net.osmand.core.jni.MapStylesCollection;
-import net.osmand.core.jni.ObfMapObject;
-import net.osmand.core.jni.ObfMapObjectsProvider;
-import net.osmand.core.jni.ObfsCollection;
-import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.QListFloat;
-import net.osmand.core.jni.QListPointI;
-import net.osmand.core.jni.QStringList;
-import net.osmand.core.jni.QStringStringHash;
-import net.osmand.core.jni.QVectorPointI;
-import net.osmand.core.jni.ResolvedMapStyle;
-import net.osmand.core.jni.SqliteHeightmapTileProvider;
-import net.osmand.core.jni.SwigUtilities;
-import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
-import net.osmand.osm.AbstractPoiType;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
@@ -64,7 +36,6 @@ import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import net.osmand.util.OsmUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -88,7 +59,7 @@ public class MapRendererContext {
 	public static final int OBF_CONTOUR_LINES_RASTER_LAYER = 6000;
 	public static final int OBF_SYMBOL_SECTION = 1;
 	public static final int WEATHER_CONTOURS_SYMBOL_SECTION = 2;
-	private static boolean IGNORE_CORE_PRELOADED_STYLES = false; // enable to debug default.render.xml changes
+	public static boolean IGNORE_CORE_PRELOADED_STYLES = false; // enable to debug default.render.xml changes
 
 	private final OsmandApplication app;
 
@@ -129,16 +100,26 @@ public class MapRendererContext {
 	 *
 	 * @param mapRendererView Reference to MapRendererView
 	 */
-	public void setMapRendererView(@Nullable MapRendererView mapRendererView) {
-		boolean update = (this.mapRendererView != mapRendererView);
-		if (update && this.mapRendererView != null)
-			this.mapRendererView.stopRenderer();
-		this.mapRendererView = mapRendererView;
-		if (!update) {
+	public synchronized void setMapRendererView(@Nullable MapRendererView mapRendererView) {
+		if (this.mapRendererView == mapRendererView) {
 			return;
 		}
+		this.mapRendererView = mapRendererView;
 		if (mapRendererView != null) {
 			applyCurrentContextToView();
+		}
+	}
+
+	public synchronized void suspendMapRendererView(@Nullable MapRendererView mapRendererView) {
+		if (this.mapRendererView != null && (mapRendererView == null || this.mapRendererView == mapRendererView)) {
+			this.mapRendererView.handleOnPause();
+		}
+	}
+
+	public synchronized void releaseMapRendererView(@Nullable MapRendererView mapRendererView) {
+		if (this.mapRendererView != null && (mapRendererView == null || this.mapRendererView == mapRendererView)) {
+			this.mapRendererView.stopRenderer();
+			this.mapRendererView = null;
 		}
 	}
 
@@ -457,13 +438,15 @@ public class MapRendererContext {
 		}
 	}
 
+	public void presetMapRendererOptions(@NonNull MapRendererView mapRendererView) {
+		mapRendererView.setupOptions.setMaxNumberOfRasterMapLayersInBatch(1);
+	}
+
 	private void applyCurrentContextToView() {
 		MapRendererView mapRendererView = this.mapRendererView;
 		if (mapRendererView == null) {
 			return;
 		}
-		mapRendererView.setMapRendererSetupOptionsConfigurator(
-				mapRendererSetupOptions -> mapRendererSetupOptions.setMaxNumberOfRasterMapLayersInBatch(1));
 		if (mapRendererView instanceof AtlasMapRendererView) {
 			cachedReferenceTileSize = getReferenceTileSize();
 			((AtlasMapRendererView) mapRendererView).setReferenceTileSizeOnScreenInPixels(cachedReferenceTileSize);
@@ -471,6 +454,7 @@ public class MapRendererContext {
 		updateElevationConfiguration();
 
 		if (obfMapRasterLayerProvider != null) {
+			mapRendererView.resetMapLayerProvider(providerType.layerIndex);
 			mapRendererView.setMapLayerProvider(providerType.layerIndex, obfMapRasterLayerProvider);
 		}
 		if (obfMapSymbolsProvider != null) {
@@ -707,13 +691,17 @@ public class MapRendererContext {
 	}
 
 	public List<RenderedObject> retrievePolygonsAroundPoint(PointI point, ZoomLevel zoomLevel, boolean withPoints) {
-		MapObjectList polygons = mapPrimitivesProvider.retreivePolygons(point, zoomLevel);
 		List<RenderedObject> res = new ArrayList<>();
-		if (polygons.size() > 0) {
-			for (int i = 0; i < polygons.size(); i++) {
-				MapObject polygon = polygons.get(i);
-				RenderedObject renderedObject = createRenderedObjectForPolygon(polygon, i);
-				res.add(renderedObject);
+		if (mapPrimitivesProvider != null) {
+			MapObjectList polygons = mapPrimitivesProvider.retreivePolygons(point, zoomLevel);
+			if (polygons.size() > 0) {
+				for (int i = 0; i < polygons.size(); i++) {
+					MapObject polygon = polygons.get(i);
+					RenderedObject renderedObject = createRenderedObjectForPolygon(polygon, i);
+					if (renderedObject != null) {
+						res.add(renderedObject);
+					}
+				}
 			}
 		}
 		return res;
@@ -726,6 +714,9 @@ public class MapRendererContext {
 		for (int i = 0; i < tagsKeys.size(); i++) {
 			String key = tagsKeys.get(i);
 			String value = tags.get(key);
+			if ("osmand_change".equals(key) && "delete".equals(value)) {
+				return null;
+			}
 			object.putTag(key, value);
 		}
 
@@ -734,6 +725,9 @@ public class MapRendererContext {
 		for (int i = 0; i < namesKeys.size(); i++) {
 			String key = namesKeys.get(i);
 			String value = names.get(key);
+			if ("osmand_change".equals(key) && "delete".equals(value)) {
+				return null;
+			}
 			object.setName(key, value);
 		}
 

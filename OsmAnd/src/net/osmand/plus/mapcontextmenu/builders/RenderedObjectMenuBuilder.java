@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import net.osmand.CallbackWithObject;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.MapPoiTypes;
@@ -19,7 +20,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import net.osmand.util.OsmUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
@@ -147,7 +147,7 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 			double lat = MapUtils.get31LatitudeY(renderedObject.getLabelY());
 			double lon = MapUtils.get31LongitudeX(renderedObject.getLabelX());
 			rect = MapUtils.calculateLatLonBbox(lat, lon, SEARCH_POI_RADIUS);
-			osmId = OsmUtils.getOsmObjectId(renderedObject);
+			osmId = ObfConstants.getOsmObjectId(renderedObject);
 			app = application;
 		}
 
@@ -160,7 +160,7 @@ public class RenderedObjectMenuBuilder extends AmenityMenuBuilder {
 					new ResultMatcher<>() {
 						@Override
 						public boolean publish(Amenity amenity) {
-							long id = OsmUtils.getOsmObjectId(amenity);
+							long id = ObfConstants.getOsmObjectId(amenity);
 							return id == osmId;
 						}
 

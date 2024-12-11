@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
-import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
+import net.osmand.plus.routepreparationmenu.data.parameters.LocalRoutingParameter;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.PlatformUtil;

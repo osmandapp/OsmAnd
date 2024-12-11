@@ -255,26 +255,7 @@
 \nOsmAnd aktiboki garatua izaten ari da eta proiektuaren prozesuak dituen garatze, programatze eta funtzionalitate berrien probak egiteko behar den finantziazio laguntzetan ere oinarritzen da. OsmAnd+ erosiz gero, aplikazioa are zirraragarria izatea laguntzen duzu! Ezaugarri berriak finantzatzea edo dohaintza orokor bat egitea posible da osman.net-en.</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapak &amp; Nabigazioa</string>
     <string name="osmand_plus_short_description_80_chars">Lineaz Kanpoko eta Sare Bidezko OSM Mapetarako Mapa Ikusle eta Nabigatzaile Mugikor Globala</string>
-    <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions)
-\n
-\nOsmAnd+ kode irekiko nabigaziorako aplikazioa da, OpenStreetMap-eko (OSM) mota askotako munduko mapetara sarbidearekin. Mapa guztiak (bektore edo tesela mapak) telefonoaren memoria txartelean gorde daitezke, lineaz kanpoko erabilpena bermatzeko. OsmAnd-ek ere lineaz kanpoko eta sareko ibilbide-kalkulua eskaintzen du, txandakako ahots gidaritzarekin.
-\n
-\nOsmAnd+ aplikazioaren ordaindutako bertsioa da, hau erosiz gero proiektua aurrera eramaten laguntzen ari zara, ezaugarri berrien garapena finantzatzen, eta gainera, azken eguneraketak jasoko dituzu.
-\n
-\nEzaugarri nagusi batzuk:
-\n- Lineaz kanpoko erabateko erabilpena (bektore edo tesela mapak gorde ondoren aukeratu daitezken karpetetan)
-\n- Lineaz kanpoko mundu guztiko mapa konpaktuak eskuragarri
-\n- Muga gabeko herrialde edo eskualdeetako mapen deskarga, aplikaziotik zuzenean
-\n- Lineaz kanpoko WIkipedia-ko erabilpena (deskargatu Wikipedia-ko POIak), turismorako erabilgarriak
-\n- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interes puntuak (POI), gogokoak,  garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak eta topografia-ezaugarriak sestra-kurbak/erliebearen itzala/malda bezalakoak
-\n- Lineaz kanpoko helbide eta lekuen bilatzailea (POI-ak)
-\n- Lineaz kanpoko ibilbide-kalkulua distantzia ertainetarako
-\n- Kotxea, bizikleta eta oinezkoentzat modua:
-\n- Aukerazko egun/gau ikuspegi automatizatua
-\n- Aukerazko abiaduraren araberako maparen zooma
-\n- Aukerazko maparen lerrokatzea, iparrorratzaren edo norabidearen araberakoa
-\n- Aukerazko errei gidaritza, abiadura muga bistaratzea, grabaketa edo ahots bihurgailua motorra⏎ ⇥
-\n"</string>
+    <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions)\n\n\n\nOsmAnd+ kode irekiko nabigaziorako aplikazioa da, OpenStreetMap-eko (OSM) mota askotako munduko mapetara sarbidearekin. Mapa guztiak (bektore edo tesela mapak) telefonoaren memoria txartelean gorde daitezke, lineaz kanpoko erabilpena bermatzeko. OsmAnd-ek ere lineaz kanpoko eta sareko ibilbide-kalkulua eskaintzen du, txandakako ahots gidaritzarekin.\n\n\n\nOsmAnd+ aplikazioaren ordaindutako bertsioa da, hau erosiz gero proiektua aurrera eramaten laguntzen ari zara, ezaugarri berrien garapena finantzatzen, eta gainera, azken eguneraketak jasoko dituzu.\n\n\n\nEzaugarri nagusi batzuk:\n\n- Lineaz kanpoko erabateko erabilpena (bektore edo tesela mapak gorde ondoren aukeratu daitezken karpetetan)\n\n- Lineaz kanpoko mundu guztiko mapa konpaktuak eskuragarri\n\n- Muga gabeko herrialde edo eskualdeetako mapen deskarga, aplikaziotik zuzenean\n\n- Lineaz kanpoko WIkipedia-ko erabilpena (deskargatu Wikipedia-ko POIak), turismorako erabilgarriak\n\n- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interes puntuak (POI), gogokoak,  garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak eta topografia-ezaugarriak sestra-kurbak/erliebearen itzala/malda bezalakoak\n\n- Lineaz kanpoko helbide eta lekuen bilatzailea (POI-ak)\n\n- Lineaz kanpoko ibilbide-kalkulua distantzia ertainetarako\n\n- Kotxea, bizikleta eta oinezkoentzat modua:\n\n- Aukerazko egun/gau ikuspegi automatizatua\n\n- Aukerazko abiaduraren araberako maparen zooma\n\n- Aukerazko maparen lerrokatzea, iparrorratzaren edo norabidearen araberakoa\n\n- Aukerazko errei gidaritza, abiadura muga bistaratzea, grabaketa edo ahots bihurgailua motorra⏎ ⇥\n\n"</string>
     <string name="filterpoi_activity">Sortu interesguneen iragazkia</string>
     <string name="recalculate_route_to_your_location">Garraio modua:</string>
     <string name="select_navigation_mode">Garraio modua:</string>
@@ -1470,7 +1451,6 @@
     <string name="waypoint_visit_before">Bisitatu aurretik</string>
     <string name="simulate_your_location">Simulatu zure kokapena</string>
     <string name="drawer">Zerrenda soila</string>
-    <string name="short_location_on_map">Lat %1$s\nLon %2$s</string>
     <string name="tips_and_tricks_descr">Maiz egindako galderak, azken aldaketak, eta bestelakoak.</string>
     <string name="routing_settings_2">Nabigazio ezarpenak</string>
     <string name="shared_string_deselect">Desautatu</string>
@@ -3783,7 +3763,6 @@
     <string name="message_graph_will_be_available_after_recalculation">Itxaron mesedez.
 \nIbilbidea birkalkulatu ondoren grafikoa eskuragarri egongo da.</string>
     <string name="shared_string_local_maps">Tokiko mapak</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="icon_group_special">Berezia</string>
     <string name="icon_group_transport">Garraioa</string>
     <string name="icon_group_service">Zerbitzua</string>
@@ -5022,51 +5001,7 @@
     <string name="simulation_position_description">Hautatu kokapena mugitzeko iturri gisa erabiliko den arrasto-fitxategi bat.</string>
     <string name="empty_tracks">Ez duzu arrasto-fitxategirik.</string>
     <string name="display_position_automatic_descr">Maparen orientazioaren araberakoa da: behea mugimenduaren noranzkorako, erdigunea beste guztientzat.</string>
-    <string name="release_4_4">"• \"Arrastoak\" menua hobetu da \"Konfiguratu mapa\" atalean
-\n
-\n
-\n • Testuinguru-menuak interesguneen izen lokalizatuak bistaratzen ditu orain
-\n
-\n
-\n • Ibilbidea esteka bidez partekatzeko aukera gehitu da
-\n
-\n
-\n • \"Itsas milia/oinak\" luzera-unitatea gehitu da
-\n
-\n
-\n • Maparen orientazioak modu finko berria gehitu du
-\n
-\n
-\n • Hasierako pantaila sinplifikatua
-\n
-\n
-\n • Kokapen finkoa pantaila zatitu moduan Android Auto-n
-\n
-\n
-\n • \"Abiadura/Malda\" grafikoa gehitu da pista aztertzeko
-\n
-\n
-\n • Android 13-k aplikazioaren hizkuntza aukeraketa sistemaren ezarpenetara eraman du
-\n
-\n
-\n • Leku beganoak bistaratzeko arazoak konpondu dira
-\n
-\n
-\n  • \"Overlay\" edo \"Underlay\" mapa gisa erabiltzen diren lineako fitxak deskargatzeko aukera gehitu da
-\n
-\n
-\n • Unitate inperialen laguntza gehitu da \"Ibilgailuen parametroetarako\"
-\n
-\n
-\n • Ziklomotor profil berria
-\n
-\n
-\n • \"Bistaratzeko posizioa\" aukera berria gehitu du \"Automatiko\"
-\n
-\n
-\n • Okertu, zoom eta biratzeko mapa keinuak konpondu dira
-\n
-\n"</string>
+    <string name="release_4_4">"• \"Arrastoak\" menua hobetu da \"Konfiguratu mapa\" atalean\n\n\n\n\n\n • Testuinguru-menuak interesguneen izen lokalizatuak bistaratzen ditu orain\n\n\n\n\n\n • Ibilbidea esteka bidez partekatzeko aukera gehitu da\n\n\n\n\n\n • \"Itsas milia/oinak\" luzera-unitatea gehitu da\n\n\n\n\n\n • Maparen orientazioak modu finko berria gehitu du\n\n\n\n\n\n • Hasierako pantaila sinplifikatua\n\n\n\n\n\n • Kokapen finkoa pantaila zatitu moduan Android Auto-n\n\n\n\n\n\n • \"Abiadura/Malda\" grafikoa gehitu da pista aztertzeko\n\n\n\n\n\n • Android 13-k aplikazioaren hizkuntza aukeraketa sistemaren ezarpenetara eraman du\n\n\n\n\n\n • Leku beganoak bistaratzeko arazoak konpondu dira\n\n\n\n\n\n  • \"Overlay\" edo \"Underlay\" mapa gisa erabiltzen diren lineako fitxak deskargatzeko aukera gehitu da\n\n\n\n\n\n • Unitate inperialen laguntza gehitu da \"Ibilgailuen parametroetarako\"\n\n\n\n\n\n • Ziklomotor profil berria\n\n\n\n\n\n • \"Bistaratzeko posizioa\" aukera berria gehitu du \"Automatiko\"\n\n\n\n\n\n • Okertu, zoom eta biratzeko mapa keinuak konpondu dira\n\n\n\n"</string>
     <string name="switch_folder">Aldatu karpeta</string>
     <string name="cloud_version_confirm_delete">\"%1$s\" OsmAnd Cloud-etik ezabatu\?</string>
     <string name="shared_string_delete_file">Ezabatu fitxategia</string>
@@ -5899,4 +5834,42 @@
     <string name="drawer_button_description">Menu nagusia irekitzen du.</string>
     <string name="configure_map_description">Aldatu maparen estiloa, geruzak edo bestelako ezarpenak.</string>
     <string name="my_location_action_descr">Zentratzen du mapa zure uneko kokapenean.</string>
+    <string name="obd_widget_vehicle_speed">Ibilgailuaren abiadura</string>
+    <string name="obd_widget_engine_speed">Motorraren birak</string>
+    <string name="obd_fuel_consumption_rate_l_h">Erregai-kontsumo tasa (l/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor">Erregai-kontsumo tasa (sentsorea)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Ibilgailuen erregai-kontsumo-tasa erakusten du sentsorearen arabera (l/h)</string>
+    <string name="obd_fuel_level_liter">Erregai maila (l)</string>
+    <string name="obd_fuel_level_percent">Erregai maila (%)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Ibilgailuen erregai-kontsumo-tasa erakusten du kalkuluen arabera (l/h)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Erregai-kontsumo-tasa l/h</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">Erregaiaren kontsumo-tasa %/h</string>
+    <string name="route_guidance_desc">Ibilbideen orientazioa denbora errealean eskaintzen du, hurrengo biraketarako distantzia, errepidearen izena, uneko kalearen izena eta erreiaren informazioa barne. Trepetak aktibo daude nabigazioan zehar.</string>
+    <string name="route_guidance">Ibilbide-gida</string>
+    <string name="obd_fuel_left_km">geratzen den erregaia (km)</string>
+    <string name="obd_fuel_consumption_rate_scanner">Erregai-kontsumo-tasa (obd)</string>
+    <string name="obd_bluetooth_off_description">Aktibatu Bluetooth-a, bilatu eta konektatu eskanerrak.</string>
+    <string name="obd_searching_text_description">Mesedez, eduki gailua eskanerretik gertu. Ziurtatu ibilgailuaren motorra martxan dagoela.</string>
+    <string name="obd_nothing_found_description">Mesedez, egiaztatu honako hau:\n – Ziurtatu Bluetootha aktibatuta dagoela\n – Ibilgailuaren motorra martxan dagoela\n – Ziurtatu zure gailua eskanerraren eremuan dagoela.</string>
+    <string name="obd_nothing_found_text">Ez da eskanerrik aurkitu</string>
+    <string name="obd_device_forget_sensor_description">Eskanerra zerrendatik kenduko da. Eskaner hau berriro parekatu ahal izango duzu edozein unetan.</string>
+    <string name="shared_string_bluetooth">Bluetooth-a</string>
+    <string name="connect_obd_instructions_step">1. Konektatu eskanerra zure ibilgailuaren OBD-II atakara.\n\n 2. Piztu ibilgailuaren motorra\n\n 3. Gaitu Bluetootha zure gailuan\n\n 4. Sakatu \'%1$s\' eta hautatu zure eskanerra zerrendatik.</string>
+    <string name="liter">l</string>
+    <string name="obd_searching_text">Eskanerrak bilatzen</string>
+    <string name="obd_device_forget_sensor">Ahaztu eskanerra</string>
+    <string name="speedometer_maximum">Gehienezkoa</string>
+    <string name="percent_hour">%/h</string>
+    <string name="screen_is_locked_by_external_button">Ukipen-pantaila blokeatuta dago. Desblokeatzeko, sakatu %1$s botoia, edo sakatu pantailako botoia.</string>
+    <string name="screen_is_unlocked">Ukipen-pantaila desblokeatuta dago.</string>
+    <string name="screen_is_locked_by_action_button">Ukipen-pantaila blokeatuta dago. Sakatu botoia desblokeatzeko.</string>
+    <string name="obd_vehicle_info">Ibilgailuaren informazioa</string>
+    <string name="connect_obd_instructions_title">OsmAnd-ek Bluetooth konexioak onartzen ditu OBD-II eskanerretarako.</string>
+    <string name="obd_how_to_connect">Nola konektatu:</string>
+    <string name="connect_obd_instructions_step1">Konektatu eskanerra zure ibilgailuaren OBD-II atakara.</string>
+    <string name="connect_obd_instructions_step2">Piztu ibilgailuaren motorra</string>
+    <string name="connect_obd_instructions_step3">Gaitu Bluetootha zure gailuan</string>
+    <string name="connect_obd_instructions_step4">Sakatu \'Konektatu\' eta hautatu zure eskanerra zerrendatik.</string>
+    <string name="learn_more_about_obd_sensors">Lortu informazio gehiago sentsoreei buruz.</string>
+    <string name="release_4_9">• Pantaila osoko galeria-ikustaile bat gehitu da Wikimediako irudietarako\n\n • \"Ibilgailuen neurketak\" plugin berri bat aurkeztu du ibilgailuen errendimendua OBD-II protokoloa erabiliz kontrolatzeko\n\n • Arrastoei jarduerak esleitzeko eta horren arabera iragazteko gaitasuna gehitu da\n\n • Bidaiak grabatzeko eta ukipen-pantaila blokeatzeko ekintza azkar berriak ezarri dira\n\n • Maparen botoiaren itxura pertsonalizagarria eta sareta zehatza sartu ditu\n\n • Testuinguru-menua eta \"Berrezarri batez besteko abiadura\" ekintza bat gehitu ditu trepetetan\n\n • Ibilbide geruza berria gehitu da \"Motocros ibilbideak\"\n\n • \"Auto-grabatu arrastoa nabigazioan\" konpondu da\n\n • Arazoa konpondu da RTL-n iraulitako koordenatuekin\n\n • Unean grabatutako arrastoetarako galdutako sentsoreen datuak konpondu dira\n\n • Hautatutako punturako inguruko eremuei buruzko informazioa gehitu da\n\n • Ekintza azkarra gehitu da OSM edizioen ikusgarritasuna kontrolatzeko\n\n • Lurra koloreztatzeko aukeren ikusgarritasun parametro bereiziak\n\n • Saka daitekeen ikono bat gehitu da sarbidea edo beste errepide edo bide-atributu batzuk bistaratzeko</string>
 </resources>

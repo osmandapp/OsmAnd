@@ -1230,7 +1230,7 @@ public class SearchCoreFactory {
 				} else if (obj instanceof SearchPoiTypeFilter) {
 					poiTypeFilter = (SearchPoiTypeFilter) obj;
 				} else if (obj instanceof SearchPoiAdditionalFilter) {
-					poiTypeFilter = ACCEPT_ALL_POI_TYPE_FILTER;
+					poiTypeFilter = null;
 					poiAdditionalFilter = (SearchPoiAdditionalFilter) obj;
 				} else {
 					throw new UnsupportedOperationException();
@@ -1273,9 +1273,9 @@ public class SearchCoreFactory {
 				}
 			}
 			this.nameFilter = nameFilter;
-			if (poiTypeFilter != null) {
+			if (poiTypeFilter != null || poiAdditionalFilter != null) {
 				int radius = BBOX_RADIUS;
-				if (phrase.getRadiusLevel() == 1 && poiTypeFilter instanceof CustomSearchPoiFilter) {
+				if (poiTypeFilter != null && phrase.getRadiusLevel() == 1 && poiTypeFilter instanceof CustomSearchPoiFilter) {
 					String name = ((CustomSearchPoiFilter) poiTypeFilter).getFilterId();
 					if ("std_null".equals(name)) {
 						radius = BBOX_RADIUS_NEAREST;

@@ -23,6 +23,7 @@ import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.RenderingContext;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.ObfConstants;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AmenitySymbolsProvider.AmenitySymbolsGroup;
 import net.osmand.core.jni.AreaI;
@@ -71,8 +72,8 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
+import net.osmand.util.GeoParsedPoint;
 import net.osmand.util.MapUtils;
-import net.osmand.util.OsmUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -92,6 +93,8 @@ public class MapSelectionHelper {
 	private static final int AMENITY_SEARCH_RADIUS = 50;
 	private static final int AMENITY_SEARCH_RADIUS_FOR_RELATION = 500;
 	private static final int TILE_SIZE = 256;
+
+	private static final String TAG_POI_LAT_LON = "osmand_poi_lat_lon";
 
 	private final OsmandApplication app;
 	private final OsmandMapTileView view;
@@ -343,11 +346,17 @@ public class MapSelectionHelper {
 							}
 							IOnPathMapSymbol onPathMapSymbol = getOnPathMapSymbol(symbolInfo);
 							if (onPathMapSymbol == null) {
-								amenity = getAmenity(result.objectLatLon, obfMapObject);
+								LatLon latLon = result.objectLatLon;
+								if (tags.containsKey(TAG_POI_LAT_LON)) {
+									LatLon l = parsePoiLatLon(tags.get(TAG_POI_LAT_LON));
+									latLon = l == null ? latLon : l;
+									tags.remove(TAG_POI_LAT_LON);
+								}
+								amenity = getAmenity(latLon, obfMapObject);
 								if (amenity != null) {
 									amenity.setMapIconName(getMapIconName(symbolInfo));
 								} else if (!isRoute) {
-									addRenderedObject(result, symbolInfo, obfMapObject);
+									addRenderedObject(result, symbolInfo, obfMapObject, tags);
 								}
 							}
 						}
@@ -361,6 +370,15 @@ public class MapSelectionHelper {
 	}
 
 	@Nullable
+	private LatLon parsePoiLatLon(String value) {
+		if (value == null) {
+			return null;
+		}
+		GeoParsedPoint p = MapUtils.decodeShortLinkString(value);
+		return new LatLon(p.getLatitude(), p.getLongitude());
+	}
+
+	@Nullable
 	private String getMapIconName(MapSymbolInformation symbolInfo) {
 		RasterMapSymbol rasterMapSymbol = getRasterMapSymbol(symbolInfo);
 		if (rasterMapSymbol != null && rasterMapSymbol.getContentClass() == MapSymbol.ContentClass.Icon) {
@@ -370,7 +388,7 @@ public class MapSelectionHelper {
 	}
 
 	private void addRenderedObject(@NonNull MapSelectionResult result, @NonNull MapSymbolInformation symbolInfo,
-	                               @NonNull ObfMapObject obfMapObject) {
+	                               @NonNull ObfMapObject obfMapObject, Map<String, String> tags) {
 		RasterMapSymbol rasterMapSymbol = getRasterMapSymbol(symbolInfo);
 		if (rasterMapSymbol != null) {
 			RenderedObject renderedObject = new RenderedObject();
@@ -389,6 +407,9 @@ public class MapSelectionHelper {
 			}
 			if (rasterMapSymbol.getContentClass() == MapSymbol.ContentClass.Icon) {
 				renderedObject.setIconRes(rasterMapSymbol.getContent());
+			}
+			for (Map.Entry<String, String> entry : tags.entrySet()) {
+				renderedObject.putTag(entry.getKey(), entry.getValue());
 			}
 			result.selectedObjects.put(renderedObject, null);
 		}
@@ -632,7 +653,7 @@ public class MapSelectionHelper {
 
 	public static Amenity findAmenity(@NonNull OsmandApplication app, @NonNull LatLon latLon,
 	                                  @Nullable List<String> names, long id) {
-		int searchRadius = OsmUtils.isIdFromRelation(id >> AMENITY_ID_RIGHT_SHIFT)
+		int searchRadius = ObfConstants.isIdFromRelation(id >> AMENITY_ID_RIGHT_SHIFT)
 				? AMENITY_SEARCH_RADIUS_FOR_RELATION
 				: AMENITY_SEARCH_RADIUS;
 		return findAmenity(app, latLon, names, id, searchRadius);
@@ -641,7 +662,7 @@ public class MapSelectionHelper {
 	@Nullable
 	public static Amenity findAmenity(@NonNull OsmandApplication app, @NonNull LatLon latLon,
 	                                  @Nullable List<String> names, long id, int radius) {
-		id = OsmUtils.getOsmId(id >> AMENITY_ID_RIGHT_SHIFT);
+		id = ObfConstants.getOsmId(id >> AMENITY_ID_RIGHT_SHIFT);
 		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
 		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true);
 
@@ -666,8 +687,8 @@ public class MapSelectionHelper {
 			Long initAmenityId = amenity.getId();
 			if (initAmenityId != null) {
 				long amenityId;
-				if (OsmUtils.isShiftedID(initAmenityId)) {
-					amenityId = OsmUtils.getOsmId(initAmenityId);
+				if (ObfConstants.isShiftedID(initAmenityId)) {
+					amenityId = ObfConstants.getOsmId(initAmenityId);
 				} else {
 					amenityId = initAmenityId >> AMENITY_ID_RIGHT_SHIFT;
 				}

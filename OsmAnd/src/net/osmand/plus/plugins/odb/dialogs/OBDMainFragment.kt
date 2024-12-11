@@ -1,142 +1,316 @@
 package net.osmand.plus.plugins.odb.dialogs
 
-//import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.FUEL_LEFT_LITERS
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import androidx.appcompat.widget.Toolbar
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.R
-import net.osmand.plus.base.BaseOsmAndFragment
-import net.osmand.plus.plugins.PluginsHelper
+import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
+import net.osmand.plus.plugins.odb.VehicleMetricsPlugin.OBDConnectionState
+import net.osmand.plus.plugins.odb.adapters.OBDMainFragmentAdapter
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
+import net.osmand.shared.data.BTDeviceInfo
 import net.osmand.shared.obd.OBDDataComputer
-import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.BATTERY_VOLTAGE
-import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.FUEL_CONSUMPTION_RATE
-import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.FUEL_LEFT_DISTANCE
-import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.FUEL_LEFT_PERCENT
-import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.FUEL_TYPE
-import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.RPM
-import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.SPEED
-import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.TEMPERATURE_AMBIENT
-import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.TEMPERATURE_COOLANT
-import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.TEMPERATURE_INTAKE
-import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget.VIN
+import net.osmand.shared.obd.OBDDataComputer.OBDComputerWidget
+import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget
+import net.osmand.util.Algorithms
 
-class OBDMainFragment : BaseOsmAndFragment() {
-	private var deviceName: EditText? = null
-	private var fuelLeftDistBtn: Button? = null
-	private var fuelLeftLitersBtn: Button? = null
-	private var fuelConsumptionBtn: Button? = null
-	private var rpmBtn: Button? = null
-	private var speedBtn: Button? = null
-	private var tempIntakeBtn: Button? = null
-	private var tempCoolantBtn: Button? = null
-	private var batteryVoltageBtn: Button? = null
-	private var fuelTypeBtn: Button? = null
-	private var fuelLeftPersBtn: Button? = null
-	private var tempAmbientBtn: Button? = null
-	private var vinBtn: Button? = null
-	private var fuelLeftDistResp: EditText? = null
-	private var fuelLeftLitersResp: EditText? = null
-	private var fuelConsumptionResp: EditText? = null
-	private var rpmResp: EditText? = null
-	private var speedResp: EditText? = null
-	private var tempIntakeResp: EditText? = null
-	private var tempCoolantResp: EditText? = null
-	private var vinResp: EditText? = null
-	private var fuelTypeResp: EditText? = null
-	private var fuelLeftPersResp: EditText? = null
-	private var tempAmbientResp: EditText? = null
-	private var batteryVoltageResp: EditText? = null
+class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.ConnectionStateListener,
+	RenameOBDDialog.OnDeviceNameChangedCallback, ForgetOBDDeviceDialog.ForgetDeviceListener {
 
-	protected var plugin: VehicleMetricsPlugin? = null
+	enum class OBDDataType (var widgetType: OBDTypeWidget, val icon: Int?) {
+		VIN(OBDTypeWidget.VIN, null),
+		FUEL_TYPE(OBDTypeWidget.FUEL_TYPE, R.drawable.ic_action_fuel_tank),
+		TEMPERATURE_INTAKE(OBDTypeWidget.TEMPERATURE_INTAKE, R.drawable.ic_action_obd_temperature_intake),
+		TEMPERATURE_AMBIENT(OBDTypeWidget.TEMPERATURE_AMBIENT, R.drawable.ic_action_obd_temperature_outside),
+		TEMPERATURE_COOLANT(OBDTypeWidget.TEMPERATURE_COOLANT, R.drawable.ic_action_obd_temperature_coolant),
+		ENGINE_OIL_TEMPERATURE(OBDTypeWidget.ENGINE_OIL_TEMPERATURE, R.drawable.ic_action_obd_temperature_engine_oil),
+		RPM(OBDTypeWidget.RPM, R.drawable.ic_action_obd_engine_speed),
+		SPEED(OBDTypeWidget.SPEED, R.drawable.ic_action_obd_speed),
+		FUEL_CONSUMPTION_RATE_LITER_HOUR(OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR, R.drawable.ic_action_obd_fuel_consumption),
+		FUEL_CONSUMPTION_RATE_LITER_KM(OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM, R.drawable.ic_action_obd_fuel_consumption),
+		FUEL_LEFT_LITER(OBDTypeWidget.FUEL_LEFT_LITER, R.drawable.ic_action_obd_fuel_remaining),
+		CALCULATED_ENGINE_LOAD(OBDTypeWidget.CALCULATED_ENGINE_LOAD, R.drawable.ic_action_car_info),
+		FUEL_PRESSURE(OBDTypeWidget.FUEL_PRESSURE, R.drawable.ic_action_obd_fuel_pressure),
+		THROTTLE_POSITION(OBDTypeWidget.THROTTLE_POSITION, R.drawable.ic_action_obd_throttle_position),
+		BATTERY_VOLTAGE(OBDTypeWidget.BATTERY_VOLTAGE, R.drawable.ic_action_obd_battery_voltage)
+	}
+
+	data class OBDDataItem(val dataType: OBDDataType, val widget: OBDComputerWidget)
+
 	private val handler = Handler(Looper.getMainLooper())
+	private val items = mutableListOf<Any>()
 
-	override fun onCreateView(
-		inflater: LayoutInflater,
-		container: ViewGroup?,
-		savedInstanceState: Bundle?): View? {
-		updateNightMode()
-		val view = themedInflater.inflate(getLayoutId(), container, false)
-		setupUI(view)
-		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view)
-		return view
-	}
+	private lateinit var adapter: OBDMainFragmentAdapter
+	private var progress: View? = null
 
-	fun getLayoutId(): Int {
-		return R.layout.fragment_obd_main
-	}
+	private lateinit var device: BTDeviceInfo
 
-	private fun setupToolbar(view: View) {
-		val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
-		toolbar.setTitleTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode))
-		toolbar.setNavigationIcon(AndroidUtils.getNavigationIconResId(app))
-		toolbar.setNavigationContentDescription(R.string.shared_string_close)
-		toolbar.setNavigationOnClickListener { v: View? -> requireActivity().onBackPressed() }
-	}
-
-	private fun setupUI(view: View) {
-		setupToolbar(view)
-		fuelLeftDistResp = view.findViewById(R.id.resp1)
-		fuelLeftLitersResp = view.findViewById(R.id.resp2)
-		fuelConsumptionResp = view.findViewById(R.id.resp3)
-		rpmResp = view.findViewById(R.id.resp4)
-		speedResp = view.findViewById(R.id.resp5)
-		tempIntakeResp = view.findViewById(R.id.resp6)
-		tempCoolantResp = view.findViewById(R.id.resp7)
-		batteryVoltageResp = view.findViewById(R.id.resp8)
-		fuelTypeResp = view.findViewById(R.id.resp9)
-		fuelLeftPersResp = view.findViewById(R.id.resp10)
-		tempAmbientResp = view.findViewById(R.id.resp11)
-		deviceName = view.findViewById(R.id.device_name)
-		fuelLeftDistBtn = view.findViewById(R.id.btn1)
-		fuelLeftLitersBtn = view.findViewById(R.id.btn2)
-		fuelConsumptionBtn = view.findViewById(R.id.btn3)
-		rpmBtn = view.findViewById(R.id.btn4)
-		speedBtn = view.findViewById(R.id.btn5)
-		tempIntakeBtn = view.findViewById(R.id.btn6)
-		tempCoolantBtn = view.findViewById(R.id.btn7)
-		batteryVoltageBtn = view.findViewById(R.id.btn8)
-		fuelTypeBtn = view.findViewById(R.id.btn9)
-		fuelLeftPersBtn = view.findViewById(R.id.btn10)
-		tempAmbientBtn = view.findViewById(R.id.btn11)
-		vinBtn = view.findViewById(R.id.btn12)
-		fuelLeftDistBtn?.text = "fuel left distance"
-		fuelLeftLitersBtn?.text = "fuel left liters"
-		fuelConsumptionBtn?.text = "fuel consumption"
-		rpmBtn?.text = "rpm"
-		speedBtn?.text = "speed"
-		tempIntakeBtn?.text = "intake air temp"
-		tempCoolantBtn?.text = "engine coolant temp"
-		batteryVoltageBtn?.text = "battery voltage"
-		fuelTypeBtn?.text = "fuel type"
-		fuelLeftPersBtn?.text = "fuel left percent"
-		tempAmbientBtn?.text = "ambient air temperature"
-		vinBtn?.text = "vin"
-	}
+	private var updateEnable = false
+	private var deviceConnectionState: OBDConnectionState = OBDConnectionState.DISCONNECTED
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+		arguments?.apply {
+			val connectedDevice = vehicleMetricsPlugin.getConnectedDeviceInfo()
+			val deviceName = getString(DEVICE_NAME_KEY) ?: ""
+			val deviceAddress = getString(DEVICE_ADDRESS_KEY) ?: ""
+			device = if (connectedDevice != null &&
+				(deviceAddress == connectedDevice.address ||
+						(Algorithms.isEmpty(deviceAddress) && Algorithms.isEmpty(deviceName)))) {
+				deviceConnectionState = OBDConnectionState.CONNECTED
+				connectedDevice
+			} else {
+				deviceConnectionState = OBDConnectionState.DISCONNECTED
+				BTDeviceInfo(deviceName, deviceAddress)
+			}
+		}
+	}
 
-		plugin = PluginsHelper.getPlugin(
-			VehicleMetricsPlugin::class.java)
+	@ColorRes
+	override fun getStatusBarColorId(): Int {
+		AndroidUiHelper.setStatusBarContentColor(view, nightMode)
+		return if (nightMode) R.color.status_bar_main_dark else R.color.activity_background_color_light
+	}
 
+	override val layoutId: Int
+		get() = R.layout.fragment_obd_main
 
+	override fun setupToolbar(view: View) {
+		view.findViewById<ImageButton>(R.id.close_button).apply {
+			setOnClickListener {
+				requireActivity().onBackPressed()
+			}
+			setImageResource(AndroidUtils.getNavigationIconResId(context))
+		}
+	}
+
+	override fun setupUI(view: View) {
+		progress = view.findViewById(R.id.progress_bar)
+		items.clear()
+		setupConnectionState(view)
+		updateButtonState(view)
+		setupVehicleInfo()
+		setupReceivedData()
+		setupSettingsCard()
+		setupList(view)
+	}
+
+	private fun setupList(view: View) {
+		adapter = OBDMainFragmentAdapter(app, nightMode, requireMapActivity(), device, this)
+		view.findViewById<RecyclerView>(R.id.recycler_view)?.adapter = adapter
+		adapter.items = ArrayList(items)
+	}
+
+	private fun setupConnectionState(view: View) {
+		val connected = deviceConnectionState == OBDConnectionState.CONNECTED
+
+		val connectedText = app.getString(
+			if (connected) R.string.external_device_connected else R.string.external_device_disconnected
+		)
+		view.findViewById<TextView>(R.id.device_name).text = device.name
+		view.findViewById<TextView>(R.id.connection_state).text = app.getString(
+			R.string.ltr_or_rtl_combine_via_comma,
+			connectedText,
+			app.getString(R.string.shared_string_bluetooth)
+		)
+
+		view.findViewById<ImageView?>(R.id.widget_icon).apply {
+			background = uiUtilities.getIcon(
+				if (connected) {
+					if (nightMode) R.drawable.bg_widget_type_icon_dark else R.drawable.bg_widget_type_icon_light
+				} else {
+					if (nightMode) R.drawable.bg_widget_type_disconnected_icon_dark else R.drawable.bg_widget_type_disconnected_icon_light
+				}
+			)
+			if (connected) {
+				setImageDrawable(uiUtilities.getIcon(if (nightMode) R.drawable.widget_obd_car_day else R.drawable.widget_obd_car_night))
+			} else {
+				setImageDrawable(uiUtilities.getThemedIcon(R.drawable.ic_action_car_obd2))
+			}
+		}
+	}
+
+	private fun updateButtonState(view: View) {
+		val pairButtonText = view.findViewById<TextView>(R.id.button_text)
+		val pairButton = view.findViewById<View>(R.id.pair_btn)
+		val pairButtonContainer = view.findViewById<View>(R.id.button_container)
+		val connectedStateBtnTextColor = ColorUtilities.getButtonSecondaryTextColorId(nightMode)
+		val disconnectedStateBtnTextColor =
+			if (nightMode) R.color.dlg_btn_primary_text_dark else R.color.dlg_btn_primary_text_light
+
+		val connectedStateBtnBgColorLight = R.drawable.dlg_btn_secondary_light
+		val connectedStateBtnBgColorDark = R.drawable.dlg_btn_secondary_dark
+
+		val disconnectedStateBtnBgColorLight = R.drawable.dlg_btn_primary_light
+		val disconnectedStateBtnBgColorDark = R.drawable.dlg_btn_primary_dark
+
+		val connectingStateBtnBgColorLight = R.color.active_color_secondary_light
+		val connectingStateBtnBgColorDark = R.color.active_color_secondary_dark
+
+		val lightResId: Int
+		val darkResId: Int
+		var pairBtnTextColorId = 0
+		var pairBtnTextId = 0
+		var isConnecting = false
+		when (deviceConnectionState) {
+			OBDConnectionState.CONNECTED -> {
+				lightResId = connectedStateBtnBgColorLight
+				darkResId = connectedStateBtnBgColorDark
+				pairBtnTextColorId = connectedStateBtnTextColor
+				pairBtnTextId = R.string.external_device_details_disconnect
+				pairButton.setOnClickListener {
+					vehicleMetricsPlugin.disconnect(true)
+				}
+			}
+
+			OBDConnectionState.CONNECTING -> {
+				lightResId = connectingStateBtnBgColorLight
+				darkResId = connectingStateBtnBgColorDark
+				pairButton.setOnClickListener(null)
+				isConnecting = true
+			}
+
+			else -> {
+				lightResId = disconnectedStateBtnBgColorLight
+				darkResId = disconnectedStateBtnBgColorDark
+				pairBtnTextColorId = disconnectedStateBtnTextColor
+				pairBtnTextId = R.string.external_device_details_connect
+				pairButton.setOnClickListener {
+					vehicleMetricsPlugin.connectToObd(requireActivity(), device)
+				}
+			}
+		}
+		view.post {
+			AndroidUtils.setBackground(
+				app,
+				pairButtonContainer,
+				nightMode,
+				R.drawable.ripple_solid_light,
+				R.drawable.ripple_solid_dark
+			)
+			AndroidUtils.setBackground(
+				app,
+				pairButton,
+				nightMode,
+				lightResId,
+				darkResId
+			)
+			if (pairBtnTextId != 0) {
+				pairButtonText.text = getString(pairBtnTextId)
+			}
+			if (pairBtnTextColorId != 0) {
+				val colorStateList = ContextCompat.getColorStateList(app, pairBtnTextColorId)
+				pairButtonText.setTextColor(colorStateList)
+			}
+			progress?.visibility = if (isConnecting) View.VISIBLE else View.GONE
+			pairButtonText.visibility = if (isConnecting) View.GONE else View.VISIBLE
+		}
+	}
+
+	override fun onStateChanged(
+		state: OBDConnectionState,
+		deviceInfo: BTDeviceInfo) {
+		if (device.address == deviceInfo.address) {
+			deviceConnectionState = state
+		}
+		view?.let {
+			setupConnectionState(it)
+			updateButtonState(it)
+		}
+	}
+
+	private fun setupVehicleInfo() {
+		items.add(OBDMainFragmentAdapter.ITEM_DIVIDER)
+		items.add(OBDMainFragmentAdapter.TITLE_VEHICLE_TYPE)
+		items.add(OBDDataItem(OBDDataType.VIN, OBDDataComputer.registerWidget(OBDTypeWidget.VIN, 0)))
+	}
+
+	private fun setupReceivedData() {
+		items.add(OBDMainFragmentAdapter.ITEM_DIVIDER)
+		items.add(OBDMainFragmentAdapter.TITLE_RECEIVED_TYPE)
+		OBDDataType.entries.forEach {
+			if (it.widgetType != OBDTypeWidget.VIN) {
+				items.add(OBDDataItem(it, OBDDataComputer.registerWidget(it.widgetType, it.widgetType.defaultAverageTime)))
+			}
+		}
+	}
+
+	private fun setupSettingsCard() {
+		items.add(OBDMainFragmentAdapter.ITEM_DIVIDER)
+		items.add(OBDMainFragmentAdapter.TITLE_SETTINGS_TYPE)
+		items.add(OBDMainFragmentAdapter.NAME_ITEM_TYPE)
+		items.add(OBDMainFragmentAdapter.FORGET_SENSOR_TYPE)
+	}
+
+	override fun onStart() {
+		super.onStart()
+		updateWidgets()
+	}
+
+	private fun updateWidgets() {
+		items.forEach {
+			if (it is OBDDataItem) {
+				val widget = it.widget
+				val value = vehicleMetricsPlugin.getWidgetValue(widget)
+				val unit = vehicleMetricsPlugin.getWidgetUnit(widget)
+				adapter.let { obdAdapter ->
+					val savedValue = obdAdapter.lastSavedValueMap[widget]
+					if (!savedValue?.first.equals(value) or !savedValue?.second.equals(unit)) {
+						obdAdapter.notifyItemChanged(
+							items.indexOf(it),
+							OBDMainFragmentAdapter.UPDATE_VALUE_PAYLOAD_TYPE
+						)
+					}
+				}
+			}
+		}
+	}
+
+	override fun onResume() {
+		super.onResume()
+		updateEnable = true
+		startHandler()
+		vehicleMetricsPlugin.setConnectionStateListener(this)
+	}
+
+	private fun startHandler() {
+		handler.postDelayed({
+			if (view != null && updateEnable) {
+				updateWidgets()
+				startHandler()
+			}
+		}, UPDATE_INTERVAL_MILLIS)
+	}
+
+	override fun onPause() {
+		super.onPause()
+		updateEnable = false
+		vehicleMetricsPlugin.setConnectionStateListener(null)
 	}
 
 	companion object {
-		val TAG = OBDMainFragment::class.java.simpleName
-		fun showInstance(manager: FragmentManager) {
+		const val TAG: String = "VehicleMetricsFragment"
+		const val UPDATE_INTERVAL_MILLIS = 100L
+		const val DEVICE_NAME_KEY = "DEVICE_NAME_KEY"
+		const val DEVICE_ADDRESS_KEY = "DEVICE_ADDRESS_KEY"
+
+		fun showInstance(manager: FragmentManager, device: BTDeviceInfo) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 				val fragment = OBDMainFragment()
+				val args = Bundle()
+				args.putString(DEVICE_NAME_KEY, device.name)
+				args.putString(DEVICE_ADDRESS_KEY, device.address)
+				fragment.arguments = args
 				fragment.retainInstance = true
 				manager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
@@ -146,53 +320,13 @@ class OBDMainFragment : BaseOsmAndFragment() {
 		}
 	}
 
-	private val widgets = mutableListOf<OBDDataComputer.OBDComputerWidget>()
-
-	override fun onStart() {
-		super.onStart()
-		OBDDataComputer.OBDTypeWidget.entries.forEach {
-			widgets.add(OBDDataComputer.registerWidget(it, 0))
-		}
-		updateWidgets()
+	override fun onNameChanged() {
+		view?.findViewById<TextView>(R.id.device_name)?.text = device.name
+		adapter.notifyDataSetChanged()
 	}
 
-	private fun updateWidgets() {
-		widgets.forEach {
-			updateWidgetsData(
-				it.type,
-				if (it.computeValue() == null) " - " else it.computeValue().toString())
-		}
-		handler.postDelayed({ updateWidgets() }, 100)
-	}
-
-	override fun onStop() {
-		super.onStop()
-		widgets.forEach { OBDDataComputer.removeWidget(it) }
-	}
-
-	private fun updateWidgetsData(widgetType: OBDDataComputer.OBDTypeWidget, result: String) {
-		app.runInUIThread {
-			when (widgetType) {
-				SPEED -> updateWidgetData(speedResp, result)
-				RPM -> updateWidgetData(rpmResp, result)
-				FUEL_LEFT_DISTANCE -> updateWidgetData(fuelLeftDistResp, result)
-//				FUEL_LEFT_LITERS -> updateWidgetData(fuelLeftLitersResp, result)
-				FUEL_LEFT_PERCENT -> updateWidgetData(fuelLeftPersResp, result)
-				FUEL_CONSUMPTION_RATE -> updateWidgetData(fuelConsumptionResp, result)
-				TEMPERATURE_INTAKE -> updateWidgetData(tempIntakeResp, result)
-				TEMPERATURE_AMBIENT -> updateWidgetData(tempAmbientResp, result)
-				BATTERY_VOLTAGE -> updateWidgetData(batteryVoltageResp, result)
-				FUEL_TYPE -> updateWidgetData(fuelTypeResp, result)
-				TEMPERATURE_COOLANT -> updateWidgetData(tempCoolantResp, result)
-				VIN -> updateWidgetData(vinResp, result)
-			}
-		}
-
-	}
-
-	private fun updateWidgetData(field: EditText?, result: String) {
-		if (field?.text.toString() != result) {
-			field?.setText(result)
-		}
+	override fun onForgetSensorConfirmed(deviceId: String) {
+		vehicleMetricsPlugin?.removeDeviceToUsedOBDDevicesList(deviceId)
+		view?.let { setupUI(it) }
 	}
 }

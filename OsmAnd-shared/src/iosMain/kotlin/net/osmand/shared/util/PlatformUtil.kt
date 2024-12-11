@@ -6,6 +6,10 @@ import net.osmand.shared.api.SQLiteAPIImpl
 import net.osmand.shared.api.XmlFactoryAPI
 import net.osmand.shared.api.XmlPullParserAPI
 import net.osmand.shared.api.XmlSerializerAPI
+import net.osmand.shared.gpx.GpxTrackAnalysis
+import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser
+import net.osmand.shared.gpx.PointAttributes
+import net.osmand.shared.gpx.primitives.WptPt
 
 actual object PlatformUtil {
 
@@ -22,6 +26,18 @@ actual object PlatformUtil {
 	actual fun getOsmAndContext(): OsmAndContext = osmAndContext
 
 	actual fun getSQLiteAPI(): SQLiteAPI = sqliteApi
+
+	actual fun getTrackPointsAnalyser(): TrackPointsAnalyser? {
+		val contextTrackPointsAnalyser = osmAndContext.getTrackPointsAnalyser()
+		return object : TrackPointsAnalyser {
+			override fun onAnalysePoint(
+				analysis: GpxTrackAnalysis, point: WptPt, attribute: PointAttributes
+			) {
+				contextTrackPointsAnalyser?.onAnalysePoint(analysis, point, attribute)
+				SensorPointAnalyser.onAnalysePoint(analysis, point, attribute)
+			}
+		}
+	}
 
 	fun getXmlPullParserApi(): XmlPullParserAPI = xmlFactoryApi.createXmlPullParserApi()
 

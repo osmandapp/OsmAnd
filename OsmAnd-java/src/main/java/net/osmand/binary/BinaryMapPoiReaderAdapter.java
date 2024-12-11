@@ -64,7 +64,7 @@ public class BinaryMapPoiReaderAdapter {
 		int right31;
 		int top31;
 		int bottom31;
-		
+
 		public int getLeft31() {
 			return left31;
 		}
@@ -818,6 +818,7 @@ public class BinaryMapPoiReaderAdapter {
 						}
 					}
 				}
+				am.setRegionName(region.getName());
 				return am;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.DX_FIELD_NUMBER:
 				x = (codedIS.readSInt32() + (px << (BASE_POI_ZOOM - zoom))) << BASE_POI_SHIFT;
@@ -972,7 +973,7 @@ public class BinaryMapPoiReaderAdapter {
 					}
 				}
 				subtype = poiTypes.replaceDeprecatedSubtype(type, subtype);
-				if (req.poiTypeFilter.accept(type, subtype)) {
+				if (req.poiTypeFilter != null && req.poiTypeFilter.accept(type, subtype)) {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 					return true;
 				}

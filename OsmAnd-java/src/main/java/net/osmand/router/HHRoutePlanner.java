@@ -1279,6 +1279,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		// SPEEDUP: Speed up by just clearing visited
 		hctx.rctx.unloadAllData(); // needed for proper multidijsktra work
 		RouteSegmentPoint s = loadPoint(hctx.rctx, start);
+		if (s == null) {
+			System.err.printf("HH recalculateNetworkCluster: loadPoint() is NULL for %s\n", start);
+			return;
+		}
 		// hctx.rctx.calculationProgress = new RouteCalculationProgress(); // we should reuse same progress for cancellation
 		hctx.rctx.config.MAX_VISITED = MAX_POINTS_CLUSTER_ROUTING * 2;
 		long ps = calcRPId(s, s.getSegmentStart(), s.getSegmentEnd());

@@ -28,7 +28,6 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
@@ -53,6 +52,7 @@ public class RoutingContext {
 	public final RouteCalculationMode calculationMode;
 	public final Map<BinaryMapIndexReader, List<RouteSubregion>> map = new LinkedHashMap<BinaryMapIndexReader, List<RouteSubregion>>();
 	public final Map<RouteRegion, BinaryMapIndexReader> reverseMap = new LinkedHashMap<RouteRegion, BinaryMapIndexReader>();
+	private RouteConditionalHelper conditionalHelper = new RouteConditionalHelper();
 	public NativeLibrary nativeLib;
 	
 	// 0. Reference to native routingcontext for multiple routes
@@ -300,8 +300,11 @@ public class RoutingContext {
 				} else {
 					for (RouteDataObject ro : res) {
 						if (ro != null) {
+							if (config.ambiguousConditionalTags != null) {
+								conditionalHelper.resolveAmbiguousConditionalTags(ro, config.ambiguousConditionalTags);
+							}
 							if (config.routeCalculationTime != 0) {
-								ro.processConditionalTags(config.routeCalculationTime);
+								conditionalHelper.processConditionalTags(ro, config.routeCalculationTime);
 							}
 							if (config.router.acceptLine(ro)) {
 								if (excludeNotAllowed != null && !excludeNotAllowed.contains(ro.getId())) {

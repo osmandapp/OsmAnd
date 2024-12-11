@@ -51,4 +51,9 @@ class GradientGeometryWayProvider implements GeometryWayProvider {
 	public float getHeight(int index) {
 		return heights == null ? 0 : heights.get(index);
 	}
+
+	@Override
+	public boolean isFirstLastLocation(int index) {
+		return false;
+	}
 }

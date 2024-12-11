@@ -1,15 +1,9 @@
 package net.osmand.data;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import gnu.trove.map.hash.TLongObjectHashMap;
-
 import net.osmand.util.MapUtils;
+
+import java.util.*;
 
 /**
  * @param <T> - object to store in that manager
@@ -121,7 +115,7 @@ public class DataTileManager<T> {
 	 */
 	public List<T> getClosestObjects(double latitude, double longitude, double radius) {
 		if (isEmpty()) {
-			return Collections.emptyList();
+			return new ArrayList<>();
 		}
 		double tileDist = radius / MapUtils.getTileDistanceWidth(latitude, zoom);
 		int tileDistInt = (int) Math.ceil(tileDist);

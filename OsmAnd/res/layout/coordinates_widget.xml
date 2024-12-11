@@ -45,7 +45,6 @@
 				android:layout_gravity="center"
 				android:maxLines="1"
 				android:textColor="@color/activity_background_color_light"
-				android:textDirection="ltr"
 				android:textSize="@dimen/map_top_widget_text_size"
 				app:typefaceWeight="medium"
 				tools:text="N 20°96′60″" />
@@ -88,7 +87,6 @@
 				android:layout_gravity="center"
 				android:maxLines="1"
 				android:textColor="@color/activity_background_color_light"
-				android:textDirection="ltr"
 				android:textSize="@dimen/map_top_widget_text_size"
 				app:typefaceWeight="medium"
 				tools:text="W 120°31′12″" />

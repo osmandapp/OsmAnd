@@ -5,7 +5,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_DETAILS_OPTIONS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
-import static net.osmand.plus.activities.MapActivityActions.SaveDirectionsAsyncTask;
 import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 
 import android.animation.Animator;
@@ -67,6 +66,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.track.helpers.save.SaveDirectionsAsyncTask;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -135,7 +135,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+			@Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		MapActivity mapActivity = (MapActivity) requireActivity();
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
@@ -620,7 +621,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		return file;
 	}
 
-	private StringBuilder generateHtml(List<RouteDirectionInfo> directionInfos, String title, String url) {
+	private StringBuilder generateHtml(List<RouteDirectionInfo> directionInfos, String title,
+			String url) {
 		StringBuilder html = new StringBuilder();
 		if (!TextUtils.isEmpty(title)) {
 			html.append("<h1>");
@@ -781,7 +783,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		}
 	}
 
-	public void updateZoomButtonsPos(@NonNull ContextMenuFragment fragment, int y, boolean animated) {
+	public void updateZoomButtonsPos(@NonNull ContextMenuFragment fragment, int y,
+			boolean animated) {
 		View zoomButtonsView = this.zoomButtonsView;
 		if (zoomButtonsView != null) {
 			int zoomY = y - getZoomButtonsHeight();
@@ -815,7 +818,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	}
 
 	@Override
-	public void onContextMenuYPosChanged(@NonNull ContextMenuFragment fragment, int y, boolean needMapAdjust, boolean animated) {
+	public void onContextMenuYPosChanged(@NonNull ContextMenuFragment fragment, int y,
+			boolean needMapAdjust, boolean animated) {
 		if (fragment == getCurrentFragment()) {
 			updateToolbars(fragment, y, animated);
 			updatePagesViewPos(fragment, y, animated);
@@ -825,7 +829,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	}
 
 	@Override
-	public void onContextMenuStateChanged(@NonNull ContextMenuFragment fragment, int menuState, int previousMenuState) {
+	public void onContextMenuStateChanged(@NonNull ContextMenuFragment fragment, int menuState,
+			int previousMenuState) {
 		LockableViewPager viewPager = this.viewPager;
 		RouteDetailsFragment current = getCurrentFragment();
 		if (viewPager != null && fragment == current) {
@@ -866,7 +871,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		return showInstance(fragmentManager, args);
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager, int routeIndex, int initialMenuState) {
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, int routeIndex,
+			int initialMenuState) {
 		Bundle args = new Bundle();
 		args.putInt(ROUTE_INDEX_KEY, routeIndex);
 		args.putInt(INITIAL_MENU_STATE_KEY, initialMenuState);
@@ -874,7 +880,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		return showInstance(fragmentManager, args);
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager, @Nullable Bundle args) {
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
+			@Nullable Bundle args) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			ChooseRouteFragment fragment = new ChooseRouteFragment();
 			fragment.setArguments(args);
@@ -892,13 +899,14 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		if (mapActivity != null) {
 			dismiss(false);
 			if (!mapActivity.getMyApplication().getRoutingHelper().isPublicTransportMode()) {
-				mapActivity.getMapLayers().getMapActionsHelper().startNavigation();
+				mapActivity.getMapActions().startNavigation();
 			}
 		}
 	}
 
 	@Override
-	public void onSaveAsNewTrack(@NonNull String folderPath, @NonNull String fileName, boolean showOnMap, boolean simplifiedTrack) {
+	public void onSaveAsNewTrack(@NonNull String folderPath, @NonNull String fileName,
+			boolean showOnMap, boolean simplifiedTrack) {
 		File fileDir = new File(folderPath);
 		File toSave = new File(fileDir, fileName + GPX_FILE_EXT);
 		new SaveDirectionsAsyncTask(app, showOnMap).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, toSave);

@@ -500,7 +500,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		if (!InAppPurchaseUtils.is3dMapsAvailable(app)) {
 			boolean nightMode = isNightMode(activity, app);
 			item.setUseNaturalSecondIconColor(true);
-			item.setSecondaryIcon(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day);
+			item.setSecondaryIcon(PurchasingUtils.getProFeatureIconId(nightMode));
 		} else {
 			item.setColor(app, enabled3DMode ? R.color.osmand_orange : INVALID_ID);
 			item.setSelected(enabled3DMode);

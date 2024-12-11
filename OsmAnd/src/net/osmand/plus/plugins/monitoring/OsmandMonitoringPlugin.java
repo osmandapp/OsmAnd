@@ -18,6 +18,11 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.ValueHolder;
+import net.osmand.plus.plugins.monitoring.actions.FinishTripRecordingAction;
+import net.osmand.plus.plugins.monitoring.actions.SaveRecordedTripAndContinueAction;
+import net.osmand.plus.plugins.monitoring.actions.StartNewTripSegmentAction;
+import net.osmand.plus.plugins.monitoring.actions.TripRecordingAction;
+import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
@@ -229,17 +234,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return app.getSavingTrackHelper().getCurrentTrack();
 	}
 
-	public boolean wasTrackMonitored() {
-		return settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
-	}
-
-	public boolean hasDataToSave() {
-		return app.getSavingTrackHelper().hasDataToSave();
-	}
-
 	public void askShowTripRecordingDialog(@NonNull FragmentActivity activity) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
-		if (hasDataToSave() || wasTrackMonitored()) {
+		if (hasDataToSave() || isRecordingTrack()) {
 			TripRecordingBottomSheet.showInstance(fragmentManager);
 		} else {
 			askStartRecording(activity);
@@ -263,12 +260,21 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	public void startRecording(@Nullable FragmentActivity activity) {
 		app.getSavingTrackHelper().startNewSegment();
-		app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.set(true);
+		setRecordingTrack(true);
 		app.startNavigationService(NavigationService.USED_BY_GPX);
 
 		if (activity != null) {
 			AndroidUtils.requestNotificationPermissionIfNeeded(activity);
 		}
+	}
+
+	public boolean finishRecording() {
+		if (mapActivity != null && hasDataToSave()) {
+			saveCurrentTrack(null, mapActivity);
+			app.getNotificationHelper().refreshNotifications();
+			return true;
+		}
+		return false;
 	}
 
 	public void saveCurrentTrack() {
@@ -374,12 +380,28 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		}
 	}
 
+	public void pauseOrResumeRecording() {
+		if (isRecordingTrack()) {
+			setRecordingTrack(false);
+			NavigationService navigationService = app.getNavigationService();
+			if (navigationService != null) {
+				navigationService.stopIfNeeded(app, NavigationService.USED_BY_GPX);
+			}
+		} else {
+			setRecordingTrack(true);
+			app.startNavigationService(NavigationService.USED_BY_GPX);
+			if (mapActivity != null) {
+				AndroidUtils.requestNotificationPermissionIfNeeded(mapActivity);
+			}
+		}
+	}
+
 	public void stopRecording() {
 		stopRecording(false);
 	}
 
 	public void stopRecording(boolean clearData) {
-		settings.SAVE_GLOBAL_TRACK_TO_GPX.set(false);
+		setRecordingTrack(false);
 		app.getSavingTrackHelper().onStopRecording(clearData);
 		if (app.getNavigationService() != null) {
 			app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_GPX);
@@ -388,6 +410,18 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	public boolean isSaving() {
 		return isSaving;
+	}
+
+	public void setRecordingTrack(boolean recording) {
+		settings.SAVE_GLOBAL_TRACK_TO_GPX.set(recording);
+	}
+
+	public boolean isRecordingTrack() {
+		return settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
+	}
+
+	public boolean hasDataToSave() {
+		return app.getSavingTrackHelper().hasDataToSave();
 	}
 
 	public boolean isLiveMonitoringEnabled() {
@@ -404,8 +438,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		if (choice.value || activity == null) {
 			Runnable runnable = () -> {
 				app.getSavingTrackHelper().startNewSegment();
+				setRecordingTrack(true);
 				settings.SAVE_GLOBAL_TRACK_INTERVAL.set(vs.value);
-				settings.SAVE_GLOBAL_TRACK_TO_GPX.set(true);
 				settings.SAVE_GLOBAL_TRACK_REMEMBER.set(choice.value);
 
 				if (activity != null) {
@@ -422,5 +456,15 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	@Override
 	public DashFragmentData getCardFragment() {
 		return DashTrackFragment.FRAGMENT_DATA;
+	}
+
+	@Override
+	protected List<QuickActionType> getQuickActionTypes() {
+		List<QuickActionType> quickActionTypes = new ArrayList<>();
+		quickActionTypes.add(TripRecordingAction.TYPE);
+		quickActionTypes.add(StartNewTripSegmentAction.TYPE);
+		quickActionTypes.add(SaveRecordedTripAndContinueAction.TYPE);
+		quickActionTypes.add(FinishTripRecordingAction.TYPE);
+		return quickActionTypes;
 	}
 }

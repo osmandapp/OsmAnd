@@ -49,6 +49,8 @@ class GpxTrackAnalysis {
 	var pointAttributes = mutableListOf<PointAttributes>()
 	var availableAttributes = mutableSetOf<String>()
 
+	var maxDistanceBetweenPoints = 0.0F
+
 	var hasSpeedInTrack = false
 
 	fun getGpxParameter(parameter: GpxParameter): Any? {
@@ -347,13 +349,12 @@ class GpxTrackAnalysis {
 				if (j > 0) {
 					val prev = s[j - 1]
 
-					calculations[0] = KMapUtils.getDistance(prev.lat, prev.lon, point.lat, point.lon).toFloat()
-					// TODO: Fix if needed
-					// using ellipsoidal 'distanceBetween' instead of spherical haversine (MapUtils.getDistance) is
-					// a little more exact, also seems slightly faster:
-					//net.osmand.Location.distanceBetween(
-					//	prev.lat, prev.lon, point.lat, point.lon, calculations
-					//)
+					calculations[0] = KMapUtils.getEllipsoidDistance(prev.lat, prev.lon, point.lat, point.lon).toFloat()
+
+					if (calculations[0] > maxDistanceBetweenPoints) {
+						maxDistanceBetweenPoints = calculations[0]
+					}
+
 					_totalDistance += calculations[0]
 					segmentDistance += calculations[0]
 					point.distance = segmentDistance.toDouble()
@@ -469,6 +470,7 @@ class GpxTrackAnalysis {
 		if (!hasElevationData() && !attribute.elevation.isNaN()) {
 			setHasData(POINT_ELEVATION, true)
 		}
+		point.attributes = attribute
 		pointsAnalyser?.onAnalysePoint(this, point, attribute)
 		pointAttributes.add(attribute)
 	}

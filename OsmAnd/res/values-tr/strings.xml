@@ -3785,7 +3785,6 @@
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd, UTM NATO biçimine benzer olan MGRS\'yi kullanmaktadır.</string>
     <string name="shared_string_local_maps">Yerel haritalar</string>
-    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="icon_group_amenity">Tesis</string>
     <string name="icon_group_special">Özel</string>
     <string name="icon_group_transport">Ulaşım</string>

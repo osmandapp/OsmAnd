@@ -101,6 +101,7 @@ public class AverageSpeedWidget extends SimpleWidget {
 
 	public void resetAverageSpeed() {
 		averageSpeedComputer.resetLocations();
+		setText(NO_VALUE, null);
 	}
 
 	@Override

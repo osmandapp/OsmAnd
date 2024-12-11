@@ -1,9 +1,10 @@
 package net.osmand.plus.views.mapwidgets.configure.buttons;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTE_PLANNING_HUD_ID;
-import static net.osmand.plus.quickaction.ButtonAppearanceParams.BIG_SIZE_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.OPAQUE_ALPHA;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.RECTANGULAR_RADIUS_DP;
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_BOTTOM;
+import static net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize.POS_LEFT;
 
 import android.graphics.drawable.Drawable;
 
@@ -18,6 +19,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.views.controls.maphudbuttons.ButtonPositionSize;
 
 public class NavigationMenuButtonState extends MapButtonState {
 
@@ -25,7 +27,7 @@ public class NavigationMenuButtonState extends MapButtonState {
 
 	public NavigationMenuButtonState(@NonNull OsmandApplication app) {
 		super(app, ROUTE_PLANNING_HUD_ID);
-		this.visibilityPref = settings.registerBooleanPreference(id + "_state", true).makeProfile();
+		this.visibilityPref = addPreference(settings.registerBooleanPreference(id + "_state", true)).makeProfile();
 	}
 
 	@NonNull
@@ -58,17 +60,24 @@ public class NavigationMenuButtonState extends MapButtonState {
 
 	@NonNull
 	@Override
-	public ButtonAppearanceParams createDefaultAppearanceParams() {
-		String iconName;
-		int routePlanningBtnImage = MapActivity.getMapRouteInfoMenu().getRoutePlanningBtnImage();
-		if (routePlanningBtnImage != 0) {
-			iconName = app.getResources().getResourceEntryName(routePlanningBtnImage);
-		} else if (app.getRoutingHelper().isFollowingMode()) {
-			iconName = "ic_action_start_navigation";
-		} else {
-			iconName = "ic_action_gdirections_dark";
+	public String getDefaultIconName() {
+		int routePlanningBtnImage = app.getRoutingHelper().getAppMode().getIconRes();
+		boolean isFollowingMode = app.getRoutingHelper().isFollowingMode();
+		if (routePlanningBtnImage != 0 && app.getRoutingHelper().isRoutePlanningMode() && !isFollowingMode) {
+			return app.getResources().getResourceEntryName(routePlanningBtnImage);
 		}
-		return new ButtonAppearanceParams(iconName, BIG_SIZE_DP, OPAQUE_ALPHA, RECTANGULAR_RADIUS_DP);
+
+		return isFollowingMode ? "ic_action_start_navigation" : "ic_action_gdirections_dark";
+	}
+
+	@Override
+	public float getDefaultOpacity() {
+		return OPAQUE_ALPHA;
+	}
+
+	@Override
+	public int getDefaultCornerRadius() {
+		return RECTANGULAR_RADIUS_DP;
 	}
 
 	@Nullable
@@ -79,5 +88,11 @@ public class NavigationMenuButtonState extends MapButtonState {
 			return AndroidUtils.getDrawableForDirection(app, drawable);
 		}
 		return drawable;
+	}
+
+	@NonNull
+	@Override
+	protected ButtonPositionSize setupButtonPosition(@NonNull ButtonPositionSize position) {
+		return setupButtonPosition(position, POS_LEFT, POS_BOTTOM, true, false);
 	}
 }

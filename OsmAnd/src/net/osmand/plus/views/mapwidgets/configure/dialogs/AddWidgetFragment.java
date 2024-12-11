@@ -24,10 +24,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.Collator;
+import net.osmand.OsmAndCollator;
 import net.osmand.aidl.AidlMapWidgetWrapper;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
@@ -40,7 +44,6 @@ import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.banner.WidgetPromoBanner;
-import net.osmand.plus.views.mapwidgets.banner.WidgetPromoBanner.WidgetData;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
 import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment;
@@ -162,6 +165,8 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 		List<WidgetType> widgets = widgetsDataHolder.getWidgetsList();
 		AidlMapWidgetWrapper aidlWidgetData = widgetsDataHolder.getAidlWidgetData();
 		if (widgets != null) {
+			Collator collator = OsmAndCollator.primaryCollator();
+			widgets.sort((indexItem, indexItem2) -> collator.compare(app.getString(indexItem.titleId), app.getString(indexItem2.titleId)));
 			inflateWidgetsList(widgets);
 		} else if (aidlWidgetData != null) {
 			inflateAidlWidget(aidlWidgetData);
@@ -192,10 +197,15 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 				Drawable icon = getIcon(widget.getIconId(nightMode));
 				setupWidgetItemView(view, widget.id, title, desc, icon, widget.getDefaultOrder());
 				container.addView(view);
+			} else if (widget.isOBDWidget()) {
+				View view = inflater.inflate(R.layout.selectable_widget_item_pro_banner, container, false);
+				((ImageView) view.findViewById(R.id.icon)).setImageResource(widget.getIconId(nightMode));
+				((TextView) view.findViewById(R.id.title)).setText(widget.titleId);
+				view.setOnClickListener(v -> ChoosePlanFragment.showInstance(activity, OsmAndFeature.VEHICLE_METRICS));
+				container.addView(view);
 			} else {
-				WidgetData widgetData = new WidgetData(widget.titleId, widget.dayIconId, widget.nightIconId);
-				WidgetPromoBanner banner = new WidgetPromoBanner(activity, widgetData, false);
-				container.addView(banner.build(activity));
+				container.addView(new WidgetPromoBanner(activity, widget, false).build());
+				addVerticalSpace(container, getDimensionPixelSize(R.dimen.content_padding_small));
 			}
 		}
 	}

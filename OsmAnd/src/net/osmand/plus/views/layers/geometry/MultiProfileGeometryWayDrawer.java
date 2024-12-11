@@ -39,22 +39,23 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 	@Override
 	public void drawPath(@NonNull VectorLinesCollection collection, int baseOrder,
 	                     boolean shouldDrawArrows, @NonNull List<DrawPathData31> pathsData) {
-		int lineId = LINE_ID;
 		GeometryWayStyle<?> prevStyle = null;
 		List<DrawPathData31> dataArr = new ArrayList<>();
+		int lineId = LINE_ID;
 		for (DrawPathData31 data : pathsData) {
 			GeometryMultiProfileWayStyle style = getMultiProfileWayStyle(data.style);
-			if (prevStyle != null && !Algorithms.objectEquals(style, prevStyle) && !dataArr.isEmpty()) {
+			if (!dataArr.isEmpty() && prevStyle != null && !Algorithms.objectEquals(style, prevStyle) && !dataArr.isEmpty()) {
 				drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows,
 						true, prevStyle, dataArr);
 				dataArr.clear();
 			}
 			prevStyle = style;
+			data.lineId = lineId;
 			if (style != null && !style.isGap()) {
 				dataArr.add(data);
 			}
 		}
-		if (!dataArr.isEmpty()) {
+		if (!dataArr.isEmpty() && prevStyle != null) {
 			drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, true, prevStyle,
 					dataArr);
 		}

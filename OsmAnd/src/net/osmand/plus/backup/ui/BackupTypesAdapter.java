@@ -16,6 +16,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.base.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
@@ -138,7 +139,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		ImageView proIcon = view.findViewById(R.id.pro_icon);
 		boolean showProIcon = !InAppPurchaseUtils.isExportTypeAvailable(app, exportType) && !cloudRestore;
 		setupChildIcon(view, exportType.getIconId(), selected && !showProIcon);
-		proIcon.setImageResource(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day);
+		proIcon.setImageResource(PurchasingUtils.getProFeatureIconId(nightMode));
 		view.setOnClickListener(view1 -> {
 			compoundButton.performClick();
 			if (listener != null) {

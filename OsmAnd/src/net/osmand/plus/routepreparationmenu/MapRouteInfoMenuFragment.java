@@ -26,7 +26,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
-import net.osmand.plus.track.helpers.GpxNavigationHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.TextViewExProgress;
@@ -504,7 +503,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 	public void onSegmentSelect(@NonNull GpxFile gpxFile, int selectedSegment) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			GpxNavigationHelper.startNavigationForSegment(gpxFile, selectedSegment, mapActivity);
+			mapActivity.getMapActions().startNavigationForSegment(gpxFile, selectedSegment, mapActivity);
 			dismiss();
 		}
 	}
@@ -513,7 +512,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 	public void onRouteSelected(@NonNull GpxFile gpxFile, int selectedRoute) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			GpxNavigationHelper.startNavigationForRoute(gpxFile, selectedRoute, mapActivity);
+			mapActivity.getMapActions().startNavigationForRoute(gpxFile, selectedRoute, mapActivity);
 			dismiss();
 		}
 	}

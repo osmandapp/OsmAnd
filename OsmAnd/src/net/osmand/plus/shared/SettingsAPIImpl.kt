@@ -1,7 +1,9 @@
 package net.osmand.plus.shared
 
+import net.osmand.StateChangedListener
 import net.osmand.plus.OsmandApplication
-import net.osmand.plus.settings.backend.preferences.CommonPreference
+import net.osmand.plus.settings.backend.preferences.FloatPreference
+import net.osmand.plus.settings.backend.preferences.StringPreference
 import net.osmand.shared.api.SettingsAPI
 import net.osmand.shared.api.KStateChangedListener
 
@@ -12,14 +14,6 @@ class SettingsAPIImpl(private val app: OsmandApplication) : SettingsAPI {
 		defValue: String,
 		global: Boolean,
 		shared: Boolean) {
-		getOrRegisterPreference(name, defValue, global, shared)
-	}
-
-	private fun getOrRegisterPreference(
-		name: String,
-		defValue: String,
-		global: Boolean = true,
-		shared: Boolean = true): CommonPreference<String> {
 		val preference = app.settings.registerStringPreference(name, defValue)
 		if (global) {
 			preference.makeGlobal()
@@ -27,22 +21,59 @@ class SettingsAPIImpl(private val app: OsmandApplication) : SettingsAPI {
 		if (shared) {
 			preference.makeShared()
 		}
-		return preference
 	}
 
-	override fun getStringPreference(
-		name: String,
-		defValue: String,
-		global: Boolean,
-		shared: Boolean): String {
-		return getOrRegisterPreference(name, defValue, global, shared).get()
+	override fun getStringPreference(name: String): String? {
+		return when (val pref = app.settings.getPreference(name)) {
+			is StringPreference -> pref.get()
+			else -> null
+		}
 	}
 
 	override fun setStringPreference(name: String, value: String) {
-		getOrRegisterPreference(name, value).set(value)
+		val pref = app.settings.getPreference(name)
+		if (pref is StringPreference) pref.set(value)
 	}
 
-	override fun <T> addPreferenceListener(name: String, listener: KStateChangedListener<T>) {
-		getOrRegisterPreference(name, "").addListener { }
+	override fun addStringPreferenceListener(
+		name: String,
+		listener: KStateChangedListener<String>) {
+		val pref = app.settings.getPreference(name)
+		if (pref is StringPreference) {
+			pref.addListener(StateChangedListener { change -> listener.stateChanged(change) })
+		}
+	}
+
+	override fun registerPreference(
+		name: String,
+		defValue: Float,
+		global: Boolean,
+		shared: Boolean) {
+		val preference = app.settings.registerFloatPreference(name, defValue)
+		if (global) {
+			preference.makeGlobal()
+		}
+		if (shared) {
+			preference.makeShared()
+		}
+	}
+
+	override fun getFloatPreference(name: String): Float? {
+		return when (val pref = app.settings.getPreference(name)) {
+			is FloatPreference -> pref.get()
+			else -> null
+		}
+	}
+
+	override fun setFloatPreference(name: String, value: Float) {
+		val pref = app.settings.getPreference(name)
+		if (pref is FloatPreference) pref.set(value)
+	}
+
+	override fun addFloatPreferenceListener(name: String, listener: KStateChangedListener<Float>) {
+		val pref = app.settings.getPreference(name)
+		if (pref is FloatPreference) {
+			pref.addListener(StateChangedListener { change -> listener.stateChanged(change) })
+		}
 	}
 }

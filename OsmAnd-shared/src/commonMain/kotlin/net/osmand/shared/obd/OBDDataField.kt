@@ -1,17 +1,13 @@
 package net.osmand.shared.obd
 
-open class OBDDataField(
-	val type: OBDDataFieldType,
-	private val stringValue: String) {
-	fun getDisplayName(): String {
-		return type.getDisplayName()
-	}
+import net.osmand.shared.extensions.currentTimeMillis
 
-	fun getDisplayUnit(): String {
-		return type.getDisplayUnit()
-	}
+open class OBDDataField<T>(
+	val value: T) {
+	var timestamp = currentTimeMillis()
+	var location: OBDDataComputer.OBDLocation? = null
 
-	open fun getValue(): String {
-		return stringValue
+	companion object {
+		val NO_DATA = OBDDataField<Any>(0)
 	}
 }

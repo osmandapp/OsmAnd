@@ -34,4 +34,9 @@ class GeometryWayWptPtProvider implements GeometryWayProvider {
 	public int getSize() {
 		return points.size();
 	}
+
+	@Override
+	public boolean isFirstLastLocation(int index) {
+		return false;
+	}
 }

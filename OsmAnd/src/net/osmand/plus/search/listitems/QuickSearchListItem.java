@@ -171,8 +171,10 @@ public class QuickSearchListItem {
 				if (searchResult.relatedObject != null) {
 					Street relatedStreet = (Street) searchResult.relatedObject;
 					if (relatedStreet.getCity() != null) {
-						return searchResult.localeRelatedObjectName + ", "
-								+ relatedStreet.getCity().getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true);
+						String relObj = searchResult.localeRelatedObjectName;
+						String cityName = relatedStreet.getCity().getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true);
+						String res = relObj.contains(cityName) ? relObj : relObj + ", " + cityName;
+						return res.replace("<", "").replace(">", "");
 					} else {
 						return searchResult.localeRelatedObjectName;
 					}

@@ -1,8 +1,16 @@
 package net.osmand.plus.views.layers.geometry;
 
 import android.content.Context;
-import android.graphics.*;
-import android.util.Pair;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.Shader;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -10,13 +18,11 @@ import androidx.annotation.Nullable;
 
 import net.osmand.core.jni.QListFColorARGB;
 import net.osmand.core.jni.VectorLinesCollection;
-import net.osmand.shared.routing.ColoringType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.MapTileLayer;
-//import net.osmand.plus.views.layers.geometry.MultiColoringGeometryWay.GeometryGradientWayStyle;
-//import net.osmand.plus.views.layers.geometry.MultiColoringGeometryWay.GeometrySolidWayStyle;
 import net.osmand.shared.ColorPalette;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -65,15 +71,16 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 
 	protected void drawGradient(@NonNull VectorLinesCollection collection, int baseOrder,
 	                            boolean shouldDrawArrows, @NonNull List<DrawPathData31> pathsData) {
-		int lineId = LINE_ID;
 		GeometryWayStyle<?> prevStyle = null;
 		List<DrawPathData31> dataArr = new ArrayList<>();
+		int lineId = LINE_ID;
 		for (DrawPathData31 data : pathsData) {
-			if (prevStyle != null && data.style == null) {
+			if (!dataArr.isEmpty() && prevStyle != null && data.style == null) {
 				drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows, true, prevStyle, dataArr);
 				dataArr.clear();
 			}
 			prevStyle = data.style;
+			data.lineId = lineId;
 			dataArr.add(data);
 		}
 		if (!dataArr.isEmpty() && prevStyle != null) {
@@ -97,9 +104,19 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 		Bitmap pointBitmap = arrowPathPointSample.drawBitmap(getContext());
 		Bitmap specialPointBitmap = specialArrowPathPointSample.drawBitmap(getContext());
 
-		GeometrySolidWayStyle<?> solidWayStyle = (GeometrySolidWayStyle<?>) style;
-		float bitmapStep = (float) solidWayStyle.getRegularPointStepPx();
-		float specialBitmapStep = (float) solidWayStyle.getSpecialPointStepPx();
+		if (pointBitmap == null) {
+			pointBitmap = style.getPointBitmap();
+		}
+
+		float bitmapStep;
+		float specialBitmapStep;
+		if (style instanceof GeometrySolidWayStyle<?> solidWayStyle) {
+			bitmapStep = (float) solidWayStyle.getRegularPointStepPx();
+			specialBitmapStep = (float) solidWayStyle.getSpecialPointStepPx();
+		} else {
+			bitmapStep = (float) style.getPointStepPx(1);
+			specialBitmapStep = (float) style.getPointStepPx(1);
+		}
 
 		Pair<QListFColorARGB, QListFColorARGB> mappings = getColorizationMappings(pathsData);
 
@@ -125,12 +142,10 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 				int color = 0;
 				GeometryWayStyle<?> style = data.style;
 				if (style != null) {
-					if (style instanceof GeometryGradient3DWayStyle) {
-						GeometryGradient3DWayStyle<?> wayStyle = (GeometryGradient3DWayStyle<?>) style;
+					if (style instanceof GeometryGradient3DWayStyle<?> wayStyle) {
 						color = outline ? wayStyle.currOutlineColor : wayStyle.currColor;
 						lastColor = outline ? wayStyle.nextOutlineColor : wayStyle.nextColor;
-					} else if (style instanceof GeometryGradientWayStyle) {
-						GeometryGradientWayStyle<?> wayStyle = (GeometryGradientWayStyle<?>) style;
+					} else if (style instanceof GeometryGradientWayStyle<?> wayStyle) {
 						color = wayStyle.currColor;
 						lastColor = wayStyle.nextColor;
 					} else {
@@ -187,8 +202,8 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 
 	@Override
 	protected PathPoint getArrowPathPoint(float iconX, float iconY, GeometryWayStyle<?> style, double angle, double percent) {
-		GeometrySolidWayStyle<?> solidWayStyle = (GeometrySolidWayStyle<?>) style;
-		return new ArrowPathPoint(iconX, iconY, angle, style, percent, solidWayStyle.useSpecialArrow());
+		boolean useSpecialArrow = style instanceof GeometrySolidWayStyle && ((GeometrySolidWayStyle<?>) style).useSpecialArrow();
+		return new ArrowPathPoint(iconX, iconY, angle, style, percent, useSpecialArrow);
 	}
 
 	@NonNull
@@ -211,9 +226,8 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 		@Override
 		protected int[] getPointBitmapSize() {
 			Bitmap bitmap = getPointBitmap();
-			if (bitmap != null) {
+			if (bitmap != null && style instanceof GeometrySolidWayStyle<?> arrowsWayStyle) {
 				Context ctx = style.getCtx();
-				GeometrySolidWayStyle<?> arrowsWayStyle = (GeometrySolidWayStyle<?>) style;
 				if (useSpecialArrow) {
 					int bitmapSize = (int) (arrowsWayStyle.getOuterCircleRadius() * 2 + AndroidUtils.dpToPxAuto(ctx, 2));
 					return new int[] {bitmapSize, bitmapSize};
@@ -231,13 +245,12 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 
 		@Override
 		protected void draw(@NonNull Canvas canvas, @NonNull GeometryWayContext context) {
-			if (style instanceof GeometrySolidWayStyle && shouldDrawArrow()) {
+			if (style instanceof GeometrySolidWayStyle<?> arrowsWayStyle && shouldDrawArrow()) {
 				Bitmap bitmap = getPointBitmap();
 				if (bitmap == null) {
 					return;
 				}
 				Context ctx = style.getCtx();
-				GeometrySolidWayStyle<?> arrowsWayStyle = (GeometrySolidWayStyle<?>) style;
 
 				float newWidth;
 				if (useSpecialArrow) {
@@ -264,6 +277,24 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 				int arrowColor = arrowsWayStyle.getPointColor();
 				paint.setColorFilter(new PorterDuffColorFilter(arrowColor, PorterDuff.Mode.SRC_IN));
 				canvas.drawBitmap(bitmap, matrix, paint);
+			} else if (style instanceof GeometryWalkWayStyle walkWayStyle && shouldDrawArrow()) {
+				Bitmap bitmap = walkWayStyle.getPointBitmap();
+				if (bitmap == null) {
+					return;
+				}
+				float paintW2 = bitmap.getWidth() / 2f;
+				float paintH2 = bitmap.getHeight() / 2f;
+				Matrix matrix = getMatrix();
+				matrix.reset();
+				matrix.postRotate((float) angle, paintW2, paintH2);
+				matrix.postTranslate(x - paintW2, y - paintH2);
+				if (style.hasPaintedPointBitmap()) {
+					Paint paint = context.getPaintIconCustom();
+					paint.setColorFilter(null);
+					canvas.drawBitmap(bitmap, matrix, paint);
+				} else {
+					canvas.drawBitmap(bitmap, matrix, context.getPaintIcon());
+				}
 			}
 		}
 
@@ -276,8 +307,7 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 		}
 
 		private int getCircleColor(@NonNull GeometrySolidWayStyle<?> style) {
-			if (style instanceof GeometryGradientWayStyle<?>) {
-				GeometryGradientWayStyle<?> gradientStyle = ((GeometryGradientWayStyle<?>) style);
+			if (style instanceof GeometryGradientWayStyle<?> gradientStyle) {
 				return ColorPalette.Companion.getIntermediateColor(gradientStyle.currColor, gradientStyle.nextColor, percent);
 			}
 			return style.getColor(0);

@@ -2,6 +2,7 @@ package net.osmand.plus.backup.ui;
 
 import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_DELETE;
 import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_DOWNLOAD;
+import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_NONE;
 import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_UPLOAD;
 import static net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType.UNIQUE;
 import static net.osmand.plus.backup.ui.BackupUiUtils.generateTimeString;
@@ -86,7 +87,8 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 	}
 
 	private void setupDownloadAction(@NonNull View view) {
-		boolean deleteOperation = item.operation == SYNC_OPERATION_DELETE;
+		boolean deleteOperation = item.operation == SYNC_OPERATION_DELETE
+				|| item.operation == SYNC_OPERATION_NONE && item.remoteFile != null && item.remoteFile.isDeleted();
 		boolean enabled = isRowEnabled(item.fileName) && (item.remoteFile != null || deleteOperation);
 
 		String description;
@@ -203,17 +205,16 @@ public class ChangeItemActionsBottomSheet extends BottomSheetDialogFragment {
 		settingsHelper.syncSettingsItems(item.fileName, item.localFile, item.remoteFile, UNIQUE, operation);
 	}
 
+	@NonNull
 	private String getTitleForOperation() {
-		switch (item.operation) {
-			case SYNC_OPERATION_DOWNLOAD:
-				return getString(item.localFile == null ? R.string.new_file : R.string.modified_file);
-			case SYNC_OPERATION_UPLOAD:
-				return getString(item.remoteFile == null ? R.string.new_file : R.string.modified_file);
-			case SYNC_OPERATION_DELETE:
-				return getString(R.string.deleted_file);
-			default:
-				return getString(R.string.cloud_conflict);
-		}
+		return switch (item.operation) {
+			case SYNC_OPERATION_DOWNLOAD ->
+					getString(item.localFile == null ? R.string.new_file : R.string.modified_file);
+			case SYNC_OPERATION_UPLOAD ->
+					getString(item.remoteFile == null ? R.string.new_file : R.string.modified_file);
+			case SYNC_OPERATION_DELETE -> getString(R.string.deleted_file);
+			default -> getString(R.string.cloud_conflict);
+		};
 	}
 
 	private boolean isRowEnabled(@NonNull String fileName) {

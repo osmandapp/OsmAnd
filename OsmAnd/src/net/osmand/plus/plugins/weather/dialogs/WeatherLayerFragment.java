@@ -24,6 +24,7 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.weather.WeatherBand;
+import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.plugins.weather.units.WeatherUnit;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -42,6 +43,8 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 	private static final long MS_IN_DAY = 24 * 60 * 60 * 1000;
 
 	private WeatherBand weatherBand;
+	private WeatherHelper weatherHelper;
+	private boolean isSliderDragging = false;
 
 	@Override
 	protected boolean isUsedOnMap() {
@@ -58,7 +61,8 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 		if (bandIndex == WEATHER_BAND_NOTHING && savedInstanceState != null) {
 			bandIndex = savedInstanceState.getShort(WEATHER_BAND_KEY);
 		}
-		weatherBand = app.getWeatherHelper().getWeatherBand(bandIndex);
+		weatherHelper = app.getWeatherHelper();
+		weatherBand = weatherHelper.getWeatherBand(bandIndex);
 		if (weatherBand == null) {
 			requireActivity().onBackPressed();
 		}
@@ -111,7 +115,6 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 		CommonPreference<Float> alphaPref = weatherBand.getAlphaPreference();
 		if (alphaPref != null) {
 			Slider slider = view.findViewById(R.id.slider);
-			TextView tvCurrentValue = view.findViewById(R.id.slider_current_value);
 
 			slider.setStepSize(0.01f);
 			slider.setValueTo(1);
@@ -121,23 +124,51 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 			((TextView) view.findViewById(R.id.slider_max)).setText(String.valueOf(TRANSPARENCY_MAX));
 
 			float value = alphaPref.get();
-			tvCurrentValue.setText(formatAlpha(value));
+			setupSliderValueIndicator(view, value);
 			slider.setValue(value);
+
+			slider.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
+				@Override
+				public void onStartTrackingTouch(@NonNull Slider slider) {
+					isSliderDragging = true;
+				}
+
+				@Override
+				public void onStopTrackingTouch(@NonNull Slider slider) {
+					isSliderDragging = false;
+					applyTransparency(view, slider.getValue(), true);
+				}
+			});
 
 			slider.addOnChangeListener((slider_, newValue, fromUser) -> {
 				if (fromUser) {
-					weatherBand.getAlphaPreference().set(newValue);
-					tvCurrentValue.setText(formatAlpha(newValue));
-					WeatherTileResourcesManager weatherTileResourcesManager = app.getWeatherHelper().getWeatherResourcesManager();
-					if (weatherTileResourcesManager != null) {
-						weatherTileResourcesManager.clearDbCache(System.currentTimeMillis() + MAX_FORECAST_DAYS * MS_IN_DAY);
-					}
+					applyTransparency(view, newValue, !isSliderDragging);
 				}
 			});
 			int activeColor = settings.getApplicationMode().getProfileColor(nightMode);
 			UiUtilities.setupSlider(slider, nightMode, activeColor, false);
 		}
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.transparency_card), alphaPref != null);
+	}
+
+	private void applyTransparency(@NonNull View view, float newValue, boolean updateTiles) {
+		CommonPreference<Float> alphaPref = weatherBand.getAlphaPreference();
+		if (alphaPref != null) {
+			alphaPref.set(newValue);
+			setupSliderValueIndicator(view, newValue);
+			if (updateTiles) {
+				WeatherTileResourcesManager manager = weatherHelper.getWeatherResourcesManager();
+				if (manager != null) {
+					long now = System.currentTimeMillis();
+					manager.clearDbCache(now + MAX_FORECAST_DAYS * MS_IN_DAY);
+				}
+			}
+		}
+	}
+
+	private void setupSliderValueIndicator(@NonNull View view, float value) {
+		TextView tvIndicator = view.findViewById(R.id.slider_current_value);
+		tvIndicator.setText(formatAlpha(value));
 	}
 
 	private String formatAlpha(float value) {
@@ -183,7 +214,7 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 				int selected = (int) v.getTag();
 				settings.setPreference(weatherBand.getBandUnitPref().getId(), selected);
 				updateMeasurementUnitsCard(view);
-				app.getWeatherHelper().updateBandsSettings();
+				weatherHelper.updateBandsSettings();
 				refreshMap((MapActivity) getMyActivity());
 			};
 			int profileColor = settings.getApplicationMode().getProfileColor(nightMode);

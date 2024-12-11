@@ -1,12 +1,12 @@
 package net.osmand.shared.gpx.filters
 
 import kotlinx.serialization.Serializable
-import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.GpxParameter
+import net.osmand.shared.gpx.TrackItem
 import kotlin.math.ceil
 import kotlin.math.floor
 
-@Serializable
+@Serializable(with = RangeTrackFilterSerializer::class)
 open class RangeTrackFilter<T : Comparable<T>>
 	: BaseTrackFilter {
 
@@ -95,7 +95,7 @@ open class RangeTrackFilter<T : Comparable<T>>
 		val value: Comparable<Any> = trackItem.dataItem?.getParameter(trackFilterType.property!!)
 			?: return false
 		val comparableValue = getComparableValue(value)
-		return comparableValue > valueFrom && comparableValue < valueTo
+		return comparableValue in valueFrom..valueTo
 				|| comparableValue < minValue && valueFrom == minValue
 				|| comparableValue > maxValue && valueTo == maxValue
 	}

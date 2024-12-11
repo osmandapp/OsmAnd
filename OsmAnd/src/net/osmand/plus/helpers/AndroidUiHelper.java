@@ -19,6 +19,7 @@ import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.View.OnAttachStateChangeListener;
 import android.view.WindowInsetsController;
@@ -74,11 +75,14 @@ public class AndroidUiHelper {
 		return rotation;
 	}
 
-	public static int getScreenOrientation(@NonNull Activity activity) {
-		WindowManager windowManager = activity.getWindowManager();
-		int rotation = windowManager.getDefaultDisplay().getRotation();
+	public static int getScreenOrientation(@NonNull @UiContext Context context) {
+		WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+		Display display = manager.getDefaultDisplay();
+
+		int rotation = display.getRotation();
 		DisplayMetrics dm = new DisplayMetrics();
-		activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+		display.getMetrics(dm);
+
 		int width = dm.widthPixels;
 		int height = dm.heightPixels;
 		int orientation;
@@ -155,8 +159,8 @@ public class AndroidUiHelper {
 		return lt == Configuration.SCREENLAYOUT_SIZE_XLARGE;
 	}
 
-	public static boolean isOrientationPortrait(@NonNull Activity ctx) {
-		int orientation = getScreenOrientation(ctx);
+	public static boolean isOrientationPortrait(@NonNull @UiContext Context context) {
+		int orientation = getScreenOrientation(context);
 		return orientation == SCREEN_ORIENTATION_PORTRAIT || orientation == SCREEN_ORIENTATION_REVERSE_PORTRAIT;
 	}
 

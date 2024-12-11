@@ -1,11 +1,15 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import android.content.Context;
+import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
@@ -15,32 +19,51 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
 
-public class RulerWidget {
+public class RulerWidget extends FrameLayout {
 
 	private final OsmandApplication app;
 	private final OsmandMap osmandMap;
 
-	private final View layout;
-	private final ImageView icon;
-	private final TextView text;
-	private final TextView textShadow;
+	private View layout;
+	private ImageView icon;
+	private TextView text;
+	private TextView textShadow;
 
-	private final int maxWidth;
+	private int maxWidth;
 	private float cacheRulerZoom;
 	private float cacheMapDensity;
 	private double cacheRulerTileX;
 	private double cacheRulerTileY;
 
-	public RulerWidget(@NonNull OsmandApplication app, @NonNull View view) {
-		this.app = app;
+	public RulerWidget(@NonNull Context context) {
+		this(context, null);
+	}
+
+	public RulerWidget(@NonNull Context context, @Nullable AttributeSet attrs) {
+		this(context, attrs, 0);
+	}
+
+	public RulerWidget(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+		this(context, attrs, defStyleAttr, 0);
+	}
+
+	public RulerWidget(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+		super(context, attrs, defStyleAttr, defStyleRes);
+
+		this.app = (OsmandApplication) context.getApplicationContext();
 		osmandMap = app.getOsmandMap();
 		cacheMapDensity = osmandMap.getMapDensity();
+	}
 
-		layout = view.findViewById(R.id.map_ruler_layout);
-		icon = view.findViewById(R.id.map_ruler_image);
-		text = view.findViewById(R.id.map_ruler_text);
-		textShadow = view.findViewById(R.id.map_ruler_text_shadow);
-		maxWidth = view.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
+	@Override
+	protected void onFinishInflate() {
+		super.onFinishInflate();
+
+		layout = findViewById(R.id.map_ruler_layout);
+		icon = findViewById(R.id.map_ruler_image);
+		text = findViewById(R.id.map_ruler_text);
+		textShadow = findViewById(R.id.map_ruler_text_shadow);
+		maxWidth = getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
 	}
 
 	public void updateTextSize(boolean isNight, int textColor, int textShadowColor, int shadowRadius) {

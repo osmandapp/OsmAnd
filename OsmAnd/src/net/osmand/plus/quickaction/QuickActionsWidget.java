@@ -6,7 +6,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -196,14 +195,15 @@ public class QuickActionsWidget extends LinearLayout {
 	}
 
 	private View createPageView(@NonNull ViewGroup container, int position) {
+		Context context = getContext();
 		boolean light = settings.isLightContent() && !app.getDaynightHelper().isNightMode();
-		LayoutInflater inflater = UiUtilities.getInflater(container.getContext(), !light);
+		LayoutInflater inflater = UiUtilities.getInflater(context, !light);
 
 		View page = inflater.inflate(R.layout.quick_action_widget_page, container, false);
 		GridLayout gridLayout = page.findViewById(R.id.grid);
 
 		QuickActionButtonState buttonState = selectedButton.getButtonState();
-		boolean land = !AndroidUiHelper.isOrientationPortrait((Activity) getContext());
+		boolean land = !AndroidUiHelper.isOrientationPortrait(context);
 		int maxItems = actions.size() == 1 ? 1 : ACTIONS_PER_PAGE;
 
 		for (int i = 0; i < maxItems; i++) {
@@ -214,7 +214,7 @@ public class QuickActionsWidget extends LinearLayout {
 						actions.get(i + (position * ACTIONS_PER_PAGE)));
 
 				((ImageView) view.findViewById(imageView))
-						.setImageResource(action.getIconRes(app));
+						.setImageResource(action.getIconRes(context));
 
 				((TextView) view.findViewById(R.id.title))
 						.setText(action.getActionText(app));

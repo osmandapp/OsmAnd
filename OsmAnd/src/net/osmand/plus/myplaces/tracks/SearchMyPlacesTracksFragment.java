@@ -96,7 +96,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 		if (externalFilter != null) {
 			return new SearchTracksAdapter(app, trackItems, nightMode, selectionMode, externalFilter);
 		} else {
-			TracksSearchFilter filter = new TracksSearchFilter(app, trackItems, currentFolder);
+			TracksSearchFilter filter = new TracksSearchFilter(app, trackItems, currentFolder, null);
 			return new SearchTracksAdapter(app, trackItems, nightMode, selectionMode, filter);
 		}
 	}
@@ -120,14 +120,17 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 			boolean filtersChanged = false;
 			TracksSearchFilter searchFilter = (TracksSearchFilter) adapter.getFilter();
 			List<BaseTrackFilter> currentFilters = searchFilter.getAppliedFilters();
-			if (currentFilters.size() != smartFolder.getFilters().size()) {
-				filtersChanged = true;
-			} else {
-				for (BaseTrackFilter folderFilter : smartFolder.getFilters()) {
-					BaseTrackFilter currentFilter = searchFilter.getFilterByType(folderFilter.getTrackFilterType());
-					if (currentFilter == null || !currentFilter.equals(folderFilter)) {
-						filtersChanged = true;
-						break;
+			List<BaseTrackFilter> filters = smartFolder.getFilters();
+			if (filters != null) {
+				if (currentFilters.size() != filters.size()) {
+					filtersChanged = true;
+				} else {
+					for (BaseTrackFilter folderFilter : filters) {
+						BaseTrackFilter currentFilter = searchFilter.getFilterByType(folderFilter.getTrackFilterType());
+						if (currentFilter == null || !currentFilter.equals(folderFilter)) {
+							filtersChanged = true;
+							break;
+						}
 					}
 				}
 			}
