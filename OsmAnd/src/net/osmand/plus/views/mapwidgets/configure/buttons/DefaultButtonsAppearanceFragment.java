@@ -1,4 +1,4 @@
-package net.osmand.plus.quickaction;
+package net.osmand.plus.views.mapwidgets.configure.buttons;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -21,35 +21,37 @@ import com.google.android.material.snackbar.Snackbar;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.card.icon.OnIconsPaletteListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.quickaction.ButtonAppearanceParams;
+import net.osmand.plus.quickaction.ButtonSizeCard;
+import net.osmand.plus.quickaction.CornerRadiusCard;
+import net.osmand.plus.quickaction.MapButtonsHelper;
+import net.osmand.plus.quickaction.OpacitySliderCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonCard;
-import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements CardListener, OnIconsPaletteListener<String> {
+public class DefaultButtonsAppearanceFragment extends BaseOsmAndFragment implements CardListener {
 
-	public static final String TAG = MapButtonAppearanceFragment.class.getSimpleName();
+	public static final String TAG = DefaultButtonsAppearanceFragment.class.getSimpleName();
 
-	public static final String MAP_BUTTON_KEY = "map_button_key";
-
-	private List<BaseCard> cards;
-	private DialogButton applyButton;
-	private MapButtonState buttonState;
-	private MapButtonCard mapButtonCard;
-	private MapButtonIconController iconController;
+	private CommonPreference<Integer> defaultSizePref;
+	private CommonPreference<Float> defaultOpacityPref;
+	private CommonPreference<Integer> defaultCornerRadiusPref;
 
 	private ButtonAppearanceParams appearanceParams;
 	private ButtonAppearanceParams originalAppearanceParams;
+
+	private List<BaseCard> cards;
+	private DialogButton applyButton;
 
 	public boolean getContentStatusBarNightMode() {
 		return nightMode;
@@ -65,28 +67,23 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		Bundle args = requireArguments();
-		String key = args.getString(MAP_BUTTON_KEY);
-		if (key != null) {
-			buttonState = app.getMapButtonsHelper().getMapButtonStateById(key);
-		}
-		if (buttonState != null) {
-			appearanceParams = buttonState.createAppearanceParams();
-			originalAppearanceParams = buttonState.createAppearanceParams();
-			String savedIconName = buttonState.getSavedIconName();
-			appearanceParams.setIconName(savedIconName);
-			originalAppearanceParams.setIconName(savedIconName);
+		MapButtonsHelper helper = app.getMapButtonsHelper();
+		defaultSizePref = helper.getDefaultSizePref();
+		defaultOpacityPref = helper.getDefaultOpacityPref();
+		defaultCornerRadiusPref = helper.getDefaultCornerRadiusPref();
 
-			if (savedInstanceState != null) {
-				appearanceParams.readBundle(savedInstanceState);
-			}
-			iconController = MapButtonIconController.getInstance(app, buttonState, appearanceParams, this);
+		appearanceParams = createAppearanceParams();
+		originalAppearanceParams = createAppearanceParams();
+
+		if (savedInstanceState != null) {
+			appearanceParams.readBundle(savedInstanceState);
 		}
 	}
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+			@Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		View view = themedInflater.inflate(R.layout.map_button_appearance_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
@@ -106,7 +103,7 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 		toolbar.setBackgroundColor(ColorUtilities.getAppBarSecondaryColor(view.getContext(), nightMode));
 
 		TextView title = toolbar.findViewById(R.id.toolbar_title);
-		title.setText(R.string.shared_string_appearance);
+		title.setText(R.string.default_appearance);
 		title.setTextColor(ColorUtilities.getPrimaryTextColor(view.getContext(), nightMode));
 
 		ImageView closeButton = toolbar.findViewById(R.id.close_button);
@@ -126,18 +123,16 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 
 	private void setupCards(@NonNull View view) {
 		cards = new ArrayList<>();
-		MapActivity activity = requireMapActivity();
+
 		ViewGroup container = view.findViewById(R.id.cards_container);
 		container.removeAllViews();
 
-		mapButtonCard = new MapButtonCard(activity, buttonState, appearanceParams);
-		addCard(container, mapButtonCard);
-		addCard(container, new ButtonIconsCard(activity, iconController));
-		addCard(container, new CornerRadiusCard(activity, appearanceParams, false));
-		container.addView(themedInflater.inflate(R.layout.simple_divider_item, container, false));
-		addCard(container, new ButtonSizeCard(activity, appearanceParams, false));
-		container.addView(themedInflater.inflate(R.layout.simple_divider_item, container, false));
-		addCard(container, new OpacitySliderCard(activity, appearanceParams, false));
+		MapActivity activity = requireMapActivity();
+		addCard(container, new CornerRadiusCard(activity, appearanceParams, true));
+		container.addView(themedInflater.inflate(R.layout.list_item_divider, container, false));
+		addCard(container, new ButtonSizeCard(activity, appearanceParams, true));
+		container.addView(themedInflater.inflate(R.layout.list_item_divider, container, false));
+		addCard(container, new OpacitySliderCard(activity, appearanceParams, true));
 	}
 
 	private void addCard(@NonNull ViewGroup container, @NonNull BaseCard card) {
@@ -149,18 +144,14 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 	private void setupApplyButton(@NonNull View view) {
 		applyButton = view.findViewById(R.id.apply_button);
 		applyButton.setOnClickListener(v -> {
-			applyChanges();
+			saveChanges(false);
+			showAllModesSnackbar();
 
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				activity.onBackPressed();
 			}
 		});
-	}
-
-	private void applyChanges() {
-		saveChanges(false);
-		showAllModesSnackbar();
 	}
 
 	private void showAllModesSnackbar() {
@@ -179,15 +170,13 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 
 	private void saveChanges(boolean applyToAllProfiles) {
 		if (applyToAllProfiles) {
-			settings.setPreferenceForAllModes(buttonState.getSizePref().getId(), appearanceParams.getSize());
-			settings.setPreferenceForAllModes(buttonState.getOpacityPref().getId(), appearanceParams.getOpacity());
-			settings.setPreferenceForAllModes(buttonState.getCornerRadiusPref().getId(), appearanceParams.getCornerRadius());
-			settings.setPreferenceForAllModes(buttonState.getIconPref().getId(), appearanceParams.getIconName());
+			settings.setPreferenceForAllModes(defaultSizePref.getId(), appearanceParams.getSize());
+			settings.setPreferenceForAllModes(defaultOpacityPref.getId(), appearanceParams.getOpacity());
+			settings.setPreferenceForAllModes(defaultCornerRadiusPref.getId(), appearanceParams.getCornerRadius());
 		} else {
-			buttonState.getSizePref().set(appearanceParams.getSize());
-			buttonState.getOpacityPref().set(appearanceParams.getOpacity());
-			buttonState.getCornerRadiusPref().set(appearanceParams.getCornerRadius());
-			buttonState.getIconPref().set(appearanceParams.getIconName());
+			defaultSizePref.set(appearanceParams.getSize());
+			defaultOpacityPref.set(appearanceParams.getOpacity());
+			defaultCornerRadiusPref.set(appearanceParams.getCornerRadius());
 		}
 	}
 
@@ -203,24 +192,20 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 	}
 
 	private void updateButtons() {
-		ButtonAppearanceParams params = appearanceParams;
-		String iconName = appearanceParams.getIconName();
-		if (Algorithms.isEmpty(iconName)) {
-			params = new ButtonAppearanceParams(appearanceParams);
-			params.setIconName(buttonState.getDefaultIconName());
-		}
-		mapButtonCard.updateButton(params);
 		applyButton.setEnabled(!Algorithms.objectEquals(originalAppearanceParams, appearanceParams));
 	}
 
 	private void resetAppearance() {
-		ButtonAppearanceParams defaultParams = buttonState.createDefaultAppearanceParams();
-		appearanceParams.setIconName(null);
-		appearanceParams.setSize(defaultParams.getSize());
-		appearanceParams.setOpacity(defaultParams.getOpacity());
-		appearanceParams.setCornerRadius(defaultParams.getCornerRadius());
-		iconController.updateAfterReset();
+		appearanceParams.setSize(defaultSizePref.getDefaultValue());
+		appearanceParams.setOpacity(defaultOpacityPref.getDefaultValue());
+		appearanceParams.setCornerRadius(defaultCornerRadiusPref.getDefaultValue());
 		updateContent();
+	}
+
+	@NonNull
+	private ButtonAppearanceParams createAppearanceParams() {
+		return new ButtonAppearanceParams(null, defaultSizePref.get(),
+				defaultOpacityPref.get(), defaultCornerRadiusPref.get());
 	}
 
 	@Override
@@ -229,15 +214,10 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 	}
 
 	@Override
-	public void onIconSelectedFromPalette(@Nullable String iconName) {
-		appearanceParams.setIconName(iconName);
-		updateButtons();
-	}
-
-	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		appearanceParams.saveToBundle(outState);
+		originalAppearanceParams.saveToBundle(outState);
 	}
 
 	@Override
@@ -260,16 +240,6 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 		}
 	}
 
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-
-		FragmentActivity activity = getActivity();
-		if (activity != null && !activity.isChangingConfigurations()) {
-			MapButtonIconController.onDestroy(app);
-		}
-	}
-
 	@Nullable
 	public MapActivity getMapActivity() {
 		FragmentActivity activity = getActivity();
@@ -285,13 +255,9 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 		return (MapActivity) activity;
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull MapButtonState buttonState) {
+	public static void showInstance(@NonNull FragmentManager manager) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			Bundle args = new Bundle();
-			args.putString(MAP_BUTTON_KEY, buttonState.getId());
-
-			MapButtonAppearanceFragment fragment = new MapButtonAppearanceFragment();
-			fragment.setArguments(args);
+			DefaultButtonsAppearanceFragment fragment = new DefaultButtonsAppearanceFragment();
 			manager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
