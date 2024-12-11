@@ -1036,6 +1036,9 @@ public class MapPoiTypes {
 		if (pt == null) {
 			pt = poiTypesByTag.get(tag);
 		}
+		if (pt == null) {
+			pt = poiTypesByTag.get(tag + "/" + "null"); // required when no type="text" specified
+		}
 		return pt;
 	}
 
