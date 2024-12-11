@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/shadow_on_map"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:scaleType="fitXY"
+		app:srcCompat="@drawable/bg_shadow_onmap" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="?attr/activity_background_color"
+		android:orientation="vertical">
+
+		<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?attr/list_background_color">
+
+			<include
+				android:id="@+id/main_toggle"
+				layout="@layout/bottom_sheet_item_with_switch_56dp" />
+
+		</FrameLayout>
+
+		<!--Empty screen, when public transport disabled-->
+		<FrameLayout
+			android:id="@+id/empty_screen"
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1"
+			android:visibility="gone">
+
+			<include layout="@layout/card_bottom_divider" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginVertical="@dimen/content_padding"
+				android:orientation="vertical">
+
+				<androidx.appcompat.widget.AppCompatImageView
+					android:layout_width="@dimen/icon_size_double"
+					android:layout_height="@dimen/icon_size_double"
+					android:layout_gravity="center"
+					android:layout_marginVertical="@dimen/content_padding"
+					android:src="@drawable/mm_amenity_bus_station"
+					android:tint="?attr/default_icon_color" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					style="@style/DescStyle"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center"
+					android:gravity="center"
+					android:text="@string/turn_on_public_transport_description"
+					android:textColor="?android:textColorSecondary" />
+
+			</LinearLayout>
+
+		</FrameLayout>
+
+		<!--Normal screen, when public transport enabled-->
+		<LinearLayout
+			android:id="@+id/normal_screen"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<include layout="@layout/list_item_divider" />
+
+			<FrameLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="?attr/list_background_color">
+
+				<include
+					android:id="@+id/transport_stops_toggle"
+					layout="@layout/bottom_sheet_item_with_switch" />
+
+			</FrameLayout>
+
+			<LinearLayout
+				android:id="@+id/routes_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+
+				<include layout="@layout/list_item_divider" />
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="?attr/list_background_color"
+					android:orientation="vertical">
+
+					<net.osmand.plus.widgets.TextViewEx
+						style="@style/TitleStyle.Medium"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginHorizontal="@dimen/content_padding"
+						android:layout_marginVertical="@dimen/content_padding_small"
+						android:text="@string/transport_Routes"
+						android:textColor="?android:textColorPrimary" />
+
+					<LinearLayout
+						android:id="@+id/transport_toggles_list"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="vertical" />
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+			<include
+				android:id="@+id/bottom_divider"
+				layout="@layout/card_bottom_divider" />
+
+			<View
+				android:id="@+id/bottom_empty_space"
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:layout_weight="1"
+				android:focusable="false"
+				android:minHeight="@dimen/toolbar_height" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+	android:shape="rectangle">
+
+	<solid android:color="@color/switch_button_active_light" />
+	<corners android:radius="@dimen/fab_icon_padding" />
+
+</shape>
