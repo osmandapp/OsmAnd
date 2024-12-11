@@ -31,7 +31,7 @@ import java.util.TreeSet;
 
 
 public class MapPoiTypes {
-	private static final String OTHER_MAP_CATEGORY = "Other";
+	public static final String OTHER_MAP_CATEGORY = "Other";
 	private static MapPoiTypes DEFAULT_INSTANCE = null;
 	private static final Log log = PlatformUtil.getLog(MapRenderingTypes.class);
 	private String resourceName;
@@ -971,11 +971,7 @@ public class MapPoiTypes {
 	}
 
 	public Amenity parseAmenity(String tag, String val, boolean relation, Map<String, String> otherTags) {
-		initPoiTypesByTag();
-		PoiType pt = poiTypesByTag.get(tag + "/" + val);
-		if (pt == null) {
-			pt = poiTypesByTag.get(tag);
-		}
+		PoiType pt = getPoiTypeByTagValue(tag, val);
 		if (pt == null || pt.isAdditional()) {
 			return null;
 		}
@@ -1031,6 +1027,16 @@ public class MapPoiTypes {
 		}
 
 		return a;
+	}
+
+
+	public PoiType getPoiTypeByTagValue(String tag, String val) {
+		initPoiTypesByTag();
+		PoiType pt = poiTypesByTag.get(tag + "/" + val);
+		if (pt == null) {
+			pt = poiTypesByTag.get(tag);
+		}
+		return pt;
 	}
 
 	public boolean isTextAdditionalInfo(String key, String value) {
