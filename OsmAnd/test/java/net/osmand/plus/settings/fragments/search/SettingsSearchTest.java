@@ -1,5 +1,4 @@
-package net.osmand.test.activities;
-
+package net.osmand.plus.settings.fragments.search;
 
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
@@ -29,7 +28,6 @@ import androidx.test.filters.LargeTest;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.settings.fragments.search.SearchResultsFragmentUI;
 import net.osmand.test.common.AndroidTest;
 
 import org.hamcrest.Matcher;
