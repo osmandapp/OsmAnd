@@ -12,7 +12,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withSubstring;
 import static net.osmand.test.common.Matchers.childAtPosition;
 import static net.osmand.test.common.Matchers.recyclerViewHasItem;
@@ -30,10 +29,10 @@ import androidx.test.filters.LargeTest;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.fragments.search.SearchResultsFragmentUI;
 import net.osmand.test.common.AndroidTest;
 
 import org.hamcrest.Matcher;
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -102,10 +101,11 @@ public class SettingsSearchTest extends AndroidTest {
 				withId(R.id.map_menu_button),
 				withContentDescription("Back to menu"),
 				childAtPosition(
-						childAtPosition(
-								withId(R.id.bottom_controls_container),
-								3),
-						0),
+						allOf(withId(R.id.map_hud_layout),
+								childAtPosition(
+										withId(R.id.map_hud_container),
+										0)),
+						10),
 				isDisplayed());
 	}
 
@@ -147,11 +147,7 @@ public class SettingsSearchTest extends AndroidTest {
 
 	private static Matcher<View> searchResultsView() {
 		return allOf(
-				withId(androidx.preference.R.id.recycler_view),
-				withParent(
-						allOf(
-								withId(android.R.id.list_container),
-								withParent(IsInstanceOf.instanceOf(android.widget.LinearLayout.class)))),
+				withId(SearchResultsFragmentUI.SEARCH_RESULTS_VIEW_ID),
 				isDisplayed());
 	}
 
