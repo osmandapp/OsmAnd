@@ -1,5 +1,7 @@
 package net.osmand.plus.wikivoyage.data;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
@@ -202,7 +204,6 @@ public class TravelDbHelper implements TravelHelper {
 			localDataHelper.removeArticleFromSaved(article);
 		}
 	}
-
 
 	public List<File> getExistingTravelBooks() {
 		return existingTravelBooks;
@@ -713,6 +714,11 @@ public class TravelDbHelper implements TravelHelper {
 		return nm.substring(0, nm.indexOf('.')).replace('_', ' ');
 	}
 
+	@Override
+	public boolean isTravelGpxTags(@NonNull Map<String, String> tags) {
+		return false; // stub
+	}
+
 	@Nullable
 	@Override
 	public TravelGpx searchGpx(@NonNull LatLon location, @Nullable String fileName, @Nullable String ref) {
@@ -721,15 +727,13 @@ public class TravelDbHelper implements TravelHelper {
 
 	@Override
 	public void openTrackMenu(@NonNull TravelArticle article, @NonNull MapActivity mapActivity,
-							  @NonNull String gpxFileName, @NonNull LatLon location) {
-
+							  @NonNull String gpxFileName, @NonNull LatLon location, boolean adjustMapPosition) {
 	}
 
 	@NonNull
 	@Override
 	public String getGPXName(@NonNull TravelArticle article) {
-		return article.getTitle().replace('/', '_').replace('\'', '_')
-				.replace('\"', '_') + IndexConstants.GPX_FILE_EXT;
+		return article.getGpxFileName() + GPX_FILE_EXT;
 	}
 
 	@NonNull

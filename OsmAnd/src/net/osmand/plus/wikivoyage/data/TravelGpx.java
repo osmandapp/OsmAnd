@@ -14,8 +14,7 @@ import androidx.annotation.Nullable;
 import net.osmand.data.Amenity;
 import net.osmand.util.Algorithms;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Set;
 
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 
@@ -27,9 +26,12 @@ public class TravelGpx extends TravelArticle {
 	public static final String MAX_ELEVATION = "max_ele";
 	public static final String MIN_ELEVATION = "min_ele";
 	public static final String AVERAGE_ELEVATION = "avg_ele";
-	public static final String ROUTE_RADIUS = "route_radius";
+	public static final String START_ELEVATION = "start_ele";
+	public static final String ELE_GRAPH = "ele_graph";
+	public static final String ROUTE_BBOX_RADIUS = "route_bbox_radius";
 	public static final String USER = "user";
 	public static final String ACTIVITY_TYPE = "route_activity_type";
+	public static final String TRAVEL_MAP_TO_POI_TAG = "route_id";
 
 	public String user;
 	public String activityType;
@@ -62,6 +64,8 @@ public class TravelGpx extends TravelArticle {
 		return analysis;
 	}
 
+	private static final Set<String> doNotSaveWptTags = Set.of("route_id", "route_name");
+
 	@NonNull
 	@Override
 	public WptPt createWptPt(@NonNull Amenity amenity, @Nullable String lang) {
@@ -72,24 +76,22 @@ public class TravelGpx extends TravelArticle {
 		for (String obfTag : amenity.getAdditionalInfoKeys()) {
 			String value = amenity.getAdditionalInfo(obfTag);
 			if (!Algorithms.isEmpty(value)) {
-				String gpxTag = allowedPointObfToGpxTags.get(obfTag);
-				if (gpxTag != null) {
-					wptPt.getExtensionsToWrite().put(gpxTag, value);
-				}
 				if (OBF_POINTS_GROUPS_CATEGORY.equals(obfTag)) {
 					wptPt.setCategory(value);
+				} else if ("name".equals(obfTag)) {
+					wptPt.setName(value);
+				} else if ("description".equals(obfTag)) {
+					wptPt.setDesc(value);
+				} else if ("note".equals(obfTag)) {
+					wptPt.setComment(value);
+				} else if ("colour".equals(obfTag) && amenity.getAdditionalInfoKeys().contains("color")) {
+					// ignore "colour" if "color" exists
+				} else if (!doNotSaveWptTags.contains(obfTag)) {
+					wptPt.getExtensionsToWrite().put(obfTag, value);
 				}
 			}
 		}
 		return wptPt;
-	}
-
-	private final static Map<String, String> allowedPointObfToGpxTags = new HashMap<>();
-
-	static {
-		allowedPointObfToGpxTags.put("color", "color");
-		allowedPointObfToGpxTags.put("gpx_icon", "icon");
-		allowedPointObfToGpxTags.put("gpx_bg", "background");
 	}
 
 	@NonNull
@@ -101,6 +103,6 @@ public class TravelGpx extends TravelArticle {
 	@NonNull
 	@Override
 	public String getMainFilterString() {
-		return ROUTE_TRACK;
+		return ROUTE_TRACK; // considered together with ROUTES_PREFIX
 	}
 }

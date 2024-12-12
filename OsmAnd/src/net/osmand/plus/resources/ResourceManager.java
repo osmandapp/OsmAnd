@@ -1571,7 +1571,7 @@ public class ResourceManager {
 			if (lf != null) {
 				for (File f : lf) {
 					if (f != null && f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-						map.put(f.getName(), AndroidUtils.formatDate(context, f.lastModified()));
+						map.put(f.getName(), getDateFormat().format(f.lastModified()));
 					}
 				}
 			}

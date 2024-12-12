@@ -349,6 +349,7 @@ object GpxUtilities {
 			const val OBF_POINTS_GROUPS_ICONS = "points_groups_icons"
 			const val OBF_POINTS_GROUPS_COLORS = "points_groups_colors"
 			const val OBF_POINTS_GROUPS_BACKGROUNDS = "points_groups_backgrounds"
+			const val OBF_POINTS_GROUPS_EMPTY_NAME_STUB = "." // stub to store empty points_groups_names
 			const val OBF_POINTS_GROUPS_CATEGORY = "points_groups_category" // optional category of OBF-GPX point
 
 			fun parsePointsGroupAttributes(parser: XmlPullParser): PointsGroup {
@@ -999,6 +1000,7 @@ object GpxUtilities {
 		extensionsReader: GpxExtensionsReader?,
 		addGeneralTrack: Boolean
 	): GpxFile {
+		val insideTagDepth = mutableMapOf("trk" to 0)
 		oneOffLogParseTimeErrors = true
 		val gpxFile = GpxFile(null)
 		gpxFile.metadata.time = 0
@@ -1032,6 +1034,7 @@ object GpxUtilities {
 				if (tok == XmlPullParser.START_TAG) {
 					val parse = parserState.lastOrNull()
 					val tag = parser.getName() ?: ""
+					insideTagDepth[tag]?.let { insideTagDepth[tag] = it + 1}
 					if (extensionReadMode && parse != null && !routePointExtension) {
 						val tagName = tag.lowercase()
 						when {
@@ -1062,8 +1065,8 @@ object GpxUtilities {
 								}
 							}
 
-							tagName == "route" -> routeExtension = true
-							tagName == "types" -> typesExtension = true
+							tagName == "route" && insideTagDepth["trk"]!! > 0 -> routeExtension = true
+							tagName == "types" && insideTagDepth["trk"]!! > 0 -> typesExtension = true
 							tagName == "points_groups" -> pointsGroupsExtension = true
 							tagName == "network_route" -> networkRoute = true
 							else -> {
@@ -1314,7 +1317,8 @@ object GpxUtilities {
 					}
 				} else if (tok == XmlPullParser.END_TAG) {
 					val parse = parserState.lastOrNull()
-					val tag = parser.getName()
+					val tag = parser.getName() ?: ""
+					insideTagDepth[tag]?.let { insideTagDepth[tag] = it - 1}
 
 					if (tag.equals("routepointextension", ignoreCase = true)) {
 						routePointExtension = false
