@@ -14,7 +14,7 @@ import net.osmand.plus.R;
 @VisibleForTesting(otherwise = PACKAGE_PRIVATE)
 public class SearchResultsFragmentUI implements de.KnollFrank.lib.settingssearch.search.ui.SearchResultsFragmentUI {
 
-	@VisibleForTesting()
+	@VisibleForTesting
 	@IdRes
 	public static final int SEARCH_RESULTS_VIEW_ID = R.id.searchResultsCustom;
 
