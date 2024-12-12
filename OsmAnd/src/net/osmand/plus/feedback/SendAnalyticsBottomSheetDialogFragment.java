@@ -220,6 +220,7 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 		}
 	}
 
+	@Override
 	public String getSearchableInfo() {
 		return new SendAnalyticsSearchableInfoProvider(items).getSearchableInfo();
 	}
