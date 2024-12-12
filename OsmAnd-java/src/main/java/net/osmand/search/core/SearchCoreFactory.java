@@ -1125,7 +1125,6 @@ public class SearchCoreFactory {
 			List<PoiSubType> poiSubTypes = r.getTopIndexSubTypes();
 			String lang = phrase.getSettings().getLang();
 			List<TopIndexMatch> matches = new ArrayList<>();
-			Collator collator = OsmAndCollator.primaryCollator(new Locale(phrase.getSettings().getLang()));
 			NameStringMatcher nm = new NameStringMatcher(search, CHECK_ONLY_STARTS_WITH);
 			for (PoiSubType subType : poiSubTypes) {
 				String topIndexValue = null;
@@ -1135,11 +1134,13 @@ public class SearchCoreFactory {
 				for (String s : possibleValues) {
 					translate = getTopIndexTranslation(s);
 					if (complete) {
-						if (CollatorStringMatcher.cmatches(collator, search, s, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
+						CollatorStringMatcher csm = new CollatorStringMatcher(s, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+						if (csm.matches(search)) {
 							topIndexValue = s;
 							break;
 						} else {
-							if (CollatorStringMatcher.cmatches(collator, search, translate, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
+							csm = new CollatorStringMatcher(translate, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
+							if (csm.matches(search)) {
 								topIndexValue = s;
 								break;
 							}

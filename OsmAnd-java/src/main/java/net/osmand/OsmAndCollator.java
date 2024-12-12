@@ -13,12 +13,6 @@ public class OsmAndCollator {
 		instance.setStrength(java.text.Collator.PRIMARY);
 		return wrapCollator(instance);
 	}
-
-	public static net.osmand.Collator primaryCollator(Locale locale) {
-		final java.text.Collator instance = java.text.Collator.getInstance(locale);
-		instance.setStrength(java.text.Collator.PRIMARY);
-		return wrapCollator(instance);
-	}
 	
 	public static net.osmand.Collator wrapCollator(final java.text.Collator instance) {
 		return new net.osmand.Collator() {
