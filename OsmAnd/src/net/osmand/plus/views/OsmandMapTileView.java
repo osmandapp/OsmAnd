@@ -106,7 +106,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private static final int MAX_ZOOM_LIMIT = 17;
 
 	private static final long ANIMATION_PREVIEW_TIME = 1500;
-	private static final float ZOOM_STEP_TO_FIT = 0.1f;
+	private static final float ZOOM_STEP_TO_FIT = 0.05f;
 	private static final float MARGIN_PERCENT_TO_FIT = 0.8f;
 
 	private boolean MEASURE_FPS;
