@@ -12,7 +12,6 @@ import net.osmand.data.LatLon
 import net.osmand.data.QuadRect
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
-import net.osmand.plus.auto.views.CarSurfaceView
 import net.osmand.plus.views.Zoom
 import net.osmand.search.core.SearchResult
 import net.osmand.util.Algorithms

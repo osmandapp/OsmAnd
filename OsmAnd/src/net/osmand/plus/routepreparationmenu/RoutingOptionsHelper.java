@@ -1,7 +1,18 @@
 package net.osmand.plus.routepreparationmenu;
 
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.AVOID_ROUTING_PARAMETER_PREFIX;
-import static net.osmand.router.GeneralRouter.*;
+import static net.osmand.router.GeneralRouter.ALLOW_MOTORWAYS;
+import static net.osmand.router.GeneralRouter.ALLOW_PRIVATE;
+import static net.osmand.router.GeneralRouter.ALLOW_PRIVATE_FOR_TRUCK;
+import static net.osmand.router.GeneralRouter.AVOID_FERRIES;
+import static net.osmand.router.GeneralRouter.AVOID_MOTORWAY;
+import static net.osmand.router.GeneralRouter.AVOID_TOLL;
+import static net.osmand.router.GeneralRouter.AVOID_UNPAVED;
+import static net.osmand.router.GeneralRouter.PREFER_MOTORWAYS;
+import static net.osmand.router.GeneralRouter.RoutingParameter;
+import static net.osmand.router.GeneralRouter.RoutingParameterType;
+import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
+import static net.osmand.router.GeneralRouter.USE_SHORTEST_WAY;
 
 import android.app.Activity;
 import android.content.Context;
@@ -73,7 +84,13 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 
 public class RoutingOptionsHelper {

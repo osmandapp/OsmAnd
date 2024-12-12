@@ -40,19 +40,19 @@ public class CustomizableSingleSelectionBottomSheet extends CustomizableBottomSh
 		}
 		ctx = UiUtilities.getThemedContext(ctx, nightMode);
 
-		String title = (String) displayData.getExtra(TITLE);
+		String title = getTitle();
 		if (title != null) {
 			TitleItem titleItem = new TitleItem(title);
 			items.add(titleItem);
 		}
 
-		String description = (String) displayData.getExtra(SUBTITLE);
+		String description = getDescription();
 		if (description != null) {
 			LongDescriptionItem descriptionItem = new LongDescriptionItem(description);
 			items.add(descriptionItem);
 		}
 
-		List<DisplayItem> displayItems = displayData.getDisplayItems();
+		List<DisplayItem> displayItems = getDisplayItems();
 		for (int i = 0; i < displayItems.size(); i++) {
 			DisplayItem displayItem = displayItems.get(i);
 			Integer selectedIndex = (Integer) displayData.getExtra(SELECTED_INDEX);
@@ -89,16 +89,42 @@ public class CustomizableSingleSelectionBottomSheet extends CustomizableBottomSh
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
-	                                   @NonNull String processId, boolean usedOnMap) {
+									   @NonNull String processId, boolean usedOnMap) {
+		return createInstance(processId, usedOnMap).show(fragmentManager);
+	}
+
+	public static @NonNull CustomizableSingleSelectionBottomSheet createInstance(final @NonNull String processId, final boolean usedOnMap) {
+		final CustomizableSingleSelectionBottomSheet fragment = new CustomizableSingleSelectionBottomSheet();
+		fragment.setProcessId(processId);
+		fragment.setUsedOnMap(usedOnMap);
+		return fragment;
+	}
+
+	public boolean show(@NonNull final FragmentManager fragmentManager) {
 		try {
-			CustomizableSingleSelectionBottomSheet fragment = new CustomizableSingleSelectionBottomSheet();
-			fragment.setProcessId(processId);
-			fragment.setUsedOnMap(usedOnMap);
-			fragment.show(fragmentManager, TAG);
+			show(fragmentManager, TAG);
 			return true;
-		} catch (RuntimeException e) {
+		} catch (final RuntimeException e) {
 			return false;
 		}
 	}
 
+	private String getTitle() {
+		return (String) displayData.getExtra(TITLE);
+	}
+
+	private String getDescription() {
+		return (String) displayData.getExtra(SUBTITLE);
+	}
+
+	private List<DisplayItem> getDisplayItems() {
+		return displayData.getDisplayItems();
+	}
+
+	public String getSearchableInfo() {
+		return CustomizableSingleSelectionBottomSheetSearchableInfoProvider.getSearchableInfo(
+				getTitle(),
+				getDescription(),
+				getDisplayItems());
+	}
 }

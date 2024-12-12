@@ -58,6 +58,8 @@ import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSh
 import net.osmand.plus.settings.bottomsheets.EditTextPreferenceBottomSheet;
 import net.osmand.plus.settings.bottomsheets.MultiSelectPreferencesBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SingleSelectPreferenceBottomSheet;
+import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandler;
+import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandlerProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -69,6 +71,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
+import java.util.Optional;
 import java.util.Set;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener,
@@ -82,6 +85,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public static final String OPEN_CONFIG_ON_MAP = "openConfigOnMap";
 	public static final String MAP_CONFIG = "openMapConfigMenu";
 	public static final String SCREEN_CONFIG = "screenConfig";
+	public static final String CONFIGURE_SETTINGS_SEARCH = "configureSettingsSearch";
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
@@ -96,6 +100,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	private int statusBarColor = -1;
 	private boolean nightMode;
 	private boolean wasDrawerDisabled;
+	// FK-TODO: remove configureSettingsSearch?
+	private boolean configureSettingsSearch = false;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -103,6 +109,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		settings = app.getSettings();
 		appCustomization = app.getAppCustomization();
 		Bundle args = getArguments();
+		configureSettingsSearch = args != null && args.getBoolean(CONFIGURE_SETTINGS_SEARCH, false);
 		if (savedInstanceState != null) {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 		}
@@ -137,10 +144,12 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			} else {
 				updateAllSettings();
 			}
-			createToolbar(inflater, view);
-			setDivider(null);
-			view.setBackgroundColor(ContextCompat.getColor(app, getBackgroundColorRes()));
-			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
+			if (!configureSettingsSearch) {
+				createToolbar(inflater, view);
+				setDivider(null);
+				view.setBackgroundColor(ContextCompat.getColor(app, getBackgroundColorRes()));
+				AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
+			}
 		}
 		return view;
 	}
@@ -156,6 +165,9 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		if (configureSettingsSearch) {
+			return;
+		}
 		super.onViewCreated(view, savedInstanceState);
 		updateToolbar();
 	}
@@ -194,6 +206,9 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	@Override
 	public void onResume() {
 		super.onResume();
+		if (configureSettingsSearch) {
+			return;
+		}
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			wasDrawerDisabled = mapActivity.isDrawerDisabled();
@@ -207,7 +222,9 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	@Override
 	public void onPause() {
 		super.onPause();
-
+		if (configureSettingsSearch) {
+			return;
+		}
 		Activity activity = getActivity();
 		if (activity != null) {
 			if (!wasDrawerDisabled && activity instanceof MapActivity) {
@@ -223,6 +240,9 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	@Override
 	public void onDetach() {
 		super.onDetach();
+		if (configureSettingsSearch) {
+			return;
+		}
 		if (getStatusBarColorId() != -1) {
 			Activity activity = getActivity();
 			if (activity instanceof MapActivity) {
@@ -301,7 +321,17 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	@Override
-	public boolean onPreferenceClick(Preference preference) {
+	public boolean onPreferenceClick(final Preference preference) {
+		if (this instanceof final PreferenceFragmentHandlerProvider preferenceFragmentHandlerProvider) {
+			final Optional<PreferenceFragmentHandler> preferenceFragmentHandler = preferenceFragmentHandlerProvider.getPreferenceFragmentHandler(preference);
+			if (preferenceFragmentHandler.isPresent()) {
+				preferenceFragmentHandler.get().showPreferenceFragment(
+						preferenceFragmentHandler.get().createPreferenceFragment(
+								getContext(),
+								this));
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -348,7 +378,9 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			recreate();
 		} else {
 			getPreferenceManager().setPreferenceDataStore(settings.getDataStore(appMode));
-			updateToolbar();
+			if (!configureSettingsSearch) {
+				updateToolbar();
+			}
 			updateAllSettings();
 		}
 	}
@@ -760,7 +792,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return app.getSettings();
 	}
 
-	protected Drawable getIcon(@DrawableRes int id) {
+	public Drawable getIcon(@DrawableRes int id) {
 		UiUtilities cache = getIconsCache();
 		return cache != null ? cache.getIcon(id) : null;
 	}
@@ -796,7 +828,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	protected void showSingleSelectionDialog(@NonNull String processId,
-	                                         @NonNull IDialogController controller) {
+											 @NonNull IDialogController controller) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			DialogManager dialogManager = app.getDialogManager();
@@ -829,7 +861,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public static SwitchPreferenceEx createSwitchPreferenceEx(@NonNull Context ctx, @NonNull String prefId,
-	                                                          String title, String summary, int layoutId) {
+															  String title, String summary, int layoutId) {
 		SwitchPreferenceEx p = new SwitchPreferenceEx(ctx);
 		p.setKey(prefId);
 		p.setTitle(title);
@@ -848,8 +880,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public static ListPreferenceEx createListPreferenceEx(@NonNull Context ctx, @NonNull String prefId,
-	                                                      @NonNull String[] names, @NonNull Object[] values,
-	                                                      String title, int layoutId) {
+														  @NonNull String[] names, @NonNull Object[] values,
+														  String title, int layoutId) {
 		ListPreferenceEx listPreference = new ListPreferenceEx(ctx);
 		listPreference.setKey(prefId);
 		listPreference.setTitle(title);
@@ -888,33 +920,49 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return preference;
 	}
 
+	public static @NonNull Fragment createFragment(final String fragmentClassName,
+												   final @NonNull Context context,
+												   final @Nullable ApplicationMode appMode,
+												   final @NonNull Bundle args,
+												   final @Nullable Fragment target) {
+		final Fragment fragment = Fragment.instantiate(context, fragmentClassName);
+		if (appMode != null) {
+			args.putString(APP_MODE_KEY, appMode.getStringKey());
+		}
+		fragment.setArguments(args);
+		fragment.setTargetFragment(target, 0);
+		return fragment;
+	}
+
 	public static boolean showInstance(@NonNull FragmentActivity activity, @NonNull SettingsScreenType screenType) {
-		return showInstance(activity, screenType, null);
+		final Fragment fragment = createFragment(screenType.fragmentName, activity, null, new Bundle(), null);
+		return showFragment(fragment, activity, screenType.fragmentName);
 	}
 
 	public static boolean showInstance(@NonNull FragmentActivity activity,
-	                                   @NonNull SettingsScreenType screenType,
-	                                   @Nullable ApplicationMode appMode) {
-		return showInstance(activity, screenType, appMode, new Bundle(), null);
+									   @NonNull SettingsScreenType screenType,
+									   @Nullable ApplicationMode appMode) {
+		final Fragment fragment = createFragment(screenType.fragmentName, activity, appMode, new Bundle(), null);
+		return showFragment(fragment, activity, screenType.fragmentName);
 	}
 
 	public static boolean showInstance(@NonNull FragmentActivity activity,
-	                                   @NonNull SettingsScreenType screenType,
-	                                   @Nullable ApplicationMode appMode,
-	                                   @NonNull Bundle args,
-	                                   @Nullable Fragment target) {
+									   @NonNull SettingsScreenType screenType,
+									   @Nullable ApplicationMode appMode,
+									   @NonNull Bundle args,
+									   @Nullable Fragment target) {
+		final Fragment fragment = createFragment(screenType.fragmentName, activity, appMode, args, target);
+		return showFragment(fragment, activity, screenType.fragmentName);
+	}
+
+	public static boolean showFragment(final Fragment fragment,
+									   final @NonNull FragmentActivity activity,
+									   final String fragmentName) {
 		try {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
-			String tag = screenType.fragmentName;
-			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, tag)) {
-				Fragment fragment = Fragment.instantiate(activity, tag);
-				if (appMode != null) {
-					args.putString(APP_MODE_KEY, appMode.getStringKey());
-				}
-				fragment.setArguments(args);
-				fragment.setTargetFragment(target, 0);
+			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, fragmentName)) {
 				fragmentManager.beginTransaction()
-						.replace(R.id.fragmentContainer, fragment, tag)
+						.replace(R.id.fragmentContainer, fragment, fragmentName)
 						.addToBackStack(DRAWER_SETTINGS_ID)
 						.commitAllowingStateLoss();
 				return true;

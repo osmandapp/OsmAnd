@@ -1,7 +1,14 @@
 package net.osmand.plus.measurementtool;
 
 import android.content.Context;
-import android.graphics.*;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.PathEffect;
+import android.graphics.PathMeasure;
+import android.graphics.PointF;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;

@@ -1709,6 +1709,7 @@ public class OsmandSettings {
 
 	public final CommonPreference<String> GRADIENT_PALETTES = new StringPreference(this, "gradient_color_palettes", null).makeGlobal().makeShared();
 	public final ListStringPreference LAST_USED_FAV_ICONS = (ListStringPreference) new ListStringPreference(this, "last_used_favorite_icons", null, ",").makeShared().makeGlobal();
+	public final ListStringPreference PLUGINS_COVERED_BY_SETTINGS_SEARCH = (ListStringPreference) new ListStringPreference(this, "plugins_covered_by_settings_search", null, ",").makeGlobal().makeShared();
 
 	public final CommonPreference<Integer> SAVE_TRACK_INTERVAL = new IntPreference(this, "save_track_interval", 5000).makeProfile();
 
@@ -2451,7 +2452,7 @@ public class OsmandSettings {
 	}
 
 	public void setMapLocationToShow(double latitude, double longitude, int zoom, PointDescription pointDescription,
-	                                 boolean addToHistory, Object toShow) {
+									 boolean addToHistory, Object toShow) {
 		SettingsEditor edit = settingsAPI.edit(globalPreferences);
 		edit.putFloat(MAP_LAT_TO_SHOW, (float) latitude);
 		edit.putFloat(MAP_LON_TO_SHOW, (float) longitude);

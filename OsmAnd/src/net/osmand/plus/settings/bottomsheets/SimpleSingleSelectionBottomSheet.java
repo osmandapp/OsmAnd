@@ -14,19 +14,22 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.common.collect.ImmutableList;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimpleSingleSelectionBottomSheet extends BasePreferenceBottomSheet {
+public class SimpleSingleSelectionBottomSheet extends BasePreferenceBottomSheet implements SearchablePreferenceDialog {
 
 	public static final String TAG = SimpleSingleSelectionBottomSheet.class.getSimpleName();
 
@@ -48,21 +51,31 @@ public class SimpleSingleSelectionBottomSheet extends BasePreferenceBottomSheet 
 	private Object[] values;
 	private int selectedEntryIndex;
 
-	public static void showInstance(@NonNull FragmentManager fm, @NonNull Fragment target,
-	                                @NonNull String key, @NonNull String title, @NonNull String description,
-	                                @NonNull ApplicationMode appMode, boolean usedOnMap,
-	                                @NonNull String[] names, @NonNull Object[] values,
-	                                int selectedIndex) {
-		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
-			Bundle args = new Bundle();
-			args.putString(PREFERENCE_ID, key);
-			SimpleSingleSelectionBottomSheet fragment = new SimpleSingleSelectionBottomSheet();
-			fragment.setArguments(args);
-			fragment.setAppMode(appMode);
-			fragment.setUsedOnMap(usedOnMap);
-			fragment.setTargetFragment(target, 0);
-			fragment.setParameters(title, description, names, values, selectedIndex);
-			fragment.show(fm, TAG);
+	public static @NonNull SimpleSingleSelectionBottomSheet createInstance(final @NonNull Fragment target,
+																		   final @NonNull String key,
+																		   final @NonNull String title,
+																		   final @NonNull String description,
+																		   final @NonNull ApplicationMode appMode,
+																		   final boolean usedOnMap,
+																		   final @NonNull String[] names,
+																		   final @NonNull Object[] values,
+																		   final int selectedIndex) {
+		final Bundle args = new Bundle();
+		args.putString(PREFERENCE_ID, key);
+
+		final SimpleSingleSelectionBottomSheet fragment = new SimpleSingleSelectionBottomSheet();
+		fragment.setArguments(args);
+		fragment.setAppMode(appMode);
+		fragment.setUsedOnMap(usedOnMap);
+		fragment.setTargetFragment(target, 0);
+		fragment.setParameters(title, description, names, values, selectedIndex);
+		return fragment;
+	}
+
+	@Override
+	public void show(final FragmentManager fragmentManager, final OsmandApplication app) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			show(fragmentManager, TAG);
 		}
 	}
 
@@ -129,7 +142,7 @@ public class SimpleSingleSelectionBottomSheet extends BasePreferenceBottomSheet 
 	}
 
 	public void setParameters(@NonNull String title, @NonNull String description, @NonNull String[] names,
-	                          @NonNull Object[] values, @Nullable Integer selectedEntryIndex) {
+							  @NonNull Object[] values, @Nullable Integer selectedEntryIndex) {
 		this.title = title;
 		this.description = description;
 		this.names = names;
@@ -167,5 +180,17 @@ public class SimpleSingleSelectionBottomSheet extends BasePreferenceBottomSheet 
 			callback.onConfirmPreferenceChange(getPrefId(), values[selectedEntryIndex], ApplyQueryType.SNACK_BAR);
 		}
 		dismiss();
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		return String.join(
+				", ",
+				ImmutableList
+						.<String>builder()
+						.add(title)
+						.add(description)
+						.add(names)
+						.build());
 	}
 }

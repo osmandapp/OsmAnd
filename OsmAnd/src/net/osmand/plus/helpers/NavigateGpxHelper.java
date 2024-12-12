@@ -13,7 +13,6 @@ import android.os.ParcelFileDescriptor;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.aidlapi.navigation.NavigateGpxParams;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -26,6 +25,7 @@ import net.osmand.plus.measurementtool.GpxApproximationParams;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;

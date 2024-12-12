@@ -2,7 +2,18 @@ package net.osmand.plus.plugins.audionotes;
 
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.plugins.PluginInfoFragment.PLUGIN_INFO;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.*;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_AUTO;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_CONTINUOUS;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_EDOF;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_HIPERFOCAL;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_INFINITY;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_MACRO;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_PHOTO_SIZE_DEFAULT;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.EXTERNAL_PHOTO_CAM_SETTING_ID;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.EXTERNAL_RECORDER_SETTING_ID;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.cameraPictureSizeDefault;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.canDisableShutterSound;
 
 import android.Manifest;
 import android.content.Context;

@@ -8,11 +8,9 @@ import static net.osmand.plus.base.dialog.data.DialogExtra.TITLE;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.data.DisplayData;
@@ -79,7 +77,7 @@ public class ProfileOptionsDialogController extends BaseDialogController impleme
 		return PROCESS_ID;
 	}
 
-	public void showDialog(@NonNull MapActivity mapActivity, @NonNull String title, @NonNull String description, @NonNull CommonPreference<MarkerDisplayOption> preference) {
+	public CustomizableSingleSelectionBottomSheet createDialog(@NonNull String title, @NonNull String description, @NonNull CommonPreference<MarkerDisplayOption> preference) {
 		this.title = title;
 		this.description = description;
 		this.preference = preference;
@@ -87,8 +85,7 @@ public class ProfileOptionsDialogController extends BaseDialogController impleme
 		DialogManager dialogManager = app.getDialogManager();
 		dialogManager.register(PROCESS_ID, this);
 
-		FragmentManager manager = mapActivity.getSupportFragmentManager();
-		CustomizableSingleSelectionBottomSheet.showInstance(manager, PROCESS_ID, true);
+		return CustomizableSingleSelectionBottomSheet.createInstance(PROCESS_ID, true);
 	}
 }
 

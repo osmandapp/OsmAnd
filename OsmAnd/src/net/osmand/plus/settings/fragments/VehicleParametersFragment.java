@@ -2,7 +2,15 @@ package net.osmand.plus.settings.fragments;
 
 import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.createRoutingParameterPref;
-import static net.osmand.router.GeneralRouter.*;
+import static net.osmand.router.GeneralRouter.DEFAULT_SPEED;
+import static net.osmand.router.GeneralRouter.MAX_AXLE_LOAD;
+import static net.osmand.router.GeneralRouter.MOTOR_TYPE;
+import static net.osmand.router.GeneralRouter.RoutingParameter;
+import static net.osmand.router.GeneralRouter.VEHICLE_HEIGHT;
+import static net.osmand.router.GeneralRouter.VEHICLE_LENGTH;
+import static net.osmand.router.GeneralRouter.VEHICLE_WEIGHT;
+import static net.osmand.router.GeneralRouter.VEHICLE_WIDTH;
+import static net.osmand.router.GeneralRouter.WEIGHT_RATING;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -10,6 +18,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -27,6 +36,8 @@ import net.osmand.plus.settings.bottomsheets.FuelTankCapacityBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SimpleSingleSelectionBottomSheet;
 import net.osmand.plus.settings.bottomsheets.VehicleParametersBottomSheet;
 import net.osmand.plus.settings.enums.DrivingRegion;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SizePreference;
 import net.osmand.plus.settings.vehiclesize.SizeType;
@@ -36,11 +47,15 @@ import net.osmand.plus.settings.vehiclesize.containers.Metric;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.GeneralRouter;
+import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.shared.settings.enums.MetricsConstants;
 
 import java.util.Map;
+import java.util.Optional;
 
-public class VehicleParametersFragment extends BaseSettingsFragment {
+import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
+
+public class VehicleParametersFragment extends BaseSettingsFragment implements SearchablePreferenceDialogProvider {
 
 	public static final String TAG = VehicleParametersFragment.class.getSimpleName();
 
@@ -69,7 +84,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 				showOtherCategory(parameters, routerProfile);
 			}
 		} else {
-			setupCategoryPref(R.string.shared_string_other);
+			setupCategoryPref(R.string.shared_string_other, "VehicleParametersFragment.other");
 			setupDefaultSpeedPref();
 		}
 	}
@@ -80,7 +95,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 				|| routerProfile != GeneralRouterProfile.PUBLIC_TRANSPORT;
 		if (shouldShowOtherCategory) {
 			addDividerPref();
-			setupCategoryPref(R.string.shared_string_other);
+			setupCategoryPref(R.string.shared_string_other, "VehicleParametersFragment.other2");
 		}
 		setupRoutingParameterPref(parameters.get(MAX_AXLE_LOAD));
 		setupRoutingParameterPref(parameters.get(WEIGHT_RATING));
@@ -99,7 +114,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 		boolean showCategory = showFuelTankCapacity || motorTypeParameter != null;
 		if (showCategory) {
 			addDividerPref();
-			setupCategoryPref(R.string.poi_filter_fuel);
+			setupCategoryPref(R.string.poi_filter_fuel, "VehicleParametersFragment.poi_filter_fuel");
 		}
 		setupRoutingParameterPref(motorTypeParameter);
 		if (showFuelTankCapacity) {
@@ -108,8 +123,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 	}
 
 	private void showDimensionsCategory(@NonNull Map<String, RoutingParameter> parameters,
-	                                    @Nullable GeneralRouterProfile routerProfile,
-	                                    @Nullable String derivedProfile) {
+										@Nullable GeneralRouterProfile routerProfile,
+										@Nullable String derivedProfile) {
 		if (routerProfile == null) {
 			return;
 		}
@@ -118,7 +133,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 		RoutingParameter width = parameters.get(VEHICLE_WIDTH);
 		RoutingParameter length = parameters.get(VEHICLE_LENGTH);
 		if (height != null || weight != null || width != null || length != null) {
-			setupCategoryPref(R.string.shared_strings_dimensions);
+			setupCategoryPref(R.string.shared_strings_dimensions, "VehicleParametersFragment.dimensions");
 		}
 
 		setupVehiclePropertyPref(height, routerProfile, derivedProfile);
@@ -127,10 +142,11 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 		setupVehiclePropertyPref(length, routerProfile, derivedProfile);
 	}
 
-	private void setupCategoryPref(int titleId) {
+	private void setupCategoryPref(int titleId, String key) {
 		PreferenceCategory preferenceCategory = new PreferenceCategory(requireContext());
 		preferenceCategory.setTitle(titleId);
 		preferenceCategory.setLayoutResource(R.layout.preference_category_with_descr);
+		preferenceCategory.setKey(key);
 
 		PreferenceScreen screen = getPreferenceScreen();
 		screen.addPreference(preferenceCategory);
@@ -149,8 +165,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 	}
 
 	private void setupVehiclePropertyPref(@Nullable RoutingParameter parameter,
-	                                      @Nullable GeneralRouterProfile profile,
-	                                      @Nullable String derivedProfile) {
+										  @Nullable GeneralRouterProfile profile,
+										  @Nullable String derivedProfile) {
 		if (parameter == null || profile == null) {
 			return;
 		}
@@ -258,32 +274,82 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 
 	@Override
 	public void onDisplayPreferenceDialog(Preference preference) {
-		if (preference instanceof SizePreference) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				VehicleParametersBottomSheet.showInstance(fragmentManager, preference.getKey(),
-						this, false, getSelectedAppMode());
-			}
-		} else if (MOTOR_TYPE_PREF_ID.equals(preference.getKey())) {
-			FragmentManager manager = getFragmentManager();
-			if (manager != null) {
-				ListPreferenceEx pref = (ListPreferenceEx) preference;
-				SimpleSingleSelectionBottomSheet.showInstance(manager, this, preference.getKey(),
-						pref.getTitle().toString(), pref.getDescription(),
-						getSelectedAppMode(), false, pref.getEntries(),
-						pref.getEntryValues(), pref.getValueIndex());
-			}
+		final Optional<SearchablePreferenceDialog> preferenceDialog =
+				createPreferenceDialog(
+						preference,
+						this,
+						false,
+						Optional.empty());
+		if (preferenceDialog.isPresent()) {
+			show(preferenceDialog.get());
 		} else {
 			super.onDisplayPreferenceDialog(preference);
 		}
+	}
+
+	private void show(final SearchablePreferenceDialog dialog) {
+		final FragmentManager fragmentManager = getFragmentManager();
+		if (fragmentManager != null) {
+			dialog.show(fragmentManager, app);
+		}
+	}
+
+	private Optional<SearchablePreferenceDialog> createPreferenceDialog(
+			final Preference preference,
+			final VehicleParametersFragment target,
+			final boolean configureSettingsSearch,
+			final Optional<Preference> preferenceParam) {
+		if (preference instanceof SizePreference) {
+			return Optional.of(
+					VehicleParametersBottomSheet
+							.createInstance(
+									preference.getKey(),
+									target,
+									false,
+									getSelectedAppMode(),
+									configureSettingsSearch,
+									preferenceParam));
+		}
+		if (MOTOR_TYPE_PREF_ID.equals(preference.getKey())) {
+			final ListPreferenceEx pref = (ListPreferenceEx) preference;
+			return Optional.of(
+					SimpleSingleSelectionBottomSheet
+							.createInstance(
+									target,
+									preference.getKey(),
+									pref.getTitle().toString(),
+									pref.getDescription(),
+									getSelectedAppMode(),
+									false,
+									pref.getEntries(),
+									pref.getEntryValues(),
+									pref.getValueIndex()));
+		}
+		return Optional.empty();
+	}
+
+	@Override
+	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
+		if (DEFAULT_SPEED.equals(preference.getKey())) {
+			return Optional.of(
+					new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
+							new Fragment(),
+							_preferenceDialog -> new VehicleSpeedHelper(app, getSelectedAppMode()).getSearchableInfo()));
+		}
+		return this
+				.createPreferenceDialog(preference, null, true, Optional.of(preference))
+				.map(preferenceDialog ->
+						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
+								(Fragment) preferenceDialog,
+								_preferenceDialog -> preferenceDialog.getSearchableInfo()));
 	}
 
 	@Override
 	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
 		super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
 		if (MOTOR_TYPE_PREF_ID.equals(prefId)) {
-			if (getActivity() instanceof MapActivity) {
-				((MapActivity) getActivity()).getMapRouteInfoMenu().updateMenu();
+			if (getActivity() instanceof MapActivity mapActivity) {
+				mapActivity.getMapRouteInfoMenu().updateMenu();
 			}
 		}
 	}
