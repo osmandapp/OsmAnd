@@ -28,6 +28,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -59,8 +60,7 @@ import net.osmand.plus.plugins.osmedit.data.EditPoiData;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
-import net.osmand.plus.plugins.osmedit.fragments.AdvancedEditPoiFragment;
-import net.osmand.plus.plugins.osmedit.fragments.BasicEditPoiFragment;
+import net.osmand.plus.plugins.osmedit.fragments.NewAdvancedEditPoiFragment;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapRemoteUtil;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapUtil;
@@ -132,7 +132,9 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
 		view = themedInflater.inflate(R.layout.fragment_edit_poi, container, false);
+		NestedScrollView scrollView = view.findViewById(R.id.scroll_view);
 
+		scrollView.setNestedScrollingEnabled(false);
 		if (savedInstanceState != null) {
 			Map<String, String> map = (Map<String, String>) AndroidUtils.getSerializable(savedInstanceState, TAGS_LIST, LinkedHashMap.class);
 			editPoiData.updateTags(map);
@@ -512,11 +514,12 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	public void smoothScrollToBottom() {
-		ScrollView scrollView = view.findViewById(R.id.scroll_view);
-		int height = scrollView.getHeight();
+		NestedScrollView scrollView = view.findViewById(R.id.scroll_view);
+		scrollView.post(() -> scrollView.fullScroll(View.FOCUS_DOWN));
+/*		int height = scrollView.getHeight();
 		int bottom = scrollView.getChildAt(0).getBottom();
 		int maxScrollY = Math.max(0, bottom - height);
-		scrollView.smoothScrollTo(0, maxScrollY);
+		scrollView.smoothScrollTo(0, maxScrollY);*/
 	}
 
 	public static void commitEntity(Action action,
@@ -705,7 +708,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 	public static class PoiInfoPagerAdapter extends FragmentStateAdapter {
 
-		private final Fragment[] fragments = {new BasicEditPoiFragment(), new AdvancedEditPoiFragment()};
+		private final Fragment[] fragments = {new NewBasicEditPoiFragment(), new NewAdvancedEditPoiFragment()};
 		private final String[] titles;
 
 		PoiInfoPagerAdapter(Fragment fm, String basicTitle, String extendedTitle) {

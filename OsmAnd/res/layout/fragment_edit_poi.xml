@@ -21,7 +21,7 @@
 		app:contentInsetRight="0dp"
 		app:contentInsetStart="@dimen/divider_color_light_margin_start" />
 
-	<ScrollView
+	<androidx.core.widget.NestedScrollView
 		android:id="@+id/scroll_view"
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
@@ -134,10 +134,11 @@
 			<androidx.viewpager2.widget.ViewPager2
 				android:id="@+id/viewpager"
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content" />
+				android:layout_height="0dp"
+				android:layout_weight="1"/>
 		</LinearLayout>
 
-	</ScrollView>
+	</androidx.core.widget.NestedScrollView>
 
 	<View
 		android:id="@+id/buttonDivider"
