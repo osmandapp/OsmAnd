@@ -5553,7 +5553,7 @@
     <string name="obd_connecting_to_device">Connessione a %s</string>
     <string name="bt_start_pair_failed">Impossibile iniziare l\'accoppiamento con il dispositivo</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Mostra il tasso di consumo di carburante del veicolo in base ai calcoli (%/h)</string>
-    <string name="obd_fuel_consumption_rate_l_km">Tasso di consumo di carburante (l/km)</string>
+    <string name="obd_fuel_consumption_rate_l_km">Tasso di consumo di carburante (l/100km)</string>
     <string name="simulate_obd">Simula i dati obd</string>
     <string name="obd_engine_runtime">Tempo di Accensione del Motore</string>
     <string name="obd_engine_runtime_desc">Indica il tempo di funzionamento del motore dall\'avvio.</string>
@@ -5561,7 +5561,7 @@
     <string name="kpa_unit">kPa</string>
     <string name="percent_hour">%/h</string>
     <string name="obd_fuel_consumption_rate_l_h">Tasso di consumo di carburante (l/h)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">Tasso di consumo di carburante l/h</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Tasso di consumo di carburante</string>
     <string name="obd_fuel_consumption_rate_l_h_desc">Mostra il tasso di consumo di carburante del veicolo in base ai calcoli (l/h)</string>
     <string name="obd_fuel_consumption_rate_sensor">Tasso di consumo di carburante (sensore)</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Mostra il tasso di consumo di carburante del veicolo basato sul sensore (l/h)</string>
@@ -5577,7 +5577,7 @@
     <string name="obd_widget_engine_speed">Velocità del motore</string>
     <string name="obd_nothing_found_text">Nessun scanner trovato</string>
     <string name="shared_string_dynamic">Dinamico</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Mostra il tasso di consumo di carburante del veicolo in base ai calcoli (l/km)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Mostra il tasso di consumo di carburante del veicolo in base ai calcoli (l/100km)</string>
     <string name="obd_fuel_level_liter">Livello carburante (l)</string>
     <string name="obd_fuel_level_percent">Livello carburante (%)</string>
     <string name="obd_fuel_left_percent">Carburante rimasto (%)</string>
@@ -5640,7 +5640,7 @@
     <string name="release_4_9">- Aggiunto un visualizzatore di gallerie a schermo intero per le immagini Wikimedia\n\n - Introdotto un nuovo plugin \"Metriche del veicolo\" per monitorare le prestazioni del veicolo utilizzando il protocollo OBD-II\n\n - Aggiunta la possibilità di assegnare attività alle tracce e di filtrarle di conseguenza\n\n - Implementate nuove azioni rapide per la registrazione del viaggio e il blocco del touchscreen\n\n - Introdotto l\'aspetto personalizzabile dei pulsanti della mappa e una griglia precisa\n\n - Aggiunto un menu contestuale e un\'azione \"Ripristina velocità media\" ai widget\n\n - Aggiunto un nuovo livello di percorso \"Sentieri per moto da strada\".\n\n - Corretta la funzione \"Registrazione automatica della traccia durante la navigazione\".\n\n - Corretto il problema delle coordinate capovolte in RTL\n\n - Corretti i dati del sensore mancanti per la traccia attualmente registrata\n\n - Aggiunte informazioni sulle aree circostanti per il punto selezionato\n\n - Aggiunta un\'azione rapida per controllare la visibilità delle modifiche OSM\n\n - Parametri di visibilità separati per le opzioni di colorazione del terreno\n\n - Aggiunta di un\'icona che può essere toccata per visualizzare l\'accesso o altri attributi di strade o sentieri</string>
     <string name="obd_fuel_type_desc">Mostra il tipo di carburante del veicolo attraverso il sensore OBD</string>
     <string name="obd_fuel_consumption_rate_desc">Mostra il tasso di consumo di carburante del veicolo in base a OBD e posizione</string>
-    <string name="obd_plugin_description">Monitorare le principali metriche del veicolo utilizzando il protocollo OBD-II. Accesso a dati quali: * Velocità del motore * Consumo di carburante * Carburante rimanente * Distanza dall\'avvio del motore * Temperatura di aspirazione * Temperatura ambiente * Temperatura del liquido di raffreddamento * Velocità del veicolo * Percentuale della batteria</string>
+    <string name="obd_plugin_description">Monitora le principali caratteristiche del veicolo utilizzando il protocollo OBD-II. Accedi ai dati tra cui:\n• Regime del motore, Tempo di funzionamento del motore, Carico motore calcolato\n• Consumo di carburante, Pressione del carburante, Carburante rimanente\n• Temperatura di aspirazione, Temperatura ambiente, Temperatura del refrigerante, Temperatura dell\'olio motore\n• Velocità del veicolo, Posizione dell\'acceleratore, Tensione della batteria\n</string>
     <string name="route_guidance">Guida del percorso</string>
     <string name="wikivoyage_offline">Wikivoyage non in linea</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
@@ -5678,4 +5678,6 @@
     <string name="location_interpolation_percent">Percentuale di interpolazione della posizione</string>
     <string name="location_interpolation_percent_desc">Imposta la percentuale di interpolazione della posizione durante la navigazione del percorso. Questo parametro riduce il ritardo della tua posizione sulla mappa durante l\'animazione.</string>
     <string name="shared_string_interpolation">Interpolazione</string>
+    <string name="auto_zoom_3d_angle">Angolo 3D dello zoom automatico</string>
+    <string name="selected_delayed_profile">Profilo selezionato \"%s\"</string>
 </resources>
