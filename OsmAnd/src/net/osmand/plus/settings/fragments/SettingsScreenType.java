@@ -39,14 +39,11 @@ public enum SettingsScreenType {
 	HISTORY_SETTINGS(HistorySettingsFragment.class, false, null, R.xml.history_preferences, R.layout.global_preference_toolbar),
 	PROFILE_APPEARANCE(ProfileAppearanceFragment.class, true, null, R.xml.profile_appearance_screen, R.layout.profile_preference_toolbar),
 	OPEN_STREET_MAP_EDITING(OsmEditingFragment.class, false, null, R.xml.osm_editing, R.layout.global_preference_toolbar),
-	// FK-TODO: make searchable:
 	MULTIMEDIA_NOTES(MultimediaNotesFragment.class, true, ApplyQueryType.SNACK_BAR, R.xml.multimedia_notes, R.layout.profile_preference_toolbar),
-	// FK-TODO: make searchable:
 	MONITORING_SETTINGS(MonitoringSettingsFragment.class, true, ApplyQueryType.SNACK_BAR, R.xml.monitoring_settings, R.layout.profile_preference_toolbar),
 	LIVE_MONITORING(LiveMonitoringFragment.class, false, ApplyQueryType.SNACK_BAR, R.xml.live_monitoring, R.layout.global_preferences_toolbar_with_switch),
 	ACCESSIBILITY_SETTINGS(AccessibilitySettingsFragment.class, true, ApplyQueryType.SNACK_BAR, R.xml.accessibility_settings, R.layout.profile_preference_toolbar),
 	DEVELOPMENT_SETTINGS(DevelopmentSettingsFragment.class, false, null, R.xml.development_settings, R.layout.global_preference_toolbar),
-	// FK-TODO: make searchable:
 	SIMULATION_NAVIGATION(SimulationNavigationSettingFragment.class, true, ApplyQueryType.NONE, R.xml.simulation_navigation_setting, R.layout.profile_preference_toolbar_with_switch),
 	ANT_PLUS_SETTINGS(ExternalDevicesListFragment.class, false, null, R.xml.antplus_settings, R.layout.global_preference_toolbar),
 	VEHICLE_METRICS_SETTINGS(OBDDevicesListFragment.class, false, null, R.xml.antplus_settings, R.layout.global_preference_toolbar),
