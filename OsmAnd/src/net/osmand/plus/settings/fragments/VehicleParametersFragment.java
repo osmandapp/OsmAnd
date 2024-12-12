@@ -2,7 +2,15 @@ package net.osmand.plus.settings.fragments;
 
 import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.createRoutingParameterPref;
-import static net.osmand.router.GeneralRouter.*;
+import static net.osmand.router.GeneralRouter.DEFAULT_SPEED;
+import static net.osmand.router.GeneralRouter.MAX_AXLE_LOAD;
+import static net.osmand.router.GeneralRouter.MOTOR_TYPE;
+import static net.osmand.router.GeneralRouter.RoutingParameter;
+import static net.osmand.router.GeneralRouter.VEHICLE_HEIGHT;
+import static net.osmand.router.GeneralRouter.VEHICLE_LENGTH;
+import static net.osmand.router.GeneralRouter.VEHICLE_WEIGHT;
+import static net.osmand.router.GeneralRouter.VEHICLE_WIDTH;
+import static net.osmand.router.GeneralRouter.WEIGHT_RATING;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -41,7 +49,6 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.shared.settings.enums.MetricsConstants;
-import net.osmand.shared.settings.enums.MetricsConstants;
 
 import java.util.Map;
 import java.util.Optional;
@@ -77,7 +84,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 				showOtherCategory(parameters, routerProfile);
 			}
 		} else {
-			setupCategoryPref(R.string.shared_string_other);
+			setupCategoryPref(R.string.shared_string_other, "VehicleParametersFragment.other");
 			setupDefaultSpeedPref();
 		}
 	}
@@ -88,7 +95,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 				|| routerProfile != GeneralRouterProfile.PUBLIC_TRANSPORT;
 		if (shouldShowOtherCategory) {
 			addDividerPref();
-			setupCategoryPref(R.string.shared_string_other);
+			setupCategoryPref(R.string.shared_string_other, "VehicleParametersFragment.other2");
 		}
 		setupRoutingParameterPref(parameters.get(MAX_AXLE_LOAD));
 		setupRoutingParameterPref(parameters.get(WEIGHT_RATING));
@@ -107,7 +114,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 		boolean showCategory = showFuelTankCapacity || motorTypeParameter != null;
 		if (showCategory) {
 			addDividerPref();
-			setupCategoryPref(R.string.poi_filter_fuel);
+			setupCategoryPref(R.string.poi_filter_fuel, "VehicleParametersFragment.poi_filter_fuel");
 		}
 		setupRoutingParameterPref(motorTypeParameter);
 		if (showFuelTankCapacity) {
@@ -116,8 +123,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 	}
 
 	private void showDimensionsCategory(@NonNull Map<String, RoutingParameter> parameters,
-	                                    @Nullable GeneralRouterProfile routerProfile,
-	                                    @Nullable String derivedProfile) {
+										@Nullable GeneralRouterProfile routerProfile,
+										@Nullable String derivedProfile) {
 		if (routerProfile == null) {
 			return;
 		}
@@ -126,7 +133,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 		RoutingParameter width = parameters.get(VEHICLE_WIDTH);
 		RoutingParameter length = parameters.get(VEHICLE_LENGTH);
 		if (height != null || weight != null || width != null || length != null) {
-			setupCategoryPref(R.string.shared_strings_dimensions);
+			setupCategoryPref(R.string.shared_strings_dimensions, "VehicleParametersFragment.dimensions");
 		}
 
 		setupVehiclePropertyPref(height, routerProfile, derivedProfile);
@@ -135,10 +142,11 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 		setupVehiclePropertyPref(length, routerProfile, derivedProfile);
 	}
 
-	private void setupCategoryPref(int titleId) {
+	private void setupCategoryPref(int titleId, String key) {
 		PreferenceCategory preferenceCategory = new PreferenceCategory(requireContext());
 		preferenceCategory.setTitle(titleId);
 		preferenceCategory.setLayoutResource(R.layout.preference_category_with_descr);
+		preferenceCategory.setKey(key);
 
 		PreferenceScreen screen = getPreferenceScreen();
 		screen.addPreference(preferenceCategory);
@@ -274,21 +282,6 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 						Optional.empty());
 		if (preferenceDialog.isPresent()) {
 			show(preferenceDialog.get());
-		} else if (preference instanceof SizePreference) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				VehicleParametersBottomSheet.showInstance(fragmentManager, preference.getKey(),
-						this, false, getSelectedAppMode());
-			}
-		} else if (MOTOR_TYPE_PREF_ID.equals(preference.getKey())) {
-			FragmentManager manager = getFragmentManager();
-			if (manager != null) {
-				ListPreferenceEx pref = (ListPreferenceEx) preference;
-				SimpleSingleSelectionBottomSheet.showInstance(manager, this, preference.getKey(),
-						pref.getTitle().toString(), pref.getDescription(),
-						getSelectedAppMode(), false, pref.getEntries(),
-						pref.getEntryValues(), pref.getValueIndex());
-			}
 		} else {
 			super.onDisplayPreferenceDialog(preference);
 		}

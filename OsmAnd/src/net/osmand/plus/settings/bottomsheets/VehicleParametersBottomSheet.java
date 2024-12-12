@@ -27,10 +27,7 @@ import net.osmand.plus.settings.vehiclesize.SizeData;
 import net.osmand.plus.settings.vehiclesize.SizeType;
 import net.osmand.plus.settings.vehiclesize.VehicleSizes;
 import net.osmand.plus.settings.vehiclesize.containers.Metric;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.chips.ChipItem;
-import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
@@ -48,11 +45,6 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet imple
 	public static final String TAG = VehicleParametersBottomSheet.class.getSimpleName();
 
 	private SizePreference sizePreference;
-	private boolean configureSettingsSearch = false;
-
-	public void setConfigureSettingsSearch(final boolean configureSettingsSearch) {
-		this.configureSettingsSearch = configureSettingsSearch;
-	}
 
 	@SuppressLint("ClickableViewAccessibility")
 	protected BaseBottomSheetItem createBottomSheetItem(@NonNull OsmandApplication app, @NonNull View mainView) {
