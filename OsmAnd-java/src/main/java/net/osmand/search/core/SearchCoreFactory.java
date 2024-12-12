@@ -1125,6 +1125,7 @@ public class SearchCoreFactory {
 			List<PoiSubType> poiSubTypes = r.getTopIndexSubTypes();
 			String lang = phrase.getSettings().getLang();
 			List<TopIndexMatch> matches = new ArrayList<>();
+			Collator collator = OsmAndCollator.primaryCollator();
 			NameStringMatcher nm = new NameStringMatcher(search, CHECK_ONLY_STARTS_WITH);
 			for (PoiSubType subType : poiSubTypes) {
 				String topIndexValue = null;
@@ -1133,14 +1134,13 @@ public class SearchCoreFactory {
 				Collections.sort(possibleValues);
 				for (String s : possibleValues) {
 					translate = getTopIndexTranslation(s);
+					String normalizeBrand = s.toLowerCase(Locale.ROOT);
 					if (complete) {
-						CollatorStringMatcher csm = new CollatorStringMatcher(s, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
-						if (csm.matches(search)) {
+						if (CollatorStringMatcher.cmatches(collator, search, normalizeBrand, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
 							topIndexValue = s;
 							break;
 						} else {
-							csm = new CollatorStringMatcher(translate, StringMatcherMode.CHECK_ONLY_STARTS_WITH);
-							if (csm.matches(search)) {
+							if (CollatorStringMatcher.cmatches(collator, search, translate, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
 								topIndexValue = s;
 								break;
 							}
@@ -1172,7 +1172,7 @@ public class SearchCoreFactory {
 		private String getTopIndexTranslation(String value) {
 			String key = TopIndexFilter.getValueKey(value);
 			String translate = types.getPoiTranslation(key);
-			if (translate.toLowerCase().equals(key)) {
+			if (translate.toLowerCase(Locale.ROOT).equals(key)) {
 				translate = value;
 			}
 			return translate;
