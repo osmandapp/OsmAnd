@@ -20,7 +20,7 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/camera_app"
 		tools:icon="@drawable/ic_action_video_dark"
-		tools:summary="@string/app_name_osmand"/>
+		tools:summary="@string/app_name_osmand" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:icon="@drawable/ic_action_picture_size"
@@ -65,6 +65,12 @@
 		android:title="@string/av_audio_bitrate"
 		tools:summary="@string/av_audio_bitrate_descr" />
 
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="av_audio_sample_rate"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/av_audio_sample_rate"
+		tools:summary="@string/av_audio_sample_rate_descr" />
+
 	<Preference
 		android:layout="@layout/simple_divider_item"
 		android:selectable="false" />
@@ -79,7 +85,7 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/camera_app"
 		tools:icon="@drawable/ic_action_video_dark"
-		tools:summary="@string/system_locale"/>
+		tools:summary="@string/system_locale" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:icon="@drawable/ic_action_picture_size"

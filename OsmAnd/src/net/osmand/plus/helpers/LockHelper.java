@@ -22,11 +22,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.actions.LockScreenAction;
+import net.osmand.plus.routing.VoiceRouter.VoiceMessageListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.routing.VoiceRouter.VoiceMessageListener;
 import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 
 import org.apache.commons.logging.Log;
@@ -233,7 +233,7 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 
 	@Override
 	public void stateChanged(ApplicationMode mode) {
-		List<QuickActionButtonState> buttonStates = app.getMapButtonsHelper().getButtonsStates();
+		List<QuickActionButtonState> buttonStates = app.getMapButtonsHelper().getQuickActionButtonsStates();
 		ApplicationMode currentMode = app.getSettings().getApplicationMode();
 
 		if (isScreenLocked() && lastApplicationMode != currentMode) {

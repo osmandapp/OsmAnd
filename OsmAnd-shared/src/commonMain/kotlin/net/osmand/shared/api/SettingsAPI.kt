@@ -1,17 +1,15 @@
 package net.osmand.shared.api
 
 interface SettingsAPI {
-	fun getStringPreference(
-		name: String,
-		defValue: String,
-		global: Boolean = true,
-		shared: Boolean = true): String
+	fun registerPreference(name: String, defValue: String, global: Boolean, shared: Boolean)
+	fun addStringPreferenceListener(name: String, listener: KStateChangedListener<String>)
 
+	fun getStringPreference(name: String): String?
 	fun setStringPreference(name: String, value: String)
-	fun <T> addPreferenceListener(name: String, listener: KStateChangedListener<T>)
-	fun registerPreference(
-		name: String,
-		defValue: String,
-		global: Boolean = true,
-		shared: Boolean = true)
+
+	fun registerPreference(name: String, defValue: Float, global: Boolean, shared: Boolean)
+	fun addFloatPreferenceListener(name: String, listener: KStateChangedListener<Float>)
+
+	fun getFloatPreference(name: String): Float?
+	fun setFloatPreference(name: String, value: Float)
 }

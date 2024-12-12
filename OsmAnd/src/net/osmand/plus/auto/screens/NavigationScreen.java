@@ -105,7 +105,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 
 	@Override
 	public void onResume(@NonNull LifecycleOwner owner) {
-		DefaultLifecycleObserver.super.onResume(owner);
+		super.onResume(owner);
 		NavigationSession navigationSession = getApp().getCarNavigationSession();
 		if (navigationSession != null) {
 			SurfaceRenderer surfaceRenderer = navigationSession.getNavigationCarSurface();
@@ -117,7 +117,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 
 	@Override
 	public void onPause(@NonNull LifecycleOwner owner) {
-		DefaultLifecycleObserver.super.onPause(owner);
+		super.onPause(owner);
 		NavigationSession navigationSession = getApp().getCarNavigationSession();
 		if (navigationSession != null) {
 			SurfaceRenderer surfaceRenderer = navigationSession.getNavigationCarSurface();
@@ -396,6 +396,11 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 			}
 		}
 		return builder.build();
+	}
+
+	@Override
+	protected void restoreMapState() {
+		//no automatic map adjust
 	}
 
 	private void updateCompass() {

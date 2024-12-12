@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
@@ -56,6 +57,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	public static final String USER_PREFIX = "user_";
 	public static final String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id";
 	public static final String BY_NAME_FILTER_ID = USER_PREFIX + "by_name";
+	public static final String TOP_WIKI_FILTER_ID = STD_PREFIX + OSM_WIKI_CATEGORY;
 	public static final int INVALID_ORDER = -1;
 
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<>();
@@ -84,6 +86,8 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 
 	private boolean deleted;
 
+	private SearchPoiAdditionalFilter additionalFilter;
+
 	// constructor for standard filters
 	public PoiUIFilter(@Nullable AbstractPoiType type, @NonNull OsmandApplication app, @NonNull String idSuffix) {
 		this.app = app;
@@ -111,6 +115,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		filterId = topIndexFilter.getFilterId();
 		this.name = topIndexFilter.getName();
 		poiTypes = app.getPoiTypes();
+		additionalFilter = topIndexFilter;
 
 		if (acceptedTypes == null) {
 			initSearchAll();
@@ -183,7 +188,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	}
 
 	public boolean isTopWikiFilter() {
-		return filterId.equals(STD_PREFIX + OSM_WIKI_CATEGORY);
+		return filterId.equals(TOP_WIKI_FILTER_ID);
 	}
 
 	public boolean isRoutesFilter() {
@@ -389,7 +394,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	                                                double bottomLatitude, double leftLongitude,
 	                                                double rightLongitude, int zoom,
 	                                                ResultMatcher<Amenity> matcher) {
-		return app.getResourceManager().searchAmenities(this, topLatitude, leftLongitude,
+		return app.getResourceManager().searchAmenities(this, additionalFilter, topLatitude, leftLongitude,
 				bottomLatitude, rightLongitude, zoom, true, wrapResultMatcher(matcher));
 	}
 

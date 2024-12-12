@@ -763,27 +763,7 @@
     <string name="shared_string_crash">Kokkujooksmine</string>
     <string name="last_launch_crashed">OsmAnd jooksis viimati kasutades kokku. Palun aita meil veateadet jagades OsmAnd rakendust parandada.</string>
     <string name="app_mode_ufo">UFO</string>
-    <string name="release_3_4">• Rakenduse profiilid: saate luua oma vajadustele vastavalt kohandatud profiili meelepärase ikooni ja värviga
-\n
-\n • Nüüd kohandage mis tahes profiili vaikimisi ja min / max kiirusi
-\n
-\n • Lisatud praeguste koordinaatide vidin
-\n
-\n • Lisatud valikud kompassi ja raadiuse joonlaua kuvamiseks kaardil
-\n
-\n • Parandatud raja taustalogimist
-\n
-\n • Täiustatud taustakaardi allalaadimist
-\n
-\n • Taastatud valik \'Lülita ekraan sisse\'
-\n
-\n • Parandatud Vikipeedia keelevalik
-\n
-\n • Parandatud kompassinuppude käitumine navigeerimise ajal
-\n
-\n • Muud veaparandused
-\n
-\n</string>
+    <string name="release_3_4">• Rakenduse profiilid: saate luua oma vajadustele vastavalt kohandatud profiili meelepärase ikooni ja värviga \n \n • Nüüd kohandage mis tahes profiili vaikimisi ja min / max kiirusi \n \n • Lisatud praeguste koordinaatide vidin \n \n • Lisatud valikud kompassi ja raadiuse joonlaua kuvamiseks kaardil \n \n • Parandatud raja taustalogimist \n \n • Täiustatud taustakaardi allalaadimist \n \n • Taastatud valik \'Lülita ekraan sisse\' \n \n • Parandatud Vikipeedia keelevalik \n \n • Parandatud kompassinuppude käitumine navigeerimise ajal \n \n • Muud veaparandused</string>
     <string name="app_mode_personal_transporter">Isiklik vedaja</string>
     <string name="app_mode_monowheel">Monoratas</string>
     <string name="app_mode_scooter">Tõukeratas</string>
@@ -954,23 +934,7 @@
     <string name="routing_attr_prefer_unpaved_description">Eelista katteta teid.</string>
     <string name="update_all_maps">Uuenda kõiki kaarte</string>
     <string name="update_all_maps_q">Uuendada kõik (%1$d) kaarti\?</string>
-    <string name="release_3_5">• Uuendatud rakenduse ja profiili seadeid, mis on nüüd järjestatud tüübi järgi. Igat profiili saab kohandada eraldi.
-\n
-\n • Uus kaartide allalaadimise dialoog, mis soovitab sirvimise ajal kaarte allalaadimiseks
-\n
-\n • Öise teema parandused
-\n
-\n • Parandanud mitmeid marsruutimisprobleeme kogu maailmas
-\n
-\n • Uuendatud põhikaart koos üksikasjalikuma teedevõrguga
-\n
-\n • Fikseeritud üleujutuse piirkonnad kogu maailmas
-\n
-\n • Suusarajad: teekonna üksikasjadele on lisatud kõrguse profiil ja teekonna keerukus
-\n
-\n • Muud veaparandused
-\n
-\n</string>
+    <string name="release_3_5">• Uuendatud rakenduse ja profiili seadeid, mis on nüüd järjestatud tüübi järgi. Igat profiili saab kohandada eraldi. \n \n • Uus kaartide allalaadimise dialoog, mis soovitab sirvimise ajal kaarte allalaadimiseks \n \n • Öise teema parandused \n \n • Parandanud mitmeid marsruutimisprobleeme kogu maailmas \n \n • Uuendatud põhikaart koos üksikasjalikuma teedevõrguga \n \n • Fikseeritud üleujutuse piirkonnad kogu maailmas \n \n • Suusarajad: teekonna üksikasjadele on lisatud kõrguse profiil ja teekonna keerukus \n \n • Muud veaparandused</string>
     <string name="apply_preference_to_all_profiles">Rakenda see muudatus kõigile või valitud profiilile.</string>
     <string name="shared_preference">Jagatud</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Eelista katteta teid</string>
@@ -1329,7 +1293,7 @@
     <string name="rendering_attr_moreDetailed_name">Rohkem üksikasju</string>
     <string name="rendering_attr_lessDetailed_name">Vähem üksikasju</string>
     <string name="rendering_attr_hideAccess_name">Ligipääsupiirangud</string>
-    <string name="rendering_attr_showAccess_name">Kuva ligipääsu- ja teemaksu piirangud</string>
+    <string name="rendering_attr_showAccess_name">Näita ligipääsupiiranguid</string>
     <string name="rendering_attr_showSurfaceGrade_name">Kuva tee kvaliteet</string>
     <string name="rendering_attr_showSurfaces_name">Kuva tee pind</string>
     <string name="no_index_file_to_download">Allalaadimisi ei leitud, palun kontrolli internetiühendust.</string>
@@ -1458,7 +1422,7 @@
     <string name="routing_attr_avoid_borders_description">Väldib riigipiiride ületusi</string>
     <string name="routing_attr_weight_name">Kaal</string>
     <string name="routing_attr_weight_description">Määra teedel lubatud sõiduki kaal.</string>
-    <string name="routing_attr_height_name">Kõrguspiirang</string>
+    <string name="routing_attr_height_name">Kõrgus</string>
     <string name="routing_attr_height_description">Määra teedel lubatud sõiduki kõrgus.</string>
     <string name="copying_osmand_one_file_descr">Faili (%s) kopeerimine uude asukohta…</string>
     <string name="copying_osmand_files_descr">OsmAnd andmefailide kopeerimine uude asukohta (%s)…</string>
@@ -1688,27 +1652,7 @@
 \n
 \n OsmAnd on aktiivselt arendamisel ning meie projekt ja selle jätkuv edasiminek sõltub rahalisest toetusest uute funktsioonide väljatöötamiseks ja testimiseks. Palun kaalu OsmAnd+ ostmist või konkreetsete uute funktsioonide rahastamist või üldise annetuse tegemist leheküljel https://osmand.net.</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ kaardid ja navigeerimine</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM automatiseeritud navigeerimisjuhised)
-\n
-\n OsmAnd+ on avatud lähtekoodiga tarkvara navigeerimisrakendus, millel on juurdepääs paljudele globaalsetele OpenStreetMap (OSM) andmetele. Kõiki kaardiandmeid (vektor- ja paanikaarte) saad salvestada telefoni mälukaardile võrguühenduseta kasutamiseks. Võimalik on nii võrguühenduseta kui ka -ühendusega teekonna leidmise funktsioon, milles on ka hääljuhiseid.
-\n
-\n OsmAnd+ on rakenduse tasuline versioon, mida ostes toetad projekti, rahastad uute funktsioonide arendamist ja saad kõige värskemaid uuendusi.
-\n
-\n Mõned põhifunktsioonid:
-\n - Täielik võrguühenduseta funktsioon (salvesta alla laaditud vektor- ja paanikaardid seadme mällu)
-\n - Saadaval on kompaktsed kogu maailma vektorkaardid (võrguühenduseta režiim)
-\n - Riigi või piirkonna kaartide piiramatu allalaadimine otse rakendusest
-\n - Võrguühenduseta Vikipeedia funktsioon (laadige Vikipeedia huvipunktid alla), sobib suurepäraselt vaatamisväärsustega tutvumiseks
-\n - Võimalik on mitme kaardikihi ülekatmine, näiteks GPX või navigeerimisrajad, huvipunktid, eelistused, kõrgusjooned, ühistranspordi peatused, täiendavad kaardid kohandatava läbipaistvusega
-\n
-\n - Aadresside ja kohtade (huvipunktide) otsing võrguühenduseta
-\n - Võrguühenduseta teekonna leidmine keskmise vahemaa jaoks
-\n - Auto-, jalgratta- ja jalakäijarežiim valikuliselt:
-\n - Automatiseeritud päeva/öö ekraanivaate vahetamine
-\n - Kiirusest sõltuv kaardi suurendustase
-\n - Kaardi joondamine vastavalt kompassile või liikumissuunale
-\n - Raja juhtimine, kiiruspiirangu kuvamine, salvestatud ja kõnesünteesi hääled
-\n</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM automatiseeritud navigeerimisjuhised) \n \n OsmAnd+ on avatud lähtekoodiga tarkvara navigeerimisrakendus, millel on juurdepääs paljudele globaalsetele OpenStreetMap (OSM) andmetele. Kõiki kaardiandmeid (vektor- ja paanikaarte) saad salvestada telefoni mälukaardile võrguühenduseta kasutamiseks. Võimalik on nii võrguühenduseta kui ka -ühendusega teekonna leidmise funktsioon, milles on ka hääljuhiseid. \n \n OsmAnd+ on rakenduse tasuline versioon, mida ostes toetad projekti, rahastad uute funktsioonide arendamist ja saad kõige värskemaid uuendusi. \n \n Mõned põhifunktsioonid: \n - Täielik võrguühenduseta funktsioon (salvesta alla laaditud vektor- ja paanikaardid seadme mällu) \n - Saadaval on kompaktsed kogu maailma vektorkaardid (võrguühenduseta režiim) \n - Riigi või piirkonna kaartide piiramatu allalaadimine otse rakendusest \n - Võrguühenduseta Vikipeedia funktsioon (laadige Vikipeedia huvipunktid alla), sobib suurepäraselt vaatamisväärsustega tutvumiseks \n - Võimalik on mitme kaardikihi ülekatmine, näiteks GPX või navigeerimisrajad, huvipunktid, eelistused, kõrgusjooned, ühistranspordi peatused, täiendavad kaardid kohandatava läbipaistvusega \n \n - Aadresside ja kohtade (huvipunktide) otsing võrguühenduseta \n - Võrguühenduseta teekonna leidmine keskmise vahemaa jaoks \n - Auto-, jalgratta- ja jalakäijarežiim valikuliselt: \n - Automatiseeritud päeva/öö ekraanivaate vahetamine \n - Kiirusest sõltuv kaardi suurendustase \n - Kaardi joondamine vastavalt kompassile või liikumissuunale \n - Raja juhtimine, kiiruspiirangu kuvamine, salvestatud ja kõnesünteesi hääled</string>
     <string name="filterpoi_activity">Loo huvipunktide filter</string>
     <string name="select_navigation_mode">Transpordiliik:</string>
     <string name="day_night_info_description">Päikesetõus: %1$s 
@@ -2100,7 +2044,7 @@
     <string name="poi_context_menu_delete">Kustuta huvipunkt</string>
     <string name="rotate_map_compass_opt">Kompassi suund</string>
     <string name="rotate_map_bearing_opt">Liikumissuund</string>
-    <string name="rotate_map_north_opt">Ei pöörle (põhi alati üleval)</string>
+    <string name="rotate_map_north_opt">Põhi on alati üleval</string>
     <string name="rotate_map_to_descr">Kaardi joondamine:</string>
     <string name="rotate_map_to">Kaardi orientatsioon</string>
     <string name="fav_imported_sucessfully">Lemmikud imporditud</string>
@@ -2507,18 +2451,7 @@
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd kogub teavet selle kohta, milliseid rakenduse osi sa avad. Sinu asukohta ei saadeta kunagi, ega ka midagi, mida rakendusse sisestad ega üksikasju piirkondade kohta, mida vaatad, otsid või laadid alla.</string>
     <string name="do_not_show_startup_messages">Ära kuva käivitusteateid</string>
     <string name="do_not_show_startup_messages_desc">Ära kuva rakenduse allahindlusi ega kohalike sündmuste teateid.</string>
-    <string name="osmand_extended_description_part2">GPS-navigeerimine
-\n • Vali võrguühenduseta (välismaal viibides rändlustasudeta) või võrgus (kiirem) vahel
-\n • Hääljuhised pöörangupõhisel suunamisel juhatavad sind mööda teed (salvestatud ja sünteesitud hääled)
-\n • Teekond arvutatakse sellest kõrvale kaldudes alati ümber
-\n • Teeäärsed juhised, tänavanimed ja eeldatav saabumisaeg on teel olles abiks
-\n • Reisi turvalisemaks muutmiseks lülitatakse päeval/öösel ekraani režiim automaatselt ümber
-\n • Näitame kiiruspiiranguid ja saad selle ületamise korral meeldetuletusi
-\n • Kaardi suurendustaset kohandame vastavalt sinu kiirusele
-\n • Otsi sihtkohti aadressi, liigi (nt parkimine, restoran, hotell, bensiinijaam, muuseum) või geograafiliste koordinaatide järgi
-\n • Toetab teekonna vahepunkte
-\n • Salvesta oma andmed või laadi üles GPX rada ja liigu mööda seda
-\n</string>
+    <string name="osmand_extended_description_part2">GPS-navigeerimine \n • Vali võrguühenduseta (välismaal viibides rändlustasudeta) või võrgus (kiirem) vahel \n • Hääljuhised pöörangupõhisel suunamisel juhatavad sind mööda teed (salvestatud ja sünteesitud hääled) \n • Teekond arvutatakse sellest kõrvale kaldudes alati ümber \n • Teeäärsed juhised, tänavanimed ja eeldatav saabumisaeg on teel olles abiks \n • Reisi turvalisemaks muutmiseks lülitatakse päeval/öösel ekraani režiim automaatselt ümber \n • Näitame kiiruspiiranguid ja saad selle ületamise korral meeldetuletusi \n • Kaardi suurendustaset kohandame vastavalt sinu kiirusele \n • Otsi sihtkohti aadressi, liigi (nt parkimine, restoran, hotell, bensiinijaam, muuseum) või geograafiliste koordinaatide järgi \n • Toetab teekonna vahepunkte \n • Salvesta oma andmed või laadi üles GPX rada ja liigu mööda seda</string>
     <string name="osmand_plus_extended_description_part2">Navigeerimine
 \n • Töötab võrgus (kiire) või võrguühenduseta (välismaal viibides puuduvad rändlustasud)
 \n • Täpsed hääljuhised (salvestatud ja sünteesitud hääled)
@@ -2628,7 +2561,7 @@
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="sett_parrot_ext_input">Papagoi</string>
     <string name="lang_oc">Oksitaani</string>
-    <string name="routing_attr_width_name">Laiuspiirang</string>
+    <string name="routing_attr_width_name">Laius</string>
     <string name="routing_attr_width_description">Määra teedel lubatud sõiduki laius.</string>
     <string name="simulate_your_location_gpx_descr">Simuleeri oma asukohta kasutades salvestatud GPX rada.</string>
     <string name="quick_action_directions_from_desc">Nupp ekraani keskkoha lähtekohaks muutmiseks. Seejärel on kas võimalik valida sihtkohta või alustada teekonna arvutamist.</string>
@@ -3009,7 +2942,7 @@
     <string name="downloading_number_of_files">Faili %1$d allalaadimine …</string>
     <string name="buy">Osta</string>
     <string name="activate_seamarks_plugin">Palun aktiveeri \'Merekaardi vaade\' lisa</string>
-    <string name="activate_srtm_plugin">Palun aktiveeri \'Kõrgusjooned\' lisa</string>
+    <string name="activate_srtm_plugin">Palun aktiveeri \'Topograafia\' lisamoodul</string>
     <string name="later">Hiljem</string>
     <string name="get_full_version">Täisversioon</string>
     <string name="downloads">Allalaadimised</string>
@@ -3121,15 +3054,7 @@
     <string name="osmand_extended_description_part1">OsmAnd (OSM automatiseeritud navigeerimisjuhised) on kaardi- ja navigatsioonirakendus, millel on juurdepääs tasuta, ülemaailmsetele ja kvaliteetsetele OpenStreetMap (OSM) andmetele.
 \n
 \n Naudi hääl- ja optilist navigaatorit, HP-de (huvipunktide) vaatamist, GPX radade loomist ja haldamist, kõrgusjoonte visuaalse kuvamise ja kõrguse teabe kasutamist (lisa kaudu), valikut sõidu, jalgrattasõidu, jalakäijate režiimide, OSM\'i andmete muutmise ja palju muu vahel.</string>
-    <string name="osmand_extended_description_part3">Kaart
-\n • Kuvab HP-d (huvipunktid) sinu ümber
-\n • Kohandab kaarti sinu liikumissuunaga (või kompassiga)
-\n • Näitab sinu asukohta ja vaatamise suunda
-\n • Jaga oma asukohta, et sõbrad saaksid sind üles leida
-\n • Hoiab sinu kõige olulisemaid kohti menüüs \'Eelistused\'
-\n • Võimaldab valida, kuidas nimesid kaardil kuvada: inglise keeles, kohalikus või foneetilises kirjas
-\n • Kuvab spetsiaalseid veebipaane, satelliidivaadet (Bingilt), erinevaid ülekatteid, näiteks GPX radade ringkäik / navigeerimine ja kohandatava läbipaistvusega täiendavaid kihte
-\n</string>
+    <string name="osmand_extended_description_part3">Kaart \n • Kuvab HP-d (huvipunktid) sinu ümber \n • Kohandab kaarti sinu liikumissuunaga (või kompassiga) \n • Näitab sinu asukohta ja vaatamise suunda \n • Jaga oma asukohta, et sõbrad saaksid sind üles leida \n • Hoiab sinu kõige olulisemaid kohti menüüs \'Eelistused\' \n • Võimaldab valida, kuidas nimesid kaardil kuvada: inglise keeles, kohalikus või foneetilises kirjas \n • Kuvab spetsiaalseid veebipaane, satelliidivaadet (Bingilt), erinevaid ülekatteid, näiteks GPX radade ringkäik / navigeerimine ja kohandatava läbipaistvusega täiendavaid kihte</string>
     <string name="osmand_extended_description_part4">Suusatamine
 \n OsmAnd suusakaartide lisa võimaldab näha keerukusastmega suusaradasid ja mõnda lisateavet, näiteks suusatõstukite ja muude rajatiste asukohti.</string>
     <string name="osmand_extended_description_part5">Jalgrattasõit
@@ -3138,18 +3063,8 @@
 \n • Vaata oma kiirust ja kõrgust
 \n • GPX salvestusvalik võimaldab sul oma reisi salvestada ja seda jagada
 \n • Täiendava lisa kaudu saad lubada kõrgusjooned ja künkavarjutuse</string>
-    <string name="osmand_extended_description_part6">Jalutamine, matkamine, linnaekskursioon
-\n • Kaart näitab jalgsi- ja matkaradu
-\n • Vikipeedia sinu eelistatud keeles võib sulle linnaekskursiooni ajal palju öelda
-\n • Ühistranspordipeatused (buss, tramm, rong) koos liinide nimedega aitavad uues linnas navigeerida
-\n • Jalakäijate režiimis GPS navigeerimine loob sulle marsruudi kõnniteede abil
-\n • Laadi üles GPX marsruut ja järgi seda või salvesta ja jaga enda oma
-\n</string>
-    <string name="osmand_extended_description_part7">Panusta OSM kvaliteeti
-\n • Teata andmevigadest
-\n • Laadi GPX rajad OSM keskkonda üles otse rakendusest
-\n • Lisa huvipunkte ja laadi need kohe üles OSM keskkonda (või hiljem internetühenduse tekkides)
-\n</string>
+    <string name="osmand_extended_description_part6">Jalutamine, matkamine, linnaekskursioon \n • Kaart näitab jalgsi- ja matkaradu \n • Vikipeedia sinu eelistatud keeles võib sulle linnaekskursiooni ajal palju öelda \n • Ühistranspordipeatused (buss, tramm, rong) koos liinide nimedega aitavad uues linnas navigeerida \n • Jalakäijate režiimis GPS navigeerimine loob sulle marsruudi kõnniteede abil \n • Laadi üles GPX marsruut ja järgi seda või salvesta ja jaga enda oma</string>
+    <string name="osmand_extended_description_part7">Panusta OSM kvaliteeti \n • Teata andmevigadest \n • Laadi GPX rajad OSM keskkonda üles otse rakendusest \n • Lisa huvipunkte ja laadi need kohe üles OSM keskkonda (või hiljem internetühenduse tekkides)</string>
     <string name="osmand_extended_description_part8">OsmAnd on aktiivselt arendatud avatud lähtekoodiga tarkvara. Kõik saavad rakendusse panustada, teatades vigadest, parandades tõlkeid või luues uut funktsioonaalsust. Lisaks kasutab projekt rahalisele toetuset programmerimiseks ja uute funktsioonide testimiseks.
 \n Ligikaudne kaardi leviala ja kvaliteet:
 \n • Lääne-Euroopa: ****
@@ -3170,14 +3085,7 @@
 \n OsmAnd+ on rakenduse tasuline versioon. Selle ostmisega toetad projekti, rahastad uute funktsioonide arendamist ja saad kõige värskemaid uuendusi.
 \n
 \n Mõned peamised omadused:</string>
-    <string name="osmand_plus_extended_description_part3">Kaardi vaatamine
-\n • Kuva oma asukoht ja suund
-\n • Valikuliselt joonda pilt vastavalt kompassile või oma liikumissuunale
-\n • Salvesta oma kõige olulisemad kohad lemmikute hulka
-\n • Kuva HP-d (huvipunktid) enda ümber
-\n • Kuva spetsiaalseid veebipaane, satelliidivaadet (Bingilt), erinevaid ülekatteid, näiteks GPX radade matka- ja navigeerimisradasid ning täiendavaid kihte kohandatava läbipaistvusega
-\n • Valikuliselt saab kohanimesid kuvada inglise, kohalikus või foneetilises õigekirjas
-\n</string>
+    <string name="osmand_plus_extended_description_part3">Kaardi vaatamine \n • Kuva oma asukoht ja suund \n • Valikuliselt joonda pilt vastavalt kompassile või oma liikumissuunale \n • Salvesta oma kõige olulisemad kohad lemmikute hulka \n • Kuva HP-d (huvipunktid) enda ümber \n • Kuva spetsiaalseid veebipaane, satelliidivaadet (Bingilt), erinevaid ülekatteid, näiteks GPX radade matka- ja navigeerimisradasid ning täiendavaid kihte kohandatava läbipaistvusega \n • Valikuliselt saab kohanimesid kuvada inglise, kohalikus või foneetilises õigekirjas</string>
     <string name="osmand_plus_extended_description_part4">Kasuta OSM ja Vikipeedia andmeid
 \n • Kvaliteetne teave maailma parimatest koostööprojektidest
 \n • OSM andmed on saadaval riikide või piirkondade kaupa
@@ -3186,12 +3094,7 @@
 \n • Kompaktsed võrguühenduseta vektorkaardid, mida uuendatakse vähemalt kord kuus
 \n
 \n • Valik täielike regiooniandmete ja lihtsalt teedevõrgu vahel (näide: kogu Jaapan on seega vastavalt kas 700 MB või 200 MB)</string>
-    <string name="osmand_plus_extended_description_part5">Turvafunktsioonid
-\n • Valikuline automaatne päeva- ja öövaate vahetamine
-\n • Valikuline kiiruspiirangu kuvamine koos meeldetuletusega kiiruse ületamise puhul
-\n • Valikuline kiirusest sõltuv suurendustase
-\n • Jaga oma asukohta, et sõbrad sind üles leiaksid
-\n</string>
+    <string name="osmand_plus_extended_description_part5">Turvafunktsioonid \n • Valikuline automaatne päeva- ja öövaate vahetamine \n • Valikuline kiiruspiirangu kuvamine koos meeldetuletusega kiiruse ületamise puhul \n • Valikuline kiirusest sõltuv suurendustase \n • Jaga oma asukohta, et sõbrad sind üles leiaksid</string>
     <string name="osmand_plus_extended_description_part6">Jalgratta ja jalakäijate funktsioonid
 \n • Jalutus-, matka- ja jalgrattateede vaatamine, mis sobib suurepäraselt vabaõhuüritusteks
 \n • Spetsiaalsed marsruutimis- ja kuvarežiimid jalgratta ja jalakäija jaoks
@@ -3199,27 +3102,8 @@
 \n • Valikuline reisi salvestamine kohalikku GPX faili või veebiteenusesse
 \n • Valikuline kiiruse ja kõrguse kuvamine
 \n • Kõrgusjoonte ja künkavarjutuse kuvamine (täiendava lisa abil)</string>
-    <string name="osmand_plus_extended_description_part7">Tee otse OSM kaastööd
-\n • Teata andmevigadest
-\n • Laadi GPX radu OSM keskkonda otse rakendusest
-\n • Lisa huvipunkte ja laadi need kohe üles OSM keskkonda (või hiljem internetiühenduse tekkimisel)
-\n • Kui soovid, siis salvesta teekonda ka taustrežiimis (kui seade on puhkeolekus)
-\n OsmAnd on aktiivselt arendatud avatud lähtekoodiga tarkvara. Kõik saavad rakendusse panustada, teatades vigadest, parandades tõlkeid või kodeerides uusi funktsioone. Lisaks toetub projekt rahalisele toetusele nii programmeerimiseks kui ka uue funktsionaalsuse testimiseks.
-\n</string>
-    <string name="osmand_plus_extended_description_part8">Ligikaudne kaardi leviala ja kvaliteet:
-\n • Lääne-Euroopa: ****
-\n • Ida-Euroopa: ***
-\n • Venemaa: ***
-\n • Põhja-Ameerika: ***
-\n • Lõuna-Ameerika: **
-\n • Aasia: **
-\n • Jaapan ja Korea: ***
-\n • Lähis-Ida: **
-\n • Aafrika: **
-\n • Antarktika: *
-\n Enamike riikide andmed üle maailma on allalaadimiseks saadaval
-\n Afganistanist Zimbabweni, Austraaliast Ameerika Ühendriikideni. Argentina, Brasiilia, Kanada, Prantsusmaa, Saksamaa, Mehhiko, Suurbritannia, Hispaania, …
-\n</string>
+    <string name="osmand_plus_extended_description_part7">Tee otse OSM kaastööd \n • Teata andmevigadest \n • Laadi GPX radu OSM keskkonda otse rakendusest \n • Lisa huvipunkte ja laadi need kohe üles OSM keskkonda (või hiljem internetiühenduse tekkimisel) \n • Kui soovid, siis salvesta teekonda ka taustrežiimis (kui seade on puhkeolekus) \n OsmAnd on aktiivselt arendatud avatud lähtekoodiga tarkvara. Kõik saavad rakendusse panustada, teatades vigadest, parandades tõlkeid või kodeerides uusi funktsioone. Lisaks toetub projekt rahalisele toetusele nii programmeerimiseks kui ka uue funktsionaalsuse testimiseks.</string>
+    <string name="osmand_plus_extended_description_part8">Ligikaudne kaardi leviala ja kvaliteet: \n • Lääne-Euroopa: **** \n • Ida-Euroopa: *** \n • Venemaa: *** \n • Põhja-Ameerika: *** \n • Lõuna-Ameerika: ** \n • Aasia: ** \n • Jaapan ja Korea: *** \n • Lähis-Ida: ** \n • Aafrika: ** \n • Antarktika: * \n Enamike riikide andmed üle maailma on allalaadimiseks saadaval \n Afganistanist Zimbabweni, Austraaliast Ameerika Ühendriikideni. Argentina, Brasiilia, Kanada, Prantsusmaa, Saksamaa, Mehhiko, Suurbritannia, Hispaania, …</string>
     <string name="save_poi_too_many_uppercase">Nimi sisaldab liiga palju suurtähti. Jätkata\?</string>
     <string name="retry">Proovi uuesti</string>
     <string name="add_waypoint">Lisa teekonnapunkt</string>
@@ -3233,7 +3117,7 @@
     <string name="move_point">Teisalda punkt</string>
     <string name="osm_recipients_label">OSM saajad</string>
     <string name="total_donations">Annetusi kokku</string>
-    <string name="day_off_label">väljas</string>
+    <string name="day_off_label">suletud</string>
     <string name="winter_and_ski_renderer">Talv ja suusatamine</string>
     <string name="touring_view_renderer">Reisi vaade</string>
     <string name="nautical_renderer">Merenduslik</string>
@@ -3665,21 +3549,7 @@
     <string name="export_import_quick_actions_with_profiles_promo">Ekspordi või impordi kiirtoiminguid koos rakenduse profiilidega.</string>
     <string name="delete_all_actions_message_q">Kustutada tagasivõtmatult %d kiirtegevust\?</string>
     <string name="route_between_points_desc">Vali kas soovid ühendada punkte sirge joonega või arvutada nendevahelist teekonda selle alusel kuidas järgnevalt on määratud.</string>
-    <string name="release_3_8">• Uuendatud teekonnaplaneerija: võimaldab kasutada igal segmendil erinevat liikumisviisi ning radade kaasamist
-\n
-\n • Uus radade kujunduse seadistamise menüü: valida saad värve, joone paksust, suunanoolte kuvamist ning alguse ja lõpu ikoone
-\n
-\n • Rattasõlmede parandatud nähtavus
-\n
-\n • Radasid saad nüüd puudutada, misjärel kuvatakse põhiteabega kontekstimenüü
-\n
-\n • Parandatud on otsingualgoritme
-\n
-\n • Parandatud raja jälgimise valikud navigeerimisel
-\n
-\n • Parandatud on profiili seadistuste impordi ja ekspordiga seotud vead
-\n
-\n</string>
+    <string name="release_3_8">• Uuendatud teekonnaplaneerija: võimaldab kasutada igal segmendil erinevat liikumisviisi ning radade kaasamist \n \n • Uus radade kujunduse seadistamise menüü: valida saad värve, joone paksust, suunanoolte kuvamist ning alguse ja lõpu ikoone \n \n • Rattasõlmede parandatud nähtavus \n \n • Radasid saad nüüd puudutada, misjärel kuvatakse põhiteabega kontekstimenüü \n \n • Parandatud on otsingualgoritme \n \n • Parandatud raja jälgimise valikud navigeerimisel \n \n • Parandatud on profiili seadistuste impordi ja ekspordiga seotud vead</string>
     <string name="gpx_monitoring_stop">Peata teekonna salvestamine</string>
     <string name="gpx_monitoring_start">Jätka teekonna salvestamist</string>
     <string name="accessibility_mode_disabled">Režiim erivajadusega kasutajatele on sinu Android\'i seadmes välja lülitatud.</string>
@@ -3779,31 +3649,7 @@
 \n
 \nKui see on lubatud, kasutab OsmAnd süsteemi ajalõpu sätet.</string>
     <string name="use_system_screen_timeout">Kasutage süsteemi ekraani ajalõppu</string>
-    <string name="release_3_6">• Profiilid: nüüd saate muuta järjestust, määrata kaardi ikooni, muuta kõiki põhiprofiilide sätteid ja taastada need vaikeseadetesse
-\n
-\n • Navigatsioonis on lisatud väljumisnumber
-\n
-\n • Ümber töötatud pistikprogrammi seaded
-\n
-\n • Kõigile profiilidele kiireks juurdepääsuks kuvatakse ümbertöödeldud seadete ekraan
-\n
-\n • Lisatud võimalus seadete kopeerimiseks teisest profiilist
-\n
-\n • Lisatud võime muuta järjestust või peita HP kategooriaid otsingus
-\n
-\n • POI ikoonid on kaardil õigesti joondatud
-\n
-\n • Kaardi seadistamiseks on lisatud päikeseloojangu / päikesetõusu andmed
-\n
-\n • Kaardile on lisatud kodu / töökoha ikoonid
-\n
-\n • Seadetesse on lisatud mitmerealise kirjelduse tugi
-\n
-\n • Jaapani kaardile on lisatud õige transliteratsioon
-\n
-\n • Lisatud on Antarktika kaart
-\n
-\n</string>
+    <string name="release_3_6">• Profiilid: nüüd saate muuta järjestust, määrata kaardi ikooni, muuta kõiki põhiprofiilide sätteid ja taastada need vaikeseadetesse \n \n • Navigatsioonis on lisatud väljumisnumber \n \n • Ümber töötatud pistikprogrammi seaded \n \n • Kõigile profiilidele kiireks juurdepääsuks kuvatakse ümbertöödeldud seadete ekraan \n \n • Lisatud võimalus seadete kopeerimiseks teisest profiilist \n \n • Lisatud võime muuta järjestust või peita HP kategooriaid otsingus \n \n • POI ikoonid on kaardil õigesti joondatud \n \n • Kaardi seadistamiseks on lisatud päikeseloojangu / päikesetõusu andmed \n \n • Kaardile on lisatud kodu / töökoha ikoonid \n \n • Seadetesse on lisatud mitmerealise kirjelduse tugi \n \n • Jaapani kaardile on lisatud õige transliteratsioon \n \n • Lisatud on Antarktika kaart</string>
     <string name="route_recalculation_dist_descr">Teekond arvutatakse ümber, kui vahemaa teekonnani on suurem kui määratud parameeter</string>
     <string name="plugin_disabled_descr">See pistikprogramm on eraldi rakendus ja tema väljalülitamine ei tähenda rakenduse eemaldamist.
 \n
@@ -3860,15 +3706,7 @@
     <string name="gpx_upload_private_visibility_descr">\"Privaatne\" tähendab, et jälg ei ilmu üheski avalikus nimekirjas, kuid selle mitte-kronoloogilises järjekorras olevad jälgimispunktid on avalikus GPS API-s ilma ajatempliteta kättesaadavad.</string>
     <string name="gpx_upload_identifiable_visibility_descr">\"Äratuntav\" tähendab, et jälge näidatakse avalikult teie GPS-jälgedes ja avalikes GPS-jälgede nimekirjades, st teised kasutajad saavad toorjälje alla laadida ja seostada seda teie kasutajanimega. GPS API-st saadud avalikud ajamärgistatud jälgimispunkti andmed, mida edastatakse jälgimispunktide API kaudu, viitavad teie algsele jälgimislehele.</string>
     <string name="gpx_upload_trackable_visibility_descr">\"Jälgitav\" tähendab, et jälg ei ilmu üheski avalikus nimekirjas, kuid töödeldud jälgimispunktid koos ajamärgiga (mida ei saa otseselt teiega seostada) ilmuvad avalikult GPS API-st allalaadimise kaudu.</string>
-    <string name="release_3_9">• Lisatud võimalus eksportida ja importida kõiki andmeid, sealhulgas seadeid, ressursse, oma kohti
-\n
-\n• Marsruudi planeerimine: graafikud rööbastee segmentide marsruudiga ja lisaks võime luua ja muuta mitut raja segmenti
-\n
-\n• Lisatud OAuth autentimise meetod OpenStreetMap, täiustatud UI OSM dialooge
-\n
-\n• Kohandatud lemmikvärvide ja asukohapunktide jälgimise toetus
-\n
-\n</string>
+    <string name="release_3_9">• Lisatud võimalus eksportida ja importida kõiki andmeid, sealhulgas seadeid, ressursse, oma kohti \n \n• Marsruudi planeerimine: graafikud rööbastee segmentide marsruudiga ja lisaks võime luua ja muuta mitut raja segmenti \n \n• Lisatud OAuth autentimise meetod OpenStreetMap, täiustatud UI OSM dialooge \n \n• Kohandatud lemmikvärvide ja asukohapunktide jälgimise toetus</string>
     <string name="reverse_all_points">Pööra kõik punktid ümber</string>
     <string name="profile_by_default_description">Vali rakenduse käivitamisel kasutatav profiil.</string>
     <string name="shared_string_last_used">Viimati kasutatud</string>
@@ -4117,19 +3955,7 @@
     <string name="in_grace_period">Ajapikendusperioodil</string>
     <string name="on_hold">Ootel</string>
     <string name="expired">Aegunud</string>
-    <string name="release_4_0_beta">• Lisatud võimalus kõrgusjoonte allalaadimiseks jalgades
-\n
-\n • Plaani marsruudi maastik: lisatud vahekaardid punktide või graafikute vahel vahetamiseks
-\n
-\n • OsmAnd Live värskendused viidi üle jaotisse \"Allalaadimised &gt; Uuendused\".
-\n
-\n • Radu saab nüüd värvida kõrguse, kiiruse või kallakuga.
-\n
-\n • Lisatud võimalus muuta marsruudiliini välimust.
-\n
-\n • Uuendatud dialoog \"Reisi salvestamine\".
-\n
-\n</string>
+    <string name="release_4_0_beta">• Lisatud võimalus kõrgusjoonte allalaadimiseks jalgades \n \n • Plaani marsruudi maastik: lisatud vahekaardid punktide või graafikute vahel vahetamiseks \n \n • OsmAnd Live värskendused viidi üle jaotisse \"Allalaadimised &gt; Uuendused\". \n \n • Radu saab nüüd värvida kõrguse, kiiruse või kallakuga. \n \n • Lisatud võimalus muuta marsruudiliini välimust. \n \n • Uuendatud dialoog \"Reisi salvestamine\"</string>
     <string name="update_all_maps_added">Uuendada kõik %1$s lisatud kaardid\?</string>
     <string name="shared_string_feet">jalga</string>
     <string name="srtm_unit_format">Kõrgusjoonte ühiku variant</string>
@@ -4177,27 +4003,7 @@
 \nAndmete praegune versioon salvestatakse serverisse ning varem tehtud muudatusi ei saa tagasi võtta.</string>
     <string name="backup_version_history_delete_descr">Kas kustutame vananenud andmetüüpide muutuste logi OsmAndi pilves\?</string>
     <string name="purchases_feature_desc_unlimited_map_download">Hangi kõigi mandrite ja piirkondade võrguühenduseta kaartide piiramatud allalaadimised.</string>
-    <string name="release_4_0">• Pilvepõhine varundamine
-\n
-\n • Lisatud öine režiim \"Topo\" renderdamisstiili jaoks
-\n
-\n • Lisatud võimalus kõrgusjoonte allalaadimiseks jalgades
-\n
-\n • Jälgi saab nüüd värvida kõrguse, kiiruse või kallakuga.
-\n
-\n • Uuendatud dialoog \"Reisi salvestamine\"
-\n
-\n • Kaugus koputuse järgi viidi raadiuse joonlauast eraldi valikuks
-\n
-\n • Marsruudi plaan: lisatud võimalus muuta navigeerimisvalikuid, pääseda kaardile ja otsingule ilma marsruudi plaanist lahkumata.
-\n
-\n • Uus ekraan \"Ostmine\", kus on üksikasjalik teave ostmise kohta.
-\n
-\n • Lisatud võimalus muuta marsruudiliini välimust.
-\n
-\n • OsmAnd Live\'i uuendused on viidud jaotisse \"Allalaadimised &gt; Uuendused\".
-\n
-\n</string>
+    <string name="release_4_0">• Pilvepõhine varundamine \n \n • Lisatud öine režiim \"Topo\" renderdamisstiili jaoks \n \n • Lisatud võimalus kõrgusjoonte allalaadimiseks jalgades \n \n • Jälgi saab nüüd värvida kõrguse, kiiruse või kallakuga. \n \n • Uuendatud dialoog \"Reisi salvestamine\" \n \n • Kaugus koputuse järgi viidi raadiuse joonlauast eraldi valikuks \n \n • Marsruudi plaan: lisatud võimalus muuta navigeerimisvalikuid, pääseda kaardile ja otsingule ilma marsruudi plaanist lahkumata. \n \n • Uus ekraan \"Ostmine\", kus on üksikasjalik teave ostmise kohta. \n \n • Lisatud võimalus muuta marsruudiliini välimust. \n \n • OsmAnd Live\'i uuendused on viidud jaotisse \"Allalaadimised &gt; Uuendused\"</string>
     <string name="duration_moment_ago">hetk tagasi</string>
     <string name="search_more">Otsi veel …</string>
     <string name="online_maps_searching_descr">Internetist otsimine…</string>
@@ -4309,31 +4115,7 @@
     <string name="shared_storage_warning_description">Uute Androidi reeglite tõttu kaotab OsmAnd 4.2 alates novembrist 2021 juurdepääsu jagatud salvestusruumile.
 \n
 \nPalun muuda salvestusruum jagatud salvestusruumist saadaolevaks salvestusruumiks, vastasel juhul kaotab rakendus juurdepääsu sinu andmetele, sealhulgas võrguühenduseta kaartidele, GPX-radadele ja muule sarnasele.</string>
-    <string name="release_4_1">• Lisatud Android Auto esialgne tugi
-\n
-\n • Kasutajaliidese värskendus UTM -i koordinaatide otsimiseks
-\n
-\n • GPS filter GPX radade jaoks
-\n
-\n • Kõrguste vidin (Pro-versioonis)
-\n
-\n • Lemmikud: lisatud võimalus vaadata hiljuti kasutatud ikoone
-\n
-\n • Marsruudi planeerimine: kasutab pärast käivitamist valitud profiili
-\n
-\n • Fikseeritud Mapillary kiht, pistikprogramm on nüüd vaikimisi keelatud
-\n
-\n • Lisatud ekraan rakenduse kogu ajaloo haldamiseks
-\n
-\n • Kaardi orientatsiooni ei lähtestata pärast rakenduse taaskäivitamist
-\n
-\n • Täiustatud SRTM kõrguse markerite renderdamine
-\n
-\n • Fikseeritud araabiakeelsete siltide kuvamine kaardil
-\n
-\n • Parandatud erinevad marsruutimisprobleemid
-\n
-\n</string>
+    <string name="release_4_1">• Lisatud Android Auto esialgne tugi \n \n • Kasutajaliidese värskendus UTM -i koordinaatide otsimiseks \n \n • GPS filter GPX radade jaoks \n \n • Kõrguste vidin (Pro-versioonis) \n \n • Lemmikud: lisatud võimalus vaadata hiljuti kasutatud ikoone \n \n • Marsruudi planeerimine: kasutab pärast käivitamist valitud profiili \n \n • Fikseeritud Mapillary kiht, pistikprogramm on nüüd vaikimisi keelatud \n \n • Lisatud ekraan rakenduse kogu ajaloo haldamiseks \n \n • Kaardi orientatsiooni ei lähtestata pärast rakenduse taaskäivitamist \n \n • Täiustatud SRTM kõrguse markerite renderdamine \n \n • Fikseeritud araabiakeelsete siltide kuvamine kaardil \n \n • Parandatud erinevad marsruutimisprobleemid</string>
     <string name="rendering_attr_natureReserves_name">Looduskaitseala</string>
     <string name="is_disabled">%1$s on välja lülitatud</string>
     <string name="history_is_disabled_descr">Selleks, et saaksid lihtsamini kasutada varasemaid tulemusi, võta kasutusele ajaloo salvestamine.</string>
@@ -4451,25 +4233,7 @@
     <string name="distance_during_navigation">Vahemaa navigeerimisel</string>
     <string name="round_up">Ümardatud</string>
     <string name="precise">Täpne</string>
-    <string name="release_4_7">• Uus vidin „Spidomeeter“ on ühilduv Android Auto\'ga
-\n
-\n • Kohenda kaarti lisades mitmeid „Kiirvalikute“ nuppe
-\n
-\n • Parandatud andmete loetavus graafikutes
-\n
-\n • Lisasime radade filtreerimisvõimaluse sensorite alusel
-\n
-\n • Parandasime välimuse kohandamist radade tüüpide kaupa
-\n
-\n • Lisasime täiendavate GPX-siltide toe
-\n
-\n • Nüüd saad kohandada valikut „Vahemaa navigeerimisel“: valida võid täpsete ja ümardatud numbrite vahel
-\n
-\n • Ühine kasutajaliides radade valikul
-\n
-\n • OpenStreetMap\'i sisselogimine kasutab autentimisel OAuth\'i versiooni 2.0
-\n
-\n</string>
+    <string name="release_4_7">• Uus vidin „Spidomeeter“ on ühilduv Android Auto\'ga \n \n • Kohenda kaarti lisades mitmeid „Kiirvalikute“ nuppe \n \n • Parandatud andmete loetavus graafikutes \n \n • Lisasime radade filtreerimisvõimaluse sensorite alusel \n \n • Parandasime välimuse kohandamist radade tüüpide kaupa \n \n • Lisasime täiendavate GPX-siltide toe \n \n • Nüüd saad kohandada valikut „Vahemaa navigeerimisel“: valida võid täpsete ja ümardatud numbrite vahel \n \n • Ühine kasutajaliides radade valikul \n \n • OpenStreetMap\'i sisselogimine kasutab autentimisel OAuth\'i versiooni 2.0</string>
     <string name="shared_string_additional">Täiendavalt</string>
     <string name="shared_string_copyright">Autoriõigused</string>
     <string name="topography_maps">Topograafilised kaardid</string>
@@ -4679,7 +4443,7 @@
     <string name="rendering_value_all_name">Kõik</string>
     <string name="shared_string_size">Suurus</string>
     <string name="help_article_map_legend_nautical_map_name">Merekaardi stiil</string>
-    <string name="compass_click_desc">Vihje: kaardi suuna muutmiseks klõpsa kompassi ikoonil.</string>
+    <string name="compass_click_desc">Kaardi suuna muutmiseks topeltklõpsa kompassi ikoonil.</string>
     <string name="route_roundabout_exit">Pööra ära: %1$d</string>
     <string name="rendering_value_sacScale_name">SAC-i alusel</string>
     <string name="tomorrow">Homme</string>
@@ -4896,4 +4660,6 @@
     <string name="smart_folder_saved">Nutikas kaust on salvestatud</string>
     <string name="map_settings_weather_wind_animation">Tuule animatsioon</string>
     <string name="map_settings_weather_cloud">Pilved</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="show_minor_turns">Liikumisel otse, kuva väikestel ristmikel</string>
 </resources>

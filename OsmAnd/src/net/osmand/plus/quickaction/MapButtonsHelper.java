@@ -14,20 +14,84 @@ import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.configmap.routes.actions.*;
+import net.osmand.plus.configmap.routes.actions.ShowHideCycleRoutesAction;
+import net.osmand.plus.configmap.routes.actions.ShowHideDifficultyClassificationAction;
+import net.osmand.plus.configmap.routes.actions.ShowHideFitnessTrailsAction;
+import net.osmand.plus.configmap.routes.actions.ShowHideHikingRoutesAction;
+import net.osmand.plus.configmap.routes.actions.ShowHideHorseRoutesAction;
+import net.osmand.plus.configmap.routes.actions.ShowHideMtbRoutesAction;
+import net.osmand.plus.configmap.routes.actions.ShowHideRunningRoutesAction;
+import net.osmand.plus.configmap.routes.actions.ShowHideSkiSlopesAction;
+import net.osmand.plus.configmap.routes.actions.ShowHideWhitewaterSportsAction;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.ShowHideMapillaryAction;
-import net.osmand.plus.quickaction.actions.*;
+import net.osmand.plus.quickaction.actions.ChangeMapOrientationAction;
+import net.osmand.plus.quickaction.actions.DayNightModeAction;
+import net.osmand.plus.quickaction.actions.DisplayPositionAction;
+import net.osmand.plus.quickaction.actions.FavoriteAction;
+import net.osmand.plus.quickaction.actions.GPXAction;
+import net.osmand.plus.quickaction.actions.LockScreenAction;
+import net.osmand.plus.quickaction.actions.MapScrollDownAction;
+import net.osmand.plus.quickaction.actions.MapScrollLeftAction;
+import net.osmand.plus.quickaction.actions.MapScrollRightAction;
+import net.osmand.plus.quickaction.actions.MapScrollUpAction;
+import net.osmand.plus.quickaction.actions.MapStyleAction;
+import net.osmand.plus.quickaction.actions.MapZoomInAction;
+import net.osmand.plus.quickaction.actions.MapZoomOutAction;
+import net.osmand.plus.quickaction.actions.MarkerAction;
+import net.osmand.plus.quickaction.actions.MoveToMyLocationAction;
+import net.osmand.plus.quickaction.actions.NavAddDestinationAction;
+import net.osmand.plus.quickaction.actions.NavAddFirstIntermediateAction;
+import net.osmand.plus.quickaction.actions.NavAutoZoomMapAction;
+import net.osmand.plus.quickaction.actions.NavDirectionsFromAction;
+import net.osmand.plus.quickaction.actions.NavRemoveNextDestination;
+import net.osmand.plus.quickaction.actions.NavReplaceDestinationAction;
+import net.osmand.plus.quickaction.actions.NavResumePauseAction;
+import net.osmand.plus.quickaction.actions.NavStartStopAction;
+import net.osmand.plus.quickaction.actions.NavVoiceAction;
+import net.osmand.plus.quickaction.actions.NavigatePreviousScreenAction;
+import net.osmand.plus.quickaction.actions.NextAppProfileAction;
+import net.osmand.plus.quickaction.actions.OpenNavigationViewAction;
+import net.osmand.plus.quickaction.actions.OpenSearchViewAction;
+import net.osmand.plus.quickaction.actions.PreviousAppProfileAction;
+import net.osmand.plus.quickaction.actions.RouteAction;
+import net.osmand.plus.quickaction.actions.ShowHideDrawerAction;
+import net.osmand.plus.quickaction.actions.ShowHideFavoritesAction;
+import net.osmand.plus.quickaction.actions.ShowHideGpxTracksAction;
+import net.osmand.plus.quickaction.actions.ShowHidePoiAction;
+import net.osmand.plus.quickaction.actions.ShowHideTransportLinesAction;
+import net.osmand.plus.quickaction.actions.SwitchProfileAction;
+import net.osmand.plus.quickaction.actions.special.OpenWunderLINQDatagridAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.mapwidgets.configure.buttons.*;
+import net.osmand.plus.views.mapwidgets.configure.buttons.CompassButtonState;
+import net.osmand.plus.views.mapwidgets.configure.buttons.ConfigureMapButtonState;
+import net.osmand.plus.views.mapwidgets.configure.buttons.DrawerMenuButtonState;
+import net.osmand.plus.views.mapwidgets.configure.buttons.Map3DButtonState;
+import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
+import net.osmand.plus.views.mapwidgets.configure.buttons.MyLocationButtonState;
+import net.osmand.plus.views.mapwidgets.configure.buttons.NavigationMenuButtonState;
+import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
+import net.osmand.plus.views.mapwidgets.configure.buttons.QuickSearchButtonState;
+import net.osmand.plus.views.mapwidgets.configure.buttons.ZoomInButtonState;
+import net.osmand.plus.views.mapwidgets.configure.buttons.ZoomOutButtonState;
 import net.osmand.util.Algorithms;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /**
  * Created by rosty on 12/27/16.
@@ -201,7 +265,7 @@ public class MapButtonsHelper {
 	}
 
 	@NonNull
-	public List<QuickActionButtonState> getButtonsStates() {
+	public List<QuickActionButtonState> getQuickActionButtonsStates() {
 		return quickActionStates;
 	}
 
@@ -211,6 +275,13 @@ public class MapButtonsHelper {
 				compassButtonState, drawerMenuButtonState, navigationMenuButtonState,
 				map3DButtonState, myLocationButtonState, zoomInButtonState, zoomOutButtonState
 		);
+	}
+
+	@NonNull
+	public List<MapButtonState> getAllButtonsStates() {
+		List<MapButtonState> list = new ArrayList<>(getQuickActionButtonsStates());
+		list.addAll(getDefaultButtonsStates());
+		return list;
 	}
 
 	@NonNull
@@ -389,6 +460,7 @@ public class MapButtonsHelper {
 		// interface
 		allTypes.add(OpenNavigationViewAction.TYPE);
 		allTypes.add(OpenSearchViewAction.TYPE);
+		allTypes.add(OpenWunderLINQDatagridAction.TYPE);
 		allTypes.add(ShowHideDrawerAction.TYPE);
 		allTypes.add(NavigatePreviousScreenAction.TYPE);
 		allTypes.add(LockScreenAction.TYPE);
@@ -433,15 +505,17 @@ public class MapButtonsHelper {
 		return list;
 	}
 
-	public void resetQuickActionsForMode(@NonNull ApplicationMode appMode) {
-		for (QuickActionButtonState buttonState : getButtonsStates()) {
-			buttonState.resetForMode(appMode);
+	public void resetButtonStatesForMode(@NonNull ApplicationMode mode, @NonNull List<MapButtonState> states) {
+		for (MapButtonState buttonState : states) {
+			buttonState.resetToDefault(mode);
 		}
 		updateActionTypes();
 	}
 
-	public void copyQuickActionsFromMode(@NonNull ApplicationMode toAppMode, @NonNull ApplicationMode fromAppMode) {
-		for (QuickActionButtonState buttonState : getButtonsStates()) {
+	public void copyButtonStatesFromMode(@NonNull ApplicationMode toAppMode,
+	                                     @NonNull ApplicationMode fromAppMode,
+	                                     @NonNull List<MapButtonState> states) {
+		for (MapButtonState buttonState : states) {
 			buttonState.copyForMode(fromAppMode, toAppMode);
 		}
 		updateActionTypes();
@@ -587,9 +661,13 @@ public class MapButtonsHelper {
 	}
 
 	@NonNull
+	public String createNewButtonStateId() {
+		return DEFAULT_BUTTON_ID + "_" + System.currentTimeMillis();
+	}
+
+	@NonNull
 	public QuickActionButtonState createNewButtonState() {
-		String id = DEFAULT_BUTTON_ID + "_" + System.currentTimeMillis();
-		return new QuickActionButtonState(app, id);
+		return new QuickActionButtonState(app, createNewButtonStateId());
 	}
 
 	public void addQuickActionButtonState(@NonNull QuickActionButtonState buttonState) {
@@ -600,6 +678,7 @@ public class MapButtonsHelper {
 
 	public void removeQuickActionButtonState(@NonNull QuickActionButtonState buttonState) {
 		settings.QUICK_ACTION_BUTTONS.removeValue(buttonState.getId());
+		buttonState.onButtonStateRemoved();
 		updateActiveActions();
 		notifyUpdates();
 	}

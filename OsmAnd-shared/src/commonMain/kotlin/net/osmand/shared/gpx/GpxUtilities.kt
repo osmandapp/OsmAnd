@@ -58,6 +58,7 @@ object GpxUtilities {
 	const val OSM_PREFIX = "osm_tag_"
 	const val AMENITY_PREFIX = "amenity_"
 	const val AMENITY_ORIGIN_EXTENSION = "amenity_origin"
+	const val ACTIVITY_TYPE = OSMAND_EXTENSIONS_PREFIX + "activity"
 
 	const val GAP_PROFILE_TYPE = "gap"
 	const val TRKPT_INDEX_EXTENSION = "trkpt_idx"
@@ -72,9 +73,28 @@ object GpxUtilities {
 	const val TRAVEL_GPX_CONVERT_MULT_1 = 2
 	const val TRAVEL_GPX_CONVERT_MULT_2 = 5
 
-	private const val GPX_TIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-	private const val GPX_TIME_NO_TIMEZONE_PATTERN = "yyyy-MM-dd'T'HH:mm:ss"
-	private const val GPX_TIME_PATTERN_TZ = "yyyy-MM-dd'T'HH:mm:ssXXX"
+	private var oneOffLogParseTimeErrors = true
+	private const val GPX_TIME_FORMATTER = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+
+	class TimePatterns {
+		companion object {
+			val formats = mutableListOf<DateTimeFormat<DateTimeComponents>>()
+			init {
+				val patterns = listOf(
+					"yyyy-MM-dd'T'HH:mm:ssXXXXX",     // GPX_TIME_PATTERN_TZ
+					"yyyy-MM-dd'T'HH:mm:ss",          // GPX_TIME_PATTERN_NO_TZ
+					"yyyy-MM-dd'T'HH:mmXXXXX",        // GPX_TIME_PATTERN_NO_SECONDS
+					"yyyy-MM-dd'T'HH:mm",             // GPX_TIME_PATTERN_NO_SECONDS_NO_TZ
+					"yyyy-MM-dd'T'HH:mm:ssXXXXX'Z'",  // GPX_TIME_PATTERN_TZ_EXTRA_Z
+					"yyyy-MM-dd'T'HH:mm:ssXXXX",      // GPX_TIME_PATTERN_TZ_NO_SEPARATOR
+					// Note: any pattern updates must be covered by ParseTimeTest.kt
+				);
+				for (pattern in patterns) {
+					formats.add(DateTimeComponents.Format { byUnicodePattern(pattern) })
+				}
+			}
+		}
+	}
 
 	private val SUPPORTED_EXTENSION_TAGS = mapOf(
 		"heartrate" to PointAttributes.SENSOR_TAG_HEART_RATE,
@@ -85,7 +105,8 @@ object GpxUtilities {
 		"cadence" to PointAttributes.SENSOR_TAG_CADENCE,
 		"temp" to PointAttributes.SENSOR_TAG_TEMPERATURE_W,
 		"wtemp" to PointAttributes.SENSOR_TAG_TEMPERATURE_W,
-		"atemp" to PointAttributes.SENSOR_TAG_TEMPERATURE_A
+		"atemp" to PointAttributes.SENSOR_TAG_TEMPERATURE_A,
+		"activity" to ACTIVITY_TYPE
 	)
 
 	const val RADIUS_DIVIDER = 5000
@@ -306,9 +327,9 @@ object GpxUtilities {
 		fun toStringBundle(): StringBundle {
 			val bundle = StringBundle()
 			bundle.putString("name", name)
-//			color?.let {
+			if (color != 0) {
 				bundle.putString("color", KAlgorithms.colorToString(color))
-//			}
+			}
 			if (!KAlgorithms.isEmpty(iconName)) {
 				bundle.putString(ICON_NAME_EXTENSION, iconName)
 			}
@@ -733,12 +754,12 @@ object GpxUtilities {
 				extensions.remove(BACKGROUND_TYPE_EXTENSION)
 			}
 		}
-		assignExtensionWriter(p, extensions)
+		assignExtensionWriter(p, extensions, "extensions")
 		writeExtensions(serializer, null, p, null)
 		progress?.progress(1)
 	}
 
-	fun assignExtensionWriter(wptPt: WptPt, extensions: Map<String, String>) {
+	fun assignExtensionWriter(wptPt: WptPt, extensions: Map<String, String>, regularExtensionsKey: String) {
 		val regularExtensions = HashMap<String, String>()
 		val gpxtpxExtensions = HashMap<String, String>()
 		for ((key, value) in extensions) {
@@ -750,7 +771,7 @@ object GpxUtilities {
 			wptPt.getDeferredExtensionsToWrite()[key] = value
 		}
 		if (regularExtensions.isNotEmpty()) {
-			wptPt.setExtensionsWriter("extensions", createExtensionsWriter(regularExtensions, true))
+			wptPt.setExtensionsWriter(regularExtensionsKey, createExtensionsWriter(regularExtensions, true))
 		}
 		if (gpxtpxExtensions.isNotEmpty()) {
 			wptPt.setExtensionsWriter("gpxtpx:TrackPointExtension", createGpxTpxExtensionsWriter(gpxtpxExtensions, false))
@@ -882,43 +903,38 @@ object GpxUtilities {
 		return format.format(Instant.fromEpochMilliseconds(time).toLocalDateTime(TimeZone.UTC))
 	}
 
-	fun parseTime(text: String): Long {
-		return parseTime(text, getTimeFormatterTZ())
-	}
+	fun parseTime(iso8601text: String): Long {
+		var milliseconds = 0.0
+		var noFractionalSeconds = iso8601text;
+		val isIndex = noFractionalSeconds.indexOf('.')
 
-	private fun parseTime(text: String, format: DateTimeFormat<DateTimeComponents>): Long {
-		var time: Long = 0
-		try {
-			time = flexibleGpxTimeParser(text, format)
-		} catch (e: Exception) {
-			try {
-				time = getTimeNoTimeZoneFormatter().parse(text).toInstantUsingOffset()
-					.toEpochMilliseconds()
-			} catch (e: Exception) {
-				log.error("Failed to parse date $text", e)
-			}
-		}
-		return time
-	}
-
-	@Throws(Exception::class)
-	private fun flexibleGpxTimeParser(
-		timeStr: String,
-		parser: DateTimeFormat<DateTimeComponents>
-	): Long {
-		var text = timeStr
-		var ms = 0.0
-		val isIndex = text.indexOf('.')
 		if (isIndex > 0) {
 			var esIndex = isIndex + 1
-			while (esIndex < text.length && text[esIndex].isDigit()) {
+			while (esIndex < noFractionalSeconds.length && noFractionalSeconds[esIndex].isDigit()) {
 				esIndex++
 			}
-			ms = ("0" + text.substring(isIndex, esIndex)).toDouble()
-			text = text.substring(0, isIndex) + text.substring(esIndex)
+			milliseconds = ("0" + noFractionalSeconds.substring(isIndex, esIndex)).toDouble()
+			noFractionalSeconds = noFractionalSeconds.substring(0, isIndex) + noFractionalSeconds.substring(esIndex)
 		}
-		return parser.parse(text).toInstantUsingOffset()
-			.toEpochMilliseconds() + (ms * 1000).toLong()
+
+		// Do trim ([ \t\r\n] etc) to avoid XML-tag parsing nuances.
+		// Replace Date-Time space-delimiter -> "T" (RFC3339 in ISO8601)
+		val rfc3339 = noFractionalSeconds.trim().replaceFirst(' ', 'T');
+
+		for (fmt in TimePatterns.formats) {
+			try {
+				return fmt.parse(rfc3339).toInstantUsingOffset()
+					.toEpochMilliseconds() + (milliseconds * 1000).toLong()
+			} catch (e: Exception) {
+				// Continue to the next format
+			}
+		}
+
+		if (oneOffLogParseTimeErrors) {
+			oneOffLogParseTimeErrors = false
+			log.error("Failed to parse date: '$iso8601text'")
+		}
+		return 0
 	}
 
 	fun getCreationTime(gpxFile: GpxFile?): Long {
@@ -942,21 +958,7 @@ object GpxUtilities {
 	private fun getTimeFormatter(): DateTimeFormat<LocalDateTime> {
 		@OptIn(FormatStringsInDatetimeFormats::class)
 		return LocalDateTime.Format {
-			byUnicodePattern(GPX_TIME_PATTERN)
-		}
-	}
-
-	@OptIn(FormatStringsInDatetimeFormats::class)
-	private fun getTimeNoTimeZoneFormatter(): DateTimeFormat<DateTimeComponents> {
-		return DateTimeComponents.Format {
-			byUnicodePattern(GPX_TIME_NO_TIMEZONE_PATTERN)
-		}
-	}
-
-	@OptIn(FormatStringsInDatetimeFormats::class)
-	private fun getTimeFormatterTZ(): DateTimeFormat<DateTimeComponents> {
-		return DateTimeComponents.Format {
-			byUnicodePattern(GPX_TIME_PATTERN_TZ)
+			byUnicodePattern(GPX_TIME_FORMATTER)
 		}
 	}
 
@@ -997,6 +999,7 @@ object GpxUtilities {
 		extensionsReader: GpxExtensionsReader?,
 		addGeneralTrack: Boolean
 	): GpxFile {
+		oneOffLogParseTimeErrors = true
 		val gpxFile = GpxFile(null)
 		gpxFile.metadata.time = 0
 		var parser: XmlPullParser? = null

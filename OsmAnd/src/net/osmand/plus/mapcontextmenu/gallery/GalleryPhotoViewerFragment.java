@@ -62,8 +62,12 @@ public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
 	private void setupImageView(@NonNull ViewGroup view) {
 		imageView = view.findViewById(R.id.image);
 
-		ImageCard imageCard = controller.getOnlinePhotoCards().get(selectedPosition);
-		downloadThumbnail(imageCard);
+		if (controller != null) {
+			ImageCard imageCard = controller.getOnlinePhotoCards().get(selectedPosition);
+			if (imageCard != null) {
+				downloadThumbnail(imageCard);
+			}
+		}
 
 		imageView.setOnDoubleTapListener(new SimpleOnGestureListener() {
 			@Override

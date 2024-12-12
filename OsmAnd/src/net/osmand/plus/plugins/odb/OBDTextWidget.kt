@@ -1,101 +1,166 @@
 package net.osmand.plus.plugins.odb
 
+import android.view.View
+import net.osmand.plus.OsmandApplication
+import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.plugins.PluginsHelper
-import net.osmand.plus.plugins.odb.OBDWidgetDataFieldType.*
+import net.osmand.plus.plugins.weather.units.TemperatureUnit
+import net.osmand.plus.settings.backend.preferences.CommonPreference
+import net.osmand.plus.settings.backend.preferences.OsmandPreference
+import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings
+import net.osmand.plus.views.mapwidgets.WidgetType
 import net.osmand.plus.views.mapwidgets.WidgetsPanel
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget
+import net.osmand.plus.widgets.popup.PopUpMenuItem
+import net.osmand.shared.obd.OBDCommand
 import net.osmand.shared.obd.OBDDataComputer
 import net.osmand.shared.obd.OBDDataComputer.OBDComputerWidget
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget
-import net.osmand.shared.obd.OBDDataComputer.OBDComputerWidgetFormatter
-import net.osmand.shared.obd.OBDFuelTypeFormatter
 import net.osmand.util.Algorithms
 
-class OBDTextWidget @JvmOverloads constructor(
+open class OBDTextWidget(
 	mapActivity: MapActivity,
-	private val fieldType: OBDWidgetDataFieldType, customId: String? = null,
-	widgetsPanel: WidgetsPanel? = null) :
-	SimpleWidget(mapActivity, fieldType.widgetType, customId, widgetsPanel) {
-	private val plugin: VehicleMetricsPlugin = PluginsHelper.getPlugin(VehicleMetricsPlugin::class.java)
-	private val widgetComputer: OBDComputerWidget
+	widgetType: WidgetType,
+	private val fieldType: OBDTypeWidget,
+	customId: String?,
+	widgetsPanel: WidgetsPanel?) :
+	SimpleWidget(mapActivity, widgetType, customId, widgetsPanel), OBDWidgetOptions {
+	private val plugin = PluginsHelper.requirePlugin(VehicleMetricsPlugin::class.java)
+	protected var widgetComputer: OBDComputerWidget
 	private var cacheTextData: String? = null
+	private var cacheSubTextData: String? = null
+
+	var measuredIntervalPref: CommonPreference<Long>? = null
+	var averageModePref: CommonPreference<Boolean>? = null
+	var temperatureUnitPref: OsmandPreference<TemperatureUnit>? = null
+
+	companion object {
+		private const val MEASURED_INTERVAL_PREF_ID = "average_obd_measured_interval_millis"
+		private const val AVERAGE_MODE_PREF_ID = "average_obd_mode"
+		private const val TEMPERATURE_UNIT_PREF = "temperature_unit_pref"
+		const val DEFAULT_INTERVAL_MILLIS: Long = 30 * 60 * 1000L
+		fun formatIntervals(app: OsmandApplication, interval: Long): String {
+			val seconds = interval < 60 * 1000
+			val timeInterval = if (seconds
+			) (interval / 1000).toString() else (interval / 1000 / 60).toString()
+			val timeUnit = if (interval < 60 * 1000
+			) app.getString(R.string.shared_string_sec)
+			else app.getString(R.string.shared_string_minute_lowercase)
+			return app.getString(R.string.ltr_or_rtl_combine_via_space, timeInterval, timeUnit)
+		}
+	}
 
 	init {
-		val obdDataWidgetType: OBDTypeWidget
-		var formatter = OBDComputerWidgetFormatter()
-		var averageTimeSeconds = 15
-		when(fieldType) {
-			RPM -> {
-				obdDataWidgetType = OBDTypeWidget.RPM
-				formatter = OBDComputerWidgetFormatter("%.0f")
-			}
-			FUEL_CONSUMPTION_RATE -> {
-				obdDataWidgetType = OBDTypeWidget.FUEL_CONSUMPTION_RATE
-				formatter = OBDComputerWidgetFormatter("%.0f")
-				averageTimeSeconds = 5 * 60
-			}
-			FUEL_CONSUMPTION_RATE_SENSOR -> {
-				obdDataWidgetType = OBDTypeWidget.FUEL_CONSUMPTION_RATE_SENSOR
-				formatter = OBDComputerWidgetFormatter("%.0f")
-				averageTimeSeconds = 5 * 60
-			}
-			FUEL_LEFT_DISTANCE -> {
-				obdDataWidgetType = OBDTypeWidget.FUEL_LEFT_DISTANCE
-				formatter = OBDComputerWidgetFormatter("%.0f")
-			}
-			SPEED -> {
-				obdDataWidgetType = OBDTypeWidget.SPEED
-				formatter = OBDComputerWidgetFormatter("%.0f")
-			}
-			FUEL_LVL -> {
-				obdDataWidgetType = OBDTypeWidget.FUEL_LEFT_PERCENT
-				formatter = OBDComputerWidgetFormatter("%.2f")
-			}
-			AMBIENT_AIR_TEMP -> {
-				obdDataWidgetType = OBDTypeWidget.TEMPERATURE_AMBIENT
-				formatter = OBDComputerWidgetFormatter("%.0f")
-			}
-			BATTERY_VOLTAGE -> {
-				obdDataWidgetType = OBDTypeWidget.BATTERY_VOLTAGE
-				formatter = OBDComputerWidgetFormatter("%.2f")
-			}
-			AIR_INTAKE_TEMP -> {
-				obdDataWidgetType = OBDTypeWidget.TEMPERATURE_INTAKE
-				formatter = OBDComputerWidgetFormatter("%.0f")
-			}
-			COOLANT_TEMP -> {
-				obdDataWidgetType = OBDTypeWidget.TEMPERATURE_COOLANT
-				formatter = OBDComputerWidgetFormatter("%.0f")
-			}
-			FUEL_TYPE -> {
-				obdDataWidgetType = OBDTypeWidget.FUEL_TYPE
-				formatter = OBDFuelTypeFormatter()
-			}
-			VIN -> {
-				obdDataWidgetType = OBDTypeWidget.VIN
-				formatter = OBDComputerWidgetFormatter("%s")
-			}
+		// 0 - for instant
+		var averageTimeSeconds = 0
+
+		if (isTemperatureWidget()){
+			temperatureUnitPref = registerTemperaturePref(customId)
 		}
-		//todo implement setting correct time for widget (0 for instant)
-		widgetComputer = OBDDataComputer.registerWidget(obdDataWidgetType, averageTimeSeconds, formatter)
+
+		if (supportsAverageMode()) {
+			measuredIntervalPref = registerMeasuredIntervalPref(customId)
+			averageModePref = registerAverageModePref(customId)
+			if (averageModePref!!.get()) {
+				averageTimeSeconds = (measuredIntervalPref!!.get() / 1000).toInt()
+			}
+		} else if (fieldType == OBDTypeWidget.FUEL_CONSUMPTION_RATE_PERCENT_HOUR ||
+			fieldType == OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR ||
+			fieldType == OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM
+		) {
+			averageTimeSeconds = fieldType.defaultAverageTime
+		}
+
+		widgetComputer =
+			OBDDataComputer.registerWidget(fieldType, averageTimeSeconds)
 	}
-	
-	override fun updateSimpleWidgetInfo(drawSettings: DrawSettings?) {
-		val data = widgetComputer.computeValue()
-		val textData: String
-		val subtext: String?
-		if (data == null) {
-			textData = NO_VALUE
-			subtext = null
-		} else {
-			textData = data.toString()
-			subtext = fieldType.dataType.getDisplayUnit()
+
+	open fun updatePrefs(prefsChanged: Boolean) {
+		if (supportsAverageMode()) {
+			val newTimeSeconds: Int =
+				if (averageModePref?.get() == true) ((measuredIntervalPref?.get()
+					?: 0) / 1000).toInt() else 0
+			if (prefsChanged) {
+				widgetComputer = OBDDataComputer.registerWidget(widgetComputer.type, newTimeSeconds)
+			} else {
+				widgetComputer.averageTimeSeconds = newTimeSeconds
+			}
+			updateWidgetName()
 		}
-		if(!Algorithms.objectEquals(textData, cacheTextData)) {
+	}
+
+	override fun getOnClickListener(): View.OnClickListener? {
+		return if (supportsAverageMode() && averageModePref != null) {
+			View.OnClickListener { v: View? ->
+				averageModePref?.let {
+					it.set(!it.get())
+					updatePrefs(true)
+				}
+			}
+		} else {
+			null
+		}
+	}
+
+	override fun getWidgetActions(): MutableList<PopUpMenuItem>? {
+		if (supportsAverageMode() && averageModePref?.get() == true) {
+			val actions: MutableList<PopUpMenuItem> = ArrayList()
+			val uiUtilities = app.uiUtilities
+			val iconColor = ColorUtilities.getDefaultIconColor(app, nightMode)
+
+			actions.add(PopUpMenuItem.Builder(app)
+				.setIcon(
+					uiUtilities.getPaintedIcon(
+						R.drawable.ic_action_reset_to_default_dark,
+						iconColor
+					)
+				)
+				.setTitleId(R.string.reset_average_value)
+				.setOnClickListener { item: PopUpMenuItem? -> resetAverageValue() }
+				.showTopDivider(true)
+				.create())
+			return actions
+		}
+		return null
+	}
+
+	private fun resetAverageValue() {
+		widgetComputer.resetLocations()
+		setText(NO_VALUE, null)
+	}
+
+	override fun getWidgetName(): String? {
+		val widgetName = if (widgetType != null) getString(widgetType.titleId) else null
+
+		if (supportsAverageMode() && !Algorithms.isEmpty(widgetName) && averageModePref?.get() == true) {
+			val formattedInterval = formatIntervals(app, measuredIntervalPref!!.get())
+			return app.getString(
+				R.string.ltr_or_rtl_combine_via_colon,
+				widgetName,
+				formattedInterval
+			)
+		}
+		return widgetName
+	}
+
+	override fun updateSimpleWidgetInfo(drawSettings: DrawSettings?) {
+		val visible = widgetType.isPurchased(app)
+		if (visible) {
+			updateSimpleWidgetInfoImpl()
+		}
+	}
+
+	private fun updateSimpleWidgetInfoImpl() {
+		val subtext: String? = plugin?.getWidgetUnit(widgetComputer, this)
+		val textData: String = plugin?.getWidgetValue(widgetComputer, this) ?: NO_VALUE
+		if (!Algorithms.objectEquals(textData, cacheTextData) ||
+			!Algorithms.objectEquals(subtext, cacheSubTextData)
+		) {
 			setText(textData, subtext)
 			cacheTextData = textData
+			cacheSubTextData = subtext
 		}
 	}
 
@@ -105,6 +170,72 @@ class OBDTextWidget @JvmOverloads constructor(
 
 	init {
 		updateInfo(null)
-		setIcons(fieldType.widgetType)
+		setIcons(widgetType)
+	}
+
+	fun getWidgetOBDCommand(): OBDCommand {
+		return  fieldType.requiredCommand
+	}
+
+	private fun registerAverageModePref(customId: String?): CommonPreference<Boolean> {
+		val prefId = if (Algorithms.isEmpty(customId))
+			AVERAGE_MODE_PREF_ID
+		else AVERAGE_MODE_PREF_ID + customId
+		return settings.registerBooleanPreference(prefId, false)
+			.makeProfile()
+			.cache()
+	}
+
+	private fun registerMeasuredIntervalPref(customId: String?): CommonPreference<Long> {
+		val prefId = if (Algorithms.isEmpty(customId))
+			MEASURED_INTERVAL_PREF_ID
+		else MEASURED_INTERVAL_PREF_ID + customId
+		return settings.registerLongPreference(prefId, DEFAULT_INTERVAL_MILLIS)
+			.makeProfile()
+			.cache()
+	}
+
+	private fun registerTemperaturePref(customId: String?): OsmandPreference<TemperatureUnit> {
+		val prefId = if (Algorithms.isEmpty(customId))
+			TEMPERATURE_UNIT_PREF
+		else TEMPERATURE_UNIT_PREF + customId
+
+		return settings.registerEnumStringPreference(
+			prefId, TemperatureUnit.CELSIUS,
+			TemperatureUnit.entries.toTypedArray(), TemperatureUnit::class.java
+		)
+			.makeProfile()
+			.cache()
+	}
+
+	fun isTemperatureWidget(): Boolean {
+		return when (widgetType) {
+			WidgetType.OBD_AIR_INTAKE_TEMP,
+			WidgetType.ENGINE_OIL_TEMPERATURE,
+			WidgetType.OBD_AMBIENT_AIR_TEMP,
+			WidgetType.OBD_ENGINE_COOLANT_TEMP -> return true
+
+			else -> false
+		}
+	}
+
+	fun supportsAverageMode(): Boolean {
+		return when (widgetType) {
+			WidgetType.OBD_SPEED,
+			WidgetType.OBD_CALCULATED_ENGINE_LOAD,
+			WidgetType.OBD_FUEL_PRESSURE,
+			WidgetType.OBD_THROTTLE_POSITION,
+			WidgetType.OBD_BATTERY_VOLTAGE,
+			WidgetType.OBD_AIR_INTAKE_TEMP,
+			WidgetType.ENGINE_OIL_TEMPERATURE,
+			WidgetType.OBD_AMBIENT_AIR_TEMP,
+			WidgetType.OBD_ENGINE_COOLANT_TEMP -> return true
+
+			else -> false
+		}
+	}
+
+	override fun getTemperatureUnit(): TemperatureUnit {
+		return temperatureUnitPref?.get() ?: app.weatherHelper.weatherSettings.weatherTempUnit.get()
 	}
 }

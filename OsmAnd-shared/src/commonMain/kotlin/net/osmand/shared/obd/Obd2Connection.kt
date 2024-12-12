@@ -1,18 +1,28 @@
 package net.osmand.shared.obd
 
-import net.osmand.shared.extensions.format
 import net.osmand.shared.util.LoggerFactory
+import okio.IOException
 
-class Obd2Connection(private val connection: UnderlyingTransport) {
+class Obd2Connection(
+	private val connection: UnderlyingTransport,
+	private val obdDispatcher: OBDDispatcher) {
 	enum class COMMAND_TYPE(val code: Int) {
 		LIVE(0x41), FREEZE(0x42), IDENTIFICATION(0x49)
 	}
 
-	private val initCommands = arrayOf("ATD", "ATZ", "AT E0", "AT L0", "AT S0", "AT H0", "AT SP 0")
 	private val log = LoggerFactory.getLogger("Obd2Connection")
+	private var initialized = false
+	private var finished = false
 
 	init {
 		runInitCommands()
+		initialized = true
+	}
+
+	fun isFinished() = finished
+
+	fun finish() {
+		finished = true
 	}
 
 	private fun runInitCommands() {
@@ -23,9 +33,8 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 
 	private fun runImpl(command: String): String {
 		val response = StringBuilder()
-		log.debug("runImpl($command)")
 		connection.write((command + "\r").encodeToByteArray())
-		while (true) {
+		while (!finished) {
 			val value = connection.readByte() ?: continue
 			val c = value.toChar()
 			// this is the prompt, stop here
@@ -34,7 +43,7 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 			response.append(c)
 		}
 		val responseValue = response.toString()
-		log.debug("runImpl() returned $responseValue")
+		log("runImpl($command) returned $responseValue")
 		return responseValue
 	}
 
@@ -42,13 +51,15 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 		fullCommand: String,
 		command: Int,
 		commandType: COMMAND_TYPE = COMMAND_TYPE.LIVE): OBDResponse {
+		if (finished) {
+			return OBDResponse.ERROR
+		}
 		var response = runImpl(fullCommand)
 		val originalResponseValue = response
 		val unspacedCommand = fullCommand.replace(" ", "")
 		if (response.startsWith(unspacedCommand))
 			response = response.substring(unspacedCommand.length)
 		response = unpackLongFrame(response)
-		log.debug("post-processed response $response")
 		response = removeSideData(
 			response,
 			"SEARCHING",
@@ -59,29 +70,36 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 			"BUSERROR",
 			"STOPPED"
 		)
-		log.debug("post-processed response without side data $response")
 		when (response) {
 			"OK" -> return OBDResponse.OK
 			"?" -> return OBDResponse.QUESTION_MARK
 			"NODATA" -> return OBDResponse.NO_DATA
-			"UNABLETOCONNECT" -> throw Exception("connection failure")
-			"CANERROR" -> throw Exception("CAN bus error")
+			"UNABLETOCONNECT" -> {
+				finished = true
+				log.error("connection failure")
+				return OBDResponse.ERROR
+			}
+
+			"CANERROR" -> {
+				log.error("CAN bus error")
+				return OBDResponse.ERROR
+			}
 		}
 		try {
 			var hexValues = toHexValues(response)
 			if (hexValues.size < 3 ||
 				hexValues[0] != commandType.code ||
 				hexValues[1] != command) {
-				log.debug("Incorrect answer data (size ${hexValues.size}) for $fullCommand")
+				log("Incorrect answer data (size ${hexValues.size}) for $fullCommand")
 			} else {
 				hexValues = hexValues.copyOfRange(2, hexValues.size)
 			}
 			return OBDResponse(hexValues)
 		} catch (e: IllegalArgumentException) {
-			log.debug(
+			log(
 				"Conversion error: command: '$fullCommand', original response: '$originalResponseValue', processed response: '$response'"
 			)
-			throw e
+			return OBDResponse.ERROR
 		}
 	}
 
@@ -152,39 +170,21 @@ class Obd2Connection(private val connection: UnderlyingTransport) {
 		}
 	}
 
-	fun getSupportedPIDs(): Set<Int> {
-		val result = mutableSetOf<Int>()
-		val pids = arrayOf("0100", "0120", "0140", "0160")
-		var basePid = 1
-		for (pid in pids) {
-			val responseData = run(pid, 0x01)
-			if (responseData.result.size >= 6) {
-				val byte0 = responseData.result[2].toByte()
-				val byte1 = responseData.result[3].toByte()
-				val byte2 = responseData.result[4].toByte()
-				val byte3 = responseData.result[5].toByte()
-				log.debug(
-					"Supported PID at base $basePid payload %02X%02X%02X%02X".format(
-						byte0,
-						byte1,
-						byte2,
-						byte3
-					)
-				)
-				val bitSet = FourByteBitSet(byte0, byte1, byte2, byte3)
-				for (byteIndex in 0..3) {
-					for (bitIndex in 7 downTo 0) {
-						if (bitSet.getBit(byteIndex, bitIndex)) {
-							val command = basePid + 8 * byteIndex + 7 - bitIndex
-							log.debug("Command $command found supported")
-							result.add(command)
-						}
-					}
-				}
-			}
-			basePid += 0x20
+	private fun log(msg: String) {
+		if (obdDispatcher.debug) {
+			log.debug(msg)
+		} else {
+			log.info(msg)
 		}
-		return result
+	}
+
+	companion object {
+		private val initCommands =
+			arrayOf("ATD", "ATZ", "AT E0", "AT L0", "AT S0", "AT H0", "AT SP 0")
+
+		fun isInitCommand(command: String): Boolean {
+			return initCommands.contains(command)
+		}
 	}
 
 }

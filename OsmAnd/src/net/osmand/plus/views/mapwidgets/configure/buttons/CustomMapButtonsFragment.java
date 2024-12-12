@@ -58,7 +58,7 @@ public class CustomMapButtonsFragment extends BaseMapButtonsFragment implements 
 	@NonNull
 	@Override
 	protected List<MapButtonState> getAdapterItems() {
-		return new ArrayList<>(mapButtonsHelper.getButtonsStates());
+		return new ArrayList<>(mapButtonsHelper.getQuickActionButtonsStates());
 	}
 
 	@Override
@@ -125,7 +125,8 @@ public class CustomMapButtonsFragment extends BaseMapButtonsFragment implements 
 	@Override
 	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
 		ApplicationMode toAppMode = settings.getApplicationMode();
-		mapButtonsHelper.copyQuickActionsFromMode(toAppMode, appMode);
+		List<MapButtonState> states = new ArrayList<>(mapButtonsHelper.getQuickActionButtonsStates());
+		mapButtonsHelper.copyButtonStatesFromMode(toAppMode, appMode, states);
 		updateAdapter();
 	}
 

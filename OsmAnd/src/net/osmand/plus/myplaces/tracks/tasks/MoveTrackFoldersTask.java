@@ -5,20 +5,18 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.base.BaseLoadAsyncTask;
+import net.osmand.plus.shared.SharedUtil;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.shared.gpx.TrackItem;
 import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.data.TracksGroup;
-import net.osmand.plus.utils.FileUtils;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class MoveTrackFoldersTask extends BaseLoadAsyncTask<Void, Void, Void> {
@@ -68,15 +66,7 @@ public class MoveTrackFoldersTask extends BaseLoadAsyncTask<Void, Void, Void> {
 			File dest = new File(destinationFolder, src.name());
 			if (src.renameTo(dest.getAbsolutePath())) {
 				dest.setLastModified(System.currentTimeMillis());
-
-				List<File> files = new ArrayList<>();
-				for (TrackItem trackItem : trackFolder.getFlattenedTrackItems()) {
-					KFile file = trackItem.getFile();
-					if (file != null) {
-						files.add(SharedUtil.jFile(file));
-					}
-				}
-				FileUtils.updateMovedGpxFiles(app, files, SharedUtil.jFile(src), dest);
+				FileUtils.updateMovedTrackFolder(app, trackFolder, SharedUtil.jFile(src), dest);
 			}
 		}
 	}

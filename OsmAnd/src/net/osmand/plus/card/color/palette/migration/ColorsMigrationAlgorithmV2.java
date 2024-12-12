@@ -6,13 +6,13 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
+import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.plus.card.color.palette.main.data.DefaultPaletteColors;
 import net.osmand.plus.card.color.palette.main.data.FileColorsCollection;
-import net.osmand.plus.card.color.palette.migration.data.ColorsCollectionBundle;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
+import net.osmand.plus.card.color.palette.migration.data.ColorsCollectionBundle;
 import net.osmand.plus.card.color.palette.migration.data.ColorsCollectionV1;
-import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.plus.card.color.palette.migration.data.PaletteColorV1;
 import net.osmand.plus.card.color.palette.migration.data.PredefinedPaletteColor;
 import net.osmand.plus.profiles.ProfileIconColors;
@@ -44,9 +44,8 @@ public class ColorsMigrationAlgorithmV2 {
 
 	private final OsmandApplication app;
 
-	public static void doMigration(@NonNull OsmandApplication app) {
-		ColorsMigrationAlgorithmV2 migrationAlgorithm = new ColorsMigrationAlgorithmV2(app);
-		migrationAlgorithm.execute();
+	public static void execute(@NonNull OsmandApplication app) {
+		new ColorsMigrationAlgorithmV2(app).executeImpl();
 	}
 
 	public ColorsMigrationAlgorithmV2(@NonNull OsmandApplication app) {
@@ -69,7 +68,7 @@ public class ColorsMigrationAlgorithmV2 {
 				settings, "route_line_colors_palette", null).makeGlobal();
 	}
 
-	private void execute() {
+	private void executeImpl() {
 		// Collect available colors from the user palette file
 		ColorsCollection newCollection = new FileColorsCollection(app);
 		newCollection.addAllUniqueColors(DefaultPaletteColors.valuesList());

@@ -10,7 +10,6 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -57,7 +56,14 @@ import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import org.apache.commons.logging.Log;
 
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.TimeZone;
 
 public class WeatherForecastFragment extends BaseOsmAndFragment implements WeatherWebClientListener {
 
@@ -186,7 +192,6 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		setupDatesView(view);
 		setupTimeSlider(view);
 		buildZoomButtons(view);
-		moveCompassButton(view);
 
 		return view;
 	}
@@ -361,6 +366,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 
 		MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
 		rulerWidget = mapInfoLayer.setupRulerWidget(view.findViewById(R.id.map_ruler_layout));
+		activity.getMapLayers().getMapControlsLayer().addCustomMapButton(view.findViewById(R.id.map_compass_button));
 	}
 
 	private void setupDatesView(@NonNull View view) {
@@ -466,22 +472,6 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		}
 	}
 
-	private void moveCompassButton(@NonNull View view) {
-		int btnSizePx = getDimensionPixelSize(R.dimen.map_small_button_size);
-		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(btnSizePx, btnSizePx);
-		int toolbarHeight = getDimensionPixelSize(R.dimen.toolbar_height);
-		int topMargin = getDimensionPixelSize(R.dimen.map_small_button_margin);
-		int startMargin = getDimensionPixelSize(R.dimen.map_button_margin);
-		AndroidUtils.setMargins(params, startMargin, topMargin + toolbarHeight, 0, 0);
-
-		MapActivity activity = getMapActivity();
-		if (activity != null) {
-			MapLayers mapLayers = activity.getMapLayers();
-			MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
-			mapControlsLayer.moveCompassButton((ViewGroup) view, params);
-		}
-	}
-
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -514,10 +504,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment implements Weath
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			MapLayers mapLayers = mapActivity.getMapLayers();
-
-			MapControlsLayer layer = mapLayers.getMapControlsLayer();
-			layer.clearCustomMapButtons();
-			layer.restoreCompassButton();
+			mapLayers.getMapControlsLayer().clearCustomMapButtons();
 
 			if (rulerWidget != null) {
 				MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();

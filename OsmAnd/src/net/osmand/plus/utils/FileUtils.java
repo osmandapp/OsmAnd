@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -24,7 +25,10 @@ import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.TrackItem;
+import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.gpx.primitives.Metadata;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
@@ -174,8 +178,28 @@ public class FileUtils {
 		}
 	}
 
-	public static void updateMovedGpxFiles(@NonNull OsmandApplication app, @NonNull List<File> files,
-	                                       @NonNull File srcDir, @NonNull File destDir) {
+	public static void updateMovedTrackFolder(@NonNull OsmandApplication app, @NonNull TrackFolder trackFolder,
+	                                          @NonNull File srcDir, @NonNull File destDir) {
+		List<File> files = new ArrayList<>();
+		for (TrackItem trackItem : trackFolder.getFlattenedTrackItems()) {
+			KFile file = trackItem.getFile();
+			if (file != null) {
+				files.add(SharedUtil.jFile(file));
+			}
+		}
+		updateMovedGpxFiles(app, files, srcDir, destDir);
+
+		TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
+		sortModesHelper.updateAfterMoveTrackFolder(trackFolder, srcDir);
+	}
+
+	public static void updateAfterDeleteTrackFolder(@NonNull OsmandApplication app, @NonNull TrackFolder trackFolder) {
+		TrackSortModesHelper sortModesHelper = app.getTrackSortModesHelper();
+		sortModesHelper.updateAfterDeleteTrackFolder(trackFolder);
+	}
+
+	private static void updateMovedGpxFiles(@NonNull OsmandApplication app, @NonNull List<File> files,
+	                                        @NonNull File srcDir, @NonNull File destDir) {
 		for (File srcFile : files) {
 			String path = srcFile.getAbsolutePath();
 			String newPath = path.replace(srcDir.getAbsolutePath(), destDir.getAbsolutePath());

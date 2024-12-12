@@ -81,7 +81,7 @@ class TracksFoldersScreen(
                 .setTitle(app.getString(R.string.sort_last_modified))
                 .setImage(iconLastModified)
                 .setBrowsable(true)
-                .setOnClickListener { onClickTabFolder(trackTabsHelper.trackTabs[TrackTabType.ALL.name]!!) }
+                .setOnClickListener { onClickTabFolder(trackTabsHelper.getTrackTab(TrackTabType.ALL.name)!!) }
                 .build())
 
         if (trackTabsHelper.trackTabs.isEmpty()) {
@@ -93,14 +93,14 @@ class TracksFoldersScreen(
         }
         templateBuilder.setLoading(false)
         var itemsCount = 1
-        for (trackTab in trackTabsHelper.trackTabs.values) {
+        for (trackTab in trackTabsHelper.getSortedTrackTabs(false)) {
             if (trackTab.type != TrackTabType.FOLDER) {
                 continue
             }
             if (itemsCount == contentLimit) {
                 break
             }
-            val title = trackTab.getName(app)
+            val title = trackTab.getName()
             val iconColorId = ColorUtilities.getDefaultIconColorId(app.daynightHelper.isNightMode)
             val iconDrawable = app.uiUtilities.getIcon(trackTab.type.iconId, iconColorId)
             val icon = CarIcon.Builder(
@@ -131,7 +131,7 @@ class TracksFoldersScreen(
     }
 
     override fun loadTracksFinished(folder: TrackFolder) {
-        trackTabsHelper.updateTrackItems(folder.getFlattenedTrackItems())
+        trackTabsHelper.updateTrackItems(folder)
         invalidate()
     }
 

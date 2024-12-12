@@ -10,7 +10,6 @@ import com.google.android.material.slider.RangeSlider.OnSliderTouchListener
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
-import net.osmand.shared.settings.enums.MetricsConstants
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.OsmandTextFieldBoxes
@@ -18,6 +17,7 @@ import net.osmand.plus.widgets.TextViewEx
 import net.osmand.plus.widgets.tools.SimpleTextWatcher
 import net.osmand.shared.gpx.filters.MeasureUnitType
 import net.osmand.shared.gpx.filters.RangeTrackFilter
+import net.osmand.shared.settings.enums.MetricsConstants
 import net.osmand.util.Algorithms
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 import java.text.DecimalFormat
@@ -171,9 +171,12 @@ open class FilterRangeViewHolder(
 	private fun updateValues() {
 		isBinding = true
 		val valueFrom = getDisplayValueFrom(filter)
-		val valueTo = getDisplayValueTo(filter)
+		var valueTo = getDisplayValueTo(filter)
 		val minValue = getDisplayMinValue(filter)
 		val maxValue = getDisplayMaxValue(filter)
+		if(filter.maxValue == filter.valueTo) {
+			valueTo = maxValue
+		}
 		if (maxValue > minValue) {
 			slider.valueTo = maxValue.toFloat()
 			slider.valueFrom = minValue.toFloat()
@@ -204,7 +207,7 @@ open class FilterRangeViewHolder(
 	open fun getDisplayMaxValue(filter: RangeTrackFilter<*>): Int {
 		val formattedValue =
 			getFormattedValue(filter.trackFilterType.measureUnitType, filter.ceilMaxValue())
-		return formattedValue.valueSrc.toInt()
+		return ceil(formattedValue.valueSrc).toInt()
 	}
 
 	open fun getDisplayMinValue(filter: RangeTrackFilter<*>): Int {
@@ -228,6 +231,9 @@ open class FilterRangeViewHolder(
 		measureUnitType: MeasureUnitType,
 		value: String): OsmAndFormatter.FormattedValue {
 		val metricsConstants: MetricsConstants = app.settings.METRIC_SYSTEM.get()
+		val params = OsmAndFormatter.OsmAndFormatterParams()
+		params.setExtraDecimalPrecision(3)
+		params.setForcePreciseValue(true)
 		return when (measureUnitType) {
 			MeasureUnitType.SPEED -> OsmAndFormatter.getFormattedSpeedValue(value.toFloat(), app)
 			MeasureUnitType.ALTITUDE -> OsmAndFormatter.getFormattedAltitudeValue(
@@ -237,7 +243,8 @@ open class FilterRangeViewHolder(
 
 			MeasureUnitType.DISTANCE -> OsmAndFormatter.getFormattedDistanceValue(
 				value.toFloat(),
-				app)
+				app,
+				params)
 
 			MeasureUnitType.TIME_DURATION -> OsmAndFormatter.FormattedValue(
 				value.toFloat() / 1000 / 60,

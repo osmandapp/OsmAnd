@@ -73,6 +73,9 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 		if (buttonState != null) {
 			appearanceParams = buttonState.createAppearanceParams();
 			originalAppearanceParams = buttonState.createAppearanceParams();
+			String savedIconName = buttonState.getSavedIconName();
+			appearanceParams.setIconName(savedIconName);
+			originalAppearanceParams.setIconName(savedIconName);
 
 			if (savedInstanceState != null) {
 				appearanceParams.readBundle(savedInstanceState);
@@ -200,17 +203,23 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 	}
 
 	private void updateButtons() {
-		mapButtonCard.updateButton();
+		ButtonAppearanceParams params = appearanceParams;
+		String iconName = appearanceParams.getIconName();
+		if (Algorithms.isEmpty(iconName)) {
+			params = new ButtonAppearanceParams(appearanceParams);
+			params.setIconName(buttonState.getDefaultIconName());
+		}
+		mapButtonCard.updateButton(params);
 		applyButton.setEnabled(!Algorithms.objectEquals(originalAppearanceParams, appearanceParams));
 	}
 
 	private void resetAppearance() {
 		ButtonAppearanceParams defaultParams = buttonState.createDefaultAppearanceParams();
-		appearanceParams.setIconName(defaultParams.getIconName());
+		appearanceParams.setIconName(null);
 		appearanceParams.setSize(defaultParams.getSize());
 		appearanceParams.setOpacity(defaultParams.getOpacity());
 		appearanceParams.setCornerRadius(defaultParams.getCornerRadius());
-		iconController.update();
+		iconController.updateAfterReset();
 		updateContent();
 	}
 
@@ -220,7 +229,7 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 	}
 
 	@Override
-	public void onIconSelectedFromPalette(@NonNull String iconName) {
+	public void onIconSelectedFromPalette(@Nullable String iconName) {
 		appearanceParams.setIconName(iconName);
 		updateButtons();
 	}

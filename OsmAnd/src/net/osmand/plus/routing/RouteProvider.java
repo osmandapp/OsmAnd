@@ -14,10 +14,12 @@ import net.osmand.Location;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.Route;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.avoidroads.AvoidRoadsHelper;
@@ -36,19 +38,25 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.ApproximationType;
 import net.osmand.plus.settings.enums.RoutingType;
-import net.osmand.router.*;
+import net.osmand.plus.shared.SharedUtil;
+import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
+import net.osmand.router.GpxRouteApproximation;
+import net.osmand.router.PrecalculatedRouteDirection;
+import net.osmand.router.RouteExporter;
+import net.osmand.router.RouteImporter;
+import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
+import net.osmand.router.RouteResultPreparation;
+import net.osmand.router.RouteSegmentResult;
+import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.gpx.GPXUtilities.Route;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
@@ -60,7 +68,13 @@ import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.zip.GZIPInputStream;
 
 import javax.xml.parsers.FactoryConfigurationError;
@@ -822,7 +836,7 @@ public class RouteProvider {
 		return calcOfflineRouteImpl(params, env.getRouter(), env.getCtx(), env.getComplexCtx(), st, en, inters, env.getPrecalculated());
 	}
 
-	private RoutingConfiguration initOsmAndRoutingConfig(Builder config, RouteCalculationParams params, OsmandSettings settings,
+	private RoutingConfiguration initOsmAndRoutingConfig(Builder builder, RouteCalculationParams params, OsmandSettings settings,
 	                                                     GeneralRouter generalRouter) throws IOException, FileNotFoundException {
 		Map<String, String> paramsR = new LinkedHashMap<String, String>();
 		for (Map.Entry<String, RoutingParameter> e : RoutingHelperUtils.getParametersForDerivedProfile(params.mode, generalRouter).entrySet()) {
@@ -857,7 +871,7 @@ public class RouteProvider {
 		}
 		OsmandApplication app = settings.getContext();
 		DirectionPointsHelper helper = app.getAvoidSpecificRoads().getPointsHelper();
-		config.setDirectionPoints(helper.getDirectionPoints(params.mode));
+		builder.setDirectionPoints(helper.getDirectionPoints(params.mode));
 
 		float mb = (1 << 20);
 		Runtime rt = Runtime.getRuntime();
@@ -869,13 +883,15 @@ public class RouteProvider {
 		log.warn("Use " + nativeMemoryLimitMb + " MB of native memory ");
 		String derivedProfile = params.mode.getDerivedProfile();
 		String routingProfile = "default".equals(derivedProfile) ? params.mode.getRoutingProfile() : derivedProfile;
-		RoutingConfiguration cf = config.build(routingProfile, params.start.hasBearing() ?
-						params.start.getBearing() / 180d * Math.PI : null,
-				memoryLimits, paramsR);
+		Double direction = params.start.hasBearing() ? params.start.getBearing() / 180d * Math.PI : null;
+
+		RoutingConfiguration configuration = builder.build(routingProfile, direction, memoryLimits, paramsR);
 		if (settings.ENABLE_TIME_CONDITIONAL_ROUTING.getModeValue(params.mode)) {
-			cf.routeCalculationTime = System.currentTimeMillis();
+			configuration.routeCalculationTime = System.currentTimeMillis();
 		}
-		return cf;
+		configuration.showMinorTurns = settings.SHOW_MINOR_TURNS.getModeValue(params.mode);
+
+		return configuration;
 	}
 
 	private RouteCalculationResult calcOfflineRouteImpl(RouteCalculationParams params,

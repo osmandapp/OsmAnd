@@ -11,7 +11,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.shared.routing.ColoringType;
 
-public abstract class MultiColoringGeometryWayContext extends GeometryWayContext {
+public abstract class MultiColoringGeometryWayContext extends CommonGeometryWayContext {
 
 	private static final int SHADOW_COLOR = 0x80000000;
 

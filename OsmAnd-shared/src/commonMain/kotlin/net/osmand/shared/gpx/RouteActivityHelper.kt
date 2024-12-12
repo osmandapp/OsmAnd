@@ -49,8 +49,11 @@ object RouteActivityHelper {
 		runAsync {
 			trackItems.forEach { trackItem ->
 				trackItem.getFile()?.let { file ->
-					val gpxFile = PlatformUtil.getOsmAndContext().getSelectedFileByPath(file.absolutePath())
-					if (gpxFile != null && gpxFile.error == null) {
+					var gpxFile = PlatformUtil.getOsmAndContext().getSelectedFileByPath(file.absolutePath())
+					if (gpxFile == null) {
+						gpxFile = GpxUtilities.loadGpxFile(file)
+					}
+					if (gpxFile.error == null) {
 						saveRouteActivityAsync(gpxFile, routeActivity)
 					}
 				}
@@ -72,7 +75,7 @@ object RouteActivityHelper {
 	}
 
 	private fun saveRouteActivity(gpxFile: GpxFile, routeActivity: RouteActivity?, callback: OnCompleteCallback? = null) {
-		gpxFile.metadata.setRouteActivity(routeActivity, getActivities())
+		gpxFile.metadata.setRouteActivity(routeActivity)
 		val file = KFile(gpxFile.path)
 		CoroutineScope(Dispatchers.Main).launch {
 			withContext(Dispatchers.IO) {

@@ -59,9 +59,7 @@ import net.osmand.plus.auto.screens.SettingsScreen;
 import net.osmand.plus.helpers.LocationCallback;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.RestoreNavigationHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.routing.IRouteInformationListener;
@@ -81,6 +79,7 @@ import net.osmand.util.GeoParsedPoint;
 import net.osmand.util.GeoPointParserUtil;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -131,7 +130,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	private CarContext carContext;
 	private NavigationManager navigationManager;
-	private boolean carNavigationActive;
+	private boolean carNavigationShouldBeActive; // it could set true before init navigationManager
 	private TripHelper tripHelper;
 
 	NavigationSession() {
@@ -162,6 +161,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		SurfaceRenderer navigationCarSurface = this.navigationCarSurface;
 		if (navigationCarSurface != null) {
 			navigationCarSurface.setMapView(hasStarted() ? mapView : null);
+			if (mapView != null) {
+				navigationCarSurface.handleRecenter();
+			}
 		}
 	}
 
@@ -188,7 +190,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	public void onStart(@NonNull LifecycleOwner owner) {
 		OsmandApplication app = getApp();
 		routingHelper.addListener(this);
-
 		defaultAppMode = settings.getApplicationMode();
 		if (!isAppModeDerivedFromCar(defaultAppMode)) {
 			List<ApplicationMode> availableAppModes = ApplicationMode.values(app);
@@ -213,7 +214,12 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	@Override
 	public void onResume(@NonNull LifecycleOwner owner) {
-		showRoutePreview();
+		if (routingHelper.isFollowingMode() && routingHelper.isRouteCalculated()) {
+			startNavigationScreen();
+//			updateCarNavigation(routingHelper.getLastFixedLocation());
+		} else {
+			showRoutePreview();
+		}
 	}
 
 	@Override
@@ -292,15 +298,14 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		if (ACTION_NAVIGATE.equals(action)) {
 			CarToast.makeText(getCarContext(), "Navigation intent: " + intent.getDataString(), CarToast.LENGTH_LONG).show();
 		}
-		landingScreen = new LandingScreen(getCarContext(), settingsAction);
 
+		landingScreen = new LandingScreen(getCarContext(), settingsAction);
 		OsmandApplication app = getApp();
 		if (!InAppPurchaseUtils.isAndroidAutoAvailable(app)) {
 			getCarContext().getCarService(ScreenManager.class).push(landingScreen);
 			requestPurchaseScreen = new RequestPurchaseScreen(getCarContext());
 			return requestPurchaseScreen;
 		}
-
 		if (!isLocationPermissionAvailable()) {
 			getCarContext().getCarService(ScreenManager.class).push(landingScreen);
 			return new RequestPermissionScreen(getCarContext(), locationPermissionGrantedCallback);
@@ -368,17 +373,18 @@ public class NavigationSession extends Session implements NavigationListener, Os
 				} else {
 					result.localeName = label;
 				}
-				screenManager.pushForResult(new RoutePreviewScreen(context, settingsAction, result), (obj) -> {
+				screenManager.pushForResult(new RoutePreviewScreen(context, settingsAction, result, true), (obj) -> {
 					if (obj != null) {
-						getApp().getOsmandMap().getMapLayers().getMapActionsHelper().startNavigation();
+						getApp().getOsmandMap().getMapActions().startNavigation();
 						if (hasStarted()) {
-							startNavigation();
+							startNavigationScreen();
 						}
 					}
 				});
 			} else {
 				String text = point.isGeoAddress() ? point.getQuery() : uri.toString();
-				screenManager.pushForResult(new SearchResultsScreen(context, settingsAction, text), (obj) -> {});
+				screenManager.pushForResult(new SearchResultsScreen(context, settingsAction, text), (obj) -> {
+				});
 			}
 		}
 	}
@@ -414,15 +420,27 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		return requestLocationPermission();
 	}
 
-	public void startNavigation() {
-		createNavigationScreen();
+	public void startNavigationScreen() {
+		if (navigationScreen != null) {
+			CarContext context = getCarContext();
+			ScreenManager screenManager = context.getCarService(ScreenManager.class);
+			Screen top = screenManager.getTop();
+			if (top instanceof NavigationScreen) {
+				return;
+			}
+		}
+		if (navigationScreen == null) {
+			navigationScreen = new NavigationScreen(getCarContext(), settingsAction, this);
+			navigationCarSurface.setCallback(navigationScreen);
+		}
 		getCarContext().getCarService(ScreenManager.class).push(navigationScreen);
+		// navigation already started
+		if (routingHelper.isFollowingMode() && routingHelper.isRouteCalculated() && !carNavigationShouldBeActive) {
+			startCarNavigation();
+			updateCarNavigation(getApp().getLocationProvider().getLastKnownLocation());
+		}
 	}
 
-	private void createNavigationScreen() {
-		navigationScreen = new NavigationScreen(getCarContext(), settingsAction, this);
-		navigationCarSurface.setCallback(navigationScreen);
-	}
 
 	@Override
 	public void stopNavigation() {
@@ -450,7 +468,12 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 	@Override
 	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
-		showRoutePreview();
+		if (routingHelper.isFollowingMode() && routingHelper.isRouteCalculated()) {
+			startNavigationScreen();
+			updateCarNavigation(getApp().getLocationProvider().getLastKnownLocation());
+		} else {
+			showRoutePreview();
+		}
 	}
 
 	@Override
@@ -469,7 +492,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		ScreenManager screenManager = context.getCarService(ScreenManager.class);
 		Screen top = screenManager.getTop();
 		TargetPoint pointToNavigate = app.getTargetPointsHelper().getPointToNavigate();
-		if (app.getRoutingHelper().isRouteCalculated() && !settings.FOLLOW_THE_ROUTE.get()
+		if (app.getRoutingHelper().isRouteCalculated() && !app.getRoutingHelper().isFollowingMode()
 				&& pointToNavigate != null && !(top instanceof RoutePreviewScreen)) {
 			SearchResult result = new SearchResult();
 			result.location = new LatLon(pointToNavigate.getLatitude(), pointToNavigate.getLongitude());
@@ -495,11 +518,11 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			}
 
 			screenManager.popToRoot();
-			screenManager.pushForResult(new RoutePreviewScreen(context, settingsAction, result), (obj) -> {
+			screenManager.pushForResult(new RoutePreviewScreen(context, settingsAction, result, false), (obj) -> {
 				if (obj != null) {
-					app.getOsmandMap().getMapLayers().getMapActionsHelper().startNavigation();
+					app.getOsmandMap().getMapActions().startNavigation();
 					if (hasStarted()) {
-						startNavigation();
+						startNavigationScreen();
 					}
 				}
 			});
@@ -528,7 +551,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 					if (!locations.isEmpty()) {
 						Location location = locations.get(locations.size() - 1);
 						lastTimeGPSLocationFixed = System.currentTimeMillis();
-						locationProvider.setLocationFromService(location);
+						if (!settings.MAP_ACTIVITY_ENABLED) {
+							locationProvider.setLocationFromService(location);
+						}
 					}
 				}
 			});
@@ -537,7 +562,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 				locationServiceHelper.requestNetworkLocationUpdates(new LocationCallback() {
 					@Override
 					public void onLocationResult(@NonNull List<net.osmand.Location> locations) {
-						if (!locations.isEmpty() && !useOnlyGPS()) {
+						if (!settings.MAP_ACTIVITY_ENABLED && !locations.isEmpty() && !useOnlyGPS()) {
 							locationProvider.setLocationFromService(locations.get(locations.size() - 1));
 						}
 					}
@@ -601,8 +626,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 					}
 				}
 			});
-			// Uncomment if navigating
-			// mNavigationManager.navigationStarted();
+			if (carNavigationShouldBeActive) {
+				navigationManager.navigationStarted();
+			}
 		} else {
 			this.navigationManager = null;
 		}
@@ -626,8 +652,8 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	public void startCarNavigation() {
 		if (navigationManager != null) {
 			navigationManager.navigationStarted();
-			carNavigationActive = true;
 		}
+		carNavigationShouldBeActive = true;
 	}
 
 	/**
@@ -643,7 +669,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 								navigationScreen.stopTrip();
 							}
 						}
-						carNavigationActive = false;
+						carNavigationShouldBeActive = false;
 						navigationManager.navigationEnded();
 					}
 				}
@@ -653,13 +679,13 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	public void updateCarNavigation(Location currentLocation) {
 		OsmandApplication app = getApp();
 		TripHelper tripHelper = this.tripHelper;
-		if (carNavigationActive && navigationManager != null && tripHelper != null
+		if (carNavigationShouldBeActive && navigationManager != null && tripHelper != null
 				&& routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
 			NavigationSession carNavigationSession = app.getCarNavigationSession();
 			if (carNavigationSession != null) {
 				NavigationScreen navigationScreen = carNavigationSession.getNavigationScreen();
 				if (navigationScreen == null) {
-					carNavigationSession.startNavigation();
+					carNavigationSession.startNavigationScreen();
 					navigationScreen = carNavigationSession.getNavigationScreen();
 				}
 				if (navigationScreen != null) {
@@ -687,10 +713,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		}
 	}
 
-	public boolean isCarNavigationActive() {
-		return carNavigationActive;
-	}
-
 	private void checkAppInitialization(@NonNull RestoreNavigationHelper restoreNavigationHelper) {
 		OsmandApplication app = getApp();
 		if (app.isApplicationInitializing()) {
@@ -703,8 +725,12 @@ public class NavigationSession extends Session implements NavigationListener, Os
 						}
 					}
 					if (event == ROUTING_CONFIG_INITIALIZED) {
-						if (app.getRegions() != null) {
-							restoreNavigationHelper.checkRestoreRoutingMode();
+						try {
+							if (PlatformUtil.getOsmandRegions() != null) {
+								restoreNavigationHelper.checkRestoreRoutingMode();
+							}
+						} catch (IOException e) {
+							LOG.warn("getOsmandRegions", e);
 						}
 					}
 				}

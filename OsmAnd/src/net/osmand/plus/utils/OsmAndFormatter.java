@@ -11,8 +11,6 @@ import android.text.format.DateUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.core.text.TextUtilsCompat;
-import androidx.core.view.ViewCompat;
 
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.MGRSPoint;
@@ -31,10 +29,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.SwissGridApproximation;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.AngularConstants;
+import net.osmand.plus.settings.enums.VolumeUnit;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.util.Algorithms;
+import net.osmand.util.TextDirectionUtil;
 
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
@@ -58,6 +59,9 @@ public class OsmAndFormatter {
 	public static final float YARDS_IN_ONE_METER = 1.0936f;
 	public static final float FEET_IN_ONE_METER = YARDS_IN_ONE_METER * 3f;
 	public static final float INCHES_IN_ONE_METER = FEET_IN_ONE_METER * 12;
+
+	public static final float IMPERIAL_GALLONS_IN_LITER = 4.54609f;
+	public static final float US_GALLONS_IN_LITER = 3.78541f;
 
 	public static final int KILOGRAMS_IN_ONE_TON = 1000;
 	public static final float POUNDS_IN_ONE_KILOGRAM = 2.2046f;
@@ -85,16 +89,13 @@ public class OsmAndFormatter {
 	public static final int SWISS_GRID_FORMAT = LocationConvert.SWISS_GRID_FORMAT;
 	public static final int SWISS_GRID_PLUS_FORMAT = LocationConvert.SWISS_GRID_PLUS_FORMAT;
 	private static final char DELIMITER_DEGREES = '°';
-	private static final char DELIMITER_MINUTES = '′';
+	private static final char DELIMITER_MINUTES = '\'';
 	private static final char DELIMITER_SECONDS = '″';
 
 	private static final char NORTH = 'N';
 	private static final char SOUTH = 'S';
 	private static final char WEST = 'W';
 	private static final char EAST = 'E';
-
-	public static final String LTR_MARK = "\u200e";
-	public static final String RTL_MARK = "\u200f";
 
 	static {
 		setTwelveHoursFormatting(false, Locale.getDefault());
@@ -157,6 +158,13 @@ public class OsmAndFormatter {
 			formattedTime += " " + localDaysStr[calendar.get(Calendar.DAY_OF_WEEK)];
 		}
 		return formattedTime;
+	}
+
+	public static String getFormattedTimeRuntime(int seconds) {
+		int totalMinutes = (seconds / 60);
+		int hours = totalMinutes / 60;
+		int minutes = totalMinutes % 60;
+		return String.format(Locale.US, "%d:%02d", hours, minutes);
 	}
 
 	public static DateFormat getDateFormat(@NonNull Context context) {
@@ -328,6 +336,7 @@ public class OsmAndFormatter {
 		public static final boolean DEFAULT_FORCE_TRAILING = true;
 		public static final int DEFAULT_EXTRA_DECIMAL_PRECISION = 1;
 		boolean forceTrailingZerosInDecimalMainUnit = DEFAULT_FORCE_TRAILING;
+		boolean forcePreciseValue = false;
 		int extraDecimalPrecision = DEFAULT_EXTRA_DECIMAL_PRECISION;
 
 		public static final OsmAndFormatterParams USE_LOWER_BOUNDS = useLowerBoundParam();
@@ -351,6 +360,14 @@ public class OsmAndFormatter {
 		private OsmAndFormatterParams setTrailingZerosForMainUnit(boolean forceTrailingZeros) {
 			this.forceTrailingZerosInDecimalMainUnit = forceTrailingZeros;
 			return this;
+		}
+
+		public void setForcePreciseValue(boolean forceDecimalPlaces) {
+			this.forcePreciseValue = forceDecimalPlaces;
+		}
+
+		public void setExtraDecimalPrecision(int extraDecimalPrecision) {
+			this.extraDecimalPrecision = extraDecimalPrecision;
 		}
 
 	}
@@ -405,7 +422,9 @@ public class OsmAndFormatter {
 		float floatDistance = meters / mainUnitInMeters;
 		boolean forceTrailingZeros = pms.forceTrailingZerosInDecimalMainUnit;
 		int decimalPrecision = pms.extraDecimalPrecision;
-		if (meters >= 100 * mainUnitInMeters) {
+		if(pms.forcePreciseValue) {
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, decimalPrecision, ctx);
+		} else if (meters >= 100 * mainUnitInMeters) {
 			return formatValue((int) (meters / mainUnitInMeters + 0.5), mainUnitStr, forceTrailingZeros,
 					0, ctx);
 		} else if (meters > 9.99f * mainUnitInMeters) {
@@ -445,7 +464,6 @@ public class OsmAndFormatter {
 			return formatValue(m, R.string.m, forceTrailingZeros, 0, ctx);
 		}
 	}
-
 
 	@NonNull
 	public static String getFormattedAlt(double alt, OsmandApplication ctx) {
@@ -558,6 +576,58 @@ public class OsmAndFormatter {
 			default:
 				return formattedValueSrc;
 		}
+	}
+
+	public static FormattedValue getFormattedFuelCapacityValue(@NonNull OsmandApplication app, @NonNull VolumeUnit volumeUnit, @NonNull ApplicationMode mode) {
+		OsmandSettings settings = app.getSettings();
+		boolean separateWithSpace = false;
+		String textValue;
+		String textUnit;
+		float value = readSavedFuelTankCapacity(settings, volumeUnit, mode);
+		if (value == 0.0f) {
+			textValue = app.getString(R.string.shared_string_none);
+			textUnit = "";
+		} else {
+			DecimalFormat formatter = new DecimalFormat("0.#", new DecimalFormatSymbols(Locale.US));
+			textValue = formatter.format(value);
+			textUnit = volumeUnit.getUnitSymbol(app);
+			separateWithSpace = true;
+		}
+		return new FormattedValue(value, textValue, textUnit, separateWithSpace);
+	}
+
+	public static float readSavedFuelTankCapacity(@NonNull OsmandSettings settings, @NonNull VolumeUnit volumeUnit, @NonNull ApplicationMode mode) {
+		OsmandPreference<Float> fuelTankCapacity = settings.FUEL_TANK_CAPACITY;
+		float valueInLitres = fuelTankCapacity.getModeValue(mode);
+		if (valueInLitres == 0.0f) {
+			return valueInLitres;
+		}
+
+		return convertLiterToVolumeUnit(volumeUnit, valueInLitres);
+	}
+
+	public static float convertLiterToVolumeUnit(@NonNull VolumeUnit volumeUnit, float value){
+		if (volumeUnit == VolumeUnit.US_GALLONS) {
+			return value / US_GALLONS_IN_LITER;
+		} else if (volumeUnit == VolumeUnit.IMPERIAL_GALLONS) {
+			return value / IMPERIAL_GALLONS_IN_LITER;
+		} else {
+			return value;
+		}
+	}
+
+	public static float prepareFuelTankCapacityToSave(@NonNull VolumeUnit volumeUnit, float value) {
+		float preparedValueToSave = 0;
+		if (value != 0.0f) {
+			if (volumeUnit == VolumeUnit.US_GALLONS) {
+				preparedValueToSave = value * US_GALLONS_IN_LITER;
+			} else if (volumeUnit == VolumeUnit.IMPERIAL_GALLONS) {
+				preparedValueToSave = value * IMPERIAL_GALLONS_IN_LITER;
+			} else {
+				preparedValueToSave = value;
+			}
+		}
+		return preparedValueToSave;
 	}
 
 	@NonNull
@@ -854,7 +924,11 @@ public class OsmAndFormatter {
 	}
 
 	public static String getFormattedCoordinates(double lat, double lon, int outputFormat) {
-		StringBuilder result = new StringBuilder(LTR_MARK);
+		return getFormattedCoordinates(lat, lon, outputFormat, true);
+	}
+
+	public static String getFormattedCoordinates(double lat, double lon, int outputFormat, boolean forceLTR) {
+		StringBuilder result = new StringBuilder();
 		if (outputFormat == FORMAT_DEGREES_SHORT) {
 			result.append(formatCoordinate(lat, outputFormat)).append(" ").append(formatCoordinate(lon, outputFormat));
 		} else if (outputFormat == FORMAT_DEGREES || outputFormat == FORMAT_MINUTES || outputFormat == FORMAT_SECONDS) {
@@ -895,7 +969,8 @@ public class OsmAndFormatter {
 			DecimalFormat swissGridFormat = new DecimalFormat("###,###.##", formatSymbols);
 			result.append(swissGridFormat.format(swissGrid[0])).append(", ").append(swissGridFormat.format(swissGrid[1]));
 		}
-		return result.toString();
+		String formattedCoordinates = result.toString();
+		return forceLTR ? TextDirectionUtil.markAsLTR(formattedCoordinates) : formattedCoordinates;
 	}
 
 
@@ -935,10 +1010,6 @@ public class OsmAndFormatter {
 					.append(DELIMITER_SECONDS);
 		}
 		return sb.toString();
-	}
-
-	public static String markLTR(String text) {
-		return LTR_MARK + text;
 	}
 
 	private static double formatCoordinate(double coordinate, StringBuilder sb, char delimiter) {

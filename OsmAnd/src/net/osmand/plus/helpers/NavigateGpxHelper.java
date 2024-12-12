@@ -13,7 +13,6 @@ import android.os.ParcelFileDescriptor;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.aidlapi.navigation.NavigateGpxParams;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -26,6 +25,7 @@ import net.osmand.plus.measurementtool.GpxApproximationParams;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -109,7 +109,7 @@ public class NavigateGpxHelper {
 		if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 			RoutingHelper routingHelper = app.getRoutingHelper();
 
-			boolean passWholeRoute = navigationParams.isPassWholeRoute();
+			Boolean passWholeRoute = navigationParams.isPassWholeRoute();
 			boolean checkLocationPermission = navigationParams.isCheckLocationPermission();
 			if (routingHelper.isFollowingMode() && !navigationParams.isForce()) {
 				WeakReference<MapActivity> activityRef = new WeakReference<>(mapActivity);
@@ -170,7 +170,7 @@ public class NavigateGpxHelper {
 	}
 
 	public static void startNavigation(@NonNull MapActivity mapActivity, @NonNull GpxFile gpx,
-	                                   boolean checkLocationPermission, boolean passWholeRoute) {
+	                                   boolean checkLocationPermission, @Nullable Boolean passWholeRoute) {
 		startNavigation(mapActivity, gpx, null, null, null, null, null, checkLocationPermission, passWholeRoute);
 	}
 
@@ -178,14 +178,14 @@ public class NavigateGpxHelper {
 	                                   @Nullable LatLon from, @Nullable PointDescription fromDesc,
 	                                   @Nullable LatLon to, @Nullable PointDescription toDesc,
 	                                   boolean checkLocationPermission) {
-		startNavigation(mapActivity, null, from, fromDesc, to, toDesc, mode, checkLocationPermission, false);
+		startNavigation(mapActivity, null, from, fromDesc, to, toDesc, mode, checkLocationPermission, null);
 	}
 
 	private static void startNavigation(@NonNull MapActivity mapActivity, @Nullable GpxFile gpx,
 	                                    @Nullable LatLon from, @Nullable PointDescription fromDesc,
 	                                    @Nullable LatLon to, @Nullable PointDescription toDesc,
-	                                    @Nullable ApplicationMode mode,
-	                                    boolean checkLocationPermission, boolean passWholeRoute) {
+	                                    @Nullable ApplicationMode mode, boolean checkLocationPermission,
+	                                    @Nullable Boolean passWholeRoute) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		RoutingHelper routingHelper = app.getRoutingHelper();

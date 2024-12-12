@@ -1,11 +1,11 @@
 package net.osmand.shared.gpx.data
 
+import net.osmand.shared.gpx.GpxDirItem
 import net.osmand.shared.gpx.GpxHelper
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.filters.TrackFolderAnalysis
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.KAlgorithms
-import net.osmand.shared.util.KCollectionUtils
 import kotlin.math.max
 
 class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
@@ -18,6 +18,7 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 	private var flattenedSubFolders: List<TrackFolder>? = null
 	private var folderAnalysis: TrackFolderAnalysis? = null
 	private var lastModified: Long = -1
+	var dirItem: GpxDirItem? = null
 
 	init {
 		this.dirFile = dirFile
@@ -37,6 +38,8 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 		lastModified = folder.lastModified
 	}
 
+	override fun getId() = relativePath
+
 	override fun getName(): String {
 		return GpxHelper.getFolderName(dirFile, false)
 	}
@@ -50,14 +53,20 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 	}
 
 	val relativePath: String
-		get() {
-			val dirName = getDirName()
-			val parentFolder = getParentFolder()
-			return if (parentFolder != null && !parentFolder.isRootFolder) parentFolder.relativePath + "/" + dirName else dirName
-		}
+		get() =
+			if (!isRootFolder) {
+				val dirName = dirFile.name()
+				val parent = getParentFolder()
+				if (parent?.isRootFolder == false) parent.relativePath + "/" + dirName else dirName
+			} else {
+				""
+			}
+
 
 	val isRootFolder: Boolean
 		get() = getParentFolder() == null
+
+	fun getRootFolder(): TrackFolder = getParentFolder()?.getRootFolder() ?: this
 
 	fun getParentFolder(): TrackFolder? {
 		return parentFolder
@@ -144,8 +153,8 @@ class TrackFolder(dirFile: KFile, parentFolder: TrackFolder?) :
 		return analysis
 	}
 
-	override fun getDirName(): String {
-		return dirFile.name()
+	override fun getDirName(includingSubdirs: Boolean): String {
+		return if (includingSubdirs) relativePath else dirFile.name()
 	}
 
 	fun getLastModified(): Long {

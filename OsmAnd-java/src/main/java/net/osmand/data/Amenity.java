@@ -14,18 +14,8 @@ import net.osmand.util.MapUtils;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeSet;
 
 import gnu.trove.list.array.TIntArrayList;
 
@@ -83,6 +73,7 @@ public class Amenity extends MapObject {
 	private String mapIconName;
 	private int order;
 	private Map<Integer, List<TagValuePair>> tagGroups;
+	private String regionName;
 
 	public int getOrder() {
 		return order;
@@ -102,8 +93,17 @@ public class Amenity extends MapObject {
 		}
 		tagGroups.put(id, tagValues);
 	}
+
 	public void setTagGroups(Map<Integer, List<TagValuePair>> tagGroups) {
 		this.tagGroups = tagGroups;
+	}
+
+	public void setRegionName(String regionName) {
+		this.regionName = regionName;
+	}
+
+	public String getRegionName() {
+		return regionName;
 	}
 
 	public static class AmenityRoutePoint {
@@ -168,7 +168,12 @@ public class Amenity extends MapObject {
 			return null;
 		}
 		String str = additionalInfo.get(key);
-		str = unzipContent(str);
+		if (str == null && key.contains(":")) {
+			str = additionalInfo.get(key.replaceAll(":", "_-_")); // try content_-_uk after content:uk
+		}
+		if (str != null) {
+			str = unzipContent(str);
+		}
 		return str;
 	}
 
@@ -240,7 +245,7 @@ public class Amenity extends MapObject {
 	public void setAdditionalInfo(String tag, String value) {
 		if ("name".equals(tag)) {
 			setName(value);
-		} else if (tag.startsWith("name:")) {
+		} else if (isNameLangTag(tag)) {
 			setName(tag.substring("name:".length()), value);
 		} else {
 			if (this.additionalInfo == null) {
@@ -427,7 +432,7 @@ public class Amenity extends MapObject {
 			return translateName;
 		}
 		for (String nm : getAdditionalInfoKeys()) {
-			if (nm.startsWith(tag + ":")) {
+			if (nm.startsWith(tag + ":") || nm.startsWith(tag + "_-_")) {
 				return getAdditionalInfo(nm);
 			}
 		}

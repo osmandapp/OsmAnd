@@ -1,5 +1,6 @@
 package net.osmand.shared.gpx
 
+import net.osmand.shared.util.KAlgorithms
 import kotlin.reflect.KClass
 
 enum class GpxParameter(
@@ -75,7 +76,7 @@ enum class GpxParameter(
 	fun convertToDbValue(value: Any?): Any? {
 		return when {
 			value != null && typeClass == Boolean::class -> if (value as Boolean) 1 else 0
-			this == COLOR && value is Int -> if (value == 0) "" else value.toString()
+			this == COLOR && value is Int -> if (value == 0) "" else KAlgorithms.colorToString(value)
 			else -> value
 		}
 	}

@@ -20,10 +20,25 @@ import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.Pair;
 import android.util.TypedValue;
-import android.view.*;
+import android.view.GestureDetector;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.VelocityTracker;
+import android.view.View;
 import android.view.View.OnLayoutChangeListener;
+import android.view.ViewConfiguration;
+import android.view.ViewGroup;
+import android.view.ViewParent;
+import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.*;
+import android.widget.FrameLayout;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.OverScroller;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -2304,7 +2319,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				int fHeight = viewHeight - y - AndroidUtils.getStatusBarHeight(getMapActivity());
 				tileBoxHeightPx = tb.getPixHeight() - fHeight;
 			}
-			getMapActivity().getMapView().fitRectToMap(r.left, r.right, r.top, r.bottom, tileBoxWidthPx, tileBoxHeightPx, 0, marginStartPx);
+			getMapActivity().getMapView().fitRectToMap(r.left, r.right, r.top, r.bottom,
+					tileBoxWidthPx, tileBoxHeightPx, 0, marginStartPx);
 			return true;
 		}
 		return false;

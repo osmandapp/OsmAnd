@@ -16,7 +16,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 
-public abstract class GeometryWayStyle<T extends GeometryWayContext> {
+public abstract class GeometryWayStyle<T extends CommonGeometryWayContext> {
 
 	private final T context;
 	protected Integer color;

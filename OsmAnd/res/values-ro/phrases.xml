@@ -173,7 +173,7 @@
     <string name="poi_healthcare">Servicii medicale</string>
     <string name="poi_administrative">Administrativ</string>
     <string name="poi_education">Educație</string>
-    <string name="poi_landuse">Utilizare terenuri</string>
+    <string name="poi_landuse">Zonificare funcțională</string>
     <string name="poi_trash_disposal">Evacuare gunoi</string>
     <string name="poi_communication">Comunicare</string>
     <string name="poi_power">Putere</string>
@@ -511,9 +511,9 @@
     <string name="poi_orchard">Livadă</string>
     <string name="poi_vineyard">Podgorie</string>
     <string name="poi_quarry">Carieră</string>
-    <string name="poi_retail">Zonă comercială (magazine)</string>
-    <string name="poi_commercial">Zonă comercială (servicii)</string>
-    <string name="poi_landuse_railway">Zonă de cale ferată</string>
+    <string name="poi_retail">Zonă comerț</string>
+    <string name="poi_commercial">Zonă servicii</string>
+    <string name="poi_landuse_railway">Zonă de infrastructură feroviară</string>
     <string name="poi_industrial">Zonă industrială</string>
     <string name="poi_residential">Zonă rezidențială</string>
     <string name="poi_waste_basket">Coș de gunoi</string>
@@ -4286,7 +4286,7 @@
     <string name="poi_parcel_locker">Locker colete</string>
     <string name="poi_tiles">Magazin de gresie și faianță</string>
     <string name="poi_board_type_art">Artă</string>
-    <string name="poi_landuse_education">Educație</string>
+    <string name="poi_landuse_education">Zonă de instituții de învățământ</string>
     <string name="poi_board_type_sight">Vedere</string>
     <string name="poi_board_type_planet_walk">Model sistem solar</string>
     <string name="poi_board_type_sport">Sport</string>

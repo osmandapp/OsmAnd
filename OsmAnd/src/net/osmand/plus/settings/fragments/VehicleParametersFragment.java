@@ -2,15 +2,7 @@ package net.osmand.plus.settings.fragments;
 
 import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.createRoutingParameterPref;
-import static net.osmand.router.GeneralRouter.DEFAULT_SPEED;
-import static net.osmand.router.GeneralRouter.MAX_AXLE_LOAD;
-import static net.osmand.router.GeneralRouter.MOTOR_TYPE;
-import static net.osmand.router.GeneralRouter.RoutingParameter;
-import static net.osmand.router.GeneralRouter.VEHICLE_HEIGHT;
-import static net.osmand.router.GeneralRouter.VEHICLE_LENGTH;
-import static net.osmand.router.GeneralRouter.VEHICLE_WEIGHT;
-import static net.osmand.router.GeneralRouter.VEHICLE_WIDTH;
-import static net.osmand.router.GeneralRouter.WEIGHT_RATING;
+import static net.osmand.router.GeneralRouter.*;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -22,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 
@@ -31,6 +24,7 @@ import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.StringPreference;
+import net.osmand.plus.settings.bottomsheets.FuelTankCapacityBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SimpleSingleSelectionBottomSheet;
 import net.osmand.plus.settings.bottomsheets.VehicleParametersBottomSheet;
 import net.osmand.plus.settings.enums.DrivingRegion;
@@ -43,8 +37,10 @@ import net.osmand.plus.settings.vehiclesize.VehicleSizes;
 import net.osmand.plus.settings.vehiclesize.WeightMetric;
 import net.osmand.plus.settings.vehiclesize.containers.Metric;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.MetricsConstants;
 
 import java.util.Map;
@@ -75,21 +71,89 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 				GeneralRouterProfile routerProfile = router.getProfile();
 				String derivedProfile = mode.getDerivedProfile();
 				Map<String, RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(mode, router);
-				setupVehiclePropertyPref(parameters.get(VEHICLE_HEIGHT), routerProfile, derivedProfile);
-				setupVehiclePropertyPref(parameters.get(VEHICLE_WEIGHT), routerProfile, derivedProfile);
-				setupVehiclePropertyPref(parameters.get(VEHICLE_WIDTH), routerProfile, derivedProfile);
-				setupVehiclePropertyPref(parameters.get(VEHICLE_LENGTH), routerProfile, derivedProfile);
 
-				setupRoutingParameterPref(parameters.get(MOTOR_TYPE));
-				setupRoutingParameterPref(parameters.get(MAX_AXLE_LOAD));
-				setupRoutingParameterPref(parameters.get(WEIGHT_RATING));
-				if (routerProfile != GeneralRouterProfile.PUBLIC_TRANSPORT) {
-					setupDefaultSpeedPref();
-				}
+				showDimensionsCategory(parameters, routerProfile, derivedProfile);
+				showFuelCategory(parameters, routerProfile);
+				showOtherCategory(parameters, routerProfile);
 			}
 		} else {
+			setupCategoryPref(R.string.shared_string_other);
 			setupDefaultSpeedPref();
 		}
+	}
+
+	private void showOtherCategory(@NonNull Map<String, RoutingParameter> parameters, @Nullable GeneralRouterProfile routerProfile) {
+		boolean shouldShowOtherCategory = parameters.get(MAX_AXLE_LOAD) != null
+				|| parameters.get(WEIGHT_RATING) != null
+				|| routerProfile != GeneralRouterProfile.PUBLIC_TRANSPORT;
+		if (shouldShowOtherCategory) {
+			addDividerPref();
+			setupCategoryPref(R.string.shared_string_other);
+		}
+		setupRoutingParameterPref(parameters.get(MAX_AXLE_LOAD));
+		setupRoutingParameterPref(parameters.get(WEIGHT_RATING));
+		if (routerProfile != GeneralRouterProfile.PUBLIC_TRANSPORT) {
+			setupDefaultSpeedPref();
+		}
+	}
+
+	private void showFuelCategory(@NonNull Map<String, RoutingParameter> parameters, @Nullable GeneralRouterProfile routerProfile) {
+		boolean showFuelTankCapacity = routerProfile != null
+				&& routerProfile != GeneralRouterProfile.PEDESTRIAN
+				&& routerProfile != GeneralRouterProfile.BICYCLE
+				&& routerProfile != GeneralRouterProfile.HORSEBACKRIDING
+				&& routerProfile != GeneralRouterProfile.SKI;
+		RoutingParameter motorTypeParameter = parameters.get(MOTOR_TYPE);
+		boolean showCategory = showFuelTankCapacity || motorTypeParameter != null;
+		if (showCategory) {
+			addDividerPref();
+			setupCategoryPref(R.string.poi_filter_fuel);
+		}
+		setupRoutingParameterPref(motorTypeParameter);
+		if (showFuelTankCapacity) {
+			setupFuelTankCapacityPref();
+		}
+	}
+
+	private void showDimensionsCategory(@NonNull Map<String, RoutingParameter> parameters,
+	                                    @Nullable GeneralRouterProfile routerProfile,
+	                                    @Nullable String derivedProfile) {
+		if (routerProfile == null) {
+			return;
+		}
+		RoutingParameter height = parameters.get(VEHICLE_HEIGHT);
+		RoutingParameter weight = parameters.get(VEHICLE_WEIGHT);
+		RoutingParameter width = parameters.get(VEHICLE_WIDTH);
+		RoutingParameter length = parameters.get(VEHICLE_LENGTH);
+		if (height != null || weight != null || width != null || length != null) {
+			setupCategoryPref(R.string.shared_strings_dimensions);
+		}
+
+		setupVehiclePropertyPref(height, routerProfile, derivedProfile);
+		setupVehiclePropertyPref(weight, routerProfile, derivedProfile);
+		setupVehiclePropertyPref(width, routerProfile, derivedProfile);
+		setupVehiclePropertyPref(length, routerProfile, derivedProfile);
+	}
+
+	private void setupCategoryPref(int titleId) {
+		PreferenceCategory preferenceCategory = new PreferenceCategory(requireContext());
+		preferenceCategory.setTitle(titleId);
+		preferenceCategory.setLayoutResource(R.layout.preference_category_with_descr);
+
+		PreferenceScreen screen = getPreferenceScreen();
+		screen.addPreference(preferenceCategory);
+	}
+
+	private void setupFuelTankCapacityPref() {
+		Context ctx = requireContext();
+		ApplicationMode selectedMode = getSelectedAppMode();
+		Preference defaultSpeedPref = new Preference(ctx);
+		defaultSpeedPref.setKey(settings.FUEL_TANK_CAPACITY.getId());
+		defaultSpeedPref.setTitle(R.string.fuel_tank_capacity);
+		defaultSpeedPref.setSummary(OsmAndFormatter.getFormattedFuelCapacityValue(app, settings.UNIT_OF_VOLUME.getModeValue(selectedMode), selectedMode).format(app));
+		defaultSpeedPref.setIcon(getPersistentPrefIcon(R.drawable.ic_action_fuel_tank));
+		defaultSpeedPref.setLayoutResource(R.layout.preference_with_descr);
+		getPreferenceScreen().addPreference(defaultSpeedPref);
 	}
 
 	private void setupVehiclePropertyPref(@Nullable RoutingParameter parameter,
@@ -181,7 +245,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if (DEFAULT_SPEED.equals(preference.getKey())) {
+		String key = preference.getKey();
+		if (DEFAULT_SPEED.equals(key)) {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				ApplicationMode mode = getSelectedAppMode();
@@ -189,6 +254,12 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 				speedHelper.showSeekbarSettingsDialog(activity);
 			}
 			return true;
+		} else if (settings.FUEL_TANK_CAPACITY.getId().equals(key)) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				FuelTankCapacityBottomSheet.showInstance(fragmentManager, preference.getKey(),
+						this, false, getSelectedAppMode());
+			}
 		}
 		return super.onPreferenceClick(preference);
 	}
@@ -203,6 +274,21 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 						Optional.empty());
 		if (preferenceDialog.isPresent()) {
 			show(preferenceDialog.get());
+		} else if (preference instanceof SizePreference) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				VehicleParametersBottomSheet.showInstance(fragmentManager, preference.getKey(),
+						this, false, getSelectedAppMode());
+			}
+		} else if (MOTOR_TYPE_PREF_ID.equals(preference.getKey())) {
+			FragmentManager manager = getFragmentManager();
+			if (manager != null) {
+				ListPreferenceEx pref = (ListPreferenceEx) preference;
+				SimpleSingleSelectionBottomSheet.showInstance(manager, this, preference.getKey(),
+						pref.getTitle().toString(), pref.getDescription(),
+						getSelectedAppMode(), false, pref.getEntries(),
+						pref.getEntryValues(), pref.getValueIndex());
+			}
 		} else {
 			super.onDisplayPreferenceDialog(preference);
 		}
@@ -269,9 +355,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
 		super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
 		if (MOTOR_TYPE_PREF_ID.equals(prefId)) {
-			MapActivity activity = getMapActivity();
-			if (activity != null) {
-				activity.getMapRouteInfoMenu().updateMenu();
+			if (getActivity() instanceof MapActivity mapActivity) {
+				mapActivity.getMapRouteInfoMenu().updateMenu();
 			}
 		}
 	}
@@ -285,22 +370,16 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 		app.getRoutingHelper().onSettingsChanged(getSelectedAppMode());
 	}
 
+	@Nullable
 	private Drawable getPreferenceIcon(String prefId) {
-		switch (prefId) {
-			case DEFAULT_SPEED:
-				return getPersistentPrefIcon(R.drawable.ic_action_speed);
-			case VEHICLE_HEIGHT:
-				return getPersistentPrefIcon(R.drawable.ic_action_height_limit);
-			case VEHICLE_WEIGHT:
-				return getPersistentPrefIcon(R.drawable.ic_action_weight_limit);
-			case VEHICLE_WIDTH:
-				return getPersistentPrefIcon(R.drawable.ic_action_width_limit);
-			case VEHICLE_LENGTH:
-				return getPersistentPrefIcon(R.drawable.ic_action_length_limit);
-			case MOTOR_TYPE:
-				return getPersistentPrefIcon(R.drawable.ic_action_fuel);
-			default:
-				return null;
-		}
+		return switch (prefId) {
+			case DEFAULT_SPEED -> getPersistentPrefIcon(R.drawable.ic_action_speed);
+			case VEHICLE_HEIGHT -> getPersistentPrefIcon(R.drawable.ic_action_height_limit);
+			case VEHICLE_WEIGHT -> getPersistentPrefIcon(R.drawable.ic_action_weight_limit);
+			case VEHICLE_WIDTH -> getPersistentPrefIcon(R.drawable.ic_action_width_limit);
+			case VEHICLE_LENGTH -> getPersistentPrefIcon(R.drawable.ic_action_length_limit);
+			case MOTOR_TYPE -> getPersistentPrefIcon(R.drawable.ic_action_fuel);
+			default -> null;
+		};
 	}
 }

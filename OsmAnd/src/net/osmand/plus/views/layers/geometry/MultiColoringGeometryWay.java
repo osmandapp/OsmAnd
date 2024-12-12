@@ -97,7 +97,7 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 		}
 	}
 
-	protected void updateTrack3DStyle(@Nullable Track3DStyle track3DStyle) {
+	public void updateTrack3DStyle(@Nullable Track3DStyle track3DStyle) {
 		this.track3DStyle = track3DStyle;
 		if (!styleMap.isEmpty()) {
 			for (GeometryWayStyle<?> style : styleMap.values()) {
@@ -112,6 +112,18 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 				}
 			}
 		}
+	}
+
+	public void updateColoringType(@NonNull ColoringType routeColoringType) {
+		coloringType = routeColoringType;
+	}
+
+	public float getCustomWidth() {
+		return this.customWidth;
+	}
+
+	public void updateCustomWidth(@NonNull float customWidth) {
+		this.customWidth = customWidth;
 	}
 
 	protected void updateStylesDashPattern(@Nullable float[] dashPattern) {
@@ -270,16 +282,15 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 		super.addLocation(tb, locationIdx, dist, style, points);
 
 		if (points.size() > 1) {
-			if (style instanceof GeometryGradientWayStyle<?>) {
-				GeometryGradientWayStyle<?> prevStyle = (GeometryGradientWayStyle<?>) points.get(points.size() - 2).style;
-				GeometryGradientWayStyle<?> currStyle = (GeometryGradientWayStyle<?>) style;
+			GeometryWayStyle<?> pStyle = points.get(points.size() - 2).style;
+			if (style instanceof GeometryGradientWayStyle<?> currStyle
+					&& pStyle instanceof GeometryGradientWayStyle<?> prevStyle) {
 				if (!prevStyle.equals(currStyle)) {
 					prevStyle.nextColor = currStyle.currColor;
 				}
 			}
-			if (style instanceof GeometryGradient3DWayStyle<?>) {
-				GeometryGradient3DWayStyle<?> prevStyle = (GeometryGradient3DWayStyle<?>) points.get(points.size() - 2).style;
-				GeometryGradient3DWayStyle<?> currStyle = (GeometryGradient3DWayStyle<?>) style;
+			if (style instanceof GeometryGradient3DWayStyle<?> currStyle
+					&& pStyle instanceof GeometryGradient3DWayStyle<?> prevStyle) {
 				if (!prevStyle.equals(currStyle)) {
 					prevStyle.nextOutlineColor = currStyle.currOutlineColor;
 				}
@@ -290,14 +301,13 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 	@Override
 	protected boolean addInitialPoint(RotatedTileBox tb, double topLatitude, double leftLongitude,
 	                                  double bottomLatitude, double rightLongitude, GeometryWayStyle<?> style,
-	                                  boolean previousVisible, Location lastPoint, int startLocationIndex) {
+	                                  Location lastPoint, int startLocationIndex) {
 		boolean added = super.addInitialPoint(tb, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-				style, previousVisible, lastPoint, startLocationIndex);
+				style, lastPoint, startLocationIndex);
 		if (!added) {
 			return false;
 		}
-		if (style instanceof GeometryGradient3DWayStyle) {
-			GeometryGradient3DWayStyle<?> gradientStyle = (GeometryGradient3DWayStyle<?>) style;
+		if (style instanceof GeometryGradient3DWayStyle<?> gradientStyle) {
 			Geometry3DWayProvider provider = get3DLocationProvider();
 			if (startLocationIndex == 0) {
 				int startColor = provider.getColor(0);
@@ -318,8 +328,7 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 				gradientStyle.currOutlineColor = ColorPalette.Companion.getIntermediateColor(prevOutlineColor, nextOutlineColor, percent);
 				gradientStyle.nextOutlineColor = nextOutlineColor;
 			}
-		} else if (style instanceof GeometryGradientWayStyle) {
-			GeometryGradientWayStyle<?> gradientStyle = (GeometryGradientWayStyle<?>) style;
+		} else if (style instanceof GeometryGradientWayStyle<?> gradientStyle) {
 			GradientGeometryWayProvider provider = getGradientLocationProvider();
 			if (startLocationIndex == 0) {
 				int startColor = provider.getColor(0);
@@ -332,8 +341,7 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 				gradientStyle.currColor = ColorPalette.Companion.getIntermediateColor(prevColor, nextColor, percent);
 				gradientStyle.nextColor = nextColor;
 			}
-		} else if (coloringType.isRouteInfoAttribute() && style instanceof GeometrySolidWayStyle<?>) {
-			GeometrySolidWayStyle<?> prevStyle = (GeometrySolidWayStyle<?>) style;
+		} else if (coloringType.isRouteInfoAttribute() && style instanceof GeometrySolidWayStyle<?> prevStyle) {
 			GeometrySolidWayStyle<?> transparentWayStyle = getSolidWayStyle(Color.TRANSPARENT);
 			int prevStyleIdx = startLocationIndex > 0 ? startLocationIndex - 1 : 0;
 			prevStyle.color = getStyle(prevStyleIdx, transparentWayStyle).color;

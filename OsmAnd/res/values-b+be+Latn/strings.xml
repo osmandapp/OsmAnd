@@ -185,8 +185,7 @@
     <string name="gpx_selection_segment_title">Adrezak</string>
     <string name="gpx_selection_number_of_points">%1$s punktaŭ</string>
     <string name="gpx_selection_point">Punkt %1$s</string>
-    <string name="gpx_selection_route_points">%1$s 
-Punktaŭ maršrutu %2$s</string>
+    <string name="gpx_selection_route_points">%1$s Punktaŭ maršrutu %2$s</string>
     <string name="gpx_selection_points">%1$s
 \nPunkty</string>
     <string name="gpx_selection_track">%1$s 
@@ -604,8 +603,7 @@ Punktaŭ maršrutu %2$s</string>
     <string name="filterpoi_activity">Stvaryć fіltar POI</string>
     <string name="recalculate_route_to_your_location">Vіd transpartu:</string>
     <string name="select_navigation_mode">Vybierycie vіd transpartu</string>
-    <string name="day_night_info_description">Uzychod: %1$s 
-Zachod: %2$s</string>
+    <string name="day_night_info_description">Uzychod: %1$s Zachod: %2$s</string>
     <string name="day_night_info">Uzychod/zachod</string>
     <string name="map_widget_renderer">Styl mapy</string>
     <string name="layer_map_appearance">Skanfіhuravać ekran</string>

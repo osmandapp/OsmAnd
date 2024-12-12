@@ -4635,4 +4635,6 @@
     <string name="poi_wedge">Hydrauliczna zapora drogowa</string>
     <string name="poi_dressing_room">Przebieralnia</string>
     <string name="poi_emergency_bay">Zatoka awaryjna</string>
+    <string name="poi_us_maps_recreation_area_activity_road_cycling">Kolarstwo szosowe</string>
+    <string name="poi_us_maps_recreation_area_activity_other_activities">Inne aktywności</string>
 </resources>

@@ -5,4 +5,8 @@ data class RouteActivity(
 	val label: String,
 	val iconName: String,
 	val group: RouteActivityGroup
-)
+) {
+	override fun toString(): String {
+		return id
+	}
+}

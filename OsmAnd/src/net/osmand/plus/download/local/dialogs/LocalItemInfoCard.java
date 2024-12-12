@@ -12,7 +12,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.utils.AndroidUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -43,8 +42,10 @@ public class LocalItemInfoCard extends BaseCard {
 		String date = format.format(localItem.getLastModified());
 		setupRow(container.findViewById(R.id.data), getString(R.string.shared_string_created), date, false);
 
-		String size = AndroidUtils.formatSize(app, localItem.getSize());
-		setupRow(container.findViewById(R.id.size), getString(R.string.shared_string_size), size, true);
+		long size = localItem.getSize();
+		View sizeRow = container.findViewById(R.id.size);
+		AndroidUiHelper.updateVisibility(sizeRow, size > 0);
+		setupRow(sizeRow, getString(R.string.shared_string_size), localItem.getSizeDescription(app), true);
 	}
 
 	private void setupRow(@NonNull View view, @Nullable String title, @Nullable String description, boolean lastItem) {

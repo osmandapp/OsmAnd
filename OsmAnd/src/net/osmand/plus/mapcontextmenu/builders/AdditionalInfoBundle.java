@@ -1,6 +1,5 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
-import static net.osmand.data.Amenity.NAME;
 import static net.osmand.data.Amenity.SUBTYPE;
 import static net.osmand.data.Amenity.TYPE;
 import static net.osmand.shared.gpx.GpxUtilities.ADDRESS_EXTENSION;
@@ -31,7 +30,7 @@ public class AdditionalInfoBundle {
 	private static final List<String> HIDDEN_EXTENSIONS = Arrays.asList(
 			COLOR_NAME_EXTENSION, ICON_NAME_EXTENSION, BACKGROUND_TYPE_EXTENSION,
 			PROFILE_TYPE_EXTENSION, ADDRESS_EXTENSION, AMENITY_ORIGIN_EXTENSION,
-			NAME, TYPE, SUBTYPE
+			TYPE, SUBTYPE
 	);
 
 	private final OsmandApplication app;

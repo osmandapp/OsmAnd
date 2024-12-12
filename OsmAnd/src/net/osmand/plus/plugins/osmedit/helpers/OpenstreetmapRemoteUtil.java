@@ -12,6 +12,7 @@ import com.github.scribejava.core.model.Response;
 
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.Building;
 import net.osmand.data.LatLon;
@@ -37,7 +38,6 @@ import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthAuthorizationAdapter;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.util.MapUtils;
-import net.osmand.util.OsmUtils;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParserException;
@@ -460,12 +460,12 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 	@Override
 	public Entity loadEntity(@NonNull MapObject object) {
-		EntityType type = OsmUtils.getOsmEntityType(object);
+		EntityType type = ObfConstants.getOsmEntityType(object);
 		if (type == null || type == EntityType.RELATION) {
 			return null;
 		}
 		boolean isWay = type == EntityType.WAY;
-		long entityId = OsmUtils.getOsmObjectId(object);
+		long entityId = ObfConstants.getOsmObjectId(object);
 		try {
 			String api = isWay ? "api/0.6/way/" : "api/0.6/node/";
 			String res = sendRequest(getSiteApi() + api + entityId, "GET", null,

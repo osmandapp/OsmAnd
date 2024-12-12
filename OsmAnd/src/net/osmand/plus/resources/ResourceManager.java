@@ -17,6 +17,8 @@ import android.util.DisplayMetrics;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.gson.Gson;
+
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -24,6 +26,7 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.binary.CachedOsmandIndexes;
@@ -43,7 +46,6 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.download.DownloadOsmandIndexesHelper;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetEntry;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
@@ -72,9 +74,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.text.DateFormat;
 import java.text.MessageFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -116,6 +120,7 @@ public class ResourceManager {
 	private final BitmapTilesCache bitmapTilesCache;
 	private final GeometryTilesCache mapillaryVectorTilesCache;
 	private List<MapTileLayerSize> mapTileLayerSizes = new ArrayList<>();
+	private AssetsCollection assetsCollection;
 
 	private final OsmandApplication context;
 	private final List<ResourceListener> resourceListeners = new ArrayList<>();
@@ -638,10 +643,10 @@ public class ResourceManager {
 
 	public void copyMissingJSAssets() {
 		try {
-			List<AssetEntry> assets = DownloadOsmandIndexesHelper.getBundledAssets(context.getAssets());
+			AssetsCollection assetsCollection = getAssets();
 			File appPath = context.getAppPath(null);
 			if (appPath.canWrite()) {
-				for (AssetEntry asset : assets) {
+				for (AssetEntry asset : assetsCollection.getEntries()) {
 					File jsFile = new File(appPath, asset.destination);
 					if (asset.destination.contains(VOICE_PROVIDER_SUFFIX) && asset.destination
 							.endsWith(TTSVOICE_INDEX_EXT_JS)) {
@@ -658,7 +663,7 @@ public class ResourceManager {
 					}
 				}
 			}
-		} catch (XmlPullParserException | IOException e) {
+		} catch (IOException e) {
 			log.error("Error while loading tts files from assets", e);
 		}
 	}
@@ -798,11 +803,11 @@ public class ResourceManager {
 	                                 boolean firstInstall,
 	                                 boolean overwrite,
 	                                 boolean forceCheck) throws IOException, XmlPullParserException {
-		List<AssetEntry> assetEntries = DownloadOsmandIndexesHelper.getBundledAssets(assetManager);
-		for (AssetEntry asset : assetEntries) {
-			String[] modes = asset.combinedMode.split("\\|");
+		AssetsCollection assetsCollection = getAssets();
+		for (AssetEntry asset : assetsCollection.getEntries()) {
+			String[] modes = asset.mode.split("\\|");
 			if (modes.length == 0) {
-				log.error("Mode '" + asset.combinedMode + "' is not valid");
+				log.error("Mode '" + asset.mode + "' is not valid");
 				continue;
 			}
 			String installMode = null;
@@ -845,15 +850,20 @@ public class ResourceManager {
 			if (ASSET_COPY_MODE__copyOnlyIfDoesNotExist.equals(copyMode)) {
 				if (!exists) {
 					shouldCopy = true;
-				} else if (asset.version != null &&
-						destinationFile.lastModified() < asset.version.getTime()) {
+				} else if (asset.dateVersion != null && destinationFile.lastModified() < asset.dateVersion.getTime()) {
 					shouldCopy = true;
 				}
 			}
 			if (shouldCopy) {
-				copyAssets(assetManager, asset.source, destinationFile);
+				copyAssets(assetManager, asset.source, destinationFile, asset.getVersionTime());
 			}
 		}
+	}
+
+	public static boolean copyAssets(AssetManager assetManager, String assetName,
+	                                 File file, Long lastModifiedTime) throws IOException {
+		copyAssets(assetManager, assetName, file);
+		return lastModifiedTime != null && file.setLastModified(lastModifiedTime);
 	}
 
 	public static void copyAssets(AssetManager assetManager, String assetName, File file) throws IOException {
@@ -1167,18 +1177,30 @@ public class ResourceManager {
 
 	@NonNull
 	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter, QuadRect rect, boolean includeTravel) {
-		return searchAmenities(filter, rect.top, rect.left, rect.bottom, rect.right, -1, includeTravel, null);
+		return searchAmenities(filter, null, rect.top, rect.left, rect.bottom, rect.right, -1, includeTravel, null);
 	}
 
 	@NonNull
-	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter, double topLatitude,
-	                                     double leftLongitude, double bottomLatitude,
-	                                     double rightLongitude, int zoom, boolean includeTravel,
-	                                     ResultMatcher<Amenity> matcher) {
+	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter, double top,
+										 double left, double bottom,
+										 double right, int zoom, boolean includeTravel,
+										 ResultMatcher<Amenity> matcher) {
+		return searchAmenities(filter, null, top, left, bottom, right, zoom, includeTravel, matcher);
+	}
+
+	@NonNull
+	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter, SearchPoiAdditionalFilter additionalFilter, double topLatitude,
+										 double leftLongitude, double bottomLatitude,
+										 double rightLongitude, int zoom, boolean includeTravel,
+										 ResultMatcher<Amenity> matcher) {
 		List<Amenity> amenities = new ArrayList<>();
 		searchAmenitiesInProgress = true;
 		try {
-			if (!filter.isEmpty()) {
+			boolean isEmpty = filter.isEmpty();
+			if (isEmpty && additionalFilter != null) {
+				filter = null;
+			}
+			if (!isEmpty || additionalFilter != null) {
 				int top31 = MapUtils.get31TileNumberY(topLatitude);
 				int left31 = MapUtils.get31TileNumberX(leftLongitude);
 				int bottom31 = MapUtils.get31TileNumberY(bottomLatitude);
@@ -1190,7 +1212,7 @@ public class ResourceManager {
 					}
 					if (index != null && index.checkContainsInt(top31, left31, bottom31, right31)) {
 						List<Amenity> r = index.searchAmenities(top31,
-								left31, bottom31, right31, zoom, filter, matcher);
+								left31, bottom31, right31, zoom, filter, additionalFilter, matcher);
 						if (r != null) {
 							amenities.addAll(r);
 						}
@@ -1493,16 +1515,26 @@ public class ResourceManager {
 		return readers.toArray(new BinaryMapIndexReader[0]);
 	}
 
-	public BinaryMapIndexReader[] getQuickSearchFiles() {
+	public BinaryMapIndexReader[] getQuickSearchFiles(List<String> ignoreExtensions) {
 		Collection<BinaryMapReaderResource> fileReaders = getFileReaders();
 		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
 		for (BinaryMapReaderResource r : fileReaders) {
-			BinaryMapIndexReader shallowReader = r.getShallowReader();
-			if (shallowReader != null && (shallowReader.containsPoiData() || shallowReader.containsAddressData()) &&
-					!r.getFileName().endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
-				BinaryMapIndexReader reader = r.getReader(BinaryMapReaderResourceType.QUICK_SEARCH);
-				if (reader != null) {
-					readers.add(reader);
+			boolean allow = true;
+			if (!Algorithms.isEmpty(ignoreExtensions)) {
+				for (String ext : ignoreExtensions) {
+					if (r.getFileName().endsWith(ext)) {
+						allow = false;
+						break;
+					}
+				}
+			}
+			if (allow) {
+				BinaryMapIndexReader shallowReader = r.getShallowReader();
+				if (shallowReader != null && (shallowReader.containsPoiData() || shallowReader.containsAddressData())) {
+					BinaryMapIndexReader reader = r.getReader(BinaryMapReaderResourceType.QUICK_SEARCH);
+					if (reader != null) {
+						readers.add(reader);
+					}
 				}
 			}
 		}
@@ -1582,5 +1614,33 @@ public class ResourceManager {
 
 	public IncrementalChangesManager getChangesManager() {
 		return changesManager;
+	}
+
+	@NonNull
+	public AssetsCollection getAssets() throws IOException {
+		return assetsCollection == null ? assetsCollection = readBundledAssets() : assetsCollection;
+	}
+
+	private static class AssetEntryList {
+		List<AssetEntry> assets = new ArrayList<>();
+	}
+
+	@NonNull
+	private AssetsCollection readBundledAssets() throws IOException {
+		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
+		AssetManager assetManager = context.getAssets();
+		InputStream isBundledAssetsXml = assetManager.open("bundled_assets.json");
+		AssetEntryList lst = new Gson().fromJson(new InputStreamReader(isBundledAssetsXml), AssetEntryList.class);
+		for (AssetEntry ae : lst.assets) {
+			if (!Algorithms.isEmpty(ae.version)) {
+				try {
+					ae.dateVersion = DATE_FORMAT.parse(ae.version);
+				} catch (ParseException e) {
+					log.error(e.getMessage(), e);
+				}
+			}
+		}
+		isBundledAssetsXml.close();
+		return new AssetsCollection(context, lst.assets);
 	}
 }

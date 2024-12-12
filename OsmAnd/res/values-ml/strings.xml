@@ -635,8 +635,7 @@
     <string name="poi_filter_entertainment">കലാപ്രകടനം</string>
     <string name="auto_zoom_map_descr">"നിങ്ങളുടെ സ്പീഡിനനുസരിച്ച് ഭൂപടത്തിന്റെ സൂം സ്വയം ക്രമീകരിക്കുക "</string>
     <string name="snap_to_road">പാതയില്‍ തന്നെ നിര്‍ത്തുക</string>
-    <string name="day_night_info_description">സൂര്യോദയം: %1$s 
-സൂര്യസ്തമയം: %2$s</string>
+    <string name="day_night_info_description">സൂര്യോദയം: %1$s സൂര്യസ്തമയം: %2$s</string>
     <string name="day_night_info">പകല്‍/രാത്രി വിവരം</string>
     <string name="map_widget_show_ruler">സ്കേല്‍</string>
     <string name="bg_service_sleep_mode_off">"ആപ്പിനെ ബാക്ക്ഗ്രൗണ്ടില്‍ പ്രവര്‍ത്തിപ്പിക്കുക "</string>
@@ -1930,19 +1929,7 @@
     <string name="routing_attr_avoid_ice_roads_fords_description">"മഞ്ഞിലുള്ള (ice) റോഡുകളും  കടത്തുകളും (ford)  ഒഴിവാക്കുക "</string>
     <string name="use_location">സ്ഥാനം ഉപയോഗിക്കു</string>
     <string name="shared_string_gpx_tracks">"ജിപിഎക്സ്  പാതകള്‍"</string>
-    <string name="osmand_plus_extended_description_part8">"മാപ്പിന്റെ ഏകദേശ വ്യാപ്തിയും നിലവാരവും:
-\n. പടിഞ്ഞാറന്‍ യൂറോപ്പ് : ****
-\n .കിഴക്കന്‍ യൂറോപ്പ്  : ***
-\n.റഷ്യ: ***
-\n. വടക്കേ അമേരിക്ക: *** 
-\n. തെക്കേ അമേരിക്ക:**
-\n. ഏഷ്യ: **
-\n. ജപ്പാന്‍ &amp; കൊറിയ :***
-\n. ഗള്‍ഫ് : **
-\n. ആഫ്റിക്ക : **
-\n. അന്റാര്‍ട്ടിക്ക:*
-\nഅഫ്ഗാനിസ്ഥാന്‍ തുടങ്ങി സിംബാവേ വരെ ലോകത്തെ മിക്കവാറും എല്ലാ രാജ്യങ്ങളുടെ ഭൂപടങ്ങളും ഡൗണ്‍ലോഡ് ചെയ്യാനായ് ലഭ്യമാണ്, ഇന്ത്യ, അമേരിക്ക , ആസ്ട്രേലിയ, ഫ്രാന്‍സ്, റഷ്യ, ഇംഗ്ളണ്ട്  , സ്പെയ്ന്‍, ......   
-\n"</string>
+    <string name="osmand_plus_extended_description_part8">"മാപ്പിന്റെ ഏകദേശ വ്യാപ്തിയും നിലവാരവും:\n\n. പടിഞ്ഞാറന്‍ യൂറോപ്പ് : ****\n\n .കിഴക്കന്‍ യൂറോപ്പ്  : ***\n\n.റഷ്യ: ***\n\n. വടക്കേ അമേരിക്ക: *** \n\n. തെക്കേ അമേരിക്ക:**\n\n. ഏഷ്യ: **\n\n. ജപ്പാന്‍ &amp; കൊറിയ :***\n\n. ഗള്‍ഫ് : **\n\n. ആഫ്റിക്ക : **\n\n. അന്റാര്‍ട്ടിക്ക:*\n\nഅഫ്ഗാനിസ്ഥാന്‍ തുടങ്ങി സിംബാവേ വരെ ലോകത്തെ മിക്കവാറും എല്ലാ രാജ്യങ്ങളുടെ ഭൂപടങ്ങളും ഡൗണ്‍ലോഡ് ചെയ്യാനായ് ലഭ്യമാണ്, ഇന്ത്യ, അമേരിക്ക , ആസ്ട്രേലിയ, ഫ്രാന്‍സ്, റഷ്യ, ഇംഗ്ളണ്ട്  , സ്പെയ്ന്‍, ......   \n\n"</string>
     <string name="recalculate_route_to_your_location">ഗതാഗത രീതി:</string>
     <string name="show_lanes">ലേനുകള്‍</string>
     <string name="int_continuosly">തുടരെയുളള</string>

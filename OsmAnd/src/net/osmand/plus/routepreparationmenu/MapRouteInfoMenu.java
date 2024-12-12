@@ -45,10 +45,13 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.data.*;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxHelper;
-import net.osmand.shared.gpx.primitives.WptPt;
+import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.data.SpecialPointType;
+import net.osmand.data.ValueHolder;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
@@ -73,9 +76,32 @@ import net.osmand.plus.myplaces.favorites.FavoritesListener;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ConfigureAppModesBottomSheetDialogFragment;
-import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.*;
-import net.osmand.plus.routepreparationmenu.cards.*;
+import net.osmand.plus.routepreparationmenu.cards.AttachTrackToRoadsBannerCard;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
+import net.osmand.plus.routepreparationmenu.cards.HistoryCard;
+import net.osmand.plus.routepreparationmenu.cards.HomeWorkCard;
+import net.osmand.plus.routepreparationmenu.cards.LongDistanceWarningCard;
+import net.osmand.plus.routepreparationmenu.cards.MapMarkersCard;
+import net.osmand.plus.routepreparationmenu.cards.MissingMapsWarningCard;
+import net.osmand.plus.routepreparationmenu.cards.NauticalBridgeHeightWarningCard;
+import net.osmand.plus.routepreparationmenu.cards.PedestrianRouteCard;
+import net.osmand.plus.routepreparationmenu.cards.PreviousRouteCard;
+import net.osmand.plus.routepreparationmenu.cards.PublicTransportBetaWarningCard;
+import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
+import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundSettingsWarningCard;
+import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundWarningCard;
+import net.osmand.plus.routepreparationmenu.cards.SimpleRouteCard;
+import net.osmand.plus.routepreparationmenu.cards.TrackEditCard;
+import net.osmand.plus.routepreparationmenu.cards.TracksCard;
+import net.osmand.plus.routepreparationmenu.data.RouteMenuAppModes;
+import net.osmand.plus.routepreparationmenu.data.parameters.AvoidPTTypesRoutingParameter;
+import net.osmand.plus.routepreparationmenu.data.parameters.AvoidRoadsRoutingParameter;
+import net.osmand.plus.routepreparationmenu.data.parameters.LocalRoutingParameter;
+import net.osmand.plus.routepreparationmenu.data.parameters.LocalRoutingParameterGroup;
+import net.osmand.plus.routepreparationmenu.data.parameters.MuteSoundRoutingParameter;
+import net.osmand.plus.routepreparationmenu.data.parameters.OtherLocalRoutingParameter;
+import net.osmand.plus.routepreparationmenu.data.parameters.ShowAlongTheRouteItem;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -108,6 +134,9 @@ import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.TransportRouteResult;
 import net.osmand.search.core.SearchResult;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxHelper;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -115,7 +144,13 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
 
 public class MapRouteInfoMenu implements IRouteInformationListener, CardListener, FavoritesListener {
 
@@ -461,7 +496,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					fragment.updateInfo();
 					if (!routeCalculationInProgress) {
 						fragment.hideRouteCalculationProgressBar();
-						openMenuAfterCalculation(fragment, app);
+						if (!app.getOsmandMap().getMapView().isCarView()) {
+							openMenuAfterCalculation(fragment, app);
+						}
 					}
 				}
 			}
@@ -1513,7 +1550,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				if (mapActivity.getPointToNavigate() != null) {
 					hide();
 				}
-				mapActivity.getMapLayers().getMapActionsHelper().startNavigation();
+				mapActivity.getMapActions().startNavigation();
 			}
 		}
 	}
@@ -1528,7 +1565,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private void clickRouteCancel() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			mapActivity.getMapLayers().getMapActionsHelper().stopNavigation();
+			mapActivity.getMapActions().stopNavigation();
 			resetRouteCalculation();
 		}
 	}
@@ -2345,7 +2382,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				mapActivity.refreshMap();
 				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), true);
 				if (switched) {
-					mapActivity.getMapLayers().getMapActionsHelper().switchToRouteFollowingLayout();
+					mapActivity.getMapActions().switchToRouteFollowingLayout();
 				}
 				if (mapActivity.getPointToNavigate() == null && !selectFromMapTouch && !selectFromTracks
 						&& !customizingRouteLine) {

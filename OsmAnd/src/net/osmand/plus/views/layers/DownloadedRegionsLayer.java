@@ -93,6 +93,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	private int lastCheckMapCx;
 	private int lastCheckMapCy;
 	private int lastCheckMapZoom;
+	private int lastCheckDataHash;
 
 	private static final int ZOOM_TO_SHOW_MAP_NAMES = 6;
 	private static final int ZOOM_AFTER_BASEMAP = 12;
@@ -180,6 +181,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		pathDownloaded = new Path();
 		pathSelected = new Path();
 		pathBackuped = new Path();
+
 
 		data = new MapLayerData<List<BinaryMapDataObject>>() {
 
@@ -295,12 +297,15 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		int zoom = tileBox.getZoom();
 		int cx = tileBox.getCenter31X();
 		int cy = tileBox.getCenter31Y();
-		if (lastCheckMapCx == cx && lastCheckMapCy == cy && lastCheckMapZoom == zoom) {
+		if (lastCheckMapCx == cx && lastCheckMapCy == cy && lastCheckMapZoom == zoom && !checkHashForFirstUsage(currentObjects)) {
 			return;
 		}
 		lastCheckMapCx = cx;
 		lastCheckMapCy = cy;
 		lastCheckMapZoom = zoom;
+		if (currentObjects != null) {
+			lastCheckDataHash = currentObjects.hashCode();
+		}
 
 		MapActivity mapActivity = getMapActivity();
 		if (app.getSettings().SHOW_DOWNLOAD_MAP_DIALOG.get()
@@ -343,6 +348,9 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 				if (indexItems.size() == 0) {
 					if (!indexes.isDownloadedFromInternet && app.getSettings().isInternetConnectionAvailable()) {
 						downloadThread.runReloadIndexFilesSilent();
+						lastCheckMapCx = 0;
+						lastCheckMapCy = 0;
+						lastCheckMapZoom = 0;
 					}
 				} else {
 					for (IndexItem item : indexItems) {
@@ -385,6 +393,11 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		if (mapActivity != null) {
 			app.runInUIThread(() -> mapActivity.hideTopToolbar(TopToolbarControllerType.DOWNLOAD_MAP));
 		}
+	}
+
+	private boolean checkHashForFirstUsage(@Nullable List<BinaryMapDataObject> currentObjects) {
+		boolean firstTimeAppStart = app.getAppInitializer().isFirstTime();
+		return firstTimeAppStart && currentObjects != null && lastCheckDataHash != currentObjects.hashCode();
 	}
 
 	private void removeRegionObjectsFromList(@NonNull List<BinaryMapDataObject> list, @NonNull WorldRegion region) {

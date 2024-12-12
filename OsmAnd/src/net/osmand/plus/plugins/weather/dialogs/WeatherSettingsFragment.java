@@ -89,10 +89,8 @@ public class WeatherSettingsFragment extends BaseSettingsFragment implements Wea
 		offlineForecastHelper = app.getOfflineForecastHelper();
 		Context ctx = requireContext();
 
-		Preference divider = new Preference(ctx);
-		divider.setLayoutResource(R.layout.simple_divider_item);
+		Preference divider = createDividerPref();
 		divider.setKey("weather_cache_divider");
-		divider.setSelectable(false);
 		addOnPreferencesScreen(divider);
 
 		PreferenceCategory category = new PreferenceCategory(ctx);
@@ -121,11 +119,8 @@ public class WeatherSettingsFragment extends BaseSettingsFragment implements Wea
 		Context context = requireContext();
 		int profileColor = getActiveProfileColor();
 
-		Preference divider = new Preference(context);
-		divider.setLayoutResource(R.layout.simple_divider_item);
+		Preference divider = createDividerPref();
 		divider.setKey("buttons_divider");
-		divider.setSelectable(false);
-		divider.setPersistent(false);
 		addOnPreferencesScreen(divider);
 
 		Preference resetToDefault = new Preference(context);

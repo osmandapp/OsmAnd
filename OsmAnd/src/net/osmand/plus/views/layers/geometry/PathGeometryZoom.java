@@ -12,7 +12,7 @@ import java.util.List;
 
 import gnu.trove.list.array.TByteArrayList;
 
-class PathGeometryZoom {
+public class PathGeometryZoom {
 
 	private static final float EPSILON_IN_DPI = 2;
 	private final TByteArrayList simplifyPoints;

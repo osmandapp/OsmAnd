@@ -47,10 +47,24 @@
 		android:title="@string/simulate_your_location"
 		tools:summary="@string/simulate_your_location_stop_descr" />
 
+	<Preference
+		android:key="location_interpolation_percent"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/location_interpolation_percent"
+		tools:summary="50 %" />
+
 	<PreferenceCategory
 		android:key="debugging_and_development"
 		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/debugging_and_development" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="simulate_obd_data"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/simulate_obd" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="battery_saving"

@@ -19,6 +19,7 @@ public enum OsmAndFeature {
 	CROSS_BUY(R.string.shared_string_cross_buy, R.string.purchases_feature_desc_cross_buy, R.drawable.ic_action_cross_buy_colored_day, R.drawable.ic_action_cross_buy_colored_night),
 	WEATHER(R.string.shared_string_weather, R.string.weather_plugin_description, R.drawable.ic_action_umbrella_colored, R.drawable.ic_action_umbrella_colored_night),
 	RELIEF_3D(R.string.relief_3d, R.string.relief_3d_description, R.drawable.ic_action_3d_relief_colored_day, R.drawable.ic_action_3d_relief_colored_night),
+	VEHICLE_METRICS(R.string.vehicle_metrics_obd_ii, R.string.purchase_feature_desc_vehicle_metrics_obd_ii, R.drawable.ic_action_vehicle_metrics_colored_day, R.drawable.ic_action_vehicle_metrics_colored_night),
 	MONTHLY_MAP_UPDATES(R.string.monthly_map_updates, R.string.purchases_feature_desc_monthly_map_updates, R.drawable.ic_action_monthly_map_updates_colored_day, R.drawable.ic_action_monthly_map_updates_colored_night),
 	UNLIMITED_MAP_DOWNLOADS(R.string.unlimited_map_downloads, R.string.purchases_feature_desc_unlimited_map_download, R.drawable.ic_action_unlimited_downloads_colored_day, R.drawable.ic_action_unlimited_download_colored_night),
 	ANDROID_AUTO(R.string.android_auto, R.string.purchases_feature_desc_android_auto, R.drawable.ic_action_android_auto_colored, R.drawable.ic_action_android_auto_colored_night),
@@ -89,7 +90,8 @@ public enum OsmAndFeature {
 			TERRAIN,
 			NAUTICAL,
 			WEATHER,
-			RELIEF_3D
+			RELIEF_3D,
+			VEHICLE_METRICS
 	);
 
 	public static final List<OsmAndFeature> OSMAND_PRO_PREVIEW_FEATURES = Arrays.asList(
@@ -104,7 +106,8 @@ public enum OsmAndFeature {
 			TERRAIN,
 			NAUTICAL,
 			WEATHER,
-			RELIEF_3D
+			RELIEF_3D,
+			VEHICLE_METRICS
 	);
 
 	public static final List<OsmAndFeature> MAPS_PLUS_FEATURES = Arrays.asList(

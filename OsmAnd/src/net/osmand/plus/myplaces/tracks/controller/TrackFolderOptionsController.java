@@ -12,7 +12,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
@@ -20,10 +19,9 @@ import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.data.DisplayItem;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemClicked;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
-import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.settings.bottomsheets.CustomizableOptionsBottomSheet;
-import net.osmand.shared.gpx.data.TrackFolder;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
@@ -31,17 +29,16 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.AlertDialogExtra;
 import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
-public class TrackFolderOptionsController extends BaseDialogController implements IDisplayDataProvider,
-		IDialogItemClicked, TrackFolderOptionsListener {
+public class TrackFolderOptionsController extends BaseDialogController
+		implements IDisplayDataProvider, IDialogItemClicked, TrackFolderOptionsListener {
 
 	private final static Log LOG = PlatformUtil.getLog(TrackFolderOptionsController.class);
 
@@ -165,7 +162,7 @@ public class TrackFolderOptionsController extends BaseDialogController implement
 				}
 			});
 			String caption = activity.getString(R.string.enter_new_name);
-			CustomAlert.showInput(dialogData, activity, trackFolder.getDirName(), caption);
+			CustomAlert.showInput(dialogData, activity, trackFolder.getDirName(false), caption);
 		}
 	}
 
@@ -175,15 +172,7 @@ public class TrackFolderOptionsController extends BaseDialogController implement
 		if (oldDir.renameTo(newDir)) {
 			trackFolder.setDirFile(SharedUtil.kFile(newDir));
 			trackFolder.resetCachedData();
-
-			List<File> files = new ArrayList<>();
-			for (TrackItem trackItem : trackFolder.getFlattenedTrackItems()) {
-				KFile file = trackItem.getFile();
-				if (file != null) {
-					files.add(SharedUtil.jFile(file));
-				}
-			}
-			FileUtils.updateMovedGpxFiles(app, files, oldDir, newDir);
+			FileUtils.updateMovedTrackFolder(app, trackFolder, oldDir, newDir);
 
 			dialogManager.askRefreshDialogCompletely(PROCESS_ID);
 
@@ -234,6 +223,8 @@ public class TrackFolderOptionsController extends BaseDialogController implement
 
 	@Override
 	public void onFolderDeleted() {
+		FileUtils.updateAfterDeleteTrackFolder(app, trackFolder);
+
 		// Close options dialog after folder deleted
 		dialogManager.askDismissDialog(PROCESS_ID);
 

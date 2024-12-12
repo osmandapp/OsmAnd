@@ -875,7 +875,7 @@ public class BackupHelper {
 						if (PluginsHelper.isDevelopment()) {
 							if (fileChangedRemotely || fileChangedLocally) {
 								LOG.debug("file to backup " + localFile + " " + remoteFile
-										+ " " + fileChangedRemotely + " fileChangedRemotely " + fileChangedLocally + "fileChangedLocally");
+										+ " fileChangedRemotely " + fileChangedRemotely + " fileChangedLocally " + fileChangedLocally);
 							}
 						}
 					} else if (!remoteFile.isDeleted()) {

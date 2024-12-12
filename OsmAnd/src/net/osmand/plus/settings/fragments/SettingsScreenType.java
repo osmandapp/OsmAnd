@@ -10,7 +10,8 @@ import net.osmand.plus.plugins.development.DevelopmentSettingsFragment;
 import net.osmand.plus.plugins.externalsensors.ExternalSettingsWriteToTrackSettingsFragment;
 import net.osmand.plus.plugins.externalsensors.dialogs.ExternalDevicesListFragment;
 import net.osmand.plus.plugins.monitoring.MonitoringSettingsFragment;
-import net.osmand.plus.plugins.odb.dialogs.VehicleMetricsSettingsFragment;
+import net.osmand.plus.plugins.odb.dialogs.OBDDevicesListFragment;
+import net.osmand.plus.plugins.odb.dialogs.OBDMainFragment;
 import net.osmand.plus.plugins.osmedit.fragments.OsmEditingFragment;
 import net.osmand.plus.plugins.weather.dialogs.WeatherSettingsFragment;
 import net.osmand.plus.settings.datastorage.DataStorageFragment;
@@ -48,7 +49,8 @@ public enum SettingsScreenType {
 	// FK-TODO: make searchable:
 	SIMULATION_NAVIGATION(SimulationNavigationSettingFragment.class, true, ApplyQueryType.NONE, R.xml.simulation_navigation_setting, R.layout.profile_preference_toolbar_with_switch),
 	ANT_PLUS_SETTINGS(ExternalDevicesListFragment.class, false, null, R.xml.antplus_settings, R.layout.global_preference_toolbar),
-	VEHICLE_METRICS_SETTINGS(VehicleMetricsSettingsFragment.class, false, null, R.xml.antplus_settings, R.layout.global_preference_toolbar),
+	VEHICLE_METRICS_SETTINGS(OBDDevicesListFragment.class, false, null, R.xml.antplus_settings, R.layout.global_preference_toolbar),
+	VEHICLE_CONNECTED_METRICS_SETTINGS(OBDMainFragment.class, false, null, R.xml.antplus_settings, R.layout.global_preference_toolbar),
 	WEATHER_SETTINGS(WeatherSettingsFragment.class, true, ApplyQueryType.SNACK_BAR, R.xml.weather_settings, R.layout.profile_preference_toolbar),
 	EXTERNAL_SETTINGS_WRITE_TO_TRACK_SETTINGS(ExternalSettingsWriteToTrackSettingsFragment.class, true, ApplyQueryType.BOTTOM_SHEET, R.xml.external_sensors_write_to_track_settings, R.layout.profile_preference_toolbar),
 	DANGEROUS_GOODS(DangerousGoodsFragment.class, true, ApplyQueryType.NONE, R.xml.dangerous_goods_parameters, R.layout.global_preference_toolbar),

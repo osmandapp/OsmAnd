@@ -49,7 +49,7 @@ public class GmsLocationServiceHelper extends LocationServiceHelper {
 
 		fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(app);
 		fusedLocationRequest = new LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 100).build();
-		networkLocationRequest = new LocationRequestCompat.Builder(100).setQuality(LocationRequestCompat.QUALITY_HIGH_ACCURACY).build();
+		networkLocationRequest = new LocationRequestCompat.Builder(5000).setQuality(LocationRequestCompat.QUALITY_HIGH_ACCURACY).build();
 		fusedLocationCallback = new com.google.android.gms.location.LocationCallback() {
 			@Override
 			public void onLocationResult(@NonNull LocationResult locationResult) {

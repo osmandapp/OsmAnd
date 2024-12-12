@@ -1,5 +1,9 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.plus.settings.backend.OsmAndAppCustomizationFields.ROUTE_INTERMEDIATE_POINT;
+import static net.osmand.plus.settings.backend.OsmAndAppCustomizationFields.ROUTE_START_POINT;
+import static net.osmand.plus.settings.backend.OsmAndAppCustomizationFields.ROUTE_TARGET_POINT;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -182,18 +186,18 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 				if (pointToStart != null) {
 					int x = MapUtils.get31TileNumberX(pointToStart.getLongitude());
 					int y = MapUtils.get31TileNumberY(pointToStart.getLatitude());
-					drawMarker(markersCollection, mStartPoint, new PointI(x, y), null);
+					drawMarkerOpenGL(markersCollection, mStartPoint, new PointI(x, y), null);
 				}
 				for (int i = 0; i < intermediatePoints.size(); i++) {
 					TargetPoint ip = intermediatePoints.get(i);
 					int x = MapUtils.get31TileNumberX(ip.getLongitude());
 					int y = MapUtils.get31TileNumberY(ip.getLatitude());
-					drawMarker(markersCollection, mIntermediatePoint, new PointI(x, y), String.valueOf(i + 1));
+					drawMarkerOpenGL(markersCollection, mIntermediatePoint, new PointI(x, y), String.valueOf(i + 1));
 				}
 				if (pointToNavigate != null) {
 					int x = MapUtils.get31TileNumberX(pointToNavigate.getLongitude());
 					int y = MapUtils.get31TileNumberY(pointToNavigate.getLatitude());
-					drawMarker(markersCollection, mTargetPoint, new PointI(x, y), null);
+					drawMarkerOpenGL(markersCollection, mTargetPoint, new PointI(x, y), null);
 				}
 				mapRenderer.addSymbolsProvider(markersCollection);
 				this.mapMarkersCollection = markersCollection;
@@ -226,9 +230,9 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	}
 
 	private void recreateBitmaps() {
-		mStartPoint = getScaledBitmap(R.drawable.map_start_point);
-		mTargetPoint = getScaledBitmap(R.drawable.map_target_point);
-		mIntermediatePoint = getScaledBitmap(R.drawable.map_intermediate_point);
+		mStartPoint = getScaledBitmap(ROUTE_START_POINT);
+		mTargetPoint = getScaledBitmap(ROUTE_TARGET_POINT);
+		mIntermediatePoint = getScaledBitmap(ROUTE_INTERMEDIATE_POINT);
 		clearMapMarkersCollections();
 	}
 
@@ -326,7 +330,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	@Override
 	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position,
-									   @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback) {
+	                                   @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback) {
 		boolean result = false;
 		TargetPoint newTargetPoint = null;
 		if (o instanceof TargetPoint) {
@@ -357,9 +361,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		applyMovableObject(position);
 	}
 
-	/** OpenGL */
-	private void drawMarker(@NonNull MapMarkersCollection markersCollection,
-	                        @NonNull Bitmap bitmap, @NonNull PointI position, @Nullable String caption) {
+	private void drawMarkerOpenGL(@NonNull MapMarkersCollection markersCollection,
+	                              @NonNull Bitmap bitmap, @NonNull PointI position, @Nullable String caption) {
 		if (!getMapView().hasMapRenderer()) {
 			return;
 		}
@@ -374,7 +377,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 				.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.Right);
 
 		if (caption != null) {
-			initCaptionStyle();
+			initCaptionStyleOpenGL();
 			mapMarkerBuilder
 					.setCaptionStyle(captionStyle)
 					.setCaptionTopSpace(-mIntermediatePoint.getHeight() * 0.7 - captionStyle.getSize() / 2)
@@ -383,8 +386,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		mapMarkerBuilder.buildAndAddToCollection(markersCollection);
 	}
 
-	/** OpenGL */
-	private void initCaptionStyle() {
+	private void initCaptionStyleOpenGL() {
 		if (!getMapView().hasMapRenderer() || captionStyle != null) {
 			return;
 		}

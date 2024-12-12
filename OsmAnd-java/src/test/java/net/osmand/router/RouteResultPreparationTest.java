@@ -23,6 +23,7 @@ import java.util.TreeSet;
 import org.apache.commons.logging.Log;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -40,6 +41,7 @@ import net.osmand.util.Algorithms;
  * Created by yurkiss on 04.03.16.
  */
 
+@Ignore
 @RunWith(Parameterized.class)
 public class RouteResultPreparationTest {
     

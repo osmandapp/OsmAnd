@@ -244,7 +244,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 			getPreferenceScreen().addPreference(straightAngle);
 		}
 
-		addDivider(screen);
+		addDividerPref();
 		setupRouteRecalcHeader(screen);
 		setupSelectRouteRecalcDistance(screen);
 		setupReverseDirectionRecalculation(screen);
@@ -418,7 +418,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 	}
 
 	private void setupDevelopmentCategoryPreferences(PreferenceScreen screen, ApplicationMode mode, final Class<? extends OsmandPlugin> plugin) {
-		addDivider(screen);
+		addDividerPref();
 		setupDevelopmentCategoryHeader(screen, plugin);
 		if (mode.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT)) {
 			setupOsmLiveForPublicTransportPref(plugin);

@@ -1,11 +1,12 @@
 package net.osmand.plus.resources;
 
-import java.util.List;
-
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.data.Amenity;
+
+import java.util.List;
 
 public interface AmenityIndexRepository {
 
@@ -18,7 +19,8 @@ public interface AmenityIndexRepository {
 	/**
 	 * Search amenities in the specified box doesn't cache results 
 	 */
-	List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int zoom, SearchPoiTypeFilter filter,
+	List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int zoom,
+								  SearchPoiTypeFilter filter, SearchPoiAdditionalFilter additionalFilter,
 			 ResultMatcher<Amenity> matcher);
 
 	List<Amenity> searchAmenitiesOnThePath(List<Location> locations, double radius, SearchPoiTypeFilter filter, 

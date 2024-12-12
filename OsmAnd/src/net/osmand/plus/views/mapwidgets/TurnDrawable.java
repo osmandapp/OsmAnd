@@ -1,31 +1,32 @@
 package net.osmand.plus.views.mapwidgets;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.PointF;
-import android.graphics.Rect;
+import android.graphics.*;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.views.TurnPathHelper;
 import net.osmand.router.TurnType;
 
+import org.apache.commons.logging.Log;
+
 public class TurnDrawable extends Drawable {
+
+	protected static final Log log = PlatformUtil.getLog(TurnDrawable.class);
 
 	protected Paint paintBlack;
 	protected Paint paintRouteDirection;
 	protected Path pathForTurn = new Path();
 	protected Path pathForTurnOutlay = new Path();
+	private final Path originalPathForTurn = new Path();
+	private final Path originalPathForTurnOutlay = new Path();
 	protected TurnType turnType;
 	protected int turnImminent;
 	protected boolean deviatedFromRoute;
@@ -64,10 +65,15 @@ public class TurnDrawable extends Drawable {
 		float scaleX = bounds.width() / 72f;
 		float scaleY = bounds.height() / 72f;
 		m.setScale(scaleX, scaleY);
-		pathForTurn.transform(m, pathForTurn);
+
+		pathForTurn.set(originalPathForTurn);
+		pathForTurn.transform(m);
+
+		pathForTurnOutlay.set(originalPathForTurnOutlay);
+		pathForTurnOutlay.transform(m);
+
 		centerText.x = scaleX * centerText.x;
 		centerText.y = scaleY * centerText.y;
-		pathForTurnOutlay.transform(m, pathForTurnOutlay);
 	}
 
 	public int getTurnImminent() {
@@ -109,7 +115,7 @@ public class TurnDrawable extends Drawable {
 		}
 	}
 
-	public void setTextPaint(TextPaint textPaint) {
+	public void setTextPaint(@NonNull TextPaint textPaint) {
 		this.textPaint = textPaint;
 		this.textPaint.setTextAlign(Paint.Align.CENTER);
 	}
@@ -129,14 +135,15 @@ public class TurnDrawable extends Drawable {
 		return 0;
 	}
 
+	@Nullable
 	public TurnType getTurnType() {
 		return turnType;
 	}
 
-	public boolean setTurnType(TurnType turnType) {
+	public boolean setTurnType(@Nullable TurnType turnType) {
 		if (turnType != this.turnType && !getBounds().isEmpty()) {
 			this.turnType = turnType;
-			TurnPathHelper.calcTurnPath(pathForTurn, pathForTurnOutlay, turnType, null,
+			TurnPathHelper.calcTurnPath(originalPathForTurn, originalPathForTurnOutlay, turnType, null,
 					centerText, mini, false, true, false);
 			onBoundsChange(getBounds());
 			return true;

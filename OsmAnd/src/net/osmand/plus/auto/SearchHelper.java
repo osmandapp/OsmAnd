@@ -1,6 +1,7 @@
 package net.osmand.plus.auto;
 
 import static android.text.Spanned.SPAN_INCLUSIVE_INCLUSIVE;
+import static net.osmand.search.core.ObjectType.INDEX_ITEM;
 
 import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
@@ -184,7 +185,7 @@ public class SearchHelper {
 			List<SearchResult> searchResults = new ArrayList<>();
 			for (SearchResult r : resultCollection.getCurrentSearchResults()) {
 				String name = QuickSearchListItem.getName(app, r);
-				if (Algorithms.isEmpty(name)) {
+				if (Algorithms.isEmpty(name) || r.objectType == INDEX_ITEM) {
 					continue;
 				}
 				Drawable icon = QuickSearchListItem.getIcon(app, r);
@@ -267,7 +268,7 @@ public class SearchHelper {
 			float dist = (float) MapUtils.getDistance(placeLocation, searchLocation);
 			SpannableString description = !Algorithms.isEmpty(typeName)
 					? new SpannableString("  • " + typeName) : new SpannableString(" ");
-			DistanceSpan distanceSpan = DistanceSpan.create(TripHelper.getDistance(app, dist));
+			DistanceSpan distanceSpan = DistanceSpan.create(TripUtils.getDistance(app, dist));
 			description.setSpan(distanceSpan, 0, 1, SPAN_INCLUSIVE_INCLUSIVE);
 			builder.addText(description);
 			builder.setMetadata(new Metadata.Builder().setPlace(new Place.Builder(

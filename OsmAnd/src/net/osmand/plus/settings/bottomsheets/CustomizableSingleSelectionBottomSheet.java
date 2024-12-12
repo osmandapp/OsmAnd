@@ -84,8 +84,8 @@ public class CustomizableSingleSelectionBottomSheet extends CustomizableBottomSh
 
 	@Override
 	protected boolean hideButtonsContainer() {
-		Boolean showBottomButtons = (Boolean) displayData.getExtra(SHOW_BOTTOM_BUTTONS);
-		return showBottomButtons == null || !showBottomButtons;
+		Boolean show = displayData != null ? (Boolean) displayData.getExtra(SHOW_BOTTOM_BUTTONS) : null;
+		return show == null || !show;
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager,

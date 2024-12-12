@@ -40,18 +40,18 @@ import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.icon.OnIconsPaletteListener;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.editors.controller.EditorColorController;
 import net.osmand.plus.mapcontextmenu.editors.icon.EditorIconController;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
-import net.osmand.plus.widgets.dialogbutton.DialogButton;
-import net.osmand.plus.widgets.tools.SimpleTextWatcher;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.measurementtool.ExitBottomSheetDialogFragment;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -88,14 +88,13 @@ public abstract class EditorFragment extends BaseOsmAndFragment
 		return iconName;
 	}
 
-	public void setIconName(@NonNull String iconName) {
-		this.iconName = iconName;
+	public void setIconName(@Nullable String iconName) {
+		this.iconName = iconName != null ? iconName : DEFAULT_ICON_NAME;
 	}
 
 	@DrawableRes
 	public int getIconId() {
-		int iconId = RenderingIcons.getBigIconResourceId(iconName);
-		return iconId != 0 ? iconId : DEFAULT_UI_ICON_ID;
+		return AndroidUtils.getDrawableId(app, iconName, DEFAULT_UI_ICON_ID);
 	}
 
 	public void setIcon(@DrawableRes int iconId) {
@@ -308,7 +307,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment
 	}
 
 	@Override
-	public void onIconSelectedFromPalette(@NonNull String icon) {
+	public void onIconSelectedFromPalette(@Nullable String icon) {
 		setIconName(icon);
 		updateContent();
 	}

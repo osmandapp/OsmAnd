@@ -29,6 +29,7 @@ import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
+import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.DistanceDuringNavigationBottomSheet;
@@ -40,6 +41,10 @@ import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandler;
 import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandlerProvider;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
+import net.osmand.plus.settings.enums.VolumeUnit;
+import net.osmand.router.GeneralRouter;
+import net.osmand.shared.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.UiUtilities;
@@ -69,6 +74,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		setupCoordinatesFormatPref();
 		setupAngularUnitsPref();
 		setupSpeedSystemPref();
+		setupUnitOfVolumePref();
 		setupPreciseDistanceNumbersPref();
 
 		setupVolumeButtonsAsZoom();
@@ -218,6 +224,41 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		speedSystem.setEntryValues(entryValues);
 		speedSystem.setDescription(R.string.default_speed_system_descr);
 		speedSystem.setIcon(getActiveIcon(R.drawable.ic_action_speed));
+	}
+
+	private void setupUnitOfVolumePref() {
+		boolean hidePref = false;
+		ApplicationMode mode = getSelectedAppMode();
+		RouteService routeService = mode.getRouteService();
+		if (routeService == RouteService.OSMAND) {
+			GeneralRouter router = app.getRouter(mode);
+			if (router != null) {
+				GeneralRouter.GeneralRouterProfile routerProfile = router.getProfile();
+				hidePref = routerProfile == null
+						|| routerProfile == GeneralRouter.GeneralRouterProfile.PEDESTRIAN
+						|| routerProfile == GeneralRouter.GeneralRouterProfile.BICYCLE
+						|| routerProfile == GeneralRouter.GeneralRouterProfile.HORSEBACKRIDING
+						|| routerProfile == GeneralRouter.GeneralRouterProfile.SKI;
+			}
+		}
+		ListPreferenceEx unitOfVolumePref = findPreference(settings.UNIT_OF_VOLUME.getId());
+		if (hidePref) {
+			unitOfVolumePref.setVisible(false);
+		} else {
+			VolumeUnit[] unitValues = VolumeUnit.values();
+			String[] entries = new String[unitValues.length];
+			Integer[] entryValues = new Integer[unitValues.length];
+
+			for (int i = 0; i < entries.length; i++) {
+				entries[i] = unitValues[i].toHumanString(app);
+				entryValues[i] = unitValues[i].ordinal();
+			}
+
+			unitOfVolumePref.setEntries(entries);
+			unitOfVolumePref.setEntryValues(entryValues);
+			unitOfVolumePref.setDescription(R.string.unit_of_volume_description);
+			unitOfVolumePref.setIcon(getActiveIcon(R.drawable.ic_action_fuel_tank));
+		}
 	}
 
 	private void setupPreciseDistanceNumbersPref() {

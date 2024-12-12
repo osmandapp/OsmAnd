@@ -2,7 +2,6 @@ package net.osmand.plus.views.mapwidgets.configure.dialogs;
 
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 
-import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,7 +18,6 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -95,11 +93,6 @@ public class Map3DModeBottomSheet extends MenuBottomSheetDialogFragment {
 			Fragment targetFragment = getTargetFragment();
 			if (targetFragment instanceof Map3DModeUpdateListener) {
 				((Map3DModeUpdateListener) targetFragment).onMap3DModeUpdated(itemVisibility);
-			}
-			Activity activity = getActivity();
-			if (activity instanceof MapActivity) {
-				MapActivity mapActivity = (MapActivity) activity;
-				mapActivity.getMapLayers().updateLayers(mapActivity);
 			}
 			dismiss();
 		});

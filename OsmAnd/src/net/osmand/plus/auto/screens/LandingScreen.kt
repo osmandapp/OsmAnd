@@ -3,9 +3,17 @@ package net.osmand.plus.auto.screens
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.car.app.CarContext
-import androidx.car.app.model.*
+import androidx.car.app.model.Action
+import androidx.car.app.model.ActionStrip
+import androidx.car.app.model.CarIcon
+import androidx.car.app.model.Item
+import androidx.car.app.model.ItemList
+import androidx.car.app.model.Row
+import androidx.car.app.model.Template
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import net.osmand.plus.R
 import net.osmand.plus.auto.NavigationSession
 
@@ -14,6 +22,14 @@ class LandingScreen(
     private val settingsAction: Action) : BaseAndroidAutoScreen(carContext) {
     @DrawableRes
     private var compassResId = R.drawable.ic_compass_niu
+
+    init {
+        lifecycle.addObserver(object : DefaultLifecycleObserver {
+            override fun onResume(owner: LifecycleOwner) {
+                app.carNavigationSession?.updateCarNavigation(app.locationProvider.lastKnownLocation)
+            }
+        })
+    }
 
     override fun onGetTemplate(): Template {
         val listBuilder = ItemList.Builder()
@@ -107,14 +123,7 @@ class LandingScreen(
             .setBrowsable(true)
             .setOnClickListener {
                 app.carNavigationSession?.let { carNavigationSession ->
-                    if (app.routingHelper.isRouteCalculated) {
-                        app.routingHelper.resumeNavigation()
-                    }
-                    carNavigationSession.startNavigation()
-                    val navigationScreen = carNavigationSession.navigationScreen
-                    navigationScreen?.let {
-                        screenManager.push(navigationScreen)
-                    }
+                    carNavigationSession.startNavigationScreen()
                 }
             }
             .build()
