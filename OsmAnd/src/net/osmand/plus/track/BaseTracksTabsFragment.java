@@ -23,7 +23,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
@@ -44,6 +43,7 @@ import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -253,7 +253,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 	}
 
 	protected void updateTrackTabs() {
-		adapter.setTrackTabs(trackTabsHelper.getSortedTrackTabs(false));
+		adapter.setTrackTabs(getSortedTrackTabs());
 	}
 
 	@Override
@@ -366,16 +366,17 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 			}
 		};
 	}
+
 	abstract protected void addTrackItem(@NonNull TrackItem item);
 
 	protected void setTabs(@NonNull List<TrackTab> tabs) {
 		setTabs(tabs, 0);
 	}
 
-	protected void setTabs(@NonNull List<TrackTab> tabs, @NonNull String preselectedTabId) {
+	protected void setTabs(@NonNull List<TrackTab> tabs, @Nullable String preselectedTabId) {
 		int index = 0;
 		for (int i = 0; i < tabs.size(); i++) {
-			if (preselectedTabId.equals(tabs.get(i).getId())) {
+			if (Algorithms.stringsEqual(preselectedTabId, tabs.get(i).getId())) {
 				index = i;
 				break;
 			}

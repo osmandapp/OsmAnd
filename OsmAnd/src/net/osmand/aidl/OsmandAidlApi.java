@@ -820,7 +820,7 @@ public class OsmandAidlApi {
 				if (mapActivity != null) {
 					RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 					if (routingHelper.isPauseNavigation() || routingHelper.isFollowingMode()) {
-						mapActivity.getMapLayers().getMapActionsHelper().stopNavigationWithoutConfirm();
+						mapActivity.getMapActions().stopNavigationWithoutConfirm();
 					}
 				}
 			}

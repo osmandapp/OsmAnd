@@ -45,6 +45,7 @@ import net.osmand.Period;
 import net.osmand.Period.PeriodUnit;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
+import net.osmand.core.android.NativeCore;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.ValueHolder;
@@ -445,15 +446,7 @@ public class OsmandSettings {
 
 	public boolean switchAppMode(boolean next) {
 		ApplicationMode appMode = getApplicationMode();
-		List<ApplicationMode> enabledModes = ApplicationMode.values(ctx);
-		int indexOfCurrent = enabledModes.indexOf(appMode);
-		int indexOfNext;
-		if (next) {
-			indexOfNext = indexOfCurrent < enabledModes.size() - 1 ? indexOfCurrent + 1 : 0;
-		} else {
-			indexOfNext = indexOfCurrent > 0 ? indexOfCurrent - 1 : enabledModes.size() - 1;
-		}
-		ApplicationMode nextAppMode = enabledModes.get(indexOfNext);
+		ApplicationMode nextAppMode = getSwitchedAppMode(appMode, next);
 		if (appMode != nextAppMode && setApplicationMode(nextAppMode)) {
 			String pattern = ctx.getString(R.string.application_profile_changed);
 			String message = String.format(pattern, nextAppMode.toHumanString());
@@ -461,6 +454,18 @@ public class OsmandSettings {
 			return true;
 		}
 		return false;
+	}
+
+	public ApplicationMode getSwitchedAppMode(ApplicationMode selectedMode, boolean next) {
+		List<ApplicationMode> enabledModes = ApplicationMode.values(ctx);
+		int indexOfCurrent = enabledModes.indexOf(selectedMode);
+		int indexOfNext;
+		if (next) {
+			indexOfNext = indexOfCurrent < enabledModes.size() - 1 ? indexOfCurrent + 1 : 0;
+		} else {
+			indexOfNext = indexOfCurrent > 0 ? indexOfCurrent - 1 : enabledModes.size() - 1;
+		}
+		return enabledModes.get(indexOfNext);
 	}
 
 	public boolean setApplicationMode(ApplicationMode appMode) {
@@ -3172,7 +3177,9 @@ public class OsmandSettings {
 
 	public final CommonPreference<Integer> LOCATION_INTERPOLATION_PERCENT = new IntPreference(this, "location_interpolation_percent", 0).makeGlobal().makeShared();
 
-	public final OsmandPreference<Boolean> USE_OPENGL_RENDER = new BooleanPreference(this, "use_opengl_render", Build.VERSION.SDK_INT >= Build.VERSION_CODES.P).makeGlobal().makeShared().cache();
+	public final CommonPreference<Boolean> USE_OPENGL_RENDER = new BooleanPreference(this, "use_opengl_render",
+			Build.VERSION.SDK_INT >= Build.VERSION_CODES.P).makeGlobal().makeShared().cache();
+
 	public final OsmandPreference<Integer> OPENGL_RENDER_FAILED = new IntPreference(this, "opengl_render_failed_count", 0).makeGlobal().cache();
 
 	public final OsmandPreference<String> CONTRIBUTION_INSTALL_APP_DATE = new StringPreference(this, "CONTRIBUTION_INSTALL_APP_DATE", null).makeGlobal();
