@@ -406,7 +406,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	}
 
 	@Override
-	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
+	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
 		return this
 				.createPreferenceDialog(preference, null)
 				.map(showableSearchablePreferenceDialog -> showableSearchablePreferenceDialog.searchablePreferenceDialog)

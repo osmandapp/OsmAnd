@@ -329,7 +329,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 	}
 
 	@Override
-	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
+	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
 		if (DEFAULT_SPEED.equals(preference.getKey())) {
 			return Optional.of(
 					new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(

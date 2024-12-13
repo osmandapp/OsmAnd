@@ -76,8 +76,25 @@ public class SettingsSearchTest extends AndroidTest {
 
 	@Test
 	public void shouldSearchAndFindRecalculateRoutePreference() {
+		testSearchAndFind("Recalculate route");
+	}
+
+	@Test
+	public void test_search_within_AnnouncementTimeBottomSheet_title() {
+		testSearchAndFind(R.string.announcement_time_title);
+	}
+
+	@Test
+	public void test_search_within_AnnouncementTimeBottomSheet_description() {
+		testSearchAndFind(R.string.announcement_time_descr);
+	}
+
+	private void testSearchAndFind(final int id) {
+		testSearchAndFind(app.getResources().getString(id));
+	}
+
+	private void testSearchAndFind(final String searchQuery) {
 		// Given
-		final String searchQuery = "Recalculate route";
 		clickSearchButton();
 
 		// When

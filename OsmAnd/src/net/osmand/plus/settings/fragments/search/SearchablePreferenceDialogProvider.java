@@ -8,5 +8,5 @@ import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableIn
 
 public interface SearchablePreferenceDialogProvider {
 
-	Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference);
+	Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference);
 }

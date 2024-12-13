@@ -303,7 +303,7 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 	public String getSearchableInfo() {
 		return String.join(
 				", ",
-				getView().<TextViewEx>findViewById(R.id.title).getText(),
+				requireView().<TextViewEx>findViewById(R.id.title).getText(),
 				getTitle(trackItem),
 				getTitle(speedItem),
 				getTitle(startItem));

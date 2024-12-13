@@ -83,13 +83,6 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		}
 	}
 
-	private void show(final SearchablePreferenceDialog dialog) {
-		final FragmentManager fragmentManager = getFragmentManager();
-		if (fragmentManager != null) {
-			dialog.show(fragmentManager, app);
-		}
-	}
-
 	private Optional<SearchablePreferenceDialog> createPreferenceDialog(final Preference preference,
 																		final GlobalSettingsFragment target) {
 		return SEND_ANONYMOUS_DATA_PREF_ID.equals(preference.getKey()) ?
@@ -97,8 +90,15 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 				Optional.empty();
 	}
 
+	private void show(final SearchablePreferenceDialog dialog) {
+		final FragmentManager fragmentManager = getFragmentManager();
+		if (fragmentManager != null) {
+			dialog.show(fragmentManager, app);
+		}
+	}
+
 	@Override
-	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
+	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
 		return this
 				.createPreferenceDialog(preference, null)
 				.map(preferenceDialog ->
