@@ -6080,4 +6080,5 @@
     <string name="location_interpolation_percent">Процент интерполяции местоположения</string>
     <string name="shared_string_interpolation">Интерполяция</string>
     <string name="location_interpolation_percent_desc">Установите процент интерполяции местоположения при навигации по маршруту. Этот параметр уменьшает задержку отображения вашего местоположения на карте во время анимации.</string>
+    <string name="selected_delayed_profile">Выбранный профиль «%s»</string>
 </resources>
