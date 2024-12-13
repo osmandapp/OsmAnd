@@ -5664,4 +5664,5 @@
     <string name="quick_action_save_recorded_trip_and_continue">Uložiť výlet a pokračovať</string>
     <string name="third_links">Odkazy inam</string>
     <string name="shared_string_interpolation">Interpolácia</string>
+    <string name="selected_delayed_profile">Zvolený profil \"%s\"</string>
 </resources>

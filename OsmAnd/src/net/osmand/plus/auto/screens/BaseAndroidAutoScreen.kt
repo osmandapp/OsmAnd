@@ -111,7 +111,7 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 				val leftPanel =  tb.pixWidth / 2; // assume panel takes half screen
 				val tileBoxWidthPx = tb.pixWidth - leftPanel;
 				mapView.fitRectToMap(tb, mapRect.left, mapRect.right, mapRect.top, mapRect.bottom,
-					tileBoxWidthPx, 0, 0, 0, rtl, 0.85f,true)
+					tileBoxWidthPx, 0, 0, 0, rtl, 0.75f,true)
 				mapView.refreshMap()
 			}
 		}
