@@ -83,24 +83,20 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 			isLockTimerActive = false;
 			lock();
 		};
-		voiceMessageListener = new VoiceMessageListener() {
-			@Override
-			public void onVoiceMessage(List<String> listCommands, List<String> played) {
-				if (turnScreenOnNavigationInstructions.get()) {
-					unlockEvent();
-				}
+
+		voiceMessageListener = (listCommands, played) -> {
+			if (turnScreenOnNavigationInstructions.get()) {
+				unlockEvent();
 			}
 		};
-		OsmAndAppCustomizationListener customizationListener = new OsmAndAppCustomizationListener() {
-			@Override
-			public void onOsmAndSettingsCustomized() {
-				OsmandSettings settings = app.getSettings();
-				turnScreenOnTime = settings.TURN_SCREEN_ON_TIME_INT;
-				turnScreenOnSensor = settings.TURN_SCREEN_ON_SENSOR;
-				useSystemScreenTimeout = settings.USE_SYSTEM_SCREEN_TIMEOUT;
-				turnScreenOnPowerButton = settings.TURN_SCREEN_ON_POWER_BUTTON;
-				turnScreenOnNavigationInstructions = settings.TURN_SCREEN_ON_NAVIGATION_INSTRUCTIONS;
-			}
+
+		OsmAndAppCustomizationListener customizationListener = () -> {
+			OsmandSettings osmSettings = app.getSettings();
+			turnScreenOnTime = osmSettings.TURN_SCREEN_ON_TIME_INT;
+			turnScreenOnSensor = osmSettings.TURN_SCREEN_ON_SENSOR;
+			useSystemScreenTimeout = osmSettings.USE_SYSTEM_SCREEN_TIMEOUT;
+			turnScreenOnPowerButton = osmSettings.TURN_SCREEN_ON_POWER_BUTTON;
+			turnScreenOnNavigationInstructions = osmSettings.TURN_SCREEN_ON_NAVIGATION_INSTRUCTIONS;
 		};
 		app.getAppCustomization().addListener(customizationListener);
 		app.getRoutingHelper().getVoiceRouter().addVoiceMessageListener(voiceMessageListener);
@@ -237,7 +233,6 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 	/**
 	 * LockScreenAction part
 	 */
-
 
 	public void toggleLockScreen() {
 		lockScreen = !lockScreen;
