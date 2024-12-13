@@ -14,7 +14,7 @@ import java.util.Set;
 
 
 public abstract class Entity implements Serializable {
-	public enum EntityType {
+    public enum EntityType {
 		NODE,
 		WAY,
 		RELATION,
@@ -110,6 +110,7 @@ public abstract class Entity implements Serializable {
 	private int version;
 	private double latitude;
 	private double longitude;
+	private boolean isTiger;
 	public static final int MODIFY_UNKNOWN = 0;
 	public static final int MODIFY_DELETED = -1;
 	public static final int MODIFY_MODIFIED = 1;
@@ -199,6 +200,9 @@ public abstract class Entity implements Serializable {
 	public String putTagNoLC(String key, String value) {
 		if (tags == null) {
 			tags = new LinkedHashMap<String, String>();
+		}
+		if (key.equals("tiger:osmand") && value.equals("yes")) {
+			isTiger = true;
 		}
 		return tags.put(key, value);
 	}
@@ -351,5 +355,9 @@ public abstract class Entity implements Serializable {
 					Math.abs(longitude - thatObj.longitude) < 0.00001 &&
 					Algorithms.objectEquals(this.tags, thatObj.tags);
 		}
+	}
+
+	public boolean isTiger() {
+		return isTiger;
 	}
 }
