@@ -7,6 +7,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
@@ -58,6 +59,7 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 	private final Runnable lockRunnable;
 	private final VoiceMessageListener voiceMessageListener;
 	private LockGestureDetector gestureDetector;
+	private boolean isLockTimerActive = false;
 
 	public interface LockUIAdapter {
 
@@ -77,7 +79,10 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 		turnScreenOnNavigationInstructions = settings.TURN_SCREEN_ON_NAVIGATION_INSTRUCTIONS;
 
 		settings.APPLICATION_MODE.addListener(this);
-		lockRunnable = this::lock;
+		lockRunnable = () -> {
+			isLockTimerActive = false;
+			lock();
+		};
 		voiceMessageListener = new VoiceMessageListener() {
 			@Override
 			public void onVoiceMessage(List<String> listCommands, List<String> played) {
@@ -145,6 +150,7 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 			});
 		}
 		if (millis > 0) {
+			isLockTimerActive = true;
 			uiHandler.postDelayed(lockRunnable, millis);
 		}
 	}
@@ -155,6 +161,20 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 			timedUnlock(unlockTime * 1000L);
 		} else {
 			timedUnlock(0);
+		}
+	}
+
+	public void resetLockTimerIfNeeded() {
+		boolean isTimerRunning = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
+				? uiHandler.hasCallbacks(lockRunnable)
+				: isLockTimerActive;
+
+		if (isTimerRunning) {
+			uiHandler.removeCallbacks(lockRunnable);
+			int unlockTime = getUnlockTime();
+			if (unlockTime > 0) {
+				uiHandler.postDelayed(lockRunnable, unlockTime * 1000L);
+			}
 		}
 	}
 
