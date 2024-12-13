@@ -316,7 +316,7 @@ public class TravelObfHelper implements TravelHelper {
 		travelGpx.description = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.DESCRIPTION));
 		travelGpx.routeId = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID));
 		travelGpx.user = Algorithms.emptyIfNull(amenity.getTagContent(USER));
-		travelGpx.activityType = Algorithms.emptyIfNull(amenity.getTagContent(ACTIVITY_TYPE));
+		travelGpx.activityType = Algorithms.emptyIfNull(amenity.getTagContent(ACTIVITY_TYPE)); // TODO
 		travelGpx.ref = Algorithms.emptyIfNull(amenity.getRef());
 		travelGpx.totalDistance = Algorithms.parseFloatSilently(amenity.getTagContent(DISTANCE), 0);
 		travelGpx.diffElevationUp = Algorithms.parseDoubleSilently(amenity.getTagContent(DIFF_ELEVATION_UP), 0);
@@ -342,7 +342,7 @@ public class TravelObfHelper implements TravelHelper {
 						return true;
 					}
 					if (ROUTE_TRACK.equals(filter) && subcategory.startsWith(ROUTES_PREFIX)) {
-						return true; // include routes:routes_xxx by routes:route_track filter
+						return true; // include routes:routes_xxx with routes:route_track filter
 					}
 				}
 				return false;
@@ -1287,7 +1287,7 @@ public class TravelObfHelper implements TravelHelper {
 			if (gpxFileExtensions.containsKey(GpxUtilities.ACTIVITY_TYPE)) {
 				gpxFile.getMetadata().getExtensionsToWrite()
 						.put(GpxUtilities.ACTIVITY_TYPE, gpxFileExtensions.get(GpxUtilities.ACTIVITY_TYPE));
-				gpxFileExtensions.remove(GpxUtilities.ACTIVITY_TYPE); // move activity to metadata
+				gpxFileExtensions.remove(GpxUtilities.ACTIVITY_TYPE); // move activity to metadata TODO fixme
 			}
 			gpxFile.getExtensionsToWrite().putAll(gpxFileExtensions); // finally
 		}

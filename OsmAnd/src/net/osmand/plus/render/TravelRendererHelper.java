@@ -280,7 +280,10 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 					routeTrackFilters.add(app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + subTypeKeyName));
 				}
 			}
-			routeTrackFilters.add(app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + ROUTE_TRACK));
+			PoiUIFilter filter = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + ROUTE_TRACK);
+			if (filter != null) {
+				routeTrackFilters.add(filter);
+			}
 		}
 	}
 

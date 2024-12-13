@@ -49,7 +49,7 @@ public class MapPoiTypes {
 	public static final String ROUTE_ARTICLE_POINT = "route_article_point";
 	public static final String CATEGORY = "category";
 	public static final String ROUTE_TRACK = "route_track"; // routes:route_track (no activity)
-	public static final String ROUTES_PREFIX = "routes_"; // routes:routes_xxx (activity type)
+	public static final String ROUTES_PREFIX = "routes_"; // routes:routes_xxx (any activity type)
 	public static final String ROUTE_TRACK_POINT = "route_track_point";
 
 	private PoiTranslator poiTranslator = null;
