@@ -5970,4 +5970,5 @@
     <string name="l_100km">L/100km</string>
     <string name="speedometer_maximum">Maxim</string>
     <string name="obd_fuel_consumption_rate_l_km_desc">Indică rata consumului de combustibil al vehiculului pe baza calculelor (L/100 km)</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">Indică rata consumului de combustibil al vehiculului pe baza calculelor (%/h)</string>
 </resources>
