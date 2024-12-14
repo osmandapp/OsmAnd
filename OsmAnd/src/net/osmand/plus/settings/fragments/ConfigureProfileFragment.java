@@ -351,6 +351,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		Preference configureMap = findPreference(CONFIGURE_MAP);
 		configureMap.setIcon(getContentIcon(R.drawable.ic_action_layers));
 
+		// FK-TODO: make this Intent searchable
 		Intent intent = new Intent(ctx, MapActivity.class);
 		intent.putExtra(OPEN_CONFIG_ON_MAP, MAP_CONFIG);
 		intent.putExtra(APP_MODE_KEY, getSelectedAppMode().getStringKey());
