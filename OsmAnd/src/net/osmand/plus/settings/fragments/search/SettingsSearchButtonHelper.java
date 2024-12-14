@@ -5,6 +5,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.IdRes;
 import androidx.fragment.app.FragmentActivity;
+import androidx.preference.Preference;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -62,7 +63,7 @@ public class SettingsSearchButtonHelper {
 						new SearchDatabaseConfigBuilder()
 								.withFragmentFactory(new FragmentFactory())
 								.withPreferenceFragmentConnected2PreferenceProvider(new PreferenceFragmentConnected2PreferenceProvider())
-								.withSearchableInfoProvider(new SearchableInfoProvider())
+								.withSearchableInfoProvider(SettingsSearchButtonHelper::getSearchableInfo)
 								.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
 								.withPreferenceSearchablePredicate(new PreferenceSearchablePredicate())
 								.build())
@@ -76,6 +77,12 @@ public class SettingsSearchButtonHelper {
 								.build())
 				.withCreateSearchDatabaseTaskSupplier(createSearchDatabaseTaskSupplier)
 				.build();
+	}
+
+	private static Optional<String> getSearchableInfo(final Preference preference) {
+		return preference instanceof final SearchableInfoProvider searchableInfoProvider ?
+				Optional.of(searchableInfoProvider.getSearchableInfo()) :
+				Optional.empty();
 	}
 
 	private void onClickShowSearchPreferenceFragment(final ImageView searchPreferenceButton) {
