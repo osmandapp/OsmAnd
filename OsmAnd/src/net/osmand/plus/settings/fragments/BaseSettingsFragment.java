@@ -336,16 +336,18 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public boolean onPreferenceClick(final Preference preference) {
 		if (this instanceof final PreferenceFragmentHandlerProvider preferenceFragmentHandlerProvider) {
 			final Optional<PreferenceFragmentHandler> preferenceFragmentHandler = preferenceFragmentHandlerProvider.getPreferenceFragmentHandler(preference);
-			// FK-TODO: refactor isPresent(), get()
 			if (preferenceFragmentHandler.isPresent()) {
-				preferenceFragmentHandler.get().showPreferenceFragment(
-						preferenceFragmentHandler.get().createPreferenceFragment(
-								getContext(),
-								this));
-				return true;
+				return showPreferenceFragment(preferenceFragmentHandler.get());
 			}
 		}
 		return false;
+	}
+
+	private boolean showPreferenceFragment(final PreferenceFragmentHandler preferenceFragmentHandler) {
+		return preferenceFragmentHandler.showPreferenceFragment(
+				preferenceFragmentHandler.createPreferenceFragment(
+						getContext(),
+						this));
 	}
 
 	public boolean isProfileDependent() {
