@@ -263,12 +263,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 			}
 			return true;
 		} else if (settings.FUEL_TANK_CAPACITY.getId().equals(key)) {
-			final Optional<SearchablePreferenceDialog> preferenceDialog =
-					createPreferenceDialog(
-							preference,
-							this,
-							false);
-			show(preferenceDialog.get());
+			onDisplayPreferenceDialog(preference);
 			return true;
 		}
 		return super.onPreferenceClick(preference);
