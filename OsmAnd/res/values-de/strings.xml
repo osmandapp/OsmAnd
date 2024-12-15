@@ -5682,4 +5682,5 @@
     <string name="location_interpolation_percent_desc">Legt den Prozentsatz der Standortinterpolation während der Routennavigation fest. Dieser Parameter reduziert die Verzögerung der Position des Standorts auf der Karte während der Animation.</string>
     <string name="shared_string_interpolation">Interpolation</string>
     <string name="location_interpolation_percent">Prozentualer Anteil der Standortinterpolation</string>
+    <string name="selected_delayed_profile">Ausgewähltes Profil \"%s\"</string>
 </resources>
