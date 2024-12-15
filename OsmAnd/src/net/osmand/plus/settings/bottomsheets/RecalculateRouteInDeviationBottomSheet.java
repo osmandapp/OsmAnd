@@ -38,9 +38,6 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.shared.settings.enums.MetricsConstants;
 
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBottomSheet implements SearchablePreferenceDialog {
 
 	public static final String TAG = RecalculateRouteInDeviationBottomSheet.class.getSimpleName();
@@ -93,8 +90,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 		int activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
 		int disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
 
-		String title = getString(R.string.recalculate_route_in_deviation);
-		items.add(new TitleItem(title));
+		items.add(new TitleItem(getTitle()));
 
 		View sliderView = UiUtilities.getInflater(getContext(), nightMode)
 				.inflate(R.layout.bottom_sheet_item_slider_with_two_text, null);
@@ -138,7 +134,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 				.create();
 		items.add(preferenceBtn[0]);
 		items.add(new DividerSpaceItem(app, contentPaddingSmall));
-		items.add(new LongDescriptionItem(getString(R.string.select_distance_route_will_recalc)));
+		items.add(new LongDescriptionItem(getDescription()));
 		items.add(new DividerSpaceItem(app, contentPadding));
 
 		slider.addOnChangeListener(new Slider.OnChangeListener() {
@@ -157,7 +153,22 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 				.create());
 		items.add(new SubtitmeListDividerItem(getContext()));
 		items.add(new DividerSpaceItem(app, contentPaddingSmall));
-		items.add(new LongDescriptionItem(getString(R.string.recalculate_route_distance_promo)));
+		items.add(new LongDescriptionItem(getLongDescription()));
+	}
+
+	@NonNull
+	private String getTitle() {
+		return getString(R.string.recalculate_route_in_deviation);
+	}
+
+	@NonNull
+	private String getDescription() {
+		return getString(R.string.select_distance_route_will_recalc);
+	}
+
+	@NonNull
+	private String getLongDescription() {
+		return getString(R.string.recalculate_route_distance_promo);
 	}
 
 	@Override
@@ -256,13 +267,6 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 
 	@Override
 	public String getSearchableInfo() {
-		// FK-TODO: no not use the string resources directly, instead use the items declared above
-		return Stream
-				.of(
-						R.string.recalculate_route_in_deviation,
-						R.string.select_distance_route_will_recalc,
-						R.string.recalculate_route_distance_promo)
-				.map(this::getString)
-				.collect(Collectors.joining(", "));
+		return String.join(", ", getTitle(), getDescription(), getLongDescription());
 	}
 }
