@@ -427,8 +427,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 			final Optional<SearchablePreferenceDialog> preferenceDialog =
 					createPreferenceDialog(
 							preference,
-							this,
-							Optional.empty());
+							this);
 			if (preferenceDialog.isPresent()) {
 				show(preferenceDialog.get());
 				return true;
@@ -486,16 +485,14 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	}
 
 	private Optional<SearchablePreferenceDialog> createPreferenceDialog(final Preference preference,
-																		final GeneralProfileSettingsFragment target,
-																		final Optional<Preference> preferenceParam) {
+																		final GeneralProfileSettingsFragment target) {
 		if (settings.PRECISE_DISTANCE_NUMBERS.getId().equals(preference.getKey())) {
 			return Optional.of(
 					DistanceDuringNavigationBottomSheet.createInstance(
-							preference.getKey(),
+							preference,
 							target,
 							getSelectedAppMode(),
-							false,
-							preferenceParam));
+							false));
 		}
 		return Optional.empty();
 	}
@@ -510,7 +507,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	@Override
 	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
 		return this
-				.createPreferenceDialog(preference, null, Optional.of(preference))
+				.createPreferenceDialog(preference, null)
 				.map(preferenceDialog ->
 						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
 								(Fragment) preferenceDialog,

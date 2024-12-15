@@ -31,8 +31,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
-import java.util.Optional;
-
 public class DistanceDuringNavigationBottomSheet extends BasePreferenceBottomSheet implements SearchablePreferenceDialog {
 
 	public static final String TAG = DistanceDuringNavigationBottomSheet.class.getSimpleName();
@@ -125,20 +123,21 @@ public class DistanceDuringNavigationBottomSheet extends BasePreferenceBottomShe
 	}
 
 	public static @NonNull DistanceDuringNavigationBottomSheet createInstance(
-			final String prefKey,
+			final Preference preference,
 			final @Nullable Fragment target,
 			final @Nullable ApplicationMode appMode,
-			final boolean usedOnMap,
-			final Optional<Preference> preference) {
+			final boolean usedOnMap) {
 		final Bundle args = new Bundle();
-		args.putString(PREFERENCE_ID, prefKey);
+		args.putString(PREFERENCE_ID, preference.getKey());
 
 		final DistanceDuringNavigationBottomSheet fragment = new DistanceDuringNavigationBottomSheet();
 		fragment.setArguments(args);
 		fragment.setAppMode(appMode);
 		fragment.setUsedOnMap(usedOnMap);
 		fragment.setTargetFragment(target, 0);
-		preference.ifPresent(fragment::setPreference);
+		if (target == null) {
+			fragment.setPreference(preference);
+		}
 		return fragment;
 	}
 
