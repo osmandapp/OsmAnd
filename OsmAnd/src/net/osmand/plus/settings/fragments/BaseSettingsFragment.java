@@ -83,7 +83,6 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
-import java.util.Optional;
 import java.util.Set;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener,
@@ -335,10 +334,10 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	@Override
 	public boolean onPreferenceClick(final Preference preference) {
 		if (this instanceof final PreferenceFragmentHandlerProvider preferenceFragmentHandlerProvider) {
-			final Optional<PreferenceFragmentHandler> preferenceFragmentHandler = preferenceFragmentHandlerProvider.getPreferenceFragmentHandler(preference);
-			if (preferenceFragmentHandler.isPresent()) {
-				return showPreferenceFragment(preferenceFragmentHandler.get());
-			}
+			return preferenceFragmentHandlerProvider
+					.getPreferenceFragmentHandler(preference)
+					.map(this::showPreferenceFragment)
+					.orElse(false);
 		}
 		return false;
 	}
