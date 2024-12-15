@@ -94,10 +94,26 @@ public class SettingsSearchTest extends AndroidTest {
 		testSearchAndFind(R.string.fuel_tank_capacity_description);
 	}
 
+	@Test
+	public void test_search_within_RecalculateRouteInDeviationBottomSheet_title() {
+		testSearchAndFind(R.string.recalculate_route_in_deviation);
+	}
+
+	@Test
+	public void test_search_within_RecalculateRouteInDeviationBottomSheet_description() {
+		testSearchAndFind(R.string.select_distance_route_will_recalc);
+	}
+
+	@Test
+	public void test_search_within_RecalculateRouteInDeviationBottomSheet_longDescription() {
+		testSearchAndFind(R.string.recalculate_route_distance_promo);
+	}
+
 	private void testSearchAndFind(final int id) {
 		testSearchAndFind(app.getResources().getString(id));
 	}
 
+	// FK-TODO: move all tests invoking this test method to a new parameterized test class
 	private void testSearchAndFind(final String searchQuery) {
 		// Given
 		clickSearchButton();

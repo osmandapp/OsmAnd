@@ -66,6 +66,8 @@ import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.RoutingType;
 import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandler;
 import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandlerProvider;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListParameters;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
@@ -90,7 +92,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-public class RouteParametersFragment extends BaseSettingsFragment implements PreferenceFragmentHandlerProvider {
+import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
+
+public class RouteParametersFragment extends BaseSettingsFragment implements PreferenceFragmentHandlerProvider, SearchablePreferenceDialogProvider {
 
 	public static final String TAG = RouteParametersFragment.class.getSimpleName();
 
@@ -626,6 +630,23 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 	}
 
 	@Override
+	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
+		if (settings.ROUTE_RECALCULATION_DISTANCE.getId().equals(preference.getKey())) {
+			final SearchablePreferenceDialog preferenceDialog =
+					RecalculateRouteInDeviationBottomSheet.createInstance(
+							preference,
+							null,
+							false,
+							getSelectedAppMode());
+			return Optional.of(
+					new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
+							(Fragment) preferenceDialog,
+							_preferenceDialog -> preferenceDialog.getSearchableInfo()));
+		}
+		return Optional.empty();
+	}
+
+	@Override
 	public void onDisplayPreferenceDialog(Preference preference) {
 		String prefId = preference.getKey();
 		ApplicationMode appMode = getSelectedAppMode();
@@ -633,7 +654,9 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 
 		if (settings.ROUTE_RECALCULATION_DISTANCE.getId().equals(prefId)) {
 			if (manager != null) {
-				RecalculateRouteInDeviationBottomSheet.showInstance(manager, prefId, this, false, getSelectedAppMode());
+				RecalculateRouteInDeviationBottomSheet
+						.createInstance(preference, this, false, getSelectedAppMode())
+						.show(manager, RecalculateRouteInDeviationBottomSheet.TAG);
 			}
 		} else if (!reliefFactorParameters.isEmpty() && prefId.equals(ROUTING_PREFERENCE_PREFIX + USE_HEIGHT_OBSTACLES)) {
 			if (manager != null) {

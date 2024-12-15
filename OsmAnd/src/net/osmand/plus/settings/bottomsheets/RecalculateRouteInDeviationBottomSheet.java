@@ -1,5 +1,8 @@
 package net.osmand.plus.settings.bottomsheets;
 
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.DEFAULT_MODE;
+import static net.osmand.plus.settings.fragments.RouteParametersFragment.DISABLE_MODE;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
@@ -10,33 +13,35 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
 
 import com.google.android.material.slider.Slider;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.shared.settings.enums.MetricsConstants;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitmeListDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.settings.enums.MetricsConstants;
 
-import static net.osmand.plus.settings.fragments.RouteParametersFragment.DEFAULT_MODE;
-import static net.osmand.plus.settings.fragments.RouteParametersFragment.DISABLE_MODE;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBottomSheet {
+public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBottomSheet implements SearchablePreferenceDialog {
 
 	public static final String TAG = RecalculateRouteInDeviationBottomSheet.class.getSimpleName();
 
@@ -225,21 +230,39 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 		return OsmAndFormatter.getFormattedDistance(value, app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS);
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target,
-	                                   boolean usedOnMap, @Nullable ApplicationMode appMode) {
-		try {
-			Bundle args = new Bundle();
-			args.putString(PREFERENCE_ID, key);
-
-			RecalculateRouteInDeviationBottomSheet fragment = new RecalculateRouteInDeviationBottomSheet();
-			fragment.setArguments(args);
-			fragment.setUsedOnMap(usedOnMap);
-			fragment.setAppMode(appMode);
-			fragment.setTargetFragment(target, 0);
-			fragment.show(fragmentManager, TAG);
-			return true;
-		} catch (RuntimeException e) {
-			return false;
+	@NonNull
+	public static RecalculateRouteInDeviationBottomSheet createInstance(final Preference preference,
+																		final Fragment target,
+																		final boolean usedOnMap,
+																		final @Nullable ApplicationMode appMode) {
+		final Bundle args = new Bundle();
+		args.putString(PREFERENCE_ID, preference.getKey());
+		final RecalculateRouteInDeviationBottomSheet fragment = new RecalculateRouteInDeviationBottomSheet();
+		fragment.setArguments(args);
+		fragment.setUsedOnMap(usedOnMap);
+		fragment.setAppMode(appMode);
+		fragment.setTargetFragment(target, 0);
+		// FK-TODO: find a clearer way to handle this (everywhere):
+		if (target == null) {
+			fragment.setPreference(preference);
 		}
+		return fragment;
+	}
+
+	@Override
+	public void show(final FragmentManager fragmentManager, final OsmandApplication app) {
+		show(fragmentManager, TAG);
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		// FK-TODO: no not use the string resources directly, instead use the items declared above
+		return Stream
+				.of(
+						R.string.recalculate_route_in_deviation,
+						R.string.select_distance_route_will_recalc,
+						R.string.recalculate_route_distance_promo)
+				.map(this::getString)
+				.collect(Collectors.joining(", "));
 	}
 }
