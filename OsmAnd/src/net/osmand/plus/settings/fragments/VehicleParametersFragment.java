@@ -263,11 +263,13 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 			}
 			return true;
 		} else if (settings.FUEL_TANK_CAPACITY.getId().equals(key)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				FuelTankCapacityBottomSheet.showInstance(fragmentManager, preference.getKey(),
-						this, false, getSelectedAppMode());
-			}
+			final Optional<SearchablePreferenceDialog> preferenceDialog =
+					createPreferenceDialog(
+							preference,
+							this,
+							false);
+			show(preferenceDialog.get());
+			return true;
 		}
 		return super.onPreferenceClick(preference);
 	}
@@ -278,8 +280,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 				createPreferenceDialog(
 						preference,
 						this,
-						false,
-						Optional.empty());
+						false);
 		if (preferenceDialog.isPresent()) {
 			show(preferenceDialog.get());
 		} else {
@@ -297,33 +298,39 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 	private Optional<SearchablePreferenceDialog> createPreferenceDialog(
 			final Preference preference,
 			final VehicleParametersFragment target,
-			final boolean configureSettingsSearch,
-			final Optional<Preference> preferenceParam) {
+			final boolean configureSettingsSearch) {
 		if (preference instanceof SizePreference) {
 			return Optional.of(
 					VehicleParametersBottomSheet
 							.createInstance(
-									preference.getKey(),
+									preference,
 									target,
 									false,
 									getSelectedAppMode(),
-									configureSettingsSearch,
-									preferenceParam));
+									configureSettingsSearch));
 		}
 		if (MOTOR_TYPE_PREF_ID.equals(preference.getKey())) {
 			final ListPreferenceEx pref = (ListPreferenceEx) preference;
 			return Optional.of(
-					SimpleSingleSelectionBottomSheet
-							.createInstance(
-									target,
-									preference.getKey(),
-									pref.getTitle().toString(),
-									pref.getDescription(),
-									getSelectedAppMode(),
-									false,
-									pref.getEntries(),
-									pref.getEntryValues(),
-									pref.getValueIndex()));
+					SimpleSingleSelectionBottomSheet.createInstance(
+							target,
+							preference.getKey(),
+							pref.getTitle().toString(),
+							pref.getDescription(),
+							getSelectedAppMode(),
+							false,
+							pref.getEntries(),
+							pref.getEntryValues(),
+							pref.getValueIndex()));
+		}
+		if (settings.FUEL_TANK_CAPACITY.getId().equals(preference.getKey())) {
+			return Optional.of(
+					FuelTankCapacityBottomSheet.createInstance(
+							preference,
+							target,
+							false,
+							getSelectedAppMode(),
+							configureSettingsSearch));
 		}
 		return Optional.empty();
 	}
@@ -337,7 +344,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 							_preferenceDialog -> new VehicleSpeedHelper(app, getSelectedAppMode()).getSearchableInfo()));
 		}
 		return this
-				.createPreferenceDialog(preference, null, true, Optional.of(preference))
+				.createPreferenceDialog(preference, null, true)
 				.map(preferenceDialog ->
 						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
 								(Fragment) preferenceDialog,

@@ -38,7 +38,6 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 
 public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet implements SearchablePreferenceDialog {
 	private static final Log LOG = PlatformUtil.getLog(VehicleParametersBottomSheet.class);
@@ -135,21 +134,22 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet imple
 		return formatter.format(input);
 	}
 
-	public static @NonNull VehicleParametersBottomSheet createInstance(final String key,
-																	   final Fragment target,
-																	   final boolean usedOnMap,
-																	   final @Nullable ApplicationMode appMode,
-																	   final boolean configureSettingsSearch,
-																	   final Optional<Preference> preference) {
+	@NonNull
+	public static VehicleParametersBottomSheet createInstance(final Preference preference,
+															  final Fragment target,
+															  final boolean usedOnMap,
+															  final @Nullable ApplicationMode appMode,
+															  final boolean configureSettingsSearch) {
 		final Bundle args = new Bundle();
-		args.putString(PREFERENCE_ID, key);
-
+		args.putString(PREFERENCE_ID, preference.getKey());
 		final VehicleParametersBottomSheet fragment = new VehicleParametersBottomSheet();
 		fragment.setArguments(args);
 		fragment.setUsedOnMap(usedOnMap);
 		fragment.setAppMode(appMode);
 		fragment.setTargetFragment(target, 0);
-		preference.ifPresent(fragment::setPreference);
+		if (target == null) {
+			fragment.setPreference(preference);
+		}
 		fragment.setConfigureSettingsSearch(configureSettingsSearch);
 		return fragment;
 	}
@@ -160,7 +160,7 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet imple
 			if (!fragmentManager.isStateSaved()) {
 				show(fragmentManager, TAG);
 			}
-		} catch (RuntimeException e) {
+		} catch (final RuntimeException e) {
 			LOG.error("showInstance", e);
 		}
 	}

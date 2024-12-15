@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -19,6 +20,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.VolumeUnit;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
@@ -33,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class FuelTankCapacityBottomSheet extends BaseTextFieldBottomSheet {
+public class FuelTankCapacityBottomSheet extends BaseTextFieldBottomSheet implements SearchablePreferenceDialog {
 	private static final Log LOG = PlatformUtil.getLog(VehicleParametersBottomSheet.class);
 	public static final String TAG = FuelTankCapacityBottomSheet.class.getSimpleName();
 
@@ -77,7 +79,7 @@ public class FuelTankCapacityBottomSheet extends BaseTextFieldBottomSheet {
 
 	@NonNull
 	public List<ChipItem> collectChipItems(@NonNull OsmandApplication app,
-	                                       @NonNull VolumeUnit volumeUnit) {
+										   @NonNull VolumeUnit volumeUnit) {
 		List<ChipItem> chips = new ArrayList<>();
 		String none = app.getString(R.string.shared_string_none);
 		ChipItem chip = new ChipItem(none);
@@ -129,21 +131,42 @@ public class FuelTankCapacityBottomSheet extends BaseTextFieldBottomSheet {
 		return formatter.format(input);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, String key, Fragment target,
-	                                boolean usedOnMap, @Nullable ApplicationMode appMode) {
+	@NonNull
+	public static FuelTankCapacityBottomSheet createInstance(final Preference preference,
+															 final Fragment target,
+															 final boolean usedOnMap,
+															 final @Nullable ApplicationMode appMode,
+															 final boolean configureSettingsSearch) {
+		final Bundle args = new Bundle();
+		args.putString(PREFERENCE_ID, preference.getKey());
+		final FuelTankCapacityBottomSheet fragment = new FuelTankCapacityBottomSheet();
+		fragment.setArguments(args);
+		fragment.setUsedOnMap(usedOnMap);
+		fragment.setAppMode(appMode);
+		fragment.setTargetFragment(target, 0);
+		if (target == null) {
+			fragment.setPreference(preference);
+		}
+		fragment.setConfigureSettingsSearch(configureSettingsSearch);
+		return fragment;
+	}
+
+	@Override
+	public void show(final FragmentManager fragmentManager, final OsmandApplication app) {
 		try {
-			if (!fm.isStateSaved()) {
-				Bundle args = new Bundle();
-				args.putString(PREFERENCE_ID, key);
-				FuelTankCapacityBottomSheet fragment = new FuelTankCapacityBottomSheet();
-				fragment.setArguments(args);
-				fragment.setUsedOnMap(usedOnMap);
-				fragment.setAppMode(appMode);
-				fragment.setTargetFragment(target, 0);
-				fragment.show(fm, TAG);
+			if (!fragmentManager.isStateSaved()) {
+				show(fragmentManager, TAG);
 			}
-		} catch (RuntimeException e) {
+		} catch (final RuntimeException e) {
 			LOG.error("showInstance", e);
 		}
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		return String.join(
+				", ",
+				title.getText(),
+				tvDescription.getText());
 	}
 }

@@ -89,6 +89,11 @@ public class SettingsSearchTest extends AndroidTest {
 		testSearchAndFind(R.string.announcement_time_descr);
 	}
 
+	@Test
+	public void test_search_within_FuelTankCapacityBottomSheet_description() {
+		testSearchAndFind(R.string.fuel_tank_capacity_description);
+	}
+
 	private void testSearchAndFind(final int id) {
 		testSearchAndFind(app.getResources().getString(id));
 	}

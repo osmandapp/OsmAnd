@@ -490,13 +490,12 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 																		final Optional<Preference> preferenceParam) {
 		if (settings.PRECISE_DISTANCE_NUMBERS.getId().equals(preference.getKey())) {
 			return Optional.of(
-					DistanceDuringNavigationBottomSheet
-							.createInstance(
-									preference.getKey(),
-									target,
-									getSelectedAppMode(),
-									false,
-									preferenceParam));
+					DistanceDuringNavigationBottomSheet.createInstance(
+							preference.getKey(),
+							target,
+							getSelectedAppMode(),
+							false,
+							preferenceParam));
 		}
 		return Optional.empty();
 	}
