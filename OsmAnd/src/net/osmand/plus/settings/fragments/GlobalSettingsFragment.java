@@ -75,12 +75,11 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 
 	@Override
 	public void onDisplayPreferenceDialog(Preference preference) {
-		final Optional<SearchablePreferenceDialog> preferenceDialog = createPreferenceDialog(preference, this);
-		if (preferenceDialog.isPresent()) {
-			show(preferenceDialog.get());
-		} else {
-			super.onDisplayPreferenceDialog(preference);
-		}
+		this
+				.createPreferenceDialog(preference, this)
+				.ifPresentOrElse(
+						this::show,
+						() -> super.onDisplayPreferenceDialog(preference));
 	}
 
 	private Optional<SearchablePreferenceDialog> createPreferenceDialog(final Preference preference,

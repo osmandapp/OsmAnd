@@ -272,10 +272,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 	@Override
 	public void onDisplayPreferenceDialog(Preference preference) {
 		this
-				.createPreferenceDialog(
-						preference,
-						this,
-						false)
+				.createPreferenceDialog(preference, this, false)
 				.ifPresentOrElse(
 						this::show,
 						() -> super.onDisplayPreferenceDialog(preference));

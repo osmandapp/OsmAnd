@@ -255,14 +255,17 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements Sear
 
 	@Override
 	public void onDisplayPreferenceDialog(Preference preference) {
-		final Optional<SearchablePreferenceDialog> searchablePreferenceDialog = createSearchablePreferenceDialog(preference, this);
-		if (searchablePreferenceDialog.isPresent()) {
-			show(searchablePreferenceDialog.get());
-		} else if (settings.VOICE_PROVIDER.getId().equals(preference.getKey())) {
-			VoiceLanguageBottomSheetFragment.showInstance(requireActivity().getSupportFragmentManager(), this, getSelectedAppMode(), false);
-		} else {
-			super.onDisplayPreferenceDialog(preference);
-		}
+		this
+				.createSearchablePreferenceDialog(preference, this)
+				.ifPresentOrElse(
+						this::show,
+						() -> {
+							if (settings.VOICE_PROVIDER.getId().equals(preference.getKey())) {
+								VoiceLanguageBottomSheetFragment.showInstance(requireActivity().getSupportFragmentManager(), this, getSelectedAppMode(), false);
+							} else {
+								super.onDisplayPreferenceDialog(preference);
+							}
+						});
 	}
 
 	private Optional<SearchablePreferenceDialog> createSearchablePreferenceDialog(
