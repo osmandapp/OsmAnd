@@ -45,7 +45,12 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 						{"RecalculateRouteInDeviationBottomSheet_title", R.string.recalculate_route_in_deviation},
 						{"RecalculateRouteInDeviationBottomSheet_description", R.string.select_distance_route_will_recalc},
 						{"RecalculateRouteInDeviationBottomSheet_longDescription", R.string.recalculate_route_distance_promo},
-						{"ScreenTimeoutBottomSheet_description", R.string.system_screen_timeout_descr}
+						{"ScreenTimeoutBottomSheet_description", R.string.system_screen_timeout_descr},
+						{"GoodsRestrictionsBottomSheet_title", R.string.routing_attr_goods_restrictions_name},
+						{"GoodsRestrictionsBottomSheet: goods_delivery_desc", R.string.goods_delivery_desc},
+						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_2", R.string.goods_delivery_desc_2},
+						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_3", R.string.goods_delivery_desc_3},
+						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_4", R.string.goods_delivery_desc_4},
 				});
 	}
 

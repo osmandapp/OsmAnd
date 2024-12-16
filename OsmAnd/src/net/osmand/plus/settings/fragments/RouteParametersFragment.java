@@ -578,10 +578,16 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 				HazmatCategoryBottomSheet.showInstance(manager, this, HAZMAT_TRANSPORTING_ENABLED, appMode, false, hazmatParameters.localizedNames, hazmatParameters.values, selectedValueIndex);
 			}
 		} else if (GOODS_RESTRICTIONS_PREFERENCE.equals(prefId)) {
-			FragmentManager manager = getFragmentManager();
+			final FragmentManager manager = getFragmentManager();
 			if (manager != null) {
-				OsmandPreference<Boolean> pref = getGoodsRestrictionPreference();
-				GoodsRestrictionsBottomSheet.showInstance(manager, this, GOODS_RESTRICTIONS_PREFERENCE, appMode, false, pref.getModeValue(appMode));
+				GoodsRestrictionsBottomSheet
+						.createInstance(
+								this,
+								preference,
+								appMode,
+								false,
+								getGoodsRestrictionPreference().getModeValue(appMode))
+						.show(manager, app);
 			}
 		} else if (ALLOW_VIA_FERRATA_PREFERENCE.equals(prefId)) {
 			FragmentManager manager = getFragmentManager();
@@ -631,17 +637,31 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 
 	@Override
 	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
+		return this
+				.getSearchablePreferenceDialog(preference)
+				.map(preferenceDialog ->
+						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
+								(Fragment) preferenceDialog,
+								_preferenceDialog -> preferenceDialog.getSearchableInfo()));
+	}
+
+	private Optional<SearchablePreferenceDialog> getSearchablePreferenceDialog(final Preference preference) {
 		if (settings.ROUTE_RECALCULATION_DISTANCE.getId().equals(preference.getKey())) {
-			final SearchablePreferenceDialog preferenceDialog =
+			return Optional.of(
 					RecalculateRouteInDeviationBottomSheet.createInstance(
 							preference,
 							null,
 							false,
-							getSelectedAppMode());
+							getSelectedAppMode()));
+		}
+		if (GOODS_RESTRICTIONS_PREFERENCE.equals(preference.getKey())) {
 			return Optional.of(
-					new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-							(Fragment) preferenceDialog,
-							_preferenceDialog -> preferenceDialog.getSearchableInfo()));
+					GoodsRestrictionsBottomSheet.createInstance(
+							null,
+							preference,
+							getSelectedAppMode(),
+							false,
+							getGoodsRestrictionPreference().getModeValue(getSelectedAppMode())));
 		}
 		return Optional.empty();
 	}
