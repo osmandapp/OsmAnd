@@ -11,6 +11,7 @@ import kotlinx.datetime.toLocalDateTime
 import net.osmand.shared.KException
 import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.extensions.currentTimeMillis
+import net.osmand.shared.gpx.GpxFile.Companion.XML_COLON
 import net.osmand.shared.gpx.primitives.Author
 import net.osmand.shared.gpx.primitives.Bounds
 import net.osmand.shared.gpx.primitives.Copyright
@@ -819,7 +820,7 @@ object GpxUtilities {
 		if (newKey.startsWith(OSMAND_EXTENSIONS_PREFIX)) {
 			newKey = newKey.replace(OSMAND_EXTENSIONS_PREFIX, "")
 		}
-		newKey = newKey.replace(":", "_-_")
+		newKey = newKey.replace(":", XML_COLON)
 		return OSMAND_EXTENSIONS_PREFIX + newKey
 	}
 
@@ -1665,5 +1666,4 @@ object GpxUtilities {
 			i += if (processedPoints > 0) processedPoints else 1
 		}
 	}
-
 }

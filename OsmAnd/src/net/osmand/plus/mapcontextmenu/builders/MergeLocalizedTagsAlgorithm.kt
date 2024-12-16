@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.builders
 import net.osmand.osm.AbstractPoiType
 import net.osmand.osm.MapPoiTypes
 import net.osmand.plus.OsmandApplication
+import net.osmand.shared.gpx.GpxFile.Companion.XML_COLON
 
 private val NAME_TAG_PREFIXES = listOf(
 	"name", "int_name", "nat_name", "reg_name", "loc_name",
@@ -135,6 +136,6 @@ class MergeLocalizedTagsAlgorithm private constructor(private val app: OsmandApp
 	}
 
 	private fun convertKey(key: String): String {
-		return key.replace("_-_", ":")
+		return key.replace(XML_COLON, ":")
 	}
 }

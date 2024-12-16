@@ -2,10 +2,10 @@ package net.osmand.data;
 
 import static net.osmand.gpx.GPXUtilities.*;
 import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
-import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
+import static net.osmand.shared.gpx.GpxFile.XML_COLON;
 
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
@@ -174,7 +174,7 @@ public class Amenity extends MapObject {
 		}
 		String str = additionalInfo.get(key);
 		if (str == null && key.contains(":")) {
-			str = additionalInfo.get(key.replaceAll(":", "_-_")); // try content_-_uk after content:uk
+			str = additionalInfo.get(key.replaceAll(":", XML_COLON)); // try content_-_uk after content:uk
 		}
 		if (str != null) {
 			str = unzipContent(str);
@@ -438,7 +438,7 @@ public class Amenity extends MapObject {
 			return translateName;
 		}
 		for (String nm : getAdditionalInfoKeys()) {
-			if (nm.startsWith(tag + ":") || nm.startsWith(tag + "_-_")) {
+			if (nm.startsWith(tag + ":") || nm.startsWith(tag + XML_COLON)) {
 				return getAdditionalInfo(nm);
 			}
 		}
