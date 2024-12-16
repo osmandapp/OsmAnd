@@ -26,16 +26,17 @@ class BasePreferenceBottomSheetInitializer<T extends BasePreferenceBottomSheet> 
 				  final @Nullable ApplicationMode appMode,
 				  final boolean usedOnMap,
 				  final @Nullable Fragment target) {
-		final Bundle args = new Bundle();
-		args.putString(PREFERENCE_ID, preference.getKey());
-		basePreferenceBottomSheet.setArguments(args);
+		basePreferenceBottomSheet.setPreference(preference);
+		basePreferenceBottomSheet.setArguments(createArguments(PREFERENCE_ID, preference.getKey()));
 		basePreferenceBottomSheet.setUsedOnMap(usedOnMap);
 		basePreferenceBottomSheet.setAppMode(appMode);
 		basePreferenceBottomSheet.setTargetFragment(target, 0);
-		// FK-TODO: find a clearer way to handle this (everywhere):
-		if (target == null) {
-			basePreferenceBottomSheet.setPreference(preference);
-		}
 		return basePreferenceBottomSheet;
+	}
+
+	private static Bundle createArguments(final String key, final String value) {
+		final Bundle arguments = new Bundle();
+		arguments.putString(key, value);
+		return arguments;
 	}
 }
