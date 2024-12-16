@@ -39,6 +39,9 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import net.osmand.Collator;
 import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.IndexConstants;
@@ -81,6 +84,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -126,6 +130,10 @@ public class TravelObfHelper implements TravelHelper {
 			"avg_ele", "min_ele", "max_ele", "start_ele", "ele_graph", "diff_ele_up", "diff_ele_down",
 			"avg_speed", "min_speed", "max_speed", "time_moving", "time_moving_no_gaps", "time_span", "time_span_no_gaps"
 	);
+
+	public static final String WPT_EXTRA_TAGS = "wpt_extra_tags";
+	private static final String METADATA_EXTRA_TAGS = "metadata_extra_tags";
+	private static final String EXTENSIONS_EXTRA_TAGS = "extensions_extra_tags";
 
 	public TravelObfHelper(OsmandApplication app) {
 		this.app = app;
@@ -316,7 +324,7 @@ public class TravelObfHelper implements TravelHelper {
 		travelGpx.description = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.DESCRIPTION));
 		travelGpx.routeId = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID));
 		travelGpx.user = Algorithms.emptyIfNull(amenity.getTagContent(USER));
-		travelGpx.activityType = Algorithms.emptyIfNull(amenity.getTagContent(ACTIVITY_TYPE)); // TODO
+		travelGpx.activityType = Algorithms.emptyIfNull(amenity.getTagContent(ACTIVITY_TYPE));
 		travelGpx.ref = Algorithms.emptyIfNull(amenity.getRef());
 		travelGpx.totalDistance = Algorithms.parseFloatSilently(amenity.getTagContent(DISTANCE), 0);
 		travelGpx.diffElevationUp = Algorithms.parseDoubleSilently(amenity.getTagContent(DIFF_ELEVATION_UP), 0);
@@ -1190,13 +1198,12 @@ public class TravelObfHelper implements TravelHelper {
 			if (subType.startsWith(ROUTES_PREFIX)) {
 				String osmValue = amenity.getType().getPoiTypeByKeyName(subType).getOsmValue();
 				if (!Algorithms.isEmpty(osmValue)) {
-					if (amenity.hasOsmRouteId()) {
-						gpxFileExtensions.put("route_type", osmValue); // instead of type and route tags
+					if (amenity.hasOsmRouteId() || !"other".equals(osmValue)) {
+						gpxFileExtensions.put("route_type", osmValue); // do not litter gpx with default route_type
 					}
-					RouteActivityHelper helper = app.getRouteActivityHelper();
-					RouteActivity activity = helper.findActivityByTag(osmValue);
-					if (activity != null) {
-						gpxFileExtensions.put(GpxUtilities.ACTIVITY_TYPE, activity.getId());
+					String activityType = amenity.getAdditionalInfo("route_activity_type");
+					if (activityType != null) {
+						gpxFileExtensions.put(GpxUtilities.ACTIVITY_TYPE, activityType); // osmand:activity in gpx
 					}
 				}
 			}
@@ -1287,8 +1294,24 @@ public class TravelObfHelper implements TravelHelper {
 			if (gpxFileExtensions.containsKey(GpxUtilities.ACTIVITY_TYPE)) {
 				gpxFile.getMetadata().getExtensionsToWrite()
 						.put(GpxUtilities.ACTIVITY_TYPE, gpxFileExtensions.get(GpxUtilities.ACTIVITY_TYPE));
-				gpxFileExtensions.remove(GpxUtilities.ACTIVITY_TYPE); // move activity to metadata TODO fixme
+				gpxFileExtensions.remove(GpxUtilities.ACTIVITY_TYPE); // move activity to the metadata
+				gpxFileExtensions.remove("route_activity_type"); // osmand:activity is enough
+				gpxFileExtensions.remove("route_type");
 			}
+
+			Gson gson = new Gson();
+			Type type = new TypeToken<Map<String, String>>() {}.getType();
+			if (gpxFileExtensions.containsKey(EXTENSIONS_EXTRA_TAGS)) {
+				gpxFile.getExtensionsToWrite()
+						.putAll(gson.fromJson(gpxFileExtensions.get(EXTENSIONS_EXTRA_TAGS), type));
+				gpxFileExtensions.remove(EXTENSIONS_EXTRA_TAGS);
+			}
+			if (gpxFileExtensions.containsKey(METADATA_EXTRA_TAGS)) {
+				gpxFile.getMetadata().getExtensionsToWrite()
+						.putAll(gson.fromJson(gpxFileExtensions.get(METADATA_EXTRA_TAGS), type));
+				gpxFileExtensions.remove(METADATA_EXTRA_TAGS);
+			}
+
 			gpxFile.getExtensionsToWrite().putAll(gpxFileExtensions); // finally
 		}
 		reconstructPointsGroups(gpxFile, pgNames, pgIcons, pgColors, pgBackgrounds); // create groups before points

@@ -1,6 +1,7 @@
 package net.osmand.plus.wikivoyage.data;
 
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
+import static net.osmand.plus.wikivoyage.data.TravelObfHelper.WPT_EXTRA_TAGS;
 import static net.osmand.shared.gpx.GpxUtilities.POINT_ELEVATION;
 
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -11,9 +12,14 @@ import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_C
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import net.osmand.data.Amenity;
 import net.osmand.util.Algorithms;
 
+import java.lang.reflect.Type;
+import java.util.Map;
 import java.util.Set;
 
 import net.osmand.shared.gpx.GpxTrackAnalysis;
@@ -86,6 +92,10 @@ public class TravelGpx extends TravelArticle {
 					wptPt.setComment(value);
 				} else if ("colour".equals(obfTag) && amenity.getAdditionalInfoKeys().contains("color")) {
 					// ignore "colour" if "color" exists
+				} else if (WPT_EXTRA_TAGS.equals(obfTag)) {
+					Gson gson = new Gson();
+					Type type = new TypeToken<Map<String, String>>() {}.getType();
+					wptPt.getExtensionsToWrite().putAll(gson.fromJson(value, type));
 				} else if (!doNotSaveWptTags.contains(obfTag)) {
 					wptPt.getExtensionsToWrite().put(obfTag, value);
 				}
