@@ -92,7 +92,20 @@ public abstract class MapButtonState {
 
 	@NonNull
 	public ButtonAppearanceParams createDefaultAppearanceParams() {
-		return new ButtonAppearanceParams(getDefaultIconName(), getDefaultSize(), getDefaultOpacity(), getDefaultCornerRadius());
+		MapButtonsHelper buttonsHelper = app.getMapButtonsHelper();
+		int size = buttonsHelper.getDefaultSizePref().get();
+		if (size <= 0) {
+			size = getDefaultSize();
+		}
+		float opacity = buttonsHelper.getDefaultOpacityPref().get();
+		if (opacity < 0) {
+			opacity = getDefaultOpacity();
+		}
+		int cornerRadius = buttonsHelper.getDefaultCornerRadiusPref().get();
+		if (cornerRadius < 0) {
+			cornerRadius = getDefaultCornerRadius();
+		}
+		return new ButtonAppearanceParams(getDefaultIconName(), size, opacity, cornerRadius);
 	}
 
 	@LayoutRes
@@ -211,10 +224,7 @@ public abstract class MapButtonState {
 		if (value != null && value > 0) {
 			position.fromLongValue(value);
 		}
-		int size = sizePref.get();
-		if (size <= 0) {
-			size = getDefaultSize();
-		}
+		int size = createAppearanceParams().getSize();
 		size = (size / 8) + 1;
 		position.setSize(size, size);
 	}

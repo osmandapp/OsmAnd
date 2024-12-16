@@ -68,6 +68,7 @@ public class MapButtonCard extends MapBaseCard {
 		if (mapButton != null) {
 			customAppearanceParams = appearanceParams;
 			mapButton.setCustomAppearanceParams(appearanceParams);
+			mapButton.setInvalidated(true);
 			mapButton.update();
 		}
 	}

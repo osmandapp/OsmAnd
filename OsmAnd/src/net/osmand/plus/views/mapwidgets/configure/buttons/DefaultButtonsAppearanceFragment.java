@@ -50,6 +50,7 @@ public class DefaultButtonsAppearanceFragment extends BaseOsmAndFragment impleme
 	private ButtonAppearanceParams appearanceParams;
 	private ButtonAppearanceParams originalAppearanceParams;
 
+	private MapHudCard mapHudCard;
 	private List<BaseCard> cards;
 	private DialogButton applyButton;
 
@@ -128,6 +129,8 @@ public class DefaultButtonsAppearanceFragment extends BaseOsmAndFragment impleme
 		container.removeAllViews();
 
 		MapActivity activity = requireMapActivity();
+		mapHudCard = new MapHudCard(activity, appearanceParams);
+		addCard(container, mapHudCard);
 		addCard(container, new CornerRadiusCard(activity, appearanceParams, true));
 		container.addView(themedInflater.inflate(R.layout.list_item_divider, container, false));
 		addCard(container, new ButtonSizeCard(activity, appearanceParams, true));
@@ -211,6 +214,10 @@ public class DefaultButtonsAppearanceFragment extends BaseOsmAndFragment impleme
 	@Override
 	public void onCardPressed(@NonNull BaseCard card) {
 		updateButtons();
+
+		if (mapHudCard != null) {
+			mapHudCard.updateContent();
+		}
 	}
 
 	@Override
@@ -237,6 +244,15 @@ public class DefaultButtonsAppearanceFragment extends BaseOsmAndFragment impleme
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			activity.enableDrawer();
+		}
+	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+
+		if (mapHudCard != null) {
+			mapHudCard.clearWidgets();
 		}
 	}
 
