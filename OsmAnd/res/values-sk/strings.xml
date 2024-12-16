@@ -5665,4 +5665,20 @@
     <string name="third_links">Odkazy inam</string>
     <string name="shared_string_interpolation">Interpolácia</string>
     <string name="selected_delayed_profile">Zvolený profil \"%s\"</string>
+    <string name="obd_fuel_type_bifuel_ethanol">Hybridný motor na etanol</string>
+    <string name="obd_fuel_type_bifuel_lpg">Hybridný motor na LPG</string>
+    <string name="obd_fuel_type_bifuel_cng">Hybridný motor na CNG</string>
+    <string name="obd_fuel_type_hybrid_electric_combustion">Hybridný elektrický a spaľovací motor</string>
+    <string name="obd_fuel_type_bifuel_gasoline">Hybridný motor na benzín</string>
+    <string name="obd_fuel_type_bifuel_methanol">Hybridný motor na metanol</string>
+    <string name="obd_fuel_type_bifuel_propane">Hybridný motor na propán</string>
+    <string name="obd_fuel_type_hybrid_electric">Hybridný elektrický</string>
+    <string name="obd_fuel_type_hybrid_ethanol">Hybridný etanolový</string>
+    <string name="obd_fuel_type_hybrid_diesel">Hybridný naftový</string>
+    <string name="obd_fuel_type_hybrid_gasoline">Hybridný benzínový</string>
+    <string name="obd_fuel_type_bifuel_electric_combustion">Hybridný na elektrický a spaľovací motor</string>
+    <string name="obd_fuel_type_hybrid_regenerative">Hybridný regeneratívny</string>
+    <string name="obd_fuel_type_bifuel_hydrogen">Hybridný na vodík</string>
+    <string name="obd_fuel_type_hybrid_hydrogen">Hybridný vodíkový</string>
+    <string name="obd_fuel_type_bifuel_electricity">Hybridný motor na elektrinu</string>
 </resources>

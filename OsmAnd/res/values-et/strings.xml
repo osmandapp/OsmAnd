@@ -465,7 +465,7 @@
     <string name="make_as_start_point">Tee sellest lähtepunkt</string>
     <string name="map_import_error">Kaardi importimise viga</string>
     <string name="map_imported_successfully">Kaart imporditud</string>
-    <string name="enter_the_file_name">Kirjuta faili nimi.</string>
+    <string name="enter_the_file_name">Sisesta failinimi.</string>
     <string name="transport_nearby_routes_within">Lähedalolevad teekonnad</string>
     <string name="transport_nearby_routes">Ulatus</string>
     <string name="dd_mm_ss_format">DD°MM′SS″</string>
@@ -2992,7 +2992,7 @@
     <string name="number_of_edits">Muudatuste arv</string>
     <string name="reports_for">Kanna ette</string>
     <string name="night">Öö</string>
-    <string name="file_name_containes_illegal_char">Faili nimi sisaldab keelatud sümbolit</string>
+    <string name="file_name_containes_illegal_char">Failinimi sisaldab keelatud sümbolit</string>
     <string name="configure_screen_quick_action">Kiirtoiming</string>
     <string name="quick_action_item_action">Tegevus %d</string>
     <string name="quick_action_item_screen">Ekraan %d</string>
@@ -3505,7 +3505,7 @@
     <string name="access_hint_enter_address">Sisesta aadress</string>
     <string name="simplified_track">Lihtsustatud teekond</string>
     <string name="simplified_track_description">Salvestatakse ainult üldine teekond ilma teekonnapunktideta.</string>
-    <string name="shared_string_file_name">Faili nimi</string>
+    <string name="shared_string_file_name">Failinimi</string>
     <string name="number_of_gpx_files_selected_pattern">%s rajafaili valitud</string>
     <string name="disable_recording_once_app_killed_descrp">Raja logimine peatub, kui rakendus tapetakse (viimaste rakenduste kaudu). (OsmAnd-i tausttähis kaob Androidi teateribalt.)</string>
     <string name="save_global_track_interval_descr">Määra üldisel teekonna salvestamisel kasutatav logimisvälp (lülitatakse sisse kaardil asuvast teekonna salvestamise vidinast).</string>

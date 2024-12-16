@@ -383,7 +383,7 @@
     <string name="poi_computer">Magasin de matériel informatique</string>
     <string name="poi_dive">Magasin pour la plongée sous-marine</string>
     <string name="poi_ship_chandler">Magasin d\'accastillage</string>
-    <string name="poi_gate">Pont</string>
+    <string name="poi_gate">Barrière</string>
     <string name="poi_traffic_signals">Feu de circulation</string>
     <string name="poi_service_tyres">Pneus</string>
     <string name="poi_public_transport_platform_bus">Arrêt de bus</string>
@@ -400,7 +400,7 @@
     <string name="poi_antiques">Antiquaire</string>
     <string name="poi_hunting">Magasin d\'articles de chasse</string>
     <string name="poi_interior_decoration">Magasin de décoration intérieure</string>
-    <string name="poi_lift_gate">Pont levant</string>
+    <string name="poi_lift_gate">Barrière levante</string>
     <string name="poi_border_control">Poste frontière</string>
     <string name="poi_traffic_calming_table">Ralentisseur (plateau)</string>
     <string name="poi_vehicle_inspection">Centre de contrôle technique automobile</string>
@@ -820,7 +820,7 @@
     <string name="poi_wiki_lang_vo">Wiki volapük</string>
     <string name="poi_cycle_barrier">Barrière cycliste</string>
     <string name="poi_motorcycle_barrier">Barrière anti-motocycles</string>
-    <string name="poi_bump_gate">Ralentisseur (dos d\'âne)</string>
+    <string name="poi_bump_gate">Barrière à pousser</string>
     <string name="poi_height_restrictor">Limiteur de hauteur</string>
     <string name="poi_horse_stile">Échalier à chevaux</string>
     <string name="poi_stile">Échalier</string>
@@ -4029,7 +4029,7 @@
     <string name="poi_sports_hall">Salle de sport</string>
     <string name="poi_couplings">Raccord de bouche d\'incendie</string>
     <string name="poi_ticket_validator">Valideur de billets</string>
-    <string name="poi_hampshire_gate">Barrière en barbelés</string>
+    <string name="poi_hampshire_gate">Barrière en fil de fer</string>
     <string name="poi_research_institute">Institut de recherche</string>
     <string name="poi_driver_training">Lieu de formation à la conduite</string>
     <string name="poi_coffee_filter">Café</string>
