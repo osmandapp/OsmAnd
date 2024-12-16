@@ -4550,7 +4550,7 @@
     <string name="map_widget_ant_bicycle_dist_desc">Mostra a distância percorrida</string>
     <string name="worldwide_maps">Mapas mundiais</string>
     <string name="external_sensors_plugin_name">Sensores externos</string>
-    <string name="external_sensors_plugin_description">Acede a sensores externos para ler, por exemplo, o ritmo cardíaco, velocidade da bicicleta, potência e cadência da bicicleta. Requer que o seu dispositivo esteja ligado aos respetivos sensores através do ANT + (Wireless Personal Network protocol).</string>
+    <string name="external_sensors_plugin_description">Acede a sensores externos para ler, por exemplo, o ritmo cardíaco, velocidade da bicicleta, potência e cadência da bicicleta. Requer que o seu dispositivo esteja ligado aos respetivos sensores através do protocolo de rede pessoal sem fios ANT+.</string>
     <string name="map_widget_altitude_map_center_desc">Mostra a elevação acima do nível do mar do centro do mapa atual.</string>
     <string name="map_widget_altitude_current_location">Altitude: localização atual</string>
     <string name="map_widget_altitude_desc">Mostra a altitude da geolocalização atual ou a elevação do centro do mapa atual</string>
@@ -4589,12 +4589,7 @@
     <string name="map_rendering_engine_v2">Versão 2 (OpenGL)</string>
     <string name="map_rendering_engine_descr">A versão 2 (OpenGL) é um motor de renderização de mapas mais rápido também na visualização 2.5D. A versão 1 foi a versão padrão antes da versão do OsmAnd 4.3, e ainda é a recomendada em dispositivos mais antigos.</string>
     <string name="map_rendering_engine">Motor de renderização do mapa</string>
-    <string name="weather_plugin_description">Fornece
-\n- a previsão meteorológica de 24h e 7 dias com 5 camadas
-\n- widgets baseados em localização
-\n- as isolinhas de temperatura / pressão
-\n
-\nOs dados meteorológicos são fornecidos pelo Global Forecast System (GFS, %1$s).</string>
+    <string name="weather_plugin_description">Fornece \n- a previsão meteorológica semanal com 5 camadas \n- widgets baseados em localização \n- as isolinhas de temperatura / pressão \n \nOs dados meteorológicos são fornecidos pelo Global Forecast System (GFS, %1$s).</string>
     <string name="weather_offline_forecast">Previsão offline</string>
     <string name="empty_screen_weather_temperature_layer">Ative para visualizar a camada de temperatura no mapa.</string>
     <string name="weather_widgets_secondary_desc">As unidades de medida podem ser alteradas nas configurações do complemento Previsão meteorológica.</string>
@@ -4615,7 +4610,7 @@
     <string name="map_widget_group_sunrise_sunset">Nascer do sol, pôr do sol</string>
     <string name="depth_contour_lines">Curvas de nível de profundidade</string>
     <string name="turn_on_nautical_depth_description">Ative para visualizar os dados de profundidade náutica no mapa.</string>
-    <string name="weather_online_cache">Cache de online</string>
+    <string name="weather_online_cache">Cache online</string>
     <string name="map_settings_weather_temp">Temperatura</string>
     <string name="map_settings_weather_air_pressure">Pressão atmosférica</string>
     <string name="map_settings_weather_wind">Vento</string>
@@ -4644,7 +4639,7 @@
     <string name="weather_pressure_hectopascals">Hectopascais</string>
     <string name="weather_pressure_inches_of_mercury">Polegadas de mercúrio</string>
     <string name="weather_pressure_millimeters_of_mercury">Milímetros de mercúrio</string>
-    <string name="weather_prefs_descr">Previsão de 24 horas e 7 dias, atualizada a cada 3 horas</string>
+    <string name="weather_prefs_descr">Previsão semanal, atualizada a cada 3 horas</string>
     <string name="switch_mode_by_tapping_on_widget">Alterne o modo tocando no widget.</string>
     <string name="weather_wind_kmh">km/h</string>
     <string name="empty_screen_weather_wind_layer">Ative para visualizar a camada de vento no mapa.</string>
@@ -4662,12 +4657,12 @@
     <string name="rendering_attr_showMtbScale_description">Mostrar trilhos conforme a escala MTB.</string>
     <string name="quick_action_temperature_layer">Uma opção para mostrar ou ocultar a camada de temperatura no mapa.</string>
     <string name="quick_action_precipitation_layer">Uma opção para mostrar ou ocultar a camada de precipitação no mapa.</string>
-    <string name="quick_action_wind_layer">Um botão para mostrar ou ocultar a camada de ventos no mapa.</string>
+    <string name="quick_action_wind_layer">Um botão para mostrar ou ocultar a camada de vento no mapa.</string>
     <string name="quick_action_cloud_layer">Um botão para mostrar ou ocultar a camada de nuvens no mapa.</string>
     <string name="quick_action_air_pressure_layer">Um botão para mostrar ou ocultar a camada de pressão do ar no mapa.</string>
     <string name="temperature_layer">Camada de temperatura</string>
     <string name="pressure_layer">Camada de pressão</string>
-    <string name="wind_layer">Camada de ventos</string>
+    <string name="wind_layer">Camada de vento</string>
     <string name="cloud_layer">Camada de nuvens</string>
     <string name="precipitation_layer">Camada de precipitação</string>
     <string name="mtb_imba_full">Associação Internacional de Ciclismo de Montanha</string>
@@ -4844,7 +4839,7 @@
     <string name="shared_string_ear_lobe">Lóbulo da orelha</string>
     <string name="shared_string_foot">Pé</string>
     <string name="ant_plus_bluetooth_off">O Bluetooth está desligado</string>
-    <string name="ant_plus_bluetooth_off_description">Ative os sensores de localização e emparelhamento do Bluetooth.</string>
+    <string name="ant_plus_bluetooth_off_description">Ative o Bluetooth para encontrar e emparelhar sensores.</string>
     <string name="ant_plus_searching_text">A procurar sensores</string>
     <string name="ant_plus_nothing_found_description">Certifique-se que:
 \n- O Bluetooth está ativado
@@ -4920,12 +4915,8 @@
     <string name="osmand_cloud_deleted_account_descr">A conta e todos os dados foram eliminados do OsmAnd Cloud.</string>
     <string name="delete_account_warning">Eliminar a conta %1$s?</string>
     <string name="delete_account">Eliminar conta</string>
-    <string name="osmand_cloud_deleting_account_descr">Em poucos instantes, todos os seus dados e conta serão eliminados do OsmAnd Cloud.
-\n
-\nTodos os dados no dispositivo permanecem intactos.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Eliminar a conta OsmAnd Cloud?
-\n
-\nEsta ação não pode ser desfeita.</string>
+    <string name="osmand_cloud_deleting_account_descr">Em poucos instantes, todos os seus dados e conta serão eliminados do OsmAnd Cloud. \n \nTodos os dados no dispositivo permanecerão intactos.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Eliminar a conta OsmAnd Cloud? \n \nEsta ação não pode ser revertida.</string>
     <string name="action_cannot_be_undone">Esta ação não pode ser desfeita.</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Os dispositivos secundários serão desconectados do OsmAnd Cloud e perderão o acesso às funcionalidades pagas.</string>
     <string name="osmand_cloud_deletion_account_warning">A sua conta e todos os detalhes da conta serão %1$s</string>
@@ -5490,7 +5481,7 @@
     <string name="contour_layers_action_descr">Alterar camadas de contornos</string>
     <string name="change_zoom_action_descr">Alterar ampliação do mapa.</string>
     <string name="map_3d_mode_action_descr">Alterar inclinação do mapa.</string>
-    <string name="rendering_attr_showDirtbikeTrails_description">Mostrar trilhos de terra para bicicletas</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Mostrar trilhos para motos todo-o-terreno</string>
     <string name="configure_map_description">Alterar o estilo do mapa, as camadas ou outras configurações.</string>
     <string name="shared_string_dp">dp</string>
     <string name="type_of_activity">Tipo de atividade</string>
@@ -5546,7 +5537,7 @@
     <string name="third_links">Hiperligações de terceiros</string>
     <string name="reset_average_speed">Repor velocidade média</string>
     <string name="unknown_bt_device">Dispositivo desconhecido</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Trilhos para motos fora de estrada</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Trilhos para motos todo-o-terreno</string>
     <string name="obd_fuel_type_not_provided">Não foi indicado o tipo de combustível</string>
     <string name="obd_fuel_type_gasoline">Gasolina</string>
     <string name="quick_action_showhide_osm_edits_descr">Botão para mostrar ou ocultar as edições locais do OSM no mapa.</string>
