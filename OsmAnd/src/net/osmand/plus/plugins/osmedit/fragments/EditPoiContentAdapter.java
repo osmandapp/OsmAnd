@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -77,6 +78,7 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 	private final ArrayAdapter<String> valueAdapter;
 	private final OpeningHoursAdapter openingHoursAdapter;
 	private final Activity activity;
+
 	private EditText currentTagEditText;
 	private final EditPoiListener editPoiListener;
 
@@ -108,8 +110,14 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 		notifyDataSetChanged();
 	}
 
+	@NonNull
 	public List<Object> getItems() {
 		return items;
+	}
+
+	@Nullable
+	public EditText getCurrentTagEditText() {
+		return currentTagEditText;
 	}
 
 	@Override
@@ -269,13 +277,13 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 			tagEditText.setText(tag);
 			tagEditText.setAdapter(tagAdapter);
 			tagEditText.setThreshold(1);
-			if (tagItem.isNew()) {
-				showKeyboard(tagEditText);
-			}
 
 			String[] previousTag = {tag};
 			tagEditText.setOnFocusChangeListener((v, hasFocus) -> {
 				if (!hasFocus) {
+					if (tagEditText.equals(currentTagEditText)) {
+						currentTagEditText = null;
+					}
 					tagFB.hideClearButton();
 					if (!getData().isInEdit()) {
 						String s = tagEditText.getText().toString();
@@ -286,11 +294,20 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 						}
 					}
 				} else {
-					tagFB.showClearButton();
 					currentTagEditText = tagEditText;
+					tagFB.showClearButton();
 					tagAdapter.getFilter().filter(tagEditText.getText());
 				}
 			});
+
+			if (tagItem.isNew()) {
+				tagEditText.requestFocus();
+				tagEditText.post(() -> {
+					if (activity != null) {
+						AndroidUtils.showSoftKeyboard(activity, tagEditText);
+					}
+				});
+			}
 
 			valueEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(AMENITY_TEXT_LENGTH)});
 			valueEditText.setText(value);
@@ -473,6 +490,7 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 		}
 
 		public void bindView(@NonNull OpenHoursItem openHoursItem) {
+			timeListContainer.removeAllViews();
 			OpeningHoursParser.OpeningHours openingHours = openingHoursAdapter.getOpeningHours();
 			int position = openHoursItem.position();
 			clockIconImageView.setImageDrawable(openingHoursAdapter.getClockDrawable());

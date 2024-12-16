@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 
@@ -34,7 +33,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.plugins.osmedit.data.EditPoiData;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
-import net.osmand.plus.plugins.osmedit.fragments.EditPoiContentAdapter.TagItemHolder;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -48,7 +46,6 @@ public class NewAdvancedEditPoiFragment extends BaseOsmAndFragment implements Ed
 
 	private EditPoiData.TagsChangedListener mTagsChangedListener;
 
-	private EditText currentTagEditText;
 	private String[] allTags;
 	private EditPoiContentAdapter contentAdapter;
 	private RecyclerView recyclerView;
@@ -82,18 +79,6 @@ public class NewAdvancedEditPoiFragment extends BaseOsmAndFragment implements Ed
 				long id = System.currentTimeMillis();
 				contentAdapter.getItems().add(position, new TagItem("", "", true, id));
 				contentAdapter.notifyItemInserted(position);
-
-				recyclerView.post(() -> {
-					getEditPoiFragment().smoothScrollToBottom();
-					recyclerView.post(() -> {
-						recyclerView.scrollToPosition(contentAdapter.getItemCount() - 1);
-						RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(position);
-						if (viewHolder instanceof TagItemHolder tagItemHolder && id == tagItemHolder.getItemId()) {
-							tagItemHolder.itemView.requestFocus();
-							tagItemHolder.focusOnTagEdit();
-						}
-					});
-				});
 			}
 
 			@Override
@@ -224,8 +209,8 @@ public class NewAdvancedEditPoiFragment extends BaseOsmAndFragment implements Ed
 
 	@Override
 	public void onSaveButtonClick() {
-		if (currentTagEditText != null) {
-			currentTagEditText.clearFocus();
+		if (contentAdapter.getCurrentTagEditText() != null) {
+			contentAdapter.getCurrentTagEditText().clearFocus();
 		}
 	}
 

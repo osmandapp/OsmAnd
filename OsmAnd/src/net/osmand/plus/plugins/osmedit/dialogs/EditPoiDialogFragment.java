@@ -110,6 +110,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	private OnSaveButtonClickListener onSaveButtonClickListener;
 	private OsmandTextFieldBoxes poiTypeTextInputLayout;
 	private View view;
+	public NestedScrollView scrollView;
 
 	public static final int AMENITY_TEXT_LENGTH = 255;
 
@@ -128,11 +129,18 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		editPoiData = new EditPoiData(entity, app);
 	}
 
+	private void resetNestedScrollView() {
+		scrollView.post(() -> {
+			scrollView.scrollTo(0, 0);
+			scrollView.requestLayout();
+		});
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
 		view = themedInflater.inflate(R.layout.fragment_edit_poi, container, false);
-		NestedScrollView scrollView = view.findViewById(R.id.scroll_view);
+		scrollView = view.findViewById(R.id.scroll_view);
 
 		scrollView.setNestedScrollingEnabled(false);
 		if (savedInstanceState != null) {
@@ -170,6 +178,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 				} else {
 					onSaveButtonClickListener = null;
 				}
+				resetNestedScrollView();
 			}
 
 			@Override
