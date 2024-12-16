@@ -13,11 +13,11 @@ import net.osmand.plus.settings.vehiclesize.containers.Metric;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-import de.KnollFrank.lib.settingssearch.common.Lists;
+import de.KnollFrank.lib.settingssearch.common.Optionals;
 
 public class SizePreference extends DialogPreference implements SearchableInfoProvider {
 
@@ -89,11 +89,10 @@ public class SizePreference extends DialogPreference implements SearchableInfoPr
 
 	@Override
 	public String getSearchableInfo() {
-		return String.join(
-				", ",
-				Lists.getPresentElements(
-						List.of(
-								Optional.ofNullable(getDialogTitle()),
-								Optional.ofNullable(getSummary()))));
+		return Optionals
+				.streamOfPresentElements(
+						Optional.ofNullable(getDialogTitle()),
+						Optional.ofNullable(getSummary()))
+				.collect(Collectors.joining(", "));
 	}
 }

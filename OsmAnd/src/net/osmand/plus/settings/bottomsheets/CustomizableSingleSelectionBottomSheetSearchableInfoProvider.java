@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import de.KnollFrank.lib.settingssearch.common.Lists;
+import de.KnollFrank.lib.settingssearch.common.Optionals;
 
 public class CustomizableSingleSelectionBottomSheetSearchableInfoProvider {
 
@@ -24,15 +24,10 @@ public class CustomizableSingleSelectionBottomSheetSearchableInfoProvider {
 	}
 
 	private static String asString(final DisplayItem displayItem) {
-		return String.join(
-				", ",
-				concat(
+		return Optionals
+				.streamOfPresentElements(
 						Optional.ofNullable(displayItem.getTitle()),
-						Optional.ofNullable(displayItem.getDescription())));
-	}
-
-	private static List<CharSequence> concat(final Optional<CharSequence> dialogTitle,
-											 final Optional<CharSequence> description) {
-		return Lists.getPresentElements(List.of(dialogTitle, description));
+						Optional.ofNullable(displayItem.getDescription()))
+				.collect(Collectors.joining(", "));
 	}
 }

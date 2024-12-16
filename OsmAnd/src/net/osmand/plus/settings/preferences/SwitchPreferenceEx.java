@@ -7,10 +7,10 @@ import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.plus.settings.fragments.search.SearchableInfoProvider;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-import de.KnollFrank.lib.settingssearch.common.Lists;
+import de.KnollFrank.lib.settingssearch.common.Optionals;
 
 public class SwitchPreferenceEx extends SwitchPreferenceCompat implements SearchableInfoProvider {
 
@@ -53,12 +53,11 @@ public class SwitchPreferenceEx extends SwitchPreferenceCompat implements Search
 
 	@Override
 	public String getSearchableInfo() {
-		return String.join(
-				", ",
-				Lists.getPresentElements(
-						List.of(
-								Optional.ofNullable(getSummaryOff()),
-								Optional.ofNullable(getSummaryOn()),
-								Optional.ofNullable(getDescription()))));
+		return Optionals
+				.streamOfPresentElements(
+						Optional.ofNullable(getSummaryOff()),
+						Optional.ofNullable(getSummaryOn()),
+						Optional.ofNullable(getDescription()))
+				.collect(Collectors.joining(", "));
 	}
 }

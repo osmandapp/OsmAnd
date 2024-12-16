@@ -7,10 +7,10 @@ import androidx.preference.EditTextPreference;
 
 import net.osmand.plus.settings.fragments.search.SearchableInfoProvider;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-import de.KnollFrank.lib.settingssearch.common.Lists;
+import de.KnollFrank.lib.settingssearch.common.Optionals;
 
 public class EditTextPreferenceEx extends EditTextPreference implements SearchableInfoProvider {
 
@@ -46,11 +46,10 @@ public class EditTextPreferenceEx extends EditTextPreference implements Searchab
 
 	@Override
 	public String getSearchableInfo() {
-		return String.join(
-				", ",
-				Lists.getPresentElements(
-						List.of(
-								Optional.ofNullable(getText()),
-								Optional.ofNullable(getDescription()))));
+		return Optionals
+				.streamOfPresentElements(
+						Optional.ofNullable(getText()),
+						Optional.ofNullable(getDescription()))
+				.collect(Collectors.joining(", "));
 	}
 }
