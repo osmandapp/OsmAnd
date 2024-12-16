@@ -5859,7 +5859,7 @@
     <string name="type_of_activity">Tipo de atividade</string>
     <string name="change_activity">Alterar atividade</string>
     <string name="shared_string_increase">Aumentar</string>
-    <string name="rendering_attr_showDirtbikeTrails_description">Mostrar trilhas de terra para bicicletas</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Mostrar trilhas de terra para motos fora de estrada</string>
     <string name="shared_string_decrease">Diminuir</string>
     <string name="unit_volt">V</string>
     <string name="wikimedia">Wikimedia</string>
@@ -5933,7 +5933,7 @@
     <string name="connect_obd_instructions_step3">Ative o Bluetooth no seu dispositivo</string>
     <string name="learn_more_about_obd_sensors">Saiba mais sobre sensores.</string>
     <string name="screen_is_locked_by_action_button">A tela sensível ao toque está bloqueada. Toque no botão para desbloquear.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Trilhas de terra para bicicletas</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Trilhas de terra para motos fora de estrada</string>
     <string name="obd_fuel_type_bifuel_ethanol">Funcionamento bicombustível a etanol</string>
     <string name="liter_per_hour">l/h</string>
     <string name="obd_fuel_type_hybrid_electric_combustion">Híbrido elétrico e motor a combustão</string>
@@ -5970,7 +5970,7 @@
     <string name="connect_obd_instructions_step2">Ligue o motor do seu veículo</string>
     <string name="connect_obd_instructions_title">O OsmAnd suporta conexões Bluetooth com scanners OBD-II.</string>
     <string name="connect_obd_instructions_step1">Conecte o scanner à porta OBD-II do seu veículo.</string>
-    <string name="connect_obd_instructions_step4">Toque em \'Conectar\' e selecione o scanner na lista.</string>
+    <string name="connect_obd_instructions_step4">Toque em \'%1$s\' e selecione o scanner na lista.</string>
     <string name="vehicle_metrics_plugin_settings">Configurações de métricas do veículo</string>
     <string name="obd_rpm_desc">Mostra as RPM do tacômetro do veículo pelo sensor OBD</string>
     <string name="screen_is_locked_by_external_button">A tela sensível ao toque está bloqueada. Para desbloquear, pressione o botão %1$s ou toque no botão na tela.</string>
