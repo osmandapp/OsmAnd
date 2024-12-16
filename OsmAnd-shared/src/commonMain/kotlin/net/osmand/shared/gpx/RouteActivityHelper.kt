@@ -134,12 +134,6 @@ object RouteActivityHelper {
 				val activityLabel = activityJson["label"]!!.jsonPrimitive.content
 				val iconName = activityJson["icon_name"]!!.jsonPrimitive.content
 				val tags = activityJson["tags"]?.jsonArray?.map { it.jsonPrimitive.content }?.toSet()
-//				log.error(
-//					"XXX <string name=\"poi_activity_type_" + activityId + "\">" + activityLabel + "</string>"
-//				);
-//				log.error(
-//					"XXX <poi_additional tag=\"route_activity_type\" value=\"" + activityId + "\" name=\"route_activity_type_" + activityId + "\"/> <!-- " + activitiesGroup.id + " -->\n"
-//				);
 				val activity = RouteActivity(activityId, activityLabel, iconName, activitiesGroup, tags)
 				cachedActivities.add(activity)
 				activities.add(activity)
