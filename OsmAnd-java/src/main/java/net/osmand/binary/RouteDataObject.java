@@ -1,13 +1,6 @@
 package net.osmand.binary;
 
-import static net.osmand.router.GeneralRouter.*;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
 import gnu.trove.map.hash.TIntObjectHashMap;
-
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
@@ -15,6 +8,12 @@ import net.osmand.data.LatLon;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+import static net.osmand.router.GeneralRouter.GeneralRouterProfile;
 
 public class RouteDataObject {
 	/*private */static final int RESTRICTION_SHIFT = 3;
@@ -636,6 +635,31 @@ public class RouteDataObject {
 			if (r.roundabout()) {
 				return true;
 			}
+		}
+		return false;
+	}
+
+	public boolean isClockwise(boolean leftSide) {
+		if (pointTypes != null) {
+			for (int[] tt : pointTypes) {
+				if (tt == null) {
+					continue;
+				}
+				for (int t : tt) {
+					RouteTypeRule r = region.quickGetEncodingRule(t);
+					if (r.getTag().equals("direction")) {
+						if (r.getValue().equals("clockwise")) {
+							return true;
+						}
+						if (r.getValue().equals("anticlockwise")) {
+							return false;
+						}
+					}
+				}
+			}
+		}
+		if (leftSide) {
+			return true;
 		}
 		return false;
 	}
