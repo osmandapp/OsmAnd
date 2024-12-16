@@ -324,7 +324,11 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 			this.searchablePreferenceDialog = searchablePreferenceDialog;
 		}
 
-		public abstract void show();
+		public void show() {
+			show(searchablePreferenceDialog);
+		}
+
+		protected abstract void show(final SearchablePreferenceDialog searchablePreferenceDialog);
 	}
 
 	@Override
@@ -372,7 +376,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 									false)) {
 
 						@Override
-						public void show() {
+						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
 							final FragmentActivity activity = getActivity();
 							if (activity != null) {
 								searchablePreferenceDialog.show(activity.getSupportFragmentManager(), app);
@@ -388,9 +392,8 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 									target,
 									getSelectedAppMode())) {
 
-						// FK-TODO: refactor
 						@Override
-						public void show() {
+						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
 							final FragmentManager fragmentManager = getFragmentManager();
 							if (fragmentManager != null) {
 								searchablePreferenceDialog.show(fragmentManager, app);
@@ -407,7 +410,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 									getSelectedAppMode())) {
 
 						@Override
-						public void show() {
+						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
 							final FragmentManager fragmentManager = getFragmentManager();
 							if (fragmentManager != null) {
 								searchablePreferenceDialog.show(fragmentManager, app);
