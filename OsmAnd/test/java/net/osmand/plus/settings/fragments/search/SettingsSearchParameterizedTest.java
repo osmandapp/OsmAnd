@@ -44,7 +44,8 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 						{"FuelTankCapacityBottomSheet_description", R.string.fuel_tank_capacity_description},
 						{"RecalculateRouteInDeviationBottomSheet_title", R.string.recalculate_route_in_deviation},
 						{"RecalculateRouteInDeviationBottomSheet_description", R.string.select_distance_route_will_recalc},
-						{"RecalculateRouteInDeviationBottomSheet_longDescription", R.string.recalculate_route_distance_promo}
+						{"RecalculateRouteInDeviationBottomSheet_longDescription", R.string.recalculate_route_distance_promo},
+						{"ScreenTimeoutBottomSheet_description", R.string.system_screen_timeout_descr}
 				});
 	}
 
