@@ -4874,21 +4874,11 @@
     <string name="poi_cash_in">Depósito de dinheiro</string>
     <string name="poi_osmand_access_main_tag">Acesso</string>
     <string name="poi_route_track">Outras rotas</string>
-    <string name="poi_activities_running">Corrida</string>
     <string name="poi_osmand_foot_prohibited_tunnel">Túnel proibido para pedestres</string>
     <string name="poi_osmand_bicycle_prohibited_tunnel">Túnel proibido para ciclistas</string>
     <string name="poi_route_article">Artigos de viagem</string>
     <string name="poi_route_article_point">Pontos de viagem</string>
     <string name="poi_route_track_point">Outros pontos de rotas</string>
-    <string name="poi_activities_bicycle">Bicicleta</string>
-    <string name="poi_activities_trekking">Caminhada</string>
-    <string name="poi_activities_pedestrian">A pé</string>
-    <string name="poi_activities_kayak">Esportes aquáticos</string>
-    <string name="poi_activities_horse">Local de equitação</string>
-    <string name="poi_activities_skiing">Esportes de inverno</string>
-    <string name="poi_activities_snowmobile">Moto de neve</string>
-    <string name="poi_activities_fitness">Trilhas de exercícios</string>
-    <string name="poi_activities_inline_skates">Patins em linha</string>
     <string name="poi_payment_parco_no">Parco não aceito</string>
     <string name="poi_payment_parkster_no">Parkster não aceito</string>
 </resources>

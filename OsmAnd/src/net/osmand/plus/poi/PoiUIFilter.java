@@ -6,7 +6,6 @@ import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.ROUTES;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
-import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 
 import android.content.Context;
@@ -201,10 +200,6 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 
 	public boolean isRouteArticlePointFilter() {
 		return filterId.startsWith(STD_PREFIX + ROUTE_ARTICLE_POINT);
-	}
-
-	public boolean isRouteTrackFilter() {
-		return filterId.startsWith(STD_PREFIX + ROUTE_TRACK);
 	}
 
 	public boolean isShowPrivateNeeded() {
