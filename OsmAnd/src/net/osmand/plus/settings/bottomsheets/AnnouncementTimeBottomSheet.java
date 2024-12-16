@@ -166,17 +166,9 @@ public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet imple
 															 final Fragment target,
 															 final @Nullable ApplicationMode appMode,
 															 final boolean usedOnMap) {
-		final Bundle args = new Bundle();
-		args.putString(PREFERENCE_ID, preference.getKey());
-		final AnnouncementTimeBottomSheet fragment = new AnnouncementTimeBottomSheet();
-		fragment.setArguments(args);
-		fragment.setAppMode(appMode);
-		fragment.setUsedOnMap(usedOnMap);
-		fragment.setTargetFragment(target, 0);
-		if (target == null) {
-			fragment.setPreference(preference);
-		}
-		return fragment;
+		return BasePreferenceBottomSheetInitializer
+				.initialize(new AnnouncementTimeBottomSheet())
+				.with(preference, appMode, usedOnMap, target);
 	}
 
 	@Override

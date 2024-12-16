@@ -127,18 +127,9 @@ public class DistanceDuringNavigationBottomSheet extends BasePreferenceBottomShe
 			final @Nullable Fragment target,
 			final @Nullable ApplicationMode appMode,
 			final boolean usedOnMap) {
-		final Bundle args = new Bundle();
-		args.putString(PREFERENCE_ID, preference.getKey());
-
-		final DistanceDuringNavigationBottomSheet fragment = new DistanceDuringNavigationBottomSheet();
-		fragment.setArguments(args);
-		fragment.setAppMode(appMode);
-		fragment.setUsedOnMap(usedOnMap);
-		fragment.setTargetFragment(target, 0);
-		if (target == null) {
-			fragment.setPreference(preference);
-		}
-		return fragment;
+		return BasePreferenceBottomSheetInitializer
+				.initialize(new DistanceDuringNavigationBottomSheet())
+				.with(preference, appMode, usedOnMap, target);
 	}
 
 	@Override

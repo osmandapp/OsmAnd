@@ -1,7 +1,6 @@
 package net.osmand.plus.settings.bottomsheets;
 
 import android.annotation.SuppressLint;
-import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
 
@@ -137,18 +136,11 @@ public class FuelTankCapacityBottomSheet extends BaseTextFieldBottomSheet implem
 															 final boolean usedOnMap,
 															 final @Nullable ApplicationMode appMode,
 															 final boolean configureSettingsSearch) {
-		final Bundle args = new Bundle();
-		args.putString(PREFERENCE_ID, preference.getKey());
 		final FuelTankCapacityBottomSheet fragment = new FuelTankCapacityBottomSheet();
-		fragment.setArguments(args);
-		fragment.setUsedOnMap(usedOnMap);
-		fragment.setAppMode(appMode);
-		fragment.setTargetFragment(target, 0);
-		if (target == null) {
-			fragment.setPreference(preference);
-		}
 		fragment.setConfigureSettingsSearch(configureSettingsSearch);
-		return fragment;
+		return BasePreferenceBottomSheetInitializer
+				.initialize(fragment)
+				.with(preference, appMode, usedOnMap, target);
 	}
 
 	@Override

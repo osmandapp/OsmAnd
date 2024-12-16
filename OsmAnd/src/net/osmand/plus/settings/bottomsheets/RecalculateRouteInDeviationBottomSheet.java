@@ -246,18 +246,9 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 																		final Fragment target,
 																		final boolean usedOnMap,
 																		final @Nullable ApplicationMode appMode) {
-		final Bundle args = new Bundle();
-		args.putString(PREFERENCE_ID, preference.getKey());
-		final RecalculateRouteInDeviationBottomSheet fragment = new RecalculateRouteInDeviationBottomSheet();
-		fragment.setArguments(args);
-		fragment.setUsedOnMap(usedOnMap);
-		fragment.setAppMode(appMode);
-		fragment.setTargetFragment(target, 0);
-		// FK-TODO: find a clearer way to handle this (everywhere):
-		if (target == null) {
-			fragment.setPreference(preference);
-		}
-		return fragment;
+		return BasePreferenceBottomSheetInitializer
+				.initialize(new RecalculateRouteInDeviationBottomSheet())
+				.with(preference, appMode, usedOnMap, target);
 	}
 
 	@Override
