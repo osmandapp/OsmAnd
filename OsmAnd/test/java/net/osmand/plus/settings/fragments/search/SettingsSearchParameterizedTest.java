@@ -39,18 +39,27 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 		return Arrays.asList(
 				new Object[][]{
 						{"RecalculateRoute", R.string.recalculate_route},
-						{"AnnouncementTimeBottomSheet_title", R.string.announcement_time_title},
-						{"AnnouncementTimeBottomSheet_description", R.string.announcement_time_descr},
-						{"FuelTankCapacityBottomSheet_description", R.string.fuel_tank_capacity_description},
-						{"RecalculateRouteInDeviationBottomSheet_title", R.string.recalculate_route_in_deviation},
-						{"RecalculateRouteInDeviationBottomSheet_description", R.string.select_distance_route_will_recalc},
-						{"RecalculateRouteInDeviationBottomSheet_longDescription", R.string.recalculate_route_distance_promo},
-						{"ScreenTimeoutBottomSheet_description", R.string.system_screen_timeout_descr},
-						{"GoodsRestrictionsBottomSheet_title", R.string.routing_attr_goods_restrictions_name},
+
+						{"AnnouncementTimeBottomSheet: title", R.string.announcement_time_title},
+						{"AnnouncementTimeBottomSheet: description", R.string.announcement_time_descr},
+
+						{"FuelTankCapacityBottomSheet: description", R.string.fuel_tank_capacity_description},
+
+						{"RecalculateRouteInDeviationBottomSheet: title", R.string.recalculate_route_in_deviation},
+						{"RecalculateRouteInDeviationBottomSheet: description", R.string.select_distance_route_will_recalc},
+						{"RecalculateRouteInDeviationBottomSheet: longDescription", R.string.recalculate_route_distance_promo},
+
+						{"ScreenTimeoutBottomSheet: description", R.string.system_screen_timeout_descr},
+
+						{"GoodsRestrictionsBottomSheet: title", R.string.routing_attr_goods_restrictions_name},
 						{"GoodsRestrictionsBottomSheet: goods_delivery_desc", R.string.goods_delivery_desc},
 						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_2", R.string.goods_delivery_desc_2},
 						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_3", R.string.goods_delivery_desc_3},
 						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_4", R.string.goods_delivery_desc_4},
+
+						// FK-TODO: enable development plugin for these two test cases
+						// {"LocationInterpolationBottomSheet: title", R.string.location_interpolation_percent},
+						// {"LocationInterpolationBottomSheet: description", R.string.location_interpolation_percent_desc}
 				});
 	}
 

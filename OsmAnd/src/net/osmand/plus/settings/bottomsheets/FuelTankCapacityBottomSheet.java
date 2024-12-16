@@ -3,6 +3,7 @@ package net.osmand.plus.settings.bottomsheets;
 import android.annotation.SuppressLint;
 import android.text.Editable;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,6 +34,8 @@ import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class FuelTankCapacityBottomSheet extends BaseTextFieldBottomSheet implements SearchablePreferenceDialog {
 	private static final Log LOG = PlatformUtil.getLog(VehicleParametersBottomSheet.class);
@@ -156,9 +159,9 @@ public class FuelTankCapacityBottomSheet extends BaseTextFieldBottomSheet implem
 
 	@Override
 	public String getSearchableInfo() {
-		return String.join(
-				", ",
-				title.getText(),
-				tvDescription.getText());
+		return Stream
+				.of(title, tvDescription)
+				.map(TextView::getText)
+				.collect(Collectors.joining(", "));
 	}
 }

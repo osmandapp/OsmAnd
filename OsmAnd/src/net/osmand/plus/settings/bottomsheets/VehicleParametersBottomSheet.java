@@ -37,6 +37,8 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet implements SearchablePreferenceDialog {
 	private static final Log LOG = PlatformUtil.getLog(VehicleParametersBottomSheet.class);
@@ -159,7 +161,10 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet imple
 
 	@Override
 	public String getSearchableInfo() {
-		return String.join(", ", _getText(R.id.title), _getText(R.id.description));
+		return Stream
+				.of(R.id.title, R.id.description)
+				.map(this::_getText)
+				.collect(Collectors.joining(", "));
 	}
 
 	private CharSequence _getText(final @IdRes int id) {

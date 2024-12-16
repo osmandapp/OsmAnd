@@ -292,7 +292,8 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		// in microamperes (µA) as specified in the API documentation.
 		if (Math.abs(m1.energyConsumption) > AUTO_DETECT_MICROAMPERES) m1.energyConsumption /= 1000;
 		if (Math.abs(m5.energyConsumption) > AUTO_DETECT_MICROAMPERES) m5.energyConsumption /= 1000;
-		if (Math.abs(m15.energyConsumption) > AUTO_DETECT_MICROAMPERES) m15.energyConsumption /= 1000;
+		if (Math.abs(m15.energyConsumption) > AUTO_DETECT_MICROAMPERES)
+			m15.energyConsumption /= 1000;
 
 		String fps = String.format("%.0f / %.0f / %.0f", m1.fps1k, m5.fps1k, m15.fps1k);
 		String gpu = String.format("%.2f / %.2f / %.2f", m1.gpu1k, m5.gpu1k, m15.gpu1k);
@@ -352,11 +353,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 				preference.setSummary(getAgpsDataDownloadedSummary());
 			}
 			return true;
-		} else if (settings.LOCATION_INTERPOLATION_PERCENT.getId().equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				LocationInterpolationBottomSheet.showInstance(fragmentManager, preference.getKey(), this, getSelectedAppMode());
-			}
 		} else if (RESET_TO_DEFAULT.equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
@@ -392,6 +388,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 									target,
 									getSelectedAppMode())) {
 
+						// FK-TODO: refactor
 						@Override
 						public void show() {
 							final FragmentManager fragmentManager = getFragmentManager();
@@ -399,8 +396,24 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 								searchablePreferenceDialog.show(fragmentManager, app);
 							}
 						}
-					}
-			);
+					});
+		}
+		if (settings.LOCATION_INTERPOLATION_PERCENT.getId().equals(preference.getKey())) {
+			return Optional.of(
+					new ShowableSearchablePreferenceDialog(
+							LocationInterpolationBottomSheet.createInstance(
+									preference,
+									target,
+									getSelectedAppMode())) {
+
+						@Override
+						public void show() {
+							final FragmentManager fragmentManager = getFragmentManager();
+							if (fragmentManager != null) {
+								searchablePreferenceDialog.show(fragmentManager, app);
+							}
+						}
+					});
 		}
 		return Optional.empty();
 	}

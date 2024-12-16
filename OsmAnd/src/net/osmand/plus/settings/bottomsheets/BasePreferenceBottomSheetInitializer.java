@@ -10,7 +10,7 @@ import androidx.preference.Preference;
 
 import net.osmand.plus.settings.backend.ApplicationMode;
 
-class BasePreferenceBottomSheetInitializer<T extends BasePreferenceBottomSheet> {
+public class BasePreferenceBottomSheetInitializer<T extends BasePreferenceBottomSheet> {
 
 	private final T basePreferenceBottomSheet;
 
