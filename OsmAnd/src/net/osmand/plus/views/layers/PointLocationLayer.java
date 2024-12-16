@@ -320,8 +320,7 @@ public class PointLocationLayer extends OsmandMapLayer
 		switch (currentMarkerState) {
 			case MOVE -> {
 				navigationMarker.setVisibility(!showHeading);
-				// Tempoprary code for testing instant location on map
-				//locationMarker.setVisibility(true);
+				locationMarker.setVisibility(false);
 				navigationMarkerWithHeading.setVisibility(showHeading);
 				locationMarkerWithHeading.setVisibility(false);
 				circleColor = showHeading
@@ -701,12 +700,6 @@ public class PointLocationLayer extends OsmandMapLayer
 				prevLocation = location;
 			}
 		}
-		// Tempoprary code for testing instant location on map
-		//if (mapRenderer != null) {
-		//	PointI target31 = new PointI(MapUtils.get31TileNumberX(location.getLongitude()),
-		//			MapUtils.get31TileNumberY(location.getLatitude()));
-		//	locationMarker.marker.setPosition(target31);
-		//}
 	}
 
 	@Override
