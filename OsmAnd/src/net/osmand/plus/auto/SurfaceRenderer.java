@@ -2,10 +2,14 @@ package net.osmand.plus.auto;
 
 import static net.osmand.plus.views.OsmandMapTileView.DEFAULT_ELEVATION_ANGLE;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.Surface;
@@ -62,6 +66,9 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	private Surface surface;
 	@Nullable
 	private SurfaceContainer surfaceContainer;
+
+	@Nullable
+	private Bitmap offscreenBitmap;
 
 	@Nullable
 	private Rect visibleArea;
@@ -192,7 +199,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	};
 
 	public SurfaceRenderer(@NonNull CarContext carContext, @NonNull Lifecycle lifecycle) {
-		this.handler = new Handler();
+		this.handler = new Handler(Looper.getMainLooper());
 		this.carContext = carContext;
 		this.surfaceView = new CarSurfaceView(carContext, this);
 		lifecycle.addObserver(this);
@@ -235,7 +242,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	 */
 	@Override
 	public void onFrameReady(MapRendererView mapRendererView) {
-		//renderFrame();
+//		renderFrame();
 		sendRenderFrameMsg();
 	}
 
@@ -295,6 +302,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	 */
 	public void updateLocation(@Nullable Location location) {
 		//renderFrame();
+		sendRenderFrameMsg();
 	}
 
 	@NonNull
@@ -327,8 +335,9 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 					setupOffscreenRenderer();
 				}
 			});
-		} else
+		} else {
 			setupOffscreenRenderer();
+		}
 	}
 
 	public void setupOffscreenRenderer() {
@@ -432,15 +441,33 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox().copy();
 		try {
 			renderFrame(tileBox, drawSettings);
-		} catch (Exception ignored) {
-			// Ignored
+		} catch (Exception e) {
+			Log.w(TAG, "Render frame err: " + e.getMessage());
 		}
 	}
 
-	public void renderFrame(RotatedTileBox tileBox, DrawSettings drawSettings) {
+	public synchronized void renderFrame(RotatedTileBox tileBox, DrawSettings drawSettings) {
 		if (mapView == null || surface == null || !surface.isValid()) {
 			// Surface is not available, or has been destroyed, skip this frame.
 			return;
+		}
+
+		if (offscreenMapRendererView != null) {
+			// retrieve bitmap outside lock canvas
+			Bitmap offscreenBitmapSrc = offscreenMapRendererView.getBitmap(null);
+			if (offscreenBitmapSrc != null) {
+				if (offscreenBitmap == null || offscreenBitmap.getWidth() != offscreenBitmapSrc.getWidth() ||
+						offscreenBitmap.getHeight() != offscreenBitmapSrc.getHeight()) {
+					offscreenBitmap = Bitmap.createBitmap(offscreenBitmapSrc.getWidth(), offscreenBitmapSrc.getWidth(), Bitmap.Config.ARGB_8888);
+				}
+				Matrix matrix = new Matrix();
+				matrix.preScale(1.0f, -1.0f);
+				Canvas canvas = new Canvas(offscreenBitmap);
+				canvas.setMatrix(matrix);
+				canvas.drawBitmap(offscreenBitmapSrc, 0, 0, new Paint());
+			} else {
+				offscreenBitmap = null;
+			}
 		}
 		Canvas canvas = surface.lockCanvas(null);
 		try {
@@ -449,8 +476,9 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 			boolean updateVectorRendering = drawSettings.isUpdateVectorRendering() || darkMode != newDarkMode;
 			darkMode = newDarkMode;
 			drawSettings = new DrawSettings(newDarkMode, updateVectorRendering);
-			if (offscreenMapRendererView != null)
-				canvas.drawBitmap(offscreenMapRendererView.getBitmap(), 0, 0, null);
+			if (offscreenBitmap != null) {
+				canvas.drawBitmap(offscreenBitmap, 0, 0, null);
+			}
 			mapView.drawOverMap(canvas, tileBox, drawSettings);
 			SurfaceRendererCallback callback = this.callback;
 			if (callback != null) {
