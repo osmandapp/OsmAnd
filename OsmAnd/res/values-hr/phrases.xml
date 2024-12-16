@@ -1886,4 +1886,13 @@
     <string name="poi_denomination_orthodox">Pravoslavlje</string>
     <string name="poi_denomination_reformed">Reformist</string>
     <string name="poi_denomination_iglesia_ni_cristo">Crkva krista</string>
+    <string name="poi_foundation">Zakladni ured</string>
+    <string name="poi_archery">Streličarstvo</string>
+    <string name="poi_notary">Notar</string>
+    <string name="poi_ice_rink">Klizalište</string>
+    <string name="poi_raceway">Trkalište</string>
+    <string name="poi_gorge">Kanjon</string>
+    <string name="poi_couloir">Tjesnac</string>
+    <string name="poi_boat_rental">Iznajmljivanje čamaca</string>
+    <string name="poi_mountain_area">Planinsko područje</string>
 </resources>
