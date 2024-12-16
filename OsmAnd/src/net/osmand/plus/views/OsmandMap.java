@@ -148,15 +148,14 @@ public class OsmandMap {
 	}
 
 	public float getMapDensity() {
-		float scale = app.getSettings().MAP_DENSITY.get();
-		return scale;// * getCarDensityScaleCoef();
+		return app.getSettings().MAP_DENSITY.get();
 	}
 
 	public float getCarDensityScaleCoef() {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		if (mapView.isCarView()) {
 			float carViewDensity = mapView.getCarViewDensity();
-			return carViewDensity / 2f + 0.1f;
+			return carViewDensity / 2.6f;
 		}
 		return 1f;
 	}
