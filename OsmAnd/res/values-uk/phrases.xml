@@ -4880,7 +4880,7 @@
     <string name="poi_route_article">Статті про подорожі</string>
     <string name="poi_route_article_point">Пункти</string>
     <string name="poi_route_track">Інші маршрути</string>
-    <string name="poi_route_track_point">Інші пункти маршруту</string>
+    <string name="poi_route_track_point">Точки маршруту</string>
     <string name="poi_payment_parco_no">Паркомісце не прийнято</string>
     <string name="poi_payment_parco_yes">Паркомісце</string>
     <string name="poi_payment_parkster_no">Паркер не прийнято</string>
@@ -4893,4 +4893,12 @@
     <string name="poi_camp_site_deluxe">Делюкс</string>
     <string name="poi_camp_site_type">Тип турбази</string>
     <string name="poi_camp_site_standard">Стандартний</string>
+    <string name="poi_routes_foot">стопа</string>
+    <string name="poi_routes_motorcycling">Мотоциклів</string>
+    <string name="poi_routes_other">Інші маршрути</string>
+    <string name="poi_routes_cycling">Велоспорт</string>
+    <string name="poi_routes_winter_sport">Зимові види спорту</string>
+    <string name="poi_routes_driving">Водіння</string>
+    <string name="poi_routes_air_sports">Повітряний спорт</string>
+    <string name="poi_routes_water_sport">Водні види спорту</string>
 </resources>
