@@ -9,7 +9,7 @@ import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
 import static net.osmand.plus.wikivoyage.data.PopularArticles.ARTICLES_PER_PAGE;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_ACTIVITY_TYPE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.AVERAGE_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELEVATION_DOWN;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELEVATION_UP;
@@ -324,7 +324,7 @@ public class TravelObfHelper implements TravelHelper {
 		travelGpx.description = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.DESCRIPTION));
 		travelGpx.routeId = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID));
 		travelGpx.user = Algorithms.emptyIfNull(amenity.getTagContent(USER));
-		travelGpx.activityType = Algorithms.emptyIfNull(amenity.getTagContent(ACTIVITY_TYPE));
+		travelGpx.activityType = Algorithms.emptyIfNull(amenity.getTagContent(ROUTE_ACTIVITY_TYPE));
 		travelGpx.ref = Algorithms.emptyIfNull(amenity.getRef());
 		travelGpx.totalDistance = Algorithms.parseFloatSilently(amenity.getTagContent(DISTANCE), 0);
 		travelGpx.diffElevationUp = Algorithms.parseDoubleSilently(amenity.getTagContent(DIFF_ELEVATION_UP), 0);
@@ -1203,7 +1203,7 @@ public class TravelObfHelper implements TravelHelper {
 					}
 					RouteActivityHelper helper = app.getRouteActivityHelper();
 					for (String key : amenity.getAdditionalInfoKeys()) {
-						if (key.startsWith(ACTIVITY_TYPE + "_")) {
+						if (key.startsWith(ROUTE_ACTIVITY_TYPE + "_")) {
 							String activityType = amenity.getAdditionalInfo(key);
 							if (!activityType.isEmpty() && helper.findRouteActivity(activityType) != null) {
 								gpxFileExtensions.put(GpxUtilities.ACTIVITY_TYPE, activityType); // osmand:activity in gpx
@@ -1301,7 +1301,7 @@ public class TravelObfHelper implements TravelHelper {
 				gpxFile.getMetadata().getExtensionsToWrite()
 						.put(GpxUtilities.ACTIVITY_TYPE, gpxFileExtensions.get(GpxUtilities.ACTIVITY_TYPE));
 				gpxFileExtensions.remove(GpxUtilities.ACTIVITY_TYPE); // move activity to the metadata
-				gpxFileExtensions.remove(ACTIVITY_TYPE); // osmand:activity is enough
+				gpxFileExtensions.remove(ROUTE_ACTIVITY_TYPE); // osmand:activity is enough
 				gpxFileExtensions.remove(ROUTE_TYPE);
 			}
 
