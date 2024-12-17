@@ -410,7 +410,7 @@
     <string name="poi_public_transport_platform_tram">Tramvajska stanica</string>
     <string name="poi_tram_stop">Tramvajska stanica</string>
     <string name="poi_public_transport_station">Stanica javnog prijevoza</string>
-    <string name="poi_bus_station">Autobusno stajalište</string>
+    <string name="poi_bus_station">Autobusna stanica</string>
     <string name="poi_subway_entrance">Ulaz u podzemnu željeznicu</string>
     <string name="poi_subway_station">Da;Stanica podzemne željeznice</string>
     <string name="poi_junction">Raskršće</string>
@@ -1216,7 +1216,7 @@
     <string name="poi_government_legislative">Institucija legislative</string>
     <string name="poi_vhf">VHF kanal</string>
     <string name="poi_surface_clay">Glina</string>
-    <string name="poi_surface_tartan">Karirano</string>
+    <string name="poi_surface_tartan">Tartan</string>
     <string name="poi_visibility_house">Vidljivost: kuća</string>
     <string name="poi_visibility_street">Vidljivost: ulica</string>
     <string name="poi_visibility_area">Vidljivost: područje</string>
@@ -1345,8 +1345,8 @@
     <string name="poi_substation_distribution">Distribucija</string>
     <string name="poi_substation_transition">Prijelaz</string>
     <string name="poi_substation_converter">Konverter</string>
-    <string name="poi_substation_compensation">Nadoknađivanje</string>
-    <string name="poi_substation_compression">Komprimiranje</string>
+    <string name="poi_substation_compensation">Nadoknada</string>
+    <string name="poi_substation_compression">Kompresija</string>
     <string name="poi_substation_measurement">Mjerenje</string>
     <string name="poi_blood_donation">Doniranje krvi</string>
     <string name="poi_books_comic">Stripovi</string>
@@ -1895,4 +1895,22 @@
     <string name="poi_couloir">Tjesnac</string>
     <string name="poi_boat_rental">Iznajmljivanje čamaca</string>
     <string name="poi_mountain_area">Planinsko područje</string>
+    <string name="poi_location_platform">Lokacija: platforma</string>
+    <string name="poi_location_kiosk">Lokacija: kiosk</string>
+    <string name="poi_location_outdoor">Lokacija: vani</string>
+    <string name="poi_free_flying_site_landing">Slijetanje</string>
+    <string name="poi_location_underground">Lokacija: podzemno</string>
+    <string name="poi_location_roof">Lokacija: krov</string>
+    <string name="poi_location_entrance">Lokacija: ulaz</string>
+    <string name="poi_free_flying_site_towing">Vuča</string>
+    <string name="poi_free_flying_site_training">Obuka</string>
+    <string name="poi_location_overground">Lokacija: nadzemno</string>
+    <string name="poi_location_overhead">Lokacija: iznad</string>
+    <string name="poi_free_flying_paragliding_no">Paragliding: ne</string>
+    <string name="poi_location_indoor">Lokacija: unutar</string>
+    <string name="poi_location_bridge">Lokacija: most</string>
+    <string name="poi_location_rooftop">Lokacija: vrh krova</string>
+    <string name="poi_location_underwater">Lokacija: podvodno</string>
+    <string name="poi_location_wall">Lokacija: zid</string>
+    <string name="poi_free_flying_site_takeoff">Polijetanje</string>
 </resources>
