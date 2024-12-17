@@ -376,6 +376,14 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	@Override
 	public void onDisplayPreferenceDialog(Preference preference) {
+		if (this instanceof ShowableSearchablePreferenceDialogProvider showableSearchablePreferenceDialogProvider) {
+			final Optional<ShowableSearchablePreferenceDialog<?>> preferenceDialog = showableSearchablePreferenceDialogProvider.getShowableSearchablePreferenceDialog(preference, this);
+			if (preferenceDialog.isPresent()) {
+				preferenceDialog.get().show();
+				return;
+			}
+		}
+
 		FragmentManager fragmentManager = getFragmentManager();
 		if (fragmentManager == null) {
 			return;

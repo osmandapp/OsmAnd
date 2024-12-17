@@ -45,13 +45,6 @@ public class SwitchPreferenceEx extends SwitchPreferenceCompat implements Search
 	}
 
 	@Override
-	protected void onClick() {
-		if (getFragment() == null && getIntent() == null) {
-			getPreferenceManager().showDialog(this);
-		}
-	}
-
-	@Override
 	public String getSearchableInfo() {
 		return Optionals
 				.streamOfPresentElements(

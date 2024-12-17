@@ -34,18 +34,17 @@ import net.osmand.plus.settings.datastorage.DataStorageHelper;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
-import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 import java.util.Map;
 import java.util.Optional;
 
-import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
-
 
 public class GlobalSettingsFragment extends BaseSettingsFragment
-		implements OnSendAnalyticsPrefsUpdate, OnSelectProfileCallback, SearchablePreferenceDialogProvider {
+		implements OnSendAnalyticsPrefsUpdate, OnSelectProfileCallback, ShowableSearchablePreferenceDialogProvider {
 
 	public static final String TAG = GlobalSettingsFragment.class.getSimpleName();
 
@@ -74,36 +73,20 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	}
 
 	@Override
-	public void onDisplayPreferenceDialog(Preference preference) {
-		this
-				.createPreferenceDialog(preference, this)
-				.ifPresentOrElse(
-						this::show,
-						() -> super.onDisplayPreferenceDialog(preference));
-	}
-
-	private Optional<SearchablePreferenceDialog> createPreferenceDialog(final Preference preference,
-																		final GlobalSettingsFragment target) {
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Fragment target) {
 		return SEND_ANONYMOUS_DATA_PREF_ID.equals(preference.getKey()) ?
-				Optional.of(SendAnalyticsBottomSheetDialogFragment.createInstance(target)) :
+				Optional.of(
+						new ShowableSearchablePreferenceDialog<>(SendAnalyticsBottomSheetDialogFragment.createInstance(target)) {
+
+							@Override
+							protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+								final FragmentManager fragmentManager = getFragmentManager();
+								if (fragmentManager != null) {
+									searchablePreferenceDialog.show(fragmentManager, app);
+								}
+							}
+						}) :
 				Optional.empty();
-	}
-
-	private void show(final SearchablePreferenceDialog dialog) {
-		final FragmentManager fragmentManager = getFragmentManager();
-		if (fragmentManager != null) {
-			dialog.show(fragmentManager, app);
-		}
-	}
-
-	@Override
-	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
-		return this
-				.createPreferenceDialog(preference, null)
-				.map(preferenceDialog ->
-						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-								(Fragment) preferenceDialog,
-								_preferenceDialog -> preferenceDialog.getSearchableInfo()));
 	}
 
 	@Override
