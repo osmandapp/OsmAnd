@@ -4886,7 +4886,7 @@
     <string name="poi_route_article_point">Тачке на путовањима</string>
     <string name="poi_route_article">Чланци о путовањима</string>
     <string name="poi_route_track">Друге руте</string>
-    <string name="poi_route_track_point">Тачке других рута</string>
+    <string name="poi_route_track_point">Тачке руте</string>
     <string name="poi_name_etymology">Етимологија имена</string>
     <string name="poi_name_left">Назив леве стране</string>
     <string name="poi_name_right">Назив десне стране</string>
@@ -4896,4 +4896,12 @@
     <string name="poi_camp_site_basic">Основно</string>
     <string name="poi_camp_site_standard">Стандардно</string>
     <string name="poi_camp_site_deluxe">Делукс</string>
+    <string name="poi_routes_winter_sport">Зимски спортови</string>
+    <string name="poi_routes_air_sports">Ваздушни спортови</string>
+    <string name="poi_routes_driving">Вожња</string>
+    <string name="poi_routes_water_sport">Спортови на води</string>
+    <string name="poi_routes_cycling">Бициклизам</string>
+    <string name="poi_routes_foot">Пешке</string>
+    <string name="poi_routes_other">Друге руте</string>
+    <string name="poi_routes_motorcycling">Мотоциклизам</string>
 </resources>
