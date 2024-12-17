@@ -11,6 +11,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton.Builder;
@@ -18,6 +19,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.base.dialog.data.DisplayItem;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.List;
@@ -28,7 +30,7 @@ import java.util.List;
  * When choosing one of the options, the selected option is passed to the controller
  * and dialog automatically closed without the need for confirmation by the user.
  */
-public class CustomizableSingleSelectionBottomSheet extends CustomizableBottomSheet {
+public class CustomizableSingleSelectionBottomSheet extends CustomizableBottomSheet implements SearchablePreferenceDialog {
 
 	public static final String TAG = CustomizableSingleSelectionBottomSheet.class.getSimpleName();
 
@@ -88,11 +90,6 @@ public class CustomizableSingleSelectionBottomSheet extends CustomizableBottomSh
 		return show == null || !show;
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
-									   @NonNull String processId, boolean usedOnMap) {
-		return createInstance(processId, usedOnMap).show(fragmentManager);
-	}
-
 	public static @NonNull CustomizableSingleSelectionBottomSheet createInstance(final @NonNull String processId, final boolean usedOnMap) {
 		final CustomizableSingleSelectionBottomSheet fragment = new CustomizableSingleSelectionBottomSheet();
 		fragment.setProcessId(processId);
@@ -100,13 +97,17 @@ public class CustomizableSingleSelectionBottomSheet extends CustomizableBottomSh
 		return fragment;
 	}
 
-	public boolean show(@NonNull final FragmentManager fragmentManager) {
-		try {
-			show(fragmentManager, TAG);
-			return true;
-		} catch (final RuntimeException e) {
-			return false;
-		}
+	@Override
+	public void show(final FragmentManager fragmentManager, final OsmandApplication app) {
+		show(fragmentManager, TAG);
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		return CustomizableSingleSelectionBottomSheetSearchableInfoProvider.getSearchableInfo(
+				getTitle(),
+				getDescription(),
+				getDisplayItems());
 	}
 
 	private String getTitle() {
@@ -119,12 +120,5 @@ public class CustomizableSingleSelectionBottomSheet extends CustomizableBottomSh
 
 	private List<DisplayItem> getDisplayItems() {
 		return displayData.getDisplayItems();
-	}
-
-	public String getSearchableInfo() {
-		return CustomizableSingleSelectionBottomSheetSearchableInfoProvider.getSearchableInfo(
-				getTitle(),
-				getDescription(),
-				getDisplayItems());
 	}
 }

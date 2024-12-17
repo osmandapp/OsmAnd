@@ -18,7 +18,8 @@ public class CompassModeWidgetDialogController extends BaseCompassModeDialogCont
 		super(app, app.getSettings().getApplicationMode());
 	}
 
-	@NonNull @Override
+	@NonNull
+	@Override
 	public String getProcessId() {
 		return PROCESS_ID;
 	}
@@ -40,6 +41,8 @@ public class CompassModeWidgetDialogController extends BaseCompassModeDialogCont
 		dialogManager.register(PROCESS_ID, controller);
 
 		FragmentManager manager = mapActivity.getSupportFragmentManager();
-		CustomizableSingleSelectionBottomSheet.showInstance(manager, PROCESS_ID, true);
+		CustomizableSingleSelectionBottomSheet
+				.createInstance(PROCESS_ID, true)
+				.show(manager, app);
 	}
 }

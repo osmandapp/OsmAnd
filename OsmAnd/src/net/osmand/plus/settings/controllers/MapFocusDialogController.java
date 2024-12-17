@@ -15,8 +15,8 @@ import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.data.DisplayItem;
-import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemSelected;
+import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSheet;
@@ -97,6 +97,8 @@ public class MapFocusDialogController extends BaseDialogController
 		dialogManager.register(PROCESS_ID, controller);
 
 		FragmentManager manager = mapActivity.getSupportFragmentManager();
-		CustomizableSingleSelectionBottomSheet.showInstance(manager, PROCESS_ID, true);
+		CustomizableSingleSelectionBottomSheet
+				.createInstance(PROCESS_ID, true)
+				.show(manager, app);
 	}
 }
