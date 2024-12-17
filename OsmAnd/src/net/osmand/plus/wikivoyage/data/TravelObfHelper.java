@@ -1298,11 +1298,14 @@ public class TravelObfHelper implements TravelHelper {
 			}
 			gpxFile.setHasAltitude(hasAltitude);
 			if (gpxFileExtensions.containsKey(GpxUtilities.ACTIVITY_TYPE)) {
-				gpxFile.getMetadata().getExtensionsToWrite()
-						.put(GpxUtilities.ACTIVITY_TYPE, gpxFileExtensions.get(GpxUtilities.ACTIVITY_TYPE));
-				gpxFileExtensions.remove(GpxUtilities.ACTIVITY_TYPE); // move activity to the metadata
-				gpxFileExtensions.remove(ROUTE_ACTIVITY_TYPE); // osmand:activity is enough
+				final String activityType =  gpxFileExtensions.get(GpxUtilities.ACTIVITY_TYPE);
+				gpxFile.getMetadata().getExtensionsToWrite().put(GpxUtilities.ACTIVITY_TYPE, activityType);
+
+				// cleanup type and activity tags
 				gpxFileExtensions.remove(ROUTE_TYPE);
+				gpxFileExtensions.remove(ROUTE_ACTIVITY_TYPE);
+				gpxFileExtensions.remove(ROUTE_ACTIVITY_TYPE + "_" + activityType);
+				gpxFileExtensions.remove(GpxUtilities.ACTIVITY_TYPE); // moved to the metadata
 			}
 
 			Gson gson = new Gson();
