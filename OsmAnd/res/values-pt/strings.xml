@@ -4653,8 +4653,8 @@
     <string name="precipitation_widget_desc">Mostra a precipitação para o centro do mapa atual.</string>
     <string name="rendering_attr_depthContourWidth_name">Espessura da linha</string>
     <string name="storage_migration_fragment_close_descr">A cópia está apenas %1$s%% completa. Se parar agora, a aplicação pode não funcionar corretamente.</string>
-    <string name="rendering_attr_showMtbScale_name">Mostrar escala MTB</string>
-    <string name="rendering_attr_showMtbScale_description">Mostrar trilhos conforme a escala MTB.</string>
+    <string name="rendering_attr_showMtbScale_name">Mostrar escala BTT</string>
+    <string name="rendering_attr_showMtbScale_description">Mostrar trilhos conforme a sua escala BTT.</string>
     <string name="quick_action_temperature_layer">Uma opção para mostrar ou ocultar a camada de temperatura no mapa.</string>
     <string name="quick_action_precipitation_layer">Uma opção para mostrar ou ocultar a camada de precipitação no mapa.</string>
     <string name="quick_action_wind_layer">Um botão para mostrar ou ocultar a camada de vento no mapa.</string>
@@ -4666,7 +4666,7 @@
     <string name="cloud_layer">Camada de nuvens</string>
     <string name="precipitation_layer">Camada de precipitação</string>
     <string name="mtb_imba_full">Associação Internacional de Ciclismo de Montanha</string>
-    <string name="mtb_scale">Escala MTB</string>
+    <string name="mtb_scale">Escala BTT</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_segment_classification">Classificação de segmento</string>
     <string name="rendering_attr_weatherCloudContours_name">Isolinhas de nuvens</string>
