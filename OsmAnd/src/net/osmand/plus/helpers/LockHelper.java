@@ -7,8 +7,8 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Build;
 import android.os.Handler;
+import android.os.Message;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.provider.Settings;
@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
+import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
@@ -37,6 +38,7 @@ import java.util.List;
 public class LockHelper implements SensorEventListener, StateChangedListener<ApplicationMode> {
 
 	private static final Log LOG = PlatformUtil.getLog(LockHelper.class);
+	private static final int LOCK_SCREEN_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 8;
 
 	private static final int SENSOR_SENSITIVITY = 4;
 
@@ -59,7 +61,6 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 	private final Runnable lockRunnable;
 	private final VoiceMessageListener voiceMessageListener;
 	private LockGestureDetector gestureDetector;
-	private boolean isLockTimerActive = false;
 
 	public interface LockUIAdapter {
 
@@ -79,10 +80,7 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 		turnScreenOnNavigationInstructions = settings.TURN_SCREEN_ON_NAVIGATION_INSTRUCTIONS;
 
 		settings.APPLICATION_MODE.addListener(this);
-		lockRunnable = () -> {
-			isLockTimerActive = false;
-			lock();
-		};
+		lockRunnable = this::lock;
 
 		voiceMessageListener = (listCommands, played) -> {
 			if (turnScreenOnNavigationInstructions.get()) {
@@ -146,8 +144,7 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 			});
 		}
 		if (millis > 0) {
-			isLockTimerActive = true;
-			uiHandler.postDelayed(lockRunnable, millis);
+			sendPostDelayedLockMessage(millis);
 		}
 	}
 
@@ -161,17 +158,19 @@ public class LockHelper implements SensorEventListener, StateChangedListener<App
 	}
 
 	public void resetLockTimerIfNeeded() {
-		boolean isTimerRunning = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
-				? uiHandler.hasCallbacks(lockRunnable)
-				: isLockTimerActive;
-
-		if (isTimerRunning) {
+		if (uiHandler.hasMessages(LOCK_SCREEN_MESSAGE)) {
 			uiHandler.removeCallbacks(lockRunnable);
 			int unlockTime = getUnlockTime();
 			if (unlockTime > 0) {
-				uiHandler.postDelayed(lockRunnable, unlockTime * 1000L);
+				sendPostDelayedLockMessage(unlockTime * 1000L);
 			}
 		}
+	}
+
+	private void sendPostDelayedLockMessage(long delayMillis){
+		Message message = Message.obtain(uiHandler, lockRunnable);
+		message.what = LOCK_SCREEN_MESSAGE;
+		uiHandler.sendMessageDelayed(message, delayMillis);
 	}
 
 	private int getUnlockTime() {
