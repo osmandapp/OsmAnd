@@ -36,6 +36,7 @@ public class TravelGpx extends TravelArticle {
 	public static final String ELE_GRAPH = "ele_graph";
 	public static final String ROUTE_BBOX_RADIUS = "route_bbox_radius";
 	public static final String USER = "user";
+	public static final String ROUTE_TYPE = "route_type";
 	public static final String ACTIVITY_TYPE = "route_activity_type";
 	public static final String TRAVEL_MAP_TO_POI_TAG = "route_id";
 
