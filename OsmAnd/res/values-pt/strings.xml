@@ -4476,7 +4476,7 @@
     <string name="rendering_attr_depthContourWidth_description">Largura da curva de nível de profundidade</string>
     <string name="auto_25_chars_route_tl_kl">Vire à esquerda e mantenha-se na esquerda</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostra trilhos específicos para bicicletas de montanha.</string>
-    <string name="rendering_attr_showMtbScaleIMBATrails_name">Mostrar trilhos BTT</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">Mostrar trilhos BTT IMBA</string>
     <string name="duplacate_widget_added_snackbar">Está a ser acrescentado à lista um widget duplicado.</string>
     <string name="auto_25_chars_route_tl_kr">Vire à esquerda e mantenha-se na direita</string>
     <string name="auto_25_chars_route_tr_kl">Vire à direita e mantenha-se na esquerda</string>
@@ -5148,7 +5148,7 @@
     <string name="shared_string_delete_item">Eliminar item</string>
     <string name="help_article_start_with_name">Começar com o OsmAnd</string>
     <string name="help_article_purchases_ios_name">Compras iOS</string>
-    <string name="help_article_navigation_routing_bicycle_based_routing_name">Rotas de bicicleta (MTB)</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">Rotas de bicicleta (BTT)</string>
     <string name="help_article_widgets_nav_widgets_name">Widgets de navegação</string>
     <string name="help_article_map_interact_with_map_name">Interagir com o mapa</string>
     <string name="key_event_category_actions">Ações</string>
