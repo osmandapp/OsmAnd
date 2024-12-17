@@ -337,10 +337,10 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	@Override
 	public boolean onPreferenceClick(final Preference preference) {
 		if (this instanceof final PreferenceFragmentHandlerProvider preferenceFragmentHandlerProvider) {
-			return preferenceFragmentHandlerProvider
-					.getPreferenceFragmentHandler(preference)
-					.map(this::showPreferenceFragment)
-					.orElse(false);
+			final Optional<PreferenceFragmentHandler> preferenceFragmentHandler = preferenceFragmentHandlerProvider.getPreferenceFragmentHandler(preference);
+			if (preferenceFragmentHandler.isPresent()) {
+				return showPreferenceFragment(preferenceFragmentHandler.get());
+			}
 		}
 		if (this instanceof ShowableSearchablePreferenceDialogProvider showableSearchablePreferenceDialogProvider) {
 			final Optional<ShowableSearchablePreferenceDialog<?>> preferenceDialog = showableSearchablePreferenceDialogProvider.getShowableSearchablePreferenceDialog(preference, this);
