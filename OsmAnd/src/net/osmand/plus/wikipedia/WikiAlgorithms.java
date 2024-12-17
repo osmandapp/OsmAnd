@@ -72,10 +72,9 @@ public class WikiAlgorithms {
 		return new Pair<>(text, url);
 	}
 
-	@Nullable
 	public static String formatWikiDate(@Nullable String date) {
-		if (date == null) {
-			return null;
+		if (Algorithms.isEmpty(date)) {
+			return "";
 		}
 		String cleanDate = date.startsWith("+") ? date.substring(1) : date;
 		cleanDate = cleanDate.endsWith("Z") ? cleanDate.substring(0, cleanDate.length() - 1) : cleanDate;

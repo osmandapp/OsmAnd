@@ -153,7 +153,7 @@ public class WikiCoreHelper {
 	private static List<WikiImage> getImagesOsmAndAPIRequestV2(String url, List<WikiImage> wikiImages) {
 		OsmandAPIResponseV2 response = sendWikipediaApiRequest(url, OsmandAPIResponseV2.class);
 		if (response != null && !Algorithms.isEmpty(response.images)) {
-			for (Map<String, Object> image : response.images) {
+			for (Map<String, String> image : response.images) {
 				WikiImage wikiImage = parseImageDataWithMetaData(image);
 				if (wikiImage != null && isUrlFileImage(wikiImage)) {
 					wikiImages.add(wikiImage);
@@ -187,25 +187,27 @@ public class WikiCoreHelper {
 		return wikiImages;
 	}
 
-	private static WikiImage parseImageDataWithMetaData(Map<String, Object> image) {
-		String imageUrl = (String) image.get("image");
+	private static WikiImage parseImageDataWithMetaData(Map<String, String> image) {
+		String imageUrl = image.get("image");
 		if (!Algorithms.isEmpty(image)) {
 			WikiImage wikiImage = parseImageDataFromFile(imageUrl);
 			if (wikiImage != null) {
 				Metadata metadata = wikiImage.getMetadata();
 
-				String date = (String) image.get("date");
+				String date = image.get("date");
 				if (date != null) {
 					metadata.setDate(date);
 				}
-				String author = (String) image.get("author");
+				String author = image.get("author");
 				if (date != null) {
 					metadata.setAuthor(author);
 				}
-				String license = (String) image.get("license");
+				String license = image.get("license");
 				if (date != null) {
 					metadata.setLicense(license);
 				}
+				long mediaId = Algorithms.parseLongSilently(image.get("mediaId"), -1);
+				wikiImage.setMediaId(mediaId);
 				return wikiImage;
 			}
 		}
@@ -258,7 +260,7 @@ public class WikiCoreHelper {
 	public static class OsmandAPIResponseV2 {
 		@SerializedName("features-v2")
 		@Expose
-		private final Set<Map<String, Object>> images = null;
+		private final Set<Map<String, String>> images = null;
 	}
 
 	public static class OsmandAPIResponse {
