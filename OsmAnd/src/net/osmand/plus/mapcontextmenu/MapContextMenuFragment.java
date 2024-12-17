@@ -192,7 +192,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		DialogManager dialogManager = mapActivity.getMyApplication().getDialogManager();
 		GalleryController controller = (GalleryController) dialogManager.findController(GalleryController.PROCESS_ID);
 		if (controller == null) {
-			dialogManager.register(GalleryController.PROCESS_ID, new GalleryController(mapActivity.getMyApplication()));
+			dialogManager.register(GalleryController.PROCESS_ID, new GalleryController(app));
 		}
 	}
 
