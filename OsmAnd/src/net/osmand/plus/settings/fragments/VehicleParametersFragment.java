@@ -2,6 +2,7 @@ package net.osmand.plus.settings.fragments;
 
 import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.createRoutingParameterPref;
+import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 import static net.osmand.router.GeneralRouter.DEFAULT_SPEED;
 import static net.osmand.router.GeneralRouter.MAX_AXLE_LOAD;
 import static net.osmand.router.GeneralRouter.MOTOR_TYPE;
@@ -37,7 +38,8 @@ import net.osmand.plus.settings.bottomsheets.SimpleSingleSelectionBottomSheet;
 import net.osmand.plus.settings.bottomsheets.VehicleParametersBottomSheet;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
-import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SizePreference;
 import net.osmand.plus.settings.vehiclesize.SizeType;
@@ -53,9 +55,7 @@ import net.osmand.shared.settings.enums.MetricsConstants;
 import java.util.Map;
 import java.util.Optional;
 
-import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
-
-public class VehicleParametersFragment extends BaseSettingsFragment implements SearchablePreferenceDialogProvider {
+public class VehicleParametersFragment extends BaseSettingsFragment implements ShowableSearchablePreferenceDialogProvider {
 
 	public static final String TAG = VehicleParametersFragment.class.getSimpleName();
 
@@ -270,41 +270,37 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 	}
 
 	@Override
-	public void onDisplayPreferenceDialog(Preference preference) {
-		this
-				.createPreferenceDialog(preference, this, false)
-				.map(SearchablePreferenceDialogFragmentHolder::searchablePreferenceDialogFragment)
-				.ifPresentOrElse(
-						this::show,
-						() -> super.onDisplayPreferenceDialog(preference));
-	}
-
-	private void show(final SearchablePreferenceDialog dialog) {
-		final FragmentManager fragmentManager = getFragmentManager();
-		if (fragmentManager != null) {
-			dialog.show(fragmentManager, app);
+	public void onDisplayPreferenceDialog(final Preference preference) {
+		final boolean shown = showDialogForPreference(preference, this);
+		if (!shown) {
+			super.onDisplayPreferenceDialog(preference);
 		}
 	}
 
-	private Optional<SearchablePreferenceDialogFragmentHolder<?>> createPreferenceDialog(
-			final Preference preference,
-			final VehicleParametersFragment target,
-			final boolean configureSettingsSearch) {
+	@Override
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Fragment target) {
+		final boolean configureSettingsSearch = target == null;
 		if (preference instanceof SizePreference) {
 			return Optional.of(
-					SearchablePreferenceDialogFragmentHolder.of(
+					new ShowableSearchablePreferenceDialog<>(
 							VehicleParametersBottomSheet
 									.createInstance(
 											preference,
 											target,
 											false,
 											getSelectedAppMode(),
-											configureSettingsSearch)));
+											configureSettingsSearch)) {
+
+						@Override
+						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+							VehicleParametersFragment.this.show(searchablePreferenceDialog);
+						}
+					});
 		}
 		if (MOTOR_TYPE_PREF_ID.equals(preference.getKey())) {
 			final ListPreferenceEx pref = (ListPreferenceEx) preference;
 			return Optional.of(
-					SearchablePreferenceDialogFragmentHolder.of(
+					new ShowableSearchablePreferenceDialog<>(
 							SimpleSingleSelectionBottomSheet.createInstance(
 									target,
 									preference.getKey(),
@@ -314,36 +310,38 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 									false,
 									pref.getEntries(),
 									pref.getEntryValues(),
-									pref.getValueIndex())));
+									pref.getValueIndex())) {
+
+						@Override
+						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+							VehicleParametersFragment.this.show(searchablePreferenceDialog);
+						}
+					});
 		}
 		if (settings.FUEL_TANK_CAPACITY.getId().equals(preference.getKey())) {
 			return Optional.of(
-					SearchablePreferenceDialogFragmentHolder.of(
+					new ShowableSearchablePreferenceDialog<>(
 							FuelTankCapacityBottomSheet.createInstance(
 									preference,
 									target,
 									false,
 									getSelectedAppMode(),
-									configureSettingsSearch)));
+									configureSettingsSearch)) {
+
+						@Override
+						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+							VehicleParametersFragment.this.show(searchablePreferenceDialog);
+						}
+					});
 		}
 		return Optional.empty();
 	}
 
-	@Override
-	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
-		if (DEFAULT_SPEED.equals(preference.getKey())) {
-			return Optional.of(
-					new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-							new Fragment(),
-							_preferenceDialog -> new VehicleSpeedHelper(app, getSelectedAppMode()).getSearchableInfo()));
+	private void show(final SearchablePreferenceDialog dialog) {
+		final FragmentManager fragmentManager = getFragmentManager();
+		if (fragmentManager != null) {
+			dialog.show(fragmentManager, app);
 		}
-		return this
-				.createPreferenceDialog(preference, null, true)
-				.map(SearchablePreferenceDialogFragmentHolder::searchablePreferenceDialogFragment)
-				.map(preferenceDialog ->
-						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-								preferenceDialog,
-								_preferenceDialog -> preferenceDialog.getSearchableInfo()));
 	}
 
 	@Override
