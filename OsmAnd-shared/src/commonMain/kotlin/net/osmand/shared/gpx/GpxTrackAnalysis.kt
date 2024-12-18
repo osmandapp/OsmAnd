@@ -24,7 +24,6 @@ class GpxTrackAnalysis {
 	}
 
 	var name: String? = null
-	var totalDistanceWithoutGaps = 0f
 	var timeSpanWithoutGaps: Long = 0
 	var expectedRouteDuration: Long = 0
 	var timeMovingWithoutGaps: Long = 0
@@ -169,6 +168,10 @@ class GpxTrackAnalysis {
 		get() = (getGpxParameter(GpxParameter.TOTAL_DISTANCE) as Double).toFloat()
 		set(value) = setGpxParameter(GpxParameter.TOTAL_DISTANCE, value.toDouble())
 
+	var totalDistanceWithoutGaps: Float
+		get() = (getGpxParameter(GpxParameter.TOTAL_DISTANCE_WITHOUT_GAPS) as Double).toFloat()
+		set(value) = setGpxParameter(GpxParameter.TOTAL_DISTANCE_WITHOUT_GAPS, value.toDouble())
+
 	fun isTimeSpecified(): Boolean {
 		val startTime = startTime
 		val endTime = endTime
@@ -295,6 +298,7 @@ class GpxTrackAnalysis {
 		var totalSensorCadenceSum = 0.0
 
 		var _totalDistance = 0.0f
+		var _totalDistanceWithoutGaps = 0.0f
 
 		points = 0
 
@@ -402,7 +406,7 @@ class GpxTrackAnalysis {
 						distanceMovingOfSingleSegment = 0f
 					}
 					if (point.lastPoint) {
-						totalDistanceWithoutGaps += distanceOfSingleSegment
+						_totalDistanceWithoutGaps += distanceOfSingleSegment
 						timeMovingWithoutGaps += timeMovingOfSingleSegment
 						totalDistanceMovingWithoutGaps += distanceMovingOfSingleSegment
 					}
@@ -446,8 +450,11 @@ class GpxTrackAnalysis {
 			}
 			processElevationDiff(s)
 		}
-
+		totalDistanceWithoutGaps = _totalDistanceWithoutGaps
 		totalDistance = _totalDistance
+		if(splitSegments.size == 1 && !splitSegments[0].segment.isGeneralSegment()) {
+			totalDistanceWithoutGaps = totalDistance
+		}
 
 		checkUnspecifiedValues(fileTimeStamp)
 		processAverageValues(totalElevation, elevationPoints, totalSpeedSum, speedCount)
