@@ -9,7 +9,7 @@ import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
 import static net.osmand.plus.wikivoyage.data.PopularArticles.ARTICLES_PER_PAGE;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_ACTIVITY_TYPE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.AVERAGE_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELEVATION_DOWN;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELEVATION_UP;
@@ -18,6 +18,7 @@ import static net.osmand.plus.wikivoyage.data.TravelGpx.ELE_GRAPH;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.MAX_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.MIN_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_BBOX_RADIUS;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_TYPE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.START_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.USER;
 import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_BACKGROUNDS;
@@ -71,7 +72,6 @@ import net.osmand.search.core.SearchSettings;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.RouteActivityHelper;
-import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -324,7 +324,7 @@ public class TravelObfHelper implements TravelHelper {
 		travelGpx.description = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.DESCRIPTION));
 		travelGpx.routeId = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID));
 		travelGpx.user = Algorithms.emptyIfNull(amenity.getTagContent(USER));
-		travelGpx.activityType = Algorithms.emptyIfNull(amenity.getTagContent(ACTIVITY_TYPE));
+		travelGpx.activityType = Algorithms.emptyIfNull(amenity.getTagContent(ROUTE_ACTIVITY_TYPE));
 		travelGpx.ref = Algorithms.emptyIfNull(amenity.getRef());
 		travelGpx.totalDistance = Algorithms.parseFloatSilently(amenity.getTagContent(DISTANCE), 0);
 		travelGpx.diffElevationUp = Algorithms.parseDoubleSilently(amenity.getTagContent(DIFF_ELEVATION_UP), 0);
@@ -1199,11 +1199,17 @@ public class TravelObfHelper implements TravelHelper {
 				String osmValue = amenity.getType().getPoiTypeByKeyName(subType).getOsmValue();
 				if (!Algorithms.isEmpty(osmValue)) {
 					if (amenity.hasOsmRouteId() || !"other".equals(osmValue)) {
-						gpxFileExtensions.put("route_type", osmValue); // do not litter gpx with default route_type
+						gpxFileExtensions.put(ROUTE_TYPE, osmValue); // do not litter gpx with default route_type
 					}
-					String activityType = amenity.getAdditionalInfo("route_activity_type");
-					if (activityType != null) {
-						gpxFileExtensions.put(GpxUtilities.ACTIVITY_TYPE, activityType); // osmand:activity in gpx
+					RouteActivityHelper helper = app.getRouteActivityHelper();
+					for (String key : amenity.getAdditionalInfoKeys()) {
+						if (key.startsWith(ROUTE_ACTIVITY_TYPE + "_")) {
+							String activityType = amenity.getAdditionalInfo(key);
+							if (!activityType.isEmpty() && helper.findRouteActivity(activityType) != null) {
+								gpxFileExtensions.put(GpxUtilities.ACTIVITY_TYPE, activityType); // osmand:activity in gpx
+								break;
+							}
+						}
 					}
 				}
 			}
@@ -1292,11 +1298,14 @@ public class TravelObfHelper implements TravelHelper {
 			}
 			gpxFile.setHasAltitude(hasAltitude);
 			if (gpxFileExtensions.containsKey(GpxUtilities.ACTIVITY_TYPE)) {
-				gpxFile.getMetadata().getExtensionsToWrite()
-						.put(GpxUtilities.ACTIVITY_TYPE, gpxFileExtensions.get(GpxUtilities.ACTIVITY_TYPE));
-				gpxFileExtensions.remove(GpxUtilities.ACTIVITY_TYPE); // move activity to the metadata
-				gpxFileExtensions.remove("route_activity_type"); // osmand:activity is enough
-				gpxFileExtensions.remove("route_type");
+				final String activityType =  gpxFileExtensions.get(GpxUtilities.ACTIVITY_TYPE);
+				gpxFile.getMetadata().getExtensionsToWrite().put(GpxUtilities.ACTIVITY_TYPE, activityType);
+
+				// cleanup type and activity tags
+				gpxFileExtensions.remove(ROUTE_TYPE);
+				gpxFileExtensions.remove(ROUTE_ACTIVITY_TYPE);
+				gpxFileExtensions.remove(ROUTE_ACTIVITY_TYPE + "_" + activityType);
+				gpxFileExtensions.remove(GpxUtilities.ACTIVITY_TYPE); // moved to the metadata
 			}
 
 			Gson gson = new Gson();

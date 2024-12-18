@@ -7,7 +7,7 @@ import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_ACTIVITY_TYPE;
 import static net.osmand.render.RenderingRulesStorage.LINE_RULES;
 import static net.osmand.render.RenderingRulesStorage.ORDER_RULES;
 import static net.osmand.render.RenderingRulesStorage.POINT_RULES;
@@ -148,12 +148,12 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 		}
 		boolean showTracks = getRouteTracksProperty().get();
 		boolean renderedChanged = false;
-		List<String> routesTypes = resourceManager.searchPoiSubTypesByPrefix(ACTIVITY_TYPE);
+		List<String> routesTypes = resourceManager.searchPoiSubTypesByPrefix(ROUTE_ACTIVITY_TYPE);
 		for (String type : routesTypes) {
 			CommonPreference<Boolean> pref = getRouteTypeProperty(type);
 			if (renderer != null) {
 				boolean selected = showTracks && pref.get();
-				String attrName = type.replace(ACTIVITY_TYPE + "_", "");
+				String attrName = type.replace(ROUTE_ACTIVITY_TYPE + "_", "");
 				renderedChanged |= updateRouteTypeVisibility(renderer, attrName, selected, false);
 			}
 		}
@@ -385,7 +385,7 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 	public void onRendererLoaded(String name, RenderingRulesStorage rules, InputStream source) {
 		for (Map.Entry<String, CommonPreference<Boolean>> entry : routeTypesProps.entrySet()) {
 			boolean selected = entry.getValue().get();
-			String attrName = entry.getKey().replace(ACTIVITY_TYPE + "_", "");
+			String attrName = entry.getKey().replace(ROUTE_ACTIVITY_TYPE + "_", "");
 			updateRouteTypeVisibility(rules, attrName, selected, false);
 		}
 	}
