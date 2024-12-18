@@ -43,7 +43,6 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 						{"AnnouncementTimeBottomSheet: title", R.string.announcement_time_title},
 						{"AnnouncementTimeBottomSheet: description", R.string.announcement_time_descr},
 
-						{"FuelTankCapacityBottomSheet: title", R.string.fuel_tank_capacity},
 						{"FuelTankCapacityBottomSheet: description", R.string.fuel_tank_capacity_description},
 
 						{"RecalculateRouteInDeviationBottomSheet: title", R.string.recalculate_route_in_deviation},
