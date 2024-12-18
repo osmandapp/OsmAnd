@@ -164,7 +164,8 @@ public class GpxBlockStatisticsBuilder {
 		if (app == null || gpxFile == null) {
 			return;
 		}
-		boolean withoutGaps = false;
+		GpxDisplayItem displayItem = getDisplayItem();
+		boolean withoutGaps = !selectedGpxFile.isJoinSegments() && displayItem != null && displayItem.isGeneralTrack();
 		if (initAnalysis == null) {
 			withoutGaps = true;
 			if (gpxFile.equals(app.getSavingTrackHelper().getCurrentGpx())) {
@@ -173,7 +174,6 @@ public class GpxBlockStatisticsBuilder {
 				withoutGaps = !selectedGpxFile.isJoinSegments()
 						&& (Algorithms.isEmpty(currentGpx.getTracks()) || currentGpx.getTracks().get(0).isGeneralTrack());
 			} else {
-				GpxDisplayItem displayItem = getDisplayItem();
 				if (displayItem != null) {
 					analysis = displayItem.analysis;
 					withoutGaps = !selectedGpxFile.isJoinSegments() && displayItem.isGeneralTrack();
