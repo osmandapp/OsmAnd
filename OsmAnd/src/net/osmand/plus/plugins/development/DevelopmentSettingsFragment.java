@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.development;
 
 import static net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.showResetSettingsDialog;
+import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 import static net.osmand.plus.simulation.OsmAndLocationSimulation.LocationSimulationListener;
 
 import android.content.Intent;
@@ -318,7 +319,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		final String prefId = preference.getKey();
-		if (showDialogForPreference(preference)) {
+		if (showDialogForPreference(preference, this)) {
 			return true;
 		} else if (SIMULATE_INITIAL_STARTUP.equals(prefId)) {
 			app.getAppInitializer().resetFirstTimeRun();
@@ -346,15 +347,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 			}
 		}
 		return super.onPreferenceClick(preference);
-	}
-
-	private boolean showDialogForPreference(final Preference preference) {
-		final Optional<ShowableSearchablePreferenceDialog<?>> preferenceDialog = getShowableSearchablePreferenceDialog(preference, this);
-		if (preferenceDialog.isPresent()) {
-			preferenceDialog.get().show();
-			return true;
-		}
-		return false;
 	}
 
 	@Override

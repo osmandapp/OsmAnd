@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 import static net.osmand.plus.settings.fragments.search.PreferenceMarker.markPreferenceAsConnectedToPlugin;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
@@ -21,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -50,7 +52,9 @@ import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.fragments.configureitems.ConfigureMenuRootFragment;
 import net.osmand.plus.settings.fragments.profileappearance.ProfileAppearanceFragment;
-import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
@@ -66,9 +70,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
-
-public class ConfigureProfileFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener, PluginStateListener, SearchablePreferenceDialogProvider {
+public class ConfigureProfileFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener, PluginStateListener, ShowableSearchablePreferenceDialogProvider {
 
 	public static final String TAG = ConfigureProfileFragment.class.getSimpleName();
 
@@ -438,24 +440,19 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	}
 
 	@Override
-	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
-		return this
-				.createSearchablePreferenceDialogFragment(preference, null)
-				.map(searchablePreferenceDialogFragmentHolder ->
-						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-								searchablePreferenceDialogFragmentHolder.searchablePreferenceDialogFragment(),
-								_preferenceDialog -> searchablePreferenceDialogFragmentHolder.searchablePreferenceDialogFragment().getSearchableInfo()));
-	}
-
-	private Optional<SearchablePreferenceDialogFragmentHolder<?>> createSearchablePreferenceDialogFragment(
-			final Preference preference,
-			final ConfigureProfileFragment target) {
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Fragment target) {
 		if (RESET_TO_DEFAULT.equals(preference.getKey())) {
 			return Optional.of(
-					SearchablePreferenceDialogFragmentHolder.of(
+					new ShowableSearchablePreferenceDialog<>(
 							ResetProfilePrefsBottomSheet.createInstance(
 									getSelectedAppMode(),
-									target)));
+									target)) {
+
+						@Override
+						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+							searchablePreferenceDialog.show(getFragmentManager(), app);
+						}
+					});
 		}
 		return Optional.empty();
 	}
@@ -465,10 +462,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		final MapActivity mapActivity = getMapActivity();
 		final FragmentManager fragmentManager = getFragmentManager();
 		if (mapActivity != null && fragmentManager != null) {
-			final Optional<SearchablePreferenceDialogFragmentHolder<?>> searchablePreferenceDialogFragment =
-					createSearchablePreferenceDialogFragment(preference, this);
-			if (searchablePreferenceDialogFragment.isPresent()) {
-				searchablePreferenceDialogFragment.get().searchablePreferenceDialogFragment().show(fragmentManager, app);
+			if (showDialogForPreference(preference, this)) {
 				return true;
 			}
 			final String prefId = preference.getKey();
