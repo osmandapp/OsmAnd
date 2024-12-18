@@ -276,14 +276,8 @@ class GpxFile : GpxExtensions {
 		analysis.wptPoints = points.size
 		analysis.setWptCategoryNames(getWaypointCategories())
 
-		val generalTrack = getGeneralTrack()
-		val generalSegment = getGeneralSegment()
-		if (!isShowCurrentTrack() && generalTrack != null && generalSegment != null) {
-			analysis.prepareInformation(fileTimestamp, pointsAnalyzer, SplitSegment(generalSegment))
-		} else {
-			val segments = getSplitSegments(analysis, fromDistance, toDistance)
-			analysis.prepareInformation(fileTimestamp, pointsAnalyzer, *segments.toTypedArray())
-		}
+		val segments = getSplitSegments(analysis, fromDistance, toDistance)
+		analysis.prepareInformation(fileTimestamp, pointsAnalyzer, *segments.toTypedArray())
 		return analysis
 	}
 

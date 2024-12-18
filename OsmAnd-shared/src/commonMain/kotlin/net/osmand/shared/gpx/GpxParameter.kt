@@ -13,7 +13,6 @@ enum class GpxParameter(
 	FILE_NAME("fileName", "TEXT", String::class, null, false),
 	FILE_DIR("fileDir", "TEXT", String::class, null, false),
 	TOTAL_DISTANCE("totalDistance", "double", Double::class, 0.0, true),
-	TOTAL_DISTANCE_WITHOUT_GAPS("totalDistanceWithoutGaps", "double", Double::class, 0.0, true),
 	TOTAL_TRACKS("totalTracks", "int", Int::class, 0, true),
 	START_TIME("startTime", "bigint", Long::class, Long.MAX_VALUE, true),
 	END_TIME("endTime", "bigint", Long::class, Long.MIN_VALUE, true),
