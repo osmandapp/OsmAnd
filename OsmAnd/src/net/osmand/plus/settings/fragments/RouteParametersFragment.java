@@ -66,7 +66,6 @@ import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.RoutingType;
 import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandler;
 import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandlerProvider;
-import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListParameters;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
@@ -639,29 +638,32 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
 		return this
 				.getSearchablePreferenceDialog(preference)
+				.map(SearchablePreferenceDialogFragmentHolder::searchablePreferenceDialogFragment)
 				.map(preferenceDialog ->
 						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-								(Fragment) preferenceDialog,
+								preferenceDialog,
 								_preferenceDialog -> preferenceDialog.getSearchableInfo()));
 	}
 
-	private Optional<SearchablePreferenceDialog> getSearchablePreferenceDialog(final Preference preference) {
+	private Optional<SearchablePreferenceDialogFragmentHolder<?>> getSearchablePreferenceDialog(final Preference preference) {
 		if (settings.ROUTE_RECALCULATION_DISTANCE.getId().equals(preference.getKey())) {
 			return Optional.of(
-					RecalculateRouteInDeviationBottomSheet.createInstance(
-							preference,
-							null,
-							false,
-							getSelectedAppMode()));
+					SearchablePreferenceDialogFragmentHolder.of(
+							RecalculateRouteInDeviationBottomSheet.createInstance(
+									preference,
+									null,
+									false,
+									getSelectedAppMode())));
 		}
 		if (GOODS_RESTRICTIONS_PREFERENCE.equals(preference.getKey())) {
 			return Optional.of(
-					GoodsRestrictionsBottomSheet.createInstance(
-							null,
-							preference,
-							getSelectedAppMode(),
-							false,
-							getGoodsRestrictionPreference().getModeValue(getSelectedAppMode())));
+					SearchablePreferenceDialogFragmentHolder.of(
+							GoodsRestrictionsBottomSheet.createInstance(
+									null,
+									preference,
+									getSelectedAppMode(),
+									false,
+									getGoodsRestrictionPreference().getModeValue(getSelectedAppMode()))));
 		}
 		return Optional.empty();
 	}

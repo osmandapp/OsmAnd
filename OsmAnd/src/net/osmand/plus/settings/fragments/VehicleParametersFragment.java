@@ -273,6 +273,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 	public void onDisplayPreferenceDialog(Preference preference) {
 		this
 				.createPreferenceDialog(preference, this, false)
+				.map(SearchablePreferenceDialogFragmentHolder::searchablePreferenceDialogFragment)
 				.ifPresentOrElse(
 						this::show,
 						() -> super.onDisplayPreferenceDialog(preference));
@@ -285,42 +286,45 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 		}
 	}
 
-	private Optional<SearchablePreferenceDialog> createPreferenceDialog(
+	private Optional<SearchablePreferenceDialogFragmentHolder<?>> createPreferenceDialog(
 			final Preference preference,
 			final VehicleParametersFragment target,
 			final boolean configureSettingsSearch) {
 		if (preference instanceof SizePreference) {
 			return Optional.of(
-					VehicleParametersBottomSheet
-							.createInstance(
-									preference,
-									target,
-									false,
-									getSelectedAppMode(),
-									configureSettingsSearch));
+					SearchablePreferenceDialogFragmentHolder.of(
+							VehicleParametersBottomSheet
+									.createInstance(
+											preference,
+											target,
+											false,
+											getSelectedAppMode(),
+											configureSettingsSearch)));
 		}
 		if (MOTOR_TYPE_PREF_ID.equals(preference.getKey())) {
 			final ListPreferenceEx pref = (ListPreferenceEx) preference;
 			return Optional.of(
-					SimpleSingleSelectionBottomSheet.createInstance(
-							target,
-							preference.getKey(),
-							pref.getTitle().toString(),
-							pref.getDescription(),
-							getSelectedAppMode(),
-							false,
-							pref.getEntries(),
-							pref.getEntryValues(),
-							pref.getValueIndex()));
+					SearchablePreferenceDialogFragmentHolder.of(
+							SimpleSingleSelectionBottomSheet.createInstance(
+									target,
+									preference.getKey(),
+									pref.getTitle().toString(),
+									pref.getDescription(),
+									getSelectedAppMode(),
+									false,
+									pref.getEntries(),
+									pref.getEntryValues(),
+									pref.getValueIndex())));
 		}
 		if (settings.FUEL_TANK_CAPACITY.getId().equals(preference.getKey())) {
 			return Optional.of(
-					FuelTankCapacityBottomSheet.createInstance(
-							preference,
-							target,
-							false,
-							getSelectedAppMode(),
-							configureSettingsSearch));
+					SearchablePreferenceDialogFragmentHolder.of(
+							FuelTankCapacityBottomSheet.createInstance(
+									preference,
+									target,
+									false,
+									getSelectedAppMode(),
+									configureSettingsSearch)));
 		}
 		return Optional.empty();
 	}
@@ -335,9 +339,10 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 		}
 		return this
 				.createPreferenceDialog(preference, null, true)
+				.map(SearchablePreferenceDialogFragmentHolder::searchablePreferenceDialogFragment)
 				.map(preferenceDialog ->
 						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-								(Fragment) preferenceDialog,
+								preferenceDialog,
 								_preferenceDialog -> preferenceDialog.getSearchableInfo()));
 	}
 

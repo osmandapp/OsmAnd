@@ -12,7 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
@@ -28,6 +27,7 @@ import net.osmand.plus.settings.bottomsheets.AnnouncementTimeBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SpeedLimitBottomSheet;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.SearchablePreferenceDialogFragmentHolder;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
@@ -257,6 +257,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements Sear
 	public void onDisplayPreferenceDialog(Preference preference) {
 		this
 				.createSearchablePreferenceDialog(preference, this)
+				.map(SearchablePreferenceDialogFragmentHolder::searchablePreferenceDialogFragment)
 				.ifPresentOrElse(
 						this::show,
 						() -> {
@@ -268,16 +269,17 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements Sear
 						});
 	}
 
-	private Optional<SearchablePreferenceDialog> createSearchablePreferenceDialog(
+	private Optional<SearchablePreferenceDialogFragmentHolder<?>> createSearchablePreferenceDialog(
 			final Preference preference,
 			final VoiceAnnouncesFragment target) {
 		return settings.ARRIVAL_DISTANCE_FACTOR.getId().equals(preference.getKey()) ?
 				Optional.of(
-						AnnouncementTimeBottomSheet.createInstance(
-								preference,
-								target,
-								getSelectedAppMode(),
-								false)) :
+						SearchablePreferenceDialogFragmentHolder.of(
+								AnnouncementTimeBottomSheet.createInstance(
+										preference,
+										target,
+										getSelectedAppMode(),
+										false))) :
 				Optional.empty();
 	}
 
@@ -307,9 +309,10 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements Sear
 	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
 		return this
 				.createSearchablePreferenceDialog(preference, null)
+				.map(SearchablePreferenceDialogFragmentHolder::searchablePreferenceDialogFragment)
 				.map(preferenceDialog ->
 						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-								(Fragment) preferenceDialog,
+								preferenceDialog,
 								_preferenceDialog -> preferenceDialog.getSearchableInfo()));
 	}
 }

@@ -4,8 +4,7 @@ import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 
-// FK-TODO: use everywhere like in ConfigureProfileFragment
-record SearchablePreferenceDialogFragmentHolder<T extends Fragment & SearchablePreferenceDialog>(
+public record SearchablePreferenceDialogFragmentHolder<T extends Fragment & SearchablePreferenceDialog>(
 		T searchablePreferenceDialogFragment) {
 
 	public static <T extends Fragment & SearchablePreferenceDialog> SearchablePreferenceDialogFragmentHolder<T> of(final T searchablePreferenceDialogFragment) {
