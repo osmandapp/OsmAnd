@@ -425,9 +425,11 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	public boolean onPreferenceClick(Preference preference) {
 		{
 			final Optional<SearchablePreferenceDialog> preferenceDialog =
-					createPreferenceDialog(
-							preference,
-							this);
+					this
+							.createPreferenceDialog(
+									preference,
+									this)
+							.map(SearchablePreferenceDialogFragmentHolder::searchablePreferenceDialogFragment);
 			if (preferenceDialog.isPresent()) {
 				show(preferenceDialog.get());
 				return true;
@@ -484,15 +486,17 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		return Optional.empty();
 	}
 
-	private Optional<SearchablePreferenceDialog> createPreferenceDialog(final Preference preference,
-																		final GeneralProfileSettingsFragment target) {
+	private Optional<SearchablePreferenceDialogFragmentHolder<?>> createPreferenceDialog(
+			final Preference preference,
+			final GeneralProfileSettingsFragment target) {
 		if (settings.PRECISE_DISTANCE_NUMBERS.getId().equals(preference.getKey())) {
 			return Optional.of(
-					DistanceDuringNavigationBottomSheet.createInstance(
-							preference,
-							target,
-							getSelectedAppMode(),
-							false));
+					SearchablePreferenceDialogFragmentHolder.of(
+							DistanceDuringNavigationBottomSheet.createInstance(
+									preference,
+									target,
+									getSelectedAppMode(),
+									false)));
 		}
 		return Optional.empty();
 	}
@@ -508,10 +512,11 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
 		return this
 				.createPreferenceDialog(preference, null)
-				.map(preferenceDialog ->
+				.map(SearchablePreferenceDialogFragmentHolder::searchablePreferenceDialogFragment)
+				.map(searchablePreferenceDialog ->
 						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-								(Fragment) preferenceDialog,
-								_preferenceDialog -> preferenceDialog.getSearchableInfo()));
+								searchablePreferenceDialog,
+								_preferenceDialog -> searchablePreferenceDialog.getSearchableInfo()));
 	}
 
 	private void updateDialogControllerCallbacks() {
