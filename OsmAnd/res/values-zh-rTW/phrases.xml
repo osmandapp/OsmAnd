@@ -4881,7 +4881,7 @@
     <string name="poi_osmand_foot_prohibited_tunnel">隧道禁止行人通行</string>
     <string name="poi_osmand_bicycle_prohibited_tunnel">隧道禁止腳踏車騎士通行</string>
     <string name="poi_route_track">其他路線</string>
-    <string name="poi_route_track_point">其他路線點</string>
+    <string name="poi_route_track_point">路線點</string>
     <string name="poi_route_article_point">旅遊點</string>
     <string name="poi_route_article">旅遊文章</string>
     <string name="poi_name_etymology">名稱詞源學</string>
@@ -4893,4 +4893,12 @@
     <string name="poi_camp_site_type">露營地類型</string>
     <string name="poi_camp_site_basic">基本</string>
     <string name="poi_camp_site_deluxe">豪華</string>
+    <string name="poi_routes_motorcycling">騎機車</string>
+    <string name="poi_routes_other">其他路線</string>
+    <string name="poi_routes_winter_sport">冬季運動</string>
+    <string name="poi_routes_driving">開車</string>
+    <string name="poi_routes_air_sports">空中運動</string>
+    <string name="poi_routes_foot">步行</string>
+    <string name="poi_routes_cycling">騎腳踏車</string>
+    <string name="poi_routes_water_sport">水上運動</string>
 </resources>

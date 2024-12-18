@@ -165,8 +165,8 @@
     <string name="shared_string_on">Uključeno</string>
     <string name="shared_string_off">Isključeno</string>
     <string name="backToMenu">Povratak na izbornik</string>
-    <string name="zoomOut">Udalji</string>
-    <string name="zoomIn">Približi</string>
+    <string name="zoomOut">Umanji</string>
+    <string name="zoomIn">Uvećaj</string>
     <string name="north">sjever</string>
     <string name="north_north_east">sjever-sjeveroistok</string>
     <string name="north_east">sjeveroistok</string>
@@ -1645,4 +1645,11 @@
     <string name="max_level_download_tile_descr">Ne pregledavaj online karte razinom zumiranja izvan ove.</string>
     <string name="public_transport_type">Vrsta prijevoza</string>
     <string name="avoid_pt_types">Izbjegni vrste prijevoza …</string>
+    <string name="key_event_action_move_left">Pomakni lijevo</string>
+    <string name="key_event_action_move_up">Pomakni gore</string>
+    <string name="key_event_action_move_down">Pomakni dolje</string>
+    <string name="key_event_action_move_right">Pomakni desno</string>
+    <string name="key_event_action_zoom_in">Uvećaj</string>
+    <string name="key_event_action_zoom_out">Umanji</string>
+    <string name="lang_sr_latn">Srpski (latinica)</string>
 </resources>

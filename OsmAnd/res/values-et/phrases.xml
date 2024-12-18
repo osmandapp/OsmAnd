@@ -4872,7 +4872,7 @@
     <string name="poi_cycle_network">Rattateede võrgustik</string>
     <string name="poi_padus_category_designation">Kategooria: määramine</string>
     <string name="poi_padus_category_easement">Kategooria: servituut</string>
-    <string name="poi_route_track_point">Muud teekonnapunktid</string>
+    <string name="poi_route_track_point">Teekonnapunktid</string>
     <string name="poi_route_track">Muud teekonnad</string>
     <string name="poi_payment_parkster_no">Parksteri teenus pole kasutatav</string>
     <string name="poi_payment_parkster_yes">Parkster</string>
@@ -4886,4 +4886,6 @@
     <string name="poi_camp_site_serviced">Lisateenustega</string>
     <string name="poi_camp_site_standard">Standardne</string>
     <string name="poi_camp_site_deluxe">Luksuslik</string>
+    <string name="poi_routes_water_sport">Veespordialade marsruudid</string>
+    <string name="poi_routes_other">Muud marsruudid</string>
 </resources>
