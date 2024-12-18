@@ -41,37 +41,37 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 	public static Iterable<Object[]> data() {
 		return Arrays.asList(
 				new Object[][]{
-						{"RecalculateRoute", searchQueryId(R.string.recalculate_route)},
+						{"RecalculateRoute", searchQuery(R.string.recalculate_route)},
 
-						{"AnnouncementTimeBottomSheet: title", searchQueryId(R.string.announcement_time_title)},
-						{"AnnouncementTimeBottomSheet: description", searchQueryId(R.string.announcement_time_descr)},
-						{"AnnouncementTimeBottomSheet: time intervals", searchQueryId(R.string.announcement_time_intervals)},
+						{"AnnouncementTimeBottomSheet: title", searchQuery(R.string.announcement_time_title)},
+						{"AnnouncementTimeBottomSheet: description", searchQuery(R.string.announcement_time_descr)},
+						{"AnnouncementTimeBottomSheet: time intervals", searchQuery(R.string.announcement_time_intervals)},
 
-						{"FuelTankCapacityBottomSheet: title", searchQueryId(R.string.fuel_tank_capacity)},
-						{"FuelTankCapacityBottomSheet: description", searchQueryId(R.string.fuel_tank_capacity_description)},
+						{"FuelTankCapacityBottomSheet: title", searchQuery(R.string.fuel_tank_capacity)},
+						{"FuelTankCapacityBottomSheet: description", searchQuery(R.string.fuel_tank_capacity_description)},
 
-						{"RecalculateRouteInDeviationBottomSheet: title", searchQueryId(R.string.recalculate_route_in_deviation)},
-						{"RecalculateRouteInDeviationBottomSheet: description", searchQueryId(R.string.select_distance_route_will_recalc)},
-						{"RecalculateRouteInDeviationBottomSheet: longDescription", searchQueryId(R.string.recalculate_route_distance_promo)},
+						{"RecalculateRouteInDeviationBottomSheet: title", searchQuery(R.string.recalculate_route_in_deviation)},
+						{"RecalculateRouteInDeviationBottomSheet: description", searchQuery(R.string.select_distance_route_will_recalc)},
+						{"RecalculateRouteInDeviationBottomSheet: longDescription", searchQuery(R.string.recalculate_route_distance_promo)},
 
-						{"ScreenTimeoutBottomSheet: description", searchQueryId(R.string.system_screen_timeout_descr)},
+						{"ScreenTimeoutBottomSheet: description", searchQuery(R.string.system_screen_timeout_descr)},
 
-						{"GoodsRestrictionsBottomSheet: title", searchQueryId(R.string.routing_attr_goods_restrictions_name)},
-						{"GoodsRestrictionsBottomSheet: goods_delivery_desc", searchQueryId(R.string.goods_delivery_desc)},
-						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_2", searchQueryId(R.string.goods_delivery_desc_2)},
-						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_3", searchQueryId(R.string.goods_delivery_desc_3)},
-						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_4", searchQueryId(R.string.goods_delivery_desc_4)},
+						{"GoodsRestrictionsBottomSheet: title", searchQuery(R.string.routing_attr_goods_restrictions_name)},
+						{"GoodsRestrictionsBottomSheet: goods_delivery_desc", searchQuery(R.string.goods_delivery_desc)},
+						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_2", searchQuery(R.string.goods_delivery_desc_2)},
+						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_3", searchQuery(R.string.goods_delivery_desc_3)},
+						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_4", searchQuery(R.string.goods_delivery_desc_4)},
 
-						{"SendAnalyticsBottomSheetDialogFragment: description", searchQueryId(R.string.make_osmand_better_descr)},
+						{"SendAnalyticsBottomSheetDialogFragment: description", searchQuery(R.string.make_osmand_better_descr)},
 
-						{"ProfileAppearanceFragment: view_angle_description", searchQueryId(R.string.view_angle_description)},
-						{"ProfileAppearanceFragment: location_radius_description", searchQueryId(R.string.location_radius_description)},
+						{"ProfileAppearanceFragment: view_angle_description", searchQuery(R.string.view_angle_description)},
+						{"ProfileAppearanceFragment: location_radius_description", searchQuery(R.string.location_radius_description)},
 
-						{"RouteParametersFragment: title", searchQueryId(R.string.route_recalculation_dist_title)},
+						{"RouteParametersFragment: title", searchQuery(R.string.route_recalculation_dist_title)},
 
-						{"ResetProfilePrefsBottomSheet: title", searchQueryId(R.string.reset_all_profile_settings)},
-						{"ResetProfilePrefsBottomSheet: description", searchQueryId(R.string.reset_all_profile_settings_descr)},
-						{"ResetProfilePrefsBottomSheet: reset_confirmation_descr", searchQueryString("Tapping Reset discards all your changes")},
+						{"ResetProfilePrefsBottomSheet: title", searchQuery(R.string.reset_all_profile_settings)},
+						{"ResetProfilePrefsBottomSheet: description", searchQuery(R.string.reset_all_profile_settings_descr)},
+						{"ResetProfilePrefsBottomSheet: reset_confirmation_descr", searchQuery("Tapping Reset discards all your changes")},
 
 						// FK-TODO: enable development plugin for these two test cases
 						// {"LocationInterpolationBottomSheet: title", Either.ofLeft(R.string.location_interpolation_percent)},
@@ -104,11 +104,11 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 				Function.identity());
 	}
 
-	private static Either<Integer, String> searchQueryId(final @StringRes int id) {
+	private static Either<Integer, String> searchQuery(final @StringRes int id) {
 		return Either.ofLeft(id);
 	}
 
-	private static Either<Integer, String> searchQueryString(final String str) {
+	private static Either<Integer, String> searchQuery(final String str) {
 		return Either.ofRight(str);
 	}
 }
