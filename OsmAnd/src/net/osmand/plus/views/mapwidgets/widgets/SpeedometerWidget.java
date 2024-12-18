@@ -583,7 +583,13 @@ public class SpeedometerWidget {
 	}
 
 	private int getSpeedTextColor(boolean speedExceed) {
-		return app.getColor(speedExceed ? R.color.text_color_negative : lastNightMode ? R.color.widgettext_night : R.color.widgettext_day);
+		int colorId;
+		if (speedExceed) {
+			colorId = lastNightMode ? R.color.speedometer_text_speed_exceed_night : R.color.speedometer_text_speed_exceed_day;
+		} else {
+			colorId = lastNightMode ? R.color.widgettext_night : R.color.widgettext_day;
+		}
+		return app.getColor(colorId);
 	}
 
 	@NonNull

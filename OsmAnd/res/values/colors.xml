@@ -219,6 +219,10 @@
 	<!-- Distance to object suitable for all themes -->
 	<color name="color_distance">#FD9822</color>
 
+	<!-- Speedometer -->
+	<color name="speedometer_text_speed_exceed_day">#E71D36</color>
+	<color name="speedometer_text_speed_exceed_night">#E71D36</color>
+
 	<color name="color_myloc_distance">#0080FF</color>
 	<color name="wpt_distance_color">#dd6CB336</color>
 
