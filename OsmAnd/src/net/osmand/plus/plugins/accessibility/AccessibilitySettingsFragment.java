@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.accessibility;
 
 import static net.osmand.plus.plugins.PluginInfoFragment.PLUGIN_INFO;
+import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -29,17 +31,15 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.settings.fragments.SearchablePreferenceDialogFragmentHolder;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
-import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 import java.util.Optional;
 
-import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
-
-public class AccessibilitySettingsFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener, SearchablePreferenceDialogProvider {
+public class AccessibilitySettingsFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener, ShowableSearchablePreferenceDialogProvider {
 
 	private static final String ACCESSIBILITY_OPTIONS = "accessibility_options";
 	private static final String COPY_PLUGIN_SETTINGS = "copy_plugin_settings";
@@ -257,13 +257,8 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 	}
 
 	@Override
-	public boolean onPreferenceClick(Preference preference) {
-		final Optional<SearchablePreferenceDialog> searchablePreferenceDialog =
-				this
-						.createSearchablePreferenceDialog(preference, this)
-						.map(SearchablePreferenceDialogFragmentHolder::searchablePreferenceDialogFragment);
-		if (searchablePreferenceDialog.isPresent()) {
-			searchablePreferenceDialog.get().show(getFragmentManager(), app);
+	public boolean onPreferenceClick(final Preference preference) {
+		if (showDialogForPreference(preference, this)) {
 			return true;
 		}
 		if (COPY_PLUGIN_SETTINGS.equals(preference.getKey())) {
@@ -276,24 +271,19 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 	}
 
 	@Override
-	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
-		return this
-				.createSearchablePreferenceDialog(preference, null)
-				.map(SearchablePreferenceDialogFragmentHolder::searchablePreferenceDialogFragment)
-				.map(searchablePreferenceDialog ->
-						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-								searchablePreferenceDialog,
-								_preferenceDialog -> searchablePreferenceDialog.getSearchableInfo()));
-	}
-
-	private Optional<SearchablePreferenceDialogFragmentHolder<?>> createSearchablePreferenceDialog(final Preference preference,
-																								   final AccessibilitySettingsFragment target) {
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Fragment target) {
 		if (RESET_TO_DEFAULT.equals(preference.getKey())) {
 			return Optional.of(
-					SearchablePreferenceDialogFragmentHolder.of(
+					new ShowableSearchablePreferenceDialog<>(
 							ResetProfilePrefsBottomSheet.createInstance(
 									getSelectedAppMode(),
-									target)));
+									target)) {
+
+						@Override
+						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+							searchablePreferenceDialog.show(getFragmentManager(), app);
+						}
+					});
 		}
 		return Optional.empty();
 	}
