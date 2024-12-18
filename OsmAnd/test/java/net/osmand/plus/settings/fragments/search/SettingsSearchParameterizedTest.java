@@ -42,7 +42,9 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 
 						{"AnnouncementTimeBottomSheet: title", R.string.announcement_time_title},
 						{"AnnouncementTimeBottomSheet: description", R.string.announcement_time_descr},
+						{"AnnouncementTimeBottomSheet: time intervals", R.string.announcement_time_intervals},
 
+						{"FuelTankCapacityBottomSheet: title", R.string.fuel_tank_capacity},
 						{"FuelTankCapacityBottomSheet: description", R.string.fuel_tank_capacity_description},
 
 						{"RecalculateRouteInDeviationBottomSheet: title", R.string.recalculate_route_in_deviation},
@@ -56,6 +58,13 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_2", R.string.goods_delivery_desc_2},
 						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_3", R.string.goods_delivery_desc_3},
 						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_4", R.string.goods_delivery_desc_4},
+
+						{"SendAnalyticsBottomSheetDialogFragment: description", R.string.make_osmand_better_descr},
+
+						{"ProfileAppearanceFragment: view_angle_description", R.string.view_angle_description},
+						{"ProfileAppearanceFragment: location_radius_description", R.string.location_radius_description},
+
+						{"RouteParametersFragment: title", R.string.route_recalculation_dist_title},
 
 						// FK-TODO: enable development plugin for these two test cases
 						// {"LocationInterpolationBottomSheet: title", R.string.location_interpolation_percent},
