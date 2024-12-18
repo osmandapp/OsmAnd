@@ -29,10 +29,17 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.SearchablePreferenceDialogFragmentHolder;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
-public class AccessibilitySettingsFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
+import java.util.Optional;
+
+import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
+
+public class AccessibilitySettingsFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener, SearchablePreferenceDialogProvider {
 
 	private static final String ACCESSIBILITY_OPTIONS = "accessibility_options";
 	private static final String COPY_PLUGIN_SETTINGS = "copy_plugin_settings";
@@ -251,20 +258,44 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		String prefId = preference.getKey();
-		if (COPY_PLUGIN_SETTINGS.equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
+		final Optional<SearchablePreferenceDialog> searchablePreferenceDialog =
+				this
+						.createSearchablePreferenceDialog(preference, this)
+						.map(SearchablePreferenceDialogFragmentHolder::searchablePreferenceDialogFragment);
+		if (searchablePreferenceDialog.isPresent()) {
+			searchablePreferenceDialog.get().show(getFragmentManager(), app);
+			return true;
+		}
+		if (COPY_PLUGIN_SETTINGS.equals(preference.getKey())) {
+			final FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
 				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, getSelectedAppMode());
 			}
-		} else if (RESET_TO_DEFAULT.equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				// FK-TODO: make searchable
-				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, getSelectedAppMode(), this, app);
-			}
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
+		return this
+				.createSearchablePreferenceDialog(preference, null)
+				.map(SearchablePreferenceDialogFragmentHolder::searchablePreferenceDialogFragment)
+				.map(searchablePreferenceDialog ->
+						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
+								searchablePreferenceDialog,
+								_preferenceDialog -> searchablePreferenceDialog.getSearchableInfo()));
+	}
+
+	private Optional<SearchablePreferenceDialogFragmentHolder<?>> createSearchablePreferenceDialog(final Preference preference,
+																								   final AccessibilitySettingsFragment target) {
+		if (RESET_TO_DEFAULT.equals(preference.getKey())) {
+			return Optional.of(
+					SearchablePreferenceDialogFragmentHolder.of(
+							ResetProfilePrefsBottomSheet.createInstance(
+									getSelectedAppMode(),
+									target)));
+		}
+		return Optional.empty();
 	}
 
 	@Override

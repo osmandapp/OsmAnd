@@ -21,7 +21,11 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
 import net.osmand.test.common.AndroidTest;
 
 import org.hamcrest.Matcher;
@@ -68,6 +72,21 @@ public class SettingsSearchTest extends AndroidTest {
 				.forEach(path -> onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(path))));
 	}
 
+	@Test
+	public void shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_AccessibilityPlugin() {
+		// Given
+		enablePlugin(getAccessibilityPlugin());
+		clickSearchButton(app);
+
+		// When
+		onView(searchView()).perform(replaceText(app.getString(R.string.reset_all_profile_settings)), closeSoftKeyboard());
+
+		// Then
+		Stream
+				.of("Driving")
+				.map(applicationMode -> String.format("Path: %s > Accessibility > Reset plugin settings to default", applicationMode))
+				.forEach(path -> onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(path))));
+	}
 
 	public static Matcher<View> searchView() {
 		return allOf(
@@ -90,5 +109,19 @@ public class SettingsSearchTest extends AndroidTest {
 
 	public static Matcher<View> hasSearchResultWithSubstring(final String substring) {
 		return recyclerViewHasItem(hasDescendant(withSubstring(substring)));
+	}
+
+	private void enablePlugin(final OsmandPlugin osmandPlugin) {
+		PluginsHelper.enablePlugin(null, app, osmandPlugin, true);
+	}
+
+	private static AccessibilityPlugin getAccessibilityPlugin() {
+		return PluginsHelper
+				.getAvailablePlugins()
+				.stream()
+				.filter(osmandPlugin -> osmandPlugin instanceof AccessibilityPlugin)
+				.map(osmandPlugin -> (AccessibilityPlugin) osmandPlugin)
+				.findFirst()
+				.orElseThrow();
 	}
 }
