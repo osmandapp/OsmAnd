@@ -76,7 +76,7 @@ public class SettingsSearchTest extends AndroidTest {
 	@Test
 	public void shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_AccessibilityPlugin() {
 		// Given
-		enablePlugin(getAccessibilityPlugin());
+		enablePlugin(AccessibilityPlugin.class);
 		clickSearchButton(app);
 
 		// When
@@ -91,13 +91,13 @@ public class SettingsSearchTest extends AndroidTest {
 
 	@Test
 	public void shouldSearchAndFind_LocationInterpolationBottomSheet_title() {
-		enablePlugin(getDevelopmentPlugin());
+		enablePlugin(OsmandDevelopmentPlugin.class);
 		shouldSearchAndFind(app.getString(R.string.location_interpolation_percent));
 	}
 
 	@Test
 	public void shouldSearchAndFind_LocationInterpolationBottomSheet_description() {
-		enablePlugin(getDevelopmentPlugin());
+		enablePlugin(OsmandDevelopmentPlugin.class);
 		shouldSearchAndFind(app.getString(R.string.location_interpolation_percent_desc));
 	}
 
@@ -135,27 +135,20 @@ public class SettingsSearchTest extends AndroidTest {
 		return recyclerViewHasItem(hasDescendant(withSubstring(substring)));
 	}
 
-	private void enablePlugin(final OsmandPlugin osmandPlugin) {
-		PluginsHelper.enablePlugin(null, app, osmandPlugin, true);
+	private void enablePlugin(final Class<? extends OsmandPlugin> plugin) {
+		PluginsHelper.enablePlugin(
+				null,
+				app,
+				getPlugin(plugin),
+				true);
 	}
 
-	// FK-TODO: DRY with getDevelopmentPlugin()
-	private static AccessibilityPlugin getAccessibilityPlugin() {
+	private static <T extends OsmandPlugin> T getPlugin(final Class<T> plugin) {
 		return PluginsHelper
 				.getAvailablePlugins()
 				.stream()
-				.filter(osmandPlugin -> osmandPlugin instanceof AccessibilityPlugin)
-				.map(osmandPlugin -> (AccessibilityPlugin) osmandPlugin)
-				.findFirst()
-				.orElseThrow();
-	}
-
-	private OsmandDevelopmentPlugin getDevelopmentPlugin() {
-		return PluginsHelper
-				.getAvailablePlugins()
-				.stream()
-				.filter(osmandPlugin -> osmandPlugin instanceof OsmandDevelopmentPlugin)
-				.map(osmandPlugin -> (OsmandDevelopmentPlugin) osmandPlugin)
+				.filter(plugin::isInstance)
+				.map(plugin::cast)
 				.findFirst()
 				.orElseThrow();
 	}
