@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
@@ -77,15 +76,17 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	public void onDisplayPreferenceDialog(Preference preference) {
 		this
 				.createPreferenceDialog(preference, this)
+				.map(SearchablePreferenceDialogFragmentHolder::searchablePreferenceDialogFragment)
 				.ifPresentOrElse(
 						this::show,
 						() -> super.onDisplayPreferenceDialog(preference));
 	}
 
-	private Optional<SearchablePreferenceDialog> createPreferenceDialog(final Preference preference,
-																		final GlobalSettingsFragment target) {
+	private Optional<SearchablePreferenceDialogFragmentHolder<?>> createPreferenceDialog(
+			final Preference preference,
+			final GlobalSettingsFragment target) {
 		return SEND_ANONYMOUS_DATA_PREF_ID.equals(preference.getKey()) ?
-				Optional.of(SendAnalyticsBottomSheetDialogFragment.createInstance(target)) :
+				Optional.of(SearchablePreferenceDialogFragmentHolder.of(SendAnalyticsBottomSheetDialogFragment.createInstance(target))) :
 				Optional.empty();
 	}
 
@@ -100,9 +101,10 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
 		return this
 				.createPreferenceDialog(preference, null)
+				.map(SearchablePreferenceDialogFragmentHolder::searchablePreferenceDialogFragment)
 				.map(preferenceDialog ->
 						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-								(Fragment) preferenceDialog,
+								preferenceDialog,
 								_preferenceDialog -> preferenceDialog.getSearchableInfo()));
 	}
 
