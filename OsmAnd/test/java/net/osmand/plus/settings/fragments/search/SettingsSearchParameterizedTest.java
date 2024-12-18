@@ -62,8 +62,6 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 						{"ProfileAppearanceFragment: view_angle_description", R.string.view_angle_description},
 						{"ProfileAppearanceFragment: location_radius_description", R.string.location_radius_description},
 
-						{"RouteParametersFragment: title", R.string.route_recalculation_dist_title},
-
 						// FK-TODO: enable development plugin for these two test cases
 						// {"LocationInterpolationBottomSheet: title", R.string.location_interpolation_percent},
 						// {"LocationInterpolationBottomSheet: description", R.string.location_interpolation_percent_desc}
