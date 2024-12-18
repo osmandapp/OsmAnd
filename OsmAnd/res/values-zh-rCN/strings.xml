@@ -5774,4 +5774,16 @@
     <string name="obd_throttle_position_desc">显示油门在节流阀体内的角度。</string>
     <string name="obd_engine_coolant_temp_desc">显示引擎冷却液的温度</string>
     <string name="obd_ambient_air_temp_desc">显示车外温度。</string>
+    <string name="shared_string_instant">立即</string>
+    <string name="selected_delayed_profile">选中的配置文件 “%s”</string>
+    <string name="average_value_slider_description">选择平均值测量的时间间隔。</string>
+    <string name="average_temperature">平均温度</string>
+    <string name="current_temperature">当前温度</string>
+    <string name="shared_string_interpolation">插值</string>
+    <string name="shared_string_engine">引擎</string>
+    <string name="vehicle_metrics_recording_description">选择要记录到 GPX 文件中的参数。</string>
+    <string name="location_interpolation_percent">位置插值百分比</string>
+    <string name="location_interpolation_percent_desc">设置路线导航时位置插值的百分比。该参数可减少动画播放时，地图上出现的位置滞后。</string>
+    <string name="shared_string_volume">容量</string>
+    <string name="average_temperature_slider_description">选择测量平均温度的时间间隔。</string>
 </resources>
