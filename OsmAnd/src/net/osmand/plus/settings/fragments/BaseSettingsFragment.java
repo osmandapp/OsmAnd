@@ -866,9 +866,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			DialogManager dialogManager = app.getDialogManager();
 			dialogManager.register(processId, controller);
 			FragmentManager fm = activity.getSupportFragmentManager();
-			CustomizableSingleSelectionBottomSheet
-					.createInstance(processId, false)
-					.show(fm, app);
+			CustomizableSingleSelectionBottomSheet.showInstance(fm, processId, false);
 		}
 	}
 

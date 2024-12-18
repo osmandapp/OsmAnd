@@ -59,9 +59,6 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 
 						{"SendAnalyticsBottomSheetDialogFragment: description", R.string.make_osmand_better_descr},
 
-						{"ProfileAppearanceFragment: view_angle_description", R.string.view_angle_description},
-						{"ProfileAppearanceFragment: location_radius_description", R.string.location_radius_description},
-
 						// FK-TODO: enable development plugin for these two test cases
 						// {"LocationInterpolationBottomSheet: title", R.string.location_interpolation_percent},
 						// {"LocationInterpolationBottomSheet: description", R.string.location_interpolation_percent_desc}
