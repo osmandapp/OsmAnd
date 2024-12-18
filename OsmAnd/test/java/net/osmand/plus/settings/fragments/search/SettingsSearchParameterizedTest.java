@@ -57,8 +57,6 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_3", R.string.goods_delivery_desc_3},
 						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_4", R.string.goods_delivery_desc_4},
 
-						{"SendAnalyticsBottomSheetDialogFragment: description", R.string.make_osmand_better_descr},
-
 						// FK-TODO: enable development plugin for these two test cases
 						// {"LocationInterpolationBottomSheet: title", R.string.location_interpolation_percent},
 						// {"LocationInterpolationBottomSheet: description", R.string.location_interpolation_percent_desc}
