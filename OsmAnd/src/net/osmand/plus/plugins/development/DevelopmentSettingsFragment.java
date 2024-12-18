@@ -25,7 +25,6 @@ import net.osmand.plus.settings.bottomsheets.BooleanRadioButtonsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
-import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -37,9 +36,7 @@ import net.osmand.util.SunriseSunset;
 import java.text.SimpleDateFormat;
 import java.util.Optional;
 
-import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
-
-public class DevelopmentSettingsFragment extends BaseSettingsFragment implements ConfirmationDialogListener, SearchablePreferenceDialogProvider, ShowableSearchablePreferenceDialogProvider {
+public class DevelopmentSettingsFragment extends BaseSettingsFragment implements ConfirmationDialogListener, ShowableSearchablePreferenceDialogProvider {
 
 	private static final String SIMULATE_INITIAL_STARTUP = "simulate_initial_startup";
 	private static final String SIMULATE_YOUR_LOCATION = "simulate_your_location";
@@ -413,13 +410,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 					});
 		}
 		return Optional.empty();
-	}
-
-	@Override
-	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
-		return this
-				.getShowableSearchablePreferenceDialog(preference, null)
-				.map(ShowableSearchablePreferenceDialog::asPreferenceDialogAndSearchableInfoByPreferenceDialogProvider);
 	}
 
 	@Override
