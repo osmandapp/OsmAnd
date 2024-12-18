@@ -4940,7 +4940,7 @@
     <string name="poi_route_activity_type_enduro_motorcycling">Мотоцикл Ендуро</string>
     <string name="poi_route_activity_type_snowboarding">Катання на сноуборді</string>
     <string name="poi_route_activity_type_hot_air_ballooning">Політ на повітряній кулі</string>
-    <string name="poi_route_activity_type_hang_gliding">Дельта планеризм</string>
+    <string name="poi_route_activity_type_hang_gliding">Дельтапланеризм</string>
     <string name="poi_route_activity_type_fitness">Фітнес</string>
     <string name="poi_route_activity_type_road_cycling">Шосейний велосипед</string>
     <string name="poi_route_activity_type_car">автомобіль</string>
@@ -4956,11 +4956,11 @@
     <string name="poi_route_activity_type_kayak">Байдарка</string>
     <string name="poi_route_activity_type_surfing">Серфінг</string>
     <string name="poi_route_activity_type_hill_climbing">Підйом на гору</string>
-    <string name="poi_route_activity_type_mountain_biking">Гірський Велосипед</string>
+    <string name="poi_route_activity_type_mountain_biking">Катання на гірських велосипедах</string>
     <string name="poi_route_activity_type_tree_climbing">Лазіння по деревах</string>
-    <string name="poi_route_activity_type_drone_flying">Дрон політ</string>
+    <string name="poi_route_activity_type_drone_flying">Польоти дронів</string>
     <string name="poi_route_activity_type_parachuting_skydiving">Стрибки з парашутом</string>
-    <string name="poi_route_activity_type_gliding_sailplane">планерування (планер)</string>
+    <string name="poi_route_activity_type_gliding_sailplane">Планерування (планер)</string>
     <string name="poi_route_activity_type_harvesting">збирання врожаю</string>
     <string name="poi_route_activity_type_swimming_outdoor">Плавання на відкритому повітрі</string>
 </resources>
