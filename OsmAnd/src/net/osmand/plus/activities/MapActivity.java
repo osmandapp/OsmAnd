@@ -746,7 +746,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (showWelcomeScreen && FirstUsageWizardFragment.showFragment(this)) {
 			SecondSplashScreenFragment.SHOW = false;
 		} else if (SendAnalyticsBottomSheetDialogFragment.shouldShowDialog(app)) {
-			SendAnalyticsBottomSheetDialogFragment.showInstance(app, fragmentManager, null);
+			SendAnalyticsBottomSheetDialogFragment
+					.createInstance(null)
+					.show(fragmentManager, app);
 		}
 		if (fragmentsHelper.isFirstScreenShowing() && (!settings.SHOW_OSMAND_WELCOME_SCREEN.get() || !showOsmAndWelcomeScreen)) {
 			fragmentsHelper.disableFirstUsageFragment();
@@ -1353,7 +1355,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	@NonNull
-	public MapRouteInfoMenu getMapRouteInfoMenu() { return mapRouteInfoMenu; }
+	public MapRouteInfoMenu getMapRouteInfoMenu() {
+		return mapRouteInfoMenu;
+	}
 
 	@NonNull
 	public TrackDetailsMenu getTrackDetailsMenu() {
@@ -1579,7 +1583,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				sim.startStopRouteAnimation(this);
 			}
 		}
-		for (OsmandPlugin plugin: PluginsHelper.getEnabledPlugins()) {
+		for (OsmandPlugin plugin : PluginsHelper.getEnabledPlugins()) {
 			plugin.newRouteIsCalculated(newRoute);
 		}
 	}

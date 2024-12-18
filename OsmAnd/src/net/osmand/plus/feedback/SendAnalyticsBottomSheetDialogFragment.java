@@ -190,10 +190,6 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 		return false;
 	}
 
-	public static void showInstance(@NonNull OsmandApplication app, @NonNull FragmentManager fm, @Nullable Fragment target) {
-		createInstance(target).show(fm, app);
-	}
-
 	public static @NonNull SendAnalyticsBottomSheetDialogFragment createInstance(final @Nullable Fragment target) {
 		final SendAnalyticsBottomSheetDialogFragment fragment = new SendAnalyticsBottomSheetDialogFragment();
 		fragment.setTargetFragment(target, 0);
