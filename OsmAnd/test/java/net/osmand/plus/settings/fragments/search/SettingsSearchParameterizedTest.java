@@ -74,10 +74,6 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 						{"ResetProfilePrefsBottomSheet: reset_confirmation_descr", searchQuery("Tapping Reset discards all your changes")},
 
 						{"GeneralProfileSettingsFragment", searchQuery(R.string.distance_during_navigation)}
-
-						// FK-TODO: enable development plugin for these two test cases
-						// {"LocationInterpolationBottomSheet: title", Either.ofLeft(R.string.location_interpolation_percent)},
-						// {"LocationInterpolationBottomSheet: description", Either.ofLeft(R.string.location_interpolation_percent_desc)}
 				});
 	}
 

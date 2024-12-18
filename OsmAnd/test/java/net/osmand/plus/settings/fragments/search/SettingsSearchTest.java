@@ -26,6 +26,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.test.common.AndroidTest;
 
 import org.hamcrest.Matcher;
@@ -88,6 +89,29 @@ public class SettingsSearchTest extends AndroidTest {
 				.forEach(path -> onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(path))));
 	}
 
+	@Test
+	public void shouldSearchAndFind_LocationInterpolationBottomSheet_title() {
+		enablePlugin(getDevelopmentPlugin());
+		shouldSearchAndFind(app.getString(R.string.location_interpolation_percent));
+	}
+
+	@Test
+	public void shouldSearchAndFind_LocationInterpolationBottomSheet_description() {
+		enablePlugin(getDevelopmentPlugin());
+		shouldSearchAndFind(app.getString(R.string.location_interpolation_percent_desc));
+	}
+
+	private void shouldSearchAndFind(final String searchQuery) {
+		// Given
+		clickSearchButton(app);
+
+		// When
+		onView(searchView()).perform(replaceText(searchQuery), closeSoftKeyboard());
+
+		// Then
+		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(searchQuery)));
+	}
+
 	public static Matcher<View> searchView() {
 		return allOf(
 				withClassName(is("android.widget.SearchView$SearchAutoComplete")),
@@ -115,12 +139,23 @@ public class SettingsSearchTest extends AndroidTest {
 		PluginsHelper.enablePlugin(null, app, osmandPlugin, true);
 	}
 
+	// FK-TODO: DRY with getDevelopmentPlugin()
 	private static AccessibilityPlugin getAccessibilityPlugin() {
 		return PluginsHelper
 				.getAvailablePlugins()
 				.stream()
 				.filter(osmandPlugin -> osmandPlugin instanceof AccessibilityPlugin)
 				.map(osmandPlugin -> (AccessibilityPlugin) osmandPlugin)
+				.findFirst()
+				.orElseThrow();
+	}
+
+	private OsmandDevelopmentPlugin getDevelopmentPlugin() {
+		return PluginsHelper
+				.getAvailablePlugins()
+				.stream()
+				.filter(osmandPlugin -> osmandPlugin instanceof OsmandDevelopmentPlugin)
+				.map(osmandPlugin -> (OsmandDevelopmentPlugin) osmandPlugin)
 				.findFirst()
 				.orElseThrow();
 	}
