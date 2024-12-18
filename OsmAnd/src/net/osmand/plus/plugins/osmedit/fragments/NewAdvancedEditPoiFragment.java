@@ -1,11 +1,13 @@
 package net.osmand.plus.plugins.osmedit.fragments;
 
 import static net.osmand.plus.plugins.osmedit.fragments.EditPoiContentAdapter.PAYLOAD_AMENITY;
+import static net.osmand.plus.plugins.osmedit.fragments.EditPoiContentAdapter.PAYLOAD_FOCUS_ON_ITEM;
 import static net.osmand.plus.plugins.osmedit.fragments.EditPoiContentAdapter.PAYLOAD_NAME;
 import static net.osmand.plus.plugins.osmedit.fragments.EditPoiContentAdapter.TYPE_ADD_TAG;
 import static net.osmand.plus.plugins.osmedit.fragments.EditPoiContentAdapter.TYPE_DESCRIPTION_ITEM;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.LayoutInflater;
@@ -33,6 +35,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.plugins.osmedit.data.EditPoiData;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -77,8 +80,30 @@ public class NewAdvancedEditPoiFragment extends BaseOsmAndFragment implements Ed
 			@Override
 			public void onAddNewItem(int position, int buttonType) {
 				long id = System.currentTimeMillis();
-				contentAdapter.getItems().add(position, new TagItem("", "", true, id));
+				contentAdapter.getItems().add(position, new TagItem("", "", id));
 				contentAdapter.notifyItemInserted(position);
+				recyclerView.postDelayed(() -> {
+					getEditPoiFragment().smoothScrollToBottom();
+					getEditPoiFragment().scrollView.post(() -> contentAdapter.notifyItemChanged(position, PAYLOAD_FOCUS_ON_ITEM));
+				}, 300);
+			}
+
+			@Override
+			public void onDeleteItem(int position) {
+				LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
+				boolean clearFocus = false;
+				View focusedView = recyclerView.getFocusedChild();
+				if (focusedView != null && manager != null) {
+					Rect mReact = new Rect();
+					getEditPoiFragment().scrollView.getHitRect(mReact);
+
+					clearFocus = !focusedView.getLocalVisibleRect(mReact);
+				}
+
+				if (clearFocus) {
+					AndroidUtils.hideSoftKeyboard(requireActivity(), focusedView);
+					focusedView.clearFocus();
+				}
 			}
 
 			@Override
@@ -100,7 +125,7 @@ public class NewAdvancedEditPoiFragment extends BaseOsmAndFragment implements Ed
 		return view;
 	}
 
-	public record TagItem(@NonNull String tag, @NonNull String value, boolean isNew, long id) {
+	public record TagItem(@NonNull String tag, @NonNull String value, long id) {
 	}
 
 	public void setValueData(@NonNull String[] values) {
@@ -146,7 +171,7 @@ public class NewAdvancedEditPoiFragment extends BaseOsmAndFragment implements Ed
 					|| tag.getKey().equals(currentPoiTypeKey)) {
 				continue;
 			}
-			list.add(new TagItem(tag.getKey(), tag.getValue(), false, System.currentTimeMillis()));
+			list.add(new TagItem(tag.getKey(), tag.getValue(), System.currentTimeMillis()));
 		}
 
 		editPoiData.setIsInEdit(false);
@@ -209,9 +234,7 @@ public class NewAdvancedEditPoiFragment extends BaseOsmAndFragment implements Ed
 
 	@Override
 	public void onSaveButtonClick() {
-		if (contentAdapter.getCurrentTagEditText() != null) {
-			contentAdapter.getCurrentTagEditText().clearFocus();
-		}
+		contentAdapter.clearFocus();
 	}
 
 	public static void addPoiToStringSet(AbstractPoiType abstractPoiType, Set<String> stringSet,

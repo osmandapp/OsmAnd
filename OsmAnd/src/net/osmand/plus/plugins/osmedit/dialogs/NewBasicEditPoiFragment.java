@@ -84,6 +84,11 @@ public class NewBasicEditPoiFragment extends BaseOsmAndFragment implements EditP
 			}
 
 			@Override
+			public void onDeleteItem(int position) {
+
+			}
+
+			@Override
 			public InputFilter[] getLengthLimit() {
 				return lengthLimit;
 			}
@@ -103,7 +108,6 @@ public class NewBasicEditPoiFragment extends BaseOsmAndFragment implements EditP
 				return NewBasicEditPoiFragment.this.basicTagsInitialized;
 			}
 		};
-
 
 		contentAdapter = new EditPoiContentAdapter((MapActivity) requireActivity(), getContentList(),
 				null, null, openingHoursAdapter, nightMode, getEditPoiFragment(), editPoiListener);

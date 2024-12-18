@@ -115,11 +115,6 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 		return items;
 	}
 
-	@Nullable
-	public EditText getCurrentTagEditText() {
-		return currentTagEditText;
-	}
-
 	@Override
 	public int getItemViewType(int position) {
 		Object object = items.get(position);
@@ -232,7 +227,10 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 	}
 
 	public void clearFocus() {
-		currentTagEditText.clearFocus();
+		if (currentTagEditText != null) {
+			currentTagEditText.clearFocus();
+			currentTagEditText = null;
+		}
 	}
 
 	public void removeItem(int position) {
@@ -280,11 +278,12 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
 			String[] previousTag = {tag};
 			tagEditText.setOnFocusChangeListener((v, hasFocus) -> {
+				updateCurrentTagEditText(hasFocus);
+				updateClearButtonVisibility(hasFocus);
+				if (Algorithms.isEmpty(tagEditText.getText().toString())) {
+					return;
+				}
 				if (!hasFocus) {
-					if (tagEditText.equals(currentTagEditText)) {
-						currentTagEditText = null;
-					}
-					tagFB.hideClearButton();
 					if (!getData().isInEdit()) {
 						String s = tagEditText.getText().toString();
 						if (!previousTag[0].equals(s)) {
@@ -294,20 +293,9 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 						}
 					}
 				} else {
-					currentTagEditText = tagEditText;
-					tagFB.showClearButton();
 					tagAdapter.getFilter().filter(tagEditText.getText());
 				}
 			});
-
-			if (tagItem.isNew()) {
-				tagEditText.requestFocus();
-				tagEditText.post(() -> {
-					if (activity != null) {
-						AndroidUtils.showSoftKeyboard(activity, tagEditText);
-					}
-				});
-			}
 
 			valueEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(AMENITY_TEXT_LENGTH)});
 			valueEditText.setText(value);
@@ -333,11 +321,29 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
 			deleteButton.setOnClickListener(v -> {
 				int itemPosition = holder.getAdapterPosition();
+				editPoiListener.onDeleteItem(itemPosition);
 				removeItem(itemPosition);
 				getData().removeTag(tagEditText.getText().toString());
 			});
 		}
 
+		private void updateCurrentTagEditText(boolean hasFocus){
+			if (!hasFocus) {
+				if (tagEditText.equals(currentTagEditText)) {
+					currentTagEditText = null;
+				}
+			} else {
+				currentTagEditText = tagEditText;
+			}
+		}
+
+		private void updateClearButtonVisibility(boolean hasFocus) {
+			if (!hasFocus) {
+				tagFB.hideClearButton();
+			} else {
+				tagFB.showClearButton();
+			}
+		}
 	}
 
 	class DescriptionItemHolder extends RecyclerView.ViewHolder {
@@ -575,6 +581,7 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
 	public interface EditPoiListener {
 		void onAddNewItem(int position, int buttonType);
+		void onDeleteItem(int position);
 
 		InputFilter[] getLengthLimit();
 
