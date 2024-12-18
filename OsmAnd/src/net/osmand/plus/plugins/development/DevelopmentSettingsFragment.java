@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Debug;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -26,6 +25,7 @@ import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.Confirmatio
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.simulation.SimulateLocationFragment;
@@ -316,17 +316,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		resetToDefault.setIcon(getActiveIcon(R.drawable.ic_action_reset_to_default_dark));
 	}
 
-	private static abstract class ShowableSearchablePreferenceDialog<T extends Fragment & SearchablePreferenceDialog> {
-
-		public final T searchablePreferenceDialog;
-
-		public ShowableSearchablePreferenceDialog(final T searchablePreferenceDialog) {
-			this.searchablePreferenceDialog = searchablePreferenceDialog;
-		}
-
-		public abstract void show();
-	}
-
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
@@ -372,7 +361,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 									false)) {
 
 						@Override
-						public void show() {
+						public void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
 							final FragmentActivity activity = getActivity();
 							if (activity != null) {
 								searchablePreferenceDialog.show(activity.getSupportFragmentManager(), app);
@@ -388,9 +377,8 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 									target,
 									getSelectedAppMode())) {
 
-						// FK-TODO: refactor
 						@Override
-						public void show() {
+						public void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
 							final FragmentManager fragmentManager = getFragmentManager();
 							if (fragmentManager != null) {
 								searchablePreferenceDialog.show(fragmentManager, app);
@@ -407,7 +395,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 									getSelectedAppMode())) {
 
 						@Override
-						public void show() {
+						public void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
 							final FragmentManager fragmentManager = getFragmentManager();
 							if (fragmentManager != null) {
 								searchablePreferenceDialog.show(fragmentManager, app);
@@ -422,11 +410,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
 		return this
 				.createPreferenceDialog(preference, null)
-				.map(showableSearchablePreferenceDialog -> showableSearchablePreferenceDialog.searchablePreferenceDialog)
-				.map(searchablePreferenceDialog ->
-						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-								searchablePreferenceDialog,
-								_preferenceDialog -> searchablePreferenceDialog.getSearchableInfo()));
+				.map(ShowableSearchablePreferenceDialog::asPreferenceDialogAndSearchableInfoByPreferenceDialogProvider);
 	}
 
 	@Override
