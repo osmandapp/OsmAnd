@@ -136,11 +136,11 @@ public class SettingsSearchTest extends AndroidTest {
 	}
 
 	private void enablePlugin(final Class<? extends OsmandPlugin> plugin) {
-		PluginsHelper.enablePlugin(
-				null,
-				app,
-				getPlugin(plugin),
-				true);
+		enablePlugin(getPlugin(plugin));
+	}
+
+	private void enablePlugin(final OsmandPlugin plugin) {
+		PluginsHelper.enablePlugin(null, app, plugin, true);
 	}
 
 	private static <T extends OsmandPlugin> T getPlugin(final Class<T> plugin) {
