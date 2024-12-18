@@ -102,7 +102,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 
 	private String getSearchQuery() {
 		return searchQueryIdOrString.join(
-				id -> app.getResources().getString(id),
+				app::getString,
 				Function.identity());
 	}
 
