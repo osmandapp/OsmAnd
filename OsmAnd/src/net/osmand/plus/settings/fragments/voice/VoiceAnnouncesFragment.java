@@ -29,8 +29,7 @@ import net.osmand.plus.settings.bottomsheets.SpeedLimitBottomSheet;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
-import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
-import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -40,7 +39,9 @@ import net.osmand.shared.settings.enums.SpeedConstants;
 
 import java.util.Optional;
 
-public class VoiceAnnouncesFragment extends BaseSettingsFragment implements ShowableSearchablePreferenceDialogProvider {
+import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
+
+public class VoiceAnnouncesFragment extends BaseSettingsFragment implements SearchablePreferenceDialogProvider {
 
 	public static final String TAG = VoiceAnnouncesFragment.class.getSimpleName();
 
@@ -248,18 +249,42 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements Show
 		} else if (settings.SPEED_LIMIT_EXCEED_KMH.getId().equals(prefId)) {
 			ApplicationMode mode = getSelectedAppMode();
 			SpeedLimitBottomSheet.showInstance(requireFragmentManager(), this, prefId, mode);
-		} else if (isArrivalDistancePreference(preference)) {
-			return true;
 		}
 		return super.onPreferenceClick(preference);
 	}
 
 	@Override
 	public void onDisplayPreferenceDialog(Preference preference) {
-		if (settings.VOICE_PROVIDER.getId().equals(preference.getKey())) {
-			VoiceLanguageBottomSheetFragment.showInstance(requireActivity().getSupportFragmentManager(), this, getSelectedAppMode(), false);
-		} else {
-			super.onDisplayPreferenceDialog(preference);
+		this
+				.createSearchablePreferenceDialog(preference, this)
+				.ifPresentOrElse(
+						this::show,
+						() -> {
+							if (settings.VOICE_PROVIDER.getId().equals(preference.getKey())) {
+								VoiceLanguageBottomSheetFragment.showInstance(requireActivity().getSupportFragmentManager(), this, getSelectedAppMode(), false);
+							} else {
+								super.onDisplayPreferenceDialog(preference);
+							}
+						});
+	}
+
+	private Optional<SearchablePreferenceDialog> createSearchablePreferenceDialog(
+			final Preference preference,
+			final VoiceAnnouncesFragment target) {
+		return settings.ARRIVAL_DISTANCE_FACTOR.getId().equals(preference.getKey()) ?
+				Optional.of(
+						AnnouncementTimeBottomSheet.createInstance(
+								preference,
+								target,
+								getSelectedAppMode(),
+								false)) :
+				Optional.empty();
+	}
+
+	private void show(final SearchablePreferenceDialog dialog) {
+		final FragmentManager fragmentManager = getFragmentManager();
+		if (fragmentManager != null) {
+			dialog.show(fragmentManager, app);
 		}
 	}
 
@@ -279,28 +304,12 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements Show
 	}
 
 	@Override
-	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Fragment target) {
-		return isArrivalDistancePreference(preference) ?
-				Optional.of(
-						new ShowableSearchablePreferenceDialog<>(
-								AnnouncementTimeBottomSheet.createInstance(
-										preference,
-										target,
-										getSelectedAppMode(),
-										false)) {
-
-							@Override
-							protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-								final FragmentManager fragmentManager = getFragmentManager();
-								if (fragmentManager != null) {
-									searchablePreferenceDialog.show(fragmentManager, app);
-								}
-							}
-						}) :
-				Optional.empty();
-	}
-
-	private boolean isArrivalDistancePreference(final Preference preference) {
-		return settings.ARRIVAL_DISTANCE_FACTOR.getId().equals(preference.getKey());
+	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
+		return this
+				.createSearchablePreferenceDialog(preference, null)
+				.map(preferenceDialog ->
+						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
+								(Fragment) preferenceDialog,
+								_preferenceDialog -> preferenceDialog.getSearchableInfo()));
 	}
 }
