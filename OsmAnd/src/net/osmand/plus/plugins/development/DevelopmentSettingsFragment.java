@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Debug;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -26,6 +27,7 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.simulation.SimulateLocationFragment;
@@ -37,7 +39,7 @@ import java.util.Optional;
 
 import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
 
-public class DevelopmentSettingsFragment extends BaseSettingsFragment implements ConfirmationDialogListener, SearchablePreferenceDialogProvider {
+public class DevelopmentSettingsFragment extends BaseSettingsFragment implements ConfirmationDialogListener, SearchablePreferenceDialogProvider, ShowableSearchablePreferenceDialogProvider {
 
 	private static final String SIMULATE_INITIAL_STARTUP = "simulate_initial_startup";
 	private static final String SIMULATE_YOUR_LOCATION = "simulate_your_location";
@@ -318,10 +320,8 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		String prefId = preference.getKey();
-		final Optional<ShowableSearchablePreferenceDialog<?>> preferenceDialog = createPreferenceDialog(preference, this);
-		if (preferenceDialog.isPresent()) {
-			preferenceDialog.get().show();
+		final String prefId = preference.getKey();
+		if (showDialogForPreference(preference)) {
 			return true;
 		} else if (SIMULATE_INITIAL_STARTUP.equals(prefId)) {
 			app.getAppInitializer().resetFirstTimeRun();
@@ -351,8 +351,17 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		return super.onPreferenceClick(preference);
 	}
 
-	private Optional<ShowableSearchablePreferenceDialog<?>> createPreferenceDialog(final Preference preference,
-																				   final DevelopmentSettingsFragment target) {
+	private boolean showDialogForPreference(final Preference preference) {
+		final Optional<ShowableSearchablePreferenceDialog<?>> preferenceDialog = getShowableSearchablePreferenceDialog(preference, this);
+		if (preferenceDialog.isPresent()) {
+			preferenceDialog.get().show();
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Fragment target) {
 		if (SIMULATE_YOUR_LOCATION.equals(preference.getKey())) {
 			return Optional.of(
 					new ShowableSearchablePreferenceDialog<>(
@@ -361,7 +370,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 									false)) {
 
 						@Override
-						public void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
 							final FragmentActivity activity = getActivity();
 							if (activity != null) {
 								searchablePreferenceDialog.show(activity.getSupportFragmentManager(), app);
@@ -378,7 +387,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 									getSelectedAppMode())) {
 
 						@Override
-						public void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
 							final FragmentManager fragmentManager = getFragmentManager();
 							if (fragmentManager != null) {
 								searchablePreferenceDialog.show(fragmentManager, app);
@@ -395,7 +404,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 									getSelectedAppMode())) {
 
 						@Override
-						public void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
 							final FragmentManager fragmentManager = getFragmentManager();
 							if (fragmentManager != null) {
 								searchablePreferenceDialog.show(fragmentManager, app);
@@ -409,7 +418,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	@Override
 	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
 		return this
-				.createPreferenceDialog(preference, null)
+				.getShowableSearchablePreferenceDialog(preference, null)
 				.map(ShowableSearchablePreferenceDialog::asPreferenceDialogAndSearchableInfoByPreferenceDialogProvider);
 	}
 
