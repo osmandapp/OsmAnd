@@ -32,6 +32,8 @@ import net.osmand.plus.widgets.TextViewEx;
 
 import org.apache.commons.logging.Log;
 
+import java.util.Optional;
+
 public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet implements SearchablePreferenceDialog {
 
 	public static final String TAG = AnnouncementTimeBottomSheet.class.getSimpleName();
@@ -168,7 +170,7 @@ public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet imple
 															 final boolean usedOnMap) {
 		return BasePreferenceBottomSheetInitializer
 				.initialize(new AnnouncementTimeBottomSheet())
-				.with(preference, appMode, usedOnMap, target);
+				.with(Optional.of(preference), appMode, usedOnMap, target);
 	}
 
 	@Override

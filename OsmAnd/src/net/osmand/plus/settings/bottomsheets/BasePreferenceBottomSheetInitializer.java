@@ -10,6 +10,8 @@ import androidx.preference.Preference;
 
 import net.osmand.plus.settings.backend.ApplicationMode;
 
+import java.util.Optional;
+
 public class BasePreferenceBottomSheetInitializer<T extends BasePreferenceBottomSheet> {
 
 	private final T basePreferenceBottomSheet;
@@ -22,12 +24,15 @@ public class BasePreferenceBottomSheetInitializer<T extends BasePreferenceBottom
 		return new BasePreferenceBottomSheetInitializer<>(basePreferenceBottomSheet);
 	}
 
-	public T with(final Preference preference,
+	public T with(final Optional<Preference> preference,
 				  final @Nullable ApplicationMode appMode,
 				  final boolean usedOnMap,
 				  final @Nullable Fragment target) {
-		basePreferenceBottomSheet.setPreference(preference);
-		basePreferenceBottomSheet.setArguments(createArguments(PREFERENCE_ID, preference.getKey()));
+		preference.ifPresent(
+				_preference -> {
+					basePreferenceBottomSheet.setPreference(_preference);
+					basePreferenceBottomSheet.setArguments(createArguments(PREFERENCE_ID, _preference.getKey()));
+				});
 		basePreferenceBottomSheet.setUsedOnMap(usedOnMap);
 		basePreferenceBottomSheet.setAppMode(appMode);
 		basePreferenceBottomSheet.setTargetFragment(target, 0);

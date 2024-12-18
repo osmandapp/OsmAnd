@@ -260,7 +260,8 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 		} else if (RESET_TO_DEFAULT.equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, getSelectedAppMode(), this);
+				// FK-TODO: make searchable
+				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, getSelectedAppMode(), this, app);
 			}
 		}
 		return super.onPreferenceClick(preference);

@@ -32,6 +32,7 @@ import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class LocationInterpolationBottomSheet extends BasePreferenceBottomSheet implements SearchablePreferenceDialog {
 
@@ -194,7 +195,7 @@ public class LocationInterpolationBottomSheet extends BasePreferenceBottomSheet 
 																  final ApplicationMode appMode) {
 		return BasePreferenceBottomSheetInitializer
 				.initialize(new LocationInterpolationBottomSheet())
-				.with(preference, appMode, false, target);
+				.with(Optional.of(preference), appMode, false, target);
 	}
 
 	@Override

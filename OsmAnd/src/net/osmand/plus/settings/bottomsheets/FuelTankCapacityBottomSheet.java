@@ -34,6 +34,7 @@ import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -143,7 +144,7 @@ public class FuelTankCapacityBottomSheet extends BaseTextFieldBottomSheet implem
 		fragment.setConfigureSettingsSearch(configureSettingsSearch);
 		return BasePreferenceBottomSheetInitializer
 				.initialize(fragment)
-				.with(preference, appMode, usedOnMap, target);
+				.with(Optional.of(preference), appMode, usedOnMap, target);
 	}
 
 	@Override

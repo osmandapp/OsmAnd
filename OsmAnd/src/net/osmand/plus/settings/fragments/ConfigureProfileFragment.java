@@ -50,6 +50,7 @@ import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.fragments.configureitems.ConfigureMenuRootFragment;
 import net.osmand.plus.settings.fragments.profileappearance.ProfileAppearanceFragment;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
@@ -63,9 +64,11 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
-public class ConfigureProfileFragment extends BaseSettingsFragment implements CopyAppModePrefsListener,
-		ResetAppModePrefsListener, PluginStateListener {
+import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
+
+public class ConfigureProfileFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener, PluginStateListener, SearchablePreferenceDialogProvider {
 
 	public static final String TAG = ConfigureProfileFragment.class.getSimpleName();
 
@@ -435,13 +438,41 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	}
 
 	@Override
-	public boolean onPreferenceClick(Preference preference) {
-		MapActivity mapActivity = getMapActivity();
-		FragmentManager fragmentManager = getFragmentManager();
-		if (mapActivity != null && fragmentManager != null) {
-			String prefId = preference.getKey();
-			ApplicationMode selectedMode = getSelectedAppMode();
+	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
+		return this
+				.createSearchablePreferenceDialogFragment(preference, null)
+				.map(searchablePreferenceDialogFragmentHolder ->
+						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
+								searchablePreferenceDialogFragmentHolder.searchablePreferenceDialogFragment(),
+								_preferenceDialog -> searchablePreferenceDialogFragmentHolder.searchablePreferenceDialogFragment().getSearchableInfo()));
+	}
 
+	private Optional<SearchablePreferenceDialogFragmentHolder<?>> createSearchablePreferenceDialogFragment(
+			final Preference preference,
+			final ConfigureProfileFragment target) {
+		if (RESET_TO_DEFAULT.equals(preference.getKey())) {
+			return Optional.of(
+					SearchablePreferenceDialogFragmentHolder.of(
+							ResetProfilePrefsBottomSheet.createInstance(
+									getSelectedAppMode(),
+									target)));
+		}
+		return Optional.empty();
+	}
+
+	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		final MapActivity mapActivity = getMapActivity();
+		final FragmentManager fragmentManager = getFragmentManager();
+		if (mapActivity != null && fragmentManager != null) {
+			final Optional<SearchablePreferenceDialogFragmentHolder<?>> searchablePreferenceDialogFragment =
+					createSearchablePreferenceDialogFragment(preference, this);
+			if (searchablePreferenceDialogFragment.isPresent()) {
+				searchablePreferenceDialogFragment.get().searchablePreferenceDialogFragment().show(fragmentManager, app);
+				return true;
+			}
+			final String prefId = preference.getKey();
+			final ApplicationMode selectedMode = getSelectedAppMode();
 			if (CONFIGURE_MAP.equals(prefId)) {
 				sepAppModeToSelected();
 				fragmentManager.beginTransaction()
@@ -453,8 +484,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				ConfigureScreenFragment.showInstance(mapActivity);
 			} else if (COPY_PROFILE_SETTINGS.equals(prefId)) {
 				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, selectedMode);
-			} else if (RESET_TO_DEFAULT.equals(prefId)) {
-				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, getSelectedAppMode(), this);
 			} else if (EXPORT_PROFILE.equals(prefId)) {
 				ExportSettingsFragment.showInstance(fragmentManager, selectedMode, null, false);
 			} else if (DELETE_PROFILE.equals(prefId)) {

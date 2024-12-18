@@ -31,6 +31,8 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
+import java.util.Optional;
+
 public class DistanceDuringNavigationBottomSheet extends BasePreferenceBottomSheet implements SearchablePreferenceDialog {
 
 	public static final String TAG = DistanceDuringNavigationBottomSheet.class.getSimpleName();
@@ -129,7 +131,7 @@ public class DistanceDuringNavigationBottomSheet extends BasePreferenceBottomShe
 			final boolean usedOnMap) {
 		return BasePreferenceBottomSheetInitializer
 				.initialize(new DistanceDuringNavigationBottomSheet())
-				.with(preference, appMode, usedOnMap, target);
+				.with(Optional.of(preference), appMode, usedOnMap, target);
 	}
 
 	@Override

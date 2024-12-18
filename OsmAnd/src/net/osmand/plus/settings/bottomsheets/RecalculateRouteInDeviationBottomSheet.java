@@ -38,6 +38,8 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.shared.settings.enums.MetricsConstants;
 
+import java.util.Optional;
+
 public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBottomSheet implements SearchablePreferenceDialog {
 
 	public static final String TAG = RecalculateRouteInDeviationBottomSheet.class.getSimpleName();
@@ -248,7 +250,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 																		final @Nullable ApplicationMode appMode) {
 		return BasePreferenceBottomSheetInitializer
 				.initialize(new RecalculateRouteInDeviationBottomSheet())
-				.with(preference, appMode, usedOnMap, target);
+				.with(Optional.of(preference), appMode, usedOnMap, target);
 	}
 
 	@Override
