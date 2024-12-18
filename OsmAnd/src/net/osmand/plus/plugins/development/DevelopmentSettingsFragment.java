@@ -25,8 +25,7 @@ import net.osmand.plus.settings.bottomsheets.BooleanRadioButtonsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
-import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
-import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.simulation.SimulateLocationFragment;
@@ -36,7 +35,9 @@ import net.osmand.util.SunriseSunset;
 import java.text.SimpleDateFormat;
 import java.util.Optional;
 
-public class DevelopmentSettingsFragment extends BaseSettingsFragment implements ConfirmationDialogListener, ShowableSearchablePreferenceDialogProvider {
+import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
+
+public class DevelopmentSettingsFragment extends BaseSettingsFragment implements ConfirmationDialogListener, SearchablePreferenceDialogProvider {
 
 	private static final String SIMULATE_INITIAL_STARTUP = "simulate_initial_startup";
 	private static final String SIMULATE_YOUR_LOCATION = "simulate_your_location";
@@ -315,10 +316,29 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		resetToDefault.setIcon(getActiveIcon(R.drawable.ic_action_reset_to_default_dark));
 	}
 
+	private static abstract class ShowableSearchablePreferenceDialog {
+
+		public final SearchablePreferenceDialog searchablePreferenceDialog;
+
+		public ShowableSearchablePreferenceDialog(final SearchablePreferenceDialog searchablePreferenceDialog) {
+			this.searchablePreferenceDialog = searchablePreferenceDialog;
+		}
+
+		public void show() {
+			show(searchablePreferenceDialog);
+		}
+
+		protected abstract void show(final SearchablePreferenceDialog searchablePreferenceDialog);
+	}
+
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
-		if (SIMULATE_INITIAL_STARTUP.equals(prefId)) {
+		final Optional<ShowableSearchablePreferenceDialog> preferenceDialog = createPreferenceDialog(preference, this);
+		if (preferenceDialog.isPresent()) {
+			preferenceDialog.get().show();
+			return true;
+		} else if (SIMULATE_INITIAL_STARTUP.equals(prefId)) {
 			app.getAppInitializer().resetFirstTimeRun();
 			settings.FIRST_MAP_IS_DOWNLOADED.resetToDefault();
 			settings.WEBGL_SUPPORTED.resetToDefault();
@@ -346,11 +366,11 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		return super.onPreferenceClick(preference);
 	}
 
-	@Override
-	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Fragment target) {
+	private Optional<ShowableSearchablePreferenceDialog> createPreferenceDialog(final Preference preference,
+																				final DevelopmentSettingsFragment target) {
 		if (SIMULATE_YOUR_LOCATION.equals(preference.getKey())) {
 			return Optional.of(
-					new ShowableSearchablePreferenceDialog<>(
+					new ShowableSearchablePreferenceDialog(
 							SimulateLocationFragment.createInstance(
 									null,
 									false)) {
@@ -366,7 +386,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		}
 		if (settings.MEMORY_ALLOCATED_FOR_ROUTING.getId().equals(preference.getKey())) {
 			return Optional.of(
-					new ShowableSearchablePreferenceDialog<>(
+					new ShowableSearchablePreferenceDialog(
 							AllocatedRoutingMemoryBottomSheet.createInstance(
 									preference.getKey(),
 									target,
@@ -383,7 +403,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		}
 		if (settings.LOCATION_INTERPOLATION_PERCENT.getId().equals(preference.getKey())) {
 			return Optional.of(
-					new ShowableSearchablePreferenceDialog<>(
+					new ShowableSearchablePreferenceDialog(
 							LocationInterpolationBottomSheet.createInstance(
 									preference,
 									target,
@@ -399,6 +419,17 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 					});
 		}
 		return Optional.empty();
+	}
+
+	@Override
+	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
+		return this
+				.createPreferenceDialog(preference, null)
+				.map(showableSearchablePreferenceDialog -> showableSearchablePreferenceDialog.searchablePreferenceDialog)
+				.map(searchablePreferenceDialog ->
+						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
+								(Fragment) searchablePreferenceDialog,
+								_preferenceDialog -> searchablePreferenceDialog.getSearchableInfo()));
 	}
 
 	@Override
