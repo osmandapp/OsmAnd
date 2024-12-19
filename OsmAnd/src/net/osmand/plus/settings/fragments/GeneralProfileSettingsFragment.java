@@ -2,6 +2,7 @@ package net.osmand.plus.settings.fragments;
 
 import static net.osmand.plus.settings.bottomsheets.DistanceDuringNavigationBottomSheet.DistanceDuringNavigationMode;
 import static net.osmand.plus.settings.fragments.SettingsScreenType.EXTERNAL_INPUT_DEVICE;
+import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -41,7 +42,8 @@ import net.osmand.plus.settings.enums.VolumeUnit;
 import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandler;
 import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandlerProvider;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
-import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.UiUtilities;
@@ -54,9 +56,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
-
-public class GeneralProfileSettingsFragment extends BaseSettingsFragment implements SearchablePreferenceDialogProvider, PreferenceFragmentHandlerProvider {
+public class GeneralProfileSettingsFragment extends BaseSettingsFragment implements PreferenceFragmentHandlerProvider, ShowableSearchablePreferenceDialogProvider {
 
 	public static final String TAG = GeneralProfileSettingsFragment.class.getSimpleName();
 
@@ -422,32 +422,19 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	}
 
 	@Override
-	public boolean onPreferenceClick(Preference preference) {
-		{
-			final Optional<SearchablePreferenceDialog> preferenceDialog =
-					this
-							.createPreferenceDialog(
-									preference,
-									this)
-							.map(SearchablePreferenceDialogFragmentHolder::searchablePreferenceDialogFragment);
-			if (preferenceDialog.isPresent()) {
-				show(preferenceDialog.get());
-				return true;
-			}
+	public boolean onPreferenceClick(final Preference preference) {
+		if (showDialogForPreference(preference, this)) {
+			return true;
 		}
-		{
-			String key = preference.getKey();
-			ApplicationMode appMode = getSelectedAppMode();
-			if (settings.DRIVING_REGION.getId().equals(key)) {
-				showDrivingRegionDialog();
-				return true;
-			}
-			if (settings.ROTATE_MAP.getId().equals(key)) {
-				CompassModeDialogController controller = new CompassModeDialogController(app, appMode);
-				showSingleSelectionDialog(CompassModeDialogController.PROCESS_ID, controller);
-				controller.setCallback(this);
-				return true;
-			}
+		if (settings.DRIVING_REGION.getId().equals(preference.getKey())) {
+			showDrivingRegionDialog();
+			return true;
+		}
+		if (settings.ROTATE_MAP.getId().equals(preference.getKey())) {
+			CompassModeDialogController controller = new CompassModeDialogController(app, getSelectedAppMode());
+			showSingleSelectionDialog(CompassModeDialogController.PROCESS_ID, controller);
+			controller.setCallback(this);
+			return true;
 		}
 		return super.onPreferenceClick(preference);
 	}
@@ -486,17 +473,24 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		return Optional.empty();
 	}
 
-	private Optional<SearchablePreferenceDialogFragmentHolder<?>> createPreferenceDialog(
+	@Override
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(
 			final Preference preference,
-			final GeneralProfileSettingsFragment target) {
+			final Fragment target) {
 		if (settings.PRECISE_DISTANCE_NUMBERS.getId().equals(preference.getKey())) {
 			return Optional.of(
-					SearchablePreferenceDialogFragmentHolder.of(
+					new ShowableSearchablePreferenceDialog<>(
 							DistanceDuringNavigationBottomSheet.createInstance(
 									preference,
 									target,
 									getSelectedAppMode(),
-									false)));
+									false)) {
+
+						@Override
+						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+							GeneralProfileSettingsFragment.this.show(searchablePreferenceDialog);
+						}
+					});
 		}
 		return Optional.empty();
 	}
@@ -506,17 +500,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		if (fragmentManager != null) {
 			dialog.show(fragmentManager, app);
 		}
-	}
-
-	@Override
-	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
-		return this
-				.createPreferenceDialog(preference, null)
-				.map(SearchablePreferenceDialogFragmentHolder::searchablePreferenceDialogFragment)
-				.map(searchablePreferenceDialog ->
-						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-								searchablePreferenceDialog,
-								_preferenceDialog -> searchablePreferenceDialog.getSearchableInfo()));
 	}
 
 	private void updateDialogControllerCallbacks() {

@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 
+// FK-TODO: remove
 public record SearchablePreferenceDialogFragmentHolder<T extends Fragment & SearchablePreferenceDialog>(
 		T searchablePreferenceDialogFragment) {
 

@@ -73,7 +73,9 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 						{"ResetProfilePrefsBottomSheet: description", searchQuery(R.string.reset_all_profile_settings_descr)},
 						{"ResetProfilePrefsBottomSheet: reset_confirmation_descr", searchQuery("Tapping Reset discards all your changes")},
 
-						{"GeneralProfileSettingsFragment", searchQuery(R.string.distance_during_navigation)}
+						{"GeneralProfileSettingsFragment", searchQuery(R.string.distance_during_navigation)},
+
+						{"DistanceDuringNavigationBottomSheet: description", searchQuery("Choose how distance information is displayed in navigation widgets")}
 				});
 	}
 
