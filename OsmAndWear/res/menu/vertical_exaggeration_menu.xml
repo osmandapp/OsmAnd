@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+	<item
+		android:id="@+id/reset_to_default"
+		android:icon="@drawable/ic_action_reset"
+		android:title="@string/reset_to_default"
+		app:iconTint="?attr/default_icon_color"
+		app:showAsAction="always" />
+</menu>

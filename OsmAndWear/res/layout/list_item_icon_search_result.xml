@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/selectableItemBackground"
+	android:orientation="horizontal"
+	android:minHeight="@dimen/setting_list_item_group_height">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/icon"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_gravity="center_vertical"
+		android:layout_marginEnd="@dimen/bottom_sheet_icon_margin_large"
+		android:layout_marginStart="@dimen/content_padding"
+		tools:src="@drawable/list_destination" />
+
+	<LinearLayout
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1"
+			android:layout_gravity="center_vertical"
+			android:orientation="vertical"
+			android:paddingTop="@dimen/content_padding_small"
+			android:paddingBottom="@dimen/content_padding_small">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/title"
+				style="@style/TitleStyle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:textColor="?android:textColorPrimary"
+				android:textSize="@dimen/default_list_text_size"
+				tools:text="Some title" />
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/description"
+				style="@style/DescStyle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:maxLines="2"
+				android:textColor="?android:textColorSecondary"
+				tools:text="Some description" />
+
+		</LinearLayout>
+
+		<View
+			android:id="@+id/bottom_divider"
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="?attr/divider_color_basic" />
+
+	</LinearLayout>
+
+</LinearLayout>
