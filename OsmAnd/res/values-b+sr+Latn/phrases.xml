@@ -4883,18 +4883,7 @@
     <string name="poi_route_article">Članci o putovanjima</string>
     <string name="poi_route_article_point">Tačke na putovanjima</string>
     <string name="poi_route_track">Druge rute</string>
-    <string name="poi_route_track_point">Tačke drugih ruta</string>
-    <string name="poi_activities_bicycle">Bicikl</string>
-    <string name="poi_activities_trekking">Pešačenje</string>
-    <string name="poi_activities_running">Trčanje</string>
-    <string name="poi_activities_pedestrian">Hodanje</string>
-    <string name="poi_activities_kayak">Sportovi na vodi</string>
-    <string name="poi_activities_skiing">Zimski sportovi</string>
-    <string name="poi_activities_inline_skates">Koturaljke</string>
-    <string name="poi_activities_horse">Jahanje konja</string>
-    <string name="poi_activities_snowmobile">Motorne sanke</string>
-    <string name="poi_activities_fitness">Staze za trčanje</string>
-    <string name="poi_activities_mountain_bike">Brdski biciklizam</string>
+    <string name="poi_route_track_point">Tačke rute</string>
     <string name="poi_name_etymology">Etimologija imena</string>
     <string name="poi_name_left">Naziv leve strane</string>
     <string name="poi_name_right">Naziv desne strane</string>
@@ -4904,4 +4893,12 @@
     <string name="poi_camp_site_basic">Osnovno</string>
     <string name="poi_camp_site_standard">Standardno</string>
     <string name="poi_camp_site_serviced">Uslužno</string>
+    <string name="poi_routes_motorcycling">Motociklizam</string>
+    <string name="poi_routes_foot">Peške</string>
+    <string name="poi_routes_cycling">Biciklizam</string>
+    <string name="poi_routes_air_sports">Vazdušni sportovi</string>
+    <string name="poi_routes_winter_sport">Zimski sportovi</string>
+    <string name="poi_routes_driving">Vožnja</string>
+    <string name="poi_routes_water_sport">Sportovi na vodi</string>
+    <string name="poi_routes_other">Druge rute</string>
 </resources>

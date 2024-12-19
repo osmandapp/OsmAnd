@@ -5560,11 +5560,11 @@
     <string name="obd_throttle_position">Posizione Acceleratore</string>
     <string name="kpa_unit">kPa</string>
     <string name="percent_hour">%/h</string>
-    <string name="obd_fuel_consumption_rate_l_h">Tasso di consumo di carburante (l/h)</string>
+    <string name="obd_fuel_consumption_rate_l_h">Tasso di consumo di carburante (L/h)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Tasso di consumo di carburante</string>
-    <string name="obd_fuel_consumption_rate_l_h_desc">Mostra il tasso di consumo di carburante del veicolo in base ai calcoli (l/h)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Mostra il tasso di consumo di carburante del veicolo in base ai calcoli (L/h)</string>
     <string name="obd_fuel_consumption_rate_sensor">Tasso di consumo di carburante (sensore)</string>
-    <string name="obd_fuel_consumption_rate_sensor_desc">Mostra il tasso di consumo di carburante del veicolo basato sul sensore (l/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Mostra il tasso di consumo di carburante del veicolo basato sul sensore (L/h)</string>
     <string name="obd_fuel_left_liter">Carburante rimasto (l)</string>
     <string name="obd_fuel_left_km">Carburante rimasto (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Tasso di consumo di carburante (obd)</string>
@@ -5606,7 +5606,7 @@
     <string name="screen_is_locked_by_external_button">Il touch screen è bloccato. Per sbloccare, premere il tasto %1$s o toccare il pulsante sullo schermo.</string>
     <string name="unit_of_volume_description">Le unità selezionate verranno applicate a tutti i dati relativi al volume nel profilo corrente.</string>
     <string name="unit_of_volume">Unità di volume</string>
-    <string name="l_100km">l/100 km</string>
+    <string name="l_100km">L/100 km</string>
     <string name="lock_screen">Schermata di blocco</string>
     <string name="track_does_not_contain_data_to_save">La traccia non contiene dati da salvare.</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Traccia i dati vitali del veicolo utilizzando il protocollo OBD-II. Monitorate le metriche chiave come la velocità, il numero di giri del motore, il consumo di carburante e altro ancora.</string>
@@ -5666,7 +5666,7 @@
     <string name="third_links">Collegamenti a Terzi</string>
     <string name="vehicle_metrics_plugin_settings">Impostazioni Metriche Veicolo</string>
     <string name="quick_action_save_recorded_trip_and_continue_summary">Un pulsante per salvare il percorso correntemente registrato come file GPX e continuare a registrare un nuovo tratto senza interruzioni.</string>
-    <string name="liter_per_hour">l/h</string>
+    <string name="liter_per_hour">L/h</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Sentieri per bici da sterrato</string>
     <string name="obd_fuel_left_liters">Carburante rimanente (litri)</string>
     <string name="av_audio_sample_rate">Frequenza di campionamento audio</string>

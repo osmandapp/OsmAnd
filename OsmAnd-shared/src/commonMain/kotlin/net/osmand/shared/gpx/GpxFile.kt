@@ -894,5 +894,6 @@ class GpxFile : GpxExtensions {
 	companion object {
 		const val OSMAND_AUTHOR_PREFIX = "OsmAnd"
 		const val DEFAULT_WPT_GROUP_NAME = ""
+		const val XML_COLON = "_-_"
 	}
 }

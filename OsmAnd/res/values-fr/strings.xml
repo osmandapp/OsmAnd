@@ -5676,4 +5676,8 @@
     <string name="obd_fuel_consumption_desc">Affiche le taux de consommation du carburant par le moteur, calculé en fonction du carburant restant, de la taille du réservoir et de la distance parcourue selon le GPS.</string>
     <string name="show_minor_turns_descr">Les voies seront affichées sur toutes les intersections rencontrées indépendamment des instructions vocales</string>
     <string name="show_minor_turns">Afficher sur les intersections mineures lors de la navigation en ligne droite</string>
+    <string name="selected_delayed_profile">Profil \"%s\" sélectionné</string>
+    <string name="shared_string_interpolation">Interpolation</string>
+    <string name="location_interpolation_percent">Pourcentage d\'interpolation de la position</string>
+    <string name="location_interpolation_percent_desc">Définit le pourcentage d\'interpolation de la position lors du guidage. Ce paramètre rend l\'animation de votre position sur la carte plus fluide.</string>
 </resources>

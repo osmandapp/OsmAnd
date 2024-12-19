@@ -4883,18 +4883,7 @@
     <string name="poi_route_article">Články o cestování</string>
     <string name="poi_route_article_point">Body na cestách</string>
     <string name="poi_route_track">Další trasy</string>
-    <string name="poi_route_track_point">Další body trasy</string>
-    <string name="poi_activities_bicycle">Kolo</string>
-    <string name="poi_activities_trekking">Pěší turistika</string>
-    <string name="poi_activities_running">Běh</string>
-    <string name="poi_activities_pedestrian">Chůze</string>
-    <string name="poi_activities_kayak">Vodní sporty</string>
-    <string name="poi_activities_horse">Jízda na koni</string>
-    <string name="poi_activities_skiing">Zimní sporty</string>
-    <string name="poi_activities_snowmobile">Sněžný skútr</string>
-    <string name="poi_activities_fitness">Fitness stezky</string>
-    <string name="poi_activities_inline_skates">Inline brusle</string>
-    <string name="poi_activities_mountain_bike">Horská cyklistika</string>
+    <string name="poi_route_track_point">Body trasy</string>
     <string name="poi_name_etymology">Původ názvu</string>
     <string name="poi_name_right">Název pravé strany</string>
     <string name="poi_name_left">Název levé strany</string>
@@ -4904,4 +4893,12 @@
     <string name="poi_camp_site_basic">Základní</string>
     <string name="poi_camp_site_standard">Standardní</string>
     <string name="poi_camp_site_serviced">Se službami</string>
+    <string name="poi_routes_motorcycling">Jízda na motorce</string>
+    <string name="poi_routes_foot">Chůze</string>
+    <string name="poi_routes_winter_sport">Zimní sporty</string>
+    <string name="poi_routes_air_sports">Vzdušné sporty</string>
+    <string name="poi_routes_water_sport">Vodní sporty</string>
+    <string name="poi_routes_driving">Řízení vozidla</string>
+    <string name="poi_routes_cycling">Jízda na kole</string>
+    <string name="poi_routes_other">Další trasy</string>
 </resources>

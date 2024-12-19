@@ -5745,11 +5745,11 @@
     <string name="rpm_unit">دورة بالدقيقة</string>
     <string name="obd_fuel_left_distance_desc">يوضح المسافة التي يمكن للمركبة قطعها على مستوى الوقود الأيسر فوق مستشعر OBD</string>
     <string name="obd_fuel_level_desc">يعرض مستوى وقود السيارة عبر مستشعر OBD</string>
-    <string name="obd_engine_coolant_temp">درجة حرارة سائل تبريد المحرك</string>
-    <string name="obd_fuel_level">مستوى الوقود</string>
+    <string name="obd_engine_coolant_temp">درجة حرارة سائل التبريد</string>
+    <string name="obd_fuel_level">كفاءة الوقود (%)</string>
     <string name="obd_fuel_consumption_rate">معدل استهلاك الوقود</string>
     <string name="obd_fuel_consumption_rate_desc">يعرض معدل استهلاك وقود السيارة استنادًا إلى OBD والموقع</string>
-    <string name="obd_ambient_air_temp">درجة حرارة الهواء المحيط</string>
+    <string name="obd_ambient_air_temp">درجة الحرارة المحيطة</string>
     <string name="obd_battery_voltage">جهد البطارية</string>
     <string name="raster_layers_action_descr">تغيير طبقات النقطية</string>
     <string name="contour_layers_action_descr">تغيير طبقات الكنتور</string>
@@ -5791,8 +5791,8 @@
     <string name="obd_fuel_type_methanol">ميثانول</string>
     <string name="obd_fuel_type_diesel">الديزل</string>
     <string name="vehicle_metrics_plugin_settings">إعدادات مقاييس السيارة</string>
-    <string name="obd_air_intake_temp">درجة حرارة الهواء الداخل</string>
-    <string name="liter_per_hour">l/h</string>
+    <string name="obd_air_intake_temp">درجة الحرارة الداخلة</string>
+    <string name="liter_per_hour">لتر/ساعة</string>
     <string name="release_4_9">• تمت إضافة عارض ملء الشاشة لصور ويكيميديا\n\n• تم تقديم مكون إضافي جديد \"مقاييس المركبات\" لمراقبة أداء المركبات باستخدام بروتوكول OBD-II\n\n• تمت إضافة القدرة على تعيين الأنشطة للمسارات وتصفيتها وفقًا لذلك\n\n• تم تنفيذ إجراءات سريعة جديدة لتسجيل الرحلة وقفل شاشة اللمس\n\n• تم تقديم مظهر زر خريطة قابل للتخصيص وشبكة دقيقة\n\n• تمت إضافة قائمة سياقية وإجراء \"إعادة تعيين متوسط السرعة\" إلى الأدوات\n\n• تمت إضافة طبقة مسار جديدة \"مسارات الدراجات النارية\"\n\n• تم إصلاح \"التسجيل التلقائي للمسار أثناء التنقل\"\n\n• تم إصلاح مشكلة الإحداثيات المقلوبة في RTL\n\n• تم إصلاح بيانات المستشعر المفقودة للتسجيل الحالي للمسار\n\n• تمت إضافة معلومات حول المناطق المحيطة بالنقطة المحددة\n\n• تمت إضافة إجراء سريع للتحكم في رؤية تعديلات OSM\n\n• أدوات رؤية منفصلة لخيارات تلوين التضاريس\n\n• تمت إضافة أيقونة قابلة للنقر لعرض الوصول أو سمات الطريق أو المسار الأخرى</string>
     <string name="third_links">الروابط الثالثة</string>
     <string name="reset_average_speed">إعادة ضبط متوسط السرعة</string>
@@ -5859,7 +5859,7 @@
     <string name="obd_engine_coolant_temp_desc">يظهر درجة حرارة سائل تبريد المحرك</string>
     <string name="obd_fuel_level_liter">مستوى الوقود (لتر)</string>
     <string name="obd_nothing_found_description">يرجى التحقق مما يلي:\n- تأكد من تشغيل البلوتوث\n- تشغيل محرك السيارة\n- تأكد من أن جهازك ضمن نطاق الماسح الضوئي.</string>
-    <string name="l_100km">لـ/100كم</string>
+    <string name="l_100km">لتر/100كم</string>
     <string name="obd_calculated_engine_load">حمولة المحرك المحسوبة</string>
     <string name="obd_fuel_consumption_rate_l_h">معدل استهلاك الوقود (لتر/ساعة)</string>
     <string name="obd_fuel_consumption_rate_sensor">معدل استهلاك الوقود (المستشعر)</string>
@@ -5870,7 +5870,7 @@
     <string name="dynamic_icon_type_summary">تتغير الأيقونة استنادًا إلى حالة الإجراء.</string>
     <string name="obd_connected_to_device">متصّل بـ %s</string>
     <string name="obd_engine_runtime">مدة تشغيل المحرك</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">يعرض معدل استهلاك الوقود للمركبة بناءً على الحسابات (لتر/كم)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">يعرض معدل استهلاك الوقود للمركبة بناءً على الحسابات (لتر/100 كم)</string>
     <string name="obd_engine_oil_temperature">درجة حرارة زيت المحرك</string>
     <string name="obd_calculated_engine_load_desc">يعرض النسبة المئوية للطاقة المتوفرة للمحرك والتي يتم استخدامها في لحظة معينة.</string>
     <string name="obd_fuel_consumption_desc">يظهر معدل استخدام الوقود بواسطة المحرك، والذي يتم حسابه على أساس الوقود المتبقي وحجم الخزان والمسافة المقطوعة كما هو محدد بواسطة نظام تحديد المواقع العالمي (GPS).</string>
@@ -5880,7 +5880,7 @@
     <string name="obd_fuel_pressure">ضغط الوقود</string>
     <string name="obd_fuel_consumption_rate_l_h_desc">يظهر معدل استهلاك الوقود للمركبة بناءً على الحسابات (لتر/ساعة)</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">يعرض معدل استهلاك الوقود للمركبة بناءً على المستشعر (لتر/ساعة)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">معدل استهلاك الوقود لتر/ساعة</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">معدل استهلاك الوقود</string>
     <string name="obd_fuel_consumption_rate_percent_hour">معدل استهلاك الوقود %/ساعة</string>
     <string name="route_guidance">توجيه الطريق</string>
     <string name="obd_widget_vehicle_speed">سرعة السيارة</string>
@@ -5907,7 +5907,7 @@
     <string name="obd_connecting_to_device">الاتصال بـ %s</string>
     <string name="bt_start_pair_failed">لا يمكن الاقتران بالجهاز</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">يعرض معدل استهلاك وقود السيارة بناءً على الحسابات (%/ساعة)</string>
-    <string name="obd_fuel_consumption_rate_l_km">معدل استهلاك الوقود (لتر/كم)</string>
+    <string name="obd_fuel_consumption_rate_l_km">معدل استهلاك الوقود (لتر/100 كم)</string>
     <string name="kpa_unit">كيلو باسكال</string>
     <string name="liter">لتر</string>
     <string name="obd_fuel_level_percent">مستوى الوقود (%)</string>
@@ -5927,4 +5927,5 @@
     <string name="unit_of_volume_description">سيتم تطبيق الوحدات المحددة على كافة البيانات المتعلقة بالحجم في الملف الشخصي الحالي.</string>
     <string name="unit_of_volume">وحدة الحجم</string>
     <string name="obd_ambient_air_temp_desc">يعرض درجة الحرارة خارج السيارة.</string>
+    <string name="selected_delayed_profile">الوضع المحدد \"%s\"</string>
 </resources>

@@ -1134,8 +1134,9 @@ public class SearchCoreFactory {
 				Collections.sort(possibleValues);
 				for (String s : possibleValues) {
 					translate = getTopIndexTranslation(s);
+					String normalizeBrand = s.toLowerCase(Locale.ROOT);
 					if (complete) {
-						if (CollatorStringMatcher.cmatches(collator, search, s, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
+						if (CollatorStringMatcher.cmatches(collator, search, normalizeBrand, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
 							topIndexValue = s;
 							break;
 						} else {
@@ -1171,7 +1172,7 @@ public class SearchCoreFactory {
 		private String getTopIndexTranslation(String value) {
 			String key = TopIndexFilter.getValueKey(value);
 			String translate = types.getPoiTranslation(key);
-			if (translate.toLowerCase().equals(key)) {
+			if (translate.toLowerCase(Locale.ROOT).equals(key)) {
 				translate = value;
 			}
 			return translate;
