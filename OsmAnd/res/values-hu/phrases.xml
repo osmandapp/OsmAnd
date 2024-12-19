@@ -4910,7 +4910,7 @@
     <string name="poi_route_activity_type_waterskiing">Vízisízés</string>
     <string name="poi_route_activity_type_motorboat">Motorcsónakozás</string>
     <string name="poi_route_activity_type_horse_riding">Lovaglás</string>
-    <string name="poi_route_activity_type_mushrooms_picking">Gombaszedés</string>
+    <string name="poi_route_activity_type_mushrooms_picking">Gombázás</string>
     <string name="poi_route_activity_type_rafting">Vadvízi evezés</string>
     <string name="poi_route_activity_type_tree_climbing">Fára mászás</string>
     <string name="poi_route_activity_type_harvesting">Aratás</string>
@@ -4925,7 +4925,7 @@
     <string name="poi_route_activity_type_karting">Gokartozás</string>
     <string name="poi_route_activity_type_windsurfing">Széllovaglás</string>
     <string name="poi_route_activity_type_road_motorcycling">Országúti motorozás</string>
-    <string name="poi_route_activity_type_adventure_motorcycling"></string>
+    <string name="poi_route_activity_type_adventure_motorcycling"/>
     <string name="poi_route_activity_type_ice_skating">Jégkorcsolyázás</string>
     <string name="poi_route_activity_type_road_cycling">Országúti kerékpározás</string>
     <string name="poi_route_activity_type_touring_motorcycling">Túramotorozás</string>
