@@ -576,7 +576,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 				Integer selectedValueIndex = enabled ? hazmatParameters.findIndexOfValue(selectedValue) : null;
 				HazmatCategoryBottomSheet.showInstance(manager, this, HAZMAT_TRANSPORTING_ENABLED, appMode, false, hazmatParameters.localizedNames, hazmatParameters.values, selectedValueIndex);
 			}
-		} else if (GOODS_RESTRICTIONS_PREFERENCE.equals(prefId)) {
+		} else if (isGoodsRestrictionsPreference(preference)) {
 			this
 					.getPreferenceDialogForGoodsRestrictionsPreference(preference, this)
 					.show();
@@ -630,13 +630,21 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(
 			final Preference preference,
 			final Fragment target) {
-		if (settings.ROUTE_RECALCULATION_DISTANCE.getId().equals(preference.getKey())) {
+		if (isRouteRecalculationDistancePreference(preference)) {
 			return Optional.of(getPreferenceDialogForRouteRecalculationDistancePreference(preference, target));
 		}
-		if (GOODS_RESTRICTIONS_PREFERENCE.equals(preference.getKey())) {
+		if (isGoodsRestrictionsPreference(preference)) {
 			return Optional.of(getPreferenceDialogForGoodsRestrictionsPreference(preference, target));
 		}
 		return Optional.empty();
+	}
+
+	private boolean isRouteRecalculationDistancePreference(final Preference preference) {
+		return settings.ROUTE_RECALCULATION_DISTANCE.getId().equals(preference.getKey());
+	}
+
+	private static boolean isGoodsRestrictionsPreference(final Preference preference) {
+		return GOODS_RESTRICTIONS_PREFERENCE.equals(preference.getKey());
 	}
 
 	private ShowableSearchablePreferenceDialog<RecalculateRouteInDeviationBottomSheet> getPreferenceDialogForRouteRecalculationDistancePreference(
@@ -680,7 +688,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 		ApplicationMode appMode = getSelectedAppMode();
 		FragmentManager manager = getFragmentManager();
 
-		if (settings.ROUTE_RECALCULATION_DISTANCE.getId().equals(prefId)) {
+		if (isRouteRecalculationDistancePreference(preference)) {
 			this
 					.getPreferenceDialogForRouteRecalculationDistancePreference(preference, this)
 					.show();
