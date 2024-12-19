@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction;
 
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageButton;
@@ -17,6 +19,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
@@ -61,6 +64,8 @@ public abstract class SliderButtonsCard extends MapBaseCard {
 		View selector = view.findViewById(R.id.card_selector);
 		if (showOriginal) {
 			selector.setOnClickListener(v -> showMenu(selector));
+		} else {
+			container.findViewById(R.id.header).getLayoutParams().height = WRAP_CONTENT;
 		}
 		AndroidUiHelper.updateVisibility(selector.findViewById(R.id.drop_down_icon), showOriginal);
 	}
@@ -139,8 +144,8 @@ public abstract class SliderButtonsCard extends MapBaseCard {
 
 	@NonNull
 	protected Drawable getPersistentPrefIcon(@DrawableRes int iconId) {
-		Drawable enabled = getColoredIcon(iconId, ColorUtilities.getActiveColorId(nightMode));
-		Drawable disabled = getColoredIcon(iconId, ColorUtilities.getSecondaryIconColorId(nightMode));
+		Drawable enabled = UiUtilities.createTintedDrawable(app, iconId, ColorUtilities.getActiveColor(app, nightMode));
+		Drawable disabled = UiUtilities.createTintedDrawable(app, iconId, ColorUtilities.getSecondaryIconColor(app, nightMode));
 
 		return AndroidUtils.createEnabledStateListDrawable(disabled, enabled);
 	}

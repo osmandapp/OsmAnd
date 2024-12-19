@@ -293,8 +293,8 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	}
 
 	protected void updateContent() {
-		updateIcon();
 		updateSize();
+		updateIcon();
 		updateBackground();
 		updateShadow();
 	}
