@@ -280,13 +280,32 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	@Override
 	public String getSearchableInfo() {
 		return Stream
+				.concat(
+						getConstantSearchableInfo(),
+						getSearchableInfoOfItems())
+				.collect(Collectors.joining(", "));
+	}
+
+	private Stream<String> getConstantSearchableInfo() {
+		return Stream
 				.of(
 						R.string.language_description,
 						VoiceType.TTS.titleRes,
 						VoiceType.TTS.descriptionRes,
 						VoiceType.RECORDED.titleRes,
 						VoiceType.RECORDED.descriptionRes)
-				.map(this::getString)
-				.collect(Collectors.joining(", "));
+				.map(this::getString);
+	}
+
+	private Stream<String> getSearchableInfoOfItems() {
+		return Stream
+				.concat(
+						ttsItems.stream(),
+						recordedItems.stream())
+				.map(indexItem ->
+						indexItem.getVisibleName(
+								app,
+								app.getRegions(),
+								false));
 	}
 }
