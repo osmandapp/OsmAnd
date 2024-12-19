@@ -335,11 +335,12 @@ public class RouteGeometryWay extends
 					int y = MapUtils.get31TileNumberY(point.location.getLatitude());
 					points.add(new PointI(x, y));
 				}
+				float vectorLineScale = GeometryWayDrawer.getVectorLineScale(getContext().getApp()) / 2.0f;
 				if (lineIdx < initialLinesCount) {
 					VectorLine vectorLine = actionLinesCollection.getLines().get(lineIdx);
 					vectorLine.setPoints(points);
 					vectorLine.setIsHidden(false);
-					vectorLine.setLineWidth(customWidth);
+					vectorLine.setLineWidth(customWidth * vectorLineScale);
 					vectorLine.setFillColor(NativeUtilities.createFColorARGB(arrowColor));
 					lineIdx++;
 				} else {
@@ -347,7 +348,7 @@ public class RouteGeometryWay extends
 					vectorLineBuilder.setBaseOrder(baseOrder--)
 							.setIsHidden(false)
 							.setLineId((int) actionLinesCollection.getLines().size())
-							.setLineWidth(customWidth)
+							.setLineWidth(customWidth * vectorLineScale)
 							.setPoints(points)
 							.setEndCapStyle(VectorLine.EndCapStyle.ARROW.ordinal())
 							.setFillColor(NativeUtilities.createFColorARGB(arrowColor));
