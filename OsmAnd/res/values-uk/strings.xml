@@ -5340,7 +5340,7 @@
     <string name="help_article_navigation_routing_car_based_routing_name">Автомаршрути (вантажівки, мотоцикли)</string>
     <string name="help_article_navigation_routing_online_routing_name">Онлайн-маршрутизація</string>
     <string name="help_article_map_map_context_menu_name">Контекстне меню мапи</string>
-    <string name="help_article_navigation_car_play_name">Автомобільні ігри</string>
+    <string name="help_article_navigation_car_play_name">CarPlay</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Екран мапи під час навігації</string>
     <string name="help_article_navigation_routing_name">Параметри маршруту</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Про маршрутизацію OsmAnd</string>
@@ -5923,7 +5923,6 @@
     <string name="obd_fuel_type_bifuel_methanol">Двопаливний метанол</string>
     <string name="obd_fuel_type_bifuel_ethanol">Двопаливний етанол</string>
     <string name="percent_unit">%</string>
-    <string name="obd_rpm">Оберти</string>
     <string name="rpm_unit">об/хв</string>
     <string name="obd_rpm_desc">Віджет показує оберти з тахометра машини за датчиком OBD</string>
     <string name="obd_fuel_type_desc">Віджет показує тип пального машини за датчиком OBD</string>
@@ -5932,7 +5931,7 @@
     <string name="obd_battery_voltage">Напруга акумулятора</string>
     <string name="obd_support">Підтримка OBD</string>
     <string name="obd_plugin_name">Показники машини</string>
-    <string name="obd_plugin_description">Відстежуйте ключові показники автомобіля за допомогою протоколу OBD-II. Доступ до даних, включаючи: * Оберти двигуна * Витрата палива * Залишок палива * Пробіг з моменту запуску двигуна * Температура впуску * Температура навколишнього середовища * Температура охолоджуючої рідини * Швидкість руху автомобіля * Відсоток заряду акумулятора</string>
+    <string name="obd_plugin_description">Контролюйте ключові показники автомобіля за допомогою протоколу OBD-II. Дані доступу, включаючи: \n • Швидкість двигуна, час роботи двигуна, розраховане навантаження двигуна \n • Витрата палива, тиск палива, залишок палива \n • Температура впуску, температура навколишнього середовища, температура охолоджуючої рідини, температура моторного масла \n • Швидкість автомобіля, положення дросельної заслінки, напруга акумулятора\n</string>
     <string name="obd_fuel_type">Тип пального</string>
     <string name="obd_vin">VIN</string>
     <string name="obd_fuel_type_cng">Стиснений природний газ (CNG)</string>
@@ -5953,7 +5952,6 @@
     <string name="obd_engine_coolant_temp">Температура охолоджувальної рідини</string>
     <string name="obd_fuel_level">Паливна ефективність (%)</string>
     <string name="obd_fuel_consumption_rate">Споживання пального</string>
-    <string name="obd_fuel_left_distance">Залишок пального (відстань)</string>
     <string name="reset_average_speed">Скинути середню швидкість</string>
     <string name="obd_vin_desc">VIN-код за OBD</string>
     <string name="obd_fuel_type_electric">Електрика</string>
@@ -5997,13 +5995,13 @@
     <string name="obd_fuel_pressure">Тиск палива</string>
     <string name="obd_fuel_pressure_desc">Показує тиск всередині паливної системи</string>
     <string name="kpa_unit">кПа</string>
-    <string name="obd_fuel_consumption_rate_sensor_desc">Показує витрату палива автомобіля на основі даних датчика (л/год)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Показує швидкість споживання палива автомобіля на основі датчика (л/год)</string>
     <string name="obd_bluetooth_off_description">Увімкніть функцію пошуку та підключення сканерів за допомогою Bluetooth.</string>
     <string name="shared_string_dynamic">Динамічний</string>
     <string name="obd_connected_to_device">Під\'єднано до %s</string>
     <string name="dynamic_icon_type_summary">Піктограма змінюється залежно від стану дії.</string>
-    <string name="l_100km">л/100км</string>
-    <string name="obd_fuel_consumption_rate_l_km">Витрата пального (л/км)</string>
+    <string name="l_100km">л/100 км</string>
+    <string name="obd_fuel_consumption_rate_l_km">Витрата палива (л/100 км)</string>
     <string name="obd_not_connected_to_device">Від\'єднано від %s</string>
     <string name="obd_connecting_to_device">Під\'єднання до %s</string>
     <string name="obd_engine_runtime">Тривалість роботи двигуна</string>
@@ -6015,7 +6013,7 @@
     <string name="obd_engine_oil_temperature_desc">Показує температуру моторного масла.</string>
     <string name="obd_fuel_consumption_rate_l_h_desc">Показує витрату палива автомобіля на основі розрахунків (л/год)</string>
     <string name="record_obd_data">Реєструйте показники автомобіля</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Показує витрату палива автомобіля на основі розрахунків (л/км)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Показує витрату палива автомобіля на основі розрахунків (л/100 км)</string>
     <string name="simulate_obd">Імітація даних obd</string>
     <string name="obd_throttle_position">Положення дросельної заслінки</string>
     <string name="speedometer_maximum">Максимум</string>
@@ -6028,7 +6026,7 @@
     <string name="obd_fuel_left_percent">Залишок пального (%)</string>
     <string name="obd_fuel_left_liter">Залишок пального (л)</string>
     <string name="obd_fuel_consumption_rate_scanner">Витрата пального (у.п.)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">Витрата пального л/год</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Норма витрати палива</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Витрата палива %/год</string>
     <string name="obd_vehicle_info">Інформація про транспортний засіб</string>
     <string name="obd_searching_text">Пошук сканерів</string>
@@ -6087,4 +6085,8 @@
     <string name="av_audio_sample_rate_descr">Виберіть рівень звуку.</string>
     <string name="connect_new_scanner">Підключення нового сканера</string>
     <string name="shared_string_engine">Двигуни</string>
+    <string name="shared_string_interpolation">Інтерполяція</string>
+    <string name="location_interpolation_percent">Відсоток інтерполяції розташування</string>
+    <string name="location_interpolation_percent_desc">Встановіть відсоток інтерполяції розташування під час навігації по маршруту. Цей параметр зменшує затримку вашого розташування на карті під час анімації.</string>
+    <string name="selected_delayed_profile">Вибраний профіль \"%s\"</string>
 </resources>

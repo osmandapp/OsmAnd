@@ -1,6 +1,7 @@
 package net.osmand.plus.auto;
 
 import static net.osmand.plus.views.OsmandMapTileView.DEFAULT_ELEVATION_ANGLE;
+import static net.osmand.plus.views.MapViewWithLayers.SYMBOLS_UPDATE_INTERVAL;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -331,41 +332,43 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 			setupOffscreenRenderer();
 	}
 
-	public void setupOffscreenRenderer() {
+	public synchronized void setupOffscreenRenderer() {
 		Log.i(TAG, "setupOffscreenRenderer");
 		if (getApp().useOpenGlRenderer()) {
 			if (surface != null && surface.isValid()) {
 				if (offscreenMapRendererView != null) {
 					MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
-					if (mapRendererContext != null) {
-						if (mapRendererContext.getMapRendererView() == offscreenMapRendererView)
-							return;
+					if (mapRendererContext != null && mapRendererContext.getMapRendererView() != offscreenMapRendererView) {
 						offscreenMapRendererView = null;
 					}
 				}
 				if (offscreenMapRendererView == null) {
-					MapRendererView mapRendererView = null;
 					MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
 					if (mapRendererContext != null) {
-						if (mapView != null && mapView.getMapRenderer() != null)
-							mapView.setMapRenderer(null);
+						MapRendererView mapRendererView = null;
+						if (mapView != null && mapView.getMapRenderer() != null) {
+							mapView.detachMapRenderer();
+						}
 						if (mapRendererContext.getMapRendererView() != null) {
 							mapRendererView = mapRendererContext.getMapRendererView();
 							mapRendererContext.setMapRendererView(null);
 						}
-						offscreenMapRendererView = new AtlasMapRendererView(carContext);
-						offscreenMapRendererView.setMapRendererSetupOptionsConfigurator(
-								mapRendererSetupOptions -> mapRendererSetupOptions.setMaxNumberOfRasterMapLayersInBatch(1));
-						offscreenMapRendererView.setupRenderer(carContext, getWidth(), getHeight(), mapRendererView);
-						offscreenMapRendererView.setMinZoomLevel(ZoomLevel.swigToEnum(mapView.getMinZoom()));
-						offscreenMapRendererView.setMaxZoomLevel(ZoomLevel.swigToEnum(mapView.getMaxZoom()));
-						offscreenMapRendererView.setAzimuth(0);
-						mapView.setMinAllowedElevationAngle(MIN_ALLOWED_ELEVATION_ANGLE_AA);
-						float elevationAngle = mapView.normalizeElevationAngle(getApp().getSettings().getLastKnownMapElevation());
 						NativeCoreContext.setMapRendererContext(getApp(), surfaceView.getDensity());
 						mapRendererContext = NativeCoreContext.getMapRendererContext();
 						if (mapRendererContext != null) {
+							offscreenMapRendererView = new AtlasMapRendererView(carContext);
+							mapRendererContext.presetMapRendererOptions(offscreenMapRendererView);
+							offscreenMapRendererView.setupRenderer(carContext, getWidth(), getHeight(), mapRendererView);
+							offscreenMapRendererView.setMinZoomLevel(ZoomLevel.swigToEnum(mapView.getMinZoom()));
+							offscreenMapRendererView.setMaxZoomLevel(ZoomLevel.swigToEnum(mapView.getMaxZoom()));
+							offscreenMapRendererView.setAzimuth(0);
+							offscreenMapRendererView.removeAllSymbolsProviders();
+							offscreenMapRendererView.resumeSymbolsUpdate();
+							offscreenMapRendererView.setSymbolsUpdateInterval(SYMBOLS_UPDATE_INTERVAL);
+							offscreenMapRendererView.enableBatterySavingMode();
 							mapRendererContext.setMapRendererView(offscreenMapRendererView);
+							mapView.setMinAllowedElevationAngle(MIN_ALLOWED_ELEVATION_ANGLE_AA);
+							float elevationAngle = mapView.normalizeElevationAngle(getApp().getSettings().getLastKnownMapElevation());
 							mapView.setMapRenderer(offscreenMapRendererView);
 							mapView.setElevationAngle(elevationAngle);
 							mapView.addElevationListener(this);
@@ -374,28 +377,27 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 							offscreenMapRendererView.addListener(this);
 							mapView.getAnimatedDraggingThread().toggleAnimations();
 						}
-						offscreenMapRendererView.enableBatterySavingMode();
 					}
 				}
 			}
 		}
 	}
 
-	public void stopOffscreenRenderer() {
+	public synchronized void stopOffscreenRenderer() {
 		Log.i(TAG, "stopOffscreenRenderer");
 		if (offscreenMapRendererView != null) {
-			AtlasMapRendererView offscreenMapRendererView = this.offscreenMapRendererView;
-			this.offscreenMapRendererView = null;
 			if (mapView != null) {
 				mapView.removeElevationListener(this);
 				mapView.getAnimatedDraggingThread().toggleAnimations();
 				if (mapView.getMapRenderer() == offscreenMapRendererView) {
-					mapView.setMapRenderer(null);
+					mapView.detachMapRenderer();
 				}
 			}
 			MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
-			if (mapRendererContext != null && mapRendererContext.getMapRendererView() == offscreenMapRendererView)
-				offscreenMapRendererView.stopRenderer();
+			if (mapRendererContext != null) {
+				mapRendererContext.suspendMapRendererView(offscreenMapRendererView);
+			}
+			offscreenMapRendererView = null;
 		}
 	}
 

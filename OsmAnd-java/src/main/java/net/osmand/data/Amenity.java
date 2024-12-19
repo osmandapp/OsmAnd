@@ -1,7 +1,11 @@
 package net.osmand.data;
 
-import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
-import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
+import static net.osmand.gpx.GPXUtilities.*;
+import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
+import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
+import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
+import static net.osmand.shared.gpx.GpxFile.XML_COLON;
 
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
@@ -48,6 +52,7 @@ public class Amenity extends MapObject {
 	public static final String IS_AGGR_PART = "is_aggr_part";
 	public static final String CONTENT_JSON = "content_json";
 	public static final String ROUTE_ID = "route_id";
+	public static final String ROUTE_ID_OSM_PREFIX = "OSM";
 	public static final String ROUTE_SOURCE = "route_source";
 	public static final String ROUTE_NAME = "route_name";
 	public static final String COLOR = "color";
@@ -169,7 +174,7 @@ public class Amenity extends MapObject {
 		}
 		String str = additionalInfo.get(key);
 		if (str == null && key.contains(":")) {
-			str = additionalInfo.get(key.replaceAll(":", "_-_")); // try content_-_uk after content:uk
+			str = additionalInfo.get(key.replaceAll(":", XML_COLON)); // try content_-_uk after content:uk
 		}
 		if (str != null) {
 			str = unzipContent(str);
@@ -309,7 +314,7 @@ public class Amenity extends MapObject {
 	private void printNames(String prefix, Map<String, String> stringMap, StringBuilder s) {
 		for (Entry<String, String> e : stringMap.entrySet()) {
 			if (e.getValue().startsWith(" gz ")) {
-				s.append(prefix).append(e.getKey()).append("='gzip ...'");
+				s.append(prefix).append(e.getKey()).append("='gzip ...' ");
 			} else {
 				s.append(prefix).append(e.getKey()).append("='").append(e.getValue()).append("' ");
 			}
@@ -347,9 +352,10 @@ public class Amenity extends MapObject {
 	}
 
 	public String getGpxIcon() {
-		return getAdditionalInfo(GPX_ICON);
+		String wikiVoyageIcon = getAdditionalInfo(GPX_ICON);
+		String travelGpxIcon = getAdditionalInfo(ICON_NAME_EXTENSION);
+		return Algorithms.isEmpty(wikiVoyageIcon) ? travelGpxIcon : wikiVoyageIcon;
 	}
-
 
 	public String getContentLanguage(String tag, String lang, String defLang) {
 		if (lang != null) {
@@ -432,7 +438,7 @@ public class Amenity extends MapObject {
 			return translateName;
 		}
 		for (String nm : getAdditionalInfoKeys()) {
-			if (nm.startsWith(tag + ":") || nm.startsWith(tag + "_-_")) {
+			if (nm.startsWith(tag + ":") || nm.startsWith(tag + XML_COLON)) {
 				return getAdditionalInfo(nm);
 			}
 		}
@@ -445,6 +451,25 @@ public class Amenity extends MapObject {
 
 	public String getRouteId() {
 		return getAdditionalInfo(ROUTE_ID);
+	}
+
+	public boolean hasOsmRouteId() {
+		String routeId = getRouteId();
+		return routeId != null && routeId.startsWith(ROUTE_ID_OSM_PREFIX);
+	}
+
+	public String getGpxFileName(String lang) {
+		final String gpxFileName = lang != null ? getName(lang) : getEnName(true);
+		if (!Algorithms.isEmpty(gpxFileName)) {
+			return gpxFileName;
+		}
+		if (!Algorithms.isEmpty(getRouteId())) {
+			return getRouteId();
+		}
+		if (!Algorithms.isEmpty(getSubType())) {
+			return getType().getKeyName() + " " + getSubType();
+		}
+		return getType().getKeyName();
 	}
 
 	public String getStrictTagContent(String tag, String lang) {
@@ -547,6 +572,14 @@ public class Amenity extends MapObject {
 
 	public boolean isPrivateAccess() {
 		return PRIVATE_VALUE.equals(getTagContent(ACCESS_PRIVATE_TAG));
+	}
+
+	public boolean isRouteTrack() {
+		return subType != null && (subType.equals(ROUTE_TRACK) || subType.startsWith(ROUTES_PREFIX));
+	}
+
+	public boolean isRoutePoint() {
+		return subType != null && (subType.equals(ROUTE_TRACK_POINT) || subType.equals(ROUTE_ARTICLE_POINT));
 	}
 
 	public JSONObject toJSON() {

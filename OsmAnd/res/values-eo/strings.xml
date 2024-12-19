@@ -1949,26 +1949,7 @@
     <string name="coords_search">Koordinat-serĉo</string>
     <string name="advanced_coords_search">Detala koordinat-serĉo</string>
     <string name="route_stops_before">Post %1$s haltejoj</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd (OSM Aŭtomata Navigado Direktanta al la celo)
-\n
-\nOsmAnd estas malfermkoda navigada aplikaĵo kun aliro al diversaj mondaj datumoj de OSM. Ĉiuj mapoj (vektoraj kaj kahelaj) povas esti konservitaj en la poŝtelefona konservejo por malkonekta uzado. La aplikaĵo ankaŭ ebligas uzi lokan aŭ enretan navigadon kun voĉaj anoncoj turno‑post‑turno.
-\n
-\nOsmAnd+ estas pagenda versio de programo, per aĉeti la aplikaĵo, vi subtenas la projekton, donacas al novaj ebloj, kaj ricevos la plej novajn ĝisdatigojn.
-\n
-\nĈefaj eblaĵoj:
-\n– funkcias tute eksterrete (konservas elŝutitajn vektorajn aŭ kahelajn mapojn en la aparata konservejo)
-\n– kompaktaj vektoraj eksterretaj mapoj de la tuta mondo
-\n– senlime elŝuti landaj aŭ regionaj mapoj senpere en la aplikaĵo
-\n– eksterreta Vikipedio (elŝuteblaj vikipediaj interesejoj), perfekte por vizitado
-\n– diversspecaj tavoloj de mapo: GPX aŭ navigadaj kursoj, interesejoj, ŝatataj ejoj, haltejoj de publika transporto, ekstraj mapoj kun ŝanĝebla diafaneco, topografio (nivelkurboj/nivelombrumo/dekliveco)
-\n– serĉi eksterrete adresojn kaj interesajn ejojn (interesejojn)
-\n– difini kursojn por mezaj distancoj eksterrete
-\n– aŭta, bicikla, kaj piediranta reĝimoj kun:
-\n – agordeblaj aŭtomata/taga/nokta aspektoj
-\n – agordebla rapid-dependa map-skalado
-\n – agordebla map-turniĝo laŭ direkto de movado aŭ kompaso
-\n – sciigoj pri koridoroj, rapidlimoj, antaŭregistritaj aŭ sintezitaj parolaj helpoj
-\n</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd (OSM Aŭtomata Navigado Direktanta al la celo) \n \nOsmAnd estas malfermkoda navigada aplikaĵo kun aliro al diversaj mondaj datumoj de OSM. Ĉiuj mapoj (vektoraj kaj kahelaj) povas esti konservitaj en la poŝtelefona konservejo por malkonekta uzado. La aplikaĵo ankaŭ ebligas uzi lokan aŭ enretan navigadon kun voĉaj anoncoj turno‑post‑turno. \n \nOsmAnd+ estas pagenda versio de programo, per aĉeti la aplikaĵo, vi subtenas la projekton, donacas al novaj ebloj, kaj ricevos la plej novajn ĝisdatigojn. \n \nĈefaj eblaĵoj: \n– funkcias tute eksterrete (konservas elŝutitajn vektorajn aŭ kahelajn mapojn en la aparata konservejo) \n– kompaktaj vektoraj eksterretaj mapoj de la tuta mondo \n– senlime elŝuti landaj aŭ regionaj mapoj senpere en la aplikaĵo \n– eksterreta Vikipedio (elŝuteblaj vikipediaj interesejoj), perfekte por vizitado \n– diversspecaj tavoloj de mapo: GPX aŭ navigadaj kursoj, interesejoj, ŝatataj ejoj, haltejoj de publika transporto, ekstraj mapoj kun ŝanĝebla diafaneco, topografio (nivelkurboj/nivelombrumo/dekliveco) \n– serĉi eksterrete adresojn kaj interesajn ejojn (interesejojn) \n– difini kursojn por mezaj distancoj eksterrete \n– aŭta, bicikla, kaj piediranta reĝimoj kun: \n – agordeblaj aŭtomata/taga/nokta aspektoj \n – agordebla rapid-dependa map-skalado \n – agordebla map-turniĝo laŭ direkto de movado aŭ kompaso \n – sciigoj pri koridoroj, rapidlimoj, antaŭregistritaj aŭ sintezitaj parolaj helpoj</string>
     <string name="rendering_attr_hideOverground_name">Superteraj objektoj</string>
     <string name="shared_string_change">Ŝanĝi</string>
     <string name="get_started">Ekigi</string>
@@ -2177,27 +2158,8 @@
     <string name="osmand_extended_description_part1">OsmAnd (OSM Aŭtomata Navigado Direkte al celo) estas mapa kaj naviga aplikaĵo kun aliro al liberaj, tutmondaj kaj altkvalitaj datumoj de OSM.
 \n
 \nĜuu voĉan kaj vidan navigadon, esploradon de interesejoj (punktoj de intereso), kreadon kaj administradon de GPX‑spuroj, montradon de nivelkurboj kaj informojn pri topografio (per kromprogramo), elekton inter aŭta, bicikla kaj piediranta reĝimoj, OSM‑redaktadon kaj pli.</string>
-    <string name="osmand_extended_description_part2">GPS-navigado 
-\n • Elekti inter eksterreta (neniuj retmigradaj kostoj dum estado eksterlande) kaj enreta (pli rapida) reĝimoj 
-\n • Turno-post-turnaj voĉaj anoncoj gvidos vin al la celo (antaŭregistritaj kaj parolsintezitaj voĉoj) 
-\n • Kurso estos rekalkulita kiam vi devojiĝos 
-\n • Informoj pri koridoroj, strat-nomoj kaj proksimuma tempo de alveno helpos al vi dum vojaĝo 
-\n • Por igi vian veturadon pli sekura, taga/nokta etoso ŝanĝiĝas aŭtomate 
-\n • Elekti montri rapid-limojn kaj avertojn kiam vi trorapidas 
-\n • Map-pligrandigo alĝustiĝas al via rapido 
-\n • Serĉi cel-lokojn laŭ adreso, laŭ speco (ekz. parkumejo, restoracio, hotelo, benzinejo, muzeo) aŭ laŭ geografiaj koordinatoj 
-\n • Subteno por interceloj sur via kurso 
-\n • Registri vian propran GPX-spuron kaj sekvi ĝin
-\n</string>
-    <string name="osmand_extended_description_part3">Mapo 
-\n • Montrado de interesejoj (punktoj de intereso) ĉirkaŭ vi 
-\n • Orientiĝado de mapo laŭ via direkto de movo (aŭ laŭ kompaso) 
-\n • Montrado kie vi estas kaj kien vi rigardas 
-\n • Diskonigi vian pozicion por ke viaj amikoj povu trovi vin 
-\n • Konservi viajn plej gravajn ejojn en listo de “ŝatataj” 
-\n • Ebligas al vi elekti kiel vidigi nomojn sur la mapo: esperante, en loka lingvo aŭ en fonetika transskribo 
-\n • Montras specialajn enretajn kahelojn, satelitan vidon (de Bing), diversajn surtavolojn kiel piediradajn kursojn kaj aldonajn tavolojn kun agordebla diafaneco
-\n</string>
+    <string name="osmand_extended_description_part2">GPS-navigado \n • Elekti inter eksterreta (neniuj retmigradaj kostoj dum estado eksterlande) kaj enreta (pli rapida) reĝimoj \n • Turno-post-turnaj voĉaj anoncoj gvidos vin al la celo (antaŭregistritaj kaj parolsintezitaj voĉoj) \n • Kurso estos rekalkulita kiam vi devojiĝos \n • Informoj pri koridoroj, strat-nomoj kaj proksimuma tempo de alveno helpos al vi dum vojaĝo \n • Por igi vian veturadon pli sekura, taga/nokta etoso ŝanĝiĝas aŭtomate \n • Elekti montri rapid-limojn kaj avertojn kiam vi trorapidas \n • Map-pligrandigo alĝustiĝas al via rapido \n • Serĉi cel-lokojn laŭ adreso, laŭ speco (ekz. parkumejo, restoracio, hotelo, benzinejo, muzeo) aŭ laŭ geografiaj koordinatoj \n • Subteno por interceloj sur via kurso \n • Registri vian propran GPX-spuron kaj sekvi ĝin</string>
+    <string name="osmand_extended_description_part3">Mapo \n • Montrado de interesejoj (punktoj de intereso) ĉirkaŭ vi \n • Orientiĝado de mapo laŭ via direkto de movo (aŭ laŭ kompaso) \n • Montrado kie vi estas kaj kien vi rigardas \n • Diskonigi vian pozicion por ke viaj amikoj povu trovi vin \n • Konservi viajn plej gravajn ejojn en listo de “ŝatataj” \n • Ebligas al vi elekti kiel vidigi nomojn sur la mapo: esperante, en loka lingvo aŭ en fonetika transskribo \n • Montras specialajn enretajn kahelojn, satelitan vidon (de Bing), diversajn surtavolojn kiel piediradajn kursojn kaj aldonajn tavolojn kun agordebla diafaneco</string>
     <string name="osmand_extended_description_part4">Skiado 
 \n La kromprogramo de OsmAnd “skiada map-vido” ebligas al vi vidigi skivojojn kun ilia facileco kaj aliajn taŭgajn informojn, kiel lokojn de skiliftoj kaj aliajn ejojn.</string>
     <string name="osmand_extended_description_part5">Biciklado
@@ -2206,18 +2168,8 @@
 \n • Montri viajn rapidon kaj altitudon
 \n • Registri GPX-spurojn de via vojaĝo kaj diskonigi ilin
 \n • Per aldona kromprogramo vi povas vidigi nivelkurbojn kaj nivelombrumon (reliefon)</string>
-    <string name="osmand_extended_description_part6">Piedirado, vizitado de urbo 
-\n • La mapo montras al vi piediradajn kursojn 
-\n • Vikipedio en via lingvo eblas rakonti al vi multe dum via vizitado de urbo 
-\n • Haltejoj de publika transporto (aŭtobusaj, tramaj, fervojaj) kaj nomoj de linioj por helpi al vi navigi en urbo 
-\n • GPS-navigado en piedirada reĝimo kalkulas kursojn uzante piediradajn kursojn 
-\n • Alŝuti kaj postsekvi GPX-spuron aŭ registri kaj diskonigi vian propran
-\n</string>
-    <string name="osmand_extended_description_part7">Kontribui al OSM
-\n • Raporti erarojn pri datumoj
-\n • Alŝuti GPX-spurojn al OSM senpere de la aplikaĵo
-\n • Aldoni interesejojn kaj senpere alŝuti ilin al OSM (aŭ poste se malkonekte)
-\n</string>
+    <string name="osmand_extended_description_part6">Piedirado, vizitado de urbo \n • La mapo montras al vi piediradajn kursojn \n • Vikipedio en via lingvo eblas rakonti al vi multe dum via vizitado de urbo \n • Haltejoj de publika transporto (aŭtobusaj, tramaj, fervojaj) kaj nomoj de linioj por helpi al vi navigi en urbo \n • GPS-navigado en piedirada reĝimo kalkulas kursojn uzante piediradajn kursojn \n • Alŝuti kaj postsekvi GPX-spuron aŭ registri kaj diskonigi vian propran</string>
+    <string name="osmand_extended_description_part7">Kontribui al OSM \n • Raporti erarojn pri datumoj \n • Alŝuti GPX-spurojn al OSM senpere de la aplikaĵo \n • Aldoni interesejojn kaj senpere alŝuti ilin al OSM (aŭ poste se malkonekte)</string>
     <string name="osmand_extended_description_part8">OsmAnd estas malfermkoda kaj daŭre evoluigata programaro. Ĉiu povas kontribui al la aplikaĵo per raporti erarojn, plibonigi tradukojn aŭ programi novajn funkciojn. La projekto baziĝas sur monaj donacoj por fondi kodumadon kaj testi novajn funkciojn. 
 \n Proksimuma map-atingo kaj kvalito: 
 \n • Okcidenta Eŭropo: **** 
@@ -2245,14 +2197,7 @@
 \n • interceloj de kurso
 \n • aŭtomate rekalkuli kurson kiam devoje
 \n • serĉi lokojn laŭ adreso, laŭ speco (ekz. restoracio, hotelo, benzinejo, muzeo) aŭ laŭ geografiaj koordinatoj</string>
-    <string name="osmand_plus_extended_description_part3">Map‑vido:
-\n • montri vian pozicion kaj orientiĝon
-\n • malnepre orienti la ekranon laŭ kompaso aŭ laŭ via direkto de movo
-\n • konservi viajn plej gravajn lokojn en la listo de ŝatataj
-\n • montri proksimajn interesejojn (vendejoj, frizejoj, statuoj, ktp)
-\n • vidigi specialajn enretajn kahelojn, satelita vido (de Bing), diversaj surtavoloj ekz. piediradaj kursoj, GPX-spuroj kaj kromaj tavoloj kun agordebla diafaneco
-\n • malnepre vidigi nomojn en Esperanto, en loka lingvo aŭ en fonetika transskribo
-\n</string>
+    <string name="osmand_plus_extended_description_part3">Map‑vido: \n • montri vian pozicion kaj orientiĝon \n • malnepre orienti la ekranon laŭ kompaso aŭ laŭ via direkto de movo \n • konservi viajn plej gravajn lokojn en la listo de ŝatataj \n • montri proksimajn interesejojn (vendejoj, frizejoj, statuoj, ktp) \n • vidigi specialajn enretajn kahelojn, satelita vido (de Bing), diversaj surtavoloj ekz. piediradaj kursoj, GPX-spuroj kaj kromaj tavoloj kun agordebla diafaneco \n • malnepre vidigi nomojn en Esperanto, en loka lingvo aŭ en fonetika transskribo</string>
     <string name="fonts_header">Mapaj tiparoj</string>
     <string name="osmand_plus_extended_description_part4">Uzi datumojn de OSM kaj Vikipedio:
 \n • altkvalitaj informoj el la plej bonaj kunlaboraj projektoj en la mondo
@@ -2261,12 +2206,7 @@
 \n • senlimaj senpagaj elŝutoj senpere de la aplikaĵo
 \n • kompaktaj vektoraj mapoj ĝisdatigataj almenaŭ unumonate
 \n • elekto inter plenaj datumoj por regiono aŭ nur voja reto (ekz. plena mapo povas okupi 700 MB, sed nurvoja mapo 200 MB)</string>
-    <string name="osmand_plus_extended_description_part5">Sekurecaj eblaĵoj:
-\n • malnepre aŭtomate baskui inter taga/nokta vido
-\n • malnepre montri rapid‑limon kaj avertojn se vi trorapidas
-\n • malnepra rapid‑dependa map‑pligrandigo
-\n • kunhavigi vian pozicion, por ke viaj amikoj povu trovi vin
-\n</string>
+    <string name="osmand_plus_extended_description_part5">Sekurecaj eblaĵoj: \n • malnepre aŭtomate baskui inter taga/nokta vido \n • malnepre montri rapid‑limon kaj avertojn se vi trorapidas \n • malnepra rapid‑dependa map‑pligrandigo \n • kunhavigi vian pozicion, por ke viaj amikoj povu trovi vin</string>
     <string name="osmand_plus_extended_description_part6">Bicikladaj kaj piediradaj eblaĵoj:
 \n • vidigo de piediradaj kaj bicikladaj kursoj, bonega por eksterdoma aktiveco 
 \n • speciala difinado de vojo por biciklado kaj piedirado
@@ -2274,27 +2214,8 @@
 \n • malnepra registrado de kurso kun eblo konservi ĝin al GPX‑dosiero aŭ al enreta servo 
 \n • malnepra vidigo de rapido kaj altitudo 
 \n • vidigado de nivelkurboj kaj nivel‑ombrumo (reliefo) (per kromprogramo)</string>
-    <string name="osmand_plus_extended_description_part7">Senpere kontribui al OSM:
-\n • raporti erarojn pri datumoj
-\n • alŝuti GPX-spurojn al OSM senpere de la aplikaĵo
-\n • aldoni interesejojn kaj senpere alŝuti ilin al OSM (aŭ poste se malkonekte)
-\n • malnepre registri kurson ankaŭ en fona reĝimo (kiam la aparato dormetas)
-\n OsmAnd estas malfermkoda kaj daŭre evoluigata programaro. Ĉiu povas kontribui al la aplikaĵo per raporti erarojn, plibonigi tradukojn aŭ programi novajn funkciojn. La projekto baziĝas sur monaj donacoj por fondi kodumadon kaj testi novajn funkciojn.
-\n</string>
-    <string name="osmand_plus_extended_description_part8">Proksimuma map‑atingo kaj kvalito: 
-\n • Okcidenta Eŭropo: ☆☆☆☆ 
-\n • Orienta Eŭropo: ☆☆☆ 
-\n • Rusujo: ☆☆☆ 
-\n • Nordameriko: ☆☆☆ 
-\n • Sudameriko: ☆☆ 
-\n • Azio: ☆☆ 
-\n • Japanujo kaj Koreujo: ☆☆☆ 
-\n • Proksim-Oriento: ☆☆ 
-\n • Afriko: ☆☆ 
-\n • Antarkto: ☆ 
-\nMapoj de preskaŭ ĉiuj landoj de la mondo estas elŝuteblaj! 
-\nDe Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Francujo, Germanujo, Meksiko, Britujo, Hispanujo…
-\n</string>
+    <string name="osmand_plus_extended_description_part7">Senpere kontribui al OSM: \n • raporti erarojn pri datumoj \n • alŝuti GPX-spurojn al OSM senpere de la aplikaĵo \n • aldoni interesejojn kaj senpere alŝuti ilin al OSM (aŭ poste se malkonekte) \n • malnepre registri kurson ankaŭ en fona reĝimo (kiam la aparato dormetas) \n OsmAnd estas malfermkoda kaj daŭre evoluigata programaro. Ĉiu povas kontribui al la aplikaĵo per raporti erarojn, plibonigi tradukojn aŭ programi novajn funkciojn. La projekto baziĝas sur monaj donacoj por fondi kodumadon kaj testi novajn funkciojn.</string>
+    <string name="osmand_plus_extended_description_part8">Proksimuma map‑atingo kaj kvalito: \n • Okcidenta Eŭropo: ☆☆☆☆ \n • Orienta Eŭropo: ☆☆☆ \n • Rusujo: ☆☆☆ \n • Nordameriko: ☆☆☆ \n • Sudameriko: ☆☆ \n • Azio: ☆☆ \n • Japanujo kaj Koreujo: ☆☆☆ \n • Proksim-Oriento: ☆☆ \n • Afriko: ☆☆ \n • Antarkto: ☆ \nMapoj de preskaŭ ĉiuj landoj de la mondo estas elŝuteblaj! \nDe Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Francujo, Germanujo, Meksiko, Britujo, Hispanujo…</string>
     <string name="restore_purchases">Restarigi aĉetaĵojn</string>
     <string name="shared_string_visible">Videbla(j)</string>
     <string name="analyze_on_map">Analizi sur mapo</string>
@@ -5618,7 +5539,6 @@
     <string name="obd_fuel_type_unknown">nekonata speco de brulaĵo</string>
     <string name="obd_widget_group">Statistikoj pri veturilo</string>
     <string name="percent_unit">%</string>
-    <string name="obd_rpm">Rivolua rapido</string>
     <string name="rpm_unit">riv./min</string>
     <string name="obd_fuel_level_desc">Montras nivelon de brulaĵo raportatan de OBD-sentilo</string>
     <string name="obd_fuel_left_distance_desc">Montras vetureblan distancon per la nuna brulaĵ-nivelo raportatan de OBD-sentilo</string>
@@ -5630,9 +5550,8 @@
     <string name="obd_plugin_name">Statistikoj pri veturilo</string>
     <string name="obd_fuel_consumption_rate">Konsum-rapido de brulaĵo</string>
     <string name="obd_fuel_consumption_rate_desc">Montras konsum-rapidon de brulaĵo raportatan de OBD-sentilo</string>
-    <string name="obd_fuel_left_distance">Resta brulaĵo (distanco)</string>
     <string name="obd_fuel_type">Speco de brulaĵo</string>
-    <string name="obd_plugin_description">Ebligas kontroli parametrojn de aŭtomobilo per la protokolo OBD-II. Alireblaj datumoj:\n• rivolua rapido de motoro\n• konsumo de brulaĵo\n• resta brulaĵo\n• distanco ekde starto de motoro\n• temperaturo en eniga aer-kolektilo\n• temperaturo de ĉirkaŭaĵo\n• temperaturo de malvarmiga likvaĵo\n• rapido de veturilo\n• tensio de baterio</string>
+    <string name="obd_plugin_description">Ebligas kontroli parametrojn de aŭtomobilo per la protokolo OBD-II. Alireblaj datumoj:\n• rivolua rapido de motoro, ĝia labortempo, ĝia kalkulita ŝargo\n• konsumo de brulaĵo, premo de brula, resta brulaĵo\n• temperaturoj de: eniga aer-kolektilo, fono, malvarmiga likvaĵo, motoroleo\n• rapido de veturilo, pozicio de brulaĵ-valvo, tensio de baterio.\n</string>
     <string name="obd_support">Subteno por OBD</string>
     <string name="obd_fuel_type_hydrogen">hidrogeno</string>
     <string name="shared_string_obd">OBD</string>
@@ -5669,7 +5588,7 @@
     <string name="imperial_gallons">Britaj galjonoj</string>
     <string name="us_gallons">Usonaj galjonoj</string>
     <string name="unit_of_volume_description">Elektata mezurunuo estos aplikita al ĉiuj volumen-rilataj datumoj en la elektita profilo.</string>
-    <string name="unit_of_volume">Mezurunuo de volumeno</string>
+    <string name="unit_of_volume">Unuo de volumeno</string>
     <string name="dynamic_icon_type_summary">Bildsimbolo ŝanĝiĝas laŭ stato de ago.</string>
     <string name="shared_string_dynamic">Dinamika</string>
     <string name="obd_connected_to_device">Konektita kun %s</string>
@@ -5678,8 +5597,8 @@
     <string name="bt_start_pair_failed">Ne povas ekigi kupli la aparaton</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Montras konsumon de brulaĵo de via veturilo surbaze de kalkuloj (%/h)</string>
     <string name="l_100km">l/100km</string>
-    <string name="obd_fuel_consumption_rate_l_km">Konsumo de brulaĵo (l/km)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Montras konsumon de brulaĵo de via veturilo surbaze de kalkuloj (l/km)</string>
+    <string name="obd_fuel_consumption_rate_l_km">Konsumo de brulaĵo (l/100 km)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Montras konsumon de brulaĵo de via veturilo surbaze de kalkuloj (l/100 km)</string>
     <string name="simulate_obd">Simuli OBD-datumojn</string>
     <string name="obd_engine_runtime">Labortempo de motoro</string>
     <string name="obd_engine_runtime_desc">Montras kiel longe la motoro laboris ekde ĝia starto.</string>
@@ -5700,7 +5619,7 @@
     <string name="obd_engine_oil_temperature_desc">Montras temperaturon de motoroleo.</string>
     <string name="obd_fuel_left_percent">Resta brulaĵo (%)</string>
     <string name="obd_fuel_consumption_rate_scanner">Konsumo de brulaĵo (OBD)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">Konsumo de brulaĵo (l/h)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Konsumo de brulaĵo</string>
     <string name="percent_hour">%/h</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Montras konsumon de brulaĵo de via veturilo surbaze de sentilo (l/h)</string>
     <string name="obd_engine_oil_temperature">Temperaturo de motoroleo</string>
@@ -5767,4 +5686,8 @@
     <string name="connect_new_scanner">Konekti novan skanilon</string>
     <string name="vehicle_metrics_recording_description">Elekti parametrojn por registri al la GPX-dosiero.</string>
     <string name="shared_string_engine">Motoro</string>
+    <string name="location_interpolation_percent">Elcento de interpolo de pozicio</string>
+    <string name="location_interpolation_percent_desc">Agordi elcenton de alproksimigo de pozicio dum navigi laŭ kurso. Tiu ĉi parametro malpliigas prokraston vidigi vian movbildan pozicion sur la mapo.</string>
+    <string name="shared_string_interpolation">Interpolo</string>
+    <string name="selected_delayed_profile">Elektis profilon “%s”</string>
 </resources>

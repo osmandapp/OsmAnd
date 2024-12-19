@@ -32,7 +32,6 @@ import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
-import net.osmand.plus.track.helpers.GpxNavigationHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
@@ -182,7 +181,7 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 			TrackSelectSegmentBottomSheet.showInstance(fragmentManager, gpxFile, this);
 		} else {
-			GpxNavigationHelper.startNavigationForGpx(gpxFile, mapActivity);
+			mapActivity.getMapActions().startNavigationForGpx(gpxFile, mapActivity);
 			closeDashboard();
 		}
 	}
@@ -240,7 +239,7 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 	public void onSegmentSelect(@NonNull GpxFile gpxFile, int selectedSegment) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			GpxNavigationHelper.startNavigationForSegment(gpxFile, selectedSegment, mapActivity);
+			mapActivity.getMapActions().startNavigationForSegment(gpxFile, selectedSegment, mapActivity);
 			closeDashboard();
 		}
 	}
@@ -249,7 +248,7 @@ public class DashRecentsFragment extends DashLocationFragment implements OnSegme
 	public void onRouteSelected(@NonNull GpxFile gpxFile, int selectedRoute) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			GpxNavigationHelper.startNavigationForRoute(gpxFile, selectedRoute, mapActivity);
+			mapActivity.getMapActions().startNavigationForRoute(gpxFile, selectedRoute, mapActivity);
 			closeDashboard();
 		}
 	}

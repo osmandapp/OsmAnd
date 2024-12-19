@@ -3,8 +3,15 @@ package net.osmand.plus.views.layers;
 import static net.osmand.util.MapUtils.HIGH_LATLON_PRECISION;
 
 import android.content.Context;
-import android.graphics.*;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint.Cap;
+import android.graphics.Path;
+import android.graphics.PointF;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.LayerDrawable;
 
 import androidx.annotation.NonNull;
@@ -36,7 +43,6 @@ import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.routing.TransportRoutingHelper;
-import net.osmand.shared.routing.*;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
@@ -48,6 +54,7 @@ import net.osmand.plus.views.layers.geometry.PublicTransportGeometryWayContext;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWay;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWayContext;
 import net.osmand.router.TransportRouteResult;
+import net.osmand.shared.routing.ColoringType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -63,10 +70,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	private final RoutingHelper helper;
 	private final TransportRoutingHelper transportHelper;
-	private int currentAnimatedRoute;
-	private float lastRouteBearing;
 	private Location lastRouteProjection;
-	private Location lastFixedLocation;
 
 	private final ChartPointsHelper chartPointsHelper;
 	private TrackChartPoints trackChartPoints;
@@ -137,7 +141,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		attrsWPT.paint2.setStrokeCap(Cap.BUTT);
 		attrsWPT.paint2.setColor(Color.BLACK);
 
-		attrsW = new RenderingLineAttributes("walkingRouteLine");
+		attrsW = new RenderingLineAttributes("straightWalkingRouteLine");
 		attrsW.defaultWidth = (int) (12 * density);
 		attrsW.defaultWidth3 = (int) (7 * density);
 		attrsW.defaultColor = ContextCompat.getColor(getContext(), R.color.nav_track_walk_fill);
@@ -226,10 +230,6 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		QuadRect correctedQuadRect = getCorrectedQuadRect(latlonRect);
 		drawLocations(tileBox, canvas, correctedQuadRect.top, correctedQuadRect.left,
 				correctedQuadRect.bottom, correctedQuadRect.right);
-	}
-
-	public float getLastRouteBearing() {
-		return lastRouteBearing;
 	}
 
 	@Nullable
@@ -469,20 +469,13 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			boolean routeUpdated = routeGeometry.updateRoute(tb, route);
 			boolean shouldShowTurnArrows = shouldShowTurnArrows();
 
-			if (routeUpdated) {
-				currentAnimatedRoute = 0;
-			}
 			Location lastProjection;
-			float lastBearing;
 			int startLocationIndex;
 			if (directTo) {
 				lastProjection = null;
-				lastBearing = 0.0f;
 				startLocationIndex = 0;
 			} else if (route.getCurrentStraightAngleRoute() > 0) {
 				Location lastFixedLocation = helper.getLastFixedLocation();
-				boolean lastFixedLocationChanged = !MapUtils.areLatLonEqual(this.lastFixedLocation, lastFixedLocation);
-				this.lastFixedLocation = lastFixedLocation;
 				Location currentLocation = new Location(lastFixedLocation);
 				MapRendererView mapRenderer = getMapRenderer();
 				OsmandApplication app = getApplication();
@@ -504,43 +497,30 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 					currentLocation.setLongitude(tb.getLongitude());
 				}
 				List<Location> locations = route.getImmutableAllLocations();
-				float posTolerance = RoutingHelper.getPosTolerance(currentLocation.hasAccuracy()
-						? currentLocation.getAccuracy() : 0);
-				int currentAnimatedRoute = helper.calculateCurrentRoute(currentLocation, posTolerance,
-						locations, this.currentAnimatedRoute, false);
-				// calculate projection of current location
-
-				if (currentAnimatedRoute > 0) {
-					Location previousRouteLocation = locations.get(currentAnimatedRoute - 1);
-					Location currentRouteLocation = locations.get(currentAnimatedRoute);
-					lastProjection = RoutingHelperUtils.getProject(
-							currentLocation, previousRouteLocation, currentRouteLocation);
-					lastBearing = lastProjection.getBearing();
-					if (!MapUtils.areLatLonEqual(previousRouteLocation, currentRouteLocation)) {
-						lastBearing = MapUtils.normalizeDegrees360(previousRouteLocation.bearingTo(currentRouteLocation));
-					}
-					if (app.getSettings().SNAP_TO_ROAD.get() && currentAnimatedRoute + 1 < locations.size()) {
-						Location nextRouteLocation = locations.get(currentAnimatedRoute + 1);
-						RoutingHelperUtils.approximateBearingIfNeeded(helper, lastProjection, currentLocation,
-								previousRouteLocation, currentRouteLocation, nextRouteLocation, true);
+				int currentRoute = route.getCurrentRouteForLocation(currentLocation);
+				if (currentRoute > 0) {
+					Location previousRouteLocation = locations.get(currentRoute - 1);
+					Location currentRouteLocation = locations.get(currentRoute);
+					lastProjection = RoutingHelperUtils.getProject(currentLocation, previousRouteLocation, currentRouteLocation);
+					float calcbearing = !MapUtils.areLatLonEqual(previousRouteLocation, currentRouteLocation) ? previousRouteLocation.bearingTo(currentRouteLocation) :
+							previousRouteLocation.bearingTo(currentLocation);
+					lastProjection.setBearing(MapUtils.normalizeDegrees360(calcbearing));
+					if (currentLocation.distanceTo(lastProjection) > helper.getMaxAllowedProjectDist(currentLocation)) {
+						lastProjection = null;
+					} else if (app.getSettings().SNAP_TO_ROAD.get() && currentRoute + 1 < locations.size()) {
+						// Not needed here as this code for preview turns
+//						Location nextRouteLocation = locations.get(currentRoute + 1);
+//						RoutingHelperUtils.approximateBearingIfNeeded(helper, lastProjection, currentLocation,
+//								previousRouteLocation, currentRouteLocation, nextRouteLocation, true);
 					}
 				} else {
 					lastProjection = null;
-					lastBearing = 0.0f;
 				}
-				startLocationIndex = currentAnimatedRoute;
-				if (lastFixedLocationChanged) {
-					if (currentAnimatedRoute > route.getCurrentRoute() + 1) {
-						currentAnimatedRoute = route.getCurrentRoute();
-					}
-					this.currentAnimatedRoute = currentAnimatedRoute;
-				}
+				startLocationIndex = currentRoute;
 			} else {
 				lastProjection = straight || routeUpdated ? helper.getLastFixedLocation() : helper.getLastProjection();
-				lastBearing = lastProjection != null && lastProjection.hasBearing() ? lastProjection.getBearing() : lastRouteBearing;
 				startLocationIndex = route.getCurrentStraightAngleRoute();
 			}
-			lastRouteBearing = lastBearing;
 			lastRouteProjection = lastProjection;
 			boolean draw = true;
 			if (routeGeometry.hasMapRenderer()) {

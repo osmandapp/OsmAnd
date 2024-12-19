@@ -70,7 +70,7 @@ open class OBDTextWidget(
 			fieldType == OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_HOUR ||
 			fieldType == OBDTypeWidget.FUEL_CONSUMPTION_RATE_LITER_KM
 		) {
-			averageTimeSeconds = 5 * 60
+			averageTimeSeconds = fieldType.defaultAverageTime
 		}
 
 		widgetComputer =
@@ -147,7 +147,6 @@ open class OBDTextWidget(
 
 	override fun updateSimpleWidgetInfo(drawSettings: DrawSettings?) {
 		val visible = widgetType.isPurchased(app)
-		updateVisibility(visible)
 		if (visible) {
 			updateSimpleWidgetInfoImpl()
 		}

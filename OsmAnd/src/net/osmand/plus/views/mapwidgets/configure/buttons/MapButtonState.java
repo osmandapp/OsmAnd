@@ -1,6 +1,7 @@
 package net.osmand.plus.views.mapwidgets.configure.buttons;
 
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.BIG_SIZE_DP;
+import static net.osmand.plus.quickaction.ButtonAppearanceParams.ORIGINAL_VALUE;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.TRANSPARENT_ALPHA;
 
@@ -18,6 +19,7 @@ import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
+import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -60,11 +62,11 @@ public abstract class MapButtonState {
 		this.allPreferences = new ArrayList<>();
 
 		this.iconPref = addPreference(settings.registerStringPreference(id + "_icon", null)).makeProfile().cache();
-		this.sizePref = addPreference(settings.registerIntPreference(id + "_size", -1)).makeProfile().cache();
-		this.opacityPref = addPreference(settings.registerFloatPreference(id + "_opacity", -1)).makeProfile().cache();
-		this.cornerRadiusPref = addPreference(settings.registerIntPreference(id + "_corner_radius", -1)).makeProfile().cache();
-		this.portraitPositionPref = addPreference(settings.registerLongPreference(id + "_position_portrait", -1)).makeProfile().cache();
-		this.landscapePositionPref = addPreference(settings.registerLongPreference(id + "_position_landscape", -1)).makeProfile().cache();
+		this.sizePref = addPreference(settings.registerIntPreference(id + "_size", ORIGINAL_VALUE)).makeProfile().cache();
+		this.opacityPref = addPreference(settings.registerFloatPreference(id + "_opacity", ORIGINAL_VALUE)).makeProfile().cache();
+		this.cornerRadiusPref = addPreference(settings.registerIntPreference(id + "_corner_radius", ORIGINAL_VALUE)).makeProfile().cache();
+		this.portraitPositionPref = addPreference(settings.registerLongPreference(id + "_position_portrait", ORIGINAL_VALUE)).makeProfile().cache();
+		this.landscapePositionPref = addPreference(settings.registerLongPreference(id + "_position_landscape", ORIGINAL_VALUE)).makeProfile().cache();
 		this.positionSize = setupButtonPosition(new ButtonPositionSize(getId()));
 		this.defaultPositionSize = setupButtonPosition(new ButtonPositionSize(getId()));
 
@@ -90,7 +92,20 @@ public abstract class MapButtonState {
 
 	@NonNull
 	public ButtonAppearanceParams createDefaultAppearanceParams() {
-		return new ButtonAppearanceParams(getDefaultIconName(), getDefaultSize(), getDefaultOpacity(), getDefaultCornerRadius());
+		MapButtonsHelper buttonsHelper = app.getMapButtonsHelper();
+		int size = buttonsHelper.getDefaultSizePref().get();
+		if (size <= 0) {
+			size = getDefaultSize();
+		}
+		float opacity = buttonsHelper.getDefaultOpacityPref().get();
+		if (opacity < 0) {
+			opacity = getDefaultOpacity();
+		}
+		int cornerRadius = buttonsHelper.getDefaultCornerRadiusPref().get();
+		if (cornerRadius < 0) {
+			cornerRadius = getDefaultCornerRadius();
+		}
+		return new ButtonAppearanceParams(getDefaultIconName(), size, opacity, cornerRadius);
 	}
 
 	@LayoutRes
@@ -209,10 +224,7 @@ public abstract class MapButtonState {
 		if (value != null && value > 0) {
 			position.fromLongValue(value);
 		}
-		int size = sizePref.get();
-		if (size <= 0) {
-			size = getDefaultSize();
-		}
+		int size = createAppearanceParams().getSize();
 		size = (size / 8) + 1;
 		position.setSize(size, size);
 	}

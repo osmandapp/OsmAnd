@@ -1,7 +1,6 @@
 package net.osmand.plus.views.layers;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
-import static net.osmand.plus.views.layers.geometry.GeometryWayDrawer.VECTOR_LINE_SCALE_COEF;
 
 import android.Manifest;
 import android.content.Context;
@@ -59,6 +58,7 @@ import net.osmand.plus.views.MoveMarkerBottomSheetHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapSelectionHelper.MapSelectionResult;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.plus.views.layers.geometry.GeometryWayDrawer;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
@@ -236,7 +236,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 						builder.setPoints(points)
 								.setIsHidden(false)
 								.setLineId(1)
-								.setLineWidth(outlinePaint.getStrokeWidth() * VECTOR_LINE_SCALE_COEF)
+								.setLineWidth(outlinePaint.getStrokeWidth() * GeometryWayDrawer.getVectorLineScale(getApplication()))
 								.setFillColor(NativeUtilities.createFColorARGB(outlinePaint.getColor()))
 								.setApproximationEnabled(false)
 								.setBaseOrder(getBaseOrder());

@@ -71,6 +71,9 @@ public class WidgetsSettingsHelper {
 		mapButtonsHelper.getCompassButtonState().getVisibilityPref().resetModeToDefault(appMode);
 		settings.SHOW_DISTANCE_RULER.resetModeToDefault(appMode);
 		mapButtonsHelper.resetButtonStatesForMode(appMode, mapButtonsHelper.getAllButtonsStates());
+		mapButtonsHelper.getDefaultSizePref().resetModeToDefault(appMode);
+		mapButtonsHelper.getDefaultOpacityPref().resetModeToDefault(appMode);
+		mapButtonsHelper.getDefaultCornerRadiusPref().resetModeToDefault(appMode);
 	}
 
 	public void copyConfigureScreenSettings(@NonNull ApplicationMode fromAppMode) {
@@ -84,6 +87,9 @@ public class WidgetsSettingsHelper {
 		copyPrefFromAppMode(settings.DISTANCE_BY_TAP_TEXT_SIZE, fromAppMode);
 		copyPrefFromAppMode(settings.SHOW_SPEEDOMETER, fromAppMode);
 		copyPrefFromAppMode(settings.SPEEDOMETER_SIZE, fromAppMode);
+		copyPrefFromAppMode(mapButtonsHelper.getDefaultSizePref(),fromAppMode);
+		copyPrefFromAppMode(mapButtonsHelper.getDefaultOpacityPref(),fromAppMode);
+		copyPrefFromAppMode(mapButtonsHelper.getDefaultCornerRadiusPref(),fromAppMode);
 		mapButtonsHelper.copyButtonStatesFromMode(appMode, fromAppMode, mapButtonsHelper.getAllButtonsStates());
 	}
 

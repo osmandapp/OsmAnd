@@ -133,11 +133,11 @@ public class MapButtonAppearanceFragment extends BaseOsmAndFragment implements C
 		mapButtonCard = new MapButtonCard(activity, buttonState, appearanceParams);
 		addCard(container, mapButtonCard);
 		addCard(container, new ButtonIconsCard(activity, iconController));
-		addCard(container, new CornerRadiusCard(activity, appearanceParams));
+		addCard(container, new CornerRadiusCard(activity, appearanceParams, false));
 		container.addView(themedInflater.inflate(R.layout.simple_divider_item, container, false));
-		addCard(container, new ButtonSizeCard(activity, appearanceParams));
+		addCard(container, new ButtonSizeCard(activity, appearanceParams, false));
 		container.addView(themedInflater.inflate(R.layout.simple_divider_item, container, false));
-		addCard(container, new OpacitySliderCard(activity, appearanceParams));
+		addCard(container, new OpacitySliderCard(activity, appearanceParams, false));
 	}
 
 	private void addCard(@NonNull ViewGroup container, @NonNull BaseCard card) {

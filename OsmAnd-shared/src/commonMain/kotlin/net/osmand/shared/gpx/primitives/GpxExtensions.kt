@@ -50,7 +50,7 @@ open class GpxExtensions {
 	}
 
 	fun copyExtensions(e: GpxExtensions) {
-		val extensionsToRead = e.getExtensionsToRead()
+		val extensionsToRead = e.getExtensionsToRead().toMap()
 		if (extensionsToRead.isNotEmpty()) {
 			getExtensionsToWrite().putAll(extensionsToRead)
 		}
@@ -86,9 +86,5 @@ open class GpxExtensions {
 
 	fun removeColor() {
 		getExtensionsToWrite().remove(GpxUtilities.COLOR_NAME_EXTENSION)
-	}
-
-	companion object {
-		const val OBF_GPX_EXTENSION_TAG_PREFIX = "gpx_" // enlisted in poi_types.xml under name="route_track"
 	}
 }

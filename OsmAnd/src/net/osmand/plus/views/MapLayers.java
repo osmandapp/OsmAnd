@@ -63,6 +63,7 @@ public class MapLayers {
 	private final static String LAYER_ADD = "LAYER_ADD";
 
 	private final OsmandApplication app;
+
 	private final MapWidgetRegistry mapWidgetRegistry;
 
 	// the order of layer should be preserved ! when you are inserting new layer
@@ -644,10 +645,6 @@ public class MapLayers {
 
 	public MapControlsLayer getMapControlsLayer() {
 		return mapControlsLayer;
-	}
-
-	public MapActionsHelper getMapActionsHelper() {
-		return mapControlsLayer.getMapActionsHelper();
 	}
 
 	public MapQuickActionLayer getMapQuickActionLayer() {

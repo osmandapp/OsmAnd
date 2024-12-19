@@ -5,11 +5,14 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PathEffect;
 import android.graphics.RectF;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
+import net.osmand.plus.render.OsmandDashPathEffect;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.RenderingLineAttributes;
 
@@ -35,7 +38,7 @@ public class CommonGeometryWayContext extends GeometryWayContext {
 	}
 
 	public void updatePaints(boolean nightMode, @NonNull RenderingLineAttributes attrs,
-	                         @NonNull RenderingLineAttributes attrsW) {
+			@NonNull RenderingLineAttributes attrsW) {
 		this.attrsW = attrsW;
 		updatePaints(nightMode, attrs);
 	}
@@ -58,7 +61,7 @@ public class CommonGeometryWayContext extends GeometryWayContext {
 
 		// create anchor bitmap
 		float density = getDensity();
-		float margin = 2f * density;
+		float margin = getArrowMargin();
 
 		// create walk arrow bitmap
 		float width = walkCircleW + margin * 2;
@@ -87,5 +90,19 @@ public class CommonGeometryWayContext extends GeometryWayContext {
 		canvas.drawBitmap(arrowBitmap, width / 2 - arrowBitmap.getWidth() / 2f, height / 2 - arrowBitmap.getHeight() / 2f, paint);
 
 		walkArrowBitmap = bitmap;
+	}
+
+	protected float getArrowMargin() {
+		float[] intervals = getDashPattern(attrsW.paint);
+		return intervals != null && intervals.length >= 2 ? intervals[1] : 2f * getDensity();
+	}
+
+	@Nullable
+	private float[] getDashPattern(@NonNull Paint paint) {
+		PathEffect pathEffect = paint.getPathEffect();
+		if (pathEffect instanceof OsmandDashPathEffect) {
+			return ((OsmandDashPathEffect) pathEffect).getIntervals();
+		}
+		return null;
 	}
 }

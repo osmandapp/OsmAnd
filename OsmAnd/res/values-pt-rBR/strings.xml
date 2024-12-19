@@ -5859,7 +5859,7 @@
     <string name="type_of_activity">Tipo de atividade</string>
     <string name="change_activity">Alterar atividade</string>
     <string name="shared_string_increase">Aumentar</string>
-    <string name="rendering_attr_showDirtbikeTrails_description">Mostrar trilhas de terra para bicicletas</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Mostrar trilhas de terra para motos fora de estrada</string>
     <string name="shared_string_decrease">Diminuir</string>
     <string name="unit_volt">V</string>
     <string name="wikimedia">Wikimedia</string>
@@ -5891,7 +5891,6 @@
     <string name="obd_engine_coolant_temp">Temperatura do líquido de arrefecimento</string>
     <string name="obd_fuel_level">Eficiência de combustível (%)</string>
     <string name="obd_fuel_consumption_rate">Taxa de consumo de combustível</string>
-    <string name="obd_fuel_left_distance">Combustível restante (distância)</string>
     <string name="obd_fuel_type">Tipo de combustível</string>
     <string name="obd_plugin_name">Métricas de veículos</string>
     <string name="reset_average_speed">Redefinir velocidade média</string>
@@ -5934,7 +5933,7 @@
     <string name="connect_obd_instructions_step3">Ative o Bluetooth no seu dispositivo</string>
     <string name="learn_more_about_obd_sensors">Saiba mais sobre sensores.</string>
     <string name="screen_is_locked_by_action_button">A tela sensível ao toque está bloqueada. Toque no botão para desbloquear.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Trilhas de terra para bicicletas</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Trilhas de terra para motos fora de estrada</string>
     <string name="obd_fuel_type_bifuel_ethanol">Funcionamento bicombustível a etanol</string>
     <string name="liter_per_hour">l/h</string>
     <string name="obd_fuel_type_hybrid_electric_combustion">Híbrido elétrico e motor a combustão</string>
@@ -5948,7 +5947,6 @@
     <string name="obd_fuel_left_liters">Combustível restante (litros)</string>
     <string name="obd_fuel_type_hybrid_hydrogen">Hidrogênio híbrido</string>
     <string name="shared_string_obd">OBD</string>
-    <string name="obd_rpm">RPM</string>
     <string name="rpm_unit">rpm</string>
     <string name="obd_fuel_level_desc">Mostra o nível de combustível do veículo pelo sensor OBD</string>
     <string name="obd_fuel_left_distance_desc">Mostra a distância que o veículo pode percorrer com o nível de combustível esquerdo no sensor OBD</string>
@@ -5957,7 +5955,6 @@
     <string name="obd_fuel_consumption_rate_sensor_desc">Mostra a taxa de consumo de combustível do veículo com base no sensor (l/h)</string>
     <string name="obd_fuel_level_liter">Nível de combustível (l)</string>
     <string name="obd_fuel_level_percent">Nível de combustível (%)</string>
-    <string name="obd_fuel_left_liter">Combustível restante (l)</string>
     <string name="obd_fuel_left_km">Combustível restante (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Taxa de consumo de combustível (obd)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Taxa de consumo de combustível l/h</string>
@@ -5967,14 +5964,13 @@
     <string name="obd_fuel_consumption_rate_l_h">Taxa de consumo de combustível (l/h)</string>
     <string name="obd_fuel_consumption_rate_l_h_desc">Mostra a taxa de consumo de combustível do veículo com base em cálculos (l/h)</string>
     <string name="route_guidance_desc">Fornece orientação de rota em tempo real, incluindo distância até a próxima curva, nome da estrada, nome da rua atual e informações sobre a pista. Os widgets ficam ativos durante a navegação.</string>
-    <string name="obd_fuel_left_percent">Combustível restante (%)</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Taxa de consumo de combustível %/h</string>
     <string name="third_links">Links de terceiros</string>
     <string name="obd_fuel_type_bifuel_hydrogen">Hidrogénio em funcionamento bicombustível</string>
     <string name="connect_obd_instructions_step2">Ligue o motor do seu veículo</string>
     <string name="connect_obd_instructions_title">O OsmAnd suporta conexões Bluetooth com scanners OBD-II.</string>
     <string name="connect_obd_instructions_step1">Conecte o scanner à porta OBD-II do seu veículo.</string>
-    <string name="connect_obd_instructions_step4">Toque em \'Conectar\' e selecione o scanner na lista.</string>
+    <string name="connect_obd_instructions_step4">Toque em \'%1$s\' e selecione o scanner na lista.</string>
     <string name="vehicle_metrics_plugin_settings">Configurações de métricas do veículo</string>
     <string name="obd_rpm_desc">Mostra as RPM do tacômetro do veículo pelo sensor OBD</string>
     <string name="screen_is_locked_by_external_button">A tela sensível ao toque está bloqueada. Para desbloquear, pressione o botão %1$s ou toque no botão na tela.</string>

@@ -12,9 +12,15 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
+import net.osmand.shared.data.KLatLon;
+import net.osmand.shared.util.KMapUtils;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -25,6 +31,7 @@ public class RoutingHelperUtils {
 
 	private static final int CACHE_RADIUS = 100000;
 	public static final int MAX_BEARING_DEVIATION = 45;
+	private static final Log log = LogFactory.getLog(RoutingHelperUtils.class);
 
 	@NonNull
 	public static String formatStreetName(@Nullable String name, @Nullable String ref, @Nullable String destination,
@@ -109,12 +116,8 @@ public class RoutingHelperUtils {
 	}
 
 	public static void approximateBearingIfNeeded(@NonNull RoutingHelper routingHelper,
-	                                              @NonNull Location projection,
-	                                              @NonNull Location location,
-	                                              @NonNull Location previousRouteLocation,
-	                                              @NonNull Location currentRouteLocation,
-	                                              @NonNull Location nextRouteLocation,
-	                                              boolean previewNextTurn) {
+			@NonNull Location projection, @NonNull Location location, @NonNull Location previousRouteLocation, @NonNull Location currentRouteLocation,
+			@NonNull Location nextRouteLocation, boolean previewNextTurn) {
 		double dist = location.distanceTo(projection);
 		double maxDist = routingHelper.getMaxAllowedProjectDist(currentRouteLocation);
 		if (dist >= maxDist) {
@@ -271,5 +274,60 @@ public class RoutingHelperUtils {
 			}
 		}
 		return parameters;
+	}
+
+	@NonNull
+	public static List<Location> predictLocations(Location previousLocation, Location currentLocation,
+	                                        double timeInSeconds, RouteCalculationResult route) {
+		float speedPrev = previousLocation.getSpeed();
+		float speedNew = currentLocation.getSpeed();
+		double avgSpeed = (speedPrev + speedNew) / 2.0;
+		double remainingDistance = avgSpeed * timeInSeconds * 0.8;
+
+		List<Location> predictedLocations = new ArrayList<>();
+		int currentRoute = route.getCurrentRouteForLocation(currentLocation) + 1;
+		List<Location> routeLocations = route.getImmutableAllLocations();
+		for (int i = currentRoute; i < routeLocations.size() - 1; i++) {
+			Location pointA;
+			Location pointB;
+			if (i == currentRoute) {
+				pointA = currentLocation;
+				pointB = routeLocations.get(i);
+			} else {
+				pointA = routeLocations.get(i);
+				pointB = routeLocations.get(i + 1);
+			}
+			double segmentDistance = pointA.distanceTo(pointB);
+			if (remainingDistance <= segmentDistance) {
+				double fraction = remainingDistance / segmentDistance;
+				KLatLon interpolatedLoc = KMapUtils.INSTANCE.interpolateLatLon(
+						pointA.getLatitude(), pointA.getLongitude(), pointB.getLatitude(), pointB.getLongitude(), fraction);
+				Location predictedPoint = buildPredictedLocation(currentLocation, pointA, pointB);
+				predictedPoint.setLatitude(interpolatedLoc.getLatitude());
+				predictedPoint.setLongitude(interpolatedLoc.getLongitude());
+				predictedLocations.add(predictedPoint);
+				break;
+			} else {
+				predictedLocations.add(buildPredictedLocation(currentLocation, pointA, pointB));
+				remainingDistance -= segmentDistance;
+			}
+		}
+
+		if (predictedLocations.isEmpty() && !routeLocations.isEmpty()) {
+			Location lastRouteLocation = routeLocations.get(routeLocations.size() - 1);
+			predictedLocations.add(buildPredictedLocation(currentLocation, currentLocation, lastRouteLocation));
+		}
+
+		return predictedLocations;
+	}
+
+	@NonNull
+	private static Location buildPredictedLocation(Location currentLocation, Location pointA, Location pointB) {
+		Location predictedPoint = new Location(currentLocation);
+		predictedPoint.setProvider("predicted");
+		predictedPoint.setLatitude(pointB.getLatitude());
+		predictedPoint.setLongitude(pointB.getLongitude());
+		predictedPoint.setBearing(pointA.bearingTo(pointB));
+		return predictedPoint;
 	}
 }

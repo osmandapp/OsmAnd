@@ -51,6 +51,8 @@ class TracksScreen(
 		lifecycle.addObserver(this)
 	}
 
+	override fun shouldRestoreMapState() = true
+
 	override fun onCreate(owner: LifecycleOwner) {
 		super.onCreate(owner)
 		loadTracksTask = LoadTracksTask()
@@ -83,7 +85,7 @@ class TracksScreen(
         val title = if (trackTab.type == TrackTabType.ALL) {
             app.getString(R.string.sort_last_modified)
         } else {
-            trackTab.getName(app)
+            trackTab.getName()
         }
         val isLoading = loadTracksTask.status != AsyncTask.Status.FINISHED
         templateBuilder.setLoading(isLoading)

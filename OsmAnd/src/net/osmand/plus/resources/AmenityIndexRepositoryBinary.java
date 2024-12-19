@@ -10,6 +10,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
@@ -176,10 +177,10 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 
 	@Override
 	public synchronized List<Amenity> searchAmenities(int stop, int sleft, int sbottom, int sright, int zoom,
-													  SearchPoiTypeFilter filter, ResultMatcher<Amenity> matcher) {
+													  SearchPoiTypeFilter filter, SearchPoiAdditionalFilter additionalFilter, ResultMatcher<Amenity> matcher) {
 		long now = System.currentTimeMillis();
 		SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(sleft, sright, stop, sbottom, zoom,
-				filter, matcher);
+				filter, additionalFilter, matcher);
 		List<Amenity> result = null;
 		try {
 			BinaryMapIndexReader reader = getOpenFile();

@@ -903,7 +903,7 @@ public class RouteResultPreparation {
 						if (!Algorithms.isEmpty(nm) || !Algorithms.isEmpty(ref)) {
 							streetName = String.format("onto %s %s " , nm, ref);
 						}
-						String to = result.get(prevSegment + 1).getDestinationName("", false, result, prevSegment + 1);
+						String to = result.get(prevSegment + 1).getDestinationName("", false, result, prevSegment + 1, true);
 						if(!Algorithms.isEmpty(to)) {
 							streetName = "to " + to; 
 						}

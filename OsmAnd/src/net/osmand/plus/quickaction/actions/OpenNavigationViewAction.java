@@ -13,7 +13,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.views.layers.MapActionsHelper;
 
 public class OpenNavigationViewAction extends QuickAction {
 
@@ -35,10 +34,7 @@ public class OpenNavigationViewAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-		MapActionsHelper controlsHelper = mapActivity.getMapLayers().getMapActionsHelper();
-		if (controlsHelper != null) {
-			controlsHelper.doRoute();
-		}
+		mapActivity.getMapActions().doRoute();
 	}
 
 	@Override

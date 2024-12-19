@@ -4,6 +4,7 @@ import static net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget.MAX_SHIE
 import static net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget.setShieldImage;
 import static java.lang.Math.min;
 
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 import android.view.Gravity;
@@ -77,7 +78,8 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	private boolean isFullRow;
 	protected boolean verticalWidget;
 
-	public NextTurnBaseWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @NonNull WidgetType widgetType, @Nullable WidgetsPanel panel, boolean horizontalMini) {
+	public NextTurnBaseWidget(@NonNull MapActivity mapActivity, @Nullable String customId,
+			@NonNull WidgetType widgetType, @Nullable WidgetsPanel panel, boolean horizontalMini) {
 		super(mapActivity, widgetType);
 		this.horizontalMini = horizontalMini;
 		this.customId = customId;
@@ -179,7 +181,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		} else {
 			boolean vis = updateVisibility(turnType != null);
 			if (turnDrawable.setTurnType(turnType) || vis) {
-				turnDrawable.setTextPaint(topTextView.getPaint());
+				turnDrawable.setTextPaint(textPaint);
 				if (horizontalMini) {
 					setImageDrawable(turnDrawable, false);
 				} else {
@@ -342,8 +344,8 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			updateVerticalWidgetColors(textState);
 		} else {
 			super.updateColors(textState);
-			updateTextColor(topTextView, null, textState.textColor, textState.textShadowColor,
-					textState.textBold, textState.textShadowRadius);
+			updateTextColor(topTextView, null, textState.textColor,
+					textState.textShadowColor, textState.textBold, textState.textShadowRadius);
 
 			textPaint.set(topTextView.getPaint());
 			textPaint.setColor(textState.textColor);
@@ -353,6 +355,8 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	}
 
 	protected void updateVerticalWidgetColors(@NonNull TextState textState) {
+		int typefaceStyle = textState.textBold ? Typeface.BOLD : Typeface.NORMAL;
+
 		nightMode = textState.night;
 		int exitRefTextColorId = isNightMode()
 				? R.color.text_color_primary_dark
@@ -362,6 +366,9 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		distanceView.setTextColor(ContextCompat.getColor(app, exitRefTextColorId));
 		distanceSubView.setTextColor(ColorUtilities.getSecondaryTextColor(mapActivity, nightMode));
 		streetView.setTextColor(ColorUtilities.getSecondaryTextColor(mapActivity, nightMode));
+		distanceView.setTypeface(Typeface.DEFAULT, typefaceStyle);
+		distanceSubView.setTypeface(Typeface.DEFAULT, typefaceStyle);
+		streetView.setTypeface(Typeface.DEFAULT, typefaceStyle);
 
 		bg.setBackgroundResource(textState.widgetBackgroundId);
 	}

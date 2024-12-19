@@ -27,7 +27,6 @@ class LandingScreen(
     init {
         lifecycle.addObserver(object : DefaultLifecycleObserver {
             override fun onResume(owner: LifecycleOwner) {
-                Log.d("AA_navigation", "LandingScreen onResume: ")
                 app.carNavigationSession?.updateCarNavigation(app.locationProvider.lastKnownLocation)
             }
         })

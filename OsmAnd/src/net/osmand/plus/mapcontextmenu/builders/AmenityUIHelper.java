@@ -571,6 +571,10 @@ public class AmenityUIHelper extends MenuBuilder {
 			buildDetailsRow(amenitiesRow, getRowIcon(R.drawable.ic_action_map_language), name,
 					app.getString(R.string.ltr_or_rtl_combine_via_colon, hint, nameLocale.getDisplayLanguage()), null,
 					namesMap.size() > 1 ? getNamesCollapsableView(namesMap, nameLocale.getLanguage(), hint) : null, true, null);
+			int viewGroupChildCount = viewGroup.getChildCount();
+			if (viewGroupChildCount > 0 && !isDividerAtPosition(viewGroup, viewGroupChildCount - 1)) {
+				buildRowDivider(viewGroup, viewGroupChildCount);
+			}
 			viewGroup.addView(amenitiesRow);
 		}
 	}

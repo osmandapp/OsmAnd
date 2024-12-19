@@ -652,7 +652,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		return object.toString() + ": " + startPointIndex + "-" + endPointIndex;
 	}
 
-	public String getDestinationName(String lang, boolean transliterate, List<RouteSegmentResult> list, int routeInd) {
+	public String getDestinationName(String lang, boolean transliterate, List<RouteSegmentResult> list, int routeInd, boolean withRef) {
 		String dnRef = getObject().getDestinationRef(lang, transliterate, isForwardDirection());
 		String destinationName = getObject().getDestinationName(lang, transliterate, isForwardDirection());
 		if (Algorithms.isEmpty(destinationName)) {
@@ -678,10 +678,12 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 				}
 			}
 		}
-		if (!Algorithms.isEmpty(dnRef) && !Algorithms.isEmpty(destinationName)) {
-			destinationName = dnRef + ", " + destinationName;
-		} else if (!Algorithms.isEmpty(dnRef) && Algorithms.isEmpty(destinationName)) {
-			destinationName = dnRef;
+		if (withRef) {
+			if (!Algorithms.isEmpty(dnRef) && !Algorithms.isEmpty(destinationName)) {
+				destinationName = dnRef + ", " + destinationName;
+			} else if (!Algorithms.isEmpty(dnRef) && Algorithms.isEmpty(destinationName)) {
+				destinationName = dnRef;
+			}
 		}
 		return destinationName;
 	}

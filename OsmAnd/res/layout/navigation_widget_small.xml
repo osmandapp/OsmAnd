@@ -7,9 +7,8 @@
 	android:layout_height="@dimen/simple_widget_small_height"
 	android:orientation="vertical"
 	android:paddingStart="9dp"
-	android:paddingTop="6dp"
-	android:paddingEnd="16dp"
-	android:paddingBottom="3dp">
+	android:paddingVertical="6dp"
+	android:paddingEnd="16dp">
 
 	<LinearLayout
 		android:id="@+id/container"

@@ -19,11 +19,13 @@ import net.osmand.util.Algorithms
 abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext),
 	DefaultLifecycleObserver {
 
-	protected var prevElevationAngle = 90f
-	protected var prevRotationAngle = 0f
-	protected var prevZoom: Zoom? = null
-	protected var prevMapLinkedToLocation = false
-	protected val ANIMATION_RETURN_FROM_PREVIEW_TIME = 1500
+	private val ANIMATION_RETURN_FROM_PREVIEW_TIME = 1500
+
+	private var prevElevationAngle = 90f
+	private var prevRotationAngle = 0f
+	private var prevZoom: Zoom? = null
+	private var prevMapLinkedToLocation = false
+	private var prevStateSaved = false
 
 	protected val app: OsmandApplication
 		get() {
@@ -46,6 +48,8 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 		)
 	}
 
+	protected open fun shouldRestoreMapState(): Boolean = false
+
 	protected open fun getConstraintLimitType(): Int {
 		return ConstraintManager.CONTENT_LIMIT_TYPE_LIST
 	}
@@ -58,6 +62,7 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 			RoutePreviewScreen(carContext, settingsAction, result, true)
 		) { obj: Any? ->
 			obj?.let {
+				screenManager.popToRoot()
 				startNavigation()
 				finish()
 			}
@@ -68,7 +73,7 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 	}
 
 	private fun startNavigation() {
-		app.osmandMap.mapLayers.mapActionsHelper.startNavigation()
+		app.osmandMap.mapActions.startNavigation()
 		val session = app.carNavigationSession
 		session?.startNavigationScreen()
 	}
@@ -102,13 +107,15 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 			if (!mapRect.hasInitialState()) {
 				val mapView = app.osmandMap.mapView
 				val tb = mapView.rotatedTileBox
-				tb.setCenterLocation(tb.centerPixelX.toFloat() / tb.pixWidth, 0.5f)
 				tb.rotate = 0f;
-				mapView.fitRectToMap(
-					tb,
-					mapRect.left, mapRect.right, mapRect.top, mapRect.bottom,
-					0, 0, true, true
-				)
+				tb.setZoomAndAnimation(tb.zoom, 0.0, 0.0);
+//				tb.mapDensity = surfaceRenderer.density.toDouble() * app.settings.MAP_DENSITY.get();
+				tb.mapDensity = surfaceRenderer.density.toDouble() * app.osmandMap.mapDensity;
+				val rtl = false; // panel is always on the left
+				val leftPanel =  tb.pixWidth / 2; // assume panel takes half screen
+				val tileBoxWidthPx = tb.pixWidth - leftPanel;
+				mapView.fitRectToMap(tb, mapRect.left, mapRect.right, mapRect.top, mapRect.bottom,
+					tileBoxWidthPx, 0, 0, 0, rtl, 0.75f,true)
 				mapView.refreshMap()
 			}
 		}
@@ -118,14 +125,37 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 		session?.navigationCarSurface?.handleRecenter()
 	}
 
-	override fun onStop(owner: LifecycleOwner) {
+	override fun onCreate(owner: LifecycleOwner) {
+		if (shouldSaveMapState()) {
+			saveMapState()
+		}
+	}
+
+	override fun onDestroy(owner: LifecycleOwner) {
 		if (prevMapLinkedToLocation != app.mapViewTrackingUtilities.isMapLinkedToLocation) {
 			app.mapViewTrackingUtilities.isMapLinkedToLocation = prevMapLinkedToLocation
 		}
-		restoreMapState()
+		if (prevStateSaved) {
+			restoreMapState()
+		}
 	}
 
-	protected open fun restoreMapState() {
+	private fun shouldSaveMapState(): Boolean {
+		return shouldRestoreMapState() && screenManager.screenStack
+			.filterIsInstance<BaseAndroidAutoScreen>()
+			.none { it != this && it.shouldRestoreMapState() }
+	}
+
+	private fun saveMapState() {
+		val mapView = app.osmandMap.mapView
+		prevMapLinkedToLocation = app.mapViewTrackingUtilities.isMapLinkedToLocation
+		prevZoom = mapView.currentZoom
+		prevRotationAngle = mapView.rotate
+		prevElevationAngle = mapView.normalizeElevationAngle(mapView.elevationAngle)
+		prevStateSaved = true
+	}
+
+	private fun restoreMapState() {
 		val mapView = app.osmandMap.mapView
 		val locationProvider = app.locationProvider
 		val lastKnownLocation = locationProvider.lastKnownLocation
@@ -137,14 +167,6 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 			prevElevationAngle,
 			ANIMATION_RETURN_FROM_PREVIEW_TIME.toLong(),
 			false)
-	}
-
-	override fun onStart(owner: LifecycleOwner) {
-		val mapView = app.osmandMap.mapView
-		prevMapLinkedToLocation = app.mapViewTrackingUtilities.isMapLinkedToLocation
-		prevZoom = mapView.currentZoom
-		prevRotationAngle = mapView.rotate
-		prevElevationAngle = mapView.normalizeElevationAngle(mapView.elevationAngle)
 	}
 
 	companion object {
