@@ -110,8 +110,8 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private LockableScrollView scrollView;
 	private IMapLocationListener mapLocationListener;
 	private TouchListener touchListener;
-	private double lat;
-	private double lon;
+	private Double lat = null;
+	private Double lon = null;
 	private boolean portraitMode;
 
 	@Override
@@ -183,6 +183,9 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 				updateTileSourceContent();
 			}
 		});
+		if (lat == null || lon == null) {
+			updateLatLon();
+		}
 		setupDownloadButton();
 		showHideMapControls(false);
 		setupScrollableMapView();
@@ -222,12 +225,14 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 
 	@NonNull
 	private IMapLocationListener getMapLocationListener() {
-		return (v, v1, o) -> {
-			QuadRect rect = getLatLonRectOfMapWindow();
-			LatLon mapWindowCenter = new LatLon(rect.centerY(), rect.centerX());
-			lat = mapWindowCenter.getLatitude();
-			lon = mapWindowCenter.getLongitude();
-		};
+		return (v, v1, o) -> updateLatLon();
+	}
+
+	private void updateLatLon(){
+		QuadRect rect = getLatLonRectOfMapWindow();
+		LatLon mapWindowCenter = new LatLon(rect.centerY(), rect.centerX());
+		lat = mapWindowCenter.getLatitude();
+		lon = mapWindowCenter.getLongitude();
 	}
 
 	@NonNull
