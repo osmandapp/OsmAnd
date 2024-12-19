@@ -17,6 +17,7 @@ import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MapHudCard extends MapBaseCard {
@@ -83,10 +84,10 @@ public class MapHudCard extends MapBaseCard {
 
 	private void setupRulerWidget() {
 		rulerWidget = (RulerWidget) themedInflater.inflate(R.layout.map_ruler, mapHudLayout, false);
+		mapHudLayout.addWidget(rulerWidget);
 
 		MapLayers mapLayers = app.getOsmandMap().getMapLayers();
 		mapLayers.getMapInfoLayer().setupRulerWidget(rulerWidget);
-		mapHudLayout.addWidget(rulerWidget);
 	}
 
 	@Override
@@ -105,6 +106,6 @@ public class MapHudCard extends MapBaseCard {
 
 	public void clearWidgets() {
 		MapLayers mapLayers = app.getOsmandMap().getMapLayers();
-		mapLayers.getMapInfoLayer().setupRulerWidget(rulerWidget);
+		mapLayers.getMapInfoLayer().removeRulerWidgets(Collections.singletonList(rulerWidget));
 	}
 }
