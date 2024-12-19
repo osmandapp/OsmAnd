@@ -224,7 +224,6 @@ public class DefaultButtonsAppearanceFragment extends BaseOsmAndFragment impleme
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		appearanceParams.saveToBundle(outState);
-		originalAppearanceParams.saveToBundle(outState);
 	}
 
 	@Override
