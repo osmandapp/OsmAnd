@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -63,11 +62,30 @@ public class SimpleSingleSelectionBottomSheet extends BasePreferenceBottomSheet 
 			final @NonNull String[] names,
 			final @NonNull Object[] values,
 			final int selectedIndex) {
-		final SimpleSingleSelectionBottomSheet bottomSheet = new SimpleSingleSelectionBottomSheet();
-		bottomSheet.setParameters(title, description, names, values, selectedIndex);
 		return BasePreferenceBottomSheetInitializer
-				.initialize(bottomSheet)
+				.initialize(
+						new SimpleSingleSelectionBottomSheet(
+								title,
+								description,
+								names,
+								values,
+								selectedIndex))
 				.with(Optional.of(preference), appMode, usedOnMap, target);
+	}
+
+	public SimpleSingleSelectionBottomSheet() {
+	}
+
+	public SimpleSingleSelectionBottomSheet(@NonNull String title,
+											@NonNull String description,
+											@NonNull String[] names,
+											@NonNull Object[] values,
+											int selectedEntryIndex) {
+		this.title = title;
+		this.description = description;
+		this.names = names;
+		this.values = values;
+		this.selectedEntryIndex = selectedEntryIndex;
 	}
 
 	@Override
@@ -137,15 +155,6 @@ public class SimpleSingleSelectionBottomSheet extends BasePreferenceBottomSheet 
 			CompoundButton cb = view.findViewById(R.id.compound_button);
 			cb.setChecked(i == selectedEntryIndex);
 		}
-	}
-
-	public void setParameters(@NonNull String title, @NonNull String description, @NonNull String[] names,
-							  @NonNull Object[] values, @Nullable Integer selectedEntryIndex) {
-		this.title = title;
-		this.description = description;
-		this.names = names;
-		this.values = values;
-		this.selectedEntryIndex = selectedEntryIndex != null ? selectedEntryIndex : 0;
 	}
 
 	@Override
