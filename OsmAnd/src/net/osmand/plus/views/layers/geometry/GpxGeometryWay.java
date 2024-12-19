@@ -51,7 +51,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 				|| this.coloringType != coloringType || coloringType == ColoringType.ATTRIBUTE
 				&& !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute);
 
-		this.coloringChanged = this.customColor != trackColor || coloringTypeChanged;
+		this.coloringChanged = this.customColor != trackColor || coloringTypeChanged || this.customWidth != trackWidth;;
 		if (coloringTypeChanged) {
 			resetSymbolProviders();
 		}
