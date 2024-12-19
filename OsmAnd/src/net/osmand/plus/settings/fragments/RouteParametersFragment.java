@@ -66,7 +66,9 @@ import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.RoutingType;
 import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandler;
 import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandlerProvider;
-import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListParameters;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
@@ -91,9 +93,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
-
-public class RouteParametersFragment extends BaseSettingsFragment implements PreferenceFragmentHandlerProvider, SearchablePreferenceDialogProvider {
+public class RouteParametersFragment extends BaseSettingsFragment implements PreferenceFragmentHandlerProvider, ShowableSearchablePreferenceDialogProvider {
 
 	public static final String TAG = RouteParametersFragment.class.getSimpleName();
 
@@ -577,17 +577,9 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 				HazmatCategoryBottomSheet.showInstance(manager, this, HAZMAT_TRANSPORTING_ENABLED, appMode, false, hazmatParameters.localizedNames, hazmatParameters.values, selectedValueIndex);
 			}
 		} else if (GOODS_RESTRICTIONS_PREFERENCE.equals(prefId)) {
-			final FragmentManager manager = getFragmentManager();
-			if (manager != null) {
-				GoodsRestrictionsBottomSheet
-						.createInstance(
-								this,
-								preference,
-								appMode,
-								false,
-								getGoodsRestrictionPreference().getModeValue(appMode))
-						.show(manager, app);
-			}
+			this
+					.getPreferenceDialogForGoodsRestrictionsPreference(preference, this)
+					.show();
 		} else if (ALLOW_VIA_FERRATA_PREFERENCE.equals(prefId)) {
 			FragmentManager manager = getFragmentManager();
 			if (manager != null) {
@@ -635,37 +627,51 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 	}
 
 	@Override
-	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
-		return this
-				.getSearchablePreferenceDialog(preference)
-				.map(SearchablePreferenceDialogFragmentHolder::searchablePreferenceDialogFragment)
-				.map(preferenceDialog ->
-						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-								preferenceDialog,
-								_preferenceDialog -> preferenceDialog.getSearchableInfo()));
-	}
-
-	private Optional<SearchablePreferenceDialogFragmentHolder<?>> getSearchablePreferenceDialog(final Preference preference) {
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(
+			final Preference preference,
+			final Fragment target) {
 		if (settings.ROUTE_RECALCULATION_DISTANCE.getId().equals(preference.getKey())) {
-			return Optional.of(
-					SearchablePreferenceDialogFragmentHolder.of(
-							RecalculateRouteInDeviationBottomSheet.createInstance(
-									preference,
-									null,
-									false,
-									getSelectedAppMode())));
+			return Optional.of(getPreferenceDialogForRouteRecalculationDistancePreference(preference, target));
 		}
 		if (GOODS_RESTRICTIONS_PREFERENCE.equals(preference.getKey())) {
-			return Optional.of(
-					SearchablePreferenceDialogFragmentHolder.of(
-							GoodsRestrictionsBottomSheet.createInstance(
-									null,
-									preference,
-									getSelectedAppMode(),
-									false,
-									getGoodsRestrictionPreference().getModeValue(getSelectedAppMode()))));
+			return Optional.of(getPreferenceDialogForGoodsRestrictionsPreference(preference, target));
 		}
 		return Optional.empty();
+	}
+
+	private ShowableSearchablePreferenceDialog<RecalculateRouteInDeviationBottomSheet> getPreferenceDialogForRouteRecalculationDistancePreference(
+			final Preference preference,
+			final Fragment target) {
+		return new ShowableSearchablePreferenceDialog<>(
+				RecalculateRouteInDeviationBottomSheet.createInstance(
+						preference,
+						target,
+						false,
+						getSelectedAppMode())) {
+
+			@Override
+			protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+				searchablePreferenceDialog.show(getFragmentManager(), app);
+			}
+		};
+	}
+
+	private ShowableSearchablePreferenceDialog<GoodsRestrictionsBottomSheet> getPreferenceDialogForGoodsRestrictionsPreference(
+			final Preference preference,
+			final Fragment target) {
+		return new ShowableSearchablePreferenceDialog<>(
+				GoodsRestrictionsBottomSheet.createInstance(
+						target,
+						preference,
+						getSelectedAppMode(),
+						false,
+						getGoodsRestrictionPreference().getModeValue(getSelectedAppMode()))) {
+
+			@Override
+			protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+				searchablePreferenceDialog.show(getFragmentManager(), app);
+			}
+		};
 	}
 
 	@Override
@@ -675,11 +681,9 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 		FragmentManager manager = getFragmentManager();
 
 		if (settings.ROUTE_RECALCULATION_DISTANCE.getId().equals(prefId)) {
-			if (manager != null) {
-				RecalculateRouteInDeviationBottomSheet
-						.createInstance(preference, this, false, getSelectedAppMode())
-						.show(manager, RecalculateRouteInDeviationBottomSheet.TAG);
-			}
+			this
+					.getPreferenceDialogForRouteRecalculationDistancePreference(preference, this)
+					.show();
 		} else if (!reliefFactorParameters.isEmpty() && prefId.equals(ROUTING_PREFERENCE_PREFIX + USE_HEIGHT_OBSTACLES)) {
 			if (manager != null) {
 				ElevationDateBottomSheet.showInstance(manager, appMode, this, false);
