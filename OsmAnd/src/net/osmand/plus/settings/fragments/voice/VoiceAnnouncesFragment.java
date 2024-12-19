@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.fragments.voice;
 
+import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
 import android.graphics.drawable.ColorDrawable;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
@@ -27,9 +29,9 @@ import net.osmand.plus.settings.bottomsheets.AnnouncementTimeBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SpeedLimitBottomSheet;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.settings.fragments.SearchablePreferenceDialogFragmentHolder;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
-import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -39,9 +41,7 @@ import net.osmand.shared.settings.enums.SpeedConstants;
 
 import java.util.Optional;
 
-import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
-
-public class VoiceAnnouncesFragment extends BaseSettingsFragment implements SearchablePreferenceDialogProvider {
+public class VoiceAnnouncesFragment extends BaseSettingsFragment implements ShowableSearchablePreferenceDialogProvider {
 
 	public static final String TAG = VoiceAnnouncesFragment.class.getSimpleName();
 
@@ -254,32 +254,35 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements Sear
 	}
 
 	@Override
-	public void onDisplayPreferenceDialog(Preference preference) {
-		this
-				.createSearchablePreferenceDialog(preference, this)
-				.map(SearchablePreferenceDialogFragmentHolder::searchablePreferenceDialogFragment)
-				.ifPresentOrElse(
-						this::show,
-						() -> {
-							if (settings.VOICE_PROVIDER.getId().equals(preference.getKey())) {
-								VoiceLanguageBottomSheetFragment.showInstance(requireActivity().getSupportFragmentManager(), this, getSelectedAppMode(), false);
-							} else {
-								super.onDisplayPreferenceDialog(preference);
-							}
-						});
+	public void onDisplayPreferenceDialog(final Preference preference) {
+		if (showDialogForPreference(preference, this)) {
+			return;
+		}
+		if (settings.VOICE_PROVIDER.getId().equals(preference.getKey())) {
+			VoiceLanguageBottomSheetFragment.showInstance(requireActivity().getSupportFragmentManager(), this, getSelectedAppMode(), false);
+			return;
+		}
+		super.onDisplayPreferenceDialog(preference);
 	}
 
-	private Optional<SearchablePreferenceDialogFragmentHolder<?>> createSearchablePreferenceDialog(
+	@Override
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(
 			final Preference preference,
-			final VoiceAnnouncesFragment target) {
+			final Fragment target) {
 		return settings.ARRIVAL_DISTANCE_FACTOR.getId().equals(preference.getKey()) ?
 				Optional.of(
-						SearchablePreferenceDialogFragmentHolder.of(
+						new ShowableSearchablePreferenceDialog<>(
 								AnnouncementTimeBottomSheet.createInstance(
 										preference,
 										target,
 										getSelectedAppMode(),
-										false))) :
+										false)) {
+
+							@Override
+							protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+								VoiceAnnouncesFragment.this.show(searchablePreferenceDialog);
+							}
+						}) :
 				Optional.empty();
 	}
 
@@ -303,16 +306,5 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements Sear
 	private void setupSpeakCamerasPref() {
 		SwitchPreferenceCompat showCameras = findPreference(settings.SPEAK_SPEED_CAMERA.getId());
 		showCameras.setVisible(!settings.SPEED_CAMERAS_UNINSTALLED.get());
-	}
-
-	@Override
-	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
-		return this
-				.createSearchablePreferenceDialog(preference, null)
-				.map(SearchablePreferenceDialogFragmentHolder::searchablePreferenceDialogFragment)
-				.map(preferenceDialog ->
-						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-								preferenceDialog,
-								_preferenceDialog -> preferenceDialog.getSearchableInfo()));
 	}
 }
