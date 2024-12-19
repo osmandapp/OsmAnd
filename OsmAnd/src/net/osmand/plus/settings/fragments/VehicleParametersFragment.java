@@ -303,7 +303,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 					new ShowableSearchablePreferenceDialog<>(
 							SimpleSingleSelectionBottomSheet.createInstance(
 									target,
-									preference.getKey(),
+									preference,
 									pref.getTitle().toString(),
 									pref.getDescription(),
 									getSelectedAppMode(),

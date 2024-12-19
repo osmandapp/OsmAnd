@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
 
 import com.google.common.collect.ImmutableList;
 
@@ -28,6 +29,7 @@ import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class SimpleSingleSelectionBottomSheet extends BasePreferenceBottomSheet implements SearchablePreferenceDialog {
 
@@ -51,25 +53,21 @@ public class SimpleSingleSelectionBottomSheet extends BasePreferenceBottomSheet 
 	private Object[] values;
 	private int selectedEntryIndex;
 
-	public static @NonNull SimpleSingleSelectionBottomSheet createInstance(final @NonNull Fragment target,
-																		   final @NonNull String key,
-																		   final @NonNull String title,
-																		   final @NonNull String description,
-																		   final @NonNull ApplicationMode appMode,
-																		   final boolean usedOnMap,
-																		   final @NonNull String[] names,
-																		   final @NonNull Object[] values,
-																		   final int selectedIndex) {
-		final Bundle args = new Bundle();
-		args.putString(PREFERENCE_ID, key);
-
-		final SimpleSingleSelectionBottomSheet fragment = new SimpleSingleSelectionBottomSheet();
-		fragment.setArguments(args);
-		fragment.setAppMode(appMode);
-		fragment.setUsedOnMap(usedOnMap);
-		fragment.setTargetFragment(target, 0);
-		fragment.setParameters(title, description, names, values, selectedIndex);
-		return fragment;
+	public static @NonNull SimpleSingleSelectionBottomSheet createInstance(
+			final @NonNull Fragment target,
+			final @NonNull Preference preference,
+			final @NonNull String title,
+			final @NonNull String description,
+			final @NonNull ApplicationMode appMode,
+			final boolean usedOnMap,
+			final @NonNull String[] names,
+			final @NonNull Object[] values,
+			final int selectedIndex) {
+		final SimpleSingleSelectionBottomSheet bottomSheet = new SimpleSingleSelectionBottomSheet();
+		bottomSheet.setParameters(title, description, names, values, selectedIndex);
+		return BasePreferenceBottomSheetInitializer
+				.initialize(bottomSheet)
+				.with(Optional.of(preference), appMode, usedOnMap, target);
 	}
 
 	@Override
