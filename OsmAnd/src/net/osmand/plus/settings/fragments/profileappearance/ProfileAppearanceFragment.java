@@ -1,6 +1,7 @@
 package net.osmand.plus.settings.fragments.profileappearance;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 import static net.osmand.plus.utils.ColorUtilities.getListBgColorId;
 
 import android.annotation.SuppressLint;
@@ -38,10 +39,11 @@ import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
 import net.osmand.plus.card.icon.IconsPaletteCard;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
-import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialogProvider;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -54,9 +56,7 @@ import org.apache.commons.logging.Log;
 
 import java.util.Optional;
 
-import de.KnollFrank.lib.settingssearch.provider.PreferenceDialogAndSearchableInfoByPreferenceDialogProvider;
-
-public class ProfileAppearanceFragment extends BaseSettingsFragment implements IProfileAppearanceScreen, SearchablePreferenceDialogProvider {
+public class ProfileAppearanceFragment extends BaseSettingsFragment implements IProfileAppearanceScreen, ShowableSearchablePreferenceDialogProvider {
 
 	private static final Log LOG = PlatformUtil.getLog(ProfileAppearanceFragment.class);
 
@@ -230,46 +230,52 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 	}
 
 	@Override
-	public boolean onPreferenceClick(Preference preference) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			this
-					.createPreferenceDialog(preference)
-					.ifPresent(dialog -> dialog.show(mapActivity.getSupportFragmentManager()));
+	public boolean onPreferenceClick(final Preference preference) {
+		if (showDialogForPreference(preference, this)) {
+			return true;
 		}
 		return super.onPreferenceClick(preference);
 	}
 
 	@Override
-	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(final Preference preference) {
-		return this
-				.createPreferenceDialog(preference)
-				.map(preferenceDialog ->
-						new PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<>(
-								preferenceDialog,
-								CustomizableSingleSelectionBottomSheet::getSearchableInfo));
-	}
-
-	private Optional<CustomizableSingleSelectionBottomSheet> createPreferenceDialog(final Preference preference) {
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Fragment target) {
 		if (settings.VIEW_ANGLE_VISIBILITY.getId().equals(preference.getKey())) {
 			return Optional.of(
-					screenController
-							.getProfileOptionController()
-							.createDialog(
-									app.getString(R.string.view_angle),
-									app.getString(R.string.view_angle_description),
-									settings.VIEW_ANGLE_VISIBILITY));
+					new ShowableSearchablePreferenceDialog<>(
+							screenController
+									.getProfileOptionController()
+									.createDialog(
+											app.getString(R.string.view_angle),
+											app.getString(R.string.view_angle_description),
+											settings.VIEW_ANGLE_VISIBILITY)) {
+
+						@Override
+						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+							ProfileAppearanceFragment.this.show(searchablePreferenceDialog);
+						}
+					});
 		}
 		if (settings.LOCATION_RADIUS_VISIBILITY.getId().equals(preference.getKey())) {
 			return Optional.of(
-					screenController
-							.getProfileOptionController()
-							.createDialog(
-									app.getString(R.string.location_radius),
-									app.getString(R.string.location_radius_description),
-									settings.LOCATION_RADIUS_VISIBILITY));
+					new ShowableSearchablePreferenceDialog<>(
+							screenController
+									.getProfileOptionController()
+									.createDialog(
+											app.getString(R.string.location_radius),
+											app.getString(R.string.location_radius_description),
+											settings.LOCATION_RADIUS_VISIBILITY)) {
+
+						@Override
+						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+							ProfileAppearanceFragment.this.show(searchablePreferenceDialog);
+						}
+					});
 		}
 		return Optional.empty();
+	}
+
+	private void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+		searchablePreferenceDialog.show(requireActivity().getSupportFragmentManager(), app);
 	}
 
 	private void bindCard(@NonNull PreferenceViewHolder holder, @NonNull BaseCard card) {
