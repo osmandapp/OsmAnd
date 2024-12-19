@@ -1212,8 +1212,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			OsmandApplication app = getApp();
 			if (app != null) {
 				if (app.getSettings().isVoiceProviderNotSelected(appMode)) {
-					VoiceLanguageBottomSheetFragment.showInstance(mapActivity.getSupportFragmentManager(),
-							null, appMode, true);
+					VoiceLanguageBottomSheetFragment
+							.createInstance(null, appMode, true)
+							.show(mapActivity.getSupportFragmentManager(), app);
 				} else {
 					app.getRoutingOptionsHelper().switchSound();
 				}

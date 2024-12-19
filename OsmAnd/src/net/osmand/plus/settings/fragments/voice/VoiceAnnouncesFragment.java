@@ -258,10 +258,6 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements Show
 		if (showDialogForPreference(preference, this)) {
 			return;
 		}
-		if (settings.VOICE_PROVIDER.getId().equals(preference.getKey())) {
-			VoiceLanguageBottomSheetFragment.showInstance(requireActivity().getSupportFragmentManager(), this, getSelectedAppMode(), false);
-			return;
-		}
 		super.onDisplayPreferenceDialog(preference);
 	}
 
@@ -269,21 +265,36 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements Show
 	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(
 			final Preference preference,
 			final Fragment target) {
-		return settings.ARRIVAL_DISTANCE_FACTOR.getId().equals(preference.getKey()) ?
-				Optional.of(
-						new ShowableSearchablePreferenceDialog<>(
-								AnnouncementTimeBottomSheet.createInstance(
-										preference,
-										target,
-										getSelectedAppMode(),
-										false)) {
+		if (settings.ARRIVAL_DISTANCE_FACTOR.getId().equals(preference.getKey())) {
+			return Optional.of(
+					new ShowableSearchablePreferenceDialog<>(
+							AnnouncementTimeBottomSheet.createInstance(
+									preference,
+									target,
+									getSelectedAppMode(),
+									false)) {
 
-							@Override
-							protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-								VoiceAnnouncesFragment.this.show(searchablePreferenceDialog);
-							}
-						}) :
-				Optional.empty();
+						@Override
+						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+							VoiceAnnouncesFragment.this.show(searchablePreferenceDialog);
+						}
+					});
+		}
+		if (settings.VOICE_PROVIDER.getId().equals(preference.getKey())) {
+			return Optional.of(
+					new ShowableSearchablePreferenceDialog<>(
+							VoiceLanguageBottomSheetFragment.createInstance(
+									target,
+									getSelectedAppMode(),
+									false)) {
+
+						@Override
+						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+							searchablePreferenceDialog.show(requireActivity().getSupportFragmentManager(), app);
+						}
+					});
+		}
+		return Optional.empty();
 	}
 
 	private void show(final SearchablePreferenceDialog dialog) {

@@ -319,8 +319,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 				routingHelper.getVoiceRouter().setMuteForMode(applicationMode, active);
 				String voiceProvider = app.getSettings().VOICE_PROVIDER.getModeValue(applicationMode);
 				if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
-					VoiceLanguageBottomSheetFragment.showInstance(mapActivity.getSupportFragmentManager(),
-							RouteOptionsBottomSheet.this, applicationMode, usedOnMap);
+					VoiceLanguageBottomSheetFragment
+							.createInstance(RouteOptionsBottomSheet.this, applicationMode, usedOnMap)
+							.show(mapActivity.getSupportFragmentManager(), app);
 				} else {
 					cb.setChecked(!active);
 					icon.setImageDrawable(getPaintedContentIcon(!active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));

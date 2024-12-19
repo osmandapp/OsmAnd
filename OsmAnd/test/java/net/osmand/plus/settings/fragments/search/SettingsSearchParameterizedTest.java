@@ -77,7 +77,11 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 
 						{"DistanceDuringNavigationBottomSheet: description", searchQuery("Choose how distance information is displayed in navigation widgets")},
 
-						{"VehicleParametersFragment: SimpleSingleSelectionBottomSheet, description", searchQuery(R.string.routing_attr_motor_type_description)}
+						{"VehicleParametersFragment: SimpleSingleSelectionBottomSheet, description", searchQuery(R.string.routing_attr_motor_type_description)},
+
+						{"VoiceLanguageBottomSheetFragment: language_description", searchQuery(R.string.language_description)},
+						{"VoiceLanguageBottomSheetFragment: tts_description", searchQuery(R.string.tts_description)},
+						{"VoiceLanguageBottomSheetFragment: recorded_description", searchQuery(R.string.recorded_description)},
 				});
 	}
 
