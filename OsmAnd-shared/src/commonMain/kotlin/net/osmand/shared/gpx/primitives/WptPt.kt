@@ -13,6 +13,7 @@ class WptPt : GpxExtensions {
 	var lon: Double = 0.0
 	var name: String? = null
 	var link: String? = null
+	var linkText: String? = null
 	var category: String? = null
 	var desc: String? = null
 	var comment: String? = null
@@ -37,6 +38,7 @@ class WptPt : GpxExtensions {
 		lon = wptPt.lon
 		name = wptPt.name
 		link = wptPt.link
+		linkText = wptPt.linkText
 		category = wptPt.category
 		desc = wptPt.desc
 		comment = wptPt.comment
@@ -342,5 +344,4 @@ class WptPt : GpxExtensions {
 	fun setSpecialPointType(type: String?) {
 		getExtensionsToWrite()[GpxUtilities.POINT_TYPE_EXTENSION] = type!!
 	}
-
 }

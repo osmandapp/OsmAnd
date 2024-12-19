@@ -7,6 +7,7 @@ class Metadata : GpxExtensions {
 	var name: String? = null
 	var desc: String? = null
 	var link: String? = null
+	var linkText: String? = null
 	var keywords: String? = null
 	var time: Long = 0
 	var author: Author? = null
@@ -19,6 +20,7 @@ class Metadata : GpxExtensions {
 		name = source.name
 		desc = source.desc
 		link = source.link
+		linkText = source.linkText
 		keywords = source.keywords
 		time = source.time
 		val sourceAuthor = source.author

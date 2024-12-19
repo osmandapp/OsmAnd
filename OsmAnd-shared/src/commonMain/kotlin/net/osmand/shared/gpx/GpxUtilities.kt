@@ -562,7 +562,12 @@ object GpxUtilities {
 			writeCopyright(serializer, copyright)
 			serializer.endTag(null, "copyright")
 		}
-		writeNotNullTextWithAttribute(serializer, "link", "href", file.metadata.link)
+		if (file.metadata.link != null) {
+			serializer.startTag(null, "link")
+			serializer.attribute(null, "href", file.metadata.link!!)
+			writeNotNullText(serializer, "text", file.metadata.linkText)
+			serializer.endTag(null, "link")
+		}
 		if (file.metadata.time != 0L) {
 			writeNotNullText(serializer, "time", formatTime(file.metadata.time))
 		}
@@ -722,7 +727,12 @@ object GpxUtilities {
 		}
 		writeNotNullText(serializer, "name", p.name)
 		writeNotNullText(serializer, "desc", p.desc)
-		writeNotNullTextWithAttribute(serializer, "link", "href", p.link)
+		if (p.link != null) {
+			serializer.startTag(null, "link")
+			serializer.attribute(null, "href", p.link!!)
+			writeNotNullText(serializer, "text", p.linkText)
+			serializer.endTag(null, "link")
+		}
 		writeNotNullText(serializer, "type", p.category)
 		writeNotNullText(serializer, "cmt", p.comment)
 		if (!p.hdop.isNaN()) {
@@ -835,7 +845,12 @@ object GpxUtilities {
 				serializer.endTag(null, "email")
 			}
 		}
-		writeNotNullTextWithAttribute(serializer, "link", "href", author.link)
+		if (author.link != null) {
+			serializer.startTag(null, "link")
+			serializer.attribute(null, "href", author.link!!)
+			writeNotNullText(serializer, "text", author.linkText)
+			serializer.endTag(null, "link")
+		}
 	}
 
 	private fun writeCopyright(serializer: XmlSerializer, copyright: Copyright) {
@@ -1001,7 +1016,7 @@ object GpxUtilities {
 		extensionsReader: GpxExtensionsReader?,
 		addGeneralTrack: Boolean
 	): GpxFile {
-		val insideTagDepth = mutableMapOf("trk" to 0)
+		val insideTagDepth = mutableMapOf("trk" to 0, "link" to 0)
 		oneOffLogParseTimeErrors = true
 		val gpxFile = GpxFile(null)
 		gpxFile.metadata.time = 0
@@ -1164,6 +1179,11 @@ object GpxUtilities {
 									}
 
 									"link" -> parse.link = parser.getAttributeValue("", "href")
+									"text" -> {
+										if (insideTagDepth["link"]!! > 0) {
+											parse.linkText = readText(parser, "text")
+										}
+									}
 									"time" -> {
 										val text = readText(parser, "time")
 										parse.time = parseTime(text!!)
@@ -1188,8 +1208,12 @@ object GpxUtilities {
 											parse.email = "$id@$domain"
 										}
 									}
-
 									"link" -> parse.link = parser.getAttributeValue("", "href")
+									"text" -> {
+										if (insideTagDepth["link"]!! > 0) {
+											parse.linkText = readText(parser, "text")
+										}
+									}
 								}
 							}
 
@@ -1279,8 +1303,12 @@ object GpxUtilities {
 										} catch (_: NumberFormatException) {
 										}
 									}
-
 									"link" -> parse.link = parser.getAttributeValue("", "href")
+									"text" -> {
+										if (insideTagDepth["link"]!! > 0) {
+											parse.linkText = readText(parser, "text")
+										}
+									}
 									"category" -> parse.category = readText(parser, "category")
 									"type" -> {
 										if (parse.category == null) {
