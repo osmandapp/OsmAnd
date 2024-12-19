@@ -12,7 +12,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.utils.AndroidUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

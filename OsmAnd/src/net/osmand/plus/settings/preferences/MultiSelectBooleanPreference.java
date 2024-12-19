@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.preferences;
 
+import static net.osmand.plus.settings.preferences.ListPreferenceEx.concat;
+
 import android.content.Context;
 import android.util.AttributeSet;
 
@@ -7,11 +9,13 @@ import androidx.preference.MultiSelectListPreference;
 import androidx.preference.PreferenceDataStore;
 
 import net.osmand.plus.settings.backend.OsmAndPreferencesDataStore;
+import net.osmand.plus.settings.fragments.search.SearchableInfoProvider;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
-public class MultiSelectBooleanPreference extends MultiSelectListPreference {
+public class MultiSelectBooleanPreference extends MultiSelectListPreference implements SearchableInfoProvider {
 
 	private String description;
 
@@ -108,5 +112,15 @@ public class MultiSelectBooleanPreference extends MultiSelectListPreference {
 		}
 
 		return enabledPrefs;
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		return String.join(
+				", ",
+				concat(
+						Optional.ofNullable(getDialogTitle()),
+						Optional.ofNullable(getDescription()),
+						Optional.ofNullable(getEntries())));
 	}
 }

@@ -1,7 +1,13 @@
 package net.osmand.plus.plugins.monitoring;
 
 import static net.osmand.plus.importfiles.tasks.SaveGpxAsyncTask.GPX_FILE_DATE_FORMAT;
-import static net.osmand.shared.gpx.GpxParameter.*;
+import static net.osmand.shared.gpx.GpxParameter.COLOR;
+import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.COLOR_PALETTE;
+import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
+import static net.osmand.shared.gpx.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.shared.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.WIDTH;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -53,7 +59,15 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInformationListener {
 

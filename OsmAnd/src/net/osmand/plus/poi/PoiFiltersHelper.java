@@ -20,8 +20,8 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
 import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.search.core.TopIndexFilter;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.search.core.TopIndexFilter;
 import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;

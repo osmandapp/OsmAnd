@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
+import static net.osmand.plus.settings.fragments.search.PreferenceMarker.markPreferenceAsConnectedToPlugin;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
 import android.content.Context;
@@ -20,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -49,6 +52,9 @@ import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.fragments.configureitems.ConfigureMenuRootFragment;
 import net.osmand.plus.settings.fragments.profileappearance.ProfileAppearanceFragment;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
@@ -62,9 +68,9 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
-public class ConfigureProfileFragment extends BaseSettingsFragment implements CopyAppModePrefsListener,
-		ResetAppModePrefsListener, PluginStateListener {
+public class ConfigureProfileFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener, PluginStateListener, ShowableSearchablePreferenceDialogProvider {
 
 	public static final String TAG = ConfigureProfileFragment.class.getSimpleName();
 
@@ -350,6 +356,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		Preference configureMap = findPreference(CONFIGURE_MAP);
 		configureMap.setIcon(getContentIcon(R.drawable.ic_action_layers));
 
+		// FK-TODO: make this Intent searchable
 		Intent intent = new Intent(ctx, MapActivity.class);
 		intent.putExtra(OPEN_CONFIG_ON_MAP, MAP_CONFIG);
 		intent.putExtra(APP_MODE_KEY, getSelectedAppMode().getStringKey());
@@ -418,6 +425,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				preference.setIcon(getContentIcon(plugin.getLogoResourceId()));
 				preference.setLayoutResource(R.layout.preference_with_descr);
 				preference.setFragment(plugin.getSettingsScreenType().fragmentName);
+				markPreferenceAsConnectedToPlugin(preference, plugin.getClass());
 
 				category.addPreference(preference);
 			}
@@ -432,13 +440,33 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	}
 
 	@Override
-	public boolean onPreferenceClick(Preference preference) {
-		MapActivity mapActivity = getMapActivity();
-		FragmentManager fragmentManager = getFragmentManager();
-		if (mapActivity != null && fragmentManager != null) {
-			String prefId = preference.getKey();
-			ApplicationMode selectedMode = getSelectedAppMode();
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Fragment target) {
+		if (RESET_TO_DEFAULT.equals(preference.getKey())) {
+			return Optional.of(
+					new ShowableSearchablePreferenceDialog<>(
+							ResetProfilePrefsBottomSheet.createInstance(
+									getSelectedAppMode(),
+									target)) {
 
+						@Override
+						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+							searchablePreferenceDialog.show(getFragmentManager(), app);
+						}
+					});
+		}
+		return Optional.empty();
+	}
+
+	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		final MapActivity mapActivity = getMapActivity();
+		final FragmentManager fragmentManager = getFragmentManager();
+		if (mapActivity != null && fragmentManager != null) {
+			if (showDialogForPreference(preference, this)) {
+				return true;
+			}
+			final String prefId = preference.getKey();
+			final ApplicationMode selectedMode = getSelectedAppMode();
 			if (CONFIGURE_MAP.equals(prefId)) {
 				sepAppModeToSelected();
 				fragmentManager.beginTransaction()
@@ -450,8 +478,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				ConfigureScreenFragment.showInstance(mapActivity);
 			} else if (COPY_PROFILE_SETTINGS.equals(prefId)) {
 				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, selectedMode);
-			} else if (RESET_TO_DEFAULT.equals(prefId)) {
-				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, getSelectedAppMode(), this);
 			} else if (EXPORT_PROFILE.equals(prefId)) {
 				ExportSettingsFragment.showInstance(fragmentManager, selectedMode, null, false);
 			} else if (DELETE_PROFILE.equals(prefId)) {

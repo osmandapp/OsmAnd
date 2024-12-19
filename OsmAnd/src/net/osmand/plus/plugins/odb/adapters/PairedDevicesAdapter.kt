@@ -3,7 +3,6 @@ package net.osmand.plus.plugins.odb.adapters
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.annotation.ColorRes
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.MenuCompat

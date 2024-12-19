@@ -41,12 +41,17 @@ public abstract class BaseTextFieldBottomSheet extends BasePreferenceBottomSheet
 	protected int contentHeightPrevious;
 
 	protected float currentValue;
+	private boolean configureSettingsSearch = false;
+
+	public void setConfigureSettingsSearch(final boolean configureSettingsSearch) {
+		this.configureSettingsSearch = configureSettingsSearch;
+	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, parent, savedInstanceState);
-		if (view != null) {
+		if (view != null && !configureSettingsSearch) {
 			view.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
 		}
 		return view;

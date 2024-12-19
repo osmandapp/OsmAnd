@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -19,14 +20,16 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 
-import org.jetbrains.annotations.NotNull;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class GoodsRestrictionsBottomSheet extends BasePreferenceBottomSheet {
+public class GoodsRestrictionsBottomSheet extends BasePreferenceBottomSheet implements SearchablePreferenceDialog {
 
 	public static final String TAG = GoodsRestrictionsBottomSheet.class.getSimpleName();
 
@@ -38,20 +41,21 @@ public class GoodsRestrictionsBottomSheet extends BasePreferenceBottomSheet {
 	private boolean isSelected;
 	private boolean hasChangesToApply = false;
 
-	public static void showInstance(@NonNull FragmentManager fm, @NonNull Fragment target,
-	                                @NonNull String key, @NonNull ApplicationMode appMode,
-	                                boolean usedOnMap, boolean selected) {
-		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
-			Bundle args = new Bundle();
-			args.putString(PREFERENCE_ID, key);
-			args.putBoolean(SELECTED_KEY, selected);
-			GoodsRestrictionsBottomSheet fragment = new GoodsRestrictionsBottomSheet();
-			fragment.setArguments(args);
-			fragment.setAppMode(appMode);
-			fragment.setUsedOnMap(usedOnMap);
-			fragment.setTargetFragment(target, 0);
-			fragment.show(fm, TAG);
-		}
+	public static GoodsRestrictionsBottomSheet createInstance(final @NonNull Fragment target,
+															  final @NonNull Preference preference,
+															  final @NonNull ApplicationMode appMode,
+															  final boolean usedOnMap,
+															  final boolean selected) {
+		final Bundle args = new Bundle();
+		args.putString(PREFERENCE_ID, preference.getKey());
+		args.putBoolean(SELECTED_KEY, selected);
+		GoodsRestrictionsBottomSheet fragment = new GoodsRestrictionsBottomSheet();
+		fragment.setArguments(args);
+		fragment.setPreference(preference);
+		fragment.setAppMode(appMode);
+		fragment.setUsedOnMap(usedOnMap);
+		fragment.setTargetFragment(target, 0);
+		return fragment;
 	}
 
 	@Override
@@ -140,4 +144,23 @@ public class GoodsRestrictionsBottomSheet extends BasePreferenceBottomSheet {
 		}
 	}
 
+	@Override
+	public void show(final FragmentManager fragmentManager, final OsmandApplication app) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			show(fragmentManager, TAG);
+		}
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		return Stream
+				.of(
+						R.string.routing_attr_goods_restrictions_name,
+						R.string.goods_delivery_desc,
+						R.string.goods_delivery_desc_2,
+						R.string.goods_delivery_desc_3,
+						R.string.goods_delivery_desc_4)
+				.map(this::getString)
+				.collect(Collectors.joining(", "));
+	}
 }

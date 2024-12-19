@@ -25,6 +25,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -70,8 +71,20 @@ import net.osmand.plus.feedback.RateUsHelper;
 import net.osmand.plus.feedback.RenderInitErrorBottomSheet;
 import net.osmand.plus.feedback.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.firstusage.FirstUsageWizardFragment;
-import net.osmand.plus.helpers.*;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.DayNightHelper;
+import net.osmand.plus.helpers.DiscountHelper;
+import net.osmand.plus.helpers.IntentHelper;
+import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.LockHelper.LockUIAdapter;
+import net.osmand.plus.helpers.MapAppInitializeListener;
+import net.osmand.plus.helpers.MapDisplayPositionManager;
+import net.osmand.plus.helpers.MapFragmentsHelper;
+import net.osmand.plus.helpers.MapPermissionsResultCallback;
+import net.osmand.plus.helpers.MapRouteCalculationProgressListener;
+import net.osmand.plus.helpers.MapScrollHelper;
+import net.osmand.plus.helpers.RestoreNavigationHelper;
+import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ui.ImportGpxBottomSheetDialogFragment;
@@ -105,7 +118,9 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomiz
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.MainSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
+import net.osmand.plus.settings.fragments.search.SettingsSearchButtonHelper;
 import net.osmand.plus.simulation.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.simulation.SimulatedLocation;
@@ -135,10 +150,15 @@ import org.apache.commons.logging.Log;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import de.KnollFrank.lib.settingssearch.client.CreateSearchDatabaseTaskProvider;
+import de.KnollFrank.lib.settingssearch.common.task.AsyncTaskWithProgressUpdateListeners;
+import de.KnollFrank.lib.settingssearch.common.task.Tasks;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		IRouteInformationListener, AMapPointUpdateListener, MapMarkerChangedListener,
@@ -159,6 +179,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private static final TrackDetailsMenu trackDetailsMenu = new TrackDetailsMenu();
 	@Nullable
 	private static Intent prevActivityIntent = null;
+
+	private static final @IdRes int FRAGMENT_CONTAINER_VIEW_ID = View.generateViewId();
+	private Optional<AsyncTaskWithProgressUpdateListeners<?>> createSearchDatabaseTask = Optional.empty();
 
 	private final List<ActivityResultListener> activityResultListeners = new ArrayList<>();
 
@@ -335,6 +358,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (!PluginsHelper.isDevelopment() || settings.TRANSPARENT_STATUS_BAR.get()) {
 			AndroidUtils.enterToFullScreen(this, getLayout());
 		}
+	}
+
+	public Optional<AsyncTaskWithProgressUpdateListeners<?>> getCreateSearchDatabaseTask() {
+		return createSearchDatabaseTask;
 	}
 
 	@Override
@@ -693,7 +720,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						BaseSettingsFragment.showInstance(this, SettingsScreenType.DATA_STORAGE, null, args, null);
 					} else {
 						ActivityCompat.requestPermissions(this,
-								new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
+								new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
 								DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
 					}
 				}
@@ -719,7 +746,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (showWelcomeScreen && FirstUsageWizardFragment.showFragment(this)) {
 			SecondSplashScreenFragment.SHOW = false;
 		} else if (SendAnalyticsBottomSheetDialogFragment.shouldShowDialog(app)) {
-			SendAnalyticsBottomSheetDialogFragment.showInstance(app, fragmentManager, null);
+			SendAnalyticsBottomSheetDialogFragment
+					.createInstance(null)
+					.show(fragmentManager, app);
 		}
 		if (fragmentsHelper.isFirstScreenShowing() && (!settings.SHOW_OSMAND_WELCOME_SCREEN.get() || !showOsmAndWelcomeScreen)) {
 			fragmentsHelper.disableFirstUsageFragment();
@@ -925,6 +954,18 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		lockHelper.onStart();
 		getMyApplication().getNotificationHelper().showNotifications();
 		extendedMapActivity.onStart(this);
+		{
+			createSearchDatabaseTask =
+					Optional.of(
+							CreateSearchDatabaseTaskProvider.getCreateSearchDatabaseTask(
+									SettingsSearchButtonHelper.createSearchPreferenceFragments(
+											this::getCreateSearchDatabaseTask,
+											this,
+											FRAGMENT_CONTAINER_VIEW_ID,
+											MainSettingsFragment.class),
+									this));
+			Tasks.executeTaskInParallelWithOtherTasks(createSearchDatabaseTask.get());
+		}
 	}
 
 	@Override
@@ -1216,9 +1257,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public static void launchMapActivityMoveToTop(@NonNull Context activity,
-	                                              @Nullable Bundle prevIntentParams,
-	                                              @Nullable Uri intentData,
-	                                              @Nullable Bundle intentParams) {
+												  @Nullable Bundle prevIntentParams,
+												  @Nullable Uri intentData,
+												  @Nullable Bundle intentParams) {
 		if (activity instanceof MapActivity) {
 			if (((MapActivity) activity).getDashboard().isVisible()) {
 				((MapActivity) activity).getDashboard().hideDashboard();
@@ -1314,7 +1355,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	@NonNull
-	public MapRouteInfoMenu getMapRouteInfoMenu() { return mapRouteInfoMenu; }
+	public MapRouteInfoMenu getMapRouteInfoMenu() {
+		return mapRouteInfoMenu;
+	}
 
 	@NonNull
 	public TrackDetailsMenu getTrackDetailsMenu() {
@@ -1544,7 +1587,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				sim.startStopRouteAnimation(this);
 			}
 		}
-		for (OsmandPlugin plugin: PluginsHelper.getEnabledPlugins()) {
+		for (OsmandPlugin plugin : PluginsHelper.getEnabledPlugins()) {
 			plugin.newRouteIsCalculated(newRoute);
 		}
 	}

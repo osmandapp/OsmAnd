@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.monitoring;
 
-import static net.osmand.plus.plugins.monitoring.VehicleMetricsRecordingFragment.*;
+import static net.osmand.plus.plugins.monitoring.VehicleMetricsRecordingFragment.VehicleMetricsItem;
+import static net.osmand.plus.plugins.monitoring.VehicleMetricsRecordingFragment.VehicleMetricsRecordingCategory;
 
 import android.annotation.SuppressLint;
 import android.view.Gravity;

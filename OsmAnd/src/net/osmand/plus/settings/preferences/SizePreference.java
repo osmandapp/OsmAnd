@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.preference.DialogPreference;
 
 import net.osmand.plus.R;
+import net.osmand.plus.settings.fragments.search.SearchableInfoProvider;
 import net.osmand.plus.settings.vehiclesize.SizeType;
 import net.osmand.plus.settings.vehiclesize.VehicleSizes;
 import net.osmand.plus.settings.vehiclesize.containers.Metric;
@@ -13,8 +14,12 @@ import net.osmand.plus.settings.vehiclesize.containers.Metric;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
-public class SizePreference extends DialogPreference {
+import de.KnollFrank.lib.settingssearch.common.Optionals;
+
+public class SizePreference extends DialogPreference implements SearchableInfoProvider {
 
 	private SizeType sizeType;
 	private Metric metric;
@@ -78,7 +83,16 @@ public class SizePreference extends DialogPreference {
 		return getContext().getString(stringId);
 	}
 
-	public String getValue () {
+	public String getValue() {
 		return getPersistedString(defaultValue);
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		return Optionals
+				.streamOfPresentElements(
+						Optional.ofNullable(getDialogTitle()),
+						Optional.ofNullable(getSummary()))
+				.collect(Collectors.joining(", "));
 	}
 }

@@ -4,18 +4,18 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
-import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.util.Algorithms;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.util.Algorithms;
 
 public class AudioVideoNoteMenuController extends MenuController {
 	private Recording mRecording;
