@@ -77,9 +77,13 @@ public class TravelGpx extends TravelArticle {
 	@Override
 	public WptPt createWptPt(@NonNull Amenity amenity, @Nullable String lang) {
 		WptPt wptPt = new WptPt();
+		wptPt.setName(amenity.getName());
 		wptPt.setLat(amenity.getLocation().getLatitude());
 		wptPt.setLon(amenity.getLocation().getLongitude());
-		wptPt.setName(amenity.getName());
+
+		Map<String, String> wptPtExtensions = wptPt.getExtensionsToWrite();
+		amenity.getNamesMap(true).forEach((key, value) -> wptPtExtensions.put("name:" + key, value));
+
 		for (String obfTag : amenity.getAdditionalInfoKeys()) {
 			String value = amenity.getAdditionalInfo(obfTag);
 			if (!Algorithms.isEmpty(value)) {
@@ -96,12 +100,13 @@ public class TravelGpx extends TravelArticle {
 				} else if (WPT_EXTRA_TAGS.equals(obfTag)) {
 					Gson gson = new Gson();
 					Type type = new TypeToken<Map<String, String>>() {}.getType();
-					wptPt.getExtensionsToWrite().putAll(gson.fromJson(value, type));
+					wptPtExtensions.putAll(gson.fromJson(value, type));
 				} else if (!doNotSaveWptTags.contains(obfTag)) {
-					wptPt.getExtensionsToWrite().put(obfTag, value);
+					wptPtExtensions.put(obfTag, value);
 				}
 			}
 		}
+
 		return wptPt;
 	}
 
