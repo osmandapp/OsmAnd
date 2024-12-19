@@ -4904,4 +4904,9 @@
     <string name="poi_routes_foot">Пешке</string>
     <string name="poi_routes_other">Друге руте</string>
     <string name="poi_routes_motorcycling">Мотоциклизам</string>
+    <string name="poi_route_activity_type_off_road">Ван пута</string>
+    <string name="poi_route_activity_type_karting">Картинг</string>
+    <string name="poi_route_activity_type_all_terrain_vehicle">ВСТ (Возило за све терене)</string>
+    <string name="poi_route_activity_type_truck_hgv">Камион (ХГВ)</string>
+    <string name="poi_route_activity_type_car">Кола</string>
 </resources>
