@@ -2584,12 +2584,8 @@
 \nSpetsiaalset kaardi allalaadimist pole vaja, vaade on loodud meie tavakaartidest.
 \n
 \nSelle vaate saad tagasi lülitada, aktiveerides selle siin uuesti või muutes vastavalt vajadusele jaotises „Kaardi seadistamine“ „Kaardistiil“.</string>
-    <string name="plugin_nautical_descr">See lisamoodul rikastab OsmAndi kaardirakendust meresõiduks vajaliku teabega, nagu laevateed, meremärgid, ohutsoonid, sildumisjuhendid ja muu oluline. Kasutamiseks lülita alajaotuses „Seadista kaarti“ sisse valik „Merekaardid“ ning laadi alla soovitud piirkonna kaart.
-\n
-\nLisateave: %1$s.</string>
-    <string name="plugin_ski_descr">See OsmAnd laiendus toob sõrmeulatusse üksikasjad globaalsete mäesuusatamise nõlvade, murdmaasuusaradade, mäesuusaradade, köisraudteede ja suusaliftide kohta. Teekonnad ja suusaradade raskusastmed on tähistatud värvikoodidega ning kujutatud spetsiaalses talvises kaardistiilis, mis sulab ühte lumivalge talvemaastikuga.
-\n
-\nSelle vaate aktiveerimine muudab kaardi stiili väärtuseks \'Talv ja suusk\', mis näitab kõiki maastikuomadusi talvetingimustes. Selle vaate saab tagasi lülitada, aktiveerides selle siin uuesti või muutes vastavalt vajadusele jaotises \'Kaardi seadistamine\' \'Kaardistiil\'.</string>
+    <string name="plugin_nautical_descr">See lisamoodul rikastab OsmAndi kaardirakendust meresõiduks vajaliku teabega, nagu laevateed, meremärgid, ohutsoonid, sildumisjuhendid ja muu oluline. Kasutamiseks lülita alajaotuses „Seadista kaarti“ sisse valik „Merekaardid“ ning laadi alla soovitud piirkonna kaart. \n \nLisateave: %1$s.</string>
+    <string name="plugin_ski_descr">See OsmAnd laiendus toob sõrmeulatusse üksikasjad globaalsete mäesuusatamise nõlvade, murdmaasuusaradade, mäesuusaradade, köisraudteede ja suusaliftide kohta. Teekonnad ja suusaradade raskusastmed on tähistatud värvikoodidega ning kujutatud spetsiaalses talvises kaardistiilis, mis sulab ühte lumivalge talvemaastikuga. \n \nSelle vaate aktiveerimine muudab kaardi stiili väärtuseks \'Talv ja suusk\', mis näitab kõiki maastikuomadusi talvetingimustes. Selle vaate saab tagasi lülitada, aktiveerides selle siin uuesti või muutes vastavalt vajadusele jaotises \'Kaardi seadistamine\' \'Kaardistiil\'.</string>
     <string name="audionotes_plugin_description">Tee reisi ajal heli-, pildi- või videomärkmeid, kasutades kas nuppu kaardil või asukoha kontekstimenüüd.</string>
     <string name="osmand_parking_plugin_description">Jäta meelde oma auto parkimiskoht ja teavita oma kalendrirakendust, kui parkimise aeg hakkab lõppema. Parkimismarkeri lisamiseks vali vajalik koht kaardil, ava „Tegevused“ ja klõpsi „Lisa parkimine“.</string>
     <string name="unit_of_length_descr">Muuda vahemaa mõõtmiseks kasutatud ühikut.</string>
