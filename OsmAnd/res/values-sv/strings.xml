@@ -1351,9 +1351,7 @@
     <string name="notes">A/V anteckningar</string>
     <string name="online_map">Online-karta</string>
     <string name="share_note">Dela anteckning</string>
-    <string name="plugin_nautical_descr">Berikar kartan med information för båtliv och segling, som fyrar och sjömärken, gästhamnar, förbudsområden, ankring etc. För att använda, ladda ner respektive sjökort och välj kartstilen \'Sjökort\' under \'Konfigurera karta\'.
-\n
-\nLäs mer på %1$s.</string>
+    <string name="plugin_nautical_descr">Berikar kartan med information för båtliv och segling, som fyrar och sjömärken, gästhamnar, förbudsområden, ankring etc. För att använda, ladda ner respektive sjökort och välj kartstilen \'Sjökort\' under \'Konfigurera karta\'. \n \nLäs mer på %1$s.</string>
     <string name="plugin_ski_descr">Designad för navigering i vintersportområden: Se alpina pister och liftar samt längdskidspår, färgkodade efter svårighetsgrad eller ledmarkeringar. För att använda, aktivera modulen, gå till \'Konfigurera kartan\' och välj kartstilen \'Vinter och skidor\'.</string>
     <string name="plugin_touringview_descr">Om du aktiverar denna vy ändras kartan till \'Vägkartsvy\', som är en speciell vy med mycket detaljer för resenärer och yrkesförare.
 \n
@@ -4846,27 +4844,7 @@
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
     <string name="track_filter_date_selected_format">%s - %s</string>
     <string name="average_glide_ratio">Genomsnittligt glidtal</string>
-    <string name="release_4_6">• Android Auto: nytt 3D läge
-\n
-\n• Möjligt att anpassa snabbknappar/tangentgenvägar för externa inmatningsenheter
-\n
-\n• Nya widgetar: Glidtal, Solens position, Tillgängligt minne
-\n
-\n• Spår: Filter och smarta mappar tillagda, förbättrad minneshantering för stora filer
-\n
-\n• Förbättrad färgläggning av spår i lutningsläget, med ny symmetrisk gradient
-\n
-\n• Förbättrade övre och nedre widgetpaneler med stöd för alla widgetar
-\n
-\n• OsmAnd Cloud: Tillgång till raderade filer
-\n
-\n• Stöd för ANT+ temperatur widget
-\n
-\n• Uppdaterad lokal resurshantering
-\n
-\n• Löst problem med genomskinligt statusfält
-\n
-\n</string>
+    <string name="release_4_6">• Android Auto: nytt 3D läge \n \n• Möjligt att anpassa snabbknappar/tangentgenvägar för externa inmatningsenheter \n \n• Nya widgetar: Glidtal, Solens position, Tillgängligt minne \n \n• Spår: Filter och smarta mappar tillagda, förbättrad minneshantering för stora filer \n \n• Förbättrad färgläggning av spår i lutningsläget, med ny symmetrisk gradient \n \n• Förbättrade övre och nedre widgetpaneler med stöd för alla widgetar \n \n• OsmAnd Cloud: Tillgång till raderade filer \n \n• Stöd för ANT+ temperatur widget \n \n• Uppdaterad lokal resurshantering \n \n• Löst problem med genomskinligt statusfält \n \n</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Kartvy under navigering</string>
     <string name="filter_by_name">Filtrera efter namn</string>
     <string name="shared_string_reset_all">Återställ allt</string>
@@ -5208,9 +5186,7 @@
     <string name="slope_description">Lutningskartor använder färger för att visualisera hur brant terrängen är (lutningsgrad).</string>
     <string name="ui_customization_short_descr">Huvudmeny-objekt, kontextmeny</string>
     <string name="slope_download_description">Ytterligare kartor krävs för att visa terränglutning på kartan.</string>
-    <string name="ui_customization_description">Anpassa mängden objekt i \'Huvudmenyn\', \'Konfigurera kartan\' och \'Kontextmeny\'.
-\n
-\nDeaktivera oanvända insticksmoduler för att dölja alla deras inställningar och reglage. %1$s.</string>
+    <string name="ui_customization_description">Anpassa mängden objekt i \'Huvudmenyn\', \'Konfigurera kartan\' och \'Kontextmeny\'. \n \nDeaktivera oanvända insticksmoduler för att dölja alla deras inställningar och reglage. %1$s.</string>
     <string name="main_actions">Primära åtgärder</string>
     <string name="import_complete_description">Importerade alla data från %1$s. Använd knapparna nedan för att öppna någon del av appen för att hantera den.</string>
     <string name="download_unsupported_action">Åtgärden %1$s stöds inte</string>
