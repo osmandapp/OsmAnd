@@ -6,7 +6,7 @@ import net.osmand.shared.util.KAlgorithms
 class Metadata : GpxExtensions {
 	var name: String? = null
 	var desc: String? = null
-	var link: String? = null
+	var link: Link? = null
 	var keywords: String? = null
 	var time: Long = 0
 	var author: Author? = null
@@ -18,30 +18,21 @@ class Metadata : GpxExtensions {
 	constructor(source: Metadata) {
 		name = source.name
 		desc = source.desc
-		link = source.link
 		keywords = source.keywords
 		time = source.time
-		val sourceAuthor = source.author
-		if (sourceAuthor != null) {
-			author = Author(sourceAuthor)
-		}
-		val sourceCopyright = source.copyright
-		if (sourceCopyright != null) {
-			copyright = Copyright(sourceCopyright)
-		}
-		val sourceBounds = source.bounds
-		if (sourceBounds != null) {
-			bounds = Bounds(sourceBounds)
-		}
+		link = source.link?.let { Link(it) }
+		author = source.author?.let { Author(it) }
+		bounds = source.bounds?.let { Bounds(it) }
+		copyright = source.copyright?.let { Copyright(it) }
 		copyExtensions(source)
 	}
 
 	fun isEmpty(): Boolean {
 		return name.isNullOrEmpty() &&
 				desc.isNullOrEmpty() &&
-				link.isNullOrEmpty() &&
 				keywords.isNullOrEmpty() &&
 				time == 0L &&
+				link == null &&
 				author == null &&
 				copyright == null &&
 				bounds == null &&

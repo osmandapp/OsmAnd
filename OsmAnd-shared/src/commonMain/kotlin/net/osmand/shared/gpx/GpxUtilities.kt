@@ -16,6 +16,7 @@ import net.osmand.shared.gpx.primitives.Author
 import net.osmand.shared.gpx.primitives.Bounds
 import net.osmand.shared.gpx.primitives.Copyright
 import net.osmand.shared.gpx.primitives.GpxExtensions
+import net.osmand.shared.gpx.primitives.Link
 import net.osmand.shared.gpx.primitives.Metadata
 import net.osmand.shared.gpx.primitives.Route
 import net.osmand.shared.gpx.primitives.Track
@@ -550,6 +551,7 @@ object GpxUtilities {
 		serializer.startTag(null, "metadata")
 		writeNotNullText(serializer, "name", trackName)
 		writeNotNullText(serializer, "desc", file.metadata.desc)
+		writeNotNullLink(serializer, file.metadata.link)
 		val author = file.metadata.author
 		if (author != null) {
 			serializer.startTag(null, "author")
@@ -562,7 +564,6 @@ object GpxUtilities {
 			writeCopyright(serializer, copyright)
 			serializer.endTag(null, "copyright")
 		}
-		writeNotNullTextWithAttribute(serializer, "link", "href", file.metadata.link)
 		if (file.metadata.time != 0L) {
 			writeNotNullText(serializer, "time", formatTime(file.metadata.time))
 		}
@@ -574,6 +575,17 @@ object GpxUtilities {
 		writeExtensions(serializer, file.metadata, null)
 		progress?.progress(1)
 		serializer.endTag(null, "metadata")
+	}
+
+	private fun writeNotNullLink(serializer: XmlSerializer, link: Link?) {
+		if (link != null) {
+			serializer.startTag(null, "link")
+			if (link.href != null) {
+				serializer.attribute(null, "href", link.href!!)
+			}
+			writeNotNullText(serializer, "text", link.text)
+			serializer.endTag(null, "link")
+		}
 	}
 
 	private fun writePoints(serializer: XmlSerializer, file: GpxFile, progress: IProgress?) {
@@ -722,9 +734,9 @@ object GpxUtilities {
 		}
 		writeNotNullText(serializer, "name", p.name)
 		writeNotNullText(serializer, "desc", p.desc)
-		writeNotNullTextWithAttribute(serializer, "link", "href", p.link)
 		writeNotNullText(serializer, "type", p.category)
 		writeNotNullText(serializer, "cmt", p.comment)
+		writeNotNullLink(serializer, p.link)
 		if (!p.hdop.isNaN()) {
 			writeNotNullText(serializer, "hdop", formatDecimal(p.hdop))
 		}
@@ -835,7 +847,7 @@ object GpxUtilities {
 				serializer.endTag(null, "email")
 			}
 		}
-		writeNotNullTextWithAttribute(serializer, "link", "href", author.link)
+		writeNotNullLink(serializer, author.link)
 	}
 
 	private fun writeCopyright(serializer: XmlSerializer, copyright: Copyright) {
@@ -1163,7 +1175,12 @@ object GpxUtilities {
 										parserState.add(copyright)
 									}
 
-									"link" -> parse.link = parser.getAttributeValue("", "href")
+									"link" -> {
+										val link = Link(parser.getAttributeValue("", "href"))
+										parse.link = link
+										parserState.add(link)
+									}
+
 									"time" -> {
 										val text = readText(parser, "time")
 										parse.time = parseTime(text!!)
@@ -1188,8 +1205,11 @@ object GpxUtilities {
 											parse.email = "$id@$domain"
 										}
 									}
-
-									"link" -> parse.link = parser.getAttributeValue("", "href")
+									"link" -> {
+										val link = Link(parser.getAttributeValue("", "href"))
+										parse.link = link
+										parserState.add(link)
+									}
 								}
 							}
 
@@ -1197,6 +1217,12 @@ object GpxUtilities {
 								when (tag) {
 									"year" -> parse.year = readText(parser, "year")
 									"license" -> parse.license = readText(parser, "license")
+								}
+							}
+
+							is Link -> {
+								when (tag) {
+									"text" -> parse.text = readText(parser, "text")
 								}
 							}
 
@@ -1279,8 +1305,11 @@ object GpxUtilities {
 										} catch (_: NumberFormatException) {
 										}
 									}
-
-									"link" -> parse.link = parser.getAttributeValue("", "href")
+									"link" -> {
+										val link = Link(parser.getAttributeValue("", "href"))
+										parse.link = link
+										parserState.add(link)
+									}
 									"category" -> parse.category = readText(parser, "category")
 									"type" -> {
 										if (parse.category == null) {
@@ -1354,6 +1383,12 @@ object GpxUtilities {
 
 						"copyright" -> {
 							if (parse is Copyright) {
+								parserState.removeLast()
+							}
+						}
+
+						"link" -> {
+							if (parse is Link) {
 								parserState.removeLast()
 							}
 						}

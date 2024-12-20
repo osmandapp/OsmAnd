@@ -155,15 +155,17 @@ public class DescriptionCard extends MapBaseCard {
 
 	@Nullable
 	public static String getMetadataImageLink(@NonNull Metadata metadata) {
-		String link = metadata.getLink();
-		if (!TextUtils.isEmpty(link)) {
-			String lowerCaseLink = link.toLowerCase();
-			if (lowerCaseLink.contains(".jpg")
-					|| lowerCaseLink.contains(".jpeg")
-					|| lowerCaseLink.contains(".png")
-					|| lowerCaseLink.contains(".bmp")
-					|| lowerCaseLink.contains(".webp")) {
-				return link;
+		if (metadata.getLink() != null) {
+			String link = metadata.getLink().getHref();
+			if (!TextUtils.isEmpty(link)) {
+				String lowerCaseLink = link.toLowerCase();
+				if (lowerCaseLink.contains(".jpg")
+						|| lowerCaseLink.contains(".jpeg")
+						|| lowerCaseLink.contains(".png")
+						|| lowerCaseLink.contains(".bmp")
+						|| lowerCaseLink.contains(".webp")) {
+					return link;
+				}
 			}
 		}
 		return null;
