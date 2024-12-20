@@ -19,6 +19,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.common.collect.ImmutableList;
+
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -57,6 +59,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import de.KnollFrank.lib.settingssearch.common.Lists;
 
 public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implements ImportTaskListener, SearchablePreferenceDialog {
 
@@ -92,10 +97,10 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 			args.putString(SELECTED_KEY, selectedItemKey);
 			bottomSheet.setArguments(args);
 		}
-		{
-			final boolean isOnline = OnlineRoutingEngine.isOnlineEngineKey(selectedItemKey);
-			bottomSheet.setDialogMode(isOnline ? DialogMode.ONLINE : DialogMode.OFFLINE);
-		}
+		bottomSheet.setDialogMode(
+				OnlineRoutingEngine.isOnlineEngineKey(selectedItemKey) ?
+						DialogMode.ONLINE :
+						DialogMode.OFFLINE);
 		return BasePreferenceBottomSheetInitializer
 				.initialize(bottomSheet)
 				.with(Optional.empty(), appMode, usedOnMap, target);
@@ -526,7 +531,39 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 
 	@Override
 	public String getSearchableInfo() {
-		// FK-TODO: add online and offline profiles
-		return getString(R.string.select_nav_profile_dialog_message);
+		return String.join(
+				", ",
+				ImmutableList
+						.<String>builder()
+						.add(getString(R.string.select_nav_profile_dialog_message))
+						.addAll(getProfilesNames(DialogMode.OFFLINE))
+						.addAll(getProfilesNames(DialogMode.ONLINE))
+						.build());
+	}
+
+	private List<String> getProfilesNames(final DialogMode dialogMode) {
+		return getNames(getProfilesList(getProfilesGroups(dialogMode)));
+	}
+
+	private List<ProfilesGroup> getProfilesGroups(final DialogMode dialogMode) {
+		return switch (dialogMode) {
+			case ONLINE -> getDataUtils().getOnlineProfiles(predefinedGroups);
+			case OFFLINE -> getDataUtils().getOfflineProfiles();
+		};
+	}
+
+	private List<RoutingDataObject> getProfilesList(final List<ProfilesGroup> profilesGroups) {
+		return Lists.concat(
+				profilesGroups
+						.stream()
+						.map(ProfilesGroup::getProfiles)
+						.collect(Collectors.toList()));
+	}
+
+	private List<String> getNames(final List<RoutingDataObject> profilesList) {
+		return profilesList
+				.stream()
+				.map(ProfileDataObject::getName)
+				.collect(Collectors.toList());
 	}
 }
