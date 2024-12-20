@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/activity_background_color"
+	android:clickable="true"
+	android:focusable="true"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:id="@+id/content"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<include layout="@layout/connected_device_card" />
+
+		<ScrollView
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/content_padding_small"
+				android:orientation="vertical"
+				android:paddingBottom="@dimen/content_padding_half">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding_small"
+					android:layout_marginBottom="@dimen/content_padding_small"
+					android:background="?attr/list_background_color"
+					android:elevation="2dp"
+					android:orientation="vertical">
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center_vertical"
+						android:padding="@dimen/content_padding"
+						android:text="@string/external_device_details_information"
+						android:textSize="@dimen/default_list_text_size"
+						app:typefaceWeight="medium" />
+
+					<LinearLayout
+						android:id="@+id/connection_type_container"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:contentDescription="@string/external_device_details_connection"
+						android:orientation="horizontal">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:gravity="center_vertical"
+							android:importantForAccessibility="no"
+							android:lineSpacingExtra="5sp"
+							android:padding="@dimen/content_padding"
+							android:text="@string/external_device_details_connection"
+							android:textSize="@dimen/default_list_text_size" />
+
+						<TextView
+							android:id="@+id/connection_type"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:gravity="center_vertical|right"
+							android:importantForAccessibility="no"
+							android:lineSpacingExtra="5sp"
+							android:padding="@dimen/content_padding"
+							android:text="-"
+							android:textColor="?android:textColorSecondary"
+							android:textSize="@dimen/default_list_text_size" />
+
+					</LinearLayout>
+
+					<include
+						layout="@layout/divider"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="@dimen/content_padding" />
+
+					<LinearLayout
+						android:id="@+id/battery_level_container"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:contentDescription="@string/external_device_details_battery"
+						android:orientation="horizontal">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:gravity="center_vertical"
+							android:importantForAccessibility="no"
+							android:lineSpacingExtra="5sp"
+							android:padding="@dimen/content_padding"
+							android:text="@string/external_device_details_battery"
+							android:textSize="@dimen/default_list_text_size" />
+
+						<TextView
+							android:id="@+id/battery_level"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:gravity="center_vertical|right"
+							android:importantForAccessibility="no"
+							android:lineSpacingExtra="5sp"
+							android:padding="@dimen/content_padding"
+							android:text="-"
+							android:textColor="?android:textColorSecondary"
+							android:textSize="@dimen/default_list_text_size" />
+
+					</LinearLayout>
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding_small"
+					android:layout_marginBottom="@dimen/content_padding_small"
+					android:background="?attr/list_background_color"
+					android:elevation="2dp"
+					android:orientation="vertical">
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center_vertical"
+						android:padding="@dimen/content_padding"
+						android:text="@string/external_device_details_received_data"
+						android:textSize="@dimen/default_list_text_size"
+						app:typefaceWeight="medium" />
+
+					<androidx.recyclerview.widget.RecyclerView
+						android:id="@+id/received_data"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+						tools:listitem="@layout/device_characteristic_item" />
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/content_padding_small"
+					android:layout_marginBottom="@dimen/content_padding_small"
+					android:background="?attr/list_background_color"
+					android:elevation="2dp"
+					android:orientation="vertical">
+
+					<net.osmand.plus.widgets.TextViewEx
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:gravity="center_vertical"
+						android:padding="@dimen/content_padding"
+						android:text="@string/shared_string_settings"
+						android:textSize="@dimen/default_list_text_size"
+						app:typefaceWeight="medium" />
+
+					<LinearLayout
+						android:id="@+id/name_property_container"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:contentDescription="@string/external_sensor_name_property_description"
+						android:orientation="vertical"
+						android:padding="@dimen/content_padding">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:gravity="center_vertical"
+							android:importantForAccessibility="no"
+							android:lineSpacingExtra="5sp"
+							android:text="@string/shared_string_name"
+							android:textSize="@dimen/default_list_text_size" />
+
+						<TextView
+							android:id="@+id/property_name"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:gravity="center_vertical|start"
+							android:importantForAccessibility="no"
+							android:lineSpacingExtra="5sp"
+							android:textColor="?android:textColorSecondary"
+							android:textSize="@dimen/default_list_text_size"
+							tools:text="Sensor name" />
+
+					</LinearLayout>
+
+					<include
+						layout="@layout/divider"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="@dimen/content_padding" />
+
+					<androidx.recyclerview.widget.RecyclerView
+						android:id="@+id/changeable_properties"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layoutDirection="inherit"
+						app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+					<LinearLayout
+						android:id="@+id/forget_device_container"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:contentDescription="@string/external_device_forget_sensor"
+						android:orientation="horizontal">
+
+						<TextView
+							android:id="@+id/forget_btn"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:gravity="center_vertical"
+							android:importantForAccessibility="no"
+							android:lineSpacingExtra="5sp"
+							android:padding="@dimen/content_padding"
+							android:text="@string/external_device_forget_sensor"
+							android:textSize="@dimen/default_list_text_size" />
+
+						<ImageView
+							android:id="@+id/forget_icon"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="center_vertical"
+							android:layout_marginEnd="@dimen/content_padding"
+							android:gravity="center_vertical|right"
+							android:importantForAccessibility="no"
+							android:lineSpacingExtra="5sp"
+							android:src="@drawable/ic_action_sensor_remove"
+							android:textColor="?android:textColorSecondary"
+							android:textSize="@dimen/default_list_text_size" />
+
+					</LinearLayout>
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+		</ScrollView>
+
+	</LinearLayout>
+
+</LinearLayout>

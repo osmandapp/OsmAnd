@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--      <string name="docs_latest_version" translatable="false">https://docs.osmand.net/blog/osmand-android-4-2-released/</string>  -->
+    <string name="docs_latest_version" translatable="false">https://docs.osmand.net/docs/versions/future-android</string>
+    <string name="blog_guideline" translatable="false">https://osmand.net/blog/guideline-pt</string>
+
+    <string name="docs_add_online_maps" translatable="false">https://docs.osmand.net/docs/user/map/raster-maps#add-new-online-raster-map-source</string>
+
+    <string name="docs_widgets" translatable="false">https://docs.osmand.net/docs/user/widgets/</string>
+    <string name="docs_widget_configure_screen" translatable="false">https://docs.osmand.net/docs/user/widgets/configure-screen</string>
+    <string name="docs_widget_route_maneuvers" translatable="false">https://docs.osmand.net/docs/user/widgets/nav-widgets#next-turns</string>
+    <string name="docs_widget_navigation_points" translatable="false">https://docs.osmand.net/docs/user/widgets/nav-widgets/#navigation-points</string>
+    <string name="docs_widget_markers" translatable="false">https://docs.osmand.net/docs/user/widgets/markers/</string>
+    <string name="docs_widget_bearing" translatable="false">https://docs.osmand.net/docs/user/widgets/nav-widgets#bearing</string>
+    <string name="docs_widget_av_notes" translatable="false">https://docs.osmand.net/docs/user/widgets/info-widgets#-audio-video-notes-widget-android</string>
+    <string name="docs_widget_coordinates" translatable="false">https://docs.osmand.net/docs/user/widgets/info-widgets#coordinates-widget</string>
+    <string name="docs_widget_street_name" translatable="false">https://docs.osmand.net/docs/user/widgets/nav-widgets#street-name</string>
+    <string name="docs_widget_lanes" translatable="false">https://docs.osmand.net/docs/user/widgets/nav-widgets/#lanes</string>
+    <string name="docs_widget_current_speed" translatable="false">https://docs.osmand.net/docs/user/widgets/info-widgets/#speed</string>
+    <string name="docs_widget_max_speed" translatable="false">https://docs.osmand.net/docs/user/widgets/nav-widgets/#speed-limit</string>
+    <string name="docs_widget_altitude" translatable="false">https://docs.osmand.net/docs/user/widgets/info-widgets/#altitude</string>
+    <string name="docs_widget_gps_info" translatable="false">https://docs.osmand.net/docs/user/widgets/info-widgets/#gps-info-android</string>
+    <string name="docs_widget_trip_recording" translatable="false">https://docs.osmand.net/docs/user/widgets/info-widgets/#-trip-recording-widgets</string>
+    <string name="docs_widget_current_time" translatable="false">https://docs.osmand.net/docs/user/widgets/info-widgets/#current-time</string>
+    <string name="docs_widget_battery" translatable="false">https://docs.osmand.net/docs/user/widgets/info-widgets/#battery-level</string>
+    <string name="docs_widget_rssi" translatable="false">https://docs.osmand.net/docs/user/widgets/info-widgets</string>
+    <string name="docs_widget_radius_ruler" translatable="false">https://docs.osmand.net/docs/user/widgets/radius-ruler</string>
+    <string name="docs_widget_fps" translatable="false">https://docs.osmand.net/docs/user/widgets/info-widgets/#-fps-info-android</string>
+    <string name="docs_widget_mapillary" translatable="false">https://docs.osmand.net/docs/user/widgets/info-widgets/#-mapillary-widget</string>
+    <string name="docs_widget_parking" translatable="false">https://docs.osmand.net/docs/user/widgets/info-widgets/#-parking-widget</string>
+    <string name="docs_widget_distance_by_tap" translatable="false">https://docs.osmand.net/docs/user/widgets/radius-ruler#distance-by-tap-tool</string>
+
+    <string name="docs_plugin_trip_recording" translatable="false">https://osmand.net/docs/user/plugins/trip-recording</string>
+    <string name="docs_plugin_nautical" translatable="false">https://osmand.net/docs/user/plugins/nautical-charts</string>
+    <string name="docs_plugin_osm" translatable="false">https://osmand.net/docs/user/plugins/osm-editing</string>
+    <string name="docs_plugin_srtm" translatable="false">https://osmand.net/docs/user/plugins/topography</string>
+    <string name="weather_global_forecast_system" translatable="false">https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast</string>
+
+    <string name="docs_purchases" translatable="false">https://docs.osmand.net/docs/user/purchases/</string>
+    <string name="docs_purchases_android" translatable="false">https://docs.osmand.net/docs/user/purchases/android</string>
+    <string name="docs_purchases_new_device" translatable="false">https://docs.osmand.net/docs/user/purchases/#new-device--new-account</string>
+    <string name="docs_map_download_tiles" translatable="false">https://docs.osmand.net/docs/user/map/raster-maps#download--update-tiles</string>
+    <string name="docs_troubleshooting_voice_navigation" translatable="false">https://docs.osmand.net/docs/user/troubleshooting/navigation#voice-navigation</string>
+    <string name="docs_osmand_live" translatable="false">https://osmand.net/docs/user/personal/maps-resources#osmand-live</string>
+    <string name="docs_legal_terms_of_use" translatable="false">https://osmand.net/docs/legal/terms-of-use</string>
+    <string name="docs_legal_privacy_policy" translatable="false">https://osmand.net/docs/legal/privacy-policy</string>
+    <string name="docs_external_sensors" translatable="false">https://docs.osmand.net/docs/user/plugins/external-sensors</string>
+    <string name="docs_obd_sensors" translatable="false">https://docs.osmand.net/docs/user/plugins/vehicle-metrics</string>
+    <string name="docs_external_sensors_unknown_type" translatable="false">https://docs.osmand.net/docs/intro</string>
+    <string name="docs_proxy_settings" translatable="false">https://osmand.net/docs/user/personal/global-settings/#proxy</string>
+    <string name="docs_free_versions" translatable="false">https://docs.osmand.net/docs/versions/free-versions</string>
+
+    <string name="community_twitter" translatable="false">https://twitter.com/osmandapp</string>
+    <string name="community_reddit" translatable="false">https://www.reddit.com/r/OsmAnd</string>
+    <string name="community_facebook" translatable="false">https://www.facebook.com/osmandapp</string>
+    <string name="community_vk" translatable="false">https://vk.com/osmandapp</string>
+
+    <string name="issues_github" translatable="false">https://github.com/osmandapp/OsmAnd/issues</string>
+    <string name="discussion_github" translatable="false">https://github.com/osmandapp/OsmAnd/discussions</string>
+
+    <string name="url_osm_live_info" translatable="false">https://osmand.net/osm_live</string>
+    <string name="url_osm_wiki_map_features" translatable="false">https://wiki.openstreetmap.org/wiki/Map_features</string>
+    <string name="url_wikipedia_slope" translatable="false">https://en.wikipedia.org/wiki/Grade_(slope)</string>
+    <string name="url_wikipedia_utm_format" translatable="false">https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system</string>
+    <string name="url_wikipedia_mgrs_format" translatable="false">https://en.wikipedia.org/wiki/Military_Grid_Reference_System</string>
+
+    <string name="osmand_poll" translatable="false">https://osmand.net/android-poll.html</string>
+    <string name="osmand_features" translatable="false">https://osmand.net/docs/user/plugins</string>
+    <string name="osmand_features_contour_lines_plugin" translatable="false">https://osmand.net/docs/user/plugins/topography</string>
+    <string name="osmand_privacy_policy" translatable="false">https://osmand.net/help-online/privacy-policy</string>
+    <string name="osmand_about" translatable="false">https://docs.osmand.net/help-online/about</string>
+
+</resources>
