@@ -5936,4 +5936,7 @@
     <string name="location_interpolation_percent">Відсоток інтерполяції розташування</string>
     <string name="location_interpolation_percent_desc">Встановіть відсоток інтерполяції розташування під час навігації по маршруту. Цей параметр зменшує затримку вашого розташування на карті під час анімації.</string>
     <string name="selected_delayed_profile">Вибраний профіль \"%s\"</string>
+    <string name="default_buttons_opacity_original_description">Кожна кнопка зберігає власну непрозорість фону.</string>
+    <string name="default_buttons_size_original_description">Кожна кнопка зберігає свій розмір.</string>
+    <string name="default_buttons_corners_original_description">Кожна кнопка зберігає власний кутовий радіус.</string>
 </resources>
