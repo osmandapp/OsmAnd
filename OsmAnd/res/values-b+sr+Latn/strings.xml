@@ -300,9 +300,7 @@
     <string name="rename_failed">Preimenovanje nije uspelo.</string>
     <string name="shared_string_currently_recording_track">Putanja koja se trenutno snima</string>
     <string name="back_to_map">Nazad na mapu</string>
-    <string name="plugin_nautical_descr">Ovaj dodatak obogaćuje program OsmAnd da prikazuje i pomorske puteve, svetionike navođenja, opasne plovne oblasti, oblasti sa ograničenjima za jedrenje i pristajanje, itd. Radi upotrebe, preuzmi odgovarajuće plovne mape i omogući prikaz „Plovne mape“ pod „Podesi mapu“.
-\n
-\nDodatna saznanja na %1$s.</string>
+    <string name="plugin_nautical_descr">Ovaj dodatak obogaćuje program OsmAnd da prikazuje i pomorske puteve, svetionike navođenja, opasne plovne oblasti, oblasti sa ograničenjima za jedrenje i pristajanje, itd. Radi upotrebe, preuzmi odgovarajuće plovne mape i omogući prikaz „Plovne mape“ pod „Podesi mapu“. \n \nDodatna saznanja na %1$s.</string>
     <string name="plugin_ski_descr">Napravljeno za navođenje po oblastima zimskih sportova. Pregleda skijaške staze i skijaške žičare, poljske skijaške putanje, sa obojenim linijama koje ukazujućim na težinu staza. Radi korišćenja ovog dodatka promeni izgled mape na „Podesi mapu“ pa izgled „Zima i skijanje“.</string>
     <string name="shared_string_audio">Audio</string>
     <string name="share_note">Deli belešku</string>
@@ -3110,9 +3108,7 @@
     <string name="point_deleted">Tačka %1$s je obrisana</string>
     <string name="shared_string_world">Svet</string>
     <string name="send_search_query">Pošalji upit pretrage?</string>
-    <string name="send_search_query_description">Poslaćemo upit tvoje pretrage: „%1$s“, kao i lokaciju.
-\n
-\n Ne sakupljamo lične podatke, samo nam trebaju podaci o pretragama da bismo poboljšavali motor pretrage.</string>
+    <string name="send_search_query_description">Poslaćemo upit tvoje pretrage: „%1$s“, kao i lokaciju. \n \n Ne sakupljamo lične podatke, samo nam trebaju podaci o pretragama da bismo poboljšavali motor pretrage.</string>
     <string name="increase_search_radius_to">Povećaj radijus pretrage na %1$s</string>
     <string name="search_no_results_feedback">Nema nalaza u pretrazi? 
 \nJavite nam</string>
@@ -4246,9 +4242,7 @@
     <string name="stop_download">Zaustavi preuzimanje</string>
     <string name="zoom_levels_difference_description">Velika razlika između nivoa približavanja može povećati veličinu preuzetih podataka.</string>
     <string name="number_of_tiles">Broj sličica mape</string>
-    <string name="location_source_descr">Podrazumevano, OsmAnd instaliran iz Google Play koristi %1$s za određivanje lokacije.
-\n
-\nAko dobiješ netačne podatke o lokaciju ili koristiš uređaj bez %2$s, pređi na „%3$s“</string>
+    <string name="location_source_descr">Podrazumevano, OsmAnd instaliran iz Google Play koristi %1$s za određivanje lokacije. \n \nAko dobiješ netačne podatke o lokaciju ili koristiš uređaj bez %2$s, pređi na „%3$s“</string>
     <string name="exit_import_descr">Izaći bez čuvanja promena?</string>
     <string name="rendering_attr_showFitnessTrails_description">Prikaz staza za trčanje</string>
     <string name="import_tracks_descr">%1$s, sadrži %2$s zasebne trase. Izaberi trase za uvoz.</string>
@@ -4381,8 +4375,7 @@
     <string name="track_file">Fajl trase</string>
     <string name="shared_storage_last_step">Možeš kasnije odrediti novu folder za podatke.</string>
     <string name="shared_storage_third_step">Odobri dozvolu za pristup ovom folderu. Bez nje, OsmAnd ne može da kolira fajlove.</string>
-    <string name="shared_storage_first_step">Pritisni „%1$s”.
-\nFajl menadžer otvara gde treba da nađeš i otvoriš folder OsmAnd.</string>
+    <string name="shared_storage_first_step">Pritisni „%1$s”. \nFajl menadžer otvara gde treba da nađeš i otvoriš folder OsmAnd.</string>
     <string name="shared_string_copy_to">Snimi u</string>
     <string name="history_is_disabled_descr">Omogući istoriju radi dobavljanja bržeg pristupa poslednjim korišćenim nalazima.</string>
     <string name="history_actions_descr">Možeš da izvezeš istoriju u fajl.</string>
@@ -4531,9 +4524,7 @@
     <string name="next_live_update_time">Sledeće ažuriranje u %1$s.</string>
     <string name="shared_string_inches">inči</string>
     <string name="y_axis">Y osa</string>
-    <string name="ant_missing_dependency_descr">Neuspešno pronalaženje odgovarajuće službe „%1$s“
-\nTreba da ugradiš ili osvežiš ANT + službu priključaka
-\nDa li želiš da pokreneš skladište igara za to?</string>
+    <string name="ant_missing_dependency_descr">Neuspešno pronalaženje odgovarajuće službe „%1$s“ \nTreba da ugradiš ili osvežiš ANT + službu priključaka \nDa li želiš da pokreneš skladište igara za to?</string>
     <string name="worldwide_maps">Mape sveta</string>
     <string name="favorite_delete_group">Obriši grupu</string>
     <string name="trip_recording_uphill_widget_desc">Prikazuje ukupno sve uspone na putu koji se trenutno snima.</string>
