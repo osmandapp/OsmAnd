@@ -85,7 +85,9 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 
 						{"WakeTimeBottomSheet: description", searchQuery(context -> context.getString(R.string.turn_screen_on_wake_time_descr, context.getString(R.string.keep_screen_on)))},
 						{"WakeTimeBottomSheet: keep_screen_on", searchQuery(R.string.keep_screen_on)},
-						{"WakeTimeBottomSheet: timeoutDescription", searchQuery(context -> context.getString(R.string.screen_timeout_descr, context.getString(R.string.system_screen_timeout)))}
+						{"WakeTimeBottomSheet: timeoutDescription", searchQuery(context -> context.getString(R.string.screen_timeout_descr, context.getString(R.string.system_screen_timeout)))},
+
+						{"SelectNavProfileBottomSheet: header", searchQuery(R.string.select_nav_profile_dialog_message)}
 				});
 	}
 

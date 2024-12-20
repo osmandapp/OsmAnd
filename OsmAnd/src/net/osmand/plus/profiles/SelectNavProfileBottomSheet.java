@@ -17,10 +17,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.IndexConstants;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -39,7 +39,9 @@ import net.osmand.plus.profiles.data.ProfilesGroup;
 import net.osmand.plus.profiles.data.RoutingDataObject;
 import net.osmand.plus.profiles.data.RoutingDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheetInitializer;
 import net.osmand.plus.settings.fragments.NavigationFragment;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
@@ -54,8 +56,9 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implements ImportTaskListener {
+public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implements ImportTaskListener, SearchablePreferenceDialog {
 
 	private static final String DOWNLOADED_PREDEFINED_JSON = "downloaded_predefined_json";
 	private static final String DIALOG_TYPE = "dialog_type";
@@ -79,24 +82,23 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 		int titleId;
 	}
 
-	public static void showInstance(@NonNull FragmentActivity activity,
-	                                @Nullable Fragment target,
-	                                ApplicationMode appMode,
-	                                String selectedItemKey,
-	                                boolean usedOnMap) {
-		FragmentManager fragmentManager = activity.getSupportFragmentManager();
-		if (!fragmentManager.isStateSaved()) {
-			SelectNavProfileBottomSheet fragment = new SelectNavProfileBottomSheet();
-			Bundle args = new Bundle();
+	public static SelectNavProfileBottomSheet createInstance(final @Nullable Fragment target,
+															 final ApplicationMode appMode,
+															 final String selectedItemKey,
+															 final boolean usedOnMap) {
+		final SelectNavProfileBottomSheet bottomSheet = new SelectNavProfileBottomSheet();
+		{
+			final Bundle args = new Bundle();
 			args.putString(SELECTED_KEY, selectedItemKey);
-			fragment.setArguments(args);
-			fragment.setUsedOnMap(usedOnMap);
-			fragment.setAppMode(appMode);
-			fragment.setTargetFragment(target, 0);
-			boolean isOnline = OnlineRoutingEngine.isOnlineEngineKey(selectedItemKey);
-			fragment.setDialogMode(isOnline ? DialogMode.ONLINE : DialogMode.OFFLINE);
-			fragment.show(fragmentManager, TAG);
+			bottomSheet.setArguments(args);
 		}
+		{
+			final boolean isOnline = OnlineRoutingEngine.isOnlineEngineKey(selectedItemKey);
+			bottomSheet.setDialogMode(isOnline ? DialogMode.ONLINE : DialogMode.OFFLINE);
+		}
+		return BasePreferenceBottomSheetInitializer
+				.initialize(bottomSheet)
+				.with(Optional.empty(), appMode, usedOnMap, target);
 	}
 
 	@Override
@@ -515,4 +517,16 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 		this.dialogMode = dialogMode;
 	}
 
+	@Override
+	public void show(final FragmentManager fragmentManager, final OsmandApplication app) {
+		if (!fragmentManager.isStateSaved()) {
+			show(fragmentManager, TAG);
+		}
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		// FK-TODO: add online and offline profiles
+		return getString(R.string.select_nav_profile_dialog_message);
+	}
 }

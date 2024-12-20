@@ -4,6 +4,7 @@ import static net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet.PR
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
@@ -28,20 +29,23 @@ public class BasePreferenceBottomSheetInitializer<T extends BasePreferenceBottom
 				  final @Nullable ApplicationMode appMode,
 				  final boolean usedOnMap,
 				  final @Nullable Fragment target) {
-		preference.ifPresent(
-				_preference -> {
-					basePreferenceBottomSheet.setPreference(_preference);
-					basePreferenceBottomSheet.setArguments(createArguments(PREFERENCE_ID, _preference.getKey()));
-				});
+		preference.ifPresent(this::setPreference);
 		basePreferenceBottomSheet.setUsedOnMap(usedOnMap);
 		basePreferenceBottomSheet.setAppMode(appMode);
 		basePreferenceBottomSheet.setTargetFragment(target, 0);
 		return basePreferenceBottomSheet;
 	}
 
-	private static Bundle createArguments(final String key, final String value) {
-		final Bundle arguments = new Bundle();
-		arguments.putString(key, value);
-		return arguments;
+	private void setPreference(final Preference preference) {
+		basePreferenceBottomSheet.setPreference(preference);
+		getArguments(basePreferenceBottomSheet).putString(PREFERENCE_ID, preference.getKey());
+	}
+
+	@NonNull
+	private static Bundle getArguments(final Fragment fragment) {
+		if (fragment.getArguments() == null) {
+			fragment.setArguments(new Bundle());
+		}
+		return fragment.getArguments();
 	}
 }
