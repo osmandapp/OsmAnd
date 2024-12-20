@@ -83,7 +83,9 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 						{"VoiceLanguageBottomSheetFragment: tts_description", searchQuery(R.string.tts_description)},
 						{"VoiceLanguageBottomSheetFragment: recorded_description", searchQuery(R.string.recorded_description)},
 
-						{"WakeTimeBottomSheet: description", searchQuery(context -> context.getString(R.string.turn_screen_on_wake_time_descr, context.getString(R.string.keep_screen_on)))}
+						{"WakeTimeBottomSheet: description", searchQuery(context -> context.getString(R.string.turn_screen_on_wake_time_descr, context.getString(R.string.keep_screen_on)))},
+						{"WakeTimeBottomSheet: keep_screen_on", searchQuery(R.string.keep_screen_on)},
+						{"WakeTimeBottomSheet: timeoutDescription", searchQuery(context -> context.getString(R.string.screen_timeout_descr, context.getString(R.string.system_screen_timeout)))}
 				});
 	}
 

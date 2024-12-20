@@ -69,8 +69,8 @@ public class WakeTimeBottomSheet extends BasePreferenceBottomSheet implements Se
 				.create();
 		items.add(preferenceDescription);
 
-		String on = getString(R.string.keep_screen_on);
-		String off = getString(R.string.keep_screen_on); // also needs to say 'on' the way the dialog is designed.
+		String on = getKeepScreenOn();
+		String off = getKeepScreenOn(); // also needs to say 'on' the way the dialog is designed.
 		BottomSheetItemWithCompoundButton[] preferenceBtn = new BottomSheetItemWithCompoundButton[1];
 		preferenceBtn[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(keepScreenOnEnabled)
@@ -128,10 +128,20 @@ public class WakeTimeBottomSheet extends BasePreferenceBottomSheet implements Se
 				.create());
 
 		BaseBottomSheetItem timeoutDescription = new BottomSheetItemWithDescription.Builder()
-				.setDescription(getString(R.string.screen_timeout_descr, getString(R.string.system_screen_timeout)))
+				.setDescription(getTimeoutDescription())
 				.setLayoutId(R.layout.bottom_sheet_item_descr)
 				.create();
 		items.add(timeoutDescription);
+	}
+
+	@NonNull
+	private String getKeepScreenOn() {
+		return getString(R.string.keep_screen_on);
+	}
+
+	@NonNull
+	private String getTimeoutDescription() {
+		return getString(R.string.screen_timeout_descr, getString(R.string.system_screen_timeout));
 	}
 
 	@Override
@@ -205,6 +215,6 @@ public class WakeTimeBottomSheet extends BasePreferenceBottomSheet implements Se
 
 	@Override
 	public String getSearchableInfo() {
-		return getString(R.string.turn_screen_on_wake_time_descr, getString(R.string.keep_screen_on));
+		return String.join(", ", getKeepScreenOn(), getTimeoutDescription());
 	}
 }
