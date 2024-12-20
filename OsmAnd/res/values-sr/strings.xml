@@ -5666,4 +5666,7 @@
     <string name="location_interpolation_percent_desc">Поставите проценат интерполације локације током руте. Овај параметар смањује кашњење положаја ваше локације на мапи, током анимације.</string>
     <string name="location_interpolation_percent">Проценат интерполације позиције</string>
     <string name="selected_delayed_profile">Изабрани профил \"%s\"</string>
+    <string name="default_buttons_size_original_description">Свако дугме задржава своју властиту величину.</string>
+    <string name="default_buttons_corners_original_description">Свако дугме задржава свој радијус окретања.</string>
+    <string name="default_buttons_opacity_original_description">Свако дугме чува своју провидност позадине.</string>
 </resources>
