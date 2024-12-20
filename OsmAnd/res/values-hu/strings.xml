@@ -1451,9 +1451,7 @@
 \nNem szükséges speciális térképet letölteni, a nézet a szabványos térképeinkből kerül előállításra. 
 \n 
 \nEz a nézet visszaállítható, ha újra kikapcsolja az aktiválást itt, vagy a „Térképstílus” megváltoztatásával a „Térkép beállítása” alatt igény szerint.</string>
-    <string name="plugin_nautical_descr">Gazdagítsa a térképet a hajózási útvonalakra, navigációs fényekre, hajózási veszélyzónákra, hajózási vagy kikötési korlátozásokkal érintett zónákra stb. vonatkozó adatokkal. Használatához töltse le a megfelelő tengeri térképeket, és engedélyezze a „Térkép beállítása” menüpontban a „Hajózási térkép” stílust.
-\n
-\nTovábbi olvasnivalók a %1$s oldalon.</string>
+    <string name="plugin_nautical_descr">Gazdagítsa a térképet a hajózási útvonalakra, navigációs fényekre, hajózási veszélyzónákra, hajózási vagy kikötési korlátozásokkal érintett zónákra stb. vonatkozó adatokkal. Használatához töltse le a megfelelő tengeri térképeket, és engedélyezze a „Térkép beállítása” menüpontban a „Hajózási térkép” stílust. \n \nTovábbi olvasnivalók a %1$s oldalon.</string>
     <string name="plugin_ski_descr">Télisport helyszíneken való navigációra tervezve: sífelvonók, sípályák és sífutópályák a nehézségi fokozatot jelző színes vonalakkal. Használatához engedélyezze ezt a bővítményt, valamint a „Térkép beállítása” menüpontban a „Tél és síelés” térképstílust.</string>
     <string name="filter_poi_hint">Szűrés név szerint</string>
     <string name="search_poi_category_hint">Gépeljen az összes kereséséhez</string>
@@ -1952,7 +1950,7 @@
     <string name="update_all_maps_now">Frissíti most az összes térképet?</string>
     <string name="clear_tile_data">Összes csempe törlése</string>
     <string name="routing_attr_short_way_name">Üzemanyag-takarékos útvonal</string>
-    <string name="replace_favorite_confirmation">Lecseréli ezt a kedvencet: %1$s\?</string>
+    <string name="replace_favorite_confirmation">Lecseréli ezt a kedvencet: %1$s?</string>
     <string name="driving_region_australia">Ausztrália</string>
     <string name="get_for">Beszerzés %1$s-ért</string>
     <string name="subcategories">Alkategóriák</string>
@@ -2025,7 +2023,7 @@
     <string name="quick_action_edit_action">Művelet szerkesztése</string>
     <string name="dialog_add_action_title">Művelet hozzáadása</string>
     <string name="quick_actions_delete">Művelet törlése</string>
-    <string name="quick_actions_delete_text">Törli ezt a műveletet: „%s”\?</string>
+    <string name="quick_actions_delete_text">Törli ezt a műveletet: „%s”?</string>
     <string name="quick_favorites_show_favorites_dialog">Kedvencek párbeszédablak megjelenítése</string>
     <string name="quick_favorites_name_preset">Előre megadott név</string>
     <string name="quick_action_add_marker_descr">Gomb, amely létrehoz a képernyő közepén egy térképjelölőt.</string>
@@ -2609,9 +2607,7 @@
     <string name="arrive_at_time">Érkezés ekkor: %1$s</string>
     <string name="powered_by_osmand">Az OsmAndtól</string>
     <string name="third_party_application">Harmadik féltől származó alkalmazás</string>
-    <string name="send_search_query_description">Keresését és tartózkodási helyét elküldjük ide: „%1$s”.
-\n 
-\n Nem gyűjtünk személyes adatokat, a keresési adatokat csak a kereső algoritmus fejlesztéséhez használjuk fel.</string>
+    <string name="send_search_query_description">Keresését és tartózkodási helyét elküldjük ide: „%1$s”. \n \n Nem gyűjtünk személyes adatokat, a keresési adatokat csak a kereső algoritmus fejlesztéséhez használjuk fel.</string>
     <string name="transport_nearby_routes">Ezen belül található:</string>
     <string name="shared_string_launch">Indítás</string>
     <string name="lang_gn_py">guarani</string>
@@ -2802,7 +2798,7 @@
     <string name="profile_alert_need_save_title">Módosítások mentése</string>
     <string name="profile_alert_need_save_msg">A módosítások mentése először a profilba</string>
     <string name="profile_alert_delete_title">Profil törlése</string>
-    <string name="profile_alert_delete_msg">„%s” profil törlése\?</string>
+    <string name="profile_alert_delete_msg">„%s” profil törlése?</string>
     <string name="select_base_profile_dialog_title">Kiinduló profil kijelölése</string>
     <string name="process_downloading_service">OsmAnd letöltési szolgáltatás</string>
     <string name="shared_string_color_magenta">Magenta</string>
@@ -3253,9 +3249,7 @@
     <string name="shared_string_all_languages">Összes nyelv</string>
     <string name="wiki_menu_download_descr">További térképek szükségesek a Wikipédia POI-k térképen való megjelenítéséhez.</string>
     <string name="context_menu_actions">Opciók menü</string>
-    <string name="ui_customization_description">Személyre szabhatja az elemek számát a Menüben, a Térkép beállításában és az Opciókban. 
-\n 
-\nA használaton kívüli bővítmények kikapcsolásával elrejtheti őket a %1$s menüből.</string>
+    <string name="ui_customization_description">Személyre szabhatja az elemek számát a Menüben, a Térkép beállításában és az Opciókban. \n \nA használaton kívüli bővítmények kikapcsolásával elrejtheti őket a %1$s menüből.</string>
     <string name="ui_customization_short_descr">Menü elemek, opciók</string>
     <string name="select_wikipedia_article_langs">Jelölje ki a térképen megjelenő Wikipédia-szócikkek nyelvét. A szócikk olvasása közben válthat valamennyi elérhető nyelv között.</string>
     <string name="some_articles_may_not_available_in_lang">Előfordulhat, hogy néhány Wikipédia-szócikk nem érhető el az ön nyelvén.</string>
@@ -3317,25 +3311,7 @@
     <string name="search_poi_types_descr">Kombináljon POI típusokat különböző kategóriákból. Koppintson egy kapcsolóra az összes altípus kiválasztásához, vagy koppintson egy szövegre az egyes altípusok kijelöléséhez.</string>
     <string name="search_poi_types">POI típusok keresése</string>
     <string name="index_item_world_basemap_detailed">Áttekintő világtérkép (részletes)</string>
-    <string name="release_3_7">• Új offline lejtőtérkép
-\n
-\n • Kedvencek és GPX-útpontok teljes testreszabhatósága – egyéni színek, ikonok, formák
-\n
-\n • Opciók menü, Térkép beállítása és Főmenü elemeinek sorrendje testreszabható
-\n
-\n • Wikipédia külön rétegként szerepel a Térkép beállítása menüben, a kívánt nyelvek kiválaszthatók
-\n
-\n • Saját POI szűrők létrehozhatók / térképek teljes rugalmassággal
-\n
-\n • Egyéni profilok beállításainak visszaállíthatósága
-\n
-\n • Teljeskörű GPX útvonalak létrehozása a navigációból, mely támogatja a forgalmi sávokat és a teljes navigációs utasításokat
-\n
-\n • Felhasználói felület méreteinek javítása táblagépeken
-\n
-\n • Jobbról balra írt nyelvekkel kapcsolatos hibák javítása
-\n
-\n</string>
+    <string name="release_3_7">• Új offline lejtőtérkép \n \n • Kedvencek és GPX-útpontok teljes testreszabhatósága – egyéni színek, ikonok, formák \n \n • Opciók menü, Térkép beállítása és Főmenü elemeinek sorrendje testreszabható \n \n • Wikipédia külön rétegként szerepel a Térkép beállítása menüben, a kívánt nyelvek kiválaszthatók \n \n • Saját POI szűrők létrehozhatók / térképek teljes rugalmassággal \n \n • Egyéni profilok beállításainak visszaállíthatósága \n \n • Teljeskörű GPX útvonalak létrehozása a navigációból, mely támogatja a forgalmi sávokat és a teljes navigációs utasításokat \n \n • Felhasználói felület méreteinek javítása táblagépeken \n \n • Jobbról balra írt nyelvekkel kapcsolatos hibák javítása \n \n</string>
     <string name="unsupported_type_error">Nem támogatott típus</string>
     <string name="shared_string_resume">Folytatás</string>
     <string name="map_source_zoom_levels_descr">Ezek a paraméterek a térképként vagy fedő-/alátétrétegként való használatkor befolyásolják a megjelenítést.
@@ -4119,8 +4095,7 @@
     <string name="storage_found_files_descr">Koppintson a(z) „%1$s” gombra, hogy átmásoljon %2$s fájlt innen: „%3$s”, ide: „ %4$s” Ez eltarthat egy darabig.</string>
     <string name="storage_copied_files_size">Feldolgozva %1$s fájl, (%2$s)</string>
     <string name="shared_storage_third_step">Adjon engedélyt a mappa eléréséhez. Enélkül az OsmAnd nem tud fájlokat másolni.</string>
-    <string name="shared_storage_first_step">Nyomja meg a(z) „%1$s” gombot.
-\nA fájlkezelő meg fog nyílni, ahol meg kell keresnie és meg kell nyitnia az osmand mappát.</string>
+    <string name="shared_storage_first_step">Nyomja meg a(z) „%1$s” gombot. \nA fájlkezelő meg fog nyílni, ahol meg kell keresnie és meg kell nyitnia az osmand mappát.</string>
     <string name="shared_storage_second_step">Kattintson az „Ezen mappa használata” gombra.</string>
     <string name="folder_access_denied">Engedély szükséges a kiválasztott mappa eléréséhez.</string>
     <string name="copying_completed">Másolva</string>
@@ -4220,9 +4195,7 @@
     <string name="exit_import">Kilép\?</string>
     <string name="import_tracks_descr">„%1$s” %2$s különálló nyomvonalat tartalmaz. Válassza ki az importálandókat.</string>
     <string name="quick_action_add_route_descr">Gomb, amellyel a képernyő közepéről lehet útvonalat indítani.</string>
-    <string name="location_source_descr">Alapértelmezés szerint a Google Playről telepített OsmAnd a következő segítségével határozza meg a pozíciót: %1$s.
-\n
-\nHa ez pontatlan, vagy az eszközt %2$s nélkül használja, próbáljon meg átváltani erre: „%3$s”.</string>
+    <string name="location_source_descr">Alapértelmezés szerint a Google Playről telepített OsmAnd a következő segítségével határozza meg a pozíciót: %1$s. \n \nHa ez pontatlan, vagy az eszközt %2$s nélkül használja, próbáljon meg átváltani erre: „%3$s”.</string>
     <string name="location_source">Helyadatok forrása</string>
     <string name="shared_string_shape">Alak</string>
     <string name="default_appearance_desc">Az alapértelmezett szín, ikon és alak a csoporthoz hozzáadott kedvenc pontokra lesz érvényes.</string>
@@ -4506,9 +4479,7 @@
     <string name="map_widget_ant_bicycle_dist_desc">Megjeleníti a megtett távolságot</string>
     <string name="map_widget_ant_heart_rate_desc">Valós időben mutatja a felhasználó pulzusát egy adott tevékenység során</string>
     <string name="nautical_depth_points">Tengeri mélységpontok</string>
-    <string name="ant_missing_dependency_descr">A szükséges „%1$s” szolgáltatás nem található.
-\nTelepítenie vagy frissítenie kell az ANT+ beépülő szolgáltatást.
-\nSzeretne ehhez belépni a Google Play Áruházba\?</string>
+    <string name="ant_missing_dependency_descr">A szükséges „%1$s” szolgáltatás nem található. \nTelepítenie vagy frissítenie kell az ANT+ beépülő szolgáltatást. \nSzeretne ehhez belépni a Google Play Áruházba?</string>
     <string name="ant_read_data">Adatok olvasása</string>
     <string name="map_widget_ant_bicycle_power">Kerékpáros-teljesítmény</string>
     <string name="map_widget_ant_heart_rate">Pulzusszám</string>
