@@ -78,8 +78,7 @@
     <string name="osmand_parking_position_description">Lleoliad parcio eich cerbyd. %1$s</string>
     <string name="osmand_parking_position_description_add">I nôl y cerbyd o:</string>
     <string name="osmand_parking_position_name">Man parcio</string>
-    <string name="osmand_parking_plugin_description">Mae\'n caniatáu cofnodi ble mae\'ch cerbyd wedi\'i barcio, gan gynnwys faint o amser sy\'n weddill yno.
-\n Mae\'r lleoliad a\'r amser i\'w gweld ar y dashfwrdd yn ogystal ag yn y teclyn map. Gellir gosod larwm atgoffa i galendr Android.</string>
+    <string name="osmand_parking_plugin_description">Mae\'n caniatáu cofnodi ble mae\'ch cerbyd wedi\'i barcio, gan gynnwys faint o amser sy\'n weddill yno. \n Mae\'r lleoliad a\'r amser i\'w gweld ar y dashfwrdd yn ogystal ag yn y teclyn map. Gellir gosod larwm atgoffa i galendr Android.</string>
     <string name="osmand_parking_plugin_name">Lleoliad parcio</string>
     <string name="context_menu_item_add_parking_point">Cofnodi fel man parcio</string>
     <string name="context_menu_item_delete_parking_point">Dileu cofnod man parcio</string>
@@ -3842,11 +3841,7 @@
 \nNid oes angen lawrlwytho map arbennig, mae\'r olygfa\'n cael ei chreu o\'n mapiau safonol.
 \n
 \nGellir dychwelyd y wedd hon trwy naill ai ei dad-ysgogi eto yma, neu trwy newid yr \'Arddull Map\' o dan \'Ffurfweddu map\' fel y dymunir.</string>
-    <string name="plugin_nautical_descr">Mae\'r ategyn hwn yn cyfoethogi map ac ap llywio OsmAnd i hefyd gynhyrchu mapiau morol ar gyfer cychod, hwylio, a mathau eraill o chwaraeon dŵr.
-\n
-\nBydd yr ychwanegiad map arbennig ar gyfer OsmAnd yn darparu\'r holl farciau llywio morol a symbolau siart, ar gyfer mordwyo mewndirol yn ogystal ag ar gyfer mordwyo ger y lan. Mae disgrifiad pob marc llywio yn rhoi\'r manylion sydd eu hangen i\'w hadnabod a\'u hystyr (categori, siâp, lliw, dilyniant, cyfeirnod, ac ati).
-\n
-\nI ddychwelyd i un o arddulliau map confensiynol OsmAnd, yn syml naill ai cau\'r ategyn hwn eto, neu newid yr \'Arddull Map\' o dan \'Ffurfweddu map\' fel y dymunir.</string>
+    <string name="plugin_nautical_descr">Mae\'r ategyn hwn yn cyfoethogi map ac ap llywio OsmAnd i hefyd gynhyrchu mapiau morol ar gyfer cychod, hwylio, a mathau eraill o chwaraeon dŵr. \n \nBydd yr ychwanegiad map arbennig ar gyfer OsmAnd yn darparu\'r holl farciau llywio morol a symbolau siart, ar gyfer mordwyo mewndirol yn ogystal ag ar gyfer mordwyo ger y lan. Mae disgrifiad pob marc llywio yn rhoi\'r manylion sydd eu hangen i\'w hadnabod a\'u hystyr (categori, siâp, lliw, dilyniant, cyfeirnod, ac ati). \n \nI ddychwelyd i un o arddulliau map confensiynol OsmAnd, yn syml naill ai cau\'r ategyn hwn eto, neu newid yr \'Arddull Map\' o dan \'Ffurfweddu map\' fel y dymunir.</string>
     <string name="nautical_maps_missing">Llwythwch i lawr y map all-lein arbennig i ddangos y nodweddion sgïo.</string>
     <string name="proxy_pref_descr">Nodwch weinydd dirprwyol.</string>
     <string name="rendering_value_germanRoadAtlas_name">Atlas ffordd yr Almaen</string>
@@ -4072,9 +4067,7 @@
     <string name="use_osm_live_routing_description">Galluogi llywio ar gyfer newidiadau OsmAnd Live.</string>
     <string name="use_osm_live_routing">Llywio OsmAnd Live</string>
     <string name="add_time_span">Ychwanegu rhychwant amser</string>
-    <string name="plugin_ski_descr">Mae\'r ategyn hwn ar gyfer OsmAnd yn rhoi manylion llethrau sgïo lawr allt fyd-eang, rhediadau sgïo traws gwlad, llwybrau sgïo Alpaidd, ceir cebl a lifftiau sgïo ar flaenau eich bysedd. Mae llwybrau a pistes yn cael eu dangos â chod lliw yn ôl anhawster, a\'u darlunio mewn arddull map \'Gaeaf\' arbennig sy\'n cymathu tirwedd aeafol lliw eira.
-\n
-\nMae agor yr olwg hon yn newid arddull y map i \'Gaeaf a sgïo\', gan ddangos holl nodweddion y dirwedd dan amodau gaeafol. Gellir dychwelyd y wedd hon trwy naill ai ei gau eto yma, neu trwy newid yr \'Arddull Map\' o dan \'Ffurfweddu map\' fel y dymunir.</string>
+    <string name="plugin_ski_descr">Mae\'r ategyn hwn ar gyfer OsmAnd yn rhoi manylion llethrau sgïo lawr allt fyd-eang, rhediadau sgïo traws gwlad, llwybrau sgïo Alpaidd, ceir cebl a lifftiau sgïo ar flaenau eich bysedd. Mae llwybrau a pistes yn cael eu dangos â chod lliw yn ôl anhawster, a\'u darlunio mewn arddull map \'Gaeaf\' arbennig sy\'n cymathu tirwedd aeafol lliw eira. \n \nMae agor yr olwg hon yn newid arddull y map i \'Gaeaf a sgïo\', gan ddangos holl nodweddion y dirwedd dan amodau gaeafol. Gellir dychwelyd y wedd hon trwy naill ai ei gau eto yma, neu trwy newid yr \'Arddull Map\' o dan \'Ffurfweddu map\' fel y dymunir.</string>
     <string name="paid_plugin">Ategyn taledig</string>
     <string name="start_editing_card_description">Gallwch a dylech olygu unrhyw erthygl ar Wikivoyage. Rhannwch wybodaeth, profiad, talent, a\'ch sylw.</string>
     <string name="get_unlimited_access">Cael mynediad diderfyn</string>
