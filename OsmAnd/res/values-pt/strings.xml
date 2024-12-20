@@ -2056,7 +2056,7 @@
     <string name="update_all_maps_now">Atualizar todos os mapas agora\?</string>
     <string name="clear_tile_data">Eliminar todos os mosaicos</string>
     <string name="routing_attr_short_way_name">Percurso económico</string>
-    <string name="replace_favorite_confirmation">Substituir o favorito %1$s\?</string>
+    <string name="replace_favorite_confirmation">Substituir o favorito %1$s?</string>
     <string name="rendering_attr_hideOverground_name">Objetos à superfície</string>
     <string name="get_started">Começar</string>
     <string name="route_stops_before">%1$s paragens anteriores</string>
