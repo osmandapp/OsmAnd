@@ -1593,9 +1593,7 @@
     <string name="route_duration">الزمن :</string>
     <string name="route_tr">انعطف يميناً</string>
     <string name="route_tl">انعطف يسارا واذهب</string>
-    <string name="plugin_nautical_descr">إثراء خريطتك بمعلومات حول طرق الإبحار ، وأضواء الملاحة ، ومناطق الخطر البحري ، والمناطق ذات قيود الإبحار أو الإرساء ، وما إلى ذلك.
-\n
-\nمزيد من القراءة على %1$s.</string>
+    <string name="plugin_nautical_descr">إثراء خريطتك بمعلومات حول طرق الإبحار ، وأضواء الملاحة ، ومناطق الخطر البحري ، والمناطق ذات قيود الإبحار أو الإرساء ، وما إلى ذلك. \n \nمزيد من القراءة على %1$s.</string>
     <string name="search_near_map">البحث قرب مركز الخريطة الحالية</string>
     <string name="active_markers">عدد خطوط التوجيه</string>
     <string name="map_markers">التوجيه المباشر</string>
@@ -3520,9 +3518,7 @@
     <string name="shared_string_language">اللغة</string>
     <string name="shared_string_all_languages">كل اللغات</string>
     <string name="wiki_menu_download_descr">هناك حاجة إلى خرائط إضافية لعرض النقاط المهمة من ويكيبيديا على الخريطة.</string>
-    <string name="ui_customization_description">تخصيص كمية العناصر في قائمة تكوين خيارات الخريطة.
-\n
-\nيمكنك تعطيل الإضافات غير المستخدمة لإخفاء جميع الضوابط من الطلب %1$s.</string>
+    <string name="ui_customization_description">تخصيص كمية العناصر في قائمة تكوين خيارات الخريطة. \n \nيمكنك تعطيل الإضافات غير المستخدمة لإخفاء جميع الضوابط من الطلب %1$s.</string>
     <string name="ui_customization_short_descr">القائمة الجانبية و السفلية</string>
     <string name="ui_customization">تخصيص واجهة المستخدم</string>
     <string name="shared_string_drawer">القائمة الجانبية</string>
