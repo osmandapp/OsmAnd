@@ -1956,7 +1956,7 @@
     <string name="dist_away_from_my_location">Recherche %1$s autour</string>
     <string name="update_all_maps_now">Mettre à jour toutes les cartes maintenant ?</string>
     <string name="clear_tile_data">Supprimer toutes les tuiles</string>
-    <string name="replace_favorite_confirmation">Remplacer le favori « %1$s » \?</string>
+    <string name="replace_favorite_confirmation">Remplacer le favori « %1$s » ?</string>
     <string name="shared_string_change">Modifier</string>
     <string name="get_started">Démarrons ensemble</string>
     <string name="routing_attr_short_way_name">Trajet économe en carburant</string>
@@ -3315,9 +3315,7 @@
     <string name="shared_string_all_languages">Toutes les langues</string>
     <string name="wiki_menu_download_descr">D’autres cartes sont nécessaires pour afficher les POI Wikipédia sur la carte.</string>
     <string name="divider_descr">Éléments sous ce point isolés par un séparateur.</string>
-    <string name="ui_customization_description">Personnalisez le nombre d’éléments dans le panneau latéral, le menu Paramétrer la carte et le menu contextuel.
-\n
-\nVous pouvez désactiver les extensions inutilisées, pour masquer leurs contrôles. %1$s.</string>
+    <string name="ui_customization_description">Personnalisez le nombre d’éléments dans le panneau latéral, le menu Paramétrer la carte et le menu contextuel. \n \nVous pouvez désactiver les extensions inutilisées, pour masquer leurs contrôles. %1$s.</string>
     <string name="hidden_items_descr">Ces éléments sont masqués dans le menu mais les options présentes ou les extensions continueront à fonctionner.</string>
     <string name="reset_items_descr">Masquer les paramètres les réinitialise à leurs valeurs par défaut.</string>
     <string name="ui_customization_short_descr">Éléments du panneau déroulant, menu contextuel</string>
@@ -3383,25 +3381,7 @@
     <string name="subscription_osmandlive_item">Abonnement - OsmAnd Live</string>
     <string name="osmand_purchases_item">Achats OsmAnd</string>
     <string name="navigation_profiles_item">Profils de navigation</string>
-    <string name="release_3_7">- Nouvelles cartes des pentes hors ligne
-\n
-\n - Personnalisation complète des favoris et des points de passage GPX - couleurs, icônes et formes personnalisées
-\n
-\n - Personnalisez l\'ordre des éléments dans le menu contextuel, le menu configurer la carte et le panneau déroulant
-\n
-\n - Wikipédia comme couche séparée dans Paramétrer la carte, sélectionnez uniquement les langues nécessaires
-\n
-\n - Créez vos propres filtres de PI avec une flexibilité totale
-\n
-\n - Ajout d\'options permettant de restaurer les paramètres des profils personnalisés
-\n
-\n - Les routes GPX utilisées en navigation prennent en charge les voies de circulation et les instructions de virage complètes
-\n
-\n - Correction des tailles sur les tablettes
-\n
-\n - Correction de bugs avec RTL
-\n
-\n</string>
+    <string name="release_3_7">- Nouvelles cartes des pentes hors ligne \n \n - Personnalisation complète des favoris et des points de passage GPX - couleurs, icônes et formes personnalisées \n \n - Personnalisez l\'ordre des éléments dans le menu contextuel, le menu configurer la carte et le panneau déroulant \n \n - Wikipédia comme couche séparée dans Paramétrer la carte, sélectionnez uniquement les langues nécessaires \n \n - Créez vos propres filtres de PI avec une flexibilité totale \n \n - Ajout d\'options permettant de restaurer les paramètres des profils personnalisés \n \n - Les routes GPX utilisées en navigation prennent en charge les voies de circulation et les instructions de virage complètes \n \n - Correction des tailles sur les tablettes \n \n - Correction de bugs avec RTL \n \n</string>
     <string name="additional_actions_descr">Accédez à ces actions en appuyant sur le bouton \"%1$s\".</string>
     <string name="quick_action_transport_descr">Bouton pour afficher ou masquer les transports en commun sur la carte.</string>
     <string name="create_edit_poi">Créer ou modifier un PI</string>
