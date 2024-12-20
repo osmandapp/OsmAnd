@@ -5935,4 +5935,7 @@
     <string name="shared_string_interpolation">Интерполяция</string>
     <string name="location_interpolation_percent_desc">Установите процент интерполяции местоположения при навигации по маршруту. Этот параметр уменьшает задержку отображения вашего местоположения на карте во время анимации.</string>
     <string name="selected_delayed_profile">Выбранный профиль «%s»</string>
+    <string name="default_buttons_opacity_original_description">Каждая кнопка будет иметь свою непрозрачность фона.</string>
+    <string name="default_buttons_size_original_description">Каждая кнопка будет иметь свой размер.</string>
+    <string name="default_buttons_corners_original_description">Каждая кнопка будет иметь свой радиус скругления.</string>
 </resources>
