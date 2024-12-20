@@ -302,9 +302,7 @@
     <string name="rename_failed">Преименовање није успело.</string>
     <string name="shared_string_currently_recording_track">Траг која се тренутно снима</string>
     <string name="back_to_map">Назад на карту</string>
-    <string name="plugin_nautical_descr">Овај додатак обогаћује програм ОсмАнд да приказује и поморске путеве, светионике навођења, опасне пловне области, области са ограничењима за једрење и пристајање, итд. Ради употребе, преузмите одговарајуће пловне карте и омогућите приказ „пловне карте“ под „Подеси карту“.
-\n
-\nДодатна сазнања на %1$s.</string>
+    <string name="plugin_nautical_descr">Овај додатак обогаћује програм ОсмАнд да приказује и поморске путеве, светионике навођења, опасне пловне области, области са ограничењима за једрење и пристајање, итд. Ради употребе, преузмите одговарајуће пловне карте и омогућите приказ „пловне карте“ под „Подеси карту“. \n \nДодатна сазнања на %1$s.</string>
     <string name="plugin_ski_descr">Направљено за навођење по областима зимских спортова. Прегледајте скијашке стазе и скијашке жичаре, пољске скијашке стазе, са обојеним линијама које указујућим на тежину стаза. Ради коришћења овог прикључка промените изглед карте на „Подеси карту“ на изглед „Зима и скијање“.</string>
     <string name="shared_string_audio">Звук</string>
     <string name="share_note">Дели белешку</string>
@@ -1017,7 +1015,7 @@
     <string name="update_all_maps_now">Освежити све карте сада?</string>
     <string name="clear_tile_data">Очисти све плочице</string>
     <string name="routing_attr_short_way_name">Пут који штеди гориво</string>
-    <string name="replace_favorite_confirmation">Замените омиљеног %1$s\?</string>
+    <string name="replace_favorite_confirmation">Замените омиљеног %1$s?</string>
     <string name="rendering_attr_hideOverground_name">Надземне грађевине</string>
     <string name="shared_string_change">Промена</string>
     <string name="get_started">Почнимо</string>
@@ -2182,7 +2180,7 @@
     <string name="quick_action_navigation_voice_on">Искључи глас</string>
     <string name="dialog_add_action_title">Додај радњу</string>
     <string name="quick_actions_delete">Обриши радњу</string>
-    <string name="quick_actions_delete_text">Обрисати радњу „%s“\?</string>
+    <string name="quick_actions_delete_text">Обрисати радњу „%s“?</string>
     <string name="quick_favorites_show_favorites_dialog">Прикажи прозорче омиљених</string>
     <string name="favorite_autofill_toast_text">" сачувано је у "</string>
     <string name="favorite_empty_place_name">Место</string>
@@ -2625,9 +2623,7 @@
 \nОвај поглед се може искључити тако што се или овде искључи, или тако што се, по жељи, промени \"Начин изгледа карте\" под \"Подеси карту\".</string>
     <string name="point_deleted">Тачка %1$s је обрисана</string>
     <string name="shared_string_world">Свет</string>
-    <string name="send_search_query_description">Послаћемо упит Ваше претраге: „%1$s“, као и Вашу положај.
-\n
-\n Не сакупљамо личне податке, само нам требају подаци о претрагама да бисмо побољшавали погон претраге.</string>
+    <string name="send_search_query_description">Послаћемо упит Ваше претраге: „%1$s“, као и Вашу положај. \n \n Не сакупљамо личне податке, само нам требају подаци о претрагама да бисмо побољшавали погон претраге.</string>
     <string name="send_search_query">Пошаљи упит претраге?</string>
     <string name="increase_search_radius_to">Повећај полупречник претраге на %1$s</string>
     <string name="thank_you_for_feedback">Хвала за повратном одговору</string>
@@ -4101,8 +4097,7 @@
 \nПрограм ће започети са коришћењем Ваше нове фасцикле података.</string>
     <string name="shared_storage_last_step">Можете одредити нову фасциклу са подацима касније.</string>
     <string name="shared_storage_third_step">Одобрите дозволу за приступ овој фасцикли. Без ње, ОсмАнд не може да умножава датотеке.</string>
-    <string name="shared_storage_first_step">Притисните „%1$s”.
-\nУправник датотека отвара где треба да нађете и отворите фасциклу Османда.</string>
+    <string name="shared_storage_first_step">Притисните „%1$s”. \nУправник датотека отвара где треба да нађете и отворите фасциклу Османда.</string>
     <string name="shared_storage_second_step">Кликните „користи ову фасциклу”.</string>
     <string name="copying_completed">Умножено</string>
     <string name="shared_storage_migration">Пренос на дељено складиште</string>
@@ -4252,9 +4247,7 @@
     <string name="import_tracks_descr">%1$s, садржи %2$s засебне трагове. Изаберите трагове за увоз.</string>
     <string name="select_suggested_points">Изаберите предложене тачке</string>
     <string name="location_source">Извор добављања положаја</string>
-    <string name="location_source_descr">Подразумевано, ОсмАнд уграђен из Гуглове продавнице користи %1$s за одређивање положаја.
-\n
-\nАко добијете нетачне податке о положају или користите уређај без %2$s, покушајте да пређете на „%3$s“</string>
+    <string name="location_source_descr">Подразумевано, ОсмАнд уграђен из Гуглове продавнице користи %1$s за одређивање положаја. \n \nАко добијете нетачне податке о положају или користите уређај без %2$s, покушајте да пређете на „%3$s“</string>
     <string name="default_appearance_desc">Подразумевана боја, сличица и облик ће се применити на додане омиљене тачке у групи.</string>
     <string name="default_appearance">Подразумевани изглед</string>
     <string name="edit_category">Уреди врсту</string>
@@ -4716,9 +4709,7 @@
     <string name="goods_delivery_desc">Доставна возила могу бити забрањена на неким путевима.</string>
     <string name="next_live_update_date_and_time">Следеће освежење на %1$s у %2$s.</string>
     <string name="calculate_online_altitude_descr">Израчунајте надморску висину на служитељима Османда, засновану на сателитским сликама и дигиталним моделима надморске висине. Различитости у односу на висине снимљене уређајем могу бити кориштене за исправку надморске висине.</string>
-    <string name="ant_missing_dependency_descr">Нисам успео да пронађем одговарајућу службу „%1$s“
-\nТреба да уградите или освежите АНТ + службу прикључака
-\nДа ли желите да покренете складиште игара за то\?</string>
+    <string name="ant_missing_dependency_descr">Нисам успео да пронађем одговарајућу службу „%1$s“ \nТреба да уградите или освежите АНТ + службу прикључака \nДа ли желите да покренете складиште игара за то?</string>
     <string name="updated_map_time">Освежено: %1$s.</string>
     <string name="live_update_frequency_hour_variant">Освежења карата се проверавају сваког сата.</string>
     <string name="live_update_frequency_week_variant">Освежења карата се проверавају седмично.</string>
@@ -4742,7 +4733,7 @@
     <string name="sort_duration_descending">Најпре најдуже трајање</string>
     <string name="sort_date_descending">Најпре најстарији датум</string>
     <string name="delete_cloud_version">Избриши издање из облака</string>
-    <string name="cloud_version_confirm_delete">Да ли избрисати „%1$s“ из Облака ОсмАнда\?</string>
+    <string name="cloud_version_confirm_delete">Да ли избрисати „%1$s“ из Облака ОсмАнда?</string>
     <string name="simulation_position_description">Изаберите датотеку трага ради употребе као извора за померање положаја.</string>
     <string name="shared_string_kilograms">килограми</string>
     <string name="share_link">Дели везу</string>
