@@ -252,7 +252,7 @@
     <string name="poi_grit_bin">Ujo kun sablo/salo</string>
     <string name="poi_ambulance_station">Ambulanca stacio</string>
     <string name="poi_disaster_response">Stacio de civila defendo</string>
-    <string name="poi_emergency_access_point">Vivsava rekonebla signo</string>
+    <string name="poi_emergency_access_point">Vivsava orientiĝa signalo</string>
     <string name="poi_ford">Travadejo</string>
     <string name="poi_ford_stepping_stones">Travadejo ŝtona</string>
     <string name="poi_mountain_pass">Montpasejo</string>
@@ -1191,13 +1191,13 @@
     <string name="poi_information_board">tabulo</string>
     <string name="poi_information_map">mapo</string>
     <string name="poi_information_office">oficejo</string>
-    <string name="poi_information_trail_blaze">vojsigno</string>
+    <string name="poi_information_trail_blaze">turisma marko</string>
     <string name="poi_information_terminal">terminalo</string>
-    <string name="poi_information_route_marker">vojsigno</string>
+    <string name="poi_information_route_marker">turisma marko</string>
     <string name="poi_information_hikingmap">mapo piedirada</string>
     <string name="poi_information_nature">naturo</string>
     <string name="poi_information_history">historio</string>
-    <string name="poi_information_sign">signo</string>
+    <string name="poi_information_sign">signalo</string>
     <string name="poi_information_audioguide">son-gvidilo</string>
     <string name="poi_information_bicyclemap">mapo bicikla</string>
     <string name="poi_information_tactile_model">modelo por blinduloj</string>
@@ -4287,7 +4287,7 @@
     <string name="poi_board_type_art">arto</string>
     <string name="poi_board_type_planet_walk">modelo de Suna sistemo</string>
     <string name="poi_board_type_sight">nuna vido</string>
-    <string name="poi_board_type_welcome_sign">bonvena signo</string>
+    <string name="poi_board_type_welcome_sign">bonvena ŝildo</string>
     <string name="poi_tiles">Kahela vendejo</string>
     <string name="poi_board_type_sport">sporto</string>
     <string name="poi_landuse_education">Edukada institucio</string>
