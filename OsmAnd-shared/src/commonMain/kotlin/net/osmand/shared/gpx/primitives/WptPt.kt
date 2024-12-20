@@ -12,8 +12,7 @@ class WptPt : GpxExtensions {
 	var lat: Double = 0.0
 	var lon: Double = 0.0
 	var name: String? = null
-	var link: String? = null
-	var linkText: String? = null
+	var link: Link? = null
 	var category: String? = null
 	var desc: String? = null
 	var comment: String? = null
@@ -37,8 +36,6 @@ class WptPt : GpxExtensions {
 		lat = wptPt.lat
 		lon = wptPt.lon
 		name = wptPt.name
-		link = wptPt.link
-		linkText = wptPt.linkText
 		category = wptPt.category
 		desc = wptPt.desc
 		comment = wptPt.comment
@@ -53,6 +50,7 @@ class WptPt : GpxExtensions {
 		slopeColor = wptPt.slopeColor
 		colourARGB = wptPt.colourARGB
 		distance = wptPt.distance
+		link = wptPt.link?.let { Link(it) }
 		getExtensionsToWrite().putAll(wptPt.getExtensionsToWrite())
 	}
 

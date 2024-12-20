@@ -72,6 +72,7 @@ import net.osmand.search.core.SearchSettings;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.RouteActivityHelper;
+import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -1275,7 +1276,7 @@ public class TravelObfHelper implements TravelHelper {
 		}
 
 		if (!Algorithms.isEmpty(article.getImageTitle())) {
-			gpxFile.getMetadata().setLink(TravelArticle.getImageUrl(article.getImageTitle(), false));
+			gpxFile.getMetadata().setLink(new Link(TravelArticle.getImageUrl(article.getImageTitle(), false)));
 		}
 
 		if (!segmentList.isEmpty()) {

@@ -53,9 +53,9 @@ public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 					null, phones, 0,
 					false, null, false, 0, false, true, false, null, false);
 		}
-		if (!Algorithms.isEmpty(wpt.getLink())) {
+		if (wpt.getLink() != null && !Algorithms.isEmpty(wpt.getLink().getHref())) {
 			buildRow(view, R.drawable.ic_world_globe_dark,
-					null, wpt.getLink(), 0,
+					null, wpt.getLink().getHref(), 0,
 					false, null, false, 0, true, null, false);
 		}
 		if (!Algorithms.isEmpty(emails)) {

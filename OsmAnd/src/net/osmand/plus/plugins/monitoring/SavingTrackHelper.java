@@ -34,6 +34,7 @@ import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.RouteActivityHelper;
+import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.shared.gpx.primitives.Track;
@@ -374,7 +375,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 
 				// check if name is extension (needed for audio/video plugin & josm integration)
 				if (pt.getName() != null && pt.getName().length() > 4 && pt.getName().charAt(pt.getName().length() - 4) == '.') {
-					pt.setLink(pt.getName());
+					pt.setLink(new Link(pt.getName()));
 				}
 
 				String date = DateFormat.format("yyyy-MM-dd", time).toString(); //$NON-NLS-1$

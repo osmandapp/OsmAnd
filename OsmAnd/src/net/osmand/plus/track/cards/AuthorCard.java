@@ -26,8 +26,10 @@ public class AuthorCard extends BaseMetadataCard {
 		super.updateContent();
 
 		Author author = metadata.getAuthor();
+		String url = (author != null && author.getLink() != null) ? author.getLink().getHref() : null;
+
 		boolean visible = author != null && (!Algorithms.isEmpty(author.getName())
-				|| !Algorithms.isEmpty(author.getEmail()) || !Algorithms.isEmpty(author.getLink()));
+				|| !Algorithms.isEmpty(author.getEmail()) || !Algorithms.isEmpty(url));
 
 		updateVisibility(visible);
 
@@ -38,7 +40,7 @@ public class AuthorCard extends BaseMetadataCard {
 			if (!Algorithms.isEmpty(author.getEmail())) {
 				createEmailItemRow(getString(R.string.shared_string_email_address), author.getEmail(), R.drawable.ic_action_at_mail);
 			}
-			createLinkItemRow(getString(R.string.shared_string_link), author.getLink(), R.drawable.ic_action_link);
+			createLinkItemRow(getString(R.string.shared_string_link), url, R.drawable.ic_action_link);
 		}
 	}
 }
