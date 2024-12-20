@@ -5454,4 +5454,5 @@
     <string name="location_interpolation_percent">Céatadán idirshuímh suímh</string>
     <string name="location_interpolation_percent_desc">Socraigh an céatadán d\'idirshuíomh suímh le linn loingseoireachta bealaigh. Laghdaíonn an paraiméadar seo aga moille do shuíomh suímh ar an léarscáil le linn beochana.</string>
     <string name="shared_string_interpolation">Idirshuíomh</string>
+    <string name="selected_delayed_profile">Próifíl roghnaithe \"%s\"</string>
 </resources>

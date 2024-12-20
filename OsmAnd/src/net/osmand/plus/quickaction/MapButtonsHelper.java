@@ -1,5 +1,6 @@
 package net.osmand.plus.quickaction;
 
+import static net.osmand.plus.quickaction.ButtonAppearanceParams.ORIGINAL_VALUE;
 import static net.osmand.plus.quickaction.QuickActionType.CREATE_CATEGORY;
 import static net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState.DEFAULT_BUTTON_ID;
 
@@ -21,6 +22,7 @@ import net.osmand.plus.quickaction.actions.*;
 import net.osmand.plus.quickaction.actions.special.OpenWunderLINQDatagridAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.views.mapwidgets.configure.buttons.*;
 import net.osmand.util.Algorithms;
 
@@ -99,8 +101,13 @@ public class MapButtonsHelper {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
+	private final Collator collator = OsmAndCollator.primaryCollator();
 	private final QuickActionSerializer serializer = new QuickActionSerializer();
 	private final Gson gson = new GsonBuilder().registerTypeAdapter(QuickAction.class, serializer).create();
+
+	private final CommonPreference<Integer> defaultSizePref;
+	private final CommonPreference<Float> defaultOpacityPref;
+	private final CommonPreference<Integer> defaultCornerRadiusPref;
 
 	private Map3DButtonState map3DButtonState;
 	private MyLocationButtonState myLocationButtonState;
@@ -117,11 +124,15 @@ public class MapButtonsHelper {
 	private Map<Integer, QuickActionType> quickActionTypesInt = new TreeMap<>();
 	private Map<String, QuickActionType> quickActionTypesStr = new TreeMap<>();
 	private Set<QuickActionUpdatesListener> updatesListeners = new HashSet<>();
-	private final Collator collator = OsmAndCollator.primaryCollator();
+
 
 	public MapButtonsHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
+		this.defaultSizePref = settings.registerIntPreference("default_map_button_size", ORIGINAL_VALUE).makeProfile().cache();
+		this.defaultOpacityPref = settings.registerFloatPreference("default_map_button_opacity", ORIGINAL_VALUE).makeProfile().cache();
+		this.defaultCornerRadiusPref = settings.registerIntPreference("default_map_button_corner_radius", ORIGINAL_VALUE).makeProfile().cache();
+
 		updateActionTypes();
 		initDefaultButtons();
 	}
@@ -595,6 +606,21 @@ public class MapButtonsHelper {
 			}
 		}
 		return null;
+	}
+
+	@NonNull
+	public CommonPreference<Integer> getDefaultSizePref() {
+		return defaultSizePref;
+	}
+
+	@NonNull
+	public CommonPreference<Float> getDefaultOpacityPref() {
+		return defaultOpacityPref;
+	}
+
+	@NonNull
+	public CommonPreference<Integer> getDefaultCornerRadiusPref() {
+		return defaultCornerRadiusPref;
 	}
 
 	@NonNull

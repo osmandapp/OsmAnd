@@ -127,6 +127,27 @@ public class TravelArticle {
 		return routeId;
 	}
 
+	public boolean hasOsmRouteId() {
+		String routeId = getRouteId();
+		return routeId != null && routeId.startsWith(Amenity.ROUTE_ID_OSM_PREFIX);
+	}
+
+	@NonNull
+	public String getGpxFileName() {
+		String gpxFileName = !Algorithms.isEmpty(title) ? title : routeId;
+		if (gpxFileName != null) {
+			return gpxFileName
+				.replace('/', '_')
+				.replace('\'', '_')
+				.replace('\"', '_')
+				.replace('\r', '_')
+				.replace('\n', '_');
+		} else {
+			LOG.error("Empty travel article in " + this.file);
+			return "Travel Article File"; // @NonNull
+		}
+	}
+
 	public String getRouteSource() {
 		return routeSource;
 	}

@@ -52,7 +52,6 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 	private static final Log LOG = PlatformUtil.getLog(SearchScreen.class);
 	private static final int MAP_MARKERS_LIMIT = 3;
 
-
 	@NonNull
 	private final Action settingsAction;
 
@@ -73,7 +72,6 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 		reloadHistory();
 	}
 
-
 	@NonNull
 	public SearchUICore getSearchUICore() {
 		return getApp().getSearchUICore().getCore();
@@ -81,6 +79,7 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 
 	@Override
 	public void onDestroy(@NonNull LifecycleOwner owner) {
+		super.onDestroy(owner);
 		getApp().getAppInitializer().removeListener(this);
 		getLifecycle().removeObserver(this);
 		destroyed = true;

@@ -1,5 +1,6 @@
 package net.osmand.plus.views.mapwidgets.configure.buttons;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -69,8 +70,22 @@ public class DefaultMapButtonsFragment extends BaseMapButtonsFragment implements
 	protected void showOptionsMenu(@NonNull View view) {
 		List<PopUpMenuItem> items = new ArrayList<>();
 
-		items.add(new PopUpMenuItem.Builder(view.getContext())
+		Context context = view.getContext();
+
+		items.add(new PopUpMenuItem.Builder(context)
+				.setTitleId(R.string.shared_string_appearance)
+				.setIcon(getContentIcon(R.drawable.ic_action_appearance))
+				.setOnClickListener(v -> {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						FragmentManager manager = activity.getSupportFragmentManager();
+						DefaultButtonsAppearanceFragment.showInstance(manager);
+					}
+				}).create());
+
+		items.add(new PopUpMenuItem.Builder(context)
 				.setTitle(getString(R.string.reset_to_default))
+				.showTopDivider(true)
 				.setIcon(getContentIcon(R.drawable.ic_action_reset))
 				.setOnClickListener(v -> {
 					FragmentActivity activity = getActivity();
@@ -80,7 +95,7 @@ public class DefaultMapButtonsFragment extends BaseMapButtonsFragment implements
 					}
 				}).create());
 
-		items.add(new PopUpMenuItem.Builder(view.getContext())
+		items.add(new PopUpMenuItem.Builder(context)
 				.setTitle(getString(R.string.copy_from_other_profile))
 				.setIcon(getContentIcon(R.drawable.ic_action_copy))
 				.setOnClickListener(v -> {
@@ -96,7 +111,6 @@ public class DefaultMapButtonsFragment extends BaseMapButtonsFragment implements
 		displayData.anchorView = view;
 		displayData.menuItems = items;
 		displayData.nightMode = nightMode;
-		displayData.layoutId = R.layout.simple_popup_menu_item;
 		PopUpMenu.show(displayData);
 	}
 

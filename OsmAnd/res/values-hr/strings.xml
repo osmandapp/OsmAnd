@@ -67,7 +67,7 @@
     <string name="safe_mode_description">Pokrenite aplikaciju u sigurnom načinu rada.</string>
     <string name="safe_mode">Siguran način rada</string>
     <string name="native_library_not_running">Aplikacija je pokrenuta sigurnom načinu rada (isključite ga u postavkama).</string>
-    <string name="background_service_is_enabled_question">OsmAnd je pokrenut, ali je u stanju mirovanja. Želite li ga isključiti?</string>
+    <string name="background_service_is_enabled_question">Pozadinska usluga OsmAnd-a još uvijek radi. Želiš li je također zaustaviti?</string>
     <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner aplikacija nije instalirana. Potraži na Market?</string>
     <string name="rendering_attr_roadColors_description">Odaberite shemu boja za ceste:</string>
     <string name="rendering_attr_roadColors_name">Sheme boja za ceste</string>
@@ -165,8 +165,8 @@
     <string name="shared_string_on">Uključeno</string>
     <string name="shared_string_off">Isključeno</string>
     <string name="backToMenu">Povratak na izbornik</string>
-    <string name="zoomOut">Udalji</string>
-    <string name="zoomIn">Približi</string>
+    <string name="zoomOut">Umanji</string>
+    <string name="zoomIn">Uvećaj</string>
     <string name="north">sjever</string>
     <string name="north_north_east">sjever-sjeveroistok</string>
     <string name="north_east">sjeveroistok</string>
@@ -966,9 +966,9 @@
     <string name="rendering_attr_coloredBuildings_name">Obojane zgrade</string>
     <string name="continue_navigation">Nastavi navigaciju</string>
     <string name="pause_navigation">Pauziraj navigaciju</string>
-    <string name="enable_sleep_mode">Omogućite stanje mirovanja GPS-a</string>
+    <string name="enable_sleep_mode">Uključi GPS modus u pozadini</string>
     <string name="gps_wake_up_timer">Interval uključivanja GPS-a</string>
-    <string name="sleep_mode_stop_dialog">Prekinuti GPS stanje mirovanja?</string>
+    <string name="sleep_mode_stop_dialog">Zaustaviti GPS modus u pozadini?</string>
     <string name="map_preferred_locale_descr">Izaberite jezik za oznake na karti (ako jezik nije dostupan prebaciti će se na Engleski ili lokalni jezik)</string>
     <string name="map_preferred_locale">Jezik karte</string>
     <string name="local_map_names">Lokalni nazivi</string>
@@ -980,7 +980,7 @@
     <string name="distance">Udaljenost</string>
     <string name="shared_string_all">Sve</string>
     <string name="way_alarms">Prometna upozorenja</string>
-    <string name="speak_favorites">Najavi favorite u blizini</string>
+    <string name="speak_favorites">Favoriti u blizini</string>
     <string name="speak_poi">POI u blizini</string>
     <string name="download_additional_maps">Preuzeti karte koje nedostaju %1$s (%2$d MB)?</string>
     <string name="live_monitoring_start">Započnite online praćenje</string>
@@ -1643,4 +1643,13 @@
     <string name="add_destination_query">Najprije odaberite odredište</string>
     <string name="rendering_attr_highway_class_path_name">Staza</string>
     <string name="max_level_download_tile_descr">Ne pregledavaj online karte razinom zumiranja izvan ove.</string>
+    <string name="public_transport_type">Vrsta prijevoza</string>
+    <string name="avoid_pt_types">Izbjegni vrste prijevoza …</string>
+    <string name="key_event_action_move_left">Pomakni lijevo</string>
+    <string name="key_event_action_move_up">Pomakni gore</string>
+    <string name="key_event_action_move_down">Pomakni dolje</string>
+    <string name="key_event_action_move_right">Pomakni desno</string>
+    <string name="key_event_action_zoom_in">Uvećaj</string>
+    <string name="key_event_action_zoom_out">Umanji</string>
+    <string name="lang_sr_latn">Srpski (latinica)</string>
 </resources>

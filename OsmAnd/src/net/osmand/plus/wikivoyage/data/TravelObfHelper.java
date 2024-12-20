@@ -2,23 +2,29 @@ package net.osmand.plus.wikivoyage.data;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.data.Amenity.REF;
+import static net.osmand.data.Amenity.ROUTE;
 import static net.osmand.data.Amenity.ROUTE_ID;
+import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
 import static net.osmand.plus.wikivoyage.data.PopularArticles.ARTICLES_PER_PAGE;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_ACTIVITY_TYPE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.AVERAGE_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELEVATION_DOWN;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELEVATION_UP;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DISTANCE;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ELE_GRAPH;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.MAX_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.MIN_ELEVATION;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_RADIUS;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_BBOX_RADIUS;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_TYPE;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.START_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.USER;
 import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_BACKGROUNDS;
 import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_COLORS;
 import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_DELIMITER;
+import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_EMPTY_NAME_STUB;
 import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_ICONS;
 import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_NAMES;
 import static net.osmand.shared.gpx.GpxUtilities.PointsGroup.OBF_POINTS_GROUPS_PREFIX;
@@ -26,8 +32,6 @@ import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_FIRST_DIST;
 import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_FIRST_LETTER;
 import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_MULT_1;
 import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_MULT_2;
-import static net.osmand.shared.gpx.primitives.GpxExtensions.OBF_GPX_EXTENSION_TAG_PREFIX;
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 import android.os.AsyncTask;
 import android.text.TextUtils;
@@ -36,12 +40,16 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import net.osmand.Collator;
 import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.plus.Version;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -62,8 +70,8 @@ import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -76,6 +84,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -88,7 +97,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import gnu.trove.set.TLongSet;
@@ -113,6 +124,16 @@ public class TravelObfHelper implements TravelHelper {
 	private final List<Pair<File, Amenity>> foundAmenities = new ArrayList<>();
 	public volatile int requestNumber = 0;
 
+	// Do not clutter GPX with tags that are always generated.
+	private static final Set<String> doNotSaveAmenityGpxTags = Set.of(
+			"date", "distance", "route_name", "route_bbox_radius",
+			"avg_ele", "min_ele", "max_ele", "start_ele", "ele_graph", "diff_ele_up", "diff_ele_down",
+			"avg_speed", "min_speed", "max_speed", "time_moving", "time_moving_no_gaps", "time_span", "time_span_no_gaps"
+	);
+
+	public static final String WPT_EXTRA_TAGS = "wpt_extra_tags";
+	private static final String METADATA_EXTRA_TAGS = "metadata_extra_tags";
+	private static final String EXTENSIONS_EXTRA_TAGS = "extensions_extra_tags";
 
 	public TravelObfHelper(OsmandApplication app) {
 		this.app = app;
@@ -206,8 +227,15 @@ public class TravelObfHelper implements TravelHelper {
 		return popularArticles;
 	}
 
+	@Override
+	public boolean isTravelGpxTags(@NonNull Map<String, String> tags) {
+		return tags.containsKey(ROUTE_ID) && "segment".equals(tags.get(ROUTE));
+	}
+
 	@Nullable
 	public synchronized TravelGpx searchGpx(@NonNull LatLon location, @Nullable String filter, @Nullable String ref) {
+		final String lcFilter = filter != null ? filter.toLowerCase() : null;
+		final String lcSearchRef = ref != null ? ref.toLowerCase() : null;
 		List<Pair<File, Amenity>> foundAmenities = new ArrayList<>();
 		int searchRadius = ARTICLE_SEARCH_RADIUS;
 		TravelGpx travelGpx = null;
@@ -221,15 +249,23 @@ public class TravelObfHelper implements TravelHelper {
 			}
 			for (Pair<File, Amenity> foundGpx : foundAmenities) {
 				Amenity amenity = foundGpx.second;
-				if ((Algorithms.objectEquals(amenity.getRouteId(), filter)
-						|| Algorithms.objectEquals(amenity.getName(), filter))
-						&& Algorithms.objectEquals(amenity.getRef(), ref)) {
+				final String aRef = amenity.getRef();
+				final String aName = amenity.getName();
+				final String aRouteId = amenity.getRouteId();
+				final String lcRef = aRef != null ? aRef.toLowerCase() : null;
+				final String lcName = aName != null ? aName.toLowerCase() : null;
+				final String lcRouteId = aRouteId != null ? aRouteId.toLowerCase() : null;
+				if ((Algorithms.objectEquals(lcRouteId, lcFilter) || Algorithms.objectEquals(lcName, lcFilter))
+						&& (lcSearchRef == null || Algorithms.objectEquals(lcRef, lcSearchRef))) {
 					travelGpx = getTravelGpx(foundGpx.first, amenity);
 					break;
 				}
 			}
 			searchRadius *= 2;
 		} while (travelGpx == null && searchRadius < MAX_SEARCH_RADIUS);
+		if (travelGpx == null) {
+			LOG.error(String.format("searchGpx(%s, %s, %s) failed", location, filter, ref));
+		}
 		return travelGpx;
 	}
 
@@ -257,7 +293,7 @@ public class TravelObfHelper implements TravelHelper {
 	private TravelArticle cacheTravelArticles(File file, Amenity amenity, String lang, boolean readPoints, @Nullable GpxReadCallback callback) {
 		TravelArticle article = null;
 		Map<String, TravelArticle> articles;
-		if (ROUTE_TRACK.equals(amenity.getSubType())) {
+		if (amenity.isRouteTrack()) {
 			articles = readRoutePoint(file, amenity);
 		} else {
 			articles = readArticles(file, amenity);
@@ -282,40 +318,39 @@ public class TravelObfHelper implements TravelHelper {
 		TravelGpx travelGpx = new TravelGpx();
 		travelGpx.file = file;
 		String title = amenity.getName("en");
-		travelGpx.title = createTitle(Algorithms.isEmpty(title) ? amenity.getName() : title);
+		travelGpx.title = Algorithms.isEmpty(title) ? amenity.getName() : title;
 		travelGpx.lat = amenity.getLocation().getLatitude();
 		travelGpx.lon = amenity.getLocation().getLongitude();
 		travelGpx.description = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.DESCRIPTION));
 		travelGpx.routeId = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID));
 		travelGpx.user = Algorithms.emptyIfNull(amenity.getTagContent(USER));
-		travelGpx.activityType = Algorithms.emptyIfNull(amenity.getTagContent(ACTIVITY_TYPE));
+		travelGpx.activityType = Algorithms.emptyIfNull(amenity.getTagContent(ROUTE_ACTIVITY_TYPE));
 		travelGpx.ref = Algorithms.emptyIfNull(amenity.getRef());
-		try {
-			travelGpx.totalDistance = Float.parseFloat(Algorithms.emptyIfNull(amenity.getTagContent(DISTANCE)));
-			travelGpx.diffElevationUp = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(DIFF_ELEVATION_UP)));
-			travelGpx.diffElevationDown = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(DIFF_ELEVATION_DOWN)));
-			travelGpx.maxElevation = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(MAX_ELEVATION)));
-			travelGpx.minElevation = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(MIN_ELEVATION)));
-			travelGpx.avgElevation = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(AVERAGE_ELEVATION)));
-			String radius = amenity.getTagContent(ROUTE_RADIUS);
-			if (radius != null) {
-				travelGpx.routeRadius = MapUtils.convertCharToDist(radius.charAt(0), TRAVEL_GPX_CONVERT_FIRST_LETTER,
-						TRAVEL_GPX_CONVERT_FIRST_DIST, TRAVEL_GPX_CONVERT_MULT_1, TRAVEL_GPX_CONVERT_MULT_2);
-			}
-		} catch (NumberFormatException e) {
-			LOG.debug(e.getMessage(), e);
+		travelGpx.totalDistance = Algorithms.parseFloatSilently(amenity.getTagContent(DISTANCE), 0);
+		travelGpx.diffElevationUp = Algorithms.parseDoubleSilently(amenity.getTagContent(DIFF_ELEVATION_UP), 0);
+		travelGpx.diffElevationDown = Algorithms.parseDoubleSilently(amenity.getTagContent(DIFF_ELEVATION_DOWN), 0);
+		travelGpx.minElevation = Algorithms.parseDoubleSilently(amenity.getTagContent(MIN_ELEVATION), 0);
+		travelGpx.avgElevation = Algorithms.parseDoubleSilently(amenity.getTagContent(AVERAGE_ELEVATION), 0);
+		travelGpx.maxElevation = Algorithms.parseDoubleSilently(amenity.getTagContent(MAX_ELEVATION), 0);
+		String radius = amenity.getTagContent(ROUTE_BBOX_RADIUS);
+		if (radius != null) {
+			travelGpx.routeRadius = MapUtils.convertCharToDist(radius.charAt(0), TRAVEL_GPX_CONVERT_FIRST_LETTER,
+					TRAVEL_GPX_CONVERT_FIRST_DIST, TRAVEL_GPX_CONVERT_MULT_1, TRAVEL_GPX_CONVERT_MULT_2);
 		}
 		return travelGpx;
 	}
 
 	@NonNull
-	public static SearchPoiTypeFilter getSearchFilter(String... filterSubcategory) {
+	public static SearchPoiTypeFilter getSearchFilter(String... filterSubcategories) {
 		return new SearchPoiTypeFilter() {
 			@Override
 			public boolean accept(PoiCategory type, String subcategory) {
-				for (String filterSubcategory : filterSubcategory) {
-					if (subcategory.equals(filterSubcategory)) {
+				for (String filter : filterSubcategories) {
+					if (subcategory.equals(filter)) {
 						return true;
+					}
+					if (ROUTE_TRACK.equals(filter) && subcategory.startsWith(ROUTES_PREFIX)) {
+						return true; // include routes:routes_xxx with routes:route_track filter
 					}
 				}
 				return false;
@@ -694,7 +729,7 @@ public class TravelObfHelper implements TravelHelper {
 
 	@Override
 	public void openTrackMenu(@NonNull TravelArticle article, @NonNull MapActivity mapActivity,
-	                          @NonNull String gpxFileName, @NonNull LatLon latLon) {
+	                          @NonNull String gpxFileName, @NonNull LatLon latLon, boolean adjustMapPosition) {
 		GpxReadCallback callback = new GpxReadCallback() {
 			@Override
 			public void onGpxFileReading() {
@@ -709,7 +744,7 @@ public class TravelObfHelper implements TravelHelper {
 
 					String name = gpxFileName.endsWith(GPX_FILE_EXT) ? gpxFileName : gpxFileName + GPX_FILE_EXT;
 					File file = new File(FileUtils.getTempDir(app), name);
-					GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, wptPt, article.getAnalysis(), null);
+					GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, wptPt, article.getAnalysis(), null, adjustMapPosition);
 				}
 			}
 		};
@@ -1037,8 +1072,7 @@ public class TravelObfHelper implements TravelHelper {
 	@NonNull
 	@Override
 	public String getGPXName(@NonNull TravelArticle article) {
-		return article.getTitle().replace('/', '_').replace('\'', '_')
-				.replace('\"', '_') + GPX_FILE_EXT;
+		return article.getGpxFileName() + GPX_FILE_EXT;
 	}
 
 	@NonNull
@@ -1070,15 +1104,10 @@ public class TravelObfHelper implements TravelHelper {
 		}
 	}
 
-	@Nullable
-	private synchronized GpxFile buildGpxFile(@NonNull List<BinaryMapIndexReader> readers, TravelArticle article) {
-		List<BinaryMapDataObject> segmentList = new ArrayList<>();
-		Map<String, String> gpxFileExtensions = new HashMap<>();
-		List<Amenity> pointList = new ArrayList<>();
-		List<String> pgNames = new ArrayList<>();
-		List<String> pgIcons = new ArrayList<>();
-		List<String> pgColors = new ArrayList<>();
-		List<String> pgBackgrounds = new ArrayList<>();
+	private void fetchSegmentsAndPoints(List<BinaryMapIndexReader> readers, TravelArticle article,
+	                                    List<BinaryMapDataObject> segmentList, List<Amenity> pointList,
+	                                    Map<String, String> gpxFileExtensions, List<String> pgNames,
+	                                    List<String> pgIcons, List<String> pgColors, List<String> pgBackgrounds) {
 		for (BinaryMapIndexReader reader : readers) {
 			try {
 				if (article.file != null && !article.file.equals(reader.getFile())) {
@@ -1087,75 +1116,17 @@ public class TravelObfHelper implements TravelHelper {
 				if (article instanceof TravelGpx) {
 					BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> sr = BinaryMapIndexReader.buildSearchRequest(
 							0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, 15, null,
-							new ResultMatcher<BinaryMapDataObject>() {
-								@Override
-								public boolean publish(BinaryMapDataObject object) {
-									if (object.getPointsLength() > 1) {
-										if (object.getTagValue(REF).equals(article.ref)
-												&& (object.getTagValue(ROUTE_ID).equals(article.routeId)
-												|| createTitle(object.getName()).equals(article.getTitle()))) {
-											segmentList.add(object);
-										}
-									}
-									return false;
-								}
-
-								@Override
-								public boolean isCancelled() {
-									return false;
-								}
-							});
+							matchSegmentsByRefTitleRouteId(article, segmentList));
 					if (article.routeRadius >= 0) {
 						sr.setBBoxRadius(article.lat, article.lon, article.routeRadius);
 					}
 					reader.searchMapIndex(sr);
 				}
-
 				BinaryMapIndexReader.SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
 						0, 0, Algorithms.emptyIfNull(article.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
 						getSearchFilter(article.getMainFilterString(), article.getPointFilterString()),
-						new ResultMatcher<Amenity>() {
-							@Override
-							public boolean publish(Amenity amenity) {
-								if (amenity.getRouteId().equals(article.getRouteId())) {
-									if (ROUTE_TRACK.equals(amenity.getSubType())) {
-										for (String key : amenity.getAdditionalInfoKeys()) {
-											if (key.startsWith(OBF_GPX_EXTENSION_TAG_PREFIX)) {
-												String tag = key.replaceFirst(OBF_GPX_EXTENSION_TAG_PREFIX, "");
-												String val = amenity.getAdditionalInfo(key);
-												gpxFileExtensions.put(tag, val);
-											} else if (key.startsWith(OBF_POINTS_GROUPS_PREFIX)) {
-												final String delimiter = OBF_POINTS_GROUPS_DELIMITER;
-												String joinedValues = amenity.getAdditionalInfo(key);
-												List<String> values = Arrays.asList(joinedValues.split(delimiter));
-												if (OBF_POINTS_GROUPS_NAMES.equals(key)) {
-													pgNames.addAll(values);
-												} else if (OBF_POINTS_GROUPS_ICONS.equals(key)) {
-													pgIcons.addAll(values);
-												} else if (OBF_POINTS_GROUPS_COLORS.equals(key)) {
-													pgColors.addAll(values);
-												} else if (OBF_POINTS_GROUPS_BACKGROUNDS.equals(key)) {
-													pgBackgrounds.addAll(values);
-												}
-											}
-										}
-									} else if (ROUTE_TRACK_POINT.equals(amenity.getSubType())) {
-										pointList.add(amenity);
-									} else {
-										String amenityLang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
-										if (Algorithms.stringsEqual(article.lang, amenityLang)) {
-											pointList.add(amenity);
-										}
-									}
-								}
-								return false;
-							}
-
-							@Override
-							public boolean isCancelled() {
-								return false;
-							}
-						}, null);
+						matchPointsAndTags(article, pointList, gpxFileExtensions, pgNames, pgIcons, pgColors, pgBackgrounds),
+						null);
 				if (article.routeRadius >= 0) {
 					pointRequest.setBBoxRadius(article.lat, article.lon, article.routeRadius);
 				}
@@ -1171,9 +1142,135 @@ public class TravelObfHelper implements TravelHelper {
 				LOG.error(e.getMessage());
 			}
 		}
-		GpxFile gpxFile = null;
-		String description = article.getDescription();
-		String title = FileUtils.isValidFileName(description) ? description : article.getTitle();
+	}
+
+	@NonNull
+	private ResultMatcher<Amenity> matchPointsAndTags(TravelArticle article, List<Amenity> pointList, Map<String, String> gpxFileExtensions, List<String> pgNames, List<String> pgIcons, List<String> pgColors, List<String> pgBackgrounds) {
+		return new ResultMatcher<Amenity>() {
+			boolean isAlreadyProcessed = false;
+			@Override
+			public boolean publish(Amenity amenity) {
+				if (amenity.getRouteId().equals(article.getRouteId())) {
+					if (amenity.isRouteTrack()) {
+						if (!isAlreadyProcessed) {
+							isAlreadyProcessed = true;
+							reconstructGpxTagsFromAmenityType(amenity, gpxFileExtensions);
+							for (String tag : amenity.getAdditionalInfoKeys()) {
+								String value = amenity.getAdditionalInfo(tag);
+								if (tag.startsWith(OBF_POINTS_GROUPS_PREFIX)) {
+									final String delimiter = OBF_POINTS_GROUPS_DELIMITER;
+									List<String> values = Arrays.asList(value.split(delimiter));
+									if (OBF_POINTS_GROUPS_NAMES.equals(tag)) {
+										pgNames.addAll(values);
+									} else if (OBF_POINTS_GROUPS_ICONS.equals(tag)) {
+										pgIcons.addAll(values);
+									} else if (OBF_POINTS_GROUPS_COLORS.equals(tag)) {
+										pgColors.addAll(values);
+									} else if (OBF_POINTS_GROUPS_BACKGROUNDS.equals(tag)) {
+										pgBackgrounds.addAll(values);
+									}
+								} else if (!doNotSaveAmenityGpxTags.contains(tag)) {
+									gpxFileExtensions.put(tag, value);
+								}
+							}
+						}
+					} else if (ROUTE_TRACK_POINT.equals(amenity.getSubType())) {
+						pointList.add(amenity);
+					} else {
+						String amenityLang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
+						if (Algorithms.stringsEqual(article.lang, amenityLang)) {
+							pointList.add(amenity);
+						}
+					}
+				}
+				return false;
+			}
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		};
+	}
+
+	private void reconstructGpxTagsFromAmenityType(Amenity amenity, Map<String, String> gpxFileExtensions) {
+		if (amenity.isRouteTrack() && amenity.getSubType() != null) {
+			String subType = amenity.getSubType();
+			if (subType.startsWith(ROUTES_PREFIX)) {
+				String osmValue = amenity.getType().getPoiTypeByKeyName(subType).getOsmValue();
+				if (!Algorithms.isEmpty(osmValue)) {
+					if (amenity.hasOsmRouteId() || !"other".equals(osmValue)) {
+						gpxFileExtensions.put(ROUTE_TYPE, osmValue); // do not litter gpx with default route_type
+					}
+					RouteActivityHelper helper = app.getRouteActivityHelper();
+					for (String key : amenity.getAdditionalInfoKeys()) {
+						if (key.startsWith(ROUTE_ACTIVITY_TYPE + "_")) {
+							String activityType = amenity.getAdditionalInfo(key);
+							if (!activityType.isEmpty() && helper.findRouteActivity(activityType) != null) {
+								gpxFileExtensions.put(GpxUtilities.ACTIVITY_TYPE, activityType); // osmand:activity in gpx
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@NonNull
+	private ResultMatcher<BinaryMapDataObject> matchSegmentsByRefTitleRouteId(
+			TravelArticle article, List<BinaryMapDataObject> segmentList) {
+		return new ResultMatcher<BinaryMapDataObject>() {
+			@Override
+			public boolean publish(BinaryMapDataObject object) {
+				if (object.getPointsLength() > 1) {
+					if (object.getTagValue(REF).equals(article.ref)
+							&& (object.getTagValue(ROUTE_ID).equals(article.routeId)
+							|| object.getName().equals(article.getTitle()))) {
+						segmentList.add(object);
+					}
+				}
+				return false;
+			}
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		};
+	}
+
+	@Nullable
+	private synchronized GpxFile buildGpxFile(@NonNull List<BinaryMapIndexReader> readers, TravelArticle article) {
+		List<BinaryMapDataObject> segmentList = new ArrayList<>();
+		Map<String, String> gpxFileExtensions = new TreeMap<>();
+		List<Amenity> pointList = new ArrayList<>();
+		List<String> pgNames = new ArrayList<>();
+		List<String> pgIcons = new ArrayList<>();
+		List<String> pgColors = new ArrayList<>();
+		List<String> pgBackgrounds = new ArrayList<>();
+
+		fetchSegmentsAndPoints(readers, article, segmentList, pointList, gpxFileExtensions,
+				pgNames, pgIcons, pgColors, pgBackgrounds);
+
+		GpxFile gpxFile;
+		if (article instanceof TravelGpx) {
+			gpxFile = new GpxFile(Version.getFullVersion(app));
+			gpxFile.getMetadata().setName(Objects.requireNonNullElse(article.title, article.routeId)); // path is name
+			if (!Algorithms.isEmpty(article.title) && article.hasOsmRouteId()) {
+				gpxFileExtensions.putIfAbsent("name", article.title);
+			}
+			if (!Algorithms.isEmpty(article.description)) {
+				gpxFile.getMetadata().setDesc(article.description);
+			}
+		} else {
+			String description = article.getDescription();
+			String title = FileUtils.isValidFileName(description) ? description : article.getTitle();
+			gpxFile = new GpxFile(title, article.getLang(), article.getContent());
+		}
+
+		if (!Algorithms.isEmpty(article.getImageTitle())) {
+			gpxFile.getMetadata().setLink(TravelArticle.getImageUrl(article.getImageTitle(), false));
+		}
+
 		if (!segmentList.isEmpty()) {
 			boolean hasAltitude = false;
 			Track track = new Track();
@@ -1185,38 +1282,49 @@ public class TravelObfHelper implements TravelHelper {
 					point.setLon(MapUtils.get31LongitudeX(segment.getPoint31XTile(i)));
 					trkSegment.getPoints().add(point);
 				}
-				String ele_graph = segment.getTagValue("ele_graph");
+				String ele_graph = segment.getTagValue(ELE_GRAPH);
 				if (!Algorithms.isEmpty(ele_graph)) {
 					hasAltitude = true;
 					List<Integer> heightRes = KMapAlgorithms.INSTANCE.decodeIntHeightArrayGraph(ele_graph, 3);
-					double startEle = 0;
-					try {
-						startEle = Double.parseDouble(segment.getTagValue("start_ele"));
-					} catch (NumberFormatException e) {
-						LOG.debug(e.getMessage(), e);
-					}
+					double startEle = Algorithms.parseDoubleSilently(segment.getTagValue(START_ELEVATION), 0);
 					KMapAlgorithms.INSTANCE.augmentTrkSegmentWithAltitudes(trkSegment, heightRes, startEle);
 				}
 				track.getSegments().add(trkSegment);
 			}
-			gpxFile = new GpxFile(title, article.getLang(), article.getContent());
-			if (!Algorithms.isEmpty(article.getImageTitle())) {
-				gpxFile.getMetadata().setLink(TravelArticle.getImageUrl(article.getImageTitle(), false));
-			}
 			gpxFile.setTracks(new ArrayList<>());
 			gpxFile.getTracks().add(track);
-			gpxFile.setRef(article.ref);
+			if (!(article instanceof TravelGpx)) {
+				gpxFile.setRef(article.ref);
+			}
 			gpxFile.setHasAltitude(hasAltitude);
-			gpxFile.getExtensionsToWrite().putAll(gpxFileExtensions);
+			if (gpxFileExtensions.containsKey(GpxUtilities.ACTIVITY_TYPE)) {
+				final String activityType =  gpxFileExtensions.get(GpxUtilities.ACTIVITY_TYPE);
+				gpxFile.getMetadata().getExtensionsToWrite().put(GpxUtilities.ACTIVITY_TYPE, activityType);
+
+				// cleanup type and activity tags
+				gpxFileExtensions.remove(ROUTE_TYPE);
+				gpxFileExtensions.remove(ROUTE_ACTIVITY_TYPE);
+				gpxFileExtensions.remove(ROUTE_ACTIVITY_TYPE + "_" + activityType);
+				gpxFileExtensions.remove(GpxUtilities.ACTIVITY_TYPE); // moved to the metadata
+			}
+
+			Gson gson = new Gson();
+			Type type = new TypeToken<Map<String, String>>() {}.getType();
+			if (gpxFileExtensions.containsKey(EXTENSIONS_EXTRA_TAGS)) {
+				gpxFile.getExtensionsToWrite()
+						.putAll(gson.fromJson(gpxFileExtensions.get(EXTENSIONS_EXTRA_TAGS), type));
+				gpxFileExtensions.remove(EXTENSIONS_EXTRA_TAGS);
+			}
+			if (gpxFileExtensions.containsKey(METADATA_EXTRA_TAGS)) {
+				gpxFile.getMetadata().getExtensionsToWrite()
+						.putAll(gson.fromJson(gpxFileExtensions.get(METADATA_EXTRA_TAGS), type));
+				gpxFileExtensions.remove(METADATA_EXTRA_TAGS);
+			}
+
+			gpxFile.getExtensionsToWrite().putAll(gpxFileExtensions); // finally
 		}
 		reconstructPointsGroups(gpxFile, pgNames, pgIcons, pgColors, pgBackgrounds); // create groups before points
 		if (!pointList.isEmpty()) {
-			if (gpxFile == null) {
-				gpxFile = new GpxFile(title, article.getLang(), article.getContent());
-				if (!Algorithms.isEmpty(article.getImageTitle())) {
-					gpxFile.getMetadata().setLink(TravelArticle.getImageUrl(article.getImageTitle(), false));
-				}
-			}
 			for (Amenity wayPoint : pointList) {
 				gpxFile.addPoint(article.createWptPt(wayPoint, article.getLang()));
 			}
@@ -1234,16 +1342,13 @@ public class TravelObfHelper implements TravelHelper {
 				String icon = pgIcons.get(i);
 				String background = pgBackgrounds.get(i);
 				int color = KAlgorithms.INSTANCE.parseColor(pgColors.get(i));
-				if (name.isEmpty()) name = GpxFile.DEFAULT_WPT_GROUP_NAME; // follow current default
+				if (name.isEmpty() || OBF_POINTS_GROUPS_EMPTY_NAME_STUB.equals(name)) {
+					name = GpxFile.DEFAULT_WPT_GROUP_NAME; // follow current default
+				}
 				GpxUtilities.PointsGroup pg = new GpxUtilities.PointsGroup(name, icon, background, color);
 				gpxFile.addPointsGroup(pg);
 			}
 		}
-	}
-
-	@NonNull
-	public String createTitle(@NonNull String name) {
-		return capitalizeFirstLetter(GpxHelper.INSTANCE.getGpxTitle(name));
 	}
 
 	private class GpxFileReader extends AsyncTask<Void, Void, GpxFile> {

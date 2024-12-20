@@ -9,6 +9,7 @@ import static net.osmand.shared.routing.Gpx3DWallColorType.UPWARD_GRADIENT;
 import static net.osmand.plus.views.layers.geometry.GeometryWayStyle.COLORIZATION_GRADIENT;
 import static net.osmand.plus.views.layers.geometry.GeometryWayStyle.COLORIZATION_NONE;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -34,6 +35,7 @@ import net.osmand.core.jni.VectorLine;
 import net.osmand.core.jni.VectorLineBuilder;
 import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.track.Gpx3DLinePositionType;
 import net.osmand.plus.track.Gpx3DVisualizationType;
 import net.osmand.plus.utils.NativeUtilities;
@@ -49,7 +51,7 @@ import java.util.List;
 public class GeometryWayDrawer<T extends GeometryWayContext> {
 
 	protected static final int LINE_ID = 1;
-	public static final float VECTOR_LINE_SCALE_COEF = 2.0f;
+	private static final float VECTOR_LINE_SCALE_COEF = 2.0f;
 	private static final Log log = PlatformUtil.getLog(GeometryWayDrawer.class);
 
 	private final T context;
@@ -95,6 +97,11 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 
 	public T getContext() {
 		return context;
+	}
+
+	public static float getVectorLineScale(@NonNull Context context) {
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		return VECTOR_LINE_SCALE_COEF + (1 - app.getOsmandMap().getCarDensityScaleCoef()) * VECTOR_LINE_SCALE_COEF;
 	}
 
 	public void drawArrowsOverPath(@NonNull Canvas canvas, @NonNull RotatedTileBox tb, List<GeometryWayPoint> points, double distPixToFinish) {
@@ -214,8 +221,9 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			if (line.getLineId() == lineId) {
 				line.setElevationScaleFactor(additionalExaggeration);
 				line.setFillColor(NativeUtilities.createFColorARGB(color));
-				line.setLineWidth(width * VECTOR_LINE_SCALE_COEF);
-				line.setOutlineWidth(outlineWidth * VECTOR_LINE_SCALE_COEF);
+				float vectorLineScale = getVectorLineScale(context.getApp());
+				line.setLineWidth(width * vectorLineScale);
+				line.setOutlineWidth(outlineWidth * vectorLineScale);
 				line.setPoints(points);
 
 				setupColorization(line, colorizationScheme, colorizationMapping, outlineColorizationMapping,
@@ -235,7 +243,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 						line.setSurfaceLineVisibility(linePositionType == BOTTOM || linePositionType == TOP_BOTTOM);
 					}
 					line.setFillColor(new FColorARGB(a, r, g, b));
-					line.setOutlineWidth(width * VECTOR_LINE_SCALE_COEF / 2.0f);
+					line.setOutlineWidth(width * getVectorLineScale(context.getApp()) / 2.0f);
 
 					if (wallColorType == Gpx3DWallColorType.NONE) {
 						line.setColorizationScheme(COLORIZATION_GRADIENT);
@@ -263,11 +271,12 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			}
 		}
 		VectorLineBuilder builder = new VectorLineBuilder();
+		float vectorLineScale = getVectorLineScale(context.getApp());
 		builder.setPoints(points)
 				.setIsHidden(false)
 				.setLineId(lineId)
-				.setLineWidth(width * VECTOR_LINE_SCALE_COEF)
-				.setOutlineWidth(outlineWidth * VECTOR_LINE_SCALE_COEF)
+				.setLineWidth(width * vectorLineScale)
+				.setOutlineWidth(outlineWidth * vectorLineScale)
 				.setApproximationEnabled(approximationEnabled)
 				.setBaseOrder(baseOrder);
 		if (dashPattern != null) {
@@ -302,7 +311,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			builder.setElevationScaleFactor(additionalExaggeration)
 					.setColorizationScheme(colorizationScheme)
 					.setHeights(heights)
-					.setOutlineWidth(width * VECTOR_LINE_SCALE_COEF / 2.0f);
+					.setOutlineWidth(width * vectorLineScale / 2.0f);
 			if (wallColorType == NONE) {
 				builder.setNearOutlineColor(new FColorARGB(0, r, g, b));
 				builder.setFarOutlineColor(new FColorARGB(0, r, g, b));

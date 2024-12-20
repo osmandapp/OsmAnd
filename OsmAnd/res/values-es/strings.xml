@@ -6076,4 +6076,5 @@
     <string name="location_interpolation_percent">Porcentaje de interpolación de la ubicación</string>
     <string name="location_interpolation_percent_desc">Establece el porcentaje de interpolación de la posición durante la navegación por la ruta. Este parámetro reduce el desfase de la posición de tu ubicación en el mapa durante la animación.</string>
     <string name="shared_string_interpolation">Interpolación</string>
+    <string name="selected_delayed_profile">Perfil seleccionado \"%s\"</string>
 </resources>

@@ -6052,4 +6052,5 @@
     <string name="location_interpolation_percent">Persentase interpolasi lokasi</string>
     <string name="shared_string_interpolation">Interpolasi</string>
     <string name="location_interpolation_percent_desc">Tetapkan presentasi interpolasi lokasi saat navigasi rute. Parameter ini mengurangi kelambatan posisi lokasi di peta saat ada animasi.</string>
+    <string name="selected_delayed_profile">Profil \"%s\" terpilih</string>
 </resources>

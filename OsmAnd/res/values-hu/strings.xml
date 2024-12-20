@@ -5643,4 +5643,5 @@
     <string name="shared_string_interpolation">Interpoláció</string>
     <string name="location_interpolation_percent">Hely interpolációs százaléka</string>
     <string name="location_interpolation_percent_desc">Állítsa be a navigáció használata közbeni helyinterpoláció százalékos értékét. Ez a paraméter csökkenti a térképen az animálás során megjelenített pozíciójának lemaradását a tényleges helyzetéhez képest.</string>
+    <string name="selected_delayed_profile">Kiválasztott profil: \"%s\"</string>
 </resources>
