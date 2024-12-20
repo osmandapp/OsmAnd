@@ -5681,4 +5681,7 @@
     <string name="shared_string_interpolation">Interpolacija</string>
     <string name="location_interpolation_percent_desc">Postavi procenat interpolacije lokacije tokom navigacije. Ovaj parametar smanjuje kašnjenje položaja tvoje lokacije na mapi tokom animacije.</string>
     <string name="selected_delayed_profile">Izabrani profil \"%s\"</string>
+    <string name="default_buttons_opacity_original_description">Svako dugme čuva svoju providnost pozadine.</string>
+    <string name="default_buttons_corners_original_description">Svako dugme zadržava svoj radijus okretanja.</string>
+    <string name="default_buttons_size_original_description">Svako dugme zadržava svoju vlastitu veličinu.</string>
 </resources>
