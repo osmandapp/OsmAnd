@@ -1696,9 +1696,7 @@
 \n无需下载专门的地图，我们基于标准地图创建的该视图。
 \n
 \n您可以在此重新激活该视图，或者根据需要更改 “配置地图 ”下的 “地图样式”。</string>
-    <string name="plugin_nautical_descr">通过航行路线、导航灯、航海危险区、限制航行或停靠区等信息丰富地图内容。在使用前，请下载相应的航海地图，并在 “配置地图 ”下启用 “航海地图 ”样式。
-\n
-\n了解更多 %1$s。</string>
+    <string name="plugin_nautical_descr">通过航行路线、导航灯、航海危险区、限制航行或停靠区等信息丰富地图内容。在使用前，请下载相应的航海地图，并在 “配置地图 ”下启用 “航海地图 ”样式。 \n \n了解更多 %1$s。</string>
     <string name="plugin_ski_descr">专为冬季运动场地导航而设计： 查看滑雪道、滑雪缆车和越野滑雪道，并用彩色线条标示难度等级。使用时，请启用此插件，并进入 \"配置地图\"，选择 \"冬季和滑雪 \"地图样式。</string>
     <string name="index_tours">旅游</string>
     <string name="shared_string_all">全部</string>
@@ -2566,9 +2564,7 @@
     <string name="open_in_browser_wiki">在线打开条目</string>
     <string name="wiki_article_not_found">未找到条目</string>
     <string name="increase_search_radius_to">增大搜索半径至 %1$s</string>
-    <string name="send_search_query_description">你的搜索查询将与你的位置一起发送到：“ %1$s”。
-\n
-\n 不收集个人信息，仅收集改善搜索所需的搜索数据。</string>
+    <string name="send_search_query_description">你的搜索查询将与你的位置一起发送到：“ %1$s”。 \n \n 不收集个人信息，仅收集改善搜索所需的搜索数据。</string>
     <string name="send_search_query">发送搜索请求？</string>
     <string name="search_street">搜索街道</string>
     <string name="start_search_from_city">首先指定城市/乡镇/地区</string>
@@ -3770,8 +3766,7 @@
 \n请注意，较高的最小距离可能会过度简化轨迹的几何形状。</string>
     <string name="app_modes_options">选择程序模式</string>
     <string name="gps_filter_speed_altitude_desc">只有匹配设定间隔的轨迹点才会出现在图表和地图上，其余的轨迹点将被隐藏。</string>
-    <string name="shared_storage_first_step">按 “%1$s”。
-\n文件管理器会在你需要寻找并打开 osmand 文件夹的地方打开。</string>
+    <string name="shared_storage_first_step">按 “%1$s”。 \n文件管理器会在你需要寻找并打开 osmand 文件夹的地方打开。</string>
     <string name="folder_access_denied">需要权限才能访问所选文件夹。</string>
     <string name="copying_completed">已复制</string>
     <string name="shared_string_migration">迁移</string>
@@ -4275,9 +4270,7 @@
     <string name="gpx_no_routes_descr">你可以使用\"%1$s\"工具将路线添加到文件中。</string>
     <string name="list_of_groups">群组列表</string>
     <string name="routing_attr_difficulty_preference_advanced_name">高级</string>
-    <string name="location_source_descr">默认情况下，从Google Play安装的OsmAnd使用%1$s来确定位置。
-\n
-\n如果您获得不准确的位置信息或使用没有 %2$s 的设备，请尝试切换到“%3$s”</string>
+    <string name="location_source_descr">默认情况下，从Google Play安装的OsmAnd使用%1$s来确定位置。 \n \n如果您获得不准确的位置信息或使用没有 %2$s 的设备，请尝试切换到“%3$s”</string>
     <string name="quick_action_add_route_descr">一个可以从屏幕中间启动路线的按钮。</string>
     <string name="routing_attr_difficulty_preference_beginner_name">初学者</string>
     <string name="routing_attr_freeride_policy_allow_name">允许</string>
@@ -4369,19 +4362,7 @@
     <string name="compass_always_visible">始终可见</string>
     <string name="goods_delivery_desc_4">对超过 3.5 吨的车辆使用卡车配置文件。</string>
     <string name="routing_attr_freeride_policy_description">“自由式滑雪(Freeride)”和“越野滑雪(Off-piste)”是非官方的路线和通道。通常未经修饰，没有维护，晚上没有检查。请自行承担风险。</string>
-    <string name="release_4_0_beta">- 增加了以英尺为单位下载等高线的选项
-\n
-\n - 规划路线景观：增加了在点或图表之间切换的选项卡
-\n
-\n - OsmAnd实时更新移至 “下载 &gt; 更新”
-\n
-\n - 轨迹现在可以按高度、速度或坡度进行着色。
-\n
-\n - 增加了改变路线外观的选项。
-\n
-\n - 更新了“行程录制”对话框
-\n
-\n</string>
+    <string name="release_4_0_beta">- 增加了以英尺为单位下载等高线的选项 \n \n - 规划路线景观：增加了在点或图表之间切换的选项卡 \n \n - OsmAnd实时更新移至 “下载 &gt; 更新” \n \n - 轨迹现在可以按高度、速度或坡度进行着色。 \n \n - 增加了改变路线外观的选项。 \n \n - 更新了“行程录制”对话框 \n \n</string>
     <string name="release_3_5">- 更新了应用程序和配置文件设置。设置现在按类型排列。每个配置文件都可以单独定制。
 \n
 \n - 新的地图下载对话框，建议在浏览时下载地图
@@ -4534,9 +4515,7 @@
     <string name="map_widget_altitude_desc">显示当前地理位置的海拔或当前地图中心的高度</string>
     <string name="map_widget_rendering_fps_desc">显示地图和地图元素的显示和刷新速度，以每秒帧数 （FPS） 表示。</string>
     <string name="ant_go_to_store">前往商店</string>
-    <string name="ant_missing_dependency_descr">找不到所需的服务“%1$s”。
-\n您需要安装或更新 ANT + 插件服务。
-\n您想启动 Play 商店来进行安装或更新吗？</string>
+    <string name="ant_missing_dependency_descr">找不到所需的服务“%1$s”。 \n您需要安装或更新 ANT + 插件服务。 \n您想启动 Play 商店来进行安装或更新吗？</string>
     <string name="ant_missing_dependency">缺少依赖关系</string>
     <string name="ant_read_data">读取数据</string>
     <string name="ant_write_to_gpx">将数据写入轨迹</string>
