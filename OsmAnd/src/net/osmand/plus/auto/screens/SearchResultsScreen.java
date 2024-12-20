@@ -28,7 +28,6 @@ import java.util.List;
 public final class SearchResultsScreen extends BaseSearchScreen implements DefaultLifecycleObserver,
 		AppInitializeListener {
 
-
 	@NonNull
 	private final Action settingsAction;
 	@NonNull
@@ -77,6 +76,7 @@ public final class SearchResultsScreen extends BaseSearchScreen implements Defau
 
 	@Override
 	public void onDestroy(@NonNull LifecycleOwner owner) {
+		super.onDestroy(owner);
 		getApp().getAppInitializer().removeListener(this);
 		getLifecycle().removeObserver(this);
 		destroyed = true;

@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="default_buttons_size_original_description">Each button would keep its own size.</string>
+    <string name="default_buttons_corners_original_description">Each button would keep its own corner radius.</string>
+    <string name="default_buttons_opacity_original_description">Each button would keep its own background opacity.</string>
     <string name="selected_delayed_profile">Selected profile \"%s\"</string>
     <string name="shared_string_interpolation">Interpolation</string>
     <string name="location_interpolation_percent">Location interpolation percentage</string>

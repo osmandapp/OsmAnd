@@ -222,17 +222,49 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 
 	@Override
 	public final void resetToDefault() {
-		T o = getProfileDefaultValue(getApplicationMode());
-		set(o);
+		if (global) {
+			T oldValue = get();
+			Object prefs = getPreferences();
+			if (getSettingsAPI().edit(prefs).remove(getId()).commit()) {
+				T newValue = get();
+				boolean changed = !Algorithms.objectEquals(oldValue, newValue);
+				if (changed && lastModifiedTimeStored) {
+					setLastModifiedTime(prefs, System.currentTimeMillis());
+				}
+				if (changed && isShared()) {
+					if (PluginsHelper.isDevelopment()) {
+						Log.d("CommonPreference", "RESET_TO_DEFAULT id=" + getId()
+								+ " value=" + newValue + " cached=" + cachedValue);
+					}
+					settings.updateLastPreferencesEditTime(prefs);
+				}
+				cachedValue = newValue;
+				cachedPreference = prefs;
+				fireEvent(newValue);
+			}
+		} else {
+			resetModeToDefault(getApplicationMode());
+		}
 	}
 
 	@Override
 	public final void resetModeToDefault(ApplicationMode mode) {
 		if (global) {
 			resetToDefault();
-		} else {
-			T o = getProfileDefaultValue(mode);
-			setModeValue(mode, o);
+		} else if (mode != null) {
+			T oldValue = getModeValue(mode);
+			Object prefs = settings.getProfilePreferences(mode);
+			if (getSettingsAPI().edit(prefs).remove(getId()).commit()) {
+				T newValue = getModeValue(mode);
+				boolean changed = !Algorithms.objectEquals(oldValue, newValue);
+				if (changed) {
+					settings.updateLastPreferencesEditTime(prefs);
+				}
+				if (cache && cachedPreference == prefs) {
+					cachedValue = newValue;
+				}
+				fireEvent(newValue);
+			}
 		}
 	}
 

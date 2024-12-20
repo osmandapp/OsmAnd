@@ -155,7 +155,8 @@ public class OsmandMap {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		if (mapView.isCarView()) {
 			float carViewDensity = mapView.getCarViewDensity();
-			return carViewDensity / 2.6f;
+			float density = mapView.getDensity();
+			return carViewDensity / density;
 		}
 		return 1f;
 	}

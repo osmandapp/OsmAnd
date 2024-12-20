@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.ButtonAppearanceParams;
@@ -28,7 +29,7 @@ public class MapButtonCard extends MapBaseCard {
 	private MapButton mapButton;
 
 	public MapButtonCard(@NonNull MapActivity mapActivity, @NonNull MapButtonState buttonState,
-	                     @Nullable ButtonAppearanceParams customAppearanceParams) {
+			@Nullable ButtonAppearanceParams customAppearanceParams) {
 		super(mapActivity, false);
 		this.buttonState = buttonState;
 		this.customAppearanceParams = customAppearanceParams;
@@ -45,7 +46,7 @@ public class MapButtonCard extends MapBaseCard {
 		container.removeAllViews();
 
 		setupButton(container);
-		setupButtonBackground(container);
+		setupButtonBackground(container, nightMode);
 	}
 
 	public void setupButton(@NonNull ViewGroup container) {
@@ -67,11 +68,13 @@ public class MapButtonCard extends MapBaseCard {
 		if (mapButton != null) {
 			customAppearanceParams = appearanceParams;
 			mapButton.setCustomAppearanceParams(appearanceParams);
+			mapButton.setInvalidated(true);
 			mapButton.update();
 		}
 	}
 
-	private void setupButtonBackground(@NonNull View view) {
+	public static void setupButtonBackground(@NonNull View view, boolean nightMode) {
+		OsmandApplication app = (OsmandApplication) view.getContext().getApplicationContext();
 		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 		if (renderer != null) {
 			MapRenderRepositories maps = app.getResourceManager().getRenderer();

@@ -4901,4 +4901,12 @@
     <string name="poi_routes_water_sport">Deportes acuáticos</string>
     <string name="poi_routes_driving">Conduciendo</string>
     <string name="poi_routes_motorcycling">Motociclismo</string>
+    <string name="poi_route_activity_type_all_terrain_vehicle">ATV (Vehículo todoterreno)</string>
+    <string name="poi_route_activity_type_enduro_motorcycling">Motociclismo enduro</string>
+    <string name="poi_route_activity_type_off_road">Todoterreno</string>
+    <string name="poi_route_activity_type_karting">Karting</string>
+    <string name="poi_route_activity_type_adventure_motorcycling">Motociclismo de aventura</string>
+    <string name="poi_route_activity_type_motocross">Motocrós</string>
+    <string name="poi_route_activity_type_car">Coche</string>
+    <string name="poi_route_activity_type_truck_hgv">Camión (vehículo pesado)</string>
 </resources>
