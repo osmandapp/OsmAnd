@@ -1154,7 +1154,14 @@ public class TravelObfHelper implements TravelHelper {
 					if (amenity.isRouteTrack()) {
 						if (!isAlreadyProcessed) {
 							isAlreadyProcessed = true;
-							reconstructGpxTagsFromAmenityType(amenity, gpxFileExtensions);
+							reconstructActivityFromAmenity(amenity, gpxFileExtensions);
+							amenity.getNamesMap(true).forEach((lang, value) ->
+									{
+										if (!"ref".equals(lang) && !"sym".equals(lang)) {
+											gpxFileExtensions.put("name:" + lang, value);
+										}
+									}
+							);
 							for (String tag : amenity.getAdditionalInfoKeys()) {
 								String value = amenity.getAdditionalInfo(tag);
 								if (tag.startsWith(OBF_POINTS_GROUPS_PREFIX)) {
@@ -1192,7 +1199,7 @@ public class TravelObfHelper implements TravelHelper {
 		};
 	}
 
-	private void reconstructGpxTagsFromAmenityType(Amenity amenity, Map<String, String> gpxFileExtensions) {
+	private void reconstructActivityFromAmenity(Amenity amenity, Map<String, String> gpxFileExtensions) {
 		if (amenity.isRouteTrack() && amenity.getSubType() != null) {
 			String subType = amenity.getSubType();
 			if (subType.startsWith(ROUTES_PREFIX)) {
