@@ -5661,4 +5661,7 @@
     <string name="location_interpolation_percent_desc">Agordi elcenton de alproksimigo de pozicio dum navigi laŭ kurso. Tiu ĉi parametro malpliigas prokraston vidigi vian movbildan pozicion sur la mapo.</string>
     <string name="shared_string_interpolation">Interpolo</string>
     <string name="selected_delayed_profile">Elektis profilon “%s”</string>
+    <string name="default_buttons_corners_original_description">Ĉiu butono havos sian implicitan rondecon (radiuson de angulo).</string>
+    <string name="default_buttons_opacity_original_description">Ĉiu butono havos sian implicitan travideblon de interna fono.</string>
+    <string name="default_buttons_size_original_description">Ĉiu butono havos sian implicitan grandon.</string>
 </resources>
