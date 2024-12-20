@@ -13,13 +13,13 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
+import net.osmand.plus.utils.FontCache;
 
 public class AisObjectMenuBuilder extends MenuBuilder {
 
@@ -88,7 +88,7 @@ public class AisObjectMenuBuilder extends MenuBuilder {
             LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             AndroidUtils.setMargins(llTextParams, dpToPx(16f), dpToPx(8f), 0, 0);
             textPrefixView.setLayoutParams(llTextParams);
-            textPrefixView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
+            textPrefixView.setTypeface(FontCache.getNormalFont());
             textPrefixView.setTextSize(12);
             textPrefixView.setTextColor(ColorUtilities.getSecondaryTextColor(app, !light));
             textPrefixView.setMinLines(1);
@@ -103,7 +103,7 @@ public class AisObjectMenuBuilder extends MenuBuilder {
         AndroidUtils.setMargins(llTextParams,
                 dpToPx(16f), dpToPx(textPrefixView != null ? 2f : (suffixText != null ? 10f : 8f)), 0, dpToPx(suffixText != null ? 6f : 8f));
         textView.setLayoutParams(llTextParams);
-        textView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
+        textView.setTypeface(FontCache.getNormalFont());
         textView.setTextSize(16);
         textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
         textView.setText(aisType);
@@ -124,7 +124,7 @@ public class AisObjectMenuBuilder extends MenuBuilder {
             LinearLayout.LayoutParams llTextSecondaryParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             AndroidUtils.setMargins(llTextSecondaryParams, dpToPx(16f), 0, 0, dpToPx(6f));
             textViewSecondary.setLayoutParams(llTextSecondaryParams);
-            textViewSecondary.setTypeface(FontCache.getRobotoRegular(view.getContext()));
+            textViewSecondary.setTypeface(FontCache.getNormalFont());
             textViewSecondary.setTextSize(14);
             textViewSecondary.setTextColor(ColorUtilities.getSecondaryTextColor(app, !light));
             textViewSecondary.setText(suffixText);
@@ -138,7 +138,7 @@ public class AisObjectMenuBuilder extends MenuBuilder {
             buttonTextViewParams.gravity = Gravity.CENTER_VERTICAL;
             AndroidUtils.setMargins(buttonTextViewParams, dpToPx(8), 0, dpToPx(8), 0);
             buttonTextView.setLayoutParams(buttonTextViewParams);
-            buttonTextView.setTypeface(FontCache.getRobotoMedium(view.getContext()));
+            buttonTextView.setTypeface(FontCache.getMediumFont());
             buttonTextView.setTextSize(16);
             buttonTextView.setTextColor(ContextCompat.getColor(view.getContext(), !light ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n));
             buttonTextView.setText(aisValue);

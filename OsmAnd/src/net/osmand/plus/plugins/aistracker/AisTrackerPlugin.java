@@ -94,12 +94,12 @@ public class AisTrackerPlugin extends OsmandPlugin {
     }
     @Override
     public CharSequence getDescription(boolean linksEnabled) {
-        return app.getString(R.string.plugin_aistracker_description).concat("\n\n").concat(app.getString(R.string.plugin_aistracker_disclaimer));
+        return app.getString(R.string.plugin_ais_tracker_description).concat("\n\n").concat(app.getString(R.string.plugin_ais_tracker_disclaimer));
     }
 
     @Override
     public String getName() {
-        return app.getString(R.string.plugin_aistracker_name);
+        return app.getString(R.string.plugin_ais_tracker_name);
     }
 
     @Override

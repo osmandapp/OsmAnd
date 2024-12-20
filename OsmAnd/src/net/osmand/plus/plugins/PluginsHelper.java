@@ -561,14 +561,14 @@ public class PluginsHelper {
 	}
 
 	public static List<String> onIndexingFiles(@Nullable IProgress progress) {
-		List<String> l = new ArrayList<>();
+		List<String> list = new ArrayList<>();
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			List<String> ls = plugin.indexingFiles(progress);
-			if (ls != null && !ls.isEmpty()) {
-				l.addAll(ls);
+			List<String> files = plugin.indexingFiles(progress);
+			if (!Algorithms.isEmpty(files)) {
+				list.addAll(files);
 			}
 		}
-		return l;
+		return list;
 	}
 
 	public static void onMapActivityCreate(@NonNull MapActivity activity) {
