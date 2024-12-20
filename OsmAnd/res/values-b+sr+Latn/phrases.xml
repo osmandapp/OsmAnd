@@ -4901,4 +4901,14 @@
     <string name="poi_routes_driving">Vožnja</string>
     <string name="poi_routes_water_sport">Sportovi na vodi</string>
     <string name="poi_routes_other">Druge rute</string>
+    <string name="poi_route_activity_type_car">Kola</string>
+    <string name="poi_route_activity_type_off_road">Van puta</string>
+    <string name="poi_route_activity_type_all_terrain_vehicle">ATV (terensko vozilo)</string>
+    <string name="poi_route_activity_type_truck_hgv">Kamion (HGV)</string>
+    <string name="poi_route_activity_type_karting">Karting</string>
+    <string name="poi_route_activity_type_adventure_motorcycling">Avanturistički motociklizam</string>
+    <string name="poi_route_activity_type_enduro_motorcycling">Enduro motociklizam</string>
+    <string name="poi_route_activity_type_road_motorcycling">Drumski motociklizam</string>
+    <string name="poi_route_activity_type_motocross">Motokros</string>
+    <string name="poi_route_activity_type_off_road_motorcycling_dirt_biking">Terenski motociklizam (prljavi biciklizam)</string>
 </resources>
