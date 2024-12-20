@@ -1422,9 +1422,7 @@
     <string name="rename_failed">Umbenennen fehlgeschlagen.</string>
     <string name="shared_string_currently_recording_track">Momentane Trackaufzeichnung</string>
     <string name="back_to_map">Zurück zur Karte</string>
-    <string name="plugin_nautical_descr">Reichert Ihre Karte mit Informationen über Segelrouten, Leuchtfeuer, nautische Gefahrenzonen, Zonen mit Segel- oder Anlegeverboten usw. an. Um sie zu verwenden, laden Sie die entsprechenden nautischen Karten herunter und aktivieren Sie den Stil „Nautisch“ unter „Menü → Karte konfigurieren → Kartendarstellung“.
-\n
-\nWeitere Informationen unter %1$s.</string>
+    <string name="plugin_nautical_descr">Reichert Ihre Karte mit Informationen über Segelrouten, Leuchtfeuer, nautische Gefahrenzonen, Zonen mit Segel- oder Anlegeverboten usw. an. Um sie zu verwenden, laden Sie die entsprechenden nautischen Karten herunter und aktivieren Sie den Stil „Nautisch“ unter „Menü → Karte konfigurieren → Kartendarstellung“. \n \nWeitere Informationen unter %1$s.</string>
     <string name="plugin_ski_descr">Entwickelt für die Navigation in Wintersportgebieten: Sehen Sie Skipisten, Skilifte und Langlaufloipen, mit farbigen Linien, die Schwierigkeitsgrade anzeigen. Um diese Erweiterung zu verwenden, aktivieren Sie sie und wählen Sie unter „Karte konfigurieren“ den Kartenstil „Winter und Ski“.</string>
     <string name="plugin_touringview_descr">Bei Aktivierung dieser Ansicht wechselt die Kartendarstellung zur „Tourenkarte“, einer besonders detaillierten Darstellung für Fernreisende und Berufsfahrer.
 \n
@@ -1958,7 +1956,7 @@
     <string name="route_stops_before">%1$s Haltestellen davor</string>
     <string name="rendering_attr_hideOverground_name">Oberirdische Objekte</string>
     <string name="routing_attr_short_way_name">Kraftstoffsparende Route</string>
-    <string name="replace_favorite_confirmation">Den Favoriten „%1$s“ ersetzen\?</string>
+    <string name="replace_favorite_confirmation">Den Favoriten „%1$s“ ersetzen?</string>
     <string name="shared_string_change">Ändern</string>
     <string name="get_started">Erste Schritte</string>
     <string name="update_all_maps_now">Jetzt alle Karten aktualisieren?</string>
@@ -2054,7 +2052,7 @@
     <string name="quick_action_edit_action">Aktion bearbeiten</string>
     <string name="dialog_add_action_title">Aktion hinzufügen</string>
     <string name="quick_actions_delete">Aktion löschen</string>
-    <string name="quick_actions_delete_text">Aktion „%s“ löschen\?</string>
+    <string name="quick_actions_delete_text">Aktion „%s“ löschen?</string>
     <string name="quick_favorites_show_favorites_dialog">Dialog zu Favoriten anzeigen</string>
     <string name="quick_favorites_name_preset">Namen voreinstellen</string>
     <string name="shared_string_action_name">Aktionsname</string>
@@ -2630,9 +2628,7 @@
     <string name="coord_input_save_as_track">Als Track speichern</string>
     <string name="coord_input_save_as_track_descr">Sie haben %1$s Punkte hinzugefügt. Geben Sie einen Dateinamen ein und klicken Sie auf „Speichern“.</string>
     <string name="point_deleted">Punkt %1$s gelöscht</string>
-    <string name="send_search_query_description">Ihre Suchanfrage wird an „%1$s“ gesendet, zusammen mit Ihrem Standort.
-\n
-\nPersönliche Informationen werden nicht gesammelt, sondern nur Suchdaten, die zur Verbesserung der Suche benötigt werden.</string>
+    <string name="send_search_query_description">Ihre Suchanfrage wird an „%1$s“ gesendet, zusammen mit Ihrem Standort. \n \nPersönliche Informationen werden nicht gesammelt, sondern nur Suchdaten, die zur Verbesserung der Suche benötigt werden.</string>
     <string name="send_search_query">Suchanfrage senden?</string>
     <string name="shared_string_world">Welt</string>
     <string name="increase_search_radius_to">Vergrößerung des Suchradius auf %1$s</string>
@@ -3410,9 +3406,7 @@
     <string name="profiles_for_action_not_found">Konnte keine solchen Profile finden.</string>
     <string name="index_item_world_basemap_detailed">Weltübersichtskarte (detailliert)</string>
     <string name="unsupported_type_error">Nicht unterstützter Typ</string>
-    <string name="ui_customization_description">Passen Sie die Menge der Elemente in „Schublade“, „Karte konfigurieren“ und „Kontextmenü“ an.
-\n
-\nDeaktivieren Sie ungenutzte Erweiterungen, um deren Steuerelemente auszublenden. %1$s.</string>
+    <string name="ui_customization_description">Passen Sie die Menge der Elemente in „Schublade“, „Karte konfigurieren“ und „Kontextmenü“ an. \n \nDeaktivieren Sie ungenutzte Erweiterungen, um deren Steuerelemente auszublenden. %1$s.</string>
     <string name="ui_customization_short_descr">Schubladenelemente, Kontextmenü</string>
     <string name="shared_string_drawer">Schublade</string>
     <string name="gpx_parse_error">Probleme mit einer GPX-Datei gefunden.
@@ -4148,8 +4142,7 @@
     <string name="storage_found_files_size">%1$s Dateien %2$s gefunden</string>
     <string name="shared_storage_last_step">Sie können anschließend einen neuen Datenordner angeben.</string>
     <string name="shared_storage_third_step">Erteilen Sie die Berechtigung zum Zugriff auf den Ordner. Ohne sie kann OsmAnd keine Dateien kopieren.</string>
-    <string name="shared_storage_first_step">Drücken Sie „%1$s“.
-\nEs öffnet sich der Dateimanager, in dem Sie den Ordner osmand finden und öffnen müssen.</string>
+    <string name="shared_storage_first_step">Drücken Sie „%1$s“. \nEs öffnet sich der Dateimanager, in dem Sie den Ordner osmand finden und öffnen müssen.</string>
     <string name="shared_storage_migration_descr">Aufgrund von Änderungen im Android-Speicherzugriff kann OsmAnd nicht mehr %1$s verwenden.
 \n
 \nKopieren Sie alle Ihre Daten in den neuen Ordner.</string>
@@ -4535,9 +4528,7 @@
     <string name="depth_contours">Tiefenlinien</string>
     <string name="worldwide_maps">Weltweite Karten</string>
     <string name="purchases_feature_desc_cross_buy">Nutzen Sie Ihre Abonnementfunktionen auf verschiedenen Plattformen (Android/iOS/Web) ohne zusätzliche Kosten.</string>
-    <string name="ant_missing_dependency_descr">Der erforderliche Dienst „%1$s“ konnte nicht gefunden werden.
-\nSie müssen den ANT+ Plugins Service installieren oder aktualisieren.
-\nMöchten Sie dazu den Play Store aufrufen\?</string>
+    <string name="ant_missing_dependency_descr">Der erforderliche Dienst „%1$s“ konnte nicht gefunden werden. \nSie müssen den ANT+ Plugins Service installieren oder aktualisieren. \nMöchten Sie dazu den Play Store aufrufen?</string>
     <string name="ant_missing_dependency">Fehlende Abhängigkeit</string>
     <string name="ant_go_to_store">Zum Laden gehen</string>
     <string name="ant_read_data">Daten lesen</string>
@@ -4754,7 +4745,7 @@
     <string name="shared_string_inches">Zoll</string>
     <string name="inch">in</string>
     <string name="approximate_bearing">Ungefähre Peilung</string>
-    <string name="cloud_version_confirm_delete">„%1$s“ aus OsmAnd Cloud löschen\?</string>
+    <string name="cloud_version_confirm_delete">„%1$s“ aus OsmAnd Cloud löschen?</string>
     <string name="shared_string_delete_file">Datei löschen</string>
     <string name="delete_cloud_version">Cloud-Version löschen</string>
     <string name="local_version_do_not_exist">Keine lokale Version vorhanden.</string>
