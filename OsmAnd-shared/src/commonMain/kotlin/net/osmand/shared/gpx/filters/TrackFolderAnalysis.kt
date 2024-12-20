@@ -1,6 +1,7 @@
 package net.osmand.shared.gpx.filters
 
 import net.osmand.shared.extensions.format
+import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.data.TrackFolder
 import net.osmand.shared.gpx.data.TracksGroup
@@ -34,9 +35,10 @@ class TrackFolderAnalysis(folder: TracksGroup) {
 		var timeSpanSum = 0.0
 		for (trackItem in items) {
 			val dataItem = trackItem.dataItem
+			val joinSegments = dataItem?.getParameter<Boolean>(GpxParameter.JOIN_SEGMENTS) == true
 			val analysis = dataItem?.getAnalysis()
 			if (analysis != null) {
-				totalDistanceSum += analysis.totalDistance
+				totalDistanceSum += if (joinSegments) analysis.totalDistance else analysis.totalDistanceWithoutGaps
 				diffElevationUp += analysis.diffElevationUp
 				diffElevationDown += analysis.diffElevationDown
 				val file: KFile? = trackItem.getFile()
