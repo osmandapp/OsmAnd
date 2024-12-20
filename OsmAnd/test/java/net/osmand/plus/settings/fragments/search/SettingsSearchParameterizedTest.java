@@ -9,11 +9,11 @@ import static net.osmand.plus.settings.fragments.search.SettingsSearchTest.hasSe
 import static net.osmand.plus.settings.fragments.search.SettingsSearchTest.searchResultsView;
 import static net.osmand.plus.settings.fragments.search.SettingsSearchTest.searchView;
 
+import android.content.Context;
+
 import androidx.annotation.StringRes;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.filters.LargeTest;
-
-import com.codepoetics.ambivalence.Either;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -35,7 +35,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 	public String description;
 
 	@Parameterized.Parameter(value = 1)
-	public Either<Integer, String> searchQueryIdOrString;
+	public Function<Context, String> searchQueryProvider;
 
 	@Parameterized.Parameters(name = "{0}")
 	public static Iterable<Object[]> data() {
@@ -82,6 +82,8 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 						{"VoiceLanguageBottomSheetFragment: language_description", searchQuery(R.string.language_description)},
 						{"VoiceLanguageBottomSheetFragment: tts_description", searchQuery(R.string.tts_description)},
 						{"VoiceLanguageBottomSheetFragment: recorded_description", searchQuery(R.string.recorded_description)},
+
+						{"WakeTimeBottomSheet: description", searchQuery(context -> context.getString(R.string.turn_screen_on_wake_time_descr, context.getString(R.string.keep_screen_on)))}
 				});
 	}
 
@@ -90,7 +92,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 
 	@Test
 	public void testSearchAndFind() {
-		testSearchAndFind(getSearchQuery());
+		testSearchAndFind(searchQueryProvider.apply(app));
 	}
 
 	private void testSearchAndFind(final String searchQuery) {
@@ -104,17 +106,15 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(searchQuery)));
 	}
 
-	private String getSearchQuery() {
-		return searchQueryIdOrString.join(
-				app::getString,
-				Function.identity());
+	private static Function<Context, String> searchQuery(final @StringRes int id) {
+		return context -> context.getString(id);
 	}
 
-	private static Either<Integer, String> searchQuery(final @StringRes int id) {
-		return Either.ofLeft(id);
+	private static Function<Context, String> searchQuery(final String str) {
+		return context -> str;
 	}
 
-	private static Either<Integer, String> searchQuery(final String str) {
-		return Either.ofRight(str);
+	private static Function<Context, String> searchQuery(final Function<Context, String> searchQueryProvider) {
+		return searchQueryProvider;
 	}
 }
