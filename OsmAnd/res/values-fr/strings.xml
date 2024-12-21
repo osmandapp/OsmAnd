@@ -5660,4 +5660,8 @@
     <string name="shared_string_interpolation">Interpolation</string>
     <string name="location_interpolation_percent">Pourcentage d\'interpolation de la position</string>
     <string name="location_interpolation_percent_desc">Définit le pourcentage d\'interpolation de la position lors du guidage. Ce paramètre rend l\'animation de votre position sur la carte plus fluide.</string>
+    <string name="default_buttons_corners_original_description">Chaque bouton conservera son propre rayon de coin.</string>
+    <string name="default_buttons_opacity_original_description">Chaque bouton conservera sa propre opacité d’arrière-plan.</string>
+    <string name="default_buttons_size_original_description">Chaque bouton conservera sa propre taille.</string>
+    <string name="auto_zoom_3d_angle">Angle du zoom 3D automatique</string>
 </resources>

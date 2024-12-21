@@ -1466,7 +1466,7 @@
     <string name="lang_ceb">Себуански</string>
     <string name="lang_ms">Малайски</string>
     <string name="lang_ht">Хаитянски</string>
-    <string name="plugin_nautical_descr">Обогатява картата с информация за маршрути за плаване, навигационни светлини, опасни морски зони, зони с ограничения за плаване или акостиране и др. За да я използвате, изтеглете съответните морски карти и включете „Морска карта“ в „Настройки на картата“. \n \nДокументацията е достъпна на адрес %1$s.</string>
+    <string name="plugin_nautical_descr">Обогатява картата с информация за маршрути за плаване, навигационни светлини, опасни морски зони, зони с ограничения за плаване или акостиране и др. За да я използвате, изтеглете съответните морски карти и включете „Морска карта“ в „Настройки на картата“.\n\nДокументацията е достъпна на адрес %1$s.</string>
     <string name="plugin_settings">Добавки</string>
     <string name="rendering_attr_currentTrackColor_name">цвят на GPX</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX ширина</string>
@@ -3131,7 +3131,7 @@
     <string name="points_of_interests">Интересни места (POI)</string>
     <string name="selected_waypoints_descr">Избраните отправни точки ще бъдат добавени към трасето „%1$s“</string>
     <string name="apply_to_existing_favorites_descr">Прилагане на промените към съществуващите избрани точки в групата или само към новите\?</string>
-    <string name="favorite_confirm_delete_group">Сигурни ли сте, че желаете да бъде премахната групата „%1$s“ и всички точки в нея (%2$d)?</string>
+    <string name="favorite_confirm_delete_group">Желаете ли да бъде премахната групата „%1$s“ и всички точки в нея (%2$d)?</string>
     <string name="keep_passed_markers_descr">Маркерите, добавени група Избрани или Отправни точки на GPX, отбекязани като преминати, ще останат на картата. Ако групата е изключена, маркерите ще изчезнат от картата.</string>
     <string name="shortcut_navigate_to_home">Към „Вкъщи“</string>
     <string name="enable_3d_maps">Включване на триизмерни карти</string>
@@ -3451,7 +3451,7 @@
 \nИзберете %2$s. Всички данни, свързани с камери за скорост: предупреждения, известия, POI, ще бъдат премахнати до преинсталиране на OsmAnd.</string>
     <string name="routing_attr_height_obstacles_description">Прогнозното време за пътуване ще отчита въздействието на възвишенията. Предпочитанията за маршрута могат да помогнат за избягване на стръмни изкачвания:</string>
     <string name="show_map_symbols">Обозначения на картата</string>
-    <string name="ant_missing_dependency_descr">Необходимата услуга „%1$s“ не е намерена. \nТрябва да инсталирате или обновите услугата ANT+ Plugins Service. \nЖелаете ли да посетите магазина за приложения?</string>
+    <string name="ant_missing_dependency_descr">Необходимата услуга „%1$s“ не е намерена.\nТрябва да инсталирате или обновите услугата ANT+ Plugins Service.\nЖелаете ли да посетите магазина за приложения?</string>
     <string name="clear_all_history_warning">Премахване на всички записи в историята на приложението, включително историята на търсенето, маршрутизацията и маркерите\?</string>
     <string name="altitude_correction">Корекция на надм. височина</string>
     <string name="no_altitude_data_desc">За да получите данни от %1$s, прикрепете трасето към пътищата или го изчислете онлайн.</string>
@@ -3662,14 +3662,12 @@
     <string name="copying_file">Копиране на файл %1$s…</string>
     <string name="icon_group_education">Образование</string>
     <string name="delete_history_items">Премахване на %1$s записа от историята\?</string>
-    <string name="shared_storage_second_step">Докоснете „Използване на тази папка“ (Use this folder).</string>
+    <string name="shared_storage_second_step">Докоснете „Използване на тази папка“.</string>
     <string name="shared_storage">Споделено хранилище</string>
     <string name="storage_found_files_size">Намерени %1$s файла %2$s</string>
     <string name="shared_storage_last_step">След това можете да посочите нова папка за данни.</string>
-    <string name="shared_storage_first_step">Натиснете „%1$s“. \nПриложението за файлове отваря мястото, в което трябва да откриете папката osmand.</string>
-    <string name="shared_storage_migration_descr">Поради промени в достъпа до хранилището на Android OsmAnd вече не може да използва %1$s.
-\n
-\nНеобходимо е да копирате всички данни в новата папка.</string>
+    <string name="shared_storage_first_step">Докоснете „%1$s“. \nПриложението за управление на файлове отваря мястото, на което трябва да откриете папката osmand.</string>
+    <string name="shared_storage_migration_descr">Поради промени в достъпа до хранилището на Android OsmAnd вече не може да използва %1$s.\n\nНеобходимо е да копирате всички данни в новата папка.</string>
     <string name="shared_storage_migration">Мигриране на споделеното хранилище</string>
     <string name="rendering_attr_natureReserves_description">Показват се природни резервати, защитени територии и национални паркове.</string>
     <string name="shared_string_new_track">Ново трасе</string>
@@ -4466,4 +4464,13 @@
     <string name="reset_average_speed">Нулиране на средната скорост</string>
     <string name="start_trip_recording_first_m">Първо започнете да записвате пътуване.</string>
     <string name="quick_action_showhide_osm_edits_descr">Бутон, превключващ местните редакции на OSM в картата.</string>
+    <string name="wake_time">Време на работа след събуждане</string>
+    <string name="quick_action_navigation_voice">Гласови напътствия</string>
+    <string name="selected_delayed_profile">Избран профил s\\</string>
+    <string name="shared_string_interpolation">Интерполация</string>
+    <string name="error_notification_desc">Изпратете екранна снимка на известието на support@osmand.net</string>
+    <string name="quick_action_map_underlay_switch">Подложената карта е променена на „%s“.</string>
+    <string name="select_base_profile_dialog_title">Изберете начален профил</string>
+    <string name="default_buttons_corners_original_description">Всеки бутон ще има свой размер на окръглянето.</string>
+    <string name="default_buttons_opacity_original_description">Всеки бутон ще има своя прозрачност на фона.</string>
 </resources>

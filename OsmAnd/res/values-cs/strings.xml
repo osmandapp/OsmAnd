@@ -4958,7 +4958,7 @@
     <string name="feature_available_as_part_of_plan">%1$s je k dispozici jako součást plánu %2$s</string>
     <string name="shared_string_included">Zahrnuto</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
-    <string name="local_indexes_category_terrain">Terénní mapy (3D)</string>
+    <string name="local_indexes_category_terrain">Terénní mapy (3D</string>
     <string name="hillshade_slope">Stínování kopců, svahy</string>
     <string name="map_widget_glide_average_desc">Zobrazuje průměrný klouzavý poměr pro nastavený interval.</string>
     <string name="map_widget_glide_target_desc">Zobrazuje klouzavost potřebnou k dosažení cílového bodu.</string>
@@ -5659,5 +5659,8 @@
     <string name="location_interpolation_percent">Procento interpolace polohy</string>
     <string name="location_interpolation_percent_desc">Nastavení procenta interpolace polohy během navigace po trase. Tento parametr snižuje zpoždění polohy na mapě během animace.</string>
     <string name="shared_string_interpolation">Interpolace</string>
-    <string name="selected_delayed_profile">Zvolený profil „%s“</string>
+    <string name="selected_delayed_profile">Zvolený profil s\\</string>
+    <string name="default_buttons_opacity_original_description">Každé tlačítko si zachová svou vlastní průhlednost pozadí.</string>
+    <string name="default_buttons_size_original_description">Každé tlačítko si zachová svou vlastní velikost.</string>
+    <string name="default_buttons_corners_original_description">Každé tlačítko si zachová své vlastní zaoblení rohů.</string>
 </resources>
