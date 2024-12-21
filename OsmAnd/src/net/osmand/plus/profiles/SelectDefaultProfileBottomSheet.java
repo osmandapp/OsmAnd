@@ -1,6 +1,6 @@
 package net.osmand.plus.profiles;
 
-import static net.osmand.plus.profiles.SearchableInfoHelper.getProfileDescriptions;
+import static net.osmand.plus.settings.fragments.search.SearchableInfoHelper.getProfileDescriptions;
 
 import android.os.Bundle;
 import android.view.View;

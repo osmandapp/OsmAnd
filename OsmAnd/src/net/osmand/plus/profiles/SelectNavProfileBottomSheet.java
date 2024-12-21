@@ -2,6 +2,7 @@ package net.osmand.plus.profiles;
 
 import static net.osmand.plus.importfiles.ImportType.ROUTING;
 import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.NONE_VEHICLE;
+import static net.osmand.plus.settings.fragments.search.SearchableInfoHelper.getProfileNames;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -542,7 +543,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 	}
 
 	private List<String> getProfilesNames(final DialogMode dialogMode) {
-		return getNames(getProfilesList(getProfilesGroups(dialogMode)));
+		return getProfileNames(getProfilesList(getProfilesGroups(dialogMode)));
 	}
 
 	private List<ProfilesGroup> getProfilesGroups(final DialogMode dialogMode) {
@@ -558,12 +559,5 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 						.stream()
 						.map(ProfilesGroup::getProfiles)
 						.collect(Collectors.toList()));
-	}
-
-	private List<String> getNames(final List<RoutingDataObject> profilesList) {
-		return profilesList
-				.stream()
-				.map(ProfileDataObject::getName)
-				.collect(Collectors.toList());
 	}
 }
