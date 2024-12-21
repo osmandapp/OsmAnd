@@ -4680,7 +4680,7 @@
     <string name="osmand_cloud_deletion_all_data_warning">All data på OsmAnds molntjänst kommer att %1$s. Data på din enhet kommer inte påverkas.</string>
     <string name="free_favorites_backup_description">Registrera dig för OsmAnd molntjänst för gratis säkerhetskopiering av favoriter och inställningar.</string>
     <string name="get_osmand_cloud">Skaffa OsmAnd molntjänst</string>
-    <string name="osmand_cloud_delete_account_confirmation">Radera kontot\?</string>
+    <string name="osmand_cloud_delete_account_confirmation">Radera konto?</string>
     <string name="routing_attr_piste_type_nordic_description">Leder och skidspår för längdskidåkning.</string>
     <string name="contact_us">Kontakta oss</string>
     <string name="osmand_cloud_deleted_account_descr">Konto och all data har raderats från OsmAnd molntjänst.</string>
