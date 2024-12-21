@@ -6053,4 +6053,6 @@
     <string name="shared_string_interpolation">Interpolasi</string>
     <string name="location_interpolation_percent_desc">Tetapkan presentasi interpolasi lokasi saat navigasi rute. Parameter ini mengurangi kelambatan posisi lokasi di peta saat ada animasi.</string>
     <string name="selected_delayed_profile">Profil \"%s\" terpilih</string>
+    <string name="default_buttons_corners_original_description">Setiap tombol tetap memiliki radius bulatnya sendiri.</string>
+    <string name="default_buttons_size_original_description">Setiap tombol tetap memiliki ukurannya sendiri.</string>
 </resources>
