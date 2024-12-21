@@ -102,13 +102,12 @@ public class SelectDefaultProfileBottomSheet extends SelectProfileBottomSheet im
 				ImmutableList
 						.<String>builder()
 						.add(getString(R.string.profile_by_default_description))
-						.addAll(getProfileDescriptions())
+						.addAll(getProfileDescriptions(getProfiles()))
 						.build());
 	}
 
-	private List<String> getProfileDescriptions() {
-		return this
-				.getProfiles()
+	public static List<String> getProfileDescriptions(final List<ProfileDataObject> profiles) {
+		return profiles
 				.stream()
 				.map(profile -> String.format("%s (%s)", profile.getName(), profile.getDescription()))
 				.collect(Collectors.toList());
