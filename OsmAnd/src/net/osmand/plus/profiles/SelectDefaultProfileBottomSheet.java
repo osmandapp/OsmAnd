@@ -4,9 +4,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
+import com.google.common.collect.ImmutableList;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -22,6 +25,7 @@ import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class SelectDefaultProfileBottomSheet extends SelectProfileBottomSheet implements SearchablePreferenceDialog {
 
@@ -76,7 +80,12 @@ public class SelectDefaultProfileBottomSheet extends SelectProfileBottomSheet im
 	@Override
 	protected void refreshProfiles() {
 		profiles.clear();
-		profiles.addAll(ProfileDataUtils.getDataObjects(app, ApplicationMode.values(app)));
+		profiles.addAll(getProfiles());
+	}
+
+	@NonNull
+	private List<ProfileDataObject> getProfiles() {
+		return ProfileDataUtils.getDataObjects(app, ApplicationMode.values(app));
 	}
 
 	@Override
@@ -88,7 +97,20 @@ public class SelectDefaultProfileBottomSheet extends SelectProfileBottomSheet im
 
 	@Override
 	public String getSearchableInfo() {
-		// FK-TODO: add profiles
-		return getString(R.string.profile_by_default_description);
+		return String.join(
+				", ",
+				ImmutableList
+						.<String>builder()
+						.add(getString(R.string.profile_by_default_description))
+						.addAll(getProfileDescriptions())
+						.build());
+	}
+
+	private List<String> getProfileDescriptions() {
+		return this
+				.getProfiles()
+				.stream()
+				.map(profile -> String.format("%s (%s)", profile.getName(), profile.getDescription()))
+				.collect(Collectors.toList());
 	}
 }
