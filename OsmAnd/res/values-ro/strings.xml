@@ -5997,4 +5997,5 @@
     <string name="screen_is_unlocked">Ecranul tactil este deblocat.</string>
     <string name="liter_per_hour">L/h</string>
     <string name="quick_action_showhide_osm_edits_descr">Buton pentru a afișa sau a ascunde editările OSM locale pe hartă.</string>
+    <string name="default_buttons_size_original_description">Fiecare buton își va păstra dimensiunea proprie.</string>
 </resources>
