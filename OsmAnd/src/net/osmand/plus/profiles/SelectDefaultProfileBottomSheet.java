@@ -4,12 +4,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SimpleDividerItem;
@@ -17,30 +16,30 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.profiles.data.ProfileDataObject;
 import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheetInitializer;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class SelectDefaultProfileBottomSheet extends SelectProfileBottomSheet {
+public class SelectDefaultProfileBottomSheet extends SelectProfileBottomSheet implements SearchablePreferenceDialog {
 
 	private final List<ProfileDataObject> profiles = new ArrayList<>();
 
-	public static void showInstance(@NonNull FragmentActivity activity,
-	                                @Nullable Fragment target,
-	                                ApplicationMode appMode,
-	                                String selectedItemKey,
-	                                boolean usedOnMap) {
-		FragmentManager fragmentManager = activity.getSupportFragmentManager();
-		if (!fragmentManager.isStateSaved()) {
-			SelectDefaultProfileBottomSheet fragment = new SelectDefaultProfileBottomSheet();
-			Bundle args = new Bundle();
+	public static SelectDefaultProfileBottomSheet createInstance(final @Nullable Fragment target,
+																 final ApplicationMode appMode,
+																 final String selectedItemKey,
+																 final boolean usedOnMap) {
+		final SelectDefaultProfileBottomSheet bottomSheet = new SelectDefaultProfileBottomSheet();
+		{
+			final Bundle args = new Bundle();
 			args.putString(SELECTED_KEY, selectedItemKey);
-			fragment.setArguments(args);
-			fragment.setUsedOnMap(usedOnMap);
-			fragment.setAppMode(appMode);
-			fragment.setTargetFragment(target, 0);
-			fragment.show(fragmentManager, TAG);
+			bottomSheet.setArguments(args);
 		}
+		return BasePreferenceBottomSheetInitializer
+				.initialize(bottomSheet)
+				.with(Optional.empty(), appMode, usedOnMap, target);
 	}
 
 	@Override
@@ -80,4 +79,16 @@ public class SelectDefaultProfileBottomSheet extends SelectProfileBottomSheet {
 		profiles.addAll(ProfileDataUtils.getDataObjects(app, ApplicationMode.values(app)));
 	}
 
+	@Override
+	public void show(final FragmentManager fragmentManager, final OsmandApplication app) {
+		if (!fragmentManager.isStateSaved()) {
+			show(fragmentManager, TAG);
+		}
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		// FK-TODO: add profiles
+		return getString(R.string.profile_by_default_description);
+	}
 }

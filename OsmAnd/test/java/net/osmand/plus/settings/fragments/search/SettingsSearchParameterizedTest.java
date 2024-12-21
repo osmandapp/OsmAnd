@@ -17,6 +17,7 @@ import androidx.test.filters.LargeTest;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.test.common.AndroidTest;
 
 import org.junit.Rule;
@@ -87,7 +88,10 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 						{"WakeTimeBottomSheet: keep_screen_on", searchQuery(R.string.keep_screen_on)},
 						{"WakeTimeBottomSheet: timeoutDescription", searchQuery(context -> context.getString(R.string.screen_timeout_descr, context.getString(R.string.system_screen_timeout)))},
 
-						{"SelectNavProfileBottomSheet: header", searchQuery(R.string.select_nav_profile_dialog_message)}
+						{"SelectNavProfileBottomSheet: header", searchQuery(R.string.select_nav_profile_dialog_message)},
+
+						{"SelectDefaultProfileBottomSheet: description", searchQuery(R.string.profile_by_default_description)},
+						{"SelectDefaultProfileBottomSheet: car profile", searchQuery(ApplicationMode.CAR.toHumanString())},
 				});
 	}
 

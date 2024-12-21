@@ -2,7 +2,6 @@ package net.osmand.plus.settings.fragments;
 
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.USE_LAST_PROFILE_ARG;
-import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 
 import android.app.Activity;
 import android.app.backup.BackupManager;
@@ -75,24 +74,54 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 
 	@Override
 	public void onDisplayPreferenceDialog(final Preference preference) {
-		final boolean shown = showDialogForPreference(preference, this);
-		if (!shown) {
-			super.onDisplayPreferenceDialog(preference);
+		if (isSendAnonymousData(preference)) {
+			createSendAnonymousDataPreferenceDialog(this).show();
 		}
 	}
 
 	@Override
 	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Fragment target) {
-		return SEND_ANONYMOUS_DATA_PREF_ID.equals(preference.getKey()) ?
-				Optional.of(
-						new ShowableSearchablePreferenceDialog<>(SendAnalyticsBottomSheetDialogFragment.createInstance(target)) {
+		if (isSendAnonymousData(preference)) {
+			return Optional.of(createSendAnonymousDataPreferenceDialog(target));
+		}
+		if (isSelectDefaultProfile(preference)) {
+			return Optional.of(createSelectDefaultProfilePreferenceDialog(target));
+		}
+		return Optional.empty();
+	}
 
-							@Override
-							protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-								GlobalSettingsFragment.this.show(searchablePreferenceDialog);
-							}
-						}) :
-				Optional.empty();
+	private static boolean isSendAnonymousData(final Preference preference) {
+		return SEND_ANONYMOUS_DATA_PREF_ID.equals(preference.getKey());
+	}
+
+	private ShowableSearchablePreferenceDialog<SendAnalyticsBottomSheetDialogFragment> createSendAnonymousDataPreferenceDialog(final Fragment target) {
+		return new ShowableSearchablePreferenceDialog<>(SendAnalyticsBottomSheetDialogFragment.createInstance(target)) {
+
+			@Override
+			protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+				GlobalSettingsFragment.this.show(searchablePreferenceDialog);
+			}
+		};
+	}
+
+	private boolean isSelectDefaultProfile(final Preference preference) {
+		return settings.DEFAULT_APPLICATION_MODE.getId().equals(preference.getKey());
+	}
+
+	private ShowableSearchablePreferenceDialog<SelectDefaultProfileBottomSheet> createSelectDefaultProfilePreferenceDialog(final Fragment target) {
+		return new ShowableSearchablePreferenceDialog<>(
+				SelectDefaultProfileBottomSheet
+						.createInstance(
+								target,
+								getSelectedAppMode(),
+								settings.DEFAULT_APPLICATION_MODE.get().getStringKey(),
+								false)) {
+
+			@Override
+			protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+				searchablePreferenceDialog.show(requireActivity().getSupportFragmentManager(), app);
+			}
+		};
 	}
 
 	private void show(final SearchablePreferenceDialog dialog) {
@@ -194,23 +223,19 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
-		if (prefId.equals(settings.DEFAULT_APPLICATION_MODE.getId())) {
-			if (getActivity() != null) {
-				String defaultModeKey = settings.DEFAULT_APPLICATION_MODE.get().getStringKey();
-				SelectDefaultProfileBottomSheet.showInstance(
-						getActivity(), this, getSelectedAppMode(), defaultModeKey, false);
-			}
+		if (isSelectDefaultProfile(preference)) {
+			createSelectDefaultProfilePreferenceDialog(this).show();
 		} else if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(prefId) && !settings.SPEED_CAMERAS_UNINSTALLED.get()) {
 			FragmentManager manager = getFragmentManager();
 			if (manager != null) {
 				SpeedCamerasBottomSheet.showInstance(manager, this);
 			}
-		} else if (prefId.equals(settings.LOCATION_SOURCE.getId())) {
+		} else if (settings.LOCATION_SOURCE.getId().equals(prefId)) {
 			FragmentManager manager = getFragmentManager();
 			if (manager != null) {
 				LocationSourceBottomSheet.showInstance(manager, this);
 			}
-		} else if (prefId.equals(MAP_RENDERING_ENGINE_ID)) {
+		} else if (MAP_RENDERING_ENGINE_ID.equals(prefId)) {
 			new MapRenderingEngineDialog(app, getActivity()).showDialog(this::setupMapRenderingEnginePref);
 		}
 
