@@ -18,25 +18,32 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.profiles.data.ProfileDataObject;
 import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheetInitializer;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class SelectBaseProfileBottomSheet extends SelectProfileBottomSheet implements SearchablePreferenceDialog {
 
 	private final List<ProfileDataObject> profiles = new ArrayList<>();
 
 	@NonNull
-	public static SelectBaseProfileBottomSheet createInstance(final @Nullable Fragment target, final ApplicationMode appMode, final String selectedItemKey, final boolean usedOnMap) {
-		final SelectBaseProfileBottomSheet fragment = new SelectBaseProfileBottomSheet();
-		Bundle args = new Bundle();
-		args.putString(SELECTED_KEY, selectedItemKey);
-		fragment.setArguments(args);
-		fragment.setUsedOnMap(usedOnMap);
-		fragment.setAppMode(appMode);
-		fragment.setTargetFragment(target, 0);
-		return fragment;
+	public static SelectBaseProfileBottomSheet createInstance(final @Nullable Fragment target,
+															  final ApplicationMode appMode,
+															  final String selectedItemKey,
+															  final boolean usedOnMap) {
+		final SelectBaseProfileBottomSheet bottomSheet = new SelectBaseProfileBottomSheet();
+		{
+			final Bundle args = new Bundle();
+			args.putString(SELECTED_KEY, selectedItemKey);
+			bottomSheet.setArguments(args);
+		}
+		return BasePreferenceBottomSheetInitializer
+				.initialize(bottomSheet)
+				.with(Optional.empty(), appMode, usedOnMap, target);
+
 	}
 
 	@Override

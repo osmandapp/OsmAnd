@@ -142,10 +142,10 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet imple
 															  final boolean usedOnMap,
 															  final @Nullable ApplicationMode appMode,
 															  final boolean configureSettingsSearch) {
-		final VehicleParametersBottomSheet fragment = new VehicleParametersBottomSheet();
-		fragment.setConfigureSettingsSearch(configureSettingsSearch);
+		final VehicleParametersBottomSheet bottomSheet = new VehicleParametersBottomSheet();
+		bottomSheet.setConfigureSettingsSearch(configureSettingsSearch);
 		return BasePreferenceBottomSheetInitializer
-				.initialize(fragment)
+				.initialize(bottomSheet)
 				.with(Optional.of(preference), appMode, usedOnMap, target);
 	}
 

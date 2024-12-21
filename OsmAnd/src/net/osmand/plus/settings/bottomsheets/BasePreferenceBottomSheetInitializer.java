@@ -15,10 +15,10 @@ import java.util.Optional;
 
 public class BasePreferenceBottomSheetInitializer<T extends BasePreferenceBottomSheet> {
 
-	private final T basePreferenceBottomSheet;
+	private final T bottomSheet;
 
-	private BasePreferenceBottomSheetInitializer(final T basePreferenceBottomSheet) {
-		this.basePreferenceBottomSheet = basePreferenceBottomSheet;
+	private BasePreferenceBottomSheetInitializer(final T bottomSheet) {
+		this.bottomSheet = bottomSheet;
 	}
 
 	public static <T extends BasePreferenceBottomSheet> BasePreferenceBottomSheetInitializer<T> initialize(final T basePreferenceBottomSheet) {
@@ -30,15 +30,15 @@ public class BasePreferenceBottomSheetInitializer<T extends BasePreferenceBottom
 				  final boolean usedOnMap,
 				  final @Nullable Fragment target) {
 		preference.ifPresent(this::setPreference);
-		basePreferenceBottomSheet.setUsedOnMap(usedOnMap);
-		basePreferenceBottomSheet.setAppMode(appMode);
-		basePreferenceBottomSheet.setTargetFragment(target, 0);
-		return basePreferenceBottomSheet;
+		bottomSheet.setUsedOnMap(usedOnMap);
+		bottomSheet.setAppMode(appMode);
+		bottomSheet.setTargetFragment(target, 0);
+		return bottomSheet;
 	}
 
 	private void setPreference(final Preference preference) {
-		basePreferenceBottomSheet.setPreference(preference);
-		getArguments(basePreferenceBottomSheet).putString(PREFERENCE_ID, preference.getKey());
+		bottomSheet.setPreference(preference);
+		getArguments(bottomSheet).putString(PREFERENCE_ID, preference.getKey());
 	}
 
 	@NonNull
