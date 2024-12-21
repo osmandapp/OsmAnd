@@ -1,6 +1,6 @@
 package net.osmand.plus.profiles;
 
-import static net.osmand.plus.profiles.SelectDefaultProfileBottomSheet.getProfileDescriptions;
+import static net.osmand.plus.profiles.SearchableInfoHelper.getProfileDescriptions;
 
 import android.os.Bundle;
 
@@ -61,8 +61,7 @@ public class SelectBaseProfileBottomSheet extends SelectProfileBottomSheet imple
 	@Override
 	protected void refreshProfiles() {
 		profiles.clear();
-		final List<ProfileDataObject> dataObjects = getProfiles();
-		profiles.addAll(dataObjects);
+		profiles.addAll(getProfiles());
 	}
 
 	@NonNull

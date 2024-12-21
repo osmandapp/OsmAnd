@@ -1,5 +1,7 @@
 package net.osmand.plus.profiles;
 
+import static net.osmand.plus.profiles.SearchableInfoHelper.getProfileDescriptions;
+
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,7 +27,6 @@ import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class SelectDefaultProfileBottomSheet extends SelectProfileBottomSheet implements SearchablePreferenceDialog {
 
@@ -104,12 +105,5 @@ public class SelectDefaultProfileBottomSheet extends SelectProfileBottomSheet im
 						.add(getString(R.string.profile_by_default_description))
 						.addAll(getProfileDescriptions(getProfiles()))
 						.build());
-	}
-
-	public static List<String> getProfileDescriptions(final List<ProfileDataObject> profiles) {
-		return profiles
-				.stream()
-				.map(profile -> String.format("%s (%s)", profile.getName(), profile.getDescription()))
-				.collect(Collectors.toList());
 	}
 }
