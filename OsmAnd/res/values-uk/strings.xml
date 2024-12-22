@@ -2015,7 +2015,7 @@
     <string name="update_all_maps_now">Оновити усі мапи зараз\?</string>
     <string name="clear_tile_data">Вилучити всі тайли</string>
     <string name="routing_attr_short_way_name">Паливно-ощадний шлях</string>
-    <string name="replace_favorite_confirmation">Замінити 1$s улюблене?</string>
+    <string name="replace_favorite_confirmation">Замінити %1$s улюблене?</string>
     <string name="rendering_attr_hideOverground_name">Надземні обʼєкти</string>
     <string name="shared_string_change">Змінити</string>
     <string name="get_started">Почати</string>
@@ -2990,7 +2990,7 @@
     <string name="navigate_point_format_utm">Стандарт UTM</string>
     <string name="change_default_settings">Змінити налаштування</string>
     <string name="discard_changes">Відхилити зміни</string>
-    <string name="apply_to_current_profile">Застосовувати лише до 1$s\\</string>
+    <string name="apply_to_current_profile">Застосовувати лише до %1$s\\</string>
     <string name="apply_to_all_profiles">Застосувати до всіх профілів</string>
     <string name="start_up_message_pref">Повідомлення під час запуску застосунку</string>
     <string name="analytics_pref_title">Аналітика</string>
@@ -3024,7 +3024,7 @@
     <string name="coordinates_format_info">Обраний формат буде застосовано у всьому застосунку.</string>
     <string name="pref_selected_by_default_for_profiles">Це налаштування є типовим для профілів: %s</string>
     <string name="turn_screen_on_info">Показувати мапу на екрані блокування під час навігації.</string>
-    <string name="route_parameters_info">Налаштування маршрутизації у вибраному профілі 1$s</string>
+    <string name="route_parameters_info">Налаштування маршрутизації у вибраному профілі %1$s</string>
     <string name="wake_time">Час очікування після пробудження</string>
     <string name="screen_alerts_descr">Під час навігації в лівому нижньому куті екрана зʼявлятимуться сповіщення.</string>
     <string name="language_and_output">Мова та вивід</string>
@@ -4130,13 +4130,13 @@
     <string name="copying_file">Копіювання файлу %1$s…</string>
     <string name="from_to_with_params">З %1$s до %2$s</string>
     <string name="progress_complete">%1$s завершено</string>
-    <string name="storage_found_files_descr">Торкніться 1$s, щоб скопіювати файли %2$s із 3$s у 4$s. Це може зайняти деякий час.</string>
+    <string name="storage_found_files_descr">Торкніться %1$s, щоб скопіювати файли %2$s із %3$s у %4$s. Це може зайняти деякий час.</string>
     <string name="storage_copied_files_size">Оброблено %1$s файл(и), %2$s</string>
     <string name="storage_copying_files_size">Копіювання %1$s файлів %2$s</string>
     <string name="storage_found_files_size">Знайдено %1$s файлів %2$s</string>
     <string name="shared_storage_last_step">Після цього можна вказати нову теку даних.</string>
     <string name="shared_storage_third_step">Надайте дозвіл на доступ до теки. Без цього OsmAnd не може копіювати файли.</string>
-    <string name="shared_storage_first_step">Натисніть 1$s\nВідкривається файловий менеджер, де потрібно знайти і відкрити папку osmand.</string>
+    <string name="shared_storage_first_step">Натисніть %1$s\nВідкривається файловий менеджер, де потрібно знайти і відкрити папку osmand.</string>
     <string name="copying_completed">Скопійовано</string>
     <string name="shared_string_copy_to">Копіювати до</string>
     <string name="start_copying">Почати копіювання</string>
@@ -4225,7 +4225,7 @@
     <string name="rendering_value_omit_name">Пропустити</string>
     <string name="rendering_attr_seabedDetail_name">Деталі морського дна</string>
     <string name="save_track_to_gpx_descrp">Автозапуск запису треку під час навігації та автоматичне збереження після завершення.</string>
-    <string name="gpx_no_routes_descr">Ви можете використовувати інструмент 1$s, щоб додати маршрут до файлу.</string>
+    <string name="gpx_no_routes_descr">Ви можете використовувати інструмент %1$s, щоб додати маршрут до файлу.</string>
     <string name="gpx_no_routes_title">Маршрути відсутні</string>
     <string name="quick_action_add_route_descr">Кнопка запуску маршруту з середини екрана.</string>
     <string name="please_provide_group_name_message">Назвіть групу.</string>
@@ -4239,7 +4239,7 @@
     <string name="exit_import">Вийти\?</string>
     <string name="import_tracks">Імпорт треків</string>
     <string name="import_tracks_descr">%1$s, містить %2$s окремі треки. Виберіть треки, які потрібно імпортувати.</string>
-    <string name="location_source_descr">За умовчанням OsmAnd, встановлений із Google Play, використовує %1$s для визначення місцезнаходження.\n\nЯкщо ви отримуєте неточну інформацію про місцезнаходження або використовуєте пристрій без %2$s, спробуйте переключитися на 3$s\\</string>
+    <string name="location_source_descr">За умовчанням OsmAnd, встановлений із Google Play, використовує %1$s для визначення місцезнаходження.\n\nЯкщо ви отримуєте неточну інформацію про місцезнаходження або використовуєте пристрій без %2$s, спробуйте переключитися на %3$s\\</string>
     <string name="location_source">Джерело даних про місцеположення</string>
     <string name="shared_string_shape">Форма</string>
     <string name="default_appearance_desc">Типовий колір, піктограма та форма застосовуватимуться до доданих точок у групі закладок.</string>
@@ -4515,7 +4515,7 @@
     <string name="map_widget_camera_distance">Висота від землі до камери</string>
     <string name="map_widget_zoom_level_desc">Показує поточний масштаб мапи.</string>
     <string name="external_sensor_widgets">Зовнішні датчики</string>
-    <string name="ant_missing_dependency_descr">Не вдалося знайти необхідну послугу 1$s\nВам потрібно встановити або оновити службу плагінів ANT+. \nВи хочете запустити Play Store для цього?</string>
+    <string name="ant_missing_dependency_descr">Не вдалося знайти необхідну послугу %1$s\nВам потрібно встановити або оновити службу плагінів ANT+. \nВи хочете запустити Play Store для цього?</string>
     <string name="ant_missing_dependency">Відсутня залежність</string>
     <string name="ant_go_to_store">Перейти до маркету</string>
     <string name="ant_read_data">Отримання даних</string>
@@ -4716,7 +4716,7 @@
     <string name="share_link">Поділитись посиланням</string>
     <string name="determine_location">Дозвольте нам визначити ваше розташування</string>
     <string name="skip_download">Пропустити завантаження</string>
-    <string name="weight_limit_error">Мінімальне значення становить 1 $s тонни. Використовуйте профіль 2$s, якщо вага автомобіля менша за мінімальне значення.</string>
+    <string name="weight_limit_error">Мінімальне значення становить %1$s тонни. Використовуйте профіль %2$s, якщо вага автомобіля менша за мінімальне значення.</string>
     <string name="sound_beep_complex_loud">Звуковий сигнал: складний гучний</string>
     <string name="sound_beep_complex">Звуковий сигнал: складний</string>
     <string name="sound_beep_minimal">Звуковий сигнал: мінімальний</string>
@@ -4775,7 +4775,7 @@
     <string name="weather_forecast_is_outdated">Прогноз застарілий.</string>
     <string name="shared_string_all_world">Весь світ</string>
     <string name="offline_weather_forecast_desc">Ви можете завантажити прогноз погоди на 7 днів.</string>
-    <string name="common_weight_limit_error">Мінімальне значення 1$s %2$s. Використовуйте профіль 3$s, якщо вага автомобіля менше мінімального значення.</string>
+    <string name="common_weight_limit_error">Мінімальне значення %1$s %2$s. Використовуйте профіль %3$s, якщо вага автомобіля менше мінімального значення.</string>
     <string name="shared_string_pounds">фунтів</string>
     <string name="metric_lbs">фунтів</string>
     <string name="free_maps_updates">Безплатні оновлення (екстрені)</string>
@@ -5087,7 +5087,7 @@
     <string name="empty_name">Назви немає</string>
     <string name="edit_filter">Змінити фільтр</string>
     <string name="save_as_smart_folder">Зберегти як розумну теку</string>
-    <string name="delete_smart_folder_dialog_message">Це видалить розумну папку 1$s (доріжки не будуть видалені.)</string>
+    <string name="delete_smart_folder_dialog_message">Це видалить розумну папку %1$s (доріжки не будуть видалені.)</string>
     <string name="average_glide_time_interval_desc">Вкажіть інтервал часу для усереднення ковзання.</string>
     <string name="release_4_6">• Android Auto: додано режим 3D\n\n • Треки: представлено фільтри та розумні папки, оптимізовано пам’ять для великих файлів\n\n • Покращено верхню та нижню панелі віджетів для розміщення всіх віджетів\n\n • Покращене управління місцевими ресурсами\n\n • Настроюване відображення кнопок для зовнішніх контролерів\n\n • Нові віджети: lide Ratio та un Positionn\n • OsmAnd Cloud: тепер доступ до видалених файлів\n\n • Покращене забарвлення доріжки в режимі нахилу з новим симетричним градієнтом\n\n • Вирішено проблеми з прозорим рядком стану\n\n • Додано підтримку віджета температури ANT+\n\n • Представлено доступний віджет RAM</string>
     <string name="map_widget_group_glide_desc">Віджети показують відношення ковзання до цілі або середнє відношення ковзання для поточної поїздки.</string>
