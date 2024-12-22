@@ -99,13 +99,14 @@ public class ResetProfilePrefsBottomSheet extends BasePreferenceBottomSheet impl
 		return DialogButtonType.SECONDARY;
 	}
 
-	// FK-TODO: inline
 	public static boolean showInstance(@NonNull FragmentManager manager,
 									   @NonNull ApplicationMode appMode,
 									   @Nullable Fragment target,
 									   final OsmandApplication app) {
 		try {
-			createInstance(appMode, Optional.ofNullable(target)).show(manager, app);
+			ResetProfilePrefsBottomSheet
+					.createInstance(appMode, Optional.ofNullable(target))
+					.show(manager, app);
 			return true;
 		} catch (final RuntimeException e) {
 			return false;
