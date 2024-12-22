@@ -24,8 +24,8 @@ import androidx.test.filters.LargeTest;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.test.common.AndroidTest;
 
@@ -83,10 +83,22 @@ public class SettingsSearchTest extends AndroidTest {
 		onView(searchView()).perform(replaceText(app.getString(R.string.reset_all_profile_settings)), closeSoftKeyboard());
 
 		// Then
-		Stream
-				.of("Driving")
-				.map(applicationMode -> String.format("Path: %s > Accessibility > Reset plugin settings to default", applicationMode))
-				.forEach(path -> onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(path))));
+		final String path = "Path: Driving > Accessibility > Reset plugin settings to default";
+		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(path)));
+	}
+
+	@Test
+	public void shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_AudioVideoNotesPlugin() {
+		// Given
+		enablePlugin(AudioVideoNotesPlugin.class);
+		clickSearchButton(app);
+
+		// When
+		onView(searchView()).perform(replaceText(app.getString(R.string.reset_all_profile_settings_descr)), closeSoftKeyboard());
+
+		// Then
+		final String path = "Path: Driving > Audio/video notes > Reset plugin settings to default";
+		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(path)));
 	}
 
 	@Test
@@ -136,20 +148,6 @@ public class SettingsSearchTest extends AndroidTest {
 	}
 
 	private void enablePlugin(final Class<? extends OsmandPlugin> plugin) {
-		enablePlugin(getPlugin(plugin));
-	}
-
-	private void enablePlugin(final OsmandPlugin plugin) {
-		PluginsHelper.enablePlugin(null, app, plugin, true);
-	}
-
-	private static <T extends OsmandPlugin> T getPlugin(final Class<T> plugin) {
-		return PluginsHelper
-				.getAvailablePlugins()
-				.stream()
-				.filter(plugin::isInstance)
-				.map(plugin::cast)
-				.findFirst()
-				.orElseThrow();
+		new PluginsHelper(app).enablePlugin(plugin);
 	}
 }

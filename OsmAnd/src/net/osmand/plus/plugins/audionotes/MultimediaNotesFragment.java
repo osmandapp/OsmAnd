@@ -14,6 +14,7 @@ import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.EXTERNAL_
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.cameraPictureSizeDefault;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.canDisableShutterSound;
+import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 
 import android.Manifest;
 import android.content.Context;
@@ -33,6 +34,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
@@ -51,6 +53,9 @@ import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
@@ -63,8 +68,9 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class MultimediaNotesFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
+public class MultimediaNotesFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener, ShowableSearchablePreferenceDialogProvider {
 
 	public static final int CAMERA_FOR_PHOTO_PARAMS_REQUEST_CODE = 104;
 
@@ -478,7 +484,10 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	}
 
 	@Override
-	public boolean onPreferenceClick(Preference preference) {
+	public boolean onPreferenceClick(final Preference preference) {
+		if (showDialogForPreference(preference, this)) {
+			return true;
+		}
 		String prefId = preference.getKey();
 		if (OPEN_NOTES.equals(prefId)) {
 			Bundle bundle = new Bundle();
@@ -495,14 +504,8 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 			if (fragmentManager != null) {
 				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, getSelectedAppMode());
 			}
-		} else if (RESET_TO_DEFAULT.equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				// FK-TODO: make searchable
-				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, getSelectedAppMode(), this, app);
-			}
 		} else if (CAMERA_PERMISSION.equals(prefId)) {
-			requestPermissions(new String[] {Manifest.permission.CAMERA}, CAMERA_FOR_PHOTO_PARAMS_REQUEST_CODE);
+			requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_FOR_PHOTO_PARAMS_REQUEST_CODE);
 		} else if (EXTERNAL_RECORDER_SETTING_ID.equals(prefId)) {
 			AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
 			if (plugin != null) {
@@ -519,6 +522,25 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		return super.onPreferenceClick(preference);
 	}
 
+	@Override
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(
+			final Preference preference,
+			final Optional<Fragment> target) {
+		return RESET_TO_DEFAULT.equals(preference.getKey()) ?
+				Optional.of(
+						new ShowableSearchablePreferenceDialog<>(
+								ResetProfilePrefsBottomSheet.createInstance(
+										getSelectedAppMode(),
+										target)) {
+
+							@Override
+							protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+								searchablePreferenceDialog.show(getFragmentManager(), app);
+							}
+						}) :
+				Optional.empty();
+	}
+
 	private void showSelectCameraAppDialog(@NonNull CommonPreference<Boolean> preference) {
 		Context ctx = getContext();
 		if (ctx == null) {
@@ -529,7 +551,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		int profileColor = appMode.getProfileColor(nightMode);
 
 		int selected = preference.getModeValue(appMode) ? 0 : 1;
-		String[] entries = new String[] {
+		String[] entries = new String[]{
 				getCameraAppTitle(true),
 				getCameraAppTitle(false)
 		};
