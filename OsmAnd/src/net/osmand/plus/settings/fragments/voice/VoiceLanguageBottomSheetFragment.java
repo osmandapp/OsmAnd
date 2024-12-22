@@ -30,6 +30,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
+import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheetInitializer;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.voice.VoiceItemsAdapter.VoiceItemsListener;
@@ -41,6 +42,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -262,12 +264,12 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	public static VoiceLanguageBottomSheetFragment createInstance(final @Nullable Fragment target,
 																  final @Nullable ApplicationMode appMode,
 																  final boolean usedOnMap) {
-		VoiceLanguageBottomSheetFragment fragment = new VoiceLanguageBottomSheetFragment();
-		fragment.setRetainInstance(true);
-		fragment.setAppMode(appMode);
-		fragment.setUsedOnMap(usedOnMap);
-		fragment.setTargetFragment(target, 0);
-		return fragment;
+		final VoiceLanguageBottomSheetFragment bottomSheet = new VoiceLanguageBottomSheetFragment();
+		bottomSheet.setRetainInstance(true);
+		return BasePreferenceBottomSheetInitializer
+				.initialize(bottomSheet)
+				.with(Optional.empty(), appMode, usedOnMap, target);
+
 	}
 
 	@Override

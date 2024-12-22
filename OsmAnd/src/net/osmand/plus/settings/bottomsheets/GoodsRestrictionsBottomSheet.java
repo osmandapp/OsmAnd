@@ -26,6 +26,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -46,16 +47,15 @@ public class GoodsRestrictionsBottomSheet extends BasePreferenceBottomSheet impl
 															  final @NonNull ApplicationMode appMode,
 															  final boolean usedOnMap,
 															  final boolean selected) {
-		final Bundle args = new Bundle();
-		args.putString(PREFERENCE_ID, preference.getKey());
-		args.putBoolean(SELECTED_KEY, selected);
-		GoodsRestrictionsBottomSheet fragment = new GoodsRestrictionsBottomSheet();
-		fragment.setArguments(args);
-		fragment.setPreference(preference);
-		fragment.setAppMode(appMode);
-		fragment.setUsedOnMap(usedOnMap);
-		fragment.setTargetFragment(target, 0);
-		return fragment;
+		final GoodsRestrictionsBottomSheet bottomSheet = new GoodsRestrictionsBottomSheet();
+		{
+			final Bundle args = new Bundle();
+			args.putBoolean(SELECTED_KEY, selected);
+			bottomSheet.setArguments(args);
+		}
+		return BasePreferenceBottomSheetInitializer
+				.initialize(bottomSheet)
+				.with(Optional.of(preference), appMode, usedOnMap, target);
 	}
 
 	@Override
