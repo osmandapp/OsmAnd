@@ -5348,7 +5348,7 @@
     <string name="add_row">Lägg till rad</string>
     <string name="discard_changes_prompt">Kassera ändringarna?</string>
     <string name="shared_string_empty_trash">Töm papperskorgen</string>
-    <string name="delete_track_folder_dialog_message">Detta kommer radera mappen 1$s och alla %2$s spår i den.</string>
+    <string name="delete_track_folder_dialog_message">Detta kommer radera mappen %1$s och alla %2$s spår i den.</string>
     <string name="shared_string_delete_immediately">Radera omedelbart</string>
     <string name="delete_smart_folder_dialog_message">Detta kommer radera smarta mappen \"%1$s\". (Inga spår raderas.)</string>
     <string name="shared_string_is_deleted">%1$s har raderats.</string>

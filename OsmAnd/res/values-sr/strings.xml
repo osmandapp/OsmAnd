@@ -1015,7 +1015,7 @@
     <string name="update_all_maps_now">Освежити све карте сада?</string>
     <string name="clear_tile_data">Очисти све плочице</string>
     <string name="routing_attr_short_way_name">Пут који штеди гориво</string>
-    <string name="replace_favorite_confirmation">Замените омиљеног 1$s?</string>
+    <string name="replace_favorite_confirmation">Замените омиљеног %1$s?</string>
     <string name="rendering_attr_hideOverground_name">Надземне грађевине</string>
     <string name="shared_string_change">Промена</string>
     <string name="get_started">Почнимо</string>
@@ -2613,7 +2613,7 @@
     <string name="plugin_touringview_descr">Укључивањем овог погледа се мења начин изгеда карте на „Туристички преглед“, који је нарочити богати преглед за туристе и службене возаче. \n\nОвај поглед нуди, на сваком ступњу приближавања највећу количину туристичких појединости на подацима карте (посебно путеве, трагове, стазе и знакове сналажења у простору). \n\nТакође и јасно представља све врсте путева по боји, тако да никад не буде забуне, што је корисно када се нпр. возе већа возила. \n\nА нуди се и посебне туристичке могућности као што су приказ бициклистичких или планинских путева. \n\nНије потребно преузимање посебне карте, поглед се прави од обичних карти. \n\nОвај поглед се може искључити тако што се или овде искључи, или тако што се, по жељи, промени Начин изгледа карте под Подеси карту.</string>
     <string name="point_deleted">Тачка %1$s је обрисана</string>
     <string name="shared_string_world">Свет</string>
-    <string name="send_search_query_description">Послаћемо упит Ваше претраге: 1$s, као и Вашу положај. \n \n Не сакупљамо личне податке, само нам требају подаци о претрагама да бисмо побољшавали погон претраге.</string>
+    <string name="send_search_query_description">Послаћемо упит Ваше претраге: %1$s, као и Вашу положај. \n \n Не сакупљамо личне податке, само нам требају подаци о претрагама да бисмо побољшавали погон претраге.</string>
     <string name="send_search_query">Пошаљи упит претраге?</string>
     <string name="increase_search_radius_to">Повећај полупречник претраге на %1$s</string>
     <string name="thank_you_for_feedback">Хвала за повратном одговору</string>
@@ -2972,12 +2972,12 @@
     <string name="pref_selected_by_default_for_profiles">Ова поставка је подразумевано одабрана за налоге : %s</string>
     <string name="change_default_settings">Промени поставке</string>
     <string name="discard_changes">Одбаци промену</string>
-    <string name="apply_to_current_profile">Примени само на 1$s\\</string>
+    <string name="apply_to_current_profile">Примени само на %1$s\\</string>
     <string name="apply_to_all_profiles">Примени на све налоге</string>
     <string name="start_up_message_pref">Порука по отварању</string>
     <string name="analytics_pref_title">Рашчлањивања</string>
     <string name="turn_screen_on_info">Прикажи карту на закључаном заслону за време навођења.</string>
-    <string name="route_parameters_info">Поставке за образовање пута у означеном налогу 1$s</string>
+    <string name="route_parameters_info">Поставке за образовање пута у означеном налогу %1$s</string>
     <string name="wake_time">Време чекања после буђења</string>
     <string name="units_and_formats">Мерне јединице и облици</string>
     <string name="map_look_descr">Изглед карте</string>
@@ -3356,7 +3356,7 @@
 \n
 \nОдаберите %2$s. Сви подаци везани за радаре: упозорења, обавештења, занимљиве тачке ће бити обрисане док се ОсмАнд поново не угради.</string>
     <string name="shared_string_legal">Правно</string>
-    <string name="screen_timeout_descr">Ако је 1$s укључен, време рада ће зависити од тога.</string>
+    <string name="screen_timeout_descr">Ако је %1$s укључен, време рада ће зависити од тога.</string>
     <string name="uninstall_speed_cameras">Избриши радаре</string>
     <string name="speed_camera_pois">Радарске тачке занимања</string>
     <string name="keep_active">Држи укљученим</string>
@@ -4079,7 +4079,7 @@
     <string name="storage_copied_files_size">Умножавање %1$s датотека %2$s</string>
     <string name="storage_copying_files_size">Умножавање %1$s датотека %2$s</string>
     <string name="files_remaining">Преостале датотеке: %1$s %2$s</string>
-    <string name="storage_found_files_descr">Додирните 1$s ради умножавања %2$s датотека са 3$s на 4$s. Може потрајати неко време.</string>
+    <string name="storage_found_files_descr">Додирните %1$s ради умножавања %2$s датотека са %3$s на %4$s. Може потрајати неко време.</string>
     <string name="from_to_with_params">Од %1$s до %2$s</string>
     <string name="storage_found_files_size">Пронађено је %1$s датотека %2$s</string>
     <string name="shared_string_skip_warning">Да ли прескочити пренос\? ОсмАнд више нема приступ вашим датотекама у дељеном складишту.
@@ -4087,7 +4087,7 @@
 \nПрограм ће започети са коришћењем Ваше нове фасцикле података.</string>
     <string name="shared_storage_last_step">Можете одредити нову фасциклу са подацима касније.</string>
     <string name="shared_storage_third_step">Одобрите дозволу за приступ овој фасцикли. Без ње, ОсмАнд не може да умножава датотеке.</string>
-    <string name="shared_storage_first_step">Притисните 1$s \nУправник датотека отвара где треба да нађете и отворите фасциклу Османда.</string>
+    <string name="shared_storage_first_step">Притисните %1$s \nУправник датотека отвара где треба да нађете и отворите фасциклу Османда.</string>
     <string name="shared_storage_second_step">Кликните користи ову фасциклу</string>
     <string name="copying_completed">Умножено</string>
     <string name="shared_storage_migration">Пренос на дељено складиште</string>
@@ -4223,10 +4223,10 @@
     <string name="rendering_attr_seabedDetail_name">Појединост морског дна</string>
     <string name="save_track_to_gpx_descrp">Самостално покрени снимање трага током навођења и самостално сачувај након тога.</string>
     <string name="gpx_no_routes_title">Нема рута</string>
-    <string name="gpx_no_routes_descr">Можете користити алатку 1$s ради додавања путање у датотеку.</string>
+    <string name="gpx_no_routes_descr">Можете користити алатку %1$s ради додавања путање у датотеку.</string>
     <string name="quick_action_add_route_descr">Дугме за покретање путање од средине заслона.</string>
     <string name="please_provide_group_name_message">Молим, именујте групу.</string>
-    <string name="selected_waypoints_descr">Одабране пролазне тачке биће додате трагу 1$s</string>
+    <string name="selected_waypoints_descr">Одабране пролазне тачке биће додате трагу %1$s</string>
     <string name="shared_string_reading_file">Читање датотеке…</string>
     <string name="all_groups">Све групе</string>
     <string name="list_of_groups">Списак група</string>
@@ -4237,7 +4237,7 @@
     <string name="import_tracks_descr">%1$s, садржи %2$s засебне трагове. Изаберите трагове за увоз.</string>
     <string name="select_suggested_points">Изаберите предложене тачке</string>
     <string name="location_source">Извор добављања положаја</string>
-    <string name="location_source_descr">Подразумевано, ОсмАнд уграђен из Гуглове продавнице користи %1$s за одређивање положаја. \n \nАко добијете нетачне податке о положају или користите уређај без %2$s, покушајте да пређете на 3$s\\</string>
+    <string name="location_source_descr">Подразумевано, ОсмАнд уграђен из Гуглове продавнице користи %1$s за одређивање положаја. \n \nАко добијете нетачне податке о положају или користите уређај без %2$s, покушајте да пређете на %3$s\\</string>
     <string name="default_appearance_desc">Подразумевана боја, сличица и облик ће се применити на додане омиљене тачке у групи.</string>
     <string name="default_appearance">Подразумевани изглед</string>
     <string name="edit_category">Уреди врсту</string>
@@ -4453,7 +4453,7 @@
     <string name="map_widget_camera_tilt">Нагнутост камере</string>
     <string name="shared_string_large">Увећано</string>
     <string name="trip_recording_downhill_widget_desc">Приказује укупно све спустове на путу који се тренутно снима.</string>
-    <string name="favorite_confirm_delete_group">Да ли обрисати групу 1$s и све придружене тачке (%2$d)?</string>
+    <string name="favorite_confirm_delete_group">Да ли обрисати групу %1$s и све придружене тачке (%2$d)?</string>
     <string name="av_notes_audio_widget_desc">Тап по справици ће снимити звучну белешку.</string>
     <string name="auto_25_chars_route_roundabout_kl">Изађите на излазу %1$d и држите лево</string>
     <string name="download_complete">Преузимање је завршено</string>
@@ -4614,7 +4614,7 @@
     <string name="purchases_feature_desc_cross_buy">Користите своје могућности претплате на различитим платформама (Андорид/Иос/веб) без додатних трошкова.</string>
     <string name="map_widget_ant_bicycle_power">Снага бицикла</string>
     <string name="depth_contours">Дубински обриси</string>
-    <string name="included_in_your_current_plan">Укључен је ваш план 1$s</string>
+    <string name="included_in_your_current_plan">Укључен је ваш план %1$s</string>
     <string name="quick_action_map_center_widget_descr">Прекидач за приказ или скривање справице средишта карте.</string>
     <string name="map_widget_rendering_fps_desc">Приказује брзину освежавања карте и елемената карте који се приказују и освежавају, изражено у сличицама по секунди (ФПС).</string>
     <string name="simulate_location_by_gpx">Опонашај положај по ГПИксу</string>
@@ -4699,7 +4699,7 @@
     <string name="goods_delivery_desc">Доставна возила могу бити забрањена на неким путевима.</string>
     <string name="next_live_update_date_and_time">Следеће освежење на %1$s у %2$s.</string>
     <string name="calculate_online_altitude_descr">Израчунајте надморску висину на служитељима Османда, засновану на сателитским сликама и дигиталним моделима надморске висине. Различитости у односу на висине снимљене уређајем могу бити кориштене за исправку надморске висине.</string>
-    <string name="ant_missing_dependency_descr">Нисам успео да пронађем одговарајућу службу 1$s \nТреба да уградите или освежите АНТ + службу прикључака \nДа ли желите да покренете складиште игара за то?</string>
+    <string name="ant_missing_dependency_descr">Нисам успео да пронађем одговарајућу службу %1$s \nТреба да уградите или освежите АНТ + службу прикључака \nДа ли желите да покренете складиште игара за то?</string>
     <string name="updated_map_time">Освежено: %1$s.</string>
     <string name="live_update_frequency_hour_variant">Освежења карата се проверавају сваког сата.</string>
     <string name="live_update_frequency_week_variant">Освежења карата се проверавају седмично.</string>
@@ -4723,7 +4723,7 @@
     <string name="sort_duration_descending">Најпре најдуже трајање</string>
     <string name="sort_date_descending">Најпре најстарији датум</string>
     <string name="delete_cloud_version">Избриши издање из облака</string>
-    <string name="cloud_version_confirm_delete">Да ли избрисати 1$s из Облака ОсмАнда?</string>
+    <string name="cloud_version_confirm_delete">Да ли избрисати %1$s из Облака ОсмАнда?</string>
     <string name="simulation_position_description">Изаберите датотеку трага ради употребе као извора за померање положаја.</string>
     <string name="shared_string_kilograms">килограми</string>
     <string name="share_link">Дели везу</string>
@@ -4731,7 +4731,7 @@
     <string name="sound_beep_minimal">Бип: најтиши</string>
     <string name="last_synchronized">Последње усклађивани</string>
     <string name="display_position_automatic_descr">Зависи од усмерења карте: дно за смер кретања, средиште за све остало.</string>
-    <string name="weight_limit_error">Најмања вредност је 1$s тона. Користите налог 2$s уколико је тежина возила мања од најмање вредности.</string>
+    <string name="weight_limit_error">Најмања вредност је %1$s тона. Користите налог %2$s уколико је тежина возила мања од најмање вредности.</string>
     <string name="share_as_file">Дели као датотеку</string>
     <string name="sound_beep_complex">Бип: сложен</string>
     <string name="determine_location">Омогућава нам да одредимо ваш положај</string>
@@ -4769,7 +4769,7 @@
     <string name="is_imported">%1$s је увезен.</string>
     <string name="file_already_exists_description">1$s Датотека са таквим именом већ постоји. Замена ће преписати све измене садашњим издањем.</string>
     <string name="file_already_exists">Датотека већ постоји</string>
-    <string name="nav_profile_confirm_delete">Избрисати 1$s?</string>
+    <string name="nav_profile_confirm_delete">Избрисати %1$s?</string>
     <string name="external_device_low_battery">Батерија је отпразна</string>
     <string name="external_device_menu_forget">Заборави</string>
     <string name="external_device_characteristic_speed">Брзина</string>
@@ -4788,7 +4788,7 @@
     <string name="shared_string_all_world">Цели свет</string>
     <string name="external_device_characteristic_diastolic">Дијастолички</string>
     <string name="external_device_characteristic_systolic">Систолички</string>
-    <string name="common_weight_limit_error">Најмања вредност је 1$s %2$s. Користите пресек 3$s ако ли је тежина возила мања од најмање вредности.</string>
+    <string name="common_weight_limit_error">Најмања вредност је %1$s %2$s. Користите пресек %3$s ако ли је тежина возила мања од најмање вредности.</string>
     <string name="external_device_details_pair">Упари</string>
     <string name="external_device_details_disconnect">Прекини везу</string>
     <string name="ant_plus_open_settings">Отвори поставке</string>
@@ -4877,7 +4877,7 @@
     <string name="ant_plus_bluetooth_off">Блутут је искључен</string>
     <string name="ant_plus_bluetooth_off_description">Укључите претрагу Блутута и упарите пријемнике.</string>
     <string name="delete_folder">Избриши фолдер</string>
-    <string name="delete_track_folder_dialog_message">Ово ће избрисати фасциклу 1$s и све %2$s садржане трагове.</string>
+    <string name="delete_track_folder_dialog_message">Ово ће избрисати фасциклу %1$s и све %2$s садржане трагове.</string>
     <string name="track_not_recorded">Није снимљено</string>
     <string name="shared_string_new_track">Нови траг</string>
     <string name="map_2d_mode_action">Површински начин приказа (2д)</string>
@@ -5212,7 +5212,7 @@
     <string name="widget_available_ram">Доступан РАМ</string>
     <string name="filter_by_name">Филтер по имену</string>
     <string name="special_routing_cpp">Нарочита врста одређивања путање</string>
-    <string name="delete_smart_folder_dialog_message">Ово ће уклонити паметану фасциклу 1$s. (Ниједан траг неће бити избрисан.)</string>
+    <string name="delete_smart_folder_dialog_message">Ово ће уклонити паметану фасциклу %1$s. (Ниједан траг неће бити избрисан.)</string>
     <string name="discard_filter_changes_prompt">Ресетовати све филтере?</string>
     <string name="empty_name">Празно име</string>
     <string name="calculate_offline_altitude_descr">Израчунавање елевације офлајн, на основу података Теренске мапе (3Д). Разлике у односу на сачувану висину на уређају могу се користити за корекцију елевације.</string>
@@ -5284,7 +5284,7 @@
     <string name="retrieve_elevation_data_summary">ОсмАнд може да преузме податке о надморској висини са оближњих путева или карата тла.</string>
     <string name="delete_actions_button">Дугме брисања</string>
     <string name="shared_string_osm_id">ОСМ ИД</string>
-    <string name="delete_actions_button_confirmation">Да ли поуздано да желите да избришете 1$s са свим додатим дејствима?</string>
+    <string name="delete_actions_button_confirmation">Да ли поуздано да желите да избришете %1$s са свим додатим дејствима?</string>
     <string name="route_line_use_coloring_altitude">Линија путање је обојена по надморској висини.</string>
     <string name="getting_list_of_required_maps">Преузима се списак потребних карата…</string>
     <string name="required_maps">Потребне карте</string>
