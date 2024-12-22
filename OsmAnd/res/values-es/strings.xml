@@ -5976,4 +5976,6 @@
     <string name="location_interpolation_percent_desc">Establece el porcentaje de interpolación de la posición durante la navegación por la ruta. Este parámetro reduce el desfase de la posición de tu ubicación en el mapa durante la animación.</string>
     <string name="shared_string_interpolation">Interpolación</string>
     <string name="selected_delayed_profile">Perfil seleccionado \"%s\"</string>
+    <string name="default_buttons_size_original_description">Cada botón conservará su propio tamaño.</string>
+    <string name="default_buttons_corners_original_description">Cada botón conserva sus propias esquinas redondeadas.</string>
 </resources>
