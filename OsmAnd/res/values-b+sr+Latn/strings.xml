@@ -300,8 +300,8 @@
     <string name="rename_failed">Preimenovanje nije uspelo.</string>
     <string name="shared_string_currently_recording_track">Putanja koja se trenutno snima</string>
     <string name="back_to_map">Nazad na mapu</string>
-    <string name="plugin_nautical_descr">Ovaj dodatak obogaćuje program OsmAnd da prikazuje i pomorske puteve, svetionike navođenja, opasne plovne oblasti, oblasti sa ograničenjima za jedrenje i pristajanje, itd. Radi upotrebe, preuzmi odgovarajuće plovne mape i omogući prikaz „Plovne mape“ pod „Podesi mapu“. \n \nDodatna saznanja na %1$s.</string>
-    <string name="plugin_ski_descr">Napravljeno za navođenje po oblastima zimskih sportova. Pregleda skijaške staze i skijaške žičare, poljske skijaške putanje, sa obojenim linijama koje ukazujućim na težinu staza. Radi korišćenja ovog dodatka promeni izgled mape na „Podesi mapu“ pa izgled „Zima i skijanje“.</string>
+    <string name="plugin_nautical_descr">Ovaj dodatak obogaćuje program OsmAnd da prikazuje i pomorske puteve, svetionike navođenja, opasne plovne oblasti, oblasti sa ograničenjima za jedrenje i pristajanje, itd. Radi upotrebe, preuzmi odgovarajuće plovne mape i omogući prikaz Plovne mape pod Podesi mapu\n\nDodatna saznanja na %1$s.</string>
+    <string name="plugin_ski_descr">Napravljeno za navođenje po oblastima zimskih sportova. Pregleda skijaške staze i skijaške žičare, poljske skijaške putanje, sa obojenim linijama koje ukazujućim na težinu staza. Radi korišćenja ovog dodatka promeni izgled mape na Podesi mapu pa izgled Zima i skijanje.</string>
     <string name="shared_string_audio">Audio</string>
     <string name="share_note">Deli belešku</string>
     <string name="location_on_map">Koordinate:
@@ -1162,7 +1162,7 @@
     <string name="map_widget_monitoring_services">Servis monitorniga</string>
     <string name="gps_not_available">Omogući GPS u podešavanjima</string>
     <string name="non_optimal_route_calculation">Računaj moguću približnu rutu za velike razdaljine</string>
-    <string name="enable_plugin_monitoring_services">Omogući dodatak za „snimanje putovanja“ radi korišćenja usluga beleženja (beleženje GPX-a, praćenje lokacije na internetu)</string>
+    <string name="enable_plugin_monitoring_services">Omogući dodatak za snimanje putovanja radi korišćenja usluga beleženja (beleženje GPX-a, praćenje lokacije na internetu)</string>
     <string name="map_widget_show_destination_arrow">Prikazuj pravac odredišta</string>
     <string name="rendering_attr_roadColors_name">Obrazac boja puteva</string>
     <string name="rendering_attr_roadColors_description">Izaberi obrazac boja puteva:</string>
@@ -1970,7 +1970,7 @@
     <string name="increase_search_radius">Povećaj oblast pretrage</string>
     <string name="restart_search">Restart pretrage</string>
     <string name="private_access_routing_req">Tvoje odredište se nalazi na privatnom posedu. Dozvoli korišćenje privatnih puteva na ovom putovanju?</string>
-    <string name="plugin_mapillary_descr">Slike sa nivoa ulice. Možeš i sam doprineti. Da bi video postojeće podatke kao sloj mape, uključite \'Slike na nivou ulice u meniju \'Podesi mapu\'.</string>
+    <string name="plugin_mapillary_descr">Slike sa nivoa ulice. Možeš i sam doprineti. Da bi video postojeće podatke kao sloj mape, uključite Slike na nivou ulice u meniju Podesi mapu.</string>
     <string name="mapillary">Mapilari</string>
     <string name="mapillary_descr">Internet slike ulica za sve. Otkrij mesta, sarađujte, osvojite svet.</string>
     <string name="mapillary_widget_descr">Omogućava brzi doprinos Mapilariju.</string>
@@ -2329,7 +2329,7 @@
     <string name="logcat_buffer_descr">Pregled i zajedničko korišćenje dnevnika o aplikacijama</string>
     <string name="permission_is_required">Potrebne su dozvole za korišćenje ove mogućnosti.</string>
     <string name="export_profile_dialog_description">Odaberi dodatne podatke za izvoz uz profil.</string>
-    <string name="import_profile_dialog_description">Uvezeni profil sadrži dodatne podatke. Klikni na uvoz da uvezeš samo podatke profila ili odaberi dodatne podatke.</string>
+    <string name="import_profile_dialog_description">Uvezeni profil sadrži dodatne podatke. Klikni na Uvoz da uvezeš samo podatke profila ili odaberi dodatne podatke.</string>
     <string name="shared_string_include_data">Uključi dodatne podatke</string>
     <string name="shared_string_rendering_style">Stil renderinga</string>
     <string name="shared_string_routing">Rutiranje</string>
@@ -3262,7 +3262,7 @@
     <string name="shared_string_no_thank_you">Ne, hvala</string>
     <string name="settings_privacy_and_security_desc">Odaberi koje podatke deliš</string>
     <string name="settings_privacy_and_security">Privatnost i bezbednost</string>
-    <string name="privacy_and_security_change_descr">Pritisni „Dozvoli“ ako se slažeš sa našom %1$s</string>
+    <string name="privacy_and_security_change_descr">Pritisni Dozvoli ako se slažeš sa našom %1$s</string>
     <string name="visited_screens_collect_descr">Pomozi nam da razumemo omiljene mogućnosti OsmAnda.</string>
     <string name="downloaded_maps_collect_descr">Pomaže nam da razumemo popularnost mape zemlje i regije.</string>
     <string name="collected_data_descr">Odredi koje podatke dozvoljavaš OsmAnd-u da deli.</string>
@@ -3621,10 +3621,10 @@
     <string name="markers_history">Istorija markera</string>
     <string name="send_files_to_openstreetmap">Pošalji datoteku GPX-a na OpenStreetMap</string>
     <string name="enter_text_separated">Unesi oznake odvojene zarezom.</string>
-    <string name="gpx_upload_public_visibility_descr">„Javno“ znači da je ruta javno prikazan u tragovima GPS-a i na javnim tragovima GPS-a, kao i na javnom spisku ruta sa vremenskim oznakama u sirovom obliku. Podaci koji se prikazuju putem API-ja ne upućuju na stranicu ruta. Vremenske oznake praćenja nisu dostupne putem javnog API-ja GPS-a i tačke praćenja nisu vremenski poređane.</string>
-    <string name="gpx_upload_private_visibility_descr">„Privatno“ znači da se ruta ne pojavljuje ni na jednom javnom spisku, ali tačke praćenja u njemu u nisu u vremenskom redosledu dostupne putem javnog API-ja GPS-a bez vremenskih oznaka.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">„Prepoznatljiv“ znači da će se ruta javno prikazati u tragovima GPS-a i u javnim spiskovima ruta GPS-a, tj. drugi korisnici će moći da preuzmu neobrađeni ruta i povežu ga sa Vašim korisničkim imenom. Javni podaci o vremenskim tačkama staze iz API-ja GPS-a koji se služe putem API-ja za tačke praćenja imaće odnos na vašu izvornu stranicu praćenja.</string>
-    <string name="gpx_upload_trackable_visibility_descr">„Praćenje“ znači da se ruta ne prikazuje nigde na javnim spiskovima, ali obrađene tačke praćenja sa vremenskim oznakama u njima (koje ne mogu biti neposredno povezane sa vama) idu kroz preuzimanja sa javnog API-ja GPS-a.</string>
+    <string name="gpx_upload_public_visibility_descr">Javno znači da je ruta javno prikazan u tragovima GPS-a i na javnim tragovima GPS-a, kao i na javnom spisku ruta sa vremenskim oznakama u sirovom obliku. Podaci koji se prikazuju putem API-ja ne upućuju na stranicu ruta. Vremenske oznake praćenja nisu dostupne putem javnog API-ja GPS-a i tačke praćenja nisu vremenski poređane.</string>
+    <string name="gpx_upload_private_visibility_descr">Privatno znači da se ruta ne pojavljuje ni na jednom javnom spisku, ali tačke praćenja u njemu u nisu u vremenskom redosledu dostupne putem javnog API-ja GPS-a bez vremenskih oznaka.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">Prepoznatljiv znači da će se ruta javno prikazati u tragovima GPS-a i u javnim spiskovima ruta GPS-a, tj. drugi korisnici će moći da preuzmu neobrađeni ruta i povežu ga sa Vašim korisničkim imenom. Javni podaci o vremenskim tačkama staze iz API-ja GPS-a koji se služe putem API-ja za tačke praćenja imaće odnos na vašu izvornu stranicu praćenja.</string>
+    <string name="gpx_upload_trackable_visibility_descr">\tPraćenje znači da se ruta ne prikazuje nigde na javnim spiskovima, ali obrađene tačke praćenja sa vremenskim oznakama u njima (koje ne mogu biti neposredno povezane sa vama) idu kroz preuzimanja sa javnog API-ja GPS-a.</string>
     <string name="osm_edit_close_note">Zatvori OSM belešku</string>
     <string name="osm_edit_comment_note">Komentar OSM napomena</string>
     <string name="osm_login_descr">Prijavi se koristeći bezbedan način OAuth ili koristiti svoje korisničko ime i lozinku.</string>
@@ -3817,7 +3817,7 @@
     <string name="in_grace_period">U grejs periodu</string>
     <string name="on_hold">Na čekanju</string>
     <string name="expired">Isteklo</string>
-    <string name="release_4_0_beta">• Dodata mogućnost preuzimanja izohipsi u stopama \n \n• Planirajte pejzaž rute: dodati jezičci da se prebacuje između tačaka i grafika \n \n• Ažuriranja OsmAnd Live su premeštena u „Preuzimanja &gt; Ažuriranja” \n \n • Trase sada mogu da se oboje po visini, brzini ili nagibu. \n \n • Dodata opcija da se izmeni izgled linija za navođenje \n \n • Ažuriran dijalog za „Snimanje puta”</string>
+    <string name="release_4_0_beta">• Dodata mogućnost preuzimanja izohipsi u stopama\n\n• Planirajte pejzaž rute: dodati jezičci da se prebacuje između tačaka i grafika\n\n• Ažuriranja OsmAnd Live su premeštena u Preuzimanja &gt; Ažuriranja\n\n • Trase sada mogu da se oboje po visini, brzini ili nagibu.\n\n • Dodata opcija da se izmeni izgled linija za navođenje\n\n • Ažuriran dijalog za Snimanje puta</string>
     <string name="update_all_maps_added">Ažuriraj sve mape dodate na %1$s?</string>
     <string name="exit_number">Broj izlaza</string>
     <string name="announce_when_exceeded">Obavestiti na prekoračenu brzinu</string>
@@ -4192,7 +4192,7 @@
     <string name="routing_attr_freeride_policy_only_if_necessary_name">Samo ako je neophodno</string>
     <string name="routing_attr_freeride_policy_allow_name">Dozvoli</string>
     <string name="routing_attr_freeride_policy_prefer_offpiste_name">Skijanje van staze</string>
-    <string name="snackbar_page_removed">„Stranica %1$s“ je uklonjena.</string>
+    <string name="snackbar_page_removed">Stranica %1$s je uklonjena.</string>
     <string name="map_widget_distance_to_destination">Udaljenost do odredišta</string>
     <string name="apply_to_existing_points_descr">Primeniti promene na postojeće tačke grupe ili samo na nove?</string>
     <string name="apply_to_existing_favorites_descr">Primeniti promene na postojeće grupe favorita ili samo na nove?</string>
@@ -4277,7 +4277,7 @@
     <string name="backup_restore_now">Vrati sada</string>
     <string name="backup_setup">Podesi bekap</string>
     <string name="backup_welcome_back_descr">Vrati podatke na ovom uređaju koristeći OsmAnd Cloud.</string>
-    <string name="release_4_0">• Smeštanje u Cloud \n \n • Dodat je noćni način rada za prikaz mapa „Topo”. \n \n • Dodata je mogućnost da se izohipse preuzmu u stopama \n \n • Trasa sada mogu biti obojene po visini, brzini ili nagibu \n \n • Osvežen je prozor „Snimanje ruta” \n \n • Udaljenost na klik je pomerena iz lenjira sa prečnikom u posebnu mogućnost \n \n • Planiranje puta: sada možeš promeniti mogućnosti navođenja, pristupiti podešavanjima mape i tražiti po mapi bez napuštanja planiranja puta \n \n • Novi prikaz „Kupovina” sa podrobnim podacima o kupovini \n \n • Dodata je mogućnost promene izgleda linije rute \n \n • Ažuriranje OsmAnda Live su pomerena u „Preuzmi mape”</string>
+    <string name="release_4_0">• Smeštanje u Cloud\n\n • Dodat je noćni način rada za prikaz mapa Topo\n\n • Dodata je mogućnost da se izohipse preuzmu u stopama\n\n • Trasa sada mogu biti obojene po visini, brzini ili nagibu\n\n • Osvežen je prozor Snimanje ruta\n\n • Udaljenost na klik je pomerena iz lenjira sa prečnikom u posebnu mogućnost\n\n • Planiranje puta: sada možeš promeniti mogućnosti navođenja, pristupiti podešavanjima mape i tražiti po mapi bez napuštanja planiranja puta\n\n • Novi prikaz Kupovina sa podrobnim podacima o kupovini \n \n • Dodata je mogućnost promene izgleda linije rute\n\n • Ažuriranje OsmAnda Live su pomerena u Preuzmi mape</string>
     <string name="backup_error_user_is_not_registered">Nijedan korisnik nije registrovan sa tom adresom e-mail adresom</string>
     <string name="backup_error_token_is_not_valid_or_expired">Nevažeći ili je istekao token</string>
     <string name="no_activity_for_intent">Ugradi program koji može da izvede ovu radnju.</string>
@@ -4343,7 +4343,7 @@
     <string name="rendering_attr_showRunningRoutes_description">Prikaz ruta za trčanje</string>
     <string name="exit_import">Izlaz?</string>
     <string name="quick_action_add_route_descr">Dugme za pokretanje rute od sredine ekrana.</string>
-    <string name="always_ask_waypoint_appearance_description">Dodirom na ovu radnju otvoriće se ekran „Dodaj međuodredište“, gde možeš promeniti ime i izgled.</string>
+    <string name="always_ask_waypoint_appearance_description">Dodirom na ovu radnju otvoriće se ekran Dodaj međuodredište, gde možeš promeniti ime i izgled.</string>
     <string name="track_file">Fajl trase</string>
     <string name="shared_storage_last_step">Možeš kasnije odrediti novu folder za podatke.</string>
     <string name="shared_storage_third_step">Odobri dozvolu za pristup ovom folderu. Bez nje, OsmAnd ne može da kolira fajlove.</string>
@@ -4845,8 +4845,8 @@
     <string name="download_cloud_version">Preuzmi izdanje iz Cloud-a</string>
     <string name="shared_string_do_not_exist">Ne postoji</string>
     <string name="trip_recording_downhill_widget_desc">Prikazuje ukupno sve nizbrdice na putu koji se trenutno snima.</string>
-    <string name="time_to_destination_widget_desc">Ova vidžet prikazuje „Vreme pristizanja“ ili „Preostalo vreme“ na poslednjoj dolaznoj tački. Vreme se stalno osvežava prilikom navođenja i jednako je vremenu rute iz trenutnelokacije.</string>
-    <string name="time_to_intermediate_widget_desc">Vidžet prikazuje „Vreme pristizanja“ ili „Preostalo vreme“ na prvojm međuodredištu. Vreme se stalno osvežava prilikom navođenja, a kada se prolazne tačke prođu, vreme će biti osveženo na sledećoj prolaznoj tački.</string>
+    <string name="time_to_destination_widget_desc">Ova vidžet prikazuje Vreme pristizanja ili Preostalo vreme na poslednjoj dolaznoj tački. Vreme se stalno osvežava prilikom navođenja i jednako je vremenu rute iz trenutne lokacije.</string>
+    <string name="time_to_intermediate_widget_desc">Vidžet prikazuje Vreme pristizanja ili Preostalo vreme na prvojm međuodredištu. Vreme se stalno osvežava prilikom navođenja, a kada se prolazne tačke prođu, vreme će biti osveženo na sledećoj prolaznoj tački.</string>
     <string name="marker_2nd">Sledeći marker</string>
     <string name="remove_widget_first">Prvo ukloni vidžet</string>
     <string name="add_row">Dodaj liniju</string>
@@ -5007,7 +5007,7 @@
     <string name="si_nm_ft">Nautičke milje/stope</string>
     <string name="av_audio_format_bottom_sheet_descr">Označi format zvučnog zapisa. Vrsta zvučnog fajla je 3GPP (.3gp).</string>
     <string name="value_downloaded_of_mb">Preuzima se %1$.1f/%2$.1f MB</string>
-    <string name="release_4_4">• Poboljšan je meni „Trase“ u „podešavanjima mape“ \n \n • Priručni meni sada prikazuje mestne nazive TOI \n \n • Dodata je mogućnost deljenja rute vezom \n \n • Didata je jedinica rastojanja „pomorske milje/stope“ \n \n • Usmerenje mape dodaje novi nepokretan način \n \n • Uprošćen je početni matični prikaz \n \n • Nepromenljivo mesto lokacija u podeljenom prikazu Android auta \n \n • Dodat je grafički prikaz za proučavanje „Brzina/nagib“ \n \n • Android 13 je premestio jezik programa u podešavanja sistema \n \n • Ispravljena je greška prilikom prikaza mesta pošćenja \n \n • Dodata je mogućnost preuzimanja tilova sa interneta koristeći „frontalne“ ili „podmetnute“ mape \n \n • Dodata je mogućnost upotrebe imperijalne merne jedinice za „osobine vozila“ \n \n • Novi presek moped \n \n • „lokaciju prikaza“ je dobio novu mogućnost „samostalan“ \n \n • Ispravljeno je upravljanje pokretima kartom za nagib, približavanje i obrtanje</string>
+    <string name="release_4_4">• Poboljšan je meni Trase u Podešavanjima mape\n\n • Priručni meni sada prikazuje mestne nazive TOI\n\n • Dodata je mogućnost deljenja rute vezom\n\n • Didata je jedinica rastojanja pomorske milje/stope\n\n • Usmerenje mape dodaje novi nepokretan način\n\n • Uprošćen je početni matični prikaz\n\n • Nepromenljivo mesto lokacija u podeljenom prikazu Android auta\n\n • Dodat je grafički prikaz za proučavanje Brzina/nagib\n\n • Android 13 je premestio jezik programa u podešavanja sistema\n\n • Ispravljena je greška prilikom prikaza mesta pošćenja\n\n • Dodata je mogućnost preuzimanja tilova sa interneta koristeći frontalne ili podmetnute mape\n\n • Dodata je mogućnost upotrebe imperijalne merne jedinice za „osobine vozila“\n\n • Novi presek moped\n\n • Lokaciju prikaza je dobio novu mogućnost samostalan\n\n • Ispravljeno je upravljanje pokretima kartom za nagib, približavanje i obrtanje</string>
     <string name="changes">Izmene %1$s</string>
     <string name="upload_change">Preuzimanje izmena</string>
     <string name="cloud_conflicts">Konflikt</string>
@@ -5102,7 +5102,7 @@
     <string name="map_widget_camera_tilt">Nagnutost kamere</string>
     <string name="map_widget_ant_bicycle_speed_desc">Prikazuje brzinu putovanja</string>
     <string name="nautical_depth_points">Tačke dubine mora</string>
-    <string name="release_4_3">• Novo, brža verzija 2, motora za obradu mape (Opengl), sa pogledom u 2.5 dimenzije \n \n • Glatko oživljavanje izmene lokacija pri kretanju \n \n • Novi widžet za koordinate središta mape i visinu za geografske lokacije \n \n • „Razmak za kucanje“ dodata mogućnost veličine dodatog slova \n \n • Widžet map marker: dodata je mogućnost izmene ponašanja na klik. \n \n • Ispravka mogućnosti „Prikaži lokaciju“ \n \n • GPX: dodata podrška za oznake „vezu“, „cmt“, „silaz“ i bilo koje proizvoljno proširenje \n \n • Preuređen spisak „Plovne mape“ \n \n • Dodatna podrška za ANT + senzore \n \n • Dodatna mogućnost za onemogućavanje jedinstvenog ličnog broja preuzimanja \n \n • Podesiva podrazumevana brzina vremenskih prilika za hodanje/planinarenje/trčanje zavisno od nadmorske visine \n \n • Ispravljeno ponašanje zvučnog izlaza i klizača glasnoće</string>
+    <string name="release_4_3">• Novo, brža verzija 2, motora za obradu mape (OpenGL), sa pogledom u 2,5 dimenzije\n\n • Glatko oživljavanje izmene lokacija pri kretanju\n\n • Novi widžet za koordinate središta mape i visinu za geografske lokacije\n\n • Razmak za kucanje dodata mogućnost veličine dodatog slova\n\n • Vidžet map marker: dodata je mogućnost izmene ponašanja na klik.\n\n • Ispravka mogućnosti Prikaži lokaciju\n\n • GPX: dodata podrška za oznake vezu, cmt, silaz i bilo koje proizvoljno proširenje\n\n • Preuređen spisak Plovne mape\n\n • Dodatna podrška za ANT + senzore\n\n • Dodatna mogućnost za onemogućavanje jedinstvenog ličnog broja preuzimanja\n\n • Podesiva podrazumevana brzina vremenskih prilika za hodanje/planinarenje/trčanje zavisno od nadmorske visine\n\n • Ispravljeno ponašanje zvučnog izlaza i klizača glasnoće</string>
     <string name="speak_gps_signal_status">Najavljuje gubljenje jačine signala GPS-a i povratak</string>
     <string name="map_widget_rendering_fps">Obrada mape u slikama po sekundi</string>
     <string name="purchases_feature_desc_cross_buy">Koristi svoje mogućnosti pretplate na različitim platformama (Andorid/Ios/veb) bez dodatnih troškova.</string>
@@ -5175,7 +5175,7 @@
     <string name="shared_string_cache">Keš</string>
     <string name="filter_screen_title">Filter</string>
     <string name="filter_tracks_count">Filter: %d</string>
-    <string name="release_4_5">• BLE/ANT+ senzori: prepravljena veza, pisanje i pregled primljenih podataka GPX -u \n \n• Besplatna sigurnosna kopija za favorite i postavke u \'Osmand Cloud\' \n \n• Novi format za karte terena s 3D podrškom za pomoć \n \n• Upravljanje trasama: Ažurirano korisnički interfejs, dodano sortiranje, podrška grupisanim folderima \n \n• Android Auto: Novi Start Menu za favorite, zapise i TOI kategorije \n \n• Jedna lista widžeta za gornju/donju ploču \n \n• Novi profil \'voza\', omogućava izračunavanje železničkih ruta \n \n• Contour Lines funkcioniše s bilo kojim \'izvorom karte\' \n \n• Prošireni popis zadanih radnji za spoljnu tastaturu \n \n• Prilagođene datoteke usmeravanja, dodane opcije za brisanje ili prepisivanje \n \n• Dodana opcija za \'najavljivanje odstupanja od rute\' \n \n• Ekran za pokretanje: dodana opcija Obnovite stanje OsmAnd iz datoteke \n \n• Dodana klasa \'opasnih materijala\' za kamionske navigacije u Severnoj Americi \n \n• Dodana podrška \'putem Ferrata\' za pešačko naviđenje \n \n• Dodana \'CAI\' lestvica za poteškoće klasifikacije ruta \n \n• Fiksni odabir jezika po aplikaciji \n \n• Dodana podrška za tematske ikone \n \n• Osmand Cloud: dodana opcija za brisanje naloga \n \n• Pristupačnost: dodirnite veličinu cilja za dugme promenjene na 48 dp; Popravljeni problem s izgledom karte vidljivo za čitanje ekrana \n \n• Japanski glas je prepravljen \n \n• Promena nadmorske visine i procena nagiba je prerađena</string>
+    <string name="release_4_5">• BLE/ANT+ senzori: prepravljena veza, pisanje i pregled primljenih podataka GPX -u\n\n • Besplatna sigurnosna kopija za favorite i postavke u Osmand Cloud\n\n • Novi format za karte terena s 3D podrškom za pomoć\n\n • Upravljanje trasama: Ažurirano korisnički interfejs, dodano sortiranje, podrška grupisanim folderima\n\n • Android Auto: Novi Start Menu za favorite, zapise i TOI kategorije\n\n • Jedna lista widžeta za gornju/donju ploču\n\n • Novi profil voza, omogućava izračunavanje železničkih ruta\n\n • Contour Lines funkcioniše s bilo kojim izvorom karte\n\n • Prošireni popis zadanih radnji za spoljnu tastaturu\n\n • Prilagođene datoteke usmeravanja, dodane opcije za brisanje ili prepisivanje\n\n • Dodana opcija za najavljivanje odstupanja od rute\n\n • Ekran za pokretanje: dodana opcija Obnovite stanje OsmAnd iz datoteke\n\n • Dodana klasa opasnih materijala za kamionske navigacije u Severnoj Americi\n\n • Dodana podrška putem Ferrata za pešačko navođenje\n\n • Dodana CAI lestvica za poteškoće klasifikacije ruta\n\n • Fiksni odabir jezika po aplikaciji\n\n • Dodana podrška za tematske ikone\n\n • Osmand Cloud: dodana opcija za brisanje naloga\n\n • Pristupačnost: dodirnite veličinu cilja za dugme promenjene na 48 dp; Popravljeni problem s izgledom karte vidljivo za čitanje ekrana\n\n • Japanski glas je prepravljen\n\n • Promena nadmorske visine i procena nagiba je prerađena</string>
     <string name="battery_optimization_banner_content">Android optimizacija baterije može uzrokovati netačnosti u snimljenim putanjama.</string>
     <string name="dont_ask_anymore">Ne pitati više</string>
     <string name="battery_optimization_settings">Podešavanje optimizacija baterije</string>
