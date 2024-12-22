@@ -264,13 +264,13 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements Show
 	@Override
 	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(
 			final Preference preference,
-			final Fragment target) {
+			final Optional<Fragment> target) {
 		if (settings.ARRIVAL_DISTANCE_FACTOR.getId().equals(preference.getKey())) {
 			return Optional.of(
 					new ShowableSearchablePreferenceDialog<>(
 							AnnouncementTimeBottomSheet.createInstance(
 									preference,
-									target,
+									target.orElse(null),
 									getSelectedAppMode(),
 									false)) {
 
@@ -284,7 +284,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements Show
 			return Optional.of(
 					new ShowableSearchablePreferenceDialog<>(
 							VoiceLanguageBottomSheetFragment.createInstance(
-									target,
+									target.orElse(null),
 									getSelectedAppMode(),
 									false)) {
 

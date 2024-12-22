@@ -578,7 +578,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 			}
 		} else if (isGoodsRestrictionsPreference(preference)) {
 			this
-					.getPreferenceDialogForGoodsRestrictionsPreference(preference, this)
+					.getPreferenceDialogForGoodsRestrictionsPreference(preference, Optional.of(this))
 					.show();
 		} else if (ALLOW_VIA_FERRATA_PREFERENCE.equals(prefId)) {
 			FragmentManager manager = getFragmentManager();
@@ -629,7 +629,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 	@Override
 	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(
 			final Preference preference,
-			final Fragment target) {
+			final Optional<Fragment> target) {
 		if (isRouteRecalculationDistancePreference(preference)) {
 			return Optional.of(getPreferenceDialogForRouteRecalculationDistancePreference(preference, target));
 		}
@@ -649,11 +649,11 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 
 	private ShowableSearchablePreferenceDialog<RecalculateRouteInDeviationBottomSheet> getPreferenceDialogForRouteRecalculationDistancePreference(
 			final Preference preference,
-			final Fragment target) {
+			final Optional<Fragment> target) {
 		return new ShowableSearchablePreferenceDialog<>(
 				RecalculateRouteInDeviationBottomSheet.createInstance(
 						preference,
-						target,
+						target.orElse(null),
 						false,
 						getSelectedAppMode())) {
 
@@ -666,10 +666,10 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 
 	private ShowableSearchablePreferenceDialog<GoodsRestrictionsBottomSheet> getPreferenceDialogForGoodsRestrictionsPreference(
 			final Preference preference,
-			final Fragment target) {
+			final Optional<Fragment> target) {
 		return new ShowableSearchablePreferenceDialog<>(
 				GoodsRestrictionsBottomSheet.createInstance(
-						target,
+						target.orElse(null),
 						preference,
 						getSelectedAppMode(),
 						false,
@@ -690,7 +690,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 
 		if (isRouteRecalculationDistancePreference(preference)) {
 			this
-					.getPreferenceDialogForRouteRecalculationDistancePreference(preference, this)
+					.getPreferenceDialogForRouteRecalculationDistancePreference(preference, Optional.of(this))
 					.show();
 		} else if (!reliefFactorParameters.isEmpty() && prefId.equals(ROUTING_PREFERENCE_PREFIX + USE_HEIGHT_OBSTACLES)) {
 			if (manager != null) {

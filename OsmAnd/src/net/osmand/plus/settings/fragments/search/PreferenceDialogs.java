@@ -10,7 +10,10 @@ public class PreferenceDialogs {
 	public static <T extends Fragment & ShowableSearchablePreferenceDialogProvider> boolean showDialogForPreference(
 			final Preference preference,
 			final T preferenceDialogProviderAndTarget) {
-		final Optional<ShowableSearchablePreferenceDialog<?>> preferenceDialog = preferenceDialogProviderAndTarget.getShowableSearchablePreferenceDialog(preference, preferenceDialogProviderAndTarget);
+		final Optional<ShowableSearchablePreferenceDialog<?>> preferenceDialog =
+				preferenceDialogProviderAndTarget.getShowableSearchablePreferenceDialog(
+						preference,
+						Optional.of(preferenceDialogProviderAndTarget));
 		if (preferenceDialog.isPresent()) {
 			preferenceDialog.get().show();
 			return true;

@@ -16,7 +16,7 @@ class PreferenceDialogAndSearchableInfoProvider implements de.KnollFrank.lib.set
 		// FK-TODO: handle more preference dialogs, which shall be searchable
 		return hostOfPreference instanceof final ShowableSearchablePreferenceDialogProvider showableSearchablePreferenceDialogProvider ?
 				showableSearchablePreferenceDialogProvider
-						.getShowableSearchablePreferenceDialog(preference, null)
+						.getShowableSearchablePreferenceDialog(preference, Optional.empty())
 						.map(ShowableSearchablePreferenceDialog::asPreferenceDialogAndSearchableInfoByPreferenceDialogProvider) :
 				Optional.empty();
 	}

@@ -8,6 +8,5 @@ import java.util.Optional;
 @FunctionalInterface
 public interface ShowableSearchablePreferenceDialogProvider {
 
-	// Fk-TODO: make Fragment parameter an Optional<Fragment>
-	Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(Preference preference, Fragment target);
+	Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(Preference preference, Optional<Fragment> target);
 }

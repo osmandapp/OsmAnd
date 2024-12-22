@@ -53,18 +53,17 @@ public class TurnScreenOnFragment extends BaseSettingsFragment implements Showab
 	}
 
 	@Override
-	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Fragment target) {
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Optional<Fragment> target) {
 		return settings.TURN_SCREEN_ON_TIME_INT.getId().equals(preference.getKey()) ?
 				Optional.of(
 						new ShowableSearchablePreferenceDialog<>(
-								WakeTimeBottomSheet
-										.createInstance(
-												preference,
-												target,
-												false,
-												getSelectedAppMode(),
-												getApplyQueryType(),
-												isProfileDependent())) {
+								WakeTimeBottomSheet.createInstance(
+										preference,
+										target.orElse(null),
+										false,
+										getSelectedAppMode(),
+										getApplyQueryType(),
+										isProfileDependent())) {
 							@Override
 							protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
 								searchablePreferenceDialog.show(getFragmentManager(), app);

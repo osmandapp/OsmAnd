@@ -278,18 +278,18 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 	}
 
 	@Override
-	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Fragment target) {
-		final boolean configureSettingsSearch = target == null;
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Optional<Fragment> target) {
+		final boolean configureSettingsSearch = target.isEmpty();
 		if (preference instanceof SizePreference) {
 			return Optional.of(
 					new ShowableSearchablePreferenceDialog<>(
-							VehicleParametersBottomSheet
-									.createInstance(
-											preference,
-											target,
-											false,
-											getSelectedAppMode(),
-											configureSettingsSearch)) {
+							VehicleParametersBottomSheet.createInstance(
+									preference,
+									target.orElse(null),
+									false,
+									getSelectedAppMode(),
+									// FK-TODO: inline
+									configureSettingsSearch)) {
 
 						@Override
 						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
@@ -302,7 +302,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 			return Optional.of(
 					new ShowableSearchablePreferenceDialog<>(
 							SimpleSingleSelectionBottomSheet.createInstance(
-									target,
+									target.orElse(null),
 									preference,
 									pref.getTitle().toString(),
 									pref.getDescription(),
@@ -323,9 +323,10 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 					new ShowableSearchablePreferenceDialog<>(
 							FuelTankCapacityBottomSheet.createInstance(
 									preference,
-									target,
+									target.orElse(null),
 									false,
 									getSelectedAppMode(),
+									// FK-TODO: inline
 									configureSettingsSearch)) {
 
 						@Override

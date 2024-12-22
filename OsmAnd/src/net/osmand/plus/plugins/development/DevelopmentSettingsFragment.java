@@ -350,7 +350,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	}
 
 	@Override
-	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Fragment target) {
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Optional<Fragment> target) {
 		if (SIMULATE_YOUR_LOCATION.equals(preference.getKey())) {
 			return Optional.of(
 					new ShowableSearchablePreferenceDialog<>(
@@ -372,7 +372,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 					new ShowableSearchablePreferenceDialog<>(
 							AllocatedRoutingMemoryBottomSheet.createInstance(
 									preference.getKey(),
-									target,
+									target.orElse(null),
 									getSelectedAppMode())) {
 
 						@Override
@@ -389,7 +389,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 					new ShowableSearchablePreferenceDialog<>(
 							LocationInterpolationBottomSheet.createInstance(
 									preference,
-									target,
+									target.orElse(null),
 									getSelectedAppMode())) {
 
 						@Override

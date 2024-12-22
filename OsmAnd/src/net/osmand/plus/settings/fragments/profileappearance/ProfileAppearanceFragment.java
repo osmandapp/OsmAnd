@@ -238,7 +238,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 	}
 
 	@Override
-	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Fragment target) {
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Optional<Fragment> target) {
 		if (settings.VIEW_ANGLE_VISIBILITY.getId().equals(preference.getKey())) {
 			return Optional.of(
 					new ShowableSearchablePreferenceDialog<>(

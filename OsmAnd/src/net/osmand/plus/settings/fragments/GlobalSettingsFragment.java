@@ -75,12 +75,12 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	@Override
 	public void onDisplayPreferenceDialog(final Preference preference) {
 		if (isSendAnonymousData(preference)) {
-			createSendAnonymousDataPreferenceDialog(this).show();
+			createSendAnonymousDataPreferenceDialog(Optional.of(this)).show();
 		}
 	}
 
 	@Override
-	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Fragment target) {
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Optional<Fragment> target) {
 		if (isSendAnonymousData(preference)) {
 			return Optional.of(createSendAnonymousDataPreferenceDialog(target));
 		}
@@ -94,8 +94,8 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		return SEND_ANONYMOUS_DATA_PREF_ID.equals(preference.getKey());
 	}
 
-	private ShowableSearchablePreferenceDialog<SendAnalyticsBottomSheetDialogFragment> createSendAnonymousDataPreferenceDialog(final Fragment target) {
-		return new ShowableSearchablePreferenceDialog<>(SendAnalyticsBottomSheetDialogFragment.createInstance(target)) {
+	private ShowableSearchablePreferenceDialog<SendAnalyticsBottomSheetDialogFragment> createSendAnonymousDataPreferenceDialog(final Optional<Fragment> target) {
+		return new ShowableSearchablePreferenceDialog<>(SendAnalyticsBottomSheetDialogFragment.createInstance(target.orElse(null))) {
 
 			@Override
 			protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
@@ -108,14 +108,13 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		return settings.DEFAULT_APPLICATION_MODE.getId().equals(preference.getKey());
 	}
 
-	private ShowableSearchablePreferenceDialog<SelectDefaultProfileBottomSheet> createSelectDefaultProfilePreferenceDialog(final Fragment target) {
+	private ShowableSearchablePreferenceDialog<SelectDefaultProfileBottomSheet> createSelectDefaultProfilePreferenceDialog(final Optional<Fragment> target) {
 		return new ShowableSearchablePreferenceDialog<>(
-				SelectDefaultProfileBottomSheet
-						.createInstance(
-								target,
-								getSelectedAppMode(),
-								settings.DEFAULT_APPLICATION_MODE.get().getStringKey(),
-								false)) {
+				SelectDefaultProfileBottomSheet.createInstance(
+						target.orElse(null),
+						getSelectedAppMode(),
+						settings.DEFAULT_APPLICATION_MODE.get().getStringKey(),
+						false)) {
 
 			@Override
 			protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
@@ -224,7 +223,9 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
 		if (isSelectDefaultProfile(preference)) {
-			createSelectDefaultProfilePreferenceDialog(this).show();
+			this
+					.createSelectDefaultProfilePreferenceDialog(Optional.of(this))
+					.show();
 		} else if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(prefId) && !settings.SPEED_CAMERAS_UNINSTALLED.get()) {
 			FragmentManager manager = getFragmentManager();
 			if (manager != null) {

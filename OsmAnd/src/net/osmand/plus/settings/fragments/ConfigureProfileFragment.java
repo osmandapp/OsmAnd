@@ -440,13 +440,13 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	}
 
 	@Override
-	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Fragment target) {
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Optional<Fragment> target) {
 		if (RESET_TO_DEFAULT.equals(preference.getKey())) {
 			return Optional.of(
 					new ShowableSearchablePreferenceDialog<>(
 							ResetProfilePrefsBottomSheet.createInstance(
 									getSelectedAppMode(),
-									target)) {
+									target.orElse(null))) {
 
 						@Override
 						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {

@@ -476,13 +476,13 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	@Override
 	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(
 			final Preference preference,
-			final Fragment target) {
+			final Optional<Fragment> target) {
 		if (settings.PRECISE_DISTANCE_NUMBERS.getId().equals(preference.getKey())) {
 			return Optional.of(
 					new ShowableSearchablePreferenceDialog<>(
 							DistanceDuringNavigationBottomSheet.createInstance(
 									preference,
-									target,
+									target.orElse(null),
 									getSelectedAppMode(),
 									false)) {
 

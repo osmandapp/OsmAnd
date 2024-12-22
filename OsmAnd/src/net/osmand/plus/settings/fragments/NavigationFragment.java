@@ -150,12 +150,12 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 	}
 
 	@Override
-	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Fragment target) {
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Optional<Fragment> target) {
 		return NAVIGATION_TYPE.equals(preference.getKey()) ?
 				Optional.of(
 						new ShowableSearchablePreferenceDialog<>(
 								SelectNavProfileBottomSheet.createInstance(
-										target,
+										target.orElse(null),
 										getSelectedAppMode(),
 										getSelectedAppMode().getRoutingProfile(),
 										false)) {
