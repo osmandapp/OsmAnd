@@ -165,7 +165,7 @@ public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet imple
 
 	@NonNull
 	public static AnnouncementTimeBottomSheet createInstance(final Preference preference,
-															 final Fragment target,
+															 final Optional<Fragment> target,
 															 final @Nullable ApplicationMode appMode,
 															 final boolean usedOnMap) {
 		return BasePreferenceBottomSheetInitializer

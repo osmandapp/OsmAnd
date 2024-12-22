@@ -245,7 +245,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 
 	@NonNull
 	public static RecalculateRouteInDeviationBottomSheet createInstance(final Preference preference,
-																		final Fragment target,
+																		final Optional<Fragment> target,
 																		final boolean usedOnMap,
 																		final @Nullable ApplicationMode appMode) {
 		return BasePreferenceBottomSheetInitializer

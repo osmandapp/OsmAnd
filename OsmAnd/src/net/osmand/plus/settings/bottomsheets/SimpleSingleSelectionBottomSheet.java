@@ -53,7 +53,7 @@ public class SimpleSingleSelectionBottomSheet extends BasePreferenceBottomSheet 
 	private int selectedEntryIndex;
 
 	public static @NonNull SimpleSingleSelectionBottomSheet createInstance(
-			final @NonNull Fragment target,
+			final Optional<Fragment> target,
 			final @NonNull Preference preference,
 			final @NonNull String title,
 			final @NonNull String description,

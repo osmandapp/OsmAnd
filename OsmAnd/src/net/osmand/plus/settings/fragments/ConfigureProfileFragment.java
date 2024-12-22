@@ -446,7 +446,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 					new ShowableSearchablePreferenceDialog<>(
 							ResetProfilePrefsBottomSheet.createInstance(
 									getSelectedAppMode(),
-									target.orElse(null))) {
+									target)) {
 
 						@Override
 						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {

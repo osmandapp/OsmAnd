@@ -5,7 +5,6 @@ import static net.osmand.plus.settings.fragments.search.SearchableInfoHelper.get
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -30,7 +29,7 @@ public class SelectBaseProfileBottomSheet extends SelectProfileBottomSheet imple
 	private final List<ProfileDataObject> profiles = new ArrayList<>();
 
 	@NonNull
-	public static SelectBaseProfileBottomSheet createInstance(final @Nullable Fragment target,
+	public static SelectBaseProfileBottomSheet createInstance(final Optional<Fragment> target,
 															  final ApplicationMode appMode,
 															  final String selectedItemKey,
 															  final boolean usedOnMap) {

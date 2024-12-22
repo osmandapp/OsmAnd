@@ -145,7 +145,7 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet imple
 		bottomSheet.setConfigureSettingsSearch(target.isEmpty());
 		return BasePreferenceBottomSheetInitializer
 				.initialize(bottomSheet)
-				.with(Optional.of(preference), appMode, usedOnMap, target.orElse(null));
+				.with(Optional.of(preference), appMode, usedOnMap, target);
 	}
 
 	@Override

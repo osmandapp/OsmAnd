@@ -155,7 +155,7 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 				Optional.of(
 						new ShowableSearchablePreferenceDialog<>(
 								SelectNavProfileBottomSheet.createInstance(
-										target.orElse(null),
+										target,
 										getSelectedAppMode(),
 										getSelectedAppMode().getRoutingProfile(),
 										false)) {

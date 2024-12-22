@@ -89,6 +89,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment implements CalculateAltitudeListener {
 
@@ -320,7 +321,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 				String voiceProvider = app.getSettings().VOICE_PROVIDER.getModeValue(applicationMode);
 				if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 					VoiceLanguageBottomSheetFragment
-							.createInstance(RouteOptionsBottomSheet.this, applicationMode, usedOnMap)
+							.createInstance(Optional.of(RouteOptionsBottomSheet.this), applicationMode, usedOnMap)
 							.show(mapActivity.getSupportFragmentManager(), app);
 				} else {
 					cb.setChecked(!active);

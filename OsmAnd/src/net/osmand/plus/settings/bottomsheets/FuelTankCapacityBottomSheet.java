@@ -143,7 +143,7 @@ public class FuelTankCapacityBottomSheet extends BaseTextFieldBottomSheet implem
 		fragment.setConfigureSettingsSearch(target.isEmpty());
 		return BasePreferenceBottomSheetInitializer
 				.initialize(fragment)
-				.with(Optional.of(preference), appMode, usedOnMap, target.orElse(null));
+				.with(Optional.of(preference), appMode, usedOnMap, target);
 	}
 
 	@Override

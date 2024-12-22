@@ -111,7 +111,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	private ShowableSearchablePreferenceDialog<SelectDefaultProfileBottomSheet> createSelectDefaultProfilePreferenceDialog(final Optional<Fragment> target) {
 		return new ShowableSearchablePreferenceDialog<>(
 				SelectDefaultProfileBottomSheet.createInstance(
-						target.orElse(null),
+						target,
 						getSelectedAppMode(),
 						settings.DEFAULT_APPLICATION_MODE.get().getStringKey(),
 						false)) {

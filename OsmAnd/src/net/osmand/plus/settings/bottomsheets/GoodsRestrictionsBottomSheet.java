@@ -42,7 +42,7 @@ public class GoodsRestrictionsBottomSheet extends BasePreferenceBottomSheet impl
 	private boolean isSelected;
 	private boolean hasChangesToApply = false;
 
-	public static GoodsRestrictionsBottomSheet createInstance(final Fragment target,
+	public static GoodsRestrictionsBottomSheet createInstance(final Optional<Fragment> target,
 															  final @NonNull Preference preference,
 															  final @NonNull ApplicationMode appMode,
 															  final boolean usedOnMap,

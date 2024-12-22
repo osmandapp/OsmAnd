@@ -261,7 +261,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 		}
 	}
 
-	public static VoiceLanguageBottomSheetFragment createInstance(final @Nullable Fragment target,
+	public static VoiceLanguageBottomSheetFragment createInstance(final Optional<Fragment> target,
 																  final @Nullable ApplicationMode appMode,
 																  final boolean usedOnMap) {
 		final VoiceLanguageBottomSheetFragment bottomSheet = new VoiceLanguageBottomSheetFragment();

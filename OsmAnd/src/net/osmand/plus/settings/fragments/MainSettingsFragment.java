@@ -177,7 +177,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 			return Optional.of(
 					new ShowableSearchablePreferenceDialog<>(
 							SelectBaseProfileBottomSheet.createInstance(
-									target.orElse(null),
+									target,
 									getSelectedAppMode(),
 									null,
 									false)) {

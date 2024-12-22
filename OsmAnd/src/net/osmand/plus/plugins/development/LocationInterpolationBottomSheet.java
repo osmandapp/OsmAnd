@@ -191,7 +191,7 @@ public class LocationInterpolationBottomSheet extends BasePreferenceBottomSheet 
 	}
 
 	public static LocationInterpolationBottomSheet createInstance(final Preference preference,
-																  final Fragment target,
+																  final Optional<Fragment> target,
 																  final ApplicationMode appMode) {
 		return BasePreferenceBottomSheetInitializer
 				.initialize(new LocationInterpolationBottomSheet())

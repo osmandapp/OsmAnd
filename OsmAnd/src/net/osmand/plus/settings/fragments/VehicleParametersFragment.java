@@ -299,7 +299,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 			return Optional.of(
 					new ShowableSearchablePreferenceDialog<>(
 							SimpleSingleSelectionBottomSheet.createInstance(
-									target.orElse(null),
+									target,
 									preference,
 									pref.getTitle().toString(),
 									pref.getDescription(),

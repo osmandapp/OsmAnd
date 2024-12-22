@@ -59,7 +59,7 @@ public class TurnScreenOnFragment extends BaseSettingsFragment implements Showab
 						new ShowableSearchablePreferenceDialog<>(
 								WakeTimeBottomSheet.createInstance(
 										preference,
-										target.orElse(null),
+										target,
 										false,
 										getSelectedAppMode(),
 										getApplyQueryType(),

@@ -482,7 +482,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 					new ShowableSearchablePreferenceDialog<>(
 							DistanceDuringNavigationBottomSheet.createInstance(
 									preference,
-									target.orElse(null),
+									target,
 									getSelectedAppMode(),
 									false)) {
 

@@ -270,7 +270,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements Show
 					new ShowableSearchablePreferenceDialog<>(
 							AnnouncementTimeBottomSheet.createInstance(
 									preference,
-									target.orElse(null),
+									target,
 									getSelectedAppMode(),
 									false)) {
 
@@ -284,7 +284,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements Show
 			return Optional.of(
 					new ShowableSearchablePreferenceDialog<>(
 							VoiceLanguageBottomSheetFragment.createInstance(
-									target.orElse(null),
+									target,
 									getSelectedAppMode(),
 									false)) {
 

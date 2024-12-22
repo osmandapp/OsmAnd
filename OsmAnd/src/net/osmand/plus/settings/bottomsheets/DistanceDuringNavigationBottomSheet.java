@@ -126,7 +126,7 @@ public class DistanceDuringNavigationBottomSheet extends BasePreferenceBottomShe
 
 	public static @NonNull DistanceDuringNavigationBottomSheet createInstance(
 			final Preference preference,
-			final @Nullable Fragment target,
+			final Optional<Fragment> target,
 			final @Nullable ApplicationMode appMode,
 			final boolean usedOnMap) {
 		return BasePreferenceBottomSheetInitializer

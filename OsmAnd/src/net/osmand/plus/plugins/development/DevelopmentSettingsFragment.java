@@ -389,7 +389,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 					new ShowableSearchablePreferenceDialog<>(
 							LocationInterpolationBottomSheet.createInstance(
 									preference,
-									target.orElse(null),
+									target,
 									getSelectedAppMode())) {
 
 						@Override

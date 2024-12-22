@@ -195,7 +195,7 @@ public class WakeTimeBottomSheet extends BasePreferenceBottomSheet implements Se
 
 	@NonNull
 	public static WakeTimeBottomSheet createInstance(final Preference preference,
-													 final Fragment target,
+													 final Optional<Fragment> target,
 													 final boolean usedOnMap,
 													 final @Nullable ApplicationMode appMode,
 													 final ApplyQueryType applyQueryType,

@@ -149,6 +149,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.Stack;
 
@@ -1213,7 +1214,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			if (app != null) {
 				if (app.getSettings().isVoiceProviderNotSelected(appMode)) {
 					VoiceLanguageBottomSheetFragment
-							.createInstance(null, appMode, true)
+							.createInstance(Optional.empty(), appMode, true)
 							.show(mapActivity.getSupportFragmentManager(), app);
 				} else {
 					app.getRoutingOptionsHelper().switchSound();

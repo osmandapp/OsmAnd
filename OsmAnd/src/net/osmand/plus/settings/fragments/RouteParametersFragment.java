@@ -653,7 +653,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 		return new ShowableSearchablePreferenceDialog<>(
 				RecalculateRouteInDeviationBottomSheet.createInstance(
 						preference,
-						target.orElse(null),
+						target,
 						false,
 						getSelectedAppMode())) {
 
@@ -669,7 +669,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 			final Optional<Fragment> target) {
 		return new ShowableSearchablePreferenceDialog<>(
 				GoodsRestrictionsBottomSheet.createInstance(
-						target.orElse(null),
+						target,
 						preference,
 						getSelectedAppMode(),
 						false,

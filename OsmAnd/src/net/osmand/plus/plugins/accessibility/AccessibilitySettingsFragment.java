@@ -277,7 +277,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 					new ShowableSearchablePreferenceDialog<>(
 							ResetProfilePrefsBottomSheet.createInstance(
 									getSelectedAppMode(),
-									target.orElse(null))) {
+									target)) {
 
 						@Override
 						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {

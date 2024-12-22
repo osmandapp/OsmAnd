@@ -28,11 +28,11 @@ public class BasePreferenceBottomSheetInitializer<T extends BasePreferenceBottom
 	public T with(final Optional<Preference> preference,
 				  final @Nullable ApplicationMode appMode,
 				  final boolean usedOnMap,
-				  final @Nullable Fragment target) {
+				  final Optional<Fragment> target) {
 		preference.ifPresent(this::setPreference);
 		bottomSheet.setUsedOnMap(usedOnMap);
 		bottomSheet.setAppMode(appMode);
-		bottomSheet.setTargetFragment(target, 0);
+		bottomSheet.setTargetFragment(target.orElse(null), 0);
 		return bottomSheet;
 	}
 

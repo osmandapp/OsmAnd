@@ -32,7 +32,7 @@ public class SelectDefaultProfileBottomSheet extends SelectProfileBottomSheet im
 
 	private final List<ProfileDataObject> profiles = new ArrayList<>();
 
-	public static SelectDefaultProfileBottomSheet createInstance(final @Nullable Fragment target,
+	public static SelectDefaultProfileBottomSheet createInstance(final Optional<Fragment> target,
 																 final ApplicationMode appMode,
 																 final String selectedItemKey,
 																 final boolean usedOnMap) {

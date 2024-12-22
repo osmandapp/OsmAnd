@@ -88,7 +88,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 		int titleId;
 	}
 
-	public static SelectNavProfileBottomSheet createInstance(final @Nullable Fragment target,
+	public static SelectNavProfileBottomSheet createInstance(final Optional<Fragment> target,
 															 final ApplicationMode appMode,
 															 final String selectedItemKey,
 															 final boolean usedOnMap) {
