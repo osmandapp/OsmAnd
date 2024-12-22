@@ -136,15 +136,14 @@ public class FuelTankCapacityBottomSheet extends BaseTextFieldBottomSheet implem
 
 	@NonNull
 	public static FuelTankCapacityBottomSheet createInstance(final Preference preference,
-															 final Fragment target,
+															 final Optional<Fragment> target,
 															 final boolean usedOnMap,
-															 final @Nullable ApplicationMode appMode,
-															 final boolean configureSettingsSearch) {
+															 final @Nullable ApplicationMode appMode) {
 		final FuelTankCapacityBottomSheet fragment = new FuelTankCapacityBottomSheet();
-		fragment.setConfigureSettingsSearch(configureSettingsSearch);
+		fragment.setConfigureSettingsSearch(target.isEmpty());
 		return BasePreferenceBottomSheetInitializer
 				.initialize(fragment)
-				.with(Optional.of(preference), appMode, usedOnMap, target);
+				.with(Optional.of(preference), appMode, usedOnMap, target.orElse(null));
 	}
 
 	@Override
