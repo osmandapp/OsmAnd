@@ -10,6 +10,11 @@ class Link : GpxExtensions {
         this.href = href;
     }
 
+    constructor(href: String?, text: String?) {
+        this.href = href;
+        this.text = text;
+    }
+
     constructor(link: Link) {
         href = link.href
         text = link.text

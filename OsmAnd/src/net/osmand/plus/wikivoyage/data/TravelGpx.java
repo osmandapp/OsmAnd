@@ -1,9 +1,12 @@
 package net.osmand.plus.wikivoyage.data;
 
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
+import static net.osmand.plus.wikivoyage.data.TravelObfHelper.TAG_URL;
+import static net.osmand.plus.wikivoyage.data.TravelObfHelper.TAG_URL_TEXT;
 import static net.osmand.plus.wikivoyage.data.TravelObfHelper.WPT_EXTRA_TAGS;
 import static net.osmand.shared.gpx.GpxUtilities.POINT_ELEVATION;
 
+import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.shared.gpx.primitives.WptPt;
 
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
@@ -84,6 +87,8 @@ public class TravelGpx extends TravelArticle {
 		Map<String, String> wptPtExtensions = wptPt.getExtensionsToWrite();
 		amenity.getNamesMap(true).forEach((key, value) -> wptPtExtensions.put("name:" + key, value));
 
+		String linkHref = null, linkText = null;
+
 		for (String obfTag : amenity.getAdditionalInfoKeys()) {
 			String value = amenity.getAdditionalInfo(obfTag);
 			if (!Algorithms.isEmpty(value)) {
@@ -95,6 +100,10 @@ public class TravelGpx extends TravelArticle {
 					wptPt.setDesc(value);
 				} else if ("note".equals(obfTag)) {
 					wptPt.setComment(value);
+				} else if (TAG_URL.equals(obfTag)) {
+					linkHref = value;
+				} else if (TAG_URL_TEXT.equals(obfTag)) {
+					linkText = value;
 				} else if ("colour".equals(obfTag) && amenity.getAdditionalInfoKeys().contains("color")) {
 					// ignore "colour" if "color" exists
 				} else if (WPT_EXTRA_TAGS.equals(obfTag)) {
@@ -105,6 +114,10 @@ public class TravelGpx extends TravelArticle {
 					wptPtExtensions.put(obfTag, value);
 				}
 			}
+		}
+
+		if (linkHref != null || linkText != null) {
+			wptPt.setLink(new Link(linkHref, linkText)); // nullable href/text
 		}
 
 		return wptPt;
