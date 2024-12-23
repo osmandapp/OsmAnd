@@ -72,6 +72,7 @@ import net.osmand.search.core.SearchSettings;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.RouteActivityHelper;
+import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -131,6 +132,8 @@ public class TravelObfHelper implements TravelHelper {
 			"avg_speed", "min_speed", "max_speed", "time_moving", "time_moving_no_gaps", "time_span", "time_span_no_gaps"
 	);
 
+	final static String TAG_URL = "url";
+	final static String TAG_URL_TEXT = "url_text";
 	public static final String WPT_EXTRA_TAGS = "wpt_extra_tags";
 	private static final String METADATA_EXTRA_TAGS = "metadata_extra_tags";
 	private static final String EXTENSIONS_EXTRA_TAGS = "extensions_extra_tags";
@@ -1274,8 +1277,17 @@ public class TravelObfHelper implements TravelHelper {
 			gpxFile = new GpxFile(title, article.getLang(), article.getContent());
 		}
 
+		if (gpxFileExtensions.containsKey(TAG_URL) && gpxFileExtensions.containsKey(TAG_URL_TEXT)) {
+			gpxFile.getMetadata().setLink(new Link(gpxFileExtensions.get(TAG_URL), gpxFileExtensions.get(TAG_URL_TEXT)));
+			gpxFileExtensions.remove(TAG_URL_TEXT);
+			gpxFileExtensions.remove(TAG_URL);
+		} else if (gpxFileExtensions.containsKey(TAG_URL)) {
+			gpxFile.getMetadata().setLink(new Link(gpxFileExtensions.get(TAG_URL)));
+			gpxFileExtensions.remove(TAG_URL);
+		}
+
 		if (!Algorithms.isEmpty(article.getImageTitle())) {
-			gpxFile.getMetadata().setLink(TravelArticle.getImageUrl(article.getImageTitle(), false));
+			gpxFile.getMetadata().setLink(new Link(TravelArticle.getImageUrl(article.getImageTitle(), false)));
 		}
 
 		if (!segmentList.isEmpty()) {
