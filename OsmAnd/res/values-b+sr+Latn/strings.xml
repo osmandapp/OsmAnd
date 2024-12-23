@@ -2562,7 +2562,7 @@
     <string name="get_started">Započni</string>
     <string name="shared_string_change">Izmeni</string>
     <string name="rendering_attr_hideOverground_name">Nadzemne građevine</string>
-    <string name="replace_favorite_confirmation">Menjaš 1$s favorite?</string>
+    <string name="replace_favorite_confirmation">Menjaš %1$s favorite?</string>
     <string name="routing_attr_short_way_name">Eknomična ruta</string>
     <string name="clear_tile_data">Očistiti sve sličice mape</string>
     <string name="update_all_maps_now">Osvežiti sve mape sada?</string>
@@ -2759,7 +2759,7 @@
     <string name="keep_active">Zadrži aktivnim</string>
     <string name="shared_string_uninstall">Deinstaliraj</string>
     <string name="speed_cameras_alert">Upozorenja na prekršajne kamere su zakonom zabranjene u nekim državama.</string>
-    <string name="screen_timeout_descr">Ako je 1$s uključen, vreme rada će zavisiti od toga.</string>
+    <string name="screen_timeout_descr">Ako je %1$s uključen, vreme rada će zavisiti od toga.</string>
     <string name="default_screen_timeout">Podrazumevano vreme isključivanja ekrana</string>
     <string name="shared_string_tones">tone</string>
     <string name="shared_string_meters">metri</string>
@@ -3090,7 +3090,7 @@
     <string name="point_deleted">Tačka %1$s je obrisana</string>
     <string name="shared_string_world">Svet</string>
     <string name="send_search_query">Pošalji upit pretrage?</string>
-    <string name="send_search_query_description">Poslaćemo upit tvoje pretrage: 1$s kao i lokaciju.\n\n Ne sakupljamo lične podatke, samo nam trebaju podaci o pretragama da bismo poboljšavali motor pretrage.</string>
+    <string name="send_search_query_description">Poslaćemo upit tvoje pretrage: %1$s kao i lokaciju.\n\n Ne sakupljamo lične podatke, samo nam trebaju podaci o pretragama da bismo poboljšavali motor pretrage.</string>
     <string name="increase_search_radius_to">Povećaj radijus pretrage na %1$s</string>
     <string name="search_no_results_feedback">Nema nalaza u pretrazi? 
 \nJavite nam</string>
@@ -3402,12 +3402,12 @@
     <string name="map_look_descr">Izgled mape</string>
     <string name="units_and_formats">Merne jedinice i formati</string>
     <string name="wake_time">Vreme čekanja posle buđenja</string>
-    <string name="route_parameters_info">Podešavanja za kreiranje rute u profilu 1$s</string>
+    <string name="route_parameters_info">Podešavanja za kreiranje rute u profilu %1$s</string>
     <string name="turn_screen_on_info">Prikazati mapu na zaključanom ekranu za vreme navođenja.</string>
     <string name="analytics_pref_title">Analitika</string>
     <string name="start_up_message_pref">Poruka pri otvaranju</string>
     <string name="apply_to_all_profiles">Primeni na sve profile</string>
-    <string name="apply_to_current_profile">Primeni samo na 1$s\\</string>
+    <string name="apply_to_current_profile">Primeni samo na %1$s\\</string>
     <string name="discard_changes">Odbaci promenu</string>
     <string name="change_default_settings">Promeni podešavanja</string>
     <string name="pref_selected_by_default_for_profiles">Ovo podešavanje je odabrano za podrazumevani profile : %s</string>
@@ -4088,7 +4088,7 @@
     <string name="app_profile_type">Vrsta profila aplikacije</string>
     <string name="add_to_group">Dodaj u grupu</string>
     <string name="files_remaining">Preostali fajlovi: %1$s %2$s</string>
-    <string name="storage_found_files_descr">Tapni 1$s radi umnožavanja %2$s fajlova sa 3$s na 4$s Može potrajati neko vreme.</string>
+    <string name="storage_found_files_descr">Tapni %1$s radi umnožavanja %2$s fajlova sa %3$s na %4$s Može potrajati neko vreme.</string>
     <string name="storage_found_files_size">Pronađeno je %1$s fajlova %2$s</string>
     <string name="history_preferences_descr">Možeš onemogućiti beleženje istorije pojedinačno za svaku vrstu istorije.</string>
     <string name="shortcut_start_recording">Počni sa snimanjem</string>
@@ -4146,7 +4146,7 @@
     <string name="restore_selected_data">Vrati izabrane podatke</string>
     <string name="move_map_to_select_area">Pomerite mapu radi odabira potrebne oblasti.</string>
     <string name="default_appearance_desc">Podrazumevana boja, ikona i oblik će se primeniti na dodane favorite u grupi.</string>
-    <string name="selected_waypoints_descr">Odabrane prolazne tačke biće dodate trasi 1$s</string>
+    <string name="selected_waypoints_descr">Odabrane prolazne tačke biće dodate trasi %1$s</string>
     <string name="created_on">Datum kreiranja</string>
     <string name="shared_string_mode">Režim</string>
     <string name="time_to_navigation_point_widget_settings_desc">Tapni vidžet radi promene načina rada.</string>
@@ -4214,11 +4214,11 @@
     <string name="stop_download">Zaustavi preuzimanje</string>
     <string name="zoom_levels_difference_description">Velika razlika između nivoa približavanja može povećati veličinu preuzetih podataka.</string>
     <string name="number_of_tiles">Broj sličica mape</string>
-    <string name="location_source_descr">Podrazumevano, OsmAnd instaliran iz Google Play koristi %1$s za određivanje lokacije.\n\nAko dobiješ netačne podatke o lokaciju ili koristiš uređaj bez %2$s, pređi na 3$s\\</string>
+    <string name="location_source_descr">Podrazumevano, OsmAnd instaliran iz Google Play koristi %1$s za određivanje lokacije.\n\nAko dobiješ netačne podatke o lokaciju ili koristiš uređaj bez %2$s, pređi na %3$s\\</string>
     <string name="exit_import_descr">Izaći bez čuvanja promena?</string>
     <string name="rendering_attr_showFitnessTrails_description">Prikaz staza za trčanje</string>
     <string name="import_tracks_descr">%1$s, sadrži %2$s zasebne trase. Izaberi trase za uvoz.</string>
-    <string name="gpx_no_routes_descr">Možeš koristiti alatku 1$s radi dodavanja rute u datoteku.</string>
+    <string name="gpx_no_routes_descr">Možeš koristiti alatku %1$s radi dodavanja rute u datoteku.</string>
     <string name="rendering_value_omit_name">Izostaviti</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Oznake za beleške</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Prikazati oznake beleški</string>
@@ -4347,7 +4347,7 @@
     <string name="track_file">Fajl trase</string>
     <string name="shared_storage_last_step">Možeš kasnije odrediti novu folder za podatke.</string>
     <string name="shared_storage_third_step">Odobri dozvolu za pristup ovom folderu. Bez nje, OsmAnd ne može da kolira fajlove.</string>
-    <string name="shared_storage_first_step">Pritisni 1$s\nFajl menadžer otvara gde treba da nađeš i otvoriš folder OsmAnd.</string>
+    <string name="shared_storage_first_step">Pritisni %1$s\nFajl menadžer otvara gde treba da nađeš i otvoriš folder OsmAnd.</string>
     <string name="shared_string_copy_to">Snimi u</string>
     <string name="history_is_disabled_descr">Omogući istoriju radi dobavljanja bržeg pristupa poslednjim korišćenim nalazima.</string>
     <string name="history_actions_descr">Možeš da izvezeš istoriju u fajl.</string>
@@ -4448,7 +4448,7 @@
     <string name="external_device_characteristic_pulse_rate">Brzina otkucaja srca</string>
     <string name="external_device_details_battery">Baterija</string>
     <string name="app_mode_climbing">Alpinizam</string>
-    <string name="cloud_version_confirm_delete">Brišeš 1$s iz OsmAnd Cloud?</string>
+    <string name="cloud_version_confirm_delete">Brišeš %1$s iz OsmAnd Cloud?</string>
     <string name="shared_string_contours">Konture</string>
     <string name="temperature_widget_desc">Prikazuje toplotu na trenutnom središtu mape.</string>
     <string name="external_sensors_plugin_name">Spoljašnji senzori</string>
@@ -4496,7 +4496,7 @@
     <string name="next_live_update_time">Sledeće ažuriranje u %1$s.</string>
     <string name="shared_string_inches">inči</string>
     <string name="y_axis">Y osa</string>
-    <string name="ant_missing_dependency_descr">Neuspešno pronalaženje odgovarajuće službe 1$s\nTreba da ugradiš ili osvežiš ANT + službu priključaka\nDa li želiš da pokreneš skladište igara za to?</string>
+    <string name="ant_missing_dependency_descr">Neuspešno pronalaženje odgovarajuće službe %1$s\nTreba da ugradiš ili osvežiš ANT + službu priključaka\nDa li želiš da pokreneš skladište igara za to?</string>
     <string name="worldwide_maps">Mape sveta</string>
     <string name="favorite_delete_group">Obriši grupu</string>
     <string name="trip_recording_uphill_widget_desc">Prikazuje ukupno sve uspone na putu koji se trenutno snima.</string>
@@ -4677,12 +4677,12 @@
     <string name="device_disconnected">Nepovezan %1$s</string>
     <string name="file_already_exists">Fajl već postoji</string>
     <string name="file_already_exists_description">1$s Fajl sa takvim imenom već postoji. Zamena će prepisati sve izmene sadašnjim izdanjem.</string>
-    <string name="nav_profile_confirm_delete">Brisanje 1$s?</string>
+    <string name="nav_profile_confirm_delete">Brisanje %1$s?</string>
     <string name="external_device_disconnected">Nepovezan</string>
     <string name="external_device_characteristic_distance">Rastojanje</string>
     <string name="external_device_characteristic_heart_rate">Brzina otkucaja srca</string>
     <string name="external_device_details_received_data">Primljeni podaci</string>
-    <string name="common_weight_limit_error">Najmanja vrednost je 1$s %2$s. Koristite presek 3$s ako li je težina vozila manja od najmanje vrednosti.</string>
+    <string name="common_weight_limit_error">Najmanja vrednost je %1$s %2$s. Koristite presek %3$s ako li je težina vozila manja od najmanje vrednosti.</string>
     <string name="metric_lbs">lbs</string>
     <string name="app_mode_moped">Moped</string>
     <string name="sort_duration_ascending">Prvo najkraće trajanje</string>
@@ -4704,7 +4704,7 @@
     <string name="goods_delivery_desc_3">Primenjuje se samo nakamionska vozila lakša od 3.5 tona.</string>
     <string name="updated_map_time">Ažurirano: %1$s.</string>
     <string name="show_all_tracks_on_the_map">Prikazuj sve trase na mapi</string>
-    <string name="weight_limit_error">Najmanja vrednost je 1$s tona. Koristite profil 2$s ukoliko je težina vozila manja od najmanje vrednosti.</string>
+    <string name="weight_limit_error">Najmanja vrednost je %1$s tona. Koristite profil %2$s ukoliko je težina vozila manja od najmanje vrednosti.</string>
     <string name="shared_string_sunset">Zalazak Sunca</string>
     <string name="complex_widget_alert">%1$s vidžet se može staviti samo u sopstveni red.</string>
     <string name="map_widget_sun_position">Pozicija Sunca</string>
@@ -4838,7 +4838,7 @@
     <string name="key_event_action_move_left">Pomeri levo</string>
     <string name="key_event_action_move_down">Pomeri dole</string>
     <string name="shared_string_close_the_dialog">Zatvori prozor</string>
-    <string name="delete_track_folder_dialog_message">Ovo će izbrisati folder 1$s i sve %2$s sadržane trase.</string>
+    <string name="delete_track_folder_dialog_message">Ovo će izbrisati folder %1$s i sve %2$s sadržane trase.</string>
     <string name="delete_folder_question">Da li brišeš folder?</string>
     <string name="cloud_sync_progress">Sinhronizacija…%1$s</string>
     <string name="check_for_updates">Proveri osveženja</string>
@@ -5072,8 +5072,8 @@
     <string name="how_to_use">Kako da koristiš:</string>
     <string name="display_position">Prikazati lokaciju</string>
     <string name="download_heightmap_maps">Visinska mapa</string>
-    <string name="included_in_your_current_plan">Uključen je u plan 1$s</string>
-    <string name="favorite_confirm_delete_group">Brišeš 1$s grupu i sve tačke (%2$d)?</string>
+    <string name="included_in_your_current_plan">Uključen je u plan %1$s</string>
+    <string name="favorite_confirm_delete_group">Brišeš %1$s grupu i sve tačke (%2$d)?</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Prikazati MTB IMBA trase</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Prikazuj odgovarajuće planinske biciklističke staze.</string>
     <string name="attach_roads_warning">Samo snimljena ruta može da se slepi uz puteve.</string>
@@ -5267,7 +5267,7 @@
     <string name="use_nearby_roads">Koristite obližnje puteve</string>
     <string name="shared_string_osm_id">OSM ID</string>
     <string name="use_terrain_maps">Koristi Terenske mape</string>
-    <string name="delete_actions_button_confirmation">Da li ste sigurni da želite da izbrišete 1$s sa svim dodatim radnjama?</string>
+    <string name="delete_actions_button_confirmation">Da li ste sigurni da želite da izbrišete %1$s sa svim dodatim radnjama?</string>
     <string name="use_terrain_maps_summary">Koriste se mape terena za podatke o nadmorskoj visini. Geometrija putanje ostaje nepromenjena.</string>
     <string name="use_nearby_roads_summary">Koristi se vanmrežna mapa radi pronalaženja obližnjih puteva i podataka o nadmorskoj visini. Može prilagoditi geometriju putanje.</string>
     <string name="retrieve_elevation_data_summary">OsmAnd može da preuzme podatke o nadmorskoj visini sa obližnjih puteva ili mapa terena.</string>
