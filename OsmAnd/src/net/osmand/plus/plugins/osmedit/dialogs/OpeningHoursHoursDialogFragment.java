@@ -79,13 +79,13 @@ public class OpeningHoursHoursDialogFragment extends DialogFragment {
 									} else {
 										item.setEndTime(time, timePosition);
 									}
-									((BasicEditPoiFragment) getParentFragment())
+									((NewBasicEditPoiFragment) getParentFragment())
 											.setBasicOpeningHoursRule(item, rulePosition);
 								}
 							}
 						})
 				.setNegativeButton(R.string.shared_string_cancel, (dialog, which) -> {
-					BasicEditPoiFragment editPoiFragment = ((BasicEditPoiFragment) getParentFragment());
+					NewBasicEditPoiFragment editPoiFragment = ((NewBasicEditPoiFragment) getParentFragment());
 					if (editPoiFragment != null) {
 						editPoiFragment.removeUnsavedOpeningHours();
 					}
