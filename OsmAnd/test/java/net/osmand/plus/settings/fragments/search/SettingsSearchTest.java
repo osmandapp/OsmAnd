@@ -27,6 +27,7 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.test.common.AndroidTest;
 
 import org.hamcrest.Matcher;
@@ -98,6 +99,21 @@ public class SettingsSearchTest extends AndroidTest {
 
 		// Then
 		final String path = "Path: Driving > Audio/video notes > Reset plugin settings to default";
+		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(path)));
+	}
+
+	// FK-TODO: wie in der geshelften Version refaktorisieren
+	@Test
+	public void shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_OsmandMonitoringPlugin() {
+		// Given
+		enablePlugin(OsmandMonitoringPlugin.class);
+		clickSearchButton(app);
+
+		// When
+		onView(searchView()).perform(replaceText(app.getString(R.string.reset_all_profile_settings_descr)), closeSoftKeyboard());
+
+		// Then
+		final String path = "Path: Driving > Trip recording > Reset plugin settings to default";
 		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(path)));
 	}
 

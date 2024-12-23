@@ -1,21 +1,18 @@
 package net.osmand.plus.settings.fragments.search;
 
-import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static net.osmand.test.common.Matchers.childAtPosition;
 import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.is;
 
 import android.view.View;
-
-import androidx.test.espresso.DataInteraction;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -27,7 +24,7 @@ class SearchButtonClick {
 	public static void clickSearchButton(final OsmandApplication osmandApplication) {
 		skipAppStartDialogs(osmandApplication);
 		onView(mapMenuButton()).perform(click());
-		settingsButton().perform(click());
+		onView(settingsButton()).perform(click());
 		onView(searchButton()).perform(click());
 	}
 
@@ -45,15 +42,8 @@ class SearchButtonClick {
 				isDisplayed());
 	}
 
-	private static DataInteraction settingsButton() {
-		return onData(anything())
-				.inAdapterView(
-						allOf(
-								withId(R.id.menuItems),
-								childAtPosition(
-										withId(R.id.drawer_relative_layout),
-										0)))
-				.atPosition(13);
+	private static Matcher<View> settingsButton() {
+		return withText(R.string.shared_string_settings);
 	}
 
 	private static Matcher<View> searchButton() {
