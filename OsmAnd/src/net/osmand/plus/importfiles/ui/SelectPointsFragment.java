@@ -127,7 +127,7 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 
 	@NonNull
 	private View getHeaderView() {
-		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View view = inflater.inflate(R.layout.suggested_points_header, null);
 
 		TextView title = view.findViewById(R.id.title);

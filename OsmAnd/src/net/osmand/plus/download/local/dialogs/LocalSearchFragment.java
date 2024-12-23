@@ -118,7 +118,7 @@ public class LocalSearchFragment extends LocalBaseFragment implements LocalItemL
 	}
 
 	private void setupRecyclerView(@NonNull View view) {
-		adapter = new LocalSearchAdapter(app, this, nightMode);
+		adapter = new LocalSearchAdapter(view.getContext(), this, nightMode);
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));

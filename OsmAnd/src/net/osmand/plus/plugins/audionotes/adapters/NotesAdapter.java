@@ -78,7 +78,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 					|| type == TYPE_VIDEO_HEADER;
 
 			if (row == null) {
-				LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+				LayoutInflater inflater = UiUtilities.getInflater(themedCtx, nightMode);
 				if (header) {
 					row = inflater.inflate(R.layout.list_item_header, parent, false);
 					HeaderViewHolder hHolder = new HeaderViewHolder(row);
@@ -101,7 +101,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 
 			return row;
 		} else {
-			LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+			LayoutInflater inflater = UiUtilities.getInflater(themedCtx, nightMode);
 			boolean lastCard = getCardsCount() == position + 1;
 			int margin = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
 			int sideMargin = app.getResources().getDisplayMetrics().widthPixels / 10;

@@ -293,7 +293,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 
 	private BaseBottomSheetItem createMuteSoundItem(LocalRoutingParameter optionsItem) {
 		boolean active = !routingHelper.getVoiceRouter().isMuteForMode(applicationMode);
-		View itemView = UiUtilities.getInflater(app, nightMode).inflate(
+		View itemView = UiUtilities.getInflater(requireContext(), nightMode).inflate(
 				R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp, null, false);
 		ImageView icon = itemView.findViewById(R.id.icon);
 		TextView tvTitle = itemView.findViewById(R.id.title);
@@ -353,7 +353,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 	private BaseBottomSheetItem inflateElevationParameter(LocalRoutingParameter parameter) {
 		BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 		boolean active = !useHeightPref.getModeValue(applicationMode);
-		View itemView = UiUtilities.getInflater(app, nightMode).inflate(
+		View itemView = UiUtilities.getInflater(requireContext(), nightMode).inflate(
 				R.layout.bottom_sheet_item_with_switch_and_dialog, null, false);
 		SwitchCompat switchButton = itemView.findViewById(R.id.compound_button);
 		View itemsContainer = itemView.findViewById(R.id.selectable_list_item);

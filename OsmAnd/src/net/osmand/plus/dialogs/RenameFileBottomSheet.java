@@ -66,7 +66,7 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 		items.add(new TitleItem(getString(R.string.shared_string_rename)));
 
-		View mainView = UiUtilities.getInflater(app, nightMode).inflate(R.layout.track_name_edit_text, null);
+		View mainView = UiUtilities.getInflater(requireContext(), nightMode).inflate(R.layout.track_name_edit_text, null);
 		nameTextBox = setupTextBox(mainView);
 		editText = setupEditText(mainView);
 		AndroidUtils.softKeyboardDelayed(getActivity(), editText);

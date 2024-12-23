@@ -77,7 +77,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 		activeColorId = ColorUtilities.getActiveColorId(nightMode);
 		defaultColorId = ColorUtilities.getDefaultIconColorId(nightMode);
 		uiUtilities = app.getUIUtilities();
-		themedInflater = UiUtilities.getInflater(app, nightMode);
+		themedInflater = UiUtilities.getInflater(activity, nightMode);
 		locationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(activity);
 	}
 

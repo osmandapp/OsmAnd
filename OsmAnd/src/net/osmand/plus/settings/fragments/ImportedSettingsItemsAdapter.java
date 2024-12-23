@@ -46,7 +46,7 @@ public class ImportedSettingsItemsAdapter extends
 	@NonNull
 	@Override
 	public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), nightMode);
 		View view = inflater.inflate(R.layout.list_item_import, parent, false);
 		return new ItemViewHolder(view);
 	}

@@ -104,7 +104,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = requiredMyApplication();
 		settings = app.getSettings();
-		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 		if (getTargetFragment() instanceof OnLiveUpdatesForLocalChange) {
 			onLiveUpdatesForLocalChange = (OnLiveUpdatesForLocalChange) getTargetFragment();
 		}
@@ -137,7 +137,8 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		items.add(itemUpdateTimeInfo);
 		refreshUpdateTimeInfo();
 
-		View itemLiveUpdate = getCustomButtonView(app, null, localUpdatePreference.get(), nightMode);
+		Context context = requireContext();
+		View itemLiveUpdate = getCustomButtonView(context, null, localUpdatePreference.get(), nightMode);
 		View itemLiveUpdateButton = itemLiveUpdate.findViewById(R.id.button_container);
 		CompoundButton button = itemLiveUpdateButton.findViewById(R.id.compound_button);
 		UiUtilities.setupCompoundButton(button, nightMode, TOOLBAR);
@@ -164,7 +165,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 									}
 								})) {
 							item.setTitle(getStateText(!checked));
-							updateCustomButtonView(app, null, item.getView(), !checked, nightMode);
+							updateCustomButtonView(context, null, item.getView(), !checked, nightMode);
 							CommonPreference<Boolean> localUpdatePreference = preferenceForLocalIndex(fileName, settings);
 							frequencyToggleButton.setItemsEnabled(localUpdatePreference.get());
 							timeOfDayToggleButton.setItemsEnabled(localUpdatePreference.get());
