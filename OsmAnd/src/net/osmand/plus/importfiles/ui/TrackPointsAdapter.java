@@ -55,7 +55,7 @@ class TrackPointsAdapter extends OsmandBaseExpandableListAdapter {
 		this.app = (OsmandApplication) context.getApplicationContext();
 		this.nightMode = nightMode;
 		this.selectedPoints = selectedPoints;
-		inflater = UiUtilities.getInflater(app, nightMode);
+		inflater = UiUtilities.getInflater(context, nightMode);
 		uiUtilities = app.getUIUtilities();
 		viewCache = UpdateLocationUtils.getUpdateLocationViewCache(context);
 	}

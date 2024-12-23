@@ -418,7 +418,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 			View view = convertView;
 			if (view == null) {
-				LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+				LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 				view = inflater.inflate(R.layout.list_group_title_with_right_descr, parent, false);
 			}
 			view.setOnClickListener(null);

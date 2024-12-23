@@ -78,7 +78,7 @@ public class BooleanRadioButtonsBottomSheet extends BooleanPreferenceBottomSheet
 
 	@NonNull
 	public View getCustomRadioButtonView(@NonNull SwitchPreferenceEx preference, boolean enabled) {
-		View view = UiUtilities.getInflater(app, nightMode).inflate(R.layout.dialog_list_item_with_compound_button, null);
+		View view = UiUtilities.getInflater(requireContext(), nightMode).inflate(R.layout.dialog_list_item_with_compound_button, null);
 		view.setTag(enabled);
 
 		TextView textView = view.findViewById(R.id.text);

@@ -249,7 +249,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 
 	private void createSuggestedMapsItems(List<IndexItem> suggestedMaps) {
 		OsmandApplication app = requiredMyApplication();
-		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
+		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
 
 		items.add(new DividerItem(themedCtx));
 
