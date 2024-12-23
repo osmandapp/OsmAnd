@@ -9,6 +9,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withSubstring;
+import static net.osmand.plus.settings.fragments.search.PluginsHelper.enablePlugin;
+import static net.osmand.plus.settings.fragments.search.PluginsHelper.getPlugin;
 import static net.osmand.plus.settings.fragments.search.SearchButtonClick.clickSearchButton;
 import static net.osmand.test.common.Matchers.childAtPosition;
 import static net.osmand.test.common.Matchers.recyclerViewHasItem;
@@ -76,56 +78,28 @@ public class SettingsSearchTest extends AndroidTest {
 
 	@Test
 	public void shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_AccessibilityPlugin() {
-		// Given
-		enablePlugin(AccessibilityPlugin.class);
-		clickSearchButton(app);
-
-		// When
-		onView(searchView()).perform(replaceText(app.getString(R.string.reset_all_profile_settings)), closeSoftKeyboard());
-
-		// Then
-		final String path = "Path: Driving > Accessibility > Reset plugin settings to default";
-		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(path)));
+		shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_Plugin(AccessibilityPlugin.class);
 	}
 
 	@Test
 	public void shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_AudioVideoNotesPlugin() {
-		// Given
-		enablePlugin(AudioVideoNotesPlugin.class);
-		clickSearchButton(app);
-
-		// When
-		onView(searchView()).perform(replaceText(app.getString(R.string.reset_all_profile_settings_descr)), closeSoftKeyboard());
-
-		// Then
-		final String path = "Path: Driving > Audio/video notes > Reset plugin settings to default";
-		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(path)));
+		shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_Plugin(AudioVideoNotesPlugin.class);
 	}
 
-	// FK-TODO: wie in der geshelften Version refaktorisieren
 	@Test
 	public void shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_OsmandMonitoringPlugin() {
-		// Given
-		enablePlugin(OsmandMonitoringPlugin.class);
-		clickSearchButton(app);
-
-		// When
-		onView(searchView()).perform(replaceText(app.getString(R.string.reset_all_profile_settings_descr)), closeSoftKeyboard());
-
-		// Then
-		final String path = "Path: Driving > Trip recording > Reset plugin settings to default";
-		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(path)));
+		shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_Plugin(OsmandMonitoringPlugin.class);
 	}
 
 	@Test
 	public void shouldSearchAndFind_LocationInterpolationBottomSheet_title() {
-		enablePlugin(OsmandDevelopmentPlugin.class);
+		enablePlugin(OsmandDevelopmentPlugin.class, app);
 		shouldSearchAndFind(app.getString(R.string.location_interpolation_percent));
 	}
 
 	@Test
 	public void shouldSearchAndFind_LocationInterpolationBottomSheet_description() {
-		enablePlugin(OsmandDevelopmentPlugin.class);
+		enablePlugin(OsmandDevelopmentPlugin.class, app);
 		shouldSearchAndFind(app.getString(R.string.location_interpolation_percent_desc));
 	}
 
@@ -163,7 +137,17 @@ public class SettingsSearchTest extends AndroidTest {
 		return recyclerViewHasItem(hasDescendant(withSubstring(substring)));
 	}
 
-	private void enablePlugin(final Class<? extends OsmandPlugin> plugin) {
-		new PluginsHelper(app).enablePlugin(plugin);
+	private void shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_Plugin(final Class<? extends OsmandPlugin> pluginClass) {
+		// Given
+		final OsmandPlugin plugin = getPlugin(pluginClass);
+		enablePlugin(plugin, app);
+		clickSearchButton(app);
+
+		// When
+		onView(searchView()).perform(replaceText(app.getString(R.string.reset_all_profile_settings_descr)), closeSoftKeyboard());
+
+		// Then
+		final String pathExpected = String.format("Path: Driving > %s > Reset plugin settings to default", plugin.getName());
+		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(pathExpected)));
 	}
 }
