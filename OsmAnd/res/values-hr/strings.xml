@@ -247,8 +247,8 @@
     <string name="poi_action_succeded_template">Radnja {0} je uspješno završena.</string>
     <string name="poi_edit_title">Uredi POI</string>
     <string name="poi_create_title">Stvori POI</string>
-    <string name="osb_comment_dialog_success">Komentar je uspješno dodan</string>
-    <string name="osb_comment_dialog_error">Dogodila se greška: komentar nije dodan</string>
+    <string name="osb_comment_dialog_success">Komentar je dodan</string>
+    <string name="osb_comment_dialog_error">Nije bilo moguće dodati komentar.</string>
     <string name="osb_comment_dialog_author">Ime autora</string>
     <string name="osb_comment_dialog_message">Poruka</string>
     <string name="favourites_context_menu_edit">Uredi favorite</string>
@@ -1652,4 +1652,6 @@
     <string name="key_event_action_zoom_in">Uvećaj</string>
     <string name="key_event_action_zoom_out">Umanji</string>
     <string name="lang_sr_latn">Srpski (latinica)</string>
+    <string name="lang_mk">Makedonski</string>
+    <string name="shared_string_location">Lokacija</string>
 </resources>

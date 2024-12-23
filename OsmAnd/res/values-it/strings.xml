@@ -1946,7 +1946,7 @@
     <string name="lang_hsb">Sorabo superiore</string>
     <string name="rendering_attr_hideOverground_name">Oggetti sopra il terreno</string>
     <string name="routing_attr_short_way_name">Percorso più efficiente rispetto ai consumi</string>
-    <string name="replace_favorite_confirmation">Sostituire il preferito %1$s\?</string>
+    <string name="replace_favorite_confirmation">Sostituire il preferito %1$s?</string>
     <string name="shared_string_change">Cambia</string>
     <string name="get_started">Inizia</string>
     <string name="skip_map_downloading">Salta download delle mappe</string>

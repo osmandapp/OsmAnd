@@ -692,8 +692,7 @@
     <string name="osmand_parking_pm">\'s-middags</string>
     <string name="osmand_parking_am">\'s-ochtends</string>
     <string name="osmand_parking_position_name">Parkeerplek</string>
-    <string name="osmand_parking_plugin_description">Bewaart de locatie waar je auto geparkeerd staat en de resterende parkeertijd.
-\nDe parkeerlocatie en resterende parkeertijd staan op het Osmand dashboard en in een widget op de kaart. Er kan een alarmsignaal in de Android kalender geplaatst worden ter herinnering.</string>
+    <string name="osmand_parking_plugin_description">Bewaart de locatie waar je auto geparkeerd staat en de resterende parkeertijd. \nDe parkeerlocatie en resterende parkeertijd staan op het Osmand dashboard en in een widget op de kaart. Er kan een alarmsignaal in de Android kalender geplaatst worden ter herinnering.</string>
     <string name="osmand_parking_plugin_name">Parkeerlocatie</string>
     <string name="context_menu_item_add_parking_point">Markeer als parkeerlocatie</string>
     <string name="context_menu_item_delete_parking_point">Verwijder de parkeerpositie</string>
@@ -1362,17 +1361,9 @@
 \nEen speciale kaart downloaden is niet nodig; de weergave wordt gecreëerd van de gewone kaartgegevens. 
 \n 
 \nDeze weergave kan worden aan- en uitgezet door het kiezen van \'Touring-weergave (meer contrast en detail)\' onder \'Kaart instellen\' en dan \'Kaartstijl\'.</string>
-    <string name="plugin_nautical_descr">Toon nautische gegevens op de kaart voor varen, zeilen, en andere vormen van watersport. Download ook het kaartbestand \'Zeebakens (wereld)\' om deze plugin te gebruiken.
-\n
-\nDeze plug-in biedt alle nautische navigatietekens en kaartsymbolen voor de binnenvaart en voor navigatie bij de kust. In de beschrijving van elke navigatieteken staat de informatie die nodig is om hem te identificeren en over de betekenis (categorie, vorm, kleur, volgorde, referentie, enz.) ervan.
-\n
-\nOm weer de gewone kaart te zien kun je de plug-in uitschakelen of de \'Kaart stijl\' onder \'Kaart instellen\' veranderen.
-\n
-\nLees verder op %1$s.</string>
+    <string name="plugin_nautical_descr">Toon nautische gegevens op de kaart voor varen, zeilen, en andere vormen van watersport. Download ook het kaartbestand \'Zeebakens (wereld)\' om deze plugin te gebruiken. \n \nDeze plug-in biedt alle nautische navigatietekens en kaartsymbolen voor de binnenvaart en voor navigatie bij de kust. In de beschrijving van elke navigatieteken staat de informatie die nodig is om hem te identificeren en over de betekenis (categorie, vorm, kleur, volgorde, referentie, enz.) ervan. \n \nOm weer de gewone kaart te zien kun je de plug-in uitschakelen of de \'Kaart stijl\' onder \'Kaart instellen\' veranderen. \n \nLees verder op %1$s.</string>
     <string name="plugin_ski_name">Ski kaartweergave</string>
-    <string name="plugin_ski_descr">Toon gedetailleerde informatie over slalompistes, langlaufroutes, alpine ski routes, kabelbanen en skiliften wereldwijd. Routes en pistes worden getoond in een kleurcode naar moeilijkheidsgraad, en afgebeeld in een speciale \'Winter en ski\' kaartstijl die lijkt op een besneeuwd winterlandschap.
-\n
-\nHet activeren van deze weergave verandert de kaartstijl in \'Winter en ski\', met alle kenmerken van het landschap onder winterse omstandigheden. Deze weergave kan worden teruggezet door het deactiveren van de plug-in, of door het veranderen van de \'Kaart stijl\' onder \'Kaart instellen\'.</string>
+    <string name="plugin_ski_descr">Toon gedetailleerde informatie over slalompistes, langlaufroutes, alpine ski routes, kabelbanen en skiliften wereldwijd. Routes en pistes worden getoond in een kleurcode naar moeilijkheidsgraad, en afgebeeld in een speciale \'Winter en ski\' kaartstijl die lijkt op een besneeuwd winterlandschap. \n \nHet activeren van deze weergave verandert de kaartstijl in \'Winter en ski\', met alle kenmerken van het landschap onder winterse omstandigheden. Deze weergave kan worden teruggezet door het deactiveren van de plug-in, of door het veranderen van de \'Kaart stijl\' onder \'Kaart instellen\'.</string>
     <string name="rename_failed">Hernoemen mislukt.</string>
     <string name="back_to_map">Terug naar kaart</string>
     <string name="share_note">Deel notitie</string>
@@ -1971,7 +1962,7 @@
     <string name="shared_string_change">Wijzig</string>
     <string name="get_started">Aan de slag</string>
     <string name="routing_attr_short_way_name">Economische route</string>
-    <string name="replace_favorite_confirmation">Vervang Favoriet %1$s\?</string>
+    <string name="replace_favorite_confirmation">Vervang Favoriet %1$s?</string>
     <string name="update_all_maps_now">Nu alle kaarten updaten\?</string>
     <string name="si_mi_meters">Mijl/meter</string>
     <string name="skip_map_downloading">Kaarten later downloaden</string>
@@ -3433,9 +3424,7 @@
     <string name="recalculate_route_distance_promo">De route wordt herberekend als de afstand van de route tot de huidige locatie groter is dan de geselecteerde waarde.</string>
     <string name="shared_string_octagon">Achthoek</string>
     <string name="shared_string_square">Vierkant</string>
-    <string name="ui_customization_description">Pas het aantal items aan in \'Map, \'Kaart instellen\' en \'Contextmenu\'.
-\n
-\nSchakel ongebruikte plug-ins uit om al hun besturingselementen te verbergen. %1$s.</string>
+    <string name="ui_customization_description">Pas het aantal items aan in \'Map, \'Kaart instellen\' en \'Contextmenu\'. \n \nSchakel ongebruikte plug-ins uit om al hun besturingselementen te verbergen. %1$s.</string>
     <string name="ui_customization_short_descr">Mappen, contextmenu</string>
     <string name="ui_customization">Aanpassing van de gebruikersinterface</string>
     <string name="shared_string_drawer">Map</string>

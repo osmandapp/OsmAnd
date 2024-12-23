@@ -1095,7 +1095,7 @@
     <string name="quick_action_map_style_switch">Map style changed to \"%s\".</string>
     <string name="quick_action_navigation_voice_off">Unmute Voice</string>
     <string name="quick_action_navigation_voice_on">Mute Voice</string>
-    <string name="quick_actions_delete_text">¿Quies desniciar l\'aición «%s»\?</string>
+    <string name="quick_actions_delete_text">¿Quies desniciar l\'aición «%s»?</string>
     <string name="quick_action_take_audio_note_descr">A button to add an audio note in the middle of the screen.</string>
     <string name="quick_action_add_osm_bug_descr">Un botón p\'amestar una nota d\'OSM metanes de la pantalla.</string>
     <string name="quick_action_add_poi_descr">A button to add a POI in the middle of the screen.</string>
@@ -1358,8 +1358,7 @@
     <string name="routing_attr_allow_private_name">Allow private access</string>
     <string name="access_direction_audio_feedback">Audio directions</string>
     <string name="osmand_parking_plugin_name">Parking position</string>
-    <string name="osmand_parking_plugin_description">Lets you record where your car is parked, including how much parking time remains.
-\n Both location and time are visible on the dashboard as well as in a map widget. An alarm reminder can be added to the Android calendar.</string>
+    <string name="osmand_parking_plugin_description">Lets you record where your car is parked, including how much parking time remains. \n Both location and time are visible on the dashboard as well as in a map widget. An alarm reminder can be added to the Android calendar.</string>
     <string name="localization_pref_title">Localization</string>
     <string name="plan_route">Planificar un camín</string>
     <string name="shared_string_search">Search</string>
@@ -2382,14 +2381,8 @@
     <string name="osmand_distance_planning_plugin_description">Create paths by tapping the map, or by using or modifying existing GPX files, to plan a trip and measure the distance between points. The result can be saved as a GPX file to use later for guidance.</string>
     <string name="osmand_distance_planning_plugin_name">Distance calculator and planning tool</string>
     <string name="audionotes_plugin_description">Make audio/photo/video notes during a trip, using either a map button or location context menu.</string>
-    <string name="plugin_ski_descr">This plugin for OsmAnd puts at your fingertips details of global downhill ski slopes, cross country ski runs, Alpine ski routes, cable cars and ski lifts. Routes and pistes are shown color-coded by difficulty, and depicted in a special \'Winter\' map style which assimilates a snow-colored winter landscape.
-\n
-\nActivating this view changes the map style to \'Winter and ski\', showing all landscape features under wintry conditions. This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.</string>
-    <string name="plugin_nautical_descr">This plugin enriches the OsmAnd map and navigation app to also produce nautical maps for boating, sailing, and other types of watersports.
-\n
-\nA special map add-on for OsmAnd will provide all nautical navigation marks and chart symbols, for inland as well as for nearshore navigation. The description of each navigation mark provides the details needed to identify them and their meaning (category, shape, color, sequence, reference, etc.).
-\n
-\nTo return to one of OsmAnd\'s conventional map styles, simply either de-activate this plugin again, or change the \'Map style\' under \'Configure map\' as desired.</string>
+    <string name="plugin_ski_descr">This plugin for OsmAnd puts at your fingertips details of global downhill ski slopes, cross country ski runs, Alpine ski routes, cable cars and ski lifts. Routes and pistes are shown color-coded by difficulty, and depicted in a special \'Winter\' map style which assimilates a snow-colored winter landscape. \n \nActivating this view changes the map style to \'Winter and ski\', showing all landscape features under wintry conditions. This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.</string>
+    <string name="plugin_nautical_descr">This plugin enriches the OsmAnd map and navigation app to also produce nautical maps for boating, sailing, and other types of watersports. \n \nA special map add-on for OsmAnd will provide all nautical navigation marks and chart symbols, for inland as well as for nearshore navigation. The description of each navigation mark provides the details needed to identify them and their meaning (category, shape, color, sequence, reference, etc.). \n \nTo return to one of OsmAnd\'s conventional map styles, simply either de-activate this plugin again, or change the \'Map style\' under \'Configure map\' as desired.</string>
     <string name="plugin_touringview_descr">Activating this view changes OsmAnd\'s map style to \'Touring view\', this is a special high-detail view for travelers and professional drivers.
 \n
 \nThis view provides, at any given map zoom, the maximum amount of travel details available in the map data (particularly roads, tracks, paths, and orientation marks).

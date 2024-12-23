@@ -1777,9 +1777,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
 \n
 \nHety styĺ moža być skasavany šliacham jaho vykliučeńnia tut abo źmienaju ŭ punkcie \"Styĺ mapy\" mieniu \"Nalady mapy\" na patrebny.</string>
     <string name="plugin_ski_name">Łyžnyja mapy</string>
-    <string name="plugin_ski_descr">Moduĺ dlia OsmAnd daje vam dostup da dadzienych ab harnalyžnych trasach, maršrutach dlia biehavych lyž, aĺpijskich spuskach, funikuliorach i harnalyžnych pad\'jomnikach. Maršruty i spuski adznačany roznymi kolierami ŭ zaliežnasci ad ich skladanasci i namaliavanyja z vykarystanniem admyslovaha «zimovaha» styliu mapy, jaki zakliučajecca ŭ tym, što vykarystoŭvajucca «sniežnyja» koliery zimovaha piejzažu. 
-\n 
-\nU vypadku aktyvacyi hetaha vidu, styĺ mapy mianiajecca na «Winter and ski», pakazvajučy ŭsio detali piejzažu tak, jak jany vyhliadajuć zimoj. Taki (zimovy) vyhliad moža być admienieny aĺbo šliacham deaktyvacyi tut, aĺbo kali vy pamianiajecie «Styĺ mapy» u mieniu «Nalada mapy» na žadany vyhliad.</string>
+    <string name="plugin_ski_descr">Moduĺ dlia OsmAnd daje vam dostup da dadzienych ab harnalyžnych trasach, maršrutach dlia biehavych lyž, aĺpijskich spuskach, funikuliorach i harnalyžnych pad\'jomnikach. Maršruty i spuski adznačany roznymi kolierami ŭ zaliežnasci ad ich skladanasci i namaliavanyja z vykarystanniem admyslovaha «zimovaha» styliu mapy, jaki zakliučajecca ŭ tym, što vykarystoŭvajucca «sniežnyja» koliery zimovaha piejzažu. \n \nU vypadku aktyvacyi hetaha vidu, styĺ mapy mianiajecca na «Winter and ski», pakazvajučy ŭsio detali piejzažu tak, jak jany vyhliadajuć zimoj. Taki (zimovy) vyhliad moža być admienieny aĺbo šliacham deaktyvacyi tut, aĺbo kali vy pamianiajecie «Styĺ mapy» u mieniu «Nalada mapy» na žadany vyhliad.</string>
     <string name="rename_failed">Pierajmienavannie nie atrymalasia.</string>
     <string name="days_behind">d. tamu abnaŭlali</string>
     <string name="back_to_map">Viarnucca da mapy</string>
@@ -2700,8 +2698,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="coord_input_save_as_track_descr">Vy dadali %1$s kropak. Uviadzicie nazvu fajla i nacisnicie «zachavać».</string>
     <string name="point_deleted">Kropka %1$s vydalienaja</string>
     <string name="shared_string_world">Sviet</string>
-    <string name="send_search_query_description">My adpravim vaš pašukovy zapyt «%1$s», a taksama vašaje miescaznachodžannie. \n
-        \n Zbirajucca toĺki niepierasanaĺnyja danyja, danyja pošuku vykarystoŭvajucca toĺki dlia taho, kab paliepšyć alharytm pošuku.</string>
+    <string name="send_search_query_description">My adpravim vaš pašukovy zapyt «%1$s», a taksama vašaje miescaznachodžannie. \n \n Zbirajucca toĺki niepierasanaĺnyja danyja, danyja pošuku vykarystoŭvajucca toĺki dlia taho, kab paliepšyć alharytm pošuku.</string>
     <string name="send_search_query">Adpravić pašukovy zapyt?</string>
     <string name="increase_search_radius_to">Pavialičyć radyus pošuku da %1$s</string>
     <string name="thank_you_for_feedback">Dziakuj za Vaš vodhuk</string>

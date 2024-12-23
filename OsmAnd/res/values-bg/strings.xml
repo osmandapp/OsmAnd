@@ -1466,9 +1466,7 @@
     <string name="lang_ceb">Себуански</string>
     <string name="lang_ms">Малайски</string>
     <string name="lang_ht">Хаитянски</string>
-    <string name="plugin_nautical_descr">Обогатява картата с информация за маршрути за плаване, навигационни светлини, опасни морски зони, зони с ограничения за плаване или акостиране и др. За да я използвате, изтеглете съответните морски карти и включете „Морска карта“ в „Настройки на картата“.
-\n
-\nДокументацията е достъпна на адрес %1$s.</string>
+    <string name="plugin_nautical_descr">Обогатява картата с информация за маршрути за плаване, навигационни светлини, опасни морски зони, зони с ограничения за плаване или акостиране и др. За да я използвате, изтеглете съответните морски карти и включете „Морска карта“ в „Настройки на картата“.\n\nДокументацията е достъпна на адрес %1$s.</string>
     <string name="plugin_settings">Добавки</string>
     <string name="rendering_attr_currentTrackColor_name">цвят на GPX</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX ширина</string>
@@ -1935,7 +1933,7 @@
     <string name="update_all_maps_now">Обновяване на всички карти?</string>
     <string name="clear_tile_data">Изчистване на всички плочки</string>
     <string name="routing_attr_short_way_name">Икономичен маршрут</string>
-    <string name="replace_favorite_confirmation">Заместване на „%1$s“ от Избрани\?</string>
+    <string name="replace_favorite_confirmation">Заместване на „%1$s“ от Избрани?</string>
     <string name="rendering_attr_hideOverground_name">Надземни обекти</string>
     <string name="osm_live_payment_desc">Абонаментна такса се начислява всеки месец. Можете да я отмените от Google Play по всяко време.</string>
     <string name="donation_to_osm">Дарение за OSM общността</string>
@@ -3040,7 +3038,7 @@
     <string name="external_device_details_pair">Сдвояване</string>
     <string name="external_device_ble">BLE</string>
     <string name="y_axis">Ос Y</string>
-    <string name="cloud_version_confirm_delete">Изтриване на „%1$s“ от облачната услуга на OsmAnd\?</string>
+    <string name="cloud_version_confirm_delete">Изтриване на „%1$s“ от облачната услуга на OsmAnd?</string>
     <string name="shared_string_delete_file">Изтриване на файл</string>
     <string name="open_weather_action_description">Отваря екран с подробности за прогнозата.</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Изолинии на скоростта на вятъра (изотахи)</string>
@@ -3133,7 +3131,7 @@
     <string name="points_of_interests">Интересни места (POI)</string>
     <string name="selected_waypoints_descr">Избраните отправни точки ще бъдат добавени към трасето „%1$s“</string>
     <string name="apply_to_existing_favorites_descr">Прилагане на промените към съществуващите избрани точки в групата или само към новите\?</string>
-    <string name="favorite_confirm_delete_group">Сигурни ли сте, че желаете да бъде премахната групата „%1$s“ и всички точки в нея (%2$d)?</string>
+    <string name="favorite_confirm_delete_group">Желаете ли да бъде премахната групата „%1$s“ и всички точки в нея (%2$d)?</string>
     <string name="keep_passed_markers_descr">Маркерите, добавени група Избрани или Отправни точки на GPX, отбекязани като преминати, ще останат на картата. Ако групата е изключена, маркерите ще изчезнат от картата.</string>
     <string name="shortcut_navigate_to_home">Към „Вкъщи“</string>
     <string name="enable_3d_maps">Включване на триизмерни карти</string>
@@ -3453,9 +3451,7 @@
 \nИзберете %2$s. Всички данни, свързани с камери за скорост: предупреждения, известия, POI, ще бъдат премахнати до преинсталиране на OsmAnd.</string>
     <string name="routing_attr_height_obstacles_description">Прогнозното време за пътуване ще отчита въздействието на възвишенията. Предпочитанията за маршрута могат да помогнат за избягване на стръмни изкачвания:</string>
     <string name="show_map_symbols">Обозначения на картата</string>
-    <string name="ant_missing_dependency_descr">Необходимата услуга „%1$s“ не е намерена.
-\nТрябва да инсталирате или обновите услугата ANT+ Plugins Service.
-\nЖелаете ли да посетите магазина за приложения?</string>
+    <string name="ant_missing_dependency_descr">Необходимата услуга „%1$s“ не е намерена.\nТрябва да инсталирате или обновите услугата ANT+ Plugins Service.\nЖелаете ли да посетите магазина за приложения?</string>
     <string name="clear_all_history_warning">Премахване на всички записи в историята на приложението, включително историята на търсенето, маршрутизацията и маркерите\?</string>
     <string name="altitude_correction">Корекция на надм. височина</string>
     <string name="no_altitude_data_desc">За да получите данни от %1$s, прикрепете трасето към пътищата или го изчислете онлайн.</string>
@@ -3623,9 +3619,7 @@
     <string name="navigate_point_format_swiss_grid">Швейцарска мрежа (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">Швейцарска мрежа (CH1903+)</string>
     <string name="list_of_groups">Списък на групи</string>
-    <string name="location_source_descr">По подразбиране OsmAnd, инсталиран от Google Play, използва %1$s за определяне на местоположението.
-\n
-\nАко получавате неточно местоположение или използвате устройство без %2$s, опитайте да превключите на „%3$s“</string>
+    <string name="location_source_descr">По подразбиране OsmAnd, инсталиран от Google Play, използва %1$s за определяне на местоположението. \n \nАко получавате неточно местоположение или използвате устройство без %2$s, опитайте да превключите на „%3$s“</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Показва етикетите fixme</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Етикети fixme</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
@@ -3668,15 +3662,12 @@
     <string name="copying_file">Копиране на файл %1$s…</string>
     <string name="icon_group_education">Образование</string>
     <string name="delete_history_items">Премахване на %1$s записа от историята\?</string>
-    <string name="shared_storage_second_step">Докоснете „Използване на тази папка“ (Use this folder).</string>
+    <string name="shared_storage_second_step">Докоснете „Използване на тази папка“.</string>
     <string name="shared_storage">Споделено хранилище</string>
     <string name="storage_found_files_size">Намерени %1$s файла %2$s</string>
     <string name="shared_storage_last_step">След това можете да посочите нова папка за данни.</string>
-    <string name="shared_storage_first_step">Натиснете „%1$s“.
-\nПриложението за файлове отваря мястото, в което трябва да откриете папката osmand.</string>
-    <string name="shared_storage_migration_descr">Поради промени в достъпа до хранилището на Android OsmAnd вече не може да използва %1$s.
-\n
-\nНеобходимо е да копирате всички данни в новата папка.</string>
+    <string name="shared_storage_first_step">Докоснете „%1$s“. \nПриложението за управление на файлове отваря мястото, на което трябва да откриете папката osmand.</string>
+    <string name="shared_storage_migration_descr">Поради промени в достъпа до хранилището на Android OsmAnd вече не може да използва %1$s.\n\nНеобходимо е да копирате всички данни в новата папка.</string>
     <string name="shared_storage_migration">Мигриране на споделеното хранилище</string>
     <string name="rendering_attr_natureReserves_description">Показват се природни резервати, защитени територии и национални паркове.</string>
     <string name="shared_string_new_track">Ново трасе</string>
@@ -4340,9 +4331,7 @@
     <string name="routing_attr_relief_smoothness_factor_hills_name">Планински</string>
     <string name="route_between_points">Маршрут между точките</string>
     <string name="route_between_points_whole_track_button_desc">Изчислява цялото трасе с избрания профил.</string>
-    <string name="ui_customization_description">Настройка на главното, контекстуалното и раздела „Настройка на карти“.
-\n
-\nИзключете неизползваните добавки, за да се скрият техните контроли за управление. %1$s.</string>
+    <string name="ui_customization_description">Настройка на главното, контекстуалното и раздела „Настройка на карти“. \n \nИзключете неизползваните добавки, за да се скрият техните контроли за управление. %1$s.</string>
     <string name="no_assigned_keys">Липсват клавишни комбинации</string>
     <string name="remove_key_assignment">Премахване на клавишната комбинация</string>
     <string name="remove_key_assignment_summary">Клавишната комбинация на избраното действие ще бъде премахната.</string>
@@ -4475,4 +4464,13 @@
     <string name="reset_average_speed">Нулиране на средната скорост</string>
     <string name="start_trip_recording_first_m">Първо започнете да записвате пътуване.</string>
     <string name="quick_action_showhide_osm_edits_descr">Бутон, превключващ местните редакции на OSM в картата.</string>
+    <string name="wake_time">Време на работа след събуждане</string>
+    <string name="quick_action_navigation_voice">Гласови напътствия</string>
+    <string name="selected_delayed_profile">Избран профил s\\</string>
+    <string name="shared_string_interpolation">Интерполация</string>
+    <string name="error_notification_desc">Изпратете екранна снимка на известието на support@osmand.net</string>
+    <string name="quick_action_map_underlay_switch">Подложената карта е променена на „%s“.</string>
+    <string name="select_base_profile_dialog_title">Изберете начален профил</string>
+    <string name="default_buttons_corners_original_description">Всеки бутон ще има свой размер на окръглянето.</string>
+    <string name="default_buttons_opacity_original_description">Всеки бутон ще има своя прозрачност на фона.</string>
 </resources>

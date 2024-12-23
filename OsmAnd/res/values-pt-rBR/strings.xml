@@ -165,9 +165,7 @@
 \n
 \nEssa visão pode ser revertida desativando aqui mesmo ou alterando o \'Estilo do mapa\' em \'Configurar mapa\' quando desejar.</string>
     <string name="plugin_nautical_name">Mapa náutico</string>
-    <string name="plugin_nautical_descr">Enriquece o seu mapa com informações sobre rotas de navegação, luzes de navegação, zonas náuticas de perigo, zonas com restrições de navegação ou atracação, etc.
-\n
-\nLeitura adicional em %1$s.</string>
+    <string name="plugin_nautical_descr">Enriquece o seu mapa com informações sobre rotas de navegação, luzes de navegação, zonas náuticas de perigo, zonas com restrições de navegação ou atracação, etc. \n \nLeitura adicional em %1$s.</string>
     <string name="plugin_ski_name">Mapa de esqui</string>
     <string name="plugin_ski_descr">Projetado para navegar em áreas de esportes de inverno: veja pistas de esqui e teleféricos e pistas de esqui cross country, com linhas coloridas indicando as classificações de dificuldade. Para usar, habilite este plugin e também vá em \"Configurar mapa\" e escolha o estilo de mapa \"Inverno e esqui\".</string>
     <string name="audionotes_plugin_name">Notas de áudio/vídeo</string>

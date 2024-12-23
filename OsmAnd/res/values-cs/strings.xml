@@ -1962,7 +1962,7 @@
     <string name="update_all_maps_now">Aktualizovat všechny mapy ihned?</string>
     <string name="clear_tile_data">Vymazat všechny dlaždice</string>
     <string name="routing_attr_short_way_name">Ekonomická trasa</string>
-    <string name="replace_favorite_confirmation">Nahradit Oblíbené místo „%1$s“\?</string>
+    <string name="replace_favorite_confirmation">Nahradit Oblíbené místo „%1$s“?</string>
     <string name="rendering_attr_hideOverground_name">Nadzemní objekty</string>
     <string name="shared_string_change">Změnit</string>
     <string name="get_started">Začít</string>
@@ -3226,25 +3226,7 @@
     <string name="osmand_purchases_item">Nákupy v OsmAnd</string>
     <string name="legend_item_description">Průvodce symboly na mapě.</string>
     <string name="navigation_profiles_item">Navigační profily</string>
-    <string name="release_3_7">• Nové offline mapy svahů
-\n
-\n• Plné přizpůsobení oblíbených bodů a GPX cílů – vlastní barvy, ikony a tvary
-\n
-\n• Možnost změny pořadí položek v kontextovém menu, nastavení mapy i hlavním menu
-\n
-\n• Wikipedie jako samostatná vrstva v nastavení mapy, lze vybrat pouze potřebné jazyky
-\n
-\n• Vytváření vlastních filtrů a map bodů zájmu s plnou flexibilitou
-\n
-\n• Přidána možnost obnovit nastavení vlastních profilů
-\n
-\n• Plnohodnotné GPX trasy z navigace nyní podporují jízdní pruhy a kompletní navigační pokyny
-\n
-\n• Opravena velikost uživatelského rozhraní na tabletech
-\n
-\n• Opraveny chyby pro jazyky psané zprava doleva
-\n
-\n</string>
+    <string name="release_3_7">• Nové offline mapy svahů \n \n• Plné přizpůsobení oblíbených bodů a GPX cílů – vlastní barvy, ikony a tvary \n \n• Možnost změny pořadí položek v kontextovém menu, nastavení mapy i hlavním menu \n \n• Wikipedie jako samostatná vrstva v nastavení mapy, lze vybrat pouze potřebné jazyky \n \n• Vytváření vlastních filtrů a map bodů zájmu s plnou flexibilitou \n \n• Přidána možnost obnovit nastavení vlastních profilů \n \n• Plnohodnotné GPX trasy z navigace nyní podporují jízdní pruhy a kompletní navigační pokyny \n \n• Opravena velikost uživatelského rozhraní na tabletech \n \n• Opraveny chyby pro jazyky psané zprava doleva \n \n</string>
     <string name="edit_online_source">Upravit online zdroj</string>
     <string name="expire_time">Doba vypršení platnosti</string>
     <string name="mercator_projection">Mercatorovo zobrazení</string>
@@ -4976,7 +4958,7 @@
     <string name="feature_available_as_part_of_plan">%1$s je k dispozici jako součást plánu %2$s</string>
     <string name="shared_string_included">Zahrnuto</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
-    <string name="local_indexes_category_terrain">Terénní mapy (3D)</string>
+    <string name="local_indexes_category_terrain">Terénní mapy (3D</string>
     <string name="hillshade_slope">Stínování kopců, svahy</string>
     <string name="map_widget_glide_average_desc">Zobrazuje průměrný klouzavý poměr pro nastavený interval.</string>
     <string name="map_widget_glide_target_desc">Zobrazuje klouzavost potřebnou k dosažení cílového bodu.</string>
@@ -5677,5 +5659,8 @@
     <string name="location_interpolation_percent">Procento interpolace polohy</string>
     <string name="location_interpolation_percent_desc">Nastavení procenta interpolace polohy během navigace po trase. Tento parametr snižuje zpoždění polohy na mapě během animace.</string>
     <string name="shared_string_interpolation">Interpolace</string>
-    <string name="selected_delayed_profile">Zvolený profil „%s“</string>
+    <string name="selected_delayed_profile">Zvolený profil s\\</string>
+    <string name="default_buttons_opacity_original_description">Každé tlačítko si zachová svou vlastní průhlednost pozadí.</string>
+    <string name="default_buttons_size_original_description">Každé tlačítko si zachová svou vlastní velikost.</string>
+    <string name="default_buttons_corners_original_description">Každé tlačítko si zachová své vlastní zaoblení rohů.</string>
 </resources>
