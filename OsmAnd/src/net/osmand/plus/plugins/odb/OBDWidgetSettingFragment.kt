@@ -177,7 +177,7 @@ class OBDWidgetSettingFragment : BaseSimpleWidgetSettingsFragment() {
 	private fun showSeekbarSettingsDialog() {
 		val nightMode = !app.settings.isLightContentForMode(appMode)
 		seekBarIntervalMillis = selectedIntervalMillis
-		val themedContext = UiUtilities.getThemedContext(activity, nightMode)
+		val themedContext = UiUtilities.getThemedContext(requireContext(), nightMode)
 		val builder = AlertDialog.Builder(themedContext)
 		val seekbarView = inflater.inflate(R.layout.map_marker_interval_dialog, null, false)
 		builder.setView(seekbarView)
