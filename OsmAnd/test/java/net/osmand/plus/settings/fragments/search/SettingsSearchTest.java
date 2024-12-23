@@ -30,6 +30,7 @@ import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.test.common.AndroidTest;
 
 import org.hamcrest.Matcher;
@@ -89,6 +90,11 @@ public class SettingsSearchTest extends AndroidTest {
 	@Test
 	public void shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_OsmandMonitoringPlugin() {
 		shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_Plugin(OsmandMonitoringPlugin.class);
+	}
+
+	@Test
+	public void shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_WeatherPlugin() {
+		shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_Plugin(WeatherPlugin.class);
 	}
 
 	@Test

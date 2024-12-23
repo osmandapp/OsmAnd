@@ -8,7 +8,6 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -97,20 +96,6 @@ public class ResetProfilePrefsBottomSheet extends BasePreferenceBottomSheet impl
 	@Override
 	protected DialogButtonType getRightBottomButtonType() {
 		return DialogButtonType.SECONDARY;
-	}
-
-	public static boolean showInstance(@NonNull FragmentManager manager,
-									   @NonNull ApplicationMode appMode,
-									   @Nullable Fragment target,
-									   final OsmandApplication app) {
-		try {
-			ResetProfilePrefsBottomSheet
-					.createInstance(appMode, Optional.ofNullable(target))
-					.show(manager, app);
-			return true;
-		} catch (final RuntimeException e) {
-			return false;
-		}
 	}
 
 	public static ResetProfilePrefsBottomSheet createInstance(final @NonNull ApplicationMode appMode,
