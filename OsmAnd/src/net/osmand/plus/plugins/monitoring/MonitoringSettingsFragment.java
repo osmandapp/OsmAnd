@@ -7,6 +7,7 @@ import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.SECONDS;
 import static net.osmand.plus.settings.backend.OsmandSettings.MONTHLY_DIRECTORY;
 import static net.osmand.plus.settings.backend.OsmandSettings.REC_DIRECTORY;
 import static net.osmand.plus.settings.controllers.BatteryOptimizationController.isIgnoringBatteryOptimizations;
+import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -48,6 +49,9 @@ import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetA
 import net.osmand.plus.settings.bottomsheets.SingleSelectPreferenceBottomSheet;
 import net.osmand.plus.settings.controllers.BatteryOptimizationController;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.track.fragments.controller.SelectRouteActivityController;
@@ -63,8 +67,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Optional;
 
-public class MonitoringSettingsFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
+public class MonitoringSettingsFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener, ShowableSearchablePreferenceDialogProvider {
 
 	private static final String DISABLE_BATTERY_OPTIMIZATION = "disable_battery_optimization";
 	private static final String COPY_PLUGIN_SETTINGS = "copy_plugin_settings";
@@ -276,7 +281,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		@ColorRes int iconColor = isNightMode() ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
 		int iconId = R.drawable.ic_action_car_info;
 		Drawable prefIcon = getIcon(iconId, iconColor);
-		String summary = app.getString(R.string.shared_string_none);;
+		String summary = app.getString(R.string.shared_string_none);
 
 		VehicleMetricsPlugin plugin = PluginsHelper.getPlugin(VehicleMetricsPlugin.class);
 		if (plugin != null) {
@@ -457,7 +462,27 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	}
 
 	@Override
-	public boolean onPreferenceClick(Preference preference) {
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Optional<Fragment> target) {
+		return RESET_TO_DEFAULT.equals(preference.getKey()) ?
+				Optional.of(
+						new ShowableSearchablePreferenceDialog<>(
+								ResetProfilePrefsBottomSheet.createInstance(
+										getSelectedAppMode(),
+										target)) {
+
+							@Override
+							protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+								searchablePreferenceDialog.show(getFragmentManager(), app);
+							}
+						}) :
+				Optional.empty();
+	}
+
+	@Override
+	public boolean onPreferenceClick(final Preference preference) {
+		if (showDialogForPreference(preference, this)) {
+			return true;
+		}
 		String prefId = preference.getKey();
 		if (OPEN_TRACKS.equals(prefId)) {
 			Bundle bundle = new Bundle();
@@ -473,12 +498,6 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
 				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, getSelectedAppMode());
-			}
-		} else if (RESET_TO_DEFAULT.equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				// FK-TODO: make searchable
-				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, getSelectedAppMode(), this, app);
 			}
 		} else if (DISABLE_BATTERY_OPTIMIZATION.endsWith(prefId)) {
 			MapActivity mapActivity = getMapActivity();
