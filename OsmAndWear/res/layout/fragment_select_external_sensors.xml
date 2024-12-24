@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/bg_color"
+	android:clickable="true"
+	android:fitsSystemWindows="true"
+	android:focusable="true"
+	android:orientation="vertical">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/toolbar_height"
+		android:background="?attr/actionModeBackground">
+
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/toolbar_height"
+			android:fitsSystemWindows="true"
+			app:layout_collapseMode="pin"
+			app:title="@string/external_sensors_plugin_name">
+
+		</androidx.appcompat.widget.Toolbar>
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+		<LinearLayout
+			android:id="@+id/devices_content"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical">
+
+			<include
+				android:id="@+id/no_bluetooth_card"
+				layout="@layout/no_bluetooth_card" />
+
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/connected_devices_list"
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:layout_weight="1"
+				app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+			<include
+				android:id="@+id/pair_btn_additional"
+				layout="@layout/bottom_buttons" />
+
+		</LinearLayout>
+
+		<include
+			android:id="@+id/state_no_bluetooth"
+			layout="@layout/no_bluetooth_view" />
+	</FrameLayout>
+
+</LinearLayout>
