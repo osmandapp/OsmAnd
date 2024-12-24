@@ -4915,7 +4915,7 @@
     <string name="poi_route_activity_type_enduro_motorcycling">Ендуро мотоциклизам</string>
     <string name="poi_route_activity_type_road_motorcycling">Друмски мотоциклизам</string>
     <string name="poi_route_activity_type_sport_motorcycling">Спортски Мотоциклизам</string>
-    <string name="poi_route_activity_type_track_racing">Трке на тркама</string>
+    <string name="poi_route_activity_type_track_racing">Трке на стазама</string>
     <string name="poi_route_activity_type_motor_scooter">Мотор скутер</string>
     <string name="poi_route_activity_type_backpacking">Пешачење са ранцем</string>
     <string name="poi_route_activity_type_hiking">Планинарење</string>
