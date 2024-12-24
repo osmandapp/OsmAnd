@@ -7,12 +7,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
-
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.RequestCreator;
 
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.Metadata;
@@ -59,7 +54,7 @@ public class DescriptionCard extends MapBaseCard {
 		String imageUrl = getMetadataImageLink(gpxFile.getMetadata());
 		String descriptionHtml = gpxFile.getMetadata().getDescription();
 
-		setupImage(imageUrl);
+		PicassoUtils.setupMainImageByUrl(app, view, imageUrl);
 
 		if (Algorithms.isBlank(descriptionHtml)) {
 			showAddBtn();
@@ -131,46 +126,11 @@ public class DescriptionCard extends MapBaseCard {
 		AndroidUtils.setBackground(ctx, button, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 	}
 
-	private void setupImage(String imageUrl) {
-		if (imageUrl == null) {
-			return;
-		}
-		PicassoUtils picasso = PicassoUtils.getPicasso(app);
-		RequestCreator rc = Picasso.get().load(imageUrl);
-		AppCompatImageView image = view.findViewById(R.id.main_image);
-		rc.into(image, new Callback() {
-			@Override
-			public void onSuccess() {
-				picasso.setResultLoaded(imageUrl, true);
-				AndroidUiHelper.updateVisibility(image, true);
-			}
-
-			@Override
-			public void onError(Exception e) {
-				picasso.setResultLoaded(imageUrl, false);
-			}
-		});
-	}
-
-	public static boolean isImageUrl(String url) {
-		if (!Algorithms.isEmpty(url)) {
-			String lowerCaseUrl = url.toLowerCase();
-			if (lowerCaseUrl.contains(".jpg")
-					|| lowerCaseUrl.contains(".jpeg")
-					|| lowerCaseUrl.contains(".png")
-					|| lowerCaseUrl.contains(".bmp")
-					|| lowerCaseUrl.contains(".webp")) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	@Nullable
 	public static String getMetadataImageLink(@NonNull Metadata metadata) {
 		if (metadata.getLink() != null) {
 			String url = metadata.getLink().getHref();
-			if (isImageUrl(url)) {
+			if (PicassoUtils.isImageUrl(url)) {
 				return url;
 			}
 		}

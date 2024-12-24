@@ -1,10 +1,9 @@
 package net.osmand.plus.track.fragments.controller;
 
-import static net.osmand.plus.track.cards.DescriptionCard.isImageUrl;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.data.LatLon;
@@ -60,7 +59,7 @@ public class EditWptDescriptionController extends EditPointDescriptionController
 		WptPt wpt = (WptPt) getContextMenuObject();
 		if (wpt != null && wpt.getLink() != null && !Algorithms.isEmpty(wpt.getLink().getHref())) {
 			String url = wpt.getLink().getHref();
-			if (isImageUrl(url)) {
+			if (PicassoUtils.isImageUrl(url)) {
 				return url;
 			}
 		}
