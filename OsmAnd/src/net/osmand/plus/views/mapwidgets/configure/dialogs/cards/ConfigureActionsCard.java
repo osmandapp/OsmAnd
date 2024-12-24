@@ -53,8 +53,10 @@ public class ConfigureActionsCard extends MapBaseCard {
 		button.setOnClickListener(v -> {
 			FragmentManager manager = target.getFragmentManager();
 			if (manager != null) {
-				ApplicationMode appMode = settings.getApplicationMode();
-				SelectCopyAppModeBottomSheet.showInstance(manager, target, appMode);
+				// FK-TODO: make searchable
+				SelectCopyAppModeBottomSheet
+						.createInstance(target, settings.getApplicationMode())
+						.show(manager, app);
 			}
 		});
 	}

@@ -497,7 +497,10 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		} else if (COPY_PLUGIN_SETTINGS.equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, getSelectedAppMode());
+				// FK-TODO: make searchable
+				SelectCopyAppModeBottomSheet
+						.createInstance(this, getSelectedAppMode())
+						.show(fragmentManager, app);
 			}
 		} else if (DISABLE_BATTERY_OPTIMIZATION.endsWith(prefId)) {
 			MapActivity mapActivity = getMapActivity();

@@ -454,6 +454,19 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 						}
 					});
 		}
+		if (COPY_PROFILE_SETTINGS.equals(preference.getKey())) {
+			return Optional.of(
+					new ShowableSearchablePreferenceDialog<>(
+							SelectCopyAppModeBottomSheet.createInstance(
+									target.orElse(null),
+									getSelectedAppMode())) {
+
+						@Override
+						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+							searchablePreferenceDialog.show(getFragmentManager(), app);
+						}
+					});
+		}
 		return Optional.empty();
 	}
 
@@ -476,8 +489,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			} else if (CONFIGURE_SCREEN.equals(prefId)) {
 				sepAppModeToSelected();
 				ConfigureScreenFragment.showInstance(mapActivity);
-			} else if (COPY_PROFILE_SETTINGS.equals(prefId)) {
-				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, selectedMode);
 			} else if (EXPORT_PROFILE.equals(prefId)) {
 				ExportSettingsFragment.showInstance(fragmentManager, selectedMode, null, false);
 			} else if (DELETE_PROFILE.equals(prefId)) {

@@ -264,7 +264,10 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 		if (COPY_PLUGIN_SETTINGS.equals(preference.getKey())) {
 			final FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, getSelectedAppMode());
+				// FK-TODO: make searchable
+				SelectCopyAppModeBottomSheet
+						.createInstance(this, getSelectedAppMode())
+						.show(fragmentManager, app);
 			}
 		}
 		return super.onPreferenceClick(preference);

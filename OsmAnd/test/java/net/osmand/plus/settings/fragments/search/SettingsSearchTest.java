@@ -31,6 +31,7 @@ import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.test.common.AndroidTest;
 
 import org.hamcrest.Matcher;
@@ -75,6 +76,19 @@ public class SettingsSearchTest extends AndroidTest {
 				.of("Driving", "Truck")
 				.map(applicationMode -> String.format("Path: %s > Navigation settings > Screen alerts > Speed cameras", applicationMode))
 				.forEach(path -> onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(path))));
+	}
+
+	@Test
+	public void test_search_ApplicationMode_find_SelectCopyAppModeBottomSheet() {
+		// Given
+		final ApplicationMode applicationMode = ApplicationMode.PEDESTRIAN;
+		clickSearchButton(app);
+
+		// When
+		onView(searchView()).perform(replaceText(applicationMode.toHumanString()), closeSoftKeyboard());
+
+		// Then
+		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(String.format("Path: Driving > %s", app.getString(R.string.copy_from_other_profile)))));
 	}
 
 	@Test

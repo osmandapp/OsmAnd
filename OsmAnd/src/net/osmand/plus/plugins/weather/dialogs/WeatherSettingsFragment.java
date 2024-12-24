@@ -201,7 +201,10 @@ public class WeatherSettingsFragment extends BaseSettingsFragment implements Wea
 		} else if (COPY_PLUGIN_SETTINGS.equals(key)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, getSelectedAppMode());
+				// FK-TODO: make searchable
+				SelectCopyAppModeBottomSheet
+						.createInstance(this, getSelectedAppMode())
+						.show(fragmentManager, app);
 			}
 		}
 		return super.onPreferenceClick(preference);

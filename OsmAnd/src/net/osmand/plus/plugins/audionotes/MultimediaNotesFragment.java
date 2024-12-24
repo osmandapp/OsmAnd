@@ -502,7 +502,10 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		} else if (COPY_PLUGIN_SETTINGS.equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, getSelectedAppMode());
+				// FK-TODO: make searchable
+				SelectCopyAppModeBottomSheet
+						.createInstance(this, getSelectedAppMode())
+						.show(fragmentManager, app);
 			}
 		} else if (CAMERA_PERMISSION.equals(prefId)) {
 			requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_FOR_PHOTO_PARAMS_REQUEST_CODE);

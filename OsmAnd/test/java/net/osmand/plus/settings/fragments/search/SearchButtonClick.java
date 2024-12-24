@@ -43,7 +43,9 @@ class SearchButtonClick {
 	}
 
 	private static Matcher<View> settingsButton() {
-		return withText(R.string.shared_string_settings);
+		return allOf(
+				withText(R.string.shared_string_settings),
+				isDisplayed());
 	}
 
 	private static Matcher<View> searchButton() {
