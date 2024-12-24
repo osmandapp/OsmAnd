@@ -1,7 +1,6 @@
 package net.osmand.plus.track.cards;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -153,19 +152,26 @@ public class DescriptionCard extends MapBaseCard {
 		});
 	}
 
+	public static boolean isImageUrl(String url) {
+		if (!Algorithms.isEmpty(url)) {
+			String lowerCaseUrl = url.toLowerCase();
+			if (lowerCaseUrl.contains(".jpg")
+					|| lowerCaseUrl.contains(".jpeg")
+					|| lowerCaseUrl.contains(".png")
+					|| lowerCaseUrl.contains(".bmp")
+					|| lowerCaseUrl.contains(".webp")) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@Nullable
 	public static String getMetadataImageLink(@NonNull Metadata metadata) {
 		if (metadata.getLink() != null) {
-			String link = metadata.getLink().getHref();
-			if (!TextUtils.isEmpty(link)) {
-				String lowerCaseLink = link.toLowerCase();
-				if (lowerCaseLink.contains(".jpg")
-						|| lowerCaseLink.contains(".jpeg")
-						|| lowerCaseLink.contains(".png")
-						|| lowerCaseLink.contains(".bmp")
-						|| lowerCaseLink.contains(".webp")) {
-					return link;
-				}
+			String url = metadata.getLink().getHref();
+			if (isImageUrl(url)) {
+				return url;
 			}
 		}
 		return null;

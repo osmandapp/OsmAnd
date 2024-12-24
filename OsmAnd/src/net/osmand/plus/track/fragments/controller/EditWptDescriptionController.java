@@ -1,6 +1,9 @@
 package net.osmand.plus.track.fragments.controller;
 
+import static net.osmand.plus.track.cards.DescriptionCard.isImageUrl;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -11,6 +14,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
+import net.osmand.util.Algorithms;
 
 public class EditWptDescriptionController extends EditPointDescriptionController {
 
@@ -48,5 +52,18 @@ public class EditWptDescriptionController extends EditPointDescriptionController
 	public String getTitle() {
 		WptPt wpt = (WptPt) getContextMenuObject();
 		return wpt != null ? wpt.getName() : super.getTitle();
+	}
+
+	@Override
+	@Nullable
+	public String getImageUrl() {
+		WptPt wpt = (WptPt) getContextMenuObject();
+		if (wpt != null && wpt.getLink() != null && !Algorithms.isEmpty(wpt.getLink().getHref())) {
+			String url = wpt.getLink().getHref();
+			if (isImageUrl(url)) {
+				return url;
+			}
+		}
+		return null;
 	}
 }
