@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.TurnPathHelper;
 import net.osmand.router.TurnType;
 
@@ -21,7 +22,8 @@ public class TurnDrawable extends Drawable {
 
 	protected static final Log log = PlatformUtil.getLog(TurnDrawable.class);
 
-	protected Paint paintBlack;
+	protected Paint paintTurnOutlayStroke;
+	protected Paint paintTurnOutlayFill;
 	protected Paint paintRouteDirection;
 	protected Path pathForTurn = new Path();
 	protected Path pathForTurnOutlay = new Path();
@@ -34,17 +36,24 @@ public class TurnDrawable extends Drawable {
 	private final boolean mini;
 	private final PointF centerText;
 	private TextPaint textPaint;
+	private Boolean nightMode;
 	private int clr;
 
 	public TurnDrawable(Context ctx, boolean mini) {
 		this.ctx = ctx;
 		this.mini = mini;
 		centerText = new PointF();
-		paintBlack = new Paint();
-		paintBlack.setStyle(Paint.Style.STROKE);
-		paintBlack.setColor(Color.BLACK);
-		paintBlack.setAntiAlias(true);
-		paintBlack.setStrokeWidth(2.5f);
+		paintTurnOutlayStroke = new Paint();
+		paintTurnOutlayStroke.setStyle(Paint.Style.STROKE);
+		paintTurnOutlayStroke.setColor(Color.BLACK);
+		paintTurnOutlayStroke.setAntiAlias(true);
+		paintTurnOutlayStroke.setStrokeWidth(2.5f);
+
+		int fillColor = AndroidUtils.getColorFromAttr(ctx, R.attr.nav_arrow_circle_color);
+		paintTurnOutlayFill = new Paint();
+		paintTurnOutlayFill.setStyle(Paint.Style.FILL);
+		paintTurnOutlayFill.setColor(fillColor);
+		paintTurnOutlayFill.setAntiAlias(true);
 
 		paintRouteDirection = new Paint();
 		paintRouteDirection.setStyle(Paint.Style.FILL);
@@ -104,9 +113,10 @@ public class TurnDrawable extends Drawable {
 	public void draw(@NonNull Canvas canvas) {
 		/// small indent
 		// canvas.translate(0, 3 * scaleCoefficient);
-		canvas.drawPath(pathForTurnOutlay, paintBlack);
+		canvas.drawPath(pathForTurnOutlay, paintTurnOutlayFill);
+		canvas.drawPath(pathForTurnOutlay, paintTurnOutlayStroke);
 		canvas.drawPath(pathForTurn, paintRouteDirection);
-		canvas.drawPath(pathForTurn, paintBlack);
+		canvas.drawPath(pathForTurn, paintTurnOutlayStroke);
 		if (textPaint != null) {
 			if (turnType != null && !mini && turnType.getExitOut() > 0) {
 				canvas.drawText(turnType.getExitOut() + "", centerText.x,
@@ -118,6 +128,16 @@ public class TurnDrawable extends Drawable {
 	public void setTextPaint(@NonNull TextPaint textPaint) {
 		this.textPaint = textPaint;
 		this.textPaint.setTextAlign(Paint.Align.CENTER);
+	}
+
+	public void updateNightMode(boolean nightMode) {
+		if (this.nightMode == null || this.nightMode != nightMode) {
+			this.nightMode = nightMode;
+			int fillColor = ctx.getColor(nightMode
+					? R.color.nav_arrow_circle_color_dark
+					: R.color.nav_arrow_circle_color_light);
+			paintTurnOutlayFill.setColor(fillColor);
+		}
 	}
 
 	@Override

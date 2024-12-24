@@ -182,6 +182,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			boolean vis = updateVisibility(turnType != null);
 			if (turnDrawable.setTurnType(turnType) || vis) {
 				turnDrawable.setTextPaint(textPaint);
+				turnDrawable.updateNightMode(isNightMode());
 				if (horizontalMini) {
 					setImageDrawable(turnDrawable, false);
 				} else {
@@ -350,6 +351,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			textPaint.set(topTextView.getPaint());
 			textPaint.setColor(textState.textColor);
 			turnDrawable.setTextPaint(textPaint);
+			turnDrawable.updateNightMode(isNightMode());
 			turnDrawable.invalidateSelf();
 		}
 	}
