@@ -64,6 +64,16 @@
 
 			</LinearLayout>
 
+			<include layout="@layout/list_item_divider" />
+
+			<LinearLayout
+				android:id="@+id/legend_container"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+
+			</LinearLayout>
+
 			<include
 				android:id="@+id/bottom_divider"
 				layout="@layout/card_bottom_divider" />
