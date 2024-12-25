@@ -6035,4 +6035,7 @@
     <string name="obd_fuel_type_hydrogen">Hidrogen</string>
     <string name="obd_fuel_type_hybrid_ethanol">Etanol hibrid</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Trasee pentru biciclete Dirt</string>
+    <string name="unit_volt">V</string>
+    <string name="obd_vin_desc">Codul VIN peste OBD</string>
+    <string name="obd_vin">VIN</string>
 </resources>
