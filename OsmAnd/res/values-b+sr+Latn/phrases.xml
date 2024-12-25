@@ -4943,4 +4943,24 @@
     <string name="poi_route_activity_type_parachuting_skydiving">Padobranstvo (Skakanje padobranom)</string>
     <string name="poi_route_activity_type_powered_paragliding_paramotoring">Motorni paraglajding (Paramotoring)</string>
     <string name="poi_route_activity_type_paragliding">Paraglajding</string>
+    <string name="poi_route_activity_type_ultralight_aviation">Ultralaka Avijacija</string>
+    <string name="poi_route_activity_type_canoe">Kanu</string>
+    <string name="poi_route_activity_type_diving">Ronjenje</string>
+    <string name="poi_route_activity_type_scuba_diving">Ronjenje sa opremom</string>
+    <string name="poi_route_activity_type_kayak">Kajak</string>
+    <string name="poi_route_activity_type_surfing">Surfovanje</string>
+    <string name="poi_route_activity_type_swimming_outdoor">Plivanje na otvorenom</string>
+    <string name="poi_route_activity_type_waterskiing">Skijanje na vodi</string>
+    <string name="poi_route_activity_type_windsurfing">Jedrilični surfing</string>
+    <string name="poi_route_activity_type_motorboat">Motorni čamac</string>
+    <string name="poi_route_activity_type_horse_riding">Jahanje konjima</string>
+    <string name="poi_route_activity_type_mushrooms_picking">Branje gljiva</string>
+    <string name="poi_route_activity_type_harvesting">Žetva</string>
+    <string name="poi_route_activity_type_tree_climbing">Penjanje na drveće</string>
+    <string name="poi_route_activity_type_caving">Pećinarenje</string>
+    <string name="poi_route_activity_type_train_riding">Vožnja vozom</string>
+    <string name="poi_route_activity_type_golfing">Igranje golfa</string>
+    <string name="poi_route_activity_type_fitness">Fitnes</string>
+    <string name="poi_route_activity_type_inline_skates">Koturaljke</string>
+    <string name="poi_route_activity_type_rafting">Splavarenje</string>
 </resources>
