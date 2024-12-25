@@ -230,7 +230,7 @@
     <string name="search_position_map_view">Stred mapy teraz</string>
     <string name="select_search_position">Východzí bod:</string>
     <string name="context_menu_item_search">Hľadať v okolí</string>
-    <string name="route_successfully_saved_at">Trasa uložená ako \"%1$s\".</string>
+    <string name="route_successfully_saved_at">Trasa uložená ako \'%1$s\'.</string>
     <string name="filename_input">Názov súboru:</string>
     <string name="file_with_name_already_exist">Súbor s takýmto názvom už existuje.</string>
     <string name="local_index_upload_gpx_description">Odošlite GPX súbory do OSM komunity na vylepšenie máp.</string>
@@ -3297,10 +3297,10 @@
     <string name="app_mode_ski_snowmobile">Snežný skúter</string>
     <string name="custom_osmand_plugin">Vlastný modul pre OsmAnd</string>
     <string name="replace_point_descr">Nahradiť iný bod týmto.</string>
-    <string name="changes_applied_to_profile">Zmeny boli použité na profil \"%1$s\".</string>
-    <string name="settings_item_read_error">Nepodarilo sa prečítať z \"%1$s\".</string>
-    <string name="settings_item_write_error">Nepodarilo sa zapísať do \"%1$s\".</string>
-    <string name="settings_item_import_error">Nepodarilo sa importovať z \"%1$s\".</string>
+    <string name="changes_applied_to_profile">Zmeny boli použité na profil \'%1$s\'.</string>
+    <string name="settings_item_read_error">Nepodarilo sa prečítať z \'%1$s\'.</string>
+    <string name="settings_item_write_error">Nepodarilo sa zapísať do \'%1$s\'.</string>
+    <string name="settings_item_import_error">Nepodarilo sa importovať z \'%1$s\'.</string>
     <string name="select_track_file">Zvoľte súbor stopy</string>
     <string name="shared_string_languages">Jazyky</string>
     <string name="shared_string_language">Jazyk</string>
@@ -5681,4 +5681,7 @@
     <string name="obd_fuel_type_bifuel_hydrogen">Hybridný na vodík</string>
     <string name="obd_fuel_type_hybrid_hydrogen">Hybridný vodíkový</string>
     <string name="obd_fuel_type_bifuel_electricity">Hybridný motor na elektrinu</string>
+    <string name="default_buttons_size_original_description">Každé tlačidlo si zachová vlastnú veľkosť.</string>
+    <string name="default_buttons_opacity_original_description">Každé tlačidlo si zachová vlastnú priehľadnosť pozadia.</string>
+    <string name="default_buttons_corners_original_description">Každé tlačidlo si zachová vlastné zaoblenie rohov.</string>
 </resources>
