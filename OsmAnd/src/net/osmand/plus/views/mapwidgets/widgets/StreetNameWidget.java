@@ -112,7 +112,7 @@ public class StreetNameWidget extends MapWidget {
 		boolean showClosestWaypointFirstInAddress = params.showClosestWaypointFirstInAddress;
 
 		if (turnArrowColorId != 0) {
-			turnDrawable.setColor(turnArrowColorId);
+			turnDrawable.setRouteDirectionColor(turnArrowColorId);
 		}
 
 		boolean hideStreetName = MapRouteInfoMenu.chooseRoutesVisible

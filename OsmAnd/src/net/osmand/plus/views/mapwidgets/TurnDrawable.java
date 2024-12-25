@@ -5,14 +5,16 @@ import android.graphics.*;
 import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
 
+import androidx.annotation.AttrRes;
+import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.TurnPathHelper;
 import net.osmand.router.TurnType;
 
@@ -37,7 +39,7 @@ public class TurnDrawable extends Drawable {
 	private final PointF centerText;
 	private TextPaint textPaint;
 	private Boolean nightMode;
-	private int clr;
+	private int routeDirectionColorId;
 
 	public TurnDrawable(Context ctx, boolean mini) {
 		this.ctx = ctx;
@@ -45,26 +47,25 @@ public class TurnDrawable extends Drawable {
 		centerText = new PointF();
 		paintTurnOutlayStroke = new Paint();
 		paintTurnOutlayStroke.setStyle(Paint.Style.STROKE);
-		paintTurnOutlayStroke.setColor(Color.BLACK);
+		paintTurnOutlayStroke.setColor(getColor(R.color.nav_arrow_stroke_color));
 		paintTurnOutlayStroke.setAntiAlias(true);
 		paintTurnOutlayStroke.setStrokeWidth(2.5f);
 
-		int fillColor = AndroidUtils.getColorFromAttr(ctx, R.attr.nav_arrow_circle_color);
 		paintTurnOutlayFill = new Paint();
 		paintTurnOutlayFill.setStyle(Paint.Style.FILL);
-		paintTurnOutlayFill.setColor(fillColor);
+		paintTurnOutlayFill.setColor(getColorFromAttr(R.attr.nav_arrow_circle_color));
 		paintTurnOutlayFill.setAntiAlias(true);
 
 		paintRouteDirection = new Paint();
 		paintRouteDirection.setStyle(Paint.Style.FILL);
 		paintRouteDirection.setAntiAlias(true);
-		setColor(R.color.nav_arrow);
+		setRouteDirectionColor(R.color.nav_arrow);
 	}
 
-	public void setColor(@ColorRes int clr) {
-		if (clr != this.clr) {
-			this.clr = clr;
-			paintRouteDirection.setColor(ContextCompat.getColor(ctx, clr));
+	public void setRouteDirectionColor(@ColorRes int routeDirectionColorId) {
+		if (routeDirectionColorId != this.routeDirectionColorId) {
+			this.routeDirectionColorId = routeDirectionColorId;
+			paintRouteDirection.setColor(getColor(routeDirectionColorId));
 		}
 	}
 
@@ -98,13 +99,13 @@ public class TurnDrawable extends Drawable {
 		this.turnImminent = turnImminent;
 		this.deviatedFromRoute = deviatedFromRoute;
 		if (deviatedFromRoute) {
-			paintRouteDirection.setColor(ctx.getColor(R.color.nav_arrow_distant));
+			paintRouteDirection.setColor(getColor(R.color.nav_arrow_distant));
 		} else if (turnImminent > 0) {
-			paintRouteDirection.setColor(ctx.getColor(R.color.nav_arrow));
+			paintRouteDirection.setColor(getColor(R.color.nav_arrow));
 		} else if (turnImminent == 0) {
-			paintRouteDirection.setColor(ctx.getColor(R.color.nav_arrow_imminent));
+			paintRouteDirection.setColor(getColor(R.color.nav_arrow_imminent));
 		} else {
-			paintRouteDirection.setColor(ctx.getColor(R.color.nav_arrow_distant));
+			paintRouteDirection.setColor(getColor(R.color.nav_arrow_distant));
 		}
 		invalidateSelf();
 	}
@@ -125,19 +126,34 @@ public class TurnDrawable extends Drawable {
 		}
 	}
 
-	public void setTextPaint(@NonNull TextPaint textPaint) {
+	public void updateColors(@NonNull TextPaint textPaint, boolean nightMode) {
 		this.textPaint = textPaint;
 		this.textPaint.setTextAlign(Paint.Align.CENTER);
-	}
+		this.textPaint.setColor(ColorUtilities.getPrimaryTextColor(ctx, nightMode));
 
-	public void updateNightMode(boolean nightMode) {
 		if (this.nightMode == null || this.nightMode != nightMode) {
 			this.nightMode = nightMode;
-			int fillColor = ctx.getColor(nightMode
+			int outlayFillColor = ctx.getColor(nightMode
 					? R.color.nav_arrow_circle_color_dark
 					: R.color.nav_arrow_circle_color_light);
-			paintTurnOutlayFill.setColor(fillColor);
+			paintTurnOutlayFill.setColor(outlayFillColor);
 		}
+	}
+
+	@Nullable
+	public TurnType getTurnType() {
+		return turnType;
+	}
+
+	public boolean setTurnType(@Nullable TurnType turnType) {
+		if (turnType != this.turnType && !getBounds().isEmpty()) {
+			this.turnType = turnType;
+			TurnPathHelper.calcTurnPath(originalPathForTurn, originalPathForTurnOutlay, turnType, null,
+					centerText, mini, false, true, false);
+			onBoundsChange(getBounds());
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -155,19 +171,13 @@ public class TurnDrawable extends Drawable {
 		return 0;
 	}
 
-	@Nullable
-	public TurnType getTurnType() {
-		return turnType;
+	@ColorInt
+	private int getColor(@ColorRes int colorId) {
+		return ColorUtilities.getColor(ctx, colorId);
 	}
 
-	public boolean setTurnType(@Nullable TurnType turnType) {
-		if (turnType != this.turnType && !getBounds().isEmpty()) {
-			this.turnType = turnType;
-			TurnPathHelper.calcTurnPath(originalPathForTurn, originalPathForTurnOutlay, turnType, null,
-					centerText, mini, false, true, false);
-			onBoundsChange(getBounds());
-			return true;
-		}
-		return false;
+	@ColorInt
+	private int getColorFromAttr(@AttrRes int attrId) {
+		return AndroidUtils.getColorFromAttr(ctx, attrId);
 	}
 }
