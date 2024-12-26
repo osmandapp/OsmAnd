@@ -512,16 +512,6 @@
 					android:layout_height="wrap_content"
 					android:orientation="vertical"
 					tools:background="?attr/activity_background_color">
-
-					<androidx.appcompat.widget.AppCompatImageView
-						android:id="@+id/main_image"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:adjustViewBounds="true"
-						android:visibility="gone"
-						tools:src="@drawable/img_help_announcement_time_day"
-						tools:visibility="visible" />
-
 				</LinearLayout>
 
 			</net.osmand.plus.LockableScrollView>

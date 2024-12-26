@@ -39,13 +39,19 @@ public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 	}
 
 	@Override
+	protected void buildMainImage(View view) {
+		if (mainImageUrl != null) {
+			AppCompatImageView imageView = inflateAndGetMainImageView(view);
+			PicassoUtils.setupImageViewByUrl(app, imageView, mainImageUrl, true);
+		}
+	}
+
+	@Override
 	protected void buildDescription(View view) {
 		String desc = descTokens.get(KEY_DESCRIPTION);
 		if (!Algorithms.isEmpty(desc)) {
 			buildDescriptionRow(view, desc);
 		}
-		AppCompatImageView imageView = view.findViewById(R.id.main_image);
-		PicassoUtils.setupImageViewByUrl(app, imageView, mainImageUrl, true);
 	}
 
 	@Override

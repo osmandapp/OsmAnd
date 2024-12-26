@@ -56,7 +56,7 @@ public class DescriptionCard extends MapBaseCard {
 		String descriptionHtml = gpxFile.getMetadata().getDescription();
 
 		AppCompatImageView imageView = view.findViewById(R.id.main_image);
-		PicassoUtils.setupImageViewByUrl(app, imageView, imageUrl, false);
+		PicassoUtils.setupImageViewByUrl(app, imageView, imageUrl, true);
 
 		if (Algorithms.isBlank(descriptionHtml)) {
 			showAddBtn();

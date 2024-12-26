@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.StatFs;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.squareup.picasso.Callback;
@@ -121,7 +122,7 @@ public class PicassoUtils {
 		return Math.max(Math.min(size, MAX_DISK_CACHE_SIZE), MIN_DISK_CACHE_SIZE);
 	}
 
-	public static boolean isImageUrl(String url) {
+	public static boolean isImageUrl(@Nullable String url) {
 		if (!Algorithms.isEmpty(url)) {
 			String lowerCaseUrl = url.toLowerCase();
 			if (lowerCaseUrl.contains(".jpg")
@@ -135,9 +136,9 @@ public class PicassoUtils {
 		return false;
 	}
 
-	public static void setupImageViewByUrl(OsmandApplication app, AppCompatImageView imageView,
-										   String imageUrl, boolean useWikivoyageNetworkPolicy) {
-		if (app == null || imageView == null || imageUrl == null || !isImageUrl(imageUrl)) {
+	public static void setupImageViewByUrl(@NonNull OsmandApplication app, @Nullable AppCompatImageView imageView,
+	                                       @Nullable String imageUrl, boolean useWikivoyageNetworkPolicy) {
+		if (imageView == null || imageUrl == null || !isImageUrl(imageUrl)) {
 			LOG.error("Invalid setupImageByUrl() call");
 			return;
 		}

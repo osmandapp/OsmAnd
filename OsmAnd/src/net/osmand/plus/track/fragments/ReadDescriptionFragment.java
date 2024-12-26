@@ -66,7 +66,7 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 		View view = themedInflater.inflate(R.layout.dialog_read_description, container, false);
 		setupToolbar(view);
 		AppCompatImageView imageView = view.findViewById(R.id.main_image);
-		PicassoUtils.setupImageViewByUrl(app, imageView, getImageUrl(), false);
+		PicassoUtils.setupImageViewByUrl(app, imageView, getImageUrl(), true);
 		setupContentView(view);
 		return view;
 	}

@@ -84,15 +84,15 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			additionalInfo.putAll(gson.fromJson(wptExtraTags, type));
 			additionalInfo.remove(WPT_EXTRA_TAGS);
 		}
+		final String url = additionalInfo.get(TAG_URL);
+		if (PicassoUtils.isImageUrl(url)) {
+			AppCompatImageView imageView = inflateAndGetMainImageView(view);
+			PicassoUtils.setupImageViewByUrl(app, imageView, url, true);
+		}
 		final String description = additionalInfo.get(Amenity.DESCRIPTION);
 		if (!Algorithms.isEmpty(description)) {
 			buildDescriptionRow(view, description);
 			additionalInfo.remove(Amenity.DESCRIPTION);
-		}
-		final String url = additionalInfo.get(TAG_URL);
-		if (!Algorithms.isEmpty(url) && PicassoUtils.isImageUrl(url)) {
-			AppCompatImageView imageView = view.findViewById(R.id.main_image);
-			PicassoUtils.setupImageViewByUrl(app, imageView, url, true);
 		}
 	}
 
