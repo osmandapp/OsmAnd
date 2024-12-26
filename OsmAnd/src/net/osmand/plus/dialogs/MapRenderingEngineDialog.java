@@ -9,10 +9,12 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
@@ -20,12 +22,16 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.widgets.TextViewEx;
 
-public class MapRenderingEngineDialog extends DialogFragment {
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class MapRenderingEngineDialog extends DialogFragment implements SearchablePreferenceDialog {
 	private final OsmandApplication app;
 	private final FragmentActivity fragmentActivity;
 	@Nullable
@@ -55,9 +61,9 @@ public class MapRenderingEngineDialog extends DialogFragment {
 		builder.setView(alertDialogView);
 
 		View legacyRenderingView = alertDialogView.findViewById(R.id.legacy_rendering);
-		radioButtonLegacy = setupRadioItem(legacyRenderingView, app.getResources().getString(R.string.map_rendering_engine_v1));
+		radioButtonLegacy = setupRadioItem(legacyRenderingView, app.getString(getMapRenderingEngineV1()));
 		View openglRenderingView = alertDialogView.findViewById(R.id.opengl_rendering);
-		radioButtonOpengl = setupRadioItem(openglRenderingView, app.getResources().getString(R.string.map_rendering_engine_v2));
+		radioButtonOpengl = setupRadioItem(openglRenderingView, app.getString(getMapRenderingEngineV2()));
 		updateRadioButtons(app.getSettings().USE_OPENGL_RENDER.get());
 		radioButtonOpengl.setEnabled(Version.isOpenGlAvailable(app));
 		openglRenderingView.findViewById(R.id.button).setEnabled(Version.isOpenGlAvailable(app));
@@ -72,6 +78,14 @@ public class MapRenderingEngineDialog extends DialogFragment {
 			dismiss();
 		});
 		return builder.create();
+	}
+
+	private static @StringRes int getMapRenderingEngineV1() {
+		return R.string.map_rendering_engine_v1;
+	}
+
+	private static @StringRes int getMapRenderingEngineV2() {
+		return R.string.map_rendering_engine_v2;
 	}
 
 	private AppCompatRadioButton setupRadioItem(View view, String name) {
@@ -139,6 +153,22 @@ public class MapRenderingEngineDialog extends DialogFragment {
 	private void updateRadioButtons(boolean openglEnabled) {
 		radioButtonLegacy.setChecked(!openglEnabled);
 		radioButtonOpengl.setChecked(openglEnabled);
+	}
+
+	@Override
+	public void show(final FragmentManager fragmentManager, final OsmandApplication app) {
+		show(fragmentManager, (String) null);
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		return Stream
+				.of(
+						R.string.map_rendering_engine_descr,
+						getMapRenderingEngineV1(),
+						getMapRenderingEngineV2())
+				.map(app::getString)
+				.collect(Collectors.joining(", "));
 	}
 
 	public interface OnRenderChangeListener {

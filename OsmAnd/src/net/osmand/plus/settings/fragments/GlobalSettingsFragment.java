@@ -87,6 +87,9 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		if (isSelectDefaultProfile(preference)) {
 			return Optional.of(createSelectDefaultProfilePreferenceDialog(target));
 		}
+		if (isMapRenderingEngine(preference)) {
+			return Optional.of(createMapRenderingEngineDialog());
+		}
 		return Optional.empty();
 	}
 
@@ -119,6 +122,24 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 			@Override
 			protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
 				searchablePreferenceDialog.show(requireActivity().getSupportFragmentManager(), app);
+			}
+		};
+	}
+
+	private static boolean isMapRenderingEngine(final Preference preference) {
+		return MAP_RENDERING_ENGINE_ID.equals(preference.getKey());
+	}
+
+	private ShowableSearchablePreferenceDialog<MapRenderingEngineDialog> createMapRenderingEngineDialog() {
+		return new ShowableSearchablePreferenceDialog<>(
+				new MapRenderingEngineDialog(
+						app,
+						getActivity(),
+						this::setupMapRenderingEnginePref)) {
+
+			@Override
+			protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+				searchablePreferenceDialog.show(getParentFragmentManager(), app);
 			}
 		};
 	}
@@ -226,23 +247,22 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 			this
 					.createSelectDefaultProfilePreferenceDialog(Optional.of(this))
 					.show();
+			return true;
 		} else if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(prefId) && !settings.SPEED_CAMERAS_UNINSTALLED.get()) {
 			FragmentManager manager = getFragmentManager();
 			if (manager != null) {
 				SpeedCamerasBottomSheet.showInstance(manager, this);
+				return true;
 			}
 		} else if (settings.LOCATION_SOURCE.getId().equals(prefId)) {
 			FragmentManager manager = getFragmentManager();
 			if (manager != null) {
 				LocationSourceBottomSheet.showInstance(manager, this);
+				return true;
 			}
-		} else if (MAP_RENDERING_ENGINE_ID.equals(prefId)) {
-			final MapRenderingEngineDialog mapRenderingEngineDialog =
-					new MapRenderingEngineDialog(
-							app,
-							getActivity(),
-							this::setupMapRenderingEnginePref);
-			mapRenderingEngineDialog.show(getParentFragmentManager(), null);
+		} else if (isMapRenderingEngine(preference)) {
+			createMapRenderingEngineDialog().show();
+			return true;
 		}
 
 		return super.onPreferenceClick(preference);
