@@ -6038,4 +6038,9 @@
     <string name="unit_volt">V</string>
     <string name="obd_vin_desc">Codul VIN peste OBD</string>
     <string name="obd_vin">VIN</string>
+    <string name="rpm_unit">rpm</string>
+    <string name="shared_string_obd">OBD</string>
+    <string name="vehicle_metrics_plugin_settings">Setări pentru parametrii vehiculului</string>
+    <string name="percent_unit">%</string>
+    <string name="obd_widget_group">Parametrii vehiculului</string>
 </resources>
