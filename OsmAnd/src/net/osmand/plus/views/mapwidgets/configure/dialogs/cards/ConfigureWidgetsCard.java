@@ -14,6 +14,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
@@ -132,5 +133,23 @@ public class ConfigureWidgetsCard extends MapBaseCard {
 		int color = appMode.getProfileColor(nightMode);
 		Drawable background = UiUtilities.getColoredSelectableDrawable(app, color, 0.3f);
 		AndroidUtils.setBackground(button, background);
+	}
+
+	public String getSearchableInfo() {
+		return String.join(
+				", ",
+				getString(R.string.shared_string_widgets),
+				getTitle(R.id.left_panel),
+				getTitle(R.id.right_panel),
+				getTitle(R.id.top_panel),
+				getTitle(R.id.bottom_panel),
+				getTitle(R.id.transparent_widgets_button));
+	}
+
+	private CharSequence getTitle(final @IdRes int id) {
+		return view
+				.findViewById(id)
+				.<TextView>findViewById(R.id.title)
+				.getText();
 	}
 }

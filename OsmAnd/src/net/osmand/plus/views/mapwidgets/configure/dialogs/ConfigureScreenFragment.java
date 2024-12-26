@@ -395,7 +395,13 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 
 	@Override
 	public String getSearchableInfo() {
-		// FK-TODO: add more strings
-		return getString(R.string.configure_screen_widgets_descr);
+		// FK-TODO: add more searchable info
+		return String.join(
+				", ",
+				getString(R.string.configure_screen_widgets_descr),
+				widgetsCard.getSearchableInfo(),
+				buttonsCard.getSearchableInfo(),
+				otherCard.getSearchableInfo(),
+				actionsCard.getSearchableInfo());
 	}
 }
