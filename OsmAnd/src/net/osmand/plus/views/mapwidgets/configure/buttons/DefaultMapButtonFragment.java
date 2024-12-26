@@ -147,7 +147,6 @@ public class DefaultMapButtonFragment extends BaseOsmAndFragment implements Copy
 				.setOnClickListener(v -> {
 					FragmentActivity activity = getActivity();
 					if (activity != null) {
-						// FK-TODO: make searchable
 						SelectCopyAppModeBottomSheet
 								.createInstance(this, settings.getApplicationMode())
 								.show(activity.getSupportFragmentManager(), app);

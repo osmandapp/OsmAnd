@@ -225,7 +225,6 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 	private void copyFromProfile() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			// FK-TODO: make searchable?
 			SelectCopyAppModeBottomSheet
 					.createInstance(this, selectedAppMode)
 					.show(activity.getSupportFragmentManager(), app);

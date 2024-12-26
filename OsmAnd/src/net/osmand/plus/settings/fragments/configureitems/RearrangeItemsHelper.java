@@ -342,7 +342,6 @@ public class RearrangeItemsHelper implements CopyAppModePrefsListener {
 	public void showCopyAppModeDialog() {
 		FragmentManager manager = fragment.getFragmentManager();
 		if (manager != null) {
-			// FK-TODO: make searchable?
 			SelectCopyAppModeBottomSheet
 					.createInstance(fragment, appMode)
 					.show(manager, app);

@@ -86,7 +86,6 @@ public class DefaultMapButtonsFragment extends BaseMapButtonsFragment implements
 				.setOnClickListener(v -> {
 					FragmentActivity activity = getActivity();
 					if (activity != null) {
-						// FK-TODO: make searchable
 						SelectCopyAppModeBottomSheet
 								.createInstance(this, settings.getApplicationMode())
 								.show(activity.getSupportFragmentManager(), app);
