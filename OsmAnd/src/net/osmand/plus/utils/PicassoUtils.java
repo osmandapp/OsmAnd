@@ -17,6 +17,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -143,6 +144,7 @@ public class PicassoUtils {
 		}
 		PicassoUtils picasso = PicassoUtils.getPicasso(app);
 		RequestCreator rc = Picasso.get().load(imageUrl);
+		WikivoyageUtils.setupNetworkPolicy(app.getSettings(), rc);
 		AppCompatImageView image = view.findViewById(R.id.main_image);
 		rc.into(image, new Callback() {
 			@Override
