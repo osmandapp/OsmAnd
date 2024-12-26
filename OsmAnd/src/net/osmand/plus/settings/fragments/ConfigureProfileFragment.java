@@ -442,6 +442,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	@Override
 	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Optional<Fragment> target) {
 		if (RESET_TO_DEFAULT.equals(preference.getKey())) {
+			// FK-TODO: DRY with other usages of RESET_TO_DEFAULT
 			return Optional.of(
 					new ShowableSearchablePreferenceDialog<>(
 							ResetProfilePrefsBottomSheet.createInstance(
@@ -455,6 +456,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 					});
 		}
 		if (COPY_PROFILE_SETTINGS.equals(preference.getKey())) {
+			// FK-TODO: DRY with other usages of COPY_PROFILE_SETTINGS and COPY_PLUGIN_SETTINGS
 			return Optional.of(
 					new ShowableSearchablePreferenceDialog<>(
 							SelectCopyAppModeBottomSheet.createInstance(

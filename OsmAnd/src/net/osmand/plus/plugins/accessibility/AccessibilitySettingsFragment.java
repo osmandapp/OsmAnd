@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
@@ -261,15 +260,6 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 		if (showDialogForPreference(preference, this)) {
 			return true;
 		}
-		if (COPY_PLUGIN_SETTINGS.equals(preference.getKey())) {
-			final FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				// FK-TODO: make searchable
-				SelectCopyAppModeBottomSheet
-						.createInstance(this, getSelectedAppMode())
-						.show(fragmentManager, app);
-			}
-		}
 		return super.onPreferenceClick(preference);
 	}
 
@@ -281,6 +271,19 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 							ResetProfilePrefsBottomSheet.createInstance(
 									getSelectedAppMode(),
 									target)) {
+
+						@Override
+						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+							searchablePreferenceDialog.show(getFragmentManager(), app);
+						}
+					});
+		}
+		if (COPY_PLUGIN_SETTINGS.equals(preference.getKey())) {
+			return Optional.of(
+					new ShowableSearchablePreferenceDialog<>(
+							SelectCopyAppModeBottomSheet.createInstance(
+									target.orElse(null),
+									getSelectedAppMode())) {
 
 						@Override
 						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {

@@ -95,6 +95,11 @@ public class SettingsSearchTest extends AndroidTest {
 	}
 
 	@Test
+	public void shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_AccessibilityPlugin() {
+		shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_Plugin(AccessibilityPlugin.class);
+	}
+
+	@Test
 	public void shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_AccessibilityPlugin() {
 		shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_Plugin(AccessibilityPlugin.class);
 	}
@@ -192,6 +197,24 @@ public class SettingsSearchTest extends AndroidTest {
 
 		// Then
 		final String pathExpected = String.format("Path: Driving > %s > Reset plugin settings to default", plugin.getName());
+		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(pathExpected)));
+	}
+
+	private void shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_Plugin(final Class<? extends OsmandPlugin> pluginClass) {
+		// Given
+		final OsmandPlugin plugin = getPlugin(pluginClass);
+		enablePlugin(plugin, app);
+		clickSearchButton(app);
+
+		// When
+		onView(searchView()).perform(replaceText(ApplicationMode.PEDESTRIAN.toHumanString()), closeSoftKeyboard());
+
+		// Then
+		final String pathExpected =
+				String.format(
+						"Path: Driving > %s > %s",
+						plugin.getName(),
+						app.getString(R.string.copy_from_other_profile));
 		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(pathExpected)));
 	}
 }
