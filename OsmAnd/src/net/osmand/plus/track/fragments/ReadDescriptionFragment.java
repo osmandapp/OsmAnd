@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -64,7 +65,8 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 		updateNightMode();
 		View view = themedInflater.inflate(R.layout.dialog_read_description, container, false);
 		setupToolbar(view);
-		PicassoUtils.setupMainImageByUrl(app, view, getImageUrl());
+		AppCompatImageView imageView = view.findViewById(R.id.main_image);
+		PicassoUtils.setupImageViewByUrl(app, imageView, getImageUrl(), false);
 		setupContentView(view);
 		return view;
 	}

@@ -2,7 +2,6 @@ package net.osmand.plus.utils;
 
 import android.content.Context;
 import android.os.StatFs;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -15,7 +14,6 @@ import com.squareup.picasso.RequestCreator;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.util.Algorithms;
@@ -137,20 +135,22 @@ public class PicassoUtils {
 		return false;
 	}
 
-	public static void setupMainImageByUrl(OsmandApplication app, View view, String imageUrl) {
-		if (app == null || view == null || imageUrl == null || !isImageUrl(imageUrl)) {
-			LOG.error("Invalid setupMainImageByUrl() call");
+	public static void setupImageViewByUrl(OsmandApplication app, AppCompatImageView imageView,
+										   String imageUrl, boolean useWikivoyageNetworkPolicy) {
+		if (app == null || imageView == null || imageUrl == null || !isImageUrl(imageUrl)) {
+			LOG.error("Invalid setupImageByUrl() call");
 			return;
 		}
 		PicassoUtils picasso = PicassoUtils.getPicasso(app);
 		RequestCreator rc = Picasso.get().load(imageUrl);
-		WikivoyageUtils.setupNetworkPolicy(app.getSettings(), rc);
-		AppCompatImageView image = view.findViewById(R.id.main_image);
-		rc.into(image, new Callback() {
+		if (useWikivoyageNetworkPolicy) {
+			WikivoyageUtils.setupNetworkPolicy(app.getSettings(), rc);
+		}
+		rc.into(imageView, new Callback() {
 			@Override
 			public void onSuccess() {
 				picasso.setResultLoaded(imageUrl, true);
-				AndroidUiHelper.updateVisibility(image, true);
+				AndroidUiHelper.updateVisibility(imageView, true);
 			}
 			@Override
 			public void onError(Exception e) {

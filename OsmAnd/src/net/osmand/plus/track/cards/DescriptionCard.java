@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.shared.gpx.GpxFile;
@@ -54,7 +55,8 @@ public class DescriptionCard extends MapBaseCard {
 		String imageUrl = getMetadataImageLink(gpxFile.getMetadata());
 		String descriptionHtml = gpxFile.getMetadata().getDescription();
 
-		PicassoUtils.setupMainImageByUrl(app, view, imageUrl);
+		AppCompatImageView imageView = view.findViewById(R.id.main_image);
+		PicassoUtils.setupImageViewByUrl(app, imageView, imageUrl, false);
 
 		if (Algorithms.isBlank(descriptionHtml)) {
 			showAddBtn();

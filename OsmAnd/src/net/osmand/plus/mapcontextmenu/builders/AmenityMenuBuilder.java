@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -89,8 +90,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			additionalInfo.remove(Amenity.DESCRIPTION);
 		}
 		final String url = additionalInfo.get(TAG_URL);
-		if (!Algorithms.isEmpty(url)) {
-			PicassoUtils.setupMainImageByUrl(app, view, url);
+		if (!Algorithms.isEmpty(url) && PicassoUtils.isImageUrl(url)) {
+			AppCompatImageView imageView = view.findViewById(R.id.main_image);
+			PicassoUtils.setupImageViewByUrl(app, imageView, url, true);
 		}
 	}
 

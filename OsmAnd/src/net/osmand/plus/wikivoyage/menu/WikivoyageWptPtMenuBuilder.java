@@ -3,6 +3,7 @@ package net.osmand.plus.wikivoyage.menu;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
 
 import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -43,7 +44,8 @@ public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 		if (!Algorithms.isEmpty(desc)) {
 			buildDescriptionRow(view, desc);
 		}
-		PicassoUtils.setupMainImageByUrl(app, view, mainImageUrl);
+		AppCompatImageView imageView = view.findViewById(R.id.main_image);
+		PicassoUtils.setupImageViewByUrl(app, imageView, mainImageUrl, true);
 	}
 
 	@Override
