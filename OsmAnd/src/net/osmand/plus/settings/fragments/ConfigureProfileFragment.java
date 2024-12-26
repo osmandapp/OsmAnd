@@ -444,7 +444,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			return Optional.of(createResetProfilePrefsBottomSheet(target, this));
 		}
 		if (COPY_PROFILE_SETTINGS.equals(preference.getKey())) {
-			// FK-TODO: DRY with other usages of COPY_PROFILE_SETTINGS and COPY_PLUGIN_SETTINGS
 			return Optional.of(createSelectCopyAppModeBottomSheet(target, this));
 		}
 		return Optional.empty();
