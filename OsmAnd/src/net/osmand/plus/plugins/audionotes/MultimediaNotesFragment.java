@@ -15,6 +15,7 @@ import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.NOTES_TAB
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.cameraPictureSizeDefault;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.canDisableShutterSound;
 import static net.osmand.plus.settings.fragments.ResetProfilePrefsBottomSheetFactory.createResetProfilePrefsBottomSheet;
+import static net.osmand.plus.settings.fragments.SelectCopyAppModeBottomSheetFactory.createSelectCopyAppModeBottomSheet;
 import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 
 import android.Manifest;
@@ -36,7 +37,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
@@ -45,7 +45,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
@@ -498,14 +497,6 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 			favorites.putExtra(MapActivity.INTENT_PARAMS, bundle);
 			startActivity(favorites);
 			return true;
-		} else if (COPY_PLUGIN_SETTINGS.equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				// FK-TODO: make searchable
-				SelectCopyAppModeBottomSheet
-						.createInstance(this, getSelectedAppMode())
-						.show(fragmentManager, app);
-			}
 		} else if (CAMERA_PERMISSION.equals(prefId)) {
 			requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_FOR_PHOTO_PARAMS_REQUEST_CODE);
 		} else if (EXTERNAL_RECORDER_SETTING_ID.equals(prefId)) {
@@ -528,9 +519,13 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(
 			final Preference preference,
 			final Optional<Fragment> target) {
-		return RESET_TO_DEFAULT.equals(preference.getKey()) ?
-				Optional.of(createResetProfilePrefsBottomSheet(target, this)) :
-				Optional.empty();
+		if (RESET_TO_DEFAULT.equals(preference.getKey())) {
+			return Optional.of(createResetProfilePrefsBottomSheet(target, this));
+		}
+		if (COPY_PLUGIN_SETTINGS.equals(preference.getKey())) {
+			return Optional.of(createSelectCopyAppModeBottomSheet(target, this));
+		}
+		return Optional.empty();
 	}
 
 	private void showSelectCameraAppDialog(@NonNull CommonPreference<Boolean> preference) {
