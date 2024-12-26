@@ -94,7 +94,9 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 						{"SelectDefaultProfileBottomSheet: car profile", searchQuery(ApplicationMode.CAR.toHumanString())},
 
 						{"SelectBaseProfileBottomSheet: title", searchQuery(R.string.select_base_profile_dialog_title)},
-						{"SelectBaseProfileBottomSheet: longDescription", searchQuery(R.string.select_base_profile_dialog_message)}
+						{"SelectBaseProfileBottomSheet: longDescription", searchQuery(R.string.select_base_profile_dialog_message)},
+
+						{"ConfigureScreenFragment", searchQuery(R.string.configure_screen_widgets_descr)}
 				});
 	}
 

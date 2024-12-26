@@ -52,6 +52,7 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.fragments.configureitems.ConfigureMenuRootFragment;
 import net.osmand.plus.settings.fragments.profileappearance.ProfileAppearanceFragment;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.utils.AndroidUtils;
@@ -446,7 +447,26 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		if (COPY_PROFILE_SETTINGS.equals(preference.getKey())) {
 			return Optional.of(createSelectCopyAppModeBottomSheet(target, this));
 		}
+		if (isConfigureScreen(preference)) {
+			return Optional.of(createConfigureScreenFragment());
+		}
 		return Optional.empty();
+	}
+
+	private static boolean isConfigureScreen(final Preference preference) {
+		return CONFIGURE_SCREEN.equals(preference.getKey());
+	}
+
+	private ShowableSearchablePreferenceDialog<ConfigureScreenFragment> createConfigureScreenFragment() {
+		return new ShowableSearchablePreferenceDialog<>(ConfigureScreenFragment.createInstance()) {
+
+			@Override
+			protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+				searchablePreferenceDialog.show(
+						getMapActivity().getSupportFragmentManager(),
+						app);
+			}
+		};
 	}
 
 	@Override
@@ -454,9 +474,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		final MapActivity mapActivity = getMapActivity();
 		final FragmentManager fragmentManager = getFragmentManager();
 		if (mapActivity != null && fragmentManager != null) {
-			if (showDialogForPreference(preference, this)) {
-				return true;
-			}
 			final String prefId = preference.getKey();
 			final ApplicationMode selectedMode = getSelectedAppMode();
 			if (CONFIGURE_MAP.equals(prefId)) {
@@ -465,15 +482,18 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 						.remove(this)
 						.addToBackStack(TAG)
 						.commitAllowingStateLoss();
-			} else if (CONFIGURE_SCREEN.equals(prefId)) {
+			} else if (isConfigureScreen(preference)) {
 				sepAppModeToSelected();
-				ConfigureScreenFragment.showInstance(mapActivity);
+				createConfigureScreenFragment().show();
+				return true;
 			} else if (EXPORT_PROFILE.equals(prefId)) {
 				ExportSettingsFragment.showInstance(fragmentManager, selectedMode, null, false);
 			} else if (DELETE_PROFILE.equals(prefId)) {
 				showDeleteModeConfirmation();
 			} else if (UI_CUSTOMIZATION.equals(prefId)) {
 				ConfigureMenuRootFragment.showInstance(fragmentManager, selectedMode, this);
+			} else if (showDialogForPreference(preference, this)) {
+				return true;
 			}
 		}
 		return super.onPreferenceClick(preference);
