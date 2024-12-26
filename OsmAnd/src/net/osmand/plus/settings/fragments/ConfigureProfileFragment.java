@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.settings.fragments.ResetProfilePrefsBottomSheetFactory.createResetProfilePrefsBottomSheet;
 import static net.osmand.plus.settings.fragments.SelectCopyAppModeBottomSheetFactory.createSelectCopyAppModeBottomSheet;
 import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 import static net.osmand.plus.settings.fragments.search.PreferenceMarker.markPreferenceAsConnectedToPlugin;
@@ -48,11 +49,9 @@ import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsLis
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
-import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.fragments.configureitems.ConfigureMenuRootFragment;
 import net.osmand.plus.settings.fragments.profileappearance.ProfileAppearanceFragment;
-import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.utils.AndroidUtils;
@@ -443,17 +442,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Optional<Fragment> target) {
 		if (RESET_TO_DEFAULT.equals(preference.getKey())) {
 			// FK-TODO: DRY with other usages of RESET_TO_DEFAULT
-			return Optional.of(
-					new ShowableSearchablePreferenceDialog<>(
-							ResetProfilePrefsBottomSheet.createInstance(
-									getSelectedAppMode(),
-									target)) {
-
-						@Override
-						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-							searchablePreferenceDialog.show(getFragmentManager(), app);
-						}
-					});
+			return Optional.of(createResetProfilePrefsBottomSheet(target, this));
 		}
 		if (COPY_PROFILE_SETTINGS.equals(preference.getKey())) {
 			// FK-TODO: DRY with other usages of COPY_PROFILE_SETTINGS and COPY_PLUGIN_SETTINGS

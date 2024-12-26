@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.accessibility;
 
 import static net.osmand.plus.plugins.PluginInfoFragment.PLUGIN_INFO;
+import static net.osmand.plus.settings.fragments.ResetProfilePrefsBottomSheetFactory.createResetProfilePrefsBottomSheet;
 import static net.osmand.plus.settings.fragments.SelectCopyAppModeBottomSheetFactory.createSelectCopyAppModeBottomSheet;
 import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 
@@ -27,10 +28,8 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
@@ -266,17 +265,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 	@Override
 	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Optional<Fragment> target) {
 		if (RESET_TO_DEFAULT.equals(preference.getKey())) {
-			return Optional.of(
-					new ShowableSearchablePreferenceDialog<>(
-							ResetProfilePrefsBottomSheet.createInstance(
-									getSelectedAppMode(),
-									target)) {
-
-						@Override
-						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-							searchablePreferenceDialog.show(getFragmentManager(), app);
-						}
-					});
+			return Optional.of(createResetProfilePrefsBottomSheet(target, this));
 		}
 		if (COPY_PLUGIN_SETTINGS.equals(preference.getKey())) {
 			return Optional.of(createSelectCopyAppModeBottomSheet(target, this));
