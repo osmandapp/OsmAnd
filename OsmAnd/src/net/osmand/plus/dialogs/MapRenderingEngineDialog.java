@@ -2,9 +2,7 @@ package net.osmand.plus.dialogs;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -32,16 +30,15 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class MapRenderingEngineDialog extends DialogFragment implements SearchablePreferenceDialog {
+
 	private final OsmandApplication app;
 	private final FragmentActivity fragmentActivity;
 	@Nullable
 	private final OnRenderChangeListener renderChangeListener;
-	private AppCompatRadioButton radioButtonLegacy;
-	private AppCompatRadioButton radioButtonOpengl;
 
 	public MapRenderingEngineDialog(final OsmandApplication app,
 									final FragmentActivity fragmentActivity,
-									final @Nullable OnRenderChangeListener renderChangeListener) {
+									@Nullable final OnRenderChangeListener renderChangeListener) {
 		this.app = app;
 		this.fragmentActivity = fragmentActivity;
 		this.renderChangeListener = renderChangeListener;
@@ -50,31 +47,27 @@ public class MapRenderingEngineDialog extends DialogFragment implements Searchab
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(@Nullable final Bundle savedInstanceState) {
-		return createDialog();
-	}
-
-	private AlertDialog createDialog() {
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		Context themedContext = UiUtilities.getThemedContext(fragmentActivity, nightMode);
-		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
-		View alertDialogView = LayoutInflater.from(themedContext).inflate(R.layout.alert_dialog_message_with_choice_list, null, false);
+		AlertDialog.Builder builder =
+				new AlertDialog.Builder(
+						UiUtilities.getThemedContext(
+								fragmentActivity,
+								app.getDaynightHelper().isNightModeForMapControls()));
+		final View alertDialogView = getLayoutInflater().inflate(R.layout.alert_dialog_message_with_choice_list, null, false);
 		builder.setView(alertDialogView);
 
-		View legacyRenderingView = alertDialogView.findViewById(R.id.legacy_rendering);
-		radioButtonLegacy = setupRadioItem(legacyRenderingView, app.getString(getMapRenderingEngineV1()));
-		View openglRenderingView = alertDialogView.findViewById(R.id.opengl_rendering);
-		radioButtonOpengl = setupRadioItem(openglRenderingView, app.getString(getMapRenderingEngineV2()));
-		updateRadioButtons(app.getSettings().USE_OPENGL_RENDER.get());
+		final View legacyRenderingView = alertDialogView.findViewById(R.id.legacy_rendering);
+		final AppCompatRadioButton radioButtonLegacy = setupRadioItem(legacyRenderingView, app.getString(getMapRenderingEngineV1()));
+		final View openglRenderingView = alertDialogView.findViewById(R.id.opengl_rendering);
+		final AppCompatRadioButton radioButtonOpengl = setupRadioItem(openglRenderingView, app.getString(getMapRenderingEngineV2()));
+		updateRadioButtons(app.getSettings().USE_OPENGL_RENDER.get(), radioButtonLegacy, radioButtonOpengl);
 		radioButtonOpengl.setEnabled(Version.isOpenGlAvailable(app));
 		openglRenderingView.findViewById(R.id.button).setEnabled(Version.isOpenGlAvailable(app));
-
 		legacyRenderingView.findViewById(R.id.button).setOnClickListener(view -> {
-			updateRenderingEngineSetting(false);
+			updateRenderingEngineSetting(false, radioButtonLegacy, radioButtonOpengl);
 			dismiss();
 		});
-
 		openglRenderingView.findViewById(R.id.button).setOnClickListener(view -> {
-			updateRenderingEngineSetting(true);
+			updateRenderingEngineSetting(true, radioButtonLegacy, radioButtonOpengl);
 			dismiss();
 		});
 		return builder.create();
@@ -89,21 +82,22 @@ public class MapRenderingEngineDialog extends DialogFragment implements Searchab
 	}
 
 	private AppCompatRadioButton setupRadioItem(View view, String name) {
-		AppCompatRadioButton radioButton = view.findViewById(R.id.radio);
-		TextViewEx text = view.findViewById(R.id.text);
+		final AppCompatRadioButton radioButton = view.findViewById(R.id.radio);
+		final TextViewEx text = view.findViewById(R.id.text);
 		text.setText(name);
 		radioButton.setVisibility(View.VISIBLE);
-
 		return radioButton;
 	}
 
-	private void updateRenderingEngineSetting(boolean openglEnabled) {
-		updateRadioButtons(openglEnabled);
+	private void updateRenderingEngineSetting(final boolean openglEnabled,
+											  final AppCompatRadioButton radioButtonLegacy,
+											  final AppCompatRadioButton radioButtonOpengl) {
+		updateRadioButtons(openglEnabled, radioButtonLegacy, radioButtonOpengl);
 		app.getSettings().USE_OPENGL_RENDER.set(openglEnabled);
 
 		if (app.isApplicationInitializing()) {
-			String title = app.getString(R.string.loading_smth, "");
-			ProgressDialog progress = ProgressDialog.show(fragmentActivity, title, app.getString(R.string.loading_data));
+			final String title = app.getString(R.string.loading_smth, "");
+			final ProgressDialog progress = ProgressDialog.show(fragmentActivity, title, app.getString(R.string.loading_data));
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
 				public void onFinish(@NonNull AppInitializer init) {
@@ -120,8 +114,8 @@ public class MapRenderingEngineDialog extends DialogFragment implements Searchab
 
 	private void updateRenderingEngine(boolean openglEnabled) {
 		if (openglEnabled && !NativeCoreContext.isInit()) {
-			String title = app.getString(R.string.loading_smth, "");
-			ProgressDialog progress = ProgressDialog.show(fragmentActivity, title, app.getString(R.string.loading_data));
+			final String title = app.getString(R.string.loading_smth, "");
+			final ProgressDialog progress = ProgressDialog.show(fragmentActivity, title, app.getString(R.string.loading_data));
 			app.getAppInitializer().initOpenglAsync(() -> {
 				updateDependentAppComponents();
 				if (AndroidUtils.isActivityNotDestroyed(fragmentActivity)) {
@@ -142,7 +136,7 @@ public class MapRenderingEngineDialog extends DialogFragment implements Searchab
 	private void updateDependentAppComponents() {
 		app.getOsmandMap().setupRenderingView();
 
-		MapActivity mapActivity = app.getOsmandMap().getMapView().getMapActivity();
+		final MapActivity mapActivity = app.getOsmandMap().getMapView().getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.refreshMapComplete();
 		}
@@ -150,7 +144,9 @@ public class MapRenderingEngineDialog extends DialogFragment implements Searchab
 		app.getDownloadThread().runReloadIndexFilesSilent();
 	}
 
-	private void updateRadioButtons(boolean openglEnabled) {
+	private void updateRadioButtons(final boolean openglEnabled,
+									final AppCompatRadioButton radioButtonLegacy,
+									final AppCompatRadioButton radioButtonOpengl) {
 		radioButtonLegacy.setChecked(!openglEnabled);
 		radioButtonOpengl.setChecked(openglEnabled);
 	}
