@@ -460,7 +460,7 @@ object GpxUtilities {
 			} else {
 				throw KException("Output file or stream is not defined")
 			}
-			serializer.setFeature("https://xmlpull.org/v1/doc/features.html#indent-output", true)
+			serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true)
 			serializer.startDocument("UTF-8", true)
 			serializer.startTag(null, "gpx")
 			serializer.attribute(null, "version", "1.1")
