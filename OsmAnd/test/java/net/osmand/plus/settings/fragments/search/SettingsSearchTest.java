@@ -95,6 +95,11 @@ public class SettingsSearchTest extends AndroidTest {
 	}
 
 	@Test
+	public void shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_OsmandMonitoringPlugin() {
+		shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_Plugin(OsmandMonitoringPlugin.class);
+	}
+
+	@Test
 	public void shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_AccessibilityPlugin() {
 		shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_Plugin(AccessibilityPlugin.class);
 	}
