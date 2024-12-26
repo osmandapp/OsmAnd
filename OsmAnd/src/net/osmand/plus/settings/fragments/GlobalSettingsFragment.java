@@ -220,7 +220,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	}
 
 	@Override
-	public boolean onPreferenceClick(Preference preference) {
+	public boolean onPreferenceClick(final Preference preference) {
 		String prefId = preference.getKey();
 		if (isSelectDefaultProfile(preference)) {
 			this
@@ -237,7 +237,12 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 				LocationSourceBottomSheet.showInstance(manager, this);
 			}
 		} else if (MAP_RENDERING_ENGINE_ID.equals(prefId)) {
-			new MapRenderingEngineDialog(app, getActivity()).showDialog(this::setupMapRenderingEnginePref);
+			final MapRenderingEngineDialog mapRenderingEngineDialog =
+					new MapRenderingEngineDialog(
+							app,
+							getActivity(),
+							this::setupMapRenderingEnginePref);
+			mapRenderingEngineDialog.show(getParentFragmentManager(), null);
 		}
 
 		return super.onPreferenceClick(preference);
@@ -304,7 +309,6 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	}
 
 	private void setupMapRenderingEnginePref() {
-		// FK-TODO: make searchable, e.g. searchquery OpenGL must match this preference
 		Preference preference = findPreference(MAP_RENDERING_ENGINE_ID);
 		preference.setIcon(getContentIcon(R.drawable.ic_map));
 		preference.setSummary(settings.USE_OPENGL_RENDER.get() ? R.string.map_rendering_engine_v2 : R.string.map_rendering_engine_v1);

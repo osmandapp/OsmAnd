@@ -1,7 +1,9 @@
 package net.osmand.plus.dialogs;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -9,10 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatRadioButton;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializeListener;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -22,19 +25,29 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.widgets.TextViewEx;
 
-public class MapRenderingEngineDialog {
+public class MapRenderingEngineDialog extends DialogFragment {
 	private final OsmandApplication app;
 	private final FragmentActivity fragmentActivity;
+	@Nullable
+	private final OnRenderChangeListener renderChangeListener;
 	private AppCompatRadioButton radioButtonLegacy;
 	private AppCompatRadioButton radioButtonOpengl;
-	private AlertDialog alertDialog;
 
-	public MapRenderingEngineDialog(OsmandApplication app, FragmentActivity fragmentActivity) {
+	public MapRenderingEngineDialog(final OsmandApplication app,
+									final FragmentActivity fragmentActivity,
+									final @Nullable OnRenderChangeListener renderChangeListener) {
 		this.app = app;
 		this.fragmentActivity = fragmentActivity;
+		this.renderChangeListener = renderChangeListener;
 	}
 
-	private AlertDialog createDialog(@Nullable OnRenderChangeListener renderChangeListener) {
+	@NonNull
+	@Override
+	public Dialog onCreateDialog(@Nullable final Bundle savedInstanceState) {
+		return createDialog();
+	}
+
+	private AlertDialog createDialog() {
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		Context themedContext = UiUtilities.getThemedContext(fragmentActivity, nightMode);
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
@@ -50,13 +63,13 @@ public class MapRenderingEngineDialog {
 		openglRenderingView.findViewById(R.id.button).setEnabled(Version.isOpenGlAvailable(app));
 
 		legacyRenderingView.findViewById(R.id.button).setOnClickListener(view -> {
-			updateRenderingEngineSetting(false, renderChangeListener);
-			alertDialog.dismiss();
+			updateRenderingEngineSetting(false);
+			dismiss();
 		});
 
 		openglRenderingView.findViewById(R.id.button).setOnClickListener(view -> {
-			updateRenderingEngineSetting(true, renderChangeListener);
-			alertDialog.dismiss();
+			updateRenderingEngineSetting(true);
+			dismiss();
 		});
 		return builder.create();
 	}
@@ -70,7 +83,7 @@ public class MapRenderingEngineDialog {
 		return radioButton;
 	}
 
-	private void updateRenderingEngineSetting(boolean openglEnabled, @Nullable OnRenderChangeListener listener) {
+	private void updateRenderingEngineSetting(boolean openglEnabled) {
 		updateRadioButtons(openglEnabled);
 		app.getSettings().USE_OPENGL_RENDER.set(openglEnabled);
 
@@ -83,15 +96,15 @@ public class MapRenderingEngineDialog {
 					if (AndroidUtils.isActivityNotDestroyed(fragmentActivity)) {
 						progress.dismiss();
 					}
-					updateRenderingEngine(openglEnabled, listener);
+					updateRenderingEngine(openglEnabled);
 				}
 			});
 		} else {
-			updateRenderingEngine(openglEnabled, listener);
+			updateRenderingEngine(openglEnabled);
 		}
 	}
 
-	private void updateRenderingEngine(boolean openglEnabled, @Nullable OnRenderChangeListener listener) {
+	private void updateRenderingEngine(boolean openglEnabled) {
 		if (openglEnabled && !NativeCoreContext.isInit()) {
 			String title = app.getString(R.string.loading_smth, "");
 			ProgressDialog progress = ProgressDialog.show(fragmentActivity, title, app.getString(R.string.loading_data));
@@ -107,8 +120,8 @@ public class MapRenderingEngineDialog {
 				app.getOsmandMap().getMapLayers().getMapVectorLayer().setAlpha(255);
 			}
 		}
-		if (listener != null) {
-			listener.onRenderChange();
+		if (renderChangeListener != null) {
+			renderChangeListener.onRenderChange();
 		}
 	}
 
@@ -126,11 +139,6 @@ public class MapRenderingEngineDialog {
 	private void updateRadioButtons(boolean openglEnabled) {
 		radioButtonLegacy.setChecked(!openglEnabled);
 		radioButtonOpengl.setChecked(openglEnabled);
-	}
-
-	public void showDialog(@Nullable OnRenderChangeListener renderChangeListener) {
-		alertDialog = createDialog(renderChangeListener);
-		alertDialog.show();
 	}
 
 	public interface OnRenderChangeListener {

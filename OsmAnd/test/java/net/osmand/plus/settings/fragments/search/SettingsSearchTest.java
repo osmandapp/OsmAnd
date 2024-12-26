@@ -19,10 +19,12 @@ import static org.hamcrest.Matchers.is;
 
 import android.view.View;
 
+import androidx.annotation.StringRes;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -43,6 +45,7 @@ import java.util.stream.Stream;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
+// FK-TODO: DRY in test methods
 public class SettingsSearchTest extends AndroidTest {
 
 	@Rule
@@ -121,6 +124,27 @@ public class SettingsSearchTest extends AndroidTest {
 	public void shouldSearchAndFind_LocationInterpolationBottomSheet_description() {
 		enablePlugin(OsmandDevelopmentPlugin.class, app);
 		shouldSearchAndFind(app.getString(R.string.location_interpolation_percent_desc));
+	}
+
+	@Test
+	public void test_search_map_rendering_engine_v1_find_map_rendering_engine() {
+		find_map_rendering_engine(R.string.map_rendering_engine_v1, app);
+	}
+
+	@Test
+	public void test_search_map_rendering_engine_v2_find_map_rendering_engine() {
+		find_map_rendering_engine(R.string.map_rendering_engine_v2, app);
+	}
+
+	private void find_map_rendering_engine(final @StringRes int searchQueryId, final OsmandApplication app) {
+		// Given
+		clickSearchButton(app);
+
+		// When
+		onView(searchView()).perform(replaceText(app.getString(searchQueryId)), closeSoftKeyboard());
+
+		// Then
+		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(app.getString(R.string.map_rendering_engine))));
 	}
 
 	private void shouldSearchAndFind(final String searchQuery) {
