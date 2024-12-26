@@ -5674,4 +5674,6 @@
     <string name="default_buttons_opacity_original_description">Кожна кнопка зберігає власну непрозорість фону.</string>
     <string name="default_buttons_size_original_description">Кожна кнопка зберігає свій розмір.</string>
     <string name="default_buttons_corners_original_description">Кожна кнопка зберігає власний кутовий радіус.</string>
+    <string name="calculating_indication_message">Розрахунок…</string>
+    <string name="calculate_size">Розрахувати розмір</string>
 </resources>
