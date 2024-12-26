@@ -6021,4 +6021,21 @@
     <string name="help_article_personal_color_palette_schemes_name">Scheme de culori</string>
     <string name="movies_list">Lista de filme</string>
     <string name="obd_fuel_type_cng">CNG</string>
+    <string name="reset_average_speed">Resetarea vitezei medii</string>
+    <string name="obd_fuel_type_unknown">Necunoscut Tip combustibil</string>
+    <string name="unknown_bt_device">Dispozitiv necunoscut</string>
+    <string name="third_links">Legături terțe</string>
+    <string name="obd_fuel_type_not_provided">Niciun tip de combustibil furnizat</string>
+    <string name="obd_fuel_type_hybrid_diesel">Diesel hibrid</string>
+    <string name="obd_fuel_type_hybrid_electric">Hibrid electric</string>
+    <string name="obd_fuel_type_hybrid_electric_combustion">Motor electric hibrid și motor cu combustie</string>
+    <string name="obd_fuel_type_hybrid_regenerative">Hibrid regenerativ</string>
+    <string name="obd_fuel_type_bifuel_hydrogen">Bifuel care funcționează cu hidrogen</string>
+    <string name="obd_fuel_type_hybrid_hydrogen">Hidrogen hibrid</string>
+    <string name="obd_fuel_type_hydrogen">Hidrogen</string>
+    <string name="obd_fuel_type_hybrid_ethanol">Etanol hibrid</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Trasee pentru biciclete Dirt</string>
+    <string name="unit_volt">V</string>
+    <string name="obd_vin_desc">Codul VIN peste OBD</string>
+    <string name="obd_vin">VIN</string>
 </resources>

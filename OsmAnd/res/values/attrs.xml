@@ -129,6 +129,7 @@
         <attr name="bottom_bar_background_color" format="color" />
 
         <attr name="bottom_nav_shadow" format="reference"/>
+		<attr name="nav_arrow_circle_color" format="color"/>
 
 		<attr name="text_rounded_bg_regular" format="reference" />
 		<attr name="text_rounded_bg_active" format="reference" />

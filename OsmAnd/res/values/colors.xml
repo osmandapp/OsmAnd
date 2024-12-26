@@ -273,7 +273,10 @@
 
 	<color name="nav_arrow_distant">#C0C0C0</color>
 	<color name="nav_arrow">#FADE23</color>
+	<color name="nav_arrow_stroke_color">#000000</color>
 	<color name="nav_arrow_imminent">#2EFF00</color>
+	<color name="nav_arrow_circle_color_light">#D9D9D9</color>
+	<color name="nav_arrow_circle_color_dark">#737373</color>
 
 	<color name="nav_point">#FA5050</color>
 	<color name="poi_background">#A0FF8000</color>

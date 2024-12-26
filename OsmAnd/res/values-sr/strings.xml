@@ -2977,7 +2977,7 @@
     <string name="start_up_message_pref">Порука по отварању</string>
     <string name="analytics_pref_title">Рашчлањивања</string>
     <string name="turn_screen_on_info">Прикажи карту на закључаном заслону за време навођења.</string>
-    <string name="route_parameters_info">Поставке за образовање пута у означеном налогу %1$s</string>
+    <string name="route_parameters_info">Поставке за образовање рута у означеном налогу %1$s</string>
     <string name="wake_time">Време чекања после буђења</string>
     <string name="units_and_formats">Мерне јединице и облици</string>
     <string name="map_look_descr">Изглед карте</string>
@@ -4205,7 +4205,7 @@
     <string name="rendering_attr_seabedDetail_name">Појединост морског дна</string>
     <string name="save_track_to_gpx_descrp">Самостално покрени снимање трага током навођења и самостално сачувај након тога.</string>
     <string name="gpx_no_routes_title">Нема рута</string>
-    <string name="gpx_no_routes_descr">Можете користити алатку %1$s ради додавања путање у датотеку.</string>
+    <string name="gpx_no_routes_descr">Можете користити алатку %1$s ради додавања руте у датотеку.</string>
     <string name="quick_action_add_route_descr">Дугме за покретање путање од средине заслона.</string>
     <string name="please_provide_group_name_message">Молим, именујте групу.</string>
     <string name="selected_waypoints_descr">Одабране пролазне тачке биће додате трагу %1$s</string>
@@ -4596,7 +4596,7 @@
     <string name="purchases_feature_desc_cross_buy">Користите своје могућности претплате на различитим платформама (Андорид/Иос/веб) без додатних трошкова.</string>
     <string name="map_widget_ant_bicycle_power">Снага бицикла</string>
     <string name="depth_contours">Дубински обриси</string>
-    <string name="included_in_your_current_plan">Укључен је ваш план %1$s</string>
+    <string name="included_in_your_current_plan">Укључен је ваш текући план %1$s</string>
     <string name="quick_action_map_center_widget_descr">Прекидач за приказ или скривање справице средишта карте.</string>
     <string name="map_widget_rendering_fps_desc">Приказује брзину освежавања карте и елемената карте који се приказују и освежавају, изражено у сличицама по секунди (ФПС).</string>
     <string name="simulate_location_by_gpx">Опонашај положај по ГПИксу</string>
@@ -4770,7 +4770,7 @@
     <string name="shared_string_all_world">Цели свет</string>
     <string name="external_device_characteristic_diastolic">Дијастолички</string>
     <string name="external_device_characteristic_systolic">Систолички</string>
-    <string name="common_weight_limit_error">Најмања вредност је %1$s %2$s. Користите пресек %3$s ако ли је тежина возила мања од најмање вредности.</string>
+    <string name="common_weight_limit_error">Најмања вредност је %1$s %2$s. Користите пресек %3$s ако је тежина возила мања од најмање вредности.</string>
     <string name="external_device_details_pair">Упари</string>
     <string name="external_device_details_disconnect">Прекини везу</string>
     <string name="ant_plus_open_settings">Отвори поставке</string>
@@ -5266,7 +5266,7 @@
     <string name="retrieve_elevation_data_summary">ОсмАнд може да преузме податке о надморској висини са оближњих путева или карата тла.</string>
     <string name="delete_actions_button">Дугме брисања</string>
     <string name="shared_string_osm_id">ОСМ ИД</string>
-    <string name="delete_actions_button_confirmation">Да ли поуздано да желите да избришете %1$s са свим додатим дејствима?</string>
+    <string name="delete_actions_button_confirmation">Да ли поуздано желите да избришете %1$s са свим додатим дејствима?</string>
     <string name="route_line_use_coloring_altitude">Линија путање је обојена по надморској висини.</string>
     <string name="getting_list_of_required_maps">Преузима се списак потребних карата…</string>
     <string name="required_maps">Потребне карте</string>

@@ -2048,7 +2048,7 @@
     <string name="quick_action_item_action">Дія %d</string>
     <string name="configure_screen_quick_action">Швидка дія</string>
     <string name="quick_action_item_screen">Екран %d</string>
-    <string name="quick_action_map_style_switch">Стиль карти змінено на s</string>
+    <string name="quick_action_map_style_switch">Стиль карти змінено на «%s»</string>
     <string name="quick_action_new_action">Додати дію</string>
     <string name="quick_action_edit_action">Редагувати дію</string>
     <string name="dialog_add_action_title">Додати дію</string>
@@ -2070,7 +2070,7 @@
     <string name="quick_action_map_styles">Стилі мапи</string>
     <string name="quick_action_map_source_title">Джерела мап</string>
     <string name="quick_action_map_source_action">Додати джерело мапи</string>
-    <string name="quick_action_map_source_switch">Джерело карти змінено на s</string>
+    <string name="quick_action_map_source_switch">Джерело карти змінено на «%s»</string>
     <string name="quick_action_btn_tutorial_title">Змінити положення кнопки</string>
     <string name="shared_string_action_name">Назва дії</string>
     <string name="quick_favorites_show_favorites_dialog">Показати діалог Закладок</string>
@@ -2108,8 +2108,8 @@
     <string name="quick_action_page_list_descr">Кнопка для перегортання списку нижче.</string>
     <string name="quick_action_map_overlay_title">Допоміжні шари</string>
     <string name="quick_action_map_overlay_action">Додати допоміжний шар</string>
-    <string name="quick_action_map_overlay_switch">Накладання карти змінено на s</string>
-    <string name="quick_action_map_underlay_switch">Підкладку карти змінено на s</string>
+    <string name="quick_action_map_overlay_switch">Накладання карти змінено на «%s»</string>
+    <string name="quick_action_map_underlay_switch">Підкладку карти змінено на «%s»</string>
     <string name="quick_action_map_underlay_title">Тло мапи</string>
     <string name="quick_action_map_underlay_action">Додати тло</string>
     <string name="quick_action_btn_tutorial_descr">Довге натискання з перетягуванням кнопки змінює її положення на екрані.</string>
@@ -3018,7 +3018,7 @@
     <string name="screen_alerts">Екранні сповіщення</string>
     <string name="route_parameters_descr">Налаштування параметрів маршруту</string>
     <string name="route_parameters">Параметри маршруту</string>
-    <string name="application_profile_changed">Профіль програми змінено на s\\</string>
+    <string name="application_profile_changed">Профіль програми змінено на «%s»</string>
     <string name="utm_format_descr">OsmAnd використовує стандарт UTM, який схожий, але не ідентичний до формату UTM NATO.</string>
     <string name="navigate_point_format_olc">Код Open Location</string>
     <string name="coordinates_format_info">Обраний формат буде застосовано у всьому застосунку.</string>

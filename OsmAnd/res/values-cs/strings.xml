@@ -827,7 +827,7 @@
     <string name="delete_target_point">Smazat cíl</string>
     <string name="intermediate_point">Mezicíl %1$s</string>
     <string name="map_widget_show_destination_arrow">Zobrazit směr do cíle</string>
-    <string name="enable_plugin_monitoring_services">Zapněte modul „Záznam cesty“ pro použití záznamových služeb (zaznamenávání GPX, on-line sledování)</string>
+    <string name="enable_plugin_monitoring_services">Zapněte modul Záznam cesty pro použití záznamových služeb (zaznamenávání GPX, on-line sledování)</string>
     <string name="non_optimal_route_calculation">Při dlouhých vzdálenostech použít méně přesný, ale rychlejší výpočet</string>
     <string name="gps_not_available">Prosím zapněte GPS přijímač v nastavení</string>
     <string name="rendering_attr_roadColors_description">Vyberte barevné schéma:</string>
@@ -1962,7 +1962,7 @@
     <string name="update_all_maps_now">Aktualizovat všechny mapy ihned?</string>
     <string name="clear_tile_data">Vymazat všechny dlaždice</string>
     <string name="routing_attr_short_way_name">Ekonomická trasa</string>
-    <string name="replace_favorite_confirmation">Nahradit Oblíbené místo „%1$s“?</string>
+    <string name="replace_favorite_confirmation">Nahradit Oblíbené místo %1$s?</string>
     <string name="rendering_attr_hideOverground_name">Nadzemní objekty</string>
     <string name="shared_string_change">Změnit</string>
     <string name="get_started">Začít</string>
@@ -2841,7 +2841,7 @@
     <string name="profile_alert_need_save_title">Uložit změny</string>
     <string name="profile_alert_need_save_msg">Nejprve je třeba uložit změny profilu</string>
     <string name="profile_alert_delete_title">Odstranit profil</string>
-    <string name="profile_alert_delete_msg">Odstranit profil „%s“</string>
+    <string name="profile_alert_delete_msg">Odstranit profil s</string>
     <string name="select_base_profile_dialog_title">Zvolte výchozí profil</string>
     <string name="select_nav_profile_dialog_title">Vyberte typ navigace</string>
     <string name="base_profile_descr_car">Auto, nákladní auto, motocykl</string>
@@ -3595,12 +3595,12 @@
     <string name="login_account">Účet</string>
     <string name="user_login">Přihlásit se</string>
     <string name="markers_history">Historie značek</string>
-    <string name="gpx_upload_public_visibility_descr">„Veřejná“ znamená, že trasa je veřejně dostupná ve vašich GPS trasách, ve veřejných seznamech GPS tras a také ve veřejném seznamu stop s nezpracovanými časovými razítky. Data poskytnutá prostřednictvím API nebudou odkazovat na vaši stránku s trasou. Časová razítka bodů trasy nebudou dostupná prostřednictvím veřejného GPS API a body nebudou chronologicky seřazeny.</string>
-    <string name="gpx_upload_private_visibility_descr">„Soukromá“ znamená, že trasa se neobjeví v žádném veřejném seznamu, ale body trasy budou dostupné prostřednictvím veřejného GPS API, bez časových razítek a nebudou chronologicky seřazeny.</string>
+    <string name="gpx_upload_public_visibility_descr">Veřejná znamená, že trasa je veřejně dostupná ve vašich GPS trasách, ve veřejných seznamech GPS tras a také ve veřejném seznamu stop s nezpracovanými časovými razítky. Data poskytnutá prostřednictvím API nebudou odkazovat na vaši stránku s trasou. Časová razítka bodů trasy nebudou dostupná prostřednictvím veřejného GPS API a body nebudou chronologicky seřazeny.</string>
+    <string name="gpx_upload_private_visibility_descr">Soukromá znamená, že trasa se neobjeví v žádném veřejném seznamu, ale body trasy budou dostupné prostřednictvím veřejného GPS API, bez časových razítek a nebudou chronologicky seřazeny.</string>
     <string name="send_files_to_openstreetmap">Odeslat soubor GPX do OpenStreetMap</string>
     <string name="enter_text_separated">Zadejte značky oddělené čárkou.</string>
-    <string name="gpx_upload_trackable_visibility_descr">„Sledovatelná“ znamená, že trasa se neobjeví v žádném veřejném seznamu, ale zpracované body trasy s časovými razítky (které nelze přímo spojit s vámi) budou dostupné prostřednictvím veřejného GPS API.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">„Identifikovatelná“ znamená, že trasa bude veřejně dostupná ve vašich GPS trasách a veřejných seznamech GPS tras, tzn. ostatní uživatelé si budou moci stáhnout nezpracovanou trasu a propojit ji s vaším uživatelským jménem. Veřejná data bodů trasy s časovými razítky poskytnutá prostřednictvím GPS API se budou odkazovat na vaši původní stránku s trasou.</string>
+    <string name="gpx_upload_trackable_visibility_descr">\tSledovatelná znamená, že trasa se neobjeví v žádném veřejném seznamu, ale zpracované body trasy s časovými razítky (které nelze přímo spojit s vámi) budou dostupné prostřednictvím veřejného GPS API.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">Identifikovatelná znamená, že trasa bude veřejně dostupná ve vašich GPS trasách a veřejných seznamech GPS tras, tzn. ostatní uživatelé si budou moci stáhnout nezpracovanou trasu a propojit ji s vaším uživatelským jménem. Veřejná data bodů trasy s časovými razítky poskytnutá prostřednictvím GPS API se budou odkazovat na vaši původní stránku s trasou.</string>
     <string name="osm_edit_close_note">Zavřít OSM poznámku</string>
     <string name="osm_edit_comment_note">Komentovat OSM poznámku</string>
     <string name="osm_login_descr">Přihlaste se metodou OAuth nebo použijte své přihlašovací jméno a heslo v OSM.</string>
