@@ -5651,4 +5651,6 @@
     <string name="default_buttons_size_original_description">Свако дугме задржава своју властиту величину.</string>
     <string name="default_buttons_corners_original_description">Свако дугме задржава свој радијус окретања.</string>
     <string name="default_buttons_opacity_original_description">Свако дугме чува своју провидност позадине.</string>
+    <string name="calculate_size">Израчунајте величину</string>
+    <string name="calculating_indication_message">Израчунавање…</string>
 </resources>
