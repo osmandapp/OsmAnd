@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.accessibility;
 
 import static net.osmand.plus.plugins.PluginInfoFragment.PLUGIN_INFO;
+import static net.osmand.plus.settings.fragments.SelectCopyAppModeBottomSheetFactory.createSelectCopyAppModeBottomSheet;
 import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 
 import android.content.Context;
@@ -24,7 +25,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
@@ -279,17 +279,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 					});
 		}
 		if (COPY_PLUGIN_SETTINGS.equals(preference.getKey())) {
-			return Optional.of(
-					new ShowableSearchablePreferenceDialog<>(
-							SelectCopyAppModeBottomSheet.createInstance(
-									target.orElse(null),
-									getSelectedAppMode())) {
-
-						@Override
-						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-							searchablePreferenceDialog.show(getFragmentManager(), app);
-						}
-					});
+			return Optional.of(createSelectCopyAppModeBottomSheet(target, this));
 		}
 		return Optional.empty();
 	}

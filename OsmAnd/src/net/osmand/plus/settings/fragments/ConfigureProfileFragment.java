@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.settings.fragments.SelectCopyAppModeBottomSheetFactory.createSelectCopyAppModeBottomSheet;
 import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 import static net.osmand.plus.settings.fragments.search.PreferenceMarker.markPreferenceAsConnectedToPlugin;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
@@ -43,7 +44,6 @@ import net.osmand.plus.plugins.PluginInstalledBottomSheetDialog.PluginStateListe
 import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
@@ -457,17 +457,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		}
 		if (COPY_PROFILE_SETTINGS.equals(preference.getKey())) {
 			// FK-TODO: DRY with other usages of COPY_PROFILE_SETTINGS and COPY_PLUGIN_SETTINGS
-			return Optional.of(
-					new ShowableSearchablePreferenceDialog<>(
-							SelectCopyAppModeBottomSheet.createInstance(
-									target.orElse(null),
-									getSelectedAppMode())) {
-
-						@Override
-						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-							searchablePreferenceDialog.show(getFragmentManager(), app);
-						}
-					});
+			return Optional.of(createSelectCopyAppModeBottomSheet(target, this));
 		}
 		return Optional.empty();
 	}

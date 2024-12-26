@@ -3,6 +3,7 @@ package net.osmand.plus.profiles;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -114,7 +115,7 @@ public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragm
 		dismiss();
 	}
 
-	public static SelectCopyAppModeBottomSheet createInstance(final Fragment target,
+	public static SelectCopyAppModeBottomSheet createInstance(final @Nullable Fragment target,
 															  final @NonNull ApplicationMode currentMode) {
 		final SelectCopyAppModeBottomSheet bottomSheet = new SelectCopyAppModeBottomSheet();
 		{
