@@ -58,22 +58,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	@Override
 	public void buildInternal(View view) {
 		if (amenity.isRoutePoint()) {
-			final String wptExtraTags = additionalInfo.get(WPT_EXTRA_TAGS);
-			if (!Algorithms.isEmpty(wptExtraTags)) {
-				Gson gson = new Gson();
-				Type type = new TypeToken<Map<String, String>>() {}.getType();
-				additionalInfo.putAll(gson.fromJson(wptExtraTags, type));
-				additionalInfo.remove(WPT_EXTRA_TAGS);
-			}
-			final String description = additionalInfo.get(Amenity.DESCRIPTION);
-			if (!Algorithms.isEmpty(description)) {
-				buildDescriptionRow(view, description);
-				additionalInfo.remove(Amenity.DESCRIPTION);
-			}
-			final String url = additionalInfo.get(TAG_URL);
-			if (!Algorithms.isEmpty(url)) {
-				PicassoUtils.setupMainImageByUrl(app, view, url);
-			}
+			processRoutePointAmenityTags(view);
 		}
 
 		rowsBuilder = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), additionalInfo);
@@ -87,6 +72,25 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		rowsBuilder.buildNamesRow((ViewGroup) view, amenity.getNamesMap(true), false);
 		if (!rowsBuilder.isFirstRow()) {
 			firstRow = rowsBuilder.isFirstRow();
+		}
+	}
+
+	private void processRoutePointAmenityTags(View view) {
+		final String wptExtraTags = additionalInfo.get(WPT_EXTRA_TAGS);
+		if (!Algorithms.isEmpty(wptExtraTags)) {
+			Gson gson = new Gson();
+			Type type = new TypeToken<Map<String, String>>() {}.getType();
+			additionalInfo.putAll(gson.fromJson(wptExtraTags, type));
+			additionalInfo.remove(WPT_EXTRA_TAGS);
+		}
+		final String description = additionalInfo.get(Amenity.DESCRIPTION);
+		if (!Algorithms.isEmpty(description)) {
+			buildDescriptionRow(view, description);
+			additionalInfo.remove(Amenity.DESCRIPTION);
+		}
+		final String url = additionalInfo.get(TAG_URL);
+		if (!Algorithms.isEmpty(url)) {
+			PicassoUtils.setupMainImageByUrl(app, view, url);
 		}
 	}
 
