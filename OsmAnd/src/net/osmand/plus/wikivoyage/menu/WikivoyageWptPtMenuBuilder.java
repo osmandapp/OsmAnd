@@ -41,9 +41,9 @@ public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 	protected void buildDescription(View view) {
 		String desc = descTokens.get(KEY_DESCRIPTION);
 		if (!Algorithms.isEmpty(desc)) {
-			PicassoUtils.setupMainImageByUrl(app, view, mainImageUrl);
 			buildDescriptionRow(view, desc);
 		}
+		PicassoUtils.setupMainImageByUrl(app, view, mainImageUrl);
 	}
 
 	@Override
