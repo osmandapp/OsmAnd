@@ -6043,4 +6043,7 @@
     <string name="vehicle_metrics_plugin_settings">Setări pentru parametrii vehiculului</string>
     <string name="percent_unit">%</string>
     <string name="obd_widget_group">Parametrii vehiculului</string>
+    <string name="obd_fuel_left_distance_desc">Indică distanța pe care autovehiculul o poate parcurge cu nivelul de combustibil rămas pe senzorul OBD</string>
+    <string name="obd_fuel_type_desc">Afișează tipul de combustibil al vehiculului prin senzorul OBD</string>
+    <string name="obd_air_intake_temp">Temperatura de admisie</string>
 </resources>
