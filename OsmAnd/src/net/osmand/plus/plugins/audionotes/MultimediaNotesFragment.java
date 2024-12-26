@@ -516,9 +516,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	}
 
 	@Override
-	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(
-			final Preference preference,
-			final Optional<Fragment> target) {
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Optional<Fragment> target) {
 		if (RESET_TO_DEFAULT.equals(preference.getKey())) {
 			return Optional.of(createResetProfilePrefsBottomSheet(target, this));
 		}

@@ -110,6 +110,11 @@ public class SettingsSearchTest extends AndroidTest {
 	}
 
 	@Test
+	public void shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_WeatherPlugin() {
+		shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_Plugin(WeatherPlugin.class);
+	}
+
+	@Test
 	public void shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_AccessibilityPlugin() {
 		shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_Plugin(AccessibilityPlugin.class);
 	}

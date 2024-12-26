@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.weather.dialogs;
 
 import static net.osmand.plus.settings.fragments.ResetProfilePrefsBottomSheetFactory.createResetProfilePrefsBottomSheet;
+import static net.osmand.plus.settings.fragments.SelectCopyAppModeBottomSheetFactory.createSelectCopyAppModeBottomSheet;
 import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 
 import android.content.Context;
@@ -10,7 +11,6 @@ import android.view.View.OnClickListener;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceViewHolder;
@@ -26,7 +26,6 @@ import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.plugins.weather.listener.WeatherCacheSizeChangeListener;
 import net.osmand.plus.plugins.weather.units.WeatherUnit;
 import net.osmand.plus.plugins.weather.viewholder.WeatherTotalCacheSizeViewHolder;
-import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
@@ -170,9 +169,13 @@ public class WeatherSettingsFragment extends BaseSettingsFragment implements Wea
 	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(
 			final Preference preference,
 			final Optional<Fragment> target) {
-		return RESET_TO_DEFAULT.equals(preference.getKey()) ?
-				Optional.of(createResetProfilePrefsBottomSheet(target, this)) :
-				Optional.empty();
+		if (RESET_TO_DEFAULT.equals(preference.getKey())) {
+			return Optional.of(createResetProfilePrefsBottomSheet(target, this));
+		}
+		if (COPY_PLUGIN_SETTINGS.equals(preference.getKey())) {
+			return Optional.of(createSelectCopyAppModeBottomSheet(target, this));
+		}
+		return Optional.empty();
 	}
 
 	@Override
@@ -187,14 +190,6 @@ public class WeatherSettingsFragment extends BaseSettingsFragment implements Wea
 				WeatherDialogs.showClearOnlineCacheDialog(ctx, isNightMode());
 			}
 			return false;
-		} else if (COPY_PLUGIN_SETTINGS.equals(key)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				// FK-TODO: make searchable
-				SelectCopyAppModeBottomSheet
-						.createInstance(this, getSelectedAppMode())
-						.show(fragmentManager, app);
-			}
 		}
 		return super.onPreferenceClick(preference);
 	}
