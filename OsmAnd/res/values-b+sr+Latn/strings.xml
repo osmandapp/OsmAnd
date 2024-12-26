@@ -4682,7 +4682,7 @@
     <string name="external_device_characteristic_distance">Rastojanje</string>
     <string name="external_device_characteristic_heart_rate">Brzina otkucaja srca</string>
     <string name="external_device_details_received_data">Primljeni podaci</string>
-    <string name="common_weight_limit_error">Najmanja vrednost je %1$s %2$s. Koristite presek %3$s ako li je težina vozila manja od najmanje vrednosti.</string>
+    <string name="common_weight_limit_error">Najmanja vrednost je %1$s %2$s. Koristite presek %3$s ako je težina vozila manja od najmanje vrednosti.</string>
     <string name="metric_lbs">lbs</string>
     <string name="app_mode_moped">Moped</string>
     <string name="sort_duration_ascending">Prvo najkraće trajanje</string>
@@ -5072,7 +5072,7 @@
     <string name="how_to_use">Kako da koristiš:</string>
     <string name="display_position">Prikazati lokaciju</string>
     <string name="download_heightmap_maps">Visinska mapa</string>
-    <string name="included_in_your_current_plan">Uključen je u plan %1$s</string>
+    <string name="included_in_your_current_plan">Uključen je u tekući plan %1$s</string>
     <string name="favorite_confirm_delete_group">Brišeš %1$s grupu i sve tačke (%2$d)?</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Prikazati MTB IMBA trase</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Prikazuj odgovarajuće planinske biciklističke staze.</string>

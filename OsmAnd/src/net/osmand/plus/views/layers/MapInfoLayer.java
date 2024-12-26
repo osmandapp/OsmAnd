@@ -394,8 +394,8 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		if (verticalWidget) {
 			ts.textColor = ColorUtilities.getPrimaryTextColor(getContext(), nightMode);
 		} else {
-			ts.textColor = nightMode ? ContextCompat.getColor(getContext(), R.color.widgettext_night) :
-					ContextCompat.getColor(getContext(), R.color.widgettext_day);
+			int textColorId = nightMode ? R.color.widgettext_night : R.color.widgettext_day;
+			ts.textColor = ColorUtilities.getColor(getContext(), textColorId);
 		}
 		ts.secondaryTextColor = ColorUtilities.getSecondaryTextColor(getContext(), nightMode);
 
