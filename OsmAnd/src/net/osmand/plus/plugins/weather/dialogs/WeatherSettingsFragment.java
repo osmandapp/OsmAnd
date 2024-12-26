@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.weather.dialogs;
 
+import static net.osmand.plus.settings.fragments.ResetProfilePrefsBottomSheetFactory.createResetProfilePrefsBottomSheet;
 import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 
 import android.content.Context;
@@ -28,11 +29,9 @@ import net.osmand.plus.plugins.weather.viewholder.WeatherTotalCacheSizeViewHolde
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
-import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
@@ -172,17 +171,7 @@ public class WeatherSettingsFragment extends BaseSettingsFragment implements Wea
 			final Preference preference,
 			final Optional<Fragment> target) {
 		return RESET_TO_DEFAULT.equals(preference.getKey()) ?
-				Optional.of(
-						new ShowableSearchablePreferenceDialog<>(
-								ResetProfilePrefsBottomSheet.createInstance(
-										getSelectedAppMode(),
-										target)) {
-
-							@Override
-							protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-								searchablePreferenceDialog.show(getFragmentManager(), app);
-							}
-						}) :
+				Optional.of(createResetProfilePrefsBottomSheet(target, this)) :
 				Optional.empty();
 	}
 

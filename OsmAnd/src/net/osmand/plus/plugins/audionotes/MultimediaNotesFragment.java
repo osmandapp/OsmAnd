@@ -14,6 +14,7 @@ import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.EXTERNAL_
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.cameraPictureSizeDefault;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.canDisableShutterSound;
+import static net.osmand.plus.settings.fragments.ResetProfilePrefsBottomSheetFactory.createResetProfilePrefsBottomSheet;
 import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 
 import android.Manifest;
@@ -49,11 +50,9 @@ import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsLis
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
@@ -530,17 +529,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 			final Preference preference,
 			final Optional<Fragment> target) {
 		return RESET_TO_DEFAULT.equals(preference.getKey()) ?
-				Optional.of(
-						new ShowableSearchablePreferenceDialog<>(
-								ResetProfilePrefsBottomSheet.createInstance(
-										getSelectedAppMode(),
-										target)) {
-
-							@Override
-							protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-								searchablePreferenceDialog.show(getFragmentManager(), app);
-							}
-						}) :
+				Optional.of(createResetProfilePrefsBottomSheet(target, this)) :
 				Optional.empty();
 	}
 
