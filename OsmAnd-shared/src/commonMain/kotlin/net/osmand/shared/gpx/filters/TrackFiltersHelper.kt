@@ -10,6 +10,10 @@ import net.osmand.shared.gpx.filters.FilterType.TEXT
 import kotlin.reflect.KClass
 
 object TrackFiltersHelper {
+	//Implementing new filter subclass (child of child of BaseTrackFilter) need to add it to
+	// SmartFolderHelper -> trackFilterSerializersModule in order to serialize correctly
+
+
 	fun createTextFilter(
 		filterType: TrackFilterType,
 		listener: FilterChangedListener?): BaseTrackFilter {

@@ -1400,7 +1400,7 @@ public class MenuBuilder {
 		OsmAndFeature feature = OsmAndFeature.WIKIPEDIA;
 		LinearLayout view = buildCollapsableContentView(app, false, true);
 
-		View banner = UiUtilities.getInflater(app, !light)
+		View banner = UiUtilities.getInflater(mapActivity, !light)
 				.inflate(R.layout.get_wikipedia_context_menu_banner, view, false);
 
 		ImageView ivIcon = banner.findViewById(R.id.icon);

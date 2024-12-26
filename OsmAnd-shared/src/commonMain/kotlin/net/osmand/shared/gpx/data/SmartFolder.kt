@@ -10,6 +10,9 @@ import net.osmand.shared.util.KCollectionUtils
 
 @Serializable
 class SmartFolder(@Serializable var folderName: String) : TracksGroup, ComparableTracksGroup {
+	companion object {
+		const val ID_PREFIX = "SMART_FOLDER___"
+	}
 
 	@Transient
 	private var trackItems: List<TrackItem>? = null
@@ -24,6 +27,10 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 
 	@Transient
 	private var folderAnalysis: TrackFolderAnalysis? = null
+
+	override fun getId(): String {
+		return ID_PREFIX + folderName
+	}
 
 	override fun getName() = folderName
 
@@ -52,7 +59,7 @@ class SmartFolder(@Serializable var folderName: String) : TracksGroup, Comparabl
 		return analysis
 	}
 
-	override fun getDirName() = folderName
+	override fun getDirName(includingSubdirs: Boolean) = folderName
 
 	override fun lastModified() = creationTime
 

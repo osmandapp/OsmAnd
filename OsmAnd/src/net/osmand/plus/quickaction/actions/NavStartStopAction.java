@@ -42,10 +42,10 @@ public class NavStartStopAction extends QuickAction {
 			if (Boolean.parseBoolean(getParams().get(KEY_DIALOG))) {
 				DestinationReachedFragment.show(mapActivity);
 			} else {
-				mapActivity.getMapLayers().getMapActionsHelper().stopNavigation();
+				mapActivity.getMapActions().stopNavigation();
 			}
 		} else {
-			mapActivity.getMapLayers().getMapActionsHelper().doRoute();
+			mapActivity.getMapActions().doRoute();
 		}
 	}
 
@@ -93,8 +93,11 @@ public class NavStartStopAction extends QuickAction {
 
 		if (!helper.isRoutePlanningMode() && !helper.isFollowingMode() && context instanceof MapActivity activity) {
 			return activity.getMapActions().getRouteMode().getIconRes();
+		} else if (helper.isPauseNavigation() || helper.isFollowingMode() || helper.isRoutePlanningMode()) {
+			return helper.getAppMode().getIconRes();
+		} else {
+			return app.getSettings().getApplicationMode().getIconRes();
 		}
-		return helper.getAppMode().getIconRes();
 	}
 
 	@Override

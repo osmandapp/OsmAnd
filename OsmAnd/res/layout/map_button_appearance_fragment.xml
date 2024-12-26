@@ -28,7 +28,6 @@
 					android:id="@+id/cards_container"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:background="?attr/card_and_list_background_basic"
 					android:orientation="vertical" />
 
 				<include layout="@layout/card_bottom_divider" />

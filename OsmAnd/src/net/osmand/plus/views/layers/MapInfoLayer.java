@@ -246,7 +246,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		}
 	}
 
-	public void recreateTopWidgetsPanel() {
+	public void updateVerticalPanels() {
 		ApplicationMode appMode = settings.getApplicationMode();
 		widgetRegistry.updateWidgetsInfo(appMode, drawSettings);
 
@@ -394,8 +394,8 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		if (verticalWidget) {
 			ts.textColor = ColorUtilities.getPrimaryTextColor(getContext(), nightMode);
 		} else {
-			ts.textColor = nightMode ? ContextCompat.getColor(getContext(), R.color.widgettext_night) :
-					ContextCompat.getColor(getContext(), R.color.widgettext_day);
+			int textColorId = nightMode ? R.color.widgettext_night : R.color.widgettext_day;
+			ts.textColor = ColorUtilities.getColor(getContext(), textColorId);
 		}
 		ts.secondaryTextColor = ColorUtilities.getSecondaryTextColor(getContext(), nightMode);
 
@@ -437,6 +437,8 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			widgetRegistry.updateWidgetsInfo(settings.getApplicationMode(), drawSettings);
 			leftWidgetsPanel.update(drawSettings);
 			rightWidgetsPanel.update(drawSettings);
+			topWidgetsPanel.update(drawSettings);
+			bottomWidgetsPanel.update(drawSettings);
 			topToolbarView.updateInfo();
 			alarmWidget.updateInfo(drawSettings, false);
 			speedometerWidget.updateInfo(drawSettings);

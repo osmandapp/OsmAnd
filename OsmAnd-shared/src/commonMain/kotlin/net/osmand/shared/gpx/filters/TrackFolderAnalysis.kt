@@ -52,7 +52,7 @@ class TrackFolderAnalysis(folder: TracksGroup) {
 		timeSpan = timeSpanSum.toInt()
 		tracksCount = items.size
 
-		log.info(">>>> ${folder.getName()} = (tracks: $tracksCount, totalDistance: ${"%.2f".format(totalDistance)}, " +
+		log.info(">>>> ${folder.getId()} = (tracks: $tracksCount, totalDistance: ${"%.2f".format(totalDistance)}, " +
 				"timeSpan: $timeSpan, fileSize: $fileSize, diffElevationUp: ${"%.2f".format(diffElevationUp)}, diffElevationDown: ${"%.2f".format(diffElevationDown)}")
 	}
 }

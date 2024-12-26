@@ -139,7 +139,7 @@ class SmartFolderOptionsController(
 
 	private fun showEditFiltersDialog(folder: SmartFolder) {
 		dialogManager.askDismissDialog(PROCESS_ID)
-		optionsListener?.showEditFiltersDialog(folder)
+		optionsListener?.showEditFiltersDialog(folder, null)
 	}
 
 	private fun showExportDialog(folder: SmartFolder) {

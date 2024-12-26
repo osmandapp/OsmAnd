@@ -579,7 +579,7 @@ public class VoiceRouter {
 			if (includeDest == true) {
 				result.put(TO_REF, getNonNullString(getSpeakablePointName(i.getRef())));
 				result.put(TO_STREET_NAME, getNonNullString(getSpeakablePointName(i.getStreetName())));
-				String dest = getSpeakablePointName(cutLongDestination(i.getDestinationName()));
+				String dest = getSpeakablePointName(cutLongDestination(i.getDestinationRefAndName()));
 				result.put(TO_DEST, getNonNullString(dest));
 			} else {
 				result.put(TO_REF, getNonNullString(getSpeakablePointName(i.getRef())));
@@ -634,7 +634,7 @@ public class VoiceRouter {
 			return new StreetName(result);
 		}
 		result.put(TO_REF, getNonNullString(getSpeakablePointName(exitInfo.getRef())));
-		String dest = getSpeakablePointName(cutLongDestination(routeInfo.getDestinationName()));
+		String dest = getSpeakablePointName(cutLongDestination(routeInfo.getDestinationRefAndName()));
 		result.put(TO_DEST, getNonNullString(dest));
 		result.put(TO_STREET_NAME, "");
 		return new StreetName(result);

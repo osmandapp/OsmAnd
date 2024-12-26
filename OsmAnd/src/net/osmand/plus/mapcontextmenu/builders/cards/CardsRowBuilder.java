@@ -86,7 +86,7 @@ public class CardsRowBuilder {
 	}
 
 	public void build(@NonNull GalleryController controller, boolean onlinePhotos, boolean nightMode) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(app, nightMode);
+		LayoutInflater themedInflater = UiUtilities.getInflater(mapActivity, nightMode);
 		galleryView = themedInflater.inflate(R.layout.gallery_card, null);
 		RecyclerView recyclerView = galleryView.findViewById(R.id.recycler_view);
 

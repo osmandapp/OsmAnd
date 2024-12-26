@@ -10,7 +10,7 @@
     <string name="poi_payment_toll_type">支付类别</string>
     <string name="poi_fuel_type">燃料类型</string>
     <string name="poi_payment_fuel_type">加油卡</string>
-    <string name="poi_additional_type">额外的</string>
+    <string name="poi_additional_type">额外</string>
     <string name="poi_internet_access_type">互联网接入类型</string>
     <string name="poi_bicycle_service">自行车服务</string>
     <string name="poi_self_service">自助</string>
@@ -348,9 +348,9 @@
     <string name="poi_car_wash">洗车</string>
     <string name="poi_fuel_lpg">液化石油气（LPG）</string>
     <string name="poi_fuel_cng">压缩天然气（CNG）</string>
-    <string name="poi_fuel_ethanol">燃料乙醇</string>
+    <string name="poi_fuel_ethanol">乙醇</string>
     <string name="poi_fuel_methanol">甲醇</string>
-    <string name="poi_fuel_biogas">生物气体</string>
+    <string name="poi_fuel_biogas">生物气体/沼气</string>
     <string name="poi_fuel_lh2">液氢</string>
     <string name="poi_bus_station">公共汽车站</string>
     <string name="poi_subway_station">是；地铁站</string>
@@ -1215,7 +1215,7 @@
     <string name="poi_fuel_octane_100">辛烷值 100</string>
     <string name="poi_fuel_1_50">1:50 燃料</string>
     <string name="poi_fuel_octane_92">辛烷值 92</string>
-    <string name="poi_fuel_hgv_diesel">HGV柴油</string>
+    <string name="poi_fuel_hgv_diesel">重型卡车（HGV）柴油</string>
     <string name="poi_fuel_octane_95">辛烷值 95</string>
     <string name="poi_fuel_octane_98">辛烷值 98</string>
     <string name="poi_railway_platform">铁路月台;火车月台</string>
@@ -1234,7 +1234,7 @@
     <string name="poi_dovecote">鸽舍</string>
     <string name="poi_fish_pass">鱼道</string>
     <string name="poi_laundry_service_yes">有</string>
-    <string name="poi_fuel_gtl_diesel">GTL 柴油</string>
+    <string name="poi_fuel_gtl_diesel">气转液（GTL）柴油</string>
     <string name="poi_craft_sculptor">雕刻家</string>
     <string name="poi_mini_roundabout">迷你环岛</string>
     <string name="poi_islet">小岛</string>
@@ -1723,7 +1723,7 @@
     <string name="poi_butcher_lamb">羊肉</string>
     <string name="poi_butcher_pork">猪肉</string>
     <string name="poi_butcher_halal">清真</string>
-    <string name="poi_origin">原产地</string>
+    <string name="poi_origin">来源</string>
     <string name="poi_tobacco_yes">是；烟草</string>
     <string name="poi_membership_yes">是；会员资格</string>
     <string name="poi_membership_no">否</string>
@@ -3153,4 +3153,15 @@
     <string name="poi_lock_ref">船闸编号</string>
     <string name="poi_lock_height">船闸高度</string>
     <string name="poi_pump_status_locked">水泵状态：上锁</string>
+    <string name="poi_office_diplomatic">外交机构</string>
+    <string name="poi_organic_only">仅限；仅限有机</string>
+    <string name="poi_operational_status_broken">损毁</string>
+    <string name="poi_fuel_svo">植物燃油</string>
+    <string name="poi_fuel_e20">乙醇汽油E20</string>
+    <string name="poi_fuel_e85">乙醇汽油E85</string>
+    <string name="poi_fuel_autogas">无乙醇无铅汽油</string>
+    <string name="poi_fuel_e10">乙醇汽油E10</string>
+    <string name="poi_fuel_91ul">91辛烷值无铅航空燃油</string>
+    <string name="poi_fuel_100ll">100辛烷值低铅航空燃油</string>
+    <string name="poi_fuel_jeta1">Jet A-1 航空燃油</string>
 </resources>

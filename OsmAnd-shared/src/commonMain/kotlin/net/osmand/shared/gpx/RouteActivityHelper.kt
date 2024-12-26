@@ -45,12 +45,24 @@ object RouteActivityHelper {
 		return cachedActivities
 	}
 
+	fun findActivityByTag(tag: String): RouteActivity? {
+		for (activity in getActivities()) {
+			if (activity.tags != null && activity.tags.contains(tag)) {
+				return activity
+			}
+		}
+		return null
+	}
+
 	fun saveRouteActivity(trackItems: Collection<TrackItem>, routeActivity: RouteActivity?) {
 		runAsync {
 			trackItems.forEach { trackItem ->
 				trackItem.getFile()?.let { file ->
-					val gpxFile = PlatformUtil.getOsmAndContext().getSelectedFileByPath(file.absolutePath())
-					if (gpxFile != null && gpxFile.error == null) {
+					var gpxFile = PlatformUtil.getOsmAndContext().getSelectedFileByPath(file.absolutePath())
+					if (gpxFile == null) {
+						gpxFile = GpxUtilities.loadGpxFile(file)
+					}
+					if (gpxFile.error == null) {
 						saveRouteActivityAsync(gpxFile, routeActivity)
 					}
 				}
@@ -121,7 +133,8 @@ object RouteActivityHelper {
 				val activityId = activityJson["id"]!!.jsonPrimitive.content
 				val activityLabel = activityJson["label"]!!.jsonPrimitive.content
 				val iconName = activityJson["icon_name"]!!.jsonPrimitive.content
-				val activity = RouteActivity(activityId, activityLabel, iconName, activitiesGroup)
+				val tags = activityJson["tags"]?.jsonArray?.map { it.jsonPrimitive.content }?.toSet()
+				val activity = RouteActivity(activityId, activityLabel, iconName, activitiesGroup, tags)
 				cachedActivities.add(activity)
 				activities.add(activity)
 			}

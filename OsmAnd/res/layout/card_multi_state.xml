@@ -46,6 +46,7 @@
 				tools:text="Solid" />
 
 			<androidx.appcompat.widget.AppCompatImageButton
+				android:id="@+id/drop_down_icon"
 				style="@style/Widget.AppCompat.ActionButton"
 				android:layout_width="@dimen/standard_icon_size"
 				android:layout_height="@dimen/standard_icon_size"

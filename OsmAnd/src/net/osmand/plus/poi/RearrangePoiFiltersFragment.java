@@ -110,7 +110,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 
 		boolean nightMode = isNightMode(app, usedOnMap);
 
-		View mainView = UiUtilities.getInflater(app, nightMode).inflate(R.layout.edit_arrangement_list_fragment, container, false);
+		View mainView = UiUtilities.getInflater(requireContext(), nightMode).inflate(R.layout.edit_arrangement_list_fragment, container, false);
 		createToolbar(mainView, nightMode);
 
 		RecyclerView recyclerView = mainView.findViewById(R.id.profiles_list);

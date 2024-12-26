@@ -66,7 +66,7 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(getString(R.string.add_new_folder)));
 
-		View view = UiUtilities.getInflater(app, nightMode).inflate(R.layout.track_name_edit_text, null);
+		View view = UiUtilities.getInflater(requireContext(), nightMode).inflate(R.layout.track_name_edit_text, null);
 		nameTextBox = view.findViewById(R.id.name_text_box);
 		int textBoxBgColorId = nightMode ? R.color.card_and_list_background_light : R.color.activity_background_color_light;
 		int textBoxBgColor = ContextCompat.getColor(app, textBoxBgColorId);

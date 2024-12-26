@@ -4,6 +4,7 @@ import static android.graphics.Region.Op.DIFFERENCE;
 import static android.graphics.drawable.GradientDrawable.RECTANGLE;
 import static android.widget.ImageView.ScaleType.CENTER;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.BIG_SIZE_DP;
+import static net.osmand.plus.quickaction.ButtonAppearanceParams.ORIGINAL_VALUE;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.ROUND_RADIUS_DP;
 import static net.osmand.plus.quickaction.ButtonAppearanceParams.TRANSPARENT_ALPHA;
 import static net.osmand.plus.views.layers.ContextMenuLayer.VIBRATE_SHORT;
@@ -101,11 +102,13 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 		this(context, attrs, 0);
 	}
 
-	public MapButton(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
+	public MapButton(@NonNull Context context, @Nullable AttributeSet attrs,
+			@AttrRes int defStyleAttr) {
 		this(context, attrs, defStyleAttr, 0);
 	}
 
-	public MapButton(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
+	public MapButton(@NonNull Context context, @Nullable AttributeSet attrs,
+			@AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
 
 		this.app = (OsmandApplication) context.getApplicationContext();
@@ -121,7 +124,7 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 
 	@NonNull
 	protected ImageView setupImageView(@NonNull Context context, @Nullable AttributeSet attrs,
-	                                   @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
+			@AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
 		int imageSize = (int) getImageSize();
 		ImageView imageView = new ImageView(context, attrs, defStyleAttr, defStyleRes);
 		imageView.setClickable(false);
@@ -181,7 +184,13 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	public ButtonPositionSize getDefaultPositionSize() {
 		MapButtonState buttonState = getButtonState();
 		if (buttonState != null) {
-			return buttonState.getDefaultPositionSize();
+			ButtonPositionSize position = buttonState.getDefaultPositionSize();
+
+			int size = getSize();
+			size = (size / 8) + 1;
+			position.setSize(size, size);
+
+			return position;
 		}
 		return null;
 	}
@@ -253,7 +262,8 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 		}
 	}
 
-	protected void setBackgroundColors(@ColorInt int backgroundColor, @ColorInt int backgroundPressedColor) {
+	protected void setBackgroundColors(@ColorInt int backgroundColor,
+			@ColorInt int backgroundPressedColor) {
 		if (this.backgroundColor != backgroundColor || this.backgroundPressedColor != backgroundPressedColor) {
 			this.backgroundColor = backgroundColor;
 			this.backgroundPressedColor = backgroundPressedColor;
@@ -269,8 +279,8 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 		updateColors(nightMode);
 
 		ButtonAppearanceParams params = getAppearanceParams();
-		if (invalidated || !Algorithms.objectEquals(appearanceParams, params) || customAppearanceParams != null) {
-			this.appearanceParams = customAppearanceParams != null ? customAppearanceParams : params;
+		if (invalidated || !Algorithms.objectEquals(appearanceParams, params)) {
+			this.appearanceParams = params;
 			this.invalidated = false;
 			updateContent();
 		}
@@ -283,14 +293,17 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	}
 
 	protected void updateContent() {
-		updateIcon();
 		updateSize();
+		updateIcon();
 		updateBackground();
 		updateShadow();
 	}
 
 	protected void updateIcon() {
-		String iconName = appearanceParams.getIconName();
+		String iconName = customAppearanceParams != null ? customAppearanceParams.getIconName() : null;
+		if (Algorithms.isEmpty(iconName)) {
+			iconName = appearanceParams.getIconName();
+		}
 		int iconId = AndroidUtils.getDrawableId(app, iconName);
 		if (iconId == 0) {
 			iconId = RenderingIcons.getBigIconResourceId(iconName);
@@ -321,8 +334,8 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 
 	protected void updateBackground() {
 		Context context = getContext();
-		float opacity = appearanceParams.getOpacity();
-		int cornerRadius = AndroidUtils.dpToPx(context, appearanceParams.getCornerRadius());
+		float opacity = getOpacity();
+		int cornerRadius = AndroidUtils.dpToPx(context, getCornerRadius());
 
 		GradientDrawable normal = new GradientDrawable();
 		normal.setShape(RECTANGLE);
@@ -342,7 +355,7 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	}
 
 	protected void updateShadow() {
-		int radius = AndroidUtils.dpToPx(getContext(), appearanceParams.getCornerRadius());
+		int radius = AndroidUtils.dpToPx(getContext(), getCornerRadius());
 		float[] outerRadius = new float[] {radius, radius, radius, radius, radius, radius, radius, radius};
 
 		ShapeDrawable drawable = new ShapeDrawable();
@@ -358,7 +371,7 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	protected void onDraw(@NotNull Canvas canvas) {
 		super.onDraw(canvas);
 
-		if (!nightMode && appearanceParams != null) {
+		if (!nightMode && (appearanceParams != null || customAppearanceParams != null)) {
 			drawShadow(canvas);
 		}
 	}
@@ -369,7 +382,7 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 		int width = getWidth();
 		int height = getHeight();
 		int padding = (int) shadowPadding;
-		int radius = AndroidUtils.dpToPx(getContext(), appearanceParams.getCornerRadius());
+		int radius = AndroidUtils.dpToPx(getContext(), getCornerRadius());
 
 		clipPath.reset();
 		clipPath.addRoundRect(padding, padding, width - padding, height - padding, radius, radius, Direction.CW);
@@ -420,8 +433,7 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 	}
 
 	public float getImageSize() {
-		ButtonAppearanceParams params = appearanceParams != null ? appearanceParams : getAppearanceParams();
-		return AndroidUtils.dpToPxF(getContext(), params.getSize());
+		return AndroidUtils.dpToPxF(getContext(), getSize());
 	}
 
 	@NonNull
@@ -453,5 +465,44 @@ public abstract class MapButton extends FrameLayout implements OnAttachStateChan
 		if (visibilityListener != null) {
 			visibilityListener.onVisibilityChanged(changedView, visibility);
 		}
+	}
+
+	public int getSize() {
+		if (customAppearanceParams != null) {
+			int size = customAppearanceParams.getSize();
+			if (size == ORIGINAL_VALUE) {
+				MapButtonState buttonState = getButtonState();
+				return buttonState != null ? buttonState.getDefaultSize() : createDefaultAppearanceParams().getSize();
+			}
+			return size;
+		}
+		ButtonAppearanceParams params = appearanceParams != null ? appearanceParams : getAppearanceParams();
+		return params.getSize();
+	}
+
+	public float getOpacity() {
+		if (customAppearanceParams != null) {
+			float opacity = customAppearanceParams.getOpacity();
+			if (opacity == ORIGINAL_VALUE) {
+				MapButtonState buttonState = getButtonState();
+				return buttonState != null ? buttonState.getDefaultOpacity() : createDefaultAppearanceParams().getOpacity();
+			}
+			return opacity;
+		}
+		ButtonAppearanceParams params = appearanceParams != null ? appearanceParams : getAppearanceParams();
+		return params.getOpacity();
+	}
+
+	public int getCornerRadius() {
+		if (customAppearanceParams != null) {
+			int cornerRadius = customAppearanceParams.getCornerRadius();
+			if (cornerRadius == ORIGINAL_VALUE) {
+				MapButtonState buttonState = getButtonState();
+				return buttonState != null ? buttonState.getDefaultCornerRadius() : createDefaultAppearanceParams().getCornerRadius();
+			}
+			return cornerRadius;
+		}
+		ButtonAppearanceParams params = appearanceParams != null ? appearanceParams : getAppearanceParams();
+		return params.getCornerRadius();
 	}
 }

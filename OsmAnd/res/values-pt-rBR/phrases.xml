@@ -4873,4 +4873,12 @@
     <string name="poi_us_maps_recreation_area_activity_day_use_site">Área de uso diurno;Local de uso diurno;Área de uso diurno;Área de recreação de uso diurno;Local de recreação de uso diurno</string>
     <string name="poi_cash_in">Depósito de dinheiro</string>
     <string name="poi_osmand_access_main_tag">Acesso</string>
+    <string name="poi_route_track">Outras rotas</string>
+    <string name="poi_osmand_foot_prohibited_tunnel">Túnel proibido para pedestres</string>
+    <string name="poi_osmand_bicycle_prohibited_tunnel">Túnel proibido para ciclistas</string>
+    <string name="poi_route_article">Artigos de viagem</string>
+    <string name="poi_route_article_point">Pontos de viagem</string>
+    <string name="poi_route_track_point">Outros pontos de rotas</string>
+    <string name="poi_payment_parco_no">Parco não aceito</string>
+    <string name="poi_payment_parkster_no">Parkster não aceito</string>
 </resources>

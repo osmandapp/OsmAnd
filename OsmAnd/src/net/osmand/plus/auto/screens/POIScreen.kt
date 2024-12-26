@@ -46,24 +46,10 @@ class POIScreen(
 
     init {
         loadPOI()
-        lifecycle.addObserver(object : DefaultLifecycleObserver {
-            override fun onDestroy(owner: LifecycleOwner) {
-                super.onDestroy(owner)
-                app.osmandMap.mapLayers.poiMapLayer.setCustomMapObjects(null)
-                app.osmandMap.mapLayers.poiMapLayer.customObjectsDelegate = null
-                app.osmandMap.mapView.backToLocation()
-                initialCompassMode?.let {
-                    app.mapViewTrackingUtilities.switchCompassModeTo(it)
-                }
-            }
-
-            override fun onStart(owner: LifecycleOwner) {
-                super.onStart(owner)
-                app.osmandMap.mapLayers.poiMapLayer.customObjectsDelegate =
-                    OsmandMapLayer.CustomMapObjects()
-            }
-        })
+        lifecycle.addObserver(this)
     }
+
+    override fun shouldRestoreMapState() = true
 
     override fun onGetTemplate(): Template {
         val templateBuilder = PlaceListNavigationTemplate.Builder()
@@ -183,4 +169,19 @@ class POIScreen(
         result.`object` = point.`object`
         openRoutePreview(settingsAction, result)
     }
+
+	override fun onDestroy(owner: LifecycleOwner) {
+		super.onDestroy(owner)
+		app.osmandMap.mapLayers.poiMapLayer.setCustomMapObjects(null)
+		app.osmandMap.mapLayers.poiMapLayer.customObjectsDelegate = null
+		app.osmandMap.mapView.backToLocation()
+		initialCompassMode?.let {
+			app.mapViewTrackingUtilities.switchCompassModeTo(it)
+		}
+	}
+
+	override fun onCreate(owner: LifecycleOwner) {
+		super.onCreate(owner)
+		app.osmandMap.mapLayers.poiMapLayer.customObjectsDelegate = OsmandMapLayer.CustomMapObjects()
+	}
 }

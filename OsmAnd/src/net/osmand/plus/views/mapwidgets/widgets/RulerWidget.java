@@ -18,8 +18,11 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.controls.MapHudLayout.SizeChangeListener;
+import net.osmand.plus.views.controls.MapHudLayout.ViewChangeProvider;
+import net.osmand.plus.views.controls.MapHudLayout.VisibilityChangeListener;
 
-public class RulerWidget extends FrameLayout {
+public class RulerWidget extends FrameLayout implements ViewChangeProvider {
 
 	private final OsmandApplication app;
 	private final OsmandMap osmandMap;
@@ -35,6 +38,9 @@ public class RulerWidget extends FrameLayout {
 	private double cacheRulerTileX;
 	private double cacheRulerTileY;
 
+	private SizeChangeListener sizeListener;
+	private VisibilityChangeListener visibilityListener;
+
 	public RulerWidget(@NonNull Context context) {
 		this(context, null);
 	}
@@ -47,7 +53,8 @@ public class RulerWidget extends FrameLayout {
 		this(context, attrs, defStyleAttr, 0);
 	}
 
-	public RulerWidget(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+	public RulerWidget(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr,
+			int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
 
 		this.app = (OsmandApplication) context.getApplicationContext();
@@ -66,7 +73,8 @@ public class RulerWidget extends FrameLayout {
 		maxWidth = getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
 	}
 
-	public void updateTextSize(boolean isNight, int textColor, int textShadowColor, int shadowRadius) {
+	public void updateTextSize(boolean isNight, int textColor, int textShadowColor,
+			int shadowRadius) {
 		TextInfoWidget.updateTextColor(text, textShadow, textColor, textShadowColor, false, shadowRadius);
 		icon.setBackgroundResource(isNight ? R.drawable.ruler_night : R.drawable.ruler);
 	}
@@ -108,9 +116,36 @@ public class RulerWidget extends FrameLayout {
 		AndroidUiHelper.updateVisibility(layout, visibility);
 	}
 
-	public static double getRulerDistance(@NonNull OsmandApplication app, @NonNull RotatedTileBox tileBox) {
+	public static double getRulerDistance(@NonNull OsmandApplication app,
+			@NonNull RotatedTileBox tileBox) {
 		double pixDensity = tileBox.getPixDensity();
 		int maxWidth = app.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
 		return OsmAndFormatter.calculateRoundedDist(maxWidth / pixDensity, app);
+	}
+
+	@Override
+	public void setSizeListener(@Nullable SizeChangeListener listener) {
+		this.sizeListener = listener;
+	}
+
+	@Override
+	public void setVisibilityListener(@Nullable VisibilityChangeListener listener) {
+		this.visibilityListener = listener;
+	}
+
+	@Override
+	protected void onSizeChanged(int w, int h, int oldWidth, int oldHeight) {
+		super.onSizeChanged(w, h, oldWidth, oldHeight);
+		if (sizeListener != null) {
+			sizeListener.onSizeChanged(this, w, h, oldWidth, oldHeight);
+		}
+	}
+
+	@Override
+	protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
+		super.onVisibilityChanged(changedView, visibility);
+		if (visibilityListener != null) {
+			visibilityListener.onVisibilityChanged(changedView, visibility);
+		}
 	}
 }

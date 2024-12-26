@@ -827,7 +827,7 @@
     <string name="delete_target_point">Smazat cíl</string>
     <string name="intermediate_point">Mezicíl %1$s</string>
     <string name="map_widget_show_destination_arrow">Zobrazit směr do cíle</string>
-    <string name="enable_plugin_monitoring_services">Zapněte modul „Záznam cesty“ pro použití záznamových služeb (zaznamenávání GPX, on-line sledování)</string>
+    <string name="enable_plugin_monitoring_services">Zapněte modul Záznam cesty pro použití záznamových služeb (zaznamenávání GPX, on-line sledování)</string>
     <string name="non_optimal_route_calculation">Při dlouhých vzdálenostech použít méně přesný, ale rychlejší výpočet</string>
     <string name="gps_not_available">Prosím zapněte GPS přijímač v nastavení</string>
     <string name="rendering_attr_roadColors_description">Vyberte barevné schéma:</string>
@@ -1962,7 +1962,7 @@
     <string name="update_all_maps_now">Aktualizovat všechny mapy ihned?</string>
     <string name="clear_tile_data">Vymazat všechny dlaždice</string>
     <string name="routing_attr_short_way_name">Ekonomická trasa</string>
-    <string name="replace_favorite_confirmation">Nahradit Oblíbené místo „%1$s“\?</string>
+    <string name="replace_favorite_confirmation">Nahradit Oblíbené místo %1$s?</string>
     <string name="rendering_attr_hideOverground_name">Nadzemní objekty</string>
     <string name="shared_string_change">Změnit</string>
     <string name="get_started">Začít</string>
@@ -2841,7 +2841,7 @@
     <string name="profile_alert_need_save_title">Uložit změny</string>
     <string name="profile_alert_need_save_msg">Nejprve je třeba uložit změny profilu</string>
     <string name="profile_alert_delete_title">Odstranit profil</string>
-    <string name="profile_alert_delete_msg">Odstranit profil „%s“</string>
+    <string name="profile_alert_delete_msg">Odstranit profil s</string>
     <string name="select_base_profile_dialog_title">Zvolte výchozí profil</string>
     <string name="select_nav_profile_dialog_title">Vyberte typ navigace</string>
     <string name="base_profile_descr_car">Auto, nákladní auto, motocykl</string>
@@ -3226,25 +3226,7 @@
     <string name="osmand_purchases_item">Nákupy v OsmAnd</string>
     <string name="legend_item_description">Průvodce symboly na mapě.</string>
     <string name="navigation_profiles_item">Navigační profily</string>
-    <string name="release_3_7">• Nové offline mapy svahů
-\n
-\n• Plné přizpůsobení oblíbených bodů a GPX cílů – vlastní barvy, ikony a tvary
-\n
-\n• Možnost změny pořadí položek v kontextovém menu, nastavení mapy i hlavním menu
-\n
-\n• Wikipedie jako samostatná vrstva v nastavení mapy, lze vybrat pouze potřebné jazyky
-\n
-\n• Vytváření vlastních filtrů a map bodů zájmu s plnou flexibilitou
-\n
-\n• Přidána možnost obnovit nastavení vlastních profilů
-\n
-\n• Plnohodnotné GPX trasy z navigace nyní podporují jízdní pruhy a kompletní navigační pokyny
-\n
-\n• Opravena velikost uživatelského rozhraní na tabletech
-\n
-\n• Opraveny chyby pro jazyky psané zprava doleva
-\n
-\n</string>
+    <string name="release_3_7">• Nové offline mapy svahů \n \n• Plné přizpůsobení oblíbených bodů a GPX cílů – vlastní barvy, ikony a tvary \n \n• Možnost změny pořadí položek v kontextovém menu, nastavení mapy i hlavním menu \n \n• Wikipedie jako samostatná vrstva v nastavení mapy, lze vybrat pouze potřebné jazyky \n \n• Vytváření vlastních filtrů a map bodů zájmu s plnou flexibilitou \n \n• Přidána možnost obnovit nastavení vlastních profilů \n \n• Plnohodnotné GPX trasy z navigace nyní podporují jízdní pruhy a kompletní navigační pokyny \n \n• Opravena velikost uživatelského rozhraní na tabletech \n \n• Opraveny chyby pro jazyky psané zprava doleva \n \n</string>
     <string name="edit_online_source">Upravit online zdroj</string>
     <string name="expire_time">Doba vypršení platnosti</string>
     <string name="mercator_projection">Mercatorovo zobrazení</string>
@@ -3613,12 +3595,12 @@
     <string name="login_account">Účet</string>
     <string name="user_login">Přihlásit se</string>
     <string name="markers_history">Historie značek</string>
-    <string name="gpx_upload_public_visibility_descr">„Veřejná“ znamená, že trasa je veřejně dostupná ve vašich GPS trasách, ve veřejných seznamech GPS tras a také ve veřejném seznamu stop s nezpracovanými časovými razítky. Data poskytnutá prostřednictvím API nebudou odkazovat na vaši stránku s trasou. Časová razítka bodů trasy nebudou dostupná prostřednictvím veřejného GPS API a body nebudou chronologicky seřazeny.</string>
-    <string name="gpx_upload_private_visibility_descr">„Soukromá“ znamená, že trasa se neobjeví v žádném veřejném seznamu, ale body trasy budou dostupné prostřednictvím veřejného GPS API, bez časových razítek a nebudou chronologicky seřazeny.</string>
+    <string name="gpx_upload_public_visibility_descr">Veřejná znamená, že trasa je veřejně dostupná ve vašich GPS trasách, ve veřejných seznamech GPS tras a také ve veřejném seznamu stop s nezpracovanými časovými razítky. Data poskytnutá prostřednictvím API nebudou odkazovat na vaši stránku s trasou. Časová razítka bodů trasy nebudou dostupná prostřednictvím veřejného GPS API a body nebudou chronologicky seřazeny.</string>
+    <string name="gpx_upload_private_visibility_descr">Soukromá znamená, že trasa se neobjeví v žádném veřejném seznamu, ale body trasy budou dostupné prostřednictvím veřejného GPS API, bez časových razítek a nebudou chronologicky seřazeny.</string>
     <string name="send_files_to_openstreetmap">Odeslat soubor GPX do OpenStreetMap</string>
     <string name="enter_text_separated">Zadejte značky oddělené čárkou.</string>
-    <string name="gpx_upload_trackable_visibility_descr">„Sledovatelná“ znamená, že trasa se neobjeví v žádném veřejném seznamu, ale zpracované body trasy s časovými razítky (které nelze přímo spojit s vámi) budou dostupné prostřednictvím veřejného GPS API.</string>
-    <string name="gpx_upload_identifiable_visibility_descr">„Identifikovatelná“ znamená, že trasa bude veřejně dostupná ve vašich GPS trasách a veřejných seznamech GPS tras, tzn. ostatní uživatelé si budou moci stáhnout nezpracovanou trasu a propojit ji s vaším uživatelským jménem. Veřejná data bodů trasy s časovými razítky poskytnutá prostřednictvím GPS API se budou odkazovat na vaši původní stránku s trasou.</string>
+    <string name="gpx_upload_trackable_visibility_descr">\tSledovatelná znamená, že trasa se neobjeví v žádném veřejném seznamu, ale zpracované body trasy s časovými razítky (které nelze přímo spojit s vámi) budou dostupné prostřednictvím veřejného GPS API.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">Identifikovatelná znamená, že trasa bude veřejně dostupná ve vašich GPS trasách a veřejných seznamech GPS tras, tzn. ostatní uživatelé si budou moci stáhnout nezpracovanou trasu a propojit ji s vaším uživatelským jménem. Veřejná data bodů trasy s časovými razítky poskytnutá prostřednictvím GPS API se budou odkazovat na vaši původní stránku s trasou.</string>
     <string name="osm_edit_close_note">Zavřít OSM poznámku</string>
     <string name="osm_edit_comment_note">Komentovat OSM poznámku</string>
     <string name="osm_login_descr">Přihlaste se metodou OAuth nebo použijte své přihlašovací jméno a heslo v OSM.</string>
@@ -4976,7 +4958,7 @@
     <string name="feature_available_as_part_of_plan">%1$s je k dispozici jako součást plánu %2$s</string>
     <string name="shared_string_included">Zahrnuto</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
-    <string name="local_indexes_category_terrain">Terénní mapy (3D)</string>
+    <string name="local_indexes_category_terrain">Terénní mapy (3D</string>
     <string name="hillshade_slope">Stínování kopců, svahy</string>
     <string name="map_widget_glide_average_desc">Zobrazuje průměrný klouzavý poměr pro nastavený interval.</string>
     <string name="map_widget_glide_target_desc">Zobrazuje klouzavost potřebnou k dosažení cílového bodu.</string>
@@ -5010,7 +4992,7 @@
     <string name="help_article_purchases_giveaway_name">Dárek</string>
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
     <string name="standard_maps">Standardní mapy</string>
-    <string name="max_altitude">Max. výška</string>
+    <string name="max_altitude">Max. nadmořská výška</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">Hlasové výzvy / upozornění</string>
     <string name="track_filter_date_selected_format">%s - %s</string>
     <string name="shared_string_created">Vytvořeno</string>
@@ -5019,7 +5001,7 @@
     <string name="help_article_navigation_routing_direct_to_point_routing_name">Navigace přímo do bodu (Loď)</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Obrazovka mapy při navigaci</string>
     <string name="filter_by_name">Filtrovat podle názvu</string>
-    <string name="shared_string_reset_all">Resetovat vše</string>
+    <string name="shared_string_reset_all">Obnovit vše</string>
     <string name="help_article_navigation_guidance_name">Navigační průvodce</string>
     <string name="help_article_personal_profiles_name">Profily (Nastavení)</string>
     <string name="help_article_navigation_routing_car_based_routing_name">Navigace automobilů (nákladních automobilů, motocyklů)</string>
@@ -5078,7 +5060,7 @@
     <string name="shared_string_show_icon">Zobrazit ikonu</string>
     <string name="shared_string_loading">Načítání</string>
     <string name="delete_smart_folder_dialog_message">Tím se odstraní chytrá složka \"%1$s\". (Žádné stopy nebudou smazány.)</string>
-    <string name="discard_filter_changes_prompt">Resetovat všechny filtry?</string>
+    <string name="discard_filter_changes_prompt">Obnovit všechny filtry?</string>
     <string name="no_config_smart_folder_description">Chytré složky umožňují seskupovat trasy podle použitých filtrů</string>
     <string name="loading_tracks">Znovu načítání tras</string>
     <string name="searching_matching_tracks">Vyhledat všechny odpovídající trasy</string>
@@ -5146,7 +5128,7 @@
     <string name="key_event_action_previous_app_profile">Předchozí profil aplikace</string>
     <string name="key_event_action_change_map_orientation">Změnit orientaci mapy</string>
     <string name="trash_is_empty_banner_desc">Soubory odstraněné z OsmAnd Cloud zde budou k dispozici ještě %1$s dní poté.</string>
-    <string name="all_folders">Všechny složky</string>
+    <string name="all_folders">Všechny adresáře</string>
     <string name="wheel_circumference">Obvod kola</string>
     <string name="external_sensor_name_property_description">Název snímače</string>
     <string name="copy_build_version">Kopírovat verzi sestavení</string>
@@ -5208,9 +5190,9 @@
     <string name="add_new_type">Přidat nový typ</string>
     <string name="key_bindings">Přiřazení kláves</string>
     <string name="external_input_device_title">Externí vstupní zařízení</string>
-    <string name="not_specified">Nespecifikováno</string>
+    <string name="not_specified">Není specifikováno</string>
     <string name="shared_string_is_deleted">%1$s je smazáno.</string>
-    <string name="root_folder">Kořenová složka</string>
+    <string name="root_folder">Kořenový adresář</string>
     <string name="folder">Složka</string>
     <string name="help_article_troubleshooting_maps_data_name">Mapy a data</string>
     <string name="help_article_widgets_name">Mapové nástroje</string>
@@ -5226,7 +5208,7 @@
     <string name="rendering_attr_padusHideBoundaries_description">Skrýt hranice veřejných prostranství ale nechat oblasti</string>
     <string name="sorted_sufolders_toast">Podsložky v \"%1$s\" jsou seřazeny podle: \"%2$s\"</string>
     <string name="avg_sensor_cadence">Kadence jízdního kola, průměr</string>
-    <string name="avg_sensor_speed">Rychlost senzorů, průměr</string>
+    <string name="avg_sensor_speed">Rychlost snímače, průměr</string>
     <string name="help_article_setup_a_route_name">Připravit trasu</string>
     <string name="special_routing_cpp">Speciální směrovací typ</string>
     <string name="speed_limit_warning">Varování o rychlostním limitu</string>
@@ -5241,14 +5223,14 @@
     <string name="sort_subfolders">Seřadit podsložky</string>
     <string name="shared_string_activity">Aktivita</string>
     <string name="shared_string_keywords">Klíčová slova</string>
-    <string name="max_sensor_heartrate">Srdeční tep, max</string>
-    <string name="avg_sensor_heartrate">Srdeční tep, průměr</string>
+    <string name="max_sensor_heartrate">Tepová frekvence, max</string>
+    <string name="avg_sensor_heartrate">Tepová frekvence, průměr</string>
     <string name="max_sensor_cadence">Kadence jízdního kola, max</string>
     <string name="max_sensor_bycicle_power">Výkon jízdního kola, max</string>
     <string name="avg_sensor_bycicle_power">Výkon jízdního kola, průměr</string>
     <string name="max_sensor_temperature">Teplota, max</string>
     <string name="avg_sensor_temperature">Teplota, průměr</string>
-    <string name="max_sensor_speed">Rychlost senzorů, max</string>
+    <string name="max_sensor_speed">Snímač rychlosti, max</string>
     <string name="rendering_attr_padusDisplayMode_description">Podle typu přístupu nebo jména manažera</string>
     <string name="rendering_value_access_name">Podle typu přístupu</string>
     <string name="rendering_value_managerName_name">Podle jména manažera</string>
@@ -5498,16 +5480,16 @@
     <string name="no_internet_descr">Zkontrolujte připojení a zkuste to znovu.</string>
     <string name="no_photos_available_descr">K této lokalitě zatím nebyly přidány žádné uživatelské fotografie</string>
     <string name="no_photos_available">Nejsou dostupné žádné fotografie</string>
-    <string name="quick_action_finish_trip_recording_summary">Tlačítko pro uložení trasy GPX a ukončení záznamu cesty.</string>
+    <string name="quick_action_finish_trip_recording_summary">Tlačítko pro uložení GPX stopy a ukončení záznamu cesty.</string>
     <string name="quick_action_save_recorded_trip_and_continue">Zaznamenaná cesta a pokračování</string>
-    <string name="track_does_not_contain_data_to_save">Trasa neobsahuje data, která by bylo možné uložit.</string>
+    <string name="track_does_not_contain_data_to_save">Stopa neobsahuje data, která by bylo možné uložit.</string>
     <string name="start_trip_recording_first_m">Nejprve spusťte záznam cesty.</string>
-    <string name="new_segment_started_m">Zahájení nahrávání nového segmentu trasy.</string>
-    <string name="quick_action_save_recorded_trip_and_continue_summary">Tlačítko pro uložení aktuální zaznamenané cesty jako souboru GPX a pokračování v nahrávání nové trasy bez přerušení.</string>
+    <string name="new_segment_started_m">Zahájení nahrávání nového segmentu stopy.</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">Tlačítko pro uložení aktuální zaznamenané cesty jako souboru GPX a pokračování v nahrávání nové stopy bez přerušení.</string>
     <string name="quick_action_new_trip_segment">Tlačítko pro spuštění nového segmentu v probíhajícím záznamu stopy GPX.</string>
     <string name="unit_volt">V</string>
     <string name="obd_fuel_type_methanol">Metanol</string>
-    <string name="obd_fuel_type_bifuel_propane">Hybridní pohon na Propan</string>
+    <string name="obd_fuel_type_bifuel_propane">Hybridní pohon na propan</string>
     <string name="obd_fuel_type_bifuel_electricity">Hybridní pohon na elektřinu</string>
     <string name="obd_fuel_type_hydrogen">Vodík</string>
     <string name="percent_unit">%</string>
@@ -5516,8 +5498,8 @@
     <string name="obd_fuel_type_desc">Zobrazuje typ paliva vozidla přes snímač OBD</string>
     <string name="obd_engine_coolant_temp">Teplota chladicí kapaliny</string>
     <string name="obd_fuel_level">Spotřeba paliva (%)</string>
-    <string name="obd_plugin_name">Metriky vozidel</string>
-    <string name="obd_plugin_description">Sledování klíčových parametrů vozidla pomocí protokolu OBD-II. Přístup k datům včetně: * Otáčky motoru * Spotřeba paliva * Zbývající palivo * Vzdálenost od nastartování motoru * Teplota sání * Teplota okolí * Teplota chladicí kapaliny * Rychlost vozidla * Procento baterie</string>
+    <string name="obd_plugin_name">Metriky vozidla</string>
+    <string name="obd_plugin_description">Monitorujte klíčové metriky vozidla pomocí protokolu OBD-II. Přístup k datům zahrnuje:\n • Otáčky motoru, doba běhu motoru, vypočtené zatížení motoru\n • Spotřeba paliva, tlak paliva, zbývající palivo\n • Teplota sání, teplota okolí, teplota chladicí kapaliny, teplota motorového oleje\n • Rychlost vozidla, poloha škrticí klapky, napětí baterie\n</string>
     <string name="obd_support">Podpora OBD</string>
     <string name="obd_ambient_air_temp">Teplota okolí</string>
     <string name="obd_battery_voltage">Napětí baterie</string>
@@ -5533,11 +5515,11 @@
     <string name="obd_fuel_type_ethanol">Etanol</string>
     <string name="obd_fuel_type_electric">Elektřina</string>
     <string name="obd_fuel_type_bifuel_gasoline">Hybridní pohon na benzín</string>
-    <string name="obd_fuel_type_bifuel_methanol">Hybridní pohon na Methanol</string>
-    <string name="obd_fuel_type_bifuel_ethanol">Hybridní pohon na Ethanol</string>
+    <string name="obd_fuel_type_bifuel_methanol">Hybridní pohon na metanol</string>
+    <string name="obd_fuel_type_bifuel_ethanol">Hybridní pohon na etanol</string>
     <string name="obd_fuel_type_bifuel_electric_combustion">Hybridní elektrický a spalovací motor</string>
     <string name="obd_fuel_type_hybrid_gasoline">Hybridní benzínový</string>
-    <string name="obd_fuel_type_hybrid_ethanol">Hybridní ethanolový</string>
+    <string name="obd_fuel_type_hybrid_ethanol">Hybridní etanolový</string>
     <string name="obd_fuel_type_hybrid_diesel">Hybridní dieselový</string>
     <string name="obd_fuel_type_hybrid_hydrogen">Hybridní vodíkový</string>
     <string name="obd_fuel_type_unknown">Neznámý typ paliva</string>
@@ -5552,12 +5534,12 @@
     <string name="obd_fuel_type_bifuel_lpg">Hybridní pohon na LPG</string>
     <string name="obd_fuel_type_bifuel_cng">Hybridní pohon na CNG</string>
     <string name="obd_fuel_type_hybrid_electric">Hybridní elektrický</string>
-    <string name="obd_fuel_consumption_rate_desc">Zobrazuje míru spotřeby paliva vozidla na základě umístění OBD</string>
+    <string name="obd_fuel_consumption_rate_desc">Zobrazuje míru spotřeby paliva vozidla podle OBD a polohy</string>
     <string name="obd_rpm_desc">Zobrazuje otáčky otáčkoměru vozidla přes snímač OBD</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="offline_wikivoyage">Offline Wikivoyage</string>
-    <string name="lock_screen_description">Povoluje nebo zakazuje funkce dotykové obrazovky, aby se zabránilo náhodnému klepnutí</string>
-    <string name="lock_screen">Uzamčení obrazovky</string>
+    <string name="lock_screen_description">Zapne nebo vypne funkce dotykové obrazovky, aby se zabránilo nechtěným klepnutím</string>
+    <string name="lock_screen">Zamknout obrazovku</string>
     <string name="obd_vin">VIN</string>
     <string name="quick_action_start_pause_recording">Tlačítko pro spuštění, pozastavení nebo obnovení záznamu stopy GPX.</string>
     <string name="obd_vin_desc">VIN kód přes OBD</string>
@@ -5565,10 +5547,8 @@
     <string name="obd_fuel_type_hybrid_regenerative">Hybridní regenerativní</string>
     <string name="shared_string_obd">OBD</string>
     <string name="obd_widget_group">Metriky vozidel</string>
-    <string name="obd_fuel_left_distance">Zbývající palivo (vzdálenost)</string>
     <string name="obd_fuel_type_bifuel_hydrogen">Hybridní na vodík</string>
     <string name="vehicle_metrics_plugin_settings">Nastavení metrik vozidla</string>
-    <string name="obd_rpm">RPM</string>
     <string name="rpm_unit">rpm</string>
     <string name="quick_action_showhide_osm_edits_descr">Tlačítko pro zobrazení nebo skrytí místních úprav OSM na mapě.</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Stezky pro terénní kola</string>
@@ -5577,16 +5557,16 @@
     <string name="connect_obd_instructions_step1">Připojte skener k portu OBD-II vozidla.</string>
     <string name="connect_obd_instructions_step2">Nastartujte motor vozidla</string>
     <string name="connect_obd_instructions_step3">Povolte v zařízení Bluetooth</string>
-    <string name="connect_obd_instructions_step4">Klepněte na možnost „Připojit“ a vyberte skener ze seznamu.</string>
+    <string name="connect_obd_instructions_step4">Klepněte na možnost „%1$s“ a vyberte skener ze seznamu.</string>
     <string name="obd_fuel_left_liters">Zbývající palivo (litry)</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
     <string name="connect_obd_instructions_title">OsmAnd podporuje připojení Bluetooth ke skenerům OBD-II.</string>
     <string name="learn_more_about_obd_sensors">Další informace o senzorech.</string>
-    <string name="liter_per_hour">l/h</string>
+    <string name="liter_per_hour">L/h</string>
     <string name="screen_is_locked_by_external_button">Dotyková obrazovka je uzamčená. Chcete-li odemknout, stiskněte tlačítko %1$s nebo klepněte na tlačítko na obrazovce.</string>
     <string name="screen_is_unlocked">Dotyková obrazovka je odemčená.</string>
-    <string name="screen_is_locked_by_action_button">Dotyková obrazovka je uzamčená. Klepnutím na tlačítko odemkněte.</string>
-    <string name="release_4_9">- Přidán celoobrazovkový prohlížeč galerií pro obrázky Wikimedia\n\n - Zavedení nového zásuvného modulu „Metriky vozidla“ pro sledování výkonu vozidla pomocí protokolu OBD-II.\n\n - Přidána možnost přiřazovat činnosti ke stopám a podle toho je filtrovat\n\n - Implementovány nové rychlé akce pro záznam jízdy a uzamčení dotykové obrazovky\n\n - Zaveden přizpůsobitelný vzhled tlačítek mapy a přesná mřížka\n\n - Přidána kontextová nabídka a akce „Obnovit průměrnou rychlost“ k widgetům\n\n - Přidána nová vrstva tras „Dirt Bike trails“\n\n - Opravena funkce „Automatický záznam trasy během navigace“\n\n - Opraven problém s převrácenými souřadnicemi v jazyce RTL\n\n - Opravena chybějící data snímačů pro aktuálně zaznamenávanou trasu\n\n - Přidány informace o okolních oblastech pro vybraný bod\n\n - Přidána rychlá akce pro kontrolu viditelnosti úprav OSM\n\n - Oddělené parametry viditelnosti pro možnosti zabarvení terénu\n\n - Přidána ikona pro zobrazení přístupu nebo jiných atributů silnice či cesty, na kterou lze klepnout</string>
+    <string name="screen_is_locked_by_action_button">Dotyková obrazovka je zamčená. Klepnutím ji odemknete.</string>
+    <string name="release_4_9">• Přidán celoobrazovkový prohlížeč galerií pro obrázky Wikimedia\n\n • Přidán nový modul „Metriky vozidla“ pro sledování výkonu vozidla pomocí protokolu OBD-II.\n\n • Přidána možnost přiřazovat činnosti ke stopám a podle toho je filtrovat\n\n • Implementovány nové rychlé akce pro záznam jízdy a uzamčení dotykové obrazovky\n\n • Zaveden přizpůsobitelný vzhled tlačítek mapy a přesná mřížka\n\n • Přidána kontextová nabídka a akce „Obnovit průměrnou rychlost“ k widgetům\n\n • Přidána nová vrstva tras „Trasy pro terénní kola“\n\n • Opravena funkce „Automatický záznam trasy během navigace“\n\n • Opraven problém s převrácenými souřadnicemi v jazyce RTL\n\n • Opravena chybějící data snímačů pro aktuálně zaznamenávanou stopu\n\n • Přidány informace o okolních oblastech pro vybraný bod\n\n • Přidána rychlá akce pro ovládání viditelnosti úprav OSM\n\n • Oddělené parametry viditelnosti pro možnosti zabarvení terénu\n\n • Přidána ikona pro zobrazení přístupu nebo jiných atributů silnice či cesty, na kterou lze klepnout</string>
     <string name="route_guidance_desc">Poskytuje navádění trasy v reálném čase, včetně vzdálenosti k další odbočce, názvu silnice, názvu aktuální ulice a informací o jízdních pruzích. Widgety jsou aktivní během navigace.</string>
     <string name="obd_nothing_found_description">Zkontrolujte prosím následující:\n – Ujistěte se, že je Bluetooth zapnutý\n – Motor vozidla běží\n – Ujistěte se, že je vaše zařízení v dosahu skeneru.</string>
     <string name="obd_bluetooth_off_description">Zapněte Bluetooth hledání a připojení skenerů.</string>
@@ -5598,24 +5578,22 @@
     <string name="obd_searching_text">Hledání skenerů</string>
     <string name="obd_device_forget_sensor">Zapomenout skener</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Zobrazuje spotřebu paliva vozidla na základě výpočtů (%/h)</string>
-    <string name="l_100km">l/100km</string>
-    <string name="obd_fuel_consumption_rate_l_km">Spotřeba paliva (l/km)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Zobrazuje spotřebu paliva vozidla na základě výpočtů (l/km)</string>
-    <string name="simulate_obd">Simulace dat obd</string>
+    <string name="l_100km">L/100km</string>
+    <string name="obd_fuel_consumption_rate_l_km">Spotřeba paliva (L/100 km)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Zobrazuje spotřebu paliva vozidla na základě výpočtů (l/100 km)</string>
+    <string name="simulate_obd">Simulace dat OBD</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Tlak paliva</string>
     <string name="percent_hour">%/h</string>
-    <string name="obd_fuel_consumption_rate_l_h">Spotřeba paliva (l/h)</string>
+    <string name="obd_fuel_consumption_rate_l_h">Spotřeba paliva (L/h)</string>
     <string name="obd_fuel_consumption_rate_sensor">Spotřeba paliva (senzor)</string>
-    <string name="obd_fuel_consumption_rate_l_h_desc">Zobrazuje spotřebu paliva vozidla na základě výpočtů (l/h)</string>
-    <string name="obd_fuel_consumption_rate_sensor_desc">Zobrazuje spotřebu paliva vozidla na základě senzoru (l/h)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Zobrazuje spotřebu paliva vozidla na základě výpočtů (L/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Zobrazuje spotřebu paliva vozidla na základě senzoru (L/h)</string>
     <string name="obd_fuel_level_liter">Hladina paliva (l)</string>
     <string name="obd_fuel_level_percent">Hladina paliva (%)</string>
-    <string name="obd_fuel_left_percent">Zbývá palivo (%)</string>
-    <string name="obd_fuel_left_liter">Zbývá palivo (l)</string>
     <string name="obd_fuel_left_km">Zbývá palivo (km)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">Spotřeba paliva l/h</string>
-    <string name="obd_fuel_consumption_rate_scanner">Spotřeba paliva (obd)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Míra spotřeby paliva</string>
+    <string name="obd_fuel_consumption_rate_scanner">Spotřeba paliva (OBD)</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Spotřeba paliva %/h</string>
     <string name="route_guidance">Navádění po trase</string>
     <string name="obd_widget_vehicle_speed">Rychlost vozidla</string>
@@ -5627,4 +5605,62 @@
     <string name="dynamic_icon_type_summary">Ikona se mění podle stavu akce.</string>
     <string name="shared_string_dynamic">Dynamický</string>
     <string name="obd_connecting_to_device">Připojení k %s</string>
+    <string name="shared_strings_dimensions">Rozměry</string>
+    <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
+    <string name="fuel_tank_capacity_description">Zadejte objem nádrže, abyste mohli přesně sledovat stav paliva a jeho spotřebu</string>
+    <string name="fuel_tank_capacity">Objem palivové nádrže</string>
+    <string name="obd_engine_oil_temperature_desc">Ukazuje teplotu motorového oleje.</string>
+    <string name="obd_throttle_position_desc">Ukazuje úhel škrticí klapky v tělese škrticí klapky.</string>
+    <string name="vehicle_metrics_obd_ii">Metriky vozidla (OBD-II)</string>
+    <string name="ltr_or_rtl_combine_via_per">%1$s za %2$s</string>
+    <string name="shared_string_volume">Objem</string>
+    <string name="obd_calculated_engine_load">Vypočítané zatížení motoru</string>
+    <string name="obd_engine_oil_temperature">Teplota motorového oleje</string>
+    <string name="remaining_fuel">Zbývající palivo</string>
+    <string name="obd_fuel_consumption">Spotřeba paliva</string>
+    <string name="reset_average_value">Reset průměrné hodnoty</string>
+    <string name="average_temperature_slider_description">Zvolte časový interval pro měření průměrné teploty.</string>
+    <string name="shared_string_instant">Okamžitý</string>
+    <string name="current_temperature">Aktuální teplota</string>
+    <string name="show_minor_turns">Zobrazení na menších křižovatkách při přímé navigaci</string>
+    <string name="litres">Litry</string>
+    <string name="imperial_gallons_unit">imp gal</string>
+    <string name="imperial_gallons">Imperiální galony</string>
+    <string name="us_gallons">US galony</string>
+    <string name="record_obd_data">Záznam metrik vozidla</string>
+    <string name="shared_string_hour">Hodiny</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Sledování důležitých údajů o vozidle pomocí protokolu OBD-II. Sledujte klíčové ukazatele, jako je rychlost, otáčky motoru, spotřeba paliva a další.</string>
+    <string name="obd_fuel_consumption_rate_sensor_type">Použít vybrané jednotky v názvu.</string>
+    <string name="remaining_fuel_description">Zobrazuje zbývající množství paliva v nádrži vozidla</string>
+    <string name="average_value_slider_description">Vyberte časový interval pro měření průměrné hodnoty.</string>
+    <string name="obd_fuel_consumption_desc">Zobrazuje míru spotřeby paliva v motoru vypočítanou na základě zbývajícího paliva, velikosti nádrže a ujeté vzdálenosti podle GPS.</string>
+    <string name="average_temperature">Průměrná teplota</string>
+    <string name="show_minor_turns_descr">Na všech průjezdních křižovatkách se zobrazí jízdní pruhy bez ohledu na hlasové pokyny</string>
+    <string name="us_gallons_unit">gal</string>
+    <string name="unit_of_volume_description">Vybrané jednotky se použijí na všechna data související s objemem v aktuálním profilu.</string>
+    <string name="obd_fuel_pressure_desc">Ukazuje tlak v palivovém systému</string>
+    <string name="obd_battery_voltage_desc">Zobrazuje úroveň napětí baterie vozidla</string>
+    <string name="obd_engine_runtime_desc">Ukazuje, jak dlouho motor běží od jeho nastartování.</string>
+    <string name="obd_throttle_position">Poloha škrticí klapky</string>
+    <string name="obd_calculated_engine_load_desc">Zobrazuje procento výkonu motoru, které je v daném okamžiku k dispozici.</string>
+    <string name="obd_engine_runtime">Provozní doba motoru</string>
+    <string name="obd_speed_desc">Zobrazuje rychlost ze snímače rychlosti vozidla (VSS).</string>
+    <string name="obd_air_intake_temp_desc">Ukazuje teplotu vzduchu vstupujícího do sacího potrubí motoru.</string>
+    <string name="unit_of_volume">Jednotka objemu</string>
+    <string name="obd_engine_coolant_temp_desc">Ukazuje teplotu chladicí kapaliny motoru</string>
+    <string name="obd_ambient_air_temp_desc">Zobrazuje teplotu vně vozidla.</string>
+    <string name="preview_next_turn">Ukázat příští odbočku</string>
+    <string name="av_audio_sample_rate">Vzorkovací frekvence zvuku</string>
+    <string name="av_audio_sample_rate_descr">Vyberte vzorkovací frekvenci zvuku.</string>
+    <string name="connect_new_scanner">Připojit nový skener</string>
+    <string name="shared_string_engine">Motor</string>
+    <string name="vehicle_metrics_recording_description">Vyberte parametry, které se mají zaznamenat do GPX souboru.</string>
+    <string name="auto_zoom_3d_angle">Úhel automatického 3D zoomu</string>
+    <string name="location_interpolation_percent">Procento interpolace polohy</string>
+    <string name="location_interpolation_percent_desc">Nastavení procenta interpolace polohy během navigace po trase. Tento parametr snižuje zpoždění polohy na mapě během animace.</string>
+    <string name="shared_string_interpolation">Interpolace</string>
+    <string name="selected_delayed_profile">Zvolený profil s\\</string>
+    <string name="default_buttons_opacity_original_description">Každé tlačítko si zachová svou vlastní průhlednost pozadí.</string>
+    <string name="default_buttons_size_original_description">Každé tlačítko si zachová svou vlastní velikost.</string>
+    <string name="default_buttons_corners_original_description">Každé tlačítko si zachová své vlastní zaoblení rohů.</string>
 </resources>

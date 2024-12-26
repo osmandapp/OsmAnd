@@ -34,6 +34,7 @@ import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.RouteActivityHelper;
+import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.shared.gpx.primitives.Track;
@@ -374,7 +375,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 
 				// check if name is extension (needed for audio/video plugin & josm integration)
 				if (pt.getName() != null && pt.getName().length() > 4 && pt.getName().charAt(pt.getName().length() - 4) == '.') {
-					pt.setLink(pt.getName());
+					pt.setLink(new Link(pt.getName()));
 				}
 
 				String date = DateFormat.format("yyyy-MM-dd", time).toString(); //$NON-NLS-1$
@@ -575,15 +576,17 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 	private String getPluginsInfo(@NonNull net.osmand.Location location) {
 		JSONObject json = new JSONObject();
 		PluginsHelper.attachAdditionalInfoToRecordedTrack(location, json);
-
-		OsmandDevelopmentPlugin plugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
-		boolean writeBearing = plugin != null && plugin.SAVE_BEARING_TO_GPX.get();
-		if (writeBearing && location.hasBearing()) {
-			try {
-				json.put(TRACK_COL_BEARING, DECIMAL_FORMAT.format(location.getBearing()));
-			} catch (JSONException e) {
-				log.error(e.getMessage(), e);
+		try {
+			OsmandDevelopmentPlugin plugin = PluginsHelper.getEnabledPlugin(OsmandDevelopmentPlugin.class);
+			if (settings.SAVE_TRACK_PRECISION.get() == 0) {
+				json.put("provider", location.getProvider());
 			}
+			boolean writeBearing = plugin != null && plugin.SAVE_BEARING_TO_GPX.get();
+			if (writeBearing && location.hasBearing()) {
+				json.put(TRACK_COL_BEARING, DECIMAL_FORMAT.format(location.getBearing()));
+			}
+		} catch (JSONException e) {
+			log.error(e.getMessage(), e);
 		}
 		return json.length() > 0 ? json.toString() : null;
 	}

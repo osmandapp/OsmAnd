@@ -7,10 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.views.layers.MapActionsHelper;
 import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
 import net.osmand.plus.views.mapwidgets.configure.buttons.NavigationMenuButtonState;
 
@@ -34,10 +32,7 @@ public class NavigationMenuButton extends MapButton {
 
 		setOnClickListener(v -> {
 			mapActivity.getFragmentsHelper().dismissCardDialog();
-			MapActionsHelper controlsHelper = app.getOsmandMap().getMapLayers().getMapActionsHelper();
-			if (controlsHelper != null) {
-				controlsHelper.doRoute();
-			}
+			app.getOsmandMap().getMapActions().doRoute();
 		});
 	}
 
@@ -50,8 +45,7 @@ public class NavigationMenuButton extends MapButton {
 	@Override
 	protected void updateColors(boolean nightMode) {
 		if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()
-				|| routingHelper.isRouteBeingCalculated() || routingHelper.isRouteCalculated()
-				|| MapActivity.getMapRouteInfoMenu().getRoutePlanningBtnImage() != 0) {
+				|| routingHelper.isRouteBeingCalculated() || routingHelper.isRouteCalculated()) {
 			setIconColor(ColorUtilities.getColor(app, R.color.color_myloc_distance));
 		} else {
 			setIconColor(ColorUtilities.getMapButtonIconColor(app, nightMode));

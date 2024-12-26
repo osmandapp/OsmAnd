@@ -1134,8 +1134,9 @@ public class SearchCoreFactory {
 				Collections.sort(possibleValues);
 				for (String s : possibleValues) {
 					translate = getTopIndexTranslation(s);
+					String normalizeBrand = s.toLowerCase(Locale.ROOT);
 					if (complete) {
-						if (CollatorStringMatcher.cmatches(collator, search, s, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
+						if (CollatorStringMatcher.cmatches(collator, search, normalizeBrand, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
 							topIndexValue = s;
 							break;
 						} else {
@@ -1171,7 +1172,7 @@ public class SearchCoreFactory {
 		private String getTopIndexTranslation(String value) {
 			String key = TopIndexFilter.getValueKey(value);
 			String translate = types.getPoiTranslation(key);
-			if (translate.toLowerCase().equals(key)) {
+			if (translate.toLowerCase(Locale.ROOT).equals(key)) {
 				translate = value;
 			}
 			return translate;
@@ -1230,7 +1231,7 @@ public class SearchCoreFactory {
 				} else if (obj instanceof SearchPoiTypeFilter) {
 					poiTypeFilter = (SearchPoiTypeFilter) obj;
 				} else if (obj instanceof SearchPoiAdditionalFilter) {
-					poiTypeFilter = ACCEPT_ALL_POI_TYPE_FILTER;
+					poiTypeFilter = null;
 					poiAdditionalFilter = (SearchPoiAdditionalFilter) obj;
 				} else {
 					throw new UnsupportedOperationException();
@@ -1273,9 +1274,9 @@ public class SearchCoreFactory {
 				}
 			}
 			this.nameFilter = nameFilter;
-			if (poiTypeFilter != null) {
+			if (poiTypeFilter != null || poiAdditionalFilter != null) {
 				int radius = BBOX_RADIUS;
-				if (phrase.getRadiusLevel() == 1 && poiTypeFilter instanceof CustomSearchPoiFilter) {
+				if (poiTypeFilter != null && phrase.getRadiusLevel() == 1 && poiTypeFilter instanceof CustomSearchPoiFilter) {
 					String name = ((CustomSearchPoiFilter) poiTypeFilter).getFilterId();
 					if ("std_null".equals(name)) {
 						radius = BBOX_RADIUS_NEAREST;

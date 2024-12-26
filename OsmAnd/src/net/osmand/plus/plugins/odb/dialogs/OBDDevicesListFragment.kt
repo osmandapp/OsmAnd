@@ -148,7 +148,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 
 	override fun onResume() {
 		super.onResume()
-		vehicleMetricsPlugin?.setConnectionStateListener(this)
+		vehicleMetricsPlugin.setConnectionStateListener(this)
 		noBluetoothCard?.visibility =
 			if (AndroidUtils.isBluetoothEnabled(requireActivity())) View.GONE else View.VISIBLE
 		updatePairedSensorsList()
@@ -156,12 +156,12 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 
 	override fun onPause() {
 		super.onPause()
-		vehicleMetricsPlugin?.setConnectionStateListener(null)
+		vehicleMetricsPlugin.setConnectionStateListener(null)
 	}
 
 	private fun updatePairedSensorsList() {
 		if (view != null) {
-			vehicleMetricsPlugin?.let { plugin ->
+			vehicleMetricsPlugin.let { plugin ->
 				val connectedDevice = plugin.getConnectedDeviceInfo()
 				val connectedDevices: List<BTDeviceInfo> =
 					if (connectedDevice == null) emptyList() else arrayListOf(connectedDevice)
@@ -198,11 +198,11 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	}
 
 	override fun onDisconnect(device: BTDeviceInfo) {
-		vehicleMetricsPlugin?.disconnect()
+		vehicleMetricsPlugin.disconnect(true)
 	}
 
 	override fun onConnect(device: BTDeviceInfo) {
-		vehicleMetricsPlugin?.connectToObd(requireActivity(), device)
+		vehicleMetricsPlugin.connectToObd(requireActivity(), device)
 	}
 
 	override fun onSettings(device: BTDeviceInfo) {
@@ -224,7 +224,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	}
 
 	override fun onForgetSensorConfirmed(deviceId: String) {
-		vehicleMetricsPlugin?.removeDeviceToUsedOBDDevicesList(deviceId)
+		vehicleMetricsPlugin.removeDeviceToUsedOBDDevicesList(deviceId)
 		updatePairedSensorsList()
 	}
 

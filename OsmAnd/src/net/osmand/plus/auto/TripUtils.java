@@ -17,6 +17,7 @@ import androidx.car.app.navigation.model.Maneuver;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.CurrentStreetName;
+import net.osmand.plus.routing.RoadShield;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
@@ -226,30 +227,6 @@ public class TripUtils {
 
 	@NonNull
 	public static CurrentStreetName getStreetName(@NonNull OsmandApplication app, @NonNull NextDirectionInfo info, @NonNull RouteDirectionInfo routeInfo) {
-		CurrentStreetName streetName = new CurrentStreetName(info);
-		if (Algorithms.isEmpty(streetName.text)) {
-			streetName.text = getTurnDescription(app, info, routeInfo);
-		}
-		return streetName;
-	}
-
-	@Nullable
-	private static String getTurnDescription(@NonNull OsmandApplication app, @NonNull NextDirectionInfo info, @NonNull RouteDirectionInfo routeInfo) {
-		String description = routeInfo.getRef();
-		if (Algorithms.isEmpty(description)) {
-			TurnType turnType = routeInfo.getTurnType();
-			NextDirectionInfo nextInfo = getNextDirectionInfoAfter(app, info);
-			TurnType nextTurnType = nextInfo != null && nextInfo.directionInfo != null ? nextInfo.directionInfo.getTurnType() : null;
-
-			description = turnType != null ? nextTurnsToString(app, turnType, nextTurnType) : null;
-		}
-		return description;
-	}
-
-	@Nullable
-	private static NextDirectionInfo getNextDirectionInfoAfter(@NonNull OsmandApplication app, @NonNull NextDirectionInfo info) {
-		RoutingHelper helper = app.getRoutingHelper();
-		boolean onRoute = !helper.isDeviatedFromRoute();
-		return onRoute ? helper.getNextRouteDirectionInfoAfter(info, new NextDirectionInfo(), true) : null;
+		return new CurrentStreetName(info, true);
 	}
 }

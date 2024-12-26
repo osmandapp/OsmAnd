@@ -44,5 +44,7 @@ data class ButtonAppearanceParams(
 
 		internal const val ROUND_RADIUS_DP = 36
 		internal const val RECTANGULAR_RADIUS_DP = 2
+
+		internal const val ORIGINAL_VALUE = -1
 	}
 }

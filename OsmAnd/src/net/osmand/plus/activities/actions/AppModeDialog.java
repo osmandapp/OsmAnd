@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.OsmandApplication;
@@ -62,7 +63,7 @@ public class AppModeDialog {
 			buttons[k++] = createToggle(a.getLayoutInflater(), app, R.layout.mode_view, ll.findViewById(R.id.app_modes_content), ma, useMapTheme);
 		}
 		for (int i = 0; i < buttons.length; i++) {
-			updateButtonState(app, values, selected, onClickListener, buttons, i, singleSelection, useMapTheme, nightMode);
+			updateButtonState(a, values, selected, onClickListener, buttons, i, singleSelection, useMapTheme, nightMode);
 		}
 
 		ApplicationMode activeMode = app.getSettings().getApplicationMode();
@@ -84,10 +85,11 @@ public class AppModeDialog {
 	}
 
 
-	public static void updateButtonState(OsmandApplication app, List<ApplicationMode> visible,
+	public static void updateButtonState(@NonNull Context context, List<ApplicationMode> visible,
 	                                     Set<ApplicationMode> selected, View.OnClickListener onClickListener, View[] buttons,
 	                                     int i, boolean singleChoice, boolean useMapTheme, boolean nightMode) {
-		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		Context themedCtx = UiUtilities.getThemedContext(context, nightMode);
 		if (buttons[i] != null) {
 			View tb = buttons[i];
 			ApplicationMode mode = visible.get(i);
@@ -130,7 +132,7 @@ public class AppModeDialog {
 						onClickListener.onClick(null);
 					}
 					for (int i = 0; i < visible.size(); i++) {
-						updateButtonState(app, visible, selected, onClickListener, buttons, i, singleChoice, useMapTheme, nightMode);
+						updateButtonState(context, visible, selected, onClickListener, buttons, i, singleChoice, useMapTheme, nightMode);
 					}
 				}
 			});

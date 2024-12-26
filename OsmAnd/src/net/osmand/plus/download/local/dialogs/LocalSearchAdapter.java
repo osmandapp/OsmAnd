@@ -2,6 +2,7 @@ package net.osmand.plus.download.local.dialogs;
 
 import static net.osmand.plus.download.local.dialogs.LocalItemsAdapter.LIST_ITEM_TYPE;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,8 @@ public class LocalSearchAdapter extends RecyclerView.Adapter<ViewHolder> impleme
 	private final LayoutInflater themedInflater;
 	private final boolean nightMode;
 
-	public LocalSearchAdapter(@NonNull OsmandApplication app, @NonNull LocalItemListener listener, boolean nightMode) {
+	public LocalSearchAdapter(@NonNull Context context, @NonNull LocalItemListener listener, boolean nightMode) {
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		this.listener = listener;
 		this.nightMode = nightMode;
 		this.filter = new LocalSearchFilter(app, result -> {
@@ -42,7 +44,7 @@ public class LocalSearchAdapter extends RecyclerView.Adapter<ViewHolder> impleme
 			notifyDataSetChanged();
 			return true;
 		});
-		themedInflater = UiUtilities.getInflater(app, nightMode);
+		themedInflater = UiUtilities.getInflater(context, nightMode);
 	}
 
 	public void setItems(@NonNull List<BaseLocalItem> items) {

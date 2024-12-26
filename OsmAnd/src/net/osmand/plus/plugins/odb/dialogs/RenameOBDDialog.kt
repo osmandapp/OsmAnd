@@ -123,7 +123,7 @@ class RenameOBDDialog : BaseOsmAndDialogFragment() {
 	}
 
 	private fun showDismissDialog() {
-		val themedContext = UiUtilities.getThemedContext(activity, isNightMode(false))
+		val themedContext = UiUtilities.getThemedContext(requireContext(), isNightMode(false))
 		val dismissDialog = AlertDialog.Builder(themedContext)
 		dismissDialog.setTitle(getString(R.string.shared_string_dismiss))
 		dismissDialog.setMessage(getString(R.string.exit_without_saving))

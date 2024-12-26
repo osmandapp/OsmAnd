@@ -178,7 +178,7 @@ public class CommonChartAdapter extends BaseChartAdapter<ElevationChart, LineDat
 	}
 
 	private LayoutInflater createThemedInflater() {
-		return LayoutInflater.from(UiUtilities.getThemedContext(app, isNightMode()));
+		return LayoutInflater.from(UiUtilities.getThemedContext(chart.getContext(), isNightMode()));
 	}
 
 	public void setGpxGraphType(@Nullable GPXTabItemType gpxGraphType) {

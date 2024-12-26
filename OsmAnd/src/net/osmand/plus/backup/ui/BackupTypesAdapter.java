@@ -1,6 +1,7 @@
 package net.osmand.plus.backup.ui;
 
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,14 +56,14 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 	private final boolean nightMode;
 	private final boolean cloudRestore;
 
-	public BackupTypesAdapter(OsmandApplication app, OnItemSelectedListener listener, boolean cloudRestore, boolean nightMode) {
-		this.app = app;
+	public BackupTypesAdapter(@NonNull Context context, OnItemSelectedListener listener, boolean cloudRestore, boolean nightMode) {
+		this.app = (OsmandApplication) context.getApplicationContext();
 		this.listener = listener;
 		this.nightMode = nightMode;
 		this.cloudRestore = cloudRestore;
 		uiUtilities = app.getUIUtilities();
-		themedInflater = UiUtilities.getInflater(app, nightMode);
-		activeColor = ContextCompat.getColor(app, nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light);
+		themedInflater = UiUtilities.getInflater(context, nightMode);
+		activeColor = ContextCompat.getColor(context, nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light);
 	}
 
 	@Override

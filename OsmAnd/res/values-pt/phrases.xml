@@ -185,7 +185,7 @@
     <string name="poi_fire_water_pond">Reservatório de água contra incêndios</string>
     <string name="poi_grit_bin">Caixa de sal-gema</string>
     <string name="poi_ambulance_station">Posto de ambulância</string>
-    <string name="poi_disaster_response">Serviço de emergência</string>
+    <string name="poi_disaster_response">Estação de resposta a catástrofes</string>
     <string name="poi_emergency_access_point">Ponto de acesso de emergência</string>
     <string name="poi_ford">Vau</string>
     <string name="poi_ford_stepping_stones">Ponte pedonal em pedras separadas</string>
@@ -4880,4 +4880,24 @@
     <string name="poi_payment_parkster_no">Parkster não aceite</string>
     <string name="poi_osmand_foot_prohibited_tunnel">Túnel proibido para pedestres</string>
     <string name="poi_osmand_bicycle_prohibited_tunnel">Túnel proibido para ciclistas</string>
+    <string name="poi_camp_site_type">Tipo de parque de campismo</string>
+    <string name="poi_routes_driving">A conduzir</string>
+    <string name="poi_routes_motorcycling">De motorizada</string>
+    <string name="poi_routes_foot">A pé</string>
+    <string name="poi_routes_winter_sport">Desportos de inverno</string>
+    <string name="poi_routes_cycling">Ciclismo</string>
+    <string name="poi_routes_air_sports">Desportos aéreos</string>
+    <string name="poi_routes_other">Outras rotas</string>
+    <string name="poi_routes_water_sport">Desportos aquáticos</string>
+    <string name="poi_route_track_point">Pontos de rota</string>
+    <string name="poi_climbing_boulder">Pedregulho de escalada</string>
+    <string name="poi_camp_site_serviced">Com serviços</string>
+    <string name="poi_camp_site_deluxe">De luxo</string>
+    <string name="poi_camp_site_standard">Normal</string>
+    <string name="poi_camp_site_basic">Básico</string>
+    <string name="poi_name_etymology">Etimologia do nome</string>
+    <string name="poi_name_left">Nome do lado esquerdo</string>
+    <string name="poi_name_right">Nome do lado direito</string>
+    <string name="poi_route_article">Artigos de viagem</string>
+    <string name="poi_route_article_point">Pontos de viagem</string>
 </resources>

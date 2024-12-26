@@ -24,12 +24,12 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsConfigurationChangeListener;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 
@@ -165,12 +165,10 @@ public abstract class WidgetSettingsBaseFragment extends BaseOsmAndFragment {
 		return activity != null ? ((MapActivity) activity) : null;
 	}
 
-	public static void showFragment(@NonNull FragmentManager manager,
-	                                @NonNull Bundle args,
-	                                @Nullable Fragment target,
-	                                @NonNull WidgetSettingsBaseFragment fragment) {
+	public static void showFragment(@NonNull FragmentManager manager, @NonNull Bundle args,
+	                                @NonNull WidgetSettingsBaseFragment fragment, @Nullable Fragment target) {
 		String tag = fragment.getClass().getSimpleName();
-		if (AndroidUtils.isFragmentCanBeAdded(manager, tag) && manager.findFragmentByTag(tag) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, tag, true)) {
 			fragment.setArguments(args);
 			fragment.setTargetFragment(target, 0);
 

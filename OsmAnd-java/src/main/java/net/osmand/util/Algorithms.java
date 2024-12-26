@@ -1349,4 +1349,20 @@ public class Algorithms {
 		return resultList.toArray(new String[resultList.size()]);
 	}
 
+	public static String splitAndClearRepeats(String ref, String symbol) {
+		String[] arr = ref.split(symbol);
+		String res = "";
+		String prev = "";
+		for (String s : arr) {
+			if (Algorithms.isEmpty(s) || prev.equals(s))
+				continue;
+			if (!res.isEmpty()) {
+				res += symbol;
+			}
+			res += s;
+			prev = s;
+		}
+		return res;
+	}
+
 }

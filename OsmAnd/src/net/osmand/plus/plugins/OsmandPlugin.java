@@ -566,4 +566,7 @@ public abstract class OsmandPlugin {
 	public void onCarNavigationSessionCreated() {
 
 	}
+
+	public void newRouteIsCalculated(boolean newRoute) {
+	}
 }

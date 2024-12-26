@@ -165,9 +165,7 @@
 \n
 \nEssa visão pode ser revertida desativando aqui mesmo ou alterando o \'Estilo do mapa\' em \'Configurar mapa\' quando desejar.</string>
     <string name="plugin_nautical_name">Mapa náutico</string>
-    <string name="plugin_nautical_descr">Enriquece o seu mapa com informações sobre rotas de navegação, luzes de navegação, zonas náuticas de perigo, zonas com restrições de navegação ou atracação, etc.
-\n
-\nLeitura adicional em %1$s.</string>
+    <string name="plugin_nautical_descr">Enriquece o seu mapa com informações sobre rotas de navegação, luzes de navegação, zonas náuticas de perigo, zonas com restrições de navegação ou atracação, etc. \n \nLeitura adicional em %1$s.</string>
     <string name="plugin_ski_name">Mapa de esqui</string>
     <string name="plugin_ski_descr">Projetado para navegar em áreas de esportes de inverno: veja pistas de esqui e teleféricos e pistas de esqui cross country, com linhas coloridas indicando as classificações de dificuldade. Para usar, habilite este plugin e também vá em \"Configurar mapa\" e escolha o estilo de mapa \"Inverno e esqui\".</string>
     <string name="audionotes_plugin_name">Notas de áudio/vídeo</string>
@@ -5859,7 +5857,7 @@
     <string name="type_of_activity">Tipo de atividade</string>
     <string name="change_activity">Alterar atividade</string>
     <string name="shared_string_increase">Aumentar</string>
-    <string name="rendering_attr_showDirtbikeTrails_description">Mostrar trilhas de terra para bicicletas</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Mostrar trilhas de terra para motos fora de estrada</string>
     <string name="shared_string_decrease">Diminuir</string>
     <string name="unit_volt">V</string>
     <string name="wikimedia">Wikimedia</string>
@@ -5891,7 +5889,6 @@
     <string name="obd_engine_coolant_temp">Temperatura do líquido de arrefecimento</string>
     <string name="obd_fuel_level">Eficiência de combustível (%)</string>
     <string name="obd_fuel_consumption_rate">Taxa de consumo de combustível</string>
-    <string name="obd_fuel_left_distance">Combustível restante (distância)</string>
     <string name="obd_fuel_type">Tipo de combustível</string>
     <string name="obd_plugin_name">Métricas de veículos</string>
     <string name="reset_average_speed">Redefinir velocidade média</string>
@@ -5934,7 +5931,7 @@
     <string name="connect_obd_instructions_step3">Ative o Bluetooth no seu dispositivo</string>
     <string name="learn_more_about_obd_sensors">Saiba mais sobre sensores.</string>
     <string name="screen_is_locked_by_action_button">A tela sensível ao toque está bloqueada. Toque no botão para desbloquear.</string>
-    <string name="rendering_attr_showDirtbikeTrails_name">Trilhas de terra para bicicletas</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">Trilhas de terra para motos fora de estrada</string>
     <string name="obd_fuel_type_bifuel_ethanol">Funcionamento bicombustível a etanol</string>
     <string name="liter_per_hour">l/h</string>
     <string name="obd_fuel_type_hybrid_electric_combustion">Híbrido elétrico e motor a combustão</string>
@@ -5948,7 +5945,6 @@
     <string name="obd_fuel_left_liters">Combustível restante (litros)</string>
     <string name="obd_fuel_type_hybrid_hydrogen">Hidrogênio híbrido</string>
     <string name="shared_string_obd">OBD</string>
-    <string name="obd_rpm">RPM</string>
     <string name="rpm_unit">rpm</string>
     <string name="obd_fuel_level_desc">Mostra o nível de combustível do veículo pelo sensor OBD</string>
     <string name="obd_fuel_left_distance_desc">Mostra a distância que o veículo pode percorrer com o nível de combustível esquerdo no sensor OBD</string>
@@ -5957,7 +5953,6 @@
     <string name="obd_fuel_consumption_rate_sensor_desc">Mostra a taxa de consumo de combustível do veículo com base no sensor (l/h)</string>
     <string name="obd_fuel_level_liter">Nível de combustível (l)</string>
     <string name="obd_fuel_level_percent">Nível de combustível (%)</string>
-    <string name="obd_fuel_left_liter">Combustível restante (l)</string>
     <string name="obd_fuel_left_km">Combustível restante (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Taxa de consumo de combustível (obd)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Taxa de consumo de combustível l/h</string>
@@ -5967,16 +5962,45 @@
     <string name="obd_fuel_consumption_rate_l_h">Taxa de consumo de combustível (l/h)</string>
     <string name="obd_fuel_consumption_rate_l_h_desc">Mostra a taxa de consumo de combustível do veículo com base em cálculos (l/h)</string>
     <string name="route_guidance_desc">Fornece orientação de rota em tempo real, incluindo distância até a próxima curva, nome da estrada, nome da rua atual e informações sobre a pista. Os widgets ficam ativos durante a navegação.</string>
-    <string name="obd_fuel_left_percent">Combustível restante (%)</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Taxa de consumo de combustível %/h</string>
     <string name="third_links">Links de terceiros</string>
     <string name="obd_fuel_type_bifuel_hydrogen">Hidrogénio em funcionamento bicombustível</string>
     <string name="connect_obd_instructions_step2">Ligue o motor do seu veículo</string>
     <string name="connect_obd_instructions_title">O OsmAnd suporta conexões Bluetooth com scanners OBD-II.</string>
     <string name="connect_obd_instructions_step1">Conecte o scanner à porta OBD-II do seu veículo.</string>
-    <string name="connect_obd_instructions_step4">Toque em \'Conectar\' e selecione o scanner na lista.</string>
+    <string name="connect_obd_instructions_step4">Toque em \'%1$s\' e selecione o scanner na lista.</string>
     <string name="vehicle_metrics_plugin_settings">Configurações de métricas do veículo</string>
     <string name="obd_rpm_desc">Mostra as RPM do tacômetro do veículo pelo sensor OBD</string>
     <string name="screen_is_locked_by_external_button">A tela sensível ao toque está bloqueada. Para desbloquear, pressione o botão %1$s ou toque no botão na tela.</string>
     <string name="shared_string_dynamic">Dinâmico</string>
+    <string name="record_obd_data">Registre as métricas do veículo</string>
+    <string name="bt_start_pair_failed">Não é possível iniciar o emparelhamento com o dispositivo</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Mostra a taxa de consumo de combustível do veículo com base em cálculos (l/km)</string>
+    <string name="obd_searching_text">Buscando por scanners</string>
+    <string name="dynamic_icon_type_summary">O ícone muda com base no estado da ação.</string>
+    <string name="obd_connected_to_device">Conectado a %s</string>
+    <string name="obd_not_connected_to_device">Desconectado de %s</string>
+    <string name="obd_throttle_position_desc">Mostra a pressão de combustível do veículo (pressão manométrica) obtida pelo scanner obd</string>
+    <string name="obd_fuel_pressure">Pressão do combustível</string>
+    <string name="obd_fuel_pressure_desc">Mostra a pressão de combustível do veículo (pressão manométrica) obtida pelo scanner obd</string>
+    <string name="percent_hour">%/h</string>
+    <string name="l_100km">l/100km</string>
+    <string name="obd_fuel_consumption_rate_l_km">Taxa de consumo de combustível (l/km)</string>
+    <string name="obd_engine_runtime_desc">Mostra o tempo de funcionamento do motor do veículo obtido do scanner obd</string>
+    <string name="obd_throttle_position">Posição do acelerador</string>
+    <string name="obd_engine_oil_temperature_desc">Mostra a temperatura do óleo do motor do veículo obtida pelo scanner obd</string>
+    <string name="fuel_tank_capacity_description">Insira a capacidade do tanque para acompanhar com precisão os níveis e o consumo de combustível</string>
+    <string name="fuel_tank_capacity">Capacidade do tanque de combustível</string>
+    <string name="shared_strings_dimensions">Dimensões</string>
+    <string name="litres">Litros</string>
+    <string name="unit_of_volume_description">As unidades selecionadas serão aplicadas a todos os dados relacionados ao volume no perfil atual.</string>
+    <string name="unit_of_volume">Unidade de volume</string>
+    <string name="obd_connecting_to_device">Conectando-se a %s</string>
+    <string name="speedometer_maximum">Máximo</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">Mostra a taxa de consumo de combustível do veículo com base em cálculos (%/h)</string>
+    <string name="simulate_obd">Simular dados obd</string>
+    <string name="obd_engine_runtime">Tempo de execução do motor</string>
+    <string name="obd_calculated_engine_load">Carga calculada do motor</string>
+    <string name="obd_calculated_engine_load_desc">Mostra a carga do motor calculada pelo veículo com base no sensor</string>
+    <string name="obd_engine_oil_temperature">Temperatura do óleo do motor</string>
 </resources>

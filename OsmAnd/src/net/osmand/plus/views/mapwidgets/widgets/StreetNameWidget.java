@@ -112,7 +112,7 @@ public class StreetNameWidget extends MapWidget {
 		boolean showClosestWaypointFirstInAddress = params.showClosestWaypointFirstInAddress;
 
 		if (turnArrowColorId != 0) {
-			turnDrawable.setColor(turnArrowColorId);
+			turnDrawable.setRouteDirectionColor(turnArrowColorId);
 		}
 
 		boolean hideStreetName = MapRouteInfoMenu.chooseRoutesVisible
@@ -362,7 +362,7 @@ public class StreetNameWidget extends MapWidget {
 		if (updatedVisibility && widgetType.getPanel(settings) == WidgetsPanel.TOP) {
 			MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
 			if (mapInfoLayer != null) {
-				mapInfoLayer.recreateTopWidgetsPanel();
+				mapInfoLayer.updateVerticalPanels();
 			}
 			mapActivity.updateStatusBarColor();
 		}
@@ -370,10 +370,9 @@ public class StreetNameWidget extends MapWidget {
 	}
 
 	@Override
-	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel widgetsPanel,
-	                       @NonNull List<MapWidget> followingWidgets) {
+	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel, @NonNull List<MapWidget> followingWidgets) {
 		ViewGroup specialContainer = getSpecialContainer();
-		boolean useSpecialPosition = widgetsPanel == WidgetsPanel.TOP && specialContainer != null;
+		boolean useSpecialPosition = panel == WidgetsPanel.TOP && specialContainer != null;
 		if (useSpecialPosition) {
 			specialContainer.removeAllViews();
 

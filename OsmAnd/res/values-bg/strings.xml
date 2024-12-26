@@ -1466,9 +1466,7 @@
     <string name="lang_ceb">Себуански</string>
     <string name="lang_ms">Малайски</string>
     <string name="lang_ht">Хаитянски</string>
-    <string name="plugin_nautical_descr">Обогатява картата с информация за маршрути за плаване, навигационни светлини, опасни морски зони, зони с ограничения за плаване или акостиране и др. За да я използвате, изтеглете съответните морски карти и включете „Морска карта“ в „Настройки на картата“.
-\n
-\nДокументацията е достъпна на адрес %1$s.</string>
+    <string name="plugin_nautical_descr">Обогатява картата с информация за маршрути за плаване, навигационни светлини, опасни морски зони, зони с ограничения за плаване или акостиране и др. За да я използвате, изтеглете съответните морски карти и включете „Морска карта“ в „Настройки на картата“.\n\nДокументацията е достъпна на адрес %1$s.</string>
     <string name="plugin_settings">Добавки</string>
     <string name="rendering_attr_currentTrackColor_name">цвят на GPX</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX ширина</string>
@@ -1575,7 +1573,7 @@
     <string name="si_min_m">Минути на миля</string>
     <string name="si_nm_h">Морски мили в час (възли)</string>
     <string name="nm_h">вз.</string>
-    <string name="min_mile">мин/м</string>
+    <string name="min_mile">мин/миля</string>
     <string name="map_legend">Легенда на картата</string>
     <string name="shared_string_contact">За контакт</string>
     <string name="share_osm_edits_subject">OSM редакции, споделени чрез OsmAnd</string>
@@ -1935,7 +1933,7 @@
     <string name="update_all_maps_now">Обновяване на всички карти?</string>
     <string name="clear_tile_data">Изчистване на всички плочки</string>
     <string name="routing_attr_short_way_name">Икономичен маршрут</string>
-    <string name="replace_favorite_confirmation">Заместване на „%1$s“ от Избрани\?</string>
+    <string name="replace_favorite_confirmation">Заместване на „%1$s“ от Избрани?</string>
     <string name="rendering_attr_hideOverground_name">Надземни обекти</string>
     <string name="osm_live_payment_desc">Абонаментна такса се начислява всеки месец. Можете да я отмените от Google Play по всяко време.</string>
     <string name="donation_to_osm">Дарение за OSM общността</string>
@@ -2081,7 +2079,7 @@
     <string name="select_shape">Изберете форма</string>
     <string name="shared_string_circle">Кръг</string>
     <string name="shared_string_octagon">Осмоъгълник</string>
-    <string name="shared_string_min">Мин.</string>
+    <string name="shared_string_min">Мин</string>
     <string name="ui_customization">Персонализиране на потребителския интерфейс</string>
     <string name="context_menu_actions">Действия в контекстното меню</string>
     <string name="reorder_or_hide_from">Преподреждане или скриване на елементи от %1$s.</string>
@@ -3040,7 +3038,7 @@
     <string name="external_device_details_pair">Сдвояване</string>
     <string name="external_device_ble">BLE</string>
     <string name="y_axis">Ос Y</string>
-    <string name="cloud_version_confirm_delete">Изтриване на „%1$s“ от облачната услуга на OsmAnd\?</string>
+    <string name="cloud_version_confirm_delete">Изтриване на „%1$s“ от облачната услуга на OsmAnd?</string>
     <string name="shared_string_delete_file">Изтриване на файл</string>
     <string name="open_weather_action_description">Отваря екран с подробности за прогнозата.</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Изолинии на скоростта на вятъра (изотахи)</string>
@@ -3133,7 +3131,7 @@
     <string name="points_of_interests">Интересни места (POI)</string>
     <string name="selected_waypoints_descr">Избраните отправни точки ще бъдат добавени към трасето „%1$s“</string>
     <string name="apply_to_existing_favorites_descr">Прилагане на промените към съществуващите избрани точки в групата или само към новите\?</string>
-    <string name="favorite_confirm_delete_group">Сигурни ли сте, че желаете да бъде премахната групата „%1$s“ и всички точки в нея (%2$d)?</string>
+    <string name="favorite_confirm_delete_group">Желаете ли да бъде премахната групата „%1$s“ и всички точки в нея (%2$d)?</string>
     <string name="keep_passed_markers_descr">Маркерите, добавени група Избрани или Отправни точки на GPX, отбекязани като преминати, ще останат на картата. Ако групата е изключена, маркерите ще изчезнат от картата.</string>
     <string name="shortcut_navigate_to_home">Към „Вкъщи“</string>
     <string name="enable_3d_maps">Включване на триизмерни карти</string>
@@ -3453,9 +3451,7 @@
 \nИзберете %2$s. Всички данни, свързани с камери за скорост: предупреждения, известия, POI, ще бъдат премахнати до преинсталиране на OsmAnd.</string>
     <string name="routing_attr_height_obstacles_description">Прогнозното време за пътуване ще отчита въздействието на възвишенията. Предпочитанията за маршрута могат да помогнат за избягване на стръмни изкачвания:</string>
     <string name="show_map_symbols">Обозначения на картата</string>
-    <string name="ant_missing_dependency_descr">Необходимата услуга „%1$s“ не е намерена.
-\nТрябва да инсталирате или обновите услугата ANT+ Plugins Service.
-\nЖелаете ли да посетите магазина за приложения?</string>
+    <string name="ant_missing_dependency_descr">Необходимата услуга „%1$s“ не е намерена.\nТрябва да инсталирате или обновите услугата ANT+ Plugins Service.\nЖелаете ли да посетите магазина за приложения?</string>
     <string name="clear_all_history_warning">Премахване на всички записи в историята на приложението, включително историята на търсенето, маршрутизацията и маркерите\?</string>
     <string name="altitude_correction">Корекция на надм. височина</string>
     <string name="no_altitude_data_desc">За да получите данни от %1$s, прикрепете трасето към пътищата или го изчислете онлайн.</string>
@@ -3623,9 +3619,7 @@
     <string name="navigate_point_format_swiss_grid">Швейцарска мрежа (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">Швейцарска мрежа (CH1903+)</string>
     <string name="list_of_groups">Списък на групи</string>
-    <string name="location_source_descr">По подразбиране OsmAnd, инсталиран от Google Play, използва %1$s за определяне на местоположението.
-\n
-\nАко получавате неточно местоположение или използвате устройство без %2$s, опитайте да превключите на „%3$s“</string>
+    <string name="location_source_descr">По подразбиране OsmAnd, инсталиран от Google Play, използва %1$s за определяне на местоположението. \n \nАко получавате неточно местоположение или използвате устройство без %2$s, опитайте да превключите на „%3$s“</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Показва етикетите fixme</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Етикети fixme</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
@@ -3668,15 +3662,12 @@
     <string name="copying_file">Копиране на файл %1$s…</string>
     <string name="icon_group_education">Образование</string>
     <string name="delete_history_items">Премахване на %1$s записа от историята\?</string>
-    <string name="shared_storage_second_step">Докоснете „Използване на тази папка“ (Use this folder).</string>
+    <string name="shared_storage_second_step">Докоснете „Използване на тази папка“.</string>
     <string name="shared_storage">Споделено хранилище</string>
     <string name="storage_found_files_size">Намерени %1$s файла %2$s</string>
     <string name="shared_storage_last_step">След това можете да посочите нова папка за данни.</string>
-    <string name="shared_storage_first_step">Натиснете „%1$s“.
-\nПриложението за файлове отваря мястото, в което трябва да откриете папката osmand.</string>
-    <string name="shared_storage_migration_descr">Поради промени в достъпа до хранилището на Android OsmAnd вече не може да използва %1$s.
-\n
-\nНеобходимо е да копирате всички данни в новата папка.</string>
+    <string name="shared_storage_first_step">Докоснете „%1$s“. \nПриложението за управление на файлове отваря мястото, на което трябва да откриете папката osmand.</string>
+    <string name="shared_storage_migration_descr">Поради промени в достъпа до хранилището на Android OsmAnd вече не може да използва %1$s.\n\nНеобходимо е да копирате всички данни в новата папка.</string>
     <string name="shared_storage_migration">Мигриране на споделеното хранилище</string>
     <string name="rendering_attr_natureReserves_description">Показват се природни резервати, защитени територии и национални паркове.</string>
     <string name="shared_string_new_track">Ново трасе</string>
@@ -3830,7 +3821,7 @@
     <string name="free_versions_descr">Изтеглете и инсталирайте безплатната версия на OsmAnd</string>
     <string name="shared_string_checked">Отметнато</string>
     <string name="shared_string_avoid">Избягване</string>
-    <string name="max_altitude">Макс. надм. височина</string>
+    <string name="max_altitude">Максимална надморска височина</string>
     <string name="track_filter_date_selected_format">%s - %s</string>
     <string name="average_glide_ratio">Среден коефициент на планиране</string>
     <string name="free_versions">Безплатни издания</string>
@@ -3912,7 +3903,7 @@
     <string name="collected_data_descr">Определете каква информация да споделяте с OsmAnd.</string>
     <string name="sorted_sufolders_toast">Папките в „%1$s“ са сортирани по: „%2$s“</string>
     <string name="shared_string_activity">Дейност</string>
-    <string name="sort_subfolders">Сортиране на подпапки</string>
+    <string name="sort_subfolders">Сортиране на вложени папки</string>
     <string name="shared_string_additional">Допълнителни</string>
     <string name="settings_privacy_and_security">Поверителност и защита</string>
     <string name="privacy_and_security_change_descr">Докоснете „Разрешаване“ ако сте съгласни с нашата %1$s</string>
@@ -4340,9 +4331,7 @@
     <string name="routing_attr_relief_smoothness_factor_hills_name">Планински</string>
     <string name="route_between_points">Маршрут между точките</string>
     <string name="route_between_points_whole_track_button_desc">Изчислява цялото трасе с избрания профил.</string>
-    <string name="ui_customization_description">Настройка на главното, контекстуалното и раздела „Настройка на карти“.
-\n
-\nИзключете неизползваните добавки, за да се скрият техните контроли за управление. %1$s.</string>
+    <string name="ui_customization_description">Настройка на главното, контекстуалното и раздела „Настройка на карти“. \n \nИзключете неизползваните добавки, за да се скрият техните контроли за управление. %1$s.</string>
     <string name="no_assigned_keys">Липсват клавишни комбинации</string>
     <string name="remove_key_assignment">Премахване на клавишната комбинация</string>
     <string name="remove_key_assignment_summary">Клавишната комбинация на избраното действие ще бъде премахната.</string>
@@ -4365,7 +4354,7 @@
     <string name="track_does_not_contain_data_to_save">Трасето не съдържа информация, която да бъде запазена.</string>
     <string name="quick_action_finish_trip_recording_summary">Бутон за запзване на трасето в GPX и приключване на записа на пътуването.</string>
     <string name="new_segment_started_m">Започнат запис на нов сегмент от трасето.</string>
-    <string name="lock_screen_description">Включва или изключва сензорния екран, за да предотврати случайни докосвания</string>
+    <string name="lock_screen_description">Включване или изключване на екрана, за да бъдат предотвратени нежелани докосвания</string>
     <string name="quick_action_save_recorded_trip_and_continue_summary">Бутон за запазване на текущото записано пътуване като GPX файл и продължаване на записа на нова следа без прекъсване.</string>
     <string name="obd_fuel_type_methanol">Метанол</string>
     <string name="obd_fuel_type_gasoline">Бензин</string>
@@ -4384,7 +4373,6 @@
     <string name="obd_fuel_type_hydrogen">Водород</string>
     <string name="obd_fuel_type_unknown">Неизвестен вид гориво</string>
     <string name="obd_widget_group">Показатели превозно средство</string>
-    <string name="obd_rpm">Обороти</string>
     <string name="obd_rpm_desc">Показва оборотите на тахометъра спрямо сензора на OBD</string>
     <string name="obd_air_intake_temp">t⁰ на постъпващ въздух</string>
     <string name="obd_fuel_level_desc">Показва нивото на горивото спрямо сензора на OBD</string>
@@ -4395,7 +4383,6 @@
     <string name="obd_engine_coolant_temp">t⁰ на охлаждаща течност</string>
     <string name="obd_fuel_level">Ефективност на гориво (%)</string>
     <string name="obd_fuel_consumption_rate">Разход на гориво</string>
-    <string name="obd_fuel_left_distance">Оставащо гориво (разстояние)</string>
     <string name="obd_fuel_consumption_rate_desc">Показва разхода на гориво на превозното средство спрямо сензора на OBD</string>
     <string name="obd_fuel_type">Вид на горивото</string>
     <string name="obd_support">Поддръжка на OBD</string>
@@ -4421,10 +4408,69 @@
     <string name="obd_fuel_type_bifuel_gasoline">Двугоривен: бензин</string>
     <string name="obd_fuel_type_bifuel_propane">Двугоривен: пропан-бутан</string>
     <string name="obd_fuel_type_bifuel_electricity">Двугоривен: електричество</string>
-    <string name="obd_plugin_description">Наблюдавайте ключови показатели на превозното средство чрез протокола OBD-II. Предоставя данни, включително: * Скорост на двигателя * Разход на гориво * Оставащо гориво * Разстояние отзапалването на двигателя * Температура на входящ въздух * Температура на околната среда * Температура на охлаждащата течност * Скорост на превозното средство * Заряд на акумулатора</string>
+    <string name="obd_plugin_description">Наблюдавайте ключови показатели на превозното средство чрез протокола OBD-II. Предоставя данни, включително:\n • Скорост на двигателя, време на работа на двигателя, изчислено натоварване на двигателя\n • Разход на гориво, налягане на горивото, оставащо гориво\n • Температура на входящия въздух, температура на околната среда, температура на охлаждащата течност, температура на маслото на двигателя\n • Скорост на превозното средство, позиция на дроселовата клапа, напрежение на акумулатора\n</string>
     <string name="percent_unit">%</string>
     <string name="rpm_unit">об/мин</string>
     <string name="vehicle_metrics_plugin_settings">Настройки показатели превозно средство</string>
     <string name="obd_widget_vehicle_speed">Скорост на превозното средство</string>
     <string name="obd_widget_engine_speed">Скорост на двигателя</string>
+    <string name="not_specified">Не е избрано</string>
+    <string name="avg_sensor_speed">Сензор скорост, средна</string>
+    <string name="avg_sensor_heartrate">Пулс, средно</string>
+    <string name="discard_filter_changes_prompt">Нулиране на филтрите?</string>
+    <string name="min_max">Макс/мин</string>
+    <string name="power_watts_unit">Ватове</string>
+    <string name="all_folders">Всички папки</string>
+    <string name="max_sensor_cadence">Вело каданс, макс</string>
+    <string name="max_sensor_heartrate">Пулс, макс</string>
+    <string name="avg_sensor_cadence">Вело каданс, средно</string>
+    <string name="max_sensor_bycicle_power">Вело мощност, макс</string>
+    <string name="revolutions_per_minute_unit">об/мин</string>
+    <string name="max_min">Макс/мин</string>
+    <string name="root_folder">Коренова папка</string>
+    <string name="max_sensor_speed">Сензор скорост, макс</string>
+    <string name="avg_sensor_bycicle_power">Вело мощност, средно</string>
+    <string name="max_sensor_temperature">Температура, макс</string>
+    <string name="remaining_fuel">Оставащо гориво</string>
+    <string name="reset_average_value">Нулиране на средна стойност</string>
+    <string name="shared_string_instant">Незабавно</string>
+    <string name="obd_fuel_consumption_rate_sensor_type">Избраните мерни единици да бъдат добавени в името.</string>
+    <string name="remaining_fuel_description">Показва количеството на оставащото в резервоара гориво</string>
+    <string name="obd_fuel_consumption_desc">Показва разхода на гориво от двигателя, изчислен въз основа на оставащото гориво, размера на резервоара и изминатото разстояние, според GPS.</string>
+    <string name="obd_fuel_consumption">Разход на гориво</string>
+    <string name="average_value_slider_description">Изберете интервала от време, през който да бъде измерена средната стойност.</string>
+    <string name="average_temperature">Средна температура</string>
+    <string name="average_temperature_slider_description">Изберете интервала от време, през който да бъде измерена средната трмпература.</string>
+    <string name="current_temperature">Текуща температура</string>
+    <string name="obd_battery_voltage_desc">Показва напрежението в акумулатора</string>
+    <string name="obd_air_intake_temp_desc">Показва температурата на постъпвщия през въздушната клапа въздух.</string>
+    <string name="preview_next_turn">Преглед следващ завой</string>
+    <string name="connect_new_scanner">Свързване на нов скенер</string>
+    <string name="av_audio_sample_rate">Честота на аудио дискретизация</string>
+    <string name="av_audio_sample_rate_descr">Избор на честота на аудио дискретизация.</string>
+    <string name="auto_zoom_3d_angle">Ъгъл при триизмерно увеличаване</string>
+    <string name="lock_screen">Заключване на екрана</string>
+    <string name="screen_is_locked_by_action_button">Екранът е заключен. Докоснете бутона, за да го отключите.</string>
+    <string name="screen_is_unlocked">Екранът е отключен.</string>
+    <string name="help_article_map_tracks_name">Трасета</string>
+    <string name="help_article_personal_color_palette_schemes_name">Цветови теми</string>
+    <string name="vehicle_metrics_obd_ii">Показатели за превозно средство (OBD-II)</string>
+    <string name="ltr_or_rtl_combine_via_per">%1$s за %2$s</string>
+    <string name="shared_string_volume">Обем</string>
+    <string name="shared_string_hour">Час</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Проследявайте жизненоважни данни за превозното средство с помощта на протокола OBD-II. Наблюдавайте ключови показатели като скорост, обороти на двигателя, разход на гориво и др.</string>
+    <string name="shared_string_engine">Двигател</string>
+    <string name="vehicle_metrics_recording_description">Изберете параметрите, които да бъдат записани в GPX файл.</string>
+    <string name="reset_average_speed">Нулиране на средната скорост</string>
+    <string name="start_trip_recording_first_m">Първо започнете да записвате пътуване.</string>
+    <string name="quick_action_showhide_osm_edits_descr">Бутон, превключващ местните редакции на OSM в картата.</string>
+    <string name="wake_time">Време на работа след събуждане</string>
+    <string name="quick_action_navigation_voice">Гласови напътствия</string>
+    <string name="selected_delayed_profile">Избран профил s\\</string>
+    <string name="shared_string_interpolation">Интерполация</string>
+    <string name="error_notification_desc">Изпратете екранна снимка на известието на support@osmand.net</string>
+    <string name="quick_action_map_underlay_switch">Подложената карта е променена на „%s“.</string>
+    <string name="select_base_profile_dialog_title">Изберете начален профил</string>
+    <string name="default_buttons_corners_original_description">Всеки бутон ще има свой размер на окръглянето.</string>
+    <string name="default_buttons_opacity_original_description">Всеки бутон ще има своя прозрачност на фона.</string>
 </resources>

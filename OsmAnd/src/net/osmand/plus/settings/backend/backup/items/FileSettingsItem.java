@@ -387,7 +387,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 	@Override
 	public void delete() {
 		super.delete();
-		// TODO: delete settings item
+		Algorithms.removeAllFiles(file);
 	}
 
 	@Nullable

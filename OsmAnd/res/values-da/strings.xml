@@ -689,7 +689,7 @@
     <string name="poi_error_io_error_template">I/O-fejl under udførelsen af handling {0}.</string>
     <string name="poi_error_unexpected_template">Kunne ikke udføre handling {0}.</string>
     <string name="poi_action_succeded_template">Handling {0} fuldført.</string>
-    <string name="poi_action_change">ændre</string>
+    <string name="poi_action_change">skift</string>
     <string name="poi_action_add">tilføj</string>
     <string name="poi_remove_success">Slettet</string>
     <string name="poi_remove_title">Slet interessepunkt</string>
@@ -2177,7 +2177,7 @@
 \n • Antarktis: *  
 \n De fleste lande i verden kan hentes!  
 \n Få pålidelig navigation - det være sig Frankrig, Tyskland, Mexico, Storbritannien, Spanien, Holland, USA, Rusland, Brasilien eller andre.</string>
-    <string name="osmand_plus_extended_description_part7">Bidrag direkte til OSM   \n • Rapporter fejl i data   \n • Overfør GPX-spor direkte til OSM   \n • Tilføj IP\'er og overfør dem direkte til OSM (eller senere, hvis offline)   \n • Valgfri turoptagelse også i baggrundstilstand (mens enheden er i dvaletilstand) \n  OsmAnd er aktivt udviklet Open source-software. Alle kan bidrage til appen ved rapporterer programfejl, forbedre oversættelser eller kodning nye funktioner. Derudover er projektet afhængig af økonomiske bidrag til finansiering af kodning og afprøvning af nye funktionaliteter</string>
+    <string name="osmand_plus_extended_description_part7">Bidrag direkte til OSM   \n • Rapporter fejl i data   \n • Overfør GPX-spor direkte til OSM   \n • Tilføj IP\'er og overfør dem direkte til OSM (eller senere, hvis offline)   \n • Valgfri turoptagelse også i baggrundstilstand (mens enheden er i dvaletilstand) \n  OsmAnd er aktivt udviklet Open source-software. Alle kan bidrage til appen ved rapporterer programfejl, forbedre oversættelser eller kodning nye funktioner. Derudover er projektet afhængig af økonomiske bidrag til finansiering af kodning og afprøvning af nye funktionaliteter.</string>
     <string name="osmand_extended_description_part2">GPS-navigation \n • Vælg mellem offline (ingen roamingtakster i udlandet) eller online (hurtigere) tilstand \n • Sving-for-sving stemmevejledning (indspillet og syntetiseret stemmer) \n • Rutens genberegnes ved afvigelse   \n • Banevejledning, gadenavne, og forventet ankomsttidspunkt vil hjælpe undervejs \n • For at gøre rejsen mere sikker, skifter dag-/nat-tilstand automatisk \n • Vælg at vise hastighedsgrænser, og få påmindelser, hvis de overskrides \n • Kortzoom tilpasser sig hastigheden \n • Søg destination efter adresse, efter type (fx: parkering, restaurant, hotel, tankstation, museum), eller ved geografiskekoordinater \n • Understøtter mellemliggende punkter på ruten \n • Optag eller overfør et GPX-spor og følg det</string>
     <string name="osmand_extended_description_part3">Kort \n • Viser IP\'er (interessepunkter) i nærheden \n • Justerer kortet til bevægelsesretning (eller kompas) \n • Viser hvor man er og hvad der kigges på \n • Del placering, så andre kan finde dig \n • Gem vigtige steder i \'Favoritter\' \n • Giver mulighed for at vælge, hvordan navne vises på kortet: på engelsk, lokal eller fonetisk stavemåde . \n• Viser specialiserede online kortfliser, satellitvisning (fra Bing), forskellige overlejringer som touring/navigation GPX-spor og yderligere lag med tilpasselig gennemsigtighed</string>
     <string name="osmand_extended_description_part4">Skikort 
@@ -2195,14 +2195,7 @@
 \n OsmAnd+ er den betalte appversion. Ved køb af denne støtter du projektet og udviklingen af nye funktioner, og modtager de seneste opdateringer.
 \n
 \n Nogle af de vigtigste funktioner:</string>
-    <string name="osmand_plus_extended_description_part2">Navigation
-\n  • Arbejder online (hurtig) eller offline (ingen roamingtakster, i udlandet)
-\n  • Sving-for-sving stemmevejledning (indspillede og syntetiseret stemmer)
-\n  • Valgfri vognbaneskift, gadenavn visning, og forventet ankomsttidspunkt
-\n  • Understøtter mellemliggende punkter på ruten
-\n  • Automatisk genberegning, ved afvigelse fra ruten
-\n  • Søg efter steder efter adresse, efter type (fx: restaurant, hotel, tankstation, museum), eller ved geografiske koordinater
-\n</string>
+    <string name="osmand_plus_extended_description_part2">"Navigation \n  • Arbejder online (hurtig) eller offline (ingen roamingtakster, i udlandet) \n  • Sving-for-sving stemmevejledning (indspillede og syntetiseret stemmer) \n  • Valgfri vognbaneskift, gadenavn visning, og forventet ankomsttidspunkt \n  • Understøtter mellemliggende punkter på ruten \n  • Automatisk genberegning, ved afvigelse fra ruten \n  • Søg efter steder efter adresse, efter type (fx: restaurant, hotel, tankstation, museum), eller ved geografiske koordinater "</string>
     <string name="osmand_plus_extended_description_part3">Kortvisning   \n • Vis position og orientering   \n • Juster eventuelt kortet efter kompas eller bevægelsesretning   \n • Gem de vigtigste steder som foretrukne   \n • Vis IP\'er (interessepunktr) i nærheden   \n • Vis specialiserede online kortfliser, satellitvisning (fra Bing), forskellige overlejringer som touring/navigation GPX-spor og yderligere lag med justerbar gennemsigtighed   \n • Vis valgfrit stednavne på engelsk, lokal eller fonetisk stavemåde</string>
     <string name="osmand_plus_extended_description_part4">Brug OSM og Wikipedia data  
 \n • Information af høj kvalitet fra de bedste samarbejdsprojekter i verden  
@@ -2632,7 +2625,7 @@
     <string name="coord_input_edit_point">Rediger punkt</string>
     <string name="coord_input_add_point">Tilføj punkt</string>
     <string name="coord_input_save_as_track">Gem som spor</string>
-    <string name="coord_input_save_as_track_descr">%1$s punkter tilføjet. Indtast et filnavn og tryk på “Gem“.</string>
+    <string name="coord_input_save_as_track_descr">Du tilføjede %1$s punkter. Indtast et filnavn og tryk på Gem.</string>
     <string name="point_deleted">Punkt %1$s er blevet slettet</string>
     <string name="shared_string_world">Verden</string>
     <string name="send_search_query_description">Send søgestrengen: \"%1$s\" samt lokationen.
@@ -2914,7 +2907,7 @@
     <string name="shared_string_crash">Nedbrud</string>
     <string name="last_launch_crashed">Sidste kørsel af OsmAnd mislykkedes. Hjælp med at forbedre OsmAnd ved at dele fejlmeddelelsen.</string>
     <string name="app_mode_ufo">UFO</string>
-    <string name="release_3_4">• App-profiler: opret en brugerdefineret profil med en brugerdefineret ikon og farve \n \n • Tilpas enhver profilers standard- og min/max hastigheder \n \n • Tilføjet et modul til de aktuelle koordinater \n \n • Tilføjede muligheder for at vise kompasset og en radiuslineal på kortet \n \n • Rettet logføring af baggrundsspor \n \n • Forbedret hentning af kort i baggrunden \n \n • Rettet Wikipedia sprogvalg \n \n • Rettet kompasknappens opførsel under navigationen \n \n • Andre fejlrettelser</string>
+    <string name="release_3_4">• App-profiler: opret en brugerdefineret profil med en brugerdefineret ikon og farve\n\n • Tilpas enhver profilers standard- og min/max hastigheder\n\n •Tilføjet et modul til de aktuelle koordinater\n\n • Tilføjede muligheder for at vise kompasset og en radiuslineal på kortet\n\n • Rettet logføring af baggrundsspor\n\n • Forbedret hentning af kort i baggrunden\n\n • Returned \'Turn screen on\' option\n\n • Rettet Wikipedia sprogvalg\n\n • Rettet kompasknappens opførsel under navigationen\n\n • Andre fejlrettelser</string>
     <string name="app_mode_personal_transporter">Person transport</string>
     <string name="app_mode_monowheel">Monohjul</string>
     <string name="app_mode_scooter">Scooter</string>
@@ -3283,7 +3276,7 @@
     <string name="monitoring_min_speed_descr_remark">Bemærk: Hastighed &gt; 0 kontrol: De fleste GPS-chipsæt giver kun en hastighedsværdi, hvis algoritmen bestemmer, at der er bevægelse, og ingen, hvis der ikke er bevægelse. Brug af indstillingen &gt; 0 i dette filter bruger derfor en vis grad bevægelsesdetektering fra GPS-chipset. Men selvom de ikke filtreres på optagelsestidspunktet, bruges denne funktion i GPX-analysen til at bestemme den korrigerede afstand, det vil sige, at værdien, der vises i feltet, er afstanden, der er registreret under bevægelsen.</string>
     <string name="monitoring_min_speed_descr_recommendation">Anbefaling: Forsøg først at bruge bevægelsesdetektering via filteret til minimum afstandsmåling (B). Dette kan føre til bedre resultater, og der vil mistes færre data. Hvis sporene forbliver unøjagtige ved lave hastigheder, så prøv værdier, der ikke er nul her. Bemærk, at nogle målinger (nogle netværksbaserede metoder) muligvis ikke viser nogen hastighedsværdier overhovedet. I dette tilfælde registreres intet.</string>
     <string name="monitoring_min_speed_descr_side_effect">Bivirkning: Spor vil mangle alle sektioner, hvor minimumshastighedskriteriet ikke var opfyldt (f.eks. hvor cyklen skubbes op ad en stejl bakke). Der vil heller ikke være nogen oplysninger om hvileperioder, som pauser. Har indvirkning på alle analyser eller efterbehandlinger, som når det forsøges at bestemme den samlede længde af rejsen, tid i bevægelse, eller den gennemsnitlige hastighed.</string>
-    <string name="import_profile_dialog_description">Den importerede profil indeholder yderligere data. Klik på Importer for kun at importere profildata, eller vælg yderligere data.</string>
+    <string name="import_profile_dialog_description">Den importerede profil indeholder yderligere data. Klik på importer for kun at importere profildata, eller vælg yderligere data.</string>
     <string name="route_recalculation_dist_descr">Ruten vil blive genberegnet, hvis afstanden til ruten er længere end angivet parameter</string>
     <string name="route_recalculation_dist_title">Mindste afstand for at genberegne rute</string>
     <string name="import_duplicates_description">OsmAnd har allerede elementer med de samme navne som de importerede.
@@ -3712,7 +3705,7 @@
     <string name="no_purchases">Du har ingen køb</string>
     <string name="new_device_account">Ny enhed / ny konto</string>
     <string name="contact_support_description">Hvis du har spørgsmål, bedes du kontakte os på %1$s.</string>
-    <string name="empty_purchases_description">Hvis dine køb ikke vises her, kan du trykke på \"%1$s\" eller kontakte vores supportteam.</string>
+    <string name="empty_purchases_description">Hvis dine køb ikke vises her, kan du trykke på “%1$s” eller kontakte vores supportteam.</string>
     <string name="contact_support">Kontakt support</string>
     <string name="troubleshooting">Fejlfinding</string>
     <string name="troubleshooting_description">Følg venligst dette link, hvis du har problemer med køb.</string>
@@ -3808,7 +3801,7 @@
     <string name="unlimited_map_downloads">Ubegrænset download af kort</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia og Wikivoyage offline</string>
     <string name="offline_wikipeadia">Offline Wikipedia</string>
-    <string name="you_can_get_feature_as_part_of_pattern">Få \"%1$s\" som en del af %2$s abonnementet. Sammenligning:</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Få “%1$s” som en del af %2$s abonnementet. Sammenligning:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s af %2$s</string>
     <string name="continue_with">Fortsæt med %1$s</string>
     <string name="not_available_with">Ikke tilgængelig med %1$s</string>
@@ -3975,7 +3968,7 @@
     <string name="system_screen_timeout_descr">Slukker skærmen i henhold til systemets skærm-timeout.</string>
     <string name="system_screen_timeout">Brug systemets skærm-timeout</string>
     <string name="turn_screen_on_descr">Vælg indstillinger for opvågning af skærmen (sørg for at OsmAnd er i forgrunden, når enheden er låst):</string>
-    <string name="turn_screen_on_power_button_disabled">Deaktiveret. Kræver \"Hold skærmen tændt\" under \"Timeout efter opvågning\".</string>
+    <string name="turn_screen_on_power_button_disabled">Deaktiveret. Kræver \'Hold skærmen tændt\' under \'Timeout efter opvågning\'.</string>
     <string name="turn_screen_on_power_button_descr">Hvis du trykker på enhedens tænd/sluk-knap, tændes skærmen med OsmAnd ovenpå låseskærmen.</string>
     <string name="turn_screen_on_wake_time_descr">Vælg skærmens timeout efter opvågning. (\"%1$s\" anvender ingen timeout.)</string>
     <string name="map_source_zoom_levels">Indstil et minimalt og maksimalt zoomniveau for visning eller indlæsning af onlinekortet.</string>
@@ -4922,7 +4915,7 @@
     <string name="calculate_offline_altitude_descr">Beregn højde offline, baseret på data fra terrænkort (3D). Forskelle i forhold til enhedens registrerede højde kan bruges som højdekorrektion.</string>
     <string name="error_calculate">Beregningsresultatet er tomt</string>
     <string name="power_watts_unit">Watt</string>
-    <string name="revolutions_per_minute_unit">OPM</string>
+    <string name="revolutions_per_minute_unit">O/M</string>
     <string name="shared_string_close_the_dialog">Luk dialogen</string>
     <string name="relief_3d">3D-relief</string>
     <string name="terrain_map">Terrænkort (3D)</string>
@@ -4993,7 +4986,7 @@
     <string name="feature_available_as_part_of_plan">%1$s tilgængelig som en del af %2$s-abonnementet</string>
     <string name="shared_string_included">Inkluderet</string>
     <string name="hillshade_slope">Terrænskygge, hældning</string>
-    <string name="local_indexes_category_terrain">Terrænkort (3D)</string>
+    <string name="local_indexes_category_terrain">Terrænkort (3D</string>
     <string name="map_widget_glide_average_desc">Viser det gennemsnitlige glidetal for det indstillede interval.</string>
     <string name="average_glide_time_interval_desc">Angiv tidsintervallet for glide-gennemsnit.</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
@@ -5089,10 +5082,10 @@
     <string name="app_mode_hang_gliding">Hanggliding</string>
     <string name="with_waypoints">Med rutepunkter</string>
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
-    <string name="max_altitude">Maks. højde</string>
+    <string name="max_altitude">Maks højde</string>
     <string name="track_filter_date_selected_format">%s - %s</string>
     <string name="filter_by_name">Filtrér efter navn</string>
-    <string name="shared_string_reset_all">Nulstil alt</string>
+    <string name="shared_string_reset_all">Nulstil alle</string>
     <string name="filter_tracks_count">Filter: %d</string>
     <string name="date_of_creation">Dato for oprettelse</string>
     <string name="filter_screen_title">Filter</string>
@@ -5193,7 +5186,7 @@
     <string name="trash_is_empty">Papirkurven er tom</string>
     <string name="key_event_action_move_to_my_location">Flyt til Min placering</string>
     <string name="clear_key_assignment">Ryd tastetildeling</string>
-    <string name="not_specified">Ikke angivet</string>
+    <string name="not_specified">Ikke specificeret</string>
     <string name="download_to_device">Download til enhed</string>
     <string name="key_event_category_map_interactions">Interaktioner med kort</string>
     <string name="key_event_action_move_down">Flyt ned</string>
@@ -5236,16 +5229,16 @@
 \n
 \nHvis du oplever nogle af disse problemer, kan du prøve at ændre batteriforbruget til \'Ubegrænset\'.</string>
     <string name="battery_optimization">Batterioptimering</string>
-    <string name="max_sensor_heartrate">Puls, maks.</string>
+    <string name="max_sensor_heartrate">Puls, maks</string>
     <string name="avg_sensor_heartrate">Puls, gennemsnit</string>
     <string name="avg_sensor_speed">Sensorhastighed, gennemsnit</string>
-    <string name="max_sensor_cadence">Cykelkadence, maks.</string>
+    <string name="max_sensor_cadence">Cykelkadence, maks</string>
     <string name="avg_sensor_cadence">Cykelkadence, gennemsnit</string>
-    <string name="max_sensor_bycicle_power">Cykeleffekt, maks.</string>
-    <string name="avg_sensor_bycicle_power">Cykeleffekt, gennemsnit</string>
-    <string name="max_sensor_temperature">Temperatur, maks.</string>
+    <string name="max_sensor_bycicle_power">Cykelkraft, maks</string>
+    <string name="avg_sensor_bycicle_power">Cykelkraft, gennemsnit</string>
+    <string name="max_sensor_temperature">Temperatur, maks</string>
     <string name="avg_sensor_temperature">Temperatur, gennemsnit</string>
-    <string name="max_sensor_speed">Sensorhastighed, maks.</string>
+    <string name="max_sensor_speed">Sensorhastighed, maks</string>
     <string name="shared_string_activity">Aktivitet</string>
     <string name="shared_string_additional">Yderligere</string>
     <string name="sorted_sufolders_toast">Undermapper i “%1$s” sorteres efter: “%2$s”</string>
@@ -5488,7 +5481,7 @@
     <string name="quick_action_drawer_title">Sidemenu</string>
     <string name="quick_action_search_view_desc">En skifter til at åbne eller lukke søgevisning.</string>
     <string name="quick_action_switch_compass_desc">En skifter til at skifte kortorientering.</string>
-    <string name="shared_string_interface">Brugerflade</string>
+    <string name="shared_string_interface">Grænseflade</string>
     <string name="quick_action_navigation_view_desc">En skifter til at åbne eller lukke navigationsvisning.</string>
     <string name="quick_action_search_view_title">Søgevisning</string>
     <string name="quick_action_navigation_view_title">Navigationsvisning</string>
@@ -5544,8 +5537,7 @@
     <string name="obd_fuel_type_bifuel_electric_combustion">To-brændstofkøretøj, der kører på el- og forbrændingsmotor</string>
     <string name="obd_fuel_type_bifuel_hydrogen">To-brændstofkøretøj, der kører på brint</string>
     <string name="shared_string_obd">OBD (Diagnoseudtag)</string>
-    <string name="obd_rpm_desc">Viser køretøjets omdrejningstæller RPM via OBD-sensor</string>
-    <string name="obd_rpm">RPM (Omdrejninger pr. minut)</string>
+    <string name="obd_rpm_desc">Viser køretøjets omdrejningstæller O/M via OBD-sensor</string>
     <string name="rpm_unit">rpm</string>
     <string name="obd_fuel_level_desc">Viser køretøjets brændstofniveau via OBD-sensor</string>
     <string name="obd_fuel_left_distance_desc">Viser, hvor langt køretøjet kan køre på det resterende brændstofniveau via OBD-sensor</string>
@@ -5561,10 +5553,9 @@
     <string name="obd_engine_coolant_temp">Kølevæsketemperatur</string>
     <string name="obd_fuel_level">Brændstoføkonomi (%)</string>
     <string name="obd_fuel_consumption_rate">Brændstofforbrug</string>
-    <string name="obd_fuel_left_distance">Brændstof tilbage (afstand)</string>
     <string name="obd_fuel_type">Brændstoftype</string>
-    <string name="obd_plugin_description">Overvåg vigtige køretøjsmålinger ved hjælp af OBD-II-protokollen. Få adgang til data, herunder: * Motorens omdrejningshastighed * Brændstofforbrug * Resterende brændstof * Afstand siden motorstart * Indtagstemperatur * Omgivelsestemperatur * Kølevæskes temperatur * Køretøjets hastighed * Batteriprocent</string>
-    <string name="obd_plugin_name">Køretøjsparametre</string>
+    <string name="obd_plugin_description">Overvåg vigtige køretøjsmålinger ved hjælp af OBD-II-protokollen. Få adgang til data, herunder:\n • Motoromdrejningshastighed, motorens driftstid, beregnet motorbelastning \n • Brændstofforbrug, brændstoftryk, resterende brændstof\n • Indtagstemperatur, omgivelsestemperatur, kølevæskes temperatur, motoroliens temperatur\n • Køretøjets hastighed, gasspjældets position, batterispænding\n</string>
+    <string name="obd_plugin_name">Målinger af køretøj</string>
     <string name="unknown_bt_device">Ukendt enhed</string>
     <string name="obd_vin">VIN</string>
     <string name="obd_vin_desc">VIN-kode via OBD</string>
@@ -5588,14 +5579,14 @@
     <string name="third_links">Tredje-links</string>
     <string name="tracker_item">OsmAnd tracker</string>
     <string name="lock_screen">Lås skærm</string>
-    <string name="lock_screen_description">Aktiverer eller deaktiverer touch screen-funktionalitet for at forhindre utilsigtede tryk</string>
+    <string name="lock_screen_description">Aktiverer eller deaktiverer trykfølsom skærmfunktionalitet for at forhindre utilsigtede tryk</string>
     <string name="quick_action_showhide_osm_edits_descr">Knap til at vise eller skjule lokale OSM-redigeringer på kortet.</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Motocross-stier</string>
-    <string name="liter_per_hour">l/t</string>
+    <string name="liter_per_hour">L/t</string>
     <string name="release_4_9">• Tilføjet en galleriviser i fuld skærm til Wikimedia-billeder\n\n • Introduceret en ny udvidelse \"Køretøjsparametre\" til overvågning af køretøjets ydeevne ved hjælp af OBD-II-protokollen\n\n • Tilføjet muligheden for at tildele aktiviteter til spor og filtrere dem i overensstemmelse hermed\n\n •Implementeret nye genveje til optagelse af ture og låsning af berøringsskærmen\n\n • Introduceret brugertilpasset udseende af kortknapper og et præcist gitter\n\n • Tilføjet en kontekstmenu og en »Nulstil gennemsnitshastighed«-handling til moduler\n\n • Tilføjet nyt rutelag \"Motocross-spor\"\n\n • Rettet \"Optag spor automatisk under navigation\"\n\n • Rettet problem med spejlvendte koordinater i RTL\n\n • Rettet manglende sensordata for det aktuelle optagelsesspor\n\n • Tilføjet information om de omkringliggende områder for det valgte punkt\n\n • Tilføjet genvej til at kontrollere synligheden af OSM-redigeringer\n\n • Separate synlighedsparametre for terrænfarvemuligheder\n\n • Tilføjet et ikon, der kan trykkes på, for at vise adgang eller andre vej- eller stiattributter</string>
     <string name="screen_is_locked_by_external_button">Den berøringsfølsomme skærm er låst. For at låse op skal du trykke på %1$s-knappen eller trykke på knappen på skærmen.</string>
     <string name="screen_is_unlocked">Den berøringsfølsomme skærm er låst op.</string>
-    <string name="screen_is_locked_by_action_button">Den berøringsfølsomme skærm er låst. Tryk på knap for at låse op.</string>
+    <string name="screen_is_locked_by_action_button">Den berøringsfølsomme skærm er låst. Tryk på knappen for at låse op.</string>
     <string name="connect_obd_instructions_title">OsmAnd understøtter Bluetooth-forbindelser til OBD-II-scannere.</string>
     <string name="connect_obd_instructions_step2">Tænd køretøjets motor</string>
     <string name="connect_obd_instructions_step3">Aktivér Bluetooth på din enhed</string>
@@ -5603,7 +5594,7 @@
     <string name="obd_vehicle_info">Info om køretøj</string>
     <string name="obd_how_to_connect">Sådan får du forbindelse:</string>
     <string name="connect_obd_instructions_step1">Tilslut scanneren til køretøjets OBD-II-stik.</string>
-    <string name="connect_obd_instructions_step4">Tryk på \"Opret forbindelse,\" og vælg din scanner på listen.</string>
+    <string name="connect_obd_instructions_step4">Tryk på \'%1$s,\' og vælg din scanner på listen.</string>
     <string name="learn_more_about_obd_sensors">Få mere at vide om sensorer.</string>
     <string name="obd_fuel_left_liters">Resterende brændstof (liter)</string>
     <string name="route_guidance_desc">Giver rutevejledning i realtid, herunder afstand til næste sving, vejnavn, aktuelt gadenavn og oplysninger om vognbane. Moduler er aktive under navigation.</string>
@@ -5618,25 +5609,23 @@
     <string name="obd_device_forget_sensor_description">Scanneren fjernes fra listen. Du vil til enhver tid kunne parre denne scanner igen.</string>
     <string name="obd_searching_text">Søger efter scannere</string>
     <string name="connect_obd_instructions_step">1. Tilslut scanneren til bilens OBD-II-indgang.\n\n 2. Tænd for køretøjets motor\n\n 3. Aktivér Bluetooth på din enhed\n\n 4. Tryk på \'%1$s\' og vælg din scanner fra listen.</string>
-    <string name="obd_fuel_consumption_rate_l_h">Brændstofforbrug (l/t)</string>
+    <string name="obd_fuel_consumption_rate_l_h">Brændstofforbrug (L/t)</string>
     <string name="obd_fuel_consumption_rate_sensor">Brændstofforbrug (sensor)</string>
-    <string name="obd_fuel_consumption_rate_l_h_desc">Viser køretøjets brændstofforbrug baseret på beregninger (l/t)</string>
-    <string name="obd_fuel_consumption_rate_sensor_desc">Viser køretøjets brændstofforbrug baseret på sensor (l/t)</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Viser køretøjets brændstofforbrug baseret på beregninger (L/t)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Viser køretøjets brændstofforbrug baseret på sensor (L/t)</string>
     <string name="obd_fuel_level_liter">Brændstofniveau (l)</string>
     <string name="obd_fuel_level_percent">Brændstofniveau (%)</string>
-    <string name="obd_fuel_left_percent">Brændstof tilbage (%)</string>
-    <string name="obd_fuel_left_liter">Brændstof tilbage (l)</string>
     <string name="obd_fuel_left_km">Brændstof tilbage (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Brændstofforbrug (obd)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">Brændstofforbrug l/t</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Brændstofforbrug</string>
     <string name="obd_fuel_consumption_rate_percent_hour">Brændstofforbrug %/t</string>
     <string name="speedometer_maximum">Maksimum</string>
     <string name="percent_hour">%/t</string>
     <string name="liter">l</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Viser køretøjets brændstofforbrug baseret på beregninger (%/t)</string>
-    <string name="l_100km">l/100 km</string>
-    <string name="obd_fuel_consumption_rate_l_km">Brændstofforbrug (l/km)</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Viser køretøjets brændstofforbrug baseret på beregninger (l/km)</string>
+    <string name="l_100km">L/100 km</string>
+    <string name="obd_fuel_consumption_rate_l_km">Brændstofforbrug (L/100 km)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Viser køretøjets brændstofforbrug baseret på beregninger (L/100 km)</string>
     <string name="simulate_obd">Simulér obd-data</string>
     <string name="kpa_unit">kPa</string>
     <string name="obd_fuel_pressure">Brændstoftryk</string>
@@ -5646,4 +5635,62 @@
     <string name="obd_connected_to_device">Tilsluttet %s</string>
     <string name="obd_not_connected_to_device">Afkoblet fra %s</string>
     <string name="bt_start_pair_failed">Kan ikke starte parring med enhed</string>
+    <string name="record_obd_data">Registrér køretøjets målinger</string>
+    <string name="fuel_tank_capacity_description">Indtast kapaciteten af din brændstoftank, så du kan følge brændstofniveau og forbrug nøjagtigt</string>
+    <string name="fuel_tank_capacity">Brændstoftankens kapacitet</string>
+    <string name="shared_strings_dimensions">Dimensioner</string>
+    <string name="litres">Liter</string>
+    <string name="imperial_gallons_unit">imp gal</string>
+    <string name="us_gallons_unit">gal</string>
+    <string name="imperial_gallons">Imperial gallons</string>
+    <string name="us_gallons">US gallons</string>
+    <string name="unit_of_volume_description">De valgte enheder vil blive anvendt på alle volumenrelaterede data i den aktuelle profil.</string>
+    <string name="unit_of_volume">Volumenenhed</string>
+    <string name="wunderlinq_datagrid">WunderLINQ-datanetværk</string>
+    <string name="shared_string_volume">Volumen</string>
+    <string name="obd_fuel_consumption_rate_sensor_type">Brug valgte enheder i navnet.</string>
+    <string name="remaining_fuel_description">Viser mængden af brændstof, der er tilbage i køretøjets tank</string>
+    <string name="obd_fuel_consumption">Brændstofforbrug</string>
+    <string name="reset_average_value">Nulstil gennemsnitsværdi</string>
+    <string name="average_value_slider_description">Vælg tidsintervallet for måling af gennemsnitsværdien.</string>
+    <string name="average_temperature">Gennemsnitlig temperatur</string>
+    <string name="show_minor_turns_descr">Der vises vognbaner i alle overkørsler uanset stemmeinstruktioner</string>
+    <string name="show_minor_turns">Vis på mindre vejkryds, når man navigerer ligeud</string>
+    <string name="remaining_fuel">Resterende brændstof</string>
+    <string name="vehicle_metrics_obd_ii">Køretøjsmålinger (OBD-II)</string>
+    <string name="shared_string_hour">Time</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Spor vigtige køretøjsdata ved hjælp af OBD-II-protokollen. Overvåg nøgletal som hastighed, motoromdrejninger, brændstofforbrug og meget mere.</string>
+    <string name="ltr_or_rtl_combine_via_per">%1$s pr. %2$s</string>
+    <string name="obd_fuel_pressure_desc">Viser trykket i brændstofsystemet</string>
+    <string name="current_temperature">Nuværende temperatur</string>
+    <string name="obd_fuel_consumption_desc">Viser motorens brændstofforbrug, beregnet ud fra resterende brændstof, tankstørrelse og tilbagelagt distance som bestemt af GPS.</string>
+    <string name="shared_string_instant">Øjeblikkelig</string>
+    <string name="average_temperature_slider_description">Vælg tidsintervallet for måling af gennemsnitstemperaturen.</string>
+    <string name="obd_engine_coolant_temp_desc">Viser temperaturen på motorens kølevæske</string>
+    <string name="obd_engine_runtime">Motorens køretid</string>
+    <string name="obd_engine_runtime_desc">Viser, hvor længe motoren har kørt, siden den blev startet.</string>
+    <string name="obd_calculated_engine_load">Beregnet motorbelastning</string>
+    <string name="obd_calculated_engine_load_desc">Viser den procentdel af motorens tilgængelige effekt, der bruges på et givet tidspunkt.</string>
+    <string name="obd_engine_oil_temperature">Temperatur på motorolien</string>
+    <string name="obd_engine_oil_temperature_desc">Viser temperaturen på motorolien.</string>
+    <string name="obd_ambient_air_temp_desc">Viser temperaturen uden for køretøjet.</string>
+    <string name="obd_battery_voltage_desc">Viser spændingsniveauet på køretøjets batteri</string>
+    <string name="preview_next_turn">Forhåndsvis næste sving</string>
+    <string name="av_audio_sample_rate">Lydsamplingsfrekvens</string>
+    <string name="av_audio_sample_rate_descr">Vælg lydsamplingsfrekvens.</string>
+    <string name="connect_new_scanner">Tilslut ny scanner</string>
+    <string name="auto_zoom_3d_angle">Auto-zoom 3D-vinkel</string>
+    <string name="shared_string_engine">Motor</string>
+    <string name="vehicle_metrics_recording_description">Vælg de parametre, der skal registreres i GPX-filen.</string>
+    <string name="obd_throttle_position">Gasspjældets position</string>
+    <string name="obd_throttle_position_desc">Viser vinklen på gasspjældspladen i gasspjældshuset.</string>
+    <string name="obd_speed_desc">Viser hastighed fra køretøjets hastighedssensor (VVS).</string>
+    <string name="obd_air_intake_temp_desc">Viser temperaturen på den luft, der kommer ind i motorens indsugningsmanifold.</string>
+    <string name="shared_string_interpolation">Interpolation</string>
+    <string name="location_interpolation_percent_desc">Indstil procentdelen af lokationsinterpolation under rutenavigation. Denne parameter reducerer forsinkelsen af din position på kortet under animation.</string>
+    <string name="location_interpolation_percent">Interpolation af placering i procent</string>
+    <string name="selected_delayed_profile">Valgte profil \"%s\"</string>
+    <string name="default_buttons_corners_original_description">Hver knap beholder sin egen hjørneradius.</string>
+    <string name="default_buttons_opacity_original_description">Hver knap beholder sin egen baggrundsgennemsigtighed.</string>
+    <string name="default_buttons_size_original_description">Hver knap beholder sin egen størrelse.</string>
 </resources>

@@ -295,7 +295,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 
 						Fragment target = getParentFragment();
 						FragmentManager manager = activity.getSupportFragmentManager();
-						WidgetSettingsBaseFragment.showFragment(manager, args, target, fragment);
+						WidgetSettingsBaseFragment.showFragment(manager, args, fragment, target);
 					}
 				});
 				UiUtilities.setupListItemBackground(app, settingsButton, selectedAppMode.getProfileColor(nightMode));
