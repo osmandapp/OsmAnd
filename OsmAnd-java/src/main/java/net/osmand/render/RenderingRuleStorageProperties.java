@@ -344,13 +344,11 @@ public class RenderingRuleStorageProperties {
 	private RenderingRuleProperty registerRuleInternal(RenderingRuleProperty p) {
 		RenderingRuleProperty existing = get(p.getAttrName());
 		properties.put(p.getAttrName(), p);
-		if(existing == null) {
+		if (existing == null) {
 			p.setId(rules.size());
 			rules.add(p);
 		} else {
-			p.setId(existing.getId());
-			rules.set(existing.getId(), p);
-			customRules.remove(existing);
+			return existing;
 		}
 		return p;
 	}
