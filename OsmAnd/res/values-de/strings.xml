@@ -5297,7 +5297,7 @@
     <string name="missing_maps_header">Fehlende oder veraltete Karten</string>
     <string name="getting_list_of_required_maps">Beschaffung einer Liste der benötigten Karten…</string>
     <string name="route_line_use_coloring_altitude">Die Routenlinie ist nach der Höhenlage eingefärbt.</string>
-    <string name="delete_actions_button_confirmation">Sind Sie sicher, dass Sie „%1$s“ mit allen hinzugefügten Aktionen löschen möchten?</string>
+    <string name="delete_actions_button_confirmation">Sind Sie sicher, dass Sie 1$s mit allen hinzugefügten Aktionen löschen möchten?</string>
     <string name="visualized_by">Visualisiert von</string>
     <string name="wall_color">Wandfarbe</string>
     <string name="track_line">Track-Linie</string>
