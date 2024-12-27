@@ -5674,4 +5674,7 @@
     <string name="shared_string_interpolation">Interpolation</string>
     <string name="location_interpolation_percent">Prozentualer Anteil der Standortinterpolation</string>
     <string name="selected_delayed_profile">Ausgewähltes Profil \"%s\"</string>
+    <string name="calculating_indication_message">Berechne …</string>
+    <string name="calculate_size">Berechne Größe</string>
+    <string name="default_buttons_size_original_description">Jede Taste würde ihre eigene Größe behalten.</string>
 </resources>
