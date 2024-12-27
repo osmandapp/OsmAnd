@@ -5618,4 +5618,6 @@
     <string name="default_buttons_size_original_description">Mindegyik gomb megtartja a saját méretét.</string>
     <string name="default_buttons_corners_original_description">Mindegyik gomb megtartja a saját lekerekítési sugarát.</string>
     <string name="default_buttons_opacity_original_description">Mindegyik gomb megtartja a saját háttér-átlátszatlanságát.</string>
+    <string name="calculate_size">Méret kiszámítása</string>
+    <string name="calculating_indication_message">Számítás…</string>
 </resources>

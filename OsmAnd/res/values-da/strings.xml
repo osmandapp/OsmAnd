@@ -5693,4 +5693,6 @@
     <string name="default_buttons_corners_original_description">Hver knap beholder sin egen hjørneradius.</string>
     <string name="default_buttons_opacity_original_description">Hver knap beholder sin egen baggrundsgennemsigtighed.</string>
     <string name="default_buttons_size_original_description">Hver knap beholder sin egen størrelse.</string>
+    <string name="calculating_indication_message">Beregner…</string>
+    <string name="calculate_size">Beregn størrelse</string>
 </resources>
