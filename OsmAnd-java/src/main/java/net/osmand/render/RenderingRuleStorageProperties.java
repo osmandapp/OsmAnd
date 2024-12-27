@@ -192,21 +192,21 @@ public class RenderingRuleStorageProperties {
 
 	final Map<String, RenderingRuleProperty> properties;
 	// C++
-	final List<RenderingRuleProperty> rules ;
-	final List<RenderingRuleProperty> customRules ;
+	final List<RenderingRuleProperty> rules;
+	final Map<String, RenderingRuleProperty> customRules;
 	
 	
 	public RenderingRuleStorageProperties() {
-		properties = new LinkedHashMap<String, RenderingRuleProperty>();
-		rules = new ArrayList<RenderingRuleProperty>();
-		customRules = new ArrayList<RenderingRuleProperty>();
+		properties = new LinkedHashMap<>();
+		rules = new ArrayList<>();
+		customRules = new LinkedHashMap<>();
 		createDefaultRenderingRuleProperties();
 	}
 	
 	public RenderingRuleStorageProperties(RenderingRuleStorageProperties toClone) {
-		properties = new LinkedHashMap<String, RenderingRuleProperty>(toClone.properties);
-		rules = new ArrayList<RenderingRuleProperty>(toClone.rules);
-		customRules = new ArrayList<RenderingRuleProperty>(toClone.customRules);
+		properties = new LinkedHashMap<>(toClone.properties);
+		rules = new ArrayList<>(toClone.rules);
+		customRules = new LinkedHashMap<>(toClone.customRules);
 		createDefaultRenderingRuleProperties();
 	}
 
@@ -329,35 +329,27 @@ public class RenderingRuleStorageProperties {
 	}
 	
 	public List<RenderingRuleProperty> getCustomRules() {
-		return customRules;
+		return new ArrayList<>(customRules.values());
 	}
 
 	public RenderingRuleProperty getCustomRule(String attrName) {
-		for (RenderingRuleProperty p : customRules) {
-			if (p.getAttrName().equals(attrName)) {
-				return p;
-			}
-		}
-		return null;
+		return customRules.get(attrName);
 	}
 
 	private RenderingRuleProperty registerRuleInternal(RenderingRuleProperty p) {
 		RenderingRuleProperty existing = get(p.getAttrName());
-		properties.put(p.getAttrName(), p);
 		if (existing == null) {
+			properties.put(p.getAttrName(), p);
 			p.setId(rules.size());
 			rules.add(p);
-		} else {
-			return existing;
 		}
 		return p;
 	}
 
-	public RenderingRuleProperty registerRule(RenderingRuleProperty p) {
-		RenderingRuleProperty ps = registerRuleInternal(p);
-		if(!customRules.contains(ps)) {
-			customRules.add(p);
+	public void registerRule(RenderingRuleProperty p) {
+		registerRuleInternal(p);
+		if (!customRules.containsKey(p.attrName)) {
+			customRules.put(p.attrName, p);
 		}
-		return ps;
 	}
 }
