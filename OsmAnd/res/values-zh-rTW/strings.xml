@@ -5309,7 +5309,7 @@
     <string name="key_assignment_add_action">新增動作</string>
     <string name="clear_key_assignment_summary">將會清除所選動作的按鍵分配。</string>
     <string name="no_assigned_keys">沒有分配的按鍵</string>
-    <string name="key_name_pattern">按鈕 1$s\\</string>
+    <string name="key_name_pattern">按鈕 %1$s\\</string>
     <string name="key_assignment_add_key">新增鍵</string>
     <string name="action_icon">動作圖示</string>
     <string name="user_palette">使用者調色板</string>
