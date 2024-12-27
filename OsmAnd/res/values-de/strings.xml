@@ -1956,7 +1956,7 @@
     <string name="route_stops_before">%1$s Haltestellen davor</string>
     <string name="rendering_attr_hideOverground_name">Oberirdische Objekte</string>
     <string name="routing_attr_short_way_name">Kraftstoffsparende Route</string>
-    <string name="replace_favorite_confirmation">Den Favoriten „%1$s“ ersetzen?</string>
+    <string name="replace_favorite_confirmation">Den Favoriten 1$s ersetzen?</string>
     <string name="shared_string_change">Ändern</string>
     <string name="get_started">Erste Schritte</string>
     <string name="update_all_maps_now">Jetzt alle Karten aktualisieren?</string>
@@ -2044,7 +2044,7 @@
     <string name="rendering_attr_hideWaterPolygons_name">Wasserflächen</string>
     <string name="quick_action_item_action">Aktion %d</string>
     <string name="quick_action_item_screen">Bildschirm %d</string>
-    <string name="quick_action_map_style_switch">Kartendarstellung geändert zu „%s“.</string>
+    <string name="quick_action_map_style_switch">Kartendarstellung geändert zu s</string>
     <string name="quick_action_navigation_voice">Sprachausgabe ein/aus</string>
     <string name="quick_action_navigation_voice_off">Sprachausgabe aktivieren</string>
     <string name="quick_action_navigation_voice_on">Sprachausgabe stummschalten</string>
@@ -2052,7 +2052,7 @@
     <string name="quick_action_edit_action">Aktion bearbeiten</string>
     <string name="dialog_add_action_title">Aktion hinzufügen</string>
     <string name="quick_actions_delete">Aktion löschen</string>
-    <string name="quick_actions_delete_text">Aktion „%s“ löschen?</string>
+    <string name="quick_actions_delete_text">Aktion s löschen?</string>
     <string name="quick_favorites_show_favorites_dialog">Dialog zu Favoriten anzeigen</string>
     <string name="quick_favorites_name_preset">Namen voreinstellen</string>
     <string name="shared_string_action_name">Aktionsname</string>
@@ -2078,7 +2078,7 @@
     <string name="quick_action_map_underlay_action">Underlay hinzufügen</string>
     <string name="quick_action_map_source_title">Kartenquellen</string>
     <string name="quick_action_map_source_action">Kartenquelle hinzufügen</string>
-    <string name="quick_action_map_source_switch">Kartenquelle wurde in „%s“ geändert.</string>
+    <string name="quick_action_map_source_switch">Kartenquelle geändert zu s</string>
     <string name="quick_action_btn_tutorial_title">Schaltflächenposition ändern</string>
     <string name="quick_action_category_descr">Kategorie, in welche der Favorit gespeichert werden soll:</string>
     <string name="quick_action_gpx_category_descr">Wählen Sie eine beliebige Kategorie.</string>
@@ -2097,8 +2097,8 @@
     <string name="quick_action_add_create_items">Objekte erstellen</string>
     <string name="quick_action_bug_descr">Diese Nachricht wird ins Kommentarfeld eingetragen.</string>
     <string name="quick_action_btn_tutorial_descr">Langes Drücken und Ziehen der Schaltfläche ändert ihre Bildschirmposition.</string>
-    <string name="quick_action_map_overlay_switch">Karten-Overlay wurde in „%s“ geändert.</string>
-    <string name="quick_action_map_underlay_switch">Karten-Underlay wurde in „%s“ geändert.</string>
+    <string name="quick_action_map_overlay_switch">Karten-Overlay geändert zu s</string>
+    <string name="quick_action_map_underlay_switch">Karten-Underlay geändert zu s</string>
     <string name="navigate_point_olc_info_invalid">Ungültiger OLC
 \n</string>
     <string name="navigate_point_olc_info_short">Kurzer OLC
@@ -2628,7 +2628,7 @@
     <string name="coord_input_save_as_track">Als Track speichern</string>
     <string name="coord_input_save_as_track_descr">Sie haben %1$s Punkte hinzugefügt. Geben Sie einen Dateinamen ein und klicken Sie auf „Speichern“.</string>
     <string name="point_deleted">Punkt %1$s gelöscht</string>
-    <string name="send_search_query_description">Ihre Suchanfrage wird an „%1$s“ gesendet, zusammen mit Ihrem Standort. \n \nPersönliche Informationen werden nicht gesammelt, sondern nur Suchdaten, die zur Verbesserung der Suche benötigt werden.</string>
+    <string name="send_search_query_description">Ihre Suchanfrage wird an 1$s gesendet, zusammen mit Ihrem Standort. \n \nPersönliche Informationen werden nicht gesammelt, sondern nur Suchdaten, die zur Verbesserung der Suche benötigt werden.</string>
     <string name="send_search_query">Suchanfrage senden?</string>
     <string name="shared_string_world">Welt</string>
     <string name="increase_search_radius_to">Vergrößerung des Suchradius auf %1$s</string>
@@ -2769,8 +2769,8 @@
     <string name="avoid_pt_types_descr">Wählen Sie die öffentlichen Verkehrsmittel aus, die Sie für die Navigation vermeiden möchten:</string>
     <string name="avoid_pt_types">Verkehrsmittel ausschließen …</string>
     <string name="shared_string_walk">Gehen</string>
-    <string name="save_poi_value_exceed_length">Kürzen Sie die Länge des Tags „%s“ auf weniger als 255 Zeichen.</string>
-    <string name="save_poi_value_exceed_length_title">Länge des Wertes „%s“</string>
+    <string name="save_poi_value_exceed_length">Kürzen Sie die Länge des Tags s auf weniger als 255 Zeichen.</string>
+    <string name="save_poi_value_exceed_length_title">Länge des s Wertes</string>
     <string name="quick_action_day_night_mode">%s Modus</string>
     <string name="routing_attr_avoid_sett_name">Keine Pflastersteine</string>
     <string name="routing_attr_avoid_sett_description">Vermeidet Pflastersteine</string>
@@ -2841,7 +2841,7 @@
     <string name="profile_alert_need_save_title">Änderungen speichern</string>
     <string name="profile_alert_need_save_msg">Änderungen am Profil zuerst speichern</string>
     <string name="profile_alert_delete_title">Profil löschen</string>
-    <string name="profile_alert_delete_msg">Profil „%s“ löschen</string>
+    <string name="profile_alert_delete_msg">Profil s löschen</string>
     <string name="select_base_profile_dialog_title">Wählen Sie zunächst ein Profil aus</string>
     <string name="select_base_profile_dialog_message">Bauen Sie ein eigenes Anwendungsprofil auf einem der Standardprofile der App auf. Dieses bestimmt die Grundeinstellungen wie Voreinstellungen zur Sichtbarkeit von Widgets und die Einheiten für Geschwindigkeit und Entfernungen. Dies sind die App-Standardprofile zusammen mit Beispielen für eigene Anwendungsprofile, die erweitert werden können:</string>
     <string name="select_nav_profile_dialog_title">Navigationsart auswählen</string>
@@ -2989,11 +2989,11 @@
     <string name="pref_selected_by_default_for_profiles">Für Profile wird als Vorgabe diese Einstellung gewählt: %s</string>
     <string name="change_default_settings">Einstellung ändern</string>
     <string name="discard_changes">Änderung verwerfen</string>
-    <string name="apply_to_current_profile">Nur auf Profil „%1$s“ anwenden</string>
+    <string name="apply_to_current_profile">Nur anwenden auf 1$s\\</string>
     <string name="apply_to_all_profiles">Auf alle Profile anwenden</string>
     <string name="analytics_pref_title">Analyseinstrumente</string>
     <string name="turn_screen_on_info">Karte während der Navigation auf dem Sperrbildschirm anzeigen.</string>
-    <string name="route_parameters_info">Einstellungen für die Routenplanung des gewählten Profils „%1$s“.</string>
+    <string name="route_parameters_info">Einstellungen für die Routenplanung des gewählten Profils 1$s</string>
     <string name="wake_time">Timeout (Abschaltzeit) nach dem Aufwachen</string>
     <string name="units_and_formats">Einheiten und Formate</string>
     <string name="map_look_descr">Kartendarstellung</string>
@@ -3025,7 +3025,7 @@
     <string name="voice_announces">Sprachansagen</string>
     <string name="screen_alerts">Bildschirmwarnungen</string>
     <string name="route_parameters_descr">Routenparameter konfigurieren</string>
-    <string name="application_profile_changed">App-Profil geändert zu „%s“</string>
+    <string name="application_profile_changed">App-Profil geändert zu s\\</string>
     <string name="logcat_buffer">Logcat-Puffer</string>
     <string name="plugins_settings">Plugin-Einstellungen</string>
     <string name="shared_string_by_default">Standardmäßig</string>
@@ -3428,10 +3428,10 @@
     <string name="turn_screen_on_power_button_descr">Drücken Sie den Einschaltknopf des Geräts, um den Bildschirm mit OsmAnd im Vordergrund einzuschalten.</string>
     <string name="turn_screen_on_power_button">Einschaltknopf</string>
     <string name="turn_screen_on_proximity_sensor">Näherungssensor</string>
-    <string name="turn_screen_on_wake_time_descr">Timeout (Abschaltzeit) des Bildschirms nach dem Aufwachen auswählen. („%1$s“, um keinen Timeout anzuwenden.)</string>
+    <string name="turn_screen_on_wake_time_descr">Timeout (Abschaltzeit) des Bildschirms nach dem Aufwachen auswählen. (1$s, um keinen Timeout anzuwenden.)</string>
     <string name="keep_screen_on">Bildschirm eingeschaltet lassen</string>
     <string name="keep_screen_off">Bildschirm ausgeschaltet lassen</string>
-    <string name="screen_timeout_descr">Wenn „%1$s“ eingeschaltet ist, hängt die Aktivitätszeit davon ab.</string>
+    <string name="screen_timeout_descr">Wenn 1$s eingeschaltet ist, hängt die Aktivitätszeit davon ab.</string>
     <string name="pseudo_mercator_projection">Pseudo-Mercator-Projektion</string>
     <string name="one_image_per_tile">Eine Bilddatei pro Kachel</string>
     <string name="sqlite_db_file">SQLiteDB-Datei</string>
@@ -3505,7 +3505,7 @@
     <string name="route_between_points">Route zwischen Punkten</string>
     <string name="plan_a_route">Eine Route planen</string>
     <string name="add_to_a_track">Zu einem Track hinzufügen</string>
-    <string name="add_hidden_group_info">Der hinzugefügte Punkt befindet sich in „%s“. Blenden Sie die ausgewählte Gruppe ein, um sie in der Karte anzuzeigen.</string>
+    <string name="add_hidden_group_info">Der hinzugefügte Punkt befindet sich in s. Blenden Sie die ausgewählte Gruppe ein, um sie in der Karte anzuzeigen.</string>
     <string name="track_show_start_finish_icons">Start- und Ziel-Symbole anzeigen</string>
     <string name="select_track_width">Breite auswählen</string>
     <string name="gpx_split_interval_descr">Wählen Sie das Intervall, in dem Markierungen mit Abstand oder Zeit auf dem Track angezeigt werden.</string>
@@ -4136,13 +4136,13 @@
     <string name="copying_file">Kopieren der Datei %1$s …</string>
     <string name="from_to_with_params">Von %1$s nach %2$s</string>
     <string name="progress_complete">%1$s abgeschlossen</string>
-    <string name="storage_found_files_descr">Tippen Sie auf „%1$s“, um %2$s Dateien von „%3$s“ nach „%4$s“ zu kopieren. Dies kann einige Zeit dauern.</string>
+    <string name="storage_found_files_descr">Tippen Sie auf 1$s, um %2$s Dateien von 3$s nach 4$s zu kopieren. Dies kann einige Zeit dauern.</string>
     <string name="storage_copied_files_size">%1$s Datei(en) %2$s verarbeitet</string>
     <string name="storage_copying_files_size">Kopieren von %1$s Dateien %2$s</string>
     <string name="storage_found_files_size">%1$s Dateien %2$s gefunden</string>
     <string name="shared_storage_last_step">Sie können anschließend einen neuen Datenordner angeben.</string>
     <string name="shared_storage_third_step">Erteilen Sie die Berechtigung zum Zugriff auf den Ordner. Ohne sie kann OsmAnd keine Dateien kopieren.</string>
-    <string name="shared_storage_first_step">Drücken Sie „%1$s“. \nEs öffnet sich der Dateimanager, in dem Sie den Ordner osmand finden und öffnen müssen.</string>
+    <string name="shared_storage_first_step">Drücken Sie 1$s\nEs öffnet sich der Dateimanager, in dem Sie den Ordner osmand finden und öffnen müssen.</string>
     <string name="shared_storage_migration_descr">Aufgrund von Änderungen im Android-Speicherzugriff kann OsmAnd nicht mehr %1$s verwenden.
 \n
 \nKopieren Sie alle Ihre Daten in den neuen Ordner.</string>
@@ -5297,7 +5297,7 @@
     <string name="missing_maps_header">Fehlende oder veraltete Karten</string>
     <string name="getting_list_of_required_maps">Beschaffung einer Liste der benötigten Karten…</string>
     <string name="route_line_use_coloring_altitude">Die Routenlinie ist nach der Höhenlage eingefärbt.</string>
-    <string name="delete_actions_button_confirmation">Sind Sie sicher, dass Sie %1$s mit allen hinzugefügten Aktionen löschen möchten?</string>
+    <string name="delete_actions_button_confirmation">Sind Sie sicher, dass Sie 1$s mit allen hinzugefügten Aktionen löschen möchten?</string>
     <string name="visualized_by">Visualisiert von</string>
     <string name="wall_color">Wandfarbe</string>
     <string name="track_line">Track-Linie</string>
@@ -5331,7 +5331,7 @@
     <string name="no_assigned_keys">Keine zugewiesenen Tasten</string>
     <string name="shared_string_key">Taste</string>
     <string name="new_key_assignment">Neue Tastenzuweisung</string>
-    <string name="key_name_pattern">Taste %1$s\\</string>
+    <string name="key_name_pattern">Taste 1$s\\</string>
     <string name="clear_key_assignment_summary">Tastenzuweisung für die ausgewählte Aktion wird gelöscht.</string>
     <string name="key_assignment_add_action">Aktion hinzufügen</string>
     <string name="clear_all_key_shortcuts_summary">Alle Tastenzuweisungen für den ausgewählten Typ werden gelöscht.</string>
