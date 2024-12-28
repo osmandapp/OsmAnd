@@ -159,7 +159,7 @@ public class AppInitializer implements IProgress {
 	private boolean routingConfigInitialized;
 	private String taskName;
 	private SharedPreferences startPrefs;
-	private StateChangedListener<String> onCustomAppModesKeysChanged;
+	private StateChangedListener<String> rebuildSearchDatabaseListener;
 
 	public interface LoadRoutingFilesCallback {
 		void onRoutingFilesLoaded();
@@ -311,7 +311,7 @@ public class AppInitializer implements IProgress {
 		} else {
 			settings.setApplicationMode(settings.DEFAULT_APPLICATION_MODE.get());
 		}
-		whenCustomAppModesKeysChangedThenRebuildSearchDatabase();
+		whenCustomAppModesKeysOrUserProfileNameChangedThenRebuildSearchDatabase();
 		startTime = System.currentTimeMillis();
 		getLazyRoutingConfig();
 		app.applyTheme(app);
@@ -376,10 +376,10 @@ public class AppInitializer implements IProgress {
 		initOpeningHoursParser();
 	}
 
-	private void whenCustomAppModesKeysChangedThenRebuildSearchDatabase() {
-		// FK-TODO: when profile name within "Profile Appearance" preference changes then also rebuildSearchDatabase()
-		onCustomAppModesKeysChanged = s -> rebuildSearchDatabase();
-		app.getSettings().CUSTOM_APP_MODES_KEYS.addListener(onCustomAppModesKeysChanged);
+	private void whenCustomAppModesKeysOrUserProfileNameChangedThenRebuildSearchDatabase() {
+		rebuildSearchDatabaseListener = s -> rebuildSearchDatabase();
+		app.getSettings().CUSTOM_APP_MODES_KEYS.addListener(rebuildSearchDatabaseListener);
+		app.getSettings().USER_PROFILE_NAME.addListener(rebuildSearchDatabaseListener);
 	}
 
 	private void rebuildSearchDatabase() {
