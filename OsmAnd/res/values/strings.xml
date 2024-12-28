@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="rendering_attr_showClimbingRoutes_name">Climbing routes</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Show climbing routes</string>
 
     <string name="calculating_indication_message">Calculating…</string>
     <string name="calculate_size">Calculate size</string>
