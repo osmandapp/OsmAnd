@@ -5,8 +5,10 @@ import net.osmand.plus.plugins.OsmandPlugin;
 
 class PluginsHelper {
 
-	public static void enablePlugin(final Class<? extends OsmandPlugin> plugin, final OsmandApplication app) {
-		enablePlugin(getPlugin(plugin), app);
+	public static OsmandPlugin enablePlugin(final Class<? extends OsmandPlugin> plugin, final OsmandApplication app) {
+		final OsmandPlugin osmandPlugin = getPlugin(plugin);
+		enablePlugin(osmandPlugin, app);
+		return osmandPlugin;
 	}
 
 	public static void enablePlugin(final OsmandPlugin plugin, final OsmandApplication app) {

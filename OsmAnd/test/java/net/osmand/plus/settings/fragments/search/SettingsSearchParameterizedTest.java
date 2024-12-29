@@ -25,7 +25,6 @@ import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Stream;
 
 @LargeTest
@@ -36,7 +35,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 	public String description;
 
 	@Parameterized.Parameter(value = 1)
-	public SettingsSearchTestTemplate settingsSearchTestTemplate;
+	public SettingsSearchTest settingsSearchTest;
 
 	@Parameterized.Parameters(name = "{0}")
 	public static Iterable<Object[]> data() {
@@ -105,12 +104,12 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 								"search_ApplicationMode_find_SelectCopyAppModeBottomSheet",
 								searchQueryAndResult(
 										context -> ApplicationMode.PEDESTRIAN.toHumanString(),
-										(context, osmandPlugin) -> List.of(String.format("Path: Driving > %s", context.getString(R.string.copy_from_other_profile))))
+										context -> List.of(String.format("Path: Driving > %s", context.getString(R.string.copy_from_other_profile))))
 						},
 
 						{
 								"shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_AccessibilityPlugin",
-								new SettingsSearchTestTemplate() {
+								new SettingsSearchWithPluginTestTemplate() {
 
 									@Override
 									protected String getSearchQuery(final Context context) {
@@ -118,20 +117,20 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 									}
 
 									@Override
-									protected Optional<Class<? extends OsmandPlugin>> getPluginClass() {
-										return Optional.of(AccessibilityPlugin.class);
+									protected Class<? extends OsmandPlugin> getPluginClass() {
+										return AccessibilityPlugin.class;
 									}
 
 									@Override
-									protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
-										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.orElseThrow().getName()));
+									protected List<String> getExpectedSearchResults(final Context context, final OsmandPlugin osmandPlugin) {
+										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.getName()));
 									}
 								}
 						},
 
 						{
 								"shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_AudioVideoNotesPlugin",
-								new SettingsSearchTestTemplate() {
+								new SettingsSearchWithPluginTestTemplate() {
 
 									@Override
 									protected String getSearchQuery(final Context context) {
@@ -139,20 +138,20 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 									}
 
 									@Override
-									protected Optional<Class<? extends OsmandPlugin>> getPluginClass() {
-										return Optional.of(AudioVideoNotesPlugin.class);
+									protected Class<? extends OsmandPlugin> getPluginClass() {
+										return AudioVideoNotesPlugin.class;
 									}
 
 									@Override
-									protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
-										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.orElseThrow().getName()));
+									protected List<String> getExpectedSearchResults(final Context context, final OsmandPlugin osmandPlugin) {
+										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.getName()));
 									}
 								}
 						},
 
 						{
 								"shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_OsmandMonitoringPlugin",
-								new SettingsSearchTestTemplate() {
+								new SettingsSearchWithPluginTestTemplate() {
 
 									@Override
 									protected String getSearchQuery(final Context context) {
@@ -160,20 +159,20 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 									}
 
 									@Override
-									protected Optional<Class<? extends OsmandPlugin>> getPluginClass() {
-										return Optional.of(OsmandMonitoringPlugin.class);
+									protected Class<? extends OsmandPlugin> getPluginClass() {
+										return OsmandMonitoringPlugin.class;
 									}
 
 									@Override
-									protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
-										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.orElseThrow().getName()));
+									protected List<String> getExpectedSearchResults(final Context context, final OsmandPlugin osmandPlugin) {
+										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.getName()));
 									}
 								}
 						},
 
 						{
 								"shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_WeatherPlugin",
-								new SettingsSearchTestTemplate() {
+								new SettingsSearchWithPluginTestTemplate() {
 
 									@Override
 									protected String getSearchQuery(final Context context) {
@@ -181,20 +180,20 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 									}
 
 									@Override
-									protected Optional<Class<? extends OsmandPlugin>> getPluginClass() {
-										return Optional.of(WeatherPlugin.class);
+									protected Class<? extends OsmandPlugin> getPluginClass() {
+										return WeatherPlugin.class;
 									}
 
 									@Override
-									protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
-										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.orElseThrow().getName()));
+									protected List<String> getExpectedSearchResults(final Context context, final OsmandPlugin osmandPlugin) {
+										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.getName()));
 									}
 								}
 						},
 
 						{
 								"shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_OsmandMonitoringPlugin",
-								new SettingsSearchTestTemplate() {
+								new SettingsSearchWithPluginTestTemplate() {
 
 									@Override
 									protected String getSearchQuery(final Context context) {
@@ -202,16 +201,16 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 									}
 
 									@Override
-									protected Optional<Class<? extends OsmandPlugin>> getPluginClass() {
-										return Optional.of(OsmandMonitoringPlugin.class);
+									protected Class<? extends OsmandPlugin> getPluginClass() {
+										return OsmandMonitoringPlugin.class;
 									}
 
 									@Override
-									protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+									protected List<String> getExpectedSearchResults(final Context context, final OsmandPlugin osmandPlugin) {
 										return List.of(
 												String.format(
 														"Path: Driving > %s > %s",
-														osmandPlugin.orElseThrow().getName(),
+														osmandPlugin.getName(),
 														context.getString(R.string.copy_from_other_profile)));
 									}
 								}
@@ -219,7 +218,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 
 						{
 								"shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_AccessibilityPlugin",
-								new SettingsSearchTestTemplate() {
+								new SettingsSearchWithPluginTestTemplate() {
 
 									@Override
 									protected String getSearchQuery(final Context context) {
@@ -227,16 +226,16 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 									}
 
 									@Override
-									protected Optional<Class<? extends OsmandPlugin>> getPluginClass() {
-										return Optional.of(AccessibilityPlugin.class);
+									protected Class<? extends OsmandPlugin> getPluginClass() {
+										return AccessibilityPlugin.class;
 									}
 
 									@Override
-									protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+									protected List<String> getExpectedSearchResults(final Context context, final OsmandPlugin osmandPlugin) {
 										return List.of(
 												String.format(
 														"Path: Driving > %s > %s",
-														osmandPlugin.orElseThrow().getName(),
+														osmandPlugin.getName(),
 														context.getString(R.string.copy_from_other_profile)));
 									}
 								}
@@ -244,7 +243,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 
 						{
 								"shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_AudioVideoNotesPlugin",
-								new SettingsSearchTestTemplate() {
+								new SettingsSearchWithPluginTestTemplate() {
 
 									@Override
 									protected String getSearchQuery(final Context context) {
@@ -252,16 +251,16 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 									}
 
 									@Override
-									protected Optional<Class<? extends OsmandPlugin>> getPluginClass() {
-										return Optional.of(AudioVideoNotesPlugin.class);
+									protected Class<? extends OsmandPlugin> getPluginClass() {
+										return AudioVideoNotesPlugin.class;
 									}
 
 									@Override
-									protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+									protected List<String> getExpectedSearchResults(final Context context, final OsmandPlugin osmandPlugin) {
 										return List.of(
 												String.format(
 														"Path: Driving > %s > %s",
-														osmandPlugin.orElseThrow().getName(),
+														osmandPlugin.getName(),
 														context.getString(R.string.copy_from_other_profile)));
 									}
 								}
@@ -269,7 +268,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 
 						{
 								"shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_WeatherPlugin",
-								new SettingsSearchTestTemplate() {
+								new SettingsSearchWithPluginTestTemplate() {
 
 									@Override
 									protected String getSearchQuery(final Context context) {
@@ -277,16 +276,16 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 									}
 
 									@Override
-									protected Optional<Class<? extends OsmandPlugin>> getPluginClass() {
-										return Optional.of(WeatherPlugin.class);
+									protected Class<? extends OsmandPlugin> getPluginClass() {
+										return WeatherPlugin.class;
 									}
 
 									@Override
-									protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+									protected List<String> getExpectedSearchResults(final Context context, final OsmandPlugin osmandPlugin) {
 										return List.of(
 												String.format(
 														"Path: Driving > %s > %s",
-														osmandPlugin.orElseThrow().getName(),
+														osmandPlugin.getName(),
 														context.getString(R.string.copy_from_other_profile)));
 									}
 								}
@@ -294,7 +293,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 
 						{
 								"shouldSearchAndFind_LocationInterpolationBottomSheet_title",
-								new SettingsSearchTestTemplate() {
+								new SettingsSearchWithPluginTestTemplate() {
 
 									@Override
 									protected String getSearchQuery(final Context context) {
@@ -302,12 +301,12 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 									}
 
 									@Override
-									protected Optional<Class<? extends OsmandPlugin>> getPluginClass() {
-										return Optional.of(OsmandDevelopmentPlugin.class);
+									protected Class<? extends OsmandPlugin> getPluginClass() {
+										return OsmandDevelopmentPlugin.class;
 									}
 
 									@Override
-									protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+									protected List<String> getExpectedSearchResults(final Context context, final OsmandPlugin osmandPlugin) {
 										return List.of(context.getString(R.string.location_interpolation_percent));
 									}
 								}
@@ -315,7 +314,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 
 						{
 								"shouldSearchAndFind_LocationInterpolationBottomSheet_description",
-								new SettingsSearchTestTemplate() {
+								new SettingsSearchWithPluginTestTemplate() {
 
 									@Override
 									protected String getSearchQuery(final Context context) {
@@ -323,12 +322,12 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 									}
 
 									@Override
-									protected Optional<Class<? extends OsmandPlugin>> getPluginClass() {
-										return Optional.of(OsmandDevelopmentPlugin.class);
+									protected Class<? extends OsmandPlugin> getPluginClass() {
+										return OsmandDevelopmentPlugin.class;
 									}
 
 									@Override
-									protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+									protected List<String> getExpectedSearchResults(final Context context, final OsmandPlugin osmandPlugin) {
 										return List.of(context.getString(R.string.location_interpolation_percent_desc));
 									}
 								}
@@ -344,12 +343,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 									}
 
 									@Override
-									protected Optional<Class<? extends OsmandPlugin>> getPluginClass() {
-										return Optional.empty();
-									}
-
-									@Override
-									protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+									protected List<String> getExpectedSearchResults(final Context context) {
 										return Stream
 												.of("Driving", "Moped")
 												.map(applicationMode -> String.format("Path: %s > Profile appearance", applicationMode))
@@ -368,12 +362,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 									}
 
 									@Override
-									protected Optional<Class<? extends OsmandPlugin>> getPluginClass() {
-										return Optional.empty();
-									}
-
-									@Override
-									protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+									protected List<String> getExpectedSearchResults(final Context context) {
 										return Stream
 												.of("Driving", "Truck")
 												.map(applicationMode -> String.format("Path: %s > Navigation settings > Screen alerts > Speed cameras", applicationMode))
@@ -389,6 +378,6 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 
 	@Test
 	public void testSearchAndFind() {
-		settingsSearchTestTemplate.testSearchAndFind(app);
+		settingsSearchTest.testSearchAndFind(app);
 	}
 }
