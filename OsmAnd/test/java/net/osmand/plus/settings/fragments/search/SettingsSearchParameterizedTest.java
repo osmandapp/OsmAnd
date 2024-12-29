@@ -95,8 +95,15 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 
 						{"ConfigureScreenFragment", searchQueryAndResult(R.string.configure_screen_widgets_descr)},
 
-						{"test_search_map_rendering_engine_v1_find_map_rendering_engine", searchQueryAndResult(R.string.map_rendering_engine_v1, R.string.map_rendering_engine)},
-						{"test_search_map_rendering_engine_v2_find_map_rendering_engine", searchQueryAndResult(R.string.map_rendering_engine_v2, R.string.map_rendering_engine)}
+						{"search_map_rendering_engine_v1_find_map_rendering_engine", searchQueryAndResult(R.string.map_rendering_engine_v1, R.string.map_rendering_engine)},
+						{"search_map_rendering_engine_v2_find_map_rendering_engine", searchQueryAndResult(R.string.map_rendering_engine_v2, R.string.map_rendering_engine)},
+
+						{
+								"search_ApplicationMode_find_SelectCopyAppModeBottomSheet",
+								searchQueryAndResult(
+										context -> ApplicationMode.PEDESTRIAN.toHumanString(),
+										context -> String.format("Path: Driving > %s", context.getString(R.string.copy_from_other_profile)))
+						}
 				});
 	}
 

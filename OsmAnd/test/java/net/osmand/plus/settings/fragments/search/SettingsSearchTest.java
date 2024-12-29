@@ -43,7 +43,6 @@ import java.util.stream.Stream;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-// FK-TODO: DRY in test methods
 public class SettingsSearchTest extends AndroidTest {
 
 	@Rule
@@ -77,19 +76,6 @@ public class SettingsSearchTest extends AndroidTest {
 				.of("Driving", "Truck")
 				.map(applicationMode -> String.format("Path: %s > Navigation settings > Screen alerts > Speed cameras", applicationMode))
 				.forEach(path -> onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(path))));
-	}
-
-	@Test
-	public void test_search_ApplicationMode_find_SelectCopyAppModeBottomSheet() {
-		// Given
-		final ApplicationMode applicationMode = ApplicationMode.PEDESTRIAN;
-		clickSearchButton(app);
-
-		// When
-		onView(searchView()).perform(replaceText(applicationMode.toHumanString()), closeSoftKeyboard());
-
-		// Then
-		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(String.format("Path: Driving > %s", app.getString(R.string.copy_from_other_profile)))));
 	}
 
 	@Test

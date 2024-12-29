@@ -8,6 +8,12 @@ import java.util.function.Function;
 
 class SearchQueryAndResultFactory {
 
+	public static SearchQueryAndResult searchQueryAndResult(
+			final Function<Context, String> searchQueryProvider,
+			final Function<Context, String> searchResultProvider) {
+		return new SearchQueryAndResult(searchQueryProvider, searchResultProvider);
+	}
+
 	public static SearchQueryAndResult searchQueryAndResult(final Function<Context, String> searchQueryProvider) {
 		return new SearchQueryAndResult(searchQueryProvider, searchQueryProvider);
 	}
