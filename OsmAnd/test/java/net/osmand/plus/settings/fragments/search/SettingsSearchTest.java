@@ -83,9 +83,37 @@ public class SettingsSearchTest extends AndroidTest {
 						{"VoiceLanguageBottomSheetFragment: tts_description", searchQueryAndExpectedSearchResult(R.string.tts_description)},
 						{"VoiceLanguageBottomSheetFragment: recorded_description", searchQueryAndExpectedSearchResult(R.string.recorded_description)},
 
-						{"WakeTimeBottomSheet: description", searchQueryAndExpectedSearchResult(context -> context.getString(R.string.turn_screen_on_wake_time_descr, context.getString(R.string.keep_screen_on)))},
+						{
+								"WakeTimeBottomSheet: description",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.turn_screen_on_wake_time_descr, context.getString(R.string.keep_screen_on));
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
 						{"WakeTimeBottomSheet: keep_screen_on", searchQueryAndExpectedSearchResult(R.string.keep_screen_on)},
-						{"WakeTimeBottomSheet: timeoutDescription", searchQueryAndExpectedSearchResult(context -> context.getString(R.string.screen_timeout_descr, context.getString(R.string.system_screen_timeout)))},
+						{
+								"WakeTimeBottomSheet: timeoutDescription",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.screen_timeout_descr, context.getString(R.string.system_screen_timeout));
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
 
 						{"SelectNavProfileBottomSheet: header", searchQueryAndExpectedSearchResult(R.string.select_nav_profile_dialog_message)},
 
