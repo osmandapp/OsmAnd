@@ -2972,7 +2972,7 @@
     <string name="pref_selected_by_default_for_profiles">Ова поставка је подразумевано одабрана за налоге : %s</string>
     <string name="change_default_settings">Промени поставке</string>
     <string name="discard_changes">Одбаци промену</string>
-    <string name="apply_to_current_profile">Примени само на %1$s\\</string>
+    <string name="apply_to_current_profile">Примени само на %1$s</string>
     <string name="apply_to_all_profiles">Примени на све налоге</string>
     <string name="start_up_message_pref">Порука по отварању</string>
     <string name="analytics_pref_title">Рашчлањивања</string>
@@ -3007,7 +3007,7 @@
     <string name="screen_alerts">Упозорења на заслону</string>
     <string name="route_parameters_descr">Подеси одреднице пута</string>
     <string name="route_parameters">Одреднице пута</string>
-    <string name="application_profile_changed">Приименљиви налог је промењен на s\\</string>
+    <string name="application_profile_changed">Приименљиви налог је промењен на s</string>
     <string name="logcat_buffer">Спремник дневника</string>
     <string name="plugins_settings">Поставке додатака</string>
     <string name="shared_string_by_default">Подразумевано</string>
@@ -4219,7 +4219,7 @@
     <string name="import_tracks_descr">%1$s, садржи %2$s засебне трагове. Изаберите трагове за увоз.</string>
     <string name="select_suggested_points">Изаберите предложене тачке</string>
     <string name="location_source">Извор добављања положаја</string>
-    <string name="location_source_descr">Подразумевано, ОсмАнд уграђен из Гуглове продавнице користи %1$s за одређивање положаја. \n \nАко добијете нетачне податке о положају или користите уређај без %2$s, покушајте да пређете на %3$s\\</string>
+    <string name="location_source_descr">Подразумевано, ОсмАнд уграђен из Гуглове продавнице користи %1$s за одређивање положаја. \n \nАко добијете нетачне податке о положају или користите уређај без %2$s, покушајте да пређете на %3$s</string>
     <string name="default_appearance_desc">Подразумевана боја, сличица и облик ће се применити на додане омиљене тачке у групи.</string>
     <string name="default_appearance">Подразумевани изглед</string>
     <string name="edit_category">Уреди врсту</string>
