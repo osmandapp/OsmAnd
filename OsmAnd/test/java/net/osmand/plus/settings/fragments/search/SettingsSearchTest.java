@@ -10,7 +10,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withSubstring;
 import static net.osmand.plus.settings.fragments.search.PluginsHelper.enablePlugin;
-import static net.osmand.plus.settings.fragments.search.PluginsHelper.getPlugin;
 import static net.osmand.plus.settings.fragments.search.SearchButtonClick.clickSearchButton;
 import static net.osmand.test.common.Matchers.childAtPosition;
 import static net.osmand.test.common.Matchers.recyclerViewHasItem;
@@ -25,13 +24,7 @@ import androidx.test.filters.LargeTest;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.plugins.weather.WeatherPlugin;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.test.common.AndroidTest;
 
 import org.hamcrest.Matcher;
@@ -79,26 +72,6 @@ public class SettingsSearchTest extends AndroidTest {
 	}
 
 	@Test
-	public void shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_OsmandMonitoringPlugin() {
-		shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_Plugin(OsmandMonitoringPlugin.class);
-	}
-
-	@Test
-	public void shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_AccessibilityPlugin() {
-		shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_Plugin(AccessibilityPlugin.class);
-	}
-
-	@Test
-	public void shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_AudioVideoNotesPlugin() {
-		shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_Plugin(AudioVideoNotesPlugin.class);
-	}
-
-	@Test
-	public void shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_WeatherPlugin() {
-		shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_Plugin(WeatherPlugin.class);
-	}
-
-	@Test
 	public void shouldSearchAndFind_LocationInterpolationBottomSheet_title() {
 		enablePlugin(OsmandDevelopmentPlugin.class, app);
 		shouldSearchAndFind(app.getString(R.string.location_interpolation_percent));
@@ -142,23 +115,5 @@ public class SettingsSearchTest extends AndroidTest {
 
 	public static Matcher<View> hasSearchResultWithSubstring(final String substring) {
 		return recyclerViewHasItem(hasDescendant(withSubstring(substring)));
-	}
-
-	private void shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_Plugin(final Class<? extends OsmandPlugin> pluginClass) {
-		// Given
-		final OsmandPlugin plugin = getPlugin(pluginClass);
-		enablePlugin(plugin, app);
-		clickSearchButton(app);
-
-		// When
-		onView(searchView()).perform(replaceText(ApplicationMode.PEDESTRIAN.toHumanString()), closeSoftKeyboard());
-
-		// Then
-		final String pathExpected =
-				String.format(
-						"Path: Driving > %s > %s",
-						plugin.getName(),
-						app.getString(R.string.copy_from_other_profile));
-		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(pathExpected)));
 	}
 }

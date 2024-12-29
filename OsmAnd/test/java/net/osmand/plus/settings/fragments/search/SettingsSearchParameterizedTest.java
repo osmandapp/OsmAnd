@@ -133,6 +133,54 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 										Optional.of(WeatherPlugin.class),
 										(context, osmandPlugin) -> String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.orElseThrow().getName()))
 						},
+
+						{
+								"shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_OsmandMonitoringPlugin",
+								new SearchAndFindTest(
+										context -> ApplicationMode.PEDESTRIAN.toHumanString(),
+										Optional.of(OsmandMonitoringPlugin.class),
+										(context, osmandPlugin) ->
+												String.format(
+														"Path: Driving > %s > %s",
+														osmandPlugin.orElseThrow().getName(),
+														context.getString(R.string.copy_from_other_profile)))
+						},
+
+						{
+								"shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_AccessibilityPlugin",
+								new SearchAndFindTest(
+										context -> ApplicationMode.PEDESTRIAN.toHumanString(),
+										Optional.of(AccessibilityPlugin.class),
+										(context, osmandPlugin) ->
+												String.format(
+														"Path: Driving > %s > %s",
+														osmandPlugin.orElseThrow().getName(),
+														context.getString(R.string.copy_from_other_profile)))
+						},
+
+						{
+								"shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_AudioVideoNotesPlugin",
+								new SearchAndFindTest(
+										context -> ApplicationMode.PEDESTRIAN.toHumanString(),
+										Optional.of(AudioVideoNotesPlugin.class),
+										(context, osmandPlugin) ->
+												String.format(
+														"Path: Driving > %s > %s",
+														osmandPlugin.orElseThrow().getName(),
+														context.getString(R.string.copy_from_other_profile)))
+						},
+
+						{
+								"shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_WeatherPlugin",
+								new SearchAndFindTest(
+										context -> ApplicationMode.PEDESTRIAN.toHumanString(),
+										Optional.of(WeatherPlugin.class),
+										(context, osmandPlugin) ->
+												String.format(
+														"Path: Driving > %s > %s",
+														osmandPlugin.orElseThrow().getName(),
+														context.getString(R.string.copy_from_other_profile)))
+						},
 				});
 	}
 
