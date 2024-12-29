@@ -1,20 +1,16 @@
 package net.osmand.plus.settings.fragments.search;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.replaceText;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static net.osmand.plus.settings.fragments.search.SearchButtonClick.clickSearchButton;
-import static net.osmand.plus.settings.fragments.search.SearchQueryAndResultFactory.searchQueryAndResult;
-import static net.osmand.plus.settings.fragments.search.SettingsSearchTest.hasSearchResultWithSubstring;
-import static net.osmand.plus.settings.fragments.search.SettingsSearchTest.searchResultsView;
-import static net.osmand.plus.settings.fragments.search.SettingsSearchTest.searchView;
+import static net.osmand.plus.settings.fragments.search.SearchAndFindTestFactory.searchQueryAndResult;
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.filters.LargeTest;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.test.common.AndroidTest;
 
@@ -24,6 +20,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 @LargeTest
 @RunWith(Parameterized.class)
@@ -33,7 +30,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 	public String description;
 
 	@Parameterized.Parameter(value = 1)
-	public SearchQueryAndResult searchQueryAndResult;
+	public SearchAndFindTest searchAndFindTest;
 
 	@Parameterized.Parameters(name = "{0}")
 	public static Iterable<Object[]> data() {
@@ -102,8 +99,40 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 								"search_ApplicationMode_find_SelectCopyAppModeBottomSheet",
 								searchQueryAndResult(
 										context -> ApplicationMode.PEDESTRIAN.toHumanString(),
-										context -> String.format("Path: Driving > %s", context.getString(R.string.copy_from_other_profile)))
-						}
+										(context, osmandPlugin) -> String.format("Path: Driving > %s", context.getString(R.string.copy_from_other_profile)))
+						},
+
+						{
+								"shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_AccessibilityPlugin",
+								new SearchAndFindTest(
+										context -> context.getString(R.string.reset_all_profile_settings_descr),
+										Optional.of(AccessibilityPlugin.class),
+										(context, osmandPlugin) -> String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.orElseThrow().getName()))
+						},
+
+						{
+								"shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_AudioVideoNotesPlugin",
+								new SearchAndFindTest(
+										context -> context.getString(R.string.reset_all_profile_settings_descr),
+										Optional.of(AudioVideoNotesPlugin.class),
+										(context, osmandPlugin) -> String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.orElseThrow().getName()))
+						},
+
+						{
+								"shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_OsmandMonitoringPlugin",
+								new SearchAndFindTest(
+										context -> context.getString(R.string.reset_all_profile_settings_descr),
+										Optional.of(OsmandMonitoringPlugin.class),
+										(context, osmandPlugin) -> String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.orElseThrow().getName()))
+						},
+
+						{
+								"shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_WeatherPlugin",
+								new SearchAndFindTest(
+										context -> context.getString(R.string.reset_all_profile_settings_descr),
+										Optional.of(WeatherPlugin.class),
+										(context, osmandPlugin) -> String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.orElseThrow().getName()))
+						},
 				});
 	}
 
@@ -112,17 +141,6 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 
 	@Test
 	public void testSearchAndFind() {
-		testSearchAndFind(searchQueryAndResult.getSearchQuery(app), searchQueryAndResult.getSearchResult(app));
-	}
-
-	private void testSearchAndFind(final String searchQuery, final String searchResultExpected) {
-		// Given
-		clickSearchButton(app);
-
-		// When
-		onView(searchView()).perform(replaceText(searchQuery), closeSoftKeyboard());
-
-		// Then
-		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(searchResultExpected)));
+		searchAndFindTest.testSearchAndFind(app);
 	}
 }

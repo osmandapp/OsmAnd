@@ -99,26 +99,6 @@ public class SettingsSearchTest extends AndroidTest {
 	}
 
 	@Test
-	public void shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_AccessibilityPlugin() {
-		shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_Plugin(AccessibilityPlugin.class);
-	}
-
-	@Test
-	public void shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_AudioVideoNotesPlugin() {
-		shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_Plugin(AudioVideoNotesPlugin.class);
-	}
-
-	@Test
-	public void shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_OsmandMonitoringPlugin() {
-		shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_Plugin(OsmandMonitoringPlugin.class);
-	}
-
-	@Test
-	public void shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_WeatherPlugin() {
-		shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_Plugin(WeatherPlugin.class);
-	}
-
-	@Test
 	public void shouldSearchAndFind_LocationInterpolationBottomSheet_title() {
 		enablePlugin(OsmandDevelopmentPlugin.class, app);
 		shouldSearchAndFind(app.getString(R.string.location_interpolation_percent));
@@ -162,20 +142,6 @@ public class SettingsSearchTest extends AndroidTest {
 
 	public static Matcher<View> hasSearchResultWithSubstring(final String substring) {
 		return recyclerViewHasItem(hasDescendant(withSubstring(substring)));
-	}
-
-	private void shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_Plugin(final Class<? extends OsmandPlugin> pluginClass) {
-		// Given
-		final OsmandPlugin plugin = getPlugin(pluginClass);
-		enablePlugin(plugin, app);
-		clickSearchButton(app);
-
-		// When
-		onView(searchView()).perform(replaceText(app.getString(R.string.reset_all_profile_settings_descr)), closeSoftKeyboard());
-
-		// Then
-		final String pathExpected = String.format("Path: Driving > %s > Reset plugin settings to default", plugin.getName());
-		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(pathExpected)));
 	}
 
 	private void shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_Plugin(final Class<? extends OsmandPlugin> pluginClass) {
