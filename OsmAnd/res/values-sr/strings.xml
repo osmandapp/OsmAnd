@@ -5653,4 +5653,6 @@
     <string name="default_buttons_opacity_original_description">Свако дугме чува своју провидност позадине.</string>
     <string name="calculate_size">Израчунајте величину</string>
     <string name="calculating_indication_message">Израчунавање…</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Стазе за пењање</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Приказати стазе за пењање</string>
 </resources>
