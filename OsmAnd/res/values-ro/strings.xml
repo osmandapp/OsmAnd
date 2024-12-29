@@ -5927,7 +5927,7 @@
     <string name="show_minor_turns">Afișare la intersecțiile minore atunci când se navighează în linie dreaptă</string>
     <string name="location_interpolation_percent_desc">Setați procentul de interpolare a locației în timpul navigării pe traseu. Acest parametru reduce decalajul poziției locației dumneavoastră pe hartă în timpul animației.</string>
     <string name="imperial_gallons">Galoane imperiale</string>
-    <string name="selected_delayed_profile">Profil selectat s\\</string>
+    <string name="selected_delayed_profile">Profil selectat s</string>
     <string name="fuel_tank_capacity_description">Introduceți capacitatea rezervorului pentru a urmări cu exactitate nivelurile de combustibil și consumul</string>
     <string name="location_interpolation_percent">Procent de interpolare a locației</string>
     <string name="us_gallons">Galoane US</string>
