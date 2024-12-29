@@ -9,7 +9,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withSubstring;
-import static net.osmand.plus.settings.fragments.search.PluginsHelper.enablePlugin;
 import static net.osmand.plus.settings.fragments.search.SearchButtonClick.clickSearchButton;
 import static net.osmand.test.common.Matchers.childAtPosition;
 import static net.osmand.test.common.Matchers.recyclerViewHasItem;
@@ -22,9 +21,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
-import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.test.common.AndroidTest;
 
 import org.hamcrest.Matcher;
@@ -69,29 +66,6 @@ public class SettingsSearchTest extends AndroidTest {
 				.of("Driving", "Truck")
 				.map(applicationMode -> String.format("Path: %s > Navigation settings > Screen alerts > Speed cameras", applicationMode))
 				.forEach(path -> onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(path))));
-	}
-
-	@Test
-	public void shouldSearchAndFind_LocationInterpolationBottomSheet_title() {
-		enablePlugin(OsmandDevelopmentPlugin.class, app);
-		shouldSearchAndFind(app.getString(R.string.location_interpolation_percent));
-	}
-
-	@Test
-	public void shouldSearchAndFind_LocationInterpolationBottomSheet_description() {
-		enablePlugin(OsmandDevelopmentPlugin.class, app);
-		shouldSearchAndFind(app.getString(R.string.location_interpolation_percent_desc));
-	}
-
-	private void shouldSearchAndFind(final String searchQuery) {
-		// Given
-		clickSearchButton(app);
-
-		// When
-		onView(searchView()).perform(replaceText(searchQuery), closeSoftKeyboard());
-
-		// Then
-		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(searchQuery)));
 	}
 
 	public static Matcher<View> searchView() {

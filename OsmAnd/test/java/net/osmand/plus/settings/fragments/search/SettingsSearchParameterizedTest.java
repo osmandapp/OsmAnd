@@ -9,6 +9,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -180,6 +181,22 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 														"Path: Driving > %s > %s",
 														osmandPlugin.orElseThrow().getName(),
 														context.getString(R.string.copy_from_other_profile)))
+						},
+
+						{
+								"shouldSearchAndFind_LocationInterpolationBottomSheet_title",
+								new SearchAndFindTest(
+										context -> context.getString(R.string.location_interpolation_percent),
+										Optional.of(OsmandDevelopmentPlugin.class),
+										(context, osmandPlugin) -> context.getString(R.string.location_interpolation_percent))
+						},
+
+						{
+								"shouldSearchAndFind_LocationInterpolationBottomSheet_description",
+								new SearchAndFindTest(
+										context -> context.getString(R.string.location_interpolation_percent),
+										Optional.of(OsmandDevelopmentPlugin.class),
+										(context, osmandPlugin) -> context.getString(R.string.location_interpolation_percent_desc))
 						},
 				});
 	}
