@@ -6047,4 +6047,6 @@
     <string name="obd_fuel_type_desc">Afișează tipul de combustibil al vehiculului prin senzorul OBD</string>
     <string name="obd_air_intake_temp">Temperatura de admisie</string>
     <string name="calculating_indication_message">Calculând…</string>
+    <string name="obd_fuel_level_desc">Afișează Afișează nivelul de combustibil al vehiculului prin senzorul OBD nivelul de combustibil al vehiculului prin senzorul OBD</string>
+    <string name="calculate_size">Calculați dimensiunea</string>
 </resources>
