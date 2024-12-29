@@ -2881,7 +2881,7 @@
     <string name="coordinates_format_info">A kiválasztott formátum az alkalmazáson belül mindenhol alkalmazva lesz.</string>
     <string name="change_default_settings">Beállítás módosítása</string>
     <string name="discard_changes">Változtatás elvetése</string>
-    <string name="apply_to_current_profile">Alkalmazás csak erre: %1$s\\</string>
+    <string name="apply_to_current_profile">Alkalmazás csak erre: %1$s</string>
     <string name="apply_to_all_profiles">Alkalmazás az összes profilra</string>
     <string name="start_up_message_pref">Indítási üzenet</string>
     <string name="analytics_pref_title">Analitika</string>
@@ -5097,7 +5097,7 @@
     <string name="key_event_action_open_search_view">Keresési nézet megnyitása</string>
     <string name="key_event_action_zoom_out">Kicsinyítés</string>
     <string name="key_event_action_toggle_drower">Oldalmenü be/ki</string>
-    <string name="key_is_already_assigned_error">A(z) %1$s gomb már hozzá van rendelve ehhez a művelethez: %2$s\\</string>
+    <string name="key_is_already_assigned_error">A(z) %1$s gomb már hozzá van rendelve ehhez a művelethez: %2$s</string>
     <string name="key_event_action_open_navigation_view">Navigációs nézet megnyitása</string>
     <string name="external_input_device_title">Külső beviteli eszköz</string>
     <string name="key_bindings">Billentyű-hozzárendelések</string>
@@ -5280,7 +5280,7 @@
     <string name="shared_string_key">Billentyű</string>
     <string name="no_assigned_keys">Nincsenek hozzárendelt billentyűk</string>
     <string name="clear_all_key_shortcuts_summary">A kiválasztott típushoz tartozó összes billentyű-hozzárendelés el lesz távolítva.</string>
-    <string name="key_name_pattern">1$s\\ gomb</string>
+    <string name="key_name_pattern">1$s gomb</string>
     <string name="clear_key_assignment_summary">A kiválasztott művelethez tartozó billentyű-hozzárendelés törlődik.</string>
     <string name="key_assignment_add_key">Billentyű hozzáadása</string>
     <string name="action_icon">Műveletikon</string>
