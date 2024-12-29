@@ -275,8 +275,8 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements Show
 									false)) {
 
 						@Override
-						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-							VoiceAnnouncesFragment.this.show(searchablePreferenceDialog);
+						protected void show(final AnnouncementTimeBottomSheet announcementTimeBottomSheet) {
+							VoiceAnnouncesFragment.this.show(announcementTimeBottomSheet);
 						}
 					});
 		}
@@ -289,8 +289,8 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements Show
 									false)) {
 
 						@Override
-						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-							searchablePreferenceDialog.show(requireActivity().getSupportFragmentManager(), app);
+						protected void show(final VoiceLanguageBottomSheetFragment voiceLanguageBottomSheetFragment) {
+							voiceLanguageBottomSheetFragment.show(requireActivity().getSupportFragmentManager(), app);
 						}
 					});
 		}

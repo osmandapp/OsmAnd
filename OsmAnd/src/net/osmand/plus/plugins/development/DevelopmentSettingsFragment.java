@@ -25,7 +25,6 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BooleanRadioButtonsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -359,10 +358,10 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 									false)) {
 
 						@Override
-						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+						protected void show(final SimulateLocationFragment simulateLocationFragment) {
 							final FragmentActivity activity = getActivity();
 							if (activity != null) {
-								searchablePreferenceDialog.show(activity.getSupportFragmentManager(), app);
+								simulateLocationFragment.show(activity.getSupportFragmentManager(), app);
 							}
 						}
 					});
@@ -376,10 +375,10 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 									getSelectedAppMode())) {
 
 						@Override
-						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+						protected void show(final AllocatedRoutingMemoryBottomSheet allocatedRoutingMemoryBottomSheet) {
 							final FragmentManager fragmentManager = getFragmentManager();
 							if (fragmentManager != null) {
-								searchablePreferenceDialog.show(fragmentManager, app);
+								allocatedRoutingMemoryBottomSheet.show(fragmentManager, app);
 							}
 						}
 					});
@@ -393,10 +392,10 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 									getSelectedAppMode())) {
 
 						@Override
-						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+						protected void show(final LocationInterpolationBottomSheet locationInterpolationBottomSheet) {
 							final FragmentManager fragmentManager = getFragmentManager();
 							if (fragmentManager != null) {
-								searchablePreferenceDialog.show(fragmentManager, app);
+								locationInterpolationBottomSheet.show(fragmentManager, app);
 							}
 						}
 					});

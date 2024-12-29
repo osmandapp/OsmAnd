@@ -66,7 +66,6 @@ import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.RoutingType;
 import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandler;
 import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandlerProvider;
-import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListParameters;
@@ -658,8 +657,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 						getSelectedAppMode())) {
 
 			@Override
-			protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-				searchablePreferenceDialog.show(getFragmentManager(), app);
+			protected void show(final RecalculateRouteInDeviationBottomSheet recalculateRouteInDeviationBottomSheet) {
+				recalculateRouteInDeviationBottomSheet.show(getFragmentManager(), app);
 			}
 		};
 	}
@@ -676,8 +675,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 						getGoodsRestrictionPreference().getModeValue(getSelectedAppMode()))) {
 
 			@Override
-			protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-				searchablePreferenceDialog.show(getFragmentManager(), app);
+			protected void show(final GoodsRestrictionsBottomSheet goodsRestrictionsBottomSheet) {
+				goodsRestrictionsBottomSheet.show(getFragmentManager(), app);
 			}
 		};
 	}

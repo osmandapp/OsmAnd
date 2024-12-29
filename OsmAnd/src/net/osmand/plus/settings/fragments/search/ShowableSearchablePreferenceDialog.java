@@ -22,5 +22,5 @@ public abstract class ShowableSearchablePreferenceDialog<T extends Fragment & Se
 				SearchablePreferenceDialog::getSearchableInfo);
 	}
 
-	protected abstract void show(final SearchablePreferenceDialog searchablePreferenceDialog);
+	protected abstract void show(final T searchablePreferenceDialog);
 }

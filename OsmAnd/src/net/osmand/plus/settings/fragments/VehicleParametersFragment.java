@@ -289,8 +289,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 									getSelectedAppMode())) {
 
 						@Override
-						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-							VehicleParametersFragment.this.show(searchablePreferenceDialog);
+						protected void show(final VehicleParametersBottomSheet vehicleParametersBottomSheet) {
+							VehicleParametersFragment.this.show(vehicleParametersBottomSheet);
 						}
 					});
 		}
@@ -310,8 +310,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 									pref.getValueIndex())) {
 
 						@Override
-						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-							VehicleParametersFragment.this.show(searchablePreferenceDialog);
+						protected void show(final SimpleSingleSelectionBottomSheet simpleSingleSelectionBottomSheet) {
+							VehicleParametersFragment.this.show(simpleSingleSelectionBottomSheet);
 						}
 					});
 		}
@@ -325,8 +325,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 									getSelectedAppMode())) {
 
 						@Override
-						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-							VehicleParametersFragment.this.show(searchablePreferenceDialog);
+						protected void show(final FuelTankCapacityBottomSheet fuelTankCapacityBottomSheet) {
+							VehicleParametersFragment.this.show(fuelTankCapacityBottomSheet);
 						}
 					});
 		}

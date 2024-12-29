@@ -37,7 +37,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.profileappearance.ProfileAppearanceFragment;
 import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandler;
 import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandlerProvider;
-import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.SettingsSearchButtonHelper;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
@@ -183,8 +182,8 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 									false)) {
 
 						@Override
-						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-							searchablePreferenceDialog.show(getActivity().getSupportFragmentManager(), app);
+						protected void show(final SelectBaseProfileBottomSheet selectBaseProfileBottomSheet) {
+							selectBaseProfileBottomSheet.show(getActivity().getSupportFragmentManager(), app);
 						}
 					});
 		}

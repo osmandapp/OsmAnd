@@ -487,8 +487,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 									false)) {
 
 						@Override
-						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-							GeneralProfileSettingsFragment.this.show(searchablePreferenceDialog);
+						protected void show(final DistanceDuringNavigationBottomSheet distanceDuringNavigationBottomSheet) {
+							GeneralProfileSettingsFragment.this.show(distanceDuringNavigationBottomSheet);
 						}
 					});
 		}

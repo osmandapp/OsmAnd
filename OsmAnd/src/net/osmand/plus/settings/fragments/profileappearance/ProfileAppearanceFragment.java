@@ -39,6 +39,7 @@ import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
 import net.osmand.plus.card.icon.IconsPaletteCard;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
@@ -250,8 +251,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 											settings.VIEW_ANGLE_VISIBILITY)) {
 
 						@Override
-						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-							ProfileAppearanceFragment.this.show(searchablePreferenceDialog);
+						protected void show(final CustomizableSingleSelectionBottomSheet customizableSingleSelectionBottomSheet) {
+							ProfileAppearanceFragment.this.show(customizableSingleSelectionBottomSheet);
 						}
 					});
 		}
@@ -266,8 +267,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 											settings.LOCATION_RADIUS_VISIBILITY)) {
 
 						@Override
-						protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-							ProfileAppearanceFragment.this.show(searchablePreferenceDialog);
+						protected void show(final CustomizableSingleSelectionBottomSheet customizableSingleSelectionBottomSheet) {
+							ProfileAppearanceFragment.this.show(customizableSingleSelectionBottomSheet);
 						}
 					});
 		}

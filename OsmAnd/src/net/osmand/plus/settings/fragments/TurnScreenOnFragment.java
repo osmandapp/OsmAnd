@@ -14,7 +14,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.ScreenTimeoutBottomSheet;
 import net.osmand.plus.settings.bottomsheets.WakeTimeBottomSheet;
-import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
@@ -65,8 +64,8 @@ public class TurnScreenOnFragment extends BaseSettingsFragment implements Showab
 										getApplyQueryType(),
 										isProfileDependent())) {
 							@Override
-							protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-								searchablePreferenceDialog.show(getFragmentManager(), app);
+							protected void show(final WakeTimeBottomSheet wakeTimeBottomSheet) {
+								wakeTimeBottomSheet.show(getFragmentManager(), app);
 							}
 						}) :
 				Optional.empty();

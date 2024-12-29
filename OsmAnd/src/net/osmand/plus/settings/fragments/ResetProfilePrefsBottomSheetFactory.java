@@ -3,7 +3,6 @@ package net.osmand.plus.settings.fragments;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
-import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
 
 import java.util.Optional;
@@ -19,8 +18,8 @@ public class ResetProfilePrefsBottomSheetFactory {
 						target)) {
 
 			@Override
-			protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-				searchablePreferenceDialog.show(
+			protected void show(final ResetProfilePrefsBottomSheet resetProfilePrefsBottomSheet) {
+				resetProfilePrefsBottomSheet.show(
 						baseSettingsFragment.getFragmentManager(),
 						baseSettingsFragment.getMyApplication());
 			}

@@ -33,7 +33,6 @@ import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DialogMode;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.util.Algorithms;
@@ -161,8 +160,8 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 										false)) {
 
 							@Override
-							protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-								searchablePreferenceDialog.show(
+							protected void show(final SelectNavProfileBottomSheet selectNavProfileBottomSheet) {
+								selectNavProfileBottomSheet.show(
 										getMapActivity().getSupportFragmentManager(),
 										app);
 							}

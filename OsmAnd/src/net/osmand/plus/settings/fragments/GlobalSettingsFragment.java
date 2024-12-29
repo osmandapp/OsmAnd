@@ -33,7 +33,6 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.DataStorageHelper;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.settings.enums.LocationSource;
-import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
@@ -101,8 +100,11 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		return new ShowableSearchablePreferenceDialog<>(SendAnalyticsBottomSheetDialogFragment.createInstance(target.orElse(null))) {
 
 			@Override
-			protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-				GlobalSettingsFragment.this.show(searchablePreferenceDialog);
+			protected void show(final SendAnalyticsBottomSheetDialogFragment sendAnalyticsBottomSheetDialogFragment) {
+				final FragmentManager fragmentManager = getFragmentManager();
+				if (fragmentManager != null) {
+					sendAnalyticsBottomSheetDialogFragment.show(fragmentManager, app);
+				}
 			}
 		};
 	}
@@ -120,8 +122,8 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 						false)) {
 
 			@Override
-			protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-				searchablePreferenceDialog.show(requireActivity().getSupportFragmentManager(), app);
+			protected void show(final SelectDefaultProfileBottomSheet selectDefaultProfileBottomSheet) {
+				selectDefaultProfileBottomSheet.show(requireActivity().getSupportFragmentManager(), app);
 			}
 		};
 	}
@@ -138,17 +140,10 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 						this::setupMapRenderingEnginePref)) {
 
 			@Override
-			protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-				searchablePreferenceDialog.show(getParentFragmentManager(), app);
+			protected void show(final MapRenderingEngineDialog mapRenderingEngineDialog) {
+				mapRenderingEngineDialog.show(getParentFragmentManager(), app);
 			}
 		};
-	}
-
-	private void show(final SearchablePreferenceDialog dialog) {
-		final FragmentManager fragmentManager = getFragmentManager();
-		if (fragmentManager != null) {
-			dialog.show(fragmentManager, app);
-		}
 	}
 
 	@Override

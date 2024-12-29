@@ -52,7 +52,6 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.fragments.configureitems.ConfigureMenuRootFragment;
 import net.osmand.plus.settings.fragments.profileappearance.ProfileAppearanceFragment;
-import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.utils.AndroidUtils;
@@ -461,8 +460,8 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		return new ShowableSearchablePreferenceDialog<>(ConfigureScreenFragment.createInstance()) {
 
 			@Override
-			protected void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-				searchablePreferenceDialog.show(
+			protected void show(final ConfigureScreenFragment configureScreenFragment) {
+				configureScreenFragment.show(
 						getMapActivity().getSupportFragmentManager(),
 						app);
 			}
