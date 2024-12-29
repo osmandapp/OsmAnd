@@ -102,9 +102,21 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 
 						{
 								"search_ApplicationMode_find_SelectCopyAppModeBottomSheet",
-								searchQueryAndResult(
-										context -> ApplicationMode.PEDESTRIAN.toHumanString(),
-										context -> List.of(String.format("Path: Driving > %s", context.getString(R.string.copy_from_other_profile))))
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context1) {
+										return ApplicationMode.PEDESTRIAN.toHumanString();
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(
+												String.format(
+														"Path: Driving > %s",
+														context.getString(R.string.copy_from_other_profile)));
+									}
+								}
 						},
 
 						{
