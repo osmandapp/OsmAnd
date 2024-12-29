@@ -1,12 +1,15 @@
 package net.osmand.plus.settings.fragments.search;
 
-import static net.osmand.plus.settings.fragments.search.SearchAndFindTestFactory.searchQueryAndResult;
+import static net.osmand.plus.settings.fragments.search.SettingsSearchTestFactory.searchQueryAndResult;
+
+import android.content.Context;
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.filters.LargeTest;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
@@ -33,7 +36,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 	public String description;
 
 	@Parameterized.Parameter(value = 1)
-	public SettingsSearchAndFindTest settingsSearchAndFindTest;
+	public SettingsSearchTestTemplate settingsSearchTestTemplate;
 
 	@Parameterized.Parameters(name = "{0}")
 	public static Iterable<Object[]> data() {
@@ -107,126 +110,276 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 
 						{
 								"shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_AccessibilityPlugin",
-								new SettingsSearchAndFindTest(
-										context -> context.getString(R.string.reset_all_profile_settings_descr),
-										Optional.of(AccessibilityPlugin.class),
-										(context, osmandPlugin) -> List.of(String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.orElseThrow().getName())))
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.reset_all_profile_settings_descr);
+									}
+
+									@Override
+									protected Optional<Class<? extends OsmandPlugin>> getPluginClass() {
+										return Optional.of(AccessibilityPlugin.class);
+									}
+
+									@Override
+									protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.orElseThrow().getName()));
+									}
+								}
 						},
 
 						{
 								"shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_AudioVideoNotesPlugin",
-								new SettingsSearchAndFindTest(
-										context -> context.getString(R.string.reset_all_profile_settings_descr),
-										Optional.of(AudioVideoNotesPlugin.class),
-										(context, osmandPlugin) -> List.of(String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.orElseThrow().getName())))
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.reset_all_profile_settings_descr);
+									}
+
+									@Override
+									protected Optional<Class<? extends OsmandPlugin>> getPluginClass() {
+										return Optional.of(AudioVideoNotesPlugin.class);
+									}
+
+									@Override
+									protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.orElseThrow().getName()));
+									}
+								}
 						},
 
 						{
 								"shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_OsmandMonitoringPlugin",
-								new SettingsSearchAndFindTest(
-										context -> context.getString(R.string.reset_all_profile_settings_descr),
-										Optional.of(OsmandMonitoringPlugin.class),
-										(context, osmandPlugin) -> List.of(String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.orElseThrow().getName())))
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.reset_all_profile_settings_descr);
+									}
+
+									@Override
+									protected Optional<Class<? extends OsmandPlugin>> getPluginClass() {
+										return Optional.of(OsmandMonitoringPlugin.class);
+									}
+
+									@Override
+									protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.orElseThrow().getName()));
+									}
+								}
 						},
 
 						{
 								"shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_WeatherPlugin",
-								new SettingsSearchAndFindTest(
-										context -> context.getString(R.string.reset_all_profile_settings_descr),
-										Optional.of(WeatherPlugin.class),
-										(context, osmandPlugin) -> List.of(String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.orElseThrow().getName())))
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.reset_all_profile_settings_descr);
+									}
+
+									@Override
+									protected Optional<Class<? extends OsmandPlugin>> getPluginClass() {
+										return Optional.of(WeatherPlugin.class);
+									}
+
+									@Override
+									protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.orElseThrow().getName()));
+									}
+								}
 						},
 
 						{
 								"shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_OsmandMonitoringPlugin",
-								new SettingsSearchAndFindTest(
-										context -> ApplicationMode.PEDESTRIAN.toHumanString(),
-										Optional.of(OsmandMonitoringPlugin.class),
-										(context, osmandPlugin) ->
-												List.of(
-														String.format(
-																"Path: Driving > %s > %s",
-																osmandPlugin.orElseThrow().getName(),
-																context.getString(R.string.copy_from_other_profile))))
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return ApplicationMode.PEDESTRIAN.toHumanString();
+									}
+
+									@Override
+									protected Optional<Class<? extends OsmandPlugin>> getPluginClass() {
+										return Optional.of(OsmandMonitoringPlugin.class);
+									}
+
+									@Override
+									protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+										return List.of(
+												String.format(
+														"Path: Driving > %s > %s",
+														osmandPlugin.orElseThrow().getName(),
+														context.getString(R.string.copy_from_other_profile)));
+									}
+								}
 						},
 
 						{
 								"shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_AccessibilityPlugin",
-								new SettingsSearchAndFindTest(
-										context -> ApplicationMode.PEDESTRIAN.toHumanString(),
-										Optional.of(AccessibilityPlugin.class),
-										(context, osmandPlugin) ->
-												List.of(
-														String.format(
-																"Path: Driving > %s > %s",
-																osmandPlugin.orElseThrow().getName(),
-																context.getString(R.string.copy_from_other_profile))))
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return ApplicationMode.PEDESTRIAN.toHumanString();
+									}
+
+									@Override
+									protected Optional<Class<? extends OsmandPlugin>> getPluginClass() {
+										return Optional.of(AccessibilityPlugin.class);
+									}
+
+									@Override
+									protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+										return List.of(
+												String.format(
+														"Path: Driving > %s > %s",
+														osmandPlugin.orElseThrow().getName(),
+														context.getString(R.string.copy_from_other_profile)));
+									}
+								}
 						},
 
 						{
 								"shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_AudioVideoNotesPlugin",
-								new SettingsSearchAndFindTest(
-										context -> ApplicationMode.PEDESTRIAN.toHumanString(),
-										Optional.of(AudioVideoNotesPlugin.class),
-										(context, osmandPlugin) ->
-												List.of(
-														String.format(
-																"Path: Driving > %s > %s",
-																osmandPlugin.orElseThrow().getName(),
-																context.getString(R.string.copy_from_other_profile))))
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return ApplicationMode.PEDESTRIAN.toHumanString();
+									}
+
+									@Override
+									protected Optional<Class<? extends OsmandPlugin>> getPluginClass() {
+										return Optional.of(AudioVideoNotesPlugin.class);
+									}
+
+									@Override
+									protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+										return List.of(
+												String.format(
+														"Path: Driving > %s > %s",
+														osmandPlugin.orElseThrow().getName(),
+														context.getString(R.string.copy_from_other_profile)));
+									}
+								}
 						},
 
 						{
 								"shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_WeatherPlugin",
-								new SettingsSearchAndFindTest(
-										context -> ApplicationMode.PEDESTRIAN.toHumanString(),
-										Optional.of(WeatherPlugin.class),
-										(context, osmandPlugin) ->
-												List.of(
-														String.format(
-																"Path: Driving > %s > %s",
-																osmandPlugin.orElseThrow().getName(),
-																context.getString(R.string.copy_from_other_profile))))
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return ApplicationMode.PEDESTRIAN.toHumanString();
+									}
+
+									@Override
+									protected Optional<Class<? extends OsmandPlugin>> getPluginClass() {
+										return Optional.of(WeatherPlugin.class);
+									}
+
+									@Override
+									protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+										return List.of(
+												String.format(
+														"Path: Driving > %s > %s",
+														osmandPlugin.orElseThrow().getName(),
+														context.getString(R.string.copy_from_other_profile)));
+									}
+								}
 						},
 
 						{
 								"shouldSearchAndFind_LocationInterpolationBottomSheet_title",
-								new SettingsSearchAndFindTest(
-										context -> context.getString(R.string.location_interpolation_percent),
-										Optional.of(OsmandDevelopmentPlugin.class),
-										(context, osmandPlugin) -> List.of(context.getString(R.string.location_interpolation_percent)))
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.location_interpolation_percent);
+									}
+
+									@Override
+									protected Optional<Class<? extends OsmandPlugin>> getPluginClass() {
+										return Optional.of(OsmandDevelopmentPlugin.class);
+									}
+
+									@Override
+									protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+										return List.of(context.getString(R.string.location_interpolation_percent));
+									}
+								}
 						},
 
 						{
 								"shouldSearchAndFind_LocationInterpolationBottomSheet_description",
-								new SettingsSearchAndFindTest(
-										context -> context.getString(R.string.location_interpolation_percent),
-										Optional.of(OsmandDevelopmentPlugin.class),
-										(context, osmandPlugin) -> List.of(context.getString(R.string.location_interpolation_percent_desc)))
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.location_interpolation_percent);
+									}
+
+									@Override
+									protected Optional<Class<? extends OsmandPlugin>> getPluginClass() {
+										return Optional.of(OsmandDevelopmentPlugin.class);
+									}
+
+									@Override
+									protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+										return List.of(context.getString(R.string.location_interpolation_percent_desc));
+									}
+								}
 						},
 
 						{
 								"shouldSearchAndFindProfileAppearanceSettings4EachApplicationMode",
-								new SettingsSearchAndFindTest(
-										context -> "profile appearance",
-										Optional.empty(),
-										(context, osmandPlugin) ->
-												Stream
-														.of("Driving", "Moped")
-														.map(applicationMode -> String.format("Path: %s > Profile appearance", applicationMode))
-														.toList())
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return "profile appearance";
+									}
+
+									@Override
+									protected Optional<Class<? extends OsmandPlugin>> getPluginClass() {
+										return Optional.empty();
+									}
+
+									@Override
+									protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+										return Stream
+												.of("Driving", "Moped")
+												.map(applicationMode -> String.format("Path: %s > Profile appearance", applicationMode))
+												.toList();
+									}
+								}
 						},
 
 						{
 								"shouldSearchAndFindSpeedCameraSettings4EachApplicationMode",
-								new SettingsSearchAndFindTest(
-										context -> "speed cameras",
-										Optional.empty(),
-										(context, osmandPlugin) ->
-												Stream
-														.of("Driving", "Truck")
-														.map(applicationMode -> String.format("Path: %s > Navigation settings > Screen alerts > Speed cameras", applicationMode))
-														.toList())
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return "speed cameras";
+									}
+
+									@Override
+									protected Optional<Class<? extends OsmandPlugin>> getPluginClass() {
+										return Optional.empty();
+									}
+
+									@Override
+									protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+										return Stream
+												.of("Driving", "Truck")
+												.map(applicationMode -> String.format("Path: %s > Navigation settings > Screen alerts > Speed cameras", applicationMode))
+												.toList();
+									}
+								}
 						},
 				});
 	}
@@ -236,6 +389,6 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 
 	@Test
 	public void testSearchAndFind() {
-		settingsSearchAndFindTest.testSearchAndFind(app);
+		settingsSearchTestTemplate.testSearchAndFind(app);
 	}
 }

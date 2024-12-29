@@ -10,7 +10,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withSubstring;
 import static net.osmand.plus.settings.fragments.search.PluginsHelper.enablePlugin;
-import static net.osmand.plus.settings.fragments.search.PluginsHelper.getPlugin;
 import static net.osmand.plus.settings.fragments.search.SearchButtonClick.clickSearchButton;
 import static net.osmand.test.common.Matchers.childAtPosition;
 import static net.osmand.test.common.Matchers.recyclerViewHasItem;
@@ -27,38 +26,35 @@ import org.hamcrest.Matcher;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.BiFunction;
-import java.util.function.Function;
 
-public class SettingsSearchAndFindTest {
-
-	private final Function<Context, String> searchQueryProvider;
-	private final BiFunction<Context, Optional<OsmandPlugin>, List<String>> searchResultsProvider;
-	private final Optional<Class<? extends OsmandPlugin>> pluginClass;
-
-	public SettingsSearchAndFindTest(final Function<Context, String> searchQueryProvider,
-									 final Optional<Class<? extends OsmandPlugin>> pluginClass,
-									 final BiFunction<Context, Optional<OsmandPlugin>, List<String>> searchResultsProvider) {
-		this.searchQueryProvider = searchQueryProvider;
-		this.searchResultsProvider = searchResultsProvider;
-		this.pluginClass = pluginClass;
-	}
+// FK-TODO: rename to SettingsSearchWithPluginTestTemplate then create class SettingsSearchTestTemplate without getPluginClass() method
+public abstract class SettingsSearchTestTemplate {
 
 	public void testSearchAndFind(final OsmandApplication app) {
 		// Given
-		final Optional<OsmandPlugin> osmandPlugin = pluginClass.map(PluginsHelper::getPlugin);
+		final Optional<OsmandPlugin> osmandPlugin = getOsmandPlugin();
 		osmandPlugin.ifPresent(_osmandPlugin -> enablePlugin(_osmandPlugin, app));
-
-		pluginClass.ifPresent(_pluginClass -> enablePlugin(getPlugin(_pluginClass), app));
 		clickSearchButton(app);
 
 		// When
-		onView(searchView()).perform(replaceText(searchQueryProvider.apply(app)), closeSoftKeyboard());
+		onView(searchView()).perform(replaceText(getSearchQuery(app)), closeSoftKeyboard());
 
 		// Then
-		for (final String searchResult : searchResultsProvider.apply(app, osmandPlugin)) {
+		for (final String searchResult : getSearchResults(app, osmandPlugin)) {
 			onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(searchResult)));
 		}
+	}
+
+	protected abstract String getSearchQuery(final Context context);
+
+	protected abstract Optional<Class<? extends OsmandPlugin>> getPluginClass();
+
+	protected abstract List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin);
+
+	private Optional<OsmandPlugin> getOsmandPlugin() {
+		return this
+				.getPluginClass()
+				.map(PluginsHelper::getPlugin);
 	}
 
 	private static Matcher<View> searchView() {
