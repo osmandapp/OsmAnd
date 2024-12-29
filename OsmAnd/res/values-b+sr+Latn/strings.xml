@@ -5658,4 +5658,6 @@
     <string name="default_buttons_size_original_description">Svako dugme zadržava svoju vlastitu veličinu.</string>
     <string name="calculate_size">Izračunajte veličinu</string>
     <string name="calculating_indication_message">Preračunavanje…</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Staze za penjanje</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Prikazati staze za penjanje</string>
 </resources>
