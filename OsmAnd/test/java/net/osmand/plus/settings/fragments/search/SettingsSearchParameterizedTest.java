@@ -97,15 +97,39 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 
 						{"ConfigureScreenFragment", searchQueryAndResult(R.string.configure_screen_widgets_descr)},
 
-						{"search_map_rendering_engine_v1_find_map_rendering_engine", searchQueryAndResult(R.string.map_rendering_engine_v1, R.string.map_rendering_engine)},
-						{"search_map_rendering_engine_v2_find_map_rendering_engine", searchQueryAndResult(R.string.map_rendering_engine_v2, R.string.map_rendering_engine)},
+						{"search_map_rendering_engine_v1_find_map_rendering_engine",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.map_rendering_engine_v1);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(context.getString(R.string.map_rendering_engine));
+									}
+								}},
+						{"search_map_rendering_engine_v2_find_map_rendering_engine",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.map_rendering_engine_v2);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(context.getString(R.string.map_rendering_engine));
+									}
+								}},
 
 						{
 								"search_ApplicationMode_find_SelectCopyAppModeBottomSheet",
 								new SettingsSearchTestTemplate() {
 
 									@Override
-									protected String getSearchQuery(final Context context1) {
+									protected String getSearchQuery(final Context context) {
 										return ApplicationMode.PEDESTRIAN.toHumanString();
 									}
 

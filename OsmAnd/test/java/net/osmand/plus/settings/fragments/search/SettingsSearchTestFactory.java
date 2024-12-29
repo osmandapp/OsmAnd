@@ -25,21 +25,6 @@ class SettingsSearchTestFactory {
 		};
 	}
 
-	public static SettingsSearchTest searchQueryAndResult(final @StringRes int queryId, final @StringRes int resultId) {
-		return new SettingsSearchTestTemplate() {
-
-			@Override
-			protected String getSearchQuery(final Context context) {
-				return context.getString(queryId);
-			}
-
-			@Override
-			protected List<String> getExpectedSearchResults(final Context context) {
-				return List.of(context.getString(resultId));
-			}
-		};
-	}
-
 	public static SettingsSearchTest searchQueryAndResult(final @StringRes int id) {
 		return new SettingsSearchTestTemplate() {
 
