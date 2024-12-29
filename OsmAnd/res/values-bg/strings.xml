@@ -4466,7 +4466,7 @@
     <string name="quick_action_showhide_osm_edits_descr">Бутон, превключващ местните редакции на OSM в картата.</string>
     <string name="wake_time">Време на работа след събуждане</string>
     <string name="quick_action_navigation_voice">Гласови напътствия</string>
-    <string name="selected_delayed_profile">Избран профил s\\</string>
+    <string name="selected_delayed_profile">Избран профил s</string>
     <string name="shared_string_interpolation">Интерполация</string>
     <string name="error_notification_desc">Изпратете екранна снимка на известието на support@osmand.net</string>
     <string name="quick_action_map_underlay_switch">Подложената карта е променена на „%s“.</string>
