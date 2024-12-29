@@ -36,67 +36,70 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 	public String description;
 
 	@Parameterized.Parameter(value = 1)
-	public Function<Context, String> searchQueryProvider;
+	public SearchQueryAndResult searchQueryAndResult;
 
 	@Parameterized.Parameters(name = "{0}")
 	public static Iterable<Object[]> data() {
 		return Arrays.asList(
 				new Object[][]{
-						{"RecalculateRoute", searchQuery(R.string.recalculate_route)},
+						{"RecalculateRoute", SearchQueryAndResult.from(R.string.recalculate_route)},
 
-						{"AnnouncementTimeBottomSheet: title", searchQuery(R.string.announcement_time_title)},
-						{"AnnouncementTimeBottomSheet: description", searchQuery(R.string.announcement_time_descr)},
-						{"AnnouncementTimeBottomSheet: time intervals", searchQuery(R.string.announcement_time_intervals)},
+						{"AnnouncementTimeBottomSheet: title", SearchQueryAndResult.from(R.string.announcement_time_title)},
+						{"AnnouncementTimeBottomSheet: description", SearchQueryAndResult.from(R.string.announcement_time_descr)},
+						{"AnnouncementTimeBottomSheet: time intervals", SearchQueryAndResult.from(R.string.announcement_time_intervals)},
 
-						{"FuelTankCapacityBottomSheet: title", searchQuery(R.string.fuel_tank_capacity)},
-						{"FuelTankCapacityBottomSheet: description", searchQuery(R.string.fuel_tank_capacity_description)},
+						{"FuelTankCapacityBottomSheet: title", SearchQueryAndResult.from(R.string.fuel_tank_capacity)},
+						{"FuelTankCapacityBottomSheet: description", SearchQueryAndResult.from(R.string.fuel_tank_capacity_description)},
 
-						{"RecalculateRouteInDeviationBottomSheet: title", searchQuery(R.string.recalculate_route_in_deviation)},
-						{"RecalculateRouteInDeviationBottomSheet: description", searchQuery(R.string.select_distance_route_will_recalc)},
-						{"RecalculateRouteInDeviationBottomSheet: longDescription", searchQuery(R.string.recalculate_route_distance_promo)},
+						{"RecalculateRouteInDeviationBottomSheet: title", SearchQueryAndResult.from(R.string.recalculate_route_in_deviation)},
+						{"RecalculateRouteInDeviationBottomSheet: description", SearchQueryAndResult.from(R.string.select_distance_route_will_recalc)},
+						{"RecalculateRouteInDeviationBottomSheet: longDescription", SearchQueryAndResult.from(R.string.recalculate_route_distance_promo)},
 
-						{"ScreenTimeoutBottomSheet: description", searchQuery(R.string.system_screen_timeout_descr)},
+						{"ScreenTimeoutBottomSheet: description", SearchQueryAndResult.from(R.string.system_screen_timeout_descr)},
 
-						{"GoodsRestrictionsBottomSheet: title", searchQuery(R.string.routing_attr_goods_restrictions_name)},
-						{"GoodsRestrictionsBottomSheet: goods_delivery_desc", searchQuery(R.string.goods_delivery_desc)},
-						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_2", searchQuery(R.string.goods_delivery_desc_2)},
-						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_3", searchQuery(R.string.goods_delivery_desc_3)},
-						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_4", searchQuery(R.string.goods_delivery_desc_4)},
+						{"GoodsRestrictionsBottomSheet: title", SearchQueryAndResult.from(R.string.routing_attr_goods_restrictions_name)},
+						{"GoodsRestrictionsBottomSheet: goods_delivery_desc", SearchQueryAndResult.from(R.string.goods_delivery_desc)},
+						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_2", SearchQueryAndResult.from(R.string.goods_delivery_desc_2)},
+						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_3", SearchQueryAndResult.from(R.string.goods_delivery_desc_3)},
+						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_4", SearchQueryAndResult.from(R.string.goods_delivery_desc_4)},
 
-						{"SendAnalyticsBottomSheetDialogFragment: description", searchQuery(R.string.make_osmand_better_descr)},
+						{"SendAnalyticsBottomSheetDialogFragment: description", SearchQueryAndResult.from(R.string.make_osmand_better_descr)},
 
-						{"ProfileAppearanceFragment: view_angle_description", searchQuery(R.string.view_angle_description)},
-						{"ProfileAppearanceFragment: location_radius_description", searchQuery(R.string.location_radius_description)},
+						{"ProfileAppearanceFragment: view_angle_description", SearchQueryAndResult.from(R.string.view_angle_description)},
+						{"ProfileAppearanceFragment: location_radius_description", SearchQueryAndResult.from(R.string.location_radius_description)},
 
-						{"RouteParametersFragment: title", searchQuery(R.string.route_recalculation_dist_title)},
+						{"RouteParametersFragment: title", SearchQueryAndResult.from(R.string.route_recalculation_dist_title)},
 
-						{"ResetProfilePrefsBottomSheet: title", searchQuery(R.string.reset_all_profile_settings)},
-						{"ResetProfilePrefsBottomSheet: description", searchQuery(R.string.reset_all_profile_settings_descr)},
-						{"ResetProfilePrefsBottomSheet: reset_confirmation_descr", searchQuery("Tapping Reset discards all your changes")},
+						{"ResetProfilePrefsBottomSheet: title", SearchQueryAndResult.from(R.string.reset_all_profile_settings)},
+						{"ResetProfilePrefsBottomSheet: description", SearchQueryAndResult.from(R.string.reset_all_profile_settings_descr)},
+						{"ResetProfilePrefsBottomSheet: reset_confirmation_descr", SearchQueryAndResult.from("Tapping Reset discards all your changes")},
 
-						{"GeneralProfileSettingsFragment", searchQuery(R.string.distance_during_navigation)},
+						{"GeneralProfileSettingsFragment", SearchQueryAndResult.from(R.string.distance_during_navigation)},
 
-						{"DistanceDuringNavigationBottomSheet: description", searchQuery("Choose how distance information is displayed in navigation widgets")},
+						{"DistanceDuringNavigationBottomSheet: description", SearchQueryAndResult.from("Choose how distance information is displayed in navigation widgets")},
 
-						{"VehicleParametersFragment: SimpleSingleSelectionBottomSheet, description", searchQuery(R.string.routing_attr_motor_type_description)},
+						{"VehicleParametersFragment: SimpleSingleSelectionBottomSheet, description", SearchQueryAndResult.from(R.string.routing_attr_motor_type_description)},
 
-						{"VoiceLanguageBottomSheetFragment: language_description", searchQuery(R.string.language_description)},
-						{"VoiceLanguageBottomSheetFragment: tts_description", searchQuery(R.string.tts_description)},
-						{"VoiceLanguageBottomSheetFragment: recorded_description", searchQuery(R.string.recorded_description)},
+						{"VoiceLanguageBottomSheetFragment: language_description", SearchQueryAndResult.from(R.string.language_description)},
+						{"VoiceLanguageBottomSheetFragment: tts_description", SearchQueryAndResult.from(R.string.tts_description)},
+						{"VoiceLanguageBottomSheetFragment: recorded_description", SearchQueryAndResult.from(R.string.recorded_description)},
 
-						{"WakeTimeBottomSheet: description", searchQuery(context -> context.getString(R.string.turn_screen_on_wake_time_descr, context.getString(R.string.keep_screen_on)))},
-						{"WakeTimeBottomSheet: keep_screen_on", searchQuery(R.string.keep_screen_on)},
-						{"WakeTimeBottomSheet: timeoutDescription", searchQuery(context -> context.getString(R.string.screen_timeout_descr, context.getString(R.string.system_screen_timeout)))},
+						{"WakeTimeBottomSheet: description", SearchQueryAndResult.from(context -> context.getString(R.string.turn_screen_on_wake_time_descr, context.getString(R.string.keep_screen_on)))},
+						{"WakeTimeBottomSheet: keep_screen_on", SearchQueryAndResult.from(R.string.keep_screen_on)},
+						{"WakeTimeBottomSheet: timeoutDescription", SearchQueryAndResult.from(context -> context.getString(R.string.screen_timeout_descr, context.getString(R.string.system_screen_timeout)))},
 
-						{"SelectNavProfileBottomSheet: header", searchQuery(R.string.select_nav_profile_dialog_message)},
+						{"SelectNavProfileBottomSheet: header", SearchQueryAndResult.from(R.string.select_nav_profile_dialog_message)},
 
-						{"SelectDefaultProfileBottomSheet: description", searchQuery(R.string.profile_by_default_description)},
-						{"SelectDefaultProfileBottomSheet: car profile", searchQuery(ApplicationMode.CAR.toHumanString())},
+						{"SelectDefaultProfileBottomSheet: description", SearchQueryAndResult.from(R.string.profile_by_default_description)},
+						{"SelectDefaultProfileBottomSheet: car profile", SearchQueryAndResult.from(ApplicationMode.CAR.toHumanString())},
 
-						{"SelectBaseProfileBottomSheet: title", searchQuery(R.string.select_base_profile_dialog_title)},
-						{"SelectBaseProfileBottomSheet: longDescription", searchQuery(R.string.select_base_profile_dialog_message)},
+						{"SelectBaseProfileBottomSheet: title", SearchQueryAndResult.from(R.string.select_base_profile_dialog_title)},
+						{"SelectBaseProfileBottomSheet: longDescription", SearchQueryAndResult.from(R.string.select_base_profile_dialog_message)},
 
-						{"ConfigureScreenFragment", searchQuery(R.string.configure_screen_widgets_descr)}
+						{"ConfigureScreenFragment", SearchQueryAndResult.from(R.string.configure_screen_widgets_descr)},
+
+						{"test_search_map_rendering_engine_v1_find_map_rendering_engine", SearchQueryAndResult.from(R.string.map_rendering_engine_v1, R.string.map_rendering_engine)},
+						{"test_search_map_rendering_engine_v2_find_map_rendering_engine", SearchQueryAndResult.from(R.string.map_rendering_engine_v2, R.string.map_rendering_engine)}
 				});
 	}
 
@@ -105,10 +108,12 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 
 	@Test
 	public void testSearchAndFind() {
-		testSearchAndFind(searchQueryProvider.apply(app));
+		testSearchAndFind(
+				searchQueryAndResult.searchQueryProvider().apply(app),
+				searchQueryAndResult.searchResultProvider().apply(app));
 	}
 
-	private void testSearchAndFind(final String searchQuery) {
+	private void testSearchAndFind(final String searchQuery, final String searchResult) {
 		// Given
 		clickSearchButton(app);
 
@@ -116,18 +121,29 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 		onView(searchView()).perform(replaceText(searchQuery), closeSoftKeyboard());
 
 		// Then
-		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(searchQuery)));
+		onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(searchResult)));
 	}
 
-	private static Function<Context, String> searchQuery(final @StringRes int id) {
-		return context -> context.getString(id);
-	}
+	public record SearchQueryAndResult(Function<Context, String> searchQueryProvider,
+									   Function<Context, String> searchResultProvider) {
 
-	private static Function<Context, String> searchQuery(final String str) {
-		return context -> str;
-	}
+		public static SearchQueryAndResult from(final @StringRes int id) {
+			return from(context -> context.getString(id));
+		}
 
-	private static Function<Context, String> searchQuery(final Function<Context, String> searchQueryProvider) {
-		return searchQueryProvider;
+		public static SearchQueryAndResult from(final @StringRes int queryId,
+												final @StringRes int resultId) {
+			return new SearchQueryAndResult(
+					context -> context.getString(queryId),
+					context -> context.getString(resultId));
+		}
+
+		public static SearchQueryAndResult from(final String str) {
+			return from(context -> str);
+		}
+
+		public static SearchQueryAndResult from(final Function<Context, String> searchQueryProvider) {
+			return new SearchQueryAndResult(searchQueryProvider, searchQueryProvider);
+		}
 	}
 }
