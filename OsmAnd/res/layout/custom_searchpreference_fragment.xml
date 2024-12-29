@@ -17,10 +17,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
-        android:id="@+id/searchResultsCheckBox"
+        android:id="@+id/search_inside_disabled_profiles"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ignore search results"
+        android:text="search inside disabled profiles"
         app:layout_constraintBottom_toTopOf="@+id/searchResultsFragmentContainerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchResultsCheckBox" />
+        app:layout_constraintTop_toBottomOf="@+id/search_inside_disabled_profiles" />
 
     <include
         android:id="@+id/progressContainerCustom"

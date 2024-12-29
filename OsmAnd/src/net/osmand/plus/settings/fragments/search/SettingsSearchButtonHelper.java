@@ -9,6 +9,7 @@ import androidx.preference.Preference;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 
 import java.util.Optional;
@@ -26,6 +27,7 @@ public class SettingsSearchButtonHelper {
 	private final @IdRes int fragmentContainerViewId;
 	private final SearchDatabaseStatusHandler searchDatabaseStatusHandler;
 	private final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<?>>> createSearchDatabaseTaskSupplier;
+	private final OsmandPreference<String> availableAppModes;
 
 	public SettingsSearchButtonHelper(final BaseSettingsFragment rootSearchPreferenceFragment,
 									  final @IdRes int fragmentContainerViewId,
@@ -38,6 +40,7 @@ public class SettingsSearchButtonHelper {
 						new SetStringPreference(
 								app.getSettings().PLUGINS_COVERED_BY_SETTINGS_SEARCH));
 		this.createSearchDatabaseTaskSupplier = createSearchDatabaseTaskSupplier;
+		this.availableAppModes = app.getSettings().AVAILABLE_APP_MODES;
 	}
 
 	public void configureSettingsSearchButton(final ImageView settingsSearchButton) {
@@ -50,8 +53,12 @@ public class SettingsSearchButtonHelper {
 			final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<?>>> createSearchDatabaseTaskSupplier,
 			final FragmentActivity fragmentActivity,
 			final @IdRes int fragmentContainerViewId,
-			final Class<? extends BaseSettingsFragment> rootPreferenceFragment) {
-		final SearchResultsFilter searchResultsFilter = new SearchResultsFilter();
+			final Class<? extends BaseSettingsFragment> rootPreferenceFragment,
+			final OsmandPreference<String> availableAppModes) {
+		final SearchResultsFilter searchResultsFilter =
+				new SearchResultsFilter(
+						PreferencePathDisplayerFactory.getApplicationModeKeys(),
+						availableAppModes);
 		return SearchPreferenceFragments
 				.builder(
 						new SearchConfiguration(
@@ -93,7 +100,8 @@ public class SettingsSearchButtonHelper {
 						createSearchDatabaseTaskSupplier,
 						rootSearchPreferenceFragment.requireActivity(),
 						fragmentContainerViewId,
-						rootSearchPreferenceFragment.getClass());
+						rootSearchPreferenceFragment.getClass(),
+						availableAppModes);
 		searchPreferenceButton.setOnClickListener(v -> showSearchPreferenceFragment(searchPreferenceFragments));
 	}
 

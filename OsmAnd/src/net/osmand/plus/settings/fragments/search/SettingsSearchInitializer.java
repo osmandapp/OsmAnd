@@ -26,8 +26,7 @@ public class SettingsSearchInitializer {
 	private List<OsmandPreference<String>> getAppProfilePreferences() {
 		return List.of(
 				app.getSettings().CUSTOM_APP_MODES_KEYS,
-				app.getSettings().USER_PROFILE_NAME,
-				app.getSettings().AVAILABLE_APP_MODES);
+				app.getSettings().USER_PROFILE_NAME);
 	}
 
 	private void rebuildSearchDatabase() {

@@ -13,7 +13,7 @@ class PreferencePathDisplayerFactory {
 		return new PreferencePathDisplayer(context, getApplicationModeKeys());
 	}
 
-	private static Set<String> getApplicationModeKeys() {
+	public static Set<String> getApplicationModeKeys() {
 		return ApplicationMode
 				.allPossibleValues()
 				.stream()

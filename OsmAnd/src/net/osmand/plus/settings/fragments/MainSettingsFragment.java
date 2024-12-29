@@ -292,14 +292,6 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		}
 	}
 
-	public static boolean isAppProfilePreference(final Preference preference) {
-		return ApplicationMode.valueOfStringKey(preference.getKey(), null) != null;
-	}
-
-	public static SwitchPreferenceEx asAppProfilePreference(final Preference preference) {
-		return (SwitchPreferenceEx) preference;
-	}
-
 	public void onProfileSelected(ApplicationMode item, boolean isChecked) {
 		if (isChecked) {
 			availableAppModes.add(item);
