@@ -2990,7 +2990,7 @@
     <string name="navigate_point_format_utm">Стандарт UTM</string>
     <string name="change_default_settings">Змінити налаштування</string>
     <string name="discard_changes">Відхилити зміни</string>
-    <string name="apply_to_current_profile">Застосовувати лише до %1$s\\</string>
+    <string name="apply_to_current_profile">Застосовувати лише до %1$s</string>
     <string name="apply_to_all_profiles">Застосувати до всіх профілів</string>
     <string name="start_up_message_pref">Повідомлення під час запуску застосунку</string>
     <string name="analytics_pref_title">Аналітика</string>
@@ -4239,7 +4239,7 @@
     <string name="exit_import">Вийти\?</string>
     <string name="import_tracks">Імпорт треків</string>
     <string name="import_tracks_descr">%1$s, містить %2$s окремі треки. Виберіть треки, які потрібно імпортувати.</string>
-    <string name="location_source_descr">За умовчанням OsmAnd, встановлений із Google Play, використовує %1$s для визначення місцезнаходження.\n\nЯкщо ви отримуєте неточну інформацію про місцезнаходження або використовуєте пристрій без %2$s, спробуйте переключитися на %3$s\\</string>
+    <string name="location_source_descr">За умовчанням OsmAnd, встановлений із Google Play, використовує %1$s для визначення місцезнаходження.\n\nЯкщо ви отримуєте неточну інформацію про місцезнаходження або використовуєте пристрій без %2$s, спробуйте переключитися на %3$s</string>
     <string name="location_source">Джерело даних про місцеположення</string>
     <string name="shared_string_shape">Форма</string>
     <string name="default_appearance_desc">Типовий колір, піктограма та форма застосовуватимуться до доданих точок у групі закладок.</string>
