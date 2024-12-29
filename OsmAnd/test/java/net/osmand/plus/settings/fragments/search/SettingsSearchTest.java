@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.fragments.search;
 
-import static net.osmand.plus.settings.fragments.search.SettingsSearchTestFactory.searchQueryAndExpectedSearchResult;
-
 import android.content.Context;
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
@@ -41,47 +39,439 @@ public class SettingsSearchTest extends AndroidTest {
 	public static Iterable<Object[]> data() {
 		return Arrays.asList(
 				new Object[][]{
-						{"RecalculateRoute", searchQueryAndExpectedSearchResult(R.string.recalculate_route)},
+						{
+								"RecalculateRoute",
+								new SettingsSearchTestTemplate() {
 
-						{"AnnouncementTimeBottomSheet: title", searchQueryAndExpectedSearchResult(R.string.announcement_time_title)},
-						{"AnnouncementTimeBottomSheet: description", searchQueryAndExpectedSearchResult(R.string.announcement_time_descr)},
-						{"AnnouncementTimeBottomSheet: time intervals", searchQueryAndExpectedSearchResult(R.string.announcement_time_intervals)},
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.recalculate_route);
+									}
 
-						{"FuelTankCapacityBottomSheet: title", searchQueryAndExpectedSearchResult(R.string.fuel_tank_capacity)},
-						{"FuelTankCapacityBottomSheet: description", searchQueryAndExpectedSearchResult(R.string.fuel_tank_capacity_description)},
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
 
-						{"RecalculateRouteInDeviationBottomSheet: title", searchQueryAndExpectedSearchResult(R.string.recalculate_route_in_deviation)},
-						{"RecalculateRouteInDeviationBottomSheet: description", searchQueryAndExpectedSearchResult(R.string.select_distance_route_will_recalc)},
-						{"RecalculateRouteInDeviationBottomSheet: longDescription", searchQueryAndExpectedSearchResult(R.string.recalculate_route_distance_promo)},
+						{
+								"AnnouncementTimeBottomSheet: title",
+								new SettingsSearchTestTemplate() {
 
-						{"ScreenTimeoutBottomSheet: description", searchQueryAndExpectedSearchResult(R.string.system_screen_timeout_descr)},
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.announcement_time_title);
+									}
 
-						{"GoodsRestrictionsBottomSheet: title", searchQueryAndExpectedSearchResult(R.string.routing_attr_goods_restrictions_name)},
-						{"GoodsRestrictionsBottomSheet: goods_delivery_desc", searchQueryAndExpectedSearchResult(R.string.goods_delivery_desc)},
-						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_2", searchQueryAndExpectedSearchResult(R.string.goods_delivery_desc_2)},
-						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_3", searchQueryAndExpectedSearchResult(R.string.goods_delivery_desc_3)},
-						{"GoodsRestrictionsBottomSheet: goods_delivery_desc_4", searchQueryAndExpectedSearchResult(R.string.goods_delivery_desc_4)},
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+						{
+								"AnnouncementTimeBottomSheet: description",
+								new SettingsSearchTestTemplate() {
 
-						{"SendAnalyticsBottomSheetDialogFragment: description", searchQueryAndExpectedSearchResult(R.string.make_osmand_better_descr)},
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.announcement_time_descr);
+									}
 
-						{"ProfileAppearanceFragment: view_angle_description", searchQueryAndExpectedSearchResult(R.string.view_angle_description)},
-						{"ProfileAppearanceFragment: location_radius_description", searchQueryAndExpectedSearchResult(R.string.location_radius_description)},
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+						{
+								"AnnouncementTimeBottomSheet: time intervals",
+								new SettingsSearchTestTemplate() {
 
-						{"RouteParametersFragment: title", searchQueryAndExpectedSearchResult(R.string.route_recalculation_dist_title)},
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.announcement_time_intervals);
+									}
 
-						{"ResetProfilePrefsBottomSheet: title", searchQueryAndExpectedSearchResult(R.string.reset_all_profile_settings)},
-						{"ResetProfilePrefsBottomSheet: description", searchQueryAndExpectedSearchResult(R.string.reset_all_profile_settings_descr)},
-						{"ResetProfilePrefsBottomSheet: reset_confirmation_descr", searchQueryAndExpectedSearchResult("Tapping Reset discards all your changes")},
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
 
-						{"GeneralProfileSettingsFragment", searchQueryAndExpectedSearchResult(R.string.distance_during_navigation)},
+						{
+								"FuelTankCapacityBottomSheet: title",
+								new SettingsSearchTestTemplate() {
 
-						{"DistanceDuringNavigationBottomSheet: description", searchQueryAndExpectedSearchResult("Choose how distance information is displayed in navigation widgets")},
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.fuel_tank_capacity);
+									}
 
-						{"VehicleParametersFragment: SimpleSingleSelectionBottomSheet, description", searchQueryAndExpectedSearchResult(R.string.routing_attr_motor_type_description)},
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+						{
+								"FuelTankCapacityBottomSheet: description",
+								new SettingsSearchTestTemplate() {
 
-						{"VoiceLanguageBottomSheetFragment: language_description", searchQueryAndExpectedSearchResult(R.string.language_description)},
-						{"VoiceLanguageBottomSheetFragment: tts_description", searchQueryAndExpectedSearchResult(R.string.tts_description)},
-						{"VoiceLanguageBottomSheetFragment: recorded_description", searchQueryAndExpectedSearchResult(R.string.recorded_description)},
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.fuel_tank_capacity_description);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+
+						{
+								"RecalculateRouteInDeviationBottomSheet: title",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.recalculate_route_in_deviation);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+						{
+								"RecalculateRouteInDeviationBottomSheet: description",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.select_distance_route_will_recalc);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+						{
+								"RecalculateRouteInDeviationBottomSheet: longDescription",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.recalculate_route_distance_promo);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+
+						{
+								"ScreenTimeoutBottomSheet: description",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.system_screen_timeout_descr);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+
+						{
+								"GoodsRestrictionsBottomSheet: title",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.routing_attr_goods_restrictions_name);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+						{
+								"GoodsRestrictionsBottomSheet: goods_delivery_desc",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.goods_delivery_desc);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+						{
+								"GoodsRestrictionsBottomSheet: goods_delivery_desc_2",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.goods_delivery_desc_2);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+						{
+								"GoodsRestrictionsBottomSheet: goods_delivery_desc_3",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.goods_delivery_desc_3);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+						{
+								"GoodsRestrictionsBottomSheet: goods_delivery_desc_4",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.goods_delivery_desc_4);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+
+						{
+								"SendAnalyticsBottomSheetDialogFragment: description",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.make_osmand_better_descr);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+
+						{
+								"ProfileAppearanceFragment: view_angle_description",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.view_angle_description);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+						{
+								"ProfileAppearanceFragment: location_radius_description",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.location_radius_description);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+
+						{
+								"RouteParametersFragment: title",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.route_recalculation_dist_title);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+
+						{
+								"ResetProfilePrefsBottomSheet: title",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.reset_all_profile_settings);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+						{
+								"ResetProfilePrefsBottomSheet: description",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.reset_all_profile_settings_descr);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+						{
+								"ResetProfilePrefsBottomSheet: reset_confirmation_descr",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return "Tapping Reset discards all your changes";
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+
+						{
+								"GeneralProfileSettingsFragment",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.distance_during_navigation);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+
+						{
+								"DistanceDuringNavigationBottomSheet: description",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return "Choose how distance information is displayed in navigation widgets";
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+
+						{
+								"VehicleParametersFragment: SimpleSingleSelectionBottomSheet, description",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.routing_attr_motor_type_description);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+
+						{
+								"VoiceLanguageBottomSheetFragment: language_description",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.language_description);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+						{
+								"VoiceLanguageBottomSheetFragment: tts_description",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.tts_description);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+						{
+								"VoiceLanguageBottomSheetFragment: recorded_description",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.recorded_description);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
 
 						{
 								"WakeTimeBottomSheet: description",
@@ -98,7 +488,21 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-						{"WakeTimeBottomSheet: keep_screen_on", searchQueryAndExpectedSearchResult(R.string.keep_screen_on)},
+						{
+								"WakeTimeBottomSheet: keep_screen_on",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.keep_screen_on);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
 						{
 								"WakeTimeBottomSheet: timeoutDescription",
 								new SettingsSearchTestTemplate() {
@@ -115,15 +519,99 @@ public class SettingsSearchTest extends AndroidTest {
 								}
 						},
 
-						{"SelectNavProfileBottomSheet: header", searchQueryAndExpectedSearchResult(R.string.select_nav_profile_dialog_message)},
+						{
+								"SelectNavProfileBottomSheet: header",
+								new SettingsSearchTestTemplate() {
 
-						{"SelectDefaultProfileBottomSheet: description", searchQueryAndExpectedSearchResult(R.string.profile_by_default_description)},
-						{"SelectDefaultProfileBottomSheet: car profile", searchQueryAndExpectedSearchResult(ApplicationMode.CAR.toHumanString())},
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.select_nav_profile_dialog_message);
+									}
 
-						{"SelectBaseProfileBottomSheet: title", searchQueryAndExpectedSearchResult(R.string.select_base_profile_dialog_title)},
-						{"SelectBaseProfileBottomSheet: longDescription", searchQueryAndExpectedSearchResult(R.string.select_base_profile_dialog_message)},
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
 
-						{"ConfigureScreenFragment", searchQueryAndExpectedSearchResult(R.string.configure_screen_widgets_descr)},
+						{
+								"SelectDefaultProfileBottomSheet: description",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.profile_by_default_description);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+						{
+								"SelectDefaultProfileBottomSheet: car profile",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return ApplicationMode.CAR.toHumanString();
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+
+						{
+								"SelectBaseProfileBottomSheet: title",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.select_base_profile_dialog_title);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+						{
+								"SelectBaseProfileBottomSheet: longDescription",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.select_base_profile_dialog_message);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+
+						{
+								"ConfigureScreenFragment",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.configure_screen_widgets_descr);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
 
 						{
 								"search_map_rendering_engine_v1_find_map_rendering_engine",
