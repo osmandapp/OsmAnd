@@ -40,8 +40,8 @@ public abstract class SettingsSearchTestTemplate {
 		onView(searchView()).perform(replaceText(getSearchQuery(app)), closeSoftKeyboard());
 
 		// Then
-		for (final String searchResult : getSearchResults(app, osmandPlugin)) {
-			onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(searchResult)));
+		for (final String expectedSearchResult : getExpectedSearchResults(app, osmandPlugin)) {
+			onView(searchResultsView()).check(matches(hasSearchResultWithSubstring(expectedSearchResult)));
 		}
 	}
 
@@ -49,7 +49,7 @@ public abstract class SettingsSearchTestTemplate {
 
 	protected abstract Optional<Class<? extends OsmandPlugin>> getPluginClass();
 
-	protected abstract List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin);
+	protected abstract List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin);
 
 	private Optional<OsmandPlugin> getOsmandPlugin() {
 		return this

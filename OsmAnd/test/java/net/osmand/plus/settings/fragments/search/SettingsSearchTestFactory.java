@@ -30,7 +30,7 @@ class SettingsSearchTestFactory {
 			}
 
 			@Override
-			protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+			protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
 				return searchResultsProvider.apply(context, osmandPlugin);
 			}
 		};
@@ -50,7 +50,7 @@ class SettingsSearchTestFactory {
 			}
 
 			@Override
-			protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+			protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
 				return List.of(searchQueryProvider.apply(context));
 			}
 		};
@@ -70,7 +70,7 @@ class SettingsSearchTestFactory {
 			}
 
 			@Override
-			protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+			protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
 				return List.of(context.getString(resultId));
 			}
 		};

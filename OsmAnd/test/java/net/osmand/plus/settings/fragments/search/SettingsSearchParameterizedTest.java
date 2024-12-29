@@ -123,7 +123,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 									}
 
 									@Override
-									protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+									protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
 										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.orElseThrow().getName()));
 									}
 								}
@@ -144,7 +144,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 									}
 
 									@Override
-									protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+									protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
 										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.orElseThrow().getName()));
 									}
 								}
@@ -165,7 +165,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 									}
 
 									@Override
-									protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+									protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
 										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.orElseThrow().getName()));
 									}
 								}
@@ -186,7 +186,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 									}
 
 									@Override
-									protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+									protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
 										return List.of(String.format("Path: Driving > %s > Reset plugin settings to default", osmandPlugin.orElseThrow().getName()));
 									}
 								}
@@ -207,7 +207,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 									}
 
 									@Override
-									protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+									protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
 										return List.of(
 												String.format(
 														"Path: Driving > %s > %s",
@@ -232,7 +232,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 									}
 
 									@Override
-									protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+									protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
 										return List.of(
 												String.format(
 														"Path: Driving > %s > %s",
@@ -257,7 +257,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 									}
 
 									@Override
-									protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+									protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
 										return List.of(
 												String.format(
 														"Path: Driving > %s > %s",
@@ -282,7 +282,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 									}
 
 									@Override
-									protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+									protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
 										return List.of(
 												String.format(
 														"Path: Driving > %s > %s",
@@ -307,7 +307,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 									}
 
 									@Override
-									protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+									protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
 										return List.of(context.getString(R.string.location_interpolation_percent));
 									}
 								}
@@ -328,7 +328,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 									}
 
 									@Override
-									protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+									protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
 										return List.of(context.getString(R.string.location_interpolation_percent_desc));
 									}
 								}
@@ -349,7 +349,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 									}
 
 									@Override
-									protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+									protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
 										return Stream
 												.of("Driving", "Moped")
 												.map(applicationMode -> String.format("Path: %s > Profile appearance", applicationMode))
@@ -373,7 +373,7 @@ public class SettingsSearchParameterizedTest extends AndroidTest {
 									}
 
 									@Override
-									protected List<String> getSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
+									protected List<String> getExpectedSearchResults(final Context context, final Optional<OsmandPlugin> osmandPlugin) {
 										return Stream
 												.of("Driving", "Truck")
 												.map(applicationMode -> String.format("Path: %s > Navigation settings > Screen alerts > Speed cameras", applicationMode))
