@@ -420,8 +420,7 @@
     <string name="osmand_parking_choose_type">Park etme türünü seçin</string>
     <string name="osmand_parking_time_no_limit">Zaman-sınırsız park et</string>
     <string name="osmand_parking_position_description_add">Aracı almak için:</string>
-    <string name="osmand_parking_plugin_description">Aracınızın nerede park edildiğini ve alternatif olarak ne kadar park süresi kaldığını kaydetmenizi sağlar.
-\n Konum ve saat hem gösterge tablosunda hem de harita widget\'ında görülebilir. Android takvimine bir alarm hatırlatıcısı eklenebilir.</string>
+    <string name="osmand_parking_plugin_description">Aracınızın nerede park edildiğini ve alternatif olarak ne kadar park süresi kaldığını kaydetmenizi sağlar. \n Konum ve saat hem gösterge tablosunda hem de harita widget\'ında görülebilir. Android takvimine bir alarm hatırlatıcısı eklenebilir.</string>
     <string name="osmand_parking_plugin_name">Park etme pozisyonu</string>
     <string name="context_menu_item_delete_parking_point">Park etme işaretini sil</string>
     <string name="gpxup_public">Genel</string>
