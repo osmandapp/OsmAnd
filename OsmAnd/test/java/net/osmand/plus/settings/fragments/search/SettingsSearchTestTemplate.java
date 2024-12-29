@@ -15,7 +15,7 @@ import net.osmand.plus.OsmandApplication;
 
 import java.util.List;
 
-abstract class SettingsSearchTestTemplate implements SettingsSearchTest {
+abstract class SettingsSearchTestTemplate implements ISettingsSearchTest {
 
 	@Override
 	public void testSearchAndFind(final OsmandApplication app) {

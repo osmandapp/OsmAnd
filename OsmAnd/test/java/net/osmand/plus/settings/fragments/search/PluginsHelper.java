@@ -11,11 +11,11 @@ class PluginsHelper {
 		return osmandPlugin;
 	}
 
-	public static void enablePlugin(final OsmandPlugin plugin, final OsmandApplication app) {
+	private static void enablePlugin(final OsmandPlugin plugin, final OsmandApplication app) {
 		net.osmand.plus.plugins.PluginsHelper.enablePlugin(null, app, plugin, true);
 	}
 
-	public static <T extends OsmandPlugin> T getPlugin(final Class<T> plugin) {
+	private static <T extends OsmandPlugin> T getPlugin(final Class<T> plugin) {
 		return net.osmand.plus.plugins.PluginsHelper
 				.getAvailablePlugins()
 				.stream()

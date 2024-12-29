@@ -7,10 +7,9 @@ import androidx.annotation.StringRes;
 import java.util.List;
 import java.util.function.Function;
 
-// FK-TODO: inline methods
 class SettingsSearchTestFactory {
 
-	public static SettingsSearchTest searchQueryAndResult(final Function<Context, String> searchQueryProvider) {
+	public static ISettingsSearchTest searchQueryAndExpectedSearchResult(final Function<Context, String> searchQueryProvider) {
 		return new SettingsSearchTestTemplate() {
 
 			@Override
@@ -25,31 +24,31 @@ class SettingsSearchTestFactory {
 		};
 	}
 
-	public static SettingsSearchTest searchQueryAndResult(final @StringRes int id) {
+	public static ISettingsSearchTest searchQueryAndExpectedSearchResult(final @StringRes int id) {
 		return new SettingsSearchTestTemplate() {
 
 			@Override
-			protected String getSearchQuery(final Context context1) {
-				return context1.getString(id);
+			protected String getSearchQuery(final Context context) {
+				return context.getString(id);
 			}
 
 			@Override
-			protected List<String> getExpectedSearchResults(final Context context1) {
-				return List.of(context1.getString(id));
+			protected List<String> getExpectedSearchResults(final Context context) {
+				return List.of(context.getString(id));
 			}
 		};
 	}
 
-	public static SettingsSearchTest searchQueryAndResult(final String str) {
+	public static ISettingsSearchTest searchQueryAndExpectedSearchResult(final String str) {
 		return new SettingsSearchTestTemplate() {
 
 			@Override
-			protected String getSearchQuery(final Context context1) {
+			protected String getSearchQuery(final Context context) {
 				return str;
 			}
 
 			@Override
-			protected List<String> getExpectedSearchResults(final Context context1) {
+			protected List<String> getExpectedSearchResults(final Context context) {
 				return List.of(str);
 			}
 		};
