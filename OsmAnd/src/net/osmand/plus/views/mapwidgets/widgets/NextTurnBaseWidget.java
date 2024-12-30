@@ -174,8 +174,8 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 
 	public void setTurnType(TurnType turnType) {
 		this.turnType = turnType;
-		boolean shouldUpdate = verticalWidget || updateVisibility(turnType != null);
-		if (turnDrawable.setTurnType(turnType) && shouldUpdate) {
+		boolean visibilityUpdated = !verticalWidget && updateVisibility(turnType != null);
+		if (turnDrawable.setTurnType(turnType) || visibilityUpdated) {
 			turnDrawable.updateColors(isNightMode());
 			if (verticalWidget) {
 				setVerticalImage(turnDrawable);
