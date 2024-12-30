@@ -4517,4 +4517,8 @@
     <string name="external_input_device_descr">Изберете външно устройство за управление, например клавиатура или WunderLINQ.</string>
     <string name="sett_generic_ext_input">Клавиатура</string>
     <string name="sett_parrot_ext_input">Parrot</string>
+    <string name="travel_topics">Тематични пътувания</string>
+    <string name="clear_all_key_shortcuts_summary">Всички значения на клавиши за избрания вид ще бъдат премахнати.</string>
+    <string name="reset_key_assignments_desc">Всички значения на клавиши за избрания вид ще бъдат премахнати.</string>
+    <string name="clear_key_assignment_summary">Значението на клавиша за избраното действие ще бъде премахнато.</string>
 </resources>
