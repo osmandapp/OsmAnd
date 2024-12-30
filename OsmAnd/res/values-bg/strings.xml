@@ -4521,4 +4521,5 @@
     <string name="clear_all_key_shortcuts_summary">Всички значения на клавиши за избрания вид ще бъдат премахнати.</string>
     <string name="reset_key_assignments_desc">Всички значения на клавиши за избрания вид ще бъдат премахнати.</string>
     <string name="clear_key_assignment_summary">Значението на клавиша за избраното действие ще бъде премахнато.</string>
+    <string name="missing_maps_ignore">Използване на изтеглените карти</string>
 </resources>
