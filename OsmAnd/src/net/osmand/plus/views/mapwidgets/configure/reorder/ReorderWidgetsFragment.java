@@ -227,7 +227,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 		if (activity != null) {
 			SelectCopyAppModeBottomSheet
 					.createInstance(this, selectedAppMode)
-					.show(activity.getSupportFragmentManager(), app);
+					.show(activity.getSupportFragmentManager());
 		}
 	}
 

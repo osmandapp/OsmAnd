@@ -290,7 +290,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements Show
 
 						@Override
 						protected void show(final VoiceLanguageBottomSheetFragment voiceLanguageBottomSheetFragment) {
-							voiceLanguageBottomSheetFragment.show(requireActivity().getSupportFragmentManager(), app);
+							voiceLanguageBottomSheetFragment.show(requireActivity().getSupportFragmentManager());
 						}
 					});
 		}
@@ -300,7 +300,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements Show
 	private void show(final SearchablePreferenceDialog dialog) {
 		final FragmentManager fragmentManager = getFragmentManager();
 		if (fragmentManager != null) {
-			dialog.show(fragmentManager, app);
+			dialog.show(fragmentManager);
 		}
 	}
 

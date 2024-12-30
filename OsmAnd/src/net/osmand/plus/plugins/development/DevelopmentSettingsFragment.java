@@ -361,7 +361,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 						protected void show(final SimulateLocationFragment simulateLocationFragment) {
 							final FragmentActivity activity = getActivity();
 							if (activity != null) {
-								simulateLocationFragment.show(activity.getSupportFragmentManager(), app);
+								simulateLocationFragment.show(activity.getSupportFragmentManager());
 							}
 						}
 					});
@@ -378,7 +378,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 						protected void show(final AllocatedRoutingMemoryBottomSheet allocatedRoutingMemoryBottomSheet) {
 							final FragmentManager fragmentManager = getFragmentManager();
 							if (fragmentManager != null) {
-								allocatedRoutingMemoryBottomSheet.show(fragmentManager, app);
+								allocatedRoutingMemoryBottomSheet.show(fragmentManager);
 							}
 						}
 					});
@@ -395,7 +395,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 						protected void show(final LocationInterpolationBottomSheet locationInterpolationBottomSheet) {
 							final FragmentManager fragmentManager = getFragmentManager();
 							if (fragmentManager != null) {
-								locationInterpolationBottomSheet.show(fragmentManager, app);
+								locationInterpolationBottomSheet.show(fragmentManager);
 							}
 						}
 					});

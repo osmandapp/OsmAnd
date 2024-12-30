@@ -604,7 +604,7 @@ public class MapActivityActions extends MapActions {
 					MapActivity.clearPrevActivityIntent();
 					ConfigureScreenFragment
 							.createInstance()
-							.show(activity.getSupportFragmentManager(), app);
+							.show(activity.getSupportFragmentManager());
 					return true;
 				}));
 

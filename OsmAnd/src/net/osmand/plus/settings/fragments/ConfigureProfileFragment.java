@@ -461,9 +461,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 
 			@Override
 			protected void show(final ConfigureScreenFragment configureScreenFragment) {
-				configureScreenFragment.show(
-						getMapActivity().getSupportFragmentManager(),
-						app);
+				configureScreenFragment.show(getMapActivity().getSupportFragmentManager());
 			}
 		};
 	}

@@ -40,6 +40,6 @@ public class CompassModeWidgetDialogController extends BaseCompassModeDialogCont
 
 		CustomizableSingleSelectionBottomSheet
 				.createInstance(PROCESS_ID, true)
-				.show(mapActivity.getSupportFragmentManager(), app);
+				.show(mapActivity.getSupportFragmentManager());
 	}
 }

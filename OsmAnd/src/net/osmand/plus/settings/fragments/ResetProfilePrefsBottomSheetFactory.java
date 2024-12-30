@@ -19,9 +19,7 @@ public class ResetProfilePrefsBottomSheetFactory {
 
 			@Override
 			protected void show(final ResetProfilePrefsBottomSheet resetProfilePrefsBottomSheet) {
-				resetProfilePrefsBottomSheet.show(
-						baseSettingsFragment.getFragmentManager(),
-						baseSettingsFragment.getMyApplication());
+				resetProfilePrefsBottomSheet.show(baseSettingsFragment.getFragmentManager());
 			}
 		};
 	}

@@ -152,8 +152,8 @@ public class MapRenderingEngineDialog extends DialogFragment implements Searchab
 	}
 
 	@Override
-	public void show(final FragmentManager fragmentManager, final OsmandApplication app) {
-		show(fragmentManager, (String) null);
+	public void show(final FragmentManager fragmentManager) {
+		show(fragmentManager, null);
 	}
 
 	@Override

@@ -18,7 +18,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.IndexConstants;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -270,11 +269,6 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 		return speed == 1 ? getString(R.string.shared_string_original) : "x" + speed;
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @Nullable GpxFile gpxFile, boolean usedOnMap) {
-		final SimulateLocationFragment instance = createInstance(gpxFile, usedOnMap);
-		instance.show(manager, instance.app);
-	}
-
 	public static SimulateLocationFragment createInstance(final @Nullable GpxFile gpxFile, final boolean usedOnMap) {
 		final SimulateLocationFragment fragment = new SimulateLocationFragment();
 		fragment.setGpxFile(gpxFile);
@@ -289,7 +283,7 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 	}
 
 	@Override
-	public void show(final FragmentManager fragmentManager, final OsmandApplication app) {
+	public void show(final FragmentManager fragmentManager) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			fragmentManager
 					.beginTransaction()

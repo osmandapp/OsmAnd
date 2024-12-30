@@ -183,7 +183,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 
 						@Override
 						protected void show(final SelectBaseProfileBottomSheet selectBaseProfileBottomSheet) {
-							selectBaseProfileBottomSheet.show(getActivity().getSupportFragmentManager(), app);
+							selectBaseProfileBottomSheet.show(getActivity().getSupportFragmentManager());
 						}
 					});
 		}

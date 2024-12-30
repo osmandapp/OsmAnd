@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -106,7 +105,7 @@ public class ResetProfilePrefsBottomSheet extends BasePreferenceBottomSheet impl
 	}
 
 	@Override
-	public void show(final FragmentManager fragmentManager, final OsmandApplication app) {
+	public void show(final FragmentManager fragmentManager) {
 		show(fragmentManager, TAG);
 	}
 

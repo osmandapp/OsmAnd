@@ -19,9 +19,7 @@ public class SelectCopyAppModeBottomSheetFactory {
 
 			@Override
 			protected void show(final SelectCopyAppModeBottomSheet selectCopyAppModeBottomSheet) {
-				selectCopyAppModeBottomSheet.show(
-						baseSettingsFragment.getFragmentManager(),
-						baseSettingsFragment.getMyApplication());
+				selectCopyAppModeBottomSheet.show(baseSettingsFragment.getFragmentManager());
 			}
 		};
 	}

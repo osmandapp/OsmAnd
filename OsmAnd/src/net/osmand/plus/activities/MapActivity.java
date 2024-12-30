@@ -748,7 +748,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		} else if (SendAnalyticsBottomSheetDialogFragment.shouldShowDialog(app)) {
 			SendAnalyticsBottomSheetDialogFragment
 					.createInstance(null)
-					.show(fragmentManager, app);
+					.show(fragmentManager);
 		}
 		if (fragmentsHelper.isFirstScreenShowing() && (!settings.SHOW_OSMAND_WELCOME_SCREEN.get() || !showOsmAndWelcomeScreen)) {
 			fragmentsHelper.disableFirstUsageFragment();

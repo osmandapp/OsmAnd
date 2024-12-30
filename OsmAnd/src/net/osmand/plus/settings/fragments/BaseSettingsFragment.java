@@ -850,7 +850,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			FragmentManager fm = activity.getSupportFragmentManager();
 			CustomizableSingleSelectionBottomSheet
 					.createInstance(processId, false)
-					.show(fm, app);
+					.show(fm);
 		}
 	}
 

@@ -56,7 +56,7 @@ public class ConfigureActionsCard extends MapBaseCard {
 			if (manager != null) {
 				SelectCopyAppModeBottomSheet
 						.createInstance(target, settings.getApplicationMode())
-						.show(manager, app);
+						.show(manager);
 			}
 		});
 	}

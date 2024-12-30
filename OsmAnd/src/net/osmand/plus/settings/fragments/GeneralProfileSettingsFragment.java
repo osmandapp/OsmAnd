@@ -498,7 +498,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	private void show(final SearchablePreferenceDialog dialog) {
 		final FragmentManager fragmentManager = getFragmentManager();
 		if (fragmentManager != null) {
-			dialog.show(fragmentManager, app);
+			dialog.show(fragmentManager);
 		}
 	}
 

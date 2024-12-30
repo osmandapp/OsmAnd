@@ -336,7 +336,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements S
 	private void show(final SearchablePreferenceDialog dialog) {
 		final FragmentManager fragmentManager = getFragmentManager();
 		if (fragmentManager != null) {
-			dialog.show(fragmentManager, app);
+			dialog.show(fragmentManager);
 		}
 	}
 

@@ -98,6 +98,6 @@ public class MapFocusDialogController extends BaseDialogController
 
 		CustomizableSingleSelectionBottomSheet
 				.createInstance(PROCESS_ID, true)
-				.show(mapActivity.getSupportFragmentManager(), app);
+				.show(mapActivity.getSupportFragmentManager());
 	}
 }

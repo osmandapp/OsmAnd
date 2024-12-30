@@ -658,7 +658,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 
 			@Override
 			protected void show(final RecalculateRouteInDeviationBottomSheet recalculateRouteInDeviationBottomSheet) {
-				recalculateRouteInDeviationBottomSheet.show(getFragmentManager(), app);
+				recalculateRouteInDeviationBottomSheet.show(getFragmentManager());
 			}
 		};
 	}
@@ -676,7 +676,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 
 			@Override
 			protected void show(final GoodsRestrictionsBottomSheet goodsRestrictionsBottomSheet) {
-				goodsRestrictionsBottomSheet.show(getFragmentManager(), app);
+				goodsRestrictionsBottomSheet.show(getFragmentManager());
 			}
 		};
 	}

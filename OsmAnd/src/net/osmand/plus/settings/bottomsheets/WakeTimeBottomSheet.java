@@ -13,7 +13,6 @@ import androidx.preference.Preference;
 
 import com.google.android.material.slider.Slider;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -209,7 +208,7 @@ public class WakeTimeBottomSheet extends BasePreferenceBottomSheet implements Se
 	}
 
 	@Override
-	public void show(final FragmentManager fragmentManager, final OsmandApplication app) {
+	public void show(final FragmentManager fragmentManager) {
 		show(fragmentManager, TAG);
 	}
 

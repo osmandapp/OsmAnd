@@ -344,7 +344,7 @@ public class RearrangeItemsHelper implements CopyAppModePrefsListener {
 		if (manager != null) {
 			SelectCopyAppModeBottomSheet
 					.createInstance(fragment, appMode)
-					.show(manager, app);
+					.show(manager);
 		}
 	}
 

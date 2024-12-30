@@ -227,7 +227,7 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 	}
 
 	@Override
-	public void show(final FragmentManager fragmentManager, final OsmandApplication app) {
+	public void show(final FragmentManager fragmentManager) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			show(fragmentManager, TAG);
 		}

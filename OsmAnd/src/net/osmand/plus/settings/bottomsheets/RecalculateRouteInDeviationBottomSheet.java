@@ -254,7 +254,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 	}
 
 	@Override
-	public void show(final FragmentManager fragmentManager, final OsmandApplication app) {
+	public void show(final FragmentManager fragmentManager) {
 		show(fragmentManager, TAG);
 	}
 

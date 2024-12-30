@@ -103,7 +103,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 			protected void show(final SendAnalyticsBottomSheetDialogFragment sendAnalyticsBottomSheetDialogFragment) {
 				final FragmentManager fragmentManager = getFragmentManager();
 				if (fragmentManager != null) {
-					sendAnalyticsBottomSheetDialogFragment.show(fragmentManager, app);
+					sendAnalyticsBottomSheetDialogFragment.show(fragmentManager);
 				}
 			}
 		};
@@ -123,7 +123,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 
 			@Override
 			protected void show(final SelectDefaultProfileBottomSheet selectDefaultProfileBottomSheet) {
-				selectDefaultProfileBottomSheet.show(requireActivity().getSupportFragmentManager(), app);
+				selectDefaultProfileBottomSheet.show(requireActivity().getSupportFragmentManager());
 			}
 		};
 	}
@@ -141,7 +141,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 
 			@Override
 			protected void show(final MapRenderingEngineDialog mapRenderingEngineDialog) {
-				mapRenderingEngineDialog.show(getParentFragmentManager(), app);
+				mapRenderingEngineDialog.show(getParentFragmentManager());
 			}
 		};
 	}
@@ -196,7 +196,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 					if (fragmentManager != null) {
 						SendAnalyticsBottomSheetDialogFragment
 								.createInstance(this)
-								.show(fragmentManager, app);
+								.show(fragmentManager);
 					}
 				} else {
 					settings.SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.set(false);

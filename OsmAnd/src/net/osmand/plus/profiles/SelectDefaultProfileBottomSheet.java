@@ -13,7 +13,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.common.collect.ImmutableList;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SimpleDividerItem;
@@ -90,7 +89,7 @@ public class SelectDefaultProfileBottomSheet extends SelectProfileBottomSheet im
 	}
 
 	@Override
-	public void show(final FragmentManager fragmentManager, final OsmandApplication app) {
+	public void show(final FragmentManager fragmentManager) {
 		if (!fragmentManager.isStateSaved()) {
 			show(fragmentManager, TAG);
 		}

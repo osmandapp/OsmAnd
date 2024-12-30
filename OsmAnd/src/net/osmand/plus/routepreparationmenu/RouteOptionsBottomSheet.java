@@ -322,7 +322,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 				if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 					VoiceLanguageBottomSheetFragment
 							.createInstance(Optional.of(RouteOptionsBottomSheet.this), applicationMode, usedOnMap)
-							.show(mapActivity.getSupportFragmentManager(), app);
+							.show(mapActivity.getSupportFragmentManager());
 				} else {
 					cb.setChecked(!active);
 					icon.setImageDrawable(getPaintedContentIcon(!active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));

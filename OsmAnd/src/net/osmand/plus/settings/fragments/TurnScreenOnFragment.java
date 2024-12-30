@@ -65,7 +65,7 @@ public class TurnScreenOnFragment extends BaseSettingsFragment implements Showab
 										isProfileDependent())) {
 							@Override
 							protected void show(final WakeTimeBottomSheet wakeTimeBottomSheet) {
-								wakeTimeBottomSheet.show(getFragmentManager(), app);
+								wakeTimeBottomSheet.show(getFragmentManager());
 							}
 						}) :
 				Optional.empty();

@@ -88,7 +88,7 @@ public class DefaultMapButtonsFragment extends BaseMapButtonsFragment implements
 					if (activity != null) {
 						SelectCopyAppModeBottomSheet
 								.createInstance(this, settings.getApplicationMode())
-								.show(activity.getSupportFragmentManager(), app);
+								.show(activity.getSupportFragmentManager());
 					}
 				}).create());
 

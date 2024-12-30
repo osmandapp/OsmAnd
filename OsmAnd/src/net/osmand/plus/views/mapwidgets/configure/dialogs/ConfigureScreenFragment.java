@@ -21,7 +21,6 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.AppBarLayout.Behavior;
 
 import net.osmand.StateChangedListener;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -383,7 +382,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	@Override
-	public void show(final FragmentManager fragmentManager, final OsmandApplication app) {
+	public void show(final FragmentManager fragmentManager) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			fragmentManager
 					.beginTransaction()

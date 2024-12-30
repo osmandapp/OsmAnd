@@ -161,9 +161,7 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 
 							@Override
 							protected void show(final SelectNavProfileBottomSheet selectNavProfileBottomSheet) {
-								selectNavProfileBottomSheet.show(
-										getMapActivity().getSupportFragmentManager(),
-										app);
+								selectNavProfileBottomSheet.show(getMapActivity().getSupportFragmentManager());
 							}
 						}) :
 				Optional.empty();

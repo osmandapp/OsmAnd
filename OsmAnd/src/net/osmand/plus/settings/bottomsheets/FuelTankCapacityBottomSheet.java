@@ -147,7 +147,7 @@ public class FuelTankCapacityBottomSheet extends BaseTextFieldBottomSheet implem
 	}
 
 	@Override
-	public void show(final FragmentManager fragmentManager, final OsmandApplication app) {
+	public void show(final FragmentManager fragmentManager) {
 		try {
 			if (!fragmentManager.isStateSaved()) {
 				show(fragmentManager, TAG);

@@ -197,13 +197,13 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 	}
 
 	@Override
-	public void show(final @NonNull FragmentManager fm, final @NonNull OsmandApplication app) {
+	public void show(final @NonNull FragmentManager fm) {
 		try {
 			if (fm.findFragmentByTag(TAG) == null) {
 				show(fm, TAG);
 
-				OsmandSettings settings = app.getSettings();
-				int numberOfStarts = app.getAppInitializer().getNumberOfStarts();
+				OsmandSettings settings = requiredMyApplication().getSettings();
+				int numberOfStarts = requiredMyApplication().getAppInitializer().getNumberOfStarts();
 				OsmandPreference<Integer> lastRequestNS = settings.SEND_ANONYMOUS_DATA_LAST_REQUEST_NS;
 				if (numberOfStarts != lastRequestNS.get()) {
 					OsmandPreference<Integer> counter = settings.SEND_ANONYMOUS_DATA_REQUESTS_COUNT;

@@ -149,7 +149,7 @@ public class DefaultMapButtonFragment extends BaseOsmAndFragment implements Copy
 					if (activity != null) {
 						SelectCopyAppModeBottomSheet
 								.createInstance(this, settings.getApplicationMode())
-								.show(activity.getSupportFragmentManager(), app);
+								.show(activity.getSupportFragmentManager());
 					}
 				}).create());
 

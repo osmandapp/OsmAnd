@@ -276,7 +276,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 	}
 
 	private void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
-		searchablePreferenceDialog.show(requireActivity().getSupportFragmentManager(), app);
+		searchablePreferenceDialog.show(requireActivity().getSupportFragmentManager());
 	}
 
 	private void bindCard(@NonNull PreferenceViewHolder holder, @NonNull BaseCard card) {
