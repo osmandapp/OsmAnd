@@ -5660,4 +5660,8 @@
     <string name="default_buttons_opacity_original_description">Chaque bouton conservera sa propre opacité d’arrière-plan.</string>
     <string name="default_buttons_size_original_description">Chaque bouton conservera sa propre taille.</string>
     <string name="auto_zoom_3d_angle">Angle du zoom 3D automatique</string>
+    <string name="calculate_size">Calculer la taille</string>
+    <string name="calculating_indication_message">Calcul en cours …</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Voies d\'escalade</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Afficher les voies d\'escalade</string>
 </resources>
