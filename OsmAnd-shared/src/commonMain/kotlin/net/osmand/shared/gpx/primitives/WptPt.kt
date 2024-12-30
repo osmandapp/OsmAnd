@@ -32,26 +32,28 @@ class WptPt : GpxExtensions {
 
 	constructor()
 
-	constructor(wptPt: WptPt) {
-		lat = wptPt.lat
-		lon = wptPt.lon
-		name = wptPt.name
-		link = wptPt.link
-		category = wptPt.category
-		desc = wptPt.desc
-		comment = wptPt.comment
-		time = wptPt.time
-		ele = wptPt.ele
-		speed = wptPt.speed
-		hdop = wptPt.hdop
-		heading = wptPt.heading
-		deleted = wptPt.deleted
-		speedColor = wptPt.speedColor
-		altitudeColor = wptPt.altitudeColor
-		slopeColor = wptPt.slopeColor
-		colourARGB = wptPt.colourARGB
-		distance = wptPt.distance
-		getExtensionsToWrite().putAll(wptPt.getExtensionsToWrite())
+	constructor(wptPt: WptPt?) {
+		if (wptPt != null) {
+			lat = wptPt.lat
+			lon = wptPt.lon
+			name = wptPt.name
+			link = wptPt.link
+			category = wptPt.category
+			desc = wptPt.desc
+			comment = wptPt.comment
+			time = wptPt.time
+			ele = wptPt.ele
+			speed = wptPt.speed
+			hdop = wptPt.hdop
+			heading = wptPt.heading
+			deleted = wptPt.deleted
+			speedColor = wptPt.speedColor
+			altitudeColor = wptPt.altitudeColor
+			slopeColor = wptPt.slopeColor
+			colourARGB = wptPt.colourARGB
+			distance = wptPt.distance
+			getExtensionsToWrite().putAll(wptPt.getExtensionsToWrite())
+		}
 	}
 
 	fun getColor(): Int {
