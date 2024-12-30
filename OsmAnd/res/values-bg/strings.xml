@@ -4512,4 +4512,8 @@
     <string name="cloud_trash_clear_confirmation">Окончателно премахване на елементите в кошчето?</string>
     <string name="delete_all_items">Премахване на всички</string>
     <string name="delete_trash_item_confirmation_desc">Окончателно премахване на „%1$s“?</string>
+    <string name="sett_no_ext_input">Без</string>
+    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="external_input_device_descr">Изберете външно устройство за управление, например клавиатура или WunderLINQ.</string>
+    <string name="sett_generic_ext_input">Клавиатура</string>
 </resources>
