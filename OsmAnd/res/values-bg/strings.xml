@@ -4508,4 +4508,8 @@
     <string name="fuel_tank_capacity_description">Въведете обема на резервоара, за да следите точно нивото и разхода на гориво</string>
     <string name="apply_only_to_new">Прилагане само към новите</string>
     <string name="routing_attr_length_description">Задайте дължината на превозното средство, която да бъде разрешена по маршрутите.</string>
+    <string name="restore_from_trash">Възстановяване от кошчето</string>
+    <string name="cloud_trash_clear_confirmation">Окончателно премахване на елементите в кошчето?</string>
+    <string name="delete_all_items">Премахване на всички</string>
+    <string name="delete_trash_item_confirmation_desc">Окончателно премахване на „%1$s“?</string>
 </resources>
