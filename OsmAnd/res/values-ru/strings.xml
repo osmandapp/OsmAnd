@@ -5896,4 +5896,6 @@
     <string name="auto_zoom_3d_angle">Угол наклона при автомасштабе</string>
     <string name="calculate_size">Рассчитать размер</string>
     <string name="calculating_indication_message">Расчет…</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Показать скалолазные маршруты</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Скалолазные маршруты</string>
 </resources>
