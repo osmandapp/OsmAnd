@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.text.style.TextAppearanceSpan;
 
 import net.osmand.plus.R;
@@ -28,6 +29,10 @@ class PreferencePathDisplayer implements de.KnollFrank.lib.settingssearch.result
 
 	@Override
 	public CharSequence display(final PreferencePath preferencePath) {
+		return TextUtils.concat("Path: ", asString(preferencePath));
+	}
+
+	private SpannableString asString(final PreferencePath preferencePath) {
 		final List<SpannableString> titles = getTitles(preferencePath);
 		highlightApplicationModeAtStartOfLongPreferencePath(preferencePath, titles);
 		return join(titles, new SpannableString(" > "));
@@ -37,7 +42,8 @@ class PreferencePathDisplayer implements de.KnollFrank.lib.settingssearch.result
 		return preferencePath
 				.preferences()
 				.stream()
-				.map(preference -> preference.getTitle().orElse("?"))
+				.map(SearchablePreferencePOJO::getTitle)
+				.map(title -> title.orElse("?"))
 				.map(SpannableString::new)
 				.collect(Collectors.toList());
 	}
