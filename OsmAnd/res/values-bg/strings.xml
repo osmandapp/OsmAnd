@@ -4529,7 +4529,7 @@
     <string name="clear_all_key_shortcuts">Премахване всички клавишни комбинации</string>
     <string name="key_assignments">Зададени клавиши</string>
     <string name="quick_action_destination">Местоназначение</string>
-    <string name="quick_action_directions_from">Отправна точка</string>
+    <string name="quick_action_directions_from">Маршрут от тук</string>
     <string name="quick_action_move_map_down">Движение надолу</string>
     <string name="quick_action_verb_start_stop">Пискане/спиране</string>
     <string name="rendering_attr_showToll_description">Показване на ограничените с пътна такса пътища</string>
@@ -4577,4 +4577,19 @@
     <string name="button_already_assigned_to_this_action">На клавишът вече е зададено това действие.</string>
     <string name="quick_action_verb_navigate">Маршрутизиране</string>
     <string name="map_widget_sun_position_desc">Показва времето до изгрев или залез.</string>
+    <string name="quick_action_track_waypoint">Отправна точка</string>
+    <string name="quick_action_video_note">Видеобележка</string>
+    <string name="quick_action_add_category">Категория</string>
+    <string name="quick_action_auto_zoom_on">Включване автом. мащабиране</string>
+    <string name="quick_action_auto_zoom_off">Изключване автом. мащабиране</string>
+    <string name="quick_action_audio_note">Аудиобележка</string>
+    <string name="quick_action_photo_note">Фотобележка</string>
+    <string name="quick_action_parking_place">Място на паркиране</string>
+    <string name="quick_action_map_source_action">Добавяне източник на карти</string>
+    <string name="quick_action_navigation_view_title">Екран за маршрутизиране</string>
+    <string name="quick_action_search_view_title">Екран за търсене</string>
+    <string name="quick_action_drawer_title">Главно меню</string>
+    <string name="quick_action_day_night_switch_mode">Превключване дневен/нощен режим</string>
+    <string name="quick_action_previous_screen_title">Предишен екран</string>
+    <string name="quick_action_btn_tutorial_title">Промяна мястото на бутона</string>
 </resources>
