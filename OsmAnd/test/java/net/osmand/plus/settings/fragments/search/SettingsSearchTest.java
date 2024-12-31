@@ -924,6 +924,22 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
+
+						{
+								"shouldSearchAndFind_ConfigureMenuRootFragment_description",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.ui_customization_description, context.getString(R.string.prefs_plugins));
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
 				});
 	}
 

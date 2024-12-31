@@ -449,6 +449,9 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		if (isConfigureScreen(preference)) {
 			return Optional.of(createConfigureScreenFragment());
 		}
+		if (UI_CUSTOMIZATION.equals(preference.getKey())) {
+			return Optional.of(createConfigureMenuRootFragment(target));
+		}
 		return Optional.empty();
 	}
 
@@ -462,6 +465,19 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			@Override
 			protected void show(final ConfigureScreenFragment configureScreenFragment) {
 				configureScreenFragment.show(getMapActivity().getSupportFragmentManager());
+			}
+		};
+	}
+
+	private ShowableSearchablePreferenceDialog<ConfigureMenuRootFragment> createConfigureMenuRootFragment(final Optional<Fragment> target) {
+		return new ShowableSearchablePreferenceDialog<>(
+				ConfigureMenuRootFragment.createInstance(
+						getSelectedAppMode(),
+						target.orElse(null))) {
+
+			@Override
+			protected void show(final ConfigureMenuRootFragment searchablePreferenceDialog) {
+				searchablePreferenceDialog.show(getFragmentManager());
 			}
 		};
 	}
@@ -487,9 +503,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				ExportSettingsFragment.showInstance(fragmentManager, selectedMode, null, false);
 			} else if (DELETE_PROFILE.equals(prefId)) {
 				showDeleteModeConfirmation();
-			} else if (UI_CUSTOMIZATION.equals(prefId)) {
-				// FK-TODO: make ConfigureMenuRootFragment searchable
-				ConfigureMenuRootFragment.showInstance(fragmentManager, selectedMode, this);
 			} else if (showDialogForPreference(preference, this)) {
 				return true;
 			}
