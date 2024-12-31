@@ -1123,7 +1123,9 @@ public class TravelObfHelper implements TravelHelper {
 											if (key.startsWith(OBF_GPX_EXTENSION_TAG_PREFIX)) {
 												String tag = key.replaceFirst(OBF_GPX_EXTENSION_TAG_PREFIX, "");
 												String val = amenity.getAdditionalInfo(key);
-												gpxFileExtensions.put(tag, val);
+												if (val != null) {
+													gpxFileExtensions.put(tag, val);
+												}
 											} else if (key.startsWith(OBF_POINTS_GROUPS_PREFIX)) {
 												final String delimiter = OBF_POINTS_GROUPS_DELIMITER;
 												String joinedValues = amenity.getAdditionalInfo(key);

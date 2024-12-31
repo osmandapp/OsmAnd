@@ -196,10 +196,10 @@ class WptPt : GpxExtensions {
 	}
 
 	fun setAddress(address: String?) {
-		if (KAlgorithms.isBlank(address)) {
+		if (address.isNullOrEmpty()) {
 			getExtensionsToWrite().remove(GpxUtilities.ADDRESS_EXTENSION)
 		} else {
-			getExtensionsToWrite()[GpxUtilities.ADDRESS_EXTENSION] = address!!
+			getExtensionsToWrite()[GpxUtilities.ADDRESS_EXTENSION] = address
 		}
 	}
 
@@ -340,7 +340,9 @@ class WptPt : GpxExtensions {
 	}
 
 	fun setSpecialPointType(type: String?) {
-		getExtensionsToWrite()[GpxUtilities.POINT_TYPE_EXTENSION] = type!!
+		if (type != null) {
+			getExtensionsToWrite()[GpxUtilities.POINT_TYPE_EXTENSION] = type
+		}
 	}
 
 }
