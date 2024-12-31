@@ -161,10 +161,10 @@
     <string name="prefs_plugins">Dodaci</string>
     <string name="send_files_to_osm">Poslati GPX datoteke na OSM?</string>
     <string name="shared_string_help">Pomoć</string>
-    <string name="back_to_location">Natrag na poziciju</string>
+    <string name="back_to_location">Vrati se na poziciju</string>
     <string name="shared_string_on">Uključeno</string>
     <string name="shared_string_off">Isključeno</string>
-    <string name="backToMenu">Povratak na izbornik</string>
+    <string name="backToMenu">Natrag na izbornik</string>
     <string name="zoomOut">Umanji</string>
     <string name="zoomIn">Uvećaj</string>
     <string name="north">sjever</string>
@@ -211,7 +211,7 @@
     <string name="default_buttons_support">Podrška</string>
     <string name="support_new_features">Podrži nove značajke</string>
     <string name="info_button">Informacije</string>
-    <string name="support_new_features_descr">Donirajte kako biste vidjeli nove značajke u aplikaciji</string>
+    <string name="support_new_features_descr">Donirajte kako biste vidjeli nove značajke u aplikaciji.</string>
     <string name="front">Ispred</string>
     <string name="front_right">Ispred desno</string>
     <string name="right">Desno</string>
@@ -1654,4 +1654,6 @@
     <string name="lang_sr_latn">Srpski (latinica)</string>
     <string name="lang_mk">Makedonski</string>
     <string name="shared_string_location">Lokacija</string>
+    <string name="accessibility_mode">Modus pristupačnosti</string>
+    <string name="show_ruler_level">Prikaži ravnalo</string>
 </resources>
