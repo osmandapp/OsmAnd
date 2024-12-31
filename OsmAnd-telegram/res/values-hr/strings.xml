@@ -92,7 +92,7 @@
     <string name="privacy">Privatnost</string>
     <string name="direction">Smjer</string>
     <string name="precision">Točnost</string>
-    <string name="altitude">Nadmorska visina</string>
+    <string name="altitude">Visina</string>
     <string name="bearing">Usmjerenje</string>
     <string name="search_contacts">Traži kontakte</string>
     <string name="search_contacts_descr">Pretraži sve svoje grupe i kontakte.</string>
