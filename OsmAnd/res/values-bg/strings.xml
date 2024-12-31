@@ -4592,4 +4592,8 @@
     <string name="quick_action_day_night_switch_mode">Превключване дневен/нощен режим</string>
     <string name="quick_action_previous_screen_title">Предишен екран</string>
     <string name="quick_action_btn_tutorial_title">Промяна мястото на бутона</string>
+    <string name="quick_action_location_by_gpx">Местоположение по GPX</string>
+    <string name="quick_action_terrain_color_scheme">Цветова схема на релефа</string>
+    <string name="quick_action_terrain">Вид оцветяване на релефа</string>
+    <string name="quick_action_to_my_location">Към моето местоположение</string>
 </resources>
