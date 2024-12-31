@@ -72,21 +72,21 @@ public class WikiCoreHelper {
 			String url = "";
 			try {
 				if (!Algorithms.isEmpty(wikidataId)) {
-					url += (url.length() == 0 ? OSMAND_API_ENDPOINT : "&") + "article=" + URLEncoder.encode(wikidataId, "UTF-8");
+					url += (url.isEmpty() ? OSMAND_API_ENDPOINT : "&") + "article=" + URLEncoder.encode(wikidataId, "UTF-8");
 				}
 				if (!Algorithms.isEmpty(wikiCategory)) {
-					url += (url.length() == 0 ? OSMAND_API_ENDPOINT : "&") + "category=" + URLEncoder.encode(wikiCategory, "UTF-8");
+					url += (url.isEmpty() ? OSMAND_API_ENDPOINT : "&") + "category=" + URLEncoder.encode(wikiCategory, "UTF-8");
 				}
 				if (!Algorithms.isEmpty(wikiTitle)) {
-					url += (url.length() == 0 ? OSMAND_API_ENDPOINT : "&") + "wiki=" + URLEncoder.encode(wikiTitle, "UTF-8");
+					url += (url.isEmpty() ? OSMAND_API_ENDPOINT : "&") + "wiki=" + URLEncoder.encode(wikiTitle, "UTF-8");
 				}
 				if (!Algorithms.isEmpty(wikidataId)) {
-					url += (url.length() == 0 ? OSMAND_API_ENDPOINT : "&") + "addMetaData=" + URLEncoder.encode("true", "UTF-8");
+					url += (url.isEmpty() ? OSMAND_API_ENDPOINT : "&") + "addMetaData=" + URLEncoder.encode("true", "UTF-8");
 				}
 			} catch (UnsupportedEncodingException e) {
 				throw new RuntimeException(e);
 			}
-			if (url.length() > 0) {
+			if (!url.isEmpty()) {
 				getImagesOsmAndAPIRequestV2(url, wikiImages);
 			}
 		} else {
