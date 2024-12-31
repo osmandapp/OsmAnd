@@ -416,13 +416,13 @@
     <string name="shared_string_action_name">Ime radnje</string>
     <string name="quick_action_btn_tutorial_descr">Dugo držanje i prevlačenje dugmeta ga pomera po ekranu.</string>
     <string name="quick_action_btn_tutorial_title">Pomeri dugme</string>
-    <string name="quick_action_map_source_switch">Izvor mape je promenjen na s</string>
+    <string name="quick_action_map_source_switch">Izvor mape je promenjen na \"%s\".</string>
     <string name="quick_action_map_source_action">Dodaj izvor mape</string>
     <string name="quick_action_map_source_title">Izvor mape</string>
     <string name="quick_action_map_underlay_action">Dodaj sloj ispod mape</string>
     <string name="quick_action_map_underlay_title">Slojevi ispod mape</string>
-    <string name="quick_action_map_underlay_switch">Sloj ispod mape promenjen na s</string>
-    <string name="quick_action_map_overlay_switch">Nivo iznad mape promenjen na s</string>
+    <string name="quick_action_map_underlay_switch">Sloj ispod mape promenjen na \"%s\".</string>
+    <string name="quick_action_map_overlay_switch">Nivo iznad mape promenjen na \"%s\".</string>
     <string name="quick_action_map_overlay_action">Dodaj nivo iznad mape</string>
     <string name="quick_action_map_overlay_title">Slojevi iznad mape</string>
     <string name="quick_action_map_styles">Stilovi mapa</string>
@@ -460,7 +460,7 @@
     <string name="quick_action_add_marker_descr">Dugme za dodavanje oznake na mapi za lokaciju na sredini ekrana.</string>
     <string name="quick_favorites_name_preset">Unapred postavljeno ime</string>
     <string name="quick_favorites_show_favorites_dialog">Prikazati dijalog za favorite</string>
-    <string name="quick_actions_delete_text">Brisanje radnje s?</string>
+    <string name="quick_actions_delete_text">Brisanje radnje \"%s\"?</string>
     <string name="quick_actions_delete">Obriši radnju</string>
     <string name="dialog_add_action_title">Dodaj radnju</string>
     <string name="quick_action_edit_action">Uredi akciju</string>
@@ -468,7 +468,7 @@
     <string name="quick_action_navigation_voice_on">Isključi glas</string>
     <string name="quick_action_navigation_voice_off">Uključi glas</string>
     <string name="quick_action_navigation_voice">Uklj/isklj glas</string>
-    <string name="quick_action_map_style_switch">Stil mape je izmenjen na s</string>
+    <string name="quick_action_map_style_switch">Stil mape je izmenjen na \"%s\".</string>
     <string name="quick_action_item_screen">Ekran %d</string>
     <string name="quick_action_item_action">Radnja %d</string>
     <string name="poi_dialog_poi_type">Vrsta TOI</string>
@@ -2786,7 +2786,7 @@
     <string name="quick_action_remove_next_destination_descr">Uklanja trenutnu odredišnu tačku. Ako je ona i finiš tačka, navođenje će se zaustaviti.</string>
     <string name="search_download_wikipedia_maps">Preuzimanje Wikipedia mape</string>
     <string name="plugin_wikipedia_description">Podaci o tačkama zanimanja potražite na Vikipediji, džepnom internet vodiču koji ima članke o mestima i odredištima.</string>
-    <string name="add_hidden_group_info">Dodatu tačku možeš naći u s Otkrij sakrivenu označenu grupu pa je prikazati na mapi.</string>
+    <string name="add_hidden_group_info">Dodatu tačku možeš naći u \"%s\" Otkrij sakrivenu označenu grupu pa je prikazati na mapi.</string>
     <string name="app_mode_enduro_motorcycle">Enduro motocikl</string>
     <string name="app_mode_motor_scooter">Skuter</string>
     <string name="app_mode_wheelchair">Invalidska kolica</string>
@@ -3083,7 +3083,7 @@
     <string name="get_osmand_live">Nabavi OsmAnd Live radi korišćenja ovih mogućnosti: dnevna ažuriranja mapa sa neograničenim brojem preuzimanja, svi plaćeni i besplatni dodaci, Wikipedia, Wikivoyage i još mnogo toga.</string>
     <string name="quick_action_edit_actions">Izmeni akcije</string>
     <string name="error_notification_desc">Pošalji snimak ekrana ovog obaveštenja na support@osmand.net</string>
-    <string name="coord_input_save_as_track_descr">Dodao si %1$s tačke(i). Unesi ime fajla i tapni Snimi</string>
+    <string name="coord_input_save_as_track_descr">Dodao si %1$s tačke(i). Unesi ime fajla i tapni \"Snimi\".</string>
     <string name="coord_input_save_as_track">Snimi kao putanju</string>
     <string name="coord_input_add_point">Dodaj tačku</string>
     <string name="coord_input_edit_point">Izmeni tačku</string>
@@ -3174,8 +3174,8 @@
     <string name="add_intermediate">Dodaj međuodredište</string>
     <string name="public_transport_warning_title">Navođenje javnim prevozom je trenutno u beta fazi, očekuj greške i nepravilnosti.</string>
     <string name="public_transport_warning_descr_blog">Pročitaj kako OsmAnd izračunava puteve na našem blogu.</string>
-    <string name="save_poi_value_exceed_length_title">Dužina vrednosti s</string>
-    <string name="save_poi_value_exceed_length">Skrati veličinu oznake s na manje od 255 znakova.</string>
+    <string name="save_poi_value_exceed_length_title">Dužina vrednosti \"%s\"</string>
+    <string name="save_poi_value_exceed_length">Skrati veličinu oznake \"%s\" na manje od 255 znakova.</string>
     <string name="shared_string_walk">Hodanje</string>
     <string name="avoid_pt_types">Izbegavati vrste prevoza…</string>
     <string name="quick_action_day_night_mode">%s način</string>
@@ -3229,7 +3229,7 @@
     <string name="select_nav_profile_dialog_title">Odaberi vrstu navođenja</string>
     <string name="select_base_profile_dialog_message">Napravi svoj proizvoljni profil na jednom od podrazumevanih profila, kojim se određuju osnovne podešavanja kao što su podrazumevana vidljivost vidžeta ili jedinice brzine i daljine. Ovo su podrazumevani primenljivi nalozi, zajedno sa primerima proizvoljnih profila kojima se može proširiti:</string>
     <string name="select_base_profile_dialog_title">Odaberi početni profil</string>
-    <string name="profile_alert_delete_msg">Brisanje profila s</string>
+    <string name="profile_alert_delete_msg">Brisanje profila \"%s\"</string>
     <string name="profile_alert_delete_title">Obriši profil</string>
     <string name="profile_alert_need_save_msg">Prvo snimi izmene na profilu</string>
     <string name="profile_alert_need_save_title">Snimi izmene</string>
@@ -3332,7 +3332,7 @@
     <string name="price_and_discount">%1$s • Uštedi %2$s</string>
     <string name="cancel_subscription">Poništi preplatu</string>
     <string name="get_discount_second_part">Onda %1$s</string>
-    <string name="osmand_parking_plugin_description">Označava gde su vam auta ostavljena i obaveštava kalendar kada će isteći vreme parkiranja. Za postavljanje markera, izaberi mesto na mapi, idi na Radnje i tapni na Dodaj parking</string>
+    <string name="osmand_parking_plugin_description">Označava gde su vam auta ostavljena i obaveštava kalendar kada će isteći vreme parkiranja. Za postavljanje markera, izaberi mesto na mapi, idi na \"Radnje\" i tapni na \"Dodaj parking\".</string>
     <string name="osmand_parking_plugin_name">Parking pozicija</string>
     <string name="audionotes_plugin_description">Pravi zvučne/video beleške tokom putovanja, koristeći bilo dugme mape ili kontekstni meni lokacije.</string>
     <string name="audionotes_plugin_name">Zvučni i video zapisi</string>
@@ -3402,7 +3402,7 @@
     <string name="map_look_descr">Izgled mape</string>
     <string name="units_and_formats">Merne jedinice i formati</string>
     <string name="wake_time">Vreme čekanja posle buđenja</string>
-    <string name="route_parameters_info">Podešavanja za kreiranje rute u profilu %1$s</string>
+    <string name="route_parameters_info">Podešavanja za kreiranje rute u profilu \"%1$s\".</string>
     <string name="turn_screen_on_info">Prikazati mapu na zaključanom ekranu za vreme navođenja.</string>
     <string name="analytics_pref_title">Analitika</string>
     <string name="start_up_message_pref">Poruka pri otvaranju</string>
@@ -3421,7 +3421,7 @@
     <string name="configure_profile_info">Podešavanja za profil:</string>
     <string name="configure_profile">Podesi profil</string>
     <string name="switch_profile">Zamena profila</string>
-    <string name="application_profile_changed">Primenljivi profil je promenjen na s</string>
+    <string name="application_profile_changed">Primenljivi profil je promenjen na \"%s\"</string>
     <string name="logcat_buffer">Privremena memorija za dnevnik</string>
     <string name="plugins_settings">Podešavanja dodataka</string>
     <string name="shared_string_by_default">Podrazumevano</string>
@@ -3993,7 +3993,7 @@
     <string name="shared_string_complete">završeno</string>
     <string name="stop_and_exit">Zaustavi i izađi</string>
     <string name="folder_access_denied">Potrebna dozvola za pristup odabranom folderu.</string>
-    <string name="shared_storage_second_step">Tapni Koristi ovaj folder</string>
+    <string name="shared_storage_second_step">Tapni \"Koristi ovaj folder\".</string>
     <string name="routes_color_by_type">Oboj rute po…</string>
     <string name="select_backup_data_descr">Izaberi podatke i foldere za rezervne kopije.</string>
     <string name="backup_danger_zone">Opasna zona</string>
@@ -4676,7 +4676,7 @@
     <string name="rendering_value_name_only_name">Samo ime</string>
     <string name="device_disconnected">Nepovezan %1$s</string>
     <string name="file_already_exists">Fajl već postoji</string>
-    <string name="file_already_exists_description">1$s Fajl sa takvim imenom već postoji. Zamena će prepisati sve izmene sadašnjim izdanjem.</string>
+    <string name="file_already_exists_description">\"%1$s\" Fajl sa takvim imenom već postoji. Zamena će prepisati sve izmene sadašnjim izdanjem.</string>
     <string name="nav_profile_confirm_delete">Brisanje %1$s?</string>
     <string name="external_device_disconnected">Nepovezan</string>
     <string name="external_device_characteristic_distance">Rastojanje</string>
@@ -4771,7 +4771,7 @@
     <string name="reset_key_assignments">Uspostavljanje početnih vrednosti dodela tastera</string>
     <string name="shared_string_reassign">Dodeliti</string>
     <string name="clear_key_assignment">Obriši dodelu tastera</string>
-    <string name="clear_key_assignment_desc">Ključno povezivanje izabrane radnje će biti očišćeno i postavljeno na \njedan</string>
+    <string name="clear_key_assignment_desc">Ključno povezivanje izabrane radnje će biti očišćeno i postavljeno na \"Nijedan\".</string>
     <string name="show_toast_about_key_pressed">Prikazivanje iskakajućih poruka o kliknutom dugmetu</string>
     <string name="key_assignments">Dodeljivanje ključeva</string>
     <string name="see_all_plans">Pogledaj sve planove</string>
