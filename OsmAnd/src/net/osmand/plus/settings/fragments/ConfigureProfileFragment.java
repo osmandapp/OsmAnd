@@ -488,6 +488,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			} else if (DELETE_PROFILE.equals(prefId)) {
 				showDeleteModeConfirmation();
 			} else if (UI_CUSTOMIZATION.equals(prefId)) {
+				// FK-TODO: make ConfigureMenuRootFragment searchable
 				ConfigureMenuRootFragment.showInstance(fragmentManager, selectedMode, this);
 			} else if (showDialogForPreference(preference, this)) {
 				return true;
