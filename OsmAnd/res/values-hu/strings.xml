@@ -733,7 +733,7 @@
     <string name="continue_follow_previous_route_auto">Folytatódjon az előző, befejezetlen navigáció\? (%1$s másodperc)</string>
     <string name="show_cameras">Traffipaxok</string>
     <string name="show_traffic_warnings">Forgalmi figyelmeztetések</string>
-    <string name="avoid_toll_roads">Fizetős út nélkül</string>
+    <string name="avoid_toll_roads">Fizetős utak elkerülése</string>
     <string name="map_widget_top_text">Utcanév</string>
     <string name="map_widget_config">Képernyő beállítása</string>
     <string name="map_widget_back_to_loc">Hol vagyok\?</string>
@@ -763,7 +763,7 @@
     <string name="int_continuosly">Folyamatos</string>
     <string name="layer_map_appearance">Képernyő beállítása</string>
     <string name="show_lanes">Sávok</string>
-    <string name="avoid_unpaved">Burkolatlan út nélkül</string>
+    <string name="avoid_unpaved">Burkolatlan utak elkerülése</string>
     <string name="avoid_ferries">Komp nélkül</string>
     <string name="email">e-mail</string>
     <string name="filterpoi_activity">POI szűrő készítés</string>
@@ -1038,13 +1038,13 @@
     <string name="route_info">Útvonal-információk</string>
     <string name="routing_attr_prefer_motorway_name">Autópályák előnyben részesítése</string>
     <string name="routing_attr_prefer_motorway_description">Autópályák előnyben részesítése</string>
-    <string name="routing_attr_avoid_toll_name">Fizetős út nélkül</string>
+    <string name="routing_attr_avoid_toll_name">Fizetős utak elkerülése</string>
     <string name="routing_attr_avoid_toll_description">Elkerüli a fizetős utakat</string>
-    <string name="routing_attr_avoid_unpaved_name">Burkolatlan út nélkül</string>
+    <string name="routing_attr_avoid_unpaved_name">Burkolatlan utak elkerülése</string>
     <string name="routing_attr_avoid_unpaved_description">Elkerüli a burkolatlan utakat</string>
     <string name="routing_attr_avoid_ferries_name">Komp nélkül</string>
     <string name="routing_attr_avoid_ferries_description">Elkerüli a kompokat</string>
-    <string name="routing_attr_avoid_motorway_name">Autópálya nélkül</string>
+    <string name="routing_attr_avoid_motorway_name">Autópályák elkerülése</string>
     <string name="routing_attr_avoid_motorway_description">Elkerüli az autópályákat</string>
     <string name="routing_attr_weight_name">Súly</string>
     <string name="routing_attr_weight_description">Adja meg az útvonalakon a járművekre vonatkozó súlykorlátozást.</string>
@@ -1230,7 +1230,7 @@
     <string name="av_camera_pic_size_descr">Kamera képméretének beállítása</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Jelzett turistautak megjelenítése (OSMC).</string>
     <string name="index_tours">Túrák</string>
-    <string name="shared_string_all">Minden</string>
+    <string name="shared_string_all">Összes</string>
     <string name="shared_string_waypoints">Útpontok</string>
     <string name="way_alarms">Forgalmi figyelmeztetések</string>
     <string name="speak_favorites">Közeli kedvencek</string>
@@ -2241,7 +2241,7 @@
     <string name="use_system_keyboard">Rendszer billentyűzetének használata</string>
     <string name="fast_coordinates_input_descr">Válassza ki a koordinátabeviteli formátumát. Módosításához koppintson a „Beállításokra”.</string>
     <string name="fast_coordinates_input">Gyors koordinátabevitel</string>
-    <string name="routing_attr_avoid_ice_roads_fords_name">Jégutak és gázlók nélkül</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Jégutak és gázlók elkerülése</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Elkerüli a jégutakat és a gázlókat.</string>
     <string name="use_location">Pozíció használata</string>
     <string name="add_location_as_first_point_descr">A tökéletes útvonal megtervezéséhez adja meg kiindulási pontként saját pozícióját.</string>
@@ -4332,8 +4332,8 @@
     <string name="rendering_attr_horseScale_name">Lovas utak nehézségi foka</string>
     <string name="routing_attr_allow_private_for_truck_name">Behajtás magánterületre (tehergépjármű)</string>
     <string name="rendering_attr_weatherPressureContours_name">Légnyomás izobár vonalak</string>
-    <string name="routing_attr_avoid_highway_name">Főutak elkerülése</string>
-    <string name="routing_attr_avoid_highway_description">Autópályák elkerülése</string>
+    <string name="routing_attr_avoid_highway_name">Gyorsforgalmi utak elkerülése</string>
+    <string name="routing_attr_avoid_highway_description">Gyorsforgalmi utak elkerülése</string>
     <string name="routing_attr_hazmat_category_description">Veszélyes anyagok kategória / A kategóriára vonatkozó behajtási tilalmak figyelembevétele</string>
     <string name="routing_attr_hazmat_category_name">Veszélyes anyag kategória</string>
     <string name="map_widget_true_bearing">Valódi irány</string>
