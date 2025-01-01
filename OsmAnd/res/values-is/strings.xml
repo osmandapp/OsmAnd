@@ -4849,7 +4849,7 @@
     <string name="approximate_bearing_descr">Reikna miðun út frá leið sem verið er að fylgja.</string>
     <string name="open_issue_on_github">Opnaðu verkbeiðni á GitHub</string>
     <string name="about_osmand">Um OsmAnd</string>
-    <string name="local_indexes_category_terrain">Yfirborðskort (3D)</string>
+    <string name="local_indexes_category_terrain">Yfirborðskort (3D</string>
     <string name="user_guide">Notendahandbók</string>
     <string name="send_logcat_log_descr">Ítarleg atvikaskrá</string>
     <string name="average_glide_time_interval_desc">Skilgreindu tímabilin sem notuð verða til að reikna meðalrennsli.</string>
