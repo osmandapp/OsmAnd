@@ -4555,7 +4555,7 @@
     <string name="rendering_engine_failed_descr">Османд се је вратио на приказ карте „Издање 1“. Можете покушати да повратите нови начин погона приказа „Издање 2 (ОпенГЛ)“ у поставкама.
 \n
 \nМолим, подржите побољшања достављањем дневника грешака.</string>
-    <string name="rendering_engine_failed">Приказ карте Османда се је недавно срушило.</string>
+    <string name="rendering_engine_failed">Приказ карте Османда се недавно срушио.</string>
     <string name="map_rendering_engine_v2">Издање 2 (ОпенГЛ)</string>
     <string name="map_rendering_engine_descr">Издање 2 (ОпенГЛ) је бржи погон приказа карата, такође представља поглед 2.5. Издање 1 прегледа је било подразумевано пре Османда 4.3, које је и даље пожељно на старијим уређајима.</string>
     <string name="map_rendering_engine">Погон приказа карата</string>
