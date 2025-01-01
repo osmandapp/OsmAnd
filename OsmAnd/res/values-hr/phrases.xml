@@ -578,7 +578,7 @@
     <string name="poi_drinking_water_yes">Da;Pitka voda</string>
     <string name="poi_drinking_water_no">Ne</string>
     <string name="poi_supervised_no">Bez nadgledanja</string>
-    <string name="poi_seasonal_yes">Da</string>
+    <string name="poi_seasonal_yes">Da;Sezonsko</string>
     <string name="poi_seasonal_no">Ne</string>
     <string name="poi_access_permissive">Dozvoljen pristup</string>
     <string name="poi_seasonal_dry_season">Suho razdoblje</string>
