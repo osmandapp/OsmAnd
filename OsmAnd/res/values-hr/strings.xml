@@ -1298,7 +1298,7 @@
     <string name="file_can_not_be_moved">Nije bilo moguće premjestiti datoteku.</string>
     <string name="shared_string_move">Premjesti</string>
     <string name="routing_attr_driving_style_name">Stil vožnje</string>
-    <string name="altitude_descent">nizbrdica</string>
+    <string name="altitude_descent">Nizbrdica</string>
     <string name="altitude_ascent">Uzbrdica</string>
     <string name="altitude_range">Visinska razlika</string>
     <string name="average_altitude">Prosječna nadmorska visina</string>
@@ -1680,4 +1680,5 @@
     <string name="rendering_attr_surface_grass_name">Trava</string>
     <string name="routing_attr_avoid_ferry_name">Bez trajekata</string>
     <string name="rendering_attr_surface_snow_name">Snijeg</string>
+    <string name="rendering_attr_piste_type_downhill_name">Spust</string>
 </resources>
