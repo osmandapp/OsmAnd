@@ -4963,4 +4963,9 @@
     <string name="poi_route_activity_type_scuba_diving">Submarinismo</string>
     <string name="poi_route_activity_type_harvesting">Cosechar</string>
     <string name="poi_route_activity_type_swimming_outdoor">Natación al aire libre</string>
+    <string name="poi_cafe_filter">Cafetería</string>
+    <string name="poi_climbing_area">Área de escalada</string>
+    <string name="poi_climbing_route">Ruta de escalada</string>
+    <string name="poi_climbing_route_bottom">Ruta de escalada inferior</string>
+    <string name="poi_cafe_yes">Sí</string>
 </resources>
