@@ -4937,7 +4937,7 @@
     <string name="poi_route_article">Ferðagreinar</string>
     <string name="poi_route_article_point">Punktar ferðar</string>
     <string name="poi_route_track">Aðrar leiðir</string>
-    <string name="poi_route_track_point">Punktar í öðrum leiðum</string>
+    <string name="poi_route_track_point">Punktar í leið</string>
     <string name="poi_name_right">Nafn hægra megin</string>
     <string name="poi_name_etymology">Orðsifjar nafns</string>
     <string name="poi_name_left">Nafn vinstra megin</string>
