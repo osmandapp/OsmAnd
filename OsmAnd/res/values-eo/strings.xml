@@ -4704,7 +4704,7 @@
     <string name="y_axis">Akso Y</string>
     <string name="x_axis">Akso X</string>
     <string name="last_synchronized">Antaŭa samtempigo</string>
-    <string name="weight_limit_error">La minimuma valoro estas %1$s Mg. Uzu la profilon “%2$s”, se maso de via veturilo estas malpli ol la minimuma valoro.</string>
+    <string name="weight_limit_error">La minimuma valoro estas %1$s Mg. Uzu la profilon “%2$s”, se maso de via veturilo estas malpli ol la minimuma valoro.</string>
     <string name="share_link">Kunhavigi ligilon</string>
     <string name="share_as_file">Kunhavigi kiel dosieron</string>
     <string name="sound_beep_complex_loud">Sono: kompleksa laŭta</string>
@@ -4760,7 +4760,7 @@
     <string name="offline_cache">Kaŝmemoro</string>
     <string name="shared_string_alt_name">Alternativa nomo</string>
     <string name="free_maps_updates">Senpagaj ĝisdatigoj (krizaj)</string>
-    <string name="common_weight_limit_error">La minimuma valoro estas %1$s %2$s Uzu la profilon “%3$s”, se pezo de via veturilo estas malpli granda ol la minimuma valoro.</string>
+    <string name="common_weight_limit_error">La minimuma valoro estas %1$s %2$s. Uzu la profilon “%3$s”, se pezo de via veturilo estas malpli granda ol la minimuma valoro.</string>
     <string name="clear_online_cache_description">Forviŝi kaŝmemoron de enretaj veteraj kaheloj.</string>
     <string name="clear_online_cache">Forviŝi kaŝmemoron</string>
     <string name="token_is_not_valid">Ĵetono malvalida</string>
@@ -5664,4 +5664,8 @@
     <string name="default_buttons_corners_original_description">Ĉiu butono havos sian implicitan rondecon (radiuson de angulo).</string>
     <string name="default_buttons_opacity_original_description">Ĉiu butono havos sian implicitan travideblon de interna fono.</string>
     <string name="default_buttons_size_original_description">Ĉiu butono havos sian implicitan grandon.</string>
+    <string name="calculate_size">Kalkuli grandon</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Grimpadaj kursoj</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Montri grimpadajn kursojn</string>
+    <string name="calculating_indication_message">Kalkulado…</string>
 </resources>
