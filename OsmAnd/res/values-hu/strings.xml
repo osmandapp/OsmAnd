@@ -5298,7 +5298,7 @@
     <string name="remove_key_assignment">Gomb-hozzárendelés eltávolítása</string>
     <string name="tomorrow">Holnap</string>
     <string name="daynight_mode_day_summary">Mindig világos témával jeleníti meg a térképet, nappali fényviszonyokhoz ideális.</string>
-    <string name="daynight_mode_night_summary">Mindig sötét témában jeleníti meg a térképet, éjszaka vagy gyenge fényviszonyokhoz ideális.</string>
+    <string name="daynight_mode_night_summary">Mindig sötét témával jeleníti meg a térképet, éjszaka vagy gyenge fényviszonyokhoz ideális.</string>
     <string name="daynight_mode_app_theme_summary">A térkép megjelenése igazodik az alkalmazás általános témájához – nappali mód világos témához, éjszakai mód sötét témához</string>
     <string name="map_settings_weather_wind_animation">Szélanimáció</string>
     <string name="weather_source_ecmwf_title">ECMWF</string>
