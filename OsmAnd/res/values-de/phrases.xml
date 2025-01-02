@@ -3087,7 +3087,7 @@
     <string name="poi_motorcycle_tyres_no">Reifen: nein</string>
     <string name="poi_motorcycle_clothes_yes">Motorradbekleidung</string>
     <string name="poi_motorcycle_clothes_no">Motorradbekleidung: nein</string>
-    <string name="poi_motorcycle_type_scooter">Motorroller</string>
+    <string name="poi_motorcycle_type_scooter">Roller</string>
     <string name="poi_motorcycle_type_sportbike">Supersportler</string>
     <string name="poi_motorcycle_type_chopper">Chopper</string>
     <string name="poi_motorcycle_type_offroad">Gelände</string>
@@ -4949,4 +4949,18 @@
     <string name="poi_cafe_yes">ja</string>
     <string name="poi_route_activity_type_harvesting">Ernten</string>
     <string name="poi_climbing_area">Klettergebiet</string>
+    <string name="poi_route_activity_type_road_running">Straßenlauf</string>
+    <string name="poi_route_activity_type_trekking">Trekking</string>
+    <string name="poi_route_activity_type_road_cycling">Straßenradfahren</string>
+    <string name="poi_route_activity_type_gliding_sailplane">Segelfliegen (Segelflugzeug)</string>
+    <string name="poi_route_activity_type_hang_gliding">Drachenfliegen</string>
+    <string name="poi_route_activity_type_powered_paragliding_paramotoring">Motorisiertes Gleitschirmfliegen (Motorschirm)</string>
+    <string name="poi_route_activity_type_swimming_outdoor">Schwimmen im Freien</string>
+    <string name="poi_route_activity_type_tree_climbing">Baumklettern</string>
+    <string name="poi_route_activity_type_train_riding">Zugfahren</string>
+    <string name="poi_route_activity_type_motor_scooter">Motorroller</string>
+    <string name="poi_route_activity_type_trail_running">Geländelauf</string>
+    <string name="poi_route_activity_type_walking">Gehen</string>
+    <string name="poi_route_activity_type_cross_country_skiing">Langlauf</string>
+    <string name="poi_route_activity_type_ultralight_aviation">Ultraleichtfliegen</string>
 </resources>
