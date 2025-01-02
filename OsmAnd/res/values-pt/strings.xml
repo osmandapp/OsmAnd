@@ -4959,7 +4959,7 @@
     <string name="open_issue_on_github">Abrir problema no GitHub</string>
     <string name="about_osmand">Sobre o OsmAnd</string>
     <string name="enable_to_use_external_input_device">Permite usar um dispositivo de entrada externo com o OsmAnd</string>
-    <string name="local_indexes_category_terrain">Mapas de terreno (3D)</string>
+    <string name="local_indexes_category_terrain">Mapas de terreno (3D</string>
     <string name="key_event_action_change_map_orientation">Alterar orientação do mapa</string>
     <string name="user_guide">Guia do utilizador</string>
     <string name="smart_folder_name_present">Essa pasta inteligente já existe</string>
@@ -5656,4 +5656,7 @@
     <string name="obd_fuel_left_liters">Combustível restante (litros)</string>
     <string name="obd_fuel_consumption">Consumo de combustível</string>
     <string name="kpa_unit">kPa</string>
+    <string name="calculate_size">Calcular o tamanho</string>
+    <string name="default_buttons_size_original_description">Cada botão manteria o seu próprio tamanho.</string>
+    <string name="calculating_indication_message">A calcular…</string>
 </resources>
