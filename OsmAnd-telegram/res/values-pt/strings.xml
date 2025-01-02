@@ -244,7 +244,7 @@
     <string name="shared_string_hour_short">h</string>
     <string name="shared_string_minute_short">min</string>
     <string name="shared_string_second_short">seg</string>
-    <string name="welcome_descr"><b>OsmAnd Tracker</b> permite que partilhe a sua localização e veja a dos outros no OsmAnd.<br/> <br/>A aplicação usa a API do Telegram e é necessário ter uma conta no Telegram.</string>
+    <string name="welcome_descr"><![CDATA[<b>O OsmAnd Tracker</b> permite-o partilhar a sua localização e ver a dos outros no OsmAnd.<br/><br/>A aplicação usa a API do Telegram, por isso, é necessário ter uma conta no Telegram.]]></string>
     <string name="my_location">A minha posição</string>
     <string name="live_now">Ao vivo agora</string>
     <string name="timeline">Cronologia</string>
