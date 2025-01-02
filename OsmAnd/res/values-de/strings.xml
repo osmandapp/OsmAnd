@@ -2904,7 +2904,7 @@
     <string name="last_launch_crashed">Der letzte Start von OsmAnd ist fehlgeschlagen. Bitte helfen Sie uns, OsmAnd zu verbessern, indem Sie uns über diesen Fehler informieren.</string>
     <string name="release_3_4">• App-Profile: Benutzerdefiniertes Profil nach den eigenen Bedürfnissen mit benutzerdefiniertem Symbol und in eigener Farbe anlegen. \n \n• Benutzerdefinierte Standard- und Min/Max-Geschwindigkeiten für jedes Profil jetzt möglich \n \n• Widgets mit aktuellen Koordinaten hinzugefügt \n \n• Optionen für die Anzeige des Kompasses auf der Karte mit einem Radiuslineal ergänzt \n \n• Track-Aufnahmen im Hintergrund korrigiert \n \n• Verbesserte Kartendownloads im Hintergrund \n \n• Option „Bildschirm einschalten“ wieder hinzugefügt \n \n• Die Sprachauswahl in Wikipedia wurde korrigiert \n \n• Das Verhalten der Kompasstaste während der Navigation wurde korrigiert \n \n• Weitere Fehlerbehebungen</string>
     <string name="app_mode_monowheel">Einreifen</string>
-    <string name="app_mode_scooter">Motorroller</string>
+    <string name="app_mode_scooter">Roller</string>
     <string name="precision_hdop_and_vdop">Horizontale Genauigkeit: %1$s, vertikal: %2$s</string>
     <string name="precision_hdop">Horizontale Genauigkeit: %s</string>
     <string name="routing_attr_allow_skating_only_name">Nur Skating-Routen zulassen</string>
@@ -3736,7 +3736,7 @@
     <string name="routing_engine_vehicle_type_hgv">Lkw</string>
     <string name="routing_engine_vehicle_type_small_truck">Kleintransporter</string>
     <string name="routing_engine_vehicle_type_truck">Lkw</string>
-    <string name="routing_engine_vehicle_type_scooter">Motorroller</string>
+    <string name="routing_engine_vehicle_type_scooter">Roller</string>
     <string name="routing_engine_vehicle_type_racingbike">Rennrad</string>
     <string name="routing_engine_vehicle_type_mtb">Mountainbike</string>
     <string name="message_server_error">Server-Fehler: %1$s</string>
