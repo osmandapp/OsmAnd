@@ -121,6 +121,13 @@ public class FavouritesHelper {
 
 		boolean changed = merge(extGroups, groups);
 
+		// Fix issue #20957
+		// Prevent the loss of favorites and groups added when loading favorites from file
+		if (!Algorithms.isEmpty(flatGroups)) {
+			merge(flatGroups, groups);
+			changed = true;
+		}
+
 		flatGroups = groups;
 		favoriteGroups = new ArrayList<>(groups.values());
 
@@ -131,7 +138,7 @@ public class FavouritesHelper {
 		// Force save favorites to file if internals are different from externals
 		// or no favorites created yet or legacy favourites.gpx present
 		if (changed || !fileHelper.getExternalDir().exists() || legacyExternalFile.exists()) {
-			saveCurrentPointsIntoFile(false);
+			forceSaveCurrentPointsIntoFile();
 			// Delete legacy favourites.gpx if exists
 			if (legacyExternalFile.exists()) {
 				legacyExternalFile.delete();
@@ -207,7 +214,8 @@ public class FavouritesHelper {
 		listeners.remove(listener);
 	}
 
-	private boolean merge(Map<String, FavoriteGroup> source, Map<String, FavoriteGroup> destination) {
+	private boolean merge(@NonNull Map<String, FavoriteGroup> source,
+	                      @NonNull Map<String, FavoriteGroup> destination) {
 		boolean changed = false;
 		for (Map.Entry<String, FavoriteGroup> entry : source.entrySet()) {
 			String key = entry.getKey();
@@ -481,10 +489,19 @@ public class FavouritesHelper {
 	}
 
 	public void saveCurrentPointsIntoFile(boolean async) {
+		saveCurrentPointsIntoFileImpl(false, async);
+	}
+
+	private void forceSaveCurrentPointsIntoFile() {
+		saveCurrentPointsIntoFileImpl(true, false);
+	}
+
+	private void saveCurrentPointsIntoFileImpl(boolean force, boolean async) {
 		updateLastModifiedTime();
-		SaveFavoritesListener listener = this::onFavouritePropertiesUpdated;
+		if (!force && !isFavoritesLoaded()) return;
 
 		List<FavoriteGroup> groups = new ArrayList<>(favoriteGroups);
+		SaveFavoritesListener listener = this::onFavouritePropertiesUpdated;
 		if (async) {
 			fileHelper.saveFavoritesIntoFile(groups, listener);
 		} else {
