@@ -6056,4 +6056,8 @@
     <string name="default_buttons_corners_original_description">Setiap tombol tetap memiliki radius bulatnya sendiri.</string>
     <string name="default_buttons_size_original_description">Setiap tombol tetap memiliki ukurannya sendiri.</string>
     <string name="default_buttons_opacity_original_description">Setiap tombol tetap memiliki opasitas latar belakangnya sendiri.</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Rute pendakian</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Tampilkan rute pendakian</string>
+    <string name="calculating_indication_message">Menghitung…</string>
+    <string name="calculate_size">Hitung ukuran</string>
 </resources>
