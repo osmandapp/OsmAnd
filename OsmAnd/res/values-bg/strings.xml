@@ -2568,7 +2568,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Предпочитане на пътища без настилка.</string>
     <string name="routing_attr_prefer_unpaved_description">Предпочитане на селски пътища.</string>
     <string name="osm_live_payment_discount_descr">Спестете %1$s</string>
-    <string name="quick_action_toggle_preference">Превключете за промяна на настройката.</string>
+    <string name="quick_action_toggle_preference">Превключвател за промяна на настройката.</string>
     <string name="routing_attr_prefer_horse_routes_description">Предпочитане на конни маршрути</string>
     <string name="routing_attr_prefer_hiking_routes_description">Предпочитане на пешеходни маршрути</string>
     <string name="routing_attr_prefer_hiking_routes_name">Предпочитане на пешеходни маршрути</string>
@@ -4596,4 +4596,14 @@
     <string name="quick_action_terrain_color_scheme">Цветова схема на релефа</string>
     <string name="quick_action_terrain">Вид оцветяване на релефа</string>
     <string name="quick_action_to_my_location">Към моето местоположение</string>
+    <string name="quick_action_map_source_switch">Източникът на карти променен на „%s“.</string>
+    <string name="quick_action_move_map_left">Движение наляво</string>
+    <string name="quick_action_move_map_right">Движение надясно</string>
+    <string name="quick_action_empty_param_error">Попълнете всички параметри</string>
+    <string name="quick_action_duplicate">Установено е дублиране на имена</string>
+    <string name="quick_action_gpx_category_descr">Изберете незадължителна категория.</string>
+    <string name="quick_action_interim_dialog">Показване на междинен диалогов прозорец</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Запазване на пътуването и напред</string>
+    <string name="quick_action_display_position_in_center">Показване на позицията винаги в центъра</string>
+    <string name="quick_action_show_navigation_finish_dialog">Показване на диалога за край на маршрутизиране</string>
 </resources>
