@@ -275,4 +275,5 @@
     <string name="send_live_location_error">Greška prilikom slanja trenutne lokacije: %1$s</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s – %2$s</string>
     <string name="location_source">Izvor lokacije</string>
+    <string name="location_source_summary">OsmAnd instaliran s Google Playa standardno koristi Google Play usluge za određivanje lokacije.\n\nAko dobiješ netočne podatke o lokaciji ili ako koristiš uređaj bez Google Play usluga, pokušaj se prebaciti na Android API</string>
 </resources>
