@@ -173,15 +173,14 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	}
 
 	public void setTurnType(TurnType turnType) {
-		if (verticalWidget) {
-			this.turnType = turnType;
-			if (turnDrawable.setTurnType(turnType)) {
+		this.turnType = turnType;
+		boolean visibilityUpdated = !verticalWidget && updateVisibility(turnType != null);
+		if (turnDrawable.setTurnType(turnType) || visibilityUpdated) {
+			turnDrawable.updateColors(isNightMode());
+			if (verticalWidget) {
 				setVerticalImage(turnDrawable);
-			}
-		} else {
-			boolean vis = updateVisibility(turnType != null);
-			if (turnDrawable.setTurnType(turnType) || vis) {
-				turnDrawable.updateColors(textPaint, isNightMode());
+			} else {
+				turnDrawable.updateTextPaint(textPaint, nightMode);
 				if (horizontalMini) {
 					setImageDrawable(turnDrawable, false);
 				} else {
@@ -349,8 +348,8 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 
 			textPaint.set(topTextView.getPaint());
 			textPaint.setColor(textState.textColor);
-			turnDrawable.updateColors(textPaint, isNightMode());
-			turnDrawable.invalidateSelf();
+			turnDrawable.updateTextPaint(textPaint, isNightMode());
+			turnDrawable.updateColors(isNightMode());
 		}
 	}
 
@@ -369,6 +368,8 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		distanceView.setTypeface(Typeface.DEFAULT, typefaceStyle);
 		distanceSubView.setTypeface(Typeface.DEFAULT, typefaceStyle);
 		streetView.setTypeface(Typeface.DEFAULT, typefaceStyle);
+
+		turnDrawable.updateColors(isNightMode());
 
 		bg.setBackgroundResource(textState.widgetBackgroundId);
 	}
