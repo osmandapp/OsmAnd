@@ -4904,7 +4904,7 @@
     <string name="poi_route_activity_type_car">Auto</string>
     <string name="poi_route_activity_type_e_biking">E-biken</string>
     <string name="poi_route_activity_type_off_road">Off-Road</string>
-    <string name="poi_route_activity_type_all_terrain_vehicle">ATV</string>
+    <string name="poi_route_activity_type_all_terrain_vehicle">ATV (All-Terrain Vehicle)</string>
     <string name="poi_route_activity_type_truck_hgv">LKW</string>
     <string name="poi_route_activity_type_adventure_motorcycling">Abenteuer Motorradsport</string>
     <string name="poi_route_activity_type_enduro_motorcycling">Enduro Motorradsport</string>
@@ -4964,4 +4964,8 @@
     <string name="poi_route_activity_type_cross_country_skiing">Langlauf</string>
     <string name="poi_route_activity_type_ultralight_aviation">Ultraleichtfliegen</string>
     <string name="poi_route_activity_type_aviation">Luftfahrt</string>
+    <string name="poi_route_activity_type_touring_motorcycling">Tourenmotoradfahren</string>
+    <string name="poi_route_activity_type_touring">Touring</string>
+    <string name="poi_route_activity_type_gravel_biking">Gravel-Bike fahren</string>
+    <string name="poi_climbing_route_bottom">Anfangsstück der Kletterroute</string>
 </resources>
