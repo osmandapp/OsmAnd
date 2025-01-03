@@ -119,11 +119,14 @@ public class QuickSearchListItem {
 	}
 
 	public String getTypeName() {
+		return getExtendedTypeName(app, searchResult);
+	}
+
+	public static String getExtendedTypeName(OsmandApplication app, SearchResult searchResult) {
 		String typeName = getTypeName(app, searchResult);
 		String alternateName = searchResult.alternateName;
-		if (searchResult.object instanceof Amenity) {
-			Amenity amenity = (Amenity) searchResult.object;
-			alternateName = amenity.getTranslation(app.getPoiTypes(), searchResult.alternateName);
+		if (searchResult.object instanceof Amenity amenity) {
+            alternateName = amenity.getTranslation(app.getPoiTypes(), searchResult.alternateName);
 		}
 		return alternateName != null ? typeName + " • " + alternateName : typeName;
 	}
