@@ -350,7 +350,6 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			textPaint.setColor(textState.textColor);
 			turnDrawable.updateTextPaint(textPaint, isNightMode());
 			turnDrawable.updateColors(isNightMode());
-			turnDrawable.invalidateSelf();
 		}
 	}
 
@@ -371,7 +370,6 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		streetView.setTypeface(Typeface.DEFAULT, typefaceStyle);
 
 		turnDrawable.updateColors(isNightMode());
-		turnDrawable.invalidateSelf();
 
 		bg.setBackgroundResource(textState.widgetBackgroundId);
 	}
