@@ -1690,4 +1690,10 @@
     <string name="last_seven_days">Zadnjih 7 dana</string>
     <string name="map_markers_other">Druge oznake</string>
     <string name="shared_string_two">Dva</string>
+    <string name="dd_mm_mmmm_format">DD°MM.MMMM′</string>
+    <string name="dd_dddddd_format">DD.DDDDDD°</string>
+    <string name="shared_string_without_name">Bez imena</string>
+    <string name="dd_mm_ss_format">DD°MM′SS″</string>
+    <string name="dd_ddddd_format">DD.DDDDD°</string>
+    <string name="dd_mm_mmm_format">DD°MM.MMM′</string>
 </resources>
