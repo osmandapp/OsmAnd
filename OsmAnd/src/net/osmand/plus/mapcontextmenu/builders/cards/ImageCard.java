@@ -125,7 +125,8 @@ public abstract class ImageCard extends AbstractCard {
 					this.externalLink = imageObject.getBoolean("externalLink");
 				}
 				if (imageObject.has("topIcon") && !imageObject.isNull("topIcon")) {
-					this.topIconId = AndroidUtils.getDrawableId(getMyApplication(), imageObject.getString("topIcon"));
+					String topIcon = imageObject.getString("topIcon");
+					this.topIconId = AndroidUtils.getDrawableId(getMyApplication(), topIcon);
 				}
 				if (imageObject.has("buttonIcon") && !imageObject.isNull("buttonIcon")) {
 					this.buttonIconId = AndroidUtils.getDrawableId(getMyApplication(), imageObject.getString("buttonIcon"));
