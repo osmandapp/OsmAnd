@@ -118,7 +118,7 @@ public class WptPtMenuController extends MenuController {
 			this.wpt = (WptPt) object;
 
 			if (builder instanceof WikivoyageWptPtMenuBuilder) {
-				((WikivoyageWptPtMenuBuilder) builder).updateDescriptionTokens(wpt);
+				((WikivoyageWptPtMenuBuilder) builder).updateImageLinkAndDescriptionTokens(wpt);
 			}
 		}
 	}

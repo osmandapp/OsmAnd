@@ -26,8 +26,11 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.local.CategoryType;
 import net.osmand.plus.download.local.LocalCategory;
 import net.osmand.plus.download.local.LocalGroup;
+import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemsLoaderTask;
 import net.osmand.plus.download.local.LocalItemsLoaderTask.LoadItemsListener;
+import net.osmand.plus.download.local.LocalSizeCalculationListener;
+import net.osmand.plus.download.local.LocalSizeController;
 import net.osmand.plus.download.local.dialogs.CategoriesAdapter.LocalTypeListener;
 import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
 import net.osmand.plus.importfiles.ImportTaskListener;
@@ -40,7 +43,7 @@ import java.util.Map;
 
 
 public class LocalCategoriesFragment extends LocalBaseFragment implements DownloadEvents,
-		LocalTypeListener, LoadItemsListener, ImportTaskListener {
+		LocalTypeListener, LoadItemsListener, ImportTaskListener, LocalSizeCalculationListener {
 
 	private MemoryInfo memoryInfo;
 	private Map<CategoryType, LocalCategory> categories;
@@ -130,6 +133,7 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 	public void onResume() {
 		super.onResume();
 		app.getImportHelper().addImportTaskListener(this);
+		LocalSizeController.addCalculationListener(app, this);
 		if (categories == null && (asyncLoader == null || asyncLoader.getStatus() == Status.FINISHED)) {
 			reloadData();
 		}
@@ -139,6 +143,7 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 	public void onDestroy() {
 		super.onDestroy();
 		app.getImportHelper().removeImportTaskListener(this);
+		LocalSizeController.removeCalculationListener(app, this);
 		if (asyncLoader != null && asyncLoader.getStatus() == Status.RUNNING) {
 			asyncLoader.cancel(false);
 		}
@@ -227,6 +232,14 @@ public class LocalCategoriesFragment extends LocalBaseFragment implements Downlo
 		FragmentManager manager = getFragmentManager();
 		if (manager != null) {
 			LocalItemsFragment.showInstance(manager, group.getType(), this);
+		}
+	}
+
+	@Override
+	public void onSizeCalculationEvent(@NonNull LocalItem localItem) {
+		LocalGroup localGroup = adapter.getLocalGroup(localItem.getType());
+		if (localGroup != null) {
+			adapter.updateItem(localGroup);
 		}
 	}
 }

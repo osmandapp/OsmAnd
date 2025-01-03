@@ -792,27 +792,29 @@ public class SearchCoreFactory {
 			// }
 			for (PoiCategory c : categories) {
 				PoiTypeResult res = checkPoiType(nm, c);
-				if(res != null) {
+				if (res != null) {
 					results.put(res.pt.getKeyName(), res);
 				}
 				if (nmAdditional != null) {
 					addAditonals(nmAdditional, results, c);
 				}
 			}
+			Map<String, PoiTypeResult> additionals = new LinkedHashMap<>();
 			Iterator<Entry<String, PoiType>> it = translatedNames.entrySet().iterator();
 			while (it.hasNext()) {
 				Entry<String, PoiType> e = it.next();
 				PoiType pt = e.getValue();
 				if (pt.getCategory() != types.getOtherMapCategory() && !pt.isReference()) {
 					PoiTypeResult res = checkPoiType(nm, pt);
-					if(res != null) {
+					if (res != null) {
 						results.put(res.pt.getKeyName(), res);
 					}
 					if (nmAdditional != null) {
-						addAditonals(nmAdditional, results, pt);
+						addAditonals(nmAdditional, additionals, pt);
 					}
 				}
 			}
+			results.putAll(additionals); // results ordered by: top, categories, types, additional
 			return results;
 		}
 

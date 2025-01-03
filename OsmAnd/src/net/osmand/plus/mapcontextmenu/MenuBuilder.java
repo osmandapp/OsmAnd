@@ -38,6 +38,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.NativeLibrary.RenderedObject;
@@ -594,6 +595,7 @@ public class MenuBuilder {
 	}
 
 	protected void buildTopInternal(View view) {
+		buildMainImage(view);
 		buildDescription(view);
 		if (showLocalTransportRoutes()) {
 			buildRow(view, 0, null, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false, false),
@@ -605,6 +607,25 @@ public class MenuBuilder {
 			buildRow(view, 0, null, routesWithingDistance, 0, true, collapsableView,
 					false, 0, false, null, true);
 		}
+	}
+
+	@Nullable
+	protected AppCompatImageView inflateAndGetMainImageView(@NonNull View view) {
+		AppCompatImageView imageView = view.findViewById(R.id.main_image);
+		if (imageView == null) {
+			ViewGroup container = (ViewGroup) view;
+			View image = UiUtilities
+					.getInflater(mapActivity, !isLightContent())
+					.inflate(R.layout.gpx_main_image, container, false);
+			if (image != null) {
+				container.addView(image);
+				imageView = image.findViewById(R.id.main_image);
+			}
+		}
+		return imageView;
+	}
+
+	protected void buildMainImage(View view) {
 	}
 
 	protected void buildDescription(View view) {

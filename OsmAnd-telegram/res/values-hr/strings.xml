@@ -92,7 +92,7 @@
     <string name="privacy">Privatnost</string>
     <string name="direction">Smjer</string>
     <string name="precision">Točnost</string>
-    <string name="altitude">Nadmorska visina</string>
+    <string name="altitude">Visina</string>
     <string name="bearing">Usmjerenje</string>
     <string name="search_contacts">Traži kontakte</string>
     <string name="search_contacts_descr">Pretraži sve svoje grupe i kontakte.</string>
@@ -274,4 +274,5 @@
     <string name="shared_string_error">Greška</string>
     <string name="send_live_location_error">Greška prilikom slanja trenutne lokacije: %1$s</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s – %2$s</string>
+    <string name="location_source">Izvor lokacije</string>
 </resources>

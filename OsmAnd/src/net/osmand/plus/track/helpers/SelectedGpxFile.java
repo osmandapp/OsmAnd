@@ -3,11 +3,15 @@ package net.osmand.plus.track.helpers;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.TrackArea;
 import net.osmand.data.QuadRect;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.shared.SharedUtil;
+import net.osmand.plus.views.OsmandMap;
+import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
@@ -15,9 +19,6 @@ import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.views.OsmandMap;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -172,8 +173,13 @@ public class SelectedGpxFile {
 		boolean hasCalculatedBounds = !bounds.hasInitialState();
 		if (hasCalculatedBounds) {
 			// Update already calculated bounds without iterating all points
-			GpxUtilities.INSTANCE.updateBounds(
-					SharedUtil.kQuadRect(bounds), Collections.singletonList(point), 0);
+			KQuadRect kQuadRect = SharedUtil.kQuadRect(bounds);
+			GpxUtilities.INSTANCE.updateBounds(kQuadRect, Collections.singletonList(point), 0);
+
+			bounds.right = kQuadRect.getRight();
+			bounds.left = kQuadRect.getLeft();
+			bounds.top = kQuadRect.getTop();
+			bounds.bottom = kQuadRect.getBottom();
 		} else {
 			updateBounds();
 		}

@@ -4900,4 +4900,5 @@
     <string name="poi_name_right">Nome do lado direito</string>
     <string name="poi_route_article">Artigos de viagem</string>
     <string name="poi_route_article_point">Pontos de viagem</string>
+    <string name="poi_route_activity_type_car">Carro</string>
 </resources>

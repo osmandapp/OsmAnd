@@ -5533,4 +5533,8 @@
     <string name="default_buttons_corners_original_description">Cada botón mantendría su propio radio de esquina.</string>
     <string name="default_buttons_opacity_original_description">Cada botón mantendría su propia opacidad de fondo.</string>
     <string name="default_buttons_size_original_description">Cada botón mantendría su propio tamaño.</string>
+    <string name="calculating_indication_message">Calculando…</string>
+    <string name="calculate_size">Calcular tamaño</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Rutas de escalada</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Mostrar rutas de escalada</string>
 </resources>

@@ -78,7 +78,7 @@ public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWa
 				}
 			}
 		}
-		resetSymbolProviders();
+		resetArrowsProvider();
 	}
 
 	protected void updateTrack3DStyle(@NonNull GeometryWayStyle<?> style, @Nullable Track3DStyle track3DStyle) {

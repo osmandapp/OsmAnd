@@ -39,6 +39,8 @@ import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.download.local.LocalOperationTask;
+import net.osmand.plus.download.local.LocalSizeCalculationListener;
+import net.osmand.plus.download.local.LocalSizeController;
 import net.osmand.plus.download.local.OperationType;
 import net.osmand.plus.download.local.dialogs.LocalItemsAdapter.LocalItemListener;
 import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
@@ -55,7 +57,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class LocalItemsFragment extends LocalBaseFragment implements LocalItemListener, MapsSortModeListener {
+public class LocalItemsFragment extends LocalBaseFragment implements LocalItemListener,
+		MapsSortModeListener, LocalSizeCalculationListener {
 
 	public static final String TAG = LocalItemsFragment.class.getSimpleName();
 
@@ -69,6 +72,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 
 	private LocalItemsAdapter adapter;
 	private boolean selectionMode;
+	private MemoryInfo memoryInfo;
 
 	@Override
 	@ColorRes
@@ -226,6 +230,16 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	}
 
 	private void addMemoryInfo(@NonNull List<Object> items) {
+		memoryInfo = new MemoryInfo();
+		List<MemoryItem> memoryItems = calculateMemoryItems();
+		if (memoryItems != null) {
+			memoryInfo.setItems(memoryItems);
+			items.add(0, memoryInfo);
+		}
+	}
+
+	@Nullable
+	private List<MemoryItem> calculateMemoryItems() {
 		LocalGroup group = getGroup();
 		LocalCategory category = getCategory();
 		if (group != null && category != null) {
@@ -243,9 +257,9 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 			int color = ColorUtilities.getColor(app, category.getType().getColorId());
 			String text = getString(R.string.ltr_or_rtl_combine_via_dash, title, AndroidUtils.formatSize(app, category.getSize()));
 			memoryItems.add(new MemoryItem(text, category.getSize() - group.getSize(), color));
-
-			items.add(0, new MemoryInfo(memoryItems));
+			return memoryItems;
 		}
+		return null;
 	}
 
 	@Override
@@ -257,12 +271,14 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	public void onResume() {
 		super.onResume();
 		updateToolbar();
+		LocalSizeController.addCalculationListener(app, this);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		updateToolbar();
+		LocalSizeController.removeCalculationListener(app, this);
 
 		DownloadActivity activity = getDownloadActivity();
 		if (activity != null) {
@@ -359,6 +375,16 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 		if (isAdded()) {
 			updateAdapter();
 		}
+	}
+
+	@Override
+	public void onSizeCalculationEvent(@NonNull LocalItem localItem) {
+		List<MemoryItem> memoryItems = calculateMemoryItems();
+		if (memoryItems != null) {
+			memoryInfo.setItems(memoryItems);
+			adapter.updateItem(memoryInfo);
+		}
+		adapter.updateItem(localItem);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull LocalItemType type, @Nullable Fragment target) {

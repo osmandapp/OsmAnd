@@ -2,12 +2,18 @@ package net.osmand.plus.mapcontextmenu.builders;
 
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NEAREST_POI_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NEAREST_WIKI_KEY;
+import static net.osmand.plus.wikivoyage.data.TravelObfHelper.TAG_URL;
+import static net.osmand.plus.wikivoyage.data.TravelObfHelper.WPT_EXTRA_TAGS;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -16,11 +22,13 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
+import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Type;
 import java.util.Map;
 
 public class AmenityMenuBuilder extends MenuBuilder {
@@ -50,6 +58,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
+		if (amenity.isRoutePoint()) {
+			processRoutePointAmenityTags(view);
+		}
+
 		rowsBuilder = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), additionalInfo);
 		rowsBuilder.setLight(isLightContent());
 		rowsBuilder.setLatLon(getLatLon());
@@ -61,6 +73,26 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		rowsBuilder.buildNamesRow((ViewGroup) view, amenity.getNamesMap(true), false);
 		if (!rowsBuilder.isFirstRow()) {
 			firstRow = rowsBuilder.isFirstRow();
+		}
+	}
+
+	private void processRoutePointAmenityTags(View view) {
+		final String wptExtraTags = additionalInfo.get(WPT_EXTRA_TAGS);
+		if (!Algorithms.isEmpty(wptExtraTags)) {
+			Gson gson = new Gson();
+			Type type = new TypeToken<Map<String, String>>() {}.getType();
+			additionalInfo.putAll(gson.fromJson(wptExtraTags, type));
+			additionalInfo.remove(WPT_EXTRA_TAGS);
+		}
+		final String url = additionalInfo.get(TAG_URL);
+		if (PicassoUtils.isImageUrl(url)) {
+			AppCompatImageView imageView = inflateAndGetMainImageView(view);
+			PicassoUtils.setupImageViewByUrl(app, imageView, url, true);
+		}
+		final String description = additionalInfo.get(Amenity.DESCRIPTION);
+		if (!Algorithms.isEmpty(description)) {
+			buildDescriptionRow(view, description);
+			additionalInfo.remove(Amenity.DESCRIPTION);
 		}
 	}
 

@@ -5458,4 +5458,8 @@
     <string name="default_buttons_size_original_description">Choimeádfadh gach cnaipe a mhéid féin.</string>
     <string name="default_buttons_corners_original_description">Choimeádfadh gach cnaipe a gha cúinne féin.</string>
     <string name="default_buttons_opacity_original_description">Choimeádfadh gach cnaipe a chúlra féin teimhneacht.</string>
+    <string name="calculating_indication_message">Ag ríomh…</string>
+    <string name="calculate_size">Ríomh méid</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Bealaí dreapadóireachta</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Taispeáin bealaí dreapadóireachta</string>
 </resources>
