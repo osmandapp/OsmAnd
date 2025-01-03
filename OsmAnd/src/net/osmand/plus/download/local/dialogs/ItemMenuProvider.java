@@ -128,7 +128,7 @@ public class ItemMenuProvider implements MenuProvider {
 					return true;
 				});
 			}
-			if (localItem.isSizeCalculationLimitReached() && !localItem.isSizeCalculating(app)) {
+			if (type == TILES_DATA) {
 				menuItem = menu.add(0, R.string.calculate_size, Menu.NONE, R.string.calculate_size);
 				menuItem.setIcon(getIcon(R.drawable.ic_action_file_info, colorId));
 				menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -136,8 +136,6 @@ public class ItemMenuProvider implements MenuProvider {
 					LocalSizeController.calculateFullSize(app, localItem);
 					return true;
 				});
-			}
-			if (type == TILES_DATA) {
 				Object object = localItem.getAttachedObject();
 				if ((object instanceof TileSourceTemplate) || ((object instanceof SQLiteTileSource)
 						&& ((SQLiteTileSource) object).couldBeDownloadedFromInternet())) {
