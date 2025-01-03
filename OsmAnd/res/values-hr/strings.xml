@@ -1681,7 +1681,7 @@
     <string name="routing_attr_avoid_ferry_name">Bez trajekata</string>
     <string name="rendering_attr_surface_snow_name">Snijeg</string>
     <string name="rendering_attr_piste_type_downhill_name">Spust</string>
-    <string name="start_editing_card_image_text">Besplatni svjetski turistički vodič svatko može urediti.</string>
+    <string name="start_editing_card_image_text">Besplatni svjetski turistički vodič koji svatko može urediti.</string>
     <string name="quick_action_edit_actions">Uredi radnje</string>
     <string name="external_sensor_widgets">Vanjski senzori</string>
     <string name="read_wikipedia_offline">Čitaj Wikipediju bez internetske veze</string>
