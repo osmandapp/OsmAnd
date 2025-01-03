@@ -5,25 +5,68 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ListView;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.core.jni.LatLon;
+import net.osmand.data.QuadRect;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.search.GetNearbyImagesTask;
+import net.osmand.plus.search.NearbyAdapter;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.fragments.HistoryItemsFragment;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.Algorithms;
+import net.osmand.wiki.WikiCoreHelper;
 
+import java.util.Collections;
 import java.util.List;
 
-public class QuickSearchHistoryListFragment extends QuickSearchListFragment {
+public class QuickSearchHistoryListFragment extends QuickSearchListFragment implements NearbyAdapter.NearbyItemClickListener {
 
-	public static final int TITLE = R.string.shared_string_history;
+	public static final int TITLE = R.string.shared_string_explore;
 
 	private boolean selectionMode;
+	private View nearByContainer;
+	private RecyclerView nearByList;
+	private NearbyAdapter adapter = new NearbyAdapter(Collections.emptyList(), this);
+
+	public void onNearbyItemClicked(@NonNull WikiCoreHelper.OsmandApiFeatureData item) {
+
+	}
+
+	private final GetNearbyImagesTask.GetImageCardsListener imageCardListener = new GetNearbyImagesTask.GetImageCardsListener() {
+		@Override
+		public void onTaskStarted() {
+
+		}
+
+		@Override
+		public void onFinish(@NonNull List<? extends WikiCoreHelper.OsmandApiFeatureData> result) {
+			updateNearbyItems(result);
+		}
+	};
+
+	private void updateNearbyItems(@NonNull List<? extends WikiCoreHelper.OsmandApiFeatureData> result) {
+		if (nearByContainer != null) {
+			nearByContainer.setVisibility(result.isEmpty() ? View.GONE : View.VISIBLE);
+		}
+		adapter.setItems(result);
+	}
 
 	@Override
 	public SearchListFragmentType getType() {
 		return SearchListFragmentType.HISTORY;
+	}
+
+	@LayoutRes
+	protected int getLayoutId() {
+		return R.layout.search_explore_fragment_layout;
 	}
 
 	public boolean isSelectionMode() {
@@ -72,5 +115,37 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment {
 		} else {
 			super.onListItemClick(listView, view, position, id);
 		}
+	}
+
+	@Override
+	public void updateListAdapter(List<QuickSearchListItem> listItems, boolean append, boolean addShadows) {
+		super.updateListAdapter(listItems, append, false);
+	}
+
+	@Override
+	public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		startLoadingNearestPhotos();
+		setupNearByCard(view);
+	}
+
+	private void setupNearByCard(@NonNull View view) {
+		nearByContainer = view.findViewById(R.id.nearBy_container);
+		nearByList = view.findViewById(R.id.nearByList);
+		LinearLayoutManager layoutManager = new LinearLayoutManager(app);
+		layoutManager.setOrientation(RecyclerView.HORIZONTAL);
+		nearByList.setLayoutManager(layoutManager);
+		nearByList.setItemAnimator(null);
+		nearByList.setAdapter(adapter);
+	}
+
+	private void startLoadingNearestPhotos() {
+		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+		QuadRect mapRect = mapView.getCurrentRotatedTileBox().getLatLonBounds();
+		String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+		if (Algorithms.isEmpty(preferredLang)) {
+			preferredLang = app.getLanguage();
+		}
+		(new GetNearbyImagesTask(mapRect, mapView.getZoom(), preferredLang, imageCardListener)).execute();
 	}
 }

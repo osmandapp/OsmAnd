@@ -587,7 +587,7 @@ public class MenuBuilder {
 	}
 
 	protected Map<String, String> getAdditionalCardParams() {
-		return null;
+		return Collections.emptyMap();
 	}
 
 	protected void buildInternal(View view) {
