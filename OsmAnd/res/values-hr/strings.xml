@@ -1686,4 +1686,5 @@
     <string name="external_sensor_widgets">Vanjski senzori</string>
     <string name="read_wikipedia_offline">Čitaj Wikipediju bez internetske veze</string>
     <string name="coordinates_widget_current_location">Koordinate: Trenutačni položaj</string>
+    <string name="unlimited_downloads">Neograničeno preuzimanje</string>
 </resources>
