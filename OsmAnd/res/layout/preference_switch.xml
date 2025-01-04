@@ -63,7 +63,6 @@
                 android:text="some preference path"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:visibility="gone" />
-
         </LinearLayout>
 
         <View
