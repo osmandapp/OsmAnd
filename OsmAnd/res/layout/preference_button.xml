@@ -53,21 +53,7 @@
                 app:typefaceWeight="medium"
                 tools:text="Button text" />
 
-            <TextView
-                android:id="@id/searchable_info"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="some searchable info"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@id/preference_path"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="some preference path"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:visibility="gone" />
+            <include layout="@layout/searchable_info_and_preference_path" />
 
             <View
                 android:id="@+id/divider"
