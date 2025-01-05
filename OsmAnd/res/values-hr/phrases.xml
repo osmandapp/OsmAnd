@@ -360,9 +360,9 @@
     <string name="poi_sightseeing">Razgledavanje</string>
     <string name="poi_cafe_and_restaurant">Kafić i restoran</string>
     <string name="poi_finance">Financije</string>
-    <string name="poi_natural">Prirodno</string>
+    <string name="poi_natural">Priroda</string>
     <string name="poi_military">Vojska</string>
-    <string name="poi_osmwiki">Wikipedia</string>
+    <string name="poi_osmwiki">Wikipedija</string>
     <string name="poi_user_defined_other">Korisnički određeno</string>
     <string name="poi_bakery">Pekara</string>
     <string name="poi_cheese">Prodavaonica sireva</string>
@@ -547,10 +547,10 @@
     <string name="poi_military_bunker">Vojni bunker</string>
     <string name="poi_military_barracks">Barake</string>
     <string name="poi_military_office">Vojni ured</string>
-    <string name="poi_wiki_place">Wikipedia</string>
+    <string name="poi_wiki_place">Wikipedija</string>
     <string name="poi_cycle_barrier">Biciklistička prepreka</string>
     <string name="poi_block">Blok</string>
-    <string name="poi_debris">Smeće</string>
+    <string name="poi_debris">Ruševina</string>
     <string name="poi_entrance_main">Glavni ulaz</string>
     <string name="poi_entrance">Ulaz</string>
     <string name="poi_entrance_exit">Izlaz</string>
@@ -1007,7 +1007,7 @@
     <string name="poi_fire_operator">Vatrogasac</string>
     <string name="poi_water_tank">Cisterna</string>
     <string name="poi_length">Duljina</string>
-    <string name="poi_wiki_link">Wikipedia</string>
+    <string name="poi_wiki_link">Wikipedija</string>
     <string name="poi_cuisine">Kuhinja</string>
     <string name="poi_cuisine_pizza">Pizza</string>
     <string name="poi_cuisine_coffee">Kava</string>
@@ -2142,4 +2142,6 @@
     <string name="poi_generator_source_oil">Izvor energije: nafta</string>
     <string name="poi_crossing_unmarked">Neoznačeno</string>
     <string name="poi_toll_hgv_yes">Cestarina za kamione</string>
+    <string name="poi_craft">Radionica</string>
+    <string name="poi_route_activity_type_car">Auto</string>
 </resources>
