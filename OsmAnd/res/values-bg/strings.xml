@@ -2072,7 +2072,7 @@
     <string name="recalculate_route_distance_promo">Маршрутът ще бъде преизчислен, ако разстоянието от маршрута до текущото местоположение е повече от избраната стойност.</string>
     <string name="n_items_of_z">%1$s от %2$s</string>
     <string name="download_slope_maps">Склонове</string>
-    <string name="quick_action_terrain_descr">Бутон, превключващ слой с терена върху картата.</string>
+    <string name="quick_action_terrain_descr">Превключване на слой с терена на картата.</string>
     <string name="delete_description">Изтриване на описанието</string>
     <string name="add_description">Добавете описание</string>
     <string name="select_group">Изберете група</string>
@@ -2568,7 +2568,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Предпочитане на пътища без настилка.</string>
     <string name="routing_attr_prefer_unpaved_description">Предпочитане на селски пътища.</string>
     <string name="osm_live_payment_discount_descr">Спестете %1$s</string>
-    <string name="quick_action_toggle_preference">Превключвател за промяна на настройката.</string>
+    <string name="quick_action_toggle_preference">Променя настройка.</string>
     <string name="routing_attr_prefer_horse_routes_description">Предпочитане на конни маршрути</string>
     <string name="routing_attr_prefer_hiking_routes_description">Предпочитане на пешеходни маршрути</string>
     <string name="routing_attr_prefer_hiking_routes_name">Предпочитане на пешеходни маршрути</string>
@@ -2580,7 +2580,7 @@
     <string name="apply_preference_to_all_profiles">Прилагане на промяната към всички или към избраните профили.</string>
     <string name="layer_osm_edits">OSM редакции</string>
     <string name="quick_action_poi_show">Показване на %1$s</string>
-    <string name="quick_action_navigation_voice_descr">Превключва гласовите напътствия по време на маршрутизиране.</string>
+    <string name="quick_action_navigation_voice_descr">Превключване на гласовите напътствия по време на маршрутизиране.</string>
     <string name="track_saved">Следата е запазена</string>
     <string name="empty_filename">Празно име на файл</string>
     <string name="clear_confirmation_msg">Почистване на %1$s\?</string>
@@ -2665,7 +2665,7 @@
 \nПреместете папката с данни от споделеното хранилище в достъпно хранилище, в противен случай приложението ще загуби достъп до вашите данни като карти за ползване извън мрежа, трасета на GPX и др.</string>
     <string name="store_tracks_in_monthly_directories">Записване на трасета в месечна папка</string>
     <string name="store_tracks_in_monthly_directories_descrp">Трасетата се записват в различна папка всеки месец (напр. 2020-12).</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Бутон, превключващ избраното трасе на картата.</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Превключване на избраните трасета на картата.</string>
     <string name="looking_for_tracks_with_waypoints">Търсене на трасета с отправни точки</string>
     <string name="snowmobile_render_descr">За каране на снегомобил по определени пътища и трасета.</string>
     <string name="gpx_no_tracks_title">Нямате файлове с трасета</string>
@@ -2761,7 +2761,7 @@
     <string name="shared_string_widget">Приспособление</string>
     <string name="routing_attr_carriage_restrictions_description">Отчита правата за достъп на транспортни средства с животинска тяга</string>
     <string name="routing_attr_avoid_4wd_only_name">Без пътища за 4WD</string>
-    <string name="quick_action_switch_profile_descr">Бутонът за действия превлкючва между избраните профили.</string>
+    <string name="quick_action_switch_profile_descr">Бутонът за действия превключва между избраните профили.</string>
     <string name="selected_profile">Избран профил</string>
     <string name="arrival_time_widget_desc">Време на пристигане до местоназначението.</string>
     <string name="gps_info_widget_desc">Показва броя на видимите и използвани в момента сателити.</string>
@@ -3330,7 +3330,7 @@
 \nOpenPlaceReviews.org</string>
     <string name="shared_string_sunset">Залез</string>
     <string name="quick_action_showhide_osmbugs_descr">Бутон, превключващ бележките от OSM на картата.</string>
-    <string name="quick_action_hillshade_descr">Бутон, превключващ засенчването на релефа на картата.</string>
+    <string name="quick_action_hillshade_descr">Превключване на засенчването на релефа на картата.</string>
     <string name="move_to_history">Преместване в историята</string>
     <string name="shared_string_terms_of_use">Условия за ползване</string>
     <string name="reset_to_default">Нулиране</string>
@@ -3472,7 +3472,7 @@
     <string name="hillshade_menu_download_descr">Инсталирайте картата „Засенчване на релефа“, за да виждате засенчване по вертикала.</string>
     <string name="ant_heart_rate_write_gpx_desc">Включване на сърдечния ритъм в трасето</string>
     <string name="current_location_widget">Координати: текущо местоположение</string>
-    <string name="default_render_descr">Стил с общо предназначение. Гъсто населените места са показани по-ясно. Отнася се за контурни линии, маршрути, качество на повърхността, ограничения на достъпа, пътни знаци, оцветяване на пътища по скалата на SAC/CAI, елементи на водни спортове.</string>
+    <string name="default_render_descr">Стил с общо предназначение. Гъсто населените места са показани чисто. Характеристики на маршрутите, качество на повърхността, ограничения на достъпа, пътни знаци, изобразяване на пътища в съответствие със скалата на SAC/CAI, елементи на белите спортове, топографски характеристики като контурни линии.</string>
     <string name="shared_string_reset">Нулиране</string>
     <string name="hillshade_purchase_header">Инсталирайте добавката „Релеф“, за да виждате градуирани вертикални области.</string>
     <string name="shared_string_large">Голям</string>
@@ -4193,7 +4193,7 @@
     <string name="download_cloud_versions">Изтегляне на облачни версии</string>
     <string name="map_widget_map_scale">Мащаб на картата</string>
     <string name="show_arrows_on_the_map">Показване на стрелки на картата</string>
-    <string name="quick_action_showhide_poi_descr">Бутон, превключващ POI на картата.</string>
+    <string name="quick_action_showhide_poi_descr">Превключване на POI на картата.</string>
     <string name="nothing_found_in_radius">Няма нищо в радиус от</string>
     <string name="search_no_results_feedback">Няма резултати?
 \nДайте обратна връзка</string>
@@ -4203,15 +4203,15 @@
     <string name="profiles_for_action_not_found">Не е намерен такъв профил.</string>
     <string name="switch_osm_notes_visibility_desc">Превключване на бележките на OSM на картата.</string>
     <string name="show_something_on_map">Показване на %1$s на картата</string>
-    <string name="quick_action_routes_summary">Бутон, превключващ %1$s на картата.</string>
-    <string name="quick_action_coordinates_widget_descr">Бутон, превключващ приспособлението за координати на картата.</string>
+    <string name="quick_action_routes_summary">Превключване на „%1$s“ на картата.</string>
+    <string name="quick_action_coordinates_widget_descr">Превключване на приспособлението за координати на картата.</string>
     <string name="marker_show_distance_descr">Изберете как да бъдат изобразени разстоянието и посоката на картата:</string>
     <string name="add_hidden_group_info">Добавената точка няма да бъде видима на картата, защото избраната група е скрита. Можете да нмерите точката в „%s“.</string>
-    <string name="quick_action_showhide_mapillary_descr">Бутон, превключващ слоя на Mapillary на картата.</string>
+    <string name="quick_action_showhide_mapillary_descr">Превключване на слоя на Mapillary на картата.</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Добавете най-малко две точки</string>
     <string name="osm_live_payment_contribute_descr">Даренията помагат за финансиране на картографията на OSM.</string>
     <string name="rendering_attr_showLez_description">Показване на зоните за ниски емисии на картата. Не влияе на маршрутизирането.</string>
-    <string name="quick_action_showhide_favorites_descr">Бутон, превключващ избраните точки на картата.</string>
+    <string name="quick_action_showhide_favorites_descr">Превключване на избраните точки на картата.</string>
     <string name="graph_axis">Оси на графиката</string>
     <string name="profile_alert_need_routing_type_msg">Изберете режим на маршрутизиране за новия профил.</string>
     <string name="routing_engine_vehicle_type_car">Автомобил</string>
@@ -4331,7 +4331,7 @@
     <string name="routing_attr_relief_smoothness_factor_hills_name">Планински</string>
     <string name="route_between_points">Маршрут между точките</string>
     <string name="route_between_points_whole_track_button_desc">Изчислява цялото трасе с избрания профил.</string>
-    <string name="ui_customization_description">Настройка на главното, контекстуалното и раздела „Настройка на карти“ и „Контекстуално меню“.\n\nИзключете неизползваните добавки, за да бъдат скрити контролите им за управление. %1$s.</string>
+    <string name="ui_customization_description">Настройка на главното, контекстуалното и раздела „Настройка на картата“ и „Контекстуално меню“.\n\nИзключете неизползваните добавки, за да бъдат скрити контролите им за управление. %1$s.</string>
     <string name="no_assigned_keys">Липсват клавишни комбинации</string>
     <string name="remove_key_assignment">Премахване на клавишната комбинация</string>
     <string name="remove_key_assignment_summary">Клавишната комбинация на избраното действие ще бъде премахната.</string>
@@ -4352,10 +4352,10 @@
     <string name="shared_string_no_internet_connection">Няма връзка с интернет</string>
     <string name="no_internet_descr">Проверете връзката и пробвайте отново.</string>
     <string name="track_does_not_contain_data_to_save">Трасето не съдържа информация, която да бъде запазена.</string>
-    <string name="quick_action_finish_trip_recording_summary">Бутон за запзване на трасето в GPX и приключване на записа на пътуването.</string>
+    <string name="quick_action_finish_trip_recording_summary">Запзване на трасето в GPX и приключване на записа на пътуването.</string>
     <string name="new_segment_started_m">Започнат запис на нов сегмент от трасето.</string>
     <string name="lock_screen_description">Включване или изключване на екрана, за да бъдат предотвратени нежелани докосвания</string>
-    <string name="quick_action_save_recorded_trip_and_continue_summary">Бутон за запазване на текущото записано пътуване като GPX файл и продължаване на записа на нова следа без прекъсване.</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">Бутон, запазващ текущото записано пътуване като GPX файл и продължаващ записа на нова следа без прекъсване.</string>
     <string name="obd_fuel_type_methanol">Метанол</string>
     <string name="obd_fuel_type_gasoline">Бензин</string>
     <string name="obd_fuel_type_ethanol">Етанол</string>
@@ -4579,7 +4579,7 @@
     <string name="map_widget_sun_position_desc">Показва времето до изгрев или залез.</string>
     <string name="quick_action_track_waypoint">Отправна точка</string>
     <string name="quick_action_video_note">Видеобележка</string>
-    <string name="quick_action_add_category">Категория</string>
+    <string name="quick_action_add_category">Добавяне на категория</string>
     <string name="quick_action_auto_zoom_on">Включване автом. мащабиране</string>
     <string name="quick_action_auto_zoom_off">Изключване автом. мащабиране</string>
     <string name="quick_action_audio_note">Аудиобележка</string>
@@ -4596,7 +4596,7 @@
     <string name="quick_action_terrain_color_scheme">Цветова схема на релефа</string>
     <string name="quick_action_terrain">Вид оцветяване на релефа</string>
     <string name="quick_action_to_my_location">Към моето местоположение</string>
-    <string name="quick_action_map_source_switch">Източникът на карти променен на „%s“.</string>
+    <string name="quick_action_map_source_switch">Източникът на карти е променен на „%s“.</string>
     <string name="quick_action_move_map_left">Движение наляво</string>
     <string name="quick_action_move_map_right">Движение надясно</string>
     <string name="quick_action_empty_param_error">Попълнете всички параметри</string>
@@ -4606,4 +4606,43 @@
     <string name="quick_action_save_recorded_trip_and_continue">Запазване на пътуването и напред</string>
     <string name="quick_action_display_position_in_center">Показване на позицията винаги в центъра</string>
     <string name="quick_action_show_navigation_finish_dialog">Показване на диалога за край на маршрутизиране</string>
+    <string name="map_mode">Режим на картата</string>
+    <string name="quick_action_need_to_add_item_to_list">Добавете най-малко един елемент в списъка „Бързи действия“ в настройкте</string>
+    <string name="quick_actions_delete">Премахване на действие</string>
+    <string name="quick_action_take_photo_note_descr">Добавя фото бележка в центъра на картата.</string>
+    <string name="quick_action_previous_screen_desc">Връщане към предишния екран.</string>
+    <string name="quick_action_add_marker_descr">Добавяне на маркер в центъра на картата.</string>
+    <string name="delete_actions_button_confirmation">Желаете ли бутона „%1$s“ с всички добавени действия да бъде премахнат?</string>
+    <string name="key_event_category_map_interactions">Взаимодействие с картата</string>
+    <string name="quick_action_start_stop_navigation_descr">Бутон за начало или край на маршрутизацията.</string>
+    <string name="quick_action_bug_descr">Това съобщение ще бъде добавено в полето за коментар.</string>
+    <string name="quick_action_duplicates">Действието е преименувано на „%1$s“, за да бъде избегнато дублиране.</string>
+    <string name="quick_action_btn_tutorial_descr">Със задържане и влачене местете бутона по екрана.</string>
+    <string name="key_event_category_actions">Действия</string>
+    <string name="delete_actions_button">Премахване на бутон</string>
+    <string name="rendering_attr_whiteWaterSports_name">Водни спортове</string>
+    <string name="sqlite_db_file">Файл на SQLiteDB</string>
+    <string name="quick_action_directions_from_desc">Прави центъра на картата отправна точка. Ще е нужно да укажете местоназначение или ще се преизчисли маршрута.</string>
+    <string name="quick_action_add_first_intermediate_desc">Прави центъра на картата първа междинна точка от маршрута.</string>
+    <string name="quick_action_add_destination_desc">Прави центъра на картата новото местоназначение като предишното става последна междинна точка.</string>
+    <string name="quick_action_replace_destination_desc">Прави центъра на картата новото местоназначение, заменяйки предишното (ако има).</string>
+    <string name="delete_all_actions_message_q">Желаете ли %d бързи действия да бъдат необратимо премахнати?</string>
+    <string name="quick_action_switch_compass_desc">Превключва ориентацията на картата.</string>
+    <string name="quick_action_navigation_view_desc">Превключване на екрана за маршрутизиране.</string>
+    <string name="quick_action_start_pause_recording">Бутон за начало, пауза и край на запис на трасе в GPX.</string>
+    <string name="quick_action_search_view_desc">Превключване на екрана за търсене.</string>
+    <string name="dialog_add_action_title">Добавяне на действие</string>
+    <string name="quick_actions_delete_text">Желаете ли действието „%s“ да бъде премахнато?</string>
+    <string name="quick_action_take_audio_note_descr">Добавя аудио бележка в центъра на картата.</string>
+    <string name="quick_action_add_poi_descr">Добавяне на интересна точка в центъра на картата.</string>
+    <string name="quick_action_add_osm_bug_descr">Добавя бележка на OSM в центъра на картата.</string>
+    <string name="quick_action_switch_day_night_descr">Превключване между дневен и нощен режим в OsmAnd.</string>
+    <string name="quick_action_category_descr">Категория, в която да бъдат запазвани избраните точки:</string>
+    <string name="quick_action_take_video_note_descr">Добавя видео бележка в центъра на картата.</string>
+    <string name="quick_action_add_parking_descr">Добавя място на паркиране в центъра на картата.</string>
+    <string name="quick_action_page_list_descr">Прелиства списъка отдолу.</string>
+    <string name="quick_action_drawer_desc">Превключване на главното меню.</string>
+    <string name="quick_action_auto_zoom_desc">Бутон, превключващ автоматичното мащабиране въз основа на скоростта.</string>
+    <string name="quick_action_fav_name_descr">Оставете полето празно, за да бъде използван адреса или името на мястото.</string>
+    <string name="quick_action_new_trip_segment">Бутон, започващ нов сегмент в текущия запис на трасе в GPX.</string>
 </resources>
