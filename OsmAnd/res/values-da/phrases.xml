@@ -4110,4 +4110,7 @@
     <string name="poi_climbing_route">Klatrerute</string>
     <string name="poi_climbing_route_bottom">Klatrerute bund</string>
     <string name="poi_cafe_yes">Ja</string>
+    <string name="poi_roundtrip_yes">Rundtur: ja</string>
+    <string name="poi_recycling_glass_bottles_colour">Farvede glasflasker</string>
+    <string name="poi_roundtrip_no">Rundtur: nej</string>
 </resources>
