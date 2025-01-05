@@ -268,7 +268,7 @@
     <string name="shared_string_minute_short">min</string>
     <string name="shared_string_second_short">s</string>
     <string name="welcome_descr"><b>OsmAnd praćenje</b> omogućuje dijeljenje vlastite lokacije i prikaz lokacija drugih korisnika u OsmAndu.<br/><br/>Program koristi Telegram API, stoga je potreban Telegram račun.</string>
-    <string name="my_location">Moja lokacija</string>
+    <string name="my_location">Moja pozicija</string>
     <string name="live_now">Sada uživo</string>
     <string name="enter_code">Upiši kȏd</string>
     <string name="shared_string_error">Greška</string>
