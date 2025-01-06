@@ -926,8 +926,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 						int preciseX = reverse? hctx.startX : hctx.endX;
 						o.distanceFromStart += planner.calculatePreciseStartTime(hctx.rctx, preciseX, preciseY, o);
 					} else {
-						double obstacle = hctx.rctx.getRouter().defineRoutingObstacle(o.getRoad(), o.getSegmentStart(), 
-								o.getSegmentStart()> o.getSegmentEnd());
+						float obstacle = hctx.rctx.getRouter().defineRoutingObstacle(
+								o.getRoad(), o.getSegmentStart(), o.getSegmentStart() > o.getSegmentEnd());
 						if (obstacle < 0) {
 							continue;
 						}
