@@ -326,7 +326,7 @@ public class WikiCoreHelper {
 		private String wikiDesc;
 		private String osmid;
 		private String osmtype;
-		private String poitype;
+		public String poitype;
 		public String poisubtype;
 	}
 

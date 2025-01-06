@@ -21,6 +21,7 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelObfHelper;
@@ -82,7 +83,8 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(getLayoutId(), container, false);
+		LayoutInflater themedInflater = UiUtilities.getInflater(app, !app.getSettings().isLightContent());
+		return themedInflater.inflate(getLayoutId(), container, false);
 	}
 
 	@Override

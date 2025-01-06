@@ -11,10 +11,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.core.jni.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.search.GetNearbyImagesTask;
 import net.osmand.plus.search.NearbyAdapter;
@@ -34,7 +32,7 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	private boolean selectionMode;
 	private View nearByContainer;
 	private RecyclerView nearByList;
-	private NearbyAdapter adapter = new NearbyAdapter(Collections.emptyList(), this);
+	private NearbyAdapter adapter = null;
 
 	public void onNearbyItemClicked(@NonNull WikiCoreHelper.OsmandApiFeatureData item) {
 
@@ -56,7 +54,9 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 		if (nearByContainer != null) {
 			nearByContainer.setVisibility(result.isEmpty() ? View.GONE : View.VISIBLE);
 		}
-		adapter.setItems(result);
+		if (adapter != null) {
+			adapter.setItems(result);
+		}
 	}
 
 	@Override
@@ -104,6 +104,7 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 				getDialogFragment().reloadHistory();
 			}
 		});
+		adapter = new NearbyAdapter(app, Collections.emptyList(), this);
 	}
 
 	@Override

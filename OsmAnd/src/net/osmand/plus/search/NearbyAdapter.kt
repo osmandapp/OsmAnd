@@ -1,6 +1,5 @@
 package net.osmand.plus.search
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -10,12 +9,15 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
+import net.osmand.plus.render.RenderingIcons
 import net.osmand.plus.utils.PicassoUtils
+import net.osmand.plus.utils.UiUtilities
 import net.osmand.wiki.WikiCoreHelper
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData
 import net.osmand.wiki.WikiImage
 
 class NearbyAdapter(
+	val app: OsmandApplication,
 	var items: List<OsmandApiFeatureData>,
 	private val onItemClickListener: NearbyItemClickListener
 ) : RecyclerView.Adapter<NearbyAdapter.NearbyViewHolder>() {
@@ -25,9 +27,14 @@ class NearbyAdapter(
 	}
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NearbyViewHolder {
-		val view = LayoutInflater.from(parent.context)
-			.inflate(R.layout.search_nearby_item, parent, false)
+		val app = parent.context.applicationContext as OsmandApplication
+		val inflater = UiUtilities.getInflater(app, isNightMode())
+		val view = inflater.inflate(R.layout.search_nearby_item, parent, false)
 		return NearbyViewHolder(view)
+	}
+
+	private fun isNightMode(): Boolean {
+		return app.daynightHelper.isNightMode
 	}
 
 	override fun onBindViewHolder(holder: NearbyViewHolder, position: Int) {
@@ -39,6 +46,7 @@ class NearbyAdapter(
 
 	class NearbyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 		private val imageView: ImageView = itemView.findViewById(R.id.item_image)
+		private val iconImageView: ImageView = itemView.findViewById(R.id.item_icon)
 		private val titleTextView: TextView = itemView.findViewById(R.id.item_title)
 		private val descriptionTextView: TextView = itemView.findViewById(R.id.item_description)
 		private var imageData: WikiImage? = null
@@ -46,6 +54,21 @@ class NearbyAdapter(
 		fun bind(item: OsmandApiFeatureData, onItemClickListener: NearbyItemClickListener) {
 			imageData = WikiCoreHelper.getImageData(item.properties.photoTitle);
 			val app = imageView.context.applicationContext as OsmandApplication
+			val poiTypes = app.poiTypes
+			val subType = poiTypes.getPoiTypeByKey(item.properties.poisubtype)
+			val poiIcon = RenderingIcons.getBigIcon(app, subType.keyName)
+			val uiUtilities = app.uiUtilities
+			val nightMode = app.daynightHelper.isNightMode
+			val coloredIcon = if (poiIcon != null) {
+				uiUtilities.getRenderingIcon(
+					app,
+					subType.keyName,
+					nightMode)
+
+			} else {
+				uiUtilities.getIcon(R.drawable.ic_action_info_dark, nightMode)
+			}
+			iconImageView.setImageDrawable(coloredIcon)
 			val picasso = PicassoUtils.getPicasso(app)
 
 			imageData?.let {

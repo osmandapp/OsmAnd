@@ -33,8 +33,7 @@
 			android:layout_width="16dp"
 			android:layout_height="16dp"
 			android:layout_gravity="center_vertical"
-			android:layout_marginEnd="6dp"
-			android:visibility="gone"/>
+			android:layout_marginEnd="6dp"/>
 
 		<TextView
 			android:id="@+id/item_description"

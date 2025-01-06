@@ -3,6 +3,7 @@ package net.osmand.plus.utils;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -54,6 +55,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapFragmentsHelper;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
@@ -136,6 +138,21 @@ public class UiUtilities {
 
 	public Drawable getIcon(@DrawableRes int id, @ColorRes int colorId) {
 		return getDrawable(id, colorId);
+	}
+
+	@Nullable
+	public Drawable getRenderingIcon(Context ctx, String fileName, boolean nightMode) {
+		Drawable d = RenderingIcons.getBigIcon(ctx, fileName);
+		if (d != null) {
+			int color = ColorUtilities.getColor(ctx, nightMode
+					? R.color.icon_color_secondary_light : R.color.icon_color_secondary_dark);
+			d = DrawableCompat.wrap(d);
+			d.mutate();
+			d.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+			return d;
+		} else {
+			return null;
+		}
 	}
 
 	public Drawable getLayeredIcon(@DrawableRes int bgIconId, @DrawableRes int foregroundIconId) {
