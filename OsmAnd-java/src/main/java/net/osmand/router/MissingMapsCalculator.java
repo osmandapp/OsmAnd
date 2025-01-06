@@ -193,9 +193,13 @@ public class MissingMapsCalculator {
 			boolean hasMapJoinType = or.isDownloadOfType(o, OsmandRegions.MAP_JOIN_TYPE);
 			boolean hasRoadsJoinType = or.isDownloadOfType(o, OsmandRegions.ROADS_JOIN_TYPE);
 			if (hasMapType || hasRoadsType || hasMapJoinType || hasRoadsJoinType) {
-				regions.add(or.getDownloadName(o));
-				if (!hasMapJoinType && !hasRoadsJoinType) {
-					onlyJointMap = false;
+				String regionName = or.getDownloadName(o);
+				WorldRegion regionData = or.getRegionDataByDownloadName(regionName);
+				if (regionData != null && regionData.getSubregions().isEmpty()) {
+					regions.add(regionName);
+					if (!hasMapJoinType && !hasRoadsJoinType) {
+						onlyJointMap = false;
+					}
 				}
 			}
 		}
