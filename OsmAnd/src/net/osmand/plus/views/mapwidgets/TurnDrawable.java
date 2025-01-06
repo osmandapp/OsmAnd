@@ -139,7 +139,6 @@ public class TurnDrawable extends Drawable {
 					? R.color.nav_arrow_circle_color_dark
 					: R.color.nav_arrow_circle_color_light);
 			paintTurnOutlayFill.setColor(outlayFillColor);
-			invalidateSelf();
 		}
 	}
 
