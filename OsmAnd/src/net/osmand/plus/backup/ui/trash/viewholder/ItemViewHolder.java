@@ -66,7 +66,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 		title.setText(item.getName(app));
 		description.setText(item.getDescription(app));
 
-		int iconId = item.getIconId();
+		int iconId = item.getIconId(app);
 		icon.setImageDrawable(iconId != -1 ? uiUtilities.getIcon(iconId) : null);
 
 		setupProgress(item);
