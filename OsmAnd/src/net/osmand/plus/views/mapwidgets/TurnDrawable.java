@@ -126,11 +126,13 @@ public class TurnDrawable extends Drawable {
 		}
 	}
 
-	public void updateColors(@NonNull TextPaint textPaint, boolean nightMode) {
+	public void updateTextPaint(@NonNull TextPaint textPaint, boolean nightMode) {
 		this.textPaint = textPaint;
 		this.textPaint.setTextAlign(Paint.Align.CENTER);
 		this.textPaint.setColor(ColorUtilities.getPrimaryTextColor(ctx, nightMode));
+	}
 
+	public void updateColors(boolean nightMode) {
 		if (this.nightMode == null || this.nightMode != nightMode) {
 			this.nightMode = nightMode;
 			int outlayFillColor = ctx.getColor(nightMode
@@ -149,7 +151,7 @@ public class TurnDrawable extends Drawable {
 		if (turnType != this.turnType && !getBounds().isEmpty()) {
 			this.turnType = turnType;
 			TurnPathHelper.calcTurnPath(originalPathForTurn, originalPathForTurnOutlay, turnType, null,
-					centerText, mini, false, true, false);
+					centerText, false, false, true, false);
 			onBoundsChange(getBounds());
 			return true;
 		}
