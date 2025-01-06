@@ -718,9 +718,9 @@ public class AndroidUtils {
 		return iconId > 0 ? iconId : defRes;
 	}
 
-	public static int getDrawableId(OsmandApplication app, String id) {
+	public static int getDrawableId(@NonNull Context context, String id) {
 		if (!Algorithms.isEmpty(id)) {
-			return app.getResources().getIdentifier(id, "drawable", app.getPackageName());
+			return context.getResources().getIdentifier(id, "drawable", context.getPackageName());
 		}
 		return 0;
 	}
