@@ -170,4 +170,5 @@ public class MainExternalInputDevicesFragment extends BaseSettingsFragment {
 	protected int getBackgroundColorRes() {
 		return ColorUtilities.getActivityBgColorId(isNightMode());
 	}
+
 }
