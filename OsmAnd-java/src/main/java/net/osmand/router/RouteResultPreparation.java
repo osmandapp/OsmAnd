@@ -1605,7 +1605,7 @@ public class RouteResultPreparation {
 			ai.speakPriority = highwaySpeakPriority(attached.getObject().getHighway()); 
 			ai.attachedOnTheRight = ex >= 0;
 			ai.attachedAngle = deviation;
-			ai.parsedLanes = parseTurnLanes(attached.getObject(), attached.getBearingBegin() * Math.PI / 180);;
+			ai.parsedLanes = parseTurnLanes(attached.getObject(), attached.getBearingBegin() * Math.PI / 180);
 			ai.lanes = lanes;
 
 			if (!verySharpTurn || hasSharpOrReverseLane) {

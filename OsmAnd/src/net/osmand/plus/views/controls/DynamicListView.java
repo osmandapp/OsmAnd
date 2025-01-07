@@ -19,7 +19,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -40,7 +39,6 @@ import android.widget.HeaderViewListAdapter;
 import android.widget.ListAdapter;
 
 import androidx.annotation.NonNull;
-import androidx.core.view.ViewCompat;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 
@@ -460,16 +458,10 @@ public class DynamicListView extends ObservableListView {
 
 					switchView.setTranslationY(delta);
 
-					if (android.os.Build.VERSION.SDK_INT < 12) {
-						ViewCompat.animate(switchView)
-								.translationY(0)
-								.setDuration(MOVE_DURATION);
-					} else {
-						ObjectAnimator animator = ObjectAnimator.ofFloat(switchView,
-								View.TRANSLATION_Y, 0);
-						animator.setDuration(MOVE_DURATION);
-						animator.start();
-					}
+					ObjectAnimator animator = ObjectAnimator.ofFloat(switchView,
+							View.TRANSLATION_Y, 0);
+					animator.setDuration(MOVE_DURATION);
+					animator.start();
 
 					return true;
 				}
@@ -515,48 +507,39 @@ public class DynamicListView extends ObservableListView {
 
 			mHoverCellCurrentBounds.offsetTo(mHoverCellOriginalBounds.left, mobileView.getTop());
 
-			if (android.os.Build.VERSION.SDK_INT < 12) {
-				finishTouch();
-			} else {
-				/**
-				 * This TypeEvaluator is used to animate the BitmapDrawable back to its
-				 * final location when the user lifts his finger by modifying the
-				 * BitmapDrawable's bounds.
-				 */
-				TypeEvaluator<Rect> sBoundEvaluator = new TypeEvaluator<Rect>() {
-					public Rect evaluate(float fraction, Rect startValue, Rect endValue) {
-						return new Rect(interpolate(startValue.left, endValue.left, fraction),
-								interpolate(startValue.top, endValue.top, fraction),
-								interpolate(startValue.right, endValue.right, fraction),
-								interpolate(startValue.bottom, endValue.bottom, fraction));
-					}
+			/*
+			 * This TypeEvaluator is used to animate the BitmapDrawable back to its
+			 * final location when the user lifts his finger by modifying the
+			 * BitmapDrawable's bounds.
+			 */
+			TypeEvaluator<Rect> sBoundEvaluator = new TypeEvaluator<Rect>() {
+				public Rect evaluate(float fraction, Rect startValue, Rect endValue) {
+					return new Rect(interpolate(startValue.left, endValue.left, fraction),
+							interpolate(startValue.top, endValue.top, fraction),
+							interpolate(startValue.right, endValue.right, fraction),
+							interpolate(startValue.bottom, endValue.bottom, fraction));
+				}
 
-					public int interpolate(int start, int end, float fraction) {
-						return (int) (start + fraction * (end - start));
-					}
-				};
+				public int interpolate(int start, int end, float fraction) {
+					return (int) (start + fraction * (end - start));
+				}
+			};
 
-				ObjectAnimator hoverViewAnimator = ObjectAnimator.ofObject(mHoverCell, "bounds",
-						sBoundEvaluator, mHoverCellCurrentBounds);
-				hoverViewAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-					@Override
-					public void onAnimationUpdate(ValueAnimator valueAnimator) {
-						invalidate();
-					}
-				});
-				hoverViewAnimator.addListener(new AnimatorListenerAdapter() {
-					@Override
-					public void onAnimationStart(Animator animation) {
-						setEnabled(false);
-					}
+			ObjectAnimator hoverViewAnimator = ObjectAnimator.ofObject(mHoverCell, "bounds",
+					sBoundEvaluator, mHoverCellCurrentBounds);
+			hoverViewAnimator.addUpdateListener(valueAnimator -> invalidate());
+			hoverViewAnimator.addListener(new AnimatorListenerAdapter() {
+				@Override
+				public void onAnimationStart(Animator animation) {
+					setEnabled(false);
+				}
 
-					@Override
-					public void onAnimationEnd(Animator animation) {
-						finishTouch();
-					}
-				});
-				hoverViewAnimator.start();
-			}
+				@Override
+				public void onAnimationEnd(Animator animation) {
+					finishTouch();
+				}
+			});
+			hoverViewAnimator.start();
 		} else {
 			touchEventsCancelled();
 		}

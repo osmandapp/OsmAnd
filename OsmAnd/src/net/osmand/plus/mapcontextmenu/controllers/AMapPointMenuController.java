@@ -11,19 +11,20 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.aidl.AidlContextMenuButtonWrapper;
 import net.osmand.aidl.AidlContextMenuButtonsWrapper;
 import net.osmand.aidl.AidlMapPointWrapper;
 import net.osmand.aidlapi.maplayer.point.AMapPoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.TitleButtonController;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
 import net.osmand.util.Algorithms;
 
@@ -41,7 +42,8 @@ public class AMapPointMenuController extends MenuController {
 
 	private final Drawable pointDrawable;
 
-	public AMapPointMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull AidlMapPointWrapper point) {
+	public AMapPointMenuController(@NonNull MapActivity mapActivity,
+			@NonNull PointDescription pointDescription, @NonNull AidlMapPointWrapper point) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.point = point;
 		pointDrawable = getPointDrawable();
@@ -79,7 +81,8 @@ public class AMapPointMenuController extends MenuController {
 	}
 
 	@Override
-	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
+	public void addPlainMenuItems(String typeStr, PointDescription pointDescription,
+			LatLon latLon) {
 		for (String detail : point.getDetails()) {
 			builder.addPlainMenuItem(R.drawable.ic_action_info_dark, detail, true, false, null);
 		}
@@ -181,12 +184,13 @@ public class AMapPointMenuController extends MenuController {
 		return false;
 	}
 
-	private TitleButtonController createAdditionButtonController(AidlContextMenuButtonWrapper contextMenuButton, long callbackId) {
+	private TitleButtonController createAdditionButtonController(
+			AidlContextMenuButtonWrapper contextMenuButton, long callbackId) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null || contextMenuButton == null) {
 			return null;
 		}
-		TitleButtonController titleButtonController = new TitleButtonController() {
+		TitleButtonController titleButtonController = new TitleButtonController(this) {
 			@Override
 			public void buttonPressed() {
 				MapActivity mapActivity = getMapActivity();

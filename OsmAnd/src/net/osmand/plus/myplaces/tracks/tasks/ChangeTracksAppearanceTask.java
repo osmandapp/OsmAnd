@@ -22,7 +22,7 @@ import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.shared.io.KFile;
 import net.osmand.shared.routing.ColoringType;
 import net.osmand.shared.gpx.GpxDbHelper;
-import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;;
+import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.shared.gpx.GpxDataItem;

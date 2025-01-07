@@ -12,6 +12,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.TitleButtonController;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.util.Algorithms;
@@ -31,7 +32,7 @@ public class PointDescriptionMenuController extends MenuController {
 		OsmAndAppCustomization customization = app.getAppCustomization();
 		if (customization.isFeatureEnabled(CONTEXT_MENU_AVOID_ROADS_ID)
 				&& (routingHelper.isRoutePlanningMode() || routingHelper.isFollowingMode())) {
-			leftTitleButtonController = new TitleButtonController() {
+			leftTitleButtonController = new TitleButtonController(this) {
 				@Override
 				public void buttonPressed() {
 					MapActivity activity = getMapActivity();

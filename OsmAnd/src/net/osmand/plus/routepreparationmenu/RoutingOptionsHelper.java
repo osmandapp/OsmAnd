@@ -5,9 +5,7 @@ import static net.osmand.router.GeneralRouter.*;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,22 +32,7 @@ import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.routepreparationmenu.data.PermanentAppModeOptions;
 import net.osmand.plus.routepreparationmenu.data.RouteMenuAppModes;
-import net.osmand.plus.routepreparationmenu.data.parameters.AvoidPTTypesRoutingParameter;
-import net.osmand.plus.routepreparationmenu.data.parameters.AvoidRoadsRoutingParameter;
-import net.osmand.plus.routepreparationmenu.data.parameters.CalculateAltitudeItem;
-import net.osmand.plus.routepreparationmenu.data.parameters.CustomizeRouteLineRoutingParameter;
-import net.osmand.plus.routepreparationmenu.data.parameters.DividerItem;
-import net.osmand.plus.routepreparationmenu.data.parameters.GpxLocalRoutingParameter;
-import net.osmand.plus.routepreparationmenu.data.parameters.InterruptMusicRoutingParameter;
-import net.osmand.plus.routepreparationmenu.data.parameters.LocalRoutingParameter;
-import net.osmand.plus.routepreparationmenu.data.parameters.LocalRoutingParameterGroup;
-import net.osmand.plus.routepreparationmenu.data.parameters.MuteSoundRoutingParameter;
-import net.osmand.plus.routepreparationmenu.data.parameters.OtherLocalRoutingParameter;
-import net.osmand.plus.routepreparationmenu.data.parameters.OtherSettingsRoutingParameter;
-import net.osmand.plus.routepreparationmenu.data.parameters.RouteSimulationItem;
-import net.osmand.plus.routepreparationmenu.data.parameters.ShowAlongTheRouteItem;
-import net.osmand.plus.routepreparationmenu.data.parameters.TimeConditionalRoutingItem;
-import net.osmand.plus.routepreparationmenu.data.parameters.VoiceGuidanceRoutingParameter;
+import net.osmand.plus.routepreparationmenu.data.parameters.*;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
@@ -362,36 +345,25 @@ public class RoutingOptionsHelper {
 				AppCompatCheckedTextView tv = v.findViewById(R.id.text1);
 				tv.setText(item.getTitle());
 				tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f);
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-					UiUtilities.setupCompoundButtonDrawable(app, nightMode, selectedModeColor, tv.getCheckMarkDrawable());
-				}
+				UiUtilities.setupCompoundButtonDrawable(app, nightMode, selectedModeColor, tv.getCheckMarkDrawable());
 
 				return v;
 			}
 		};
 
 		int[] selectedPosition = {selectedIndex};
-		builder.setSingleChoiceItems(listAdapter, selectedIndex, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int position) {
-				selectedPosition[0] = position;
-			}
-		});
+		builder.setSingleChoiceItems(listAdapter, selectedIndex, (dialog, position) -> selectedPosition[0] = position);
 		builder.setTitle(group.getText(mapActivity))
-				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						OsmandSettings settings = app.getSettings();
-						int position = selectedPosition[0];
-						if (position >= 0 && position < group.getRoutingParameters().size()) {
-							for (int i = 0; i < group.getRoutingParameters().size(); i++) {
-								LocalRoutingParameter rp = group.getRoutingParameters().get(i);
-								rp.setSelected(settings, i == position);
-							}
-							mapActivity.getRoutingHelper().onSettingsChanged(true);
-							if (listener != null) {
-								listener.onClick();
-							}
+				.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
+					int position = selectedPosition[0];
+					if (position >= 0 && position < group.getRoutingParameters().size()) {
+						for (int l = 0; l < group.getRoutingParameters().size(); l++) {
+							LocalRoutingParameter rp = group.getRoutingParameters().get(l);
+							rp.setSelected(settings, l == position);
+						}
+						mapActivity.getRoutingHelper().onSettingsChanged(true);
+						if (listener != null) {
+							listener.onClick();
 						}
 					}
 				})
@@ -400,32 +372,20 @@ public class RoutingOptionsHelper {
 	}
 
 	public LocalRoutingParameter getItem(ApplicationMode am, String parameter) {
-		switch (parameter) {
-			case MuteSoundRoutingParameter.KEY:
-				return new MuteSoundRoutingParameter();
-			case DividerItem.KEY:
-				return new DividerItem();
-			case RouteSimulationItem.KEY:
-				return new RouteSimulationItem();
-			case CalculateAltitudeItem.KEY:
-				return new CalculateAltitudeItem();
-			case ShowAlongTheRouteItem.KEY:
-				return new ShowAlongTheRouteItem();
-			case AvoidPTTypesRoutingParameter.KEY:
-				return new AvoidPTTypesRoutingParameter();
-			case AvoidRoadsRoutingParameter.KEY:
-				return new AvoidRoadsRoutingParameter();
-			case GpxLocalRoutingParameter.KEY:
-				return new GpxLocalRoutingParameter();
-			case TimeConditionalRoutingItem.KEY:
-				return new TimeConditionalRoutingItem();
-			case OtherSettingsRoutingParameter.KEY:
-				return new OtherSettingsRoutingParameter();
-			case CustomizeRouteLineRoutingParameter.KEY:
-				return new CustomizeRouteLineRoutingParameter();
-			default:
-				return getRoutingParameterInnerById(am, parameter);
-		}
+		return switch (parameter) {
+			case MuteSoundRoutingParameter.KEY -> new MuteSoundRoutingParameter();
+			case DividerItem.KEY -> new DividerItem();
+			case RouteSimulationItem.KEY -> new RouteSimulationItem();
+			case CalculateAltitudeItem.KEY -> new CalculateAltitudeItem();
+			case ShowAlongTheRouteItem.KEY -> new ShowAlongTheRouteItem();
+			case AvoidPTTypesRoutingParameter.KEY -> new AvoidPTTypesRoutingParameter();
+			case AvoidRoadsRoutingParameter.KEY -> new AvoidRoadsRoutingParameter();
+			case GpxLocalRoutingParameter.KEY -> new GpxLocalRoutingParameter();
+			case TimeConditionalRoutingItem.KEY -> new TimeConditionalRoutingItem();
+			case OtherSettingsRoutingParameter.KEY -> new OtherSettingsRoutingParameter();
+			case CustomizeRouteLineRoutingParameter.KEY -> new CustomizeRouteLineRoutingParameter();
+			default -> getRoutingParameterInnerById(am, parameter);
+		};
 	}
 
 	public LocalRoutingParameter getRoutingParameterInnerById(ApplicationMode am, String parameterId) {

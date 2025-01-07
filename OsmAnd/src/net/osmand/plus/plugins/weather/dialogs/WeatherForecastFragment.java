@@ -40,7 +40,7 @@ import net.osmand.plus.plugins.weather.widgets.WeatherWidgetsPanel;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.OsmAndFormatter.TimeFormatter;
+import net.osmand.plus.utils.TimeFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;

@@ -19,7 +19,6 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.Street;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResource;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResourceType;
 import net.osmand.util.MapUtils;
 
@@ -51,8 +50,8 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 
 	public RegionAddressRepositoryBinary(ResourceManager mgr, BinaryMapReaderResource resource ) {
 		this.resource = resource;
-		langSetting = mgr.getContext().getSettings().MAP_PREFERRED_LOCALE;
-		transliterateSetting = mgr.getContext().getSettings().MAP_TRANSLITERATE_NAMES;
+		langSetting = mgr.getApp().getSettings().MAP_PREFERRED_LOCALE;
+		transliterateSetting = mgr.getApp().getSettings().MAP_TRANSLITERATE_NAMES;
 		this.collator = OsmAndCollator.primaryCollator();
 		this.postCodes = new TreeMap<String, City>(OsmAndCollator.primaryCollator());
 	}

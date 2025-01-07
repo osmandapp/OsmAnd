@@ -3,9 +3,7 @@ package net.osmand.plus.base;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
@@ -43,10 +41,8 @@ public class BottomSheetDialog extends Dialog {
 		super.onCreate(savedInstanceState);
 		Window window = getWindow();
 		if (window != null) {
-			if (Build.VERSION.SDK_INT >= 21) {
-				window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-				window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-			}
+			window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+			window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 			window.setLayout(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 		}
 	}

@@ -1,6 +1,6 @@
 package net.osmand.plus.track.fragments;
 
-import static net.osmand.plus.utils.OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS;
+import static net.osmand.plus.utils.OsmAndFormatterParams.NO_TRAILING_ZEROS;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

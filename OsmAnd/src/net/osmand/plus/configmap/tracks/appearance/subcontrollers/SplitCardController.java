@@ -20,6 +20,7 @@ import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.fragments.SplitIntervalBottomSheet;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
@@ -117,7 +118,7 @@ public class SplitCardController extends BaseMultiStateCardController {
 			if (splitType == GpxSplitType.NO_SPLIT.getType()) {
 				summary = GpxSplitType.NO_SPLIT.getHumanString(app);
 			} else if (splitType == GpxSplitType.DISTANCE.getType()) {
-				String formattedDistance = OsmAndFormatter.getFormattedDistanceInterval(app, splitInterval, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS);
+				String formattedDistance = OsmAndFormatter.getFormattedDistanceInterval(app, splitInterval, OsmAndFormatterParams.NO_TRAILING_ZEROS);
 				summary = app.getString(R.string.ltr_or_rtl_combine_via_comma, GpxSplitType.DISTANCE.getHumanString(app), formattedDistance);
 			} else if (splitType == GpxSplitType.TIME.getType()) {
 				String formattedTime = OsmAndFormatter.getFormattedTimeInterval(app, splitInterval);

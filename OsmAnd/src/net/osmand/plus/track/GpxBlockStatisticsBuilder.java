@@ -454,28 +454,23 @@ public class GpxBlockStatisticsBuilder {
 			holder.titleText.setText(item.title);
 			holder.titleText.setTextColor(ContextCompat.getColor(app, R.color.text_color_secondary_light));
 			float letterSpacing = 0.00f;
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-				letterSpacing = Math.max(holder.valueText.getLetterSpacing(), holder.titleText.getLetterSpacing());
-			}
+			letterSpacing = Math.max(holder.valueText.getLetterSpacing(), holder.titleText.getLetterSpacing());
 			holder.titleText.setMinWidth(calculateWidthWithin(letterSpacing, item.title, item.value));
-			holder.itemView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					GpxTrackAnalysis analysis = displayItem != null ? displayItem.analysis : null;
-					if (blocksClickable && analysis != null && actionsListener != null) {
-						ArrayList<GPXDataSetType> list = new ArrayList<>();
-						if (analysis.hasElevationData() || analysis.isSpeedSpecified() || analysis.hasSpeedData()) {
-							if (item.firstType != null) {
-								list.add(item.firstType);
-							}
-							if (item.secondType != null) {
-								list.add(item.secondType);
-							}
+			holder.itemView.setOnClickListener(v -> {
+				GpxTrackAnalysis analysis = displayItem != null ? displayItem.analysis : null;
+				if (blocksClickable && analysis != null && actionsListener != null) {
+					ArrayList<GPXDataSetType> list = new ArrayList<>();
+					if (analysis.hasElevationData() || analysis.isSpeedSpecified() || analysis.hasSpeedData()) {
+						if (item.firstType != null) {
+							list.add(item.firstType);
 						}
-						displayItem.chartTypes = list.size() > 0 ? list.toArray(new GPXDataSetType[0]) : null;
-						displayItem.locationOnMap = displayItem.locationStart;
-						actionsListener.openAnalyzeOnMap(displayItem);
+						if (item.secondType != null) {
+							list.add(item.secondType);
+						}
 					}
+					displayItem.chartTypes = list.size() > 0 ? list.toArray(new GPXDataSetType[0]) : null;
+					displayItem.locationOnMap = displayItem.locationStart;
+					actionsListener.openAnalyzeOnMap(displayItem);
 				}
 			});
 			Drawable icon = app.getUIUtilities().getIcon(item.imageResId, item.imageColorId);

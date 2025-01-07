@@ -33,6 +33,8 @@ import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.TitleButtonController;
+import net.osmand.plus.mapcontextmenu.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.builders.MapDataMenuBuilder;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsFragment;
@@ -97,7 +99,7 @@ public class MapDataMenuController extends MenuController {
 		OsmandPlugin srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 		srtmNeedsInstallation = srtmPlugin == null || srtmPlugin.needsInstallation();
 
-		leftDownloadButtonController = new TitleButtonController() {
+		leftDownloadButtonController = new TitleButtonController(this) {
 			@Override
 			public void buttonPressed() {
 				MapActivity activity = getMapActivity();
@@ -135,7 +137,7 @@ public class MapDataMenuController extends MenuController {
 		leftDownloadButtonController.caption = mapActivity.getString(R.string.shared_string_download);
 		leftDownloadButtonController.startIconId = R.drawable.ic_action_import;
 
-		rightDownloadButtonController = new TitleButtonController() {
+		rightDownloadButtonController = new TitleButtonController(this) {
 			@Override
 			public void buttonPressed() {
 				MapActivity activity = getMapActivity();
@@ -165,7 +167,7 @@ public class MapDataMenuController extends MenuController {
 		rightDownloadButtonController.caption = mapActivity.getString(R.string.download_select_map_types);
 		rightDownloadButtonController.startIconId = R.drawable.ic_plugin_srtm;
 
-		bottomTitleButtonController = new TitleButtonController() {
+		bottomTitleButtonController = new TitleButtonController(this) {
 			@Override
 			public void buttonPressed() {
 				if (indexItem != null) {
