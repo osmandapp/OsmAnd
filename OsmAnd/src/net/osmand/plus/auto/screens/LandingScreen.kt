@@ -1,5 +1,6 @@
 package net.osmand.plus.auto.screens
 
+import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.car.app.CarContext
