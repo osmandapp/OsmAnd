@@ -5,22 +5,6 @@ import static net.osmand.util.RouterUtilTest.getNativeLibPath;
 import static net.osmand.util.RouterUtilTest.getRoadId;
 import static net.osmand.util.RouterUtilTest.getRoadStartPoint;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import net.osmand.NativeLibrary;
-import net.osmand.PlatformUtil;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
