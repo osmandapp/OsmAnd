@@ -108,7 +108,7 @@ public class QuickActionsSettingsItem extends SettingsItem {
 				renameButton();
 			}
 		}
-		stateBean.setupButtonState(buttonState);
+		stateBean.setupButtonState(app, buttonState);
 		mapButtonsHelper.addQuickActionButtonState(buttonState);
 	}
 
