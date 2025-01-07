@@ -29,6 +29,7 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -305,7 +306,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 
 	private void updateDistance() {
 		int deviatePath = turnDrawable.isDeviatedFromRoute() ? deviatedPath : nextTurnDistance;
-		String distance = OsmAndFormatter.getFormattedDistance(deviatePath, app, OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS);
+		String distance = OsmAndFormatter.getFormattedDistance(deviatePath, app, OsmAndFormatterParams.USE_LOWER_BOUNDS);
 
 		String text;
 		String subText = null;

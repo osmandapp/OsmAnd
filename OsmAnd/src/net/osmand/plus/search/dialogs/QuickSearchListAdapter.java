@@ -52,6 +52,7 @@ import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
@@ -267,7 +268,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		if (searchUICore.isSearchMoreAvailable(searchPhrase) && minimalSearchRadius != Integer.MAX_VALUE) {
 			double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
 			textTitle = app.getString(R.string.nothing_found_in_radius) + " "
-					+ OsmAndFormatter.getFormattedDistance((float) rd, app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS);
+					+ OsmAndFormatter.getFormattedDistance((float) rd, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
 		} else {
 			textTitle = app.getString(R.string.search_nothing_found);
 		}
@@ -361,7 +362,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		if (searchUICore.isSearchMoreAvailable(searchPhrase) && minimalSearchRadius != Integer.MAX_VALUE) {
 			double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
 			textTitle = app.getString(R.string.nothing_found_in_radius) + " "
-					+ OsmAndFormatter.getFormattedDistance((float) rd, app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS);
+					+ OsmAndFormatter.getFormattedDistance((float) rd, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
 		} else {
 			textTitle = app.getString(R.string.search_nothing_found);
 		}
@@ -669,7 +670,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			float rd = (float) OsmAndFormatter.calculateRoundedDist(
 					searchUICore.getNextSearchRadius(searchPhrase), app);
 			return app.getString(R.string.increase_search_radius_to,
-					OsmAndFormatter.getFormattedDistance(rd, app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS));
+					OsmAndFormatter.getFormattedDistance(rd, app, OsmAndFormatterParams.NO_TRAILING_ZEROS));
 		} else {
 			return app.getString(R.string.increase_search_radius);
 		}

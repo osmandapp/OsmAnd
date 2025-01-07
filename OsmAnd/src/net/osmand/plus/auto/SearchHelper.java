@@ -19,6 +19,7 @@ import net.osmand.plus.search.SearchUtils;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
@@ -218,7 +219,7 @@ public class SearchHelper {
 					if (count == 0 && minimalSearchRadius != Integer.MAX_VALUE) {
 						double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
 						builder.addText(app.getString(R.string.nothing_found_in_radius) + " "
-								+ OsmAndFormatter.getFormattedDistance((float) rd, app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS));
+								+ OsmAndFormatter.getFormattedDistance((float) rd, app, OsmAndFormatterParams.NO_TRAILING_ZEROS));
 					}
 					builder.setOnClickListener(this::onClickSearchMore);
 					builder.setBrowsable(true);
