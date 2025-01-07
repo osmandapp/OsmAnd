@@ -41,7 +41,7 @@ public class SpeedCamerasBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		View root = UiUtilities.getInflater(app, nightMode).inflate(R.layout.bottom_sheet_icon_title_description, null);
+		View root = UiUtilities.getInflater(requireContext(), nightMode).inflate(R.layout.bottom_sheet_icon_title_description, null);
 		((ImageView) root.findViewById(R.id.icon)).setImageDrawable(app.getUIUtilities().getIcon(R.drawable.img_speed_camera_warning));
 		((TextView) root.findViewById(R.id.title)).setText(R.string.speed_camera_pois);
 		((TextView) root.findViewById(R.id.description)).setText(getDescriptionText());

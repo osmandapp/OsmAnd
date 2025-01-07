@@ -43,7 +43,7 @@ import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.ShowAlongTheRouteBottomSheet;
 import net.osmand.plus.routing.CurrentStreetName;
 import net.osmand.plus.routing.RoadShield;
-import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.routing.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -112,7 +112,7 @@ public class StreetNameWidget extends MapWidget {
 		boolean showClosestWaypointFirstInAddress = params.showClosestWaypointFirstInAddress;
 
 		if (turnArrowColorId != 0) {
-			turnDrawable.setColor(turnArrowColorId);
+			turnDrawable.setRouteDirectionColor(turnArrowColorId);
 		}
 
 		boolean hideStreetName = MapRouteInfoMenu.chooseRoutesVisible

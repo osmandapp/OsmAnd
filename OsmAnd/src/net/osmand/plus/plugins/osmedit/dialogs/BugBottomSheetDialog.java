@@ -54,7 +54,7 @@ public class BugBottomSheetDialog extends MenuBottomSheetDialogFragment {
 
 		items.add(new TitleItem(getString(titleTextId)));
 
-		View osmNoteView = View.inflate(UiUtilities.getThemedContext(app, nightMode),
+		View osmNoteView = View.inflate(UiUtilities.getThemedContext(requireContext(), nightMode),
 				R.layout.open_osm_note_text, null);
 		osmNoteView.getViewTreeObserver().addOnGlobalLayoutListener(getShadowLayoutListener());
 		TextInputLayout textBox = osmNoteView.findViewById(R.id.name_text_box);

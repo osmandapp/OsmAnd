@@ -128,10 +128,15 @@ public abstract class BaseCard {
 
 	@NonNull
 	public View build(@NonNull Context ctx) {
-		themedInflater = UiUtilities.getInflater(ctx, nightMode);
-		view = themedInflater.inflate(getCardLayoutId(), null);
+		view = inflate(ctx);
 		update();
 		return view;
+	}
+
+	@NonNull
+	public View inflate(@NonNull Context ctx) {
+		themedInflater = UiUtilities.getInflater(ctx, nightMode);
+		return themedInflater.inflate(getCardLayoutId(), null);
 	}
 
 	public OsmandApplication getMyApplication() {

@@ -294,7 +294,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 
 	private BaseBottomSheetItem createMuteSoundItem(LocalRoutingParameter optionsItem) {
 		boolean active = !routingHelper.getVoiceRouter().isMuteForMode(applicationMode);
-		View itemView = UiUtilities.getInflater(app, nightMode).inflate(
+		View itemView = UiUtilities.getInflater(requireContext(), nightMode).inflate(
 				R.layout.bottom_sheet_item_with_descr_switch_and_additional_button_56dp, null, false);
 		ImageView icon = itemView.findViewById(R.id.icon);
 		TextView tvTitle = itemView.findViewById(R.id.title);
@@ -333,18 +333,13 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 
 		Drawable drawable = app.getUIUtilities().getIcon(R.drawable.ic_action_settings,
 				nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
-		if (Build.VERSION.SDK_INT >= 21) {
-			Drawable activeDrawable = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_settings, selectedModeColor);
-			drawable = AndroidUtils.createPressedStateListDrawable(drawable, activeDrawable);
-		}
+		Drawable activeDrawable = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_settings, selectedModeColor);
+		drawable = AndroidUtils.createPressedStateListDrawable(drawable, activeDrawable);
 		voicePromptsBtnImage.setImageDrawable(drawable);
 
-		voicePromptsBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.VOICE_ANNOUNCES, applicationMode);
-				dismiss();
-			}
+		voicePromptsBtn.setOnClickListener(v -> {
+			BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.VOICE_ANNOUNCES, applicationMode);
+			dismiss();
 		});
 
 		return new BaseBottomSheetItem.Builder()
@@ -355,7 +350,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 	private BaseBottomSheetItem inflateElevationParameter(LocalRoutingParameter parameter) {
 		BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 		boolean active = !useHeightPref.getModeValue(applicationMode);
-		View itemView = UiUtilities.getInflater(app, nightMode).inflate(
+		View itemView = UiUtilities.getInflater(requireContext(), nightMode).inflate(
 				R.layout.bottom_sheet_item_with_switch_and_dialog, null, false);
 		SwitchCompat switchButton = itemView.findViewById(R.id.compound_button);
 		View itemsContainer = itemView.findViewById(R.id.selectable_list_item);

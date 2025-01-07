@@ -1,5 +1,6 @@
 package net.osmand.plus.quickaction;
 
+import static net.osmand.plus.quickaction.ButtonAppearanceParams.ORIGINAL_VALUE;
 import static net.osmand.plus.quickaction.QuickActionType.CREATE_CATEGORY;
 import static net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState.DEFAULT_BUTTON_ID;
 
@@ -14,84 +15,22 @@ import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.configmap.routes.actions.ShowHideCycleRoutesAction;
-import net.osmand.plus.configmap.routes.actions.ShowHideDifficultyClassificationAction;
-import net.osmand.plus.configmap.routes.actions.ShowHideFitnessTrailsAction;
-import net.osmand.plus.configmap.routes.actions.ShowHideHikingRoutesAction;
-import net.osmand.plus.configmap.routes.actions.ShowHideHorseRoutesAction;
-import net.osmand.plus.configmap.routes.actions.ShowHideMtbRoutesAction;
-import net.osmand.plus.configmap.routes.actions.ShowHideRunningRoutesAction;
-import net.osmand.plus.configmap.routes.actions.ShowHideSkiSlopesAction;
-import net.osmand.plus.configmap.routes.actions.ShowHideWhitewaterSportsAction;
+import net.osmand.plus.configmap.routes.actions.*;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.ShowHideMapillaryAction;
-import net.osmand.plus.quickaction.actions.ChangeMapOrientationAction;
-import net.osmand.plus.quickaction.actions.DayNightModeAction;
-import net.osmand.plus.quickaction.actions.DisplayPositionAction;
-import net.osmand.plus.quickaction.actions.FavoriteAction;
-import net.osmand.plus.quickaction.actions.GPXAction;
-import net.osmand.plus.quickaction.actions.LockScreenAction;
-import net.osmand.plus.quickaction.actions.MapScrollDownAction;
-import net.osmand.plus.quickaction.actions.MapScrollLeftAction;
-import net.osmand.plus.quickaction.actions.MapScrollRightAction;
-import net.osmand.plus.quickaction.actions.MapScrollUpAction;
-import net.osmand.plus.quickaction.actions.MapStyleAction;
-import net.osmand.plus.quickaction.actions.MapZoomInAction;
-import net.osmand.plus.quickaction.actions.MapZoomOutAction;
-import net.osmand.plus.quickaction.actions.MarkerAction;
-import net.osmand.plus.quickaction.actions.MoveToMyLocationAction;
-import net.osmand.plus.quickaction.actions.NavAddDestinationAction;
-import net.osmand.plus.quickaction.actions.NavAddFirstIntermediateAction;
-import net.osmand.plus.quickaction.actions.NavAutoZoomMapAction;
-import net.osmand.plus.quickaction.actions.NavDirectionsFromAction;
-import net.osmand.plus.quickaction.actions.NavRemoveNextDestination;
-import net.osmand.plus.quickaction.actions.NavReplaceDestinationAction;
-import net.osmand.plus.quickaction.actions.NavResumePauseAction;
-import net.osmand.plus.quickaction.actions.NavStartStopAction;
-import net.osmand.plus.quickaction.actions.NavVoiceAction;
-import net.osmand.plus.quickaction.actions.NavigatePreviousScreenAction;
-import net.osmand.plus.quickaction.actions.NextAppProfileAction;
-import net.osmand.plus.quickaction.actions.OpenNavigationViewAction;
-import net.osmand.plus.quickaction.actions.OpenSearchViewAction;
-import net.osmand.plus.quickaction.actions.PreviousAppProfileAction;
-import net.osmand.plus.quickaction.actions.RouteAction;
-import net.osmand.plus.quickaction.actions.ShowHideDrawerAction;
-import net.osmand.plus.quickaction.actions.ShowHideFavoritesAction;
-import net.osmand.plus.quickaction.actions.ShowHideGpxTracksAction;
-import net.osmand.plus.quickaction.actions.ShowHidePoiAction;
-import net.osmand.plus.quickaction.actions.ShowHideTransportLinesAction;
-import net.osmand.plus.quickaction.actions.SwitchProfileAction;
+import net.osmand.plus.quickaction.actions.*;
 import net.osmand.plus.quickaction.actions.special.OpenWunderLINQDatagridAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.views.mapwidgets.configure.buttons.CompassButtonState;
-import net.osmand.plus.views.mapwidgets.configure.buttons.ConfigureMapButtonState;
-import net.osmand.plus.views.mapwidgets.configure.buttons.DrawerMenuButtonState;
-import net.osmand.plus.views.mapwidgets.configure.buttons.Map3DButtonState;
-import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
-import net.osmand.plus.views.mapwidgets.configure.buttons.MyLocationButtonState;
-import net.osmand.plus.views.mapwidgets.configure.buttons.NavigationMenuButtonState;
-import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
-import net.osmand.plus.views.mapwidgets.configure.buttons.QuickSearchButtonState;
-import net.osmand.plus.views.mapwidgets.configure.buttons.ZoomInButtonState;
-import net.osmand.plus.views.mapwidgets.configure.buttons.ZoomOutButtonState;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.views.mapwidgets.configure.buttons.*;
 import net.osmand.util.Algorithms;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Created by rosty on 12/27/16.
@@ -162,8 +101,13 @@ public class MapButtonsHelper {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
+	private final Collator collator = OsmAndCollator.primaryCollator();
 	private final QuickActionSerializer serializer = new QuickActionSerializer();
 	private final Gson gson = new GsonBuilder().registerTypeAdapter(QuickAction.class, serializer).create();
+
+	private final CommonPreference<Integer> defaultSizePref;
+	private final CommonPreference<Float> defaultOpacityPref;
+	private final CommonPreference<Integer> defaultCornerRadiusPref;
 
 	private Map3DButtonState map3DButtonState;
 	private MyLocationButtonState myLocationButtonState;
@@ -180,11 +124,15 @@ public class MapButtonsHelper {
 	private Map<Integer, QuickActionType> quickActionTypesInt = new TreeMap<>();
 	private Map<String, QuickActionType> quickActionTypesStr = new TreeMap<>();
 	private Set<QuickActionUpdatesListener> updatesListeners = new HashSet<>();
-	private final Collator collator = OsmAndCollator.primaryCollator();
+
 
 	public MapButtonsHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
+		this.defaultSizePref = settings.registerIntPreference("default_map_button_size", ORIGINAL_VALUE).makeProfile().cache();
+		this.defaultOpacityPref = settings.registerFloatPreference("default_map_button_opacity", ORIGINAL_VALUE).makeProfile().cache();
+		this.defaultCornerRadiusPref = settings.registerIntPreference("default_map_button_corner_radius", ORIGINAL_VALUE).makeProfile().cache();
+
 		updateActionTypes();
 		initDefaultButtons();
 	}
@@ -658,6 +606,21 @@ public class MapButtonsHelper {
 			}
 		}
 		return null;
+	}
+
+	@NonNull
+	public CommonPreference<Integer> getDefaultSizePref() {
+		return defaultSizePref;
+	}
+
+	@NonNull
+	public CommonPreference<Float> getDefaultOpacityPref() {
+		return defaultOpacityPref;
+	}
+
+	@NonNull
+	public CommonPreference<Integer> getDefaultCornerRadiusPref() {
+		return defaultCornerRadiusPref;
 	}
 
 	@NonNull

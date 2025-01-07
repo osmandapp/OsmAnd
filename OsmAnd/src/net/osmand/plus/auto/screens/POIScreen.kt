@@ -48,6 +48,8 @@ class POIScreen(
         lifecycle.addObserver(this)
     }
 
+    override fun shouldRestoreMapState() = true
+
     override fun onGetTemplate(): Template {
         val templateBuilder = PlaceListNavigationTemplate.Builder()
         if (loading) {
@@ -177,10 +179,8 @@ class POIScreen(
 		}
 	}
 
-	override fun onStart(owner: LifecycleOwner) {
-		super.onStart(owner)
-		app.osmandMap.mapLayers.poiMapLayer.customObjectsDelegate =
-			OsmandMapLayer.CustomMapObjects()
-
+	override fun onCreate(owner: LifecycleOwner) {
+		super.onCreate(owner)
+		app.osmandMap.mapLayers.poiMapLayer.customObjectsDelegate = OsmandMapLayer.CustomMapObjects()
 	}
 }

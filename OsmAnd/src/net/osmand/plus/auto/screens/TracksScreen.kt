@@ -49,6 +49,8 @@ class TracksScreen(
 		lifecycle.addObserver(this)
 	}
 
+	override fun shouldRestoreMapState() = true
+
 	override fun onCreate(owner: LifecycleOwner) {
 		super.onCreate(owner)
 		loadTracksTask = LoadTracksTask()

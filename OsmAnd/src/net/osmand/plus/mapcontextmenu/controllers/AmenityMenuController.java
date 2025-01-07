@@ -1,12 +1,14 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
+import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
 
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -14,24 +16,29 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
 import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
+import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
+import org.apache.commons.logging.Log;
+
 import java.util.List;
 
 public class AmenityMenuController extends MenuController {
+	private static final Log LOG = PlatformUtil.getLog(AmenityMenuController.class);
 
 	private Amenity amenity;
 	private final MapMarker marker;
@@ -69,8 +76,8 @@ public class AmenityMenuController extends MenuController {
 					new MapMarkerMenuController(mapActivity, marker.getPointDescription(mapActivity), marker);
 			leftTitleButtonController = markerMenuController.getLeftTitleButtonController();
 			rightTitleButtonController = markerMenuController.getRightTitleButtonController();
-		} else if (amenity.getSubType().equals(ROUTE_ARTICLE_POINT)) {
-			TitleButtonController openTrackButtonController = new TitleButtonController() {
+		} else if (amenity.isRoutePoint()) {
+			TitleButtonController openTrackButtonController = new TitleButtonController(this) {
 				@Override
 				public void buttonPressed() {
 					MapActivity mapActivity = getMapActivity();
@@ -83,7 +90,7 @@ public class AmenityMenuController extends MenuController {
 			openTrackButtonController.caption = mapActivity.getString(R.string.shared_string_open_track);
 			leftTitleButtonController = openTrackButtonController;
 		} else if (amenity.getType().isWiki()) {
-			leftTitleButtonController = new TitleButtonController() {
+			leftTitleButtonController = new TitleButtonController(this) {
 				@Override
 				public void buttonPressed() {
 					MapActivity activity = getMapActivity();
@@ -101,11 +108,20 @@ public class AmenityMenuController extends MenuController {
 
 	void openTrack(MapActivity mapActivity) {
 		TravelHelper travelHelper = mapActivity.getMyApplication().getTravelHelper();
-		String lang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
-		String name = amenity.getTagContent(Amenity.ROUTE_NAME);
-		TravelArticle article = travelHelper.getArticleByTitle(name, lang, true, null);
-		if (article != null) {
-			travelHelper.openTrackMenu(article, mapActivity, name, amenity.getLocation());
+		if (ROUTE_ARTICLE_POINT.equals(amenity.getSubType())) {
+			String lang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
+			String name = amenity.getTagContent(Amenity.ROUTE_NAME);
+			TravelArticle article = travelHelper.getArticleByTitle(name, lang, true, null);
+			if (article != null) {
+				travelHelper.openTrackMenu(article, mapActivity, name, amenity.getLocation(), false);
+			}
+		} else if (ROUTE_TRACK_POINT.equals(amenity.getSubType())) {
+			TravelGpx travelGpx = travelHelper.searchGpx(amenity.getLocation(), amenity.getRouteId(), amenity.getRef());
+			if (travelGpx != null) {
+				travelHelper.openTrackMenu(travelGpx, mapActivity, travelGpx.getTitle(), amenity.getLocation(), false);
+			} else {
+				LOG.error("openTrack() searchGpx() travelGpx is null");
+			}
 		}
 	}
 

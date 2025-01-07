@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.preference.Preference;
 
 import com.google.android.material.slider.Slider;
 
@@ -31,10 +30,10 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
-import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.shared.settings.enums.MetricsConstants;
 
@@ -66,7 +65,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 		settings = app.getSettings();
 		appMode = getAppMode();
 		preference = settings.ROUTE_RECALCULATION_DISTANCE;
-		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
+		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
 		getPreferenceStateAndValue();
 
 		SwitchPreferenceEx switchPref = (SwitchPreferenceEx) getPreference();
@@ -107,13 +106,14 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 
 		String on = getString(R.string.shared_string_enabled);
 		String off = getString(R.string.shared_string_disabled);
+		Context context = requireContext();
 		BottomSheetItemWithCompoundButton[] preferenceBtn = new BottomSheetItemWithCompoundButton[1];
 		preferenceBtn[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(enabled)
 				.setCompoundButtonColor(appModeColor)
 				.setTitle(enabled ? on : off)
 				.setTitleColorId(enabled ? activeColor : disabledColor)
-				.setCustomView(getCustomButtonView(app, getAppMode(), enabled, nightMode))
+				.setCustomView(getCustomButtonView(context, getAppMode(), enabled, nightMode))
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -125,7 +125,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 						preferenceBtn[0].setChecked(enabled);
 						getDefaultValue();
 						updateSliderView();
-						updateCustomButtonView(app, getAppMode(), v, enabled, nightMode);
+						updateCustomButtonView(context, getAppMode(), v, enabled, nightMode);
 						Fragment target = getTargetFragment();
 						float newValue = enabled ? DEFAULT_MODE : DISABLE_MODE;
 						if (target instanceof OnConfirmPreferenceChange) {
@@ -197,7 +197,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 	}
 
 	private void updateSliderView() {
-		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
+		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
 		int activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
 		int disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
 		int textColorPrimary = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorPrimary);
@@ -240,7 +240,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 	}
 
 	private static String getFormattedDistance(@NonNull OsmandApplication app, float value) {
-		return OsmAndFormatter.getFormattedDistance(value, app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS);
+		return OsmAndFormatter.getFormattedDistance(value, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
 	}
 
 	@NonNull

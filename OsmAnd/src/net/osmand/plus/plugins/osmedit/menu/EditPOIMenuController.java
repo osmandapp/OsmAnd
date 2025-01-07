@@ -14,6 +14,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.TitleButtonController;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
@@ -45,7 +46,7 @@ public class EditPOIMenuController extends MenuController {
 			builder.setShowTitleIfTruncated(false);
 		}
 
-		leftTitleButtonController = new TitleButtonController() {
+		leftTitleButtonController = new TitleButtonController(this) {
 			@Override
 			public void buttonPressed() {
 				MapActivity activity = getMapActivity();
@@ -73,7 +74,7 @@ public class EditPOIMenuController extends MenuController {
 		leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_upload);
 		leftTitleButtonController.startIconId = R.drawable.ic_action_export;
 
-		rightTitleButtonController = new TitleButtonController() {
+		rightTitleButtonController = new TitleButtonController(this) {
 			@Override
 			public void buttonPressed() {
 				MapActivity activity = getMapActivity();

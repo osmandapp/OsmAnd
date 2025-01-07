@@ -56,7 +56,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		if (!(preference instanceof BooleanPreference)) {
 			return;
 		}
-		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
+		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
 
 		String title = switchPreference.getTitle().toString();
 		items.add(new TitleItem(title));
@@ -67,12 +67,13 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		int disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
 		boolean checked = switchPreference.isChecked();
 
+		Context context = requireContext();
 		BottomSheetItemWithCompoundButton[] preferenceBtn = new BottomSheetItemWithCompoundButton[1];
 		preferenceBtn[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(checked)
 				.setTitle(checked ? on : off)
 				.setTitleColorId(checked ? activeColor : disabledColor)
-				.setCustomView(getCustomButtonView(app, getAppMode(), checked, nightMode))
+				.setCustomView(getCustomButtonView(context, getAppMode(), checked, nightMode))
 				.setOnClickListener(v -> {
 					boolean newValue = !switchPreference.isChecked();
 					Fragment targetFragment = getTargetFragment();
@@ -89,7 +90,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 							preferenceBtn[0].setTitle(newValue ? on : off);
 							preferenceBtn[0].setChecked(newValue);
 							preferenceBtn[0].setTitleColorId(newValue ? activeColor : disabledColor);
-							updateCustomButtonView(app, getAppMode(), v, newValue, nightMode);
+							updateCustomButtonView(context, getAppMode(), v, newValue, nightMode);
 
 							if (targetFragment instanceof OnPreferenceChanged) {
 								((OnPreferenceChanged) targetFragment).onPreferenceChanged(switchPreference.getKey());
@@ -129,14 +130,15 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		return R.string.shared_string_close;
 	}
 
-	public static View getCustomButtonView(OsmandApplication app, ApplicationMode mode, boolean checked, boolean nightMode) {
-		View customView = UiUtilities.getInflater(app, nightMode).inflate(R.layout.bottom_sheet_item_preference_switch, null);
-		updateCustomButtonView(app, mode, customView, checked, nightMode);
+	public static View getCustomButtonView(@NonNull Context context, ApplicationMode mode, boolean checked, boolean nightMode) {
+		View customView = UiUtilities.getInflater(context, nightMode).inflate(R.layout.bottom_sheet_item_preference_switch, null);
+		updateCustomButtonView(context, mode, customView, checked, nightMode);
 		return customView;
 	}
 
-	public static void updateCustomButtonView(OsmandApplication app, ApplicationMode mode, View customView, boolean checked, boolean nightMode) {
-		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
+	public static void updateCustomButtonView(@NonNull Context context, ApplicationMode mode, View customView, boolean checked, boolean nightMode) {
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		Context themedCtx = UiUtilities.getThemedContext(context, nightMode);
 		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(themedCtx);
 		LinearLayout buttonView = customView.findViewById(R.id.button_container);
 
@@ -147,16 +149,17 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 			bgColor = ColorUtilities.getColorWithAlpha(color, checked ? 0.1f : 0.5f);
 			selectedColor = ColorUtilities.getColorWithAlpha(color, checked ? 0.3f : 0.5f);
 		} else {
-			bgColor = ContextCompat.getColor(app, checked
+			bgColor = ContextCompat.getColor(context, checked
 					? getActiveColorId(nightMode) : getSecondaryIconColorId(nightMode));
 			selectedColor = ColorUtilities.getColorWithAlpha(
-					ContextCompat.getColor(app, getActiveColorId(nightMode)), checked ? 0.3f : 0.5f);
+					ContextCompat.getColor(context, getActiveColorId(nightMode)), checked ? 0.3f : 0.5f);
 		}
 
 		int bgResId = isLayoutRtl ? R.drawable.rectangle_rounded_left : R.drawable.rectangle_rounded_right;
 		int selectableResId = isLayoutRtl ? R.drawable.ripple_rectangle_rounded_left : R.drawable.ripple_rectangle_rounded_right;
-		Drawable bgDrawable = app.getUIUtilities().getPaintedIcon(bgResId, bgColor);
-		Drawable selectable = app.getUIUtilities().getPaintedIcon(selectableResId, selectedColor);
+		UiUtilities utilities = app.getUIUtilities();
+		Drawable bgDrawable = utilities.getPaintedIcon(bgResId, bgColor);
+		Drawable selectable = utilities.getPaintedIcon(selectableResId, selectedColor);
 		Drawable[] layers = {bgDrawable, selectable};
 		AndroidUtils.setBackground(buttonView, new LayerDrawable(layers));
 	}

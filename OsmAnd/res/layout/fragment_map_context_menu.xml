@@ -512,7 +512,6 @@
 					android:layout_height="wrap_content"
 					android:orientation="vertical"
 					tools:background="?attr/activity_background_color">
-
 				</LinearLayout>
 
 			</net.osmand.plus.LockableScrollView>

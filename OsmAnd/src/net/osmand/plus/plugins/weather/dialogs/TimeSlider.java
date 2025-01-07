@@ -19,7 +19,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.OsmAndFormatter.TimeFormatter;
+import net.osmand.plus.utils.TimeFormatter;
 
 import org.apache.commons.logging.Log;
 

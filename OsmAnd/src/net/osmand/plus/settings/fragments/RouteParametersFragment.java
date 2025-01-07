@@ -7,11 +7,7 @@ import static net.osmand.plus.settings.fragments.DangerousGoodsFragment.getHazma
 import static net.osmand.plus.settings.fragments.SettingsScreenType.DANGEROUS_GOODS;
 import static net.osmand.plus.settings.fragments.search.PreferenceMarker.markPreferenceAsConnectedToPlugin;
 import static net.osmand.plus.utils.AndroidUtils.getRoutingStringPropertyName;
-import static net.osmand.router.GeneralRouter.ALLOW_VIA_FERRATA;
-import static net.osmand.router.GeneralRouter.GOODS_RESTRICTIONS;
-import static net.osmand.router.GeneralRouter.HAZMAT_CATEGORY;
-import static net.osmand.router.GeneralRouter.USE_HEIGHT_OBSTACLES;
-import static net.osmand.router.GeneralRouter.USE_SHORTEST_WAY;
+import static net.osmand.router.GeneralRouter.*;
 
 import android.app.Activity;
 import android.content.Context;
@@ -75,14 +71,13 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.router.GeneralRouter;
-import net.osmand.router.GeneralRouter.RoutingParameter;
-import net.osmand.router.GeneralRouter.RoutingParameterType;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -257,8 +252,9 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 		}
 	}
 
-	private void setupOsmAndRouteServicePrefs(@NonNull ApplicationMode am, @NonNull PreferenceScreen screen,
-											  @NonNull SwitchPreferenceEx fastRoute) {
+	private void setupOsmAndRouteServicePrefs(@NonNull ApplicationMode am,
+			@NonNull PreferenceScreen screen,
+			@NonNull SwitchPreferenceEx fastRoute) {
 		GeneralRouter router = app.getRouter(am);
 		clearParameters();
 		if (router != null) {
@@ -279,22 +275,22 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 					drivingStyleParameters.add(routingParameter);
 				} else if (param.startsWith(HAZMAT_CATEGORY_USA_PREFIX)) {
 					hazmatCategoryUSAParameters.add(routingParameter);
-				} else if ((!param.equals(GeneralRouter.USE_SHORTEST_WAY) || am.isDerivedRoutingFrom(ApplicationMode.CAR))
-						&& !param.equals(GeneralRouter.VEHICLE_HEIGHT)
-						&& !param.equals(GeneralRouter.VEHICLE_WEIGHT)
-						&& !param.equals(GeneralRouter.VEHICLE_WIDTH)
-						&& !param.equals(GeneralRouter.MOTOR_TYPE)
-						&& !param.equals(GeneralRouter.MAX_AXLE_LOAD)
-						&& !param.equals(GeneralRouter.WEIGHT_RATING)
-						&& !param.equals(GeneralRouter.VEHICLE_LENGTH)) {
+				} else if ((!param.equals(USE_SHORTEST_WAY) || am.isDerivedRoutingFrom(ApplicationMode.CAR))
+						&& !param.equals(VEHICLE_HEIGHT)
+						&& !param.equals(VEHICLE_WEIGHT)
+						&& !param.equals(VEHICLE_WIDTH)
+						&& !param.equals(MOTOR_TYPE)
+						&& !param.equals(MAX_AXLE_LOAD)
+						&& !param.equals(WEIGHT_RATING)
+						&& !param.equals(VEHICLE_LENGTH)) {
 					otherRoutingParameters.add(routingParameter);
 				}
 			}
-			if (drivingStyleParameters.size() > 0) {
+			if (!drivingStyleParameters.isEmpty()) {
 				ListPreferenceEx drivingStyleRouting = createRoutingBooleanListPreference(DRIVING_STYLE, drivingStyleParameters);
 				screen.addPreference(drivingStyleRouting);
 			}
-			if (avoidParameters.size() > 0) {
+			if (!avoidParameters.isEmpty()) {
 				String title;
 				String description;
 				if (am.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT)) {
@@ -307,12 +303,12 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 				MultiSelectBooleanPreference avoidRouting = createRoutingBooleanMultiSelectPref(AVOID_ROUTING_PARAMETER_PREFIX, title, description, avoidParameters);
 				screen.addPreference(avoidRouting);
 			}
-			if (preferParameters.size() > 0) {
+			if (!preferParameters.isEmpty()) {
 				String title = getString(R.string.prefer_in_routing_title);
 				MultiSelectBooleanPreference preferRouting = createRoutingBooleanMultiSelectPref(PREFER_ROUTING_PARAMETER_PREFIX, title, "", preferParameters);
 				screen.addPreference(preferRouting);
 			}
-			if (hazmatCategoryUSAParameters.size() > 0) {
+			if (!hazmatCategoryUSAParameters.isEmpty()) {
 				setupHazmatUSACategoryPreference(screen);
 			}
 			Context ctx = requireContext();
@@ -336,7 +332,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 		setupTimeConditionalRoutingPref();
 	}
 
-	public static Preference createRoutingParameterPref(@NonNull Context ctx, @NonNull RoutingParameter p) {
+	public static Preference createRoutingParameterPref(@NonNull Context ctx,
+			@NonNull RoutingParameter p) {
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
 		OsmandSettings settings = app.getSettings();
 
@@ -357,7 +354,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 		}
 	}
 
-	public static ListParameters populateListParameters(@NonNull Context ctx, @NonNull RoutingParameter parameter) {
+	public static ListParameters populateListParameters(@NonNull Context ctx,
+			@NonNull RoutingParameter parameter) {
 		Object[] vls = parameter.getPossibleValues();
 		String[] sVls = new String[vls.length];
 		int i = 0;
@@ -378,7 +376,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 		return new ListParameters(descriptions, names, sVls);
 	}
 
-	private void setupOtherBooleanParameterSummary(ApplicationMode am, RoutingParameter p, TwoStatePreference preference) {
+	private void setupOtherBooleanParameterSummary(ApplicationMode am, RoutingParameter p,
+			TwoStatePreference preference) {
 		if (USE_HEIGHT_OBSTACLES.equals(p.getId()) && !Algorithms.isEmpty(reliefFactorParameters)) {
 			String summaryOn = getString(R.string.shared_string_enabled);
 			for (RoutingParameter parameter : reliefFactorParameters) {
@@ -392,12 +391,6 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 			preference.setSummaryOn(R.string.shared_string_on);
 			preference.setSummaryOff(R.string.shared_string_off);
 		}
-	}
-
-	private void addDivider(PreferenceScreen screen) {
-		Preference divider = new Preference(requireContext());
-		divider.setLayoutResource(R.layout.simple_divider_item);
-		screen.addPreference(divider);
 	}
 
 	private void setupReverseDirectionRecalculation(PreferenceScreen screen) {
@@ -770,12 +763,13 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 		}
 		String summary = String.format(getString(R.string.ltr_or_rtl_combine_via_bold_point),
 				enabled ? getString(R.string.shared_string_enabled) : getString(R.string.shared_string_disabled),
-				OsmAndFormatter.getFormattedDistance(allowedValue, app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS));
+				OsmAndFormatter.getFormattedDistance(allowedValue, app, OsmAndFormatterParams.NO_TRAILING_ZEROS));
 		switchPref.setSummary(summary);
 		switchPref.setChecked(enabled);
 	}
 
-	private void setupViaFerrataPreference(@NonNull RoutingParameter parameter, @NonNull PreferenceScreen screen) {
+	private void setupViaFerrataPreference(@NonNull RoutingParameter parameter,
+			@NonNull PreferenceScreen screen) {
 		viaFerrataParameter = parameter;
 		CommonPreference<Boolean> preference = settings.getCustomRoutingBooleanProperty(
 				parameter.getId(), parameter.getDefaultBoolean()
@@ -846,7 +840,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 		return list;
 	}
 
-	private void setupHazmatCategoryPreference(@NonNull RoutingParameter parameter, @NonNull PreferenceScreen screen) {
+	private void setupHazmatCategoryPreference(@NonNull RoutingParameter parameter,
+			@NonNull PreferenceScreen screen) {
 		Preference hazmatUsaPreference = findPreference(DANGEROUS_GOODS_USA);
 		if (hazmatUsaPreference == null || !hazmatUsaPreference.isVisible()) {
 			Preference preference = new Preference(app);
@@ -885,7 +880,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 		uiPreference.setIcon(icon);
 	}
 
-	private void setupGoodsRestrictionsPreference(@NonNull RoutingParameter parameter, @NonNull PreferenceScreen screen) {
+	private void setupGoodsRestrictionsPreference(@NonNull RoutingParameter parameter,
+			@NonNull PreferenceScreen screen) {
 		Preference uiPreference = new Preference(app);
 		uiPreference.setKey(GOODS_RESTRICTIONS_PREFERENCE);
 		String title = getRoutingStringPropertyName(app, parameter.getId(), parameter.getName());
@@ -969,7 +965,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 	}
 
 	@Override
-	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
+	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles,
+			Object newValue) {
 		if ((RELIEF_SMOOTHNESS_FACTOR.equals(prefId) || DRIVING_STYLE.equals(prefId)) && newValue instanceof String) {
 			List<RoutingParameter> routingParameters = DRIVING_STYLE.equals(prefId) ? drivingStyleParameters : reliefFactorParameters;
 			updateSelectedParameters(app, getSelectedAppMode(), routingParameters, (String) newValue);
@@ -1010,7 +1007,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 		}
 	}
 
-	private ListPreferenceEx createRoutingBooleanListPreference(String groupKey, List<RoutingParameter> routingParameters) {
+	private ListPreferenceEx createRoutingBooleanListPreference(String groupKey,
+			List<RoutingParameter> routingParameters) {
 		String defaultTitle = Algorithms.capitalizeFirstLetterAndLowercase(groupKey.replace('_', ' '));
 		String title = getRoutingStringPropertyName(app, groupKey, defaultTitle);
 		String description = AndroidUtils.getRoutingStringPropertyDescription(app, groupKey, "");
@@ -1040,7 +1038,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 		return routingListPref;
 	}
 
-	private MultiSelectBooleanPreference createRoutingBooleanMultiSelectPref(String groupKey, String title, String descr, List<RoutingParameter> routingParameters) {
+	private MultiSelectBooleanPreference createRoutingBooleanMultiSelectPref(String groupKey,
+			String title, String descr, List<RoutingParameter> routingParameters) {
 		MultiSelectBooleanPreference multiSelectPref = new MultiSelectBooleanPreference(app);
 		multiSelectPref.setKey(groupKey);
 		multiSelectPref.setTitle(title);
@@ -1099,7 +1098,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 		return getRoutingStringPropertyName(context, parameter.getId(), parameter.getName());
 	}
 
-	public static boolean isRoutingParameterSelected(OsmandSettings settings, ApplicationMode mode, RoutingParameter parameter) {
+	public static boolean isRoutingParameterSelected(OsmandSettings settings, ApplicationMode mode,
+			RoutingParameter parameter) {
 		CommonPreference<Boolean> property = settings.getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
 		if (mode != null) {
 			return property.getModeValue(mode);
@@ -1109,7 +1109,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 	}
 
 	public static void updateSelectedParameters(OsmandApplication app, ApplicationMode mode,
-												List<RoutingParameter> parameters, String selectedParameterId) {
+			List<RoutingParameter> parameters, String selectedParameterId) {
 		for (RoutingParameter p : parameters) {
 			String parameterId = p.getId();
 			setRoutingParameterSelected(app.getSettings(), mode, parameterId, p.getDefaultBoolean(), parameterId.equals(selectedParameterId));
@@ -1118,7 +1118,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 	}
 
 	private static void setRoutingParameterSelected(OsmandSettings settings, ApplicationMode mode,
-													String parameterId, boolean defaultBoolean, boolean isChecked) {
+			String parameterId, boolean defaultBoolean, boolean isChecked) {
 		CommonPreference<Boolean> property = settings.getCustomRoutingBooleanProperty(parameterId, defaultBoolean);
 		if (mode != null) {
 			property.setModeValue(mode, isChecked);
@@ -1132,39 +1132,30 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 	}
 
 	private Drawable getRoutingPrefIcon(String prefId) {
-		switch (prefId) {
-			case GeneralRouter.ALLOW_PRIVATE:
-			case GeneralRouter.ALLOW_PRIVATE_FOR_TRUCK:
-				return getPersistentPrefIcon(R.drawable.ic_action_private_access);
-			case GeneralRouter.USE_SHORTEST_WAY:
-				return getPersistentPrefIcon(R.drawable.ic_action_fuel);
-			case GeneralRouter.ALLOW_MOTORWAYS:
-				return getPersistentPrefIcon(
-						UiUtilities.createTintedDrawable(app, R.drawable.ic_action_motorways, getActiveProfileColor()),
-						UiUtilities.createTintedDrawable(app, R.drawable.ic_action_avoid_motorways, ContextCompat.getColor(app, R.color.icon_color_default_light)));
-			case USE_HEIGHT_OBSTACLES:
-			case RELIEF_SMOOTHNESS_FACTOR:
-				return getPersistentPrefIcon(R.drawable.ic_action_altitude_average);
-			case AVOID_ROUTING_PARAMETER_PREFIX:
-				return getPersistentPrefIcon(R.drawable.ic_action_alert);
-			case DRIVING_STYLE:
-				return getPersistentPrefIcon(R.drawable.ic_action_bicycle_dark);
-			case "fast_route_mode":
-				return getPersistentPrefIcon(R.drawable.ic_action_fastest_route);
-			case "enable_time_conditional_routing":
-				return getPersistentPrefIcon(R.drawable.ic_action_road_works_dark);
-			case HAZMAT_TRANSPORTING_ENABLED:
-				return getPersistentPrefIcon(
-						getIcon(R.drawable.ic_action_hazmat_limit_colored),
-						getContentIcon(R.drawable.ic_action_hazmat_limit));
-			case GOODS_RESTRICTIONS_PREFERENCE:
-				return getPersistentPrefIcon(R.drawable.ic_action_van);
-			case ROUTING_RECALC_DISTANCE:
-				return getPersistentPrefIcon(R.drawable.ic_action_minimal_distance);
-			case ROUTING_RECALC_WRONG_DIRECTION:
-				return getPersistentPrefIcon(R.drawable.ic_action_reverse_direction);
-			default:
-				return null;
-		}
+		return switch (prefId) {
+			case ALLOW_PRIVATE, ALLOW_PRIVATE_FOR_TRUCK ->
+					getPersistentPrefIcon(R.drawable.ic_action_private_access);
+			case USE_SHORTEST_WAY -> getPersistentPrefIcon(R.drawable.ic_action_fuel);
+			case ALLOW_MOTORWAYS -> getPersistentPrefIcon(
+					UiUtilities.createTintedDrawable(app, R.drawable.ic_action_motorways, getActiveProfileColor()),
+					UiUtilities.createTintedDrawable(app, R.drawable.ic_action_avoid_motorways, ContextCompat.getColor(app, R.color.icon_color_default_light)));
+			case USE_HEIGHT_OBSTACLES, RELIEF_SMOOTHNESS_FACTOR ->
+					getPersistentPrefIcon(R.drawable.ic_action_altitude_average);
+			case AVOID_ROUTING_PARAMETER_PREFIX ->
+					getPersistentPrefIcon(R.drawable.ic_action_alert);
+			case DRIVING_STYLE -> getPersistentPrefIcon(R.drawable.ic_action_bicycle_dark);
+			case "fast_route_mode" -> getPersistentPrefIcon(R.drawable.ic_action_fastest_route);
+			case "enable_time_conditional_routing" ->
+					getPersistentPrefIcon(R.drawable.ic_action_road_works_dark);
+			case HAZMAT_TRANSPORTING_ENABLED -> getPersistentPrefIcon(
+					getIcon(R.drawable.ic_action_hazmat_limit_colored),
+					getContentIcon(R.drawable.ic_action_hazmat_limit));
+			case GOODS_RESTRICTIONS_PREFERENCE -> getPersistentPrefIcon(R.drawable.ic_action_van);
+			case ROUTING_RECALC_DISTANCE ->
+					getPersistentPrefIcon(R.drawable.ic_action_minimal_distance);
+			case ROUTING_RECALC_WRONG_DIRECTION ->
+					getPersistentPrefIcon(R.drawable.ic_action_reverse_direction);
+			default -> null;
+		};
 	}
 }

@@ -77,7 +77,7 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 			sliderDescrRes = savedInstanceState.getInt(SLIDER_DESCR_RES_KEY);
 			newMapSource = savedInstanceState.getBoolean(NEW_MAP_SOURCE);
 		}
-		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 		TitleItem titleItem = new TitleItem(getString(R.string.shared_string_zoom_levels));
 		items.add(titleItem);
 		View sliderView = inflater.inflate(R.layout.zoom_levels_with_descr, null);

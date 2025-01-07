@@ -602,21 +602,21 @@ public class UiUtilities {
 	}
 
 	@NonNull
-	public static LayoutInflater getInflater(Context ctx, boolean nightMode) {
+	public static LayoutInflater getInflater(@NonNull Context ctx, boolean nightMode) {
 		return LayoutInflater.from(getThemedContext(ctx, nightMode));
 	}
 
 	@NonNull
-	public static Context getThemedContext(Context context, boolean nightMode) {
+	public static Context getThemedContext(@NonNull Context context, boolean nightMode) {
 		return getThemedContext(context, nightMode, R.style.OsmandLightTheme, R.style.OsmandDarkTheme);
 	}
 
 	@NonNull
-	public static Context getThemedContext(Context context, boolean nightMode, int lightStyle, int darkStyle) {
+	public static Context getThemedContext(@NonNull Context context, boolean nightMode, int lightStyle, int darkStyle) {
 		return new ContextThemeWrapper(context, nightMode ? darkStyle : lightStyle);
 	}
 
-	public static void setMargins(View v, int s, int t, int e, int b) {
+	public static void setMargins(@NonNull View v, int s, int t, int e, int b) {
 		if (v.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
 			ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
 			AndroidUtils.setMargins(p, s, t, e, b);

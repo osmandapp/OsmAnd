@@ -88,7 +88,7 @@ public abstract class SelectPointsCategoryBottomSheet extends MenuBottomSheetDia
 	@NonNull
 	private BaseBottomSheetItem createAddNewCategoryItem() {
 		OsmandApplication app = requiredMyApplication();
-		View container = UiUtilities.getInflater(app, nightMode)
+		View container = UiUtilities.getInflater(requireContext(), nightMode)
 				.inflate(R.layout.bottom_sheet_item_with_descr_64dp, null);
 		container.setMinimumHeight(getResources().getDimensionPixelSize(R.dimen.bottom_sheet_list_item_height));
 

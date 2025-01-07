@@ -48,7 +48,7 @@ public class InfoCard extends BaseMetadataCard {
 		if (!Algorithms.isEmpty(keywords)) {
 			createItemRow(getString(R.string.shared_string_keywords), keywords, getContentIcon(R.drawable.ic_action_label));
 		}
-		String link = metadata != null ? metadata.getLink() : null;
+		String link = (metadata != null && metadata.getLink() != null) ? metadata.getLink().getHref() : null;
 		if (!Algorithms.isEmpty(link)) {
 			createLinkItemRow(getString(R.string.shared_string_link), link, R.drawable.ic_action_link);
 		}

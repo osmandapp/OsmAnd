@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.mapcontextmenu.TitleButtonController;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -21,7 +22,7 @@ import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNoteMenuController;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.plugins.audionotes.Recording;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -53,7 +54,7 @@ public class WptPtMenuController extends MenuController {
 		if (mapMarker != null && mapMarker.history && !app.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
 			mapMarker = null;
 		}
-		TitleButtonController openTrackButtonController = new TitleButtonController() {
+		TitleButtonController openTrackButtonController = new TitleButtonController(this) {
 			@Override
 			public void buttonPressed() {
 				MapActivity mapActivity = getMapActivity();
@@ -118,7 +119,7 @@ public class WptPtMenuController extends MenuController {
 			this.wpt = (WptPt) object;
 
 			if (builder instanceof WikivoyageWptPtMenuBuilder) {
-				((WikivoyageWptPtMenuBuilder) builder).updateDescriptionTokens(wpt);
+				((WikivoyageWptPtMenuBuilder) builder).updateImageLinkAndDescriptionTokens(wpt);
 			}
 		}
 	}

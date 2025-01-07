@@ -19,18 +19,19 @@ import androidx.car.app.navigation.model.RoutePreviewNavigationTemplate;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
+
 import net.osmand.PlatformUtil;
+import net.osmand.plus.auto.TripUtils;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.data.QuadRect;
 import net.osmand.data.ValueHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.auto.TripUtils;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -64,7 +65,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 	private boolean calculateRoute;
 	private boolean calculating;
 
-	private final StateChangedListener<Void> stateChangedListener = new StateChangedListener<Void>() {
+	private final StateChangedListener<Void> stateChangedListener = new StateChangedListener<>() {
 		@Override
 		public void stateChanged(Void change) {
 			if (routeGpxFile != null) {
@@ -75,7 +76,6 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		}
 	};
 
-
 	public RoutePreviewScreen(@NonNull CarContext carContext, @NonNull Action settingsAction,
 	                          @NonNull SearchResult searchResult, boolean calculateRoute) {
 		super(carContext);
@@ -84,6 +84,11 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		this.calculateRoute = calculateRoute;
 		getLifecycle().addObserver(this);
 		calculating = calculateRoute;
+	}
+
+	@Override
+	protected boolean shouldRestoreMapState() {
+		return true;
 	}
 
 	private void prepareRoute() {
@@ -155,6 +160,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 
 	@Override
 	public void onDestroy(@NonNull LifecycleOwner owner) {
+		super.onDestroy(owner);
 		OsmandApplication app = getApp();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		routingHelper.removeListener(this);

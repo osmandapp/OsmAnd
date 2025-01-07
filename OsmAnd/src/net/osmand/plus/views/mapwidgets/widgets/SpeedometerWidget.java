@@ -50,7 +50,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
+import net.osmand.plus.utils.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.util.Algorithms;
@@ -289,7 +289,7 @@ public class SpeedometerWidget {
 					cachedSpeed = location.getSpeed();
 					isChanged = true;
 				}
-				OsmAndFormatter.FormattedValue formattedSpeed = OsmAndFormatter.getFormattedSpeedValue(cachedSpeed, app);
+				FormattedValue formattedSpeed = OsmAndFormatter.getFormattedSpeedValue(cachedSpeed, app);
 				if (isChanged) {
 					setSpeedText(formattedSpeed.value, formattedSpeed.unit);
 				}
@@ -319,7 +319,7 @@ public class SpeedometerWidget {
 						formattedSpeed.valueSrc > cachedSpeedLimit + delta;
 			} else if (cachedSpeed != 0) {
 				cachedSpeed = 0;
-				OsmAndFormatter.FormattedValue formattedSpeed = OsmAndFormatter.getFormattedSpeedValue(cachedSpeed, app);
+				FormattedValue formattedSpeed = OsmAndFormatter.getFormattedSpeedValue(cachedSpeed, app);
 				setSpeedText(formattedSpeed.value, formattedSpeed.unit);
 				AndroidUiHelper.updateVisibility(view, true);
 			} else {
@@ -540,7 +540,7 @@ public class SpeedometerWidget {
 		textPaint.setAntiAlias(true);
 		textPaint.setTypeface(FontCache.getMediumFont());
 
-		OsmAndFormatter.FormattedValue formattedSpeed = OsmAndFormatter.getFormattedSpeedValue(cachedSpeed, app);
+		FormattedValue formattedSpeed = OsmAndFormatter.getFormattedSpeedValue(cachedSpeed, app);
 		float unitTextSize = SPEEDOMETER_UNIT_TEXT_SIZE * density;
 		textPaint.setTextSize(unitTextSize);
 		textPaint.setTypeface(DEFAULT);
@@ -583,7 +583,13 @@ public class SpeedometerWidget {
 	}
 
 	private int getSpeedTextColor(boolean speedExceed) {
-		return app.getColor(speedExceed ? R.color.text_color_negative : lastNightMode ? R.color.widgettext_night : R.color.widgettext_day);
+		int colorId;
+		if (speedExceed) {
+			colorId = lastNightMode ? R.color.speedometer_text_speed_exceed_night : R.color.speedometer_text_speed_exceed_day;
+		} else {
+			colorId = lastNightMode ? R.color.widgettext_night : R.color.widgettext_day;
+		}
+		return app.getColor(colorId);
 	}
 
 	@NonNull

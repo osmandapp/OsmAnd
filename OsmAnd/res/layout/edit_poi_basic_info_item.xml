@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		app:theme="?attr/new_app_theme">
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/contactInfoTextView"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginTop="18dp"
+			android:text="@string/contact_info"
+			android:textColor="?android:textColorPrimary"
+			app:typefaceWeight="medium"
+			android:layout_marginStart="@dimen/content_padding" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/streetImageView"
+			style="@style/edit_poi_imageview_style"
+			android:layout_below="@id/contactInfoTextView"
+			app:srcCompat="@drawable/ic_action_street_name"
+			app:tint="?android:textColorSecondary" />
+
+		<EditText
+			android:id="@+id/streetEditText"
+			style="@style/create_poi_text_field"
+			android:layout_below="@id/contactInfoTextView"
+			android:hint="@string/street_name"
+			android:inputType="textMultiLine"
+			tools:text="testText" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/houseNumberImageView"
+			style="@style/edit_poi_imageview_style"
+			android:layout_below="@id/streetEditText"
+			app:srcCompat="@drawable/ic_action_building_number"
+			app:tint="?android:textColorSecondary" />
+
+		<EditText
+			android:id="@+id/houseNumberEditText"
+			style="@style/create_poi_text_field"
+			android:layout_below="@id/streetEditText"
+			android:hint="@string/building_number"
+			android:inputType="text" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/phoneImageView"
+			style="@style/edit_poi_imageview_style"
+			android:layout_below="@id/houseNumberEditText"
+			app:srcCompat="@drawable/ic_action_call_dark"
+			app:tint="?android:textColorSecondary" />
+
+		<EditText
+			android:id="@+id/phoneEditText"
+			style="@style/create_poi_text_field"
+			android:layout_below="@id/houseNumberEditText"
+			android:hint="@string/phone"
+			android:inputType="phone" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/webSiteImageView"
+			style="@style/edit_poi_imageview_style"
+			android:layout_below="@id/phoneEditText"
+			app:srcCompat="@drawable/ic_world_globe_dark"
+			app:tint="?android:textColorSecondary" />
+
+		<EditText
+			android:id="@+id/webSiteEditText"
+			style="@style/create_poi_text_field"
+			android:layout_below="@id/phoneEditText"
+			android:hint="@string/website"
+			android:inputType="textUri" />
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/descriptionImageView"
+			style="@style/edit_poi_imageview_style"
+			android:layout_below="@id/webSiteEditText"
+			app:srcCompat="@drawable/ic_action_description"
+			app:tint="?android:textColorSecondary" />
+
+		<EditText
+			android:id="@+id/descriptionEditText"
+			style="@style/create_poi_text_field"
+			android:layout_width="match_parent"
+			android:layout_below="@id/webSiteEditText"
+			android:hint="@string/shared_string_description"
+			android:inputType="textMultiLine" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/openHoursTextView"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/descriptionEditText"
+			android:layout_marginStart="@dimen/content_padding"
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginTop="18dp"
+			android:layout_marginBottom="@dimen/content_padding"
+			android:text="@string/opening_hours"
+			android:textColor="?android:textColorPrimary"
+			app:typefaceWeight="medium" />
+
+	</RelativeLayout>
+
+</LinearLayout>

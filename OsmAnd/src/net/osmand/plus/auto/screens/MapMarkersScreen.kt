@@ -36,6 +36,8 @@ class MapMarkersScreen(
         lifecycle.addObserver(this)
     }
 
+    override fun shouldRestoreMapState() = true
+
     override fun onGetTemplate(): Template {
         val listBuilder = ItemList.Builder()
         val markersSize = app.mapMarkersHelper.mapMarkers.size
@@ -103,8 +105,8 @@ class MapMarkersScreen(
 		app.osmandMap.mapLayers.mapMarkersLayer.customObjectsDelegate = null
 	}
 
-	override fun onStart(owner: LifecycleOwner) {
-		super.onStart(owner)
+	override fun onCreate(owner: LifecycleOwner) {
+		super.onCreate(owner)
 		app.osmandMap.mapLayers.mapMarkersLayer.customObjectsDelegate = CustomMapObjects()
 	}
 }

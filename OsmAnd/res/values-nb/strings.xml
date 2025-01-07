@@ -1543,7 +1543,7 @@
     <string name="no_inet_connection_desc_map">Kreves for å laste ned kart.</string>
     <string name="storage_free_space">Ledig lagerplass</string>
     <string name="clear_tile_data">Slett alle kartfliser</string>
-    <string name="replace_favorite_confirmation">Er du sikker på at du vil erstatte favoritt %1$s\?</string>
+    <string name="replace_favorite_confirmation">Er du sikker på at du vil erstatte favoritt %1$s?</string>
     <string name="get_started">Kom i gang</string>
     <string name="routing_attr_short_way_name">Drivstoff-effektiv vei</string>
     <string name="edit_tilesource_expiration_time">Utløper (minutter)</string>
@@ -2492,8 +2492,7 @@
     <string name="poi_filter_namefinder">Nettbasert navnesøk</string>
     <string name="version_index_is_big_for_memory">Indeksen \"{0}\" fikk ikke plass i minnet</string>
     <string name="version_index_is_not_supported">Versjonen av indeksen \"{0}\" støttes ikke</string>
-    <string name="osmand_parking_plugin_description">Parkeringsplass-tillegget lar deg registrere hvor bilen din er parkert og hvor mye parkeringstid som gjenstår (hvis det er en tidsbegrensning). 
-\nBåde parkeringsplass og tid er synlige på dashbordet i OsmAnd såvel som i et miniprogram på kartet. En alarm kan legges til Android-kalenderen som en påminnelse.</string>
+    <string name="osmand_parking_plugin_description">Parkeringsplass-tillegget lar deg registrere hvor bilen din er parkert og hvor mye parkeringstid som gjenstår (hvis det er en tidsbegrensning). \nBåde parkeringsplass og tid er synlige på dashbordet i OsmAnd såvel som i et miniprogram på kartet. En alarm kan legges til Android-kalenderen som en påminnelse.</string>
     <string name="dashboard_or_drawer_description">En valgmulighet tilbys om å primært styre programmet via det fleksible dashbordet eller en statisk meny. Ditt valg kan alltid endres i dashbordinnstillingene.</string>
     <string name="shared_string_travel_guides">Reiseguider</string>
     <string name="waypoints_removed_from_map_markers">Rutepunkter fjernet fra kartmarkører</string>
@@ -2727,9 +2726,7 @@
     <string name="search_no_results_feedback">Resultatløst\? 
 \nGi oss tilbakemelding</string>
     <string name="poi_cannot_be_found">Fant ikke node eller vei.</string>
-    <string name="send_search_query_description">Vi kommer til å sende inn ditt søk «%1$s», sammen med din plassering.
-\n
-\nIngen personlig info samles inn, søkedata brukes kun for å forbedre søkealgoritmen.</string>
+    <string name="send_search_query_description">Vi kommer til å sende inn ditt søk «%1$s», sammen med din plassering. \n \nIngen personlig info samles inn, søkedata brukes kun for å forbedre søkealgoritmen.</string>
     <string name="test_voice_desrc">Trykk på en knapp og lytt til den tilhørende talemeldingen for å høre om den mangler eller er feil</string>
     <string name="ask_for_location_permission">Innvilg OsmAnd tilgang til plassering for å fortsette.</string>
     <string name="rendering_value_black_name">Svart</string>
@@ -2942,7 +2939,7 @@
     <string name="profile_alert_need_save_title">Lagre endringer</string>
     <string name="profile_alert_need_save_msg">Lagre endringer i profilen først</string>
     <string name="profile_alert_delete_title">Slett profil</string>
-    <string name="profile_alert_delete_msg">Slett «%s»-profilen\?</string>
+    <string name="profile_alert_delete_msg">Slett «%s»-profilen?</string>
     <string name="select_base_profile_dialog_title">Velg profil til å starte med</string>
     <string name="select_nav_profile_dialog_title">Velg navigasjonstype</string>
     <string name="base_profile_descr_car">Bil, lastebil, motorsykkel</string>
@@ -4030,18 +4027,7 @@
     <string name="routing_attr_allow_streams_description">Tillat bekker og dreneringsgrøfter</string>
     <string name="backup_delete_types_descr">Slett all data for foreldede datatyper fra OsmAnd-sky\?</string>
     <string name="backup_error_size_is_exceeded">Maks. størrelse for OsmAnd-sky har overskredet %1$s</string>
-    <string name="release_4_0">• Skysikkerhetskopi
-\n • Nattmodus for «Topo»-opptegningsstil
-\n • Mulighet for nedlasting av konturlinjer i fot
-\n • Spor kan nå fargelegges etter høyde, hastighet, eller helning.
-\n • Oppdatert «Sporopptak»-dialog
-\n • Distanse ved trykk flyttet fra radius-linjal inn i eget valg
-\n • Planlegg rute: Tillagt mulighet for å endre navigasjonsvalg, tilgjengelig oppsettskart og søk uten å forlate ruteplanlegging
-\n • Ny «Kjøp»-skjerm med detaljert info om kjøp
-\n • Tillagt alternativ for å endre rutelinjeutseende
-\n • OsmAnd Live-oppdateringer flyttet til «Nedlastinger»→«Oppdateringer»
-\n
-\n</string>
+    <string name="release_4_0">• Skysikkerhetskopi \n • Nattmodus for «Topo»-opptegningsstil \n • Mulighet for nedlasting av konturlinjer i fot \n • Spor kan nå fargelegges etter høyde, hastighet, eller helning. \n • Oppdatert «Sporopptak»-dialog \n • Distanse ved trykk flyttet fra radius-linjal inn i eget valg \n • Planlegg rute: Tillagt mulighet for å endre navigasjonsvalg, tilgjengelig oppsettskart og søk uten å forlate ruteplanlegging \n • Ny «Kjøp»-skjerm med detaljert info om kjøp \n • Tillagt alternativ for å endre rutelinjeutseende \n • OsmAnd Live-oppdateringer flyttet til «Nedlastinger»→«Oppdateringer» \n \n</string>
     <string name="logout_from_osmand_cloud">Logg ut fra OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Logg ut\?
 \nDu vil måtte logge inn igjen for å sikkerhetskopiere eller gjenopprette data.</string>
@@ -4136,19 +4122,7 @@
     <string name="benefits_for_contributors_primary_descr">Aktive bidragsytere gjør seg fortjent til timevise kartoppdateringer.</string>
     <string name="benefits_for_contributors_secondary_descr">Logg inn på OpenStreetMap for å sjekke at du kan få ubegrensede månedlige og timevise kartoppdateringer.</string>
     <string name="purchases_restored">Kjøp gjenopprettet</string>
-    <string name="release_4_0_beta">• Mulighet for nedlasting av kotelinjer i fot.
-\n
-\n • Planlegging av rutelandskap: Faner for å bygge mellom punkter og diagrammer.
-\n
-\n • OsmAnd Live-oppdateringer flyttet til «Nedlastinger → Oppdateringer».
-\n
-\n • Spor kan nå fargelegges etter høyde, hastighet, eller helning.
-\n
-\n • Tillagt valg for å endre rutelinjeutseende.
-\n
-\n • Oppdatert «Sporopptaks»-dialog.
-\n
-\n</string>
+    <string name="release_4_0_beta">• Mulighet for nedlasting av kotelinjer i fot. \n \n • Planlegging av rutelandskap: Faner for å bygge mellom punkter og diagrammer. \n \n • OsmAnd Live-oppdateringer flyttet til «Nedlastinger → Oppdateringer». \n \n • Spor kan nå fargelegges etter høyde, hastighet, eller helning. \n \n • Tillagt valg for å endre rutelinjeutseende. \n \n • Oppdatert «Sporopptaks»-dialog. \n \n</string>
     <string name="routing_engine_vehicle_type_mtb">MTB</string>
     <string name="activity_type_racing_name">Kappløp</string>
     <string name="exit_number">Avkjøringsnummer</string>
@@ -4293,8 +4267,7 @@
 \nProgrammet vil begynne å bruke den nye datamappen.</string>
     <string name="shared_storage_last_step">Du kan angi en ny datamappe etterpå.</string>
     <string name="shared_storage_third_step">Gi tillatelse for å få tilgang til mappen. Uten den kan ikke OsmAnd kopiere filer.</string>
-    <string name="shared_storage_first_step">Trykk «%1$s».
-\nFilbehandleren åpnes der du trenger å finne og åpne OsmAnd-mappen.</string>
+    <string name="shared_storage_first_step">Trykk «%1$s». \nFilbehandleren åpnes der du trenger å finne og åpne OsmAnd-mappen.</string>
     <string name="storage_copying_files_size">Kopierer %1$s filer %2$s</string>
     <string name="rendering_attr_natureReserves_description">Vis naturreservat, vernede områder, og nasjonalparker.</string>
     <string name="progress_complete">%1$s fullført</string>
@@ -4394,9 +4367,7 @@
     <string name="android_api">Android-API</string>
     <string name="google_play_services">Google Play-tjenester</string>
     <string name="location_source">Stedsplasseringskilde</string>
-    <string name="location_source_descr">Som forvalg bruker OsmAnd installert fra Google Play, %1$s for å fastsette posisjon.
-\n
-\nHvis du får upresis posisjonsinfo eller bruker en enhet uten %2$s, kan du prøve å bytte til «%3$s».</string>
+    <string name="location_source_descr">Som forvalg bruker OsmAnd installert fra Google Play, %1$s for å fastsette posisjon. \n \nHvis du får upresis posisjonsinfo eller bruker en enhet uten %2$s, kan du prøve å bytte til «%3$s».</string>
     <string name="edit_category">Rediger kategori</string>
     <string name="shared_string_shape">Form</string>
     <string name="default_appearance_desc">Forvalgt farge, ikon og form vil bli brukt for de tillagte favorittpunktene i gruppen.</string>
@@ -4731,9 +4702,7 @@
     <string name="external_sensor_widgets">Eksterne sensorer</string>
     <string name="map_widget_ant_bicycle_dist">Sykkeldistanse</string>
     <string name="map_widget_target_distance_desc">Viser avstanden fra kameraet til målstedet.</string>
-    <string name="ant_missing_dependency_descr">Fant ikke den påkrevde tjenesten «%1$s».
-\nDu må installere eller oppgradere ANT+-programtilleggstjenesten.
-\nVil du åpne Play-butikken for å hente den\?</string>
+    <string name="ant_missing_dependency_descr">Fant ikke den påkrevde tjenesten «%1$s». \nDu må installere eller oppgradere ANT+-programtilleggstjenesten. \nVil du åpne Play-butikken for å hente den?</string>
     <string name="shared_string_shows">Viser</string>
     <string name="coordinates_widget_current_location">Koordinater: nåværende posisjon</string>
     <string name="shared_string_switch_mode">Bytt modus</string>
@@ -4991,7 +4960,7 @@
     <string name="weather_precip_in">in</string>
     <string name="shared_string_add_manually">Legg til manuelt …</string>
     <string name="shared_string_delete_file">Slett fil</string>
-    <string name="cloud_version_confirm_delete">Slett «%1$s» fra OsmAnd-sky\?</string>
+    <string name="cloud_version_confirm_delete">Slett «%1$s» fra OsmAnd-sky?</string>
     <string name="delete_cloud_version">Slett sky-versjon</string>
     <string name="local_version_do_not_exist">Det finnes ingen lokal versjon.</string>
     <string name="shared_string_in_progress">Underveis</string>
@@ -4999,31 +4968,7 @@
     <string name="movement_speed">Bevegelseshastighet</string>
     <string name="simulation_position_description">Velg en sporfil som vil bli brukt som kilde for posisjonsforflytning.</string>
     <string name="weather_pressure_inhg">inHg</string>
-    <string name="release_4_3">- Ny, raskere versjon 2 (OpenGL) kartopptagningsmotor med 2,5D-visning.
-\n
-\n - Jevn animasjon av stedsendringer mens du er i bevegelse
-\n
-\n - Nye miniprogrammer for kartsenterkoordinater og høyde for geoposisjoner
-\n
-\n - «Avstand til trykk»: lagt til alternativer for tekststørrelse
-\n
-\n - «Kartmarkør»-miniprogram: lagt til alternativ for å endre klikkatferd
-\n
-\n - Fikset alternativet «Posisjonsplassering»
-\n
-\n - GPX: lagt til støtte for «link», «cmt», «desc»-etiketter og for eventuelle egendefinerte utvidelser.
-\n
-\n - Reorganisert «Nautiske kart»-liste
-\n
-\n - Lagt til støtte for ANT+-sensorer
-\n
-\n - Lagt til mulighet for å deaktivere nedlasting av UUID
-\n
-\n - Standard hastighetsjusterbar prognose for høydeavhengige turtider for gåing / fotturer / løping
-\n
-\n - Fast lydutgang og glidebryter for lydstyrke
-\n
-\n</string>
+    <string name="release_4_3">- Ny, raskere versjon 2 (OpenGL) kartopptagningsmotor med 2,5D-visning. \n \n - Jevn animasjon av stedsendringer mens du er i bevegelse \n \n - Nye miniprogrammer for kartsenterkoordinater og høyde for geoposisjoner \n \n - «Avstand til trykk»: lagt til alternativer for tekststørrelse \n \n - «Kartmarkør»-miniprogram: lagt til alternativ for å endre klikkatferd \n \n - Fikset alternativet «Posisjonsplassering» \n \n - GPX: lagt til støtte for «link», «cmt», «desc»-etiketter og for eventuelle egendefinerte utvidelser. \n \n - Reorganisert «Nautiske kart»-liste \n \n - Lagt til støtte for ANT+-sensorer \n \n - Lagt til mulighet for å deaktivere nedlasting av UUID \n \n - Standard hastighetsjusterbar prognose for høydeavhengige turtider for gåing / fotturer / løping \n \n - Fast lydutgang og glidebryter for lydstyrke \n \n</string>
     <string name="release_4_4">- Forbedret «Spor»-meny i «Sett opp kart».
 \n
 \n - Bindeleddsmenyen viser nå lokaliserte navn for interessepunkter.

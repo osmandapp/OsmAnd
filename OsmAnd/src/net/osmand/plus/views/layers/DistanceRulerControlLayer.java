@@ -398,7 +398,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 		vectorLineBuilder.setBaseOrder(getBaseOrder())
 				.setIsHidden(false)
 				.setLineId(0)
-				.setLineWidth(lineAttrs.paint.getStrokeWidth() * GeometryWayDrawer.VECTOR_LINE_SCALE_COEF)
+				.setLineWidth(lineAttrs.paint.getStrokeWidth() * GeometryWayDrawer.getVectorLineScale(app))
 				.setPoints(points31)
 				.setEndCapStyle(VectorLine.EndCapStyle.BUTT.swigValue())
 				.setFillColor(NativeUtilities.createFColorARGB(lineAttrs.paint.getColor()));

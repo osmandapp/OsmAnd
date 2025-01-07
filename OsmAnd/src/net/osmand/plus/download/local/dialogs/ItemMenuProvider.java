@@ -39,6 +39,7 @@ import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalOperationTask;
+import net.osmand.plus.download.local.LocalSizeController;
 import net.osmand.plus.download.local.OperationType;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.SQLiteTileSource;
@@ -113,9 +114,7 @@ public class ItemMenuProvider implements MenuProvider {
 			});
 		}
 		LocalItemType type = item.getType();
-		if (item instanceof LocalItem) {
-			LocalItem localItem = (LocalItem) item;
-
+		if (item instanceof LocalItem localItem) {
 			boolean backuped = localItem.isBackuped(app);
 			if (type.isBackupSupported() || backuped) {
 				addOperationItem(menu, localItem, backuped ? RESTORE_OPERATION : BACKUP_OPERATION);
@@ -130,6 +129,13 @@ public class ItemMenuProvider implements MenuProvider {
 				});
 			}
 			if (type == TILES_DATA) {
+				menuItem = menu.add(0, R.string.calculate_size, Menu.NONE, R.string.calculate_size);
+				menuItem.setIcon(getIcon(R.drawable.ic_action_file_info, colorId));
+				menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+				menuItem.setOnMenuItemClickListener(item -> {
+					LocalSizeController.calculateFullSize(app, localItem);
+					return true;
+				});
 				Object object = localItem.getAttachedObject();
 				if ((object instanceof TileSourceTemplate) || ((object instanceof SQLiteTileSource)
 						&& ((SQLiteTileSource) object).couldBeDownloadedFromInternet())) {

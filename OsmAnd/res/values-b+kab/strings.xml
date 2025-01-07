@@ -1246,9 +1246,7 @@
     <string name="delete_description">Kkes aglam</string>
     <string name="select_group">Fren agraw</string>
     <string name="select_shape">Fren talɣa</string>
-    <string name="ui_customization_description">Sbadu amḍan n yiferdisen deg ugalis adruram, sbadu takarḍa akked wumuɣ n usatal.
-\n
-\nTzemreḍ ad tsenseḍ izegrar ur nettwaseqdac ara, akken ad teffreḍ meṛṛa imsefraken deg usnas %1$s.</string>
+    <string name="ui_customization_description">Sbadu amḍan n yiferdisen deg ugalis adruram, sbadu takarḍa akked wumuɣ n usatal. \n \nTzemreḍ ad tsenseḍ izegrar ur nettwaseqdac ara, akken ad teffreḍ meṛṛa imsefraken deg usnas %1$s.</string>
     <string name="ui_customization_short_descr">Iferdisen n ugalis adruram, umuɣ n usatal</string>
     <string name="ui_customization">Amuddu n udem i ugrudem n useqdac</string>
     <string name="shared_string_drawer">Agalis adruram</string>

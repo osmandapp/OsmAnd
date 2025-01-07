@@ -66,7 +66,7 @@ public class CompassVisibilityBottomSheet extends MenuBottomSheetDialogFragment 
 
 	@NonNull
 	private View createView() {
-		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View view = inflater.inflate(R.layout.fragment_compass_visibility_bottom_sheet_dialog, null);
 
 		setupVisibilityItem(CompassVisibility.ALWAYS_VISIBLE, view);

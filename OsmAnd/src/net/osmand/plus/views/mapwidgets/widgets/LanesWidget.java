@@ -16,11 +16,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
-import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.routing.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.LanesDrawable;
@@ -153,7 +154,7 @@ public class LanesWidget extends MapWidget {
 				lanesText.setText("");
 			} else {
 				String formattedDistance = OsmAndFormatter.getFormattedDistance(distance, app,
-						OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS);
+						OsmAndFormatterParams.USE_LOWER_BOUNDS);
 				lanesText.setText(formattedDistance);
 				lanesShadowText.setText(formattedDistance);
 			}

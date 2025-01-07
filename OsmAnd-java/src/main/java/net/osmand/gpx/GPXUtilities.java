@@ -3,6 +3,7 @@ package net.osmand.gpx;
 
 
 import static net.osmand.gpx.GPXUtilities.RouteSegment.START_TRKPT_IDX_ATTR;
+import static net.osmand.shared.gpx.GpxFile.XML_COLON;
 import static net.osmand.util.Algorithms.isDigit;
 
 import net.osmand.IProgress;
@@ -1363,7 +1364,7 @@ public class GPXUtilities {
 		if (key.startsWith(OSMAND_EXTENSIONS_PREFIX)) {
 			key = key.replace(OSMAND_EXTENSIONS_PREFIX, "");
 		}
-		key = key.replace(":", "_-_");
+		key = key.replace(":", XML_COLON);
 		return OSMAND_EXTENSIONS_PREFIX + key;
 	}
 

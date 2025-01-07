@@ -1589,7 +1589,7 @@
     <string name="map_widget_max_speed">Luasteorainn</string>
     <string name="translit_names">Traslitrigh ainmneacha</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Bealaí siúltóireachta</string>
-    <string name="local_indexes_category_terrain">Léarscáileanna tír-raon (3T)</string>
+    <string name="local_indexes_category_terrain">Léarscáileanna tír-raon (3D</string>
     <string name="quick_action_map_overlay_action">Cuir forleagan leis</string>
     <string name="free_maps_updates">Nuashonruithe saor in aisce (éigeandáil)</string>
     <string name="search_offline_clear_search">Cuardach nua</string>
@@ -5455,4 +5455,11 @@
     <string name="location_interpolation_percent_desc">Socraigh an céatadán d\'idirshuíomh suímh le linn loingseoireachta bealaigh. Laghdaíonn an paraiméadar seo aga moille do shuíomh suímh ar an léarscáil le linn beochana.</string>
     <string name="shared_string_interpolation">Idirshuíomh</string>
     <string name="selected_delayed_profile">Próifíl roghnaithe \"%s\"</string>
+    <string name="default_buttons_size_original_description">Choimeádfadh gach cnaipe a mhéid féin.</string>
+    <string name="default_buttons_corners_original_description">Choimeádfadh gach cnaipe a gha cúinne féin.</string>
+    <string name="default_buttons_opacity_original_description">Choimeádfadh gach cnaipe a chúlra féin teimhneacht.</string>
+    <string name="calculating_indication_message">Ag ríomh…</string>
+    <string name="calculate_size">Ríomh méid</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Bealaí dreapadóireachta</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Taispeáin bealaí dreapadóireachta</string>
 </resources>

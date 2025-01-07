@@ -1946,7 +1946,7 @@
     <string name="lang_hsb">Sorabo superiore</string>
     <string name="rendering_attr_hideOverground_name">Oggetti sopra il terreno</string>
     <string name="routing_attr_short_way_name">Percorso più efficiente rispetto ai consumi</string>
-    <string name="replace_favorite_confirmation">Sostituire il preferito %1$s\?</string>
+    <string name="replace_favorite_confirmation">Sostituire il preferito %1$s?</string>
     <string name="shared_string_change">Cambia</string>
     <string name="get_started">Inizia</string>
     <string name="skip_map_downloading">Salta download delle mappe</string>
@@ -5218,7 +5218,7 @@
     <string name="precise_distance_numbers">Numeri di distanza precisi</string>
     <string name="battery_optimization_banner_content">L\'ottimizzazione della batteria di Android può causare lacune e imprecisioni nelle tracce registrate.</string>
     <string name="dont_ask_anymore">Non chiedere più</string>
-    <string name="battery_optimization_desc">L\'ottimizzazione della batteria in Android può causare lacune e imprecisioni nelle tracce registrate.\n\nSe riscontri uno di questi problemi, puoi provare a modificare l\'utilizzo della batteria su \"Illimitato\".</string>
+    <string name="battery_optimization_desc">L\'ottimizzazione della batteria in Android può causare lacune e imprecisioni nelle tracce registrate.\n\nSe riscontri uno di questi problemi, puoi provare a modificare l\'utilizzo della batteria su \"Illimitato\"</string>
     <string name="max_sensor_cadence">Cadenza della pedalata, massima</string>
     <string name="avg_sensor_cadence">Cadenza della pedalata, media</string>
     <string name="max_sensor_bycicle_power">Potenza della pedalata, massima</string>
@@ -5553,18 +5553,18 @@
     <string name="obd_connecting_to_device">Connessione a %s</string>
     <string name="bt_start_pair_failed">Impossibile iniziare l\'accoppiamento con il dispositivo</string>
     <string name="obd_fuel_consumption_rate_percent_hour_desc">Mostra il tasso di consumo di carburante del veicolo in base ai calcoli (%/h)</string>
-    <string name="obd_fuel_consumption_rate_l_km">Tasso di consumo di carburante (l/km)</string>
+    <string name="obd_fuel_consumption_rate_l_km">Tasso di consumo di carburante (l/100km)</string>
     <string name="simulate_obd">Simula i dati obd</string>
     <string name="obd_engine_runtime">Tempo di Accensione del Motore</string>
     <string name="obd_engine_runtime_desc">Indica il tempo di funzionamento del motore dall\'avvio.</string>
     <string name="obd_throttle_position">Posizione Acceleratore</string>
     <string name="kpa_unit">kPa</string>
     <string name="percent_hour">%/h</string>
-    <string name="obd_fuel_consumption_rate_l_h">Tasso di consumo di carburante (l/h)</string>
-    <string name="obd_fuel_consumption_rate_liter_hour">Tasso di consumo di carburante l/h</string>
-    <string name="obd_fuel_consumption_rate_l_h_desc">Mostra il tasso di consumo di carburante del veicolo in base ai calcoli (l/h)</string>
+    <string name="obd_fuel_consumption_rate_l_h">Tasso di consumo di carburante (L/h)</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Tasso di consumo di carburante</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Mostra il tasso di consumo di carburante del veicolo in base ai calcoli (L/h)</string>
     <string name="obd_fuel_consumption_rate_sensor">Tasso di consumo di carburante (sensore)</string>
-    <string name="obd_fuel_consumption_rate_sensor_desc">Mostra il tasso di consumo di carburante del veicolo basato sul sensore (l/h)</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Mostra il tasso di consumo di carburante del veicolo basato sul sensore (L/h)</string>
     <string name="obd_fuel_left_liter">Carburante rimasto (l)</string>
     <string name="obd_fuel_left_km">Carburante rimasto (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Tasso di consumo di carburante (obd)</string>
@@ -5577,7 +5577,7 @@
     <string name="obd_widget_engine_speed">Velocità del motore</string>
     <string name="obd_nothing_found_text">Nessun scanner trovato</string>
     <string name="shared_string_dynamic">Dinamico</string>
-    <string name="obd_fuel_consumption_rate_l_km_desc">Mostra il tasso di consumo di carburante del veicolo in base ai calcoli (l/km)</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Mostra il tasso di consumo di carburante del veicolo in base ai calcoli (l/100km)</string>
     <string name="obd_fuel_level_liter">Livello carburante (l)</string>
     <string name="obd_fuel_level_percent">Livello carburante (%)</string>
     <string name="obd_fuel_left_percent">Carburante rimasto (%)</string>
@@ -5606,7 +5606,7 @@
     <string name="screen_is_locked_by_external_button">Il touch screen è bloccato. Per sbloccare, premere il tasto %1$s o toccare il pulsante sullo schermo.</string>
     <string name="unit_of_volume_description">Le unità selezionate verranno applicate a tutti i dati relativi al volume nel profilo corrente.</string>
     <string name="unit_of_volume">Unità di volume</string>
-    <string name="l_100km">l/100 km</string>
+    <string name="l_100km">L/100 km</string>
     <string name="lock_screen">Schermata di blocco</string>
     <string name="track_does_not_contain_data_to_save">La traccia non contiene dati da salvare.</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Traccia i dati vitali del veicolo utilizzando il protocollo OBD-II. Monitorate le metriche chiave come la velocità, il numero di giri del motore, il consumo di carburante e altro ancora.</string>
@@ -5640,7 +5640,7 @@
     <string name="release_4_9">- Aggiunto un visualizzatore di gallerie a schermo intero per le immagini Wikimedia\n\n - Introdotto un nuovo plugin \"Metriche del veicolo\" per monitorare le prestazioni del veicolo utilizzando il protocollo OBD-II\n\n - Aggiunta la possibilità di assegnare attività alle tracce e di filtrarle di conseguenza\n\n - Implementate nuove azioni rapide per la registrazione del viaggio e il blocco del touchscreen\n\n - Introdotto l\'aspetto personalizzabile dei pulsanti della mappa e una griglia precisa\n\n - Aggiunto un menu contestuale e un\'azione \"Ripristina velocità media\" ai widget\n\n - Aggiunto un nuovo livello di percorso \"Sentieri per moto da strada\".\n\n - Corretta la funzione \"Registrazione automatica della traccia durante la navigazione\".\n\n - Corretto il problema delle coordinate capovolte in RTL\n\n - Corretti i dati del sensore mancanti per la traccia attualmente registrata\n\n - Aggiunte informazioni sulle aree circostanti per il punto selezionato\n\n - Aggiunta un\'azione rapida per controllare la visibilità delle modifiche OSM\n\n - Parametri di visibilità separati per le opzioni di colorazione del terreno\n\n - Aggiunta di un\'icona che può essere toccata per visualizzare l\'accesso o altri attributi di strade o sentieri</string>
     <string name="obd_fuel_type_desc">Mostra il tipo di carburante del veicolo attraverso il sensore OBD</string>
     <string name="obd_fuel_consumption_rate_desc">Mostra il tasso di consumo di carburante del veicolo in base a OBD e posizione</string>
-    <string name="obd_plugin_description">Monitorare le principali metriche del veicolo utilizzando il protocollo OBD-II. Accesso a dati quali: * Velocità del motore * Consumo di carburante * Carburante rimanente * Distanza dall\'avvio del motore * Temperatura di aspirazione * Temperatura ambiente * Temperatura del liquido di raffreddamento * Velocità del veicolo * Percentuale della batteria</string>
+    <string name="obd_plugin_description">Monitora le principali caratteristiche del veicolo utilizzando il protocollo OBD-II. Accedi ai dati tra cui:\n• Regime del motore, Tempo di funzionamento del motore, Carico motore calcolato\n• Consumo di carburante, Pressione del carburante, Carburante rimanente\n• Temperatura di aspirazione, Temperatura ambiente, Temperatura del refrigerante, Temperatura dell\'olio motore\n• Velocità del veicolo, Posizione dell\'acceleratore, Tensione della batteria\n</string>
     <string name="route_guidance">Guida del percorso</string>
     <string name="wikivoyage_offline">Wikivoyage non in linea</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
@@ -5666,7 +5666,7 @@
     <string name="third_links">Collegamenti a Terzi</string>
     <string name="vehicle_metrics_plugin_settings">Impostazioni Metriche Veicolo</string>
     <string name="quick_action_save_recorded_trip_and_continue_summary">Un pulsante per salvare il percorso correntemente registrato come file GPX e continuare a registrare un nuovo tratto senza interruzioni.</string>
-    <string name="liter_per_hour">l/h</string>
+    <string name="liter_per_hour">L/h</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Sentieri per bici da sterrato</string>
     <string name="obd_fuel_left_liters">Carburante rimanente (litri)</string>
     <string name="av_audio_sample_rate">Frequenza di campionamento audio</string>
@@ -5678,4 +5678,13 @@
     <string name="location_interpolation_percent">Percentuale di interpolazione della posizione</string>
     <string name="location_interpolation_percent_desc">Imposta la percentuale di interpolazione della posizione durante la navigazione del percorso. Questo parametro riduce il ritardo della tua posizione sulla mappa durante l\'animazione.</string>
     <string name="shared_string_interpolation">Interpolazione</string>
+    <string name="auto_zoom_3d_angle">Angolo 3D dello zoom automatico</string>
+    <string name="selected_delayed_profile">Profilo selezionato \"%s\"</string>
+    <string name="default_buttons_size_original_description">Ogni pulsante manterrebbe la propria dimensione.</string>
+    <string name="calculating_indication_message">Sto calcolando…</string>
+    <string name="calculate_size">Calcola la dimensione</string>
+    <string name="default_buttons_corners_original_description">Ogni pulsante manterrebbe il proprio raggio d\'angolo.</string>
+    <string name="default_buttons_opacity_original_description">Ogni pulsante manterrebbe la propria opacità di sfondo.</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Mostra i percorsi per l\'arrampicata</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Percorsi arrampicata</string>
 </resources>

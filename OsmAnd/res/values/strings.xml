@@ -10,7 +10,14 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="rendering_attr_showClimbingRoutes_name">Climbing routes</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Show climbing routes</string>
 
+    <string name="calculating_indication_message">Calculating…</string>
+    <string name="calculate_size">Calculate size</string>
+    <string name="default_buttons_size_original_description">Each button would keep its own size.</string>
+    <string name="default_buttons_corners_original_description">Each button would keep its own corner radius.</string>
+    <string name="default_buttons_opacity_original_description">Each button would keep its own background opacity.</string>
     <string name="selected_delayed_profile">Selected profile \"%s\"</string>
     <string name="shared_string_interpolation">Interpolation</string>
     <string name="location_interpolation_percent">Location interpolation percentage</string>
@@ -5983,4 +5990,5 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
     <string name="routing_attr_freeride_policy_description">\'Freeride\' and \'Off-piste\' are unofficial routes and passages. Typically ungroomed, unmaintained and not checked in the evening. Enter at your own risk.</string>
     <string name="voice_prompts_timetable">Voice prompts times</string>
+    <string name="display_distance_to_first_intermediate">Display time and distance to first intermediate if it\'s set</string>
 </resources>

@@ -792,27 +792,29 @@ public class SearchCoreFactory {
 			// }
 			for (PoiCategory c : categories) {
 				PoiTypeResult res = checkPoiType(nm, c);
-				if(res != null) {
+				if (res != null) {
 					results.put(res.pt.getKeyName(), res);
 				}
 				if (nmAdditional != null) {
 					addAditonals(nmAdditional, results, c);
 				}
 			}
+			Map<String, PoiTypeResult> additionals = new LinkedHashMap<>();
 			Iterator<Entry<String, PoiType>> it = translatedNames.entrySet().iterator();
 			while (it.hasNext()) {
 				Entry<String, PoiType> e = it.next();
 				PoiType pt = e.getValue();
 				if (pt.getCategory() != types.getOtherMapCategory() && !pt.isReference()) {
 					PoiTypeResult res = checkPoiType(nm, pt);
-					if(res != null) {
+					if (res != null) {
 						results.put(res.pt.getKeyName(), res);
 					}
 					if (nmAdditional != null) {
-						addAditonals(nmAdditional, results, pt);
+						addAditonals(nmAdditional, additionals, pt);
 					}
 				}
 			}
+			results.putAll(additionals); // results ordered by: top, categories, types, additional
 			return results;
 		}
 
@@ -1134,8 +1136,9 @@ public class SearchCoreFactory {
 				Collections.sort(possibleValues);
 				for (String s : possibleValues) {
 					translate = getTopIndexTranslation(s);
+					String normalizeBrand = s.toLowerCase(Locale.ROOT);
 					if (complete) {
-						if (CollatorStringMatcher.cmatches(collator, search, s, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
+						if (CollatorStringMatcher.cmatches(collator, search, normalizeBrand, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
 							topIndexValue = s;
 							break;
 						} else {
@@ -1171,7 +1174,7 @@ public class SearchCoreFactory {
 		private String getTopIndexTranslation(String value) {
 			String key = TopIndexFilter.getValueKey(value);
 			String translate = types.getPoiTranslation(key);
-			if (translate.toLowerCase().equals(key)) {
+			if (translate.toLowerCase(Locale.ROOT).equals(key)) {
 				translate = value;
 			}
 			return translate;

@@ -602,8 +602,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Posición do aparcamento</string>
-    <string name="osmand_parking_plugin_description">Rexistra onde foi aparcado o automóbil, incluíndo canto tempo falta. 
-\n Tanto a localización coma o tempo do aparcamento amósanse no menú principal e nun trebello sobre o mapa. Pódese engadir unha alarma de lembranza ó calendario do Android.</string>
+    <string name="osmand_parking_plugin_description">Rexistra onde foi aparcado o automóbil, incluíndo canto tempo falta. \n Tanto a localización coma o tempo do aparcamento amósanse no menú principal e nun trebello sobre o mapa. Pódese engadir unha alarma de lembranza ó calendario do Android.</string>
     <string name="osmand_parking_plugin_name">Posición de aparcamento</string>
     <string name="context_menu_item_add_parking_point">Marcar coma posición do aparcamento</string>
     <string name="context_menu_item_delete_parking_point">Eliminar marcaxe de aparcamento</string>
