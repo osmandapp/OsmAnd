@@ -14,13 +14,16 @@ import androidx.car.app.model.Row
 import androidx.car.app.model.Template
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
+import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import net.osmand.plus.shared.SharedUtil
 import net.osmand.plus.R
 import net.osmand.plus.auto.TripUtils
 import net.osmand.plus.configmap.tracks.TrackTab
 import net.osmand.plus.configmap.tracks.TrackTabType
-import net.osmand.plus.shared.SharedUtil
+import net.osmand.plus.settings.enums.CompassMode
 import net.osmand.plus.track.data.GPXInfo
+import net.osmand.shared.gpx.GpxDbHelper
 import net.osmand.plus.track.helpers.SelectedGpxFile
 import net.osmand.plus.views.layers.base.OsmandMapLayer.CustomMapObjects
 import net.osmand.search.core.ObjectType
@@ -28,7 +31,6 @@ import net.osmand.search.core.SearchResult
 import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.extensions.jFile
 import net.osmand.shared.gpx.GpxDataItem
-import net.osmand.shared.gpx.GpxDbHelper
 import net.osmand.shared.gpx.GpxParameter.NEAREST_CITY_NAME
 import net.osmand.shared.gpx.GpxUtilities
 import net.osmand.shared.gpx.TrackItem
