@@ -1,7 +1,7 @@
 package net.osmand.plus.auto;
 
-import static net.osmand.plus.views.MapViewWithLayers.SYMBOLS_UPDATE_INTERVAL;
 import static net.osmand.plus.views.OsmandMapTileView.DEFAULT_ELEVATION_ANGLE;
+import static net.osmand.plus.views.MapViewWithLayers.SYMBOLS_UPDATE_INTERVAL;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
