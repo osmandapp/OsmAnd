@@ -36,6 +36,22 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.apache.commons.logging.Log;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import net.osmand.NativeLibrary;
+import net.osmand.PlatformUtil;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
+import net.osmand.util.Algorithms;
+
 /**
  * Created by yurkiss on 04.03.16.
  */
