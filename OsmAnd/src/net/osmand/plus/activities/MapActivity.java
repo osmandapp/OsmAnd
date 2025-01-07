@@ -942,18 +942,19 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		lockHelper.onStart();
 		getMyApplication().getNotificationHelper().showNotifications();
 		extendedMapActivity.onStart(this);
-		{
-			createSearchDatabaseTask =
-					Optional.of(
-							CreateSearchDatabaseTaskProvider.getCreateSearchDatabaseTask(
-									SettingsSearchButtonHelper.createSearchPreferenceFragments(
-											this::getCreateSearchDatabaseTask,
-											this,
-											FRAGMENT_CONTAINER_VIEW_ID,
-											MainSettingsFragment.class),
-									this));
-			Tasks.executeTaskInParallelWithOtherTasks(createSearchDatabaseTask.get());
-		}
+		// FK-FIXME: the following code block makes the magnifying glass freeze when the user clicks on it on installed OsmAnd-nightlyFree-legacy-fat-debug.apk
+//		{
+//			createSearchDatabaseTask =
+//					Optional.of(
+//							CreateSearchDatabaseTaskProvider.getCreateSearchDatabaseTask(
+//									SettingsSearchButtonHelper.createSearchPreferenceFragments(
+//											this::getCreateSearchDatabaseTask,
+//											this,
+//											FRAGMENT_CONTAINER_VIEW_ID,
+//											MainSettingsFragment.class),
+//									this));
+//			Tasks.executeTaskInParallelWithOtherTasks(createSearchDatabaseTask.get());
+//		}
 	}
 
 	@Override
