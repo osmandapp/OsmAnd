@@ -128,7 +128,10 @@ public class GalleryDetailsFragment extends BaseOsmAndFragment implements Downlo
 		}
 
 		int iconId = card.getTopIconId();
-		buildItem(container, getString(R.string.shared_string_source), getSourceTypeName(card), iconId, false, false);
+		String source = getSourceTypeName(card);
+		if (!Algorithms.isEmpty(source) || iconId != 0) {
+			buildItem(container, getString(R.string.shared_string_source), source, iconId, false, false);
+		}
 
 		String license = metadata != null ? metadata.getLicense() : null;
 		if (!Algorithms.isEmpty(license)) {
@@ -155,7 +158,7 @@ public class GalleryDetailsFragment extends BaseOsmAndFragment implements Downlo
 
 		int defaultIconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		ImageView iconView = view.findViewById(R.id.icon);
-		Drawable drawable = !defaultColor ? app.getUIUtilities().getIcon(iconId) : app.getUIUtilities().getPaintedIcon(iconId, defaultIconColor);
+		Drawable drawable = !defaultColor ? uiUtilities.getIcon(iconId) : uiUtilities.getPaintedIcon(iconId, defaultIconColor);
 		iconView.setImageDrawable(drawable);
 
 		TextView titleView = view.findViewById(R.id.title);

@@ -277,8 +277,8 @@ public class RoutingHelperUtils {
 	}
 
 	@NonNull
-	public static List<Location> predictLocations(Location previousLocation, Location currentLocation,
-	                                        double timeInSeconds, RouteCalculationResult route) {
+	public static List<Location> predictLocations(@NonNull Location previousLocation, @NonNull Location currentLocation,
+	                                        double timeInSeconds, @NonNull RouteCalculationResult route) {
 		float speedPrev = previousLocation.getSpeed();
 		float speedNew = currentLocation.getSpeed();
 		double avgSpeed = (speedPrev + speedNew) / 2.0;

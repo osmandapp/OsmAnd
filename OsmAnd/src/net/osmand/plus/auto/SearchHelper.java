@@ -183,7 +183,7 @@ public class SearchHelper {
 					continue;
 				}
 				Drawable icon = QuickSearchListItem.getIcon(app, r);
-				String typeName = showDescription ? QuickSearchListItem.getTypeName(app, r) : "";
+				String typeName = showDescription ? QuickSearchListItem.getExtendedTypeName(app, r) : "";
 				itemList.setNoItemsMessage(app.getString(R.string.search_nothing_found));
 				Row.Builder builder = buildSearchRow(searchSettings.getOriginalLocation(), r.location, name, icon, typeName);
 				if (builder != null) {

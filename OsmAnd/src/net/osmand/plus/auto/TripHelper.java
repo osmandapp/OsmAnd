@@ -293,8 +293,17 @@ public class TripHelper {
 		destBuilder.setImage(new CarIcon.Builder(IconCompat.createWithResource(app,
 				R.drawable.ic_action_point_destination)).build());
 
-		Distance distance = TripUtils.getDistance(app, routingHelper.getLeftDistance());
-		int leftTimeSec = routingHelper.getLeftTime();
+		int leftTimeSec = 0;
+		int leftDistance = 0;
+		if (app.getSettings().USE_LEFT_DISTANCE_TO_INTERMEDIATE.get()) {
+			leftDistance = routingHelper.getLeftTimeNextIntermediate();
+			leftTimeSec = routingHelper.getLeftTimeNextIntermediate();
+		}
+		if (leftDistance == 0) {
+			leftTimeSec = routingHelper.getLeftTime();
+			leftDistance = routingHelper.getLeftDistance();
+		}
+		Distance distance =  TripUtils.getDistance(app, leftDistance);
 		DateTimeWithZone dateTime = DateTimeWithZone.create(System.currentTimeMillis() + leftTimeSec * 1000L, TimeZone.getDefault());
 		TravelEstimate.Builder travelEstimateBuilder = new TravelEstimate.Builder(distance, dateTime);
 		travelEstimateBuilder.setRemainingTimeSeconds(leftTimeSec >= 0 ? leftTimeSec : REMAINING_TIME_UNKNOWN);

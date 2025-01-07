@@ -4,13 +4,20 @@ import android.content.Context;
 import android.os.StatFs;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.wikivoyage.WikivoyageUtils;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -113,5 +120,43 @@ public class PicassoUtils {
 
 		// Bound inside min/max size for disk cache.
 		return Math.max(Math.min(size, MAX_DISK_CACHE_SIZE), MIN_DISK_CACHE_SIZE);
+	}
+
+	public static boolean isImageUrl(@Nullable String url) {
+		if (!Algorithms.isEmpty(url)) {
+			String lowerCaseUrl = url.toLowerCase();
+			if (lowerCaseUrl.contains(".jpg")
+					|| lowerCaseUrl.contains(".jpeg")
+					|| lowerCaseUrl.contains(".png")
+					|| lowerCaseUrl.contains(".bmp")
+					|| lowerCaseUrl.contains(".webp")) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static void setupImageViewByUrl(@NonNull OsmandApplication app, @Nullable AppCompatImageView imageView,
+	                                       @Nullable String imageUrl, boolean useWikivoyageNetworkPolicy) {
+		if (imageView == null || imageUrl == null || !isImageUrl(imageUrl)) {
+			LOG.error("Invalid setupImageByUrl() call");
+			return;
+		}
+		PicassoUtils picasso = PicassoUtils.getPicasso(app);
+		RequestCreator rc = Picasso.get().load(imageUrl);
+		if (useWikivoyageNetworkPolicy) {
+			WikivoyageUtils.setupNetworkPolicy(app.getSettings(), rc);
+		}
+		rc.into(imageView, new Callback() {
+			@Override
+			public void onSuccess() {
+				picasso.setResultLoaded(imageUrl, true);
+				AndroidUiHelper.updateVisibility(imageView, true);
+			}
+			@Override
+			public void onError(Exception e) {
+				picasso.setResultLoaded(imageUrl, false);
+			}
+		});
 	}
 }

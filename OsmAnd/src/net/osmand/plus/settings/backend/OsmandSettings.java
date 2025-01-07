@@ -45,7 +45,6 @@ import net.osmand.Period;
 import net.osmand.Period.PeriodUnit;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
-import net.osmand.core.android.NativeCore;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.ValueHolder;
@@ -1047,14 +1046,6 @@ public class OsmandSettings {
 	public final OsmandPreference<DrivingRegion> DRIVING_REGION = new EnumStringPreference<DrivingRegion>(this,
 			"default_driving_region", DrivingRegion.EUROPE_ASIA, DrivingRegion.values()) {
 
-		public boolean setValue(Object prefs, DrivingRegion val) {
-			boolean overrideMetricSystem = !DRIVING_REGION_AUTOMATIC.getValue(prefs, DRIVING_REGION_AUTOMATIC.getDefaultValue());
-			if (overrideMetricSystem && val != null) {
-				METRIC_SYSTEM.setValue(prefs, val.defMetrics);
-			}
-			return super.setValue(prefs, val);
-		}
-
 		public DrivingRegion getDefaultValue() {
 			return DrivingRegion.getDrivingRegionByLocale();
 		}
@@ -1953,6 +1944,9 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOULD_SHOW_FREE_VERSION_BANNER = new BooleanPreference(this, "should_show_free_version_banner", false).makeGlobal().makeShared().cache();
 
 	public final OsmandPreference<Boolean> USE_DISCRETE_AUTO_ZOOM = new BooleanPreference(this, "use_v1_auto_zoom", false).makeGlobal().makeShared().cache();
+
+	public final OsmandPreference<Boolean> USE_LEFT_DISTANCE_TO_INTERMEDIATE = new BooleanPreference(this, "use_left_distance_to_intermediate", false).makeProfile().makeShared().cache();
+
 	public final OsmandPreference<Boolean> TRANSPARENT_STATUS_BAR = new BooleanPreference(this, "transparent_status_bar", true).makeGlobal().makeShared();
 
 	public final OsmandPreference<Boolean> SHOW_INFO_ABOUT_PRESSED_KEY = new BooleanPreference(this, "show_info_about_pressed_key", false).makeGlobal().makeShared();

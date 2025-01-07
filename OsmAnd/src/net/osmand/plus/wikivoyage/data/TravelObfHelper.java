@@ -132,8 +132,8 @@ public class TravelObfHelper implements TravelHelper {
 			"avg_speed", "min_speed", "max_speed", "time_moving", "time_moving_no_gaps", "time_span", "time_span_no_gaps"
 	);
 
-	final static String TAG_URL = "url";
-	final static String TAG_URL_TEXT = "url_text";
+	public static final String TAG_URL = "url";
+	public static final String TAG_URL_TEXT = "url_text";
 	public static final String WPT_EXTRA_TAGS = "wpt_extra_tags";
 	private static final String METADATA_EXTRA_TAGS = "metadata_extra_tags";
 	private static final String EXTENSIONS_EXTRA_TAGS = "extensions_extra_tags";
