@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.audionotes;
 
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AVActionType.REC_AUDIO;
+
 import android.animation.ValueAnimator;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -106,8 +108,8 @@ public class AudioVideoNoteRecordingMenuFullScreen extends AudioVideoNoteRecordi
 	public void hideFinalPhoto() {
 		stopProgress();
 
-		AudioVideoNotesPlugin.CurrentRecording recording = plugin.getCurrentRecording();
-		boolean show = showViewfinder && recording != null && recording.getType() != AudioVideoNotesPlugin.AVActionType.REC_AUDIO;
+		CurrentRecording recording = plugin.getCurrentRecording();
+		boolean show = showViewfinder && recording != null && recording.getType() != REC_AUDIO;
 		imageview.setVisibility(View.GONE);
 		progressBar.setVisibility(View.INVISIBLE);
 		viewfinder.setVisibility(show ? View.VISIBLE : View.GONE);

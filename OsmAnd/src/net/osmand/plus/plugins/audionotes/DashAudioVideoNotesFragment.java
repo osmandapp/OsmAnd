@@ -74,7 +74,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 			return;
 		}
 
-		List<AudioVideoNotesPlugin.Recording> notes = new ArrayList<AudioVideoNotesPlugin.Recording>(plugin.getAllRecordings());
+		List<Recording> notes = new ArrayList<Recording>(plugin.getAllRecordings());
 		if (notes.size() == 0) {
 			mainView.setVisibility(View.GONE);
 			return;
@@ -87,7 +87,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 		notesLayout.removeAllViews();
 		DashboardOnMap.handleNumberOfRows(notes, getMyApplication().getSettings(), ROW_NUMBER_TAG);
 
-		for (AudioVideoNotesPlugin.Recording recording : notes) {
+		for (Recording recording : notes) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View view = inflater.inflate(R.layout.note, null, false);
 
@@ -116,10 +116,10 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 		}
 	}
 
-	private void sortItemsDescending(List<AudioVideoNotesPlugin.Recording> items) {
-		Collections.sort(items, new Comparator<AudioVideoNotesPlugin.Recording>() {
+	private void sortItemsDescending(List<Recording> items) {
+		Collections.sort(items, new Comparator<Recording>() {
 			@Override
-			public int compare(AudioVideoNotesPlugin.Recording first, AudioVideoNotesPlugin.Recording second) {
+			public int compare(Recording first, Recording second) {
 				long firstTime = first.getLastModified();
 				long secondTime = second.getLastModified();
 				if (firstTime < secondTime) {
@@ -133,7 +133,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 		});
 	}
 
-	public static Drawable getNoteView(AudioVideoNotesPlugin.Recording recording, View view,
+	public static Drawable getNoteView(Recording recording, View view,
 	                                   OsmandApplication ctx) {
 		String name = recording.getName(ctx, true);
 		TextView nameText = view.findViewById(R.id.name);

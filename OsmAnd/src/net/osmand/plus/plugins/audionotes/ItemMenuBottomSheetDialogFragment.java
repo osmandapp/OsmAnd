@@ -6,7 +6,6 @@ import android.view.View;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;

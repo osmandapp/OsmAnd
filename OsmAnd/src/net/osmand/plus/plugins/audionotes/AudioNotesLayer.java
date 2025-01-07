@@ -18,7 +18,6 @@ import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
