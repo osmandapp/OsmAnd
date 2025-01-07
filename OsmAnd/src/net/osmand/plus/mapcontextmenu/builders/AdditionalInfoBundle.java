@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
+import static net.osmand.data.Amenity.NAME;
 import static net.osmand.data.Amenity.SUBTYPE;
 import static net.osmand.data.Amenity.TYPE;
 import static net.osmand.shared.gpx.GpxUtilities.ADDRESS_EXTENSION;

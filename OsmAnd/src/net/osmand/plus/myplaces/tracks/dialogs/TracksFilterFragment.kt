@@ -36,7 +36,9 @@ import net.osmand.shared.gpx.TrackItem
 import net.osmand.shared.gpx.data.SmartFolder
 import net.osmand.shared.gpx.data.TrackFolder
 import net.osmand.shared.gpx.filters.BaseTrackFilter
+import net.osmand.shared.gpx.filters.DateTrackFilter
 import net.osmand.shared.gpx.filters.FilterChangedListener
+import net.osmand.shared.gpx.filters.TrackFilterType
 import net.osmand.util.Algorithms
 
 class TracksFilterFragment : BaseOsmAndDialogFragment(),
