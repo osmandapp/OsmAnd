@@ -1,7 +1,5 @@
 package net.osmand.plus.routepreparationmenu;
 
-import static net.osmand.plus.helpers.WaypointDialogHelper.showOnMap;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -40,12 +38,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.LocationPointWrapper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper.TargetOptionsBottomSheetDialogFragment;
 import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.helpers.LocationPointWrapper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -64,6 +62,8 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.plus.helpers.WaypointDialogHelper.showOnMap;
 
 public class WaypointsFragment extends BaseOsmAndFragment implements ObservableScrollViewCallbacks,
 		DynamicListViewCallbacks, WaypointDialogHelper.WaypointDialogHelperCallback, AddPointBottomSheetDialog.DialogListener {

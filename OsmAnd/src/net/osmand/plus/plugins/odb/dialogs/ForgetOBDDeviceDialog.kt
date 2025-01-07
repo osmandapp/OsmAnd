@@ -3,6 +3,7 @@ package net.osmand.plus.plugins.odb.dialogs
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice
 import net.osmand.plus.plugins.externalsensors.dialogs.ForgetDeviceBaseDialog
 
 class ForgetOBDDeviceDialog : ForgetDeviceBaseDialog() {

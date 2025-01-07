@@ -1,12 +1,12 @@
 package net.osmand.plus.resources;
 
+import java.util.List;
+
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 import net.osmand.data.Amenity;
-
-import java.util.List;
 
 public interface AmenityIndexRepository {
 

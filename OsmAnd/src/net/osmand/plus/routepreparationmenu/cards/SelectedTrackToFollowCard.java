@@ -1,21 +1,22 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
+import net.osmand.plus.routepreparationmenu.data.parameters.OtherLocalRoutingParameter;
+
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.FollowTrackFragment;
 import net.osmand.plus.routepreparationmenu.data.parameters.LocalRoutingParameter;
-import net.osmand.plus.routepreparationmenu.data.parameters.OtherLocalRoutingParameter;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.shared.gpx.GpxFile;
 
 public class SelectedTrackToFollowCard extends MapBaseCard {
 

@@ -11,11 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.settings.enums.DayNightMode;
 
 public class DayNightModeAction extends QuickAction {
 

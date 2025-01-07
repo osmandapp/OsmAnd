@@ -14,10 +14,11 @@ import me.zhanghai.android.materialprogressbar.MaterialProgressBar
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
+import net.osmand.plus.plugins.odb.adapters.OBDDevicesAdapter
 import net.osmand.plus.plugins.odb.adapters.PairedDevicesAdapter
 import net.osmand.plus.utils.AndroidUtils
-import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY
+import net.osmand.plus.widgets.dialogbutton.DialogButton
 import net.osmand.shared.data.BTDeviceInfo
 import net.osmand.util.CollectionUtils
 

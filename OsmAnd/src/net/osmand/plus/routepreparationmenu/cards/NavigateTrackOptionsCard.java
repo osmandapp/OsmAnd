@@ -1,7 +1,7 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
-import static net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
-import static net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
+import static net.osmand.plus.widgets.multistatetoggle.RadioItem.*;
+import static net.osmand.plus.widgets.multistatetoggle.TextToggleButton.*;
 
 import android.view.View;
 import android.widget.LinearLayout;

@@ -1,12 +1,6 @@
 package net.osmand.plus.plugins.osmedit;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP_CATEGORY_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OPEN_STREET_MAP_ITEMS_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_EDITING;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.*;
 import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 

@@ -1,12 +1,6 @@
 package net.osmand.plus.plugins.weather.dialogs;
 
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_CLOUD;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_NOTHING;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRECIPITATION;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_TEMPERATURE;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_ANIMATION;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_SPEED;
+import static net.osmand.plus.plugins.weather.WeatherBand.*;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;

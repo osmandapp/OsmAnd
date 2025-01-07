@@ -13,8 +13,8 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings
 import net.osmand.plus.views.mapwidgets.WidgetType
 import net.osmand.plus.views.mapwidgets.WidgetsPanel
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget
-import net.osmand.plus.widgets.popup.PopUpMenuItem
 import net.osmand.shared.obd.OBDCommand
+import net.osmand.plus.widgets.popup.PopUpMenuItem
 import net.osmand.shared.obd.OBDDataComputer
 import net.osmand.shared.obd.OBDDataComputer.OBDComputerWidget
 import net.osmand.shared.obd.OBDDataComputer.OBDTypeWidget

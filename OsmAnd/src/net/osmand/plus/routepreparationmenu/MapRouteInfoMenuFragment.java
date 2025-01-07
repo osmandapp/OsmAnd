@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
@@ -28,7 +29,6 @@ import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSe
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.TextViewExProgress;
-import net.osmand.shared.gpx.GpxFile;
 
 public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		implements OnSegmentSelectedListener, DownloadEvents {

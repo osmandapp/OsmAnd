@@ -298,4 +298,5 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 	public interface OnSelectProfileCallback {
 		void onProfileSelected(Bundle args);
 	}
+
 }

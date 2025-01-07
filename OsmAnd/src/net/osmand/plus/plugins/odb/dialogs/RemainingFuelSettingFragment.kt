@@ -10,7 +10,7 @@ import android.widget.TextView
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.plugins.odb.OBDRemainingFuelWidget
-import net.osmand.plus.plugins.odb.OBDRemainingFuelWidget.RemainingFuelMode
+import net.osmand.plus.plugins.odb.OBDRemainingFuelWidget.*
 import net.osmand.plus.settings.backend.ApplicationMode
 import net.osmand.plus.settings.backend.preferences.OsmandPreference
 import net.osmand.plus.utils.AndroidUtils
