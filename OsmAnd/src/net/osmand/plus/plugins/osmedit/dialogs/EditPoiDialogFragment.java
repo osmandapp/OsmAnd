@@ -61,7 +61,8 @@ import net.osmand.plus.plugins.osmedit.data.EditPoiData;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
-import net.osmand.plus.plugins.osmedit.fragments.NewAdvancedEditPoiFragment;
+import net.osmand.plus.plugins.osmedit.fragments.AdvancedEditPoiFragment;
+import net.osmand.plus.plugins.osmedit.fragments.BasicEditPoiFragment;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapRemoteUtil;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapUtil;
@@ -692,7 +693,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 	public static class PoiInfoPagerAdapter extends FragmentStateAdapter {
 
-		private final Fragment[] fragments = {new NewBasicEditPoiFragment(), new NewAdvancedEditPoiFragment()};
+		private final Fragment[] fragments = {new BasicEditPoiFragment(), new AdvancedEditPoiFragment()};
 		private final String[] titles;
 
 		PoiInfoPagerAdapter(Fragment fm, String basicTitle, String extendedTitle) {

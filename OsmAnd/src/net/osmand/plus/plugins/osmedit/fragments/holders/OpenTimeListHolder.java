@@ -13,8 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
-import net.osmand.plus.plugins.osmedit.dialogs.NewBasicEditPoiFragment.OpenHoursItem;
-import net.osmand.plus.plugins.osmedit.dialogs.NewBasicEditPoiFragment.OpeningHoursAdapter;
+import net.osmand.plus.plugins.osmedit.fragments.BasicEditPoiFragment.OpenHoursItem;
+import net.osmand.plus.plugins.osmedit.fragments.BasicEditPoiFragment.OpeningHoursAdapter;
 import net.osmand.plus.plugins.osmedit.dialogs.OpeningHoursDaysDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.OpeningHoursHoursDialogFragment;
 import net.osmand.plus.plugins.osmedit.fragments.EditPoiContentAdapter.EditPoiAdapterListener;

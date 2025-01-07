@@ -74,7 +74,7 @@ public class OpeningHoursDaysDialogFragment extends DialogFragment {
 								OpeningHoursHoursDialogFragment.createInstance(item, positionToAdd, true, 0)
 										.show(getFragmentManager(), "TimePickerDialogFragment");
 							} else {
-								((NewBasicEditPoiFragment) getParentFragment())
+								((BasicEditPoiFragment) getParentFragment())
 										.setBasicOpeningHoursRule(item, positionToAdd);
 							}
 						} else {

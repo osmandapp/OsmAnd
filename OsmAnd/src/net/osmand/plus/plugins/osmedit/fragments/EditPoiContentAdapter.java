@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.osmedit.fragments;
 
-import static net.osmand.plus.plugins.osmedit.fragments.NewAdvancedEditPoiFragment.*;
+import static net.osmand.plus.plugins.osmedit.fragments.AdvancedEditPoiFragment.*;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -21,9 +21,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.osmedit.data.EditPoiData;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
-import net.osmand.plus.plugins.osmedit.dialogs.NewBasicEditPoiFragment.OpenHoursItem;
-import net.osmand.plus.plugins.osmedit.dialogs.NewBasicEditPoiFragment.OpeningHoursAdapter;
-import net.osmand.plus.plugins.osmedit.fragments.NewAdvancedEditPoiFragment.OsmTagsArrayAdapter;
+import net.osmand.plus.plugins.osmedit.fragments.BasicEditPoiFragment.OpenHoursItem;
+import net.osmand.plus.plugins.osmedit.fragments.BasicEditPoiFragment.OpeningHoursAdapter;
+import net.osmand.plus.plugins.osmedit.fragments.AdvancedEditPoiFragment.OsmTagsArrayAdapter;
 import net.osmand.plus.plugins.osmedit.fragments.holders.AddItemHolder;
 import net.osmand.plus.plugins.osmedit.fragments.holders.AddOpeningHoursHolder;
 import net.osmand.plus.plugins.osmedit.fragments.holders.BasicInfoHolder;
