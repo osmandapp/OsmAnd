@@ -1,42 +1,8 @@
 package net.osmand.plus.download.local;
 
 
-import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
-import static net.osmand.IndexConstants.BINARY_DEPTH_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_ROAD_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_WIKI_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.COLOR_PALETTE_DIR;
-import static net.osmand.IndexConstants.FONT_INDEX_DIR;
-import static net.osmand.IndexConstants.FONT_INDEX_EXT;
-import static net.osmand.IndexConstants.GEOTIFF_DIR;
-import static net.osmand.IndexConstants.HIDDEN_DIR;
-import static net.osmand.IndexConstants.MAPS_PATH;
-import static net.osmand.IndexConstants.NAUTICAL_INDEX_DIR;
-import static net.osmand.IndexConstants.ROADS_INDEX_DIR;
-import static net.osmand.IndexConstants.SRTM_INDEX_DIR;
-import static net.osmand.IndexConstants.TIF_EXT;
-import static net.osmand.IndexConstants.TILES_INDEX_DIR;
-import static net.osmand.IndexConstants.TXT_EXT;
-import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
-import static net.osmand.IndexConstants.WEATHER_EXT;
-import static net.osmand.IndexConstants.WEATHER_FORECAST_DIR;
-import static net.osmand.IndexConstants.WIKIVOYAGE_INDEX_DIR;
-import static net.osmand.IndexConstants.WIKI_INDEX_DIR;
-import static net.osmand.plus.download.local.LocalItemType.COLOR_DATA;
-import static net.osmand.plus.download.local.LocalItemType.DEPTH_DATA;
-import static net.osmand.plus.download.local.LocalItemType.FONT_DATA;
-import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
-import static net.osmand.plus.download.local.LocalItemType.ROAD_DATA;
-import static net.osmand.plus.download.local.LocalItemType.TERRAIN_DATA;
-import static net.osmand.plus.download.local.LocalItemType.TILES_DATA;
-import static net.osmand.plus.download.local.LocalItemType.TTS_VOICE_DATA;
-import static net.osmand.plus.download.local.LocalItemType.VOICE_DATA;
-import static net.osmand.plus.download.local.LocalItemType.WEATHER_DATA;
-import static net.osmand.plus.download.local.LocalItemType.WIKI_AND_TRAVEL_MAPS;
+import static net.osmand.IndexConstants.*;
+import static net.osmand.plus.download.local.LocalItemType.*;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
