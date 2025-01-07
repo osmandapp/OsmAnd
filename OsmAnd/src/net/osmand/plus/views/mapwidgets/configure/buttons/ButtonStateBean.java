@@ -12,6 +12,7 @@ public class ButtonStateBean {
 	public int size = -1;
 	public int cornerRadius = -1;
 	public float opacity = -1;
+	public boolean enabled;
 
 	public ButtonStateBean(@NonNull String id) {
 		this.id = id;
@@ -19,6 +20,7 @@ public class ButtonStateBean {
 
 	public void setupButtonState(@NonNull QuickActionButtonState buttonState) {
 		buttonState.setName(name);
+		buttonState.setEnabled(enabled);
 
 		if (!Algorithms.isEmpty(icon)) {
 			buttonState.getIconPref().set(icon);
@@ -37,6 +39,7 @@ public class ButtonStateBean {
 	@NonNull
 	public static ButtonStateBean toStateBean(@NonNull QuickActionButtonState state) {
 		ButtonStateBean bean = new ButtonStateBean(state.getId());
+		bean.enabled = state.isEnabled();
 		if (state.hasCustomName()) {
 			bean.name = state.getName();
 		}
