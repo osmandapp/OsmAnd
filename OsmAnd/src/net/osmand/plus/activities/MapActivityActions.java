@@ -1,39 +1,6 @@
 package net.osmand.plus.activities;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_AV_NOTES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BACKUP_RESTORE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_MAP_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_PROFILE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_SCREEN_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DASHBOARD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIRECTIONS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DOWNLOAD_MAPS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_FAVORITES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_HELP_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_LIVE_UPDATES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MAP_MARKERS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MEASURE_DISTANCE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MY_PLACES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_OSMAND_VERSION_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_OSM_EDITS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_PLUGINS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SEARCH_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SWITCH_PROFILE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRACKS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRAVEL_GUIDES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRIP_RECORDING_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_GPX_WAYPOINT;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_AVOID_ROAD;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DIRECTIONS_FROM_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MARKER_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MEASURE_DISTANCE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_SEARCH_NEARBY;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_SHARE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.*;
 import static net.osmand.plus.widgets.ctxmenu.ViewCreator.PROFILES_CHOSEN_PROFILE_TAG;
 import static net.osmand.plus.widgets.ctxmenu.ViewCreator.PROFILES_CONTROL_BUTTON_TAG;
 import static net.osmand.plus.widgets.ctxmenu.ViewCreator.PROFILES_NORMAL_PROFILE_TAG;
@@ -167,7 +134,7 @@ public class MapActivityActions extends MapActions {
 
 
 	public void addMapMarker(double latitude, double longitude, PointDescription pd,
-							 @Nullable String mapObjectName) {
+			@Nullable String mapObjectName) {
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		markersHelper.addMapMarker(new LatLon(latitude, longitude), pd, mapObjectName);
 	}
@@ -181,7 +148,7 @@ public class MapActivityActions extends MapActions {
 	}
 
 	public void addActionsToAdapter(double latitude, double longitude,
-									ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
+			ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 		MapActivity activity = getMapActivity();
 		if (activity == null) {
 			return;
@@ -259,15 +226,15 @@ public class MapActivityActions extends MapActions {
 	}
 
 	public void contextMenuPoint(MapActivity activity, double latitude, double longitude,
-								 ContextMenuAdapter _adapter,
-								 Object selectedObj) {
+			ContextMenuAdapter _adapter,
+			Object selectedObj) {
 		ContextMenuAdapter adapter = _adapter == null ? new ContextMenuAdapter(app) : _adapter;
 		addActionsToAdapter(latitude, longitude, adapter, selectedObj, false);
 		showAdditionalActionsFragment(adapter, getContextMenuItemClickListener(activity, latitude, longitude, adapter));
 	}
 
 	public void showAdditionalActionsFragment(ContextMenuAdapter adapter,
-											  AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener listener) {
+			AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener listener) {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			AdditionalActionsBottomSheetDialogFragment actionsBottomSheetDialogFragment = new AdditionalActionsBottomSheetDialogFragment();
@@ -277,7 +244,7 @@ public class MapActivityActions extends MapActions {
 	}
 
 	public ContextMenuItemClickListener getContextMenuItemClickListener(MapActivity activity, double latitude,
-																		double longitude, ContextMenuAdapter adapter) {
+			double longitude, ContextMenuAdapter adapter) {
 		ViewCreator viewCreator = new ViewCreator(activity, !settings.isLightContent());
 		ContextMenuListAdapter listAdapter = adapter.toListAdapter(activity, viewCreator);
 
@@ -327,17 +294,17 @@ public class MapActivityActions extends MapActions {
 	}
 
 	public void enterRoutePlanningModeGivenGpx(GpxFile gpxFile, ApplicationMode appMode,
-											   LatLon from,
-											   PointDescription fromName, boolean useIntermediatePointsByDefault,
-											   boolean showMenu, int menuState) {
+			LatLon from,
+			PointDescription fromName, boolean useIntermediatePointsByDefault,
+			boolean showMenu, int menuState) {
 		enterRoutePlanningModeGivenGpx(gpxFile, appMode, from, fromName,
 				useIntermediatePointsByDefault, showMenu, menuState, null);
 	}
 
 	@Override
 	public void enterRoutePlanningModeGivenGpx(GpxFile gpxFile, ApplicationMode appMode,
-											   LatLon from, PointDescription fromName, boolean useIntermediatePointsByDefault,
-											   boolean showMenu, int menuState, @Nullable Boolean passWholeRoute) {
+			LatLon from, PointDescription fromName, boolean useIntermediatePointsByDefault,
+			boolean showMenu, int menuState, @Nullable Boolean passWholeRoute) {
 		super.enterRoutePlanningModeGivenGpx(gpxFile, appMode, from, fromName,
 				useIntermediatePointsByDefault, showMenu, menuState, passWholeRoute);
 		MapActivity activity = getMapActivity();
@@ -399,8 +366,8 @@ public class MapActivityActions extends MapActions {
 
 	@NonNull
 	private ContextMenuAdapter createSwitchProfileOptionsMenu(@NonNull MapActivity activity,
-															  @NonNull ContextMenuAdapter adapter,
-															  boolean nightMode) {
+			@NonNull ContextMenuAdapter adapter,
+			boolean nightMode) {
 		drawerMode = DRAWER_MODE_NORMAL;
 		createProfilesController(activity, adapter, nightMode, true);
 
@@ -437,7 +404,7 @@ public class MapActivityActions extends MapActions {
 	}
 
 	private ContextMenuAdapter createNormalOptionsMenu(@NonNull MapActivity activity,
-													   @NonNull ContextMenuAdapter adapter, boolean nightMode) {
+			@NonNull ContextMenuAdapter adapter, boolean nightMode) {
 		createProfilesController(activity, adapter, nightMode, false);
 
 		adapter.addItem(new ContextMenuItem(DRAWER_DASHBOARD_ID)
@@ -646,7 +613,7 @@ public class MapActivityActions extends MapActions {
 	}
 
 	private void createProfilesController(@NonNull MapActivity activity,
-										  ContextMenuAdapter optionsMenuHelper, boolean nightMode, boolean listExpanded) {
+			ContextMenuAdapter optionsMenuHelper, boolean nightMode, boolean listExpanded) {
 		//switch profile button
 		ApplicationMode currentMode = settings.APPLICATION_MODE.get();
 
@@ -682,14 +649,14 @@ public class MapActivityActions extends MapActions {
 
 	@NonNull
 	private String getProfileDescription(@NonNull ApplicationMode mode,
-										 @NonNull RoutingProfilesHolder profiles) {
+			@NonNull RoutingProfilesHolder profiles) {
 		String type = getString(mode.isCustomProfile() ? R.string.profile_type_user_string : R.string.profile_type_osmand_string);
 		return getProfileDescription(mode, profiles, type);
 	}
 
 	@NonNull
 	private String getProfileDescription(@NonNull ApplicationMode mode,
-										 @NonNull RoutingProfilesHolder profiles, @NonNull String defValue) {
+			@NonNull RoutingProfilesHolder profiles, @NonNull String defValue) {
 		String description = defValue;
 		String routingProfileKey = mode.getRoutingProfile();
 		String derivedProfile = mode.getDerivedProfile();
@@ -704,8 +671,8 @@ public class MapActivityActions extends MapActions {
 	}
 
 	private void addMyPlacesTabToDrawer(@NonNull MapActivity activity,
-										@NonNull ContextMenuAdapter adapter, @StringRes int titleRes, @DrawableRes int iconRes,
-										String drawerId) {
+			@NonNull ContextMenuAdapter adapter, @StringRes int titleRes, @DrawableRes int iconRes,
+			String drawerId) {
 		adapter.addItem(new ContextMenuItem(drawerId)
 				.setTitleId(titleRes, activity)
 				.setIcon(iconRes)
@@ -757,7 +724,7 @@ public class MapActivityActions extends MapActions {
 	}
 
 	public void stopNavigationActionConfirm(@Nullable OnDismissListener listener,
-											@Nullable Runnable onStopAction) {
+			@Nullable Runnable onStopAction) {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			DismissRouteBottomSheetFragment.showInstance(activity.getSupportFragmentManager(), listener, onStopAction);
