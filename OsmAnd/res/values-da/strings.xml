@@ -5697,4 +5697,5 @@
     <string name="calculate_size">Beregn størrelse</string>
     <string name="rendering_attr_showClimbingRoutes_name">Klatreruter</string>
     <string name="rendering_attr_showClimbingRoutes_description">Vis klatreruter</string>
+    <string name="display_distance_to_first_intermediate">Vis tid og afstand til første mellemliggende, hvis det er indstillet</string>
 </resources>
