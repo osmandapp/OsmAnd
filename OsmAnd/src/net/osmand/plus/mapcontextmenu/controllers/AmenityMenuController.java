@@ -16,20 +16,20 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
 import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
-import net.osmand.plus.wikivoyage.data.TravelObfHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
@@ -77,7 +77,7 @@ public class AmenityMenuController extends MenuController {
 			leftTitleButtonController = markerMenuController.getLeftTitleButtonController();
 			rightTitleButtonController = markerMenuController.getRightTitleButtonController();
 		} else if (amenity.isRoutePoint()) {
-			TitleButtonController openTrackButtonController = new TitleButtonController() {
+			TitleButtonController openTrackButtonController = new TitleButtonController(this) {
 				@Override
 				public void buttonPressed() {
 					MapActivity mapActivity = getMapActivity();
@@ -90,7 +90,7 @@ public class AmenityMenuController extends MenuController {
 			openTrackButtonController.caption = mapActivity.getString(R.string.shared_string_open_track);
 			leftTitleButtonController = openTrackButtonController;
 		} else if (amenity.getType().isWiki()) {
-			leftTitleButtonController = new TitleButtonController() {
+			leftTitleButtonController = new TitleButtonController(this) {
 				@Override
 				public void buttonPressed() {
 					MapActivity activity = getMapActivity();
