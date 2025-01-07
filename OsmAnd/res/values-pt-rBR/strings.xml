@@ -5985,4 +5985,5 @@
     <string name="obd_calculated_engine_load">Carga calculada do motor</string>
     <string name="obd_calculated_engine_load_desc">Mostra a carga do motor calculada pelo veículo com base no sensor</string>
     <string name="obd_engine_oil_temperature">Temperatura do óleo do motor</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Rotas de escalada</string>
 </resources>
