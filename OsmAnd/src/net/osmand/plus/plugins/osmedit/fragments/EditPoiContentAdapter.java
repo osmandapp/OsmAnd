@@ -1,35 +1,21 @@
 package net.osmand.plus.plugins.osmedit.fragments;
 
-import static net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment.AMENITY_TEXT_LENGTH;
 import static net.osmand.plus.plugins.osmedit.fragments.NewAdvancedEditPoiFragment.*;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.graphics.drawable.Drawable;
-import android.text.Editable;
 import android.text.InputFilter;
-import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
-import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -37,22 +23,18 @@ import net.osmand.plus.plugins.osmedit.data.EditPoiData;
 import net.osmand.plus.plugins.osmedit.dialogs.EditPoiDialogFragment;
 import net.osmand.plus.plugins.osmedit.dialogs.NewBasicEditPoiFragment.OpenHoursItem;
 import net.osmand.plus.plugins.osmedit.dialogs.NewBasicEditPoiFragment.OpeningHoursAdapter;
-import net.osmand.plus.plugins.osmedit.dialogs.OpeningHoursDaysDialogFragment;
-import net.osmand.plus.plugins.osmedit.dialogs.OpeningHoursHoursDialogFragment;
 import net.osmand.plus.plugins.osmedit.fragments.NewAdvancedEditPoiFragment.OsmTagsArrayAdapter;
-import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.plugins.osmedit.fragments.holders.AddItemHolder;
+import net.osmand.plus.plugins.osmedit.fragments.holders.AddOpeningHoursHolder;
+import net.osmand.plus.plugins.osmedit.fragments.holders.BasicInfoHolder;
+import net.osmand.plus.plugins.osmedit.fragments.holders.DescriptionItemHolder;
+import net.osmand.plus.plugins.osmedit.fragments.holders.OpenTimeListHolder;
+import net.osmand.plus.plugins.osmedit.fragments.holders.TagItemHolder;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.OsmandTextFieldBoxes;
-import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
-import net.osmand.util.OpeningHoursParser;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import gnu.trove.list.array.TIntArrayList;
-import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
 public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 	public static final int TYPE_DESCRIPTION_ITEM = 1;
@@ -81,12 +63,13 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
 	private EditText currentTagEditText;
 	private final EditPoiListener editPoiListener;
+	private final EditPoiAdapterListener editPoiAdapterListener;
 
 
 	public EditPoiContentAdapter(@NonNull MapActivity mapActivity, @NonNull List<Object> items,
 	                             ArrayAdapter<String> valueAdapter, OsmTagsArrayAdapter tagAdapter,
-	                             OpeningHoursAdapter openingHoursAdapter, boolean nightMode, EditPoiDialogFragment editPoiDialogFragment,
-	                             EditPoiListener editPoiListener) {
+	                             OpeningHoursAdapter openingHoursAdapter, boolean nightMode, @NonNull EditPoiDialogFragment editPoiDialogFragment,
+	                             @NonNull EditPoiListener editPoiListener) {
 		setHasStableIds(true);
 		this.items.addAll(items);
 		this.nightMode = nightMode;
@@ -98,6 +81,34 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 		this.editPoiDialogFragment = editPoiDialogFragment;
 		this.editPoiListener = editPoiListener;
 		themedInflater = UiUtilities.getInflater(mapActivity, nightMode);
+		editPoiAdapterListener = getTagItemHolderListener();
+	}
+
+	private EditPoiAdapterListener getTagItemHolderListener() {
+		return new EditPoiAdapterListener() {
+			@Override
+			public void setCurrentTagEditText(@Nullable EditText editText) {
+				currentTagEditText = editText;
+			}
+
+			@Nullable
+			@Override
+			public EditText getCurrentTagEditText() {
+				return currentTagEditText;
+			}
+
+			@Override
+			public void removeItem(int position) {
+				notifyItemRemoved(position);
+				items.remove(position);
+			}
+
+			@SuppressLint("NotifyDataSetChanged")
+			@Override
+			public void dataChanged() {
+				notifyDataSetChanged();
+			}
+		};
 	}
 
 	private EditPoiData getData() {
@@ -134,7 +145,11 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 		if (object instanceof Integer integer) {
 			return integer;
 		} else if (object instanceof TagItem tagItem) {
-			return tagItem.id();
+			if (Algorithms.isEmpty(tagItem.tag())) {
+				return tagItem.id();
+			} else {
+				return tagItem.tag().hashCode();
+			}
 		} else if (object instanceof OpenHoursItem openHoursItem) {
 			return openHoursItem.id();
 		}
@@ -152,7 +167,7 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 			}
 			case TYPE_TAG_ITEM -> {
 				itemView = themedInflater.inflate(R.layout.list_item_poi_tag, parent, false);
-				yield new TagItemHolder(itemView, app);
+				yield new TagItemHolder(itemView, app, valueAdapter, tagAdapter, activity, nightMode);
 			}
 			case TYPE_ADD_TAG -> {
 				itemView = themedInflater.inflate(R.layout.edit_poi_add_item, parent, false);
@@ -168,7 +183,7 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 			}
 			case TYPE_OPEN_TIME_LIST_ITEM -> {
 				itemView = themedInflater.inflate(R.layout.open_time_list_item, parent, false);
-				yield new OpenTimeListHolder(itemView);
+				yield new OpenTimeListHolder(itemView, activity);
 			}
 
 			default -> throw new IllegalArgumentException("Unsupported view type");
@@ -180,17 +195,17 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 		Object item = items.get(position);
 
 		if (holder instanceof DescriptionItemHolder descriptionItemHolder) {
-			descriptionItemHolder.bindView();
+			descriptionItemHolder.bindView(getData());
 		} else if (holder instanceof TagItemHolder tagItemHolder && item instanceof TagItem tagItem) {
-			tagItemHolder.bindView(holder, tagItem, nightMode);
+			tagItemHolder.bindView(holder, tagItem, getData(), editPoiListener, editPoiAdapterListener);
 		} else if (holder instanceof AddItemHolder addItemHolder) {
-			addItemHolder.bindView();
+			addItemHolder.bindView(editPoiListener);
 		} else if (holder instanceof BasicInfoHolder basicInfoHolder) {
-			basicInfoHolder.bindView();
+			basicInfoHolder.bindView(getData(), editPoiListener);
 		} else if (holder instanceof AddOpeningHoursHolder addOpeningHoursHolder) {
-			addOpeningHoursHolder.bindView();
+			addOpeningHoursHolder.bindView(editPoiListener);
 		} else if (holder instanceof OpenTimeListHolder openTimeListHolder && item instanceof OpenHoursItem openHoursItem) {
-			openTimeListHolder.bindView(openHoursItem);
+			openTimeListHolder.bindView(openHoursItem, openingHoursAdapter, editPoiAdapterListener, editPoiListener);
 		}
 	}
 
@@ -200,10 +215,10 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 			if (holder instanceof DescriptionItemHolder descriptionItemHolder) {
 				switch (payLoadInteger) {
 					case PAYLOAD_NAME:
-						descriptionItemHolder.updateName();
+						descriptionItemHolder.updateName(getData());
 						break;
 					case PAYLOAD_AMENITY:
-						descriptionItemHolder.updatePoiType();
+						descriptionItemHolder.updatePoiType(getData());
 						break;
 				}
 			} else if (holder instanceof TagItemHolder tagItemHolder && PAYLOAD_FOCUS_ON_ITEM == payLoadInteger) {
@@ -219,13 +234,6 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 		return items.size();
 	}
 
-	private void showKeyboard(@NonNull View view) {
-		view.requestFocus();
-		if (activity != null) {
-			AndroidUtils.showSoftKeyboard(activity, view);
-		}
-	}
-
 	public void clearFocus() {
 		if (currentTagEditText != null) {
 			currentTagEditText.clearFocus();
@@ -233,354 +241,9 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 		}
 	}
 
-	public void removeItem(int position) {
-		notifyItemRemoved(position);
-		items.remove(position);
-	}
-
-	class TagItemHolder extends RecyclerView.ViewHolder {
-
-		private final OsmandApplication app;
-		private final OsmandTextFieldBoxes tagFB;
-		private final OsmandTextFieldBoxes valueFB;
-		private final ExtendedEditText tagEditText;
-		private final AutoCompleteTextView valueEditText;
-		private final View deleteButton;
-
-		public TagItemHolder(@NonNull View itemView, @NonNull OsmandApplication app) {
-			super(itemView);
-			this.app = app;
-			tagFB = itemView.findViewById(R.id.tag_fb);
-			valueFB = itemView.findViewById(R.id.value_fb);
-			tagEditText = itemView.findViewById(R.id.tagEditText);
-			valueEditText = itemView.findViewById(R.id.valueEditText);
-			deleteButton = itemView.findViewById(R.id.delete_button);
-		}
-
-		public void focusOnTagEdit() {
-			showKeyboard(tagEditText);
-		}
-
-		public void bindView(@NonNull RecyclerView.ViewHolder holder, @NonNull TagItem tagItem, boolean nightMode) {
-			Drawable deleteDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark, !nightMode);
-
-			String tag = tagItem.tag();
-			String value = tagItem.value();
-			tagFB.setClearButton(deleteDrawable);
-			tagFB.post(tagFB::hideClearButton);
-
-			valueFB.setClearButton(deleteDrawable);
-			valueFB.post(valueFB::hideClearButton);
-
-			tagEditText.setText(tag);
-			tagEditText.setAdapter(tagAdapter);
-			tagEditText.setThreshold(1);
-
-			String[] previousTag = {tag};
-			tagEditText.setOnFocusChangeListener((v, hasFocus) -> {
-				updateCurrentTagEditText(hasFocus);
-				updateClearButtonVisibility(hasFocus);
-				if (Algorithms.isEmpty(tagEditText.getText().toString())) {
-					return;
-				}
-				if (!hasFocus) {
-					if (!getData().isInEdit()) {
-						String s = tagEditText.getText().toString();
-						if (!previousTag[0].equals(s)) {
-							getData().removeTag(previousTag[0]);
-							getData().putTag(s, valueEditText.getText().toString());
-							previousTag[0] = s;
-						}
-					}
-				} else {
-					tagAdapter.getFilter().filter(tagEditText.getText());
-				}
-			});
-
-			valueEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(AMENITY_TEXT_LENGTH)});
-			valueEditText.setText(value);
-			valueEditText.setAdapter(valueAdapter);
-			valueEditText.setThreshold(3);
-			valueEditText.addTextChangedListener(new SimpleTextWatcher() {
-				@Override
-				public void afterTextChanged(Editable s) {
-					if (!getData().isInEdit()) {
-						getData().putTag(tagEditText.getText().toString(), s.toString());
-					}
-				}
-			});
-
-			valueEditText.setOnFocusChangeListener((v, hasFocus) -> {
-				if (hasFocus) {
-					valueFB.showClearButton();
-					valueAdapter.getFilter().filter(valueEditText.getText());
-				} else {
-					valueFB.hideClearButton();
-				}
-			});
-
-			deleteButton.setOnClickListener(v -> {
-				int itemPosition = holder.getAdapterPosition();
-				editPoiListener.onDeleteItem(itemPosition);
-				removeItem(itemPosition);
-				getData().removeTag(tagEditText.getText().toString());
-			});
-		}
-
-		private void updateCurrentTagEditText(boolean hasFocus){
-			if (!hasFocus) {
-				if (tagEditText.equals(currentTagEditText)) {
-					currentTagEditText = null;
-				}
-			} else {
-				currentTagEditText = tagEditText;
-			}
-		}
-
-		private void updateClearButtonVisibility(boolean hasFocus) {
-			if (!hasFocus) {
-				tagFB.hideClearButton();
-			} else {
-				tagFB.showClearButton();
-			}
-		}
-	}
-
-	class DescriptionItemHolder extends RecyclerView.ViewHolder {
-		private final TextView nameTextView;
-		private final TextView amenityTagTextView;
-		private final TextView amenityTextView;
-
-		public DescriptionItemHolder(@NonNull View itemView) {
-			super(itemView);
-			this.nameTextView = itemView.findViewById(R.id.nameTextView);
-			this.amenityTagTextView = itemView.findViewById(R.id.amenityTagTextView);
-			this.amenityTextView = itemView.findViewById(R.id.amenityTextView);
-		}
-
-		public void bindView() {
-			updateName();
-			updatePoiType();
-		}
-
-		public void updateName() {
-			nameTextView.setText(getData().getTag(OSMSettings.OSMTagKey.NAME.getValue()));
-		}
-
-		public void updatePoiType() {
-			PoiType pt = getData().getPoiTypeDefined();
-			if (pt != null) {
-				amenityTagTextView.setText(pt.getEditOsmTag());
-				amenityTextView.setText(pt.getEditOsmValue());
-			} else {
-				PoiCategory category = getData().getPoiCategory();
-				if (category != null) {
-					amenityTagTextView.setText(category.getDefaultTag());
-				} else {
-					amenityTagTextView.setText(R.string.tag_poi_amenity);
-				}
-				amenityTextView.setText(getData().getPoiTypeString());
-			}
-		}
-	}
-
-	class AddItemHolder extends RecyclerView.ViewHolder {
-
-		private final View addTagButton;
-
-		public AddItemHolder(@NonNull View itemView) {
-			super(itemView);
-			this.addTagButton = itemView.findViewById(R.id.addTagButton);
-		}
-
-		public void bindView() {
-			addTagButton.setOnClickListener(v -> editPoiListener.onAddNewItem(getAdapterPosition(), TYPE_ADD_TAG));
-		}
-	}
-
-	class BasicInfoHolder extends RecyclerView.ViewHolder {
-
-		private final EditText streetEditText;
-		private final EditText houseNumberEditText;
-		private final EditText phoneEditText;
-		private final EditText webSiteEditText;
-		private final EditText descriptionEditText;
-
-		public BasicInfoHolder(@NonNull View itemView) {
-			super(itemView);
-			streetEditText = itemView.findViewById(R.id.streetEditText);
-			houseNumberEditText = itemView.findViewById(R.id.houseNumberEditText);
-			phoneEditText = itemView.findViewById(R.id.phoneEditText);
-			webSiteEditText = itemView.findViewById(R.id.webSiteEditText);
-			descriptionEditText = itemView.findViewById(R.id.descriptionEditText);
-		}
-
-		protected void addTextWatcher(String tag, EditText e) {
-			e.addTextChangedListener(new SimpleTextWatcher() {
-				@Override
-				public void afterTextChanged(Editable s) {
-					EditPoiData data = getData();
-					if (data != null && !data.isInEdit()) {
-						if (!TextUtils.isEmpty(s)) {
-							data.putTag(tag, s.toString());
-						} else if (editPoiListener.isBasicTagsInitialized() && editPoiListener.isFragmentResumed()) {
-							data.removeTag(tag);
-						}
-					}
-				}
-
-			});
-		}
-
-		public void bindView() {
-			addTextWatcher(OSMSettings.OSMTagKey.ADDR_STREET.getValue(), streetEditText);
-			addTextWatcher(OSMSettings.OSMTagKey.WEBSITE.getValue(), webSiteEditText);
-			addTextWatcher(OSMSettings.OSMTagKey.PHONE.getValue(), phoneEditText);
-			addTextWatcher(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue(), houseNumberEditText);
-			addTextWatcher(OSMSettings.OSMTagKey.DESCRIPTION.getValue(), descriptionEditText);
-			InputFilter[] lengthLimit = editPoiListener.getLengthLimit();
-			streetEditText.setFilters(lengthLimit);
-			houseNumberEditText.setFilters(lengthLimit);
-			phoneEditText.setFilters(lengthLimit);
-			webSiteEditText.setFilters(lengthLimit);
-			descriptionEditText.setFilters(lengthLimit);
-
-			AndroidUtils.setTextHorizontalGravity(streetEditText, Gravity.START);
-			AndroidUtils.setTextHorizontalGravity(houseNumberEditText, Gravity.START);
-			AndroidUtils.setTextHorizontalGravity(phoneEditText, Gravity.START);
-			AndroidUtils.setTextHorizontalGravity(webSiteEditText, Gravity.START);
-			AndroidUtils.setTextHorizontalGravity(descriptionEditText, Gravity.START);
-
-			EditPoiData data = getData();
-			if (data == null) {
-				return;
-			}
-			Map<String, String> tagValues = data.getTagValues();
-			streetEditText.setText(tagValues.get(OSMSettings.OSMTagKey.ADDR_STREET.getValue()));
-			houseNumberEditText.setText(tagValues.get(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue()));
-			phoneEditText.setText(tagValues.get(OSMSettings.OSMTagKey.PHONE.getValue()));
-			webSiteEditText.setText(tagValues.get(OSMSettings.OSMTagKey.WEBSITE.getValue()));
-			descriptionEditText.setText(tagValues.get(OSMSettings.OSMTagKey.DESCRIPTION.getValue()));
-		}
-	}
-
-	class AddOpeningHoursHolder extends RecyclerView.ViewHolder {
-
-		private final View button;
-
-		public AddOpeningHoursHolder(@NonNull View itemView) {
-			super(itemView);
-			button = itemView.findViewById(R.id.addOpeningHoursButton);
-		}
-
-		public void bindView() {
-			button.setOnClickListener(v -> editPoiListener.onAddNewItem(getAdapterPosition(), TYPE_ADD_OPENING_HOURS));
-		}
-	}
-
-	class OpenTimeListHolder extends RecyclerView.ViewHolder {
-
-		private final ImageView clockIconImageView;
-		private final TextView daysTextView;
-		private final LinearLayout timeListContainer;
-		private final ImageButton deleteItemImageButton;
-		private final Button addTimeSpanButton;
-
-		public OpenTimeListHolder(@NonNull View itemView) {
-			super(itemView);
-			clockIconImageView = itemView.findViewById(R.id.clockIconImageView);
-			daysTextView = itemView.findViewById(R.id.daysTextView);
-			timeListContainer = itemView.findViewById(R.id.timeListContainer);
-			deleteItemImageButton = itemView.findViewById(R.id.deleteItemImageButton);
-			addTimeSpanButton = itemView.findViewById(R.id.addTimeSpanButton);
-		}
-
-		public void bindView(@NonNull OpenHoursItem openHoursItem) {
-			timeListContainer.removeAllViews();
-			OpeningHoursParser.OpeningHours openingHours = openingHoursAdapter.getOpeningHours();
-			int position = openHoursItem.position();
-			clockIconImageView.setImageDrawable(openingHoursAdapter.getClockDrawable());
-
-			if (openingHours.getRules().get(position) instanceof OpeningHoursParser.BasicOpeningHourRule rule) {
-				StringBuilder stringBuilder = new StringBuilder();
-				rule.appendDaysString(stringBuilder);
-
-				daysTextView.setText(stringBuilder.toString());
-				daysTextView.setOnClickListener(v -> {
-					OpeningHoursDaysDialogFragment fragment =
-							OpeningHoursDaysDialogFragment.createInstance(rule, position);
-					fragment.show(getManager(), "OpenTimeDialogFragment");
-				});
-
-				TIntArrayList startTimes = rule.getStartTimes();
-				TIntArrayList endTimes = rule.getEndTimes();
-				for (int i = 0; i < startTimes.size(); i++) {
-					View timeFromToLayout = LayoutInflater.from(activity)
-							.inflate(R.layout.time_from_to_layout, timeListContainer, false);
-					TextView openingTextView = timeFromToLayout.findViewById(R.id.openingTextView);
-					openingTextView.setText(Algorithms.formatMinutesDuration(startTimes.get(i)));
-
-					TextView closingTextView = timeFromToLayout.findViewById(R.id.closingTextView);
-					closingTextView.setText(Algorithms.formatMinutesDuration(endTimes.get(i)));
-
-					openingTextView.setTag(i);
-					openingTextView.setOnClickListener(v -> {
-						int index = (int) v.getTag();
-						OpeningHoursHoursDialogFragment.createInstance(rule, position, true, index)
-								.show(getManager(), "OpeningHoursHoursDialogFragment");
-					});
-					closingTextView.setTag(i);
-					closingTextView.setOnClickListener(v -> {
-						int index = (int) v.getTag();
-						OpeningHoursHoursDialogFragment.createInstance(rule, position, false, index)
-								.show(getManager(), "OpeningHoursHoursDialogFragment");
-					});
-
-					ImageButton deleteTimeSpanImageButton = timeFromToLayout
-							.findViewById(R.id.deleteTimespanImageButton);
-					deleteTimeSpanImageButton.setImageDrawable(openingHoursAdapter.getDeleteDrawable());
-					int timeSpanPosition = i;
-					deleteTimeSpanImageButton.setOnClickListener(v -> {
-						if (startTimes.size() == 1) {
-							openingHours.getRules().remove(position);
-						} else {
-							rule.deleteTimeRange(timeSpanPosition);
-						}
-						openingHoursAdapter.updateHoursData();
-						notifyDataSetChanged();
-					});
-					timeListContainer.addView(timeFromToLayout);
-				}
-
-				deleteItemImageButton.setVisibility(View.GONE);
-				addTimeSpanButton.setVisibility(View.VISIBLE);
-				addTimeSpanButton.setOnClickListener(v -> OpeningHoursHoursDialogFragment.createInstance(rule, position, true,
-						startTimes.size()).show(getManager(),
-						"TimePickerDialogFragment"));
-			} else if (openingHours.getRules().get(position) instanceof OpeningHoursParser.UnparseableRule) {
-				daysTextView.setText(openingHours.getRules().get(position).toRuleString());
-				timeListContainer.removeAllViews();
-
-				deleteItemImageButton.setVisibility(View.VISIBLE);
-				deleteItemImageButton.setImageDrawable(openingHoursAdapter.getDeleteDrawable());
-				deleteItemImageButton.setOnClickListener(v -> {
-					openingHours.getRules().remove(position);
-					openingHoursAdapter.updateHoursData();
-					notifyDataSetChanged();
-				});
-				addTimeSpanButton.setVisibility(View.GONE);
-			}
-		}
-
-		private FragmentManager getManager() {
-			return editPoiListener.getChildFragmentManager();
-		}
-
-	}
-
-
 	public interface EditPoiListener {
 		void onAddNewItem(int position, int buttonType);
+
 		void onDeleteItem(int position);
 
 		InputFilter[] getLengthLimit();
@@ -594,6 +257,17 @@ public class EditPoiContentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 		default boolean isBasicTagsInitialized() {
 			return false;
 		}
+	}
+
+	public interface EditPoiAdapterListener {
+		void setCurrentTagEditText(@Nullable EditText editText);
+
+		@Nullable
+		EditText getCurrentTagEditText();
+
+		void removeItem(int position);
+
+		void dataChanged();
 	}
 }
 
