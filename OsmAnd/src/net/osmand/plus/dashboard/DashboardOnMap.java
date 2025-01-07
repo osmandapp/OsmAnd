@@ -1,25 +1,6 @@
 package net.osmand.plus.dashboard;
 
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.ALPINE_HIKING;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.CONFIGURE_MAP;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.CONTOUR_LINES;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.CYCLE_ROUTES;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.DASHBOARD;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.HIKING_ROUTES;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.MAPILLARY;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.MTB_ROUTES;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.NAUTICAL_DEPTH;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.OSM_NOTES;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.OVERLAY_MAP;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.RELIEF_3D;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TERRAIN;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TRANSPORT_LINES;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TRAVEL_ROUTES;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.UNDERLAY_MAP;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WEATHER;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WEATHER_CONTOURS;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WEATHER_LAYER;
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.WIKIPEDIA;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.*;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -39,18 +20,9 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AbsListView;
+import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
-import android.widget.ProgressBar;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
