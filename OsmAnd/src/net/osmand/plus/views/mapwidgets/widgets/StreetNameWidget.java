@@ -354,6 +354,9 @@ public class StreetNameWidget extends MapWidget {
 		ImageView removeImage = waypointInfoBar.findViewById(R.id.waypoint_close);
 		moreImage.setImageDrawable(iconsCache.getIcon(R.drawable.ic_overflow_menu_white, isNightMode()));
 		removeImage.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark, isNightMode()));
+
+		turnDrawable.updateColors(nightMode);
+		turnDrawable.invalidateSelf();
 	}
 
 	@Override
