@@ -111,8 +111,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private LockableScrollView scrollView;
 	private IMapLocationListener mapLocationListener;
 	private TouchListener touchListener;
-	private Double lat = null;
-	private Double lon = null;
+	private LatLon latLon = null;
 	private boolean portraitMode;
 
 	@Override
@@ -138,8 +137,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 			if (savedInstanceState.containsKey(KEY_LAT_LON)) {
 				LatLon savedLatLon = AndroidUtils.getSerializable(savedInstanceState, KEY_LAT_LON, LatLon.class);
 				if (savedLatLon != null) {
-					lat = savedLatLon.getLatitude();
-					lon = savedLatLon.getLongitude();
+					latLon = savedLatLon;
 				}
 			}
 		} else {
@@ -231,7 +229,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 						int[] xy = new int[2];
 						mapWindow.getLocationOnScreen(xy);
 						int marginTop = xy[1];
-						mapView.fitLocationToMap(lat, lon, tileBox.getZoom(), mapWindow.getWidth(),
+						mapView.fitLocationToMap(latLon.getLatitude(), latLon.getLongitude(), tileBox.getZoom(), mapWindow.getWidth(),
 								mapWindow.getHeight(), marginTop, false);
 					}
 				});
@@ -247,8 +245,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private void updateLatLon(){
 		QuadRect rect = getLatLonRectOfMapWindow();
 		LatLon mapWindowCenter = new LatLon(rect.centerY(), rect.centerX());
-		lat = mapWindowCenter.getLatitude();
-		lon = mapWindowCenter.getLongitude();
+		latLon = mapWindowCenter;
 	}
 
 	@NonNull
@@ -286,9 +283,8 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private void moveMapCenterToMapWindow() {
 		boolean animated = false;
 		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox();
-		if (lat == null || lon == null) {
-			lat = tileBox.getCenterLatLon().getLatitude();
-			lon = tileBox.getCenterLatLon().getLongitude();
+		if (latLon == null) {
+			latLon = new LatLon(tileBox.getCenterLatLon().getLatitude(), tileBox.getCenterLatLon().getLongitude());
 			animated = true;
 		}
 
@@ -297,6 +293,9 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		mapWindow.getLocationOnScreen(xy);
 		int marginTop = xy[1];
 		int marginLeft = xy[0];
+
+		double lat = latLon.getLatitude();
+		double lon = latLon.getLongitude();
 
 		if (portraitMode) {
 			mapView.fitLocationToMap(lat, lon, tileBox.getZoom(), mapWindow.getWidth(), mapWindow.getHeight(),
@@ -576,8 +575,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		outState.putInt(KEY_SELECTED_MIN_ZOOM, selectedMinZoom);
 		outState.putInt(KEY_SELECTED_MAX_ZOOM, selectedMaxZoom);
 		outState.putSerializable(KEY_DOWNLOAD_TYPE, downloadType);
-		if (lat != null && lon != null) {
-			LatLon latLon = new LatLon(lat, lon);
+		if (latLon != null) {
 			outState.putSerializable(KEY_LAT_LON, latLon);
 		}
 	}
