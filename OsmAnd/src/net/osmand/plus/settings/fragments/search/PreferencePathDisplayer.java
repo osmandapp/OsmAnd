@@ -49,12 +49,12 @@ class PreferencePathDisplayer implements de.KnollFrank.lib.settingssearch.result
 	}
 
 	private void highlightApplicationModeAtStartOfLongPreferencePath(final PreferencePath preferencePath, final List<SpannableString> titles) {
-		if (isLongPreferencePath(preferencePath) && isApplicationMode(preferencePath.preferences().get(0))) {
+		if (isLong(preferencePath) && isApplicationMode(preferencePath.preferences().get(0))) {
 			highlight(titles.get(0));
 		}
 	}
 
-	private static boolean isLongPreferencePath(final PreferencePath preferencePath) {
+	private static boolean isLong(final PreferencePath preferencePath) {
 		return preferencePath.preferences().size() >= 2;
 	}
 
