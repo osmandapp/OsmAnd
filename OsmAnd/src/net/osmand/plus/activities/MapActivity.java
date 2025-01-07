@@ -71,20 +71,8 @@ import net.osmand.plus.feedback.RateUsHelper;
 import net.osmand.plus.feedback.RenderInitErrorBottomSheet;
 import net.osmand.plus.feedback.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.firstusage.FirstUsageWizardFragment;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.DayNightHelper;
-import net.osmand.plus.helpers.DiscountHelper;
-import net.osmand.plus.helpers.IntentHelper;
-import net.osmand.plus.helpers.LockHelper;
+import net.osmand.plus.helpers.*;
 import net.osmand.plus.helpers.LockHelper.LockUIAdapter;
-import net.osmand.plus.helpers.MapAppInitializeListener;
-import net.osmand.plus.helpers.MapDisplayPositionManager;
-import net.osmand.plus.helpers.MapFragmentsHelper;
-import net.osmand.plus.helpers.MapPermissionsResultCallback;
-import net.osmand.plus.helpers.MapRouteCalculationProgressListener;
-import net.osmand.plus.helpers.MapScrollHelper;
-import net.osmand.plus.helpers.RestoreNavigationHelper;
-import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ui.ImportGpxBottomSheetDialogFragment;
@@ -1257,9 +1245,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public static void launchMapActivityMoveToTop(@NonNull Context activity,
-												  @Nullable Bundle prevIntentParams,
-												  @Nullable Uri intentData,
-												  @Nullable Bundle intentParams) {
+	                                              @Nullable Bundle prevIntentParams,
+	                                              @Nullable Uri intentData,
+	                                              @Nullable Bundle intentParams) {
 		if (activity instanceof MapActivity) {
 			if (((MapActivity) activity).getDashboard().isVisible()) {
 				((MapActivity) activity).getDashboard().hideDashboard();
@@ -1355,9 +1343,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	@NonNull
-	public MapRouteInfoMenu getMapRouteInfoMenu() {
-		return mapRouteInfoMenu;
-	}
+	public MapRouteInfoMenu getMapRouteInfoMenu() { return mapRouteInfoMenu; }
 
 	@NonNull
 	public TrackDetailsMenu getTrackDetailsMenu() {
@@ -1587,7 +1573,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				sim.startStopRouteAnimation(this);
 			}
 		}
-		for (OsmandPlugin plugin : PluginsHelper.getEnabledPlugins()) {
+		for (OsmandPlugin plugin: PluginsHelper.getEnabledPlugins()) {
 			plugin.newRouteIsCalculated(newRoute);
 		}
 	}
