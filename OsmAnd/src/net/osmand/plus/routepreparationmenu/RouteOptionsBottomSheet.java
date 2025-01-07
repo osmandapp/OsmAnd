@@ -331,18 +331,13 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 
 		Drawable drawable = app.getUIUtilities().getIcon(R.drawable.ic_action_settings,
 				nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
-		if (Build.VERSION.SDK_INT >= 21) {
-			Drawable activeDrawable = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_settings, selectedModeColor);
-			drawable = AndroidUtils.createPressedStateListDrawable(drawable, activeDrawable);
-		}
+		Drawable activeDrawable = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_settings, selectedModeColor);
+		drawable = AndroidUtils.createPressedStateListDrawable(drawable, activeDrawable);
 		voicePromptsBtnImage.setImageDrawable(drawable);
 
-		voicePromptsBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.VOICE_ANNOUNCES, applicationMode);
-				dismiss();
-			}
+		voicePromptsBtn.setOnClickListener(v -> {
+			BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.VOICE_ANNOUNCES, applicationMode);
+			dismiss();
 		});
 
 		return new BaseBottomSheetItem.Builder()

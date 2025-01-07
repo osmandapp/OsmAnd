@@ -1,13 +1,11 @@
 package net.osmand.plus.plugins.accessibility;
 
 import android.app.Activity;
-import android.os.Build;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.core.view.AccessibilityDelegateCompat;
@@ -108,26 +106,24 @@ public class AccessibilityAssistant extends AccessibilityDelegateCompat implemen
 
 
     private void processFocusChange(View view, boolean isFocused, boolean eventPassed) {
-        if (view.isClickable() && ((view instanceof ImageView) || (view instanceof ImageButton) || (view instanceof Button))) {
+        if (view.isClickable() && (view instanceof ImageView || view instanceof Button)) {
             discourageUiUpdates = isFocused;
-        } else if (eventPassed || (Build.VERSION.SDK_INT != 17)) {
+        } else {
             focusedView = isFocused ? view : null;
         }
     }
 
     private void notifyEvent(View view, int eventType, boolean passed) {
-        if (Build.VERSION.SDK_INT >= 16) {
-            switch (eventType) {
-            case AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED:
-                processFocusChange(view, true, passed);
-                break;
-            case AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUS_CLEARED:
-                processFocusChange(view, false, passed);
-                break;
-            default:
-                break;
-            }
-        }
+	    switch (eventType) {
+		    case AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED:
+			    processFocusChange(view, true, passed);
+			    break;
+		    case AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUS_CLEARED:
+			    processFocusChange(view, false, passed);
+			    break;
+		    default:
+			    break;
+	    }
     }
 
 }

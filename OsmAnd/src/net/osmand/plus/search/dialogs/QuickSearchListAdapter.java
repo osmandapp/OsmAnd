@@ -7,7 +7,6 @@ import static net.osmand.search.core.ObjectType.POI_TYPE;
 
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -322,12 +321,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 		TextView analyseButtonDescr = view.findViewById(R.id.settings_button);
 		FrameLayout analyseButton = view.findViewById(R.id.settings_button_container);
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			AndroidUtils.setBackground(app, analyseButton, isNightMode(), R.drawable.btn_border_light, R.drawable.btn_border_dark);
-			AndroidUtils.setBackground(app, analyseButtonDescr, isNightMode(), R.drawable.ripple_light, R.drawable.ripple_dark);
-		} else {
-			AndroidUtils.setBackground(app, analyseButton, isNightMode(), R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
-		}
+		AndroidUtils.setBackground(app, analyseButton, isNightMode(), R.drawable.btn_border_light, R.drawable.btn_border_dark);
+		AndroidUtils.setBackground(app, analyseButtonDescr, isNightMode(), R.drawable.ripple_light, R.drawable.ripple_dark);
 		analyseButton.setOnClickListener(disabledHistoryItem.getOnClickListener());
 
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.top_divider), false);

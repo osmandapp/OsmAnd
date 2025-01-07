@@ -3,7 +3,6 @@ package net.osmand.plus.wikipedia;
 import static net.osmand.plus.utils.ColorUtilities.getStatusBarSecondaryColorId;
 
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -137,11 +136,8 @@ public abstract class WikiArticleBaseDialogFragment extends WikiBaseDialogFragme
 	@NonNull
 	protected Drawable getSelectedLangIcon() {
 		Drawable normal = getContentIcon(R.drawable.ic_action_map_language);
-		if (Build.VERSION.SDK_INT >= 21) {
-			Drawable active = getActiveIcon(R.drawable.ic_action_map_language);
-			return AndroidUtils.createPressedStateListDrawable(normal, active);
-		}
-		return normal;
+		Drawable active = getActiveIcon(R.drawable.ic_action_map_language);
+		return AndroidUtils.createPressedStateListDrawable(normal, active);
 	}
 
 	@Override

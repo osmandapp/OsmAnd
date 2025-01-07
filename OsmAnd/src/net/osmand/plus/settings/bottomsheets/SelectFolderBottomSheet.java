@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.bottomsheets;
 
+import static android.view.View.GONE;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
@@ -17,8 +19,6 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 
 import org.apache.commons.logging.Log;
-
-import static android.view.View.GONE;
 
 public class SelectFolderBottomSheet extends BasePreferenceBottomSheet {
 
@@ -76,24 +76,8 @@ public class SelectFolderBottomSheet extends BasePreferenceBottomSheet {
 		View divider = mainView.findViewById(R.id.divider);
 		View btnOpenChoseDialog = mainView.findViewById(R.id.button);
 
-//		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//			if (btnTitle != null) {
-//				tvBtnTitle.setText(btnTitle);
-//				int colorResId = ColorUtilities.getActiveColorId(nightMode);
-//				int color = ContextCompat.getColor(ctx, colorResId);
-//				Drawable drawable = UiUtilities.getColoredSelectableDrawable(ctx, color, 0.3f);
-//				AndroidUtils.setBackground(btnOpenChoseDialog, drawable);
-//				btnOpenChoseDialog.setOnClickListener(new View.OnClickListener() {
-//					@Override
-//					public void onClick(View v) {
-//						openDocumentTree();
-//					}
-//				});
-//			}
-//		} else {
 		divider.setVisibility(GONE);
 		btnOpenChoseDialog.setVisibility(GONE);
-//		}
 
 		if (text != null) {
 			editText.setText(text);
@@ -103,13 +87,10 @@ public class SelectFolderBottomSheet extends BasePreferenceBottomSheet {
 			tvDescription.setText(description);
 		}
 
-		editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				if (hasFocus && !etWasFocused) {
-					etWasFocused = true;
-					editText.setText(currentPath);
-				}
+		editText.setOnFocusChangeListener((v, hasFocus) -> {
+			if (hasFocus && !etWasFocused) {
+				etWasFocused = true;
+				editText.setText(currentPath);
 			}
 		});
 
