@@ -50,7 +50,6 @@ public class NewBasicEditPoiFragment extends BaseOsmAndFragment implements EditP
 		View view = themedInflater.inflate(R.layout.fragment_edit_poi_advanced_new, container, false);
 
 		RecyclerView recyclerView = view.findViewById(R.id.content_recycler_view);
-		recyclerView.setNestedScrollingEnabled(true);
 		InputFilter[] lengthLimit = {
 				new InputFilter.LengthFilter(AMENITY_TEXT_LENGTH)
 		};

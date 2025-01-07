@@ -7,7 +7,6 @@ import static net.osmand.plus.plugins.osmedit.fragments.EditPoiContentAdapter.TY
 import static net.osmand.plus.plugins.osmedit.fragments.EditPoiContentAdapter.TYPE_DESCRIPTION_ITEM;
 
 import android.content.Context;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.LayoutInflater;
@@ -63,7 +62,6 @@ public class NewAdvancedEditPoiFragment extends BaseOsmAndFragment implements Ed
 		View view = themedInflater.inflate(R.layout.fragment_edit_poi_advanced_new, container, false);
 
 		recyclerView = view.findViewById(R.id.content_recycler_view);
-		recyclerView.setNestedScrollingEnabled(true);
 
 		tagAdapter = new OsmTagsArrayAdapter(app, R.layout.list_textview);
 		valueAdapter = new ArrayAdapter<>(app, R.layout.list_textview);
@@ -83,8 +81,8 @@ public class NewAdvancedEditPoiFragment extends BaseOsmAndFragment implements Ed
 				contentAdapter.getItems().add(position, new TagItem("", "", id));
 				contentAdapter.notifyItemInserted(position);
 				recyclerView.postDelayed(() -> {
-					getEditPoiFragment().smoothScrollToBottom();
-					getEditPoiFragment().scrollView.post(() -> contentAdapter.notifyItemChanged(position, PAYLOAD_FOCUS_ON_ITEM));
+					recyclerView.scrollToPosition(contentAdapter.getItemCount() - 1);
+					contentAdapter.notifyItemChanged(position, PAYLOAD_FOCUS_ON_ITEM);
 				}, 300);
 			}
 
@@ -93,11 +91,11 @@ public class NewAdvancedEditPoiFragment extends BaseOsmAndFragment implements Ed
 				LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
 				boolean clearFocus = false;
 				View focusedView = recyclerView.getFocusedChild();
-				if (focusedView != null && manager != null) {
-					Rect mReact = new Rect();
-					getEditPoiFragment().scrollView.getHitRect(mReact);
-
-					clearFocus = !focusedView.getLocalVisibleRect(mReact);
+				LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+				if (focusedView != null && manager != null && layoutManager != null) {
+					int firstVisible = layoutManager.findFirstCompletelyVisibleItemPosition();
+					int lastVisible = layoutManager.findLastCompletelyVisibleItemPosition();
+					clearFocus = !(position >= firstVisible && position <= lastVisible);
 				}
 
 				if (clearFocus) {

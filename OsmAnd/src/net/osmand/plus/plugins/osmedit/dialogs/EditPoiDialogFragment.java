@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -28,13 +29,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -110,7 +111,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	private OnSaveButtonClickListener onSaveButtonClickListener;
 	private OsmandTextFieldBoxes poiTypeTextInputLayout;
 	private View view;
-	public NestedScrollView scrollView;
 
 	public static final int AMENITY_TEXT_LENGTH = 255;
 
@@ -129,20 +129,10 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		editPoiData = new EditPoiData(entity, app);
 	}
 
-	private void resetNestedScrollView() {
-		scrollView.post(() -> {
-			scrollView.scrollTo(0, 0);
-			scrollView.requestLayout();
-		});
-	}
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
 		view = themedInflater.inflate(R.layout.fragment_edit_poi, container, false);
-		scrollView = view.findViewById(R.id.scroll_view);
-
-		scrollView.setNestedScrollingEnabled(false);
 		if (savedInstanceState != null) {
 			Map<String, String> map = (Map<String, String>) AndroidUtils.getSerializable(savedInstanceState, TAGS_LIST, LinkedHashMap.class);
 			editPoiData.updateTags(map);
@@ -178,7 +168,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 				} else {
 					onSaveButtonClickListener = null;
 				}
-				resetNestedScrollView();
 			}
 
 			@Override
@@ -221,18 +210,10 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		int activeColor = ColorUtilities.getActiveColor(getContext(), nightMode);
 		onlineDocumentationButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_help, activeColor));
 		ImageButton poiTypeButton = view.findViewById(R.id.poiTypeButton);
-		poiTypeButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				PoiTypeDialogFragment fragment = PoiTypeDialogFragment.createInstance();
-				fragment.setOnItemSelectListener(new PoiTypeDialogFragment.OnItemSelectListener() {
-					@Override
-					public void select(PoiCategory poiCategory) {
-						setPoiCategory(poiCategory);
-					}
-				});
-				fragment.show(getChildFragmentManager(), "PoiTypeDialogFragment");
-			}
+		poiTypeButton.setOnClickListener(v -> {
+			PoiTypeDialogFragment fragment = PoiTypeDialogFragment.createInstance();
+			fragment.setOnItemSelectListener(this::setPoiCategory);
+			fragment.show(getChildFragmentManager(), "PoiTypeDialogFragment");
 		});
 
 		ExtendedEditText poiNameEditText = view.findViewById(R.id.poiNameEditText);
@@ -276,16 +257,13 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 		AppCompatImageButton expandButton = poiTypeTextInputLayout.getEndIconImageButton();
 		expandButton.setColorFilter(R.color.gpx_chart_red);
-		expandButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				PoiCategory category = editPoiData.getPoiCategory();
-				if (category != null) {
-					PoiSubTypeDialogFragment dialogFragment =
-							PoiSubTypeDialogFragment.createInstance(category);
-					dialogFragment.setOnItemSelectListener(c -> setSubCategory(c));
-					dialogFragment.show(getChildFragmentManager(), "PoiSubTypeDialogFragment");
-				}
+		expandButton.setOnClickListener(v -> {
+			PoiCategory category = editPoiData.getPoiCategory();
+			if (category != null) {
+				PoiSubTypeDialogFragment dialogFragment =
+						PoiSubTypeDialogFragment.createInstance(category);
+				dialogFragment.setOnItemSelectListener(this::setSubCategory);
+				dialogFragment.show(getChildFragmentManager(), "PoiSubTypeDialogFragment");
 			}
 		});
 
@@ -302,25 +280,31 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		Button saveButton = view.findViewById(R.id.saveButton);
 		saveButton.setText(openstreetmapUtil instanceof OpenstreetmapRemoteUtil
 				? R.string.shared_string_upload : R.string.shared_string_save);
-		saveButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				trySave();
-			}
-		});
+		saveButton.setOnClickListener(v -> trySave());
 		Button cancelButton = view.findViewById(R.id.cancelButton);
-		cancelButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismissCheckForChanges();
-			}
-		});
+		cancelButton.setOnClickListener(v -> dismissCheckForChanges());
 		setAdapterForPoiTypeEditText();
 		setCancelable(false);
 		if (editPoiData.hasEmptyValue()) {
 			viewPager.setCurrentItem(ADVANCED_TAB);
 		}
 		editPoiData.setupInitPoint();
+
+		AppBarLayout appBarLayout = view.findViewById(R.id.app_bar);
+		appBarLayout.addOnOffsetChangedListener((_appBarLayout, verticalOffset) -> {
+			Rect mReact = new Rect();
+			view.getHitRect(mReact);
+
+			boolean clearFocus = poiNameEditText.getLocalVisibleRect(mReact);
+			poiNameEditText.setFocusable(clearFocus);
+			poiNameEditText.setFocusableInTouchMode(clearFocus);
+			poiNameEditText.setClickable(clearFocus);
+
+			poiTypeEditText.setFocusable(clearFocus);
+			poiTypeEditText.setFocusableInTouchMode(clearFocus);
+			poiTypeEditText.setClickable(clearFocus);
+		});
+
 		return view;
 	}
 
@@ -520,15 +504,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 	public void setSubCategory(String subCategory) {
 		poiTypeEditText.setText(subCategory);
-	}
-
-	public void smoothScrollToBottom() {
-		NestedScrollView scrollView = view.findViewById(R.id.scroll_view);
-		scrollView.post(() -> scrollView.fullScroll(View.FOCUS_DOWN));
-/*		int height = scrollView.getHeight();
-		int bottom = scrollView.getChildAt(0).getBottom();
-		int maxScrollY = Math.max(0, bottom - height);
-		scrollView.smoothScrollTo(0, maxScrollY);*/
 	}
 
 	public static void commitEntity(Action action,
