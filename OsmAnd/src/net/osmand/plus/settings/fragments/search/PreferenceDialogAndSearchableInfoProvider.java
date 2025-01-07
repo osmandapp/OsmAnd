@@ -13,7 +13,7 @@ class PreferenceDialogAndSearchableInfoProvider implements de.KnollFrank.lib.set
 	public Optional<PreferenceDialogAndSearchableInfoByPreferenceDialogProvider<?>> getPreferenceDialogAndSearchableInfoByPreferenceDialogProvider(
 			final Preference preference,
 			final PreferenceFragmentCompat hostOfPreference) {
-		// FK-TODO: handle more preference dialogs, which shall be searchable
+		// FK-TODO: handle more preference dialogs which shall be searchable
 		return hostOfPreference instanceof final ShowableSearchablePreferenceDialogProvider showableSearchablePreferenceDialogProvider ?
 				showableSearchablePreferenceDialogProvider
 						.getShowableSearchablePreferenceDialog(preference, Optional.empty())
