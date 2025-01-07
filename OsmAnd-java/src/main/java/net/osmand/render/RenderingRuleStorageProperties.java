@@ -337,17 +337,30 @@ public class RenderingRuleStorageProperties {
 	}
 
 	private RenderingRuleProperty registerRuleInternal(RenderingRuleProperty p) {
-		RenderingRuleProperty existing = get(p.getAttrName());
+		return registerRuleInternal(p, true);
+	}
+
+	private RenderingRuleProperty registerRuleInternal(RenderingRuleProperty p, boolean overwriteExisting) {
+		String attrName = p.getAttrName();
+		RenderingRuleProperty existing = get(attrName);
 		if (existing == null) {
-			properties.put(p.getAttrName(), p);
+			properties.put(attrName, p);
 			p.setId(rules.size());
 			rules.add(p);
+		} else if (overwriteExisting) {
+			int id = existing.getId();
+			p.setId(id);
+			rules.set(id, p);
+			properties.put(attrName, p);
+			customRules.remove(attrName);
+		} else {
+			p = existing;
 		}
 		return p;
 	}
 
-	public void registerRule(RenderingRuleProperty p) {
-		registerRuleInternal(p);
+	public void registerRule(RenderingRuleProperty p, boolean overwriteExisting) {
+		registerRuleInternal(p, overwriteExisting);
 		if (!customRules.containsKey(p.attrName)) {
 			customRules.put(p.attrName, p);
 		}
