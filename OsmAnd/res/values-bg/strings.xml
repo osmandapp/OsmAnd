@@ -3256,7 +3256,7 @@
     <string name="mtb_imba">МАПК (IMBA)</string>
     <string name="mtb_imba_full">Международна асоциация за планинско колоездене</string>
     <string name="map_widget_altitude_map_center">Надм. височина: център на картата</string>
-    <string name="quick_action_air_pressure_layer">Бутон, превключващ слоя с атмосферното налягане на картата.</string>
+    <string name="quick_action_air_pressure_layer">Превключва слоя с атмосферното налягане на картата.</string>
     <string name="cloud_layer">Слой с облачност</string>
     <string name="switch_mode_by_tapping_on_widget">Превключете режима с докосване на приспособлението.</string>
     <string name="map_rendering_engine_v2">Издание 2 (OpenGL)</string>
@@ -3264,7 +3264,7 @@
     <string name="rendering_attr_showMtbScale_description">Показване на пътеките, в зависимост от сложността по скалата за MTB.</string>
     <string name="rendering_attr_showMtbScale_name">Показване на скалата за MTB</string>
     <string name="share_crash_log">Споделяне на дневника с грешката</string>
-    <string name="quick_action_wind_layer">Бутон, превключващ слоя с вятъра на картата.</string>
+    <string name="quick_action_wind_layer">Превключва слоя с вятъра на картата.</string>
     <string name="temperature_layer">Слой с температура</string>
     <string name="map_widget_altitude_current_location">Надм. височина: текущо местоположение</string>
     <string name="map_widget_ruler_control">Линия за радиус</string>
@@ -3284,8 +3284,8 @@
     <string name="shared_string_restart">Рестартиране</string>
     <string name="copying_completed">Копирането е завършено</string>
     <string name="shared_string_do_not_exist">Не съществува</string>
-    <string name="quick_action_temperature_layer">Бутон, превключващ слоя с температурата на картата.</string>
-    <string name="quick_action_cloud_layer">Бутон, превключващ слоя с облачността на картата.</string>
+    <string name="quick_action_temperature_layer">Превключва слоя с температурата на картата.</string>
+    <string name="quick_action_cloud_layer">Превключва слоя с облачността на картата.</string>
     <string name="shared_string_contours">Контури</string>
     <string name="precipitation_layer">Слой с валежи</string>
     <string name="wind_widget_desc">Показва скоростта на вятъра в текущия център на картата.</string>
@@ -3307,7 +3307,7 @@
     <string name="backup_error_failed_to_fetch_remote_items">Грешка при получаване на списъка с файлове от сървъра.</string>
     <string name="shared_string_purchased_on">Поръчано на</string>
     <string name="mtb_segment_classification">Класификация на сегменти</string>
-    <string name="quick_action_precipitation_layer">Бутон, превключващ слоя с валежите на картата.</string>
+    <string name="quick_action_precipitation_layer">Превключва слоя с валежите на картата.</string>
     <string name="pressure_layer">Слой с налягане</string>
     <string name="wind_layer">Слой с вятър</string>
     <string name="air_pressure_widget_desc">Показва атмосферното налягане в текущия център на картата.</string>
@@ -3359,7 +3359,7 @@
     <string name="speak_route_recalculation">Съобщаване за преизчисляване на маршрута</string>
     <string name="map_center_widget">Координати: център на картата</string>
     <string name="send_uuid_preference_desc">Случаен идентификатор (UUID) се използва за изтегляне на карти от сървърите на OsmAnd, за да се наблюдава справедливото използване на ресурсите на сървъра, да се прогнозират моделите на трафика и да се генерират анонимни месечни отчети за картите.</string>
-    <string name="quick_action_map_center_widget_descr">Бутон, превключващ приспособлението за центъра на картата.</string>
+    <string name="quick_action_map_center_widget_descr">Превключва приспособлението, показващо координатите на центъра на картата.</string>
     <string name="audio_video_notes_desc">Осигурява бърз достъп до пускане/спиране на запис на аудио/видеобележка или снимка.</string>
     <string name="map_source_zoom_levels">Задайте минималните и максималните увеличения, при които да бъдат показвани и зареждани карти от интернет.</string>
     <string name="street_level_imagery">Снимки от улицата</string>
@@ -3376,7 +3376,7 @@
     <string name="map_widget_zoom_level">Увеличение</string>
     <string name="map_widget_camera_distance_desc">Показва височината на камерата над нивото на повърхността.</string>
     <string name="map_widget_target_distance_desc">Показва разстоянието между камерата и местоназначение.</string>
-    <string name="quick_action_current_location_widget_descr">Бутон, превключващ приспособлението за местоположение на картата.</string>
+    <string name="quick_action_current_location_widget_descr">Превключва приспособлението, показващо координатите на местоположението на картата.</string>
     <string name="coordinates_widget_current_location_desc">Показва географските координати на текущото местоположение</string>
     <string name="map_marker_interval_dialog_desc">Задайте интервала от време, за който да бъде усреднена скороста, с цел оценка на времето на пристигане.</string>
     <string name="radius_rules_widget_desc">Инструментът „Линия за радиуси“ показва окръжности с разстояния около избрана точка от картата.</string>
@@ -3631,7 +3631,7 @@
     <string name="shared_string_show_slope">Показване на склоновете</string>
     <string name="route_line_use_gradient_coloring">Линията на маршрута е оцветена в зависимост от стръмността на денивелацията.</string>
     <string name="gpx_no_routes_title">Няма маршрути</string>
-    <string name="quick_action_add_route_descr">Бутон за стартиране на маршрут от средата на екрана.</string>
+    <string name="quick_action_add_route_descr">Запопва маршрут от средата на екрана.</string>
     <string name="rendering_attr_seabedDetail_name">Подробности</string>
     <string name="estimated_download_size">Очакван размер на изтегляне</string>
     <string name="please_provide_group_name_message">Посочете име на групата.</string>
@@ -4355,7 +4355,7 @@
     <string name="quick_action_finish_trip_recording_summary">Запзване на трасето в GPX и приключване на записа на пътуването.</string>
     <string name="new_segment_started_m">Започнат запис на нов сегмент от трасето.</string>
     <string name="lock_screen_description">Включване или изключване на екрана, за да бъдат предотвратени нежелани докосвания</string>
-    <string name="quick_action_save_recorded_trip_and_continue_summary">Бутон, запазващ текущото записано пътуване като GPX файл и продължаващ записа на нова следа без прекъсване.</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">Запазва текущото записано пътуване като GPX файл и продължава записа на ново трасе без прекъсване.</string>
     <string name="obd_fuel_type_methanol">Метанол</string>
     <string name="obd_fuel_type_gasoline">Бензин</string>
     <string name="obd_fuel_type_ethanol">Етанол</string>
@@ -4622,14 +4622,14 @@
     <string name="delete_actions_button">Премахване на бутон</string>
     <string name="rendering_attr_whiteWaterSports_name">Водни спортове</string>
     <string name="sqlite_db_file">Файл на SQLiteDB</string>
-    <string name="quick_action_directions_from_desc">Прави центъра на картата отправна точка. Ще е нужно да укажете местоназначение или ще се преизчисли маршрута.</string>
+    <string name="quick_action_directions_from_desc">Прави центъра на картата отправна точка. Ще е нужно да укажете местоназначение или маршрута ще бъде преизчислен.</string>
     <string name="quick_action_add_first_intermediate_desc">Прави центъра на картата първа междинна точка от маршрута.</string>
     <string name="quick_action_add_destination_desc">Прави центъра на картата новото местоназначение като предишното става последна междинна точка.</string>
     <string name="quick_action_replace_destination_desc">Прави центъра на картата новото местоназначение, заменяйки предишното (ако има).</string>
     <string name="delete_all_actions_message_q">Желаете ли %d бързи действия да бъдат необратимо премахнати?</string>
     <string name="quick_action_switch_compass_desc">Превключва ориентацията на картата.</string>
     <string name="quick_action_navigation_view_desc">Превключване на екрана за маршрутизиране.</string>
-    <string name="quick_action_start_pause_recording">Бутон за начало, пауза и край на запис на трасе в GPX.</string>
+    <string name="quick_action_start_pause_recording">Нчало, пауза и край на запис на трасе в GPX.</string>
     <string name="quick_action_search_view_desc">Превключване на екрана за търсене.</string>
     <string name="dialog_add_action_title">Добавяне на действие</string>
     <string name="quick_actions_delete_text">Желаете ли действието „%s“ да бъде премахнато?</string>
@@ -4644,5 +4644,5 @@
     <string name="quick_action_drawer_desc">Превключване на главното меню.</string>
     <string name="quick_action_auto_zoom_desc">Бутон, превключващ автоматичното мащабиране въз основа на скоростта.</string>
     <string name="quick_action_fav_name_descr">Оставете полето празно, за да бъде използван адреса или името на мястото.</string>
-    <string name="quick_action_new_trip_segment">Бутон, започващ нов сегмент в текущия запис на трасе в GPX.</string>
+    <string name="quick_action_new_trip_segment">Започва нов сегмент в записваното на трасе на GPX.</string>
 </resources>
