@@ -13,13 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.car.app.model.CarIcon;
 import androidx.car.app.model.DateTimeWithZone;
 import androidx.car.app.model.Distance;
-import androidx.car.app.navigation.model.Destination;
-import androidx.car.app.navigation.model.Lane;
-import androidx.car.app.navigation.model.LaneDirection;
-import androidx.car.app.navigation.model.Maneuver;
-import androidx.car.app.navigation.model.Step;
-import androidx.car.app.navigation.model.TravelEstimate;
-import androidx.car.app.navigation.model.Trip;
+import androidx.car.app.navigation.model.*;
 import androidx.car.app.navigation.model.Trip.Builder;
 import androidx.core.graphics.drawable.IconCompat;
 
