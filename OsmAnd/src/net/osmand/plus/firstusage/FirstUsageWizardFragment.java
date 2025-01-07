@@ -75,13 +75,7 @@ import net.osmand.util.MapUtils;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmAndLocationListener,
 		AppInitializeListener, DownloadEvents, StorageSelectionListener, FirstUsageActionsListener {
