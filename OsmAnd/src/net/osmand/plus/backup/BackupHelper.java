@@ -40,8 +40,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -194,11 +194,13 @@ public class BackupHelper {
 		}
 	}
 
-	public void updateFileUploadTime(@NonNull String type, @NonNull String fileName, long updateTime) {
+	public void updateFileUploadTime(@NonNull String type, @NonNull String fileName,
+			long updateTime) {
 		dbHelper.updateFileUploadTime(type, fileName, updateTime);
 	}
 
-	public void updateFileMd5Digest(@NonNull String type, @NonNull String fileName, @NonNull String md5Hex) {
+	public void updateFileMd5Digest(@NonNull String type, @NonNull String fileName,
+			@NonNull String md5Hex) {
 		dbHelper.updateFileMd5Digest(type, fileName, md5Hex);
 	}
 
@@ -454,13 +456,14 @@ public class BackupHelper {
 	}
 
 	public void deleteFiles(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,
-	                        @Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
+			@Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteFilesCommand(this, remoteFiles, byVersion, listener));
 	}
 
 	void deleteFilesSync(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,
-	                     @Nullable Executor executor, @Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
+			@Nullable Executor executor,
+			@Nullable OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 		try {
 			new DeleteFilesCommand(this, remoteFiles, byVersion, listener)
@@ -472,7 +475,8 @@ public class BackupHelper {
 		}
 	}
 
-	void downloadFileList(@Nullable OnDownloadFileListListener listener) throws UserNotRegisteredException {
+	void downloadFileList(
+			@Nullable OnDownloadFileListListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		Map<String, String> params = new HashMap<>();
@@ -528,17 +532,20 @@ public class BackupHelper {
 		executor.runCommand(new DeleteOldFilesCommand(this, types));
 	}
 
-	public void deleteAccount(@NonNull String email, @NonNull String token) throws UserNotRegisteredException {
+	public void deleteAccount(@NonNull String email,
+			@NonNull String token) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteAccountCommand(this, email, token));
 	}
 
-	public void checkCode(@NonNull String email, @NonNull String token) throws UserNotRegisteredException {
+	public void checkCode(@NonNull String email,
+			@NonNull String token) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new CheckCodeCommand(this, email, token));
 	}
 
-	public void sendCode(@NonNull String email, @NonNull String action) throws UserNotRegisteredException {
+	public void sendCode(@NonNull String email,
+			@NonNull String action) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new SendCodeCommand(this, email, action));
 	}
@@ -560,70 +567,74 @@ public class BackupHelper {
 
 	@NonNull
 	String downloadFile(@NonNull File file, @NonNull RemoteFile remoteFile,
-	                    @Nullable OnDownloadFileListener listener) throws UserNotRegisteredException {
+			@Nullable OnDownloadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		OperationLog operationLog = new OperationLog("downloadFile " + file.getName(), DEBUG);
 		String error;
 		String type = remoteFile.getType();
 		String fileName = remoteFile.getName();
-		Map<String, String> params = new HashMap<>();
-		params.put("deviceid", getDeviceId());
-		params.put("accessToken", getAccessToken());
-		params.put("name", fileName);
-		params.put("type", type);
-		params.put("updatetime", String.valueOf(remoteFile.getUpdatetimems()));
+		try {
+			Map<String, String> params = new HashMap<>();
+			params.put("deviceid", getDeviceId());
+			params.put("accessToken", getAccessToken());
+			params.put("name", fileName);
+			params.put("type", type);
+			params.put("updatetime", String.valueOf(remoteFile.getUpdatetimems()));
 
-		StringBuilder builder = new StringBuilder(DOWNLOAD_FILE_URL);
-		boolean firstParam = true;
-		for (Entry<String, String> entry : params.entrySet()) {
-			builder.append(firstParam ? "?" : "&").append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8));
-			firstParam = false;
-		}
-		IProgress iProgress = new AbstractProgress() {
+			StringBuilder builder = new StringBuilder(DOWNLOAD_FILE_URL);
+			boolean firstParam = true;
+			for (Entry<String, String> entry : params.entrySet()) {
+				builder.append(firstParam ? "?" : "&").append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+				firstParam = false;
+			}
+			IProgress iProgress = new AbstractProgress() {
 
-			private ProgressHelper progressHelper;
+				private ProgressHelper progressHelper;
 
-			@Override
-			public void startWork(int work) {
-				progressHelper = new ProgressHelper(() -> {
+				@Override
+				public void startWork(int work) {
+					progressHelper = new ProgressHelper(() -> {
+						if (listener != null) {
+							int progress = progressHelper.getLastKnownProgress();
+							int deltaProgress = progressHelper.getLastAddedDeltaProgress();
+							listener.onFileDownloadProgress(type, fileName, progress, deltaProgress);
+						}
+					});
 					if (listener != null) {
-						int progress = progressHelper.getLastKnownProgress();
-						int deltaProgress = progressHelper.getLastAddedDeltaProgress();
-						listener.onFileDownloadProgress(type, fileName, progress, deltaProgress);
+						progressHelper.onStartWork(work);
+						listener.onFileDownloadStarted(type, fileName, progressHelper.getTotalWork());
 					}
-				});
-				if (listener != null) {
-					progressHelper.onStartWork(work);
-					listener.onFileDownloadStarted(type, fileName, progressHelper.getTotalWork());
 				}
-			}
 
-			@Override
-			public void progress(int deltaWork) {
-				if (listener != null) {
-					progressHelper.onProgress(deltaWork);
+				@Override
+				public void progress(int deltaWork) {
+					if (listener != null) {
+						progressHelper.onProgress(deltaWork);
+					}
 				}
-			}
 
-			@Override
-			public boolean isInterrupted() {
-				if (listener != null) {
-					return listener.isDownloadCancelled();
+				@Override
+				public boolean isInterrupted() {
+					if (listener != null) {
+						return listener.isDownloadCancelled();
+					}
+					return super.isInterrupted();
 				}
-				return super.isInterrupted();
-			}
 
-			@Override
-			public void finishTask() {
-				int remainingProgress = progressHelper.getTotalWork() - progressHelper.getLastKnownProgress();
-				if (remainingProgress > 0) {
-					progress(remainingProgress);
+				@Override
+				public void finishTask() {
+					int remainingProgress = progressHelper.getTotalWork() - progressHelper.getLastKnownProgress();
+					if (remainingProgress > 0) {
+						progress(remainingProgress);
+					}
 				}
-			}
-		};
-		iProgress.startWork(remoteFile.getFilesize() / 1024);
-		error = AndroidNetworkUtils.downloadFile(builder.toString(), file, true, iProgress);
+			};
+			iProgress.startWork(remoteFile.getFilesize() / 1024);
+			error = AndroidNetworkUtils.downloadFile(builder.toString(), file, true, iProgress);
+		} catch (UnsupportedEncodingException e) {
+			error = "UnsupportedEncodingException";
+		}
 		if (listener != null) {
 			listener.onFileDownloadDone(type, fileName, error);
 		}
