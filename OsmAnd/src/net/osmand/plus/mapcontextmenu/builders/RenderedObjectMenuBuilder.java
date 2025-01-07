@@ -1,8 +1,8 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
 import static net.osmand.NativeLibrary.RenderedObject;
-
 import android.os.AsyncTask;
+
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
