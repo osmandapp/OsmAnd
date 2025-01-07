@@ -5462,4 +5462,5 @@
     <string name="calculate_size">Ríomh méid</string>
     <string name="rendering_attr_showClimbingRoutes_name">Bealaí dreapadóireachta</string>
     <string name="rendering_attr_showClimbingRoutes_description">Taispeáin bealaí dreapadóireachta</string>
+    <string name="display_distance_to_first_intermediate">Taispeáin an t-am agus an fad go dtí an chéad idirmheánach má tá sé socraithe</string>
 </resources>
