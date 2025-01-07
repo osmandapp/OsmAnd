@@ -14,15 +14,15 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.plus.shared.SharedUtil;
+import net.osmand.shared.gpx.data.ComparableTracksGroup;
 import net.osmand.shared.data.KLatLon;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.TrackItem;
-import net.osmand.shared.gpx.data.ComparableTracksGroup;
 import net.osmand.shared.io.KFile;
 import net.osmand.shared.util.KMapUtils;
 import net.osmand.util.CollectionUtils;
