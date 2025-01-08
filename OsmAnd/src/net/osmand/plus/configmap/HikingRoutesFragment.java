@@ -158,7 +158,9 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupLegendCard(View view) {
-		ViewGroup group = view.findViewById(R.id.legend_container);
+		ViewGroup container = view.findViewById(R.id.legend_container);
+		ViewGroup contentGroup = view.findViewById(R.id.legend_content);
+		contentGroup.removeAllViews();
 		String propertyValue = routeLayersHelper.getSelectedHikingRoutesValue();
 
 		if (NODE_NETWORKS_VALUE.equals(propertyValue)) {
@@ -166,13 +168,13 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 			if (!Algorithms.isEmpty(dataClasses)) {
 				RouteLegendCard card = new RouteLegendCard(requireActivity(), dataClasses, app.getString(R.string.shared_string_legend));
 				View cardView = card.build();
-				group.addView(cardView);
-				AndroidUiHelper.updateVisibility(group, true);
+				contentGroup.addView(cardView);
+				AndroidUiHelper.updateVisibility(container, true);
 			} else {
-				AndroidUiHelper.updateVisibility(group, false);
+				AndroidUiHelper.updateVisibility(container, false);
 			}
 		} else {
-			AndroidUiHelper.updateVisibility(group, false);
+			AndroidUiHelper.updateVisibility(container, false);
 		}
 	}
 
