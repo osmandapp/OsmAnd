@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.fragments.TrackAppearanceFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -58,10 +60,14 @@ public class RouteLegendCard extends BaseCard {
 		CompoundButton compoundButton = itemView.findViewById(R.id.compound_button);
 		TextView title = itemView.findViewById(R.id.title);
 		TextView description = itemView.findViewById(R.id.description);
+		AndroidUiHelper.updateVisibility(description, false);
 		View divider = itemView.findViewById(R.id.divider_bottom);
+		ImageView icon = itemView.findViewById(R.id.icon);
+
+		Drawable iconDrawable = TrackAppearanceFragment.getTrackIcon(app, null, false, dataClass.color);
+		icon.setImageDrawable(iconDrawable);
 
 		title.setText(dataClass.title());
-		description.setText(dataClass.description());
 
 		compoundButton.setChecked(isClassEnabled(dataClass));
 
@@ -94,6 +100,6 @@ public class RouteLegendCard extends BaseCard {
 
 	}
 
-	public record DataClass(String title, String description) {
+	public record DataClass(String title, int color) {
 	}
 }

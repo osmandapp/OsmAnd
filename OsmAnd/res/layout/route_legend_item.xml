@@ -9,13 +9,15 @@
 	android:gravity="center"
 	android:orientation="horizontal">
 
-	<androidx.appcompat.widget.AppCompatImageView
+	<ImageView
 		android:id="@+id/icon"
 		android:layout_width="@dimen/standard_icon_size"
 		android:layout_height="@dimen/standard_icon_size"
 		android:layout_marginStart="@dimen/content_padding"
 		android:layout_marginEnd="@dimen/favorites_icon_right_margin"
-		android:src="@drawable/ic_action_route_direction_here" />
+		android:layout_gravity="center_vertical"
+		tools:src="@drawable/ic_action_track_line_bold_color"
+		tools:tint="?attr/default_icon_color" />
 
 	<LinearLayout
 		android:layout_width="match_parent"

@@ -15,7 +15,6 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.configmap.RouteLegendCard.DataClass;
 import net.osmand.plus.configmap.routes.MtbClassification;
 import net.osmand.plus.configmap.routes.RouteLayersHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -26,7 +25,6 @@ import net.osmand.plus.utils.UiUtilities;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.IntStream;
 
 public class MtbRoutesFragment extends BaseOsmAndFragment {
 
@@ -57,7 +55,6 @@ public class MtbRoutesFragment extends BaseOsmAndFragment {
 		setupClassifications(view);
 		updateClassificationPreferences();
 
-		setupLegendCard(view);
 		return view;
 	}
 
@@ -86,22 +83,6 @@ public class MtbRoutesFragment extends BaseOsmAndFragment {
 			View propertyView = createRadioButton(classification, inflater, container, hasDivider);
 			container.addView(propertyView);
 		}
-	}
-
-	@NonNull
-	private List<DataClass> getDataClasses() {
-		return IntStream.rangeClosed(1, 9)
-				.mapToObj(i -> new DataClass("Legend item " + i, "Description"))
-				.toList();
-	}
-
-	private void setupLegendCard(@NonNull View view) {
-		List<DataClass> items = getDataClasses();
-
-		RouteLegendCard card = new RouteLegendCard(requireActivity(), items, app.getString(R.string.shared_string_legend));
-		ViewGroup group = view.findViewById(R.id.legend_container);
-		View cardView = card.build();
-		group.addView(cardView);
 	}
 
 	private View createRadioButton(@NonNull MtbClassification classification, @NonNull LayoutInflater inflater, @Nullable ViewGroup container, boolean hasDivider) {

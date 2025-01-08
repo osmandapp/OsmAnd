@@ -55,6 +55,7 @@ public class RenderingRulesStorage {
 	
 	protected Map<String, RenderingRule> renderingAttributes = new LinkedHashMap<String, RenderingRule>();
 	protected Map<String, RenderingRule> renderingAssociations = new LinkedHashMap<String, RenderingRule>();
+	protected Map<String, RenderingClass> renderingClasses = new LinkedHashMap<String, RenderingClass>();
 	protected Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
 	
 	protected String renderingName;
@@ -271,6 +272,7 @@ public class RenderingRulesStorage {
 		private final XmlPullParser parser;
 		private int state;
 		Stack<RenderingRule> stack = new Stack<RenderingRule>();
+		private final Stack<RenderingClass> renderingClassStack = new Stack<>();
 		private final RenderingRulesStorageResolver resolver;
 		private final boolean addon;
 		private RenderingRulesStorage dependsStorage;
@@ -431,6 +433,23 @@ public class RenderingRulesStorage {
 				}
 			} else if ("renderer".equals(name)) { //$NON-NLS-1$
 				throw new XmlPullParserException("Rendering style is deprecated and no longer supported.");
+			}else if ("renderingClass".equals(name)) {
+				String className = parser.getAttributeValue(null, "name");
+				String title = parser.getAttributeValue(null, "title");
+				boolean enable = Boolean.parseBoolean(parser.getAttributeValue(null, "enable"));
+
+				RenderingClass newClass = new RenderingClass(className, title, enable);
+
+				if (!renderingClassStack.isEmpty()) {
+					RenderingClass parent = renderingClassStack.peek();
+					parent.addChild(newClass);
+					newClass.setPath(parent.getPath() + className);
+				} else {
+					newClass.setPath(className);
+				}
+
+				renderingClasses.put(newClass.getPath(), newClass);
+				renderingClassStack.push(newClass);
 			} else {
 				log.warn("Unknown tag : " + name); //$NON-NLS-1$
 			}
@@ -483,6 +502,8 @@ public class RenderingRulesStorage {
 				stack.pop();
 			} else if ("renderingAssociation".equals(name)) { //$NON-NLS-1$
 				stack.pop();
+			} else if ("renderingClass".equals(name)) {
+				renderingClassStack.pop();
 			}
 		}
 	}
@@ -558,6 +579,10 @@ public class RenderingRulesStorage {
 
 	public RenderingRule getRenderingAttributeRule(String attribute) {
 		return renderingAttributes.get(attribute);
+	}
+
+	public RenderingClass getRenderingClass(String path) {
+		return renderingClasses.get(path);
 	}
 	
 	public String[] getRenderingAttributeNames() {
