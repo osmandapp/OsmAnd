@@ -265,6 +265,7 @@ public class TripHelper {
 		drawable.setBounds(0, 0, width, height);
 		drawable.setTurnType(turnType);
 		drawable.setTurnImminent(imminent, deviatedFromRoute);
+		drawable.updateColors(app.getDaynightHelper().isNightMode());
 		return drawableToBitmap(drawable, width, height);
 	}
 
