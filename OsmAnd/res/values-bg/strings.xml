@@ -4645,4 +4645,5 @@
     <string name="quick_action_auto_zoom_desc">Бутон, превключващ автоматичното мащабиране въз основа на скоростта.</string>
     <string name="quick_action_fav_name_descr">Оставете полето празно, за да бъде използван адреса или името на мястото.</string>
     <string name="quick_action_new_trip_segment">Започва нов сегмент в записваното на трасе на GPX.</string>
+    <string name="display_distance_to_first_intermediate">Показване на време и разстояние до първа междинна точка ако е зададена</string>
 </resources>
