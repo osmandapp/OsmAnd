@@ -642,8 +642,8 @@ public class OsmandSettings {
 		}
 	}
 
-	public <T> void registerInternalPreference(String id, CommonPreference<T> tCommonPreference) {
-		registeredPreferences.put(id, tCommonPreference);
+	public <T> void registerInternalPreference(String id, CommonPreference<T> preference) {
+		registeredPreferences.put(id, preference);
 	}
 
 	public boolean isSet(boolean global, String id) {
@@ -3086,7 +3086,8 @@ public class OsmandSettings {
 
 	@NonNull
 	public CommonPreference<String> registerCustomRenderProperty(@NonNull String attrName, @Nullable String defaultValue) {
-		CommonPreference<String> preference = new StringPreference(this, RENDERER_PREFERENCE_PREFIX + attrName, defaultValue).makeProfile();
+		String id = attrName.startsWith(RENDERER_PREFERENCE_PREFIX) ? attrName : RENDERER_PREFERENCE_PREFIX + attrName;
+		CommonPreference<String> preference = new StringPreference(this, id, defaultValue).makeProfile();
 		customRendersProps.put(attrName, preference);
 		return preference;
 	}
@@ -3114,23 +3115,26 @@ public class OsmandSettings {
 
 	@NonNull
 	public CommonPreference<Boolean> registerCustomRenderBooleanProperty(@NonNull String attrName, boolean defaultValue) {
-		CommonPreference<Boolean> preference = new BooleanPreference(this, RENDERER_PREFERENCE_PREFIX + attrName, defaultValue).makeProfile();
+		String id = attrName.startsWith(RENDERER_PREFERENCE_PREFIX) ? attrName : RENDERER_PREFERENCE_PREFIX + attrName;
+		CommonPreference<Boolean> preference = new BooleanPreference(this, id, defaultValue).makeProfile();
 		customBooleanRendersProps.put(attrName, preference);
 		return preference;
 	}
 
 	@NonNull
-	public CommonPreference<String> getCustomRoutingProperty(@NonNull String attrName, String defValue) {
+	public CommonPreference<String> getCustomRoutingProperty(@NonNull String attrName, String defaultValue) {
 		if (!customRoutingProps.containsKey(attrName)) {
-			customRoutingProps.put(attrName, new StringPreference(this, ROUTING_PREFERENCE_PREFIX + attrName, defValue).makeProfile());
+			String id = attrName.startsWith(ROUTING_PREFERENCE_PREFIX) ? attrName : ROUTING_PREFERENCE_PREFIX + attrName;
+			customRoutingProps.put(attrName, new StringPreference(this, id, defaultValue).makeProfile());
 		}
 		return customRoutingProps.get(attrName);
 	}
 
 	@NonNull
-	public CommonPreference<Boolean> getCustomRoutingBooleanProperty(String attrName, boolean defaulfValue) {
+	public CommonPreference<Boolean> getCustomRoutingBooleanProperty(@NonNull String attrName, boolean defaultValue) {
 		if (!customBooleanRoutingProps.containsKey(attrName)) {
-			customBooleanRoutingProps.put(attrName, new BooleanStringPreference(this, ROUTING_PREFERENCE_PREFIX + attrName, defaulfValue).makeProfile());
+			String id = attrName.startsWith(ROUTING_PREFERENCE_PREFIX) ? attrName : ROUTING_PREFERENCE_PREFIX + attrName;
+			customBooleanRoutingProps.put(attrName, new BooleanStringPreference(this, id, defaultValue).makeProfile());
 		}
 		return customBooleanRoutingProps.get(attrName);
 	}
