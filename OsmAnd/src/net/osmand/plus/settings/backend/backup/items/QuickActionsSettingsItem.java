@@ -108,7 +108,7 @@ public class QuickActionsSettingsItem extends SettingsItem {
 				renameButton();
 			}
 		}
-		stateBean.setupButtonState(buttonState);
+		stateBean.setupButtonState(app, buttonState);
 		mapButtonsHelper.addQuickActionButtonState(buttonState);
 	}
 
@@ -144,6 +144,7 @@ public class QuickActionsSettingsItem extends SettingsItem {
 				buttonState = new QuickActionButtonState(app, id);
 				stateBean = new ButtonStateBean(id);
 				stateBean.name = object.optString("name");
+				stateBean.enabled = object.optBoolean("enabled");
 
 				String iconName = object.optString("icon");
 				if (!Algorithms.isEmpty(iconName)) {
@@ -178,6 +179,7 @@ public class QuickActionsSettingsItem extends SettingsItem {
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("id", buttonState.getId());
 			jsonObject.put("name", buttonState.hasCustomName() ? buttonState.getName() : "");
+			jsonObject.put("enabled", buttonState.isEnabled());
 
 			if (buttonState.getIconPref().isSet()) {
 				jsonObject.put("icon", buttonState.getIconPref().get());
