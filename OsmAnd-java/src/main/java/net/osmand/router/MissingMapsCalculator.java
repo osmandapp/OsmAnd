@@ -24,7 +24,6 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
-import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
 
 public class MissingMapsCalculator {
@@ -274,7 +273,7 @@ public class MissingMapsCalculator {
 
 	private boolean isRoadOnlyMap(String regionName) {
 		BinaryMapDataObject o = cachedCountries.get(regionName);
-		if (o != null) {
+		if (o != null && or != null) {
 			boolean hasMapType = or.isDownloadOfType(o, OsmandRegions.MAP_TYPE);
 			boolean hasRoadsType = or.isDownloadOfType(o, OsmandRegions.ROADS_TYPE);
 			boolean hasMapJoinType = or.isDownloadOfType(o, OsmandRegions.MAP_JOIN_TYPE);
