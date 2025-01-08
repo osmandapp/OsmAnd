@@ -164,6 +164,7 @@ public class MissingMapsCalculator {
 				}
 			}
 		}
+		cachedCountries.clear();
 
 		if(!result.hasMissingMaps()) {
 			return false;
