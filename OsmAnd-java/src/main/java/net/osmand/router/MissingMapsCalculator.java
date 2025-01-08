@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -35,7 +34,6 @@ public class MissingMapsCalculator {
 	private OsmandRegions or;
 	private BinaryMapIndexReader reader;
 	private List<String> lastKeyNames ;
-	private Map<String, BinaryMapDataObject> cachedCountries = new HashMap<>();
 
 	private static class Point {
 		List<String> regions;
@@ -87,7 +85,6 @@ public class MissingMapsCalculator {
 		}
 		LatLon end = null;
 		LatLon prev = start;
-		cachedCountries.clear();
 		for (int i = 0; i < targets.size(); i++) {
 			end = targets.get(i);
 			if (MapUtils.getDistance(prev, end) < DISTANCE_SKIP) {
@@ -164,7 +161,6 @@ public class MissingMapsCalculator {
 				}
 			}
 		}
-		cachedCountries.clear();
 
 		if(!result.hasMissingMaps()) {
 			return false;
@@ -199,9 +195,7 @@ public class MissingMapsCalculator {
 			boolean hasMapJoinType = or.isDownloadOfType(o, OsmandRegions.MAP_JOIN_TYPE);
 			boolean hasRoadsJoinType = or.isDownloadOfType(o, OsmandRegions.ROADS_JOIN_TYPE);
 			if (hasMapType || hasRoadsType || hasMapJoinType || hasRoadsJoinType) {
-				String name = or.getDownloadName(o);
-				regions.add(name);
-				cachedCountries.put(name, o);
+				regions.add(or.getDownloadName(o));
 				if (!hasMapJoinType && !hasRoadsJoinType) {
 					onlyJointMap = false;
 				}
@@ -273,13 +267,11 @@ public class MissingMapsCalculator {
 	}
 
 	private boolean isRoadOnlyMap(String regionName) {
-		BinaryMapDataObject o = cachedCountries.get(regionName);
-		if (o != null && or != null) {
-			boolean hasMapType = or.isDownloadOfType(o, OsmandRegions.MAP_TYPE);
-			boolean hasRoadsType = or.isDownloadOfType(o, OsmandRegions.ROADS_TYPE);
-			boolean hasMapJoinType = or.isDownloadOfType(o, OsmandRegions.MAP_JOIN_TYPE);
-			boolean hasRoadsJoinType = or.isDownloadOfType(o, OsmandRegions.ROADS_JOIN_TYPE);
-			return (!hasMapType && hasRoadsType) || (!hasMapJoinType && hasRoadsJoinType);
+		if (or != null) {
+			WorldRegion wr = or.getRegionDataByDownloadName(regionName);
+			if (wr != null) {
+				return !wr.isRegionMapDownload() && wr.isRegionRoadsDownload();
+			}
 		}
 		return false;
 	}
