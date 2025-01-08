@@ -36,6 +36,7 @@ import java.util.List;
 public class HikingRoutesFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = HikingRoutesFragment.class.getSimpleName();
+	public static final String NODE_NETWORKS_VALUE = "walkingRoutesOSMCNodes";
 
 	private RouteLayersHelper routeLayersHelper;
 	@Nullable
@@ -160,7 +161,7 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 		ViewGroup group = view.findViewById(R.id.legend_container);
 		String propertyValue = routeLayersHelper.getSelectedHikingRoutesValue();
 
-		if (HIKING_OSMC_NODES.getPropertyValue().equals(propertyValue)) {
+		if (NODE_NETWORKS_VALUE.equals(propertyValue)) {
 			List<DataClass> dataClasses = getDataClasses(app, HIKING_OSMC_NODES);
 			if (!Algorithms.isEmpty(dataClasses)) {
 				RouteLegendCard card = new RouteLegendCard(requireActivity(), dataClasses, app.getString(R.string.shared_string_legend));

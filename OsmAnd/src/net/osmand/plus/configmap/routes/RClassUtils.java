@@ -16,18 +16,12 @@ import java.util.List;
 
 public class RClassUtils {
     public enum RClassType {
-        HIKING_OSMC_NODES(".route.hiking.osmc_nodes", "walkingRoutesOSMCNodes");
+        HIKING_OSMC_NODES(".route.hiking.osmc_nodes");
 
         private final String path;
-        private final String propertyValue;
 
-        RClassType(@NonNull String path, @Nullable String propertyValue) {
+        RClassType(@NonNull String path) {
             this.path = path;
-            this.propertyValue = propertyValue;
-        }
-
-        public String getPropertyValue() {
-            return propertyValue;
         }
 
         public String getPath() {
