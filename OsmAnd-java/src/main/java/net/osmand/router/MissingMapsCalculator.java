@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -23,6 +24,7 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
+import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
 
 public class MissingMapsCalculator {
@@ -34,6 +36,7 @@ public class MissingMapsCalculator {
 	private OsmandRegions or;
 	private BinaryMapIndexReader reader;
 	private List<String> lastKeyNames ;
+	private Map<String, BinaryMapDataObject> cachedCountries = new HashMap<>();
 
 	private static class Point {
 		List<String> regions;
@@ -85,6 +88,7 @@ public class MissingMapsCalculator {
 		}
 		LatLon end = null;
 		LatLon prev = start;
+		cachedCountries.clear();
 		for (int i = 0; i < targets.size(); i++) {
 			end = targets.get(i);
 			if (MapUtils.getDistance(prev, end) < DISTANCE_SKIP) {
@@ -103,9 +107,11 @@ public class MissingMapsCalculator {
 		Set<Long> presentTimestamps = null;
 		for (Point p : pointsToCheck) {
 			if (p.hhEditions == null) {
-				if (p.regions.size() > 0) {
-					result.addMissingMaps(p.regions.get(0));
-					
+				for (String reg : p.regions) {
+					if (!isRoadOnlyMap(reg)) {
+						result.addMissingMaps(reg);
+						break;
+					}
 				}
 			} else if (checkHHEditions) {
 				if (presentTimestamps == null) {
@@ -193,13 +199,11 @@ public class MissingMapsCalculator {
 			boolean hasMapJoinType = or.isDownloadOfType(o, OsmandRegions.MAP_JOIN_TYPE);
 			boolean hasRoadsJoinType = or.isDownloadOfType(o, OsmandRegions.ROADS_JOIN_TYPE);
 			if (hasMapType || hasRoadsType || hasMapJoinType || hasRoadsJoinType) {
-				String regionName = or.getDownloadName(o);
-				WorldRegion regionData = or.getRegionDataByDownloadName(regionName);
-				if (regionData != null && regionData.getSubregions().isEmpty()) {
-					regions.add(regionName);
-					if (!hasMapJoinType && !hasRoadsJoinType) {
-						onlyJointMap = false;
-					}
+				String name = or.getDownloadName(o);
+				regions.add(name);
+				cachedCountries.put(name, o);
+				if (!hasMapJoinType && !hasRoadsJoinType) {
+					onlyJointMap = false;
 				}
 			}
 		}
@@ -266,6 +270,18 @@ public class MissingMapsCalculator {
 		if (reader != null) {
 			reader.close();
 		}
+	}
+
+	private boolean isRoadOnlyMap(String regionName) {
+		BinaryMapDataObject o = cachedCountries.get(regionName);
+		if (o != null) {
+			boolean hasMapType = or.isDownloadOfType(o, OsmandRegions.MAP_TYPE);
+			boolean hasRoadsType = or.isDownloadOfType(o, OsmandRegions.ROADS_TYPE);
+			boolean hasMapJoinType = or.isDownloadOfType(o, OsmandRegions.MAP_JOIN_TYPE);
+			boolean hasRoadsJoinType = or.isDownloadOfType(o, OsmandRegions.ROADS_JOIN_TYPE);
+			return (!hasMapType && hasRoadsType) || (!hasMapJoinType && hasRoadsJoinType);
+		}
+		return false;
 	}
 
 }
