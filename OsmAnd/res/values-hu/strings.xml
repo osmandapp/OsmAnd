@@ -5622,4 +5622,5 @@
     <string name="calculating_indication_message">Számítás…</string>
     <string name="rendering_attr_showClimbingRoutes_description">Hegymászó utak megjeleítése</string>
     <string name="rendering_attr_showClimbingRoutes_name">Hegymászó utak</string>
+    <string name="display_distance_to_first_intermediate">Idő és távolság megjelenítése az első köztesponthoz, ha be van állítva</string>
 </resources>

@@ -5174,7 +5174,7 @@
     <string name="key_assignments">Tastenbelegungen</string>
     <string name="topography_maps">Topografische Karten</string>
     <string name="clear_key_assignment">Tastenbelegung löschen</string>
-    <string name="clear_key_assignment_desc">Tastenkürzel für die ausgewählte Aktion gelöscht und gesetzt auf\n„Keine“.</string>
+    <string name="clear_key_assignment_desc">Tastenkürzel für die ausgewählte Aktion wird gelöscht und gesetzt auf\n„Keine“.</string>
     <string name="reset_key_assignments_desc">Alle Tastenbelegungen für den ausgewählten Typ werden entfernt.</string>
     <string name="rendering_attr_showToll_name">Mautbeschränkungen anzeigen</string>
     <string name="shared_string_reassign">Neu belegen</string>
@@ -5681,4 +5681,5 @@
     <string name="default_buttons_opacity_original_description">Jede Schaltfläche würde ihre eigene Transparenz behalten.</string>
     <string name="rendering_attr_showClimbingRoutes_name">Kletterrouten</string>
     <string name="rendering_attr_showClimbingRoutes_description">Kletterrouten anzeigen</string>
+    <string name="display_distance_to_first_intermediate">Zeige Zeit und Entfernung bis zum ersten Zwischenziel an, falls eingestellt</string>
 </resources>
