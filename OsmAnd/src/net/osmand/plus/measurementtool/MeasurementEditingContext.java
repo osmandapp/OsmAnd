@@ -837,7 +837,10 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 						if (calculateIfNeeded && roadSegmentIndexes.contains(segmentsForSnap.size())) {
 							scheduleRouteCalculateIfNotEmpty();
 						}
-						segmentForSnapPoints.addAll(Arrays.asList(point, nextPoint));
+						if (segmentForSnapPoints.isEmpty()) {
+							segmentForSnapPoints.add(point);
+						}
+						segmentForSnapPoints.add(nextPoint);
 					}
 				}
 				if (segmentForSnapPoints.isEmpty()) {
