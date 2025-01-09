@@ -4443,7 +4443,7 @@
     <string name="average_temperature_slider_description">Изберете интервала от време, през който да бъде измерена средната трмпература.</string>
     <string name="current_temperature">Текуща температура</string>
     <string name="obd_battery_voltage_desc">Показва напрежението в акумулатора</string>
-    <string name="obd_air_intake_temp_desc">Показва температурата на постъпвщия през въздушната клапа въздух.</string>
+    <string name="obd_air_intake_temp_desc">Показва температурата на постъпващия през въздушната клапа въздух.</string>
     <string name="preview_next_turn">Преглед следващ завой</string>
     <string name="connect_new_scanner">Свързване на нов скенер</string>
     <string name="av_audio_sample_rate">Честота на аудио дискретизация</string>
@@ -4646,4 +4646,16 @@
     <string name="quick_action_fav_name_descr">Оставете полето празно, за да бъде използван адреса или името на мястото.</string>
     <string name="quick_action_new_trip_segment">Започва нов сегмент в записваното на трасе на GPX.</string>
     <string name="display_distance_to_first_intermediate">Показване на време и разстояние до първа междинна точка ако е зададена</string>
+    <string name="obd_engine_oil_temperature_desc">Показва температурата на маслото на двигателя.</string>
+    <string name="obd_speed_desc">Показва скоростта спрямо датчика за скорост на превозното средство (VSS).</string>
+    <string name="l_100km">л/100 км</string>
+    <string name="liter">л</string>
+    <string name="default_buttons_size_original_description">Всеки бутон ще има свой размер на.</string>
+    <string name="location_interpolation_percent">Процент интерполация на местоположението</string>
+    <string name="obd_engine_runtime_desc">Показва колко дълго работи двигателя от момента на запалване.</string>
+    <string name="obd_engine_runtime">Време на работа на двигателя</string>
+    <string name="obd_ambient_air_temp_desc">Показва температурата на околната среда.</string>
+    <string name="percent_hour">%/ч</string>
+    <string name="calculating_indication_message">Изчисляване…</string>
+    <string name="obd_engine_coolant_temp_desc">Показва температурата на охлаждащата течност на двигателя</string>
 </resources>

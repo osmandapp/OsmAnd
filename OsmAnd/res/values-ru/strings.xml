@@ -5898,4 +5898,5 @@
     <string name="calculating_indication_message">Расчет…</string>
     <string name="rendering_attr_showClimbingRoutes_description">Показать скалолазные маршруты</string>
     <string name="rendering_attr_showClimbingRoutes_name">Скалолазные маршруты</string>
+    <string name="display_distance_to_first_intermediate">Отображать время и расстояние до первой промежуточной точки, если она установлена</string>
 </resources>
