@@ -5668,4 +5668,5 @@
     <string name="rendering_attr_showClimbingRoutes_name">Grimpadaj kursoj</string>
     <string name="rendering_attr_showClimbingRoutes_description">Montri grimpadajn kursojn</string>
     <string name="calculating_indication_message">Kalkulado…</string>
+    <string name="display_distance_to_first_intermediate">Montri tempon kaj distancon al unua intercelo (se agordita)</string>
 </resources>
