@@ -824,22 +824,24 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		if (!segments.isEmpty()) {
 			for (TrkSegment segment : segments) {
 				TrkSegment segmentForSnap = new TrkSegment();
-				for (int i = 0; i < segment.getPoints().size() - 1; i++) {
-					WptPt point = points.get(i);
-					WptPt nextPoint = segment.getPoints().get(i + 1);
+				List<WptPt> segmentPoints = segment.getPoints();
+				List<WptPt> segmentForSnapPoints = segmentForSnap.getPoints();
+				for (int i = 0; i < segmentPoints.size() - 1; i++) {
+					WptPt point = segmentPoints.get(i);
+					WptPt nextPoint = segmentPoints.get(i + 1);
 					RoadSegmentData data = this.roadSegmentData.get(new Pair<>(point, nextPoint));
 					List<WptPt> pts = data != null ? data.getPoints() : null;
 					if (pts != null) {
-						segmentForSnap.getPoints().addAll(pts);
+						segmentForSnapPoints.addAll(pts);
 					} else {
 						if (calculateIfNeeded && roadSegmentIndexes.contains(segmentsForSnap.size())) {
 							scheduleRouteCalculateIfNotEmpty();
 						}
-						segmentForSnap.getPoints().addAll(Arrays.asList(point, nextPoint));
+						segmentForSnapPoints.addAll(Arrays.asList(point, nextPoint));
 					}
 				}
-				if (segmentForSnap.getPoints().isEmpty()) {
-					segmentForSnap.getPoints().addAll(segment.getPoints());
+				if (segmentForSnapPoints.isEmpty()) {
+					segmentForSnapPoints.addAll(segmentPoints);
 				}
 				segmentsForSnap.add(segmentForSnap);
 			}
