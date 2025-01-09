@@ -9,7 +9,8 @@ public interface PreferenceFragmentHandler {
 
 	Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment();
 
-	PreferenceFragmentCompat createPreferenceFragment(Context context, final Fragment target);
+	// FK-TODO: refactor to "Optional<Fragment> target"
+	PreferenceFragmentCompat createPreferenceFragment(Context context, Fragment target);
 
 	boolean showPreferenceFragment(PreferenceFragmentCompat preferenceFragment);
 }
