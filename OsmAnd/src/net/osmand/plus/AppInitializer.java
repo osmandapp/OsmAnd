@@ -104,6 +104,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Stream;
 
 import de.KnollFrank.lib.settingssearch.search.SearchDatabaseDirectoryIO;
 
@@ -280,7 +281,7 @@ public class AppInitializer implements IProgress {
 		} else {
 			settings.setApplicationMode(settings.DEFAULT_APPLICATION_MODE.get());
 		}
-		whenCustomAppModesKeysOrUserProfileNameChangedThenRebuildSearchDatabase();
+		rebuildSearchDatabaseOnAppProfileChanged();
 		startTime = System.currentTimeMillis();
 		getLazyRoutingConfig();
 		app.applyTheme(app);
@@ -345,10 +346,15 @@ public class AppInitializer implements IProgress {
 		initOpeningHoursParser();
 	}
 
-	private void whenCustomAppModesKeysOrUserProfileNameChangedThenRebuildSearchDatabase() {
+	// FK-TODO: extract class
+	private void rebuildSearchDatabaseOnAppProfileChanged() {
 		rebuildSearchDatabaseListener = s -> rebuildSearchDatabase();
-		app.getSettings().CUSTOM_APP_MODES_KEYS.addListener(rebuildSearchDatabaseListener);
-		app.getSettings().USER_PROFILE_NAME.addListener(rebuildSearchDatabaseListener);
+		Stream
+				.of(
+						app.getSettings().CUSTOM_APP_MODES_KEYS,
+						app.getSettings().USER_PROFILE_NAME,
+						app.getSettings().AVAILABLE_APP_MODES)
+				.forEach(osmandPreference -> osmandPreference.addListener(rebuildSearchDatabaseListener));
 	}
 
 	private void rebuildSearchDatabase() {

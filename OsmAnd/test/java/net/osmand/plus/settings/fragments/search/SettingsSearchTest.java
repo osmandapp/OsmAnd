@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.filters.LargeTest;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -888,8 +889,15 @@ public class SettingsSearchTest extends AndroidTest {
 						},
 
 						{
-								"shouldSearchAndFindProfileAppearanceSettings4EachApplicationMode",
+								"shouldSearchAndFindProfileAppearanceSettings4EachEnabledApplicationMode",
 								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected void initializeTest(final OsmandApplication app) {
+										Stream
+												.of(ApplicationMode.CAR, ApplicationMode.MOPED)
+												.forEach(applicationMode -> ApplicationMode.changeProfileAvailability(applicationMode, true, app));
+									}
 
 									@Override
 									protected String getSearchQuery(final Context context) {
@@ -907,8 +915,36 @@ public class SettingsSearchTest extends AndroidTest {
 						},
 
 						{
+								"shouldNotFindProfileAppearanceSettings4DisabledApplicationModes",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected void initializeTest(final OsmandApplication app) {
+										ApplicationMode.changeProfileAvailability(ApplicationMode.CAR, false, app);
+									}
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return "profile appearance";
+									}
+
+									@Override
+									protected List<String> getForbiddenSearchResults(final Context context) {
+										return List.of("Path: Driving > Profile appearance");
+									}
+								}
+						},
+
+						{
 								"shouldSearchAndFindSpeedCameraSettings4EachApplicationMode",
 								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected void initializeTest(final OsmandApplication app) {
+										Stream
+												.of(ApplicationMode.CAR, ApplicationMode.TRUCK)
+												.forEach(applicationMode -> ApplicationMode.changeProfileAvailability(applicationMode, true, app));
+									}
 
 									@Override
 									protected String getSearchQuery(final Context context) {
