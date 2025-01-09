@@ -36,7 +36,7 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 		return src
 				.filter(preferenceWithHost -> preferenceWithHost.host() instanceof PreferenceFragmentHandlerProvider)
 				.flatMap(preferenceWithHost -> ((PreferenceFragmentHandlerProvider) preferenceWithHost.host()).getPreferenceFragmentHandler(preferenceWithHost.preference()))
-				.map(preferenceFragmentHandler -> preferenceFragmentHandler.createPreferenceFragment(context, null));
+				.map(preferenceFragmentHandler -> preferenceFragmentHandler.createPreferenceFragment(context, Optional.empty()));
 	}
 
 	private static Fragment createDefaultInstance(final String fragmentClassName,

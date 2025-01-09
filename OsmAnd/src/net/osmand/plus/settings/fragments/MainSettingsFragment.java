@@ -203,13 +203,13 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 							}
 
 							@Override
-							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Fragment target) {
+							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
 								return (PreferenceFragmentCompat) BaseSettingsFragment.createFragment(
 										getClassOfPreferenceFragment().getName(),
 										context,
 										applicationMode,
 										new Bundle(),
-										target);
+										target.orElse(null));
 							}
 
 							@Override

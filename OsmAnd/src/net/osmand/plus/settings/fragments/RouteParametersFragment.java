@@ -597,7 +597,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements Pre
 						}
 
 						@Override
-						public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Fragment target) {
+						public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
 							return (PreferenceFragmentCompat) BaseSettingsFragment.createFragment(
 									getClassOfPreferenceFragment().getName(),
 									context,

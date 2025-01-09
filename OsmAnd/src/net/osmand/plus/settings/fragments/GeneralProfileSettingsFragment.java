@@ -451,13 +451,13 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 						}
 
 						@Override
-						public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Fragment target) {
+						public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
 							return (PreferenceFragmentCompat) BaseSettingsFragment.createFragment(
 									getClassOfPreferenceFragment().getName(),
 									context,
 									getSelectedAppMode(),
 									new Bundle(),
-									target);
+									target.orElse(null));
 						}
 
 						@Override
