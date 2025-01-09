@@ -22,7 +22,6 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.OnResultCallback;
 import net.osmand.PlatformUtil;
-import net.osmand.StateChangedListener;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.core.android.NativeCore;
 import net.osmand.map.OsmandRegions;
@@ -71,6 +70,7 @@ import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
+import net.osmand.plus.settings.fragments.search.SettingsSearchInitializer;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -104,9 +104,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.stream.Stream;
-
-import de.KnollFrank.lib.settingssearch.search.SearchDatabaseDirectoryIO;
 
 public class AppInitializer implements IProgress {
 
@@ -129,7 +126,7 @@ public class AppInitializer implements IProgress {
 	private boolean routingConfigInitialized;
 	private String taskName;
 	private SharedPreferences startPrefs;
-	private StateChangedListener<String> rebuildSearchDatabaseListener;
+	private SettingsSearchInitializer settingsSearchInitializer;
 
 	public interface LoadRoutingFilesCallback {
 		void onRoutingFilesLoaded();
@@ -281,7 +278,8 @@ public class AppInitializer implements IProgress {
 		} else {
 			settings.setApplicationMode(settings.DEFAULT_APPLICATION_MODE.get());
 		}
-		rebuildSearchDatabaseOnAppProfileChanged();
+		settingsSearchInitializer = new SettingsSearchInitializer(app);
+		settingsSearchInitializer.rebuildSearchDatabaseOnAppProfileChanged();
 		startTime = System.currentTimeMillis();
 		getLazyRoutingConfig();
 		app.applyTheme(app);
@@ -344,21 +342,6 @@ public class AppInitializer implements IProgress {
 		app.trackSortModesHelper = startupInit(new TrackSortModesHelper(app), TrackSortModesHelper.class);
 
 		initOpeningHoursParser();
-	}
-
-	// FK-TODO: extract class
-	private void rebuildSearchDatabaseOnAppProfileChanged() {
-		rebuildSearchDatabaseListener = s -> rebuildSearchDatabase();
-		Stream
-				.of(
-						app.getSettings().CUSTOM_APP_MODES_KEYS,
-						app.getSettings().USER_PROFILE_NAME,
-						app.getSettings().AVAILABLE_APP_MODES)
-				.forEach(osmandPreference -> osmandPreference.addListener(rebuildSearchDatabaseListener));
-	}
-
-	private void rebuildSearchDatabase() {
-		new SearchDatabaseDirectoryIO(app).removeSearchDatabaseDirectories4AllLocales();
 	}
 
 	private void initOpeningHoursParser() {
