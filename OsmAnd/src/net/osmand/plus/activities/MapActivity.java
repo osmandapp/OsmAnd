@@ -1654,6 +1654,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		app.getLocaleHelper().setLanguage(this);
 		app.runInUIThread(fragmentsHelper::updateFragments);
+		app.getNotificationHelper().refreshNotifications();
 	}
 
 	@Override

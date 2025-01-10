@@ -5655,4 +5655,5 @@
     <string name="calculating_indication_message">Израчунавање…</string>
     <string name="rendering_attr_showClimbingRoutes_name">Стазе за пењање</string>
     <string name="rendering_attr_showClimbingRoutes_description">Приказати стазе за пењање</string>
+    <string name="display_distance_to_first_intermediate">Прикажи време и раздаљину до првог међуодредишта ако је подешено</string>
 </resources>

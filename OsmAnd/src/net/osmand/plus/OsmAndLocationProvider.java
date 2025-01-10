@@ -53,6 +53,7 @@ import net.osmand.plus.simulation.SimulationProvider;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -140,8 +141,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	private final GPSInfo gpsInfo = new GPSInfo();
 
-	private final List<OsmAndLocationListener> locationListeners = new ArrayList<>();
-	private final List<OsmAndCompassListener> compassListeners = new ArrayList<>();
+	private List<OsmAndLocationListener> locationListeners = new ArrayList<>();
+	private List<OsmAndCompassListener> compassListeners = new ArrayList<>();
 	private GnssStatus.Callback gpsStatusListener;
 	private final float[] mRotationM = new float[9];
 
@@ -246,22 +247,22 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	public void addLocationListener(@NonNull OsmAndLocationListener listener) {
 		if (!locationListeners.contains(listener)) {
-			locationListeners.add(listener);
+			locationListeners = CollectionUtils.addToList(locationListeners, listener);
 		}
 	}
 
 	public void removeLocationListener(@NonNull OsmAndLocationListener listener) {
-		locationListeners.remove(listener);
+		locationListeners = CollectionUtils.removeFromList(locationListeners, listener);
 	}
 
 	public void addCompassListener(@NonNull OsmAndCompassListener listener) {
 		if (!compassListeners.contains(listener)) {
-			compassListeners.add(listener);
+			compassListeners = CollectionUtils.addToList(compassListeners, listener);
 		}
 	}
 
 	public void removeCompassListener(@NonNull OsmAndCompassListener listener) {
-		compassListeners.remove(listener);
+		compassListeners = CollectionUtils.removeFromList(compassListeners, listener);
 	}
 
 	private void addLocationSourceListener() {
@@ -488,9 +489,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		return MapUtils.unifyRotationTo360((float) (Math.atan2(sinA, cosA) * 180 / Math.PI));
 	}
 
-	private void updateLocation(net.osmand.Location loc) {
-		for (OsmAndLocationListener l : locationListeners) {
-			l.updateLocation(loc);
+	private void updateLocation(net.osmand.Location location) {
+		for (OsmAndLocationListener listener : locationListeners) {
+			listener.updateLocation(location);
 		}
 	}
 

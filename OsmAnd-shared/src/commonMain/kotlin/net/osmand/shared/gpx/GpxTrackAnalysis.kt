@@ -169,6 +169,10 @@ class GpxTrackAnalysis {
 		get() = (getGpxParameter(GpxParameter.TOTAL_DISTANCE) as Double).toFloat()
 		set(value) = setGpxParameter(GpxParameter.TOTAL_DISTANCE, value.toDouble())
 
+	var joinSegments: Boolean
+		get() = (getGpxParameter(GpxParameter.JOIN_SEGMENTS) as Boolean)
+		set(value) = (setGpxParameter(GpxParameter.JOIN_SEGMENTS, value))
+
 	fun isTimeSpecified(): Boolean {
 		val startTime = startTime
 		val endTime = endTime
@@ -447,7 +451,12 @@ class GpxTrackAnalysis {
 			processElevationDiff(s)
 		}
 
-		totalDistance = _totalDistance
+
+		if (joinSegments && totalDistanceWithoutGaps > 0) {
+			totalDistance = totalDistanceWithoutGaps
+		} else {
+			totalDistance = _totalDistance
+		}
 
 		checkUnspecifiedValues(fileTimeStamp)
 		processAverageValues(totalElevation, elevationPoints, totalSpeedSum, speedCount)
