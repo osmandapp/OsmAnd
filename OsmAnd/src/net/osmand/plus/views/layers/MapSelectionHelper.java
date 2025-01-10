@@ -232,7 +232,7 @@ public class MapSelectionHelper {
 
 				boolean isTravelGpx = !Algorithms.isEmpty(travelGpxFilter);
 				boolean isOsmRoute = !Algorithms.isEmpty(OsmRouteType.getRouteKeys(tags));
-				boolean isClickableWay = renderedObject.getX().size() > 1 && clickableWayLoader.isClickableWayTags(tags);
+				boolean isClickableWay = clickableWayLoader.isClickableWayV1(renderedObject);
 
 				if (!isClickableWay && !isTravelGpx && !isOsmRoute && (renderedObject.getId() == null
 						|| !renderedObject.isVisible() || renderedObject.isDrawOnPath())) {
@@ -264,8 +264,7 @@ public class MapSelectionHelper {
 				}
 				LatLon searchLatLon = result.objectLatLon != null ? result.objectLatLon : result.pointLatLon;
 				if (isClickableWay && !isDerivedGpxSelected) {
-					long osmId = ObfConstants.getOsmId(renderedObject.getId() >> AMENITY_ID_RIGHT_SHIFT);
-					isDerivedGpxSelected = addClickableWay(result, osmId, renderedObject.getName(), tags);
+					isDerivedGpxSelected = addClickableWayV1(result, renderedObject);
 				} else if (isTravelGpx && !isDerivedGpxSelected) {
 					isDerivedGpxSelected = addTravelGpx(result, travelGpxFilter, renderedObject.getTagValue("ref"));
 				} else if (isOsmRoute && !isDerivedGpxSelected) {
@@ -351,8 +350,7 @@ public class MapSelectionHelper {
 
 							boolean isTravelGpx = app.getTravelHelper().isTravelGpxTags(tags);
 							boolean isOsmRoute = !Algorithms.isEmpty(OsmRouteType.getRouteKeys(tags));
-							boolean isClickableWay = obfMapObject.getPoints31().size() > 1
-									&& clickableWayLoader.isClickableWayTags(tags);
+							boolean isClickableWay = clickableWayLoader.isClickableWayV2(obfMapObject, tags);
 
 							if (isOsmRoute && !isDerivedGpxSelected) {
 								NetworkRouteSelectorFilter routeFilter = createRouteFilter();
@@ -361,10 +359,7 @@ public class MapSelectionHelper {
 									isDerivedGpxSelected = true;
 								}
 							} else if (isClickableWay && !isDerivedGpxSelected) {
-								long id = obfMapObject.getId().getId().longValue();
-								long osmId = ObfConstants.getOsmId(id >> AMENITY_ID_RIGHT_SHIFT);
-								String caption = obfMapObject.getCaptionInNativeLanguage();
-								isDerivedGpxSelected = addClickableWay(result, osmId, caption, tags);
+								isDerivedGpxSelected = addClickableWayV2(result, obfMapObject, tags);
 							} else if (isTravelGpx && !isDerivedGpxSelected) {
 								isDerivedGpxSelected = addTravelGpx(result, tags.get(ROUTE_ID), null);
 							}
@@ -495,14 +490,21 @@ public class MapSelectionHelper {
 		return false;
 	}
 
-	private boolean addClickableWay(@NonNull MapSelectionResult result, long osmId,
-	                                @Nullable String name, @NonNull Map<String, String> tags) {
-		ClickableWay clickableWay = clickableWayLoader.searchClickableWay(osmId, name, tags, result.pointLatLon);
+	private boolean addClickableWayV1(@NonNull MapSelectionResult result, @NonNull RenderedObject renderedObject) {
+		ClickableWay clickableWay = clickableWayLoader.searchClickableWayV1(result.pointLatLon, renderedObject);
 		if (clickableWay != null) {
 			result.selectedObjects.put(clickableWay, clickableWayLoader.getContextMenuProvider());
 			return true;
-		} else {
-			log.error("addClickableWay() searchClickableWay() is null");
+		}
+		return false;
+	}
+
+	private boolean addClickableWayV2(@NonNull MapSelectionResult result, @NonNull ObfMapObject obfMapObject,
+									  @NonNull Map<String, String> tags) {
+		ClickableWay clickableWay = clickableWayLoader.searchClickableWayV2(result.pointLatLon, obfMapObject, tags);
+		if (clickableWay != null) {
+			result.selectedObjects.put(clickableWay, clickableWayLoader.getContextMenuProvider());
+			return true;
 		}
 		return false;
 	}
