@@ -6055,4 +6055,8 @@
     <string name="obd_engine_coolant_temp">Temperatura lichidului de răcire</string>
     <string name="obd_ambient_air_temp">Temperatura ambientală</string>
     <string name="obd_battery_voltage">Tensiunea bateriei</string>
+    <string name="obd_fuel_type">Tipul de combustibil</string>
+    <string name="obd_support">Suport OBD</string>
+    <string name="obd_plugin_name"></string>
+    <string name="obd_plugin_description">Monitorizați parametrii cheie ai vehiculului utilizând protocolul OBD-II. Accesați date care includ:\n • turația motorului, timpul de funcționare al motorului, sarcina calculată a motorului \n • Consumul de combustibil, presiunea combustibilului, combustibilul rămas\n • Temperatura de admisie, temperatura ambiantă, temperatura lichidului de răcire, temperatura uleiului de motor\n• Viteza vehiculului, Poziția accelerației, Tensiunea bateriei\n</string>
 </resources>
