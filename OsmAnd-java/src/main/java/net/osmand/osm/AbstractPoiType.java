@@ -23,9 +23,6 @@ public abstract class AbstractPoiType {
 	private String translation;
 
 	public AbstractPoiType(String keyName, MapPoiTypes registry) {
-		if (keyName == null) {
-			System.out.println("dhdhdhdh");
-		}
 		this.keyName = keyName;
 		this.registry = registry;
 	}
@@ -183,6 +180,6 @@ public abstract class AbstractPoiType {
 		if (!(other instanceof AbstractPoiType that)) {
 			return false;
 		}
-        return keyName != null && keyName.equals(that.keyName);
-    }
+		return keyName != null && keyName.equals(that.keyName);
+	}
 }
