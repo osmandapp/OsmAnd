@@ -1365,4 +1365,25 @@ public class Algorithms {
 		return res;
 	}
 
+	public static String sanitizeFileName(String fileName) {
+		return fileName
+				.replace("/", "_")
+				.replace("\\", "_")
+				.replace(":", "_")
+				.replace(";", "_")
+				.replace("*", "_")
+				.replace("?", "_")
+				.replace("`", "_")
+				.replace("\'", "_")
+				.replace("\"", "_")
+				.replace("<", "_")
+				.replace(">", "_")
+				.replace("|", "_")
+				.replace("&", "_")
+				.replace("\0", "_")
+				.replace("\n", "_")
+				.replace("\r", "_")
+				.replace("\t", " ")
+				.trim();
+	}
 }
