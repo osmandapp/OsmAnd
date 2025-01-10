@@ -24,6 +24,7 @@ import java.util.Set;
 
 public class ClickableWayLoader {
     public static final Set<String> clickableTags = Set.of("piste:type", "mtb:scale", "dirtbike:scale");
+    public static final Map<String, String> forbiddenTags = Map.of("area", "yes", "access", "no");
 
     private final ClickableWayActivator activator;
 
@@ -31,11 +32,17 @@ public class ClickableWayLoader {
         this.activator = new ClickableWayActivator(app, view);
     }
 
+    @NonNull
     public ContextMenuLayer.IContextMenuProvider getContextMenuProvider() {
         return activator;
     }
 
-    public boolean isClickableTags(@NonNull Map<String, String> tags) {
+    public boolean isClickableWayTags(@NonNull Map<String, String> tags) {
+        for (Map.Entry<String, String> forbidden : forbiddenTags.entrySet()) {
+            if (forbidden.getValue().equals(tags.get(forbidden.getKey()))) {
+                return false;
+            }
+        }
         for (String key : tags.keySet()) {
             if (clickableTags.contains(key)) {
                 return true;
@@ -44,13 +51,9 @@ public class ClickableWayLoader {
         return false;
     }
 
-    public long getOsmId(@NonNull ObfMapObject object) {
-        long id = object.getId().getId().longValue();
-        return ObfConstants.getOsmId(id >> AMENITY_ID_RIGHT_SHIFT);
-    }
-
     @Nullable
-    public ClickableWay searchClickableWay(long osmId, Map<String, String> tags, @NonNull LatLon searchLatLon) {
-        return new ClickableWay(osmId, tags, searchLatLon); // TODO test
+    public ClickableWay searchClickableWay(long osmId, @Nullable String name, @NonNull Map<String, String> tags,
+                                           @NonNull LatLon searchLatLon) {
+        return new ClickableWay(osmId, name, tags, searchLatLon); // TODO test
     }
 }

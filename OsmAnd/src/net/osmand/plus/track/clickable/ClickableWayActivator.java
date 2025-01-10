@@ -42,7 +42,7 @@ public class ClickableWayActivator implements ContextMenuLayer.IContextMenuProvi
 
     @Override
     public PointDescription getObjectName(Object o) {
-        String name = ((ClickableWay) o).getName();
+        String name = ((ClickableWay) o).getWayName();
         return new PointDescription(PointDescription.POINT_TYPE_GPX, name);
     }
 

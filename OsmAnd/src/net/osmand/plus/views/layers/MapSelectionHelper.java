@@ -222,15 +222,19 @@ public class MapSelectionHelper {
 		if (renderedObjects != null) {
 			double cosRotateTileSize = Math.cos(Math.toRadians(rc.rotate)) * TILE_SIZE;
 			double sinRotateTileSize = Math.sin(Math.toRadians(rc.rotate)) * TILE_SIZE;
-			boolean isRouteGpxSelected = false;
+			boolean isDerivedGpxSelected = false;
 			for (RenderedObject renderedObject : renderedObjects) {
 				String routeID = renderedObject.getRouteID();
 				String fileName = renderedObject.getGpxFileName();
-				String filter = routeID != null ? routeID : fileName;
+				String travelGpxFilter = routeID != null ? routeID : fileName;
 
-				boolean isTravelGpx = !Algorithms.isEmpty(filter);
-				boolean isRoute = !Algorithms.isEmpty(OsmRouteType.getRouteKeys(renderedObject.getTags()));
-				if (!isTravelGpx && !isRoute && (renderedObject.getId() == null
+				Map<String, String> tags = renderedObject.getTags();
+
+				boolean isTravelGpx = !Algorithms.isEmpty(travelGpxFilter);
+				boolean isOsmRoute = !Algorithms.isEmpty(OsmRouteType.getRouteKeys(tags));
+				boolean isClickableWay = renderedObject.getX().size() > 1 && clickableWayLoader.isClickableWayTags(tags);
+
+				if (!isClickableWay && !isTravelGpx && !isOsmRoute && (renderedObject.getId() == null
 						|| !renderedObject.isVisible() || renderedObject.isDrawOnPath())) {
 					continue;
 				}
@@ -259,18 +263,20 @@ public class MapSelectionHelper {
 					result.objectLatLon = renderedObject.getLabelLatLon();
 				}
 				LatLon searchLatLon = result.objectLatLon != null ? result.objectLatLon : result.pointLatLon;
-				if (isTravelGpx && !isRouteGpxSelected) {
-					isRouteGpxSelected = addTravelGpx(result, filter, renderedObject.getTagValue("ref"));
-				} else {
-					if (isRoute && !isRouteGpxSelected) {
-						NetworkRouteSelectorFilter routeFilter = createRouteFilter();
-						if (!Algorithms.isEmpty(routeFilter.typeFilter)) {
-							addOsmRoute(result, tileBox, point, routeFilter);
-							isRouteGpxSelected = true;
-						}
+				if (isClickableWay && !isDerivedGpxSelected) {
+					long osmId = ObfConstants.getOsmId(renderedObject.getId() >> AMENITY_ID_RIGHT_SHIFT);
+					isDerivedGpxSelected = addClickableWay(result, osmId, renderedObject.getName(), tags);
+				} else if (isTravelGpx && !isDerivedGpxSelected) {
+					isDerivedGpxSelected = addTravelGpx(result, travelGpxFilter, renderedObject.getTagValue("ref"));
+				} else if (isOsmRoute && !isDerivedGpxSelected) {
+					NetworkRouteSelectorFilter routeFilter = createRouteFilter();
+					if (!Algorithms.isEmpty(routeFilter.typeFilter)) {
+						addOsmRoute(result, tileBox, point, routeFilter);
+						isDerivedGpxSelected = true;
 					}
+				} else if (!isClickableWay && !isOsmRoute && !isTravelGpx) {
 					boolean amenityAdded = addAmenity(result, renderedObject, searchLatLon);
-					if (!amenityAdded && !isRoute) {
+					if (!amenityAdded && !isOsmRoute) {
 						result.selectedObjects.put(renderedObject, null);
 					}
 				}
@@ -285,7 +291,7 @@ public class MapSelectionHelper {
 			int delta = 20;
 			PointI tl = new PointI((int) point.x - delta, (int) point.y - delta);
 			PointI br = new PointI((int) point.x + delta, (int) point.y + delta);
-			boolean isDerivedGpxSelected = false; // TODO implement in v1
+			boolean isDerivedGpxSelected = false;
 			MapSymbolInformationList symbols = rendererView.getSymbolsIn(new AreaI(tl, br), false);
 			for (int i = 0; i < symbols.size(); i++) {
 				MapSymbolInformation symbolInfo = symbols.get(i);
@@ -342,23 +348,27 @@ public class MapSelectionHelper {
 						}
 						if (obfMapObject != null) {
 							Map<String, String> tags = getTags(obfMapObject.getResolvedAttributes());
+
+							boolean isTravelGpx = app.getTravelHelper().isTravelGpxTags(tags);
 							boolean isOsmRoute = !Algorithms.isEmpty(OsmRouteType.getRouteKeys(tags));
+							boolean isClickableWay = obfMapObject.getPoints31().size() > 1
+									&& clickableWayLoader.isClickableWayTags(tags);
+
 							if (isOsmRoute && !isDerivedGpxSelected) {
 								NetworkRouteSelectorFilter routeFilter = createRouteFilter();
 								if (!Algorithms.isEmpty(routeFilter.typeFilter)) {
 									addOsmRoute(result, tileBox, point, routeFilter);
 									isDerivedGpxSelected = true;
 								}
-							}
-							boolean isTravelGpx = app.getTravelHelper().isTravelGpxTags(tags);
-							if (isTravelGpx && !isDerivedGpxSelected) {
+							} else if (isClickableWay && !isDerivedGpxSelected) {
+								long id = obfMapObject.getId().getId().longValue();
+								long osmId = ObfConstants.getOsmId(id >> AMENITY_ID_RIGHT_SHIFT);
+								String caption = obfMapObject.getCaptionInNativeLanguage();
+								isDerivedGpxSelected = addClickableWay(result, osmId, caption, tags);
+							} else if (isTravelGpx && !isDerivedGpxSelected) {
 								isDerivedGpxSelected = addTravelGpx(result, tags.get(ROUTE_ID), null);
 							}
-							boolean isClickableWay = clickableWayLoader.isClickableTags(tags);
-							if (isClickableWay && !isDerivedGpxSelected) {
-								isDerivedGpxSelected = addClickableWay(result, tags,
-										clickableWayLoader.getOsmId(obfMapObject));
-							}
+
 							IOnPathMapSymbol onPathMapSymbol = getOnPathMapSymbol(symbolInfo);
 							if (onPathMapSymbol == null) {
 								LatLon latLon = result.objectLatLon;
@@ -485,8 +495,9 @@ public class MapSelectionHelper {
 		return false;
 	}
 
-	private boolean addClickableWay(@NonNull MapSelectionResult result, Map<String, String> tags, long osmId) {
-		ClickableWay clickableWay = clickableWayLoader.searchClickableWay(osmId, tags, result.pointLatLon);
+	private boolean addClickableWay(@NonNull MapSelectionResult result, long osmId,
+	                                @Nullable String name, @NonNull Map<String, String> tags) {
+		ClickableWay clickableWay = clickableWayLoader.searchClickableWay(osmId, name, tags, result.pointLatLon);
 		if (clickableWay != null) {
 			result.selectedObjects.put(clickableWay, clickableWayLoader.getContextMenuProvider());
 			return true;
