@@ -6052,4 +6052,7 @@
     <string name="obd_rpm_desc">Afișează turația tahometrului vehiculului pe senzorul OBD</string>
     <string name="rendering_attr_showClimbingRoutes_name">Rute de alpinism</string>
     <string name="rendering_attr_showClimbingRoutes_description">Arată rute de alpinism</string>
+    <string name="obd_engine_coolant_temp">Temperatura lichidului de răcire</string>
+    <string name="obd_ambient_air_temp">Temperatura ambientală</string>
+    <string name="obd_battery_voltage">Tensiunea bateriei</string>
 </resources>
