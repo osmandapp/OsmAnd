@@ -8,20 +8,17 @@ import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.Sele
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 
-import java.util.Map;
-
 public class ClickableWay {
     private final long osmId;
     private final String name;
-    private GpxFile gpxFile = null; // TODO
-    private final Map<String, String> tags;
+    private final GpxFile gpxFile;
     private final SelectedGpxPoint selectedGpxPoint;
 
-    public ClickableWay(long osmId, @Nullable String name, @NonNull Map<String, String> tags,
+    public ClickableWay(@NonNull GpxFile gpxFile, long osmId, @Nullable String name,
                         @NonNull LatLon selectedPointCoordinates) {
+        this.gpxFile = gpxFile;
         this.osmId = osmId;
         this.name = name;
-        this.tags = tags;
         WptPt selectedPoint = new WptPt();
         selectedPoint.setLat(selectedPointCoordinates.getLatitude());
         selectedPoint.setLon(selectedPointCoordinates.getLongitude());
@@ -33,7 +30,7 @@ public class ClickableWay {
     }
 
     public String getWayName() {
-        return name != null ? name : Long.toString(osmId);
+        return name != null ? (name + "(" + osmId + ")") : Long.toString(osmId); // TODO get back plain name
     }
 
     public String toString() {

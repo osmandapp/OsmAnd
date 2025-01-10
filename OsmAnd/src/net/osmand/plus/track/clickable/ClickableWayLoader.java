@@ -12,8 +12,14 @@ import net.osmand.core.jni.QVectorPointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.Version;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.RouteActivityHelper;
+import net.osmand.shared.gpx.primitives.RouteActivity;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.Map;
@@ -21,20 +27,15 @@ import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
 
-// TODO cache <id, GpxFile>
-// TODO activity type (by tags)
-// TODO GpxFile naming (tag-defined + name)
-// TODO fetch elevation from routing-section
-// TODO calc distance stats, elevation stats, etc (automatically if data exists)
-// THINK auto-reverse Way (assume downhill OR detect start by minDist to currentLocation)
-
 public class ClickableWayLoader {
     public static final Set<String> clickableTags = Set.of("piste:type", "mtb:scale", "dirtbike:scale");
     public static final Map<String, String> forbiddenTags = Map.of("area", "yes", "access", "no");
 
+    private final OsmandApplication app;
     private final ClickableWayActivator activator;
 
     public ClickableWayLoader(@NonNull OsmandApplication app, @NonNull OsmandMapTileView view) {
+        this.app = app;
         this.activator = new ClickableWayActivator(app, view);
     }
 
@@ -59,7 +60,7 @@ public class ClickableWayLoader {
         TIntArrayList xPoints = renderedObject.getX();
         TIntArrayList yPoints = renderedObject.getY();
         int searchRadius = calcSearchRadius(xPoints, yPoints);
-        return searchClickableWay(searchLatLon, searchRadius, osmId, name, tags);
+        return searchClickableWay(searchLatLon, searchRadius, xPoints, yPoints, osmId, name, tags);
     }
 
     @Nullable
@@ -76,12 +77,38 @@ public class ClickableWayLoader {
             yPoints.add(points31.get(i).getY());
         }
         int searchRadius = calcSearchRadius(xPoints, yPoints);
-        return searchClickableWay(searchLatLon, searchRadius, osmId, name, tags);
+        return searchClickableWay(searchLatLon, searchRadius, xPoints, yPoints, osmId, name, tags);
     }
 
     private ClickableWay searchClickableWay(LatLon searchLatLon, int searchRadius,
+                                            TIntArrayList xPoints, TIntArrayList yPoints,
                                             long osmId, String name, Map<String, String> tags) {
-        return new ClickableWay(osmId, name, tags, searchLatLon); // TODO implement obf read to fetch height data
+        GpxFile gpxFile = new GpxFile(Version.getFullVersion(app));
+
+        if (!Algorithms.isEmpty(name)) {
+            gpxFile.getMetadata().setName(name);
+        }
+
+        RouteActivityHelper helper = app.getRouteActivityHelper();
+        for (String tag : tags.keySet()) {
+            RouteActivity activity = helper.findActivityByTag(tag);
+            if (activity != null) {
+                String activityType = activity.getId();
+                gpxFile.getMetadata().getExtensionsToWrite().put(GpxUtilities.ACTIVITY_TYPE, activityType);
+                break;
+            }
+        }
+
+        gpxFile.getExtensionsToWrite().putAll(tags); // TODO check prefix, check /:/ in tag
+
+        // TODO fill trkpt from xPoints/xPoints
+        // TODO fetch elevation data from routing-section
+
+        // TODO cache <id, GpxFile>
+        // TODO calc distance stats, elevation stats, etc (automatically if data exists)
+        // THINK auto-reverse Way (assume downhill OR detect start by minDist to currentLocation)
+
+        return new ClickableWay(gpxFile, osmId, name, searchLatLon);
     }
 
     private int calcSearchRadius(TIntArrayList x, TIntArrayList y) {
