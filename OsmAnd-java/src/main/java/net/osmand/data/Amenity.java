@@ -641,7 +641,7 @@ public class Amenity extends MapObject {
 		if (subType != null) {
 			result.put(addPrefixes ? AMENITY_PREFIX + SUBTYPE : SUBTYPE, subType);
 		}
-		if (type != null) {
+		if (type != null && type.getKeyName() != null) {
 			result.put(addPrefixes ? AMENITY_PREFIX + TYPE : TYPE, type.getKeyName());
 		}
 		if (openingHours != null) {
