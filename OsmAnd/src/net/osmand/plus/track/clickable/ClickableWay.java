@@ -19,10 +19,14 @@ public class ClickableWay {
         this.gpxFile = gpxFile;
         this.osmId = osmId;
         this.name = name;
-        WptPt selectedPoint = new WptPt();
-        selectedPoint.setLat(selectedPointCoordinates.getLatitude());
-        selectedPoint.setLon(selectedPointCoordinates.getLongitude());
-        selectedGpxPoint = new SelectedGpxPoint(null, selectedPoint);
+        WptPt wpt = new WptPt();
+        wpt.setLat(selectedPointCoordinates.getLatitude());
+        wpt.setLon(selectedPointCoordinates.getLongitude());
+        this.selectedGpxPoint = new SelectedGpxPoint(null, wpt);
+    }
+
+    public GpxFile getGpxFile() {
+        return gpxFile;
     }
 
     public SelectedGpxPoint getSelectedGpxPoint() {
@@ -30,7 +34,7 @@ public class ClickableWay {
     }
 
     public String getWayName() {
-        return name != null ? (name + "(" + osmId + ")") : Long.toString(osmId); // TODO get back plain name
+        return name != null ? name : Long.toString(osmId);
     }
 
     public String toString() {

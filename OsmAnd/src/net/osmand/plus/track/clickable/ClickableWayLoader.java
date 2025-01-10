@@ -19,9 +19,13 @@ import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.shared.gpx.primitives.RouteActivity;
+import net.osmand.shared.gpx.primitives.Track;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -101,10 +105,23 @@ public class ClickableWayLoader {
 
         gpxFile.getExtensionsToWrite().putAll(tags); // TODO check prefix, check /:/ in tag
 
-        // TODO fill trkpt from xPoints/xPoints
-        // TODO fetch elevation data from routing-section
+        TrkSegment trkSegment = new TrkSegment();
+        for (int i = 0; i < Math.min(xPoints.size(), yPoints.size()); i++) {
+            WptPt wpt = new WptPt();
+            wpt.setLat(MapUtils.get31LatitudeY(yPoints.get(i)));
+            wpt.setLon(MapUtils.get31LongitudeX(xPoints.get(i)));
+            trkSegment.getPoints().add(wpt);
+        }
 
+        Track track = new Track();
+        track.getSegments().add(trkSegment);
+        gpxFile.setTracks(List.of(track)); // immutable
+
+        // TODO check unique gpx
         // TODO cache <id, GpxFile>
+        // TODO gpx colors by difficulty
+        // TODO close previous on open new
+        // TODO fetch elevation data from routing-section
         // TODO calc distance stats, elevation stats, etc (automatically if data exists)
         // THINK auto-reverse Way (assume downhill OR detect start by minDist to currentLocation)
 
