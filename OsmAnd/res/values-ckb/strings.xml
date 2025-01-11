@@ -61,4 +61,8 @@
     <string name="percent_unit">٪</string>
     <string name="quick_action_directions_from">خاڵی دەستپێک</string>
     <string name="shared_string_show_icon">پیشاندانی وێنۆچکە</string>
+    <string name="trash_is_empty">گلێشدان بەتاڵە</string>
+    <string name="shared_string_empty_trash">گلێشدانە بەتاڵ بکە</string>
+    <string name="shared_string_created">درووست کرا</string>
+    <string name="shared_string_trash">گلێشدان</string>
 </resources>
