@@ -797,7 +797,7 @@ class GpxFile : GpxExtensions {
 			trkSegments.add(cloneTrkSegment(segment))
 		}
 		dest.segments = trkSegments
-		copyExtensions(source)
+		dest.copyExtensions(source)
 		return dest
 	}
 
@@ -810,7 +810,7 @@ class GpxFile : GpxExtensions {
 			points.add(WptPt(point))
 		}
 		dest.points = points
-		copyExtensions(source)
+		dest.copyExtensions(source)
 		return dest
 	}
 
@@ -844,7 +844,7 @@ class GpxFile : GpxExtensions {
 			routeTypes.add(cloneRouteType(rt))
 		}
 		dest.routeTypes = routeTypes
-		copyExtensions(source)
+		dest.copyExtensions(source)
 		return dest
 	}
 
