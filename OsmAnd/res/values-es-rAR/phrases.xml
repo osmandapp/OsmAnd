@@ -4023,7 +4023,7 @@
     <string name="poi_payment_calling_cards_no">No acepta tarjetas telefónicas</string>
     <string name="poi_manufacturer">Fabricante</string>
     <string name="poi_groundskeeping">Equipos de jardinería</string>
-    <string name="poi_country_store">Productos de campo;Tienda de campo</string>
+    <string name="poi_country_store">Productos para el campo;Tienda de campo;Almacén rural; Almacén de campo</string>
     <string name="poi_prep_school">Centro de tutorización;Academia de estudios;Profesor/a particular</string>
     <string name="poi_ticket_validator">Validador de entradas;Validador de billetes;Validador de boletos</string>
     <string name="poi_geoglyph">Geoglifo</string>
