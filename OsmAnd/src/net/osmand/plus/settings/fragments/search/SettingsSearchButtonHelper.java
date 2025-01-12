@@ -51,6 +51,7 @@ public class SettingsSearchButtonHelper {
 			final FragmentActivity fragmentActivity,
 			final @IdRes int fragmentContainerViewId,
 			final Class<? extends BaseSettingsFragment> rootPreferenceFragment) {
+		final SearchResultsFilter searchResultsFilter = new SearchResultsFilter();
 		return SearchPreferenceFragments
 				.builder(
 						new SearchConfiguration(
@@ -69,8 +70,9 @@ public class SettingsSearchButtonHelper {
 								.build())
 				.withSearchConfig(
 						new SearchConfigBuilder()
+								.withSearchResultsFilter(searchResultsFilter)
 								.withPreferencePathDisplayer(PreferencePathDisplayerFactory.createPreferencePathDisplayer(fragmentActivity))
-								.withSearchPreferenceFragmentUI(new SearchPreferenceFragmentUI())
+								.withSearchPreferenceFragmentUI(new SearchPreferenceFragmentUI(searchResultsFilter))
 								.withSearchResultsFragmentUI(new SearchResultsFragmentUI())
 								.withPrepareShow(new PrepareShow())
 								.withIncludePreferenceInSearchResultsPredicate(new IncludePreferenceInSearchResultsPredicate())

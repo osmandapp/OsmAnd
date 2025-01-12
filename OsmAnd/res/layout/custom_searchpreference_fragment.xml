@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/windowBackground"
-    android:clipToPadding="false"
-    android:paddingTop="?android:attr/actionBarSize">
+    android:clipToPadding="false">
 
     <include
         android:id="@+id/searchView"
@@ -17,6 +16,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <CheckBox
+        android:id="@+id/searchResultsCheckBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ignore search results"
+        app:layout_constraintBottom_toTopOf="@+id/searchResultsFragmentContainerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/searchResultsFragmentContainerView"
         android:layout_width="match_parent"
@@ -24,7 +33,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintTop_toBottomOf="@+id/searchResultsCheckBox" />
 
     <include
         android:id="@+id/progressContainerCustom"
