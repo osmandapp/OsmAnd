@@ -493,11 +493,12 @@ class GpxFile : GpxExtensions {
 		for (track in tracks) {
 			val trackColor = track.getColor(getColor(0))
 			for (segment in track.segments) {
+				val segmentColor = segment.getColor(trackColor)
 				if (!segment.generalSegment && segment.points.isNotEmpty()) {
 					val ts = TrkSegment()
 					tpoints.add(ts)
 					ts.points.addAll(segment.points)
-					ts.setColor(trackColor)
+					ts.setColor(segmentColor)
 				}
 			}
 		}
