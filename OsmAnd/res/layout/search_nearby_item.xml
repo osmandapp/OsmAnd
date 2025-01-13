@@ -4,23 +4,25 @@
 	android:layout_width="144dp"
 	android:layout_height="wrap_content"
 	android:orientation="vertical"
-	android:padding="16dp">
+	android:paddingStart="@dimen/content_padding"
+	android:paddingTop="@dimen/content_padding"
+	android:paddingBottom="@dimen/content_padding">
 
 	<ImageView
 		android:id="@+id/item_image"
-		android:layout_width="144dp"
+		android:layout_width="wrap_content"
 		android:layout_height="108dp"
-		android:scaleType="centerInside"/>
+		android:layout_gravity="center_horizontal"
+		android:scaleType="centerInside" />
 
 	<TextView
 		android:id="@+id/item_title"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="9dp"
-		tools:text="Eiffel Tower"
 		android:textColor="?android:textColorPrimary"
 		android:textSize="16sp"
-		/>
+		tools:text="Eiffel Tower" />
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -32,16 +34,16 @@
 			android:id="@+id/item_icon"
 			android:layout_width="16dp"
 			android:layout_height="16dp"
-			android:layout_gravity="center_vertical"
-			android:layout_marginEnd="6dp"/>
+			android:layout_gravity="center_vertical|top"
+			android:layout_marginEnd="6dp" />
 
 		<TextView
 			android:id="@+id/item_description"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			tools:text="Monument"
 			android:textColor="?android:textColorSecondary"
-			android:textSize="14sp" />
+			android:textSize="14sp"
+			tools:text="Monument" />
 	</LinearLayout>
 
 </LinearLayout>

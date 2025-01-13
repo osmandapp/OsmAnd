@@ -2,6 +2,8 @@ package net.osmand.plus.utils;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
@@ -765,4 +767,14 @@ public class UiUtilities {
 
 		AndroidUiHelper.setStatusBarContentColor(activity.getWindow().getDecorView(), nightModeForContent);
 	}
+
+	public Bitmap getScaledBitmap(@Nullable MapActivity activity, @DrawableRes int drawableId, float scale) {
+		Bitmap bitmap = BitmapFactory.decodeResource(activity == null ? app.getResources() : activity.getResources(), drawableId);
+		if (bitmap != null && scale != 1f && scale > 0) {
+			bitmap = AndroidUtils.scaleBitmap(bitmap,
+					(int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);
+		}
+		return bitmap;
+	}
+
 }

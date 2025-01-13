@@ -1,5 +1,6 @@
 package net.osmand.plus.search
 
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -34,7 +35,7 @@ class NearbyAdapter(
 	}
 
 	private fun isNightMode(): Boolean {
-		return app.daynightHelper.isNightMode
+		return !app.getSettings().isLightContent
 	}
 
 	override fun onBindViewHolder(holder: NearbyViewHolder, position: Int) {
@@ -72,21 +73,23 @@ class NearbyAdapter(
 			val picasso = PicassoUtils.getPicasso(app)
 
 			imageData?.let {
-				Picasso.get()
+				val creator = Picasso.get()
 					.load(it.imageStubUrl)
-					.error(R.drawable.mm_ferry_terminal_small_night)
-					.into(imageView, object : Callback {
-						override fun onSuccess() {
-							picasso.setResultLoaded(it.imageStubUrl, true)
-						}
+				if (coloredIcon != null) {
+					creator.error(coloredIcon)
+				}
+				creator.into(imageView, object : Callback {
+					override fun onSuccess() {
+						picasso.setResultLoaded(it.imageStubUrl, true)
+					}
 
-						override fun onError(e: Exception?) {
-							picasso.setResultLoaded(it.imageStubUrl, true)
-						}
-					})
+					override fun onError(e: Exception?) {
+						picasso.setResultLoaded(it.imageStubUrl, true)
+					}
+				})
 			}
 			titleTextView.text = item.properties.wikiTitle
-			descriptionTextView.text = item.properties.poisubtype
+			descriptionTextView.text = subType.translation
 			itemView.setOnClickListener { onItemClickListener.onNearbyItemClicked(item) }
 		}
 	}

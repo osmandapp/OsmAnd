@@ -79,6 +79,7 @@ import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.nearbyplaces.NearbyPlacesHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -278,6 +279,7 @@ public class OsmandApplication extends MultiDexApplication {
 		localeHelper.checkPreferredLocale();
 		appInitializer.onCreateApplication();
 		osmandMap.getMapLayers().createLayers(osmandMap.getMapView());
+		NearbyPlacesHelper.INSTANCE.init(this);
 		startApplication();
 		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 

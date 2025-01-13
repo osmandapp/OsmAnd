@@ -311,23 +311,30 @@ public class WikiCoreHelper {
 	public static class OsmandApiFeatureData {
 		@Expose
 		public WikiDataProperties properties;
+		@Expose
+		public WikiDataGeometry geometry;
+	}
+
+	public static class WikiDataGeometry {
+		@Expose
+		public double[] coordinates;
 	}
 
 	public static class WikiDataProperties {
 		private String id;
 		private String photoId;
 		public String photoTitle;
+		public String wikiTitle;
+		public String poitype;
+		public String poisubtype;
 		private String catId;
 		private String catTitle;
 		private String depId;
 		private String depTitle;
-		public String wikiTitle;
 		private String wikiLang;
-		private String wikiDesc;
+		public String wikiDesc;
 		private String osmid;
 		private String osmtype;
-		public String poitype;
-		public String poisubtype;
 	}
 
 	public static class OsmandAPIResponse {

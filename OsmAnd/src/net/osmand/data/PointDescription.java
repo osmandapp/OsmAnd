@@ -36,6 +36,7 @@ public class PointDescription {
 	private double lat;
 	private double lon;
 
+	public static final String POINT_TYPE_NEARBY_PLACE = "nearby_place";
 	public static final String POINT_TYPE_FAVORITE = "favorite";
 	public static final String POINT_TYPE_WPT = "wpt";
 	public static final String POINT_TYPE_GPX = "gpx";

@@ -23,11 +23,13 @@ class GetNearbyImagesTask(
 	override suspend fun doInBackground(vararg params: Unit): List<OsmandApiFeatureData> {
 		TrafficStats.setThreadStatsTag(GET_NEARBY_IMAGES_CARD_THREAD_ID)
 		var wikimediaImageList = Collections.emptyList<OsmandApiFeatureData>()
+		LOG.debug("Start loading nearby places")
 		try {
 			wikimediaImageList = WikiCoreHelper.getExploreImageList(mapRect, zoom, locale)
 		} catch (error: Exception) {
 			LOG.debug("Load nearby images error $error")
 		}
+		LOG.debug("Finish loading nearby places. Found ${wikimediaImageList.size} items")
 		return wikimediaImageList
 	}
 

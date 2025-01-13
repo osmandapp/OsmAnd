@@ -11,21 +11,19 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.data.QuadRect;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.search.GetNearbyImagesTask;
+import net.osmand.plus.nearbyplaces.NearbyPlacesHelper;
+import net.osmand.plus.nearbyplaces.NearbyPlacesListener;
 import net.osmand.plus.search.NearbyAdapter;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.fragments.HistoryItemsFragment;
-import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.util.Algorithms;
 import net.osmand.wiki.WikiCoreHelper;
+import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData;
 
-import java.util.Collections;
 import java.util.List;
 
-public class QuickSearchHistoryListFragment extends QuickSearchListFragment implements NearbyAdapter.NearbyItemClickListener {
+public class QuickSearchHistoryListFragment extends QuickSearchListFragment implements NearbyAdapter.NearbyItemClickListener, NearbyPlacesListener {
 
 	public static final int TITLE = R.string.shared_string_explore;
 
@@ -38,25 +36,20 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 
 	}
 
-	private final GetNearbyImagesTask.GetImageCardsListener imageCardListener = new GetNearbyImagesTask.GetImageCardsListener() {
-		@Override
-		public void onTaskStarted() {
-
-		}
-
-		@Override
-		public void onFinish(@NonNull List<? extends WikiCoreHelper.OsmandApiFeatureData> result) {
-			updateNearbyItems(result);
-		}
-	};
-
-	private void updateNearbyItems(@NonNull List<? extends WikiCoreHelper.OsmandApiFeatureData> result) {
+	private void updateNearbyItems() {
+		List<OsmandApiFeatureData> nearbyData = NearbyPlacesHelper.INSTANCE.getDataCollection();
 		if (nearByContainer != null) {
-			nearByContainer.setVisibility(result.isEmpty() ? View.GONE : View.VISIBLE);
+			nearByContainer.setVisibility(nearbyData.isEmpty() ? View.GONE : View.VISIBLE);
 		}
-		if (adapter != null) {
-			adapter.setItems(result);
+		getNearbyAdapter().setItems(nearbyData);
+	}
+
+	private NearbyAdapter getNearbyAdapter() {
+		if (adapter == null) {
+			List<OsmandApiFeatureData> nearbyData = NearbyPlacesHelper.INSTANCE.getDataCollection();
+			adapter = new NearbyAdapter(getMyApplication(), nearbyData, this);
 		}
+		return adapter;
 	}
 
 	@Override
@@ -104,7 +97,6 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 				getDialogFragment().reloadHistory();
 			}
 		});
-		adapter = new NearbyAdapter(app, Collections.emptyList(), this);
 	}
 
 	@Override
@@ -126,8 +118,12 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	@Override
 	public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		startLoadingNearestPhotos();
 		setupNearByCard(view);
+		NearbyPlacesHelper.INSTANCE.startLoadingNearestPhotos();
+		view.findViewById(R.id.show_all_btn).setOnClickListener(v -> {
+//			app.getOsmandMap().getMapLayers().getNearbyPlacesLayer().setCustomMapObjects(app.getFavoritesHelper().getFavouritePoints());
+			app.getOsmandMap().getMapLayers().getNearbyPlacesLayer().setCustomMapObjects(NearbyPlacesHelper.INSTANCE.getDataCollection());
+		});
 	}
 
 	private void setupNearByCard(@NonNull View view) {
@@ -137,16 +133,23 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 		layoutManager.setOrientation(RecyclerView.HORIZONTAL);
 		nearByList.setLayoutManager(layoutManager);
 		nearByList.setItemAnimator(null);
-		nearByList.setAdapter(adapter);
+		nearByList.setAdapter(getNearbyAdapter());
 	}
 
-	private void startLoadingNearestPhotos() {
-		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
-		QuadRect mapRect = mapView.getCurrentRotatedTileBox().getLatLonBounds();
-		String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
-		if (Algorithms.isEmpty(preferredLang)) {
-			preferredLang = app.getLanguage();
-		}
-		(new GetNearbyImagesTask(mapRect, mapView.getZoom(), preferredLang, imageCardListener)).execute();
+	@Override
+	public void onResume() {
+		super.onResume();
+		NearbyPlacesHelper.INSTANCE.addListener(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		NearbyPlacesHelper.INSTANCE.removeListener(this);
+	}
+
+	@Override
+	public void onNearbyPlacesUpdated() {
+		updateNearbyItems();
 	}
 }
