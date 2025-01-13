@@ -5665,4 +5665,6 @@
     <string name="calculating_indication_message">Vypočítávám…</string>
     <string name="rendering_attr_showClimbingRoutes_description">Zobrazit lezecké trasy</string>
     <string name="rendering_attr_showClimbingRoutes_name">Lezecké trasy</string>
+    <string name="display_distance_to_first_intermediate">Zobrazit podrobnosti trasy k nejbližší zastávce</string>
+    <string name="display_distance_to_first_intermediate_summary">Zobrazit čas a vzdálenost k nejbližšímu mezicíli. Vypněte, pokud chcete vždy vidět podrobnosti trasy k cíli.</string>
 </resources>
