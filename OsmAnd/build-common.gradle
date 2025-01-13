@@ -116,62 +116,61 @@ clean.doFirst {
 }
 
 tasks.register('validateTranslations') {
-	doLast {
-		println "Validating translations"
+	println "Validating translations"
+	def taskStartTime = System.currentTimeMillis()
 
-		def pattern = /%(\d+\$)?[sSdD]/
-		def files = ["strings.xml", "phrases.xml"]
-		def defaultPlaceholders = [:]
-		def parser = new XmlParser()
+	def pattern = /%(\d+\$)?[sSdD]/
+	def files = ["strings.xml", "phrases.xml"]
+	def defaultPlaceholders = [:]
+	def parser = new XmlParser()
 
-		def normalizePlaceholders = { placeholders -> placeholders.collect { it.toLowerCase() }.toSet() }
+	def normalizePlaceholders = { placeholders -> placeholders.collect { it.toLowerCase() }.toSet() }
 
-		files.each { fileName ->
-			def file = new File(file("res/values"), fileName)
-			if (file.exists()) {
-				parser.parse(file).string.each { node ->
-					def placeholders = (node.text() ?: "").findAll(pattern)
-					defaultPlaceholders[node.@name] = normalizePlaceholders(placeholders)
-				}
-			} else {
-				println "Skipping missing default file: ${file.path}"
+	files.each { fileName ->
+		def file = new File(file("res/values"), fileName)
+		if (file.exists()) {
+			parser.parse(file).string.each { node ->
+				def placeholders = (node.text() ?: "").findAll(pattern)
+				defaultPlaceholders[node.@name] = normalizePlaceholders(placeholders)
 			}
+		} else {
+			println "Skipping missing default file: ${file.path}"
 		}
+	}
 
-		def issues = []
-		def directories = file("res").listFiles().findAll {
-			it.isDirectory() && it.name.startsWith("values-")
-		}
+	def issues = []
+	def directories = file("res").listFiles().findAll {
+		it.isDirectory() && it.name.startsWith("values-")
+	}
 
-		directories.each { dir ->
-			files.each { fileName ->
-				def file = new File(dir, fileName)
-				if (file.exists()) {
-					def placeholders = [:]
-					parser.parse(file).string.each { node ->
-						def translationPlaceholders = (node.text() ?: "").findAll(pattern)
-						placeholders[node.@name] = normalizePlaceholders(translationPlaceholders)
-					}
+	directories.each { dir ->
+		files.each { fileName ->
+			def file = new File(dir, fileName)
+			if (file.exists()) {
+				def placeholders = [:]
+				parser.parse(file).string.each { node ->
+					def translationPlaceholders = (node.text() ?: "").findAll(pattern)
+					placeholders[node.@name] = normalizePlaceholders(translationPlaceholders)
+				}
 
-					defaultPlaceholders.each { key, defaultValues ->
-						if (placeholders.containsKey(key)) {
-							def translationValues = placeholders[key]
-							if (defaultValues != translationValues) {
-								issues << "Mismatch in ${file.path}: '${key}' -> Default: ${defaultValues}, Translation: ${translationValues}"
-							}
+				defaultPlaceholders.each { key, defaultValues ->
+					if (placeholders.containsKey(key)) {
+						def translationValues = placeholders[key]
+						if (defaultValues != translationValues) {
+							issues << "Mismatch in ${file.path}: '${key}' -> Default: ${defaultValues}, Translation: ${translationValues}"
 						}
 					}
 				}
 			}
 		}
-
-		if (issues.isEmpty()) {
-			println "All translations passed validation"
-		} else {
-			issues.each { println "ERROR: $it" }
-			throw new GradleException("Translation validation failed with ${issues.size()} issue(s).")
-		}
 	}
+
+	if (!issues.isEmpty()) {
+		issues.each { println "ERROR: $it" }
+		throw new GradleException("Translation validation failed with ${issues.size()} issue(s).")
+	}
+	def validationEndTime = System.currentTimeMillis()
+	println "Translations validated in ${(validationEndTime - taskStartTime)} ms"
 }
 
 tasks.register('downloadWorldMiniBasemap', Download) {
