@@ -103,7 +103,7 @@
     <string name="shared_string_unexpected_error">Error inesperado</string>
     <string name="shared_string_action_template">Acción {0}</string>
     <string name="shared_string_close">Cerrar</string>
-    <string name="shared_string_exit">Salir</string>
+    <string name="shared_string_exit">Salida</string>
     <string name="shared_string_show">Mostrar</string>
     <string name="shared_string_show_all">Mostrar todo</string>
     <string name="shared_string_collapse">Contraer</string>
@@ -5537,4 +5537,5 @@
     <string name="calculate_size">Calcular tamaño</string>
     <string name="rendering_attr_showClimbingRoutes_name">Rutas de escalada</string>
     <string name="rendering_attr_showClimbingRoutes_description">Mostrar rutas de escalada</string>
+    <string name="display_distance_to_first_intermediate">Mostrar detalles de la ruta para la siguiente parada</string>
 </resources>

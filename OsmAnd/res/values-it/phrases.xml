@@ -2978,7 +2978,7 @@
     <string name="poi_traffic_signals_vibration">Vibrazione</string>
     <string name="poi_fire_hydrant_pressure_filter">Pressione</string>
     <string name="poi_vending_elongated_coin">Moneta souvenir</string>
-    <string name="poi_drive_through_no">Drive-through: no</string>
+    <string name="poi_drive_through_no">Percorribile in auto: no</string>
     <string name="poi_piste_grooming_mogul">Gobba</string>
     <string name="poi_piste_grooming_backcountry">Fuoripista</string>
     <string name="poi_piste_difficulty_freeride">Fuoripista</string>
@@ -4375,7 +4375,7 @@
     <string name="poi_toilets_position_urinal">Positizione della toilette: orinale</string>
     <string name="poi_toilets_position_seated">Posizione sulla toilette: seduta</string>
     <string name="poi_cash_withdrawal_purchase_required_no">Prelievo contanti: acquisto non necessario</string>
-    <string name="poi_borough">Borough</string>
+    <string name="poi_borough">Borgo</string>
     <string name="poi_city_block">Isolato</string>
     <string name="poi_cuisine_soba">Soba</string>
     <string name="poi_cuisine_empanada">Empanada</string>
