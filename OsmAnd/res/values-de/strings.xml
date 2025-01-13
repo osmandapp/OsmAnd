@@ -5681,4 +5681,6 @@
     <string name="default_buttons_opacity_original_description">Jede Schaltfläche würde ihre eigene Transparenz behalten.</string>
     <string name="rendering_attr_showClimbingRoutes_name">Kletterrouten</string>
     <string name="rendering_attr_showClimbingRoutes_description">Kletterrouten anzeigen</string>
+    <string name="display_distance_to_first_intermediate_summary">Zeigt zuerst die Zeit und Entfernung für den nächsten Halt an. Schalte um, um immer Details zum Ziel anzuzeigen.</string>
+    <string name="display_distance_to_first_intermediate">Zeige Routendetails zum nächsten Halt</string>
 </resources>
