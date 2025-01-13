@@ -56,7 +56,7 @@ public class SettingsSearchButtonHelper {
 			final Class<? extends BaseSettingsFragment> rootPreferenceFragment,
 			final OsmandPreference<String> availableAppModes) {
 		final SearchResultsFilter searchResultsFilter =
-				new SearchResultsFilter(
+				SearchResultsFilterFactory.createSearchResultsFilter(
 						PreferencePathDisplayerFactory.getApplicationModeKeys(),
 						availableAppModes);
 		return SearchPreferenceFragments

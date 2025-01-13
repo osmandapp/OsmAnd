@@ -1,8 +1,7 @@
 package net.osmand.plus.settings.fragments.search;
 
-import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-
 import java.util.Collection;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import de.KnollFrank.lib.settingssearch.PreferencePath;
@@ -10,13 +9,11 @@ import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreference;
 
 class SearchResultsFilter implements de.KnollFrank.lib.settingssearch.results.SearchResultsFilter {
 
-	private final Collection<String> allProfiles;
-	private final OsmandPreference<String> enabledProfiles;
+	private final Predicate<String> isDisabledProfile;
 	private boolean removeSearchResultsConnectedToDisabledProfiles = true;
 
-	public SearchResultsFilter(final Collection<String> allProfiles, final OsmandPreference<String> enabledProfiles) {
-		this.allProfiles = allProfiles;
-		this.enabledProfiles = enabledProfiles;
+	SearchResultsFilter(final Predicate<String> isDisabledProfile) {
+		this.isDisabledProfile = isDisabledProfile;
 	}
 
 	@Override
@@ -46,18 +43,7 @@ class SearchResultsFilter implements de.KnollFrank.lib.settingssearch.results.Se
 	}
 
 	private boolean startsWithDisabledProfile(final PreferencePath preferencePath) {
-		return isDisabledProfile(preferencePath.preferences().get(0).getKey().orElseThrow());
-	}
-
-	private boolean isDisabledProfile(final String key) {
-		return isProfile(key) && isDisabled(key);
-	}
-
-	private boolean isProfile(final String key) {
-		return allProfiles.contains(key);
-	}
-
-	private boolean isDisabled(final String profile) {
-		return !enabledProfiles.get().contains(profile);
+		final var startOfPreferencePath = preferencePath.preferences().get(0);
+		return isDisabledProfile.test(startOfPreferencePath.getKey().orElseThrow());
 	}
 }
