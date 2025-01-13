@@ -7,6 +7,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
+import net.osmand.util.Algorithms;
 
 public class ClickableWay {
     private final long osmId;
@@ -34,7 +35,7 @@ public class ClickableWay {
     }
 
     public String getWayName() {
-        return name != null ? name : Long.toString(osmId);
+        return Algorithms.isEmpty(name) ? Long.toString(osmId) : name;
     }
 
     public String toString() {

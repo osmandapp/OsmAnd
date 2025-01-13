@@ -32,8 +32,24 @@ import java.util.Set;
 import gnu.trove.list.array.TIntArrayList;
 
 public class ClickableWayLoader {
-    public static final Set<String> clickableTags = Set.of("piste:type", "mtb:scale", "dirtbike:scale");
+    public static final Set<String> clickableTags = Set.of("piste:type", "piste:difficulty", "mtb:scale", "dirtbike:scale");
     public static final Map<String, String> forbiddenTags = Map.of("area", "yes", "access", "no");
+    public static final Map<String, String> gpxColors = Map.ofEntries(
+            Map.entry("0", "brown"),
+            Map.entry("1", "green"),
+            Map.entry("2", "blue"),
+            Map.entry("3", "red"),
+            Map.entry("4", "black"),
+            Map.entry("5", "black"),
+            Map.entry("6", "black"),
+            Map.entry("novice", "green"),
+            Map.entry("easy", "blue"),
+            Map.entry("intermediate", "red"),
+            Map.entry("advanced", "black"),
+            Map.entry("expert", "black"),
+            Map.entry("freeride", "yellow")
+            // others are default (red)
+    );
 
     private final OsmandApplication app;
     private final ClickableWayActivator activator;
@@ -91,6 +107,8 @@ public class ClickableWayLoader {
 
         if (!Algorithms.isEmpty(name)) {
             gpxFile.getMetadata().setName(name);
+        } else {
+            gpxFile.getMetadata().setName(Long.toString(osmId));
         }
 
         RouteActivityHelper helper = app.getRouteActivityHelper();
@@ -103,7 +121,7 @@ public class ClickableWayLoader {
             }
         }
 
-        gpxFile.getExtensionsToWrite().putAll(tags); // TODO check prefix, check /:/ in tag
+        gpxFile.getExtensionsToWrite().putAll(tags);
 
         TrkSegment trkSegment = new TrkSegment();
         for (int i = 0; i < Math.min(xPoints.size(), yPoints.size()); i++) {
@@ -117,15 +135,35 @@ public class ClickableWayLoader {
         track.getSegments().add(trkSegment);
         gpxFile.setTracks(List.of(track)); // immutable
 
+        String color = getGpxColorByTags(tags);
+        if (color != null) {
+            System.err.printf("XXX color (%s)\n", color);
+            gpxFile.setColor(color);
+        }
+
         // TODO check unique gpx
         // TODO cache <id, GpxFile>
-        // TODO gpx colors by difficulty
         // TODO close previous on open new
         // TODO fetch elevation data from routing-section
         // TODO calc distance stats, elevation stats, etc (automatically if data exists)
         // THINK auto-reverse Way (assume downhill OR detect start by minDist to currentLocation)
 
         return new ClickableWay(gpxFile, osmId, name, searchLatLon);
+    }
+
+    @Nullable
+    private String getGpxColorByTags(Map <String, String> tags) {
+        for (String t : clickableTags) {
+            String val = tags.get(t);
+            if (val != null) {
+                for (Map.Entry<String, String> matchColor : gpxColors.entrySet()) {
+                    if (val.contains(matchColor.getKey())) {
+                        return matchColor.getValue();
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     private int calcSearchRadius(TIntArrayList x, TIntArrayList y) {
