@@ -26,7 +26,6 @@ class GpxTrackAnalysis {
 	var name: String? = null
 	var totalDistanceWithoutGaps = 0f
 	var timeSpanWithoutGaps: Long = 0
-	var expectedRouteDuration: Long = 0
 	var timeMovingWithoutGaps: Long = 0
 	var totalDistanceMovingWithoutGaps = 0f
 
@@ -72,6 +71,10 @@ class GpxTrackAnalysis {
 	var timeSpan: Long
 		get() = getGpxParameter(GpxParameter.TIME_SPAN) as Long
 		set(value) = setGpxParameter(GpxParameter.TIME_SPAN, value)
+
+	var expectedRouteDuration: Long
+		get() = getGpxParameter(GpxParameter.EXPECTED_DURATION) as Long
+		set(value) = setGpxParameter(GpxParameter.EXPECTED_DURATION, value)
 
 	var timeMoving: Long
 		get() = getGpxParameter(GpxParameter.TIME_MOVING) as Long
