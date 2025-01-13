@@ -741,14 +741,8 @@
 \nMitä tahansa näistä kartoista voidaan näyttää pää(pohja)karttana, tai päällys- tai aluskerroksena toiselle pohjakartalle (kuten OsmAndin perus offline-kartat). Saadaksesi mikä tahansa aluskerros näkyvämmäksi, tiettyjä osia OsmAnd vektorikartoista voi tarvittaessa helposti piilottaa \"Kartta-asetukset\" valikosta.
 \n
 \nLataa ruutukarttoja suoraan, tai kopioi ne SQLite-tietokanta tiedostoina OSMAndin kansioon käyttäen kolmannen osapuolen karttavalmistelutyökaluilla.</string>
-    <string name="record_plugin_description">Tämä lisäosa ottaa käyttöön toiminnallisuudet nauhoittaa ja tallentaa jälkiä manuaalisesti koskettamalla GPX-kirjauswidgettiä kartalla, tai myös automaattisesti tallentaa kaikki navigointireitit GPX-tiedostoon.
-\n
-\nTallennetut jäljet voidaan jakaa ystävillesi tai käyttää OSM osallistumisissa. Urheilijat voivat käyttää tallennettuja jälkiä harjoittelun seuraamiseen. Jotain perusanalyysejä jäljille voidaan tehdä suoraan OsmAndissa, kuten kierrosaikoja, keskimääräistä nopeutta jne., ja jälkiä voi tietysti myös myöhemmin analysoida erityisissä kolmannen osapuolen analysointityökaluissa.</string>
     <string name="srtm_paid_version_title">Korkeuskäyrät-lisäosa</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-lisäosa offline-korkeuskäyriä varten</string>
-    <string name="srtm_plugin_description">Tämä lisäosa tarjoaa korkeuskäyräpeitteen ja (kohokuva) mäkivarjostustason näytettäväksi OsmAnd offline-karttojen päällä. Tätä toiminnallisuutta arvostavat paljon urheilijat, retkeilijät, vuoristoseikkailijat, ja ketkä tahansa maisemien ihailusta kiinnostuneet.
-\n
-\nMaailmanlaajuiset tiedot (välillä 70° pohjoista ja 70° eteläistä) perustuu mittauksiin jotka on tehnyt SRTM (Shuttle Radar Topography Mission) ja ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ja NASAn maapallontarkkailujärjestelmän lippulaivasatelliitti Terran mukana kulkeva kuvauslaite. ASTER on yhteistyö NASAn, Japanin talous-, kauppa ja teollisuusministeriön (METI), ja Japanin avaruusjärjestelmien (J-spacesystems) välillä.</string>
     <string name="layer_map">Kartan lähde…</string>
     <string name="text_size">Tekstin koko</string>
     <string name="map_locale">Kartan kieli</string>

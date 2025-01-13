@@ -119,17 +119,19 @@ tasks.register('validateTranslations') {
 	doLast {
 		println "Validating translations"
 
-		def pattern = /%(\d+\$)?[sd]/
+		def pattern = /%(\d+\$)?[sSdD]/
 		def files = ["strings.xml", "phrases.xml"]
 		def defaultPlaceholders = [:]
 		def parser = new XmlParser()
 
-		// Parse default locale placeholders
+		def normalizePlaceholders = { placeholders -> placeholders.collect { it.toLowerCase() }.toSet() }
+
 		files.each { fileName ->
 			def file = new File(file("res/values"), fileName)
 			if (file.exists()) {
 				parser.parse(file).string.each { node ->
-					defaultPlaceholders[node.@name] = (node.text() ?: "").findAll(pattern).toSet()
+					def placeholders = (node.text() ?: "").findAll(pattern)
+					defaultPlaceholders[node.@name] = normalizePlaceholders(placeholders)
 				}
 			} else {
 				println "Skipping missing default file: ${file.path}"
@@ -147,7 +149,8 @@ tasks.register('validateTranslations') {
 				if (file.exists()) {
 					def placeholders = [:]
 					parser.parse(file).string.each { node ->
-						placeholders[node.@name] = (node.text() ?: "").findAll(pattern).toSet()
+						def translationPlaceholders = (node.text() ?: "").findAll(pattern)
+						placeholders[node.@name] = normalizePlaceholders(translationPlaceholders)
 					}
 
 					defaultPlaceholders.each { key, defaultValues ->
@@ -158,8 +161,6 @@ tasks.register('validateTranslations') {
 							}
 						}
 					}
-				} else {
-					println "Skipping missing translation file: ${file.path}"
 				}
 			}
 		}

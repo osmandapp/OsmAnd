@@ -2841,7 +2841,7 @@
     <string name="profile_alert_need_save_title">Änderungen speichern</string>
     <string name="profile_alert_need_save_msg">Änderungen am Profil zuerst speichern</string>
     <string name="profile_alert_delete_title">Profil löschen</string>
-    <string name="profile_alert_delete_msg">Profil „%1$s“ löschen</string>
+    <string name="profile_alert_delete_msg">Profil „%s“ löschen</string>
     <string name="select_base_profile_dialog_title">Wählen Sie zunächst ein Profil aus</string>
     <string name="select_base_profile_dialog_message">Bauen Sie ein eigenes Anwendungsprofil auf einem der Standardprofile der App auf. Dieses bestimmt die Grundeinstellungen wie Voreinstellungen zur Sichtbarkeit von Widgets und die Einheiten für Geschwindigkeit und Entfernungen. Dies sind die App-Standardprofile zusammen mit Beispielen für eigene Anwendungsprofile, die erweitert werden können:</string>
     <string name="select_nav_profile_dialog_title">Navigationsart auswählen</string>
@@ -3025,7 +3025,7 @@
     <string name="voice_announces">Sprachansagen</string>
     <string name="screen_alerts">Bildschirmwarnungen</string>
     <string name="route_parameters_descr">Routenparameter konfigurieren</string>
-    <string name="application_profile_changed">App-Profil geändert zu s\\</string>
+    <string name="application_profile_changed">App-Profil geändert zu %s</string>
     <string name="logcat_buffer">Logcat-Puffer</string>
     <string name="plugins_settings">Plugin-Einstellungen</string>
     <string name="shared_string_by_default">Standardmäßig</string>
@@ -5143,7 +5143,7 @@
     <string name="key_event_action_open_search_view">Suche öffnen</string>
     <string name="key_event_action_zoom_out">Herauszoomen</string>
     <string name="key_event_action_toggle_drower">Seitenmenü anzeigen/verbergen</string>
-    <string name="key_is_already_assigned_error">Der Schlüssel %1$s ist bereits der Aktion „2$s\\“ zugeordnet</string>
+    <string name="key_is_already_assigned_error">Der Schlüssel %1$s ist bereits der Aktion „%2$s“ zugeordnet</string>
     <string name="key_event_action_open_navigation_view">Navigationsansicht öffnen</string>
     <string name="external_input_device_title">Externes Eingabegerät</string>
     <string name="key_bindings">Tastenbelegung</string>
@@ -5574,7 +5574,7 @@
     <string name="connect_obd_instructions_step1">Den Scanner an den OBD-II-Anschluss Ihres Fahrzeugs anschließen.</string>
     <string name="connect_obd_instructions_step2">Den Motor Ihres Fahrzeugs einschalten</string>
     <string name="learn_more_about_obd_sensors">Mehr über Sensoren erfahren.</string>
-    <string name="connect_obd_instructions_step4">Auf „Verbinden“ tippen und den Scanner aus der Liste auswählen.</string>
+    <string name="connect_obd_instructions_step4">Auf „%1$s“ tippen und den Scanner aus der Liste auswählen.</string>
     <string name="connect_obd_instructions_title">OsmAnd unterstützt Bluetooth-Verbindungen zu OBD-II-Scannern.</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
     <string name="obd_vehicle_info">Fahrzeuginformation</string>

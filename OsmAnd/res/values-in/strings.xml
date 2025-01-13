@@ -5957,7 +5957,7 @@
     <string name="connect_obd_instructions_step2">Nyalakan mesin kendaraan Anda</string>
     <string name="obd_how_to_connect">Cara menghubungkan:</string>
     <string name="connect_obd_instructions_step3">Aktifkan Bluetooth di perangkat Anda</string>
-    <string name="connect_obd_instructions_step4">Ketuk \'Hubungkan\' dan pilih pemindai Anda dari daftar.</string>
+    <string name="connect_obd_instructions_step4">Ketuk \'%1$s\' dan pilih pemindai Anda dari daftar.</string>
     <string name="learn_more_about_obd_sensors">Pelajari lebih lanjut tentang sensor.</string>
     <string name="obd_fuel_left_liters">Bahan bakar tersisa (liter)</string>
     <string name="obd_widget_vehicle_speed">Kecepatan kendaraan</string>
