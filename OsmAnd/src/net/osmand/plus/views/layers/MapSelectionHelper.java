@@ -477,7 +477,7 @@ public class MapSelectionHelper {
 
 	private boolean addTravelGpx(@NonNull MapSelectionResult result, @Nullable String routeId, @Nullable String ref) {
 		TravelGpx travelGpx = app.getTravelHelper().searchGpx(result.pointLatLon, routeId, ref);
-		if (travelGpx != null && isUniqueGpx(result.selectedObjects, travelGpx)) {
+		if (travelGpx != null && isUniqueTravelGpx(result.selectedObjects, travelGpx)) {
 			WptPt selectedPoint = new WptPt();
 			selectedPoint.setLat(result.pointLatLon.getLatitude());
 			selectedPoint.setLon(result.pointLatLon.getLongitude());
@@ -492,7 +492,7 @@ public class MapSelectionHelper {
 
 	private boolean addClickableWayV1(@NonNull MapSelectionResult result, @NonNull RenderedObject renderedObject) {
 		ClickableWay clickableWay = clickableWayLoader.searchClickableWayV1(result.pointLatLon, renderedObject);
-		if (clickableWay != null) {
+		if (clickableWay != null && isUniqueClickableWay(result.selectedObjects, clickableWay)) {
 			result.selectedObjects.put(clickableWay, clickableWayLoader.getContextMenuProvider());
 			return true;
 		}
@@ -502,16 +502,39 @@ public class MapSelectionHelper {
 	private boolean addClickableWayV2(@NonNull MapSelectionResult result, @NonNull ObfMapObject obfMapObject,
 									  @NonNull Map<String, String> tags) {
 		ClickableWay clickableWay = clickableWayLoader.searchClickableWayV2(result.pointLatLon, obfMapObject, tags);
-		if (clickableWay != null) {
+		if (clickableWay != null && isUniqueClickableWay(result.selectedObjects, clickableWay)) {
 			result.selectedObjects.put(clickableWay, clickableWayLoader.getContextMenuProvider());
 			return true;
 		}
 		return false;
 	}
 
-	private boolean isUniqueGpx(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
-	                            @NonNull TravelGpx travelGpx) {
-		String travelGpxFileName = travelGpx.getGpxFileName() + GPX_FILE_EXT;
+	private boolean isUniqueGpxFileName(Map<Object, IContextMenuProvider> selectedObjects, String gpxFileName) {
+		for (Map.Entry<Object, IContextMenuProvider> entry : selectedObjects.entrySet()) {
+			if (entry.getKey() instanceof SelectedGpxPoint && entry.getValue() instanceof GPXLayer) {
+				SelectedGpxPoint selectedGpxPoint = (SelectedGpxPoint) entry.getKey();
+				if (selectedGpxPoint.getSelectedGpxFile().getGpxFile().getPath().endsWith(gpxFileName)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	private boolean isUniqueClickableWay(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
+										 @NonNull ClickableWay clickableWay) {
+		for (Object object : selectedObjects.keySet()) {
+			if (object instanceof ClickableWay that) {
+				if (clickableWay.getOsmId() == that.getOsmId()) {
+					return false;
+				}
+			}
+		}
+		return isUniqueGpxFileName(selectedObjects, clickableWay.getGpxFileName() + GPX_FILE_EXT);
+	}
+
+	private boolean isUniqueTravelGpx(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
+									  @NonNull TravelGpx travelGpx) {
 		for (Map.Entry<Object, IContextMenuProvider> entry : selectedObjects.entrySet()) {
 			if (entry.getKey() instanceof Pair && entry.getValue() instanceof GPXLayer
 					&& ((Pair<?, ?>) entry.getKey()).first instanceof TravelGpx) {
@@ -520,14 +543,8 @@ public class MapSelectionHelper {
 					return false;
 				}
 			}
-			if (entry.getKey() instanceof SelectedGpxPoint && entry.getValue() instanceof GPXLayer) {
-				SelectedGpxPoint selectedGpxPoint = (SelectedGpxPoint) entry.getKey();
-				if (selectedGpxPoint.getSelectedGpxFile().getGpxFile().getPath().endsWith(travelGpxFileName)) {
-					return false;
-				}
-			}
 		}
-		return true;
+		return isUniqueGpxFileName(selectedObjects,  travelGpx.getGpxFileName() + GPX_FILE_EXT);
 	}
 
 	private void addOsmRoute(@NonNull MapSelectionResult result, @NonNull RotatedTileBox tileBox, @NonNull PointF point,
@@ -582,13 +599,13 @@ public class MapSelectionHelper {
 			log.error(e);
 		}
 		for (RouteKey routeKey : routes.keySet()) {
-			if (isUniqueRoute(selectedObjects.keySet(), routeKey)) {
+			if (isUniqueOsmRoute(selectedObjects.keySet(), routeKey)) {
 				selectedObjects.put(new Pair<>(routeKey, rect), provider);
 			}
 		}
 	}
 
-	private boolean isUniqueRoute(@NonNull Set<Object> set, @NonNull RouteKey tmpRouteKey) {
+	private boolean isUniqueOsmRoute(@NonNull Set<Object> set, @NonNull RouteKey tmpRouteKey) {
 		for (Object selectedObject : set) {
 			if (selectedObject instanceof Pair && ((Pair<?, ?>) selectedObject).first instanceof RouteKey) {
 				RouteKey routeKey = (RouteKey) ((Pair<?, ?>) selectedObject).first;

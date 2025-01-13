@@ -26,12 +26,20 @@ public class ClickableWay {
         this.selectedGpxPoint = new SelectedGpxPoint(null, wpt);
     }
 
+    public long getOsmId() {
+        return osmId;
+    }
+
     public GpxFile getGpxFile() {
         return gpxFile;
     }
 
     public SelectedGpxPoint getSelectedGpxPoint() {
         return selectedGpxPoint;
+    }
+
+    public String getGpxFileName() {
+        return Algorithms.sanitizeFileName(getWayName());
     }
 
     public String getWayName() {

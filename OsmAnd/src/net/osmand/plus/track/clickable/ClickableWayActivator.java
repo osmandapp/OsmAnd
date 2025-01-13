@@ -18,7 +18,6 @@ import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.primitives.WptPt;
-import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.List;
@@ -40,8 +39,8 @@ public class ClickableWayActivator implements ContextMenuLayer.IContextMenuProvi
             GpxFile gpxFile = that.getGpxFile();
             GpxTrackAnalysis analysis = gpxFile.getAnalysis(0);
             WptPt selectedPoint = that.getSelectedGpxPoint().getSelectedPoint();
-            String safeFileName = Algorithms.sanitizeFileName(that.getWayName());
-            File file = new File(FileUtils.getTempDir(app), safeFileName + GPX_FILE_EXT);
+            String safeFileName = that.getGpxFileName() + GPX_FILE_EXT;
+            File file = new File(FileUtils.getTempDir(app), safeFileName);
             GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, selectedPoint, analysis, null, true);
             return true;
         }

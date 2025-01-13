@@ -2,6 +2,9 @@ package net.osmand.plus.track.clickable;
 
 import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 
+// THINK use similar icon="piste_high_difficulty" for no-name pistes
+// THINK auto-reverse Way (assume downhill OR detect start by minDist to currentLocation)
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -137,16 +140,14 @@ public class ClickableWayLoader {
 
         String color = getGpxColorByTags(tags);
         if (color != null) {
-            System.err.printf("XXX color (%s)\n", color);
             gpxFile.setColor(color);
         }
 
-        // TODO check unique gpx
         // TODO cache <id, GpxFile>
-        // TODO close previous on open new
-        // TODO fetch elevation data from routing-section
+
+        // TODO fetch elevation data from routing-section - RouteSectionReader.java
+
         // TODO calc distance stats, elevation stats, etc (automatically if data exists)
-        // THINK auto-reverse Way (assume downhill OR detect start by minDist to currentLocation)
 
         return new ClickableWay(gpxFile, osmId, name, searchLatLon);
     }
