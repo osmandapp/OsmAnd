@@ -3025,7 +3025,7 @@
     <string name="voice_announces">Sprachansagen</string>
     <string name="screen_alerts">Bildschirmwarnungen</string>
     <string name="route_parameters_descr">Routenparameter konfigurieren</string>
-    <string name="application_profile_changed">App-Profil geändert zu s\\</string>
+    <string name="application_profile_changed">App-Profil geändert zu \"%s\"</string>
     <string name="logcat_buffer">Logcat-Puffer</string>
     <string name="plugins_settings">Plugin-Einstellungen</string>
     <string name="shared_string_by_default">Standardmäßig</string>
@@ -5143,7 +5143,7 @@
     <string name="key_event_action_open_search_view">Suche öffnen</string>
     <string name="key_event_action_zoom_out">Herauszoomen</string>
     <string name="key_event_action_toggle_drower">Seitenmenü anzeigen/verbergen</string>
-    <string name="key_is_already_assigned_error">Der Schlüssel %1$s ist bereits der Aktion „2$s\\“ zugeordnet</string>
+    <string name="key_is_already_assigned_error">Der Schlüsse\"%1$s\" ist bereits der Aktion „%2$s“ zugeordnet</string>
     <string name="key_event_action_open_navigation_view">Navigationsansicht öffnen</string>
     <string name="external_input_device_title">Externes Eingabegerät</string>
     <string name="key_bindings">Tastenbelegung</string>
@@ -5174,7 +5174,7 @@
     <string name="key_assignments">Tastenbelegungen</string>
     <string name="topography_maps">Topografische Karten</string>
     <string name="clear_key_assignment">Tastenbelegung löschen</string>
-    <string name="clear_key_assignment_desc">Tastenkürzel für die ausgewählte Aktion wird gelöscht und gesetzt auf\n„Keine“.</string>
+    <string name="clear_key_assignment_desc">Tastenkürzel für die ausgewählte Aktion wird gelöscht und gesetzt auf „Keine“.</string>
     <string name="reset_key_assignments_desc">Alle Tastenbelegungen für den ausgewählten Typ werden entfernt.</string>
     <string name="rendering_attr_showToll_name">Mautbeschränkungen anzeigen</string>
     <string name="shared_string_reassign">Neu belegen</string>
@@ -5681,5 +5681,4 @@
     <string name="default_buttons_opacity_original_description">Jede Schaltfläche würde ihre eigene Transparenz behalten.</string>
     <string name="rendering_attr_showClimbingRoutes_name">Kletterrouten</string>
     <string name="rendering_attr_showClimbingRoutes_description">Kletterrouten anzeigen</string>
-    <string name="display_distance_to_first_intermediate">Zeige Zeit und Entfernung bis zum ersten Zwischenziel an, falls eingestellt</string>
 </resources>

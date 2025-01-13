@@ -5678,4 +5678,5 @@
     <string name="calculate_size">Розрахувати розмір</string>
     <string name="rendering_attr_showClimbingRoutes_description">Показати маршрути сходження</string>
     <string name="rendering_attr_showClimbingRoutes_name">Скелелазні маршрути</string>
+    <string name="display_distance_to_first_intermediate">Відображати час і відстань до першого проміжного пункту, якщо він встановлений</string>
 </resources>
