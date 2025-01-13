@@ -9,10 +9,14 @@ import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PNT_
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_ALARM_ANNOUNCE;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_PNT_APPROACH;
 
+import android.os.AsyncTask;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Location;
+import net.osmand.OnCompleteCallback;
+import net.osmand.StateChangedListener;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
@@ -30,6 +34,7 @@ import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.util.MapUtils;
@@ -37,8 +42,9 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import gnu.trove.list.array.TIntArrayList;
@@ -74,15 +80,32 @@ public class WaypointHelper {
 	private final ConcurrentHashMap<AlarmInfoType, AlarmInfo> lastAnnouncedAlarms = new ConcurrentHashMap<>();
 	private final ConcurrentHashMap<AlarmInfoType, Long> lastAnnouncedAlarmsTime = new ConcurrentHashMap<>();
 	private TIntArrayList pointsProgress = new TIntArrayList();
+	private boolean rejectPointsCalculation = false;
 	private RouteCalculationResult route;
 
 	private ApplicationMode appMode;
+
+	// Listeners cache that is needed to prevent individual listeners weak references lost
+	private final Map<String, StateChangedListener<Boolean>> registeredPrefListeners = new HashMap<>();
 
 
 	public WaypointHelper(OsmandApplication application) {
 		app = application;
 		settings = app.getSettings();
 		appMode = settings.getApplicationMode();
+		registerPreferenceListeners();
+	}
+
+	private void registerPreferenceListeners() {
+		registerPreferenceListener(settings.ANNOUNCE_WPT, WAYPOINTS);
+		registerPreferenceListener(settings.ANNOUNCE_NEARBY_FAVORITES, FAVORITES);
+		registerPreferenceListener(settings.ANNOUNCE_NEARBY_POI, POI);
+	}
+
+	private void registerPreferenceListener(@NonNull OsmandPreference<Boolean> preference, int type) {
+		StateChangedListener<Boolean> listener = aBoolean -> recalculatePointsAsync(type, null);
+		registeredPrefListeners.put(preference.getId(), listener);
+		preference.addListener(listener);
 	}
 
 	public List<LocationPointWrapper> getWaypoints(int type) {
@@ -258,7 +281,12 @@ public class WaypointHelper {
 		return mostImportant;
 	}
 
+	public void switchWaypointTypeAsync(int type, boolean enable, @Nullable OnCompleteCallback callback) {
+		runAsync(() -> switchWaypointType(type, enable), callback);
+	}
+
 	public void switchWaypointType(int type, boolean enable) {
+		rejectPointsCalculation = true;
 		//An item will be displayed in the Waypoint list if either "Show..." or "Announce..." is selected for it in the Navigation settings
 		//Keep both "Show..." and "Announce..." Nav settings in sync when user changes what to display in the Waypoint list, as follows:
 		if (type == ALARMS) {
@@ -279,11 +307,12 @@ public class WaypointHelper {
 			settings.SHOW_WPT.set(enable);
 			settings.ANNOUNCE_WPT.set(enable);
 		}
+		rejectPointsCalculation = false;
 		recalculatePoints(route, type, locationPoints);
 	}
 
-	public void recalculatePoints(int type) {
-		recalculatePoints(route, type, locationPoints);
+	public void recalculatePointsAsync(int type, @Nullable OnCompleteCallback callback) {
+		runAsync(() -> recalculatePoints(route, type, locationPoints), callback);
 	}
 
 
@@ -570,7 +599,7 @@ public class WaypointHelper {
 	}
 
 	protected void recalculatePoints(RouteCalculationResult route, int type, List<List<LocationPointWrapper>> locationPoints) {
-		if (route == null || route.isEmpty()) {
+		if (route == null || route.isEmpty() || rejectPointsCalculation) {
 			return;
 		}
 		boolean all = type == -1;
@@ -770,5 +799,22 @@ public class WaypointHelper {
 		} else {
 			this.searchDeviationRadius = radius;
 		}
+	}
+
+	private void runAsync(@NonNull Runnable runnable, @Nullable OnCompleteCallback callback) {
+		new AsyncTask<Void, Void, Void>() {
+			@Override
+			protected Void doInBackground(Void... voids) {
+				runnable.run();
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(Void unused) {
+				if (callback != null) {
+					callback.onComplete();
+				}
+			}
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 }

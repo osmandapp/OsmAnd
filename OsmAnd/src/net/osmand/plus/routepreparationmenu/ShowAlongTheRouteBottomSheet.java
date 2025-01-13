@@ -470,68 +470,20 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 	}
 
 	private void enableType(int type, boolean enable) {
-		new EnableWaypointsTypeTask(this, type, enable).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		waypointHelper.switchWaypointTypeAsync(type, enable, () -> {
+            if (isAdded()) {
+                updateAdapter();
+                updateMenu();
+            }
+        });
 	}
 
 	private void recalculatePoints(int type) {
-		new RecalculatePointsTask(this, type).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-	}
-
-	private static class RecalculatePointsTask extends AsyncTask<Void, Void, Void> {
-
-		private final OsmandApplication app;
-		private final WeakReference<ShowAlongTheRouteBottomSheet> fragmentRef;
-		private final int type;
-
-		RecalculatePointsTask(ShowAlongTheRouteBottomSheet fragment, int type) {
-			this.app = fragment.getMyApplication();
-			this.fragmentRef = new WeakReference<>(fragment);
-			this.type = type;
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			app.getWaypointHelper().recalculatePoints(type);
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void aVoid) {
-			ShowAlongTheRouteBottomSheet fragment = fragmentRef.get();
-			if (fragment != null) {
-				fragment.updateAdapter();
-			}
-		}
-	}
-
-	private static class EnableWaypointsTypeTask extends AsyncTask<Void, Void, Void> {
-
-		private final OsmandApplication app;
-		private final WeakReference<ShowAlongTheRouteBottomSheet> fragmentRef;
-		private final int type;
-		private final boolean enable;
-
-		EnableWaypointsTypeTask(ShowAlongTheRouteBottomSheet fragment, int type, boolean enable) {
-			this.app = fragment.getMyApplication();
-			this.fragmentRef = new WeakReference<>(fragment);
-			this.type = type;
-			this.enable = enable;
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			app.getWaypointHelper().switchWaypointType(type, enable);
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void aVoid) {
-			ShowAlongTheRouteBottomSheet fragment = fragmentRef.get();
-			if (fragment != null && fragment.isAdded()) {
-				fragment.updateAdapter();
-				fragment.updateMenu();
-			}
-		}
+		waypointHelper.recalculatePointsAsync(type, () -> {
+            if (isAdded()) {
+                updateAdapter();
+            }
+        });
 	}
 
 	private static class ContentItem {
