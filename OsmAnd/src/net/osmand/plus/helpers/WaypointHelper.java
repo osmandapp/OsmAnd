@@ -659,17 +659,14 @@ public class WaypointHelper {
 
 
 	protected void sortList(List<LocationPointWrapper> list) {
-		Collections.sort(list, new Comparator<LocationPointWrapper>() {
-			@Override
-			public int compare(LocationPointWrapper olhs, LocationPointWrapper orhs) {
-				int lhs = olhs.routeIndex;
-				int rhs = orhs.routeIndex;
-				if (lhs == rhs) {
-					return Float.compare(olhs.deviationDistance, orhs.deviationDistance);
-				}
-				return lhs < rhs ? -1 : 1;
-			}
-		});
+		Collections.sort(list, (olhs, orhs) -> {
+            int lhs = olhs.routeIndex;
+            int rhs = orhs.routeIndex;
+            if (lhs == rhs) {
+                return Float.compare(olhs.deviationDistance, orhs.deviationDistance);
+            }
+            return lhs < rhs ? -1 : 1;
+        });
 	}
 
 
