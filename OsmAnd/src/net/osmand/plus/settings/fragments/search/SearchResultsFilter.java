@@ -3,7 +3,6 @@ package net.osmand.plus.settings.fragments.search;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 
 import java.util.Collection;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import de.KnollFrank.lib.settingssearch.PreferencePath;
@@ -11,11 +10,11 @@ import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreference;
 
 class SearchResultsFilter implements de.KnollFrank.lib.settingssearch.results.SearchResultsFilter {
 
-	private final Set<String> allProfiles;
+	private final Collection<String> allProfiles;
 	private final OsmandPreference<String> enabledProfiles;
 	private boolean removeSearchResultsConnectedToDisabledProfiles = true;
 
-	public SearchResultsFilter(final Set<String> allProfiles, final OsmandPreference<String> enabledProfiles) {
+	public SearchResultsFilter(final Collection<String> allProfiles, final OsmandPreference<String> enabledProfiles) {
 		this.allProfiles = allProfiles;
 		this.enabledProfiles = enabledProfiles;
 	}
