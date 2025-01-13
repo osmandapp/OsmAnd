@@ -5561,7 +5561,7 @@
     <string name="driving_region_india">India</string>
     <string name="driving_region_uk">Storbritannia og lignende</string>
     <string name="weather_source_ecmwf_description">Europeisk senter for middels lange værvarsler (ECMWF)</string>
-    <string name="hugerock_promo">Hugerock-kampanje i %1$d måneder</string>
+    <string name="hugerock_promo">Hugerock-kampanje i %1$s måneder</string>
     <string name="resting_navigation_position">Hvile- og navigasjonsposisjon</string>
     <string name="resting_position">Hvileposisjon</string>
     <string name="navigation_position">Navigasjonsposisjon</string>
