@@ -65,8 +65,11 @@
     <!-- Osmand themes styles -->
     <style name="ToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
         <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetEnd">0dp</item>
         <item name="titleMargin">0dp</item>
         <item name="contentInsetStartWithNavigation">@dimen/toolbar_inset_start_with_navigation</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
     </style>
 
     <style name="OverflowMenuButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
