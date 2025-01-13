@@ -493,11 +493,12 @@ class GpxFile : GpxExtensions {
 		for (track in tracks) {
 			val trackColor = track.getColor(getColor(0))
 			for (segment in track.segments) {
+				val segmentColor = segment.getColor(trackColor)
 				if (!segment.generalSegment && segment.points.isNotEmpty()) {
 					val ts = TrkSegment()
 					tpoints.add(ts)
 					ts.points.addAll(segment.points)
-					ts.setColor(trackColor)
+					ts.setColor(segmentColor)
 				}
 			}
 		}
@@ -797,7 +798,7 @@ class GpxFile : GpxExtensions {
 			trkSegments.add(cloneTrkSegment(segment))
 		}
 		dest.segments = trkSegments
-		copyExtensions(source)
+		dest.copyExtensions(source)
 		return dest
 	}
 
@@ -810,7 +811,7 @@ class GpxFile : GpxExtensions {
 			points.add(WptPt(point))
 		}
 		dest.points = points
-		copyExtensions(source)
+		dest.copyExtensions(source)
 		return dest
 	}
 
@@ -844,7 +845,7 @@ class GpxFile : GpxExtensions {
 			routeTypes.add(cloneRouteType(rt))
 		}
 		dest.routeTypes = routeTypes
-		copyExtensions(source)
+		dest.copyExtensions(source)
 		return dest
 	}
 
