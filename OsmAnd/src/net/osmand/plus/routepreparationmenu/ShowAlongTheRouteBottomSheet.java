@@ -248,21 +248,21 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 				WaypointDialogHelper.updatePointInfoView(app, mapActivity, convertView, item.point, true, nightMode, true, false);
 
 				convertView.findViewById(R.id.waypoint_container).setOnClickListener(v -> {
-                    Fragment fragment = getTargetFragment();
-                    if (fragment != null) {
-                        fragment.onActivityResult(getTargetRequestCode(), SHOW_CONTENT_ITEM_REQUEST_CODE, null);
-                    }
-                    dismiss();
-                    WaypointDialogHelper.showOnMap(app, mapActivity, item.point.getPoint(), false);
-                });
+					Fragment fragment = getTargetFragment();
+					if (fragment != null) {
+						fragment.onActivityResult(getTargetRequestCode(), SHOW_CONTENT_ITEM_REQUEST_CODE, null);
+					}
+					dismiss();
+					WaypointDialogHelper.showOnMap(app, mapActivity, item.point.getPoint(), false);
+				});
 
 				ImageButton remove = convertView.findViewById(R.id.info_close);
 				remove.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_remove_dark));
 				remove.setOnClickListener(v -> {
-                    app.getWaypointHelper().removeVisibleLocationPoint(item.point);
-                    group.subItems.remove(item);
-                    adapter.notifyDataSetChanged();
-                });
+					app.getWaypointHelper().removeVisibleLocationPoint(item.point);
+					group.subItems.remove(item);
+					adapter.notifyDataSetChanged();
+				});
 			}
 
 			View bottomDivider = convertView.findViewById(R.id.bottom_divider);
@@ -471,19 +471,19 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 
 	private void enableType(int type, boolean enable) {
 		waypointHelper.switchWaypointTypeAsync(type, enable, () -> {
-            if (isAdded()) {
-                updateAdapter();
-                updateMenu();
-            }
-        });
+			if (isAdded()) {
+				updateAdapter();
+				updateMenu();
+			}
+		});
 	}
 
 	private void recalculatePoints(int type) {
 		waypointHelper.recalculatePointsAsync(type, () -> {
-            if (isAdded()) {
-                updateAdapter();
-            }
-        });
+			if (isAdded()) {
+				updateAdapter();
+			}
+		});
 	}
 
 	private static class ContentItem {
