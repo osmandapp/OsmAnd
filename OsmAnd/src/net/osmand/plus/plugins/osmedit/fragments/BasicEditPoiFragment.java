@@ -119,6 +119,7 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment implements OnFragme
 		return view;
 	}
 
+	@Nullable
 	private EditPoiDialogFragment getEditPoiFragment() {
 		return (EditPoiDialogFragment) getParentFragment();
 	}
@@ -176,8 +177,13 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment implements OnFragme
 		contentAdapter.notifyDataSetChanged();
 	}
 
+	@Nullable
 	private EditPoiData getData() {
-		return getEditPoiFragment().getEditPoiData();
+		EditPoiDialogFragment fragment = getEditPoiFragment();
+		if (fragment == null) {
+			return null;
+		}
+		return fragment.getEditPoiData();
 	}
 
 	@Override
