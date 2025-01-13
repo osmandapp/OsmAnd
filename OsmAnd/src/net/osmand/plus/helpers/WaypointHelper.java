@@ -68,12 +68,11 @@ public class WaypointHelper {
 	public static final int[] SEARCH_RADIUS_VALUES = {50, 100, 200, 500, 1000, 2000, 5000};
 	private static final double DISTANCE_IGNORE_DOUBLE_SPEEDCAMS = 150;
 	private static final double DISTANCE_IGNORE_DOUBLE_RAILWAYS = 50;
-
+	private static final int SAME_ALARM_INTERVAL = 30;//in seconds
 	private List<List<LocationPointWrapper>> locationPoints = new ArrayList<>();
 	private final ConcurrentHashMap<LocationPoint, Integer> locationPointsStates = new ConcurrentHashMap<>();
 	private final ConcurrentHashMap<AlarmInfoType, AlarmInfo> lastAnnouncedAlarms = new ConcurrentHashMap<>();
 	private final ConcurrentHashMap<AlarmInfoType, Long> lastAnnouncedAlarmsTime = new ConcurrentHashMap<>();
-	private static final int SAME_ALARM_INTERVAL = 30;//in seconds
 	private TIntArrayList pointsProgress = new TIntArrayList();
 	private RouteCalculationResult route;
 
@@ -85,7 +84,6 @@ public class WaypointHelper {
 		settings = app.getSettings();
 		appMode = settings.getApplicationMode();
 	}
-
 
 	public List<LocationPointWrapper> getWaypoints(int type) {
 		if (type == TARGETS) {
@@ -260,7 +258,7 @@ public class WaypointHelper {
 		return mostImportant;
 	}
 
-	public void enableWaypointType(int type, boolean enable) {
+	public void switchWaypointType(int type, boolean enable) {
 		//An item will be displayed in the Waypoint list if either "Show..." or "Announce..." is selected for it in the Navigation settings
 		//Keep both "Show..." and "Announce..." Nav settings in sync when user changes what to display in the Waypoint list, as follows:
 		if (type == ALARMS) {
@@ -572,50 +570,51 @@ public class WaypointHelper {
 	}
 
 	protected void recalculatePoints(RouteCalculationResult route, int type, List<List<LocationPointWrapper>> locationPoints) {
+		if (route == null || route.isEmpty()) {
+			return;
+		}
 		boolean all = type == -1;
 		appMode = settings.getApplicationMode();
-		if (route != null && !route.isEmpty()) {
-			boolean showWaypoints = settings.SHOW_WPT.get(); // global
-			boolean announceWaypoints = settings.ANNOUNCE_WPT.get(); // global
+		boolean showWaypoints = settings.SHOW_WPT.get(); // global
+		boolean announceWaypoints = settings.ANNOUNCE_WPT.get(); // global
 
+		if (route.getAppMode() != null) {
+			appMode = route.getAppMode();
+		}
+		boolean showPOI = settings.SHOW_NEARBY_POI.getModeValue(appMode);
+		boolean showFavorites = settings.SHOW_NEARBY_FAVORITES.getModeValue(appMode);
+		boolean announceFavorites = settings.ANNOUNCE_NEARBY_FAVORITES.getModeValue(appMode);
+		boolean announcePOI = settings.ANNOUNCE_NEARBY_POI.getModeValue(appMode);
+
+		if ((type == FAVORITES || all)) {
+			List<LocationPointWrapper> array = clearAndGetArray(locationPoints, FAVORITES);
+			if (showFavorites) {
+				findLocationPoints(route, FAVORITES, array, app.getFavoritesHelper().getVisibleFavouritePoints(),
+						announceFavorites);
+				sortList(array);
+			}
+		}
+		if ((type == ALARMS || all)) {
+			List<LocationPointWrapper> array = clearAndGetArray(locationPoints, ALARMS);
 			if (route.getAppMode() != null) {
-				appMode = route.getAppMode();
+				calculateAlarms(route, array, appMode);
+				sortList(array);
 			}
-			boolean showPOI = settings.SHOW_NEARBY_POI.getModeValue(appMode);
-			boolean showFavorites = settings.SHOW_NEARBY_FAVORITES.getModeValue(appMode);
-			boolean announceFavorites = settings.ANNOUNCE_NEARBY_FAVORITES.getModeValue(appMode);
-			boolean announcePOI = settings.ANNOUNCE_NEARBY_POI.getModeValue(appMode);
-
-			if ((type == FAVORITES || all)) {
-				List<LocationPointWrapper> array = clearAndGetArray(locationPoints, FAVORITES);
-				if (showFavorites) {
-					findLocationPoints(route, FAVORITES, array, app.getFavoritesHelper().getVisibleFavouritePoints(),
-							announceFavorites);
-					sortList(array);
-				}
+		}
+		if ((type == WAYPOINTS || all)) {
+			List<LocationPointWrapper> array = clearAndGetArray(locationPoints, WAYPOINTS);
+			if (showWaypoints) {
+				findLocationPoints(route, WAYPOINTS, array, app.getAppCustomization().getWaypoints(),
+						announceWaypoints);
+				findLocationPoints(route, WAYPOINTS, array, route.getLocationPoints(), announceWaypoints);
+				sortList(array);
 			}
-			if ((type == ALARMS || all)) {
-				List<LocationPointWrapper> array = clearAndGetArray(locationPoints, ALARMS);
-				if (route.getAppMode() != null) {
-					calculateAlarms(route, array, appMode);
-					sortList(array);
-				}
-			}
-			if ((type == WAYPOINTS || all)) {
-				List<LocationPointWrapper> array = clearAndGetArray(locationPoints, WAYPOINTS);
-				if (showWaypoints) {
-					findLocationPoints(route, WAYPOINTS, array, app.getAppCustomization().getWaypoints(),
-							announceWaypoints);
-					findLocationPoints(route, WAYPOINTS, array, route.getLocationPoints(), announceWaypoints);
-					sortList(array);
-				}
-			}
-			if ((type == POI || all)) {
-				List<LocationPointWrapper> array = clearAndGetArray(locationPoints, POI);
-				if (showPOI) {
-					calculatePoi(route, array, announcePOI);
-					sortList(array);
-				}
+		}
+		if ((type == POI || all)) {
+			List<LocationPointWrapper> array = clearAndGetArray(locationPoints, POI);
+			if (showPOI) {
+				calculatePoi(route, array, announcePOI);
+				sortList(array);
 			}
 		}
 	}
