@@ -20,7 +20,7 @@
         android:id="@+id/search_inside_disabled_profiles"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="search inside disabled profiles"
+        android:text="@string/search_inside_disabled_profiles"
         app:layout_constraintBottom_toTopOf="@+id/searchResultsFragmentContainerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
