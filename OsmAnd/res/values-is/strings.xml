@@ -5640,4 +5640,16 @@
     <string name="shared_string_engine">Vél</string>
     <string name="preview_next_turn">Forskoða næstu beygju</string>
     <string name="rendering_attr_showClimbingRoutes_name">Klifurleiðir</string>
+    <string name="display_distance_to_first_intermediate_summary">Birtir fyrst tíma og fjarlægð að næsta áfangastað. Slökktu á þessu til að sýna alltaf ítarlegar upplýsingar fyrir endanlega áfangastaðinn.</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Sýna klifurleiðir</string>
+    <string name="calculate_size">Reikna stærð</string>
+    <string name="default_buttons_size_original_description">Hver hnappur myndi halda sinni stærð.</string>
+    <string name="default_buttons_corners_original_description">Hver hnappur myndi halda sínum hornradíus.</string>
+    <string name="default_buttons_opacity_original_description">Hver hnappur myndi halda sínu ógegnsæi bakgrunns.</string>
+    <string name="selected_delayed_profile">Valið snið \"%s\"</string>
+    <string name="shared_string_interpolation">Brúun</string>
+    <string name="location_interpolation_percent_desc">Stilltu prósentuhlutfall brúunar (forspár) á staðsetningu á meðan leiðsögn stendur. Þessi breyta minnkar seinkun á birtingu staðsetningar þinnar á kortinu á meðan hreyfingu stendur.</string>
+    <string name="location_interpolation_percent">Prósentuhlutfall brúunar á staðsetningu</string>
+    <string name="calculating_indication_message">Reikna…</string>
+    <string name="display_distance_to_first_intermediate">Sýna ítarlegri upplýsingar um næsta áfangastað</string>
 </resources>
