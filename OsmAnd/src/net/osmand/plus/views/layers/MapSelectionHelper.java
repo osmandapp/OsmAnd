@@ -491,7 +491,7 @@ public class MapSelectionHelper {
 	}
 
 	private boolean addClickableWayV1(@NonNull MapSelectionResult result, @NonNull RenderedObject renderedObject) {
-		ClickableWay clickableWay = clickableWayLoader.searchClickableWayV1(result.pointLatLon, renderedObject);
+		ClickableWay clickableWay = clickableWayLoader.loadClickableWayV1(result.pointLatLon, renderedObject);
 		if (clickableWay != null && isUniqueClickableWay(result.selectedObjects, clickableWay)) {
 			result.selectedObjects.put(clickableWay, clickableWayLoader.getContextMenuProvider());
 			return true;
@@ -501,7 +501,7 @@ public class MapSelectionHelper {
 
 	private boolean addClickableWayV2(@NonNull MapSelectionResult result, @NonNull ObfMapObject obfMapObject,
 									  @NonNull Map<String, String> tags) {
-		ClickableWay clickableWay = clickableWayLoader.searchClickableWayV2(result.pointLatLon, obfMapObject, tags);
+		ClickableWay clickableWay = clickableWayLoader.loadClickableWayV2(result.pointLatLon, obfMapObject, tags);
 		if (clickableWay != null && isUniqueClickableWay(result.selectedObjects, clickableWay)) {
 			result.selectedObjects.put(clickableWay, clickableWayLoader.getContextMenuProvider());
 			return true;

@@ -3,9 +3,11 @@ package net.osmand.plus.track.clickable;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 
 import android.graphics.PointF;
+import android.os.AsyncTask;
 
 import androidx.annotation.Nullable;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -35,13 +37,22 @@ public class ClickableWayActivator implements ContextMenuLayer.IContextMenuProvi
     @Override
     public boolean showMenuAction(@Nullable Object object) {
         if (object instanceof ClickableWay that) {
+
             MapActivity mapActivity = view.getMapActivity();
-            GpxFile gpxFile = that.getGpxFile();
-            GpxTrackAnalysis analysis = gpxFile.getAnalysis(0);
-            WptPt selectedPoint = that.getSelectedGpxPoint().getSelectedPoint();
-            String safeFileName = that.getGpxFileName() + GPX_FILE_EXT;
-            File file = new File(FileUtils.getTempDir(app), safeFileName);
-            GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, selectedPoint, analysis, null, true);
+
+            CallbackWithObject<ClickableWay> callback = clickableWay -> {
+                GpxFile gpxFile = that.getGpxFile();
+                // gpxFile.setWidth("bold"); // TODO just a test
+                GpxTrackAnalysis analysis = gpxFile.getAnalysis(0);
+                String safeFileName = that.getGpxFileName() + GPX_FILE_EXT;
+                File file = new File(FileUtils.getTempDir(app), safeFileName);
+                WptPt selectedPoint = that.getSelectedGpxPoint().getSelectedPoint();
+                GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, selectedPoint, analysis, null, true);
+                return true;
+            };
+
+            ClickableWayReaderTask readerTask = new ClickableWayReaderTask(mapActivity, that, callback);
+            readerTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             return true;
         }
         return false;

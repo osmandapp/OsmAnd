@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -12,17 +13,20 @@ import net.osmand.util.Algorithms;
 public class ClickableWay {
     private final long osmId;
     private final String name;
+    private final QuadRect bbox;
     private final GpxFile gpxFile;
     private final SelectedGpxPoint selectedGpxPoint;
 
     public ClickableWay(@NonNull GpxFile gpxFile, long osmId, @Nullable String name,
-                        @NonNull LatLon selectedPointCoordinates) {
+                        @NonNull LatLon selectedLatLon, @NonNull QuadRect bbox) {
         this.gpxFile = gpxFile;
         this.osmId = osmId;
         this.name = name;
+        this.bbox = bbox;
+
         WptPt wpt = new WptPt();
-        wpt.setLat(selectedPointCoordinates.getLatitude());
-        wpt.setLon(selectedPointCoordinates.getLongitude());
+        wpt.setLat(selectedLatLon.getLatitude());
+        wpt.setLon(selectedLatLon.getLongitude());
         this.selectedGpxPoint = new SelectedGpxPoint(null, wpt);
     }
 

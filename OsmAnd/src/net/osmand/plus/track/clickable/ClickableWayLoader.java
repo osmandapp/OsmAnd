@@ -54,6 +54,8 @@ public class ClickableWayLoader {
             // others are default (red)
     );
 
+    // TODO implement simple cache <id, GpxFile>
+
     private final OsmandApplication app;
     private final ClickableWayActivator activator;
 
@@ -76,19 +78,19 @@ public class ClickableWayLoader {
     }
 
     @Nullable
-    public ClickableWay searchClickableWayV1(@NonNull LatLon searchLatLon, @NonNull RenderedObject renderedObject) {
+    public ClickableWay loadClickableWayV1(@NonNull LatLon selectedLatLon, @NonNull RenderedObject renderedObject) {
         long osmId = ObfConstants.getOsmId(renderedObject.getId() >> AMENITY_ID_RIGHT_SHIFT);
         Map<String, String> tags = renderedObject.getTags();
         String name = renderedObject.getName();
         TIntArrayList xPoints = renderedObject.getX();
         TIntArrayList yPoints = renderedObject.getY();
-        int searchRadius = calcSearchRadius(xPoints, yPoints);
-        return searchClickableWay(searchLatLon, searchRadius, xPoints, yPoints, osmId, name, tags);
+        QuadRect bbox = calcSearchQuadRect(xPoints, yPoints);
+        return loadClickableWay(selectedLatLon, bbox, xPoints, yPoints, osmId, name, tags);
     }
 
     @Nullable
-    public ClickableWay searchClickableWayV2(@NonNull LatLon searchLatLon, @NonNull ObfMapObject obfMapObject,
-                                             @NonNull Map<String, String> tags) {
+    public ClickableWay loadClickableWayV2(@NonNull LatLon selectedLatLon, @NonNull ObfMapObject obfMapObject,
+                                           @NonNull Map<String, String> tags) {
         long id = obfMapObject.getId().getId().longValue();
         long osmId = ObfConstants.getOsmId(id >> AMENITY_ID_RIGHT_SHIFT);
         String name = obfMapObject.getCaptionInNativeLanguage();
@@ -99,13 +101,13 @@ public class ClickableWayLoader {
             xPoints.add(points31.get(i).getX());
             yPoints.add(points31.get(i).getY());
         }
-        int searchRadius = calcSearchRadius(xPoints, yPoints);
-        return searchClickableWay(searchLatLon, searchRadius, xPoints, yPoints, osmId, name, tags);
+        QuadRect bbox = calcSearchQuadRect(xPoints, yPoints);
+        return loadClickableWay(selectedLatLon, bbox, xPoints, yPoints, osmId, name, tags);
     }
 
-    private ClickableWay searchClickableWay(LatLon searchLatLon, int searchRadius,
-                                            TIntArrayList xPoints, TIntArrayList yPoints,
-                                            long osmId, String name, Map<String, String> tags) {
+    private ClickableWay loadClickableWay(LatLon selectedLatLon, QuadRect bbox,
+                                          TIntArrayList xPoints, TIntArrayList yPoints,
+                                          long osmId, String name, Map<String, String> tags) {
         GpxFile gpxFile = new GpxFile(Version.getFullVersion(app));
 
         if (!Algorithms.isEmpty(name)) {
@@ -143,13 +145,7 @@ public class ClickableWayLoader {
             gpxFile.setColor(color);
         }
 
-        // TODO cache <id, GpxFile>
-
-        // TODO fetch elevation data from routing-section - RouteSectionReader.java
-
-        // TODO calc distance stats, elevation stats, etc (automatically if data exists)
-
-        return new ClickableWay(gpxFile, osmId, name, searchLatLon);
+        return new ClickableWay(gpxFile, osmId, name, selectedLatLon, bbox);
     }
 
     @Nullable
@@ -167,12 +163,12 @@ public class ClickableWayLoader {
         return null;
     }
 
-    private int calcSearchRadius(TIntArrayList x, TIntArrayList y) {
+    private QuadRect calcSearchQuadRect(TIntArrayList x, TIntArrayList y) {
         QuadRect bbox = new QuadRect();
         for (int i = 0; i < Math.min(x.size(), y.size()); i++) {
             bbox.expand(x.get(i), y.get(i), x.get(i), y.get(i));
         }
-        return (int)MapUtils.measuredDist31((int)bbox.left, (int)bbox.top, (int)bbox.right, (int)bbox.bottom);
+        return bbox; // (int)MapUtils.measuredDist31((int)bbox.left, (int)bbox.top, (int)bbox.right, (int)bbox.bottom);
     }
 
     private boolean isClickableWayTags(@NonNull Map<String, String> tags) {
