@@ -1,5 +1,7 @@
 package net.osmand;
 
+import net.osmand.util.ArabicNormalizer;
+
 import java.util.Locale;
 
 
@@ -55,9 +57,17 @@ public class CollatorStringMatcher implements StringMatcher {
 	public boolean matches(String name) {
 		return cmatches(collator, name, part, mode);
 	}
-	
-	
+
 	public static boolean cmatches(Collator collator, String fullName, String part, StringMatcherMode mode){
+		String withoutDiacritic = ArabicNormalizer.normalize(fullName);
+		boolean matchDiacritic = false;
+		if (!fullName.equals(withoutDiacritic)) {
+			matchDiacritic = cmatchInternal(collator, withoutDiacritic, part, mode);
+		}
+		return matchDiacritic || cmatchInternal(collator, fullName, part, mode);
+	}
+	
+	private static boolean cmatchInternal(Collator collator, String fullName, String part, StringMatcherMode mode){
 		switch (mode) {
 		case CHECK_CONTAINS:
 			return ccontains(collator, fullName, part); 

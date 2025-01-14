@@ -16,6 +16,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.util.Algorithms;
+import net.osmand.util.ArabicNormalizer;
 import net.osmand.util.LocationParser;
 import net.osmand.util.MapUtils;
 
@@ -802,7 +803,12 @@ public class SearchPhrase {
 
 		@Override
 		public boolean matches(String name) {
-			return sm.matches(name);
+			String normalized = ArabicNormalizer.normalize(name);
+			boolean matchDiacritic = false;
+			if (!name.equals(normalized)) {
+				matchDiacritic = sm.matches(normalized);
+			}
+			return matchDiacritic || sm.matches(name);
 		}
 		
 	}
