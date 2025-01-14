@@ -5639,4 +5639,5 @@
     <string name="connect_new_scanner">Tengja nýjan skynjara</string>
     <string name="shared_string_engine">Vél</string>
     <string name="preview_next_turn">Forskoða næstu beygju</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Klifurleiðir</string>
 </resources>
