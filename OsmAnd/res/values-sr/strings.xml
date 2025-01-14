@@ -5656,5 +5656,5 @@
     <string name="rendering_attr_showClimbingRoutes_name">Стазе за пењање</string>
     <string name="rendering_attr_showClimbingRoutes_description">Приказати стазе за пењање</string>
     <string name="display_distance_to_first_intermediate_summary">Прво приказује време и раздаљину до следећег заустављања. Искључите да бисте увек приказивали детаље за одредиште.</string>
-    <string name="display_distance_to_first_intermediate">Приказ детаља руте за следеће заустављање</string>
+    <string name="display_distance_to_first_intermediate_title">Приказ детаља руте за следеће заустављање</string>
 </resources>

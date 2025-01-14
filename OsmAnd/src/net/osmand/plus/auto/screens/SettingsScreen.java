@@ -44,7 +44,7 @@ public final class SettingsScreen extends BaseAndroidAutoScreen {
 				.build()
         );
 		sectionABuilder.addItem(new Row.Builder()
-				.setTitle(getCarContext().getString(R.string.display_distance_to_first_intermediate))
+				.setTitle(getCarContext().getString(R.string.display_distance_to_first_intermediate_title))
 				.addText(getCarContext().getString(R.string.display_distance_to_first_intermediate_summary))
 				.setToggle(
 						new Toggle.Builder(osmandSettings.USE_LEFT_DISTANCE_TO_INTERMEDIATE::set)
