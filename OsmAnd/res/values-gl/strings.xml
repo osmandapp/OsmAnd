@@ -34,9 +34,6 @@
     <string name="rendering_attr_publicTransportMode_name">Liñas de bus, trolebus e transbordos</string>
     <string name="monitoring_settings">Gravación de viaxes</string>
     <string name="monitoring_settings_descr">Configurar de que xeito gravar as túas viaxes.</string>
-    <string name="record_plugin_description">Este plugin activa a funcionalidade para rexistrar e gardar as túas pistas de xeito manual premendo no trebello de gravación GPX no mapa, ou automáticamente rexistrando todas as túas rutas percorridas nun ficheiro GPX. 
-\n 
-\nAs pistas gravadas poden ser compartidas coas túas amizades ou ser empregadas para contribuír ó OSM. Os atletas poden empregar as pistas gravadas para seguir os seus adestramentos. Algunhas análises básicas de pistas pódense facer directamente no OsmAnd, coma tempos por volta, velocidade media, etc., e por suposto as pistas poden analizarse de xeito posterior con ferramentas de análise de terceiros.</string>
     <string name="record_plugin_name">Gravación de viaxes</string>
     <string name="int_hour">h</string>
     <string name="duration">Duración</string>
@@ -416,9 +413,6 @@
     <string name="map_widget_audionotes">Notas de son</string>
     <string name="audionotes_plugin_description">Fai notas de audio, fotografías e/ou vídeos durante unha viaxe, empregando un botón no mapa ou o menú contextual da localización.</string>
     <string name="audionotes_plugin_name">Notas de son/vídeo</string>
-    <string name="srtm_plugin_description">Este plugin fornece unha capa de sobreposición das curvas do nivel e unha capa de sombras da altitude (relevo) que poden ser amosadas nos mapas sen conexión do OsmAnd. Esta funcionalidade pode ser moi apreciada por atletas, camiñantes, sendeiristas e calquera que teña interese pola estrutura de relevo da paisaxe. (Ten en conta que as curvas do nivel e/ou os datos do relevo están dispoñíbeis en descargas adicionais separadas logo de activares o plugin)
-\n 
-\nOs datos globais (entre os 70 graos norte e os 70 graos sul) están baseados nas medicións do SRTM (Misión Topográfica con Radar da Lanzadeira Espacial) e o ASTER (Radiómetro Espacial Avanzado de Emisión Térmica e Reflexión) e instrumentos de imaxes a bordo do Terra, o satélite máis importante do Sistema de Observación Terrestre da NASA. O ASTER é un esforzo cooperativo entre a NASA, o Ministerio de Economía do Xapón, Comercio e Industria (METI) e Sistemas Espaciais Xaponeses (J-spaceystems).</string>
     <string name="srtm_plugin_name">Curvas de nivel</string>
     <string name="download_select_map_types">Outros mapas</string>
     <string name="download_roads_only_item">Só as estradas</string>
@@ -1699,11 +1693,6 @@
 \nNon se precisa baixar ningún mapa especial, xa que a vista se xera a partir dos mapas normais. 
 \n 
 \nPódese pechar esta vista desactivándoa aquí ou mudando o \"Estilo do mapa\" en \"Configurar o mapa\" coma se desexe.</string>
-    <string name="plugin_nautical_descr">Este plugin enriquece a aplicación de mapas de navegación OsmAnd para que amose tamén mapas náuticos para viaxes en barco e outros tipos de deportes acuáticos. 
-\n 
-\nUnha extensión dos mapas especial para o OsmAnd fornece tódalas marcaxes náuticas e símbolos das cartas para a navegación en augas interiores e de cabotaxe. A descrición de cada marcaxe da navegación fornece os detalles precisos para identificala, así coma o seu significado (categoría, forma, cor, secuencia, referencia, etc.). 
-\n 
-\nPara voltar a un dos estilos do mapa convencionais do OsmAnd, sinxelamente hai que desactivar este plugin de novo ou mudar o \"Estilo do mapa\" en \"Configurar o mapa\" coma se desexe.</string>
     <string name="impassable_road_desc">Escolle as estradas que desexes evitar durante a navegación.</string>
     <string name="shared_string_sound">Son</string>
     <string name="no_location_permission">Outorgar acceso ós datos de localización.</string>

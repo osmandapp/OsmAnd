@@ -6063,4 +6063,6 @@
     <string name="obd_fuel_consumption_rate">Rata consumului de combustibil</string>
     <string name="obd_fuel_consumption_rate_desc">Afișează rata consumului de combustibil al vehiculului pe baza OBD și a locației</string>
     <string name="obd_fuel_left_liters">Combustibil rămas (litri)</string>
+    <string name="display_distance_to_first_intermediate_summary">Afișează mai întâi ora și distanța pentru următoarea oprire. Dezactivați pentru a afișa întotdeauna detaliile pentru destinație.</string>
+    <string name="display_distance_to_first_intermediate">Afișați detaliile traseului pentru următoarea oprire</string>
 </resources>

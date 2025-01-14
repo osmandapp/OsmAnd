@@ -5660,4 +5660,6 @@
     <string name="calculating_indication_message">Preračunavanje…</string>
     <string name="rendering_attr_showClimbingRoutes_name">Staze za penjanje</string>
     <string name="rendering_attr_showClimbingRoutes_description">Prikazati staze za penjanje</string>
+    <string name="display_distance_to_first_intermediate_summary">Prvo prikazuje vreme i razdaljinu do sledećeg zaustavljanja. Isključite da biste uvek prikazivali detalje za odredište.</string>
+    <string name="display_distance_to_first_intermediate">Prikaz detalja rute za sledeće zaustavljanje</string>
 </resources>

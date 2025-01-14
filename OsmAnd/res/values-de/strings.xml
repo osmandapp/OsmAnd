@@ -2841,7 +2841,7 @@
     <string name="profile_alert_need_save_title">Änderungen speichern</string>
     <string name="profile_alert_need_save_msg">Änderungen am Profil zuerst speichern</string>
     <string name="profile_alert_delete_title">Profil löschen</string>
-    <string name="profile_alert_delete_msg">Profil „%1$s“ löschen</string>
+    <string name="profile_alert_delete_msg">Profil „%s“ löschen</string>
     <string name="select_base_profile_dialog_title">Wählen Sie zunächst ein Profil aus</string>
     <string name="select_base_profile_dialog_message">Bauen Sie ein eigenes Anwendungsprofil auf einem der Standardprofile der App auf. Dieses bestimmt die Grundeinstellungen wie Voreinstellungen zur Sichtbarkeit von Widgets und die Einheiten für Geschwindigkeit und Entfernungen. Dies sind die App-Standardprofile zusammen mit Beispielen für eigene Anwendungsprofile, die erweitert werden können:</string>
     <string name="select_nav_profile_dialog_title">Navigationsart auswählen</string>
@@ -5574,7 +5574,7 @@
     <string name="connect_obd_instructions_step1">Den Scanner an den OBD-II-Anschluss Ihres Fahrzeugs anschließen.</string>
     <string name="connect_obd_instructions_step2">Den Motor Ihres Fahrzeugs einschalten</string>
     <string name="learn_more_about_obd_sensors">Mehr über Sensoren erfahren.</string>
-    <string name="connect_obd_instructions_step4">Auf „Verbinden“ tippen und den Scanner aus der Liste auswählen.</string>
+    <string name="connect_obd_instructions_step4">Auf „%1$s“ tippen und den Scanner aus der Liste auswählen.</string>
     <string name="connect_obd_instructions_title">OsmAnd unterstützt Bluetooth-Verbindungen zu OBD-II-Scannern.</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
     <string name="obd_vehicle_info">Fahrzeuginformation</string>
@@ -5681,4 +5681,6 @@
     <string name="default_buttons_opacity_original_description">Jede Schaltfläche würde ihre eigene Transparenz behalten.</string>
     <string name="rendering_attr_showClimbingRoutes_name">Kletterrouten</string>
     <string name="rendering_attr_showClimbingRoutes_description">Kletterrouten anzeigen</string>
+    <string name="display_distance_to_first_intermediate_summary">Zeigt zuerst die Zeit und Entfernung für den nächsten Halt an. Schalte um, um immer Details zum Ziel anzuzeigen.</string>
+    <string name="display_distance_to_first_intermediate">Zeige Routendetails zum nächsten Halt</string>
 </resources>

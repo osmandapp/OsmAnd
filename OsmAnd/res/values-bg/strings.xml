@@ -4401,7 +4401,7 @@
     <string name="obd_how_to_connect">Как да свържете:</string>
     <string name="connect_obd_instructions_step2">Включете двигателя.</string>
     <string name="connect_obd_instructions_step3">Включете Bluetooth на устройството.</string>
-    <string name="connect_obd_instructions_step4">Докоснете „Свързване“ и изберете скенера от списъка.</string>
+    <string name="connect_obd_instructions_step4">Докоснете „%1$s“ и изберете скенера от списъка.</string>
     <string name="learn_more_about_obd_sensors">Научете повече за сензорите.</string>
     <string name="obd_fuel_left_liters">Оставащо гориво (литри)</string>
     <string name="obd_fuel_type_electric">Електричество</string>

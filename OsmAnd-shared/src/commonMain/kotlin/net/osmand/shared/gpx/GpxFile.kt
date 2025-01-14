@@ -476,7 +476,7 @@ class GpxFile : GpxExtensions {
 		val tpoints = mutableListOf<TrkSegment>()
 		if (routes.isNotEmpty()) {
 			for (route in routes) {
-				val routeColor = route.getColor(getColor(0))
+				val routeColor = route.getColor(getColor(null))
 				if (route.points.isNotEmpty()) {
 					val ts = TrkSegment()
 					tpoints.add(ts)
@@ -491,7 +491,7 @@ class GpxFile : GpxExtensions {
 	fun processPoints(): List<TrkSegment> {
 		val tpoints = mutableListOf<TrkSegment>()
 		for (track in tracks) {
-			val trackColor = track.getColor(getColor(0))
+			val trackColor = track.getColor(getColor(null))
 			for (segment in track.segments) {
 				val segmentColor = segment.getColor(trackColor)
 				if (!segment.generalSegment && segment.points.isNotEmpty()) {

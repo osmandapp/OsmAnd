@@ -5070,4 +5070,24 @@
     <string name="distance_during_navigation_description">Выберыце спосаб адлюстравання інфармацыі аб адлегласці ў віджэтах навігацыі (адлегласць да пункту прызначэння, наступнага павароту, паласы).
 \n
 \n Выберыце «%1$s» для дакладных лічбаў або «%2$s» для больш зручнай чытальнасці.</string>
+    <string name="display_distance_to_first_intermediate">Паказаць дэталі маршрута да наступнага прыпынку</string>
+    <string name="display_distance_to_first_intermediate_summary">Спачатку паказаць час і адлегласць да наступнага прыпынку. Выключыць, каб заўсёды паказваць дэталі для пункта прызначэння.</string>
+    <string name="av_audio_sample_rate_descr">Абраць частату дыскрэтызацыі аўдыё.</string>
+    <string name="auto_zoom_3d_angle">Аўтаматычны зум 3D-вугал</string>
+    <string name="default_buttons_size_original_description">Кожная кнопка будзе захоўваць свой памер.</string>
+    <string name="default_buttons_opacity_original_description">Кожная кнопка будзе захоўваць сваю празрыстасць фону.</string>
+    <string name="default_buttons_corners_original_description">Кожная кнопка будзе захоўваць свой радыус закруглення кутоў.</string>
+    <string name="connect_new_scanner">Падключыць новы сканер</string>
+    <string name="preview_next_turn">Папярэдні прагляд наступнага павароту</string>
+    <string name="location_interpolation_percent_desc">Усталюйце працэнт інтэрпаляцыі месцазнаходжання падчас навігацыі па маршруце. Гэты параметр памяншае затрымку вашай пазіцыі на карце падчас анімацыі.</string>
+    <string name="av_audio_sample_rate">Частата дыскрэтызацыі аўдыё</string>
+    <string name="shared_string_engine">Рухавік</string>
+    <string name="vehicle_metrics_recording_description">Абраць параметры для запісу ў файл GPX.</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Маршруты для ўздыму</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Паказаць маршруты для ўздыму</string>
+    <string name="calculating_indication_message">Вылічэнне…</string>
+    <string name="calculate_size">Вылічыць памер</string>
+    <string name="location_interpolation_percent">Працэнт інтэрпаляцыі месцазнаходжання</string>
+    <string name="selected_delayed_profile">Абраны профіль \"%s\"</string>
+    <string name="shared_string_interpolation">Інтэрпаляцыя</string>
 </resources>
