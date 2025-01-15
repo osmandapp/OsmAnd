@@ -78,9 +78,15 @@ public class CustomAlert {
 
 	public static void showSingleSelection(@NonNull AlertDialogData data, @NonNull CharSequence[] items,
 	                                       int selectedEntryIndex, @Nullable View.OnClickListener itemClickListener) {
+		showSingleSelection(data, items, null, selectedEntryIndex, itemClickListener);
+	}
+
+	public static void showSingleSelection(@NonNull AlertDialogData data, @NonNull CharSequence[] items,
+	                                       @Nullable CharSequence[] descriptions, int selectedEntryIndex,
+	                                       @Nullable View.OnClickListener itemClickListener) {
 		AlertDialog.Builder builder = createAlertDialogBuilder(data);
 		SelectionDialogAdapter adapter = new SelectionDialogAdapter(
-				data.getContext(), items, selectedEntryIndex, null,
+				data.getContext(), data.getItemsLayoutRes(), items, descriptions, selectedEntryIndex, null,
 				data.getControlsColor(), data.isNightMode(), itemClickListener, false
 		);
 		builder.setAdapter(adapter, null);
@@ -92,9 +98,15 @@ public class CustomAlert {
 
 	public static void showMultiSelection(@NonNull AlertDialogData data, @NonNull CharSequence[] items,
 	                                      @Nullable boolean[] checkedItems, @Nullable View.OnClickListener itemClickListener) {
+		showMultiSelection(data, items, null, checkedItems, itemClickListener);
+	}
+
+	public static void showMultiSelection(@NonNull AlertDialogData data, @NonNull CharSequence[] items,
+										  @Nullable CharSequence[] descriptions, @Nullable boolean[] checkedItems,
+										  @Nullable View.OnClickListener itemClickListener) {
 		AlertDialog.Builder builder = createAlertDialogBuilder(data);
 		SelectionDialogAdapter adapter = new SelectionDialogAdapter(
-				data.getContext(), items, INVALID_ID, checkedItems,
+				data.getContext(), data.getItemsLayoutRes(), items, descriptions, INVALID_ID, checkedItems,
 				data.getControlsColor(), data.isNightMode(), itemClickListener, true
 		);
 		builder.setAdapter(adapter, null);
