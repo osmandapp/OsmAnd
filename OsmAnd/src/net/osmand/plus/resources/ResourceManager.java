@@ -1284,13 +1284,7 @@ public class ResourceManager {
 	}
 
 	public static boolean copyAssets(@NonNull AssetManager manager, @NonNull String name,
-			@NonNull File file, @Nullable Long lastModifiedTime) throws IOException {
-		copyAssets(manager, name, file);
-		return lastModifiedTime != null && file.setLastModified(lastModifiedTime);
-	}
-
-	public static void copyAssets(@NonNull AssetManager manager, @NonNull String name,
-			@NonNull File file) throws IOException {
+			@NonNull File file, @Nullable Long modifiedTime) throws IOException {
 		if (file.exists()) {
 			Algorithms.removeAllFiles(file);
 		}
@@ -1300,5 +1294,7 @@ public class ResourceManager {
 		Algorithms.streamCopy(is, out);
 		Algorithms.closeStream(out);
 		Algorithms.closeStream(is);
+
+		return modifiedTime != null && file.setLastModified(modifiedTime);
 	}
 }
