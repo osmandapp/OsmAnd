@@ -803,12 +803,7 @@ public class SearchPhrase {
 
 		@Override
 		public boolean matches(String name) {
-			String normalized = ArabicNormalizer.normalize(name);
-			boolean matchDiacritic = false;
-			if (!name.equals(normalized)) {
-				matchDiacritic = sm.matches(normalized);
-			}
-			return matchDiacritic || sm.matches(name);
+			return sm.matches(name);
 		}
 		
 	}

@@ -58,16 +58,13 @@ public class CollatorStringMatcher implements StringMatcher {
 		return cmatches(collator, name, part, mode);
 	}
 
-	public static boolean cmatches(Collator collator, String fullName, String part, StringMatcherMode mode){
-		String withoutDiacritic = ArabicNormalizer.normalize(fullName);
-		boolean matchDiacritic = false;
-		if (!fullName.equals(withoutDiacritic)) {
-			matchDiacritic = cmatchInternal(collator, withoutDiacritic, part, mode);
+	public static boolean cmatches(Collator collator, String fullName, String part, StringMatcherMode mode) {
+		if (ArabicNormalizer.isSpecialArabic(fullName)) {
+			fullName = ArabicNormalizer.normalize(fullName);
 		}
-		return matchDiacritic || cmatchInternal(collator, fullName, part, mode);
-	}
-	
-	private static boolean cmatchInternal(Collator collator, String fullName, String part, StringMatcherMode mode){
+		if (ArabicNormalizer.isSpecialArabic(part)) {
+			part = ArabicNormalizer.normalize(part);
+		}
 		switch (mode) {
 		case CHECK_CONTAINS:
 			return ccontains(collator, fullName, part); 
