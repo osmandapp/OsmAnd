@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.NativeLibrary.RenderedObject;
+import net.osmand.binary.HeightDataLoader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.core.jni.ObfMapObject;
 import net.osmand.core.jni.QVectorPointI;
@@ -63,8 +64,6 @@ public class ClickableWayHelper {
     private final OsmandApplication app;
     private final OsmandMapTileView view;
     private final ClickableWayMenuActivator activator;
-
-//    private static final Log log = PlatformUtil.getLog(ClickableWay.class);
 
     public ClickableWayHelper(@NonNull OsmandApplication app, @NonNull OsmandMapTileView view) {
         this.app = app;
@@ -195,23 +194,9 @@ public class ClickableWayHelper {
     }
 
     private boolean readHeightData(ClickableWay clickableWay) {
-        // TODO read height data, implement simple cache
-//        BinaryMapIndexReader[] readers = app.getResourceManager().getReverseGeocodingMapFiles();
-//        NetworkRouteSelector.NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelector.NetworkRouteSelectorFilter();
-//        NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter, null);
-//        try {
-//            QuadRect bbox31 = clickableWay.getBbox();
-//            QuadRect bboxLatLon = new QuadRect(
-//                    MapUtils.get31LongitudeX((int)bbox31.left),
-//                    MapUtils.get31LatitudeY((int)bbox31.top),
-//                    MapUtils.get31LongitudeX((int)bbox31.right),
-//                    MapUtils.get31LatitudeY((int)bbox31.bottom)
-//            );
-//            Map<NetworkRouteSelector.RouteKey, GpxFile> routes = routeSelector.getRoutes(bboxLatLon, true, null);
-//            System.err.printf("XXX routes\n");
-//        } catch (IOException e) {
-//            log.error(e);
-//        }
+        HeightDataLoader loader = new HeightDataLoader(app.getResourceManager().getReverseGeocodingMapFiles());
+        loader.loadHeightData(clickableWay.getOsmId(), clickableWay.getBbox());
+        // TODO read height data, apply to the GpxFile points
         return true;
     }
 
