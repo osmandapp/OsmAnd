@@ -143,6 +143,7 @@ public class OsmandSettings {
 	private final Map<String, CommonPreference<String>> customRendersProps = new LinkedHashMap<>();
 	private final Map<String, CommonPreference<Boolean>> customBooleanRoutingProps = new LinkedHashMap<>();
 	private final Map<String, CommonPreference<Boolean>> customBooleanRendersProps = new LinkedHashMap<>();
+	private final Map<String, CommonPreference<Boolean>> customBooleanRenderClassProps = new LinkedHashMap<>();
 
 	private final ImpassableRoadsStorage impassableRoadsStorage = new ImpassableRoadsStorage(this);
 	private final IntermediatePointsStorage intermediatePointsStorage = new IntermediatePointsStorage(this);
@@ -3116,6 +3117,16 @@ public class OsmandSettings {
 			registerCustomRenderBooleanProperty(attrName, false);
 		}
 		return customBooleanRendersProps.get(attrName);
+	}
+
+	@NonNull
+	public CommonPreference<Boolean> getСustomBooleanRenderClassProperty(@NonNull String className, boolean defaultValue) {
+		if (!customBooleanRenderClassProps.containsKey(className)) {
+			CommonPreference<Boolean> preference = new BooleanPreference(this, className, defaultValue).makeProfile();
+			customBooleanRenderClassProps.put(className, preference);
+			return preference;
+		}
+		return customBooleanRenderClassProps.get(className);
 	}
 
 	@NonNull

@@ -1,8 +1,6 @@
 package net.osmand.plus.configmap;
 
 import static net.osmand.osm.OsmRouteType.HIKING;
-import static net.osmand.plus.configmap.routes.RClassUtils.RClassType.HIKING_OSMC_NODES;
-import static net.osmand.plus.configmap.routes.RClassUtils.getDataClasses;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,17 +15,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.configmap.RouteLegendCard.DataClass;
 import net.osmand.plus.configmap.routes.RouteLayersHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
+import net.osmand.render.RenderingClass;
 import net.osmand.render.RenderingRuleProperty;
+import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -37,6 +37,7 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = HikingRoutesFragment.class.getSimpleName();
 	public static final String NODE_NETWORKS_VALUE = "walkingRoutesOSMCNodes";
+	public static final String OSMC_NODES_KEY = ".route.hiking.osmc_nodes";
 
 	private RouteLayersHelper routeLayersHelper;
 	@Nullable
@@ -59,7 +60,8 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 	}
 
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 		updateNightMode();
 		View view = themedInflater.inflate(R.layout.map_route_types_fragment, container, false);
 
@@ -164,7 +166,7 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 		String propertyValue = routeLayersHelper.getSelectedHikingRoutesValue();
 
 		if (NODE_NETWORKS_VALUE.equals(propertyValue)) {
-			List<DataClass> dataClasses = getDataClasses(app, HIKING_OSMC_NODES);
+			List<RenderingClass> dataClasses = getDataClasses(app);
 			if (!Algorithms.isEmpty(dataClasses)) {
 				RouteLegendCard card = new RouteLegendCard(requireActivity(), dataClasses, app.getString(R.string.shared_string_legend));
 				View cardView = card.build();
@@ -176,6 +178,20 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 		} else {
 			AndroidUiHelper.updateVisibility(container, false);
 		}
+	}
+
+	@NonNull
+	public List<RenderingClass> getDataClasses(@NonNull OsmandApplication app) {
+		List<RenderingClass> renderingClasses = new ArrayList<>();
+
+		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		if (renderer != null) {
+			RenderingClass renderingClass = renderer.getRenderingClass(OSMC_NODES_KEY);
+			if (renderingClass != null) {
+				renderingClasses.addAll(renderingClass.getChildren());
+			}
+		}
+		return renderingClasses;
 	}
 
 	private void refreshMap() {

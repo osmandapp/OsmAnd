@@ -269,14 +269,15 @@ public class RenderingRulesStorage {
 	}
 	
 	private class RenderingRulesHandler {
+
 		private final XmlPullParser parser;
 		private int state;
-		Stack<RenderingRule> stack = new Stack<RenderingRule>();
+		private final Stack<RenderingRule> stack = new Stack<RenderingRule>();
 		private final Stack<RenderingClass> renderingClassStack = new Stack<>();
 		private final RenderingRulesStorageResolver resolver;
 		private final boolean addon;
 		private RenderingRulesStorage dependsStorage;
-		
+
 		public RenderingRulesHandler(XmlPullParser parser, RenderingRulesStorageResolver resolver,
 									 boolean addon){
 			this.parser = parser;
@@ -433,23 +434,22 @@ public class RenderingRulesStorage {
 				}
 			} else if ("renderer".equals(name)) { //$NON-NLS-1$
 				throw new XmlPullParserException("Rendering style is deprecated and no longer supported.");
-			}else if ("renderingClass".equals(name)) {
-				String className = parser.getAttributeValue(null, "name");
-				String title = parser.getAttributeValue(null, "title");
-				boolean enable = Boolean.parseBoolean(parser.getAttributeValue(null, "enable"));
+			} else if ("renderingClass".equals(name)) {
+				String title = attrsMap.get("title");
+				String className = attrsMap.get("name");
+				boolean enable = Boolean.parseBoolean(attrsMap.get("enable"));
 
-				RenderingClass newClass = new RenderingClass(className, title, enable);
+				RenderingClass renderingClass = new RenderingClass(className, title, enable);
 
 				if (!renderingClassStack.isEmpty()) {
 					RenderingClass parent = renderingClassStack.peek();
-					parent.addChild(newClass);
-					newClass.setPath(parent.getPath() + className);
+					parent.addChild(renderingClass);
+					renderingClass.setPath(parent.getPath() + className);
 				} else {
-					newClass.setPath(className);
+					renderingClass.setPath(className);
 				}
-
-				renderingClasses.put(newClass.getPath(), newClass);
-				renderingClassStack.push(newClass);
+				renderingClasses.put(renderingClass.getPath(), renderingClass);
+				renderingClassStack.push(renderingClass);
 			} else {
 				log.warn("Unknown tag : " + name); //$NON-NLS-1$
 			}
@@ -598,6 +598,14 @@ public class RenderingRulesStorage {
 
 	public String[] getRenderingAssociationNames() {
 		return renderingAssociations.keySet().toArray(new String[0]);
+	}
+
+	public Map<String, RenderingClass> getRenderingClasses() {
+		return renderingClasses;
+	}
+
+	public Map<String, RenderingRule> getRenderingAssociations() {
+		return renderingAssociations;
 	}
 
 	public RenderingRule[] getRules(int state){

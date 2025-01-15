@@ -1,5 +1,7 @@
 package net.osmand.plus.configmap;
 
+import static net.osmand.render.RenderingRuleStorageProperties.ATTR_COLOR_VALUE;
+
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,25 +11,33 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.render.RenderingClass;
+import net.osmand.render.RenderingRule;
+import net.osmand.render.RenderingRulesStorage;
 
 import java.util.List;
 
 public class RouteLegendCard extends BaseCard {
+
+
 	private final LayoutInflater themedInflater;
 
-	private final List<DataClass> items;
+	private final List<RenderingClass> items;
 	private final String cardTitle;
 
-	public RouteLegendCard(@NonNull FragmentActivity activity, @NonNull List<DataClass> items, @NonNull String cardTitle) {
+	public RouteLegendCard(@NonNull FragmentActivity activity, @NonNull List<RenderingClass> items,
+			@NonNull String cardTitle) {
 		super(activity, true);
 		this.items = items;
 		this.cardTitle = cardTitle;
@@ -55,7 +65,7 @@ public class RouteLegendCard extends BaseCard {
 
 	@NonNull
 	private View createView(int position) {
-		DataClass dataClass = items.get(position);
+		RenderingClass dataClass = items.get(position);
 		View itemView = themedInflater.inflate(R.layout.route_legend_item, null, false);
 		CompoundButton compoundButton = itemView.findViewById(R.id.compound_button);
 		TextView title = itemView.findViewById(R.id.title);
@@ -64,10 +74,14 @@ public class RouteLegendCard extends BaseCard {
 		View divider = itemView.findViewById(R.id.divider_bottom);
 		ImageView icon = itemView.findViewById(R.id.icon);
 
-		Drawable iconDrawable = TrackAppearanceFragment.getTrackIcon(app, null, false, dataClass.color);
-		icon.setImageDrawable(iconDrawable);
+		String colorName = dataClass.getColorName();
+		Integer color = parseColor(app.getRendererRegistry().getCurrentSelectedRenderer(), colorName);
+		if (color != null) {
+			Drawable iconDrawable = TrackAppearanceFragment.getTrackIcon(app, null, false, color);
+			icon.setImageDrawable(iconDrawable);
+		}
 
-		title.setText(dataClass.title());
+		title.setText(dataClass.getTitle());
 
 		compoundButton.setChecked(isClassEnabled(dataClass));
 
@@ -92,14 +106,36 @@ public class RouteLegendCard extends BaseCard {
 		title.setText(cardTitle);
 	}
 
-	public boolean isClassEnabled(@NonNull DataClass dataClass) {
+	public boolean isClassEnabled(@NonNull RenderingClass dataClass) {
 		return false;
 	}
 
-	public void onClassSelected(@NonNull DataClass dataClass, boolean checked) {
-
+	public void onClassSelected(@NonNull RenderingClass dataClass, boolean checked) {
+		settings.getСustomBooleanRenderClassProperty(dataClass.getName(), dataClass.isEnable()).set(checked);
+		refreshMap();
 	}
 
-	public record DataClass(String title, int color) {
+	private void refreshMap() {
+		if (activity instanceof MapActivity mapActivity) {
+			mapActivity.refreshMapComplete();
+			mapActivity.updateLayers();
+		}
+	}
+
+	public static Integer parseColor(@NonNull RenderingRulesStorage routeRender, @Nullable String colorName) {
+		if (colorName == null) {
+			return null;
+		}
+		Integer color = null;
+
+		RenderingRule colorRule = routeRender.getRenderingAttributeRule(colorName);
+		List<RenderingRule> rules = colorRule.getIfElseChildren();
+		for (RenderingRule rule : rules) {
+			int colorValue = rule.getIntPropertyValue(ATTR_COLOR_VALUE);
+			if (colorValue != -1) {
+				color = colorValue;
+			}
+		}
+		return color;
 	}
 }
