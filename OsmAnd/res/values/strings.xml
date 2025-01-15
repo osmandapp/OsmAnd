@@ -1058,7 +1058,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     </string>
     <string name="set_up_backup">Set up backup</string>
     <string name="choose_what_to_sync">Choose what to sync</string>
-    <string name="cloud_sync_progress">Sync…%1$s</string>
+    <string name="cloud_sync_progress">Sync… %1$s</string>
     <string name="checking_progress">Checking…</string>
     <string name="shared_string_modified">Modified</string>
     <string name="res_unknown">Unknown</string>
