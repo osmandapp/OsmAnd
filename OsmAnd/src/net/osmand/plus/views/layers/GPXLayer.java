@@ -1131,9 +1131,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 			GpxFile gpxFile = selectedGpxFile.getGpxFile();
 			String width = gpxAppearanceHelper.getTrackWidth(gpxFile, defaultWidthPref.get());
-			if (!cachedTrackWidth.containsKey(width)) {
-				cachedTrackWidth.put(width, null);
-			}
+			cachedTrackWidth.putIfAbsent(width, null);
 			if (selectedGpxFile.isShowCurrentTrack()) {
 				currentTrack = selectedGpxFile;
 			} else {
@@ -1212,9 +1210,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			renderedSegments = new HashSet<>();
 			renderedSegmentsCache.put(gpxFilePath, renderedSegments);
 		}
-		String width = gpxAppearanceHelper.getTrackWidth(gpxFile, defaultWidthPref.get());
+		String gpxWidth = gpxAppearanceHelper.getTrackWidth(gpxFile, defaultWidthPref.get());
 		for (int segmentIdx = 0; segmentIdx < segments.size(); segmentIdx++) {
 			TrkSegment ts = segments.get(segmentIdx);
+			String width = ts.getWidth(gpxWidth);
+			cachedTrackWidth.putIfAbsent(width, null);
 			int color = getTrackColor(gpxFile, ts.getColor(cachedColor));
 			boolean newTsRenderer = false;
 			if (ts.getRenderer() == null && !ts.getPoints().isEmpty()) {
