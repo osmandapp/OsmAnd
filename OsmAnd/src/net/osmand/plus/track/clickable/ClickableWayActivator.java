@@ -1,59 +1,45 @@
 package net.osmand.plus.track.clickable;
 
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-
 import android.graphics.PointF;
 import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.primitives.WptPt;
 
-import java.io.File;
 import java.util.List;
 
 public class ClickableWayActivator implements ContextMenuLayer.IContextMenuProvider {
-    private OsmandApplication app;
-    private OsmandMapTileView view;
+    private final OsmandMapTileView view;
+    private final CallbackWithObject<ClickableWay> readHeights;
+    private final CallbackWithObject<ClickableWay> openAsGpxFile;
 
-    public ClickableWayActivator(OsmandApplication app, OsmandMapTileView view) {
-        this.app = app;
+    public ClickableWayActivator(@NonNull OsmandMapTileView view,
+                                 @NonNull CallbackWithObject<ClickableWay> readHeightData,
+                                 @NonNull CallbackWithObject<ClickableWay> openAsGpxFile) {
         this.view = view;
+        this.readHeights = readHeightData;
+        this.openAsGpxFile = openAsGpxFile;
         // could be derived from OsmandMapLayer(ctx) in case of necessity
     }
 
     @Override
     public boolean showMenuAction(@Nullable Object object) {
         if (object instanceof ClickableWay that) {
-
             MapActivity mapActivity = view.getMapActivity();
-
-            CallbackWithObject<ClickableWay> callback = clickableWay -> {
-                GpxFile gpxFile = that.getGpxFile();
-                // gpxFile.setWidth("bold"); // TODO just a test
-                GpxTrackAnalysis analysis = gpxFile.getAnalysis(0);
-                String safeFileName = that.getGpxFileName() + GPX_FILE_EXT;
-                File file = new File(FileUtils.getTempDir(app), safeFileName);
-                WptPt selectedPoint = that.getSelectedGpxPoint().getSelectedPoint();
-                GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, selectedPoint, analysis, null, true);
+            if (mapActivity != null) {
+                (new ClickableWayReaderTask(mapActivity, that, readHeights, openAsGpxFile))
+                        .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 return true;
-            };
-
-            ClickableWayReaderTask readerTask = new ClickableWayReaderTask(mapActivity, that, callback);
-            readerTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-            return true;
+            }
         }
         return false;
     }

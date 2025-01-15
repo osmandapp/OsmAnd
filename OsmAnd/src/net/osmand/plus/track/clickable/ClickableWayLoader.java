@@ -1,5 +1,6 @@
 package net.osmand.plus.track.clickable;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.data.MapObject.AMENITY_ID_RIGHT_SHIFT;
 
 // THINK use similar icon="piste_high_difficulty" for no-name pistes
@@ -16,9 +17,13 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.shared.gpx.primitives.RouteActivity;
@@ -28,6 +33,7 @@ import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -54,14 +60,14 @@ public class ClickableWayLoader {
             // others are default (red)
     );
 
-    // TODO implement simple cache <id, GpxFile>
-
     private final OsmandApplication app;
+    private final OsmandMapTileView view;
     private final ClickableWayActivator activator;
 
     public ClickableWayLoader(@NonNull OsmandApplication app, @NonNull OsmandMapTileView view) {
         this.app = app;
-        this.activator = new ClickableWayActivator(app, view);
+        this.view = view;
+        this.activator = new ClickableWayActivator(view, this::readHeightData, this::openAsGpxFile);
     }
 
     @NonNull
@@ -89,7 +95,8 @@ public class ClickableWayLoader {
     }
 
     @Nullable
-    public ClickableWay loadClickableWayV2(@NonNull LatLon selectedLatLon, @NonNull ObfMapObject obfMapObject,
+    public ClickableWay loadClickableWayV2(@NonNull LatLon selectedLatLon,
+                                           @NonNull ObfMapObject obfMapObject,
                                            @NonNull Map<String, String> tags) {
         long id = obfMapObject.getId().getId().longValue();
         long osmId = ObfConstants.getOsmId(id >> AMENITY_ID_RIGHT_SHIFT);
@@ -149,7 +156,7 @@ public class ClickableWayLoader {
     }
 
     @Nullable
-    private String getGpxColorByTags(Map <String, String> tags) {
+    private String getGpxColorByTags(Map<String, String> tags) {
         for (String t : clickableTags) {
             String val = tags.get(t);
             if (val != null) {
@@ -181,6 +188,25 @@ public class ClickableWayLoader {
             if (clickableTags.contains(key)) {
                 return true;
             }
+        }
+        return false;
+    }
+
+    private boolean readHeightData(ClickableWay clickableWay) {
+        // TODO read height data, implement simple cache
+        return true;
+    }
+
+    private boolean openAsGpxFile(ClickableWay clickableWay) {
+        MapActivity mapActivity = view.getMapActivity();
+        if (mapActivity != null) {
+            GpxFile gpxFile = clickableWay.getGpxFile();
+            GpxTrackAnalysis analysis = gpxFile.getAnalysis(0);
+            String safeFileName = clickableWay.getGpxFileName() + GPX_FILE_EXT;
+            File file = new File(FileUtils.getTempDir(app), safeFileName);
+            WptPt selectedPoint = clickableWay.getSelectedGpxPoint().getSelectedPoint();
+            GpxUiHelper.saveAndOpenGpx(mapActivity, file, gpxFile, selectedPoint, analysis, null, true);
+            return true;
         }
         return false;
     }

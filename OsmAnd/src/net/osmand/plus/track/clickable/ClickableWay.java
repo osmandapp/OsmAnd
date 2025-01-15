@@ -34,6 +34,10 @@ public class ClickableWay {
         return osmId;
     }
 
+    public QuadRect getBbox() {
+        return bbox;
+    }
+
     public GpxFile getGpxFile() {
         return gpxFile;
     }
