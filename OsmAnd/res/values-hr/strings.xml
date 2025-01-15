@@ -1721,4 +1721,19 @@
     <string name="receiving_data_from_server">Primanje podataka od servera …</string>
     <string name="download_hillshade_maps">Sjenčani reljef</string>
     <string name="shared_string_wikipedia">Wikipedija</string>
+    <string name="tab_title_basic">Osnovno</string>
+    <string name="app_mode_wheelchair">Invalidska kolica</string>
+    <string name="app_mode_enduro_motorcycle">Enduro motor</string>
+    <string name="app_mode_go_cart">Go-kart</string>
+    <string name="please_provide_point_name_error">Zadaj ime za ovu točku</string>
+    <string name="gpx_direction_arrows">Strelice smjera</string>
+    <string name="shared_string_uninstall_and_restart">Deinstaliraj i ponovo pokreni</string>
+    <string name="app_mode_motor_scooter">Moto-skuter</string>
+    <string name="app_mode_inline_skates">Inline koturaljke</string>
+    <string name="app_mode_climbing">Penjanje</string>
+    <string name="search_download_wikipedia_maps">Preuzmi Wikipedija karte</string>
+    <string name="select_track_width">Odaberi širinu</string>
+    <string name="app_mode_wheelchair_forward">Invalidska kolica naprijed</string>
+    <string name="shared_string_custom">Prilagođeno</string>
+    <string name="track_show_start_finish_icons">Prikaži ikone početka i kraja</string>
 </resources>
