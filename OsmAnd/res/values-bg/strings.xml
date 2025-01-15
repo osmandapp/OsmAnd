@@ -3219,7 +3219,7 @@
     <string name="select_waypoints_category_description">Добавете всички отправни точки от трасето или изберете отделни категории.</string>
     <string name="waypoints_removed_from_map_markers">Премахнати са отправни точки от</string>
     <string name="add_group_descr">Внасяне на групи от избрани или отправни точки на GPX.</string>
-    <string name="cloud_sync_progress">Синхронизиране…%1$s</string>
+    <string name="cloud_sync_progress">Синхронизиране… %1$s</string>
     <string name="external_device_connected">Свързано</string>
     <string name="external_device_disconnected">Несвързано</string>
     <string name="make_round_trip_descr">Добавя копие на изходната точка в качеството на местоназначение.</string>
