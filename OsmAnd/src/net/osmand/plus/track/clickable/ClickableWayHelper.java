@@ -40,7 +40,7 @@ import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
 
-public class ClickableWayLoader {
+public class ClickableWayHelper {
     public static final Set<String> clickableTags = Set.of("piste:type", "piste:difficulty", "mtb:scale", "dirtbike:scale");
     public static final Map<String, String> forbiddenTags = Map.of("area", "yes", "access", "no");
     public static final Map<String, String> gpxColors = Map.ofEntries(
@@ -62,12 +62,14 @@ public class ClickableWayLoader {
 
     private final OsmandApplication app;
     private final OsmandMapTileView view;
-    private final ClickableWayActivator activator;
+    private final ClickableWayMenuActivator activator;
 
-    public ClickableWayLoader(@NonNull OsmandApplication app, @NonNull OsmandMapTileView view) {
+//    private static final Log log = PlatformUtil.getLog(ClickableWay.class);
+
+    public ClickableWayHelper(@NonNull OsmandApplication app, @NonNull OsmandMapTileView view) {
         this.app = app;
         this.view = view;
-        this.activator = new ClickableWayActivator(view, this::readHeightData, this::openAsGpxFile);
+        this.activator = new ClickableWayMenuActivator(view, this::readHeightData, this::openAsGpxFile);
     }
 
     @NonNull
@@ -194,6 +196,22 @@ public class ClickableWayLoader {
 
     private boolean readHeightData(ClickableWay clickableWay) {
         // TODO read height data, implement simple cache
+//        BinaryMapIndexReader[] readers = app.getResourceManager().getReverseGeocodingMapFiles();
+//        NetworkRouteSelector.NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelector.NetworkRouteSelectorFilter();
+//        NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter, null);
+//        try {
+//            QuadRect bbox31 = clickableWay.getBbox();
+//            QuadRect bboxLatLon = new QuadRect(
+//                    MapUtils.get31LongitudeX((int)bbox31.left),
+//                    MapUtils.get31LatitudeY((int)bbox31.top),
+//                    MapUtils.get31LongitudeX((int)bbox31.right),
+//                    MapUtils.get31LatitudeY((int)bbox31.bottom)
+//            );
+//            Map<NetworkRouteSelector.RouteKey, GpxFile> routes = routeSelector.getRoutes(bboxLatLon, true, null);
+//            System.err.printf("XXX routes\n");
+//        } catch (IOException e) {
+//            log.error(e);
+//        }
         return true;
     }
 

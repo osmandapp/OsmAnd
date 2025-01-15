@@ -6,15 +6,15 @@ import net.osmand.CallbackWithObject;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 
-public class ClickableWayReaderTask extends BaseLoadAsyncTask<Void, Void, ClickableWay> {
+public class ClickableWayAsyncTask extends BaseLoadAsyncTask<Void, Void, ClickableWay> {
     private final ClickableWay clickableWay;
     private final CallbackWithObject<ClickableWay> readHeightData;
     private final CallbackWithObject<ClickableWay> openAsGpxFile;
 
-    public ClickableWayReaderTask(@NonNull MapActivity mapActivity,
-                                  @NonNull ClickableWay clickableWay,
-                                  @NonNull CallbackWithObject<ClickableWay> readHeightData,
-                                  @NonNull CallbackWithObject<ClickableWay> openAsGpxFile) {
+    public ClickableWayAsyncTask(@NonNull MapActivity mapActivity,
+                                 @NonNull ClickableWay clickableWay,
+                                 @NonNull CallbackWithObject<ClickableWay> readHeightData,
+                                 @NonNull CallbackWithObject<ClickableWay> openAsGpxFile) {
         super(mapActivity);
         this.clickableWay = clickableWay;
         this.readHeightData = readHeightData;

@@ -17,14 +17,14 @@ import net.osmand.shared.gpx.primitives.WptPt;
 
 import java.util.List;
 
-public class ClickableWayActivator implements ContextMenuLayer.IContextMenuProvider {
+public class ClickableWayMenuActivator implements ContextMenuLayer.IContextMenuProvider {
     private final OsmandMapTileView view;
     private final CallbackWithObject<ClickableWay> readHeights;
     private final CallbackWithObject<ClickableWay> openAsGpxFile;
 
-    public ClickableWayActivator(@NonNull OsmandMapTileView view,
-                                 @NonNull CallbackWithObject<ClickableWay> readHeightData,
-                                 @NonNull CallbackWithObject<ClickableWay> openAsGpxFile) {
+    public ClickableWayMenuActivator(@NonNull OsmandMapTileView view,
+                                     @NonNull CallbackWithObject<ClickableWay> readHeightData,
+                                     @NonNull CallbackWithObject<ClickableWay> openAsGpxFile) {
         this.view = view;
         this.readHeights = readHeightData;
         this.openAsGpxFile = openAsGpxFile;
@@ -36,7 +36,7 @@ public class ClickableWayActivator implements ContextMenuLayer.IContextMenuProvi
         if (object instanceof ClickableWay that) {
             MapActivity mapActivity = view.getMapActivity();
             if (mapActivity != null) {
-                (new ClickableWayReaderTask(mapActivity, that, readHeights, openAsGpxFile))
+                (new ClickableWayAsyncTask(mapActivity, that, readHeights, openAsGpxFile))
                         .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 return true;
             }

@@ -77,7 +77,7 @@ import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoParsedPoint;
 import net.osmand.util.MapUtils;
-import net.osmand.plus.track.clickable.ClickableWayLoader;
+import net.osmand.plus.track.clickable.ClickableWayHelper;
 
 import org.apache.commons.logging.Log;
 
@@ -108,13 +108,13 @@ public class MapSelectionHelper {
 	private Map<LatLon, BackgroundType> touchedFullMapObjects = new HashMap<>();
 	private Map<LatLon, BackgroundType> touchedSmallMapObjects = new HashMap<>();
 
-	private ClickableWayLoader clickableWayLoader;
+	private ClickableWayHelper clickableWayHelper;
 
 	public MapSelectionHelper(@NonNull Context context) {
 		app = (OsmandApplication) context.getApplicationContext();
 		view = app.getOsmandMap().getMapView();
 		mapLayers = app.getOsmandMap().getMapLayers();
-		clickableWayLoader = new ClickableWayLoader(app, view);
+		clickableWayHelper = new ClickableWayHelper(app, view);
 	}
 
 	@NonNull
@@ -232,7 +232,7 @@ public class MapSelectionHelper {
 
 				boolean isTravelGpx = !Algorithms.isEmpty(travelGpxFilter);
 				boolean isOsmRoute = !Algorithms.isEmpty(OsmRouteType.getRouteKeys(tags));
-				boolean isClickableWay = clickableWayLoader.isClickableWayV1(renderedObject);
+				boolean isClickableWay = clickableWayHelper.isClickableWayV1(renderedObject);
 
 				if (!isClickableWay && !isTravelGpx && !isOsmRoute && (renderedObject.getId() == null
 						|| !renderedObject.isVisible() || renderedObject.isDrawOnPath())) {
@@ -350,7 +350,7 @@ public class MapSelectionHelper {
 
 							boolean isTravelGpx = app.getTravelHelper().isTravelGpxTags(tags);
 							boolean isOsmRoute = !Algorithms.isEmpty(OsmRouteType.getRouteKeys(tags));
-							boolean isClickableWay = clickableWayLoader.isClickableWayV2(obfMapObject, tags);
+							boolean isClickableWay = clickableWayHelper.isClickableWayV2(obfMapObject, tags);
 
 							if (isOsmRoute && !isDerivedGpxSelected) {
 								NetworkRouteSelectorFilter routeFilter = createRouteFilter();
@@ -491,9 +491,9 @@ public class MapSelectionHelper {
 	}
 
 	private boolean addClickableWayV1(@NonNull MapSelectionResult result, @NonNull RenderedObject renderedObject) {
-		ClickableWay clickableWay = clickableWayLoader.loadClickableWayV1(result.pointLatLon, renderedObject);
+		ClickableWay clickableWay = clickableWayHelper.loadClickableWayV1(result.pointLatLon, renderedObject);
 		if (clickableWay != null && isUniqueClickableWay(result.selectedObjects, clickableWay)) {
-			result.selectedObjects.put(clickableWay, clickableWayLoader.getContextMenuProvider());
+			result.selectedObjects.put(clickableWay, clickableWayHelper.getContextMenuProvider());
 			return true;
 		}
 		return false;
@@ -501,9 +501,9 @@ public class MapSelectionHelper {
 
 	private boolean addClickableWayV2(@NonNull MapSelectionResult result, @NonNull ObfMapObject obfMapObject,
 									  @NonNull Map<String, String> tags) {
-		ClickableWay clickableWay = clickableWayLoader.loadClickableWayV2(result.pointLatLon, obfMapObject, tags);
+		ClickableWay clickableWay = clickableWayHelper.loadClickableWayV2(result.pointLatLon, obfMapObject, tags);
 		if (clickableWay != null && isUniqueClickableWay(result.selectedObjects, clickableWay)) {
-			result.selectedObjects.put(clickableWay, clickableWayLoader.getContextMenuProvider());
+			result.selectedObjects.put(clickableWay, clickableWayHelper.getContextMenuProvider());
 			return true;
 		}
 		return false;
