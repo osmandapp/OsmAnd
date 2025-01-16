@@ -4981,7 +4981,7 @@
     <string name="export_to_file">Ekspor ke berkas</string>
     <string name="shared_string_modified">Diubah</string>
     <string name="choose_what_to_sync">Pilih apa yang disinkron</string>
-    <string name="cloud_sync_progress">Menyinkronkan…%1$s</string>
+    <string name="cloud_sync_progress">Menyinkronkan… %1$s</string>
     <string name="changes">Perubahan %1$s</string>
     <string name="local_changes_will_be_dismissed">Perubahan lokal akan diabaikan</string>
     <string name="import_export">Impor/ekspor</string>
@@ -6060,4 +6060,6 @@
     <string name="rendering_attr_showClimbingRoutes_description">Tampilkan rute pendakian</string>
     <string name="calculating_indication_message">Menghitung…</string>
     <string name="calculate_size">Hitung ukuran</string>
+    <string name="display_distance_to_first_intermediate_summary">Menampilkan waktu dan jarak untuk perhentian pertama terlebih dahulu. Matikan untuk selalu menampilkan detail tujuan.</string>
+    <string name="display_distance_to_first_intermediate">Tampilkan detail rute until perhentian berikutnya</string>
 </resources>
