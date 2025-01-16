@@ -4113,4 +4113,10 @@
     <string name="poi_roundtrip_yes">Rundtur: ja</string>
     <string name="poi_recycling_glass_bottles_colour">Farvede glasflasker</string>
     <string name="poi_roundtrip_no">Rundtur: nej</string>
+    <string name="poi_vending_machine_fuel_filter">Automatisk brændstof dispenser; Brændstofs automat</string>
+    <string name="poi_cemt">CEMT</string>
+    <string name="poi_climbing_grade_filter">Klatregrad</string>
+    <string name="poi_climbing_bolt">Klatre bolt</string>
+    <string name="poi_climbing_bolts_filter">Klatre bolte</string>
+    <string name="poi_climbing_quality">Klatre kvalitet</string>
 </resources>
