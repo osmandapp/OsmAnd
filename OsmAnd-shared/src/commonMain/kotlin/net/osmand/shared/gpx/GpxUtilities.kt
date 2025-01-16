@@ -50,6 +50,7 @@ object GpxUtilities {
 	const val ICON_NAME_EXTENSION = "icon"
 	const val BACKGROUND_TYPE_EXTENSION = "background"
 	const val COLOR_NAME_EXTENSION = "color"
+	const val LINE_WIDTH_EXTENSION = "width"
 	const val PROFILE_TYPE_EXTENSION = "profile"
 	const val ADDRESS_EXTENSION = "address"
 	const val HIDDEN_EXTENSION = "hidden"
