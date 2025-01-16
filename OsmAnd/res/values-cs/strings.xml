@@ -4268,7 +4268,7 @@
     <string name="upload_change">Nahrát změnu</string>
     <string name="cloud_version_will_be_removed">Cloudová verze bude odstraněna</string>
     <string name="choose_what_to_sync">Vyberte, co synchronizovat</string>
-    <string name="cloud_sync_progress">Synchronizace...%1$s</string>
+    <string name="cloud_sync_progress">Synchronizace... %1$s</string>
     <string name="checking_progress">Kontroluje se…</string>
     <string name="shared_string_modified">Upraveno</string>
     <string name="res_unknown">Neznámý</string>

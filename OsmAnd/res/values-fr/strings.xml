@@ -4655,7 +4655,7 @@
     <string name="release_4_3">• Moteur de rendu plus rapide (OpenGL version 2) avec vue 2.5D \n \n• Animations lisses des textes et des points d\'intérêts lors du déplacement de la carte \n \n• Nouveaux widgets indiquant les coordonnées du centre de la carte ainsi que l\'altitude \n \n• Ajout d\'options sur la taille du texte pour le mode \"Distance par appui\" \n \n• Ajout d\'une option permettant de modifier le comportement du clic en mode \"Marques\" \n \n• Correction de l\'option \"Emplacement de la position\" \n \n• Ajout du support des tags \"link\", \"cmt\", \"desc\" et de toutes les extensions personnalisées pour les traces GPX \n \n• Réorganisation de la liste des cartes marines \n \n• Ajout de la prise en charge des capteurs ANT+ \n \n• Ajout d\'une option permettant de désactiver l\'UUID de téléchargement \n \n• Prévision ajustable du temps de trajet pour les itinéraires dépendants de l\'altitude \n \n• Correction de la sortie sonore et du comportement de la barre de volume</string>
     <string name="shared_string_purchased_on">Acheté le</string>
     <string name="shared_string_expires">Expire</string>
-    <string name="cloud_sync_progress">Synchronisation…%1$s</string>
+    <string name="cloud_sync_progress">Synchro…%1$s</string>
     <string name="checking_progress">Vérification…</string>
     <string name="choose_what_to_sync">Sélectionner quoi synchroniser</string>
     <string name="res_unknown">Inconnu</string>
