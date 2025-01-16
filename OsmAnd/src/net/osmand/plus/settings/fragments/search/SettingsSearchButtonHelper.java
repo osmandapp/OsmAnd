@@ -76,7 +76,7 @@ public class SettingsSearchButtonHelper {
 								.withPreferenceSearchablePredicate(new PreferenceSearchablePredicate())
 								.build())
 				.withSearchConfig(
-						new SearchConfigBuilder()
+						new SearchConfigBuilder(fragmentActivity)
 								.withSearchResultsFilter(searchResultsFilter)
 								.withPreferencePathDisplayer(PreferencePathDisplayerFactory.createPreferencePathDisplayer(fragmentActivity))
 								.withSearchPreferenceFragmentUI(new SearchPreferenceFragmentUI(searchResultsFilter))
