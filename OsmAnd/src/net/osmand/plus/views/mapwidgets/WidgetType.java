@@ -3,6 +3,7 @@ package net.osmand.plus.views.mapwidgets;
 import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.ANT_PLUS;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.GLIDE;
+import static net.osmand.plus.views.mapwidgets.WidgetGroup.NAVIGATION_POINTS;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.SUNRISE_SUNSET;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.VEHICLE_METRICS;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.WEATHER;
@@ -55,6 +56,7 @@ public enum WidgetType {
 	COORDINATES_CURRENT_LOCATION("coordinates_current_location", R.string.coordinates_widget_current_location, R.string.coordinates_widget_current_location_desc, R.drawable.widget_coordinates_location_day, R.drawable.widget_coordinates_location_night, R.string.docs_widget_coordinates, WidgetGroup.COORDINATES_WIDGET, TOP),
 	STREET_NAME("street_name", R.string.street_name, R.string.street_name_widget_desc, R.drawable.widget_street_name_day, R.drawable.widget_street_name_night, R.string.docs_widget_street_name, null, TOP),
 	MARKERS_TOP_BAR("map_markers_top", R.string.map_markers_bar, R.string.map_markers_bar_widget_desc, R.drawable.widget_markers_topbar_day, R.drawable.widget_markers_topbar_night, R.string.docs_widget_markers, null, TOP),
+	ROUTE_INFO("route_info", R.string.map_widget_route_information, R.string.map_widget_route_information_desc, R.drawable.widget_route_info_day, R.drawable.widget_route_info_night, 0, NAVIGATION_POINTS, TOP),
 	LANES("lanes", R.string.show_lanes, R.string.lanes_widgets_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, R.string.docs_widget_lanes, null, WidgetGroup.ROUTE_GUIDANCE, TOP),
 
 	// Right panel
@@ -370,6 +372,8 @@ public enum WidgetType {
 			return new ZoomLevelSettingsFragment();
 		} else if (this == LANES) {
 			return new LanesWidgetSettingsFragment();
+		} else if (this == ROUTE_INFO) {
+			return new RouteInfoWidgetSettingsFragment();
 		}
 
 		if (widgetInfo instanceof SimpleWidgetInfo) {
@@ -454,7 +458,7 @@ public enum WidgetType {
 	@NonNull
 	public static String[] getComplexWidgetIds() {
 		return new String[] {COORDINATES_MAP_CENTER.id, COORDINATES_CURRENT_LOCATION.id,
-				MARKERS_TOP_BAR.id, ELEVATION_PROFILE.id, STREET_NAME.id, LANES.id};
+				MARKERS_TOP_BAR.id, ELEVATION_PROFILE.id, STREET_NAME.id, LANES.id, ROUTE_INFO.id};
 	}
 
 	@NonNull

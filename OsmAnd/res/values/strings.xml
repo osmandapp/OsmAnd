@@ -10,6 +10,10 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="map_widget_route_information_distance_mode">Distance</string>
+    <string name="shared_string_default_view">Default view</string>
+    <string name="map_widget_route_information">Route information</string>
+    <string name="map_widget_route_information_desc">Displays the estimated arrival time, remaining travel time, and distance for the current navigation route.</string>
     <string name="display_distance_to_first_intermediate">Show route details for the next stop</string>
     <string name="display_distance_to_first_intermediate_summary">Shows time and distance for the next stop first. Turn off to always show details for the destination.</string>
 
