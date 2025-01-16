@@ -1736,4 +1736,5 @@
     <string name="app_mode_wheelchair_forward">Invalidska kolica naprijed</string>
     <string name="shared_string_custom">Prilagođeno</string>
     <string name="track_show_start_finish_icons">Prikaži ikone početka i kraja</string>
+    <string name="shared_string_toolbar">Traka alata</string>
 </resources>
