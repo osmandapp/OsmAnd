@@ -506,7 +506,6 @@ object SharedUtil {
 		kPoint.lat = point.lat
 		kPoint.lon = point.lon
 		kPoint.name = point.name
-		kPoint.link = Link(point.link)
 		kPoint.category = point.category
 		kPoint.desc = point.desc
 		kPoint.comment = point.comment
@@ -522,6 +521,7 @@ object SharedUtil {
 		kPoint.slopeColor = point.slopeColor
 		kPoint.colourARGB = point.colourARGB
 		kPoint.distance = point.distance
+		kPoint.link = point.link?.let { Link(it) }
 		copyExtensions(point, kPoint)
 		return kPoint
 	}
@@ -556,9 +556,9 @@ object SharedUtil {
 	fun kMetadata(metadata: GPXUtilities.Metadata): Metadata {
 		val kMetadata = Metadata()
 		kMetadata.name = metadata.name
-		kMetadata.link = Link(metadata.link)
 		kMetadata.keywords = metadata.keywords
 		kMetadata.time = metadata.time
+		kMetadata.link = metadata.link?.let { Link(it) }
 		if (metadata.author != null) {
 			kMetadata.author = kAuthor(metadata.author)
 		}
@@ -576,8 +576,8 @@ object SharedUtil {
 	fun kAuthor(author: GPXUtilities.Author): Author {
 		val kAuthor = Author()
 		kAuthor.name = author.name
-		kAuthor.link = Link(author.link)
 		kAuthor.email = author.email
+		kAuthor.link = author.link?.let { Link(it) }
 		copyExtensions(author, kAuthor)
 		return kAuthor
 	}
