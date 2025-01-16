@@ -113,8 +113,11 @@ public abstract class SettingsItem {
 	public abstract long getEstimatedSize();
 
 	public boolean applyFileName(@NonNull String fileName) {
+		// Case: this.fileName could be a folder so all remote files will be collected for it ?
+		// + Subfolder check correct
+		// - Where is type prefix ? filename same for different types
 		String n = getFileName();
-		return n != null && (n.endsWith(fileName) || fileName.startsWith(n + File.separator));
+		return n != null && (n.equals(fileName) || fileName.startsWith(n + File.separator));
 	}
 
 	public boolean shouldReadOnCollecting() {
