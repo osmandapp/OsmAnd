@@ -492,13 +492,16 @@ class GpxFile : GpxExtensions {
 		val tpoints = mutableListOf<TrkSegment>()
 		for (track in tracks) {
 			val trackColor = track.getColor(getColor(null))
+			val trackWidth = track.getWidth(null)
 			for (segment in track.segments) {
 				val segmentColor = segment.getColor(trackColor)
+				val segmentWidth = segment.getWidth(trackWidth)
 				if (!segment.generalSegment && segment.points.isNotEmpty()) {
 					val ts = TrkSegment()
 					tpoints.add(ts)
-					ts.points.addAll(segment.points)
 					ts.setColor(segmentColor)
+					ts.setWidth(segmentWidth)
+					ts.points.addAll(segment.points)
 				}
 			}
 		}
@@ -616,14 +619,6 @@ class GpxFile : GpxExtensions {
 
 	fun setSplitInterval(splitInterval: Double) {
 		getExtensionsToWrite()["split_interval"] = splitInterval.toString()
-	}
-
-	fun getWidth(defWidth: String?): String? {
-		return extensions?.get("width") ?: defWidth
-	}
-
-	fun setWidth(width: String) {
-		getExtensionsToWrite()["width"] = width
 	}
 
 	fun isShowArrowsSet(): Boolean {

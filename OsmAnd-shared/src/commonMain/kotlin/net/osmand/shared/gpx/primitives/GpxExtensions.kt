@@ -87,4 +87,12 @@ open class GpxExtensions {
 	fun removeColor() {
 		getExtensionsToWrite().remove(GpxUtilities.COLOR_NAME_EXTENSION)
 	}
+
+	fun getWidth(defaultWidth: String?) = this.extensions?.get(GpxUtilities.LINE_WIDTH_EXTENSION) ?: defaultWidth
+
+	fun setWidth(width: String?) {
+		width?.let {
+			getExtensionsToWrite()[GpxUtilities.LINE_WIDTH_EXTENSION] = it
+		}
+	}
 }
