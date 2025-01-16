@@ -3,13 +3,15 @@ package net.osmand.plus.views.layers.core;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.Rect;
+import android.graphics.RectF;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapTiledCollectionProvider;
@@ -27,10 +29,14 @@ import net.osmand.data.NearbyPlacePoint;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.views.layers.NearbyPlacesLayer;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,42 +44,49 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvider {
-	private static final Log LOG = PlatformUtil.getLog(NearbyPlacesTileProvider.class);
 
+	private static final Log log = LogFactory.getLog(NearbyPlacesTileProvider.class);
 	private final QListPointI points31 = new QListPointI();
 	private final List<MapLayerData> mapLayerDataList = new ArrayList<>();
-	private final Map<Long, Bitmap> bigBitmapCache = new ConcurrentHashMap<>();
-	private final Map<Long, Bitmap> smallBitmapCache = new ConcurrentHashMap<>();
+	private final Map<String, Bitmap> bigBitmapCache = new ConcurrentHashMap<>();
+	private final Map<String, Bitmap> smallBitmapCache = new ConcurrentHashMap<>();
+	private Bitmap cachedSmallBitmap;
 	private final OsmandApplication app;
-	private final int baseOrder;
-	private final boolean textVisible;
-	private final TextRasterizer.Style textStyle;
 	private final float density;
 	private final PointI offset;
 	private MapTiledCollectionProvider providerInstance;
-	private Bitmap circle;
+	private int baseOrder = 0;
 	private final Paint bitmapPaint;
+	private Bitmap circle;
+
+	private final Paint pointInnerCircle;
+	private final Paint pointOuterCircle;
+	private final int smallIconSize;
+	private final int bigIconSize;
+	private final int pointerOuterColor;
+	private final Bitmap smallIconBg;
+	private final Bitmap bigIconBg;
+	private final NearbyPlacesLayer nearbyPlacesLayer;
 
 
-	public NearbyPlacesTileProvider(@NonNull OsmandApplication app, int baseOrder, boolean textVisible,
-	                                @Nullable TextRasterizer.Style textStyle, float density) {
-		this.app = app;
+	public NearbyPlacesTileProvider(@NonNull OsmandApplication context, NearbyPlacesLayer nearbyPlacesLayer, int baseOrder, float density) {
+		this.app = context;
+		this.nearbyPlacesLayer = nearbyPlacesLayer;
 		this.baseOrder = baseOrder;
-		this.textVisible = textVisible;
-		this.textStyle = textStyle;
 		this.density = density;
+		this.bitmapPaint = nearbyPlacesLayer.getBitmapPaint();
+		this.pointInnerCircle = nearbyPlacesLayer.getPointInnerCircle();
+		this.pointOuterCircle = nearbyPlacesLayer.getPointOuterCircle();
+		this.circle = nearbyPlacesLayer.getCircle();
+		this.smallIconSize = nearbyPlacesLayer.getSmallIconSize();
+		this.bigIconSize = nearbyPlacesLayer.getBigIconSize();
+		this.bigIconBg = nearbyPlacesLayer.getBigIconBg();
+		this.smallIconBg = nearbyPlacesLayer.getSmallIconBg();
 		this.offset = new PointI(0, 0);
-		float scale = app.getOsmandMap().getCarDensityScaleCoef();
-		circle = app.getUIUtilities().getScaledBitmap(null, R.drawable.ic_white_shield_small, scale);
-
-		bitmapPaint = new Paint();
-		bitmapPaint.setAntiAlias(true);
-		bitmapPaint.setDither(true);
-		bitmapPaint.setFilterBitmap(true);
+		this.pointerOuterColor = nearbyPlacesLayer.getPointOuterColor();
 	}
 
 	public void drawSymbols(@NonNull MapRendererView mapRenderer) {
-		LOG.debug("drawSymbols");
 		if (providerInstance == null) {
 			providerInstance = instantiateProxy();
 		}
@@ -81,7 +94,6 @@ public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvid
 	}
 
 	public void clearSymbols(@NonNull MapRendererView mapRenderer) {
-		LOG.debug("clearSymbols");
 		if (providerInstance != null) {
 			mapRenderer.removeSymbolsProvider(providerInstance);
 			providerInstance = null;
@@ -105,12 +117,12 @@ public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvid
 
 	@Override
 	public boolean shouldShowCaptions() {
-		return textVisible;
+		return false;
 	}
 
 	@Override
 	public TextRasterizer.Style getCaptionStyle() {
-		return textStyle;
+		return new TextRasterizer.Style();
 	}
 
 	@Override
@@ -130,43 +142,70 @@ public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvid
 
 	@Override
 	public SingleSkImage getImageBitmap(int index, boolean isFullSize) {
-		LOG.debug("getImageBitmap " + index + "__" + isFullSize);
-		MapLayerData data = index < mapLayerDataList.size() ? mapLayerDataList.get(index) : null;
+		Bitmap bitmapResult = null;
+		NearbyPlacesTileProvider.MapLayerData data = index < mapLayerDataList.size() ? mapLayerDataList.get(index) : null;
 		if (data == null) {
 			return SwigUtilities.nullSkImage();
 		}
-		long key = data.getKey();
-		Bitmap bitmapResult = null;
-		bitmapPaint.setColorFilter(new PorterDuffColorFilter(data.color, PorterDuff.Mode.MULTIPLY));
-		bitmapResult = Bitmap.createBitmap(circle.getWidth(), circle.getHeight(), Bitmap.Config.ARGB_8888);
-		Canvas canvas = new Canvas(bitmapResult);
-		canvas.drawBitmap(circle, 0, 0, bitmapPaint);
 
-//
-//		if (isFullSize) {
-//			bitmap = bigBitmapCache.get(key);
-//			if (bitmap == null) {
-//				PointImageDrawable drawable;
-//				if (data.hasMarker) {
-//					drawable = PointImageUtils.getOrCreate(app, data.color, data.withShadow,
-//							true, /*data.overlayIconId, */data.backgroundType);
-//				} else {
-//					drawable = PointImageUtils.getOrCreate(app, data.color,
-//							data.withShadow, false, /*data.overlayIconId, */data.backgroundType);
-//				}
-//				bitmap = drawable.getBigMergedBitmap(data.textScale, false);
-//				bigBitmapCache.put(key, bitmap);
-//			}
-//		} else {
-//			bitmap = smallBitmapCache.get(key);
-//			if (bitmap == null) {
-//				PointImageDrawable drawable = PointImageUtils.getOrCreate(app, data.color,
-//						data.withShadow, false, /*data.overlayIconId, */data.backgroundType);
-//				bitmap = drawable.getSmallMergedBitmap(data.textScale);
-//				smallBitmapCache.put(key, bitmap);
-//			}
-//		}
+		String key = data.nearbyPlace.photoTitle;
+		android.util.Log.d("Corwin", "isFullsize " + isFullSize);
+		log.debug("isFullsize " + isFullSize);
+		if (isFullSize) {
+			bitmapResult = bigBitmapCache.get(key);
+			if (bitmapResult == null) {
+				bigBitmapCache.put(key, createBigBitmap(data.nearbyPlace.imageBitmap));
+			} else {
+				android.util.Log.d("Corwin", "cached big not null");
+			}
+		} else {
+			if (bitmapResult == null) {
+				bitmapResult = Bitmap.createBitmap(smallIconSize, smallIconSize, Bitmap.Config.ARGB_8888);
+				Canvas canvas = new Canvas(bitmapResult);
+				bitmapPaint.setColorFilter(new PorterDuffColorFilter(pointerOuterColor, PorterDuff.Mode.SRC_IN));
+				Rect srcRect = new Rect(0, 0, circle.getWidth(), circle.getHeight());
+				RectF dstRect = new RectF(0, 0, smallIconSize, smallIconSize);
+				canvas.drawBitmap(circle, srcRect, dstRect, bitmapPaint);
+				bitmapPaint.setColorFilter(new PorterDuffColorFilter(ColorUtilities.getColor(app, R.color.poi_background), PorterDuff.Mode.SRC_IN));
+				dstRect = new RectF(2, 2, smallIconSize - 4, smallIconSize - 4);
+				canvas.drawBitmap(circle, srcRect, dstRect, bitmapPaint);
+				bitmapResult = AndroidUtils.scaleBitmap(bitmapResult, smallIconSize, smallIconSize, false);
+				smallBitmapCache.put(key, bitmapResult);
+			}
+		}
 		return bitmapResult != null ? NativeUtilities.createSkImageFromBitmap(bitmapResult) : SwigUtilities.nullSkImage();
+	}
+
+	private @NonNull Bitmap createBigBitmap(@Nullable Bitmap loadedBitmap) {
+		android.util.Log.d("Corwin", "createBigBitmap: " + loadedBitmap);
+		Bitmap bitmapResult;
+		Bitmap bg = circle;
+		bitmapResult = Bitmap.createBitmap(bigIconSize, bigIconSize, Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(bitmapResult);
+		bitmapPaint.setColorFilter(new PorterDuffColorFilter(pointerOuterColor, PorterDuff.Mode.SRC_IN));
+		canvas.drawBitmap(bg, 0, 0, bitmapPaint);
+		if (loadedBitmap != null) {
+			int cx = bg.getWidth() / 2;
+			int cy = bg.getHeight() / 2;
+			int radius = Math.min(cx, cy) - 8;
+
+			canvas.save(); // Save the canvas state
+			canvas.clipRect(0, 0, bg.getWidth(), bg.getHeight()); // Clip to canvas bounds
+
+			Path circularPath = new Path();
+			circularPath.addCircle(cx, cy, radius, Path.Direction.CW);
+			canvas.clipPath(circularPath);
+
+			// Scale and center the loadedBitmap within the circle
+			Rect srcRect = new Rect(0, 0, loadedBitmap.getWidth(), loadedBitmap.getHeight());
+			RectF dstRect = new RectF(0, 0, bg.getWidth(), bg.getHeight());
+			bitmapPaint.setColorFilter(null);
+			canvas.drawBitmap(loadedBitmap, srcRect, dstRect, bitmapPaint);
+
+			canvas.restore(); // Restore the canvas state
+		}
+		bitmapResult = AndroidUtils.scaleBitmap(bitmapResult, bigIconSize, bigIconSize, false);
+		return bitmapResult;
 	}
 
 	@Override
@@ -210,17 +249,14 @@ public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvid
 		return offset;
 	}
 
-	public void addToData(@NonNull NearbyPlacePoint nearbyPlace, int color, boolean withShadow,
-	                      float textScale) throws IllegalStateException {
+	public void addToData(@NonNull NearbyPlacePoint nearbyPlacePoint, float textScale) throws IllegalStateException {
 		if (providerInstance != null) {
 			throw new IllegalStateException("Provider already instantiated. Data cannot be modified at this stage.");
 		}
-
-		int x31 = MapUtils.get31TileNumberX(nearbyPlace.getLongitude());
-		int y31 = MapUtils.get31TileNumberY(nearbyPlace.getLatitude());
+		int x31 = MapUtils.get31TileNumberX(nearbyPlacePoint.getLongitude());
+		int y31 = MapUtils.get31TileNumberY(nearbyPlacePoint.getLatitude());
 		points31.add(new PointI(x31, y31));
-		mapLayerDataList.add(new MapLayerData(nearbyPlace, color,
-				withShadow, /*nearbyPlace.getOverlayIconId(ctx), */nearbyPlace.getBackgroundType(),
+		mapLayerDataList.add(new MapLayerData(nearbyPlacePoint,
 				textScale));
 	}
 
@@ -231,19 +267,9 @@ public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvid
 		BackgroundType backgroundType;
 		float textScale;
 
-		MapLayerData(@NonNull NearbyPlacePoint nearbyPlace, int color,
-		             boolean withShadow, @NonNull BackgroundType backgroundType,
-		             float textScale) {
+		MapLayerData(@NonNull NearbyPlacePoint nearbyPlace, float textScale) {
 			this.nearbyPlace = nearbyPlace;
-			this.color = color;
-			this.withShadow = withShadow;
-			this.backgroundType = backgroundType;
 			this.textScale = textScale;
-		}
-
-		long getKey() {
-			return ((long) color << 6) + ((withShadow ? 1 : 0) << 3)
-					+ (int) (textScale * 10) + (backgroundType != null ? backgroundType.ordinal() : 0);
 		}
 	}
 }

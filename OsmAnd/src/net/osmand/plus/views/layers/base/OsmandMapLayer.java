@@ -85,6 +85,12 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 			}
 		}
 
+		public void onMapObjectUpdated(T object) {
+			if(customMapObjects != null && customMapObjects.contains(object)) {
+				isChanged = true;
+			}
+		}
+
 		public void setCustomMapObjects(List<T> customMapObjects) {
 			if (this.customMapObjects != customMapObjects) {
 				isChanged = true;

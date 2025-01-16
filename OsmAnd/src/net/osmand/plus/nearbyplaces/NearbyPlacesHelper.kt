@@ -6,10 +6,12 @@ import net.osmand.util.Algorithms
 import net.osmand.util.CollectionUtils
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData
 import java.util.Collections
+import kotlin.math.min
 
 object NearbyPlacesHelper {
 	private lateinit var app: OsmandApplication
 	private var lastModifiedTime: Long = 0
+	private const val PLACES_LIMIT = 10;
 
 	fun init(app: OsmandApplication) {
 		this.app = app
@@ -24,7 +26,8 @@ object NearbyPlacesHelper {
 			}
 
 			override fun onFinish(result: List<OsmandApiFeatureData>) {
-				dataCollection = result
+				val newListSize = min(result.size, PLACES_LIMIT)
+				dataCollection = result.subList(0, newListSize)
 				updateLastModifiedTime()
 				notifyListeners()
 			}

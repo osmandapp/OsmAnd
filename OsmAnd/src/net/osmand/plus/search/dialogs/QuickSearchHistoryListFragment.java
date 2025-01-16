@@ -121,7 +121,6 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 		setupNearByCard(view);
 		NearbyPlacesHelper.INSTANCE.startLoadingNearestPhotos();
 		view.findViewById(R.id.show_all_btn).setOnClickListener(v -> {
-//			app.getOsmandMap().getMapLayers().getNearbyPlacesLayer().setCustomMapObjects(app.getFavoritesHelper().getFavouritePoints());
 			app.getOsmandMap().getMapLayers().getNearbyPlacesLayer().setCustomMapObjects(NearbyPlacesHelper.INSTANCE.getDataCollection());
 		});
 	}

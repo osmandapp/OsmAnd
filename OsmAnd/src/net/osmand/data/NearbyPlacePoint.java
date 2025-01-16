@@ -1,6 +1,7 @@
 package net.osmand.data;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 
@@ -15,6 +16,7 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 	private static final long serialVersionUID = 829654300829771466L;
 
 	public static final BackgroundType DEFAULT_BACKGROUND_TYPE = BackgroundType.CIRCLE;
+	public Bitmap imageBitmap;
 	public String photoTitle;
 	public String wikiTitle;
 	public String poitype;
@@ -123,6 +125,10 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 		}
 
 		NearbyPlacePoint point = (NearbyPlacePoint) o;
+		if(point.imageBitmap != imageBitmap) {
+			return false;
+		}
+
 		if (!Algorithms.stringsEqual(photoTitle, point.photoTitle)) {
 			return false;
 		}
