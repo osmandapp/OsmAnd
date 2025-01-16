@@ -5,10 +5,8 @@ import static net.osmand.router.RouteResultPreparation.SHIFT_ID;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
-import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
-import net.osmand.router.network.NetworkRouteContext;
-import net.osmand.router.network.NetworkRouteSelector;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -44,7 +42,7 @@ public class HeightDataLoader {
         }
     }
 
-    public void loadHeightData(long osmId, QuadRect bbox31) {
+    public List<WptPt> loadHeightDataAsWaypoints(long osmId, QuadRect bbox31) {
         Map<Long, RouteDataObject> results = new HashMap<>();
         ResultMatcher<RouteDataObject> matcher = new ResultMatcher<>() {
             @Override
@@ -64,7 +62,23 @@ public class HeightDataLoader {
             log.error(e);
         }
 
-        // TODO calculateHeightArray() and return results
+        RouteDataObject found = results.get(osmId);
+        if (found != null && found.getPointsLength() > 0) {
+            List<WptPt> waypoints = new ArrayList<>();
+            float[] heightArray = found.calculateHeightArray();
+            for (int i = 0; i < found.getPointsLength(); i++) {
+                WptPt point = new WptPt();
+                point.setLat(MapUtils.get31LatitudeY(found.getPoint31YTile(i)));
+                point.setLon(MapUtils.get31LongitudeX(found.getPoint31XTile(i)));
+                if (heightArray != null && heightArray.length > i * 2 + 1) {
+                    point.setEle(heightArray[i * 2 + 1]);
+                }
+                waypoints.add(point);
+            }
+            return waypoints;
+        }
+
+        return null;
     }
 
     private boolean loadRouteDataObjects(QuadRect bbox31,
@@ -77,7 +91,7 @@ public class HeightDataLoader {
         int bottom = (int) bbox31.bottom >> ZOOM_TO_LOAD_TILES_SHIFT_R;
         for (int x = left; x <= right; x++) {
             for (int y = top; y <= bottom; y++) {
-                if (matcher.isCancelled()) {
+                if (matcher != null && matcher.isCancelled()) {
                     return loaded > 0;
                 }
                 loaded += loadRouteDataObjects(x, y, results, matcher);
@@ -108,10 +122,10 @@ public class HeightDataLoader {
                         loadedSubregions.put(sub, objects);
                     }
                     for (RouteDataObject obj : objects) {
-                        if (matcher.isCancelled()) {
+                        if (matcher != null && matcher.isCancelled()) {
                             return loaded;
                         }
-                        if (matcher.publish(obj)) {
+                        if (matcher == null || matcher.publish(obj)) {
                             if (deletedIds.contains(obj.id)) {
                                 // live-updates, osmand_change=delete
                                 continue;

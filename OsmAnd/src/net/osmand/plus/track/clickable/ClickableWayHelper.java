@@ -195,8 +195,10 @@ public class ClickableWayHelper {
 
     private boolean readHeightData(ClickableWay clickableWay) {
         HeightDataLoader loader = new HeightDataLoader(app.getResourceManager().getReverseGeocodingMapFiles());
-        loader.loadHeightData(clickableWay.getOsmId(), clickableWay.getBbox());
-        // TODO read height data, apply to the GpxFile points
+        List<WptPt> waypoints = loader.loadHeightDataAsWaypoints(clickableWay.getOsmId(), clickableWay.getBbox());
+        if (waypoints != null) {
+            clickableWay.getGpxFile().getTracks().get(0).getSegments().get(0).setPoints(waypoints);
+        }
         return true;
     }
 
