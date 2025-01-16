@@ -246,7 +246,7 @@
     <string name="shared_string_end">Slut</string>
     <string name="shared_string_start">Start</string>
     <string name="shared_string_apply">Anvend</string>
-    <string name="set_time_timeline_descr">Vælg vidt tid</string>
+    <string name="set_time_timeline_descr">Vælg vist tid</string>
     <string name="start_end_date">Start — slutdato</string>
     <string name="saved_messages">Gemte beskeder</string>
     <string name="time_zone_descr">Vælg tidszone, der skal vises i placeringsbeskeder.</string>
