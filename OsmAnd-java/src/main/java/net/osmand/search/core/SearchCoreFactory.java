@@ -681,15 +681,34 @@ public class SearchCoreFactory {
 				}
 			};
 
+			ResultMatcher<List<BinaryMapIndexReader.TagValuePair>> dynamicTagGroupsMatcher = new ResultMatcher<>() {
+                @Override
+                public boolean publish(List<BinaryMapIndexReader.TagValuePair> object) {
+                    for (BinaryMapIndexReader.TagValuePair tagValue : object) {
+                        if (tagValue.tag.startsWith("name")) {
+                            if (nm.matches(tagValue.value)) {
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                }
+
+                @Override
+                public boolean isCancelled() {
+                    return false;
+                }
+            };
+
 			SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
 					(int) bbox.centerX(), (int) bbox.centerY(), searchWord,
-					(int) bbox.left, (int) bbox.right, (int) bbox.top, (int) bbox.bottom,
-					matcher, rawDataCollector);
+					(int) bbox.left, (int) bbox.right, (int) bbox.top, (int) bbox.bottom, null,
+					matcher, rawDataCollector, dynamicTagGroupsMatcher);
 
 			SearchRequest<Amenity> reqUnlimited = BinaryMapIndexReader.buildSearchPoiRequest(
 					(int) bbox.centerX(), (int) bbox.centerY(), searchWord,
-					0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
-					matcher, rawDataCollector);
+					0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, null,
+					matcher, rawDataCollector, dynamicTagGroupsMatcher);
 
 			BinaryMapIndexReader fileRequest = phrase.getFileRequest();
 			if (fileRequest != null) {

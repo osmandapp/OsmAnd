@@ -782,6 +782,9 @@ public class BinaryMapPoiReaderAdapter {
 			switch (tag) {
 			case 0:
 				req.numberOfAcceptedObjects++;
+				if (req.tagGroupFilter != null && am.hasTagGroups() && !req.tagGroupFilter.isAccept(am.getTagGroups().keySet())) {
+					return null;
+				}
 				if (hasLocation) {
 					if (precisionXY != 0) {
 						int[] xy = MapUtils.calculateFinalXYFromBaseAndPrecisionXY(BASE_POI_ZOOM, FINAL_POI_ZOOM, precisionXY, x >> BASE_POI_SHIFT, y >> BASE_POI_SHIFT, true);
@@ -1152,6 +1155,9 @@ public class BinaryMapPoiReaderAdapter {
 							tagValuePairs.add(new TagValuePair(tagValues.get(i), tagValues.get(i + 1), -1));
 						}
 						tagGroups.put(id, tagValuePairs);
+						if (req.matchTagGroups(tagValuePairs)) {
+							req.addTagGroupIdFilter(id);
+						}
 					}
 					return;
 				case OsmandOdb.OsmAndPoiTagGroup.ID_FIELD_NUMBER:

@@ -82,6 +82,7 @@ import net.osmand.osm.edit.Way;
 import net.osmand.router.HHRouteDataStructure.HHRouteRegionPointsCtx;
 import net.osmand.router.HHRouteDataStructure.HHRoutingContext;
 import net.osmand.router.HHRouteDataStructure.NetworkDBPoint;
+import net.osmand.search.core.DynamicTagGroupFilter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -1672,14 +1673,20 @@ public class BinaryMapIndexReader {
 
 
 	public static SearchRequest<Amenity> buildSearchPoiRequest(int x, int y, String nameFilter, int sleft, int sright, int stop, int sbottom, ResultMatcher<Amenity> resultMatcher) {
-		return buildSearchPoiRequest(x, y, nameFilter, sleft, sright, stop, sbottom, resultMatcher, null);
+		return buildSearchPoiRequest(x, y, nameFilter, sleft, sright, stop, sbottom, null, resultMatcher, null, null);
 	}
 
-	public static SearchRequest<Amenity> buildSearchPoiRequest(int x, int y, String nameFilter, int sleft, int sright, int stop, int sbottom, ResultMatcher<Amenity> resultMatcher, ResultMatcher<Amenity> rawDataCollector) {
-		return buildSearchPoiRequest(x, y, nameFilter, sleft, sright, stop, sbottom, null, resultMatcher, null);
+	public static SearchRequest<Amenity> buildSearchPoiRequest(int x, int y, String nameFilter, int sleft, int sright, int stop, int sbottom,
+															   SearchPoiTypeFilter poiTypeFilter, ResultMatcher<Amenity> resultMatcher, ResultMatcher<Amenity> rawDataCollector) {
+		return buildSearchPoiRequest(x, y, nameFilter, sleft, sright, stop, sbottom, poiTypeFilter, resultMatcher, null, null);
 	}
 
-	public static SearchRequest<Amenity> buildSearchPoiRequest(int x, int y, String nameFilter, int sleft, int sright, int stop, int sbottom, SearchPoiTypeFilter poiTypeFilter, ResultMatcher<Amenity> resultMatcher, ResultMatcher<Amenity> rawDataCollector) {
+	public static SearchRequest<Amenity> buildSearchPoiRequest(int x, int y, String nameFilter,
+															   int sleft, int sright, int stop, int sbottom,
+															   SearchPoiTypeFilter poiTypeFilter,
+															   ResultMatcher<Amenity> resultMatcher,
+															   ResultMatcher<Amenity> rawDataCollector,
+															   ResultMatcher<List<TagValuePair>> dynamicTagGroupsMatcher) {
 		SearchRequest<Amenity> request = new SearchRequest<Amenity>();
 		request.x = x;
 		request.y = y;
@@ -1691,6 +1698,7 @@ public class BinaryMapIndexReader {
 		request.resultMatcher = resultMatcher;
 		request.rawDataCollector = rawDataCollector;
 		request.nameQuery = nameFilter.trim();
+		request.dynamicTagGroupsMatcher = dynamicTagGroupsMatcher;
 		return request;
 	}
 
@@ -1781,6 +1789,7 @@ public class BinaryMapIndexReader {
 
 		private ResultMatcher<T> resultMatcher;
 		private ResultMatcher<T> rawDataCollector;
+		public ResultMatcher<List<TagValuePair>>  dynamicTagGroupsMatcher;
 
 		// 31 zoom tiles
 		// common variables
@@ -1806,6 +1815,7 @@ public class BinaryMapIndexReader {
 
 		SearchPoiTypeFilter poiTypeFilter = null;
 		SearchPoiAdditionalFilter poiAdditionalFilter;
+		DynamicTagGroupFilter tagGroupFilter = null;
 
 		// cache information
 		TIntArrayList cacheCoordinates = new TIntArrayList();
@@ -1857,6 +1867,21 @@ public class BinaryMapIndexReader {
 				return true;
 			}
 			return false;
+		}
+
+		public boolean matchTagGroups(List<TagValuePair> tagValuePairs) {
+			if (dynamicTagGroupsMatcher == null) {
+				return false;
+			}
+			return dynamicTagGroupsMatcher.publish(tagValuePairs);
+		}
+
+		public void addTagGroupIdFilter(int tagGroupId) {
+			if (tagGroupFilter == null) {
+				tagGroupFilter = new DynamicTagGroupFilter(tagGroupId);
+			} else {
+				tagGroupFilter.addTagGroup(tagGroupId);
+			}
 		}
 
 		public void collectRawData(T obj) {
@@ -2463,7 +2488,7 @@ public class BinaryMapIndexReader {
 					public boolean isEmpty() {
 						return false;
 					}
-				}, null, null);
+				}, null, null, null);
 
 		reader.searchPoi(req);
 		for (Amenity a : req.getSearchResults()) {
