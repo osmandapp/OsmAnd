@@ -1036,12 +1036,7 @@ public class TravelObfHelper implements TravelHelper {
 
 	private List<BinaryMapIndexReader> getAmenityReaders() {
 		if (!app.isApplicationInitializing()) {
-			List<BinaryMapIndexReader> readers = new ArrayList<>();
-			List<AmenityIndexRepository> repos = app.getResourceManager().getAmenityRepositories(true);
-			for (AmenityIndexRepository repo : repos) {
-				readers.add(((AmenityIndexRepositoryBinary) repo).getOpenFile());
-			}
-			return readers;
+			return app.getResourceManager().getAmenityReaders(true);
 		} else {
 			return new ArrayList<>();
 		}
