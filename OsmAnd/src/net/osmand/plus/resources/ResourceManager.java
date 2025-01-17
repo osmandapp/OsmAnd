@@ -800,6 +800,16 @@ public class ResourceManager {
 	}
 
 	@NonNull
+	public List<BinaryMapIndexReader> getAmenityReaders(boolean includeTravel) {
+		List<BinaryMapIndexReader> readers = new ArrayList<>();
+		List<AmenityIndexRepository> repos = app.getResourceManager().getAmenityRepositories(includeTravel);
+		for (AmenityIndexRepository repo : repos) {
+			readers.add(((AmenityIndexRepositoryBinary) repo).getOpenFile());
+		}
+		return readers;
+	}
+
+	@NonNull
 	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter, QuadRect rect,
 			boolean includeTravel) {
 		return searchAmenities(filter, null, rect.top, rect.left, rect.bottom, rect.right, -1, includeTravel, null);
