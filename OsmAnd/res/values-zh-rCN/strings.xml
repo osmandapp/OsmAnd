@@ -5916,4 +5916,6 @@
     <string name="obd_fuel_left_liters">剩余燃料（升）</string>
     <string name="obd_fuel_left_distance_desc">通过 OBD 传感器显示车辆剩余油量下的行驶距离</string>
     <string name="obd_fuel_type_desc">通过 OBD 传感器显示车辆燃料类型</string>
+    <string name="display_distance_to_first_intermediate_summary">首先显示下一站的时间和距离。关闭此功能以始终显示目的地的详细信息。</string>
+    <string name="display_distance_to_first_intermediate">显示下一站的路线详情</string>
 </resources>
