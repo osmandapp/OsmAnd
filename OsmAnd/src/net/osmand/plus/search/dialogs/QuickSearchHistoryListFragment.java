@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.nearbyplaces.NearbyPlacesFragment;
 import net.osmand.plus.nearbyplaces.NearbyPlacesHelper;
 import net.osmand.plus.nearbyplaces.NearbyPlacesListener;
 import net.osmand.plus.search.NearbyAdapter;
@@ -122,6 +124,11 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 		NearbyPlacesHelper.INSTANCE.startLoadingNearestPhotos();
 		view.findViewById(R.id.show_all_btn).setOnClickListener(v -> {
 			app.getOsmandMap().getMapLayers().getNearbyPlacesLayer().setCustomMapObjects(NearbyPlacesHelper.INSTANCE.getDataCollection());
+			MapActivity activity = getMapActivity();
+			if (activity != null) {
+				NearbyPlacesFragment.showInstance(activity.getSupportFragmentManager());
+				getDialogFragment().hide();
+			}
 		});
 	}
 

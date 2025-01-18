@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.util.Algorithms;
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData;
@@ -16,6 +17,7 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 	private static final long serialVersionUID = 829654300829771466L;
 
 	public static final BackgroundType DEFAULT_BACKGROUND_TYPE = BackgroundType.CIRCLE;
+	@Nullable
 	public Bitmap imageBitmap;
 	public String photoTitle;
 	public String wikiTitle;

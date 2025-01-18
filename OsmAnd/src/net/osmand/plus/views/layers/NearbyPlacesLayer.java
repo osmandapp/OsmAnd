@@ -14,12 +14,14 @@ import com.squareup.picasso.Target;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.TextRasterizer;
 import net.osmand.data.LatLon;
 import net.osmand.data.NearbyPlacePoint;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
+import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
+import net.osmand.plus.nearbyplaces.NearbyPlacesHelper;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -38,9 +40,9 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 
 	private static final int START_ZOOM = 6;
 	private static final Log LOG = PlatformUtil.getLog(NearbyPlacesLayer.class);
+	public static final String LOAD_NEARBY_IMAGES_TAG = "load_nearby_images";
 
 	protected List<NearbyPlacePoint> cache = new ArrayList<>();
-	private ContextMenuLayer contextMenuLayer;
 	private boolean showNearbyPoints;
 	private float textScale = 1f;
 	private boolean nightMode;
@@ -60,6 +62,7 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 	private int bigIconSize;
 	private int bigIconBorderSize;
 	private int smallIconBorderSize;
+	private final List<Target> imageLoadingTargets = new ArrayList<>();
 
 
 	public CustomMapObjects<NearbyPlacePoint> customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
@@ -76,7 +79,6 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 		super.initLayer(view);
 
 		boolean night = getApplication().getDaynightHelper().isNightMode();
-		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 
 		nightMode = night;
 
@@ -146,20 +148,64 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 		boolean showNearbyPoints = !customObjectsDelegate.getMapObjects().isEmpty();
 		boolean showNearbyplacesChanged = this.showNearbyPoints != showNearbyPoints;
 		this.showNearbyPoints = showNearbyPoints;
-
 		if (hasMapRenderer()) {
 			if ((mapActivityInvalidated || mapRendererChanged || nightModeChanged || showNearbyplacesChanged
 					|| textScaleChanged
 					|| customObjectsDelegate.isChanged())) {
-				android.util.Log.d("Corwin", "showNearbies: ");
 				showNearbyPoints();
 				if (customObjectsDelegate != null) {
 					customObjectsDelegate.acceptChanges();
 				}
 				mapRendererChanged = false;
 			}
+		} else {
+			cache.clear();
+			if (showNearbyPoints && tileBox.getZoom() >= START_ZOOM) {
+				float iconSize = getIconSize(view.getApplication());
+				QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
+				QuadRect latLonBounds = tileBox.getLatLonBounds();
+				List<LatLon> fullObjectsLatLon = new ArrayList<>();
+				List<LatLon> smallObjectsLatLon = new ArrayList<>();
+				if (customObjectsDelegate != null) {
+					drawPoints(customObjectsDelegate.getMapObjects(), latLonBounds, false, tileBox, boundIntersections, iconSize, canvas,
+							fullObjectsLatLon, smallObjectsLatLon);
+				}
+				this.fullObjectsLatLon = fullObjectsLatLon;
+				this.smallObjectsLatLon = smallObjectsLatLon;
+			}
 		}
 		mapActivityInvalidated = false;
+	}
+
+	private void drawPoints(List<NearbyPlacePoint> pointsToDraw, QuadRect latLonBounds, boolean synced, RotatedTileBox tileBox,
+	                        QuadTree<QuadRect> boundIntersections, float iconSize, Canvas canvas,
+	                        List<LatLon> fullObjectsLatLon, List<LatLon> smallObjectsLatLon) {
+		List<NearbyPlacePoint> fullObjects = new ArrayList<>();
+		for (NearbyPlacePoint nearbyPoint : pointsToDraw) {
+			double lat = nearbyPoint.getLatitude();
+			double lon = nearbyPoint.getLongitude();
+			if (lat >= latLonBounds.bottom && lat <= latLonBounds.top
+					&& lon >= latLonBounds.left && lon <= latLonBounds.right) {
+				cache.add(nearbyPoint);
+				float x = tileBox.getPixXFromLatLon(lat, lon);
+				float y = tileBox.getPixYFromLatLon(lat, lon);
+				if (intersects(boundIntersections, x, y, iconSize, iconSize) || nearbyPoint.imageBitmap == null) {
+					canvas.drawBitmap(NearbyPlacesHelper.INSTANCE.createSmallPointBitmap(this), x, y, new Paint());
+					smallObjectsLatLon.add(new LatLon(lat, lon));
+				} else {
+					fullObjects.add(nearbyPoint);
+					fullObjectsLatLon.add(new LatLon(lat, lon));
+				}
+			}
+		}
+		for (NearbyPlacePoint point : fullObjects) {
+			Bitmap bitmap = point.imageBitmap;
+			if (bitmap != null) {
+				float x = tileBox.getPixXFromLatLon(point.getLatitude(), point.getLongitude());
+				float y = tileBox.getPixYFromLatLon(point.getLatitude(), point.getLongitude());
+				canvas.drawBitmap(NearbyPlacesHelper.INSTANCE.createBigBitmap(this, bitmap), x, y, new Paint());
+			}
+		}
 	}
 
 	public synchronized void showNearbyPoints() {
@@ -184,10 +230,6 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 		for (NearbyPlacePoint nearbyPlacePoint : points) {
 			nearbyPlacesMapLayerProvider.addToData(nearbyPlacePoint, textScale);
 		}
-	}
-
-	private TextRasterizer.Style getTextStyle(float textScale) {
-		return MapTextLayer.getTextStyle(getContext(), nightMode, textScale, view.getDensity());
 	}
 
 	public void clearNearbyPoints() {
@@ -227,30 +269,35 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 
 	public void setCustomMapObjects(List<WikiCoreHelper.OsmandApiFeatureData> nearbyPlacePoints) {
 		if (customObjectsDelegate != null) {
+			Picasso.get().cancelTag(LOAD_NEARBY_IMAGES_TAG);
+			imageLoadingTargets.clear();
 			List<NearbyPlacePoint> nearbyPlacePointsList = new ArrayList<>();
-			for (WikiCoreHelper.OsmandApiFeatureData data :
-					nearbyPlacePoints) {
+			for (WikiCoreHelper.OsmandApiFeatureData data : nearbyPlacePoints) {
 				NearbyPlacePoint point = new NearbyPlacePoint(data);
 				nearbyPlacePointsList.add(point);
 				WikiImage wikiImage = WikiCoreHelper.getImageData(point.photoTitle);
+				Target imgLoadTarget = new Target() {
+					@Override
+					public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+						point.imageBitmap = bitmap;
+						customObjectsDelegate.onMapObjectUpdated(point);
+						imageLoadingTargets.remove(this);
+					}
+
+					@Override
+					public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+					}
+
+					@Override
+					public void onPrepareLoad(Drawable placeHolderDrawable) {
+					}
+				};
+				imageLoadingTargets.add(imgLoadTarget);
 				if (wikiImage != null) {
-					Picasso.get().load(wikiImage.getImageStubUrl()).into(new Target() {
-						@Override
-						public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-							point.imageBitmap = bitmap;
-							android.util.Log.d("Corwin", "onBitmapLoaded: " + point.photoTitle);
-							customObjectsDelegate.onMapObjectUpdated(point);
-						}
-
-						@Override
-						public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-							android.util.Log.d("Corwin", "onBitmapFailed: " + point.photoTitle);
-						}
-
-						@Override
-						public void onPrepareLoad(Drawable placeHolderDrawable) {
-						}
-					});
+					Picasso.get()
+							.load(wikiImage.getImageStubUrl())
+							.tag(LOAD_NEARBY_IMAGES_TAG)
+							.into(imgLoadTarget);
 				}
 			}
 			customObjectsDelegate.setCustomMapObjects(nearbyPlacePointsList);
