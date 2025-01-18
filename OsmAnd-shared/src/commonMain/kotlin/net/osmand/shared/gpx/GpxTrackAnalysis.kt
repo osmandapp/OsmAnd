@@ -14,12 +14,13 @@ class GpxTrackAnalysis {
 	companion object {
 		const val ANALYSIS_VERSION = 1
 
-		fun prepareInformation(
-			fileTimeStamp: Long, pointsAnalyzer: TrackPointsAnalyser, segment: TrkSegment
-		): GpxTrackAnalysis {
-			return GpxTrackAnalysis().prepareInformation(
-				fileTimeStamp, pointsAnalyzer, SplitSegment(segment)
-			)
+		fun prepareInformation(fileTimeStamp: Long,
+		                       joinSegments: Boolean,
+		                       pointsAnalyzer: TrackPointsAnalyser,
+		                       segment: TrkSegment): GpxTrackAnalysis {
+			val analysis = GpxTrackAnalysis()
+			analysis.joinSegments = joinSegments
+			return analysis.prepareInformation(fileTimeStamp, pointsAnalyzer, SplitSegment(segment))
 		}
 	}
 
@@ -58,6 +59,10 @@ class GpxTrackAnalysis {
 
 	fun setGpxParameter(parameter: GpxParameter, value: Any?) {
 		parameters[parameter] = value
+	}
+
+	fun setGpxParameters(parameters: Map<GpxParameter, Any?>) {
+		this.parameters.putAll(parameters)
 	}
 
 	var startTime: Long
@@ -455,7 +460,7 @@ class GpxTrackAnalysis {
 		}
 
 
-		if (joinSegments && totalDistanceWithoutGaps > 0) {
+		if (!joinSegments && totalDistanceWithoutGaps > 0) {
 			totalDistance = totalDistanceWithoutGaps
 		} else {
 			totalDistance = _totalDistance

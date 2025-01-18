@@ -19,6 +19,7 @@ import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -35,6 +36,7 @@ public class SelectedGpxFile {
 
 	protected GpxFile gpxFile;
 	protected GpxTrackAnalysis trackAnalysis;
+	protected long analysisParametersVersion;
 
 	protected List<TrkSegment> processedPointsToDisplay = new ArrayList<>();
 	protected List<GpxDisplayGroup> splitGroups;
@@ -70,8 +72,9 @@ public class SelectedGpxFile {
 		return gpxFile.getModifiedTime() != -1;
 	}
 
-	public GpxTrackAnalysis getTrackAnalysis(OsmandApplication app) {
-		if (modifiedTime != gpxFile.getModifiedTime()) {
+	public GpxTrackAnalysis getTrackAnalysis(@NonNull OsmandApplication app) {
+		if (modifiedTime != gpxFile.getModifiedTime()
+				|| analysisParametersVersion != getAnalysisParametersVersion(app)) {
 			update(app);
 		}
 		return trackAnalysis;
@@ -92,8 +95,16 @@ public class SelectedGpxFile {
 		this.splitProcessed = true;
 	}
 
+	private long getAnalysisParametersVersion(@NonNull OsmandApplication app) {
+		String path = gpxFile.getPath();
+		KFile file = !Algorithms.isEmpty(path) ? new KFile(path) : null;
+		GpxDataItem dataItem = file != null ? app.getGpxDbHelper().getItem(file, false) : null;
+		return dataItem != null ? dataItem.getAnalysisParametersVersion() : 0;
+	}
+
 	protected void update(@NonNull OsmandApplication app) {
 		modifiedTime = gpxFile.getModifiedTime();
+		analysisParametersVersion = getAnalysisParametersVersion(app);
 		pointsModifiedTime = gpxFile.getPointsModifiedTime();
 
 		long fileTimestamp = Algorithms.isEmpty(gpxFile.getPath())
