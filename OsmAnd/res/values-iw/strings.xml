@@ -4629,7 +4629,7 @@
     <string name="x_axis">ציר X</string>
     <string name="av_audio_format_bottom_sheet_descr">נא לבחור תצורת שמע. תצורת מכולת סוג קובץ השמע היא 3GPP‏ (‎.3gp).</string>
     <string name="shared_string_modified">נערך</string>
-    <string name="cloud_sync_progress">מתבצע סנכרון…%1$s</string>
+    <string name="cloud_sync_progress">מתבצע סנכרון… %1$s</string>
     <string name="checking_progress">מתבצעת בדיקה…</string>
     <string name="res_unknown">לא ידוע</string>
     <string name="shared_string_unsynced">לא מסונכרן</string>
