@@ -118,7 +118,7 @@
     <string name="poi_vehicle_inspection">Bilsyn</string>
     <string name="poi_car_wash">Bilvask</string>
     <string name="poi_fuel">Tankstation;Benzintank;Servicestation</string>
-    <string name="poi_electricity_combined_charging">Opladningsstation;Elektrisk bil opladningsstation;El-bil opladningsstation;Elektrisk opladningspunkt;Opladningspunkt;Elektrisk ladningspunkt;Elektrisk bil forsyninger</string>
+    <string name="poi_electricity_combined_charging">Opladningsstation;Elektrisk bil opladningsstation;El-bil opladningsstation;Elektrisk opladningspunkt;Opladningspunkt;Elektrisk ladningspunkt;Elektrisk bil forsyninger;Ladestation</string>
     <string name="poi_vehicle_ramp">Kørerampe</string>
     <string name="poi_compressed_air">Trykluft</string>
     <string name="poi_parking">Parkering</string>
@@ -134,7 +134,7 @@
     <string name="poi_public_transport_station">Offentligtransport station</string>
     <string name="poi_bus_station">Busstation</string>
     <string name="poi_railway_station">Banegård:Banegård;Togstation</string>
-    <string name="poi_railway_platform">Perron;Perron</string>
+    <string name="poi_railway_platform">Jernbaneperron;Togperron</string>
     <string name="poi_subway_entrance">Metroindgang</string>
     <string name="poi_subway_station">Ja</string>
     <string name="poi_taxi">Taxaholdeplads</string>
@@ -625,7 +625,7 @@
     <string name="poi_clothes_children">Børnetøj</string>
     <string name="poi_apartment">Lejlighed</string>
     <string name="poi_public_transport_stop_position">Offentlig transport stoppested</string>
-    <string name="poi_halt">Trinbræt</string>
+    <string name="poi_halt">Trinbræt;Togstation</string>
     <string name="poi_lodging">Logi</string>
     <string name="poi_internet_access_wlan">Internetadgang: wlan</string>
     <string name="poi_internet_access_terminal">Internetadgang: terminal</string>
@@ -1849,7 +1849,7 @@
     <string name="poi_fuel_100ll">100LL brændstof</string>
     <string name="poi_fuel_autogas">Autogas</string>
     <string name="poi_fuel_jeta1">Jet A-1 brændstof</string>
-    <string name="poi_fuel_adblue">Diesel udstødning væske</string>
+    <string name="poi_fuel_adblue">Dieseludstødningsvæske</string>
     <string name="poi_fuel_wood">Brændstof: træ</string>
     <string name="poi_fuel_charcoal">Brwændstof: trækul</string>
     <string name="poi_fuel_coal">Brændstof: kul</string>
@@ -4120,13 +4120,13 @@
     <string name="poi_climbing_bolts_filter">Klatrebolte</string>
     <string name="poi_climbing_quality">Klatre kvalitet</string>
     <string name="poi_second_hand_filter">Brugte varer</string>
-    <string name="poi_shop_general">Generel butik</string>
+    <string name="poi_shop_general">Landhandel</string>
     <string name="poi_live_music">Live musik</string>
     <string name="poi_healthcare_speciality_clinic">Helbreds specialist: klinik</string>
-    <string name="poi_us_maps_recreation_area_open_status">Aktivitetsområde status</string>
-    <string name="poi_us_maps_recreation_area_activity">Aktivitetsområde</string>
-    <string name="poi_impromptu">Minimal</string>
+    <string name="poi_us_maps_recreation_area_open_status">Adgangsstatus til rekreativt område</string>
+    <string name="poi_us_maps_recreation_area_activity">Aktivitet i rekreativt område</string>
+    <string name="poi_impromptu">Improviseret</string>
     <string name="poi_reservation">Reservation</string>
-    <string name="poi_healthcare_speciality_psychotherapist">Helbreds specialist: psykoterapeut</string>
-    <string name="poi_healthcare_speciality_laboratory">Helbreds specialist: laboratorium</string>
+    <string name="poi_healthcare_speciality_psychotherapist">Sundhedsfagligt speciale: psykoterapeut</string>
+    <string name="poi_healthcare_speciality_laboratory">Sundhedsfagligt speciale: laboratorium</string>
 </resources>
