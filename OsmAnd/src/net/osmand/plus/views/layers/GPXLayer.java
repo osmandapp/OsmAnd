@@ -709,7 +709,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	@Nullable
 	@Override
 	protected Bitmap getScaledBitmap(int drawableId) {
-		return getScaledBitmap(drawableId, textScale);
+		return app.getUIUtilities().getScaledBitmap(getMapActivity(), drawableId, textScale);
 	}
 
 	private void drawSplitItems(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
