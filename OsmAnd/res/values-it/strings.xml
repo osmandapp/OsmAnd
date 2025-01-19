@@ -1941,7 +1941,7 @@
     <string name="postcode">Codice postale</string>
     <string name="shared_string_from">da</string>
     <string name="city_type_district">Distretto</string>
-    <string name="city_type_neighbourhood">Quartiere</string>
+    <string name="city_type_neighbourhood">Quartiere minore</string>
     <string name="map_widget_search">Cerca</string>
     <string name="lang_hsb">Sorabo superiore</string>
     <string name="rendering_attr_hideOverground_name">Oggetti sopra il terreno</string>
