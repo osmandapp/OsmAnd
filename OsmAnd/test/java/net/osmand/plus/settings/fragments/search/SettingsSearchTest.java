@@ -55,7 +55,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"AnnouncementTimeBottomSheet: title",
 								new SettingsSearchTestTemplate() {
@@ -132,7 +131,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"RecalculateRouteInDeviationBottomSheet: title",
 								new SettingsSearchTestTemplate() {
@@ -178,7 +176,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"ScreenTimeoutBottomSheet: description",
 								new SettingsSearchTestTemplate() {
@@ -194,7 +191,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"GoodsRestrictionsBottomSheet: title",
 								new SettingsSearchTestTemplate() {
@@ -270,7 +266,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"SendAnalyticsBottomSheetDialogFragment: description",
 								new SettingsSearchTestTemplate() {
@@ -286,7 +281,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"ProfileAppearanceFragment: view_angle_description",
 								new SettingsSearchTestTemplate() {
@@ -317,7 +311,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"RouteParametersFragment: title",
 								new SettingsSearchTestTemplate() {
@@ -333,7 +326,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"ResetProfilePrefsBottomSheet: title",
 								new SettingsSearchTestTemplate() {
@@ -379,7 +371,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"GeneralProfileSettingsFragment",
 								new SettingsSearchTestTemplate() {
@@ -395,7 +386,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"DistanceDuringNavigationBottomSheet: description",
 								new SettingsSearchTestTemplate() {
@@ -411,7 +401,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"VehicleParametersFragment: SimpleSingleSelectionBottomSheet, description",
 								new SettingsSearchTestTemplate() {
@@ -427,7 +416,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"VoiceLanguageBottomSheetFragment: language_description",
 								new SettingsSearchTestTemplate() {
@@ -473,7 +461,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"WakeTimeBottomSheet: description",
 								new SettingsSearchTestTemplate() {
@@ -519,7 +506,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"SelectNavProfileBottomSheet: header",
 								new SettingsSearchTestTemplate() {
@@ -535,7 +521,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"SelectDefaultProfileBottomSheet: description",
 								new SettingsSearchTestTemplate() {
@@ -566,7 +551,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"SelectBaseProfileBottomSheet: title",
 								new SettingsSearchTestTemplate() {
@@ -597,7 +581,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"ConfigureScreenFragment",
 								new SettingsSearchTestTemplate() {
@@ -613,7 +596,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"search_map_rendering_engine_v1_find_map_rendering_engine",
 								new SettingsSearchTestTemplate() {
@@ -627,7 +609,8 @@ public class SettingsSearchTest extends AndroidTest {
 									protected List<String> getExpectedSearchResults(final Context context) {
 										return List.of(context.getString(R.string.map_rendering_engine));
 									}
-								}},
+								}
+						},
 						{
 								"search_map_rendering_engine_v2_find_map_rendering_engine",
 								new SettingsSearchTestTemplate() {
@@ -641,8 +624,8 @@ public class SettingsSearchTest extends AndroidTest {
 									protected List<String> getExpectedSearchResults(final Context context) {
 										return List.of(context.getString(R.string.map_rendering_engine));
 									}
-								}},
-
+								}
+						},
 						{
 								"search_ApplicationMode_find_SelectCopyAppModeBottomSheet",
 								new SettingsSearchTestTemplate() {
@@ -661,7 +644,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_AccessibilityPlugin",
 								new SettingsSearchWithPluginTestTemplate() {
@@ -682,7 +664,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_AudioVideoNotesPlugin",
 								new SettingsSearchWithPluginTestTemplate() {
@@ -703,7 +684,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_OsmandMonitoringPlugin",
 								new SettingsSearchWithPluginTestTemplate() {
@@ -724,7 +704,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"shouldSearchAndFind_ResetProfilePrefsBottomSheet_within_WeatherPlugin",
 								new SettingsSearchWithPluginTestTemplate() {
@@ -745,7 +724,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_OsmandMonitoringPlugin",
 								new SettingsSearchWithPluginTestTemplate() {
@@ -770,7 +748,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_AccessibilityPlugin",
 								new SettingsSearchWithPluginTestTemplate() {
@@ -795,7 +772,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_AudioVideoNotesPlugin",
 								new SettingsSearchWithPluginTestTemplate() {
@@ -820,7 +796,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"shouldSearchAndFind_SelectCopyAppModeBottomSheet_within_WeatherPlugin",
 								new SettingsSearchWithPluginTestTemplate() {
@@ -845,7 +820,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"shouldSearchAndFind_LocationInterpolationBottomSheet_title",
 								new SettingsSearchWithPluginTestTemplate() {
@@ -866,7 +840,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"shouldSearchAndFind_LocationInterpolationBottomSheet_description",
 								new SettingsSearchWithPluginTestTemplate() {
@@ -887,7 +860,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"shouldSearchAndFindProfileAppearanceSettings4EachEnabledApplicationMode",
 								new SettingsSearchTestTemplate() {
@@ -913,7 +885,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"shouldNotFindProfileAppearanceSettings4DisabledApplicationModes",
 								new SettingsSearchTestTemplate() {
@@ -934,7 +905,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"shouldSearchAndFindSpeedCameraSettings4EachApplicationMode",
 								new SettingsSearchTestTemplate() {
@@ -960,7 +930,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"shouldSearchAndFind_ConfigureMenuRootFragment_description",
 								new SettingsSearchTestTemplate() {
