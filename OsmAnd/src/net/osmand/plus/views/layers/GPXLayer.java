@@ -1214,7 +1214,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		String defaultGpxWidth = gpxAppearanceHelper.getTrackWidth(gpxFile, defaultWidthPref.get());
 		for (int segmentIdx = 0; segmentIdx < segments.size(); segmentIdx++) {
 			TrkSegment ts = segments.get(segmentIdx);
-			String width = Objects.requireNonNullElse(actualGpxWidth, ts.getWidth(defaultGpxWidth));
+			String width = actualGpxWidth != null ? actualGpxWidth : ts.getWidth(defaultGpxWidth);
 			cachedTrackWidth.putIfAbsent(width, null);
 			int color = getTrackColor(gpxFile, ts.getColor(cachedColor));
 			boolean newTsRenderer = false;
