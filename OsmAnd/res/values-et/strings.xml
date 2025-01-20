@@ -467,7 +467,7 @@
     <string name="map_imported_successfully">Kaart imporditud</string>
     <string name="enter_the_file_name">Sisesta failinimi.</string>
     <string name="transport_nearby_routes_within">Lähedalolevad teekonnad</string>
-    <string name="transport_nearby_routes">Ulatus</string>
+    <string name="transport_nearby_routes">Ümbruses</string>
     <string name="dd_mm_ss_format">DD°MM′SS″</string>
     <string name="dd_dddddd_format">DD.DDDDDD°</string>
     <string name="dd_ddddd_format">DD.DDDDD°</string>
@@ -1214,7 +1214,7 @@
     <string name="map_widget_right">Parempoolne paneel</string>
     <string name="map_widget_left">Vasakpoolne paneel</string>
     <string name="configure_map">Seadista kaarti</string>
-    <string name="search_radius_proximity">Ulatus</string>
+    <string name="search_radius_proximity">Ümbruses</string>
     <string name="anonymous_user_hint">Anonüümsed kasutajad ei saa:
 \n- Luua gruppe;
 \n- Serveriga gruppe ja seadmeid sünkroonida;
@@ -3877,7 +3877,7 @@
     <string name="show_start_dialog">Kuva algdialoog</string>
     <string name="purchases_feature_desc_terrain">Maastiku kõrgusjooned, tumedate toonidega täielik mäe- ja nõlvakaart, millel on värvid tippude ja madalike eristamiseks.</string>
     <string name="purchases_feature_desc_wikivoyage">Sirvi Wikivoyage saiti ilma võrguühenduseta. Artiklid on jaotatud riikide ja piirkondade kaupa ning saadaval kõigis keeltes.</string>
-    <string name="purchases_feature_desc_wikipedia">Sirvi Vikipeediat võrguühenduseta. Artiklid on jaotatud riikide ja piirkondade kaupa ning saadaval kõigis keeltes.</string>
+    <string name="purchases_feature_desc_wikipedia">Tagab asukohaga seotud Vikipeedia andmed vallasrežiimis ning võimaldab sul mugavalt uurida lisateavet antud objekti ja tema lähiümbruse kohta. Ära unusta sind huvitava piirkonna Vikipeedia andmeid alla laadida.</string>
     <string name="purchases_feature_desc_combined_wiki">Tutvu Vikipeedia artiklitega liikvel olles, ilma internetiühenduseta. Võrguühenduseta andmed on jaotatud riikide kaupa ja saadaval kõigis keeltes.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Hangi juurdepääs regulaarsetele igakuistele võrguühenduseta kaartide uuendustele.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Hangi juurdepääs sagedasematele kaardiuuendustele. Tundide, päevade või nädalate kaupa uuendused. Uuendused laaditakse alla järk-järgult, ainult muutunud piirkonna osas.</string>
