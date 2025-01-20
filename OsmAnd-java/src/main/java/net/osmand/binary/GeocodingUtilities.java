@@ -1,6 +1,5 @@
 package net.osmand.binary;
 
-import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -200,7 +199,7 @@ public class GeocodingUtilities {
 		List<String> ls = new ArrayList<String>();
 		int beginning = 0;
 		for (int i = 1; i < s.length(); i++) {
-			if (CollatorStringMatcher.isSpace(s.charAt(i))) {
+			if (Character.isWhitespace(s.charAt(i))) {
 				addWord(ls, s.substring(beginning, i), addCommonWords);
 				beginning = i + 1;
 			} else if (s.charAt(i) == '(') {

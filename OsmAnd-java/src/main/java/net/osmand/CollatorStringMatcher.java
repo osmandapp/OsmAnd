@@ -195,7 +195,7 @@ public class CollatorStringMatcher implements StringMatcher {
 		return fullText;
 	}
 
-	public static boolean isSpace(char c){
+	private static boolean isSpace(char c){
 		return !Character.isLetter(c) && !Character.isDigit(c);
 	}
 	
