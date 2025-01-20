@@ -1493,8 +1493,8 @@
     <string name="poi_service_repair_no">Ingen reparation</string>
     <string name="poi_service_electrical">Reparation af elektriske køretøjer</string>
     <string name="poi_motorcycle_repair">Motorcykel reparation</string>
-    <string name="poi_self_service_yes">Ja;Selv service</string>
-    <string name="poi_self_service_no">Nej;Ingen selv service</string>
+    <string name="poi_self_service_yes">Ja;Selvbetjening</string>
+    <string name="poi_self_service_no">Nej;Ingen selvbetjening</string>
     <string name="poi_automated_yes">Ja;Automatiseret</string>
     <string name="poi_automated_no">Ikke automatiseret</string>
     <string name="poi_full_service_yes">Fuld service</string>
