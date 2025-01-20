@@ -121,7 +121,7 @@ public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvid
 
 	@Override
 	public SingleSkImage getImageBitmap(int index, boolean isFullSize) {
-		Bitmap bitmapResult = null;
+		Bitmap bitmapResult;
 		NearbyPlacesTileProvider.MapLayerData data = index < mapLayerDataList.size() ? mapLayerDataList.get(index) : null;
 		if (data == null) {
 			return SwigUtilities.nullSkImage();
@@ -130,7 +130,8 @@ public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvid
 		if (isFullSize && data.nearbyPlace.imageBitmap != null) {
 			bitmapResult = bigBitmapCache.get(key);
 			if (bitmapResult == null) {
-				bigBitmapCache.put(key, NearbyPlacesHelper.INSTANCE.createBigBitmap(nearbyPlacesLayer, data.nearbyPlace.imageBitmap));
+				bitmapResult = NearbyPlacesHelper.INSTANCE.createBigBitmap(nearbyPlacesLayer, data.nearbyPlace.imageBitmap);
+				bigBitmapCache.put(key, bitmapResult);
 			}
 		} else {
 			if (cachedSmallBitmap == null) {
@@ -138,7 +139,7 @@ public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvid
 			}
 			bitmapResult = cachedSmallBitmap;
 		}
-		return bitmapResult != null ? NativeUtilities.createSkImageFromBitmap(bitmapResult) : SwigUtilities.nullSkImage();
+		return NativeUtilities.createSkImageFromBitmap(bitmapResult);
 	}
 
 	@Override
@@ -182,7 +183,7 @@ public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvid
 		return offset;
 	}
 
-	public void addToData(@NonNull NearbyPlacePoint nearbyPlacePoint, float textScale) throws IllegalStateException {
+	public void addToData(@NonNull NearbyPlacePoint nearbyPlacePoint) throws IllegalStateException {
 		if (providerInstance != null) {
 			throw new IllegalStateException("Provider already instantiated. Data cannot be modified at this stage.");
 		}

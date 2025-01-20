@@ -87,6 +87,7 @@
 				android:layout_height="wrap_content"
 				android:layout_marginStart="@dimen/content_padding"
 				android:layout_marginTop="@dimen/content_padding_small"
+				android:layout_marginBottom="@dimen/content_padding_small"
 				android:text="@string/recently_visited"
 				android:textColor="?android:textColorPrimary" />
 
