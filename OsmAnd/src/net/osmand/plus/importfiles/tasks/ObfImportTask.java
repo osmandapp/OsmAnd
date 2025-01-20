@@ -29,6 +29,10 @@ public class ObfImportTask extends BaseImportAsyncTask<Void, Void, String> {
 		boolean unzip = name.endsWith(IndexConstants.ZIP_EXT);
 		String fileName = unzip ? name.replace(IndexConstants.ZIP_EXT, "") : name;
 		File dest = getObfDestFile(fileName);
+		File parent = dest.getParentFile();
+		if (parent != null) {
+			parent.mkdirs();
+		}
 		String error = ImportHelper.copyFile(app, dest, uri, false, unzip);
 		if (error == null) {
 			app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<>());
