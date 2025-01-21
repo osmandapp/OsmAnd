@@ -1740,4 +1740,5 @@
     <string name="shared_string_options">Opcije</string>
     <string name="shared_string_next_event">Sljedeći događaj</string>
     <string name="map_widget_sun_position_desc">Prikazuje vrijeme do izlaska ili zalaska sunca.</string>
+    <string name="map_widget_sun_position">Pozicija sunca</string>
 </resources>
