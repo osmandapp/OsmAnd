@@ -32,7 +32,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.button.PurchasingUtils;
-import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
@@ -200,7 +200,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 			public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
 			                              @NonNull View view, @NonNull ContextMenuItem item) {
 				mapActivity.getDashboard().setDashboardVisibility(true,
-						DashboardOnMap.DashboardType.WIKIPEDIA,
+						DashboardType.WIKIPEDIA,
 						AndroidUtils.getCenterViewCoordinates(view));
 				return false;
 			}

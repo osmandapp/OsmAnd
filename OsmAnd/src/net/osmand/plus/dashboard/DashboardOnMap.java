@@ -168,29 +168,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		return fragmentsData;
 	}
 
-	public enum DashboardType {
-		CONFIGURE_MAP,
-		DASHBOARD,
-		OVERLAY_MAP,
-		UNDERLAY_MAP,
-		MAPILLARY,
-		CONTOUR_LINES,
-		OSM_NOTES,
-		WIKIPEDIA,
-		TERRAIN,
-		RELIEF_3D,
-		CYCLE_ROUTES,
-		HIKING_ROUTES,
-		TRAVEL_ROUTES,
-		TRANSPORT_LINES,
-		WEATHER,
-		WEATHER_LAYER,
-		WEATHER_CONTOURS,
-		NAUTICAL_DEPTH,
-		MTB_ROUTES,
-		ALPINE_HIKING
-	}
-
 	private final Map<DashboardActionButtonType, DashboardActionButton> actionButtons = new HashMap<>();
 
 	public enum DashboardActionButtonType {
@@ -1304,12 +1281,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			while (list.size() != numberOfRows) {
 				list.remove(numberOfRows);
 			}
-		}
-	}
-
-	public static class DefaultShouldShow extends ShouldShowFunction {
-		public boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag) {
-			return settings.registerBooleanPreference(SHOULD_SHOW + tag, true).makeGlobal().get();
 		}
 	}
 

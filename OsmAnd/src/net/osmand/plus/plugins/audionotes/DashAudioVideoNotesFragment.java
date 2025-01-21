@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.dashboard.tools.DashFragmentData.DefaultShouldShow;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -35,7 +36,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 	public static final int TITLE_ID = R.string.map_widget_av_notes;
 	private static final String ROW_NUMBER_TAG = TAG + "_row_number";
 	private static final DashFragmentData.ShouldShowFunction SHOULD_SHOW_FUNCTION =
-			new DashboardOnMap.DefaultShouldShow() {
+			new DefaultShouldShow() {
 				@Override
 				public int getTitleId() {
 					return TITLE_ID;

@@ -1,4 +1,4 @@
-package net.osmand.plus.configmap;
+package net.osmand.plus.configmap.routes;
 
 import static net.osmand.IProgress.EMPTY_PROGRESS;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_ACTIVITY_TYPE;

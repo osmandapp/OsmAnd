@@ -12,12 +12,7 @@
 		android:layout_height="match_parent"
 		android:orientation="vertical">
 
-		<androidx.appcompat.widget.AppCompatImageView
-			android:id="@+id/shadow_on_map"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:scaleType="fitXY"
-			app:srcCompat="@drawable/bg_shadow_onmap" />
+		<include layout="@layout/shadow_on_map" />
 
 		<LinearLayout
 			android:layout_width="match_parent"
