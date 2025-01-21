@@ -4671,7 +4671,7 @@
     <string name="shared_string_purchased_on">Придбано</string>
     <string name="shared_string_expires">Спливає</string>
     <string name="choose_what_to_sync">Виберіть, що синхронізувати</string>
-    <string name="cloud_sync_progress">Синхронізація…%1$s</string>
+    <string name="cloud_sync_progress">Синхронізація… %1$s</string>
     <string name="checking_progress">Перевірка…</string>
     <string name="shared_string_modified">Змінено</string>
     <string name="shared_string_unsynced">Не синхронізовано</string>
@@ -5678,5 +5678,6 @@
     <string name="calculate_size">Розрахувати розмір</string>
     <string name="rendering_attr_showClimbingRoutes_description">Показати маршрути сходження</string>
     <string name="rendering_attr_showClimbingRoutes_name">Скелелазні маршрути</string>
-    <string name="display_distance_to_first_intermediate">Показати деталі маршруту для наступної зупинки</string>
+    <string name="display_distance_to_first_intermediate">Показати деталі маршруту до наступної зупинки</string>
+    <string name="display_distance_to_first_intermediate_summary">Спочатку показує час і відстань до наступної зупинки. Вимкніть, щоб завжди показувати деталі до кінцевої точки.</string>
 </resources>

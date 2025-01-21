@@ -3807,7 +3807,7 @@
     <string name="contact_support">Obrati se podršci</string>
     <string name="troubleshooting">Rešavanje problema</string>
     <string name="troubleshooting_description">Prati ovaj link ako imaš ikakvih problema sa kupovinom.</string>
-    <string name="osmand_live">OsmAnd Live</string>
+    <string name="osmand_live">OsmAnd Lajv</string>
     <string name="annual_subscription">Godišnja pretplata</string>
     <string name="monthly_subscription">Mesečna pretplata</string>
     <string name="three_months_subscription">Tromesečna članarina</string>
@@ -4840,7 +4840,7 @@
     <string name="shared_string_close_the_dialog">Zatvori prozor</string>
     <string name="delete_track_folder_dialog_message">Ovo će izbrisati folder \"%1$s\" i sve %2$s sadržane trase.</string>
     <string name="delete_folder_question">Da li brišeš folder?</string>
-    <string name="cloud_sync_progress">Sinhronizacija…%1$s</string>
+    <string name="cloud_sync_progress">Sinhronizacija… %1$s</string>
     <string name="check_for_updates">Proveri osveženja</string>
     <string name="download_cloud_version">Preuzmi izdanje iz Cloud-a</string>
     <string name="shared_string_do_not_exist">Ne postoji</string>

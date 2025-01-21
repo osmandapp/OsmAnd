@@ -3174,7 +3174,7 @@
     <string name="live_monitoring_adress">Webadresse</string>
     <string name="monitoring_notification">Benachrichtigung</string>
     <string name="monitoring_min_speed">Mindestgeschwindigkeit</string>
-    <string name="monitoring_min_accuracy">Minimale Genauigkeit</string>
+    <string name="monitoring_min_accuracy">Mindestgenauigkeit</string>
     <string name="monitoring_min_distance">Minimale Verschiebung</string>
     <string name="reset_plugin_to_default">Plugin-Einstellungen auf Voreinstellung zurücksetzen</string>
     <string name="osm_authorization_success">Autorisierung ist erfolgreich</string>

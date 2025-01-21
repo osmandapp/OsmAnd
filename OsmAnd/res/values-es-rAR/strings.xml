@@ -103,7 +103,7 @@
     <string name="shared_string_unexpected_error">Error inesperado</string>
     <string name="shared_string_action_template">Acción {0}</string>
     <string name="shared_string_close">Cerrar</string>
-    <string name="shared_string_exit">Salida</string>
+    <string name="shared_string_exit">Salir</string>
     <string name="shared_string_show">Mostrar</string>
     <string name="shared_string_show_all">Mostrar todo</string>
     <string name="shared_string_collapse">Contraer</string>

@@ -427,23 +427,20 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 				.setIcon(getContentIcon((optionsItem.getActiveIconId())))
 				.setTitle(getString(R.string.show_along_the_route))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_56dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
-						FragmentManager fm = getFragmentManager();
-						if (fm == null) {
-							return;
-						}
-						Bundle args = new Bundle();
-						ShowAlongTheRouteBottomSheet fragment = new ShowAlongTheRouteBottomSheet();
-						fragment.setUsedOnMap(true);
-						fragment.setArguments(args);
-						fragment.setTargetFragment(RouteOptionsBottomSheet.this, ShowAlongTheRouteBottomSheet.REQUEST_CODE);
-						fragment.show(fm, ShowAlongTheRouteBottomSheet.TAG);
-						updateMenu();
-					}
-				}).create();
+				.setOnClickListener(view -> {
+                    routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
+                    FragmentManager fm = getFragmentManager();
+                    if (fm == null) {
+                        return;
+                    }
+                    Bundle args = new Bundle();
+                    ShowAlongTheRouteBottomSheet fragment = new ShowAlongTheRouteBottomSheet();
+                    fragment.setUsedOnMap(true);
+                    fragment.setArguments(args);
+                    fragment.setTargetFragment(RouteOptionsBottomSheet.this, ShowAlongTheRouteBottomSheet.REQUEST_CODE);
+                    fragment.show(fm, ShowAlongTheRouteBottomSheet.TAG);
+                    updateMenu();
+                }).create();
 	}
 
 	private BaseBottomSheetItem createRouteSimulationItem(LocalRoutingParameter optionsItem) {
