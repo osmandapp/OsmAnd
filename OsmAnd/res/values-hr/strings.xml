@@ -184,7 +184,7 @@
     <string name="north_west">sjeverozapad</string>
     <string name="north_north_west">sjever-sjeverozapad</string>
     <string name="replace_destination_point">Promjenite odredište</string>
-    <string name="new_destination_point_dialog">Već ste postavili odrediše.</string>
+    <string name="new_destination_point_dialog">Već ste postavili odrediše:</string>
     <string name="ending_point_too_far">Krajnja točka je predaleko od najbliže ceste.</string>
     <string name="map_widget_next_turn_small">Skretanje (umanjeni prikaz)</string>
     <string name="route_updated_loc_found">Ruta će biti izračunata kad se pronađe položaj</string>
