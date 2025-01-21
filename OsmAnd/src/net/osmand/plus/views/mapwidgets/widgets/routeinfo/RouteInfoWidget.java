@@ -25,7 +25,6 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -36,11 +35,15 @@ import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportMultiRow;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportVerticalPanel;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.plus.views.mapwidgets.widgets.routeinfo.RouteInfoCalculator.DestinationInfo;
 import net.osmand.plus.views.mapwidgets.widgetstates.ResizableWidgetState;
 import net.osmand.util.Algorithms;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class RouteInfoWidget extends MapWidget implements IComplexWidget, ISupportVerticalPanel, ISupportWidgetResizing, ISupportMultiRow {
@@ -55,7 +58,9 @@ public class RouteInfoWidget extends MapWidget implements IComplexWidget, ISuppo
 	@Nullable
 	protected String customId;
 	private boolean isFullRow;
-	private MapInfoLayer.TextState textState;
+	private TextState textState;
+	private RouteInfoCalculator calculator;
+	private List<RouteInfoCalculator.DestinationInfo> calculatedRouteInfo;
 
 	// views
 	private View buttonTappableArea;
@@ -75,10 +80,10 @@ public class RouteInfoWidget extends MapWidget implements IComplexWidget, ISuppo
 		this.customId = customId;
 		widgetState = new ResizableWidgetState(app, customId, widgetType);
 		displayModePref = registerDisplayModePreference(customId);
+		calculator = new RouteInfoCalculator(mapActivity);
 
 		setupViews();
-//		updateVisibility(false);
-		updateVisibility(true); // todo false
+		updateVisibility(false);
 	}
 
 	@Override
@@ -91,7 +96,7 @@ public class RouteInfoWidget extends MapWidget implements IComplexWidget, ISuppo
 		WidgetSize selectedSize = widgetState.getWidgetSizePref().get();
 		return switch (selectedSize) {
 			case SMALL -> isFullRow
-					? hasIntermediatePoints()
+					? isSecondaryDataAvailable()
 							? R.layout.widget_route_information_small_duo
 							: R.layout.widget_route_information_small
 					: R.layout.widget_route_information_small_half;
@@ -110,7 +115,14 @@ public class RouteInfoWidget extends MapWidget implements IComplexWidget, ISuppo
 		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
 		inflater.inflate(getContentLayoutId(), container);
 		collectViews();
+		if (textState != null) {
+			view.setBackgroundResource(textState.widgetBackgroundId);
+			updateNavigationButtonBg();
+		}
 		updateWidgetView();
+
+		buttonTappableArea.setOnClickListener(v -> mapActivity.getMapActions().doRoute());
+
 		view.setOnLongClickListener(v -> {
 			WidgetsContextMenu.showMenu(view, mapActivity, widgetType, customId, null, true, nightMode);
 			return true;
@@ -159,29 +171,78 @@ public class RouteInfoWidget extends MapWidget implements IComplexWidget, ISuppo
 		Drawable selected = AppCompatResources.getDrawable(app, rippleDrawableId);
 
 		Drawable drawable = UiUtilities.getLayeredIcon(normal, selected);
-		AndroidUtils.setBackground(view.findViewById(R.id.button_body), drawable);
+		AndroidUtils.setBackground(buttonBody, drawable);
 	}
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		updateNavigationInfo();
+		updateInfoInternal();
+	}
+
+	private void updateInfoInternal() {
+		int count = calculatedRouteInfo != null ? calculatedRouteInfo.size() : -1;
+		calculatedRouteInfo = calculator.calculateRouteInformation();
+		if (count >= 0 && isFullRow && count != calculatedRouteInfo.size() && getWidgetSizePref().get() == WidgetSize.SMALL) {
+			// Recreating the widget is necessary because small widget size uses
+			// different layouts depending on the number of route points.
+			recreateView();
+			return;
+		}
+		boolean shouldHideTopWidgets = mapActivity.getWidgetsVisibilityHelper().shouldHideVerticalWidgets();
+		boolean typeAllowed = widgetType != null && widgetType.isAllowed();
+		boolean visible = typeAllowed && !shouldHideTopWidgets && hasInfoToDisplay();
+		updateVisibility(visible);
+		if (typeAllowed && !shouldHideTopWidgets) {
+			updateNavigationInfo();
+		}
 	}
 
 	private void updateNavigationInfo() {
-		// todo calculate and use real data
-		tvPrimaryValue1.setText("20:30");
-		tvSecondaryValue1.setText("2 h 27 m");
-		tvTertiaryValue1.setText("331km");
+		if (Algorithms.isEmpty(calculatedRouteInfo)) {
+			updateVisibility(false);
+			return;
+		}
+		updateVisibility(true);
+
+		RouteInfoDisplayMode primaryDisplayMode = getDisplayMode(settings.getApplicationMode());
+		RouteInfoDisplayMode[] orderedDisplayModes = RouteInfoDisplayMode.values(primaryDisplayMode);
+
+		updatePrimaryBlock(calculatedRouteInfo.get(0), orderedDisplayModes);
 
 		if (secondaryBlock != null) {
-			boolean secondaryDataPresent = hasIntermediatePoints();
-			AndroidUiHelper.setVisibility(secondaryDataPresent, blocksDivider, secondaryBlock);
-			if (secondaryDataPresent) {
-				tvPrimaryValue2.setText("01:27");
-				tvSecondaryValue2.setText("9 h 23 m");
-				tvTertiaryValue2.setText("629km");
+			boolean isSecondaryDataAvailable = isSecondaryDataAvailable();
+			AndroidUiHelper.setVisibility(isSecondaryDataAvailable, blocksDivider, secondaryBlock);
+
+			if (isSecondaryDataAvailable) {
+				updateSecondaryBlock(calculatedRouteInfo.get(1), orderedDisplayModes);
 			}
 		}
+	}
+
+	private void updatePrimaryBlock(@NonNull DestinationInfo destinationInfo,
+	                                @NonNull RouteInfoDisplayMode[] modes) {
+		Map<RouteInfoDisplayMode, String> displayData = prepareDisplayData(destinationInfo);
+
+		tvPrimaryValue1.setText(displayData.get(modes[0]));
+		tvSecondaryValue1.setText(displayData.get(modes[1]));
+		tvTertiaryValue1.setText(displayData.get(modes[2]));
+	}
+
+	private void updateSecondaryBlock(@NonNull DestinationInfo destinationInfo,
+	                                  @NonNull RouteInfoDisplayMode[] modes) {
+		Map<RouteInfoDisplayMode, String> displayData = prepareDisplayData(destinationInfo);
+
+		tvPrimaryValue2.setText(displayData.get(modes[0]));
+		tvSecondaryValue2.setText(displayData.get(modes[1]));
+		tvTertiaryValue2.setText(displayData.get(modes[2]));
+	}
+
+	private Map<RouteInfoDisplayMode, String> prepareDisplayData(@NonNull DestinationInfo destinationInfo) {
+		Map<RouteInfoDisplayMode, String> displayData = new HashMap<>();
+		displayData.put(RouteInfoDisplayMode.ARRIVAL_TIME, destinationInfo.arrivalTime());
+		displayData.put(RouteInfoDisplayMode.TIME_TO_GO, destinationInfo.duration());
+		displayData.put(RouteInfoDisplayMode.DISTANCE, destinationInfo.distance());
+		return displayData;
 	}
 
 	@Override
@@ -189,12 +250,6 @@ public class RouteInfoWidget extends MapWidget implements IComplexWidget, ISuppo
 		this.textState = textState;
 		this.nightMode = textState.night;
 		recreateView();
-		view.setBackgroundResource(textState.widgetBackgroundId);
-		updateNavigationButtonBg();
-		// todo implement
-
-		// todo for tests only
-		view.findViewById(R.id.button_tappable_area).setOnClickListener(v -> app.showShortToastMessage("Button clicked"));
 	}
 
 	@Override
@@ -228,11 +283,15 @@ public class RouteInfoWidget extends MapWidget implements IComplexWidget, ISuppo
 	@Override
 	public void recreateView() {
 		setupViews();
-		updateNavigationInfo();
+		updateInfoInternal();
 	}
 
-	private boolean hasIntermediatePoints() {
-		return false; // todo consider real calculations count
+	private boolean hasInfoToDisplay() {
+		return !Algorithms.isEmpty(calculatedRouteInfo);
+	}
+
+	private boolean isSecondaryDataAvailable() {
+		return calculatedRouteInfo != null && calculatedRouteInfo.size() > 1;
 	}
 
 	@NonNull
@@ -262,7 +321,7 @@ public class RouteInfoWidget extends MapWidget implements IComplexWidget, ISuppo
 	}
 
 	@NonNull
-	public static String formatDuration(@NonNull Context ctx, long timeLeft) {
+	public static String formatDuration(@NonNull Context ctx, long timeLeft) { // todo should be improved
 		long diffInMinutes = TimeUnit.MINUTES.convert(timeLeft, TimeUnit.MILLISECONDS);
 		String hour = ctx.getString(R.string.int_hour);
 		String formattedDuration = Algorithms.formatMinutesDuration((int) diffInMinutes, true);

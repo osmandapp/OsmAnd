@@ -93,7 +93,7 @@ public class RouteInfoWidgetSettingsFragment extends BaseResizableWidgetSettingF
 		for (int i = 0; i < displayModes.length; i++) {
 			RouteInfoDisplayMode displayMode = displayModes[i];
 			titles[i] = getString(displayMode.getTitleId());
-			descriptions[i] = getDisplayModeSummary(displayMode, displayModes, previewData);
+			descriptions[i] = getDisplayModeSummary(displayMode, previewData);
 			selected = selectedDisplayMode == displayMode ? i : selected;
 		}
 
@@ -111,15 +111,10 @@ public class RouteInfoWidgetSettingsFragment extends BaseResizableWidgetSettingF
 
 	@NonNull
 	private CharSequence getDisplayModeSummary(@NonNull RouteInfoDisplayMode displayMode,
-											   @NonNull RouteInfoDisplayMode[] displayModes,
 	                                           @NonNull Map<RouteInfoDisplayMode, String> previewData) {
-		List<RouteInfoDisplayMode> orderedModes = new ArrayList<>(Arrays.asList(displayModes));
-		orderedModes.remove(displayMode);
-		orderedModes.add(0, displayMode);
-
 		String fullText = "";
 		String pattern = getString(R.string.ltr_or_rtl_combine_via_bold_point);
-		for (RouteInfoDisplayMode mode : orderedModes) {
+		for (RouteInfoDisplayMode mode : RouteInfoDisplayMode.values(displayMode)) {
 			String value = Objects.requireNonNull(previewData.get(mode));
 			if (fullText.isEmpty()) {
 				fullText = value;

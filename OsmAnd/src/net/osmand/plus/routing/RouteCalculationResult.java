@@ -1395,12 +1395,17 @@ public class RouteCalculationResult {
 	}
 
 	public int getDistanceToNextIntermediate(Location fromLoc) {
+		return getDistanceToNextIntermediate(fromLoc, 0);
+	}
+
+	public int getDistanceToNextIntermediate(Location fromLoc, int intermediateIndexOffset) {
+		int targetIntermediateIndex  = nextIntermediate + intermediateIndexOffset;
 		int dist = getDistanceToFinish(fromLoc);
 		if (listDistance != null && currentRoute < listDistance.length) {
-			if (nextIntermediate >= intermediatePoints.length) {
+			if (targetIntermediateIndex >= intermediatePoints.length) {
 				return 0;
 			} else {
-				int directionInd = intermediatePoints[nextIntermediate];
+				int directionInd = intermediatePoints[targetIntermediateIndex ];
 				return dist - getListDistance(directions.get(directionInd).routePointOffset);
 			}
 		}
@@ -1465,11 +1470,12 @@ public class RouteCalculationResult {
 		return 0;
 	}
 
-	public int getLeftTimeToNextIntermediate(Location fromLoc) {
-		if (nextIntermediate >= intermediatePoints.length) {
+	public int getLeftTimeToNextIntermediate(Location fromLoc, int intermediateIndexOffset) {
+		int targetIntermediateIndex  = nextIntermediate + intermediateIndexOffset;
+		if (targetIntermediateIndex  >= intermediatePoints.length) {
 			return 0;
 		}
-		return getLeftTime(fromLoc) - directions.get(intermediatePoints[nextIntermediate]).afterLeftTime;
+		return getLeftTime(fromLoc) - directions.get(intermediatePoints[targetIntermediateIndex ]).afterLeftTime;
 	}
 
 	private int getListDistance(int index) {
