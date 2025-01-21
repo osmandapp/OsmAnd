@@ -42,9 +42,11 @@ import java.util.Set;
 import gnu.trove.list.array.TIntArrayList;
 
 public class ClickableWayHelper {
-    public static final Set<String> clickableTags = Set.of("piste:type", "piste:difficulty", "mtb:scale", "dirtbike:scale");
-    public static final Map<String, String> forbiddenTags = Map.of("area", "yes", "access", "no");
-    public static final Map<String, String> gpxColors = Map.ofEntries(
+    public static final Set<String> CLICKABLE_TAGS =
+            Set.of("piste:type", "piste:difficulty", "mtb:scale", "dirtbike:scale");
+    public static final Map<String, String> FORBIDDEN_TAGS =
+            Map.of("area", "yes", "access", "no");
+    public static final Map<String, String> GPX_COLORS = Map.ofEntries(
             Map.entry("0", "brown"),
             Map.entry("1", "green"),
             Map.entry("2", "blue"),
@@ -63,12 +65,12 @@ public class ClickableWayHelper {
 
     private final OsmandApplication app;
     private final OsmandMapTileView view;
-    private final ClickableWayMenuActivator activator;
+    private final ClickableWayMenuProvider activator;
 
     public ClickableWayHelper(@NonNull OsmandApplication app, @NonNull OsmandMapTileView view) {
         this.app = app;
         this.view = view;
-        this.activator = new ClickableWayMenuActivator(view, this::readHeightData, this::openAsGpxFile);
+        this.activator = new ClickableWayMenuProvider(view, this::readHeightData, this::openAsGpxFile);
     }
 
     @NonNull
@@ -158,10 +160,10 @@ public class ClickableWayHelper {
 
     @Nullable
     private String getGpxColorByTags(Map<String, String> tags) {
-        for (String t : clickableTags) {
+        for (String t : CLICKABLE_TAGS) {
             String val = tags.get(t);
             if (val != null) {
-                for (Map.Entry<String, String> matchColor : gpxColors.entrySet()) {
+                for (Map.Entry<String, String> matchColor : GPX_COLORS.entrySet()) {
                     if (val.contains(matchColor.getKey())) {
                         return matchColor.getValue();
                     }
@@ -180,13 +182,13 @@ public class ClickableWayHelper {
     }
 
     private boolean isClickableWayTags(@NonNull Map<String, String> tags) {
-        for (Map.Entry<String, String> forbidden : forbiddenTags.entrySet()) {
+        for (Map.Entry<String, String> forbidden : FORBIDDEN_TAGS.entrySet()) {
             if (forbidden.getValue().equals(tags.get(forbidden.getKey()))) {
                 return false;
             }
         }
         for (String key : tags.keySet()) {
-            if (clickableTags.contains(key)) {
+            if (CLICKABLE_TAGS.contains(key)) {
                 return true;
             }
         }

@@ -34,26 +34,32 @@ public class ClickableWay {
         return osmId;
     }
 
+    @NonNull
     public QuadRect getBbox() {
         return bbox;
     }
 
+    @NonNull
     public GpxFile getGpxFile() {
         return gpxFile;
     }
 
+    @NonNull
     public SelectedGpxPoint getSelectedGpxPoint() {
         return selectedGpxPoint;
     }
 
+    @NonNull
     public String getGpxFileName() {
         return Algorithms.sanitizeFileName(getWayName());
     }
 
+    @NonNull
     public String getWayName() {
         return Algorithms.isEmpty(name) ? Long.toString(osmId) : name;
     }
 
+    @Override
     public String toString() {
         return getWayName();
     }

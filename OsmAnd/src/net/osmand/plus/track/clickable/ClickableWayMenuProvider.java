@@ -17,14 +17,14 @@ import net.osmand.shared.gpx.primitives.WptPt;
 
 import java.util.List;
 
-public class ClickableWayMenuActivator implements ContextMenuLayer.IContextMenuProvider {
+public class ClickableWayMenuProvider implements ContextMenuLayer.IContextMenuProvider {
     private final OsmandMapTileView view;
     private final CallbackWithObject<ClickableWay> readHeights;
     private final CallbackWithObject<ClickableWay> openAsGpxFile;
 
-    public ClickableWayMenuActivator(@NonNull OsmandMapTileView view,
-                                     @NonNull CallbackWithObject<ClickableWay> readHeightData,
-                                     @NonNull CallbackWithObject<ClickableWay> openAsGpxFile) {
+    public ClickableWayMenuProvider(@NonNull OsmandMapTileView view,
+                                    @NonNull CallbackWithObject<ClickableWay> readHeightData,
+                                    @NonNull CallbackWithObject<ClickableWay> openAsGpxFile) {
         this.view = view;
         this.readHeights = readHeightData;
         this.openAsGpxFile = openAsGpxFile;
@@ -45,13 +45,14 @@ public class ClickableWayMenuActivator implements ContextMenuLayer.IContextMenuP
     }
 
     @Override
-    public LatLon getObjectLocation(Object o) {
+    public LatLon getObjectLocation(@NonNull Object o) {
         WptPt wpt = ((ClickableWay) o).getSelectedGpxPoint().getSelectedPoint();
         return new LatLon(wpt.getLatitude(), wpt.getLongitude());
     }
 
+    @NonNull
     @Override
-    public PointDescription getObjectName(Object o) {
+    public PointDescription getObjectName(@NonNull Object o) {
         String name = ((ClickableWay) o).getWayName();
         return new PointDescription(PointDescription.POINT_TYPE_GPX, name);
     }

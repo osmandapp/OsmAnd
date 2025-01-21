@@ -108,7 +108,7 @@ public class MapSelectionHelper {
 	private Map<LatLon, BackgroundType> touchedFullMapObjects = new HashMap<>();
 	private Map<LatLon, BackgroundType> touchedSmallMapObjects = new HashMap<>();
 
-	private ClickableWayHelper clickableWayHelper;
+	private final ClickableWayHelper clickableWayHelper;
 
 	public MapSelectionHelper(@NonNull Context context) {
 		app = (OsmandApplication) context.getApplicationContext();
@@ -509,7 +509,8 @@ public class MapSelectionHelper {
 		return false;
 	}
 
-	private boolean isUniqueGpxFileName(Map<Object, IContextMenuProvider> selectedObjects, String gpxFileName) {
+	private boolean isUniqueGpxFileName(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
+										@NonNull String gpxFileName) {
 		for (Map.Entry<Object, IContextMenuProvider> entry : selectedObjects.entrySet()) {
 			if (entry.getKey() instanceof SelectedGpxPoint && entry.getValue() instanceof GPXLayer) {
 				SelectedGpxPoint selectedGpxPoint = (SelectedGpxPoint) entry.getKey();
