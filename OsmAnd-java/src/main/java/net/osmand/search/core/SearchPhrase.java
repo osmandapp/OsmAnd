@@ -37,6 +37,7 @@ public class SearchPhrase {
 	// Object consists of 2 part [known + unknown] 
 	private String fullTextSearchPhrase = "";
 	private String unknownSearchPhrase = "";
+	private List<String> knownCityNames;
 
 	// words to be used for words span
 	private List<SearchWord> words = new ArrayList<>();
@@ -140,8 +141,29 @@ public class SearchPhrase {
 			}
 		};
 	}
-	
-	
+
+    public boolean containsCityName(String cityName) {
+		if (knownCityNames == null) {
+			return false;
+		}
+        return knownCityNames.contains(cityName);
+    }
+
+    public void addCityName(String cityName) {
+		if (knownCityNames == null) {
+			knownCityNames = new ArrayList<>();
+		}
+        knownCityNames.add(cityName);
+    }
+
+	public boolean hasCityName() {
+		return knownCityNames != null;
+	}
+
+	public void clearRectCache() {
+		cache1kmRect = null;
+	}
+
 	public enum SearchPhraseDataType {
 		MAP, ADDRESS, ROUTING, POI
 	}
@@ -497,8 +519,12 @@ public class SearchPhrase {
 	public SearchSettings getSettings() {
 		return settings;
 	}
-	
-	
+
+	public void setOriginalLocation(LatLon l) {
+		settings.setOriginalLocation(l);
+	}
+
+
 	public int getRadiusLevel() {
 		return settings.getRadiusLevel();
 	}

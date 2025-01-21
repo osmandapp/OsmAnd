@@ -114,6 +114,12 @@ public class SearchSettings {
 		s.originalLocation = l;
 		return s;
 	}
+
+	public void changeOriginalLocation(LatLon l) {
+		double distance = this.originalLocation == null ? -1 : MapUtils.getDistance(l, this.originalLocation);
+		this.regionLang = (distance > MIN_DISTANCE_REGION_LANG_RECALC || distance == -1 || this.regionLang == null) ? calculateRegionLang(l) : this.regionLang;
+		this.originalLocation = l;
+	}
 	
 	public QuadRect getSearchBBox31() {
 		return searchBBox31;

@@ -423,8 +423,11 @@ public class SearchCoreFactory {
 			if (nphrase != null && res.objectType == ObjectType.CITY) {
 				SearchAmenityByNameAPI poiApi = new SearchCoreFactory.SearchAmenityByNameAPI();
 				SearchPhrase newPhrase = nphrase.generateNewPhrase(nphrase, res.file);
-				newPhrase.getSettings().setOriginalLocation(res.location);
+				newPhrase.getSettings().changeOriginalLocation(res.location);
+				newPhrase.clearRectCache();
+				newPhrase.addCityName(res.localeName);
 				poiApi.search(newPhrase, resultMatcher);
+				res.requiredSearchPhrase.addCityName(res.localeName);
 			}
 		}
 
@@ -681,24 +684,27 @@ public class SearchCoreFactory {
 				}
 			};
 
-			ResultMatcher<List<BinaryMapIndexReader.TagValuePair>> dynamicTagGroupsMatcher = new ResultMatcher<>() {
-                @Override
-                public boolean publish(List<BinaryMapIndexReader.TagValuePair> object) {
-                    for (BinaryMapIndexReader.TagValuePair tagValue : object) {
-                        if (tagValue.tag.startsWith("name")) {
-                            if (nm.matches(tagValue.value)) {
-                                return true;
-                            }
-                        }
-                    }
-                    return false;
-                }
+			ResultMatcher<List<BinaryMapIndexReader.TagValuePair>> dynamicTagGroupsMatcher = null;
+			if (phrase.hasCityName()) {
+				dynamicTagGroupsMatcher = new ResultMatcher<>() {
+					@Override
+					public boolean publish(List<BinaryMapIndexReader.TagValuePair> object) {
+						for (BinaryMapIndexReader.TagValuePair tagValue : object) {
+							if (tagValue.tag.startsWith("name")) {
+								if (phrase.containsCityName(tagValue.value)) {
+									return true;
+								}
+							}
+						}
+						return false;
+					}
 
-                @Override
-                public boolean isCancelled() {
-                    return false;
-                }
-            };
+					@Override
+					public boolean isCancelled() {
+						return false;
+					}
+				};
+			}
 
 			SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
 					(int) bbox.centerX(), (int) bbox.centerY(), searchWord,
