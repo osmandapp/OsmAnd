@@ -748,7 +748,7 @@
     <string name="select_address_activity">Odaberite adresu</string>
     <string name="cancel_navigation">Zaustavi navigaciju</string>
     <string name="clear_destination">Obriši odredište</string>
-    <string name="cancel_route">Odbaci rutu</string>
+    <string name="cancel_route">Odbaciti rutu?</string>
     <string name="download_using_mobile_internet">WiFi trenutno nije dostupan. Želite li nastaviti preuzimanje s trenutnom internet vezom?</string>
     <string name="available_downloads_left">Dostupno je još %1$d preuzimanja</string>
     <string name="files_limit">%1$d datoteka preostalo</string>
