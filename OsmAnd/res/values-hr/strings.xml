@@ -1738,4 +1738,5 @@
     <string name="track_show_start_finish_icons">Prikaži ikone početka i kraja</string>
     <string name="shared_string_toolbar">Traka alata</string>
     <string name="shared_string_options">Opcije</string>
+    <string name="shared_string_next_event">Sljedeći događaj</string>
 </resources>
