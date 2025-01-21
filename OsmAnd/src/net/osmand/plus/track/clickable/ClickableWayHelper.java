@@ -78,16 +78,16 @@ public class ClickableWayHelper {
         return activator;
     }
 
-    public boolean isClickableWayV1(@NonNull RenderedObject renderedObject) {
+    public boolean isClickableWay(@NonNull RenderedObject renderedObject) {
         return renderedObject.getX().size() > 1 && isClickableWayTags(renderedObject.getTags()); // v1
     }
 
-    public boolean isClickableWayV2(@NonNull ObfMapObject obfMapObject, @NonNull Map<String, String> tags) {
+    public boolean isClickableWay(@NonNull ObfMapObject obfMapObject, @NonNull Map<String, String> tags) {
         return obfMapObject.getPoints31().size() > 1 && isClickableWayTags(tags); // v2 with prefetched tags
     }
 
     @Nullable
-    public ClickableWay loadClickableWayV1(@NonNull LatLon selectedLatLon, @NonNull RenderedObject renderedObject) {
+    public ClickableWay loadClickableWay(@NonNull LatLon selectedLatLon, @NonNull RenderedObject renderedObject) {
         long osmId = ObfConstants.getOsmId(renderedObject.getId() >> AMENITY_ID_RIGHT_SHIFT);
         Map<String, String> tags = renderedObject.getTags();
         String name = renderedObject.getName();
@@ -98,9 +98,9 @@ public class ClickableWayHelper {
     }
 
     @Nullable
-    public ClickableWay loadClickableWayV2(@NonNull LatLon selectedLatLon,
-                                           @NonNull ObfMapObject obfMapObject,
-                                           @NonNull Map<String, String> tags) {
+    public ClickableWay loadClickableWay(@NonNull LatLon selectedLatLon,
+                                         @NonNull ObfMapObject obfMapObject,
+                                         @NonNull Map<String, String> tags) {
         long id = obfMapObject.getId().getId().longValue();
         long osmId = ObfConstants.getOsmId(id >> AMENITY_ID_RIGHT_SHIFT);
         String name = obfMapObject.getCaptionInNativeLanguage();

@@ -232,7 +232,7 @@ public class MapSelectionHelper {
 
 				boolean isTravelGpx = !Algorithms.isEmpty(travelGpxFilter);
 				boolean isOsmRoute = !Algorithms.isEmpty(OsmRouteType.getRouteKeys(tags));
-				boolean isClickableWay = clickableWayHelper.isClickableWayV1(renderedObject);
+				boolean isClickableWay = clickableWayHelper.isClickableWay(renderedObject);
 
 				if (!isClickableWay && !isTravelGpx && !isOsmRoute && (renderedObject.getId() == null
 						|| !renderedObject.isVisible() || renderedObject.isDrawOnPath())) {
@@ -264,7 +264,8 @@ public class MapSelectionHelper {
 				}
 				LatLon searchLatLon = result.objectLatLon != null ? result.objectLatLon : result.pointLatLon;
 				if (isClickableWay && !isDerivedGpxSelected) {
-					isDerivedGpxSelected = addClickableWayV1(result, renderedObject);
+					isDerivedGpxSelected = addClickableWay(result,
+							clickableWayHelper.loadClickableWay(result.pointLatLon, renderedObject));
 				} else if (isTravelGpx && !isDerivedGpxSelected) {
 					isDerivedGpxSelected = addTravelGpx(result, travelGpxFilter, renderedObject.getTagValue("ref"));
 				} else if (isOsmRoute && !isDerivedGpxSelected) {
@@ -350,7 +351,7 @@ public class MapSelectionHelper {
 
 							boolean isTravelGpx = app.getTravelHelper().isTravelGpxTags(tags);
 							boolean isOsmRoute = !Algorithms.isEmpty(OsmRouteType.getRouteKeys(tags));
-							boolean isClickableWay = clickableWayHelper.isClickableWayV2(obfMapObject, tags);
+							boolean isClickableWay = clickableWayHelper.isClickableWay(obfMapObject, tags);
 
 							if (isOsmRoute && !isDerivedGpxSelected) {
 								NetworkRouteSelectorFilter routeFilter = createRouteFilter();
@@ -359,7 +360,8 @@ public class MapSelectionHelper {
 									isDerivedGpxSelected = true;
 								}
 							} else if (isClickableWay && !isDerivedGpxSelected) {
-								isDerivedGpxSelected = addClickableWayV2(result, obfMapObject, tags);
+								isDerivedGpxSelected = addClickableWay(result,
+										clickableWayHelper.loadClickableWay(result.pointLatLon, obfMapObject, tags));
 							} else if (isTravelGpx && !isDerivedGpxSelected) {
 								isDerivedGpxSelected = addTravelGpx(result, tags.get(ROUTE_ID), null);
 							}
@@ -490,18 +492,7 @@ public class MapSelectionHelper {
 		return false;
 	}
 
-	private boolean addClickableWayV1(@NonNull MapSelectionResult result, @NonNull RenderedObject renderedObject) {
-		ClickableWay clickableWay = clickableWayHelper.loadClickableWayV1(result.pointLatLon, renderedObject);
-		if (clickableWay != null && isUniqueClickableWay(result.selectedObjects, clickableWay)) {
-			result.selectedObjects.put(clickableWay, clickableWayHelper.getContextMenuProvider());
-			return true;
-		}
-		return false;
-	}
-
-	private boolean addClickableWayV2(@NonNull MapSelectionResult result, @NonNull ObfMapObject obfMapObject,
-									  @NonNull Map<String, String> tags) {
-		ClickableWay clickableWay = clickableWayHelper.loadClickableWayV2(result.pointLatLon, obfMapObject, tags);
+	private boolean addClickableWay(@NonNull MapSelectionResult result, @Nullable ClickableWay clickableWay) {
 		if (clickableWay != null && isUniqueClickableWay(result.selectedObjects, clickableWay)) {
 			result.selectedObjects.put(clickableWay, clickableWayHelper.getContextMenuProvider());
 			return true;
