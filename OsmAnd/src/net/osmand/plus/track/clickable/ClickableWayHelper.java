@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.binary.HeightDataLoader;
+import net.osmand.binary.HeightDataLoader.InterfaceIsCancelled;
 import net.osmand.binary.ObfConstants;
 import net.osmand.core.jni.ObfMapObject;
 import net.osmand.core.jni.QVectorPointI;
@@ -195,21 +196,25 @@ public class ClickableWayHelper {
         return false;
     }
 
-    private boolean readHeightData(ClickableWay clickableWay) {
-        HeightDataLoader loader = new HeightDataLoader(app.getResourceManager().getReverseGeocodingMapFiles());
-        List<WptPt> waypoints = loader.loadHeightDataAsWaypoints(clickableWay.getOsmId(), clickableWay.getBbox());
-        if (!Algorithms.isEmpty(waypoints)
-                && !Algorithms.isEmpty(clickableWay.getGpxFile().getTracks())
-                && !Algorithms.isEmpty(clickableWay.getGpxFile().getTracks().get(0).getSegments())) {
-            clickableWay.getGpxFile().getTracks().get(0).getSegments().get(0).setPoints(waypoints);
-            return true;
+    private boolean readHeightData(@Nullable ClickableWay clickableWay, @Nullable InterfaceIsCancelled canceller) {
+        if (clickableWay != null) {
+            HeightDataLoader loader = new HeightDataLoader(app.getResourceManager().getReverseGeocodingMapFiles());
+            List<WptPt> waypoints =
+                    loader.loadHeightDataAsWaypoints(clickableWay.getOsmId(), clickableWay.getBbox(), canceller);
+            if ((canceller == null || !canceller.isCancelled())
+                    && !Algorithms.isEmpty(waypoints)
+                    && !Algorithms.isEmpty(clickableWay.getGpxFile().getTracks())
+                    && !Algorithms.isEmpty(clickableWay.getGpxFile().getTracks().get(0).getSegments())) {
+                clickableWay.getGpxFile().getTracks().get(0).getSegments().get(0).setPoints(waypoints);
+                return true;
+            }
         }
         return false;
     }
 
-    private boolean openAsGpxFile(ClickableWay clickableWay) {
+    private boolean openAsGpxFile(@Nullable ClickableWay clickableWay) {
         MapActivity mapActivity = view.getMapActivity();
-        if (mapActivity != null) {
+        if (clickableWay != null && mapActivity != null) {
             GpxFile gpxFile = clickableWay.getGpxFile();
             GpxTrackAnalysis analysis = gpxFile.getAnalysis(0);
             String safeFileName = clickableWay.getGpxFileName() + GPX_FILE_EXT;

@@ -24,6 +24,14 @@ public class HeightDataLoader {
     public static final int ZOOM_TO_LOAD_TILES_SHIFT_L = ZOOM_TO_LOAD_TILES + 1;
     public static final int ZOOM_TO_LOAD_TILES_SHIFT_R = 31 - ZOOM_TO_LOAD_TILES;
 
+    public interface InterfaceIsCancelled {
+        boolean isCancelled();
+    }
+
+    public interface InterfaceCancellableCallback<T> {
+        boolean callback(T object, InterfaceIsCancelled canceller);
+    }
+
     private final static Log log = PlatformUtil.getLog(HeightDataLoader.class);
     private final Map<RouteSubregion, List<RouteDataObject>> loadedSubregions = new HashMap<>();
     private final Map<BinaryMapIndexReader, List<RouteSubregion>> readers = new LinkedHashMap<>();
@@ -42,7 +50,7 @@ public class HeightDataLoader {
         }
     }
 
-    public List<WptPt> loadHeightDataAsWaypoints(long osmId, QuadRect bbox31) {
+    public List<WptPt> loadHeightDataAsWaypoints(long osmId, QuadRect bbox31, InterfaceIsCancelled canceller) {
         Map<Long, RouteDataObject> results = new HashMap<>();
         ResultMatcher<RouteDataObject> matcher = new ResultMatcher<>() {
             @Override
@@ -52,7 +60,7 @@ public class HeightDataLoader {
 
             @Override
             public boolean isCancelled() {
-                return results.containsKey(osmId); // fast up search
+                return results.containsKey(osmId) || (canceller != null && canceller.isCancelled());
             }
         };
 

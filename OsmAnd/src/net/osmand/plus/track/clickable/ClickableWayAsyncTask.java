@@ -1,19 +1,21 @@
 package net.osmand.plus.track.clickable;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.binary.HeightDataLoader.InterfaceCancellableCallback;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 
 public class ClickableWayAsyncTask extends BaseLoadAsyncTask<Void, Void, ClickableWay> {
     private final ClickableWay clickableWay;
-    private final CallbackWithObject<ClickableWay> readHeightData;
+    private final InterfaceCancellableCallback<ClickableWay> readHeightData;
     private final CallbackWithObject<ClickableWay> openAsGpxFile;
 
     public ClickableWayAsyncTask(@NonNull MapActivity mapActivity,
                                  @NonNull ClickableWay clickableWay,
-                                 @NonNull CallbackWithObject<ClickableWay> readHeightData,
+                                 @NonNull InterfaceCancellableCallback<ClickableWay> readHeightData,
                                  @NonNull CallbackWithObject<ClickableWay> openAsGpxFile) {
         super(mapActivity);
         this.clickableWay = clickableWay;
@@ -21,10 +23,10 @@ public class ClickableWayAsyncTask extends BaseLoadAsyncTask<Void, Void, Clickab
         this.openAsGpxFile = openAsGpxFile;
     }
 
+    @Nullable
     @Override
     protected ClickableWay doInBackground(Void... voids) {
-        readHeightData.processResult(clickableWay);
-        return this.clickableWay;
+        return readHeightData.callback(clickableWay, this::isCancelled) ? this.clickableWay : null;
     }
 
     @Override
@@ -35,7 +37,7 @@ public class ClickableWayAsyncTask extends BaseLoadAsyncTask<Void, Void, Clickab
     }
 
     @Override
-    protected void onPostExecute(ClickableWay clickableWay) {
+    protected void onPostExecute(@Nullable ClickableWay clickableWay) {
         openAsGpxFile.processResult(clickableWay);
         hideProgress();
     }
