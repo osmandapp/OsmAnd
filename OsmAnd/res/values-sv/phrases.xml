@@ -4824,4 +4824,10 @@
     <string name="poi_us_maps_recreation_area_activity_interpretive_areas">Självguidningsområden</string>
     <string name="poi_generator_type_gas_turbine">Generatortyp: gasturbin</string>
     <string name="poi_us_maps_recreation_area_facility">Rekreationsområdesfacilitet</string>
+    <string name="poi_us_maps_recreation_area_activity_scenic_driving">Naturskön körning</string>
+    <string name="poi_us_maps_recreation_area_activity_rockhounding">Amatör geologi</string>
+    <string name="poi_us_maps_recreation_area_activity_trapping">Djurfångst</string>
+    <string name="poi_us_maps_recreation_area_activity_rock_climbing">Bergsklättring</string>
+    <string name="poi_us_maps_recreation_area_activity_sand_play">Sandlek</string>
+    <string name="poi_us_maps_recreation_area_activity_sledding_tubing">Slädslang</string>
 </resources>
