@@ -31,6 +31,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.nearbyplaces.NearbyPlacesHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.NearbyPlacesLayer;
 import net.osmand.util.MapUtils;
 
@@ -130,12 +131,12 @@ public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvid
 		if (isFullSize && data.nearbyPlace.imageBitmap != null) {
 			bitmapResult = bigBitmapCache.get(key);
 			if (bitmapResult == null) {
-				bitmapResult = NearbyPlacesHelper.INSTANCE.createBigBitmap(nearbyPlacesLayer, data.nearbyPlace.imageBitmap);
+				bitmapResult = PointImageUtils.createBigBitmap(nearbyPlacesLayer, data.nearbyPlace.imageBitmap);
 				bigBitmapCache.put(key, bitmapResult);
 			}
 		} else {
 			if (cachedSmallBitmap == null) {
-				cachedSmallBitmap = NearbyPlacesHelper.INSTANCE.createSmallPointBitmap(nearbyPlacesLayer);
+				cachedSmallBitmap = PointImageUtils.createSmallPointBitmap(nearbyPlacesLayer);
 			}
 			bitmapResult = cachedSmallBitmap;
 		}

@@ -11,7 +11,7 @@
 	<ImageView
 		android:id="@+id/item_image"
 		android:layout_width="wrap_content"
-		android:layout_height="108dp"
+		android:layout_height="@dimen/nearby_place_image_height"
 		android:layout_gravity="center_horizontal"
 		android:scaleType="centerInside" />
 

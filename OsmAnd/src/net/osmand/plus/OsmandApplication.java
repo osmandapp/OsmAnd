@@ -279,7 +279,6 @@ public class OsmandApplication extends MultiDexApplication {
 		localeHelper.checkPreferredLocale();
 		appInitializer.onCreateApplication();
 		osmandMap.getMapLayers().createLayers(osmandMap.getMapView());
-		NearbyPlacesHelper.INSTANCE.init(this);
 		startApplication();
 		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 

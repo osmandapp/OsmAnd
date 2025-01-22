@@ -33,6 +33,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.annotation.UiContext;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.SwitchCompat;
@@ -143,7 +144,7 @@ public class UiUtilities {
 	}
 
 	@Nullable
-	public Drawable getRenderingIcon(Context ctx, String fileName, boolean nightMode) {
+	public Drawable getRenderingIcon(@NonNull Context ctx, @NonNull String fileName, boolean nightMode) {
 		Drawable d = RenderingIcons.getBigIcon(ctx, fileName);
 		if (d != null) {
 			int color = ColorUtilities.getColor(ctx, nightMode
@@ -768,8 +769,8 @@ public class UiUtilities {
 		AndroidUiHelper.setStatusBarContentColor(activity.getWindow().getDecorView(), nightModeForContent);
 	}
 
-	public Bitmap getScaledBitmap(@Nullable MapActivity activity, @DrawableRes int drawableId, float scale) {
-		Bitmap bitmap = BitmapFactory.decodeResource(activity == null ? app.getResources() : activity.getResources(), drawableId);
+	public Bitmap getScaledBitmap(@UiContext Context context, @DrawableRes int drawableId, float scale) {
+		Bitmap bitmap = BitmapFactory.decodeResource(context == null ? app.getResources() : context.getResources(), drawableId);
 		if (bitmap != null && scale != 1f && scale > 0) {
 			bitmap = AndroidUtils.scaleBitmap(bitmap,
 					(int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);
