@@ -21,6 +21,7 @@ public class TurnType {
 	public static final int OFFR = 12; // Off route //$NON-NLS-1$
 	public static final int RNDB = 13; // Roundabout
 	public static final int RNLB = 14; // Roundabout left
+	public static final int NONE = 15; // U-turn //$NON-NLS-1$
 	private static final int[] TURNS_ORDER = {TU, TSHL, TL, TSLL, C, TSLR, TR, TSHR, TRU};
 
 	public static TurnType straight() {
@@ -587,7 +588,7 @@ public class TurnType {
 			turn = TurnType.TU;
 		} else {
 			// Unknown string
-			turn = TurnType.C;
+			turn = TurnType.NONE;
 //			continue;
 		}
 		return turn;
