@@ -1201,7 +1201,7 @@
     <string name="poi_smoking_dedicated">Dedikeret til rygere</string>
     <string name="poi_toll_no">Ingen vejafgift</string>
     <string name="poi_toll_yes">Vejafgift</string>
-    <string name="poi_tactile_paving_yes">Ja</string>
+    <string name="poi_tactile_paving_yes">Ja;Taktil belægning</string>
     <string name="poi_tactile_paving_no">Uden taktilbelægning</string>
     <string name="poi_traffic_signals_sound_yes">Ja;Trafiklys lyd</string>
     <string name="poi_traffic_signals_sound_no">Lyd: nej</string>
@@ -3339,7 +3339,7 @@
     <string name="poi_climbing_rock_quartzite">Klatretype: kvartsit</string>
     <string name="poi_climbing_rock_gneiss">Klatretype: gnejs</string>
     <string name="poi_climbing_rock_porphyry">Klatretype: porfyr</string>
-    <string name="poi_climbing_quality_solid">Klatrekvalitet: solid</string>
+    <string name="poi_climbing_quality_solid">Solid</string>
     <string name="poi_climbing_quality_fragile">Skrøbelig</string>
     <string name="poi_climbing_bolted_yes">Faste ankre: ja</string>
     <string name="poi_climbing_bolted_no">Faste ankre: nej</string>
@@ -3490,8 +3490,8 @@
     <string name="poi_shoe_repair">Skoreparation</string>
     <string name="poi_bulk_purchase">Storkøb</string>
     <string name="poi_substation_type">Type</string>
-    <string name="poi_bulk_purchase_yes">Ja</string>
-    <string name="poi_bulk_purchase_only">Kun</string>
+    <string name="poi_bulk_purchase_yes">Ja;Masseløb</string>
+    <string name="poi_bulk_purchase_only">Kun;Kun storkøb</string>
     <string name="poi_pipeline_substation">Rørledningsunderstation</string>
     <string name="poi_substation_transmission">Transmission</string>
     <string name="poi_substation_distribution">Distribution</string>
@@ -4172,4 +4172,15 @@
     <string name="poi_socket_type2_combo_voltage_medium">Medium</string>
     <string name="poi_socket_type2_cable_voltage_medium">Medium</string>
     <string name="poi_socket_type3a_voltage_medium">Medium</string>
+    <string name="poi_socket_type3a_output_low">Lav</string>
+    <string name="poi_socket_type3c_output_high">Høj</string>
+    <string name="poi_cash_in">Indbetalings automat</string>
+    <string name="poi_socket_type3c_output_low">Lav</string>
+    <string name="poi_climbing_rock_basalt">Klatresten: basalt</string>
+    <string name="poi_socket_typee_output_high">Høj</string>
+    <string name="poi_socket_typee_output_medium">Medium</string>
+    <string name="poi_socket_typee_output_low">Lav</string>
+    <string name="poi_us_maps_recreation_area_facility">Aktivitets facilitetsområde</string>
+    <string name="poi_socket_type3a_output_medium">Medium</string>
+    <string name="poi_socket_type3c_output_medium">Medium</string>
 </resources>
