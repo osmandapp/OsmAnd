@@ -163,7 +163,10 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 	                        QuadTree<QuadRect> boundIntersections, float iconSize, Canvas canvas,
 	                        List<LatLon> fullObjectsLatLon, List<LatLon> smallObjectsLatLon) {
 		List<NearbyPlacePoint> fullObjects = new ArrayList<>();
-		Paint smallPointPaint = new Paint();
+		Paint pointPaint = new Paint();
+		if (cachedSmallIconBitmap == null) {
+			cachedSmallIconBitmap = PointImageUtils.createSmallPointBitmap(this);
+		}
 		for (NearbyPlacePoint nearbyPoint : pointsToDraw) {
 			double lat = nearbyPoint.getLatitude();
 			double lon = nearbyPoint.getLongitude();
@@ -173,7 +176,7 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 				float x = tileBox.getPixXFromLatLon(lat, lon);
 				float y = tileBox.getPixYFromLatLon(lat, lon);
 				if (intersects(boundIntersections, x, y, iconSize, iconSize) || nearbyPoint.imageBitmap == null) {
-					canvas.drawBitmap(PointImageUtils.createSmallPointBitmap(this), x, y, smallPointPaint);
+					canvas.drawBitmap(cachedSmallIconBitmap, x, y, pointPaint);
 					smallObjectsLatLon.add(new LatLon(lat, lon));
 				} else {
 					fullObjects.add(nearbyPoint);
@@ -186,7 +189,7 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 			if (bitmap != null) {
 				float x = tileBox.getPixXFromLatLon(point.getLatitude(), point.getLongitude());
 				float y = tileBox.getPixYFromLatLon(point.getLatitude(), point.getLongitude());
-				canvas.drawBitmap(cachedSmallIconBitmap, x, y, new Paint());
+				canvas.drawBitmap(PointImageUtils.createBigBitmap(this, bitmap), x, y, pointPaint);
 			}
 		}
 	}
