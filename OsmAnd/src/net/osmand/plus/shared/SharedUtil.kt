@@ -499,6 +499,15 @@ object SharedUtil {
 	}
 
 	@JvmStatic
+	fun kTrkSegmentList(jTrkSegments: MutableList<GPXUtilities.TrkSegment>): MutableList<TrkSegment> {
+		val res = mutableListOf<TrkSegment>()
+		for (trkSeg in jTrkSegments) {
+			res.add(kTrkSegment(trkSeg));
+		}
+		return res
+	}
+
+	@JvmStatic
 	fun kWptPt(point: GPXUtilities.WptPt): WptPt {
 		val kPoint = WptPt()
 		kPoint.firstPoint = point.firstPoint

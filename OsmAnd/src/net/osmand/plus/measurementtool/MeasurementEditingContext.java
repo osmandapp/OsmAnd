@@ -1159,6 +1159,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return params;
 	}
 
+	@NonNull
 	public List<List<GPXUtilities.WptPt>> getRoutePoints() {
 		List<List<GPXUtilities.WptPt>> res = new ArrayList<>();
 		List<WptPt> plainPoints = new ArrayList<>(before.getPoints());
@@ -1189,9 +1190,10 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		if (gpxData != null && gpxData.getGpxFile() != null) {
 			points = gpxData.getGpxFile().getPointsList();
 		}
-		List<GPXUtilities.WptPt> jPoints = points != null ? SharedUtil.jWptPtList(points) : null;
-		return SharedUtil.kGpxFile(
-				RouteExporter.exportRoute(gpxName, getRouteSegments(), jPoints, getRoutePoints()));
+		List<List <WptPt>> routePoints = new ArrayList<>();
+		getRoutePoints().forEach((rpt) -> routePoints.add(SharedUtil.kWptPtList(rpt)));
+		List <TrkSegment> segments = SharedUtil.kTrkSegmentList(getRouteSegments());
+		return RouteExporter.exportRoute(gpxName, segments, points, routePoints);
 	}
 
 	private GPXUtilities.TrkSegment getRouteSegment(int startPointIndex, int endPointIndex) {
@@ -1224,7 +1226,9 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		}
 		if (!locations.isEmpty() && !route.isEmpty()) {
 			before.getPoints().get(startPointIndex).setTrkPtIndex(0);
-			return new RouteExporter("", route, locations, routePointIndexes, null).generateRouteSegment();
+			TrkSegment kTrkSegment =
+					new RouteExporter("", route, locations, routePointIndexes, null).generateRouteSegment();
+			return SharedUtil.jTrkSegment(kTrkSegment);
 		} else if (endPointIndex - startPointIndex >= 0) {
 			GPXUtilities.TrkSegment segment = new GPXUtilities.TrkSegment();
 			segment.points = SharedUtil.jWptPtList(
@@ -1234,6 +1238,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return null;
 	}
 
+	@NonNull
 	private List<GPXUtilities.TrkSegment> getRouteSegments() {
 		List<GPXUtilities.TrkSegment> res = new ArrayList<>();
 		List<Integer> lastPointIndexes = new ArrayList<>();

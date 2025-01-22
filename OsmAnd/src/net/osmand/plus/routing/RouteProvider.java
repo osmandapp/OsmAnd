@@ -1173,7 +1173,7 @@ public class RouteProvider {
 
 	public GpxFile createOsmandRouterGPX(RouteCalculationResult route, OsmandApplication ctx, String name) {
 		TargetPointsHelper helper = ctx.getTargetPointsHelper();
-		List<net.osmand.gpx.GPXUtilities.WptPt> points = new ArrayList<>();
+		List<WptPt> points = new ArrayList<>();
 		List<TargetPoint> ps = helper.getIntermediatePointsWithTarget();
 		for (int k = 0; k < ps.size(); k++) {
 			net.osmand.gpx.GPXUtilities.WptPt pt = new net.osmand.gpx.GPXUtilities.WptPt();
@@ -1202,8 +1202,10 @@ public class RouteProvider {
 
 		List<Location> locations = route.getImmutableAllLocations();
 		List<RouteSegmentResult> originalRoute = route.getOriginalRoute();
-		RouteExporter exporter = new RouteExporter(name, originalRoute, locations, null, points);
-		return SharedUtil.kGpxFile(exporter.exportRoute());
+		List<net.osmand.shared.gpx.primitives.WptPt> kPoints = SharedUtil.kWptPtList(points);
+		RouteExporter exporter = new RouteExporter(name, originalRoute, locations, null, kPoints);
+
+		return exporter.exportRoute();
 	}
 
 	private RouteCalculationResult findOnlineRoute(RouteCalculationParams params) throws IOException, JSONException {
