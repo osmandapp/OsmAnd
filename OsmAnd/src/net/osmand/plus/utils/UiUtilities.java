@@ -2,7 +2,10 @@ package net.osmand.plus.utils;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -30,6 +33,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.annotation.UiContext;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.SwitchCompat;
@@ -54,6 +58,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapFragmentsHelper;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
@@ -136,6 +141,21 @@ public class UiUtilities {
 
 	public Drawable getIcon(@DrawableRes int id, @ColorRes int colorId) {
 		return getDrawable(id, colorId);
+	}
+
+	@Nullable
+	public Drawable getRenderingIcon(@NonNull Context ctx, @NonNull String fileName, boolean nightMode) {
+		Drawable d = RenderingIcons.getBigIcon(ctx, fileName);
+		if (d != null) {
+			int color = ColorUtilities.getColor(ctx, nightMode
+					? R.color.icon_color_secondary_light : R.color.icon_color_secondary_dark);
+			d = DrawableCompat.wrap(d);
+			d.mutate();
+			d.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+			return d;
+		} else {
+			return null;
+		}
 	}
 
 	public Drawable getLayeredIcon(@DrawableRes int bgIconId, @DrawableRes int foregroundIconId) {
@@ -748,4 +768,14 @@ public class UiUtilities {
 
 		AndroidUiHelper.setStatusBarContentColor(activity.getWindow().getDecorView(), nightModeForContent);
 	}
+
+	public Bitmap getScaledBitmap(@UiContext Context context, @DrawableRes int drawableId, float scale) {
+		Bitmap bitmap = BitmapFactory.decodeResource(context == null ? app.getResources() : context.getResources(), drawableId);
+		if (bitmap != null && scale != 1f && scale > 0) {
+			bitmap = AndroidUtils.scaleBitmap(bitmap,
+					(int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);
+		}
+		return bitmap;
+	}
+
 }
