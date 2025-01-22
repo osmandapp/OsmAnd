@@ -130,19 +130,9 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 	}
 
 	private void updateTimeToGo(int leftSeconds) {
-		String formattedLeftTime = OsmAndFormatter.getFormattedDurationShortMinutes(leftSeconds);
-		setText(formattedLeftTime, getUnits(leftSeconds));
-	}
-
-	@Nullable
-	private String getUnits(long timeLeft) {
-		if (timeLeft >= 0) {
-			long diffInMinutes = TimeUnit.MINUTES.convert(timeLeft, TimeUnit.SECONDS);
-			String hour = app.getString(R.string.int_hour);
-			String minute = app.getString(R.string.shared_string_minute_lowercase);
-			return diffInMinutes >= 60 ? hour : minute;
-		}
-		return null;
+		long diffInMinutes = TimeUnit.MINUTES.convert(leftSeconds * 1000L, TimeUnit.MILLISECONDS);
+		String formattedLeftTime = Algorithms.formatMinutesDuration((int) diffInMinutes, true);
+		setText(formattedLeftTime, app.getString(R.string.int_hour));
 	}
 
 	@Nullable

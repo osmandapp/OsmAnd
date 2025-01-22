@@ -3,7 +3,7 @@ package net.osmand.plus.views.mapwidgets.widgets;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
-import android.text.format.DateFormat;
+import android.util.Pair;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportSidePanel;
@@ -230,12 +231,8 @@ public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 	}
 
 	protected void setTimeText(long time) {
-		if (DateFormat.is24HourFormat(app)) {
-			setText(DateFormat.format("k:mm", time).toString(), null);
-		} else {
-			setText(DateFormat.format("h:mm", time).toString(),
-					DateFormat.format("aa", time).toString());
-		}
+		Pair<String, String> formattedTime = OsmAndFormatter.getFormattedTime(app, time);
+		setText(formattedTime.first, formattedTime.second);
 	}
 
 	@DrawableRes

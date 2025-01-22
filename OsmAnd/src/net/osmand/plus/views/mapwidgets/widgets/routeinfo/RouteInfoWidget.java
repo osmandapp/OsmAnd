@@ -2,6 +2,7 @@ package net.osmand.plus.views.mapwidgets.widgets.routeinfo;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -29,8 +30,6 @@ import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsContextMenu;
-import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.widgetinterfaces.IComplexWidget;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportMultiRow;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportVerticalPanel;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
@@ -39,18 +38,14 @@ import net.osmand.plus.views.mapwidgets.widgets.routeinfo.RouteInfoCalculator.De
 import net.osmand.plus.views.mapwidgets.widgetstates.ResizableWidgetState;
 import net.osmand.util.Algorithms;
 
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-public class RouteInfoWidget extends MapWidget implements IComplexWidget, ISupportVerticalPanel, ISupportWidgetResizing, ISupportMultiRow {
+public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel, ISupportWidgetResizing, ISupportMultiRow {
 
 	private static final String DISPLAY_MODE_PREF_ID = "route_info_widget_display_mode";
-
-	private static final String ARRIVAL_TIME_FORMAT = "HH:mm";
 
 	private final ResizableWidgetState widgetState;
 	private final CommonPreference<RouteInfoDisplayMode> displayModePref;
@@ -59,13 +54,13 @@ public class RouteInfoWidget extends MapWidget implements IComplexWidget, ISuppo
 	protected String customId;
 	private boolean isFullRow;
 	private TextState textState;
-	private RouteInfoCalculator calculator;
-	private List<RouteInfoCalculator.DestinationInfo> calculatedRouteInfo;
+	private final RouteInfoCalculator calculator;
+	private List<DestinationInfo> calculatedRouteInfo;
+	private int cachedContentLayoutId;
 
 	// views
 	private View buttonTappableArea;
 	private View buttonBody;
-	private View primaryBlock;
 	private TextView tvPrimaryValue1;
 	private TextView tvSecondaryValue1;
 	private TextView tvTertiaryValue1;
@@ -75,7 +70,7 @@ public class RouteInfoWidget extends MapWidget implements IComplexWidget, ISuppo
 	private TextView tvTertiaryValue2;
 	private View blocksDivider;
 
-	public RouteInfoWidget(@NonNull MapActivity mapActivity, @Nullable String customId, @Nullable WidgetsPanel panel) {
+	public RouteInfoWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
 		super(mapActivity, WidgetType.ROUTE_INFO);
 		this.customId = customId;
 		widgetState = new ResizableWidgetState(app, customId, widgetType);
@@ -113,7 +108,8 @@ public class RouteInfoWidget extends MapWidget implements IComplexWidget, ISuppo
 		LinearLayout container = (LinearLayout) view;
 		container.removeAllViews();
 		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
-		inflater.inflate(getContentLayoutId(), container);
+		cachedContentLayoutId = getContentLayoutId();
+		inflater.inflate(cachedContentLayoutId, container);
 		collectViews();
 		if (textState != null) {
 			view.setBackgroundResource(textState.widgetBackgroundId);
@@ -135,7 +131,6 @@ public class RouteInfoWidget extends MapWidget implements IComplexWidget, ISuppo
 		blocksDivider = view.findViewById(R.id.blocks_divider);
 
 		// Initialization of primary block elements
-		primaryBlock = view.findViewById(R.id.primary_block);
 		tvPrimaryValue1 = view.findViewById(R.id.primary_value_1);
 		tvSecondaryValue1 = view.findViewById(R.id.secondary_value_1);
 		tvTertiaryValue1 = view.findViewById(R.id.tertiary_value_1);
@@ -159,7 +154,6 @@ public class RouteInfoWidget extends MapWidget implements IComplexWidget, ISuppo
 			if (textState != null) {
 				updateColors(textState);
 			}
-			updateInfo(null);
 		}
 	}
 
@@ -180,9 +174,8 @@ public class RouteInfoWidget extends MapWidget implements IComplexWidget, ISuppo
 	}
 
 	private void updateInfoInternal() {
-		int count = calculatedRouteInfo != null ? calculatedRouteInfo.size() : -1;
 		calculatedRouteInfo = calculator.calculateRouteInformation();
-		if (count >= 0 && isFullRow && count != calculatedRouteInfo.size() && getWidgetSizePref().get() == WidgetSize.SMALL) {
+		if (cachedContentLayoutId != getContentLayoutId()) {
 			// Recreating the widget is necessary because small widget size uses
 			// different layouts depending on the number of route points.
 			recreateView();
@@ -237,11 +230,12 @@ public class RouteInfoWidget extends MapWidget implements IComplexWidget, ISuppo
 		tvTertiaryValue2.setText(displayData.get(modes[2]));
 	}
 
-	private Map<RouteInfoDisplayMode, String> prepareDisplayData(@NonNull DestinationInfo destinationInfo) {
+	@NonNull
+	private Map<RouteInfoDisplayMode, String> prepareDisplayData(@NonNull DestinationInfo info) {
 		Map<RouteInfoDisplayMode, String> displayData = new HashMap<>();
-		displayData.put(RouteInfoDisplayMode.ARRIVAL_TIME, destinationInfo.arrivalTime());
-		displayData.put(RouteInfoDisplayMode.TIME_TO_GO, destinationInfo.duration());
-		displayData.put(RouteInfoDisplayMode.DISTANCE, destinationInfo.distance());
+		displayData.put(RouteInfoDisplayMode.ARRIVAL_TIME, formatArrivalTime(app, info.arrivalTime()));
+		displayData.put(RouteInfoDisplayMode.TIME_TO_GO, formatDuration(app, info.timeToGo()));
+		displayData.put(RouteInfoDisplayMode.DISTANCE, formatDistance(app, info.distance()));
 		return displayData;
 	}
 
@@ -274,10 +268,6 @@ public class RouteInfoWidget extends MapWidget implements IComplexWidget, ISuppo
 	@Override
 	public OsmandPreference<WidgetSize> getWidgetSizePref() {
 		return widgetState.getWidgetSizePref();
-	}
-
-	@Override
-	public void recreateViewIfNeeded(@NonNull WidgetsPanel panel) {
 	}
 
 	@Override
@@ -315,13 +305,17 @@ public class RouteInfoWidget extends MapWidget implements IComplexWidget, ISuppo
 	}
 
 	@NonNull
-	public static String formatArrivalTime(long arrivalTime) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat(ARRIVAL_TIME_FORMAT, Locale.getDefault());
-		return dateFormat.format(arrivalTime);
+	public static String formatArrivalTime(@NonNull Context ctx, long time) {
+		Pair<String, String> formattedTime = OsmAndFormatter.getFormattedTime(ctx, time);
+		if (formattedTime.second != null) {
+			String pattern = ctx.getString(R.string.ltr_or_rtl_combine_via_space);
+			return String.format(pattern, formattedTime.first, formattedTime.second);
+		}
+		return formattedTime.first;
 	}
 
 	@NonNull
-	public static String formatDuration(@NonNull Context ctx, long timeLeft) { // todo should be improved
+	public static String formatDuration(@NonNull Context ctx, long timeLeft) {
 		long diffInMinutes = TimeUnit.MINUTES.convert(timeLeft, TimeUnit.MILLISECONDS);
 		String hour = ctx.getString(R.string.int_hour);
 		String formattedDuration = Algorithms.formatMinutesDuration((int) diffInMinutes, true);

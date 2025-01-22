@@ -7,6 +7,7 @@ import static java.util.Calendar.YEAR;
 
 import android.content.Context;
 import android.text.format.DateUtils;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
@@ -165,6 +166,24 @@ public class OsmAndFormatter {
 		int minutes = totalMinutes % 60;
 		return String.format(Locale.US, "%d:%02d", hours, minutes);
 	}
+
+	@NonNull
+	public static Pair<String, String> getFormattedTime(@NonNull Context context, long time) {
+		String timeFormatted;
+		String period = null;
+
+		boolean is24HourFormat = android.text.format.DateFormat.is24HourFormat(context);
+
+		if (is24HourFormat) {
+			timeFormatted = android.text.format.DateFormat.format("k:mm", time).toString();
+		} else {
+			timeFormatted = android.text.format.DateFormat.format("h:mm", time).toString();
+			period = android.text.format.DateFormat.format("aa", time).toString();
+		}
+
+		return new Pair<>(timeFormatted, period);
+	}
+
 
 	public static DateFormat getDateFormat(@NonNull Context context) {
 		return android.text.format.DateFormat.getDateFormat(context);
