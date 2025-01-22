@@ -57,10 +57,6 @@ public class PicassoUtils {
 		memoryCache = new LruCache(app);
 
 		OkHttpClient okHttpClient = new OkHttpClient.Builder().cache(diskCache).build();
-		if (BuildConfig.DEBUG) {
-			okHttpClient = getUnsafeOkHttpClient();
-		}
-
 		Picasso picasso = new Picasso.Builder(app)
 				.downloader(new OkHttp3Downloader(okHttpClient))
 				.memoryCache(memoryCache)
