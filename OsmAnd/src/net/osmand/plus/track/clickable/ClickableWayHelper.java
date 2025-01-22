@@ -121,15 +121,8 @@ public class ClickableWayHelper {
                                           TIntArrayList xPoints, TIntArrayList yPoints,
                                           long osmId, String name, Map<String, String> tags) {
         GpxFile gpxFile = new GpxFile(Version.getFullVersion(app));
-
-        if (!Algorithms.isEmpty(name)) {
-            gpxFile.getMetadata().setName(name);
-        } else {
-            gpxFile.getMetadata().setName(Long.toString(osmId));
-        }
-
-        OsmRouteType compatibleOsmRouteType = null;
         RouteActivityHelper helper = app.getRouteActivityHelper();
+        OsmRouteType compatibleOsmRouteType = null;
         for (String clickableTag : CLICKABLE_TAGS) {
             if (tags.containsKey(clickableTag)) {
                 RouteActivity activity = helper.findActivityByTag(clickableTag);
