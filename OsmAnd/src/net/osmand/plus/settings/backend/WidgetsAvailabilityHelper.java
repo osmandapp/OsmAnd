@@ -97,7 +97,6 @@ public class WidgetsAvailabilityHelper {
 		regWidgetAvailability(SECOND_NEXT_TURN, exceptDefault);
 
 		// right
-		regWidgetVisibility(ROUTE_INFO, all);
 		regWidgetVisibility(INTERMEDIATE_DESTINATION, all);
 		regWidgetVisibility(DISTANCE_TO_DESTINATION, all);
 		regWidgetVisibility(TIME_TO_INTERMEDIATE, all);
@@ -107,7 +106,6 @@ public class WidgetsAvailabilityHelper {
 		regWidgetVisibility(ALTITUDE_MAP_CENTER, PEDESTRIAN, BICYCLE);
 		regWidgetVisibility(ALTITUDE_MY_LOCATION, PEDESTRIAN, BICYCLE);
 
-		regWidgetAvailability(ROUTE_INFO, all);
 		regWidgetAvailability(INTERMEDIATE_DESTINATION, all);
 		regWidgetAvailability(DISTANCE_TO_DESTINATION, all);
 		regWidgetAvailability(TIME_TO_INTERMEDIATE, all);
