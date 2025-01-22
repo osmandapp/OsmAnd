@@ -1630,11 +1630,12 @@ public class BinaryMapIndexReader {
 
 	public static SearchRequest<Amenity> buildSearchPoiRequest(int sleft, int sright, int stop, int sbottom, int zoom,
 	                                                           SearchPoiTypeFilter poiTypeFilter, ResultMatcher<Amenity> matcher) {
-		return 	buildSearchPoiRequest(sleft, sright, stop, sbottom, zoom, poiTypeFilter, null, matcher);
+		return 	buildSearchPoiRequest(sleft, sright, stop, sbottom, zoom, poiTypeFilter, null, matcher, null);
 	}
 
 	public static SearchRequest<Amenity> buildSearchPoiRequest(int sleft, int sright, int stop, int sbottom, int zoom,
-	                                                           SearchPoiTypeFilter poiTypeFilter, SearchPoiAdditionalFilter poiTopIndexAdditionalFilter, ResultMatcher<Amenity> matcher){
+	                                                           SearchPoiTypeFilter poiTypeFilter, SearchPoiAdditionalFilter poiTopIndexAdditionalFilter,
+															   ResultMatcher<Amenity> matcher, ResultMatcher<List<TagValuePair>> dynamicTagGroupFilter){
 		SearchRequest<Amenity> request = new SearchRequest<Amenity>();
 		request.left = sleft;
 		request.right = sright;
@@ -1644,6 +1645,7 @@ public class BinaryMapIndexReader {
 		request.poiTypeFilter = poiTypeFilter;
 		request.poiAdditionalFilter = poiTopIndexAdditionalFilter;
 		request.resultMatcher = matcher;
+		request.dynamicTagGroupsMatcher = dynamicTagGroupFilter;
 
 		return request;
 	}

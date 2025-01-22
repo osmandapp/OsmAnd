@@ -160,10 +160,6 @@ public class SearchPhrase {
 		return knownCityNames != null;
 	}
 
-	public void clearRectCache() {
-		cache1kmRect = null;
-	}
-
 	public enum SearchPhraseDataType {
 		MAP, ADDRESS, ROUTING, POI
 	}
@@ -521,7 +517,8 @@ public class SearchPhrase {
 	}
 
 	public void setOriginalLocation(LatLon l) {
-		settings.setOriginalLocation(l);
+		cache1kmRect = null;
+		settings.changeOriginalLocation(l);
 	}
 
 
@@ -966,6 +963,5 @@ public class SearchPhrase {
 		}
 		return lastUnknownSearchWordComplete;
 	}
-
 	
 }
