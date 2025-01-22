@@ -263,20 +263,21 @@ public class MapSelectionHelper {
 					result.objectLatLon = renderedObject.getLabelLatLon();
 				}
 				LatLon searchLatLon = result.objectLatLon != null ? result.objectLatLon : result.pointLatLon;
-				if (isClickableWay && !isDerivedGpxSelected) {
-					isDerivedGpxSelected = addClickableWay(result,
-							clickableWayHelper.loadClickableWay(result.pointLatLon, renderedObject));
-				} else if (isTravelGpx && !isDerivedGpxSelected) {
-					isDerivedGpxSelected = addTravelGpx(result, travelGpxFilter, renderedObject.getTagValue("ref"));
-				} else if (isOsmRoute && !isDerivedGpxSelected) {
-					NetworkRouteSelectorFilter routeFilter = createRouteFilter();
-					if (!Algorithms.isEmpty(routeFilter.typeFilter)) {
-						addOsmRoute(result, tileBox, point, routeFilter);
-						isDerivedGpxSelected = true;
+
+				if (!isDerivedGpxSelected) {
+					if (isOsmRoute) {
+						isDerivedGpxSelected = addOsmRoute(result, tileBox, point, createRouteFilter());
+					} else if (isTravelGpx) {
+						isDerivedGpxSelected = addTravelGpx(result, travelGpxFilter, renderedObject.getTagValue("ref"));
+					} else if (isClickableWay) {
+						isDerivedGpxSelected = addClickableWay(result,
+								clickableWayHelper.loadClickableWay(result.pointLatLon, renderedObject));
 					}
-				} else if (!isClickableWay && !isOsmRoute && !isTravelGpx) {
+				}
+
+				if (!isClickableWay && !isOsmRoute && !isTravelGpx) {
 					boolean amenityAdded = addAmenity(result, renderedObject, searchLatLon);
-					if (!amenityAdded && !isOsmRoute) {
+					if (!amenityAdded) {
 						result.selectedObjects.put(renderedObject, null);
 					}
 				}
@@ -353,17 +354,15 @@ public class MapSelectionHelper {
 							boolean isOsmRoute = !Algorithms.isEmpty(OsmRouteType.getRouteKeys(tags));
 							boolean isClickableWay = clickableWayHelper.isClickableWay(obfMapObject, tags);
 
-							if (isOsmRoute && !isDerivedGpxSelected) {
-								NetworkRouteSelectorFilter routeFilter = createRouteFilter();
-								if (!Algorithms.isEmpty(routeFilter.typeFilter)) {
-									addOsmRoute(result, tileBox, point, routeFilter);
-									isDerivedGpxSelected = true;
+							if (!isDerivedGpxSelected) {
+								if (isOsmRoute) {
+									isDerivedGpxSelected = addOsmRoute(result, tileBox, point, createRouteFilter());
+								} else if (isTravelGpx) {
+									isDerivedGpxSelected = addTravelGpx(result, tags.get(ROUTE_ID), null);
+								} else if (isClickableWay) {
+									isDerivedGpxSelected = addClickableWay(result,
+											clickableWayHelper.loadClickableWay(result.pointLatLon, obfMapObject, tags));
 								}
-							} else if (isClickableWay && !isDerivedGpxSelected) {
-								isDerivedGpxSelected = addClickableWay(result,
-										clickableWayHelper.loadClickableWay(result.pointLatLon, obfMapObject, tags));
-							} else if (isTravelGpx && !isDerivedGpxSelected) {
-								isDerivedGpxSelected = addTravelGpx(result, tags.get(ROUTE_ID), null);
 							}
 
 							IOnPathMapSymbol onPathMapSymbol = getOnPathMapSymbol(symbolInfo);
@@ -539,8 +538,11 @@ public class MapSelectionHelper {
 		return isUniqueGpxFileName(selectedObjects,  travelGpx.getGpxFileName() + GPX_FILE_EXT);
 	}
 
-	private void addOsmRoute(@NonNull MapSelectionResult result, @NonNull RotatedTileBox tileBox, @NonNull PointF point,
-	                         @NonNull NetworkRouteSelectorFilter selectorFilter) {
+	private boolean addOsmRoute(@NonNull MapSelectionResult result, @NonNull RotatedTileBox tileBox, @NonNull PointF point,
+								@NonNull NetworkRouteSelectorFilter selectorFilter) {
+		if (Algorithms.isEmpty(selectorFilter.typeFilter)) {
+			return false;
+		}
 		int searchRadius = (int) (OsmandMapLayer.getScaledTouchRadius(app, tileBox.getDefaultRadiusPoi()) * 1.5f);
 		LatLon minLatLon = NativeUtilities.getLatLonFromElevatedPixel(view.getMapRenderer(), tileBox,
 				point.x - searchRadius, point.y - searchRadius);
@@ -548,7 +550,7 @@ public class MapSelectionHelper {
 				point.x + searchRadius, point.y + searchRadius);
 		QuadRect rect = new QuadRect(minLatLon.getLongitude(), minLatLon.getLatitude(),
 				maxLatLon.getLongitude(), maxLatLon.getLatitude());
-		putRouteGpxToSelected(result.selectedObjects, mapLayers.getRouteSelectionLayer(), rect, selectorFilter);
+		return putRouteGpxToSelected(result.selectedObjects, mapLayers.getRouteSelectionLayer(), rect, selectorFilter);
 	}
 
 	private NetworkRouteSelectorFilter createRouteFilter() {
@@ -579,9 +581,10 @@ public class MapSelectionHelper {
 		return routeSelectorFilter;
 	}
 
-	private void putRouteGpxToSelected(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
-	                                   @NonNull IContextMenuProvider provider, @NonNull QuadRect rect,
-	                                   @NonNull NetworkRouteSelectorFilter selectorFilter) {
+	private boolean putRouteGpxToSelected(@NonNull Map<Object, IContextMenuProvider> selectedObjects,
+										  @NonNull IContextMenuProvider provider, @NonNull QuadRect rect,
+										  @NonNull NetworkRouteSelectorFilter selectorFilter) {
+		int added = 0;
 		BinaryMapIndexReader[] readers = app.getResourceManager().getReverseGeocodingMapFiles();
 		NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter, null);
 		Map<RouteKey, GpxFile> routes = new LinkedHashMap<>();
@@ -593,8 +596,10 @@ public class MapSelectionHelper {
 		for (RouteKey routeKey : routes.keySet()) {
 			if (isUniqueOsmRoute(selectedObjects.keySet(), routeKey)) {
 				selectedObjects.put(new Pair<>(routeKey, rect), provider);
+				added++;
 			}
 		}
+		return added > 0;
 	}
 
 	private boolean isUniqueOsmRoute(@NonNull Set<Object> set, @NonNull RouteKey tmpRouteKey) {
