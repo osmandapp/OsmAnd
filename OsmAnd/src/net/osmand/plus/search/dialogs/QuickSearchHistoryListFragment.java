@@ -3,6 +3,7 @@ package net.osmand.plus.search.dialogs;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.LayoutRes;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.nearbyplaces.NearbyPlacesFragment;
 import net.osmand.plus.nearbyplaces.NearbyPlacesHelper;
@@ -32,18 +34,24 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	private boolean selectionMode;
 	private View nearByContainer;
 	private RecyclerView nearByList;
-	private NearbyPlacesAdapter adapter = null;
+	private NearbyPlacesAdapter adapter;
+	private ImageView explicitIndicator;
+	private boolean expanded;
+	private View showAllBtnContainer;
+	private View progressBar;
 
 	public void onNearbyItemClicked(@NonNull WikiCoreHelper.OsmandApiFeatureData item) {
 
 	}
 
 	private void updateNearbyItems() {
-		List<OsmandApiFeatureData> nearbyData = NearbyPlacesHelper.INSTANCE.getDataCollection();
-		if (nearByContainer != null) {
-			nearByContainer.setVisibility(nearbyData.isEmpty() ? View.GONE : View.VISIBLE);
+		if (progressBar != null) {
+			AndroidUiHelper.updateVisibility(progressBar, false);
 		}
+		List<OsmandApiFeatureData> nearbyData = NearbyPlacesHelper.INSTANCE.getDataCollection();
+		AndroidUiHelper.updateVisibility(nearByList, expanded && !nearbyData.isEmpty());
 		getNearbyAdapter().setItems(nearbyData);
+		getNearbyAdapter().notifyDataSetChanged();
 	}
 
 	private NearbyPlacesAdapter getNearbyAdapter() {
@@ -120,8 +128,15 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	@Override
 	public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		progressBar = view.findViewById(R.id.progress_bar);
+		setupShowAllNearbyPlacesBtn(view);
+		setupExpandNearbyPlacesIndicator(view);
 		setupNearByCard(view);
-		NearbyPlacesHelper.INSTANCE.startLoadingNearestPhotos();
+		updateExpandState();
+	}
+
+	private void setupShowAllNearbyPlacesBtn(@NonNull View view) {
+		showAllBtnContainer = view.findViewById(R.id.show_all_button);
 		view.findViewById(R.id.show_all_btn).setOnClickListener(v -> {
 			app.getOsmandMap().getMapLayers().getNearbyPlacesLayer().setCustomMapObjects(NearbyPlacesHelper.INSTANCE.getDataCollection());
 			MapActivity activity = getMapActivity();
@@ -129,6 +144,18 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 				NearbyPlacesFragment.showInstance(activity.getSupportFragmentManager());
 				getDialogFragment().hide();
 			}
+		});
+	}
+
+	private void setupExpandNearbyPlacesIndicator(@NonNull View view) {
+		explicitIndicator = view.findViewById(R.id.explicit_indicator);
+		explicitIndicator.setOnClickListener(v -> {
+			expanded = !expanded;
+			if (expanded) {
+				AndroidUiHelper.updateVisibility(progressBar, true);
+				NearbyPlacesHelper.INSTANCE.startLoadingNearestPhotos();
+			}
+			updateExpandState();
 		});
 	}
 
@@ -157,5 +184,12 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	@Override
 	public void onNearbyPlacesUpdated() {
 		updateNearbyItems();
+	}
+
+	private void updateExpandState() {
+		int iconRes = expanded ? R.drawable.ic_action_arrow_up : R.drawable.ic_action_arrow_down;
+		explicitIndicator.setImageDrawable(app.getUIUtilities().getIcon(iconRes, !app.getSettings().isLightContent()));
+		AndroidUiHelper.updateVisibility(nearByList, expanded);
+		AndroidUiHelper.updateVisibility(showAllBtnContainer, expanded);
 	}
 }

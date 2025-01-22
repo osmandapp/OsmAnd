@@ -1,18 +1,8 @@
 package net.osmand.plus.nearbyplaces
 
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Path
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
-import android.graphics.Rect
-import android.graphics.RectF
+import net.osmand.data.QuadRect
 import net.osmand.plus.OsmandApplication
-import net.osmand.plus.R
 import net.osmand.plus.search.GetNearbyPlacesImagesTask
-import net.osmand.plus.utils.AndroidUtils
-import net.osmand.plus.utils.ColorUtilities
-import net.osmand.plus.views.layers.NearbyPlacesLayer
 import net.osmand.util.Algorithms
 import net.osmand.util.CollectionUtils
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData
@@ -22,7 +12,10 @@ import kotlin.math.min
 object NearbyPlacesHelper {
 	private lateinit var app: OsmandApplication
 	private var lastModifiedTime: Long = 0
-	private const val PLACES_LIMIT = 50;
+	private const val PLACES_LIMIT = 50
+	private var prevMapRect: QuadRect? = null
+	private var prevZoom: Int? = null
+	private var prevLang: String? = null
 
 	fun init(app: OsmandApplication) {
 		this.app = app
@@ -71,9 +64,16 @@ object NearbyPlacesHelper {
 		if (Algorithms.isEmpty(preferredLang)) {
 			preferredLang = app.language
 		}
-		GetNearbyPlacesImagesTask(
-			mapRect, mapView.zoom,
-			preferredLang!!, loadNearbyPlacesListener).execute()
+		if (prevMapRect != mapRect || prevZoom != mapView.zoom || prevLang != preferredLang) {
+			prevMapRect = mapRect
+			prevZoom = mapView.zoom
+			prevLang = preferredLang
+			GetNearbyPlacesImagesTask(
+				prevMapRect!!, prevZoom!!,
+				prevLang!!, loadNearbyPlacesListener).execute()
+		} else {
+			notifyListeners()
+		}
 	}
 
 	private fun updateLastModifiedTime() {
