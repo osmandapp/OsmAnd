@@ -61,6 +61,7 @@ public class OsmRouteType {
 	public static final OsmRouteType TRACKS = createType("tracks").reg();
 	public static final OsmRouteType TRAM = createType("tram").reg();
 	public static final OsmRouteType TROLLEYBUS = createType("trolleybus").reg();
+	public static final OsmRouteType CLIMBING = createType("climbing").renderingPropertyAttr(CLIMBING_ROUTES).reg();
 
 	// less specific bottom order
 	private final String name;
@@ -459,5 +460,6 @@ public class OsmRouteType {
 		static final String RUNNING_ROUTES = "showRunningRoutes";
 		static final String FITNESS_TRAILS = "showFitnessTrails";
 		static final String DIRTBIKE_ROUTES = "showDirtbikeTrails";
+		static final String CLIMBING_ROUTES = "showClimbingRoutes";
 	}
 }
