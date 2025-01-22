@@ -1682,6 +1682,17 @@ public class SearchCoreFactory {
 			return acceptedTypes;
 		}
 
+		@Override
+		public boolean equals(Object other) {
+			if (super.equals(other)) {
+				if (!(other instanceof PoiAdditionalCustomFilter that)) {
+					return false;
+				}
+				return this.additionalPoiTypes.equals(that.additionalPoiTypes);
+			}
+			return false;
+		}
+
 	}
 
 	public static class SearchLocationAndUrlAPI extends SearchBaseAPI {
