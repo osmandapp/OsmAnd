@@ -266,11 +266,13 @@ public class MapSelectionHelper {
 
 				if (!isDerivedGpxSelected) {
 					if (isOsmRoute) {
-						isDerivedGpxSelected = addOsmRoute(result, tileBox, point, createRouteFilter());
-					} else if (isTravelGpx) {
-						isDerivedGpxSelected = addTravelGpx(result, travelGpxFilter, renderedObject.getTagValue("ref"));
-					} else if (isClickableWay) {
-						isDerivedGpxSelected = addClickableWay(result,
+						isDerivedGpxSelected |= addOsmRoute(result, tileBox, point, createRouteFilter());
+					}
+					if (isTravelGpx) {
+						isDerivedGpxSelected |= addTravelGpx(result, travelGpxFilter, renderedObject.getTagValue("ref"));
+					}
+					if (isClickableWay) {
+						isDerivedGpxSelected |= addClickableWay(result,
 								clickableWayHelper.loadClickableWay(result.pointLatLon, renderedObject));
 					}
 				}
@@ -356,11 +358,13 @@ public class MapSelectionHelper {
 
 							if (!isDerivedGpxSelected) {
 								if (isOsmRoute) {
-									isDerivedGpxSelected = addOsmRoute(result, tileBox, point, createRouteFilter());
-								} else if (isTravelGpx) {
-									isDerivedGpxSelected = addTravelGpx(result, tags.get(ROUTE_ID), null);
-								} else if (isClickableWay) {
-									isDerivedGpxSelected = addClickableWay(result,
+									isDerivedGpxSelected |= addOsmRoute(result, tileBox, point, createRouteFilter());
+								}
+								if (isTravelGpx) {
+									isDerivedGpxSelected |= addTravelGpx(result, tags.get(ROUTE_ID), null);
+								}
+								if (isClickableWay) {
+									isDerivedGpxSelected |= addClickableWay(result,
 											clickableWayHelper.loadClickableWay(result.pointLatLon, obfMapObject, tags));
 								}
 							}
