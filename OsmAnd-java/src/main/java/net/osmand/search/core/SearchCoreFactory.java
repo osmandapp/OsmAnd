@@ -1463,30 +1463,29 @@ public class SearchCoreFactory {
 		if (!phrase.hasCityName() && countWords < 2) {
 			return null;
 		}
-
+		
 		String searchQuery = phrase.getFullSearchPhrase().toLowerCase();
-        return new ResultMatcher<>() {
-            @Override
-            public boolean publish(List<BinaryMapIndexReader.TagValuePair> object) {
-                for (BinaryMapIndexReader.TagValuePair tagValue : object) {
-                    if (tagValue.tag.startsWith("name")) {
-                        if (phrase.hasCityName()) {
-                            if (phrase.hasCityName() && phrase.containsCityName(tagValue.value)) {
-                                return true;
-                            }
-                        } else if (searchQuery.contains(tagValue.value.toLowerCase())) {
+		return new ResultMatcher<>() {
+			@Override
+			public boolean publish(List<BinaryMapIndexReader.TagValuePair> object) {
+				for (BinaryMapIndexReader.TagValuePair tagValue : object) {
+					if (tagValue.tag.startsWith("name")) {
+						if (phrase.hasCityName()) {
+							if (phrase.hasCityName() && phrase.containsCityName(tagValue.value)) {
+								return true;
+							}
+						} else if (searchQuery.contains(tagValue.value.toLowerCase())) {
 							return true;
-                        }
-                    }
-                }
-                return false;
-            }
-
-            @Override
-            public boolean isCancelled() {
-                return false;
-            }
-        };
+						}
+					}
+				}
+				return false;
+			}
+				@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		};
 	}
 
 	public static class SearchStreetByCityAPI extends SearchBaseAPI {

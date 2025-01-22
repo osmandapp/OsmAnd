@@ -109,9 +109,7 @@ public class SearchSettings {
 
 	public SearchSettings setOriginalLocation(LatLon l) {
 		SearchSettings s = new SearchSettings(this);
-		double distance = this.originalLocation == null ? -1 : MapUtils.getDistance(l, this.originalLocation);
-		s.regionLang = (distance > MIN_DISTANCE_REGION_LANG_RECALC || distance == -1 || this.regionLang == null) ? calculateRegionLang(l) : this.regionLang;
-		s.originalLocation = l;
+		s.changeOriginalLocation(l);
 		return s;
 	}
 
