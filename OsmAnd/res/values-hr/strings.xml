@@ -1743,4 +1743,5 @@
     <string name="map_widget_sun_position">Pozicija sunca</string>
     <string name="delete_account">Izbriši račun</string>
     <string name="verify_account">Potvrdi tvoj račun</string>
+    <string name="manage_subscriptions">Upravljaj pretplatama.</string>
 </resources>
