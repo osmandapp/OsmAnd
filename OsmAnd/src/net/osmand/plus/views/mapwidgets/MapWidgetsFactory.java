@@ -75,7 +75,7 @@ public class MapWidgetsFactory {
 			case LANES:
 				return new LanesWidget(mapActivity);
 			case ROUTE_INFO:
-				return new RouteInfoWidget(mapActivity, customId, panel);
+				return new RouteInfoWidget(mapActivity, customId);
 			case DISTANCE_TO_DESTINATION:
 				return new DistanceToDestinationWidget(mapActivity, customId, panel);
 			case INTERMEDIATE_DESTINATION:
