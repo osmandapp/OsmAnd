@@ -4447,9 +4447,7 @@
     <string name="select_suggested_points">Önerilen noktaları seç</string>
     <string name="exit_import_descr">Değişiklikleri kaydetmeden çıkılsın mı\?</string>
     <string name="location_source">Konum kaynağı</string>
-    <string name="location_source_descr">OsmAnd\'ı Google Play\'den kurduğunuzda, konumu belirlemek için varsayılan olarak %1$s kullanılır.
-\n
-\nHatalı konum bilgisi alıyor veya cihazınızı %2$s olmadan kullanıyorsanız, \"%3$s\" kullanmayı deneyin.</string>
+    <string name="location_source_descr">OsmAnd\'ı Google Play\'den kurduğunuzda, konumu belirlemek için varsayılan olarak %1$s kullanılır. \n \nHatalı konum bilgisi alıyor veya cihazınızı %2$s olmadan kullanıyorsanız, \"%3$s\" kullanmayı deneyin.</string>
     <string name="default_appearance_desc">Varsayılan renk, simge ve şekil, gruba eklenen favori noktalara uygulanacaktır.</string>
     <string name="default_appearance">Varsayılan görünüm</string>
     <string name="edit_category">Kategoriyi düzenle</string>
