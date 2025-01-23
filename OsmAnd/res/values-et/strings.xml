@@ -4836,4 +4836,6 @@
     <string name="change_appearance">Muuda välimust</string>
     <string name="delete_folder">Kustuta kaust</string>
     <string name="action_cannot_be_undone">Seda tegevust ei saa tagasi pöörata.</string>
+    <string name="shared_string_mode">Režiim</string>
+    <string name="map_widget_altitude_current_location">Kõrgus: praegune asukoht</string>
 </resources>
