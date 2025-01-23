@@ -2124,7 +2124,7 @@
     <string name="show_on_start_description">\'Väljas\' käivitab kaardi otse.</string>
     <string name="map_downloaded">Kaart on allalaaditud</string>
     <string name="map_downloaded_descr">%1$s kaart on kasutusvalmis.</string>
-    <string name="go_to_map">Kuva kaart</string>
+    <string name="go_to_map">Näita kaarti</string>
     <string name="shared_string_qr_code">QR kood</string>
     <string name="world_map_download_descr">Maailma aluskaart (katab kogu maailma madalal suurendustasemel) puudub või on aegunud. Üldise ülevaate saamiseks palun kaalu selle allalaadimist.</string>
     <string name="shared_string_about">Rakenduse teave</string>
