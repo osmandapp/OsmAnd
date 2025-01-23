@@ -4847,4 +4847,5 @@
     <string name="rendering_attr_hideMilitaryAreas_description">Peida sõjaväealad</string>
     <string name="rendering_attr_weatherTempContours_name">Temperatuuri samajooned</string>
     <string name="rendering_attr_seabedDetail_name">Üksikasjalik merepõhi</string>
+    <string name="routing_attr_difficulty_preference_expert_name">Ekspert</string>
 </resources>
