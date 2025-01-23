@@ -462,7 +462,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		long now = System.currentTimeMillis();
 		boolean isUserZoomed = lastTimeManualZooming > lastTimeAutoZooming;
 		return isUserZoomed
-				? now - lastTimeManualZooming > Math.max(settings.AUTO_FOLLOW_ROUTE.get(), AUTO_ZOOM_DEFAULT_CHANGE_ZOOM)
+				? now - lastTimeManualZooming > Math.max(settings.AUTO_FOLLOW_ROUTE.get() * 1000, AUTO_ZOOM_DEFAULT_CHANGE_ZOOM)
 				: now - lastTimeAutoZooming > autoZoomFrequency;
 	}
 
