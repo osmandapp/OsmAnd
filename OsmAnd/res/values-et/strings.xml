@@ -4811,4 +4811,5 @@
     <string name="most_viewed">Enimvaadatud</string>
     <string name="copy_build_version">Kopeeri rakenduse versioon</string>
     <string name="help_article_troubleshooting_crash_logs_name">Kokkujooksmise logid</string>
+    <string name="help_article_start_with_first_steps_name">Esimesed sammud</string>
 </resources>
