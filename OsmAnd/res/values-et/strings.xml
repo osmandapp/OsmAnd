@@ -4850,4 +4850,5 @@
     <string name="routing_attr_difficulty_preference_expert_name">Ekspert</string>
     <string name="routing_attr_freeride_policy_only_if_necessary_name">Vaid siis, kui vajalik</string>
     <string name="routing_attr_avoid_highway_name">Väldi kiirteid</string>
+    <string name="rendering_attr_depthContourWidth_description">Sügavuste kontuurjoonte laius</string>
 </resources>
