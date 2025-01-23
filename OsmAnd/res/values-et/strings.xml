@@ -4164,7 +4164,7 @@
     <string name="rendering_attr_showShareTaxiRoutes_name">Kiirrongide liinid</string>
     <string name="map_markers_bar">Kaardimarkerite riba</string>
     <string name="shared_string_visible_widgets">Nähtavad vidinad</string>
-    <string name="apply_to_existing_favorites_descr">Rakendada muudatusi grupi olemasolevatele lemmikpunktidele või ainult uutele\?</string>
+    <string name="apply_to_existing_favorites_descr">Rakendame muudatusi grupi olemasolevatele lemmikpunktidele või ainult uutele?</string>
     <string name="apply_to_existing_points_descr">Rakendada muudatusi grupi olemasolevatele punktidele või ainult uutele\?</string>
     <string name="routing_attr_carriage_restrictions_name">Veopiirangud</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
