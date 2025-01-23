@@ -4844,4 +4844,5 @@
     <string name="no_widgets_here_yet">Siin pole veel vidinaid</string>
     <string name="no_widgets_descr">Lisa saadavalolevate vidinate hulgast mõni vajalik vidin.</string>
     <string name="click_on_widget">Klõpsi vidinal</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">Peida sõjaväealad</string>
 </resources>
