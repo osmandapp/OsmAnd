@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="popular_places_nearby">Popular places nearby</string>
+    <string name="recently_visited">Recently visited</string>
+
     <string name="map_widget_route_information_distance_mode">Distance</string>
     <string name="shared_string_default_view">Default view</string>
     <string name="map_widget_route_information">Route information</string>

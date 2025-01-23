@@ -2075,7 +2075,7 @@
     <string name="share_route_subject">Traseu distribuit prin OsmAnd</string>
     <string name="support_new_features_descr">Donați pentru a vedea funcționalități noi implementate în aplicație.</string>
     <string name="arrival_distance_factor_early">Devreme</string>
-    <string name="arrival_distance_factor_normally">Normal</string>
+    <string name="arrival_distance_factor_normally">Normală</string>
     <string name="arrival_distance_factor_late">Târziu</string>
     <string name="arrival_distance_factor_at_last">Foarte târziu</string>
     <string name="arrival_distance">Anunţ de sosire</string>
@@ -2352,7 +2352,7 @@
     <string name="hide_compass_ruler">Ascundeți rigla busolei</string>
     <string name="select_icon_profile_dialog_title">Alegeți un icon</string>
     <string name="settings_routing_mode_string">Mod: %s</string>
-    <string name="routing_profile_ski">Ski</string>
+    <string name="routing_profile_ski">Schi</string>
     <string name="profile_type_descr_string">Tip: %s</string>
     <string name="profile_type_base_string">Profil de bază</string>
     <string name="profile_alert_need_routing_type_title">Selectați tipul navigației</string>

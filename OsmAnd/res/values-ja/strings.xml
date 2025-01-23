@@ -4312,9 +4312,7 @@ POIの更新は利用できません</string>
     <string name="track_has_no_needed_data">経路に対応するデータがありません。</string>
     <string name="shared_string_purchased">購入済</string>
     <string name="stop_download_desc">ダウンロードが完了していません。今ダウンロードを中断すると、タイルの一部のみが表示される形となります。</string>
-    <string name="location_source_descr">Google PlayよりインストールされたOsmAndは、デフォルトでは%1$sを使用して現在地を特定します。
-\n
-\n位置情報が不正確であったり、%2$sのないデバイスを使用している場合は、\"%3$s\"に切り替えてみてください。</string>
+    <string name="location_source_descr">Google PlayよりインストールされたOsmAndは、デフォルトでは%1$sを使用して現在地を特定します。 \n \n位置情報が不正確であったり、%2$sのないデバイスを使用している場合は、\"%3$s\"に切り替えてみてください。</string>
     <string name="location_source">位置情報取得元</string>
     <string name="gpx_no_routes_descr">\"%1$s\"ツールを使って、ファイルにルートを追加することができます。</string>
     <string name="import_tracks_descr">%1$s、%2$sは個別の経路が含まれます。インポートする経路を選択する必要があります。</string>
