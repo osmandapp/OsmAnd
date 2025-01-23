@@ -4842,4 +4842,5 @@
     <string name="map_widget_altitude_map_center_desc">Näitab kaardi praeguse keskpunkti kõrgust merepinnast.</string>
     <string name="reset_all_settings_desc">Kas muudame kõik seadistused vaikimisi seadistusteks?</string>
     <string name="no_widgets_here_yet">Siin pole veel vidinaid</string>
+    <string name="no_widgets_descr">Lisa saadavalolevate vidinate hulgast mõni vajalik vidin.</string>
 </resources>
