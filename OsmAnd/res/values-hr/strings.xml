@@ -1741,4 +1741,8 @@
     <string name="shared_string_next_event">Sljedeći događaj</string>
     <string name="map_widget_sun_position_desc">Prikazuje vrijeme do izlaska ili zalaska sunca.</string>
     <string name="map_widget_sun_position">Pozicija sunca</string>
+    <string name="delete_account">Izbriši račun</string>
+    <string name="verify_account">Potvrdi tvoj račun</string>
+    <string name="manage_subscriptions">Upravljaj pretplatama.</string>
+    <string name="deleting_complete">Brisanje je završeno</string>
 </resources>

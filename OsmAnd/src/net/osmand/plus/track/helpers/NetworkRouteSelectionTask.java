@@ -6,7 +6,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.base.BaseLoadAsyncTask;
@@ -56,13 +55,13 @@ public class NetworkRouteSelectionTask extends BaseLoadAsyncTask<Void, Void, Gpx
 		if (routeKey != null) {
 			selectorFilter.keyFilter = Collections.singleton(routeKey);
 			try {
-				Map<RouteKey, net.osmand.gpx.GPXFile> routes =
+				Map<RouteKey, GpxFile> routes =
 						routeSelector.getRoutes(quadRect, true, routeKey);
 				if (isCancelled()) {
 					routes.clear();
 				}
 				if (!Algorithms.isEmpty(routes)) {
-					return SharedUtil.kGpxFile(routes.values().iterator().next());
+					return routes.values().iterator().next();
 				}
 			} catch (Exception e) {
 				log.error(e);

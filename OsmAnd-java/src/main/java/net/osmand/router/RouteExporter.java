@@ -1,15 +1,15 @@
 package net.osmand.router;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.RouteSegment;
-import net.osmand.gpx.GPXUtilities.RouteType;
-import net.osmand.gpx.GPXUtilities.Track;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataBundle;
 import net.osmand.binary.StringBundle;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.RouteSegment;
+import net.osmand.shared.gpx.GpxUtilities.RouteType;
+import net.osmand.shared.gpx.primitives.Track;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -35,12 +35,12 @@ public class RouteExporter {
 		this.points = points;
 	}
 
-	public GPXFile exportRoute() {
-		GPXFile gpx = new GPXFile(OSMAND_ROUTER_V2);
+	public GpxFile exportRoute() {
+		GpxFile gpx = new GpxFile(OSMAND_ROUTER_V2);
 		Track track = new Track();
-		track.name = name;
-		gpx.tracks.add(track);
-		track.segments.add(generateRouteSegment());
+		track.setName(name);
+		gpx.getTracks().add(track);
+		track.getSegments().add(generateRouteSegment());
 		if (points != null) {
 			for (WptPt pt : points) {
 				gpx.addPoint(pt);
@@ -49,12 +49,12 @@ public class RouteExporter {
 		return gpx;
 	}
 
-	public static GPXFile exportRoute(String name, List<TrkSegment> trkSegments, List<WptPt> points, List<List<WptPt>> routePoints) {
-		GPXFile gpx = new GPXFile(OSMAND_ROUTER_V2);
+	public static GpxFile exportRoute(String name, List<TrkSegment> trkSegments, List<WptPt> points, List<List<WptPt>> routePoints) {
+		GpxFile gpx = new GpxFile(OSMAND_ROUTER_V2);
 		Track track = new Track();
-		track.name = name;
-		gpx.tracks.add(track);
-		track.segments.addAll(trkSegments);
+		track.setName(name);
+		gpx.getTracks().add(track);
+		track.getSegments().addAll(trkSegments);
 		if (points != null) {
 			for (WptPt pt : points) {
 				gpx.addPoint(pt);
@@ -100,30 +100,43 @@ public class RouteExporter {
 		for (int i = 0; i < locations.size(); i++) {
 			Location loc = locations.get(i);
 			WptPt pt = new WptPt();
-			pt.lat = loc.getLatitude();
-			pt.lon = loc.getLongitude();
+			pt.setLat(loc.getLatitude());
+			pt.setLon(loc.getLongitude());
 			if (loc.hasSpeed()) {
-				pt.speed = loc.getSpeed();
+				pt.setSpeed(loc.getSpeed());
 			}
 			if (loc.hasAltitude()) {
-				pt.ele = loc.getAltitude();
+				pt.setEle(loc.getAltitude());
 			}
 			if (loc.hasAccuracy()) {
-				pt.hdop = loc.getAccuracy();
+				pt.setHdop(loc.getAccuracy());
 			}
-			trkSegment.points.add(pt);
+			trkSegment.getPoints().add(pt);
 		}
 
 		List<RouteSegment> routeSegments = new ArrayList<>();
 		for (StringBundle item : routeItems) {
-			routeSegments.add(RouteSegment.fromStringBundle(item));
+			net.osmand.shared.util.StringBundle itemInStrings = kStringBundleJustStrings(item);
+			routeSegments.add(RouteSegment.Companion.fromStringBundle(itemInStrings));
 		}
-		trkSegment.routeSegments = routeSegments;
+		trkSegment.setRouteSegments(routeSegments);
 		List<RouteType> routeTypes = new ArrayList<>();
 		for (StringBundle item : typeList) {
-			routeTypes.add(RouteType.fromStringBundle(item));
+			net.osmand.shared.util.StringBundle itemInStrings = kStringBundleJustStrings(item);
+			routeTypes.add(RouteType.Companion.fromStringBundle(itemInStrings));
 		}
-		trkSegment.routeTypes = routeTypes;
+		trkSegment.setRouteTypes(routeTypes);
 		return trkSegment;
+	}
+
+	private net.osmand.shared.util.StringBundle kStringBundleJustStrings(StringBundle in) {
+		net.osmand.shared.util.StringBundle out = new net.osmand.shared.util.StringBundle();
+		in.getMap().forEach((key, item) -> {
+			String asString = in.getString(key, null);
+			if (asString != null) {
+				out.putString(key, asString);
+			}
+		});
+		return out;
 	}
 }

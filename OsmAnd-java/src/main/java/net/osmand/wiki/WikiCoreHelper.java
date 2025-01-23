@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
+import net.osmand.data.QuadRect;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.util.Algorithms;
 
@@ -18,6 +19,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -35,16 +37,44 @@ public class WikiCoreHelper {
 	public static final String WIKIMEDIA_FILE = "File:";
 	public static final String WIKIMEDIA_CATEGORY = "Category:";
 	private static final int THUMB_SIZE = 480;
-	public static final String OSMAND_API_ENDPOINT = "https://osmand.net/api/wiki_place?";
+	public static final String OSMAND_API_ENDPOINT = "https://osmand.net/api/";
+	public static final String OSMAND_SEARCH_ENDPOINT = "https://osmand.net/search/";
+	private static final String WIKI_PLACE_ACTION = "wiki_place?";
+	private static final String GET_WIKI_DATA_ACTION = "get-wiki-data?";
 	private static final int DEPT_CAT_LIMIT = 1;
 	private static final List<String> IMAGE_EXTENSIONS = new ArrayList<>(Arrays.asList(".jpeg", ".jpg", ".png", ".gif"));
 
 
+	public static List<OsmandApiFeatureData> getExploreImageList(QuadRect mapRect, int zoom, String lang) {
+		List<OsmandApiFeatureData> wikiImages = new ArrayList<>();
+		StringBuilder url = new StringBuilder();
+		String baseApiActionUrl = OSMAND_SEARCH_ENDPOINT + GET_WIKI_DATA_ACTION;
+		String northWest = String.format(Locale.US, "%f,%f", mapRect.top, mapRect.left);
+		String southEast = String.format(Locale.US, "%f,%f", mapRect.bottom, mapRect.right);
+		url.append(baseApiActionUrl);
+		try {
+			url.append(String.format(Locale.US, "northWest=%s", URLEncoder.encode(northWest, "UTF-8")));
+			url.append("&");
+			url.append(String.format(Locale.US, "southEast=%s", URLEncoder.encode(southEast, "UTF-8")));
+			url.append("&");
+			url.append(String.format(Locale.US, "zoom=%d", zoom));
+			url.append("&");
+			url.append(String.format(Locale.US, "lang=%s", lang));
+			url.append("&");
+			url.append(String.format(Locale.US, "filters=%s", "tourism%2Cleisure%2Centertainment"));
+
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException(e);
+		}
+		getNearbyImagesOsmAndAPIRequest(url.toString(), wikiImages);
+		return wikiImages;
+	}
+
 	public static List<WikiImage> getWikiImageList(Map<String, String> tags) {
 		List<WikiImage> wikiImages = new ArrayList<WikiImage>();
-		String wikidataId = tags.getOrDefault(Amenity.WIKIDATA, "");
-		String wikimediaCommons = tags.get(Amenity.WIKIMEDIA_COMMONS);
-		String wikiTitle = tags.get(Amenity.WIKIPEDIA);
+		String wikidataId = tags == null ? null : tags.getOrDefault(Amenity.WIKIDATA, "");
+		String wikimediaCommons = tags == null ? null : tags.get(Amenity.WIKIMEDIA_COMMONS);
+		String wikiTitle = tags == null ? null : tags.get(Amenity.WIKIPEDIA);
 		String wikiCategory = "";
 		int urlInd = wikiTitle == null ? 0 : wikiTitle.indexOf(".wikipedia.org/wiki/");
 		if (urlInd > 0) {
@@ -60,7 +90,7 @@ public class WikiCoreHelper {
 				wikiCategory = wikimediaCommons.replace(WIKIMEDIA_CATEGORY, "");
 			}
 		}
-		if (Algorithms.isEmpty(wikiTitle)) {
+		if (Algorithms.isEmpty(wikiTitle) && tags != null) {
 			for (String tag : tags.keySet()) {
 				if (tag.startsWith(Amenity.WIKIPEDIA + ":")) {
 					wikiTitle = tag.substring((Amenity.WIKIPEDIA + ":").length()) + ":" + tags.get(tag);
@@ -70,18 +100,19 @@ public class WikiCoreHelper {
 		if (USE_OSMAND_WIKI_API) {
 			// article // category
 			String url = "";
+			String baseApiActionUrl = OSMAND_API_ENDPOINT + WIKI_PLACE_ACTION;
 			try {
 				if (!Algorithms.isEmpty(wikidataId)) {
-					url += (url.isEmpty() ? OSMAND_API_ENDPOINT : "&") + "article=" + URLEncoder.encode(wikidataId, "UTF-8");
+					url += (url.isEmpty() ? baseApiActionUrl : "&") + "article=" + URLEncoder.encode(wikidataId, "UTF-8");
 				}
 				if (!Algorithms.isEmpty(wikiCategory)) {
-					url += (url.isEmpty() ? OSMAND_API_ENDPOINT : "&") + "category=" + URLEncoder.encode(wikiCategory, "UTF-8");
+					url += (url.isEmpty() ? baseApiActionUrl : "&") + "category=" + URLEncoder.encode(wikiCategory, "UTF-8");
 				}
 				if (!Algorithms.isEmpty(wikiTitle)) {
-					url += (url.isEmpty() ? OSMAND_API_ENDPOINT : "&") + "wiki=" + URLEncoder.encode(wikiTitle, "UTF-8");
+					url += (url.isEmpty() ? baseApiActionUrl : "&") + "wiki=" + URLEncoder.encode(wikiTitle, "UTF-8");
 				}
 				if (!Algorithms.isEmpty(wikidataId)) {
-					url += (url.isEmpty() ? OSMAND_API_ENDPOINT : "&") + "addMetaData=" + URLEncoder.encode("true", "UTF-8");
+					url += (url.isEmpty() ? baseApiActionUrl : "&") + "addMetaData=" + URLEncoder.encode("true", "UTF-8");
 				}
 			} catch (UnsupportedEncodingException e) {
 				throw new RuntimeException(e);
@@ -172,6 +203,13 @@ public class WikiCoreHelper {
 		return false;
 	}
 
+	private static void getNearbyImagesOsmAndAPIRequest(String url, List<OsmandApiFeatureData> wikiImages) {
+		OsmandAPIFeaturesResponse response = sendWikipediaApiRequest(url, OsmandAPIFeaturesResponse.class);
+		if (response != null && !Algorithms.isEmpty(response.features)) {
+			wikiImages.addAll(response.features);
+		}
+	}
+
 	private static List<WikiImage> getImagesOsmAndAPIRequest(String url, List<WikiImage> wikiImages) {
 		OsmandAPIResponse response = sendWikipediaApiRequest(url, OsmandAPIResponse.class);
 		if (response != null && !Algorithms.isEmpty(response.images)) {
@@ -237,7 +275,7 @@ public class WikiCoreHelper {
 			String imageStubUrl = IMAGE_BASE_URL + imageFileName + "?width=" + THUMB_SIZE;
 			return new WikiImage(imageFileName, imageName, imageStubUrl, imageHiResUrl);
 
-		} catch (UnsupportedEncodingException e) {
+		} catch (Exception e) {
 			LOG.error(e.getLocalizedMessage());
 		}
 		return null;
@@ -257,10 +295,45 @@ public class WikiCoreHelper {
 		return null;
 	}
 
+	public static class OsmandAPIFeaturesResponse {
+		@SerializedName("features")
+		@Expose
+		private final List<OsmandApiFeatureData> features = null;
+	}
+
 	public static class OsmandAPIResponseV2 {
 		@SerializedName("features-v2")
 		@Expose
 		private final Set<Map<String, String>> images = null;
+	}
+
+	public static class OsmandApiFeatureData {
+		@Expose
+		public WikiDataProperties properties;
+		@Expose
+		public WikiDataGeometry geometry;
+	}
+
+	public static class WikiDataGeometry {
+		@Expose
+		public double[] coordinates;
+	}
+
+	public static class WikiDataProperties {
+		private String id;
+		private String photoId;
+		public String photoTitle;
+		public String wikiTitle;
+		public String poitype;
+		public String poisubtype;
+		private String catId;
+		private String catTitle;
+		private String depId;
+		private String depTitle;
+		private String wikiLang;
+		public String wikiDesc;
+		private String osmid;
+		private String osmtype;
 	}
 
 	public static class OsmandAPIResponse {

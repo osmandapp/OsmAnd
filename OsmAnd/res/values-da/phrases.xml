@@ -3490,7 +3490,7 @@
     <string name="poi_shoe_repair">Skoreparation</string>
     <string name="poi_bulk_purchase">Storkøb</string>
     <string name="poi_substation_type">Type</string>
-    <string name="poi_bulk_purchase_yes">Ja;Masseløb</string>
+    <string name="poi_bulk_purchase_yes">Ja;Storkøb</string>
     <string name="poi_bulk_purchase_only">Kun;Kun storkøb</string>
     <string name="poi_pipeline_substation">Rørledningsunderstation</string>
     <string name="poi_substation_transmission">Transmission</string>
@@ -4174,13 +4174,13 @@
     <string name="poi_socket_type3a_voltage_medium">Medium</string>
     <string name="poi_socket_type3a_output_low">Lav</string>
     <string name="poi_socket_type3c_output_high">Høj</string>
-    <string name="poi_cash_in">Indbetalings automat</string>
+    <string name="poi_cash_in">Indbetalingsautomat</string>
     <string name="poi_socket_type3c_output_low">Lav</string>
     <string name="poi_climbing_rock_basalt">Klatresten: basalt</string>
     <string name="poi_socket_typee_output_high">Høj</string>
     <string name="poi_socket_typee_output_medium">Medium</string>
     <string name="poi_socket_typee_output_low">Lav</string>
-    <string name="poi_us_maps_recreation_area_facility">Aktivitets facilitetsområde</string>
+    <string name="poi_us_maps_recreation_area_facility">Facilitet på rekreativt område</string>
     <string name="poi_socket_type3a_output_medium">Medium</string>
     <string name="poi_socket_type3c_output_medium">Medium</string>
 </resources>

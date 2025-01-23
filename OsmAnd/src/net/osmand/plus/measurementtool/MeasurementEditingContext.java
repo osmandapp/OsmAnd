@@ -1159,8 +1159,9 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return params;
 	}
 
-	public List<List<GPXUtilities.WptPt>> getRoutePoints() {
-		List<List<GPXUtilities.WptPt>> res = new ArrayList<>();
+	@NonNull
+	private List<List<WptPt>> getRoutePoints() {
+		List<List<WptPt>> res = new ArrayList<>();
 		List<WptPt> plainPoints = new ArrayList<>(before.getPoints());
 		plainPoints.addAll(after.getPoints());
 		List<WptPt> points = new ArrayList<>();
@@ -1168,13 +1169,13 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			if (point.getTrkPtIndex() != -1) {
 				points.add(point);
 				if (point.isGap()) {
-					res.add(SharedUtil.jWptPtList(points));
+					res.add(points);
 					points = new ArrayList<>();
 				}
 			}
 		}
 		if (!points.isEmpty()) {
-			res.add(SharedUtil.jWptPtList(points));
+			res.add(points);
 		}
 		return res;
 	}
@@ -1189,12 +1190,10 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		if (gpxData != null && gpxData.getGpxFile() != null) {
 			points = gpxData.getGpxFile().getPointsList();
 		}
-		List<GPXUtilities.WptPt> jPoints = points != null ? SharedUtil.jWptPtList(points) : null;
-		return SharedUtil.kGpxFile(
-				RouteExporter.exportRoute(gpxName, getRouteSegments(), jPoints, getRoutePoints()));
+		return RouteExporter.exportRoute(gpxName, getRouteSegments(), points, getRoutePoints());
 	}
 
-	private GPXUtilities.TrkSegment getRouteSegment(int startPointIndex, int endPointIndex) {
+	private TrkSegment getRouteSegment(int startPointIndex, int endPointIndex) {
 		List<RouteSegmentResult> route = new ArrayList<>();
 		List<Location> locations = new ArrayList<>();
 		List<Integer> routePointIndexes = new ArrayList<>();
@@ -1226,16 +1225,16 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			before.getPoints().get(startPointIndex).setTrkPtIndex(0);
 			return new RouteExporter("", route, locations, routePointIndexes, null).generateRouteSegment();
 		} else if (endPointIndex - startPointIndex >= 0) {
-			GPXUtilities.TrkSegment segment = new GPXUtilities.TrkSegment();
-			segment.points = SharedUtil.jWptPtList(
-					new ArrayList<>(before.getPoints().subList(startPointIndex, endPointIndex + 1)));
+			TrkSegment segment = new TrkSegment();
+			segment.setPoints(new ArrayList<>(before.getPoints().subList(startPointIndex, endPointIndex + 1)));
 			return segment;
 		}
 		return null;
 	}
 
-	private List<GPXUtilities.TrkSegment> getRouteSegments() {
-		List<GPXUtilities.TrkSegment> res = new ArrayList<>();
+	@NonNull
+	private List<TrkSegment> getRouteSegments() {
+		List<TrkSegment> res = new ArrayList<>();
 		List<Integer> lastPointIndexes = new ArrayList<>();
 		for (int i = 0; i < before.getPoints().size(); i++) {
 			WptPt pt = before.getPoints().get(i);
@@ -1248,7 +1247,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		}
 		int firstPointIndex = 0;
 		for (Integer lastPointIndex : lastPointIndexes) {
-			GPXUtilities.TrkSegment segment = getRouteSegment(firstPointIndex, lastPointIndex);
+			TrkSegment segment = getRouteSegment(firstPointIndex, lastPointIndex);
 			if (segment != null) {
 				res.add(segment);
 			}
