@@ -4813,4 +4813,5 @@
     <string name="help_article_troubleshooting_crash_logs_name">Kokkujooksmise logid</string>
     <string name="help_article_start_with_first_steps_name">Esimesed sammud</string>
     <string name="help_article_start_with_name">Alusta OsmAndi kasutamist</string>
+    <string name="help_article_search_search_poi_name">Otsi huvipunkti alusel</string>
 </resources>
