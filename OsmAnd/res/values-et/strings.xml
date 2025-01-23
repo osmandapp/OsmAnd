@@ -4855,4 +4855,5 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Märkuste sildid</string>
     <string name="rendering_attr_weatherCloudContours_name">Pilvede samajooned</string>
     <string name="routing_attr_avoid_fords_name">Väldi fjorde</string>
+    <string name="rendering_attr_horseScale_name">Hobuseradade raskusaste</string>
 </resources>
