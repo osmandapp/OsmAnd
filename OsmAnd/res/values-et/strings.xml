@@ -363,7 +363,7 @@
     <string name="date_added">Lisatud</string>
     <string name="order_by">Sorteerimisalus:</string>
     <string name="show_guide_line">Kuva suunajooned</string>
-    <string name="show_arrows_on_the_map">Kuva nooled kaardil</string>
+    <string name="show_arrows_on_the_map">Näita kaardil nooli</string>
     <string name="show_passed">Kuva läbitud</string>
     <string name="hide_passed">Peida läbitud</string>
     <string name="use_location">Kasuta asukohta</string>
@@ -385,7 +385,7 @@
     <string name="osn_modify_dialog_error">Märkust ei saa muuta.</string>
     <string name="osn_modify_dialog_title">Muuda märkust</string>
     <string name="context_menu_item_modify_note">Muuda OSM märkust</string>
-    <string name="show_map">Kuva kaart</string>
+    <string name="show_map">Näita kaarti</string>
     <string name="route_is_calculated">Teekond arvutatud</string>
     <string name="round_trip">Edasi-tagasi sõit</string>
     <string name="plan_route_no_markers_toast">Selle funktsiooni kasutamiseks tuleb lisada vähemalt üks marker.</string>
@@ -964,7 +964,7 @@
     <string name="dialogs_and_notifications_descr">Halda hüpikaknaid, dialooge ja teateid.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Sõlmede võrgud</string>
     <string name="suggested_maps">Soovitatud kaardid</string>
-    <string name="suggested_maps_descr">Need kaardid on laienduse kasutamisel nõutud.</string>
+    <string name="suggested_maps_descr">Need kaardid on lisamooduli kasutamisel nõutud.</string>
     <string name="added_profiles">Lisatud profiilid</string>
     <string name="added_profiles_descr">Pistikprogrammi poolt lisatud profiilid</string>
     <string name="shared_string_turn_off">Lülita välja</string>
@@ -4805,4 +4805,6 @@
     <string name="new_segment_started_m">Alustasime uue rajalõigu salvestamist.</string>
     <string name="screen_is_locked_by_external_button">Puuteekraan on lukus. Lukustuse eemaldamiseks vajuta „%1$s“ nuppu või klõpsi nuppu ekraanil.</string>
     <string name="screen_is_unlocked">Puuteekraan pole lukus.</string>
+    <string name="show_map_symbols">Näita kaardisümboleid</string>
+    <string name="show_map_symbols_desc">Teksti, liiklusmärgid ja muud.</string>
 </resources>
