@@ -4827,4 +4827,5 @@
     <string name="daynight_mode_day_summary">Kaart on alati päevavaates (heledas kujunduses), mis sobib kasutamiseks päevastes tingimustes.</string>
     <string name="delete_account">Kustuta kasutajakonto</string>
     <string name="verify_account">Verifitseeri oma kasutajakonto</string>
+    <string name="verify_account_deletion_descr">Enne kustutamist peame kontrollima, et just sina soovid seda kustutada\n\nPalun sisesta e-posti aadress , mida sa registreerumisel kasutasid. Saadame sinna ühekordselt kasutatava salasõna.</string>
 </resources>
