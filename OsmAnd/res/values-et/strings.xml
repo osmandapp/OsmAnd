@@ -4810,4 +4810,5 @@
     <string name="reset_average_speed">Nulli keskmine kiirus</string>
     <string name="most_viewed">Enimvaadatud</string>
     <string name="copy_build_version">Kopeeri rakenduse versioon</string>
+    <string name="help_article_troubleshooting_crash_logs_name">Kokkujooksmise logid</string>
 </resources>
