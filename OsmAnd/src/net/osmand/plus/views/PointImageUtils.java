@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.R;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.layers.NearbyPlacesLayer;
@@ -32,6 +33,31 @@ import java.util.TreeMap;
 public class PointImageUtils {
 
 	private static final TreeMap<String, PointImageDrawable> DRAWABLE_CACHE = new TreeMap<>();
+
+	private static final Paint BITMAP_PAINT = createBitmapPaint();
+
+	private static final int SMALL_ICON_BORDER_DP = 1;
+	private static final int BIG_ICON_BORDER_DP = 2;
+	private static final int SMALL_ICON_SIZE_DP = 20;
+	private static final int BIG_ICON_SIZE_DP = 40;
+	private static final int POINT_OUTER_COLOR = 0xffffffff;
+
+	private static Paint createBitmapPaint() {
+		Paint bitmapPaint = new Paint();
+		bitmapPaint.setAntiAlias(true);
+		bitmapPaint.setDither(true);
+		bitmapPaint.setFilterBitmap(true);
+		return bitmapPaint;
+	}
+
+	private static Bitmap circleBitmap;
+
+	private static Bitmap getCircle(@NonNull Context ctx) {
+		if (circleBitmap == null) {
+			circleBitmap = RenderingIcons.getBitmapFromVectorDrawable(ctx, R.drawable.bg_point_circle);
+		}
+		return circleBitmap;
+	}
 
 	@NonNull
 	private static PointImageDrawable getOrCreate(@NonNull Context context, @NonNull PointImageInfo info) {
@@ -138,40 +164,37 @@ public class PointImageUtils {
 			this.type = type;
 		}
 	}
-	public static Bitmap createSmallPointBitmap(NearbyPlacesLayer layer) {
-		int borderWidth = layer.getSmallIconBorderSize();
-		Paint bitmapPaint = layer.getBitmapPaint();
-		Bitmap circle = layer.getCircle();
-		int smallIconSize = layer.getSmallIconSize();
-		int pointerOuterColor = layer.getPointOuterColor();
+
+	public static Bitmap createSmallPointBitmap(@NonNull Context ctx) {
+		int borderWidth = AndroidUtils.dpToPxAuto(ctx, SMALL_ICON_BORDER_DP);
+		Bitmap circle = getCircle(ctx);
+		int smallIconSize = AndroidUtils.dpToPxAuto(ctx, SMALL_ICON_SIZE_DP);
 		Bitmap bitmapResult = Bitmap.createBitmap(smallIconSize, smallIconSize, Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmapResult);
-		bitmapPaint.setColorFilter(new PorterDuffColorFilter(pointerOuterColor, PorterDuff.Mode.SRC_IN));
+		BITMAP_PAINT.setColorFilter(new PorterDuffColorFilter(POINT_OUTER_COLOR, PorterDuff.Mode.SRC_IN));
 		Rect srcRect = new Rect(0, 0, circle.getWidth(), circle.getHeight());
 		RectF dstRect = new RectF(0f, 0f, (float) smallIconSize, (float) smallIconSize);
-		canvas.drawBitmap(circle, srcRect, dstRect, bitmapPaint);
-		bitmapPaint.setColorFilter(new PorterDuffColorFilter(
-				ColorUtilities.getColor(layer.getApplication(), R.color.poi_background), PorterDuff.Mode.SRC_IN));
+		canvas.drawBitmap(circle, srcRect, dstRect, BITMAP_PAINT);
+		BITMAP_PAINT.setColorFilter(new PorterDuffColorFilter(
+				ColorUtilities.getColor(ctx, R.color.poi_background), PorterDuff.Mode.SRC_IN));
 		dstRect = new RectF(
 				(float) borderWidth,
 				(float) borderWidth,
 				(float) (smallIconSize - borderWidth * 2),
 				(float) (smallIconSize - borderWidth * 2));
-		canvas.drawBitmap(circle, srcRect, dstRect, bitmapPaint);
+		canvas.drawBitmap(circle, srcRect, dstRect, BITMAP_PAINT);
 		bitmapResult = AndroidUtils.scaleBitmap(bitmapResult, smallIconSize, smallIconSize, false);
 		return bitmapResult;
 	}
 
-	public static Bitmap createBigBitmap(NearbyPlacesLayer layer, Bitmap loadedBitmap) {
-		int borderWidth = layer.getBigIconBorderSize();
-		Paint bitmapPaint = layer.getBitmapPaint();
-		Bitmap circle = layer.getCircle();
-		int bigIconSize = layer.getBigIconSize();
-		int pointerOuterColor = layer.getPointOuterColor();
+	public static Bitmap createBigBitmap(@NonNull Context ctx, Bitmap loadedBitmap) {
+		int borderWidth = AndroidUtils.dpToPxAuto(ctx, BIG_ICON_BORDER_DP);
+		Bitmap circle = getCircle(ctx);
+		int bigIconSize = AndroidUtils.dpToPxAuto(ctx, BIG_ICON_SIZE_DP);
 		Bitmap bitmapResult = Bitmap.createBitmap(bigIconSize, bigIconSize, Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmapResult);
-		bitmapPaint.setColorFilter(new PorterDuffColorFilter(pointerOuterColor, PorterDuff.Mode.SRC_IN));
-		canvas.drawBitmap(circle, 0f, 0f, bitmapPaint);
+		BITMAP_PAINT.setColorFilter(new PorterDuffColorFilter(POINT_OUTER_COLOR, PorterDuff.Mode.SRC_IN));
+		canvas.drawBitmap(circle, 0f, 0f, BITMAP_PAINT);
 		int cx = circle.getWidth() / 2;
 		int cy = circle.getHeight() / 2;
 		int radius = (Math.min(cx, cy) - borderWidth * 2);
@@ -182,8 +205,8 @@ public class PointImageUtils {
 		canvas.clipPath(circularPath);
 		Rect srcRect = new Rect(0, 0, loadedBitmap.getWidth(), loadedBitmap.getHeight());
 		RectF dstRect = new RectF(0f, 0f, (float) circle.getWidth(), (float) circle.getHeight());
-		bitmapPaint.setColorFilter(null);
-		canvas.drawBitmap(loadedBitmap, srcRect, dstRect, bitmapPaint);
+		BITMAP_PAINT.setColorFilter(null);
+		canvas.drawBitmap(loadedBitmap, srcRect, dstRect, BITMAP_PAINT);
 		canvas.restore();
 		bitmapResult = AndroidUtils.scaleBitmap(bitmapResult, bigIconSize, bigIconSize, false);
 		return bitmapResult;

@@ -55,12 +55,9 @@ public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvid
 	private final PointI offset;
 	private MapTiledCollectionProvider providerInstance;
 	private int baseOrder;
-	private final NearbyPlacesLayer nearbyPlacesLayer;
 
-
-	public NearbyPlacesTileProvider(@NonNull OsmandApplication context, NearbyPlacesLayer nearbyPlacesLayer, int baseOrder, float density) {
+	public NearbyPlacesTileProvider(@NonNull OsmandApplication context, int baseOrder, float density) {
 		this.app = context;
-		this.nearbyPlacesLayer = nearbyPlacesLayer;
 		this.baseOrder = baseOrder;
 		this.density = density;
 		this.offset = new PointI(0, 0);
@@ -131,12 +128,12 @@ public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvid
 		if (isFullSize && data.nearbyPlace.imageBitmap != null) {
 			bitmapResult = bigBitmapCache.get(key);
 			if (bitmapResult == null) {
-				bitmapResult = PointImageUtils.createBigBitmap(nearbyPlacesLayer, data.nearbyPlace.imageBitmap);
+				bitmapResult = PointImageUtils.createBigBitmap(app, data.nearbyPlace.imageBitmap);
 				bigBitmapCache.put(key, bitmapResult);
 			}
 		} else {
 			if (cachedSmallBitmap == null) {
-				cachedSmallBitmap = PointImageUtils.createSmallPointBitmap(nearbyPlacesLayer);
+				cachedSmallBitmap = PointImageUtils.createSmallPointBitmap(app);
 			}
 			bitmapResult = cachedSmallBitmap;
 		}

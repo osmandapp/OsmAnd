@@ -13,9 +13,9 @@ object NearbyPlacesHelper {
 	private lateinit var app: OsmandApplication
 	private var lastModifiedTime: Long = 0
 	private const val PLACES_LIMIT = 50
-	private var prevMapRect: QuadRect? = null
-	private var prevZoom: Int? = null
-	private var prevLang: String? = null
+	private var prevMapRect: QuadRect = QuadRect()
+	private var prevZoom = 0
+	private var prevLang = ""
 
 	fun init(app: OsmandApplication) {
 		this.app = app
@@ -69,8 +69,8 @@ object NearbyPlacesHelper {
 			prevZoom = mapView.zoom
 			prevLang = preferredLang
 			GetNearbyPlacesImagesTask(
-				prevMapRect!!, prevZoom!!,
-				prevLang!!, loadNearbyPlacesListener).execute()
+				prevMapRect, prevZoom,
+				prevLang, loadNearbyPlacesListener).execute()
 		} else {
 			notifyListeners()
 		}

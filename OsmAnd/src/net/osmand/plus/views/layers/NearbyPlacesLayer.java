@@ -47,22 +47,8 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 	private boolean showNearbyPoints;
 	private boolean nightMode;
 
-	private Bitmap circle;
-	private Paint pointInnerCircle;
-	private Paint pointOuterCircle;
-	private Paint bitmapPaint;
-	private static final int SMALL_ICON_BORDER_DP = 1;
-	private static final int BIG_ICON_BORDER_DP = 2;
-	private static final int SMALL_ICON_SIZE_DP = 20;
-	private static final int BIG_ICON_SIZE_DP = 40;
-	private static final int POINT_OUTER_COLOR = 0xffffffff;
-	private int smallIconSize;
-	private int bigIconSize;
-	private int bigIconBorderSize;
-	private int smallIconBorderSize;
 	private final List<Target> imageLoadingTargets = new ArrayList<>();
 	private Bitmap cachedSmallIconBitmap;
-
 
 	public CustomMapObjects<NearbyPlacePoint> customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
 
@@ -75,23 +61,7 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
 		super.initLayer(view);
-
 		nightMode = getApplication().getDaynightHelper().isNightMode();
-
-		pointInnerCircle = new Paint();
-		pointInnerCircle.setColor(getColor(R.color.poi_background));
-		pointInnerCircle.setStyle(Paint.Style.FILL);
-		pointInnerCircle.setAntiAlias(true);
-
-		pointOuterCircle = new Paint();
-		pointOuterCircle.setColor(POINT_OUTER_COLOR);
-		pointOuterCircle.setStyle(Paint.Style.FILL_AND_STROKE);
-		pointOuterCircle.setAntiAlias(true);
-
-		bitmapPaint = new Paint();
-		bitmapPaint.setAntiAlias(true);
-		bitmapPaint.setDither(true);
-		bitmapPaint.setFilterBitmap(true);
 		recreateBitmaps();
 	}
 
@@ -100,12 +70,7 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 	}
 
 	private void recreateBitmaps() {
-		circle = RenderingIcons.getBitmapFromVectorDrawable(getApplication(), R.drawable.bg_point_circle);
-		smallIconSize = AndroidUtils.dpToPxAuto(getContext(), SMALL_ICON_SIZE_DP);
-		bigIconSize = AndroidUtils.dpToPxAuto(getContext(), BIG_ICON_SIZE_DP);
-		bigIconBorderSize = AndroidUtils.dpToPxAuto(getContext(), BIG_ICON_BORDER_DP);
-		smallIconBorderSize = AndroidUtils.dpToPxAuto(getContext(), SMALL_ICON_BORDER_DP);
-		cachedSmallIconBitmap = PointImageUtils.createSmallPointBitmap(this);
+		cachedSmallIconBitmap = PointImageUtils.createSmallPointBitmap(getApplication());
 	}
 
 	@Override
@@ -165,7 +130,7 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 		List<NearbyPlacePoint> fullObjects = new ArrayList<>();
 		Paint pointPaint = new Paint();
 		if (cachedSmallIconBitmap == null) {
-			cachedSmallIconBitmap = PointImageUtils.createSmallPointBitmap(this);
+			cachedSmallIconBitmap = PointImageUtils.createSmallPointBitmap(getApplication());
 		}
 		for (NearbyPlacePoint nearbyPoint : pointsToDraw) {
 			double lat = nearbyPoint.getLatitude();
@@ -189,7 +154,7 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 			if (bitmap != null) {
 				float x = tileBox.getPixXFromLatLon(point.getLatitude(), point.getLongitude());
 				float y = tileBox.getPixYFromLatLon(point.getLatitude(), point.getLongitude());
-				canvas.drawBitmap(PointImageUtils.createBigBitmap(this, bitmap), x, y, pointPaint);
+				canvas.drawBitmap(PointImageUtils.createBigBitmap(getApplication(), bitmap), x, y, pointPaint);
 			}
 		}
 	}
@@ -200,7 +165,7 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 			return;
 		}
 		clearNearbyPoints();
-		nearbyPlacesMapLayerProvider = new NearbyPlacesTileProvider(getApplication(), this,
+		nearbyPlacesMapLayerProvider = new NearbyPlacesTileProvider(getApplication(),
 				getPointsOrder(),
 				view.getDensity());
 
@@ -284,41 +249,5 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 		}
 		customObjectsDelegate.setCustomMapObjects(nearbyPlacePointsList);
 		getApplication().getOsmandMap().refreshMap();
-	}
-
-	public Paint getPointInnerCircle() {
-		return pointInnerCircle;
-	}
-
-	public Paint getPointOuterCircle() {
-		return pointOuterCircle;
-	}
-
-	public Paint getBitmapPaint() {
-		return bitmapPaint;
-	}
-
-	public Bitmap getCircle() {
-		return circle;
-	}
-
-	public int getBigIconSize() {
-		return bigIconSize;
-	}
-
-	public int getSmallIconSize() {
-		return smallIconSize;
-	}
-
-	public int getSmallIconBorderSize() {
-		return smallIconBorderSize;
-	}
-
-	public int getBigIconBorderSize() {
-		return bigIconBorderSize;
-	}
-
-	public int getPointOuterColor() {
-		return POINT_OUTER_COLOR;
 	}
 }

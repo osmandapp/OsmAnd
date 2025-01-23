@@ -36,7 +36,7 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	private RecyclerView nearByList;
 	private NearbyPlacesAdapter adapter;
 	private ImageView explicitIndicator;
-	private boolean expanded;
+	private boolean collapsed;
 	private View showAllBtnContainer;
 	private View progressBar;
 
@@ -49,9 +49,9 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 			AndroidUiHelper.updateVisibility(progressBar, false);
 		}
 		List<OsmandApiFeatureData> nearbyData = NearbyPlacesHelper.INSTANCE.getDataCollection();
-		AndroidUiHelper.updateVisibility(nearByList, expanded && !nearbyData.isEmpty());
 		getNearbyAdapter().setItems(nearbyData);
 		getNearbyAdapter().notifyDataSetChanged();
+		updateExpandState();
 	}
 
 	private NearbyPlacesAdapter getNearbyAdapter() {
@@ -148,15 +148,22 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	}
 
 	private void setupExpandNearbyPlacesIndicator(@NonNull View view) {
+		collapsed = app.getSettings().EXPLORE_NEARBY_ITEMS_ROW_COLLAPSED.get();
 		explicitIndicator = view.findViewById(R.id.explicit_indicator);
 		explicitIndicator.setOnClickListener(v -> {
-			expanded = !expanded;
-			if (expanded) {
-				AndroidUiHelper.updateVisibility(progressBar, true);
-				NearbyPlacesHelper.INSTANCE.startLoadingNearestPhotos();
-			}
-			updateExpandState();
+			collapsed = !collapsed;
+			onNearbyPlacesCollapseChanged();
 		});
+		onNearbyPlacesCollapseChanged();
+	}
+
+	private void onNearbyPlacesCollapseChanged() {
+		updateExpandState();
+		if (!collapsed) {
+			AndroidUiHelper.updateVisibility(progressBar, true);
+			NearbyPlacesHelper.INSTANCE.startLoadingNearestPhotos();
+		}
+		app.getSettings().EXPLORE_NEARBY_ITEMS_ROW_COLLAPSED.set(collapsed);
 	}
 
 	private void setupNearByCard(@NonNull View view) {
@@ -187,9 +194,9 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	}
 
 	private void updateExpandState() {
-		int iconRes = expanded ? R.drawable.ic_action_arrow_up : R.drawable.ic_action_arrow_down;
+		int iconRes = collapsed ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up;
 		explicitIndicator.setImageDrawable(app.getUIUtilities().getIcon(iconRes, !app.getSettings().isLightContent()));
-		AndroidUiHelper.updateVisibility(nearByList, expanded);
-		AndroidUiHelper.updateVisibility(showAllBtnContainer, expanded);
+		AndroidUiHelper.updateVisibility(nearByList, !collapsed);
+		AndroidUiHelper.updateVisibility(showAllBtnContainer, !collapsed);
 	}
 }
