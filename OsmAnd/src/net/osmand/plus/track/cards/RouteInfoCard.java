@@ -49,6 +49,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS
 public class RouteInfoCard extends MapBaseCard {
 
 	private static final String OSM_RELATION_URL = "https://www.openstreetmap.org/relation/";
+	private static final String OSM_WAY_URL = "https://www.openstreetmap.org/way/";
 	private static final Map<String, Integer> TRANSLATABLE_KEYS = new HashMap<>();
 
 	static {
@@ -56,6 +57,7 @@ public class RouteInfoCard extends MapBaseCard {
 		TRANSLATABLE_KEYS.put("alt_name", R.string.shared_string_alt_name);
 		TRANSLATABLE_KEYS.put("symbol", R.string.shared_string_symbol);
 		TRANSLATABLE_KEYS.put("relation_id", R.string.shared_string_osm_id);
+		TRANSLATABLE_KEYS.put("way_id", R.string.shared_string_osm_id);
 	}
 
 
@@ -170,6 +172,9 @@ public class RouteInfoCard extends MapBaseCard {
 			}
 		} else if ("relation_id".equals(tag.key)) {
 			String url = OSM_RELATION_URL + formattedValue;
+			setupClickableContent(view, v -> AndroidUtils.openUrl(activity, url, nightMode));
+		} else if ("way_id".equals(tag.key)) {
+			String url = OSM_WAY_URL + formattedValue;
 			setupClickableContent(view, v -> AndroidUtils.openUrl(activity, url, nightMode));
 		}
 		return view;

@@ -34,6 +34,7 @@ import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.osm.OsmRouteType;
 
 import java.io.File;
 import java.util.List;
@@ -127,20 +128,28 @@ public class ClickableWayHelper {
             gpxFile.getMetadata().setName(Long.toString(osmId));
         }
 
+        OsmRouteType compatibleOsmRouteType = null;
         RouteActivityHelper helper = app.getRouteActivityHelper();
         for (String clickableTag : CLICKABLE_TAGS) {
             if (tags.containsKey(clickableTag)) {
                 RouteActivity activity = helper.findActivityByTag(clickableTag);
                 if (activity != null) {
                     String activityType = activity.getId();
+                    compatibleOsmRouteType = OsmRouteType.getTypeFromTags(new String[]{clickableTag});
                     gpxFile.getMetadata().getExtensionsToWrite().put(GpxUtilities.ACTIVITY_TYPE, activityType);
                     break;
                 }
             }
         }
 
-        gpxFile.getExtensionsToWrite().putAll(tags);
-        gpxFile.getExtensionsToWrite().put("way_id", Long.toString(osmId));
+        if (compatibleOsmRouteType != null) {
+            gpxFile.addRouteKeyTags(tags);
+            gpxFile.addRouteKeyTags(Map.of("way_id", Long.toString(osmId)));
+            gpxFile.addRouteKeyTags(Map.of("type", compatibleOsmRouteType.getName()));
+        } else {
+            gpxFile.getExtensionsToWrite().putAll(tags);
+            gpxFile.getExtensionsToWrite().put("way_id", Long.toString(osmId));
+        }
 
         TrkSegment trkSegment = new TrkSegment();
         for (int i = 0; i < Math.min(xPoints.size(), yPoints.size()); i++) {

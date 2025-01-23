@@ -156,7 +156,8 @@ public class OsmRouteType {
 			case "mtb ride":
 			case "disused:mtb":
 			case "abandoned:mtb":
-				return MOUNTAINBIKE;
+			case "mtb:scale":
+				return MTB;
 			case "hiking":
 			case "route=hiking":
 			case "mountain hiking":
@@ -305,8 +306,9 @@ public class OsmRouteType {
 			case "лыжня":
 			case "nordic":
 			case "piste":
-			case "piste:type=nordic":
-				return WINTER;
+			case "piste:type":
+			case "piste:difficulty":
+				return SKI;
 			case "snowmobile=designated":
 			case "snowmobile=permissive":
 			case "snowmobile=yes":
@@ -322,6 +324,9 @@ public class OsmRouteType {
 				return INLINE_SKATES;
 			case "fitness_trail":
 				return FITNESS;
+			case "dirtbike":
+			case "dirtbike:scale":
+				return DIRTBIKE;
 		}
 		return null;
 	}
