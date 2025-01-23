@@ -4818,4 +4818,5 @@
     <string name="help_article_search_search_all_name">Otsi kõige alusel</string>
     <string name="help_article_purchases_ios_name">Ostud iOSis</string>
     <string name="help_article_purchases_giveaway_name">Kingitused</string>
+    <string name="help_article_purchases_android_name">Ostud Androidis</string>
 </resources>
