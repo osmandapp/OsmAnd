@@ -4829,4 +4829,5 @@
     <string name="verify_account">Verifitseeri oma kasutajakonto</string>
     <string name="verify_account_deletion_descr">Enne kustutamist peame kontrollima, et just sina soovid seda kustutada\n\nPalun sisesta e-posti aadress , mida sa registreerumisel kasutasid. Saadame sinna ühekordselt kasutatava salasõna.</string>
     <string name="manage_subscriptions">Halda tellimusi.</string>
+    <string name="deleting_complete">Kustutamine õnnestus</string>
 </resources>
