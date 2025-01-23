@@ -4833,4 +4833,5 @@
     <string name="osmand_cloud_delete_account_confirmation">Kas kustutame kasutajakonto?</string>
     <string name="bluetooth_found_title">Leidsime: %d</string>
     <string name="external_device_menu_forget">Unusta</string>
+    <string name="change_appearance">Muuda välimust</string>
 </resources>
