@@ -4090,9 +4090,7 @@
     <string name="rendering_attr_showWaterwayTunnels_name">Ubideetako tunelen ikusgarritasuna areagotzea</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Zoom txikitako ikonoak</string>
     <string name="icon_group_education">Hezkuntza</string>
-    <string name="location_source_descr">Lehenespenez, Google Play-tik instalatutako OsmAnd-ek %1$s erabiltzen du kokapena zehazteko.
-\n
-\nZehaztasunik gabeko kokapen informazioa lortzen baduzu edo gailua %2$s gabe erabiltzen baduzu, saiatu \"%3$s\"-ra aldatzen</string>
+    <string name="location_source_descr">Lehenespenez, Google Play-tik instalatutako OsmAnd-ek %1$s erabiltzen du kokapena zehazteko. \n \nZehaztasunik gabeko kokapen informazioa lortzen baduzu edo gailua %2$s gabe erabiltzen baduzu, saiatu \"%3$s\"-ra aldatzen</string>
     <string name="import_tracks">Inportatu arrastoak</string>
     <string name="shared_string_shape">Forma</string>
     <string name="stop_download_desc">Deskarga ez da osatu. Deskarga orain eteten baduzu, lauzen kopuru bat bakarrik egongo da ikusgai ikusteko.</string>
