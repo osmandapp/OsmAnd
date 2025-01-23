@@ -4835,4 +4835,5 @@
     <string name="external_device_menu_forget">Unusta</string>
     <string name="change_appearance">Muuda välimust</string>
     <string name="delete_folder">Kustuta kaust</string>
+    <string name="action_cannot_be_undone">Seda tegevust ei saa tagasi pöörata.</string>
 </resources>
