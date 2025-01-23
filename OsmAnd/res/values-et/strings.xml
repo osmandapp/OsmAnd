@@ -3345,7 +3345,7 @@
     <string name="vessel_height_warning_link">Määra laeva kõrgus</string>
     <string name="vessel_height_warning">Määra laeva kõrgus madalate sildade vältimiseks. Liikuva silla korral kasutatakse kõrgust avatud olekus.</string>
     <string name="vessel_height_limit_description">Madalate sildade vältimiseks kirjelda laeva kõrgus. Palun arvesta, et liikuva silla puhul me kasutame seda kõrgust ka siis, kui sild on avatud.</string>
-    <string name="vessel_width_limit_description">Määra laeva laius lühikeste sildade vältimiseks</string>
+    <string name="vessel_width_limit_description">Kitsaste sildade vältimiseks kirjelda laeva laius</string>
     <string name="quick_action_showhide_mapillary_descr">Selle tegevusnupu puudutamisel kuvatakse või peidetakse kaardil Mapillary kiht.</string>
     <string name="shared_string_uninstall_and_restart">Eemalda ja taaskäivita</string>
     <string name="app_mode_inline_skates">Rulluisud</string>
