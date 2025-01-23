@@ -4815,4 +4815,5 @@
     <string name="help_article_start_with_name">Alusta OsmAndi kasutamist</string>
     <string name="help_article_search_search_poi_name">Otsi huvipunkti alusel</string>
     <string name="help_article_search_search_coordinates_name">Otsi koordinaatide alusel</string>
+    <string name="help_article_search_search_all_name">Otsi kõige alusel</string>
 </resources>
