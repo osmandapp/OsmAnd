@@ -4852,4 +4852,5 @@
     <string name="routing_attr_avoid_highway_name">Väldi kiirteid</string>
     <string name="rendering_attr_depthContourWidth_description">Sügavuste kontuurjoonte laius</string>
     <string name="routing_attr_avoid_fords_description">Väldi fjorde</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Märkuste sildid</string>
 </resources>
