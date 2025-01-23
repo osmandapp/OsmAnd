@@ -15,6 +15,7 @@ import net.osmand.plus.routing.NextDirectionInfo;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.router.TurnType;
+import net.osmand.util.Algorithms;
 
 public class SecondNextTurnWidget extends NextTurnBaseWidget {
 
@@ -74,6 +75,9 @@ public class SecondNextTurnWidget extends NextTurnBaseWidget {
 			}
 			if (info != null && info.distanceTo > 0 && info.directionInfo != null) {
 				streetName = TripUtils.getStreetName(app, info, info.directionInfo);
+				if (verticalWidget && Algorithms.isEmpty(streetName.text)) {
+					streetName.text = info.directionInfo.getDescriptionRoutePart();
+				}
 				turnType = info.directionInfo.getTurnType();
 				turnImminent = info.imminent;
 				nextTurnDistance = info.distanceTo;
