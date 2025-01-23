@@ -5662,4 +5662,6 @@
     <string name="rendering_attr_showClimbingRoutes_description">Prikazati staze za penjanje</string>
     <string name="display_distance_to_first_intermediate_summary">Prvo prikazuje vreme i razdaljinu do sledećeg zaustavljanja. Isključite da biste uvek prikazivali detalje za odredište.</string>
     <string name="display_distance_to_first_intermediate">Prikaz detalja rute za sledeće zaustavljanje</string>
+    <string name="recently_visited">Nedavno posećeno</string>
+    <string name="popular_places_nearby">Popularna mesta u blizini</string>
 </resources>
