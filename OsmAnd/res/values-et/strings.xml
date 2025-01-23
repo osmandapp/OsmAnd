@@ -4838,4 +4838,5 @@
     <string name="action_cannot_be_undone">Seda tegevust ei saa tagasi pöörata.</string>
     <string name="shared_string_mode">Režiim</string>
     <string name="map_widget_altitude_current_location">Kõrgus: praegune asukoht</string>
+    <string name="map_widget_altitude_map_center">Kõrgus: kaardi keskpunkt</string>
 </resources>
