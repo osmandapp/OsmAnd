@@ -128,12 +128,14 @@ public class ClickableWayHelper {
         }
 
         RouteActivityHelper helper = app.getRouteActivityHelper();
-        for (String tag : tags.keySet()) {
-            RouteActivity activity = helper.findActivityByTag(tag);
-            if (activity != null) {
-                String activityType = activity.getId();
-                gpxFile.getMetadata().getExtensionsToWrite().put(GpxUtilities.ACTIVITY_TYPE, activityType);
-                break;
+        for (String clickableTag : CLICKABLE_TAGS) {
+            if (tags.containsKey(clickableTag)) {
+                RouteActivity activity = helper.findActivityByTag(clickableTag);
+                if (activity != null) {
+                    String activityType = activity.getId();
+                    gpxFile.getMetadata().getExtensionsToWrite().put(GpxUtilities.ACTIVITY_TYPE, activityType);
+                    break;
+                }
             }
         }
 
