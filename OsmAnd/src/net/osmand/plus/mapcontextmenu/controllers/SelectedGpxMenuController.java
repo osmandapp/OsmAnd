@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 
 import net.osmand.data.PointDescription;
+import net.osmand.plus.mapcontextmenu.TitleButtonController;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.R;
@@ -27,7 +28,7 @@ public class SelectedGpxMenuController extends MenuController {
 		this.selectedGpxPoint = selectedGpxPoint;
 		builder.setShowOnlinePhotos(false);
 
-		leftTitleButtonController = new TitleButtonController() {
+		leftTitleButtonController = new TitleButtonController(this) {
 			@Override
 			public void buttonPressed() {
 				mapContextMenu.close();
@@ -38,7 +39,7 @@ public class SelectedGpxMenuController extends MenuController {
 		leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_open_track);
 		leftTitleButtonController.startIconId = R.drawable.ic_action_folder;
 
-		rightTitleButtonController = new TitleButtonController() {
+		rightTitleButtonController = new TitleButtonController(this) {
 			@Override
 			public void buttonPressed() {
 				WptPt selectedPoint = selectedGpxPoint.getSelectedPoint();

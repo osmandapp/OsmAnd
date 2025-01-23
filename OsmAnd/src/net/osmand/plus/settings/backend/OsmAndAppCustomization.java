@@ -10,7 +10,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 
@@ -50,16 +49,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class OsmAndAppCustomization {
 
@@ -136,12 +126,7 @@ public class OsmAndAppCustomization {
 	public void customizeOsmandSettings(@NonNull String sharedPreferencesName, @Nullable Bundle bundle) {
 		customSettings = new CustomOsmandSettings(app, sharedPreferencesName, bundle);
 		OsmandSettings newSettings = customSettings.getSettings();
-		if (Build.VERSION.SDK_INT < 19) {
-			if (osmandSettings.isExternalStorageDirectorySpecifiedPre19()) {
-				File externalStorageDirectory = osmandSettings.getExternalStorageDirectoryPre19();
-				newSettings.setExternalStorageDirectoryPre19(externalStorageDirectory.getAbsolutePath());
-			}
-		} else if (osmandSettings.isExternalStorageDirectoryTypeSpecifiedV19()
+		if (osmandSettings.isExternalStorageDirectoryTypeSpecifiedV19()
 				&& osmandSettings.isExternalStorageDirectorySpecifiedV19()) {
 			int type = osmandSettings.getExternalStorageDirectoryTypeV19();
 			String directory = osmandSettings.getExternalStorageDirectoryV19();

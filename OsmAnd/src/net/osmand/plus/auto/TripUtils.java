@@ -2,8 +2,8 @@ package net.osmand.plus.auto;
 
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_IN;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_NOW;
-import static net.osmand.plus.utils.OsmAndFormatter.OsmAndFormatterParams.DEFAULT;
-import static net.osmand.plus.utils.OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS;
+import static net.osmand.plus.utils.OsmAndFormatterParams.DEFAULT;
+import static net.osmand.plus.utils.OsmAndFormatterParams.USE_LOWER_BOUNDS;
 
 import android.content.Context;
 
@@ -17,13 +17,11 @@ import androidx.car.app.navigation.model.Maneuver;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.CurrentStreetName;
-import net.osmand.plus.routing.RoadShield;
-import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.routing.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
+import net.osmand.plus.utils.FormattedValue;
 import net.osmand.router.TurnType;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
@@ -99,7 +97,7 @@ public class TripUtils {
 	@NonNull
 	public static Distance getFormattedDistance(@NonNull OsmandApplication app, double meters) {
 		MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
-		OsmAndFormatter.FormattedValue formattedValue = OsmAndFormatter.getFormattedDistanceValue((float) meters, app, USE_LOWER_BOUNDS, mc);
+		FormattedValue formattedValue = OsmAndFormatter.getFormattedDistanceValue((float) meters, app, USE_LOWER_BOUNDS, mc);
 
 		return Distance.create(formattedValue.valueSrc, getDistanceUnit(formattedValue.unitId));
 	}

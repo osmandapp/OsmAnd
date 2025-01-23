@@ -476,7 +476,7 @@ class GpxFile : GpxExtensions {
 		val tpoints = mutableListOf<TrkSegment>()
 		if (routes.isNotEmpty()) {
 			for (route in routes) {
-				val routeColor = route.getColor(getColor(0))
+				val routeColor = route.getColor(getColor(null))
 				if (route.points.isNotEmpty()) {
 					val ts = TrkSegment()
 					tpoints.add(ts)
@@ -491,13 +491,17 @@ class GpxFile : GpxExtensions {
 	fun processPoints(): List<TrkSegment> {
 		val tpoints = mutableListOf<TrkSegment>()
 		for (track in tracks) {
-			val trackColor = track.getColor(getColor(0))
+			val trackColor = track.getColor(getColor(null))
+			val trackWidth = track.getWidth(null)
 			for (segment in track.segments) {
+				val segmentColor = segment.getColor(trackColor)
+				val segmentWidth = segment.getWidth(trackWidth)
 				if (!segment.generalSegment && segment.points.isNotEmpty()) {
 					val ts = TrkSegment()
 					tpoints.add(ts)
+					ts.setColor(segmentColor)
+					ts.setWidth(segmentWidth)
 					ts.points.addAll(segment.points)
-					ts.setColor(trackColor)
 				}
 			}
 		}
@@ -615,14 +619,6 @@ class GpxFile : GpxExtensions {
 
 	fun setSplitInterval(splitInterval: Double) {
 		getExtensionsToWrite()["split_interval"] = splitInterval.toString()
-	}
-
-	fun getWidth(defWidth: String?): String? {
-		return extensions?.get("width") ?: defWidth
-	}
-
-	fun setWidth(width: String) {
-		getExtensionsToWrite()["width"] = width
 	}
 
 	fun isShowArrowsSet(): Boolean {
@@ -797,7 +793,7 @@ class GpxFile : GpxExtensions {
 			trkSegments.add(cloneTrkSegment(segment))
 		}
 		dest.segments = trkSegments
-		copyExtensions(source)
+		dest.copyExtensions(source)
 		return dest
 	}
 
@@ -810,7 +806,7 @@ class GpxFile : GpxExtensions {
 			points.add(WptPt(point))
 		}
 		dest.points = points
-		copyExtensions(source)
+		dest.copyExtensions(source)
 		return dest
 	}
 
@@ -844,7 +840,7 @@ class GpxFile : GpxExtensions {
 			routeTypes.add(cloneRouteType(rt))
 		}
 		dest.routeTypes = routeTypes
-		copyExtensions(source)
+		dest.copyExtensions(source)
 		return dest
 	}
 

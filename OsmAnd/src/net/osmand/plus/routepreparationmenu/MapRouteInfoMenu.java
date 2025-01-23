@@ -1260,8 +1260,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			View container = createToolbarSubOptionView(true, title, R.drawable.ic_action_remove_dark, true, v -> {
 				OsmandApplication app = getApp();
 				if (app != null) {
-					app.getWaypointHelper().enableWaypointType(waypointType, false);
-					updateOptionsButtons();
+					app.getWaypointHelper().switchWaypointTypeAsync(waypointType, false, this::updateOptionsButtons);
 				}
 			});
 			if (container != null) {
@@ -2109,6 +2108,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		return shouldShowTopControls(isVisible());
 	}
 
+	public boolean isPortraitMode() {
+		return portraitMode;
+	}
+
 	public boolean shouldShowTopControls(boolean menuVisible) {
 		return !menuVisible || !portraitMode || getCurrentMenuState() == MenuState.HEADER_ONLY;
 	}
@@ -2364,15 +2367,15 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
 				menuBackStack.clear();
 				if (routingHelper.isRoutePlanningMode() || routingHelper.isFollowingMode()) {
-					menuBackStack.push(new MapRouteMenuStateHolder(ROUTE_INFO, currentMenuState, fragment.getArguments()));
+					menuBackStack.push(new MapRouteMenuStateHolder(this, ROUTE_INFO, currentMenuState, fragment.getArguments()));
 				}
 				if (onDismissListener != null) {
 					onDismissListener.onDismiss(null);
 				}
 			} else if (fragment instanceof ChooseRouteFragment) {
 				routeSelected = true;
-				MapRouteMenuStateHolder holder = new MapRouteMenuStateHolder(ROUTE_DETAILS, currentMenuState, fragment.getArguments());
-				if (!menuBackStack.empty() && menuBackStack.peek().type == holder.type) {
+				MapRouteMenuStateHolder holder = new MapRouteMenuStateHolder(this, ROUTE_DETAILS, currentMenuState, fragment.getArguments());
+				if (!menuBackStack.empty() && menuBackStack.peek().getType() == holder.getType()) {
 					menuBackStack.pop();
 				}
 				if (backPressed) {
@@ -2393,7 +2396,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		show(getInitialMenuState());
 	}
 
-	private void show(int menuState) {
+	protected void show(int menuState) {
 		MapRouteMenuStateHolder holder = !menuBackStack.empty() ? menuBackStack.pop() : null;
 		if (holder != null) {
 			holder.showMenu();
@@ -2512,49 +2515,5 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public enum MapRouteMenuType {
 		ROUTE_INFO,
 		ROUTE_DETAILS
-	}
-
-	private class MapRouteMenuStateHolder {
-
-		private final MapRouteMenuType type;
-		private final int menuState;
-		private final Bundle arguments;
-
-		MapRouteMenuStateHolder(MapRouteMenuType type, int menuState, Bundle arguments) {
-			this.type = type;
-			this.menuState = menuState;
-			this.arguments = arguments;
-		}
-
-		@DrawableRes
-		int getButtonImage() {
-			OsmandApplication app = getApp();
-			return switch (type) {
-				case ROUTE_INFO -> 0;
-				case ROUTE_DETAILS ->
-						app != null ? app.getRoutingHelper().getAppMode().getIconRes() : R.drawable.ic_action_gdirections_dark;
-			};
-		}
-
-		void showMenu() {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				switch (type) {
-					case ROUTE_INFO -> showInternal(menuState);
-					case ROUTE_DETAILS ->
-							ChooseRouteFragment.showInstance(mapActivity.getSupportFragmentManager(), arguments);
-				}
-			}
-		}
-
-		void onDismiss(@Nullable MapRouteMenuStateHolder stateHolder) {
-			boolean openingRouteInfo = stateHolder != null && stateHolder.type == ROUTE_INFO;
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				if (!openingRouteInfo && type == ROUTE_DETAILS && !portraitMode) {
-					mapActivity.getMapPositionManager().setMapPositionShiftedX(false);
-				}
-			}
-		}
 	}
 }

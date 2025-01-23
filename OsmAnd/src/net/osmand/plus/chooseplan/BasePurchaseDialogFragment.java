@@ -3,7 +3,6 @@ package net.osmand.plus.chooseplan;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -107,7 +106,8 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+			@Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		mainView = themedInflater.inflate(getLayoutId(), container, false);
 		appBar = mainView.findViewById(R.id.appbar);
@@ -166,7 +166,8 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 
 	protected abstract void updateToolbar(int verticalOffset);
 
-	protected void bindFeatureItem(@NonNull View view, @NonNull OsmAndFeature feature, boolean useHeaderTitle) {
+	protected void bindFeatureItem(@NonNull View view, @NonNull OsmAndFeature feature,
+			boolean useHeaderTitle) {
 		ImageView ivIcon = view.findViewById(R.id.icon);
 		ivIcon.setImageResource(feature.getIconId(nightMode));
 
@@ -241,21 +242,16 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 		setupRoundedBackground(view, activeColor, background);
 	}
 
-	protected void setupRoundedBackground(@NonNull View view, @ColorInt int color, ButtonBackground background) {
+	protected void setupRoundedBackground(@NonNull View view, @ColorInt int color,
+			ButtonBackground background) {
 		Drawable normal = createRoundedDrawable(ColorUtilities.getColorWithAlpha(color, 0.1f), background);
-		setupRoundedBackground(view, normal, color, background);
+		setupRoundedBackground(view, normal, background);
 	}
 
 	protected void setupRoundedBackground(@NonNull View view, @NonNull Drawable normal,
-	                                      @ColorInt int color, ButtonBackground background) {
-		Drawable drawable;
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			Drawable selected = AppCompatResources.getDrawable(app, background.getRippleId(nightMode));
-			drawable = UiUtilities.getLayeredIcon(normal, selected);
-		} else {
-			Drawable selected = createRoundedDrawable(ColorUtilities.getColorWithAlpha(color, 0.5f), background);
-			drawable = AndroidUtils.createPressedStateListDrawable(normal, selected);
-		}
+			@NonNull ButtonBackground background) {
+		Drawable selected = AppCompatResources.getDrawable(app, background.getRippleId(nightMode));
+		Drawable drawable = UiUtilities.getLayeredIcon(normal, selected);
 		AndroidUtils.setBackground(view, drawable);
 	}
 

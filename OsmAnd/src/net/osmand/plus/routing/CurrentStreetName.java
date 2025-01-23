@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.router.ExitInfo;

@@ -50,6 +50,7 @@ import net.osmand.plus.configmap.HikingRoutesFragment;
 import net.osmand.plus.configmap.MtbRoutesFragment;
 import net.osmand.plus.configmap.TravelRoutesFragment;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.dashboard.tools.DashFragmentData.ShouldShowFunction;
 import net.osmand.plus.dashboard.tools.DashboardSettingsDialogFragment;
 import net.osmand.plus.dashboard.tools.TransactionBuilder;
 import net.osmand.plus.dialogs.RasterMapMenu;
@@ -497,7 +498,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		setDashboardVisibility(visible, type, null);
 	}
 
-	public void setDashboardVisibility(boolean visible, DashboardType type, int[] animationCoordinates) {
+	public void setDashboardVisibility(boolean visible, DashboardType type,
+			int[] animationCoordinates) {
 		boolean animate = !getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get();
 		setDashboardVisibility(visible, type, animate, animationCoordinates);
 	}
@@ -515,7 +517,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		return R.color.status_bar_transparent_gradient;
 	}
 
-	public void setDashboardVisibility(boolean visible, DashboardType type, boolean animation, int[] animationCoordinates) {
+	public void setDashboardVisibility(boolean visible, DashboardType type, boolean animation,
+			int[] animationCoordinates) {
 		boolean currentType = isCurrentType(type);
 		if (visible == this.visible && currentType || !AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 			return;
@@ -809,7 +812,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	private OnItemClickListener getOptionsMenuOnClickListener(ContextMenuAdapter adapter,
-	                                                          ContextMenuListAdapter listAdapter) {
+			ContextMenuListAdapter listAdapter) {
 		return (parent, view, position, id) -> {
 			int size = adapter.getItems().size();
 			if (position < 0 || position >= size) {
@@ -1046,7 +1049,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	public void updateLocation(boolean centerChanged, boolean locationChanged,
-	                           boolean compassChanged) {
+			boolean compassChanged) {
 		if (inLocationUpdate) {
 			return;
 		}
@@ -1294,7 +1297,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	public static <T> void handleNumberOfRows(List<T> list, OsmandSettings settings,
-	                                          String rowNumberTag) {
+			String rowNumberTag) {
 		int numberOfRows = settings.registerIntPreference(rowNumberTag, 3)
 				.makeGlobal().get();
 		if (list.size() > numberOfRows) {
@@ -1304,7 +1307,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		}
 	}
 
-	public static class DefaultShouldShow extends DashFragmentData.ShouldShowFunction {
+	public static class DefaultShouldShow extends ShouldShowFunction {
 		public boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag) {
 			return settings.registerBooleanPreference(SHOULD_SHOW + tag, true).makeGlobal().get();
 		}

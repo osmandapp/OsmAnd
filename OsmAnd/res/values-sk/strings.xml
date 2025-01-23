@@ -5684,4 +5684,8 @@
     <string name="default_buttons_size_original_description">Každé tlačidlo si zachová vlastnú veľkosť.</string>
     <string name="default_buttons_opacity_original_description">Každé tlačidlo si zachová vlastnú priehľadnosť pozadia.</string>
     <string name="default_buttons_corners_original_description">Každé tlačidlo si zachová vlastné zaoblenie rohov.</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Lezecké trasy</string>
+    <string name="calculating_indication_message">Vypočítavam…</string>
+    <string name="calculate_size">Vypočítať veľkosť</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Zobraziť lezecké trasy</string>
 </resources>

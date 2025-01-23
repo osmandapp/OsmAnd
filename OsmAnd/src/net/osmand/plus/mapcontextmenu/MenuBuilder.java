@@ -6,6 +6,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_ONLIN
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_SEARCH_MORE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_SHOW_ON_MAP_ID;
+import static net.osmand.plus.mapcontextmenu.SearchAmenitiesTask.NEARBY_MAX_POI_COUNT;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.DIVIDER_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NEAREST_POI_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NEAREST_WIKI_KEY;
@@ -50,7 +51,6 @@ import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
@@ -58,6 +58,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.mapcontextmenu.SearchAmenitiesTask.SearchAmenitiesListener;
 import net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
@@ -111,11 +112,6 @@ public class MenuBuilder {
 	public static final int TITLE_LIMIT = 60;
 
 	protected static final String[] arrowChars = {"=>", " - "};
-
-	private static final int NEARBY_MAX_POI_COUNT = 10;
-	private static final int NEARBY_POI_MIN_RADIUS = 250;
-	private static final int NEARBY_POI_MAX_RADIUS = 1000;
-	private static final int NEARBY_POI_SEARCH_FACTOR = 2;
 
 	protected OsmandApplication app;
 	protected MapActivity mapActivity;
@@ -1473,8 +1469,9 @@ public class MenuBuilder {
 		return null;
 	}
 
-	private void searchSortedAmenities(PoiUIFilter filter, LatLon latLon, SearchAmenitiesListener listener) {
-		execute(new SearchAmenitiesTask(filter, latLon, listener));
+	private void searchSortedAmenities(@NonNull PoiUIFilter filter, @NonNull LatLon latLon,
+			@Nullable SearchAmenitiesListener listener) {
+		execute(new SearchAmenitiesTask(filter, latLon, amenity, listener));
 	}
 
 	@ColorInt
@@ -1504,49 +1501,6 @@ public class MenuBuilder {
 
 	protected boolean isLightContent() {
 		return menuRowBuilder.isLightContent();
-	}
-
-	private class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
-
-		private final LatLon latLon;
-		private final PoiUIFilter filter;
-		private final SearchAmenitiesListener listener;
-
-		private SearchAmenitiesTask(PoiUIFilter filter, LatLon latLon, SearchAmenitiesListener listener) {
-			this.filter = filter;
-			this.latLon = latLon;
-			this.listener = listener;
-		}
-
-		@Override
-		protected List<Amenity> doInBackground(Void... params) {
-			int radius = NEARBY_POI_MIN_RADIUS;
-			List<Amenity> amenities = Collections.emptyList();
-			while (amenities.size() < NEARBY_MAX_POI_COUNT && radius <= NEARBY_POI_MAX_RADIUS) {
-				QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
-				amenities = getAmenities(rect, filter);
-				amenities.remove(amenity);
-				radius *= NEARBY_POI_SEARCH_FACTOR;
-			}
-			MapUtils.sortListOfMapObject(amenities, latLon.getLatitude(), latLon.getLongitude());
-			return amenities.subList(0, Math.min(NEARBY_MAX_POI_COUNT, amenities.size()));
-		}
-
-		@Override
-		protected void onPostExecute(List<Amenity> amenities) {
-			if (listener != null) {
-				listener.onFinish(amenities);
-			}
-		}
-
-		private List<Amenity> getAmenities(QuadRect rect, PoiUIFilter filter) {
-			return filter.searchAmenities(rect.top, rect.left,
-					rect.bottom, rect.right, -1, null);
-		}
-	}
-
-	public interface SearchAmenitiesListener {
-		void onFinish(List<Amenity> amenities);
 	}
 
 	@SuppressWarnings("unchecked")

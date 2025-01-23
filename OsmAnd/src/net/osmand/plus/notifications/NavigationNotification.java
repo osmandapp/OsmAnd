@@ -35,10 +35,11 @@ import net.osmand.plus.auto.NavigationCarAppService;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.routing.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
@@ -147,7 +148,7 @@ public class NavigationNotification extends OsmandNotification {
 			color = app.getColor(R.color.osmand_orange);
 
 			String distanceStr = OsmAndFormatter.getFormattedDistance(routingHelper.getLeftDistance(), app,
-					OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS);
+					OsmAndFormatterParams.USE_LOWER_BOUNDS);
 			String timeStr = OsmAndFormatter.getFormattedDuration(routingHelper.getLeftTime(), app);
 			String etaStr = SimpleDateFormat.getTimeInstance(DateFormat.SHORT)
 					.format(new Date(System.currentTimeMillis() + routingHelper.getLeftTime() * 1000L));
@@ -189,16 +190,17 @@ public class NavigationNotification extends OsmandNotification {
 					drawable.setBounds(0, 0, width, height);
 					drawable.setTurnType(turnType);
 					drawable.setTurnImminent(turnImminent, deviatedFromRoute);
+					drawable.updateColors(!app.getSettings().isLightSystemTheme());
 					turnBitmap = drawableToBitmap(drawable);
 				}
 
-				notificationTitle = OsmAndFormatter.getFormattedDistance(nextTurnDistance, app, OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS)
+				notificationTitle = OsmAndFormatter.getFormattedDistance(nextTurnDistance, app, OsmAndFormatterParams.USE_LOWER_BOUNDS)
 						+ (turnType != null ? " • " + RouteCalculationResult.toString(turnType, app, true) : "");
 				if (ri != null && !Algorithms.isEmpty(ri.getDescriptionRoutePart())) {
 					notificationText.append(ri.getDescriptionRoutePart());
 					if (nextNextTurnDistance > 0) {
 						notificationText.append(" ").append(OsmAndFormatter.getFormattedDistance(nextNextTurnDistance, app,
-								OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS));
+								OsmAndFormatterParams.USE_LOWER_BOUNDS));
 					}
 					notificationText.append("\n");
 				}
@@ -210,7 +212,7 @@ public class NavigationNotification extends OsmandNotification {
 					if (nextIntermediateIndex < intermediatePoints.size()) {
 						TargetPoint nextIntermediate = intermediatePoints.get(nextIntermediateIndex);
 						notificationText.append(OsmAndFormatter.getFormattedDistance(distanceToNextIntermediate, app,
-										OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS))
+										OsmAndFormatterParams.USE_LOWER_BOUNDS))
 								.append(" • ")
 								.append(nextIntermediate.getOnlyName());
 						notificationText.append("\n");

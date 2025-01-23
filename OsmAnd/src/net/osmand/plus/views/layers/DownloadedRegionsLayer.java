@@ -23,6 +23,7 @@ import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.PolygonBuilder;
 import net.osmand.core.jni.PolygonsCollection;
 import net.osmand.core.jni.QVectorPointI;
+import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -777,7 +778,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			return baseOrder;
 		}
 		if (polygonsCollection == null) {
-			polygonsCollection = new PolygonsCollection();
+			polygonsCollection = new PolygonsCollection(ZoomLevel.ZoomLevel3, ZoomLevel.ZoomLevel7);
 		}
 		for (WorldRegion region : regionList) {
 			for (List<LatLon> polygon : region.getPolygons()) {

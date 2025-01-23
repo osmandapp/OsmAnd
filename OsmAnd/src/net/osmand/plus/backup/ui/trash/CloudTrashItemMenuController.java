@@ -58,7 +58,7 @@ public class CloudTrashItemMenuController extends BaseDialogController implement
 		DisplayData displayData = new DisplayData();
 		displayData.putExtra(BACKGROUND_COLOR, ColorUtilities.getColorWithAlpha(ColorUtilities.getColor(app, activeColorId), 0.3f));
 
-		int iconId = item.getIconId();
+		int iconId = item.getIconId(app);
 		displayData.addDisplayItem(new DisplayItem()
 				.setClickable(false)
 				.setTitle(item.getName(app))

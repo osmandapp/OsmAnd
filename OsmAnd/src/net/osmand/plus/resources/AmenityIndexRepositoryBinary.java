@@ -19,7 +19,6 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResource;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResourceType;
 import net.osmand.util.MapUtils;
 
@@ -104,7 +103,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 	}
 
 	@Nullable
-	private BinaryMapIndexReader getOpenFile() {
+	public BinaryMapIndexReader getOpenFile() {
 		return resource.getReader(BinaryMapReaderResourceType.POI);
 	}
 

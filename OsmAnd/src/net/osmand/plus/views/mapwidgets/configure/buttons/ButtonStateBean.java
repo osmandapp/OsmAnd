@@ -2,12 +2,15 @@ package net.osmand.plus.views.mapwidgets.configure.buttons;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 public class ButtonStateBean {
 
 	public String id;
-	public String name = "";
+	public String name = null;
 	public String icon;
 	public int size = -1;
 	public int cornerRadius = -1;
@@ -18,7 +21,12 @@ public class ButtonStateBean {
 		this.id = id;
 	}
 
-	public void setupButtonState(@NonNull QuickActionButtonState buttonState) {
+	public void setupButtonState(@NonNull OsmandApplication app,
+			@NonNull QuickActionButtonState buttonState) {
+		OsmandSettings settings = app.getSettings();
+		ApplicationMode appMode = settings.getApplicationMode();
+		long time = settings.getLastModePreferencesEditTime(appMode);
+
 		buttonState.setName(name);
 		buttonState.setEnabled(enabled);
 
@@ -34,6 +42,7 @@ public class ButtonStateBean {
 		if (opacity >= 0) {
 			buttonState.getOpacityPref().set(opacity);
 		}
+		settings.setLastModePreferencesEditTime(appMode, time);
 	}
 
 	@NonNull

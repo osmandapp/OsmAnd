@@ -5,19 +5,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.ResultMatcher;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.map.ITileSource;
-import net.osmand.map.MapTileDownloader.DownloadRequest;
-import net.osmand.plus.resources.ResourceManager.MapTileLayerSize;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Stack;
 
 /**
@@ -119,97 +111,6 @@ public class AsyncLoadingThread extends Thread {
 			log.info("Bitmap tiles to load in memory : " + maxCacheSize);
 			bitmapTilesCache.setMaxCacheSize(maxCacheSize);
 		}
-	}
-
-	public static class TileLoadDownloadRequest extends DownloadRequest {
-
-		public final File dirWithTiles;
-		public final ITileSource tileSource;
-
-		public final long timestamp;
-
-		public TileLoadDownloadRequest(File dirWithTiles, String url, File fileToSave, String tileId,
-		                               ITileSource source, int tileX, int tileY, int zoom, long timestamp) {
-			super(url, fileToSave, tileId, tileX, tileY, zoom);
-			this.dirWithTiles = dirWithTiles;
-			this.tileSource = source;
-			this.timestamp = timestamp;
-		}
-		
-		public TileLoadDownloadRequest(File dirWithTiles, String url, File fileToSave, String tileId, ITileSource source, int tileX,
-				int tileY, int zoom, long timestamp, String referer, String userAgent) {
-			this(dirWithTiles, url, fileToSave, tileId, source, tileX, tileY, zoom, timestamp);
-			this.referer = referer;
-			this.userAgent = userAgent;
-		}
-		
-		public void saveTile(InputStream inputStream) throws IOException {
-			if (tileSource instanceof SQLiteTileSource) {
-				ByteArrayOutputStream stream = null;
-				try {
-					stream = new ByteArrayOutputStream(inputStream.available());
-					Algorithms.streamCopy(inputStream, stream);
-					stream.flush();
-
-					try {
-						((SQLiteTileSource) tileSource).insertImage(xTile, yTile, zoom, stream.toByteArray());
-					} catch (IOException e) {
-						log.warn("Tile x=" + xTile + " y=" + yTile + " z=" + zoom + " couldn't be read", e);  //$NON-NLS-1$//$NON-NLS-2$
-					}
-				} finally {
-					Algorithms.closeStream(inputStream);
-					Algorithms.closeStream(stream);
-				}
-			} else {
-				super.saveTile(inputStream);
-			}
-		}
-	}
-
-	protected class MapObjectLoadRequest<T> implements ResultMatcher<T> {
-		protected double topLatitude;
-		protected double bottomLatitude;
-		protected double leftLongitude;
-		protected double rightLongitude;
-		protected boolean cancelled;
-		protected volatile boolean running;
-
-		public boolean isContains(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
-			return this.topLatitude >= topLatitude && this.leftLongitude <= leftLongitude
-					&& this.rightLongitude >= rightLongitude && this.bottomLatitude <= bottomLatitude;
-		}
-
-		public void setBoundaries(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
-			this.topLatitude = topLatitude;
-			this.bottomLatitude = bottomLatitude;
-			this.leftLongitude = leftLongitude;
-			this.rightLongitude = rightLongitude;
-		}
-		
-		public boolean isRunning() {
-			return running && !cancelled;
-		}
-		
-		public void start() {
-			running = true;
-		}
-		
-		public void finish() {
-			running = false;
-			// use downloader callback
-			resourceManger.getMapTileDownloader().fireLoadCallback(null);
-		}
-
-		@Override
-		public boolean isCancelled() {
-			return cancelled;
-		}
-
-		@Override
-		public boolean publish(T object) {
-			return true;
-		}
-
 	}
 
 	public interface OnMapLoadedListener {

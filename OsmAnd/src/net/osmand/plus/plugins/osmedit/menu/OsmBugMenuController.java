@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.mapcontextmenu.TitleButtonController;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -24,7 +25,7 @@ public class OsmBugMenuController extends MenuController {
 		plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		this.bug = bug;
 
-		leftTitleButtonController = new TitleButtonController() {
+		leftTitleButtonController = new TitleButtonController(this) {
 			@Override
 			public void buttonPressed() {
 				MapActivity activity = getMapActivity();
@@ -45,7 +46,7 @@ public class OsmBugMenuController extends MenuController {
 		}
 		leftTitleButtonController.startIconId = R.drawable.ic_action_note_dark;
 
-		rightTitleButtonController = new TitleButtonController() {
+		rightTitleButtonController = new TitleButtonController(this) {
 			@Override
 			public void buttonPressed() {
 				MapActivity activity = getMapActivity();

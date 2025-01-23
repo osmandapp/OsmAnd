@@ -193,6 +193,7 @@
 	<string name="poi_live_music">Live music</string>
 	<string name="poi_cash_in">Cash deposit</string>
 	<string name="poi_camp_site_type">Camp site type</string>
+	<string name="poi_cafe_filter">Cafe</string>
 
 
 <!--  categories -->
@@ -5536,5 +5537,11 @@
 	<string name="poi_camp_site_standard">Standard</string>
 	<string name="poi_camp_site_serviced">Serviced</string>
 	<string name="poi_camp_site_deluxe">Deluxe</string>
+
+	<string name="poi_climbing_area">Climbing area</string>
+	<string name="poi_climbing_route">Climbing route</string>
+	<string name="poi_climbing_route_bottom">Climbing route bottom</string>
+
+	<string name="poi_cafe_yes">Yes</string>
 
 </resources>

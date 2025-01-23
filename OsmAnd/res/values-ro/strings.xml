@@ -1107,7 +1107,7 @@
     <string name="rendering_attr_moreDetailed_name">Mai multe detalii</string>
     <string name="rendering_attr_lessDetailed_name">Mai puține detalii</string>
     <string name="rendering_attr_hideAccess_name">Restricții de acces</string>
-    <string name="rendering_attr_showAccess_name">Afișarea restricțiilor de acces și de taxare</string>
+    <string name="rendering_attr_showAccess_name">Afișarea restricțiilor de acces</string>
     <string name="rendering_attr_showSurfaceGrade_name">Arată calitatea drumului</string>
     <string name="rendering_attr_showSurfaces_name">Arată suprafața drumului</string>
     <string name="rendering_attr_showCycleRoutes_name">Rute pentru biciclete</string>
@@ -4941,7 +4941,7 @@
     <string name="mtb_scale">Dificultate MTB</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">Asociația Internațională de Ciclism Montan</string>
-    <string name="cloud_sync_progress">Se sincronizează…%1$s</string>
+    <string name="cloud_sync_progress">Se sincronizează… %1$s</string>
     <string name="checking_progress">Se verifică…</string>
     <string name="shared_string_modified">Modificat</string>
     <string name="shared_string_open">Deschis</string>
@@ -5316,7 +5316,7 @@
     <string name="write_heading_description">Salvează orientarea în fiecare punct al traseului, în timpul înregistrării</string>
     <string name="write_heading">Scrie orientarea</string>
     <string name="shared_string_included">Inclus</string>
-    <string name="local_indexes_category_terrain">Hărți de teren (3D)</string>
+    <string name="local_indexes_category_terrain">Hărți de teren (3D</string>
     <string name="map_widget_group_glide_desc">Widgeturile arată raportul de planare față de țintă sau raportul de planare mediu pentru cursa curentă.</string>
     <string name="hillshade_slope">Relief umbrit, Pantă</string>
     <string name="map_widget_glide_average_desc">Arată raportul mediu de planare pentru intervalul setat.</string>
@@ -5927,7 +5927,7 @@
     <string name="show_minor_turns">Afișare la intersecțiile minore atunci când se navighează în linie dreaptă</string>
     <string name="location_interpolation_percent_desc">Setați procentul de interpolare a locației în timpul navigării pe traseu. Acest parametru reduce decalajul poziției locației dumneavoastră pe hartă în timpul animației.</string>
     <string name="imperial_gallons">Galoane imperiale</string>
-    <string name="selected_delayed_profile">Profil selectat s\\</string>
+    <string name="selected_delayed_profile">Profil selectat „%s”</string>
     <string name="fuel_tank_capacity_description">Introduceți capacitatea rezervorului pentru a urmări cu exactitate nivelurile de combustibil și consumul</string>
     <string name="location_interpolation_percent">Procent de interpolare a locației</string>
     <string name="us_gallons">Galoane US</string>
@@ -5993,7 +5993,7 @@
     <string name="new_segment_started_m">A început înregistrarea unui nou segment de pistă.</string>
     <string name="track_does_not_contain_data_to_save">Track-ul nu conține date de salvat.</string>
     <string name="screen_is_locked_by_action_button">Ecranul tactil este blocat. Atingeți butonul pentru a debloca.</string>
-    <string name="release_4_9">- A fost adăugat un vizualizator de galerii full-screen pentru imaginile Wikimedia\n\n - Introdus un nou plugin ehicle Metrics pentru a monitoriza performanța vehiculului utilizând protocolul OBD-II\n\n - A fost adăugată posibilitatea de a atribui activități pistelor și de a le filtra în consecință\n\n - Implementarea de noi acțiuni rapide pentru înregistrarea călătoriei și blocarea ecranului tactil\n\n - Introdus aspectul personalizabil al butonului de hartă și o grilă precisă\n\n - Adăugat un meniu contextual și o acțiune de viteză medie eset la widget-uri\n\n - A fost adăugat un nou strat de traseu irt Bike trailsn\n - Fixat uto-înregistrare traseu în timpul navigațiein\n - S-a rezolvat problema coordonatelor răsturnate în RTL\n\n - S-a rezolvat problema lipsei datelor senzorilor pentru traseul înregistrat în prezent\n\n - Adăugat informații despre zonele înconjurătoare pentru punctul selectat\n\n - A fost adăugată o acțiune rapidă pentru a controla vizibilitatea edițiilor OSM\n\n - Parametrii de vizibilitate separați pentru opțiunile de colorare a terenului\n\n - Adăugat o pictogramă care poate fi atinsă pentru a afișa accesul sau alte atribute de drum sau cărare</string>
+    <string name="release_4_9">• A fost adăugat un vizualizator de galerii full-screen pentru imaginile Wikimedia\n\n • Introdus un nou plugin „Vehicle Metrics” pentru a monitoriza performanța vehiculului utilizând protocolul OBD-II\n\n • A fost adăugată posibilitatea de a atribui activități pistelor și de a le filtra în consecință\n\n • Implementate noi acțiuni rapide pentru înregistrarea călătoriei și blocarea ecranului tactil\n\n • Introdus aspectul personalizabil al butonului de hartă și o grilă precisă\n\n • Adăugat un meniu contextual și o acțiune „Resetare viteză medie” pentru widget-uri\n\n • Adăugat un nou strat de traseu „Trasee pentru biciclete Dirt”\n\n • Fixat „Înregistrare automată a traseului în timpul navigării”\n\n • S-a rezolvat problema cu coordonatele răsturnate în RTL\n\n • S-a rezolvat problema lipsei datelor senzorilor pentru înregistrarea curentă a traseului\n\n • Au fost adăugate informații despre zonele înconjurătoare pentru punctul selectat\n\n • A fost adăugată o acțiune rapidă pentru a controla vizibilitatea edițiilor OSM\n\n • Parametrii de vizibilitate separați pentru opțiunile de colorare a terenului\n\n • Adăugat o pictogramă care poate fi atinsă pentru a afișa accesul sau alte atribute de drum sau cărare</string>
     <string name="screen_is_unlocked">Ecranul tactil este deblocat.</string>
     <string name="liter_per_hour">L/h</string>
     <string name="quick_action_showhide_osm_edits_descr">Buton pentru a afișa sau a ascunde editările OSM locale pe hartă.</string>
@@ -6043,4 +6043,28 @@
     <string name="vehicle_metrics_plugin_settings">Setări pentru parametrii vehiculului</string>
     <string name="percent_unit">%</string>
     <string name="obd_widget_group">Parametrii vehiculului</string>
+    <string name="obd_fuel_left_distance_desc">Indică distanța pe care autovehiculul o poate parcurge cu nivelul de combustibil rămas pe senzorul OBD</string>
+    <string name="obd_fuel_type_desc">Afișează tipul de combustibil al vehiculului prin senzorul OBD</string>
+    <string name="obd_air_intake_temp">Temperatura de admisie</string>
+    <string name="calculating_indication_message">Calculând…</string>
+    <string name="obd_fuel_level_desc">Afișează Afișează nivelul de combustibil al vehiculului prin senzorul OBD nivelul de combustibil al vehiculului prin senzorul OBD</string>
+    <string name="calculate_size">Calculați dimensiunea</string>
+    <string name="obd_rpm_desc">Afișează turația tahometrului vehiculului pe senzorul OBD</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Rute de alpinism</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Arată rute de alpinism</string>
+    <string name="obd_engine_coolant_temp">Temperatura lichidului de răcire</string>
+    <string name="obd_ambient_air_temp">Temperatura ambientală</string>
+    <string name="obd_battery_voltage">Tensiunea bateriei</string>
+    <string name="obd_fuel_type">Tipul de combustibil</string>
+    <string name="obd_support">Suport OBD</string>
+    <string name="obd_plugin_name">Parametrii vehicul</string>
+    <string name="obd_plugin_description">Monitorizați parametrii cheie ai vehiculului utilizând protocolul OBD-II. Accesați date care includ:\n • turația motorului, timpul de funcționare al motorului, sarcina calculată a motorului \n • Consumul de combustibil, presiunea combustibilului, combustibilul rămas\n • Temperatura de admisie, temperatura ambiantă, temperatura lichidului de răcire, temperatura uleiului de motor\n• Viteza vehiculului, Poziția accelerației, Tensiunea bateriei\n</string>
+    <string name="obd_fuel_level">Eficiența combustibilului (%)</string>
+    <string name="obd_fuel_consumption_rate">Rata consumului de combustibil</string>
+    <string name="obd_fuel_consumption_rate_desc">Afișează rata consumului de combustibil al vehiculului pe baza OBD și a locației</string>
+    <string name="obd_fuel_left_liters">Combustibil rămas (litri)</string>
+    <string name="display_distance_to_first_intermediate_summary">Afișează mai întâi ora și distanța pentru următoarea oprire. Dezactivați pentru a afișa întotdeauna detaliile pentru destinație.</string>
+    <string name="display_distance_to_first_intermediate">Afișați detaliile traseului pentru următoarea oprire</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="import_export">Import/export</string>
 </resources>

@@ -156,7 +156,7 @@
     <string name="poi_traffic_calming_cushion">Cojín berlinés</string>
     <string name="poi_traffic_calming_chicane">Chicana</string>
     <string name="poi_traffic_calming_rumble_strip">Banda sonora</string>
-    <string name="poi_traffic_calming_table">Peatonal elevada;Plataforma elevada</string>
+    <string name="poi_traffic_calming_table">Peatonal elevada;Plataforma elevada;Paso peatonal elevado</string>
     <string name="poi_traffic_calming_choker">Calzada reducida;Gargantilla</string>
     <string name="poi_traffic_signals">Semáforo</string>
     <string name="poi_car_repair">Taller de automóviles;Taller mecánico; Reparación de automotores</string>
@@ -4023,7 +4023,7 @@
     <string name="poi_payment_calling_cards_no">No acepta tarjetas telefónicas</string>
     <string name="poi_manufacturer">Fabricante</string>
     <string name="poi_groundskeeping">Equipos de jardinería</string>
-    <string name="poi_country_store">Productos de campo;Tienda de campo</string>
+    <string name="poi_country_store">Productos para el campo;Tienda de campo;Almacén rural; Almacén de campo</string>
     <string name="poi_prep_school">Centro de tutorización;Academia de estudios;Profesor/a particular</string>
     <string name="poi_ticket_validator">Validador de entradas;Validador de billetes;Validador de boletos</string>
     <string name="poi_geoglyph">Geoglifo</string>
@@ -4963,4 +4963,9 @@
     <string name="poi_route_activity_type_scuba_diving">Submarinismo</string>
     <string name="poi_route_activity_type_harvesting">Cosechar</string>
     <string name="poi_route_activity_type_swimming_outdoor">Natación al aire libre</string>
+    <string name="poi_cafe_filter">Cafetería</string>
+    <string name="poi_climbing_area">Área de escalada</string>
+    <string name="poi_climbing_route">Ruta de escalada</string>
+    <string name="poi_climbing_route_bottom">Ruta de escalada inferior</string>
+    <string name="poi_cafe_yes">Sí</string>
 </resources>

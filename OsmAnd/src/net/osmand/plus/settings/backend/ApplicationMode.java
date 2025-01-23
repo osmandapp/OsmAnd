@@ -108,7 +108,6 @@ public class ApplicationMode {
 			app.getAppCustomization().addListener(customizationListener);
 		}
 		if (cachedFilteredValues.isEmpty()) {
-
 			OsmandSettings settings = app.getSettings();
 			if (listener == null) {
 				listener = change -> cachedFilteredValues = new ArrayList<>();
@@ -656,23 +655,24 @@ public class ApplicationMode {
 		saveCustomAppModesToSettings(app);
 	}
 
-	public static boolean changeProfileAvailability(ApplicationMode mode, boolean isSelected, OsmandApplication app) {
-		Set<ApplicationMode> selectedModes = new LinkedHashSet<>(values(app));
-		StringBuilder vls = new StringBuilder(DEFAULT.getStringKey() + ",");
-		if (allPossibleValues().contains(mode)) {
+	public static boolean changeProfileAvailability(ApplicationMode appMode, boolean selected, OsmandApplication app) {
+		if (allPossibleValues().contains(appMode) && appMode != DEFAULT) {
 			OsmandSettings settings = app.getSettings();
-			if (isSelected) {
-				selectedModes.add(mode);
+			Set<ApplicationMode> selectedModes = new LinkedHashSet<>(values(app));
+
+			StringBuilder builder = new StringBuilder(DEFAULT.getStringKey() + ",");
+			if (selected) {
+				selectedModes.add(appMode);
 			} else {
-				selectedModes.remove(mode);
-				if (settings.APPLICATION_MODE.get() == mode) {
+				selectedModes.remove(appMode);
+				if (settings.APPLICATION_MODE.get() == appMode) {
 					settings.APPLICATION_MODE.resetToDefault();
 				}
 			}
-			for (ApplicationMode m : selectedModes) {
-				vls.append(m.getStringKey()).append(",");
+			for (ApplicationMode mode : selectedModes) {
+				builder.append(mode.getStringKey()).append(",");
 			}
-			settings.AVAILABLE_APP_MODES.set(vls.toString());
+			settings.AVAILABLE_APP_MODES.set(builder.toString());
 			return true;
 		}
 		return false;

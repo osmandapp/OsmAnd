@@ -3,7 +3,6 @@ package net.osmand.plus.activities.actions;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -152,25 +151,15 @@ public class AppModeDialog {
 			if (checked) {
 				iv.setImageDrawable(drawable);
 				iv.setContentDescription(String.format("%s %s", mode.toHumanString(), ctx.getString(R.string.item_checked)));
-				if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-					selection.setImageDrawable(ctx.getDrawable(R.drawable.btn_checked_border_light));
-					AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.ripple_light, R.drawable.ripple_light);
-				} else {
-					AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_light);
-				}
+				selection.setImageDrawable(ctx.getDrawable(R.drawable.btn_checked_border_light));
+				AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.ripple_light, R.drawable.ripple_light);
 			} else {
 				if (useMapTheme) {
-					if (Build.VERSION.SDK_INT >= 21) {
-						Drawable active = ctx.getUIUtilities().getPaintedIcon(mode.getIconRes(), mode.getProfileColor(nightMode));
-						drawable = AndroidUtils.createPressedStateListDrawable(drawable, active);
-					}
+					Drawable active = ctx.getUIUtilities().getPaintedIcon(mode.getIconRes(), mode.getProfileColor(nightMode));
+					drawable = AndroidUtils.createPressedStateListDrawable(drawable, active);
 					iv.setImageDrawable(drawable);
-					if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-						selection.setImageDrawable(ctx.getDrawable(R.drawable.btn_border_pressed_light));
-						AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.ripple_light, R.drawable.ripple_light);
-					} else {
-						AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.btn_border_pressed_trans_light, R.drawable.btn_border_pressed_trans_light);
-					}
+					selection.setImageDrawable(ctx.getDrawable(R.drawable.btn_border_pressed_light));
+					AndroidUtils.setBackground(ctx, selection, nightMode, R.drawable.ripple_light, R.drawable.ripple_light);
 				} else {
 					iv.setImageDrawable(ctx.getUIUtilities().getPaintedIcon(mode.getIconRes(), mode.getProfileColor(nightMode)));
 				}

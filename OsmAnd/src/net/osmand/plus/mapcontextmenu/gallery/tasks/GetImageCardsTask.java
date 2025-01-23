@@ -92,14 +92,14 @@ public class GetImageCardsTask extends AsyncTask<Void, Void, ImageCardsHolder> {
 			for (WikiImage wikiImage : wikimediaImageList) {
 				holder.addCard(WIKIMEDIA, new WikiImageCard(mapActivity, wikiImage));
 			}
-
-			if (!Algorithms.isEmpty(params.get(Amenity.MAPILLARY))) {
-				JSONObject imageObject = MapillaryOsmTagHelper.getImageByKey(params.get(Amenity.MAPILLARY));
+			String key = params.remove(Amenity.MAPILLARY);
+			if (!Algorithms.isEmpty(key)) {
+				JSONObject imageObject = MapillaryOsmTagHelper.getImageByKey(key);
 				if (imageObject != null) {
 					holder.addCard(MAPILLARY_AMENITY, new MapillaryImageCard(mapActivity, imageObject));
 				}
 			}
-			PluginsHelper.populateContextMenuImageCards(holder, httpPms, params, listener);
+			httpPms.putAll(params);
 			String response = AndroidNetworkUtils.sendRequest(app, "https://osmand.net/api/cm_place", httpPms,
 					"Requesting location images...", false, false);
 			if (!Algorithms.isEmpty(response)) {

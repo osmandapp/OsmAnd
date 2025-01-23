@@ -98,6 +98,7 @@ object GpxDbUtils {
 			addIfMissingGpxTableColumn(columnNames, db, START_TIME);
 			addIfMissingGpxTableColumn(columnNames, db, END_TIME);
 			addIfMissingGpxTableColumn(columnNames, db, TIME_SPAN);
+			addIfMissingGpxTableColumn(columnNames, db, EXPECTED_DURATION);
 			addIfMissingGpxTableColumn(columnNames, db, TIME_MOVING);
 			addIfMissingGpxTableColumn(columnNames, db, TOTAL_DISTANCE_MOVING);
 			addIfMissingGpxTableColumn(columnNames, db, DIFF_ELEVATION_UP);
