@@ -467,7 +467,7 @@
     <string name="map_imported_successfully">Kaart imporditud</string>
     <string name="enter_the_file_name">Sisesta failinimi.</string>
     <string name="transport_nearby_routes_within">Lähedalolevad teekonnad</string>
-    <string name="transport_nearby_routes">Ulatus</string>
+    <string name="transport_nearby_routes">Ümbruses</string>
     <string name="dd_mm_ss_format">DD°MM′SS″</string>
     <string name="dd_dddddd_format">DD.DDDDDD°</string>
     <string name="dd_ddddd_format">DD.DDDDD°</string>
@@ -1214,7 +1214,7 @@
     <string name="map_widget_right">Parempoolne paneel</string>
     <string name="map_widget_left">Vasakpoolne paneel</string>
     <string name="configure_map">Seadista kaarti</string>
-    <string name="search_radius_proximity">Ulatus</string>
+    <string name="search_radius_proximity">Ümbruses</string>
     <string name="anonymous_user_hint">Anonüümsed kasutajad ei saa:
 \n- Luua gruppe;
 \n- Serveriga gruppe ja seadmeid sünkroonida;
@@ -1310,13 +1310,9 @@
     <string name="layer_amenity_label">Punktide sildid (huvipunktid, lemmikud)</string>
     <string name="loading_smth">%1$s laadimine…</string>
     <string name="map_widget_plain_time">Praegune aeg</string>
-    <string name="selected_gpx_info_show">"
-\n
-\nKaardil vaatamiseks puuduta pikalt"</string>
+    <string name="selected_gpx_info_show">\n\nKaardil vaatamiseks puuduta pikalt</string>
     <string name="delay_navigation_start">Alusta pöörangupõhist juhendamist automaatselt</string>
-    <string name="local_index_gpx_info_show">"
-\n
-\nValikuteks puuduta pikemalt"</string>
+    <string name="local_index_gpx_info_show">\n\nValikuteks puuduta pikemalt</string>
     <string name="gpx_info_subtracks">Alamrajad: %1$s</string>
     <string name="gpx_info_waypoints">Teekonnapunktid: %1$s</string>
     <string name="gpx_info_distance">Kaugus: %1$s (%2$s punkti)</string>
@@ -2452,14 +2448,7 @@
     <string name="do_not_show_startup_messages">Ära kuva käivitusteateid</string>
     <string name="do_not_show_startup_messages_desc">Ära kuva rakenduse allahindlusi ega kohalike sündmuste teateid.</string>
     <string name="osmand_extended_description_part2">GPS-navigeerimine \n • Vali võrguühenduseta (välismaal viibides rändlustasudeta) või võrgus (kiirem) vahel \n • Hääljuhised pöörangupõhisel suunamisel juhatavad sind mööda teed (salvestatud ja sünteesitud hääled) \n • Teekond arvutatakse sellest kõrvale kaldudes alati ümber \n • Teeäärsed juhised, tänavanimed ja eeldatav saabumisaeg on teel olles abiks \n • Reisi turvalisemaks muutmiseks lülitatakse päeval/öösel ekraani režiim automaatselt ümber \n • Näitame kiiruspiiranguid ja saad selle ületamise korral meeldetuletusi \n • Kaardi suurendustaset kohandame vastavalt sinu kiirusele \n • Otsi sihtkohti aadressi, liigi (nt parkimine, restoran, hotell, bensiinijaam, muuseum) või geograafiliste koordinaatide järgi \n • Toetab teekonna vahepunkte \n • Salvesta oma andmed või laadi üles GPX rada ja liigu mööda seda</string>
-    <string name="osmand_plus_extended_description_part2">Navigeerimine
-\n • Töötab võrgus (kiire) või võrguühenduseta (välismaal viibides puuduvad rändlustasud)
-\n • Täpsed hääljuhised (salvestatud ja sünteesitud hääled)
-\n • Valikuline sõiduradade juhendamine, tänavanime kuvamine ja eeldatav saabumisaeg
-\n • Toetab teekonna vahepunkte
-\n • Automaatne teekonnast kõrvale kaldumisel selle ümberarvutamine
-\n • Otsige kohti aadressi, tüübi (nt restoran, hotell, bensiinijaam, muuseum) või geograafiliste koordinaatide järgi
-\n</string>
+    <string name="osmand_plus_extended_description_part2">"Tee juhatamine \n • Töötab võrgus (kiire) või võrguühenduseta (välismaal viibides puuduvad rändlustasud) \n • Täpsed hääljuhised (salvestatud ja sünteesitud hääled) \n • Valikuline sõiduradade juhendamine, tänavanime kuvamine ja eeldatav saabumisaeg \n • Toetab teekonna vahepunkte \n • Automaatne teekonnast kõrvale kaldumisel selle ümberarvutamine \n • Otsige kohti aadressi, tüübi (nt restoran, hotell, bensiinijaam, muuseum) või geograafiliste koordinaatide järgi "</string>
     <string name="analyze_on_map">Analüüsi kaardil</string>
     <string name="subscribe_email_desc">Rakenduse allahindluste kohta teabe saamiseks liitu meie postiloendiga ja saad veel 3 kaardi allalaadimist!</string>
     <string name="quick_action_add_destination_desc">Nupp ekraani keskkoha teekonna sihtkohaks muutmiseks; ühest varem valitud sihtkohast saab viimane vahesihtkoht.</string>
@@ -2467,7 +2456,7 @@
     <string name="quick_action_add_first_intermediate_desc">Nupp ekraani keskkoha esimeseks vahesihtkohaks muutmiseks.</string>
     <string name="quick_action_auto_zoom_desc">Nupp, mis lülitab automaatse kiirusetundliku suumimise sisse või välja.</string>
     <string name="shared_string_paused">Peatatud</string>
-    <string name="animate_my_location_desc">Lülita sisse animeeritud oma asukohas kaardi panoraamimine navigeerimise ajal.</string>
+    <string name="animate_my_location_desc">Sujuv kaardi panoraamvaade liikumise ajal. Toob kaasa väikese viivituse.</string>
     <string name="srtm_menu_download_descr">Laadi alla selle piirkonna „Kõrgusjoonte“ kaart.</string>
     <string name="srtm_purchase_header">Osta ja paigalda „Topograafia“ lisamoodul astmestatud vertikaalsete alade kuvamiseks.</string>
     <string name="quick_action_showhide_osmbugs_descr">Nupp, mis lülitab OSM märkmete kaardil kuvamise sisse või välja.</string>
@@ -3877,7 +3866,7 @@
     <string name="show_start_dialog">Kuva algdialoog</string>
     <string name="purchases_feature_desc_terrain">Maastiku kõrgusjooned, tumedate toonidega täielik mäe- ja nõlvakaart, millel on värvid tippude ja madalike eristamiseks.</string>
     <string name="purchases_feature_desc_wikivoyage">Sirvi Wikivoyage saiti ilma võrguühenduseta. Artiklid on jaotatud riikide ja piirkondade kaupa ning saadaval kõigis keeltes.</string>
-    <string name="purchases_feature_desc_wikipedia">Sirvi Vikipeediat võrguühenduseta. Artiklid on jaotatud riikide ja piirkondade kaupa ning saadaval kõigis keeltes.</string>
+    <string name="purchases_feature_desc_wikipedia">Tagab asukohaga seotud Vikipeedia andmed vallasrežiimis ning võimaldab sul mugavalt uurida lisateavet antud objekti ja tema lähiümbruse kohta. Ära unusta sind huvitava piirkonna Vikipeedia andmeid alla laadida.</string>
     <string name="purchases_feature_desc_combined_wiki">Tutvu Vikipeedia artiklitega liikvel olles, ilma internetiühenduseta. Võrguühenduseta andmed on jaotatud riikide kaupa ja saadaval kõigis keeltes.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Hangi juurdepääs regulaarsetele igakuistele võrguühenduseta kaartide uuendustele.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Hangi juurdepääs sagedasematele kaardiuuendustele. Tundide, päevade või nädalate kaupa uuendused. Uuendused laaditakse alla järk-järgult, ainult muutunud piirkonna osas.</string>
@@ -4658,4 +4647,52 @@
     <string name="map_settings_weather_cloud">Pilved</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="show_minor_turns">Liikumisel otse, kuva väikestel ristmikel</string>
+    <string name="obd_nothing_found_text">Skännereid ei leidunud</string>
+    <string name="obd_support">ODB tugi</string>
+    <string name="obd_fuel_type">Kütuse tüüp</string>
+    <string name="obd_fuel_type_propane">Propaan</string>
+    <string name="obd_battery_voltage">Aku pinge</string>
+    <string name="obd_plugin_name">Sõiduki andmed</string>
+    <string name="obd_widget_vehicle_speed">Sõiduki kiirus</string>
+    <string name="display_distance_to_first_intermediate_summary">Näitab aega ja vahemaad kuni esimese peatuseni. Kui lülitad välja, siis kuvatakse aega ja vahemaad kuni lõppsihtkohani.</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Näita ronimismarsruute</string>
+    <string name="default_buttons_opacity_original_description">Iga nupp säilitab oma tausta läbipaistmatuse.</string>
+    <string name="vehicle_metrics_recording_description">Vali GPX-faili salvestatavad parameetrid.</string>
+    <string name="av_audio_sample_rate">Heli diskreetimissagedus</string>
+    <string name="av_audio_sample_rate_descr">Vali heli diskreetimissagedus.</string>
+    <string name="vehicle_metrics_obd_ii">Mootori tööandmed (OBD-II)</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Jälgi mootori olulisi tööandmeid OBD-II protokolli abil - sealhulgas kiirust, mootori pöördeid, kütusetarbimist ja muudki.</string>
+    <string name="obd_vin">VIN-kood</string>
+    <string name="obd_vin_desc">VIN-kood ODB kaudu</string>
+    <string name="weather_wind_kilimeters_per_hour">Kilomeetrit tunnis</string>
+    <string name="default_buttons_corners_original_description">Iga nupp säilitab oma nurgaraadiuse.</string>
+    <string name="obd_air_intake_temp">Välisõhu temperatuur</string>
+    <string name="obd_fuel_type_lpg">LPG</string>
+    <string name="obd_fuel_type_electric">Elekter</string>
+    <string name="obd_engine_runtime_desc">Näitab kui kaua mootor on käivitamisest alates töötanud.</string>
+    <string name="obd_engine_runtime">Mootori tööaeg</string>
+    <string name="shared_string_interpolation">Interpoleerimine</string>
+    <string name="location_interpolation_percent">Asukoha interpoleerimise protsent</string>
+    <string name="connect_new_scanner">Ühenda uus skänner</string>
+    <string name="shared_string_hour">Tund</string>
+    <string name="ltr_or_rtl_combine_via_per">%1$s / %2$s</string>
+    <string name="shared_string_volume">Maht</string>
+    <string name="calculating_indication_message">Arvutame…</string>
+    <string name="calculate_size">Arvuta suurus/maht</string>
+    <string name="default_buttons_size_original_description">Iga nupp säilitab oma suuruse.</string>
+    <string name="selected_delayed_profile">Valitud profiil „%s“</string>
+    <string name="obd_fuel_type_not_provided">Kütuse tüüp on määramata</string>
+    <string name="obd_fuel_type_gasoline">Bensiin</string>
+    <string name="obd_fuel_type_methanol">Metanool</string>
+    <string name="obd_fuel_type_ethanol">Etanool</string>
+    <string name="obd_fuel_type_diesel">Diisel</string>
+    <string name="obd_fuel_type_cng">CNG</string>
+    <string name="obd_fuel_left_liters">Kütust alles (liitrites)</string>
+    <string name="obd_fuel_consumption_rate">Kütusetarbimine</string>
+    <string name="obd_engine_coolant_temp">Jahutusvedeliku temperatuur</string>
+    <string name="obd_widget_engine_speed">Mootori kiirus</string>
+    <string name="display_distance_to_first_intermediate">Näita teekonna üksikasju kuni järgmise peatuseni</string>
+    <string name="preview_next_turn">Näita järgmise pöörde eelvaadet</string>
+    <string name="obd_ambient_air_temp">Reisijatesalongi õhutemperatuur</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Ronimismarsruudid</string>
 </resources>

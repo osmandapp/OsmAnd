@@ -4671,7 +4671,7 @@
     <string name="shared_string_purchased_on">Придбано</string>
     <string name="shared_string_expires">Спливає</string>
     <string name="choose_what_to_sync">Виберіть, що синхронізувати</string>
-    <string name="cloud_sync_progress">Синхронізація…%1$s</string>
+    <string name="cloud_sync_progress">Синхронізація… %1$s</string>
     <string name="checking_progress">Перевірка…</string>
     <string name="shared_string_modified">Змінено</string>
     <string name="shared_string_unsynced">Не синхронізовано</string>

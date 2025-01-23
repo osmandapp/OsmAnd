@@ -16,6 +16,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.util.Algorithms;
+import net.osmand.util.ArabicNormalizer;
 import net.osmand.util.LocationParser;
 import net.osmand.util.MapUtils;
 
