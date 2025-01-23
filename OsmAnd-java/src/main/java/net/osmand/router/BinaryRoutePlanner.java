@@ -615,7 +615,9 @@ public class BinaryRoutePlanner {
 					if (tp == MapRenderingTypes.RESTRICTION_NO_LEFT_TURN
 							|| tp == MapRenderingTypes.RESTRICTION_NO_RIGHT_TURN
 							|| tp == MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON
-							|| tp == MapRenderingTypes.RESTRICTION_NO_U_TURN) {
+							|| tp == MapRenderingTypes.RESTRICTION_NO_U_TURN
+							|| tp == MapRenderingTypes.RESTRICTION_NO_EXIT 
+							|| tp == MapRenderingTypes.RESTRICTION_NO_ENTRY) {
 						return false;
 					}
 					break;
@@ -782,7 +784,8 @@ public class BinaryRoutePlanner {
 			} else if (type == -1 && exclusiveRestriction) {
 				// next = next.next; continue;
 			} else if (type == MapRenderingTypes.RESTRICTION_NO_LEFT_TURN || type == MapRenderingTypes.RESTRICTION_NO_RIGHT_TURN
-					|| type == MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON || type == MapRenderingTypes.RESTRICTION_NO_U_TURN) {
+					|| type == MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON || type == MapRenderingTypes.RESTRICTION_NO_U_TURN
+					|| type == MapRenderingTypes.RESTRICTION_NO_EXIT || type == MapRenderingTypes.RESTRICTION_NO_ENTRY) {
 				// next = next.next; continue;
 				if (via) {
 					ctx.segmentsToVisitPrescripted.remove(next);

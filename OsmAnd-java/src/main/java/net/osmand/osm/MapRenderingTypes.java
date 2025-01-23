@@ -37,6 +37,8 @@ public abstract class MapRenderingTypes {
 	public final static byte RESTRICTION_ONLY_RIGHT_TURN = 5;
 	public final static byte RESTRICTION_ONLY_LEFT_TURN = 6;
 	public final static byte RESTRICTION_ONLY_STRAIGHT_ON = 7;
+	public final static byte RESTRICTION_NO_EXIT = 8;
+	public final static byte RESTRICTION_NO_ENTRY = 9;
 	
 	private static char TAG_DELIMETER = '/'; //$NON-NLS-1$
 	
@@ -804,7 +806,7 @@ public abstract class MapRenderingTypes {
 		case RESTRICTION_ONLY_STRAIGHT_ON:
 			return "ONLY_STRAIGHT_ON".toLowerCase();
 		}
-		return "unkonwn";
+		return "unknown";
 
 	}
 
