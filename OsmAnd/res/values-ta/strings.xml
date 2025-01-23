@@ -248,7 +248,7 @@
     <string name="shared_string_add_to_favorites">பிடித்தவைகளில் சேரு</string>
     <string name="shared_string_my_location">என் நிலை</string>
     <string name="shared_string_my_places">என் இடங்கள்</string>
-    <string name="shared_string_my_favorites">பிடித்தவைகள்</string>
+    <string name="shared_string_my_favorites">பிடித்தவை</string>
     <string name="shared_string_tracks">தடங்கள்</string>
     <string name="shared_string_currently_recording_track">தற்பொழுது பதிவாகும் தடம்</string>
     <string name="shared_string_audio">ஒழி</string>
@@ -292,7 +292,7 @@
     <string name="delete_search_history">தேடல் வரலாற்றை நீக்கு</string>
     <string name="download_images">புகைப்படம் பதிவிறக்க</string>
     <string name="download_maps_travel">பயண வழிகாட்டிகள்</string>
-    <string name="shared_string_wikivoyage">விக்கிவோயாஜ்</string>
+    <string name="shared_string_wikivoyage">விக்கிவோயேச்</string>
     <string name="article_removed">கட்டுரை அகற்றப்பட்டது</string>
     <string name="wikivoyage_search_hint">தேடல்: நாடு, நகரம், மாகாணங்கள்</string>
     <string name="shared_string_read">படிக்க</string>
@@ -1343,4 +1343,14 @@
     <string name="avoid_pt_types">போக்குவரத்து வகையை தவிர்க்க…</string>
     <string name="turn_screen_on_router">திருப்பத்தில் எழுந்திரு</string>
     <string name="shared_string_is_saved"/>
+    <string name="app_name_osmand">ஒச்மண்ட்</string>
+    <string name="help_article_navigation_routing_brouter_name">மேய்ச்சல்</string>
+    <string name="shared_string_gpx_track">மின்தடம்</string>
+    <string name="index_name_openmaps">OpenMaps EU</string>
+    <string name="routing_settings">வானோடல்</string>
+    <string name="quick_action_map_overlay">மேலடுக்கு</string>
+    <string name="shared_string_changes">மாற்றங்கள்</string>
+    <string name="shared_string_transparency">வெளிப்படைத்தன்மை</string>
+    <string name="help_article_navigation_car_play_name">கார்ப்ளே</string>
+    <string name="quick_action_map_underlay">அண்டர்லே</string>
 </resources>
