@@ -776,7 +776,11 @@ public class NetworkRouteSelector {
 				return transliteration ? TransliterationHelper.transliterate(name) : name;
 			}
 			name = getValue("ref");
-			return !name.isEmpty() ? name : getRelationID();
+			if (!name.isEmpty()) {
+				return name;
+			}
+			name = getRelationID();
+			return !name.isEmpty() ? name : this.type.getName();
 		}
 
 		public String getRelationID() {
