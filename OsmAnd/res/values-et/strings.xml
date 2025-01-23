@@ -4853,4 +4853,5 @@
     <string name="rendering_attr_depthContourWidth_description">Sügavuste kontuurjoonte laius</string>
     <string name="routing_attr_avoid_fords_description">Väldi fjorde</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Märkuste sildid</string>
+    <string name="rendering_attr_weatherCloudContours_name">Pilvede samajooned</string>
 </resources>
