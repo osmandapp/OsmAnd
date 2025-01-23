@@ -25,7 +25,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.OnItemMoveCallback;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.SimpleWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
@@ -350,7 +349,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		viewHolder.addButton.setOnClickListener(showInfoListener);
 
 		viewHolder.icon.setImageResource(widgetGroup.getIconId(nightMode));
-		viewHolder.title.setText(AvailableItemViewHolder.getGroupTitle(widgetGroup, app, nightMode));
+		viewHolder.title.setText(AvailableItemViewHolder.getGroupTitle(app, widgetGroup, panel, nightMode));
 
 		viewHolder.infoButton.setOnClickListener(showInfoListener);
 		viewHolder.itemView.setOnClickListener(v -> viewHolder.infoButton.callOnClick());
