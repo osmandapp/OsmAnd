@@ -4859,4 +4859,5 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Näita märkuste silte</string>
     <string name="rendering_attr_weatherPressureContours_name">Õhurõhu samajooned</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikoonid madala suumitaseme puhul</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Vahepealne</string>
 </resources>
