@@ -46,7 +46,7 @@ public class ClickableWayHelper {
     public static final Set<String> CLICKABLE_TAGS =
             Set.of("piste:type", "piste:difficulty", "mtb:scale", "dirtbike:scale");
     public static final Map<String, String> FORBIDDEN_TAGS =
-            Map.of("area", "yes", "access", "no");
+            Map.of("area", "yes", "access", "no", "aerialway", "*");
     public static final Map<String, String> GPX_COLORS = Map.ofEntries(
             Map.entry("0", "brown"),
             Map.entry("1", "green"),
@@ -140,6 +140,7 @@ public class ClickableWayHelper {
         }
 
         gpxFile.getExtensionsToWrite().putAll(tags);
+        gpxFile.getExtensionsToWrite().put("way_id", Long.toString(osmId));
 
         TrkSegment trkSegment = new TrkSegment();
         for (int i = 0; i < Math.min(xPoints.size(), yPoints.size()); i++) {
@@ -186,7 +187,9 @@ public class ClickableWayHelper {
 
     private boolean isClickableWayTags(@NonNull Map<String, String> tags) {
         for (Map.Entry<String, String> forbidden : FORBIDDEN_TAGS.entrySet()) {
-            if (forbidden.getValue().equals(tags.get(forbidden.getKey()))) {
+            if (forbidden.getValue().equals(tags.get(forbidden.getKey()))
+                    || "*".equals(forbidden.getValue()) && tags.containsKey(forbidden.getKey())
+            ) {
                 return false;
             }
         }
