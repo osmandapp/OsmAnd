@@ -4843,4 +4843,5 @@
     <string name="reset_all_settings_desc">Kas muudame kõik seadistused vaikimisi seadistusteks?</string>
     <string name="no_widgets_here_yet">Siin pole veel vidinaid</string>
     <string name="no_widgets_descr">Lisa saadavalolevate vidinate hulgast mõni vajalik vidin.</string>
+    <string name="click_on_widget">Klõpsi vidinal</string>
 </resources>
