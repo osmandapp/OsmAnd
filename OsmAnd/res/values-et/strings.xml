@@ -4825,4 +4825,5 @@
     <string name="daynight_mode_sunrise_sunset_summary">Kaart vahetab päeva- ja öövaadet vastavalt kohalikele päikesetõusu ja -loojangu aegadele.</string>
     <string name="daynight_mode_night_summary">Kaart on alati öövaates (tumedas kujunduses), mis sobib kasutamiseks öösel ja vähese valgusega kohtades.</string>
     <string name="daynight_mode_day_summary">Kaart on alati päevavaates (heledas kujunduses), mis sobib kasutamiseks päevastes tingimustes.</string>
+    <string name="delete_account">Kustuta kasutajakonto</string>
 </resources>
