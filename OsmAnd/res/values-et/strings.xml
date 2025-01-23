@@ -4821,4 +4821,5 @@
     <string name="help_article_purchases_android_name">Ostud Androidis</string>
     <string name="rendering_attr_showDirtbikeTrails_description">Näita maastikurattaradasid</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Maastikurattarajad</string>
+    <string name="daynight_mode_app_theme_summary">Kaardi kujundus arvestab rakenduse üldise kujundusega - päevavaade heleda kujunduse puhul ja öövaade tumeda kujunduse puhul</string>
 </resources>
