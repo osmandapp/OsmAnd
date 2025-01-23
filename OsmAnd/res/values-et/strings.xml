@@ -4808,4 +4808,5 @@
     <string name="show_map_symbols">Näita kaardisümboleid</string>
     <string name="show_map_symbols_desc">Teksti, liiklusmärgid ja muud.</string>
     <string name="reset_average_speed">Nulli keskmine kiirus</string>
+    <string name="most_viewed">Enimvaadatud</string>
 </resources>
