@@ -32,7 +32,7 @@
     <string name="proxy_port">Port</string>
     <string name="proxy_server">Server</string>
     <string name="shared_string_connection">Ühendus</string>
-    <string name="shared_string_enable">Luba</string>
+    <string name="shared_string_enable">Võta kasutusele</string>
     <string name="proxy_type">Puhverserveri liik</string>
     <string name="proxy_connected">Ühendatud</string>
     <string name="proxy_disconnected">Ühendus puudub</string>
