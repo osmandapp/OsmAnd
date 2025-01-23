@@ -4819,4 +4819,5 @@
     <string name="help_article_purchases_ios_name">Ostud iOSis</string>
     <string name="help_article_purchases_giveaway_name">Kingitused</string>
     <string name="help_article_purchases_android_name">Ostud Androidis</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">Näita maastikurattaradasid</string>
 </resources>
