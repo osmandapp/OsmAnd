@@ -4823,4 +4823,5 @@
     <string name="rendering_attr_showDirtbikeTrails_name">Maastikurattarajad</string>
     <string name="daynight_mode_app_theme_summary">Kaardi kujundus arvestab rakenduse üldise kujundusega - päevavaade heleda kujunduse puhul ja öövaade tumeda kujunduse puhul</string>
     <string name="daynight_mode_sunrise_sunset_summary">Kaart vahetab päeva- ja öövaadet vastavalt kohalikele päikesetõusu ja -loojangu aegadele.</string>
+    <string name="daynight_mode_night_summary">Kaart on alati öövaates (tumedas kujunduses), mis sobib kasutamiseks öösel ja vähese valgusega kohtades.</string>
 </resources>
