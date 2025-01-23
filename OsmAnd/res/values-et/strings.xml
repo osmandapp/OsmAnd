@@ -38,7 +38,7 @@
     <string name="shared_string_delete_all">Kustuta kõik</string>
     <string name="shared_string_share">Jaga</string>
     <string name="shared_string_control_start">Start</string>
-    <string name="shared_string_control_stop">Peata</string>
+    <string name="shared_string_control_stop">Lõpeta</string>
     <string name="shared_string_import">Impordi</string>
     <string name="shared_string_export">Ekspordi</string>
     <string name="shared_string_more">Veel…</string>
@@ -2926,7 +2926,7 @@
     <string name="show_free_version_banner_description">Kuva tasuta versiooni reklaam isegi tasulises versioonis.</string>
     <string name="downloading_number_of_files">Faili %1$d allalaadimine …</string>
     <string name="buy">Osta</string>
-    <string name="activate_seamarks_plugin">Palun aktiveeri \'Merekaardi vaade\' lisa</string>
+    <string name="activate_seamarks_plugin">Palun aktiveeri \'Merekaardi vaade\' lisamoodul</string>
     <string name="activate_srtm_plugin">Palun aktiveeri \'Topograafia\' lisamoodul</string>
     <string name="later">Hiljem</string>
     <string name="get_full_version">Täisversioon</string>
@@ -4861,4 +4861,6 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikoonid madala suumitaseme puhul</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">Vahepealne</string>
     <string name="routing_attr_freeride_policy_allow_name">Luba</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Suurenda veeteede tunnelite nähtavust</string>
+    <string name="ant_plus_nothing_found_description">Palun kontrolli, et:\n– Bluetooth on sisse lülitatud\n– andur on töös\n– see nutiseade on anduri lähedal</string>
 </resources>
