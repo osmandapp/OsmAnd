@@ -39,6 +39,8 @@ public class SearchPhrase {
 	private String fullTextSearchPhrase = "";
 	private String unknownSearchPhrase = "";
 	private List<String> knownCityNames;
+	private List<LatLon> knownCityLocations;
+	private String knownCitySearchWord;
 
 	// words to be used for words span
 	private List<SearchWord> words = new ArrayList<>();
@@ -143,22 +145,48 @@ public class SearchPhrase {
 		};
 	}
 
-    public boolean containsCityName(String cityName) {
+	public boolean containsCityName(String cityName) {
 		if (knownCityNames == null) {
 			return false;
 		}
-        return knownCityNames.contains(cityName);
-    }
+		return knownCityNames.contains(cityName);
+	}
 
-    public void addCityName(String cityName) {
+	public void addCityName(String cityName) {
 		if (knownCityNames == null) {
 			knownCityNames = new ArrayList<>();
 		}
-        knownCityNames.add(cityName);
-    }
+		knownCityNames.add(cityName);
+	}
 
 	public boolean hasCityName() {
 		return knownCityNames != null;
+	}
+
+	public LatLon getCityLocation() {
+		if (knownCityLocations != null && !knownCityLocations.isEmpty()) {
+			return knownCityLocations.get(0);
+		}
+		return null;
+	}
+
+	public String getCitySearchWord() {
+		return knownCitySearchWord;
+	}
+
+	public void addKnownCity(SearchResult res, String searchWord) {
+		if (res.objectType != ObjectType.CITY) {
+			return;
+		}
+		if (knownCityNames == null) {
+			knownCityNames = new ArrayList<>();
+		}
+		if (knownCityLocations == null) {
+			knownCityLocations = new ArrayList<>();
+		}
+		knownCityNames.add(res.localeName);
+		knownCityLocations.add(res.location);
+		knownCitySearchWord = searchWord;
 	}
 
 	public enum SearchPhraseDataType {

@@ -418,7 +418,7 @@ public class SearchCoreFactory {
 		
 		private void searchPoiInCity(SearchPhrase nphrase, SearchResult res, SearchResultMatcher resultMatcher) throws IOException {
 			if (nphrase != null && res.objectType == ObjectType.CITY) {
-				res.requiredSearchPhrase.addCityName(res.localeName);//save city for other API-s
+				int cntBefore = resultMatcher.getCount();
 				SearchAmenityByNameAPI poiApi = new SearchCoreFactory.SearchAmenityByNameAPI();
 				SearchPhrase newPhrase = nphrase.generateNewPhrase(nphrase, res.file);
 				LatLon oldLocation = nphrase.getSettings().getOriginalLocation();
@@ -427,7 +427,10 @@ public class SearchCoreFactory {
 
 				poiApi.search(newPhrase, resultMatcher);
 
-				res.requiredSearchPhrase.setOriginalLocation(oldLocation);//return old location
+				res.requiredSearchPhrase.setOriginalLocation(oldLocation);
+				if (resultMatcher.getCount() > cntBefore) {
+					res.requiredSearchPhrase.addKnownCity(res, nphrase.getUnknownWordToSearch());
+				}
 			}
 		}
 
