@@ -4845,4 +4845,5 @@
     <string name="no_widgets_descr">Lisa saadavalolevate vidinate hulgast mõni vajalik vidin.</string>
     <string name="click_on_widget">Klõpsi vidinal</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Peida sõjaväealad</string>
+    <string name="rendering_attr_weatherTempContours_name">Temperatuuri samajooned</string>
 </resources>
