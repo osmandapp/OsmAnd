@@ -552,7 +552,7 @@
     <string name="shared_string_delete">அழி</string>
     <string name="shared_string_delete_all">அனைத்தையும் நீக்கு</string>
     <string name="shared_string_share">பகிர்</string>
-    <string name="shared_string_apply">விண்ணப்பிக்கவும்</string>
+    <string name="shared_string_apply">இடு</string>
     <string name="rendering_attr_trolleybusRoutes_name">ட்ரோலிபஸ் பாதை</string>
     <string name="rendering_attr_busRoutes_name">பேருந்து வழித்தடங்கள்</string>
     <string name="rendering_category_hide">மறை</string>
