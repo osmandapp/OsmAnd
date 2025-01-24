@@ -257,4 +257,5 @@
     <string name="min_km">நிமிடம்/கி.மீ.</string>
     <string name="nm_h">என்.எம்.ஐ/எச்</string>
     <string name="m_s">எம்/கள்</string>
+    <string name="km_h">கிமீ/மணி</string>
 </resources>
