@@ -1,2 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="location_source_summary">இயல்பாக, கூகிள் பிளேயிலிருந்து நிறுவப்பட்ட OSMAND இருப்பிடத்தை தீர்மானிக்க Google Play சேவைகளைப் பயன்படுத்துகிறது.\n\n நீங்கள் தவறான இருப்பிடத் தகவலைப் பெற்றால் அல்லது Google Play சேவைகள் இல்லாமல் சாதனத்தைப் பயன்படுத்தினால், ஆண்ட்ராய்டு பநிஇ க்கு மாற முயற்சிக்கவும்</string>
+    <string name="location_source">இருப்பிட சான்று</string>
+</resources>
