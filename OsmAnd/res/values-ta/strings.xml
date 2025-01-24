@@ -1069,7 +1069,7 @@
     <string name="unit_of_length_descr">என்ன தூரம் அளவிடப்படுகிறது என்பதை மாற்றவும்.</string>
     <string name="unit_of_length">நீளத்தின் அலகுகள்</string>
     <string name="si_mi_feet">மைல்கள்/அடி</string>
-    <string name="si_mi_yard">மைல்கள் / கெஜம்</string>
+    <string name="si_mi_yard">மைல்கள்/கெசம்</string>
     <string name="si_km_m">கிலோமீட்டர்கள் / மீட்டர்</string>
     <string name="yard">yd</string>
     <string name="foot">அடி</string>
