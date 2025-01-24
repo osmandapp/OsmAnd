@@ -203,4 +203,22 @@
     <string name="minutes_format">%1$d மீ</string>
     <string name="shared_string_install">நிறுவவும்</string>
     <string name="shared_string_share">பங்கு</string>
+    <string name="my_location_search_hint">தேடல்: குழு அல்லது தொடர்பு</string>
+    <string name="shared_string_back">பின்</string>
+    <string name="visible_time_for_all">அனைவருக்கும் தெரியும் நேரம்</string>
+    <string name="set_time_description">நீங்கள் தேர்ந்தெடுத்த தொடர்புகள் மற்றும் குழுக்கள் உங்கள் இருப்பிடத்தை உண்மையான நேரத்தில் பார்க்கும் நேரத்தை அமைக்கவும்.</string>
+    <string name="set_time">நேரத்தை அமைக்கவும்</string>
+    <string name="location_sharing_description">உங்கள் இருப்பிடத்தைப் பகிர விரும்பும் தொடர்புகள் மற்றும் குழுக்களைத் தேர்ந்தெடுக்கவும்.</string>
+    <string name="show_on_map">வரைபடத்தில் காட்டு</string>
+    <string name="start_location_sharing">இருப்பிடத்தைப் பகிரவும்</string>
+    <string name="app_name">OSMAND நிகழ்நிலை சி.பி.எச் டிராக்கர்</string>
+    <string name="phone_number_title">தொலைபேசி எண்</string>
+    <string name="phone_number_descr">பன்னாட்டு வடிவத்தில் தொலைபேசி எண்</string>
+    <string name="shared_string_password">கடவுச்சொல்</string>
+    <string name="enter_code">குறியீட்டை உள்ளிடவும்</string>
+    <string name="authentication_code">அங்கீகார குறியீடு</string>
+    <string name="enter_password">கடவுச்சொல்லை உள்ளிடவும்</string>
+    <string name="password_descr">தந்தி கடவுச்சொல்</string>
+    <string name="authentication_code_descr">உங்கள் கணக்கில் உள்நுழைய ஆச்மாண்டிற்கான குறியீட்டை டெலிகிராம் உங்களுக்கு அனுப்பியுள்ளது.</string>
+    <string name="shared_string_login">புகுபதிகை</string>
 </resources>
