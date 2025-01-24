@@ -335,7 +335,7 @@
     <string name="routing_settings">Navigare (funcție de profil)</string>
     <string name="routing_settings_descr">Precizați opțiunile de navigare.</string>
     <string name="global_settings">Setări Globale</string>
-    <string name="general_settings">General</string>
+    <string name="general_settings">Generală</string>
     <string name="general_settings_descr">Configurați afișajul și setările comune pentru aplicație.</string>
     <string name="global_app_settings">Setări globale aplicație</string>
     <string name="user_name">Numele de utilizator OSM</string>
@@ -6068,4 +6068,5 @@
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="import_export">Import/export</string>
     <string name="popular_places_nearby">Locuri populare în apropiere</string>
+    <string name="recently_visited">Vizitat recent</string>
 </resources>
