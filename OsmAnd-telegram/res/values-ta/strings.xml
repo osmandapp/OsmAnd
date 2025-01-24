@@ -31,4 +31,9 @@
     <string name="saved_messages">சேமித்த செய்திகள்</string>
     <string name="shared_string_end">முடிவு</string>
     <string name="shared_string_start">தொடங்கு</string>
+    <string name="shared_string_apply">இடு</string>
+    <string name="set_time_timeline_descr">காண்பிக்க நேரம் தேர்ந்தெடுக்கவும்</string>
+    <string name="start_end_date">தொடக்க - இறுதி தேதி</string>
+    <string name="timeline_no_data_descr">தேர்ந்தெடுக்கப்பட்ட நாளுக்கான தரவை நாங்கள் சேகரிக்கவில்லை</string>
+    <string name="timeline_no_data">தரவு இல்லை</string>
 </resources>
