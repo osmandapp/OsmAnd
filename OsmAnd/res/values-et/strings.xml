@@ -4897,4 +4897,5 @@
     <string name="coordinates_widget_desc">Näitab praeguse asukoha geograafilisi koordinaate.</string>
     <string name="air_pressure_widget_desc">Näitab õhurõhku kaardi praeguses keskkohas.</string>
     <string name="clouds_widget_desc">Näitab pilvekatet kaardi praeguses keskkohas.</string>
+    <string name="wind_widget_desc">Näitab tuule kiirust kaardi praeguses keskkohas.</string>
 </resources>
