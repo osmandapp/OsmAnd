@@ -4459,7 +4459,7 @@
     <string name="rendering_attr_showWaterwayTunnels_description">Mărește vizibilitatea pentru tunelurile navigabile</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etichete note</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etichete Fixme</string>
-    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="shared_string_open_street_map">Hartă deschisă OpenStreetMap</string>
     <string name="rendering_attr_seabedDetail_description">Informații text suplimentare privind calificarea suprafeței fundului mării, tipurile de suprafețe combinate, categoria și taxonul de buruieni sau ierburi marine</string>
     <string name="rendering_value_category_name">Categorie</string>
     <string name="rendering_value_all_name">Toate</string>
@@ -5441,7 +5441,7 @@
     <string name="telegram_chats">Chaturi Telegram</string>
     <string name="help_article_widgets_nav_widgets_name">Widgeturi navigaționale</string>
     <string name="shared_string_setup">Configurează</string>
-    <string name="shared_string_cache">Cache</string>
+    <string name="shared_string_cache">Cache-ul</string>
     <string name="widget_available_ram_desc">Afișează memoria disponibilă alocată pentru OsmAnd.</string>
     <string name="sort_size_descending">Mărimea mare întâi</string>
     <string name="delete_map">Ștergere hartă</string>
