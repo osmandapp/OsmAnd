@@ -4909,4 +4909,5 @@
     <string name="map_widget_trip_recording_distance">Vahemaa</string>
     <string name="map_widget_trip_recording_downhill">Allamäge</string>
     <string name="map_widget_trip_recording_uphill">Ülesmäge</string>
+    <string name="map_widget_camera_distance">Kaamera kõrgus</string>
 </resources>
