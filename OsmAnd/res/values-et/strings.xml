@@ -4900,4 +4900,5 @@
     <string name="wind_widget_desc">Näitab tuule kiirust kaardi praeguses keskkohas.</string>
     <string name="precipitation_widget_desc">Näitab sademeid kaardi praeguses keskkohas.</string>
     <string name="temperature_widget_desc">Näitab õhutemperatuuri kaardi praeguses keskkohas.</string>
+    <string name="map_widget_group_sunrise_sunset">Päikesetõus ja -loojang</string>
 </resources>
