@@ -233,4 +233,18 @@
     <string name="no_location_permission">இருப்பிட தரவு அணுகலுக்கான பயன்பாட்டிற்கு இசைவு இல்லை.</string>
     <string name="gps_not_available">கணினி அமைப்புகளில் \"இருப்பிடம்\" ஐ இயக்கவும்</string>
     <string name="location_service_no_gps_available">உங்கள் இருப்பிடத்தைப் பகிர்ந்து கொள்ள இருப்பிட வழங்குநர்களில் ஒன்றைத் தேர்ந்தெடுக்கவும்.</string>
+    <string name="osmand_logo">OSMand விரைவில்</string>
+    <string name="install_osmand">Osmand ஐ நிறுவவும்</string>
+    <string name="osmand_service">பின்னணி முறை</string>
+    <string name="osmand_service_descr">ஓச்மண்ட் டிராக்கர் திரையில் முடக்கப்பட்ட பின்னணியில் இயங்குகிறது.</string>
+    <string name="shared_string_distance">தூரம்</string>
+    <string name="share_location">இருப்பிடத்தைப் பகிரவும்</string>
+    <string name="sharing_location">பகிர்வு இடம்</string>
+    <string name="process_service">ஒச்மண்ட் டிராக்கர் பணி</string>
+    <string name="install_osmand_dialog_message">நீங்கள் முதலில் ஒச்மாண்டின் இலவச அல்லது கட்டண பதிப்பை நிறுவ வேண்டும்</string>
+    <string name="show_users_on_map">வரைபடத்தில் பயனர்களைக் காட்டு</string>
+    <string name="active_chats">செயலில் அரட்டைகள்</string>
+    <string name="shared_string_authorization">ஏற்பு</string>
+    <string name="shared_string_authorization_descr">உங்கள் தந்தி தொலைபேசி எண்ணை பன்னாட்டு வடிவத்தில் உள்ளிடவும்</string>
+    <string name="shared_string_welcome">வரவேற்கிறோம்</string>
 </resources>
