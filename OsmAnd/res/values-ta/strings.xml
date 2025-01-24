@@ -362,7 +362,7 @@
     <string name="get_for">%1$s ஐப் பெறுக</string>
     <string name="osm_live_banner_desc">வரம்பற்ற வரைபட பதிவிறக்கங்களைப் பெறுக, மேலும் ஒரு மாதத்திற்கு ஒருமுறை விட மேம்படுத்துங்கள்: வாராந்திர, தினசரி அல்லது மணிநேரம்.</string>
     <string name="osmand_plus_banner_desc">வரம்பற்ற வரைபட பதிவிறக்கங்கள், புதுப்பிப்புகள் மற்றும் விக்கிபீடியா சொருகி.</string>
-    <string name="si_mi_meters">மைல்கள் / மீட்டர்</string>
+    <string name="si_mi_meters">மைல்கள்/மீட்டர்</string>
     <string name="skip_map_downloading">வரைபடங்களைப் பதிவிறக்குக</string>
     <string name="skip_map_downloading_desc">உங்களிடம் ஆஃப்லைன் வரைபடம் நிறுவப்படவில்லை. பட்டியலில் இருந்து ஒரு வரைபடத்தை தேர்வு செய்யலாம் அல்லது \'மெனு -%1$s\' வழியாக பின்னர் வரைபடங்களைப் பதிவிறக்குங்கள்.
 \n</string>
