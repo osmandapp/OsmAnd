@@ -4885,4 +4885,5 @@
     <string name="help_article_troubleshooting_maps_data_name">Kaardid ja andmed</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Raja salvestamine</string>
     <string name="help_article_widgets_name">Kaardi vidinad</string>
+    <string name="help_article_widgets_info_widgets_name">Infovidinad</string>
 </resources>
