@@ -258,4 +258,5 @@
     <string name="nm_h">என்.எம்.ஐ/எச்</string>
     <string name="m_s">எம்/கள்</string>
     <string name="km_h">கிமீ/மணி</string>
+    <string name="mile_per_hour">எம்.பி.எச்</string>
 </resources>
