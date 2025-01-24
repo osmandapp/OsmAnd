@@ -5689,4 +5689,6 @@
     <string name="rendering_attr_showClimbingRoutes_name">Percorsi arrampicata</string>
     <string name="display_distance_to_first_intermediate_summary">Mostra il tempo e la distanza per la prossima fermata. Disattiva per mostrare sempre i dettagli per la destinazione.</string>
     <string name="display_distance_to_first_intermediate">Mostra i dettagli del percorso per la prossima fermata</string>
+    <string name="recently_visited">Visti di recente</string>
+    <string name="popular_places_nearby">Luoghi popolari nelle vicinanze</string>
 </resources>
