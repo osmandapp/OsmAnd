@@ -166,7 +166,7 @@ object GpxDbHelper : GpxReaderAdapter {
 	): Boolean {
 		item.setParameter(parameter, value)
 		val res = database.updateDataItemParameter(item, parameter, value)
-		if (res && parameter.analysisCalculation) {
+		if (res && parameter.isAnalysisRecalculationNeeded()) {
 			// Reset DATA_VERSION to force recalculation of analysis
 			item.setParameter(GpxParameter.DATA_VERSION, 0)
 			item.increaseAnalysisParametersVersion()

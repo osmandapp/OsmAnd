@@ -56,7 +56,7 @@ abstract class DataItem(val file: KFile) {
 		}
 	}
 
-	fun getAnalysisCalculationParameters() = map.filter { it.key.analysisCalculation }
+	fun getAnalysisCalculationParameters() = map.filter { it.key.isAnalysisRecalculationNeeded() }
 
 	fun getAnalysisParametersVersion() = analysisParametersVersion.get()
 
