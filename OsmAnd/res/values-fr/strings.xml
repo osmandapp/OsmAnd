@@ -5665,4 +5665,6 @@
     <string name="obd_fuel_consumption_rate_sensor_type">Utiliser les unités sélectionnées dans le nom.</string>
     <string name="display_distance_to_first_intermediate_summary">Affiche le temps et la distance jusqu\'au prochain arrêt. Désactiver pour toujours afficher les détails concernant la destination.</string>
     <string name="display_distance_to_first_intermediate">Affiche les détails de l\'itinéraire jusqu\'au prochain arrêt</string>
+    <string name="popular_places_nearby">Lieux populaires proches</string>
+    <string name="recently_visited">Dernières visites</string>
 </resources>
