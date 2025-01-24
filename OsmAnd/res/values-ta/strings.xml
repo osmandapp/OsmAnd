@@ -1228,7 +1228,7 @@
     <string name="oclock">மணிக்கு</string>
     <string name="towards">நோக்கி</string>
     <string name="accuracy">துல்லியம்</string>
-    <string name="altitude">உயரம்</string>
+    <string name="altitude">குத்துயரம்</string>
     <string name="no_info">தகவல் இல்லை</string>
     <string name="direction_style_sidewise">பக்கவாட்டு (8 பிரிவுகளில்)</string>
     <string name="direction_style_clockwise">கடிகார (12 பிரிவுகளில்)</string>
