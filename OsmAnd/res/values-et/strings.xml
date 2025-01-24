@@ -4916,4 +4916,5 @@
     <string name="map_3d_mode_action">3D-vaade</string>
     <string name="compass_always_visible">Alati nähtav</string>
     <string name="compass_always_hidden">Alati peidetud</string>
+    <string name="visible_in_3d_mode">Nähtav 3D-vaates</string>
 </resources>
