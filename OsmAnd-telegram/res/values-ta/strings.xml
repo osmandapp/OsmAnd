@@ -9,4 +9,10 @@
     <string name="send_report">அறிக்கை அனுப்பவும்</string>
     <string name="logcat_buffer_descr">பயன்பாட்டின் விரிவான பதிவுகளை சரிபார்த்து பகிரவும்</string>
     <string name="logcat_buffer">Logcat இடையக</string>
+    <string name="shared_string_export">ஏற்றுமதி</string>
+    <string name="shared_string_error_short">பிழை</string>
+    <string name="last_update_from_telegram_date">டெலிகிராமில் இருந்து கடைசி புதுப்பிப்பு: %1$s</string>
+    <string name="last_response_date">கடைசி பதில்: %1$s</string>
+    <string name="last_update_from_telegram_duration">டெலிகிராமில் இருந்து கடைசி புதுப்பிப்பு: %1$s முன்பு</string>
+    <string name="last_response_duration">கடைசி பதில்: %1$s முன்பு</string>
 </resources>
