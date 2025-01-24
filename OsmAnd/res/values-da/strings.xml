@@ -5699,4 +5699,6 @@
     <string name="rendering_attr_showClimbingRoutes_description">Vis klatreruter</string>
     <string name="display_distance_to_first_intermediate_summary">Viser tid og afstand til næste stop først. Slå fra for altid at vise detaljer for destinationen.</string>
     <string name="display_distance_to_first_intermediate">Vis rutedetaljer for det næste stop</string>
+    <string name="popular_places_nearby">Populære steder i nærheden</string>
+    <string name="recently_visited">Besøgt for nylig</string>
 </resources>
