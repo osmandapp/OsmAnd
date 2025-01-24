@@ -5659,4 +5659,7 @@
     <string name="display_distance_to_first_intermediate">Приказ детаља руте за следеће заустављање</string>
     <string name="popular_places_nearby">Популарна места у близини</string>
     <string name="recently_visited">Недавно посећено</string>
+    <string name="shared_string_length">Дужина</string>
+    <string name="shared_string_avg_altitude">Просечна надморска висина</string>
+    <string name="shared_string_avg_speed">Минимална брзина</string>
 </resources>
