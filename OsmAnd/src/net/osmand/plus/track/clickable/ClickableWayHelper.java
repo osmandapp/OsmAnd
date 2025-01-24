@@ -64,6 +64,7 @@ public class ClickableWayHelper {
             Map.entry("freeride", "yellow")
             // others are default (red)
     );
+    public static boolean SAVE_TAGS_AS_ROUTE_KEY = false;
 
     private final OsmandApplication app;
     private final OsmandMapTileView view;
@@ -128,7 +129,9 @@ public class ClickableWayHelper {
                 RouteActivity activity = helper.findActivityByTag(clickableTag);
                 if (activity != null) {
                     String activityType = activity.getId();
-                    compatibleOsmRouteType = OsmRouteType.getTypeFromTags(new String[]{clickableTag});
+                    if (SAVE_TAGS_AS_ROUTE_KEY) {
+                        compatibleOsmRouteType = OsmRouteType.getTypeFromTags(new String[]{clickableTag});
+                    }
                     gpxFile.getMetadata().getExtensionsToWrite().put(GpxUtilities.ACTIVITY_TYPE, activityType);
                     break;
                 }
