@@ -201,4 +201,5 @@
     <string name="set_visible_time_for_all">அனைவருக்கும் தெரியும் நேரத்தை அமைக்கவும்</string>
     <string name="hours_and_minutes_format">%1$d h %2$d மீ</string>
     <string name="minutes_format">%1$d மீ</string>
+    <string name="shared_string_install">நிறுவவும்</string>
 </resources>
