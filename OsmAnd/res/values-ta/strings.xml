@@ -1362,4 +1362,5 @@
     <string name="duration_ago">%1$s முன்பு</string>
     <string name="units_and_formats">அலகுகள் மற்றும் வடிவங்கள்</string>
     <string name="shared_string_appearance">தோற்றம்</string>
+    <string name="shared_string_update">புதுப்பிப்பு</string>
 </resources>
