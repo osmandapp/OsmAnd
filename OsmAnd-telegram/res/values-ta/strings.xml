@@ -263,4 +263,6 @@
     <string name="si_mph">ஒரு மணி நேரத்திற்கு மைல்கள்</string>
     <string name="si_m_s">நொடிக்கு மீட்டர்</string>
     <string name="si_min_km">ஒரு கிலோமீட்டருக்கு நிமிடங்கள்</string>
+    <string name="si_min_m">ஒரு மைலுக்கு நிமிடங்கள்</string>
+    <string name="si_nm_h">ஒரு மணி நேரத்திற்கு கடல் மைல்கள் (முடிச்சு)</string>
 </resources>
