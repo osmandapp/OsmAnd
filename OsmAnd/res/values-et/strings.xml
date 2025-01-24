@@ -4895,4 +4895,5 @@
     <string name="time_to_go_desc">Aeg minutites või tundides sinu sihtkohta jõudmiseks.</string>
     <string name="arrival_time_widget_desc">Sihtpunkti saabumise aeg.</string>
     <string name="coordinates_widget_desc">Näitab praeguse asukoha geograafilisi koordinaate.</string>
+    <string name="air_pressure_widget_desc">Näitab õhurõhku kaardi praeguses keskkohas.</string>
 </resources>
