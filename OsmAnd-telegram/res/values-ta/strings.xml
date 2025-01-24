@@ -8,4 +8,5 @@
     <string name="send_live_location_error">நேரடி இருப்பிட பிழையை அனுப்பவும்: %1$s</string>
     <string name="send_report">அறிக்கை அனுப்பவும்</string>
     <string name="logcat_buffer_descr">பயன்பாட்டின் விரிவான பதிவுகளை சரிபார்த்து பகிரவும்</string>
+    <string name="logcat_buffer">Logcat இடையக</string>
 </resources>
