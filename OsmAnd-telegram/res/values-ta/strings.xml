@@ -138,4 +138,14 @@
     <string name="not_sent_yet">இன்னும் அனுப்பப்படவில்லை</string>
     <string name="not_found_yet">இன்னும் காணப்படவில்லை</string>
     <string name="re_send_location">இருப்பிடத்தை மீண்டும் வழங்கவும்</string>
+    <string name="shared_string_status">நிலை</string>
+    <string name="no_gps_connection">சி.பி.எச் இணைப்பு இல்லை</string>
+    <string name="no_internet_connection">இணைய இணைப்பு இல்லை</string>
+    <string name="shared_string_disable">முடக்கு</string>
+    <string name="shared_string_save">சேமி</string>
+    <string name="add_device">சாதனத்தைச் சேர்க்கவும்</string>
+    <string name="share_location_as">இருப்பிடத்தைப் பகிரவும்</string>
+    <string name="live_now_description">தொடர்புகள் மற்றும் குழுக்கள் உங்களுக்கு இருப்பிடத்தைப் பகிர்ந்து கொள்கின்றன.</string>
+    <string name="logout_from_osmand_telegram_descr">நீங்கள் நிச்சயமாக ஒச்மண்ட் டிராக்கரில் இருந்து வெளியேற விரும்புகிறீர்களா, எனவே இருப்பிடத்தைப் பகிரவோ அல்லது மற்றவர்களின் இருப்பிடத்தைப் பார்க்கவோ முடியாது?</string>
+    <string name="logout_from_osmand_telegram">ஒச்மண்ட் டிராக்கரில் இருந்து வெளியேறவா?</string>
 </resources>
