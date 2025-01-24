@@ -127,7 +127,7 @@ public abstract class DistanceToPointWidget extends SimpleWidget {
 
 		@Override
 		public LatLon getPointToNavigate() {
-			TargetPoint targetPoint = targetPointsHelper.getFirstIntermediatePoint();
+			TargetPoint targetPoint = targetPointsHelper.getIntermediatePoint(0);
 			return targetPoint == null ? null : targetPoint.point;
 		}
 

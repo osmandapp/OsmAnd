@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/simple_widget_small_height"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <!-- Button with tappable area -->
+    <FrameLayout
+        android:id="@+id/button_tappable_area"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="9dp">
+
+            <include layout="@layout/widget_route_information_button" />
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+    <!-- Primary block -->
+    <LinearLayout
+        android:id="@+id/primary_block"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <net.osmand.plus.widgets.TextViewEx
+                android:id="@+id/primary_value_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="16sp"
+                tools:text="20:33" />
+
+            <net.osmand.plus.widgets.TextViewEx
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:text="•"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
+
+            <net.osmand.plus.widgets.TextViewEx
+                android:id="@+id/secondary_value_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="16sp"
+                tools:text="13 h 27 m" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <net.osmand.plus.widgets.TextViewEx
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
+                android:text="•"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
+
+            <net.osmand.plus.widgets.TextViewEx
+                android:id="@+id/tertiary_value_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="16sp"
+                tools:text="331 km" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

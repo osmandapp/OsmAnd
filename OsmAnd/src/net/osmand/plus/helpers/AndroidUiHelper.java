@@ -137,6 +137,10 @@ public class AndroidUiHelper {
 		}
 	}
 
+	public static void setVisibility(boolean visible, View... views) {
+		setVisibility(visible ? View.VISIBLE : View.GONE, views);
+	}
+
 	public static void setVisibility(int visibility, View... views) {
 		for (View view : views) {
 			if (view != null && view.getVisibility() != visibility) {

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/topDivider"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="?attr/dashboard_divider"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:minHeight="?android:attr/listPreferredItemHeightSmall"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/compound_buttons_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/context_menu_padding_margin_large"
+            android:layout_marginLeft="@dimen/context_menu_padding_margin_large"
+            android:layout_marginEnd="@dimen/context_menu_padding_margin_large"
+            android:layout_marginRight="@dimen/context_menu_padding_margin_large">
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:checkMark="?android:attr/listChoiceIndicatorSingle"
+                android:clickable="false"
+                android:focusable="false"
+                android:saveEnabled="false"
+                android:visibility="gone" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                android:clickable="false"
+                android:focusable="false"
+                android:saveEnabled="false"
+                android:visibility="gone" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginVertical="@dimen/content_padding_half"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/content_padding"
+            android:orientation="vertical">
+
+            <net.osmand.plus.widgets.TextViewEx
+                android:id="@+id/text"
+                style="@style/TitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:textColor="?android:textColorPrimary"
+                tools:text="Item title" />
+
+            <net.osmand.plus.widgets.TextViewEx
+                android:id="@+id/description"
+                style="@style/DescStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:textColor="?android:textColorSecondary"
+                android:visibility="gone"
+                tools:text="Optional item summary"
+                tools:visibility="visible" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/bottomDivider"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/list_header_padding"
+        android:background="?attr/dashboard_divider"
+        android:visibility="gone" />
+
+</LinearLayout>
+

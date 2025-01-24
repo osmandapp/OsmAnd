@@ -3,6 +3,7 @@ package net.osmand.plus.views.mapwidgets;
 import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.ANT_PLUS;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.GLIDE;
+import static net.osmand.plus.views.mapwidgets.WidgetGroup.NAVIGATION_POINTS;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.SUNRISE_SUNSET;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.VEHICLE_METRICS;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.WEATHER;
@@ -143,6 +144,7 @@ public enum WidgetType {
 	GLIDE_AVERAGE("average_glide_ratio", R.string.average_glide_ratio, R.string.map_widget_glide_average_desc, R.drawable.widget_glide_ratio_average_day, R.drawable.widget_glide_ratio_average_night, 0, GLIDE, RIGHT),
 
 	// Bottom panel
+	ROUTE_INFO("route_info", R.string.map_widget_route_information, R.string.map_widget_route_information_desc, R.drawable.widget_route_info_day, R.drawable.widget_route_info_night, 0, null, NAVIGATION_POINTS, BOTTOM),
 	ELEVATION_PROFILE("elevation_profile", R.string.elevation_profile, R.string.elevation_profile_widget_desc, R.drawable.widget_route_elevation_day, R.drawable.widget_route_elevation_night, 0, null, BOTTOM);
 
 	public static final String INTERMEDIATE_TIME_WIDGET_LEGACY = "intermediate_time";
@@ -209,6 +211,7 @@ public enum WidgetType {
 		return night ? nightIconId : dayIconId;
 	}
 
+	@Nullable
 	public WidgetGroup getGroup() {
 		return group;
 	}
@@ -237,6 +240,9 @@ public enum WidgetType {
 	public boolean isPanelsAllowed(@NonNull List<WidgetsPanel> panels) {
 		if (this == SMALL_NEXT_TURN) {
 			return !panels.contains(TOP) && !panels.contains(BOTTOM);
+		}
+		if (this == ROUTE_INFO) {
+			return !panels.contains(LEFT) && !panels.contains(RIGHT);
 		}
 		return true;
 	}
@@ -370,6 +376,8 @@ public enum WidgetType {
 			return new ZoomLevelSettingsFragment();
 		} else if (this == LANES) {
 			return new LanesWidgetSettingsFragment();
+		} else if (this == ROUTE_INFO) {
+			return new RouteInfoWidgetSettingsFragment();
 		}
 
 		if (widgetInfo instanceof SimpleWidgetInfo) {

@@ -144,6 +144,16 @@ public class ColorUtilities {
 	}
 
 	@ColorInt
+	public static int getSecondaryActiveColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, getSecondaryActiveColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getSecondaryActiveColorId(boolean nightMode) {
+		return nightMode ? R.color.active_color_secondary_dark : R.color.active_color_secondary_light;
+	}
+
+	@ColorInt
 	public static int getActiveTabTextColor(@NonNull Context ctx, boolean nightMode) {
 		return getColor(ctx, getActiveTabTextColorId(nightMode));
 	}

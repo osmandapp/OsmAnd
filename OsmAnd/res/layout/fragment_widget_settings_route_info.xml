@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <net.osmand.plus.widgets.TextViewEx
+        style="@style/DescStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/content_padding"
+        android:layout_marginVertical="@dimen/content_padding_small"
+        android:text="@string/map_widget_route_information_desc"
+        android:textColor="?android:textColorSecondary" />
+
+    <LinearLayout
+        android:id="@+id/default_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/content_padding"
+        android:paddingVertical="@dimen/content_padding_small"
+        android:orientation="vertical">
+
+        <net.osmand.plus.widgets.TextViewEx
+            style="@style/TitleStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/shared_string_default_view"
+            android:textColor="?android:textColorPrimary" />
+
+        <TextView
+            android:id="@+id/default_view_description"
+            style="@style/DescStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="?android:textColorSecondary"
+            tools:text="@string/side_marker_eta" />
+
+    </LinearLayout>
+
+</LinearLayout>

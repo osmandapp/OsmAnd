@@ -30,6 +30,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.MAX_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetType.NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
 import static net.osmand.plus.views.mapwidgets.WidgetType.RELATIVE_BEARING;
+import static net.osmand.plus.views.mapwidgets.WidgetType.ROUTE_INFO;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SECOND_NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_1;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_2;
@@ -100,11 +101,11 @@ public class WidgetsAvailabilityHelper {
 		regWidgetVisibility(DISTANCE_TO_DESTINATION, all);
 		regWidgetVisibility(TIME_TO_INTERMEDIATE, all);
 		regWidgetVisibility(TIME_TO_DESTINATION, all);
-		regWidgetVisibility(CURRENT_SPEED, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT,
-				HORSE, TRAIN);
+		regWidgetVisibility(CURRENT_SPEED, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT, HORSE, TRAIN);
 		regWidgetVisibility(MAX_SPEED, none);
 		regWidgetVisibility(ALTITUDE_MAP_CENTER, PEDESTRIAN, BICYCLE);
 		regWidgetVisibility(ALTITUDE_MY_LOCATION, PEDESTRIAN, BICYCLE);
+
 		regWidgetAvailability(INTERMEDIATE_DESTINATION, all);
 		regWidgetAvailability(DISTANCE_TO_DESTINATION, all);
 		regWidgetAvailability(TIME_TO_INTERMEDIATE, all);

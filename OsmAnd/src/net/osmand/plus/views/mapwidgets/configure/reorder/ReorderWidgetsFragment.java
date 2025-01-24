@@ -340,7 +340,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 				WidgetGroup group = widgetType.getGroup(selectedPanel);
 				if (group != null && !availableGroups.contains(group)) {
 					availableGroups.add(group);
-					defaultWidgetsItems.put(group.getOrder(), new ListItem(ItemType.AVAILABLE_GROUP, group));
+					defaultWidgetsItems.put(group.getOrder(selectedPanel), new ListItem(ItemType.AVAILABLE_GROUP, group));
 				} else if (group == null) {
 					AvailableWidgetUiInfo availableWidgetInfo = getWidgetInfo(widgetInfo);
 					defaultWidgetsItems.put(widgetType.ordinal(), new ListItem(ItemType.AVAILABLE_WIDGET, availableWidgetInfo));
@@ -351,10 +351,10 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 			}
 		}
 		List<ListItem> defaultWidgetsList = new ArrayList<>(defaultWidgetsItems.values());
-		sortWidgetsItems(defaultWidgetsList, app, nightMode);
+		sortWidgetsItems(app, defaultWidgetsList, selectedPanel, nightMode);
 
 		List<ListItem> widgetItems = new ArrayList<>(defaultWidgetsList);
-		sortWidgetsItems(externalWidgetsItems, app, nightMode);
+		sortWidgetsItems(app, externalWidgetsItems, selectedPanel, nightMode);
 
 		widgetItems.addAll(externalWidgetsItems);
 		return widgetItems;
