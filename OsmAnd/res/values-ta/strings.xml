@@ -1074,7 +1074,7 @@
     <string name="yard">yd</string>
     <string name="foot">அடி</string>
     <string name="mile_per_hour">மைல்</string>
-    <string name="mile">மைல்</string>
+    <string name="mile">மி</string>
     <string name="send_location_way_choose_title">இடத்தைப் பயன்படுத்தி பகிர்</string>
     <string name="send_location_sms_pattern">இருப்பிடம்: %1$s
 \n%2$s</string>
