@@ -81,4 +81,8 @@
     <string name="osmand_privacy_policy">Osmand தனியுரிமைக் கொள்கை</string>
     <string name="how_it_works">இது எவ்வாறு இயங்குகிறது</string>
     <string name="received_gps_points">பெறப்பட்ட சிபிஎக்ச் புள்ளிகள்: %1$s</string>
+    <string name="shared_string_appearance">தோற்றம்</string>
+    <string name="show_gps_points">சி.பி.எச் புள்ளிகளைக் காட்டு</string>
+    <string name="show_gps_points_descr">சேகரிக்கப்பட்ட மற்றும் அனுப்பப்பட்ட சி.பி.எச் புள்ளிகளின் அளவைக் காட்டு.</string>
+    <string name="please_update_osmand">வரைபடத்தில் தரவைக் காண OSMand ஐப் புதுப்பிக்கவும்</string>
 </resources>
