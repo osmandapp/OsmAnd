@@ -1370,4 +1370,5 @@
     <string name="shared_string_back">பின்</string>
     <string name="shared_string_logout">விடுபதிகை</string>
     <string name="shared_string_continue">தொடரவும்</string>
+    <string name="osmand_service">பின்னணி முறை</string>
 </resources>
