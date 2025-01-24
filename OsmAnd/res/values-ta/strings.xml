@@ -1376,4 +1376,5 @@
     <string name="min_km">நிமிடம்/கி.மீ.</string>
     <string name="m_s">எம்/கள்</string>
     <string name="si_kmh">ஒரு மணி நேரத்திற்கு கிலோமீட்டர்</string>
+    <string name="si_mph">ஒரு மணி நேரத்திற்கு மைல்கள்</string>
 </resources>
