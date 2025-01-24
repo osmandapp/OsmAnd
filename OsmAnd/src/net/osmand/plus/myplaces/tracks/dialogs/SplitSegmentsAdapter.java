@@ -43,7 +43,6 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 
 	private final Rect minMaxSpeedTextBounds = new Rect();
 	private final GpxDisplayItem displayItem;
-	private final boolean joinSegments;
 	private int minMaxSpeedLayoutWidth;
 
 	private final Paint minMaxSpeedPaint = new Paint();
@@ -51,13 +50,11 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 
 	SplitSegmentsAdapter(@NonNull FragmentActivity activity,
 	                     @NonNull List<GpxDisplayItem> items,
-	                     @NonNull GpxDisplayItem displayItem,
-	                     boolean joinSegments) {
+	                     @NonNull GpxDisplayItem displayItem) {
 		super(activity, 0, items);
 		this.activity = activity;
 		this.app = (OsmandApplication) activity.getApplicationContext();
 		this.displayItem = displayItem;
-		this.joinSegments = joinSegments;
 
 		minMaxSpeedPaint.setTextSize(app.getResources().getDimension(R.dimen.default_split_segments_data));
 		minMaxSpeedPaint.setTypeface(FontCache.getMediumFont());
@@ -146,7 +143,7 @@ class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 				TextView distanceOrTimeSpanText = convertView.findViewById(R.id.distance_or_time_span_text);
 				if (position == 0) {
 					distanceOrTimeSpanImageView.setImageDrawable(getIcon(R.drawable.ic_action_track_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
-					float totalDistance = !joinSegments && displayItem.isGeneralTrack() ? analysis.getTotalDistanceWithoutGaps() : analysis.getTotalDistance();
+					float totalDistance = displayItem.isGeneralTrack() ? analysis.getTotalDistanceWithoutGaps() : analysis.getTotalDistance();
 					distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDistance(totalDistance, app));
 					distanceOrTimeSpanText.setText(app.getString(R.string.distance));
 				} else {
