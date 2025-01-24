@@ -266,4 +266,5 @@
     <string name="si_min_m">ஒரு மைலுக்கு நிமிடங்கள்</string>
     <string name="si_nm_h">ஒரு மணி நேரத்திற்கு கடல் மைல்கள் (முடிச்சு)</string>
     <string name="si_mi_feet">மைல்கள்/அடி</string>
+    <string name="si_mi_yard">மைல்கள்/கெசம்</string>
 </resources>
