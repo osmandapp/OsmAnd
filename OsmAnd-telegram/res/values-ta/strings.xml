@@ -191,4 +191,5 @@
     <string name="get_telegram_account_first">இருப்பிட பகிர்வைப் பயன்படுத்த உங்களுக்கு ஒரு தந்தி கணக்கு தேவை.</string>
     <string name="get_telegram_description_continue">தயவுசெய்து டெலிகிராம் நிறுவி ஒரு கணக்கை அமைக்கவும்.</string>
     <string name="get_telegram_after_creating_account">இந்த பயன்பாட்டைப் பயன்படுத்தலாம்.</string>
+    <string name="shared_string_all">அனைத்தும்</string>
 </resources>
