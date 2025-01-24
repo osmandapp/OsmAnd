@@ -91,7 +91,7 @@
     <string name="my_location">என் நிலையம்</string>
     <string name="shared_string_finish">முடி</string>
     <string name="plan_route">பாதையை திட்டமிடு</string>
-    <string name="shared_string_sort">வகைபடுத்து.</string>
+    <string name="shared_string_sort">வரிசைப்படுத்து</string>
     <string name="coordinate_input">ஒருங்கிணைப்பு உள்ளீடு</string>
     <string name="marker_save_as_track_descr">பின்வரும் ஜிபிஎக்ஸ் கோப்புக்கு குறிப்பாங்களை ஏற்றுமதி செய்:</string>
     <string name="move_to_history">வறலாற்றுக்கு நகர்த்து</string>
