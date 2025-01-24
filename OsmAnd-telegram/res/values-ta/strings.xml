@@ -85,4 +85,7 @@
     <string name="show_gps_points">சி.பி.எச் புள்ளிகளைக் காட்டு</string>
     <string name="show_gps_points_descr">சேகரிக்கப்பட்ட மற்றும் அனுப்பப்பட்ட சி.பி.எச் புள்ளிகளின் அளவைக் காட்டு.</string>
     <string name="please_update_osmand">வரைபடத்தில் தரவைக் காண OSMand ஐப் புதுப்பிக்கவும்</string>
+    <string name="shared_string_update">புதுப்பிப்பு</string>
+    <string name="gps_points_in_buffer">அனுப்பப்பட்டது (இடையகத்தில்%1$d)</string>
+    <string name="points_size">%1$d புள்ளிகள்</string>
 </resources>
