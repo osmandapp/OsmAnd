@@ -4870,4 +4870,5 @@
     <string name="help_article_map_vector_maps_name">Vektorkaardid (kaardistiilid)</string>
     <string name="help_article_navigation_guidance_name">Tee juhatamine</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Kaardivaade tee juhatamise ajal</string>
+    <string name="help_article_navigation_routing_name">Teekonna parameetrid</string>
 </resources>
