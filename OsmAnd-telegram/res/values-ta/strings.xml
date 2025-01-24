@@ -23,4 +23,6 @@
     <string name="buffer_time">இடையக காலாவதி நேரம்</string>
     <string name="time_zone_descr">உங்கள் இருப்பிட செய்திகளில் காண்பிக்க நேர மண்டலத்தைத் தேர்ந்தெடுக்கவும்.</string>
     <string name="time_zone">நேர மண்டலம்</string>
+    <string name="units_and_formats">அலகுகள் மற்றும் வடிவங்கள்</string>
+    <string name="unit_of_length_descr">என்ன தூரம் அளவிடப்படுகிறது என்பதை மாற்றவும்.</string>
 </resources>
