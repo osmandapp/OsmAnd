@@ -227,4 +227,5 @@
     <string name="closing">நிறைவு</string>
     <string name="gps_network_not_enabled">\"இருப்பிடம்\" ஐ இயக்கவா?</string>
     <string name="not_logged_in">நீங்கள் உள்நுழையவில்லை</string>
+    <string name="shared_string_continue">தொடரவும்</string>
 </resources>
