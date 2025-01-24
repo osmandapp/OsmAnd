@@ -4867,4 +4867,5 @@
     <string name="help_article_map_map_context_menu_name">Kaardi kontekstimenüü</string>
     <string name="help_article_map_track_context_menu_name">Radade kontekstimenüü</string>
     <string name="help_article_map_tracks_on_map_name">Rajad ja teekonnad</string>
+    <string name="help_article_map_vector_maps_name">Vektorkaardid (kaardistiilid)</string>
 </resources>
