@@ -1360,4 +1360,5 @@
     <string name="logcat_buffer_descr">பயன்பாட்டின் விரிவான பதிவுகளை சரிபார்த்து பகிரவும்</string>
     <string name="logcat_buffer">Logcat இடையக</string>
     <string name="duration_ago">%1$s முன்பு</string>
+    <string name="units_and_formats">அலகுகள் மற்றும் வடிவங்கள்</string>
 </resources>
