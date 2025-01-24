@@ -253,4 +253,5 @@
     <string name="km">கி.மீ.</string>
     <string name="m">மீ</string>
     <string name="nm">என்.எம்.ஐ.</string>
+    <string name="min_mile">n/m</string>
 </resources>
