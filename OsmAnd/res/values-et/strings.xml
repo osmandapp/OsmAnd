@@ -4911,4 +4911,5 @@
     <string name="map_widget_trip_recording_uphill">Ülesmäge</string>
     <string name="map_widget_camera_distance">Kaamera kõrgus</string>
     <string name="map_widget_zoom_level">Suumitase</string>
+    <string name="free_account">Tasuta kasutajakonto</string>
 </resources>
