@@ -4903,4 +4903,5 @@
     <string name="map_widget_group_sunrise_sunset">Päikesetõus ja -loojang</string>
     <string name="shared_string_switch_mode">Vaheta režiimi</string>
     <string name="go_to_marker_location">Mine markeri asukohta</string>
+    <string name="side_marker_eta">Eeldatav saabumisaeg</string>
 </resources>
