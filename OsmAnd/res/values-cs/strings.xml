@@ -5669,4 +5669,7 @@
     <string name="display_distance_to_first_intermediate_summary">Zobrazit čas a vzdálenost k nejbližšímu mezicíli. Vypněte, pokud chcete vždy vidět podrobnosti trasy k cíli.</string>
     <string name="recently_visited">Nedávno navštíveno</string>
     <string name="popular_places_nearby">Populární místa v okolí</string>
+    <string name="shared_string_length">Délka</string>
+    <string name="shared_string_avg_altitude">Prům. výška</string>
+    <string name="shared_string_avg_speed">Min. rychlost</string>
 </resources>
