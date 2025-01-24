@@ -95,4 +95,5 @@
     <string name="monitoring_is_enabled">கண்காணிப்பு இயக்கப்பட்டது</string>
     <string name="monitoring_is_disabled">கண்காணிப்பு முடக்கப்பட்டுள்ளது</string>
     <string name="time_on_the_move">நகரும் நேரம்</string>
+    <string name="average_altitude">சராசரி உயரம்</string>
 </resources>
