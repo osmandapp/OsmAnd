@@ -268,4 +268,5 @@
     <string name="si_mi_feet">மைல்கள்/அடி</string>
     <string name="si_mi_yard">மைல்கள்/கெசம்</string>
     <string name="si_km_m">கிலோமீட்டர்/மீட்டர்</string>
+    <string name="si_nm">கடல் மைல்கள்</string>
 </resources>
