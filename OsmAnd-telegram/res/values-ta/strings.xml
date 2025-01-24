@@ -221,4 +221,10 @@
     <string name="password_descr">தந்தி கடவுச்சொல்</string>
     <string name="authentication_code_descr">உங்கள் கணக்கில் உள்நுழைய ஆச்மாண்டிற்கான குறியீட்டை டெலிகிராம் உங்களுக்கு அனுப்பியுள்ளது.</string>
     <string name="shared_string_login">புகுபதிகை</string>
+    <string name="shared_string_logout">விடுபதிகை</string>
+    <string name="initialization">தொடங்குகிறது</string>
+    <string name="logging_out">வெளியேறுதல்</string>
+    <string name="closing">நிறைவு</string>
+    <string name="gps_network_not_enabled">\"இருப்பிடம்\" ஐ இயக்கவா?</string>
+    <string name="not_logged_in">நீங்கள் உள்நுழையவில்லை</string>
 </resources>
