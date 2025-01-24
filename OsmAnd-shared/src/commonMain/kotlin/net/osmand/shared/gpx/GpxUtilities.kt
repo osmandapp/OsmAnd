@@ -1467,7 +1467,7 @@ object GpxUtilities {
 
 	private fun getExtensionsSupportedTag(tag: String): String {
 		val supportedTag = SUPPORTED_EXTENSION_TAGS[tag]
-		return supportedTag ?: tag
+		return supportedTag ?: tag.replace(XML_COLON, ":")
 	}
 
 	private fun parseRouteKeyAttributes(parser: XmlPullParser): Map<String, String> {
