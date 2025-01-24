@@ -4873,4 +4873,5 @@
     <string name="help_article_navigation_routing_name">Teekonna parameetrid</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">Hääljuhised / teavitused</string>
     <string name="help_article_navigation_setup_route_details_name">Teekonna üksikasjad</string>
+    <string name="help_article_navigation_setup_route_navigation_name">Teekonna ettevalmistamine</string>
 </resources>
