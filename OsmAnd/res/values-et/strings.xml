@@ -4863,4 +4863,5 @@
     <string name="routing_attr_freeride_policy_allow_name">Luba</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Suurenda veeteede tunnelite nähtavust</string>
     <string name="ant_plus_nothing_found_description">Palun kontrolli, et:\n– Bluetooth on sisse lülitatud\n– andur on töös\n– see nutiseade on anduri lähedal</string>
+    <string name="speed_mode">Kiirusrežiim</string>
 </resources>
