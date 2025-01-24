@@ -4865,4 +4865,5 @@
     <string name="ant_plus_nothing_found_description">Palun kontrolli, et:\n– Bluetooth on sisse lülitatud\n– andur on töös\n– see nutiseade on anduri lähedal</string>
     <string name="speed_mode">Kiirusrežiim</string>
     <string name="help_article_map_map_context_menu_name">Kaardi kontekstimenüü</string>
+    <string name="help_article_map_track_context_menu_name">Radade kontekstimenüü</string>
 </resources>
