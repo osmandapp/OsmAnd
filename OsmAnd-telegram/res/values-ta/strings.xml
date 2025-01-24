@@ -148,4 +148,8 @@
     <string name="live_now_description">தொடர்புகள் மற்றும் குழுக்கள் உங்களுக்கு இருப்பிடத்தைப் பகிர்ந்து கொள்கின்றன.</string>
     <string name="logout_from_osmand_telegram_descr">நீங்கள் நிச்சயமாக ஒச்மண்ட் டிராக்கரில் இருந்து வெளியேற விரும்புகிறீர்களா, எனவே இருப்பிடத்தைப் பகிரவோ அல்லது மற்றவர்களின் இருப்பிடத்தைப் பார்க்கவோ முடியாது?</string>
     <string name="logout_from_osmand_telegram">ஒச்மண்ட் டிராக்கரில் இருந்து வெளியேறவா?</string>
+    <string name="by_name">பெயரால்</string>
+    <string name="shared_string_name">பெயர்</string>
+    <string name="by_distance">தூரம் மூலம்</string>
+    <string name="by_group">குழு மூலம்</string>
 </resources>
