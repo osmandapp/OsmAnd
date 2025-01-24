@@ -259,4 +259,5 @@
     <string name="m_s">எம்/கள்</string>
     <string name="km_h">கிமீ/மணி</string>
     <string name="mile_per_hour">எம்.பி.எச்</string>
+    <string name="si_kmh">ஒரு மணி நேரத்திற்கு கிலோமீட்டர்</string>
 </resources>
