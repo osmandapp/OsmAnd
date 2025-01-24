@@ -5701,4 +5701,7 @@
     <string name="display_distance_to_first_intermediate">Vis rutedetaljer for det næste stop</string>
     <string name="popular_places_nearby">Populære steder i nærheden</string>
     <string name="recently_visited">Besøgt for nylig</string>
+    <string name="shared_string_length">Længde</string>
+    <string name="shared_string_avg_altitude">Gns. højde</string>
+    <string name="shared_string_avg_speed">Min. hastighed</string>
 </resources>
