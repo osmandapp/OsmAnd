@@ -526,7 +526,7 @@
     <string name="clear_updates_proposition_message">பதிவிறக்கம் புதுப்பிப்புகளை அகற்றி, அசல் வரைபட பதிப்பில் திரும்பவும்</string>
     <string name="add_time_span">நேர இடைவெளியைச் சேர்க்கவும்</string>
     <string name="road_blocked">சாலை தடுக்கப்பட்டது</string>
-    <string name="shared_string_select">தேர்வு</string>
+    <string name="shared_string_select">தேர்ந்தெடு</string>
     <string name="switch_start_finish">தொடக்கம் மற்றும் இலக்கை மாற்றுக</string>
     <string name="rendering_attr_hideIcons_name">POI சின்னங்கள்</string>
     <string name="item_removed">உருப்படி அகற்றப்பட்டது</string>
