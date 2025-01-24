@@ -1357,4 +1357,5 @@
     <string name="ltr_or_rtl_combine_via_dash">%1$s - %2$s</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="send_report">அறிக்கை அனுப்பவும்</string>
+    <string name="logcat_buffer_descr">பயன்பாட்டின் விரிவான பதிவுகளை சரிபார்த்து பகிரவும்</string>
 </resources>
