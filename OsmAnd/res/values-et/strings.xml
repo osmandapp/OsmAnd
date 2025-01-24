@@ -4876,4 +4876,5 @@
     <string name="help_article_navigation_setup_route_navigation_name">Teekonna ettevalmistamine</string>
     <string name="help_article_personal_name">Minu andmed</string>
     <string name="help_article_personal_import_export_name">Impordi ja ekspordi</string>
+    <string name="help_article_personal_profiles_name">Profiilid (seadistused)</string>
 </resources>
