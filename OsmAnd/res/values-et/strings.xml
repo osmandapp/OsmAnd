@@ -4906,4 +4906,5 @@
     <string name="side_marker_eta">Eeldatav saabumisaeg</string>
     <string name="developer_widgets">Arendaja vidinad</string>
     <string name="map_widget_trip_recording_duration">Kestus</string>
+    <string name="map_widget_trip_recording_distance">Vahemaa</string>
 </resources>
