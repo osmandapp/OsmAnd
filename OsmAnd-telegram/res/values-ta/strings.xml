@@ -96,4 +96,16 @@
     <string name="monitoring_is_disabled">கண்காணிப்பு முடக்கப்பட்டுள்ளது</string>
     <string name="time_on_the_move">நகரும் நேரம்</string>
     <string name="average_altitude">சராசரி உயரம்</string>
+    <string name="average_speed">சராசரி விரைவு</string>
+    <string name="open_in_osmand">ஒச்மாண்டில் காட்டு</string>
+    <string name="end_date">இறுதி தேதி</string>
+    <string name="start_date">தொடக்க தேதி</string>
+    <string name="send_location_as">இருப்பிடத்தை அனுப்பவும்</string>
+    <string name="send_location_as_descr">உங்கள் இருப்பிடத்துடன் கூடிய செய்திகள் எப்படி இருக்கும் என்பதைத் தேர்வுசெய்க.</string>
+    <string name="shared_string_map">வரைபடம்</string>
+    <string name="shared_string_text">உரை</string>
+    <string name="map_and_text">வரைபடம் மற்றும் உரை</string>
+    <string name="last_update_from_telegram">டெலிகிராமில் இருந்து கடைசி புதுப்பிப்பு</string>
+    <string name="enter_another_device_name">நீங்கள் ஏற்கனவே பயன்படுத்தாத பெயரைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="device_added_successfully">%1$s சேர்க்கப்பட்டது.</string>
 </resources>
