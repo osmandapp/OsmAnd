@@ -235,7 +235,7 @@
     <string name="shared_string_unexpected_error">எதிர்பாராத பிழை</string>
     <string name="shared_string_action_template">நடவ்டிக்கை {0}</string>
     <string name="shared_string_close">மூடு</string>
-    <string name="shared_string_exit">வெளியேற</string>
+    <string name="shared_string_exit">வெளியேறு</string>
     <string name="shared_string_show">காட்டு</string>
     <string name="shared_string_show_all">அனைத்தையும் காட்டு</string>
     <string name="shared_string_collapse">தகர்ந்து போ</string>
