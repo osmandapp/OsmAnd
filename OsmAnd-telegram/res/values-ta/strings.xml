@@ -202,4 +202,5 @@
     <string name="hours_and_minutes_format">%1$d h %2$d மீ</string>
     <string name="minutes_format">%1$d மீ</string>
     <string name="shared_string_install">நிறுவவும்</string>
+    <string name="shared_string_share">பங்கு</string>
 </resources>
