@@ -1369,4 +1369,5 @@
     <string name="shared_string_name">பெயர்</string>
     <string name="shared_string_install">நிறுவவும்</string>
     <string name="shared_string_back">பின்</string>
+    <string name="shared_string_logout">விடுபதிகை</string>
 </resources>
