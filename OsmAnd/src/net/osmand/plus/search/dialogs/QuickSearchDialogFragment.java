@@ -103,6 +103,7 @@ import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreAPI;
+import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
@@ -375,6 +376,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						mapActivity.updateStatusBarColor();
 						mapActivity.refreshMap();
 						hide();
+						LatLon cityLocation = searchPhrase.getCityLocation();
+						if (cityLocation != null && getActivity() != null) {
+							app.getSettings().setMapLocationToShow(cityLocation.getLatitude(), cityLocation.getLongitude(), SearchCoreFactory.PREFERRED_CITY_ZOOM);
+							MapActivity.launchMapActivityMoveToTop(getActivity());
+						}
 					} else {
 						SearchWord word = searchPhrase.getLastSelectedWord();
 						if (word != null) {
