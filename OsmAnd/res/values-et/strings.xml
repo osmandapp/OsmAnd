@@ -4892,4 +4892,5 @@
     <string name="average_speed_skip_stops">Arvesta vahepeatuseid</string>
     <string name="av_notes_choose_action_widget_desc">Vali toiming.</string>
     <string name="battery_widget_desc">Näitab sinu nutiseadme akutäituvust.</string>
+    <string name="time_to_go_desc">Aeg minutites või tundides sinu sihtkohta jõudmiseks.</string>
 </resources>
