@@ -4880,4 +4880,5 @@
     <string name="help_article_personal_storage_name">Andmeruum</string>
     <string name="help_article_plan_route_name">Kavanda teekonda</string>
     <string name="help_article_plan_route_coordinate_input_name">Koordinaatide sisestamine</string>
+    <string name="help_article_plan_route_web_name">Veebipõhine teekonna planeerimine</string>
 </resources>
