@@ -10,10 +10,13 @@ import net.osmand.util.Algorithms;
 
 import java.util.Map;
 
-public class MetadataExtensionsCard extends BaseMetadataCard {
+public class TrackExtensionsCard extends BaseMetadataCard {
+	private final Map<String, String> extensions;
 
-	public MetadataExtensionsCard(@NonNull MapActivity mapActivity, @NonNull Metadata metadata) {
+	public TrackExtensionsCard(@NonNull MapActivity mapActivity, @NonNull Metadata metadata,
+	                           @NonNull Map<String, String> extensions) {
 		super(mapActivity, metadata);
+		this.extensions = extensions;
 	}
 
 	@Override
@@ -25,11 +28,8 @@ public class MetadataExtensionsCard extends BaseMetadataCard {
 	@Override
 	public void updateContent() {
 		super.updateContent();
-
-		Map<String, String> extensions = metadata.getExtensions();
 		updateVisibility(!Algorithms.isEmpty(extensions));
-
-		if (extensions != null) {
+		if (!Algorithms.isEmpty(extensions)) {
 			for (String key : extensions.keySet()) {
 				String value = extensions.get(key);
 				if (value != null) {
