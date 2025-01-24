@@ -25,4 +25,10 @@
     <string name="time_zone">நேர மண்டலம்</string>
     <string name="units_and_formats">அலகுகள் மற்றும் வடிவங்கள்</string>
     <string name="unit_of_length_descr">என்ன தூரம் அளவிடப்படுகிறது என்பதை மாற்றவும்.</string>
+    <string name="unit_of_length">நீளத்தின் அலகுகள்</string>
+    <string name="unit_of_speed_system_descr">வேகத்தின் அலகு வரையறுக்கவும்.</string>
+    <string name="unit_of_speed_system">வேகத்தின் அலகு</string>
+    <string name="saved_messages">சேமித்த செய்திகள்</string>
+    <string name="shared_string_end">முடிவு</string>
+    <string name="shared_string_start">தொடங்கு</string>
 </resources>
