@@ -571,7 +571,8 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public String getPrefDescription(Context ctx, RenderingRuleProperty p, CommonPreference<String> pref) {
-		if (!Algorithms.isEmpty(pref.get())) {
+		String value = pref.get();
+		if (!Algorithms.isEmpty(value) && p.containsValue(value)) {
 			return AndroidUtils.getRenderingStringPropertyValue(ctx, pref.get());
 		} else {
 			return AndroidUtils.getRenderingStringPropertyValue(ctx, p.getDefaultValueDescription());

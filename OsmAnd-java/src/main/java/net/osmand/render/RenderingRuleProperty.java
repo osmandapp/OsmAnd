@@ -4,6 +4,7 @@ package net.osmand.render;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -142,6 +143,15 @@ public class RenderingRuleProperty {
 			return false;
 		}
 		return ruleValue == renderingProperty;
+	}
+
+	public boolean containsValue(String value) {
+		for (String v : getPossibleValues()) {
+			if (Algorithms.objectEquals(v, value)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	@Override
