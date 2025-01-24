@@ -3667,7 +3667,7 @@
     <string name="poi_bus_yes">Ja</string>
     <string name="poi_bus_designated">Udpeget</string>
     <string name="poi_caravan_yes">Ja</string>
-    <string name="poi_caravan_designated">Udpeget</string>
+    <string name="poi_caravan_designated">Udpeget;Udpeget til campingvogne</string>
     <string name="poi_motorhome_yes">Ja</string>
     <string name="poi_motorhome_designated">Udpeget</string>
     <string name="poi_trailer_yes">Ja</string>
