@@ -1353,4 +1353,5 @@
     <string name="shared_string_transparency">வெளிப்படைத்தன்மை</string>
     <string name="help_article_navigation_car_play_name">கார்ப்ளே</string>
     <string name="quick_action_map_underlay">அண்டர்லே</string>
+    <string name="location_source">இருப்பிட சான்று</string>
 </resources>
