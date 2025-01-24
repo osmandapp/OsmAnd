@@ -88,4 +88,11 @@
     <string name="shared_string_update">புதுப்பிப்பு</string>
     <string name="gps_points_in_buffer">அனுப்பப்பட்டது (இடையகத்தில்%1$d)</string>
     <string name="points_size">%1$d புள்ளிகள்</string>
+    <string name="shared_string_date">திகதி</string>
+    <string name="shared_string_collected">சேகரிக்கப்பட்டது</string>
+    <string name="gps_points">சி.பி.எச் புள்ளிகள்</string>
+    <string name="shared_string_sent">அனுப்பப்பட்டது</string>
+    <string name="monitoring_is_enabled">கண்காணிப்பு இயக்கப்பட்டது</string>
+    <string name="monitoring_is_disabled">கண்காணிப்பு முடக்கப்பட்டுள்ளது</string>
+    <string name="time_on_the_move">நகரும் நேரம்</string>
 </resources>
