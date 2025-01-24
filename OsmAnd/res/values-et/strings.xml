@@ -1139,7 +1139,7 @@
     <string name="shared_string_unexpected_error">Ootamatu viga</string>
     <string name="shared_string_action_template">Tegevus {0}</string>
     <string name="shared_string_collapse">Paki kokku</string>
-    <string name="shared_string_currently_recording_track">Raja salvestamine</string>
+    <string name="shared_string_currently_recording_track">Rada on salvestamisel</string>
     <string name="track_segments">Rajalõigud</string>
     <string name="track_points">Rajapunktid</string>
     <string name="osmand_rastermaps_plugin_description">Selle lisaga saad ligipääsu mitut liiki veebikaartidele (nn paanid või rasterkaardid), alates eelnevalt määratletud OpenStreetMap-i paanidest (nagu Mapnik) kuni satelliidipiltide ja eriotstarbeliste kihtideni nagu ilmakaardid, kliimakaardid, geoloogilised kaardid, künklikihi kihid jne.
