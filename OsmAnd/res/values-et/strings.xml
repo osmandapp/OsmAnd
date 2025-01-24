@@ -4889,4 +4889,5 @@
     <string name="help_article_widgets_map_buttons_name">Kaardinupud</string>
     <string name="help_article_widgets_markers_name">Markerite vidinad</string>
     <string name="map_widget_zoom_level_desc">Näitab kaardi praegust suumitaset</string>
+    <string name="average_speed_skip_stops">Arvesta vahepeatuseid</string>
 </resources>
