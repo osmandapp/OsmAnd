@@ -66,4 +66,19 @@
     <string name="altitude">குத்துயரம்</string>
     <string name="search_contacts_descr">உங்கள் அனைத்து குழுக்கள் மற்றும் தொடர்புகள் முழுவதும் தேடுங்கள்.</string>
     <string name="shared_string_search">தேடல்</string>
+    <string name="shared_string_ok">சரி</string>
+    <string name="timeline_available_for_free_now">காலவரிசை என்பது இப்போது இலவசமாக கிடைக்கக்கூடிய அம்சமாகும்.</string>
+    <string name="disable_monitoring">கண்காணிப்பை முடக்கு</string>
+    <string name="location_recording_enabled">இருப்பிட பதிவு இயக்கப்பட்டது</string>
+    <string name="timeline_description">வரலாற்றில் அனைத்து இடங்களையும் சேமிக்க கண்காணிப்பை இயக்கவும்.</string>
+    <string name="app_name_short">ஒச்மண்ட் டிராக்கர்</string>
+    <string name="shared_string_telegram">தந்தி</string>
+    <string name="privacy_policy_use_telegram">டெலிகிராம் (செய்தியிடல் பயன்பாடு) மக்களுடன் இணைக்கவும் தொடர்பு கொள்ளவும் பயன்படுத்தப்படுகிறது.</string>
+    <string name="privacy_policy_telegram_client">டெலிகிராம் திறந்த தளத்தைப் பயன்படுத்தும் வாடிக்கையாளர்களில் ஒச்மண்ட் டிராக்கர் ஒன்றாகும். உங்கள் தொடர்புகள் வேறு எந்த தந்தி கிளையண்டையும் பயன்படுத்தலாம்.</string>
+    <string name="privacy_policy_agree">\"தொடரவும்\" என்பதைத் தட்டுவதன் மூலம், தந்தி மற்றும் ஒச்மண்ட் தனியுரிமைக் கொள்கையின் நிபந்தனைகளை நீங்கள் ஒப்புக்கொள்கிறீர்கள்.</string>
+    <string name="shared_string_accept">ஏற்றுக்கொள்</string>
+    <string name="telegram_privacy_policy">தந்தி தனியுரிமைக் கொள்கை</string>
+    <string name="osmand_privacy_policy">Osmand தனியுரிமைக் கொள்கை</string>
+    <string name="how_it_works">இது எவ்வாறு இயங்குகிறது</string>
+    <string name="received_gps_points">பெறப்பட்ட சிபிஎக்ச் புள்ளிகள்: %1$s</string>
 </resources>
