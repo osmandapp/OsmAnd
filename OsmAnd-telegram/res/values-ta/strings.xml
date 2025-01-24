@@ -228,4 +228,9 @@
     <string name="gps_network_not_enabled">\"இருப்பிடம்\" ஐ இயக்கவா?</string>
     <string name="not_logged_in">நீங்கள் உள்நுழையவில்லை</string>
     <string name="shared_string_continue">தொடரவும்</string>
+    <string name="shared_string_cancel">ரத்துசெய்</string>
+    <string name="shared_string_settings">அமைப்புகள்</string>
+    <string name="no_location_permission">இருப்பிட தரவு அணுகலுக்கான பயன்பாட்டிற்கு இசைவு இல்லை.</string>
+    <string name="gps_not_available">கணினி அமைப்புகளில் \"இருப்பிடம்\" ஐ இயக்கவும்</string>
+    <string name="location_service_no_gps_available">உங்கள் இருப்பிடத்தைப் பகிர்ந்து கொள்ள இருப்பிட வழங்குநர்களில் ஒன்றைத் தேர்ந்தெடுக்கவும்.</string>
 </resources>
