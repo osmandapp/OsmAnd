@@ -247,4 +247,6 @@
     <string name="shared_string_authorization">ஏற்பு</string>
     <string name="shared_string_authorization_descr">உங்கள் தந்தி தொலைபேசி எண்ணை பன்னாட்டு வடிவத்தில் உள்ளிடவும்</string>
     <string name="shared_string_welcome">வரவேற்கிறோம்</string>
+    <string name="yard">yd</string>
+    <string name="foot">அடி</string>
 </resources>
