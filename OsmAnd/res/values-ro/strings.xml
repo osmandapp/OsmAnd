@@ -1829,7 +1829,7 @@
     <string name="mapillary_widget">Widget Mapillary</string>
     <string name="mapillary_widget_descr">Permite contribuții rapide la Mapillary.</string>
     <string name="mapillary_descr">Fotografii stradale online pentru toată lumea. Descoperiți locuri, colaborați, surprindeți lumea.</string>
-    <string name="mapillary">Mapillary</string>
+    <string name="mapillary">Mapilar</string>
     <string name="private_access_routing_req">Destinația dumneavoastră este situată într-o zonă cu acces privat. Permiteți utilizarea drumurilor private pentru această călătorie\?</string>
     <string name="restart_search">Reporniți căutarea</string>
     <string name="increase_search_radius">Mărește raza de căutare</string>
@@ -5596,7 +5596,7 @@
     <string name="avg_sensor_bycicle_power">Putere bicicletă, medie</string>
     <string name="max_sensor_speed">Viteză senzor, maxim</string>
     <string name="shared_string_copyright">Drepturi de autor</string>
-    <string name="shared_string_link">Link</string>
+    <string name="shared_string_link">Legătură</string>
     <string name="shared_string_all_tracks">Toate traseele</string>
     <string name="max_sensor_bycicle_power">Putere bicicletă, maxim</string>
     <string name="avg_sensor_speed">Viteză senzor, medie</string>
