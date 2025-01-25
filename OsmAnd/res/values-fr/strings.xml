@@ -5668,6 +5668,6 @@
     <string name="popular_places_nearby">Lieux populaires proches</string>
     <string name="recently_visited">Dernières visites</string>
     <string name="shared_string_avg_altitude">Altitude moyenne</string>
-    <string name="shared_string_avg_speed">Vitesse minimale</string>
+    <string name="shared_string_avg_speed">Vitesse mini</string>
     <string name="shared_string_length">Longueur</string>
 </resources>
