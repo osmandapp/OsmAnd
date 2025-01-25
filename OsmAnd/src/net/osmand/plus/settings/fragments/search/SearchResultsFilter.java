@@ -17,10 +17,10 @@ class SearchResultsFilter implements de.KnollFrank.lib.settingssearch.results.Se
 	}
 
 	@Override
-	public Collection<SearchablePreference> filter(final Collection<SearchablePreference> searchResults) {
+	public boolean includePreferenceInSearchResults(final SearchablePreference preference) {
 		return removeSearchResultsConnectedToDisabledProfiles ?
-				removeSearchResultsConnectedToDisabledProfiles(searchResults) :
-				searchResults;
+				!isConnectedToDisabledProfile(preference) :
+				true;
 	}
 
 	public boolean shallRemoveSearchResultsConnectedToDisabledProfiles() {

@@ -945,6 +945,21 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
+//						{
+//								"shouldSearchAndFind_ConfigureScreenFragment_ConfigureMap_TextSize",
+//								new SettingsSearchTestTemplate() {
+//
+//									@Override
+//									protected String getSearchQuery(final Context context) {
+//										return context.getString(R.string.text_size);
+//									}
+//
+//									@Override
+//									protected List<String> getExpectedSearchResults(final Context context) {
+//										return List.of(getSearchQuery(context));
+//									}
+//								}
+//						},
 				});
 	}
 
