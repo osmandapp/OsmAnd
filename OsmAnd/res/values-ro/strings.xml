@@ -6069,4 +6069,6 @@
     <string name="import_export">Import/export</string>
     <string name="popular_places_nearby">Locuri populare în apropiere</string>
     <string name="recently_visited">Vizitat recent</string>
+    <string name="shared_string_avg_altitude">Altitudine medie</string>
+    <string name="shared_string_length">Lungime</string>
 </resources>
