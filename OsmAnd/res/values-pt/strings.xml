@@ -4959,7 +4959,7 @@
     <string name="open_issue_on_github">Abrir problema no GitHub</string>
     <string name="about_osmand">Sobre o OsmAnd</string>
     <string name="enable_to_use_external_input_device">Permite usar um dispositivo de entrada externo com o OsmAnd</string>
-    <string name="local_indexes_category_terrain">Mapas de terreno (3D</string>
+    <string name="local_indexes_category_terrain">Mapas de terreno (3D)</string>
     <string name="key_event_action_change_map_orientation">Alterar orientação do mapa</string>
     <string name="user_guide">Guia do utilizador</string>
     <string name="smart_folder_name_present">Essa pasta inteligente já existe</string>
@@ -5665,4 +5665,9 @@
     <string name="default_buttons_opacity_original_description">Cada botão manteria a sua própria opacidade de fundo.</string>
     <string name="display_distance_to_first_intermediate_summary">Mostra primeiro a hora e a distância para a próxima paragem. Desativar para mostrar sempre os detalhes do destino.</string>
     <string name="display_distance_to_first_intermediate">Mostrar detalhes do itinerário para a próxima paragem</string>
+    <string name="shared_string_avg_speed">Velocidade mín.</string>
+    <string name="shared_string_length">Comprimento</string>
+    <string name="shared_string_avg_altitude">Altitude méd.</string>
+    <string name="popular_places_nearby">Lugares populares nas proximidades</string>
+    <string name="recently_visited">Recentemente visitado</string>
 </resources>
