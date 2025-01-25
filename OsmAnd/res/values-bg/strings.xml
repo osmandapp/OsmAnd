@@ -4558,7 +4558,7 @@
     <string name="quick_action_verb_start_pause">Старт/пауза</string>
     <string name="zoom_animated">Мащабиране с анимация</string>
     <string name="reset_key_assignments">Нулиране на зададените клавиши</string>
-    <string name="height_legend_description">За визуализиране на релефа се използват цветни карти на надморската височина.</string>
+    <string name="height_legend_description">За изобразяване на релефа се използват цветни карти на надморската височина.</string>
     <string name="action_icon">Пиктограма на действие</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
     <string name="quick_action_add_configure_map">Настройки на картата</string>
@@ -4657,4 +4657,13 @@
     <string name="percent_hour">%/ч</string>
     <string name="calculating_indication_message">Изчисляване…</string>
     <string name="obd_engine_coolant_temp_desc">Показва температурата на охлаждащата течност на двигателя</string>
+    <string name="popular_places_nearby">Известни места наблизо</string>
+    <string name="display_distance_to_first_intermediate">Подробности за следващата точка от маршрута</string>
+    <string name="recently_visited">Скоро посетени</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Маршрути за скално катерене</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Показване на маршрути за скално катерене</string>
+    <string name="shared_string_avg_altitude">Средна надморска височина</string>
+    <string name="shared_string_length">Дължина</string>
+    <string name="shared_string_avg_speed">Мин. скорост</string>
+    <string name="calculate_size">Изчисляване на големината</string>
 </resources>
