@@ -5667,4 +5667,7 @@
     <string name="display_distance_to_first_intermediate">Affiche les détails de l\'itinéraire jusqu\'au prochain arrêt</string>
     <string name="popular_places_nearby">Lieux populaires proches</string>
     <string name="recently_visited">Dernières visites</string>
+    <string name="shared_string_avg_altitude">Altitude moyenne</string>
+    <string name="shared_string_avg_speed">Vitesse minimale</string>
+    <string name="shared_string_length">Longueur</string>
 </resources>
