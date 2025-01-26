@@ -3029,4 +3029,5 @@
     <string name="routing_attr_hazmat_category_usa_5_name">ஆக்சிசனேற்ற முகவர்கள் மற்றும் கரிம பெராக்சைடுகள்</string>
     <string name="routing_attr_hazmat_category_usa_1_name">வெடிபொருட்கள்</string>
     <string name="rendering_value_managerName_name">மேலாளர் பெயர்</string>
+    <string name="rendering_attr_padusHideBoundaries_description">பொது நில எல்லைகளை மறைக்கவும், ஆனால் பகுதிகளை விட்டு விடுங்கள்</string>
 </resources>
