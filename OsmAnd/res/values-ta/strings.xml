@@ -2295,4 +2295,5 @@
     <string name="change_color">நிறத்தை மாற்றவும்</string>
     <string name="rename_track">தடத்தை மறுபெயரிடுங்கள்</string>
     <string name="enter_new_name">புதிய பெயரை உள்ளிடவும்</string>
+    <string name="shared_string_gpx_points">பிரிவகம்</string>
 </resources>
