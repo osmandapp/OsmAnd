@@ -1410,4 +1410,5 @@
     <string name="poi">பின்னர்</string>
     <string name="search_more">மேலும் தேடுங்கள்…</string>
     <string name="search_favorites">பிடித்தவைகளில் தேடுங்கள்</string>
+    <string name="error_avoid_specific_road">பைபாச் எதுவும் கிடைக்கவில்லை</string>
 </resources>
