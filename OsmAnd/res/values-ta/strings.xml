@@ -2314,4 +2314,5 @@
     <string name="backup_restore_data">தரவை மீட்டமைக்கவும்</string>
     <string name="map_downloaded">வரைபடம் பதிவிறக்கம் செய்யப்பட்டது</string>
     <string name="online_map">நிகழ்நிலை வரைபடம்</string>
+    <string name="tomorrow">நாளை</string>
 </resources>
