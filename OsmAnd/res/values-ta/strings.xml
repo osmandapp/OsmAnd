@@ -2472,4 +2472,5 @@
     <string name="routing_attr_height_obstacles_description">திட்டமிடப்பட்ட பயண நேரம் உயர தாக்கத்தை பிரதிபலிக்கும். ரூட்டிங் விருப்பம் செங்குத்தான மேல்நோக்கி தவிர்க்க உதவும்:</string>
     <string name="rendering_attr_currentTrackColor_description">சிபிஎக்ச் நிறம்</string>
     <string name="routing_attr_driving_style_speed_name">குறுகிய வழிகள்</string>
+    <string name="routing_attr_avoid_sett_description">குடியேறுவதைத் தவிர்க்கிறது</string>
 </resources>
