@@ -1658,4 +1658,5 @@
     <string name="map_during_navigation">வழிசெலுத்தலின் போது வரைபடம்</string>
     <string name="routing_profile_straightline">நேர் கோடு</string>
     <string name="routing_profile_direct_to">நேரடி-புள்ளி</string>
+    <string name="routing_profile_ski">ச்கை</string>
 </resources>
