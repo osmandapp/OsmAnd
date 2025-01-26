@@ -2038,4 +2038,5 @@
     <string name="join_segments">பிரிவுகளில் சேரவும்</string>
     <string name="simplified_track">எளிமைப்படுத்தப்பட்ட பாதை</string>
     <string name="simplified_track_description">பாதை வரி மட்டுமே சேமிக்கப்படும், வழிப்பாதைகள் நீக்கப்படும்.</string>
+    <string name="open_saved_track">சேமித்த பாதையை திறந்தது</string>
 </resources>
