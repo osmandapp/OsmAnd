@@ -1449,4 +1449,5 @@
     <string name="help_article_navigation_routing_online_routing_name">நிகழ்நிலை ரூட்டிங்</string>
     <string name="help_article_navigation_routing_osmand_routing_name">ஒச்மண்ட் ரூட்டிங் பற்றி</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">பாதசாரி ரூட்டிங்</string>
+    <string name="help_article_navigation_routing_public_transport_navigation_name">பொது போக்குவரத்து ரூட்டிங்</string>
 </resources>
