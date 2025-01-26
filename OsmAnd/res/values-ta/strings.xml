@@ -1850,4 +1850,5 @@
     <string name="altitude_descent">கீழ்நோக்கி</string>
     <string name="distance_moving">தூரம் சரி செய்யப்பட்டது</string>
     <string name="quick_action_poi_list">POI பட்டியல்</string>
+    <string name="gpxup_public">பொது</string>
 </resources>
