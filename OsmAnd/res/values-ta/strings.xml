@@ -2924,4 +2924,5 @@
     <string name="map_widget_ant_bicycle_speed_desc">பயணத்தின் வேகத்தைக் காட்டுகிறது</string>
     <string name="map_widget_ant_bicycle_dist">சைக்கிள் தூரம்</string>
     <string name="map_widget_ant_bicycle_dist_desc">பயணித்த தூரத்தைக் காட்டுகிறது</string>
+    <string name="shared_string_temperature">வெப்பநிலை</string>
 </resources>
