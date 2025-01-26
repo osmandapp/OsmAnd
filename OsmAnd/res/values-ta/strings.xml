@@ -1539,4 +1539,5 @@
     <string name="trip_recording_downhill_widget_desc">தற்போதைய பதிவு செய்யப்பட்ட பயணத்தின் அனைத்து சந்ததியினரின் கூட்டுத்தொகையைக் காட்டுகிறது.</string>
     <string name="trip_recording_uphill_widget_desc">தற்போது பதிவுசெய்யப்பட்ட பயணத்தின் அனைத்து ஏறுதல்களின் தொகையையும் காட்டுகிறது.</string>
     <string name="trip_recording_duration_widget_desc">தற்போது பதிவு செய்யப்பட்ட பயண நேரத்தைக் காட்டுகிறது.</string>
+    <string name="trip_recording_distance_widget_desc">தற்போது பதிவு செய்யப்பட்ட பயண தூரத்தைக் காட்டுகிறது.</string>
 </resources>
