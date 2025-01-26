@@ -1852,4 +1852,5 @@
     <string name="quick_action_poi_list">POI பட்டியல்</string>
     <string name="gpxup_public">பொது</string>
     <string name="gpxup_identifiable">அடையாளம் காணக்கூடிய</string>
+    <string name="gpxup_trackable">கண்காணிக்கக்கூடியது</string>
 </resources>
