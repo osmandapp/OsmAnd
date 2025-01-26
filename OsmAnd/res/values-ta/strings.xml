@@ -2921,4 +2921,5 @@
     <string name="map_widget_ant_bicycle_cadence">சைக்கிள் கேடென்ச்</string>
     <string name="map_widget_ant_bicycle_cadence_desc">பயனர் பெடலிங் செய்யும் வேகத்தைக் காட்டுகிறது</string>
     <string name="map_widget_ant_bicycle_speed">சைக்கிள் விரைவு</string>
+    <string name="map_widget_ant_bicycle_speed_desc">பயணத்தின் வேகத்தைக் காட்டுகிறது</string>
 </resources>
