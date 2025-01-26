@@ -1531,4 +1531,5 @@
     <string name="map_widget_rendering_fps_desc">வரைபடம் மற்றும் வரைபட கூறுகள் எவ்வளவு வேகமாக காட்டப்பட்டு புதுப்பிக்கப்படுகின்றன, நொடிக்கு பிரேம்களில் (FPS) வெளிப்படுத்தப்படுகின்றன என்பதைக் காட்டுகிறது.</string>
     <string name="map_widget_camera_tilt_desc">கேமரா சாய் கோணத்தை முன்னோக்கு பயன்முறையில் காட்டுகிறது. இயல்புநிலை 90 ° (சாய்வு இல்லை).</string>
     <string name="map_widget_camera_distance_desc">மேற்பரப்பு மட்டத்திற்கு மேலே கேமரா உயரத்தைக் காட்டுகிறது.</string>
+    <string name="map_widget_zoom_level_desc">தற்போதைய வரைபட சூம் அளவைக் காட்டுகிறது.</string>
 </resources>
