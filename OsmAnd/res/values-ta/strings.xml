@@ -2954,4 +2954,5 @@
     <string name="ant_plus_bluetooth_off">ஊடலை அணைக்கப்படுகிறது</string>
     <string name="ant_plus_bluetooth_off_description">ஊடலை கண்டுபிடிப்பு மற்றும் இணை சென்சார்களை இயக்கவும்.</string>
     <string name="external_device_forget_sensor">சென்சாரை மறந்து விடுங்கள்</string>
+    <string name="external_device_forget_sensor_description">சென்சார் பட்டியலிலிருந்து அகற்றப்படும். இந்த சென்சாரை நீங்கள் எந்த நேரத்திலும் மீண்டும் இணைக்க முடியும்.</string>
 </resources>
