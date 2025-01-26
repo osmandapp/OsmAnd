@@ -1500,4 +1500,5 @@
     <string name="send_log">பதிவு அனுப்பு</string>
     <string name="copy_build_version">உருவாக்க பதிப்பை நகலெடுக்கவும்</string>
     <string name="most_viewed">பெரும்பாலானவை பார்க்கப்பட்டன</string>
+    <string name="user_guide">பயனர் வழிகாட்டி</string>
 </resources>
