@@ -2432,4 +2432,5 @@
     <string name="rendering_attr_currentTrackWidth_description">சிபிஎக்ச் அகலம்</string>
     <string name="rendering_attr_piste_type_sleigh_name">பனியில் சறுக்கி ஓடும் வண்டி</string>
     <string name="rendering_attr_surface_paved_name">நடைபாதை</string>
+    <string name="routing_attr_difficulty_preference_name">விருப்பமான தொல்லை</string>
 </resources>
