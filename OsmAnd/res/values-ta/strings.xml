@@ -1727,4 +1727,5 @@
     <string name="si_nm_h">ஒரு மணி நேரத்திற்கு கடல் மைல்கள் (முடிச்சுகள்)</string>
     <string name="shared_string_tones">டோன்கள்</string>
     <string name="nothing_found">எதுவும் கிடைக்கவில்லை</string>
+    <string name="nothing_found_descr">தேடலை மாற்றவும் அல்லது அதன் ஆரம் அதிகரிக்கவும்.</string>
 </resources>
