@@ -1640,4 +1640,5 @@
     <string name="shared_string_last_used">கடைசியாக பயன்படுத்தப்பட்டது</string>
     <string name="switch_profile">சுயவிவரத்தை மாற்றவும்</string>
     <string name="show_traffic_warnings">போக்குவரத்து எச்சரிக்கைகள்</string>
+    <string name="show_pedestrian_warnings">பாதசாரி குறுக்குவழிகள்</string>
 </resources>
