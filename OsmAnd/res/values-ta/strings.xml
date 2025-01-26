@@ -1826,4 +1826,5 @@
     <string name="favorite_group_name">குழு பெயர்</string>
     <string name="select_group">குழுவைத் தேர்ந்தெடுக்கவும்</string>
     <string name="shared_string_item">உருப்படி</string>
+    <string name="shared_string_icon">படவுரு</string>
 </resources>
