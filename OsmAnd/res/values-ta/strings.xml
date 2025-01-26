@@ -2045,4 +2045,5 @@
     <string name="route_between_points_add_track_desc">புதிய பிரிவைச் சேர்க்க ஒரு தட கோப்பைத் தேர்ந்தெடுக்கவும்.</string>
     <string name="empty_filename">வெற்று கோப்பு பெயர்</string>
     <string name="plan_route_split_before">முன் பிரிந்தது</string>
+    <string name="plan_route_split_after">பிறகு பிரிந்தது</string>
 </resources>
