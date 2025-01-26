@@ -1748,4 +1748,5 @@
     <string name="shared_string_custom">தனிப்பயன்</string>
     <string name="shared_string_done">முடிந்தது</string>
     <string name="shared_string_uninstall">நிறுவல் நீக்க</string>
+    <string name="shared_string_upload">பதிவேற்றும்</string>
 </resources>
