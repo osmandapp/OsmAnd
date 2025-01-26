@@ -2142,4 +2142,5 @@
     <string name="route_add_start_point">புறப்படும் புள்ளியைச் சேர்க்கவும்</string>
     <string name="add_intermediate">இடைநிலை புள்ளியைச் சேர்க்கவும்</string>
     <string name="add_home">வீட்டிற்குச் சேர்க்கவும்</string>
+    <string name="add_work">வேலை சேர்க்கவும்</string>
 </resources>
