@@ -2259,4 +2259,5 @@
     <string name="gpx_split_interval_descr">பாதையில் தூரம் அல்லது நேரத்துடன் கூடிய மதிப்பெண்கள் காண்பிக்கப்படும் இடைவெளியைத் தேர்ந்தெடுக்கவும்.</string>
     <string name="track_show_start_finish_icons">தொடக்கத்தைக் காட்டு மற்றும் ஐகான்கள்</string>
     <string name="reset_to_original">அசல் மீட்டமை</string>
+    <string name="gpx_split_interval_none_descr">விரும்பிய பிளவு விருப்பத்தைத் தேர்ந்தெடுக்கவும்: நேரம் அல்லது தூரத்தில்.</string>
 </resources>
