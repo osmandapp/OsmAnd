@@ -2783,4 +2783,5 @@
     <string name="osmand_pro_tagline">அதிகபட்ச அம்சங்களைப் பெறுங்கள்</string>
     <string name="osmand_maps_plus_tagline">நீட்டிக்கப்பட்ட அம்சங்களைப் பெறுங்கள்</string>
     <string name="complete_purchase">முழுமையான கொள்முதல்</string>
+    <string name="no_purchases">உங்களிடம் எந்த கொள்முதல் இல்லை</string>
 </resources>
