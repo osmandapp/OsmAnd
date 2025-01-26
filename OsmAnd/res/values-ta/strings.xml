@@ -1690,4 +1690,5 @@
     <string name="turn_arrows_descr">ரூட் கோட்டில் டர்ன் அம்புகள் குறிக்கப்படுகிறதா என்பதைத் தேர்ந்தெடுக்கவும்.</string>
     <string name="temporary_conditional_routing">தற்காலிக வரம்புகளைக் கவனியுங்கள்</string>
     <string name="interrupt_music_descr">குரல் இடைநிறுத்த இசை பின்னணியை தூண்டுகிறது.</string>
+    <string name="interrupt_music">இடைநிறுத்தப்பட்ட இசை</string>
 </resources>
