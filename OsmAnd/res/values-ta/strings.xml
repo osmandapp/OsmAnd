@@ -2336,4 +2336,5 @@
     <string name="login_account">கணக்கு</string>
     <string name="user_password">கடவுச்சொல்</string>
     <string name="rendering_value_category_name">வகை</string>
+    <string name="city_type_suburb">புறநகர்</string>
 </resources>
