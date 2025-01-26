@@ -1432,4 +1432,5 @@
     <string name="help_article_map_map_context_menu_name">வரைபட சூழல் பட்டியல்</string>
     <string name="help_article_map_point_layers_on_map_name">வரைபடத்தில் புள்ளிகள்</string>
     <string name="help_article_map_raster_maps_name">ராச்டர் வரைபடங்கள் (ஆன்லைன் / ஆஃப்லைன்)</string>
+    <string name="help_article_map_track_context_menu_name">சூழல் மெனுவைக் கண்காணிக்கிறது</string>
 </resources>
