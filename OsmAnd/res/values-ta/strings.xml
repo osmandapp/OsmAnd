@@ -1645,4 +1645,5 @@
     <string name="show_lanes">பாதைகள்</string>
     <string name="speak_pedestrian">பாதசாரி குறுக்குவழிகள்</string>
     <string name="tts_title">Tts</string>
+    <string name="shared_string_symbol">அடையாளம்</string>
 </resources>
