@@ -2945,4 +2945,5 @@
     <string name="ant_plus_pair_bluetooth_prompt">நீங்கள் ஊடலை லு மற்றும் எறும்பு+ சென்சார்களை ஓச்மாண்டுடன் இணைக்கலாம்.</string>
     <string name="ant_plus_pair_new_sensor">புதிய சென்சார் இணை</string>
     <string name="ant_plus_searching">தேடுகிறது</string>
+    <string name="ble_search_again">மீண்டும் தேடுங்கள்</string>
 </resources>
