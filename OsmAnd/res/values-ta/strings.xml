@@ -1516,4 +1516,5 @@
     <string name="shared_string_min_speed">மணித்துளி. விரைவு</string>
     <string name="max_speed">அதிகபட்ச விரைவு</string>
     <string name="animate_my_location">சொந்த நிலையை உயிரூட்டவும்</string>
+    <string name="save_global_track_interval_descr">பொது தட பதிவுக்கான பதிவு இடைவெளியைக் குறிப்பிடவும் (வரைபடத்தில் \'ட்ரிப் ரெக்கார்டிங்\' விட்செட் வழியாக இயக்கப்பட்டது).</string>
 </resources>
