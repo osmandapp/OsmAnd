@@ -1496,4 +1496,5 @@
     <string name="dialogs_and_notifications_descr">பாப்அப்கள், உரையாடல்கள் மற்றும் அறிவிப்புகளைக் கட்டுப்படுத்துங்கள்.</string>
     <string name="history_preferences_descr">ஒவ்வொரு வரலாற்று வகைக்கும் வரலாற்று உள்நுழைவை தனித்தனியாக முடக்கலாம்.</string>
     <string name="settings_preset_descr">பயன்பாட்டு சுயவிவரத்திற்கு வரைபடக் காட்சி மற்றும் வழிசெலுத்தல் அமைப்புகள் நினைவில் வைக்கப்படுகின்றன. உங்கள் இயல்புநிலை சுயவிவரத்தை இங்கே அமைக்கவும்.</string>
+    <string name="coordinates">ஒருங்கிணைப்புகள்</string>
 </resources>
