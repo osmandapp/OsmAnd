@@ -2738,4 +2738,5 @@
     <string name="backup_view_conflicts">மோதல்களைக் காண்க</string>
     <string name="backup_data">தரவை காப்புப் பிரதி எடுக்கவும்</string>
     <string name="backup_version_history">பதிப்பு வரலாறு</string>
+    <string name="select_backup_data_descr">காப்புப் பிரதி எடுக்க தரவு மற்றும் கோப்புறைகளைத் தேர்ந்தெடுக்கவும்.</string>
 </resources>
