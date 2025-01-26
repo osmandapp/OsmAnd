@@ -2975,4 +2975,5 @@
     <string name="apply_to_existing">ஏற்கனவே பொருந்தும்</string>
     <string name="apply_only_to_new_points">புதிய புள்ளிகளுக்கு மட்டுமே பொருந்தும்</string>
     <string name="apply_to_existing_favorites_descr">குழுவின் தற்போதைய விருப்பமான புள்ளிகளில் மாற்றங்களை அல்லது புதியதாக மட்டுமே பயன்படுத்தலாமா?</string>
+    <string name="delete_folder">கோப்புறையை நீக்கு</string>
 </resources>
