@@ -2549,4 +2549,5 @@
     <string name="rendering_value_lightgreen_name">வெளிர் பச்சை</string>
     <string name="rendering_value_defaultTranslucentCyan_name">இயல்புநிலை (ஒளிஊடுருவக்கூடிய சியான்)</string>
     <string name="rendering_value_translucent_red_name">கசியும் சிவப்பு</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">தகுதி 1</string>
 </resources>
