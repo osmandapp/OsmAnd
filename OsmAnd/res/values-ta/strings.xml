@@ -1071,10 +1071,10 @@
     <string name="si_mi_feet">மைல்கள் / அடி</string>
     <string name="si_mi_yard">மைல்கள் / கெஜம்</string>
     <string name="si_km_m">கிலோமீட்டர்கள் / மீட்டர்</string>
-    <string name="yard">yd</string>
+    <string name="yard">யார்டு</string>
     <string name="foot">அடி</string>
-    <string name="mile_per_hour">எம்.பி.எச்</string>
-    <string name="mile">மி</string>
+    <string name="mile_per_hour">மைல்</string>
+    <string name="mile">மைல்</string>
     <string name="send_location_way_choose_title">இடத்தைப் பயன்படுத்தி பகிர்</string>
     <string name="send_location_sms_pattern">இருப்பிடம்: %1$s
 \n%2$s</string>
@@ -1107,7 +1107,7 @@
     <string name="indexing_poi">POI ஐச் சுட்டிக்காட்டுகிறது …</string>
     <string name="indexing_transport">குறியீட்டு போக்குவரத்து …</string>
     <string name="km">கி.மீ.</string>
-    <string name="km_h">கிமீ/மணி</string>
+    <string name="km_h">கிமீ / மணி</string>
     <string name="m">மீ</string>
     <string name="old_map_index_is_not_supported">நீக்கப்பட்ட வரைபட தரவு வடிவமைப்பு \'\' {0} \'\', ஆதரிக்கப்படவில்லை
 \n</string>
@@ -1373,7 +1373,7 @@
     <string name="osmand_service">பின்னணி முறை</string>
     <string name="nm">என்.எம்.ஐ.</string>
     <string name="min_mile">n/m</string>
-    <string name="min_km">நிமிடம்/கி.மீ.</string>
+    <string name="min_km">என்/கி.மீ.</string>
     <string name="m_s">எம்/கள்</string>
     <string name="si_kmh">ஒரு மணி நேரத்திற்கு கிலோமீட்டர்</string>
     <string name="si_mph">ஒரு மணி நேரத்திற்கு மைல்கள்</string>
@@ -2198,4 +2198,5 @@
     <string name="context_menu_item_open_note">OSM குறிப்பைத் திறக்கவும்</string>
     <string name="osn_add_dialog_title">குறிப்பை உருவாக்கவும்</string>
     <string name="shared_string_action">செயல்</string>
+    <string name="cubic_m">m³</string>
 </resources>
