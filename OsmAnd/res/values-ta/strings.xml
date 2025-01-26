@@ -2626,4 +2626,5 @@
     <string name="routing_attr_prefer_horse_routes_description">குதிரை வழிகளை விரும்புங்கள்</string>
     <string name="routing_attr_prefer_horse_routes_name">குதிரை வழிகளை விரும்புங்கள்</string>
     <string name="weight_limit_description">உங்கள் வாகன எடையை வழங்கவும், கனரக வாகனங்களுக்கு சில பாதை கட்டுப்பாடுகள் விண்ணப்பிக்கலாம்.</string>
+    <string name="height_limit_description">உங்கள் வாகன உயரத்தை வழங்கவும், சில பாதை கட்டுப்பாடுகள் உயர் வாகனங்களுக்கு விண்ணப்பிக்கலாம்.</string>
 </resources>
