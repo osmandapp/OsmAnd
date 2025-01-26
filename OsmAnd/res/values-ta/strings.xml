@@ -2884,4 +2884,5 @@
     <string name="routing_attr_avoid_4wd_only_description">4WD வாகனங்களுக்கு மட்டுமே பொருத்தமான சாலைகளைத் தவிர்க்கவும்</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">குறைந்த சூம்களில் ஐகான்களின் திட்ட காட்சி</string>
     <string name="routing_attr_difficulty_preference_beginner_name">தொடக்க</string>
+    <string name="dangerous_goods">ஆபத்தான பொருட்கள்</string>
 </resources>
