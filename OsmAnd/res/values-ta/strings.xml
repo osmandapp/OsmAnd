@@ -1442,4 +1442,5 @@
     <string name="help_article_navigation_routing_name">பாதை அளவுருக்கள்</string>
     <string name="help_article_navigation_routing_bicycle_based_routing_name">சைக்கிள் ரூட்டிங் (எம்டிபி)</string>
     <string name="help_article_navigation_routing_boat_navigation_name">படகு ரூட்டிங்</string>
+    <string name="help_article_navigation_routing_car_based_routing_name">கார் ரூட்டிங் (டிரக், மின்னோடி சைக்கிள்)</string>
 </resources>
