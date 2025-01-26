@@ -1837,4 +1837,5 @@
     <string name="personal_category_name">தனிப்பட்ட</string>
     <string name="shared_string_visible">தெரியும்</string>
     <string name="copy_to_map_favorites">பிடித்தவைகளுக்கு நகலெடுக்கவும்</string>
+    <string name="not_specified">குறிப்பிடப்படவில்லை</string>
 </resources>
