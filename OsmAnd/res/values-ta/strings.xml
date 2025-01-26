@@ -1565,4 +1565,5 @@
     <string name="current_speed_widget_desc">சி.பி.எச் வழியாக அறிவிக்கப்பட்டபடி உங்கள் தற்போதைய வேகத்தைக் காட்டுகிறது.</string>
     <string name="magnetic_bearing_widget_desc">உங்கள் இருப்பிடத்திலிருந்து காணப்பட்ட காந்த வடக்கு மற்றும் இலக்கு புள்ளிக்கு இடையிலான கோணம்.</string>
     <string name="time_to_go_desc">உங்கள் இலக்கை அடைய தேவையான நிமிடங்கள் அல்லது மணிநேரங்களில் நேரம்.</string>
+    <string name="arrival_time_widget_desc">இலக்கு புள்ளியில் வருகை நேரம்.</string>
 </resources>
