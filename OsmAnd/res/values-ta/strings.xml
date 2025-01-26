@@ -624,7 +624,7 @@
     <string name="max_min">அதிகபட்ச/குறைந்தபட்ச</string>
     <string name="min_max">"குறைந்தபட்ச/அதிகபட்ச "</string>
     <string name="index_tours">சுற்றுப்பயணம்</string>
-    <string name="shared_string_all">அனைத்தும்</string>
+    <string name="shared_string_all">அனைத்து</string>
     <string name="shared_string_waypoints">பாதை புள்ளிகளின்</string>
     <string name="download_additional_maps">காணாமல் போன வரைபடங்கள் %1$s (%2$d எம்பி) பதிவிறக்க வேண்டுமா\?</string>
     <string name="rendering_value_browse_map_name">வரைபடத்தை உலாவுக</string>
@@ -1754,4 +1754,5 @@
     <string name="shared_string_replace">மாற்றவும்</string>
     <string name="buy">வாங்க</string>
     <string name="shared_string_modify">மாற்றவும்</string>
+    <string name="first_time_continue">பின்னர்</string>
 </resources>
