@@ -1695,4 +1695,5 @@
     <string name="navigation_over_track">பாதையில் வழிசெலுத்தலைத் தொடங்கவா?</string>
     <string name="show_all_tracks">எல்லா தடங்களையும் காட்டு</string>
     <string name="shared_string_nearest">அருகில்</string>
+    <string name="previous_route">முந்தைய பாதை</string>
 </resources>
