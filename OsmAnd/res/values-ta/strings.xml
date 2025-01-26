@@ -2260,4 +2260,5 @@
     <string name="track_show_start_finish_icons">தொடக்கத்தைக் காட்டு மற்றும் ஐகான்கள்</string>
     <string name="reset_to_original">அசல் மீட்டமை</string>
     <string name="gpx_split_interval_none_descr">விரும்பிய பிளவு விருப்பத்தைத் தேர்ந்தெடுக்கவும்: நேரம் அல்லது தூரத்தில்.</string>
+    <string name="grey_color_undefined">தரவு இல்லாத பாகங்கள் சாம்பல் நிறத்தில் உள்ளன.</string>
 </resources>
