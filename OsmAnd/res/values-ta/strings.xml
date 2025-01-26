@@ -2465,4 +2465,5 @@
     <string name="rendering_attr_surface_sett_name">அமைக்கவும்</string>
     <string name="rendering_attr_roadStyle_name">சாலை நடை</string>
     <string name="rendering_attr_surface_gravel_name">சரளை</string>
+    <string name="routing_attr_max_num_changes_name">மாற்றங்களின் எண்ணிக்கை</string>
 </resources>
