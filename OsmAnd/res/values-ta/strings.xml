@@ -2058,4 +2058,5 @@
     <string name="shared_string_resources">வளங்கள்</string>
     <string name="download_tab_local">உள்ளக</string>
     <string name="osmand_live">ஒச்மண்ட் லைவ்</string>
+    <string name="hourly">மணிநேரத்திற்கு</string>
 </resources>
