@@ -2859,4 +2859,5 @@
     <string name="rendering_attr_horseScale_name">குதிரை பாதைகளின் தொல்லை</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">குறிப்பு குறிச்சொற்களைக் காட்டு</string>
     <string name="routing_attr_prefer_tactile_paving_name">தொட்டுணரக்கூடிய நடைபாதையை விரும்புங்கள்</string>
+    <string name="routing_attr_length_description">பாதைகளில் அனுமதிக்கப்பட வேண்டிய வாகன நீளத்தைக் குறிப்பிடவும்.</string>
 </resources>
