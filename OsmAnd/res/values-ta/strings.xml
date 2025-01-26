@@ -2699,4 +2699,5 @@
     <string name="verification_code_missing">நான் சரிபார்ப்புக் குறியீட்டைப் பெறவில்லை</string>
     <string name="verification_code_missing_description">10 நிமிடங்கள் ஆகலாம். உங்கள் ச்பேம் கோப்புறையில் இல்லாவிட்டால் கீழே உள்ள பொத்தானைப் பயன்படுத்தவும்.</string>
     <string name="resend_verification_code">மீண்டும்</string>
+    <string name="travel_routes">பயண வழிகள்</string>
 </resources>
