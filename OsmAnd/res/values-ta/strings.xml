@@ -1659,4 +1659,5 @@
     <string name="routing_profile_straightline">நேர் கோடு</string>
     <string name="routing_profile_direct_to">நேரடி-புள்ளி</string>
     <string name="routing_profile_ski">ச்கை</string>
+    <string name="routing_profile_geocoding">சியோகோடிங்</string>
 </resources>
