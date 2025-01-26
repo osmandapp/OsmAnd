@@ -2586,4 +2586,5 @@
     <string name="rendering_value_translucent_purple_name">கசியும் ஊதா</string>
     <string name="rendering_attr_hmRendered_description">காட்டப்பட்டுள்ள வரைபட விவரங்களின் அளவை அதிகரிக்கவும்.</string>
     <string name="rendering_attr_tracktype_grade2_name">திடமான (செப்பனிடப்படாத)</string>
+    <string name="rendering_attr_piste_type_hike_name">உயர்வு</string>
 </resources>
