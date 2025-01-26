@@ -1508,4 +1508,5 @@
     <string name="rotate_map_compass_opt">திசைகாட்டி திசை</string>
     <string name="rotate_map_bearing_opt">இயக்கம் திசை</string>
     <string name="rotate_map_north_opt">வடக்கு மேலே உள்ளது</string>
+    <string name="rotate_map_manual_opt">கைமுறையாக சுழற்றப்பட்டது</string>
 </resources>
