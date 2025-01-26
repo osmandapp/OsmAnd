@@ -3002,4 +3002,5 @@
     <string name="osmand_cloud_deleted_account_descr">கணக்கு மற்றும் அனைத்து தரவுகளும் ஒச்மண்ட் கிளவுட்டிலிருந்து நீக்கப்பட்டன.</string>
     <string name="skip_download">பதிவிறக்குவதைத் தவிர்க்கவும்</string>
     <string name="determine_location">உங்கள் இருப்பிடத்தை தீர்மானிக்க எங்களை அனுமதிக்கவும்</string>
+    <string name="average_glide_ratio">சராசரி சறுக்கு விகிதம்</string>
 </resources>
