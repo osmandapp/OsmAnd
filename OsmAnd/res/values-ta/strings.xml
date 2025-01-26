@@ -1535,4 +1535,5 @@
     <string name="map_widget_target_distance_desc">கேமரா மற்றும் இலக்கு இருப்பிடத்திற்கு இடையிலான தூரத்தைக் காட்டுகிறது.</string>
     <string name="av_notes_photo_widget_desc">விட்செட்டைத் தட்டினால் புகைப்படம் எடுக்க உங்களை அனுமதிக்கிறது.</string>
     <string name="av_notes_video_widget_desc">விட்செட்டைத் தட்டுவது ஒரு வீடியோவைப் பதிவுசெய்ய உங்களை அனுமதிக்கிறது.</string>
+    <string name="av_notes_audio_widget_desc">விட்செட்டைத் தட்டினால் ஆடியோ குறிப்பு எடுக்க உங்களை அனுமதிக்கிறது.</string>
 </resources>
