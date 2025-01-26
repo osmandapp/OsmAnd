@@ -2571,4 +2571,5 @@
     <string name="rendering_attr_alpineHiking_description">வழிகளுக்கான வகைப்பாடு வகைகளில் தொல்லை.</string>
     <string name="rendering_attr_highway_class_bridleway_name">பிரிட்ல்வே</string>
     <string name="routing_attr_avoid_share_taxi_name">பங்கு டாக்சி இல்லை</string>
+    <string name="rendering_attr_pisteRoutes_name">ச்கை சரிவுகள்</string>
 </resources>
