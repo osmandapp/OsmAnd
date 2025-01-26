@@ -3008,4 +3008,5 @@
     <string name="map_widget_glide_target_desc">இலக்கு புள்ளியை அடைய தேவையான சறுக்கு விகிதத்தைக் காட்டுகிறது.</string>
     <string name="map_widget_group_glide_ratio">சறுக்கு விகிதம்</string>
     <string name="map_widget_group_glide_desc">விட்செட்டுகள் சறுக்கு விகிதத்தை இலக்கு அல்லது தற்போதைய பயணத்திற்கான சராசரி சறுக்கு விகிதத்தைக் காட்டுகின்றன.</string>
+    <string name="target_elevation">இலக்கு உயரம்</string>
 </resources>
