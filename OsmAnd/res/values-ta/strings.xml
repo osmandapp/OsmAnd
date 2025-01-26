@@ -2752,4 +2752,5 @@
     <string name="cloud_recent_changes">மாற்றங்கள்</string>
     <string name="backup_pause_all">அனைத்தையும் இடைநிறுத்துங்கள்</string>
     <string name="cloud_all_changes_uploaded">அனைத்து மாற்றங்களும் பதிவேற்றப்பட்டன</string>
+    <string name="cloud_all_changes_downloaded">அனைத்து மாற்றங்களும் பதிவிறக்கம் செய்யப்பட்டன</string>
 </resources>
