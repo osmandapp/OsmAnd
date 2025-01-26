@@ -1612,4 +1612,5 @@
     <string name="position_on_map_bottom">கீழே</string>
     <string name="map_widget_compass">திசைகாட்டி</string>
     <string name="map_widget_intermediate_distance">இடைநிலை இலக்கு</string>
+    <string name="monitoring_control_start">ரெக்</string>
 </resources>
