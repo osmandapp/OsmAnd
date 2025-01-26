@@ -2938,4 +2938,5 @@
     <string name="shared_string_foot">கால்</string>
     <string name="bicycle_scd_device_name">சைக்கிள் சாதனம்</string>
     <string name="external_device_blood_pressure">இரத்த அழுத்தம்</string>
+    <string name="no_bt_permission">ஊடலை இசைவு வழங்கப்படவில்லை</string>
 </resources>
