@@ -2316,4 +2316,5 @@
     <string name="online_map">நிகழ்நிலை வரைபடம்</string>
     <string name="tomorrow">நாளை</string>
     <string name="go_to_map">வரைபடத்தைக் காட்டு</string>
+    <string name="device_memory">சாதன நினைவகம்</string>
 </resources>
