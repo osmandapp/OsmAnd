@@ -2695,4 +2695,5 @@
     <string name="promo_subscription">விளம்பர சந்தா</string>
     <string name="renew_subscription">சந்தாவை புதுப்பிக்கவும்</string>
     <string name="register_opr_create_new_account">புதிய கணக்கை உருவாக்கவும்</string>
+    <string name="osmand_cloud_create_account_descr">தயவுசெய்து உங்கள் மின்னஞ்சல் முகவரியை உள்ளிடவும், சரிபார்ப்புக் குறியீடு அங்கு அனுப்பப்படும்,\n உங்கள் எல்லா தரவும் அதனுடன் இணைக்கப்படும்.</string>
 </resources>
