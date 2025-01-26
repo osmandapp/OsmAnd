@@ -1237,7 +1237,7 @@
     <string name="arrival_distance_factor_early">ஆரம்ப</string>
     <string name="arrival_distance_factor_normally">இயல்பான</string>
     <string name="arrival_distance_factor_late">தாமதம்</string>
-    <string name="arrival_distance_factor_at_last">கடந்த மீட்டர்</string>
+    <string name="arrival_distance_factor_at_last">மிகவும் தாமதமாக</string>
     <string name="arrival_distance">வருகை அறிவிப்பு</string>
     <string name="arrival_distance_descr">வருகையை அறிவிக்க எவ்வளவு விரைவில் விரும்புகிறீர்கள்\?</string>
     <string name="rendering_out_of_memory">தேர்ந்தெடுக்கப்பட்ட பகுதியை காட்ட போதுமான செயல் நினைவகம் இல்லை</string>
