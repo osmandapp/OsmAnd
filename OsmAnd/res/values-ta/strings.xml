@@ -1425,4 +1425,5 @@
     <string name="simulation_preview_mode_desc">உருவகப்படுத்துதலின் விரைவு நேரான பிரிவுகளில் அதிகபட்சமாக இருக்கும் மற்றும் குறுக்குவெட்டுகளில் மட்டுமே மெதுவாக இருக்கும்.</string>
     <string name="simulation_preview_mode_title">வேகமான முன்னோட்டம் பயன்முறை</string>
     <string name="speed_mode">வேக பயன்முறை</string>
+    <string name="help_article_map_legend_nautical_map_name">கடல் வரைபட பாணி</string>
 </resources>
