@@ -2878,4 +2878,5 @@
     <string name="routing_attr_freeride_policy_allow_name">இசைவு</string>
     <string name="rendering_value_all_name">அனைத்தும்</string>
     <string name="rendering_value_omit_name">ஓடு</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">டிராலிபச் வழிகள்</string>
 </resources>
