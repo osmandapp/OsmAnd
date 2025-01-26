@@ -2842,4 +2842,5 @@
     <string name="routing_attr_difficulty_preference_advanced_name">மேம்பட்ட</string>
     <string name="rendering_attr_natureReserves_name">இயற்கை இருப்பு</string>
     <string name="routing_attr_freeride_policy_only_if_necessary_name">தேவைப்பட்டால் மட்டுமே</string>
+    <string name="routing_attr_avoid_highway_name">நெடுஞ்சாலைகளைத் தவிர்க்கவும்</string>
 </resources>
