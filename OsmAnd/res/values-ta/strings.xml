@@ -2119,4 +2119,5 @@
     <string name="coordinates_widget_current_location">ஒருங்கிணைப்புகள்: தற்போதைய இடம்</string>
     <string name="coordinates_widget_map_center">ஒருங்கிணைப்புகள்: வரைபட நடுவண்</string>
     <string name="searching_gps">சி.பி.எச் தேடுகிறது</string>
+    <string name="no_overlay">மேலடுக்கு இல்லை</string>
 </resources>
