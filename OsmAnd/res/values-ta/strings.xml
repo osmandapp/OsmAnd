@@ -1434,4 +1434,5 @@
     <string name="help_article_map_raster_maps_name">ராச்டர் வரைபடங்கள் (ஆன்லைன் / ஆஃப்லைன்)</string>
     <string name="help_article_map_track_context_menu_name">சூழல் மெனுவைக் கண்காணிக்கிறது</string>
     <string name="help_article_map_tracks_on_map_name">தடங்கள் மற்றும் வழிகள்</string>
+    <string name="help_article_map_vector_maps_name">திசையன் வரைபடங்கள் (வரைபட பாணிகள்)</string>
 </resources>
