@@ -2194,4 +2194,5 @@
     <string name="delete_waypoints">வழித்தடங்களை நீக்கு</string>
     <string name="poi_context_menu_modify">பின்னர் மாற்றவும்</string>
     <string name="context_menu_item_create_poi">பின்னர் உருவாக்கு</string>
+    <string name="poi_context_menu_modify_osm_change">OSM மாற்றத்தை மாற்றவும்</string>
 </resources>
