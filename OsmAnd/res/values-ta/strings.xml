@@ -2118,4 +2118,5 @@
     <string name="mapillary_menu_title_pano">360 ° படங்களை மட்டுமே காண்பி</string>
     <string name="coordinates_widget_current_location">ஒருங்கிணைப்புகள்: தற்போதைய இடம்</string>
     <string name="coordinates_widget_map_center">ஒருங்கிணைப்புகள்: வரைபட நடுவண்</string>
+    <string name="searching_gps">சி.பி.எச் தேடுகிறது</string>
 </resources>
