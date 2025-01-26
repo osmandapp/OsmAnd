@@ -2553,4 +2553,5 @@
     <string name="rendering_attr_transportStops_name">போக்குவரத்து நிறுத்தங்கள்</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">முனை நெட்வொர்க்குகள்</string>
     <string name="rendering_value_sacScale_name">சாக்</string>
+    <string name="rendering_value_sacScale_description">சுவிச் ஆல்பைன் கிளப்</string>
 </resources>
