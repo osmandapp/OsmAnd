@@ -2002,4 +2002,5 @@
     <string name="profile_type_custom_string">தனிப்பயன் சுயவிவரம்</string>
     <string name="new_profile">புதிய சுயவிவரம்</string>
     <string name="configure_profile">சுயவிவரத்தை உள்ளமைக்கவும்</string>
+    <string name="profile_settings">சுயவிவர குறிப்பிட்ட அமைப்புகள்</string>
 </resources>
