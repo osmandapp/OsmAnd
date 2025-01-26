@@ -2554,4 +2554,5 @@
     <string name="rendering_value_walkingRoutesOSMCNodes_name">முனை நெட்வொர்க்குகள்</string>
     <string name="rendering_value_sacScale_name">சாக்</string>
     <string name="rendering_value_sacScale_description">சுவிச் ஆல்பைன் கிளப்</string>
+    <string name="rendering_value_caiScale_name">Cai</string>
 </resources>
