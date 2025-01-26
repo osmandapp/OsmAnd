@@ -2135,4 +2135,5 @@
     <string name="quick_action_add_create_items">உருப்படிகளை உருவாக்கவும்</string>
     <string name="key_event_category_map_interactions">வரைபட இடைவினைகள்</string>
     <string name="map_look_descr">வரைபட தோற்றம்</string>
+    <string name="context_menu_item_edit_waypoint">சிபிஎக்ச் வழியைத் திருத்து</string>
 </resources>
