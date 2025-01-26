@@ -2417,4 +2417,5 @@
     <string name="rendering_attr_surface_grass_name">புல்</string>
     <string name="routing_attr_piste_type_skitour_description">ச்கை சுற்றுப்பயணத்திற்கான வழிகள்.</string>
     <string name="rendering_attr_surface_fine_gravel_name">நன்றாக சரளை</string>
+    <string name="rendering_value_orange_name">ஆரஞ்சு</string>
 </resources>
