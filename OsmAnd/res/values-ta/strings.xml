@@ -1766,4 +1766,5 @@
     <string name="shared_string_preparing">தயாரித்தல்</string>
     <string name="shared_string_min">மணித்துளி</string>
     <string name="shared_string_max">அதிகபட்சம்</string>
+    <string name="shared_string_wifi_only">வைஃபை மட்டுமே</string>
 </resources>
