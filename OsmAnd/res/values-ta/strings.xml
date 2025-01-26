@@ -2822,4 +2822,5 @@
     <string name="routing_attr_avoid_highway_description">நெடுஞ்சாலைகளைத் தவிர்க்கவும்</string>
     <string name="routing_attr_prefer_hiking_routes_description">ஐகிங் வழிகளை விரும்புங்கள்</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">காற்றின் வேக தனிமைப்படுத்தல்கள்</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">இராணுவப் பகுதிகளை மறைக்கவும்</string>
 </resources>
