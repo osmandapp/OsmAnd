@@ -3010,4 +3010,5 @@
     <string name="map_widget_group_glide_desc">விட்செட்டுகள் சறுக்கு விகிதத்தை இலக்கு அல்லது தற்போதைய பயணத்திற்கான சராசரி சறுக்கு விகிதத்தைக் காட்டுகின்றன.</string>
     <string name="target_elevation">இலக்கு உயரம்</string>
     <string name="average_glide_time_interval_desc">சறுக்கு சராசரியான நேர இடைவெளியைக் குறிப்பிடவும்.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">முறைகளை மாற்ற விட்செட்டைத் தட்டவும்.</string>
 </resources>
