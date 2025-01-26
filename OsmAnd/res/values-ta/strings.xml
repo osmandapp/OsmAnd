@@ -2111,4 +2111,5 @@
     <string name="save_poi_too_many_uppercase">இந்த பெயரில் பல பெரிய எழுத்துக்கள் உள்ளன. தொடரவா?</string>
     <string name="shared_string_add_photos">புகைப்படங்களைச் சேர்க்கவும்</string>
     <string name="improve_coverage_mapillary">Mapililar உடன் புகைப்படக் கவரேசை மேம்படுத்தவும்</string>
+    <string name="mapillary_descr">அனைவருக்கும் நிகழ்நிலை தெரு-நிலை புகைப்படங்கள். இடங்களைக் கண்டறியவும், ஒத்துழைக்கவும், உலகைக் கைப்பற்றவும்.</string>
 </resources>
