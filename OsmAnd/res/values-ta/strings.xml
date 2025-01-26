@@ -2019,4 +2019,5 @@
     <string name="base_profile_descr_car">கார், டிரக், மின்னோடி சைக்கிள்</string>
     <string name="base_profile_descr_bicycle">மலை பைக், மொபெட், குதிரை</string>
     <string name="base_profile_descr_pedestrian">நடைபயிற்சி, நடைபயணம், ஓடுதல்</string>
+    <string name="base_profile_descr_public_transport">பொது போக்குவரத்து வகைகள்</string>
 </resources>
