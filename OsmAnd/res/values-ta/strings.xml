@@ -2723,4 +2723,5 @@
     <string name="upload_change">மாற்றத்தை பதிவேற்றவும்</string>
     <string name="cloud_version_will_be_removed">முகில் பதிப்பு அகற்றப்படும்</string>
     <string name="cloud_changes_will_be_dismissed">மேகக்கணி மாற்றங்கள் தள்ளுபடி செய்யப்படும்</string>
+    <string name="local_file_will_be_restored">உள்ளக கோப்பு மீட்டமைக்கப்படும்</string>
 </resources>
