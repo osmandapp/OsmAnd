@@ -2343,4 +2343,5 @@
     <string name="city_type_city">நகரம்</string>
     <string name="search_POI_level_btn">மேலும் கண்டுபிடி</string>
     <string name="search_address_street">தெரு</string>
+    <string name="search_address_building_option">கட்டிடம்</string>
 </resources>
