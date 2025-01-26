@@ -2098,4 +2098,5 @@
     <string name="working_days">வேலை நாட்கள்</string>
     <string name="contact_info">தொடர்பு செய்தி</string>
     <string name="poi_remove_title">பின்னர் நீக்கு</string>
+    <string name="osm_edit_created_poi">OSM POI ஐ உருவாக்கியது</string>
 </resources>
