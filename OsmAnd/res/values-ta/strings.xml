@@ -2066,4 +2066,5 @@
     <string name="download_tab_updates">புதுப்பிப்புகள்</string>
     <string name="res_unknown">தெரியவில்லை</string>
     <string name="shared_string_size">அளவு</string>
+    <string name="created_on">உருவாக்கப்பட்டது</string>
 </resources>
