@@ -1588,4 +1588,5 @@
     <string name="add_page">பக்கத்தைச் சேர்க்கவும்</string>
     <string name="add_row">வரிசையைச் சேர்க்கவும்</string>
     <string name="shared_string_switch_mode">சுவிட்ச் பயன்முறை</string>
+    <string name="go_to_marker_location">மார்க்கர் இருப்பிடத்திற்குச் செல்லவும்</string>
 </resources>
