@@ -2496,4 +2496,5 @@
     <string name="rendering_attr_highway_class_track_name">மின்தடம்</string>
     <string name="rendering_attr_tracktype_grade4_name">பெரும்பாலும் மென்மையானது</string>
     <string name="rendering_attr_alpineHiking_name">ஐக்கிங் பாதைகள் தொல்லை தகுதி</string>
+    <string name="rendering_attr_showLez_name">குறைந்த உமிழ்வு மண்டலங்களைக் காட்டு</string>
 </resources>
