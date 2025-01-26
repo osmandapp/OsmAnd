@@ -2272,4 +2272,5 @@
     <string name="public_transport_try_change_settings">அமைப்புகளை மாற்ற முயற்சிக்கவும்.</string>
     <string name="date_of_creation">உருவாக்கிய தேதி</string>
     <string name="max_altitude">அதிகபட்ச உயரம்</string>
+    <string name="max_sensor_speed">சென்சார் விரைவு, அதிகபட்சம்</string>
 </resources>
