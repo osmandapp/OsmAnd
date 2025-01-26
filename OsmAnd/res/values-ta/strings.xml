@@ -2797,4 +2797,5 @@
     <string name="compass_visible_if_map_rotated">வரைபடம் சுழற்றப்பட்டால் தெரியும்</string>
     <string name="weather_forecast">வானிலை முன்னறிவிப்பு</string>
     <string name="weather_offline_forecast">இணைப்பில்லாத முன்னறிவிப்பு</string>
+    <string name="weather_forecast_is_outdated">முன்னறிவிப்பு காலாவதியானது.</string>
 </resources>
