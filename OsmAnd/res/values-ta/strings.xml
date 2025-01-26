@@ -1505,4 +1505,5 @@
     <string name="telegram_chats">தந்தி அரட்டைகள்</string>
     <string name="report_an_issues">ஒரு சிக்கலைப் புகாரளிக்கவும்</string>
     <string name="rotate_map_to">வரைபட நோக்குநிலை</string>
+    <string name="rotate_map_compass_opt">திசைகாட்டி திசை</string>
 </resources>
