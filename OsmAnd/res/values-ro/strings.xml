@@ -1199,7 +1199,7 @@
     <string name="navigate_point_zone">Zonă</string>
     <string name="download_tab_downloads">Toate descărcările</string>
     <string name="download_tab_updates">Actualizări</string>
-    <string name="download_tab_local">Local</string>
+    <string name="download_tab_local">Locală</string>
     <string name="no_internet_connection">Descărcarea nu este posibilă, verificaţi conexiunea la Internet.</string>
     <string name="shared_string_dismiss">Închide</string>
     <string name="everything_up_to_date">Toate fișierele au fost actualizate</string>
