@@ -2623,4 +2623,5 @@
     <string name="routing_attr_only_permitted_streets_name">வெளிப்படையாக அனுமதிக்கப்பட்ட தெருக்கள்</string>
     <string name="routing_attr_only_permitted_ways_description">வெளிப்படையாக அனுமதிக்கப்பட்ட வழிகளை (தடங்கள், பாதைகள் போன்றவை) மட்டுமே பயன்படுத்துங்கள்</string>
     <string name="routing_attr_only_permitted_ways_name">வெளிப்படையாக அனுமதிக்கப்பட்ட வழிகள்</string>
+    <string name="routing_attr_prefer_horse_routes_description">குதிரை வழிகளை விரும்புங்கள்</string>
 </resources>
