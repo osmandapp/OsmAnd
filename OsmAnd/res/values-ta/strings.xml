@@ -2475,4 +2475,5 @@
     <string name="routing_attr_avoid_sett_description">குடியேறுவதைத் தவிர்க்கிறது</string>
     <string name="rendering_attr_highway_class_steps_name">படிகள்</string>
     <string name="routing_attr_avoid_tram_name">டிராம்கள் இல்லை</string>
+    <string name="rendering_attr_piste_type_downhill_name">கீழ்நோக்கி</string>
 </resources>
