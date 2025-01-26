@@ -1465,4 +1465,5 @@
     <string name="help_article_plan_route_coordinate_input_name">உள்ளீட்டை ஒருங்கிணைக்கிறது</string>
     <string name="help_article_plan_route_web_name">வலை பாதை திட்டமிடுபவர்</string>
     <string name="help_article_purchases_android_name">ஆண்ட்ராய்டு கொள்முதல்</string>
+    <string name="help_article_purchases_giveaway_name">கொடுப்பனவு</string>
 </resources>
