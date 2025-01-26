@@ -2452,4 +2452,5 @@
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">முனை பிணைய சுழற்சி வழிகளைக் காட்டு</string>
     <string name="rendering_attr_contourDensity_name">விளிம்பு வரி அடர்த்தி</string>
     <string name="rendering_attr_showRunningRoutes_name">இயங்கும் வழிகள்</string>
+    <string name="rendering_attr_showRunningRoutes_description">இயங்கும் வழிகளைக் காட்டு</string>
 </resources>
