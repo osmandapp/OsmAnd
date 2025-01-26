@@ -2767,4 +2767,5 @@
     <string name="terrain_maps">நிலப்பரப்பு வரைபடங்கள்</string>
     <string name="shared_string_cross_buy">குறுக்கு வாங்க</string>
     <string name="track_has_no_needed_data">பாதையில் அந்தந்த தரவைக் காணவில்லை.</string>
+    <string name="select_another_colorization">மற்றொரு வகை வண்ணத்தைத் தேர்ந்தெடுக்கவும்.</string>
 </resources>
