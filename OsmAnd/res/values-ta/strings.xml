@@ -1407,4 +1407,5 @@
     <string name="show_poi_over_map">POI மேலடுக்கு காட்டு</string>
     <string name="address_search_desc">முகவரி தேடல்</string>
     <string name="shared_string_target_points">இடங்கள்</string>
+    <string name="poi">பின்னர்</string>
 </resources>
