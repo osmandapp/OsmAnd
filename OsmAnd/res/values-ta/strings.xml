@@ -1228,7 +1228,7 @@
     <string name="oclock">மணிக்கு</string>
     <string name="towards">நோக்கி</string>
     <string name="accuracy">துல்லியம்</string>
-    <string name="altitude">குத்துயரம்</string>
+    <string name="altitude">உயரம்</string>
     <string name="no_info">தகவல் இல்லை</string>
     <string name="direction_style_sidewise">பக்கவாட்டு (8 பிரிவுகளில்)</string>
     <string name="direction_style_clockwise">கடிகார (12 பிரிவுகளில்)</string>
@@ -1402,4 +1402,5 @@
     <string name="replace_destination_point">இலக்கை மாற்றவும்</string>
     <string name="add_as_first_destination_point">முதல் இடைநிலை இலக்காக சேர்க்கவும்</string>
     <string name="add_as_last_destination_point">கடைசி இடைநிலை இடமாக சேர்க்கவும்</string>
+    <string name="start_point">தொடங்கு</string>
 </resources>
