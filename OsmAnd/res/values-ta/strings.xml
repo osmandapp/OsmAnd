@@ -1992,4 +1992,5 @@
     <string name="shared_string_rendering_style">வழங்குதல் பாணி</string>
     <string name="shared_string_importing">இறக்குமதி</string>
     <string name="configure_screen_quick_action">விரைவான செயல்</string>
+    <string name="search_activity">தேடல்</string>
 </resources>
