@@ -1744,4 +1744,5 @@
     <string name="in_grace_period">கருணை காலத்தில்</string>
     <string name="on_hold">நிறுத்தி</string>
     <string name="shared_string_paused">இடைநிறுத்தப்பட்டது</string>
+    <string name="shared_string_undefined">வரையறுக்கப்படவில்லை</string>
 </resources>
