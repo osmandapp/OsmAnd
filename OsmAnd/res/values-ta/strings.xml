@@ -1499,4 +1499,5 @@
     <string name="coordinates">ஒருங்கிணைப்புகள்</string>
     <string name="send_log">பதிவு அனுப்பு</string>
     <string name="copy_build_version">உருவாக்க பதிப்பை நகலெடுக்கவும்</string>
+    <string name="most_viewed">பெரும்பாலானவை பார்க்கப்பட்டன</string>
 </resources>
