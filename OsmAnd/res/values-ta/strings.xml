@@ -2392,4 +2392,5 @@
     <string name="activity_type_winter_name">குளிர்காலம்</string>
     <string name="activity_type_water_name">நீர்</string>
     <string name="rendering_attr_showMtbScale_name">MTB அளவைக் காட்டு</string>
+    <string name="rendering_attr_showMtbScaleIMBATrails_name">MTB IMBA தடங்களைக் காட்டு</string>
 </resources>
