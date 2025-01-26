@@ -2729,4 +2729,5 @@
     <string name="backup_welcome_back">மீண்டும் வருக!</string>
     <string name="backup_restore_now">இப்போது மீட்டமைக்கவும்</string>
     <string name="last_backup">கடைசி காப்புப்பிரதி</string>
+    <string name="backup_now">இப்போது காப்புப்பிரதி</string>
 </resources>
