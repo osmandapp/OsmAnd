@@ -2716,4 +2716,5 @@
     <string name="local_backup_descr">உள்ளக கோப்பிலிருந்து தரவை காப்புப் பிரதி எடுக்கவும் அல்லது மீட்டெடுக்கவும்.</string>
     <string name="backup_into_file">கோப்பாக காப்புப் பிரதி எடுக்கவும்</string>
     <string name="restore_from_file">கோப்பிலிருந்து மீட்டமைக்கவும்</string>
+    <string name="backup_complete">காப்புப்பிரதி முடிந்தது</string>
 </resources>
