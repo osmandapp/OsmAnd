@@ -1787,4 +1787,5 @@
     <string name="map_3d_mode_action">3 டி பயன்முறை</string>
     <string name="compass_always_visible">எப்போதும் தெரியும்</string>
     <string name="compass_always_hidden">எப்போதும் மறைக்கப்படுகிறது</string>
+    <string name="shared_string_hidden">மறைக்கப்பட்ட</string>
 </resources>
