@@ -2904,4 +2904,5 @@
     <string name="announcement_time_passing">கடந்து</string>
     <string name="restart_is_required">மாற்றத்தைப் பயன்படுத்த மறுதொடக்கம் தேவை.</string>
     <string name="map_widget_altitude_current_location">உயரம்: தற்போதைய இடம்</string>
+    <string name="map_widget_altitude_map_center">உயரம்: வரைபட நடுவண்</string>
 </resources>
