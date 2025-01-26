@@ -1874,4 +1874,5 @@
     <string name="srtm_color_scheme">வண்ணத் திட்டம்</string>
     <string name="press_again_to_change_the_map_orientation">வரைபட நோக்குநிலையை மாற்ற மீண்டும் தட்டவும்</string>
     <string name="shared_string_weather">வானிலை</string>
+    <string name="map_settings_weather_temp">வெப்பநிலை</string>
 </resources>
