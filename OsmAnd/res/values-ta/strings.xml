@@ -2444,4 +2444,5 @@
     <string name="routeInfo_smoothness_description">சாலை/பாதையின் சூழ்ச்சி வகைப்பாடு சக்கர வாகனங்களுக்கான வகைப்பாடு, குறிப்பாக மேற்பரப்பு வழக்கமான/தட்டையானது குறித்து.</string>
     <string name="rendering_attr_highway_class_road_name">சாலை</string>
     <string name="rendering_value_translucent_green_name">கசியும் பச்சை</string>
+    <string name="rendering_value_translucent_yellow_name">கசியும் மஞ்சள்</string>
 </resources>
