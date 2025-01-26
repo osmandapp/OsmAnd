@@ -2732,4 +2732,5 @@
     <string name="backup_now">இப்போது காப்புப்பிரதி</string>
     <string name="make_backup">காப்புப்பிரதி செய்யுங்கள்</string>
     <string name="make_backup_descr">இந்த சாதனத்தில் பல மாற்றங்கள் உள்ளன, தயவுசெய்து இந்த தரவை இழக்கக்கூடாது என்பதற்காக காப்புப்பிரதி எடுக்கவும்.</string>
+    <string name="cloud_conflicts">மோதல்கள்</string>
 </resources>
