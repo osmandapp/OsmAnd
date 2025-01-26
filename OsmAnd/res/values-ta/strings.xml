@@ -2154,4 +2154,5 @@
     <string name="shared_string_open_track">திறந்த பாதையில்</string>
     <string name="show_gpx">தடங்கள்</string>
     <string name="quick_action_interim_dialog">இடைக்கால உரையாடலைக் காட்டு</string>
+    <string name="quick_action_fav_name_descr">முகவரி அல்லது இட பெயரைப் பயன்படுத்த காலியாக விடவும்.</string>
 </resources>
