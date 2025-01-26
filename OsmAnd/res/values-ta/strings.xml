@@ -2345,4 +2345,5 @@
     <string name="search_address_street">தெரு</string>
     <string name="search_address_building_option">கட்டிடம்</string>
     <string name="external_input_device">வெளிப்புற உள்ளீட்டு சாதனங்கள்</string>
+    <string name="sett_generic_ext_input">விசைப்பலகை</string>
 </resources>
