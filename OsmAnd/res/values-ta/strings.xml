@@ -2589,4 +2589,5 @@
     <string name="rendering_attr_piste_type_hike_name">உயர்வு</string>
     <string name="rendering_attr_piste_type_snow_park_name">நிலப்பரப்பு பூங்கா</string>
     <string name="rendering_attr_highway_class_footway_name">பாதை</string>
+    <string name="routing_attr_avoid_tram_description">அணிகளைத் தவிர்க்கவும்</string>
 </resources>
