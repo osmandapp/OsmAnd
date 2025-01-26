@@ -2511,4 +2511,5 @@
     <string name="rendering_attr_highway_class_state_road_name">மாநில சாலை</string>
     <string name="routing_attr_avoid_sett_name">இல்லை</string>
     <string name="rendering_value_translucent_lightblue_name">ஒளிஊடுருவக்கூடிய வெளிர் நீலம்</string>
+    <string name="rendering_attr_smoothness_good_name">நல்லது</string>
 </resources>
