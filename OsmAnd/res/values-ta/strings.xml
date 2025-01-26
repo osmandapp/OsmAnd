@@ -2034,4 +2034,5 @@
     <string name="next_segment">அடுத்த பிரிவு</string>
     <string name="whole_track">முழு பாதையும்</string>
     <string name="only_selected_segment_recalc">தேர்ந்தெடுக்கப்பட்ட சுயவிவரத்தைப் பயன்படுத்தி தேர்ந்தெடுக்கப்பட்ட பிரிவு மட்டுமே மீண்டும் கணக்கிடப்படும்.</string>
+    <string name="reverse_route">தலைகீழ் பாதை</string>
 </resources>
