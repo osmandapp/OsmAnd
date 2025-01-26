@@ -2385,4 +2385,5 @@
     <string name="activity_type_running_name">இயங்கும்</string>
     <string name="activity_type_hiking_name">ஐக்கிங்</string>
     <string name="activity_type_cycling_name">சைக்கிள் ஓட்டுதல்</string>
+    <string name="activity_type_mountainbike_name">மலை பைக்</string>
 </resources>
