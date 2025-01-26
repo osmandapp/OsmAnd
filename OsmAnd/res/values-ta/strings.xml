@@ -2491,4 +2491,5 @@
     <string name="rendering_attr_hideWaterPolygons_name">தண்ணீரை மறைக்க</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="rendering_attr_piste_type_skitour_name">ச்கை டூர்</string>
+    <string name="routing_attr_prefer_unpaved_description">செப்பனிடப்படாத சாலைகளை விரும்புங்கள்.</string>
 </resources>
