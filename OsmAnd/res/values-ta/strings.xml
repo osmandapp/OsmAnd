@@ -1463,4 +1463,5 @@
     <string name="help_article_personal_storage_name">சேமிப்பு</string>
     <string name="help_article_plan_route_name">திட்ட பாதை</string>
     <string name="help_article_plan_route_coordinate_input_name">உள்ளீட்டை ஒருங்கிணைக்கிறது</string>
+    <string name="help_article_plan_route_web_name">வலை பாதை திட்டமிடுபவர்</string>
 </resources>
