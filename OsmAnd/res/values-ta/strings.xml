@@ -1974,4 +1974,5 @@
     <string name="purchases">கொள்முதல்</string>
     <string name="export_profile">ஏற்றுமதி சுயவிவரம்</string>
     <string name="select_data_to_import">இறக்குமதி செய்ய வேண்டிய தரவைத் தேர்ந்தெடுக்கவும்.</string>
+    <string name="nav_type_hint">வழிசெலுத்தல் வகை</string>
 </resources>
