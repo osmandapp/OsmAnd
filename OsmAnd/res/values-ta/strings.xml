@@ -1765,4 +1765,5 @@
     <string name="osmand_parking_warning">எச்சரிக்கை</string>
     <string name="shared_string_preparing">தயாரித்தல்</string>
     <string name="shared_string_min">மணித்துளி</string>
+    <string name="shared_string_max">அதிகபட்சம்</string>
 </resources>
