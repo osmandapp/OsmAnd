@@ -2616,4 +2616,5 @@
     <string name="routing_attr_avoid_train_name">ரயில்கள் இல்லை</string>
     <string name="routing_attr_allow_motorway_description">மின்னோடி பாதைகளை அனுமதிக்கிறது.</string>
     <string name="rendering_attr_hmRendered_name">மேலும் வரைபட விவரங்களைக் காட்டு</string>
+    <string name="rendering_attr_roadColors_name">சாலை வண்ண திட்டம்</string>
 </resources>
