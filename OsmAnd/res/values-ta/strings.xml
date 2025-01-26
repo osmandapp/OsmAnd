@@ -1621,4 +1621,5 @@
     <string name="map_widget_trip_recording_duration">காலம்</string>
     <string name="map_widget_trip_recording_distance">தூரம்</string>
     <string name="map_widget_time">செல்ல வேண்டிய நேரம்</string>
+    <string name="map_widget_ruler_control">ஆரம் ஆட்சியாளர்</string>
 </resources>
