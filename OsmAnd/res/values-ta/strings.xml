@@ -2163,4 +2163,5 @@
     <string name="quick_action_first_intermediate">முதல் இடைநிலை</string>
     <string name="quick_action_track_waypoint">டிராக் வே பாயிண்ட்</string>
     <string name="quick_action_directions_from">தொடக்க புள்ளி</string>
+    <string name="quick_action_destination">இலக்கு</string>
 </resources>
