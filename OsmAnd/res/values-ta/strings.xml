@@ -2789,4 +2789,5 @@
     <string name="new_device_account">புதிய சாதனம் / புதிய கணக்கு</string>
     <string name="expired">காலாவதியான</string>
     <string name="shared_string_expires">காலாவதியாகிறது</string>
+    <string name="manage_subscription">சந்தாவை நிர்வகிக்கவும்</string>
 </resources>
