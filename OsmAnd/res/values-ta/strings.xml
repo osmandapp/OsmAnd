@@ -1607,4 +1607,5 @@
     <string name="map_widget_transparent">வெளிப்படையான விட்செட்டுகள்</string>
     <string name="map_widget_next_turn">அடுத்த திருப்பம்</string>
     <string name="map_widget_next_turn_small">அடுத்த திருப்பம் (சிறியது)</string>
+    <string name="map_widget_next_next_turn">இரண்டாவது அடுத்த முறை</string>
 </resources>
