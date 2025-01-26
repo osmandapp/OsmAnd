@@ -1724,4 +1724,5 @@
     <string name="right_side_navigation">வலது கை போக்குவரத்து</string>
     <string name="si_nm_mt">கடல் மைல்கள்/மீட்டர்</string>
     <string name="si_nm_ft">கடல் மைல்கள்/அடி</string>
+    <string name="si_nm_h">ஒரு மணி நேரத்திற்கு கடல் மைல்கள் (முடிச்சுகள்)</string>
 </resources>
