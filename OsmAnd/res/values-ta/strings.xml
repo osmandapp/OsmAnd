@@ -1680,4 +1680,5 @@
     <string name="select_nav_profile_dialog_message">கிடைக்கக்கூடிய இணைப்பில்லாத மற்றும் நிகழ்நிலை ரூட்டிங் என்சின்களுடன், வழிகள் எவ்வாறு கணக்கிடப்படுகின்றன என்பதை \'வழிசெலுத்தல் வகை\' தேர்ந்தெடுக்கிறது.</string>
     <string name="osmand_default_routing">ஒச்மண்ட் ரூட்டிங்</string>
     <string name="special_routing_type">சிறப்பு ரூட்டிங்</string>
+    <string name="route_recalculation_dist_title">பாதையை மறுபரிசீலனை செய்ய குறைந்தபட்ச தூரம்</string>
 </resources>
