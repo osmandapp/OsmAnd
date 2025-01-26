@@ -2477,4 +2477,5 @@
     <string name="routing_attr_avoid_tram_name">டிராம்கள் இல்லை</string>
     <string name="rendering_attr_piste_type_downhill_name">கீழ்நோக்கி</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">வரையறுக்கப்படவில்லை</string>
+    <string name="routing_attr_allow_motorway_name">மின்னோடி பாதைகளைப் பயன்படுத்துங்கள்</string>
 </resources>
