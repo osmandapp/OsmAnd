@@ -2684,4 +2684,5 @@
     <string name="backup_error_no_valid_subscription">சரியான சந்தா இல்லை</string>
     <string name="backup_error_user_is_not_registered">அந்த மின்னஞ்சல் முகவரியுடன் எந்த பயனரும் பதிவு செய்யப்படவில்லை</string>
     <string name="backup_error_token_is_not_valid_or_expired">தவறான அல்லது காலாவதியான கிள்ளாக்கு</string>
+    <string name="backup_error_token_is_not_valid">வழங்கப்பட்ட சாதன ஐடி அல்லது டோக்கனில் ஏதோ தவறு உள்ளது</string>
 </resources>
