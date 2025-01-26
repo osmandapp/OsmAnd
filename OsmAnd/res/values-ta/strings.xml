@@ -2028,4 +2028,5 @@
     <string name="new_plugin_added">புதிய சொருகி சேர்க்கப்பட்டது</string>
     <string name="reset_to_default">இயல்புநிலைக்கு மீட்டமைக்கவும்</string>
     <string name="shared_string_no_thanks">இல்லை, நன்றி</string>
+    <string name="route_between_points">புள்ளிகளுக்கு இடையில் பாதை</string>
 </resources>
