@@ -1416,4 +1416,5 @@
     <string name="simulate_navigation">வழிசெலுத்தல் உருவகப்படுத்துதல்</string>
     <string name="day_night_info">பகல்/இரவு செய்தி</string>
     <string name="daynight_mode_auto">சூரிய உதயம்/சூரிய மறைவு</string>
+    <string name="auto_follow_location_enabled">பயன்பாட்டில் உள்ள ஆட்டோ-சென்டர் வரைபடக் காட்சி.</string>
 </resources>
