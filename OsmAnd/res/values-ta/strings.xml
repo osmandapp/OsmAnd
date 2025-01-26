@@ -2815,4 +2815,5 @@
     <string name="co2_mission">CO2 உமிழ்வு</string>
     <string name="uninstall_speed_cameras">வேக கேமராக்களை நிறுவல் நீக்குதல்</string>
     <string name="speed_camera_pois">வேக கேமரா POI’s</string>
+    <string name="speed_cameras_alert">சில நாடுகளில் வேக கேமராக்கள் எச்சரிக்கைகள் சட்டத்தால் தடைசெய்யப்பட்டுள்ளன.</string>
 </resources>
