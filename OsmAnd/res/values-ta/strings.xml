@@ -1889,4 +1889,5 @@
     <string name="shared_string_location">இடம்</string>
     <string name="navigate_point_format_D">Ddd.ddddd</string>
     <string name="navigate_point_format_DM">டி.டி.டி எம்.எம்.எம்.எம்</string>
+    <string name="navigate_point_format_DMS">டி.டி.டி எம்.எம் எச்.எச்.எச்</string>
 </resources>
