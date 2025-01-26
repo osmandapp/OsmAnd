@@ -2967,4 +2967,5 @@
     <string name="external_device_characteristic_stride_length">ச்ட்ரைட் நீளம்</string>
     <string name="wheel_circumference">சக்கர சுற்றளவு</string>
     <string name="map_orientation_default">சாதனம் அதே</string>
+    <string name="map_orientation_portrait">உருவப்படம்</string>
 </resources>
