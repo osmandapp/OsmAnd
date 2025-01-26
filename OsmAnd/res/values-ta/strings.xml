@@ -2646,4 +2646,5 @@
     <string name="routing_attr_motor_type_electric_name">மின்சாரம்</string>
     <string name="routing_attr_motor_type_hybrid_name">கலப்பினம்</string>
     <string name="transport">போக்குவரத்து</string>
+    <string name="icon_group_amenity">வசதி</string>
 </resources>
