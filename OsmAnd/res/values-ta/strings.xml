@@ -1770,4 +1770,5 @@
     <string name="shared_string_turn_off">அணைக்கவும்</string>
     <string name="shared_strings_all_regions">அனைத்து பிராந்தியங்களும்</string>
     <string name="regions">பகுதிகள்</string>
+    <string name="shared_string_width">அகலம்</string>
 </resources>
