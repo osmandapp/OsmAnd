@@ -2485,4 +2485,5 @@
     <string name="rendering_attr_winter_road_name">குளிர்கால சாலை</string>
     <string name="rendering_attr_tramTrainRoutes_name">டிராம் மற்றும் ரயில் வழிகள்</string>
     <string name="rendering_attr_smoothness_intermediate_name">இடைநிலை</string>
+    <string name="rendering_attr_surface_snow_name">பனி</string>
 </resources>
