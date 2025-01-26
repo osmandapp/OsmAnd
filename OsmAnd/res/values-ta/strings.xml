@@ -1985,4 +1985,5 @@
     <string name="replace_all">அனைத்தையும் மாற்றவும்</string>
     <string name="replace_all_desc">தற்போதைய உருப்படிகள் கோப்பிலிருந்து உருப்படிகளுடன் மாற்றப்படும்</string>
     <string name="shared_string_profiles">சுயவிவரங்கள்</string>
+    <string name="shared_string_quick_actions">விரைவான செயல்கள்</string>
 </resources>
