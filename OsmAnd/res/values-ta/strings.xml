@@ -2284,4 +2284,5 @@
     <string name="avg_sensor_temperature">வெப்பநிலை, சராசரி</string>
     <string name="shared_string_visible_on_map">வரைபடத்தில் தெரியும்</string>
     <string name="with_waypoints">வழிப்புள்ளிகளுடன்</string>
+    <string name="shared_string_reset_all">அனைத்தையும் மீட்டமைக்கவும்</string>
 </resources>
