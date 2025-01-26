@@ -2060,4 +2060,5 @@
     <string name="osmand_live">ஒச்மண்ட் லைவ்</string>
     <string name="hourly">மணிநேரத்திற்கு</string>
     <string name="daily">நாள்தோறும்</string>
+    <string name="weekly">வாராந்திர</string>
 </resources>
