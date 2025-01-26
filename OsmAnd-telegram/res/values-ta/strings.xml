@@ -202,7 +202,7 @@
     <string name="hours_and_minutes_format">%1$d h %2$d மீ</string>
     <string name="minutes_format">%1$d மீ</string>
     <string name="shared_string_install">நிறுவவும்</string>
-    <string name="shared_string_share">பங்கு</string>
+    <string name="shared_string_share">பகிர்</string>
     <string name="my_location_search_hint">தேடல்: குழு அல்லது தொடர்பு</string>
     <string name="shared_string_back">பின்</string>
     <string name="visible_time_for_all">அனைவருக்கும் தெரியும் நேரம்</string>
