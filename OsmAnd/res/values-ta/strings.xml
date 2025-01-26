@@ -3027,4 +3027,5 @@
     <string name="routing_attr_hazmat_category_usa_8_name">அரிக்கும் பொருட்கள்</string>
     <string name="rendering_value_sector1_name">பிரிவு 1</string>
     <string name="routing_attr_hazmat_category_usa_5_name">ஆக்சிசனேற்ற முகவர்கள் மற்றும் கரிம பெராக்சைடுகள்</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">வெடிபொருட்கள்</string>
 </resources>
