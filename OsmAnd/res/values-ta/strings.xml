@@ -1692,4 +1692,5 @@
     <string name="interrupt_music_descr">குரல் இடைநிறுத்த இசை பின்னணியை தூண்டுகிறது.</string>
     <string name="interrupt_music">இடைநிறுத்தப்பட்ட இசை</string>
     <string name="shared_string_turn">திருப்பம்</string>
+    <string name="navigation_over_track">பாதையில் வழிசெலுத்தலைத் தொடங்கவா?</string>
 </resources>
