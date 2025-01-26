@@ -2104,4 +2104,5 @@
     <string name="osm_edit_comment_note">கருத்து OSM குறிப்பு</string>
     <string name="close_changeset">மாற்றங்களை மூடு</string>
     <string name="poi_dialog_comment">கருத்து</string>
+    <string name="poi_dialog_reopen">மீண்டும் திறக்கவும்</string>
 </resources>
