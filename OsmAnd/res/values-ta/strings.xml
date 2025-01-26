@@ -2139,4 +2139,5 @@
     <string name="parking_place">பார்க்கிங் இடம்</string>
     <string name="quick_action_navigation_voice">குரல் ஆன்/ஆஃப்</string>
     <string name="quick_action_map_style">வரைபட நடை</string>
+    <string name="route_add_start_point">புறப்படும் புள்ளியைச் சேர்க்கவும்</string>
 </resources>
