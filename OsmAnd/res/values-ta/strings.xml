@@ -2861,4 +2861,5 @@
     <string name="routing_attr_prefer_tactile_paving_name">தொட்டுணரக்கூடிய நடைபாதையை விரும்புங்கள்</string>
     <string name="routing_attr_length_description">பாதைகளில் அனுமதிக்கப்பட வேண்டிய வாகன நீளத்தைக் குறிப்பிடவும்.</string>
     <string name="routing_attr_prefer_hiking_routes_name">ஐகிங் வழிகளை விரும்புங்கள்</string>
+    <string name="rendering_attr_hideMilitaryAreas_description">இராணுவப் பகுதிகளை மறைக்கவும்</string>
 </resources>
