@@ -3015,4 +3015,5 @@
     <string name="rendering_attr_padusDisplayMode_name">பொது நிலங்கள் காட்சி முறை</string>
     <string name="routing_attr_hazmat_category_usa_6_name">நச்சு மற்றும் தொற்று பொருட்கள்</string>
     <string name="rendering_value_sector5_name">பிரிவு 5</string>
+    <string name="rendering_attr_showToll_name">கட்டண கட்டுப்பாடுகளைக் காட்டு</string>
 </resources>
