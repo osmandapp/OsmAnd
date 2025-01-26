@@ -2643,4 +2643,5 @@
     <string name="routing_attr_motor_type_petrol_name">பெட்ரோல்</string>
     <string name="routing_attr_motor_type_lpg_name">எல்பிசி</string>
     <string name="routing_attr_motor_type_gas_name">சி.என்.சி.</string>
+    <string name="routing_attr_motor_type_electric_name">மின்சாரம்</string>
 </resources>
