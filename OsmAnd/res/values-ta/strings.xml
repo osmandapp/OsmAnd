@@ -2144,4 +2144,5 @@
     <string name="add_home">வீட்டிற்குச் சேர்க்கவும்</string>
     <string name="add_work">வேலை சேர்க்கவும்</string>
     <string name="favorite_home_category">வீடு</string>
+    <string name="work_button">வேலை</string>
 </resources>
