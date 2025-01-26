@@ -2131,4 +2131,5 @@
     <string name="quick_action_map_source_action">வரைபட மூலத்தைச் சேர்க்கவும்</string>
     <string name="quick_action_map_style_action">வரைபட பாணியைச் சேர்க்கவும்</string>
     <string name="quick_action_map_styles">வரைபட பாணிகள்</string>
+    <string name="quick_action_new_action">செயலைச் சேர்க்கவும்</string>
 </resources>
