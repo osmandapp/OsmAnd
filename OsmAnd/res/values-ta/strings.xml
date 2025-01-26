@@ -2880,4 +2880,5 @@
     <string name="rendering_value_omit_name">ஓடு</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">டிராலிபச் வழிகள்</string>
     <string name="rendering_attr_showShareTaxiRoutes_name">சட்டில் வழிகள்</string>
+    <string name="routing_attr_prefer_tactile_paving_description">தொட்டுணரக்கூடிய நடைபாதையை விரும்புங்கள்</string>
 </resources>
