@@ -1643,4 +1643,5 @@
     <string name="show_pedestrian_warnings">பாதசாரி குறுக்குவழிகள்</string>
     <string name="show_cameras">வேக கேமராக்கள்</string>
     <string name="show_lanes">பாதைகள்</string>
+    <string name="speak_pedestrian">பாதசாரி குறுக்குவழிகள்</string>
 </resources>
