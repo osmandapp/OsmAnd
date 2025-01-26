@@ -1310,7 +1310,7 @@
     <string name="shared_string_do_not_use">பயண்படுத்தாதே</string>
     <string name="shared_string_no">இல்லை</string>
     <string name="shared_string_on">இயக்கு</string>
-    <string name="shared_string_off">அணை</string>
+    <string name="shared_string_off">நிறுத்து</string>
     <string name="shared_string_previous">முன்னே</string>
     <string name="shared_string_next">அடுத்து</string>
     <string name="images_cache">புகைப்படம் மறைவிடம்</string>
@@ -1760,4 +1760,5 @@
     <string name="shared_string_time_span">கால இடைவெளி</string>
     <string name="shared_string_start_time">தொடக்க நேரம்</string>
     <string name="shared_string_end_time">இறுதி நேரம்</string>
+    <string name="shared_string_time_moving">நேரம் நகரும்</string>
 </resources>
