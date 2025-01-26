@@ -2388,4 +2388,5 @@
     <string name="activity_type_mountainbike_name">மலை பைக்</string>
     <string name="activity_type_racing_name">பந்தய</string>
     <string name="activity_type_riding_name">சவாரி</string>
+    <string name="activity_type_snowmobile_name">ச்னோமொபைல்</string>
 </resources>
