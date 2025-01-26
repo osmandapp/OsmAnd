@@ -1414,4 +1414,5 @@
     <string name="shared_string_road">சாலை</string>
     <string name="avoid_roads_msg">தவிர்க்க சாலைகளைத் தேர்ந்தெடுப்பதன் மூலம் மாற்று வழியைத் தூண்டவும்</string>
     <string name="simulate_navigation">வழிசெலுத்தல் உருவகப்படுத்துதல்</string>
+    <string name="day_night_info">பகல்/இரவு செய்தி</string>
 </resources>
