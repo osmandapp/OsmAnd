@@ -2042,4 +2042,5 @@
     <string name="plan_route_create_new_route">புதிய வழியை உருவாக்கவும்</string>
     <string name="plan_route_open_existing_track">தற்போதுள்ள பாதையைத் திறக்கவும்</string>
     <string name="sort_last_modified">கடைசியாக மாற்றப்பட்டது</string>
+    <string name="route_between_points_add_track_desc">புதிய பிரிவைச் சேர்க்க ஒரு தட கோப்பைத் தேர்ந்தெடுக்கவும்.</string>
 </resources>
