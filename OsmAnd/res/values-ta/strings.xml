@@ -3086,4 +3086,5 @@
     <string name="resting_navigation_position">ஓய்வு மற்றும் வழிசெலுத்தல் நிலை</string>
     <string name="user_palette">பயனர் தட்டு</string>
     <string name="height_legend_description">நிவாரணத்தைக் காட்சிப்படுத்த உயர வண்ண வரைபடங்கள் பயன்படுத்தப்படுகின்றன.</string>
+    <string name="daynight_mode_app_theme_summary">வரைபடத்தின் காட்சி பயன்பாட்டின் ஒட்டுமொத்த கருப்பொருள் - ஒரு ஒளி கருப்பொருளுக்கான நாள் பயன்முறையும், இருண்ட கருப்பொருளுக்கான இரவு பயன்முறையும் சீரமைக்கப்படுகிறது</string>
 </resources>
