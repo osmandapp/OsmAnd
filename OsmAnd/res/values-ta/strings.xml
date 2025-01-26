@@ -1796,4 +1796,5 @@
     <string name="shared_string_not_included">சேர்க்கப்படவில்லை</string>
     <string name="shared_string_progress">முன்னேற்றம்</string>
     <string name="shared_string_contributions">பங்களிப்புகள்</string>
+    <string name="shared_string_angle">கோணம்</string>
 </resources>
