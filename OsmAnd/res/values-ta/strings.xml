@@ -1839,4 +1839,5 @@
     <string name="copy_to_map_favorites">பிடித்தவைகளுக்கு நகலெடுக்கவும்</string>
     <string name="not_specified">குறிப்பிடப்படவில்லை</string>
     <string name="import_export">இறக்குமதி/ஏற்றுமதி</string>
+    <string name="import_tracks">தடங்களை இறக்குமதி செய்யுங்கள்</string>
 </resources>
