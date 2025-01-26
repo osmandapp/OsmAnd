@@ -2925,4 +2925,5 @@
     <string name="map_widget_ant_bicycle_dist">சைக்கிள் தூரம்</string>
     <string name="map_widget_ant_bicycle_dist_desc">பயணித்த தூரத்தைக் காட்டுகிறது</string>
     <string name="shared_string_temperature">வெப்பநிலை</string>
+    <string name="sensor_temperature_desc">சென்சாரிலிருந்து வெப்பநிலையைக் காட்டுகிறது</string>
 </resources>
