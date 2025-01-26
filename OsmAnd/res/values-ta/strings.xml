@@ -2656,4 +2656,5 @@
     <string name="app_mode_car">வண்டி ஓட்டுதல்</string>
     <string name="app_mode_bicycle">சைக்கிள் ஓட்டுதல்</string>
     <string name="app_mode_pedestrian">நடைபயிற்சி</string>
+    <string name="app_mode_taxi">டாக்சி</string>
 </resources>
