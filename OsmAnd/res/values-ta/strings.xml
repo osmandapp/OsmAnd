@@ -2081,4 +2081,5 @@
     <string name="disable_vertex_hillshade_3d">3d இல் வெர்டெக்ச் இல்சேட்டை முடக்கு</string>
     <string name="generate_slope_from_3d_maps">3D வரைபடங்களிலிருந்து சாய்வு ராச்டர் வரைபடங்களை உருவாக்குங்கள்</string>
     <string name="generate_hillshade_from_3d_maps">3D வரைபடங்களிலிருந்து இல்சேட் ராச்டர் வரைபடங்களை உருவாக்குங்கள்</string>
+    <string name="shared_string_menu">பட்டியல்</string>
 </resources>
