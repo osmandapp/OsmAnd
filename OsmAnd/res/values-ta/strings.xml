@@ -2153,4 +2153,5 @@
     <string name="quick_action_navigation_voice_off">அசைவுக் குரல்</string>
     <string name="shared_string_open_track">திறந்த பாதையில்</string>
     <string name="show_gpx">தடங்கள்</string>
+    <string name="quick_action_interim_dialog">இடைக்கால உரையாடலைக் காட்டு</string>
 </resources>
