@@ -2788,4 +2788,5 @@
     <string name="redeem_promo_code">விளம்பர குறியீட்டை மீட்டெடுக்கவும்</string>
     <string name="new_device_account">புதிய சாதனம் / புதிய கணக்கு</string>
     <string name="expired">காலாவதியான</string>
+    <string name="shared_string_expires">காலாவதியாகிறது</string>
 </resources>
