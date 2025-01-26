@@ -2949,4 +2949,5 @@
     <string name="ant_plus_nothing_found_text">எந்த சென்சார்களையும் கண்டுபிடிக்க முடியவில்லை</string>
     <string name="ant_plus_nothing_found_description">நிச்சயமாக:\n - ஊடலை இயக்கப்படுகிறது\n - சென்சார் செயல்படுத்தப்படுகிறது\n - இந்த சாதனம் சென்சாருக்கு அருகில் அமைந்துள்ளது</string>
     <string name="ant_plus_searching_text">சென்சார்களைத் தேடுகிறது</string>
+    <string name="ant_plus_searching_text_description">சாதனத்தை சென்சாருக்கு நெருக்கமாக வைத்திருங்கள். நீங்கள் சென்சாரை செயல்படுத்த வேண்டும், எனவே ஒச்மண்ட் அதைக் கண்டுபிடிக்க முடியும்.</string>
 </resources>
