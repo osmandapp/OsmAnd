@@ -2870,4 +2870,5 @@
     <string name="routing_attr_driving_style_description">குறுகிய, வேகமான அல்லது பாதுகாப்பான வழியைப் பெற ஓட்டுநர் நோக்கத்தைத் தேர்ந்தெடுக்கவும்</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">மழைப்பொழிவு தனிமைப்படுத்தல்கள்</string>
     <string name="rendering_attr_weatherPressureContours_name">அழுத்தம் தனிமைப்படுத்தல்கள்</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">குறைந்த சூம்களில் சின்னங்கள்</string>
 </resources>
