@@ -1703,4 +1703,5 @@
     <string name="starting_point_too_far">அருகிலுள்ள சாலையிலிருந்து வெகு தொலைவில் புறப்படும் இடம்.</string>
     <string name="ending_point_too_far">அருகிலுள்ள சாலையிலிருந்து வெகு தொலைவில் உள்ளது.</string>
     <string name="arrived_at_destination">நீங்கள் வந்துவிட்டீர்கள்.</string>
+    <string name="route_kl">இடதுபுறமாக இருங்கள்</string>
 </resources>
