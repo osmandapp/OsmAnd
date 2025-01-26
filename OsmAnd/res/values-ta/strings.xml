@@ -1497,4 +1497,5 @@
     <string name="history_preferences_descr">ஒவ்வொரு வரலாற்று வகைக்கும் வரலாற்று உள்நுழைவை தனித்தனியாக முடக்கலாம்.</string>
     <string name="settings_preset_descr">பயன்பாட்டு சுயவிவரத்திற்கு வரைபடக் காட்சி மற்றும் வழிசெலுத்தல் அமைப்புகள் நினைவில் வைக்கப்படுகின்றன. உங்கள் இயல்புநிலை சுயவிவரத்தை இங்கே அமைக்கவும்.</string>
     <string name="coordinates">ஒருங்கிணைப்புகள்</string>
+    <string name="send_log">பதிவு அனுப்பு</string>
 </resources>
