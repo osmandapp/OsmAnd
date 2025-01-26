@@ -2297,4 +2297,5 @@
     <string name="enter_new_name">புதிய பெயரை உள்ளிடவும்</string>
     <string name="shared_string_gpx_points">பிரிவகம்</string>
     <string name="shared_string_overview">கண்ணோட்டம்</string>
+    <string name="local_indexes_cat_backup">செயலிழக்கச் செய்தது</string>
 </resources>
