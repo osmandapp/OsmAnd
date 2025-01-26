@@ -1550,4 +1550,5 @@
     <string name="second_next_turn_widget_desc">விட்செட் உங்கள் இரண்டாவது அடுத்த திருப்பத்தைப் பற்றிய தகவல்களைக் காட்டுகிறது, இது நெருங்கும் தூரத்திற்குள் திரும்பினால் இயக்கப்பட்டது.</string>
     <string name="next_turn_widget_desc">விட்செட் உங்கள் அடுத்த திருப்பத்தைப் பற்றிய தகவல்களை சூழ்ச்சி மற்றும் அதற்கான தூரத்துடன் காட்டுகிறது.</string>
     <string name="average_speed_widget_desc">தற்போதைய பயணத்தின் சராசரி வேகத்தைக் காட்டுகிறது.</string>
+    <string name="average_speed_time_interval_desc">வேக சராசரியான நேர இடைவெளியைக் குறிப்பிடவும்.</string>
 </resources>
