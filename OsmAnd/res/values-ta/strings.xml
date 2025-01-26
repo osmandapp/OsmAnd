@@ -1577,4 +1577,5 @@
     <string name="wind_widget_desc">தற்போதைய வரைபட மையத்திற்கான காற்றின் வேகத்தைக் காட்டுகிறது.</string>
     <string name="precipitation_widget_desc">தற்போதைய வரைபட மையத்திற்கான மழைப்பொழிவைக் காட்டுகிறது.</string>
     <string name="temperature_widget_desc">தற்போதைய வரைபட மையத்தின் வெப்பநிலையைக் காட்டுகிறது.</string>
+    <string name="true_bearing_wdiget_desc">உங்கள் இருப்பிடத்திலிருந்து காணப்பட்ட உண்மையான வடக்கு மற்றும் இலக்கு புள்ளிக்கு இடையிலான கோணம்.</string>
 </resources>
