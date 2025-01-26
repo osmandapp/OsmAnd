@@ -2445,4 +2445,5 @@
     <string name="rendering_attr_highway_class_road_name">சாலை</string>
     <string name="rendering_value_translucent_green_name">கசியும் பச்சை</string>
     <string name="rendering_value_translucent_yellow_name">கசியும் மஞ்சள்</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">OSM மேப்பர் உதவியாளர்</string>
 </resources>
