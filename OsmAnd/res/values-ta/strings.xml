@@ -2871,4 +2871,5 @@
     <string name="rendering_attr_weatherPrecipitationContours_name">மழைப்பொழிவு தனிமைப்படுத்தல்கள்</string>
     <string name="rendering_attr_weatherPressureContours_name">அழுத்தம் தனிமைப்படுத்தல்கள்</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">குறைந்த சூம்களில் சின்னங்கள்</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">இடைநிலை</string>
 </resources>
