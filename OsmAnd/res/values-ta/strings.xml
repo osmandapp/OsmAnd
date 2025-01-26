@@ -343,7 +343,7 @@
     <string name="rendering_attr_surfaceIntegrity_name">சாலை மேற்பரப்பு ஒருமைப்பாடு</string>
     <string name="search_hint">நகரம், முகவரி, POI பெயர்</string>
     <string name="translit_names">பெயரிடும் பெயர்கள்</string>
-    <string name="edit_filter">திருத்து வகைகள்</string>
+    <string name="edit_filter">வடிகட்டியைத் திருத்து</string>
     <string name="subcategories">துணை வகைகள்</string>
     <string name="selected_categories">தேர்ந்தெடுக்கப்பட்ட பிரிவுகள்</string>
     <string name="create_custom_poi">தனிப்பயன் வடிப்பான் உருவாக்கவும்</string>
