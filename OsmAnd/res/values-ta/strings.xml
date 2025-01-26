@@ -2128,4 +2128,5 @@
     <string name="quick_action_map_overlay_title">வரைபட மேலடுக்குகள்</string>
     <string name="quick_action_map_underlay_title">வரைபடம் அண்டர்லேச்</string>
     <string name="vector_data">இணைப்பில்லாத திசையன் வரைபடங்கள்</string>
+    <string name="quick_action_map_source_action">வரைபட மூலத்தைச் சேர்க்கவும்</string>
 </resources>
