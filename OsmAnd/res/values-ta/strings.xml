@@ -2171,4 +2171,5 @@
     <string name="quick_action_verb_start_stop">தொடக்க / நிறுத்து</string>
     <string name="map_source">வரைபட மூல</string>
     <string name="voices">குரல் தூண்டுகிறது</string>
+    <string name="temperature_layer">வெப்பநிலை அடுக்கு</string>
 </resources>
