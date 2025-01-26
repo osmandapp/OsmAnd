@@ -2819,4 +2819,5 @@
     <string name="rendering_attr_showTrainRoutes_name">ரயில் வழிகள்</string>
     <string name="rendering_attr_showWaterwayTunnels_description">நீர்வழி சுரங்கங்களுக்கான தெரிவுநிலையை அதிகரிக்கவும்</string>
     <string name="rendering_attr_natureReserves_description">இயற்கை இருப்பு, பாதுகாக்கப்பட்ட பகுதிகள் மற்றும் தேசிய பூங்காக்களைக் காட்டு.</string>
+    <string name="routing_attr_avoid_highway_description">நெடுஞ்சாலைகளைத் தவிர்க்கவும்</string>
 </resources>
