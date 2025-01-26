@@ -2007,4 +2007,5 @@
     <string name="ui_customization">இடைமுகம் தனிப்பயனாக்கம்</string>
     <string name="ui_customization_short_descr">டிராயர் உருப்படிகள், சூழல் பட்டியல்</string>
     <string name="reorder_profiles">சுயவிவர பட்டியலைத் திருத்து</string>
+    <string name="profile_alert_need_profile_name_title">சுயவிவர பெயரை உள்ளிடவும்</string>
 </resources>
