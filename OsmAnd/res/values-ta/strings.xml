@@ -2406,4 +2406,5 @@
     <string name="rendering_attr_streetLightingNight_name">இரவில் மட்டுமே காட்டு</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">வான்வழி பாதை</string>
     <string name="routing_attr_freeride_policy_name">ஆஃப்-பிச்ட்</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">கிடைவளைவு</string>
 </resources>
