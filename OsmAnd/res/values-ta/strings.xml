@@ -2977,4 +2977,5 @@
     <string name="apply_to_existing_favorites_descr">குழுவின் தற்போதைய விருப்பமான புள்ளிகளில் மாற்றங்களை அல்லது புதியதாக மட்டுமே பயன்படுத்தலாமா?</string>
     <string name="delete_folder">கோப்புறையை நீக்கு</string>
     <string name="root_folder">ரூட் கோப்புறை</string>
+    <string name="all_folders">அனைத்து கோப்புறைகளும்</string>
 </resources>
