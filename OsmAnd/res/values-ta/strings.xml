@@ -2803,4 +2803,5 @@
     <string name="sign_in_with_open_street_map">OpenStreetMap உடன் உள்நுழைக</string>
     <string name="use_login_and_password">பயனர்பெயர் மற்றும் கடவுச்சொல்லைப் பயன்படுத்தவும்</string>
     <string name="perform_oauth_authorization">OAUTH வழியாக உள்நுழைக</string>
+    <string name="benefits_for_contributors">செயலில் உள்ள OSM பங்களிப்பாளர்களுக்கான நன்மைகள்</string>
 </resources>
