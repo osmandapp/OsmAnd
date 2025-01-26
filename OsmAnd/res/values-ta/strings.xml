@@ -1821,4 +1821,5 @@
     <string name="number_of_tiles">ஓடுகளின் எண்ணிக்கை</string>
     <string name="zoom_levels_difference_description">சூம் நிலைகளுக்கு இடையிலான பெரிய வேறுபாடு பதிவிறக்கம் செய்யப்பட்ட தரவின் அளவை அதிகரிக்கும்.</string>
     <string name="shared_string_color">நிறம்</string>
+    <string name="favorite">பிடித்த</string>
 </resources>
