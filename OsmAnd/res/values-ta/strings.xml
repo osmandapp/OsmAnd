@@ -1623,4 +1623,5 @@
     <string name="map_widget_time">செல்ல வேண்டிய நேரம்</string>
     <string name="map_widget_ruler_control">ஆரம் ஆட்சியாளர்</string>
     <string name="show_compass_ruler">திசைகாட்டி ஆட்சியாளரைக் காட்டு</string>
+    <string name="hide_compass_ruler">திசைகாட்டி ஆட்சியாளரை மறைக்கவும்</string>
 </resources>
