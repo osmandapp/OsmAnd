@@ -2085,4 +2085,5 @@
     <string name="feedback">கருத்து</string>
     <string name="commiting_node">உறுதியான முனை…</string>
     <string name="shared_string_loading">ஏற்றுகிறது</string>
+    <string name="unsaved_changes_will_be_lost">சேமிக்கப்படாத மாற்றங்கள் இழக்கப்படும். தொடரவா?</string>
 </resources>
