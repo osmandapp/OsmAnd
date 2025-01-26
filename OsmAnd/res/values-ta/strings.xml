@@ -2905,4 +2905,5 @@
     <string name="restart_is_required">மாற்றத்தைப் பயன்படுத்த மறுதொடக்கம் தேவை.</string>
     <string name="map_widget_altitude_current_location">உயரம்: தற்போதைய இடம்</string>
     <string name="map_widget_altitude_map_center">உயரம்: வரைபட நடுவண்</string>
+    <string name="map_widget_altitude_map_center_desc">தற்போதைய வரைபட மையத்தின் கடல் மட்டத்திற்கு மேலே உயரத்தைக் காட்டுகிறது.</string>
 </resources>
