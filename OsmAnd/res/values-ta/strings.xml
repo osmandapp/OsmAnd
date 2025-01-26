@@ -2434,4 +2434,5 @@
     <string name="rendering_attr_surface_paved_name">நடைபாதை</string>
     <string name="routing_attr_difficulty_preference_name">விருப்பமான தொல்லை</string>
     <string name="routing_attr_avoid_subway_name">சுரங்கப்பாதைகள் இல்லை</string>
+    <string name="rendering_attr_showLez_description">வரைபடத்தில் குறைந்த உமிழ்வு மண்டலங்களைக் காட்டு. ரூட்டிங் பாதிக்காது.</string>
 </resources>
