@@ -2633,4 +2633,5 @@
     <string name="vessel_width_limit_description">குறுகிய பாலங்களைத் தவிர்க்க கப்பல் அகலத்தை அமைக்கவும்</string>
     <string name="default_speed_dialog_msg">அறியப்படாத சாலை வகைகளுக்கான வருகை நேரத்தை மதிப்பிடுகிறது, மேலும் அனைத்து சாலைகளுக்கும் வேகத்தை கட்டுப்படுத்துகிறது (ரூட்டிங் பாதிக்கலாம்)</string>
     <string name="transport_hazmat_title">அபாயகரமான பொருட்களின் போக்குவரத்து</string>
+    <string name="routing_attr_hazmat_category_name">அச்மத் வகை</string>
 </resources>
