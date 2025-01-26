@@ -1451,4 +1451,5 @@
     <string name="help_article_navigation_routing_pedestrian_routing_name">பாதசாரி ரூட்டிங்</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">பொது போக்குவரத்து ரூட்டிங்</string>
     <string name="help_article_navigation_routing_ski_routing_name">ச்கை ரூட்டிங்</string>
+    <string name="help_article_navigation_routing_straight_line_routing_name">நேர் லைன் ரூட்டிங் (விமானம்)</string>
 </resources>
