@@ -2766,4 +2766,5 @@
     <string name="nautical_depth">கடல் ஆழம்</string>
     <string name="terrain_maps">நிலப்பரப்பு வரைபடங்கள்</string>
     <string name="shared_string_cross_buy">குறுக்கு வாங்க</string>
+    <string name="track_has_no_needed_data">பாதையில் அந்தந்த தரவைக் காணவில்லை.</string>
 </resources>
