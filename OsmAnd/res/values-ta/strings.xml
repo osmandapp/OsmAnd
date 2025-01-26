@@ -2088,4 +2088,5 @@
     <string name="unsaved_changes_will_be_lost">சேமிக்கப்படாத மாற்றங்கள் இழக்கப்படும். தொடரவா?</string>
     <string name="upload_poi">பின்னர் பதிவேற்றவும்</string>
     <string name="auto_zoom">ஆட்ட்சூம்</string>
+    <string name="auto_zoom_smooth">மென்மையான</string>
 </resources>
