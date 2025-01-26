@@ -1469,4 +1469,5 @@
     <string name="help_article_purchases_ios_name">ஐஇமு கொள்முதல்</string>
     <string name="help_article_search_search_all_name">அனைத்தையும் தேடுங்கள்</string>
     <string name="help_article_search_search_coordinates_name">தேடல் ஆயத்தொலைவுகள்</string>
+    <string name="help_article_search_search_poi_name">தேடுங்கள்</string>
 </resources>
