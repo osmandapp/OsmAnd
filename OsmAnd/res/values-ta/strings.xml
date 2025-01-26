@@ -3038,4 +3038,5 @@
     <string name="rendering_attr_lightDetail_name">ஒளி விவரம்</string>
     <string name="rendering_attr_lightDetail_description">இயல்புநிலை: சீமார்க் பெயர் (ஒளி எழுத்து. குழு.</string>
     <string name="rendering_attr_padusDisplayMode_description">அணுகல் வகை அல்லது மேலாளர் பெயர் மூலம்</string>
+    <string name="rendering_value_access_name">அணுகல் வகை மூலம்</string>
 </resources>
