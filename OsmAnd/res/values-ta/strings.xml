@@ -2419,4 +2419,5 @@
     <string name="rendering_attr_surface_fine_gravel_name">நன்றாக சரளை</string>
     <string name="rendering_value_orange_name">ஆரஞ்சு</string>
     <string name="rendering_value_medium_w_name">சராசரி</string>
+    <string name="rendering_attr_contourDensity_description">விளிம்பு வரி அடர்த்தி</string>
 </resources>
