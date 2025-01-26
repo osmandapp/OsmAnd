@@ -2376,4 +2376,5 @@
     <string name="routeInfo_surface_name">மேற்பரப்பு</string>
     <string name="routeInfo_surface_description">சாலை/பாதையின் உடல் மேற்பரப்பு தகவலை வழங்கவும்.</string>
     <string name="routeInfo_horse_scale_name">குதிரை பாதைகளின் தொல்லை</string>
+    <string name="routeInfo_horse_scale_description">குதிரைப் பாதைகளின் சிரமத்திற்கு ஏற்ப பாதைகளை வழங்கவும்</string>
 </resources>
