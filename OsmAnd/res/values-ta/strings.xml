@@ -2009,4 +2009,5 @@
     <string name="reorder_profiles">சுயவிவர பட்டியலைத் திருத்து</string>
     <string name="profile_alert_need_profile_name_title">சுயவிவர பெயரை உள்ளிடவும்</string>
     <string name="select_color">வண்ணத்தைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="select_icon_profile_dialog_title">ஐகானைத் தேர்ந்தெடுக்கவும்</string>
 </resources>
