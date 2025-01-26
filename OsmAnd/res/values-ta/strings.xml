@@ -2251,4 +2251,5 @@
     <string name="depth_contours">ஆழமான வரையறைகள்</string>
     <string name="navigate_point_latitude">அகலாங்கு</string>
     <string name="navigate_point_longitude">நெட்டாங்கு</string>
+    <string name="context_menu_edit_descr">விளக்கத்தைத் திருத்து</string>
 </resources>
