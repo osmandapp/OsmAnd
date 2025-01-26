@@ -2166,4 +2166,5 @@
     <string name="quick_action_destination">இலக்கு</string>
     <string name="quick_action_parking_place">பார்க்கிங் இடம்</string>
     <string name="quick_action_verb_show_hide">காட்டு / மறைக்க</string>
+    <string name="quick_action_verb_turn_on_off">இயக்கவும் / முடக்கவும்</string>
 </resources>
