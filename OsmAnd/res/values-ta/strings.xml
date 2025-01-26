@@ -2795,4 +2795,5 @@
     <string name="free_favorites_backup">இலவச பிடித்தவை காப்புப்பிரதி</string>
     <string name="get_osmand_cloud">ஒச்மண்ட் மேகத்தைப் பெறுங்கள்</string>
     <string name="compass_visible_if_map_rotated">வரைபடம் சுழற்றப்பட்டால் தெரியும்</string>
+    <string name="weather_forecast">வானிலை முன்னறிவிப்பு</string>
 </resources>
