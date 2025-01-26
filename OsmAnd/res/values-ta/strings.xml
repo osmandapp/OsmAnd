@@ -2917,4 +2917,5 @@
     <string name="map_widget_ant_heart_rate">இதய துடிப்பு</string>
     <string name="map_widget_ant_heart_rate_desc">நிகழ்நேரத்தில் கொடுக்கப்பட்ட செயல்பாட்டின் போது பயனரின் இதயத் துடிப்பைக் காட்டுகிறது</string>
     <string name="map_widget_ant_bicycle_power">சைக்கிள் ஆற்றல்</string>
+    <string name="map_widget_ant_bicycle_power_desc">சைக்கிள் ஓட்டுநரின் ஆற்றல் வெளியீட்டைக் காட்டுகிறது, இது பைக்கை முன்னோக்கி நகர்த்த பயன்படுகிறது</string>
 </resources>
