@@ -2428,4 +2428,5 @@
     <string name="rendering_attr_showFunicularRoutes_name">வேடிக்கையான வழிகள்</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">மலைப்பாங்கான</string>
     <string name="rendering_attr_contourWidth_name">விளிம்பு வரி அகலம்</string>
+    <string name="routing_attr_piste_type_sled_description">ச்லெட் பயன்பாட்டிற்கான சரிவுகள்.</string>
 </resources>
