@@ -2293,4 +2293,5 @@
     <string name="exit_at">வெளியேறவும்</string>
     <string name="transport_stops">நிறுத்தங்கள்</string>
     <string name="change_color">நிறத்தை மாற்றவும்</string>
+    <string name="rename_track">தடத்தை மறுபெயரிடுங்கள்</string>
 </resources>
