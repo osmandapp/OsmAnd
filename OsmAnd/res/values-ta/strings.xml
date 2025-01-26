@@ -1596,4 +1596,5 @@
     <string name="map_widget_time_to_destination">இலக்கு நேரம்</string>
     <string name="map_widget_time_to_intermediate">இடைநிலை நேரம்</string>
     <string name="map_widget_true_bearing">உண்மையான தாங்கி</string>
+    <string name="developer_widgets">உருவாக்குபவர் விட்செட்டுகள்</string>
 </resources>
