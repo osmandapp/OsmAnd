@@ -2848,4 +2848,5 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">குறிப்பு குறிச்சொற்கள்</string>
     <string name="rendering_attr_weatherCloudContours_name">மேகக்கணி ஐசோலின்கள்</string>
     <string name="routing_attr_carriage_restrictions_description">குதிரை வரையப்பட்ட வாகனங்களுக்கான அணுகல் அனுமதிகளைக் கவனியுங்கள்</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">ஆஃபிச்டை விரும்புங்கள்</string>
 </resources>
