@@ -2957,4 +2957,5 @@
     <string name="external_device_forget_sensor_description">சென்சார் பட்டியலிலிருந்து அகற்றப்படும். இந்த சென்சாரை நீங்கள் எந்த நேரத்திலும் மீண்டும் இணைக்க முடியும்.</string>
     <string name="external_device_details_information">தகவல்</string>
     <string name="external_device_details_battery">மின்கலம்</string>
+    <string name="external_device_details_received_data">பெறப்பட்ட தரவு</string>
 </resources>
