@@ -2593,4 +2593,5 @@
     <string name="rendering_value_default13_name">இயல்புநிலை (13)</string>
     <string name="routeInfo_roadClass_name">சாலை வகை</string>
     <string name="routeInfo_roadClass_description">சாலை வகைப்பாடு மூலம் பாதை அல்லது தடத்தை வண்ணமயமாக்குங்கள்.</string>
+    <string name="routing_attr_allow_skating_only_description">கிளாசிக் தடங்கள் இல்லாமல் மட்டுமே ஃப்ரீச்டைல் அல்லது ச்கேட்டிங் செய்ய வழிகள்.</string>
 </resources>
