@@ -2804,4 +2804,5 @@
     <string name="use_login_and_password">பயனர்பெயர் மற்றும் கடவுச்சொல்லைப் பயன்படுத்தவும்</string>
     <string name="perform_oauth_authorization">OAUTH வழியாக உள்நுழைக</string>
     <string name="benefits_for_contributors">செயலில் உள்ள OSM பங்களிப்பாளர்களுக்கான நன்மைகள்</string>
+    <string name="benefits_for_contributors_primary_descr">OpenStreetMap.org க்கு செயலில் பங்களிப்பாளர்கள் வரம்பற்ற மணிநேர வரைபட புதுப்பிப்புகளுக்கு உரிமை பெற்றிருக்கலாம்.</string>
 </resources>
