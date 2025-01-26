@@ -2501,4 +2501,5 @@
     <string name="routing_attr_piste_type_nordic_description">நோர்டிக் அல்லது குறுக்கு நாடு பனிச்சறுக்கு தடங்கள்.</string>
     <string name="rendering_attr_surface_unpaved_name">செப்பனிடப்படாதது</string>
     <string name="rendering_value_translucent_lightgreen_name">கசியும் ஒளி பச்சை</string>
+    <string name="rendering_attr_contourLines_name">விளிம்பு கோடுகளைக் காட்டு</string>
 </resources>
