@@ -2601,4 +2601,5 @@
     <string name="routing_attr_piste_type_downhill_name">ஆல்பைன் மற்றும் கீழ்நோக்கி பனிச்சறுக்கு</string>
     <string name="rendering_value_darkyellow_name">இருண்ட மஞ்சள்</string>
     <string name="routing_attr_prefer_unpaved_name">செப்பனிடப்படாத சாலைகளை விரும்புங்கள்</string>
+    <string name="rendering_value_default_name">இயல்புநிலை</string>
 </resources>
