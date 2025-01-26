@@ -3099,4 +3099,5 @@
     <string name="shared_string_interface">இடைமுகம்</string>
     <string name="lock_screen_description">தற்செயலான குழாய்களைத் தடுக்க தொடுதிரை செயல்பாட்டை இயக்குகிறது அல்லது முடக்குகிறது</string>
     <string name="add_widget_below">கீழே விட்செட்டைச் சேர்க்கவும்</string>
+    <string name="add_widget_above">மேலே விட்செட்டைச் சேர்க்கவும்</string>
 </resources>
