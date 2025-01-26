@@ -2173,4 +2173,5 @@
     <string name="voices">குரல் தூண்டுகிறது</string>
     <string name="temperature_layer">வெப்பநிலை அடுக்கு</string>
     <string name="pressure_layer">அழுத்தம் அடுக்கு</string>
+    <string name="wind_layer">காற்று அடுக்கு</string>
 </resources>
