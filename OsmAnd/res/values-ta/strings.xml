@@ -2383,4 +2383,5 @@
     <string name="activity_type_offroad_name">ஆஃப்-ரோட்</string>
     <string name="activity_type_walking_name">நடைபயிற்சி</string>
     <string name="activity_type_running_name">இயங்கும்</string>
+    <string name="activity_type_hiking_name">ஐக்கிங்</string>
 </resources>
