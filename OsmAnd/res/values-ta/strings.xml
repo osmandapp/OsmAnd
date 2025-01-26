@@ -1422,4 +1422,5 @@
     <string name="simulation_real_mode_title">யதார்த்தமான உருவகப்படுத்துதல்</string>
     <string name="simulation_constant_mode_desc">நிலையான தேர்ந்தெடுக்கப்பட்ட வேகத்துடன் உருவகப்படுத்துதல் செய்யப்படும்.</string>
     <string name="simulation_constant_mode_title">நிலையான விரைவு</string>
+    <string name="simulation_preview_mode_desc">உருவகப்படுத்துதலின் விரைவு நேரான பிரிவுகளில் அதிகபட்சமாக இருக்கும் மற்றும் குறுக்குவெட்டுகளில் மட்டுமே மெதுவாக இருக்கும்.</string>
 </resources>
