@@ -2458,4 +2458,5 @@
     <string name="routing_attr_avoid_low_emission_zone_name">குறைந்த உமிழ்வு மண்டலங்களைத் தவிர்க்கவும்</string>
     <string name="routing_attr_avoid_low_emission_zone_description">குறைந்த உமிழ்வு மண்டலங்களைத் தவிர்க்கவும்</string>
     <string name="routing_attr_avoid_tunnels_name">சுரங்கங்களைத் தவிர்க்கவும்</string>
+    <string name="routing_attr_avoid_tunnels_description">சுரங்கங்களைத் தவிர்க்கவும்</string>
 </resources>
