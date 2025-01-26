@@ -2299,4 +2299,5 @@
     <string name="shared_string_overview">கண்ணோட்டம்</string>
     <string name="local_indexes_cat_backup">செயலிழக்கச் செய்தது</string>
     <string name="poi_filter_parking">பார்க்கிங்</string>
+    <string name="search_nearby">அருகிலேயே தேடுங்கள்</string>
 </resources>
