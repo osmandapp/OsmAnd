@@ -1435,4 +1435,5 @@
     <string name="help_article_map_track_context_menu_name">சூழல் மெனுவைக் கண்காணிக்கிறது</string>
     <string name="help_article_map_tracks_on_map_name">தடங்கள் மற்றும் வழிகள்</string>
     <string name="help_article_map_vector_maps_name">திசையன் வரைபடங்கள் (வரைபட பாணிகள்)</string>
+    <string name="help_article_navigation_auto_car_name">ஆண்ட்ராய்டு ஆட்டோ</string>
 </resources>
