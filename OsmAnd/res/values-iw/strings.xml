@@ -4991,4 +4991,8 @@
     <string name="obd_not_connected_to_device">מנותק מ־%s</string>
     <string name="obd_connecting_to_device">התחברות אל %s</string>
     <string name="wheel_circumference">היקף גלגל</string>
+    <string name="popular_places_nearby">מקומות נפוצים באזור</string>
+    <string name="shared_string_avg_altitude">גובה ממוצע</string>
+    <string name="shared_string_length">אורך</string>
+    <string name="shared_string_avg_speed">מהירות מזערית</string>
 </resources>
