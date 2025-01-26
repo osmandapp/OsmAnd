@@ -2682,4 +2682,5 @@
     <string name="restore_from_osmand_cloud">ஒச்மண்ட் கிளவுட்டிலிருந்து மீட்டமைக்கவும்</string>
     <string name="choose_what_to_restore">எதை மீட்டெடுக்க வேண்டும் என்பதைத் தேர்வுசெய்க.</string>
     <string name="backup_error_no_valid_subscription">சரியான சந்தா இல்லை</string>
+    <string name="backup_error_user_is_not_registered">அந்த மின்னஞ்சல் முகவரியுடன் எந்த பயனரும் பதிவு செய்யப்படவில்லை</string>
 </resources>
