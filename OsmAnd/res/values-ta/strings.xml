@@ -2814,4 +2814,5 @@
     <string name="checking_progress">சோதனை…</string>
     <string name="co2_mission">CO2 உமிழ்வு</string>
     <string name="uninstall_speed_cameras">வேக கேமராக்களை நிறுவல் நீக்குதல்</string>
+    <string name="speed_camera_pois">வேக கேமரா POI’s</string>
 </resources>
