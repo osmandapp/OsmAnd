@@ -2137,4 +2137,5 @@
     <string name="map_look_descr">வரைபட தோற்றம்</string>
     <string name="context_menu_item_edit_waypoint">சிபிஎக்ச் வழியைத் திருத்து</string>
     <string name="parking_place">பார்க்கிங் இடம்</string>
+    <string name="quick_action_navigation_voice">குரல் ஆன்/ஆஃப்</string>
 </resources>
