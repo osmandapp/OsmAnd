@@ -1660,4 +1660,5 @@
     <string name="routing_profile_direct_to">நேரடி-புள்ளி</string>
     <string name="routing_profile_ski">ச்கை</string>
     <string name="routing_profile_geocoding">சியோகோடிங்</string>
+    <string name="fast_route_mode_descr">வேகமான வழியைக் கணக்கிட அல்லது எரிபொருள் சேமிப்பு பாதையை முடக்கவும்.</string>
 </resources>
