@@ -1685,4 +1685,5 @@
     <string name="recalculate_route_distance_promo">தேர்ந்தெடுக்கப்பட்ட மதிப்பை விட வழியிலிருந்து தற்போதைய இருப்பிடத்திற்கு தூரம் அதிகமாக இருந்தால் பாதை மீண்டும் கணக்கிடப்படும்.</string>
     <string name="select_distance_route_will_recalc">பாதை மீண்டும் கணக்கிடப்படும் தூரத்தைத் தேர்ந்தெடுக்கவும்.</string>
     <string name="shared_string_navigation">வானோடல்</string>
+    <string name="customize_route_line">பாதை வரியைத் தனிப்பயனாக்குங்கள்</string>
 </resources>
