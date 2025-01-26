@@ -2558,4 +2558,5 @@
     <string name="rendering_value_caiScale_description">இத்தாலிய ஆல்பைன் கிளப் (இத்தாலிய ஆல்பைன் கிளப்)</string>
     <string name="rendering_attr_piste_difficulty_expert_name">வல்லுநர்</string>
     <string name="rendering_attr_tracktype_grade1_name">திடமான (நடைபாதை)</string>
+    <string name="routing_attr_avoid_train_description">ரயில்களைத் தவிர்க்கிறது</string>
 </resources>
