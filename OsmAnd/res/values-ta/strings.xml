@@ -1682,4 +1682,5 @@
     <string name="special_routing_type">சிறப்பு ரூட்டிங்</string>
     <string name="route_recalculation_dist_title">பாதையை மறுபரிசீலனை செய்ய குறைந்தபட்ச தூரம்</string>
     <string name="in_case_of_reverse_direction">தலைகீழ் திசையில்</string>
+    <string name="recalculate_route_distance_promo">தேர்ந்தெடுக்கப்பட்ட மதிப்பை விட வழியிலிருந்து தற்போதைய இருப்பிடத்திற்கு தூரம் அதிகமாக இருந்தால் பாதை மீண்டும் கணக்கிடப்படும்.</string>
 </resources>
