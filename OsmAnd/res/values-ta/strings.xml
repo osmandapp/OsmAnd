@@ -2864,4 +2864,5 @@
     <string name="rendering_attr_hideMilitaryAreas_description">இராணுவப் பகுதிகளை மறைக்கவும்</string>
     <string name="rendering_attr_weatherTempContours_name">வெப்பநிலை தனிமைப்படுத்தல்கள்</string>
     <string name="rendering_attr_showTramRoutes_name">டிராம் வழிகள்</string>
+    <string name="routing_attr_hazmat_category_description">அபாயகரமான பொருட்கள் வகை / அச்மத் அணுகல் அனுமதிகளைக் கவனியுங்கள்</string>
 </resources>
