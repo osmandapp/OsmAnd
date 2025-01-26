@@ -108,7 +108,7 @@
     <string name="last_update_from_telegram">டெலிகிராமில் இருந்து கடைசி புதுப்பிப்பு</string>
     <string name="enter_another_device_name">நீங்கள் ஏற்கனவே பயன்படுத்தாத பெயரைத் தேர்ந்தெடுக்கவும்</string>
     <string name="device_added_successfully">%1$s சேர்க்கப்பட்டது.</string>
-    <string name="shared_string_add">கூட்டு</string>
+    <string name="shared_string_add">சேரு</string>
     <string name="error_adding_new_device">புதிய சாதனத்தைச் சேர்க்க முடியவில்லை</string>
     <string name="enter_device_name_description">உங்கள் புதிய சாதனத்தை அதிகபட்சமாக பெயரிடுங்கள். 200 சின்னங்கள்.</string>
     <string name="device_name_is_too_long">சாதனத்தின் பெயர் மிக நீளமானது</string>
