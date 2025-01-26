@@ -2824,4 +2824,5 @@
     <string name="rendering_attr_weatherWindSpeedContours_name">காற்றின் வேக தனிமைப்படுத்தல்கள்</string>
     <string name="rendering_attr_hideMilitaryAreas_name">இராணுவப் பகுதிகளை மறைக்கவும்</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Fixme குறிச்சொற்களைக் காட்டு</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">ஆபத்தானது</string>
 </resources>
