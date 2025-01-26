@@ -2742,4 +2742,5 @@
     <string name="backup_danger_zone">இடர் மண்டலம்</string>
     <string name="backup_delete_all_data">எனது எல்லா தரவையும் நீக்கவும்</string>
     <string name="backup_delete_old_data">பழைய பதிப்புகளை அகற்று</string>
+    <string name="logout_from_osmand_cloud_decsr">வெளியேறு?\n தரவை காப்புப் பிரதி எடுக்க அல்லது மீட்டமைக்க நீங்கள் மீண்டும் உள்நுழைய வேண்டும்.</string>
 </resources>
