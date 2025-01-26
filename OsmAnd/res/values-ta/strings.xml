@@ -2100,4 +2100,5 @@
     <string name="poi_remove_title">பின்னர் நீக்கு</string>
     <string name="osm_edit_created_poi">OSM POI ஐ உருவாக்கியது</string>
     <string name="osm_edit_created_note">OSM குறிப்பு உருவாக்கப்பட்டது</string>
+    <string name="osm_edit_close_note">OSM குறிப்பை மூடு</string>
 </resources>
