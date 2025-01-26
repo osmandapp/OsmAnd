@@ -2451,4 +2451,5 @@
     <string name="routing_attr_allow_expert_name">வல்லுநர் வழிகளை அனுமதிக்கவும்</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">முனை பிணைய சுழற்சி வழிகளைக் காட்டு</string>
     <string name="rendering_attr_contourDensity_name">விளிம்பு வரி அடர்த்தி</string>
+    <string name="rendering_attr_showRunningRoutes_name">இயங்கும் வழிகள்</string>
 </resources>
