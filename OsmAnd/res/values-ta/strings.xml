@@ -1759,4 +1759,5 @@
     <string name="time_of_day">நாள் நேரம்</string>
     <string name="shared_string_time_span">கால இடைவெளி</string>
     <string name="shared_string_start_time">தொடக்க நேரம்</string>
+    <string name="shared_string_end_time">இறுதி நேரம்</string>
 </resources>
