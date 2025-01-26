@@ -2046,4 +2046,5 @@
     <string name="empty_filename">வெற்று கோப்பு பெயர்</string>
     <string name="plan_route_split_before">முன் பிரிந்தது</string>
     <string name="plan_route_split_after">பிறகு பிரிந்தது</string>
+    <string name="follow_track">பாதையைப் பின்தொடரவும்</string>
 </resources>
