@@ -2239,4 +2239,5 @@
     <string name="osm_editing_plugin_name">OpenStreetMap திருத்துதல்</string>
     <string name="plugin_mapillary_descr">தெரு-நிலை காட்சிகளின் படங்கள். நீங்களே பங்களிக்கலாம். தற்போதுள்ள தரவை வரைபட அடுக்காகக் காண, \"உள்ளமைக்கவும் வரைபடம்\" பட்டியலில் \"தெரு-நிலை படங்களை\" இயக்கவும்.</string>
     <string name="debugging_and_development">ஒச்மண்ட் வளர்ச்சி</string>
+    <string name="osmand_development_plugin_description">OSMand ஐ சோதிக்கவும் பிழைத்திருத்தவும் செயல்பாட்டை வழங்குகிறது: வழிசெலுத்தல் வழிகளை உருவகப்படுத்துதல், திரை வழங்குதல், காசோலை செயல்திறன் போன்றவற்றை கண்காணிக்கவும். சாதாரண பயன்பாட்டு பயன்பாட்டிற்கு இந்த சொருகி தேவையில்லை.</string>
 </resources>
