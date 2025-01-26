@@ -3078,4 +3078,5 @@
     <string name="rendering_value_dark_orange_name">இருண்ட ஆரஞ்சு</string>
     <string name="rendering_value_pale_name">வெளிர்</string>
     <string name="view_angle">கோணத்தைக் காண்க</string>
+    <string name="location_radius">இருப்பிட ஆரம்</string>
 </resources>
