@@ -2061,4 +2061,5 @@
     <string name="hourly">மணிநேரத்திற்கு</string>
     <string name="daily">நாள்தோறும்</string>
     <string name="weekly">வாராந்திர</string>
+    <string name="update_frequency">புதுப்பிப்பு அதிர்வெண்</string>
 </resources>
