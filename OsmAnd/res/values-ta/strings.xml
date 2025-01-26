@@ -2507,4 +2507,5 @@
     <string name="routing_attr_driving_style_prefer_unpaved_name">செப்பனிடப்படாத சாலைகளை விரும்புங்கள்</string>
     <string name="rendering_attr_surface_sand_name">மணல்</string>
     <string name="routing_attr_no_new_routing_description">V1.9 இல் அறிமுகப்படுத்தப்பட்ட ரூட்டிங் விதிகளைப் பயன்படுத்த வேண்டாம்.</string>
+    <string name="rendering_attr_surface_cobblestone_name">கோப்ச்டோன்</string>
 </resources>
