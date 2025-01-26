@@ -118,7 +118,7 @@
     <string name="sharing_status">பகிர்வு நிலை</string>
     <string name="location_sharing_status">பகிர்வு: %1$s</string>
     <string name="shared_string_enabled">இயக்கப்பட்டது</string>
-    <string name="shared_string_hide">மறை</string>
+    <string name="shared_string_hide">மறைக்க</string>
     <string name="share_location_as_description_second_line">டெலிகிராம் கிளையண்டில் %1$s அரட்டை போட் பயன்படுத்தி சாதன ஐடியை உருவாக்கி பார்க்கலாம். %2$s</string>
     <string name="share_location_as_description">ஒரு டெலிகிராம் கணக்கில் பல சாதனங்களை இணைக்க விரும்பினால், உங்கள் இருப்பிடத்தைப் பகிர வெவ்வேறு சாதனங்களைப் பயன்படுத்த வேண்டும்.</string>
     <string name="last_updated_location">கடைசியாக புதுப்பிக்கப்பட்ட இடம்:</string>
