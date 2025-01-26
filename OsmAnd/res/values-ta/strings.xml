@@ -1806,4 +1806,5 @@
     <string name="shared_string_author">நூலாசிரியர்</string>
     <string name="shared_string_link">இணைப்பு</string>
     <string name="shared_string_license">உரிமம்</string>
+    <string name="shared_string_keywords">முக்கிய வார்த்தைகள்</string>
 </resources>
