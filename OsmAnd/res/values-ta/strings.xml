@@ -2694,4 +2694,5 @@
     <string name="backup_error_failed_to_fetch_remote_items">சேவையகத்திலிருந்து கோப்பு பட்டியலைப் பெறுவதில் தோல்வி.</string>
     <string name="promo_subscription">விளம்பர சந்தா</string>
     <string name="renew_subscription">சந்தாவை புதுப்பிக்கவும்</string>
+    <string name="register_opr_create_new_account">புதிய கணக்கை உருவாக்கவும்</string>
 </resources>
