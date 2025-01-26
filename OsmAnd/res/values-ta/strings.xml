@@ -1848,4 +1848,5 @@
     <string name="altitude_range">உயர வரம்பு</string>
     <string name="altitude_ascent">மேல்நோக்கி</string>
     <string name="altitude_descent">கீழ்நோக்கி</string>
+    <string name="distance_moving">தூரம் சரி செய்யப்பட்டது</string>
 </resources>
