@@ -3057,4 +3057,5 @@
     <string name="shared_string_speedometer">ச்பீடோமீட்டர்</string>
     <string name="speedometer_description">சி.பி.எச் வழியாக அறிவிக்கப்பட்டபடி உங்கள் தற்போதைய வேகத்தைக் காட்டுகிறது</string>
     <string name="speed_limit_warning">வேக வரம்பு எச்சரிக்கை</string>
+    <string name="shared_string_always">எப்போதும்</string>
 </resources>
