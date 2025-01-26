@@ -2411,4 +2411,5 @@
     <string name="rendering_attr_piste_difficulty_intermediate_name">இடைநிலை</string>
     <string name="routeInfo_piste_difficulty_name">பிச்டே தொல்லை</string>
     <string name="routing_attr_short_way_description">உகந்த குறுகிய பாதை (ஆற்றல் சேமிப்பு)</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">தகுதி 3</string>
 </resources>
