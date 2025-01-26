@@ -2331,4 +2331,5 @@
     <string name="rearrange_categories">வகைகளை மறுசீரமைக்கவும்</string>
     <string name="create_custom_categories_list_promo">பட்டியல் வரிசையை மாற்றி வகைகளை மறைக்கவும். அனைத்து மாற்றங்களையும் சுயவிவரங்களாக இறக்குமதி செய்யுங்கள் அல்லது ஏற்றுமதி செய்க.</string>
     <string name="reset_to_default_category_button_promo">\'இயல்புநிலைக்கு மீட்டமை\' நிறுவல் இயல்புநிலைக்கு வரிசை வரிசையை மீண்டும் நிலைநிறுத்தும்.</string>
+    <string name="search_poi_types_descr">வெவ்வேறு வகைகளிலிருந்து POI வகைகளை இணைக்கவும். அனைத்தையும் தேர்ந்தெடுக்க சுவிட்சைத் தட்டவும், வகை தேர்வுக்கு இடது பக்கத்தைத் தட்டவும்.</string>
 </resources>
