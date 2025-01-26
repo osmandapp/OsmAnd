@@ -1475,4 +1475,5 @@
     <string name="help_article_start_with_main_menu_name">பட்டியல் விளையாடுங்கள்</string>
     <string name="help_article_troubleshooting_crash_logs_name">செயலிழப்பு பதிவுகள்</string>
     <string name="help_article_troubleshooting_general_name">பொது</string>
+    <string name="help_article_troubleshooting_maps_data_name">வரைபடங்கள் &amp; தரவு</string>
 </resources>
