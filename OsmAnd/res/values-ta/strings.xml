@@ -2980,4 +2980,5 @@
     <string name="all_folders">அனைத்து கோப்புறைகளும்</string>
     <string name="start_recording">பதிவு செய்யத் தொடங்குங்கள்</string>
     <string name="duration_moment_ago">ஒரு கணம் முன்பு</string>
+    <string name="trash_is_empty">குப்பை காலியாக உள்ளது</string>
 </resources>
