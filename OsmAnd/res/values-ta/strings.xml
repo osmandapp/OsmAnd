@@ -1697,4 +1697,5 @@
     <string name="shared_string_nearest">அருகில்</string>
     <string name="previous_route">முந்தைய பாதை</string>
     <string name="transfers">இடமாற்றங்கள்</string>
+    <string name="error_calculating_route">வழியைக் கணக்கிட முடியவில்லை.</string>
 </resources>
