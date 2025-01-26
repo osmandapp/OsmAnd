@@ -2675,4 +2675,5 @@
     <string name="app_mode_utv">அருகருகே</string>
     <string name="app_mode_osm">ஓஎச்எம்</string>
     <string name="app_mode_moped">மொபெட்</string>
+    <string name="user_login">புகுபதிவு</string>
 </resources>
