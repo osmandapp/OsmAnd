@@ -1560,4 +1560,5 @@
     <string name="current_time_widget_desc">உங்கள் சாதனத்திலிருந்து எடுக்கப்பட்ட தற்போதைய நேரத்தைக் காட்டுகிறது.</string>
     <string name="battery_widget_desc">உங்கள் சாதனத்தின் பேட்டரி அளவைக் காட்டுகிறது.</string>
     <string name="gps_info_widget_desc">தற்போது காணக்கூடிய மற்றும் பயன்படுத்தப்பட்ட செயற்கைக்கோள்களின் எண்ணிக்கையைக் காட்டுகிறது.</string>
+    <string name="altitude_widget_desc">தற்போதைய புவிஇருப்பிடத்தின் கடல் மட்டத்திற்கு மேலே உயரத்தைக் காட்டுகிறது.</string>
 </resources>
