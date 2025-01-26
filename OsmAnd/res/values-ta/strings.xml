@@ -2338,4 +2338,5 @@
     <string name="rendering_value_category_name">வகை</string>
     <string name="city_type_suburb">புறநகர்</string>
     <string name="city_type_hamlet">குக்கிராமம்</string>
+    <string name="city_type_village">சிற்றூர்</string>
 </resources>
