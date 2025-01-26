@@ -2203,4 +2203,5 @@
     <string name="kg">கிலோ</string>
     <string name="shared_string_sec">நொடி</string>
     <string name="int_seconds">நொடிகள்</string>
+    <string name="first_usage_item">முதல் பயன்பாடு</string>
 </resources>
