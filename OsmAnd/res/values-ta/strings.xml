@@ -292,7 +292,7 @@
     <string name="delete_search_history">தேடல் வரலாற்றை நீக்கு</string>
     <string name="download_images">புகைப்படம் பதிவிறக்க</string>
     <string name="download_maps_travel">பயண வழிகாட்டிகள்</string>
-    <string name="shared_string_wikivoyage">விக்கிவோயேச்</string>
+    <string name="shared_string_wikivoyage">விக்கிவோயாஜ்</string>
     <string name="article_removed">கட்டுரை அகற்றப்பட்டது</string>
     <string name="wikivoyage_search_hint">தேடல்: நாடு, நகரம், மாகாணங்கள்</string>
     <string name="shared_string_read">படிக்க</string>
@@ -2227,4 +2227,5 @@
     <string name="index_name_north_america">வட அமெரிக்கா</string>
     <string name="index_name_russia">ரச்யா</string>
     <string name="index_name_south_america">தென் அமெரிக்கா</string>
+    <string name="nautical_maps">கடல் வரைபடங்கள்</string>
 </resources>
