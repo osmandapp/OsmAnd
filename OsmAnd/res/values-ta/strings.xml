@@ -235,7 +235,7 @@
     <string name="shared_string_unexpected_error">எதிர்பாராத பிழை</string>
     <string name="shared_string_action_template">நடவ்டிக்கை {0}</string>
     <string name="shared_string_close">மூடு</string>
-    <string name="shared_string_exit">வெளியேறு</string>
+    <string name="shared_string_exit">வெளியேற</string>
     <string name="shared_string_show">காட்டு</string>
     <string name="shared_string_show_all">அனைத்தையும் காட்டு</string>
     <string name="shared_string_collapse">தகர்ந்து போ</string>
@@ -526,7 +526,7 @@
     <string name="clear_updates_proposition_message">பதிவிறக்கம் புதுப்பிப்புகளை அகற்றி, அசல் வரைபட பதிப்பில் திரும்பவும்</string>
     <string name="add_time_span">நேர இடைவெளியைச் சேர்க்கவும்</string>
     <string name="road_blocked">சாலை தடுக்கப்பட்டது</string>
-    <string name="shared_string_select">தேர்ந்தெடு</string>
+    <string name="shared_string_select">தேர்வு</string>
     <string name="switch_start_finish">தலைகீழ் தொடக்க புள்ளி மற்றும் இலக்கு</string>
     <string name="rendering_attr_hideIcons_name">POI சின்னங்கள்</string>
     <string name="item_removed">உருப்படி அகற்றப்பட்டது</string>
@@ -552,7 +552,7 @@
     <string name="shared_string_delete">அழி</string>
     <string name="shared_string_delete_all">அனைத்தையும் நீக்கு</string>
     <string name="shared_string_share">பங்கு</string>
-    <string name="shared_string_apply">இடு</string>
+    <string name="shared_string_apply">விண்ணப்பிக்கவும்</string>
     <string name="rendering_attr_trolleybusRoutes_name">ட்ரோலிபஸ் பாதை</string>
     <string name="rendering_attr_busRoutes_name">பேருந்து வழித்தடங்கள்</string>
     <string name="rendering_category_hide">மறை</string>
@@ -1303,8 +1303,8 @@
     <string name="routing_settings_2">வழிதட அமைப்புகள்</string>
     <string name="general_settings_2">பொதுவான அமைப்புகள்</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="shared_string_ok">சரி</string>
-    <string name="shared_string_cancel">ரத்துசெய்</string>
+    <string name="shared_string_ok">எற்க்கிறேன்</string>
+    <string name="shared_string_cancel">மறுக்கிறேன்</string>
     <string name="shared_string_dismiss">ரத்து செய்</string>
     <string name="shared_string_yes">ஆம்</string>
     <string name="shared_string_do_not_use">பயண்படுத்தாதே</string>
@@ -1745,4 +1745,5 @@
     <string name="on_hold">நிறுத்தி</string>
     <string name="shared_string_paused">இடைநிறுத்தப்பட்டது</string>
     <string name="shared_string_undefined">வரையறுக்கப்படவில்லை</string>
+    <string name="shared_string_custom">தனிப்பயன்</string>
 </resources>
