@@ -2056,4 +2056,5 @@
     <string name="select_folder_descr">கோப்புறையைத் தேர்ந்தெடுக்கவும் அல்லது புதியதைச் சேர்க்கவும்</string>
     <string name="threshold_distance">வாசல் தூரம்</string>
     <string name="shared_string_resources">வளங்கள்</string>
+    <string name="download_tab_local">உள்ளக</string>
 </resources>
