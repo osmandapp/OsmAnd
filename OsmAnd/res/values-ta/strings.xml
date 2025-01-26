@@ -2378,4 +2378,5 @@
     <string name="routeInfo_horse_scale_name">குதிரை பாதைகளின் தொல்லை</string>
     <string name="routeInfo_horse_scale_description">குதிரைப் பாதைகளின் சிரமத்திற்கு ஏற்ப பாதைகளை வழங்கவும்</string>
     <string name="mtb_segment_classification">பிரிவு வகைப்பாடு</string>
+    <string name="activity_type_car_name">கார்</string>
 </resources>
