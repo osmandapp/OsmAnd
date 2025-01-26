@@ -1990,4 +1990,5 @@
     <string name="quick_action_map_source_title">வரைபட ஆதாரங்கள்</string>
     <string name="shared_string_routing">ரூட்டிங்</string>
     <string name="shared_string_rendering_style">வழங்குதல் பாணி</string>
+    <string name="shared_string_importing">இறக்குமதி</string>
 </resources>
