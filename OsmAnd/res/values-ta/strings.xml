@@ -2209,4 +2209,5 @@
     <string name="map_viewing_item">வரைபடம் பார்க்கும்</string>
     <string name="planning_trip_item">ஒரு பயணத்தைத் திட்டமிடுங்கள்</string>
     <string name="navigation_profiles_item">வழிசெலுத்தல் சுயவிவரங்கள்</string>
+    <string name="osmand_purchases_item">ஒச்மண்ட் கொள்முதல்</string>
 </resources>
