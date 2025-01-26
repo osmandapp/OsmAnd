@@ -2635,4 +2635,5 @@
     <string name="transport_hazmat_title">அபாயகரமான பொருட்களின் போக்குவரத்து</string>
     <string name="routing_attr_hazmat_category_name">அச்மத் வகை</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (கட்டுப்பாடுகள் இல்லை)</string>
+    <string name="transport_hazmat_yes_desc">பொருந்தக்கூடிய வகையைத் தேர்ந்தெடுக்கவும்.</string>
 </resources>
