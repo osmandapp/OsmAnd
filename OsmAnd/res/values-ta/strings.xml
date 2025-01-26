@@ -2749,4 +2749,5 @@
     <string name="backup_delete_old_data_warning">முன்னர் ஏற்றப்பட்ட தரவுகளுக்கான மாற்ற வரலாற்றை நீக்க உள்ளீர்கள்.\n\n தரவின் தற்போதைய பதிப்பு சேவையகத்தில் சேமிக்கப்படும், ஆனால் நீங்கள் முன்பு செய்யப்பட்ட மாற்றங்களுக்கு திரும்ப முடியாது.</string>
     <string name="delete_all_confirmation">ஆம், அனைத்தையும் நீக்கு</string>
     <string name="backup_delete_types_descr">ஒச்மண்ட் கிளவுட்டிலிருந்து நீக்கப்பட்ட தரவு வகைகளுக்கான எல்லா தரவையும் நீக்கவா?</string>
+    <string name="cloud_recent_changes">மாற்றங்கள்</string>
 </resources>
