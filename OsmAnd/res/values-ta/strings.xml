@@ -1800,4 +1800,5 @@
     <string name="shared_string_uploaded">பதிவேற்றப்பட்டது</string>
     <string name="shared_string_legal">சட்டரீதியான</string>
     <string name="shared_string_history">வரலாறு</string>
+    <string name="shared_string_external">வெளிப்புறம்</string>
 </resources>
