@@ -2688,4 +2688,5 @@
     <string name="backup_error_file_not_available">கோப்பு கிடைக்கவில்லை</string>
     <string name="backup_error_gzip_only_supported_upload">கோப்பை .gzip வடிவத்தில் அனுப்ப வேண்டும்</string>
     <string name="backup_error_subscription_was_expired_descr">உங்கள் OSMand Pro சந்தா காலாவதியாகிறது, காப்புப்பிரதியைப் பயன்படுத்த புதுப்பிக்கவும். மேகத்திலிருந்து தரவை நீங்கள் இன்னும் மீட்டெடுக்கலாம்.</string>
+    <string name="backup_error_subscription_was_expired">காலாவதியான சந்தா</string>
 </resources>
