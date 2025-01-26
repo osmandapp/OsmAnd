@@ -1562,4 +1562,5 @@
     <string name="gps_info_widget_desc">தற்போது காணக்கூடிய மற்றும் பயன்படுத்தப்பட்ட செயற்கைக்கோள்களின் எண்ணிக்கையைக் காட்டுகிறது.</string>
     <string name="altitude_widget_desc">தற்போதைய புவிஇருப்பிடத்தின் கடல் மட்டத்திற்கு மேலே உயரத்தைக் காட்டுகிறது.</string>
     <string name="max_speed_widget_desc">தற்போது இயக்கப்படும் சாலையின் வேக வரம்பைக் காட்டுகிறது.</string>
+    <string name="current_speed_widget_desc">சி.பி.எச் வழியாக அறிவிக்கப்பட்டபடி உங்கள் தற்போதைய வேகத்தைக் காட்டுகிறது.</string>
 </resources>
