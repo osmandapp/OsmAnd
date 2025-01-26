@@ -2268,4 +2268,5 @@
     <string name="shared_string_get">பெறுங்கள்</string>
     <string name="shared_string_open">திற</string>
     <string name="public_transport_warning_title">பொது போக்குவரத்து வழிசெலுத்தல் தற்போது பீட்டா சோதனையில் உள்ளது, பிழைகள் மற்றும் தவறுகளை எதிர்பார்க்கலாம்.</string>
+    <string name="public_transport_warning_descr_blog">எங்கள் வலைப்பதிவில் ஒச்மண்ட் ரூட்டிங் பற்றி மேலும் வாசிக்க.</string>
 </resources>
