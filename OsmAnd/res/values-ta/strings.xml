@@ -2839,4 +2839,5 @@
     <string name="rendering_attr_showMtbScale_description">அவற்றின் எம்டிபி அளவின்படி தடங்களைக் காண்பி.</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">ஆஃபிச்டே செல்ல வேண்டாம்</string>
     <string name="rendering_attr_horse_scale_critical_name">விமர்சன</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">மேம்பட்ட</string>
 </resources>
