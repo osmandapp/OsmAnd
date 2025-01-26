@@ -2652,4 +2652,5 @@
     <string name="icon_group_service">பணி</string>
     <string name="icon_group_transport">போக்குவரத்து</string>
     <string name="icon_group_travel">பயணம்</string>
+    <string name="icon_group_industrial">தொழில்</string>
 </resources>
