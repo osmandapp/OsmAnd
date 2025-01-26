@@ -1980,4 +1980,5 @@
     <string name="extra_maps_menu_group">கூடுதல் வரைபடங்கள்</string>
     <string name="import_duplicates_title">சில உருப்படிகள் ஏற்கனவே உள்ளன</string>
     <string name="import_duplicates_description">ஆச்மாண்டில் ஏற்கனவே இறக்குமதி செய்யப்பட்ட அதே பெயர்களைக் கொண்ட கூறுகள் உள்ளன.\n\n ஒரு செயலைத் தேர்ந்தெடுக்கவும்.</string>
+    <string name="keep_both">இரண்டையும் வைத்திருங்கள்</string>
 </resources>
