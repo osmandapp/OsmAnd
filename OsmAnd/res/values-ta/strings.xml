@@ -1614,4 +1614,5 @@
     <string name="map_widget_intermediate_distance">இடைநிலை இலக்கு</string>
     <string name="monitoring_control_start">ரெக்</string>
     <string name="map_widget_altitude">தற்போதைய இருப்பிடத்தின் உயரம்</string>
+    <string name="map_widget_sunrise_desc">அடுத்த சூரிய உதயத்தின் நேரம் அல்லது சூரிய தோன்றுகை வரை எஞ்சிய நேரத்தைக் காட்டுகிறது.</string>
 </resources>
