@@ -957,7 +957,7 @@
     <string name="item_unchecked">தேர்ந்தெடுக்காத</string>
     <string name="prefer_motorways">மோட்டார் வாகனங்களை விரும்புங்கள்</string>
     <string name="prefer_in_routing_title">போக்குவரத்தை விரும்புகிறேன் …</string>
-    <string name="prefer_in_routing_descr">மோட்டார் வாகனங்களை விரும்புங்கள்.</string>
+    <string name="prefer_in_routing_descr">மின்னோடி பாதைகளை விரும்புங்கள்.</string>
     <string name="max_speed_none">யாரும்</string>
     <string name="download_wikipedia_maps">விக்கிப்பீடியா</string>
     <string name="local_indexes_cat_srtm">சமநிலைக்கோடுகள்</string>
