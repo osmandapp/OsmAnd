@@ -2978,4 +2978,5 @@
     <string name="delete_folder">கோப்புறையை நீக்கு</string>
     <string name="root_folder">ரூட் கோப்புறை</string>
     <string name="all_folders">அனைத்து கோப்புறைகளும்</string>
+    <string name="start_recording">பதிவு செய்யத் தொடங்குங்கள்</string>
 </resources>
