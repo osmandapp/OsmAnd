@@ -2089,4 +2089,5 @@
     <string name="upload_poi">பின்னர் பதிவேற்றவும்</string>
     <string name="auto_zoom">ஆட்ட்சூம்</string>
     <string name="auto_zoom_smooth">மென்மையான</string>
+    <string name="auto_zoom_discrete">தனித்துவமான</string>
 </resources>
