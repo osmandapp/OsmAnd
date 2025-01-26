@@ -2674,4 +2674,5 @@
     <string name="app_mode_pickup_truck">பிக்கப் டிரக்</string>
     <string name="app_mode_utv">அருகருகே</string>
     <string name="app_mode_osm">ஓஎச்எம்</string>
+    <string name="app_mode_moped">மொபெட்</string>
 </resources>
