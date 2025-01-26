@@ -1866,4 +1866,5 @@
     <string name="daynight_mode_night">இரவு</string>
     <string name="map_widget_renderer">வரைபட நடை</string>
     <string name="mapillary">Maparyal</string>
+    <string name="street_level_imagery">தெரு-நிலை படங்கள்</string>
 </resources>
