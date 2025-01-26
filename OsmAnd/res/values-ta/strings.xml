@@ -2353,4 +2353,5 @@
     <string name="rendering_value_high_name">உயர்ந்த</string>
     <string name="routing_attr_difficulty_preference_description">இந்த சிரமத்தின் வழிகளை விரும்புங்கள், இருப்பினும் கடினமான அல்லது எளிதான பிச்ட்களை வழிநடத்துவது குறுகியதாக இருந்தால் இன்னும் சாத்தியமாகும்.</string>
     <string name="routing_attr_height_obstacles_name">உயர தரவைப் பயன்படுத்தவும்</string>
+    <string name="rendering_attr_appMode_description">வரைபடத்தை மேம்படுத்தவும்</string>
 </resources>
