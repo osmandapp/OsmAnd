@@ -2638,4 +2638,5 @@
     <string name="transport_hazmat_yes_desc">பொருந்தக்கூடிய வகையைத் தேர்ந்தெடுக்கவும்.</string>
     <string name="transport_hazmat_no_desc">சாலைகள் மற்றும் சுரங்கங்கள் அபாயகரமான பொருட்களைக் கொண்டு செல்வதை கட்டுப்படுத்தலாம்.</string>
     <string name="routing_attr_motor_type_name">மின்னோடி பயன்படுத்தும் எரிபொருள்</string>
+    <string name="routing_attr_motor_type_description">உங்கள் இயந்திரத்தின் எரிபொருள் வகையைத் தேர்ந்தெடுக்கவும், CO2 உமிழ்வை மதிப்பிடுவதற்கு இது தேவை.</string>
 </resources>
