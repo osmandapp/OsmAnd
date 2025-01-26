@@ -178,7 +178,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public static final String RETURN_SCREEN_NAME = "return_screen_name";
 	public static final String CALLING_FRAGMENT_TAG = "calling_fragment_tag";
 	public static final String ADJUST_MAP_POSITION = "adjust_map_position";
-	public static final String TRACK_DELETED_KEY = "track_deleted_key";
+	// public static final String TRACK_DELETED_KEY = "track_deleted_key";
 
 	private TrackDisplayHelper displayHelper;
 	private GpxSelectionHelper gpxSelectionHelper;
