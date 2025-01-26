@@ -2559,4 +2559,5 @@
     <string name="rendering_attr_piste_difficulty_expert_name">வல்லுநர்</string>
     <string name="rendering_attr_tracktype_grade1_name">திடமான (நடைபாதை)</string>
     <string name="routing_attr_avoid_train_description">ரயில்களைத் தவிர்க்கிறது</string>
+    <string name="routing_attr_avoid_shuttle_train_name">சட்டில் ரயில் இல்லை</string>
 </resources>
