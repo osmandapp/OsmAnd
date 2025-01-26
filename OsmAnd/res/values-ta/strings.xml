@@ -3073,4 +3073,5 @@
     <string name="weather_source_ecmwf_title">ECMWF</string>
     <string name="weather_source_GFS_title">சி.எஃப்.எச்</string>
     <string name="map_settings_weather_wind_animation">காற்று அனிமேசன்</string>
+    <string name="routing_attr_avoid_cobblestone_description">கோப்ச்டோனைத் தவிர்க்கவும்</string>
 </resources>
