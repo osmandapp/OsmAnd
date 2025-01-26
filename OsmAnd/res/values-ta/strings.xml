@@ -2484,4 +2484,5 @@
     <string name="routing_attr_max_num_changes_description">மாற்றங்களின் மேல் வரம்பைக் குறிப்பிடவும்</string>
     <string name="rendering_attr_winter_road_name">குளிர்கால சாலை</string>
     <string name="rendering_attr_tramTrainRoutes_name">டிராம் மற்றும் ரயில் வழிகள்</string>
+    <string name="rendering_attr_smoothness_intermediate_name">இடைநிலை</string>
 </resources>
