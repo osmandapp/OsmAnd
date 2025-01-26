@@ -2813,4 +2813,5 @@
     <string name="recalc_angle_dialog_descr">எனது இருப்பிடத்திற்கும் கணக்கிடப்பட்ட பாதைக்கும் இடையில் கூடுதல் நேரான பிரிவு பாதை மீண்டும் கணக்கிடப்படும் வரை காண்பிக்கப்படும்</string>
     <string name="checking_progress">சோதனை…</string>
     <string name="co2_mission">CO2 உமிழ்வு</string>
+    <string name="uninstall_speed_cameras">வேக கேமராக்களை நிறுவல் நீக்குதல்</string>
 </resources>
