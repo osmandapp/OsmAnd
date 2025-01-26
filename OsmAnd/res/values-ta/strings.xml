@@ -2074,4 +2074,5 @@
     <string name="clear_tiles_warning">இந்த மாற்றங்களைப் பயன்படுத்துவது இந்த ஓடு மூலத்திற்கான தற்காலிக சேமிப்பு தரவை அழிக்கும்</string>
     <string name="download_heightmap_maps">உயரம்</string>
     <string name="srtm_unit_format">விளிம்பு கோடுகள் அலகு மாறுபாடு</string>
+    <string name="srtm_download_single_help_message">மாறுபாட்டைத் தேர்ந்தெடுக்கவும். வடிவமைப்பை மாற்ற நீங்கள் கோப்பை மீண்டும் ஏற்ற வேண்டும்.</string>
 </resources>
