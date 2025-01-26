@@ -1814,4 +1814,5 @@
     <string name="shared_string_colors">நிறங்கள்</string>
     <string name="profile_icon">சுயவிவர படவுரு</string>
     <string name="restart">மறுதொடக்கம்</string>
+    <string name="shared_string_download_map">வரைபடத்தைப் பதிவிறக்கவும்</string>
 </resources>
