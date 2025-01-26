@@ -1493,4 +1493,5 @@
     <string name="tracker_item">ஒச்மண்ட் டிராக்கர்</string>
     <string name="settings_preset">இயல்புநிலை சுயவிவரம்</string>
     <string name="dialogs_and_notifications_title">உரையாடல்கள் மற்றும் அறிவிப்புகள்</string>
+    <string name="dialogs_and_notifications_descr">பாப்அப்கள், உரையாடல்கள் மற்றும் அறிவிப்புகளைக் கட்டுப்படுத்துங்கள்.</string>
 </resources>
