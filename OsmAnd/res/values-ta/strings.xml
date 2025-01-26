@@ -1397,4 +1397,5 @@
     <string name="months_3">மூன்று மாதங்கள்</string>
     <string name="price_free">இலவசம்</string>
     <string name="mapillary_image">Mapillay படம்</string>
+    <string name="map_widget_intermediate_time">இடைநிலை நேரம்</string>
 </resources>
