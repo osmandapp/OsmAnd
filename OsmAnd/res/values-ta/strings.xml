@@ -2232,4 +2232,5 @@
     <string name="shared_string_view">பார்வை</string>
     <string name="cache_size">கேச் அளவு</string>
     <string name="plugin_nautical_name">கடல் வரைபடக் காட்சி</string>
+    <string name="osmand_parking_plugin_name">பார்க்கிங் நிலை</string>
 </resources>
