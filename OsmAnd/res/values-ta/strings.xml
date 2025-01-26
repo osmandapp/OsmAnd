@@ -3071,4 +3071,5 @@
     <string name="weather_source_ecmwf_description">நடுத்தர தூர வானிலை முன்னறிவிப்புகளுக்கான ஐரோப்பிய நடுவண்</string>
     <string name="weather_source_GFS_description">சுற்றுச்சூழல் கணிப்புக்கான தேசிய மையங்களிலிருந்து உலகளாவிய முன்னறிவிப்பு அமைப்பு</string>
     <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="weather_source_GFS_title">சி.எஃப்.எச்</string>
 </resources>
