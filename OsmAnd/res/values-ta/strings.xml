@@ -1883,4 +1883,5 @@
     <string name="distance_during_navigation">வழிசெலுத்தலின் போது தூரம்</string>
     <string name="display_position_automatic_descr">வரைபட நோக்குநிலையைப் பொறுத்தது: இயக்க திசைக்கான கீழே, மற்ற அனைவருக்கும் நடுவண்.</string>
     <string name="osmand_settings">Osmand அமைப்புகள்</string>
+    <string name="backup_and_restore">காப்புப்பிரதி மற்றும் மீட்டமை</string>
 </resources>
