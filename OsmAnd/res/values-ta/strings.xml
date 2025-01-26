@@ -1751,4 +1751,5 @@
     <string name="shared_string_upload">பதிவேற்றும்</string>
     <string name="shared_string_move">நகர்த்தவும்</string>
     <string name="shared_string_set">கணம்</string>
+    <string name="shared_string_replace">மாற்றவும்</string>
 </resources>
