@@ -2523,4 +2523,5 @@
     <string name="rendering_attr_depthContours_name">கடல் ஆழமான வரையறைகள்</string>
     <string name="rendering_attr_depthContourWidth_name">வரி அகலம்</string>
     <string name="rendering_attr_depthContourColorScheme_name">வரி வண்ணத் திட்டம்</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">ஃப்ரீரைடு</string>
 </resources>
