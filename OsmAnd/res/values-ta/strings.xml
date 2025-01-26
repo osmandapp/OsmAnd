@@ -2836,4 +2836,5 @@
     <string name="rendering_attr_showMtbScaleIMBATrails_description">அர்ப்பணிப்பு மலை பைக்கிங் பாதைகளைக் காட்டு.</string>
     <string name="routing_attr_avoid_4wd_only_name">4WD சாலைகளைத் தவிர்க்கவும்</string>
     <string name="routing_attr_avoid_footways_name">பாதைகளைத் தவிர்க்கவும்</string>
+    <string name="rendering_attr_showMtbScale_description">அவற்றின் எம்டிபி அளவின்படி தடங்களைக் காண்பி.</string>
 </resources>
