@@ -1160,7 +1160,7 @@
     <string name="available_maps">உபயோகப்படுத்தக்கூடிய வரைபடங்கள்</string>
     <string name="select_voice_provider">குரல் வழிகாட்டலைத் தேர்ந்தெடுக்கவும்</string>
     <string name="select_voice_provider_descr">உங்கள் மொழிக்கான குரல் வழிகாட்டலைத் தேர்ந்தெடுக்கவும் அல்லது பதிவிறக்கவும்.</string>
-    <string name="impassable_road_desc">வழிசெலுத்தலின் போது தவிர்க்க விரும்பும் சாலைகளைத் தேர்ந்தெடுக்கவும்.</string>
+    <string name="impassable_road_desc">வழிசெலுத்தலின் போது நீங்கள் தவிர்க்க விரும்பும் சாலைகளைத் தேர்ந்தெடுக்கவும்.</string>
     <string name="shared_string_sound">ஒலி</string>
     <string name="no_location_permission">இருப்பிடத் தகவல்களை அணுக, பயன்பாட்டிற்கு அனுமதி இல்லை.</string>
     <string name="no_camera_permission">கேமராவை அணுகுமாறு அனுமதி இல்லை.</string>
