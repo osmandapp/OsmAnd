@@ -2536,4 +2536,5 @@
     <string name="routeInfo_tracktype_description">பாதை அல்லது தடத்தை அதன் மேற்பரப்பு அமைப்பால் வண்ணமயமாக்குங்கள். சாலை பிணையம் பெரும்பாலும் செப்பனிடப்படாதபோது பொதுவாக பொருந்தும்.</string>
     <string name="rendering_attr_highway_class_path_name">பாதை</string>
     <string name="rendering_value_white_name">வெள்ளை</string>
+    <string name="rendering_value_blue_name">நீலம்</string>
 </resources>
