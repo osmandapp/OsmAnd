@@ -2659,4 +2659,5 @@
     <string name="app_mode_taxi">டாக்சி</string>
     <string name="app_mode_shuttle_bus">சட்டில் பச்</string>
     <string name="app_mode_subway">சுரங்கப்பாதை</string>
+    <string name="app_mode_horse">குதிரை</string>
 </resources>
