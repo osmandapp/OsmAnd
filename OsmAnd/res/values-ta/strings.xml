@@ -3019,4 +3019,5 @@
     <string name="routing_attr_hazmat_category_usa_2_name">வாயுக்கள்</string>
     <string name="rendering_attr_padusHideBoundaries_name">பொது நில எல்லைகளை மறைக்கவும்</string>
     <string name="rendering_value_sectors_name">துறைகள்</string>
+    <string name="rendering_attr_showProposed_name">முன்மொழியப்பட்ட பொருள்கள்</string>
 </resources>
