@@ -3031,4 +3031,5 @@
     <string name="rendering_value_managerName_name">மேலாளர் பெயர்</string>
     <string name="rendering_attr_padusHideBoundaries_description">பொது நில எல்லைகளை மறைக்கவும், ஆனால் பகுதிகளை விட்டு விடுங்கள்</string>
     <string name="rendering_value_small_name">சிறிய</string>
+    <string name="rendering_value_name_only_name">பெயர் மட்டும்</string>
 </resources>
