@@ -1763,4 +1763,5 @@
     <string name="shared_string_time_moving">நேரம் நகரும்</string>
     <string name="shared_string_cache">கேச்</string>
     <string name="osmand_parking_warning">எச்சரிக்கை</string>
+    <string name="shared_string_preparing">தயாரித்தல்</string>
 </resources>
