@@ -2942,4 +2942,5 @@
     <string name="purchases_feature_desc_external_sensors">வெளிப்புற சென்சார்களிடமிருந்து தரவைக் காண்பி பதிவுசெய்க: சைக்கிள் விரைவு, சைக்கிள் ஆற்றல், கேடென்ச் மற்றும் இதய துடிப்பு.</string>
     <string name="external_sensors_support">வெளிப்புற சென்சார்கள் உதவி</string>
     <string name="learn_more_about_sensors_link">சென்சார்கள் பற்றி மேலும் அறிக.</string>
+    <string name="ant_plus_pair_bluetooth_prompt">நீங்கள் ஊடலை லு மற்றும் எறும்பு+ சென்சார்களை ஓச்மாண்டுடன் இணைக்கலாம்.</string>
 </resources>
