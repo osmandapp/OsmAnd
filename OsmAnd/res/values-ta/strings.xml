@@ -1788,4 +1788,5 @@
     <string name="compass_always_visible">எப்போதும் தெரியும்</string>
     <string name="compass_always_hidden">எப்போதும் மறைக்கப்படுகிறது</string>
     <string name="shared_string_hidden">மறைக்கப்பட்ட</string>
+    <string name="visible_in_3d_mode">3D பயன்முறையில் தெரியும்</string>
 </resources>
