@@ -3065,4 +3065,5 @@
     <string name="default_buttons">இயல்புநிலை பொத்தான்கள்</string>
     <string name="add_button">பொத்தானைச் சேர்க்கவும்</string>
     <string name="empty_name">வெற்று பெயர்</string>
+    <string name="custom_map_button_name_present">அத்தகைய பொத்தான் ஏற்கனவே உள்ளது</string>
 </resources>
