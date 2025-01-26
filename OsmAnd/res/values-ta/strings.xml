@@ -1824,4 +1824,5 @@
     <string name="favorite">பிடித்த</string>
     <string name="poi_dialog_poi_type">POI வகை</string>
     <string name="favorite_group_name">குழு பெயர்</string>
+    <string name="select_group">குழுவைத் தேர்ந்தெடுக்கவும்</string>
 </resources>
