@@ -1440,4 +1440,5 @@
     <string name="help_article_navigation_guidance_map_during_navigation_name">வழிசெலுத்தலின் போது வரைபடத் திரை</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">குரல் தூண்டுகிறது / அறிவிப்புகள்</string>
     <string name="help_article_navigation_routing_name">பாதை அளவுருக்கள்</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">சைக்கிள் ரூட்டிங் (எம்டிபி)</string>
 </resources>
