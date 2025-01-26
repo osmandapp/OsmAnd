@@ -2041,4 +2041,5 @@
     <string name="open_saved_track">சேமித்த பாதையை திறந்தது</string>
     <string name="plan_route_create_new_route">புதிய வழியை உருவாக்கவும்</string>
     <string name="plan_route_open_existing_track">தற்போதுள்ள பாதையைத் திறக்கவும்</string>
+    <string name="sort_last_modified">கடைசியாக மாற்றப்பட்டது</string>
 </resources>
