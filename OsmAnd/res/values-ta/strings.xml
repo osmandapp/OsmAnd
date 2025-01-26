@@ -2071,4 +2071,5 @@
     <string name="pseudo_mercator_projection">போலி-மெர்கேட்டர் திட்டம்</string>
     <string name="sqlite_db_file">Sqlitedb கோப்பு</string>
     <string name="one_image_per_tile">ஒரு ஓடு ஒரு பட கோப்பு</string>
+    <string name="clear_tiles_warning">இந்த மாற்றங்களைப் பயன்படுத்துவது இந்த ஓடு மூலத்திற்கான தற்காலிக சேமிப்பு தரவை அழிக்கும்</string>
 </resources>
