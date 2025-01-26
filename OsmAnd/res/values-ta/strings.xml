@@ -2734,4 +2734,5 @@
     <string name="make_backup_descr">இந்த சாதனத்தில் பல மாற்றங்கள் உள்ளன, தயவுசெய்து இந்த தரவை இழக்கக்கூடாது என்பதற்காக காப்புப்பிரதி எடுக்கவும்.</string>
     <string name="cloud_conflicts">மோதல்கள்</string>
     <string name="cloud_conflict">மோதல்</string>
+    <string name="upload_all">அனைத்தையும் பதிவேற்றவும்</string>
 </resources>
