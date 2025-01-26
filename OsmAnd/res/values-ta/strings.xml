@@ -2366,4 +2366,5 @@
     <string name="routing_attr_allow_classic_only_name">கிளாசிக் மட்டும் பாதைகளை அனுமதிக்கவும்</string>
     <string name="rendering_attr_streetLighting_name">தெரு விளக்குகள்</string>
     <string name="rendering_attr_appMode_name">வழங்குதல் பயன்முறை</string>
+    <string name="routing_attr_goods_restrictions_name">பொருட்கள் வழங்கல்</string>
 </resources>
