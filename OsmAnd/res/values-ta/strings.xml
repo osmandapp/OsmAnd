@@ -2521,4 +2521,5 @@
     <string name="routing_attr_driving_style_safety_name">பைவேசை விரும்புங்கள்</string>
     <string name="rendering_attr_surface_paving_stones_name">நடைபாதை கற்கள்</string>
     <string name="rendering_attr_depthContours_name">கடல் ஆழமான வரையறைகள்</string>
+    <string name="rendering_attr_depthContourWidth_name">வரி அகலம்</string>
 </resources>
