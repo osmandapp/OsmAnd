@@ -1446,4 +1446,5 @@
     <string name="help_article_navigation_routing_direct_to_point_routing_name">நேரடி-புள்ளி ரூட்டிங் (படகு)</string>
     <string name="help_article_navigation_routing_horse_routing_name">குதிரை ரூட்டிங்</string>
     <string name="help_article_navigation_routing_moped_routing_name">மொபெட் ரூட்டிங்</string>
+    <string name="help_article_navigation_routing_online_routing_name">நிகழ்நிலை ரூட்டிங்</string>
 </resources>
