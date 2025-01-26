@@ -2988,4 +2988,5 @@
     <string name="action_cannot_be_undone">இந்த செயலை செயல்தவிர்க்க முடியாது.</string>
     <string name="shared_string_next_event">அடுத்த நிகழ்வு</string>
     <string name="map_widget_sun_position_desc">சூரிய தோன்றுகை அல்லது சூரிய மறைவு வரை நேரத்தைக் காட்டுகிறது.</string>
+    <string name="map_widget_sun_position">சூரிய நிலை</string>
 </resources>
