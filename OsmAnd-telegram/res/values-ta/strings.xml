@@ -63,7 +63,7 @@
     <string name="bearing">தாங்கி</string>
     <string name="search_contacts">தொடர்புகளைத் தேடுங்கள்</string>
     <string name="type_contact_or_group_name">தொடர்பு அல்லது குழு பெயரைத் தட்டச்சு செய்க</string>
-    <string name="altitude">குத்துயரம்</string>
+    <string name="altitude">உயரம்</string>
     <string name="search_contacts_descr">உங்கள் அனைத்து குழுக்கள் மற்றும் தொடர்புகள் முழுவதும் தேடுங்கள்.</string>
     <string name="shared_string_search">தேடல்</string>
     <string name="shared_string_ok">சரி</string>
