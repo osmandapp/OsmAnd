@@ -2108,4 +2108,5 @@
     <string name="tab_title_basic">அடிப்படை</string>
     <string name="tab_title_advanced">மேம்பட்ட</string>
     <string name="save_poi_without_poi_type_message">வகை இல்லாமல் POI ஐ சேமிக்கவா?</string>
+    <string name="save_poi_too_many_uppercase">இந்த பெயரில் பல பெரிய எழுத்துக்கள் உள்ளன. தொடரவா?</string>
 </resources>
