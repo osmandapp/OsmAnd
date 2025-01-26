@@ -1652,4 +1652,5 @@
     <string name="keep_informing_never">கைமுறையாக மட்டுமே (அம்புக்குறியைத் தட்டவும்)</string>
     <string name="route_parameters">பாதை அளவுருக்கள்</string>
     <string name="fast_route_mode">வேகமான பாதை</string>
+    <string name="voice_announces">குரல் தூண்டுகிறது</string>
 </resources>
