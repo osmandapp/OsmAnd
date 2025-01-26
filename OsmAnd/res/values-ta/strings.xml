@@ -2563,4 +2563,5 @@
     <string name="rendering_attr_contourColorScheme_description">விளிம்பு கோடுகள் வண்ணத் திட்டம்</string>
     <string name="rendering_value_boldOutline_name">தைரியமான அவுட்லைன்</string>
     <string name="rendering_attr_noPolygons_name">பலகோணங்கள்</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">எளிதானது</string>
 </resources>
