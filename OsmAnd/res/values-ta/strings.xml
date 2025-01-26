@@ -3046,4 +3046,5 @@
     <string name="wall_height">சுவர் உயரம்</string>
     <string name="vertical_exaggeration_description">அளவிலான மதிப்பை மாற்றுவதன் மூலம், நீங்கள் 3D நிவாரணத்தை வலியுறுத்தலாம்.</string>
     <string name="shared_string_scale">அளவு</string>
+    <string name="required_maps">தேவையான வரைபடங்கள்</string>
 </resources>
