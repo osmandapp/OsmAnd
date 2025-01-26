@@ -2952,4 +2952,5 @@
     <string name="ant_plus_searching_text_description">சாதனத்தை சென்சாருக்கு நெருக்கமாக வைத்திருங்கள். நீங்கள் சென்சாரை செயல்படுத்த வேண்டும், எனவே ஒச்மண்ட் அதைக் கண்டுபிடிக்க முடியும்.</string>
     <string name="ant_plus_open_settings">திறந்த அமைப்புகள்</string>
     <string name="ant_plus_bluetooth_off">ஊடலை அணைக்கப்படுகிறது</string>
+    <string name="ant_plus_bluetooth_off_description">ஊடலை கண்டுபிடிப்பு மற்றும் இணை சென்சார்களை இயக்கவும்.</string>
 </resources>
