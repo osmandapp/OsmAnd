@@ -1747,4 +1747,5 @@
     <string name="shared_string_undefined">வரையறுக்கப்படவில்லை</string>
     <string name="shared_string_custom">தனிப்பயன்</string>
     <string name="shared_string_done">முடிந்தது</string>
+    <string name="shared_string_uninstall">நிறுவல் நீக்க</string>
 </resources>
