@@ -1976,4 +1976,5 @@
     <string name="select_data_to_import">இறக்குமதி செய்ய வேண்டிய தரவைத் தேர்ந்தெடுக்கவும்.</string>
     <string name="nav_type_hint">வழிசெலுத்தல் வகை</string>
     <string name="shared_string_nothing_selected">எதுவும் தேர்ந்தெடுக்கப்படவில்லை</string>
+    <string name="custom_osmand_plugin">தனிப்பயன் ஆச்மண்ட் சொருகி</string>
 </resources>
