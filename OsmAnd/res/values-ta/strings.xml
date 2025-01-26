@@ -1834,4 +1834,5 @@
     <string name="shared_string_circle">வட்டம்</string>
     <string name="shared_string_octagon">எண்கோண</string>
     <string name="shared_string_square">நாற்கை</string>
+    <string name="personal_category_name">தனிப்பட்ட</string>
 </resources>
