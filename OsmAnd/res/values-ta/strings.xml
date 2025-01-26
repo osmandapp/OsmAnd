@@ -1879,4 +1879,5 @@
     <string name="map_settings_weather_cloud">முகில்</string>
     <string name="map_settings_weather_precip">மழைப்பொழிவு</string>
     <string name="shared_string_contours">வரையறைகள்</string>
+    <string name="shared_string_layers">அடுக்குகள்</string>
 </resources>
