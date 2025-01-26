@@ -1845,4 +1845,5 @@
     <string name="shared_string_statistics">புள்ளிவிவரங்கள்</string>
     <string name="layer_route">பாதை</string>
     <string name="map_widget_average_speed">சராசரி விரைவு</string>
+    <string name="altitude_range">உயர வரம்பு</string>
 </resources>
