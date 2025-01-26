@@ -1584,4 +1584,5 @@
     <string name="map_widget_group_sunrise_sunset_desc">இந்த விட்செட்டுகள் அடுத்த சூரிய தோன்றுகை மற்றும் சூரிய மறைவு பற்றிய தகவல்களைக் காட்டுகின்றன.</string>
     <string name="map_widget_group_sunrise_sunset">சூரிய தோன்றுகை, சூரிய மறைவு</string>
     <string name="weather_widgets_secondary_desc">வானிலை சொருகி அமைப்புகளில் அளவீட்டு அலகுகளை மாற்றலாம்.</string>
+    <string name="compass_on_circles">வட்டங்களில் திசைகாட்டி</string>
 </resources>
