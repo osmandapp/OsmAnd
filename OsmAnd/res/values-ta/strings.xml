@@ -3081,4 +3081,5 @@
     <string name="location_radius">இருப்பிட ஆரம்</string>
     <string name="view_angle_description">நீங்கள் தற்போது எதிர்கொள்ளும் கூம்பு வடிவ பகுதியைக் காட்டுகிறது</string>
     <string name="location_radius_description">உங்கள் தற்போதைய இருப்பிட துல்லியத்தை குறிக்கும் வட்ட பகுதியைக் காட்டுகிறது</string>
+    <string name="resting_position">ஓய்வு நிலை</string>
 </resources>
