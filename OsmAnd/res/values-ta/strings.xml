@@ -2273,4 +2273,5 @@
     <string name="date_of_creation">உருவாக்கிய தேதி</string>
     <string name="max_altitude">அதிகபட்ச உயரம்</string>
     <string name="max_sensor_speed">சென்சார் விரைவு, அதிகபட்சம்</string>
+    <string name="avg_sensor_speed">சென்சார் விரைவு, சராசரி</string>
 </resources>
