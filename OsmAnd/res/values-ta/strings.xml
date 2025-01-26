@@ -2371,4 +2371,5 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">ரூட்டிங் செய்ய நடைபாதை சாலைகள் மீது செப்பன்ட்டை விரும்புங்கள்.</string>
     <string name="rendering_attr_surface_ice_name">பனி</string>
     <string name="routing_attr_piste_type_sled_name">ச்லெட்</string>
+    <string name="rendering_attr_smoothness_bad_name">மோசமான</string>
 </resources>
