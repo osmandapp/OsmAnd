@@ -2351,4 +2351,5 @@
     <string name="index_item_depth_contours_osmand_ext">கடல் ஆழமான வரையறைகள்</string>
     <string name="subscribe_email_desc">பயன்பாட்டு தள்ளுபடிகள் பற்றி எங்கள் அஞ்சல் பட்டியலுக்கு குழுசேரவும், மேலும் 3 வரைபட பதிவிறக்கங்களைப் பெறுங்கள்!</string>
     <string name="rendering_value_high_name">உயர்ந்த</string>
+    <string name="routing_attr_difficulty_preference_description">இந்த சிரமத்தின் வழிகளை விரும்புங்கள், இருப்பினும் கடினமான அல்லது எளிதான பிச்ட்களை வழிநடத்துவது குறுகியதாக இருந்தால் இன்னும் சாத்தியமாகும்.</string>
 </resources>
