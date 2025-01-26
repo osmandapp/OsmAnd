@@ -1860,4 +1860,5 @@
     <string name="gpx_upload_private_visibility_descr">\"தனியார்\" என்பது எந்தவொரு பொது பட்டியல்களிலும் சுவடு காண்பிக்கப்படாது, ஆனால் அதிலிருந்து தடமறியும் வரிசையில் தடமறியும் வரிசையில் பொது சி.பி.எச் பநிஇ மூலம் நேர முத்திரைகள் இல்லாமல் கிடைக்கின்றன.</string>
     <string name="save_track_to_gpx_descrp">செல்லும்போது ஆட்டோ-ச்டார்ட் டிராக் ரெக்கார்டிங் மற்றும் பின்னர் தானாக சேமிக்கப்படுகிறது.</string>
     <string name="shared_string_slope">சாய்வு</string>
+    <string name="routing_engine_vehicle_type_driving">வண்டி ஓட்டுதல்</string>
 </resources>
