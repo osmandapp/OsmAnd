@@ -6064,4 +6064,7 @@
     <string name="display_distance_to_first_intermediate">Tampilkan detail rute until perhentian berikutnya</string>
     <string name="recently_visited">Dikunjungi baru-baru ini</string>
     <string name="popular_places_nearby">Tempat-tempat sekitar yang populer</string>
+    <string name="shared_string_avg_altitude">Ketinggian rata-rata</string>
+    <string name="shared_string_length">Panjang</string>
+    <string name="shared_string_avg_speed">Kecepatan minimum</string>
 </resources>
