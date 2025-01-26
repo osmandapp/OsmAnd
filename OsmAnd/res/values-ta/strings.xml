@@ -1983,4 +1983,5 @@
     <string name="keep_both">இரண்டையும் வைத்திருங்கள்</string>
     <string name="keep_both_desc">இறக்குமதி செய்யப்பட்ட உருப்படிகள் முன்னொட்டுடன் சேர்க்கப்படும்</string>
     <string name="replace_all">அனைத்தையும் மாற்றவும்</string>
+    <string name="replace_all_desc">தற்போதைய உருப்படிகள் கோப்பிலிருந்து உருப்படிகளுடன் மாற்றப்படும்</string>
 </resources>
