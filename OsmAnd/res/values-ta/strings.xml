@@ -2769,4 +2769,5 @@
     <string name="track_has_no_needed_data">பாதையில் அந்தந்த தரவைக் காணவில்லை.</string>
     <string name="select_another_colorization">மற்றொரு வகை வண்ணத்தைத் தேர்ந்தெடுக்கவும்.</string>
     <string name="purchases_feature_desc_osmand_cloud">அனைத்து ஒச்மண்ட் தரவையும் ஆன்லைனில் சேமிக்க ஒச்மண்ட் கிளவுட்டைப் பெறுங்கள். மீண்டும் நிறுவிய பின் இழந்த தரவு இல்லை. காப்புப் பிரதி எடுத்து எல்லா தகவல்களையும் எளிதாக மீட்டெடுக்கவும்.</string>
+    <string name="purchases_feature_desc_pro_widgets">OSMand Pro அம்சங்களுக்கான அணுகலைப் பெறுங்கள்: பாதை வண்ணம் மற்றும் பல.</string>
 </resources>
