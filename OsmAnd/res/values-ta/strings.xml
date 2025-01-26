@@ -1655,4 +1655,5 @@
     <string name="voice_announces">குரல் தூண்டுகிறது</string>
     <string name="screen_alerts">திரை விழிப்பூட்டல்கள்</string>
     <string name="vehicle_parameters">வாகன அளவுருக்கள்</string>
+    <string name="map_during_navigation">வழிசெலுத்தலின் போது வரைபடம்</string>
 </resources>
