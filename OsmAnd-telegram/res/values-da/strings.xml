@@ -246,7 +246,7 @@
     <string name="shared_string_end">Slut</string>
     <string name="shared_string_start">Start</string>
     <string name="shared_string_apply">Anvend</string>
-    <string name="set_time_timeline_descr">Vælg tid at vise</string>
+    <string name="set_time_timeline_descr">Vælg vist tid</string>
     <string name="start_end_date">Start — slutdato</string>
     <string name="saved_messages">Gemte beskeder</string>
     <string name="time_zone_descr">Vælg tidszone, der skal vises i placeringsbeskeder.</string>
@@ -259,7 +259,7 @@
     <string name="buffer_time">Buffer udløbstid</string>
     <string name="unit_of_length_descr">Ændr enhed for afstand.</string>
     <string name="shared_string_suggested">Foreslået</string>
-    <string name="status_widget_title">OsmAnd Tracker-status</string>
+    <string name="status_widget_title">OsmAnd Tracker status</string>
     <string name="back_to_osmand">Tilbage til OsmAnd</string>
     <string name="last_update_from_telegram_date">Sidste opdatering fra Telegram: %1$s</string>
     <string name="last_response_date">Sidste svar: %1$s</string>

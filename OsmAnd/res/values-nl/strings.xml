@@ -4680,9 +4680,7 @@
     <string name="map_settings_weather_temp">Temperatuur</string>
     <string name="calculate_online">Online berekenen</string>
     <string name="rendering_attr_showFitnessTrails_description">Toon sport paden</string>
-    <string name="location_source_descr">Wanneer OsmAnd geïnstalleerd is vanaf Google Play gebruikt het %1$s om de plaats te bepalen.
-\n
-\nAls u onnauwkeurige plaatsbepaling ervaart, of als u een apparaat zonder %2$s gebruikt, probeer dan naar \"%3$s\" over te schakelen.</string>
+    <string name="location_source_descr">Wanneer OsmAnd geïnstalleerd is vanaf Google Play gebruikt het %1$s om de plaats te bepalen. \n \nAls u onnauwkeurige plaatsbepaling ervaart, of als u een apparaat zonder %2$s gebruikt, probeer dan naar \"%3$s\" over te schakelen.</string>
     <string name="auto_backup_title">Automatische back-up</string>
     <string name="shared_string_duplicate">Dubbel</string>
     <string name="updated_map_time">Bijgewerkt: %1$s.</string>

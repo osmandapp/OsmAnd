@@ -53,7 +53,6 @@ public class OverviewCard extends MapBaseCard {
 	private final SegmentActionsListener actionsListener;
 	private final SelectedGpxFile selectedGpxFile;
 	private final GpxBlockStatisticsBuilder blockStatisticsBuilder;
-	private final GpxTrackAnalysis analysis;
 	private final RouteActivitySelectionHelper routeActivitySelectionHelper;
 	private final GpxDataItem dataItem;
 	private final Fragment targetFragment;
@@ -63,13 +62,12 @@ public class OverviewCard extends MapBaseCard {
 	}
 
 	public OverviewCard(@NonNull MapActivity mapActivity, @NonNull SegmentActionsListener actionsListener,
-	                    @NonNull SelectedGpxFile selectedGpxFile, @Nullable GpxTrackAnalysis analysis,
-	                    @Nullable GpxDataItem dataItem, @NonNull RouteActivitySelectionHelper routeActivitySelectionHelper,
+	                    @NonNull SelectedGpxFile selectedGpxFile, @Nullable GpxDataItem dataItem,
+	                    @NonNull RouteActivitySelectionHelper routeActivitySelectionHelper,
 	                    @NonNull Fragment targetFragment) {
 		super(mapActivity);
 		this.actionsListener = actionsListener;
 		this.selectedGpxFile = selectedGpxFile;
-		this.analysis = analysis;
 		this.dataItem = dataItem;
 		this.routeActivitySelectionHelper = routeActivitySelectionHelper;
 		this.targetFragment = targetFragment;
@@ -109,7 +107,7 @@ public class OverviewCard extends MapBaseCard {
 		}
 		GpxTrackAnalysis analysis = selectedGpxFile.getFilteredSelectedGpxFile() != null
 				? selectedGpxFile.getFilteredSelectedGpxFile().getTrackAnalysis(app)
-				: this.analysis;
+				: selectedGpxFile.getTrackAnalysisToDisplay(app);
 		blockStatisticsBuilder.initStatBlocks(actionsListener, getActiveColor(), analysis);
 
 		if (blocksView.getVisibility() == View.VISIBLE && description.getVisibility() == View.VISIBLE) {

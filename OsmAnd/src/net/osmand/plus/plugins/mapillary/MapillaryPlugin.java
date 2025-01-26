@@ -340,24 +340,6 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected void collectContextMenuImageCards(@NonNull ImageCardsHolder holder,
-	                                            @NonNull Map<String, String> params,
-	                                            @Nullable Map<String, String> additionalParams,
-	                                            @Nullable GetImageCardsListener listener) {
-		if (mapActivity != null && additionalParams != null) {
-			String key = additionalParams.get(Amenity.MAPILLARY);
-			if (key != null) {
-				JSONObject imageObject = MapillaryOsmTagHelper.getImageByKey(key);
-				if (imageObject != null) {
-					holder.addCard(MAPILLARY_AMENITY, new MapillaryImageCard(mapActivity, imageObject));
-				}
-				additionalParams.remove(Amenity.MAPILLARY);
-			}
-			params.putAll(additionalParams);
-		}
-	}
-
-	@Override
 	protected boolean createContextMenuImageCard(@NonNull ImageCardsHolder holder,
 	                                             @NonNull JSONObject imageObject) {
 		ImageCard imageCard = null;

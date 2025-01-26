@@ -1941,7 +1941,7 @@
     <string name="postcode">Codice postale</string>
     <string name="shared_string_from">da</string>
     <string name="city_type_district">Distretto</string>
-    <string name="city_type_neighbourhood">Quartiere</string>
+    <string name="city_type_neighbourhood">Quartiere minore</string>
     <string name="map_widget_search">Cerca</string>
     <string name="lang_hsb">Sorabo superiore</string>
     <string name="rendering_attr_hideOverground_name">Oggetti sopra il terreno</string>
@@ -5687,4 +5687,8 @@
     <string name="default_buttons_opacity_original_description">Ogni pulsante manterrebbe la propria opacità di sfondo.</string>
     <string name="rendering_attr_showClimbingRoutes_description">Mostra i percorsi per l\'arrampicata</string>
     <string name="rendering_attr_showClimbingRoutes_name">Percorsi arrampicata</string>
+    <string name="display_distance_to_first_intermediate_summary">Mostra il tempo e la distanza per la prossima fermata. Disattiva per mostrare sempre i dettagli per la destinazione.</string>
+    <string name="display_distance_to_first_intermediate">Mostra i dettagli del percorso per la prossima fermata</string>
+    <string name="recently_visited">Visti di recente</string>
+    <string name="popular_places_nearby">Luoghi popolari nelle vicinanze</string>
 </resources>

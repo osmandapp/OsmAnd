@@ -244,7 +244,8 @@ public class ItineraryDataHelper {
 					String itineraryId = marker.getName(app) + createShortLinkString(wptPt.getLat(), wptPt.getLon(), 15);
 					extensions.put(ITINERARY_ID, groupInfo.alias + ":" + itineraryId);
 				}
-				if (Algorithms.stringsEqual(groupInfo.type, ItineraryType.TRACK.getTypeName())) {
+				if (Algorithms.stringsEqual(groupInfo.type, ItineraryType.TRACK.getTypeName())
+						&& groupInfo.path != null) {
 					extensions.put(GPX_KEY, groupInfo.path);
 				} else if (Algorithms.stringsEqual(groupInfo.type, ItineraryType.FAVOURITES.getTypeName())
 						&& !Algorithms.isEmpty(groupInfo.name)) {

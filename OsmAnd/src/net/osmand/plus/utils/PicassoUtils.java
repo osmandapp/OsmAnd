@@ -14,6 +14,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.BuildConfig;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
@@ -23,8 +24,15 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
@@ -48,8 +56,9 @@ public class PicassoUtils {
 		diskCache = new Cache(cacheDir, calculateDiskCacheSize(cacheDir));
 		memoryCache = new LruCache(app);
 
+		OkHttpClient okHttpClient = new OkHttpClient.Builder().cache(diskCache).build();
 		Picasso picasso = new Picasso.Builder(app)
-				.downloader(new OkHttp3Downloader(new OkHttpClient.Builder().cache(diskCache).build()))
+				.downloader(new OkHttp3Downloader(okHttpClient))
 				.memoryCache(memoryCache)
 				.build();
 
@@ -57,6 +66,38 @@ public class PicassoUtils {
 			Picasso.setSingletonInstance(picasso);
 		} catch (IllegalStateException e) {
 			LOG.error(e);
+		}
+	}
+
+	public OkHttpClient getUnsafeOkHttpClient() {
+		try {
+			final TrustManager[] trustAllCerts = new TrustManager[] {
+					new X509TrustManager() {
+						@Override
+						public void checkClientTrusted(X509Certificate[] chain, String authType) {
+						}
+
+						@Override
+						public void checkServerTrusted(X509Certificate[] chain, String authType) {
+						}
+
+						@Override
+						public X509Certificate[] getAcceptedIssuers() {
+							return new X509Certificate[0];
+						}
+					}
+			};
+			final SSLContext sslContext = SSLContext.getInstance("SSL");
+			sslContext.init(null, trustAllCerts, new SecureRandom());
+			final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+			return new OkHttpClient.Builder()
+					.sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0])
+					.hostnameVerifier((hostname, session) -> true)
+					.cache(diskCache)
+					.build();
+
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
 	}
 

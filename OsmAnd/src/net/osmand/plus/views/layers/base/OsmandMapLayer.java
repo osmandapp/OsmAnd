@@ -85,6 +85,12 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 			}
 		}
 
+		public void onMapObjectUpdated(T object) {
+			if(customMapObjects != null && customMapObjects.contains(object)) {
+				isChanged = true;
+			}
+		}
+
 		public void setCustomMapObjects(List<T> customMapObjects) {
 			if (this.customMapObjects != customMapObjects) {
 				isChanged = true;
@@ -431,15 +437,9 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		return getScaledBitmap(drawableId, getTextScale());
 	}
 
+	@Nullable
 	protected Bitmap getScaledBitmap(@DrawableRes int drawableId, float scale) {
-		OsmandApplication app = getApplication();
-		MapActivity activity = getMapActivity();
-		Bitmap bitmap = BitmapFactory.decodeResource(activity == null ? app.getResources() : activity.getResources(), drawableId);
-		if (bitmap != null && scale != 1f && scale > 0) {
-			bitmap = AndroidUtils.scaleBitmap(bitmap,
-					(int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);
-		}
-		return bitmap;
+		return getApplication().getUIUtilities().getScaledBitmap(getMapActivity(), drawableId, scale);
 	}
 
 	public float getTextScale() {

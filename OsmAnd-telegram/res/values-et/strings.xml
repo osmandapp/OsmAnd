@@ -4,7 +4,7 @@
     <string name="buffer_time">Puhvri aegumisaeg</string>
     <string name="time_zone_descr">Vali oma asukohateadetes kuvatav ajavöönd.</string>
     <string name="time_zone">Ajavöönd</string>
-    <string name="units_and_formats">Ühikud ja formaadid</string>
+    <string name="units_and_formats">Ühikud ja vormingud</string>
     <string name="unit_of_length_descr">Muuda vahemaa mõõtmiseks kasutatud ühikut.</string>
     <string name="unit_of_length">Pikkusühikud</string>
     <string name="unit_of_speed_system_descr">Määra kiiruse ühik.</string>
@@ -32,7 +32,7 @@
     <string name="proxy_port">Port</string>
     <string name="proxy_server">Server</string>
     <string name="shared_string_connection">Ühendus</string>
-    <string name="shared_string_enable">Luba</string>
+    <string name="shared_string_enable">Võta kasutusele</string>
     <string name="proxy_type">Puhverserveri liik</string>
     <string name="proxy_connected">Ühendatud</string>
     <string name="proxy_disconnected">Ühendus puudub</string>

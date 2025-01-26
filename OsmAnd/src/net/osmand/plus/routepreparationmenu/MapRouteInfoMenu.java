@@ -1290,8 +1290,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			View container = createToolbarSubOptionView(true, title, R.drawable.ic_action_remove_dark, true, v -> {
 				OsmandApplication app = getApp();
 				if (app != null) {
-					app.getWaypointHelper().enableWaypointType(waypointType, false);
-					updateOptionsButtons();
+					app.getWaypointHelper().switchWaypointTypeAsync(waypointType, false, this::updateOptionsButtons);
 				}
 			});
 			if (container != null) {

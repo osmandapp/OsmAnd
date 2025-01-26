@@ -190,6 +190,7 @@ public class NavigationNotification extends OsmandNotification {
 					drawable.setBounds(0, 0, width, height);
 					drawable.setTurnType(turnType);
 					drawable.setTurnImminent(turnImminent, deviatedFromRoute);
+					drawable.updateColors(!app.getSettings().isLightSystemTheme());
 					turnBitmap = drawableToBitmap(drawable);
 				}
 

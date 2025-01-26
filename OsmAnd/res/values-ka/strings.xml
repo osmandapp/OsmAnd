@@ -25,7 +25,6 @@
     <string name="plugins_screen">დამატებათა გამმართველი</string>
     <string name="prefs_plugins_descr">დამატება გაძლევთ საშუალებას გამოიყენოთ აპლიკაციისათვის თანმოყოლილი ფუნქციები როგორიცაა ნაწილოვანი რუკები, თვალის დევნება, ძილის დროის ოპერაციები და სხვა.</string>
     <string name="prefs_plugins">დამატების მმართველი</string>
-    <string name="osm_editing_plugin_description"/>
     <string name="vector_maps_may_display_faster_on_some_devices">ვექტორული რუკები როგორც წესი ჩანს უფრო სწრაფად. შეიძლება არ იმუშაოს ზოგიერთ მოწყობილობაზე.</string>
     <string name="play_commands_of_currently_selected_voice">ხმით არჩეული ბრძანებების შესრულება:</string>
     <string name="debugging_and_development">OsmAnd -ის განვითარება და გამართვა</string>
@@ -858,7 +857,6 @@
     <string name="map_widget_audionotes">ხმოვანი შენიშვნები</string>
     <string name="audionotes_plugin_description">მგზავრობისას ხმოვანი/ვიდეო შენიშვნების ჩაწერა.</string>
     <string name="audionotes_plugin_name">ხმოვანი/ვიდეო შენიშვნები</string>
-    <string name="srtm_plugin_description"/>
     <string name="srtm_plugin_name">ტოპოგრაფია</string>
     <string name="download_select_map_types">სხვა რუკები</string>
     <string name="download_srtm_maps">კოტურული ხაზების მონაცემები</string>

@@ -4090,9 +4090,7 @@
     <string name="rendering_attr_showWaterwayTunnels_name">Ubideetako tunelen ikusgarritasuna areagotzea</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Zoom txikitako ikonoak</string>
     <string name="icon_group_education">Hezkuntza</string>
-    <string name="location_source_descr">Lehenespenez, Google Play-tik instalatutako OsmAnd-ek %1$s erabiltzen du kokapena zehazteko.
-\n
-\nZehaztasunik gabeko kokapen informazioa lortzen baduzu edo gailua %2$s gabe erabiltzen baduzu, saiatu \"%3$s\"-ra aldatzen</string>
+    <string name="location_source_descr">Lehenespenez, Google Play-tik instalatutako OsmAnd-ek %1$s erabiltzen du kokapena zehazteko. \n \nZehaztasunik gabeko kokapen informazioa lortzen baduzu edo gailua %2$s gabe erabiltzen baduzu, saiatu \"%3$s\"-ra aldatzen</string>
     <string name="import_tracks">Inportatu arrastoak</string>
     <string name="shared_string_shape">Forma</string>
     <string name="stop_download_desc">Deskarga ez da osatu. Deskarga orain eteten baduzu, lauzen kopuru bat bakarrik egongo da ikusgai ikusteko.</string>
@@ -5869,7 +5867,7 @@
     <string name="connect_obd_instructions_step1">Konektatu eskanerra zure ibilgailuaren OBD-II atakara.</string>
     <string name="connect_obd_instructions_step2">Piztu ibilgailuaren motorra</string>
     <string name="connect_obd_instructions_step3">Gaitu Bluetootha zure gailuan</string>
-    <string name="connect_obd_instructions_step4">Sakatu \'Konektatu\' eta hautatu zure eskanerra zerrendatik.</string>
+    <string name="connect_obd_instructions_step4">Sakatu \'%1$s\' eta hautatu zure eskanerra zerrendatik.</string>
     <string name="learn_more_about_obd_sensors">Lortu informazio gehiago sentsoreei buruz.</string>
     <string name="release_4_9">• Pantaila osoko galeria-ikustaile bat gehitu da Wikimediako irudietarako\n\n • \"Ibilgailuen neurketak\" plugin berri bat aurkeztu du ibilgailuen errendimendua OBD-II protokoloa erabiliz kontrolatzeko\n\n • Arrastoei jarduerak esleitzeko eta horren arabera iragazteko gaitasuna gehitu da\n\n • Bidaiak grabatzeko eta ukipen-pantaila blokeatzeko ekintza azkar berriak ezarri dira\n\n • Maparen botoiaren itxura pertsonalizagarria eta sareta zehatza sartu ditu\n\n • Testuinguru-menua eta \"Berrezarri batez besteko abiadura\" ekintza bat gehitu ditu trepetetan\n\n • Ibilbide geruza berria gehitu da \"Motocros ibilbideak\"\n\n • \"Auto-grabatu arrastoa nabigazioan\" konpondu da\n\n • Arazoa konpondu da RTL-n iraulitako koordenatuekin\n\n • Unean grabatutako arrastoetarako galdutako sentsoreen datuak konpondu dira\n\n • Hautatutako punturako inguruko eremuei buruzko informazioa gehitu da\n\n • Ekintza azkarra gehitu da OSM edizioen ikusgarritasuna kontrolatzeko\n\n • Lurra koloreztatzeko aukeren ikusgarritasun parametro bereiziak\n\n • Saka daitekeen ikono bat gehitu da sarbidea edo beste errepide edo bide-atributu batzuk bistaratzeko</string>
 </resources>

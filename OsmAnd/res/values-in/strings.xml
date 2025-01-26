@@ -4981,7 +4981,7 @@
     <string name="export_to_file">Ekspor ke berkas</string>
     <string name="shared_string_modified">Diubah</string>
     <string name="choose_what_to_sync">Pilih apa yang disinkron</string>
-    <string name="cloud_sync_progress">Menyinkronkan…%1$s</string>
+    <string name="cloud_sync_progress">Menyinkronkan… %1$s</string>
     <string name="changes">Perubahan %1$s</string>
     <string name="local_changes_will_be_dismissed">Perubahan lokal akan diabaikan</string>
     <string name="import_export">Impor/ekspor</string>
@@ -5957,7 +5957,7 @@
     <string name="connect_obd_instructions_step2">Nyalakan mesin kendaraan Anda</string>
     <string name="obd_how_to_connect">Cara menghubungkan:</string>
     <string name="connect_obd_instructions_step3">Aktifkan Bluetooth di perangkat Anda</string>
-    <string name="connect_obd_instructions_step4">Ketuk \'Hubungkan\' dan pilih pemindai Anda dari daftar.</string>
+    <string name="connect_obd_instructions_step4">Ketuk \'%1$s\' dan pilih pemindai Anda dari daftar.</string>
     <string name="learn_more_about_obd_sensors">Pelajari lebih lanjut tentang sensor.</string>
     <string name="obd_fuel_left_liters">Bahan bakar tersisa (liter)</string>
     <string name="obd_widget_vehicle_speed">Kecepatan kendaraan</string>
@@ -6052,7 +6052,7 @@
     <string name="location_interpolation_percent">Persentase interpolasi lokasi</string>
     <string name="shared_string_interpolation">Interpolasi</string>
     <string name="location_interpolation_percent_desc">Tetapkan presentasi interpolasi lokasi saat navigasi rute. Parameter ini mengurangi kelambatan posisi lokasi di peta saat ada animasi.</string>
-    <string name="selected_delayed_profile">Profil \"%s\" terpilih</string>
+    <string name="selected_delayed_profile">Profil \"%s\\ terpilih</string>
     <string name="default_buttons_corners_original_description">Setiap tombol tetap memiliki radius bulatnya sendiri.</string>
     <string name="default_buttons_size_original_description">Setiap tombol tetap memiliki ukurannya sendiri.</string>
     <string name="default_buttons_opacity_original_description">Setiap tombol tetap memiliki opasitas latar belakangnya sendiri.</string>
@@ -6060,4 +6060,11 @@
     <string name="rendering_attr_showClimbingRoutes_description">Tampilkan rute pendakian</string>
     <string name="calculating_indication_message">Menghitung…</string>
     <string name="calculate_size">Hitung ukuran</string>
+    <string name="display_distance_to_first_intermediate_summary">Menampilkan waktu dan jarak untuk perhentian pertama terlebih dahulu. Matikan untuk selalu menampilkan detail tujuan.</string>
+    <string name="display_distance_to_first_intermediate">Tampilkan detail rute until perhentian berikutnya</string>
+    <string name="recently_visited">Dikunjungi baru-baru ini</string>
+    <string name="popular_places_nearby">Tempat-tempat sekitar yang populer</string>
+    <string name="shared_string_avg_altitude">Ketinggian rata-rata</string>
+    <string name="shared_string_length">Panjang</string>
+    <string name="shared_string_avg_speed">Kecepatan minimum</string>
 </resources>

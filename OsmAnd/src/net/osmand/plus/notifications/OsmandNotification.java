@@ -87,7 +87,7 @@ public abstract class OsmandNotification {
 		Builder builder = new Builder(app, NOTIFICATION_CHANEL_ID)
 				.setVisibility(androidx.core.app.NotificationCompat.VISIBILITY_PUBLIC)
 				.setPriority(top ? NotificationCompat.PRIORITY_HIGH : getPriority())
-				.setLocalOnly(true) // Probably should be deleted to not limit notifications
+//				.setLocalOnly(true) // Probably should be deleted to not limit notifications
 				.setOnlyAlertOnce(true) // Many devices still don't treat that flag correct and keep spamming
 				.setOngoing(ongoing && !wearable)
 				.setContentIntent(contentPendingIntent)

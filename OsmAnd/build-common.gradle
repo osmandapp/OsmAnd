@@ -115,23 +115,62 @@ clean.doFirst {
 	}
 }
 
-tasks.register('validateTranslate') {
+tasks.register('validateTranslations') {
 	println "Validating translations"
+	def taskStartTime = System.currentTimeMillis()
 
-	file("res").eachFileRecurse groovy.io.FileType.FILES, {
-		if (it.name == "strings.xml" || it.name == "phrases.xml") {
-			it.eachLine { line ->
-				if (line.contains("\$ s") || line.contains("\$ d") || line.contains("\$ f") ||
-						line.contains(" \$s") || line.contains(" \$d") || line.contains(" \$f") ||
-						line.contains("1\$ ") || line.contains("2\$ ") || line.contains("3\$ ") ||
-						line.contains("%1s") || line.contains(" 1\$s") ||
-						(line.contains("% \$") || line.contains("% 1") || line.contains("% 2") ||
-								line.contains("% 3") || line.contains("% s"))) {
-					throw new GradleException("Incorrect translation " + it.getAbsolutePath() + " " + line)
+	def pattern = /%(\d+\$)?[sSdD]/
+	def files = ["strings.xml", "phrases.xml"]
+	def defaultPlaceholders = [:]
+	def parser = new XmlParser()
+
+	def normalizePlaceholders = { placeholders -> placeholders.collect { it.toLowerCase() }.toSet() }
+
+	files.each { fileName ->
+		def file = new File(file("res/values"), fileName)
+		if (file.exists()) {
+			parser.parse(file).string.each { node ->
+				def placeholders = (node.text() ?: "").findAll(pattern)
+				defaultPlaceholders[node.@name] = normalizePlaceholders(placeholders)
+			}
+		} else {
+			println "Skipping missing default file: ${file.path}"
+		}
+	}
+
+	def issues = []
+	def directories = file("res").listFiles().findAll {
+		it.isDirectory() && it.name.startsWith("values-")
+	}
+
+	directories.each { dir ->
+		files.each { fileName ->
+			def file = new File(dir, fileName)
+			if (file.exists()) {
+				def placeholders = [:]
+				parser.parse(file).string.each { node ->
+					def translationPlaceholders = (node.text() ?: "").findAll(pattern)
+					placeholders[node.@name] = normalizePlaceholders(translationPlaceholders)
+				}
+
+				defaultPlaceholders.each { key, defaultValues ->
+					if (placeholders.containsKey(key)) {
+						def translationValues = placeholders[key]
+						if (defaultValues != translationValues) {
+							issues << "Mismatch in ${file.path}: '${key}' -> Default: ${defaultValues}, Translation: ${translationValues}"
+						}
+					}
 				}
 			}
 		}
 	}
+
+	if (!issues.isEmpty()) {
+		issues.each { println "ERROR: $it" }
+		throw new GradleException("Translation validation failed with ${issues.size()} issue(s).")
+	}
+	def validationEndTime = System.currentTimeMillis()
+	println "Translations validated in ${(validationEndTime - taskStartTime)} ms"
 }
 
 tasks.register('downloadWorldMiniBasemap', Download) {
@@ -257,7 +296,7 @@ tasks.register('collectExternalResources') {
 			copyMapShaderIcons,
 			copyMapPOIIcons,
 			copyLargePOIIcons,
-			validateTranslate,
+			validateTranslations,
 			copyBundledAssets,
 			copyProjDb,
 			copyColorPalettes,

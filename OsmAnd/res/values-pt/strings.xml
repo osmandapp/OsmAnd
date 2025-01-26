@@ -3466,7 +3466,7 @@
     <string name="app_mode_enduro_motorcycle">Motorizada de enduro</string>
     <string name="app_mode_inline_skates">Patins em linha</string>
     <string name="turn_screen_on_power_button_disabled">Desativado. Requer \"manter o ecrã ligado\" em \"tempo limite após a ativação\".</string>
-    <string name="release_3_7">• Novos mapas de inclinação offline \n \n • Personalização completa de Favoritos e Waypoints GPX - cores, ícones e formas personalizados \n \n • Personalize a ordem dos itens no menu de contexto, configurar mapa, gaveta \n \n • Wikipédia como uma camada separada no mapa Configurar, selecione apenas os idiomas necessários \n \n • Crie seu próprio filtro / mapa de POI com total flexibilidade \n \n • Adicionadas opções para restaurar configurações de perfis personalizados \n \n • Rotas GPX completas das vias de tráfego e instruções completas de curvas \n \n • Correção de tamanhos de interface do utilizador em tablets \n \n • Correção de erros com RTL \n \n</string>
+    <string name="release_3_7">• Novos mapas de inclinação offline \n \n • Personalização completa de favoritos e pontos de rotas GPX - cores, ícones e formas personalizados \n \n • Personalize a ordem dos itens no \"menu de contexto\", \"configurar mapa\" e \"gaveta\" \n \n • Wikipédia como uma camada separada no mapa Configurar, selecione apenas os idiomas necessários \n \n • Crie seu próprio filtro / mapa de POI com total flexibilidade \n \n • Adicionadas opções para restaurar configurações de perfis personalizados \n \n • Rotas GPX completas das vias de tráfego e instruções completas de viragens\n \n • Correção de tamanhos de interface do utilizador em tablets \n \n • Correção de erros em RTL\n\n</string>
     <string name="quick_action_remove_next_destination_descr">Elimina o próximo destino na sua rota. Se for o destino final, a navegação será interrompida.</string>
     <string name="vessel_height_limit_description">Defina a altura da embarcação para evitar pontes baixas. Tenha em conta que se a ponte for móvel, o cálculo utiliza a altura da ponte no estado aberto.</string>
     <string name="add_online_source">Adicionar origem online</string>
@@ -3707,7 +3707,7 @@
     <string name="activity_type_cycling_name">Ciclismo</string>
     <string name="activity_type_running_name">Correr</string>
     <string name="activity_type_walking_name">A pé</string>
-    <string name="activity_type_offroad_name">Todo o terreno</string>
+    <string name="activity_type_offroad_name">Todo-o-terreno</string>
     <string name="activity_type_motorbike_name">Moto</string>
     <string name="activity_type_car_name">Carro</string>
     <string name="add_online_routing_engine">Adicionar motor de roteamento online</string>
@@ -4660,7 +4660,7 @@
     <string name="shared_string_expires">Expira</string>
     <string name="shared_string_purchased_on">Comprado em</string>
     <string name="choose_what_to_sync">Escolha o que sincronizar</string>
-    <string name="cloud_sync_progress">A sincronizar…%1$s</string>
+    <string name="cloud_sync_progress">A sincronizar… %1$s</string>
     <string name="checking_progress">A verificar…</string>
     <string name="shared_string_modified">Alterado</string>
     <string name="res_unknown">Desconhecido</string>
@@ -4959,7 +4959,7 @@
     <string name="open_issue_on_github">Abrir problema no GitHub</string>
     <string name="about_osmand">Sobre o OsmAnd</string>
     <string name="enable_to_use_external_input_device">Permite usar um dispositivo de entrada externo com o OsmAnd</string>
-    <string name="local_indexes_category_terrain">Mapas de terreno (3D</string>
+    <string name="local_indexes_category_terrain">Mapas de terreno (3D)</string>
     <string name="key_event_action_change_map_orientation">Alterar orientação do mapa</string>
     <string name="user_guide">Guia do utilizador</string>
     <string name="smart_folder_name_present">Essa pasta inteligente já existe</string>
@@ -5659,4 +5659,15 @@
     <string name="calculate_size">Calcular o tamanho</string>
     <string name="default_buttons_size_original_description">Cada botão manteria o seu próprio tamanho.</string>
     <string name="calculating_indication_message">A calcular…</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Rotas de escalada</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Mostrar rotas de escalada</string>
+    <string name="default_buttons_corners_original_description">Cada botão manteria o seu próprio raio de cantos.</string>
+    <string name="default_buttons_opacity_original_description">Cada botão manteria a sua própria opacidade de fundo.</string>
+    <string name="display_distance_to_first_intermediate_summary">Mostra primeiro a hora e a distância para a próxima paragem. Desativar para mostrar sempre os detalhes do destino.</string>
+    <string name="display_distance_to_first_intermediate">Mostrar detalhes do itinerário para a próxima paragem</string>
+    <string name="shared_string_avg_speed">Velocidade mín.</string>
+    <string name="shared_string_length">Comprimento</string>
+    <string name="shared_string_avg_altitude">Altitude méd.</string>
+    <string name="popular_places_nearby">Lugares populares nas proximidades</string>
+    <string name="recently_visited">Recentemente visitado</string>
 </resources>

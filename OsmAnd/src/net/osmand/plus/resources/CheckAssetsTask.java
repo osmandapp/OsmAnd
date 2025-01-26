@@ -107,23 +107,25 @@ public class CheckAssetsTask extends AsyncTask<Void, String, List<String>> {
 
 	public void copyMissingJSAssets() {
 		try {
-			AssetsCollection assetsCollection = app.getResourceManager().getAssets();
 			File appPath = app.getAppPath(null);
 			if (appPath.canWrite()) {
-				for (AssetEntry asset : assetsCollection.getEntries()) {
+				AssetManager manager = app.getAssets();
+				AssetsCollection assets = app.getResourceManager().getAssets();
+
+				for (AssetEntry asset : assets.getEntries()) {
 					File jsFile = new File(appPath, asset.destination);
-					if (asset.destination.contains(VOICE_PROVIDER_SUFFIX) && asset.destination
-							.endsWith(TTSVOICE_INDEX_EXT_JS)) {
-						File oggFile = new File(appPath, asset.destination.replace(
-								VOICE_PROVIDER_SUFFIX, ""));
+					if (asset.destination.contains(VOICE_PROVIDER_SUFFIX)
+							&& asset.destination.endsWith(TTSVOICE_INDEX_EXT_JS)) {
+						String name = asset.destination.replace(VOICE_PROVIDER_SUFFIX, "");
+						File oggFile = new File(appPath, name);
 						if (oggFile.getParentFile().exists() && !oggFile.exists()) {
-							ResourceManager.copyAssets(app.getAssets(), asset.source, oggFile);
+							ResourceManager.copyAssets(manager, asset.source, oggFile, asset.getVersionTime());
 						}
 					} else if (asset.destination.startsWith(MODEL_3D_DIR) && !jsFile.exists()) {
-						ResourceManager.copyAssets(app.getAssets(), asset.source, jsFile);
+						ResourceManager.copyAssets(manager, asset.source, jsFile, asset.getVersionTime());
 					}
 					if (jsFile.getParentFile().exists() && !jsFile.exists()) {
-						ResourceManager.copyAssets(app.getAssets(), asset.source, jsFile);
+						ResourceManager.copyAssets(manager, asset.source, jsFile, asset.getVersionTime());
 					}
 				}
 			}

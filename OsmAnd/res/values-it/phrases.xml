@@ -174,7 +174,7 @@
     <string name="poi_hamlet">Piccolo borgo</string>
     <string name="poi_isolated_dwelling">Abitazione isolata</string>
     <string name="poi_suburb">Grande quartiere</string>
-    <string name="poi_neighbourhood">Quartiere</string>
+    <string name="poi_neighbourhood">Quartiere minore</string>
     <string name="poi_locality">Località non popolata</string>
     <string name="poi_pharmacy">Farmacia</string>
     <string name="poi_hospital">Ospedale</string>
@@ -1793,7 +1793,7 @@
     <string name="poi_summer_camp">Campo estivo</string>
     <string name="poi_crossing_bell_yes">Campana di attraversamento</string>
     <string name="poi_crossing_bell_no">Campana di attraversamento: no</string>
-    <string name="poi_crossing_light_yes">Luce di passaggio</string>
+    <string name="poi_crossing_light_yes">Luce di segnalazione</string>
     <string name="poi_crossing_on_demand_yes">Attraversamento su richiesta</string>
     <string name="poi_crossing_on_demand_no">Attraversamento su richiesta: no</string>
     <string name="poi_dispensing_yes">Sì</string>
@@ -2000,7 +2000,7 @@
     <string name="poi_crossing_barrier_full">Barriera di attraversamento: completo</string>
     <string name="poi_crossing_barrier_half">Barriera di attraversamento: metà</string>
     <string name="poi_crossing_barrier_double_half">Barriera di attraversamento: doppio metà</string>
-    <string name="poi_crossing_light_no">Luce di attraversamento: no</string>
+    <string name="poi_crossing_light_no">Luce di segnalazione: no</string>
     <string name="poi_locksmith">Negozio del fabbro (chiavi)</string>
     <string name="poi_lighting">Apparecchi di illuminazione</string>
     <string name="poi_cliff">Falesia</string>
@@ -2449,8 +2449,8 @@
     <string name="poi_resource_vanadium">Vanadio</string>
     <string name="poi_resource_zinc">Zinco</string>
     <string name="poi_resource_zircon">Zirconio</string>
-    <string name="poi_lit_yes">Luce: sì</string>
-    <string name="poi_lit_no">Luce: no</string>
+    <string name="poi_lit_yes">Illuminazione: sì</string>
+    <string name="poi_lit_no">Illuminazione: no</string>
     <string name="poi_surface_sett">Superficie: pavé</string>
     <string name="poi_surface_paving_stones">Superficie: mattonelle per pavimentazione stradale</string>
     <string name="poi_surface_pebblestone">Superficie: ciottoli</string>
@@ -2978,7 +2978,7 @@
     <string name="poi_traffic_signals_vibration">Vibrazione</string>
     <string name="poi_fire_hydrant_pressure_filter">Pressione</string>
     <string name="poi_vending_elongated_coin">Moneta souvenir</string>
-    <string name="poi_drive_through_no">Drive-through: no</string>
+    <string name="poi_drive_through_no">Percorribile in auto: no</string>
     <string name="poi_piste_grooming_mogul">Gobba</string>
     <string name="poi_piste_grooming_backcountry">Fuoripista</string>
     <string name="poi_piste_difficulty_freeride">Fuoripista</string>
@@ -3728,7 +3728,7 @@
     <string name="poi_substation_minor_distribution">Distribuzione minore</string>
     <string name="poi_park_ride_hov">HOV</string>
     <string name="poi_foot_private">Accesso pedoni: privato</string>
-    <string name="poi_shelter_no">Riparo: np</string>
+    <string name="poi_shelter_no">Riparo: no</string>
     <string name="poi_agrarian_agricultural_machinery">Macchinari agricoli</string>
     <string name="poi_generator_type_bwr_6">Tipo generatore: BWR-6</string>
     <string name="poi_generator_type_bwr_5">Tipo generatore: BWR-5</string>
@@ -4375,7 +4375,7 @@
     <string name="poi_toilets_position_urinal">Positizione della toilette: orinale</string>
     <string name="poi_toilets_position_seated">Posizione sulla toilette: seduta</string>
     <string name="poi_cash_withdrawal_purchase_required_no">Prelievo contanti: acquisto non necessario</string>
-    <string name="poi_borough">Borough</string>
+    <string name="poi_borough">Borgo</string>
     <string name="poi_city_block">Isolato</string>
     <string name="poi_cuisine_soba">Soba</string>
     <string name="poi_cuisine_empanada">Empanada</string>

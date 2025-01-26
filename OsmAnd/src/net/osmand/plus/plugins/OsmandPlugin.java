@@ -260,13 +260,6 @@ public abstract class OsmandPlugin {
 	protected void attachAdditionalInfoToRecordedTrack(@NonNull Location location, @NonNull JSONObject json) throws JSONException {
 	}
 
-
-	protected void collectContextMenuImageCards(@NonNull ImageCardsHolder holder,
-	                                            @NonNull Map<String, String> params,
-	                                            @Nullable Map<String, String> additionalParams,
-	                                            @Nullable GetImageCardsListener listener) {
-	}
-
 	protected boolean createContextMenuImageCard(@NonNull ImageCardsHolder holder,
 	                                             @NonNull JSONObject imageObject) {
 		return false;

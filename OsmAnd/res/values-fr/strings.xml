@@ -463,7 +463,7 @@
     <string name="loading_cities">Chargement des villes…</string>
     <string name="poi">PI</string>
     <string name="error_occurred_saving_gpx">Impossible d\'enregistrer le fichier GPX.</string>
-    <string name="error_calculating_route">Impossible de calculer l\'itinéraire</string>
+    <string name="error_calculating_route">Impossible de calculer l\'itinéraire.</string>
     <string name="error_calculating_route_occured">Impossible de calculer l\'itinéraire</string>
     <string name="empty_route_calculated">L\'itinéraire calculé est vide.</string>
     <string name="arrived_at_destination">Vous êtes arrivé.</string>
@@ -2984,7 +2984,7 @@
     <string name="pref_selected_by_default_for_profiles">Ce paramètre est sélectionné par défaut dans les profils : %s</string>
     <string name="change_default_settings">Modifier le paramètre</string>
     <string name="discard_changes">Ignorer la modification</string>
-    <string name="apply_to_current_profile">Appliquer uniquement à « %1$s »</string>
+    <string name="apply_to_current_profile">Appliquer uniquement à « %1$s\\</string>
     <string name="apply_to_all_profiles">Appliquer à tous les profils</string>
     <string name="start_up_message_pref">Message au démarrage</string>
     <string name="units_and_formats">Unités et formats</string>
@@ -3022,7 +3022,7 @@
     <string name="screen_alerts">Alertes visuelles</string>
     <string name="route_parameters_descr">Définir les paramètres de l\'itinéraire</string>
     <string name="route_parameters">Paramètres de l\'itinéraire</string>
-    <string name="application_profile_changed">Profil de l\'appli basculé à « %s »</string>
+    <string name="application_profile_changed">Profil de l\'appli basculé à « %s\\</string>
     <string name="logcat_buffer">Buffer Logcat</string>
     <string name="plugins_settings">Paramètres de l\'extension</string>
     <string name="get_discount_title">Réduction de %3$s pendant %1$d %2$s.</string>
@@ -4655,7 +4655,7 @@
     <string name="release_4_3">• Moteur de rendu plus rapide (OpenGL version 2) avec vue 2.5D \n \n• Animations lisses des textes et des points d\'intérêts lors du déplacement de la carte \n \n• Nouveaux widgets indiquant les coordonnées du centre de la carte ainsi que l\'altitude \n \n• Ajout d\'options sur la taille du texte pour le mode \"Distance par appui\" \n \n• Ajout d\'une option permettant de modifier le comportement du clic en mode \"Marques\" \n \n• Correction de l\'option \"Emplacement de la position\" \n \n• Ajout du support des tags \"link\", \"cmt\", \"desc\" et de toutes les extensions personnalisées pour les traces GPX \n \n• Réorganisation de la liste des cartes marines \n \n• Ajout de la prise en charge des capteurs ANT+ \n \n• Ajout d\'une option permettant de désactiver l\'UUID de téléchargement \n \n• Prévision ajustable du temps de trajet pour les itinéraires dépendants de l\'altitude \n \n• Correction de la sortie sonore et du comportement de la barre de volume</string>
     <string name="shared_string_purchased_on">Acheté le</string>
     <string name="shared_string_expires">Expire</string>
-    <string name="cloud_sync_progress">Synchronisation…%1$s</string>
+    <string name="cloud_sync_progress">Synchro…%1$s</string>
     <string name="checking_progress">Vérification…</string>
     <string name="choose_what_to_sync">Sélectionner quoi synchroniser</string>
     <string name="res_unknown">Inconnu</string>
@@ -5650,7 +5650,7 @@
     <string name="obd_fuel_consumption_desc">Affiche le taux de consommation du carburant par le moteur, calculé en fonction du carburant restant, de la taille du réservoir et de la distance parcourue selon le GPS.</string>
     <string name="show_minor_turns_descr">Les voies seront affichées sur toutes les intersections rencontrées indépendamment des instructions vocales</string>
     <string name="show_minor_turns">Afficher sur les intersections mineures lors de la navigation en ligne droite</string>
-    <string name="selected_delayed_profile">Profil \"%s\" sélectionné</string>
+    <string name="selected_delayed_profile">Profil \"%s\\ sélectionné</string>
     <string name="shared_string_interpolation">Interpolation</string>
     <string name="location_interpolation_percent">Pourcentage d\'interpolation de la position</string>
     <string name="location_interpolation_percent_desc">Définit le pourcentage d\'interpolation de la position lors du guidage. Ce paramètre rend l\'animation de votre position sur la carte plus fluide.</string>
@@ -5663,4 +5663,11 @@
     <string name="rendering_attr_showClimbingRoutes_name">Voies d\'escalade</string>
     <string name="rendering_attr_showClimbingRoutes_description">Afficher les voies d\'escalade</string>
     <string name="obd_fuel_consumption_rate_sensor_type">Utiliser les unités sélectionnées dans le nom.</string>
+    <string name="display_distance_to_first_intermediate_summary">Affiche le temps et la distance jusqu\'au prochain arrêt. Désactiver pour toujours afficher les détails concernant la destination.</string>
+    <string name="display_distance_to_first_intermediate">Affiche les détails de l\'itinéraire jusqu\'au prochain arrêt</string>
+    <string name="popular_places_nearby">Lieux populaires proches</string>
+    <string name="recently_visited">Dernières visites</string>
+    <string name="shared_string_avg_altitude">Altitude moyenne</string>
+    <string name="shared_string_avg_speed">Vitesse mini</string>
+    <string name="shared_string_length">Longueur</string>
 </resources>

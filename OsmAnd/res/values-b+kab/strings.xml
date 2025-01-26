@@ -920,7 +920,6 @@
     <string name="suggested_maps">Yettesumer</string>
     <string name="update_all_maps">Mucceḍ Akk</string>
     <string name="shared_string_memory_kb_desc">%1$S</string>
-    <string name="shared_string_memory_mb_desc">%1$s Mo (%2$s%%) n tallunt i yettwasqedcen</string>
     <string name="shared_string_memory_gb_desc">%1$S</string>
     <string name="shared_string_memory_tb_desc">%1$S</string>
     <string name="shared_string_calculate">Selkem</string>
@@ -939,7 +938,6 @@
     <string name="price_and_discount">%1$S %2$S</string>
     <string name="get_discount_second_part">"di  %1$s"</string>
     <string name="shared_string_open_track">ḍfeṛ</string>
-    <string name="shared_string_file_is_saved">yettwasekles</string>
     <string name="routeInfo_roadClass_name">Anaw</string>
     <string name="routeInfo_road_types_name">Tiwsiyin</string>
     <string name="collected_data">(ulac isefk d iţugemren)</string>
@@ -1068,7 +1066,6 @@
     <string name="commit_poi">Wennet</string>
     <string name="dahboard_options_dialog_title">Sbadu tafelwit n tedbelt</string>
     <string name="error_message_pattern">Tuccḍa:</string>
-    <string name="navigation_intent_invalid">amasal arameɣtu</string>
     <string name="av_photo_play_sound">Γeṛ ameslaw n tkamirat</string>
     <string name="poi_remove_title">Kkes</string>
     <string name="poi_create_title">rnu</string>
@@ -1113,11 +1110,11 @@
     <string name="local_indexes_cat_backup">Tamahilt-agi tensa akka tura.</string>
     <string name="local_index_map_data">Takarḍa</string>
     <string name="local_index_poi_data">Isefka</string>
-    <string name="local_index_items_restored"><ph equiv-text="base64:JTEkZA==" id="mtc_1"/> seg <ph equiv-text="base64:JTIkZA==" id="mtc_2"/> n yiferdisen remden akken iwata.</string>
-    <string name="local_index_items_deleted"><ph equiv-text="base64:JTEkZA==" id="mtc_1"/> seg <ph equiv-text="base64:JTIkZA==" id="mtc_2"/> n yiferdisen ttwakksen akken iwata.</string>
-    <string name="local_index_items_backuped"><ph equiv-text="base64:JTEkZA==" id="mtc_1"/> seg <ph equiv-text="base64:JTIkZA==" id="mtc_2"/> n yiferdisen nsan akken iwata.</string>
+    <string name="local_index_items_restored">%1$d seg %2$d n yiferdisen remden akken iwata.</string>
+    <string name="local_index_items_deleted">%1$d seg %2$d n yiferdisen ttwakksen akken iwata.</string>
+    <string name="local_index_items_backuped">%1$d seg %2$d n yiferdisen nsan akken iwata.</string>
     <string name="local_index_mi_upload_gpx">Azen i...</string>
-    <string name="local_index_items_uploaded"><ph equiv-text="base64:JTEkZA==" id="mtc_1"/> seg <ph equiv-text="base64:JTIkZA==" id="mtc_2"/> n yiferdisen ulin akken iwata.</string>
+    <string name="local_index_items_uploaded">%1$d seg %2$d n yiferdisen ulin akken iwata.</string>
     <string name="file_with_name_already_exists">Tabzimt s yisem-agi tella yakan.</string>
     <string name="file_can_not_be_renamed">Ur yezmir ara ad ibeddel isem ufaylu \"$1\" ar \"$2\".</string>
     <string name="free_version_title">lqem</string>
@@ -1267,7 +1264,6 @@
     <string name="si_min_km">Tisdatin deg ukilumitr</string>
     <string name="nm">nmi</string>
     <string name="foot">ft</string>
-    <string name="osm_editing_plugin_description">Ttekki deg OpenStreetMap (OSM) srid seg usnas OSMAnd. Amedya: rnu neɣ beddel agazen yelhan n OSM, rnu neɣ beddel tizmilin OSM sakin azen iberdan-ik GPX (aya ilaq umiḍan OSM). OpenStreetMap d tarbaɛt yeldin, tamaḍalant n tkarḍa tazayazt.</string>
     <string name="osm_editing_plugin_name">Taẓrigt OpenStreetMap</string>
     <string name="osmand_accessibility_description">Rmed, deg OsmAnd, iɣewwaren n tuffart n yibenk-ik (ṣeggem arured n taɣect-ik n uɛqal n taɣect, seqdec tignit trackball i usemɣer neɣ i urmad n yilɣa s taɣect n wadig-ik).</string>
     <string name="travel_item">Asikel (Wikivoyage d Wikipedia)</string>

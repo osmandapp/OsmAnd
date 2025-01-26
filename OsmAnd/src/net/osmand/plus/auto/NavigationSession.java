@@ -48,14 +48,8 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.auto.screens.LandingScreen;
-import net.osmand.plus.auto.screens.NavigationScreen;
-import net.osmand.plus.auto.screens.RequestPermissionScreen;
+import net.osmand.plus.auto.screens.*;
 import net.osmand.plus.auto.screens.RequestPermissionScreen.LocationPermissionCheckCallback;
-import net.osmand.plus.auto.screens.RequestPurchaseScreen;
-import net.osmand.plus.auto.screens.RoutePreviewScreen;
-import net.osmand.plus.auto.screens.SearchResultsScreen;
-import net.osmand.plus.auto.screens.SettingsScreen;
 import net.osmand.plus.helpers.LocationCallback;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.RestoreNavigationHelper;
@@ -121,7 +115,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	Action settingsAction;
 
 	private OsmandMapTileView mapView;
-	private ApplicationMode defaultAppMode;
+	private ApplicationMode originalAppMode;
 
 	private OsmAndLocationProvider locationProvider;
 	private LocationServiceHelper locationServiceHelper;
@@ -190,12 +184,13 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	public void onStart(@NonNull LifecycleOwner owner) {
 		OsmandApplication app = getApp();
 		routingHelper.addListener(this);
-		defaultAppMode = settings.getApplicationMode();
-		if (!isAppModeDerivedFromCar(defaultAppMode)) {
-			List<ApplicationMode> availableAppModes = ApplicationMode.values(app);
-			for (ApplicationMode availableAppMode : availableAppModes) {
-				if (isAppModeDerivedFromCar(availableAppMode)) {
-					settings.setApplicationMode(availableAppMode, false);
+
+		ApplicationMode appMode = settings.getApplicationMode();
+		if (!isAppModeDerivedFromCar(appMode)) {
+			for (ApplicationMode mode : ApplicationMode.values(app)) {
+				if (isAppModeDerivedFromCar(mode)) {
+					originalAppMode = appMode;
+					settings.setApplicationMode(mode, false);
 					break;
 				}
 			}
@@ -227,11 +222,13 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		OsmandApplication app = getApp();
 		routingHelper.removeListener(this);
 		settings.setLastKnownMapElevation(app.getOsmandMap().getMapView().getElevationAngle());
-		boolean routing = settings.FOLLOW_THE_ROUTE.get() || routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated();
-		if (defaultAppMode != null && !routing) {
-			settings.setApplicationMode(defaultAppMode);
+
+		boolean routing = settings.FOLLOW_THE_ROUTE.get() || routingHelper.isRouteCalculated()
+				|| routingHelper.isRouteBeingCalculated();
+		if (originalAppMode != null && !routing) {
+			settings.setApplicationMode(originalAppMode);
 		}
-		defaultAppMode = null;
+		originalAppMode = null;
 
 		app.getOsmandMap().getMapView().setupRenderingView();
 		app.onCarNavigationSessionStop(this);

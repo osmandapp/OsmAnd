@@ -4666,7 +4666,7 @@
     <string name="choose_what_to_sync">Elektu kion samtempigi</string>
     <string name="changes">Ŝanĝoj %1$s</string>
     <string name="cloud_changes">Ŝanĝoj en la nubo</string>
-    <string name="cloud_sync_progress">Samtempigado…%1$s</string>
+    <string name="cloud_sync_progress">Samtempigado… %1$s</string>
     <string name="checking_progress">Kontrolado…</string>
     <string name="shared_string_modified">Modifita</string>
     <string name="res_unknown">Nekonata</string>
@@ -5668,4 +5668,10 @@
     <string name="rendering_attr_showClimbingRoutes_name">Grimpadaj kursoj</string>
     <string name="rendering_attr_showClimbingRoutes_description">Montri grimpadajn kursojn</string>
     <string name="calculating_indication_message">Kalkulado…</string>
+    <string name="display_distance_to_first_intermediate_summary">Unue montri tempon kaj distancon al la unua intercelo. Malaktivigu por ĉiam montri detalojn pri la fina celo.</string>
+    <string name="display_distance_to_first_intermediate">Montri detalojn pri kurso al la sekva intercelo</string>
+    <string name="shared_string_length">Longo</string>
+    <string name="popular_places_nearby">Proksimaj popularaj ejoj</string>
+    <string name="recently_visited">Historio</string>
+    <string name="shared_string_avg_altitude">Mezuma altitudo</string>
 </resources>
