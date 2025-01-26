@@ -1590,4 +1590,5 @@
     <string name="shared_string_switch_mode">சுவிட்ச் பயன்முறை</string>
     <string name="go_to_marker_location">மார்க்கர் இருப்பிடத்திற்குச் செல்லவும்</string>
     <string name="side_marker_eta">மதிப்பிடப்பட்ட வருகை நேரம்</string>
+    <string name="map_markers_bar">வரைபட குறிப்பான்கள் பட்டி</string>
 </resources>
