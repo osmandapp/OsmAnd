@@ -1676,4 +1676,5 @@
     <string name="keep_informing_descr">வழக்கமான இடைவெளியில் வழிசெலுத்தல் வழிமுறைகளை மீண்டும் நிறைவேற்றவும்.</string>
     <string name="default_speed_system">வேகத்தின் அலகு</string>
     <string name="default_speed_system_descr">வேகத்தின் அலகு வரையறுக்கவும்.</string>
+    <string name="choose_audio_stream_descr">குரல் வழிகாட்டுதலுக்கு ஒலிபெருக்கியைத் தேர்ந்தெடுக்கவும்.</string>
 </resources>
