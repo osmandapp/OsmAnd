@@ -2825,4 +2825,5 @@
     <string name="rendering_attr_hideMilitaryAreas_name">இராணுவப் பகுதிகளை மறைக்கவும்</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Fixme குறிச்சொற்களைக் காட்டு</string>
     <string name="rendering_attr_horse_scale_dangerous_name">ஆபத்தானது</string>
+    <string name="rendering_attr_seabedDetail_description">கடற்படை மேற்பரப்பு_ குவலிஃபிகேசன், ஒருங்கிணைந்த மேற்பரப்பு வகைகள், களை அல்லது சீக்ராசின் வகை மற்றும் வரிவிதிப்பு பற்றிய கூடுதல் உரை செய்தி</string>
 </resources>
