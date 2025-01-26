@@ -2021,4 +2021,5 @@
     <string name="base_profile_descr_pedestrian">நடைபயிற்சி, நடைபயணம், ஓடுதல்</string>
     <string name="base_profile_descr_public_transport">பொது போக்குவரத்து வகைகள்</string>
     <string name="base_profile_descr_boat">கப்பல், ரோயிங், படகோட்டம்</string>
+    <string name="base_profile_descr_aircraft">வானூர்தி, சறுக்குதல்</string>
 </resources>
