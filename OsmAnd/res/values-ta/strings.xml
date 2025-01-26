@@ -1808,4 +1808,5 @@
     <string name="shared_string_license">உரிமம்</string>
     <string name="shared_string_keywords">முக்கிய வார்த்தைகள்</string>
     <string name="shared_string_trash">குப்பை</string>
+    <string name="shared_string_delete_immediately">உடனடியாக நீக்கு</string>
 </resources>
