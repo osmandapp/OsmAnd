@@ -2958,4 +2958,5 @@
     <string name="external_device_details_information">தகவல்</string>
     <string name="external_device_details_battery">மின்கலம்</string>
     <string name="external_device_details_received_data">பெறப்பட்ட தரவு</string>
+    <string name="bluetooth_found_title">கிடைத்தது: %d</string>
 </resources>
