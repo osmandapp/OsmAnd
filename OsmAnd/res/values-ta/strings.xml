@@ -1785,4 +1785,5 @@
     <string name="free_account">இலவச கணக்கு</string>
     <string name="map_2d_mode_action">2 டி பயன்முறை</string>
     <string name="map_3d_mode_action">3 டி பயன்முறை</string>
+    <string name="compass_always_visible">எப்போதும் தெரியும்</string>
 </resources>
