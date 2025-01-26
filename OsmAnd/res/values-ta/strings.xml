@@ -2054,4 +2054,5 @@
     <string name="change_folder">கோப்புறையை மாற்றவும்</string>
     <string name="select_folder">கோப்புறையைத் தேர்ந்தெடு</string>
     <string name="select_folder_descr">கோப்புறையைத் தேர்ந்தெடுக்கவும் அல்லது புதியதைச் சேர்க்கவும்</string>
+    <string name="threshold_distance">வாசல் தூரம்</string>
 </resources>
