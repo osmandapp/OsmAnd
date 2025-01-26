@@ -1861,4 +1861,5 @@
     <string name="save_track_to_gpx_descrp">செல்லும்போது ஆட்டோ-ச்டார்ட் டிராக் ரெக்கார்டிங் மற்றும் பின்னர் தானாக சேமிக்கப்படுகிறது.</string>
     <string name="shared_string_slope">சாய்வு</string>
     <string name="routing_engine_vehicle_type_driving">வண்டி ஓட்டுதல்</string>
+    <string name="poi_filter_public_transport">பொது போக்குவரத்து</string>
 </resources>
