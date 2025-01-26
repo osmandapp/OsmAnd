@@ -2756,4 +2756,5 @@
     <string name="cloud_all_changes_uploaded_descr">இந்த சாதனத்தில் செய்யப்பட்ட அனைத்து மாற்றங்களும் OSMand மேகத்துடன் ஒத்திசைக்கப்படுகின்றன.</string>
     <string name="cloud_no_conflicts">மோதல்கள் எதுவும் இல்லை.</string>
     <string name="upload_local_version">உள்ளக பதிப்பை பதிவேற்றவும்</string>
+    <string name="copy_address">முகவரி நகல்</string>
 </resources>
