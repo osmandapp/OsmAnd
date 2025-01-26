@@ -1791,4 +1791,5 @@
     <string name="visible_in_3d_mode">3D பயன்முறையில் தெரியும்</string>
     <string name="map_3d_mode_description">இரண்டு விரல்களால் வரைபடத்தைத் தொட்டு, வரைபட சாய்வை சரிசெய்ய அவற்றை மேலும் கீழும் நகர்த்துகிறது.</string>
     <string name="map_3d_mode_hint">நீண்ட தட்டவும் பொத்தானை மாற்ற பொத்தானை அனுமதிக்கிறது.</string>
+    <string name="data_settings">தகவல்கள்</string>
 </resources>
