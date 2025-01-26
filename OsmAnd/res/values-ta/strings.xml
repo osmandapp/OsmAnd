@@ -1438,4 +1438,5 @@
     <string name="help_article_navigation_auto_car_name">ஆண்ட்ராய்டு ஆட்டோ</string>
     <string name="help_article_navigation_guidance_name">வழிசெலுத்தல் வழிகாட்டுதல்</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">வழிசெலுத்தலின் போது வரைபடத் திரை</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">குரல் தூண்டுகிறது / அறிவிப்புகள்</string>
 </resources>
