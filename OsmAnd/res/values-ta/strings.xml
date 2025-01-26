@@ -2029,4 +2029,5 @@
     <string name="reset_to_default">இயல்புநிலைக்கு மீட்டமைக்கவும்</string>
     <string name="shared_string_no_thanks">இல்லை, நன்றி</string>
     <string name="route_between_points">புள்ளிகளுக்கு இடையில் பாதை</string>
+    <string name="save_as_new_track">புதிய பாதையாக சேமிக்கவும்</string>
 </resources>
