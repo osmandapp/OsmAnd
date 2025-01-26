@@ -2253,4 +2253,5 @@
     <string name="navigate_point_longitude">நெட்டாங்கு</string>
     <string name="context_menu_edit_descr">விளக்கத்தைத் திருத்து</string>
     <string name="add_description">விளக்கத்தைச் சேர்க்கவும்</string>
+    <string name="roads">சாலைகள்</string>
 </resources>
