@@ -2356,4 +2356,5 @@
     <string name="rendering_attr_appMode_description">வரைபடத்தை மேம்படுத்தவும்</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">பனி சாலைகள் அல்லது ஃபோர்டு இல்லை</string>
     <string name="rendering_value_germanRoadAtlas_name">செர்மன் சாலை அட்லச்</string>
+    <string name="rendering_attr_contourWidth_description">விளிம்பு வரி அகலம்</string>
 </resources>
