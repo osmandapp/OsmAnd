@@ -2509,4 +2509,5 @@
     <string name="routing_attr_no_new_routing_description">V1.9 இல் அறிமுகப்படுத்தப்பட்ட ரூட்டிங் விதிகளைப் பயன்படுத்த வேண்டாம்.</string>
     <string name="rendering_attr_surface_cobblestone_name">கோப்ச்டோன்</string>
     <string name="rendering_attr_highway_class_state_road_name">மாநில சாலை</string>
+    <string name="routing_attr_avoid_sett_name">இல்லை</string>
 </resources>
