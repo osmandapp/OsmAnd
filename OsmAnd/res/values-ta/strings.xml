@@ -2246,4 +2246,5 @@
     <string name="select_wikipedia_article_langs">வரைபடத்தில் விக்கிபீடியா கட்டுரைகளுக்கான மொழிகளைத் தேர்ந்தெடுக்கவும். கட்டுரையைப் படிக்கும்போது கிடைக்கக்கூடிய எந்த மொழிக்கும் மாறவும்.</string>
     <string name="wiki_menu_download_descr">விக்கிபீடியா POI களை வரைபடத்தில் காண கூடுதல் வரைபடங்கள் தேவை.</string>
     <string name="some_articles_may_not_available_in_lang">சில விக்கிபீடியா கட்டுரைகள் உங்கள் மொழியில் கிடைக்காமல் போகலாம்.</string>
+    <string name="depth_contour_lines">ஆழம் விளிம்பு கோடுகள்</string>
 </resources>
