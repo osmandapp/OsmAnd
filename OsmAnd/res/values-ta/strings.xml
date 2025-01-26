@@ -2596,4 +2596,5 @@
     <string name="routing_attr_allow_skating_only_description">கிளாசிக் தடங்கள் இல்லாமல் மட்டுமே ஃப்ரீச்டைல் அல்லது ச்கேட்டிங் செய்ய வழிகள்.</string>
     <string name="rendering_attr_piste_type_nordic_name">நோர்டிக்</string>
     <string name="rendering_attr_highway_class_track_grade5_name">தகுதி 5</string>
+    <string name="rendering_attr_piste_type_connection_name">இணைப்பு</string>
 </resources>
