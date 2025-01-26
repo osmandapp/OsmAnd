@@ -1600,4 +1600,5 @@
     <string name="shared_string_bearing">தாங்கி</string>
     <string name="map_widget_current_speed">தற்போதைய விரைவு</string>
     <string name="map_markers_desc">MAP குறிப்பான்கள் பட்டியலில் முதல் இரண்டு குறிப்பான்களுக்கான தூரம் அல்லது மதிப்பிடப்பட்ட நேரம் (ETA) விட்செட் காட்டுகிறது.</string>
+    <string name="route_maneuvers">பாதை சூழ்ச்சிகள்</string>
 </resources>
