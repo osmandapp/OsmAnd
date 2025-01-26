@@ -2968,4 +2968,5 @@
     <string name="wheel_circumference">சக்கர சுற்றளவு</string>
     <string name="map_orientation_default">சாதனம் அதே</string>
     <string name="map_orientation_portrait">உருவப்படம்</string>
+    <string name="map_orientation_landscape">நிலப்பரப்பு</string>
 </resources>
