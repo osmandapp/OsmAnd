@@ -2539,4 +2539,5 @@
     <string name="rendering_value_blue_name">நீலம்</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">பனி சாலைகள் மற்றும் ஃபோர்ட்களைத் தவிர்க்கிறது.</string>
     <string name="routing_attr_allow_advanced_name">மேம்பட்ட வழிகளை அனுமதிக்கவும்</string>
+    <string name="rendering_attr_surface_grass_paver_name">புல் பேவர்</string>
 </resources>
