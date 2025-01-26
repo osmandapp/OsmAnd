@@ -2992,4 +2992,5 @@
     <string name="shared_string_mode">பயன்முறை</string>
     <string name="delete_account">கணக்கை நீக்கு</string>
     <string name="verify_account">உங்கள் கணக்கை சரிபார்க்கவும்</string>
+    <string name="verify_account_deletion_descr">உங்கள் கணக்கை நீக்குவதற்கு முன் அதை சரிபார்க்க வேண்டும்.\n\n நீங்கள் பதிவுசெய்த மின்னஞ்சல் முகவரியை உள்ளிடவும். அடுத்த கட்டத்திற்கான ஒரு முறை கடவுச்சொல் அதற்கு அனுப்பப்படும்.</string>
 </resources>
