@@ -2886,4 +2886,5 @@
     <string name="routing_attr_difficulty_preference_beginner_name">தொடக்க</string>
     <string name="dangerous_goods">ஆபத்தான பொருட்கள்</string>
     <string name="dangerous_goods_description">அபாயகரமான பொருட்களைக் கொண்டு செல்லும் சில சாலைகள் மற்றும் சுரங்கங்களில் தடைசெய்யப்பட்டுள்ளது.</string>
+    <string name="show_along_the_route">பாதையில் காண்பி</string>
 </resources>
