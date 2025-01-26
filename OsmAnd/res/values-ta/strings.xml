@@ -2929,4 +2929,5 @@
     <string name="there_are_no_connected_sensors_of_this_type">இந்த வகை இணைக்கப்பட்ட சென்சார்கள் எதுவும் இல்லை</string>
     <string name="external_sensors_not_found">சென்சார்கள் காணப்படவில்லை</string>
     <string name="external_sensors_source_of_data">தரவின் சான்று</string>
+    <string name="beats_per_minute_short">பிபிஎம்</string>
 </resources>
