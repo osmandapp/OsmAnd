@@ -2389,4 +2389,5 @@
     <string name="activity_type_racing_name">பந்தய</string>
     <string name="activity_type_riding_name">சவாரி</string>
     <string name="activity_type_snowmobile_name">ச்னோமொபைல்</string>
+    <string name="activity_type_winter_name">குளிர்காலம்</string>
 </resources>
