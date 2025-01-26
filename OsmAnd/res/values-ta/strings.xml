@@ -2560,4 +2560,5 @@
     <string name="rendering_attr_tracktype_grade1_name">திடமான (நடைபாதை)</string>
     <string name="routing_attr_avoid_train_description">ரயில்களைத் தவிர்க்கிறது</string>
     <string name="routing_attr_avoid_shuttle_train_name">சட்டில் ரயில் இல்லை</string>
+    <string name="rendering_attr_contourColorScheme_description">விளிம்பு கோடுகள் வண்ணத் திட்டம்</string>
 </resources>
