@@ -2932,4 +2932,5 @@
     <string name="beats_per_minute_short">பிபிஎம்</string>
     <string name="shared_string_chest">மார்பு</string>
     <string name="shared_string_wrist">மணிக்கட்டு</string>
+    <string name="shared_string_finger">விரல்</string>
 </resources>
