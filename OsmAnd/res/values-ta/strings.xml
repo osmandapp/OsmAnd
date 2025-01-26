@@ -2280,4 +2280,5 @@
     <string name="avg_sensor_cadence">சைக்கிள் கேடென்ச், சராசரி</string>
     <string name="max_sensor_bycicle_power">சைக்கிள் ஆற்றல், அதிகபட்சம்</string>
     <string name="avg_sensor_bycicle_power">சைக்கிள் ஆற்றல், சராசரி</string>
+    <string name="max_sensor_temperature">வெப்பநிலை, அதிகபட்சம்</string>
 </resources>
