@@ -2317,4 +2317,5 @@
     <string name="tomorrow">நாளை</string>
     <string name="go_to_map">வரைபடத்தைக் காட்டு</string>
     <string name="device_memory">சாதன நினைவகம்</string>
+    <string name="suggested_maps">பரிந்துரைக்கப்பட்ட வரைபடங்கள்</string>
 </resources>
