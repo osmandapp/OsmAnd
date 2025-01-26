@@ -2437,4 +2437,5 @@
     <string name="rendering_attr_showLez_description">வரைபடத்தில் குறைந்த உமிழ்வு மண்டலங்களைக் காட்டு. ரூட்டிங் பாதிக்காது.</string>
     <string name="routing_attr_allow_intermediate_description">செங்குத்தான பிரிவுகளுடன் மிகவும் கடினமான வழிகள். பொதுவாக தவிர்க்கப்பட வேண்டிய சில தடைகள்.</string>
     <string name="rendering_attr_piste_difficulty_advanced_name">மேம்பட்ட</string>
+    <string name="routeInfo_road_types_name">சாலை வகைகள்</string>
 </resources>
