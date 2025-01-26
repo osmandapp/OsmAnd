@@ -1687,4 +1687,5 @@
     <string name="shared_string_navigation">வானோடல்</string>
     <string name="customize_route_line">பாதை வரியைத் தனிப்பயனாக்குங்கள்</string>
     <string name="turn_arrows">அம்புகளைத் திருப்புங்கள்</string>
+    <string name="turn_arrows_descr">ரூட் கோட்டில் டர்ன் அம்புகள் குறிக்கப்படுகிறதா என்பதைத் தேர்ந்தெடுக்கவும்.</string>
 </resources>
