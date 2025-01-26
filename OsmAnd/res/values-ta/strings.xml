@@ -2827,4 +2827,5 @@
     <string name="rendering_attr_horse_scale_dangerous_name">ஆபத்தானது</string>
     <string name="rendering_attr_seabedDetail_description">கடற்படை மேற்பரப்பு_ குவலிஃபிகேசன், ஒருங்கிணைந்த மேற்பரப்பு வகைகள், களை அல்லது சீக்ராசின் வகை மற்றும் வரிவிதிப்பு பற்றிய கூடுதல் உரை செய்தி</string>
     <string name="routing_attr_allow_intermittent_description">இடைப்பட்ட நீர் வழிகளை அனுமதிக்கவும்</string>
+    <string name="rendering_attr_horse_scale_impossible_name">சாத்தியமற்றது</string>
 </resources>
