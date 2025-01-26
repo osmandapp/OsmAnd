@@ -2725,4 +2725,5 @@
     <string name="cloud_changes_will_be_dismissed">மேகக்கணி மாற்றங்கள் தள்ளுபடி செய்யப்படும்</string>
     <string name="local_file_will_be_restored">உள்ளக கோப்பு மீட்டமைக்கப்படும்</string>
     <string name="local_changes_will_be_dismissed">உள்ளக மாற்றங்கள் தள்ளுபடி செய்யப்படும்</string>
+    <string name="set_up_backup">காப்புப்பிரதியை அமைக்கவும்</string>
 </resources>
