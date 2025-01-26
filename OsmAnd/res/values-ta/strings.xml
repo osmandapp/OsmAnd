@@ -2805,4 +2805,5 @@
     <string name="perform_oauth_authorization">OAUTH வழியாக உள்நுழைக</string>
     <string name="benefits_for_contributors">செயலில் உள்ள OSM பங்களிப்பாளர்களுக்கான நன்மைகள்</string>
     <string name="benefits_for_contributors_primary_descr">OpenStreetMap.org க்கு செயலில் பங்களிப்பாளர்கள் வரம்பற்ற மணிநேர வரைபட புதுப்பிப்புகளுக்கு உரிமை பெற்றிருக்கலாம்.</string>
+    <string name="benefits_for_contributors_secondary_descr">வரம்பற்ற மாத மற்றும் மணிநேர வரைபட புதுப்பிப்புகளுக்கு நீங்கள் தகுதியுடையவரா என்பதை சரிபார்க்க OpenStreetMap இல் உள்நுழைக.</string>
 </resources>
