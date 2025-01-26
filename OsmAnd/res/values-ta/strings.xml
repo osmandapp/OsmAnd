@@ -1651,4 +1651,5 @@
     <string name="routing_settings_descr">வழிசெலுத்தலுக்கான விருப்பங்களைக் குறிப்பிடவும்.</string>
     <string name="keep_informing_never">கைமுறையாக மட்டுமே (அம்புக்குறியைத் தட்டவும்)</string>
     <string name="route_parameters">பாதை அளவுருக்கள்</string>
+    <string name="fast_route_mode">வேகமான பாதை</string>
 </resources>
