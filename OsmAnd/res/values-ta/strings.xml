@@ -1606,4 +1606,5 @@
     <string name="navigation_points_desc">தூரம், வருகை அல்லது மீதமுள்ள நேரம், அடுத்த திருப்பங்கள், தாங்குதல், தற்போதைய/அடுத்த தெரு பெயர், லேன் செய்தி, அதிகபட்ச விரைவு, விழிப்பூட்டல்கள், POIS, வழிப்பாதைகள் போன்ற தகவல்களைக் காண்பிக்க வழிசெலுத்தலின் போது ஊடுருவல் விட்செட்டுகள் இயக்கப்பட்டுள்ளன.</string>
     <string name="map_widget_transparent">வெளிப்படையான விட்செட்டுகள்</string>
     <string name="map_widget_next_turn">அடுத்த திருப்பம்</string>
+    <string name="map_widget_next_turn_small">அடுத்த திருப்பம் (சிறியது)</string>
 </resources>
