@@ -2515,4 +2515,5 @@
     <string name="rendering_attr_surface_stone_name">கல்</string>
     <string name="rendering_attr_pisteGrooming_name">பிச்டே சீர்ப்படுத்தல்</string>
     <string name="rendering_attr_tracktype_grade3_name">பெரும்பாலும் திடமான</string>
+    <string name="routing_attr_allow_advanced_description">கடினமான பாதைகள், ஆபத்தான தடைகள் மற்றும் செங்குத்தான பிரிவுகளுடன்.</string>
 </resources>
