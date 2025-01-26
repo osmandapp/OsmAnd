@@ -2400,4 +2400,5 @@
     <string name="rendering_attr_currentTrackColor_name">சிபிஎக்ச் நிறம்</string>
     <string name="rendering_attr_contourLines_description">சூம் மட்டத்திலிருந்து காண்பி (விளிம்பு வரி தரவு தேவை):</string>
     <string name="rendering_attr_surface_mud_name">மண்</string>
+    <string name="rendering_attr_ice_road_name">பனி சாலை</string>
 </resources>
