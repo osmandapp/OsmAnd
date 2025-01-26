@@ -1844,4 +1844,5 @@
     <string name="tracks_on_map">காட்டப்படும் தடங்கள்</string>
     <string name="shared_string_statistics">புள்ளிவிவரங்கள்</string>
     <string name="layer_route">பாதை</string>
+    <string name="map_widget_average_speed">சராசரி விரைவு</string>
 </resources>
