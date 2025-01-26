@@ -1558,4 +1558,5 @@
     <string name="av_notes_choose_action_widget_desc">செயலைத் தேர்வுசெய்க.</string>
     <string name="radius_rules_widget_desc">ஆரம்-ரூலர் கருவி வரைபடத்தில் தேர்ந்தெடுக்கப்பட்ட புள்ளியைச் சுற்றி தூர வட்டங்களைக் காட்டுகிறது.</string>
     <string name="current_time_widget_desc">உங்கள் சாதனத்திலிருந்து எடுக்கப்பட்ட தற்போதைய நேரத்தைக் காட்டுகிறது.</string>
+    <string name="battery_widget_desc">உங்கள் சாதனத்தின் பேட்டரி அளவைக் காட்டுகிறது.</string>
 </resources>
