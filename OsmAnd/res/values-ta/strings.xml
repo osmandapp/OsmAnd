@@ -2312,4 +2312,5 @@
     <string name="weather_precip_inches">அங்குலங்கள்</string>
     <string name="restore_purchases">கொள்முதல் மீட்டமை</string>
     <string name="backup_restore_data">தரவை மீட்டமைக்கவும்</string>
+    <string name="map_downloaded">வரைபடம் பதிவிறக்கம் செய்யப்பட்டது</string>
 </resources>
