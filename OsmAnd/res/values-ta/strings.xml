@@ -2288,4 +2288,5 @@
     <string name="shared_string_to">பெறுநர்</string>
     <string name="discard_filter_changes_prompt">அனைத்து வடிப்பான்களையும் மீட்டமைக்கவா?</string>
     <string name="power_watts_unit">வாட்ச்</string>
+    <string name="revolutions_per_minute_unit">ஆர்.பி.எம்</string>
 </resources>
