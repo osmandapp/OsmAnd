@@ -2680,4 +2680,5 @@
     <string name="cloud_email_not_registered">இந்த மின்னஞ்சல் முகவரி OSMand Maude க்கு பதிவு செய்யப்படவில்லை</string>
     <string name="cloud_email_already_registered">இந்த மின்னஞ்சல் முகவரி ஏற்கனவே பதிவு செய்யப்பட்டுள்ளது.</string>
     <string name="restore_from_osmand_cloud">ஒச்மண்ட் கிளவுட்டிலிருந்து மீட்டமைக்கவும்</string>
+    <string name="choose_what_to_restore">எதை மீட்டெடுக்க வேண்டும் என்பதைத் தேர்வுசெய்க.</string>
 </resources>
