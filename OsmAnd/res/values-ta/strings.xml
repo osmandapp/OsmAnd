@@ -1654,4 +1654,5 @@
     <string name="fast_route_mode">வேகமான பாதை</string>
     <string name="voice_announces">குரல் தூண்டுகிறது</string>
     <string name="screen_alerts">திரை விழிப்பூட்டல்கள்</string>
+    <string name="vehicle_parameters">வாகன அளவுருக்கள்</string>
 </resources>
