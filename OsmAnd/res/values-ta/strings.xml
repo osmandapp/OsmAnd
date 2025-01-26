@@ -2464,4 +2464,5 @@
     <string name="rendering_attr_smoothness_impassable_name">சிறப்பான</string>
     <string name="rendering_attr_surface_sett_name">அமைக்கவும்</string>
     <string name="rendering_attr_roadStyle_name">சாலை நடை</string>
+    <string name="rendering_attr_surface_gravel_name">சரளை</string>
 </resources>
