@@ -2544,4 +2544,5 @@
     <string name="rendering_attr_smoothness_very_horrible_name">மிகவும் பயங்கரமானது</string>
     <string name="routing_attr_allow_intermediate_name">இடைநிலை வழிகளை அனுமதிக்கவும்</string>
     <string name="rendering_attr_hideWaterPolygons_description">நீர்</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">எக்ச்ட்ரீம்</string>
 </resources>
