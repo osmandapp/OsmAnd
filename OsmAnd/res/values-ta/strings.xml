@@ -2649,4 +2649,5 @@
     <string name="icon_group_amenity">வசதி</string>
     <string name="icon_group_special">சிறப்பு</string>
     <string name="icon_group_symbols">குறியிடுகள்</string>
+    <string name="icon_group_service">பணி</string>
 </resources>
