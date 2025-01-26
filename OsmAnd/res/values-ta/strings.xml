@@ -2092,4 +2092,5 @@
     <string name="auto_zoom_discrete">தனித்துவமான</string>
     <string name="battery_saving_mode">பேட்டரி சேமிப்பு முறை</string>
     <string name="simulate_your_location_gpx_descr">பதிவுசெய்யப்பட்ட சிபிஎக்ச் பாதையைப் பயன்படுத்தி உங்கள் நிலையை உருவகப்படுத்துங்கள்.</string>
+    <string name="osn_bug_name">OSM குறிப்பு</string>
 </resources>
