@@ -2573,4 +2573,5 @@
     <string name="routing_attr_avoid_share_taxi_name">பங்கு டாக்சி இல்லை</string>
     <string name="rendering_attr_pisteRoutes_name">ச்கை சரிவுகள்</string>
     <string name="rendering_attr_piste_type_sled_name">ச்லெட்</string>
+    <string name="rendering_attr_noPolygons_description">வரைபடத்தில் உள்ள அனைத்து ஏரியல் லேண்ட் அம்சங்களையும் வெளிப்படையானதாக ஆக்குங்கள்.</string>
 </resources>
