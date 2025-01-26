@@ -1521,4 +1521,5 @@
     <string name="save_track_logging_accuracy">பதிவு துல்லியம்</string>
     <string name="monitoring_min_accuracy">குறைந்தபட்ச துல்லியம்</string>
     <string name="monitoring_min_speed">குறைந்தபட்ச விரைவு</string>
+    <string name="auto_split_recording_title">இடைவெளிக்குப் பிறகு தானாக பிளவு பதிவுகள்</string>
 </resources>
