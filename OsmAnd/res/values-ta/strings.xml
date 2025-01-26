@@ -3095,4 +3095,5 @@
     <string name="map_widget_map_scale">வரைபட அளவு</string>
     <string name="lock_screen">பூட்டுத் திரை</string>
     <string name="screen_is_locked_by_action_button">தொடுதிரை பூட்டப்பட்டுள்ளது. திறக்க பொத்தானைத் தட்டவும்.</string>
+    <string name="screen_is_unlocked">தொடுதிரை திறக்கப்பட்டுள்ளது.</string>
 </resources>
