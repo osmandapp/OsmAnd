@@ -2582,4 +2582,5 @@
     <string name="routing_attr_avoid_bus_name">பேருந்துகள் இல்லை</string>
     <string name="rendering_value_highContrastRoads_name">உயர் மாறுபட்ட சாலைகள்</string>
     <string name="rendering_attr_highway_class_service_name">பணி</string>
+    <string name="rendering_attr_surface_metal_name">மாழை</string>
 </resources>
