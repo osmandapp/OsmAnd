@@ -3077,4 +3077,5 @@
     <string name="routing_attr_avoid_cobblestone_name">கோப்ச்டோனைத் தவிர்க்கவும்</string>
     <string name="rendering_value_dark_orange_name">இருண்ட ஆரஞ்சு</string>
     <string name="rendering_value_pale_name">வெளிர்</string>
+    <string name="view_angle">கோணத்தைக் காண்க</string>
 </resources>
