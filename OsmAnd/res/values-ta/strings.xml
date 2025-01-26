@@ -2179,4 +2179,5 @@
     <string name="app_profile">பயன்பாட்டு சுயவிவரம்</string>
     <string name="show_from_zoom_level">காண்பிக்கும் சூம் மட்டத்தில் தொடங்குகிறது</string>
     <string name="quick_action_contour_lines_descr">வரைபடத்தில் விளிம்பு கோடுகளைக் காண்பிக்கும் அல்லது மறைக்கும் பொத்தான்.</string>
+    <string name="quick_action_transport_descr">வரைபடத்தில் பொது போக்குவரத்தை காண்பிக்கும் அல்லது மறைக்கும் பொத்தான்.</string>
 </resources>
