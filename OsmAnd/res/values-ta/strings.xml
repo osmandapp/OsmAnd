@@ -2494,4 +2494,5 @@
     <string name="routing_attr_prefer_unpaved_description">செப்பனிடப்படாத சாலைகளை விரும்புங்கள்.</string>
     <string name="rendering_attr_roadStyle_description">சாலை நடை</string>
     <string name="rendering_attr_highway_class_track_name">மின்தடம்</string>
+    <string name="rendering_attr_tracktype_grade4_name">பெரும்பாலும் மென்மையானது</string>
 </resources>
