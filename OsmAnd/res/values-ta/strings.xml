@@ -2424,4 +2424,5 @@
     <string name="routing_attr_avoid_ferry_description">படகுகளைத் தவிர்க்கிறது</string>
     <string name="rendering_attr_highway_class_track_grade2_name">தகுதி 2</string>
     <string name="rendering_attr_showLightRailRoutes_name">லைட் ரயில் வழிகள்</string>
+    <string name="rendering_attr_showMonorailRoutes_name">மோனோரெயில் வழிகள்</string>
 </resources>
