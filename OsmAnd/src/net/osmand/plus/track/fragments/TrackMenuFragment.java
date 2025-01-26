@@ -763,7 +763,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			reattachCard(cardsContainer, overviewCard);
 		} else {
 			overviewCard = new OverviewCard(mapActivity, this, selectedGpxFile,
-					analysis, displayHelper.getGpxDataItem(), getRouteActivitySelectionHelper(gpxFile), this);
+					displayHelper.getGpxDataItem(), getRouteActivitySelectionHelper(gpxFile), this);
 			overviewCard.setListener(this);
 			cardsContainer.addView(overviewCard.build(mapActivity));
 			if (isCurrentRecordingTrack()) {

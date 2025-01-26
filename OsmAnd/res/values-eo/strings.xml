@@ -5670,4 +5670,8 @@
     <string name="calculating_indication_message">Kalkulado…</string>
     <string name="display_distance_to_first_intermediate_summary">Unue montri tempon kaj distancon al la unua intercelo. Malaktivigu por ĉiam montri detalojn pri la fina celo.</string>
     <string name="display_distance_to_first_intermediate">Montri detalojn pri kurso al la sekva intercelo</string>
+    <string name="shared_string_length">Longo</string>
+    <string name="popular_places_nearby">Proksimaj popularaj ejoj</string>
+    <string name="recently_visited">Historio</string>
+    <string name="shared_string_avg_altitude">Mezuma altitudo</string>
 </resources>

@@ -2995,7 +2995,7 @@
     <string name="pref_selected_by_default_for_profiles">Toto nastavení je vybráno jako výchozí pro profily: %s</string>
     <string name="change_default_settings">Změnit nastavení</string>
     <string name="discard_changes">Zahodit změny</string>
-    <string name="apply_to_current_profile">Použít pouze na „%1$s“</string>
+    <string name="apply_to_current_profile">Použít pouze na „%1$s\\</string>
     <string name="apply_to_all_profiles">Použít na všechny profily</string>
     <string name="start_up_message_pref">Úvodní zpráva</string>
     <string name="analytics_pref_title">Analytika</string>
@@ -3007,7 +3007,7 @@
     <string name="switch_profile">Přepnout profil</string>
     <string name="manage_profiles_descr">Vytváření, import a úprava profilů</string>
     <string name="screen_alerts">Upozornění na displeji</string>
-    <string name="application_profile_changed">Profil aplikace změněn na „%s“</string>
+    <string name="application_profile_changed">Profil aplikace změněn na „%s\\</string>
     <string name="plugins_settings">Nastavení modulů</string>
     <string name="download_detailed_map">Stáhněte detailní mapu %s pro zobrazení této oblasti.</string>
     <string name="change_data_storage_full_description">Přesunout OsmAnd soubory do nového umístění\?
@@ -4956,7 +4956,7 @@
     <string name="feature_available_as_part_of_plan">%1$s je k dispozici jako součást plánu %2$s</string>
     <string name="shared_string_included">Zahrnuto</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
-    <string name="local_indexes_category_terrain">Terénní mapy (3D</string>
+    <string name="local_indexes_category_terrain">Terénní mapy (3D)</string>
     <string name="hillshade_slope">Stínování kopců, svahy</string>
     <string name="map_widget_glide_average_desc">Zobrazuje průměrný klouzavý poměr pro nastavený interval.</string>
     <string name="map_widget_glide_target_desc">Zobrazuje klouzavost potřebnou k dosažení cílového bodu.</string>
@@ -5657,7 +5657,7 @@
     <string name="location_interpolation_percent">Procento interpolace polohy</string>
     <string name="location_interpolation_percent_desc">Nastavení procenta interpolace polohy během navigace po trase. Tento parametr snižuje zpoždění polohy na mapě během animace.</string>
     <string name="shared_string_interpolation">Interpolace</string>
-    <string name="selected_delayed_profile">Zvolený profil „%s“</string>
+    <string name="selected_delayed_profile">Zvolený profil „%s\\</string>
     <string name="default_buttons_opacity_original_description">Každé tlačítko si zachová svou vlastní průhlednost pozadí.</string>
     <string name="default_buttons_size_original_description">Každé tlačítko si zachová svou vlastní velikost.</string>
     <string name="default_buttons_corners_original_description">Každé tlačítko si zachová své vlastní zaoblení rohů.</string>
@@ -5667,4 +5667,9 @@
     <string name="rendering_attr_showClimbingRoutes_name">Lezecké trasy</string>
     <string name="display_distance_to_first_intermediate">Zobrazit podrobnosti trasy k nejbližší zastávce</string>
     <string name="display_distance_to_first_intermediate_summary">Zobrazit čas a vzdálenost k nejbližšímu mezicíli. Vypněte, pokud chcete vždy vidět podrobnosti trasy k cíli.</string>
+    <string name="recently_visited">Nedávno navštíveno</string>
+    <string name="popular_places_nearby">Populární místa v okolí</string>
+    <string name="shared_string_length">Délka</string>
+    <string name="shared_string_avg_altitude">Prům. výška</string>
+    <string name="shared_string_avg_speed">Min. rychlost</string>
 </resources>

@@ -335,7 +335,7 @@
     <string name="routing_settings">Navigare (funcție de profil)</string>
     <string name="routing_settings_descr">Precizați opțiunile de navigare.</string>
     <string name="global_settings">Setări Globale</string>
-    <string name="general_settings">General</string>
+    <string name="general_settings">Generală</string>
     <string name="general_settings_descr">Configurați afișajul și setările comune pentru aplicație.</string>
     <string name="global_app_settings">Setări globale aplicație</string>
     <string name="user_name">Numele de utilizator OSM</string>
@@ -1199,7 +1199,7 @@
     <string name="navigate_point_zone">Zonă</string>
     <string name="download_tab_downloads">Toate descărcările</string>
     <string name="download_tab_updates">Actualizări</string>
-    <string name="download_tab_local">Local</string>
+    <string name="download_tab_local">Locală</string>
     <string name="no_internet_connection">Descărcarea nu este posibilă, verificaţi conexiunea la Internet.</string>
     <string name="shared_string_dismiss">Închide</string>
     <string name="everything_up_to_date">Toate fișierele au fost actualizate</string>
@@ -1829,7 +1829,7 @@
     <string name="mapillary_widget">Widget Mapillary</string>
     <string name="mapillary_widget_descr">Permite contribuții rapide la Mapillary.</string>
     <string name="mapillary_descr">Fotografii stradale online pentru toată lumea. Descoperiți locuri, colaborați, surprindeți lumea.</string>
-    <string name="mapillary">Mapillary</string>
+    <string name="mapillary">Mapilar</string>
     <string name="private_access_routing_req">Destinația dumneavoastră este situată într-o zonă cu acces privat. Permiteți utilizarea drumurilor private pentru această călătorie\?</string>
     <string name="restart_search">Reporniți căutarea</string>
     <string name="increase_search_radius">Mărește raza de căutare</string>
@@ -2833,7 +2833,7 @@
     <string name="storage_format">Format stocare</string>
     <string name="shared_string_delete_all_q">Șterg tot\?</string>
     <string name="uninstall_speed_cameras">Dezinstalare camere radar</string>
-    <string name="shared_string_legal">Legal</string>
+    <string name="shared_string_legal">Legală</string>
     <string name="keep_active">Păstrează activ</string>
     <string name="shared_string_uninstall">Dezinstalare</string>
     <string name="shared_string_tones">tone</string>
@@ -4459,7 +4459,7 @@
     <string name="rendering_attr_showWaterwayTunnels_description">Mărește vizibilitatea pentru tunelurile navigabile</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etichete note</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etichete Fixme</string>
-    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="shared_string_open_street_map">Hartă deschisă OpenStreetMap</string>
     <string name="rendering_attr_seabedDetail_description">Informații text suplimentare privind calificarea suprafeței fundului mării, tipurile de suprafețe combinate, categoria și taxonul de buruieni sau ierburi marine</string>
     <string name="rendering_value_category_name">Categorie</string>
     <string name="rendering_value_all_name">Toate</string>
@@ -5316,7 +5316,7 @@
     <string name="write_heading_description">Salvează orientarea în fiecare punct al traseului, în timpul înregistrării</string>
     <string name="write_heading">Scrie orientarea</string>
     <string name="shared_string_included">Inclus</string>
-    <string name="local_indexes_category_terrain">Hărți de teren (3D</string>
+    <string name="local_indexes_category_terrain">Hărți de teren (3D)</string>
     <string name="map_widget_group_glide_desc">Widgeturile arată raportul de planare față de țintă sau raportul de planare mediu pentru cursa curentă.</string>
     <string name="hillshade_slope">Relief umbrit, Pantă</string>
     <string name="map_widget_glide_average_desc">Arată raportul mediu de planare pentru intervalul setat.</string>
@@ -5441,7 +5441,7 @@
     <string name="telegram_chats">Chaturi Telegram</string>
     <string name="help_article_widgets_nav_widgets_name">Widgeturi navigaționale</string>
     <string name="shared_string_setup">Configurează</string>
-    <string name="shared_string_cache">Cache</string>
+    <string name="shared_string_cache">Cache-ul</string>
     <string name="widget_available_ram_desc">Afișează memoria disponibilă alocată pentru OsmAnd.</string>
     <string name="sort_size_descending">Mărimea mare întâi</string>
     <string name="delete_map">Ștergere hartă</string>
@@ -5596,7 +5596,7 @@
     <string name="avg_sensor_bycicle_power">Putere bicicletă, medie</string>
     <string name="max_sensor_speed">Viteză senzor, maxim</string>
     <string name="shared_string_copyright">Drepturi de autor</string>
-    <string name="shared_string_link">Link</string>
+    <string name="shared_string_link">Legătură</string>
     <string name="shared_string_all_tracks">Toate traseele</string>
     <string name="max_sensor_bycicle_power">Putere bicicletă, maxim</string>
     <string name="avg_sensor_speed">Viteză senzor, medie</string>
@@ -5927,7 +5927,7 @@
     <string name="show_minor_turns">Afișare la intersecțiile minore atunci când se navighează în linie dreaptă</string>
     <string name="location_interpolation_percent_desc">Setați procentul de interpolare a locației în timpul navigării pe traseu. Acest parametru reduce decalajul poziției locației dumneavoastră pe hartă în timpul animației.</string>
     <string name="imperial_gallons">Galoane imperiale</string>
-    <string name="selected_delayed_profile">Profil selectat „%s”</string>
+    <string name="selected_delayed_profile">Profil selectat \"%s\\</string>
     <string name="fuel_tank_capacity_description">Introduceți capacitatea rezervorului pentru a urmări cu exactitate nivelurile de combustibil și consumul</string>
     <string name="location_interpolation_percent">Procent de interpolare a locației</string>
     <string name="us_gallons">Galoane US</string>
@@ -6067,4 +6067,9 @@
     <string name="display_distance_to_first_intermediate">Afișați detaliile traseului pentru următoarea oprire</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="import_export">Import/export</string>
+    <string name="popular_places_nearby">Locuri populare în apropiere</string>
+    <string name="recently_visited">Vizitat recent</string>
+    <string name="shared_string_avg_altitude">Altitudine medie</string>
+    <string name="shared_string_length">Lungime</string>
+    <string name="shared_string_avg_speed">Viteză min.</string>
 </resources>

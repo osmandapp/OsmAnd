@@ -5654,4 +5654,6 @@
     <string name="rendering_attr_showClimbingRoutes_description">顯示攀登路線</string>
     <string name="display_distance_to_first_intermediate_summary">先顯示下一站的時間和距離。關閉可一律顯示目的地的詳細資訊。</string>
     <string name="display_distance_to_first_intermediate">顯示下一站的路線詳細資訊</string>
+    <string name="recently_visited">最近造訪</string>
+    <string name="popular_places_nearby">附近的熱門地點</string>
 </resources>

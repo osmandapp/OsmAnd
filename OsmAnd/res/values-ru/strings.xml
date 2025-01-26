@@ -5889,4 +5889,9 @@
     <string name="calculating_indication_message">Расчет…</string>
     <string name="rendering_attr_showClimbingRoutes_description">Показать скалолазные маршруты</string>
     <string name="rendering_attr_showClimbingRoutes_name">Скалолазные маршруты</string>
+    <string name="shared_string_length">Длина</string>
+    <string name="shared_string_avg_altitude">Средняя высота</string>
+    <string name="shared_string_avg_speed">Мин. скорость</string>
+    <string name="popular_places_nearby">Популярные места поблизости</string>
+    <string name="recently_visited">Недавно посещенные</string>
 </resources>

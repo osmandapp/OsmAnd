@@ -410,7 +410,7 @@ public class RenderingRulesStorage {
 				if (attrsMap.get("possibleValues") != null) {
 					prop.setPossibleValues(attrsMap.get("possibleValues").split(","));
 				}
-				PROPS.registerRule(prop);
+				PROPS.registerRule(prop, !addon);
 			} else if("renderingConstant".equals(name)){ //$NON-NLS-1$
 				if(!renderingConstants.containsKey(attrsMap.get("name"))){
 					renderingConstants.put(attrsMap.get("name"), attrsMap.get("value"));
