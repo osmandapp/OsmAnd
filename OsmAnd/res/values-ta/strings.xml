@@ -2851,4 +2851,5 @@
     <string name="routing_attr_freeride_policy_prefer_offpiste_name">ஆஃபிச்டை விரும்புங்கள்</string>
     <string name="rendering_attr_horse_scale_common_name">பொது</string>
     <string name="routing_attr_difficulty_preference_expert_name">வல்லுநர்</string>
+    <string name="routing_attr_goods_restrictions_description">ஒளி பொருட்கள் வாகனங்களுக்கான அணுகல் அனுமதிகளைக் கவனியுங்கள் (பொருட்கள்)</string>
 </resources>
