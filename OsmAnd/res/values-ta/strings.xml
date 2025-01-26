@@ -1630,4 +1630,5 @@
     <string name="map_widget_camera_distance">கேமரா உயரம்</string>
     <string name="map_widget_zoom_level">சூம் நிலை</string>
     <string name="map_widget_target_distance">கேமராவிலிருந்து இலக்குக்கு தூரம்</string>
+    <string name="shared_string_buttons">பொத்தான்கள்</string>
 </resources>
