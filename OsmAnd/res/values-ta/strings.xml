@@ -1593,4 +1593,5 @@
     <string name="map_markers_bar">வரைபட குறிப்பான்கள் பட்டி</string>
     <string name="map_widget_distance_to_destination">இலக்குக்கான தூரம்</string>
     <string name="map_widget_distance_to_intermediate">இடைநிலைக்கான தூரம்</string>
+    <string name="map_widget_time_to_destination">இலக்கு நேரம்</string>
 </resources>
