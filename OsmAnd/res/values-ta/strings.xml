@@ -1975,4 +1975,5 @@
     <string name="export_profile">ஏற்றுமதி சுயவிவரம்</string>
     <string name="select_data_to_import">இறக்குமதி செய்ய வேண்டிய தரவைத் தேர்ந்தெடுக்கவும்.</string>
     <string name="nav_type_hint">வழிசெலுத்தல் வகை</string>
+    <string name="shared_string_nothing_selected">எதுவும் தேர்ந்தெடுக்கப்படவில்லை</string>
 </resources>
