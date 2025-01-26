@@ -824,7 +824,7 @@
     <string name="routing_attr_avoid_stairs_description">மாடிப்படிகளைத் தவிர்க்கவும்</string>
     <string name="routing_attr_avoid_borders_name">எல்லை கடத்தல் தவிர்க்கவும்</string>
     <string name="routing_attr_avoid_borders_description">தேசிய எல்லைகளை கடக்க வேண்டாம்</string>
-    <string name="routing_attr_weight_name">எடை வரம்பு</string>
+    <string name="routing_attr_weight_name">எடை</string>
     <string name="routing_attr_weight_description">அனுமதிக்கப்பட்ட வாகனம் எடை வரம்பை வழிகளில் குறிக்கவும்.</string>
     <string name="routing_attr_height_name">உயரம் வரம்பு</string>
     <string name="routing_attr_height_description">வாகன உயரத்தை பாதைகளில் அனுமதிக்கப்படுவதைக் குறிப்பிடவும்.</string>
