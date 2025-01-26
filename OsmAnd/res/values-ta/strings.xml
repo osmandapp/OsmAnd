@@ -1632,4 +1632,5 @@
     <string name="map_widget_target_distance">கேமராவிலிருந்து இலக்குக்கு தூரம்</string>
     <string name="shared_string_buttons">பொத்தான்கள்</string>
     <string name="top_widgets_panel">மேல் குழு</string>
+    <string name="bottom_widgets_panel">கீழே உள்ள குழு</string>
 </resources>
