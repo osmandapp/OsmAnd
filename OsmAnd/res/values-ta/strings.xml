@@ -2832,4 +2832,5 @@
     <string name="routing_attr_difficulty_preference_no_preference_name">விருப்பம் இல்லை</string>
     <string name="rendering_attr_horse_scale_difficult_name">கடினம்</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme குறிச்சொற்கள்</string>
+    <string name="rendering_attr_showBusRoutes_name">பச் வழித்தடங்கள்</string>
 </resources>
