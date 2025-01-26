@@ -2879,4 +2879,5 @@
     <string name="rendering_value_all_name">அனைத்தும்</string>
     <string name="rendering_value_omit_name">ஓடு</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">டிராலிபச் வழிகள்</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">சட்டில் வழிகள்</string>
 </resources>
