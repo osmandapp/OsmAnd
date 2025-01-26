@@ -2363,4 +2363,5 @@
     <string name="rendering_value_americanRoadAtlas_name">அமெரிக்கன் சாலை அட்லச்</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">குறைவான மலைப்பாங்கான</string>
     <string name="rendering_value_purple_name">ஊதா</string>
+    <string name="routing_attr_allow_classic_only_name">கிளாசிக் மட்டும் பாதைகளை அனுமதிக்கவும்</string>
 </resources>
