@@ -2304,4 +2304,5 @@
     <string name="weather_temperature_celsius">செல்சியச்</string>
     <string name="weather_temperature_fahrenheit">பாரன்ஈட்</string>
     <string name="weather_pressure_hectopascals">எக்டோபாச்கல்கள்</string>
+    <string name="weather_pressure_millimeters_of_mercury">அறிவன் மில்லிமீட்டர்</string>
 </resources>
