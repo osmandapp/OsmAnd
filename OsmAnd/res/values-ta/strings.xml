@@ -1723,4 +1723,5 @@
     <string name="left_side_navigation">இடது கை போக்குவரத்து</string>
     <string name="right_side_navigation">வலது கை போக்குவரத்து</string>
     <string name="si_nm_mt">கடல் மைல்கள்/மீட்டர்</string>
+    <string name="si_nm_ft">கடல் மைல்கள்/அடி</string>
 </resources>
