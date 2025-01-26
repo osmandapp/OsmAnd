@@ -2401,4 +2401,5 @@
     <string name="rendering_attr_contourLines_description">சூம் மட்டத்திலிருந்து காண்பி (விளிம்பு வரி தரவு தேவை):</string>
     <string name="rendering_attr_surface_mud_name">மண்</string>
     <string name="rendering_attr_ice_road_name">பனி சாலை</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">தகுதி 4</string>
 </resources>
