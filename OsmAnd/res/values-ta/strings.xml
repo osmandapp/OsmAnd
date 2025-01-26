@@ -2779,4 +2779,5 @@
     <string name="purchases_feature_desc_terrain">சிகரங்களையும் தாழ்நிலங்களையும் காட்ட நிலப்பரப்பு விளிம்பு கோடுகள், கிரேச்கேல் இல்சேட் மற்றும் வண்ண அளவிலான சாய்வு அறிகுறி.</string>
     <string name="purchases_feature_desc_nautical">கடல் ஆழமான தகவல்களை அணுகலாம்</string>
     <string name="monthly_subscription">மாத சந்தா</string>
+    <string name="annual_subscription">ஆண்டு சந்தா</string>
 </resources>
