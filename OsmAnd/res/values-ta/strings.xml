@@ -1511,4 +1511,5 @@
     <string name="rotate_map_manual_opt">கைமுறையாக சுழற்றப்பட்டது</string>
     <string name="compass_click_desc">வரைபட நோக்குநிலை பயன்முறையை மாற்ற திசைகாட்டி பொத்தானை இருமுறை தட்டவும்.</string>
     <string name="shared_string_automatic">தானியங்கி</string>
+    <string name="routing_attr_length_name">நீளம்</string>
 </resources>
