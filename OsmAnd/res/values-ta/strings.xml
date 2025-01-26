@@ -2032,4 +2032,5 @@
     <string name="save_as_new_track">புதிய பாதையாக சேமிக்கவும்</string>
     <string name="add_to_a_track">ஒரு பாதையில் சேர்க்கவும்</string>
     <string name="next_segment">அடுத்த பிரிவு</string>
+    <string name="whole_track">முழு பாதையும்</string>
 </resources>
