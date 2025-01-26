@@ -2537,4 +2537,5 @@
     <string name="rendering_attr_highway_class_path_name">பாதை</string>
     <string name="rendering_value_white_name">வெள்ளை</string>
     <string name="rendering_value_blue_name">நீலம்</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">பனி சாலைகள் மற்றும் ஃபோர்ட்களைத் தவிர்க்கிறது.</string>
 </resources>
