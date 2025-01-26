@@ -2818,4 +2818,5 @@
     <string name="speed_cameras_alert">சில நாடுகளில் வேக கேமராக்கள் எச்சரிக்கைகள் சட்டத்தால் தடைசெய்யப்பட்டுள்ளன.</string>
     <string name="rendering_attr_showTrainRoutes_name">ரயில் வழிகள்</string>
     <string name="rendering_attr_showWaterwayTunnels_description">நீர்வழி சுரங்கங்களுக்கான தெரிவுநிலையை அதிகரிக்கவும்</string>
+    <string name="rendering_attr_natureReserves_description">இயற்கை இருப்பு, பாதுகாக்கப்பட்ட பகுதிகள் மற்றும் தேசிய பூங்காக்களைக் காட்டு.</string>
 </resources>
