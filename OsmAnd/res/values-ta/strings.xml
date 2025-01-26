@@ -650,7 +650,7 @@
     <string name="shared_string_select_on_map">வரைபடத்தில் தேர்ந்தெடுக்கவும்</string>
     <string name="shared_string_select_all">அனைத்தையும் தெரிவுசெய்</string>
     <string name="wake_on_voice">திரையை இயக்கு</string>
-    <string name="wake_on_voice_descr">சாதனத்தை திரையில் (அனைத்து இருந்தால்) ஒரு திருப்பத்தை நெருங்கும் போது இயக்கவும்.</string>
+    <string name="wake_on_voice_descr">ஒரு திருப்பத்தை நெருங்கும் போது சாதனத் திரை (முடக்கப்பட்டால்) இயக்கவும்.</string>
     <string name="impassable_road">சாலைகள் தவிர்க்கவும் …</string>
     <string name="rendering_attr_trainLightrailRoutes_name">ரயில் பாதைகள்</string>
     <string name="rendering_attr_tramRoutes_name">டிராம் வழித்தடங்கள்</string>
