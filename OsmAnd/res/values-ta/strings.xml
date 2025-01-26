@@ -2404,4 +2404,5 @@
     <string name="rendering_attr_highway_class_track_grade4_name">தகுதி 4</string>
     <string name="rendering_attr_piste_difficulty_connection_name">இணைப்பு</string>
     <string name="rendering_attr_streetLightingNight_name">இரவில் மட்டுமே காட்டு</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">வான்வழி பாதை</string>
 </resources>
