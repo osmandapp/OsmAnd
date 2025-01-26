@@ -2155,4 +2155,5 @@
     <string name="show_gpx">தடங்கள்</string>
     <string name="quick_action_interim_dialog">இடைக்கால உரையாடலைக் காட்டு</string>
     <string name="quick_action_fav_name_descr">முகவரி அல்லது இட பெயரைப் பயன்படுத்த காலியாக விடவும்.</string>
+    <string name="quick_action_add_category">ஒரு வகையைச் சேர்க்கவும்</string>
 </resources>
