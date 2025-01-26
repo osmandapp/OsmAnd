@@ -31,12 +31,12 @@
     <string name="saved_messages">சேமித்த செய்திகள்</string>
     <string name="shared_string_end">முடிவு</string>
     <string name="shared_string_start">தொடங்கு</string>
-    <string name="shared_string_apply">இடு</string>
+    <string name="shared_string_apply">விண்ணப்பிக்கவும்</string>
     <string name="set_time_timeline_descr">காண்பிக்க நேரம் தேர்ந்தெடுக்கவும்</string>
     <string name="start_end_date">தொடக்க - இறுதி தேதி</string>
     <string name="timeline_no_data_descr">தேர்ந்தெடுக்கப்பட்ட நாளுக்கான தரவை நாங்கள் சேகரிக்கவில்லை</string>
     <string name="timeline_no_data">தரவு இல்லை</string>
-    <string name="shared_string_select">தேர்ந்தெடு</string>
+    <string name="shared_string_select">தேர்வு</string>
     <string name="min_logging_distance">குறைந்தபட்ச பதிவு தூரம்</string>
     <string name="min_logging_distance_descr">வடிகட்டி: புதிய புள்ளியை பதிவு செய்ய குறைந்தபட்ச தூரம்</string>
     <string name="min_logging_accuracy">குறைந்தபட்ச பதிவு துல்லியம்</string>
@@ -66,7 +66,7 @@
     <string name="altitude">உயரம்</string>
     <string name="search_contacts_descr">உங்கள் அனைத்து குழுக்கள் மற்றும் தொடர்புகள் முழுவதும் தேடுங்கள்.</string>
     <string name="shared_string_search">தேடல்</string>
-    <string name="shared_string_ok">சரி</string>
+    <string name="shared_string_ok">எற்க்கிறேன்</string>
     <string name="timeline_available_for_free_now">காலவரிசை என்பது இப்போது இலவசமாக கிடைக்கக்கூடிய அம்சமாகும்.</string>
     <string name="disable_monitoring">கண்காணிப்பை முடக்கு</string>
     <string name="location_recording_enabled">இருப்பிட பதிவு இயக்கப்பட்டது</string>
@@ -159,7 +159,7 @@
     <string name="choose_osmand">பயன்படுத்த OSMand பதிப்பைத் தேர்ந்தெடுக்கவும்</string>
     <string name="disable_all_sharing_desc">தேர்ந்தெடுக்கப்பட்ட அனைத்து அரட்டைகளுக்கும் (%1$d) இருப்பிட பகிர்வை முடக்குகிறது.</string>
     <string name="disable_all_sharing">அனைத்து பகிர்வுகளையும் முடக்கு</string>
-    <string name="shared_string_exit">வெளியேறு</string>
+    <string name="shared_string_exit">வெளியேற</string>
     <string name="shared_string_close">மூடு</string>
     <string name="connected_account">இணைக்கப்பட்ட கணக்கு</string>
     <string name="shared_string_account">கணக்கு</string>
@@ -228,7 +228,7 @@
     <string name="gps_network_not_enabled">\"இருப்பிடம்\" ஐ இயக்கவா?</string>
     <string name="not_logged_in">நீங்கள் உள்நுழையவில்லை</string>
     <string name="shared_string_continue">தொடரவும்</string>
-    <string name="shared_string_cancel">ரத்துசெய்</string>
+    <string name="shared_string_cancel">மறுக்கிறேன்</string>
     <string name="shared_string_settings">அமைப்புகள்</string>
     <string name="no_location_permission">இருப்பிட தரவு அணுகலுக்கான பயன்பாட்டிற்கு இசைவு இல்லை.</string>
     <string name="gps_not_available">கணினி அமைப்புகளில் \"இருப்பிடம்\" ஐ இயக்கவும்</string>
