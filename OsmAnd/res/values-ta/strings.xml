@@ -1731,4 +1731,5 @@
     <string name="select_street">தெருவைத் தேர்ந்தெடுக்கவும்</string>
     <string name="select_city">நகரத்தைத் தேர்ந்தெடுக்கவும்</string>
     <string name="type_city_town">நகரம்/நகரம்/இருப்பிடம் என தட்டச்சு செய்க</string>
+    <string name="select_postcode">அஞ்சல் குறியீடு தேடல்</string>
 </resources>
