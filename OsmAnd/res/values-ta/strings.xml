@@ -2328,4 +2328,5 @@
     <string name="open_in_browser_wiki">ஆன்லைனில் திறந்த கட்டுரை</string>
     <string name="add_custom_category">தனிப்பயன் வகையைச் சேர்க்கவும்</string>
     <string name="poi_filter_by_name">பெயரால் தேடுங்கள்</string>
+    <string name="rearrange_categories">வகைகளை மறுசீரமைக்கவும்</string>
 </resources>
