@@ -3079,4 +3079,5 @@
     <string name="rendering_value_pale_name">வெளிர்</string>
     <string name="view_angle">கோணத்தைக் காண்க</string>
     <string name="location_radius">இருப்பிட ஆரம்</string>
+    <string name="view_angle_description">நீங்கள் தற்போது எதிர்கொள்ளும் கூம்பு வடிவ பகுதியைக் காட்டுகிறது</string>
 </resources>
