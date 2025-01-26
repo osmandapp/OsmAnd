@@ -2374,4 +2374,5 @@
     <string name="rendering_attr_smoothness_bad_name">மோசமான</string>
     <string name="routing_attr_allow_expert_description">மிகவும் கடினமான பாதைகள், ஆபத்தான தடைகள் மற்றும் சுற்றுப்புறங்களுடன்.</string>
     <string name="routeInfo_surface_name">மேற்பரப்பு</string>
+    <string name="routeInfo_surface_description">சாலை/பாதையின் உடல் மேற்பரப்பு தகவலை வழங்கவும்.</string>
 </resources>
