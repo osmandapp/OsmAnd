@@ -1774,4 +1774,5 @@
     <string name="shared_string_interval">இடைவேளை</string>
     <string name="shared_string_hide_all">அனைத்தையும் மறைக்கவும்</string>
     <string name="shared_string_min_height">மணித்துளி. உயரம்</string>
+    <string name="shared_string_max_height">அதிகபட்சம். உயரம்</string>
 </resources>
