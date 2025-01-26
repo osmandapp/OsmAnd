@@ -2421,4 +2421,5 @@
     <string name="rendering_value_medium_w_name">சராசரி</string>
     <string name="rendering_attr_contourDensity_description">விளிம்பு வரி அடர்த்தி</string>
     <string name="rendering_attr_currentTrackWidth_name">சிபிஎக்ச் அகலம்</string>
+    <string name="routing_attr_avoid_ferry_description">படகுகளைத் தவிர்க்கிறது</string>
 </resources>
