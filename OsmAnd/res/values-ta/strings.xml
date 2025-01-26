@@ -1880,4 +1880,5 @@
     <string name="map_settings_weather_precip">மழைப்பொழிவு</string>
     <string name="shared_string_contours">வரையறைகள்</string>
     <string name="shared_string_layers">அடுக்குகள்</string>
+    <string name="distance_during_navigation">வழிசெலுத்தலின் போது தூரம்</string>
 </resources>
