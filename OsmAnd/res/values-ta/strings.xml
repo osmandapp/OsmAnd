@@ -2069,4 +2069,5 @@
     <string name="created_on">உருவாக்கப்பட்டது</string>
     <string name="shared_string_zoom_levels">சூம் நிலைகள்</string>
     <string name="pseudo_mercator_projection">போலி-மெர்கேட்டர் திட்டம்</string>
+    <string name="sqlite_db_file">Sqlitedb கோப்பு</string>
 </resources>
