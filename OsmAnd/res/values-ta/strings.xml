@@ -3004,4 +3004,5 @@
     <string name="determine_location">உங்கள் இருப்பிடத்தை தீர்மானிக்க எங்களை அனுமதிக்கவும்</string>
     <string name="average_glide_ratio">சராசரி சறுக்கு விகிதம்</string>
     <string name="glide_ratio_to_target">இலக்குக்கு சறுக்கு விகிதம்</string>
+    <string name="map_widget_glide_average_desc">தொகுப்பு இடைவெளியின் சராசரி சறுக்கு விகிதத்தைக் காட்டுகிறது.</string>
 </resources>
