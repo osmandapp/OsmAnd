@@ -2234,4 +2234,5 @@
     <string name="plugin_nautical_name">கடல் வரைபடக் காட்சி</string>
     <string name="osmand_parking_plugin_name">பார்க்கிங் நிலை</string>
     <string name="osmand_parking_plugin_description">உங்கள் கார் எங்கு நிறுத்தப்பட்டுள்ளது என்பதைக் குறிக்கவும், பார்க்கிங் மீட்டர் காலாவதியாகும் போது உங்கள் காலெண்டருக்கு அறிவிக்கவும். மார்க்கரை வைக்க, வரைபடத்தில் ஒரு இடத்தைத் தேர்வுசெய்து, \"செயல்கள்\" க்குச் சென்று, \"பார்க்கிங் சேர்\" என்பதைத் தட்டவும்.</string>
+    <string name="plugin_ski_name">ச்கை வரைபடக் காட்சி</string>
 </resources>
