@@ -2807,4 +2807,5 @@
     <string name="benefits_for_contributors_primary_descr">OpenStreetMap.org க்கு செயலில் பங்களிப்பாளர்கள் வரம்பற்ற மணிநேர வரைபட புதுப்பிப்புகளுக்கு உரிமை பெற்றிருக்கலாம்.</string>
     <string name="benefits_for_contributors_secondary_descr">வரம்பற்ற மாத மற்றும் மணிநேர வரைபட புதுப்பிப்புகளுக்கு நீங்கள் தகுதியுடையவரா என்பதை சரிபார்க்க OpenStreetMap இல் உள்நுழைக.</string>
     <string name="contributions_may_calculate_with_delay">பங்களிப்புகளைக் கணக்கிட பல மணி நேரம் ஆகலாம்.</string>
+    <string name="map_updates_are_unavailable_yet">வரைபட புதுப்பிப்புகள் இன்னும் கிடைக்கவில்லை. :-(</string>
 </resources>
