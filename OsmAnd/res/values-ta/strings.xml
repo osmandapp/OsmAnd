@@ -2350,4 +2350,5 @@
     <string name="cancel_subscription">சந்தாவை ரத்துசெய்</string>
     <string name="index_item_depth_contours_osmand_ext">கடல் ஆழமான வரையறைகள்</string>
     <string name="subscribe_email_desc">பயன்பாட்டு தள்ளுபடிகள் பற்றி எங்கள் அஞ்சல் பட்டியலுக்கு குழுசேரவும், மேலும் 3 வரைபட பதிவிறக்கங்களைப் பெறுங்கள்!</string>
+    <string name="rendering_value_high_name">உயர்ந்த</string>
 </resources>
