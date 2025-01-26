@@ -1715,4 +1715,5 @@
     <string name="route_head">தலை</string>
     <string name="looking_up_address">முகவரியைப் பார்ப்பது</string>
     <string name="traffic_warning_railways">இரயில் பாதை கடத்தல்</string>
+    <string name="traffic_warning_pedestrian">பாதசாரி குறுக்குவழி</string>
 </resources>
