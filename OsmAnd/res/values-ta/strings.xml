@@ -1405,4 +1405,5 @@
     <string name="start_point">தொடங்கு</string>
     <string name="shared_string_speed">வேகம்</string>
     <string name="show_poi_over_map">POI மேலடுக்கு காட்டு</string>
+    <string name="address_search_desc">முகவரி தேடல்</string>
 </resources>
