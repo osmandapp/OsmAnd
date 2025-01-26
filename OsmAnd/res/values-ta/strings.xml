@@ -2810,4 +2810,5 @@
     <string name="map_updates_are_unavailable_yet">வரைபட புதுப்பிப்புகள் இன்னும் கிடைக்கவில்லை. :-(</string>
     <string name="enough_contributions_descr">வாழ்த்துக்கள், நீங்கள் போதுமான ஓபன்ச்ட்ரீட்மேப் பங்களிப்புகளை வழங்கியுள்ளீர்கள், இப்போது வரம்பற்ற OSMAND MAP புதுப்பிப்புகளை அனுபவிக்க முடியும்!</string>
     <string name="recalc_angle_dialog_title">எனது இருப்பிடத்திற்கும் வழிக்கும் இடையில் குறைந்தபட்ச கோணம்</string>
+    <string name="recalc_angle_dialog_descr">எனது இருப்பிடத்திற்கும் கணக்கிடப்பட்ட பாதைக்கும் இடையில் கூடுதல் நேரான பிரிவு பாதை மீண்டும் கணக்கிடப்படும் வரை காண்பிக்கப்படும்</string>
 </resources>
