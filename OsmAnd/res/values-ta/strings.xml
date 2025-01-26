@@ -2677,4 +2677,5 @@
     <string name="app_mode_moped">மொபெட்</string>
     <string name="user_login">புகுபதிவு</string>
     <string name="osmand_cloud_login_descr">நீங்கள் பதிவுசெய்த மின்னஞ்சல் முகவரியை உள்ளிடவும். ஒரு முறை கடவுச்சொல் அனுப்பப்படும்.</string>
+    <string name="cloud_email_not_registered">இந்த மின்னஞ்சல் முகவரி OSMand Maude க்கு பதிவு செய்யப்படவில்லை</string>
 </resources>
