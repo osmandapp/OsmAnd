@@ -2953,4 +2953,5 @@
     <string name="ant_plus_open_settings">திறந்த அமைப்புகள்</string>
     <string name="ant_plus_bluetooth_off">ஊடலை அணைக்கப்படுகிறது</string>
     <string name="ant_plus_bluetooth_off_description">ஊடலை கண்டுபிடிப்பு மற்றும் இணை சென்சார்களை இயக்கவும்.</string>
+    <string name="external_device_forget_sensor">சென்சாரை மறந்து விடுங்கள்</string>
 </resources>
