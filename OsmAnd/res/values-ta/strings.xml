@@ -2049,4 +2049,5 @@
     <string name="follow_track">பாதையைப் பின்தொடரவும்</string>
     <string name="select_another_track">மற்றொரு பாதையைத் தேர்ந்தெடுக்கவும்</string>
     <string name="attach_to_the_roads">சாலைகளில் இணைக்கவும்</string>
+    <string name="start_of_the_track">பாதையின் தொடக்க</string>
 </resources>
