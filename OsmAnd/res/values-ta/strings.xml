@@ -2177,4 +2177,5 @@
     <string name="cloud_layer">மேகக்கணி அடுக்கு</string>
     <string name="precipitation_layer">மழைப்பொழிவு அடுக்கு</string>
     <string name="app_profile">பயன்பாட்டு சுயவிவரம்</string>
+    <string name="show_from_zoom_level">காண்பிக்கும் சூம் மட்டத்தில் தொடங்குகிறது</string>
 </resources>
