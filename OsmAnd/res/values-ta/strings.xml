@@ -2073,4 +2073,5 @@
     <string name="one_image_per_tile">ஒரு ஓடு ஒரு பட கோப்பு</string>
     <string name="clear_tiles_warning">இந்த மாற்றங்களைப் பயன்படுத்துவது இந்த ஓடு மூலத்திற்கான தற்காலிக சேமிப்பு தரவை அழிக்கும்</string>
     <string name="download_heightmap_maps">உயரம்</string>
+    <string name="srtm_unit_format">விளிம்பு கோடுகள் அலகு மாறுபாடு</string>
 </resources>
