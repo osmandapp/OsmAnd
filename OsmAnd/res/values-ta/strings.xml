@@ -1509,4 +1509,5 @@
     <string name="rotate_map_bearing_opt">இயக்கம் திசை</string>
     <string name="rotate_map_north_opt">வடக்கு மேலே உள்ளது</string>
     <string name="rotate_map_manual_opt">கைமுறையாக சுழற்றப்பட்டது</string>
+    <string name="compass_click_desc">வரைபட நோக்குநிலை பயன்முறையை மாற்ற திசைகாட்டி பொத்தானை இருமுறை தட்டவும்.</string>
 </resources>
