@@ -3091,4 +3091,5 @@
     <string name="daynight_mode_night_summary">எப்போதும் வரைபடத்தை இருண்ட கருப்பொருளில் காண்பிக்கும், இது இரவுநேர அல்லது குறைந்த ஒளி நிலைமைகளுக்கு ஏற்றது.</string>
     <string name="daynight_mode_day_summary">எப்போதும் வரைபடத்தை ஒரு ஒளி கருப்பொருளில் காண்பிக்கும், இது பகல்நேரத் தெரிவுநிலைக்கு ஏற்றது.</string>
     <string name="rendering_attr_showDirtbikeTrails_name">அழுக்கு பைக் தடங்கள்</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">அழுக்கு பைக் சுவடுகளைக் காட்டு</string>
 </resources>
