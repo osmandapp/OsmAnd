@@ -1427,4 +1427,5 @@
     <string name="speed_mode">வேக பயன்முறை</string>
     <string name="help_article_map_legend_nautical_map_name">கடல் வரைபட பாணி</string>
     <string name="help_article_map_legend_osmand_name">Osmand வரைபட பாணி</string>
+    <string name="help_article_map_legend_ski_map_name">ச்கை வரைபட நடை</string>
 </resources>
