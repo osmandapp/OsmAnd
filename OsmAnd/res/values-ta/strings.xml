@@ -516,7 +516,7 @@
     <string name="rendering_attr_showMtbRoutes_name">MTB பாதைகளைக் காண்பி</string>
     <string name="show_polygons">பலகோணங்களைக் காண்பி</string>
     <string name="find_parking">பார்க்கிங் கண்டுபிடிக்க</string>
-    <string name="shared_string_status">நிலை</string>
+    <string name="shared_string_status">நிலைமை</string>
     <string name="shared_string_save_changes">மாற்றங்களை சேமியுங்கள்</string>
     <string name="shared_string_email_address">மின்னஞ்சல் முகவரி</string>
     <string name="rendering_attr_hideUnderground_name">நிலத்தடி பொருட்கள்</string>
@@ -1792,4 +1792,5 @@
     <string name="map_3d_mode_description">இரண்டு விரல்களால் வரைபடத்தைத் தொட்டு, வரைபட சாய்வை சரிசெய்ய அவற்றை மேலும் கீழும் நகர்த்துகிறது.</string>
     <string name="map_3d_mode_hint">நீண்ட தட்டவும் பொத்தானை மாற்ற பொத்தானை அனுமதிக்கிறது.</string>
     <string name="data_settings">தகவல்கள்</string>
+    <string name="weather_online_cache">நிகழ்நிலை கேச்</string>
 </resources>
