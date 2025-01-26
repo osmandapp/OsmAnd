@@ -2578,4 +2578,5 @@
     <string name="routing_attr_allow_skating_only_name">ச்கேட்டிங் பாதைகளை மட்டுமே அனுமதிக்கவும்</string>
     <string name="routing_attr_avoid_shuttle_train_description">சட்டில் ரயில்களைப் பயன்படுத்துவதைத் தவிர்க்கிறது</string>
     <string name="routing_attr_driving_style_balance_name">சமநிலையானது</string>
+    <string name="routing_attr_piste_type_nordic_name">குறுக்கு நாடு மற்றும் நோர்டிக் பனிச்சறுக்கு</string>
 </resources>
