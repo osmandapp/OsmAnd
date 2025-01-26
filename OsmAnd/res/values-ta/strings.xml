@@ -2159,4 +2159,5 @@
     <string name="quick_action_edit_action">செயலைத் திருத்து</string>
     <string name="quick_action_bug_descr">இந்த செய்தி கருத்துத் துறையில் சேர்க்கப்பட்டுள்ளது.</string>
     <string name="quick_action_add_marker_descr">திரை சென்டர் இடத்தில் வரைபட குறிப்பானைச் சேர்க்க ஒரு பொத்தான்.</string>
+    <string name="quick_action_hillshade_descr">வரைபடத்தில் இல்சேட் காட்ட அல்லது மறைக்க ஒரு பொத்தான்.</string>
 </resources>
