@@ -3068,4 +3068,5 @@
     <string name="custom_map_button_name_present">அத்தகைய பொத்தான் ஏற்கனவே உள்ளது</string>
     <string name="data_source">தரவு மூல</string>
     <string name="weather_data_sources_prompt">ஒச்மண்ட் இரண்டு மூலங்களிலிருந்து வானிலை தரவை வழங்குகிறது:</string>
+    <string name="weather_source_ecmwf_description">நடுத்தர தூர வானிலை முன்னறிவிப்புகளுக்கான ஐரோப்பிய நடுவண்</string>
 </resources>
