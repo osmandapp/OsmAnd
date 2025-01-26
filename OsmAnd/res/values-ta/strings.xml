@@ -1750,4 +1750,5 @@
     <string name="shared_string_uninstall">நிறுவல் நீக்க</string>
     <string name="shared_string_upload">பதிவேற்றும்</string>
     <string name="shared_string_move">நகர்த்தவும்</string>
+    <string name="shared_string_set">கணம்</string>
 </resources>
