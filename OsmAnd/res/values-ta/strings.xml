@@ -2309,4 +2309,5 @@
     <string name="weather_wind_kilimeters_per_hour">ஒரு மணி நேரத்திற்கு கிலோமீட்டர்</string>
     <string name="weather_wind_knots">முடிச்சுகள்</string>
     <string name="weather_precip_milimeters">மில்லிமீட்டர்</string>
+    <string name="weather_precip_inches">அங்குலங்கள்</string>
 </resources>
