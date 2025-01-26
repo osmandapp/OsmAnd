@@ -5316,7 +5316,7 @@
     <string name="write_heading_description">Salvează orientarea în fiecare punct al traseului, în timpul înregistrării</string>
     <string name="write_heading">Scrie orientarea</string>
     <string name="shared_string_included">Inclus</string>
-    <string name="local_indexes_category_terrain">Hărți de teren (3D</string>
+    <string name="local_indexes_category_terrain">Hărți de teren (3D)</string>
     <string name="map_widget_group_glide_desc">Widgeturile arată raportul de planare față de țintă sau raportul de planare mediu pentru cursa curentă.</string>
     <string name="hillshade_slope">Relief umbrit, Pantă</string>
     <string name="map_widget_glide_average_desc">Arată raportul mediu de planare pentru intervalul setat.</string>
@@ -6071,4 +6071,5 @@
     <string name="recently_visited">Vizitat recent</string>
     <string name="shared_string_avg_altitude">Altitudine medie</string>
     <string name="shared_string_length">Lungime</string>
+    <string name="shared_string_avg_speed">Viteză min.</string>
 </resources>
