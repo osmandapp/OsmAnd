@@ -2425,4 +2425,5 @@
     <string name="rendering_attr_highway_class_track_grade2_name">தகுதி 2</string>
     <string name="rendering_attr_showLightRailRoutes_name">லைட் ரயில் வழிகள்</string>
     <string name="rendering_attr_showMonorailRoutes_name">மோனோரெயில் வழிகள்</string>
+    <string name="rendering_attr_showFunicularRoutes_name">வேடிக்கையான வழிகள்</string>
 </resources>
