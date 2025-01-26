@@ -2003,4 +2003,5 @@
     <string name="new_profile">புதிய சுயவிவரம்</string>
     <string name="configure_profile">சுயவிவரத்தை உள்ளமைக்கவும்</string>
     <string name="profile_settings">சுயவிவர குறிப்பிட்ட அமைப்புகள்</string>
+    <string name="profile_appearance">சுயவிவர தோற்றம்</string>
 </resources>
