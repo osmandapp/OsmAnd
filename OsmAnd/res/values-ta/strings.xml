@@ -1491,4 +1491,5 @@
     <string name="audionotes_plugin_name">ஆடியோ/வீடியோ குறிப்புகள்</string>
     <string name="shared_string_accessibility">அணுகல்</string>
     <string name="tracker_item">ஒச்மண்ட் டிராக்கர்</string>
+    <string name="settings_preset">இயல்புநிலை சுயவிவரம்</string>
 </resources>
