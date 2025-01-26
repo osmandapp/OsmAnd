@@ -2545,4 +2545,5 @@
     <string name="routing_attr_allow_intermediate_name">இடைநிலை வழிகளை அனுமதிக்கவும்</string>
     <string name="rendering_attr_hideWaterPolygons_description">நீர்</string>
     <string name="rendering_attr_piste_difficulty_extreme_name">எக்ச்ட்ரீம்</string>
+    <string name="rendering_value_low_name">குறைந்த</string>
 </resources>
