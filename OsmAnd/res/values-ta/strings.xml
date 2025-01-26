@@ -2799,4 +2799,5 @@
     <string name="weather_offline_forecast">இணைப்பில்லாத முன்னறிவிப்பு</string>
     <string name="weather_forecast_is_outdated">முன்னறிவிப்பு காலாவதியானது.</string>
     <string name="login_open_street_map_org">Openstreetmap.org இல் உள்நுழைக</string>
+    <string name="map_updates_for_mappers">மேப்பர்களுக்கான வரைபட புதுப்பிப்புகள்</string>
 </resources>
