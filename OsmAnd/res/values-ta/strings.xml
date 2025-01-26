@@ -1618,4 +1618,5 @@
     <string name="map_widget_sunset_desc">அடுத்த சூரிய அச்தமனத்தின் நேரம் அல்லது சூரிய மறைவு வரை எஞ்சிய நேரத்தைக் காட்டுகிறது.</string>
     <string name="map_widget_trip_recording_downhill">கீழ்நோக்கி</string>
     <string name="map_widget_trip_recording_uphill">மேல்நோக்கி</string>
+    <string name="map_widget_trip_recording_duration">காலம்</string>
 </resources>
