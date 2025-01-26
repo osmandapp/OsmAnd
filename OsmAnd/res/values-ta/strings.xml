@@ -2855,4 +2855,5 @@
     <string name="routing_attr_allow_streams_name">நீரோடைகள் மற்றும் வடிகால்களை அனுமதிக்கவும்</string>
     <string name="routing_attr_carriage_restrictions_name">வண்டி கட்டுப்பாடுகள்</string>
     <string name="routing_attr_avoid_footways_description">பாதைகளைத் தவிர்க்கவும்</string>
+    <string name="routing_attr_avoid_fords_name">ஃபோர்ட்களைத் தவிர்க்கவும்</string>
 </resources>
