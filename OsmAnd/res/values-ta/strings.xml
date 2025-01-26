@@ -2829,4 +2829,5 @@
     <string name="routing_attr_allow_intermittent_description">இடைப்பட்ட நீர் வழிகளை அனுமதிக்கவும்</string>
     <string name="rendering_attr_horse_scale_impossible_name">சாத்தியமற்றது</string>
     <string name="rendering_attr_depthContourColorScheme_description">ஆழம் விளிம்பு கோடுகள் வண்ணத் திட்டம்</string>
+    <string name="routing_attr_difficulty_preference_no_preference_name">விருப்பம் இல்லை</string>
 </resources>
