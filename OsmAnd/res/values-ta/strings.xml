@@ -2250,4 +2250,5 @@
     <string name="nautical_depth_points">கடல் ஆழம் புள்ளிகள்</string>
     <string name="depth_contours">ஆழமான வரையறைகள்</string>
     <string name="navigate_point_latitude">அகலாங்கு</string>
+    <string name="navigate_point_longitude">நெட்டாங்கு</string>
 </resources>
