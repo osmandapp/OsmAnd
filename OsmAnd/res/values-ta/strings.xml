@@ -2580,4 +2580,5 @@
     <string name="routing_attr_driving_style_balance_name">சமநிலையானது</string>
     <string name="routing_attr_piste_type_nordic_name">குறுக்கு நாடு மற்றும் நோர்டிக் பனிச்சறுக்கு</string>
     <string name="routing_attr_avoid_bus_name">பேருந்துகள் இல்லை</string>
+    <string name="rendering_value_highContrastRoads_name">உயர் மாறுபட்ட சாலைகள்</string>
 </resources>
