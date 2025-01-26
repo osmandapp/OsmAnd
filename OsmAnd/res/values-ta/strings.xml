@@ -1404,4 +1404,5 @@
     <string name="add_as_last_destination_point">கடைசி இடைநிலை இடமாக சேர்க்கவும்</string>
     <string name="start_point">தொடங்கு</string>
     <string name="shared_string_speed">வேகம்</string>
+    <string name="show_poi_over_map">POI மேலடுக்கு காட்டு</string>
 </resources>
