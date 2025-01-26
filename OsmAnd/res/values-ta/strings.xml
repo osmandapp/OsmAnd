@@ -2941,4 +2941,5 @@
     <string name="no_bt_permission">ஊடலை இசைவு வழங்கப்படவில்லை</string>
     <string name="purchases_feature_desc_external_sensors">வெளிப்புற சென்சார்களிடமிருந்து தரவைக் காண்பி பதிவுசெய்க: சைக்கிள் விரைவு, சைக்கிள் ஆற்றல், கேடென்ச் மற்றும் இதய துடிப்பு.</string>
     <string name="external_sensors_support">வெளிப்புற சென்சார்கள் உதவி</string>
+    <string name="learn_more_about_sensors_link">சென்சார்கள் பற்றி மேலும் அறிக.</string>
 </resources>
