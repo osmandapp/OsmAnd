@@ -1506,4 +1506,5 @@
     <string name="report_an_issues">ஒரு சிக்கலைப் புகாரளிக்கவும்</string>
     <string name="rotate_map_to">வரைபட நோக்குநிலை</string>
     <string name="rotate_map_compass_opt">திசைகாட்டி திசை</string>
+    <string name="rotate_map_bearing_opt">இயக்கம் திசை</string>
 </resources>
