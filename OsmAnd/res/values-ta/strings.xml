@@ -2265,4 +2265,5 @@
     <string name="upload_to_openstreetmap">OpenStreetMap இல் பதிவேற்றவும்</string>
     <string name="edit_track">தடத்தைத் திருத்து</string>
     <string name="shared_string_language">மொழி</string>
+    <string name="shared_string_get">பெறுங்கள்</string>
 </resources>
