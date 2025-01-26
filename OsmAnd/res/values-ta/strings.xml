@@ -1886,4 +1886,5 @@
     <string name="backup_and_restore">காப்புப்பிரதி மற்றும் மீட்டமை</string>
     <string name="shared_string_skip">தவிர்</string>
     <string name="map_locale">வரைபட மொழி</string>
+    <string name="shared_string_location">இடம்</string>
 </resources>
