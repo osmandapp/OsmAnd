@@ -1746,4 +1746,5 @@
     <string name="shared_string_paused">இடைநிறுத்தப்பட்டது</string>
     <string name="shared_string_undefined">வரையறுக்கப்படவில்லை</string>
     <string name="shared_string_custom">தனிப்பயன்</string>
+    <string name="shared_string_done">முடிந்தது</string>
 </resources>
