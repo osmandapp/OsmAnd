@@ -2532,4 +2532,5 @@
     <string name="routing_attr_allow_private_name">தனியார் அணுகலை அனுமதிக்கவும்</string>
     <string name="routing_attr_allow_private_for_truck_name">தனியார் அணுகலை அனுமதிக்கவும் (டிரக்)</string>
     <string name="private_access_routing_req">உங்கள் இலக்கு தனியார் அணுகல் கொண்ட பகுதியில் அமைந்துள்ளது. இந்த பயணத்திற்கு தனியார் சாலைகளைப் பயன்படுத்த அனுமதிக்கவா?</string>
+    <string name="routeInfo_tracktype_name">மேற்பரப்பு உறுதியானது</string>
 </resources>
