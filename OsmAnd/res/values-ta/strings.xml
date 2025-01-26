@@ -1625,4 +1625,5 @@
     <string name="show_compass_ruler">திசைகாட்டி ஆட்சியாளரைக் காட்டு</string>
     <string name="hide_compass_ruler">திசைகாட்டி ஆட்சியாளரை மறைக்கவும்</string>
     <string name="map_widget_distance_by_tap">குழாய் மூலம் தூரம்</string>
+    <string name="map_widget_rendering_fps">வரைபட வழங்கும் FPS</string>
 </resources>
