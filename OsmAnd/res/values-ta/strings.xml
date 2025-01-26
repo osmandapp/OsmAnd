@@ -2306,4 +2306,5 @@
     <string name="weather_pressure_hectopascals">எக்டோபாச்கல்கள்</string>
     <string name="weather_pressure_millimeters_of_mercury">அறிவன் மில்லிமீட்டர்</string>
     <string name="weather_pressure_inches_of_mercury">பாதரசத்தின் அங்குலங்கள்</string>
+    <string name="weather_wind_kilimeters_per_hour">ஒரு மணி நேரத்திற்கு கிலோமீட்டர்</string>
 </resources>
