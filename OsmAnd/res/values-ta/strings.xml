@@ -1810,4 +1810,5 @@
     <string name="shared_string_trash">குப்பை</string>
     <string name="shared_string_delete_immediately">உடனடியாக நீக்கு</string>
     <string name="shared_string_delete_item">உருப்படியை நீக்கு</string>
+    <string name="shared_string_deleting">நீக்குதல்</string>
 </resources>
