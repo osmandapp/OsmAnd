@@ -1756,4 +1756,5 @@
     <string name="shared_string_modify">மாற்றவும்</string>
     <string name="first_time_continue">பின்னர்</string>
     <string name="shared_string_time">நேரம்</string>
+    <string name="time_of_day">நாள் நேரம்</string>
 </resources>
