@@ -1840,4 +1840,5 @@
     <string name="not_specified">குறிப்பிடப்படவில்லை</string>
     <string name="import_export">இறக்குமதி/ஏற்றுமதி</string>
     <string name="import_tracks">தடங்களை இறக்குமதி செய்யுங்கள்</string>
+    <string name="gpx_parse_error">சி.பி.எக்ச் கோப்பில் காணப்படும் சிக்கல்கள்.\n\n விசாரிக்க நீங்கள் ஒச்மண்ட் ஆதரவை தொடர்பு கொள்ளலாம்.</string>
 </resources>
