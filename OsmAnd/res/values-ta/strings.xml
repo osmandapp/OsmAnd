@@ -2078,4 +2078,5 @@
     <string name="srtm_download_list_help_message">OSMAND மீட்டர் மற்றும் கால்களில் விளிம்பு வரி தரவை வழங்குகிறது. வடிவமைப்பை மாற்ற நீங்கள் கோப்பை மீண்டும் ஏற்ற வேண்டும்.</string>
     <string name="shared_string_meters">மீட்டர்</string>
     <string name="shared_string_feet">அடி</string>
+    <string name="disable_vertex_hillshade_3d">3d இல் வெர்டெக்ச் இல்சேட்டை முடக்கு</string>
 </resources>
