@@ -2387,4 +2387,5 @@
     <string name="activity_type_cycling_name">சைக்கிள் ஓட்டுதல்</string>
     <string name="activity_type_mountainbike_name">மலை பைக்</string>
     <string name="activity_type_racing_name">பந்தய</string>
+    <string name="activity_type_riding_name">சவாரி</string>
 </resources>
