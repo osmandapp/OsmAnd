@@ -2857,4 +2857,5 @@
     <string name="routing_attr_avoid_footways_description">பாதைகளைத் தவிர்க்கவும்</string>
     <string name="routing_attr_avoid_fords_name">ஃபோர்ட்களைத் தவிர்க்கவும்</string>
     <string name="rendering_attr_horseScale_name">குதிரை பாதைகளின் தொல்லை</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">குறிப்பு குறிச்சொற்களைக் காட்டு</string>
 </resources>
