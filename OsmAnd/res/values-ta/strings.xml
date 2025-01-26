@@ -2148,4 +2148,5 @@
     <string name="map_widget_parking">பார்க்கிங்</string>
     <string name="quick_action_auto_zoom">ஆட்டோ-சூம் வரைபடம்</string>
     <string name="quick_action_switch_night_mode">இரவு முறை</string>
+    <string name="quick_action_switch_day_mode">நாள் பயன்முறை</string>
 </resources>
