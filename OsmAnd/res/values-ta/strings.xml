@@ -3024,4 +3024,5 @@
     <string name="rendering_value_defaultMedium_name">இயல்புநிலை (நடுத்தர)</string>
     <string name="routing_attr_allow_via_ferrata_name">மலையக பாதை (ஃபெராட்டா வழியாக)</string>
     <string name="routing_attr_hazmat_category_usa_3_name">எரியக்கூடிய திரவங்கள்</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">அரிக்கும் பொருட்கள்</string>
 </resources>
