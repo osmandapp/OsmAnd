@@ -2962,4 +2962,5 @@
     <string name="external_device_menu_forget">மறந்துவிடு</string>
     <string name="external_device_characteristic_cadence">காடென்ச்</string>
     <string name="external_device_characteristic_speed">வேகம்</string>
+    <string name="external_device_characteristic_distance">தூரம்</string>
 </resources>
