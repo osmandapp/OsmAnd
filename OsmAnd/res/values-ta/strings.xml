@@ -2874,4 +2874,5 @@
     <string name="routing_attr_difficulty_preference_intermediate_name">இடைநிலை</string>
     <string name="rendering_attr_horse_scale_demanding_name">கோரிக்கை</string>
     <string name="routing_attr_allow_streams_description">நீரோடைகள் மற்றும் வடிகால்களை அனுமதிக்கவும்</string>
+    <string name="routing_attr_allow_intermittent_name">இடைப்பட்ட நீர் வழிகளை அனுமதிக்கவும்</string>
 </resources>
