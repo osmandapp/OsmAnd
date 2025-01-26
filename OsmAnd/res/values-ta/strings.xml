@@ -2525,4 +2525,5 @@
     <string name="rendering_attr_depthContourColorScheme_name">வரி வண்ணத் திட்டம்</string>
     <string name="rendering_attr_piste_difficulty_freeride_name">ஃப்ரீரைடு</string>
     <string name="routeInfo_steepness_name">செங்குத்தானது</string>
+    <string name="rendering_attr_smoothness_very_bad_name">மிகவும் மோசமானது</string>
 </resources>
