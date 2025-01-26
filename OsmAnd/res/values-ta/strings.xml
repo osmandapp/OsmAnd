@@ -1533,4 +1533,5 @@
     <string name="map_widget_camera_distance_desc">மேற்பரப்பு மட்டத்திற்கு மேலே கேமரா உயரத்தைக் காட்டுகிறது.</string>
     <string name="map_widget_zoom_level_desc">தற்போதைய வரைபட சூம் அளவைக் காட்டுகிறது.</string>
     <string name="map_widget_target_distance_desc">கேமரா மற்றும் இலக்கு இருப்பிடத்திற்கு இடையிலான தூரத்தைக் காட்டுகிறது.</string>
+    <string name="av_notes_photo_widget_desc">விட்செட்டைத் தட்டினால் புகைப்படம் எடுக்க உங்களை அனுமதிக்கிறது.</string>
 </resources>
