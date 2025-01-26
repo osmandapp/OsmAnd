@@ -2670,4 +2670,5 @@
     <string name="app_mode_offroad">ஆஃப்ரோட்</string>
     <string name="app_mode_camper">கேம்பர்</string>
     <string name="app_mode_campervan">கேம்பர்வன் (ஆர்.வி)</string>
+    <string name="app_mode_wagon">வேகன்</string>
 </resources>
