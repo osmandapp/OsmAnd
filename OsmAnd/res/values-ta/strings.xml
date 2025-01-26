@@ -1586,4 +1586,5 @@
     <string name="weather_widgets_secondary_desc">வானிலை சொருகி அமைப்புகளில் அளவீட்டு அலகுகளை மாற்றலாம்.</string>
     <string name="compass_on_circles">வட்டங்களில் திசைகாட்டி</string>
     <string name="add_page">பக்கத்தைச் சேர்க்கவும்</string>
+    <string name="add_row">வரிசையைச் சேர்க்கவும்</string>
 </resources>
