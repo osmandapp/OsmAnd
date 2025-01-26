@@ -2490,4 +2490,5 @@
     <string name="routing_attr_piste_type_downhill_description">ஆல்பைன் அல்லது கீழ்நோக்கி பனிச்சறுக்கு மற்றும் ச்கை லிஃப்ட் அணுகலுக்கான சரிவுகள்.</string>
     <string name="rendering_attr_hideWaterPolygons_name">தண்ணீரை மறைக்க</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
+    <string name="rendering_attr_piste_type_skitour_name">ச்கை டூர்</string>
 </resources>
