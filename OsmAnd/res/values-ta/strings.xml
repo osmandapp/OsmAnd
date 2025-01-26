@@ -3048,4 +3048,5 @@
     <string name="shared_string_scale">அளவு</string>
     <string name="required_maps">தேவையான வரைபடங்கள்</string>
     <string name="calculate_online">ஆன்லைனில் கணக்கிடுங்கள்</string>
+    <string name="missing_maps_ignore">பதிவிறக்கம் செய்யப்பட்ட வரைபடங்களைப் பயன்படுத்தவும்</string>
 </resources>
