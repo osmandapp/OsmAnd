@@ -2340,4 +2340,5 @@
     <string name="city_type_hamlet">குக்கிராமம்</string>
     <string name="city_type_village">சிற்றூர்</string>
     <string name="city_type_town">நகரம்</string>
+    <string name="city_type_city">நகரம்</string>
 </resources>
