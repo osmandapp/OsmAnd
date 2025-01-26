@@ -3053,4 +3053,5 @@
     <string name="track_vertical_exaggeration_description">அளவிலான மதிப்பை மாற்றுவதன் மூலம், நீங்கள் 3D டிராக் உயரத்தை மாற்றலாம்.</string>
     <string name="fixed_height">நிலையான உயரம்</string>
     <string name="downward_gradient">கீழ்நோக்கி சாய்வு</string>
+    <string name="upward_gradient">மேல்நோக்கி சாய்வு</string>
 </resources>
