@@ -3063,4 +3063,5 @@
     <string name="shared_string_limit">வரம்பு</string>
     <string name="custom_buttons">தனிப்பயன் பொத்தான்கள்</string>
     <string name="default_buttons">இயல்புநிலை பொத்தான்கள்</string>
+    <string name="add_button">பொத்தானைச் சேர்க்கவும்</string>
 </resources>
