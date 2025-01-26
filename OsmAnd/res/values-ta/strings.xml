@@ -1699,4 +1699,5 @@
     <string name="transfers">இடமாற்றங்கள்</string>
     <string name="error_calculating_route">வழியைக் கணக்கிட முடியவில்லை.</string>
     <string name="empty_route_calculated">கணக்கிடப்பட்ட பாதை காலியாக உள்ளது.</string>
+    <string name="arrived_at_intermediate_point">இடைநிலை இலக்கு அடைந்தது</string>
 </resources>
