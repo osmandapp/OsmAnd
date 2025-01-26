@@ -1647,4 +1647,5 @@
     <string name="tts_title">Tts</string>
     <string name="shared_string_symbol">அடையாளம்</string>
     <string name="general_settings">பொது</string>
+    <string name="general_settings_descr">பயன்பாட்டிற்கான காட்சி மற்றும் பொதுவான அமைப்புகளை அமைக்கவும்.</string>
 </resources>
