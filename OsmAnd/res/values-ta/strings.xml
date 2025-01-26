@@ -2568,4 +2568,5 @@
     <string name="rendering_value_yellow_name">மஞ்சள்</string>
     <string name="routing_attr_allow_private_description">தனியார் பகுதிகளுக்கான அணுகலை அனுமதிக்கவும்.</string>
     <string name="routing_attr_allow_private_for_truck_description">லாரிகளுக்கு தனியார் பகுதிகளுக்கு அணுக அனுமதிக்கவும்.</string>
+    <string name="rendering_attr_alpineHiking_description">வழிகளுக்கான வகைப்பாடு வகைகளில் தொல்லை.</string>
 </resources>
