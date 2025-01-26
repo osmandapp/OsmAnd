@@ -2023,4 +2023,5 @@
     <string name="base_profile_descr_boat">கப்பல், ரோயிங், படகோட்டம்</string>
     <string name="base_profile_descr_aircraft">வானூர்தி, சறுக்குதல்</string>
     <string name="profile_prefs_reset_successful">அனைத்து சுயவிவர அமைப்புகளும் இயல்புநிலைக்கு மீட்டெடுக்கப்படுகின்றன.</string>
+    <string name="profile_type_base_string">அடிப்படை சுயவிவரம்</string>
 </resources>
