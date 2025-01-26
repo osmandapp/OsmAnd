@@ -1667,4 +1667,5 @@
     <string name="choose_auto_follow_route">ஆட்டோ-சென்டர் வரைபடக் காட்சி</string>
     <string name="choose_auto_follow_route_descr">வரைபடக் காட்சி தற்போதைய நிலையுடன் ஒத்திசைக்கும் வரை நேரம்.</string>
     <string name="auto_zoom_map">ஆட்டோ சூம் வரைபடம்</string>
+    <string name="auto_zoom_map_descr">உங்கள் வேகத்திற்கு ஏற்ப பெரிதாக்க நிலை (வரைபடம் தற்போதைய நிலையுடன் ஒத்திசைக்கப்படும் போது).</string>
 </resources>
