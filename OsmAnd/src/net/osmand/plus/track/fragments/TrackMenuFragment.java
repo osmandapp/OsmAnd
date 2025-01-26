@@ -63,7 +63,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
-import net.osmand.PlatformUtil;
 import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
