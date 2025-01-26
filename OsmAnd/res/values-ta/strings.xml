@@ -2610,4 +2610,5 @@
     <string name="rendering_attr_surface_asphalt_name">நிலக்கீல்</string>
     <string name="rendering_value_translucent_orange_name">கசியும் ஆரஞ்சு</string>
     <string name="rendering_attr_depthContours_description">ஆழமான வரையறைகளையும் புள்ளிகளையும் காட்டு.</string>
+    <string name="rendering_value_thick_name">அடர்த்தியான</string>
 </resources>
