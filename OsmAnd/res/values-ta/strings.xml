@@ -2709,4 +2709,5 @@
     <string name="shared_string_cloud">முகில்</string>
     <string name="new_file">புதிய கோப்பு</string>
     <string name="modified_file">மாற்றியமைக்கப்பட்ட கோப்பு</string>
+    <string name="deleted_file">நீக்கப்பட்ட கோப்பு</string>
 </resources>
