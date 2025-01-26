@@ -2613,4 +2613,5 @@
     <string name="rendering_value_thick_name">அடர்த்தியான</string>
     <string name="routing_attr_avoid_ferry_name">படகுகள் இல்லை</string>
     <string name="routing_attr_width_name">அகலம்</string>
+    <string name="routing_attr_avoid_train_name">ரயில்கள் இல்லை</string>
 </resources>
