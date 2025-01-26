@@ -2393,4 +2393,5 @@
     <string name="activity_type_water_name">நீர்</string>
     <string name="rendering_attr_showMtbScale_name">MTB அளவைக் காட்டு</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">MTB IMBA தடங்களைக் காட்டு</string>
+    <string name="mtb_imba_full">பன்னாட்டு மலை சைக்கிள் சங்கம்</string>
 </resources>
