@@ -9,11 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
 
 import com.google.android.material.slider.Slider;
 
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
@@ -24,9 +24,13 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
+import net.osmand.plus.utils.UiUtilities;
 
-public class WakeTimeBottomSheet extends BasePreferenceBottomSheet {
+import java.util.Optional;
+
+public class WakeTimeBottomSheet extends BasePreferenceBottomSheet implements SearchablePreferenceDialog {
 
 	public static final String TAG = WakeTimeBottomSheet.class.getSimpleName();
 
@@ -64,8 +68,8 @@ public class WakeTimeBottomSheet extends BasePreferenceBottomSheet {
 				.create();
 		items.add(preferenceDescription);
 
-		String on = getString(R.string.keep_screen_on);
-		String off = getString(R.string.keep_screen_on); // also needs to say 'on' the way the dialog is designed.
+		String on = getKeepScreenOn();
+		String off = getKeepScreenOn(); // also needs to say 'on' the way the dialog is designed.
 		BottomSheetItemWithCompoundButton[] preferenceBtn = new BottomSheetItemWithCompoundButton[1];
 		preferenceBtn[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(keepScreenOnEnabled)
@@ -93,8 +97,6 @@ public class WakeTimeBottomSheet extends BasePreferenceBottomSheet {
 
 		sliderView = UiUtilities.getInflater(ctx, nightMode).inflate(R.layout.bottom_sheet_item_slider_with_two_text, null);
 		AndroidUiHelper.updateVisibility(sliderView, !keepScreenOnEnabled);
-
-		Context themedCtx = UiUtilities.getThemedContext(ctx, nightMode);
 
 		TextView tvSliderTitle = sliderView.findViewById(android.R.id.title);
 		tvSliderTitle.setText(getString(R.string.wake_time));
@@ -125,17 +127,26 @@ public class WakeTimeBottomSheet extends BasePreferenceBottomSheet {
 				.create());
 
 		BaseBottomSheetItem timeoutDescription = new BottomSheetItemWithDescription.Builder()
-				.setDescription(getString(R.string.screen_timeout_descr, getString(R.string.system_screen_timeout)))
+				.setDescription(getTimeoutDescription())
 				.setLayoutId(R.layout.bottom_sheet_item_descr)
 				.create();
 		items.add(timeoutDescription);
 	}
 
+	@NonNull
+	private String getKeepScreenOn() {
+		return getString(R.string.keep_screen_on);
+	}
+
+	@NonNull
+	private String getTimeoutDescription() {
+		return getString(R.string.screen_timeout_descr, getString(R.string.system_screen_timeout));
+	}
+
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		for (BaseBottomSheetItem item : items) {
-			if (item instanceof BottomSheetItemWithCompoundButton) {
-				BottomSheetItemWithCompoundButton itemWithCompoundButton = (BottomSheetItemWithCompoundButton) item;
+			if (item instanceof final BottomSheetItemWithCompoundButton itemWithCompoundButton) {
 				itemWithCompoundButton.getCompoundButton().setSaveEnabled(false);
 			}
 		}
@@ -181,24 +192,28 @@ public class WakeTimeBottomSheet extends BasePreferenceBottomSheet {
 		return (ListPreferenceEx) getPreference();
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String prefId, Fragment target, boolean usedOnMap,
-	                                   @Nullable ApplicationMode appMode, ApplyQueryType applyQueryType,
-	                                   boolean profileDependent) {
-		try {
-			Bundle args = new Bundle();
-			args.putString(PREFERENCE_ID, prefId);
+	@NonNull
+	public static WakeTimeBottomSheet createInstance(final Preference preference,
+													 final Optional<Fragment> target,
+													 final boolean usedOnMap,
+													 final @Nullable ApplicationMode appMode,
+													 final ApplyQueryType applyQueryType,
+													 final boolean profileDependent) {
+		final WakeTimeBottomSheet bottomSheet = new WakeTimeBottomSheet();
+		bottomSheet.setApplyQueryType(applyQueryType);
+		bottomSheet.setProfileDependent(profileDependent);
+		return BasePreferenceBottomSheetInitializer
+				.initialize(bottomSheet)
+				.with(Optional.of(preference), appMode, usedOnMap, target);
+	}
 
-			WakeTimeBottomSheet fragment = new WakeTimeBottomSheet();
-			fragment.setArguments(args);
-			fragment.setUsedOnMap(usedOnMap);
-			fragment.setAppMode(appMode);
-			fragment.setApplyQueryType(applyQueryType);
-			fragment.setTargetFragment(target, 0);
-			fragment.setProfileDependent(profileDependent);
-			fragment.show(fragmentManager, TAG);
-			return true;
-		} catch (RuntimeException e) {
-			return false;
-		}
+	@Override
+	public void show(final FragmentManager fragmentManager) {
+		show(fragmentManager, TAG);
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		return String.join(", ", getKeepScreenOn(), getTimeoutDescription());
 	}
 }

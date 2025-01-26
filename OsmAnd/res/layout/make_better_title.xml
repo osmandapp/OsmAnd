@@ -14,6 +14,7 @@
 		app:srcCompat="@drawable/img_feedback" />
 
 	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/titleTop"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:gravity="center"
@@ -28,6 +29,7 @@
 		android:paddingEnd="@dimen/content_padding" />
 
 	<TextView
+		android:id="@+id/titleMiddle"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:paddingLeft="@dimen/content_padding"
@@ -39,6 +41,7 @@
 		android:paddingEnd="@dimen/content_padding" />
 
 	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/titleBottom"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="@dimen/dialog_content_margin"

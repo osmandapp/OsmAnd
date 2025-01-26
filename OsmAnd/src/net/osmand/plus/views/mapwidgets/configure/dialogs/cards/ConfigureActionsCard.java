@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
@@ -53,8 +54,9 @@ public class ConfigureActionsCard extends MapBaseCard {
 		button.setOnClickListener(v -> {
 			FragmentManager manager = target.getFragmentManager();
 			if (manager != null) {
-				ApplicationMode appMode = settings.getApplicationMode();
-				SelectCopyAppModeBottomSheet.showInstance(manager, target, appMode);
+				SelectCopyAppModeBottomSheet
+						.createInstance(target, settings.getApplicationMode())
+						.show(manager);
 			}
 		});
 	}
@@ -80,5 +82,19 @@ public class ConfigureActionsCard extends MapBaseCard {
 		ApplicationMode appMode = settings.getApplicationMode();
 		View container = view.findViewById(R.id.container);
 		UiUtilities.setupListItemBackground(app, container, appMode.getProfileColor(nightMode));
+	}
+
+	public String getSearchableInfo() {
+		return String.join(
+				", ",
+				getTitle(R.id.reset_button),
+				getTitle(R.id.copy_button));
+	}
+
+	private CharSequence getTitle(final @IdRes int id) {
+		return view
+				.findViewById(id)
+				.<TextView>findViewById(R.id.title)
+				.getText();
 	}
 }

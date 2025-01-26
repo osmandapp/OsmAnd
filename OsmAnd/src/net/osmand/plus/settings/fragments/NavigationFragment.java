@@ -6,6 +6,7 @@ import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UP
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
 import static net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DIALOG_MODE_KEY;
 import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
+import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -32,9 +33,13 @@ import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
 import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DialogMode;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.util.Algorithms;
 
-public class NavigationFragment extends BaseSettingsFragment implements OnSelectProfileCallback {
+import java.util.Optional;
+
+public class NavigationFragment extends BaseSettingsFragment implements OnSelectProfileCallback, ShowableSearchablePreferenceDialogProvider {
 
 	public static final String TAG = NavigationFragment.class.getSimpleName();
 	public static final String NAVIGATION_TYPE = "navigation_type";
@@ -144,18 +149,37 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 	}
 
 	@Override
-	public boolean onPreferenceClick(Preference preference) {
-		String prefId = preference.getKey();
-		MapActivity activity = getMapActivity();
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Optional<Fragment> target) {
+		return NAVIGATION_TYPE.equals(preference.getKey()) ?
+				Optional.of(
+						new ShowableSearchablePreferenceDialog<>(
+								SelectNavProfileBottomSheet.createInstance(
+										target,
+										getSelectedAppMode(),
+										getSelectedAppMode().getRoutingProfile(),
+										false)) {
+
+							@Override
+							protected void show(final SelectNavProfileBottomSheet selectNavProfileBottomSheet) {
+								selectNavProfileBottomSheet.show(getMapActivity().getSupportFragmentManager());
+							}
+						}) :
+				Optional.empty();
+	}
+
+	@Override
+	public boolean onPreferenceClick(final Preference preference) {
+		if (showDialogForPreference(preference, this)) {
+			return true;
+		}
+		final MapActivity activity = getMapActivity();
 		if (activity != null) {
-			ApplicationMode appMode = getSelectedAppMode();
-			if (NAVIGATION_TYPE.equals(prefId)) {
-				String selected = appMode.getRoutingProfile();
-				SelectNavProfileBottomSheet.showInstance(activity, this, appMode, selected, false);
-			} else if (CUSTOMIZE_ROUTE_LINE.equals(prefId)) {
-				RouteLineAppearanceFragment.showInstance(activity, appMode);
-			} else if (DETAILED_TRACK_GUIDANCE.equals(prefId)) {
-				DetailedTrackGuidanceFragment.showInstance(activity, appMode, this);
+			if (CUSTOMIZE_ROUTE_LINE.equals(preference.getKey())) {
+				RouteLineAppearanceFragment.showInstance(activity, getSelectedAppMode());
+				// TODO: return true because the click was handled?
+			} else if (DETAILED_TRACK_GUIDANCE.equals(preference.getKey())) {
+				DetailedTrackGuidanceFragment.showInstance(activity, getSelectedAppMode(), this);
+				// TODO: return true because the click was handled?
 			}
 		}
 		return false;

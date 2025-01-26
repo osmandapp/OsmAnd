@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@id/searchable_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="some searchable info"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@id/preference_path"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="some preference path"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:visibility="gone" />
+</merge>

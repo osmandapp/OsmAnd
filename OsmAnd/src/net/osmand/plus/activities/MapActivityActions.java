@@ -569,7 +569,9 @@ public class MapActivityActions extends MapActions {
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_config_screen_open");
 					MapActivity.clearPrevActivityIntent();
-					ConfigureScreenFragment.showInstance(activity);
+					ConfigureScreenFragment
+							.createInstance()
+							.show(activity.getSupportFragmentManager());
 					return true;
 				}));
 

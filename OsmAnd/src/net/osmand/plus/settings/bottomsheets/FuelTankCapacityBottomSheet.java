@@ -1,14 +1,15 @@
 package net.osmand.plus.settings.bottomsheets;
 
 import android.annotation.SuppressLint;
-import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -19,6 +20,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.VolumeUnit;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
@@ -32,8 +34,11 @@ import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class FuelTankCapacityBottomSheet extends BaseTextFieldBottomSheet {
+public class FuelTankCapacityBottomSheet extends BaseTextFieldBottomSheet implements SearchablePreferenceDialog {
 	private static final Log LOG = PlatformUtil.getLog(VehicleParametersBottomSheet.class);
 	public static final String TAG = FuelTankCapacityBottomSheet.class.getSimpleName();
 
@@ -77,7 +82,7 @@ public class FuelTankCapacityBottomSheet extends BaseTextFieldBottomSheet {
 
 	@NonNull
 	public List<ChipItem> collectChipItems(@NonNull OsmandApplication app,
-	                                       @NonNull VolumeUnit volumeUnit) {
+										   @NonNull VolumeUnit volumeUnit) {
 		List<ChipItem> chips = new ArrayList<>();
 		String none = app.getString(R.string.shared_string_none);
 		ChipItem chip = new ChipItem(none);
@@ -129,21 +134,34 @@ public class FuelTankCapacityBottomSheet extends BaseTextFieldBottomSheet {
 		return formatter.format(input);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, String key, Fragment target,
-	                                boolean usedOnMap, @Nullable ApplicationMode appMode) {
+	@NonNull
+	public static FuelTankCapacityBottomSheet createInstance(final Preference preference,
+															 final Optional<Fragment> target,
+															 final boolean usedOnMap,
+															 final @Nullable ApplicationMode appMode) {
+		final FuelTankCapacityBottomSheet fragment = new FuelTankCapacityBottomSheet();
+		fragment.setConfigureSettingsSearch(target.isEmpty());
+		return BasePreferenceBottomSheetInitializer
+				.initialize(fragment)
+				.with(Optional.of(preference), appMode, usedOnMap, target);
+	}
+
+	@Override
+	public void show(final FragmentManager fragmentManager) {
 		try {
-			if (!fm.isStateSaved()) {
-				Bundle args = new Bundle();
-				args.putString(PREFERENCE_ID, key);
-				FuelTankCapacityBottomSheet fragment = new FuelTankCapacityBottomSheet();
-				fragment.setArguments(args);
-				fragment.setUsedOnMap(usedOnMap);
-				fragment.setAppMode(appMode);
-				fragment.setTargetFragment(target, 0);
-				fragment.show(fm, TAG);
+			if (!fragmentManager.isStateSaved()) {
+				show(fragmentManager, TAG);
 			}
-		} catch (RuntimeException e) {
+		} catch (final RuntimeException e) {
 			LOG.error("showInstance", e);
 		}
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		return Stream
+				.of(title, tvDescription)
+				.map(TextView::getText)
+				.collect(Collectors.joining(", "));
 	}
 }

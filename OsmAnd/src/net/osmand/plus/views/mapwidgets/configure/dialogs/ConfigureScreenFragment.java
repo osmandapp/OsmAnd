@@ -30,6 +30,7 @@ import net.osmand.plus.quickaction.MapButtonsHelper.QuickActionUpdatesListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
@@ -49,7 +50,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConfigureScreenFragment extends BaseOsmAndFragment implements QuickActionUpdatesListener,
-		WidgetsRegistryListener, ConfirmationDialogListener, CopyAppModePrefsListener {
+		WidgetsRegistryListener, ConfirmationDialogListener, CopyAppModePrefsListener, SearchablePreferenceDialog {
 
 	public static final String TAG = ConfigureScreenFragment.class.getSimpleName();
 
@@ -376,14 +377,30 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentActivity activity) {
-		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+	public static ConfigureScreenFragment createInstance() {
+		return new ConfigureScreenFragment();
+	}
+
+	@Override
+	public void show(final FragmentManager fragmentManager) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			ConfigureScreenFragment fragment = new ConfigureScreenFragment();
-			fragmentManager.beginTransaction()
-					.add(R.id.fragmentContainer, fragment, TAG)
+			fragmentManager
+					.beginTransaction()
+					.add(R.id.fragmentContainer, this, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 		}
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		// FK-TODO: add more searchable info
+		return String.join(
+				", ",
+				getString(R.string.configure_screen_widgets_descr),
+				widgetsCard.getSearchableInfo(),
+				buttonsCard.getSearchableInfo(),
+				otherCard.getSearchableInfo(),
+				actionsCard.getSearchableInfo());
 	}
 }

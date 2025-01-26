@@ -225,7 +225,9 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 	private void copyFromProfile() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			SelectCopyAppModeBottomSheet.showInstance(activity.getSupportFragmentManager(), this, selectedAppMode);
+			SelectCopyAppModeBottomSheet
+					.createInstance(this, selectedAppMode)
+					.show(activity.getSupportFragmentManager());
 		}
 	}
 

@@ -71,6 +71,7 @@ import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
+import net.osmand.plus.settings.fragments.search.SettingsSearchInitializer;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -126,6 +127,7 @@ public class AppInitializer implements IProgress {
 	private boolean routingConfigInitialized;
 	private String taskName;
 	private SharedPreferences startPrefs;
+	private SettingsSearchInitializer settingsSearchInitializer;
 
 	public interface LoadRoutingFilesCallback {
 		void onRoutingFilesLoaded();
@@ -277,6 +279,8 @@ public class AppInitializer implements IProgress {
 		} else {
 			settings.setApplicationMode(settings.DEFAULT_APPLICATION_MODE.get());
 		}
+		settingsSearchInitializer = new SettingsSearchInitializer(app);
+		settingsSearchInitializer.rebuildSearchDatabaseOnAppProfileChanged();
 		startTime = System.currentTimeMillis();
 		getLazyRoutingConfig();
 		app.applyTheme(app);
@@ -542,6 +546,7 @@ public class AppInitializer implements IProgress {
 			}
 		}
 	}
+
 	private void checkLiveUpdatesAlerts() {
 		OsmandSettings settings = app.getSettings();
 		if (InAppPurchaseUtils.isLiveUpdatesAvailable(app) && settings.IS_LIVE_UPDATES_ON.get()) {

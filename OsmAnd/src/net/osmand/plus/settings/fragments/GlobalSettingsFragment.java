@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
@@ -32,14 +33,17 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.DataStorageHelper;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.settings.enums.LocationSource;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 import java.util.Map;
+import java.util.Optional;
 
 
 public class GlobalSettingsFragment extends BaseSettingsFragment
-		implements OnSendAnalyticsPrefsUpdate, OnSelectProfileCallback {
+		implements OnSendAnalyticsPrefsUpdate, OnSelectProfileCallback, ShowableSearchablePreferenceDialogProvider {
 
 	public static final String TAG = GlobalSettingsFragment.class.getSimpleName();
 
@@ -68,21 +72,83 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	}
 
 	@Override
-	public void onDisplayPreferenceDialog(Preference preference) {
-		String prefId = preference.getKey();
-
-		if (prefId.equals(SEND_ANONYMOUS_DATA_PREF_ID)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				SendAnalyticsBottomSheetDialogFragment.showInstance(app, fragmentManager, this);
-			}
-		} else {
-			super.onDisplayPreferenceDialog(preference);
+	public void onDisplayPreferenceDialog(final Preference preference) {
+		if (isSendAnonymousData(preference)) {
+			createSendAnonymousDataPreferenceDialog(Optional.of(this)).show();
 		}
 	}
 
 	@Override
-	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Optional<Fragment> target) {
+		if (isSendAnonymousData(preference)) {
+			return Optional.of(createSendAnonymousDataPreferenceDialog(target));
+		}
+		if (isSelectDefaultProfile(preference)) {
+			return Optional.of(createSelectDefaultProfilePreferenceDialog(target));
+		}
+		if (isMapRenderingEngine(preference)) {
+			return Optional.of(createMapRenderingEngineDialog());
+		}
+		return Optional.empty();
+	}
+
+	private static boolean isSendAnonymousData(final Preference preference) {
+		return SEND_ANONYMOUS_DATA_PREF_ID.equals(preference.getKey());
+	}
+
+	private ShowableSearchablePreferenceDialog<SendAnalyticsBottomSheetDialogFragment> createSendAnonymousDataPreferenceDialog(final Optional<Fragment> target) {
+		return new ShowableSearchablePreferenceDialog<>(SendAnalyticsBottomSheetDialogFragment.createInstance(target.orElse(null))) {
+
+			@Override
+			protected void show(final SendAnalyticsBottomSheetDialogFragment sendAnalyticsBottomSheetDialogFragment) {
+				final FragmentManager fragmentManager = getFragmentManager();
+				if (fragmentManager != null) {
+					sendAnalyticsBottomSheetDialogFragment.show(fragmentManager);
+				}
+			}
+		};
+	}
+
+	private boolean isSelectDefaultProfile(final Preference preference) {
+		return settings.DEFAULT_APPLICATION_MODE.getId().equals(preference.getKey());
+	}
+
+	private ShowableSearchablePreferenceDialog<SelectDefaultProfileBottomSheet> createSelectDefaultProfilePreferenceDialog(final Optional<Fragment> target) {
+		return new ShowableSearchablePreferenceDialog<>(
+				SelectDefaultProfileBottomSheet.createInstance(
+						target,
+						getSelectedAppMode(),
+						settings.DEFAULT_APPLICATION_MODE.get().getStringKey(),
+						false)) {
+
+			@Override
+			protected void show(final SelectDefaultProfileBottomSheet selectDefaultProfileBottomSheet) {
+				selectDefaultProfileBottomSheet.show(requireActivity().getSupportFragmentManager());
+			}
+		};
+	}
+
+	private static boolean isMapRenderingEngine(final Preference preference) {
+		return MAP_RENDERING_ENGINE_ID.equals(preference.getKey());
+	}
+
+	private ShowableSearchablePreferenceDialog<MapRenderingEngineDialog> createMapRenderingEngineDialog() {
+		return new ShowableSearchablePreferenceDialog<>(
+				new MapRenderingEngineDialog(
+						app,
+						getActivity(),
+						this::setupMapRenderingEnginePref)) {
+
+			@Override
+			protected void show(final MapRenderingEngineDialog mapRenderingEngineDialog) {
+				mapRenderingEngineDialog.show(getParentFragmentManager());
+			}
+		};
+	}
+
+	@Override
+	protected void onBindPreferenceViewHolder(@NonNull Preference preference,
+											  @NonNull PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
 
 		String prefId = preference.getKey();
@@ -128,7 +194,9 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 				if (enabled) {
 					FragmentManager fragmentManager = getFragmentManager();
 					if (fragmentManager != null) {
-						SendAnalyticsBottomSheetDialogFragment.showInstance(app, fragmentManager, this);
+						SendAnalyticsBottomSheetDialogFragment
+								.createInstance(this)
+								.show(fragmentManager);
 					}
 				} else {
 					settings.SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.set(false);
@@ -168,26 +236,28 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	}
 
 	@Override
-	public boolean onPreferenceClick(Preference preference) {
+	public boolean onPreferenceClick(final Preference preference) {
 		String prefId = preference.getKey();
-		if (prefId.equals(settings.DEFAULT_APPLICATION_MODE.getId())) {
-			if (getActivity() != null) {
-				String defaultModeKey = settings.DEFAULT_APPLICATION_MODE.get().getStringKey();
-				SelectDefaultProfileBottomSheet.showInstance(
-						getActivity(), this, getSelectedAppMode(), defaultModeKey, false);
-			}
+		if (isSelectDefaultProfile(preference)) {
+			this
+					.createSelectDefaultProfilePreferenceDialog(Optional.of(this))
+					.show();
+			return true;
 		} else if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(prefId) && !settings.SPEED_CAMERAS_UNINSTALLED.get()) {
 			FragmentManager manager = getFragmentManager();
 			if (manager != null) {
 				SpeedCamerasBottomSheet.showInstance(manager, this);
+				return true;
 			}
-		} else if (prefId.equals(settings.LOCATION_SOURCE.getId())) {
+		} else if (settings.LOCATION_SOURCE.getId().equals(prefId)) {
 			FragmentManager manager = getFragmentManager();
 			if (manager != null) {
 				LocationSourceBottomSheet.showInstance(manager, this);
+				return true;
 			}
-		} else if (prefId.equals(MAP_RENDERING_ENGINE_ID)) {
-			new MapRenderingEngineDialog(app, getActivity()).showDialog(this::setupMapRenderingEnginePref);
+		} else if (isMapRenderingEngine(preference)) {
+			createMapRenderingEngineDialog().show();
+			return true;
 		}
 
 		return super.onPreferenceClick(preference);

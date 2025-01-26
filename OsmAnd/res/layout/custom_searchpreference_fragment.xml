@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/windowBackground"
+    android:clipToPadding="false">
+
+    <include
+        android:id="@+id/searchView"
+        layout="@layout/searchpreference_searchbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/searchResultsFragmentContainerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/search_inside_disabled_profiles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/search_inside_disabled_profiles"
+        app:layout_constraintBottom_toTopOf="@+id/searchResultsFragmentContainerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/searchResultsFragmentContainerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_inside_disabled_profiles" />
+
+    <include
+        android:id="@+id/progressContainerCustom"
+        layout="@layout/progress_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationZ="2dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/searchResultsFragmentContainerView"
+        app:layout_constraintEnd_toEndOf="@+id/searchResultsFragmentContainerView"
+        app:layout_constraintStart_toStartOf="@+id/searchResultsFragmentContainerView"
+        app:layout_constraintTop_toTopOf="@+id/searchResultsFragmentContainerView" />
+</androidx.constraintlayout.widget.ConstraintLayout>

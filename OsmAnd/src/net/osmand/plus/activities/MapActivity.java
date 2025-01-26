@@ -25,6 +25,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -105,7 +106,9 @@ import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomiz
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.MainSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
+import net.osmand.plus.settings.fragments.search.SettingsSearchButtonHelper;
 import net.osmand.plus.simulation.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.simulation.SimulatedLocation;
@@ -135,10 +138,15 @@ import org.apache.commons.logging.Log;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import de.KnollFrank.lib.settingssearch.client.CreateSearchDatabaseTaskProvider;
+import de.KnollFrank.lib.settingssearch.common.task.AsyncTaskWithProgressUpdateListeners;
+import de.KnollFrank.lib.settingssearch.common.task.Tasks;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		IRouteInformationListener, AMapPointUpdateListener, MapMarkerChangedListener,
@@ -159,6 +167,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private static final TrackDetailsMenu trackDetailsMenu = new TrackDetailsMenu();
 	@Nullable
 	private static Intent prevActivityIntent = null;
+
+	private static final @IdRes int FRAGMENT_CONTAINER_VIEW_ID = View.generateViewId();
+	private Optional<AsyncTaskWithProgressUpdateListeners<?>> createSearchDatabaseTask = Optional.empty();
 
 	private final List<ActivityResultListener> activityResultListeners = new ArrayList<>();
 
@@ -335,6 +346,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (!PluginsHelper.isDevelopment() || settings.TRANSPARENT_STATUS_BAR.get()) {
 			AndroidUtils.enterToFullScreen(this, getLayout());
 		}
+	}
+
+	public Optional<AsyncTaskWithProgressUpdateListeners<?>> getCreateSearchDatabaseTask() {
+		return createSearchDatabaseTask;
 	}
 
 	@Override
@@ -693,7 +708,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						BaseSettingsFragment.showInstance(this, SettingsScreenType.DATA_STORAGE, null, args, null);
 					} else {
 						ActivityCompat.requestPermissions(this,
-								new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
+								new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
 								DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
 					}
 				}
@@ -719,7 +734,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (showWelcomeScreen && FirstUsageWizardFragment.showFragment(this)) {
 			SecondSplashScreenFragment.SHOW = false;
 		} else if (SendAnalyticsBottomSheetDialogFragment.shouldShowDialog(app)) {
-			SendAnalyticsBottomSheetDialogFragment.showInstance(app, fragmentManager, null);
+			SendAnalyticsBottomSheetDialogFragment
+					.createInstance(null)
+					.show(fragmentManager);
 		}
 		if (fragmentsHelper.isFirstScreenShowing() && (!settings.SHOW_OSMAND_WELCOME_SCREEN.get() || !showOsmAndWelcomeScreen)) {
 			fragmentsHelper.disableFirstUsageFragment();
@@ -925,6 +942,19 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		lockHelper.onStart();
 		getMyApplication().getNotificationHelper().showNotifications();
 		extendedMapActivity.onStart(this);
+		// FK-FIXME: the following code block makes the magnifying glass freeze when the user clicks on it on installed OsmAnd-nightlyFree-legacy-fat-debug.apk
+//		{
+//			createSearchDatabaseTask =
+//					Optional.of(
+//							CreateSearchDatabaseTaskProvider.getCreateSearchDatabaseTask(
+//									SettingsSearchButtonHelper.createSearchPreferenceFragments(
+//											this::getCreateSearchDatabaseTask,
+//											this,
+//											FRAGMENT_CONTAINER_VIEW_ID,
+//											MainSettingsFragment.class),
+//									this));
+//			Tasks.executeTaskInParallelWithOtherTasks(createSearchDatabaseTask.get());
+//		}
 	}
 
 	@Override

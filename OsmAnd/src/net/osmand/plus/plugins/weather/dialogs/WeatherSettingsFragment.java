@@ -1,5 +1,9 @@
 package net.osmand.plus.plugins.weather.dialogs;
 
+import static net.osmand.plus.settings.fragments.ResetProfilePrefsBottomSheetFactory.createResetProfilePrefsBottomSheet;
+import static net.osmand.plus.settings.fragments.SelectCopyAppModeBottomSheetFactory.createSelectCopyAppModeBottomSheet;
+import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,7 +11,6 @@ import android.view.View.OnClickListener;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceViewHolder;
@@ -23,22 +26,23 @@ import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.plugins.weather.listener.WeatherCacheSizeChangeListener;
 import net.osmand.plus.plugins.weather.units.WeatherUnit;
 import net.osmand.plus.plugins.weather.viewholder.WeatherTotalCacheSizeViewHolder;
-import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.util.CollectionUtils;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class WeatherSettingsFragment extends BaseSettingsFragment implements WeatherCacheSizeChangeListener,
-		CopyAppModePrefsListener, ResetAppModePrefsListener {
+		CopyAppModePrefsListener, ResetAppModePrefsListener, ShowableSearchablePreferenceDialogProvider {
 
 	private static final String WEATHER_ONLINE_CACHE = "weather_online_cache";
 	private static final String WEATHER_OFFLINE_CACHE = "weather_offline_cache";
@@ -162,7 +166,21 @@ public class WeatherSettingsFragment extends BaseSettingsFragment implements Wea
 	}
 
 	@Override
-	public boolean onPreferenceClick(Preference preference) {
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Optional<Fragment> target) {
+		if (RESET_TO_DEFAULT.equals(preference.getKey())) {
+			return Optional.of(createResetProfilePrefsBottomSheet(target, this));
+		}
+		if (COPY_PLUGIN_SETTINGS.equals(preference.getKey())) {
+			return Optional.of(createSelectCopyAppModeBottomSheet(target, this));
+		}
+		return Optional.empty();
+	}
+
+	@Override
+	public boolean onPreferenceClick(final Preference preference) {
+		if (showDialogForPreference(preference, this)) {
+			return true;
+		}
 		String key = preference.getKey();
 		if (WEATHER_ONLINE_CACHE.equals(key) && offlineForecastHelper.canClearOnlineCache()) {
 			Context ctx = getContext();
@@ -170,16 +188,6 @@ public class WeatherSettingsFragment extends BaseSettingsFragment implements Wea
 				WeatherDialogs.showClearOnlineCacheDialog(ctx, isNightMode());
 			}
 			return false;
-		} else if (RESET_TO_DEFAULT.equals(key)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, getSelectedAppMode(), this);
-			}
-		} else if (COPY_PLUGIN_SETTINGS.equals(key)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, getSelectedAppMode());
-			}
 		}
 		return super.onPreferenceClick(preference);
 	}

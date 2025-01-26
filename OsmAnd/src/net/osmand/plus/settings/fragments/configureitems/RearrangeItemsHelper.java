@@ -342,7 +342,9 @@ public class RearrangeItemsHelper implements CopyAppModePrefsListener {
 	public void showCopyAppModeDialog() {
 		FragmentManager manager = fragment.getFragmentManager();
 		if (manager != null) {
-			SelectCopyAppModeBottomSheet.showInstance(manager, fragment, appMode);
+			SelectCopyAppModeBottomSheet
+					.createInstance(fragment, appMode)
+					.show(manager);
 		}
 	}
 

@@ -1,7 +1,8 @@
 package net.osmand.plus.settings.fragments;
 
-import static net.osmand.plus.settings.bottomsheets.DistanceDuringNavigationBottomSheet.*;
+import static net.osmand.plus.settings.bottomsheets.DistanceDuringNavigationBottomSheet.DistanceDuringNavigationMode;
 import static net.osmand.plus.settings.fragments.SettingsScreenType.EXTERNAL_INPUT_DEVICE;
+import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -17,8 +18,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
@@ -33,21 +36,27 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.DistanceDuringNavigationBottomSheet;
 import net.osmand.plus.settings.controllers.CompassModeDialogController;
 import net.osmand.plus.settings.enums.AngularConstants;
-import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.CompassMode;
+import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.VolumeUnit;
-import net.osmand.router.GeneralRouter;
-import net.osmand.shared.settings.enums.MetricsConstants;
-import net.osmand.shared.settings.enums.SpeedConstants;
+import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandler;
+import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandlerProvider;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.router.GeneralRouter;
+import net.osmand.shared.settings.enums.MetricsConstants;
+import net.osmand.shared.settings.enums.SpeedConstants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
-public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
+public class GeneralProfileSettingsFragment extends BaseSettingsFragment implements PreferenceFragmentHandlerProvider, ShowableSearchablePreferenceDialogProvider {
 
 	public static final String TAG = GeneralProfileSettingsFragment.class.getSimpleName();
 
@@ -124,8 +133,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 	private void setupMapScreenOrientationPref() {
 		ListPreferenceEx mapScreenOrientation = findPreference(settings.MAP_SCREEN_ORIENTATION.getId());
-		mapScreenOrientation.setEntries(new String[] {getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)});
-		mapScreenOrientation.setEntryValues(new Integer[] {ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
+		mapScreenOrientation.setEntries(new String[]{getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)});
+		mapScreenOrientation.setEntryValues(new Integer[]{ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
 		mapScreenOrientation.setIcon(getMapScreenOrientationIcon());
 	}
 
@@ -413,27 +422,84 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	public boolean onPreferenceClick(Preference preference) {
-		String key = preference.getKey();
-		ApplicationMode appMode = getSelectedAppMode();
-		if (key.equals(settings.DRIVING_REGION.getId())) {
+	public boolean onPreferenceClick(final Preference preference) {
+		if (showDialogForPreference(preference, this)) {
+			return true;
+		}
+		if (settings.DRIVING_REGION.getId().equals(preference.getKey())) {
 			showDrivingRegionDialog();
 			return true;
-		} else if (key.equals(settings.ROTATE_MAP.getId())) {
-			CompassModeDialogController controller = new CompassModeDialogController(app, appMode);
+		}
+		if (settings.ROTATE_MAP.getId().equals(preference.getKey())) {
+			CompassModeDialogController controller = new CompassModeDialogController(app, getSelectedAppMode());
 			showSingleSelectionDialog(CompassModeDialogController.PROCESS_ID, controller);
 			controller.setCallback(this);
 			return true;
-		} else if (key.equals(settings.EXTERNAL_INPUT_DEVICE.getId())) {
-			BaseSettingsFragment.showInstance(requireActivity(), EXTERNAL_INPUT_DEVICE, appMode, new Bundle(), this);
-			return true;
-		} else if (key.equals(settings.PRECISE_DISTANCE_NUMBERS.getId())) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				DistanceDuringNavigationBottomSheet.showInstance(fragmentManager, preference.getKey(), this, getSelectedAppMode(), false);
-			}
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public Optional<PreferenceFragmentHandler> getPreferenceFragmentHandler(final Preference preference) {
+		if (settings.EXTERNAL_INPUT_DEVICE.getId().equals(preference.getKey())) {
+			return Optional.of(
+					new PreferenceFragmentHandler() {
+
+						@Override
+						public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
+							return EXTERNAL_INPUT_DEVICE.fragmentClass.asSubclass(PreferenceFragmentCompat.class);
+						}
+
+						@Override
+						public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
+							return (PreferenceFragmentCompat) BaseSettingsFragment.createFragment(
+									getClassOfPreferenceFragment().getName(),
+									context,
+									getSelectedAppMode(),
+									new Bundle(),
+									target.orElse(null));
+						}
+
+						@Override
+						public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
+							return BaseSettingsFragment.showFragment(
+									preferenceFragment,
+									requireActivity(),
+									getClassOfPreferenceFragment().getName());
+						}
+					}
+			);
+		}
+		return Optional.empty();
+	}
+
+	@Override
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(
+			final Preference preference,
+			final Optional<Fragment> target) {
+		if (settings.PRECISE_DISTANCE_NUMBERS.getId().equals(preference.getKey())) {
+			return Optional.of(
+					new ShowableSearchablePreferenceDialog<>(
+							DistanceDuringNavigationBottomSheet.createInstance(
+									preference,
+									target,
+									getSelectedAppMode(),
+									false)) {
+
+						@Override
+						protected void show(final DistanceDuringNavigationBottomSheet distanceDuringNavigationBottomSheet) {
+							GeneralProfileSettingsFragment.this.show(distanceDuringNavigationBottomSheet);
+						}
+					});
+		}
+		return Optional.empty();
+	}
+
+	private void show(final SearchablePreferenceDialog dialog) {
+		final FragmentManager fragmentManager = getFragmentManager();
+		if (fragmentManager != null) {
+			dialog.show(fragmentManager);
+		}
 	}
 
 	private void updateDialogControllerCallbacks() {

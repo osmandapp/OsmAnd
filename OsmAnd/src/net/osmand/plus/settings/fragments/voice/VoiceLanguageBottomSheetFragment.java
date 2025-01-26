@@ -30,7 +30,9 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
+import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheetInitializer;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.fragments.voice.VoiceItemsAdapter.VoiceItemsListener;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
@@ -40,8 +42,11 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet implements DownloadEvents, VoiceItemsListener {
+public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet implements DownloadEvents, VoiceItemsListener, SearchablePreferenceDialog {
 
 	private static final String TAG = TrackSelectSegmentBottomSheet.class.getSimpleName();
 
@@ -256,15 +261,53 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target,
-	                                @Nullable ApplicationMode appMode, boolean usedOnMap) {
-		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			VoiceLanguageBottomSheetFragment fragment = new VoiceLanguageBottomSheetFragment();
-			fragment.setRetainInstance(true);
-			fragment.setAppMode(appMode);
-			fragment.setUsedOnMap(usedOnMap);
-			fragment.setTargetFragment(target, 0);
-			fragment.show(manager, TAG);
+	public static VoiceLanguageBottomSheetFragment createInstance(final Optional<Fragment> target,
+																  final @Nullable ApplicationMode appMode,
+																  final boolean usedOnMap) {
+		final VoiceLanguageBottomSheetFragment bottomSheet = new VoiceLanguageBottomSheetFragment();
+		bottomSheet.setRetainInstance(true);
+		return BasePreferenceBottomSheetInitializer
+				.initialize(bottomSheet)
+				.with(Optional.empty(), appMode, usedOnMap, target);
+
+	}
+
+	@Override
+	public void show(final FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			show(fragmentManager, TAG);
 		}
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		return Stream
+				.concat(
+						getConstantSearchableInfo(),
+						getSearchableInfoOfItems())
+				.collect(Collectors.joining(", "));
+	}
+
+	private Stream<String> getConstantSearchableInfo() {
+		return Stream
+				.of(
+						R.string.language_description,
+						VoiceType.TTS.titleRes,
+						VoiceType.TTS.descriptionRes,
+						VoiceType.RECORDED.titleRes,
+						VoiceType.RECORDED.descriptionRes)
+				.map(this::getString);
+	}
+
+	private Stream<String> getSearchableInfoOfItems() {
+		return Stream
+				.concat(
+						ttsItems.stream(),
+						recordedItems.stream())
+				.map(indexItem ->
+						indexItem.getVisibleName(
+								app,
+								app.getRegions(),
+								false));
 	}
 }

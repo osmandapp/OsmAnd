@@ -3,20 +3,23 @@ package net.osmand.plus.profiles;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragment<SelectCopyProfilesMenuAdapter> {
+public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragment<SelectCopyProfilesMenuAdapter> implements SearchablePreferenceDialog {
 
 	public static final String TAG = "SelectCopyAppModeBottomSheet";
 
@@ -112,27 +115,32 @@ public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragm
 		dismiss();
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, Fragment target,
-	                                @NonNull ApplicationMode currentMode) {
-		showInstance(fm, target, false, currentMode);
+	public static SelectCopyAppModeBottomSheet createInstance(final @Nullable Fragment target,
+															  final @NonNull ApplicationMode currentMode) {
+		final SelectCopyAppModeBottomSheet bottomSheet = new SelectCopyAppModeBottomSheet();
+		{
+			final Bundle args = new Bundle();
+			args.putString(CURRENT_APP_MODE_KEY, currentMode.getStringKey());
+			bottomSheet.setArguments(args);
+		}
+		bottomSheet.setTargetFragment(target, 0);
+		bottomSheet.setUsedOnMap(false);
+		return bottomSheet;
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, Fragment target,
-	                                boolean usedOnMap, @NonNull ApplicationMode currentMode) {
-		try {
-			if (fm.findFragmentByTag(TAG) == null) {
-				Bundle args = new Bundle();
-				args.putString(CURRENT_APP_MODE_KEY, currentMode.getStringKey());
-
-				SelectCopyAppModeBottomSheet fragment = new SelectCopyAppModeBottomSheet();
-				fragment.setTargetFragment(target, 0);
-				fragment.setUsedOnMap(usedOnMap);
-				fragment.setArguments(args);
-				fragment.show(fm, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+	@Override
+	public void show(final FragmentManager fragmentManager) {
+		if (fragmentManager.findFragmentByTag(TAG) == null) {
+			show(fragmentManager, TAG);
 		}
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		return appModes
+				.stream()
+				.map(ApplicationMode::toHumanString)
+				.collect(Collectors.joining(", "));
 	}
 
 	public interface CopyAppModePrefsListener {

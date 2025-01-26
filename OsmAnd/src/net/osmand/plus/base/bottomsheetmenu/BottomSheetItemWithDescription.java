@@ -56,6 +56,10 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 		changeDescriptionVisibility();
 	}
 
+	public CharSequence getDescription() {
+		return description;
+	}
+
 	public void setDescriptionMaxLines(int maxLines) {
 		this.descriptionMaxLines = maxLines;
 		descriptionTv.setMaxLines(maxLines);

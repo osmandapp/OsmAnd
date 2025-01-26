@@ -3677,7 +3677,7 @@
     <string name="announcement_time_arrive">Arrive at destination</string>
     <string name="shared_string_turn">Turn</string>
     <string name="announcement_time_intervals">Time and distance intervals</string>
-    <string name="announcement_time_descr">The anouncement timing of different voice prompts depends on prompt type, current navigation speed, and default navigation speed.</string>
+    <string name="announcement_time_descr">The announcement timing of different voice prompts depends on prompt type, current navigation speed, and default navigation speed.</string>
     <string name="announcement_time_title">Announcement time</string>
     <string name="start_recording">Start recording</string>
     <string name="show_track_on_map">Show track on map</string>

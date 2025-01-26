@@ -5,6 +5,7 @@ import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE
 import static net.osmand.plus.settings.enums.RoutingType.HH_JAVA;
 import static net.osmand.plus.settings.fragments.DangerousGoodsFragment.getHazmatUsaClass;
 import static net.osmand.plus.settings.fragments.SettingsScreenType.DANGEROUS_GOODS;
+import static net.osmand.plus.settings.fragments.search.PreferenceMarker.markPreferenceAsConnectedToPlugin;
 import static net.osmand.plus.utils.AndroidUtils.getRoutingStringPropertyName;
 import static net.osmand.router.GeneralRouter.*;
 
@@ -22,9 +23,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.TwoStatePreference;
@@ -37,6 +40,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.RouteService;
@@ -56,6 +60,10 @@ import net.osmand.plus.settings.controllers.ViaFerrataDialogController;
 import net.osmand.plus.settings.enums.ApproximationType;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.RoutingType;
+import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandler;
+import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandlerProvider;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListParameters;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
@@ -76,9 +84,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
-public class RouteParametersFragment extends BaseSettingsFragment {
+public class RouteParametersFragment extends BaseSettingsFragment implements PreferenceFragmentHandlerProvider, ShowableSearchablePreferenceDialogProvider {
 
 	public static final String TAG = RouteParametersFragment.class.getSimpleName();
 
@@ -167,7 +176,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		getPreferenceScreen().addPreference(timeConditionalRouting);
 	}
 
-	private void setupOsmLiveForPublicTransportPref() {
+	private void setupOsmLiveForPublicTransportPref(final Class<? extends OsmandPlugin> plugin) {
 		SwitchPreferenceEx useOsmLiveForPublicTransport = createSwitchPreferenceEx(settings.USE_OSM_LIVE_FOR_PUBLIC_TRANSPORT.getId(),
 				R.string.use_live_public_transport, R.layout.preference_with_descr_dialog_and_switch);
 		useOsmLiveForPublicTransport.setDescription(getString(R.string.use_osm_live_public_transport_description));
@@ -175,20 +184,22 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		useOsmLiveForPublicTransport.setSummaryOff(R.string.shared_string_disabled);
 		useOsmLiveForPublicTransport.setIcon(getPersistentPrefIcon(R.drawable.ic_action_osm_live));
 		useOsmLiveForPublicTransport.setIconSpaceReserved(true);
+		markPreferenceAsConnectedToPlugin(useOsmLiveForPublicTransport, plugin);
 		getPreferenceScreen().addPreference(useOsmLiveForPublicTransport);
 	}
 
-	private void setupNativePublicTransport() {
+	private void setupNativePublicTransport(final Class<? extends OsmandPlugin> plugin) {
 		SwitchPreferenceEx setupNativePublicTransport = createSwitchPreferenceEx(settings.PT_SAFE_MODE.getId(),
 				R.string.use_native_pt, R.layout.preference_with_descr_dialog_and_switch);
 		setupNativePublicTransport.setDescription(getString(R.string.use_native_pt_desc));
 		setupNativePublicTransport.setSummaryOn(R.string.shared_string_enabled);
 		setupNativePublicTransport.setSummaryOff(R.string.shared_string_disabled);
 		setupNativePublicTransport.setIconSpaceReserved(true);
+		markPreferenceAsConnectedToPlugin(setupNativePublicTransport, plugin);
 		getPreferenceScreen().addPreference(setupNativePublicTransport);
 	}
 
-	private void setupOsmLiveForRoutingPref() {
+	private void setupOsmLiveForRoutingPref(final Class<? extends OsmandPlugin> plugin) {
 		SwitchPreferenceEx useOsmLiveForRouting = createSwitchPreferenceEx(settings.USE_OSM_LIVE_FOR_ROUTING.getId(),
 				R.string.use_live_routing, R.layout.preference_with_descr_dialog_and_switch);
 		useOsmLiveForRouting.setDescription(getString(R.string.use_osm_live_routing_description));
@@ -196,6 +207,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		useOsmLiveForRouting.setSummaryOff(R.string.shared_string_disabled);
 		useOsmLiveForRouting.setIcon(getPersistentPrefIcon(R.drawable.ic_action_osm_live));
 		useOsmLiveForRouting.setIconSpaceReserved(true);
+		markPreferenceAsConnectedToPlugin(useOsmLiveForRouting, plugin);
 		getPreferenceScreen().addPreference(useOsmLiveForRouting);
 	}
 
@@ -234,8 +246,9 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		setupSelectRouteRecalcDistance(screen);
 		setupReverseDirectionRecalculation(screen);
 
-		if (PluginsHelper.isActive(OsmandDevelopmentPlugin.class)) {
-			setupDevelopmentCategoryPreferences(screen, am);
+		final Class<OsmandDevelopmentPlugin> plugin = OsmandDevelopmentPlugin.class;
+		if (PluginsHelper.isActive(plugin)) {
+			setupDevelopmentCategoryPreferences(screen, am, plugin);
 		}
 	}
 
@@ -395,38 +408,41 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		PreferenceCategory routingCategory = new PreferenceCategory(requireContext());
 		routingCategory.setLayoutResource(R.layout.preference_category_with_descr);
 		routingCategory.setTitle(R.string.recalculate_route);
+		routingCategory.setKey("RouteParametersFragment.recalculate_route.key");
 		screen.addPreference(routingCategory);
 	}
 
-	private void setupDevelopmentCategoryPreferences(PreferenceScreen screen,
-			ApplicationMode mode) {
+	private void setupDevelopmentCategoryPreferences(PreferenceScreen screen, ApplicationMode mode, final Class<? extends OsmandPlugin> plugin) {
 		addDividerPref();
-		setupDevelopmentCategoryHeader(screen);
+		setupDevelopmentCategoryHeader(screen, plugin);
 		if (mode.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT)) {
-			setupOsmLiveForPublicTransportPref();
-			setupNativePublicTransport();
+			setupOsmLiveForPublicTransportPref(plugin);
+			setupNativePublicTransport(plugin);
 		} else {
-			setupRoutingTypePref();
-			setupApproximationTypePref();
-			setupAutoZoomPref();
-			setupOsmLiveForRoutingPref();
+			setupRoutingTypePref(plugin);
+			setupApproximationTypePref(plugin);
+			setupAutoZoomPref(plugin);
+			setupOsmLiveForRoutingPref(plugin);
 		}
 	}
 
-	private void setupDevelopmentCategoryHeader(PreferenceScreen screen) {
+	private void setupDevelopmentCategoryHeader(PreferenceScreen screen, final Class<? extends OsmandPlugin> plugin) {
 		PreferenceCategory developmentCategory = new PreferenceCategory(requireContext());
 		developmentCategory.setLayoutResource(R.layout.preference_category_with_descr);
 		developmentCategory.setTitle(R.string.development);
+		developmentCategory.setKey("development");
+		markPreferenceAsConnectedToPlugin(developmentCategory, plugin);
 		screen.addPreference(developmentCategory);
 	}
 
-	private void setupAutoZoomPref() {
+	private void setupAutoZoomPref(final Class<? extends OsmandPlugin> plugin) {
 		Preference preference = new Preference(requireContext());
 		preference.setKey(settings.USE_DISCRETE_AUTO_ZOOM.getId());
 		preference.setTitle(R.string.auto_zoom);
 		preference.setLayoutResource(R.layout.preference_with_descr);
 		preference.setIcon(getContentIcon(R.drawable.ic_action_magnifier_plus));
 		preference.setSummary(settings.USE_DISCRETE_AUTO_ZOOM.get() ? R.string.auto_zoom_discrete : R.string.auto_zoom_smooth);
+		markPreferenceAsConnectedToPlugin(preference, plugin);
 		getPreferenceScreen().addPreference(preference);
 	}
 
@@ -479,7 +495,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		PopUpMenu.show(displayData);
 	}
 
-	private void setupRoutingTypePref() {
+	private void setupRoutingTypePref(final Class<? extends OsmandPlugin> plugin) {
 		RoutingType[] types = RoutingType.values();
 		String[] names = new String[types.length];
 		Integer[] values = new Integer[types.length];
@@ -493,6 +509,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		ListPreferenceEx preference = createListPreferenceEx(settings.ROUTING_TYPE.getId(), names,
 				values, R.string.routing_type, R.layout.preference_with_descr);
 		preference.setIcon(getContentIcon(R.drawable.ic_action_route_points));
+		markPreferenceAsConnectedToPlugin(preference, plugin);
 		getPreferenceScreen().addPreference(preference);
 	}
 
@@ -518,7 +535,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		PopUpMenu.show(displayData);
 	}
 
-	private void setupApproximationTypePref() {
+	private void setupApproximationTypePref(final Class<? extends OsmandPlugin> plugin) {
 		ApproximationType[] types = ApproximationType.values();
 		String[] names = new String[types.length];
 		Integer[] values = new Integer[types.length];
@@ -532,6 +549,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		ListPreferenceEx preference = createListPreferenceEx(settings.APPROXIMATION_TYPE.getId(), names,
 				values, R.string.gpx_approximation, R.layout.preference_with_descr);
 		preference.setIcon(getContentIcon(R.drawable.ic_action_attach_track));
+		markPreferenceAsConnectedToPlugin(preference, plugin);
 		getPreferenceScreen().addPreference(preference);
 	}
 
@@ -550,12 +568,10 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 				Integer selectedValueIndex = enabled ? hazmatParameters.findIndexOfValue(selectedValue) : null;
 				HazmatCategoryBottomSheet.showInstance(manager, this, HAZMAT_TRANSPORTING_ENABLED, appMode, false, hazmatParameters.localizedNames, hazmatParameters.values, selectedValueIndex);
 			}
-		} else if (GOODS_RESTRICTIONS_PREFERENCE.equals(prefId)) {
-			FragmentManager manager = getFragmentManager();
-			if (manager != null) {
-				OsmandPreference<Boolean> pref = getGoodsRestrictionPreference();
-				GoodsRestrictionsBottomSheet.showInstance(manager, this, GOODS_RESTRICTIONS_PREFERENCE, appMode, false, pref.getModeValue(appMode));
-			}
+		} else if (isGoodsRestrictionsPreference(preference)) {
+			this
+					.getPreferenceDialogForGoodsRestrictionsPreference(preference, Optional.of(this))
+					.show();
 		} else if (ALLOW_VIA_FERRATA_PREFERENCE.equals(prefId)) {
 			FragmentManager manager = getFragmentManager();
 			if (manager != null) {
@@ -563,12 +579,99 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 				showSingleSelectionDialog(ViaFerrataDialogController.PROCESS_ID, controller);
 				controller.setCallback(this);
 			}
-		} else if (DANGEROUS_GOODS_USA.equals(prefId)) {
-			BaseSettingsFragment.showInstance(requireActivity(), DANGEROUS_GOODS, appMode, new Bundle(), this);
 		} else if (settings.USE_DISCRETE_AUTO_ZOOM.getId().equals(prefId)) {
 			showAutoZoomDialog(preference);
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public Optional<PreferenceFragmentHandler> getPreferenceFragmentHandler(final Preference preference) {
+		if (DANGEROUS_GOODS_USA.equals(preference.getKey())) {
+			return Optional.of(
+					new PreferenceFragmentHandler() {
+
+						@Override
+						public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
+							return DANGEROUS_GOODS.fragmentClass.asSubclass(PreferenceFragmentCompat.class);
+						}
+
+						@Override
+						public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
+							return (PreferenceFragmentCompat) BaseSettingsFragment.createFragment(
+									getClassOfPreferenceFragment().getName(),
+									context,
+									getSelectedAppMode(),
+									new Bundle(),
+									null);
+						}
+
+						@Override
+						public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
+							return BaseSettingsFragment.showFragment(
+									preferenceFragment,
+									requireActivity(),
+									getClassOfPreferenceFragment().getName());
+						}
+					});
+		}
+		return Optional.empty();
+	}
+
+	@Override
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(
+			final Preference preference,
+			final Optional<Fragment> target) {
+		if (isRouteRecalculationDistancePreference(preference)) {
+			return Optional.of(getPreferenceDialogForRouteRecalculationDistancePreference(preference, target));
+		}
+		if (isGoodsRestrictionsPreference(preference)) {
+			return Optional.of(getPreferenceDialogForGoodsRestrictionsPreference(preference, target));
+		}
+		return Optional.empty();
+	}
+
+	private boolean isRouteRecalculationDistancePreference(final Preference preference) {
+		return settings.ROUTE_RECALCULATION_DISTANCE.getId().equals(preference.getKey());
+	}
+
+	private static boolean isGoodsRestrictionsPreference(final Preference preference) {
+		return GOODS_RESTRICTIONS_PREFERENCE.equals(preference.getKey());
+	}
+
+	private ShowableSearchablePreferenceDialog<RecalculateRouteInDeviationBottomSheet> getPreferenceDialogForRouteRecalculationDistancePreference(
+			final Preference preference,
+			final Optional<Fragment> target) {
+		return new ShowableSearchablePreferenceDialog<>(
+				RecalculateRouteInDeviationBottomSheet.createInstance(
+						preference,
+						target,
+						false,
+						getSelectedAppMode())) {
+
+			@Override
+			protected void show(final RecalculateRouteInDeviationBottomSheet recalculateRouteInDeviationBottomSheet) {
+				recalculateRouteInDeviationBottomSheet.show(getFragmentManager());
+			}
+		};
+	}
+
+	private ShowableSearchablePreferenceDialog<GoodsRestrictionsBottomSheet> getPreferenceDialogForGoodsRestrictionsPreference(
+			final Preference preference,
+			final Optional<Fragment> target) {
+		return new ShowableSearchablePreferenceDialog<>(
+				GoodsRestrictionsBottomSheet.createInstance(
+						target,
+						preference,
+						getSelectedAppMode(),
+						false,
+						getGoodsRestrictionPreference().getModeValue(getSelectedAppMode()))) {
+
+			@Override
+			protected void show(final GoodsRestrictionsBottomSheet goodsRestrictionsBottomSheet) {
+				goodsRestrictionsBottomSheet.show(getFragmentManager());
+			}
+		};
 	}
 
 	@Override
@@ -577,10 +680,10 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		ApplicationMode appMode = getSelectedAppMode();
 		FragmentManager manager = getFragmentManager();
 
-		if (settings.ROUTE_RECALCULATION_DISTANCE.getId().equals(prefId)) {
-			if (manager != null) {
-				RecalculateRouteInDeviationBottomSheet.showInstance(manager, prefId, this, false, getSelectedAppMode());
-			}
+		if (isRouteRecalculationDistancePreference(preference)) {
+			this
+					.getPreferenceDialogForRouteRecalculationDistancePreference(preference, Optional.of(this))
+					.show();
 		} else if (!reliefFactorParameters.isEmpty() && prefId.equals(ROUTING_PREFERENCE_PREFIX + USE_HEIGHT_OBSTACLES)) {
 			if (manager != null) {
 				ElevationDateBottomSheet.showInstance(manager, appMode, this, false);
@@ -622,8 +725,11 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		builder.show();
 	}
 
-	private static void setupAngleSlider(float[] angleValue, View sliderView, boolean nightMode,
-			int activeColor) {
+	private static void setupAngleSlider(float[] angleValue,
+										 View sliderView,
+										 boolean nightMode,
+										 int activeColor) {
+
 		Slider angleBar = sliderView.findViewById(R.id.angle_slider);
 		TextView angleTv = sliderView.findViewById(R.id.angle_text);
 

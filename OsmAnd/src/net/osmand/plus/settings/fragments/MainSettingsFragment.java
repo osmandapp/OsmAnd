@@ -4,19 +4,24 @@ import static net.osmand.plus.backup.ui.BackupUiUtils.getLastBackupTimeDescripti
 import static net.osmand.plus.importfiles.ImportType.SETTINGS;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
+import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 
+import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceViewHolder;
 
 import net.osmand.plus.OsmandApplication;
@@ -30,6 +35,11 @@ import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback
 import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.profileappearance.ProfileAppearanceFragment;
+import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandler;
+import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandlerProvider;
+import net.osmand.plus.settings.fragments.search.SettingsSearchButtonHelper;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.settings.purchase.PurchasesFragment;
 import net.osmand.plus.utils.AndroidUtils;
@@ -39,15 +49,16 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
-public class MainSettingsFragment extends BaseSettingsFragment implements OnSelectProfileCallback {
+public class MainSettingsFragment extends BaseSettingsFragment implements OnSelectProfileCallback, PreferenceFragmentHandlerProvider, ShowableSearchablePreferenceDialogProvider {
 
 	public static final String TAG = MainSettingsFragment.class.getName();
 
 	private static final String BACKUP_AND_RESTORE = "backup_and_restore";
 	private static final String CONFIGURE_PROFILE = "configure_profile";
-	private static final String APP_PROFILES = "app_profiles";
+	public static final String APP_PROFILES = "app_profiles";
 	private static final String PURCHASES_SETTINGS = "purchases_settings";
 	private static final String SELECTED_PROFILE = "selected_profile";
 	private static final String CREATE_PROFILE = "create_profile";
@@ -119,17 +130,11 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		String prefId = preference.getKey();
-		if (preference.getParent() != null && APP_PROFILES.equals(preference.getParent().getKey())) {
-			BaseSettingsFragment.showInstance(getActivity(), SettingsScreenType.CONFIGURE_PROFILE,
-					ApplicationMode.valueOfStringKey(prefId, null));
+		if (showDialogForPreference(preference, this)) {
 			return true;
-		} else if (CREATE_PROFILE.equals(prefId)) {
-			if (getActivity() != null) {
-				SelectBaseProfileBottomSheet.showInstance(
-						getActivity(), this, getSelectedAppMode(), null, false);
-			}
-		} else if (PURCHASES_SETTINGS.equals(prefId)) {
+		}
+		String prefId = preference.getKey();
+		if (PURCHASES_SETTINGS.equals(prefId)) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
@@ -161,6 +166,60 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		}
 
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(
+			final Preference preference,
+			final Optional<Fragment> target) {
+		if (CREATE_PROFILE.equals(preference.getKey())) {
+			return Optional.of(
+					new ShowableSearchablePreferenceDialog<>(
+							SelectBaseProfileBottomSheet.createInstance(
+									target,
+									getSelectedAppMode(),
+									null,
+									false)) {
+
+						@Override
+						protected void show(final SelectBaseProfileBottomSheet selectBaseProfileBottomSheet) {
+							selectBaseProfileBottomSheet.show(getActivity().getSupportFragmentManager());
+						}
+					});
+		}
+		return Optional.empty();
+	}
+
+	@Override
+	public Optional<PreferenceFragmentHandler> getPreferenceFragmentHandler(final Preference preference) {
+		return Optional
+				.ofNullable(ApplicationMode.valueOfStringKey(preference.getKey(), null))
+				.map(applicationMode ->
+						new PreferenceFragmentHandler() {
+
+							@Override
+							public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
+								return SettingsScreenType.CONFIGURE_PROFILE.fragmentClass.asSubclass(PreferenceFragmentCompat.class);
+							}
+
+							@Override
+							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
+								return (PreferenceFragmentCompat) BaseSettingsFragment.createFragment(
+										getClassOfPreferenceFragment().getName(),
+										context,
+										applicationMode,
+										new Bundle(),
+										target.orElse(null));
+							}
+
+							@Override
+							public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
+								return BaseSettingsFragment.showFragment(
+										preferenceFragment,
+										requireActivity(),
+										getClassOfPreferenceFragment().getName());
+							}
+						});
 	}
 
 	private void setupLocalBackup() {
@@ -262,5 +321,17 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 			boolean imported = args.getBoolean(PROFILES_LIST_UPDATED_ARG);
 			ProfileAppearanceFragment.showInstance(activity, profileKey, imported);
 		}
+	}
+
+	@Override
+	protected void createToolbar(@NonNull final LayoutInflater inflater, @NonNull final View view) {
+		super.createToolbar(inflater, view);
+		final SettingsSearchButtonHelper settingsSearchButtonHelper =
+				new SettingsSearchButtonHelper(
+						this,
+						R.id.fragmentContainer,
+						app,
+						getMapActivity()::getCreateSearchDatabaseTask);
+		settingsSearchButtonHelper.configureSettingsSearchButton(view.findViewById(R.id.action_button));
 	}
 }
