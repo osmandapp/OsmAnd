@@ -1997,4 +1997,5 @@
     <string name="shared_string_import_complete">இறக்குமதி முழுமையானது</string>
     <string name="app_restart_required">சில அமைப்புகளைப் பயன்படுத்த பயன்பாட்டு மறுதொடக்கம் தேவை.</string>
     <string name="copy_from_other_profile">மற்றொரு சுயவிவரத்திலிருந்து நகலெடுக்கவும்</string>
+    <string name="profile_alert_delete_title">சுயவிவரத்தை நீக்கு</string>
 </resources>
