@@ -2965,4 +2965,5 @@
     <string name="external_device_characteristic_distance">தூரம்</string>
     <string name="external_device_characteristic_total_distance">மொத்த தூரம்</string>
     <string name="external_device_characteristic_stride_length">ச்ட்ரைட் நீளம்</string>
+    <string name="wheel_circumference">சக்கர சுற்றளவு</string>
 </resources>
