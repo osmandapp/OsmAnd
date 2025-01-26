@@ -2774,4 +2774,5 @@
     <string name="purchases_feature_desc_cross_buy">உங்கள் சந்தா அம்சங்களை வெவ்வேறு தளங்களில் (Android/iOS/Web) கூடுதல் செலவில் பயன்படுத்தவும்.</string>
     <string name="purchases_feature_desc_monthly_map_updates">இணைப்பில்லாத வரைபடங்களுக்கான வழக்கமான மாத புதுப்பிப்புகளுக்கான அணுகலைப் பெறுங்கள்.</string>
     <string name="purchases_feature_desc_unlimited_map_download">அனைத்து கண்டங்களுக்கும் பிராந்தியங்களுக்கும் இணைப்பில்லாத வரைபடங்களுக்கும் வரம்பற்ற பதிவிறக்கங்களைப் பெறுங்கள்.</string>
+    <string name="purchases_feature_desc_combined_wiki">இணைய இணைப்பு இல்லாமல், பயணத்தின்போது விக்கிபீடியா கட்டுரைகளை ஆராயுங்கள். இணைப்பில்லாத தரவு நாடுகளால் வகுக்கப்பட்டு அனைத்து மொழிகளிலும் கிடைக்கிறது.</string>
 </resources>
