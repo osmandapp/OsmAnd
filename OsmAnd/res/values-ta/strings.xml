@@ -2751,4 +2751,5 @@
     <string name="backup_delete_types_descr">ஒச்மண்ட் கிளவுட்டிலிருந்து நீக்கப்பட்ட தரவு வகைகளுக்கான எல்லா தரவையும் நீக்கவா?</string>
     <string name="cloud_recent_changes">மாற்றங்கள்</string>
     <string name="backup_pause_all">அனைத்தையும் இடைநிறுத்துங்கள்</string>
+    <string name="cloud_all_changes_uploaded">அனைத்து மாற்றங்களும் பதிவேற்றப்பட்டன</string>
 </resources>
