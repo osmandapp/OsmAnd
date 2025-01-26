@@ -2210,4 +2210,5 @@
     <string name="planning_trip_item">ஒரு பயணத்தைத் திட்டமிடுங்கள்</string>
     <string name="navigation_profiles_item">வழிசெலுத்தல் சுயவிவரங்கள்</string>
     <string name="osmand_purchases_item">ஒச்மண்ட் கொள்முதல்</string>
+    <string name="subscription_osmandlive_item">சந்தா - ஒச்மண்ட் லைவ்</string>
 </resources>
