@@ -2985,4 +2985,5 @@
     <string name="subscribe_email_error">பிழை</string>
     <string name="restore_from_trash">குப்பையிலிருந்து மீட்டமைக்கவும்</string>
     <string name="download_to_device">சாதனத்திற்கு பதிவிறக்கவும்</string>
+    <string name="action_cannot_be_undone">இந்த செயலை செயல்தவிர்க்க முடியாது.</string>
 </resources>
