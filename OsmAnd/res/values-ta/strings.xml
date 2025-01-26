@@ -1635,4 +1635,5 @@
     <string name="bottom_widgets_panel">கீழே உள்ள குழு</string>
     <string name="layer_map_appearance">திரையை உள்ளமைக்கவும்</string>
     <string name="edit_profile_screen_options_subtitle">சுயவிவரத்திற்கான திரை விருப்பங்களைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="markers_history">குறிப்பான்கள் வரலாறு</string>
 </resources>
