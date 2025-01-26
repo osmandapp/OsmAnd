@@ -2792,4 +2792,5 @@
     <string name="manage_subscription">சந்தாவை நிர்வகிக்கவும்</string>
     <string name="contact_support">தொடர்பு உதவி</string>
     <string name="free_favorites_backup_description">பிடித்தவை மற்றும் அமைப்புகளுக்கு இலவச காப்புப்பிரதியைப் பெற ஒச்மண்ட் கிளவுட்டில் பதிவு செய்யுங்கள்.</string>
+    <string name="free_favorites_backup">இலவச பிடித்தவை காப்புப்பிரதி</string>
 </resources>
