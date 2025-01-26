@@ -2084,4 +2084,5 @@
     <string name="shared_string_menu">பட்டியல்</string>
     <string name="feedback">கருத்து</string>
     <string name="commiting_node">உறுதியான முனை…</string>
+    <string name="shared_string_loading">ஏற்றுகிறது</string>
 </resources>
