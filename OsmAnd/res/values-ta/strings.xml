@@ -1573,4 +1573,5 @@
     <string name="quick_action_coordinates_widget_descr">வரைபடத்தில் ஆயத்தொகுப்பு விட்செட்டை காட்ட அல்லது மறைக்க ஒரு மாற்று.</string>
     <string name="mapillary_widget_descr">மாபிலரி விரைவான பங்களிப்புகளை அனுமதிக்கிறது.</string>
     <string name="air_pressure_widget_desc">தற்போதைய வரைபட மையத்திற்கான காற்று அழுத்தத்தைக் காட்டுகிறது.</string>
+    <string name="clouds_widget_desc">தற்போதைய வரைபட மையத்திற்கான முகில் கவரேசைக் காட்டுகிறது.</string>
 </resources>
