@@ -2896,4 +2896,5 @@
     <string name="user_points">பயனர் புள்ளிகள்</string>
     <string name="announcement_time_descr">வெவ்வேறு குரல் தூண்டுதல்களின் அன oun ன்மென்ட் நேரம் உடனடி வகை, தற்போதைய வழிசெலுத்தல் விரைவு மற்றும் இயல்புநிலை வழிசெலுத்தல் விரைவு ஆகியவற்றைப் பொறுத்தது.</string>
     <string name="announcement_time_intervals">நேரம் மற்றும் தூர இடைவெளிகள்</string>
+    <string name="announcement_time_arrive">இலக்கை அடையுங்கள்</string>
 </resources>
