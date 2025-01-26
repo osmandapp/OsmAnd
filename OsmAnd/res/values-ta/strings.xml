@@ -2712,4 +2712,5 @@
     <string name="deleted_file">நீக்கப்பட்ட கோப்பு</string>
     <string name="osmand_cloud_authorize_descr">உங்கள் தரவை ஒருபோதும் இழக்காதீர்கள். காப்புப் பிரதி எடுத்து எல்லா தகவல்களையும் எளிதாக மீட்டெடுக்கவும்.</string>
     <string name="register_opr_have_account">என்னிடம் ஏற்கனவே ஒரு கணக்கு உள்ளது</string>
+    <string name="local_backup">உள்ளக காப்புப்பிரதி</string>
 </resources>
