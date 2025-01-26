@@ -2901,4 +2901,5 @@
     <string name="announcement_time_prepare">ஆயத்தம்</string>
     <string name="announcement_time_prepare_long">நீண்ட ஆயத்தம்</string>
     <string name="announcement_time_approach">அணுகுமுறை</string>
+    <string name="announcement_time_passing">கடந்து</string>
 </resources>
