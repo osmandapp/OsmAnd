@@ -1556,4 +1556,5 @@
     <string name="parking_widget_desc">திரை மையத்திலிருந்து உங்கள் பார்க்கிங் இடத்திற்கு தூரத்தைக் காட்டுகிறது.</string>
     <string name="mapillary_widget_desc">தெரு-நிலை படங்களைச் சேர்க்க மேபிலரி பயன்பாட்டிற்கு விரைவான அணுகலை வழங்குகிறது.</string>
     <string name="av_notes_choose_action_widget_desc">செயலைத் தேர்வுசெய்க.</string>
+    <string name="radius_rules_widget_desc">ஆரம்-ரூலர் கருவி வரைபடத்தில் தேர்ந்தெடுக்கப்பட்ட புள்ளியைச் சுற்றி தூர வட்டங்களைக் காட்டுகிறது.</string>
 </resources>
