@@ -2701,4 +2701,5 @@
     <string name="resend_verification_code">மீண்டும்</string>
     <string name="travel_routes">பயண வழிகள்</string>
     <string name="walking_route_osmc_description">அவற்றின் தனிப்பட்ட உள்ளக வண்ணத்தால் வண்ண வழிகள் (ஓபன்ச்ட்ரீட்மேப்பில் இருந்தால்) மற்றும் வகை (சர்வதேச, பிராந்திய, உள்ளூர்).</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">வண்ண வழிகள் அவற்றின் முனை பிணையம் வகை (சர்வதேச, பிராந்திய, உள்ளூர்) படி.</string>
 </resources>
