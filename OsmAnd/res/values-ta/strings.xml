@@ -2973,4 +2973,5 @@
     <string name="change_appearance">தோற்றத்தை மாற்றவும்</string>
     <string name="default_appearance_desc">இயல்புநிலை நிறம், படவுரு மற்றும் வடிவம் குழுவில் சேர்க்கப்பட்ட பிடித்த புள்ளிகளுக்கு பொருந்தும்.</string>
     <string name="apply_to_existing">ஏற்கனவே பொருந்தும்</string>
+    <string name="apply_only_to_new_points">புதிய புள்ளிகளுக்கு மட்டுமே பொருந்தும்</string>
 </resources>
