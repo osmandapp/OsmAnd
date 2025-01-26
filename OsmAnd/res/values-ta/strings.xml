@@ -1527,4 +1527,5 @@
     <string name="save_heading_descr">பதிவு செய்யும் போது ஒவ்வொரு டிராக் பாயிண்டிற்கும் செல்வதைச் சேமிக்கவும்.</string>
     <string name="distance_circles">தூர-வட்டங்கள்</string>
     <string name="coordinates_widget_map_center_desc">தற்போதைய வரைபட மையத்தின் புவியியல் ஒருங்கிணைப்புகளைக் காட்டுகிறது</string>
+    <string name="coordinates_widget_current_location_desc">தற்போதைய புவிஇருப்பிடத்தின் புவியியல் ஒருங்கிணைப்புகளைக் காட்டுகிறது</string>
 </resources>
