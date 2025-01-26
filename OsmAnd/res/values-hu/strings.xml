@@ -5626,7 +5626,7 @@
     <string name="display_distance_to_first_intermediate">A következő megállásig tartó útvonal részleteinek mutatása</string>
     <string name="popular_places_nearby">Népszerű helyek a közelben</string>
     <string name="recently_visited">Nemrég látogatott</string>
-    <string name="shared_string_avg_altitude">Átl.magasság</string>
-    <string name="shared_string_avg_speed">Min.sebesség</string>
-    <string name="shared_string_length">Hossz</string>
+    <string name="shared_string_avg_altitude">Átlagos magasság</string>
+    <string name="shared_string_avg_speed">Legkisebb sebesség</string>
+    <string name="shared_string_length">Hosszúság</string>
 </resources>
