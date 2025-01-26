@@ -2161,4 +2161,5 @@
     <string name="quick_action_add_marker_descr">திரை சென்டர் இடத்தில் வரைபட குறிப்பானைச் சேர்க்க ஒரு பொத்தான்.</string>
     <string name="quick_action_hillshade_descr">வரைபடத்தில் இல்சேட் காட்ட அல்லது மறைக்க ஒரு பொத்தான்.</string>
     <string name="quick_action_first_intermediate">முதல் இடைநிலை</string>
+    <string name="quick_action_track_waypoint">டிராக் வே பாயிண்ட்</string>
 </resources>
