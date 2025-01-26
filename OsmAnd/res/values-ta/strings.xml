@@ -2282,4 +2282,5 @@
     <string name="avg_sensor_bycicle_power">சைக்கிள் ஆற்றல், சராசரி</string>
     <string name="max_sensor_temperature">வெப்பநிலை, அதிகபட்சம்</string>
     <string name="avg_sensor_temperature">வெப்பநிலை, சராசரி</string>
+    <string name="shared_string_visible_on_map">வரைபடத்தில் தெரியும்</string>
 </resources>
