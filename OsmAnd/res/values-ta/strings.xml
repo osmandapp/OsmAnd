@@ -2262,4 +2262,5 @@
     <string name="gpx_split_interval_none_descr">விரும்பிய பிளவு விருப்பத்தைத் தேர்ந்தெடுக்கவும்: நேரம் அல்லது தூரத்தில்.</string>
     <string name="grey_color_undefined">தரவு இல்லாத பாகங்கள் சாம்பல் நிறத்தில் உள்ளன.</string>
     <string name="analyze_on_map">வரைபடத்தில் பகுப்பாய்வு செய்யுங்கள்</string>
+    <string name="upload_to_openstreetmap">OpenStreetMap இல் பதிவேற்றவும்</string>
 </resources>
