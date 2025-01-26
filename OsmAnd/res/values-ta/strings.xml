@@ -3017,4 +3017,5 @@
     <string name="rendering_value_sector5_name">பிரிவு 5</string>
     <string name="rendering_attr_showToll_name">கட்டண கட்டுப்பாடுகளைக் காட்டு</string>
     <string name="routing_attr_hazmat_category_usa_2_name">வாயுக்கள்</string>
+    <string name="rendering_attr_padusHideBoundaries_name">பொது நில எல்லைகளை மறைக்கவும்</string>
 </resources>
