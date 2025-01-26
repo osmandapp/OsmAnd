@@ -1398,4 +1398,5 @@
     <string name="price_free">இலவசம்</string>
     <string name="mapillary_image">Mapillay படம்</string>
     <string name="map_widget_intermediate_time">இடைநிலை நேரம்</string>
+    <string name="new_destination_point_dialog">நீங்கள் ஏற்கனவே ஒரு இலக்கை அமைத்துள்ளீர்கள்:</string>
 </resources>
