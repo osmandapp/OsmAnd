@@ -2546,4 +2546,5 @@
     <string name="rendering_attr_hideWaterPolygons_description">நீர்</string>
     <string name="rendering_attr_piste_difficulty_extreme_name">எக்ச்ட்ரீம்</string>
     <string name="rendering_value_low_name">குறைந்த</string>
+    <string name="rendering_value_lightgreen_name">வெளிர் பச்சை</string>
 </resources>
