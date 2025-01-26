@@ -3106,4 +3106,5 @@
     <string name="delete_widget_description">இந்த விட்செட் நீக்கப்படும். நீங்கள் அதை உள்ளமைக்க திரையில் பின்னர் மீட்டெடுக்கலாம்.</string>
     <string name="reset_average_speed">சராசரி வேகத்தை மீட்டமைக்கவும்</string>
     <string name="rendering_attr_showClimbingRoutes_description">ஏறும் வழிகளைக் காட்டு</string>
+    <string name="rendering_attr_showClimbingRoutes_name">ஏறும் வழிகள்</string>
 </resources>
