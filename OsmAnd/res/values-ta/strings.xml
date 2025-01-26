@@ -1488,4 +1488,5 @@
     <string name="help_article_personal_color_palette_schemes_name">வண்ண திட்டங்கள்</string>
     <string name="obd_plugin_name">வாகன அளவீடுகள்</string>
     <string name="global_settings">உலகளாவிய அமைப்புகள்</string>
+    <string name="audionotes_plugin_name">ஆடியோ/வீடியோ குறிப்புகள்</string>
 </resources>
