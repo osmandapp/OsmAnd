@@ -1537,4 +1537,5 @@
     <string name="av_notes_video_widget_desc">விட்செட்டைத் தட்டுவது ஒரு வீடியோவைப் பதிவுசெய்ய உங்களை அனுமதிக்கிறது.</string>
     <string name="av_notes_audio_widget_desc">விட்செட்டைத் தட்டினால் ஆடியோ குறிப்பு எடுக்க உங்களை அனுமதிக்கிறது.</string>
     <string name="trip_recording_downhill_widget_desc">தற்போதைய பதிவு செய்யப்பட்ட பயணத்தின் அனைத்து சந்ததியினரின் கூட்டுத்தொகையைக் காட்டுகிறது.</string>
+    <string name="trip_recording_uphill_widget_desc">தற்போது பதிவுசெய்யப்பட்ட பயணத்தின் அனைத்து ஏறுதல்களின் தொகையையும் காட்டுகிறது.</string>
 </resources>
