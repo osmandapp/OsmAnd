@@ -2697,4 +2697,5 @@
     <string name="register_opr_create_new_account">புதிய கணக்கை உருவாக்கவும்</string>
     <string name="osmand_cloud_create_account_descr">தயவுசெய்து உங்கள் மின்னஞ்சல் முகவரியை உள்ளிடவும், சரிபார்ப்புக் குறியீடு அங்கு அனுப்பப்படும்,\n உங்கள் எல்லா தரவும் அதனுடன் இணைக்கப்படும்.</string>
     <string name="verification_code_missing">நான் சரிபார்ப்புக் குறியீட்டைப் பெறவில்லை</string>
+    <string name="verification_code_missing_description">10 நிமிடங்கள் ஆகலாம். உங்கள் ச்பேம் கோப்புறையில் இல்லாவிட்டால் கீழே உள்ள பொத்தானைப் பயன்படுத்தவும்.</string>
 </resources>
