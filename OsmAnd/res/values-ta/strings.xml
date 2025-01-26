@@ -2663,4 +2663,5 @@
     <string name="app_mode_helicopter">உலங்கூர்தி</string>
     <string name="app_mode_skiing">பனிச்சறுக்கு</string>
     <string name="horseback_riding">குதிரை சவாரி</string>
+    <string name="app_mode_personal_transporter">தனிப்பட்ட டிரான்ச்போர்ட்டர்</string>
 </resources>
