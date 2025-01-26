@@ -2877,4 +2877,5 @@
     <string name="routing_attr_allow_intermittent_name">இடைப்பட்ட நீர் வழிகளை அனுமதிக்கவும்</string>
     <string name="routing_attr_freeride_policy_allow_name">இசைவு</string>
     <string name="rendering_value_all_name">அனைத்தும்</string>
+    <string name="rendering_value_omit_name">ஓடு</string>
 </resources>
