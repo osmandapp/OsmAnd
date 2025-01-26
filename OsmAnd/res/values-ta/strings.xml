@@ -2381,4 +2381,5 @@
     <string name="activity_type_car_name">கார்</string>
     <string name="activity_type_motorbike_name">மின்னோடி பைக்</string>
     <string name="activity_type_offroad_name">ஆஃப்-ரோட்</string>
+    <string name="activity_type_walking_name">நடைபயிற்சி</string>
 </resources>
