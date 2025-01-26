@@ -1641,4 +1641,5 @@
     <string name="switch_profile">சுயவிவரத்தை மாற்றவும்</string>
     <string name="show_traffic_warnings">போக்குவரத்து எச்சரிக்கைகள்</string>
     <string name="show_pedestrian_warnings">பாதசாரி குறுக்குவழிகள்</string>
+    <string name="show_cameras">வேக கேமராக்கள்</string>
 </resources>
