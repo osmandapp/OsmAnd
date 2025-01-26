@@ -2329,4 +2329,5 @@
     <string name="add_custom_category">தனிப்பயன் வகையைச் சேர்க்கவும்</string>
     <string name="poi_filter_by_name">பெயரால் தேடுங்கள்</string>
     <string name="rearrange_categories">வகைகளை மறுசீரமைக்கவும்</string>
+    <string name="create_custom_categories_list_promo">பட்டியல் வரிசையை மாற்றி வகைகளை மறைக்கவும். அனைத்து மாற்றங்களையும் சுயவிவரங்களாக இறக்குமதி செய்யுங்கள் அல்லது ஏற்றுமதி செய்க.</string>
 </resources>
