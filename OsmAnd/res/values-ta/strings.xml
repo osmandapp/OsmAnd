@@ -1803,4 +1803,5 @@
     <string name="shared_string_external">வெளிப்புறம்</string>
     <string name="shared_string_all_icons">அனைத்து சின்னங்களும்</string>
     <string name="shared_string_duplicate">நகல்</string>
+    <string name="shared_string_author">நூலாசிரியர்</string>
 </resources>
