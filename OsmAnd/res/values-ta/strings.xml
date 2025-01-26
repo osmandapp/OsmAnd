@@ -3049,4 +3049,5 @@
     <string name="required_maps">தேவையான வரைபடங்கள்</string>
     <string name="calculate_online">ஆன்லைனில் கணக்கிடுங்கள்</string>
     <string name="missing_maps_ignore">பதிவிறக்கம் செய்யப்பட்ட வரைபடங்களைப் பயன்படுத்தவும்</string>
+    <string name="missing_maps_ignore_details">பதிவிறக்கம் செய்யப்பட்ட வரைபடங்கள் உங்கள் வழியை மறைக்கின்றனவா? நீங்கள் அந்த பகுதியை நன்கு அறிந்திருந்தால் அவர்களுடன் செல்லவும்.</string>
 </resources>
