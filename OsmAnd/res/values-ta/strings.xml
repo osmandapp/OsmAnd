@@ -2188,4 +2188,5 @@
     <string name="quick_action_switch_profile_descr">செயல் பொத்தானை தேர்ந்தெடுக்கப்பட்ட சுயவிவரங்களுக்கு இடையில் மாறுகிறது.</string>
     <string name="profile_type_user_string">பயனர் சுயவிவரம்</string>
     <string name="profile_type_osmand_string">Osmand சுயவிவரம்</string>
+    <string name="quick_action_toggle_preference">விருப்பத்தை மாற்ற ஒரு மாற்று.</string>
 </resources>
