@@ -1381,4 +1381,5 @@
     <string name="si_min_km">ஒரு கிலோமீட்டருக்கு நிமிடங்கள்</string>
     <string name="si_min_m">ஒரு மைலுக்கு நிமிடங்கள்</string>
     <string name="si_nm">கடல் மைல்கள்</string>
+    <string name="download_depth_countours">கடல் ஆழமான வரையறைகள்</string>
 </resources>
