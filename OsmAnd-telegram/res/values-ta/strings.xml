@@ -193,7 +193,7 @@
     <string name="get_telegram_after_creating_account">இந்த பயன்பாட்டைப் பயன்படுத்தலாம்.</string>
     <string name="shared_string_all">அனைத்து</string>
     <string name="hours_format">%1$d h</string>
-    <string name="shared_string_off">அணை</string>
+    <string name="shared_string_off">நிறுத்து</string>
     <string name="already_registered_in_telegram">உங்களுக்கு பதிவுசெய்யப்பட்ட தந்தி கணக்கு மற்றும் தொலைபேசி எண் தேவை</string>
     <string name="do_not_have_telegram">என்னிடம் தந்தி கணக்கு இல்லை</string>
     <string name="enter_authentication_code">அங்கீகாரக் குறியீட்டை உள்ளிடவும்</string>
