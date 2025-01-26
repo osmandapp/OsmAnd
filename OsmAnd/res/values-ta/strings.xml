@@ -1670,4 +1670,5 @@
     <string name="auto_zoom_map_descr">உங்கள் வேகத்திற்கு ஏற்ப பெரிதாக்க நிலை (வரைபடம் தற்போதைய நிலையுடன் ஒத்திசைக்கப்படும் போது).</string>
     <string name="snap_to_road">சாலைக்கு ஒடி</string>
     <string name="snap_to_road_descr">தற்போதைய நிலை படவுரு தற்போதைய வழிசெலுத்தல் பாதையில் ஒடுக்கப்படும்</string>
+    <string name="show_warnings_title">விழிப்பூட்டல்களைக் காட்டு…</string>
 </resources>
