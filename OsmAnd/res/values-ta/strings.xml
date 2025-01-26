@@ -1610,4 +1610,5 @@
     <string name="map_widget_next_next_turn">இரண்டாவது அடுத்த முறை</string>
     <string name="position_on_map_center">நடுவண்</string>
     <string name="position_on_map_bottom">கீழே</string>
+    <string name="map_widget_compass">திசைகாட்டி</string>
 </resources>
