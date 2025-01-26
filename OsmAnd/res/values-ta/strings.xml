@@ -1897,4 +1897,5 @@
     <string name="navigate_point_olc">இருப்பிடக் குறியீட்டைத் திறக்கவும்</string>
     <string name="approximate_file_size">தோராயமான கோப்பு அளவு</string>
     <string name="shared_string_example">எடுத்துக்காட்டு</string>
+    <string name="mgrs_format_descr">ஒச்மண்ட் எம்.சி.ஆர்களைப் பயன்படுத்துகிறது, இது யுடிஎம் நேட்டோ வடிவத்திற்கு ஒத்ததாகும்.</string>
 </resources>
