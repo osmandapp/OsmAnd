@@ -2898,4 +2898,5 @@
     <string name="announcement_time_intervals">நேரம் மற்றும் தூர இடைவெளிகள்</string>
     <string name="announcement_time_arrive">இலக்கை அடையுங்கள்</string>
     <string name="announcement_time_off_route">பாதை</string>
+    <string name="announcement_time_prepare">ஆயத்தம்</string>
 </resources>
