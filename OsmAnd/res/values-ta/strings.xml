@@ -2998,4 +2998,5 @@
     <string name="osmand_cloud_delete_account_confirmation">கணக்கை நீக்கவா?</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">இரண்டாம் நிலை சாதனங்கள் ஒச்மண்ட் கிளவுட்டில் இருந்து உள்நுழைந்து கட்டண அம்சங்களுக்கான அணுகலை இழக்கும்.</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">இது உங்கள் OSMAND PRO சந்தாவை ரத்து செய்யாது.</string>
+    <string name="osmand_cloud_deleting_account_descr">சில தருணங்களில் உங்கள் தரவு மற்றும் கணக்கு அனைத்தும் ஒச்மண்ட் கிளவுட்டிலிருந்து நீக்கப்படும்.\n\n சாதனத்தில் உள்ள அனைத்து தரவுகளும் தீண்டத்தகாதவை.</string>
 </resources>
