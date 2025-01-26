@@ -2693,4 +2693,5 @@
     <string name="service_is_not_available_please_try_later">பணி கிடைக்கவில்லை. தயவுசெய்து பின்னர் மீண்டும் முயற்சிக்கவும்.</string>
     <string name="backup_error_failed_to_fetch_remote_items">சேவையகத்திலிருந்து கோப்பு பட்டியலைப் பெறுவதில் தோல்வி.</string>
     <string name="promo_subscription">விளம்பர சந்தா</string>
+    <string name="renew_subscription">சந்தாவை புதுப்பிக்கவும்</string>
 </resources>
