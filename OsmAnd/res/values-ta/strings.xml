@@ -2122,4 +2122,5 @@
     <string name="no_overlay">மேலடுக்கு இல்லை</string>
     <string name="quick_action_map_overlay_action">மேலடுக்கைச் சேர்க்கவும்</string>
     <string name="no_underlay">அண்டர்லே இல்லை</string>
+    <string name="quick_action_map_underlay_action">அண்டர்லே சேர்க்கவும்</string>
 </resources>
