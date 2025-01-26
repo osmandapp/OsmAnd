@@ -64,6 +64,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -106,7 +107,6 @@ import net.osmand.plus.track.cards.CopyrightCard;
 import net.osmand.plus.track.cards.DescriptionCard;
 import net.osmand.plus.track.cards.GpxInfoCard;
 import net.osmand.plus.track.cards.InfoCard;
-import net.osmand.plus.track.cards.TrackExtensionsCard;
 import net.osmand.plus.track.cards.OptionsCard;
 import net.osmand.plus.track.cards.OverviewCard;
 import net.osmand.plus.track.cards.PointsGroupsCard;
@@ -157,8 +157,6 @@ import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-import org.apache.commons.logging.Log;
-
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.LinkedHashMap;
@@ -171,7 +169,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		DisplayPointGroupsCallback, CalculateAltitudeListener, OnSaveDescriptionCallback {
 
 	public static final String TAG = TrackMenuFragment.class.getName();
-	private static final Log log = PlatformUtil.getLog(TrackMenuFragment.class);
 
 	public static final String TRACK_FILE_NAME = "track_file_name";
 	public static final String OPEN_TAB_NAME = "open_tab_name";
@@ -197,7 +194,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private AuthorCard authorCard;
 	private CopyrightCard copyrightCard;
 	private InfoCard infoCard;
-	private TrackExtensionsCard trackExtensionsCard;
+	private RouteInfoCard trackExtensionsCard;
 	private RouteInfoCard routeInfoCard;
 	private OverviewCard overviewCard;
 	private TrackPointsCard pointsCard;
@@ -762,9 +759,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private void setupOverviewCards(MapActivity mapActivity, ViewGroup cardsContainer, boolean shouldReattachCards) {
 		GpxFile gpxFile = selectedGpxFile.getGpxFile();
 		Metadata metadata = gpxFile.getMetadata();
-		Map<String, String> combinedExtensions = new LinkedHashMap<>();
-		combinedExtensions.putAll(metadata.getExtensionsToRead());
-		combinedExtensions.putAll(gpxFile.getExtensionsToRead());
 
 		if (shouldReattachCards && overviewCard != null && overviewCard.getView() != null) {
 			reattachCard(cardsContainer, overviewCard);
@@ -825,7 +819,14 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (shouldReattachCards && trackExtensionsCard != null && trackExtensionsCard.getView() != null) {
 			reattachCard(cardsContainer, trackExtensionsCard);
 		} else {
-			trackExtensionsCard = new TrackExtensionsCard(mapActivity, metadata, combinedExtensions);
+			Map<String, String> combinedExtensionsTags = new LinkedHashMap<>();
+			combinedExtensionsTags.putAll(metadata.getExtensionsToRead());
+			combinedExtensionsTags.putAll(gpxFile.getExtensionsToRead());
+
+			RouteKey tagsAsRouteKey = new RouteKey(OsmRouteType.UNKNOWN);
+			combinedExtensionsTags.forEach(tagsAsRouteKey::addTag);
+
+			trackExtensionsCard = new RouteInfoCard(mapActivity, tagsAsRouteKey, gpxFile);
 			cardsContainer.addView(trackExtensionsCard.build(mapActivity));
 		}
 
