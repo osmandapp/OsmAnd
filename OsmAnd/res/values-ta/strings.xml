@@ -2395,4 +2395,5 @@
     <string name="rendering_attr_showMtbScaleIMBATrails_name">MTB IMBA தடங்களைக் காட்டு</string>
     <string name="mtb_imba_full">பன்னாட்டு மலை சைக்கிள் சங்கம்</string>
     <string name="rendering_attr_tracktype_grade5_name">மென்மையான</string>
+    <string name="routing_attr_avoid_share_taxi_description">பங்கு டாக்சியைத் தவிர்க்கிறது</string>
 </resources>
