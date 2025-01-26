@@ -2834,4 +2834,5 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme குறிச்சொற்கள்</string>
     <string name="rendering_attr_showBusRoutes_name">பச் வழித்தடங்கள்</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">அர்ப்பணிப்பு மலை பைக்கிங் பாதைகளைக் காட்டு.</string>
+    <string name="routing_attr_avoid_4wd_only_name">4WD சாலைகளைத் தவிர்க்கவும்</string>
 </resources>
