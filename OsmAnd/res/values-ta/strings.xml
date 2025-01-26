@@ -3075,4 +3075,5 @@
     <string name="map_settings_weather_wind_animation">காற்று அனிமேசன்</string>
     <string name="routing_attr_avoid_cobblestone_description">கோப்ச்டோனைத் தவிர்க்கவும்</string>
     <string name="routing_attr_avoid_cobblestone_name">கோப்ச்டோனைத் தவிர்க்கவும்</string>
+    <string name="rendering_value_dark_orange_name">இருண்ட ஆரஞ்சு</string>
 </resources>
