@@ -3097,4 +3097,5 @@
     <string name="screen_is_locked_by_action_button">தொடுதிரை பூட்டப்பட்டுள்ளது. திறக்க பொத்தானைத் தட்டவும்.</string>
     <string name="screen_is_unlocked">தொடுதிரை திறக்கப்பட்டுள்ளது.</string>
     <string name="shared_string_interface">இடைமுகம்</string>
+    <string name="lock_screen_description">தற்செயலான குழாய்களைத் தடுக்க தொடுதிரை செயல்பாட்டை இயக்குகிறது அல்லது முடக்குகிறது</string>
 </resources>
