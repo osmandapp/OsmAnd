@@ -1718,4 +1718,5 @@
     <string name="traffic_warning_pedestrian">பாதசாரி குறுக்குவழி</string>
     <string name="traffic_warning_hazard">இடர்</string>
     <string name="accessibility_announce">அறிவிக்கவும்</string>
+    <string name="driving_region_uk">இங்கிலாந்து மற்றும் ஒத்த</string>
 </resources>
