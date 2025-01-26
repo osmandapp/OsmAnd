@@ -1728,4 +1728,5 @@
     <string name="shared_string_tones">டோன்கள்</string>
     <string name="nothing_found">எதுவும் கிடைக்கவில்லை</string>
     <string name="nothing_found_descr">தேடலை மாற்றவும் அல்லது அதன் ஆரம் அதிகரிக்கவும்.</string>
+    <string name="select_street">தெருவைத் தேர்ந்தெடுக்கவும்</string>
 </resources>
