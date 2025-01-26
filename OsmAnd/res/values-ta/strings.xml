@@ -2461,4 +2461,5 @@
     <string name="routing_attr_avoid_tunnels_description">சுரங்கங்களைத் தவிர்க்கவும்</string>
     <string name="rendering_attr_surface_wood_name">மரம்</string>
     <string name="rendering_attr_smoothness_horrible_name">பயங்கரமான</string>
+    <string name="rendering_attr_smoothness_impassable_name">சிறப்பான</string>
 </resources>
