@@ -1681,4 +1681,5 @@
     <string name="osmand_default_routing">ஒச்மண்ட் ரூட்டிங்</string>
     <string name="special_routing_type">சிறப்பு ரூட்டிங்</string>
     <string name="route_recalculation_dist_title">பாதையை மறுபரிசீலனை செய்ய குறைந்தபட்ச தூரம்</string>
+    <string name="in_case_of_reverse_direction">தலைகீழ் திசையில்</string>
 </resources>
