@@ -1553,4 +1553,5 @@
     <string name="average_speed_time_interval_desc">வேக சராசரியான நேர இடைவெளியைக் குறிப்பிடவும்.</string>
     <string name="average_speed_skip_stops">நிறுத்தங்களை கணக்கில் எடுத்துக் கொள்ளுங்கள்</string>
     <string name="elevation_profile_widget_desc">தற்போதைய பாதையின் உயரம் மற்றும் சாய்வு சுயவிவரத்தைக் காட்டுகிறது.</string>
+    <string name="parking_widget_desc">திரை மையத்திலிருந்து உங்கள் பார்க்கிங் இடத்திற்கு தூரத்தைக் காட்டுகிறது.</string>
 </resources>
