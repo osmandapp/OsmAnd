@@ -2276,4 +2276,5 @@
     <string name="avg_sensor_speed">சென்சார் விரைவு, சராசரி</string>
     <string name="max_sensor_heartrate">இதய துடிப்பு, அதிகபட்சம்</string>
     <string name="avg_sensor_heartrate">இதய துடிப்பு, சராசரி</string>
+    <string name="max_sensor_cadence">சைக்கிள் கேடென்ச், மேக்ச்</string>
 </resources>
