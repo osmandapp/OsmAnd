@@ -2473,4 +2473,5 @@
     <string name="rendering_attr_currentTrackColor_description">சிபிஎக்ச் நிறம்</string>
     <string name="routing_attr_driving_style_speed_name">குறுகிய வழிகள்</string>
     <string name="routing_attr_avoid_sett_description">குடியேறுவதைத் தவிர்க்கிறது</string>
+    <string name="rendering_attr_highway_class_steps_name">படிகள்</string>
 </resources>
