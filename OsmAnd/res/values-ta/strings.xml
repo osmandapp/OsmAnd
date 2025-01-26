@@ -3033,4 +3033,5 @@
     <string name="rendering_value_small_name">சிறிய</string>
     <string name="rendering_value_name_only_name">பெயர் மட்டும்</string>
     <string name="rendering_value_sector3_name">பிரிவு 3</string>
+    <string name="routing_attr_allow_via_ferrata_description">நிலையான கேபிள்கள், தண்டுகள், ஏணிகள் மற்றும் பாலங்கள் பொருத்தப்பட்ட ஒரு மலை பாதை.</string>
 </resources>
