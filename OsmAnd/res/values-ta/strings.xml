@@ -1675,4 +1675,5 @@
     <string name="keep_informing">வழிசெலுத்தல் வழிமுறைகளை மீண்டும் செய்யவும்</string>
     <string name="keep_informing_descr">வழக்கமான இடைவெளியில் வழிசெலுத்தல் வழிமுறைகளை மீண்டும் நிறைவேற்றவும்.</string>
     <string name="default_speed_system">வேகத்தின் அலகு</string>
+    <string name="default_speed_system_descr">வேகத்தின் அலகு வரையறுக்கவும்.</string>
 </resources>
