@@ -2920,4 +2920,5 @@
     <string name="map_widget_ant_bicycle_power_desc">சைக்கிள் ஓட்டுநரின் ஆற்றல் வெளியீட்டைக் காட்டுகிறது, இது பைக்கை முன்னோக்கி நகர்த்த பயன்படுகிறது</string>
     <string name="map_widget_ant_bicycle_cadence">சைக்கிள் கேடென்ச்</string>
     <string name="map_widget_ant_bicycle_cadence_desc">பயனர் பெடலிங் செய்யும் வேகத்தைக் காட்டுகிறது</string>
+    <string name="map_widget_ant_bicycle_speed">சைக்கிள் விரைவு</string>
 </resources>
