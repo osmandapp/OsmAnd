@@ -2707,4 +2707,5 @@
     <string name="routes_color_by_type">மூலம் வண்ண வழிகள்…</string>
     <string name="osmand_cloud">ஒச்மண்ட் முகில்</string>
     <string name="shared_string_cloud">முகில்</string>
+    <string name="new_file">புதிய கோப்பு</string>
 </resources>
