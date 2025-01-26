@@ -1817,4 +1817,5 @@
     <string name="shared_string_download_map">வரைபடத்தைப் பதிவிறக்கவும்</string>
     <string name="download_map_dialog">வரைபட உரையாடலைப் பதிவிறக்கவும்</string>
     <string name="update_tile">புதுப்பிப்பு</string>
+    <string name="move_map_to_select_area">தேவையான பகுதியைத் தேர்ந்தெடுக்க வரைபடத்தை நகர்த்தவும்.</string>
 </resources>
