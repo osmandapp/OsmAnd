@@ -2555,4 +2555,5 @@
     <string name="rendering_value_sacScale_name">சாக்</string>
     <string name="rendering_value_sacScale_description">சுவிச் ஆல்பைன் கிளப்</string>
     <string name="rendering_value_caiScale_name">Cai</string>
+    <string name="rendering_value_caiScale_description">இத்தாலிய ஆல்பைன் கிளப் (இத்தாலிய ஆல்பைன் கிளப்)</string>
 </resources>
