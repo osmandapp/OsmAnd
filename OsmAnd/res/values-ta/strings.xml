@@ -1995,4 +1995,5 @@
     <string name="search_activity">தேடல்</string>
     <string name="shared_string_class">வகுப்பு</string>
     <string name="shared_string_import_complete">இறக்குமதி முழுமையானது</string>
+    <string name="app_restart_required">சில அமைப்புகளைப் பயன்படுத்த பயன்பாட்டு மறுதொடக்கம் தேவை.</string>
 </resources>
