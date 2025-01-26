@@ -1865,4 +1865,5 @@
     <string name="show_borders_of_downloaded_maps">பதிவிறக்கம் செய்யப்பட்ட வரைபடங்களின் எல்லைகளைக் காட்டு</string>
     <string name="daynight_mode_night">இரவு</string>
     <string name="map_widget_renderer">வரைபட நடை</string>
+    <string name="mapillary">Maparyal</string>
 </resources>
