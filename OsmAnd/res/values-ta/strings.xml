@@ -2110,4 +2110,5 @@
     <string name="save_poi_without_poi_type_message">வகை இல்லாமல் POI ஐ சேமிக்கவா?</string>
     <string name="save_poi_too_many_uppercase">இந்த பெயரில் பல பெரிய எழுத்துக்கள் உள்ளன. தொடரவா?</string>
     <string name="shared_string_add_photos">புகைப்படங்களைச் சேர்க்கவும்</string>
+    <string name="improve_coverage_mapillary">Mapililar உடன் புகைப்படக் கவரேசை மேம்படுத்தவும்</string>
 </resources>
