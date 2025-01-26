@@ -2439,4 +2439,5 @@
     <string name="rendering_attr_piste_difficulty_advanced_name">மேம்பட்ட</string>
     <string name="routeInfo_road_types_name">சாலை வகைகள்</string>
     <string name="rendering_value_translucent_blue_name">கசியும் நீலம்</string>
+    <string name="routing_attr_avoid_bus_description">பேருந்துகள் மற்றும் டிரால்பச்களைத் தவிர்க்கிறது</string>
 </resources>
