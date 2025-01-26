@@ -2438,4 +2438,5 @@
     <string name="routing_attr_allow_intermediate_description">செங்குத்தான பிரிவுகளுடன் மிகவும் கடினமான வழிகள். பொதுவாக தவிர்க்கப்பட வேண்டிய சில தடைகள்.</string>
     <string name="rendering_attr_piste_difficulty_advanced_name">மேம்பட்ட</string>
     <string name="routeInfo_road_types_name">சாலை வகைகள்</string>
+    <string name="rendering_value_translucent_blue_name">கசியும் நீலம்</string>
 </resources>
