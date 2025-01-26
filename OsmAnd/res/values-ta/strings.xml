@@ -3036,4 +3036,5 @@
     <string name="routing_attr_allow_via_ferrata_description">நிலையான கேபிள்கள், தண்டுகள், ஏணிகள் மற்றும் பாலங்கள் பொருத்தப்பட்ட ஒரு மலை பாதை.</string>
     <string name="rendering_attr_showToll_description">சாலைகளில் கட்டண கட்டுப்பாடுகளைக் காட்டுங்கள்</string>
     <string name="rendering_attr_lightDetail_name">ஒளி விவரம்</string>
+    <string name="rendering_attr_lightDetail_description">இயல்புநிலை: சீமார்க் பெயர் (ஒளி எழுத்து. குழு.</string>
 </resources>
