@@ -1846,4 +1846,5 @@
     <string name="layer_route">பாதை</string>
     <string name="map_widget_average_speed">சராசரி விரைவு</string>
     <string name="altitude_range">உயர வரம்பு</string>
+    <string name="altitude_ascent">மேல்நோக்கி</string>
 </resources>
