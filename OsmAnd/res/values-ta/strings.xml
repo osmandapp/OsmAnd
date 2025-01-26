@@ -1871,4 +1871,5 @@
     <string name="shared_string_legend">புராணக்கதை</string>
     <string name="add_online_source">நிகழ்நிலை மூலத்தைச் சேர்க்கவும்</string>
     <string name="show_map_symbols">வரைபட சின்னங்களைக் காட்டு</string>
+    <string name="srtm_color_scheme">வண்ணத் திட்டம்</string>
 </resources>
