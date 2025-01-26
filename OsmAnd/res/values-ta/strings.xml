@@ -2014,4 +2014,5 @@
     <string name="select_navigation_icon">நகரும் போது படவுரு நிலை</string>
     <string name="resting_position_icon">ஓய்வு நிலை படவுரு</string>
     <string name="navigation_position_icon">வழிசெலுத்தல் நிலை படவுரு</string>
+    <string name="resting_position_icon_summary">நீங்கள் நகராதபோது படவுரு காட்டப்படும்.</string>
 </resources>
