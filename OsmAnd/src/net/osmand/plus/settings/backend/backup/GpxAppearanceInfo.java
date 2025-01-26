@@ -196,6 +196,20 @@ public class GpxAppearanceInfo {
 		return hasAnyParam ? gpxAppearanceInfo : null;
 	}
 
+	public static boolean isGpxAppearanceTag(String tag) {
+		Object[] testValues = { "1", 1, 1L, 1D, true };
+		for (Object value : testValues) {
+			try {
+				JSONObject json = new JSONObject();
+				json.put(tag, value); // try types
+				if (fromJson(json) != null) {
+					return true;
+				}
+			} catch (JSONException ignored) { }
+		}
+		return false;
+	}
+
 	private static GradientScaleType getScaleType(String name) {
 		if (!Algorithms.isEmpty(name)) {
 			try {

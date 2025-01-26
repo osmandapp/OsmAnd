@@ -12,6 +12,7 @@ import android.widget.TextView;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.osm.AbstractPoiType;
@@ -49,12 +50,13 @@ import androidx.annotation.StringRes;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 import static net.osmand.data.Amenity.DESCRIPTION;
+import static net.osmand.data.Amenity.NAME;
 import static net.osmand.shared.gpx.GpxUtilities.ACTIVITY_TYPE;
 
 import org.apache.commons.logging.Log;
 
 public class RouteInfoCard extends MapBaseCard {
-	public static final Set<String> HIDDEN_TAGS = Set.of(ACTIVITY_TYPE, DESCRIPTION); // TODO hide GpxAppearanceInfo
+	public static final Set<String> HIDDEN_GPX_TAGS = Set.of(ACTIVITY_TYPE, NAME, DESCRIPTION);
 	public static final String OSM_RELATION_URL = "https://www.openstreetmap.org/relation/";
 	public static final String OSM_WAY_URL = "https://www.openstreetmap.org/way/";
 	private static final Map<String, Integer> TRANSLATABLE_KEYS = new HashMap<>();
@@ -132,12 +134,14 @@ public class RouteInfoCard extends MapBaseCard {
 			String key = routeKey.getKeyFromTag(tag);
 			String value = routeKey.getValue(key);
 
-			if (key.equals("name") || key.equals("type") || key.contains("osmc")) {
-				continue;
-			}
-
-			if (HIDDEN_TAGS.contains(key)) {
-				continue;
+			if (routeKey.type != OsmRouteType.UNKNOWN) {
+				if (key.equals("name") || key.equals("type") || key.contains("osmc")) {
+					continue;
+				}
+			} else {
+				if (HIDDEN_GPX_TAGS.contains(key) || GpxAppearanceInfo.isGpxAppearanceTag(key)) {
+					continue;
+				}
 			}
 
 			RouteTag routeTag = new RouteTag(key, value);
