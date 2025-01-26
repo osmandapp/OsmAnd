@@ -1793,4 +1793,5 @@
     <string name="map_3d_mode_hint">நீண்ட தட்டவும் பொத்தானை மாற்ற பொத்தானை அனுமதிக்கிறது.</string>
     <string name="data_settings">தகவல்கள்</string>
     <string name="weather_online_cache">நிகழ்நிலை கேச்</string>
+    <string name="shared_string_not_included">சேர்க்கப்படவில்லை</string>
 </resources>
