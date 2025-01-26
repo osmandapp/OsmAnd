@@ -2175,4 +2175,5 @@
     <string name="pressure_layer">அழுத்தம் அடுக்கு</string>
     <string name="wind_layer">காற்று அடுக்கு</string>
     <string name="cloud_layer">மேகக்கணி அடுக்கு</string>
+    <string name="precipitation_layer">மழைப்பொழிவு அடுக்கு</string>
 </resources>
