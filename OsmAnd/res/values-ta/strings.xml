@@ -1714,4 +1714,5 @@
     <string name="route_tu">யு-டர்ன் செய்து செல்லுங்கள்</string>
     <string name="route_head">தலை</string>
     <string name="looking_up_address">முகவரியைப் பார்ப்பது</string>
+    <string name="traffic_warning_railways">இரயில் பாதை கடத்தல்</string>
 </resources>
