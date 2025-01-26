@@ -1518,4 +1518,5 @@
     <string name="animate_my_location">சொந்த நிலையை உயிரூட்டவும்</string>
     <string name="save_global_track_interval_descr">பொது தட பதிவுக்கான பதிவு இடைவெளியைக் குறிப்பிடவும் (வரைபடத்தில் \'ட்ரிப் ரெக்கார்டிங்\' விட்செட் வழியாக இயக்கப்பட்டது).</string>
     <string name="monitoring_min_distance">குறைந்தபட்ச இடப்பெயர்ச்சி</string>
+    <string name="save_track_logging_accuracy">பதிவு துல்லியம்</string>
 </resources>
