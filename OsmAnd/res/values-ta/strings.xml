@@ -2380,4 +2380,5 @@
     <string name="mtb_segment_classification">பிரிவு வகைப்பாடு</string>
     <string name="activity_type_car_name">கார்</string>
     <string name="activity_type_motorbike_name">மின்னோடி பைக்</string>
+    <string name="activity_type_offroad_name">ஆஃப்-ரோட்</string>
 </resources>
