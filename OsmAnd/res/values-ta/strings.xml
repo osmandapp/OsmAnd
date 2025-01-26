@@ -2591,4 +2591,5 @@
     <string name="rendering_attr_highway_class_footway_name">பாதை</string>
     <string name="routing_attr_avoid_tram_description">அணிகளைத் தவிர்க்கவும்</string>
     <string name="rendering_value_default13_name">இயல்புநிலை (13)</string>
+    <string name="routeInfo_roadClass_name">சாலை வகை</string>
 </resources>
