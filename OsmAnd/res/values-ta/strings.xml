@@ -2347,4 +2347,5 @@
     <string name="external_input_device">வெளிப்புற உள்ளீட்டு சாதனங்கள்</string>
     <string name="sett_generic_ext_input">விசைப்பலகை</string>
     <string name="sett_wunderlinq_ext_input">Wunderlinq</string>
+    <string name="cancel_subscription">சந்தாவை ரத்துசெய்</string>
 </resources>
