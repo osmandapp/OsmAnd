@@ -2193,4 +2193,5 @@
     <string name="quick_action_need_to_add_item_to_list">\'விரைவு செயல்\' அமைப்புகளில் குறைந்தது ஒரு உருப்படியையாவது பட்டியலில் சேர்க்கவும்</string>
     <string name="delete_waypoints">வழித்தடங்களை நீக்கு</string>
     <string name="poi_context_menu_modify">பின்னர் மாற்றவும்</string>
+    <string name="context_menu_item_create_poi">பின்னர் உருவாக்கு</string>
 </resources>
