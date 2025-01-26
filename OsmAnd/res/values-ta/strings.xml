@@ -1574,4 +1574,5 @@
     <string name="mapillary_widget_descr">மாபிலரி விரைவான பங்களிப்புகளை அனுமதிக்கிறது.</string>
     <string name="air_pressure_widget_desc">தற்போதைய வரைபட மையத்திற்கான காற்று அழுத்தத்தைக் காட்டுகிறது.</string>
     <string name="clouds_widget_desc">தற்போதைய வரைபட மையத்திற்கான முகில் கவரேசைக் காட்டுகிறது.</string>
+    <string name="wind_widget_desc">தற்போதைய வரைபட மையத்திற்கான காற்றின் வேகத்தைக் காட்டுகிறது.</string>
 </resources>
