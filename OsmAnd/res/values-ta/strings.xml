@@ -2720,4 +2720,5 @@
     <string name="last_sync">கடைசி ஒத்திசைவு</string>
     <string name="sync_now">இப்போது ஒத்திசைக்கவும்</string>
     <string name="local_changes">உள்ளக மாற்றங்கள்</string>
+    <string name="upload_change">மாற்றத்தை பதிவேற்றவும்</string>
 </resources>
