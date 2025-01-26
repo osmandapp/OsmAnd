@@ -2183,4 +2183,5 @@
     <string name="quick_action_showhide_mapillary_descr">வரைபடத்தில் உள்ள மேபிலரி லேயரைக் காட்ட அல்லது மறைக்க ஒரு மாற்று.</string>
     <string name="quick_action_remove_next_destination">அடுத்த இலக்கு புள்ளி</string>
     <string name="quick_action_remove_next_destination_descr">உங்கள் பாதையில் அடுத்த இலக்கை நீக்குகிறது. அது இறுதி இலக்கு என்றால், வழிசெலுத்தல் நிறுத்தப்படும்.</string>
+    <string name="change_application_profile">பயன்பாட்டு சுயவிவரத்தை மாற்றவும்</string>
 </resources>
