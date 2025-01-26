@@ -2891,4 +2891,5 @@
     <string name="announce_when_exceeded">மீறும்போது அறிவிக்கவும்</string>
     <string name="speak_gps_signal_status">சி.பி.எச் சிக்னல் இழப்பு மற்றும் மீட்பை அறிவிக்கவும்</string>
     <string name="speak_route_recalculation">பாதை மறுசீரமைப்பை அறிவிக்கவும்</string>
+    <string name="speak_route_deviation">பாதையிலிருந்து விலகலை அறிவிக்கவும்</string>
 </resources>
