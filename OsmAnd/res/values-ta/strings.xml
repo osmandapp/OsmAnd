@@ -1507,4 +1507,5 @@
     <string name="rotate_map_to">வரைபட நோக்குநிலை</string>
     <string name="rotate_map_compass_opt">திசைகாட்டி திசை</string>
     <string name="rotate_map_bearing_opt">இயக்கம் திசை</string>
+    <string name="rotate_map_north_opt">வடக்கு மேலே உள்ளது</string>
 </resources>
