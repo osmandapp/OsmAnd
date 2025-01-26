@@ -2641,4 +2641,5 @@
     <string name="routing_attr_motor_type_description">உங்கள் இயந்திரத்தின் எரிபொருள் வகையைத் தேர்ந்தெடுக்கவும், CO2 உமிழ்வை மதிப்பிடுவதற்கு இது தேவை.</string>
     <string name="routing_attr_motor_type_diesel_name">வளியெண்ணை</string>
     <string name="routing_attr_motor_type_petrol_name">பெட்ரோல்</string>
+    <string name="routing_attr_motor_type_lpg_name">எல்பிசி</string>
 </resources>
