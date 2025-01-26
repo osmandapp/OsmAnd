@@ -2442,4 +2442,5 @@
     <string name="routing_attr_avoid_bus_description">பேருந்துகள் மற்றும் டிரால்பச்களைத் தவிர்க்கிறது</string>
     <string name="routeInfo_smoothness_name">மென்மையானது</string>
     <string name="routeInfo_smoothness_description">சாலை/பாதையின் சூழ்ச்சி வகைப்பாடு சக்கர வாகனங்களுக்கான வகைப்பாடு, குறிப்பாக மேற்பரப்பு வழக்கமான/தட்டையானது குறித்து.</string>
+    <string name="rendering_attr_highway_class_road_name">சாலை</string>
 </resources>
