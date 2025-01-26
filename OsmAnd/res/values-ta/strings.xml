@@ -1739,4 +1739,5 @@
     <string name="shared_string_search_history">தேடல் வரலாறு</string>
     <string name="navigation_history">வழிசெலுத்தல் வரலாறு</string>
     <string name="map_markers_history">வரைபட குறிப்பான்கள் வரலாறு</string>
+    <string name="track_coloring_solid">திடமான</string>
 </resources>
