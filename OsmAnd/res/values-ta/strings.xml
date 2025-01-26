@@ -856,7 +856,7 @@
     <string name="animate_routing_route">கணக்கிடப்பட்ட வழியைப் பயன்படுத்தி சிமுலேடு</string>
     <string name="animate_routing_gpx">ஜி.பி.எக்ஸ் டிராக்கைப் பயன்படுத்தி சிமுலேட்</string>
     <string name="route_is_too_long_v2">10 நிமிடங்களுக்குள் இந்த நீண்ட வழிக்கான பாதை கண்டுபிடிக்கப்படவில்லை எனில் இடைநிலை இடங்களைச் சேர்க்கவும்.</string>
-    <string name="auto_zoom_none">ஆட்டோ ஜூம் இல்லை</string>
+    <string name="auto_zoom_none">ஆட்டோ பெரிதாக்கவில்லை</string>
     <string name="auto_zoom_close">மூடுவதற்கு</string>
     <string name="auto_zoom_far">நடுப்பகுதியில்</string>
     <string name="auto_zoom_farthest">நீண்ட தூரத்திற்கு</string>
