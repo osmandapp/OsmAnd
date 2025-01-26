@@ -1805,4 +1805,5 @@
     <string name="shared_string_duplicate">நகல்</string>
     <string name="shared_string_author">நூலாசிரியர்</string>
     <string name="shared_string_link">இணைப்பு</string>
+    <string name="shared_string_license">உரிமம்</string>
 </resources>
