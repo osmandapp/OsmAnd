@@ -2415,4 +2415,5 @@
     <string name="routing_attr_freeride_policy_description">\'ஃப்ரீரைடு\' மற்றும் \'ஆஃப்-பிச்ட்\' ஆகியவை அதிகாரப்பூர்வமற்ற வழிகள் மற்றும் பத்திகள். பொதுவாக வளர்க்கப்படாதது, மதிப்பிடப்படாதது மற்றும் மாலையில் சரிபார்க்கப்படவில்லை. உங்கள் சொந்த ஆபத்தில் உள்ளிடவும்.</string>
     <string name="rendering_attr_highway_class_street_name">தெரு</string>
     <string name="rendering_attr_surface_grass_name">புல்</string>
+    <string name="routing_attr_piste_type_skitour_description">ச்கை சுற்றுப்பயணத்திற்கான வழிகள்.</string>
 </resources>
