@@ -2052,4 +2052,5 @@
     <string name="start_of_the_track">பாதையின் தொடக்க</string>
     <string name="nearest_point">அருகிலுள்ள புள்ளி</string>
     <string name="change_folder">கோப்புறையை மாற்றவும்</string>
+    <string name="select_folder">கோப்புறையைத் தேர்ந்தெடு</string>
 </resources>
