@@ -2572,4 +2572,5 @@
     <string name="rendering_attr_highway_class_bridleway_name">பிரிட்ல்வே</string>
     <string name="routing_attr_avoid_share_taxi_name">பங்கு டாக்சி இல்லை</string>
     <string name="rendering_attr_pisteRoutes_name">ச்கை சரிவுகள்</string>
+    <string name="rendering_attr_piste_type_sled_name">ச்லெட்</string>
 </resources>
