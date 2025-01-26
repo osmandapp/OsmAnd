@@ -1428,4 +1428,5 @@
     <string name="help_article_map_legend_nautical_map_name">கடல் வரைபட பாணி</string>
     <string name="help_article_map_legend_osmand_name">Osmand வரைபட பாணி</string>
     <string name="help_article_map_legend_ski_map_name">ச்கை வரைபட நடை</string>
+    <string name="help_article_map_interact_with_map_name">வரைபடத்துடன் தொடர்பு கொள்ளுங்கள்</string>
 </resources>
