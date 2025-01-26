@@ -2831,4 +2831,5 @@
     <string name="rendering_attr_depthContourColorScheme_description">ஆழம் விளிம்பு கோடுகள் வண்ணத் திட்டம்</string>
     <string name="routing_attr_difficulty_preference_no_preference_name">விருப்பம் இல்லை</string>
     <string name="rendering_attr_horse_scale_difficult_name">கடினம்</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme குறிச்சொற்கள்</string>
 </resources>
