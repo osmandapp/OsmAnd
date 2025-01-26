@@ -2369,4 +2369,5 @@
     <string name="routing_attr_goods_restrictions_name">பொருட்கள் வழங்கல்</string>
     <string name="routing_attr_avoid_subway_description">சுரங்கப்பாதைகள் மற்றும் இலகுரக ரயில் போக்குவரத்தைத் தவிர்க்கிறது</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">ரூட்டிங் செய்ய நடைபாதை சாலைகள் மீது செப்பன்ட்டை விரும்புங்கள்.</string>
+    <string name="rendering_attr_surface_ice_name">பனி</string>
 </resources>
