@@ -3060,4 +3060,5 @@
     <string name="shared_string_always">எப்போதும்</string>
     <string name="when_exceeded">மீறும்போது</string>
     <string name="step_by_step">திருப்புமுனை</string>
+    <string name="shared_string_limit">வரம்பு</string>
 </resources>
