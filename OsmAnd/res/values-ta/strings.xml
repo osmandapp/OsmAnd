@@ -2482,4 +2482,5 @@
     <string name="routeInfo_winter_ice_road_name">குளிர்காலம் மற்றும் பனி சாலைகள்</string>
     <string name="routeInfo_winter_ice_road_description">அதன் குளிர்கால சாலை வகைப்பாட்டின் மூலம் பாதை அல்லது தடத்தை வண்ணமயமாக்குங்கள்.</string>
     <string name="routing_attr_max_num_changes_description">மாற்றங்களின் மேல் வரம்பைக் குறிப்பிடவும்</string>
+    <string name="rendering_attr_winter_road_name">குளிர்கால சாலை</string>
 </resources>
