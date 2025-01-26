@@ -2654,4 +2654,5 @@
     <string name="icon_group_travel">பயணம்</string>
     <string name="icon_group_industrial">தொழில்</string>
     <string name="app_mode_car">வண்டி ஓட்டுதல்</string>
+    <string name="app_mode_bicycle">சைக்கிள் ஓட்டுதல்</string>
 </resources>
