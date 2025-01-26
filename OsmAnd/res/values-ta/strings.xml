@@ -2448,4 +2448,5 @@
     <string name="rendering_attr_OSMMapperAssistant_name">OSM மேப்பர் உதவியாளர்</string>
     <string name="rendering_attr_smoothness_excellent_name">சிறந்த</string>
     <string name="rendering_value_pink_name">இளஞ்சிவப்பு</string>
+    <string name="routing_attr_allow_expert_name">வல்லுநர் வழிகளை அனுமதிக்கவும்</string>
 </resources>
