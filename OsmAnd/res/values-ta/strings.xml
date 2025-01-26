@@ -1988,4 +1988,5 @@
     <string name="shared_string_quick_actions">விரைவான செயல்கள்</string>
     <string name="shared_string_poi_types">POI வகைகள்</string>
     <string name="quick_action_map_source_title">வரைபட ஆதாரங்கள்</string>
+    <string name="shared_string_routing">ரூட்டிங்</string>
 </resources>
