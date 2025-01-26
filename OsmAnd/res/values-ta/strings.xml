@@ -2647,4 +2647,5 @@
     <string name="routing_attr_motor_type_hybrid_name">கலப்பினம்</string>
     <string name="transport">போக்குவரத்து</string>
     <string name="icon_group_amenity">வசதி</string>
+    <string name="icon_group_special">சிறப்பு</string>
 </resources>
