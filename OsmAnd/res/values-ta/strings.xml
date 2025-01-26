@@ -1736,4 +1736,5 @@
     <string name="nearest_cities">அருகிலுள்ள நகரங்கள்</string>
     <string name="type_address">முகவரியைத் தட்டச்சு செய்க</string>
     <string name="poi_categories">பின்னர் வகைகள்</string>
+    <string name="shared_string_search_history">தேடல் வரலாறு</string>
 </resources>
