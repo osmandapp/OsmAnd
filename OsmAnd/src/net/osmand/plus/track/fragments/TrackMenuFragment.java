@@ -821,12 +821,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			Map<String, String> combinedExtensionsTags = new LinkedHashMap<>();
 			combinedExtensionsTags.putAll(metadata.getExtensionsToRead());
 			combinedExtensionsTags.putAll(gpxFile.getExtensionsToRead());
-
-			RouteKey tagsAsRouteKey = new RouteKey(OsmRouteType.UNKNOWN);
-			combinedExtensionsTags.forEach(tagsAsRouteKey::addTag);
-
-			trackExtensionsCard = new RouteInfoCard(mapActivity, tagsAsRouteKey, gpxFile);
-			cardsContainer.addView(trackExtensionsCard.build(mapActivity));
+			if (!combinedExtensionsTags.isEmpty()) {
+				RouteKey tagsAsRouteKey = new RouteKey(OsmRouteType.UNKNOWN);
+				combinedExtensionsTags.forEach(tagsAsRouteKey::addTag);
+				trackExtensionsCard = new RouteInfoCard(mapActivity, tagsAsRouteKey, gpxFile);
+				cardsContainer.addView(trackExtensionsCard.build(mapActivity));
+			}
 		}
 
 		View cardBottomSpace = inflate(R.layout.list_item_divider, cardsContainer, true);
