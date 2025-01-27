@@ -34,8 +34,6 @@ public class GpxApproximationHelper {
 
 	private final OsmandApplication app;
 	private final GpxApproximationParams params;
-	private final Map<LocationsHolder, GpxRouteApproximation> resultMap = new HashMap<>();
-
 	private GpxApproximator approximator;
 	private GpxApproximationListener listener;
 
@@ -45,47 +43,52 @@ public class GpxApproximationHelper {
 		this.params = params;
 	}
 
-	public boolean calculateGpxApproximationAsync(boolean newCalculation) {
-		if (newCalculation) {
-			if (approximator != null) {
-				approximator.cancelApproximation();
-				approximator = null;
-			}
-			resultMap.clear();
-			notifyOnNewCalculation();
+	public boolean calculateGpxApproximationAsync() {
+		if (approximator != null) {
+			approximator.cancelApproximation();
+			approximator = null;
 		}
-		GpxApproximator gpxApproximator = null;
+		notifyOnNewCalculation();
+		params.getLocationsHolders();
+		List<GpxApproximator> approximateList = new ArrayList<>();
 		for (LocationsHolder locationsHolder : params.getLocationsHolders()) {
-			if (!resultMap.containsKey(locationsHolder)) {
-				gpxApproximator = createApproximator(locationsHolder);
-				break;
+			GpxApproximator approximate = createApproximator(locationsHolder);
+			if (approximate != null) {
+				approximateList.add(approximate);
 			}
 		}
-		if (gpxApproximator != null) {
+		Map<LocationsHolder, GpxRouteApproximation> approximateResult = new HashMap<>();
+		notifyOnApproximationStarted();
+		approximateMultipleGpxAsync(approximateList, approximateResult);
+	}
+
+	private void approximateMultipleGpxAsync(List<GpxApproximator> approximationsToDo, Map<LocationsHolder, GpxRouteApproximation> approximateResult) {
+		if (approximationsToDo.size() > 0) {
+			GpxApproximator gpxApproximator = approximationsToDo.remove(0);
 			try {
-				this.approximator = gpxApproximator;
 				gpxApproximator.setMode(getAppMode());
 				gpxApproximator.setPointApproximation(getDistanceThreshold());
-				approximateGpx(gpxApproximator);
-				return true;
+				approximateSingleGpxAsyncWithOther(gpxApproximator, approximationsToDo, approximateResult);
 			} catch (Exception e) {
 				LOG.error(e.getMessage(), e);
 			}
+		} else {
+			notifyOnApproximationFinished(processApproximationResults(approximateResult));
 		}
-		return false;
 	}
 
-	private void approximateGpx(@NonNull GpxApproximator gpxApproximator) {
-		notifyOnApproximationStarted();
+	private void approximateSingleGpxAsyncWithOther(final @NonNull GpxApproximator gpxApproximator, @NonNull List<GpxApproximator> leftApproximations,
+			Map<LocationsHolder, GpxRouteApproximation> approximateResult) {
+		this.approximator = gpxApproximator;
 		gpxApproximator.calculateGpxApproximationAsync(new ResultMatcher<>() {
 			@Override
 			public boolean publish(GpxRouteApproximation gpxApproximation) {
+				// wait for first result as final
 				app.runInUIThread(() -> {
 					if (!gpxApproximator.isCancelled()) {
-						resultMap.put(gpxApproximator.getLocationsHolder(), gpxApproximation);
-						if (!calculateGpxApproximationAsync(false)) {
-							notifyOnApproximationFinished(processApproximationResults());
-						}
+						approximateResult.put(gpxApproximator.getLocationsHolder(), gpxApproximation);
+						// call chain of leftApproximations to do
+						approximateMultipleGpxAsync(leftApproximations, approximateResult);
 					}
 				});
 				return true;
@@ -132,11 +135,11 @@ public class GpxApproximationHelper {
 	}
 
 	@NonNull
-	private Pair<List<GpxRouteApproximation>, List<List<WptPt>>> processApproximationResults() {
+	private Pair<List<GpxRouteApproximation>, List<List<WptPt>>> processApproximationResults(Map<LocationsHolder, GpxRouteApproximation> approximateResult) {
 		List<GpxRouteApproximation> approximations = new ArrayList<>();
 		List<List<WptPt>> points = new ArrayList<>();
 		for (LocationsHolder locationsHolder : params.getLocationsHolders()) {
-			GpxRouteApproximation approximation = resultMap.get(locationsHolder);
+			GpxRouteApproximation approximation = approximateResult.get(locationsHolder);
 			if (approximation != null) {
 				approximations.add(approximation);
 				points.add(SharedUtil.kWptPtList(locationsHolder.getWptPtList()));
@@ -147,7 +150,7 @@ public class GpxApproximationHelper {
 
 	public void setAppMode(@Nullable ApplicationMode appMode, boolean recalculate) {
 		if (params.setAppMode(appMode) && recalculate) {
-			calculateGpxApproximationAsync(true);
+			calculateGpxApproximationAsync();
 		}
 	}
 
@@ -168,7 +171,7 @@ public class GpxApproximationHelper {
 
 	public void setDistanceThreshold(int threshold, boolean recalculate) {
 		if (params.setDistanceThreshold(threshold) && recalculate) {
-			calculateGpxApproximationAsync(true);
+			calculateGpxApproximationAsync();
 		}
 	}
 
@@ -187,22 +190,22 @@ public class GpxApproximationHelper {
 	}
 
 	public static void approximateGpxAsync(@NonNull OsmandApplication app,
-	                                       @NonNull GpxFile gpxFile,
-	                                       @NonNull GpxApproximationParams params,
-	                                       @NonNull CallbackWithObject<GpxFile> callback) {
+			@NonNull GpxFile gpxFile,
+			@NonNull GpxApproximationParams params,
+			@NonNull CallbackWithObject<GpxFile> callback) {
 		MeasurementEditingContext context = createEditingContext(app, gpxFile, params);
 		GpxApproximationHelper helper = new GpxApproximationHelper(app, params);
 		helper.setListener(new GpxApproximationListener() {
 			@Override
 			public void processApproximationResults(@NonNull List<GpxRouteApproximation> approximations,
-			                                        @NonNull List<List<WptPt>> points) {
+					@NonNull List<List<WptPt>> points) {
 				GpxFile approximatedGpx = createApproximatedGpx(app, context, params, approximations, points);
 				callback.processResult(approximatedGpx);
 			}
 		});
 
 		if (helper.canApproximate()) {
-			helper.calculateGpxApproximationAsync(true);
+			helper.calculateGpxApproximationAsync();
 		} else {
 			callback.processResult(gpxFile);
 		}
@@ -210,7 +213,7 @@ public class GpxApproximationHelper {
 
 	@NonNull
 	public static GpxFile approximateGpxSync(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile,
-	                                         @NonNull GpxApproximationParams params) {
+			@NonNull GpxApproximationParams params) {
 		MeasurementEditingContext context = createEditingContext(app, gpxFile, params);
 		GpxApproximationHelper helper = new GpxApproximationHelper(app, params);
 		if (helper.canApproximate()) {
@@ -225,6 +228,7 @@ public class GpxApproximationHelper {
 
 	@NonNull
 	public Pair<List<GpxRouteApproximation>, List<List<WptPt>>> calculateGpxApproximationSync() {
+		Map<LocationsHolder, GpxRouteApproximation> approximateResult = new HashMap<>();
 		for (LocationsHolder holder : params.getLocationsHolders()) {
 			GpxApproximator approximator = createApproximator(holder);
 			if (approximator != null) {
@@ -233,7 +237,7 @@ public class GpxApproximationHelper {
 					approximator.calculateGpxApproximationSync(gctx, new ResultMatcher<>() {
 						@Override
 						public boolean publish(GpxRouteApproximation approximation) {
-							resultMap.put(approximator.getLocationsHolder(), approximation);
+							approximateResult.put(approximator.getLocationsHolder(), approximation);
 							return true;
 						}
 
@@ -247,15 +251,15 @@ public class GpxApproximationHelper {
 				}
 			}
 		}
-		return processApproximationResults();
+		return processApproximationResults(approximateResult);
 	}
 
 	@Nullable
 	public static GpxFile createApproximatedGpx(@NonNull OsmandApplication app,
-	                                            @NonNull MeasurementEditingContext context,
-	                                            @NonNull GpxApproximationParams params,
-	                                            @NonNull List<GpxRouteApproximation> approximations,
-	                                            @NonNull List<List<WptPt>> points) {
+			@NonNull MeasurementEditingContext context,
+			@NonNull GpxApproximationParams params,
+			@NonNull List<GpxRouteApproximation> approximations,
+			@NonNull List<List<WptPt>> points) {
 		for (int i = 0; i < approximations.size(); i++) {
 			GpxRouteApproximation approximation = approximations.get(i);
 			List<WptPt> segment = points.get(i);
@@ -267,8 +271,8 @@ public class GpxApproximationHelper {
 
 	@NonNull
 	private static MeasurementEditingContext createEditingContext(@NonNull OsmandApplication app,
-	                                                              @NonNull GpxFile gpxFile,
-	                                                              @NonNull GpxApproximationParams params) {
+			@NonNull GpxFile gpxFile,
+			@NonNull GpxApproximationParams params) {
 		MeasurementEditingContext ctx = new MeasurementEditingContext(app);
 		ctx.setGpxData(new GpxData(gpxFile));
 		ctx.setAppMode(params.getAppMode());
