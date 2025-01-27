@@ -64,7 +64,6 @@ public class ClickableWayHelper {
             Map.entry("freeride", "yellow")
             // others are default (red)
     );
-    public static boolean SAVE_TAGS_AS_ROUTE_KEY = false;
 
     private final OsmandApplication app;
     private final OsmandMapTileView view;
@@ -123,29 +122,19 @@ public class ClickableWayHelper {
                                           long osmId, String name, Map<String, String> tags) {
         GpxFile gpxFile = new GpxFile(Version.getFullVersion(app));
         RouteActivityHelper helper = app.getRouteActivityHelper();
-        OsmRouteType compatibleOsmRouteType = null;
         for (String clickableTag : CLICKABLE_TAGS) {
             if (tags.containsKey(clickableTag)) {
                 RouteActivity activity = helper.findActivityByTag(clickableTag);
                 if (activity != null) {
                     String activityType = activity.getId();
-                    if (SAVE_TAGS_AS_ROUTE_KEY) {
-                        compatibleOsmRouteType = OsmRouteType.getTypeFromTags(new String[]{clickableTag});
-                    }
                     gpxFile.getMetadata().getExtensionsToWrite().put(GpxUtilities.ACTIVITY_TYPE, activityType);
                     break;
                 }
             }
         }
 
-        if (compatibleOsmRouteType != null) {
-            gpxFile.addRouteKeyTags(tags);
-            gpxFile.addRouteKeyTags(Map.of("way_id", Long.toString(osmId)));
-            gpxFile.addRouteKeyTags(Map.of("type", compatibleOsmRouteType.getName()));
-        } else {
-            gpxFile.getExtensionsToWrite().putAll(tags);
-            gpxFile.getExtensionsToWrite().put("way_id", Long.toString(osmId));
-        }
+        gpxFile.getExtensionsToWrite().putAll(tags);
+        gpxFile.getExtensionsToWrite().put("way_id", Long.toString(osmId));
 
         TrkSegment trkSegment = new TrkSegment();
         for (int i = 0; i < Math.min(xPoints.size(), yPoints.size()); i++) {
