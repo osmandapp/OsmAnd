@@ -10,6 +10,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
+import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
@@ -198,13 +199,11 @@ public class RouteInfoCard extends MapBaseCard {
 		} else if ("way_id".equals(tag.key)) {
 			String url = OSM_WAY_URL + formattedValue;
 			setupClickableContent(view, v -> AndroidUtils.openUrl(activity, url, nightMode));
-		} else if ("route_id".equals(tag.key) && tag.value.startsWith(Amenity.ROUTE_ID_OSM_PREFIX)) {
-			try {
-				long osmId = Long.parseLong(tag.value.replace(Amenity.ROUTE_ID_OSM_PREFIX, ""));
+		} else if ("route_id".equals(tag.key)) {
+			long osmId = ObfConstants.getOsmIdFromPrefixedRouteId(tag.value);
+			if (osmId > 0) {
 				setupClickableContent(view, v -> AndroidUtils.openUrl(activity, OSM_RELATION_URL + osmId, nightMode));
-			} catch (NumberFormatException e) {
-				log.warn("RouteInfoCard: unable to parse osmId from route_id " + tag.value);
-            }
+			}
 		}
 		return view;
 	}
