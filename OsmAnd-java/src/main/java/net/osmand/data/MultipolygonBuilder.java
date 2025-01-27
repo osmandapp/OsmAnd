@@ -1,11 +1,12 @@
 package net.osmand.data;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
-import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.Way;
+import net.osmand.osm.edit.*;
+import net.osmand.util.JarvisAlgorithm;
 import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
+import java.sql.SQLException;
 import java.util.*;
 
 /**
@@ -155,6 +156,31 @@ public class MultipolygonBuilder {
 			result.add(r);
 		}
 		return result;
+	}
+
+	public void createInnerAndOuterWays(Entity e) {
+		// fill the multipolygon with all ways from the Relation
+		for (Relation.RelationMember es : ((Relation) e).getMembers()) {
+			if (es.getEntity() instanceof Way) {
+				boolean inner = "inner".equals(es.getRole()); //$NON-NLS-1$
+				if (inner) {
+					addInnerWay((Way) es.getEntity());
+				} else if ("outer".equals(es.getRole())) {
+					addOuterWay((Way) es.getEntity());
+				}
+			}
+		}
+	}
+
+	public void createClimbingOuterWay(Entity e, List<Node> nodes) throws SQLException {
+		nodes = JarvisAlgorithm.createConvexPolygon(nodes);
+		int radius = "crag".equals(e.getTag(OSMSettings.OSMTagKey.CLIMBING)) ? 10 : 50;
+		nodes = JarvisAlgorithm.expandPolygon(nodes, radius);
+
+		if (nodes != null) {
+			Way w = new Way(e.getId(), nodes);
+			addOuterWay(w);
+		}
 	}
 
 	private Way merge(TLongObjectHashMap<List<Way>> endMap, long stNodeId, Way changedWay,
