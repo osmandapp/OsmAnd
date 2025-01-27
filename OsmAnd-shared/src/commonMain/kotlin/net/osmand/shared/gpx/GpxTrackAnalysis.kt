@@ -14,19 +14,19 @@ class GpxTrackAnalysis {
 	companion object {
 		const val ANALYSIS_VERSION = 1
 
-		fun prepareInformation(
-			fileTimeStamp: Long, pointsAnalyzer: TrackPointsAnalyser, segment: TrkSegment
-		): GpxTrackAnalysis {
-			return GpxTrackAnalysis().prepareInformation(
-				fileTimeStamp, pointsAnalyzer, SplitSegment(segment)
-			)
+		fun prepareInformation(fileTimeStamp: Long,
+		                       joinSegments: Boolean,
+		                       pointsAnalyzer: TrackPointsAnalyser,
+		                       segment: TrkSegment): GpxTrackAnalysis {
+			val analysis = GpxTrackAnalysis()
+			analysis.joinSegments = joinSegments
+			return analysis.prepareInformation(fileTimeStamp, pointsAnalyzer, SplitSegment(segment))
 		}
 	}
 
 	var name: String? = null
 	var totalDistanceWithoutGaps = 0f
 	var timeSpanWithoutGaps: Long = 0
-	var expectedRouteDuration: Long = 0
 	var timeMovingWithoutGaps: Long = 0
 	var totalDistanceMovingWithoutGaps = 0f
 
@@ -61,6 +61,10 @@ class GpxTrackAnalysis {
 		parameters[parameter] = value
 	}
 
+	fun setGpxParameters(parameters: Map<GpxParameter, Any?>) {
+		this.parameters.putAll(parameters)
+	}
+
 	var startTime: Long
 		get() = getGpxParameter(GpxParameter.START_TIME) as Long
 		set(value) = setGpxParameter(GpxParameter.START_TIME, value)
@@ -72,6 +76,10 @@ class GpxTrackAnalysis {
 	var timeSpan: Long
 		get() = getGpxParameter(GpxParameter.TIME_SPAN) as Long
 		set(value) = setGpxParameter(GpxParameter.TIME_SPAN, value)
+
+	var expectedRouteDuration: Long
+		get() = getGpxParameter(GpxParameter.EXPECTED_DURATION) as Long
+		set(value) = setGpxParameter(GpxParameter.EXPECTED_DURATION, value)
 
 	var timeMoving: Long
 		get() = getGpxParameter(GpxParameter.TIME_MOVING) as Long
@@ -452,7 +460,7 @@ class GpxTrackAnalysis {
 		}
 
 
-		if (joinSegments && totalDistanceWithoutGaps > 0) {
+		if (!joinSegments && totalDistanceWithoutGaps > 0) {
 			totalDistance = totalDistanceWithoutGaps
 		} else {
 			totalDistance = _totalDistance

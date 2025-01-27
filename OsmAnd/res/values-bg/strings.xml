@@ -3219,7 +3219,7 @@
     <string name="select_waypoints_category_description">Добавете всички отправни точки от трасето или изберете отделни категории.</string>
     <string name="waypoints_removed_from_map_markers">Премахнати са отправни точки от</string>
     <string name="add_group_descr">Внасяне на групи от избрани или отправни точки на GPX.</string>
-    <string name="cloud_sync_progress">Синхронизиране…%1$s</string>
+    <string name="cloud_sync_progress">Синхронизиране… %1$s</string>
     <string name="external_device_connected">Свързано</string>
     <string name="external_device_disconnected">Несвързано</string>
     <string name="make_round_trip_descr">Добавя копие на изходната точка в качеството на местоназначение.</string>
@@ -4401,7 +4401,7 @@
     <string name="obd_how_to_connect">Как да свържете:</string>
     <string name="connect_obd_instructions_step2">Включете двигателя.</string>
     <string name="connect_obd_instructions_step3">Включете Bluetooth на устройството.</string>
-    <string name="connect_obd_instructions_step4">Докоснете „Свързване“ и изберете скенера от списъка.</string>
+    <string name="connect_obd_instructions_step4">Докоснете „%1$s“ и изберете скенера от списъка.</string>
     <string name="learn_more_about_obd_sensors">Научете повече за сензорите.</string>
     <string name="obd_fuel_left_liters">Оставащо гориво (литри)</string>
     <string name="obd_fuel_type_electric">Електричество</string>
@@ -4558,7 +4558,7 @@
     <string name="quick_action_verb_start_pause">Старт/пауза</string>
     <string name="zoom_animated">Мащабиране с анимация</string>
     <string name="reset_key_assignments">Нулиране на зададените клавиши</string>
-    <string name="height_legend_description">За визуализиране на релефа се използват цветни карти на надморската височина.</string>
+    <string name="height_legend_description">За изобразяване на релефа се използват цветни карти на надморската височина.</string>
     <string name="action_icon">Пиктограма на действие</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
     <string name="quick_action_add_configure_map">Настройки на картата</string>
@@ -4645,7 +4645,6 @@
     <string name="quick_action_auto_zoom_desc">Бутон, превключващ автоматичното мащабиране въз основа на скоростта.</string>
     <string name="quick_action_fav_name_descr">Оставете полето празно, за да бъде използван адреса или името на мястото.</string>
     <string name="quick_action_new_trip_segment">Започва нов сегмент в записваното на трасе на GPX.</string>
-    <string name="display_distance_to_first_intermediate">Показване на време и разстояние до първа междинна точка ако е зададена</string>
     <string name="obd_engine_oil_temperature_desc">Показва температурата на маслото на двигателя.</string>
     <string name="obd_speed_desc">Показва скоростта спрямо датчика за скорост на превозното средство (VSS).</string>
     <string name="l_100km">л/100 км</string>
@@ -4658,4 +4657,13 @@
     <string name="percent_hour">%/ч</string>
     <string name="calculating_indication_message">Изчисляване…</string>
     <string name="obd_engine_coolant_temp_desc">Показва температурата на охлаждащата течност на двигателя</string>
+    <string name="popular_places_nearby">Известни места наблизо</string>
+    <string name="display_distance_to_first_intermediate">Подробности за следващата точка от маршрута</string>
+    <string name="recently_visited">Скоро посетени</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Маршрути за скално катерене</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Показване на маршрути за скално катерене</string>
+    <string name="shared_string_avg_altitude">Средна надморска височина</string>
+    <string name="shared_string_length">Дължина</string>
+    <string name="shared_string_avg_speed">Мин. скорост</string>
+    <string name="calculate_size">Изчисляване на големината</string>
 </resources>

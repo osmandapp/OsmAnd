@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.srtm;
 
-import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.RELIEF_3D;
+import static net.osmand.plus.dashboard.DashboardType.RELIEF_3D;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.MAX_VERTICAL_EXAGGERATION;
 import static net.osmand.plus.plugins.srtm.SRTMPlugin.MIN_VERTICAL_EXAGGERATION;
 

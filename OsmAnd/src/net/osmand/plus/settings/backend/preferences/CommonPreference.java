@@ -342,18 +342,22 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	public boolean writeToJson(JSONObject json, ApplicationMode appMode) throws JSONException {
 		if (appMode != null) {
 			if (!global) {
-				String value = asStringModeValue(appMode);
+				if (isSetForMode(appMode)) {
+					String value = asStringModeValue(appMode);
+					if (value != null) {
+						json.put(getId(), value);
+					}
+					return true;
+				}
+			}
+		} else if (global) {
+			if (isSet()) {
+				String value = asString();
 				if (value != null) {
 					json.put(getId(), value);
 				}
 				return true;
 			}
-		} else if (global) {
-			String value = asString();
-			if (value != null) {
-				json.put(getId(), value);
-			}
-			return true;
 		}
 		return false;
 	}

@@ -1105,9 +1105,6 @@
     <string name="city_type_village">Pentref</string>
     <string name="lang_af">Affricâneg</string>
     <string name="rendering_attr_hideText_name">Testun</string>
-    <string name="srtm_plugin_description">Mae\'r ategyn hwn yn cynnig troshaen cyfuchlinau a haen cysgodion bryniau (tirwedd) i\'w dangos dros ben mapiau safonol OsmAnd. Gwerthfawrogir y nodwedd hon mwyaf gan athletwyr, heicwyr, cerddwyr mynyddoedd, ac unrhyw un â diddordeb yn ffurf tirwedd. (Noder fod data cyfuchlinau a thirwedd ar gael ac i\'w lwytho ar wahân ar ôl gosod yr ategyn.)
-\n
-\nMae\'r data byd-eang (rhwng 70° i\'r gogledd a 70° i\'r de) yn seiliedig ar fesuriadau gan SRTM (Shuttle Radar Topography Mission) ac ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), offeryn delweddu ar fwrdd Terra, lloeren arloesol System Arsylwi\'r Ddaear NASA. Mae ASTER yn ymdrech ar y cyd rhwng NASA, Gweinyddiaeth Economeg, Masnach a Diwydiant (METI) Japan, a Systemau Gofod Japan (J-spacesystems).</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
 \n
 \n Mae OsmAnd+ yn ap llywio meddalwedd cod agored gyda mynediad at ystyr eang o ddata OSM byd-eang. Gellir cadw holl ddata\'r map (fectorau neu deils mapiau) yng ngherdyn storfa\'r ffôn ar gyfer defnydd all-lein. Mae\'n bosib llywio llwybrau ar-lein ac all-lein, gan gynnwys cyfarwyddiadau llais ar hyd y ffordd.
@@ -3841,7 +3838,6 @@
 \nNid oes angen lawrlwytho map arbennig, mae\'r olygfa\'n cael ei chreu o\'n mapiau safonol.
 \n
 \nGellir dychwelyd y wedd hon trwy naill ai ei dad-ysgogi eto yma, neu trwy newid yr \'Arddull Map\' o dan \'Ffurfweddu map\' fel y dymunir.</string>
-    <string name="plugin_nautical_descr">Mae\'r ategyn hwn yn cyfoethogi map ac ap llywio OsmAnd i hefyd gynhyrchu mapiau morol ar gyfer cychod, hwylio, a mathau eraill o chwaraeon dŵr. \n \nBydd yr ychwanegiad map arbennig ar gyfer OsmAnd yn darparu\'r holl farciau llywio morol a symbolau siart, ar gyfer mordwyo mewndirol yn ogystal ag ar gyfer mordwyo ger y lan. Mae disgrifiad pob marc llywio yn rhoi\'r manylion sydd eu hangen i\'w hadnabod a\'u hystyr (categori, siâp, lliw, dilyniant, cyfeirnod, ac ati). \n \nI ddychwelyd i un o arddulliau map confensiynol OsmAnd, yn syml naill ai cau\'r ategyn hwn eto, neu newid yr \'Arddull Map\' o dan \'Ffurfweddu map\' fel y dymunir.</string>
     <string name="nautical_maps_missing">Llwythwch i lawr y map all-lein arbennig i ddangos y nodweddion sgïo.</string>
     <string name="proxy_pref_descr">Nodwch weinydd dirprwyol.</string>
     <string name="rendering_value_germanRoadAtlas_name">Atlas ffordd yr Almaen</string>
@@ -3876,7 +3872,6 @@
     <string name="gps_wake_up_timer">Cyfwng deffro GPS</string>
     <string name="download_wikipedia_files">Lawrlwytho data Wicipedia ychwanegol (%1$sMB)\?</string>
     <string name="simulate_your_location">Efelychu dy safle</string>
-    <string name="osm_editing_plugin_description">Gwnewch gyfraniadau OSM fel creu neu addasu gwrthrychau OSM POI, agor neu roi sylwadau ar nodiadau OSM, a chyfrannu ffeiliau GPX wedi\'u recordio yn OsmAnd trwy gyflenwi\'ch enw defnyddiwr a\'ch cyfrinair. Mae OpenStreetMap.org yn brosiect mapio parth cyhoeddus byd-eang a yrrir gan y gymuned.</string>
     <string name="back_to_map">Nôl i\'r map</string>
     <string name="routing_attr_no_new_routing_description">Peidio â defnyddio rheolau llwybro a gyflwynwyd yn v1.9.</string>
     <string name="use_opengl_render_descr">Defnyddio rendrad OpenGL cyflymu caledwedd (gall ddefnyddio mwy o fatri, neu beidio â gweithio ar ddyfeisiau hen iawn).</string>
@@ -4027,9 +4022,6 @@
     <string name="osm_edit_reopened_note">Nodyn OSM wedi\'i ailagor</string>
     <string name="specified_directiory_not_writeable">Nid oedd modd creu mapiau yn y cyfeiriadur penodedig</string>
     <string name="local_osm_changes_upload_all_confirm">Llwytho %1$d newid(iadau) i OSM\?</string>
-    <string name="record_plugin_description">Mae\'r ategyn hwn yn agor y swyddogaeth i recordio a chadw eich traciau trwy gyffwrdd â\'r teclyn cofnodi GPX ar y map â llaw, neu hefyd i fewngofnodi\'ch holl lwybrau llywio yn awtomatig i ffeil GPX.
-\n
-\n Gellir rhannu traciau wedi\'u recordio gyda\'ch ffrindiau neu eu defnyddio ar gyfer cyfraniadau OSM. Gall athletwyr ddefnyddio traciau wedi\'u recordio i fonitro eu sesiynau hyfforddi. Gellir perfformio rhywfaint o ddadansoddi trac sylfaenol yn uniongyrchol yn OsmAnd, fel amseroedd lap, cyflymder cyfartalog ac ati, ac wrth gwrs gellir dadansoddi traciau yn ddiweddarach hefyd mewn offer dadansoddi trydydd parti arbennig.</string>
     <string name="dash_download_msg_none">Lawrlwytho mapiau all-lein\?</string>
     <string name="rendering_attr_transportStops_name">Arosfanau trafnidiaeth</string>
     <string name="use_opengl_render">Defnyddio rendrad OpenGL</string>

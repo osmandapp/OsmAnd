@@ -66,7 +66,6 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 	private SplitSegmentsAdapter adapter;
 
 	private int selectedSplitInterval;
-	private final boolean joinSegments = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -102,7 +101,7 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 		listView.setDivider(null);
 		listView.setDividerHeight(0);
 
-		adapter = new SplitSegmentsAdapter(requireActivity(), new ArrayList<>(), displayItem, joinSegments);
+		adapter = new SplitSegmentsAdapter(requireActivity(), new ArrayList<>(), displayItem);
 		headerView = view.findViewById(R.id.header_layout);
 
 		ImageView splitImage = headerView.findViewById(R.id.header_split_image);
@@ -224,7 +223,7 @@ public class SplitSegmentDialogFragment extends BaseOsmAndDialogFragment {
 			splitInterval = timeSplit.get(selectedSplitInterval);
 		}
 		SplitTrackListener listener = getSplitTrackListener(selectedGpxFile);
-		GpxSplitParams params = new GpxSplitParams(splitType, splitInterval, joinSegments);
+		GpxSplitParams params = new GpxSplitParams(splitType, splitInterval, false);
 
 		app.getGpxDisplayHelper().splitTrackAsync(selectedGpxFile, groups, params, listener);
 	}

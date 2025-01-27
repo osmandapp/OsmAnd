@@ -4687,7 +4687,7 @@
     <string name="backup_error_failed_to_fetch_remote_items">Nepodarilo sa stiahnuť zoznam súborov zo serveru.</string>
     <string name="local_file_will_be_restored">Lokálny súbor bude obnovený</string>
     <string name="choose_what_to_sync">Zvoľte čo synchronizovať</string>
-    <string name="cloud_sync_progress">Synchronizuje sa…%1$s</string>
+    <string name="cloud_sync_progress">Synchronizuje sa… %1$s</string>
     <string name="checking_progress">Kontroluje sa…</string>
     <string name="shared_string_modified">Zmenené</string>
     <string name="res_unknown">Neznáme</string>
@@ -5684,4 +5684,15 @@
     <string name="default_buttons_size_original_description">Každé tlačidlo si zachová vlastnú veľkosť.</string>
     <string name="default_buttons_opacity_original_description">Každé tlačidlo si zachová vlastnú priehľadnosť pozadia.</string>
     <string name="default_buttons_corners_original_description">Každé tlačidlo si zachová vlastné zaoblenie rohov.</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Lezecké trasy</string>
+    <string name="calculating_indication_message">Vypočítavam…</string>
+    <string name="calculate_size">Vypočítať veľkosť</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Zobraziť lezecké trasy</string>
+    <string name="shared_string_length">Dĺžka</string>
+    <string name="shared_string_avg_altitude">Priem.nadm.výška</string>
+    <string name="shared_string_avg_speed">Min. rýchlosť</string>
+    <string name="popular_places_nearby">Populárne miesta v okolí</string>
+    <string name="recently_visited">Nedávno navštívené</string>
+    <string name="display_distance_to_first_intermediate_summary">Zobrazí čas a vzdialenosť pre ďalšiu zastávku. Vypnite ak chcete vždy zobrazenie podrobnosti trasy k cieľu.</string>
+    <string name="display_distance_to_first_intermediate">Zobraziť podrobnosti trasy pre ďalšiu zastávku</string>
 </resources>

@@ -4901,4 +4901,23 @@
     <string name="poi_route_article">Artigos de viagem</string>
     <string name="poi_route_article_point">Pontos de viagem</string>
     <string name="poi_route_activity_type_car">Carro</string>
+    <string name="poi_route_activity_type_off_road">Todo-o-terreno</string>
+    <string name="poi_route_activity_type_all_terrain_vehicle">ATV (veículo todo-o-terreno)</string>
+    <string name="poi_route_activity_type_truck_hgv">Camião (pesado de mercadorias)</string>
+    <string name="poi_route_activity_type_karting">Karting</string>
+    <string name="poi_route_activity_type_road_motorcycling">Motociclismo de estrada</string>
+    <string name="poi_route_activity_type_off_road_motorcycling_dirt_biking">Motociclismo todo-o-terreno</string>
+    <string name="poi_route_activity_type_touring_motorcycling">Motociclismo de turismo</string>
+    <string name="poi_route_activity_type_sport_motorcycling">Motociclismo desportivo</string>
+    <string name="poi_route_activity_type_hiking">Caminhada</string>
+    <string name="poi_route_activity_type_track_racing">Corrida em pista</string>
+    <string name="poi_route_activity_type_backpacking">Viajem de mochila às costas</string>
+    <string name="poi_route_activity_type_road_running">Corrida em estrada</string>
+    <string name="poi_route_activity_type_walking">A pé</string>
+    <string name="poi_cafe_filter">Café</string>
+    <string name="poi_route_activity_type_motocross">Motocrosse</string>
+    <string name="poi_route_activity_type_trail_running">Corrida em trilhos</string>
+    <string name="poi_route_activity_type_trekking">Caminhada</string>
+    <string name="poi_route_activity_type_adventure_motorcycling">Motociclismo de aventura</string>
+    <string name="poi_route_activity_type_enduro_motorcycling">Motociclismo enduro</string>
 </resources>

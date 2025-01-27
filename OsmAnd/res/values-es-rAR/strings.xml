@@ -5537,4 +5537,6 @@
     <string name="calculate_size">Calcular tamaño</string>
     <string name="rendering_attr_showClimbingRoutes_name">Rutas de escalada</string>
     <string name="rendering_attr_showClimbingRoutes_description">Mostrar rutas de escalada</string>
+    <string name="display_distance_to_first_intermediate">Mostrar detalles de la ruta para la siguiente parada</string>
+    <string name="display_distance_to_first_intermediate_summary">Muestra primero el tiempo y la distancia a la siguiente parada. Desactivarla mostrará siempre los detalles del destino.</string>
 </resources>

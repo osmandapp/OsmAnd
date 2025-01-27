@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/toolbar_height"
+		app:contentInsetEnd="0dp"
+		app:contentInsetLeft="0dp"
+		app:contentInsetRight="0dp"
+		app:contentInsetStart="0dp"
+		app:elevation="2dp">
+
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/toolbar_height"
+			android:fitsSystemWindows="false"
+			android:gravity="center_vertical"
+			app:title="@string/popular_places_nearby" />
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<LinearLayout
+		android:id="@+id/main_view"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
+		android:orientation="vertical"
+		tools:ignore="UselessParent">
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="10dp"
+			android:background="@drawable/bg_contextmenu_shadow_top_light" />
+	</LinearLayout>
+
+</FrameLayout>

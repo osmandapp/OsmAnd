@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.IndexConstants;
+import net.osmand.plus.dashboard.tools.DashFragmentData.DefaultShouldShow;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -55,7 +56,7 @@ public class DashTrackFragment extends DashBaseFragment {
 	private static final String ROW_NUMBER_TAG = TAG + "_row_number";
 
 	private static final DashFragmentData.ShouldShowFunction SHOULD_SHOW_FUNCTION =
-			new DashboardOnMap.DefaultShouldShow() {
+			new DefaultShouldShow() {
 				@Override
 				public int getTitleId() {
 					return TITLE_ID;

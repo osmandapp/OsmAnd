@@ -4653,7 +4653,7 @@
     <string name="sync_now">Szinkronizálás most</string>
     <string name="local_changes_will_be_dismissed">A helyi változások el lesznek vetve</string>
     <string name="cloud_all_changes_uploaded_descr">Az eszközön végrehajtott összes módosítás szinkronizálva van az OsmAnd felhőszolgáltatással.</string>
-    <string name="cloud_sync_progress">Szinkronizálás...%1$s</string>
+    <string name="cloud_sync_progress">Szinkronizálás... %1$s</string>
     <string name="si_nm_ft">Tengeri mérföld/láb</string>
     <string name="av_audio_format_bottom_sheet_descr">Válasszon hangkimeneti formátumot. A hang fájltípus-tároló formátuma 3GPP (.3gp).</string>
     <string name="si_nm_mt">Tengeri mérföld/méter</string>
@@ -4914,7 +4914,7 @@
     <string name="write_heading">Irány mentése</string>
     <string name="feature_available_as_part_of_plan">%1$s elérhető az %2$s csomag részeként</string>
     <string name="shared_string_included">Belefoglalva</string>
-    <string name="local_indexes_category_terrain">Domborzati térképek (3D</string>
+    <string name="local_indexes_category_terrain">Domborzati térképek (3D)</string>
     <string name="hillshade_slope">Domborzatárnyékolás, lejtés</string>
     <string name="map_widget_group_glide_ratio">Siklószám</string>
     <string name="average_glide_ratio">Átlagos siklószám</string>
@@ -5622,5 +5622,11 @@
     <string name="calculating_indication_message">Számítás…</string>
     <string name="rendering_attr_showClimbingRoutes_description">Hegymászó utak megjeleítése</string>
     <string name="rendering_attr_showClimbingRoutes_name">Hegymászó utak</string>
-    <string name="display_distance_to_first_intermediate">Idő és távolság megjelenítése az első köztes ponthoz, ha be van állítva</string>
+    <string name="display_distance_to_first_intermediate_summary">Először a következő megállásig tartó időt és távolságot mutatja. Kapcsolja ki, hogy mindig az úticél részleteit mutassa.</string>
+    <string name="display_distance_to_first_intermediate">A következő megállásig tartó útvonal részleteinek mutatása</string>
+    <string name="popular_places_nearby">Népszerű helyek a közelben</string>
+    <string name="recently_visited">Nemrég látogatott</string>
+    <string name="shared_string_avg_altitude">Átlagos magasság</string>
+    <string name="shared_string_avg_speed">Legkisebb sebesség</string>
+    <string name="shared_string_length">Hosszúság</string>
 </resources>

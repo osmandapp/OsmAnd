@@ -304,9 +304,6 @@
     <string name="lang_fy">Западнофризский</string>
     <string name="lang_als">Албанский (тоскский)</string>
     <string name="rendering_attr_showProposed_name">Планируемые объекты</string>
-    <string name="srtm_plugin_description">Наложение контурных линий и слоя затенения рельефа (отмывки) поверх стандартных карт OsmAnd. Эту функцию оценят спортсмены, туристы, путешественники и все, кому важна рельефная структура ландшафта.
-\n
-\nГлобальные данные (между 70° на севере и 70° на юге) основаны на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) — инструменте визуализации Terra, флагманского спутника Системы наблюдения Земли NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), а также Космических систем Японии (J-spacesystems).</string>
     <string name="srtm_paid_version_msg">Рассмотрите возможность покупки плагина «Ландшафт» в Google Play, чтобы поддержать последующую разработку.</string>
     <string name="srtm_paid_version_title">Ландшафт</string>
     <string name="av_def_action_video">Записать видео</string>
@@ -1563,10 +1560,6 @@
     <string name="duration">Продолжительность</string>
     <string name="save_track_interval_globally">Интервал записи</string>
     <string name="save_track_to_gpx_globally_descr">Ведение записи местоположений в файл GPX можно включить или выключить с помощью виджета записи GPX на карте.</string>
-    <string name="record_plugin_description">Запись и сохранение треков через виджет GPX; возможность автоматической записи маршрута в GPX-файл при навигации (должно быть включено в настройках).
-\n
-\nЗаписанные треки можно отправлять друзьям или использовать для вклада в OSM.
-\nОни помогут спортсменам контролировать тренировки. Базовый анализ треков (время прохождения круга, средняя скорость и др.) можно выполнить непосредственно в OsmAnd. И конечно, треки можно анализировать специальными инструментами сторонних производителей.</string>
     <string name="create_poi_link_to_osm_doc"><u>Онлайн OSM</u> классификация карт с изображениями.</string>
     <string name="confirm_every_run">Всегда спрашивать</string>
     <string name="save_global_track_interval">Общий интервал записи трека</string>
@@ -1768,7 +1761,6 @@
     <string name="delay_to_start_navigation_descr">Укажите время ожидания на экране составления маршрута.</string>
     <string name="delay_to_start_navigation">Старт пошагового ведения через…</string>
     <string name="shared_string_go">Поехали</string>
-    <string name="plugin_nautical_descr">Морские карты для катания на лодках, парусного спорта и других видов спорта. \n \nСпециальная дополнительная карта для OsmAnd добавляет морские навигационные и условные знаки как для внутренней, так и для прибрежной навигации. Описание навигационных отметок содержит информацию, необходимую для их идентификации, а также их характеристики (категория, форма, цвет, последовательность мерцания огней и т.д.). \n \nЧтобы вернуться к базовому стилю карты, отключите этот плагин или измените Стиль карты в разделе «Настройки карты».</string>
     <string name="local_osm_changes_upload_all_confirm">Отправить изменения (%1$d) в OSM\?</string>
     <string name="confirmation_to_clear_history">Очистить историю?</string>
     <string name="plugin_ski_descr">Информация о маршрутах для беговых лыж, горнолыжных трассах, альпийских спусках, фуникулёрах и горнолыжных подъёмниках. Маршруты и спуски отмечены разными цветами в зависимости от сложности и отображаются в особом «зимнем» стиле карты, где используются «снежные» цвета зимнего пейзажа. \n \nПри выборе этого стиля вид карты меняется на «Зимний/лыжный», отображая все детали так, как они выглядят зимой. \nОтключить стиль можно здесь либо через смену стиля карты в разделе «Настройки карты».</string>
@@ -4644,7 +4636,6 @@
     <string name="altitude_correction">Коррекция высоты</string>
     <string name="next_live_update_time">Следующее обновление в %1$s.</string>
     <string name="includes_osm_changes_until">Включает изменения OSM, сделанные до %1$s.</string>
-    <string name="no_altitude_data_desc">Для получения данных рассчитайте маршрут онлайн или выполните привязку к дорогам.</string>
     <string name="updated_map_time">Обновлено: %1$s.</string>
     <string name="next_live_update_date_and_time">Следующее обновление %1$s в %2$s.</string>
     <string name="switch_widget_mode_desc">Вы можете переключить режим, нажав на виджет.</string>
@@ -5794,7 +5785,7 @@
     <string name="connect_obd_instructions_step1">Подключите сканер к порту OBD-II вашего транспортного средства.</string>
     <string name="connect_obd_instructions_step2">Запустите двигатель транспортного средства.</string>
     <string name="connect_obd_instructions_step3">Включите Bluetooth на вашем устройстве.</string>
-    <string name="connect_obd_instructions_step4">Нажмите «Подключиться» и выберите ваш сканер из списка.</string>
+    <string name="connect_obd_instructions_step4">Нажмите «%1$s» и выберите ваш сканер из списка.</string>
     <string name="learn_more_about_obd_sensors">Узнать больше о датчиках.</string>
     <string name="obd_fuel_left_liters">Осталось топлива (литров)</string>
     <string name="route_guidance">Маршрутные маневры</string>
@@ -5898,5 +5889,9 @@
     <string name="calculating_indication_message">Расчет…</string>
     <string name="rendering_attr_showClimbingRoutes_description">Показать скалолазные маршруты</string>
     <string name="rendering_attr_showClimbingRoutes_name">Скалолазные маршруты</string>
-    <string name="display_distance_to_first_intermediate">Отображать время и расстояние до первой промежуточной точки, если она установлена</string>
+    <string name="shared_string_length">Длина</string>
+    <string name="shared_string_avg_altitude">Средняя высота</string>
+    <string name="shared_string_avg_speed">Мин. скорость</string>
+    <string name="popular_places_nearby">Популярные места поблизости</string>
+    <string name="recently_visited">Недавно посещенные</string>
 </resources>

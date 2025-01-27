@@ -1,7 +1,6 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -17,14 +16,12 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
-import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -235,16 +232,7 @@ public class MenuRowBuilder {
 
 	@Nullable
 	public Drawable getRowIcon(Context ctx, String fileName) {
-		Drawable d = RenderingIcons.getBigIcon(ctx, fileName);
-		if (d != null) {
-			d = DrawableCompat.wrap(d);
-			d.mutate();
-			d.setColorFilter(getColor(isLightContent()
-					? R.color.icon_color_secondary_light : R.color.icon_color_secondary_dark), PorterDuff.Mode.SRC_IN);
-			return d;
-		} else {
-			return null;
-		}
+		return app.getUIUtilities().getRenderingIcon(ctx, fileName, isLightContent());
 	}
 
 	@ColorInt

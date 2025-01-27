@@ -166,6 +166,12 @@ object GpxDbHelper : GpxReaderAdapter {
 	): Boolean {
 		item.setParameter(parameter, value)
 		val res = database.updateDataItemParameter(item, parameter, value)
+		if (res && parameter.isAnalysisRecalculationNeeded()) {
+			// Reset DATA_VERSION to force recalculation of analysis
+			item.setParameter(GpxParameter.DATA_VERSION, 0)
+			item.increaseAnalysisParametersVersion()
+			database.updateDataItemParameter(item, GpxParameter.DATA_VERSION, 0)
+		}
 		putToCache(item)
 		return res
 	}
@@ -234,6 +240,10 @@ object GpxDbHelper : GpxReaderAdapter {
 		return getItem(file, null)
 	}
 
+	fun getItem(file: KFile, readIfNeeded: Boolean): GpxDataItem? {
+		return getItem(file, null, readIfNeeded)
+	}
+
 	fun getGpxDirItem(file: KFile): GpxDirItem {
 		var item = dirItems[file]
 		if (item == null) {
@@ -247,11 +257,15 @@ object GpxDbHelper : GpxReaderAdapter {
 	}
 
 	fun getItem(file: KFile, callback: GpxDataItemCallback?): GpxDataItem? {
+		return getItem(file, callback, true)
+	}
+
+	fun getItem(file: KFile, callback: GpxDataItemCallback?, readIfNeeded: Boolean): GpxDataItem? {
 		if (file.isPathEmpty()) {
 			return null
 		}
 		val item = dataItems[file]
-		if (GpxDbUtils.isAnalyseNeeded(item) && GpxDataItem.isRegularTrack(file)) {
+		if (readIfNeeded && GpxDbUtils.isAnalyseNeeded(item) && GpxDataItem.isRegularTrack(file)) {
 			readGpxItem(file, item, callback)
 		}
 		return item

@@ -4624,7 +4624,7 @@
     <string name="si_nm_ft">Наутичке миље/стопе</string>
     <string name="av_audio_format_bottom_sheet_descr">Означите облик звучног записа. Врста звучне датотеке је 3ГПП (.3gp).</string>
     <string name="choose_what_to_sync">Одредите шта ће се усклађивати</string>
-    <string name="cloud_sync_progress">Усклади…%1$s</string>
+    <string name="cloud_sync_progress">Усклади… %1$s</string>
     <string name="check_for_updates">Провери освежења</string>
     <string name="shared_string_cloud">Облак</string>
     <string name="new_file">Нова датотека</string>
@@ -5655,5 +5655,11 @@
     <string name="calculating_indication_message">Израчунавање…</string>
     <string name="rendering_attr_showClimbingRoutes_name">Стазе за пењање</string>
     <string name="rendering_attr_showClimbingRoutes_description">Приказати стазе за пењање</string>
-    <string name="display_distance_to_first_intermediate">Прикажи време и раздаљину до првог међуодредишта ако је подешено</string>
+    <string name="display_distance_to_first_intermediate_summary">Прво приказује време и раздаљину до следећег заустављања. Искључите да бисте увек приказивали детаље за одредиште.</string>
+    <string name="display_distance_to_first_intermediate">Приказ детаља руте за следеће заустављање</string>
+    <string name="popular_places_nearby">Популарна места у близини</string>
+    <string name="recently_visited">Недавно посећено</string>
+    <string name="shared_string_length">Дужина</string>
+    <string name="shared_string_avg_altitude">Просечна надморска висина</string>
+    <string name="shared_string_avg_speed">Минимална брзина</string>
 </resources>

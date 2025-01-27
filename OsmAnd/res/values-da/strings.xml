@@ -4709,7 +4709,7 @@
     <string name="cloud_all_changes_uploaded_descr">Alle ændringer foretaget på denne enhed er synkroniseret med OsmAnd Cloud.</string>
     <string name="cloud_no_conflicts">Der er ingen konflikter.</string>
     <string name="download_cloud_version">Download cloud-version</string>
-    <string name="cloud_sync_progress">Synkroniserer...%1$s</string>
+    <string name="cloud_sync_progress">Synkroniserer… %1$s</string>
     <string name="backup_error_failed_to_fetch_remote_items">Fillisten kunne ikke hentes fra serveren.</string>
     <string name="import_export">Import/eksport</string>
     <string name="modified_file">Ændret fil</string>
@@ -4986,7 +4986,7 @@
     <string name="feature_available_as_part_of_plan">%1$s tilgængelig som en del af %2$s-abonnementet</string>
     <string name="shared_string_included">Inkluderet</string>
     <string name="hillshade_slope">Terrænskygge, hældning</string>
-    <string name="local_indexes_category_terrain">Terrænkort (3D</string>
+    <string name="local_indexes_category_terrain">Terrænkort (3D)</string>
     <string name="map_widget_glide_average_desc">Viser det gennemsnitlige glidetal for det indstillede interval.</string>
     <string name="average_glide_time_interval_desc">Angiv tidsintervallet for glide-gennemsnit.</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
@@ -5697,5 +5697,11 @@
     <string name="calculate_size">Beregn størrelse</string>
     <string name="rendering_attr_showClimbingRoutes_name">Klatreruter</string>
     <string name="rendering_attr_showClimbingRoutes_description">Vis klatreruter</string>
-    <string name="display_distance_to_first_intermediate">Vis tid og afstand til første mellemliggende, hvis det er indstillet</string>
+    <string name="display_distance_to_first_intermediate_summary">Viser tid og afstand til næste stop først. Slå fra for altid at vise detaljer for destinationen.</string>
+    <string name="display_distance_to_first_intermediate">Vis rutedetaljer for det næste stop</string>
+    <string name="popular_places_nearby">Populære steder i nærheden</string>
+    <string name="recently_visited">Besøgt for nylig</string>
+    <string name="shared_string_length">Længde</string>
+    <string name="shared_string_avg_altitude">Gns. højde</string>
+    <string name="shared_string_avg_speed">Min. hastighed</string>
 </resources>

@@ -1734,7 +1734,7 @@ public class OsmandSettings {
 
 	public final CommonPreference<GPXDataSetAxisType> TRIP_RECORDING_Y_AXIS = new EnumStringPreference<>(this, "trip_recording_Y_axis", GPXDataSetAxisType.DISTANCE, GPXDataSetAxisType.values());
 
-	public final CommonPreference<Boolean> SHOW_TRIP_REC_NOTIFICATION = new BooleanPreference(this, "show_trip_recording_notification", true).makeProfile();
+	public final CommonPreference<Boolean> SHOW_TRIP_REC_NOTIFICATION = new BooleanPreference(this, "show_trip_recording_notification", false).makeProfile();
 
 
 	public final CommonPreference<Boolean> LIVE_MONITORING = new BooleanPreference(this, "live_monitoring", false).makeProfile();

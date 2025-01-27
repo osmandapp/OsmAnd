@@ -3807,7 +3807,7 @@
     <string name="contact_support">Obrati se podršci</string>
     <string name="troubleshooting">Rešavanje problema</string>
     <string name="troubleshooting_description">Prati ovaj link ako imaš ikakvih problema sa kupovinom.</string>
-    <string name="osmand_live">OsmAnd Live</string>
+    <string name="osmand_live">OsmAnd Lajv</string>
     <string name="annual_subscription">Godišnja pretplata</string>
     <string name="monthly_subscription">Mesečna pretplata</string>
     <string name="three_months_subscription">Tromesečna članarina</string>
@@ -4425,7 +4425,7 @@
     <string name="key_event_category_actions">Akcije</string>
     <string name="key_event_action_activity_back_pressed">Aktivnost natrag je pritisnuta</string>
     <string name="shared_string_show_icon">Prikazati ikonu</string>
-    <string name="local_indexes_category_terrain">Mapa trerena (3D)</string>
+    <string name="local_indexes_category_terrain">Mape terena (3D)</string>
     <string name="get_osmand_cloud">Nabavi OsmAnd Cloud</string>
     <string name="delete_account">Obriši nalog</string>
     <string name="external_sensors_not_found">Sensor nije pronađen</string>
@@ -4840,7 +4840,7 @@
     <string name="shared_string_close_the_dialog">Zatvori prozor</string>
     <string name="delete_track_folder_dialog_message">Ovo će izbrisati folder \"%1$s\" i sve %2$s sadržane trase.</string>
     <string name="delete_folder_question">Da li brišeš folder?</string>
-    <string name="cloud_sync_progress">Sinhronizacija…%1$s</string>
+    <string name="cloud_sync_progress">Sinhronizacija… %1$s</string>
     <string name="check_for_updates">Proveri osveženja</string>
     <string name="download_cloud_version">Preuzmi izdanje iz Cloud-a</string>
     <string name="shared_string_do_not_exist">Ne postoji</string>
@@ -5660,5 +5660,11 @@
     <string name="calculating_indication_message">Preračunavanje…</string>
     <string name="rendering_attr_showClimbingRoutes_name">Staze za penjanje</string>
     <string name="rendering_attr_showClimbingRoutes_description">Prikazati staze za penjanje</string>
-    <string name="display_distance_to_first_intermediate">Prikaži vreme i razdaljinu do prvog međuodredišta ako je podešeno</string>
+    <string name="display_distance_to_first_intermediate_summary">Prvo prikazuje vreme i razdaljinu do sledećeg zaustavljanja. Isključite da biste uvek prikazivali detalje za odredište.</string>
+    <string name="display_distance_to_first_intermediate">Prikaz detalja rute za sledeće zaustavljanje</string>
+    <string name="recently_visited">Nedavno posećeno</string>
+    <string name="popular_places_nearby">Popularna mesta u blizini</string>
+    <string name="shared_string_length">Dužina</string>
+    <string name="shared_string_avg_altitude">Prosečna nadmorska visina</string>
+    <string name="shared_string_avg_speed">Minimalna brzina</string>
 </resources>

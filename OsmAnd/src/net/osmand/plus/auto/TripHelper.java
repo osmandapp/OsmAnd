@@ -25,6 +25,7 @@ import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.routing.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.mapwidgets.LanesDrawable;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
 import net.osmand.router.TurnType;
@@ -41,6 +42,7 @@ public class TripHelper {
 	public static final float TURN_LANE_IMAGE_MARGIN = 4f;
 
 	private final OsmandApplication app;
+	private final OsmandSettings settings;
 	private final RoutingHelper routingHelper;
 
 	private Destination lastDestination;
@@ -52,6 +54,7 @@ public class TripHelper {
 
 	public TripHelper(@NonNull OsmandApplication app) {
 		this.app = app;
+		this.settings = app.getSettings();
 		this.routingHelper = app.getRoutingHelper();
 	}
 
@@ -296,7 +299,7 @@ public class TripHelper {
 
 		int leftTimeSec = 0;
 		int leftDistance = 0;
-		if (app.getSettings().USE_LEFT_DISTANCE_TO_INTERMEDIATE.get()) {
+		if (settings.USE_LEFT_DISTANCE_TO_INTERMEDIATE.get()) {
 			leftDistance = routingHelper.getLeftTimeNextIntermediate();
 			leftTimeSec = routingHelper.getLeftTimeNextIntermediate();
 		}

@@ -4868,7 +4868,7 @@
     <string name="poi_property_management">Immobilienverwaltung</string>
     <string name="poi_engineer">Ingenieurbüro</string>
     <string name="poi_mcdonalds">McDonald\'s</string>
-    <string name="poi_cash_in">Kaution</string>
+    <string name="poi_cash_in">Einzahlung möglich</string>
     <string name="poi_cash_in_yes">Ja</string>
     <string name="poi_cash_in_no">Nein</string>
     <string name="poi_cash_in_customers">Kunden</string>
