@@ -15,12 +15,14 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -239,18 +241,34 @@ public class TextRenderer {
 	}
 
 	public void drawShieldIcon(RenderingContext rc, Canvas cv, TextDrawInfo text, String sr) {
+		drawShieldIcon(rc, cv, text, sr, null);
+	}
+
+	public void drawShieldIcon(RenderingContext rc, Canvas cv, TextDrawInfo text, String sr, @Nullable Integer customViewHeight) {
 		if (sr != null) {
 			float coef = rc.getDensityValue(rc.screenDensityRatio * rc.textScale);
 			Drawable ico = RenderingIcons.getDrawableIcon(context, sr, true);
 			if (ico != null) {
-				float left = text.centerX - ico.getIntrinsicWidth() / 2f * coef - 0.5f;
-				float top = text.centerY - ico.getIntrinsicHeight() / 2f * coef - paintText.descent() * 1.5f;
+				int iconHeight = ico.getIntrinsicHeight();
+				int iconWidth = ico.getIntrinsicWidth();
+				float xyRatio = (float) iconWidth / iconHeight;
+
+				if (customViewHeight != null) {
+					int viewHeightPx = AndroidUtils.dpToPx(rc.ctx, customViewHeight);
+					int viewWidthPx = (int) (viewHeightPx * xyRatio);
+
+					iconHeight = viewHeightPx;
+					iconWidth = viewWidthPx;
+				}
+
+				float left = text.centerX - iconWidth / 2f * coef - 0.5f;
+				float top = text.centerY - iconHeight / 2f * coef - paintText.descent() * 1.5f;
 				cv.save();
 				cv.translate(left, top);
 				if (rc.screenDensityRatio != 1f) {
-					ico.setBounds(0, 0, (int) (ico.getIntrinsicWidth() * coef), (int) (ico.getIntrinsicHeight() * coef));
+					ico.setBounds(0, 0, (int) (iconWidth * coef), (int) (iconHeight * coef));
 				} else {
-					ico.setBounds(0, 0, ico.getIntrinsicWidth(), ico.getIntrinsicHeight());
+					ico.setBounds(0, 0, iconWidth, iconHeight);
 				}
 				ico.draw(cv);
 				cv.restore();

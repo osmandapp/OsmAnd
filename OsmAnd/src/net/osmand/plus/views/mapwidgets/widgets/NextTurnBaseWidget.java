@@ -54,6 +54,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	private static final int EXIT_OUT_TEXT_SIZE_L = 22;
 	private static final int EXIT_OUT_TEXT_SIZE_M = 15;
 	private static final int EXIT_OUT_TEXT_SIZE_S = 11;
+	private static final int SHIELD_HEIGHT_DP = 40;
 
 	protected boolean horizontalMini;
 	protected int deviatedPath;
@@ -202,7 +203,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			int maxShields = min(shields.size(), MAX_SHIELDS_QUANTITY);
 			for (int i = 0; i < maxShields; i++) {
 				RoadShield shield = shields.get(i);
-				isShieldSet |= setShieldImage(shield, mapActivity, shieldImagesContainer, isNightMode());
+				isShieldSet |= setShieldImage(shield, mapActivity, shieldImagesContainer, SHIELD_HEIGHT_DP, isNightMode());
 			}
 			return isShieldSet;
 		}
