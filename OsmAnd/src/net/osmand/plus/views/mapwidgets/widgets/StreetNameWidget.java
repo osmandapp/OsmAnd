@@ -226,7 +226,7 @@ public class StreetNameWidget extends MapWidget {
 			int maxShields = min(shields.size(), MAX_SHIELDS_QUANTITY);
 			for (int i = 0; i < maxShields; i++) {
 				RoadShield shield = shields.get(i);
-				isShieldSet |= setShieldImage(shield, mapActivity, shieldImagesContainer, isNightMode());
+				isShieldSet |= setShieldImage(shield, mapActivity, shieldImagesContainer, null, isNightMode());
 			}
 			return isShieldSet;
 		}
@@ -234,7 +234,7 @@ public class StreetNameWidget extends MapWidget {
 	}
 
 	public static boolean setShieldImage(@NonNull RoadShield shield, @NonNull MapActivity mapActivity,
-	                                     @NonNull LinearLayout shieldImagesContainer, boolean nightMode) {
+	                                     @NonNull LinearLayout shieldImagesContainer, @Nullable Integer customViewHeight, boolean nightMode) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		RouteDataObject object = shield.getRdo();
 		StringBuilder additional = shield.getAdditional();
@@ -287,21 +287,35 @@ public class StreetNameWidget extends MapWidget {
 		float ySize = shieldDrawable.getIntrinsicHeight();
 		float xyRatio = xSize / ySize;
 		//setting view proportions (height is fixed by toolbar size - 48dp);
-		int viewHeightPx = AndroidUtils.dpToPx(app, 48);
+
+		boolean isCustomViewProportions = customViewHeight != null;
+		int bitmapWidth = (int) xSize;
+		int bitmapHeight = (int) ySize;
+		float scaleCoefficient = 1;
+
+		int viewHeightPx = AndroidUtils.dpToPx(app, isCustomViewProportions ? customViewHeight : 48);
 		int viewWidthPx = (int) (viewHeightPx * xyRatio);
 
-		Bitmap bitmap = Bitmap.createBitmap((int) xSize, (int) ySize, Bitmap.Config.ARGB_8888);
+		if (isCustomViewProportions) {
+			bitmapWidth = viewWidthPx;
+			bitmapHeight = viewHeightPx;
+			scaleCoefficient = viewWidthPx / xSize;
+		}
+
+		Bitmap bitmap = Bitmap.createBitmap(bitmapWidth, bitmapHeight, Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmap);
 		Paint paint = setupTextPaint(app, textRenderer.getPaintText(), rreq);
+		float basePx = paint.getTextSize();
+		paint.setTextSize(basePx * scaleCoefficient);
 
-		float centerX = xSize / 2f;
-		float centerY = ySize / 2f - paint.getFontMetrics().ascent / 2f;
+		float centerX = bitmapWidth / 2f;
+		float centerY = bitmapHeight / 2f - paint.getFontMetrics().ascent / 2f;
 		text.fillProperties(rc, rreq, centerX, centerY);
-		textRenderer.drawShieldIcon(rc, canvas, text, text.getShieldResIcon());
+		textRenderer.drawShieldIcon(rc, canvas, text, text.getShieldResIcon(), customViewHeight);
 		textRenderer.drawWrappedText(canvas, text, 20f);
 
 		ImageView imageView = new ImageView(mapActivity);
-		int viewSize = AndroidUtils.dpToPx(app, 40f);
+		int viewSize = AndroidUtils.dpToPx(app, isCustomViewProportions ? customViewHeight : 40f);
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(viewWidthPx, viewSize);
 		int padding = AndroidUtils.dpToPx(app, 4f);
 		imageView.setPadding(0, 0, 0, padding);
