@@ -120,9 +120,7 @@ public class RouteInfoCard extends MapBaseCard {
 			}
 		}
 
-		if (addedRows == 0) {
-			view.setVisibility(View.GONE);
-		}
+		updateVisibility(view, addedRows > 0);
 	}
 
 	@NonNull
