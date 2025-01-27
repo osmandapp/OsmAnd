@@ -63,7 +63,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
-import net.osmand.PlatformUtil;
+import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -106,7 +106,6 @@ import net.osmand.plus.track.cards.CopyrightCard;
 import net.osmand.plus.track.cards.DescriptionCard;
 import net.osmand.plus.track.cards.GpxInfoCard;
 import net.osmand.plus.track.cards.InfoCard;
-import net.osmand.plus.track.cards.MetadataExtensionsCard;
 import net.osmand.plus.track.cards.OptionsCard;
 import net.osmand.plus.track.cards.OverviewCard;
 import net.osmand.plus.track.cards.PointsGroupsCard;
@@ -157,11 +156,11 @@ import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-import org.apache.commons.logging.Log;
-
 import java.io.File;
 import java.lang.ref.WeakReference;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TrackMenuFragment extends ContextMenuScrollFragment implements CardListener,
 		SegmentActionsListener, RenameCallback, OnTrackFileMoveListener, OnPointsDeleteListener,
@@ -169,7 +168,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		DisplayPointGroupsCallback, CalculateAltitudeListener, OnSaveDescriptionCallback {
 
 	public static final String TAG = TrackMenuFragment.class.getName();
-	private static final Log log = PlatformUtil.getLog(TrackMenuFragment.class);
 
 	public static final String TRACK_FILE_NAME = "track_file_name";
 	public static final String OPEN_TAB_NAME = "open_tab_name";
@@ -180,7 +178,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public static final String RETURN_SCREEN_NAME = "return_screen_name";
 	public static final String CALLING_FRAGMENT_TAG = "calling_fragment_tag";
 	public static final String ADJUST_MAP_POSITION = "adjust_map_position";
-	public static final String TRACK_DELETED_KEY = "track_deleted_key";
+	// public static final String TRACK_DELETED_KEY = "track_deleted_key";
 
 	private TrackDisplayHelper displayHelper;
 	private GpxSelectionHelper gpxSelectionHelper;
@@ -195,7 +193,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private AuthorCard authorCard;
 	private CopyrightCard copyrightCard;
 	private InfoCard infoCard;
-	private MetadataExtensionsCard metadataExtensionsCard;
+	private RouteInfoCard trackExtensionsCard;
 	private RouteInfoCard routeInfoCard;
 	private OverviewCard overviewCard;
 	private TrackPointsCard pointsCard;
@@ -817,11 +815,18 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			cardsContainer.addView(copyrightCard.build(mapActivity));
 		}
 
-		if (shouldReattachCards && metadataExtensionsCard != null && metadataExtensionsCard.getView() != null) {
-			reattachCard(cardsContainer, metadataExtensionsCard);
+		if (shouldReattachCards && trackExtensionsCard != null && trackExtensionsCard.getView() != null) {
+			reattachCard(cardsContainer, trackExtensionsCard);
 		} else {
-			metadataExtensionsCard = new MetadataExtensionsCard(mapActivity, metadata);
-			cardsContainer.addView(metadataExtensionsCard.build(mapActivity));
+			Map<String, String> combinedExtensionsTags = new LinkedHashMap<>();
+			combinedExtensionsTags.putAll(metadata.getExtensionsToRead());
+			combinedExtensionsTags.putAll(gpxFile.getExtensionsToRead());
+			if (!combinedExtensionsTags.isEmpty()) {
+				RouteKey tagsAsRouteKey = new RouteKey(OsmRouteType.UNKNOWN);
+				combinedExtensionsTags.forEach(tagsAsRouteKey::addTag);
+				trackExtensionsCard = new RouteInfoCard(mapActivity, tagsAsRouteKey, gpxFile);
+				cardsContainer.addView(trackExtensionsCard.build(mapActivity));
+			}
 		}
 
 		View cardBottomSpace = inflate(R.layout.list_item_divider, cardsContainer, true);
@@ -882,8 +887,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (infoCard != null) {
 			infoCard.updateContent();
 		}
-		if (metadataExtensionsCard != null) {
-			metadataExtensionsCard.updateContent();
+		if (trackExtensionsCard != null) {
+			trackExtensionsCard.updateContent();
 		}
 	}
 
@@ -1487,8 +1492,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (copyrightCard != null) {
 			copyrightCard.updateContent();
 		}
-		if (metadataExtensionsCard != null) {
-			metadataExtensionsCard.updateContent();
+		if (trackExtensionsCard != null) {
+			trackExtensionsCard.updateContent();
 		}
 		updatePointGroupsCard();
 		setupCards(true);

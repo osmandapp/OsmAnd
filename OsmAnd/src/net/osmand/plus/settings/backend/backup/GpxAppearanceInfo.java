@@ -1,11 +1,5 @@
 package net.osmand.plus.settings.backend.backup;
 
-import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_ALTITUDE;
-import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_HDOP;
-import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_SPEED;
-import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MIN_FILTER_ALTITUDE;
-import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MIN_FILTER_SPEED;
-import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_SMOOTHING_THRESHOLD;
 import static net.osmand.shared.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.shared.gpx.GpxParameter.COLOR;
 import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
@@ -46,7 +40,62 @@ import net.osmand.util.Algorithms;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Set;
+
 public class GpxAppearanceInfo {
+	public static final String TAG_COLOR = "color";
+	public static final String TAG_WIDTH = "width";
+	public static final String TAG_SHOW_ARROWS = "show_arrows";
+	public static final String TAG_START_FINISH = "show_start_finish";
+	public static final String TAG_SPLIT_TYPE = "split_type";
+	public static final String TAG_SPLIT_INTERVAL = "split_interval";
+	public static final String TAG_COLORING_TYPE = "coloring_type";
+	public static final String TAG_COLOR_PALETTE = "color_palette";
+	public static final String TAG_LINE_3D_VISUALIZATION_BY_TYPE = "line_3d_visualization_by_type";
+	public static final String TAG_LINE_3D_VISUALIZATION_WALL_COLOR_TYPE = "line_3d_visualization_wall_color_type";
+	public static final String TAG_LINE_3D_VISUALIZATION_POSITION_TYPE = "line_3d_visualization_position_type";
+	public static final String TAG_VERTICAL_EXAGGERATION_SCALE = "vertical_exaggeration_scale";
+	public static final String TAG_ELEVATION_METERS = "elevation_meters";
+	public static final String TAG_TIME_SPAN = "time_span";
+	public static final String TAG_WPT_POINTS = "wpt_points";
+	public static final String TAG_TOTAL_DISTANCE = "total_distance";
+	public static final String TAG_GRADIENT_SCALE_TYPE = "gradient_scale_type";
+	public static final String TAG_SMOOTHING_THRESHOLD = "smoothing_threshold";
+	public static final String TAG_MIN_FILTER_SPEED = "min_filter_speed";
+	public static final String TAG_MAX_FILTER_SPEED = "max_filter_speed";
+	public static final String TAG_MIN_FILTER_ALTITUDE = "min_filter_altitude";
+	public static final String TAG_MAX_FILTER_ALTITUDE = "max_filter_altitude";
+	public static final String TAG_MAX_FILTER_HDOP = "max_filter_hdop";
+
+	public static final Set<String> gpxAppearanceTags = Set.of(
+			TAG_COLOR,
+			TAG_WIDTH,
+			TAG_SHOW_ARROWS,
+			TAG_START_FINISH,
+			TAG_SPLIT_TYPE,
+			TAG_SPLIT_INTERVAL,
+			TAG_COLORING_TYPE,
+			TAG_COLOR_PALETTE,
+			TAG_LINE_3D_VISUALIZATION_BY_TYPE,
+			TAG_LINE_3D_VISUALIZATION_WALL_COLOR_TYPE,
+			TAG_LINE_3D_VISUALIZATION_POSITION_TYPE,
+			TAG_VERTICAL_EXAGGERATION_SCALE,
+			TAG_ELEVATION_METERS,
+			TAG_TIME_SPAN,
+			TAG_WPT_POINTS,
+			TAG_TOTAL_DISTANCE,
+			TAG_GRADIENT_SCALE_TYPE,
+			TAG_SMOOTHING_THRESHOLD,
+			TAG_MIN_FILTER_SPEED,
+			TAG_MAX_FILTER_SPEED,
+			TAG_MIN_FILTER_ALTITUDE,
+			TAG_MAX_FILTER_ALTITUDE,
+			TAG_MAX_FILTER_HDOP
+	);
+
+	public static boolean isGpxAppearanceTag(@NonNull String tag) {
+		return gpxAppearanceTags.contains(tag);
+	}
 
 	public String width;
 	public String coloringType;
@@ -107,23 +156,23 @@ public class GpxAppearanceInfo {
 	}
 
 	public void toJson(@NonNull JSONObject json) throws JSONException {
-		writeParam(json, "color", color);
-		writeParam(json, "width", width);
-		writeParam(json, "show_arrows", showArrows);
-		writeParam(json, "show_start_finish", showStartFinish);
-		writeParam(json, "split_type", GpxSplitType.getSplitTypeByTypeId(splitType).getTypeName());
-		writeParam(json, "split_interval", splitInterval);
-		writeParam(json, "coloring_type", coloringType);
-		writeParam(json, "color_palette", gradientPaletteName);
-		writeParam(json, "line_3d_visualization_by_type", trackVisualizationType.getTypeName());
-		writeParam(json, "line_3d_visualization_wall_color_type", trackWallColorType.getTypeName());
-		writeParam(json, "line_3d_visualization_position_type", trackLinePositionType.getTypeName());
-		writeParam(json, "vertical_exaggeration_scale", verticalExaggeration);
-		writeParam(json, "elevation_meters", elevationMeters);
+		writeParam(json, TAG_COLOR, color);
+		writeParam(json, TAG_WIDTH, width);
+		writeParam(json, TAG_SHOW_ARROWS, showArrows);
+		writeParam(json, TAG_START_FINISH, showStartFinish);
+		writeParam(json, TAG_SPLIT_TYPE, GpxSplitType.getSplitTypeByTypeId(splitType).getTypeName());
+		writeParam(json, TAG_SPLIT_INTERVAL, splitInterval);
+		writeParam(json, TAG_COLORING_TYPE, coloringType);
+		writeParam(json, TAG_COLOR_PALETTE, gradientPaletteName);
+		writeParam(json, TAG_LINE_3D_VISUALIZATION_BY_TYPE, trackVisualizationType.getTypeName());
+		writeParam(json, TAG_LINE_3D_VISUALIZATION_WALL_COLOR_TYPE, trackWallColorType.getTypeName());
+		writeParam(json, TAG_LINE_3D_VISUALIZATION_POSITION_TYPE, trackLinePositionType.getTypeName());
+		writeParam(json, TAG_VERTICAL_EXAGGERATION_SCALE, verticalExaggeration);
+		writeParam(json, TAG_ELEVATION_METERS, elevationMeters);
 
-		writeParam(json, "time_span", timeSpan);
-		writeParam(json, "wpt_points", wptPoints);
-		writeParam(json, "total_distance", totalDistance);
+		writeParam(json, TAG_TIME_SPAN, timeSpan);
+		writeParam(json, TAG_WPT_POINTS, wptPoints);
+		writeParam(json, TAG_TOTAL_DISTANCE, totalDistance);
 
 		writeValidDouble(json, TAG_SMOOTHING_THRESHOLD, smoothingThreshold);
 		writeValidDouble(json, TAG_MIN_FILTER_SPEED, minFilterSpeed);
@@ -135,50 +184,50 @@ public class GpxAppearanceInfo {
 
 	public static GpxAppearanceInfo fromJson(@NonNull JSONObject json) {
 		GpxAppearanceInfo gpxAppearanceInfo = new GpxAppearanceInfo();
-		boolean hasAnyParam = json.has("color");
-		gpxAppearanceInfo.color = json.optInt("color");
-		hasAnyParam |= json.has("width");
-		gpxAppearanceInfo.width = json.optString("width");
-		hasAnyParam |= json.has("show_arrows");
-		gpxAppearanceInfo.showArrows = json.optBoolean("show_arrows");
-		hasAnyParam |= json.has("show_start_finish");
-		gpxAppearanceInfo.showStartFinish = json.optBoolean("show_start_finish");
-		hasAnyParam |= json.has("split_type");
-		gpxAppearanceInfo.splitType = GpxSplitType.getSplitTypeByName(json.optString("split_type")).getType();
-		hasAnyParam |= json.has("split_interval");
-		gpxAppearanceInfo.splitInterval = json.optDouble("split_interval");
-		hasAnyParam |= json.has("coloring_type");
-		gpxAppearanceInfo.coloringType = json.optString("coloring_type");
+		boolean hasAnyParam = json.has(TAG_COLOR);
+		gpxAppearanceInfo.color = json.optInt(TAG_COLOR);
+		hasAnyParam |= json.has(TAG_WIDTH);
+		gpxAppearanceInfo.width = json.optString(TAG_WIDTH);
+		hasAnyParam |= json.has(TAG_SHOW_ARROWS);
+		gpxAppearanceInfo.showArrows = json.optBoolean(TAG_SHOW_ARROWS);
+		hasAnyParam |= json.has(TAG_START_FINISH);
+		gpxAppearanceInfo.showStartFinish = json.optBoolean(TAG_START_FINISH);
+		hasAnyParam |= json.has(TAG_SPLIT_TYPE);
+		gpxAppearanceInfo.splitType = GpxSplitType.getSplitTypeByName(json.optString(TAG_SPLIT_TYPE)).getType();
+		hasAnyParam |= json.has(TAG_SPLIT_INTERVAL);
+		gpxAppearanceInfo.splitInterval = json.optDouble(TAG_SPLIT_INTERVAL);
+		hasAnyParam |= json.has(TAG_COLORING_TYPE);
+		gpxAppearanceInfo.coloringType = json.optString(TAG_COLORING_TYPE);
 		if (ColoringType.Companion.valueOf(ColoringPurpose.TRACK, gpxAppearanceInfo.coloringType) == null) {
-			hasAnyParam |= json.has("gradient_scale_type");
-			GradientScaleType scaleType = getScaleType(json.optString("gradient_scale_type"));
+			hasAnyParam |= json.has(TAG_GRADIENT_SCALE_TYPE);
+			GradientScaleType scaleType = getScaleType(json.optString(TAG_GRADIENT_SCALE_TYPE));
 			ColoringType coloringType = ColoringType.Companion.valueOf(scaleType);
 			gpxAppearanceInfo.coloringType = coloringType == null
 					? null : coloringType.getName(null);
 		}
 
-		hasAnyParam |= json.has("color_palette");
-		gpxAppearanceInfo.gradientPaletteName = json.optString("color_palette");
-		hasAnyParam |= json.has("line_3d_visualization_by_type");
-		String trackVisualizationType = json.optString("line_3d_visualization_by_type");
+		hasAnyParam |= json.has(TAG_COLOR_PALETTE);
+		gpxAppearanceInfo.gradientPaletteName = json.optString(TAG_COLOR_PALETTE);
+		hasAnyParam |= json.has(TAG_LINE_3D_VISUALIZATION_BY_TYPE);
+		String trackVisualizationType = json.optString(TAG_LINE_3D_VISUALIZATION_BY_TYPE);
 		gpxAppearanceInfo.trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(trackVisualizationType);
-		hasAnyParam |= json.has("line_3d_visualization_wall_color_type");
-		String trackWallColorType = json.optString("line_3d_visualization_wall_color_type");
+		hasAnyParam |= json.has(TAG_LINE_3D_VISUALIZATION_WALL_COLOR_TYPE);
+		String trackWallColorType = json.optString(TAG_LINE_3D_VISUALIZATION_WALL_COLOR_TYPE);
 		gpxAppearanceInfo.trackWallColorType = Gpx3DWallColorType.Companion.get3DWallColorType(trackWallColorType);
-		hasAnyParam |= json.has("line_3d_visualization_position_type");
-		String trackLinePositionType = json.optString("line_3d_visualization_position_type");
+		hasAnyParam |= json.has(TAG_LINE_3D_VISUALIZATION_POSITION_TYPE);
+		String trackLinePositionType = json.optString(TAG_LINE_3D_VISUALIZATION_POSITION_TYPE);
 		gpxAppearanceInfo.trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(trackLinePositionType);
-		hasAnyParam |= json.has("vertical_exaggeration_scale");
-		gpxAppearanceInfo.verticalExaggeration = (float) json.optDouble("vertical_exaggeration_scale", SRTMPlugin.MIN_VERTICAL_EXAGGERATION);
-		hasAnyParam |= json.has("elevation_meters");
-		gpxAppearanceInfo.elevationMeters = (float) json.optDouble("elevation_meters");
+		hasAnyParam |= json.has(TAG_VERTICAL_EXAGGERATION_SCALE);
+		gpxAppearanceInfo.verticalExaggeration = (float) json.optDouble(TAG_VERTICAL_EXAGGERATION_SCALE, SRTMPlugin.MIN_VERTICAL_EXAGGERATION);
+		hasAnyParam |= json.has(TAG_ELEVATION_METERS);
+		gpxAppearanceInfo.elevationMeters = (float) json.optDouble(TAG_ELEVATION_METERS);
 
-		hasAnyParam |= json.has("time_span");
-		gpxAppearanceInfo.timeSpan = json.optLong("time_span");
-		hasAnyParam |= json.has("wpt_points");
-		gpxAppearanceInfo.wptPoints = json.optInt("wpt_points");
-		hasAnyParam |= json.has("total_distance");
-		gpxAppearanceInfo.totalDistance = (float) json.optDouble("total_distance");
+		hasAnyParam |= json.has(TAG_TIME_SPAN);
+		gpxAppearanceInfo.timeSpan = json.optLong(TAG_TIME_SPAN);
+		hasAnyParam |= json.has(TAG_WPT_POINTS);
+		gpxAppearanceInfo.wptPoints = json.optInt(TAG_WPT_POINTS);
+		hasAnyParam |= json.has(TAG_TOTAL_DISTANCE);
+		gpxAppearanceInfo.totalDistance = (float) json.optDouble(TAG_TOTAL_DISTANCE);
 
 		hasAnyParam |= json.has(TAG_SMOOTHING_THRESHOLD);
 		gpxAppearanceInfo.smoothingThreshold = json.optDouble(TAG_SMOOTHING_THRESHOLD);

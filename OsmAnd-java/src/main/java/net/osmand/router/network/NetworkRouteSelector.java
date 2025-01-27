@@ -745,7 +745,7 @@ public class NetworkRouteSelector {
 			String prefix = "route_" + type.getName() + ROUTE_KEY_VALUE_SEPARATOR;
 			if (tag.startsWith(prefix) && tag.length() > prefix.length()) {
 				int endIdx = tag.indexOf(ROUTE_KEY_VALUE_SEPARATOR, prefix.length());
-				return tag.substring(prefix.length(), endIdx);
+				return tag.substring(prefix.length(), endIdx != -1 ? endIdx : tag.length());
 			}
 			return "";
 		}
@@ -776,7 +776,11 @@ public class NetworkRouteSelector {
 				return transliteration ? TransliterationHelper.transliterate(name) : name;
 			}
 			name = getValue("ref");
-			return !name.isEmpty() ? name : getRelationID();
+			if (!name.isEmpty()) {
+				return name;
+			}
+			name = getRelationID();
+			return !name.isEmpty() ? name : this.type.getName();
 		}
 
 		public String getRelationID() {

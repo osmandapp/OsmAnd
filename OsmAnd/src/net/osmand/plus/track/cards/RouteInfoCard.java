@@ -9,7 +9,11 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
+import net.osmand.PlatformUtil;
+import net.osmand.binary.ObfConstants;
+import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.osm.AbstractPoiType;
@@ -39,16 +43,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
+import static net.osmand.data.Amenity.DESCRIPTION;
+import static net.osmand.data.Amenity.NAME;
+import static net.osmand.shared.gpx.GpxUtilities.ACTIVITY_TYPE;
+
+import org.apache.commons.logging.Log;
 
 public class RouteInfoCard extends MapBaseCard {
-
-	private static final String OSM_RELATION_URL = "https://www.openstreetmap.org/relation/";
+	public static final Set<String> HIDDEN_GPX_TAGS = Set.of(ACTIVITY_TYPE, NAME, DESCRIPTION);
+	public static final String OSM_RELATION_URL = "https://www.openstreetmap.org/relation/";
+	public static final String OSM_WAY_URL = "https://www.openstreetmap.org/way/";
 	private static final Map<String, Integer> TRANSLATABLE_KEYS = new HashMap<>();
 
 	static {
@@ -56,11 +67,12 @@ public class RouteInfoCard extends MapBaseCard {
 		TRANSLATABLE_KEYS.put("alt_name", R.string.shared_string_alt_name);
 		TRANSLATABLE_KEYS.put("symbol", R.string.shared_string_symbol);
 		TRANSLATABLE_KEYS.put("relation_id", R.string.shared_string_osm_id);
+		TRANSLATABLE_KEYS.put("way_id", R.string.shared_string_osm_id);
 	}
-
 
 	private final RouteKey routeKey;
 	private final GpxFile gpxFile;
+	private static final Log log = PlatformUtil.getLog(RouteInfoCard.class);
 
 	public RouteInfoCard(
 			@NonNull MapActivity activity,
@@ -82,11 +94,13 @@ public class RouteInfoCard extends MapBaseCard {
 		LinearLayout container = view.findViewById(R.id.items_container);
 		container.removeAllViews();
 
-		String routeTypeToDisplay = AndroidUtils.getActivityTypeTitle(app, routeKey.type);
-		addInfoRow(container, app.getString(R.string.layer_route), routeTypeToDisplay, false, false);
+		if (routeKey.type != OsmRouteType.UNKNOWN) {
+			String routeTypeToDisplay = AndroidUtils.getActivityTypeTitle(app, routeKey.type);
+			addInfoRow(container, app.getString(R.string.layer_route), routeTypeToDisplay, false, false);
+		}
 
+		int addedRows = 0;
 		for (TagsRow row : getRows()) {
-
 			LinearLayout expandableView = null;
 			int tagsCount = row.tags.size();
 
@@ -96,6 +110,7 @@ public class RouteInfoCard extends MapBaseCard {
 
 				ViewGroup tagContainer = tagIndex == 0 ? container : expandableView;
 				View view = addInfoRow(tagContainer, tag);
+				addedRows++;
 
 				if (tagIndex == 0 && tagsCount > 1) {
 					expandableView = createExpandableView();
@@ -104,6 +119,8 @@ public class RouteInfoCard extends MapBaseCard {
 				}
 			}
 		}
+
+		updateVisibility(view, addedRows > 0);
 	}
 
 	@NonNull
@@ -115,8 +132,14 @@ public class RouteInfoCard extends MapBaseCard {
 			String key = routeKey.getKeyFromTag(tag);
 			String value = routeKey.getValue(key);
 
-			if (key.equals("name") || key.equals("type") || key.contains("osmc")) {
-				continue;
+			if (routeKey.type != OsmRouteType.UNKNOWN) {
+				if (key.equals("name") || key.equals("type") || key.contains("osmc")) {
+					continue;
+				}
+			} else {
+				if (HIDDEN_GPX_TAGS.contains(key) || GpxAppearanceInfo.isGpxAppearanceTag(key)) {
+					continue;
+				}
 			}
 
 			RouteTag routeTag = new RouteTag(key, value);
@@ -171,6 +194,14 @@ public class RouteInfoCard extends MapBaseCard {
 		} else if ("relation_id".equals(tag.key)) {
 			String url = OSM_RELATION_URL + formattedValue;
 			setupClickableContent(view, v -> AndroidUtils.openUrl(activity, url, nightMode));
+		} else if ("way_id".equals(tag.key)) {
+			String url = OSM_WAY_URL + formattedValue;
+			setupClickableContent(view, v -> AndroidUtils.openUrl(activity, url, nightMode));
+		} else if ("route_id".equals(tag.key)) {
+			long osmId = ObfConstants.getOsmIdFromPrefixedRouteId(tag.value);
+			if (osmId > 0) {
+				setupClickableContent(view, v -> AndroidUtils.openUrl(activity, OSM_RELATION_URL + osmId, nightMode));
+			}
 		}
 		return view;
 	}
@@ -245,7 +276,7 @@ public class RouteInfoCard extends MapBaseCard {
 	}
 
 	private boolean shouldAddRow(@NonNull String key) {
-		if ("relation_id".equals(key)) {
+		if ("relation_id".equals(key) || "way_id".equals(key)) {
 			return PluginsHelper.isEnabled(OsmEditingPlugin.class);
 		}
 		return true;
