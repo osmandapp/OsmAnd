@@ -36,6 +36,7 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	private RecyclerView nearByList;
 	private NearbyPlacesAdapter adapter;
 	private ImageView explicitIndicator;
+	private View titleContainer;
 	private boolean collapsed;
 	private View showAllBtnContainer;
 	private View progressBar;
@@ -57,7 +58,7 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	private NearbyPlacesAdapter getNearbyAdapter() {
 		if (adapter == null) {
 			List<OsmandApiFeatureData> nearbyData = NearbyPlacesHelper.INSTANCE.getDataCollection();
-			adapter = new NearbyPlacesAdapter(getMyApplication(), nearbyData, this);
+			adapter = new NearbyPlacesAdapter(getMyApplication(), nearbyData, false, this);
 		}
 		return adapter;
 	}
@@ -138,10 +139,9 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	private void setupShowAllNearbyPlacesBtn(@NonNull View view) {
 		showAllBtnContainer = view.findViewById(R.id.show_all_button);
 		view.findViewById(R.id.show_all_btn).setOnClickListener(v -> {
-			app.getOsmandMap().getMapLayers().getNearbyPlacesLayer().setCustomMapObjects(NearbyPlacesHelper.INSTANCE.getDataCollection());
 			MapActivity activity = getMapActivity();
 			if (activity != null) {
-				NearbyPlacesFragment.showInstance(activity.getSupportFragmentManager());
+				NearbyPlacesFragment.Companion.showInstance(activity.getSupportFragmentManager());
 				getDialogFragment().hide();
 			}
 		});
@@ -150,7 +150,8 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	private void setupExpandNearbyPlacesIndicator(@NonNull View view) {
 		collapsed = app.getSettings().EXPLORE_NEARBY_ITEMS_ROW_COLLAPSED.get();
 		explicitIndicator = view.findViewById(R.id.explicit_indicator);
-		explicitIndicator.setOnClickListener(v -> {
+		titleContainer = view.findViewById(R.id.nearby_title_container);
+		titleContainer.setOnClickListener(v -> {
 			collapsed = !collapsed;
 			onNearbyPlacesCollapseChanged();
 		});
