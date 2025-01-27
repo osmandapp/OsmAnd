@@ -1,8 +1,18 @@
 package net.osmand.plus.nearbyplaces
 
+import net.osmand.NativeLibrary
+import net.osmand.core.jni.ZoomLevel
+import net.osmand.data.LatLon
 import net.osmand.data.QuadRect
 import net.osmand.plus.OsmandApplication
+import net.osmand.plus.activities.MapActivity
+import net.osmand.plus.mapcontextmenu.other.MenuObject
+import net.osmand.plus.mapcontextmenu.other.MenuObjectUtils
 import net.osmand.plus.search.GetNearbyPlacesImagesTask
+import net.osmand.plus.utils.NativeUtilities
+import net.osmand.plus.views.corenative.NativeCoreContext
+import net.osmand.plus.views.layers.ContextMenuLayer
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider
 import net.osmand.util.Algorithms
 import net.osmand.util.CollectionUtils
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData
@@ -82,5 +92,34 @@ object NearbyPlacesHelper {
 
 	fun getLastModifiedTime(): Long {
 		return lastModifiedTime
+	}
+
+	fun showPointInContextMenu(mapActivity: MapActivity, point: OsmandApiFeatureData) {
+		val rendererView = app.osmandMap.mapView.mapRenderer
+		val mapContext = NativeCoreContext.getMapRendererContext()
+		if (rendererView != null && mapContext != null) {
+			var menuObject: MenuObject? = null
+			val latitude: Double = point.geometry.coordinates[1]
+			val longitude: Double = point.geometry.coordinates[0]
+			val zoom: ZoomLevel = rendererView.zoomLevel
+			val latLon = LatLon(latitude, longitude)
+			val pointI = NativeUtilities.getPoint31FromLatLon(latLon)
+			val polygons: List<NativeLibrary.RenderedObject?> =
+				mapContext.retrievePolygonsAroundPoint(pointI, zoom, false)
+			if (!Algorithms.isEmpty(polygons)) {
+				val menuObjects =
+					MenuObjectUtils.createMenuObjectsList(mapActivity, polygons, latLon)
+				menuObject = menuObjects?.get(0)
+			}
+			menuObject?.let {
+				val contextObject: IContextMenuProvider = mapActivity.mapLayers.poiMapLayer
+				val contextMenuLayer: ContextMenuLayer = mapActivity.mapLayers.contextMenuLayer
+				contextMenuLayer.showContextMenu(
+					it.latLon,
+					it.pointDescription,
+					it.getObject(),
+					contextObject)
+			}
+		}
 	}
 }

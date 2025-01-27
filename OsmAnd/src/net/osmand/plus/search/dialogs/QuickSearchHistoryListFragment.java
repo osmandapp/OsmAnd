@@ -42,7 +42,18 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	private View progressBar;
 
 	public void onNearbyItemClicked(@NonNull WikiCoreHelper.OsmandApiFeatureData item) {
-
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			NearbyPlacesHelper.INSTANCE.showPointInContextMenu(mapActivity, item);
+			getDialogFragment().hideToolbar();
+			getDialogFragment().hide();
+		}
+//		PointDescription description = new PointDescription(PointDescription.POINT_TYPE_POI, "blabla");
+//		showOnMap(requireMapActivity(), getDialogFragment(), latitude, longitude,
+//				SearchCoreFactory.PREFERRED_NEARBY_PLACES_ZOOM, description, item);
+//
+//		getDialogFragment().hideToolbar();
+//		getDialogFragment().hide();
 	}
 
 	private void updateNearbyItems() {
