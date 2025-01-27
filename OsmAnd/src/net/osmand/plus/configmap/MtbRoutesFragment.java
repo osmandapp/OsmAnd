@@ -142,5 +142,4 @@ public class MtbRoutesFragment extends BaseOsmAndFragment {
 					.commitAllowingStateLoss();
 		}
 	}
-
 }

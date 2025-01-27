@@ -55,6 +55,7 @@ public class RenderingRulesStorage {
 	
 	protected Map<String, RenderingRule> renderingAttributes = new LinkedHashMap<String, RenderingRule>();
 	protected Map<String, RenderingRule> renderingAssociations = new LinkedHashMap<String, RenderingRule>();
+	protected Map<String, RenderingClass> renderingClasses = new LinkedHashMap<String, RenderingClass>();
 	protected Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
 	
 	protected String renderingName;
@@ -268,13 +269,15 @@ public class RenderingRulesStorage {
 	}
 	
 	private class RenderingRulesHandler {
+
 		private final XmlPullParser parser;
 		private int state;
-		Stack<RenderingRule> stack = new Stack<RenderingRule>();
+		private final Stack<RenderingRule> stack = new Stack<RenderingRule>();
+		private final Stack<RenderingClass> renderingClassStack = new Stack<>();
 		private final RenderingRulesStorageResolver resolver;
 		private final boolean addon;
 		private RenderingRulesStorage dependsStorage;
-		
+
 		public RenderingRulesHandler(XmlPullParser parser, RenderingRulesStorageResolver resolver,
 									 boolean addon){
 			this.parser = parser;
@@ -431,6 +434,22 @@ public class RenderingRulesStorage {
 				}
 			} else if ("renderer".equals(name)) { //$NON-NLS-1$
 				throw new XmlPullParserException("Rendering style is deprecated and no longer supported.");
+			} else if ("renderingClass".equals(name)) {
+				String title = attrsMap.get("title");
+				String className = attrsMap.get("name");
+				boolean enable = Boolean.parseBoolean(attrsMap.get("enable"));
+
+				RenderingClass renderingClass = new RenderingClass(className, title, enable);
+
+				if (!renderingClassStack.isEmpty()) {
+					RenderingClass parent = renderingClassStack.peek();
+					parent.addChild(renderingClass);
+					renderingClass.setPath(parent.getPath() + className);
+				} else {
+					renderingClass.setPath(className);
+				}
+				renderingClasses.put(renderingClass.getPath(), renderingClass);
+				renderingClassStack.push(renderingClass);
 			} else {
 				log.warn("Unknown tag : " + name); //$NON-NLS-1$
 			}
@@ -483,6 +502,8 @@ public class RenderingRulesStorage {
 				stack.pop();
 			} else if ("renderingAssociation".equals(name)) { //$NON-NLS-1$
 				stack.pop();
+			} else if ("renderingClass".equals(name)) {
+				renderingClassStack.pop();
 			}
 		}
 	}
@@ -559,6 +580,10 @@ public class RenderingRulesStorage {
 	public RenderingRule getRenderingAttributeRule(String attribute) {
 		return renderingAttributes.get(attribute);
 	}
+
+	public RenderingClass getRenderingClass(String path) {
+		return renderingClasses.get(path);
+	}
 	
 	public String[] getRenderingAttributeNames() {
 		return renderingAttributes.keySet().toArray(new String[0]);
@@ -573,6 +598,14 @@ public class RenderingRulesStorage {
 
 	public String[] getRenderingAssociationNames() {
 		return renderingAssociations.keySet().toArray(new String[0]);
+	}
+
+	public Map<String, RenderingClass> getRenderingClasses() {
+		return renderingClasses;
+	}
+
+	public Map<String, RenderingRule> getRenderingAssociations() {
+		return renderingAssociations;
 	}
 
 	public RenderingRule[] getRules(int state){

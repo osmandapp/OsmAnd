@@ -64,10 +64,6 @@
 
 			</LinearLayout>
 
-			<include
-				android:id="@+id/bottom_divider"
-				layout="@layout/card_bottom_divider" />
-
 			<View
 				android:id="@+id/bottom_empty_space"
 				android:layout_width="match_parent"

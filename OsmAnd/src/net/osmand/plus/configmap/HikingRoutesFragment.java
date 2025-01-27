@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -24,7 +25,9 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
+import net.osmand.render.RenderingClass;
 import net.osmand.render.RenderingRuleProperty;
+import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -33,6 +36,8 @@ import java.util.List;
 public class HikingRoutesFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = HikingRoutesFragment.class.getSimpleName();
+	public static final String NODE_NETWORKS_VALUE = "walkingRoutesOSMCNodes";
+	public static final String OSMC_NODES_KEY = ".route.hiking.osmc_nodes";
 
 	private RouteLayersHelper routeLayersHelper;
 	@Nullable
@@ -55,12 +60,14 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 	}
 
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 		updateNightMode();
 		View view = themedInflater.inflate(R.layout.map_route_types_fragment, container, false);
 
 		showHideTopShadow(view);
 		setupHeader(view);
+		setupLegendCard(view);
 		setupTypesCard(view);
 
 		return view;
@@ -144,11 +151,47 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 			if (view != null) {
 				setupHeader(view);
 				setupTypesCard(view);
+				setupLegendCard(view);
 			}
 			refreshMap();
 			return true;
 		});
 		return item;
+	}
+
+	private void setupLegendCard(View view) {
+		ViewGroup container = view.findViewById(R.id.legend_container);
+		ViewGroup contentGroup = view.findViewById(R.id.legend_content);
+		contentGroup.removeAllViews();
+		String propertyValue = routeLayersHelper.getSelectedHikingRoutesValue();
+
+		if (NODE_NETWORKS_VALUE.equals(propertyValue)) {
+			List<RenderingClass> dataClasses = getDataClasses(app);
+			if (!Algorithms.isEmpty(dataClasses)) {
+				RouteLegendCard card = new RouteLegendCard(requireActivity(), dataClasses, app.getString(R.string.shared_string_legend));
+				View cardView = card.build();
+				contentGroup.addView(cardView);
+				AndroidUiHelper.updateVisibility(container, true);
+			} else {
+				AndroidUiHelper.updateVisibility(container, false);
+			}
+		} else {
+			AndroidUiHelper.updateVisibility(container, false);
+		}
+	}
+
+	@NonNull
+	public List<RenderingClass> getDataClasses(@NonNull OsmandApplication app) {
+		List<RenderingClass> renderingClasses = new ArrayList<>();
+
+		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		if (renderer != null) {
+			RenderingClass renderingClass = renderer.getRenderingClass(OSMC_NODES_KEY);
+			if (renderingClass != null) {
+				renderingClasses.addAll(renderingClass.getChildren());
+			}
+		}
+		return renderingClasses;
 	}
 
 	private void refreshMap() {
