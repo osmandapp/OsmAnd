@@ -137,12 +137,7 @@ public class TravelArticle {
 	public String getGpxFileName() {
 		String gpxFileName = !Algorithms.isEmpty(title) ? title : routeId;
 		if (gpxFileName != null) {
-			return gpxFileName
-				.replace('/', '_')
-				.replace('\'', '_')
-				.replace('\"', '_')
-				.replace('\r', '_')
-				.replace('\n', '_');
+			return Algorithms.sanitizeFileName(gpxFileName);
 		} else {
 			LOG.error("Empty travel article in " + this.file);
 			return "Travel Article File"; // @NonNull

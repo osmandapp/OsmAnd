@@ -2740,7 +2740,7 @@
     <string name="poi_shop_craft">Materialoj-por-metio-vendejo</string>
     <string name="poi_service_bicycle_charging_yes">ŝargo;shargilo;sxargilo;bicikla ŝargilo</string>
     <string name="poi_service_bicycle_charging_no">ŝargo: ne</string>
-    <string name="poi_fuel_avia_type">Brulaĵ-tipo (avia)</string>
+    <string name="poi_fuel_avia_type">Brulaĵ-tipo (aviada)</string>
     <string name="poi_payment_fuel_type">Brulaĵ-kartoj</string>
     <string name="poi_internet_access_type">Interret-aliro</string>
     <string name="poi_vending_type">Vendado de</string>
@@ -4333,7 +4333,7 @@
     <string name="poi_club_dog">Hund-ŝatanta klubejo</string>
     <string name="poi_board_title">Titolo de tabulo</string>
     <string name="poi_short_name">Mallonga nomo</string>
-    <string name="poi_club_aviation">Avia klubejo</string>
+    <string name="poi_club_aviation">Aviada klubejo</string>
     <string name="poi_club_bicycle">Bicikla klubejo</string>
     <string name="poi_club_doityourself">Memfarula klubejo</string>
     <string name="poi_first_aid_kit">Manapoteko</string>

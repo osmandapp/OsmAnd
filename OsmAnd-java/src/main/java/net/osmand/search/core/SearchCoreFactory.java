@@ -38,12 +38,8 @@ import net.osmand.osm.PoiType;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.search.core.SearchPhrase.SearchPhraseDataType;
-import net.osmand.util.Algorithms;
-import net.osmand.util.GeoPointParserUtil;
-import net.osmand.util.GeoParsedPoint;
-import net.osmand.util.LocationParser;
+import net.osmand.util.*;
 import net.osmand.util.LocationParser.ParsedOpenLocationCode;
-import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -556,6 +552,9 @@ public class SearchCoreFactory {
 				Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(DEFAULT_ADDRESS_BBOX_RADIUS * 5,
 						SearchPhraseDataType.ADDRESS);
 				String wordToSearch = phrase.getUnknownWordToSearch();
+				if (ArabicNormalizer.isSpecialArabic(wordToSearch)) {
+					wordToSearch = ArabicNormalizer.normalize(wordToSearch);
+				}
 				while (offlineIterator.hasNext() && wordToSearch.length() > 0) {
 					BinaryMapIndexReader r = offlineIterator.next();
 					currentFile[0] = r;
@@ -609,6 +608,9 @@ public class SearchCoreFactory {
 			Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(BBOX_RADIUS,
 					SearchPhraseDataType.POI);
 			String searchWord = phrase.getUnknownWordToSearch();
+			if (ArabicNormalizer.isSpecialArabic(searchWord)) {
+				searchWord = ArabicNormalizer.normalize(searchWord);
+			}
 			final NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
 			QuadRect bbox = phrase.getFileRequest() != null ? phrase.getRadiusBBoxToSearch(BBOX_RADIUS_POI_IN_CITY) : phrase.getRadiusBBoxToSearch(BBOX_RADIUS_INSIDE);
 			final Set<String> ids = new HashSet<String>();

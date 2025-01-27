@@ -316,7 +316,7 @@ public class TextRenderer {
 						public boolean execute(int tagid, String nname) {
 							String tagNameN2 = o.getMapIndex().decodeType(tagid).tag;
 							if (tagName2.equals(tagNameN2)) {
-								if (nname != null && nname.trim().length() > 0) {
+								if (nname != null && nname.trim().length() > 0 && !nname.equals(text.text)) {
 									text.text += " (" + nname + ")";
 								}
 								return false;

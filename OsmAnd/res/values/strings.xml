@@ -10,6 +10,12 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="shared_string_length">Length</string>
+    <string name="shared_string_avg_altitude">Avg. altitude</string>
+    <string name="shared_string_avg_speed">Min. speed</string>
+    <string name="popular_places_nearby">Popular places nearby</string>
+    <string name="recently_visited">Recently visited</string>
+
     <string name="display_distance_to_first_intermediate">Show route details for the next stop</string>
     <string name="display_distance_to_first_intermediate_summary">Shows time and distance for the next stop first. Turn off to always show details for the destination.</string>
 

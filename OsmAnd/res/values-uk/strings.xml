@@ -4967,7 +4967,7 @@
     <string name="write_bearing_description">Під час запису зберігати напрямок на кожну точку треку</string>
     <string name="feature_available_as_part_of_plan">%1$s доступно в рамках тарифного плану %2$s</string>
     <string name="shared_string_included">Включено</string>
-    <string name="local_indexes_category_terrain">Карти місцевості (3D</string>
+    <string name="local_indexes_category_terrain">Карти місцевості (3D)</string>
     <string name="hillshade_slope">Рельєф місцевості, схил</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
     <string name="wheel_circumference">Окружність колеса</string>
@@ -5680,4 +5680,9 @@
     <string name="rendering_attr_showClimbingRoutes_name">Скелелазні маршрути</string>
     <string name="display_distance_to_first_intermediate">Показати деталі маршруту до наступної зупинки</string>
     <string name="display_distance_to_first_intermediate_summary">Спочатку показує час і відстань до наступної зупинки. Вимкніть, щоб завжди показувати деталі до кінцевої точки.</string>
+    <string name="recently_visited">Нещодавно відвідав</string>
+    <string name="popular_places_nearby">Популярні місця поблизу</string>
+    <string name="shared_string_avg_speed">Хв. швидкість</string>
+    <string name="shared_string_length">Довжина</string>
+    <string name="shared_string_avg_altitude">Середнє висота</string>
 </resources>

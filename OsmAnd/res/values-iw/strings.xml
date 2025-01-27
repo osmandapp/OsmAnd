@@ -895,7 +895,7 @@
     <string name="recording_description">מתבצעת הקלטה %1$s %3$s %2$s</string>
     <string name="recording_default_name">בהקלטה</string>
     <string name="shared_string_control_stop">עצירה</string>
-    <string name="shared_string_control_start">הקלטה</string>
+    <string name="shared_string_control_start">התחלה</string>
     <string name="map_widget_av_notes">הערות קוליות</string>
     <string name="av_def_action_video">הקלטת וידאו</string>
     <string name="av_def_action_audio">הקלטת שמע</string>
@@ -4991,4 +4991,8 @@
     <string name="obd_not_connected_to_device">מנותק מ־%s</string>
     <string name="obd_connecting_to_device">התחברות אל %s</string>
     <string name="wheel_circumference">היקף גלגל</string>
+    <string name="popular_places_nearby">מקומות נפוצים באזור</string>
+    <string name="shared_string_avg_altitude">גובה ממוצע</string>
+    <string name="shared_string_length">אורך</string>
+    <string name="shared_string_avg_speed">מהירות מזערית</string>
 </resources>

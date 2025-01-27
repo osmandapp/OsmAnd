@@ -13,6 +13,7 @@ import net.osmand.shared.gpx.primitives.Route
 import net.osmand.shared.gpx.primitives.Track
 import net.osmand.shared.gpx.primitives.TrkSegment
 import net.osmand.shared.gpx.primitives.WptPt
+import net.osmand.shared.io.KFile
 import net.osmand.shared.util.KMapUtils
 import kotlin.collections.set
 
@@ -262,7 +263,13 @@ class GpxFile : GpxExtensions {
 	}
 
 	fun getAnalysis(fileTimestamp: Long): GpxTrackAnalysis {
-		return getAnalysis(fileTimestamp, null, null, null)
+		val parameters = if (path.isNotEmpty())
+			GpxDbHelper.getItem(KFile(path), false)?.getAnalysisCalculationParameters() else null
+		return getAnalysis(fileTimestamp, null, null, parameters, null)
+	}
+
+	fun getAnalysis(fileTimestamp: Long, parameters: Map<GpxParameter, Any?>?): GpxTrackAnalysis {
+		return getAnalysis(fileTimestamp, null, null, parameters, null)
 	}
 
 	fun getAnalysis(
@@ -271,10 +278,25 @@ class GpxFile : GpxExtensions {
 		toDistance: Double?,
 		pointsAnalyzer: GpxTrackAnalysis.TrackPointsAnalyser?
 	): GpxTrackAnalysis {
+		val parameters = if (path.isNotEmpty())
+			GpxDbHelper.getItem(KFile(path), false)?.getAnalysisCalculationParameters() else null
+		return getAnalysis(fileTimestamp, fromDistance, toDistance, parameters, pointsAnalyzer)
+	}
+
+	fun getAnalysis(
+		fileTimestamp: Long,
+		fromDistance: Double?,
+		toDistance: Double?,
+		parameters: Map<GpxParameter, Any?>?,
+		pointsAnalyzer: GpxTrackAnalysis.TrackPointsAnalyser?
+	): GpxTrackAnalysis {
 		val analysis = GpxTrackAnalysis()
 		analysis.name = path
 		analysis.wptPoints = points.size
 		analysis.setWptCategoryNames(getWaypointCategories())
+		if (parameters != null) {
+			analysis.setGpxParameters(parameters)
+		}
 
 		val segments = getSplitSegments(analysis, fromDistance, toDistance)
 		analysis.prepareInformation(fileTimestamp, pointsAnalyzer, *segments.toTypedArray())
@@ -287,6 +309,12 @@ class GpxFile : GpxExtensions {
 		toDistance: Double?
 	): List<SplitSegment> {
 		val splitSegments = mutableListOf<SplitSegment>()
+		if (fromDistance == null || toDistance == null) {
+			getGeneralSegment()?.let {
+				splitSegments.add(SplitSegment(it))
+				return splitSegments
+			}
+		}
 		for (subtrack in tracks) {
 			for (segment in subtrack.segments) {
 				if (!segment.generalSegment) {

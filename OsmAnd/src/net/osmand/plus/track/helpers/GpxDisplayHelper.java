@@ -10,6 +10,7 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxParameter;
 import net.osmand.shared.gpx.primitives.Route;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
@@ -69,7 +70,10 @@ public class GpxDisplayHelper {
 			for (int i = 0; i < gpxFile.getTracks().size(); i++) {
 				TrackDisplayGroup group = buildTrackDisplayGroup(gpxFile, i, name);
 				if (processTrack) {
-					SplitTrackAsyncTask.processGroupTrack(app, group, null, false);
+					GpxDataItem dataItem = !Algorithms.isEmpty(gpxFile.getPath())
+							? app.getGpxDbHelper().getItem(new KFile(gpxFile.getPath())) : null;
+					boolean joinSegments = dataItem != null ? dataItem.getParameter(GpxParameter.JOIN_SEGMENTS) : false;
+					SplitTrackAsyncTask.processGroupTrack(app, group, null, joinSegments);
 				}
 				if (!Algorithms.isEmpty(group.getDisplayItems()) || !processTrack) {
 					displayGroups.add(group);

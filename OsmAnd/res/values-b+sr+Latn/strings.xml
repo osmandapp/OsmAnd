@@ -4425,7 +4425,7 @@
     <string name="key_event_category_actions">Akcije</string>
     <string name="key_event_action_activity_back_pressed">Aktivnost natrag je pritisnuta</string>
     <string name="shared_string_show_icon">Prikazati ikonu</string>
-    <string name="local_indexes_category_terrain">Mapa trerena (3D)</string>
+    <string name="local_indexes_category_terrain">Mape terena (3D)</string>
     <string name="get_osmand_cloud">Nabavi OsmAnd Cloud</string>
     <string name="delete_account">Obriši nalog</string>
     <string name="external_sensors_not_found">Sensor nije pronađen</string>
@@ -5662,4 +5662,9 @@
     <string name="rendering_attr_showClimbingRoutes_description">Prikazati staze za penjanje</string>
     <string name="display_distance_to_first_intermediate_summary">Prvo prikazuje vreme i razdaljinu do sledećeg zaustavljanja. Isključite da biste uvek prikazivali detalje za odredište.</string>
     <string name="display_distance_to_first_intermediate">Prikaz detalja rute za sledeće zaustavljanje</string>
+    <string name="recently_visited">Nedavno posećeno</string>
+    <string name="popular_places_nearby">Popularna mesta u blizini</string>
+    <string name="shared_string_length">Dužina</string>
+    <string name="shared_string_avg_altitude">Prosečna nadmorska visina</string>
+    <string name="shared_string_avg_speed">Minimalna brzina</string>
 </resources>

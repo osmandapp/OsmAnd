@@ -1,5 +1,6 @@
 package net.osmand.plus.search.dialogs;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -19,6 +21,7 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelObfHelper;
@@ -73,9 +76,15 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 	public abstract SearchListFragmentType getType();
 
+	@LayoutRes
+	protected int getLayoutId() {
+		return R.layout.search_dialog_list_layout;
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.search_dialog_list_layout, container, false);
+		LayoutInflater themedInflater = UiUtilities.getInflater(app, !app.getSettings().isLightContent());
+		return themedInflater.inflate(getLayoutId(), container, false);
 	}
 
 	@Override
@@ -130,9 +139,14 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	}
 
 	@Override
+	public void onAttach(@NonNull Context context) {
+		super.onAttach(context);
+		app = getMyApplication();
+	}
+
+	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		app = getMyApplication();
 		boolean nightMode = !app.getSettings().isLightContent();
 		dialogFragment = (QuickSearchDialogFragment) getParentFragment();
 		listAdapter = new QuickSearchListAdapter(app, requireMapActivity());

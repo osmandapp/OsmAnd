@@ -4657,7 +4657,7 @@
     <string name="attach_roads_descr">Nálgaðu ferilinn þinn að leyfðum vegum til að beina milli punkta og tengja við nákvæmar beygjuleiðbeiningar og eigileika leiðar.</string>
     <string name="av_audio_format_bottom_sheet_descr">Veldu hljóðsnið. Skráategund fyrir hljóðgáma er 3GPP (.3gp).</string>
     <string name="choose_what_to_sync">Veldu það sem á að samstilla</string>
-    <string name="cloud_sync_progress">Samstilli…%1$s</string>
+    <string name="cloud_sync_progress">Samstilli… %1$s</string>
     <string name="checking_progress">Athuga…</string>
     <string name="shared_string_modified">Breytt</string>
     <string name="res_unknown">Óþekkt</string>

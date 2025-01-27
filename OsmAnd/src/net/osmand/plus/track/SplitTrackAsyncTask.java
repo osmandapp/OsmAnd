@@ -222,7 +222,9 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 			List<GpxTrackAnalysis> trackAnalyses = segment.splitByTime(splitTime, joinSegments);
 			return trackAnalyses.toArray(new GpxTrackAnalysis[0]);
 		} else {
-			return new GpxTrackAnalysis[] {GpxTrackAnalysis.Companion.prepareInformation(0, pointsAnalyser, segment)};
+			return new GpxTrackAnalysis[] {
+					GpxTrackAnalysis.Companion.prepareInformation(0, joinSegments, pointsAnalyser, segment)
+			};
 		}
 	}
 

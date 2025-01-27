@@ -74,6 +74,10 @@ enum class GpxParameter(
 
 	fun isNullSupported(): Boolean = defaultValue == null
 
+	fun isAnalysisRecalculationNeeded(): Boolean {
+		return this == JOIN_SEGMENTS
+	}
+
 	fun convertToDbValue(value: Any?): Any? {
 		return when {
 			value != null && typeClass == Boolean::class -> if (value as Boolean) 1 else 0
