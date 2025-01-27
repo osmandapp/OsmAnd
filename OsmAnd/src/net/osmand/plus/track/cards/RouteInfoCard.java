@@ -66,7 +66,6 @@ public class RouteInfoCard extends MapBaseCard {
 		TRANSLATABLE_KEYS.put("alt_name", R.string.shared_string_alt_name);
 		TRANSLATABLE_KEYS.put("symbol", R.string.shared_string_symbol);
 		TRANSLATABLE_KEYS.put("relation_id", R.string.shared_string_osm_id);
-		TRANSLATABLE_KEYS.put("route_id", R.string.shared_string_osm_id);
 		TRANSLATABLE_KEYS.put("way_id", R.string.shared_string_osm_id);
 	}
 
