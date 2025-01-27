@@ -34,7 +34,7 @@ public class GpxApproximationHelper {
 
 	private final OsmandApplication app;
 	private final GpxApproximationParams params;
-	private GpxApproximator approximator;
+	private GpxApproximator currentApproximator;
 	private GpxApproximationListener listener;
 
 
@@ -43,10 +43,10 @@ public class GpxApproximationHelper {
 		this.params = params;
 	}
 
-	public boolean calculateGpxApproximationAsync() {
-		if (approximator != null) {
-			approximator.cancelApproximation();
-			approximator = null;
+	public void calculateGpxApproximationAsync() {
+		if (currentApproximator != null) {
+			currentApproximator.cancelApproximation();
+			currentApproximator = null;
 		}
 		notifyOnNewCalculation();
 		params.getLocationsHolders();
@@ -59,46 +59,40 @@ public class GpxApproximationHelper {
 		}
 		Map<LocationsHolder, GpxRouteApproximation> approximateResult = new HashMap<>();
 		notifyOnApproximationStarted();
-		approximateMultipleGpxAsync(approximateList, approximateResult);
-	}
-
-	private void approximateMultipleGpxAsync(List<GpxApproximator> approximationsToDo, Map<LocationsHolder, GpxRouteApproximation> approximateResult) {
-		if (approximationsToDo.size() > 0) {
-			GpxApproximator gpxApproximator = approximationsToDo.remove(0);
-			try {
-				gpxApproximator.setMode(getAppMode());
-				gpxApproximator.setPointApproximation(getDistanceThreshold());
-				approximateSingleGpxAsyncWithOther(gpxApproximator, approximationsToDo, approximateResult);
-			} catch (Exception e) {
-				LOG.error(e.getMessage(), e);
-			}
-		} else {
-			notifyOnApproximationFinished(processApproximationResults(approximateResult));
+		try {
+			approximateMultipleGpxAsync(approximateList, approximateResult);
+		} catch (Exception e) {
+			LOG.error(e.getMessage(), e);
 		}
 	}
 
-	private void approximateSingleGpxAsyncWithOther(final @NonNull GpxApproximator gpxApproximator, @NonNull List<GpxApproximator> leftApproximations,
+	private void approximateMultipleGpxAsync(List<GpxApproximator> approximationsToDo,
 			Map<LocationsHolder, GpxRouteApproximation> approximateResult) {
-		this.approximator = gpxApproximator;
-		gpxApproximator.calculateGpxApproximationAsync(new ResultMatcher<>() {
-			@Override
-			public boolean publish(GpxRouteApproximation gpxApproximation) {
-				// wait for first result as final
-				app.runInUIThread(() -> {
-					if (!gpxApproximator.isCancelled()) {
-						approximateResult.put(gpxApproximator.getLocationsHolder(), gpxApproximation);
-						// call chain of leftApproximations to do
-						approximateMultipleGpxAsync(leftApproximations, approximateResult);
-					}
-				});
-				return true;
-			}
-
-			@Override
-			public boolean isCancelled() {
-				return false;
-			}
-		});
+		// Runs in UI thread
+		if (approximationsToDo.size() > 0) {
+			GpxApproximator gpxApproximator = approximationsToDo.remove(0);
+			this.currentApproximator = gpxApproximator;
+			gpxApproximator.calculateGpxApproximationAsync(new ResultMatcher<>() {
+				@Override
+				public boolean publish(GpxRouteApproximation gpxApproximation) {
+					app.runInUIThread(() -> {
+						// wait for first result as final
+						if (!gpxApproximator.isCancelled()) {
+							approximateResult.put(gpxApproximator.getLocationsHolder(), gpxApproximation);
+							// call chain of leftApproximations to do
+							approximateMultipleGpxAsync(approximationsToDo, approximateResult);
+						}
+					});
+					return true;
+				}
+				@Override
+				public boolean isCancelled() {
+					return false;
+				}
+			});
+		} else {
+			notifyOnApproximationFinished(processApproximationResults(approximateResult));
+		}
 	}
 
 	public GpxApproximator createApproximator(@NonNull LocationsHolder holder) {
@@ -106,6 +100,8 @@ public class GpxApproximationHelper {
 		try {
 			approximator = new GpxApproximator(app, getAppMode(), getDistanceThreshold(), holder);
 			approximator.setApproximationListener(listener);
+			approximator.setMode(getAppMode());
+			approximator.setPointApproximation(getDistanceThreshold());
 		} catch (IOException e) {
 			LOG.error(e.getMessage(), e);
 		}
@@ -176,7 +172,7 @@ public class GpxApproximationHelper {
 	}
 
 	public boolean isSameApproximator(@NonNull GpxApproximator approximator) {
-		return this.approximator == approximator;
+		return this.currentApproximator == approximator;
 	}
 
 	public boolean canApproximate() {
@@ -184,8 +180,8 @@ public class GpxApproximationHelper {
 	}
 
 	public void cancelApproximationIfPossible() {
-		if (approximator != null) {
-			approximator.cancelApproximation();
+		if (currentApproximator != null) {
+			currentApproximator.cancelApproximation();
 		}
 	}
 
