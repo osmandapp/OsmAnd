@@ -3096,14 +3096,14 @@
     <string name="shared_string_example">Пример</string>
     <string name="change_default_settings">Изменить настройки</string>
     <string name="discard_changes">Отменить изменение</string>
-    <string name="apply_to_current_profile">Применить только к «%1$s»</string>
+    <string name="apply_to_current_profile">Применить только к «%1$s\\</string>
     <string name="apply_to_all_profiles">Применить ко всем профилям</string>
     <string name="start_up_message_pref">Сообщение при запуске</string>
     <string name="analytics_pref_title">Аналитика</string>
     <string name="turn_screen_on_info">Показывать карту на экране блокировки во время навигации.</string>
     <string name="configure_profile">Настройки профиля</string>
     <string name="switch_profile">Переключить профиль</string>
-    <string name="application_profile_changed">Профиль приложения изменён на «%s»</string>
+    <string name="application_profile_changed">Профиль приложения изменён на «%s\\</string>
     <string name="configure_profile_info">Настройки профиля:</string>
     <string name="units_and_formats">Единицы измерения и форматы</string>
     <string name="map_look_descr">Внешний вид карты</string>
@@ -5363,7 +5363,7 @@
     <string name="key_event_action_zoom_out">Отдалить</string>
     <string name="key_event_action_toggle_drower">Показать/скрыть боковое меню</string>
     <string name="shared_string_rows">Ряды</string>
-    <string name="key_is_already_assigned_error">Клавиша «%1$s» уже назначена на действие: «%2$s»</string>
+    <string name="key_is_already_assigned_error">Клавиша «%1$s» уже назначена на действие: «%2$s\\</string>
     <string name="topography_maps">Карты ландшафта</string>
     <string name="cloud_trash_clear_confirmation">Удалить все элементы в корзине окончательно?</string>
     <string name="key_assignments">Назначения клавиш</string>
@@ -5880,7 +5880,7 @@
     <string name="location_interpolation_percent">Процент интерполяции местоположения</string>
     <string name="shared_string_interpolation">Интерполяция</string>
     <string name="location_interpolation_percent_desc">Установите процент интерполяции местоположения при навигации по маршруту. Этот параметр уменьшает задержку отображения вашего местоположения на карте во время анимации.</string>
-    <string name="selected_delayed_profile">Выбранный профиль «%s»</string>
+    <string name="selected_delayed_profile">Выбранный профиль «%s\\</string>
     <string name="default_buttons_opacity_original_description">Каждая кнопка будет иметь свою непрозрачность фона.</string>
     <string name="default_buttons_size_original_description">Каждая кнопка будет иметь свой размер.</string>
     <string name="default_buttons_corners_original_description">Каждая кнопка будет иметь свой радиус скругления.</string>
@@ -5894,4 +5894,5 @@
     <string name="shared_string_avg_speed">Мин. скорость</string>
     <string name="popular_places_nearby">Популярные места поблизости</string>
     <string name="recently_visited">Недавно посещенные</string>
+    <string name="display_distance_to_first_intermediate">Показать детали маршрута до следующей остановки</string>
 </resources>
