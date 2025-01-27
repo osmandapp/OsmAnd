@@ -45,15 +45,17 @@ public class GpxApproximationHelper {
 		this.params = params;
 	}
 
-	public boolean calculateGpxApproximationAsync(boolean newCalculation) {
-		if (newCalculation) {
-			if (approximator != null) {
-				approximator.cancelApproximation();
-				approximator = null;
-			}
-			resultMap.clear();
-			notifyOnNewCalculation();
+	public boolean calculateGpxApproximationAsync() {
+		if (approximator != null) {
+			approximator.cancelApproximation();
+			approximator = null;
 		}
+		resultMap.clear();
+		notifyOnNewCalculation();
+		return calculateGpxApproximationAsyncInternal();
+	}
+
+	private boolean calculateGpxApproximationAsyncInternal() {
 		GpxApproximator gpxApproximator = null;
 		for (LocationsHolder locationsHolder : params.getLocationsHolders()) {
 			if (!resultMap.containsKey(locationsHolder)) {
@@ -80,10 +82,12 @@ public class GpxApproximationHelper {
 		gpxApproximator.calculateGpxApproximationAsync(new ResultMatcher<>() {
 			@Override
 			public boolean publish(GpxRouteApproximation gpxApproximation) {
+				// wait for first result as final
 				app.runInUIThread(() -> {
 					if (!gpxApproximator.isCancelled()) {
 						resultMap.put(gpxApproximator.getLocationsHolder(), gpxApproximation);
-						if (!calculateGpxApproximationAsync(false)) {
+						// ???
+						if (!calculateGpxApproximationAsyncInternal()) {
 							notifyOnApproximationFinished(processApproximationResults());
 						}
 					}
@@ -147,7 +151,7 @@ public class GpxApproximationHelper {
 
 	public void setAppMode(@Nullable ApplicationMode appMode, boolean recalculate) {
 		if (params.setAppMode(appMode) && recalculate) {
-			calculateGpxApproximationAsync(true);
+			calculateGpxApproximationAsync();
 		}
 	}
 
@@ -168,7 +172,7 @@ public class GpxApproximationHelper {
 
 	public void setDistanceThreshold(int threshold, boolean recalculate) {
 		if (params.setDistanceThreshold(threshold) && recalculate) {
-			calculateGpxApproximationAsync(true);
+			calculateGpxApproximationAsync();
 		}
 	}
 
@@ -202,7 +206,7 @@ public class GpxApproximationHelper {
 		});
 
 		if (helper.canApproximate()) {
-			helper.calculateGpxApproximationAsync(true);
+			helper.calculateGpxApproximationAsync();
 		} else {
 			callback.processResult(gpxFile);
 		}
