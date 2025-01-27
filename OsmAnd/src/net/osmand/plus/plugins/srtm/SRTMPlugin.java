@@ -29,7 +29,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.button.PurchasingUtils;
-import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.IndexItem;
@@ -390,14 +390,14 @@ public class SRTMPlugin extends OsmandPlugin {
 				int[] viewCoordinates = AndroidUtils.getCenterViewCoordinates(view);
 				int itemId = item.getTitleId();
 				if (itemId == R.string.download_srtm_maps) {
-					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.CONTOUR_LINES, viewCoordinates);
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONTOUR_LINES, viewCoordinates);
 					return false;
 				} else if (itemId == R.string.shared_string_terrain) {
-					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.TERRAIN, viewCoordinates);
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.TERRAIN, viewCoordinates);
 					return false;
 				} else if (itemId == R.string.relief_3d) {
 					if (InAppPurchaseUtils.is3dMapsAvailable(app)) {
-						mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.RELIEF_3D, viewCoordinates);
+						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.RELIEF_3D, viewCoordinates);
 					} else {
 						ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.RELIEF_3D);
 					}
@@ -571,7 +571,8 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public String getPrefDescription(Context ctx, RenderingRuleProperty p, CommonPreference<String> pref) {
-		if (!Algorithms.isEmpty(pref.get())) {
+		String value = pref.get();
+		if (!Algorithms.isEmpty(value) && p.containsValue(value)) {
 			return AndroidUtils.getRenderingStringPropertyValue(ctx, pref.get());
 		} else {
 			return AndroidUtils.getRenderingStringPropertyValue(ctx, p.getDefaultValueDescription());

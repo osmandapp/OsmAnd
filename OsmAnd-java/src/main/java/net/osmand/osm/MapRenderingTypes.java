@@ -804,7 +804,7 @@ public abstract class MapRenderingTypes {
 		case RESTRICTION_ONLY_STRAIGHT_ON:
 			return "ONLY_STRAIGHT_ON".toLowerCase();
 		}
-		return "unkonwn";
+		return "unknown";
 
 	}
 

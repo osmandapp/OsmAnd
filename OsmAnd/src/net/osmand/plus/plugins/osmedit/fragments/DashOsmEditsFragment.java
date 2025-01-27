@@ -21,6 +21,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.dashboard.tools.DashFragmentData.DefaultShouldShow;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.measurementtool.LoginBottomSheetFragment;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -51,7 +52,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 	private static final String ROW_NUMBER_TAG = TAG + "_row_number";
 
 	private static final DashFragmentData.ShouldShowFunction SHOULD_SHOW_FUNCTION =
-			new DashboardOnMap.DefaultShouldShow() {
+			new DefaultShouldShow() {
 				@Override
 				public int getTitleId() {
 					return TITLE_ID;
