@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:gravity="center_vertical"
+	android:orientation="horizontal">
+
+	<studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+		android:id="@+id/text_field_box"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding"
+		app:helperText=" "
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingStart="@dimen/content_padding">
+
+		<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+			android:id="@+id/edit_text"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:imeOptions="actionDone"
+			android:inputType="textMultiLine" />
+
+	</studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+</LinearLayout>
