@@ -587,11 +587,12 @@ public class SRTMPlugin extends OsmandPlugin {
 		possibleValuesList.remove(CONTOUR_LINES_DISABLED_VALUE);
 		String[] possibleValues = possibleValuesList.toArray(new String[0]);
 
-		int i = possibleValuesList.indexOf(pref.get());
-		if (i >= 0) {
-			i++;
-		} else if (Algorithms.isEmpty(pref.get())) {
-			i = 0;
+		String value = pref.get();
+		int selectedIndex = possibleValuesList.indexOf(value);
+		if (selectedIndex >= 0) {
+			selectedIndex++;
+		} else if (!p.containsValue(value) || Algorithms.isEmpty(value)) {
+			selectedIndex = 0;
 		}
 
 		String[] possibleValuesString = new String[possibleValues.length + 1];
@@ -613,7 +614,7 @@ public class SRTMPlugin extends OsmandPlugin {
 					}
 				});
 
-		CustomAlert.showSingleSelection(dialogData, possibleValuesString, i, v -> {
+		CustomAlert.showSingleSelection(dialogData, possibleValuesString, selectedIndex, v -> {
 			int which = (int) v.getTag();
 			if (which == 0) {
 				pref.set("");
