@@ -325,7 +325,6 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 
 		if (verticalWidget) {
 			distanceView.setText(text);
-			distanceSubView.setText(subText == null ? "" : subText);
 			if (subText == null) {
 				subText = "";
 			}
