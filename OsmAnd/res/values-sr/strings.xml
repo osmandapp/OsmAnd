@@ -5416,8 +5416,8 @@
     <string name="hugerock_promo">Попуст цена Хјуџрока за %1$s месеца</string>
     <string name="driving_region_uk">ВБ и слично</string>
     <string name="ask_every_time">Питај сваки пут</string>
-    <string name="detailed_track_guidance">Подробни водич трага</string>
-    <string name="detailed_track_guidance_description">ОсмАнд ће ускладити ваш траг са оближњим путевима ради бољег навођења на кривинама.</string>
+    <string name="detailed_track_guidance">Детаљан водич за стазу</string>
+    <string name="detailed_track_guidance_description">ОсмАнд ће ускладити вашу руту са оближњим путевима како би се боље оријентисао на сваком завоју.</string>
     <string name="quick_action_routes_summary">Прекидач за приказ или сакривање %1$s на карти.</string>
     <string name="shared_string_automatically">Самостално</string>
     <string name="compass_click_north_is_up">Да бисте променили режим оријентације, кликните и држите</string>

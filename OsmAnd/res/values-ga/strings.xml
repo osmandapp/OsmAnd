@@ -1589,7 +1589,7 @@
     <string name="map_widget_max_speed">Luasteorainn</string>
     <string name="translit_names">Traslitrigh ainmneacha</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Bealaí siúltóireachta</string>
-    <string name="local_indexes_category_terrain">Léarscáileanna tír-raon (3D</string>
+    <string name="local_indexes_category_terrain">Léarscáileanna tír-raon (3D)</string>
     <string name="quick_action_map_overlay_action">Cuir forleagan leis</string>
     <string name="free_maps_updates">Nuashonruithe saor in aisce (éigeandáil)</string>
     <string name="search_offline_clear_search">Cuardach nua</string>
@@ -5464,4 +5464,9 @@
     <string name="rendering_attr_showClimbingRoutes_description">Taispeáin bealaí dreapadóireachta</string>
     <string name="display_distance_to_first_intermediate_summary">Taispeánann sé am agus fad don chéad stad eile ar dtús. Múch chun sonraí an chinn scríbe a thaispeáint i gcónaí.</string>
     <string name="display_distance_to_first_intermediate">Taispeáin sonraí bealaigh don chéad stad eile</string>
+    <string name="shared_string_length">Faid</string>
+    <string name="shared_string_avg_altitude">Meán airde</string>
+    <string name="shared_string_avg_speed">Íos. luas</string>
+    <string name="popular_places_nearby">Áiteanna coitianta in aice láimhe</string>
+    <string name="recently_visited">Cuairt le déanaí</string>
 </resources>

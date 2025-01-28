@@ -5414,7 +5414,7 @@
     <string name="shared_string_automatically">Automatski</string>
     <string name="ask_every_time">Pitati svaki put</string>
     <string name="detailed_track_guidance">Detaljan vodič trasom</string>
-    <string name="detailed_track_guidance_description">OsmAnd prilagođava tvoju rutu s obližnjim putevima za bolju, detaljniju navigaciju.</string>
+    <string name="detailed_track_guidance_description">OsmAnd će uskladiti vašu stazu sa obližnjim putevima za poboljšano navođenje skretanje po skretanje.</string>
     <string name="quick_action_routes_summary">Prekidač za prikaz ili skrivanje %1$s na mapi.</string>
     <string name="compass_click_north_is_up">Da bi promenio režim orijentacije, klikni i drži</string>
     <string name="help_article_map_tracks_name">Putanje</string>
