@@ -5436,10 +5436,10 @@
     <string name="hugerock_promo_description">Безплатний доступ до функцій, включно з необмеженою кількістю завантажень мап, 3D-рельєф тощо на %1$s місяця</string>
     <string name="driving_region_india">Індія</string>
     <string name="hugerock_promo">Промо Hugerock на %1$s місяців</string>
-    <string name="detailed_track_guidance_description">OsmAnd зіставить ваш трек із сусідніми дорогами для поліпшення покрокового супроводу.</string>
+    <string name="detailed_track_guidance_description">OsmAnd зіставить ваш трек із сусідніми дорогами для покращеного покрокового супроводу.</string>
     <string name="quick_action_routes_summary">Перемикач, щоб показати або прибрати %1$s на мапі.</string>
-    <string name="detailed_track_guidance">Покрокова маршрутизація треком</string>
-    <string name="ask_every_time">Запитувати щоразу</string>
+    <string name="detailed_track_guidance">Детальне керівництво трасою</string>
+    <string name="ask_every_time">Запитуйте кожен раз</string>
     <string name="shared_string_automatically">Автоматично</string>
     <string name="compass_click_north_is_up">Затисніть, щоб змінити режим орієнтації</string>
     <string name="help_article_map_routes_name">маршрути</string>
