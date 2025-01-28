@@ -5284,8 +5284,8 @@
     <string name="quick_action_map_underlay">Podklad</string>
     <string name="choose_map_orientation">Zvolte orientaci mapy</string>
     <string name="shared_string_automatically">Automaticky</string>
-    <string name="ask_every_time">Pokaždé se zeptat</string>
-    <string name="detailed_track_guidance">Detailní navádění stopou</string>
+    <string name="ask_every_time">Pokaždé se ptejte</string>
+    <string name="detailed_track_guidance">Podrobné pokyny ke stopě</string>
     <string name="quick_action_routes_summary">Přepínač pro zobrazení nebo skrytí %1$s na mapě.</string>
     <string name="hugerock_promo">Promoakce Hugerock na %1$s měsíců</string>
     <string name="hugerock_promo_description">Bezplatný přístup k funkcím včetně neomezeného stahování map, 3D reliéfu atd. na %1$s měsíců</string>
@@ -5389,7 +5389,7 @@
     <string name="top_and_bottom">Nahoře a dole</string>
     <string name="wall_color">Barva zdi</string>
     <string name="use_nearby_roads">Použít blízké cesty</string>
-    <string name="detailed_track_guidance_description">Aplikace OsmAnd přiřadí vaši trasu k okolním cestám, abyste měli lepší navigaci krok za krokem.</string>
+    <string name="detailed_track_guidance_description">OsmAnd přizpůsobí vaši stopu blízkým silnicím pro vylepšené navádění krok za krokem.</string>
     <string name="change_terrain_color_scheme">Změnit barevné schéma terénu</string>
     <string name="play_weather_forecast">Přehrát předpověď počasí</string>
     <string name="quick_action_previous_app_profile">Profil aplikace k předchozí</string>
