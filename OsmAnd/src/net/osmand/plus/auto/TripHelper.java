@@ -111,7 +111,7 @@ public class TripHelper {
 			nextTurnDistance = (int) routingHelper.getRouteDeviation();
 		} else {
 			nextDirInfo = routingHelper.getNextRouteDirectionInfo(calc, true);
-			if (nextDirInfo != null && nextDirInfo.distanceTo > 0 && nextDirInfo.directionInfo != null) {
+			if (nextDirInfo != null && nextDirInfo.distanceTo >= 0 && nextDirInfo.directionInfo != null) {
 				turnType = nextDirInfo.directionInfo.getTurnType();
 				nextTurnDistance = nextDirInfo.distanceTo;
 				turnImminent = nextDirInfo.imminent;
