@@ -320,7 +320,7 @@ public class MapRendererContext {
 		for (RenderingRuleProperty property : storage.PROPS.getCustomRules()) {
 			String attrName = property.getAttrName();
 			if (property.isBoolean()) {
-				properties.put(attrName, settings.getRenderBooleanPropertyValue(attrName) + "");
+				properties.put(attrName, String.valueOf(settings.getRenderBooleanPropertyValue(attrName)));
 			} else {
 				String value = settings.getRenderPropertyValue(attrName);
 				if (!Algorithms.isEmpty(value)) {
@@ -330,8 +330,10 @@ public class MapRendererContext {
 		}
 		for (Map.Entry<String, RenderingClass> entry : storage.getRenderingClasses().entrySet()) {
 			RenderingClass renderingClass = entry.getValue();
+
 			String name = renderingClass.getName();
-			CommonPreference<Boolean> preference = settings.getСustomBooleanRenderClassProperty(name, renderingClass.isEnable());
+			boolean enabled = renderingClass.isEnabledByDefault();
+			CommonPreference<Boolean> preference = settings.getСustomBooleanRenderClassProperty(name, enabled);
 			properties.put(name, String.valueOf(preference.get()));
 		}
 		QStringStringHash styleSettings = new QStringStringHash();

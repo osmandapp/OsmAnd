@@ -4,6 +4,8 @@ import static net.osmand.plus.dialogs.DetailsBottomSheet.STREET_LIGHTING;
 import static net.osmand.plus.dialogs.DetailsBottomSheet.STREET_LIGHTING_NIGHT;
 import static net.osmand.plus.settings.backend.OsmandSettings.RENDERER_PREFERENCE_PREFIX;
 
+import android.util.Pair;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,20 +17,18 @@ import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.render.RenderingClass;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class ConfigureMapUtils {
 
 	public static final String[] MAP_LANGUAGES_IDS = {"", "en", "af", "als", "ar", "az", "be", "ber", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "ckb", "cs", "cy", "da", "de", "el", "eo", "es", "et", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hsb", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "kab", "kk", "kn", "ko", "ku", "la", "lb", "lo", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "oc", "os", "pl", "pms", "pt", "ro", "ru", "sat", "sc", "sh", "sk", "sl", "sq", "sr", "sr-latn", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh", "zh-Hans", "zh-Hant"};
+
+	public static final String ROUTE_CLASS_PREFIX = ".route.";
 
 	@NonNull
 	public static Map<String, String> getSorterMapLanguages(@NonNull OsmandApplication app) {
@@ -71,7 +71,8 @@ public class ConfigureMapUtils {
 	}
 
 	@Nullable
-	public static RenderingRuleProperty getPropertyForAttr(@NonNull List<RenderingRuleProperty> customRules, @NonNull String attrName) {
+	public static RenderingRuleProperty getPropertyForAttr(
+			@NonNull List<RenderingRuleProperty> customRules, @NonNull String attrName) {
 		for (RenderingRuleProperty property : customRules) {
 			if (Algorithms.stringsEqual(property.getAttrName(), attrName)) {
 				return property;
@@ -103,7 +104,39 @@ public class ConfigureMapUtils {
 		return customRules;
 	}
 
-	protected static String[] getRenderingPropertyPossibleValues(OsmandApplication app, RenderingRuleProperty p) {
+	@NonNull
+	public static Map<String, RenderingClass> getRenderingClasses(@NonNull OsmandApplication app) {
+		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		if (renderer == null) {
+			return new LinkedHashMap<>();
+		}
+		return renderer.getRenderingClasses();
+	}
+
+	@NonNull
+	public static Pair<RenderingClass, List<RenderingClass>> getRenderingClassesForKey(
+			@NonNull OsmandApplication app, @NonNull String attrName) {
+		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		if (renderer == null) {
+			return null;
+		}
+		String key = ROUTE_CLASS_PREFIX + attrName.replace("show", "");
+		RenderingClass mainClass = renderer.getRenderingClass(key);
+		if (mainClass != null) {
+			List<RenderingClass> list = new ArrayList<>();
+			for (Map.Entry<String, RenderingClass> entry : renderer.getRenderingClasses().entrySet()) {
+				RenderingClass renderingClass = entry.getValue();
+				if (renderingClass.getName().startsWith(key + ".")) {
+					list.add(renderingClass);
+				}
+			}
+			return Pair.create(mainClass, list);
+		}
+		return null;
+	}
+
+	protected static String[] getRenderingPropertyPossibleValues(OsmandApplication app,
+			RenderingRuleProperty p) {
 		String[] possibleValuesString = new String[p.getPossibleValues().length + 1];
 		possibleValuesString[0] = AndroidUtils.getRenderingStringPropertyValue(app, p.getDefaultValueDescription());
 

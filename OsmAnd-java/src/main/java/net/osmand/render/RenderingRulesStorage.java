@@ -100,6 +100,7 @@ public class RenderingRulesStorage {
 		}
 		storage.renderingAttributes.putAll(renderingAttributes);
 		storage.renderingAssociations.putAll(renderingAssociations);
+		storage.renderingClasses.putAll(renderingClasses);
 		return storage;
 	}
 
@@ -269,15 +270,13 @@ public class RenderingRulesStorage {
 	}
 	
 	private class RenderingRulesHandler {
-
 		private final XmlPullParser parser;
 		private int state;
-		private final Stack<RenderingRule> stack = new Stack<RenderingRule>();
-		private final Stack<RenderingClass> renderingClassStack = new Stack<>();
+		Stack<RenderingRule> stack = new Stack<RenderingRule>();
 		private final RenderingRulesStorageResolver resolver;
 		private final boolean addon;
 		private RenderingRulesStorage dependsStorage;
-
+		
 		public RenderingRulesHandler(XmlPullParser parser, RenderingRulesStorageResolver resolver,
 									 boolean addon){
 			this.parser = parser;
@@ -438,18 +437,7 @@ public class RenderingRulesStorage {
 				String title = attrsMap.get("title");
 				String className = attrsMap.get("name");
 				boolean enable = Boolean.parseBoolean(attrsMap.get("enable"));
-
-				RenderingClass renderingClass = new RenderingClass(className, title, enable);
-
-				if (!renderingClassStack.isEmpty()) {
-					RenderingClass parent = renderingClassStack.peek();
-					parent.addChild(renderingClass);
-					renderingClass.setPath(parent.getPath() + className);
-				} else {
-					renderingClass.setPath(className);
-				}
-				renderingClasses.put(renderingClass.getPath(), renderingClass);
-				renderingClassStack.push(renderingClass);
+				renderingClasses.put(className, new RenderingClass(className, title, enable));
 			} else {
 				log.warn("Unknown tag : " + name); //$NON-NLS-1$
 			}
@@ -477,7 +465,8 @@ public class RenderingRulesStorage {
 				String vl = parser.getAttributeValue(i);
 				if (vl != null && vl.startsWith("$")) {
 					String cv = vl.substring(1);
-					if (!renderingConstants.containsKey(cv) && !renderingAttributes.containsKey(cv) && !renderingAssociations.containsKey(cv)) {
+					if (!renderingConstants.containsKey(cv) && !renderingAttributes.containsKey(cv)
+							&& !renderingAssociations.containsKey(cv) && !renderingClasses.containsKey(cv)) {
 						throw new IllegalStateException("Rendering constant or attribute '" + cv + "' was not specified.");
 					}
 					if (renderingConstants.containsKey(cv)) {
@@ -502,8 +491,6 @@ public class RenderingRulesStorage {
 				stack.pop();
 			} else if ("renderingAssociation".equals(name)) { //$NON-NLS-1$
 				stack.pop();
-			} else if ("renderingClass".equals(name)) {
-				renderingClassStack.pop();
 			}
 		}
 	}
@@ -581,8 +568,8 @@ public class RenderingRulesStorage {
 		return renderingAttributes.get(attribute);
 	}
 
-	public RenderingClass getRenderingClass(String path) {
-		return renderingClasses.get(path);
+	public RenderingClass getRenderingClass(String name) {
+		return renderingClasses.get(name);
 	}
 	
 	public String[] getRenderingAttributeNames() {
@@ -602,10 +589,6 @@ public class RenderingRulesStorage {
 
 	public Map<String, RenderingClass> getRenderingClasses() {
 		return renderingClasses;
-	}
-
-	public Map<String, RenderingRule> getRenderingAssociations() {
-		return renderingAssociations;
 	}
 
 	public RenderingRule[] getRules(int state){

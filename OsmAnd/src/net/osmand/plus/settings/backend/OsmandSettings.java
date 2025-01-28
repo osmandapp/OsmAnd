@@ -3085,16 +3085,6 @@ public class OsmandSettings {
 	}
 
 	@NonNull
-	public CommonPreference<Boolean> getСustomBooleanRenderClassProperty(@NonNull String className, boolean defaultValue) {
-		if (!customBooleanRenderClassProps.containsKey(className)) {
-			CommonPreference<Boolean> preference = new BooleanPreference(this, className, defaultValue).makeProfile();
-			customBooleanRenderClassProps.put(className, preference);
-			return preference;
-		}
-		return customBooleanRenderClassProps.get(className);
-	}
-
-	@NonNull
 	public CommonPreference<Boolean> registerCustomRenderBooleanProperty(@NonNull String attrName, boolean defaultValue) {
 		String id = attrName.startsWith(RENDERER_PREFERENCE_PREFIX) ? attrName : RENDERER_PREFERENCE_PREFIX + attrName;
 		CommonPreference<Boolean> preference = new BooleanPreference(this, id, defaultValue).makeProfile();
@@ -3118,6 +3108,16 @@ public class OsmandSettings {
 			customBooleanRoutingProps.put(attrName, new BooleanStringPreference(this, id, defaultValue).makeProfile());
 		}
 		return customBooleanRoutingProps.get(attrName);
+	}
+
+	@NonNull
+	public CommonPreference<Boolean> getСustomBooleanRenderClassProperty(@NonNull String name, boolean defaultValue) {
+		if (!customBooleanRenderClassProps.containsKey(name)) {
+			CommonPreference<Boolean> preference = new BooleanPreference(this, name, defaultValue).makeProfile();
+			customBooleanRenderClassProps.put(name, preference);
+			return preference;
+		}
+		return customBooleanRenderClassProps.get(name);
 	}
 
 	public final OsmandPreference<Boolean> SHOW_TRAVEL = new BooleanPreference(this, "show_travel_routes", false).makeProfile().cache();

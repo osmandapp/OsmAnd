@@ -195,6 +195,17 @@ public class RouteLayersHelper {
 		return "";
 	}
 
+	@NonNull
+	public MtbClassification getSelectedMtbClassification() {
+		String selectedId = getSelectedMtbClassificationId();
+		for (MtbClassification classification : MtbClassification.values()) {
+			if (Objects.equals(classification.attrName, selectedId)) {
+				return classification;
+			}
+		}
+		return null;
+	}
+
 	@Nullable
 	public String getSelectedMtbClassificationId() {
 		return isMtbRoutesEnabled() ? mtbRoutesLastClassification.get() : null;
