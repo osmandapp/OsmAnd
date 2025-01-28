@@ -823,9 +823,6 @@
     <string name="map_widget_audionotes">소리 노트</string>
     <string name="audionotes_plugin_description">이 플러그인은 여행하는 동안 소리/사진/영상을 찍기 위한 기능과 버튼을 제공합니다.</string>
     <string name="audionotes_plugin_name">소리/영상 노트</string>
-    <string name="srtm_plugin_description">"오프라인 등고선 과 음영을 다운로드하기 위해 외부플러그인을 이용합니다 (설정→지도 관리→다운로드→ 원하는 지도 유형 선택). OsmAnd 오프라인 지도에서 조합하여 표시할 수 있습니다.
-\n↵\n↵\n이 플러그인은 등고선 오버레이와 음영레이어 모두 제공합니다. OsmAnd 오프라인 지도의 상단에 표시 할 수 있습니다. 이 기능은  운동선수, 하이커, 트레커등 음영에 관심이 있는 사람들이 즐겨 사용할 것이다.
-\n↵\n↵\n(70도 북쪽과 남쪽 70도 사이의) 글로벌 데이터는  SRTM (Shuttle Radar Topography Mission:셔틀 레이더 지형 미션)과 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer:고급 우주선 열 방출 및 반사 복사계)에 의한 측정을 기반으로 합니다, 테라 온보드 영상 측정, NASA의 지구 관찰 시스템의 주력 위성 . ASTER는 NASA, 일본 경제 산업성(METI), 일본 우주 시스템 (J-spacesystems) 사이의 협력적인 노력의 결과입니다. "</string>
     <string name="srtm_plugin_name">등고선</string>
     <string name="download_select_map_types">다른 지도</string>
     <string name="download_roads_only_item">도로 전용</string>
@@ -1020,7 +1017,6 @@
     <string name="plugins_screen">플러그인</string>
     <string name="prefs_plugins_descr">플러그인은 고급설정 및 추가기능을 활성화합니다</string>
     <string name="prefs_plugins">플러그인</string>
-    <string name="osm_editing_plugin_description">"이 플러그인을 통해,  OSM POI 생성 및 수정,  OSM 버그 열기 및 주석달기, 기록된  GPX 파일 기부처럼 OSM에 기여를 할 수 있도록  OsmAnd을 사용할 수 있습니다. 이 기능을 사용하려면 ,개인 OSM 자격 증명이 필요합니다."</string>
     <string name="support_new_features_descr">앱에 구현된 새로운 기능을 도울 수 있게 기부합니다</string>
     <string name="north">북쪽</string>
     <string name="north_north_east">북-북-동쪽</string>
@@ -1195,8 +1191,6 @@
     <string name="rendering_value_bicycle_name">자전거</string>
     <string name="rendering_value_pedestrian_name">보행자</string>
     <string name="download_additional_maps">누락된 지도 %1$s (%2$d MB) 를 다운로드 할까요?</string>
-    <string name="record_plugin_description">"이 플러그인은 지도 화면에서 GPX 기록 위젯을 터치하여 수동으로 경로를 기록하고 저장하기 위해 , 또는 GPX 파일에 운행 경로의 모든 것을 자동으로 기록하기 위해, 기능을 활성화합니다.
-\n↵\n↵\n기록된 트랙을 친구와 공유 할 수 있습니다 또는 OSM 지도에 업로드할 수 있습니다. 운동 선수들은 자신의 훈련을 모니터 하기 위해 기록된 트랙을 사용할 수 있습니다. 몇 가지 기본 트랙 분석은 랩 시간, 평균 속도처럼, OsmAnd에서 직접 수행 할 수 있으며, 트랙을 나중에 특별한 서드파티 분석 도구를 사용하여 분석 할 수 있습니다. "</string>
     <string name="record_plugin_name">여행 레코딩</string>
     <string name="int_hour">h</string>
     <string name="duration">경과시간</string>
@@ -1324,7 +1318,6 @@
     <string name="notes">노트</string>
     <string name="online_map">온라인 지도</string>
     <string name="share_note">노트 공유</string>
-    <string name="plugin_nautical_descr">지도 스타일을 항해 지도로 변경하려면 보기(View)를 활성화 합니다, 그러면 모든 해상 운행 마크와 차트 심볼을 볼 수 있습니다. \n\n세계적으로 모든 항해 기호를 포함 하는 지도 파일은 \'세계 seamarks\' 라는 하나의 파일을 다운로드하여 이용할 수 있습니다. \n\n다시 비활성화 하거나, 또는 \'지도 구성\' 의 하위메뉴인 \'지도 스타일\'을 변경하여 보기(View)를 되돌릴 수 있습니다.</string>
     <string name="days_behind">하루가 저물 때</string>
     <string name="plugin_ski_descr">지도 스타일을 \' 겨울 스키\'로 변경하려면 뷰(View)를 활성화 합니다, 겨울 조건 하에서 모든 풍경을 보여줍니다. \n\n(모든 스키 슬로프와 크로스 컨트리 스키 경로를 볼 수 있는) 글로벌 지도는 \'세계 스키 지도\'를 다운로드하여 사용할 수 있습니다. \n\n다시 비활성화 하거나, 또는 \'지도 구성\' 의 하위메뉴인 \'지도 스타일\'을 변경하여 보기(View)를 되돌릴 수 있습니다.</string>
     <string name="plugin_touringview_descr">"OsmAnd의 지도 스타일을  \'여행 보기\'로 변경합니다, 이는 여행자와 전문 드라이버을 위한 특별한 상세 보기를 지원합니다.\n\t\t\n\n이 보기는 다음을 제공 합니다, 어떤 주어진 된 지도 줌레벨에서, 여행의 최대 용량으로 지도 데이터 (특히 도로, 트랙, 경로 및 방향 표시)에서 사용할 수 있다. 그것은 또한 명확하게 (예를 들면 대형 차량 운전 하는 경우, 컬러 코딩으로) 모든 유형의 도로를 묘사합니다.\n\t\t\n\n특별한 지도 다운로드는 필요 하지 않습니다, 보기(View)는 표준 지도에서 만들어집니다.\n\t\t\n\n다시 비활성화 하거나, 또는 \'지도 구성\' 의 하위메뉴인  \'지도 스타일\'을 변경하여 보기(View)를 되돌릴 수 있습니다. "</string>

@@ -463,7 +463,7 @@
     <string name="loading_cities">Chargement des villes…</string>
     <string name="poi">PI</string>
     <string name="error_occurred_saving_gpx">Impossible d\'enregistrer le fichier GPX.</string>
-    <string name="error_calculating_route">Impossible de calculer l\'itinéraire</string>
+    <string name="error_calculating_route">Impossible de calculer l\'itinéraire.</string>
     <string name="error_calculating_route_occured">Impossible de calculer l\'itinéraire</string>
     <string name="empty_route_calculated">L\'itinéraire calculé est vide.</string>
     <string name="arrived_at_destination">Vous êtes arrivé.</string>
@@ -2049,7 +2049,7 @@
     <string name="configure_screen_quick_action">Action rapide</string>
     <string name="quick_action_item_action">Action %d</string>
     <string name="quick_action_item_screen">Écran %d</string>
-    <string name="quick_action_map_style_switch">Style de carte modifié pour « %s ».</string>
+    <string name="quick_action_map_style_switch">Style de carte modifié pour « %s ».</string>
     <string name="quick_action_navigation_voice">Voix Active / Inactive</string>
     <string name="quick_action_navigation_voice_off">Activer la voix</string>
     <string name="quick_action_navigation_voice_on">Couper la voix</string>
@@ -2057,7 +2057,7 @@
     <string name="quick_action_edit_action">Modifier l\'action</string>
     <string name="dialog_add_action_title">Ajouter une action</string>
     <string name="quick_actions_delete">Supprimer l\'action</string>
-    <string name="quick_actions_delete_text">Supprimer l\'action « %s » \?</string>
+    <string name="quick_actions_delete_text">Supprimer l\'action « %s » ?</string>
     <string name="quick_favorites_show_favorites_dialog">Afficher la liste des favoris</string>
     <string name="quick_favorites_name_preset">Nom du réglage</string>
     <string name="shared_string_action_name">Nom de l\'action</string>
@@ -2084,7 +2084,7 @@
     <string name="quick_action_map_underlay_action">Ajouter une sous-couche</string>
     <string name="quick_action_map_source_title">Sources des cartes</string>
     <string name="quick_action_map_source_action">Ajouter une source de carte</string>
-    <string name="quick_action_map_source_switch">Source de la carte modifiée pour « %s ».</string>
+    <string name="quick_action_map_source_switch">Source de la carte modifiée pour « %s ».</string>
     <string name="quick_action_btn_tutorial_title">Déplacer le bouton</string>
     <string name="quick_action_btn_tutorial_descr">Appui long pour déplacer le bouton sur l\'écran.</string>
     <string name="quick_action_add_marker_descr">Bouton pour ajouter une marque au centre de la carte.</string>
@@ -2101,8 +2101,8 @@
     <string name="quick_action_interim_dialog">Afficher une fenêtre intermédiaire</string>
     <string name="quick_action_add_create_items">Créer des éléments</string>
     <string name="quick_action_bug_descr">Ce message est ajouté en commentaire.</string>
-    <string name="quick_action_map_overlay_switch">Sur-couche de la carte modifiée pour « %s ».</string>
-    <string name="quick_action_map_underlay_switch">Sous-couche de la carte modifiée pour « %s ».</string>
+    <string name="quick_action_map_overlay_switch">Sur-couche de la carte modifiée pour « %s ».</string>
+    <string name="quick_action_map_underlay_switch">Sous-couche de la carte modifiée pour « %s ».</string>
     <string name="navigate_point_olc">Ouvrir un code d\'emplacement</string>
     <string name="navigate_point_olc_info_invalid">Code d\'emplacement incorrect
 \n</string>
@@ -2626,12 +2626,10 @@
     <string name="coord_input_edit_point">Modifier le point</string>
     <string name="coord_input_add_point">Ajouter un point</string>
     <string name="coord_input_save_as_track">Enregistrer comme trace</string>
-    <string name="coord_input_save_as_track_descr">Vous avez ajouté %1$s points. Donnez un nom au fichier et cliquez sur « Enregistrer ».</string>
+    <string name="coord_input_save_as_track_descr">Vous avez ajouté %1$s points. Donnez un nom au fichier et appyez sur « Enregistrer ».</string>
     <string name="point_deleted">Point %1$s supprimé</string>
     <string name="shared_string_world">Monde</string>
-    <string name="send_search_query_description">Vous êtes sur le point d\'envoyer la recherche : « %1$s » ainsi que votre position.
-\n 
-\nAucune donnée personnelle ne sera envoyée. Ces informations seront utilisées afin d\'améliorer l\'algorithme de recherche.</string>
+    <string name="send_search_query_description">Vous êtes sur le point d\'envoyer la recherche : « %1$s » ainsi que votre position. \n \nAucune donnée personnelle ne sera envoyée. Ces informations seront utilisées afin d\'améliorer l\'algorithme de recherche.</string>
     <string name="send_search_query">Envoyez votre recherche ?</string>
     <string name="increase_search_radius_to">Augmenter le rayon de recherche à %1$s</string>
     <string name="thank_you_for_feedback">Merci pour vos retours</string>
@@ -2769,8 +2767,8 @@
     <string name="public_transport_warning_title">Les itinéraires en transports en commun sont actuellement en phase de test. Des erreurs ou des imprécisions peuvent avoir lieu.</string>
     <string name="add_intermediate">Ajouter un point intermédiaire</string>
     <string name="shared_string_walk">Marche</string>
-    <string name="save_poi_value_exceed_length">Merci de réduire la taille de l\'étiquette « %s » à moins de 255 caractères.</string>
-    <string name="save_poi_value_exceed_length_title">Taille de « %s »</string>
+    <string name="save_poi_value_exceed_length">Merci de réduire la taille de l\'étiquette « %s » à moins de 255 caractères.</string>
+    <string name="save_poi_value_exceed_length_title">Taille de « %s »</string>
     <string name="avoid_pt_types_descr">Sélectionnez les types de transport en commun à éviter pour le guidage :</string>
     <string name="avoid_pt_types">Éviter des types de transports …</string>
     <string name="quick_action_day_night_mode">Mode %s</string>
@@ -2835,7 +2833,7 @@
     <string name="profile_alert_need_save_title">Enregistrer les modifications</string>
     <string name="profile_alert_need_save_msg">Enregistrez d\'abord les modifications apportées au profil</string>
     <string name="profile_alert_delete_title">Supprimer le profil</string>
-    <string name="profile_alert_delete_msg">Supprimer le profil « %s » \?</string>
+    <string name="profile_alert_delete_msg">Supprimer le profil « %s »</string>
     <string name="select_base_profile_dialog_title">Sélectionnez un profil avec lequel démarrer</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">icône</string>
@@ -2906,7 +2904,7 @@
 \n
 \nVous pouvez changer d\'avis à tout moment dans Paramètres &gt; Vie privée et Sécurité.</string>
     <string name="downloaded_maps_collect_descr">Aidez nous à connaître les pays et régions les plus populaires.</string>
-    <string name="privacy_and_security_change_descr">Appuyez sur « Autoriser » pour accepter nos %1$s</string>
+    <string name="privacy_and_security_change_descr">Appuyez sur « Autoriser » pour accepter nos %1$s</string>
     <string name="settings_derived_routing_mode_string">Mode utilisateur, dérive de : %s</string>
     <string name="profile_alert_need_routing_type_msg">Veuillez sélectionner un type de navigation pour le nouveau profil</string>
     <string name="turn_on_profile_desc">Veuillez activer au moins un profil pour utiliser cette option.</string>
@@ -2986,7 +2984,7 @@
     <string name="pref_selected_by_default_for_profiles">Ce paramètre est sélectionné par défaut dans les profils : %s</string>
     <string name="change_default_settings">Modifier le paramètre</string>
     <string name="discard_changes">Ignorer la modification</string>
-    <string name="apply_to_current_profile">Appliquer uniquement à « %1$s »</string>
+    <string name="apply_to_current_profile">Appliquer uniquement à « %1$s\\</string>
     <string name="apply_to_all_profiles">Appliquer à tous les profils</string>
     <string name="start_up_message_pref">Message au démarrage</string>
     <string name="units_and_formats">Unités et formats</string>
@@ -3015,7 +3013,7 @@
     <string name="navigate_point_format_olc">Code Open Location</string>
     <string name="analytics_pref_title">Analyses</string>
     <string name="turn_screen_on_info">Afficher la carte sur l\'écran de verrouillage pendant le guidage.</string>
-    <string name="route_parameters_info">Paramètres de calcul d\'itinéraire pour le profil sélectionné : « %1$s ».</string>
+    <string name="route_parameters_info">Paramètres de calcul d\'itinéraire pour le profil sélectionné : « %1$s ».</string>
     <string name="wake_time">Durée d\'allumage de l’écran</string>
     <string name="map_look_descr">Apparence de la carte</string>
     <string name="map_look">Apparence de la carte</string>
@@ -3024,7 +3022,7 @@
     <string name="screen_alerts">Alertes visuelles</string>
     <string name="route_parameters_descr">Définir les paramètres de l\'itinéraire</string>
     <string name="route_parameters">Paramètres de l\'itinéraire</string>
-    <string name="application_profile_changed">Profil de l\'appli basculé à « %s »</string>
+    <string name="application_profile_changed">Profil de l\'appli basculé à « %s\\</string>
     <string name="logcat_buffer">Buffer Logcat</string>
     <string name="plugins_settings">Paramètres de l\'extension</string>
     <string name="get_discount_title">Réduction de %3$s pendant %1$d %2$s.</string>
@@ -3929,7 +3927,7 @@
     <string name="purchases_feature_desc_wikivoyage">Explorez Wikivoyage sans connexion Internet. Les articles sont découpés par pays et disponibles dans toutes les langues.</string>
     <string name="purchases_feature_desc_wikipedia">Donne accès à tous les articles Wikipédia associés aux points d\'intérêts de la carte, permettant d\'en savoir plus sur un lieu en quelques clics. Pensez à télécharger les articles Wikipédia des régions de votre choix pour les consulter hors-ligne.</string>
     <string name="purchases_feature_desc_combined_wiki">Consultez les articles Wikipédia sans connexion Internet. Les données hors ligne sont découpées par pays et disponibles dans toutes les langues.</string>
-    <string name="purchases_feature_desc_hourly_map_updates">Accédez à des mises à jour de cartes plus fréquentes : horaire, quotidienne ou hebdomadaires Pour les zones déjà téléchargées, les mises à jour sont de taille réduite grâce à une diffusion incrémentielle.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Obtenez des mises à jour de cartes plus fréquentes : horaire, quotidienne ou hebdomadaires. Pour les zones déjà téléchargées, les mises à jour sont de taille réduite grâce à une diffusion incrémentielle.</string>
     <string name="purchases_feature_desc_osmand_cloud">Utilisez OsmAnd Cloud pour sauvegarder toutes les données d\'OsmAnd en ligne. Plus aucun risque de perdre vos données après une réinstallation. Sauvegardez et restaurez toutes vos informations sans difficulté.</string>
     <string name="nautical_depth">Profondeur bathymétrique</string>
     <string name="purchases_feature_desc_unlimited_map_download">Téléchargez en illimité des cartes hors ligne pour tous les continents et toutes les régions.</string>
@@ -4048,7 +4046,7 @@
     <string name="routeInfo_smoothness_description">Classification des caractéristiques physiques des voies pour les véhicules à roues, notamment la nature et la régularité de leurs surfaces.</string>
     <string name="routeInfo_surface_description">Fournit des informations sur la surface des routes / chemins.</string>
     <string name="no_items_of_type_message">Vous n’avez aucun élément de ce type</string>
-    <string name="release_4_0">• Sauvegarde dans le cloud \n \n• Ajout du mode nuit pour le style de carte « Topo » \n \n• Ajout d’une option pour télécharger les lignes de contour en pieds \n \n• Les pistes peuvent désormais être colorées par altitude, vitesse ou pente \n \n• Mise à jour de la boîte de dialogue « Enregistrement du voyage » \n \n• Distance par appui déplacé de la règle Rayon dans une option séparée \n \n• Planifier l’itinéraire : Vous pouvez maintenant modifier les options de navigation, accéder à la configuration de la carte et effectuer une recherche sans quitter la planification de l’itinéraire \n \n• Nouvel écran « Achat » avec des informations d’achat détaillées \n \n• Ajout d’une option pour modifier l’apparence de la ligne d’itinéraire \n \n• Les mises à jour OsmAnd Live ont été déplacées vers « Téléchargements &gt; mises à jour »</string>
+    <string name="release_4_0">• Sauvegarde dans le cloud \n \n• Ajout du mode nuit pour le style de carte « Topo » \n \n• Ajout d’une option pour télécharger les lignes de contour en pieds \n \n• Les pistes peuvent désormais être colorées par altitude, vitesse ou pente \n \n• Mise à jour de la boîte de dialogue « Enregistrement du voyage » \n \n• Distance par appui déplacé de la règle Rayon dans une option séparée \n \n• Planifier l’itinéraire : Vous pouvez maintenant modifier les options de navigation, accéder à la configuration de la carte et effectuer une recherche sans quitter la planification de l’itinéraire \n \n• Nouvel écran « Achat » avec des informations d’achat détaillées \n \n• Ajout d’une option pour modifier l’apparence de la ligne d’itinéraire \n \n• Les mises à jour OsmAnd Live ont été déplacées vers « Téléchargements &gt; Mises à jour »</string>
     <string name="add_group_to_markers">Ajouter un groupe à la liste des marques</string>
     <string name="remove_group_from_markers">Supprimer le groupe de la liste des marques</string>
     <string name="start_point">Départ</string>
@@ -4222,10 +4220,10 @@
     <string name="rendering_value_all_name">Tout</string>
     <string name="save_track_to_gpx_descrp">Enregistre automatiquement la trace lors de la navigation.</string>
     <string name="gpx_no_routes_title">Il n\'y a aucun itinéraire</string>
-    <string name="gpx_no_routes_descr">Vous pouvez utiliser l’outil « %1$s » pour enregistrer l\'itinéraire dans un fichier.</string>
+    <string name="gpx_no_routes_descr">Vous pouvez utiliser l’outil « %1$s » pour enregistrer l\'itinéraire dans un fichier.</string>
     <string name="quick_action_add_route_descr">Bouton, au milieu de l\'écran, pour démarrer un itinéraire.</string>
     <string name="please_provide_group_name_message">Veuillez saisir le nom du groupe.</string>
-    <string name="selected_waypoints_descr">Les points sélectionnés seront ajoutés à la trace \"%1$s\".</string>
+    <string name="selected_waypoints_descr">Les points sélectionnés seront ajoutés à la trace \"%1$s\"</string>
     <string name="shared_string_reading_file">Lecture du fichier…</string>
     <string name="all_groups">Tous les groupes</string>
     <string name="list_of_groups">Liste des groupes</string>
@@ -4236,9 +4234,7 @@
     <string name="import_tracks_descr">%1$s contient %2$s traces. Sélectionnez les traces à importer.</string>
     <string name="select_suggested_points">Sélectionner les points suggérés</string>
     <string name="location_source">Source de localisation</string>
-    <string name="location_source_descr">Lorsqu\'OsmAnd est installé depuis Google Play, la localisation utilisée par défaut est %1$s .
-\n
-\nSi votre localisation est imprécise ou si vous utilisez un appareil sans %2$s, essayez de basculer vers \"%3$s\".</string>
+    <string name="location_source_descr">Lorsqu\'OsmAnd est installé depuis Google Play, la localisation utilisée par défaut est %1$s .\n\nSi votre localisation est imprécise ou si vous utilisez un appareil sans %2$s, essayez de basculer vers \"%3$s\"</string>
     <string name="shared_string_shape">Forme</string>
     <string name="edit_category">Modifier la catégorie</string>
     <string name="default_appearance">Apparence par défaut</string>
@@ -4510,9 +4506,7 @@
     <string name="map_widget_ant_heart_rate">Fréquence cardiaque</string>
     <string name="ant_write_to_gpx">Ajouter des données à la trace</string>
     <string name="ant_heart_rate_write_gpx_desc">Ajouter la fréquence cardiaque à la trace</string>
-    <string name="ant_missing_dependency_descr">Impossible de trouver le service « %1$s ».
-\nVous devez installer ou mettre à jour les services ANT+.
-\nVoulez-vous lancer Google Play Store pour le faire \?</string>
+    <string name="ant_missing_dependency_descr">Impossible de trouver le service « %1$s ». \nVous devez installer ou mettre à jour les services ANT+. \nVoulez-vous lancer Google Play Store pour le faire ?</string>
     <string name="map_widget_ant_heart_rate_desc">Affiche, en temps réel, la fréquence cardiaque de l\'utilisateur pendant une activité</string>
     <string name="map_widget_ant_bicycle_cadence_desc">Affiche la vitesse à laquelle l\'utilisateur pédale</string>
     <string name="map_widget_ant_bicycle_speed">Vitesse du vélo</string>
@@ -4661,7 +4655,7 @@
     <string name="release_4_3">• Moteur de rendu plus rapide (OpenGL version 2) avec vue 2.5D \n \n• Animations lisses des textes et des points d\'intérêts lors du déplacement de la carte \n \n• Nouveaux widgets indiquant les coordonnées du centre de la carte ainsi que l\'altitude \n \n• Ajout d\'options sur la taille du texte pour le mode \"Distance par appui\" \n \n• Ajout d\'une option permettant de modifier le comportement du clic en mode \"Marques\" \n \n• Correction de l\'option \"Emplacement de la position\" \n \n• Ajout du support des tags \"link\", \"cmt\", \"desc\" et de toutes les extensions personnalisées pour les traces GPX \n \n• Réorganisation de la liste des cartes marines \n \n• Ajout de la prise en charge des capteurs ANT+ \n \n• Ajout d\'une option permettant de désactiver l\'UUID de téléchargement \n \n• Prévision ajustable du temps de trajet pour les itinéraires dépendants de l\'altitude \n \n• Correction de la sortie sonore et du comportement de la barre de volume</string>
     <string name="shared_string_purchased_on">Acheté le</string>
     <string name="shared_string_expires">Expire</string>
-    <string name="cloud_sync_progress">Synchronisation…%1$s</string>
+    <string name="cloud_sync_progress">Synchro…%1$s</string>
     <string name="checking_progress">Vérification…</string>
     <string name="choose_what_to_sync">Sélectionner quoi synchroniser</string>
     <string name="res_unknown">Inconnu</string>
@@ -5527,7 +5521,7 @@
     <string name="obd_battery_voltage">Tension de la batterie</string>
     <string name="obd_engine_coolant_temp">Température du liquide de refroidissement</string>
     <string name="obd_fuel_type">Type de carburant</string>
-    <string name="obd_plugin_description">Surveillez les mesures clés de votre véhicule en utilisant le protocole OBD-II. Accédez aux données incluant : * Vitesse du moteur * Consommation d\'essence * Essence restante * Distance depuis le démarrage du moteur * Température intérieure * Température ambiante * Température de refroidissement * Vitesse du véhicule * Pourcentage de batterie</string>
+    <string name="obd_plugin_description">Surveillez les mesures clés de votre véhicule en utilisant le protocole OBD-II. Accédez aux données incluant :\n- Vitesse du moteur, temps de fonctionnement du moteur, charge calculée du moteur\n- Consommation de carburant, pression du carburant, carburant restant\n- Température d\'admission, température ambiante, température du liquide de refroidissement, température de l\'huile moteur\n- Vitesse du véhicule, position de l\'accélérateur, tension de la batterie\n</string>
     <string name="obd_support">Prise en charge de l\'OBD</string>
     <string name="obd_fuel_consumption_rate_desc">Affiche la consommation de carburant du véhicule selon l\'OBD et la localisation</string>
     <string name="unknown_bt_device">Appareil inconnu</string>
@@ -5566,7 +5560,7 @@
     <string name="obd_how_to_connect">Comment se connecter :</string>
     <string name="connect_obd_instructions_step1">Connectez le scanneur au port OBD-II de votre véhicule.</string>
     <string name="connect_obd_instructions_step3">Activez le Bluetooth sur votre appareil</string>
-    <string name="connect_obd_instructions_step4">Appuyez sur « Connecter » et sélectionnez votre scanneur dans la liste.</string>
+    <string name="connect_obd_instructions_step4">Appuyez sur « %1$s » et sélectionnez votre scanneur dans la liste.</string>
     <string name="learn_more_about_obd_sensors">En savoir plus sur les capteurs.</string>
     <string name="obd_fuel_left_liters">Carburant restant (litres)</string>
     <string name="route_guidance">Guidage routier</string>
@@ -5601,7 +5595,7 @@
     <string name="simulate_obd">Simuler des données OBD</string>
     <string name="obd_fuel_consumption_rate_l_km">Consommation de carburant (L/100 km)</string>
     <string name="obd_engine_runtime_desc">Affiche la durée de fonctionnement du moteur du véhicule à partir du scanneur OBD.</string>
-    <string name="obd_throttle_position_desc">Affiche la pression de carburant du véhicule (pression de gauge) à partir du scanner obd</string>
+    <string name="obd_throttle_position_desc">Affiche l\'angle du plateau de l\'accélérateur dans le corps de l\'accélérateur.</string>
     <string name="obd_throttle_position">Position de l\'accélérateur</string>
     <string name="obd_fuel_pressure">Pression de carburant</string>
     <string name="bt_start_pair_failed">Impossible d\'amorcer l\'association avec l\'appareil</string>
@@ -5656,7 +5650,7 @@
     <string name="obd_fuel_consumption_desc">Affiche le taux de consommation du carburant par le moteur, calculé en fonction du carburant restant, de la taille du réservoir et de la distance parcourue selon le GPS.</string>
     <string name="show_minor_turns_descr">Les voies seront affichées sur toutes les intersections rencontrées indépendamment des instructions vocales</string>
     <string name="show_minor_turns">Afficher sur les intersections mineures lors de la navigation en ligne droite</string>
-    <string name="selected_delayed_profile">Profil \"%s\" sélectionné</string>
+    <string name="selected_delayed_profile">Profil \"%s\\ sélectionné</string>
     <string name="shared_string_interpolation">Interpolation</string>
     <string name="location_interpolation_percent">Pourcentage d\'interpolation de la position</string>
     <string name="location_interpolation_percent_desc">Définit le pourcentage d\'interpolation de la position lors du guidage. Ce paramètre rend l\'animation de votre position sur la carte plus fluide.</string>
@@ -5664,4 +5658,16 @@
     <string name="default_buttons_opacity_original_description">Chaque bouton conservera sa propre opacité d’arrière-plan.</string>
     <string name="default_buttons_size_original_description">Chaque bouton conservera sa propre taille.</string>
     <string name="auto_zoom_3d_angle">Angle du zoom 3D automatique</string>
+    <string name="calculate_size">Calculer la taille</string>
+    <string name="calculating_indication_message">Calcul en cours …</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Voies d\'escalade</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Afficher les voies d\'escalade</string>
+    <string name="obd_fuel_consumption_rate_sensor_type">Utiliser les unités sélectionnées dans le nom.</string>
+    <string name="display_distance_to_first_intermediate_summary">Affiche le temps et la distance jusqu\'au prochain arrêt. Désactiver pour toujours afficher les détails concernant la destination.</string>
+    <string name="display_distance_to_first_intermediate">Affiche les détails de l\'itinéraire jusqu\'au prochain arrêt</string>
+    <string name="popular_places_nearby">Lieux populaires proches</string>
+    <string name="recently_visited">Dernières visites</string>
+    <string name="shared_string_avg_altitude">Altitude moyenne</string>
+    <string name="shared_string_avg_speed">Vitesse mini</string>
+    <string name="shared_string_length">Longueur</string>
 </resources>

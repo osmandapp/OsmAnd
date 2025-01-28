@@ -167,6 +167,7 @@ public abstract class GeometryWay<T extends CommonGeometryWayContext, D extends 
 	public void resetArrowsProvider() {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
+			clearPathCache();
 			if (vectorLineArrowsProvider != null) {
 				mapRenderer.removeSymbolsProvider(vectorLineArrowsProvider);
 				vectorLineArrowsProvider = null;

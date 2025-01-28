@@ -50,6 +50,7 @@ object GpxUtilities {
 	const val ICON_NAME_EXTENSION = "icon"
 	const val BACKGROUND_TYPE_EXTENSION = "background"
 	const val COLOR_NAME_EXTENSION = "color"
+	const val LINE_WIDTH_EXTENSION = "width"
 	const val PROFILE_TYPE_EXTENSION = "profile"
 	const val ADDRESS_EXTENSION = "address"
 	const val HIDDEN_EXTENSION = "hidden"
@@ -468,18 +469,18 @@ object GpxUtilities {
 			if (author != null) {
 				serializer.attribute(null, "creator", author)
 			}
-			serializer.attribute(null, "xmlns", "http://www.topografix.com/GPX/1/1")
-			serializer.attribute(null, "xmlns:osmand", "https://osmand.net")
+			serializer.attribute(null, "xmlns", "https://www.topografix.com/GPX/1/1")
+			serializer.attribute(null, "xmlns:osmand", "https://osmand.net/docs/technical/osmand-file-formats/osmand-gpx")
 			serializer.attribute(
 				null,
 				"xmlns:gpxtpx",
-				"http://www.garmin.com/xmlschemas/TrackPointExtension/v1"
+				"https://www8.garmin.com/xmlschemas/TrackPointExtensionv1.xsd"
 			)
-			serializer.attribute(null, "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance")
+			serializer.attribute(null, "xmlns:xsi", "https://www.w3.org/2001/XMLSchema-instance")
 			serializer.attribute(
 				null,
 				"xsi:schemaLocation",
-				"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd"
+				"https://www.topografix.com/GPX/1/1 https://www.topografix.com/GPX/1/1/gpx.xsd"
 			)
 
 			assignPointsGroupsExtensionWriter(gpxFile)

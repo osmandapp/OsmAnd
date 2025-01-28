@@ -54,15 +54,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.IndexConstants;
 import net.osmand.Location;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.shared.gpx.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.DDM;
@@ -71,12 +68,10 @@ import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.mapmarkers.adapters.CoordinateInputAdapter;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.EditTextEx;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -1393,49 +1388,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			app.getLocationProvider().removeLocationListener(this);
 			app.getLocationProvider().removeCompassListener(this);
 			app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
-		}
-	}
-
-	private static class SaveGpxAsyncTask extends AsyncTask<Void, Void, Void> {
-		private final OsmandApplication app;
-		private final GpxFile gpx;
-		private final boolean gpxSelected;
-		private final String fileName;
-
-		SaveGpxAsyncTask(OsmandApplication app, GpxFile gpx, String fileName, boolean gpxSelected) {
-			this.app = app;
-			this.gpx = gpx;
-			this.fileName = fileName;
-			this.gpxSelected = gpxSelected;
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			if (Algorithms.isEmpty(gpx.getPath())) {
-				if (!Algorithms.isEmpty(fileName)) {
-					String dirName = IndexConstants.GPX_INDEX_DIR + IndexConstants.MAP_MARKERS_INDEX_DIR;
-					File dir = app.getAppPath(dirName);
-					if (!dir.exists()) {
-						dir.mkdirs();
-					}
-					String uniqueFileName = FileUtils.createUniqueFileName(app, fileName, dirName, IndexConstants.GPX_FILE_EXT);
-					File fout = new File(dir, uniqueFileName + IndexConstants.GPX_FILE_EXT);
-					SharedUtil.writeGpxFile(fout, gpx);
-				}
-			} else {
-				SharedUtil.writeGpxFile(new File(gpx.getPath()), gpx);
-			}
-			app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(gpx));
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void aVoid) {
-			if (!gpxSelected) {
-				GpxSelectionParams params = GpxSelectionParams.newInstance()
-						.showOnMap().syncGroup().selectedByUser().addToHistory().saveSelection();
-				app.getSelectedGpxHelper().selectGpxFile(gpx, params);
-			}
 		}
 	}
 

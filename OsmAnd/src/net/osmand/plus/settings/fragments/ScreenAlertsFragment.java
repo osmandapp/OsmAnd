@@ -4,7 +4,6 @@ import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -121,18 +120,16 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 		super.onBindPreferenceViewHolder(preference, holder);
 
 		String key = preference.getKey();
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-			if (SHOW_ROUTING_ALARMS_INFO.equals(key)) {
-				holder.itemView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, isNightMode()));
-			} else if (SCREEN_ALERTS_IMAGE.equals(key)) {
-				ImageView deviceImage = holder.itemView.findViewById(R.id.device_image);
-				ImageView warningIcon = holder.itemView.findViewById(R.id.warning_icon);
+		if (SHOW_ROUTING_ALARMS_INFO.equals(key)) {
+			holder.itemView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, isNightMode()));
+		} else if (SCREEN_ALERTS_IMAGE.equals(key)) {
+			ImageView deviceImage = holder.itemView.findViewById(R.id.device_image);
+			ImageView warningIcon = holder.itemView.findViewById(R.id.warning_icon);
 
-				deviceImage.setImageDrawable(getDeviceImage());
-				warningIcon.setImageDrawable(getWarningIcon());
-			} else if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(key)) {
-				setupPrefRoundedBg(holder);
-			}
+			deviceImage.setImageDrawable(getDeviceImage());
+			warningIcon.setImageDrawable(getWarningIcon());
+		} else if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(key)) {
+			setupPrefRoundedBg(holder);
 		}
 	}
 

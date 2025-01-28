@@ -14,7 +14,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
+import net.osmand.plus.utils.FormattedValue;
+import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -63,7 +64,7 @@ public abstract class DistanceToPointWidget extends SimpleWidget {
 				setText(isVerticalWidget() ? NO_VALUE : null, null);
 			} else {
 				FormattedValue formattedDistance = OsmAndFormatter
-						.getFormattedDistanceValue(cachedMeters, app, OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS);
+						.getFormattedDistanceValue(cachedMeters, app, OsmAndFormatterParams.USE_LOWER_BOUNDS);
 				setText(formattedDistance.value, formattedDistance.unit);
 			}
 		}

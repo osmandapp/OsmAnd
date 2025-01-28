@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.dashboard.tools.DashFragmentData.DefaultShouldShow;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -17,7 +18,7 @@ import net.osmand.plus.dashboard.tools.DashFragmentData;
 public class DashSearchFragment extends DashBaseFragment {
 	public static final String TAG = "DASH_SEARCH_FRAGMENT";
 	public static final DashFragmentData.ShouldShowFunction SHOULD_SHOW_FUNCTION =
-			new DashboardOnMap.DefaultShouldShow() {
+			new DefaultShouldShow() {
 				@Override
 				public int getTitleId() {
 					return R.string.search_for;

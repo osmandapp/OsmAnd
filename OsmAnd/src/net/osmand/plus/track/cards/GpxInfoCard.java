@@ -67,10 +67,6 @@ public class GpxInfoCard extends MapBaseCard {
 			dirName = Algorithms.objectEquals(dir, app.getAppPath(GPX_INDEX_DIR)) ? getString(R.string.shared_string_tracks) : Algorithms.capitalizeFirstLetter(dir.getName());
 		}
 		createItemRow(container, R.string.shared_string_location, R.drawable.ic_action_folder, dirName);
-
-		if (!Algorithms.isEmpty(gpxFile.getMetadata().getDesc())) {
-			createItemRow(container, R.string.shared_string_description, R.drawable.ic_action_description, gpxFile.getMetadata().getDesc());
-		}
 	}
 
 	@NonNull

@@ -3523,25 +3523,7 @@
 \nSubskrypcja odnawia się, chyba że zostanie anulowana przed wybranym okresem odnowienia.
 \n
 \nZarządzaj lub anuluj swoje subskrypcje w ustawieniach Google Play w dowolnym momencie.</string>
-    <string name="release_3_7">• Nowe mapy stoków offline 
-\n 
-\n • Pełna personalizacja Ulubionych i Punktów GPX - niestandardowe kolory, ikony, kształty
-\n 
-\n • Dostosowywanie kolejności elementów w menu kontekstowym, konfiguracji mapy i menu podręcznym
-\n 
-\n • Wikipedia jako osobna warstwa w konfiguracji mapy, wybierz tylko potrzebne języki
-\n 
-\n • Tworzenie własnego filtru użytecznych miejsc/map z pełną elastycznością
-\n 
-\n • Dodano opcje przywracania ustawień profili niestandardowych
-\n 
-\n • Pełne trasy GPX z nawigacji obsługują pasy ruchu i pełne instrukcje skrętu
-\n 
-\n • Naprawiono rozmiary interfejsu użytkownika na tabletach
-\n 
-\n • Naprawiono błędy z RTL
-\n
-\n</string>
+    <string name="release_3_7">• Nowe mapy stoków offline \n \n • Pełna personalizacja Ulubionych i Punktów GPX - niestandardowe kolory, ikony, kształty \n \n • Dostosowywanie kolejności elementów w menu kontekstowym, konfiguracji mapy i menu podręcznym \n \n • Wikipedia jako osobna warstwa w konfiguracji mapy, wybierz tylko potrzebne języki \n \n • Tworzenie własnego filtru użytecznych miejsc/map z pełną elastycznością \n \n • Dodano opcje przywracania ustawień profili niestandardowych \n \n • Pełne trasy GPX z nawigacji obsługują pasy ruchu i pełne instrukcje skrętu \n \n • Naprawiono rozmiary interfejsu użytkownika na tabletach \n \n • Naprawiono błędy z RTL \n \n</string>
     <string name="back_to_editing">Powrót do edycji</string>
     <string name="create_edit_poi">Utwórz lub edytuj użyteczne miejsce</string>
     <string name="add_edit_favorite">Dodaj lub edytuj ulubione miejsce</string>

@@ -449,7 +449,7 @@
     <string name="m_s">m/s</string>
     <string name="prefs_plugins">Breiseáin</string>
     <string name="help_article_personal_profiles_name">Próifílí (Socruithe)</string>
-    <string name="cloud_sync_progress">Ag sioncronú…%1$s</string>
+    <string name="cloud_sync_progress">Sioncronaigh… %1$s</string>
     <string name="lang_sc">Sairdínis</string>
     <string name="lang_ru">Rúisis</string>
     <string name="shared_string_buttons">Cnaipí</string>
@@ -5458,4 +5458,10 @@
     <string name="default_buttons_size_original_description">Choimeádfadh gach cnaipe a mhéid féin.</string>
     <string name="default_buttons_corners_original_description">Choimeádfadh gach cnaipe a gha cúinne féin.</string>
     <string name="default_buttons_opacity_original_description">Choimeádfadh gach cnaipe a chúlra féin teimhneacht.</string>
+    <string name="calculating_indication_message">Ag ríomh…</string>
+    <string name="calculate_size">Ríomh méid</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Bealaí dreapadóireachta</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Taispeáin bealaí dreapadóireachta</string>
+    <string name="display_distance_to_first_intermediate_summary">Taispeánann sé am agus fad don chéad stad eile ar dtús. Múch chun sonraí an chinn scríbe a thaispeáint i gcónaí.</string>
+    <string name="display_distance_to_first_intermediate">Taispeáin sonraí bealaigh don chéad stad eile</string>
 </resources>

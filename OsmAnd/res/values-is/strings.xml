@@ -4657,7 +4657,7 @@
     <string name="attach_roads_descr">Nálgaðu ferilinn þinn að leyfðum vegum til að beina milli punkta og tengja við nákvæmar beygjuleiðbeiningar og eigileika leiðar.</string>
     <string name="av_audio_format_bottom_sheet_descr">Veldu hljóðsnið. Skráategund fyrir hljóðgáma er 3GPP (.3gp).</string>
     <string name="choose_what_to_sync">Veldu það sem á að samstilla</string>
-    <string name="cloud_sync_progress">Samstilli…%1$s</string>
+    <string name="cloud_sync_progress">Samstilli… %1$s</string>
     <string name="checking_progress">Athuga…</string>
     <string name="shared_string_modified">Breytt</string>
     <string name="res_unknown">Óþekkt</string>
@@ -4849,7 +4849,7 @@
     <string name="approximate_bearing_descr">Reikna miðun út frá leið sem verið er að fylgja.</string>
     <string name="open_issue_on_github">Opnaðu verkbeiðni á GitHub</string>
     <string name="about_osmand">Um OsmAnd</string>
-    <string name="local_indexes_category_terrain">Yfirborðskort (3D)</string>
+    <string name="local_indexes_category_terrain">Yfirborðskort (3D</string>
     <string name="user_guide">Notendahandbók</string>
     <string name="send_logcat_log_descr">Ítarleg atvikaskrá</string>
     <string name="average_glide_time_interval_desc">Skilgreindu tímabilin sem notuð verða til að reikna meðalrennsli.</string>
@@ -5639,4 +5639,17 @@
     <string name="connect_new_scanner">Tengja nýjan skynjara</string>
     <string name="shared_string_engine">Vél</string>
     <string name="preview_next_turn">Forskoða næstu beygju</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Klifurleiðir</string>
+    <string name="display_distance_to_first_intermediate_summary">Birtir fyrst tíma og fjarlægð að næsta áfangastað. Slökktu á þessu til að sýna alltaf ítarlegar upplýsingar fyrir endanlega áfangastaðinn.</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Sýna klifurleiðir</string>
+    <string name="calculate_size">Reikna stærð</string>
+    <string name="default_buttons_size_original_description">Hver hnappur myndi halda sinni stærð.</string>
+    <string name="default_buttons_corners_original_description">Hver hnappur myndi halda sínum hornradíus.</string>
+    <string name="default_buttons_opacity_original_description">Hver hnappur myndi halda sínu ógegnsæi bakgrunns.</string>
+    <string name="selected_delayed_profile">Valið snið \"%s\"</string>
+    <string name="shared_string_interpolation">Brúun</string>
+    <string name="location_interpolation_percent_desc">Stilltu prósentuhlutfall brúunar (forspár) á staðsetningu á meðan leiðsögn stendur. Þessi breyta minnkar seinkun á birtingu staðsetningar þinnar á kortinu á meðan hreyfingu stendur.</string>
+    <string name="location_interpolation_percent">Prósentuhlutfall brúunar á staðsetningu</string>
+    <string name="calculating_indication_message">Reikna…</string>
+    <string name="display_distance_to_first_intermediate">Sýna ítarlegri upplýsingar um næsta áfangastað</string>
 </resources>

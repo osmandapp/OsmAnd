@@ -276,7 +276,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		@ColorRes int iconColor = isNightMode() ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
 		int iconId = R.drawable.ic_action_car_info;
 		Drawable prefIcon = getIcon(iconId, iconColor);
-		String summary = app.getString(R.string.shared_string_none);;
+		String summary = app.getString(R.string.shared_string_none);
 
 		VehicleMetricsPlugin plugin = PluginsHelper.getPlugin(VehicleMetricsPlugin.class);
 		if (plugin != null) {

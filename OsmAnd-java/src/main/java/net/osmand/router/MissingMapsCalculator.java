@@ -103,9 +103,11 @@ public class MissingMapsCalculator {
 		Set<Long> presentTimestamps = null;
 		for (Point p : pointsToCheck) {
 			if (p.hhEditions == null) {
-				if (p.regions.size() > 0) {
-					result.addMissingMaps(p.regions.get(0));
-					
+				for (String reg : p.regions) {
+					if (!isRoadOnlyMap(reg)) {
+						result.addMissingMaps(reg);
+						break;
+					}
 				}
 			} else if (checkHHEditions) {
 				if (presentTimestamps == null) {
@@ -262,6 +264,16 @@ public class MissingMapsCalculator {
 		if (reader != null) {
 			reader.close();
 		}
+	}
+
+	private boolean isRoadOnlyMap(String regionName) {
+		if (or != null) {
+			WorldRegion wr = or.getRegionDataByDownloadName(regionName);
+			if (wr != null) {
+				return !wr.isRegionMapDownload() && wr.isRegionRoadsDownload();
+			}
+		}
+		return false;
 	}
 
 }

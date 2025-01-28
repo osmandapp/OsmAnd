@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.TripUtils;
 import net.osmand.plus.routing.CurrentStreetName;
-import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.routing.NextDirectionInfo;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.router.TurnType;

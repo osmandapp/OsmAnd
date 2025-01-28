@@ -74,7 +74,6 @@
     <string name="plugins_screen">Įskiepių valdymas</string>
     <string name="prefs_plugins_descr">Įskiepiai pateikia eksperto režimo nustatymus ir įgalina papildomą funkcionalumą.</string>
     <string name="prefs_plugins">Įskiepių valdymas</string>
-    <string name="osm_editing_plugin_description">Šis įskiepis leidžia kurti ar redaguoti LV, užregistruoti ar komentuoti OSM Pastabas, dalintis įrašytais GPX failais. OSM yra atviros visuomenės valdomas, viešas žemėlapio žymėjimo projektas. Dėl smulkesnės informacijos prašome kreiptis į https://openstreetmap.org. Aktyvus dalyvavimas yra labai vertinamas, prisidėti galite tiesiai OsmAnd, jei programoje nurodysite savo prisijungimo duomenis.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektoriniai žemėlapiai tikriausiai bus atvaizduojami sparčiau. Kaikuriuose įrenginiuose gali veikti prastai.</string>
     <string name="play_commands_of_currently_selected_voice">Pasirinkite balsą ir patikrinkite grodami pranešimus:</string>
     <string name="debugging_and_development">OsmAnd vystymas</string>
@@ -852,10 +851,7 @@
     <string name="incomplete_locale">nebaigta</string>
     <string name="map_widget_max_speed">Leidžiamas greitis</string>
     <string name="rendering_attr_noAdminboundaries_name">Ribos</string>
-    <string name="rendering_attr_noAdminboundaries_description">Neberodyti regionų ribų (administratoriaus 5-9 lygiai).</string>
-    <string name="srtm_plugin_description">Šis įskiepis įgalina tiek aukščio kontūrų linijų tiek ir (reljefo) kalnų šešėlių sluoksnių atvaizdavimą ant OsmAnd žemėlapių. Ši funkcija gali būti naudinga atletams, keliautojams ir visiems, kas aktuali reljefo struktūra. (Atkreipkite dėmesį į tai kad kontūrų linijos ir/arba reljefo duomenys yra atskiri, papildomi parsiuntimai prieinami aktyvavus įskiepį)
-\n
-\nPasaulio duomenys (tarp 70 laipsnių šiaurės ir 70 laipsnių pietų) yra paremti SRTM (Shuttle Radar Topography Mission) ir ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), vaizdo fiksavimo instrumento Terra, NASA Earth Observing System palydovo, matavimais. ASTER yra bendradarbiavimo tarp NASA, Japonijos ekonomikos, prekybos ir industrijos (METI) ministerijos ir Japan Space Systems (J-spacesystems) projektas.</string>
+    <string name="rendering_attr_noAdminboundaries_description">Neberodyti regionų ribų (administratoriaus 5–9 lygiai).</string>
     <string name="srtm_plugin_name">Kontūrinės linijos</string>
     <string name="download_select_map_types">Kiti žemėlapiai</string>
     <string name="download_srtm_maps">SRTM žemėlapiai</string>
@@ -1272,9 +1268,6 @@
     <string name="rendering_attr_publicTransportMode_name">Visuomeninio transporto maršrutai</string>
     <string name="save_track_interval_globally">Įrašymo intervalas</string>
     <string name="save_track_to_gpx_globally_descr">Bendras vietos išsaugojimas į GPX failą gali būti įjungtas ar išjungtas panaudojant GPX įrankį žemėlapio ekrane.</string>
-    <string name="record_plugin_description">Išsaugo kelionės istoriją vieno mygtuko ekrane paspaudimu bei pateikia nustatymus, leidžiančius kelionės istoriją išsaugoti GPX faile.
-\n
-\nĮrašytais maršrutais galima pasidalinti su draugais arba pridėti kaip kontribuciją OSM. Sportininkai gali naudoti įrašytus maršrutus norėdami stebėti savo treniruotes. Elementarią analizę, tokią kaip ratų laikai, vidutinis greitis, ir t.t., galima atlikti tiesiai OsmAnd bei, be abejo, vėliau išanalizuoti su trečių šalių progamine įranga.</string>
     <string name="confirm_every_run">Visada klausti</string>
     <string name="save_global_track_interval">Bendras įrašymo intervalas</string>
     <string name="traffic_warning_speed_limit">Greičio ribojimas</string>
@@ -1396,7 +1389,6 @@
     <string name="location_on_map">Vieta:\n Plat. %1$s\n Ilg. %2$s</string>
     <string name="shared_string_export">Eksportuoti</string>
     <string name="days_behind">dienų senumo</string>
-    <string name="plugin_nautical_descr">Šis įskiepis papildo OsmAnd programą jūrlapiais skirtais laivybai, būriavimui ir kitoms vandens sporto veikloms. \n \nSpecialus OsmAnd žemėlapio įskiepis pateiks visus navigacinius ženklus ir jūrlapių simbolius reikalingus jūros ir vidaus vandenų navigacijai. Kiekvieno navigacinio ženklo aprašymas pateiks informaciją apie jų reikšmę (kategorija, forma, spalva, eiliškumas, nuoroda ir kt.). \n \nNorėdami grįžti į įprastinių OsmAnd žemėlapių atvaizdavimą paprasčiausiai išjunkite šį įskiepį arba \'Žemėlapio nustatymų\' skirsnyje pakeiskite \'Žemėlapio stilių\' į pageidaujamą.</string>
     <string name="rename_failed">Nepavyko pervardinti.</string>
     <string name="back_to_map">Grįžti į žemėlapį</string>
     <string name="shared_string_selected">Pasirinkta</string>

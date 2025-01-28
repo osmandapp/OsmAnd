@@ -8,15 +8,22 @@ import java.util.List;
 
 public class MemoryInfo {
 
-	private final List<MemoryItem> items = new ArrayList<>();
+	private List<MemoryItem> items = new ArrayList<>();
+
+	public MemoryInfo(){
+	}
 
 	public MemoryInfo(@NonNull List<MemoryItem> items) {
-		this.items.addAll(items);
+		setItems(items);
 	}
 
 	@NonNull
 	public List<MemoryItem> getItems() {
 		return items;
+	}
+
+	public void setItems(@NonNull List<MemoryItem> items) {
+		this.items = items;
 	}
 
 	public boolean hasData() {

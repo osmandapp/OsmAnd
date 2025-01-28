@@ -3,7 +3,6 @@ package net.osmand.plus.plugins.mapillary;
 import static android.content.Intent.ACTION_VIEW;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_MAPILLARY;
-import static net.osmand.plus.mapcontextmenu.gallery.ImageCardType.MAPILLARY_AMENITY;
 
 import android.app.Activity;
 import android.content.Context;
@@ -18,14 +17,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.PlatformUtil;
-import net.osmand.data.Amenity;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
@@ -69,7 +67,6 @@ import org.json.JSONObject;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class MapillaryPlugin extends OsmandPlugin {
 
@@ -222,7 +219,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 			@Override
 			public boolean onRowItemClick(@NonNull OnDataChangeUiAdapter uiAdapter,
 			                              @NonNull View view, @NonNull ContextMenuItem item) {
-				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAPILLARY, AndroidUtils.getCenterViewCoordinates(view));
+				mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.MAPILLARY, AndroidUtils.getCenterViewCoordinates(view));
 				return false;
 			}
 
@@ -336,24 +333,6 @@ public class MapillaryPlugin extends OsmandPlugin {
 				mil.recreateControls();
 			}
 			mapActivity.refreshMap();
-		}
-	}
-
-	@Override
-	protected void collectContextMenuImageCards(@NonNull ImageCardsHolder holder,
-	                                            @NonNull Map<String, String> params,
-	                                            @Nullable Map<String, String> additionalParams,
-	                                            @Nullable GetImageCardsListener listener) {
-		if (mapActivity != null && additionalParams != null) {
-			String key = additionalParams.get(Amenity.MAPILLARY);
-			if (key != null) {
-				JSONObject imageObject = MapillaryOsmTagHelper.getImageByKey(key);
-				if (imageObject != null) {
-					holder.addCard(MAPILLARY_AMENITY, new MapillaryImageCard(mapActivity, imageObject));
-				}
-				additionalParams.remove(Amenity.MAPILLARY);
-			}
-			params.putAll(additionalParams);
 		}
 	}
 

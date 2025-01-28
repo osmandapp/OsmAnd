@@ -88,6 +88,7 @@ import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.text.MessageFormat;
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -571,11 +572,7 @@ public class AndroidUtils {
 	}
 
 	public static void setForeground(Context ctx, View view, boolean night, int lightResId, int darkResId) {
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
-			view.setForeground(AppCompatResources.getDrawable(ctx, night ? darkResId : lightResId));
-		} else if (view instanceof FrameLayout) {
-			view.setForeground(AppCompatResources.getDrawable(ctx, night ? darkResId : lightResId));
-		}
+		view.setForeground(AppCompatResources.getDrawable(ctx, night ? darkResId : lightResId));
 	}
 
 	public static void setDashButtonBackground(Context ctx, View view, boolean night) {
@@ -718,9 +715,9 @@ public class AndroidUtils {
 		return iconId > 0 ? iconId : defRes;
 	}
 
-	public static int getDrawableId(OsmandApplication app, String id) {
+	public static int getDrawableId(@NonNull Context context, String id) {
 		if (!Algorithms.isEmpty(id)) {
-			return app.getResources().getIdentifier(id, "drawable", app.getPackageName());
+			return context.getResources().getIdentifier(id, "drawable", context.getPackageName());
 		}
 		return 0;
 	}
@@ -924,11 +921,7 @@ public class AndroidUtils {
 
 	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
 		List<Map.Entry<K, V>> list = new LinkedList<>(map.entrySet());
-		Collections.sort(list, new Comparator<Map.Entry<K, V>>() {
-			public int compare(Map.Entry<K, V> o1, Map.Entry<K, V> o2) {
-				return (o1.getValue()).compareTo(o2.getValue());
-			}
-		});
+		list.sort(Entry.comparingByValue());
 
 		Map<K, V> result = new LinkedHashMap<>();
 		for (Map.Entry<K, V> entry : list) {
@@ -938,34 +931,21 @@ public class AndroidUtils {
 	}
 
 	public static void setCompoundDrawablesWithIntrinsicBounds(@NonNull TextView tv, Drawable start, Drawable top, Drawable end, Drawable bottom) {
-		if (isSupportRTL()) {
 			tv.setCompoundDrawablesRelativeWithIntrinsicBounds(start, top, end, bottom);
-		} else {
-			tv.setCompoundDrawablesWithIntrinsicBounds(start, top, end, bottom);
-		}
 	}
 
 	public static Drawable[] getCompoundDrawables(@NonNull TextView tv) {
-		if (isSupportRTL()) {
 			return tv.getCompoundDrawablesRelative();
-		}
-		return tv.getCompoundDrawables();
 	}
 
 	public static void setPadding(View view, int start, int top, int end, int bottom) {
-		if (isSupportRTL()) {
-			view.setPaddingRelative(start, top, end, bottom);
-		} else {
-			view.setPadding(start, top, end, bottom);
-		}
+		view.setPaddingRelative(start, top, end, bottom);
 	}
 
 	public static void setMargins(ViewGroup.MarginLayoutParams layoutParams, int start, int top, int end, int bottom) {
 		layoutParams.setMargins(start, top, end, bottom);
-		if (isSupportRTL()) {
 			layoutParams.setMarginStart(start);
 			layoutParams.setMarginEnd(end);
-		}
 	}
 
 	public static int getLayoutDirection(@NonNull Context ctx) {
@@ -1026,16 +1006,12 @@ public class AndroidUtils {
 		}
 	}
 
-	public static boolean isSupportRTL() {
-		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1;
-	}
-
 	public static boolean isLayoutMirrored(@NonNull View view) {
 		return ViewCompat.getLayoutDirection(view) == ViewCompat.LAYOUT_DIRECTION_RTL;
 	}
 
 	public static boolean isLayoutRtl(Context ctx) {
-		return isSupportRTL() && getLayoutDirection(ctx) == ViewCompat.LAYOUT_DIRECTION_RTL;
+		return getLayoutDirection(ctx) == ViewCompat.LAYOUT_DIRECTION_RTL;
 	}
 
 	public static List<View> getChildrenViews(ViewGroup vg) {

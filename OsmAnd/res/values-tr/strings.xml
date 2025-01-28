@@ -127,9 +127,6 @@
     <string name="map_widget_audionotes">Sesli notlar</string>
     <string name="audionotes_plugin_description">Bir harita düğmesi veya konum içerik menüsünü kullanarak yolculuk sırasında ses/fotoğraf/video notları alın.</string>
     <string name="audionotes_plugin_name">Ses/video notları</string>
-    <string name="srtm_plugin_description">Bu eklenti, OsmAnd\'ın standart haritalarının üstünde hem eş yükselti eğrisi üst katmanının hem de (kabartma) tepe gölgesi katmanının gösterilmesini sağlamaktadır. Bu işlevsellik sporcular, uzun yürüyüşçüler, doğa yürüyüşçüleri ve manzaranın kabartma yapısıyla ilgilenen herkes tarafından çok takdir edilecektir. (Eş yükselti eğrisi ve/veya kabartma verilerinin ayrı olduğunu, eklentiyi etkinleştirdikten sonra ek indirmelerin mevcut olduğunu lütfen unutmayın.)
-\n 
-\nKüresel veriler (70° kuzey ve 70° güney arasındaki) SRTM (Shuttle Radar Topography Mission) ve ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), NASA\'nın Dünya Gözlem Sisteminin amiral uydusu olan Terra üzerindeki bir görüntüleme aracı, tarafından yapılan ölçümlere dayanmaktadır. ASTER NASA, Japonya Ekonomi, Ticaret ve Sanayi Bakanlığı (METI) , ve Japon Uzay Sistemleri (J-spacesystems) arasında ortak bir çalışmadır.</string>
     <string name="srtm_plugin_name">Topoğrafya</string>
     <string name="download_select_map_types">Diğer haritalar</string>
     <string name="download_roads_only_item">Sadece yollar</string>
@@ -420,8 +417,7 @@
     <string name="osmand_parking_choose_type">Park etme türünü seçin</string>
     <string name="osmand_parking_time_no_limit">Zaman-sınırsız park et</string>
     <string name="osmand_parking_position_description_add">Aracı almak için:</string>
-    <string name="osmand_parking_plugin_description">Aracınızın nerede park edildiğini ve alternatif olarak ne kadar park süresi kaldığını kaydetmenizi sağlar.
-\n Konum ve saat hem gösterge tablosunda hem de harita widget\'ında görülebilir. Android takvimine bir alarm hatırlatıcısı eklenebilir.</string>
+    <string name="osmand_parking_plugin_description">Aracınızın nerede park edildiğini ve alternatif olarak ne kadar park süresi kaldığını kaydetmenizi sağlar. \n Konum ve saat hem gösterge tablosunda hem de harita widget\'ında görülebilir. Android takvimine bir alarm hatırlatıcısı eklenebilir.</string>
     <string name="osmand_parking_plugin_name">Park etme pozisyonu</string>
     <string name="context_menu_item_delete_parking_point">Park etme işaretini sil</string>
     <string name="gpxup_public">Genel</string>
@@ -463,7 +459,6 @@
     <string name="plugins_screen">Eklentiler</string>
     <string name="prefs_plugins_descr">Eklentiler gelişmiş ayarları ve ek işlevselliği etkinleştirir.</string>
     <string name="prefs_plugins">Eklentiler</string>
-    <string name="osm_editing_plugin_description">Kullanıcı adınızı ve şifrenizi sağlayarak, OSM POI nesneleri oluşturma veya değiştirme, OSM notlarını açma veya yorum yapma ve kayıtlı GPX dosyaları ile OsmAnd\'a katkıda bulunma gibi OSM katkıları yapın. OpenStreetMap.org topluluk odaklı, küresel bir kamu malı haritalama projesidir.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektörel haritalar daha hızlı görüntülenir. Bazı aygıtlarda düzgün çalışmayabilir.</string>
     <string name="play_commands_of_currently_selected_voice">Bir ses seçin ve duyuruları oynayarak test edin:</string>
     <string name="debugging_and_development">OsmAnd gelişimi</string>
@@ -1230,9 +1225,6 @@
     <string name="track_segments">İz bölümü</string>
     <string name="track_points">İz noktası</string>
     <string name="record_plugin_name">Seyahat kaydetme</string>
-    <string name="record_plugin_description">Bu eklenti, harita üzerindeki GPX kayıt widget\'ına elle dokunarak gezinme rotalarınızı kaydetme işlevini, ya da tüm navigasyon rotalarınızı bir GPX dosyasına otomatik olarak kaydetme özelliğini etkinleştirir. 
-\n 
-\nKaydedilen yollar arkadaşlarınızla paylaşılabilir veya OSM\'ye katkıda bulunmak için kullanılabilir. Atletler antremanlarını izlemek için kayıtlı yolları kullanabilir. Tur zamanı, ortalama hız vs. gibi bazı basit yol analizi doğrudan OsmAnd içinde yapılabilir, ve tabii ki daha sonra özel üçüncü parti araçlarla da analiz edilebilir.</string>
     <string name="plugin_touringview_name">Gezinti haritası görünümü</string>
     <string name="lang_new">Nevar / Nepal Bhasa</string>
     <string name="favorite_category_add_new">Yeni ekle</string>
@@ -1662,7 +1654,6 @@
 \nÖzel bir harita indirme işlemi gerekli değildir, görünüm standart haritalarımızdan oluşturulmuştur. 
 \n 
 \nBu görünüm, burada tekrar devre dışı bırakılarak ya da \'Harita yapılandır\' altındaki \'Harita tarzını\' istediğiniz gibi değiştirerek geri döndürülebilir.</string>
-    <string name="plugin_nautical_descr">Bu eklenti, bot, yelken ve diğer su sporları türleri için deniz haritaları üretmesi için OsmAnd harita ve navigasyon uygulamasını zenginleştirir. \n \nOsmAnd için özel bir harita eklentisi, tüm deniz navigasyon işaretlerini ve harita sembollerini, hem kıyıdan uzak hem de yakın navigasyon için sağlayacaktır. Her gezinme işaretinin açıklaması, onları tanımlamak için gereken ayrıntıları ve anlamlarını (kategori, şekil, renk, sıra, referans vb.) sağlar. \n \nOsmAnd\'ın geleneksel harita tarzlarından birine geri dönmek için, bu eklentiyi tekrar devre dışı bırakın ya da \'Haritayı yapılandırın\' altında \'Harita tarzını\' istediğiniz gibi değiştirin.</string>
     <string name="plugin_ski_descr">OsmAnd için bu eklenti, küresel yokuş aşağı kayak pistlerinin, kros kayağı pistlerinin, Alp kayak pistlerinin, teleferiklerin ve telesiyejlerin ayrıntılarını parmaklarınızın ucuna getirir. Yollar ve pistler, zorluk derecesine göre renk kodlu olarak gösterilir ve kar renginde bir kış manzarasına benzeyen özel bir \'Kış\' harita tarzında gösterilir. \n \nBu görünümü etkinleştirmek, kış koşullarında tüm peyzaj özelliklerini gösteren harita tarzını \'Kış ve kayak\' olarak değiştirir. Bu görünüm, burada tekrar devre dışı bırakılarak veya \'Harita yapılandır\' altındaki \'Harita tarzını\' istediğiniz gibi değiştirerek geri döndürülebilir.</string>
     <string name="osmand_distance_planning_plugin_description">Bir seyahat planlamak ve noktalar arasındaki mesafeyi ölçmek için haritaya dokunarak veya mevcut GPX dosyalarını kullanarak veya değiştirerek yollar oluşturun. Sonuç, daha sonra rehberlik için kullanmak üzere bir GPX dosyası olarak kaydedilebilir.</string>
     <string name="rename_failed">Yeniden adlandırma başarısız oldu.</string>
@@ -4456,9 +4447,7 @@
     <string name="select_suggested_points">Önerilen noktaları seç</string>
     <string name="exit_import_descr">Değişiklikleri kaydetmeden çıkılsın mı\?</string>
     <string name="location_source">Konum kaynağı</string>
-    <string name="location_source_descr">OsmAnd\'ı Google Play\'den kurduğunuzda, konumu belirlemek için varsayılan olarak %1$s kullanılır.
-\n
-\nHatalı konum bilgisi alıyor veya cihazınızı %2$s olmadan kullanıyorsanız, \"%3$s\" kullanmayı deneyin.</string>
+    <string name="location_source_descr">OsmAnd\'ı Google Play\'den kurduğunuzda, konumu belirlemek için varsayılan olarak %1$s kullanılır. \n \nHatalı konum bilgisi alıyor veya cihazınızı %2$s olmadan kullanıyorsanız, \"%3$s\" kullanmayı deneyin.</string>
     <string name="default_appearance_desc">Varsayılan renk, simge ve şekil, gruba eklenen favori noktalara uygulanacaktır.</string>
     <string name="default_appearance">Varsayılan görünüm</string>
     <string name="edit_category">Kategoriyi düzenle</string>

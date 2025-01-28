@@ -16,6 +16,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.MapHudLayout.SizeChangeListener;
@@ -100,7 +101,7 @@ public class RulerWidget extends FrameLayout implements ViewChangeProvider {
 			double roundedDist = OsmAndFormatter.calculateRoundedDist(maxWidth / pixDensity, app);
 
 			int cacheRulerDistPix = (int) (pixDensity * roundedDist);
-			String cacheRulerText = OsmAndFormatter.getFormattedDistance((float) roundedDist, app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS);
+			String cacheRulerText = OsmAndFormatter.getFormattedDistance((float) roundedDist, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
 			textShadow.setText(cacheRulerText);
 			text.setText(cacheRulerText);
 			ViewGroup.LayoutParams lp = layout.getLayoutParams();

@@ -13,6 +13,7 @@ import net.osmand.shared.gpx.primitives.Route
 import net.osmand.shared.gpx.primitives.Track
 import net.osmand.shared.gpx.primitives.TrkSegment
 import net.osmand.shared.gpx.primitives.WptPt
+import net.osmand.shared.io.KFile
 import net.osmand.shared.util.KMapUtils
 import kotlin.collections.set
 
@@ -262,7 +263,13 @@ class GpxFile : GpxExtensions {
 	}
 
 	fun getAnalysis(fileTimestamp: Long): GpxTrackAnalysis {
-		return getAnalysis(fileTimestamp, null, null, null)
+		val parameters = if (path.isNotEmpty())
+			GpxDbHelper.getItem(KFile(path), false)?.getAnalysisCalculationParameters() else null
+		return getAnalysis(fileTimestamp, null, null, parameters, null)
+	}
+
+	fun getAnalysis(fileTimestamp: Long, parameters: Map<GpxParameter, Any?>?): GpxTrackAnalysis {
+		return getAnalysis(fileTimestamp, null, null, parameters, null)
 	}
 
 	fun getAnalysis(
@@ -271,10 +278,25 @@ class GpxFile : GpxExtensions {
 		toDistance: Double?,
 		pointsAnalyzer: GpxTrackAnalysis.TrackPointsAnalyser?
 	): GpxTrackAnalysis {
+		val parameters = if (path.isNotEmpty())
+			GpxDbHelper.getItem(KFile(path), false)?.getAnalysisCalculationParameters() else null
+		return getAnalysis(fileTimestamp, fromDistance, toDistance, parameters, pointsAnalyzer)
+	}
+
+	fun getAnalysis(
+		fileTimestamp: Long,
+		fromDistance: Double?,
+		toDistance: Double?,
+		parameters: Map<GpxParameter, Any?>?,
+		pointsAnalyzer: GpxTrackAnalysis.TrackPointsAnalyser?
+	): GpxTrackAnalysis {
 		val analysis = GpxTrackAnalysis()
 		analysis.name = path
 		analysis.wptPoints = points.size
 		analysis.setWptCategoryNames(getWaypointCategories())
+		if (parameters != null) {
+			analysis.setGpxParameters(parameters)
+		}
 
 		val segments = getSplitSegments(analysis, fromDistance, toDistance)
 		analysis.prepareInformation(fileTimestamp, pointsAnalyzer, *segments.toTypedArray())
@@ -287,6 +309,12 @@ class GpxFile : GpxExtensions {
 		toDistance: Double?
 	): List<SplitSegment> {
 		val splitSegments = mutableListOf<SplitSegment>()
+		if (fromDistance == null || toDistance == null) {
+			getGeneralSegment()?.let {
+				splitSegments.add(SplitSegment(it))
+				return splitSegments
+			}
+		}
 		for (subtrack in tracks) {
 			for (segment in subtrack.segments) {
 				if (!segment.generalSegment) {
@@ -476,7 +504,7 @@ class GpxFile : GpxExtensions {
 		val tpoints = mutableListOf<TrkSegment>()
 		if (routes.isNotEmpty()) {
 			for (route in routes) {
-				val routeColor = route.getColor(getColor(0))
+				val routeColor = route.getColor(getColor(null))
 				if (route.points.isNotEmpty()) {
 					val ts = TrkSegment()
 					tpoints.add(ts)
@@ -491,13 +519,17 @@ class GpxFile : GpxExtensions {
 	fun processPoints(): List<TrkSegment> {
 		val tpoints = mutableListOf<TrkSegment>()
 		for (track in tracks) {
-			val trackColor = track.getColor(getColor(0))
+			val trackColor = track.getColor(getColor(null))
+			val trackWidth = track.getWidth(null)
 			for (segment in track.segments) {
+				val segmentColor = segment.getColor(trackColor)
+				val segmentWidth = segment.getWidth(trackWidth)
 				if (!segment.generalSegment && segment.points.isNotEmpty()) {
 					val ts = TrkSegment()
 					tpoints.add(ts)
+					ts.setColor(segmentColor)
+					ts.setWidth(segmentWidth)
 					ts.points.addAll(segment.points)
-					ts.setColor(trackColor)
 				}
 			}
 		}
@@ -615,14 +647,6 @@ class GpxFile : GpxExtensions {
 
 	fun setSplitInterval(splitInterval: Double) {
 		getExtensionsToWrite()["split_interval"] = splitInterval.toString()
-	}
-
-	fun getWidth(defWidth: String?): String? {
-		return extensions?.get("width") ?: defWidth
-	}
-
-	fun setWidth(width: String) {
-		getExtensionsToWrite()["width"] = width
 	}
 
 	fun isShowArrowsSet(): Boolean {
@@ -797,7 +821,7 @@ class GpxFile : GpxExtensions {
 			trkSegments.add(cloneTrkSegment(segment))
 		}
 		dest.segments = trkSegments
-		copyExtensions(source)
+		dest.copyExtensions(source)
 		return dest
 	}
 
@@ -810,7 +834,7 @@ class GpxFile : GpxExtensions {
 			points.add(WptPt(point))
 		}
 		dest.points = points
-		copyExtensions(source)
+		dest.copyExtensions(source)
 		return dest
 	}
 
@@ -844,7 +868,7 @@ class GpxFile : GpxExtensions {
 			routeTypes.add(cloneRouteType(rt))
 		}
 		dest.routeTypes = routeTypes
-		copyExtensions(source)
+		dest.copyExtensions(source)
 		return dest
 	}
 

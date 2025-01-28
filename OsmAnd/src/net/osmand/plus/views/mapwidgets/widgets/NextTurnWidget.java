@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.TripUtils;
 import net.osmand.plus.routing.CurrentStreetName;
-import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.routing.NextDirectionInfo;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.router.TurnType;
@@ -76,7 +76,7 @@ public class NextTurnWidget extends NextTurnBaseWidget {
 				setDeviatePath((int) routingHelper.getRouteDeviation());
 			} else {
 				NextDirectionInfo info = routingHelper.getNextRouteDirectionInfo(nextDirectionInfo, true);
-				if (info != null && info.distanceTo > 0 && info.directionInfo != null) {
+				if (info != null && info.distanceTo >= 0 && info.directionInfo != null) {
 					streetName = TripUtils.getStreetName(app, info, info.directionInfo);
 					turnType = info.directionInfo.getTurnType();
 					nextTurnDistance = info.distanceTo;

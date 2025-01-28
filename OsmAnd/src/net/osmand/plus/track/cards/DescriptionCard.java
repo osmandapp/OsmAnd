@@ -1,7 +1,6 @@
 package net.osmand.plus.track.cards;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -10,10 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
-
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.RequestCreator;
 
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.Metadata;
@@ -60,7 +55,10 @@ public class DescriptionCard extends MapBaseCard {
 		String imageUrl = getMetadataImageLink(gpxFile.getMetadata());
 		String descriptionHtml = gpxFile.getMetadata().getDescription();
 
-		setupImage(imageUrl);
+		if (PicassoUtils.isImageUrl(imageUrl)) {
+			AppCompatImageView imageView = view.findViewById(R.id.main_image);
+			PicassoUtils.setupImageViewByUrl(app, imageView, imageUrl, true);
+		}
 
 		if (Algorithms.isBlank(descriptionHtml)) {
 			showAddBtn();
@@ -132,40 +130,12 @@ public class DescriptionCard extends MapBaseCard {
 		AndroidUtils.setBackground(ctx, button, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 	}
 
-	private void setupImage(String imageUrl) {
-		if (imageUrl == null) {
-			return;
-		}
-		PicassoUtils picasso = PicassoUtils.getPicasso(app);
-		RequestCreator rc = Picasso.get().load(imageUrl);
-		AppCompatImageView image = view.findViewById(R.id.main_image);
-		rc.into(image, new Callback() {
-			@Override
-			public void onSuccess() {
-				picasso.setResultLoaded(imageUrl, true);
-				AndroidUiHelper.updateVisibility(image, true);
-			}
-
-			@Override
-			public void onError(Exception e) {
-				picasso.setResultLoaded(imageUrl, false);
-			}
-		});
-	}
-
 	@Nullable
 	public static String getMetadataImageLink(@NonNull Metadata metadata) {
 		if (metadata.getLink() != null) {
-			String link = metadata.getLink().getHref();
-			if (!TextUtils.isEmpty(link)) {
-				String lowerCaseLink = link.toLowerCase();
-				if (lowerCaseLink.contains(".jpg")
-						|| lowerCaseLink.contains(".jpeg")
-						|| lowerCaseLink.contains(".png")
-						|| lowerCaseLink.contains(".bmp")
-						|| lowerCaseLink.contains(".webp")) {
-					return link;
-				}
+			String url = metadata.getLink().getHref();
+			if (PicassoUtils.isImageUrl(url)) {
+				return url;
 			}
 		}
 		return null;

@@ -3,7 +3,6 @@ package net.osmand.plus.resources;
 import net.osmand.binary.BinaryVectorTileReader;
 import net.osmand.data.GeometryTile;
 import net.osmand.map.ITileSource;
-import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
 
 import java.io.File;
 import java.io.IOException;

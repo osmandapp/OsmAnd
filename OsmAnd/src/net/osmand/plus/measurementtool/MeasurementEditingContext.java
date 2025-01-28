@@ -306,7 +306,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	}
 
 	public boolean isAddNewSegmentAllowed() {
-		return beforeSegments.size() > 0 && beforeSegments.get(beforeSegments.size() - 1).getPoints().size() >= 2;
+		return !beforeSegments.isEmpty() && beforeSegments.get(beforeSegments.size() - 1).getPoints().size() >= 2;
 	}
 
 	public void clearSnappedToRoadPoints() {
@@ -314,17 +314,11 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	}
 
 	List<TrkSegment> getBeforeTrkSegmentLine() {
-		if (beforeSegmentsForSnap != null) {
-			return beforeSegmentsForSnap;
-		}
-		return beforeSegments;
+		return beforeSegmentsForSnap != null ? beforeSegmentsForSnap : beforeSegments;
 	}
 
 	List<TrkSegment> getAfterTrkSegmentLine() {
-		if (afterSegmentsForSnap != null) {
-			return afterSegmentsForSnap;
-		}
-		return afterSegments;
+		return afterSegmentsForSnap != null ? afterSegmentsForSnap : afterSegments;
 	}
 
 	public List<TrkSegment> getBeforeSegments() {
@@ -750,7 +744,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	}
 
 	public void scheduleRouteCalculateIfNotEmpty() {
-		if (application == null || (before.getPoints().size() == 0 && after.getPoints().size() == 0)) {
+		if (application == null || (before.getPoints().isEmpty() && after.getPoints().isEmpty())) {
 			return;
 		}
 		RoutingHelper routingHelper = application.getRoutingHelper();
@@ -791,7 +785,8 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return keys;
 	}
 
-	private void recreateSegments(List<TrkSegment> segments, List<TrkSegment> segmentsForSnap, List<WptPt> points, boolean calculateIfNeeded) {
+	private void recreateSegments(List<TrkSegment> segments, List<TrkSegment> segmentsForSnap,
+								  List<WptPt> points, boolean calculateIfNeeded) {
 		List<Integer> roadSegmentIndexes = new ArrayList<>();
 		TrkSegment s = new TrkSegment();
 		segments.add(s);
@@ -829,21 +824,27 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		if (!segments.isEmpty()) {
 			for (TrkSegment segment : segments) {
 				TrkSegment segmentForSnap = new TrkSegment();
-				for (int i = 0; i < segment.getPoints().size() - 1; i++) {
-					Pair<WptPt, WptPt> pair = new Pair<>(segment.getPoints().get(i), segment.getPoints().get(i + 1));
-					RoadSegmentData data = this.roadSegmentData.get(pair);
+				List<WptPt> segmentPoints = segment.getPoints();
+				List<WptPt> segmentForSnapPoints = segmentForSnap.getPoints();
+				for (int i = 0; i < segmentPoints.size() - 1; i++) {
+					WptPt point = segmentPoints.get(i);
+					WptPt nextPoint = segmentPoints.get(i + 1);
+					RoadSegmentData data = this.roadSegmentData.get(new Pair<>(point, nextPoint));
 					List<WptPt> pts = data != null ? data.getPoints() : null;
 					if (pts != null) {
-						segmentForSnap.getPoints().addAll(pts);
+						segmentForSnapPoints.addAll(pts);
 					} else {
 						if (calculateIfNeeded && roadSegmentIndexes.contains(segmentsForSnap.size())) {
 							scheduleRouteCalculateIfNotEmpty();
 						}
-						segmentForSnap.getPoints().addAll(Arrays.asList(pair.first, pair.second));
+						if (segmentForSnapPoints.isEmpty()) {
+							segmentForSnapPoints.add(point);
+						}
+						segmentForSnapPoints.add(nextPoint);
 					}
 				}
-				if (segmentForSnap.getPoints().isEmpty()) {
-					segmentForSnap.getPoints().addAll(segment.getPoints());
+				if (segmentForSnapPoints.isEmpty()) {
+					segmentForSnapPoints.addAll(segmentPoints);
 				}
 				segmentsForSnap.add(segmentForSnap);
 			}
@@ -876,18 +877,18 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 				addPoints(segment.getPoints());
 			}
 		} else {
-			for (int si = 0; si < segments.size(); si++) {
-				TrkSegment segment = segments.get(si);
+			for (int i = 0; i < segments.size(); i++) {
+				TrkSegment segment = segments.get(i);
 				if (segment.hasRoute()) {
-					List<WptPt> routePoints = collectRoutePointsFromSegment(segment, si);
-					if (!routePoints.isEmpty() && si < segments.size() - 1) {
+					List<WptPt> routePoints = collectRoutePointsFromSegment(segment, i);
+					if (!routePoints.isEmpty() && i < segments.size() - 1) {
 						routePoints.get(routePoints.size() - 1).setGap();
 					}
 					addPoints(routePoints);
 				} else {
 					List<WptPt> points = segment.getPoints();
 					addPoints(points);
-					if (!points.isEmpty() && si < segments.size() - 1) {
+					if (!points.isEmpty() && i < segments.size() - 1) {
 						points.get(points.size() - 1).setGap();
 					}
 				}
@@ -1039,12 +1040,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	}
 
 	private void updateSegmentsForSnap(boolean both) {
-		recreateSegments(beforeSegments = new ArrayList<>(),
-				beforeSegmentsForSnap = new ArrayList<>(), before.getPoints(), true);
-		if (both) {
-			recreateSegments(afterSegments = new ArrayList<>(),
-					afterSegmentsForSnap = new ArrayList<>(), after.getPoints(), true);
-		}
+		updateSegmentsForSnap(both, true);
 	}
 
 	private void updateSegmentsForSnap(boolean both, boolean calculateIfNeeded) {
@@ -1163,8 +1159,9 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return params;
 	}
 
-	public List<List<GPXUtilities.WptPt>> getRoutePoints() {
-		List<List<GPXUtilities.WptPt>> res = new ArrayList<>();
+	@NonNull
+	private List<List<WptPt>> getRoutePoints() {
+		List<List<WptPt>> res = new ArrayList<>();
 		List<WptPt> plainPoints = new ArrayList<>(before.getPoints());
 		plainPoints.addAll(after.getPoints());
 		List<WptPt> points = new ArrayList<>();
@@ -1172,13 +1169,13 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			if (point.getTrkPtIndex() != -1) {
 				points.add(point);
 				if (point.isGap()) {
-					res.add(SharedUtil.jWptPtList(points));
+					res.add(points);
 					points = new ArrayList<>();
 				}
 			}
 		}
 		if (!points.isEmpty()) {
-			res.add(SharedUtil.jWptPtList(points));
+			res.add(points);
 		}
 		return res;
 	}
@@ -1193,12 +1190,10 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		if (gpxData != null && gpxData.getGpxFile() != null) {
 			points = gpxData.getGpxFile().getPointsList();
 		}
-		List<GPXUtilities.WptPt> jPoints = points != null ? SharedUtil.jWptPtList(points) : null;
-		return SharedUtil.kGpxFile(
-				RouteExporter.exportRoute(gpxName, getRouteSegments(), jPoints, getRoutePoints()));
+		return RouteExporter.exportRoute(gpxName, getRouteSegments(), points, getRoutePoints());
 	}
 
-	private GPXUtilities.TrkSegment getRouteSegment(int startPointIndex, int endPointIndex) {
+	private TrkSegment getRouteSegment(int startPointIndex, int endPointIndex) {
 		List<RouteSegmentResult> route = new ArrayList<>();
 		List<Location> locations = new ArrayList<>();
 		List<Integer> routePointIndexes = new ArrayList<>();
@@ -1230,16 +1225,16 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			before.getPoints().get(startPointIndex).setTrkPtIndex(0);
 			return new RouteExporter("", route, locations, routePointIndexes, null).generateRouteSegment();
 		} else if (endPointIndex - startPointIndex >= 0) {
-			GPXUtilities.TrkSegment segment = new GPXUtilities.TrkSegment();
-			segment.points = SharedUtil.jWptPtList(
-					new ArrayList<>(before.getPoints().subList(startPointIndex, endPointIndex + 1)));
+			TrkSegment segment = new TrkSegment();
+			segment.setPoints(new ArrayList<>(before.getPoints().subList(startPointIndex, endPointIndex + 1)));
 			return segment;
 		}
 		return null;
 	}
 
-	private List<GPXUtilities.TrkSegment> getRouteSegments() {
-		List<GPXUtilities.TrkSegment> res = new ArrayList<>();
+	@NonNull
+	private List<TrkSegment> getRouteSegments() {
+		List<TrkSegment> res = new ArrayList<>();
 		List<Integer> lastPointIndexes = new ArrayList<>();
 		for (int i = 0; i < before.getPoints().size(); i++) {
 			WptPt pt = before.getPoints().get(i);
@@ -1252,7 +1247,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		}
 		int firstPointIndex = 0;
 		for (Integer lastPointIndex : lastPointIndexes) {
-			GPXUtilities.TrkSegment segment = getRouteSegment(firstPointIndex, lastPointIndex);
+			TrkSegment segment = getRouteSegment(firstPointIndex, lastPointIndex);
 			if (segment != null) {
 				res.add(segment);
 			}

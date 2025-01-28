@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.map.ITileSource;
-import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
 
 import java.io.File;
 import java.io.IOException;

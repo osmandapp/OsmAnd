@@ -5880,7 +5880,7 @@
     <string name="connect_obd_instructions_step1">Conecte el escáner al puerto OBD-II de su vehículo.</string>
     <string name="connect_obd_instructions_step2">Encienda el motor de su vehículo</string>
     <string name="connect_obd_instructions_step3">Habilite el Bluetooth en su dispositivo</string>
-    <string name="connect_obd_instructions_step4">Pulse “Conectar” y seleccione su escáner de la lista.</string>
+    <string name="connect_obd_instructions_step4">Pulse “%1$s” y seleccione su escáner de la lista.</string>
     <string name="learn_more_about_obd_sensors">Obtenga más información sobre los sensores.</string>
     <string name="obd_fuel_left_liters">Combustible restante (litros)</string>
     <string name="route_guidance">Guía de itinerarios</string>
@@ -5912,7 +5912,7 @@
     <string name="simulate_obd">Simular datos OBD</string>
     <string name="obd_fuel_pressure">Presión del combustible</string>
     <string name="l_100km">L/100km</string>
-    <string name="obd_fuel_consumption_rate_percent_hour_desc">Muestra el consumo de combustible del vehículo (%/h)</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">Muestra el consumo de combustible del vehículo basado en cálculos (%/h)</string>
     <string name="obd_fuel_consumption_rate_l_km">Consumo de combustible (L/100 km)</string>
     <string name="kpa_unit">kPa</string>
     <string name="bt_start_pair_failed">No se puede iniciar el emparejamiento con el dispositivo</string>
@@ -5978,4 +5978,9 @@
     <string name="selected_delayed_profile">Perfil seleccionado \"%s\"</string>
     <string name="default_buttons_size_original_description">Cada botón conservará su propio tamaño.</string>
     <string name="default_buttons_corners_original_description">Cada botón conserva sus propias esquinas redondeadas.</string>
+    <string name="default_buttons_opacity_original_description">Cada botón mantendría su propia opacidad de fondo.</string>
+    <string name="calculating_indication_message">Calculando…</string>
+    <string name="calculate_size">Calcular tamaño</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Mostrar vías de escalada</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Vías de escalada</string>
 </resources>

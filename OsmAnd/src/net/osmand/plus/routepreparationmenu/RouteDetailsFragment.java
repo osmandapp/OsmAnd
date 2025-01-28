@@ -73,6 +73,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -483,7 +484,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			spannable.append(" • ");
 			spannable.setSpan(new ForegroundColorSpan(getSecondaryColor()), startIndex, startIndex + 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		}
-		spannable.append(OsmAndFormatter.getFormattedDistance((float) segment.getTravelDist(), app, OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS));
+		spannable.append(OsmAndFormatter.getFormattedDistance((float) segment.getTravelDist(), app, OsmAndFormatterParams.USE_LOWER_BOUNDS));
 		spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		String type = getString(transportStopRoute.getTypeStrRes()).toLowerCase();
@@ -532,7 +533,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 				spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 				startIndex = spannable.length();
 				spannable.append(getString(R.string.shared_string_walk)).append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app,
-						OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS));
+						OsmAndFormatterParams.USE_LOWER_BOUNDS));
 				spannable.setSpan(new ForegroundColorSpan(getSecondaryColor()), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 				buildRowDivider(view, true);
@@ -631,7 +632,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		title.append(" ").append(OsmAndFormatter.getFormattedDuration(walkTime, app));
 		title.setSpan(new CustomTypefaceSpan(FontCache.getMediumFont()), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		startIndex = title.length();
-		title.append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app, OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS));
+		title.append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app, OsmAndFormatterParams.USE_LOWER_BOUNDS));
 		title.setSpan(new ForegroundColorSpan(getSecondaryColor()), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		buildWalkRow(infoContainer, title, imagesContainer, new OnClickListener() {
@@ -721,7 +722,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		spannable.append("~").append(OsmAndFormatter.getFormattedDuration(walkTime, app));
 		spannable.setSpan(new CustomTypefaceSpan(typeface), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		startIndex = spannable.length();
-		spannable.append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app, OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS));
+		spannable.append(", ").append(OsmAndFormatter.getFormattedDistance((float) walkDist, app, OsmAndFormatterParams.USE_LOWER_BOUNDS));
 		spannable.setSpan(new ForegroundColorSpan(getSecondaryColor()), startIndex, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 		buildWalkRow(infoContainer, spannable, imagesContainer, v -> showWalkingRouteOnMap(segment, null));

@@ -750,31 +750,23 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 		ViewGroup.LayoutParams lp = listItemView.getLayoutParams();
 		int originalLayoutHeight = lp.height;
 
-		if (android.os.Build.VERSION.SDK_INT < 12) {
-			mPendingDismisses.add(new PendingDismissData(dismissPosition, dismissView, listItemView));
-			finishDismiss(dismissView, originalLayoutHeight);
-		} else {
-			int originalHeight = listItemView.getHeight();
-			ValueAnimator animator = ValueAnimator.ofInt(originalHeight, 1).setDuration(mAnimationTime);
+		int originalHeight = listItemView.getHeight();
+		ValueAnimator animator = ValueAnimator.ofInt(originalHeight, 1).setDuration(mAnimationTime);
 
-			animator.addListener(new AnimatorListenerAdapter() {
-				@Override
-				public void onAnimationEnd(Animator animation) {
-					finishDismiss(dismissView, originalLayoutHeight);
-				}
-			});
+		animator.addListener(new AnimatorListenerAdapter() {
+			@Override
+			public void onAnimationEnd(Animator animation) {
+				finishDismiss(dismissView, originalLayoutHeight);
+			}
+		});
 
-			animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-				@Override
-				public void onAnimationUpdate(ValueAnimator valueAnimator) {
-					lp.height = (Integer) valueAnimator.getAnimatedValue();
-					listItemView.setLayoutParams(lp);
-				}
-			});
+		animator.addUpdateListener(valueAnimator -> {
+			lp.height = (Integer) valueAnimator.getAnimatedValue();
+			listItemView.setLayoutParams(lp);
+		});
 
-			mPendingDismisses.add(new PendingDismissData(dismissPosition, dismissView, listItemView));
-			animator.start();
-		}
+		mPendingDismisses.add(new PendingDismissData(dismissPosition, dismissView, listItemView));
+		animator.start();
 	}
 
 	private void finishDismiss(View dismissView, int originalLayoutHeight) {
@@ -872,11 +864,8 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
 	private boolean isSwipeDirectionValid(float deltaX) {
 
 		int rtlSign = 1;
-		// On API level 17 and above, check if we are in a Right-To-Left layout
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-			if (mListView.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
-				rtlSign = -1;
-			}
+		if (mListView.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
+			rtlSign = -1;
 		}
 
 		// Check if swipe has been done in the correct direction

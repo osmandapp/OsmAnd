@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.utils.FileUtils;
 
 import java.io.File;
@@ -53,6 +54,9 @@ public class LocalItem extends BaseLocalItem implements Comparable<LocalItem> {
 	@NonNull
 	@Override
 	public String getSizeDescription(@NonNull Context context) {
+		if (isSizeCalculating(context)) {
+			return context.getString(R.string.calculating_indication_message);
+		}
 		String size = super.getSizeDescription(context);
 		return isSizeCalculationLimitReached() ? "≥ " + size : size;
 	}
@@ -111,6 +115,10 @@ public class LocalItem extends BaseLocalItem implements Comparable<LocalItem> {
 
 	public boolean isSizeCalculationLimitReached() {
 		return sizeCalculationLimit > 0 && sizeCalculationLimit <= size;
+	}
+
+	public boolean isSizeCalculating(@NonNull Context context) {
+		return LocalItemUtils.isSizeCalculating(context, this);
 	}
 
 	@Override

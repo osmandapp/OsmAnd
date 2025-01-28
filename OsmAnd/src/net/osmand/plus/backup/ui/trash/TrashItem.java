@@ -46,9 +46,9 @@ public class TrashItem {
 	}
 
 	@DrawableRes
-	public int getIconId() {
+	public int getIconId(@NonNull Context context) {
 		SettingsItem item = getSettingsItem();
-		return item != null ? BackupUiUtils.getIconId(item) : -1;
+		return item != null ? BackupUiUtils.getIconId(context, item) : -1;
 	}
 
 	@Nullable

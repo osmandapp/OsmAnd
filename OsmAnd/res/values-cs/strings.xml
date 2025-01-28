@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="switch_to_raster_map_to_see">Stáhněte si offline vektorovou mapu pro toto místo v \"Menu\" (\"Stáhnout mapy\") nebo přepněte na modul \"Online mapy\".</string>
+    <string name="switch_to_raster_map_to_see">Stáhněte si offline vektorovou mapu pro toto místo v „Menu“ („Stáhnout mapy“) nebo přepněte na zásuvný modul „Online mapy“.</string>
     <string name="send_files_to_osm">Nahrát GPX soubory do OSM?</string>
     <string name="gpx_visibility_txt">Viditelnost</string>
     <string name="gpx_tags_txt">Tagy</string>
@@ -2224,7 +2224,7 @@
     <string name="mapillary_action_descr">Sdílejte svůj vlastní pohled z úrovně ulice přes Mapillary.</string>
     <string name="mapillary_widget_descr">Umožňuje rychle přispět do Mapillary.</string>
     <string name="mapillary_descr">On-line fotografie z ulic pro každého. Objevte místa, spolupracujte, zachyťte svět.</string>
-    <string name="plugin_mapillary_descr">Snímky z úrovně ulice. Přispět můžete i vy. Chcete-li zobrazit existující data jako mapovou vrstvu, zapněte v nabídce \"Nastavení mapy\" možnost \"Snímky z úrovně ulice\".</string>
+    <string name="plugin_mapillary_descr">Snímky pohledu na úrovni ulice. Přispět můžete i vy. Chcete-li zobrazit existující data jako mapovou vrstvu, zapněte v nabídce „Konfigurace mapy“ možnost „Snímky na úrovni ulic“.</string>
     <string name="mapillary_widget">Nástroj Mapillary</string>
     <string name="map_widget_ruler_control">Kruhové pravítko</string>
     <string name="shared_string_reset">Resetovat</string>
@@ -2250,7 +2250,7 @@
     <string name="min_max">Min/Max</string>
     <string name="quick_action_resume_pause_navigation">Pozastavit/pokračovat v navigaci</string>
     <string name="quick_action_resume_pause_navigation_descr">Tlačítko pro pozastavení nebo pokračování navigace.</string>
-    <string name="quick_action_show_navigation_finish_dialog">Zobrazit zprávu \"Navigace ukončena\"</string>
+    <string name="quick_action_show_navigation_finish_dialog">Zobrazit zprávu o ukončení navigace</string>
     <string name="quick_action_start_stop_navigation">Spustit/ukončit navigaci</string>
     <string name="quick_action_start_stop_navigation_descr">Tlačítko pro spuštění nebo zastavení navigace.</string>
     <string name="rendering_value_translucent_pink_name">Průhledná růžová</string>
@@ -2805,7 +2805,7 @@
     <string name="downloaded_maps">Stažené mapy</string>
     <string name="visited_screens">Navštívené obrazovky</string>
     <string name="collected_data_descr">Určete, která data dovolíte aplikaci OsmAnd sdílet.</string>
-    <string name="privacy_and_security_change_descr">Klepněte na „Povolit“, pokud souhlasíte s našimi %1$s</string>
+    <string name="privacy_and_security_change_descr">Klepněte na „Povolit“, pokud souhlasíte s našimi %1$s</string>
     <string name="settings_privacy_and_security">Soukromí a zabezpečení</string>
     <string name="settings_privacy_and_security_desc">Zvolte údaje ke sdílení</string>
     <string name="shared_string_no_thank_you">Ne, díky</string>
@@ -2995,19 +2995,19 @@
     <string name="pref_selected_by_default_for_profiles">Toto nastavení je vybráno jako výchozí pro profily: %s</string>
     <string name="change_default_settings">Změnit nastavení</string>
     <string name="discard_changes">Zahodit změny</string>
-    <string name="apply_to_current_profile">Použít pouze na „%1$s“</string>
+    <string name="apply_to_current_profile">Použít pouze na „%1$s\\</string>
     <string name="apply_to_all_profiles">Použít na všechny profily</string>
     <string name="start_up_message_pref">Úvodní zpráva</string>
     <string name="analytics_pref_title">Analytika</string>
     <string name="turn_screen_on_info">Zobrazit mapu na uzamčené obrazovce během navigace.</string>
-    <string name="route_parameters_info">Nastavení navádění pro zvolený profil „%1$s“.</string>
+    <string name="route_parameters_info">Nastavení navádění pro zvolený profil „%1$s“.</string>
     <string name="units_and_formats">Jednotky a formáty</string>
     <string name="map_look_descr">Vzhled mapy</string>
     <string name="configure_profile">Upravit profil</string>
     <string name="switch_profile">Přepnout profil</string>
     <string name="manage_profiles_descr">Vytváření, import a úprava profilů</string>
     <string name="screen_alerts">Upozornění na displeji</string>
-    <string name="application_profile_changed">Profil aplikace změněn na „%s“</string>
+    <string name="application_profile_changed">Profil aplikace změněn na „%s\\</string>
     <string name="plugins_settings">Nastavení modulů</string>
     <string name="download_detailed_map">Stáhněte detailní mapu %s pro zobrazení této oblasti.</string>
     <string name="change_data_storage_full_description">Přesunout OsmAnd soubory do nového umístění\?
@@ -3226,7 +3226,7 @@
     <string name="osmand_purchases_item">Nákupy v OsmAnd</string>
     <string name="legend_item_description">Průvodce symboly na mapě.</string>
     <string name="navigation_profiles_item">Navigační profily</string>
-    <string name="release_3_7">• Nové offline mapy svahů \n \n• Plné přizpůsobení oblíbených bodů a GPX cílů – vlastní barvy, ikony a tvary \n \n• Možnost změny pořadí položek v kontextovém menu, nastavení mapy i hlavním menu \n \n• Wikipedie jako samostatná vrstva v nastavení mapy, lze vybrat pouze potřebné jazyky \n \n• Vytváření vlastních filtrů a map bodů zájmu s plnou flexibilitou \n \n• Přidána možnost obnovit nastavení vlastních profilů \n \n• Plnohodnotné GPX trasy z navigace nyní podporují jízdní pruhy a kompletní navigační pokyny \n \n• Opravena velikost uživatelského rozhraní na tabletech \n \n• Opraveny chyby pro jazyky psané zprava doleva \n \n</string>
+    <string name="release_3_7">• Nové offline mapy svahů \n \n• Plné přizpůsobení oblíbených bodů a GPX cílů – vlastní barvy, ikony a tvary \n \n• Možnost změny pořadí položek v kontextovém menu, nastavení mapy i hlavním menu \n \n• Wikipedie jako samostatná vrstva v nastavení mapy, lze vybrat pouze potřebné jazyky \n \n• Vytváření vlastních filtrů a map bodů zájmu s plnou flexibilitou \n \n• Přidána možnost obnovit nastavení vlastních profilů \n \n• Plnohodnotné GPX trasy z navigace nyní podporují jízdní pruhy a kompletní navigační pokyny \n \n• Opravena velikost uživatelského rozhraní na tabletech \n \n• Opraveny chyby pro jazyky psané zprava doleva\n\n</string>
     <string name="edit_online_source">Upravit online zdroj</string>
     <string name="expire_time">Doba vypršení platnosti</string>
     <string name="mercator_projection">Mercatorovo zobrazení</string>
@@ -3424,9 +3424,7 @@
     <string name="release_3_6">• Profily: nyní můžete změnit pořadí, nastavit ikonu pro mapu, změnit všechna nastavení základních profilů a resetovat je zpět do výchozího stavu \n \n • V navigaci přibylo číslo výjezdu \n \n • Přepracovaná nastavení modulů \n \n • Přepracovaná obrazovka nastavení pro rychlý přístup ke všem profilům \n \n • Přidaná možnost kopírovat nastavení z jiného profilu \n \n • Přidaná možnost skrýt nebo změnit pořadí kategorií bodů zájmu při hledání \n \n • Zpřesněné umístění ikon bodů zájmu na mapě \n \n • Přidané údaje o východu a západu slunce v nastavení mapy \n \n • Přidané ikony Domov a Práce na mapě \n \n • Přidaná podpora pro víceřádkové popisy v nastavení \n \n • Přidaná správná transliterace v mapě Japonska \n \n • Přidaná mapa Antarktidy</string>
     <string name="clear_recorded_data">Vymazat zaznamenaná data</string>
     <string name="routing_profile_direct_to">Přímo k bodu</string>
-    <string name="ui_customization_description">Nastavte počet položek v \"Úvodním panelu\", \"Nastavení mapy\" a \"Kontextovém menu\".
-\n
-\nVypněte nepoužívané moduly, abyste skryli jejich ovládací prvky. %1$s.</string>
+    <string name="ui_customization_description">Nastavte počet položek v „Úvodním panelu“, „Nastavení mapy“ a „Kontextovém menu“.\n\nVypněte nepoužívané moduly, abyste skryli jejich ovládací prvky. %1$s.</string>
     <string name="ui_customization_short_descr">Položky v úvodním panelu a kontextovém menu</string>
     <string name="ui_customization">Přizpůsobení uživatelského rozhraní</string>
     <string name="shared_string_drawer">Úvodní panel</string>
@@ -3456,7 +3454,7 @@
     <string name="turn_screen_on_descr">Zvolte možnosti probuzení obrazovky (při zamykání zařízení se ujistěte, že je OsmAnd na popředí):</string>
     <string name="turn_screen_on_navigation_instructions_descr">Každý navigační pokyn zapne obrazovku.</string>
     <string name="turn_screen_on_navigation_instructions">Navigační pokyny</string>
-    <string name="turn_screen_on_power_button_disabled">Vypnuto. Vyžaduje \"Nechat obrazovku zapnutou\" pod \"Časový limit obrazovky po probuzení\".</string>
+    <string name="turn_screen_on_power_button_disabled">Vypnuto. Vyžaduje „Nechat obrazovku zapnutou“ pod „Časový limit obrazovky po probuzení“.</string>
     <string name="turn_screen_on_power_button_descr">Stisknutím tlačítka napájení zapnete obrazovku s aplikací OsmAnd na zamčené obrazovce.</string>
     <string name="turn_screen_on_power_button">Tlačítko napájení</string>
     <string name="turn_screen_on_proximity_sensor">Senzor přiblížení</string>
@@ -4217,7 +4215,7 @@
     <string name="quick_action_add_route_descr">Tlačítko pro zahájení trasy uprostřed obrazovky.</string>
     <string name="please_provide_group_name_message">Pojmenujte prosím skupinu.</string>
     <string name="gpx_no_routes_title">Neexistují žádné trasy</string>
-    <string name="gpx_no_routes_descr">K přidání trasy do souboru můžete použít nástroj \"%1$s\".</string>
+    <string name="gpx_no_routes_descr">K přidání trasy do souboru můžete použít nástroj „%1$s“.</string>
     <string name="selected_waypoints_descr">Vybrané body budou přidány do stopy \"%1$s\"</string>
     <string name="shared_string_reading_file">Načítání souboru…</string>
     <string name="all_groups">Všechny skupiny</string>
@@ -4270,7 +4268,7 @@
     <string name="upload_change">Nahrát změnu</string>
     <string name="cloud_version_will_be_removed">Cloudová verze bude odstraněna</string>
     <string name="choose_what_to_sync">Vyberte, co synchronizovat</string>
-    <string name="cloud_sync_progress">Synchronizace...%1$s</string>
+    <string name="cloud_sync_progress">Synchronizace... %1$s</string>
     <string name="checking_progress">Kontroluje se…</string>
     <string name="shared_string_modified">Upraveno</string>
     <string name="res_unknown">Neznámý</string>
@@ -4384,7 +4382,7 @@
     <string name="share_crash_log">Sdílet protokol o pádu</string>
     <string name="weather_pressure_millimeters_of_mercury">Milimetrů rtuťového sloupce</string>
     <string name="weather_prefs_descr">24hodinová a 7denní předpověď, aktualizovaná každé 3 hodiny</string>
-    <string name="weight_limit_error">Minimální hodnota je \"%1$s\" tun. Pokud je hmotnost vozidla nižší než minimální hodnota, použijte profil \"%2$s\".</string>
+    <string name="weight_limit_error">Minimální hodnota je „%1$s“ tun. Pokud je hmotnost vozidla nižší než minimální hodnota, použijte profil „%2$s“.</string>
     <string name="dismiss_changes">Zamítnout změny\?</string>
     <string name="show_map_symbols">Zobrazit symboly mapy</string>
     <string name="weather_temperature_celsius">Celsia</string>
@@ -4566,7 +4564,7 @@
     <string name="routing_attr_carriage_restrictions_description">Zohlednit omezení vjezdu pro vozidla tažená koňmi</string>
     <string name="rendering_attr_horse_scale_common_name">Společné</string>
     <string name="rendering_attr_showTramRoutes_name">Tramvajové linky</string>
-    <string name="shared_string_duplicate">Duplicitní</string>
+    <string name="shared_string_duplicate">Duplikovat</string>
     <string name="favorite_delete_group">Odstranit skupinu</string>
     <string name="shared_string_identifiers">Identifikátory</string>
     <string name="terms_of_service_desc">Stažením map souhlasíte s %1$s a %2$s.</string>
@@ -4760,7 +4758,7 @@
     <string name="app_mode_climbing">Horolezectví</string>
     <string name="generate_slope_from_3d_maps">Generovat rastrové mapy svahů z 3D map</string>
     <string name="disable_vertex_hillshade_3d">Vypnout stínování vrcholů ve 3D</string>
-    <string name="common_weight_limit_error">Minimální hodnota je \"%1$s\" %2$s. Pokud je hmotnost vozidla nižší než minimální hodnota, použijte profil \"%3$s\".</string>
+    <string name="common_weight_limit_error">Minimální hodnota je „%1$s“ %2$s. Pokud je hmotnost vozidla nižší než minimální hodnota, použijte profil „%3$s“.</string>
     <string name="shared_string_pounds">libry</string>
     <string name="metric_lbs">lbs</string>
     <string name="shared_string_all_world">Celý svět</string>
@@ -4958,7 +4956,7 @@
     <string name="feature_available_as_part_of_plan">%1$s je k dispozici jako součást plánu %2$s</string>
     <string name="shared_string_included">Zahrnuto</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
-    <string name="local_indexes_category_terrain">Terénní mapy (3D</string>
+    <string name="local_indexes_category_terrain">Terénní mapy (3D)</string>
     <string name="hillshade_slope">Stínování kopců, svahy</string>
     <string name="map_widget_glide_average_desc">Zobrazuje průměrný klouzavý poměr pro nastavený interval.</string>
     <string name="map_widget_glide_target_desc">Zobrazuje klouzavost potřebnou k dosažení cílového bodu.</string>
@@ -5084,7 +5082,7 @@
     <string name="key_event_action_open_wunderlinq_datagrid">Otevřít datovou tabulku WunderLINQ</string>
     <string name="topography_maps">Topografické mapy</string>
     <string name="clear_key_assignment">Vymazat přiřazení klávesy</string>
-    <string name="clear_key_assignment_desc">Přiřazení klávesy ke zvolené akci bude odstraněno a nastaveno na \"Žádné\".</string>
+    <string name="clear_key_assignment_desc">Přiřazení klávesy ke zvolené akci bude odstraněno a nastaveno na „Žádné“.</string>
     <string name="key_event_category_map_interactions">Interakce s mapou</string>
     <string name="shared_string_next_event">Následující událost</string>
     <string name="change_button">Změnit tlačítko</string>
@@ -5206,7 +5204,7 @@
     <string name="shared_string_author">Autor</string>
     <string name="rendering_attr_padusDisplayMode_name">Zobrazovací mód veřejných prostranství</string>
     <string name="rendering_attr_padusHideBoundaries_description">Skrýt hranice veřejných prostranství ale nechat oblasti</string>
-    <string name="sorted_sufolders_toast">Podsložky v \"%1$s\" jsou seřazeny podle: \"%2$s\"</string>
+    <string name="sorted_sufolders_toast">Podsložky v „%1$s“ jsou seřazeny podle: „%2$s“</string>
     <string name="avg_sensor_cadence">Kadence jízdního kola, průměr</string>
     <string name="avg_sensor_speed">Rychlost snímače, průměr</string>
     <string name="help_article_setup_a_route_name">Připravit trasu</string>
@@ -5436,7 +5434,7 @@
     <string name="resting_position_icon_summary">Ikona se zobrazuje, když se nepohybujete.</string>
     <string name="resting_position_icon">Ikona klidové polohy</string>
     <string name="clear_all_key_shortcuts">Vymazat všechny klávesové zkratky</string>
-    <string name="no_assigned_keys_desc">Vyberte akci a přiřaďte jí klávesu klepnutím na tlačítko \"Přidat\".</string>
+    <string name="no_assigned_keys_desc">Vyberte akci a přiřaďte jí klávesu klepnutím na tlačítko „Přidat“.</string>
     <string name="steps_per_minute_unit">SPM</string>
     <string name="delete_widget">Smazat widget?</string>
     <string name="delete_widget_description">Tento widget bude odstraněn. Později jej můžete obnovit v okně Konfigurace.</string>
@@ -5659,8 +5657,19 @@
     <string name="location_interpolation_percent">Procento interpolace polohy</string>
     <string name="location_interpolation_percent_desc">Nastavení procenta interpolace polohy během navigace po trase. Tento parametr snižuje zpoždění polohy na mapě během animace.</string>
     <string name="shared_string_interpolation">Interpolace</string>
-    <string name="selected_delayed_profile">Zvolený profil s\\</string>
+    <string name="selected_delayed_profile">Zvolený profil „%s\\</string>
     <string name="default_buttons_opacity_original_description">Každé tlačítko si zachová svou vlastní průhlednost pozadí.</string>
     <string name="default_buttons_size_original_description">Každé tlačítko si zachová svou vlastní velikost.</string>
     <string name="default_buttons_corners_original_description">Každé tlačítko si zachová své vlastní zaoblení rohů.</string>
+    <string name="calculate_size">Vypočítat velikost</string>
+    <string name="calculating_indication_message">Vypočítávám…</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Zobrazit lezecké trasy</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Lezecké trasy</string>
+    <string name="display_distance_to_first_intermediate">Zobrazit podrobnosti trasy k nejbližší zastávce</string>
+    <string name="display_distance_to_first_intermediate_summary">Zobrazit čas a vzdálenost k nejbližšímu mezicíli. Vypněte, pokud chcete vždy vidět podrobnosti trasy k cíli.</string>
+    <string name="recently_visited">Nedávno navštíveno</string>
+    <string name="popular_places_nearby">Populární místa v okolí</string>
+    <string name="shared_string_length">Délka</string>
+    <string name="shared_string_avg_altitude">Prům. výška</string>
+    <string name="shared_string_avg_speed">Min. rychlost</string>
 </resources>

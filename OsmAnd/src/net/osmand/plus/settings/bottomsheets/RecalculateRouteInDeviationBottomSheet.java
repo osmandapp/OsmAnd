@@ -33,6 +33,7 @@ import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.shared.settings.enums.MetricsConstants;
 
@@ -223,7 +224,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 	}
 
 	private static String getFormattedDistance(@NonNull OsmandApplication app, float value) {
-		return OsmAndFormatter.getFormattedDistance(value, app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS);
+		return OsmAndFormatter.getFormattedDistance(value, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target,

@@ -2323,7 +2323,7 @@
     <string name="poi_resource_uranium">Уран</string>
     <string name="poi_training_yoga">Навчання: йога</string>
     <string name="poi_clothes_dance">Для танців</string>
-    <string name="poi_forestry_compartment">Покажчик: квартальний стовп</string>
+    <string name="poi_forestry_compartment">Покажчик: лісовий квартал</string>
     <string name="poi_aquaculture_shrimp">Розведення креветок</string>
     <string name="poi_cuisine_crepes">Тонкі млинці</string>
     <string name="poi_electrical">Електротовари</string>
@@ -3891,7 +3891,7 @@
     <string name="poi_local_ref">Локальний номер</string>
     <string name="poi_geodesist">Геодезист</string>
     <string name="poi_conference_centre">Конференц-центр</string>
-    <string name="poi_camp_pitch">Місце для табору</string>
+    <string name="poi_camp_pitch">Місце для палатки</string>
     <string name="poi_kickboxing">Кікбоксинг</string>
     <string name="poi_horseshoes">Підкови</string>
     <string name="poi_fencing">Фехтування</string>
@@ -4963,4 +4963,9 @@
     <string name="poi_route_activity_type_gliding_sailplane">Планерування (планер)</string>
     <string name="poi_route_activity_type_harvesting">збирання врожаю</string>
     <string name="poi_route_activity_type_swimming_outdoor">Плавання на відкритому повітрі</string>
+    <string name="poi_cafe_filter">кафе</string>
+    <string name="poi_climbing_area">Зона скелелазіння</string>
+    <string name="poi_cafe_yes">Иак</string>
+    <string name="poi_climbing_route">Маршрут сходження</string>
+    <string name="poi_climbing_route_bottom">Нижня частина маршруту сходження</string>
 </resources>

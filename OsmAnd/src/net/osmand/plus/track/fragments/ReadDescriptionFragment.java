@@ -21,10 +21,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.RequestCreator;
-
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -32,9 +28,7 @@ import net.osmand.plus.track.fragments.EditDescriptionFragment.OnSaveDescription
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.PicassoUtils;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.WebViewEx;
-import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.util.Algorithms;
 
 public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment implements OnSaveDescriptionCallback {
@@ -71,7 +65,8 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 		updateNightMode();
 		View view = themedInflater.inflate(R.layout.dialog_read_description, container, false);
 		setupToolbar(view);
-		setupImage(view);
+		AppCompatImageView imageView = view.findViewById(R.id.main_image);
+		PicassoUtils.setupImageViewByUrl(app, imageView, getImageUrl(), true);
 		setupContentView(view);
 		return view;
 	}
@@ -121,29 +116,6 @@ public abstract class ReadDescriptionFragment extends BaseOsmAndDialogFragment i
 		if (!Algorithms.isEmpty(title)) {
 			toolbarTitle.setText(title);
 		}
-	}
-
-	private void setupImage(@NonNull View view) {
-		String imageUrl = getImageUrl();
-		if (imageUrl == null) return;
-
-		AppCompatImageView ivImage = view.findViewById(R.id.main_image);
-		PicassoUtils picasso = PicassoUtils.getPicasso(app);
-		RequestCreator rc = Picasso.get().load(imageUrl);
-		WikivoyageUtils.setupNetworkPolicy(app.getSettings(), rc);
-
-		rc.into(ivImage, new Callback() {
-			@Override
-			public void onSuccess() {
-				picasso.setResultLoaded(imageUrl, true);
-				AndroidUiHelper.updateVisibility(ivImage, true);
-			}
-
-			@Override
-			public void onError(Exception e) {
-				picasso.setResultLoaded(imageUrl, false);
-			}
-		});
 	}
 
 	private void setupContentView(@NonNull View view) {

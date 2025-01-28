@@ -13,7 +13,6 @@ import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.media.MediaRecorder.AudioEncoder;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
@@ -358,7 +357,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 			qNames.add("1920 x 1080 (1080p)");
 			qValues.add(CamcorderProfile.QUALITY_1080P);
 		}
-		if (Build.VERSION.SDK_INT >= 21 && CamcorderProfile.hasProfile(CamcorderProfile.QUALITY_2160P)) {
+		if (CamcorderProfile.hasProfile(CamcorderProfile.QUALITY_2160P)) {
 			qNames.add("3840x2160 (2160p)");
 			qValues.add(CamcorderProfile.QUALITY_2160P);
 		}

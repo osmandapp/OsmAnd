@@ -1,6 +1,8 @@
 package net.osmand.plus.routing;
 
 
+import static net.osmand.plus.routing.VoiceCommandPending.ROUTE_CALCULATED;
+import static net.osmand.plus.routing.VoiceCommandPending.ROUTE_RECALCULATED;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PREPARE_TURN;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_PREPARE_TURN;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_IN;
@@ -18,7 +20,6 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.LocationPointWrapper;
-import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.routing.data.StreetName;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -898,7 +899,7 @@ public class VoiceRouter {
 				p.routeRecalculated(router.getLeftDistance(), router.getLeftTime());
 			}
 		} else if (player == null && (newRoute || settings.SPEAK_ROUTE_RECALCULATION.get())) {
-			pendingCommand = new VoiceCommandPending(!newRoute ? VoiceCommandPending.ROUTE_RECALCULATED : VoiceCommandPending.ROUTE_CALCULATED, this);
+			pendingCommand = new VoiceCommandPending(!newRoute ? ROUTE_RECALCULATED : ROUTE_CALCULATED, this);
 		}
 		play(p);
 		if (newRoute) {
@@ -947,37 +948,7 @@ public class VoiceRouter {
 		}
 	}
 
-	/**
-	 * Command to wait until voice player is initialized
-	 */
-	private class VoiceCommandPending {
-
-		public static final int ROUTE_CALCULATED = 1;
-		public static final int ROUTE_RECALCULATED = 2;
-
-		private final int type;
-		private final VoiceRouter voiceRouter;
-
-		public VoiceCommandPending(int type, @NonNull VoiceRouter voiceRouter) {
-			this.type = type;
-			this.voiceRouter = voiceRouter;
-		}
-
-		public void play(CommandBuilder newCommand) {
-			int left = voiceRouter.router.getLeftDistance();
-			int time = voiceRouter.router.getLeftTime();
-			if (left > 0) {
-				if (type == ROUTE_CALCULATED) {
-					newCommand.newRouteCalculated(left, time);
-				} else if (type == ROUTE_RECALCULATED) {
-					newCommand.routeRecalculated(left, time);
-				}
-				VoiceRouter.this.play(newCommand);
-			}
-		}
-	}
-
-	private void play(CommandBuilder p) {
+	protected void play(CommandBuilder p) {
 		if (p != null) {
 			List<String> played = p.play();
 			notifyOnVoiceMessage(p.getCommandsList(), played);

@@ -515,7 +515,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 
 	private int addStatusBarHeightIfNeeded(int res) {
 		MapActivity mapActivity = getMapActivity();
-		if (Build.VERSION.SDK_INT >= 21 && mapActivity != null) {
+		if (mapActivity != null) {
 			return res + (isSingleFragment() ? statusBarHeight : 0);
 		}
 		return res;

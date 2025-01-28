@@ -10,8 +10,10 @@ import com.google.android.material.slider.RangeSlider.OnSliderTouchListener
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
+import net.osmand.plus.utils.FormattedValue
 import net.osmand.shared.settings.enums.MetricsConstants
 import net.osmand.plus.utils.OsmAndFormatter
+import net.osmand.plus.utils.OsmAndFormatterParams
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.OsmandTextFieldBoxes
 import net.osmand.plus.widgets.TextViewEx
@@ -229,9 +231,9 @@ open class FilterRangeViewHolder(
 
 	fun getFormattedValue(
 		measureUnitType: MeasureUnitType,
-		value: String): OsmAndFormatter.FormattedValue {
+		value: String): FormattedValue {
 		val metricsConstants: MetricsConstants = app.settings.METRIC_SYSTEM.get()
-		val params = OsmAndFormatter.OsmAndFormatterParams()
+		val params = OsmAndFormatterParams()
 		params.setExtraDecimalPrecision(3)
 		params.setForcePreciseValue(true)
 		return when (measureUnitType) {
@@ -246,12 +248,13 @@ open class FilterRangeViewHolder(
 				app,
 				params)
 
-			MeasureUnitType.TIME_DURATION -> OsmAndFormatter.FormattedValue(
+			MeasureUnitType.TIME_DURATION -> FormattedValue(
 				value.toFloat() / 1000 / 60,
 				value,
-				"")
+				""
+			)
 
-			else -> OsmAndFormatter.FormattedValue(value.toFloat(), value, "")
+			else -> FormattedValue(value.toFloat(), value, "")
 		}
 	}
 

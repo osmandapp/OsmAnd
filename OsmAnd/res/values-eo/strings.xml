@@ -4666,7 +4666,7 @@
     <string name="choose_what_to_sync">Elektu kion samtempigi</string>
     <string name="changes">Ŝanĝoj %1$s</string>
     <string name="cloud_changes">Ŝanĝoj en la nubo</string>
-    <string name="cloud_sync_progress">Samtempigado…%1$s</string>
+    <string name="cloud_sync_progress">Samtempigado… %1$s</string>
     <string name="checking_progress">Kontrolado…</string>
     <string name="shared_string_modified">Modifita</string>
     <string name="res_unknown">Nekonata</string>
@@ -4760,7 +4760,7 @@
     <string name="offline_cache">Kaŝmemoro</string>
     <string name="shared_string_alt_name">Alternativa nomo</string>
     <string name="free_maps_updates">Senpagaj ĝisdatigoj (krizaj)</string>
-    <string name="common_weight_limit_error">La minimuma valoro estas %1$s %2$s Uzu la profilon “%3$s”, se pezo de via veturilo estas malpli granda ol la minimuma valoro.</string>
+    <string name="common_weight_limit_error">La minimuma valoro estas %1$s %2$s. Uzu la profilon “%3$s”, se pezo de via veturilo estas malpli granda ol la minimuma valoro.</string>
     <string name="clear_online_cache_description">Forviŝi kaŝmemoron de enretaj veteraj kaheloj.</string>
     <string name="clear_online_cache">Forviŝi kaŝmemoron</string>
     <string name="token_is_not_valid">Ĵetono malvalida</string>
@@ -4928,7 +4928,7 @@
     <string name="cache_size">Grando de kaŝmemoro</string>
     <string name="shared_string_avoid">Eviti</string>
     <string name="may_be_used_if_there_is_shortcut">Povas esti uzata se pli mallonga kurso</string>
-    <string name="release_4_5">• sentiloj BLE/ANT+: refaris konektadon, konservadon kaj montradon de ricevitaj datumoj al GPX \n \n• senpaga sekurkopio de ŝatataj punktoj kaj agordoj al OsmAnd-Nubo \n \n• nova formo de terenaj mapoj kun 3-dimensia reliefo \n \n• administri spurojn: plibonigita fasado, aldonis ordigadon kaj subtenon por ingitaj dosierujoj \n \n• Android Auto: nova komenca ekrano kun aliro al ŝatataj punktoj, spuroj kaj kategorioj de interesejoj \n \n• la samaj disponeblaj fenestraĵoj por supra kaj malsupra paneloj \n \n• nova profilo “Vagonaro” por kalkuli fervojajn kursojn \n \n• nivelkurboj kun ĉiuj map-fonto \n \n• etendita listo de implicitaj agoj por eksteraj klavaroj \n \n• propraj dosieroj de navigo, eblo superskribi aŭ forigi \n \n• eblo “Anonci devojiĝon de la kurso” \n \n• komenca ekrano: eblo restarigi agordaron de OsmAnd el dosiero \n \n• aldonis klasojn de danĝeraj materialoj por navigo per kamiono en Usono \n \n• aldonis subtenon por viaferataojn por piedirada navigo \n \n• vidigo de malfaciloj de kursoj laŭ la CAI-skalo \n \n• riparis elektilon de lingvo \n \n• aldonis subtenon por etosaj emblemoj \n \n• OsmAnd-Nubo: eblo por forigi konton \n \n• alirebleco: butona tuŝ-areo ŝanĝita al 48 dp; riparita problemo pri videbla uzant-fasado por ekranlegiloj \n \n• refaritaj japanaj voĉaj anoncoj \n \n• refaritaj ŝanĝoj de altitudo kaj pritakso de dekliveco</string>
+    <string name="release_4_5">• sentiloj BLE/ANT+: refaris konektadon, konservadon kaj montradon de ricevitaj datumoj al GPX \n \n• senpaga sekurkopio de ŝatataj punktoj kaj agordoj al OsmAnd-Nubo \n \n• nova formo de terenaj mapoj kun 3-dimensia reliefo \n \n• administri spurojn: plibonigita fasado, aldonis ordigadon kaj subtenon por ingitaj dosierujoj \n \n• Android Auto: nova komenca ekrano kun aliro al ŝatataj punktoj, spuroj kaj kategorioj de interesejoj \n \n• la samaj disponeblaj fenestraĵoj por supra kaj malsupra paneloj \n \n• nova profilo “Vagonaro” por kalkuli fervojajn kursojn \n \n• nivelkurboj kun ĉiuj map-fonto \n \n• etendita listo de implicitaj agoj por eksteraj klavaroj \n \n• propraj dosieroj de navigo, eblo superskribi aŭ forigi \n \n• eblo “Anonci devojiĝon de la kurso” \n \n• komenca ekrano: eblo restarigi agordaron de OsmAnd el dosiero \n \n• aldonis klasojn de danĝeraj materialoj por navigo per kamiono en Usono \n \n• aldonis subtenon por viaferataojn por piedirada navigo \n \n• vidigo de malfaciloj de kursoj laŭ la CAI-skalo \n \n• riparis elektilon de lingvo \n \n• aldonis subtenon por etosaj emblemoj \n \n• OsmAnd-Nubo: eblo por forigi konton \n \n• alirebleco: butona tuŝ-areo ŝanĝita al 48 dp; riparita problemo pri videbla uzant-fasado por ekranlegiloj \n \n• refaritaj japanaj voĉaj anoncoj \n \n• refaritaj ŝanĝoj de altitudo kaj pritakso de dekliveco</string>
     <string name="free_account">Senpaga konto</string>
     <string name="routing_attr_allow_via_ferrata_name">Sekurigita vojo (viaferatao)</string>
     <string name="free_settings_backup">Senpaga sekurkopio de agordoj</string>
@@ -5664,4 +5664,14 @@
     <string name="default_buttons_corners_original_description">Ĉiu butono havos sian implicitan rondecon (radiuson de angulo).</string>
     <string name="default_buttons_opacity_original_description">Ĉiu butono havos sian implicitan travideblon de interna fono.</string>
     <string name="default_buttons_size_original_description">Ĉiu butono havos sian implicitan grandon.</string>
+    <string name="calculate_size">Kalkuli grandon</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Grimpadaj kursoj</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Montri grimpadajn kursojn</string>
+    <string name="calculating_indication_message">Kalkulado…</string>
+    <string name="display_distance_to_first_intermediate_summary">Unue montri tempon kaj distancon al la unua intercelo. Malaktivigu por ĉiam montri detalojn pri la fina celo.</string>
+    <string name="display_distance_to_first_intermediate">Montri detalojn pri kurso al la sekva intercelo</string>
+    <string name="shared_string_length">Longo</string>
+    <string name="popular_places_nearby">Proksimaj popularaj ejoj</string>
+    <string name="recently_visited">Historio</string>
+    <string name="shared_string_avg_altitude">Mezuma altitudo</string>
 </resources>

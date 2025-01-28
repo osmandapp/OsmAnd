@@ -3,7 +3,6 @@ package net.osmand.plus.resources;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
-import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
 
 import org.apache.commons.logging.Log;
 

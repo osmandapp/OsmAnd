@@ -5533,4 +5533,15 @@
     <string name="default_buttons_corners_original_description">Cada botón mantendría su propio radio de esquina.</string>
     <string name="default_buttons_opacity_original_description">Cada botón mantendría su propia opacidad de fondo.</string>
     <string name="default_buttons_size_original_description">Cada botón mantendría su propio tamaño.</string>
+    <string name="calculating_indication_message">Calculando…</string>
+    <string name="calculate_size">Calcular tamaño</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Rutas de escalada</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Mostrar rutas de escalada</string>
+    <string name="display_distance_to_first_intermediate">Mostrar detalles de la ruta para la siguiente parada</string>
+    <string name="display_distance_to_first_intermediate_summary">Muestra primero el tiempo y la distancia a la siguiente parada. Desactivarla mostrará siempre los detalles del destino.</string>
+    <string name="shared_string_length">Longitud</string>
+    <string name="popular_places_nearby">Sitios populares cerca</string>
+    <string name="recently_visited">Visitados recientemente</string>
+    <string name="shared_string_avg_altitude">Altitud media</string>
+    <string name="shared_string_avg_speed">Velocidad media</string>
 </resources>

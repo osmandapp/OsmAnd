@@ -36,6 +36,7 @@ public class PointDescription {
 	private double lat;
 	private double lon;
 
+	public static final String POINT_TYPE_NEARBY_PLACE = "nearby_place";
 	public static final String POINT_TYPE_FAVORITE = "favorite";
 	public static final String POINT_TYPE_WPT = "wpt";
 	public static final String POINT_TYPE_GPX = "gpx";
@@ -434,26 +435,20 @@ public class PointDescription {
 	public static final int SWISS_GRID_PLUS_FORMAT = LocationConvert.SWISS_GRID_PLUS_FORMAT;
 
 	public static String formatToHumanString(Context ctx, int format) {
-		switch (format) {
-			case LocationConvert.FORMAT_DEGREES:
-				return ctx.getString(R.string.navigate_point_format_D);
-			case LocationConvert.FORMAT_MINUTES:
-				return ctx.getString(R.string.navigate_point_format_DM);
-			case LocationConvert.FORMAT_SECONDS:
-				return ctx.getString(R.string.navigate_point_format_DMS);
-			case LocationConvert.UTM_FORMAT:
-				return "UTM";
-			case LocationConvert.OLC_FORMAT:
-				return "OLC";
-			case LocationConvert.MGRS_FORMAT:
-				return "MGRS";
-			case LocationConvert.SWISS_GRID_FORMAT:
-				return ctx.getString(R.string.navigate_point_format_swiss_grid);
-			case LocationConvert.SWISS_GRID_PLUS_FORMAT:
-				return ctx.getString(R.string.navigate_point_format_swiss_grid_plus);
-			default:
-				return "Unknown format";
-		}
+		return switch (format) {
+			case LocationConvert.FORMAT_DEGREES -> ctx.getString(R.string.navigate_point_format_D);
+			case LocationConvert.FORMAT_MINUTES -> ctx.getString(R.string.navigate_point_format_DM);
+			case LocationConvert.FORMAT_SECONDS ->
+					ctx.getString(R.string.navigate_point_format_DMS);
+			case LocationConvert.UTM_FORMAT -> "UTM";
+			case LocationConvert.OLC_FORMAT -> "OLC";
+			case LocationConvert.MGRS_FORMAT -> "MGRS";
+			case LocationConvert.SWISS_GRID_FORMAT ->
+					ctx.getString(R.string.navigate_point_format_swiss_grid);
+			case LocationConvert.SWISS_GRID_PLUS_FORMAT ->
+					ctx.getString(R.string.navigate_point_format_swiss_grid_plus);
+			default -> "Unknown format";
+		};
 	}
 
 	@DrawableRes

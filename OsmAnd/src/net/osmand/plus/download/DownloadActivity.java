@@ -46,7 +46,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
-import net.osmand.plus.resources.ResourceManager.ReloadIndexesListener;
+import net.osmand.plus.resources.ReloadIndexesTask.ReloadIndexesListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;

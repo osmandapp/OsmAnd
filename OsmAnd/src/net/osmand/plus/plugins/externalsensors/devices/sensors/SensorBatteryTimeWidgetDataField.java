@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.FormattedValue;
 
 public class SensorBatteryTimeWidgetDataField extends SensorWidgetDataField {
 
@@ -15,10 +15,10 @@ public class SensorBatteryTimeWidgetDataField extends SensorWidgetDataField {
 
 	@Nullable
 	@Override
-	public OsmAndFormatter.FormattedValue getFormattedValue(@NonNull OsmandApplication app) {
+	public FormattedValue getFormattedValue(@NonNull OsmandApplication app) {
 		long time = getNumberValue().intValue();
 		if (time > 0) {
-			return new OsmAndFormatter.FormattedValue(time, String.valueOf(time), app.getString(R.string.shared_string_sec));
+			return new FormattedValue(time, String.valueOf(time), app.getString(R.string.shared_string_sec));
 		}
 		return null;
 	}

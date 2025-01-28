@@ -4963,4 +4963,9 @@
     <string name="poi_route_activity_type_scuba_diving">水肺潛水</string>
     <string name="poi_route_activity_type_surfing">衝浪</string>
     <string name="poi_route_activity_type_waterskiing">滑水</string>
+    <string name="poi_climbing_area">攀岩區</string>
+    <string name="poi_climbing_route">攀登路線</string>
+    <string name="poi_climbing_route_bottom">攀登路線底部</string>
+    <string name="poi_cafe_yes">是</string>
+    <string name="poi_cafe_filter">咖啡廳</string>
 </resources>

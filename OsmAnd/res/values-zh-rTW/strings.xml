@@ -5309,7 +5309,7 @@
     <string name="key_assignment_add_action">新增動作</string>
     <string name="clear_key_assignment_summary">將會清除所選動作的按鍵分配。</string>
     <string name="no_assigned_keys">沒有分配的按鍵</string>
-    <string name="key_name_pattern">按鍵「%1$s」</string>
+    <string name="key_name_pattern">按鈕「%1$s」</string>
     <string name="key_assignment_add_key">新增鍵</string>
     <string name="action_icon">動作圖示</string>
     <string name="user_palette">使用者調色板</string>
@@ -5645,4 +5645,15 @@
     <string name="shared_string_interpolation">內插</string>
     <string name="location_interpolation_percent_desc">設定路線導航時位置內插的百分比。此參數可減少動畫時您在地圖上位置的延遲。</string>
     <string name="selected_delayed_profile">選定的設定檔「%s」</string>
+    <string name="default_buttons_size_original_description">每個按鈕都會維持其大小。</string>
+    <string name="calculate_size">計算大小</string>
+    <string name="default_buttons_corners_original_description">每個按鈕都會維持其轉角半徑。</string>
+    <string name="default_buttons_opacity_original_description">每個按鈕都會維持其背景不透明度。</string>
+    <string name="calculating_indication_message">正在計算……</string>
+    <string name="rendering_attr_showClimbingRoutes_name">攀登路線</string>
+    <string name="rendering_attr_showClimbingRoutes_description">顯示攀登路線</string>
+    <string name="display_distance_to_first_intermediate_summary">先顯示下一站的時間和距離。關閉可一律顯示目的地的詳細資訊。</string>
+    <string name="display_distance_to_first_intermediate">顯示下一站的路線詳細資訊</string>
+    <string name="recently_visited">最近造訪</string>
+    <string name="popular_places_nearby">附近的熱門地點</string>
 </resources>

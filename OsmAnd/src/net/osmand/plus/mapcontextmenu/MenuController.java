@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu;
 
-import android.content.Context;
+import static net.osmand.plus.download.DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
+
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.text.SpannableString;
@@ -10,60 +11,42 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.Location;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.OnResultCallback;
 import net.osmand.aidl.AidlMapPointWrapper;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.data.Amenity;
-import net.osmand.data.FavouritePoint;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.data.QuadRect;
-import net.osmand.data.SpecialPointType;
-import net.osmand.data.TransportStop;
-import net.osmand.shared.gpx.primitives.WptPt;
+import net.osmand.data.*;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapseExpandListener;
-import net.osmand.plus.mapcontextmenu.controllers.AMapPointMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.FavouritePointMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.GpxItemMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.HistoryMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.ImpassibleRoadsMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.MapDataMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.MapMarkerMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.MyLocationMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.PointDescriptionMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.RenderedObjectMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.*;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
-import net.osmand.plus.mapcontextmenu.controllers.TargetPointMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.TransportRouteController;
-import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
-import net.osmand.plus.mapcontextmenu.controllers.WptPtMenuController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNoteMenuController;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.plugins.audionotes.Recording;
 import net.osmand.plus.plugins.mapillary.MapillaryImage;
 import net.osmand.plus.plugins.mapillary.MapillaryMenuController;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer.OpenStreetNote;
@@ -73,27 +56,20 @@ import net.osmand.plus.plugins.osmedit.menu.OsmBugMenuController;
 import net.osmand.plus.plugins.parking.ParkingPositionMenuController;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.resources.SearchOsmandRegionTask;
+import net.osmand.plus.track.clickable.ClickableWay;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.transport.TransportStopRoute;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer.DownloadMapObject;
 import net.osmand.plus.views.mapwidgets.TopToolbarController;
 import net.osmand.router.network.NetworkRouteSelector.RouteKey;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
 
 import java.util.LinkedList;
 import java.util.List;
-
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-
-import static net.osmand.plus.download.DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
 
 public abstract class MenuController extends BaseMenuController implements CollapseExpandListener {
 
@@ -244,6 +220,9 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				menuController = new MapillaryMenuController(mapActivity, pointDescription, (MapillaryImage) object);
 			} else if (object instanceof SelectedGpxPoint) {
 				menuController = new SelectedGpxMenuController(mapActivity, pointDescription, (SelectedGpxPoint) object);
+			} else if (object instanceof ClickableWay) {
+				SelectedGpxPoint point = ((ClickableWay) object).getSelectedGpxPoint();
+				menuController = new SelectedGpxMenuController(mapActivity, pointDescription, point);
 			} else if (object instanceof Pair) {
 				Pair<?, ?> pair = (Pair<?, ?>) object;
 				if (pair.second instanceof SelectedGpxPoint) {
@@ -752,96 +731,6 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		builder.buildCustomAddressLine(ll);
 	}
 
-	public abstract class TitleButtonController {
-		public String caption = "";
-		public int startIconId;
-		public int endIconId;
-		public boolean needRightText;
-		public String rightTextCaption = "";
-		public boolean visible = true;
-		public boolean tintIcon = true;
-		public Drawable startIcon;
-		public Drawable endIcon;
-		public boolean enabled = true;
-
-		@Nullable
-		public Drawable getStartIcon() {
-			return getIconDrawable(true);
-		}
-
-		@Nullable
-		public Drawable getEndIcon() {
-			return getIconDrawable(false);
-		}
-
-		@Nullable
-		private Drawable getIconDrawable(boolean start) {
-			Drawable drawable = start ? startIcon : endIcon;
-			if (drawable != null) {
-				return drawable;
-			}
-			int resId = start ? startIconId : endIconId;
-			if (resId != 0) {
-				if (tintIcon) {
-					return enabled ? getNormalIcon(resId) : getDisabledIcon(resId);
-				}
-				MapActivity mapActivity = getMapActivity();
-				return mapActivity != null ? AppCompatResources.getDrawable(mapActivity, resId) : null;
-			}
-			return null;
-		}
-
-		public void clearIcon(boolean left) {
-			if (left) {
-				startIcon = null;
-				startIconId = 0;
-			} else {
-				endIcon = null;
-				endIconId = 0;
-			}
-		}
-
-		private Drawable getDisabledIcon(@DrawableRes int iconResId) {
-			return getIcon(iconResId, ColorUtilities.getDefaultIconColorId(!isLight()));
-		}
-
-		private Drawable getNormalIcon(@DrawableRes int iconResId) {
-			return getIcon(iconResId, ColorUtilities.getActiveColorId(!isLight()));
-		}
-
-		public abstract void buttonPressed();
-	}
-
-	public abstract static class TitleProgressController {
-		public String caption = "";
-		public float progress;
-		public boolean indeterminate;
-		public boolean visible;
-		public boolean progressVisible;
-		public boolean buttonVisible;
-
-		public void setIndexesDownloadMode(@NonNull Context ctx) {
-			caption = ctx.getString(R.string.downloading_list_indexes);
-			indeterminate = true;
-			progressVisible = true;
-			buttonVisible = false;
-		}
-
-		public void setNoInternetConnectionMode(@NonNull Context ctx) {
-			caption = ctx.getString(R.string.no_index_file_to_download);
-			progressVisible = false;
-			buttonVisible = false;
-		}
-
-		public void setMapDownloadMode() {
-			indeterminate = false;
-			progressVisible = true;
-			buttonVisible = true;
-		}
-
-		public abstract void buttonPressed();
-	}
-
 	public void onShow() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && toolbarController != null) {
@@ -876,25 +765,6 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		this.latLon = latLon;
 		if (builder != null) {
 			builder.setLatLon(latLon);
-		}
-	}
-
-	public static class ContextMenuToolbarController extends TopToolbarController {
-
-		private final MenuController menuController;
-
-		public ContextMenuToolbarController(MenuController menuController) {
-			super(TopToolbarControllerType.CONTEXT_MENU);
-			this.menuController = menuController;
-			setBgIds(R.color.app_bar_main_light, R.color.app_bar_main_dark,
-					R.color.app_bar_main_light, R.color.app_bar_main_dark);
-			setBackBtnIconClrIds(R.color.card_and_list_background_light, R.color.card_and_list_background_light);
-			setCloseBtnIconClrIds(R.color.card_and_list_background_light, R.color.card_and_list_background_light);
-			setTitleTextClrIds(R.color.card_and_list_background_light, R.color.card_and_list_background_light);
-		}
-
-		public MenuController getMenuController() {
-			return menuController;
 		}
 	}
 
@@ -938,7 +808,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 					}
 				}
 
-				leftDownloadButtonController = new TitleButtonController() {
+				leftDownloadButtonController = new TitleButtonController(this) {
 					@Override
 					public void buttonPressed() {
 						MapActivity mapActivity = getMapActivity();

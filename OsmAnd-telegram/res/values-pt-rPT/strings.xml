@@ -96,7 +96,7 @@
     <string name="not_possible_to_send_to_telegram_chats">Não é possível enviar para bate-papo do Telegram:</string>
     <string name="not_sent_yet">Ainda não enviado</string>
     <string name="points_size">%1$d pontos</string>
-    <string name="welcome_descr"><b>OsmAnd Tracker</b> permite que partilhe a sua localização e veja a dos outros no OsmAnd.<br/> <br/>O app usa a API Telegram e precisa de uma conta do Telegram.</string>
+    <string name="welcome_descr"><![CDATA[<b>O OsmAnd Tracker</b> permite-o partilhar a sua localização e ver a dos outros no OsmAnd.<br/><br/>A aplicação usa a API do Telegram, por isso, é necessário ter uma conta no Telegram.]]></string>
     <string name="min_logging_distance_descr">Filtro: distância mínima para registrar um novo ponto</string>
     <string name="device_name_cannot_be_empty">O nome do aparelho não pode estar vazio</string>
     <string name="yard">yd</string>

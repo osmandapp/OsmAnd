@@ -33,7 +33,9 @@ public class OsmMapUtils {
 				"protected_area".equals(tags.get(OSMSettings.OSMTagKey.BOUNDARY.getValue())) ||
 				"low_emission_zone".equals(tags.get(OSMSettings.OSMTagKey.BOUNDARY.getValue())) ||
 				"national_park".equals(tags.get(OSMSettings.OSMTagKey.BOUNDARY.getValue())) ||
-				"danger_area".equals(tags.get(OSMSettings.OSMTagKey.MILITARY.getValue()));
+				"danger_area".equals(tags.get(OSMSettings.OSMTagKey.MILITARY.getValue())) ||
+				"area".equals(tags.get(OSMSettings.OSMTagKey.OSMAND_CLIMBING.getValue())) ||
+				"crag".equals(tags.get(OSMSettings.OSMTagKey.OSMAND_CLIMBING.getValue()));
 	}
 
 	public static LatLon getCenter(Entity e) {

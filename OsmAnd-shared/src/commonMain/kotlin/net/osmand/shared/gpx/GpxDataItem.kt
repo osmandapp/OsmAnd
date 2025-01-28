@@ -96,7 +96,7 @@ class GpxDataItem(
 
 	fun readGpxAppearanceParameter(gpxFile: GpxFile, parameter: GpxParameter) {
 		when (parameter) {
-			GpxParameter.COLOR -> setParameter(GpxParameter.COLOR, gpxFile.getColor(0))
+			GpxParameter.COLOR -> setParameter(GpxParameter.COLOR, gpxFile.getColor(null))
 			GpxParameter.WIDTH -> setParameter(GpxParameter.WIDTH, gpxFile.getWidth(null))
 			GpxParameter.SHOW_ARROWS ->
 				setParameter(

@@ -34,8 +34,7 @@ import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.resources.DetectRegionTask;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
-import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.routing.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -51,7 +50,6 @@ import net.osmand.plus.views.Zoom.ComplexZoom;
 import net.osmand.util.MapUtils;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLocationListener,
@@ -246,7 +244,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		myLocationTime = locationTime;
 
 		Location predictedLocation = null;
-		if (location != null && animateMyLocation(location) && movingTime > 100
+		if (location != null && prevLocation != null && animateMyLocation(location) && movingTime > 100
 				&& app.getSettings().SNAP_TO_ROAD.get()
 				&& routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()
 				&& app.getSettings().LOCATION_INTERPOLATION_PERCENT.get() > 0) {
@@ -464,7 +462,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		long now = System.currentTimeMillis();
 		boolean isUserZoomed = lastTimeManualZooming > lastTimeAutoZooming;
 		return isUserZoomed
-				? now - lastTimeManualZooming > Math.max(settings.AUTO_FOLLOW_ROUTE.get(), AUTO_ZOOM_DEFAULT_CHANGE_ZOOM)
+				? now - lastTimeManualZooming > Math.max(settings.AUTO_FOLLOW_ROUTE.get() * 1000, AUTO_ZOOM_DEFAULT_CHANGE_ZOOM)
 				: now - lastTimeAutoZooming > autoZoomFrequency;
 	}
 

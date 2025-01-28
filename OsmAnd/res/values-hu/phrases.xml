@@ -4906,7 +4906,7 @@
     <string name="poi_route_activity_type_ultralight_aviation">Ultrakönnyű repülés</string>
     <string name="poi_route_activity_type_hot_air_ballooning">Hőlégballonozás</string>
     <string name="poi_route_activity_type_surfing">Szörfözés</string>
-    <string name="poi_route_activity_type_swimming_outdoor">Úszás a szabadban</string>
+    <string name="poi_route_activity_type_swimming_outdoor">Kültéri úszás</string>
     <string name="poi_route_activity_type_waterskiing">Vízisízés</string>
     <string name="poi_route_activity_type_motorboat">Motorcsónakozás</string>
     <string name="poi_route_activity_type_horse_riding">Lovaglás</string>

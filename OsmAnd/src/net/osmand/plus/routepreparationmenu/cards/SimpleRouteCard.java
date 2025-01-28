@@ -40,7 +40,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FontCache;
-import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
+import net.osmand.plus.utils.FormattedValue;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.shared.gpx.GpxFile;

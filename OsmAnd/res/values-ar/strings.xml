@@ -345,7 +345,7 @@
     <string name="use_compass_navigation_descr">استخدم البوصلة عندما لا تكون هناك أي وجهة محددة.</string>
     <string name="auto_zoom_map_descr">مستوى التكبير وفقًا لسرعتك (بينما تتم مزامنة الخريطة مع الموقع الحالي).</string>
     <string name="auto_zoom_map">التكبير التلقائي</string>
-    <string name="snap_to_road">التقاط الطريق</string>
+    <string name="snap_to_road">تثبيت موقعي الحالي على الطريق</string>
     <string name="osmand_play_title_30_chars">خرائط أوسماند والملاحة</string>
     <string name="osmand_short_description_80_chars">برنامج عرض الخرائط العالمية والملاحة باستخدام خرائط الشوارع المفتوحة OSM أثناء الاتصال بالإنترنت أو من دونه</string>
     <string name="osmand_plus_play_title_30_chars">أوسماند+ للخرائط و الملاحة</string>
@@ -3586,25 +3586,7 @@
     <string name="osmand_purchases_item">مشتريات أوسماند</string>
     <string name="legend_item_description">دليل رموز الخريطة.</string>
     <string name="navigation_profiles_item">أوضاع الملاحة</string>
-    <string name="release_3_7">• خرائط جديدة للتضاريس توضح المنحدرات من دون الحاجة للاتصال بالإنترنت
-\n
-\n • التخصيص الكامل للمفضلات ونقاط الطرق GPX - الألوان المخصصة والأيقونات والأشكال
-\n
-\n • تخصيص ترتيب العناصر في القائمة السفلية ، تكوين الخريطة ، القائمة الجانبية
-\n
-\n • عرض ويكيبيديا كطبقة منفصلة في تكوين الخريطة ، حدد اللغات المطلوبة فقط
-\n
-\n • إنشاء مرشح / خرائط للمعالم الخاصة بك مع مرونة تامة
-\n
-\n • تمت إضافة خيارات لاستعادة إعدادات الأوضاع المخصصة
-\n
-\n • مسارات GPX كاملة من الممرات دعم حركة المرور وتعليمات كاملة
-\n
-\n • إصلاح أحجام واجهة المستخدم على الأجهزة اللوحية
-\n
-\n • إصلاح الخلل مع اللغات التي تكتب من اليمين
-\n
-\n</string>
+    <string name="release_3_7">• خرائط جديدة للتضاريس توضح المنحدرات من دون الحاجة للاتصال بالإنترنت \n \n • التخصيص الكامل للمفضلات ونقاط الطرق GPX - الألوان المخصصة والأيقونات والأشكال \n \n • تخصيص ترتيب العناصر في القائمة السفلية ، تكوين الخريطة ، القائمة الجانبية \n \n • عرض ويكيبيديا كطبقة منفصلة في تكوين الخريطة ، حدد اللغات المطلوبة فقط \n \n • إنشاء مرشح / خرائط للمعالم الخاصة بك مع مرونة تامة \n \n • تمت إضافة خيارات لاستعادة إعدادات الأوضاع المخصصة \n \n • مسارات GPX كاملة من الممرات دعم حركة المرور وتعليمات كاملة \n \n • إصلاح أحجام واجهة المستخدم على الأجهزة اللوحية \n \n • إصلاح الخلل مع اللغات التي تكتب من اليمين \n \n</string>
     <string name="shared_string_resume">إستئناف</string>
     <string name="additional_actions_descr">يمكنك الوصول إلى هذه الإجراءات عن طريق النقر على زر \"%1$s\".</string>
     <string name="quick_action_transport_descr">زر لإظهار أو إخفاء وسائل النقل العام على الخريطة.</string>
@@ -4008,7 +3990,7 @@
     <string name="activity_type_car_name">سيارة</string>
     <string name="copy_poi_name">نسخ اسم POI</string>
     <string name="select_another_colorization">الرجاء اختيار أنواع أخرى من التلوين.</string>
-    <string name="snap_to_road_descr">سيتم محاذاة رمز الموضع الحالي إلى مسار التنقل الحالي</string>
+    <string name="snap_to_road_descr">سيتم تثبيت موقعك الحالي على الطريق الذي تسلكه حتى لو انحرفت عنه قليلاً</string>
     <string name="select_segments">حدد الجزء</string>
     <string name="select_segments_description">%1$s يحتوي على أكثر من مقطع ، تحتاج إلى تحديد الجزء المطلوب للتنقل.</string>
     <string name="segments_count">الجزء %1$d</string>
@@ -5811,7 +5793,6 @@
     <string name="connect_obd_instructions_step1">قم بتوصيل الماسح الضوئي بمنفذ OBD-II الموجود في سيارتك.</string>
     <string name="connect_obd_instructions_step2">قم بتشغيل محرك سيارتك</string>
     <string name="connect_obd_instructions_step3">قم بتمكين البلوتوث على جهازك</string>
-    <string name="connect_obd_instructions_step4">انقر فوق \"اتصال\"، ثم حدد الماسح الضوئي الخاص بك من القائمة.</string>
     <string name="learn_more_about_obd_sensors">تعرف على المزيد حول أجهزة الاستشعار.</string>
     <string name="obd_fuel_left_liters">الوقود المتبقي (لتر)</string>
     <string name="background_opacity">خلفية معتمة</string>
