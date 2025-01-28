@@ -779,8 +779,15 @@ public class NetworkRouteSelector {
 			if (!name.isEmpty()) {
 				return name;
 			}
+			name = getFromTo();
+			if (!name.isEmpty()) {
+				return name;
+			}
 			name = getRelationID();
-			return !name.isEmpty() ? name : this.type.getName();
+			if (!name.isEmpty()) {
+				return name;
+			}
+			return this.type.getName(); // avoid emptiness
 		}
 
 		public String getRelationID() {
@@ -805,6 +812,19 @@ public class NetworkRouteSelector {
 
 		public String getWikipedia() {
 			return getValue("wikipedia");
+		}
+
+		public String getRef() {
+			return getValue("ref");
+		}
+
+		public String getFromTo() {
+			String from = getValue("from");
+			String to = getValue("to");
+			if (!Algorithms.isEmpty(from) && !Algorithms.isEmpty(to)) {
+				return from + " - " + to;
+			}
+			return "";
 		}
 
 		public static RouteKey fromGpx(Map<String, String> networkRouteKeyTags) {
