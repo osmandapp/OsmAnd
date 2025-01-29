@@ -2,29 +2,21 @@ package net.osmand.util;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-import gnu.trove.list.TLongList;
-import gnu.trove.list.array.TIntArrayList;
-import net.osmand.gpx.GPXUtilities;
+import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXUtilities.Track;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.data.LatLon;
-import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.OsmMapUtils;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
 
+// Reuse or delete once web is ready
 public class TrkSegmentSplitter {
-	
-	
-	
 
 	public static void main(String[] args) {
 //		int STEP = 30;
