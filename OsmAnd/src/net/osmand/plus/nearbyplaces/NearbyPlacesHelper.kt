@@ -1,8 +1,12 @@
 package net.osmand.plus.nearbyplaces
 
 import net.osmand.NativeLibrary
+import net.osmand.binary.ObfConstants
 import net.osmand.core.jni.ZoomLevel
+import net.osmand.data.Amenity
 import net.osmand.data.LatLon
+import net.osmand.data.MapObject
+import net.osmand.data.PointDescription
 import net.osmand.data.QuadRect
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.activities.MapActivity
@@ -79,6 +83,7 @@ object NearbyPlacesHelper {
 			prevZoom = mapView.zoom
 			prevLang = preferredLang
 			GetNearbyPlacesImagesTask(
+				app,
 				prevMapRect, prevZoom,
 				prevLang, loadNearbyPlacesListener).execute()
 		} else {
@@ -107,19 +112,41 @@ object NearbyPlacesHelper {
 			val polygons: List<NativeLibrary.RenderedObject?> =
 				mapContext.retrievePolygonsAroundPoint(pointI, zoom, false)
 			if (!Algorithms.isEmpty(polygons)) {
-				val menuObjects =
+				var menuObjects =
 					MenuObjectUtils.createMenuObjectsList(mapActivity, polygons, latLon)
-				menuObject = menuObjects?.get(0)
+				menuObjects = menuObjects.filter { it.`object` is MapObject }
+				for (mObj in menuObjects) {
+					val mapObject = mObj.`object` as MapObject
+					val osmId = ObfConstants.getOsmObjectId(mapObject)
+					if (osmId == point.properties.osmid) {
+						menuObject = mObj
+						break
+					}
+				}
 			}
-			menuObject?.let {
-				val contextObject: IContextMenuProvider = mapActivity.mapLayers.poiMapLayer
-				val contextMenuLayer: ContextMenuLayer = mapActivity.mapLayers.contextMenuLayer
-				contextMenuLayer.showContextMenu(
-					it.latLon,
-					it.pointDescription,
-					it.getObject(),
-					contextObject)
+			val contextObject: IContextMenuProvider = mapActivity.mapLayers.poiMapLayer
+			val contextMenuLayer: ContextMenuLayer = mapActivity.mapLayers.contextMenuLayer
+			val pointDescription: PointDescription
+			val contextMenuObject: Any?
+			if (menuObject == null) {
+				val amenity: Amenity? = point.amenity
+				pointDescription = PointDescription(
+					PointDescription.POINT_TYPE_NEARBY_PLACE,
+					point.properties.wikiTitle)
+				contextMenuObject = if (amenity != null) {
+					point.amenity
+				} else {
+					null
+				}
+			} else {
+				pointDescription = menuObject.pointDescription
+				contextMenuObject = menuObject.getObject()
 			}
+			contextMenuLayer.showContextMenu(
+				latLon,
+				pointDescription,
+				contextMenuObject,
+				contextObject)
 		}
 	}
 }

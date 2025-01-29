@@ -15,6 +15,7 @@ import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseOsmAndFragment
 import net.osmand.plus.helpers.AndroidUiHelper
+import net.osmand.plus.nearbyplaces.NearbyPlacesHelper.showPointInContextMenu
 import net.osmand.plus.search.NearbyPlacesAdapter
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
@@ -45,10 +46,28 @@ class NearbyPlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIte
 		setupShowAll(view)
 		setupToolBar(view)
 		setupVerticalNearbyList(view)
+
+//		requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+//			override fun handleOnBackPressed() {
+//				if (isHidden) {
+//					// Show Fragment B if it's currently hidden
+//					parentFragmentManager.beginTransaction()
+//						.show(this@NearbyPlacesFragment)
+//						.commit()
+//					mapActivity?.contextMenu?.hideMenus()
+//				} else {
+//					// Allow the system to handle the back press
+//					isEnabled = false
+//					fragmentManager?.popBackStack()
+////					requireActivity().onBackPressedDispatcher.onBackPressed()
+//				}
+//			}
+//		})
 	}
 
-	fun setupShowAll(view: View) {
-		view.findViewById<ImageView>(R.id.location_icon).setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_marker_dark, nightMode))
+	private fun setupShowAll(view: View) {
+		view.findViewById<ImageView>(R.id.location_icon)
+			.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_marker_dark, nightMode))
 	}
 
 	@ColorRes
@@ -76,11 +95,12 @@ class NearbyPlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIte
 	private fun setupVerticalNearbyList(view: View) {
 		val verticalNearbyList = view.findViewById<RecyclerView>(R.id.vertical_nearby_list)
 		val nearbyData = NearbyPlacesHelper.getDataCollection()
-		verticalNearbyAdapter = NearbyPlacesAdapter(app, nearbyData, true,this)
+		verticalNearbyAdapter = NearbyPlacesAdapter(app, nearbyData, true, this)
 		verticalNearbyList.layoutManager = LinearLayoutManager(requireContext())
 		verticalNearbyList.adapter = verticalNearbyAdapter
 		verticalNearbyAdapter.notifyDataSetChanged()
 	}
+
 	val mapActivity: MapActivity?
 		get() {
 			val activity = activity
@@ -104,6 +124,12 @@ class NearbyPlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIte
 	}
 
 	override fun onNearbyItemClicked(item: WikiCoreHelper.OsmandApiFeatureData) {
-
+		mapActivity?.let {
+			showPointInContextMenu(it, item)
+			val transaction = fragmentManager?.beginTransaction()
+			transaction?.hide(this)
+			transaction?.addToBackStack(null)
+			transaction?.commit()
+		}
 	}
 }

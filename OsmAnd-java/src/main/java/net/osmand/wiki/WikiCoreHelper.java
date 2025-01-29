@@ -308,6 +308,7 @@ public class WikiCoreHelper {
 	}
 
 	public static class OsmandApiFeatureData {
+		public Amenity amenity;
 		@Expose
 		public WikiDataProperties properties;
 		@Expose
@@ -332,7 +333,7 @@ public class WikiCoreHelper {
 		private String depTitle;
 		private String wikiLang;
 		public String wikiDesc;
-		private String osmid;
+		public Long osmid;
 		private String osmtype;
 	}
 

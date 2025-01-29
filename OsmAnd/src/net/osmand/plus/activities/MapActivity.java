@@ -87,6 +87,7 @@ import net.osmand.plus.mapmarkers.PlanRouteFragment;
 import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
+import net.osmand.plus.nearbyplaces.NearbyPlacesFragment;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -517,7 +518,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			return;
 		}
 		QuickSearchDialogFragment fragment = fragmentsHelper.getQuickSearchDialogFragment();
-		if ((backStackEntryCount == 0 || mapContextMenu.isVisible()) && fragment != null && fragment.isSearchHidden()) {
+		NearbyPlacesFragment nearbyPlacesFragment = fragmentsHelper.getNearbyPlacesFragment();
+		if ((backStackEntryCount == 0 ||
+				mapContextMenu.isVisible() && nearbyPlacesFragment == null) ||
+				(!mapContextMenu.isVisible() && nearbyPlacesFragment != null && !nearbyPlacesFragment.isHidden()) &&
+						fragment != null && fragment.isSearchHidden()) {
 			fragmentsHelper.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
 			return;
 		}
