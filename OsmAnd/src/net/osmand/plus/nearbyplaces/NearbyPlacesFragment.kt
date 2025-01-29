@@ -16,6 +16,7 @@ import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseOsmAndFragment
 import net.osmand.plus.helpers.AndroidUiHelper
+import net.osmand.plus.nearbyplaces.NearbyPlacesHelper.getDataCollection
 import net.osmand.plus.nearbyplaces.NearbyPlacesHelper.showPointInContextMenu
 import net.osmand.plus.search.NearbyPlacesAdapter
 import net.osmand.plus.search.ShowQuickSearchMode
@@ -49,30 +50,36 @@ class NearbyPlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIte
 		setupToolBar(view)
 		setupVerticalNearbyList(view)
 
-		requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-			override fun handleOnBackPressed() {
-				if (isHidden) {
-					parentFragmentManager.beginTransaction()
-						.show(this@NearbyPlacesFragment)
-						.commit()
-					mapActivity?.contextMenu?.hideMenus()
-				} else {
-					fragmentManager?.popBackStack()
-					val fragmentsHelper = mapActivity?.fragmentsHelper
-					val quickSearchDialogFragment = fragmentsHelper?.quickSearchDialogFragment
-					quickSearchDialogFragment?.let {
-						if (quickSearchDialogFragment.isSearchHidden) {
-							fragmentsHelper.showQuickSearch(ShowQuickSearchMode.CURRENT, false)
+		requireActivity().onBackPressedDispatcher.addCallback(
+			viewLifecycleOwner,
+			object : OnBackPressedCallback(true) {
+				override fun handleOnBackPressed() {
+					if (isHidden) {
+						parentFragmentManager.beginTransaction()
+							.show(this@NearbyPlacesFragment)
+							.commit()
+						mapActivity?.contextMenu?.hideMenus()
+					} else {
+						fragmentManager?.popBackStack()
+						val fragmentsHelper = mapActivity?.fragmentsHelper
+						val quickSearchDialogFragment = fragmentsHelper?.quickSearchDialogFragment
+						quickSearchDialogFragment?.let {
+							if (quickSearchDialogFragment.isSearchHidden) {
+								fragmentsHelper.showQuickSearch(ShowQuickSearchMode.CURRENT, false)
+							}
 						}
 					}
 				}
-			}
-		})
+			})
 	}
 
 	private fun setupShowAll(view: View) {
 		view.findViewById<ImageView>(R.id.location_icon)
 			.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_marker_dark, nightMode))
+		view.findViewById<View>(R.id.show_on_map).setOnClickListener {
+			app.osmandMap.mapLayers.nearbyPlacesLayer.setCustomMapObjects(getDataCollection())
+			hide()
+		}
 	}
 
 	@ColorRes
@@ -131,9 +138,13 @@ class NearbyPlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIte
 	override fun onNearbyItemClicked(item: WikiCoreHelper.OsmandApiFeatureData) {
 		mapActivity?.let {
 			showPointInContextMenu(it, item)
-			val transaction = fragmentManager?.beginTransaction()
-			transaction?.hide(this)
-			transaction?.commit()
+			hide()
 		}
+	}
+
+	fun hide() {
+		val transaction = fragmentManager?.beginTransaction()
+		transaction?.hide(this)
+		transaction?.commit()
 	}
 }

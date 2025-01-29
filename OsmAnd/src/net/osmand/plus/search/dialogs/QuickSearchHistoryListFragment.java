@@ -1,6 +1,7 @@
 package net.osmand.plus.search.dialogs;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -22,6 +23,7 @@ import net.osmand.plus.nearbyplaces.NearbyPlacesListener;
 import net.osmand.plus.search.NearbyPlacesAdapter;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.fragments.HistoryItemsFragment;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.wiki.WikiCoreHelper;
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData;
 
@@ -135,15 +137,15 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		progressBar = view.findViewById(R.id.progress_bar);
+		setupNearByCard(view);
 		setupShowAllNearbyPlacesBtn(view);
 		setupExpandNearbyPlacesIndicator(view);
-		setupNearByCard(view);
 		updateExpandState();
 	}
 
 	private void setupShowAllNearbyPlacesBtn(@NonNull View view) {
-		showAllBtnContainer = view.findViewById(R.id.show_all_button);
-		view.findViewById(R.id.show_all_btn).setOnClickListener(v -> {
+		showAllBtnContainer = nearByContainer.findViewById(R.id.show_all_button);
+		nearByContainer.findViewById(R.id.show_all_btn).setOnClickListener(v -> {
 			MapActivity activity = getMapActivity();
 			if (activity != null) {
 				NearbyPlacesFragment.Companion.showInstance(activity.getSupportFragmentManager());
@@ -173,13 +175,15 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	}
 
 	private void setupNearByCard(@NonNull View view) {
-		nearByContainer = view.findViewById(R.id.nearBy_container);
-		nearByList = view.findViewById(R.id.nearByList);
+		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), !app.getSettings().isLightContent());
+		nearByContainer = themedInflater.inflate(R.layout.nearby_places_card, getListView(), false);
+		nearByList = nearByContainer.findViewById(R.id.nearByList);
 		LinearLayoutManager layoutManager = new LinearLayoutManager(app);
 		layoutManager.setOrientation(RecyclerView.HORIZONTAL);
 		nearByList.setLayoutManager(layoutManager);
 		nearByList.setItemAnimator(null);
 		nearByList.setAdapter(getNearbyAdapter());
+		getListView().addHeaderView(nearByContainer, null, false);
 	}
 
 	@Override
