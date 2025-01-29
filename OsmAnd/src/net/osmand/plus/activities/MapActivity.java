@@ -519,10 +519,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		QuickSearchDialogFragment fragment = fragmentsHelper.getQuickSearchDialogFragment();
 		NearbyPlacesFragment nearbyPlacesFragment = fragmentsHelper.getNearbyPlacesFragment();
-		if ((backStackEntryCount == 0 ||
-				mapContextMenu.isVisible() && nearbyPlacesFragment == null) ||
-				(!mapContextMenu.isVisible() && nearbyPlacesFragment != null && !nearbyPlacesFragment.isHidden()) &&
-						fragment != null && fragment.isSearchHidden()) {
+		if ((backStackEntryCount == 0 || mapContextMenu.isVisible()) && fragment != null
+				&& fragment.isSearchHidden() && nearbyPlacesFragment == null) {
 			fragmentsHelper.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
 			return;
 		}
@@ -1549,7 +1547,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				sim.startStopRouteAnimation(this);
 			}
 		}
-		for (OsmandPlugin plugin: PluginsHelper.getEnabledPlugins()) {
+		for (OsmandPlugin plugin : PluginsHelper.getEnabledPlugins()) {
 			plugin.newRouteIsCalculated(newRoute);
 		}
 	}

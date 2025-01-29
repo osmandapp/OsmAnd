@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.ColorRes
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentManager
@@ -17,6 +18,7 @@ import net.osmand.plus.base.BaseOsmAndFragment
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.nearbyplaces.NearbyPlacesHelper.showPointInContextMenu
 import net.osmand.plus.search.NearbyPlacesAdapter
+import net.osmand.plus.search.ShowQuickSearchMode
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.wiki.WikiCoreHelper
@@ -47,22 +49,25 @@ class NearbyPlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIte
 		setupToolBar(view)
 		setupVerticalNearbyList(view)
 
-//		requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-//			override fun handleOnBackPressed() {
-//				if (isHidden) {
-//					// Show Fragment B if it's currently hidden
-//					parentFragmentManager.beginTransaction()
-//						.show(this@NearbyPlacesFragment)
-//						.commit()
-//					mapActivity?.contextMenu?.hideMenus()
-//				} else {
-//					// Allow the system to handle the back press
-//					isEnabled = false
-//					fragmentManager?.popBackStack()
-////					requireActivity().onBackPressedDispatcher.onBackPressed()
-//				}
-//			}
-//		})
+		requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+			override fun handleOnBackPressed() {
+				if (isHidden) {
+					parentFragmentManager.beginTransaction()
+						.show(this@NearbyPlacesFragment)
+						.commit()
+					mapActivity?.contextMenu?.hideMenus()
+				} else {
+					fragmentManager?.popBackStack()
+					val fragmentsHelper = mapActivity?.fragmentsHelper
+					val quickSearchDialogFragment = fragmentsHelper?.quickSearchDialogFragment
+					quickSearchDialogFragment?.let {
+						if (quickSearchDialogFragment.isSearchHidden) {
+							fragmentsHelper.showQuickSearch(ShowQuickSearchMode.CURRENT, false)
+						}
+					}
+				}
+			}
+		})
 	}
 
 	private fun setupShowAll(view: View) {
@@ -128,7 +133,6 @@ class NearbyPlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIte
 			showPointInContextMenu(it, item)
 			val transaction = fragmentManager?.beginTransaction()
 			transaction?.hide(this)
-			transaction?.addToBackStack(null)
 			transaction?.commit()
 		}
 	}
