@@ -1,6 +1,8 @@
 package net.osmand.plus.render;
 
 
+import static net.osmand.plus.views.mapwidgets.widgets.NextTurnBaseWidget.SHIELD_HEIGHT_DP;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -241,10 +243,6 @@ public class TextRenderer {
 	}
 
 	public void drawShieldIcon(RenderingContext rc, Canvas cv, TextDrawInfo text, String sr) {
-		drawShieldIcon(rc, cv, text, sr, null);
-	}
-
-	public void drawShieldIcon(RenderingContext rc, Canvas cv, TextDrawInfo text, String sr, @Nullable Integer customViewHeight) {
 		if (sr != null) {
 			float coef = rc.getDensityValue(rc.screenDensityRatio * rc.textScale);
 			Drawable ico = RenderingIcons.getDrawableIcon(context, sr, true);
@@ -253,22 +251,17 @@ public class TextRenderer {
 				int iconWidth = ico.getIntrinsicWidth();
 				float xyRatio = (float) iconWidth / iconHeight;
 
-				if (customViewHeight != null) {
-					int viewHeightPx = AndroidUtils.dpToPx(rc.ctx, customViewHeight);
-					int viewWidthPx = (int) (viewHeightPx * xyRatio);
+				int viewHeightPx = AndroidUtils.dpToPx(rc.ctx, SHIELD_HEIGHT_DP);
+				int viewWidthPx = (int) (viewHeightPx * xyRatio);
 
-					iconHeight = viewHeightPx;
-					iconWidth = viewWidthPx;
-				}
-
-				float left = text.centerX - iconWidth / 2f * coef - 0.5f;
-				float top = text.centerY - iconHeight / 2f * coef - paintText.descent() * 1.5f;
+				float left = text.centerX - viewWidthPx / 2f * coef - 0.5f;
+				float top = text.centerY - viewHeightPx / 2f * coef - paintText.descent() * 1.5f;
 				cv.save();
 				cv.translate(left, top);
 				if (rc.screenDensityRatio != 1f) {
-					ico.setBounds(0, 0, (int) (iconWidth * coef), (int) (iconHeight * coef));
+					ico.setBounds(0, 0, (int) (viewWidthPx * coef), (int) (viewHeightPx * coef));
 				} else {
-					ico.setBounds(0, 0, iconWidth, iconHeight);
+					ico.setBounds(0, 0, viewWidthPx, viewHeightPx);
 				}
 				ico.draw(cv);
 				cv.restore();
