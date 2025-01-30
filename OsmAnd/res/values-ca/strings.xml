@@ -3922,7 +3922,7 @@
     <string name="rendering_attr_horseScale_name">Dificultat de les rutes eqüestres</string>
     <string name="routing_attr_avoid_highway_description">Evita les autopistes</string>
     <string name="map_widget_trip_recording_uphill">Ascens</string>
-    <string name="map_widget_trip_recording_distance">Distància</string>
+    <string name="map_widget_distance">Distància</string>
     <string name="routing_attr_hazmat_category_name">Categoria de matèries perilloses</string>
     <string name="routing_attr_hazmat_category_description">Categoria de materials perillosos / Considereu les restriccions d\'accés</string>
     <string name="routing_attr_avoid_fords_name">Evita els guals</string>

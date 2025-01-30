@@ -2589,7 +2589,7 @@
     <string name="map_widget_trip_recording_downhill">Am i lawr</string>
     <string name="map_widget_trip_recording_uphill">Ar i fyny</string>
     <string name="map_widget_trip_recording_duration">Hyd</string>
-    <string name="map_widget_trip_recording_distance">Pellter</string>
+    <string name="map_widget_distance">Pellter</string>
     <string name="release_4_2">• Ail-dyluniad ategion: golwg a theimlad newydd, grwpio yn ôl tudalennau, newid trefn a\'u chyfuno fel y dymunwch.
 \n
 \n • Llwybrau Mynydda / Seiclo / Teithio: tapiwch ar symbol y llwybr a chael holl wybodaeth y llwybr.

@@ -4513,7 +4513,7 @@
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (inga begränsningar)</string>
     <string name="routing_attr_allow_private_for_truck_description">Tillåt åtkomst till privata områden för lastbilar.</string>
     <string name="routing_attr_allow_private_for_truck_name">Tillåt privat åtkomst (lastbil)</string>
-    <string name="map_widget_trip_recording_distance">Sträcka</string>
+    <string name="map_widget_distance">Sträcka</string>
     <string name="routing_attr_hazmat_category_name">Kategori av farligt gods</string>
     <string name="map_widget_trip_recording_duration">Varaktighet</string>
     <string name="no_altitude_data">Ingen höjddata</string>

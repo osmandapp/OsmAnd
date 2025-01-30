@@ -4375,7 +4375,7 @@
     <string name="map_widget_trip_recording_downhill">Downhill</string>
     <string name="map_widget_trip_recording_uphill">Uphill</string>
     <string name="map_widget_trip_recording_duration">Durata</string>
-    <string name="map_widget_trip_recording_distance">Distanza</string>
+    <string name="map_widget_distance">Distanza</string>
     <string name="routing_attr_hazmat_category_description">Categoria materiali pericolosi / Considera i permessi di accesso per i materiali pericolosi</string>
     <string name="radius_rules_widget_desc">Lo strumento righello radiale mostra la distanza attorno al punto selezionato nella mappa attraverso dei cerchi.</string>
     <string name="no_altitude_data">Nessun dato di altitudine</string>

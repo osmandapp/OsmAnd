@@ -4545,7 +4545,7 @@
     <string name="colour_of_circles">Kolor okręgów</string>
     <string name="compass_on_circles">Kompas na okręgach</string>
     <string name="routing_attr_avoid_4wd_only_description">Unikaj dróg nadających się dla pojazdów z napędem na 4 koła</string>
-    <string name="map_widget_trip_recording_distance">Odległość</string>
+    <string name="map_widget_distance">Odległość</string>
     <string name="rendering_attr_horseScale_name">Poziom trudności szlaków konnych</string>
     <string name="routing_attr_avoid_highway_name">Unikaj autostrad</string>
     <string name="rendering_attr_weatherTempContours_name">Izolinie temperatury</string>

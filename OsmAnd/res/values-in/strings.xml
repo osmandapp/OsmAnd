@@ -3708,7 +3708,7 @@
     <string name="monitoring_min_distance_descr_recommendation">Rekomendasi: Tetapkan perpindahan 5 meter jika Anda tidak ingin mencatat detail kecil dari rute Anda, dan tidak memerlukan data tambahan tentang periode istirahat Anda.</string>
     <string name="apply_preference_to_all_profiles">Terapkan perubahan ini ke semua atau profil yang dipilih.</string>
     <string name="routing_attr_allow_private_for_truck_description">Izinkan akses ke area pribadi untuk truk.</string>
-    <string name="map_widget_trip_recording_distance">Jarak</string>
+    <string name="map_widget_distance">Jarak</string>
     <string name="rendering_attr_horseRoutes_name">Rute kuda</string>
     <string name="osm_save_offline">Simpan secara luring</string>
     <string name="osn_reopen_dialog_title">Buka kembali catatan</string>

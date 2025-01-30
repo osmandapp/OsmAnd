@@ -4323,7 +4323,7 @@
     <string name="routing_attr_avoid_fords_description">Gázlók elkerülése</string>
     <string name="map_widget_trip_recording_downhill">Lefelé</string>
     <string name="map_widget_trip_recording_duration">Időtartam</string>
-    <string name="map_widget_trip_recording_distance">Távolság</string>
+    <string name="map_widget_distance">Távolság</string>
     <string name="map_widget_trip_recording_uphill">Felfelé</string>
     <string name="routing_attr_avoid_fords_name">Gázlók elkerülése</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">„A” (nincs korlátozás)</string>

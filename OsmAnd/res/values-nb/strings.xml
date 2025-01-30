@@ -4592,7 +4592,7 @@
     <string name="rendering_attr_hideMilitaryAreas_description">Skjul militære områder</string>
     <string name="map_widget_trip_recording_downhill">Nedoverbakke</string>
     <string name="map_widget_trip_recording_duration">Varighet</string>
-    <string name="map_widget_trip_recording_distance">Avstand</string>
+    <string name="map_widget_distance">Avstand</string>
     <string name="explore_plans">Utforsk planer</string>
     <string name="rendering_attr_weatherTempContours_name">Temperatur-isolinjer</string>
     <string name="rendering_attr_weatherPressureContours_name">Lufttrykk-isolinjer</string>

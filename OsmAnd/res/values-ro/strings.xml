@@ -4571,7 +4571,7 @@
     <string name="shared_string_symbol">Simbol</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Zone militare</string>
     <string name="explore_plans">Explorează planurile</string>
-    <string name="map_widget_trip_recording_distance">Distanță</string>
+    <string name="map_widget_distance">Distanță</string>
     <string name="routing_attr_hazmat_category_name">Categorie materiale periculoase</string>
     <string name="parking_widget_desc">Arată distanța de la centrul ecranului până la locul de parcare.</string>
     <string name="mapillary_widget_desc">Oferă acces rapid la aplicația Mapillary pentru a adăuga imagini stradale.</string>

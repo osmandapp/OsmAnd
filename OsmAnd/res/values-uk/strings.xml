@@ -4378,7 +4378,7 @@
     <string name="map_widget_trip_recording_duration">Тривалість</string>
     <string name="routing_attr_allow_private_for_truck_description">Дозволити доступ вантажних автомобілів на приватну територію.</string>
     <string name="map_widget_trip_recording_downhill">Спуск</string>
-    <string name="map_widget_trip_recording_distance">Відстань</string>
+    <string name="map_widget_distance">Відстань</string>
     <string name="routing_attr_hazmat_category_name">Категорія небезпеки</string>
     <string name="map_widget_true_bearing">Справжній азимут</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Не показувати військові обʼєкти</string>

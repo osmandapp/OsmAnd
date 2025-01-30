@@ -770,7 +770,7 @@
     <string name="arrived_at_destination">ᱟᱢ ᱛᱤᱭᱟᱹᱜ ᱠᱮᱫᱟᱢ᱾</string>
     <string name="route_to">ᱚᱠᱟᱛᱮ:</string>
     <string name="shared_string_close">ᱵᱚᱸᱫᱚᱭ ᱢᱮ</string>
-    <string name="map_widget_trip_recording_distance">ᱥᱟᱺᱜᱤᱧ</string>
+    <string name="map_widget_distance">ᱥᱟᱺᱜᱤᱧ</string>
     <string name="altitude_ascent">ᱵᱩᱨᱩᱪᱮᱛᱟᱱ</string>
     <string name="shared_string_options">ᱚᱯᱥᱟᱱᱠᱚ</string>
     <string name="measurement_tool">ᱥᱟᱺᱜᱤᱧ ᱢᱟᱯ ᱢᱮ</string>

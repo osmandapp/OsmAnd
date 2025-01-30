@@ -4387,7 +4387,7 @@
     <string name="rendering_attr_weatherPressureContours_name">Tryk-isolinjer</string>
     <string name="routing_attr_avoid_highway_name">Undgå motorveje</string>
     <string name="rendering_attr_horseScale_name">Sværhedsgraden af ridestier</string>
-    <string name="map_widget_trip_recording_distance">Afstand</string>
+    <string name="map_widget_distance">Afstand</string>
     <string name="rendering_attr_weatherTempContours_name">Temperatur-isolinjer</string>
     <string name="routing_attr_avoid_highway_description">Undgå motorveje</string>
     <string name="map_widget_trip_recording_downhill">Nedstigning</string>

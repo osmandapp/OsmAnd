@@ -2241,7 +2241,7 @@
     <string name="external_device_disconnected">Desconnectat</string>
     <string name="external_device_characteristic_heart_rate">Frequéncia cardiaca</string>
     <string name="map_widget_camera_distance">Elevacion de l’aparelh fòto</string>
-    <string name="map_widget_trip_recording_distance">Distància</string>
+    <string name="map_widget_distance">Distància</string>
     <string name="nothing_found">Ges de resultat</string>
     <string name="route_info">Informacions sus lo percors</string>
     <string name="quick_action_transport_descr">Boton per mostrar ò amagar lo transpòrt public sus la mapa.</string>

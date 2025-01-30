@@ -2870,7 +2870,7 @@
 \n</string>
     <string name="quick_action_item">빠른 작업</string>
     <string name="configure_screen_quick_action">빠른 작업</string>
-    <string name="map_widget_trip_recording_distance">거리</string>
+    <string name="map_widget_distance">거리</string>
     <string name="show_polygons">다각형 표시</string>
     <string name="show_transparency_seekbar">투명 탐색 표시줄 표시</string>
     <string name="map_markers_bar">지도 마커 막대</string>

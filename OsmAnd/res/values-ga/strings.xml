@@ -2024,7 +2024,7 @@
     <string name="app_restart_required">Caithfear an aip a atosú chun socruithe áirithe a chur i bhfeidhm.</string>
     <string name="lanes_widgets_desc">Taispeánann sé leagan amach na lánaí ar na bóithre agus aibhsíonn sé na cinn le tógáil agus tú ag taistil.</string>
     <string name="osmand_cloud_login_descr">Cuir isteach an seoladh r-phoist a úsáid tú chun clárú. Seolfar pasfhocal aonuaire chuige.</string>
-    <string name="map_widget_trip_recording_distance">Achar</string>
+    <string name="map_widget_distance">Achar</string>
     <string name="update_all_maps_added">Nuashonraigh gach léarscáil a cuireadh i %1$s\?</string>
     <string name="osm_login_descr">Logáil isteach ag úsáid an modh OAuth, nó le d\'ainm úsáideora OSM agus do phasfhocal.</string>
     <string name="uploading_count">Ag uaslódáil %1$d as %2$d</string>

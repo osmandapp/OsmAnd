@@ -4412,7 +4412,7 @@
     <string name="map_widget_time_to_destination">Tijd tot bestemming</string>
     <string name="explore_plans">Plannen verkennen</string>
     <string name="map_widget_trip_recording_duration">Tijdsduur</string>
-    <string name="map_widget_trip_recording_distance">Afstand</string>
+    <string name="map_widget_distance">Afstand</string>
     <string name="shared_string_widget">Widget</string>
     <string name="audio_video_notes_desc">Laat eenvoudig toe een opname te starten of stoppen (audio, video of foto).</string>
     <string name="altitude_widget_desc">Toont de hoogte boven de zeespiegel van de huidige geolocatie.</string>

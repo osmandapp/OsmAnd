@@ -4228,7 +4228,7 @@
     <string name="rendering_attr_weatherPressureContours_name">等压线</string>
     <string name="map_widget_trip_recording_uphill">上坡</string>
     <string name="map_widget_trip_recording_duration">持续时间</string>
-    <string name="map_widget_trip_recording_distance">距离</string>
+    <string name="map_widget_distance">距离</string>
     <string name="routing_attr_hazmat_category_description">危险品类别/考虑危险品准入许可</string>
     <string name="routing_attr_avoid_fords_name">避免涉水</string>
     <string name="routing_attr_avoid_fords_description">避免涉水</string>

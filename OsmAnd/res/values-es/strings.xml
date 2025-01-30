@@ -4511,7 +4511,7 @@
     <string name="turn_on_public_transport_description">Activar para ver rutas de transporte público en el mapa.</string>
     <string name="time_to_go_desc">Tiempo en minutos u horas necesario para llegar a tu destino.</string>
     <string name="map_widget_trip_recording_duration">Duración</string>
-    <string name="map_widget_trip_recording_distance">Distancia</string>
+    <string name="map_widget_distance">Distancia</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Sin restricciones)</string>
     <string name="calculate_online">Calcular en línea</string>
     <string name="calculate_altitude">Calcular elevación</string>

@@ -2684,7 +2684,7 @@
     <string name="empty_state_favourites">Добавяне на избрани</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Скриване на военните зони</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Скриване на военните зони</string>
-    <string name="map_widget_trip_recording_distance">Разстояние</string>
+    <string name="map_widget_distance">Разстояние</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Без ограничения)</string>
     <string name="routing_attr_avoid_fords_name">Избягване на бродове</string>
     <string name="map_widget_trip_recording_downhill">Спyскане</string>

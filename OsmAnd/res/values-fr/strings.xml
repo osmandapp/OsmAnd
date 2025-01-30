@@ -4367,7 +4367,7 @@
     <string name="routing_attr_allow_private_for_truck_description">Zones privées autorisées aux camions.</string>
     <string name="routing_attr_avoid_highway_description">Éviter les autoroutes</string>
     <string name="rendering_attr_horseScale_name">Difficulté des sentiers équestres</string>
-    <string name="map_widget_trip_recording_distance">Distance</string>
+    <string name="map_widget_distance">Distance</string>
     <string name="routing_attr_allow_private_for_truck_name">Autoriser l\'accès privé (camion)</string>
     <string name="map_widget_trip_recording_uphill">Montée</string>
     <string name="map_widget_trip_recording_duration">Durée</string>

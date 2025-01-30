@@ -3049,7 +3049,7 @@
     <string name="weather_precip_milimeters">მილიმეტრი</string>
     <string name="map_widget_trip_recording_duration">ხანგრძლივობა</string>
     <string name="map_widget_trip_recording_uphill">აღმართი</string>
-    <string name="map_widget_trip_recording_distance">მანძილი</string>
+    <string name="map_widget_distance">მანძილი</string>
     <string name="map_widget_rssi">Rssi</string>
     <string name="shared_string_nearest">უახლოესი</string>
     <string name="contact_support">მხარდაჭერა</string>

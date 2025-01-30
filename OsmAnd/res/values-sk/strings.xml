@@ -4341,7 +4341,7 @@
     <string name="rendering_attr_horseScale_name">Náročnosť ciest pre kone</string>
     <string name="routing_attr_avoid_highway_name">Vyhnúť sa cestám</string>
     <string name="map_widget_trip_recording_duration">Trvanie</string>
-    <string name="map_widget_trip_recording_distance">Vzdialenosť</string>
+    <string name="map_widget_distance">Vzdialenosť</string>
     <string name="routing_attr_hazmat_category_name">Kategória nebezpečného nákladu</string>
     <string name="current_time_widget_desc">Zobrazuje aktuálny čas podľa vášho zariadenia.</string>
     <string name="get_altitude_information">Získať informácie o nadmorskej výške</string>
