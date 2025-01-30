@@ -4334,7 +4334,7 @@
     <string name="routing_attr_avoid_fords_name">Furten vermeiden</string>
     <string name="routing_attr_hazmat_category_description">Gefahrgutkategorie / Zugangsgenehmigungen für Gefahrgut berücksichtigen</string>
     <string name="circle_settings">Kreiseinstellungen</string>
-    <string name="map_widget_trip_recording_distance">Entfernung</string>
+    <string name="map_widget_distance">Entfernung</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Militärische Bereiche ausblenden</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Militärische Bereiche</string>
     <string name="routing_attr_hazmat_category_name">Gefahrgutkategorie</string>

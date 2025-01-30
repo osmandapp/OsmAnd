@@ -1,5 +1,7 @@
 package net.osmand.plus.views.mapwidgets.widgets.routeinfo;
 
+import static net.osmand.plus.views.mapwidgets.widgets.DistanceToPointWidget.DESTINATION_REACHED_THRESHOLD;
+
 import androidx.annotation.NonNull;
 
 import net.osmand.Location;
@@ -17,9 +19,6 @@ import java.util.List;
 public class RouteInfoCalculator {
 
 	private static final int POINTS_LIMIT = 2;
-	private static final int DISTANCE_CHANGE_THRESHOLD = 10;
-	private static final int DESTINATION_REACHED_THRESHOLD = 20;
-	private static final long UPDATE_INTERVAL_SECONDS = 30;
 
 	private final MapActivity mapActivity;
 	private final OsmandMapTileView mapTileView;

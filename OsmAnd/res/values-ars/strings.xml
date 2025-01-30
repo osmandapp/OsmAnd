@@ -3885,7 +3885,7 @@
     <string name="auto_zoom_farthest">إلى مدى بعيد \"٥٠٠م\"</string>
     <string name="external_device_ant">مستشعر ANT+</string>
     <string name="shared_string_close">إغلاق</string>
-    <string name="map_widget_trip_recording_distance">المسافة</string>
+    <string name="map_widget_distance">المسافة</string>
     <string name="profile_alert_need_profile_name_msg">يجب تحديد اسم الوضع أولاً.</string>
     <string name="add_address">إضافة عنوان</string>
     <string name="fav_file_to_load_not_found">لم يتم العثور على ملف GPX يحتوي على الأماكن المفضلة في {0}</string>

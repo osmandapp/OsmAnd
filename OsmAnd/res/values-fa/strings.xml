@@ -4310,7 +4310,7 @@
     <string name="weather_wind_mph">مایل در ساعت</string>
     <string name="shared_string_mode">حالت</string>
     <string name="fold_unfold">تا کردن/باز کردن</string>
-    <string name="map_widget_trip_recording_distance">فاصله</string>
+    <string name="map_widget_distance">فاصله</string>
     <string name="shared_string_large">بزرگ</string>
     <string name="shared_string_normal">عادی</string>
     <string name="shared_string_widget">ویجت</string>

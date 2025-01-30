@@ -4587,7 +4587,7 @@
     <string name="map_widget_trip_recording_uphill">Подъём</string>
     <string name="routing_attr_hazmat_category_name">Категория опасности</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Без ограничений)</string>
-    <string name="map_widget_trip_recording_distance">Расстояние</string>
+    <string name="map_widget_distance">Расстояние</string>
     <string name="routing_attr_hazmat_category_description">Категория опасных материалов / Учитывать разрешение на доступ к опасным веществам</string>
     <string name="routing_attr_avoid_fords_name">Без бродов</string>
     <string name="routing_attr_allow_private_for_truck_name">Частные зоны (грузовик)</string>

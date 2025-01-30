@@ -34,7 +34,7 @@
     <string name="routing_attr_avoid_highway_description">Izbegnuvajte avtopatista</string>
     <string name="map_widget_trip_recording_downhill">Nadolnica</string>
     <string name="map_widget_trip_recording_duration">Vreme na traenje</string>
-    <string name="map_widget_trip_recording_distance">Rastojanie</string>
+    <string name="map_widget_distance">Rastojanie</string>
     <string name="routing_attr_hazmat_category_description">Kategorija na opasni materii/Zemete gi vo obzir dozvolite za pristap do opasnite materii</string>
     <string name="routing_attr_avoid_fords_name">Izbegnuvajte pokratki sporedni patista</string>
     <string name="routing_attr_avoid_fords_description">Izbegnuvajte pokratki sporedni patista</string>

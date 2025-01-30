@@ -4716,7 +4716,7 @@ POIの更新は利用できません</string>
     <string name="weather_wind_ms">m/s</string>
     <string name="weather_wind_kilimeters_per_hour">毎時メートル</string>
     <string name="av_notes_choose_action_widget_desc">アクションを選択します。</string>
-    <string name="map_widget_trip_recording_distance">距離</string>
+    <string name="map_widget_distance">距離</string>
     <string name="shared_string_widget">ウィジェット</string>
     <string name="map_widget_camera_distance">カメラの仰角</string>
     <string name="go_to_marker_location">マーカーの場所に移動</string>

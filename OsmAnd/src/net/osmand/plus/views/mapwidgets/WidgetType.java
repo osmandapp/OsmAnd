@@ -77,7 +77,7 @@ public enum WidgetType {
 	ALTITUDE_MAP_CENTER("altitude_map_center", R.string.map_widget_altitude_map_center, R.string.map_widget_altitude_map_center_desc, R.drawable.widget_altitude_map_center_day, R.drawable.widget_altitude_map_center_night, 0, WidgetGroup.ALTITUDE, RIGHT),
 	GPS_INFO("gps_info", R.string.map_widget_gps_info, R.string.gps_info_widget_desc, R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night, R.string.docs_widget_gps_info, null, RIGHT),
 
-	TRIP_RECORDING_DISTANCE("monitoring", R.string.map_widget_trip_recording_distance, R.string.trip_recording_distance_widget_desc, R.drawable.widget_trip_recording_day, R.drawable.widget_trip_recording_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),
+	TRIP_RECORDING_DISTANCE("monitoring", R.string.map_widget_distance, R.string.trip_recording_distance_widget_desc, R.drawable.widget_trip_recording_day, R.drawable.widget_trip_recording_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),
 	TRIP_RECORDING_TIME("trip_recording_time", R.string.map_widget_trip_recording_duration, R.string.trip_recording_duration_widget_desc, R.drawable.widget_track_recording_duration_day, R.drawable.widget_track_recording_duration_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),
 	TRIP_RECORDING_UPHILL("trip_recording_uphill", R.string.map_widget_trip_recording_uphill, R.string.trip_recording_uphill_widget_desc, R.drawable.widget_track_recording_uphill_day, R.drawable.widget_track_recording_uphill_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),
 	TRIP_RECORDING_DOWNHILL("trip_recording_downhill", R.string.map_widget_trip_recording_downhill, R.string.trip_recording_downhill_widget_desc, R.drawable.widget_track_recording_downhill_day, R.drawable.widget_track_recording_downhill_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),

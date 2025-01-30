@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 
 public class TimeToNavigationPointWidget extends SimpleWidget {
 
-	private static final long UPDATE_INTERVAL_SECONDS = 30;
+	public static final long UPDATE_INTERVAL_SECONDS = 30;
 
 	private final RoutingHelper routingHelper;
 	private final TimeToNavigationPointWidgetState widgetState;
@@ -130,7 +130,7 @@ public class TimeToNavigationPointWidget extends SimpleWidget {
 	}
 
 	private void updateTimeToGo(int leftSeconds) {
-		long diffInMinutes = TimeUnit.MINUTES.convert(leftSeconds * 1000L, TimeUnit.MILLISECONDS);
+		long diffInMinutes = TimeUnit.MINUTES.convert(leftSeconds, TimeUnit.SECONDS);
 		String formattedLeftTime = Algorithms.formatMinutesDuration((int) diffInMinutes, true);
 		setText(formattedLeftTime, app.getString(R.string.int_hour));
 	}

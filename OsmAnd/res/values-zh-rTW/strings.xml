@@ -4349,7 +4349,7 @@
     <string name="routing_attr_avoid_highway_description">避開高速公路</string>
     <string name="map_widget_trip_recording_downhill">下坡</string>
     <string name="routing_attr_avoid_fords_name">避免涉水</string>
-    <string name="map_widget_trip_recording_distance">距離</string>
+    <string name="map_widget_distance">距離</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (無限制)</string>
     <string name="routing_attr_hazmat_category_description">危險物質分類 / 考慮危險物品進入權限</string>
     <string name="map_widget_trip_recording_uphill">上坡</string>

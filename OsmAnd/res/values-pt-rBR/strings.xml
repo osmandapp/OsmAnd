@@ -4564,7 +4564,7 @@
     <string name="routing_attr_motor_type_description">Selecione o tipo de combustível do seu motor, isso é necessário para estimar a emissão de CO2.</string>
     <string name="transport_hazmat_title">Transporte de materiais perigosos</string>
     <string name="average_speed_skip_stops">Faça paradas em consideração</string>
-    <string name="map_widget_trip_recording_distance">Distância</string>
+    <string name="map_widget_distance">Distância</string>
     <string name="time_to_go_desc">Tempo em minutos ou horas necessárias para chegar ao seu destino.</string>
     <string name="shared_string_widget">Widget</string>
     <string name="route_maneuvers">Manobras de rota</string>

@@ -369,6 +369,11 @@ public class TargetPointsHelper {
 	}
 
 	@Nullable
+	public TargetPoint getFirstIntermediatePoint() {
+		return getIntermediatePoint(0);
+	}
+
+	@Nullable
 	public TargetPoint getIntermediatePoint(int intermediatePointIndex) {
 		if (intermediatePointIndex < intermediatePoints.size()) {
 			return intermediatePoints.get(intermediatePointIndex);

@@ -4563,7 +4563,7 @@
     <string name="explore_plans">עיון בתוכניות</string>
     <string name="rendering_attr_hideMilitaryAreas_description">הסתרת שטחים צבאיים</string>
     <string name="map_widget_trip_recording_duration">משך</string>
-    <string name="map_widget_trip_recording_distance">מרחק</string>
+    <string name="map_widget_distance">מרחק</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (אין הגבלות)</string>
     <string name="routing_attr_hazmat_category_name">קטגוריית חומ״ס</string>
     <string name="routing_attr_hazmat_category_description">קטגוריית חומרים מסוכנים / התחשבות ההגבלות גישה עקב חומרים מסוכנים</string>

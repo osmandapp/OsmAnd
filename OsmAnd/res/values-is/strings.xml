@@ -4348,7 +4348,7 @@
     <string name="map_widget_time_to_destination">Tími á áfangastað</string>
     <string name="rendering_attr_horseScale_name">Erfiðleikastig reiðleiða</string>
     <string name="map_widget_trip_recording_duration">Tímalengd</string>
-    <string name="map_widget_trip_recording_distance">Vegalengd</string>
+    <string name="map_widget_distance">Vegalengd</string>
     <string name="compass_on_circles">Áttaviti á hringjum</string>
     <string name="arrival_time_widget_desc">Komutími á áfangastað.</string>
     <string name="routing_attr_motor_type_lpg_name">LPG</string>

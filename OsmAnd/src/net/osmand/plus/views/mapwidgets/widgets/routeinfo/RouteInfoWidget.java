@@ -18,7 +18,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.utils.AndroidUtils;
@@ -35,7 +34,7 @@ import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportVerticalPanel;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.routeinfo.RouteInfoCalculator.DestinationInfo;
-import net.osmand.plus.views.mapwidgets.widgetstates.ResizableWidgetState;
+import net.osmand.plus.views.mapwidgets.widgetstates.RouteInfoWidgetState;
 import net.osmand.util.Algorithms;
 
 import java.util.HashMap;
@@ -45,10 +44,7 @@ import java.util.concurrent.TimeUnit;
 
 public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel, ISupportWidgetResizing, ISupportMultiRow {
 
-	private static final String DISPLAY_MODE_PREF_ID = "route_info_widget_display_mode";
-
-	private final ResizableWidgetState widgetState;
-	private final CommonPreference<RouteInfoDisplayMode> displayModePref;
+	private final RouteInfoWidgetState widgetState;
 
 	@Nullable
 	protected String customId;
@@ -73,8 +69,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	public RouteInfoWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
 		super(mapActivity, WidgetType.ROUTE_INFO);
 		this.customId = customId;
-		widgetState = new ResizableWidgetState(app, customId, widgetType);
-		displayModePref = registerDisplayModePreference(customId);
+		widgetState = new RouteInfoWidgetState(app, customId);
 		calculator = new RouteInfoCalculator(mapActivity);
 
 		setupViews();
@@ -174,7 +169,6 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	}
 
 	private void updateInfoInternal() {
-		calculatedRouteInfo = calculator.calculateRouteInformation();
 		if (cachedContentLayoutId != getContentLayoutId()) {
 			// Recreating the widget is necessary because small widget size uses
 			// different layouts depending on the number of route points.
@@ -183,14 +177,15 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		}
 		boolean shouldHideTopWidgets = mapActivity.getWidgetsVisibilityHelper().shouldHideVerticalWidgets();
 		boolean typeAllowed = widgetType != null && widgetType.isAllowed();
-		boolean visible = typeAllowed && !shouldHideTopWidgets && hasInfoToDisplay();
+		boolean visible = typeAllowed && !shouldHideTopWidgets;
 		updateVisibility(visible);
-		if (typeAllowed && !shouldHideTopWidgets) {
+		if (visible) {
 			updateNavigationInfo();
 		}
 	}
 
 	private void updateNavigationInfo() {
+		calculatedRouteInfo = calculator.calculateRouteInformation();
 		if (Algorithms.isEmpty(calculatedRouteInfo)) {
 			updateVisibility(false);
 			return;
@@ -276,32 +271,17 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		updateInfoInternal();
 	}
 
-	private boolean hasInfoToDisplay() {
-		return !Algorithms.isEmpty(calculatedRouteInfo);
-	}
-
 	private boolean isSecondaryDataAvailable() {
 		return calculatedRouteInfo != null && calculatedRouteInfo.size() > 1;
 	}
 
 	@NonNull
 	public RouteInfoDisplayMode getDisplayMode(@NonNull ApplicationMode appMode) {
-		return displayModePref.getModeValue(appMode);
+		return widgetState.getDisplayMode(appMode);
 	}
 
 	public void setDisplayMode(@NonNull ApplicationMode appMode, @NonNull RouteInfoDisplayMode displayMode) {
-		displayModePref.setModeValue(appMode, displayMode);
-	}
-
-	@NonNull
-	private CommonPreference<RouteInfoDisplayMode> registerDisplayModePreference(@Nullable String customId) {
-		String prefId = Algorithms.isEmpty(customId)
-				? DISPLAY_MODE_PREF_ID
-				: DISPLAY_MODE_PREF_ID + customId;
-		return settings.registerEnumStringPreference(prefId, RouteInfoDisplayMode.ARRIVAL_TIME,
-						RouteInfoDisplayMode.values(), RouteInfoDisplayMode.class)
-				.makeProfile()
-				.cache();
+		widgetState.setDisplayMode(appMode, displayMode);
 	}
 
 	@NonNull

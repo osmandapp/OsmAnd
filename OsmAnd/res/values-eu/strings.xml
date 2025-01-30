@@ -4926,7 +4926,7 @@
     <string name="rendering_attr_horseScale_name">Zaldi-ibilbideen zailtasuna</string>
     <string name="map_widget_trip_recording_uphill">Maldan gora</string>
     <string name="map_widget_trip_recording_duration">Iraupena</string>
-    <string name="map_widget_trip_recording_distance">Distantzia</string>
+    <string name="map_widget_distance">Distantzia</string>
     <string name="rendering_attr_weatherTempContours_name">Tenperaturako isolineak</string>
     <string name="rendering_attr_weatherPressureContours_name">Presio-isolineak</string>
     <string name="widget_secondary_desc_part_of">%1$s gehigarriaren zatia.</string>

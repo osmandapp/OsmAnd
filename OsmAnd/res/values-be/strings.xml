@@ -4055,7 +4055,7 @@
     <string name="rendering_attr_weatherPressureContours_name">Ізабары</string>
     <string name="routing_attr_avoid_highway_name">Пазбягаць аўтамагісрталяў</string>
     <string name="routing_attr_avoid_highway_description">Пазбягаць аўтамагісрталяў</string>
-    <string name="map_widget_trip_recording_distance">Адлегласць</string>
+    <string name="map_widget_distance">Адлегласць</string>
     <string name="routing_attr_hazmat_category_name">Катэгорыя небяспечнасці</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Без абмежаванняў)</string>
     <string name="routing_attr_avoid_fords_description">Пазбягаць бродаў</string>

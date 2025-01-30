@@ -4637,7 +4637,7 @@
     <string name="calculate_online">Výpočet online</string>
     <string name="explore_plans">Prozkoumat možnosti předplatného</string>
     <string name="arrival_time_widget_desc">Čas příjezdu do cílového bodu.</string>
-    <string name="map_widget_trip_recording_distance">Vzdálenost</string>
+    <string name="map_widget_distance">Vzdálenost</string>
     <string name="shared_string_widget">Nástroj</string>
     <string name="time_to_navigation_point_widget_settings_desc">Klepnutím na nástroj přepnete režimy.</string>
     <string name="elevation_profile_widget_desc">Zobrazuje výškový profil a profil sklonu aktuální trasy.</string>

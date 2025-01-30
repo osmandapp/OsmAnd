@@ -23,8 +23,7 @@ class SelectionDialogAdapter extends BaseAdapter {
 	public static final int INVALID_ID = -1;
 
 	private final int layoutId;
-	private final CharSequence[] titles;
-	private final CharSequence[] descriptions;
+	private final SelectionDialogItem[] items;
 	private final boolean useMultiSelection;
 	private final boolean nightMode;
 	private int selectedIndex = INVALID_ID;
@@ -37,15 +36,13 @@ class SelectionDialogAdapter extends BaseAdapter {
 	private final LayoutInflater inflater;
 
 	public SelectionDialogAdapter(
-			@NonNull Context ctx, @Nullable Integer layoutId,
-			@NonNull CharSequence[] titles, @Nullable CharSequence[] descriptions, int selected,
-			@Nullable boolean[] checkedItems, @ColorInt @Nullable Integer controlsColor,
+			@NonNull Context ctx, @Nullable Integer layoutId, @NonNull SelectionDialogItem[] items,
+			int selected, @Nullable boolean[] checkedItems, @ColorInt @Nullable Integer controlsColor,
 			boolean nightMode, @Nullable View.OnClickListener listener,
 			boolean useMultiSelection
 	) {
 		this.layoutId = layoutId != null ? layoutId : R.layout.dialog_list_item_with_compound_button;
-		this.titles = titles;
-		this.descriptions = descriptions;
+		this.items = items;
 		this.selectedIndex = selected;
 		this.checkedItems = checkedItems;
 		this.nightMode = nightMode;
@@ -57,13 +54,13 @@ class SelectionDialogAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		return titles.length;
+		return items.length;
 	}
 
 	@NonNull
 	@Override
 	public Object getItem(int position) {
-		return titles[position];
+		return items[position];
 	}
 
 	@Override
@@ -112,10 +109,10 @@ class SelectionDialogAdapter extends BaseAdapter {
 			AndroidUtils.setBackground(button, selectable);
 		}
 		TextView tvTitle = view.findViewById(R.id.text);
-		tvTitle.setText(titles[position]);
+		tvTitle.setText(items[position].title());
 		TextView tvDescription = view.findViewById(R.id.description);
 		if (tvDescription != null) {
-			CharSequence description = descriptions != null ? descriptions[position] : null;
+			CharSequence description = items[position].description();
 			if (description != null) {
 				tvDescription.setVisibility(View.VISIBLE);
 				tvDescription.setText(description);

@@ -4340,7 +4340,7 @@
     <string name="routing_attr_allow_private_for_truck_description">Permesi aliron al privataj areoj por kamionoj.</string>
     <string name="rendering_attr_weatherPressureContours_name">Egal-aerprem-linioj (izobaroj)</string>
     <string name="rendering_attr_horseScale_name">Facilo de ĉevalvojoj</string>
-    <string name="map_widget_trip_recording_distance">Distanco</string>
+    <string name="map_widget_distance">Distanco</string>
     <string name="map_widget_trip_recording_downhill">Malsupreniroj</string>
     <string name="routing_attr_avoid_4wd_only_name">Eviti vojojn por terenaj aŭtomobiloj</string>
     <string name="routing_attr_avoid_4wd_only_description">Eviti vojojn travetureblajn nur per ajnagrundaj aŭtomobiloj</string>

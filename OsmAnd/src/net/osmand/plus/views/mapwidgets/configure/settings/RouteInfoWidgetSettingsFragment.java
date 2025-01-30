@@ -26,12 +26,10 @@ import net.osmand.plus.views.mapwidgets.widgets.routeinfo.RouteInfoDisplayMode;
 import net.osmand.plus.views.mapwidgets.widgets.routeinfo.RouteInfoWidget;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.plus.widgets.alert.SelectionDialogItem;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -88,12 +86,12 @@ public class RouteInfoWidgetSettingsFragment extends BaseResizableWidgetSettingF
 
 		int selected = 0;
 		RouteInfoDisplayMode[] displayModes = RouteInfoDisplayMode.values();
-		CharSequence[] titles = new CharSequence[displayModes.length];
-		CharSequence[] descriptions = new CharSequence[displayModes.length];
+		SelectionDialogItem[] items = new SelectionDialogItem[displayModes.length];
 		for (int i = 0; i < displayModes.length; i++) {
 			RouteInfoDisplayMode displayMode = displayModes[i];
-			titles[i] = getString(displayMode.getTitleId());
-			descriptions[i] = getDisplayModeSummary(displayMode, previewData);
+			CharSequence title = getString(displayMode.getTitleId());
+			CharSequence description = getDisplayModeSummary(displayMode, previewData);
+			items[i] = new SelectionDialogItem(title, description);
 			selected = selectedDisplayMode == displayMode ? i : selected;
 		}
 
@@ -101,7 +99,7 @@ public class RouteInfoWidgetSettingsFragment extends BaseResizableWidgetSettingF
 				.setTitle(R.string.shared_string_default_view)
 				.setItemsLayoutRes(R.layout.dialog_list_item_with_compound_button_and_summary);
 
-		CustomAlert.showSingleSelection(dialogData, titles, descriptions, selected, v -> {
+		CustomAlert.showSingleSelection(dialogData, items, selected, v -> {
 			int which = (int) v.getTag();
 			selectedDisplayMode = displayModes[which];
 			TextView defValueDesc = container.findViewById(R.id.default_view_description);

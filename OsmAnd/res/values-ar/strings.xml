@@ -4613,7 +4613,7 @@
     <string name="rendering_attr_weatherPressureContours_name">خطوط قياس الضغط</string>
     <string name="rendering_attr_horseScale_name">مسارات الخيول الوعرة</string>
     <string name="routing_attr_avoid_highway_name">تجنب الطرق السريعة</string>
-    <string name="map_widget_trip_recording_distance">المسافة</string>
+    <string name="map_widget_distance">المسافة</string>
     <string name="map_widget_trip_recording_uphill">مرتفع</string>
     <string name="routing_attr_hazmat_category_description">فئة المواد الخطرة / الاهتمام في أذونات الوصول إلى المواد الخطرة</string>
     <string name="routing_attr_avoid_fords_name">تجنب الوحل</string>

@@ -4367,7 +4367,7 @@
     <string name="routing_attr_allow_private_for_truck_description">Permitir acesso a camiões em áreas privadas.</string>
     <string name="routing_attr_allow_private_for_truck_name">Permitir acesso privado (camião)</string>
     <string name="map_widget_trip_recording_duration">Duração</string>
-    <string name="map_widget_trip_recording_distance">Distância</string>
+    <string name="map_widget_distance">Distância</string>
     <string name="routing_attr_hazmat_category_description">Categoria de materiais perigosos / aplicar as permissões de acesso com materiais perigosos</string>
     <string name="routing_attr_avoid_fords_name">Evitar vaus</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Sem restrições)</string>

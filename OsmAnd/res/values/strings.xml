@@ -13,7 +13,6 @@
     <string name="popular_places_nearby">Popular places nearby</string>
     <string name="recently_visited">Recently visited</string>
 
-    <string name="map_widget_route_information_distance_mode">Distance</string>
     <string name="shared_string_default_view">Default view</string>
     <string name="map_widget_route_information">Route information</string>
     <string name="map_widget_route_information_desc">Displays the estimated arrival time, remaining travel time, and distance for the current navigation route.</string>
@@ -1400,7 +1399,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="map_widget_trip_recording_downhill">Downhill</string>
     <string name="map_widget_trip_recording_uphill">Uphill</string>
     <string name="map_widget_trip_recording_duration">Duration</string>
-    <string name="map_widget_trip_recording_distance">Distance</string>
+    <string name="map_widget_distance">Distance</string>
     <string name="routing_attr_hazmat_category_name">Hazmat category</string>
     <string name="routing_attr_hazmat_category_description">Hazardous materials category / Consider hazmat access permissions</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (No restrictions)</string>

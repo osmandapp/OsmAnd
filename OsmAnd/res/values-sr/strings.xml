@@ -4285,7 +4285,7 @@
     <string name="routing_attr_allow_private_for_truck_name">Дозвољен приватни приступ (теретно возило)</string>
     <string name="map_widget_trip_recording_uphill">Узбрдо</string>
     <string name="map_widget_trip_recording_duration">Трајање</string>
-    <string name="map_widget_trip_recording_distance">Растојање</string>
+    <string name="map_widget_distance">Растојање</string>
     <string name="shared_string_mode">Начин</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (нема ограничења)</string>
     <string name="av_def_action_choose">На захтев</string>

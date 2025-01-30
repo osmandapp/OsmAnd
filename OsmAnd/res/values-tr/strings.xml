@@ -4591,7 +4591,7 @@
     <string name="rendering_attr_weatherTempContours_name">Sıcaklık eş değer eğrileri</string>
     <string name="map_widget_trip_recording_downhill">Yokuş aşağı</string>
     <string name="map_widget_trip_recording_uphill">Yokuş yukarı</string>
-    <string name="map_widget_trip_recording_distance">Mesafe</string>
+    <string name="map_widget_distance">Mesafe</string>
     <string name="routing_attr_hazmat_category_name">Tehlikeli madde kategorisi</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Kısıtlama yok)</string>
     <string name="routing_attr_avoid_fords_description">Nehir geçişlerinden kaçının</string>

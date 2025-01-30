@@ -3973,7 +3973,7 @@
     <string name="rendering_attr_weatherPressureContours_name">Linije jednakog pritiska</string>
     <string name="map_widget_trip_recording_uphill">Uzbrdo</string>
     <string name="map_widget_trip_recording_duration">Trajanje</string>
-    <string name="map_widget_trip_recording_distance">Rastojanje</string>
+    <string name="map_widget_distance">Rastojanje</string>
     <string name="routing_attr_hazmat_category_name">Vrsta opasnih materija</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (nema restrikcija)</string>
     <string name="coordinates_widget_secondary_desc">Oblik koordinata se može promeniti u %1$s – %2$s – %3$s.</string>
