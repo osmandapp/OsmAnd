@@ -5419,11 +5419,11 @@
 \nCPU (tempo de inatividade): %3$s
 \nCPU (à espera da GPU): %4$s</string>
     <string name="driving_region_uk">Reino Unido e similares</string>
-    <string name="ask_every_time">Perguntar todas as vezes</string>
-    <string name="detailed_track_guidance">Orientação pormenorizada do trilho</string>
+    <string name="ask_every_time">Perguntar sempre</string>
+    <string name="detailed_track_guidance">Orientação pormenorizada do percurso</string>
     <string name="shared_string_automatically">Automaticamente</string>
     <string name="hugerock_promo">Promoção Hugerock para %1$s meses</string>
-    <string name="detailed_track_guidance_description">O OsmAnd faz corresponder o seu trajeto a estradas próximas para uma melhor orientação curva a curva.</string>
+    <string name="detailed_track_guidance_description">O OsmAnd faz corresponder o seu trilho a estradas próximas para uma melhor orientação curva-a-curva.</string>
     <string name="quick_action_routes_summary">Uma opção para mostrar ou ocultar %1$s no mapa.</string>
     <string name="hugerock_promo_description">Acesso gratuito a funcionalidades, incluindo descarregamentos ilimitados de mapas, relevo 3D, etc. por %1$s /mês</string>
     <string name="driving_region_india">Índia</string>
@@ -5659,8 +5659,8 @@
     <string name="calculate_size">Calcular o tamanho</string>
     <string name="default_buttons_size_original_description">Cada botão manteria o seu próprio tamanho.</string>
     <string name="calculating_indication_message">A calcular…</string>
-    <string name="rendering_attr_showClimbingRoutes_name">Rotas de escalada</string>
-    <string name="rendering_attr_showClimbingRoutes_description">Mostrar rotas de escalada</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Percursos de escalada</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Mostrar percursos de escalada</string>
     <string name="default_buttons_corners_original_description">Cada botão manteria o seu próprio raio de cantos.</string>
     <string name="default_buttons_opacity_original_description">Cada botão manteria a sua própria opacidade de fundo.</string>
     <string name="display_distance_to_first_intermediate_summary">Mostra primeiro a hora e a distância para a próxima paragem. Desativar para mostrar sempre os detalhes do destino.</string>

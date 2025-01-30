@@ -2367,9 +2367,7 @@
     <string name="please_provide_profile_name_message">Unesi ime profila</string>
     <string name="select_data_to_import">Odaberi podatke za uvoz.</string>
     <string name="import_duplicates_title">Neke stavke već postoje</string>
-    <string name="import_duplicates_description">OsmAnd već ima jedinice sa istim imenom kao oni koji se uvoze. 
-\n 
-\nOdaberi radnju.</string>
+    <string name="import_duplicates_description">OsmAnd već ima jedinice sa istim imenom kao oni koji se uvoze.\n\nOdaberi radnju.</string>
     <string name="keep_both_desc">Uvežene stavke će biti dodate sa predlozima</string>
     <string name="keep_both">Zadrži obe</string>
     <string name="replace_all">Zameni sve</string>
@@ -4046,9 +4044,7 @@
     <string name="from_with_param">Od %1$s</string>
     <string name="contour_lines_hillshade_slope">Konturne linije, senke reljefa, nagib</string>
     <string name="verification_code_missing">Nisam dobio verifikacioni kôd</string>
-    <string name="backup_delete_old_data_warning">Izbrisaćete istoriju promena prethodno učitanih podataka. 
-\n 
-\nTrenutna verzija podataka biće sačuvana na serveru, ali nećete moći da se vratite na prethodno izvršene promene.</string>
+    <string name="backup_delete_old_data_warning">Izbrisaćete istoriju promena prethodno učitanih podataka.\n\nTrenutna verzija podataka biće sačuvana na serveru, ali nećete moći da se vratite na prethodno izvršene promene.</string>
     <string name="street_name_widget_desc">Widgžet za naziv ulice prikazuje naziv sa pravom strelicom lokacije ili narednu ulicu sa strelicom na sledeće skretanje.</string>
     <string name="simulation_constant_mode_title">Ista brzina</string>
     <string name="rendering_attr_showFitnessTrails_name">Fitnes staze</string>
@@ -4330,8 +4326,7 @@
     <string name="failed_loading_predefined_engines">Učitavanje liste predefinisanih šablona nije uspelo. 
 \nMolimo proverite internet vezu.</string>
     <string name="osmand_cloud_login_descr">Unesi adresu e-pošte sa kojom si se registrovao. Biće poslata jednokratna lozinka.</string>
-    <string name="osmand_cloud_create_account_descr">Unesi svoju adresu e-pošte, tamo će vam biti poslan verifikacioni kôd, 
-\ni svi vaši podaci će biti povezani sa njim.</string>
+    <string name="osmand_cloud_create_account_descr">Unesi svoju adresu e-pošte, tamo će vam biti poslan verifikacioni kôd,\ni svi vaši podaci će biti povezani sa njim.</string>
     <string name="restore_from_file">Vrati iz fajla</string>
     <string name="verify_email_address">Potvrdi e-mail</string>
     <string name="routing_attr_difficulty_preference_advanced_name">Napredan</string>
@@ -4756,10 +4751,7 @@
     <string name="external_sensor_widgets">Spoljašnji senzori</string>
     <string name="map_widget_camera_distance_desc">Pokazuje visinu kamere iznad površine.</string>
     <string name="bluetooth_connected">Povezan, %s</string>
-    <string name="ant_plus_nothing_found_description">Proveri da li je:
-\n- Blutut uključen 
-\n- Prijemnik uključen 
-\n- Ovaj uređaj smešten blizu senzora</string>
+    <string name="ant_plus_nothing_found_description">Proveri da li je:\n- Blutut uključen\n- Prijemnik uključen\n- Ovaj uređaj smešten blizu senzora</string>
     <string name="share_link">Deli link</string>
     <string name="shared_string_modified">Izmenjeno</string>
     <string name="map_settings_weather_cloud">Oblačnost</string>
@@ -5422,7 +5414,7 @@
     <string name="shared_string_automatically">Automatski</string>
     <string name="ask_every_time">Pitati svaki put</string>
     <string name="detailed_track_guidance">Detaljan vodič trasom</string>
-    <string name="detailed_track_guidance_description">OsmAnd prilagođava tvoju rutu s obližnjim putevima za bolju, detaljniju navigaciju.</string>
+    <string name="detailed_track_guidance_description">OsmAnd će uskladiti vašu stazu sa obližnjim putevima za poboljšano navođenje skretanje po skretanje.</string>
     <string name="quick_action_routes_summary">Prekidač za prikaz ili skrivanje %1$s na mapi.</string>
     <string name="compass_click_north_is_up">Da bi promenio režim orijentacije, klikni i drži</string>
     <string name="help_article_map_tracks_name">Putanje</string>

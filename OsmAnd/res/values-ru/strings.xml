@@ -5894,4 +5894,5 @@
     <string name="shared_string_avg_speed">Мин. скорость</string>
     <string name="popular_places_nearby">Популярные места поблизости</string>
     <string name="recently_visited">Недавно посещенные</string>
+    <string name="display_distance_to_first_intermediate">Показать детали маршрута до следующей остановки</string>
 </resources>

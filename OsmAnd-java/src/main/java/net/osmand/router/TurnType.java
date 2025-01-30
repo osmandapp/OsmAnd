@@ -4,6 +4,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 
 
 public class TurnType {
@@ -137,6 +138,7 @@ public class TurnType {
 	private int[] lanes;
 	private boolean possiblyLeftTurn;
 	private boolean possiblyRightTurn;
+	private List<Float> otherTurnAngles;
 
 	public TurnType(int value, int exitOut, float turnAngle, boolean skipToSpeak, int[] lanes,
 	                boolean possiblyLeftTurn, boolean possiblyRightTurn) {
@@ -611,5 +613,13 @@ public class TurnType {
 			}
 		}
 		return turn;
+	}
+
+	public List<Float> getOtherTurnAngles() {
+		return otherTurnAngles;
+	} 
+	
+	public void setOtherTurnAngles(List<Float> turnAngles) {
+		this.otherTurnAngles = turnAngles;
 	}
 }

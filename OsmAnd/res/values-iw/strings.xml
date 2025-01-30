@@ -4995,4 +4995,9 @@
     <string name="shared_string_avg_altitude">גובה ממוצע</string>
     <string name="shared_string_length">אורך</string>
     <string name="shared_string_avg_speed">מהירות מזערית</string>
+    <string name="rendering_attr_showClimbingRoutes_description">הצגת מסלולי טיפוס</string>
+    <string name="calculate_size">חישוב הגודל</string>
+    <string name="default_buttons_corners_original_description">כל כפתור ישמור על רדיוס הפינות שלו.</string>
+    <string name="default_buttons_size_original_description">על כל כפתור לשמור את הגודל שלו.</string>
+    <string name="calculating_indication_message">מתבצע חישוב…</string>
 </resources>
