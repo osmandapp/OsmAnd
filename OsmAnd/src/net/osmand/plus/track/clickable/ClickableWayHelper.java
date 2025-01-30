@@ -48,6 +48,8 @@ public class ClickableWayHelper {
             Set.of("piste:type", "piste:difficulty", "mtb:scale", "dirtbike:scale");
     public static final Map<String, String> FORBIDDEN_TAGS =
             Map.of("area", "yes", "access", "no", "aerialway", "*");
+    public static final Set<String> REQUIRED_TAGS_ANY =
+            Set.of("name", "ref");
     public static final Map<String, String> GPX_COLORS = Map.ofEntries(
             Map.entry("0", "brown"),
             Map.entry("1", "green"),
@@ -187,9 +189,13 @@ public class ClickableWayHelper {
                 return false;
             }
         }
-        for (String key : tags.keySet()) {
-            if (CLICKABLE_TAGS.contains(key)) {
-                return true;
+        for (String required : REQUIRED_TAGS_ANY) {
+            if (tags.containsKey(required)) {
+                for (String key : tags.keySet()) {
+                    if (CLICKABLE_TAGS.contains(key)) {
+                        return true;
+                    }
+                }
             }
         }
         return false;
