@@ -1,5 +1,8 @@
 package net.osmand.plus.views.mapwidgets.widgets.routeinfo;
 
+import static net.osmand.plus.views.mapwidgets.widgets.DistanceToPointWidget.DISTANCE_CHANGE_THRESHOLD;
+import static net.osmand.plus.views.mapwidgets.widgets.TimeToNavigationPointWidget.UPDATE_INTERVAL_SECONDS;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
@@ -51,8 +54,9 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	private boolean isFullRow;
 	private TextState textState;
 	private final RouteInfoCalculator calculator;
-	private List<DestinationInfo> calculatedRouteInfo;
+	private List<DestinationInfo> cachedRouteInfo;
 	private int cachedContentLayoutId;
+	private Integer cachedMetricSystem;
 
 	// views
 	private View buttonTappableArea;
@@ -165,10 +169,10 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		updateInfoInternal();
+		updateInfoInternal(false);
 	}
 
-	private void updateInfoInternal() {
+	private void updateInfoInternal(boolean forceUpdate) {
 		if (cachedContentLayoutId != getContentLayoutId()) {
 			// Recreating the widget is necessary because small widget size uses
 			// different layouts depending on the number of route points.
@@ -177,32 +181,37 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		}
 		boolean shouldHideTopWidgets = mapActivity.getWidgetsVisibilityHelper().shouldHideVerticalWidgets();
 		boolean typeAllowed = widgetType != null && widgetType.isAllowed();
-		boolean visible = typeAllowed && !shouldHideTopWidgets;
-		updateVisibility(visible);
-		if (visible) {
-			updateNavigationInfo();
+		if (typeAllowed && !shouldHideTopWidgets) {
+			updateRouteInformation(forceUpdate);
+		} else {
+			updateVisibility(false);
 		}
 	}
 
-	private void updateNavigationInfo() {
-		calculatedRouteInfo = calculator.calculateRouteInformation();
+	private void updateRouteInformation(boolean forceUpdate) {
+		List<DestinationInfo> calculatedRouteInfo = calculator.calculateRouteInformation();
 		if (Algorithms.isEmpty(calculatedRouteInfo)) {
 			updateVisibility(false);
 			return;
 		}
 		updateVisibility(true);
 
+		if (!forceUpdate && !isUpdateNeeded(calculatedRouteInfo)) {
+			return;
+		}
+		cachedRouteInfo = calculatedRouteInfo;
+
 		RouteInfoDisplayMode primaryDisplayMode = getDisplayMode(settings.getApplicationMode());
 		RouteInfoDisplayMode[] orderedDisplayModes = RouteInfoDisplayMode.values(primaryDisplayMode);
 
-		updatePrimaryBlock(calculatedRouteInfo.get(0), orderedDisplayModes);
+		updatePrimaryBlock(cachedRouteInfo.get(0), orderedDisplayModes);
 
 		if (secondaryBlock != null) {
 			boolean isSecondaryDataAvailable = isSecondaryDataAvailable();
 			AndroidUiHelper.setVisibility(isSecondaryDataAvailable, blocksDivider, secondaryBlock);
 
 			if (isSecondaryDataAvailable) {
-				updateSecondaryBlock(calculatedRouteInfo.get(1), orderedDisplayModes);
+				updateSecondaryBlock(cachedRouteInfo.get(1), orderedDisplayModes);
 			}
 		}
 	}
@@ -232,6 +241,25 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		displayData.put(RouteInfoDisplayMode.TIME_TO_GO, formatDuration(app, info.timeToGo()));
 		displayData.put(RouteInfoDisplayMode.DISTANCE, formatDistance(app, info.distance()));
 		return displayData;
+	}
+
+	private boolean isUpdateNeeded(@NonNull List<DestinationInfo> routeInfo) {
+		int metricSystem = app.getSettings().METRIC_SYSTEM.get().ordinal();
+		boolean metricSystemChanged = cachedMetricSystem == null || cachedMetricSystem != metricSystem;
+		cachedMetricSystem = metricSystem;
+		if (metricSystemChanged) {
+			return true;
+		}
+		if (Algorithms.isEmpty(cachedRouteInfo) || isDataChanged(cachedRouteInfo.get(0), routeInfo.get(0))) {
+			return true;
+		}
+		return cachedRouteInfo.size() > 1 && isDataChanged(cachedRouteInfo.get(1), routeInfo.get(1));
+	}
+
+	private boolean isDataChanged(@NonNull DestinationInfo i1, @NonNull DestinationInfo i2) {
+		int distanceDif = Math.abs(i1.distance() - i2.distance());
+		long timeToGoDif = Math.abs(i1.timeToGo() - i2.timeToGo());
+		return distanceDif > DISTANCE_CHANGE_THRESHOLD || timeToGoDif > UPDATE_INTERVAL_SECONDS * 1000L;
 	}
 
 	@Override
@@ -268,11 +296,11 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	@Override
 	public void recreateView() {
 		setupViews();
-		updateInfoInternal();
+		updateInfoInternal(true);
 	}
 
 	private boolean isSecondaryDataAvailable() {
-		return calculatedRouteInfo != null && calculatedRouteInfo.size() > 1;
+		return cachedRouteInfo != null && cachedRouteInfo.size() > 1;
 	}
 
 	@NonNull
