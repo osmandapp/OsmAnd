@@ -686,9 +686,10 @@ public class PointLocationLayer extends OsmandMapLayer
 			boolean dataChanged = !MapUtils.areLatLonEqual(prevLocation, location, HIGH_LATLON_PRECISION);
 			if (dataChanged) {
 				long movingTime = prevLocation != null ? location.getTime() - prevLocation.getTime() : 0;
-				if (prevLocation != null && getApplication().getRoutingHelper().isFollowingMode() && settings.LOCATION_INTERPOLATION_PERCENT.get() > 0) {
+				Integer interpolationPercent = settings.LOCATION_INTERPOLATION_PERCENT.get();
+				if (prevLocation != null && getApplication().getRoutingHelper().isFollowingMode() && interpolationPercent > 0) {
 					List<Location> predictedLocations = RoutingHelperUtils.predictLocations(prevLocation, location,
-							movingTime / 1000.0, getApplication().getRoutingHelper().getRoute());
+							movingTime / 1000.0, getApplication().getRoutingHelper().getRoute(), interpolationPercent);
 					if (!predictedLocations.isEmpty()) {
 						// At the moment we get the first predicted location, but there may be several of them
 						Location predictedLocation = predictedLocations.get(0);
