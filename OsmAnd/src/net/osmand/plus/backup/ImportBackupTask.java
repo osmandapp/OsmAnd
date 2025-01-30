@@ -283,7 +283,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 				}
 			} else if (item instanceof QuickActionsSettingsItem) {
 				if (item.exists()) {
-					duplicateItems.add(((QuickActionsSettingsItem) item).getButtonState());
+					duplicateItems.add(((QuickActionsSettingsItem) item).getStateBean());
 				}
 			}
 		}

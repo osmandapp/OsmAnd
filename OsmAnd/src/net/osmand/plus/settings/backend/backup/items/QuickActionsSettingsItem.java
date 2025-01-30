@@ -42,11 +42,17 @@ public class QuickActionsSettingsItem extends SettingsItem {
 	private QuickActionButtonState buttonState;
 
 	public QuickActionsSettingsItem(@NonNull OsmandApplication app,
-			@Nullable QuickActionsSettingsItem baseItem,
 			@NonNull QuickActionButtonState buttonState) {
-		super(app, baseItem);
+		super(app);
 		this.buttonState = buttonState;
 		this.stateBean = ButtonStateBean.toStateBean(buttonState);
+	}
+
+	public QuickActionsSettingsItem(@NonNull OsmandApplication app,
+			@Nullable QuickActionsSettingsItem baseItem, @NonNull ButtonStateBean stateBean) {
+		super(app, baseItem);
+		this.stateBean = stateBean;
+		this.buttonState = new QuickActionButtonState(app, stateBean.id);
 	}
 
 	public QuickActionsSettingsItem(@NonNull OsmandApplication app,
@@ -88,12 +94,12 @@ public class QuickActionsSettingsItem extends SettingsItem {
 
 	@Override
 	public boolean exists() {
-		return mapButtonsHelper.getActionButtonStateById(buttonState.getId()) != null;
+		return mapButtonsHelper.getActionButtonStateById(stateBean.id) != null;
 	}
 
 	@Override
 	public long getEstimatedSize() {
-		return (long) buttonState.getQuickActions().size() * APPROXIMATE_QUICK_ACTION_SIZE_BYTES;
+		return (long) stateBean.quickActions.size() * APPROXIMATE_QUICK_ACTION_SIZE_BYTES;
 	}
 
 	@Override
@@ -121,13 +127,13 @@ public class QuickActionsSettingsItem extends SettingsItem {
 	@NonNull
 	@Override
 	public String getName() {
-		return buttonState.getId();
+		return stateBean.id;
 	}
 
 	@NonNull
 	@Override
 	public String getPublicName(@NonNull Context ctx) {
-		return Algorithms.isEmpty(stateBean.name) ? ctx.getString(R.string.shared_string_quick_actions) : stateBean.name;
+		return stateBean.getName(ctx);
 	}
 
 	@Override
@@ -177,21 +183,24 @@ public class QuickActionsSettingsItem extends SettingsItem {
 		super.writeToJson(json);
 		try {
 			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("id", buttonState.getId());
-			jsonObject.put("name", buttonState.hasCustomName() ? buttonState.getName() : "");
-			jsonObject.put("enabled", buttonState.isEnabled());
+			jsonObject.put("id", stateBean.id);
 
-			if (buttonState.getIconPref().isSet()) {
-				jsonObject.put("icon", buttonState.getIconPref().get());
+			if (!Algorithms.isEmpty(stateBean.name)) {
+				jsonObject.put("name", stateBean.name);
 			}
-			if (buttonState.getSizePref().isSet()) {
-				jsonObject.put("size", buttonState.getSizePref().get());
+			jsonObject.put("enabled", stateBean.enabled);
+
+			if (!Algorithms.isEmpty(stateBean.icon)) {
+				jsonObject.put("icon", stateBean.icon);
 			}
-			if (buttonState.getCornerRadiusPref().isSet()) {
-				jsonObject.put("corner_radius", buttonState.getCornerRadiusPref().get());
+			if (stateBean.size > 0) {
+				jsonObject.put("size", stateBean.size);
 			}
-			if (buttonState.getOpacityPref().isSet()) {
-				jsonObject.put("opacity", buttonState.getOpacityPref().get());
+			if (stateBean.cornerRadius >= 0) {
+				jsonObject.put("corner_radius", stateBean.cornerRadius);
+			}
+			if (stateBean.opacity >= 0) {
+				jsonObject.put("opacity", stateBean.opacity);
 			}
 			json.put("buttonState", jsonObject);
 		} catch (JSONException e) {
@@ -209,33 +218,31 @@ public class QuickActionsSettingsItem extends SettingsItem {
 			Gson gson = new Gson();
 			Type type = new TypeToken<HashMap<String, String>>() {}.getType();
 
-			List<QuickAction> quickActions = new ArrayList<>();
-			MapButtonsHelper mapButtonsHelper = app.getMapButtonsHelper();
+			List<QuickAction> actions = new ArrayList<>();
 			JSONArray itemsJson = json.getJSONArray("items");
 			for (int i = 0; i < itemsJson.length(); i++) {
 				JSONObject object = itemsJson.getJSONObject(i);
 				String name = object.getString("name");
-				QuickAction quickAction = null;
+				QuickAction action = null;
 				if (object.has("actionType")) {
-					quickAction = mapButtonsHelper.newActionByStringType(object.getString("actionType"));
+					action = mapButtonsHelper.newActionByStringType(object.getString("actionType"));
 				} else if (object.has("type")) {
-					quickAction = mapButtonsHelper.newActionByType(object.getInt("type"));
+					action = mapButtonsHelper.newActionByType(object.getInt("type"));
 				}
-				if (quickAction != null) {
+				if (action != null) {
 					String paramsString = object.getString("params");
 					HashMap<String, String> params = gson.fromJson(paramsString, type);
 
 					if (!name.isEmpty()) {
-						quickAction.setName(name);
+						action.setName(name);
 					}
-					quickAction.setParams(params);
-					quickActions.add(quickAction);
+					action.setParams(params);
+					actions.add(action);
 				} else {
 					warnings.add(app.getString(R.string.settings_item_read_error, name));
 				}
 			}
-			mapButtonsHelper.updateQuickActions(buttonState, quickActions);
-			mapButtonsHelper.updateActiveActions();
+			stateBean.quickActions = actions;
 		} catch (JSONException e) {
 			warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
 			throw new IllegalArgumentException("Json parse error", e);
@@ -249,23 +256,25 @@ public class QuickActionsSettingsItem extends SettingsItem {
 		JSONArray jsonArray = new JSONArray();
 		Type type = new TypeToken<HashMap<String, String>>() {}.getType();
 
-		List<QuickAction> quickActions = buttonState.getQuickActions();
-		if (!Algorithms.isEmpty(quickActions)) {
-			try {
-				for (QuickAction action : quickActions) {
-					JSONObject jsonObject = new JSONObject();
-					jsonObject.put("name", action.hasCustomName(app) ? action.getName(app) : "");
-					jsonObject.put("actionType", action.getActionType().getStringId());
-					jsonObject.put("params", gson.toJson(action.getParams(), type));
-					jsonArray.put(jsonObject);
-				}
-				json.put("items", jsonArray);
-			} catch (JSONException e) {
-				warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
-				SettingsHelper.LOG.error("Failed write to json", e);
+		try {
+			for (QuickAction action : stateBean.quickActions) {
+				JSONObject jsonObject = new JSONObject();
+				jsonObject.put("name", action.hasCustomName(app) ? action.getName(app) : "");
+				jsonObject.put("actionType", action.getActionType().getStringId());
+				jsonObject.put("params", gson.toJson(action.getParams(), type));
+				jsonArray.put(jsonObject);
 			}
+			json.put("items", jsonArray);
+		} catch (JSONException e) {
+			warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
+			SettingsHelper.LOG.error("Failed write to json", e);
 		}
 		return json;
+	}
+
+	@Override
+	public boolean shouldReadOnCollecting() {
+		return true;
 	}
 
 	@Nullable

@@ -37,6 +37,7 @@ import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.mapwidgets.configure.buttons.ButtonStateBean;
 import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.shared.gpx.GpxHelper;
 import net.osmand.util.Algorithms;
@@ -130,10 +131,10 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 				int actualIconColor = customIconColor != null ?
 						customIconColor : ContextCompat.getColor(app, iconColor.getColor(nightMode));
 				itemHolder.icon.setImageDrawable(uiUtilities.getPaintedIcon(profileIconRes, actualIconColor));
-			} else if (currentItem instanceof QuickActionButtonState) {
-				QuickActionButtonState buttonState = (QuickActionButtonState) currentItem;
-				itemHolder.title.setText(buttonState.getName());
-				itemHolder.icon.setImageDrawable(buttonState.getIcon(ColorUtilities.getColor(app, activeColorRes), nightMode, false));
+			} else if (currentItem instanceof ButtonStateBean) {
+				ButtonStateBean stateBean = (ButtonStateBean) currentItem;
+				itemHolder.title.setText(stateBean.getName(app));
+				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(stateBean.getIconId(app), activeColorRes));
 			} else if (currentItem instanceof PoiUIFilter) {
 				PoiUIFilter filter = (PoiUIFilter) currentItem;
 				itemHolder.title.setText(filter.getName());
