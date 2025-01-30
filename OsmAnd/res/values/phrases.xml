@@ -4848,7 +4848,7 @@
 	<string name="poi_computer_parts_yes">Yes;Computer parts</string>
 	<string name="poi_computer_parts_no">Computer parts: no</string>
 
-	<string name="poi_climbing_crag">Yes;Climbing crag</string>
+	<string name="poi_climbing_crag">Climbing crag</string>
 
 	<string name="poi_museum_art">Art</string>
 	<string name="poi_museum_gallery">Gallery</string>

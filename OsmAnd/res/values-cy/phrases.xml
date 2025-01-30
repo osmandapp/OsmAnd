@@ -2397,7 +2397,7 @@
     <string name="poi_computer_repair_no">Atgyweirio cyfrifiaduron: na</string>
     <string name="poi_computer_parts_yes">Oes;Rhannau cyfrifiaduron</string>
     <string name="poi_computer_parts_no">Rhannau cyfrifiaduron: na</string>
-    <string name="poi_climbing_crag">Oes;Clogwyn ddringo</string>
+    <string name="poi_climbing_crag">Clogwyn ddringo</string>
     <string name="poi_museum_art">Celf</string>
     <string name="poi_museum_gallery">Oriel</string>
     <string name="poi_museum_transport">Trafnidiaeth</string>
