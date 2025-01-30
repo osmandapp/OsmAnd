@@ -28,7 +28,7 @@
     <string name="poi_communication">الاتصالات</string>
     <string name="poi_landuse">الأراضي المستخدمة</string>
     <string name="poi_education">تعليم</string>
-    <string name="poi_administrative">إداري</string>
+    <string name="poi_administrative">بلدان ومواضع</string>
     <string name="poi_sport">رياضة</string>
     <string name="poi_tourism">السياحة</string>
     <string name="poi_sightseeing">معالم سياحية</string>
@@ -36,7 +36,7 @@
     <string name="poi_sustenance">المواد الغذائية</string>
     <string name="poi_service">الخدمات</string>
     <string name="poi_craft">الحرف اليدوية</string>
-    <string name="poi_natural">طبيعة</string>
+    <string name="poi_natural">أماكن طبيعية</string>
     <string name="poi_military">عسكري</string>
     <string name="poi_user_defined_other">محددة من قبل المستخدم</string>
     <string name="poi_palaeontological_site">موقع الكتابات القديمة</string>
@@ -2462,7 +2462,7 @@
     <string name="poi_nuclear_explosion_country">انفجار: بلد</string>
     <string name="poi_protection_object_water">الكيان المحمي: المياه</string>
     <string name="poi_protection_object_habitat">الكيان المحمي: المسكن</string>
-    <string name="poi_protection_object_nature">الكيان المحمي: الطبيعة</string>
+    <string name="poi_protection_object_nature">محمية : طبيعة</string>
     <string name="poi_protection_object_historic">الكيان المحمي: تاريخي</string>
     <string name="poi_protection_title">عنوان الحماية</string>
     <string name="poi_bandy">باندي</string>
@@ -4225,7 +4225,7 @@
     <string name="poi_museum_war">حرب</string>
     <string name="poi_museum_aerospace">الفضاء</string>
     <string name="poi_museum_apis_mellifera">نحل العسل</string>
-    <string name="poi_museum_nature">الطبيعة</string>
+    <string name="poi_museum_nature">طبيعي</string>
     <string name="poi_museum_paleontology">علم الحفريات</string>
     <string name="poi_museum_history">التاريخ</string>
     <string name="poi_museum_living_history">التاريخ الحي</string>
@@ -4304,7 +4304,7 @@
     <string name="poi_fish_pass">معبر أسماك</string>
     <string name="poi_laundry_service_yes">نعم</string>
     <string name="poi_board_type_wildlife">الحياة البرية</string>
-    <string name="poi_board_type_nature">طبيعة</string>
+    <string name="poi_board_type_nature">طبيعية</string>
     <string name="poi_food_no">الطعام: لا</string>
     <string name="poi_payment_american_express_contactless_yes">بطاقة أمريكان إكسبرس الذكية (AMEX)</string>
     <string name="poi_payment_maestro_contactless_yes">بطاقة مايسترو الذكية</string>
