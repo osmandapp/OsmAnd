@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.development;
 
 import static net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.showResetSettingsDialog;
+import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 import static net.osmand.plus.simulation.OsmAndLocationSimulation.LocationSimulationListener;
 
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.os.Debug;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -23,6 +25,8 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BooleanRadioButtonsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.simulation.SimulateLocationFragment;
@@ -30,8 +34,9 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.SunriseSunset;
 
 import java.text.SimpleDateFormat;
+import java.util.Optional;
 
-public class DevelopmentSettingsFragment extends BaseSettingsFragment implements ConfirmationDialogListener {
+public class DevelopmentSettingsFragment extends BaseSettingsFragment implements ConfirmationDialogListener, ShowableSearchablePreferenceDialogProvider {
 
 	private static final String SIMULATE_INITIAL_STARTUP = "simulate_initial_startup";
 	private static final String SIMULATE_YOUR_LOCATION = "simulate_your_location";
@@ -286,7 +291,8 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		// in microamperes (µA) as specified in the API documentation.
 		if (Math.abs(m1.energyConsumption) > AUTO_DETECT_MICROAMPERES) m1.energyConsumption /= 1000;
 		if (Math.abs(m5.energyConsumption) > AUTO_DETECT_MICROAMPERES) m5.energyConsumption /= 1000;
-		if (Math.abs(m15.energyConsumption) > AUTO_DETECT_MICROAMPERES) m15.energyConsumption /= 1000;
+		if (Math.abs(m15.energyConsumption) > AUTO_DETECT_MICROAMPERES)
+			m15.energyConsumption /= 1000;
 
 		String fps = String.format("%.0f / %.0f / %.0f", m1.fps1k, m5.fps1k, m15.fps1k);
 		String gpu = String.format("%.2f / %.2f / %.2f", m1.gpu1k, m5.gpu1k, m15.gpu1k);
@@ -311,12 +317,8 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		String prefId = preference.getKey();
-		if (SIMULATE_YOUR_LOCATION.equals(prefId)) {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				SimulateLocationFragment.showInstance(activity.getSupportFragmentManager(), null, false);
-			}
+		final String prefId = preference.getKey();
+		if (showDialogForPreference(preference, this)) {
 			return true;
 		} else if (SIMULATE_INITIAL_STARTUP.equals(prefId)) {
 			app.getAppInitializer().resetFirstTimeRun();
@@ -337,16 +339,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 				preference.setSummary(getAgpsDataDownloadedSummary());
 			}
 			return true;
-		} else if (settings.LOCATION_INTERPOLATION_PERCENT.getId().equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				LocationInterpolationBottomSheet.showInstance(fragmentManager, preference.getKey(), this, getSelectedAppMode());
-			}
-		} else if (settings.MEMORY_ALLOCATED_FOR_ROUTING.getId().equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				AllocatedRoutingMemoryBottomSheet.showInstance(fragmentManager, preference.getKey(), this, getSelectedAppMode());
-			}
 		} else if (RESET_TO_DEFAULT.equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
@@ -354,6 +346,61 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 			}
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Optional<Fragment> target) {
+		if (SIMULATE_YOUR_LOCATION.equals(preference.getKey())) {
+			return Optional.of(
+					new ShowableSearchablePreferenceDialog<>(
+							SimulateLocationFragment.createInstance(
+									null,
+									false)) {
+
+						@Override
+						protected void show(final SimulateLocationFragment simulateLocationFragment) {
+							final FragmentActivity activity = getActivity();
+							if (activity != null) {
+								simulateLocationFragment.show(activity.getSupportFragmentManager());
+							}
+						}
+					});
+		}
+		if (settings.MEMORY_ALLOCATED_FOR_ROUTING.getId().equals(preference.getKey())) {
+			return Optional.of(
+					new ShowableSearchablePreferenceDialog<>(
+							AllocatedRoutingMemoryBottomSheet.createInstance(
+									preference.getKey(),
+									target.orElse(null),
+									getSelectedAppMode())) {
+
+						@Override
+						protected void show(final AllocatedRoutingMemoryBottomSheet allocatedRoutingMemoryBottomSheet) {
+							final FragmentManager fragmentManager = getFragmentManager();
+							if (fragmentManager != null) {
+								allocatedRoutingMemoryBottomSheet.show(fragmentManager);
+							}
+						}
+					});
+		}
+		if (settings.LOCATION_INTERPOLATION_PERCENT.getId().equals(preference.getKey())) {
+			return Optional.of(
+					new ShowableSearchablePreferenceDialog<>(
+							LocationInterpolationBottomSheet.createInstance(
+									preference,
+									target,
+									getSelectedAppMode())) {
+
+						@Override
+						protected void show(final LocationInterpolationBottomSheet locationInterpolationBottomSheet) {
+							final FragmentManager fragmentManager = getFragmentManager();
+							if (fragmentManager != null) {
+								locationInterpolationBottomSheet.show(fragmentManager);
+							}
+						}
+					});
+		}
+		return Optional.empty();
 	}
 
 	@Override

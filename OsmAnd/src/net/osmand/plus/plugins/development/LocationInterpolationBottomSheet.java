@@ -9,9 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
 
 import com.google.android.material.slider.Slider;
 
@@ -23,15 +23,18 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
+import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheetInitializer;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class LocationInterpolationBottomSheet extends BasePreferenceBottomSheet {
+public class LocationInterpolationBottomSheet extends BasePreferenceBottomSheet implements SearchablePreferenceDialog {
 
 	public static final String TAG = LocationInterpolationBottomSheet.class.getSimpleName();
 
@@ -73,11 +76,8 @@ public class LocationInterpolationBottomSheet extends BasePreferenceBottomSheet 
 	public void createMenuItems(Bundle savedInstanceState) {
 		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
 
-		String title = getString(R.string.location_interpolation_percent);
-		items.add(new TitleItem(title));
-
-		String description = getString(R.string.location_interpolation_percent_desc);
-		items.add(new LongDescriptionItem(description));
+		items.add(new TitleItem(getTitle()));
+		items.add(new LongDescriptionItem(getDescription()));
 
 		View view = inflater.inflate(R.layout.bottom_sheet_allocated_routing_memory, null);
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(view).create());
@@ -87,6 +87,16 @@ public class LocationInterpolationBottomSheet extends BasePreferenceBottomSheet 
 
 		View buttonView = view.findViewById(R.id.button_container);
 		setupResetButton(buttonView);
+	}
+
+	@NonNull
+	private String getTitle() {
+		return getString(R.string.location_interpolation_percent);
+	}
+
+	@NonNull
+	private String getDescription() {
+		return getString(R.string.location_interpolation_percent_desc);
 	}
 
 	@SuppressLint("SetTextI18n")
@@ -161,7 +171,7 @@ public class LocationInterpolationBottomSheet extends BasePreferenceBottomSheet 
 
 	private List<Integer> getAvailableRange() {
 		List<Integer> powRange = new ArrayList<>();
-		for (int i = 0; i <= 100; i+=10) {
+		for (int i = 0; i <= 100; i += 10) {
 			powRange.add(i);
 		}
 		return powRange;
@@ -180,19 +190,23 @@ public class LocationInterpolationBottomSheet extends BasePreferenceBottomSheet 
 		return initialValue != currentValue;
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager,
-	                                @NonNull String key,
-	                                @NonNull Fragment target,
-	                                @Nullable ApplicationMode appMode) {
+	public static LocationInterpolationBottomSheet createInstance(final Preference preference,
+																  final Optional<Fragment> target,
+																  final ApplicationMode appMode) {
+		return BasePreferenceBottomSheetInitializer
+				.initialize(new LocationInterpolationBottomSheet())
+				.with(Optional.of(preference), appMode, false, target);
+	}
+
+	@Override
+	public void show(final FragmentManager fragmentManager) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			Bundle args = new Bundle();
-			args.putString(PREFERENCE_ID, key);
-			LocationInterpolationBottomSheet fragment = new LocationInterpolationBottomSheet();
-			fragment.setArguments(args);
-			fragment.setUsedOnMap(false);
-			fragment.setAppMode(appMode);
-			fragment.setTargetFragment(target, 0);
-			fragment.show(fragmentManager, TAG);
+			show(fragmentManager, TAG);
 		}
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		return String.join(", ", getTitle(), getDescription());
 	}
 }

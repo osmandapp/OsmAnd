@@ -7,6 +7,9 @@ import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.SECONDS;
 import static net.osmand.plus.settings.backend.OsmandSettings.MONTHLY_DIRECTORY;
 import static net.osmand.plus.settings.backend.OsmandSettings.REC_DIRECTORY;
 import static net.osmand.plus.settings.controllers.BatteryOptimizationController.isIgnoringBatteryOptimizations;
+import static net.osmand.plus.settings.fragments.ResetProfilePrefsBottomSheetFactory.createResetProfilePrefsBottomSheet;
+import static net.osmand.plus.settings.fragments.SelectCopyAppModeBottomSheetFactory.createSelectCopyAppModeBottomSheet;
+import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -32,23 +35,22 @@ import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
-import net.osmand.plus.plugins.odb.VehicleMetricsPlugin;
-import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorTrackDataType;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
-import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
+import net.osmand.plus.plugins.odb.VehicleMetricsPlugin;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
-import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.bottomsheets.SingleSelectPreferenceBottomSheet;
 import net.osmand.plus.settings.controllers.BatteryOptimizationController;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.track.fragments.controller.SelectRouteActivityController;
@@ -56,6 +58,7 @@ import net.osmand.plus.track.helpers.RouteActivitySelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.util.Algorithms;
 
@@ -63,8 +66,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Optional;
 
-public class MonitoringSettingsFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
+public class MonitoringSettingsFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener, ShowableSearchablePreferenceDialogProvider {
 
 	private static final String DISABLE_BATTERY_OPTIMIZATION = "disable_battery_optimization";
 	private static final String COPY_PLUGIN_SETTINGS = "copy_plugin_settings";
@@ -457,7 +461,21 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	}
 
 	@Override
-	public boolean onPreferenceClick(Preference preference) {
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Optional<Fragment> target) {
+		if (RESET_TO_DEFAULT.equals(preference.getKey())) {
+			return Optional.of(createResetProfilePrefsBottomSheet(target, this));
+		}
+		if (COPY_PLUGIN_SETTINGS.equals(preference.getKey())) {
+			return Optional.of(createSelectCopyAppModeBottomSheet(target, this));
+		}
+		return Optional.empty();
+	}
+
+	@Override
+	public boolean onPreferenceClick(final Preference preference) {
+		if (showDialogForPreference(preference, this)) {
+			return true;
+		}
 		String prefId = preference.getKey();
 		if (OPEN_TRACKS.equals(prefId)) {
 			Bundle bundle = new Bundle();
@@ -469,16 +487,6 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 			favorites.putExtra(MapActivity.INTENT_PARAMS, bundle);
 			startActivity(favorites);
 			return true;
-		} else if (COPY_PLUGIN_SETTINGS.equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, getSelectedAppMode());
-			}
-		} else if (RESET_TO_DEFAULT.equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, getSelectedAppMode(), this);
-			}
 		} else if (DISABLE_BATTERY_OPTIMIZATION.endsWith(prefId)) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {

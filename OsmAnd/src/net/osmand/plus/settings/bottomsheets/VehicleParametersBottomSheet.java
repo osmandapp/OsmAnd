@@ -2,28 +2,32 @@ package net.osmand.plus.settings.bottomsheets;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
+import android.widget.TextView;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.fragments.ApplyQueryType;
+import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
+import net.osmand.plus.settings.preferences.SizePreference;
 import net.osmand.plus.settings.vehiclesize.SizeData;
 import net.osmand.plus.settings.vehiclesize.SizeType;
 import net.osmand.plus.settings.vehiclesize.VehicleSizes;
-import net.osmand.plus.settings.fragments.ApplyQueryType;
-import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
-import net.osmand.plus.settings.preferences.SizePreference;
 import net.osmand.plus.settings.vehiclesize.containers.Metric;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.chips.ChipItem;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
@@ -33,8 +37,11 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
+public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet implements SearchablePreferenceDialog {
 	private static final Log LOG = PlatformUtil.getLog(VehicleParametersBottomSheet.class);
 	public static final String TAG = VehicleParametersBottomSheet.class.getSimpleName();
 
@@ -129,21 +136,39 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 		return formatter.format(input);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, String key, Fragment target,
-	                                boolean usedOnMap, @Nullable ApplicationMode appMode) {
+	@NonNull
+	public static VehicleParametersBottomSheet createInstance(final Preference preference,
+															  final Optional<Fragment> target,
+															  final boolean usedOnMap,
+															  final @Nullable ApplicationMode appMode) {
+		final VehicleParametersBottomSheet bottomSheet = new VehicleParametersBottomSheet();
+		bottomSheet.setConfigureSettingsSearch(target.isEmpty());
+		return BasePreferenceBottomSheetInitializer
+				.initialize(bottomSheet)
+				.with(Optional.of(preference), appMode, usedOnMap, target);
+	}
+
+	@Override
+	public void show(final FragmentManager fragmentManager) {
 		try {
-			if (!fm.isStateSaved()) {
-				Bundle args = new Bundle();
-				args.putString(PREFERENCE_ID, key);
-				VehicleParametersBottomSheet fragment = new VehicleParametersBottomSheet();
-				fragment.setArguments(args);
-				fragment.setUsedOnMap(usedOnMap);
-				fragment.setAppMode(appMode);
-				fragment.setTargetFragment(target, 0);
-				fragment.show(fm, TAG);
+			if (!fragmentManager.isStateSaved()) {
+				show(fragmentManager, TAG);
 			}
-		} catch (RuntimeException e) {
+		} catch (final RuntimeException e) {
 			LOG.error("showInstance", e);
 		}
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		return Stream
+				.of(R.id.title, R.id.description)
+				.map(this::_getText)
+				.collect(Collectors.joining(", "));
+	}
+
+	private CharSequence _getText(final @IdRes int id) {
+		final View mainView = items.get(0).getView();
+		return mainView.<TextView>findViewById(id).getText();
 	}
 }

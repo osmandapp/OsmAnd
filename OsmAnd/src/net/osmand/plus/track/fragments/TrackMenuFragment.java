@@ -64,7 +64,6 @@ import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -99,6 +98,7 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
+import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.simulation.SimulateLocationFragment;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.cards.AuthorCard;
@@ -1259,7 +1259,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					showTrackAltitudeDialog(-1);
 				}
 			} else if (buttonIndex == SIMULATE_POSITION_BUTTON_INDEX) {
-				SimulateLocationFragment.showInstance(fragmentManager, gpxFile, true);
+				SimulateLocationFragment
+						.createInstance(gpxFile, true)
+						.show(fragmentManager);
 			} else if (buttonIndex == DELETE_BUTTON_INDEX) {
 				String fileName = Algorithms.getFileWithoutDirs(gpxFile.getPath());
 

@@ -147,9 +147,9 @@ public class DefaultMapButtonFragment extends BaseOsmAndFragment implements Copy
 				.setOnClickListener(v -> {
 					FragmentActivity activity = getActivity();
 					if (activity != null) {
-						ApplicationMode appMode = settings.getApplicationMode();
-						FragmentManager manager = activity.getSupportFragmentManager();
-						SelectCopyAppModeBottomSheet.showInstance(manager, this, appMode);
+						SelectCopyAppModeBottomSheet
+								.createInstance(this, settings.getApplicationMode())
+								.show(activity.getSupportFragmentManager());
 					}
 				}).create());
 

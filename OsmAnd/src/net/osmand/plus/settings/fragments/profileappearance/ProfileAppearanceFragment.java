@@ -1,6 +1,7 @@
 package net.osmand.plus.settings.fragments.profileappearance;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 import static net.osmand.plus.utils.ColorUtilities.getListBgColorId;
 
 import android.annotation.SuppressLint;
@@ -38,9 +39,12 @@ import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
 import net.osmand.plus.card.icon.IconsPaletteCard;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.settings.fragments.ProfileOptionsDialogController;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -51,7 +55,9 @@ import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 
 import org.apache.commons.logging.Log;
 
-public class ProfileAppearanceFragment extends BaseSettingsFragment implements IProfileAppearanceScreen {
+import java.util.Optional;
+
+public class ProfileAppearanceFragment extends BaseSettingsFragment implements IProfileAppearanceScreen, ShowableSearchablePreferenceDialogProvider {
 
 	private static final Log LOG = PlatformUtil.getLog(ProfileAppearanceFragment.class);
 
@@ -225,19 +231,52 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 	}
 
 	@Override
-	public boolean onPreferenceClick(Preference preference) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			ProfileOptionsDialogController optionsDialogController = screenController.getProfileOptionController();
-			if (settings.VIEW_ANGLE_VISIBILITY.getId().equals(preference.getKey())) {
-				optionsDialogController.showDialog(mapActivity, app.getString(R.string.view_angle),
-						app.getString(R.string.view_angle_description), settings.VIEW_ANGLE_VISIBILITY);
-			} else if (settings.LOCATION_RADIUS_VISIBILITY.getId().equals(preference.getKey())) {
-				optionsDialogController.showDialog(mapActivity, app.getString(R.string.location_radius),
-						app.getString(R.string.location_radius_description), settings.LOCATION_RADIUS_VISIBILITY);
-			}
+	public boolean onPreferenceClick(final Preference preference) {
+		if (showDialogForPreference(preference, this)) {
+			return true;
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Optional<Fragment> target) {
+		if (settings.VIEW_ANGLE_VISIBILITY.getId().equals(preference.getKey())) {
+			return Optional.of(
+					new ShowableSearchablePreferenceDialog<>(
+							screenController
+									.getProfileOptionController()
+									.createDialog(
+											app.getString(R.string.view_angle),
+											app.getString(R.string.view_angle_description),
+											settings.VIEW_ANGLE_VISIBILITY)) {
+
+						@Override
+						protected void show(final CustomizableSingleSelectionBottomSheet customizableSingleSelectionBottomSheet) {
+							ProfileAppearanceFragment.this.show(customizableSingleSelectionBottomSheet);
+						}
+					});
+		}
+		if (settings.LOCATION_RADIUS_VISIBILITY.getId().equals(preference.getKey())) {
+			return Optional.of(
+					new ShowableSearchablePreferenceDialog<>(
+							screenController
+									.getProfileOptionController()
+									.createDialog(
+											app.getString(R.string.location_radius),
+											app.getString(R.string.location_radius_description),
+											settings.LOCATION_RADIUS_VISIBILITY)) {
+
+						@Override
+						protected void show(final CustomizableSingleSelectionBottomSheet customizableSingleSelectionBottomSheet) {
+							ProfileAppearanceFragment.this.show(customizableSingleSelectionBottomSheet);
+						}
+					});
+		}
+		return Optional.empty();
+	}
+
+	private void show(final SearchablePreferenceDialog searchablePreferenceDialog) {
+		searchablePreferenceDialog.show(requireActivity().getSupportFragmentManager());
 	}
 
 	private void bindCard(@NonNull PreferenceViewHolder holder, @NonNull BaseCard card) {
@@ -378,7 +417,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements I
 	}
 
 	public static boolean showInstance(@NonNull FragmentActivity activity,
-	                                   @Nullable String appModeKey, boolean imported) {
+									   @Nullable String appModeKey, boolean imported) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Fragment fragment = Fragment.instantiate(activity, TAG);

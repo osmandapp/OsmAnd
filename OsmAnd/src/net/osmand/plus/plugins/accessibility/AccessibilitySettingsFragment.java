@@ -1,6 +1,9 @@
 package net.osmand.plus.plugins.accessibility;
 
 import static net.osmand.plus.plugins.PluginInfoFragment.PLUGIN_INFO;
+import static net.osmand.plus.settings.fragments.ResetProfilePrefsBottomSheetFactory.createResetProfilePrefsBottomSheet;
+import static net.osmand.plus.settings.fragments.SelectCopyAppModeBottomSheetFactory.createSelectCopyAppModeBottomSheet;
+import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +17,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
@@ -23,16 +26,18 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
-public class AccessibilitySettingsFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
+import java.util.Optional;
+
+public class AccessibilitySettingsFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener, ShowableSearchablePreferenceDialogProvider {
 
 	private static final String ACCESSIBILITY_OPTIONS = "accessibility_options";
 	private static final String COPY_PLUGIN_SETTINGS = "copy_plugin_settings";
@@ -250,20 +255,22 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 	}
 
 	@Override
-	public boolean onPreferenceClick(Preference preference) {
-		String prefId = preference.getKey();
-		if (COPY_PLUGIN_SETTINGS.equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, getSelectedAppMode());
-			}
-		} else if (RESET_TO_DEFAULT.equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, getSelectedAppMode(), this);
-			}
+	public boolean onPreferenceClick(final Preference preference) {
+		if (showDialogForPreference(preference, this)) {
+			return true;
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Optional<Fragment> target) {
+		if (RESET_TO_DEFAULT.equals(preference.getKey())) {
+			return Optional.of(createResetProfilePrefsBottomSheet(target, this));
+		}
+		if (COPY_PLUGIN_SETTINGS.equals(preference.getKey())) {
+			return Optional.of(createSelectCopyAppModeBottomSheet(target, this));
+		}
+		return Optional.empty();
 	}
 
 	@Override

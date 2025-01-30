@@ -1,100 +1,121 @@
 package net.osmand.plus.dialogs;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.view.LayoutInflater;
+import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatRadioButton;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializeListener;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.widgets.TextViewEx;
 
-public class MapRenderingEngineDialog {
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class MapRenderingEngineDialog extends DialogFragment implements SearchablePreferenceDialog {
+
 	private final OsmandApplication app;
 	private final FragmentActivity fragmentActivity;
-	private AppCompatRadioButton radioButtonLegacy;
-	private AppCompatRadioButton radioButtonOpengl;
-	private AlertDialog alertDialog;
+	@Nullable
+	private final OnRenderChangeListener renderChangeListener;
 
-	public MapRenderingEngineDialog(OsmandApplication app, FragmentActivity fragmentActivity) {
+	public MapRenderingEngineDialog(final OsmandApplication app,
+									final FragmentActivity fragmentActivity,
+									@Nullable final OnRenderChangeListener renderChangeListener) {
 		this.app = app;
 		this.fragmentActivity = fragmentActivity;
+		this.renderChangeListener = renderChangeListener;
 	}
 
-	private AlertDialog createDialog(@Nullable OnRenderChangeListener renderChangeListener) {
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		Context themedContext = UiUtilities.getThemedContext(fragmentActivity, nightMode);
-		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
-		View alertDialogView = LayoutInflater.from(themedContext).inflate(R.layout.alert_dialog_message_with_choice_list, null, false);
+	@NonNull
+	@Override
+	public Dialog onCreateDialog(@Nullable final Bundle savedInstanceState) {
+		AlertDialog.Builder builder =
+				new AlertDialog.Builder(
+						UiUtilities.getThemedContext(
+								fragmentActivity,
+								app.getDaynightHelper().isNightModeForMapControls()));
+		final View alertDialogView = getLayoutInflater().inflate(R.layout.alert_dialog_message_with_choice_list, null, false);
 		builder.setView(alertDialogView);
 
-		View legacyRenderingView = alertDialogView.findViewById(R.id.legacy_rendering);
-		radioButtonLegacy = setupRadioItem(legacyRenderingView, app.getResources().getString(R.string.map_rendering_engine_v1));
-		View openglRenderingView = alertDialogView.findViewById(R.id.opengl_rendering);
-		radioButtonOpengl = setupRadioItem(openglRenderingView, app.getResources().getString(R.string.map_rendering_engine_v2));
-		updateRadioButtons(app.getSettings().USE_OPENGL_RENDER.get());
+		final View legacyRenderingView = alertDialogView.findViewById(R.id.legacy_rendering);
+		final AppCompatRadioButton radioButtonLegacy = setupRadioItem(legacyRenderingView, app.getString(getMapRenderingEngineV1()));
+		final View openglRenderingView = alertDialogView.findViewById(R.id.opengl_rendering);
+		final AppCompatRadioButton radioButtonOpengl = setupRadioItem(openglRenderingView, app.getString(getMapRenderingEngineV2()));
+		updateRadioButtons(app.getSettings().USE_OPENGL_RENDER.get(), radioButtonLegacy, radioButtonOpengl);
 		radioButtonOpengl.setEnabled(Version.isOpenGlAvailable(app));
 		openglRenderingView.findViewById(R.id.button).setEnabled(Version.isOpenGlAvailable(app));
-
 		legacyRenderingView.findViewById(R.id.button).setOnClickListener(view -> {
-			updateRenderingEngineSetting(false, renderChangeListener);
-			alertDialog.dismiss();
+			updateRenderingEngineSetting(false, radioButtonLegacy, radioButtonOpengl);
+			dismiss();
 		});
-
 		openglRenderingView.findViewById(R.id.button).setOnClickListener(view -> {
-			updateRenderingEngineSetting(true, renderChangeListener);
-			alertDialog.dismiss();
+			updateRenderingEngineSetting(true, radioButtonLegacy, radioButtonOpengl);
+			dismiss();
 		});
 		return builder.create();
 	}
 
+	private static @StringRes int getMapRenderingEngineV1() {
+		return R.string.map_rendering_engine_v1;
+	}
+
+	private static @StringRes int getMapRenderingEngineV2() {
+		return R.string.map_rendering_engine_v2;
+	}
+
 	private AppCompatRadioButton setupRadioItem(View view, String name) {
-		AppCompatRadioButton radioButton = view.findViewById(R.id.radio);
-		TextViewEx text = view.findViewById(R.id.text);
+		final AppCompatRadioButton radioButton = view.findViewById(R.id.radio);
+		final TextViewEx text = view.findViewById(R.id.text);
 		text.setText(name);
 		radioButton.setVisibility(View.VISIBLE);
-
 		return radioButton;
 	}
 
-	private void updateRenderingEngineSetting(boolean openglEnabled, @Nullable OnRenderChangeListener listener) {
-		updateRadioButtons(openglEnabled);
+	private void updateRenderingEngineSetting(final boolean openglEnabled,
+											  final AppCompatRadioButton radioButtonLegacy,
+											  final AppCompatRadioButton radioButtonOpengl) {
+		updateRadioButtons(openglEnabled, radioButtonLegacy, radioButtonOpengl);
 		app.getSettings().USE_OPENGL_RENDER.set(openglEnabled);
 
 		if (app.isApplicationInitializing()) {
-			String title = app.getString(R.string.loading_smth, "");
-			ProgressDialog progress = ProgressDialog.show(fragmentActivity, title, app.getString(R.string.loading_data));
+			final String title = app.getString(R.string.loading_smth, "");
+			final ProgressDialog progress = ProgressDialog.show(fragmentActivity, title, app.getString(R.string.loading_data));
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
 				public void onFinish(@NonNull AppInitializer init) {
 					if (AndroidUtils.isActivityNotDestroyed(fragmentActivity)) {
 						progress.dismiss();
 					}
-					updateRenderingEngine(openglEnabled, listener);
+					updateRenderingEngine(openglEnabled);
 				}
 			});
 		} else {
-			updateRenderingEngine(openglEnabled, listener);
+			updateRenderingEngine(openglEnabled);
 		}
 	}
 
-	private void updateRenderingEngine(boolean openglEnabled, @Nullable OnRenderChangeListener listener) {
+	private void updateRenderingEngine(boolean openglEnabled) {
 		if (openglEnabled && !NativeCoreContext.isInit()) {
-			String title = app.getString(R.string.loading_smth, "");
-			ProgressDialog progress = ProgressDialog.show(fragmentActivity, title, app.getString(R.string.loading_data));
+			final String title = app.getString(R.string.loading_smth, "");
+			final ProgressDialog progress = ProgressDialog.show(fragmentActivity, title, app.getString(R.string.loading_data));
 			app.getAppInitializer().initOpenglAsync(() -> {
 				updateDependentAppComponents();
 				if (AndroidUtils.isActivityNotDestroyed(fragmentActivity)) {
@@ -107,15 +128,15 @@ public class MapRenderingEngineDialog {
 				app.getOsmandMap().getMapLayers().getMapVectorLayer().setAlpha(255);
 			}
 		}
-		if (listener != null) {
-			listener.onRenderChange();
+		if (renderChangeListener != null) {
+			renderChangeListener.onRenderChange();
 		}
 	}
 
 	private void updateDependentAppComponents() {
 		app.getOsmandMap().setupRenderingView();
 
-		MapActivity mapActivity = app.getOsmandMap().getMapView().getMapActivity();
+		final MapActivity mapActivity = app.getOsmandMap().getMapView().getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.refreshMapComplete();
 		}
@@ -123,14 +144,27 @@ public class MapRenderingEngineDialog {
 		app.getDownloadThread().runReloadIndexFilesSilent();
 	}
 
-	private void updateRadioButtons(boolean openglEnabled) {
+	private void updateRadioButtons(final boolean openglEnabled,
+									final AppCompatRadioButton radioButtonLegacy,
+									final AppCompatRadioButton radioButtonOpengl) {
 		radioButtonLegacy.setChecked(!openglEnabled);
 		radioButtonOpengl.setChecked(openglEnabled);
 	}
 
-	public void showDialog(@Nullable OnRenderChangeListener renderChangeListener) {
-		alertDialog = createDialog(renderChangeListener);
-		alertDialog.show();
+	@Override
+	public void show(final FragmentManager fragmentManager) {
+		show(fragmentManager, null);
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		return Stream
+				.of(
+						R.string.map_rendering_engine_descr,
+						getMapRenderingEngineV1(),
+						getMapRenderingEngineV2())
+				.map(app::getString)
+				.collect(Collectors.joining(", "));
 	}
 
 	public interface OnRenderChangeListener {

@@ -11,6 +11,10 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
+import androidx.test.espresso.matcher.BoundedMatcher;
 
 public class Matchers {
 
@@ -59,6 +63,32 @@ public class Matchers {
 			@Override
 			public void describeTo(Description description) {
 				description.appendText("locale name '" + localeName + "'");
+			}
+		};
+	}
+
+	// adapted from https://stackoverflow.com/a/53289078/12982352
+	public static Matcher<View> recyclerViewHasItem(final Matcher<View> matcher) {
+		return new BoundedMatcher<>(RecyclerView.class) {
+
+			@Override
+			public void describeTo(Description description) {
+				description.appendText("has item: ");
+				matcher.describeTo(description);
+			}
+
+			@Override
+			protected boolean matchesSafely(final RecyclerView view) {
+				final Adapter adapter = view.getAdapter();
+				for (int position = 0; position < adapter.getItemCount(); position++) {
+					final int type = adapter.getItemViewType(position);
+					final ViewHolder holder = adapter.createViewHolder(view, type);
+					adapter.onBindViewHolder(holder, position);
+					if (matcher.matches(holder.itemView)) {
+						return true;
+					}
+				}
+				return false;
 			}
 		};
 	}

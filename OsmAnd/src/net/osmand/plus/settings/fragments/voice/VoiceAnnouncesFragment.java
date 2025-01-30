@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.fragments.voice;
 
+import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
 import android.graphics.drawable.ColorDrawable;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
@@ -25,16 +27,21 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.AnnouncementTimeBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SpeedLimitBottomSheet;
-import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.shared.settings.enums.SpeedConstants;
 
-public class VoiceAnnouncesFragment extends BaseSettingsFragment {
+import java.util.Optional;
+
+public class VoiceAnnouncesFragment extends BaseSettingsFragment implements ShowableSearchablePreferenceDialogProvider {
 
 	public static final String TAG = VoiceAnnouncesFragment.class.getSimpleName();
 
@@ -247,17 +254,53 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	public void onDisplayPreferenceDialog(Preference preference) {
-		String prefId = preference.getKey();
-		if (settings.ARRIVAL_DISTANCE_FACTOR.getId().equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				AnnouncementTimeBottomSheet.showInstance(fragmentManager, preference.getKey(), this, getSelectedAppMode(), false);
-			}
-		} else if (settings.VOICE_PROVIDER.getId().equals(prefId)) {
-			VoiceLanguageBottomSheetFragment.showInstance(requireActivity().getSupportFragmentManager(), this, getSelectedAppMode(), false);
-		} else {
-			super.onDisplayPreferenceDialog(preference);
+	public void onDisplayPreferenceDialog(final Preference preference) {
+		if (showDialogForPreference(preference, this)) {
+			return;
+		}
+		super.onDisplayPreferenceDialog(preference);
+	}
+
+	@Override
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(
+			final Preference preference,
+			final Optional<Fragment> target) {
+		if (settings.ARRIVAL_DISTANCE_FACTOR.getId().equals(preference.getKey())) {
+			return Optional.of(
+					new ShowableSearchablePreferenceDialog<>(
+							AnnouncementTimeBottomSheet.createInstance(
+									preference,
+									target,
+									getSelectedAppMode(),
+									false)) {
+
+						@Override
+						protected void show(final AnnouncementTimeBottomSheet announcementTimeBottomSheet) {
+							VoiceAnnouncesFragment.this.show(announcementTimeBottomSheet);
+						}
+					});
+		}
+		if (settings.VOICE_PROVIDER.getId().equals(preference.getKey())) {
+			return Optional.of(
+					new ShowableSearchablePreferenceDialog<>(
+							VoiceLanguageBottomSheetFragment.createInstance(
+									target,
+									getSelectedAppMode(),
+									false)) {
+
+						@Override
+						protected void show(final VoiceLanguageBottomSheetFragment voiceLanguageBottomSheetFragment) {
+							voiceLanguageBottomSheetFragment.show(requireActivity().getSupportFragmentManager());
+						}
+					});
+		}
+		return Optional.empty();
+	}
+
+	private void show(final SearchablePreferenceDialog dialog) {
+		final FragmentManager fragmentManager = getFragmentManager();
+		if (fragmentManager != null) {
+			dialog.show(fragmentManager);
 		}
 	}
 
@@ -275,5 +318,4 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		SwitchPreferenceCompat showCameras = findPreference(settings.SPEAK_SPEED_CAMERA.getId());
 		showCameras.setVisible(!settings.SPEED_CAMERAS_UNINSTALLED.get());
 	}
-
 }

@@ -18,6 +18,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.base.dialog.data.DisplayItem;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.List;
@@ -28,7 +29,7 @@ import java.util.List;
  * When choosing one of the options, the selected option is passed to the controller
  * and dialog automatically closed without the need for confirmation by the user.
  */
-public class CustomizableSingleSelectionBottomSheet extends CustomizableBottomSheet {
+public class CustomizableSingleSelectionBottomSheet extends CustomizableBottomSheet implements SearchablePreferenceDialog {
 
 	public static final String TAG = CustomizableSingleSelectionBottomSheet.class.getSimpleName();
 
@@ -40,19 +41,19 @@ public class CustomizableSingleSelectionBottomSheet extends CustomizableBottomSh
 		}
 		ctx = UiUtilities.getThemedContext(ctx, nightMode);
 
-		String title = (String) displayData.getExtra(TITLE);
+		String title = getTitle();
 		if (title != null) {
 			TitleItem titleItem = new TitleItem(title);
 			items.add(titleItem);
 		}
 
-		String description = (String) displayData.getExtra(SUBTITLE);
+		String description = getDescription();
 		if (description != null) {
 			LongDescriptionItem descriptionItem = new LongDescriptionItem(description);
 			items.add(descriptionItem);
 		}
 
-		List<DisplayItem> displayItems = displayData.getDisplayItems();
+		List<DisplayItem> displayItems = getDisplayItems();
 		for (int i = 0; i < displayItems.size(); i++) {
 			DisplayItem displayItem = displayItems.get(i);
 			Integer selectedIndex = (Integer) displayData.getExtra(SELECTED_INDEX);
@@ -88,17 +89,35 @@ public class CustomizableSingleSelectionBottomSheet extends CustomizableBottomSh
 		return show == null || !show;
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
-	                                   @NonNull String processId, boolean usedOnMap) {
-		try {
-			CustomizableSingleSelectionBottomSheet fragment = new CustomizableSingleSelectionBottomSheet();
-			fragment.setProcessId(processId);
-			fragment.setUsedOnMap(usedOnMap);
-			fragment.show(fragmentManager, TAG);
-			return true;
-		} catch (RuntimeException e) {
-			return false;
-		}
+	public static @NonNull CustomizableSingleSelectionBottomSheet createInstance(final @NonNull String processId, final boolean usedOnMap) {
+		final CustomizableSingleSelectionBottomSheet fragment = new CustomizableSingleSelectionBottomSheet();
+		fragment.setProcessId(processId);
+		fragment.setUsedOnMap(usedOnMap);
+		return fragment;
 	}
 
+	@Override
+	public void show(final FragmentManager fragmentManager) {
+		show(fragmentManager, TAG);
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		return CustomizableSingleSelectionBottomSheetSearchableInfoProvider.getSearchableInfo(
+				getTitle(),
+				getDescription(),
+				getDisplayItems());
+	}
+
+	private String getTitle() {
+		return (String) displayData.getExtra(TITLE);
+	}
+
+	private String getDescription() {
+		return (String) displayData.getExtra(SUBTITLE);
+	}
+
+	private List<DisplayItem> getDisplayItems() {
+		return displayData.getDisplayItems();
+	}
 }

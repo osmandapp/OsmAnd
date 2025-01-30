@@ -48,7 +48,9 @@ public class DashSimulateFragment extends DashBaseFragment {
 		item.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				SimulateLocationFragment.showInstance(activity.getSupportFragmentManager(), null, true);
+				SimulateLocationFragment
+						.createInstance(null, true)
+						.show(activity.getSupportFragmentManager());
 				dashboard.hideDashboard();
 			}
 		});

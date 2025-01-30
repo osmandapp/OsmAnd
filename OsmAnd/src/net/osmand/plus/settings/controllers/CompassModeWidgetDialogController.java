@@ -1,7 +1,6 @@
 package net.osmand.plus.settings.controllers;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
@@ -39,7 +38,8 @@ public class CompassModeWidgetDialogController extends BaseCompassModeDialogCont
 		DialogManager dialogManager = app.getDialogManager();
 		dialogManager.register(PROCESS_ID, controller);
 
-		FragmentManager manager = mapActivity.getSupportFragmentManager();
-		CustomizableSingleSelectionBottomSheet.showInstance(manager, PROCESS_ID, true);
+		CustomizableSingleSelectionBottomSheet
+				.createInstance(PROCESS_ID, true)
+				.show(mapActivity.getSupportFragmentManager());
 	}
 }

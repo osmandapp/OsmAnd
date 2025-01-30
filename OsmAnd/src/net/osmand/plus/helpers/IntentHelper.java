@@ -544,7 +544,9 @@ public class IntentHelper {
 						break;
 
 					case BaseSettingsFragment.SCREEN_CONFIG:
-						ConfigureScreenFragment.showInstance(mapActivity);
+						ConfigureScreenFragment
+								.createInstance()
+								.show(mapActivity.getSupportFragmentManager());
 						break;
 				}
 				clearIntent(intent);

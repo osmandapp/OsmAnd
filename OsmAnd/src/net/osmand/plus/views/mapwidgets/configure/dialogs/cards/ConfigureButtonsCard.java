@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -103,7 +104,7 @@ public class ConfigureButtonsCard extends MapBaseCard {
 	}
 
 	public static void setupButton(@NonNull View view, @NonNull String title, @Nullable String description,
-	                               @DrawableRes int iconId, boolean enabled, boolean nightMode) {
+								   @DrawableRes int iconId, boolean enabled, boolean nightMode) {
 		OsmandApplication app = (OsmandApplication) view.getContext().getApplicationContext();
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
 
@@ -125,5 +126,19 @@ public class ConfigureButtonsCard extends MapBaseCard {
 		int color = mode.getProfileColor(nightMode);
 		Drawable background = UiUtilities.getColoredSelectableDrawable(view.getContext(), color, 0.3f);
 		AndroidUtils.setBackground(view.findViewById(R.id.button_container), background);
+	}
+
+	public String getSearchableInfo() {
+		return String.join(
+				", ",
+				getTitle(R.id.custom_buttons),
+				getTitle(R.id.default_buttons));
+	}
+
+	private CharSequence getTitle(final @IdRes int id) {
+		return view
+				.findViewById(id)
+				.<TextView>findViewById(R.id.title)
+				.getText();
 	}
 }

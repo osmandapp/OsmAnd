@@ -23,6 +23,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
@@ -30,7 +31,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
+public class ConfigureMenuRootFragment extends BaseOsmAndFragment implements SearchablePreferenceDialog {
 
 	public static final String TAG = ConfigureMenuRootFragment.class.getName();
 
@@ -95,7 +96,7 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 
 	private void setupRecyclerView(@NonNull View view) {
 		List<Object> items = new ArrayList<>();
-		items.add(getString(R.string.ui_customization_description, getString(R.string.prefs_plugins)));
+		items.add(getDescription());
 		items.addAll(Arrays.asList(ScreenType.values()));
 
 		FragmentActivity activity = requireActivity();
@@ -109,6 +110,12 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 		RecyclerView recyclerView = view.findViewById(R.id.list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
 		recyclerView.setAdapter(adapter);
+	}
+
+	private String getDescription() {
+		return getString(
+				R.string.ui_customization_description,
+				getString(R.string.prefs_plugins));
 	}
 
 	@Override
@@ -137,16 +144,26 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 		outState.putString(APP_MODE_KEY, appMode.getStringKey());
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull ApplicationMode appMode, @Nullable Fragment target) {
-		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			ConfigureMenuRootFragment fragment = new ConfigureMenuRootFragment();
-			fragment.appMode = appMode;
-			fragment.setTargetFragment(target, 0);
+	public static ConfigureMenuRootFragment createInstance(final @NonNull ApplicationMode appMode,
+														   final @Nullable Fragment target) {
+		final ConfigureMenuRootFragment fragment = new ConfigureMenuRootFragment();
+		fragment.appMode = appMode;
+		fragment.setTargetFragment(target, 0);
+		return fragment;
+	}
 
-			manager.beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, TAG)
+	@Override
+	public void show(final FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			fragmentManager.beginTransaction()
+					.replace(R.id.fragmentContainer, this, TAG)
 					.addToBackStack(null)
 					.commitAllowingStateLoss();
 		}
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		return getDescription();
 	}
 }

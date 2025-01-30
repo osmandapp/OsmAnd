@@ -6,7 +6,6 @@ import static net.osmand.plus.base.dialog.data.DialogExtra.TITLE;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -15,8 +14,8 @@ import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.data.DisplayItem;
-import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemSelected;
+import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.CustomizableSingleSelectionBottomSheet;
@@ -33,13 +32,14 @@ public class MapFocusDialogController extends BaseDialogController
 	private final OsmandSettings settings;
 
 	public MapFocusDialogController(@NonNull OsmandApplication app,
-	                                @NonNull ApplicationMode appMode) {
+									@NonNull ApplicationMode appMode) {
 		super(app);
 		this.appMode = appMode;
 		this.settings = app.getSettings();
 	}
 
-	@NonNull @Override
+	@NonNull
+	@Override
 	public String getProcessId() {
 		return PROCESS_ID;
 	}
@@ -96,7 +96,8 @@ public class MapFocusDialogController extends BaseDialogController
 		DialogManager dialogManager = app.getDialogManager();
 		dialogManager.register(PROCESS_ID, controller);
 
-		FragmentManager manager = mapActivity.getSupportFragmentManager();
-		CustomizableSingleSelectionBottomSheet.showInstance(manager, PROCESS_ID, true);
+		CustomizableSingleSelectionBottomSheet
+				.createInstance(PROCESS_ID, true)
+				.show(mapActivity.getSupportFragmentManager());
 	}
 }

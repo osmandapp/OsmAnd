@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.bottomsheets;
 
+import static net.osmand.plus.settings.bottomsheets.SingleSelectPreferenceBottomSheet.SELECTED_ENTRY_INDEX_KEY;
+
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -9,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
 
 import com.google.android.material.slider.Slider;
 import com.google.android.material.slider.Slider.OnChangeListener;
@@ -16,22 +19,22 @@ import com.google.android.material.slider.Slider.OnChangeListener;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem.Builder;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.TextViewEx;
 
 import org.apache.commons.logging.Log;
 
-import static net.osmand.plus.settings.bottomsheets.SingleSelectPreferenceBottomSheet.SELECTED_ENTRY_INDEX_KEY;
+import java.util.Optional;
 
-
-public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet {
+public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet implements SearchablePreferenceDialog {
 
 	public static final String TAG = AnnouncementTimeBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(AnnouncementTimeBottomSheet.class);
@@ -43,7 +46,6 @@ public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet {
 	private int selectedEntryIndex = -1;
 
 	private TextViewEx tvSeekBarLabel;
-	private Slider slider;
 	private ImageView ivArrow;
 	private TextViewEx tvIntervalsDescr;
 
@@ -116,7 +118,7 @@ public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet {
 				.inflate(R.layout.bottom_sheet_announcement_time, null);
 
 		tvSeekBarLabel = rootView.findViewById(R.id.tv_seek_bar_label);
-		slider = rootView.findViewById(R.id.arrival_slider);
+		Slider slider = rootView.findViewById(R.id.arrival_slider);
 		ivArrow = rootView.findViewById(R.id.iv_arrow);
 		tvIntervalsDescr = rootView.findViewById(R.id.tv_interval_descr);
 		int appModeColor = getAppMode().getProfileColor(nightMode);
@@ -161,21 +163,34 @@ public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet {
 		AndroidUiHelper.updateVisibility(tvIntervalsDescr, !collapsed);
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, String prefKey, Fragment target,
-									@Nullable ApplicationMode appMode, boolean usedOnMap) {
+	@NonNull
+	public static AnnouncementTimeBottomSheet createInstance(final Preference preference,
+															 final Optional<Fragment> target,
+															 final @Nullable ApplicationMode appMode,
+															 final boolean usedOnMap) {
+		return BasePreferenceBottomSheetInitializer
+				.initialize(new AnnouncementTimeBottomSheet())
+				.with(Optional.of(preference), appMode, usedOnMap, target);
+	}
+
+	@Override
+	public void show(final FragmentManager fragmentManager) {
 		try {
-			if (!fm.isStateSaved()) {
-				Bundle args = new Bundle();
-				args.putString(PREFERENCE_ID, prefKey);
-				AnnouncementTimeBottomSheet fragment = new AnnouncementTimeBottomSheet();
-				fragment.setArguments(args);
-				fragment.setAppMode(appMode);
-				fragment.setUsedOnMap(usedOnMap);
-				fragment.setTargetFragment(target, 0);
-				fragment.show(fm, TAG);
+			if (!fragmentManager.isStateSaved()) {
+				show(fragmentManager, TAG);
 			}
-		} catch (RuntimeException e) {
+		} catch (final RuntimeException e) {
 			LOG.error("showInstance", e);
 		}
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		return String.join(
+				", ",
+				getString(R.string.announcement_time_title),
+				getString(R.string.announcement_time_descr),
+				getString(R.string.announcement_time_intervals),
+				tvIntervalsDescr.getText());
 	}
 }

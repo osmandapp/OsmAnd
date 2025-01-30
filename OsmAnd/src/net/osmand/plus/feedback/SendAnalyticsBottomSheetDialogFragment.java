@@ -30,10 +30,11 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitmeListDividerItem;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 
 import org.apache.commons.logging.Log;
 
-public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
+public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment implements SearchablePreferenceDialog {
 
 	public static final String TAG = "SendAnalyticsBottomSheetDialogFragment";
 	private static final Log LOG = PlatformUtil.getLog(SendAnalyticsBottomSheetDialogFragment.class);
@@ -189,15 +190,20 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 		return false;
 	}
 
-	public static void showInstance(@NonNull OsmandApplication app, @NonNull FragmentManager fm, @Nullable Fragment target) {
+	public static @NonNull SendAnalyticsBottomSheetDialogFragment createInstance(final @Nullable Fragment target) {
+		final SendAnalyticsBottomSheetDialogFragment fragment = new SendAnalyticsBottomSheetDialogFragment();
+		fragment.setTargetFragment(target, 0);
+		return fragment;
+	}
+
+	@Override
+	public void show(final @NonNull FragmentManager fm) {
 		try {
 			if (fm.findFragmentByTag(TAG) == null) {
-				SendAnalyticsBottomSheetDialogFragment fragment = new SendAnalyticsBottomSheetDialogFragment();
-				fragment.setTargetFragment(target, 0);
-				fragment.show(fm, TAG);
+				show(fm, TAG);
 
-				OsmandSettings settings = app.getSettings();
-				int numberOfStarts = app.getAppInitializer().getNumberOfStarts();
+				OsmandSettings settings = requiredMyApplication().getSettings();
+				int numberOfStarts = requiredMyApplication().getAppInitializer().getNumberOfStarts();
 				OsmandPreference<Integer> lastRequestNS = settings.SEND_ANONYMOUS_DATA_LAST_REQUEST_NS;
 				if (numberOfStarts != lastRequestNS.get()) {
 					OsmandPreference<Integer> counter = settings.SEND_ANONYMOUS_DATA_REQUESTS_COUNT;
@@ -208,6 +214,11 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);
 		}
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		return new SendAnalyticsSearchableInfoProvider(items).getSearchableInfo();
 	}
 
 	public interface OnSendAnalyticsPrefsUpdate {

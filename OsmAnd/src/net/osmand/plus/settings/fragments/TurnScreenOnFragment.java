@@ -1,8 +1,11 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
+
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
@@ -11,10 +14,14 @@ import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.ScreenTimeoutBottomSheet;
 import net.osmand.plus.settings.bottomsheets.WakeTimeBottomSheet;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
-public class TurnScreenOnFragment extends BaseSettingsFragment {
+import java.util.Optional;
+
+public class TurnScreenOnFragment extends BaseSettingsFragment implements ShowableSearchablePreferenceDialogProvider {
 
 	public static final String TAG = TurnScreenOnFragment.class.getSimpleName();
 
@@ -45,17 +52,35 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	public void onDisplayPreferenceDialog(Preference preference) {
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Optional<Fragment> target) {
+		return settings.TURN_SCREEN_ON_TIME_INT.getId().equals(preference.getKey()) ?
+				Optional.of(
+						new ShowableSearchablePreferenceDialog<>(
+								WakeTimeBottomSheet.createInstance(
+										preference,
+										target,
+										false,
+										getSelectedAppMode(),
+										getApplyQueryType(),
+										isProfileDependent())) {
+							@Override
+							protected void show(final WakeTimeBottomSheet wakeTimeBottomSheet) {
+								wakeTimeBottomSheet.show(getFragmentManager());
+							}
+						}) :
+				Optional.empty();
+	}
+
+	@Override
+	public void onDisplayPreferenceDialog(final Preference preference) {
+		if (showDialogForPreference(preference, this)) {
+			return;
+		}
 		FragmentManager fragmentManager = getFragmentManager();
-		ApplicationMode appMode = getSelectedAppMode();
 		String prefId = preference.getKey();
 		if (settings.USE_SYSTEM_SCREEN_TIMEOUT.getId().equals(prefId)) {
 			if (fragmentManager != null) {
-				ScreenTimeoutBottomSheet.showInstance(fragmentManager, prefId, this, false, appMode, getApplyQueryType(), isProfileDependent());
-			}
-		} else if (settings.TURN_SCREEN_ON_TIME_INT.getId().equals(prefId)) {
-			if (fragmentManager != null) {
-				WakeTimeBottomSheet.showInstance(fragmentManager, prefId, this, false, appMode, getApplyQueryType(), isProfileDependent());
+				ScreenTimeoutBottomSheet.showInstance(fragmentManager, prefId, this, false, getSelectedAppMode(), getApplyQueryType(), isProfileDependent());
 			}
 		} else {
 			super.onDisplayPreferenceDialog(preference);

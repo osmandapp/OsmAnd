@@ -2,7 +2,21 @@ package net.osmand.plus.plugins.audionotes;
 
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.plugins.PluginInfoFragment.PLUGIN_INFO;
-import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.*;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_AUTO;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_CONTINUOUS;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_EDOF;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_HIPERFOCAL;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_INFINITY;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_MACRO;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_PHOTO_SIZE_DEFAULT;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.EXTERNAL_PHOTO_CAM_SETTING_ID;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.EXTERNAL_RECORDER_SETTING_ID;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.cameraPictureSizeDefault;
+import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.canDisableShutterSound;
+import static net.osmand.plus.settings.fragments.ResetProfilePrefsBottomSheetFactory.createResetProfilePrefsBottomSheet;
+import static net.osmand.plus.settings.fragments.SelectCopyAppModeBottomSheetFactory.createSelectCopyAppModeBottomSheet;
+import static net.osmand.plus.settings.fragments.search.PreferenceDialogs.showDialogForPreference;
 
 import android.Manifest;
 import android.content.Context;
@@ -21,7 +35,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
@@ -30,15 +44,15 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialog;
+import net.osmand.plus.settings.fragments.search.ShowableSearchablePreferenceDialogProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.utils.AndroidUtils;
@@ -51,8 +65,9 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class MultimediaNotesFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
+public class MultimediaNotesFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener, ShowableSearchablePreferenceDialogProvider {
 
 	public static final int CAMERA_FOR_PHOTO_PARAMS_REQUEST_CODE = 104;
 
@@ -466,7 +481,10 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 	}
 
 	@Override
-	public boolean onPreferenceClick(Preference preference) {
+	public boolean onPreferenceClick(final Preference preference) {
+		if (showDialogForPreference(preference, this)) {
+			return true;
+		}
 		String prefId = preference.getKey();
 		if (OPEN_NOTES.equals(prefId)) {
 			Bundle bundle = new Bundle();
@@ -478,18 +496,8 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 			favorites.putExtra(MapActivity.INTENT_PARAMS, bundle);
 			startActivity(favorites);
 			return true;
-		} else if (COPY_PLUGIN_SETTINGS.equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, getSelectedAppMode());
-			}
-		} else if (RESET_TO_DEFAULT.equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, getSelectedAppMode(), this);
-			}
 		} else if (CAMERA_PERMISSION.equals(prefId)) {
-			requestPermissions(new String[] {Manifest.permission.CAMERA}, CAMERA_FOR_PHOTO_PARAMS_REQUEST_CODE);
+			requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_FOR_PHOTO_PARAMS_REQUEST_CODE);
 		} else if (EXTERNAL_RECORDER_SETTING_ID.equals(prefId)) {
 			AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
 			if (plugin != null) {
@@ -506,6 +514,17 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		return super.onPreferenceClick(preference);
 	}
 
+	@Override
+	public Optional<ShowableSearchablePreferenceDialog<?>> getShowableSearchablePreferenceDialog(final Preference preference, final Optional<Fragment> target) {
+		if (RESET_TO_DEFAULT.equals(preference.getKey())) {
+			return Optional.of(createResetProfilePrefsBottomSheet(target, this));
+		}
+		if (COPY_PLUGIN_SETTINGS.equals(preference.getKey())) {
+			return Optional.of(createSelectCopyAppModeBottomSheet(target, this));
+		}
+		return Optional.empty();
+	}
+
 	private void showSelectCameraAppDialog(@NonNull CommonPreference<Boolean> preference) {
 		Context ctx = getContext();
 		if (ctx == null) {
@@ -516,7 +535,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		int profileColor = appMode.getProfileColor(nightMode);
 
 		int selected = preference.getModeValue(appMode) ? 0 : 1;
-		String[] entries = new String[] {
+		String[] entries = new String[]{
 				getCameraAppTitle(true),
 				getCameraAppTitle(false)
 		};

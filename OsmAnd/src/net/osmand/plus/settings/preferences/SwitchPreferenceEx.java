@@ -5,7 +5,14 @@ import android.util.AttributeSet;
 
 import androidx.preference.SwitchPreferenceCompat;
 
-public class SwitchPreferenceEx extends SwitchPreferenceCompat {
+import net.osmand.plus.settings.fragments.search.SearchableInfoProvider;
+
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import de.KnollFrank.lib.settingssearch.common.Optionals;
+
+public class SwitchPreferenceEx extends SwitchPreferenceCompat implements SearchableInfoProvider {
 
 	private String description;
 
@@ -42,5 +49,15 @@ public class SwitchPreferenceEx extends SwitchPreferenceCompat {
 		if (getFragment() == null && getIntent() == null) {
 			getPreferenceManager().showDialog(this);
 		}
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		return Optionals
+				.streamOfPresentElements(
+						Optional.ofNullable(getSummaryOff()),
+						Optional.ofNullable(getSummaryOn()),
+						Optional.ofNullable(getDescription()))
+				.collect(Collectors.joining(", "));
 	}
 }

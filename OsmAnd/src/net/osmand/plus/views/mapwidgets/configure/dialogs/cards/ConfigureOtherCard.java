@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
@@ -89,5 +90,19 @@ public class ConfigureOtherCard extends MapBaseCard {
 		description.setTextSize(COMPLEX_UNIT_PX, app.getResources().getDimensionPixelSize(R.dimen.default_sub_text_size));
 
 		AndroidUiHelper.updateVisibility(description, true);
+	}
+
+	public String getSearchableInfo() {
+		return String.join(
+				", ",
+				getTitle(R.id.distance_by_tap_button),
+				getTitle(R.id.speedometer));
+	}
+
+	private CharSequence getTitle(final @IdRes int id) {
+		return view
+				.findViewById(id)
+				.<TextView>findViewById(R.id.title)
+				.getText();
 	}
 }

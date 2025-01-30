@@ -9,11 +9,13 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -24,16 +26,20 @@ import net.osmand.plus.settings.backend.preferences.BooleanPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.ApplyQueryType;
 import net.osmand.plus.settings.fragments.OnConfirmPreferenceChange;
+import net.osmand.plus.settings.fragments.search.SearchablePreferenceDialog;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
-public class DistanceDuringNavigationBottomSheet extends BasePreferenceBottomSheet {
+import java.util.Optional;
+
+public class DistanceDuringNavigationBottomSheet extends BasePreferenceBottomSheet implements SearchablePreferenceDialog {
 
 	public static final String TAG = DistanceDuringNavigationBottomSheet.class.getSimpleName();
 
 	private UiUtilities uiUtilities;
 	private BooleanPreference preference;
+	private BaseBottomSheetItem bottomSheetItem;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -47,7 +53,8 @@ public class DistanceDuringNavigationBottomSheet extends BasePreferenceBottomShe
 		}
 		preference = (BooleanPreference) osmandPreference;
 		uiUtilities = app.getUIUtilities();
-		items.add(createBottomSheetItem());
+		bottomSheetItem = createBottomSheetItem();
+		items.add(bottomSheetItem);
 	}
 
 	private BaseBottomSheetItem createBottomSheetItem() {
@@ -117,18 +124,41 @@ public class DistanceDuringNavigationBottomSheet extends BasePreferenceBottomShe
 		return R.string.shared_string_close;
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, String prefKey, Fragment target,
-									@Nullable ApplicationMode appMode, boolean usedOnMap) {
-		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			Bundle args = new Bundle();
-			args.putString(PREFERENCE_ID, prefKey);
-			DistanceDuringNavigationBottomSheet fragment = new DistanceDuringNavigationBottomSheet();
-			fragment.setArguments(args);
-			fragment.setAppMode(appMode);
-			fragment.setUsedOnMap(usedOnMap);
-			fragment.setTargetFragment(target, 0);
-			fragment.show(manager, TAG);
+	public static @NonNull DistanceDuringNavigationBottomSheet createInstance(
+			final Preference preference,
+			final Optional<Fragment> target,
+			final @Nullable ApplicationMode appMode,
+			final boolean usedOnMap) {
+		return BasePreferenceBottomSheetInitializer
+				.initialize(new DistanceDuringNavigationBottomSheet())
+				.with(Optional.of(preference), appMode, usedOnMap, target);
+	}
+
+	@Override
+	public void show(final FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			show(fragmentManager, TAG);
 		}
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		return String.join(
+				", ",
+				getTitle(bottomSheetItem.getView()),
+				getDescription(bottomSheetItem.getView()));
+	}
+
+	private static CharSequence getTitle(final View view) {
+		return getText(view, R.id.title);
+	}
+
+	private static CharSequence getDescription(final View view) {
+		return getText(view, R.id.description);
+	}
+
+	private static CharSequence getText(final View view, final @IdRes int id) {
+		return view.<TextView>findViewById(id).getText();
 	}
 
 	public enum DistanceDuringNavigationMode {

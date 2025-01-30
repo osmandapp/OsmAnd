@@ -7,10 +7,19 @@ import android.util.AttributeSet;
 import androidx.preference.DialogPreference;
 import androidx.preference.PreferenceDataStore;
 
+import com.google.common.collect.ImmutableList;
+
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndPreferencesDataStore;
+import net.osmand.plus.settings.fragments.search.SearchableInfoProvider;
 
-public class ListPreferenceEx extends DialogPreference {
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import de.KnollFrank.lib.settingssearch.common.Optionals;
+
+public class ListPreferenceEx extends DialogPreference implements SearchableInfoProvider {
 
 	private String[] entries;
 	private Object[] entryValues;
@@ -147,5 +156,27 @@ public class ListPreferenceEx extends DialogPreference {
 		if (dataStore instanceof OsmAndPreferencesDataStore) {
 			((OsmAndPreferencesDataStore) dataStore).putValue(getKey(), value);
 		}
+	}
+
+	@Override
+	public String getSearchableInfo() {
+		return String.join(
+				", ",
+				concat(
+						Optional.ofNullable(getDialogTitle()),
+						Optional.ofNullable(getDescription()),
+						Optional.ofNullable(getEntries())));
+	}
+
+	static List<CharSequence> concat(final Optional<CharSequence> dialogTitle,
+									 final Optional<CharSequence> description,
+									 final Optional<CharSequence[]> entries) {
+		return ImmutableList
+				.<CharSequence>builder()
+				.addAll(Optionals
+						.streamOfPresentElements(dialogTitle, description)
+						.collect(Collectors.toList()))
+				.addAll(Optionals.asList(entries))
+				.build();
 	}
 }

@@ -28,15 +28,12 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.routepreparationmenu.data.parameters.OtherLocalRoutingParameter;
-import net.osmand.shared.gpx.GpxFile;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
-import net.osmand.plus.avoidroads.AvoidRoadsBottomSheetDialogFragment;
-import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.avoidroads.AvoidRoadsBottomSheetDialogFragment;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -44,7 +41,6 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerStartItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.routepreparationmenu.data.parameters.AvoidPTTypesRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.AvoidRoadsRoutingParameter;
@@ -55,6 +51,7 @@ import net.osmand.plus.routepreparationmenu.data.parameters.GpxLocalRoutingParam
 import net.osmand.plus.routepreparationmenu.data.parameters.LocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.LocalRoutingParameterGroup;
 import net.osmand.plus.routepreparationmenu.data.parameters.MuteSoundRoutingParameter;
+import net.osmand.plus.routepreparationmenu.data.parameters.OtherLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.OtherSettingsRoutingParameter;
 import net.osmand.plus.routepreparationmenu.data.parameters.RouteSimulationItem;
 import net.osmand.plus.routepreparationmenu.data.parameters.ShowAlongTheRouteItem;
@@ -71,8 +68,10 @@ import net.osmand.plus.settings.bottomsheets.ElevationDateBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
 import net.osmand.plus.settings.fragments.voice.VoiceLanguageBottomSheetFragment;
+import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.track.fragments.TrackAltitudeBottomSheet;
 import net.osmand.plus.track.fragments.TrackAltitudeBottomSheet.CalculateAltitudeListener;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -80,6 +79,7 @@ import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -89,6 +89,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment implements CalculateAltitudeListener {
 
@@ -319,8 +320,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 				routingHelper.getVoiceRouter().setMuteForMode(applicationMode, active);
 				String voiceProvider = app.getSettings().VOICE_PROVIDER.getModeValue(applicationMode);
 				if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
-					VoiceLanguageBottomSheetFragment.showInstance(mapActivity.getSupportFragmentManager(),
-							RouteOptionsBottomSheet.this, applicationMode, usedOnMap);
+					VoiceLanguageBottomSheetFragment
+							.createInstance(Optional.of(RouteOptionsBottomSheet.this), applicationMode, usedOnMap)
+							.show(mapActivity.getSupportFragmentManager());
 				} else {
 					cb.setChecked(!active);
 					icon.setImageDrawable(getPaintedContentIcon(!active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
