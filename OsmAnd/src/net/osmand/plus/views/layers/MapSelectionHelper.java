@@ -353,18 +353,12 @@ public class MapSelectionHelper {
 							Map<String, String> tags = getTags(obfMapObject.getResolvedAttributes());
 
 							boolean isTravelGpx = app.getTravelHelper().isTravelGpxTags(tags);
+							boolean isOsmRoute = !Algorithms.isEmpty(OsmRouteType.getRouteKeys(tags));
 							boolean isClickableWay = clickableWayHelper.isClickableWay(obfMapObject, tags);
-
-							List<NetworkRouteSelector.RouteKey> routeKeys = OsmRouteType.getRouteKeys(tags);
-							boolean isOsmRoute = !Algorithms.isEmpty(routeKeys);
 
 							if (!isDerivedGpxSelected) {
 								if (isOsmRoute) {
-									NetworkRouteSelectorFilter routeFilter = createRouteFilter();
-									if (tags.containsKey(ROUTE_ID)) {
-										routeFilter.keyFilter = new HashSet<>(routeKeys);
-									}
-									isDerivedGpxSelected |= addOsmRoute(result, tileBox, point, routeFilter);
+									isDerivedGpxSelected |= addOsmRoute(result, tileBox, point, createRouteFilter());
 								}
 								if (isTravelGpx) {
 									isDerivedGpxSelected |= addTravelGpx(result, tags.get(ROUTE_ID), null);
