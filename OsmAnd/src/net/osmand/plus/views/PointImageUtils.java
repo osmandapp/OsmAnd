@@ -21,11 +21,11 @@ import androidx.annotation.Nullable;
 
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.views.layers.NearbyPlacesLayer;
 import net.osmand.shared.gpx.primitives.WptPt;
 
 import java.util.TreeMap;
@@ -187,13 +187,14 @@ public class PointImageUtils {
 		return bitmapResult;
 	}
 
-	public static Bitmap createBigBitmap(@NonNull Context ctx, Bitmap loadedBitmap) {
-		int borderWidth = AndroidUtils.dpToPxAuto(ctx, BIG_ICON_BORDER_DP);
-		Bitmap circle = getCircle(ctx);
-		int bigIconSize = AndroidUtils.dpToPxAuto(ctx, BIG_ICON_SIZE_DP);
+	public static Bitmap createBigBitmap(@NonNull OsmandApplication app, Bitmap loadedBitmap, boolean isSelected) {
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		int borderWidth = AndroidUtils.dpToPxAuto(app, BIG_ICON_BORDER_DP);
+		Bitmap circle = getCircle(app);
+		int bigIconSize = AndroidUtils.dpToPxAuto(app, BIG_ICON_SIZE_DP);
 		Bitmap bitmapResult = Bitmap.createBitmap(bigIconSize, bigIconSize, Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmapResult);
-		BITMAP_PAINT.setColorFilter(new PorterDuffColorFilter(POINT_OUTER_COLOR, PorterDuff.Mode.SRC_IN));
+		BITMAP_PAINT.setColorFilter(new PorterDuffColorFilter(isSelected ? app.getColor(ColorUtilities.getActiveColorId(nightMode)) : POINT_OUTER_COLOR, PorterDuff.Mode.SRC_IN));
 		canvas.drawBitmap(circle, 0f, 0f, BITMAP_PAINT);
 		int cx = circle.getWidth() / 2;
 		int cy = circle.getHeight() / 2;

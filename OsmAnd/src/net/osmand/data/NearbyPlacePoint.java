@@ -24,15 +24,17 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 	public String poitype;
 	public String poisubtype;
 	public String wikiDesc;
-
+	public OsmandApiFeatureData featureData;
 	private double latitude;
 	private double longitude;
 	private double altitude = Double.NaN;
+	public boolean isSelected;
 
 	private int color;
 	private BackgroundType backgroundType;
 
 	public NearbyPlacePoint(OsmandApiFeatureData featureData) {
+		this.featureData = featureData;
 		this.latitude = featureData.geometry.coordinates[1];
 		this.longitude = featureData.geometry.coordinates[0];
 		this.photoTitle = featureData.properties.photoTitle;
