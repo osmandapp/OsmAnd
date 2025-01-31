@@ -1,7 +1,7 @@
 package net.osmand.plus.plugins.aistracker;
 
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.AisObjType.AIS_ATON;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.AisObjType.AIS_ATON_VIRTUAL;
+import static net.osmand.plus.plugins.aistracker.AisObjType.AIS_ATON;
+import static net.osmand.plus.plugins.aistracker.AisObjType.AIS_ATON_VIRTUAL;
 import static net.osmand.plus.plugins.aistracker.AisObjectConstants.UNSPECIFIED_AID_TYPE;
 import static net.osmand.plus.plugins.aistracker.AisTrackerHelper.getCpa;
 import static net.osmand.plus.utils.OsmAndFormatter.FORMAT_MINUTES;
@@ -234,7 +234,7 @@ public class AisObjectMenuController extends MenuController {
     public String getTypeStr() {
         String result = "";
         SortedSet<Integer> msgTypes = aisObject.getMsgTypes();
-        AisObjectConstants.AisObjType objectClass = aisObject.getObjectClass();
+        AisObjType objectClass = aisObject.getObjectClass();
         for (Integer i : new Integer[]{5, 19, 24}) {
             if (msgTypes.contains(i)) {
                 result += aisObject.getShipTypeString();

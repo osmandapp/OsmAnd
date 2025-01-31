@@ -168,6 +168,17 @@
 		android:title="@string/allow_display_on_top" />
 
 	<PreferenceCategory
+		android:key="aistracker"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/plugin_ais_tracker_name" />
+
+	<Preference
+		android:key="aistracker_simulation"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/ais_load_data" />
+
+	<PreferenceCategory
 		android:key="info"
 		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/info_button" />

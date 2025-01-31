@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.aistracker;
 
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.AisObjType.*;
+import static net.osmand.plus.plugins.aistracker.AisObjType.*;
 import static net.osmand.plus.plugins.aistracker.AisObjectConstants.*;
 import static net.osmand.plus.plugins.aistracker.AisTrackerHelper.getCpa;
 import static net.osmand.plus.plugins.aistracker.AisTrackerHelper.getNewPosition;

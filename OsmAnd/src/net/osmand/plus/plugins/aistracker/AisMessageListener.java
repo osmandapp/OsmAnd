@@ -5,21 +5,14 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import net.sf.marineapi.ais.event.AbstractAISMessageListener;
-import net.sf.marineapi.ais.message.AISMessage01;
-import net.sf.marineapi.ais.message.AISMessage02;
-import net.sf.marineapi.ais.message.AISMessage03;
-import net.sf.marineapi.ais.message.AISMessage04;
-import net.sf.marineapi.ais.message.AISMessage05;
-import net.sf.marineapi.ais.message.AISMessage09;
-import net.sf.marineapi.ais.message.AISMessage18;
-import net.sf.marineapi.ais.message.AISMessage19;
-import net.sf.marineapi.ais.message.AISMessage21;
-import net.sf.marineapi.ais.message.AISMessage24;
-import net.sf.marineapi.ais.message.AISMessage27;
+import net.sf.marineapi.ais.message.*;
 import net.sf.marineapi.nmea.event.SentenceListener;
 import net.sf.marineapi.nmea.io.SentenceReader;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.DatagramSocket;
@@ -32,15 +25,18 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class AisMessageListener {
-    private AisTrackerLayer aisLayer;
+
+    private AisTrackerLayer layer;
     private Timer timer;
     private DatagramSocket udpSocket;
     private Socket tcpSocket;
     private InputStream tcpStream;
+    private InputStream fileStream;
     private SentenceReader sentenceReader = null;
     private Stack<SentenceListener> listenerList = null;
-    public AisMessageListener(int port, @NonNull AisTrackerLayer aisLayer) {
-        initMembers(aisLayer);
+
+    public AisMessageListener(int port, @NonNull AisTrackerLayer layer) {
+        initMembers(layer);
         try {
             udpSocket = new DatagramSocket(port);
             udpSocket.setReuseAddress(true);
@@ -52,10 +48,21 @@ public class AisMessageListener {
             udpSocket = null;
         }
     }
-    public AisMessageListener(@NonNull String serverIp, int serverPort, @NonNull AisTrackerLayer aisLayer) {
-        TimerTask taskCheckNetworkConnection;
-        initMembers(aisLayer);
-        taskCheckNetworkConnection = new TimerTask() {
+
+    public AisMessageListener(@NonNull AisTrackerLayer layer, @NonNull File file) {
+        initMembers(layer);
+        try {
+            fileStream = new FileInputStream(file);
+            initListeners();
+        } catch (Exception e) {
+            Log.e("AisMessageListener", "exception: " + e.getMessage());
+            fileStream = null;
+        }
+    }
+
+    public AisMessageListener(@NonNull String serverIp, int serverPort, @NonNull AisTrackerLayer layer) {
+        initMembers(layer);
+        TimerTask taskCheckNetworkConnection = new TimerTask() {
             @Override
             public void run() {
                 Log.d("AisMessageListener", "timer task taskCheckNetworkConnection running");
@@ -82,15 +89,20 @@ public class AisMessageListener {
         timer.schedule(taskCheckNetworkConnection, 1000, 30000);
     }
     private void initMembers(@NonNull AisTrackerLayer aisLayer) {
-        this.aisLayer = aisLayer;
+        this.layer = aisLayer;
         this.udpSocket = null;
         this.tcpSocket = null;
         this.tcpStream = null;
+        this.fileStream = null;
         this.listenerList = new Stack<>();
     }
+
     private void initListeners() throws IOException {
         if (tcpStream != null) {
             sentenceReader = new SentenceReader(tcpStream);
+        }
+        if (fileStream != null) {
+            sentenceReader = new SentenceReader(fileStream);
         }
         if (udpSocket != null) {
             sentenceReader = new SentenceReader(udpSocket);
@@ -392,7 +404,7 @@ public class AisMessageListener {
                 Log.e("AisMessageListener","handleAisMessage() invalid argument aisType: "+ aisType);
                 return;
         }
-        aisLayer.updateAisObjectList(ais);
+        layer.updateAisObjectList(ais);
     }
     private void initEmbeddedLister(int aisType, @NonNull SentenceListener listener) {
         //AisMessageListener.this.sentenceReader.addSentenceListener(listener); // listen to all (!) NMEA messages
