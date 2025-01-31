@@ -5672,4 +5672,7 @@
     <string name="shared_string_length">Délka</string>
     <string name="shared_string_avg_altitude">Prům. výška</string>
     <string name="shared_string_avg_speed">Min. rychlost</string>
+    <string name="shared_string_default_view">Výchozí zobrazení</string>
+    <string name="map_widget_route_information">Informace o trase</string>
+    <string name="map_widget_route_information_desc">Zobrazuje odhadovaný čas příjezdu, zbývající čas jízdy a vzdálenost pro aktuální navigační trasu.</string>
 </resources>
