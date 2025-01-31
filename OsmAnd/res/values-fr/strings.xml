@@ -5670,4 +5670,7 @@
     <string name="shared_string_avg_altitude">Altitude moyenne</string>
     <string name="shared_string_avg_speed">Vitesse mini</string>
     <string name="shared_string_length">Longueur</string>
+    <string name="map_widget_route_information">Informations sur l\'itinéraire</string>
+    <string name="map_widget_route_information_desc">Affiche l\'heure d\'arrivée estimée, le temps restant, et la distance pour l\'itinéraire actuel.</string>
+    <string name="shared_string_default_view">Vue par défaut</string>
 </resources>
