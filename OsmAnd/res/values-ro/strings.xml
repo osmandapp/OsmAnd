@@ -6072,4 +6072,6 @@
     <string name="shared_string_avg_altitude">Altitudine medie</string>
     <string name="shared_string_length">Lungime</string>
     <string name="shared_string_avg_speed">Viteză min.</string>
+    <string name="shared_string_default_view">Vizualizare implicită</string>
+    <string name="map_widget_route_information">Informații despre traseu</string>
 </resources>
