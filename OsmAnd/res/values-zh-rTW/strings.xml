@@ -1172,6 +1172,7 @@
     <string name="rendering_attr_buildings15zoom_name">建築物在 15 級縮放</string>
     <string name="rendering_attr_moreDetailed_name">更多細節</string>
     <string name="rendering_attr_lessDetailed_name">較少細節</string>
+    <string name="rendering_attr_hideAccess_name">存取限制</string>
     <string name="rendering_attr_showAccess_name">顯示進入限制</string>
     <string name="rendering_attr_showSurfaceGrade_name">顯示道路品質</string>
     <string name="rendering_attr_showSurfaces_name">顯示路面</string>
@@ -3619,13 +3620,17 @@
     <string name="osm_edit_comment_note">評論 OSM 註記</string>
     <string name="osm_login_descr">使用 OAuth 方法登入，或是您的 OSM 使用者名稱與密碼。</string>
     <string name="shared_string_add_photo">新增照片</string>
+    <string name="register_on_openplacereviews">註冊於
 \nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">照片由 OpenPlaceReviews.org 開放資料專案提供。為了上傳您的照片，您需要在他們的網站上註冊。</string>
     <string name="register_opr_create_new_account">建立新帳號</string>
     <string name="register_opr_have_account">我已經有帳號了</string>
     <string name="shared_string_search_history">搜尋歷史紀錄</string>
     <string name="app_mode_kayak">皮艇</string>
     <string name="app_mode_motorboat">快艇</string>
     <string name="add_to_mapillary">新增到 Mapillary</string>
+    <string name="add_to_opr">新增到 OpenPlaceReviews</string>
+    <string name="add_photos_descr">OsmAnd 從多個來源顯示照片：
 \nOpenPlaceReviews - POI 照片；
 \nMapillary - 街景；
 \n網路／維基媒體 - 根據 OpenStreetMap 資料的 POI 照片。</string>
@@ -3729,8 +3734,12 @@
     <string name="select_segments">選取線段</string>
     <string name="select_segments_description">%1$s 包含了多於一段，您必須指定導航的部份。</string>
     <string name="segments_count">線段 %1$d</string>
+    <string name="open_place_reviews_plugin_description">為 OpenPlaceReviews 專案做出貢獻，例如餐廳、旅館或博物館等公共場所的照片、評論或連結。
 \n
 \n在我們的網站上找到關於如何貢獻的說明 %1$s。</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">使用 test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">登入至 OpenPlaceReviews</string>
     <string name="activity_type_water_name">水上</string>
     <string name="activity_type_winter_name">冬季</string>
     <string name="activity_type_snowmobile_name">雪地摩托車</string>
@@ -5366,6 +5375,7 @@
     <string name="energy_avg_info">能源統計（1 / 5 /15 分鐘平均）</string>
     <string name="energy_avg_info_description">每分鐘電池電量：%1$s
 \n能源消耗 (mAh)：%2$s</string>
+    <string name="rendering_avg_info_description">最後一千個影格的 FPS：%1$s
 \nCPU 基本：%2$s
 \nGPU 1k：%3$s
 \n閒置 1k：%4$s</string>
@@ -5584,6 +5594,7 @@
     <string name="fuel_tank_capacity">油箱容量</string>
     <string name="shared_strings_dimensions">尺寸</string>
     <string name="litres">公升</string>
+    <string name="imperial_gallons_unit">英制加侖</string>
     <string name="us_gallons_unit">加侖</string>
     <string name="imperial_gallons">英制加侖</string>
     <string name="us_gallons">美制加侖</string>

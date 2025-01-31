@@ -1502,6 +1502,7 @@
     <string name="rendering_attr_showSurfaces_name">Тип дорожного покрытия</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Непроезжие дороги</string>
     <string name="rendering_attr_buildings15zoom_name">Здания на масштабе 15</string>
+    <string name="rendering_attr_hideAccess_name">Ограничения доступа</string>
     <string name="rendering_attr_showAccess_name">Показывать ограничения доступа</string>
     <string name="rendering_attr_showCycleRoutes_name">Велосипедные маршруты</string>
     <string name="map_preferred_locale_descr">Предпочтительный язык для меток на карте (если он не доступен, то английский язык или местные названия).</string>
@@ -3812,12 +3813,15 @@
     <string name="send_files_to_openstreetmap">Отправить GPX-файл в OpenStreetMap</string>
     <string name="osm_edit_close_note">Закрыть заметку OSM</string>
     <string name="shared_string_add_photo">Добавить фото</string>
+    <string name="register_on_openplacereviews">Зарегистрироваться на
 \nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Создать новый аккаунт</string>
     <string name="register_opr_have_account">У меня уже есть аккаунт</string>
     <string name="shared_string_search_history">История поиска</string>
     <string name="app_mode_motorboat">Моторная лодка</string>
+    <string name="add_to_opr">Добавить в OpenPlaceReviews</string>
     <string name="add_to_mapillary">Добавить в Mapillary</string>
+    <string name="add_photos_descr">OsmAnd показывает фотографии из нескольких источников:
 \nOpenPlaceReviews — фотографии POI;
 \nMapillary — изображения улиц;
 \nWeb / Wikimedia — фотографии POI по данным OpenStreetMap.</string>
@@ -3834,6 +3838,7 @@
     <string name="subscription_payment_issue_title">Нажмите кнопку, чтобы перейти к настройкам подписки Google Play и исправить вашу подписку.</string>
     <string name="osm_edit_comment_note">Комментировать заметку OSM</string>
     <string name="use_dev_url_descr">Переключиться на использование dev.openstreetmap.org вместо openstreetmap.org для тестирования отправки заметок OSM / POI / GPX.</string>
+    <string name="register_on_openplacereviews_desc">Фото предоставлены проектом открытых данных OpenPlaceReviews.org. Для отправки фото нужна регистрация на сайте.</string>
     <string name="cannot_upload_image">Невозможно отправить изображение, попробуйте позже</string>
     <string name="select_picture">Выбор изображения</string>
     <string name="app_mode_kayak">Каяк</string>
@@ -3932,16 +3937,20 @@
     <string name="activity_type_offroad_name">Внедорожник</string>
     <string name="activity_type_motorbike_name">Мотоцикл</string>
     <string name="activity_type_car_name">Автомобиль</string>
+    <string name="opr_use_dev_url">Использовать test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">Вход в OpenPlaceReviews</string>
     <string name="activity_type_snowmobile_name">Снегоход</string>
     <string name="activity_type_mountainbike_name">Горный велосипед</string>
     <string name="routing_engine_vehicle_type_driving">Вождение</string>
     <string name="routing_engine_vehicle_type_foot">Пешком</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="activity_type_water_name">Вода</string>
     <string name="activity_type_winter_name">Зима</string>
     <string name="activity_type_riding_name">Верховая езда</string>
     <string name="reverse_all_points">Реверсировать все точки</string>
     <string name="routing_attr_allow_streams_description">Разрешить ручьи и канавы</string>
     <string name="routing_attr_allow_streams_name">Разрешить ручьи и канавы</string>
+    <string name="open_place_reviews_plugin_description">Внесите свой вклад в проект OpenPlaceReviews в виде фото, ссылок или обзоров публичных мест, таких как рестораны, отели или музеи.
 \n
 \nИнструкции по добавлению информации есть на нашем сайте %1$s.</string>
     <string name="activity_type_racing_name">Гонки</string>
@@ -5631,6 +5640,7 @@
 \nПотребление энергии (мАч): %2$s</string>
     <string name="rendering_avg_info">Статистика рендеринга (в среднем за 1/5/15 минут)</string>
     <string name="energy_avg_info">Статистика потребления энергии (в среднем за 1/5/15 минут)</string>
+    <string name="rendering_avg_info_description">FPS по последним 1k кадрам: %1$s
 \nCPU базовый: %2$s
 \nGPU 1k: %3$s
 \nIDLE 1k: %4$s</string>
@@ -5826,6 +5836,7 @@
     <string name="fuel_tank_capacity">Объём топливного бака</string>
     <string name="imperial_gallons">Имперские галлоны</string>
     <string name="us_gallons">Американские галлоны</string>
+    <string name="imperial_gallons_unit">imp gal</string>
     <string name="us_gallons_unit">us gal</string>
     <string name="shared_string_hour">Час</string>
     <string name="ltr_or_rtl_combine_via_per">%1$s за %2$s</string>

@@ -1163,6 +1163,7 @@
     <string name="rendering_attr_hideWoodScrubs_name">Δάση και θάμνοι</string>
     <string name="rendering_attr_moreDetailed_name">Περισσότερες λεπτομέρειες</string>
     <string name="rendering_attr_lessDetailed_name">Λιγότερες λεπτομέρειες</string>
+    <string name="rendering_attr_hideAccess_name">Περιορισμοί πρόσβασης</string>
     <string name="rendering_attr_showAccess_name">Εμφάνιση πρόσβασης και περιορισμών διοδίων</string>
     <string name="rendering_attr_showSurfaceGrade_name">Εμφάνιση ποιότητας των δρόμων</string>
     <string name="rendering_attr_coloredBuildings_name">Χρωματισμός κτιρίων κατά τύπο</string>
@@ -3575,6 +3576,7 @@
     <string name="app_mode_kayak">Καγιάκ</string>
     <string name="copy_address">Αντιγραφή διεύθυνσης</string>
     <string name="routing_attr_prefer_hiking_routes_description">Προτιμήστε διαδρομή για πεζοπορία</string>
+    <string name="register_on_openplacereviews">Εγγραφή στο
 \nOpenPlaceReviews.org</string>
     <string name="osm_login_descr">Συνδεθείτε με την μέθοδο OAuth, ή με το όνομα χρήστη και κωδικό στο OSM.</string>
     <string name="complex_routing_descr">Δρομολόγηση δύο-φάσεων για πλοήγηση αυτοκινήτου.</string>
@@ -3653,6 +3655,7 @@
     <string name="shared_string_reading_file">Ανάγνωση αρχείου…</string>
     <string name="simulation_real_mode_title">Ρεαλιστική προσομοίωση</string>
     <string name="profile_type_osmand_string">Προφίλ OsmAnd</string>
+    <string name="add_to_opr">Προσθήκη στο OpenPlaceReviews</string>
     <string name="default_appearance">Προεπιλεγμένη εμφάνιση</string>
     <string name="shared_string_shape">Σχήμα</string>
     <string name="osm_edit_close_note">Κλείσιμο Σημείωσης OSM</string>

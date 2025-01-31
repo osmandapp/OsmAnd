@@ -660,8 +660,11 @@
     <string name="activity_type_offroad_name">Nadvor od patot</string>
     <string name="activity_type_walking_name">Peshachenje</string>
     <string name="activity_type_hiking_name">Planinarenje</string>
+    <string name="open_place_reviews">Otvori PlaceReviews</string>
     <string name="activity_type_winter_name">Zima</string>
     <string name="activity_type_water_name">Voda</string>
+    <string name="login_open_place_reviews">Najavete se na OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">Koristete test.openplacereviews.org</string>
     <string name="message_name_is_already_exists">Imeto vece postoi</string>
     <string name="routing_engine_vehicle_type_mtb">MTB</string>
     <string name="message_server_error">Greska na serverot: %1$s</string>
@@ -683,9 +686,11 @@
     <string name="export_not_enough_space">Nema dovolen prostor</string>
     <string name="export_not_enough_space_descr">Vašiot ured ima samo %1$s besplaten. Oslobodete prostor ili poništete go izborot na nekoi stavki za prenesuvanje.</string>
     <string name="file_size_needed_for_import">Potrebno e da se vnese (importira)</string>
+    <string name="add_to_opr">Dodadi vo OpenPlaceReviews</string>
     <string name="add_to_mapillary">Dodadi vo Mapillary</string>
     <string name="select_items_for_import">Izberete stavki što ḱe se uvezat.</string>
     <string name="app_mode_kayak">Kajak</string>
+    <string name="register_on_openplacereviews_desc">Fotografiite se obezbedeni od proektot za otvoreni podatoci OpenPlaceReviews.org. Za da gi postavite vašite fotografii, treba da se registrirate na nivnata veb-stranica.</string>
     <string name="gpx_upload_private_visibility_descr">„Privatno“ znači deka tragata ne se pojavuva na nitu eden javen oglas, no točkite za sledenje od nea po nehronološki redosled se dostapni preku javnoto GPS API bez vremenski oznaki.</string>
     <string name="gpx_upload_public_visibility_descr">„Javno“ znači deka tragata e javno prikažana vo vašite GPS tragi i vo javnite spisoci za tragi na GPS i vo spisokot za javna traga so vremenski pečati vo surova forma. Podatocite servirani preku API ne upatuvaat na vašata stranica za traga. Vremenskite oznaki za trasite ne se dostapni preku javnoto GPS API, a točkite za sledenje ne se hronološki podredeni.</string>
     <string name="enter_text_separated">Vnesete oznaki (tagovi) oddeleni so zapirka.</string>
@@ -946,6 +951,7 @@
     <string name="plan_route_split_before">Podeli pred</string>
     <string name="plan_route_split_after">Podeli posle</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="add_photos_descr">OsmAnd prikažuva fotografii od nekolku izvori:
 \nOpenPlaceReviews - POI fotografii;
 \nMapillary - sliki na nivo na ulica;
 \nVeb / Vikimedija - Fotografii na POI spored podatocite na OpenStreetMap.</string>
@@ -1234,6 +1240,7 @@
     <string name="store_tracks_in_daily_directories">Snimeni zapisi vo dnevnite papki</string>
     <string name="store_tracks_in_daily_directories_descrp">Snimajte zapisi vo podpapki po den na snimanje (kako 2018-01-01).</string>
     <string name="routing_attr_allow_intermittent_description">Dozvolete naizmenični vodni patista</string>
+    <string name="open_place_reviews_plugin_description">Ispraḱajte fotografii, recenzii i vrski za javni mesta kako što se restorani, hoteli, muzei i patni točki kako otvoreni podatoci https://openplacereviews.org/data/.
 \n
 \nPročitajte poveḱe na https://openplacereviews.org</string>
     <string name="add_online_routing_engine">Dodajte motor za nasočuvanje preku Internet</string>
@@ -1251,6 +1258,7 @@
     <string name="use_dev_url">Koristi dev.openstreetmap.org</string>
     <string name="user_login">Logiraj Se</string>
     <string name="routing_engine_vehicle_type_hiking">Planinarenje</string>
+    <string name="register_on_openplacereviews">Registriraj se na 
 \nOpenPlaceReviews.org</string>
     <string name="gpx_upload_trackable_visibility_descr">„Može da se sledi“ znači deka tragata ne se pojavuva na nitu eden javen oglas, tuku obrabotenite točki za sledenje so vremenski pečati od nego (koi ne možat direktno da se povrzat so vas) go pravat preku prezemanja od javnoto GPS API.</string>
     <string name="online_routing_example_hint">URL so site parametri ḱe izgleda vaka:</string>
@@ -3182,6 +3190,7 @@
     <string name="rendering_attr_hideNonVehicleHighways_name">Avtopati bez vozila</string>
     <string name="rendering_attr_moreDetailed_name">Povece detali</string>
     <string name="rendering_attr_hideText_name">Tekst</string>
+    <string name="rendering_attr_hideAccess_name">Ograničuvanja za pristap</string>
     <string name="rendering_attr_showAccess_name">Prikaži ograničuvanja za pristap i patarina</string>
     <string name="rendering_attr_showSurfaces_name">Pokažete ja površinata na patot</string>
     <string name="no_index_file_to_download">Prezemanjata ne se pronajdeni, proverete ja vrskata so Internet.</string>
