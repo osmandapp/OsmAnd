@@ -5655,4 +5655,7 @@
     <string name="shared_string_length">Дужина</string>
     <string name="shared_string_avg_altitude">Просечна надморска висина</string>
     <string name="shared_string_avg_speed">Минимална брзина</string>
+    <string name="map_widget_route_information">Информације о рути</string>
+    <string name="shared_string_default_view">Подразумевани приказ</string>
+    <string name="map_widget_route_information_desc">Приказује процењено време доласка, преостало време путовања и удаљеност за тренутну навигациону руту.</string>
 </resources>
