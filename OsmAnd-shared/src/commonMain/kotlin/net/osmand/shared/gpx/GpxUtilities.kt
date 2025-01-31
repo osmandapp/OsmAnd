@@ -509,7 +509,8 @@ object GpxUtilities {
 					val tagsBundle = StringBundle()
 					tagsBundle.putString("type", gpxFile.networkRouteKeyTags.get("type"))
 					for ((key, value) in gpxFile.networkRouteKeyTags) {
-						tagsBundle.putString(key, value)
+						val attributeToXml = key.replace(":", XML_COLON)
+						tagsBundle.putString(attributeToXml, value)
 					}
 					val routeKeyBundle = mutableListOf<StringBundle>()
 					routeKeyBundle.add(tagsBundle)
@@ -1466,7 +1467,7 @@ object GpxUtilities {
 
 	private fun getExtensionsSupportedTag(tag: String): String {
 		val supportedTag = SUPPORTED_EXTENSION_TAGS[tag]
-		return supportedTag ?: tag
+		return supportedTag ?: tag.replace(XML_COLON, ":")
 	}
 
 	private fun parseRouteKeyAttributes(parser: XmlPullParser): Map<String, String> {
@@ -1477,7 +1478,8 @@ object GpxUtilities {
 		if (!bundle.isEmpty()) {
 			for (item in bundle.getMap().values) {
 				if (item.type == StringBundle.ItemType.STRING) {
-					networkRouteKeyTags[item.name] = item.value as String
+					val attributeFromXml = item.name.replace(XML_COLON, ":")
+					networkRouteKeyTags[attributeFromXml] = item.value as String
 				}
 			}
 		}
