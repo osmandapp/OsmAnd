@@ -5688,4 +5688,7 @@
     <string name="shared_string_avg_altitude">Durchschnittliche Höhe</string>
     <string name="shared_string_avg_speed">Min. Geschwindigkeit</string>
     <string name="shared_string_length">Länge</string>
+    <string name="map_widget_route_information">Routeninformationen</string>
+    <string name="shared_string_default_view">Standardansicht</string>
+    <string name="map_widget_route_information_desc">Zeigt die geschätzte Ankunftszeit, die verbleibende Reisezeit und die Distanz für die aktuelle Navigationsroute an.</string>
 </resources>
