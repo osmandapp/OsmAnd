@@ -304,7 +304,6 @@
     <string name="rendering_attr_hideBuildings_name">Byggingar</string>
     <string name="rendering_attr_hideText_name">Texti</string>
     <string name="rendering_attr_moreDetailed_name">Nánari upplýsingar</string>
-    <string name="rendering_attr_hideAccess_name">Aðgangstakmarkanir</string>
     <string name="sort_by_name">Raða eftir nafni</string>
     <string name="select_destination_and_intermediate_points">Stilltu áfangastaði</string>
     <string name="loading_smth">Hleð inn %1$s…</string>
@@ -3636,7 +3635,6 @@
     <string name="register_opr_create_new_account">Búa til nýjan notandaaðgang</string>
     <string name="osm_login_descr">Skráðu þig inn með öruggu OAuth-aðferðinni eða með OSM-notandanafni og lykilorði.</string>
     <string name="app_mode_motorboat">Vélbátar</string>
-    <string name="register_on_openplacereviews_desc">Ljósmyndir eru í boði frá opna gagnaverkefninu OpenPlaceReviews.org. Til að geta sent inn myndir þarftu að skrá þig á vefsvæðinu þeirra.</string>
     <string name="osm_edit_comment_note">Gera athugasemd við OSM-minnispunkt</string>
     <string name="gpx_upload_trackable_visibility_descr">\"Rekjanlegt\" þýðir að ferillinn birtist ekki á neinum opinberum listum, en meðhöndlaðir ferilpunktar með tímamerkjum úr ferlinum (sem ekki er hægt að tengja beint við þig) munu birtast í gögnum sem eru sótt í gegnum opinbert GPS API-forritsviðmót.</string>
     <string name="add_photos_descr">OsmAnd birtir ljósmyndir frá ýmsum þjónustum:
@@ -3650,7 +3648,6 @@
     <string name="add_to_mapillary">Bæta í Mapillary</string>
     <string name="export_not_enough_space">Ekki er nægilegt pláss</string>
     <string name="export_not_enough_space_descr">Tækið þitt er aðeins með %1$s laust. Losaðu um eitthvað minni eða afveldu atriði sem á að flytja út.</string>
-    <string name="add_to_opr">Bæta í OpenPlaceReviews</string>
     <string name="file_size_needed_for_import">Nauðsynlegt fyrir innflutning</string>
     <string name="select_items_for_import">Veldu atriði sem á að flytja inn.</string>
     <string name="select_groups_for_import">Veldu hópa sem á að flytja inn.</string>
@@ -3742,9 +3739,6 @@
     <string name="uploaded_count">Sent inn %1$d af %2$d</string>
     <string name="toast_select_edits_for_upload">Veldu breytingar til að senda inn</string>
     <string name="hillshade_slope_contour_lines">Hæðarlínur / Hæðaskygging / Halli</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Nota test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Skrá inn á OpenPlaceReviews</string>
     <string name="activity_type_water_name">Vatn</string>
     <string name="activity_type_winter_name">Vetur</string>
     <string name="activity_type_snowmobile_name">Vélsleðar</string>

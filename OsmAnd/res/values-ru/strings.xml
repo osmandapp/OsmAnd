@@ -1502,7 +1502,6 @@
     <string name="rendering_attr_showSurfaces_name">Тип дорожного покрытия</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Непроезжие дороги</string>
     <string name="rendering_attr_buildings15zoom_name">Здания на масштабе 15</string>
-    <string name="rendering_attr_hideAccess_name">Ограничения доступа</string>
     <string name="rendering_attr_showAccess_name">Показывать ограничения доступа</string>
     <string name="rendering_attr_showCycleRoutes_name">Велосипедные маршруты</string>
     <string name="map_preferred_locale_descr">Предпочтительный язык для меток на карте (если он не доступен, то английский язык или местные названия).</string>
@@ -3819,7 +3818,6 @@
     <string name="register_opr_have_account">У меня уже есть аккаунт</string>
     <string name="shared_string_search_history">История поиска</string>
     <string name="app_mode_motorboat">Моторная лодка</string>
-    <string name="add_to_opr">Добавить в OpenPlaceReviews</string>
     <string name="add_to_mapillary">Добавить в Mapillary</string>
     <string name="add_photos_descr">OsmAnd показывает фотографии из нескольких источников:
 \nOpenPlaceReviews — фотографии POI;
@@ -3838,7 +3836,6 @@
     <string name="subscription_payment_issue_title">Нажмите кнопку, чтобы перейти к настройкам подписки Google Play и исправить вашу подписку.</string>
     <string name="osm_edit_comment_note">Комментировать заметку OSM</string>
     <string name="use_dev_url_descr">Переключиться на использование dev.openstreetmap.org вместо openstreetmap.org для тестирования отправки заметок OSM / POI / GPX.</string>
-    <string name="register_on_openplacereviews_desc">Фото предоставлены проектом открытых данных OpenPlaceReviews.org. Для отправки фото нужна регистрация на сайте.</string>
     <string name="cannot_upload_image">Невозможно отправить изображение, попробуйте позже</string>
     <string name="select_picture">Выбор изображения</string>
     <string name="app_mode_kayak">Каяк</string>
@@ -3937,13 +3934,10 @@
     <string name="activity_type_offroad_name">Внедорожник</string>
     <string name="activity_type_motorbike_name">Мотоцикл</string>
     <string name="activity_type_car_name">Автомобиль</string>
-    <string name="opr_use_dev_url">Использовать test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Вход в OpenPlaceReviews</string>
     <string name="activity_type_snowmobile_name">Снегоход</string>
     <string name="activity_type_mountainbike_name">Горный велосипед</string>
     <string name="routing_engine_vehicle_type_driving">Вождение</string>
     <string name="routing_engine_vehicle_type_foot">Пешком</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="activity_type_water_name">Вода</string>
     <string name="activity_type_winter_name">Зима</string>
     <string name="activity_type_riding_name">Верховая езда</string>
@@ -5836,7 +5830,6 @@
     <string name="fuel_tank_capacity">Объём топливного бака</string>
     <string name="imperial_gallons">Имперские галлоны</string>
     <string name="us_gallons">Американские галлоны</string>
-    <string name="imperial_gallons_unit">imp gal</string>
     <string name="us_gallons_unit">us gal</string>
     <string name="shared_string_hour">Час</string>
     <string name="ltr_or_rtl_combine_via_per">%1$s за %2$s</string>

@@ -2562,7 +2562,6 @@
     <string name="rendering_attr_showCycleRoutes_name">Cycle routes</string>
     <string name="rendering_attr_showSurfaces_name">Show road surface</string>
     <string name="rendering_attr_showSurfaceGrade_name">Show road quality</string>
-    <string name="rendering_attr_hideAccess_name">Access restrictions</string>
     <string name="rendering_attr_lessDetailed_name">Menos detalles</string>
     <string name="rendering_attr_buildings15zoom_name">Buildings on zoom 15</string>
     <string name="rendering_attr_hideWoodScrubs_name">Wood and scrubs</string>
@@ -3714,9 +3713,6 @@
     <string name="open_place_reviews_plugin_description">Unvia semeyes, reseñes y enllaces de llugares públicos como restoranes, hoteles, museos y otros puntos a OpenPlaceReviews.
 \n
 \nToos estos datos son abiertos y pues lleer más tocante al proyeutu en https://openplacereviews.org</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Usar test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Aniciar sesión n\'OpenPlaceReviews</string>
     <string name="activity_type_water_name">Water</string>
     <string name="activity_type_winter_name">Winter</string>
     <string name="activity_type_snowmobile_name">Snowmobile</string>
@@ -3950,7 +3946,6 @@
     <string name="shared_string_add_photo">Add photo</string>
     <string name="register_on_openplacereviews">Rexistru en
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Photos are provided by the OpenPlaceReviews.org open data project. In order to upload your photos you need to sign up on their website.</string>
     <string name="register_opr_create_new_account">Crear una cuenta</string>
     <string name="register_opr_have_account">Yá tengo una cuenta</string>
     <string name="shared_string_search_history">Search history</string>
@@ -3967,7 +3962,6 @@
     <string name="select_groups_for_import">Select groups that will be imported.</string>
     <string name="select_items_for_import">Select items that will be imported.</string>
     <string name="add_to_mapillary">Add to Mapillary</string>
-    <string name="add_to_opr">Add to OpenPlaceReviews</string>
     <string name="use_dev_url_descr">Switch to use \"dev.openstreetmap.org\" instead of \"openstreetmap.org\" to testing uploading OSM Note / POI / GPX.</string>
     <string name="use_dev_url">Usar dev.openstreetmap.org</string>
     <string name="add_photos_descr">OsmAnd shows photos from several sources:

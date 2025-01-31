@@ -1232,7 +1232,6 @@
     <string name="file_size_needed_for_import">საჭიროა იმპორტისთვის</string>
     <string name="select_items_for_import">აირჩიეთ საიმპორტო პუნქტები.</string>
     <string name="add_to_mapillary">Mapillary-ში დამატება</string>
-    <string name="add_to_opr">OpenPlaceReviews-ში დამატება</string>
     <string name="shared_string_save_as_gpx"/>
     <string name="layer_gpx_layer">თვალთვალი</string>
     <string name="map_widget_monitoring">გზის ჩაწერა</string>
@@ -1277,7 +1276,6 @@
     <string name="pause_navigation">ნავიგაციის შეჩერება</string>
     <string name="continue_navigation">ნავიგაციის გაგრძელება</string>
     <string name="lang_sr">სერბული (კირილიცა)</string>
-    <string name="rendering_attr_hideAccess_name">წვდომის შეზღუდვები</string>
     <string name="rendering_attr_lessDetailed_name">ნაკლები დეტალი</string>
     <string name="rendering_attr_moreDetailed_name">მეტი დეტალი</string>
     <string name="select_destination_and_intermediate_points">დანიშნულების წერტილების მითითება</string>

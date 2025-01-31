@@ -882,9 +882,7 @@
     <string name="routing_attr_weight_description">Odredi dozvoljenu težinu vozila na rutama.</string>
     <string name="routing_attr_weight_name">Težina</string>
     <string name="android_19_location_disabled">Od KitKat inačice androida (4.4) ne možete preuzimati i ažurirati mape na prethodno mjesto pohrane (%s). Želite li dopustiti aplikaciji da kopira podatke na novo mjesto?
- 
  Napomena : stare datoteke će ostati netaknute (ali ih možete obrisati).
- 
  Napomena : neće biti moguće dijeliti datoteke između OsmAnd i OsmAnd+.</string>
     <string name="copying_osmand_one_file_descr">Kopiranje datoteke (%s) na novo odredište …</string>
     <string name="copying_osmand_files_descr">Kopiranje OsmAnd datoteka na novo odredište (%s) …</string>
@@ -990,7 +988,6 @@
     <string name="rendering_attr_hideWoodScrubs_name">Sakrij šume i šikare</string>
     <string name="rendering_attr_moreDetailed_name">Više detalja</string>
     <string name="rendering_attr_lessDetailed_name">Manje detalja</string>
-    <string name="rendering_attr_hideAccess_name">Sakrij ograničenja pristupa</string>
     <string name="rendering_attr_showAccess_name">Prikaži ograničenja pristupa</string>
     <string name="rendering_attr_showSurfaceGrade_name">Prikaži kvalitetu cesta</string>
     <string name="rendering_attr_showSurfaces_name">Prikaži površine ceste</string>
@@ -1444,9 +1441,6 @@
 \nSvi OpenPlaceReview podaci su javni i dostupni svima: http://openplacereviews.org/data.
 \n
 \nPročitajte više na: http://openplacereviews.org</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Koristiti test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Prijavite se za OpenPlaceReviews</string>
     <string name="activity_type_water_name">Voda</string>
     <string name="activity_type_winter_name">Zima</string>
     <string name="activity_type_snowmobile_name">Motorne sanjke</string>

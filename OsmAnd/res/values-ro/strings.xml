@@ -1106,7 +1106,6 @@
     <string name="rendering_attr_buildings15zoom_name">Clădirile la nivel de zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">Mai multe detalii</string>
     <string name="rendering_attr_lessDetailed_name">Mai puține detalii</string>
-    <string name="rendering_attr_hideAccess_name">Restricții de acces</string>
     <string name="rendering_attr_showAccess_name">Afișarea restricțiilor de acces</string>
     <string name="rendering_attr_showSurfaceGrade_name">Arată calitatea drumului</string>
     <string name="rendering_attr_showSurfaces_name">Arată suprafața drumului</string>
@@ -3206,13 +3205,10 @@
     <string name="open_place_reviews_plugin_description">Contribuiți la proiectul OpenPlaceReviews, cum ar fi fotografii, recenzii sau linkuri pentru locuri publice, cum ar fi restaurante, hoteluri sau muzee.
 \n
 \nGăsiți instrucțiuni despre cum să contribuiți pe site-ul nostru %1$s.</string>
-    <string name="open_place_reviews">OpenPlaceRecenzii</string>
-    <string name="opr_use_dev_url">Utilizați test.openplacereviews.org</string>
     <string name="use_volume_buttons_as_zoom_descr">Controlați nivelul de zoom al hărții cu ajutorul butoanelor de volum de pe dispozitiv.</string>
     <string name="quick_action_remove_next_destination_descr">Șterge următoarea destinație de pe traseu. Dacă aceasta este destinația finală, navigația se va opri.</string>
     <string name="plugin_wikipedia_description">Obțineți informații despre punctele de interes de pe Wikipedia, un ghid offline de buzunar care conține articole despre locuri și destinații.</string>
     <string name="add_hidden_group_info">Punctul adăugat poate fi găsit în \"%s\". Descoperă grupul selectat pentru a-l afișa pe hartă.</string>
-    <string name="login_open_place_reviews">Conectați-vă la OpenPlaceReviews</string>
     <string name="activity_type_water_name">Apă</string>
     <string name="activity_type_winter_name">Iarnă</string>
     <string name="activity_type_snowmobile_name">Snowmobil</string>
@@ -3308,7 +3304,6 @@
     <string name="shared_string_add_photo">Adaugă fotografie</string>
     <string name="register_on_openplacereviews">Înregistrați-vă pe
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Fotografiile sunt furnizate de proiectul de date deschise OpenPlaceReviews.org. Pentru a vă încărca fotografiile, trebuie să vă înregistrați pe site-ul lor.</string>
     <string name="register_opr_create_new_account">Crează cont nou</string>
     <string name="register_opr_have_account">Am deja un cont</string>
     <string name="shared_string_search_history">Istoric de căutări</string>
@@ -3325,7 +3320,6 @@
     <string name="select_groups_for_import">Selectați grupurile care vor fi importate.</string>
     <string name="select_items_for_import">Selectați elementele care vor fi importate.</string>
     <string name="add_to_mapillary">Adaugă la Mapillary</string>
-    <string name="add_to_opr">Adaugați la OpenPlaceRecenzii</string>
     <string name="use_dev_url_descr">Comută la utilizarea dev.openstreetmap.org în loc de openstreetmap.org pentru a testa încărcarea de OSM Note / POI / GPX.</string>
     <string name="use_dev_url">Folosește dev.openstreetmap.org</string>
     <string name="add_photos_descr">OsmAnd prezintă fotografii din mai multe surse:
