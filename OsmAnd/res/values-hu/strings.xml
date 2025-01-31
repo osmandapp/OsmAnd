@@ -2965,7 +2965,7 @@
     <string name="app_mode_utv">UTV (kis terepautó)</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Kötélpályás felvonó</string>
     <string name="switch_profile">Profil váltás</string>
-    <string name="application_profile_changed">Alkalmazásprofil módosítva erre: %s\\</string>
+    <string name="application_profile_changed">Alkalmazásprofil módosítva erre: \"%s\"</string>
     <string name="change_data_storage_full_description">Áthelyezi az OsmAnd fájlokat az új helyre\?
 \n%1$s &gt; %2$s</string>
     <string name="rendering_value_white_name">Fehér</string>
@@ -5280,7 +5280,7 @@
     <string name="shared_string_key">Billentyű</string>
     <string name="no_assigned_keys">Nincsenek hozzárendelt billentyűk</string>
     <string name="clear_all_key_shortcuts_summary">A kiválasztott típushoz tartozó összes billentyű-hozzárendelés el lesz távolítva.</string>
-    <string name="key_name_pattern">\"%1$s\\ gomb</string>
+    <string name="key_name_pattern">\"%1$s\" gomb</string>
     <string name="clear_key_assignment_summary">A kiválasztott művelethez tartozó billentyű-hozzárendelés törlődik.</string>
     <string name="key_assignment_add_key">Billentyű hozzáadása</string>
     <string name="action_icon">Műveletikon</string>
@@ -5629,4 +5629,7 @@
     <string name="shared_string_avg_altitude">Átlagos magasság</string>
     <string name="shared_string_avg_speed">Legkisebb sebesség</string>
     <string name="shared_string_length">Hosszúság</string>
+    <string name="map_widget_route_information">Útvonalinformációk</string>
+    <string name="shared_string_default_view">Alapértelmezett nézet</string>
+    <string name="map_widget_route_information_desc">Megjeleníti a becsült érkezési időt, a fennmaradó utazási időt és az aktuális navigációs útvonal távolságát.</string>
 </resources>
