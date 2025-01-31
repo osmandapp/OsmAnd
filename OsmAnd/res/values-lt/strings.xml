@@ -1208,7 +1208,6 @@
     <string name="rendering_attr_buildings15zoom_name">Pastatus rodyti 15 didinimo laipsnyje</string>
     <string name="rendering_attr_moreDetailed_name">Detaliau</string>
     <string name="rendering_attr_lessDetailed_name">Mažiau detalių</string>
-    <string name="rendering_attr_hideAccess_name">Prieigos apribojimai</string>
     <string name="rendering_attr_showAccess_name">Rodyti pateikimo ribojimus bei rinkliavą</string>
     <string name="rendering_attr_showSurfaceGrade_name">Rodyti kelių kokybę</string>
     <string name="rendering_attr_showSurfaces_name">Rodyti kelių paviršiaus tipą</string>

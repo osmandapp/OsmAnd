@@ -1179,7 +1179,6 @@
     <string name="rendering_attr_buildings15zoom_name">Budovy pri priblížení 15</string>
     <string name="rendering_attr_moreDetailed_name">Viac detailov</string>
     <string name="rendering_attr_lessDetailed_name">Menej detailov</string>
-    <string name="rendering_attr_hideAccess_name">Obmedzenia prístupu</string>
     <string name="rendering_attr_showAccess_name">Zobraziť obmedzenia prístupu</string>
     <string name="rendering_attr_showSurfaceGrade_name">Zobraziť kvalitu ciest</string>
     <string name="rendering_attr_showSurfaces_name">Zobraziť povrch ciest</string>
@@ -3646,17 +3645,13 @@
     <string name="osm_edit_comment_note">Komentovať OSM poznámku</string>
     <string name="osm_login_descr">Prihláste sa metódou OAuth alebo pomocou mena a hesla v OSM.</string>
     <string name="shared_string_add_photo">Pridať foto</string>
-    <string name="register_on_openplacereviews">Zaregistrovať na
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Fotografie sú poskytované projektom OpenPlaceReviews.org s otvorenými dátami. Na odoslanie vašich fotiek sa musíte zaregistrovať na webovej stránke.</string>
     <string name="register_opr_create_new_account">Vytvoriť nový účet</string>
     <string name="register_opr_have_account">Už mám účet</string>
     <string name="shared_string_search_history">História hľadania</string>
     <string name="app_mode_kayak">Kajak</string>
     <string name="app_mode_motorboat">Motorový čln</string>
     <string name="add_to_mapillary">Pridať do Mapillary</string>
-    <string name="add_to_opr">Pridať do OpenPlaceReviews</string>
-    <string name="add_photos_descr">OsmAnd zobrazuje fotografie z rôznych zdrojov:
 \nOpenPlaceReviews - fotografie bodov záujmu;
 \nMapillary - fotografie z ulice;
 \nWeb / Wikimedia - fotografie bodov záujmu špeficikované v údajoch OpenStreetMap.</string>
@@ -3761,12 +3756,8 @@
     <string name="uploaded_count">Odoslané %1$d z %2$d</string>
     <string name="toast_select_edits_for_upload">Zvoľte úpravy na odoslanie</string>
     <string name="hillshade_slope_contour_lines">Vrstevnice / Tieňované svahy / Sklony svahov</string>
-    <string name="open_place_reviews_plugin_description">Prispievajte do projektu OpenPlaceReviews, napríklad fotografiami, recenziami, odkazmi o verejných miestach ako sú reštaurácie, hotely alebo múzeá.
 \n
 \nInštrukcie ako prispievať nájdete na našej webstránke %1$s.</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Použiť test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Prihlásiť sa do OpenPlaceReviews</string>
     <string name="activity_type_water_name">Voda</string>
     <string name="activity_type_winter_name">Zima</string>
     <string name="activity_type_snowmobile_name">Snežný skúter</string>
@@ -5409,7 +5400,6 @@
     <string name="energy_avg_info_description">Úroveň batérie za minútu: %1$s
 \nSpotreba energie (mAh): %2$s</string>
     <string name="rendering_avg_info">Štatistika vykresľovania (priemer za 1 / 5 / 15 minút)</string>
-    <string name="rendering_avg_info_description">FPS za posledných 1k snímok: %1$s
 \nProcesor: %2$s
 \nGrafika 1k: %3$s
 \nNečinné 1k: %4$s</string>
@@ -5574,7 +5564,6 @@
     <string name="fuel_tank_capacity">Objem nádrže</string>
     <string name="shared_strings_dimensions">Rozmery</string>
     <string name="litres">Litre</string>
-    <string name="imperial_gallons_unit">imp gal</string>
     <string name="us_gallons_unit">gal</string>
     <string name="imperial_gallons">Imperiálne galóny</string>
     <string name="us_gallons">USA galóny</string>
@@ -5599,7 +5588,6 @@
     <string name="current_temperature">Aktuálna teplota</string>
     <string name="average_temperature">Priemerná teplota</string>
     <string name="wunderlinq_datagrid">WunderLINQ Datagrid</string>
-    <string name="obd_rpm">Ot./min</string>
     <string name="obd_battery_voltage_desc">Zobrazuje úroveň napätia batérie vozidla</string>
     <string name="obd_fuel_type_hydrogen">Vodík</string>
     <string name="shared_string_volume">Objem</string>

@@ -435,7 +435,6 @@
     <string name="save_changes_into_file">Cadw newidiadau i ffeil</string>
     <string name="search_history_is_disabled_descr">Gellir galluogi\'r hanes chwilio yn y gosodiadau.</string>
     <string name="enter_verification_code">Rhowch gyfrinair un tro</string>
-    <string name="add_to_opr">Ychwanegu at OpenPlaceReviews</string>
     <string name="shared_string_permissions">Caniatâd</string>
     <string name="amenity_type_shop">Siop</string>
     <string name="exit_import">Gadael\?</string>
@@ -563,8 +562,6 @@
     <string name="activity_type_snowmobile_name">Car eira</string>
     <string name="activity_type_winter_name">Gaeaf</string>
     <string name="activity_type_water_name">Dŵr</string>
-    <string name="login_open_place_reviews">Mewngofnodi i OpenPlaceReviews</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="activity_type_motorbike_name">Beic modur</string>
     <string name="activity_type_walking_name">Cerdded</string>
     <string name="activity_type_running_name">Rhedeg</string>
@@ -589,7 +586,6 @@
     <string name="shared_string_last_used">Defnyddiwyd diwethaf</string>
     <string name="profile_by_default_description">Dewiswch y proffil i\'w ddefnyddio ar ddechrau\'r ap.</string>
     <string name="profile_type_user_string">Proffil defnyddiwr</string>
-    <string name="add_photos_descr">Mae OsmAnd yn dangos lluniau o sawl ffynhonell:
 \nOpenPlaceReviews - lluniau MODd;
 \nMapillary - delweddau lefel strydoedd;
 \nGwe / Wicimedia - lluniau MODd yn ôl data OpenStreetMap.</string>
@@ -1127,7 +1123,6 @@
 \n - Canllaw lonydd cywir, dangos cyfyngiadau cyflymder, lleisiau wedi\'i recordio a thestun-i-lais.
 \n</string>
     <string name="show_tunnels">Twneli</string>
-    <string name="open_place_reviews_plugin_description">Anfon lluniau, adolygiadau, a dolenni am lefydd cyhoeddus megis bwytai, gwestai, amgueddfeydd, a mannau o ddiddordeb fel data agored https://openplacereviews.org/data/.
 \n
 \nDarllenwch mwy ar https://openplacereviews.org</string>
     <string name="routing_engine_vehicle_type_foot">Cerdded</string>
@@ -1363,7 +1358,6 @@
     <string name="duration_moment_ago">moment yn ôl</string>
     <string name="shared_string_external">Allanol</string>
     <string name="quick_action_show_hide_title">Dangos/cuddio</string>
-    <string name="opr_use_dev_url">Defnyddio test.openplacereviews.org</string>
     <string name="copy_to_map_favorites">Copïo i ffefrynnau</string>
     <string name="copy_to_map_markers">Copïo i nodau map</string>
     <string name="select_segments_description">Mae %1$s yn cynnwys mwy nag un segment. Rhaid nodi\'r rhan ar gyfer y llywio.</string>
@@ -1859,7 +1853,6 @@
     <string name="rendering_attr_hideNonVehicleHighways_name">Ffyrdd di-gerbyd</string>
     <string name="rendering_attr_moreDetailed_name">Rhagor o fanylion</string>
     <string name="rendering_attr_lessDetailed_name">Llai o fanylion</string>
-    <string name="rendering_attr_hideAccess_name">Cyfyngiadau mynediad</string>
     <string name="rendering_attr_showCycleRoutes_name">Llwybrau beicio</string>
     <string name="show_zoom_buttons_navigation">Dangos botymau chwyddo</string>
     <string name="show_zoom_buttons_navigation_descr">Dangos botymau chwyddo yn ystod llywio.</string>
@@ -2401,7 +2394,6 @@
     <string name="shared_strings_all_regions">Pob rhanbarth</string>
     <string name="snap_to_road_descr">Bydd yr eicon lleoliad presennol yn snapio i\'r llwybr llywio cyfredol</string>
     <string name="reverse_all_points">Gwrthdroi pob pwynt</string>
-    <string name="register_on_openplacereviews">Cofrestru ar
 \nOpenPlaceReviews.org</string>
     <string name="delete_updates">Dileu diweddariadau</string>
     <string name="app_mode_light_aircraft">Awyrennau bychain</string>
@@ -3098,7 +3090,6 @@
     <string name="simulation_constant_mode_desc">Bydd yr efelychiad yn cael ei gyflawni gyda chyflymder dethol cyson.</string>
     <string name="simulation_preview_mode_desc">Bydd cyflymder yr efelychiad yn fwyaf ar adrannau syth ac yn arafu dim ond ar groesffyrdd.</string>
     <string name="simulation_preview_mode_title">Y modd rhagolwg cyflym</string>
-    <string name="register_on_openplacereviews_desc">Darperir lluniau gan brosiect data agored OpenPlaceReviews.org. Er mwyn llwytho\'ch lluniau i fyny mae angen i chi gofrestru ar eu gwefan.</string>
     <string name="osm_edit_comment_note">Sylw Nodyn OSM</string>
     <string name="gpx_upload_public_visibility_descr">Mae \"cyhoeddus\" yn golygu bod yr olrhain yn cael ei ddangos yn gyhoeddus yn eich olrhain GPS ac mewn rhestrau olrhain GPS cyhoeddus, ac yn y rhestr olrhain gyhoeddus gyda stampiau amser ar ffurf amrwd. Nid yw data a gyflwynir trwy\'r API yn cyfeirio at eich tudalen olrhain. Nid yw stampiau amser pwyntiau olrhain ar gael trwy\'r API GPS cyhoeddus, ac nid yw pwyntiau olrhain wedi\'u trefnu\'n gronolegol.</string>
     <string name="subscription_expired_title">Mae tanysgrifiad OsmAnd Live wedi dod i ben</string>
