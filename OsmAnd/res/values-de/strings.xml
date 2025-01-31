@@ -2989,7 +2989,7 @@
     <string name="pref_selected_by_default_for_profiles">Für Profile wird als Vorgabe diese Einstellung gewählt: %s</string>
     <string name="change_default_settings">Einstellung ändern</string>
     <string name="discard_changes">Änderung verwerfen</string>
-    <string name="apply_to_current_profile">Nur anwenden auf \"%1$s\\</string>
+    <string name="apply_to_current_profile">Nur anwenden auf \"%1$s\"</string>
     <string name="apply_to_all_profiles">Auf alle Profile anwenden</string>
     <string name="analytics_pref_title">Analyseinstrumente</string>
     <string name="turn_screen_on_info">Karte während der Navigation auf dem Sperrbildschirm anzeigen.</string>
@@ -4239,7 +4239,7 @@
     <string name="please_provide_group_name_message">Bitte benennen Sie die Gruppe.</string>
     <string name="exit_import">Beenden\?</string>
     <string name="import_tracks_descr">%1$s, enthält %2$s separate Tracks. Wählen Sie die zu importierenden Tracks aus.</string>
-    <string name="location_source_descr">Standardmäßig verwendet OsmAnd, das von Google Play installiert wurde, %1$s zur Standortbestimmung.\n\nWenn du ungenaue Standortinformationen erhältst oder ein Gerät ohne %2$s verwendest, versuche, zu \"%3$s\\\" zu wechseln.</string>
+    <string name="location_source_descr">Standardmäßig verwendet OsmAnd, das von Google Play installiert wurde, %1$s zur Standortbestimmung.\n\nWenn du ungenaue Standortinformationen erhältst oder ein Gerät ohne %2$s verwendest, versuche, zu \"%3$s\" zu wechseln.</string>
     <string name="location_source">Standortquelle</string>
     <string name="points_selection_descr">Schließen und alle Änderungen verwerfen\?</string>
     <string name="exit_import_descr">Beenden, ohne die Änderungen zu speichern\?</string>
@@ -5143,7 +5143,7 @@
     <string name="key_event_action_open_search_view">Suche öffnen</string>
     <string name="key_event_action_zoom_out">Herauszoomen</string>
     <string name="key_event_action_toggle_drower">Seitenmenü anzeigen/verbergen</string>
-    <string name="key_is_already_assigned_error">Die Taste \"%1$s\" ist bereits der Aktion \"%2$s\" zugeordnet</string>
+    <string name="key_is_already_assigned_error">Der Schlüssel \"%1$s\" ist bereits der Aktion \"%2$s\" zugeordnet</string>
     <string name="key_event_action_open_navigation_view">Navigationsansicht öffnen</string>
     <string name="external_input_device_title">Externes Eingabegerät</string>
     <string name="key_bindings">Tastenbelegung</string>
@@ -5331,7 +5331,7 @@
     <string name="no_assigned_keys">Keine zugewiesenen Tasten</string>
     <string name="shared_string_key">Taste</string>
     <string name="new_key_assignment">Neue Tastenzuweisung</string>
-    <string name="key_name_pattern">Taste \"%1$s\\</string>
+    <string name="key_name_pattern">Schlüssel \"%1$s\"</string>
     <string name="clear_key_assignment_summary">Tastenzuweisung für die ausgewählte Aktion wird gelöscht.</string>
     <string name="key_assignment_add_action">Aktion hinzufügen</string>
     <string name="clear_all_key_shortcuts_summary">Alle Tastenzuweisungen für den ausgewählten Typ werden gelöscht.</string>
