@@ -1530,7 +1530,7 @@
     <string name="lang_ht">Хаићански</string>
     <string name="lang_gl">Галицијски</string>
     <string name="lang_ast">Астуријски</string>
-    <string name="rendering_attr_pisteRoutes_name">Скијалишта</string>
+    <string name="rendering_attr_pisteRoutes_name">Скијашке руте</string>
     <string name="rendering_value_germanRoadAtlas_name">Немачки атлас путева</string>
     <string name="rendering_value_highContrastRoads_name">Путеви са великим контрастом</string>
     <string name="rendering_value_americanRoadAtlas_name">Амерички атлас путева</string>
