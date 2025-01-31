@@ -717,6 +717,9 @@ public class MapRendererContext {
 			if ("osmand_change".equals(key) && "delete".equals(value)) {
 				return null;
 			}
+			if (key != null && key.startsWith("osmand_")) {
+				key = key.replace("osmand_", "");
+			}
 			object.putTag(key, value);
 		}
 
