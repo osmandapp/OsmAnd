@@ -1339,7 +1339,7 @@
     <string name="rendering_attr_pisteGrooming_name">Pistepreparering</string>
     <string name="free">Ledig %1$s</string>
     <string name="device_memory">Lagerplads</string>
-    <string name="rendering_attr_pisteRoutes_name">Skiløjper</string>
+    <string name="rendering_attr_pisteRoutes_name">Skiruter</string>
     <string name="roads_only">Kun veje</string>
     <string name="notes">A/V-noter</string>
     <string name="online_map">Online kort</string>
