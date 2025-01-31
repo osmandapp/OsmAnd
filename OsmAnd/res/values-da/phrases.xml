@@ -4217,4 +4217,10 @@
     <string name="poi_authentication_key_yes">Ja</string>
     <string name="poi_authentication_app_yes">Yes</string>
     <string name="poi_trailhead">Sporets begyndelse</string>
+    <string name="poi_dog_sled_yes">Hundeslæde: ja</string>
+    <string name="poi_atv_yes">ATV: ja</string>
+    <string name="poi_access_notes">Adgangsbemærkninger</string>
+    <string name="poi_sled_no">Slæde: nej</string>
+    <string name="poi_dog_sled_no">Hundeslæde: nej</string>
+    <string name="poi_atv_no">ATV: nej</string>
 </resources>
