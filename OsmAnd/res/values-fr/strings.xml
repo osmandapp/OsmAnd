@@ -1238,7 +1238,6 @@
     <string name="rendering_attr_buildings15zoom_name">Bâtiments en zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">Plus détaillé</string>
     <string name="rendering_attr_lessDetailed_name">Moins détaillé</string>
-    <string name="rendering_attr_hideAccess_name">Accès restreints</string>
     <string name="rendering_attr_showAccess_name">Afficher les restrictions d\'accès</string>
     <string name="rendering_attr_showSurfaceGrade_name">Afficher la qualité des routes</string>
     <string name="rendering_attr_showSurfaces_name">Afficher la surface des routes</string>
@@ -3629,7 +3628,6 @@
     <string name="osm_edit_comment_note">Commenter la note OSM</string>
     <string name="osm_edit_close_note">Fermer la note OSM</string>
     <string name="shared_string_add_photo">Ajouter une photo</string>
-    <string name="register_on_openplacereviews">Inscrivez-vous sur
 \nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Créer un nouveau compte</string>
     <string name="register_opr_have_account">J\'ai déjà un compte</string>
@@ -3637,7 +3635,6 @@
 \n
 \nUtilisez soit la méthode OAuth soit vos identifiants OSM (utilisateur et mot de passe).</string>
     <string name="osm_login_descr">Connectez-vous avec la méthode sécurisée OAuth ou avec votre identifiant OSM et votre mot de passe.</string>
-    <string name="register_on_openplacereviews_desc">Les photos sont fournies par le projet OpenPlaceReviews.org. Vous devez vous connecter au site web pour leur envoyer vos photos.</string>
     <string name="shared_string_search_history">Historique de recherche</string>
     <string name="app_mode_kayak">Kayak</string>
     <string name="export_not_enough_space_descr">Votre appareil n\'a que %1$s disponible. Veuillez libérer de l\'espace ou désélectionner l\'export de certains éléments.</string>
@@ -3648,8 +3645,6 @@
     <string name="file_size_needed_for_import">Nécessaire pour l\'import</string>
     <string name="export_not_enough_space">L\'espace disponible est insuffisant</string>
     <string name="add_to_mapillary">Ajouter à Mapillary</string>
-    <string name="add_to_opr">Ajouter à OpenPlaceReviews</string>
-    <string name="add_photos_descr">OsmAnd affiche des photos de plusieurs sources :
 \nOpenPlaceReviews : photos de PI ;
 \nMapillary : photos de rue ;
 \nWeb / Wikimedia : photos de PI réféfencés dans OpenStreetMap.</string>
@@ -3748,9 +3743,6 @@
     <string name="upload_photo">Envoi en cours</string>
     <string name="upload_photo_completed">Envoi terminé</string>
     <string name="hillshade_slope_contour_lines">Courbes de niveau / Ombrage du relief / Pentes</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Utilisez test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Se connecter à OpenPlaceReviews</string>
     <string name="activity_type_water_name">Eau</string>
     <string name="activity_type_winter_name">Hiver</string>
     <string name="activity_type_snowmobile_name">Motoneige</string>
@@ -3763,7 +3755,6 @@
     <string name="activity_type_riding_name">Équitation</string>
     <string name="activity_type_offroad_name">Tout-terrain</string>
     <string name="activity_type_motorbike_name">Moto</string>
-    <string name="open_place_reviews_plugin_description">Envoyez vos photos, avis et liens sur des lieux publics tels que les restaurants, les hôtels ou les musées afin de contribuer au projet OpenPlaceReviews.
 \n
 \nPour en savoir plus, consultez %1$s.</string>
     <string name="activity_type_racing_name">Course</string>
@@ -5386,7 +5377,6 @@
 \nConsommation d\'énergie (mAh) : %2$s</string>
     <string name="rendering_avg_info">Statistiques d\'affichage (moyenne sur 1 / 5 / 15 minutes)</string>
     <string name="energy_avg_info">Statistiques de consommation (moyenne sur 1 / 5 / 15 minutes)</string>
-    <string name="rendering_avg_info_description">Images par seconde sur les 1 000 dernières images : %1$s
 \nProcesseur : %2$s
 \nCarte graphique : %3$s
 \nVeille : %4$s</string>
@@ -5609,7 +5599,6 @@
     <string name="fuel_tank_capacity">Capacité du réservoir de carburant</string>
     <string name="shared_strings_dimensions">Dimensions</string>
     <string name="litres">Litres</string>
-    <string name="imperial_gallons_unit">galon impérial</string>
     <string name="us_gallons_unit">gal</string>
     <string name="imperial_gallons">Galons impériaux</string>
     <string name="us_gallons">Gallons américains</string>

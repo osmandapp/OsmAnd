@@ -2002,7 +2002,6 @@
     <string name="fuel_tank_capacity">Dung tích bình xăng</string>
     <string name="shared_strings_dimensions">Kích thước</string>
     <string name="litres">Lít</string>
-    <string name="imperial_gallons_unit">imp ga-lông</string>
     <string name="us_gallons_unit">ga-lông</string>
     <string name="imperial_gallons">Ga-lông hệ đo imperial</string>
     <string name="us_gallons">Ga-lông hệ US</string>

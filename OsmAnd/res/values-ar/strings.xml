@@ -1170,7 +1170,6 @@
     <string name="way_alarms">تنبيهات مرورية</string>
     <string name="save_track_to_gpx_globally_headline">تسجيل المسار حسب الطلب</string>
     <string name="download_additional_maps">حمّل الخرائط المفقودة %1$s (%2$d MB)؟</string>
-    <string name="rendering_attr_hideAccess_name">قيود الدخول</string>
     <string name="rendering_attr_showAccess_name">عرض قيود الدخول</string>
     <string name="rendering_attr_showSurfaces_name">عرض سطح الطريق</string>
     <string name="rendering_attr_showCycleRoutes_name">طرق الدراجات الهوائية</string>
@@ -3858,9 +3857,7 @@
     <string name="osm_edit_comment_note">تعليق ملاحظة OSM</string>
     <string name="osm_login_descr">سجل دخولك باستخدام طريقة المصادقة الآمنة OAuth أو استخدم اسم مستخدم OSM وكلمة المرور.</string>
     <string name="shared_string_add_photo">إضافة صورة</string>
-    <string name="register_on_openplacereviews">سجل في 
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">قم بتسجيل الدخول إلى موقع مشروع البيانات المفتوحة OpenPlaceReviews.org لرفع المزيد من الصور.</string>
     <string name="register_opr_create_new_account">إنشاء حساب جديد</string>
     <string name="register_opr_have_account">لدي حساب بالفعل</string>
     <string name="app_mode_kayak">كاياك (قوارب صغيرة فردية)</string>
@@ -3873,8 +3870,6 @@
     <string name="file_size_needed_for_import">مطلوب للاستيراد</string>
     <string name="export_not_enough_space">لا يوجد مساحة كافية</string>
     <string name="add_to_mapillary">أضف إلى مابيلاي</string>
-    <string name="add_to_opr">إضافة إلى OpenPlaceReviews</string>
-    <string name="add_photos_descr">يعرض صورا من عدة مصادر: 
 \nOpenPlaceReviews - صور POI ؛ 
 \nMapillary - صور على مستوى الشارع ؛ 
 \nالويب / ويكيميديا - صور POI المحددة في بيانات OpenStreetMap.</string>
@@ -3969,12 +3964,8 @@
     <string name="uploaded_count">تم رفع %1$d من %2$d</string>
     <string name="toast_select_edits_for_upload">تحديد التعديلات للتحميل</string>
     <string name="hillshade_slope_contour_lines">التضاريس / الانحدار / الخطوط المحيطية</string>
-    <string name="open_place_reviews_plugin_description">قدم مساهمات في مشروع OpenPlaceReviews ، مثل الصور أو المراجعات أو الروابط للأماكن العامة مثل المطاعم أو الفنادق أو المتاحف.
 \n
 \nاعثر على إرشادات حول كيفية المساهمة على موقعنا %1$s.</string>
-    <string name="open_place_reviews">موقع OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">استخدام test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">الدخول إلى OpenPlaceReviews</string>
     <string name="activity_type_water_name">ماء</string>
     <string name="activity_type_winter_name">شتاء</string>
     <string name="activity_type_snowmobile_name">الثلج</string>
@@ -5840,7 +5831,6 @@
     <string name="obd_calculated_engine_load">حمولة المحرك المحسوبة</string>
     <string name="obd_fuel_consumption_rate_l_h">معدل استهلاك الوقود (لتر/ساعة)</string>
     <string name="obd_fuel_consumption_rate_sensor">معدل استهلاك الوقود (المستشعر)</string>
-    <string name="obd_fuel_left_liter">الوقود المتبقي (لتر)</string>
     <string name="obd_fuel_left_km">الوقود المتبقي (كم)</string>
     <string name="obd_fuel_consumption_rate_scanner">معدل استهلاك الوقود (OBD)</string>
     <string name="obd_air_intake_temp_desc">يعرض درجة حرارة الهواء الداخل إلى مجمع سحب المحرك.</string>
@@ -5888,7 +5878,6 @@
     <string name="kpa_unit">كيلو باسكال</string>
     <string name="liter">لتر</string>
     <string name="obd_fuel_level_percent">مستوى الوقود (%)</string>
-    <string name="obd_fuel_left_percent">الوقود المتبقي (%)</string>
     <string name="obd_engine_oil_temperature_desc">يعرض درجة حرارة زيت المحرك.</string>
     <string name="average_temperature_slider_description">حدد الفاصل الزمني لقياس درجة الحرارة المتوسطة.</string>
     <string name="remaining_fuel">الوقود المتبقي</string>

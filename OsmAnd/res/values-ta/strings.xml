@@ -679,7 +679,6 @@
     <string name="rendering_attr_buildings15zoom_name">ஜூம் 15 இல் கட்டிடங்கள்</string>
     <string name="rendering_attr_moreDetailed_name">கூடுதல் தகவல்கள்</string>
     <string name="rendering_attr_lessDetailed_name">கொஞ்சம் விவரங்கள்</string>
-    <string name="rendering_attr_hideAccess_name">அணுகல் கட்டுப்பாடுகள்</string>
     <string name="rendering_attr_showAccess_name">அணுகல் கட்டுப்பாடுகள் மற்றும் எண்ணிக்கை என்பதைக் காட்டு</string>
     <string name="rendering_attr_showSurfaceGrade_name">சாலை தரம் காட்டு</string>
     <string name="rendering_attr_showSurfaces_name">சாலை மேற்பரப்பு காட்டு</string>
@@ -1619,7 +1618,6 @@
     <string name="map_widget_trip_recording_downhill">கீழ்நோக்கி</string>
     <string name="map_widget_trip_recording_uphill">மேல்நோக்கி</string>
     <string name="map_widget_trip_recording_duration">காலம்</string>
-    <string name="map_widget_trip_recording_distance">தூரம்</string>
     <string name="map_widget_time">செல்ல வேண்டிய நேரம்</string>
     <string name="map_widget_ruler_control">ஆரம் ஆட்சியாளர்</string>
     <string name="show_compass_ruler">திசைகாட்டி ஆட்சியாளரைக் காட்டு</string>
