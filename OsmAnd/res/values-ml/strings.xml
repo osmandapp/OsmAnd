@@ -1361,6 +1361,7 @@
     <string name="rendering_attr_hideNonVehicleHighways_name">വാഹനങ്ങുളുടേതല്ലാത്ത പാതകള്‍</string>
     <string name="rendering_attr_hideWoodScrubs_name">മരങ്ങളും കുറ്റിച്ചെടികളും</string>
     <string name="rendering_attr_buildings15zoom_name">കെട്ടിടങ്ങള്‍ സൂം 15-ല്‍</string>
+    <string name="rendering_attr_hideAccess_name">പ്രവേഷന തടസം</string>
     <string name="osmo_edit_color">പ്രദര്‍ശനനിറം</string>
     <string name="int_days">ദിവസങ്ങള്‍</string>
     <string name="index_item_world_altitude_correction">"ലോക ഉയരവ്യത്യാസതിരുത്തലുകള്‍ "</string>

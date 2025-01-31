@@ -1122,6 +1122,7 @@
     <string name="rendering_attr_buildings15zoom_name">Շենքեր 15 սանդղակի վրա</string>
     <string name="rendering_attr_moreDetailed_name">Ավելի մանրամասն</string>
     <string name="rendering_attr_lessDetailed_name">Ավելի քիչ մանրամասներ</string>
+    <string name="rendering_attr_hideAccess_name">Մուտքի սահմանափակումներ</string>
     <string name="rendering_attr_showAccess_name">Ցույց տալ մուտքի սահմանափակումները</string>
     <string name="rendering_attr_showSurfaceGrade_name">Ցույց տալ ճանապարհների որակը</string>
     <string name="rendering_attr_showSurfaces_name">Ցույց տալ ճանապարհների ծածկույթի տեսակը</string>

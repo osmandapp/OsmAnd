@@ -622,6 +622,7 @@
     <string name="rendering_attr_buildings15zoom_name">Приказ зграда је на увеличању 15</string>
     <string name="rendering_attr_moreDetailed_name">Више појединости</string>
     <string name="rendering_attr_lessDetailed_name">Мање појединости</string>
+    <string name="rendering_attr_hideAccess_name">Забране приступа</string>
     <string name="rendering_attr_showAccess_name">Приказуј ограничења приступа</string>
     <string name="rendering_attr_showSurfaceGrade_name">Приказуј стање путева</string>
     <string name="rendering_attr_showSurfaces_name">Приказуј материјале путева</string>
@@ -3546,13 +3547,17 @@
     <string name="osm_edit_comment_note">Напомена белешке ОСМ-а</string>
     <string name="osm_login_descr">Пријавите се користећи безбедан начин OАутх или користити своје корисничко име и лозинку.</string>
     <string name="shared_string_add_photo">Додај фотографију</string>
+    <string name="register_on_openplacereviews">Упишите се на
 \nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">Фотографије пружају пројекат отворених података OpenPlaceReviews.org. Ради постављања своје слике, морате се пријавити на странницу веба.</string>
     <string name="register_opr_create_new_account">Направите нови налог</string>
     <string name="register_opr_have_account">Већ имам</string>
     <string name="shared_string_search_history">Претрага историје</string>
     <string name="app_mode_kayak">Кајак</string>
     <string name="app_mode_motorboat">Моторни чамац</string>
     <string name="add_to_mapillary">Додај у Мапилари</string>
+    <string name="add_to_opr">Додај у ОпенПлејсРевју</string>
+    <string name="add_photos_descr">ОсмАнд приказује фотографије из неколико извора:
 \nOpenPlaceReviews - фотографије тачака занимања;
 \nMapillary - слике улица;
 \nВеб / Викимедија - фотографије тачака занимања наведене у подацима Опенстритмапа.</string>
@@ -3686,6 +3691,7 @@
     <string name="shared_string_interval">Међувреме</string>
     <string name="track_has_no_altitude">Траг не садржи податке о надморској висини.</string>
     <string name="track_has_no_speed">Траг не садржи податке о брзини.</string>
+    <string name="opr_use_dev_url">Користи test.openplacereviews.org</string>
     <string name="temporary_conditional_routing_descr">Користи ограничења на путу тренутно дејствена на карти</string>
     <string name="routing_attr_short_way_description">Прилагођени краћи пут (уштеда енергије)</string>
     <string name="routing_attr_driving_style_description">Одаберите разлог путовања да добијете краћи, бржи или сигурнији пут</string>
@@ -3768,6 +3774,8 @@
     <string name="delete_waypoints">Обриши пролазну тачку</string>
     <string name="copy_to_map_markers">Копирај у ознаке карте</string>
     <string name="hillshade_slope_contour_lines">Рељеф / Нагиб / Изохипсе</string>
+    <string name="open_place_reviews">Утисци отворених места (OpenPlaceReviews)</string>
+    <string name="login_open_place_reviews">Пријавите се на OpenPlaceReviews</string>
     <string name="activity_type_offroad_name">Вожња ван пута</string>
     <string name="quick_action_coordinates_widget_descr">Прекидач да на карти покаже или сакрије справицу са координатама.</string>
     <string name="map_widget_distance_by_tap">Удаљеност по кликтању</string>
@@ -3800,6 +3808,7 @@
     <string name="announce_when_exceeded">Објави када се премаши</string>
     <string name="user_points">Кориснички бодови</string>
     <string name="output">Излаз</string>
+    <string name="open_place_reviews_plugin_description">Помозите пројекту ОпенПлацеРевиевс, преко слика, чланака, или веза ка јавним местима као што су гостионе, одмаралишта, музеји.
 \n
 \nПронађите упутства како да учествујете на страницама %1$s.</string>
     <string name="release_4_0_beta">• Додата је могућност преузимања изохипси у стопама\n\n• Планирајте положене путање: додати су листови за прелазак између тачака или слика\n\n• Освежавања ОсмАнда уживо су премештена у \"Преузимања &gt; Освежења\"\n\n • Путање се сада могу обојити по висини, брзини или нагибу.\n\n • Додата је могућност измене изгледа линија трагова\n\n • Освежен је прозорчић \"Снимање путовања\"</string>
@@ -5369,6 +5378,7 @@
     <string name="energy_avg_info_description">Ниво батерије у минути: %1$s
 \nПотрошња енергије (mAh): %2$s</string>
     <string name="rendering_avg_info">Статистика приказивања (просечно 1 / 5/ 15 минута)</string>
+    <string name="rendering_avg_info_description">FPS према последњих 1k кадрова: %1$s
 \nCPU базично: %2$s
 \nGPU 1k: %3$s
 \nIDLE 1k: %4$s</string>
@@ -5591,6 +5601,7 @@
     <string name="us_gallons">Амерички галони</string>
     <string name="unit_of_volume">Јединица запремине</string>
     <string name="fuel_tank_capacity_description">Унесите капацитет резервоара да бисте прецизно пратили нивое горива и потрошњу</string>
+    <string name="imperial_gallons_unit">imp gal</string>
     <string name="unit_of_volume_description">Изабране јединице ће бити примењене на све податке који се односе на запремину у тренутном профилу.</string>
     <string name="record_obd_data">Сними метрику возила</string>
     <string name="wunderlinq_datagrid">WunderLINQ Мрежа података</string>

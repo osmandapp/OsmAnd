@@ -344,6 +344,7 @@
     <string name="shared_string_api_key">API ᱪᱟᱹᱵᱤ</string>
     <string name="app_mode_light_aircraft">ᱨᱟᱣᱟᱞ ᱩᱰᱟᱹᱱᱜᱟᱹᱰᱤ</string>
     <string name="use_dev_url">dev.openstreet.org ᱵᱮᱵᱷᱟᱨ ᱢᱮ</string>
+    <string name="add_to_opr">OpenPlaceReviews ᱨᱮ ᱥᱮᱞᱮᱫᱽ ᱢᱮ</string>
     <string name="add_to_mapillary">Mapillary ᱨᱮ ᱥᱮᱞᱮᱫᱽ ᱢᱮ</string>
     <string name="select_items_for_import">ᱡᱤᱱᱤᱥ ᱠᱚ ᱵᱟᱪᱷᱟᱣ ᱢᱮ ᱡᱟ ᱟᱹᱜᱩ ᱦᱩᱭᱩᱜᱼᱟ᱾</string>
     <string name="send_files_to_openstreetmap">GPX ᱨᱮᱫ OpenStreetMap ᱨᱮ ᱠᱩᱞ ᱢᱮ</string>

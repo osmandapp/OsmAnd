@@ -23,6 +23,7 @@
     <string name="rendering_attr_buildings15zoom_name">Bygningar ved zoomnivå 15</string>
     <string name="rendering_attr_moreDetailed_name">Meir detaljert</string>
     <string name="rendering_attr_lessDetailed_name">Mindre detaljert</string>
+    <string name="rendering_attr_hideAccess_name">Gøym tilgangstype</string>
     <string name="rendering_attr_showAccess_name">Vis tilgangstype</string>
     <string name="rendering_attr_showSurfaceGrade_name">Vis vegkvalitet</string>
     <string name="rendering_attr_showSurfaces_name">Vis vegdekke</string>

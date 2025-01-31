@@ -1292,6 +1292,7 @@
     <string name="rendering_attr_buildings15zoom_name">Hooned suurendustasemel 15</string>
     <string name="rendering_attr_moreDetailed_name">Rohkem üksikasju</string>
     <string name="rendering_attr_lessDetailed_name">Vähem üksikasju</string>
+    <string name="rendering_attr_hideAccess_name">Ligipääsupiirangud</string>
     <string name="rendering_attr_showAccess_name">Näita ligipääsupiiranguid</string>
     <string name="rendering_attr_showSurfaceGrade_name">Kuva tee kvaliteet</string>
     <string name="rendering_attr_showSurfaces_name">Kuva tee pind</string>
@@ -3595,7 +3596,9 @@
     <string name="osm_edit_comment_note">Kommenteeri OSM märkust</string>
     <string name="osm_login_descr">Logi sisse, kasutades OAuth-meetodit või oma OSM kasutajanime ja salasõna.</string>
     <string name="shared_string_add_photo">Lisa foto</string>
+    <string name="register_on_openplacereviews">Registreeru
 \nOpenPlaceReviews.org saidis</string>
+    <string name="register_on_openplacereviews_desc">Fotode allikaks on avatud andmetel põhinev OpenPlaceReviews.org veebisait. Oma fotode üleslaadimiseks peaksid liituma selle veebisaidi kasutajaks.</string>
     <string name="register_opr_create_new_account">Loo uus kasutajakonto</string>
     <string name="register_opr_have_account">Mul juba on kasutajakonto olemas</string>
     <string name="shared_string_search_history">Otsinguajalugu</string>
@@ -3612,8 +3615,10 @@
     <string name="select_groups_for_import">Vali imporditavad grupid.</string>
     <string name="select_items_for_import">Vali imporditavad kirjed.</string>
     <string name="add_to_mapillary">Lisa Mapillary saiti</string>
+    <string name="add_to_opr">Lisa OpenPlaceReviews saiti</string>
     <string name="use_dev_url_descr">Tavasaidi openstreetmap.org asemel kasuta OSM märkuste, huvipunktide või GPX-failide üleslaadimise katsetamiseks arendussaiti dev.openstreetmap.org.</string>
     <string name="use_dev_url">Kasuta dev.openstreetmap.org saiti</string>
+    <string name="add_photos_descr">OsmAnd kuvab fotosid mitmetest allikatest:
 \nOpenPlaceReviews - huvipunkti fotod;
 \nMapillary - tänavavaated;
 \nWikimedia või veeb - OpenStreetMap\'i andmetes kirjeldatud fotod.</string>
@@ -3763,8 +3768,12 @@
     <string name="select_segments_description">Failis %1$s on mitu segmendi. Navigeerimiseks pead sa valima sobiva osa.</string>
     <string name="segments_count">Lõik %1$d</string>
     <string name="hillshade_slope_contour_lines">Kõrgusjooned / Reljeefi varjutus / Nõlvad</string>
+    <string name="open_place_reviews_plugin_description">Saada fotosid, ülevaateid ja viitu avalikest kohtadest nagu restranid, hotellid, muuseumid ja teeviidad kui avalikud andmed http://openplacereviews.org/data/.
 \n
 \nTäiendavalt saad lugeda aadressil http://openplacereviews.org</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="opr_use_dev_url">Kasuta teenust test.openplacereviews.org</string>
+    <string name="login_open_place_reviews">OpenPlaceReviews login</string>
     <string name="activity_type_water_name">Vesi</string>
     <string name="activity_type_winter_name">Talv</string>
     <string name="activity_type_snowmobile_name">Mootorsaan</string>
@@ -4897,6 +4906,7 @@
     <string name="side_marker_eta">Eeldatav saabumisaeg</string>
     <string name="developer_widgets">Arendaja vidinad</string>
     <string name="map_widget_trip_recording_duration">Kestus</string>
+    <string name="map_widget_trip_recording_distance">Vahemaa</string>
     <string name="map_widget_trip_recording_downhill">Allamäge</string>
     <string name="map_widget_trip_recording_uphill">Ülesmäge</string>
     <string name="map_widget_camera_distance">Kaamera kõrgus</string>

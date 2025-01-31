@@ -1232,6 +1232,7 @@
     <string name="rendering_attr_buildings15zoom_name">Edificis al detall 15 de zoom</string>
     <string name="rendering_attr_moreDetailed_name">Més detalls</string>
     <string name="rendering_attr_lessDetailed_name">Menys detalls</string>
+    <string name="rendering_attr_hideAccess_name">Restriccions d\'accés</string>
     <string name="rendering_attr_showAccess_name">Mostra les restriccions d\'accés i els peatges</string>
     <string name="rendering_attr_showSurfaceGrade_name">Mostra la qualitat de la via</string>
     <string name="rendering_attr_showSurfaces_name">Mostra el tipus de superfície de la via</string>
@@ -3710,7 +3711,9 @@
     <string name="osm_edit_comment_note">Comentari de la nota d\'OSM</string>
     <string name="osm_login_descr">Podeu iniciar la sessió mitjançant el mètode segur OAuth o fer servir el vostre usuari i contrasenya.</string>
     <string name="shared_string_add_photo">Afegeix foto</string>
+    <string name="register_on_openplacereviews">Registreu-vos a
 \nOpenPlaceReviews.org</string>
+    <string name="register_on_openplacereviews_desc">Les fotos les proporciona el projecte de dades obertes OpenPlaceReviews.org. Per poder pujar les vostres fotos, cal que us registreu al lloc web.</string>
     <string name="register_opr_create_new_account">Crea un compte nou</string>
     <string name="register_opr_have_account">ja tinc un compte</string>
     <string name="shared_string_search_history">Historial de cerques</string>
@@ -3727,7 +3730,9 @@
     <string name="select_groups_for_import">Seleccioneu els grups que s\'importaran.</string>
     <string name="select_items_for_import">Seleccioneu els elements que s\'importaran.</string>
     <string name="add_to_mapillary">Afegeix a Mapillary</string>
+    <string name="add_to_opr">Afegeix-ho a OpenPlaceReviews</string>
     <string name="use_dev_url">Utilitza dev.openstreetmap.org</string>
+    <string name="add_photos_descr">OsmAnd mostra fotos de diverses fonts:
 \nOpenPlaceReviews - fotos de PDIs;
 \nMapillary: imatges a nivell de carrer;
 \nWeb / Wikimedia: fotos dels PDIs d\'OpenStreetMap.</string>
@@ -4737,6 +4742,7 @@
     <string name="fuel_tank_capacity">Capacitat del dipòsit de combustible</string>
     <string name="shared_strings_dimensions">Mides</string>
     <string name="litres">Litres</string>
+    <string name="imperial_gallons_unit">gal imp</string>
     <string name="us_gallons_unit">gal</string>
     <string name="imperial_gallons">Galons imperials</string>
     <string name="us_gallons">Galons americans</string>
