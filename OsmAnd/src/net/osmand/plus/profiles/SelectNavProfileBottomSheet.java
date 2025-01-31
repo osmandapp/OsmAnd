@@ -254,7 +254,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 	private void addGroupHeader(ProfilesGroup group) {
 		CharSequence title = group.getTitle();
 		CharSequence description = group.getDescription(app, nightMode);
-		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
+		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
 		LayoutInflater inflater = UiUtilities.getInflater(themedCtx, nightMode);
 		View view = inflater.inflate(R.layout.group_title_with_desription_and_option, null);
 		View container = view.findViewById(R.id.container);

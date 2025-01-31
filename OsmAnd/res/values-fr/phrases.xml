@@ -291,7 +291,7 @@
     <string name="poi_scuba_diving">Plongée sous-marine</string>
     <string name="poi_seafood">Poissonnerie</string>
     <string name="poi_second_hand">Magasin de produits d\'occasion</string>
-    <string name="poi_disaster_response">Association australienne d\'aide d\'urgence (SES)</string>
+    <string name="poi_disaster_response">Poste d\'intervention en cas de catastrophe</string>
     <string name="poi_shelter">Abri</string>
     <string name="poi_religion_shinto">Shintoïsme</string>
     <string name="poi_craft_shoemaker">Cordonnier</string>
@@ -3255,7 +3255,7 @@
     <string name="poi_rtsa_scale_3a_asterisk">3А*</string>
     <string name="poi_rtsa_scale_3b">3Б</string>
     <string name="poi_rtsa_scale_3b_asterisk">3Б*</string>
-    <string name="poi_climbing_crag">Oui;Falaise d\'escalade</string>
+    <string name="poi_climbing_crag">Falaise d\'escalade</string>
     <string name="poi_climbing_crag_filter">Rocher d\'escalade</string>
     <string name="poi_free_flying_guest_guidelines_yes">Directives à l\'intention des invités : oui</string>
     <string name="poi_free_flying_guest_guidelines_no">Directives à l\'intention des invités : non</string>
@@ -4878,4 +4878,6 @@
     <string name="poi_payment_parco_no">Parco non accepté</string>
     <string name="poi_payment_parkster_yes">Parkster</string>
     <string name="poi_payment_parkster_no">Parkster non accepté</string>
+    <string name="poi_cafe_filter">Café</string>
+    <string name="poi_camp_site_type">Type de site de camping</string>
 </resources>

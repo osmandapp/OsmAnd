@@ -113,7 +113,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
-		LayoutInflater layoutInflater = UiUtilities.getInflater(app, nightMode);
+		LayoutInflater layoutInflater = UiUtilities.getInflater(requireContext(), nightMode);
 		helper = app.getPoiFilters();
 		boolean nightMode = !app.getSettings().isLightContent();
 		if (getArguments() != null) {
@@ -449,7 +449,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 		@NonNull
 		@Override
 		public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-			LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+			LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 			View row = convertView;
 			if (row == null) {
 				row = inflater.inflate(R.layout.list_item_icon24_and_menu, parent, false);

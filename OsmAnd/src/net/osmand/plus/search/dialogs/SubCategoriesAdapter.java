@@ -63,7 +63,7 @@ public class SubCategoriesAdapter extends ArrayAdapter<PoiType> {
 	@Override
 	public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 		if (convertView == null) {
-			convertView = UiUtilities.getInflater(app, nightMode)
+			convertView = UiUtilities.getInflater(parent.getContext(), nightMode)
 					.inflate(R.layout.profile_data_list_item_child, parent, false);
 		}
 		PoiType poiType = getItem(position);

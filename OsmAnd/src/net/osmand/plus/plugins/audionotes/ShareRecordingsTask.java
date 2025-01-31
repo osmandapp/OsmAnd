@@ -12,11 +12,11 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
@@ -92,7 +92,7 @@ class ShareRecordingsTask extends AsyncTask<Void, Void, List<Uri>> {
 				wpt.setLat(recording.getLatitude());
 				wpt.setLon(recording.getLongitude());
 				wpt.setName(desc);
-				wpt.setLink(recording.getFileName());
+				wpt.setLink(new Link(recording.getFileName()));
 				wpt.setTime(recording.getFile().lastModified());
 				wpt.setCategory(recording.getSearchHistoryType());
 				wpt.setDesc(recording.getTypeWithDuration(app));

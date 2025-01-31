@@ -2,7 +2,6 @@ package net.osmand;
 
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,14 +15,14 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.inapp.InAppPurchaseUtils;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppPurchaseUtils;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 
 public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 
@@ -119,7 +118,6 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		osmTextLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
 
 		int defaultLogoMarginTop = getResources().getDimensionPixelSize(R.dimen.splash_screen_logo_top);
-		int logoMarginTop = defaultLogoMarginTop - (Build.VERSION.SDK_INT >= 21 ? 0 : AndroidUtils.getStatusBarHeight(activity));
 		int textMarginBottom = getResources().getDimensionPixelSize(R.dimen.splash_screen_text_bottom);
 		int osmTextMarginBottom = getResources().getDimensionPixelSize(R.dimen.splash_screen_osm_text_bottom);
 		int elementsPaddingLeft = 0;
@@ -134,7 +132,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		} else {
 			elementsPaddingLeft = getNavigationBarWidth();
 		}
-		AndroidUtils.setMargins(logoLayoutParams, 0, logoMarginTop, 0, 0);
+		AndroidUtils.setMargins(logoLayoutParams, 0, defaultLogoMarginTop, 0, 0);
 		logo.setPadding(elementsPaddingLeft, 0, elementsPaddingRight, 0);
 		logo.setLayoutParams(logoLayoutParams);
 		view.addView(logo);

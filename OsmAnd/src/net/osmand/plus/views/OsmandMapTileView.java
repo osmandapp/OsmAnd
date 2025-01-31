@@ -1801,9 +1801,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void fitLocationToMap(double clat, double clon, int zoom,
-	                             int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, boolean animated) {
+	                             int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx, boolean animated) {
 		RotatedTileBox tb = currentViewport.copy();
 		int dy = 0;
+		int dx = 0;
 
 		int tbw = tileBoxWidthPx > 0 ? tileBoxWidthPx : tb.getPixWidth();
 		int tbh = tb.getPixHeight();
@@ -1812,11 +1813,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			dy = (tb.getPixHeight() - tileBoxHeightPx) / 2 - marginTopPx;
 		}
 		dy += tb.getCenterPixelY() - tb.getPixHeight() / 2;
+
+		if (marginLeftPx != 0 && tileBoxWidthPx > 0) {
+			dx = (tb.getPixWidth() - tileBoxWidthPx) / 2 - marginLeftPx;
+		}
+
 		tb.setPixelDimensions(tbw, tbh);
 		tb.setLatLonCenter(clat, clon);
 		tb.setZoom(zoom);
 		if (dy != 0) {
-			float x = tb.getPixWidth() / 2f;
+			float x = tb.getPixWidth() / 2f + dx;
 			float y = tb.getPixHeight() / 2f + dy;
 			clat = tb.getLatFromPixel(x, y);
 			clon = tb.getLonFromPixel(x, y);
@@ -1826,6 +1832,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		} else {
 			setLatLon(clat, clon);
 		}
+	}
+
+	public void fitLocationToMap(double clat, double clon, int zoom,
+	                             int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, boolean animated) {
+		fitLocationToMap(clat, clon, zoom, tileBoxWidthPx, tileBoxHeightPx, marginTopPx, 0, animated);
 	}
 
 	public boolean onGenericMotionEvent(MotionEvent event) {

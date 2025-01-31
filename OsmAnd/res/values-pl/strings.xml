@@ -2074,7 +2074,7 @@
     <string name="quick_action_edit_action">Modyfikowanie czynności</string>
     <string name="dialog_add_action_title">Dodawanie czynności</string>
     <string name="quick_actions_delete">Usuwanie czynności</string>
-    <string name="quick_actions_delete_text">Usunąć czynność „%s”\?</string>
+    <string name="quick_actions_delete_text">Usunąć czynność „%s”?</string>
     <string name="quick_favorites_show_favorites_dialog">Pokaż okno Ulubione</string>
     <string name="shared_string_action_name">Nazwa czynności</string>
     <string name="favorite_empty_place_name">Miejsce</string>
@@ -2663,9 +2663,7 @@
     <string name="coord_input_save_as_track_descr">Dodano %1$s punktów. Proszę wprowadzić nazwę pliku i nacisnąć „Zapisz”.</string>
     <string name="coord_input_save_as_track">Zapisz jako trasę</string>
     <string name="increase_search_radius_to">Zwiększ promień wyszukiwania do %1$s</string>
-    <string name="send_search_query_description">Twoje zapytanie wraz z położeniem będzie wysłane do: „%1$s”. 
-\n
-\n Informacje osobiste nie są gromadzone, dane wyszukiwania są używane tylko do poprawienia algorytmu wyszukiwania.</string>
+    <string name="send_search_query_description">Twoje zapytanie wraz z położeniem będzie wysłane do: „%1$s”. \n \n Informacje osobiste nie są gromadzone, dane wyszukiwania są używane tylko do poprawienia algorytmu wyszukiwania.</string>
     <string name="send_search_query">Wysłać zapytanie?</string>
     <string name="shared_string_world">Świat</string>
     <string name="point_deleted">Usunięto punkt %1$s</string>
@@ -3505,9 +3503,7 @@
     <string name="lang_an">Aragoński</string>
     <string name="lang_gu">Gudźarati</string>
     <string name="lang_yo">Joruba</string>
-    <string name="ui_customization_description">Dostosuj ilość pozycji w „Szufladzie”, „Konfiguracja mapy” i „Menu kontekstowe”.
-\n
-\nWyłącz nieużywane wtyczki, aby ukryć wszystkie ich elementy sterujące. %1$s.</string>
+    <string name="ui_customization_description">Dostosuj ilość pozycji w „Szufladzie”, „Konfiguracja mapy” i „Menu kontekstowe”. \n \nWyłącz nieużywane wtyczki, aby ukryć wszystkie ich elementy sterujące. %1$s.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="search_poi_types">Szukaj rodzajów użytecznych miejsc</string>
     <string name="search_poi_types_descr">Łącz rodzaje użytecznych miejsc z różnych kategorii. Naciśnij przełącznik, aby zaznaczyć wszystko; naciśnij lewą stronę, aby wybrać kategorię.</string>
@@ -3527,25 +3523,7 @@
 \nSubskrypcja odnawia się, chyba że zostanie anulowana przed wybranym okresem odnowienia.
 \n
 \nZarządzaj lub anuluj swoje subskrypcje w ustawieniach Google Play w dowolnym momencie.</string>
-    <string name="release_3_7">• Nowe mapy stoków offline 
-\n 
-\n • Pełna personalizacja Ulubionych i Punktów GPX - niestandardowe kolory, ikony, kształty
-\n 
-\n • Dostosowywanie kolejności elementów w menu kontekstowym, konfiguracji mapy i menu podręcznym
-\n 
-\n • Wikipedia jako osobna warstwa w konfiguracji mapy, wybierz tylko potrzebne języki
-\n 
-\n • Tworzenie własnego filtru użytecznych miejsc/map z pełną elastycznością
-\n 
-\n • Dodano opcje przywracania ustawień profili niestandardowych
-\n 
-\n • Pełne trasy GPX z nawigacji obsługują pasy ruchu i pełne instrukcje skrętu
-\n 
-\n • Naprawiono rozmiary interfejsu użytkownika na tabletach
-\n 
-\n • Naprawiono błędy z RTL
-\n
-\n</string>
+    <string name="release_3_7">• Nowe mapy stoków offline \n \n • Pełna personalizacja Ulubionych i Punktów GPX - niestandardowe kolory, ikony, kształty \n \n • Dostosowywanie kolejności elementów w menu kontekstowym, konfiguracji mapy i menu podręcznym \n \n • Wikipedia jako osobna warstwa w konfiguracji mapy, wybierz tylko potrzebne języki \n \n • Tworzenie własnego filtru użytecznych miejsc/map z pełną elastycznością \n \n • Dodano opcje przywracania ustawień profili niestandardowych \n \n • Pełne trasy GPX z nawigacji obsługują pasy ruchu i pełne instrukcje skrętu \n \n • Naprawiono rozmiary interfejsu użytkownika na tabletach \n \n • Naprawiono błędy z RTL \n \n</string>
     <string name="back_to_editing">Powrót do edycji</string>
     <string name="create_edit_poi">Utwórz lub edytuj użyteczne miejsce</string>
     <string name="add_edit_favorite">Dodaj lub edytuj ulubione miejsce</string>
@@ -4166,27 +4144,7 @@
     <string name="backup_error_token_is_not_valid_or_expired">Nieprawidłowy lub nieaktualny token</string>
     <string name="backup_error_user_is_not_registered">Brak użytkownika zarejestrowanego z tym adresem e-mail</string>
     <string name="backup_error_no_valid_subscription">Brak ważnej subskrypcji</string>
-    <string name="release_4_0">• Kopia zapasowa w chmurze
-\n
-\n • Dodano tryb nocny dla stylu mapy „Topo”
-\n
-\n • Dodano opcję pobierania poziomic w stopach
-\n
-\n • Trasy mogą być teraz pokolorowane według wysokości, prędkości lub nachylenia
-\n
-\n • Zaktualizowano okno dialogowe „Nagrywanie podróży”
-\n
-\n • Mierzenie odległości naciśnięciami przesunięte z cyrkla do oddzielnej opcji
-\n
-\n • Planowanie trasy: Możesz teraz zmienić opcje nawigacji, uzyskać dostęp do konfiguracji mapy i wyszukiwać bez opuszczania planowania trasy
-\n
-\n • Nowy ekran „Zakup” ze szczegółowymi informacjami o zakupie
-\n
-\n • Dodano opcję zmiany wyglądu linii trasy
-\n
-\n • Aktualizacje OsmAnd Live przeniesione do „Pobrane &gt; Aktualizacje”
-\n
-\n</string>
+    <string name="release_4_0">• Kopia zapasowa w chmurze \n \n • Dodano tryb nocny dla stylu mapy „Topo” \n \n • Dodano opcję pobierania poziomic w stopach \n \n • Trasy mogą być teraz pokolorowane według wysokości, prędkości lub nachylenia \n \n • Zaktualizowano okno dialogowe „Nagrywanie podróży” \n \n • Mierzenie odległości naciśnięciami przesunięte z cyrkla do oddzielnej opcji \n \n • Planowanie trasy: Możesz teraz zmienić opcje nawigacji, uzyskać dostęp do konfiguracji mapy i wyszukiwać bez opuszczania planowania trasy \n \n • Nowy ekran „Zakup” ze szczegółowymi informacjami o zakupie \n \n • Dodano opcję zmiany wyglądu linii trasy \n \n • Aktualizacje OsmAnd Live przeniesione do „Pobrane &gt; Aktualizacje” \n \n</string>
     <string name="enter_verification_code">Wprowadź jednorazowe hasło</string>
     <string name="duration_moment_ago">przed chwilą</string>
     <string name="logout_from_osmand_cloud">Wyloguj się z OsmAnd Cloud</string>
@@ -4472,9 +4430,7 @@
     <string name="memory_allocated_for_routing">Pamięć przydzielona do routingu</string>
     <string name="rendering_attr_showFitnessTrails_name">Ścieżki zdrowia</string>
     <string name="default_appearance_desc">Domyślny kolor, ikona i kształt będą stosowane do dodawanych ulubionych punktów do grupy.</string>
-    <string name="location_source_descr">OsmAnd zainstalowany domyślnie z Google Play używa %1$s do określenia lokalizacji.
-\n
-\nJeśli otrzymasz niedokładne informacje o lokalizacji lub korzystasz z urządzenia bez %2$s, spróbuj przełączyć się na „%3$s”</string>
+    <string name="location_source_descr">OsmAnd zainstalowany domyślnie z Google Play używa %1$s do określenia lokalizacji. \n \nJeśli otrzymasz niedokładne informacje o lokalizacji lub korzystasz z urządzenia bez %2$s, spróbuj przełączyć się na „%3$s”</string>
     <string name="default_appearance">Wygląd domyślny</string>
     <string name="rendering_attr_showRunningRoutes_description">Pokaż trasy biegowe</string>
     <string name="rendering_attr_showFitnessTrails_description">Pokaż ścieżki zdrowia</string>
@@ -4589,7 +4545,7 @@
     <string name="colour_of_circles">Kolor okręgów</string>
     <string name="compass_on_circles">Kompas na okręgach</string>
     <string name="routing_attr_avoid_4wd_only_description">Unikaj dróg nadających się dla pojazdów z napędem na 4 koła</string>
-    <string name="map_widget_trip_recording_distance">Odległość</string>
+    <string name="map_widget_distance">Odległość</string>
     <string name="rendering_attr_horseScale_name">Poziom trudności szlaków konnych</string>
     <string name="routing_attr_avoid_highway_name">Unikaj autostrad</string>
     <string name="rendering_attr_weatherTempContours_name">Izolinie temperatury</string>
@@ -5311,13 +5267,7 @@
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
     <string name="max_altitude">Maksymalna wysokość</string>
     <string name="track_filter_date_selected_format">%s - %s</string>
-    <string name="release_4_6">• Widżet współczynnika poślizgu
-\n
-\n• Dodano widżet temperatury ANT+
-\n
-\n• Lepsze zarządzanie pamięcią dla dużych ścieżek GPX
-\n
-\n</string>
+    <string name="release_4_6">• Widżet współczynnika poślizgu \n \n• Dodano widżet temperatury ANT+ \n \n• Lepsze zarządzanie pamięcią dla dużych ścieżek GPX \n \n</string>
     <string name="app_mode_baby_transport">Transport dziecka</string>
     <string name="filter_by_name">Filtruj według nazwy</string>
     <string name="shared_string_reset_all">Resetuj wszystko</string>
@@ -5404,49 +5354,7 @@
     <string name="edit_filter">Edycja filtra</string>
     <string name="save_as_smart_folder">Zapisz jako mądry folder</string>
     <string name="delete_smart_folder_dialog_message">Spowoduje to usunięcie inteligentnego folderu „%1$s”. (Żadne ścieżki nie zostaną usunięte.)</string>
-    <string name="release_4_5">• Czujniki BLE/ANT+: przerobione połączenie, zapis i przeglądanie otrzymanych danych do GPX
-\n
-\n • Bezpłatna kopia zapasowa ulubionych i ustawień w „OsmAnd Cloud”
-\n
-\n • Nowy format map terenu z obsługą rzeźby terenu 3D
-\n
-\n • Zarządzanie ścieżkami: zaktualizowany interfejs użytkownika, dodane sortowanie, obsługa zagnieżdżonych folderów
-\n
-\n • Android Auto: nowe menu startowe umożliwiające dostęp do ulubionych, tras i kategorii POI
-\n
-\n • Jedna lista widżetów dla panelu górnego/dolnego
-\n
-\n • Nowy profil „Pociąg”, pozwala na obliczanie tras kolejowych
-\n
-\n • Linie konturowe działają z dowolnym „źródłem mapy”
-\n
-\n • Rozszerzona lista domyślnych działań dla klawiatur zewnętrznych
-\n
-\n • Niestandardowe pliki wyznaczania tras, dodane opcje usuwania lub zastępowania
-\n
-\n • Dodano opcję „Ogłaszaj zboczenie z trasy”
-\n
-\n • Ekran startowy: dodano opcję przywracania stanu OsmAnd z pliku
-\n
-\n • Dodano klasy „Materiały niebezpieczne” w nawigacji dla ciężarówek w Ameryce Północnej
-\n
-\n • Dodano obsługę trasy „Via ferrata” dla pieszych
-\n
-\n • Dodano skalę „CAI” do klasyfikacji trudności tras
-\n
-\n • Naprawiono wybór języka dla poszczególnych aplikacji
-\n
-\n • Dodano obsługę ikon tematycznych
-\n
-\n • OsmAnd Cloud: dodano opcję usunięcia konta
-\n
-\n • Dostępność: docelowy rozmiar dotykowy dla przycisków zmieniony na 48 dp; naprawiono problem z interfejsem mapy widocznym dla czytników ekranu
-\n
-\n • Przerobiono japońskie komunikaty głosowe
-\n
-\n • Przerobiono zmianę wysokości i ocenę nachylenia
-\n
-\n</string>
+    <string name="release_4_5">• Czujniki BLE/ANT+: przerobione połączenie, zapis i przeglądanie otrzymanych danych do GPX \n \n • Bezpłatna kopia zapasowa ulubionych i ustawień w „OsmAnd Cloud” \n \n • Nowy format map terenu z obsługą rzeźby terenu 3D \n \n • Zarządzanie ścieżkami: zaktualizowany interfejs użytkownika, dodane sortowanie, obsługa zagnieżdżonych folderów \n \n • Android Auto: nowe menu startowe umożliwiające dostęp do ulubionych, tras i kategorii POI \n \n • Jedna lista widżetów dla panelu górnego/dolnego \n \n • Nowy profil „Pociąg”, pozwala na obliczanie tras kolejowych \n \n • Linie konturowe działają z dowolnym „źródłem mapy” \n \n • Rozszerzona lista domyślnych działań dla klawiatur zewnętrznych \n \n • Niestandardowe pliki wyznaczania tras, dodane opcje usuwania lub zastępowania \n \n • Dodano opcję „Ogłaszaj zboczenie z trasy” \n \n • Ekran startowy: dodano opcję przywracania stanu OsmAnd z pliku \n \n • Dodano klasy „Materiały niebezpieczne” w nawigacji dla ciężarówek w Ameryce Północnej \n \n • Dodano obsługę trasy „Via ferrata” dla pieszych \n \n • Dodano skalę „CAI” do klasyfikacji trudności tras \n \n • Naprawiono wybór języka dla poszczególnych aplikacji \n \n • Dodano obsługę ikon tematycznych \n \n • OsmAnd Cloud: dodano opcję usunięcia konta \n \n • Dostępność: docelowy rozmiar dotykowy dla przycisków zmieniony na 48 dp; naprawiono problem z interfejsem mapy widocznym dla czytników ekranu \n \n • Przerobiono japońskie komunikaty głosowe \n \n • Przerobiono zmianę wysokości i ocenę nachylenia \n \n</string>
     <string name="empty_smart_folder_title">Brak pasującej trasy</string>
     <string name="empty_smart_folder_description">Wszystkie pasujące trasy pojawią się tutaj automatycznie</string>
     <string name="configure_filter">Skonfiguruj filtr</string>

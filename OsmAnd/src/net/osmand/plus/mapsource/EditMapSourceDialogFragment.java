@@ -470,7 +470,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	}
 
 	private void addConfigurationItems(ConfigurationItem... items) {
-		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 		for (ConfigurationItem item : items) {
 			View view = inflater.inflate(R.layout.list_item_ui_customization, null);
 			((ImageView) view.findViewById(R.id.icon)).setImageDrawable(app.getUIUtilities().getIcon(item.iconRes, nightMode));

@@ -190,6 +190,7 @@
         <item name="purchase_pro_badge_icon">@drawable/img_button_pro_night</item>
 
         <item name="bottom_nav_shadow">@drawable/bg_bottom_bar_shadow_with_line_night</item>
+        <item name="nav_arrow_circle_color">@color/nav_arrow_circle_color_dark</item>
 
         <item name="text_rounded_bg_active">@drawable/text_rounded_bg_active_dark</item>
         <item name="text_rounded_bg_regular">@drawable/text_rounded_bg_regular_dark</item>

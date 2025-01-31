@@ -133,6 +133,14 @@ public class RouteTestingTest {
 			}
 
 			config.planRoadDirection = planRoadDirection;
+
+			if ("true".equals(params.get("hh"))) {
+				fe.CALCULATE_MISSING_MAPS = false;
+				fe.setDefaultHHRoutingConfig();
+				fe.setUseOnlyHHRouting(true);
+				fe.setHHRouteCpp(useNative);
+			}
+
 			RoutingContext ctx;
 			if (useNative) {
 				ctx = fe.buildRoutingContext(config, nativeLibrary, binaryMapIndexReaders,

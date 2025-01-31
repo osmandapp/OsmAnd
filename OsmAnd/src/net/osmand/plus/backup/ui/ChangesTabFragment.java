@@ -208,7 +208,7 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 			item.summary = localizedSummaryForOperation(operationType, localFile, remoteFile);
 			item.time = getTime(operationType, localFile, remoteFile);
 			item.description = BackupUiUtils.generateTimeString(app, item.summary, item.time);
-			item.iconId = BackupUiUtils.getIconId(settingsItem);
+			item.iconId = BackupUiUtils.getIconId(app, settingsItem);
 			item.settingsItem = settingsItem;
 			item.operation = operationType;
 			item.localFile = localFile;

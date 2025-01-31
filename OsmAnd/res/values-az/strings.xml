@@ -798,7 +798,7 @@
     <string name="allow_access_location">Məkan girişinə icazə ver</string>
     <string name="search_my_location">Mövqeyimi tap</string>
     <string name="update_all_maps_now">Bütün xəritələr indi yenilənsin?</string>
-    <string name="replace_favorite_confirmation">“%1$s” Favoriti əvəz edilsin\?</string>
+    <string name="replace_favorite_confirmation">“%1$s” Favoriti əvəz edilsin?</string>
     <string name="rendering_attr_hideOverground_name">Yerüstü obyektlər</string>
     <string name="coords_search">Koordinatlarla axtar</string>
     <string name="advanced_coords_search">Təkmil koordinatlar axtarışı</string>
@@ -1696,7 +1696,7 @@
     <string name="quick_action_edit_action">Fəaliyyətə düzəliş et</string>
     <string name="dialog_add_action_title">Fəaliyyət əlavə et</string>
     <string name="quick_actions_delete">Fəaliyyəti sil</string>
-    <string name="quick_actions_delete_text">“%s” fəaliyyəti silinsin\?</string>
+    <string name="quick_actions_delete_text">“%s” fəaliyyəti silinsin?</string>
     <string name="quick_favorites_show_favorites_dialog">Favoritlər dialoqunu göstər</string>
     <string name="rendering_value_darkyellow_name">Tünd sarı</string>
     <string name="shared_string_more_actions">Digər fəaliyyətlər</string>
@@ -2430,9 +2430,7 @@
     <string name="additional_actions_descr">“%1$s” düyməsinə toxunaraq bu fəaliyyətlərə daxil olun.</string>
     <string name="replace_point_descr">Başqa bir nöqtəni bununla əvəz et.</string>
     <string name="ui_customization_short_descr">Siyirmə elementləri, kontekst menyusu</string>
-    <string name="ui_customization_description">“Siyirmə”, “Xəritəni tənzimlə” və “Kontekst menyusu” elementlərin sayını fərdiləşdirin.
-\n
-\nBütün idarəetmə vasitələrini gizlətmək üçün istifadə edilməyən qoşmaları söndürün. %1$s.</string>
+    <string name="ui_customization_description">“Siyirmə”, “Xəritəni tənzimlə” və “Kontekst menyusu” elementlərin sayını fərdiləşdirin. \n \nBütün idarəetmə vasitələrini gizlətmək üçün istifadə edilməyən qoşmaları söndürün. %1$s.</string>
     <string name="shared_string_circle">Dairə</string>
     <string name="restore_all_profile_settings_descr">Bu profili yaratdıqdan/idxal etdikdən sonra bütün profil parametrləri orijinal vəziyyətinə qaytarılacaq.</string>
     <string name="restore_all_profile_settings">Bütün profil parametrləri bərpa edilsin\?</string>
@@ -2473,7 +2471,7 @@
     <string name="routing_attr_max_num_changes_name">Dəyişikliklərin sayı</string>
     <string name="shared_string_privacy_policy">Gizlilik siyasəti</string>
     <string name="settings_privacy_and_security">Gizlilik və təhlükəsizlik</string>
-    <string name="profile_alert_delete_msg">“%s” profili silinsin\?</string>
+    <string name="profile_alert_delete_msg">“%s” profili silinsin?</string>
     <string name="nav_type_hint">Naviqasiya növü</string>
     <string name="select_icon_profile_dialog_title">İkon seçin</string>
     <string name="export_profile">Profili ixrac et</string>
@@ -3061,8 +3059,7 @@
     <string name="edit_profiles_descr">OsmAnd standart profilləri silinə bilməz, lakin qeyri-aktiv edilə bilər (əvvəlki ekranda) və ya aşağıda sıralana bilər.</string>
     <string name="gps_filter_speed_altitude_desc">Yalnız müəyyən edilmiş intervala uyğun iz nöqtələri qrafikdə və xəritədə görünəcək, qalanları gizlədiləcək.</string>
     <string name="progress_complete">%1$s tamamlandı</string>
-    <string name="shared_storage_first_step">“%1$s”ə toxunun.
-\nFayl meneceri osmand qovluğunu tapmaq və açmaq üçün lazım olan yerdə açılır.</string>
+    <string name="shared_storage_first_step">“%1$s”ə toxunun. \nFayl meneceri osmand qovluğunu tapmaq və açmaq üçün lazım olan yerdə açılır.</string>
     <string name="shared_string_skip_warning">Köçürmə keçilsin\? OsmAnd artıq paylaşılan yaddaşdakı fayllarınıza daxil ola bilməz.
 \n
 \nProqram yeni məlumat qovluğunuzdan istifadə etməyə başlayacaq.</string>
@@ -3148,15 +3145,9 @@
     <string name="shared_string_hillshade">Təpə kölgəsi</string>
     <string name="hillshade_download_description">Xəritədə təpə kölgəsinə baxmaq üçün əlavə xəritələr lazımdır.</string>
     <string name="audionotes_plugin_description">Səfər zamanı ya xəritə düyməsi ya da məkan kontekst menyusundan istifadə edərək səs/şəkil/video qeydlər yaradın.</string>
-    <string name="srtm_plugin_description">Bu qoşma OsmAnd-ın standart xəritələrinin üzərində həm kontur xəttinin, həm də (relyef) təpə kölgəsi örtüyünün göstərilməsini təmin edir. Bu funksionallıq idmançılar, piyada gəzənlər, səyahətçilər və landşaftın relyef quruluşu ilə maraqlanan hər kəs tərəfindən yüksək qiymətləndiriləcək. (Nəzərə alın ki, kontur xətti və/yaxud relyef məlumatları ayrıdır, qoşmanı aktivləşdirdikdən sonra əlavə endirmələr mümkündür.)
-\n
-\nQlobal məlumatlar (70° şimal və 70° cənub arasında) SRTM (Shuttle Radar Topography Mission) və NASA-nın Yer Müşahidə Sisteminin qabaqcıl peyki olan Terra-nın göyərtəsində təsvir aləti olan ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) tərəfindən ölçmələrə əsaslanır. ASTER – NASA, Yaponiyanın İqtisadiyyat, Ticarət və Sənaye Nazirliyi (METI) və Yaponiya Kosmik Sistemləri (J-spacesystems) arasında ortaq işdir.</string>
     <string name="hillshade_menu_download_descr">Şaquli kölgələri göstərmək üçün “Təpə kölgəsi” örtük xəritəsini endirin.</string>
     <string name="layer_hillshade">Təpə kölgəsi qatı</string>
     <string name="hillshade_layer_disabled">Təpə kölgəsi qatı sönülüdür</string>
-    <string name="record_plugin_description">Bu qoşma xəritədə GPX qeydetmə vidcetinə əl ilə toxunmaqla izlərinizi qeyd etmək və saxlamaq, həmçinin bütün naviqasiya marşrutlarınızı avtomatik olaraq GPX faylına qeyd etmək funksiyasını aktivləşdirir.
-\n
-\nQeyd edilmiş izlər dostlarınızla paylaşıla və ya OSM töhfələri üçün istifadə edilə bilər. İdmançılar məşqlərinə nəzarət etmək üçün qeyd edilmiş izlərdən istifadə edə bilərlər. Dövrə vaxtları, orta sürət və s. kimi bəzi əsas iz analizləri birbaşa OsmAnd-da həyata keçirilə bilər və əlbəttə ki, daha sonra izlər xüsusi 3-cü tərəf analiz alətlərində də təhlil edilə bilər.</string>
     <string name="download_hillshade_maps">Təpə kölgələri</string>
     <string name="terrain_empty_state_text">Xəritədə təpə kölgələrini və ya yamacları göstərir. Saytımızda bu xəritə növləri haqqında daha ətraflı oxuyun.</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
@@ -3211,9 +3202,7 @@
     <string name="list_of_groups">Qrupların siyahısı</string>
     <string name="permission_is_required">Bu seçimdən istifadə etmək üçün icazə tələb olunur.</string>
     <string name="previous_run_crashed">OsmAnd-ın son çalışması çökdü. Qeyd faylı {0} qovluğundadır. Zəhmət olmasa, problemi bildirin və qeyd faylını əlavə edin.</string>
-    <string name="location_source_descr">Standart olaraq, Google Play-dən quraşdırılmış OsmAnd məkanı müəyyən etmək üçün %1$s istifadə edir.
-\n
-\nYanlış məkan məlumatı alsanız və ya cihazı %2$s olmadan istifadə etsəniz, “%3$s” rejiminə keçməyi yoxlayın.</string>
+    <string name="location_source_descr">Standart olaraq, Google Play-dən quraşdırılmış OsmAnd məkanı müəyyən etmək üçün %1$s istifadə edir. \n \nYanlış məkan məlumatı alsanız və ya cihazı %2$s olmadan istifadə etsəniz, “%3$s” rejiminə keçməyi yoxlayın.</string>
     <string name="exit_import">Çıxılsın\?</string>
     <string name="shared_string_crash">Çökmə</string>
     <string name="last_launch_crashed">OsmAnd-ın son çalışması çökdü. Zəhmət olmasa, səhv mesajını paylaşaraq OsmAnd-ı təkmilləşdirməyə kömək edin.</string>
@@ -3328,9 +3317,7 @@
     <string name="shared_string_mode">Rejim</string>
     <string name="auto_backup_preference_desc">Standart olaraq Android yeni cihazlarda və ya yenidən quraşdırıldıqdan sonra bərpa etmək üçün favoritlərin, xəritə işarələrinin və OsmAnd parametrlərinin nüsxələrini saxlayır. Bu nüsxə 25 MB ilə məhdudlaşır.
 \nOsmAnd Cloud istifadə edərkən, bu, yenidən quraşdırmadan sonra anlaşılmazlıqlara səbəb ola bilər.</string>
-    <string name="ant_missing_dependency_descr">Tələb olunan “%1$s” xidmətini tapmaq olmadı.
-\nANT+ Plugins Xidmətini quraşdırmalı və ya yeniləməlisiniz.
-\nBunu etmək üçün Play Store-u işə salmaq istəyirsiniz\?</string>
+    <string name="ant_missing_dependency_descr">Tələb olunan “%1$s” xidmətini tapmaq olmadı. \nANT+ Plugins Xidmətini quraşdırmalı və ya yeniləməlisiniz. \nBunu etmək üçün Play Store-u işə salmaq istəyirsiniz?</string>
     <string name="routing_attr_motor_type_lpg_name">LPG</string>
     <string name="shared_string_identifiers">İdentifikatorlar</string>
     <string name="map_widget_target_distance">Kameradan hədəfə qədər məsafə</string>

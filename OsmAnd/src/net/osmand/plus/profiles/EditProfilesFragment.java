@@ -2,7 +2,6 @@ package net.osmand.plus.profiles;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
@@ -25,19 +24,19 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import com.google.android.material.appbar.AppBarLayout;
 
-import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.profiles.data.ProfileDataObject;
 import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -178,9 +177,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 			}
 		});
 
-		if (Build.VERSION.SDK_INT >= 21) {
-			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), mainView);
-		}
+		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), mainView);
 
 		return mainView;
 	}

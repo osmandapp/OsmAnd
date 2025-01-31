@@ -4,6 +4,7 @@ import static net.osmand.view.ThreeStateCheckbox.State.CHECKED;
 import static net.osmand.view.ThreeStateCheckbox.State.MISC;
 import static net.osmand.view.ThreeStateCheckbox.State.UNCHECKED;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,13 +62,13 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 	private final int groupViewHeight;
 	private final int childViewHeight;
 
-	ExportSettingsAdapter(OsmandApplication app, boolean exportMode, OnItemSelectedListener listener, boolean nightMode) {
-		this.app = app;
+	ExportSettingsAdapter(@NonNull Context context, boolean exportMode, OnItemSelectedListener listener, boolean nightMode) {
+		this.app = (OsmandApplication) context.getApplicationContext();
 		this.exportMode = exportMode;
 		this.listener = listener;
 		this.nightMode = nightMode;
 		uiUtilities = app.getUIUtilities();
-		themedInflater = UiUtilities.getInflater(app, nightMode);
+		themedInflater = UiUtilities.getInflater(context, nightMode);
 		activeColorRes = nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light;
 		secondaryColorRes = nightMode ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light;
 		groupViewHeight = app.getResources().getDimensionPixelSize(R.dimen.setting_list_item_group_height);

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_fuel_type">Doare trelosk (dour-tan)</string>
     <string name="poi_fuel_avia_type">Doare trelosk (kirri-nij)</string>
@@ -222,7 +222,6 @@
     <string name="poi_doityourself">stal-vitellat</string>
     <string name="poi_doors">Dorioù</string>
     <string name="poi_erotic">Stal erotek</string>
-    
     <string name="poi_fishing">Stal-besketa</string>
     <string name="poi_florist">stal-vleunioù</string>
     <string name="poi_frame">Stal sterniañ</string>
@@ -263,7 +262,6 @@
     <string name="poi_ship_chandler">Stal sternajoù</string>
     <string name="poi_sports">Stal rikoù sport</string>
     <string name="poi_stationery">Stal-baper</string>
-    
     <string name="poi_ticket">Bilhederezh</string>
     <string name="poi_tobacco">Stal-vutun</string>
     <string name="poi_toys">Stal c\'hoarielloù</string>

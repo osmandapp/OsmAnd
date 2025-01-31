@@ -57,7 +57,7 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorData;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorDataField;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.BLEUtils;
-import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
+import net.osmand.plus.utils.FormattedValue;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

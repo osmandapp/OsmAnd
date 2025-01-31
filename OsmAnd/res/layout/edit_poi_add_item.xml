@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content">
+
+	<net.osmand.plus.widgets.ButtonEx
+		android:id="@+id/addTagButton"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="12dp"
+		android:layout_marginLeft="12dp"
+		android:layout_marginTop="16dp"
+		android:text="@string/add_tag"
+		android:textSize="@dimen/default_sub_text_size"
+		app:typefaceWeight="medium" />
+
+</LinearLayout>

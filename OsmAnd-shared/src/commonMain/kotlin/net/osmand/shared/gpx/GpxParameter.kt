@@ -17,6 +17,7 @@ enum class GpxParameter(
 	START_TIME("startTime", "bigint", Long::class, Long.MAX_VALUE, true),
 	END_TIME("endTime", "bigint", Long::class, Long.MIN_VALUE, true),
 	TIME_SPAN("timeSpan", "bigint", Long::class, 0L, true),
+	EXPECTED_DURATION("expectedDuration", "bigint", Long::class, 0L, true),
 	TIME_MOVING("timeMoving", "bigint", Long::class, 0L, true),
 	TOTAL_DISTANCE_MOVING("totalDistanceMoving", "double", Double::class, 0.0, true),
 	DIFF_ELEVATION_UP("diffElevationUp", "double", Double::class, 0.0, true),
@@ -72,6 +73,10 @@ enum class GpxParameter(
 	DATA_VERSION("dataVersion", "int", Int::class, 0, false);
 
 	fun isNullSupported(): Boolean = defaultValue == null
+
+	fun isAnalysisRecalculationNeeded(): Boolean {
+		return this == JOIN_SEGMENTS
+	}
 
 	fun convertToDbValue(value: Any?): Any? {
 		return when {

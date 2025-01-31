@@ -64,8 +64,9 @@ abstract class LocalResourcesExportType extends AbstractFileExportType {
 			File file = localItem.getFile();
 			AssetsCollection assets = resourceManager.getAssets();
 			if (assets.isFileDerivedFromAssets(file)) {
+				long lastModified = file.lastModified();
 				Long version = assets.getVersionTime(file);
-				return version == null || version == file.lastModified();
+				return version == null || version == lastModified;
 			}
 		} catch (IOException e) {
 			LOG.error(e);

@@ -1469,9 +1469,7 @@ POIの更新は利用できません</string>
 \n設定の有効無効化で元に戻せますが、[マップ設定]下の[マップスタイル]を変更することで必要に応じて切り替えることも出来ます。</string>
     <string name="plugin_nautical_name">航路マップ表示</string>
     <string name="local_osm_changes_upload_all_confirm">%1$dカ所の変更をOSMにアップロードしますか？</string>
-    <string name="plugin_nautical_descr">航路、ビーコン、海上の危険エリア、航行や係留が禁止されているエリアなどの情報で海図を充実させます。使用するには、対応する海図をダウンロードし[マップ設定]＞[マップスタイル]＞[船舶]を有効にしてください。
-\n
-\n詳しくは、%1$s をご参照下さい。</string>
+    <string name="plugin_nautical_descr">航路、ビーコン、海上の危険エリア、航行や係留が禁止されているエリアなどの情報で海図を充実させます。使用するには、対応する海図をダウンロードし[マップ設定]＞[マップスタイル]＞[船舶]を有効にしてください。 \n \n詳しくは、%1$s をご参照下さい。</string>
     <string name="plugin_ski_name">スキーマップ表示</string>
     <string name="plugin_ski_descr">ウィンタースポーツエリアでのナビゲーション用に設計されています。スキー場、スキーリフト、クロスカントリースキーコースを、難易度を示す色のついた線で見ることができます。この拡張機能を利用するには、プラグインを有効にしてから\"マップ設定\"内のマップスタイルで\"ウィンター＆スキー\"を選択します。</string>
     <string name="rename_failed">リネーム出来ませんでした</string>
@@ -3518,7 +3516,6 @@ POIの更新は利用できません</string>
     <string name="shared_string_drawer">ドロワーメニュー</string>
     <string name="shared_string_octagon">八角形</string>
     <string name="context_menu_actions">コンテキストメニュー</string>
-    <string name="reorder_or_hide_from">項目の並べ替えや非表示するものを指定できます。</string>
     <string name="shared_string_divider">分割</string>
     <string name="divider_descr">ここで指定された項目は、区切り線より下に配置されます。</string>
     <string name="shared_string_hidden">非表示</string>
@@ -4207,7 +4204,6 @@ POIの更新は利用できません</string>
     <string name="benefits_for_contributors_primary_descr">OpenStreetMap.orgへの積極的な貢献者は、無制限かつ1時間毎のマップ更新を受ける権利があります。</string>
     <string name="benefits_for_contributors_secondary_descr">OpenStreetMapにサインインして、毎月および毎時で無制限のマップ更新資格があるかどうかを確認します。</string>
     <string name="use_login_and_password">ユーザー名とパスワードを使用する</string>
-    <string name="available_until">まで利用可能</string>
     <string name="enough_contributions_descr">おめでとうございます。OpenStreetMapに十分な貢献をしたと判断され、無制限のOsmAndマップの更新を受けることができます！</string>
     <string name="shared_string_contributions">貢献</string>
     <string name="contributions_may_calculate_with_delay">貢献度の計算には数時間程度かかる場合があります。</string>
@@ -4316,9 +4312,7 @@ POIの更新は利用できません</string>
     <string name="track_has_no_needed_data">経路に対応するデータがありません。</string>
     <string name="shared_string_purchased">購入済</string>
     <string name="stop_download_desc">ダウンロードが完了していません。今ダウンロードを中断すると、タイルの一部のみが表示される形となります。</string>
-    <string name="location_source_descr">Google PlayよりインストールされたOsmAndは、デフォルトでは%1$sを使用して現在地を特定します。
-\n
-\n位置情報が不正確であったり、%2$sのないデバイスを使用している場合は、\"%3$s\"に切り替えてみてください。</string>
+    <string name="location_source_descr">Google PlayよりインストールされたOsmAndは、デフォルトでは%1$sを使用して現在地を特定します。 \n \n位置情報が不正確であったり、%2$sのないデバイスを使用している場合は、\"%3$s\"に切り替えてみてください。</string>
     <string name="location_source">位置情報取得元</string>
     <string name="gpx_no_routes_descr">\"%1$s\"ツールを使って、ファイルにルートを追加することができます。</string>
     <string name="import_tracks_descr">%1$s、%2$sは個別の経路が含まれます。インポートする経路を選択する必要があります。</string>
@@ -4722,7 +4716,7 @@ POIの更新は利用できません</string>
     <string name="weather_wind_ms">m/s</string>
     <string name="weather_wind_kilimeters_per_hour">毎時メートル</string>
     <string name="av_notes_choose_action_widget_desc">アクションを選択します。</string>
-    <string name="map_widget_trip_recording_distance">距離</string>
+    <string name="map_widget_distance">距離</string>
     <string name="shared_string_widget">ウィジェット</string>
     <string name="map_widget_camera_distance">カメラの仰角</string>
     <string name="go_to_marker_location">マーカーの場所に移動</string>

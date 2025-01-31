@@ -31,7 +31,7 @@ import net.osmand.plus.plugins.srtm.TerrainMode.TerrainType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
+import net.osmand.plus.utils.FormattedValue;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.shared.ColorPalette.ColorValue;
 import net.osmand.shared.gpx.GpxTrackAnalysis;

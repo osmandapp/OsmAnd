@@ -65,7 +65,7 @@ public class Map3DModeBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@NonNull
 	private View createView() {
-		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View view = inflater.inflate(R.layout.fragment_map_3d_mode_bottom_sheet, null);
 		LinearLayout itemsContainer = view.findViewById(R.id.items_container);
 

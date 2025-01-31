@@ -71,6 +71,11 @@ public class QuickActionsSettingsItem extends SettingsItem {
 		return buttonState;
 	}
 
+	@NonNull
+	public ButtonStateBean getStateBean() {
+		return stateBean;
+	}
+
 	@Override
 	public long getLocalModifiedTime() {
 		return buttonState.getLastModifiedTime();
@@ -103,7 +108,7 @@ public class QuickActionsSettingsItem extends SettingsItem {
 				renameButton();
 			}
 		}
-		stateBean.setupButtonState(buttonState);
+		stateBean.setupButtonState(app, buttonState);
 		mapButtonsHelper.addQuickActionButtonState(buttonState);
 	}
 
@@ -139,7 +144,7 @@ public class QuickActionsSettingsItem extends SettingsItem {
 				buttonState = new QuickActionButtonState(app, id);
 				stateBean = new ButtonStateBean(id);
 				stateBean.name = object.optString("name");
-				stateBean.enabled = object.getBoolean("enabled");
+				stateBean.enabled = object.optBoolean("enabled");
 
 				String iconName = object.optString("icon");
 				if (!Algorithms.isEmpty(iconName)) {

@@ -193,6 +193,7 @@
 	<string name="poi_live_music">Live music</string>
 	<string name="poi_cash_in">Cash deposit</string>
 	<string name="poi_camp_site_type">Camp site type</string>
+	<string name="poi_cafe_filter">Cafe</string>
 
 
 <!--  categories -->
@@ -4847,7 +4848,7 @@
 	<string name="poi_computer_parts_yes">Yes;Computer parts</string>
 	<string name="poi_computer_parts_no">Computer parts: no</string>
 
-	<string name="poi_climbing_crag">Yes;Climbing crag</string>
+	<string name="poi_climbing_crag">Climbing crag</string>
 
 	<string name="poi_museum_art">Art</string>
 	<string name="poi_museum_gallery">Gallery</string>
@@ -5536,5 +5537,19 @@
 	<string name="poi_camp_site_standard">Standard</string>
 	<string name="poi_camp_site_serviced">Serviced</string>
 	<string name="poi_camp_site_deluxe">Deluxe</string>
+
+	<string name="poi_climbing_area">Climbing area</string>
+	<string name="poi_climbing_route">Climbing route</string>
+	<string name="poi_climbing_route_bottom">Climbing route bottom</string>
+
+	<string name="poi_cafe_yes">Yes</string>
+
+	<string name="poi_sled_yes">Sled: yes</string>
+	<string name="poi_sled_no">Sled: no</string>
+	<string name="poi_dog_sled_yes">Dog sled: yes</string>
+	<string name="poi_dog_sled_no">Dog sled: no</string>
+	<string name="poi_atv_yes">ATV: yes</string>
+	<string name="poi_atv_no">ATV: no</string>
+	<string name="poi_access_notes">Access notes</string>
 
 </resources>

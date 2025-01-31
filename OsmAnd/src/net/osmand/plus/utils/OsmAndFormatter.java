@@ -7,9 +7,9 @@ import static java.util.Calendar.YEAR;
 
 import android.content.Context;
 import android.text.format.DateUtils;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import com.jwetherell.openmap.common.LatLonPoint;
@@ -42,7 +42,6 @@ import java.text.DateFormatSymbols;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -52,6 +51,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 public class OsmAndFormatter {
+
 	public static final float METERS_IN_KILOMETER = 1000f;
 	public static final float METERS_IN_ONE_MILE = 1609.344f; // 1609.344
 	public static final float METERS_IN_ONE_NAUTICALMILE = 1852f; // 1852
@@ -166,6 +166,24 @@ public class OsmAndFormatter {
 		int minutes = totalMinutes % 60;
 		return String.format(Locale.US, "%d:%02d", hours, minutes);
 	}
+
+	@NonNull
+	public static Pair<String, String> getFormattedTime(@NonNull Context context, long time) {
+		String timeFormatted;
+		String period = null;
+
+		boolean is24HourFormat = android.text.format.DateFormat.is24HourFormat(context);
+
+		if (is24HourFormat) {
+			timeFormatted = android.text.format.DateFormat.format("k:mm", time).toString();
+		} else {
+			timeFormatted = android.text.format.DateFormat.format("h:mm", time).toString();
+			period = android.text.format.DateFormat.format("aa", time).toString();
+		}
+
+		return new Pair<>(timeFormatted, period);
+	}
+
 
 	public static DateFormat getDateFormat(@NonNull Context context) {
 		return android.text.format.DateFormat.getDateFormat(context);
@@ -330,46 +348,6 @@ public class OsmAndFormatter {
 			default:
 				return Math.round(bearing) + AngularConstants.DEGREES.getUnitSymbol();
 		}
-	}
-
-	public static class OsmAndFormatterParams {
-		public static final boolean DEFAULT_FORCE_TRAILING = true;
-		public static final int DEFAULT_EXTRA_DECIMAL_PRECISION = 1;
-		boolean forceTrailingZerosInDecimalMainUnit = DEFAULT_FORCE_TRAILING;
-		boolean forcePreciseValue = false;
-		int extraDecimalPrecision = DEFAULT_EXTRA_DECIMAL_PRECISION;
-
-		public static final OsmAndFormatterParams USE_LOWER_BOUNDS = useLowerBoundParam();
-		public static final OsmAndFormatterParams NO_TRAILING_ZEROS = new OsmAndFormatterParams().setTrailingZerosForMainUnit(false);
-		public static final OsmAndFormatterParams DEFAULT = new OsmAndFormatterParams();
-
-		boolean useLowerBound = false;
-
-		public boolean isUseLowerBound() {
-			return useLowerBound;
-		}
-
-		private static OsmAndFormatterParams useLowerBoundParam() {
-			OsmAndFormatterParams p = new OsmAndFormatterParams();
-			p.useLowerBound = true;
-			p.extraDecimalPrecision = 0;
-			p.forceTrailingZerosInDecimalMainUnit = true;
-			return p;
-		}
-
-		private OsmAndFormatterParams setTrailingZerosForMainUnit(boolean forceTrailingZeros) {
-			this.forceTrailingZerosInDecimalMainUnit = forceTrailingZeros;
-			return this;
-		}
-
-		public void setForcePreciseValue(boolean forceDecimalPlaces) {
-			this.forcePreciseValue = forceDecimalPlaces;
-		}
-
-		public void setExtraDecimalPrecision(int extraDecimalPrecision) {
-			this.extraDecimalPrecision = extraDecimalPrecision;
-		}
-
 	}
 
 	@NonNull
@@ -692,15 +670,12 @@ public class OsmAndFormatter {
 	}
 
 	@NonNull
-	public static SpeedConstants getSpeedModeForPaceMode(SpeedConstants originalMode) {
-		switch (originalMode) {
-			case MINUTES_PER_KILOMETER:
-				return SpeedConstants.KILOMETERS_PER_HOUR;
-			case MINUTES_PER_MILE:
-				return SpeedConstants.MILES_PER_HOUR;
-			default:
-				return originalMode;
-		}
+	public static SpeedConstants getSpeedModeForPaceMode(@NonNull SpeedConstants originalMode) {
+		return switch (originalMode) {
+			case MINUTES_PER_KILOMETER -> SpeedConstants.KILOMETERS_PER_HOUR;
+			case MINUTES_PER_MILE -> SpeedConstants.MILES_PER_HOUR;
+			default -> originalMode;
+		};
 	}
 
 	@NonNull
@@ -1022,71 +997,6 @@ public class OsmAndFormatter {
 		coordinate -= deg;
 		coordinate *= 60.0;
 		return coordinate;
-	}
-
-	public static class FormattedValue {
-
-		public final String value;
-		public final String unit;
-		public final float valueSrc;
-		public final int unitId;
-
-		private final boolean separateWithSpace;
-
-		public FormattedValue(float valueSrc, String value, String unit) {
-			this(valueSrc, value, unit, true);
-		}
-
-		public FormattedValue(float valueSrc, String value, String unit, boolean separateWithSpace) {
-			this(valueSrc, value, unit, -1, separateWithSpace);
-		}
-
-		public FormattedValue(float valueSrc, String value, String unit, @StringRes int unitId, boolean separateWithSpace) {
-			this.value = value;
-			this.valueSrc = valueSrc;
-			this.unit = unit;
-			this.separateWithSpace = separateWithSpace;
-			this.unitId = unitId;
-		}
-
-		@NonNull
-		public String format(@NonNull Context context) {
-			return format(context, value, unit, separateWithSpace);
-		}
-
-		@NonNull
-		public static String format(@NonNull Context context, @NonNull String value,
-		                            @NonNull String unit, boolean separateWithSpace) {
-			return separateWithSpace
-					? context.getString(R.string.ltr_or_rtl_combine_via_space, value, unit)
-					: new MessageFormat("{0}{1}").format(new Object[] {value, unit});
-		}
-	}
-
-	public static class TimeFormatter {
-
-		private final DateFormat simpleTimeFormat;
-		private final DateFormat amPmTimeFormat;
-
-		public TimeFormatter(@NonNull Locale locale, @NonNull String pattern, @NonNull String amPmPattern) {
-			this(locale, pattern, amPmPattern, null);
-		}
-
-		public TimeFormatter(@NonNull Locale locale, @NonNull String pattern,
-		                     @NonNull String amPmPattern, @Nullable TimeZone timeZone) {
-			simpleTimeFormat = new SimpleDateFormat(pattern, locale);
-			amPmTimeFormat = new SimpleDateFormat(amPmPattern, locale);
-
-			if (timeZone != null) {
-				simpleTimeFormat.getCalendar().setTimeZone(timeZone);
-				amPmTimeFormat.getCalendar().setTimeZone(timeZone);
-			}
-		}
-
-		public String format(@NonNull Date date, boolean twelveHoursFormat) {
-			DateFormat timeFormat = twelveHoursFormat ? amPmTimeFormat : simpleTimeFormat;
-			return timeFormat.format(date);
-		}
 	}
 
 	@NonNull

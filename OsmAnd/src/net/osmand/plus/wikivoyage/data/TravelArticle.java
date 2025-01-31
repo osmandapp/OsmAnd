@@ -2,6 +2,7 @@ package net.osmand.plus.wikivoyage.data;
 
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.shared.gpx.primitives.WptPt;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
@@ -136,12 +137,7 @@ public class TravelArticle {
 	public String getGpxFileName() {
 		String gpxFileName = !Algorithms.isEmpty(title) ? title : routeId;
 		if (gpxFileName != null) {
-			return gpxFileName
-				.replace('/', '_')
-				.replace('\'', '_')
-				.replace('\"', '_')
-				.replace('\r', '_')
-				.replace('\n', '_');
+			return Algorithms.sanitizeFileName(gpxFileName);
 		} else {
 			LOG.error("Empty travel article in " + this.file);
 			return "Travel Article File"; // @NonNull
@@ -223,7 +219,7 @@ public class TravelArticle {
 		wptPt.setLat(amenity.getLocation().getLatitude());
 		wptPt.setLon(amenity.getLocation().getLongitude());
 		wptPt.setDesc(amenity.getDescription(lang));
-		wptPt.setLink(amenity.getSite());
+		wptPt.setLink(new Link(amenity.getSite()));
 		String colorId = amenity.getColor();
 		if (colorId != null) {
 			wptPt.setColor(DefaultColors.valueOf(colorId));

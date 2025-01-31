@@ -27,8 +27,10 @@ import net.osmand.plus.routing.RoadShield;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.WidgetSize;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -49,6 +51,10 @@ import java.util.List;
 public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget, ISupportVerticalPanel, ISupportWidgetResizing, ISupportMultiRow {
 
 	private static final int DISTANCE_CHANGE_THRESHOLD = 10;
+	private static final int EXIT_OUT_TEXT_SIZE_L = 22;
+	private static final int EXIT_OUT_TEXT_SIZE_M = 15;
+	private static final int EXIT_OUT_TEXT_SIZE_S = 11;
+	public static final int SHIELD_HEIGHT_DP = 40;
 
 	protected boolean horizontalMini;
 	protected int deviatedPath;
@@ -89,7 +95,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		setVerticalWidget(selectedPanel);
 		setupViews();
 
-		turnDrawable = new TurnDrawable(mapActivity, horizontalMini);
+		turnDrawable = new TurnDrawable(mapActivity, !verticalWidget && horizontalMini);
 		if (verticalWidget) {
 			setVerticalImage(turnDrawable);
 		} else if (horizontalMini) {
@@ -173,15 +179,14 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	}
 
 	public void setTurnType(TurnType turnType) {
-		if (verticalWidget) {
-			this.turnType = turnType;
-			if (turnDrawable.setTurnType(turnType)) {
+		this.turnType = turnType;
+		boolean visibilityUpdated = !verticalWidget && updateVisibility(turnType != null);
+		if (turnDrawable.setTurnType(turnType) || visibilityUpdated) {
+			turnDrawable.updateColors(isNightMode());
+			if (verticalWidget) {
 				setVerticalImage(turnDrawable);
-			}
-		} else {
-			boolean vis = updateVisibility(turnType != null);
-			if (turnDrawable.setTurnType(turnType) || vis) {
-				turnDrawable.setTextPaint(textPaint);
+			} else {
+				turnDrawable.updateTextPaint(textPaint, nightMode);
 				if (horizontalMini) {
 					setImageDrawable(turnDrawable, false);
 				} else {
@@ -306,7 +311,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 
 	private void updateDistance() {
 		int deviatePath = turnDrawable.isDeviatedFromRoute() ? deviatedPath : nextTurnDistance;
-		String distance = OsmAndFormatter.getFormattedDistance(deviatePath, app, OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS);
+		String distance = OsmAndFormatter.getFormattedDistance(deviatePath, app, OsmAndFormatterParams.USE_LOWER_BOUNDS);
 
 		String text;
 		String subText = null;
@@ -320,7 +325,14 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 
 		if (verticalWidget) {
 			distanceView.setText(text);
-			distanceSubView.setText(subText == null ? "" : subText);
+			if (subText == null) {
+				subText = "";
+			}
+			if (widgetState.getWidgetSizePref().get() == WidgetSize.SMALL &&
+					(!Algorithms.isEmpty(streetView.getText()) || !Algorithms.isEmpty(exitView.getText()))) {
+				subText = subText + ",";
+			}
+			distanceSubView.setText(subText);
 		} else {
 			setTextNoUpdateVisibility(text, subText);
 		}
@@ -349,9 +361,10 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 
 			textPaint.set(topTextView.getPaint());
 			textPaint.setColor(textState.textColor);
-			turnDrawable.setTextPaint(textPaint);
-			turnDrawable.invalidateSelf();
+			turnDrawable.updateTextPaint(textPaint, isNightMode());
+			turnDrawable.updateColors(isNightMode());
 		}
+		turnDrawable.invalidateSelf();
 	}
 
 	protected void updateVerticalWidgetColors(@NonNull TextState textState) {
@@ -370,7 +383,22 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		distanceSubView.setTypeface(Typeface.DEFAULT, typefaceStyle);
 		streetView.setTypeface(Typeface.DEFAULT, typefaceStyle);
 
+		textPaint.setTypeface(Typeface.create(Typeface.DEFAULT, typefaceStyle));
+		textPaint.setTextSize(AndroidUtils.spToPx(app, getVerticalExitOutTextSize()));
+		textPaint.setColor(textState.textColor);
+		turnDrawable.updateTextPaint(textPaint, isNightMode());
+		turnDrawable.updateColors(isNightMode());
 		bg.setBackgroundResource(textState.widgetBackgroundId);
+	}
+
+	private int getVerticalExitOutTextSize(){
+		return switch (widgetState.getWidgetSizePref().get()) {
+			case SMALL -> EXIT_OUT_TEXT_SIZE_S;
+			case MEDIUM ->
+					isFullRow ? EXIT_OUT_TEXT_SIZE_M : EXIT_OUT_TEXT_SIZE_S;
+			case LARGE ->
+					isFullRow ? EXIT_OUT_TEXT_SIZE_L : EXIT_OUT_TEXT_SIZE_M;
+		};
 	}
 
 	@Override
@@ -458,7 +486,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			int turnImminent = turnDrawable.getTurnImminent();
 			boolean deviatedFromRoute = turnDrawable.isDeviatedFromRoute();
 			setupViews();
-			turnDrawable = new TurnDrawable(mapActivity, horizontalMini);
+			turnDrawable = new TurnDrawable(mapActivity, !verticalWidget && horizontalMini);
 			turnDrawable.setTurnType(type);
 			turnDrawable.setTurnImminent(turnImminent, deviatedFromRoute);
 			setVerticalImage(turnDrawable);

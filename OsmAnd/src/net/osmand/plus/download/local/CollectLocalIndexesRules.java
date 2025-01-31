@@ -1,7 +1,6 @@
 package net.osmand.plus.download.local;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
@@ -18,16 +17,13 @@ public class CollectLocalIndexesRules {
 	private final OsmandApplication app;
 	private final Map<File, Boolean> directories;
 	private final Set<File> forcedAddUnknownDirectories;
-	private final SizeLimitCondition checkSizeLimitCondition;
 
 	private CollectLocalIndexesRules(@NonNull OsmandApplication app,
 	                                 @NonNull Map<File, Boolean> directories,
-	                                 @NonNull Set<File> forcedAddUnknownDirectories,
-	                                 @Nullable SizeLimitCondition sizeLimitCondition) {
+	                                 @NonNull Set<File> forcedAddUnknownDirectories) {
 		this.app = app;
 		this.directories = directories;
 		this.forcedAddUnknownDirectories = forcedAddUnknownDirectories;
-		this.checkSizeLimitCondition = sizeLimitCondition;
 	}
 
 	@NonNull
@@ -52,22 +48,11 @@ public class CollectLocalIndexesRules {
 		return addUnknown;
 	}
 
-	@Nullable
-	public Long getCalculationSizeLimit(@NonNull LocalItem localItem) {
-		return checkSizeLimitCondition != null ? checkSizeLimitCondition.execute(localItem) : null;
-	}
-
-	public interface SizeLimitCondition {
-		@Nullable
-		Long execute(@NonNull LocalItem localItem);
-	}
-
 	public static class Builder {
 
 		private final OsmandApplication app;
 		private final Map<File, Boolean> directories = new LinkedHashMap<>();
 		private final Set<File> forcedAddUnknownDirectories = new HashSet<>();
-		private SizeLimitCondition checkSizeLimitCondition;
 
 		public Builder(@NonNull OsmandApplication app) {
 			this.app = app;
@@ -85,13 +70,8 @@ public class CollectLocalIndexesRules {
 			return this;
 		}
 
-		public Builder setSizeLimitCondition(@Nullable SizeLimitCondition checkSizeLimitCondition) {
-			this.checkSizeLimitCondition = checkSizeLimitCondition;
-			return this;
-		}
-
 		public CollectLocalIndexesRules build() {
-			return new CollectLocalIndexesRules(app, directories, forcedAddUnknownDirectories, checkSizeLimitCondition);
+			return new CollectLocalIndexesRules(app, directories, forcedAddUnknownDirectories);
 		}
 	}
 }

@@ -45,7 +45,6 @@ import net.osmand.Period;
 import net.osmand.Period.PeriodUnit;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
-import net.osmand.core.android.NativeCore;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.ValueHolder;
@@ -643,8 +642,8 @@ public class OsmandSettings {
 		}
 	}
 
-	public <T> void registerInternalPreference(String id, CommonPreference<T> tCommonPreference) {
-		registeredPreferences.put(id, tCommonPreference);
+	public <T> void registerInternalPreference(String id, CommonPreference<T> preference) {
+		registeredPreferences.put(id, preference);
 	}
 
 	public boolean isSet(boolean global, String id) {
@@ -1046,14 +1045,6 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> DRIVING_REGION_AUTOMATIC = new BooleanPreference(this, "driving_region_automatic", true).makeProfile().cache();
 	public final OsmandPreference<DrivingRegion> DRIVING_REGION = new EnumStringPreference<DrivingRegion>(this,
 			"default_driving_region", DrivingRegion.EUROPE_ASIA, DrivingRegion.values()) {
-
-		public boolean setValue(Object prefs, DrivingRegion val) {
-			boolean overrideMetricSystem = !DRIVING_REGION_AUTOMATIC.getValue(prefs, DRIVING_REGION_AUTOMATIC.getDefaultValue());
-			if (overrideMetricSystem && val != null) {
-				METRIC_SYSTEM.setValue(prefs, val.defMetrics);
-			}
-			return super.setValue(prefs, val);
-		}
 
 		public DrivingRegion getDefaultValue() {
 			return DrivingRegion.getDrivingRegionByLocale();
@@ -1628,41 +1619,11 @@ public class OsmandSettings {
 		return typeNames;
 	}
 
-	public final OsmandPreference<Boolean> ANNOUNCE_WPT = new BooleanPreference(this, "announce_wpt", true) {
-		@Override
-		protected boolean setValue(Object prefs, Boolean val) {
-			boolean valueSaved = super.setValue(prefs, val);
-			if (valueSaved) {
-				SHOW_WPT.set(val);
-			}
+	public final OsmandPreference<Boolean> ANNOUNCE_WPT = new BooleanPreference(this, "announce_wpt", true).makeProfile().cache();
 
-			return valueSaved;
-		}
-	}.makeProfile().cache();
+	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_FAVORITES = new BooleanPreference(this, "announce_nearby_favorites", false).makeProfile().cache();
 
-	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_FAVORITES = new BooleanPreference(this, "announce_nearby_favorites", false) {
-		@Override
-		protected boolean setValue(Object prefs, Boolean val) {
-			boolean valueSaved = super.setValue(prefs, val);
-			if (valueSaved) {
-				SHOW_NEARBY_FAVORITES.set(val);
-			}
-
-			return valueSaved;
-		}
-	}.makeProfile().cache();
-
-	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_POI = new BooleanPreference(this, "announce_nearby_poi", false) {
-		@Override
-		protected boolean setValue(Object prefs, Boolean val) {
-			boolean valueSaved = super.setValue(prefs, val);
-			if (valueSaved) {
-				SHOW_NEARBY_POI.set(val);
-			}
-
-			return valueSaved;
-		}
-	}.makeProfile().cache();
+	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_POI = new BooleanPreference(this, "announce_nearby_poi", false).makeProfile().cache();
 
 	public final OsmandPreference<Boolean> GPX_ROUTE_CALC_OSMAND_PARTS = new BooleanPreference(this, "gpx_routing_calculate_osmand_route", true).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> GPX_CALCULATE_RTEPT = new BooleanPreference(this, "gpx_routing_calculate_rtept", true).makeGlobal().makeShared().cache();
@@ -1743,7 +1704,7 @@ public class OsmandSettings {
 
 	public final CommonPreference<GPXDataSetAxisType> TRIP_RECORDING_Y_AXIS = new EnumStringPreference<>(this, "trip_recording_Y_axis", GPXDataSetAxisType.DISTANCE, GPXDataSetAxisType.values());
 
-	public final CommonPreference<Boolean> SHOW_TRIP_REC_NOTIFICATION = new BooleanPreference(this, "show_trip_recording_notification", true).makeProfile();
+	public final CommonPreference<Boolean> SHOW_TRIP_REC_NOTIFICATION = new BooleanPreference(this, "show_trip_recording_notification", false).makeProfile();
 
 
 	public final CommonPreference<Boolean> LIVE_MONITORING = new BooleanPreference(this, "live_monitoring", false).makeProfile();
@@ -1953,6 +1914,9 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOULD_SHOW_FREE_VERSION_BANNER = new BooleanPreference(this, "should_show_free_version_banner", false).makeGlobal().makeShared().cache();
 
 	public final OsmandPreference<Boolean> USE_DISCRETE_AUTO_ZOOM = new BooleanPreference(this, "use_v1_auto_zoom", false).makeGlobal().makeShared().cache();
+
+	public final OsmandPreference<Boolean> USE_LEFT_DISTANCE_TO_INTERMEDIATE = new BooleanPreference(this, "use_left_distance_to_intermediate", false).makeProfile().makeShared().cache();
+
 	public final OsmandPreference<Boolean> TRANSPARENT_STATUS_BAR = new BooleanPreference(this, "transparent_status_bar", true).makeGlobal().makeShared();
 
 	public final OsmandPreference<Boolean> SHOW_INFO_ABOUT_PRESSED_KEY = new BooleanPreference(this, "show_info_about_pressed_key", false).makeGlobal().makeShared();
@@ -3092,7 +3056,8 @@ public class OsmandSettings {
 
 	@NonNull
 	public CommonPreference<String> registerCustomRenderProperty(@NonNull String attrName, @Nullable String defaultValue) {
-		CommonPreference<String> preference = new StringPreference(this, RENDERER_PREFERENCE_PREFIX + attrName, defaultValue).makeProfile();
+		String id = attrName.startsWith(RENDERER_PREFERENCE_PREFIX) ? attrName : RENDERER_PREFERENCE_PREFIX + attrName;
+		CommonPreference<String> preference = new StringPreference(this, id, defaultValue).makeProfile();
 		customRendersProps.put(attrName, preference);
 		return preference;
 	}
@@ -3120,23 +3085,26 @@ public class OsmandSettings {
 
 	@NonNull
 	public CommonPreference<Boolean> registerCustomRenderBooleanProperty(@NonNull String attrName, boolean defaultValue) {
-		CommonPreference<Boolean> preference = new BooleanPreference(this, RENDERER_PREFERENCE_PREFIX + attrName, defaultValue).makeProfile();
+		String id = attrName.startsWith(RENDERER_PREFERENCE_PREFIX) ? attrName : RENDERER_PREFERENCE_PREFIX + attrName;
+		CommonPreference<Boolean> preference = new BooleanPreference(this, id, defaultValue).makeProfile();
 		customBooleanRendersProps.put(attrName, preference);
 		return preference;
 	}
 
 	@NonNull
-	public CommonPreference<String> getCustomRoutingProperty(@NonNull String attrName, String defValue) {
+	public CommonPreference<String> getCustomRoutingProperty(@NonNull String attrName, String defaultValue) {
 		if (!customRoutingProps.containsKey(attrName)) {
-			customRoutingProps.put(attrName, new StringPreference(this, ROUTING_PREFERENCE_PREFIX + attrName, defValue).makeProfile());
+			String id = attrName.startsWith(ROUTING_PREFERENCE_PREFIX) ? attrName : ROUTING_PREFERENCE_PREFIX + attrName;
+			customRoutingProps.put(attrName, new StringPreference(this, id, defaultValue).makeProfile());
 		}
 		return customRoutingProps.get(attrName);
 	}
 
 	@NonNull
-	public CommonPreference<Boolean> getCustomRoutingBooleanProperty(String attrName, boolean defaulfValue) {
+	public CommonPreference<Boolean> getCustomRoutingBooleanProperty(@NonNull String attrName, boolean defaultValue) {
 		if (!customBooleanRoutingProps.containsKey(attrName)) {
-			customBooleanRoutingProps.put(attrName, new BooleanStringPreference(this, ROUTING_PREFERENCE_PREFIX + attrName, defaulfValue).makeProfile());
+			String id = attrName.startsWith(ROUTING_PREFERENCE_PREFIX) ? attrName : ROUTING_PREFERENCE_PREFIX + attrName;
+			customBooleanRoutingProps.put(attrName, new BooleanStringPreference(this, id, defaultValue).makeProfile());
 		}
 		return customBooleanRoutingProps.get(attrName);
 	}

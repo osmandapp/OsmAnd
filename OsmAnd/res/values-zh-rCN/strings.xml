@@ -1696,9 +1696,7 @@
 \n无需下载专门的地图，我们基于标准地图创建的该视图。
 \n
 \n您可以在此重新激活该视图，或者根据需要更改 “配置地图 ”下的 “地图样式”。</string>
-    <string name="plugin_nautical_descr">通过航行路线、导航灯、航海危险区、限制航行或停靠区等信息丰富地图内容。在使用前，请下载相应的航海地图，并在 “配置地图 ”下启用 “航海地图 ”样式。
-\n
-\n了解更多 %1$s。</string>
+    <string name="plugin_nautical_descr">通过航行路线、导航灯、航海危险区、限制航行或停靠区等信息丰富地图内容。在使用前，请下载相应的航海地图，并在 “配置地图 ”下启用 “航海地图 ”样式。 \n \n了解更多 %1$s。</string>
     <string name="plugin_ski_descr">专为冬季运动场地导航而设计： 查看滑雪道、滑雪缆车和越野滑雪道，并用彩色线条标示难度等级。使用时，请启用此插件，并进入 \"配置地图\"，选择 \"冬季和滑雪 \"地图样式。</string>
     <string name="index_tours">旅游</string>
     <string name="shared_string_all">全部</string>
@@ -2566,9 +2564,7 @@
     <string name="open_in_browser_wiki">在线打开条目</string>
     <string name="wiki_article_not_found">未找到条目</string>
     <string name="increase_search_radius_to">增大搜索半径至 %1$s</string>
-    <string name="send_search_query_description">你的搜索查询将与你的位置一起发送到：“ %1$s”。
-\n
-\n 不收集个人信息，仅收集改善搜索所需的搜索数据。</string>
+    <string name="send_search_query_description">你的搜索查询将与你的位置一起发送到：“ %1$s”。 \n \n 不收集个人信息，仅收集改善搜索所需的搜索数据。</string>
     <string name="send_search_query">发送搜索请求？</string>
     <string name="search_street">搜索街道</string>
     <string name="start_search_from_city">首先指定城市/乡镇/地区</string>
@@ -3770,8 +3766,7 @@
 \n请注意，较高的最小距离可能会过度简化轨迹的几何形状。</string>
     <string name="app_modes_options">选择程序模式</string>
     <string name="gps_filter_speed_altitude_desc">只有匹配设定间隔的轨迹点才会出现在图表和地图上，其余的轨迹点将被隐藏。</string>
-    <string name="shared_storage_first_step">按 “%1$s”。
-\n文件管理器会在你需要寻找并打开 osmand 文件夹的地方打开。</string>
+    <string name="shared_storage_first_step">按 “%1$s”。 \n文件管理器会在你需要寻找并打开 osmand 文件夹的地方打开。</string>
     <string name="folder_access_denied">需要权限才能访问所选文件夹。</string>
     <string name="copying_completed">已复制</string>
     <string name="shared_string_migration">迁移</string>
@@ -4233,7 +4228,7 @@
     <string name="rendering_attr_weatherPressureContours_name">等压线</string>
     <string name="map_widget_trip_recording_uphill">上坡</string>
     <string name="map_widget_trip_recording_duration">持续时间</string>
-    <string name="map_widget_trip_recording_distance">距离</string>
+    <string name="map_widget_distance">距离</string>
     <string name="routing_attr_hazmat_category_description">危险品类别/考虑危险品准入许可</string>
     <string name="routing_attr_avoid_fords_name">避免涉水</string>
     <string name="routing_attr_avoid_fords_description">避免涉水</string>
@@ -4275,9 +4270,7 @@
     <string name="gpx_no_routes_descr">你可以使用\"%1$s\"工具将路线添加到文件中。</string>
     <string name="list_of_groups">群组列表</string>
     <string name="routing_attr_difficulty_preference_advanced_name">高级</string>
-    <string name="location_source_descr">默认情况下，从Google Play安装的OsmAnd使用%1$s来确定位置。
-\n
-\n如果您获得不准确的位置信息或使用没有 %2$s 的设备，请尝试切换到“%3$s”</string>
+    <string name="location_source_descr">默认情况下，从Google Play安装的OsmAnd使用%1$s来确定位置。 \n \n如果您获得不准确的位置信息或使用没有 %2$s 的设备，请尝试切换到“%3$s”</string>
     <string name="quick_action_add_route_descr">一个可以从屏幕中间启动路线的按钮。</string>
     <string name="routing_attr_difficulty_preference_beginner_name">初学者</string>
     <string name="routing_attr_freeride_policy_allow_name">允许</string>
@@ -4318,7 +4311,7 @@
     <string name="auto_backup_title">自动备份</string>
     <string name="marker_2nd">第二个标记</string>
     <string name="import_as_one_track">导入为一条轨迹</string>
-    <string name="routing_attr_goods_restrictions_description">考虑轻型货车（货物）的访问权限</string>
+    <string name="routing_attr_goods_restrictions_description">考虑轻型载货车辆（goods）的访问权限</string>
     <string name="routing_attr_goods_restrictions_name">货物运送</string>
     <string name="live_update_frequency_hour_variant">每小时检查一次地图更新。</string>
     <string name="map_marker_average_speed_desc">指定速度平均的时间间隔（用于估计到达时间）。</string>
@@ -4369,19 +4362,7 @@
     <string name="compass_always_visible">始终可见</string>
     <string name="goods_delivery_desc_4">对超过 3.5 吨的车辆使用卡车配置文件。</string>
     <string name="routing_attr_freeride_policy_description">“自由式滑雪(Freeride)”和“越野滑雪(Off-piste)”是非官方的路线和通道。通常未经修饰，没有维护，晚上没有检查。请自行承担风险。</string>
-    <string name="release_4_0_beta">- 增加了以英尺为单位下载等高线的选项
-\n
-\n - 规划路线景观：增加了在点或图表之间切换的选项卡
-\n
-\n - OsmAnd实时更新移至 “下载 &gt; 更新”
-\n
-\n - 轨迹现在可以按高度、速度或坡度进行着色。
-\n
-\n - 增加了改变路线外观的选项。
-\n
-\n - 更新了“行程录制”对话框
-\n
-\n</string>
+    <string name="release_4_0_beta">- 增加了以英尺为单位下载等高线的选项 \n \n - 规划路线景观：增加了在点或图表之间切换的选项卡 \n \n - OsmAnd实时更新移至 “下载 &gt; 更新” \n \n - 轨迹现在可以按高度、速度或坡度进行着色。 \n \n - 增加了改变路线外观的选项。 \n \n - 更新了“行程录制”对话框 \n \n</string>
     <string name="release_3_5">- 更新了应用程序和配置文件设置。设置现在按类型排列。每个配置文件都可以单独定制。
 \n
 \n - 新的地图下载对话框，建议在浏览时下载地图
@@ -4534,9 +4515,7 @@
     <string name="map_widget_altitude_desc">显示当前地理位置的海拔或当前地图中心的高度</string>
     <string name="map_widget_rendering_fps_desc">显示地图和地图元素的显示和刷新速度，以每秒帧数 （FPS） 表示。</string>
     <string name="ant_go_to_store">前往商店</string>
-    <string name="ant_missing_dependency_descr">找不到所需的服务“%1$s”。
-\n您需要安装或更新 ANT + 插件服务。
-\n您想启动 Play 商店来进行安装或更新吗？</string>
+    <string name="ant_missing_dependency_descr">找不到所需的服务“%1$s”。 \n您需要安装或更新 ANT + 插件服务。 \n您想启动 Play 商店来进行安装或更新吗？</string>
     <string name="ant_missing_dependency">缺少依赖关系</string>
     <string name="ant_read_data">读取数据</string>
     <string name="ant_write_to_gpx">将数据写入轨迹</string>
@@ -4590,7 +4569,7 @@
     <string name="route_maneuvers_desc">导航小工具将在导航期间启用，以显示距离、到达或剩余时间、下个转弯、方位、当前街道名称、车道信息、最高速度、接近警报、兴趣点、路径点等信息。</string>
     <string name="included_in_your_current_plan">包含在您当前的“%1$s”计划中</string>
     <string name="second_next_turn_widget_desc">小工具会显示下一处转弯的信息，如果距离转弯处较近，信息则会启用。</string>
-    <string name="time_to_intermediate_widget_desc">该小部件会显示需要多少时间才能到达第一个中间点。时间将在导航过程中不断更新，一旦经过此中间点，就会更新显示到达下一个中间点所需的时间。</string>
+    <string name="time_to_intermediate_widget_desc">小工具显示到达时间或到达第一个途径点的时间。时间会在导航过程中不断更新，一旦经过途径点，就会更新到达下一个途径点的时间。</string>
     <string name="distance_to_destination_widget_desc">该小工具会显示到最终目的地点的剩余距离。</string>
     <string name="display_position">显示位置</string>
     <string name="download_heightmap_maps">高度图</string>
@@ -5636,7 +5615,7 @@
     <string name="view_angle">视线角</string>
     <string name="quick_action_directions_from">起始点</string>
     <string name="navigation_position">导航位置</string>
-    <string name="view_angle_description">显示您当前面朝方向的锥形区域</string>
+    <string name="view_angle_description">显示您当前面对方向的锥形区域</string>
     <string name="help_article_map_tracks_name">轨迹</string>
     <string name="help_article_map_routes_name">路线</string>
     <string name="compass_click_north_is_up">要改变方向模式，请按下并保持</string>
@@ -5647,8 +5626,7 @@
     <string name="quick_action_location_by_gpx">GPX 定位</string>
     <string name="rendering_value_pale_name">灰暗</string>
     <string name="energy_avg_info">能耗统计（1 / 5 / 15 分钟平均）</string>
-    <string name="energy_avg_info_description">每分钟电池电量： %1$s
-\n电量消耗（mAh毫安时）： %2$s</string>
+    <string name="energy_avg_info_description">每分钟电池电量： %1$s \n电量消耗（毫安时mAh）： %2$s</string>
     <string name="choose_map_orientation">选择地图朝向</string>
     <string name="rendering_avg_info">渲染统计（1 / 5 / 15 分钟平均）</string>
     <string name="rendering_avg_info_details">最近一千帧 FPS： %1$s
@@ -5659,7 +5637,7 @@
     <string name="quick_action_photo_note">照片注记</string>
     <string name="shared_string_all_icons">所有图标</string>
     <string name="quick_action_terrain">地形着色类型</string>
-    <string name="quick_action_map_style">地图样式</string>
+    <string name="quick_action_map_style">地图风格</string>
     <string name="quick_action_track_waypoint">轨迹路点</string>
     <string name="weather_screen">天气画面</string>
     <string name="quick_action_verb_turn_on_off">打开 / 关闭</string>
@@ -5839,4 +5817,105 @@
     <string name="obd_fuel_consumption_rate_liter_hour">燃料消耗率</string>
     <string name="route_guidance">路线指引</string>
     <string name="obd_widget_vehicle_speed">车辆速度</string>
+    <string name="rendering_attr_showDirtbikeTrails_description">显示越野摩托车路径</string>
+    <string name="obd_fuel_type_not_provided">未提供燃料类型</string>
+    <string name="obd_fuel_type_gasoline">汽油</string>
+    <string name="obd_fuel_type_methanol">甲醇</string>
+    <string name="obd_fuel_type_diesel">柴油</string>
+    <string name="obd_fuel_type_lpg">液化石油气</string>
+    <string name="obd_fuel_type_cng">压缩天然气</string>
+    <string name="obd_fuel_type_propane">丙烷</string>
+    <string name="obd_fuel_type_electric">电力</string>
+    <string name="obd_fuel_type_bifuel_gasoline">双燃料汽油</string>
+    <string name="obd_fuel_type_bifuel_methanol">双燃料甲醇</string>
+    <string name="navigation_action_descr">开启导航。</string>
+    <string name="track_does_not_contain_data_to_save">轨迹未包含需要保存的数据。</string>
+    <string name="no_internet_descr">请检查您的连接并重试。</string>
+    <string name="map_3d_mode_action_descr">更改地图倾斜角度。</string>
+    <string name="configure_map_description">更改地图样式、图层或其他设置。</string>
+    <string name="change_activity">变更活动</string>
+    <string name="my_location_action_descr">将您的当前位置置于地图中心。</string>
+    <string name="drawer_button_description">开启主菜单。</string>
+    <string name="type_of_activity">活动类型</string>
+    <string name="quick_action_start_pause_recording">开始、暂停或继续录制 GPX 轨迹的按钮。</string>
+    <string name="quick_action_save_recorded_trip_and_continue">记录行程并继续</string>
+    <string name="lock_screen">锁定屏幕</string>
+    <string name="quick_action_finish_trip_recording_summary">保存 GPX 轨迹并完成行程记录的按钮。</string>
+    <string name="start_trip_recording_first_m">请先开始行程记录。</string>
+    <string name="new_segment_started_m">开始录制新的轨迹段。</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">将当前记录的行程保存为 GPX 文件，同时不中断新轨迹记录的按钮。</string>
+    <string name="search_action_descr">开启搜索。</string>
+    <string name="no_photos_available_descr">该地点尚未添加任何用户照片</string>
+    <string name="no_photos_available">无可用照片</string>
+    <string name="change_zoom_action_descr">变更地图缩放。</string>
+    <string name="lock_screen_description">启用或禁用触摸屏功能以防止意外点击</string>
+    <string name="new_trip_segment">新的行程段</string>
+    <string name="quick_action_new_trip_segment">按钮用于在记录中的 GPX 轨迹开始一个新片段。</string>
+    <string name="rendering_attr_showDirtbikeTrails_name">越野摩托车路径</string>
+    <string name="obd_fuel_type_ethanol">乙醇</string>
+    <string name="obd_fuel_type_hybrid_gasoline">混合动力汽油</string>
+    <string name="obd_fuel_type_bifuel_propane">双燃料丙烷</string>
+    <string name="obd_fuel_type_hybrid_diesel">混合动力柴油</string>
+    <string name="shared_string_obd">车载诊断系统 （OBD）</string>
+    <string name="obd_widget_group">车辆指标</string>
+    <string name="vehicle_metrics_plugin_settings">车辆指标设置</string>
+    <string name="resting_position">静止位置</string>
+    <string name="navigation_position_icon">导航位置图标</string>
+    <string name="obd_fuel_type_bifuel_electricity">双燃料电力</string>
+    <string name="obd_fuel_type_bifuel_electric_combustion">双燃料电动机和内燃机</string>
+    <string name="obd_fuel_type_hybrid_hydrogen">混合动力氢气</string>
+    <string name="obd_fuel_type_bifuel_hydrogen">双燃料氢气</string>
+    <string name="obd_rpm_desc">通过 OBD 传感器显示车辆转速表的转速</string>
+    <string name="obd_fuel_level_desc">通过 OBD 传感器显示车辆油量</string>
+    <string name="quick_action_verb_navigate">导航</string>
+    <string name="quick_action_move_map_right">地图向右</string>
+    <string name="resting_position_icon_summary">在您静止时显示的图标。</string>
+    <string name="rpm_unit">转每分钟</string>
+    <string name="obd_support">OBD 支持</string>
+    <string name="obd_air_intake_temp">进气温度</string>
+    <string name="resting_navigation_position">静止与导航位置</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="obd_fuel_consumption_rate">油耗</string>
+    <string name="obd_fuel_level">燃油效率 (%)</string>
+    <string name="obd_fuel_type">燃料类型</string>
+    <string name="quick_action_drawer_desc">显示或隐藏侧边菜单的切换开关。</string>
+    <string name="quick_action_previous_screen_title">上一个屏幕</string>
+    <string name="obd_fuel_consumption_rate_desc">根据OBD位置来显示车辆燃料消耗率</string>
+    <string name="percent_unit">%</string>
+    <string name="obd_fuel_type_hybrid_electric_combustion">电动和内燃机混合动力</string>
+    <string name="obd_plugin_name">车辆指标</string>
+    <string name="data_source">数据来源</string>
+    <string name="obd_fuel_type_hybrid_ethanol">混合动力乙醇</string>
+    <string name="obd_fuel_type_hybrid_electric">混合动力电动</string>
+    <string name="obd_fuel_type_hybrid_regenerative">再生式混合动力</string>
+    <string name="obd_fuel_type_hydrogen">氢气</string>
+    <string name="quick_action_move_map_left">地图向左</string>
+    <string name="quick_action_first_intermediate">第一中继点</string>
+    <string name="background_opacity">背景不透明度</string>
+    <string name="corner_radius">转角半径</string>
+    <string name="shared_string_interface">界面</string>
+    <string name="quick_action_previous_screen_desc">切换到上一屏幕。</string>
+    <string name="quick_action_new_route">新路线</string>
+    <string name="resting_position_icon">静止位置图标</string>
+    <string name="quick_action_move_map_down">地图向下</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="obd_fuel_type_unknown">未知燃料类型</string>
+    <string name="obd_plugin_description">使用 OBD-II 协议监控车辆关键指标。访问的数据包括：\n - 发动机转速、发动机运行时间、计算的发动机负荷\n - 燃料消耗、燃料压力、剩余燃料\n - 进气温度、环境温度、冷却液温度、发动机油温\n - 车速、油门位置、电池电压\n</string>
+    <string name="quick_action_move_map_up">地图向上</string>
+    <string name="quick_action_map_overlay">叠加层</string>
+    <string name="weather_source_GFS_description">美国国家环境预报中心的全球预报系统</string>
+    <string name="quick_action_map_underlay">背景层</string>
+    <string name="quick_action_drawer_title">侧边菜单</string>
+    <string name="navigation_position_icon_summary">在导航或移动时显示的图标。</string>
+    <string name="obd_battery_voltage">电池电压</string>
+    <string name="obd_ambient_air_temp">环境温度</string>
+    <string name="obd_fuel_type_bifuel_lpg">双燃料液化石油气</string>
+    <string name="obd_fuel_type_bifuel_cng">双燃料压缩天然气</string>
+    <string name="obd_fuel_type_bifuel_ethanol">双燃料乙醇</string>
+    <string name="obd_engine_coolant_temp">冷却液温度</string>
+    <string name="obd_fuel_left_liters">剩余燃料（升）</string>
+    <string name="obd_fuel_left_distance_desc">通过 OBD 传感器显示车辆剩余油量下的行驶距离</string>
+    <string name="obd_fuel_type_desc">通过 OBD 传感器显示车辆燃料类型</string>
+    <string name="display_distance_to_first_intermediate_summary">首先显示下一站的时间和距离。关闭此功能以始终显示目的地的详细信息。</string>
+    <string name="display_distance_to_first_intermediate">显示下一站的路线详情</string>
 </resources>

@@ -403,9 +403,7 @@
 \nNo es necesario descargar un mapa especial, la vista es creada a partir de nuestros mapas estándar.
 \n
 \nEsta vista puede revertirse desactivando de nuevo aquí, o cambiando el «Estilo del mapa» desde «Configurar mapa» cuando lo desees.</string>
-    <string name="plugin_nautical_descr">Enriquece el mapa con información sobre rutas náuticas, marcas de navegación náutica, áreas marinas peligrosas, zonas restringidas para navegar o atracar, etc. Para usarlo, descarga los respectivos mapas náuticos y activa el estilo «Mapa náutico» en «Configurar mapa».
-\n
-\nVéase - %1$s.</string>
+    <string name="plugin_nautical_descr">Enriquece el mapa con información sobre rutas náuticas, marcas de navegación náutica, áreas marinas peligrosas, zonas restringidas para navegar o atracar, etc. Para usarlo, descarga los respectivos mapas náuticos y activa el estilo «Mapa náutico» en «Configurar mapa». \n \nVéase - %1$s.</string>
     <string name="plugin_ski_descr">Diseñado para navegar en áreas deportivas de invierno. Vea las pistas de esquí, los remontes, etc. con líneas coloreadas que indican el nivel de complejidad. Para usarlo, activa este complemento, ve a «Configurar mapa» y elige el estilo de mapa «Invierno y esquí».</string>
     <string name="audionotes_plugin_description">Toma notas de audio, fotografía y/o video durante un viaje, usando un botón en el mapa o el menú contextual de la ubicación.</string>
     <string name="osmand_parking_plugin_description">Registra en dónde el vehículo fue estacionado y crea un recordatorio sobre la expiración del mismo. Para colocar el marcador, elige un lugar en el mapa, luego ve a «Acciones» y pulsa «Añadir estacionamiento».</string>
@@ -1950,7 +1948,7 @@
     <string name="route_stops_before">%1$s parada(s) anterior(es)</string>
     <string name="rendering_attr_hideOverground_name">Objetos en superficie</string>
     <string name="routing_attr_short_way_name">Ruta de bajo consumo (corta)</string>
-    <string name="replace_favorite_confirmation">¿Reemplazar el favorito «%1$s»\?</string>
+    <string name="replace_favorite_confirmation">¿Reemplazar el favorito «%1$s»?</string>
     <string name="shared_string_change">Cambiar</string>
     <string name="get_started">Empezar</string>
     <string name="update_all_maps_now">¿Actualizar todos los mapas ahora?</string>
@@ -2050,7 +2048,7 @@
     <string name="quick_action_edit_action">Editar acción</string>
     <string name="dialog_add_action_title">Añadir acción</string>
     <string name="quick_actions_delete">Borrar acción</string>
-    <string name="quick_actions_delete_text">¿Borrar la acción «%s»\?</string>
+    <string name="quick_actions_delete_text">¿Borrar la acción «%s»?</string>
     <string name="quick_favorites_show_favorites_dialog">Mostrar diálogo de favoritos</string>
     <string name="quick_favorites_name_preset">Nombre predefinido</string>
     <string name="shared_string_action_name">Nombre de la acción</string>
@@ -2623,9 +2621,7 @@
     <string name="coord_input_save_as_track_descr">Añadiste %1$s puntos. Escribe un nombre de archivo y pulsa en «Guardar».</string>
     <string name="point_deleted">Punto %1$s borrado</string>
     <string name="shared_string_world">Mundo</string>
-    <string name="send_search_query_description">Enviaremos la consulta de búsqueda: «%1$s», así como la ubicación.
-\n
-\nNo se recopilan datos personales, los datos de búsqueda sólo se usan para mejorar el algoritmo de búsqueda.</string>
+    <string name="send_search_query_description">Enviaremos la consulta de búsqueda: «%1$s», así como la ubicación. \n \nNo se recopilan datos personales, los datos de búsqueda sólo se usan para mejorar el algoritmo de búsqueda.</string>
     <string name="send_search_query">¿Enviar consulta de búsqueda?</string>
     <string name="increase_search_radius_to">Ampliar el radio de búsqueda a %1$s</string>
     <string name="thank_you_for_feedback">Gracias por sus comentarios</string>
@@ -2846,7 +2842,7 @@
     <string name="profile_alert_need_save_title">Guardar cambios</string>
     <string name="profile_alert_need_save_msg">Guardar primero los cambios del perfil</string>
     <string name="profile_alert_delete_title">Borrar perfil</string>
-    <string name="profile_alert_delete_msg">¿Borrar el perfil «%s»\?</string>
+    <string name="profile_alert_delete_msg">¿Borrar el perfil «%s»?</string>
     <string name="select_base_profile_dialog_title">Elige un perfil para comenzar</string>
     <string name="select_base_profile_dialog_message">El perfil personalizado se basa en uno de los perfiles de aplicación predefinidos, que define los ajustes básicos como la visibilidad predefinida de los widgets, las unidades de velocidad y distancia. Estos son los perfiles de aplicación predefinidos, junto con ejemplos de perfiles personalizados que se pueden ampliar:</string>
     <string name="select_nav_profile_dialog_title">Elegir el tipo de navegación</string>
@@ -3304,9 +3300,7 @@
     <string name="settings_item_import_error">No se pudo importar desde «%1$s».</string>
     <string name="wiki_menu_download_descr">Se necesitan mapas adicionales para ver los puntos de interés de Wikipedia en el mapa.</string>
     <string name="ui_customization_short_descr">Elementos del menú lateral y menú contextual</string>
-    <string name="ui_customization_description">Personaliza la cantidad de elementos en el «Menú lateral», «Configuración del mapa» y «Menú contextual».
-\n
-\nDesactiva los complementos no usados y oculta todos sus controles en «%1$s».</string>
+    <string name="ui_customization_description">Personaliza la cantidad de elementos en el «Menú lateral», «Configuración del mapa» y «Menú contextual». \n \nDesactiva los complementos no usados y oculta todos sus controles en «%1$s».</string>
     <string name="ui_customization">Personalizar interfaz de usuario</string>
     <string name="shared_string_languages">Idiomas</string>
     <string name="shared_string_language">Idioma</string>
@@ -3376,25 +3370,7 @@
     <string name="extra_maps_menu_group">Mapas adicionales</string>
     <string name="download_unsupported_action">Acción «%1$s» no admitida</string>
     <string name="custom_color">Color personalizado</string>
-    <string name="release_3_7">• Nuevos mapas sin conexión de las pendientes 
-\n 
-\n • Personalización más completa de los favoritos y puntos de referencia GPX (colores personalizados, iconos, formas) 
-\n 
-\n • Personalización en el orden de los elementos en «Configurar mapa», «Menú contextual» y «Menú lateral» 
-\n 
-\n • Wikipedia ahora se visualiza como una capa separada en Configurar mapa, elige sólo los idiomas necesarios 
-\n 
-\n • Crea tus propios filtros o mapas de puntos de interés, con total flexibilidad 
-\n 
-\n • Se añadieron opciones para restablecer los ajustes de los perfiles personalizados 
-\n 
-\n • Las rutas GPX para la navegación, ahora admiten los carriles de tráfico y completan las instrucciones de giro 
-\n 
-\n • Se ha corregido el tamaño de la interfaz en las tabletas 
-\n 
-\n • Se corrigieron los errores con RTL 
-\n 
-\n</string>
+    <string name="release_3_7">• Nuevos mapas sin conexión de las pendientes \n \n • Personalización más completa de los favoritos y puntos de referencia GPX (colores personalizados, iconos, formas) \n \n • Personalización en el orden de los elementos en «Configurar mapa», «Menú contextual» y «Menú lateral» \n \n • Wikipedia ahora se visualiza como una capa separada en Configurar mapa, elige sólo los idiomas necesarios \n \n • Crea tus propios filtros o mapas de puntos de interés, con total flexibilidad \n \n • Se añadieron opciones para restablecer los ajustes de los perfiles personalizados \n \n • Las rutas GPX para la navegación, ahora admiten los carriles de tráfico y completan las instrucciones de giro \n \n • Se ha corregido el tamaño de la interfaz en las tabletas \n \n • Se corrigieron los errores con RTL \n \n</string>
     <string name="shared_string_resume">Reanudar</string>
     <string name="additional_actions_descr">Accede a estas acciones pulsando el botón «%1$s».</string>
     <string name="quick_action_transport_descr">Botón que muestra u oculta el transporte público en el mapa.</string>
@@ -4231,9 +4207,7 @@
     <string name="gpx_no_routes_title">Sin rutas</string>
     <string name="gpx_no_routes_descr">Usa la herramienta «%1$s» para añadir la ruta al archivo.</string>
     <string name="points_selection_descr">¿Cerrar y perder todos los cambios\?</string>
-    <string name="location_source_descr">Si se instala OsmAnd desde Google Play, de forma predefinida se usa «%1$s» para definir la ubicación.
-\n
-\nSi obtienes información inexacta de la ubicación o usas un dispositivo sin «%2$s», intenta cambiar a «%3$s»</string>
+    <string name="location_source_descr">Si se instala OsmAnd desde Google Play, de forma predefinida se usa «%1$s» para definir la ubicación. \n \nSi obtienes información inexacta de la ubicación o usas un dispositivo sin «%2$s», intenta cambiar a «%3$s»</string>
     <string name="please_provide_group_name_message">Indica el nombre del grupo.</string>
     <string name="quick_action_add_route_descr">Un botón que inicia una ruta desde el centro de la pantalla.</string>
     <string name="location_source">Proveedor de ubicación</string>
@@ -4383,7 +4357,7 @@
     <string name="explore_plans">Explorar planes</string>
     <string name="map_widget_trip_recording_downhill">Descenso</string>
     <string name="map_widget_trip_recording_uphill">Ascenso</string>
-    <string name="map_widget_trip_recording_distance">Distancia</string>
+    <string name="map_widget_distance">Distancia</string>
     <string name="routing_attr_hazmat_category_name">Categoría de materiales peligrosos</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Sin restricciones)</string>
     <string name="routing_attr_avoid_fords_name">Evitar vados</string>
@@ -4542,9 +4516,7 @@
     <string name="nautical_depth_points">Puntos de profundidad náuticos</string>
     <string name="depth_contours">Curvas de profundidad</string>
     <string name="shared_string_cross_buy">Compra cruzada</string>
-    <string name="ant_missing_dependency_descr">No se puede encontrar el servicio necesario «%1$s».
-\nDebes instalar o actualizar el servicio para el complemento ANT+.
-\n¿Quieres abrir Play Store para hacer eso\?</string>
+    <string name="ant_missing_dependency_descr">No se puede encontrar el servicio necesario «%1$s». \nDebes instalar o actualizar el servicio para el complemento ANT+. \n¿Quieres abrir Play Store para hacer eso?</string>
     <string name="map_widget_altitude_map_center_desc">Muestra la elevación sobre el nivel del mar en el centro del mapa actual.</string>
     <string name="map_widget_altitude_current_location">Altitud: ubicación actual</string>
     <string name="map_widget_altitude_current_location_desc">Muestra la altitud sobre el nivel del mar en la ubicación geográfica actual.</string>
@@ -4757,7 +4729,7 @@
     <string name="shared_string_yards">yardas</string>
     <string name="selected_value">Valor elegido</string>
     <string name="sort_duration_ascending">Duración ascendente</string>
-    <string name="cloud_version_confirm_delete">¿Borrar «%1$s» de OsmAnd Cloud\?</string>
+    <string name="cloud_version_confirm_delete">¿Borrar «%1$s» de OsmAnd Cloud?</string>
     <string name="shared_string_delete_file">Borrar archivo</string>
     <string name="delete_cloud_version">Borrar versión en la nube</string>
     <string name="local_version_do_not_exist">No existe una versión local.</string>
@@ -5589,7 +5561,7 @@
     <string name="connect_obd_instructions_step1">Conecta el escáner al puerto OBD-II del vehículo.</string>
     <string name="connect_obd_instructions_step2">Enciende el motor del vehiculo</string>
     <string name="connect_obd_instructions_step3">Activa el Bluetooth del dispositivo</string>
-    <string name="connect_obd_instructions_step4">Pulsa «Conectar» y elige tu escáner en el listado.</string>
+    <string name="connect_obd_instructions_step4">Pulsa «%1$s» y elige tu escáner en el listado.</string>
     <string name="obd_fuel_consumption_rate_l_h">Tasa de consumo del combustible (l/h)</string>
     <string name="obd_fuel_consumption_rate_sensor">Tasa de consumo del combustible (sensor)</string>
     <string name="learn_more_about_obd_sensors">Véase más sobre los sensores.</string>

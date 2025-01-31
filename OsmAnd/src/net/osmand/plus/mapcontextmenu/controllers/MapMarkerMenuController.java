@@ -1,8 +1,5 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
-import static net.osmand.plus.views.mapwidgets.WidgetType.MARKERS_TOP_BAR;
-import static net.osmand.plus.views.mapwidgets.WidgetsPanel.TOP;
-
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.ShapeDrawable;
@@ -19,18 +16,11 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.TitleButtonController;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.WidgetUtils;
-import net.osmand.plus.views.mapwidgets.WidgetType;
-import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.util.Algorithms;
-
-import java.util.Collections;
-import java.util.List;
 
 public class MapMarkerMenuController extends MenuController {
 
@@ -41,7 +31,7 @@ public class MapMarkerMenuController extends MenuController {
 		this.mapMarker = mapMarker;
 		builder.setShowNearestWiki(true);
 
-		leftTitleButtonController = new TitleButtonController() {
+		leftTitleButtonController = new TitleButtonController(this) {
 			@Override
 			public void buttonPressed() {
 				MapActivity activity = getMapActivity();
@@ -62,7 +52,7 @@ public class MapMarkerMenuController extends MenuController {
 		leftTitleButtonController.startIcon = createPassedIcon(activeColorId);
 
 		if (!mapMarker.history) {
-			rightTitleButtonController = new TitleButtonController() {
+			rightTitleButtonController = new TitleButtonController(this) {
 				@Override
 				public void buttonPressed() {
 					MapActivity activity = getMapActivity();

@@ -3457,9 +3457,7 @@
     <string name="shared_string_language">Limba</string>
     <string name="shared_string_all_languages">Totu sas limbas</string>
     <string name="wiki_menu_download_descr">Pro bìdere sos PDI de Wikipedia in sa mapa b\'at bisòngiu de mapas agiuntivas.</string>
-    <string name="ui_customization_description">Personaliza sa cantidade de elementos in su Calàssiu, cunfigura sa mapa e su menù de cuntestu.
-\n
-\nPodes disabilitare sas estensiones chi no impreas, pro cuare totu sos controllos issoro dae s\'aplicatzione %1$s.</string>
+    <string name="ui_customization_description">Personaliza sa cantidade de elementos in su Calàssiu, cunfigura sa mapa e su menù de cuntestu. \n \nPodes disabilitare sas estensiones chi no impreas, pro cuare totu sos controllos issoro dae s\'aplicatzione %1$s.</string>
     <string name="ui_customization_short_descr">Elementos de su calàssiu, menù de cuntestu</string>
     <string name="ui_customization">Personalizatzione de s\'interfache de s\'impreadore</string>
     <string name="shared_string_drawer">Calàssiu</string>
@@ -4625,7 +4623,7 @@
     <string name="use_latin_name_if_missing">Imprea su nùmene latinu si mancat</string>
     <string name="average_speed_skip_stops">Piga in cunsideru sas firmadas</string>
     <string name="transport_hazmat_yes_desc">Seletziona sa categoria adeguada.</string>
-    <string name="map_widget_trip_recording_distance">Distàntzia</string>
+    <string name="map_widget_distance">Distàntzia</string>
     <string name="routing_attr_hazmat_category_name">Categoria de materiale perigulosu</string>
     <string name="routing_attr_hazmat_category_description">Categoria de materiales perigulosos / Piga in cunsideru sos permissos de atzessu a sos materiales perigulosos</string>
     <string name="rendering_attr_weatherTempContours_name">Isolìnias de sa temperadura</string>

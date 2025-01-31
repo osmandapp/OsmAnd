@@ -65,6 +65,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	public static final String KEY_DOWNLOAD_LAYER = "download_layer";
 	private static final String KEY_SELECTED_MIN_ZOOM = "selected_min_zoom";
 	private static final String KEY_SELECTED_MAX_ZOOM = "selected_max_zoom";
+	private static final String KEY_LAT_LON = "key_lat_lon";
 
 	private DownloadTilesHelper downloadTilesHelper;
 
@@ -110,8 +111,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private LockableScrollView scrollView;
 	private IMapLocationListener mapLocationListener;
 	private TouchListener touchListener;
-	private Double lat = null;
-	private Double lon = null;
+	private LatLon latLon = null;
 	private boolean portraitMode;
 
 	@Override
@@ -134,6 +134,12 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 			selectedMinZoom = savedInstanceState.getInt(KEY_SELECTED_MIN_ZOOM);
 			selectedMaxZoom = savedInstanceState.getInt(KEY_SELECTED_MAX_ZOOM);
 			downloadType = AndroidUtils.getSerializable(savedInstanceState, KEY_DOWNLOAD_TYPE, DownloadType.class);
+			if (savedInstanceState.containsKey(KEY_LAT_LON)) {
+				LatLon savedLatLon = AndroidUtils.getSerializable(savedInstanceState, KEY_LAT_LON, LatLon.class);
+				if (savedLatLon != null) {
+					latLon = savedLatLon;
+				}
+			}
 		} else {
 			selectedMaxZoom = tileSource.getMaximumZoomSupported();
 			selectedMinZoom = Math.min(mapView.getZoom(), selectedMaxZoom);
@@ -175,17 +181,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		mapView.setElevationAngle(OsmandMapTileView.DEFAULT_ELEVATION_ANGLE);
 
 		setupToolbar();
-		view.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-				moveMapCenterToMapWindow();
-				updateTileSourceContent();
-			}
-		});
-		if (lat == null || lon == null) {
-			updateLatLon();
-		}
+
 		setupDownloadButton();
 		showHideMapControls(false);
 		setupScrollableMapView();
@@ -193,11 +189,29 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		return view;
 	}
 
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		view.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+				view.post(() -> {
+					Context ctx = getContext();
+					if (ctx != null) {
+						moveMapCenterToMapWindow();
+						updateTileSourceContent();
+					}
+				});
+			}
+		});
+	}
+
 	@SuppressLint("ClickableViewAccessibility")
 	private void setupScrollableMapView() {
+		mapLocationListener = getMapLocationListener();
 		if (portraitMode) {
 			scrollView = view.findViewById(R.id.scroll_view);
-			mapLocationListener = getMapLocationListener();
 			touchListener = getTouchListener();
 
 			view.findViewById(R.id.map_window_container).setOnTouchListener((v, event) -> {
@@ -215,7 +229,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 						int[] xy = new int[2];
 						mapWindow.getLocationOnScreen(xy);
 						int marginTop = xy[1];
-						mapView.fitLocationToMap(lat, lon, tileBox.getZoom(), mapWindow.getWidth(),
+						mapView.fitLocationToMap(latLon.getLatitude(), latLon.getLongitude(), tileBox.getZoom(), mapWindow.getWidth(),
 								mapWindow.getHeight(), marginTop, false);
 					}
 				});
@@ -231,8 +245,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	private void updateLatLon(){
 		QuadRect rect = getLatLonRectOfMapWindow();
 		LatLon mapWindowCenter = new LatLon(rect.centerY(), rect.centerX());
-		lat = mapWindowCenter.getLatitude();
-		lon = mapWindowCenter.getLongitude();
+		latLon = mapWindowCenter;
 	}
 
 	@NonNull
@@ -268,16 +281,29 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 	}
 
 	private void moveMapCenterToMapWindow() {
+		boolean animated = false;
 		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox();
-		double lat = tileBox.getCenterLatLon().getLatitude();
-		double lon = tileBox.getCenterLatLon().getLongitude();
+		if (latLon == null) {
+			latLon = new LatLon(tileBox.getCenterLatLon().getLatitude(), tileBox.getCenterLatLon().getLongitude());
+			animated = true;
+		}
+
 		View mapWindow = view.findViewById(R.id.map_window);
 		int[] xy = new int[2];
 		mapWindow.getLocationOnScreen(xy);
 		int marginTop = xy[1];
+		int marginLeft = xy[0];
 
-		mapView.fitLocationToMap(lat, lon, tileBox.getZoom(), mapWindow.getWidth(), mapWindow.getHeight(),
-				marginTop, true);
+		double lat = latLon.getLatitude();
+		double lon = latLon.getLongitude();
+
+		if (portraitMode) {
+			mapView.fitLocationToMap(lat, lon, tileBox.getZoom(), mapWindow.getWidth(), mapWindow.getHeight(),
+					marginTop, animated);
+		} else {
+			mapView.fitLocationToMap(lat, lon, tileBox.getZoom(), mapWindow.getWidth(), mapWindow.getHeight(),
+					marginTop, marginLeft, animated);
+		}
 	}
 
 	private void updateTileSourceContent() {
@@ -517,9 +543,9 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		mapView.addMapLocationListener(this);
 		handler.startUpdatesIfNotRunning();
 		showHideMapControls(false);
+		mapView.addMapLocationListener(mapLocationListener);
 
 		if (portraitMode) {
-			mapView.addMapLocationListener(mapLocationListener);
 			mapView.addTouchListener(touchListener);
 		}
 	}
@@ -531,6 +557,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		if (mapActivity != null && !wasDrawerDisabled) {
 			mapActivity.enableDrawer();
 		}
+		mapView.removeMapLocationListener(mapLocationListener);
 		mapView.removeMapLocationListener(this);
 		handler.stopUpdates();
 
@@ -538,7 +565,6 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 			downloadTilesHelper.setListener(null);
 		}
 		if (portraitMode) {
-			mapView.removeMapLocationListener(mapLocationListener);
 			mapView.removeTouchListener(touchListener);
 		}
 	}
@@ -549,6 +575,9 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		outState.putInt(KEY_SELECTED_MIN_ZOOM, selectedMinZoom);
 		outState.putInt(KEY_SELECTED_MAX_ZOOM, selectedMaxZoom);
 		outState.putSerializable(KEY_DOWNLOAD_TYPE, downloadType);
+		if (latLon != null) {
+			outState.putSerializable(KEY_LAT_LON, latLon);
+		}
 	}
 
 	@Override

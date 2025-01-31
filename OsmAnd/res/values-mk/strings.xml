@@ -34,7 +34,7 @@
     <string name="routing_attr_avoid_highway_description">Izbegnuvajte avtopatista</string>
     <string name="map_widget_trip_recording_downhill">Nadolnica</string>
     <string name="map_widget_trip_recording_duration">Vreme na traenje</string>
-    <string name="map_widget_trip_recording_distance">Rastojanie</string>
+    <string name="map_widget_distance">Rastojanie</string>
     <string name="routing_attr_hazmat_category_description">Kategorija na opasni materii/Zemete gi vo obzir dozvolite za pristap do opasnite materii</string>
     <string name="routing_attr_avoid_fords_name">Izbegnuvajte pokratki sporedni patista</string>
     <string name="routing_attr_avoid_fords_description">Izbegnuvajte pokratki sporedni patista</string>
@@ -132,9 +132,7 @@
     <string name="shared_string_shape">Oblik</string>
     <string name="default_appearance_desc">Standardnata boja, ikona i forma ḱe se primenuvaat na dodadenite omileni točki vo grupata.</string>
     <string name="default_appearance">Standarden izgled</string>
-    <string name="location_source_descr">Standardno, OsmAnd instaliran od Google Play koristi %1$s za da ja odredi lokacijata.
-\n
-\nAko dobiete netočni informacii za lokacijata ili koristite ured bez %2$s, obidete se da se prefrlite na „%3$s“</string>
+    <string name="location_source_descr">Standardno, OsmAnd instaliran od Google Play koristi %1$s za da ja odredi lokacijata. \n \nAko dobiete netočni informacii za lokacijata ili koristite ured bez %2$s, obidete se da se prefrlite na „%3$s“</string>
     <string name="location_source">Izvor na lokacijata</string>
     <string name="select_suggested_points">Izberete predloženi točki</string>
     <string name="exit_import_descr">Izlezi bez da se začuvaat promenite\?</string>
@@ -185,8 +183,7 @@
     <string name="storage_found_files_size">Pronajdeni %1$s datoteki %2$s</string>
     <string name="shared_storage_last_step">Podocna možete da navedete nova papka so podatoci.</string>
     <string name="shared_storage_third_step">Dozvolete pristap do papkata. Bez nego OsmAnd ne može da kopira datoteki.</string>
-    <string name="shared_storage_first_step">Pritisnete „%1$s“.
-\nUpravuvačot so datoteki se otvora kade što treba da ja pronajdete i otvorite papkata Osmand.</string>
+    <string name="shared_storage_first_step">Pritisnete „%1$s“. \nUpravuvačot so datoteki se otvora kade što treba da ja pronajdete i otvorite papkata Osmand.</string>
     <string name="shared_storage_second_step">Kliknete na „Koristete ja ovaa papka“.</string>
     <string name="folder_access_denied">Potrebna e dozvola za pristap do izbranata papka.</string>
     <string name="copying_completed">Kopirano</string>
@@ -640,27 +637,7 @@
     <string name="backup_dont_have_any_descr">Zakažete avtomatski rezervni kopii i nikogaš ne gubete podatoci.</string>
     <string name="backup_do_not_have_any">Sè ušte nemate onlajn rezervna kopija.</string>
     <string name="logout_from_osmand_cloud">Odjavete se od OsmAnd Cloud</string>
-    <string name="release_4_0">• Oblak (cloud) rezervna kopija
-\n
-\n • Dodaden noḱen režim za stilot na mapata „Topo“.
-\n
-\n • Dodadena e opcija za prezemanje konturni linii vo stapki
-\n
-\n • Patekite sega može da se obojat spored nadmorska visočina, brzina ili naklon
-\n
-\n • Ažuriran dijalog „Patuvanje snimanje“.
-\n
-\n • Rastojanieto so dopir e premesteno od linijarot Radius vo posebna opcija
-\n
-\n • Planirajte ruta: sega možete da gi menuvate opciite za navigacija, da pristapite do konfiguracijata na kartata i da prebaruvate bez da go napuštite planiranjeto na maršrutata
-\n
-\n • Nov ekran „Kupuvanje“ so detalni informacii za kupuvanje
-\n
-\n • Dodadena e opcija za promena na izgledot na linijata na maršrutata
-\n
-\n • Ažuriranjata na OsmAnd Live se premesteni vo „Prezemanja &gt; Ažuriranja“
-\n
-\n</string>
+    <string name="release_4_0">• Oblak (cloud) rezervna kopija \n \n • Dodaden noḱen režim za stilot na mapata „Topo“. \n \n • Dodadena e opcija za prezemanje konturni linii vo stapki \n \n • Patekite sega može da se obojat spored nadmorska visočina, brzina ili naklon \n \n • Ažuriran dijalog „Patuvanje snimanje“. \n \n • Rastojanieto so dopir e premesteno od linijarot Radius vo posebna opcija \n \n • Planirajte ruta: sega možete da gi menuvate opciite za navigacija, da pristapite do konfiguracijata na kartata i da prebaruvate bez da go napuštite planiranjeto na maršrutata \n \n • Nov ekran „Kupuvanje“ so detalni informacii za kupuvanje \n \n • Dodadena e opcija za promena na izgledot na linijata na maršrutata \n \n • Ažuriranjata na OsmAnd Live se premesteni vo „Prezemanja &gt; Ažuriranja“ \n \n</string>
     <string name="purchases_feature_desc_osmand_cloud">Zemete OsmAnd Cloud za da gi začuvate site podatoci OsmAnd onlajn. Nema izgubeni podatoci po povtorno instaliranje. Napravete rezervna kopija i lesno vratete gi site informacii.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Dobijte pristap do počesti ažuriranja na kartata. Ažuriranja na čas, dnevno ili nedelno. Ažuriranjata se prezemaat postepeno, samo za promenetata oblast.</string>
     <string name="purchases_feature_desc_wikivoyage">Istražete go Vikipatuvanjeto oflajn. Statiite podeleni po zemji i regioni i dostapni na site jazici.</string>
@@ -675,19 +652,7 @@
     <string name="shared_string_max_height">Maksimalna visina</string>
     <string name="contact_support">Kontaktirajte ja podrskata</string>
     <string name="temporary_conditional_routing_descr">Koristete gi ograničuvanjata na patištata što se aktivni sega na kartata</string>
-    <string name="release_4_0_beta">• Dodadena e opcija za prezemanje konturni linii vo stapki
-\n
-\n • Plan za pejzaž na maršruta: dodadeni jazičinja za prefrlanje pomeǵu točki ili grafikoni
-\n
-\n • Ažuriranjata na OsmAnd Live se premesteni vo „Prezemanja&gt; Ažuriranja“
-\n
-\n • Patekite sega može da se obojat spored nadmorska visočina, brzina ili naklon.
-\n
-\n • Dodadena e opcija za promena na izgledot na linijata na maršrutata.
-\n
-\n • Ažuriran dijalog „Patuvanje snimanje“.
-\n
-\n</string>
+    <string name="release_4_0_beta">• Dodadena e opcija za prezemanje konturni linii vo stapki \n \n • Plan za pejzaž na maršruta: dodadeni jazičinja za prefrlanje pomeǵu točki ili grafikoni \n \n • Ažuriranjata na OsmAnd Live se premesteni vo „Prezemanja&gt; Ažuriranja“ \n \n • Patekite sega može da se obojat spored nadmorska visočina, brzina ili naklon. \n \n • Dodadena e opcija za promena na izgledot na linijata na maršrutata. \n \n • Ažuriran dijalog „Patuvanje snimanje“. \n \n</string>
     <string name="renew_subscription">Obnovete ja pretplatata</string>
     <string name="osmand_live_cancelled">Odbien</string>
     <string name="next_billing_date">Sleden datum na naplata: %1$s</string>
@@ -1353,25 +1318,7 @@
     <string name="height_limit_description">Navedete ja visinata na vašeto vozilo, nekoi ograničuvanja na maršrutata može da važat za visoki vozila.</string>
     <string name="gpx_parse_error">OsmAnd GPX ne e dobro formiran, ve molime kontaktirajte go timot za poddrška za dopolnitelno da istraži.</string>
     <string name="parking_positions">Parking pozicii</string>
-    <string name="release_3_7">• Novi oflajn mapi na naklon
-\n
-\n • Celosno prilagoduvanje na Omileni i GPX patni točki – prisposobeni boi, ikoni, formi
-\n
-\n • Prisposobete go redosledot na stavkite vo „Kontekstno meni“, „Konfiguriraj mapa“ i „Fioka“
-\n
-\n • Vikipedija kako poseben sloj vo Konfiguriraj mapa, izberete gi samo potrebnite jazici
-\n
-\n • Sozdadete svoj filter/mapi za POI so celosna fleksibilnost
-\n
-\n • Dodadeni opcii za vraḱanje na postavkite za sopstveni profili
-\n
-\n • Celosnite GPX maršruti od navigacijata gi poddržuvaat soobraḱajnite lenti i celosnite upatstva za vrtenje
-\n
-\n • Popravete ja goleminata na interfejsot na tabletite
-\n
-\n • Popravete greški so RTL
-\n
-\n</string>
+    <string name="release_3_7">• Novi oflajn mapi na naklon \n \n • Celosno prilagoduvanje na Omileni i GPX patni točki – prisposobeni boi, ikoni, formi \n \n • Prisposobete go redosledot na stavkite vo „Kontekstno meni“, „Konfiguriraj mapa“ i „Fioka“ \n \n • Vikipedija kako poseben sloj vo Konfiguriraj mapa, izberete gi samo potrebnite jazici \n \n • Sozdadete svoj filter/mapi za POI so celosna fleksibilnost \n \n • Dodadeni opcii za vraḱanje na postavkite za sopstveni profili \n \n • Celosnite GPX maršruti od navigacijata gi poddržuvaat soobraḱajnite lenti i celosnite upatstva za vrtenje \n \n • Popravete ja goleminata na interfejsot na tabletite \n \n • Popravete greški so RTL \n \n</string>
     <string name="create_edit_poi">Kreiraj ili uredi POI</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="lang_gu">Gujaratski</string>
@@ -1382,9 +1329,7 @@
     <string name="settings_item_write_error">Ne možese da se napise vo „%1$s“.</string>
     <string name="replace_point_descr">Zamenete druga točka so ovaa.</string>
     <string name="ui_customization_short_descr">Stavki od fioka, kontekstno meni</string>
-    <string name="ui_customization_description">Prisposobete ja količinata na stavki vo „Fioka“, „Konfiguriraj mapa“ i „Kontekstno meni“.
-\n
-\nIsklučete gi neiskoristenite priklučoci za da gi skriete site nivni kontroli. %1$s.</string>
+    <string name="ui_customization_description">Prisposobete ja količinata na stavki vo „Fioka“, „Konfiguriraj mapa“ i „Kontekstno meni“. \n \nIsklučete gi neiskoristenite priklučoci za da gi skriete site nivni kontroli. %1$s.</string>
     <string name="recalculate_route_distance_promo">Trasata ḱe se presmetuva povtorno ako rastojanieto od maršrutata do momentalnata lokacija e poveḱe od izbranata vrednost.</string>
     <string name="profile_backup_failed">Ne mozese da se napravi rezerven profil.</string>
     <string name="checking_for_duplicate_description">OsmAnd proverete %1$s za duplikati so postoečki stavki vo aplikacijata.
@@ -1877,9 +1822,7 @@
     <string name="ask_for_location_permission">Dozvolete donacija do lokacijata na OsmAnd za da prodolžite.</string>
     <string name="thank_you_for_feedback">Vi blagodarime za vašiot povraten komentar</string>
     <string name="poi_cannot_be_found">Ne može da se najde jazol ili pat.</string>
-    <string name="send_search_query_description">Vašeto baranje za prebaruvanje ḱe bide isprateno do: „%1$s“, zaedno so vašata lokacija.
-\n
-\n Ne se sobiraat lični informacii, potrebni se samo podatoci za prebaruvanje za da se podobri prebaruvanjeto.</string>
+    <string name="send_search_query_description">Vašeto baranje za prebaruvanje ḱe bide isprateno do: „%1$s“, zaedno so vašata lokacija. \n \n Ne se sobiraat lični informacii, potrebni se samo podatoci za prebaruvanje za da se podobri prebaruvanjeto.</string>
     <string name="send_search_query">Da se isprati baranje za prebaruvanje\?</string>
     <string name="shared_string_world">Svet</string>
     <string name="unirs_render_descr">Izmena na standardniot stil za zgolemuvanje na kontrastot na pešačkite i velosipedskite patišta. Koristi nasledeni boi na Mapnik.</string>
@@ -2803,9 +2746,6 @@
     <string name="shared_string_export">Izvezi</string>
     <string name="shared_string_do_not_show_again">Ne prikazuvaj povtorno</string>
     <string name="shared_string_show_all">Prikazi se\'</string>
-    <string name="record_plugin_description">Ovoj priklučok ja aktivira funkcionalnosta za snimanje i začuvuvanje na vašite pesni so račno dopiranje na dodatokot za evidencija na GPX na kartata ili, isto taka, za avtomatsko evidentiranje na site vaši navigaciski pravci vo datoteka GPX.
-\n
-\n Snimenite pesni može da se spodelat so vašite prijateli ili da se koristat za pridonesi za OSM. Sportistite možat da koristat snimeni pateki za da gi sledat nivnite treninzi. Nekoi osnovni analizi na patekite može da se izvedat direktno vo OsmAnd, kako što se vreminjata na krugovi, prosečnata brzina itn., a trakite, se razbira, može i podocna da se analiziraat vo specijalni alatki za analiza od treta strana.</string>
     <string name="shared_string_download_successful">Prevzemeno</string>
     <string name="shared_string_unexpected_error">Neocekuvana greska</string>
     <string name="shared_string_show">Prikazi</string>
@@ -2830,19 +2770,8 @@
 \nNe e potrebno specijalno prezemanje karta, pogledot e kreiran od našite standardni karti.
 \n
 \nOvoj prikaz može da se vrati ili so deaktiviranje povtorno ovde ili so menuvanje na „stilot na karta“ pod „Konfiguriraj mapa“ po želba.</string>
-    <string name="plugin_nautical_descr">Ovoj priklučok ja zbogatuva aplikacijata za mapi i navigacija OsmAnd za da proizveduva i nautički karti za plovenje, edrenje i drugi vidovi na vodeni sportovi.
-\n
-\nSpecijalen dodatok za mapi za OsmAnd ḱe gi obezbedi site oznaki za nautička navigacija i simboli na grafikoni, za navigacija vo vnatrešnosta i vo blizina na bregot. Opisot na sekoja navigaciska oznaka gi dava detalite potrebni za nivno identifikuvanje i nivnoto značenje (kategorija, forma, boja, niza, referenca itn.).
-\n
-\nZa da se vratite na eden od konvencionalnite stilovi na mapi na OsmAnd, ednostavno ili povtorno deaktivirajte go ovoj priklučok ili promenete go „Stilot na karta“ pod „Konfiguriraj mapa“ po želba.</string>
-    <string name="srtm_plugin_description">Ovoj priklučok obezbeduva i preklopuvanje na konturnata linija i (reljef) sloj na senka na ridot što ḱe se prikažat na vrvot na standardnite karti na OsmAnd. Ovaa funkcionalnost ḱe bide mnogu ceneta od sportisti, planinari, velossipedisti i site zainteresirani za reljefnata struktura na pejzažot. (Ve molime imajte predvid deka podatocite za linijata na konturata i/ili relefot se odvoeni, dostapni se dopolnitelni prezemanja po aktiviranjeto na priklučokot.)
-\n
-\nGlobalnite podatoci (pomeǵu 70 ° sever i 70 ° južno) se zasnovaat na merenjata na SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Termal Emission and Reflection Radiometer), instrument za slikanje na odborot Terra, vodečkiot satelit na NASA za nabljuduvanje na Zemjata. Sistem. ASTER e kooperativen napor pomeǵu NASA, japonskoto Ministerstvo za ekonomija, trgovija i industrija (METI) i Japan Space Systems (J-spacesystems).</string>
-    <string name="plugin_ski_descr">Ovoj priklučok za OsmAnd vi gi stava na dofat detalite za globalnite skijački pateki, kros-kantri skijački pateki, alpskite ski pateki, žičarnicite i ski-liftovite. Patekite i patekite se prikažani vo boja spored teškotija i prikažani vo specijalen stil na mapa „Zimski“ koj asimilira zimski pejzaž oboen so sneg.
-\n
-\nAktiviranjeto na ovoj prikaz go menuva stilot na kartata vo „Zima i skijanje“, prikažuvajḱi gi site karakteristiki na pejzažot vo zimski uslovi. Ovoj prikaz može da se vrati ili so deaktiviranje povtorno ovde ili so menuvanje na „stilot na karta“ pod „Konfiguriraj mapa“ po želba.</string>
-    <string name="osmand_parking_plugin_description">Vi ovozmožuva da snimate kade e parkiran vašiot avtomobil, vklučitelno i kolku vreme ostanuva za parkiranje.
-\n I lokacijata i vremeto se vidlivi na kontrolnata tabla, kako i vo dodatokot za mapa. Potsetnik za alarm može da se dodade vo kalendarot na Android.</string>
+    <string name="plugin_ski_descr">Ovoj priklučok za OsmAnd vi gi stava na dofat detalite za globalnite skijački pateki, kros-kantri skijački pateki, alpskite ski pateki, žičarnicite i ski-liftovite. Patekite i patekite se prikažani vo boja spored teškotija i prikažani vo specijalen stil na mapa „Zimski“ koj asimilira zimski pejzaž oboen so sneg. \n \nAktiviranjeto na ovoj prikaz go menuva stilot na kartata vo „Zima i skijanje“, prikažuvajḱi gi site karakteristiki na pejzažot vo zimski uslovi. Ovoj prikaz može da se vrati ili so deaktiviranje povtorno ovde ili so menuvanje na „stilot na karta“ pod „Konfiguriraj mapa“ po želba.</string>
+    <string name="osmand_parking_plugin_description">Vi ovozmožuva da snimate kade e parkiran vašiot avtomobil, vklučitelno i kolku vreme ostanuva za parkiranje. \n I lokacijata i vremeto se vidlivi na kontrolnata tabla, kako i vo dodatokot za mapa. Potsetnik za alarm može da se dodade vo kalendarot na Android.</string>
     <string name="simulate_your_location_gpx_descr">Simulirajte ja vašata pozicija koristejḱi go snimenit GPX zapis.</string>
     <string name="simulate_your_location_stop_descr">Prestanete da ja simulirate vašata pozicija.</string>
     <string name="simulate_your_location_descr">Simulirajte ja vašata pozicija koristejḱi presmetana ruta ili snimeniot GPX zapis.</string>
@@ -2947,7 +2876,6 @@
     <string name="shared_string_trip_recording">Snimanje na patuvanjeto</string>
     <string name="osmand_accessibility_description">Gi pravi funkciite za pristapnost na uredot direktno dostapni vo OsmAnd. Toa go olesnuva na pr. prilagoduvanje na brzinata na govorot za glasovi od tekst vo govor, konfiguriranje na navigacija so D-pad, koristenje na trackball za kontrola na zumiranje ili povratni informacii od tekst vo govor, na primer za avtomatsko objavuvanje na vašata pozicija.</string>
     <string name="osmand_distance_planning_plugin_description">Kreirajte pateki so dopiranje na kartata ili so koristenje ili menuvanje na postoečkite GPX-datoteki, za da planirate patuvanje i da go izmerite rastojanieto pomeǵu točkite. Rezultatot može da se začuva kako datoteka GPX za da se koristi podocna za nasoki.</string>
-    <string name="osm_editing_plugin_description">Napravete pridonesi za OSM kako kreiranje ili menuvanje objekti na OSM POI, otvoranje ili komentiranje beleški za OSM i pridonesuvanje snimeni GPX-datoteki vo OsmAnd so dostavuvanje na vašeto korisničko ime i lozinka. OpenStreetMap.org e globalen proekt za mapiranje na javen domen upravuvan od zaednicata.</string>
     <string name="osmand_development_plugin_description">Postavki za funkcii za razvoj i otstranuvanje greški, kako što se simulacija na navigacija, izvedba na renderiranje ili glasovno pottiknuvanje. Nameneto za programeri, ne e potrebno za normalna upotreba na aplikacii.</string>
     <string name="rendering_attr_pisteRoutes_name">Ledeni nagibi</string>
     <string name="m_s">m/s</string>
@@ -4498,7 +4426,7 @@
     <string name="last_map_change">Последна промена на картата: %s</string>
     <string name="number_of_contributors">Broj na sorabotnici</string>
     <string name="number_of_edits">Broj na ureduvanja</string>
-    <string name="quick_actions_delete_text">Da se izbriše dejstvieto „%s“\?</string>
+    <string name="quick_actions_delete_text">Da se izbriše dejstvieto „%s“?</string>
     <string name="quick_action_edit_action">Uredete go dejstvieto</string>
     <string name="dialog_add_action_title">Dodadete dejstvie</string>
     <string name="quick_action_add_marker_descr">Kopče za dodavanje marker na mapa na lokacijata vo centarot na ekranot.</string>

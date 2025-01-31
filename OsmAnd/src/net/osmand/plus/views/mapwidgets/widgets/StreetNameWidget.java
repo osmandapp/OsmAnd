@@ -2,6 +2,7 @@ package net.osmand.plus.views.mapwidgets.widgets;
 
 import static net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import static net.osmand.plus.views.mapwidgets.WidgetType.STREET_NAME;
+import static net.osmand.plus.views.mapwidgets.widgets.NextTurnBaseWidget.SHIELD_HEIGHT_DP;
 import static java.lang.Math.min;
 
 import android.graphics.Bitmap;
@@ -43,7 +44,7 @@ import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.ShowAlongTheRouteBottomSheet;
 import net.osmand.plus.routing.CurrentStreetName;
 import net.osmand.plus.routing.RoadShield;
-import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.routing.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -112,7 +113,7 @@ public class StreetNameWidget extends MapWidget {
 		boolean showClosestWaypointFirstInAddress = params.showClosestWaypointFirstInAddress;
 
 		if (turnArrowColorId != 0) {
-			turnDrawable.setColor(turnArrowColorId);
+			turnDrawable.setRouteDirectionColor(turnArrowColorId);
 		}
 
 		boolean hideStreetName = MapRouteInfoMenu.chooseRoutesVisible
@@ -286,22 +287,26 @@ public class StreetNameWidget extends MapWidget {
 		float xSize = shieldDrawable.getIntrinsicWidth();
 		float ySize = shieldDrawable.getIntrinsicHeight();
 		float xyRatio = xSize / ySize;
-		//setting view proportions (height is fixed by toolbar size - 48dp);
-		int viewHeightPx = AndroidUtils.dpToPx(app, 48);
+
+		int viewHeightPx = AndroidUtils.dpToPx(app, SHIELD_HEIGHT_DP);
 		int viewWidthPx = (int) (viewHeightPx * xyRatio);
+		float scaleCoefficient = viewWidthPx / xSize;;
 
-		Bitmap bitmap = Bitmap.createBitmap((int) xSize, (int) ySize, Bitmap.Config.ARGB_8888);
+		Bitmap bitmap = Bitmap.createBitmap(viewWidthPx, viewHeightPx, Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmap);
-		Paint paint = setupTextPaint(app, textRenderer.getPaintText(), rreq);
 
-		float centerX = xSize / 2f;
-		float centerY = ySize / 2f - paint.getFontMetrics().ascent / 2f;
+		Paint paint = setupTextPaint(app, textRenderer.getPaintText(), rreq);
+		float basePx = paint.getTextSize();
+		paint.setTextSize(basePx * scaleCoefficient);
+
+		float centerX = viewWidthPx / 2f;
+		float centerY = viewHeightPx / 2f - paint.getFontMetrics().ascent / 2f;
 		text.fillProperties(rc, rreq, centerX, centerY);
 		textRenderer.drawShieldIcon(rc, canvas, text, text.getShieldResIcon());
 		textRenderer.drawWrappedText(canvas, text, 20f);
 
 		ImageView imageView = new ImageView(mapActivity);
-		int viewSize = AndroidUtils.dpToPx(app, 40f);
+		int viewSize = AndroidUtils.dpToPx(app, SHIELD_HEIGHT_DP);
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(viewWidthPx, viewSize);
 		int padding = AndroidUtils.dpToPx(app, 4f);
 		imageView.setPadding(0, 0, 0, padding);
@@ -354,6 +359,9 @@ public class StreetNameWidget extends MapWidget {
 		ImageView removeImage = waypointInfoBar.findViewById(R.id.waypoint_close);
 		moreImage.setImageDrawable(iconsCache.getIcon(R.drawable.ic_overflow_menu_white, isNightMode()));
 		removeImage.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark, isNightMode()));
+
+		turnDrawable.updateColors(nightMode);
+		turnDrawable.invalidateSelf();
 	}
 
 	@Override

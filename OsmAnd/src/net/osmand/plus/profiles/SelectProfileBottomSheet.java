@@ -106,7 +106,7 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 
 	protected void addToggleButton(TextRadioItem selectedItem, TextRadioItem... radioItems) {
 		int padding = getDimen(R.dimen.content_padding_small);
-		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
+		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
 		LayoutInflater inflater = UiUtilities.getInflater(themedCtx, nightMode);
 		LinearLayout container = (LinearLayout) inflater.inflate(R.layout.custom_radio_buttons, null);
 		LinearLayout.MarginLayoutParams params = new LinearLayout.MarginLayoutParams(
@@ -149,7 +149,7 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 	}
 
 	protected void addButtonItem(int titleId, int iconId, OnClickListener listener) {
-		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
+		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
 		View buttonView = View.inflate(themedCtx, R.layout.bottom_sheet_item_preference_btn, null);
 		TextView tvTitle = buttonView.findViewById(R.id.title);
 		tvTitle.setText(getString(titleId));
@@ -184,7 +184,7 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 	}
 
 	protected void addGroupHeader(CharSequence title, CharSequence description) {
-		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
+		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
 		LayoutInflater inflater = UiUtilities.getInflater(themedCtx, nightMode);
 		View view = inflater.inflate(R.layout.bottom_sheet_item_title_with_description_large, null);
 
@@ -205,7 +205,7 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 	}
 
 	protected void addMessageWithRoundedBackground(String message, int marginTop, int marginBottom) {
-		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
+		Context themedCtx = UiUtilities.getThemedContext(requireContext(), nightMode);
 		LayoutInflater inflater = UiUtilities.getInflater(themedCtx, nightMode);
 		View view = inflater.inflate(R.layout.bottom_sheet_item_description_on_rounded_bg, null);
 

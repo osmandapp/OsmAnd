@@ -1863,7 +1863,7 @@
     <string name="auto_backup_preference_desc">Theo mặc định, Android lưu các bản sao lưu của những thứ yêu thích, mã điện tử bản đồ và các cài đặt OsmAnd để khôi phục chúng trên thiết bị mới hoặc sau khi cài đặt lại. Bản sao lưu này bị giới hạn tới 25MB.\nKhi sử dụng OsmAnd Cloud, điều này có thể dẫn tới những hiểu lầm sau khi cài đặt lại.</string>
     <string name="rendering_attr_weatherTempContours_name">Đường đẳng nhiệt</string>
     <string name="rendering_attr_weatherPressureContours_name">Đường đẳng áp</string>
-    <string name="map_widget_trip_recording_distance">Khoảng cách</string>
+    <string name="map_widget_distance">Khoảng cách</string>
     <string name="colour_of_circles">Màu vòng tròn</string>
     <string name="compass_on_circles">La bàn trên vòng tròn</string>
     <string name="map_widget_ant_bicycle_dist">Nhịp đạp xe đạp</string>
@@ -2984,4 +2984,23 @@
     <string name="markers_history_is_disabled_descr">Cho phép lịch sử lưu lại danh sách những điểm đánh dấu bản đồ đã được ghé thăm.</string>
     <string name="purchases_feature_desc_android_auto">Mang những bản đồ ngoại tuyến của OsmAnd và điều hướng tới màn hình trên xe của bạn và tích hợp với những điều khiển xe của bạn.</string>
     <string name="search_title">Tìm kiếm: %1$s</string>
+    <string name="routeInfo_tracktype_description">Tô màu tuyến đường hoặc nét vẽ cung đường theo thành phần bề mặt của nó. Thường áp dụng khi mạng lưới đường chủ yếu là đường chưa được lát.</string>
+    <string name="approx_safe_mode_description">Thực hiện ước tính GPX bằng Android chậm hơn thay vì câu lệnh gốc.</string>
+    <string name="calculate_size">Tính kích thước</string>
+    <string name="routeInfo_winter_ice_road_description">Tô màu tuyến đường hoặc nét vẽ cung đường bằng sự phân loại đường mùa đông của nó.</string>
+    <string name="cancel_anytime_in_amazon_app">Xoá nó bất cứ lúc nào qua ứng dụng Amazon</string>
+    <string name="default_buttons_size_original_description">Mỗi nút sẽ giữ kích thước riêng.</string>
+    <string name="default_buttons_corners_original_description">Mỗi nút sẽ giữ độ bo tròn góc riêng.</string>
+    <string name="default_buttons_opacity_original_description">Mỗi nút sẽ giữ độ mờ nền riêng.</string>
+    <string name="quick_action_toggle_preference">Một công tắc để thay đổi sự ưa thích.</string>
+    <string name="amz_manage_subscription_descr">Quản lý sự đăng ký của bạn bằng cách dùng ứng dụng Amazon hoặc trang web Amazon.</string>
+    <string name="history_is_disabled_descr">Cho phép lịch sử có quyền truy cập nhanh hơn đến những kết quả được sử dụng gần nhất.</string>
+    <string name="empty_category_name">Làm trống tên danh mục</string>
+    <string name="no_activity_for_intent">Cài đặt một ứng dụng có thể thực hiện hành động này.</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Hiện các tuyến đường leo núi</string>
+    <string name="calculating_indication_message">Đang tính…</string>
+    <string name="no_items_of_type_message">Bạn không có thứ nào thuộc loại này</string>
+    <string name="shared_string_travelbooks">Sổ nhật ký du lịch</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Các tuyến đường leo núi</string>
+    <string name="release_4_1">• Thêm hỗ trợ ban đầu cho Android Auto\n\n• Cập nhật giao diện người dùng cho tìm kiếm tọa độ UTM\n\n• Bộ lọc GPS cho các đoạn đường GPX\n\n• Widget độ cao (Pro)\n\n• Yêu thích: thêm khả năng xem các biểu tượng đã sử dụng gần đây\n\n• Lập kế hoạch tuyến đường: sẽ sử dụng hồ sơ đã chọn sau khi khởi động\n\n• Sửa lỗi lớp Mapillary, plugin hiện đã bị vô hiệu hóa mặc định\n\n• Thêm màn hình để quản lý tất cả lịch sử trong ứng dụng\n\n• Hướng bản đồ không bị đặt lại sau khi khởi động lại ứng dụng\n\n• Cải thiện việc hiển thị đánh dấu độ cao SRTM\n\n• Sửa lỗi chú thích bản đồ tiếng Ả Rập\n\n• Sửa các vấn đề định tuyến khác</string>
 </resources>

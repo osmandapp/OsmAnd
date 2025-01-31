@@ -3,6 +3,7 @@ package net.osmand.plus.views.mapwidgets;
 import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.ANT_PLUS;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.GLIDE;
+import static net.osmand.plus.views.mapwidgets.WidgetGroup.NAVIGATION_POINTS;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.SUNRISE_SUNSET;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.VEHICLE_METRICS;
 import static net.osmand.plus.views.mapwidgets.WidgetGroup.WEATHER;
@@ -76,7 +77,7 @@ public enum WidgetType {
 	ALTITUDE_MAP_CENTER("altitude_map_center", R.string.map_widget_altitude_map_center, R.string.map_widget_altitude_map_center_desc, R.drawable.widget_altitude_map_center_day, R.drawable.widget_altitude_map_center_night, 0, WidgetGroup.ALTITUDE, RIGHT),
 	GPS_INFO("gps_info", R.string.map_widget_gps_info, R.string.gps_info_widget_desc, R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night, R.string.docs_widget_gps_info, null, RIGHT),
 
-	TRIP_RECORDING_DISTANCE("monitoring", R.string.map_widget_trip_recording_distance, R.string.trip_recording_distance_widget_desc, R.drawable.widget_trip_recording_day, R.drawable.widget_trip_recording_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),
+	TRIP_RECORDING_DISTANCE("monitoring", R.string.map_widget_distance, R.string.trip_recording_distance_widget_desc, R.drawable.widget_trip_recording_day, R.drawable.widget_trip_recording_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),
 	TRIP_RECORDING_TIME("trip_recording_time", R.string.map_widget_trip_recording_duration, R.string.trip_recording_duration_widget_desc, R.drawable.widget_track_recording_duration_day, R.drawable.widget_track_recording_duration_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),
 	TRIP_RECORDING_UPHILL("trip_recording_uphill", R.string.map_widget_trip_recording_uphill, R.string.trip_recording_uphill_widget_desc, R.drawable.widget_track_recording_uphill_day, R.drawable.widget_track_recording_uphill_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),
 	TRIP_RECORDING_DOWNHILL("trip_recording_downhill", R.string.map_widget_trip_recording_downhill, R.string.trip_recording_downhill_widget_desc, R.drawable.widget_track_recording_downhill_day, R.drawable.widget_track_recording_downhill_night, 0, WidgetGroup.TRIP_RECORDING, RIGHT),
@@ -143,6 +144,7 @@ public enum WidgetType {
 	GLIDE_AVERAGE("average_glide_ratio", R.string.average_glide_ratio, R.string.map_widget_glide_average_desc, R.drawable.widget_glide_ratio_average_day, R.drawable.widget_glide_ratio_average_night, 0, GLIDE, RIGHT),
 
 	// Bottom panel
+	ROUTE_INFO("route_info", R.string.map_widget_route_information, R.string.map_widget_route_information_desc, R.drawable.widget_route_info_day, R.drawable.widget_route_info_night, 0, null, NAVIGATION_POINTS, BOTTOM),
 	ELEVATION_PROFILE("elevation_profile", R.string.elevation_profile, R.string.elevation_profile_widget_desc, R.drawable.widget_route_elevation_day, R.drawable.widget_route_elevation_night, 0, null, BOTTOM);
 
 	public static final String INTERMEDIATE_TIME_WIDGET_LEGACY = "intermediate_time";
@@ -209,6 +211,7 @@ public enum WidgetType {
 		return night ? nightIconId : dayIconId;
 	}
 
+	@Nullable
 	public WidgetGroup getGroup() {
 		return group;
 	}
@@ -237,6 +240,9 @@ public enum WidgetType {
 	public boolean isPanelsAllowed(@NonNull List<WidgetsPanel> panels) {
 		if (this == SMALL_NEXT_TURN) {
 			return !panels.contains(TOP) && !panels.contains(BOTTOM);
+		}
+		if (this == ROUTE_INFO) {
+			return !panels.contains(LEFT) && !panels.contains(RIGHT);
 		}
 		return true;
 	}
@@ -370,6 +376,8 @@ public enum WidgetType {
 			return new ZoomLevelSettingsFragment();
 		} else if (this == LANES) {
 			return new LanesWidgetSettingsFragment();
+		} else if (this == ROUTE_INFO) {
+			return new RouteInfoWidgetSettingsFragment();
 		}
 
 		if (widgetInfo instanceof SimpleWidgetInfo) {

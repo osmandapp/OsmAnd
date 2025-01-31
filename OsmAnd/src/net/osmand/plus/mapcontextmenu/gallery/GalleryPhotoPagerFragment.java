@@ -128,7 +128,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 				boolean shouldPreloadNext = selectedPosition < position;
 				selectedPosition = position;
 				preloadThumbNails(shouldPreloadNext);
-				updateImageDescriptionRow(getSelectedImageCard(), shouldPreloadNext);
+				updateImageDescriptionRow(getSelectedImageCard(), false, shouldPreloadNext);
 			}
 
 			@Override
@@ -141,7 +141,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 		setupToolbar(view);
 		setupOnBackPressedCallback();
 		preloadThumbNails();
-		updateImageDescriptionRow(getSelectedImageCard(), null);
+		updateImageDescriptionRow(getSelectedImageCard(), true, null);
 		return view;
 	}
 
@@ -199,13 +199,12 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 		super.onSaveInstanceState(outState);
 	}
 
-	private Set<WikiImageCard> getImagesToDownloadMetadata(@NonNull WikiImageCard wikiImageCard, @Nullable Boolean preloadNext){
+	private Set<WikiImageCard> getImagesToDownloadMetadata(@NonNull WikiImageCard wikiImageCard, boolean initialLoad, @Nullable Boolean preloadNext){
 		Set<WikiImageCard> result = new HashSet<>();
 		List<ImageCard> imageCards = controller.getOnlinePhotoCards();
-		if (imageCards.size() <= 1) {
+		if (imageCards.size() <= 1 && !initialLoad) {
 			return result;
 		}
-
 		if (shouldDownloadMetadata(wikiImageCard)) {
 			result.add(wikiImageCard);
 		}
@@ -215,7 +214,6 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 		} else {
 			addImages(imageCards, result, preloadNext, 4);
 		}
-
 		return result;
 	}
 
@@ -243,13 +241,13 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 				|| Algorithms.isEmpty(license) || license.equals("Unknown"));
 	}
 
-	private void updateImageDescriptionRow(@NonNull ImageCard imageCard, @Nullable Boolean preloadNext) {
+	private void updateImageDescriptionRow(@NonNull ImageCard imageCard, boolean initialLoad, @Nullable Boolean preloadNext) {
 		if (imageCard instanceof WikiImageCard wikiImageCard) {
 			dateView.setVisibility(View.VISIBLE);
 			authorView.setVisibility(View.VISIBLE);
 			licenseView.setVisibility(View.VISIBLE);
 			controller.addMetaDataListener(this);
-			controller.downloadWikiMetaData(getImagesToDownloadMetadata(wikiImageCard, preloadNext));
+			controller.downloadWikiMetaData(getImagesToDownloadMetadata(wikiImageCard, initialLoad, preloadNext));
 
 			Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
 			setMetaData(metadata.getAuthor(), metadata.getDate(), metadata.getLicense());

@@ -22,6 +22,7 @@ import net.osmand.shared.gpx.GpxUtilities.PointsGroup
 import net.osmand.shared.gpx.primitives.Route
 import net.osmand.shared.gpx.GpxUtilities.RouteSegment
 import net.osmand.shared.gpx.GpxUtilities.RouteType
+import net.osmand.shared.gpx.primitives.Link
 import net.osmand.shared.gpx.primitives.Track
 import net.osmand.shared.gpx.primitives.TrkSegment
 import net.osmand.shared.gpx.primitives.WptPt
@@ -294,7 +295,7 @@ object SharedUtil {
 		jPoint.lat = point.lat
 		jPoint.lon = point.lon
 		jPoint.name = point.name
-		jPoint.link = point.link
+		jPoint.link = point.link?.href
 		jPoint.category = point.category
 		jPoint.desc = point.desc
 		jPoint.comment = point.comment
@@ -344,7 +345,7 @@ object SharedUtil {
 	fun jMetadata(metadata: Metadata): GPXUtilities.Metadata {
 		val jMetadata = GPXUtilities.Metadata()
 		jMetadata.name = metadata.name
-		jMetadata.link = metadata.link
+		jMetadata.link = metadata.link?.href
 		jMetadata.keywords = metadata.keywords
 		jMetadata.time = metadata.time
 		val author = metadata.author
@@ -367,7 +368,7 @@ object SharedUtil {
 	fun jAuthor(author: Author): GPXUtilities.Author {
 		val jAuthor = GPXUtilities.Author()
 		jAuthor.name = author.name
-		jAuthor.link = author.link
+		jAuthor.link = author.link?.href
 		jAuthor.email = author.email
 		copyExtensions(author, jAuthor)
 		return jAuthor
@@ -505,7 +506,6 @@ object SharedUtil {
 		kPoint.lat = point.lat
 		kPoint.lon = point.lon
 		kPoint.name = point.name
-		kPoint.link = point.link
 		kPoint.category = point.category
 		kPoint.desc = point.desc
 		kPoint.comment = point.comment
@@ -521,6 +521,7 @@ object SharedUtil {
 		kPoint.slopeColor = point.slopeColor
 		kPoint.colourARGB = point.colourARGB
 		kPoint.distance = point.distance
+		kPoint.link = point.link?.let { Link(it) }
 		copyExtensions(point, kPoint)
 		return kPoint
 	}
@@ -555,9 +556,9 @@ object SharedUtil {
 	fun kMetadata(metadata: GPXUtilities.Metadata): Metadata {
 		val kMetadata = Metadata()
 		kMetadata.name = metadata.name
-		kMetadata.link = metadata.link
 		kMetadata.keywords = metadata.keywords
 		kMetadata.time = metadata.time
+		kMetadata.link = metadata.link?.let { Link(it) }
 		if (metadata.author != null) {
 			kMetadata.author = kAuthor(metadata.author)
 		}
@@ -575,8 +576,8 @@ object SharedUtil {
 	fun kAuthor(author: GPXUtilities.Author): Author {
 		val kAuthor = Author()
 		kAuthor.name = author.name
-		kAuthor.link = author.link
 		kAuthor.email = author.email
+		kAuthor.link = author.link?.let { Link(it) }
 		copyExtensions(author, kAuthor)
 		return kAuthor
 	}

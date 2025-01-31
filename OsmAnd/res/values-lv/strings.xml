@@ -3,7 +3,6 @@
     <string name="plugins_screen">Spraudņu pārvaldnieks</string>
     <string name="prefs_plugins_descr">Spraudņi papildina lietotnes iespējas un piešķir papildus funkcionalitāti.</string>
     <string name="prefs_plugins">Spraudņi</string>
-    <string name="osm_editing_plugin_description">Rādīt iestatījumus OSM pilnveidošanai - OSM POI objektu izveidei/labošanai, GPX treku izplatīšanai un ziņošanai par OSM kļūdām. Vairāk uzziniet https://openstreetmap.org vietnē. Ikviens ir aicināts ņemt aktīvu dalību, ko ir iespējams darīt caur OsmAnd aplikāciju, norādot jūsu OSM lietotāja datus.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektoru kartes tiks attēlotas ātrāk, bet var nestrādāt uz visām ierīcēm.</string>
     <string name="play_commands_of_currently_selected_voice">Atskaņot komandas izvēlētajai balsij</string>
     <string name="debugging_and_development">OsmAnd izstrāde</string>
@@ -999,9 +998,6 @@
     <string name="local_osm_changes_delete_all_confirm">Tiks izdzēsti %1$d osm labojumi. Vai turpināt?</string>
     <string name="auto_zoom_none">Nav automātiskais mērogs</string>
     <string name="index_name_openmaps">OpenMaps Eiropa</string>
-    <string name="srtm_plugin_description">"Šis spraudnis dod iespēju rādīt kontūrlīniju un reljefu pārklājus uz standarta OsmAnd kartēm. Šo iespēju novērtēs dabas mīļotāji, aktīvās atpūtas cienītāji un jebkurš ar padziļinātu interesi par zemes reljefu. 
-\n
-\nGlobālie dati (starp 70° Z un 70° D) ir bāzēti uz SRTM (Shuttle Radar Topography Mission) un ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mērījumiem, attēlveidošanas rīks uz Terra\'s, vadošais NASA Zemes Novērošanas Sistēmas satelīts. ASTER ir kopējs veikums ar NASA, Japānas Ekonomikas Ministriju, Trade and Industry (METI) un Japānas Izplatījuma Sistēmām (J-spacesystems). "</string>
     <string name="osmand_play_title_30_chars">OsmAnd kartes &amp; navigācija</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ kartes &amp; navigācija</string>
     <string name="support_new_features_descr">Lūdzu atbalstiet programmu ar ziedojumiem, lai palīdzētu to uzlabot un attīstīt</string>
@@ -1188,9 +1184,6 @@
     <string name="lang_fa">Persiešu</string>
     <string name="map_preferred_locale_descr">Nosaukumi kartē (ja valoda nebūs pieejama, tiks lietoti vietvārdi vai angļu valoda)</string>
     <string name="map_preferred_locale">Kartes pamatvaloda</string>
-    <string name="record_plugin_description">Ar šo spraudni jūs varat manuāli saglabāt trekus, nospiežot GPX ieraksta logrīku uz kartes vai veikt automātisku visu maršrutu ierakstu GPX failā.
-\n
-\nIerakstītie treki vēlāk var tikt izmantoti treka analīzei, koplietošanai ar draugiem vai OSM izstrādei. Atlēti var izmantot trekus, lai monitorētu treniņus. Pamata treku analīze var tikt veikta tieši caur OsmAnd kā piemēram, apļu laiki, vidējais ātrums utt., bet paplašinātai analīzei trekus var atvērt citās programmās.</string>
     <string name="record_plugin_name">Ceļa ieraksts</string>
     <string name="int_hour">h</string>
     <string name="duration">Laiks</string>
@@ -1841,7 +1834,6 @@ failu(s)?
     <string name="full_report">Pilnais pārskats</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap lietotāja vārds un parole</string>
     <string name="osm_live_email_desc">Mums tas ir vajadzīgs, lai informētu jūs par ieguldījumiem</string>
-    <string name="plugin_nautical_descr">"Spraudnis papildina OsmaAnd kartes ar jūras kartēm kuģošanai, ūdenslēpošanai un citiem ūdens sporta veidiem.\n\n\n\nSpeciāls kartes papildinājums rāda navigācijas ceļus, zīmes un simbolus uz ūdens un iekšzemē krastu tuvumā. Katra navigācijas zīme ir aprakstīta, lai to varētu viegli indentificēt un ir dots skaidrojums par tās nozīmi (kategorija, izmēri, krāsa, secība, atsauces, u.t.t.).\n\n\n\nLai atgrieztos uz OsmAnd standarta kartēm, deaktivizējiet spraudni vai nomainiet karti galvenajā izvēlnē - kartes attēlošana. "</string>
     <string name="number_of_contributors">Līdzstrādnieku skaits</string>
     <string name="file_name_containes_illegal_char">Faila vārds satur neatļautas rakstu zīmes</string>
     <string name="access_default_color">Noklusētā krāsa</string>

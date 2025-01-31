@@ -120,7 +120,7 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment impl
 	}
 
 	private void createOsmAndProItem() {
-		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 		View view = inflater.inflate(R.layout.online_srtm_promo_item, itemsContainer, false);
 
 		UiUtilities utilities = app.getUIUtilities();

@@ -2299,9 +2299,7 @@
 \nGögnin koma frá SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer).
 \n
 \nFrekari upplýsingar á %1$s.</string>
-    <string name="plugin_nautical_descr">Virkjaðu þetta til að bæta á kortið myndrænni framsetningu fyrir siglingaleiðir, ljósvita, hættusvæði, bannsvæði, hvar megi kasta akkerum, bryggjur, o.s.frv. Til að nota þetta skaltu sækja sjókortaviðbótina, fara í kortastillingarnar og setja stíl kortsins á \'Sjókort\'.
-\n
-\nLeiðbeiningar - %1$s.</string>
+    <string name="plugin_nautical_descr">Virkjaðu þetta til að bæta á kortið myndrænni framsetningu fyrir siglingaleiðir, ljósvita, hættusvæði, bannsvæði, hvar megi kasta akkerum, bryggjur, o.s.frv. Til að nota þetta skaltu sækja sjókortaviðbótina, fara í kortastillingarnar og setja stíl kortsins á \'Sjókort\'. \n \nLeiðbeiningar - %1$s.</string>
     <string name="plugin_ski_descr">Hannað til að rata um vetraríþróttasvæði. Skoðaðu skíðabrekkur, gönguskíðabrautir, fjallaskíðaleiðir, kláfa og skíðalyftur. Leiðir og brautir eru með litakóða eftir erfiðleikastigi. Til að nota þetta er viðbótin fyrst virkjuð, síðan farið í stillingar kortsins og \'Vetur og skíði\' valið sem stíll þess.</string>
     <string name="select_index_file_to_download">Ekkert fannst, en þú getur aftur útbúið það sjálf(ur) (skoðaðu https://osmand.net).</string>
     <string name="index_item_world_bitcoin_payments">Bitcoin-greiðslur um víða veröld</string>
@@ -3308,9 +3306,7 @@
     <string name="shared_string_all_languages">Öll tungumál</string>
     <string name="move_inside_category">Aðeins er hægt að færa atriði innan þessa flokks.</string>
     <string name="hidden_items_descr">Þessi atriði eru falin á valmyndinni, en valkostirnir eða viðbæturnar sem þau standa fyrir munu virka áfram.</string>
-    <string name="ui_customization_description">Sérsníddu fjölda atriða í sleðanum, í uppsetningu landakorts og í samhengisvalmynd.
-\n 
-\nÞú getur gert ónotaðar forritsviðbætur óvirkar til að fela stýringar þeirra. %1$s.</string>
+    <string name="ui_customization_description">Sérsníddu fjölda atriða í sleðanum, í uppsetningu landakorts og í samhengisvalmynd. \n \nÞú getur gert ónotaðar forritsviðbætur óvirkar til að fela stýringar þeirra. %1$s.</string>
     <string name="ui_customization_short_descr">Atriði á sleða, samhengisvalmynd</string>
     <string name="ui_customization">Sérsnið viðmóts</string>
     <string name="shared_string_drawer">Sleði</string>
@@ -4352,7 +4348,7 @@
     <string name="map_widget_time_to_destination">Tími á áfangastað</string>
     <string name="rendering_attr_horseScale_name">Erfiðleikastig reiðleiða</string>
     <string name="map_widget_trip_recording_duration">Tímalengd</string>
-    <string name="map_widget_trip_recording_distance">Vegalengd</string>
+    <string name="map_widget_distance">Vegalengd</string>
     <string name="compass_on_circles">Áttaviti á hringjum</string>
     <string name="arrival_time_widget_desc">Komutími á áfangastað.</string>
     <string name="routing_attr_motor_type_lpg_name">LPG</string>
@@ -4661,7 +4657,7 @@
     <string name="attach_roads_descr">Nálgaðu ferilinn þinn að leyfðum vegum til að beina milli punkta og tengja við nákvæmar beygjuleiðbeiningar og eigileika leiðar.</string>
     <string name="av_audio_format_bottom_sheet_descr">Veldu hljóðsnið. Skráategund fyrir hljóðgáma er 3GPP (.3gp).</string>
     <string name="choose_what_to_sync">Veldu það sem á að samstilla</string>
-    <string name="cloud_sync_progress">Samstilli…%1$s</string>
+    <string name="cloud_sync_progress">Samstilli… %1$s</string>
     <string name="checking_progress">Athuga…</string>
     <string name="shared_string_modified">Breytt</string>
     <string name="res_unknown">Óþekkt</string>
@@ -4853,7 +4849,7 @@
     <string name="approximate_bearing_descr">Reikna miðun út frá leið sem verið er að fylgja.</string>
     <string name="open_issue_on_github">Opnaðu verkbeiðni á GitHub</string>
     <string name="about_osmand">Um OsmAnd</string>
-    <string name="local_indexes_category_terrain">Yfirborðskort (3D)</string>
+    <string name="local_indexes_category_terrain">Yfirborðskort (3D</string>
     <string name="user_guide">Notendahandbók</string>
     <string name="send_logcat_log_descr">Ítarleg atvikaskrá</string>
     <string name="average_glide_time_interval_desc">Skilgreindu tímabilin sem notuð verða til að reikna meðalrennsli.</string>
@@ -5643,4 +5639,17 @@
     <string name="connect_new_scanner">Tengja nýjan skynjara</string>
     <string name="shared_string_engine">Vél</string>
     <string name="preview_next_turn">Forskoða næstu beygju</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Klifurleiðir</string>
+    <string name="display_distance_to_first_intermediate_summary">Birtir fyrst tíma og fjarlægð að næsta áfangastað. Slökktu á þessu til að sýna alltaf ítarlegar upplýsingar fyrir endanlega áfangastaðinn.</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Sýna klifurleiðir</string>
+    <string name="calculate_size">Reikna stærð</string>
+    <string name="default_buttons_size_original_description">Hver hnappur myndi halda sinni stærð.</string>
+    <string name="default_buttons_corners_original_description">Hver hnappur myndi halda sínum hornradíus.</string>
+    <string name="default_buttons_opacity_original_description">Hver hnappur myndi halda sínu ógegnsæi bakgrunns.</string>
+    <string name="selected_delayed_profile">Valið snið \"%s\"</string>
+    <string name="shared_string_interpolation">Brúun</string>
+    <string name="location_interpolation_percent_desc">Stilltu prósentuhlutfall brúunar (forspár) á staðsetningu á meðan leiðsögn stendur. Þessi breyta minnkar seinkun á birtingu staðsetningar þinnar á kortinu á meðan hreyfingu stendur.</string>
+    <string name="location_interpolation_percent">Prósentuhlutfall brúunar á staðsetningu</string>
+    <string name="calculating_indication_message">Reikna…</string>
+    <string name="display_distance_to_first_intermediate">Sýna ítarlegri upplýsingar um næsta áfangastað</string>
 </resources>

@@ -66,7 +66,7 @@ public class LocationSourceBottomSheet extends MenuBottomSheetDialogFragment {
 		int margin = getDimen(R.dimen.content_padding);
 		int activeColorId = ColorUtilities.getActiveIconColorId(nightMode);
 		int secondaryColorId = ColorUtilities.getSecondaryIconColorId(nightMode);
-		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		LayoutInflater inflater = UiUtilities.getInflater(requireContext(), nightMode);
 
 		for (LocationSource source : LocationSource.values()) {
 			View view = inflater.inflate(R.layout.bottom_sheet_item_with_radio_btn_left, null);

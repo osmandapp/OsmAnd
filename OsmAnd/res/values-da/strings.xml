@@ -2625,7 +2625,7 @@
     <string name="coord_input_edit_point">Rediger punkt</string>
     <string name="coord_input_add_point">Tilføj punkt</string>
     <string name="coord_input_save_as_track">Gem som spor</string>
-    <string name="coord_input_save_as_track_descr">%1$s punkter tilføjet. Indtast et filnavn og tryk på “Gem“.</string>
+    <string name="coord_input_save_as_track_descr">Du tilføjede %1$s punkter. Indtast et filnavn og tryk på \"Gem\".</string>
     <string name="point_deleted">Punkt %1$s er blevet slettet</string>
     <string name="shared_string_world">Verden</string>
     <string name="send_search_query_description">Send søgestrengen: \"%1$s\" samt lokationen.
@@ -3276,7 +3276,7 @@
     <string name="monitoring_min_speed_descr_remark">Bemærk: Hastighed &gt; 0 kontrol: De fleste GPS-chipsæt giver kun en hastighedsværdi, hvis algoritmen bestemmer, at der er bevægelse, og ingen, hvis der ikke er bevægelse. Brug af indstillingen &gt; 0 i dette filter bruger derfor en vis grad bevægelsesdetektering fra GPS-chipset. Men selvom de ikke filtreres på optagelsestidspunktet, bruges denne funktion i GPX-analysen til at bestemme den korrigerede afstand, det vil sige, at værdien, der vises i feltet, er afstanden, der er registreret under bevægelsen.</string>
     <string name="monitoring_min_speed_descr_recommendation">Anbefaling: Forsøg først at bruge bevægelsesdetektering via filteret til minimum afstandsmåling (B). Dette kan føre til bedre resultater, og der vil mistes færre data. Hvis sporene forbliver unøjagtige ved lave hastigheder, så prøv værdier, der ikke er nul her. Bemærk, at nogle målinger (nogle netværksbaserede metoder) muligvis ikke viser nogen hastighedsværdier overhovedet. I dette tilfælde registreres intet.</string>
     <string name="monitoring_min_speed_descr_side_effect">Bivirkning: Spor vil mangle alle sektioner, hvor minimumshastighedskriteriet ikke var opfyldt (f.eks. hvor cyklen skubbes op ad en stejl bakke). Der vil heller ikke være nogen oplysninger om hvileperioder, som pauser. Har indvirkning på alle analyser eller efterbehandlinger, som når det forsøges at bestemme den samlede længde af rejsen, tid i bevægelse, eller den gennemsnitlige hastighed.</string>
-    <string name="import_profile_dialog_description">Den importerede profil indeholder yderligere data. Klik på Importer for kun at importere profildata, eller vælg yderligere data.</string>
+    <string name="import_profile_dialog_description">Den importerede profil indeholder yderligere data. Klik på \"importer\" for kun at importere profildata, eller vælg yderligere data.</string>
     <string name="route_recalculation_dist_descr">Ruten vil blive genberegnet, hvis afstanden til ruten er længere end angivet parameter</string>
     <string name="route_recalculation_dist_title">Mindste afstand for at genberegne rute</string>
     <string name="import_duplicates_description">OsmAnd har allerede elementer med de samme navne som de importerede.
@@ -3705,7 +3705,7 @@
     <string name="no_purchases">Du har ingen køb</string>
     <string name="new_device_account">Ny enhed / ny konto</string>
     <string name="contact_support_description">Hvis du har spørgsmål, bedes du kontakte os på %1$s.</string>
-    <string name="empty_purchases_description">Hvis dine køb ikke vises her, kan du trykke på \"%1$s\" eller kontakte vores supportteam.</string>
+    <string name="empty_purchases_description">Hvis dine køb ikke vises her, kan du trykke på “%1$s” eller kontakte vores supportteam.</string>
     <string name="contact_support">Kontakt support</string>
     <string name="troubleshooting">Fejlfinding</string>
     <string name="troubleshooting_description">Følg venligst dette link, hvis du har problemer med køb.</string>
@@ -3801,7 +3801,7 @@
     <string name="unlimited_map_downloads">Ubegrænset download af kort</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia og Wikivoyage offline</string>
     <string name="offline_wikipeadia">Offline Wikipedia</string>
-    <string name="you_can_get_feature_as_part_of_pattern">Få \"%1$s\" som en del af %2$s abonnementet. Sammenligning:</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Få “%1$s” som en del af %2$s abonnementet. Sammenligning:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s af %2$s</string>
     <string name="continue_with">Fortsæt med %1$s</string>
     <string name="not_available_with">Ikke tilgængelig med %1$s</string>
@@ -3968,7 +3968,7 @@
     <string name="system_screen_timeout_descr">Slukker skærmen i henhold til systemets skærm-timeout.</string>
     <string name="system_screen_timeout">Brug systemets skærm-timeout</string>
     <string name="turn_screen_on_descr">Vælg indstillinger for opvågning af skærmen (sørg for at OsmAnd er i forgrunden, når enheden er låst):</string>
-    <string name="turn_screen_on_power_button_disabled">Deaktiveret. Kræver \"Hold skærmen tændt\" under \"Timeout efter opvågning\".</string>
+    <string name="turn_screen_on_power_button_disabled">Deaktiveret. Kræver \'Hold skærmen tændt\' under \'Timeout efter opvågning\'.</string>
     <string name="turn_screen_on_power_button_descr">Hvis du trykker på enhedens tænd/sluk-knap, tændes skærmen med OsmAnd ovenpå låseskærmen.</string>
     <string name="turn_screen_on_wake_time_descr">Vælg skærmens timeout efter opvågning. (\"%1$s\" anvender ingen timeout.)</string>
     <string name="map_source_zoom_levels">Indstil et minimalt og maksimalt zoomniveau for visning eller indlæsning af onlinekortet.</string>
@@ -4387,7 +4387,7 @@
     <string name="rendering_attr_weatherPressureContours_name">Tryk-isolinjer</string>
     <string name="routing_attr_avoid_highway_name">Undgå motorveje</string>
     <string name="rendering_attr_horseScale_name">Sværhedsgraden af ridestier</string>
-    <string name="map_widget_trip_recording_distance">Afstand</string>
+    <string name="map_widget_distance">Afstand</string>
     <string name="rendering_attr_weatherTempContours_name">Temperatur-isolinjer</string>
     <string name="routing_attr_avoid_highway_description">Undgå motorveje</string>
     <string name="map_widget_trip_recording_downhill">Nedstigning</string>
@@ -4709,7 +4709,7 @@
     <string name="cloud_all_changes_uploaded_descr">Alle ændringer foretaget på denne enhed er synkroniseret med OsmAnd Cloud.</string>
     <string name="cloud_no_conflicts">Der er ingen konflikter.</string>
     <string name="download_cloud_version">Download cloud-version</string>
-    <string name="cloud_sync_progress">Synkroniserer...%1$s</string>
+    <string name="cloud_sync_progress">Synkroniserer… %1$s</string>
     <string name="backup_error_failed_to_fetch_remote_items">Fillisten kunne ikke hentes fra serveren.</string>
     <string name="import_export">Import/eksport</string>
     <string name="modified_file">Ændret fil</string>
@@ -5690,4 +5690,18 @@
     <string name="location_interpolation_percent_desc">Indstil procentdelen af lokationsinterpolation under rutenavigation. Denne parameter reducerer forsinkelsen af din position på kortet under animation.</string>
     <string name="location_interpolation_percent">Interpolation af placering i procent</string>
     <string name="selected_delayed_profile">Valgte profil \"%s\"</string>
+    <string name="default_buttons_corners_original_description">Hver knap beholder sin egen hjørneradius.</string>
+    <string name="default_buttons_opacity_original_description">Hver knap beholder sin egen baggrundsgennemsigtighed.</string>
+    <string name="default_buttons_size_original_description">Hver knap beholder sin egen størrelse.</string>
+    <string name="calculating_indication_message">Beregner…</string>
+    <string name="calculate_size">Beregn størrelse</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Klatreruter</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Vis klatreruter</string>
+    <string name="display_distance_to_first_intermediate_summary">Viser tid og afstand til næste stop først. Slå fra for altid at vise detaljer for destinationen.</string>
+    <string name="display_distance_to_first_intermediate">Vis rutedetaljer for det næste stop</string>
+    <string name="popular_places_nearby">Populære steder i nærheden</string>
+    <string name="recently_visited">Besøgt for nylig</string>
+    <string name="shared_string_length">Længde</string>
+    <string name="shared_string_avg_altitude">Gns. højde</string>
+    <string name="shared_string_avg_speed">Min. hastighed</string>
 </resources>

@@ -12,6 +12,8 @@ import net.osmand.util.Algorithms;
 
 public class ResizableWidgetState extends WidgetState {
 
+	public static final String SIMPLE_WIDGET_SIZE_ID = "simple_widget_size";
+
 	private final OsmandPreference<WidgetSize> widgetSizePref;
 	private final WidgetType widgetType;
 
@@ -23,7 +25,7 @@ public class ResizableWidgetState extends WidgetState {
 
 	@NonNull
 	private OsmandPreference<WidgetSize> registerWidgetSizePref(@Nullable String customId, @NonNull WidgetType widgetType) {
-		String prefId = "simple_widget_size";
+		String prefId = SIMPLE_WIDGET_SIZE_ID;
 		prefId += widgetType.id;
 		if (!Algorithms.isEmpty(customId)) {
 			prefId += customId;

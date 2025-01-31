@@ -1708,9 +1708,7 @@
     <string name="app_mode_ski_touring">جولة التزلج</string>
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
     <string name="native_app_allocated_memory">إجمالي الذاكرة الأصلية</string>
-    <string name="ui_customization_description">تخصيص كمية العناصر في قائمة تكوين خيارات الخريطة.
-\n
-\nيمكنك تعطيل الإضافات غير المستخدمة لإخفاء جميع الضوابط من الطلب %1$s.</string>
+    <string name="ui_customization_description">تخصيص كمية العناصر في قائمة تكوين خيارات الخريطة. \n \nيمكنك تعطيل الإضافات غير المستخدمة لإخفاء جميع الضوابط من الطلب %1$s.</string>
     <string name="osmand_plus_extended_description_part1">أوسماند بلس (توجيهات OSM للملاحة الآلية) تطبيق خريطة وملاحة مع إمكانية الوصول إلى بيانات الموقع مجاناً وفي جميع أنحاء العالم، وبجودة عالية.
 \nاستمتع بالملاحة بصوت والصورة، عرض النقاط المهمة حولك (POI)، وإنشاء وإدارة مسارات GPX باستخدام معلومات عن تصور الخرائط الجغرافية، خياراً بين القيادة، ركوب الدراجات، وضع المشاة، التعديل على OSM وأكثر من ذلك بكثير.
 \n
@@ -3053,9 +3051,7 @@
     <string name="shared_string_complete">اكتمل</string>
     <string name="location_not_found">لم يتم العثور على الموقع</string>
     <string name="poi_action_succeded_template">الإجراء {0} تم بنجاح.</string>
-    <string name="delete_trash_item_confirmation_desc">سيتم حذف %1$s بشكل دائم. هل أنت متأكد؟
-\n
-\nلا يمكن إلغاء هذا الاجراء.</string>
+    <string name="delete_trash_item_confirmation_desc">سيتم حذف %1$s بشكل دائم. هل أنت متأكد؟ \n \nلا يمكن إلغاء هذا الاجراء.</string>
     <string name="use_compass_navigation_descr">استخدم البوصلة عندما لا تكون هناك أي وجهة محددة.</string>
     <string name="osmand_plus_play_title_30_chars">أوسماند+ للخرائط و الملاحة</string>
     <string name="av_camera_pic_size_descr">حدد حجم صورة الكاميرا الداخلية</string>
@@ -3392,9 +3388,7 @@
     <string name="start_of_the_track">بداية المسار</string>
     <string name="shared_string_clear_all">مسح الكل</string>
     <string name="shared_string_marker">توجيه مباشر</string>
-    <string name="plugin_nautical_descr">إثراء خريطتك بمعلومات حول طرق الإبحار ، وأضواء الملاحة ، ومناطق الخطر البحري ، والمناطق ذات قيود الإبحار أو الإرساء ، وما إلى ذلك.
-\n
-\nمزيد من القراءة على %1$s.</string>
+    <string name="plugin_nautical_descr">إثراء خريطتك بمعلومات حول طرق الإبحار ، وأضواء الملاحة ، ومناطق الخطر البحري ، والمناطق ذات قيود الإبحار أو الإرساء ، وما إلى ذلك. \n \nمزيد من القراءة على %1$s.</string>
     <string name="routing_attr_piste_type_nordic_description">مسارات للتزلج الشمالي أو الريفي علي الثلج.</string>
     <string name="add_row">اضف سطر</string>
     <string name="shared_string_languages">اللغات</string>
@@ -3891,7 +3885,7 @@
     <string name="auto_zoom_farthest">إلى مدى بعيد \"٥٠٠م\"</string>
     <string name="external_device_ant">مستشعر ANT+</string>
     <string name="shared_string_close">إغلاق</string>
-    <string name="map_widget_trip_recording_distance">المسافة</string>
+    <string name="map_widget_distance">المسافة</string>
     <string name="profile_alert_need_profile_name_msg">يجب تحديد اسم الوضع أولاً.</string>
     <string name="add_address">إضافة عنوان</string>
     <string name="fav_file_to_load_not_found">لم يتم العثور على ملف GPX يحتوي على الأماكن المفضلة في {0}</string>
@@ -5428,25 +5422,7 @@
     <string name="quick_action_hillshade_descr">زر لإظهار وإخفاء التلال على الخريطة.</string>
     <string name="remove_the_tag">إزالة الوسم</string>
     <string name="backup_deleting_all_data">جاري حذف جميع البيانات…</string>
-    <string name="release_3_7">• خرائط جديدة للتضاريس توضح المنحدرات من دون الحاجة للاتصال بالإنترنت
-\n
-\n • التخصيص الكامل للمفضلات ونقاط الطرق GPX - الألوان المخصصة والأيقونات والأشكال
-\n
-\n • تخصيص ترتيب العناصر في القائمة السفلية ، تكوين الخريطة ، القائمة الجانبية
-\n
-\n • عرض ويكيبيديا كطبقة منفصلة في تكوين الخريطة ، حدد اللغات المطلوبة فقط
-\n
-\n • إنشاء مرشح / خرائط للمعالم الخاصة بك مع مرونة تامة
-\n
-\n • تمت إضافة خيارات لاستعادة إعدادات الأوضاع المخصصة
-\n
-\n • مسارات GPX كاملة من الممرات دعم حركة المرور وتعليمات كاملة
-\n
-\n • إصلاح أحجام واجهة المستخدم على الأجهزة اللوحية
-\n
-\n • إصلاح الخلل مع اللغات التي تكتب من اليمين
-\n
-\n</string>
+    <string name="release_3_7">• خرائط جديدة للتضاريس توضح المنحدرات من دون الحاجة للاتصال بالإنترنت \n \n • التخصيص الكامل للمفضلات ونقاط الطرق GPX - الألوان المخصصة والأيقونات والأشكال \n \n • تخصيص ترتيب العناصر في القائمة السفلية ، تكوين الخريطة ، القائمة الجانبية \n \n • عرض ويكيبيديا كطبقة منفصلة في تكوين الخريطة ، حدد اللغات المطلوبة فقط \n \n • إنشاء مرشح / خرائط للمعالم الخاصة بك مع مرونة تامة \n \n • تمت إضافة خيارات لاستعادة إعدادات الأوضاع المخصصة \n \n • مسارات GPX كاملة من الممرات دعم حركة المرور وتعليمات كاملة \n \n • إصلاح أحجام واجهة المستخدم على الأجهزة اللوحية \n \n • إصلاح الخلل مع اللغات التي تكتب من اليمين \n \n</string>
     <string name="delete_map_description">هل أنت متأكد من أنك تريد حذف خريطة %1$s؟</string>
     <string name="lang_de_casual">الألمانية (العادية)</string>
     <string name="debugging_and_development">خيارات المطور</string>

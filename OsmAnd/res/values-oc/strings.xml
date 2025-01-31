@@ -1816,7 +1816,7 @@
 \nWeb / Wikimedia: fòtos dei PDIs d\'OpenStreetMap.</string>
     <string name="use_dev_url_descr">Per lo telecargament dei Nòtas OSM / PDI / GPX, assajatz dev.openstreetmap.org en plaça de openstreetmap.org.</string>
     <string name="osm_edit_close_note">Clacar la nòta d\'OSM</string>
-    <string name="gpx_upload_trackable_visibility_descr">« Traçable » vòu dire que la traça pareisse pas dins ges de lista publica, mai solament lei ponchs intermediaris e son informacion temporala (que se pòdon pas associar directament amb vos) per lei teledescargaments de l\'API GPS publica.</string>
+    <string name="gpx_upload_trackable_visibility_descr">« Traçable » vòu dire que la traça pareisse pas dins ges de lista publica, mai solament lei ponchs intermediaris e son informacion temporala (que se pòdon pas associar directament amb vos) per lei teledescargaments de l\'API GPS publica.</string>
     <string name="gpx_upload_private_visibility_descr">\"Privada\" vòu dire que la traça es pas visibla en ges de lista publica, mai lei ponchs que contèn seràn disponibles per l\'API publica GPS, desordenadas e sensa informacion temporala.</string>
     <string name="clear_osm_token">Escafar lo testimòni OAuth d\'OpenStreetMap</string>
     <string name="use_native_pt_desc">Bascular lo calcul dau percors de Transpòrt Public sus Java (segur)</string>
@@ -2241,7 +2241,7 @@
     <string name="external_device_disconnected">Desconnectat</string>
     <string name="external_device_characteristic_heart_rate">Frequéncia cardiaca</string>
     <string name="map_widget_camera_distance">Elevacion de l’aparelh fòto</string>
-    <string name="map_widget_trip_recording_distance">Distància</string>
+    <string name="map_widget_distance">Distància</string>
     <string name="nothing_found">Ges de resultat</string>
     <string name="route_info">Informacions sus lo percors</string>
     <string name="quick_action_transport_descr">Boton per mostrar ò amagar lo transpòrt public sus la mapa.</string>

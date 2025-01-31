@@ -26,11 +26,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPointChangedListener;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
-import net.osmand.plus.mapcontextmenu.MenuController.ContextMenuToolbarController;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
-import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
-import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.controllers.MapDataMenuController;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.MapMarkerEditor;
@@ -769,7 +766,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (mapActivity != null) {
 			TopToolbarController toolbarController = mapActivity.getTopToolbarController(TopToolbarControllerType.CONTEXT_MENU);
 			if (toolbarController instanceof ContextMenuToolbarController) {
-				MenuController menuController = ((ContextMenuToolbarController) toolbarController).getMenuController();
+				MenuController menuController = ((ContextMenuToolbarController) toolbarController).getController();
 				closeToolbar(menuController);
 			}
 		}
@@ -1591,7 +1588,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		});
 	}
 
-	private abstract class MenuAction implements Runnable {
+	private abstract static class MenuAction implements Runnable {
 		protected ProgressDialog dlg;
 	}
 }

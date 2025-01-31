@@ -25,6 +25,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.AngularConstants;
+import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FontCache;
@@ -381,7 +382,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		int i = 1;
 		while ((maxCircleRadius -= radius) > 0) {
 			cacheDistances.add(OsmAndFormatter.getFormattedDistance((float) roundedDist * i++, app,
-					OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS));
+					OsmAndFormatterParams.NO_TRAILING_ZEROS));
 		}
 	}
 

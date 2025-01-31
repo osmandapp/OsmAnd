@@ -18,7 +18,6 @@ import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
-import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -749,7 +748,11 @@ public class RoutingHelper {
 	}
 
 	public int getLeftDistanceNextIntermediate() {
-		return route.getDistanceToNextIntermediate(lastFixedLocation);
+		return getLeftDistanceToIntermediate(0);
+	}
+
+	public int getLeftDistanceToIntermediate(int intermediateIndexOffset) {
+		return route.getDistanceToNextIntermediate(lastFixedLocation, intermediateIndexOffset);
 	}
 
 	public int getLeftTime() {
@@ -761,7 +764,11 @@ public class RoutingHelper {
 	}
 
 	public int getLeftTimeNextIntermediate() {
-		return route.getLeftTimeToNextIntermediate(lastFixedLocation);
+		return getLeftTimeNextIntermediate(0);
+	}
+
+	public int getLeftTimeNextIntermediate(int intermediateIndexOffset) {
+		return route.getLeftTimeToNextIntermediate(lastFixedLocation, intermediateIndexOffset);
 	}
 
 	public OsmandSettings getSettings() {

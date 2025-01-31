@@ -139,8 +139,9 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_8_02 = 4802;
 	// 4803 - 4.8-03 (Merge asset files versions)
 	public static final int VERSION_4_8_03 = 4803;
+	public static final int VERSION_5_0_00 = 5000;
 
-	public static final int LAST_APP_VERSION = VERSION_4_8_03;
+	public static final int LAST_APP_VERSION = VERSION_5_0_00;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -271,7 +272,7 @@ public class AppVersionUpgradeOnInit {
 				if (prevAppVersion < VERSION_4_8_02) {
 					migrateTerrainModeDefaultPreferences(settings);
 				}
-				if (prevAppVersion < VERSION_4_8_03) {
+				if (prevAppVersion < VERSION_5_0_00) {
 					app.getAppInitializer().addOnFinishListener(
 							init -> MergeAssetFilesVersionAlgorithm.execute(app)
 					);

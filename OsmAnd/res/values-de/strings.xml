@@ -529,7 +529,7 @@
     <string name="download_type_to_filter">Nach Typ filtern</string>
     <string name="use_high_res_maps">Hochauflösende Anzeige</string>
     <string name="use_high_res_maps_descr">Unterdrückt Streckung (Unschärfe) von Kartenkacheln auf Bildschirmen mit hoher Dichte.</string>
-    <string name="unknown_location">Position noch nicht bekannt.</string>
+    <string name="unknown_location">Position noch nicht bekannt</string>
     <string name="context_menu_item_search_transport">Suche ÖPNV</string>
     <string name="transport_searching_transport">ÖPNV-Ergebnisse (kein Ziel):</string>
     <string name="transport_searching_route">ÖPNV-Ergebnisse ({0} bis zum Ziel):</string>
@@ -1422,9 +1422,7 @@
     <string name="rename_failed">Umbenennen fehlgeschlagen.</string>
     <string name="shared_string_currently_recording_track">Momentane Trackaufzeichnung</string>
     <string name="back_to_map">Zurück zur Karte</string>
-    <string name="plugin_nautical_descr">Reichert Ihre Karte mit Informationen über Segelrouten, Leuchtfeuer, nautische Gefahrenzonen, Zonen mit Segel- oder Anlegeverboten usw. an. Um sie zu verwenden, laden Sie die entsprechenden nautischen Karten herunter und aktivieren Sie den Stil „Nautisch“ unter „Menü → Karte konfigurieren → Kartendarstellung“.
-\n
-\nWeitere Informationen unter %1$s.</string>
+    <string name="plugin_nautical_descr">Reichert Ihre Karte mit Informationen über Segelrouten, Leuchtfeuer, nautische Gefahrenzonen, Zonen mit Segel- oder Anlegeverboten usw. an. Um sie zu verwenden, laden Sie die entsprechenden nautischen Karten herunter und aktivieren Sie den Stil „Nautisch“ unter „Menü → Karte konfigurieren → Kartendarstellung“. \n \nWeitere Informationen unter %1$s.</string>
     <string name="plugin_ski_descr">Entwickelt für die Navigation in Wintersportgebieten: Sehen Sie Skipisten, Skilifte und Langlaufloipen, mit farbigen Linien, die Schwierigkeitsgrade anzeigen. Um diese Erweiterung zu verwenden, aktivieren Sie sie und wählen Sie unter „Karte konfigurieren“ den Kartenstil „Winter und Ski“.</string>
     <string name="plugin_touringview_descr">Bei Aktivierung dieser Ansicht wechselt die Kartendarstellung zur „Tourenkarte“, einer besonders detaillierten Darstellung für Fernreisende und Berufsfahrer.
 \n
@@ -1958,7 +1956,7 @@
     <string name="route_stops_before">%1$s Haltestellen davor</string>
     <string name="rendering_attr_hideOverground_name">Oberirdische Objekte</string>
     <string name="routing_attr_short_way_name">Kraftstoffsparende Route</string>
-    <string name="replace_favorite_confirmation">Den Favoriten „%1$s“ ersetzen\?</string>
+    <string name="replace_favorite_confirmation">Den Favoriten %1$s ersetzen?</string>
     <string name="shared_string_change">Ändern</string>
     <string name="get_started">Erste Schritte</string>
     <string name="update_all_maps_now">Jetzt alle Karten aktualisieren?</string>
@@ -2054,7 +2052,7 @@
     <string name="quick_action_edit_action">Aktion bearbeiten</string>
     <string name="dialog_add_action_title">Aktion hinzufügen</string>
     <string name="quick_actions_delete">Aktion löschen</string>
-    <string name="quick_actions_delete_text">Aktion „%s“ löschen\?</string>
+    <string name="quick_actions_delete_text">Aktion „%s“ löschen?</string>
     <string name="quick_favorites_show_favorites_dialog">Dialog zu Favoriten anzeigen</string>
     <string name="quick_favorites_name_preset">Namen voreinstellen</string>
     <string name="shared_string_action_name">Aktionsname</string>
@@ -2080,7 +2078,7 @@
     <string name="quick_action_map_underlay_action">Underlay hinzufügen</string>
     <string name="quick_action_map_source_title">Kartenquellen</string>
     <string name="quick_action_map_source_action">Kartenquelle hinzufügen</string>
-    <string name="quick_action_map_source_switch">Kartenquelle wurde in „%s“ geändert.</string>
+    <string name="quick_action_map_source_switch">Kartenquelle geändert zu „%s“</string>
     <string name="quick_action_btn_tutorial_title">Schaltflächenposition ändern</string>
     <string name="quick_action_category_descr">Kategorie, in welche der Favorit gespeichert werden soll:</string>
     <string name="quick_action_gpx_category_descr">Wählen Sie eine beliebige Kategorie.</string>
@@ -2099,8 +2097,8 @@
     <string name="quick_action_add_create_items">Objekte erstellen</string>
     <string name="quick_action_bug_descr">Diese Nachricht wird ins Kommentarfeld eingetragen.</string>
     <string name="quick_action_btn_tutorial_descr">Langes Drücken und Ziehen der Schaltfläche ändert ihre Bildschirmposition.</string>
-    <string name="quick_action_map_overlay_switch">Karten-Overlay wurde in „%s“ geändert.</string>
-    <string name="quick_action_map_underlay_switch">Karten-Underlay wurde in „%s“ geändert.</string>
+    <string name="quick_action_map_overlay_switch">Karten-Overlay geändert zu „%s“.</string>
+    <string name="quick_action_map_underlay_switch">Karten-Underlay geändert zu „%s“</string>
     <string name="navigate_point_olc_info_invalid">Ungültiger OLC
 \n</string>
     <string name="navigate_point_olc_info_short">Kurzer OLC
@@ -2630,9 +2628,7 @@
     <string name="coord_input_save_as_track">Als Track speichern</string>
     <string name="coord_input_save_as_track_descr">Sie haben %1$s Punkte hinzugefügt. Geben Sie einen Dateinamen ein und klicken Sie auf „Speichern“.</string>
     <string name="point_deleted">Punkt %1$s gelöscht</string>
-    <string name="send_search_query_description">Ihre Suchanfrage wird an „%1$s“ gesendet, zusammen mit Ihrem Standort.
-\n
-\nPersönliche Informationen werden nicht gesammelt, sondern nur Suchdaten, die zur Verbesserung der Suche benötigt werden.</string>
+    <string name="send_search_query_description">Ihre Suchanfrage wird an %1$s gesendet, zusammen mit Ihrem Standort. \n \nPersönliche Informationen werden nicht gesammelt, sondern nur Suchdaten, die zur Verbesserung der Suche benötigt werden.</string>
     <string name="send_search_query">Suchanfrage senden?</string>
     <string name="shared_string_world">Welt</string>
     <string name="increase_search_radius_to">Vergrößerung des Suchradius auf %1$s</string>
@@ -2774,7 +2770,7 @@
     <string name="avoid_pt_types">Verkehrsmittel ausschließen …</string>
     <string name="shared_string_walk">Gehen</string>
     <string name="save_poi_value_exceed_length">Kürzen Sie die Länge des Tags „%s“ auf weniger als 255 Zeichen.</string>
-    <string name="save_poi_value_exceed_length_title">Länge des Wertes „%s“</string>
+    <string name="save_poi_value_exceed_length_title">Länge des „%s“ Wertes</string>
     <string name="quick_action_day_night_mode">%s Modus</string>
     <string name="routing_attr_avoid_sett_name">Keine Pflastersteine</string>
     <string name="routing_attr_avoid_sett_description">Vermeidet Pflastersteine</string>
@@ -2908,7 +2904,7 @@
     <string name="last_launch_crashed">Der letzte Start von OsmAnd ist fehlgeschlagen. Bitte helfen Sie uns, OsmAnd zu verbessern, indem Sie uns über diesen Fehler informieren.</string>
     <string name="release_3_4">• App-Profile: Benutzerdefiniertes Profil nach den eigenen Bedürfnissen mit benutzerdefiniertem Symbol und in eigener Farbe anlegen. \n \n• Benutzerdefinierte Standard- und Min/Max-Geschwindigkeiten für jedes Profil jetzt möglich \n \n• Widgets mit aktuellen Koordinaten hinzugefügt \n \n• Optionen für die Anzeige des Kompasses auf der Karte mit einem Radiuslineal ergänzt \n \n• Track-Aufnahmen im Hintergrund korrigiert \n \n• Verbesserte Kartendownloads im Hintergrund \n \n• Option „Bildschirm einschalten“ wieder hinzugefügt \n \n• Die Sprachauswahl in Wikipedia wurde korrigiert \n \n• Das Verhalten der Kompasstaste während der Navigation wurde korrigiert \n \n• Weitere Fehlerbehebungen</string>
     <string name="app_mode_monowheel">Einreifen</string>
-    <string name="app_mode_scooter">Motorroller</string>
+    <string name="app_mode_scooter">Roller</string>
     <string name="precision_hdop_and_vdop">Horizontale Genauigkeit: %1$s, vertikal: %2$s</string>
     <string name="precision_hdop">Horizontale Genauigkeit: %s</string>
     <string name="routing_attr_allow_skating_only_name">Nur Skating-Routen zulassen</string>
@@ -2993,11 +2989,11 @@
     <string name="pref_selected_by_default_for_profiles">Für Profile wird als Vorgabe diese Einstellung gewählt: %s</string>
     <string name="change_default_settings">Einstellung ändern</string>
     <string name="discard_changes">Änderung verwerfen</string>
-    <string name="apply_to_current_profile">Nur auf Profil „%1$s“ anwenden</string>
+    <string name="apply_to_current_profile">Nur anwenden auf \"%1$s\\</string>
     <string name="apply_to_all_profiles">Auf alle Profile anwenden</string>
     <string name="analytics_pref_title">Analyseinstrumente</string>
     <string name="turn_screen_on_info">Karte während der Navigation auf dem Sperrbildschirm anzeigen.</string>
-    <string name="route_parameters_info">Einstellungen für die Routenplanung des gewählten Profils „%1$s“.</string>
+    <string name="route_parameters_info">Einstellungen für die Routenplanung des gewählten Profils %1$s</string>
     <string name="wake_time">Timeout (Abschaltzeit) nach dem Aufwachen</string>
     <string name="units_and_formats">Einheiten und Formate</string>
     <string name="map_look_descr">Kartendarstellung</string>
@@ -3029,7 +3025,7 @@
     <string name="voice_announces">Sprachansagen</string>
     <string name="screen_alerts">Bildschirmwarnungen</string>
     <string name="route_parameters_descr">Routenparameter konfigurieren</string>
-    <string name="application_profile_changed">App-Profil geändert zu „%s“</string>
+    <string name="application_profile_changed">App-Profil geändert zu \"%s\"</string>
     <string name="logcat_buffer">Logcat-Puffer</string>
     <string name="plugins_settings">Plugin-Einstellungen</string>
     <string name="shared_string_by_default">Standardmäßig</string>
@@ -3178,7 +3174,7 @@
     <string name="live_monitoring_adress">Webadresse</string>
     <string name="monitoring_notification">Benachrichtigung</string>
     <string name="monitoring_min_speed">Mindestgeschwindigkeit</string>
-    <string name="monitoring_min_accuracy">Minimale Genauigkeit</string>
+    <string name="monitoring_min_accuracy">Mindestgenauigkeit</string>
     <string name="monitoring_min_distance">Minimale Verschiebung</string>
     <string name="reset_plugin_to_default">Plugin-Einstellungen auf Voreinstellung zurücksetzen</string>
     <string name="osm_authorization_success">Autorisierung ist erfolgreich</string>
@@ -3410,9 +3406,7 @@
     <string name="profiles_for_action_not_found">Konnte keine solchen Profile finden.</string>
     <string name="index_item_world_basemap_detailed">Weltübersichtskarte (detailliert)</string>
     <string name="unsupported_type_error">Nicht unterstützter Typ</string>
-    <string name="ui_customization_description">Passen Sie die Menge der Elemente in „Schublade“, „Karte konfigurieren“ und „Kontextmenü“ an.
-\n
-\nDeaktivieren Sie ungenutzte Erweiterungen, um deren Steuerelemente auszublenden. %1$s.</string>
+    <string name="ui_customization_description">Passen Sie die Menge der Elemente in „Schublade“, „Karte konfigurieren“ und „Kontextmenü“ an. \n \nDeaktivieren Sie ungenutzte Erweiterungen, um deren Steuerelemente auszublenden. „%1$s“.</string>
     <string name="ui_customization_short_descr">Schubladenelemente, Kontextmenü</string>
     <string name="shared_string_drawer">Schublade</string>
     <string name="gpx_parse_error">Probleme mit einer GPX-Datei gefunden.
@@ -3437,7 +3431,7 @@
     <string name="turn_screen_on_wake_time_descr">Timeout (Abschaltzeit) des Bildschirms nach dem Aufwachen auswählen. („%1$s“, um keinen Timeout anzuwenden.)</string>
     <string name="keep_screen_on">Bildschirm eingeschaltet lassen</string>
     <string name="keep_screen_off">Bildschirm ausgeschaltet lassen</string>
-    <string name="screen_timeout_descr">Wenn „%1$s“ eingeschaltet ist, hängt die Aktivitätszeit davon ab.</string>
+    <string name="screen_timeout_descr">Wenn %1$s eingeschaltet ist, hängt die Aktivitätszeit davon ab.</string>
     <string name="pseudo_mercator_projection">Pseudo-Mercator-Projektion</string>
     <string name="one_image_per_tile">Eine Bilddatei pro Kachel</string>
     <string name="sqlite_db_file">SQLiteDB-Datei</string>
@@ -3742,7 +3736,7 @@
     <string name="routing_engine_vehicle_type_hgv">Lkw</string>
     <string name="routing_engine_vehicle_type_small_truck">Kleintransporter</string>
     <string name="routing_engine_vehicle_type_truck">Lkw</string>
-    <string name="routing_engine_vehicle_type_scooter">Motorroller</string>
+    <string name="routing_engine_vehicle_type_scooter">Roller</string>
     <string name="routing_engine_vehicle_type_racingbike">Rennrad</string>
     <string name="routing_engine_vehicle_type_mtb">Mountainbike</string>
     <string name="message_server_error">Server-Fehler: %1$s</string>
@@ -4142,14 +4136,13 @@
     <string name="copying_file">Kopieren der Datei %1$s …</string>
     <string name="from_to_with_params">Von %1$s nach %2$s</string>
     <string name="progress_complete">%1$s abgeschlossen</string>
-    <string name="storage_found_files_descr">Tippen Sie auf „%1$s“, um %2$s Dateien von „%3$s“ nach „%4$s“ zu kopieren. Dies kann einige Zeit dauern.</string>
+    <string name="storage_found_files_descr">Tippen Sie auf %1$s, um %2$s Dateien von %3$s nach %4$s zu kopieren. Dies kann einige Zeit dauern.</string>
     <string name="storage_copied_files_size">%1$s Datei(en) %2$s verarbeitet</string>
     <string name="storage_copying_files_size">Kopieren von %1$s Dateien %2$s</string>
     <string name="storage_found_files_size">%1$s Dateien %2$s gefunden</string>
     <string name="shared_storage_last_step">Sie können anschließend einen neuen Datenordner angeben.</string>
     <string name="shared_storage_third_step">Erteilen Sie die Berechtigung zum Zugriff auf den Ordner. Ohne sie kann OsmAnd keine Dateien kopieren.</string>
-    <string name="shared_storage_first_step">Drücken Sie „%1$s“.
-\nEs öffnet sich der Dateimanager, in dem Sie den Ordner osmand finden und öffnen müssen.</string>
+    <string name="shared_storage_first_step">Drücken Sie %1$s\nEs öffnet sich der Dateimanager, in dem Sie den Ordner osmand finden und öffnen müssen.</string>
     <string name="shared_storage_migration_descr">Aufgrund von Änderungen im Android-Speicherzugriff kann OsmAnd nicht mehr %1$s verwenden.
 \n
 \nKopieren Sie alle Ihre Daten in den neuen Ordner.</string>
@@ -4222,7 +4215,7 @@
     <string name="track_file_description">Tippen auf diese Aktion zeigt die verfügbaren Tracks an.</string>
     <string name="navigate_point_format_swiss_grid">Schweizer Landeskoordinaten (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">Schweizer Landeskoordinaten (CH1903+)</string>
-    <string name="always_ask_waypoint_appearance_description">Durch Tippen auf diese Aktion wird der Bildschirm „Wegpunkt hinzufügen“ geöffnet, in dem Sie Namen und Aussehen ändern können.</string>
+    <string name="always_ask_waypoint_appearance_description">Tippen auf die Aktion öffnet den Bildschirm zum Hinzufügen von Wegpunkten, in dem Sie Namen und Aussehen ändern können.</string>
     <string name="shared_string_not_used">Nicht genutzt</string>
     <string name="shared_string_used">Genutzt</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Note-Tags</string>
@@ -4241,17 +4234,17 @@
     <string name="rendering_value_omit_name">Weglassen</string>
     <string name="gpx_no_routes_title">Es gibt keine Routen</string>
     <string name="save_track_to_gpx_descrp">Automatisches Starten der Trackaufzeichnung während der Navigation und anschließendes automatisches Speichern.</string>
-    <string name="gpx_no_routes_descr">Sie können das Werkzeug „%1$s“ verwenden, um die Route der Datei hinzuzufügen.</string>
+    <string name="gpx_no_routes_descr">Sie können das Werkzeug %1$s verwenden, um die Route der Datei hinzuzufügen.</string>
     <string name="quick_action_add_route_descr">Eine Schaltfläche zum Starten einer Route in der Mitte des Bildschirms.</string>
     <string name="please_provide_group_name_message">Bitte benennen Sie die Gruppe.</string>
     <string name="exit_import">Beenden\?</string>
     <string name="import_tracks_descr">%1$s, enthält %2$s separate Tracks. Wählen Sie die zu importierenden Tracks aus.</string>
-    <string name="location_source_descr">Standardmäßig verwendet OsmAnd, wenn es von Google Play installiert wurde, %1$s zur Standortbestimmung.\n\nWenn Sie ungenaue Standortinformationen erhalten oder ein Gerät ohne %2$s verwenden, versuchen Sie, zu „%3$s“ zu wechseln</string>
+    <string name="location_source_descr">Standardmäßig verwendet OsmAnd, das von Google Play installiert wurde, %1$s zur Standortbestimmung.\n\nWenn du ungenaue Standortinformationen erhältst oder ein Gerät ohne %2$s verwendest, versuche, zu \"%3$s\\\" zu wechseln.</string>
     <string name="location_source">Standortquelle</string>
     <string name="points_selection_descr">Schließen und alle Änderungen verwerfen\?</string>
     <string name="exit_import_descr">Beenden, ohne die Änderungen zu speichern\?</string>
     <string name="select_suggested_points">Vorgeschlagene Punkte auswählen</string>
-    <string name="selected_waypoints_descr">Ausgewählte Wegpunkte werden dem Track „%1$s“ hinzugefügt</string>
+    <string name="selected_waypoints_descr">Ausgewählte Wegpunkte werden dem Track %1$s hinzugefügt</string>
     <string name="shared_string_reading_file">Datei wird gelesen …</string>
     <string name="all_groups">Alle Gruppen</string>
     <string name="list_of_groups">Gruppenliste</string>
@@ -4326,7 +4319,7 @@
     <string name="no_widgets_descr">Ein oder mehrere Widgets aus der Liste der verfügbaren Widgets hinzufügen.</string>
     <string name="no_widgets_here_yet">Noch keine Widgets vorhanden</string>
     <string name="routing_attr_freeride_policy_allow_name">Erlauben</string>
-    <string name="snackbar_page_removed">Die „Seite %1$s“ wurde entfernt.</string>
+    <string name="snackbar_page_removed">„Seite %1$s“ wurde entfernt.</string>
     <string name="routing_attr_difficulty_preference_no_preference_name">Keine Präferenz</string>
     <string name="routing_attr_difficulty_preference_advanced_name">Fortgeschrittene</string>
     <string name="available_widgets">Verfügbare Widgets</string>
@@ -4341,7 +4334,7 @@
     <string name="routing_attr_avoid_fords_name">Furten vermeiden</string>
     <string name="routing_attr_hazmat_category_description">Gefahrgutkategorie / Zugangsgenehmigungen für Gefahrgut berücksichtigen</string>
     <string name="circle_settings">Kreiseinstellungen</string>
-    <string name="map_widget_trip_recording_distance">Entfernung</string>
+    <string name="map_widget_distance">Entfernung</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Militärische Bereiche ausblenden</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Militärische Bereiche</string>
     <string name="routing_attr_hazmat_category_name">Gefahrgutkategorie</string>
@@ -4495,9 +4488,9 @@
     <string name="attach_roads_warning">Nur ein aufgezeichneter Track kann an Straßen angehängt werden.</string>
     <string name="without_profiles_changing">Ohne Profilwechsel</string>
     <string name="shared_string_only_missing">Nur fehlende</string>
-    <string name="included_in_your_current_plan">In Ihrem aktuellen „%1$s“-Plan enthalten</string>
+    <string name="included_in_your_current_plan">In Ihrem aktuellen %1$s-Plan enthalten</string>
     <string name="available_as_part_of_subscription_plan">Verfügbar im Rahmen des %1$s Abonnements.</string>
-    <string name="favorite_confirm_delete_group">Gruppe „%1$s“ und alle enthaltenen Punkte (%2$d) löschen?</string>
+    <string name="favorite_confirm_delete_group">Gruppe %1$s und alle enthaltenen Punkte (%2$d) löschen?</string>
     <string name="favorite_delete_group">Gruppe löschen</string>
     <string name="download_heightmap_maps">Höhenkarte</string>
     <string name="display_position">Positionsanzeige</string>
@@ -4535,9 +4528,7 @@
     <string name="depth_contours">Tiefenlinien</string>
     <string name="worldwide_maps">Weltweite Karten</string>
     <string name="purchases_feature_desc_cross_buy">Nutzen Sie Ihre Abonnementfunktionen auf verschiedenen Plattformen (Android/iOS/Web) ohne zusätzliche Kosten.</string>
-    <string name="ant_missing_dependency_descr">Der erforderliche Dienst „%1$s“ konnte nicht gefunden werden.
-\nSie müssen den ANT+ Plugins Service installieren oder aktualisieren.
-\nMöchten Sie dazu den Play Store aufrufen\?</string>
+    <string name="ant_missing_dependency_descr">Der erforderliche Dienst %1$s konnte nicht gefunden werden. \nSie müssen den ANT+ Plugins Service installieren oder aktualisieren. \nMöchten Sie dazu den Play Store aufrufen?</string>
     <string name="ant_missing_dependency">Fehlende Abhängigkeit</string>
     <string name="ant_go_to_store">Zum Laden gehen</string>
     <string name="ant_read_data">Daten lesen</string>
@@ -4731,7 +4722,7 @@
     <string name="share_link">Link teilen</string>
     <string name="sound_beep_simple">Signalton: einfach</string>
     <string name="sound_beep_minimal">Signalton: minimal</string>
-    <string name="weight_limit_error">Der Mindestwert ist „%1$s“ Tonnen. Verwenden Sie das Profil „%2$s“, wenn das Fahrzeuggewicht unter dem Mindestwert liegt.</string>
+    <string name="weight_limit_error">Der Mindestwert ist %1$s Tonnen. Profil %2$s verwenden, wenn das Fahrzeuggewicht unter dem Mindestwert liegt.</string>
     <string name="sound_beep_complex_loud">Signalton: komplex, laut</string>
     <string name="sound_beep_simple_loud">Signalton: einfach, laut</string>
     <string name="sound_beep_complex">Signalton: komplex</string>
@@ -4754,7 +4745,7 @@
     <string name="shared_string_inches">Zoll</string>
     <string name="inch">in</string>
     <string name="approximate_bearing">Ungefähre Peilung</string>
-    <string name="cloud_version_confirm_delete">„%1$s“ aus OsmAnd Cloud löschen\?</string>
+    <string name="cloud_version_confirm_delete">„%1$s“ aus OsmAnd Cloud löschen?</string>
     <string name="shared_string_delete_file">Datei löschen</string>
     <string name="delete_cloud_version">Cloud-Version löschen</string>
     <string name="local_version_do_not_exist">Keine lokale Version vorhanden.</string>
@@ -4790,7 +4781,7 @@
     <string name="weather_forecast">Wettervorhersage</string>
     <string name="free_maps_updates">Kostenlose Updates (Notfall)</string>
     <string name="token_is_not_valid">Token ist ungültig</string>
-    <string name="common_weight_limit_error">Der Mindestwert ist „%1$s“ %2$s. Verwenden Sie das Profil „%3$s“, wenn das Fahrzeuggewicht unter dem Mindestwert liegt.</string>
+    <string name="common_weight_limit_error">Der Mindestwert ist %1$s %2$s. Profil %3$s verwenden, wenn das Fahrzeuggewicht unter dem Mindestwert liegt.</string>
     <string name="rendering_value_defaultMedium_name">Standard (mittel)</string>
     <string name="select_layer">Ebene wählen</string>
     <string name="speak_route_deviation">Abweichung von der Route ankündigen</string>
@@ -4896,7 +4887,7 @@
     <string name="track_not_recorded">Nicht aufgezeichnet</string>
     <string name="shared_string_new_track">Neuer Track</string>
     <string name="shared_string_visible_on_map">Sichtbar auf Karte</string>
-    <string name="delete_track_folder_dialog_message">Dies löscht den Ordner „%1$s“ und alle %2$s darin enthaltenen Tracks.</string>
+    <string name="delete_track_folder_dialog_message">Dies löscht den Ordner %1$s und alle %2$s darin enthaltenen Tracks.</string>
     <string name="delete_folder">Ordner löschen</string>
     <string name="show_all_tracks_on_the_map">Alle Tracks auf der Karte anzeigen</string>
     <string name="save_track_external_sensors_data">Daten</string>
@@ -4950,7 +4941,7 @@
     <string name="free_settings_backup">Kostenlose Sicherung der Einstellungen</string>
     <string name="cache_size">Cachegröße</string>
     <string name="routing_attr_allow_via_ferrata_name">Bergroute (Klettersteig)</string>
-    <string name="release_4_5">• BLE/ANT+-Sensoren: Verbindung, Schreiben und Anzeigen empfangener Daten auf GPX überarbeitet \n \n • Kostenloses Backup für Favoriten und Einstellungen in „OsmAnd Cloud“ \n \n • Neues Format für Geländekarten mit 3D-Reliefunterstützung \n \n • Tracks-Verwaltung: aktualisierte Benutzeroberfläche, Sortierung hinzugefügt, Unterstützung verschachtelter Ordner \n \n • Android Auto: neues Startmenü für den Zugriff auf Favoriten, Tracks und POI-Kategorien \n \n • Eine Liste von Widgets für das obere/untere Bedienfeld \n \n • Neues Profil „Bahn“, ermöglicht die Berechnung von Bahnstrecken \n \n • Konturlinien funktionieren mit jeder „Kartenquelle“ \n \n • Erweiterte Liste von Standardaktionen für externe Tastaturen \n \n • Benutzerdefinierte Routing-Dateien, Optionen zum Löschen oder Überschreiben hinzugefügt \n \n • Option zu „Abweichung von der Route ankündigen“ hinzugefügt \n \n • Startbildschirm: Option „OsmAnd-Status aus Datei wiederherstellen“ hinzugefügt \n \n • „Gefährliche Materialien“-Klassen für Lkw-Navigation in Nordamerika hinzugefügt \n \n • Unterstützung von „Klettersteig“ für Fußgängerrouten hinzugefügt \n \n • „CAI“-Skala zur Schwierigkeitsklassifizierung der Routen hinzugefügt \n \n • Sprachauswahl pro App korrigiert \n \n • Unterstützung für thematische Symbole hinzugefügt \n \n • OsmAnd Cloud: Option zum Löschen eines Kontos hinzugefügt \n \n • Barrierefreiheit: Touch-Zielgröße für Schaltflächen auf 48 dpi geändert; Problem behoben, bei dem die Karten-Benutzeroberfläche für Bildschirmleseprogramme sichtbar war \n \n • Japanische Sprachansagen überarbeitet \n \n • Höhenänderung und Neigungsauswertung überarbeitet</string>
+    <string name="release_4_5">• BLE/ANT+-Sensoren: Verbindung, Schreiben und Anzeigen empfangener Daten auf GPX überarbeitet \n \n • Kostenloses Backup für Favoriten und Einstellungen in OsmAnd Cloud \n \n • Neues Format für Geländekarten mit 3D-Reliefunterstützung \n \n • Tracks-Verwaltung: aktualisierte Benutzeroberfläche, Sortierung hinzugefügt, Unterstützung verschachtelter Ordner \n \n • Android Auto: neues Startmenü für den Zugriff auf Favoriten, Tracks und POI-Kategorien \n \n • Eine Liste von Widgets für das obere/untere Bedienfeld \n \n • Neues Bahn Profil, ermöglicht die Berechnung von Bahnstrecken \n \n • Konturlinien funktionieren mit jeder Kartenquelle \n \n • Erweiterte Liste von Standardaktionen für externe Tastaturen \n \n • Benutzerdefinierte Routing-Dateien, Optionen zum Löschen oder Überschreiben hinzugefügt \n \n • Option zum Ankündigen von Routenabweichung hinzugefügt \n \n • Startbildschirm: Option „OsmAnd-Status aus Datei wiederherstellen“ hinzugefügt \n \n • Gefahrstoff-Klassen für Lkw-Navigation in Nordamerika hinzugefügt \n \n • Unterstützung von Klettersteigen für Fußgängerrouting hinzugefügt \n \n • CAI-Skala zur Schwierigkeitsklassifizierung der Routen hinzugefügt \n \n • Sprachauswahl pro App korrigiert \n \n • Unterstützung für thematische Symbole hinzugefügt \n \n • OsmAnd Cloud: Option zum Löschen eines Kontos hinzugefügt \n \n • Barrierefreiheit: Touch-Zielgröße für Schaltflächen auf 48 dpi geändert; Problem behoben, bei dem die Karten-Benutzeroberfläche für Bildschirmleseprogramme sichtbar war \n \n • Japanische Sprachansagen überarbeitet \n \n • Höhenänderung und Neigungsauswertung überarbeitet</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Raster-SQLiteDB für Relief / Hangneigung verwenden</string>
     <string name="free_ride">Freifahrt</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Sprengstoffe</string>
@@ -5090,7 +5081,7 @@
     <string name="help_article_navigation_setup_markers_navigation_name">Navigieren nach Markierungen</string>
     <string name="smart_folder_saved">Intelligenter Ordner gespeichert</string>
     <string name="help_article_widgets_markers_name">Markierungs-Widgets</string>
-    <string name="release_4_6">• Android Auto: 3D-Modus hinzugefügt \n \n• Tracks: Filter und intelligente Ordner eingeführt, Speicheroptimierung für größere Dateien \n \n• Verbesserte obere und untere Widget-Leisten, um alle Widgets unterzubringen \n \n• Verbessertes lokales Ressourcenmanagement \n \n• Anpassbare Tastenbelegung für externe Controller \n \n• Neue Widgets: „Gleitzahl“ und „Sonnenposition“ \n \n• OsmAnd Cloud: jetzt Zugriff auf gelöschte Dateien \n \n• VerbesserteTrack Einfärbung im Hangneigungsmodus mit neuem symmetrischen Gradienten \n \n• Probleme mit transparenter Statusleiste behoben \n \n• Unterstützung für ANT+-Widget „Temperatur“ hinzugefügt \n \n• Widget „Verfügbarer RAM“ eingeführt</string>
+    <string name="release_4_6">• Android Auto: 3D-Modus hinzugefügt \n \n• Tracks: Filter und intelligente Ordner eingeführt, Speicheroptimierung für größere Dateien \n \n• Verbesserte obere und untere Widget-Leisten, um alle Widgets unterzubringen \n \n• Verbessertes lokales Ressourcenmanagement \n \n• Anpassbare Tastenbelegung für externe Controller \n \n• Neue Widgets: Gleitzahl und „Sonnenposition“ \n \n• OsmAnd Cloud: jetzt Zugriff auf gelöschte Dateien \n \n• VerbesserteTrack Einfärbung im Hangneigungsmodus mit neuem symmetrischen Gradienten \n \n• Probleme mit transparenter Statusleiste behoben \n \n• Unterstützung für ANT+ Temperatur Widget hinzugefügt \n \n• Widget für verfügbaren RAM eingeführt</string>
     <string name="help_article_map_tracks_on_map_name">Tracks und Routen</string>
     <string name="help_article_navigation_routing_direct_to_point_routing_name">Punkt-zu-Punkt-Routing (Boot)</string>
     <string name="app_mode_baby_transport">Kindertransport</string>
@@ -5102,7 +5093,7 @@
     <string name="help_article_troubleshooting_track_recording_issues_name">Trackaufzeichnung</string>
     <string name="save_as_smart_folder">Als intelligenten Ordner speichern</string>
     <string name="help_article_widgets_map_buttons_name">Schaltflächen der Karte</string>
-    <string name="delete_smart_folder_dialog_message">Dies löscht den intelligenten Ordner „%1$s“. (Tracks werden nicht gelöscht.)</string>
+    <string name="delete_smart_folder_dialog_message">Dies löscht den intelligenten Ordner %1$s (Tracks werden nicht gelöscht.)</string>
     <string name="help_article_widgets_info_widgets_name">Informations-Widgets</string>
     <string name="help_article_navigation_routing_horse_routing_name">Reitrouting</string>
     <string name="help_article_widgets_name">Kartenwidgets</string>
@@ -5152,7 +5143,7 @@
     <string name="key_event_action_open_search_view">Suche öffnen</string>
     <string name="key_event_action_zoom_out">Herauszoomen</string>
     <string name="key_event_action_toggle_drower">Seitenmenü anzeigen/verbergen</string>
-    <string name="key_is_already_assigned_error">Der Schlüssel „%1$s“ ist bereits der Aktion „%2$s“ zugeordnet</string>
+    <string name="key_is_already_assigned_error">Die Taste \"%1$s\" ist bereits der Aktion \"%2$s\" zugeordnet</string>
     <string name="key_event_action_open_navigation_view">Navigationsansicht öffnen</string>
     <string name="external_input_device_title">Externes Eingabegerät</string>
     <string name="key_bindings">Tastenbelegung</string>
@@ -5168,7 +5159,7 @@
     <string name="key_event_action_next_app_profile">Nächstes App-Profil</string>
     <string name="key_event_action_activity_back_pressed">Aktivität zurückgedrückt</string>
     <string name="key_event_action_emit_navigation_hint">Navigationshinweis ausgeben</string>
-    <string name="remove_type_q">Typ „%1$s“ entfernen?</string>
+    <string name="remove_type_q">Typ %1$s entfernen?</string>
     <string name="key_event_action_move_up">Nach oben bewegen</string>
     <string name="key_event_action_move_to_my_location">Zu meinem Standort bewegen</string>
     <string name="download_to_device">Auf das Gerät herunterladen</string>
@@ -5183,7 +5174,7 @@
     <string name="key_assignments">Tastenbelegungen</string>
     <string name="topography_maps">Topografische Karten</string>
     <string name="clear_key_assignment">Tastenbelegung löschen</string>
-    <string name="clear_key_assignment_desc">Die Tastenbelegung für die ausgewählte Aktion gelöscht und auf „Keine“ gesetzt.</string>
+    <string name="clear_key_assignment_desc">Tastenkürzel für die ausgewählte Aktion wird gelöscht und gesetzt auf „Keine“.</string>
     <string name="reset_key_assignments_desc">Alle Tastenbelegungen für den ausgewählten Typ werden entfernt.</string>
     <string name="rendering_attr_showToll_name">Mautbeschränkungen anzeigen</string>
     <string name="shared_string_reassign">Neu belegen</string>
@@ -5264,7 +5255,7 @@
     <string name="routing_type_a_star_classic">A* classic</string>
     <string name="shared_sting_all_colors">Alle Farben</string>
     <string name="lang_ta_in">Tamilisch (Indien)</string>
-    <string name="release_4_7">• Neues Widget „Geschwindigkeitsmesser“, kompatibel mit Android Auto \n \n• Konfigurieren des Kartenbildschirms durch Hinzufügen mehrerer Schaltflächen für „Schnellaktionen“ \n \n• Lesbarkeit der Daten in Diagrammen verbessert \n \n• Filter nach Sensordaten für Strecken hinzugefügt \n \n• Anpassung des Aussehens für Trackgruppen verbessert \n \n• Unterstützung für zusätzliche GPX-Tags hinzugefügt \n \n• „Distanz während der Navigation“ angepasst: Wahl zwischen präzisen oder gerundeten Zahlen \n \n• Benutzeroberfläche für die Streckenauswahl vereinheitlicht \n \n• OpenStreetMap-Login auf OAuth 2.0 umgestellt</string>
+    <string name="release_4_7">- Neues Tachometer-Widget, kompatibel mit Android Auto\n\n - Konfigurieren Sie den Kartenbildschirm durch Hinzufügen mehrerer Quick-Action-Schaltflächen\n\n - Verbesserte Lesbarkeit der Daten in Diagrammen\n\n - Filter nach Sensordaten für Tracks hinzugefügt\n\n - Verbesserte Anpassung des Erscheinungsbildes für Gruppen von Tracks\n\n - Unterstützung für zusätzliche GPX-Tags hinzugefügt\n\n - Anpassen der Distanz während der Navigation, Auswahl zwischen genauen oder aufgerundeten Zahlen\n\n - Vereinheitlichte Benutzeroberfläche für die Trackauswahl\n\n - OpenStreetMap-Anmeldung auf OAuth 2.0 umgestellt</string>
     <string name="round_up">Aufrunden</string>
     <string name="precise">Präzise</string>
     <string name="distance_during_navigation">Entfernung während der Navigation</string>
@@ -5306,7 +5297,7 @@
     <string name="missing_maps_header">Fehlende oder veraltete Karten</string>
     <string name="getting_list_of_required_maps">Beschaffung einer Liste der benötigten Karten…</string>
     <string name="route_line_use_coloring_altitude">Die Routenlinie ist nach der Höhenlage eingefärbt.</string>
-    <string name="delete_actions_button_confirmation">Sind Sie sicher, dass Sie „%1$s“ mit allen hinzugefügten Aktionen löschen möchten?</string>
+    <string name="delete_actions_button_confirmation">Sind Sie sicher, dass Sie %1$s mit allen hinzugefügten Aktionen löschen möchten?</string>
     <string name="visualized_by">Visualisiert von</string>
     <string name="wall_color">Wandfarbe</string>
     <string name="track_line">Track-Linie</string>
@@ -5340,7 +5331,7 @@
     <string name="no_assigned_keys">Keine zugewiesenen Tasten</string>
     <string name="shared_string_key">Taste</string>
     <string name="new_key_assignment">Neue Tastenzuweisung</string>
-    <string name="key_name_pattern">Taste „%1$s“</string>
+    <string name="key_name_pattern">Taste \"%1$s\\</string>
     <string name="clear_key_assignment_summary">Tastenzuweisung für die ausgewählte Aktion wird gelöscht.</string>
     <string name="key_assignment_add_action">Aktion hinzufügen</string>
     <string name="clear_all_key_shortcuts_summary">Alle Tastenzuweisungen für den ausgewählten Typ werden gelöscht.</string>
@@ -5583,7 +5574,7 @@
     <string name="connect_obd_instructions_step1">Den Scanner an den OBD-II-Anschluss Ihres Fahrzeugs anschließen.</string>
     <string name="connect_obd_instructions_step2">Den Motor Ihres Fahrzeugs einschalten</string>
     <string name="learn_more_about_obd_sensors">Mehr über Sensoren erfahren.</string>
-    <string name="connect_obd_instructions_step4">Auf „Verbinden“ tippen und den Scanner aus der Liste auswählen.</string>
+    <string name="connect_obd_instructions_step4">Auf „%1$s“ tippen und den Scanner aus der Liste auswählen.</string>
     <string name="connect_obd_instructions_title">OsmAnd unterstützt Bluetooth-Verbindungen zu OBD-II-Scannern.</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
     <string name="obd_vehicle_info">Fahrzeuginformation</string>
@@ -5683,4 +5674,21 @@
     <string name="shared_string_interpolation">Interpolation</string>
     <string name="location_interpolation_percent">Prozentualer Anteil der Standortinterpolation</string>
     <string name="selected_delayed_profile">Ausgewähltes Profil \"%s\"</string>
+    <string name="calculating_indication_message">Berechne …</string>
+    <string name="calculate_size">Berechne Größe</string>
+    <string name="default_buttons_size_original_description">Jede Taste würde ihre eigene Größe behalten.</string>
+    <string name="default_buttons_corners_original_description">Jede Schaltfläche würde ihren eigenen Eckradius behalten.</string>
+    <string name="default_buttons_opacity_original_description">Jede Schaltfläche würde ihre eigene Transparenz behalten.</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Kletterrouten</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Kletterrouten anzeigen</string>
+    <string name="display_distance_to_first_intermediate_summary">Zeigt zuerst die Zeit und Entfernung für den nächsten Halt an. Schalte um, um immer Details zum Ziel anzuzeigen.</string>
+    <string name="display_distance_to_first_intermediate">Zeige Routendetails zum nächsten Halt</string>
+    <string name="popular_places_nearby">Beliebte Orte in der Nähe</string>
+    <string name="recently_visited">Kürzlich besucht</string>
+    <string name="shared_string_avg_altitude">Durchschnittliche Höhe</string>
+    <string name="shared_string_avg_speed">Min. Geschwindigkeit</string>
+    <string name="shared_string_length">Länge</string>
+    <string name="map_widget_route_information">Routeninformationen</string>
+    <string name="shared_string_default_view">Standardansicht</string>
+    <string name="map_widget_route_information_desc">Zeigt die geschätzte Ankunftszeit, die verbleibende Reisezeit und die Distanz für die aktuelle Navigationsroute an.</string>
 </resources>

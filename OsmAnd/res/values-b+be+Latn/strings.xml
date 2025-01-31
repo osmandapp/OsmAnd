@@ -102,9 +102,6 @@
     <string name="voice_provider">Hałasavyja padkazkі</string>
     <string name="monitoring_settings">Zapіs padarožža</string>
     <string name="monitoring_settings_descr">Nalady zapisu vašych padarožžaŭ.</string>
-    <string name="record_plugin_description">Moduĺ aktyvuje funkcyi dlia zapisu i zachoŭvannia vašych sliadoŭ uručnuju naciskam na vidžet zapisu GPX na ekranie mapy, abo taksama aŭtamatyčna zapisvaje ŭsie vašy maršruty navihacyi ŭ fajl GPX. 
-\n 
-\nZapisanymi sliadami možna padzialicca z vašymi siabrami abo vykarystoŭvać ich dlia adsylki ŭ OSM. Spartsmieny mohuć vykarystoŭvać zapisanyja sliady dlia kantroliu za treniroŭkami. Niekatory bazavy analiz trekaŭ moža być vykanany niepasredna ŭ OsmAnd, napryklad, čas prachodžannia kruhu, siaredniaja chutkasć i h.d., treki, viadoma, pazniej taksama mohuć być praanalizavany ŭ specyjaĺnych instrumientach analizu inšych vytvorcaŭ.</string>
     <string name="record_plugin_name">Zapіs padarožža</string>
     <string name="int_hour">h</string>
     <string name="duration">Praciahłaść</string>
@@ -483,9 +480,6 @@
     <string name="map_widget_audionotes">Aŭdyjo-natatkі</string>
     <string name="audionotes_plugin_description">Modul dla stvareńnia aŭdyjo/vіdea-natatak padčas padarožžaŭ, z dapamohaj vykarystańnia knopkі na ekranie mapy abo praz kantekstnaje meniu na lubym miescy na mapie.</string>
     <string name="audionotes_plugin_name">Aŭdyjo/vіdea-natatkі</string>
-    <string name="srtm_plugin_description">Hety moduĺ pakazvaje jak izalinii vyšyń tak i reĺjef na standartnych mapach OsmAnd. Heta mahčyma spatrebiacca spartsmienam, turystam, padarožnikam i ŭsim, chto cikavicca strukturaj reĺjefu miascovasci. (Zviarnicie ŭvahu, što dadzienyja vyšyń i reĺjefu asobnyja, dadatkova dastupnyja da spampoŭki, paslia aktyvacyi modulia.)
-\n 
-\nHlabaĺnyja dadzienyja (pamiž 70 ° na poŭnačy i 70 ° na poŭdni) hruntujucca na vymiarenniach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), dadzienych instrumienta vizualizacyi Terra, flahmanskaha spadarožnika sistemy nazirannia Ziamli ad NASA. ASTER — heta vynik sumiesnaj pracy NASA, ministerstva ekanomiki Japonii, ministerstva handliu i pramyslovaści Japonii (METI), ahienctva kasmičnych sistem Japonii (J-spacesystems).</string>
     <string name="srtm_plugin_name">Іzalinіі vyšyń</string>
     <string name="download_select_map_types">Іnšyja mapy</string>
     <string name="download_roads_only_item">Tolkі darohі</string>
@@ -725,7 +719,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="plugins_screen">Dadatkovyja moduli</string>
     <string name="prefs_plugins_descr">Moduli aktyvujuć dadatkovyja nalady i mahčymasci.</string>
     <string name="prefs_plugins">Dadatkovyja moduli</string>
-    <string name="osm_editing_plugin_description">Z dapamohaj hetaha modula OsmAnd moža być vykarystany dla palapšeńnia OSM praz stvareńnie abo źmienu abjektaŭ OSM POI, adkryćcio abo kamientujučy OSM natatki, a taksama adsyłać zapіsanyja GPX-fajły. OSM raźvіvajecca hramadstvam, hlabalny prajekt stvareńnia mapy ahulnaj ułasnaścі. Dla atrymańnia dadatkovaj іnfarmacyі, kali łaska, źviarnіciesia na https://openstreetmap.org. Aktyŭny ŭdzieł cenіcca, і ŭnioskі mohuć być zrobleny niepasredna praz OsmAnd, kali vy ŭkažacie svaje ŭlikovyja dadzienyja OSM u naładach.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Viektarnyja mapy mohuć adlustroŭvacca chutčej. Padtrymlivajecca nie ŭsіmі pryładamі.</string>
     <string name="play_commands_of_currently_selected_voice">Abrać holas i prajhrać padkazki</string>
     <string name="debugging_and_development">Dla raspracoŭščykaŭ OsmAnd</string>
@@ -1771,15 +1764,8 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
 \n 
 \nHety vyhliad moža być deaktyvavany tut, abo šliacham zmieny «Styliu mapy» u razdzielie «Nalady mapy» pa žadańni.</string>
     <string name="plugin_nautical_name">Marskіja mapy</string>
-    <string name="plugin_nautical_descr">Aktyvacyja hetaha styliu mianiaje vyhliad mapy na Marskuju, na jakoj pakazvajucca ŭsie navihacyjnyja znaki i simvaly. 
-\n
-\nFajl z dadzienymi źmiaščaje ŭsie navihacyjnyja simvaly ŭ vyhliadzie adzinaha fajlu z nazvaj \"World seamarks\". 
-\n
-\nHety styĺ moža być skasavany šliacham jaho vykliučeńnia tut abo źmienaju ŭ punkcie \"Styĺ mapy\" mieniu \"Nalady mapy\" na patrebny.</string>
     <string name="plugin_ski_name">Łyžnyja mapy</string>
-    <string name="plugin_ski_descr">Moduĺ dlia OsmAnd daje vam dostup da dadzienych ab harnalyžnych trasach, maršrutach dlia biehavych lyž, aĺpijskich spuskach, funikuliorach i harnalyžnych pad\'jomnikach. Maršruty i spuski adznačany roznymi kolierami ŭ zaliežnasci ad ich skladanasci i namaliavanyja z vykarystanniem admyslovaha «zimovaha» styliu mapy, jaki zakliučajecca ŭ tym, što vykarystoŭvajucca «sniežnyja» koliery zimovaha piejzažu. 
-\n 
-\nU vypadku aktyvacyi hetaha vidu, styĺ mapy mianiajecca na «Winter and ski», pakazvajučy ŭsio detali piejzažu tak, jak jany vyhliadajuć zimoj. Taki (zimovy) vyhliad moža być admienieny aĺbo šliacham deaktyvacyi tut, aĺbo kali vy pamianiajecie «Styĺ mapy» u mieniu «Nalada mapy» na žadany vyhliad.</string>
+    <string name="plugin_ski_descr">Moduĺ dlia OsmAnd daje vam dostup da dadzienych ab harnalyžnych trasach, maršrutach dlia biehavych lyž, aĺpijskich spuskach, funikuliorach i harnalyžnych pad\'jomnikach. Maršruty i spuski adznačany roznymi kolierami ŭ zaliežnasci ad ich skladanasci i namaliavanyja z vykarystanniem admyslovaha «zimovaha» styliu mapy, jaki zakliučajecca ŭ tym, što vykarystoŭvajucca «sniežnyja» koliery zimovaha piejzažu. \n \nU vypadku aktyvacyi hetaha vidu, styĺ mapy mianiajecca na «Winter and ski», pakazvajučy ŭsio detali piejzažu tak, jak jany vyhliadajuć zimoj. Taki (zimovy) vyhliad moža być admienieny aĺbo šliacham deaktyvacyi tut, aĺbo kali vy pamianiajecie «Styĺ mapy» u mieniu «Nalada mapy» na žadany vyhliad.</string>
     <string name="rename_failed">Pierajmienavannie nie atrymalasia.</string>
     <string name="days_behind">d. tamu abnaŭlali</string>
     <string name="back_to_map">Viarnucca da mapy</string>
@@ -2700,8 +2686,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="coord_input_save_as_track_descr">Vy dadali %1$s kropak. Uviadzicie nazvu fajla i nacisnicie «zachavać».</string>
     <string name="point_deleted">Kropka %1$s vydalienaja</string>
     <string name="shared_string_world">Sviet</string>
-    <string name="send_search_query_description">My adpravim vaš pašukovy zapyt «%1$s», a taksama vašaje miescaznachodžannie. \n
-        \n Zbirajucca toĺki niepierasanaĺnyja danyja, danyja pošuku vykarystoŭvajucca toĺki dlia taho, kab paliepšyć alharytm pošuku.</string>
+    <string name="send_search_query_description">My adpravim vaš pašukovy zapyt «%1$s», a taksama vašaje miescaznachodžannie. \n \n Zbirajucca toĺki niepierasanaĺnyja danyja, danyja pošuku vykarystoŭvajucca toĺki dlia taho, kab paliepšyć alharytm pošuku.</string>
     <string name="send_search_query">Adpravić pašukovy zapyt?</string>
     <string name="increase_search_radius_to">Pavialičyć radyus pošuku da %1$s</string>
     <string name="thank_you_for_feedback">Dziakuj za Vaš vodhuk</string>

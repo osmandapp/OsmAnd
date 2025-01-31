@@ -877,7 +877,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			dualPoint.setDistanceToEnd(reverse, hctx.distanceToEnd(reverse, dualPoint));
 			dualPoint.setCostParentRt(reverse, negCost, null, negCost);
 			pnts.put(dualPoint.index, dualPoint);
-
 			return pnts;
 		}
 		int savedMaxVisited = hctx.rctx.config.MAX_VISITED;
@@ -901,9 +900,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			TLongSet set = new TLongHashSet();
 			for (FinalRouteSegment o : frs.all) {
 				// duplicates are possible as alternative routes
-				long pntId = calculateRoutePointInternalId(o.getRoad().getId(),
-						reverse ? o.getSegmentEnd() : o.getSegmentStart(),
-						reverse ? o.getSegmentStart() : o.getSegmentEnd());
+				int startSegment = reverse ? o.getSegmentEnd() : o.getSegmentStart();
+				int endSegment = reverse ? o.getSegmentStart() : o.getSegmentEnd();
+				long pntId = calculateRoutePointInternalId(o.getRoad().getId(), startSegment, endSegment);
 				if (set.add(pntId)) {
 					T pnt = hctx.pointsByGeo.get(pntId);
 					if (pnt == null) {
@@ -927,7 +926,12 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 						int preciseX = reverse? hctx.startX : hctx.endX;
 						o.distanceFromStart += planner.calculatePreciseStartTime(hctx.rctx, preciseX, preciseY, o);
 					} else {
-						o.distanceFromStart += planner.calcRoutingSegmentTimeOnlyDist(hctx.rctx.getRouter(), o) / 2;
+						float obstacle = hctx.rctx.getRouter().defineRoutingObstacle(
+								o.getRoad(), o.getSegmentStart(), o.getSegmentStart() > o.getSegmentEnd());
+						if (obstacle < 0) {
+							continue;
+						}
+						o.distanceFromStart += planner.calcRoutingSegmentTimeOnlyDist(hctx.rctx.getRouter(), o) / 2 + obstacle;
 					}
 					if (pnt.rt(reverse).rtCost != 0) {
 						throw new IllegalStateException();

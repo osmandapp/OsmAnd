@@ -393,7 +393,7 @@
     <string name="poi_cricket">Крикет</string>
     <string name="poi_croquet">Крокет</string>
     <string name="poi_cycling">Велосипедный спорт;Велоспорт</string>
-    <string name="poi_diving">Прыжки в воду</string>
+    <string name="poi_diving">Дайвинг</string>
     <string name="poi_scuba_diving">Плавание с аквалангом</string>
     <string name="poi_dog_racing">Собачьи бега</string>
     <string name="poi_equestrian">Верховая езда</string>
@@ -696,7 +696,7 @@
     <string name="poi_base">Бейсджампинг</string>
     <string name="poi_bmx">Веломотокросс</string>
     <string name="poi_canadian_football">Канадский футбол</string>
-    <string name="poi_surfing">Серфинг</string>
+    <string name="poi_surfing">Сёрфинг</string>
     <string name="poi_historic_cannon">Историческая пушка</string>
     <string name="poi_harbour">Гавань</string>
     <string name="poi_attraction_big_wheel">Колесо обозрения</string>
@@ -1386,9 +1386,9 @@
     <string name="poi_outdoor_seating_patio">Места на открытом воздухе: патио</string>
     <string name="poi_cocktails">Коктейли</string>
     <string name="poi_cocktails_yes">Есть;Коктейли</string>
-    <string name="poi_second_hand_yes">Подержанный товар</string>
+    <string name="poi_second_hand_yes">Да</string>
     <string name="poi_second_hand_no">Подержанный товар отсутствует</string>
-    <string name="poi_second_hand_only">Только подержанный товар</string>
+    <string name="poi_second_hand_only">Только</string>
     <string name="poi_service_parts">Запчасти</string>
     <string name="poi_service_dealer">Дилер</string>
     <string name="poi_service_repair">Ремонт</string>
@@ -3444,7 +3444,7 @@
     <string name="poi_flare">Газовый факел</string>
     <string name="poi_rescue_box">Спасательный ящик</string>
     <string name="poi_climbing_crag_filter">Место для скалолазания</string>
-    <string name="poi_climbing_crag">Да</string>
+    <string name="poi_climbing_crag">Место для скалолазания</string>
     <string name="poi_hazard_additional_erosion">Опасность: эрозия</string>
     <string name="poi_hazard_additional_rockfall">Опасность: камнепад</string>
     <string name="poi_hazard_additional_nuclear">Опасность: радиация</string>
@@ -4409,4 +4409,15 @@
     <string name="poi_border_zone">Пограничная зона</string>
     <string name="poi_lock_height">Высота шлюза</string>
     <string name="poi_assembly_point">Место сбора;Пункт сбора</string>
+    <string name="poi_route_activity_type_surfing">Сёрфинг</string>
+    <string name="poi_route_activity_type_canoe">Каноэ</string>
+    <string name="poi_route_activity_type_fitness">Фитнес</string>
+    <string name="poi_route_activity_type_horse_riding">Езда на лошади</string>
+    <string name="poi_route_activity_type_mushrooms_picking">Сбор грибов</string>
+    <string name="poi_us_maps_recreation_area_activity_surfing">Сёрфинг</string>
+    <string name="poi_camp_site_basic">Простой</string>
+    <string name="poi_camp_site_standard">Обычный</string>
+    <string name="poi_camp_site_serviced">Обслуживаемый</string>
+    <string name="poi_camp_site_deluxe">Продвинутый</string>
+    <string name="poi_route_activity_type_diving">Дайвинг</string>
 </resources>

@@ -52,7 +52,7 @@ public class ConfigureOtherCard extends MapBaseCard {
 		ConfigureButtonsCard.setupButton(button, getString(R.string.display_position),
 				getString(mapFocus.getTitleId()), mapFocus.getIconId(), true, nightMode);
 
-		AndroidUiHelper.updateVisibility(button, app.useOpenGlRenderer());
+		AndroidUiHelper.updateVisibility(button, true);
 		AndroidUiHelper.updateVisibility(button.findViewById(R.id.short_divider), true);
 	}
 

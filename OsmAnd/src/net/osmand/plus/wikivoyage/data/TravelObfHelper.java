@@ -50,6 +50,8 @@ import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.plus.Version;
+import net.osmand.plus.resources.AmenityIndexRepository;
+import net.osmand.plus.resources.AmenityIndexRepositoryBinary;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -72,6 +74,7 @@ import net.osmand.search.core.SearchSettings;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.RouteActivityHelper;
+import net.osmand.shared.gpx.primitives.Link;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -131,6 +134,8 @@ public class TravelObfHelper implements TravelHelper {
 			"avg_speed", "min_speed", "max_speed", "time_moving", "time_moving_no_gaps", "time_span", "time_span_no_gaps"
 	);
 
+	public static final String TAG_URL = "url";
+	public static final String TAG_URL_TEXT = "url_text";
 	public static final String WPT_EXTRA_TAGS = "wpt_extra_tags";
 	private static final String METADATA_EXTRA_TAGS = "metadata_extra_tags";
 	private static final String EXTENSIONS_EXTRA_TAGS = "extensions_extra_tags";
@@ -180,7 +185,7 @@ public class TravelObfHelper implements TravelHelper {
 			do {
 				if (foundAmenities.size() - foundAmenitiesIndex < ARTICLES_PER_PAGE) {
 					LatLon location = app.getMapViewTrackingUtilities().getMapLocation();
-					for (BinaryMapIndexReader reader : getReaders()) {
+					for (BinaryMapIndexReader reader : getTravelReaders()) {
 						try {
 							searchAmenity(foundAmenities, location, reader, searchRadius, -1, ROUTE_ARTICLE, lang);
 							searchAmenity(foundAmenities, location, reader, searchRadius / 5, 15, ROUTE_TRACK, null);
@@ -240,7 +245,7 @@ public class TravelObfHelper implements TravelHelper {
 		int searchRadius = ARTICLE_SEARCH_RADIUS;
 		TravelGpx travelGpx = null;
 		do {
-			for (BinaryMapIndexReader reader : getReaders()) {
+			for (BinaryMapIndexReader reader : getAmenityReaders()) {
 				try {
 					searchAmenity(foundAmenities, location, reader, searchRadius, 15, ROUTE_TRACK, null);
 				} catch (Exception e) {
@@ -396,7 +401,7 @@ public class TravelObfHelper implements TravelHelper {
 
 	@Override
 	public boolean isAnyTravelBookPresent() {
-		return !Algorithms.isEmpty(getReaders());
+		return !Algorithms.isEmpty(getTravelReaders());
 	}
 
 	@NonNull
@@ -420,7 +425,7 @@ public class TravelObfHelper implements TravelHelper {
 		NameStringMatcher matcher = phrase.getFirstUnknownNameStringMatcher();
 		List<WikivoyageSearchResult> empty = new ArrayList<>();
 
-		for (BinaryMapIndexReader reader : getReaders()) {
+		for (BinaryMapIndexReader reader : getTravelReaders()) {
 			if (requestNumber != reqNumber) {
 				return empty;
 			}
@@ -654,7 +659,7 @@ public class TravelObfHelper implements TravelHelper {
 	private TravelArticle getParentArticleByTitle(String title, String lang) {
 		TravelArticle article = null;
 		List<Amenity> amenities = new ArrayList<>();
-		for (BinaryMapIndexReader reader : getReaders()) {
+		for (BinaryMapIndexReader reader : getTravelReaders()) {
 			try {
 				SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
 						0, 0, title, 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, getSearchFilter(ROUTE_ARTICLE),
@@ -753,7 +758,7 @@ public class TravelObfHelper implements TravelHelper {
 
 	private void readGpxFile(@NonNull TravelArticle article, @Nullable GpxReadCallback callback) {
 		if (!article.gpxFileRead) {
-			new GpxFileReader(article, callback, getReaders()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			new GpxFileReader(article, callback, getAmenityReaders()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		} else if (callback != null) {
 			callback.onGpxFileRead(article.gpxFile);
 		}
@@ -764,7 +769,7 @@ public class TravelObfHelper implements TravelHelper {
 		TravelArticle article = null;
 		boolean isDbArticle = articleId.file != null && articleId.file.getName().endsWith(IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT);
 		List<Amenity> amenities = new ArrayList<>();
-		for (BinaryMapIndexReader reader : getReaders()) {
+		for (BinaryMapIndexReader reader : getTravelReaders()) {
 			try {
 				if (articleId.file != null && !articleId.file.equals(reader.getFile()) && !isDbArticle) {
 					continue;
@@ -819,7 +824,7 @@ public class TravelObfHelper implements TravelHelper {
 		long lastModified = savedArticle.getLastModified();
 		TravelArticleIdentifier finalArticleId = articleId;
 		SearchRequest<Amenity> req = null;
-		for (BinaryMapIndexReader reader : getReaders()) {
+		for (BinaryMapIndexReader reader : getTravelReaders()) {
 			try {
 				if (articleId.file != null && articleId.file.equals(reader.getFile())) {
 					if (lastModified == reader.getFile().lastModified()) {
@@ -868,7 +873,7 @@ public class TravelObfHelper implements TravelHelper {
 			}
 		}
 		if (amenities.isEmpty() && !Algorithms.isEmpty(articleId.title)) {
-			for (BinaryMapIndexReader reader : getReaders()) {
+			for (BinaryMapIndexReader reader : getTravelReaders()) {
 				try {
 					req = getEqualsTitleRequest(articleId, lang, amenities, reader);
 					req.setBBoxRadius(articleId.lat, articleId.lon, SAVED_ARTICLE_SEARCH_RADIUS);
@@ -883,7 +888,7 @@ public class TravelObfHelper implements TravelHelper {
 			}
 		}
 		if (amenities.isEmpty()) {
-			for (BinaryMapIndexReader reader : getReaders()) {
+			for (BinaryMapIndexReader reader : getTravelReaders()) {
 				try {
 					req = BinaryMapIndexReader.buildSearchPoiRequest(0, 0,
 							Algorithms.emptyIfNull(articleId.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
@@ -988,7 +993,7 @@ public class TravelObfHelper implements TravelHelper {
 			top = (int) rect.top;
 			bottom = (int) rect.bottom;
 		}
-		for (BinaryMapIndexReader reader : getReaders()) {
+		for (BinaryMapIndexReader reader : getTravelReaders()) {
 			try {
 				SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
 						x, y, title, left, right, top, bottom, getSearchFilter(ROUTE_ARTICLE),
@@ -1021,9 +1026,17 @@ public class TravelObfHelper implements TravelHelper {
 		return article;
 	}
 
-	private List<BinaryMapIndexReader> getReaders() {
+	private List<BinaryMapIndexReader> getTravelReaders() {
 		if (!app.isApplicationInitializing()) {
 			return app.getResourceManager().getTravelRepositories();
+		} else {
+			return new ArrayList<>();
+		}
+	}
+
+	private List<BinaryMapIndexReader> getAmenityReaders() {
+		if (!app.isApplicationInitializing()) {
+			return app.getResourceManager().getAmenityReaders(true);
 		} else {
 			return new ArrayList<>();
 		}
@@ -1154,7 +1167,14 @@ public class TravelObfHelper implements TravelHelper {
 					if (amenity.isRouteTrack()) {
 						if (!isAlreadyProcessed) {
 							isAlreadyProcessed = true;
-							reconstructGpxTagsFromAmenityType(amenity, gpxFileExtensions);
+							reconstructActivityFromAmenity(amenity, gpxFileExtensions);
+							amenity.getNamesMap(true).forEach((lang, value) ->
+									{
+										if (!"ref".equals(lang) && !"sym".equals(lang)) {
+											gpxFileExtensions.put("name:" + lang, value);
+										}
+									}
+							);
 							for (String tag : amenity.getAdditionalInfoKeys()) {
 								String value = amenity.getAdditionalInfo(tag);
 								if (tag.startsWith(OBF_POINTS_GROUPS_PREFIX)) {
@@ -1192,7 +1212,7 @@ public class TravelObfHelper implements TravelHelper {
 		};
 	}
 
-	private void reconstructGpxTagsFromAmenityType(Amenity amenity, Map<String, String> gpxFileExtensions) {
+	private void reconstructActivityFromAmenity(Amenity amenity, Map<String, String> gpxFileExtensions) {
 		if (amenity.isRouteTrack() && amenity.getSubType() != null) {
 			String subType = amenity.getSubType();
 			if (subType.startsWith(ROUTES_PREFIX)) {
@@ -1267,8 +1287,17 @@ public class TravelObfHelper implements TravelHelper {
 			gpxFile = new GpxFile(title, article.getLang(), article.getContent());
 		}
 
+		if (gpxFileExtensions.containsKey(TAG_URL) && gpxFileExtensions.containsKey(TAG_URL_TEXT)) {
+			gpxFile.getMetadata().setLink(new Link(gpxFileExtensions.get(TAG_URL), gpxFileExtensions.get(TAG_URL_TEXT)));
+			gpxFileExtensions.remove(TAG_URL_TEXT);
+			gpxFileExtensions.remove(TAG_URL);
+		} else if (gpxFileExtensions.containsKey(TAG_URL)) {
+			gpxFile.getMetadata().setLink(new Link(gpxFileExtensions.get(TAG_URL)));
+			gpxFileExtensions.remove(TAG_URL);
+		}
+
 		if (!Algorithms.isEmpty(article.getImageTitle())) {
-			gpxFile.getMetadata().setLink(TravelArticle.getImageUrl(article.getImageTitle(), false));
+			gpxFile.getMetadata().setLink(new Link(TravelArticle.getImageUrl(article.getImageTitle(), false)));
 		}
 
 		if (!segmentList.isEmpty()) {

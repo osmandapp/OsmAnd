@@ -2,19 +2,19 @@ package net.osmand.plus.download.local;
 
 import static net.osmand.plus.download.local.LocalItemType.LIVE_UPDATES;
 import static net.osmand.plus.download.local.LocalItemType.OTHER;
+import static net.osmand.plus.download.local.LocalItemType.TILES_DATA;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.OnResultCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.local.dialogs.LiveGroupItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -22,11 +22,13 @@ public class CollectLocalIndexesAlgorithm {
 
 	private final OsmandApplication app;
 	private final CollectLocalIndexesRules rules;
-	private final List<LocalItem> separateSizeCalculationItems = new ArrayList<>();
+	private final OnResultCallback<LocalItem> onLocalItemAddedCallback;
 
-	private CollectLocalIndexesAlgorithm(@NonNull CollectLocalIndexesRules rules) {
+	private CollectLocalIndexesAlgorithm(@NonNull CollectLocalIndexesRules rules,
+	                                     @NonNull OnResultCallback<LocalItem> onLocalItemAddedCallback) {
 		this.app = rules.getApp();
 		this.rules = rules;
+		this.onLocalItemAddedCallback = onLocalItemAddedCallback;
 	}
 
 	@NonNull
@@ -42,25 +44,19 @@ public class CollectLocalIndexesAlgorithm {
 	                          @NonNull File directory, boolean addUnknown) {
 		addUnknown = rules.shouldAddUnknown(directory, addUnknown);
 		File[] listFiles = directory.listFiles();
-		if (!Algorithms.isEmpty(listFiles) && !shouldSkipDirectory(directory)) {
+		if (!Algorithms.isEmpty(listFiles)) {
 			for (File file : listFiles) {
-				addFile(categories, file, addUnknown);
+				LocalItemType type = addFile(categories, file, addUnknown);
 
-				if (file.isDirectory()) {
+				if (file.isDirectory() && type != TILES_DATA) {
 					collectFiles(categories, file, addUnknown);
-				} else {
-					calculateSizeSeparatelyIfNeeded(file);
 				}
 			}
 		}
 	}
 
-	private boolean shouldSkipDirectory(@NonNull File directory) {
-		LocalItem localItem = getSeparatelyCalculationSizeItem(directory);
-		return localItem != null && localItem.isSizeCalculationLimitReached();
-	}
-
-	private void addFile(@NonNull Map<CategoryType, LocalCategory> categories, @NonNull File file, boolean addUnknown) {
+	@Nullable
+	private LocalItemType addFile(@NonNull Map<CategoryType, LocalCategory> categories, @NonNull File file, boolean addUnknown) {
 		LocalItemType itemType = LocalItemUtils.getItemType(app, file);
 		if (itemType != null && (itemType != OTHER || addUnknown)) {
 			CategoryType categoryType = itemType.getCategoryType();
@@ -71,6 +67,7 @@ public class CollectLocalIndexesAlgorithm {
 			}
 			addLocalItem(category, file, itemType);
 		}
+		return itemType;
 	}
 
 	private void addLocalItem(@NonNull LocalCategory category, @NonNull File file, @NonNull LocalItemType itemType) {
@@ -80,7 +77,7 @@ public class CollectLocalIndexesAlgorithm {
 			LocalItem item = new LocalItem(file, itemType);
 			LocalItemUtils.updateItem(app, item);
 			category.addLocalItem(item);
-			addSeparatelyCalculationItemIfNeeded(item);
+			onLocalItemAddedCallback.onResult(item);
 		}
 	}
 
@@ -103,36 +100,9 @@ public class CollectLocalIndexesAlgorithm {
 		liveGroup.addLocalItem(item);
 	}
 
-	private void addSeparatelyCalculationItemIfNeeded(@NonNull LocalItem item) {
-		Long limit = rules.getCalculationSizeLimit(item);
-		if (limit != null && !separateSizeCalculationItems.contains(item)) {
-			separateSizeCalculationItems.add(item);
-			item.setSizeCalculationLimit(limit);
-			item.setSize(0);
-		}
-	}
-
-	private void calculateSizeSeparatelyIfNeeded(@NonNull File file) {
-		LocalItem localItem = getSeparatelyCalculationSizeItem(file);
-		if (localItem != null) {
-			localItem.setSize(localItem.getSize() + file.length());
-		}
-	}
-
-	@Nullable
-	private LocalItem getSeparatelyCalculationSizeItem(@NonNull File file) {
-		String filePath = file.getAbsolutePath();
-		for (LocalItem localItem : separateSizeCalculationItems) {
-			String basePath = localItem.getPath();
-			if (filePath.startsWith(basePath)) {
-				return localItem;
-			}
-		}
-		return null;
-	}
-
 	@NonNull
-	public static Map<CategoryType, LocalCategory> execute(@NonNull CollectLocalIndexesRules rules) {
-		return new CollectLocalIndexesAlgorithm(rules).execute();
+	public static Map<CategoryType, LocalCategory> execute(@NonNull CollectLocalIndexesRules rules,
+	                                                       @NonNull OnResultCallback<LocalItem> onLocalItemAddedCallback) {
+		return new CollectLocalIndexesAlgorithm(rules, onLocalItemAddedCallback).execute();
 	}
 }

@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -28,14 +29,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
@@ -54,7 +56,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.osmedit.EditPoiViewPager;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.EditPoiData;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
@@ -105,7 +106,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	private OpenstreetmapUtil openstreetmapUtil;
 
 	private EditPoiData editPoiData;
-	private EditPoiViewPager viewPager;
+	private ViewPager2 viewPager;
 	private ExtendedEditText poiTypeEditText;
 
 	private OnSaveButtonClickListener onSaveButtonClickListener;
@@ -133,7 +134,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		updateNightMode();
 		view = themedInflater.inflate(R.layout.fragment_edit_poi, container, false);
-
 		if (savedInstanceState != null) {
 			Map<String, String> map = (Map<String, String>) AndroidUtils.getSerializable(savedInstanceState, TAGS_LIST, LinkedHashMap.class);
 			editPoiData.updateTags(map);
@@ -151,17 +151,18 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		viewPager = view.findViewById(R.id.viewpager);
 		String basicTitle = getResources().getString(R.string.tab_title_basic);
 		String extendedTitle = getResources().getString(R.string.tab_title_advanced);
-		PoiInfoPagerAdapter pagerAdapter = new PoiInfoPagerAdapter(getChildFragmentManager(), basicTitle, extendedTitle);
+		TabLayout tabLayout = view.findViewById(R.id.tab_layout);
+		PoiInfoPagerAdapter pagerAdapter = new PoiInfoPagerAdapter(this, basicTitle, extendedTitle);
 		viewPager.setAdapter(pagerAdapter);
-		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+		viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
 			@Override
-			public void onPageScrolled(int i, float v, int i1) {
-
+			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+				super.onPageScrolled(position, positionOffset, positionOffsetPixels);
 			}
 
 			@Override
-			public void onPageSelected(int i) {
-				Fragment pageFragment = pagerAdapter.getItem(i);
+			public void onPageSelected(int position) {
+				Fragment pageFragment = pagerAdapter.createFragment(position);
 				((OnFragmentActivatedListener) pageFragment).onFragmentActivated();
 				if (pageFragment instanceof OnSaveButtonClickListener) {
 					onSaveButtonClickListener = (OnSaveButtonClickListener) pageFragment;
@@ -171,40 +172,29 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 
 			@Override
-			public void onPageScrollStateChanged(int i) {
-
+			public void onPageScrollStateChanged(int state) {
+				super.onPageScrollStateChanged(state);
 			}
 		});
 
-		TabLayout tabLayout = view.findViewById(R.id.tab_layout);
+
 		tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
 		// tabLayout.setupWithViewPager(viewPager);
 		// Hack due to bug in design support library v22.2.1
 		// https://code.google.com/p/android/issues/detail?id=180462
 		// TODO remove in new version
-		if (Build.VERSION.SDK_INT >= 11) {
-			if (ViewCompat.isLaidOut(tabLayout)) {
-				tabLayout.setupWithViewPager(viewPager);
-			} else {
-				tabLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-					@Override
-					public void onLayoutChange(View v, int left, int top, int right, int bottom,
-					                           int oldLeft, int oldTop, int oldRight, int oldBottom) {
-						tabLayout.setupWithViewPager(viewPager);
-						tabLayout.removeOnLayoutChangeListener(this);
-					}
-				});
-			}
+		if (ViewCompat.isLaidOut(tabLayout)) {
+			TabLayoutMediator mediator = new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText(pagerAdapter.getPageTitle(position)));
+			mediator.attach();
 		} else {
-			ViewTreeObserver vto = view.getViewTreeObserver();
-			vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-
+			tabLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
 				@Override
-				public void onGlobalLayout() {
-					if (getActivity() != null) {
-						tabLayout.setupWithViewPager(viewPager);
-					}
+				public void onLayoutChange(View v, int left, int top, int right, int bottom,
+				                           int oldLeft, int oldTop, int oldRight, int oldBottom) {
+					TabLayoutMediator mediator = new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText(pagerAdapter.getPageTitle(position)));
+					mediator.attach();
+					tabLayout.removeOnLayoutChangeListener(this);
 				}
 			});
 		}
@@ -221,18 +211,10 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		int activeColor = ColorUtilities.getActiveColor(getContext(), nightMode);
 		onlineDocumentationButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_help, activeColor));
 		ImageButton poiTypeButton = view.findViewById(R.id.poiTypeButton);
-		poiTypeButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				PoiTypeDialogFragment fragment = PoiTypeDialogFragment.createInstance();
-				fragment.setOnItemSelectListener(new PoiTypeDialogFragment.OnItemSelectListener() {
-					@Override
-					public void select(PoiCategory poiCategory) {
-						setPoiCategory(poiCategory);
-					}
-				});
-				fragment.show(getChildFragmentManager(), "PoiTypeDialogFragment");
-			}
+		poiTypeButton.setOnClickListener(v -> {
+			PoiTypeDialogFragment fragment = PoiTypeDialogFragment.createInstance();
+			fragment.setOnItemSelectListener(this::setPoiCategory);
+			fragment.show(getChildFragmentManager(), "PoiTypeDialogFragment");
 		});
 
 		ExtendedEditText poiNameEditText = view.findViewById(R.id.poiNameEditText);
@@ -276,16 +258,13 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 		AppCompatImageButton expandButton = poiTypeTextInputLayout.getEndIconImageButton();
 		expandButton.setColorFilter(R.color.gpx_chart_red);
-		expandButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				PoiCategory category = editPoiData.getPoiCategory();
-				if (category != null) {
-					PoiSubTypeDialogFragment dialogFragment =
-							PoiSubTypeDialogFragment.createInstance(category);
-					dialogFragment.setOnItemSelectListener(c -> setSubCategory(c));
-					dialogFragment.show(getChildFragmentManager(), "PoiSubTypeDialogFragment");
-				}
+		expandButton.setOnClickListener(v -> {
+			PoiCategory category = editPoiData.getPoiCategory();
+			if (category != null) {
+				PoiSubTypeDialogFragment dialogFragment =
+						PoiSubTypeDialogFragment.createInstance(category);
+				dialogFragment.setOnItemSelectListener(this::setSubCategory);
+				dialogFragment.show(getChildFragmentManager(), "PoiSubTypeDialogFragment");
 			}
 		});
 
@@ -302,25 +281,31 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		Button saveButton = view.findViewById(R.id.saveButton);
 		saveButton.setText(openstreetmapUtil instanceof OpenstreetmapRemoteUtil
 				? R.string.shared_string_upload : R.string.shared_string_save);
-		saveButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				trySave();
-			}
-		});
+		saveButton.setOnClickListener(v -> trySave());
 		Button cancelButton = view.findViewById(R.id.cancelButton);
-		cancelButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismissCheckForChanges();
-			}
-		});
+		cancelButton.setOnClickListener(v -> dismissCheckForChanges());
 		setAdapterForPoiTypeEditText();
 		setCancelable(false);
 		if (editPoiData.hasEmptyValue()) {
 			viewPager.setCurrentItem(ADVANCED_TAB);
 		}
 		editPoiData.setupInitPoint();
+
+		AppBarLayout appBarLayout = view.findViewById(R.id.app_bar);
+		appBarLayout.addOnOffsetChangedListener((_appBarLayout, verticalOffset) -> {
+			Rect mReact = new Rect();
+			view.getHitRect(mReact);
+
+			boolean clearFocus = poiNameEditText.getLocalVisibleRect(mReact);
+			poiNameEditText.setFocusable(clearFocus);
+			poiNameEditText.setFocusableInTouchMode(clearFocus);
+			poiNameEditText.setClickable(clearFocus);
+
+			poiTypeEditText.setFocusable(clearFocus);
+			poiTypeEditText.setFocusableInTouchMode(clearFocus);
+			poiTypeEditText.setClickable(clearFocus);
+		});
+
 		return view;
 	}
 
@@ -522,14 +507,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		poiTypeEditText.setText(subCategory);
 	}
 
-	public void smoothScrollToBottom() {
-		ScrollView scrollView = view.findViewById(R.id.scroll_view);
-		int height = scrollView.getHeight();
-		int bottom = scrollView.getChildAt(0).getBottom();
-		int maxScrollY = Math.max(0, bottom - height);
-		scrollView.smoothScrollTo(0, maxScrollY);
-	}
-
 	public static void commitEntity(Action action,
 	                                Entity entity,
 	                                EntityInfo info,
@@ -714,29 +691,29 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public static class PoiInfoPagerAdapter extends FragmentPagerAdapter {
+	public static class PoiInfoPagerAdapter extends FragmentStateAdapter {
 
 		private final Fragment[] fragments = {new BasicEditPoiFragment(), new AdvancedEditPoiFragment()};
 		private final String[] titles;
 
-		PoiInfoPagerAdapter(FragmentManager fm, String basicTitle, String extendedTitle) {
-			super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+		PoiInfoPagerAdapter(Fragment fm, String basicTitle, String extendedTitle) {
+			super(fm);
 			titles = new String[] {basicTitle, extendedTitle};
 		}
 
-		@Override
-		public int getCount() {
-			return fragments.length;
+		public CharSequence getPageTitle(int position) {
+			return titles[position];
 		}
 
+		@NonNull
 		@Override
-		public Fragment getItem(int position) {
+		public Fragment createFragment(int position) {
 			return fragments[position];
 		}
 
 		@Override
-		public CharSequence getPageTitle(int position) {
-			return titles[position];
+		public int getItemCount() {
+			return fragments.length;
 		}
 	}
 

@@ -22,9 +22,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
+import net.osmand.plus.routing.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.mapwidgets.LanesDrawable;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
 import net.osmand.router.TurnType;
@@ -41,6 +42,7 @@ public class TripHelper {
 	public static final float TURN_LANE_IMAGE_MARGIN = 4f;
 
 	private final OsmandApplication app;
+	private final OsmandSettings settings;
 	private final RoutingHelper routingHelper;
 
 	private Destination lastDestination;
@@ -52,6 +54,7 @@ public class TripHelper {
 
 	public TripHelper(@NonNull OsmandApplication app) {
 		this.app = app;
+		this.settings = app.getSettings();
 		this.routingHelper = app.getRoutingHelper();
 	}
 
@@ -108,7 +111,7 @@ public class TripHelper {
 			nextTurnDistance = (int) routingHelper.getRouteDeviation();
 		} else {
 			nextDirInfo = routingHelper.getNextRouteDirectionInfo(calc, true);
-			if (nextDirInfo != null && nextDirInfo.distanceTo > 0 && nextDirInfo.directionInfo != null) {
+			if (nextDirInfo != null && nextDirInfo.distanceTo >= 0 && nextDirInfo.directionInfo != null) {
 				turnType = nextDirInfo.directionInfo.getTurnType();
 				nextTurnDistance = nextDirInfo.distanceTo;
 				turnImminent = nextDirInfo.imminent;
@@ -265,6 +268,7 @@ public class TripHelper {
 		drawable.setBounds(0, 0, width, height);
 		drawable.setTurnType(turnType);
 		drawable.setTurnImminent(imminent, deviatedFromRoute);
+		drawable.updateColors(app.getDaynightHelper().isNightMode());
 		return drawableToBitmap(drawable, width, height);
 	}
 
@@ -293,8 +297,17 @@ public class TripHelper {
 		destBuilder.setImage(new CarIcon.Builder(IconCompat.createWithResource(app,
 				R.drawable.ic_action_point_destination)).build());
 
-		Distance distance = TripUtils.getDistance(app, routingHelper.getLeftDistance());
-		int leftTimeSec = routingHelper.getLeftTime();
+		int leftTimeSec = 0;
+		int leftDistance = 0;
+		if (settings.USE_LEFT_DISTANCE_TO_INTERMEDIATE.get()) {
+			leftDistance = routingHelper.getLeftTimeNextIntermediate();
+			leftTimeSec = routingHelper.getLeftTimeNextIntermediate();
+		}
+		if (leftDistance == 0) {
+			leftTimeSec = routingHelper.getLeftTime();
+			leftDistance = routingHelper.getLeftDistance();
+		}
+		Distance distance =  TripUtils.getDistance(app, leftDistance);
 		DateTimeWithZone dateTime = DateTimeWithZone.create(System.currentTimeMillis() + leftTimeSec * 1000L, TimeZone.getDefault());
 		TravelEstimate.Builder travelEstimateBuilder = new TravelEstimate.Builder(distance, dateTime);
 		travelEstimateBuilder.setRemainingTimeSeconds(leftTimeSec >= 0 ? leftTimeSec : REMAINING_TIME_UNKNOWN);

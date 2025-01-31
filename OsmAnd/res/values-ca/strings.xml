@@ -1968,7 +1968,7 @@
     <string name="shared_string_change">Modifica</string>
     <string name="get_started">Comença</string>
     <string name="routing_attr_short_way_name">Ruta amb menys consum</string>
-    <string name="replace_favorite_confirmation">Substituir el preferit %1$s\?</string>
+    <string name="replace_favorite_confirmation">Substituir el preferit %1$s?</string>
     <string name="update_all_maps_now">Voleu actualitzar tots els mapes ara mateix?</string>
     <string name="clear_tile_data">Esborra totes les tessel·les</string>
     <string name="search_map">Cercant mapes…</string>
@@ -2067,7 +2067,7 @@
     <string name="quick_action_edit_action">Edita acció</string>
     <string name="dialog_add_action_title">Afegeix acció</string>
     <string name="quick_actions_delete">Esborra acció</string>
-    <string name="quick_actions_delete_text">Voleu suprimir l\'acció «%s»\?</string>
+    <string name="quick_actions_delete_text">Voleu suprimir l\'acció «%s»?</string>
     <string name="quick_favorites_show_favorites_dialog">Mostra el diàleg Favorits</string>
     <string name="quick_favorites_name_preset">Configuració de nom</string>
     <string name="quick_action_add_marker_descr">Un botó per afegir un marcador de mapa a la posició central de la pantalla.</string>
@@ -3922,7 +3922,7 @@
     <string name="rendering_attr_horseScale_name">Dificultat de les rutes eqüestres</string>
     <string name="routing_attr_avoid_highway_description">Evita les autopistes</string>
     <string name="map_widget_trip_recording_uphill">Ascens</string>
-    <string name="map_widget_trip_recording_distance">Distància</string>
+    <string name="map_widget_distance">Distància</string>
     <string name="routing_attr_hazmat_category_name">Categoria de matèries perilloses</string>
     <string name="routing_attr_hazmat_category_description">Categoria de materials perillosos / Considereu les restriccions d\'accés</string>
     <string name="routing_attr_avoid_fords_name">Evita els guals</string>
@@ -3995,9 +3995,7 @@
     <string name="ant_write_to_gpx">Escriure dades en la traça</string>
     <string name="external_sensor_widgets">Ginys d\'ANT+</string>
     <string name="map_widget_ant_heart_rate">Ritme cardíac</string>
-    <string name="ant_missing_dependency_descr">No s\'ha pogut trobar el servei necessari «%1$s».
-\nCal que instal·leu o actualitzeu el servei de connectors ANT+.
-\nVoleu executar la Play Store per a fer-ho\?</string>
+    <string name="ant_missing_dependency_descr">No s\'ha pogut trobar el servei necessari «%1$s». \nCal que instal·leu o actualitzeu el servei de connectors ANT+. \nVoleu executar la Play Store per a fer-ho?</string>
     <string name="shortcut_start_recording">Comença l\'enregistrament</string>
     <string name="display_route_tracks">Mostra les traces</string>
     <string name="display_route_tracks_as_poi">Mostra les traces com a PDI</string>
@@ -4538,7 +4536,7 @@
     <string name="obd_nothing_found_text">No s\'ha trobat cap escànner</string>
     <string name="obd_searching_text">Cercant escànners</string>
     <string name="connect_obd_instructions_step">1. Connecteu l\'escàner al port OBD-II del vostre vehicle.\n\n2. Engegueu el motor del vostre vehicle\n\n3. Activeu el Bluetooth al vostre dispositiu\n\n4. Premeu \'%1$s\' i seleccioneu el vostre escànner de la llista.</string>
-    <string name="connect_obd_instructions_step4">Premeu \'Connecta\' i seleccioneu el vostre escànner de la llista.</string>
+    <string name="connect_obd_instructions_step4">Premeu \'%1$s\' i seleccioneu el vostre escànner de la llista.</string>
     <string name="obd_fuel_consumption_rate_l_h">Consum de combustible (l/h)</string>
     <string name="obd_fuel_consumption_rate_sensor">Consum de combustible (sensor)</string>
     <string name="obd_fuel_level_liter">Nivell de combustible (l)</string>

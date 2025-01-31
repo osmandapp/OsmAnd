@@ -1,5 +1,11 @@
 package net.osmand.plus.track.helpers;
 
+import static net.osmand.plus.settings.backend.backup.GpxAppearanceInfo.TAG_MAX_FILTER_ALTITUDE;
+import static net.osmand.plus.settings.backend.backup.GpxAppearanceInfo.TAG_MAX_FILTER_HDOP;
+import static net.osmand.plus.settings.backend.backup.GpxAppearanceInfo.TAG_MAX_FILTER_SPEED;
+import static net.osmand.plus.settings.backend.backup.GpxAppearanceInfo.TAG_MIN_FILTER_ALTITUDE;
+import static net.osmand.plus.settings.backend.backup.GpxAppearanceInfo.TAG_MIN_FILTER_SPEED;
+import static net.osmand.plus.settings.backend.backup.GpxAppearanceInfo.TAG_SMOOTHING_THRESHOLD;
 import static net.osmand.shared.gpx.GpxParameter.MAX_FILTER_ALTITUDE;
 import static net.osmand.shared.gpx.GpxParameter.MAX_FILTER_HDOP;
 import static net.osmand.shared.gpx.GpxParameter.MAX_FILTER_SPEED;
@@ -22,7 +28,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
+import net.osmand.plus.utils.FormattedValue;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
@@ -202,14 +208,6 @@ public class GpsFilterHelper {
 	}
 
 	public abstract static class GpsFilter {
-
-		public static final String TAG_SMOOTHING_THRESHOLD = "smoothing_threshold";
-		public static final String TAG_MIN_FILTER_SPEED = "min_filter_speed";
-		public static final String TAG_MAX_FILTER_SPEED = "max_filter_speed";
-		public static final String TAG_MIN_FILTER_ALTITUDE = "min_filter_altitude";
-		public static final String TAG_MAX_FILTER_ALTITUDE = "max_filter_altitude";
-		public static final String TAG_MAX_FILTER_HDOP = "max_filter_hdop";
-
 		protected static final int SPAN_FLAGS = Spanned.SPAN_EXCLUSIVE_INCLUSIVE;
 
 		protected GpxTrackAnalysis analysis;

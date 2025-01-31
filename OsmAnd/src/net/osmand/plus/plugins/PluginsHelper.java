@@ -775,13 +775,6 @@ public class PluginsHelper {
 		return collection;
 	}
 
-	public static void populateContextMenuImageCards(@NonNull ImageCardsHolder holder, @NonNull Map<String, String> params,
-	                                                 @Nullable Map<String, String> additionalParams, @Nullable GetImageCardsListener listener) {
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			plugin.collectContextMenuImageCards(holder, params, additionalParams, listener);
-		}
-	}
-
 	/**
 	 * @param holder      an object to collect results
 	 * @param imageObject json object that contains data for create an image card

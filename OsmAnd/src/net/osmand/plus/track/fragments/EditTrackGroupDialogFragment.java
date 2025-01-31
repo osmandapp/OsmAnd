@@ -115,6 +115,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 
 	@NonNull
 	private BaseBottomSheetItem createShowOnMapItem(@NonNull SelectedGpxFile selectedGpxFile) {
+		Context context = requireContext();
 		boolean checked = !selectedGpxFile.isGroupHidden(displayGroup.getName());
 		ApplicationMode mode = app.getSettings().getApplicationMode();
 		BottomSheetItemWithCompoundButton[] showOnMapItem = new BottomSheetItemWithCompoundButton[1];
@@ -122,14 +123,14 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 				.setCompoundButtonColor(mode.getProfileColor(nightMode))
 				.setChecked(checked)
 				.setTitle(getString(R.string.shared_string_show_on_map))
-				.setCustomView(getCustomButtonView(app, mode, checked, nightMode))
+				.setCustomView(getCustomButtonView(context, mode, checked, nightMode))
 				.setOnClickListener(v -> {
 					boolean visible = !showOnMapItem[0].isChecked();
 					if (pointsGroup != null) {
 						pointsGroup.setHidden(!visible);
 					}
 					showOnMapItem[0].setChecked(visible);
-					updateCustomButtonView(app, mode, v, visible, nightMode);
+					updateCustomButtonView(context, mode, v, visible, nightMode);
 
 					Fragment fragment = getTargetFragment();
 					if (fragment instanceof DisplayPointGroupsCallback) {

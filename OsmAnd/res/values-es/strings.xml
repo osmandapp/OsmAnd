@@ -1972,7 +1972,7 @@
     <string name="update_all_maps_now">¿Actualizar todos los mapas ahora?</string>
     <string name="clear_tile_data">Limpiar todas las teselas</string>
     <string name="routing_attr_short_way_name">Ruta de bajo consumo (corta)</string>
-    <string name="replace_favorite_confirmation">¿Reemplazar el favorito «%1$s»\?</string>
+    <string name="replace_favorite_confirmation">¿Reemplazar el favorito «%1$s»?</string>
     <string name="rendering_attr_hideOverground_name">Objetos en superficie</string>
     <string name="shared_string_change">Cambiar</string>
     <string name="get_started">Empezar</string>
@@ -2072,7 +2072,7 @@
     <string name="quick_action_edit_action">Editar acción</string>
     <string name="dialog_add_action_title">Añadir acción</string>
     <string name="quick_actions_delete">Borrar acción</string>
-    <string name="quick_actions_delete_text">¿Borrar la acción «%s»\?</string>
+    <string name="quick_actions_delete_text">¿Borrar la acción «%s»?</string>
     <string name="quick_favorites_show_favorites_dialog">Mostrar diálogo de favoritos</string>
     <string name="quick_favorites_name_preset">Nombre predefinido</string>
     <string name="quick_action_add_marker_descr">Un botón que añade un marcador en el centro de la pantalla.</string>
@@ -2712,9 +2712,7 @@
     <string name="quick_action_edit_actions">Editar acciones</string>
     <string name="point_deleted">Punto %1$s borrado</string>
     <string name="shared_string_world">Mundo</string>
-    <string name="send_search_query_description">Enviaremos la consulta de búsqueda: «%1$s», así como la ubicación.
-\n
-\nNo se recopilan datos personales, los datos de búsqueda sólo se usan para mejorar el algoritmo de búsqueda.</string>
+    <string name="send_search_query_description">Enviaremos la consulta de búsqueda: «%1$s», así como la ubicación. \n \nNo se recopilan datos personales, los datos de búsqueda sólo se usan para mejorar el algoritmo de búsqueda.</string>
     <string name="send_search_query">¿Enviar consulta de búsqueda?</string>
     <string name="increase_search_radius_to">Ampliar el radio de búsqueda a %1$s</string>
     <string name="thank_you_for_feedback">Gracias por sus comentarios</string>
@@ -3421,25 +3419,7 @@
     <string name="shared_string_language">Idioma</string>
     <string name="shared_string_all_languages">Todos los idiomas</string>
     <string name="wiki_menu_download_descr">Se necesitan mapas adicionales para ver los puntos de interés de Wikipedia en el mapa.</string>
-    <string name="release_3_7">• Nuevos mapas sin conexión de las pendientes
-\n
-\n • Personalización más completa de los favoritos y puntos de referencia GPX (colores personalizados, iconos, formas)
-\n
-\n • Personalización en el orden de los elementos en «Configurar mapa», «Menú contextual» y «Menú lateral»
-\n
-\n • Wikipedia ahora se visualiza como una capa separada en Configurar mapa, elige sólo los idiomas necesarios
-\n
-\n • Crea tus propios filtros o mapas de puntos de interés, con total flexibilidad
-\n
-\n • Se añadieron opciones para restablecer los ajustes de los perfiles personalizados
-\n
-\n • Las rutas GPX para la navegación, ahora admiten los carriles de tráfico y completan las instrucciones de giro
-\n
-\n • Se ha corregido el tamaño de la interfaz en las tabletas
-\n
-\n • Se corrigieron los errores con RTL
-\n
-\n</string>
+    <string name="release_3_7">• Nuevos mapas sin conexión de las pendientes \n \n • Personalización más completa de los favoritos y puntos de referencia GPX (colores personalizados, iconos, formas) \n \n • Personalización en el orden de los elementos en «Configurar mapa», «Menú contextual» y «Menú lateral» \n \n • Wikipedia ahora se visualiza como una capa separada en Configurar mapa, elige sólo los idiomas necesarios \n \n • Crea tus propios filtros o mapas de puntos de interés, con total flexibilidad \n \n • Se añadieron opciones para restablecer los ajustes de los perfiles personalizados \n \n • Las rutas GPX para la navegación, ahora admiten los carriles de tráfico y completan las instrucciones de giro \n \n • Se ha corregido el tamaño de la interfaz en las tabletas \n \n • Se corrigieron los errores con RTL \n \n</string>
     <string name="subscription_osmandlive_item">Suscripción - OsmAnd Live</string>
     <string name="osmand_purchases_item">Compras en OsmAnd</string>
     <string name="quick_action_transport_descr">Botón que muestra u oculta el transporte público en el mapa.</string>
@@ -3464,9 +3444,7 @@
     <string name="import_duplicates_description">OsmAnd ya tiene elementos con los mismos nombres que los importados.
 \n
 \nElige una acción.</string>
-    <string name="ui_customization_description">Personaliza la cantidad de elementos en el «Menú lateral», «Configuración del mapa» y «Menú contextual».
-\n
-\nDesactiva los complementos no usados y oculta todos sus controles en «%1$s».</string>
+    <string name="ui_customization_description">Personaliza la cantidad de elementos en el «Menú lateral», «Configuración del mapa» y «Menú contextual». \n \nDesactiva los complementos no usados y oculta todos sus controles en «%1$s».</string>
     <string name="reset_items_descr">Ocultar los ajustes, los restablece a su estado original.</string>
     <string name="lang_pnb">Panyabí</string>
     <string name="lang_nap">Napolitano</string>
@@ -4013,19 +3991,7 @@
     <string name="in_grace_period">En período de gracia</string>
     <string name="on_hold">En espera</string>
     <string name="expired">Expirado</string>
-    <string name="release_4_0_beta">• Se ha añadido la opción para descargar las curvas de nivel en pies.
-\n
-\n• Paisaje del plan de ruta: se añadieron pestañas para alternar entre puntos o gráficos
-\n
-\n• Las actualizaciones de OsmAnd Live se han movido a «Descargas → Actualizaciones».
-\n
-\n• Las trazas ahora pueden colorearse por altitud, velocidad o pendiente.
-\n
-\n• Se ha añadido la opción de cambiar el aspecto a la línea de ruta.
-\n
-\n• Se ha actualizado el cuadro de diálogo «Grabación de viaje»
-\n
-\n</string>
+    <string name="release_4_0_beta">• Se ha añadido la opción para descargar las curvas de nivel en pies. \n \n• Paisaje del plan de ruta: se añadieron pestañas para alternar entre puntos o gráficos \n \n• Las actualizaciones de OsmAnd Live se han movido a «Descargas → Actualizaciones». \n \n• Las trazas ahora pueden colorearse por altitud, velocidad o pendiente. \n \n• Se ha añadido la opción de cambiar el aspecto a la línea de ruta. \n \n• Se ha actualizado el cuadro de diálogo «Grabación de viaje» \n \n</string>
     <string name="update_all_maps_added">¿Actualizar todos los mapas añadidos a %1$s\?</string>
     <string name="exit_number">Número de salida</string>
     <string name="announce_when_exceeded">Anunciar al excederse</string>
@@ -4035,27 +4001,7 @@
     <string name="shared_string_min_height">Altura mínima</string>
     <string name="shared_string_max_height">Altura máxima</string>
     <string name="shared_string_itinerary">Itinerario</string>
-    <string name="release_4_0">• Copia de seguridad en la nube.
-\n
-\n• Se ha añadido el modo nocturno para el estilo de mapa «Topo».
-\n
-\n• Se ha añadido la opción de descargar las curvas de nivel en pies.
-\n
-\n• Las trazas ahora pueden ser coloreadas por altitud, velocidad o pendiente.
-\n
-\n• Se ha actualizado el cuadro de diálogo «Grabación de viaje».
-\n
-\n• La «Distancia al pulsar» se ha movido de la regla radial a una opción separada.
-\n
-\n• Planificar ruta: Ahora puedes cambiar los ajustes de navegación, acceder a la configuración del mapa y buscar sin salir de la planificación de ruta.
-\n
-\n• Se ha añadido la opción de «Compra» con información detallada de las compras.
-\n
-\n• Se ha añadido la opción de cambiar el aspecto de la línea de la ruta.
-\n
-\n• Las actualizaciones de OsmAnd Live se han movido a «Descargas → Actualizaciones».
-\n
-\n</string>
+    <string name="release_4_0">• Copia de seguridad en la nube. \n \n• Se ha añadido el modo nocturno para el estilo de mapa «Topo». \n \n• Se ha añadido la opción de descargar las curvas de nivel en pies. \n \n• Las trazas ahora pueden ser coloreadas por altitud, velocidad o pendiente. \n \n• Se ha actualizado el cuadro de diálogo «Grabación de viaje». \n \n• La «Distancia al pulsar» se ha movido de la regla radial a una opción separada. \n \n• Planificar ruta: Ahora puedes cambiar los ajustes de navegación, acceder a la configuración del mapa y buscar sin salir de la planificación de ruta. \n \n• Se ha añadido la opción de «Compra» con información detallada de las compras. \n \n• Se ha añadido la opción de cambiar el aspecto de la línea de la ruta. \n \n• Las actualizaciones de OsmAnd Live se han movido a «Descargas → Actualizaciones». \n \n</string>
     <string name="duration_moment_ago">hace un momento</string>
     <string name="logout_from_osmand_cloud">Salir de OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">¿Cerrar la sesión\?
@@ -4396,8 +4342,7 @@
     <string name="elevation_profile">Perfil de elevación</string>
     <string name="exit_without_saving_warning">¿Salir sin guardar los cambios\?</string>
     <string name="display_groups_visibility_dialog_description">Puedes controlar la visibilidad de los grupos en el mapa. Si la traza está oculta, todos los grupos también lo estarán.</string>
-    <string name="shared_storage_first_step">Pulsa «%1$s».
-\nEl gestor de archivos se abrirá donde debería encontrar y abrir la carpeta «osmand».</string>
+    <string name="shared_storage_first_step">Pulsa «%1$s». \nEl gestor de archivos se abrirá donde debería encontrar y abrir la carpeta «osmand».</string>
     <string name="skip_confirmation">Sí, omitir</string>
     <string name="shared_storage">Almacenamiento compartido</string>
     <string name="shared_storage_migration">Migración del almacenamiento compartido</string>
@@ -4475,9 +4420,7 @@
     <string name="quick_action_add_route_descr">Un botón que inicia una ruta desde el centro de la pantalla.</string>
     <string name="select_suggested_points">Marcar los puntos sugeridos</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Muestra etiquetas con información no obvia sobre algún elemento (note)</string>
-    <string name="location_source_descr">Si se instala OsmAnd desde Google Play, de forma predefinida se usa «%1$s» para definir la ubicación.
-\n
-\nSi obtienes información inexacta de la ubicación o usas un dispositivo sin «%2$s», intenta cambiar a «%3$s»</string>
+    <string name="location_source_descr">Si se instala OsmAnd desde Google Play, de forma predefinida se usa «%1$s» para definir la ubicación. \n \nSi obtienes información inexacta de la ubicación o usas un dispositivo sin «%2$s», intenta cambiar a «%3$s»</string>
     <string name="location_source">Fuente de la ubicación</string>
     <string name="shared_string_shape">Forma</string>
     <string name="default_appearance_desc">El color, el icono y la forma predeterminados se aplicarán a los puntos favoritos añadidos al grupo.</string>
@@ -4568,7 +4511,7 @@
     <string name="turn_on_public_transport_description">Activar para ver rutas de transporte público en el mapa.</string>
     <string name="time_to_go_desc">Tiempo en minutos u horas necesario para llegar a tu destino.</string>
     <string name="map_widget_trip_recording_duration">Duración</string>
-    <string name="map_widget_trip_recording_distance">Distancia</string>
+    <string name="map_widget_distance">Distancia</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Sin restricciones)</string>
     <string name="calculate_online">Calcular en línea</string>
     <string name="calculate_altitude">Calcular elevación</string>
@@ -4763,9 +4706,7 @@
     <string name="map_widget_ant_bicycle_power_desc">Muestra la potencia del ciclista, que se utiliza para hacer avanzar la bicicleta</string>
     <string name="lang_sat">Santalí</string>
     <string name="external_sensor_widgets">Widgets de ANT+</string>
-    <string name="ant_missing_dependency_descr">No se puede encontrar el servicio necesario «%1$s».
-\nDebes instalar o actualizar el servicio para el complemento ANT+.
-\n¿Quieres abrir Play Store para hacer eso\?</string>
+    <string name="ant_missing_dependency_descr">No se puede encontrar el servicio necesario «%1$s». \nDebes instalar o actualizar el servicio para el complemento ANT+. \n¿Quieres abrir Play Store para hacer eso?</string>
     <string name="ant_missing_dependency">Falta la dependencia</string>
     <string name="favorites_backup">Respaldo de favoritos</string>
     <string name="purchases_feature_desc_cross_buy">Usa las funciones de la suscripción en diferentes plataformas (Android/iOS/web) sin costo adicional.</string>
@@ -5234,49 +5175,7 @@
     <string name="verify_account_deletion_descr">Necesitamos verificar su cuenta antes de eliminarla.
 \n
 \nPor favor, introduzca la dirección de correo electrónico con la que se registró. Se le enviará una contraseña de un solo uso para el siguiente paso.</string>
-    <string name="release_4_5">• Sensores BLE/ANT+: Se ha mejorado la conexión, escritura y visualización de los datos recibidos en GPX.
-\n
-\n• Copia de seguridad gratuita de los favoritos y los ajustes básicos en «OsmAnd Cloud»
-\n
-\n• Nuevo formato para mapas topográficos con soporte para el relieve 3D
-\n
-\n• Gestión de trazas: se ha actualizado la interfaz de usuario, se ha añadido una clasificación y se admiten las carpetas anidadas
-\n
-\n• Android Auto: nuevo menú de inicio para acceder a los favoritos, trazas y categorías de PDI
-\n
-\n• Se ha mejorado la lista de widgets para el panel superior/inferior
-\n
-\n• Nuevo perfil «Tren», permite calcular rutas ferroviarias
-\n
-\n• Las curvas de nivel funcionan con cualquier «Repositorio de mapa»
-\n
-\n• Se ha ampliado la lista de acciones predefinidas para teclados externos
-\n
-\n• Nuevos archivos de rutas personalizados y se ha añadido opciones para borrar o sobrescribir la ruta
-\n
-\n• Se ha añadido la opción para «Anunciar desvío de la ruta»
-\n
-\n• Pantalla de inicio: se ha añadido la opción para restaurar el estado de OsmAnd desde un archivo externo
-\n
-\n• Se ha añadido distintas clases de «Materiales peligrosos» para la navegación de camiones en Norteamérica
-\n
-\n• Se ha añadido soporte de «Vía ferrata» para las rutas peatonales
-\n
-\n• Se ha añadido la escala «CAI» para la clasificación de dificultad de las rutas
-\n
-\n• Se ha corregido la elección del idioma por aplicación
-\n
-\n• Se ha añadido soporte para iconos temáticos
-\n
-\n• OsmAnd Cloud: Se ha añadido la opción de borrar la cuenta
-\n
-\n• Accesibilidad: se ha cambiado el tamaño del objetivo táctil de los botones a 48 dp; se ha solucionado el problema de la visibilidad de la interfaz de usuario del mapa para los lectores de pantalla.
-\n
-\n• Se han revisado las indicaciones de voz en japonés.
-\n
-\n• Se ha mejorado la evaluación de los cambios de altitud y pendiente.
-\n
-\n</string>
+    <string name="release_4_5">• Sensores BLE/ANT+: Se ha mejorado la conexión, escritura y visualización de los datos recibidos en GPX. \n \n• Copia de seguridad gratuita de los favoritos y los ajustes básicos en «OsmAnd Cloud» \n \n• Nuevo formato para mapas topográficos con soporte para el relieve 3D \n \n• Gestión de trazas: se ha actualizado la interfaz de usuario, se ha añadido una clasificación y se admiten las carpetas anidadas \n \n• Android Auto: nuevo menú de inicio para acceder a los favoritos, trazas y categorías de PDI \n \n• Se ha mejorado la lista de widgets para el panel superior/inferior \n \n• Nuevo perfil «Tren», permite calcular rutas ferroviarias \n \n• Las curvas de nivel funcionan con cualquier «Repositorio de mapa» \n \n• Se ha ampliado la lista de acciones predefinidas para teclados externos \n \n• Nuevos archivos de rutas personalizados y se ha añadido opciones para borrar o sobrescribir la ruta \n \n• Se ha añadido la opción para «Anunciar desvío de la ruta» \n \n• Pantalla de inicio: se ha añadido la opción para restaurar el estado de OsmAnd desde un archivo externo \n \n• Se ha añadido distintas clases de «Materiales peligrosos» para la navegación de camiones en Norteamérica \n \n• Se ha añadido soporte de «Vía ferrata» para las rutas peatonales \n \n• Se ha añadido la escala «CAI» para la clasificación de dificultad de las rutas \n \n• Se ha corregido la elección del idioma por aplicación \n \n• Se ha añadido soporte para iconos temáticos \n \n• OsmAnd Cloud: Se ha añadido la opción de borrar la cuenta \n \n• Accesibilidad: se ha cambiado el tamaño del objetivo táctil de los botones a 48 dp; se ha solucionado el problema de la visibilidad de la interfaz de usuario del mapa para los lectores de pantalla. \n \n• Se han revisado las indicaciones de voz en japonés. \n \n• Se ha mejorado la evaluación de los cambios de altitud y pendiente. \n \n</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Usar raster sqlitedb para el relieve/la pendiente</string>
     <string name="shared_string_avoid">Evitar</string>
     <string name="cache_size">Tamaño de la cache</string>
@@ -5981,7 +5880,7 @@
     <string name="connect_obd_instructions_step1">Conecte el escáner al puerto OBD-II de su vehículo.</string>
     <string name="connect_obd_instructions_step2">Encienda el motor de su vehículo</string>
     <string name="connect_obd_instructions_step3">Habilite el Bluetooth en su dispositivo</string>
-    <string name="connect_obd_instructions_step4">Pulse “Conectar” y seleccione su escáner de la lista.</string>
+    <string name="connect_obd_instructions_step4">Pulse “%1$s” y seleccione su escáner de la lista.</string>
     <string name="learn_more_about_obd_sensors">Obtenga más información sobre los sensores.</string>
     <string name="obd_fuel_left_liters">Combustible restante (litros)</string>
     <string name="route_guidance">Guía de itinerarios</string>
@@ -6013,7 +5912,7 @@
     <string name="simulate_obd">Simular datos OBD</string>
     <string name="obd_fuel_pressure">Presión del combustible</string>
     <string name="l_100km">L/100km</string>
-    <string name="obd_fuel_consumption_rate_percent_hour_desc">Muestra el consumo de combustible del vehículo (%/h)</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">Muestra el consumo de combustible del vehículo basado en cálculos (%/h)</string>
     <string name="obd_fuel_consumption_rate_l_km">Consumo de combustible (L/100 km)</string>
     <string name="kpa_unit">kPa</string>
     <string name="bt_start_pair_failed">No se puede iniciar el emparejamiento con el dispositivo</string>
@@ -6077,4 +5976,11 @@
     <string name="location_interpolation_percent_desc">Establece el porcentaje de interpolación de la posición durante la navegación por la ruta. Este parámetro reduce el desfase de la posición de tu ubicación en el mapa durante la animación.</string>
     <string name="shared_string_interpolation">Interpolación</string>
     <string name="selected_delayed_profile">Perfil seleccionado \"%s\"</string>
+    <string name="default_buttons_size_original_description">Cada botón conservará su propio tamaño.</string>
+    <string name="default_buttons_corners_original_description">Cada botón conserva sus propias esquinas redondeadas.</string>
+    <string name="default_buttons_opacity_original_description">Cada botón mantendría su propia opacidad de fondo.</string>
+    <string name="calculating_indication_message">Calculando…</string>
+    <string name="calculate_size">Calcular tamaño</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Mostrar vías de escalada</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Vías de escalada</string>
 </resources>

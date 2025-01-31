@@ -310,7 +310,7 @@
     <string name="routing_attr_avoid_fords_name">Unngå vadestadar</string>
     <string name="compass_on_circles">Kompass på sirklar</string>
     <string name="map_widget_trip_recording_downhill">Nedoverbakke</string>
-    <string name="map_widget_trip_recording_distance">Avstand</string>
+    <string name="map_widget_distance">Avstand</string>
     <string name="routing_attr_avoid_4wd_only_description">Unngå vegar som berre passar køyretøy med firhjulstrekk</string>
     <string name="rendering_attr_horse_scale_impossible_name">Umogleg</string>
     <string name="navigation_history">Navigasjonshistorikk</string>

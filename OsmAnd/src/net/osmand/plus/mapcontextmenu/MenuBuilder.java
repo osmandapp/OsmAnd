@@ -6,6 +6,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_ONLIN
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_SEARCH_MORE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_SHOW_ON_MAP_ID;
+import static net.osmand.plus.mapcontextmenu.SearchAmenitiesTask.NEARBY_MAX_POI_COUNT;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.DIVIDER_ROW_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NEAREST_POI_KEY;
 import static net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder.NEAREST_WIKI_KEY;
@@ -38,6 +39,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.NativeLibrary.RenderedObject;
@@ -49,7 +51,6 @@ import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
@@ -57,6 +58,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.mapcontextmenu.SearchAmenitiesTask.SearchAmenitiesListener;
 import net.osmand.plus.mapcontextmenu.builders.MenuRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
@@ -110,11 +112,6 @@ public class MenuBuilder {
 	public static final int TITLE_LIMIT = 60;
 
 	protected static final String[] arrowChars = {"=>", " - "};
-
-	private static final int NEARBY_MAX_POI_COUNT = 10;
-	private static final int NEARBY_POI_MIN_RADIUS = 250;
-	private static final int NEARBY_POI_MAX_RADIUS = 1000;
-	private static final int NEARBY_POI_SEARCH_FACTOR = 2;
 
 	protected OsmandApplication app;
 	protected MapActivity mapActivity;
@@ -587,13 +584,14 @@ public class MenuBuilder {
 	}
 
 	protected Map<String, String> getAdditionalCardParams() {
-		return null;
+		return Collections.emptyMap();
 	}
 
 	protected void buildInternal(View view) {
 	}
 
 	protected void buildTopInternal(View view) {
+		buildMainImage(view);
 		buildDescription(view);
 		if (showLocalTransportRoutes()) {
 			buildRow(view, 0, null, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false, false),
@@ -605,6 +603,25 @@ public class MenuBuilder {
 			buildRow(view, 0, null, routesWithingDistance, 0, true, collapsableView,
 					false, 0, false, null, true);
 		}
+	}
+
+	@Nullable
+	protected AppCompatImageView inflateAndGetMainImageView(@NonNull View view) {
+		AppCompatImageView imageView = view.findViewById(R.id.main_image);
+		if (imageView == null) {
+			ViewGroup container = (ViewGroup) view;
+			View image = UiUtilities
+					.getInflater(mapActivity, !isLightContent())
+					.inflate(R.layout.gpx_main_image, container, false);
+			if (image != null) {
+				container.addView(image);
+				imageView = image.findViewById(R.id.main_image);
+			}
+		}
+		return imageView;
+	}
+
+	protected void buildMainImage(View view) {
 	}
 
 	protected void buildDescription(View view) {
@@ -1400,7 +1417,7 @@ public class MenuBuilder {
 		OsmAndFeature feature = OsmAndFeature.WIKIPEDIA;
 		LinearLayout view = buildCollapsableContentView(app, false, true);
 
-		View banner = UiUtilities.getInflater(app, !light)
+		View banner = UiUtilities.getInflater(mapActivity, !light)
 				.inflate(R.layout.get_wikipedia_context_menu_banner, view, false);
 
 		ImageView ivIcon = banner.findViewById(R.id.icon);
@@ -1452,8 +1469,9 @@ public class MenuBuilder {
 		return null;
 	}
 
-	private void searchSortedAmenities(PoiUIFilter filter, LatLon latLon, SearchAmenitiesListener listener) {
-		execute(new SearchAmenitiesTask(filter, latLon, listener));
+	private void searchSortedAmenities(@NonNull PoiUIFilter filter, @NonNull LatLon latLon,
+			@Nullable SearchAmenitiesListener listener) {
+		execute(new SearchAmenitiesTask(filter, latLon, amenity, listener));
 	}
 
 	@ColorInt
@@ -1483,49 +1501,6 @@ public class MenuBuilder {
 
 	protected boolean isLightContent() {
 		return menuRowBuilder.isLightContent();
-	}
-
-	private class SearchAmenitiesTask extends AsyncTask<Void, Void, List<Amenity>> {
-
-		private final LatLon latLon;
-		private final PoiUIFilter filter;
-		private final SearchAmenitiesListener listener;
-
-		private SearchAmenitiesTask(PoiUIFilter filter, LatLon latLon, SearchAmenitiesListener listener) {
-			this.filter = filter;
-			this.latLon = latLon;
-			this.listener = listener;
-		}
-
-		@Override
-		protected List<Amenity> doInBackground(Void... params) {
-			int radius = NEARBY_POI_MIN_RADIUS;
-			List<Amenity> amenities = Collections.emptyList();
-			while (amenities.size() < NEARBY_MAX_POI_COUNT && radius <= NEARBY_POI_MAX_RADIUS) {
-				QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
-				amenities = getAmenities(rect, filter);
-				amenities.remove(amenity);
-				radius *= NEARBY_POI_SEARCH_FACTOR;
-			}
-			MapUtils.sortListOfMapObject(amenities, latLon.getLatitude(), latLon.getLongitude());
-			return amenities.subList(0, Math.min(NEARBY_MAX_POI_COUNT, amenities.size()));
-		}
-
-		@Override
-		protected void onPostExecute(List<Amenity> amenities) {
-			if (listener != null) {
-				listener.onFinish(amenities);
-			}
-		}
-
-		private List<Amenity> getAmenities(QuadRect rect, PoiUIFilter filter) {
-			return filter.searchAmenities(rect.top, rect.left,
-					rect.bottom, rect.right, -1, null);
-		}
-	}
-
-	public interface SearchAmenitiesListener {
-		void onFinish(List<Amenity> amenities);
 	}
 
 	@SuppressWarnings("unchecked")

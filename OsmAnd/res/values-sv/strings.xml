@@ -1188,7 +1188,7 @@
     <string name="rendering_attr_moreDetailed_name">Fler detaljer</string>
     <string name="rendering_attr_lessDetailed_name">Färre detaljer</string>
     <string name="rendering_attr_hideAccess_name">Tillfartsinskränkningar</string>
-    <string name="rendering_attr_showAccess_name">Visa åtkomstbegränsningar och betalvägar</string>
+    <string name="rendering_attr_showAccess_name">Visa åtkomstbegränsningar</string>
     <string name="rendering_attr_showSurfaceGrade_name">Visa vägkvalitet</string>
     <string name="rendering_attr_showSurfaces_name">Visa vägbeläggning</string>
     <string name="rendering_attr_showCycleRoutes_name">Cykelleder</string>
@@ -1351,9 +1351,7 @@
     <string name="notes">A/V anteckningar</string>
     <string name="online_map">Online-karta</string>
     <string name="share_note">Dela anteckning</string>
-    <string name="plugin_nautical_descr">Berikar kartan med information för båtliv och segling, som fyrar och sjömärken, gästhamnar, förbudsområden, ankring etc. För att använda, ladda ner respektive sjökort och välj kartstilen \'Sjökort\' under \'Konfigurera karta\'.
-\n
-\nLäs mer på %1$s.</string>
+    <string name="plugin_nautical_descr">Berikar kartan med information för båtliv och segling, som fyrar och sjömärken, gästhamnar, förbudsområden, ankring etc. För att använda, ladda ner respektive sjökort och välj kartstilen \'Sjökort\' under \'Konfigurera karta\'. \n \nLäs mer på %1$s.</string>
     <string name="plugin_ski_descr">Designad för navigering i vintersportområden: Se alpina pister och liftar samt längdskidspår, färgkodade efter svårighetsgrad eller ledmarkeringar. För att använda, aktivera modulen, gå till \'Konfigurera kartan\' och välj kartstilen \'Vinter och skidor\'.</string>
     <string name="plugin_touringview_descr">Om du aktiverar denna vy ändras kartan till \'Vägkartsvy\', som är en speciell vy med mycket detaljer för resenärer och yrkesförare.
 \n
@@ -2602,8 +2600,7 @@
     <string name="shared_string_do">Gör</string>
     <string name="shared_string_only_with_wifi">Endast på Wi-Fi</string>
     <string name="wikivoyage_download_pics">Ladda ner bilder</string>
-    <string name="wikivoyage_download_pics_descr">Bilder från artiklar kan laddas ner för användning frånkopplad. 
-\nDu kan alltid ändra inställningen i \"Utforska\" → \"Alternativ\".</string>
+    <string name="wikivoyage_download_pics_descr">Bilder från artiklar kan laddas ner för användning frånkopplad. \nDu kan alltid ändra inställningen i tforska → lternativ</string>
     <string name="shared_string_wifi_only">Endast på Wi-Fi</string>
     <string name="select_travel_book">Välj en resebok</string>
     <string name="shared_string_travel_book">Resebok</string>
@@ -2682,7 +2679,7 @@
     <string name="import_track_desc">Filen %1$s innehåller inte vägpunkter, importera det som ett spår?</string>
     <string name="move_point">Flytta punkt</string>
     <string name="osm_recipients_label">OSM-mottagare</string>
-    <string name="day_off_label">av</string>
+    <string name="day_off_label">stängt</string>
     <string name="winter_and_ski_renderer">Vinter och skidor</string>
     <string name="touring_view_renderer">Touringvy</string>
     <string name="nautical_renderer">Nautisk</string>
@@ -4278,7 +4275,7 @@
     <string name="weather_temperature_celsius">Celsius</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="purchases_feature_desc_hourly_map_updates">Få tillgång till mer frekventa kartuppdateringar. Uppdateringar varje timme, dag eller vecka. Uppdateringar laddas ner stegvis, endast för det ändrade området.</string>
-    <string name="turn_screen_on_power_button_disabled">Inaktiverad. Kräver \"Håll skärmen påslagen\" under \"Timeout efter skärmväckning\".</string>
+    <string name="turn_screen_on_power_button_disabled">Inaktiverad. Kräver åll skärmen påslagen under \timeout efter skärmväckning</string>
     <string name="rendering_attr_depthContourColorScheme_description">Färgsättning av djupkurvor</string>
     <string name="rendering_attr_depthContourWidth_description">Djupkurvornas linjebredd</string>
     <string name="relative_bearing_widget_desc">Visar vinkeln mellan din färdriktning och målpunkten.</string>
@@ -4516,7 +4513,7 @@
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (inga begränsningar)</string>
     <string name="routing_attr_allow_private_for_truck_description">Tillåt åtkomst till privata områden för lastbilar.</string>
     <string name="routing_attr_allow_private_for_truck_name">Tillåt privat åtkomst (lastbil)</string>
-    <string name="map_widget_trip_recording_distance">Sträcka</string>
+    <string name="map_widget_distance">Sträcka</string>
     <string name="routing_attr_hazmat_category_name">Kategori av farligt gods</string>
     <string name="map_widget_trip_recording_duration">Varaktighet</string>
     <string name="no_altitude_data">Ingen höjddata</string>
@@ -4683,7 +4680,7 @@
     <string name="osmand_cloud_deletion_all_data_warning">All data på OsmAnds molntjänst kommer att %1$s. Data på din enhet kommer inte påverkas.</string>
     <string name="free_favorites_backup_description">Registrera dig för OsmAnd molntjänst för gratis säkerhetskopiering av favoriter och inställningar.</string>
     <string name="get_osmand_cloud">Skaffa OsmAnd molntjänst</string>
-    <string name="osmand_cloud_delete_account_confirmation">Radera kontot\?</string>
+    <string name="osmand_cloud_delete_account_confirmation">Radera konto?</string>
     <string name="routing_attr_piste_type_nordic_description">Leder och skidspår för längdskidåkning.</string>
     <string name="contact_us">Kontakta oss</string>
     <string name="osmand_cloud_deleted_account_descr">Konto och all data har raderats från OsmAnd molntjänst.</string>
@@ -4846,27 +4843,7 @@
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
     <string name="track_filter_date_selected_format">%s - %s</string>
     <string name="average_glide_ratio">Genomsnittligt glidtal</string>
-    <string name="release_4_6">• Android Auto: nytt 3D läge
-\n
-\n• Möjligt att anpassa snabbknappar/tangentgenvägar för externa inmatningsenheter
-\n
-\n• Nya widgetar: Glidtal, Solens position, Tillgängligt minne
-\n
-\n• Spår: Filter och smarta mappar tillagda, förbättrad minneshantering för stora filer
-\n
-\n• Förbättrad färgläggning av spår i lutningsläget, med ny symmetrisk gradient
-\n
-\n• Förbättrade övre och nedre widgetpaneler med stöd för alla widgetar
-\n
-\n• OsmAnd Cloud: Tillgång till raderade filer
-\n
-\n• Stöd för ANT+ temperatur widget
-\n
-\n• Uppdaterad lokal resurshantering
-\n
-\n• Löst problem med genomskinligt statusfält
-\n
-\n</string>
+    <string name="release_4_6">• Android Auto: nytt 3D läge \n \n• Möjligt att anpassa snabbknappar/tangentgenvägar för externa inmatningsenheter \n \n• Nya widgetar: Glidtal, Solens position, Tillgängligt minne \n \n• Spår: Filter och smarta mappar tillagda, förbättrad minneshantering för stora filer \n \n• Förbättrad färgläggning av spår i lutningsläget, med ny symmetrisk gradient \n \n• Förbättrade övre och nedre widgetpaneler med stöd för alla widgetar \n \n• OsmAnd Cloud: Tillgång till raderade filer \n \n• Stöd för ANT+ temperatur widget \n \n• Uppdaterad lokal resurshantering \n \n• Löst problem med genomskinligt statusfält \n \n</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Kartvy under navigering</string>
     <string name="filter_by_name">Filtrera efter namn</string>
     <string name="shared_string_reset_all">Återställ allt</string>
@@ -4903,9 +4880,7 @@
     <string name="help_article_map_legend_ski_map_name">Vinter och skidor-kartstil</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Om OsmAnds ruttberäkning</string>
     <string name="terrain_category_description">Höjdkurvor, terrängskuggning i gråskala och lutningskartor i färg, för att visa toppar och dalar.</string>
-    <string name="location_source_descr">Som standard använder OsmAnd installerad från Google Play %1$s för att fastställa plats.
-\n
-\nOm du ges felaktig platsinformation, eller om enheten saknar %2$s, pröva att byta till \"%3$s\".</string>
+    <string name="location_source_descr">Som standard använder OsmAnd installerad från Google Play %1$s för att fastställa plats. \n \nOm du ges felaktig platsinformation, eller om enheten saknar %2$s, pröva att byta till \"%3$s\".</string>
     <string name="rendering_value_sector2_name">Sektor 2</string>
     <string name="ant_plus_help_title">Jag vet inte vilken typ av sensor jag har</string>
     <string name="time_to_intermediate_widget_desc">Visar \"Ankomsttid\" eller \"Återstående restid\" till första mellanliggande punkt. Tiden uppdateras kontinuerligt under navigeringen, och så fort en punkt passeras uppdateras den till nästa mellanliggande punkt.</string>
@@ -5208,9 +5183,7 @@
     <string name="slope_description">Lutningskartor använder färger för att visualisera hur brant terrängen är (lutningsgrad).</string>
     <string name="ui_customization_short_descr">Huvudmeny-objekt, kontextmeny</string>
     <string name="slope_download_description">Ytterligare kartor krävs för att visa terränglutning på kartan.</string>
-    <string name="ui_customization_description">Anpassa mängden objekt i \'Huvudmenyn\', \'Konfigurera kartan\' och \'Kontextmeny\'.
-\n
-\nDeaktivera oanvända insticksmoduler för att dölja alla deras inställningar och reglage. %1$s.</string>
+    <string name="ui_customization_description">Anpassa mängden objekt i \'Huvudmenyn\', \'Konfigurera kartan\' och \'Kontextmeny\'. \n \nDeaktivera oanvända insticksmoduler för att dölja alla deras inställningar och reglage. %1$s.</string>
     <string name="main_actions">Primära åtgärder</string>
     <string name="import_complete_description">Importerade alla data från %1$s. Använd knapparna nedan för att öppna någon del av appen för att hantera den.</string>
     <string name="download_unsupported_action">Åtgärden %1$s stöds inte</string>
@@ -5373,7 +5346,7 @@
     <string name="add_row">Lägg till rad</string>
     <string name="discard_changes_prompt">Kassera ändringarna?</string>
     <string name="shared_string_empty_trash">Töm papperskorgen</string>
-    <string name="delete_track_folder_dialog_message">Detta kommer radera mappen \'%1$s\' och alla %2$s innehållande spår.</string>
+    <string name="delete_track_folder_dialog_message">Detta kommer radera mappen %1$s och alla %2$s spår i den.</string>
     <string name="shared_string_delete_immediately">Radera omedelbart</string>
     <string name="delete_smart_folder_dialog_message">Detta kommer radera smarta mappen \"%1$s\". (Inga spår raderas.)</string>
     <string name="shared_string_is_deleted">%1$s har raderats.</string>
@@ -5720,4 +5693,94 @@
     <string name="rendering_attr_showDirtbikeTrails_description">Visa leder för off-road motorcykel (cross, enduro)</string>
     <string name="type_of_activity">Aktivitetstyp</string>
     <string name="change_activity">Byt aktivitet</string>
+    <string name="obd_searching_text_description">Vänliga ha din enhet nära skannern. Försäkra dig om att fordonets motor är igång.</string>
+    <string name="liter">l</string>
+    <string name="obd_fuel_consumption_rate_l_km_desc">Visar fordents bränsleförbrukningstakt baserat på beräkningar (l/100 km)</string>
+    <string name="obd_fuel_left_km">Återstående bränsle (km)</string>
+    <string name="obd_fuel_consumption_rate_l_h">Bränsleförbrukningstakt (l/h)</string>
+    <string name="obd_fuel_consumption_rate_percent_hour">Bränsleförbrukningstakt %/h</string>
+    <string name="obd_nothing_found_description">Vänlig kontrollera följande:\n – Säkerställ att Bluetooth är påslaget\n – Motorn är igång\n – Försäkra dig om att din enhet är inom räckhåll för skannern.</string>
+    <string name="obd_battery_voltage">Batterispänning</string>
+    <string name="obd_fuel_level">Bränsleeffektivitet (%)</string>
+    <string name="obd_fuel_pressure">Bränsletryck</string>
+    <string name="obd_fuel_consumption_rate_sensor_desc">Visar fordonets bränsleförbrukningstakt baserat på sensor (l/h)</string>
+    <string name="quick_action_finish_trip_recording_summary">En knapp för att spara GPX-spåret och avsluta inspelning av resa.</string>
+    <string name="quick_action_save_recorded_trip_and_continue_summary">En knapp för att spara den nuvarande inspelade resan som en GPX-fil och fortsätta att spela in ett nytt spår utan avbrott.</string>
+    <string name="quick_action_navigation_view_desc">En knapp för att öppna eller stänga navigationsvyn.</string>
+    <string name="energy_avg_info_description">Batterinivå per minut: %1$s\nEnergiförbrukning (mAh): %2$s</string>
+    <string name="shared_string_volume">Volym</string>
+    <string name="help_article_personal_color_palette_schemes_name">Färgscheman</string>
+    <string name="obd_fuel_consumption_rate">Bränsleförbrukningstakt</string>
+    <string name="obd_fuel_type">Bränsletyp</string>
+    <string name="quick_action_drawer_title">Sidomeny</string>
+    <string name="obd_widget_engine_speed">Motorhastighet</string>
+    <string name="shared_string_hour">Timme</string>
+    <string name="obd_engine_oil_temperature_desc">Visar motoroljans temperatur.</string>
+    <string name="average_value_slider_description">Välj tidsintervall för mätning av medelvärdet.</string>
+    <string name="obd_connecting_to_device">Ansluter till %s</string>
+    <string name="obd_fuel_consumption_rate_l_km">Bränsleförbrukningstakt (l/100 km)</string>
+    <string name="simulate_obd">Simulera obd-data</string>
+    <string name="percent_hour">%/h</string>
+    <string name="obd_fuel_consumption_rate_l_h_desc">Visar fordonets bränsleförbrukningstakt baserat på beräkningar (l/h)</string>
+    <string name="obd_fuel_consumption_rate_scanner">Bränsleförbrukningstakt (obd)</string>
+    <string name="bt_start_pair_failed">Kan inte initiera parkoppling med enhet</string>
+    <string name="obd_device_forget_sensor">Glöm skanner</string>
+    <string name="movies_list">Filmlista</string>
+    <string name="key_event_action_continuous_zoom_out">Kontinuerlig utzoomning</string>
+    <string name="shared_string_interpolation">Interpolation</string>
+    <string name="obd_searching_text">Söker efter skannrar</string>
+    <string name="obd_engine_runtime_desc">Visar hur länge motorn varit igång sedan den startades.</string>
+    <string name="obd_fuel_pressure_desc">Visar trycket i bränslesystemet</string>
+    <string name="obd_bluetooth_off_description">Slå på Bluetooth och anslut skannrar.</string>
+    <string name="connect_obd_instructions_step3">Aktivera Bluetooth på din enhet</string>
+    <string name="obd_fuel_left_liters">Återstående bränsle (liter)</string>
+    <string name="obd_engine_oil_temperature">Motoroljetemperatur</string>
+    <string name="connect_obd_instructions_step">1. Anslut skannern till ditt fordons OBD-II-port.\n\n 2. Slå på ditt fordons motor.\n\n 3. Aktivera Bluetooth på din enhet.\n\n 4. Tryck \'%1$s\' och välj din skanner från listan.</string>
+    <string name="learn_more_about_obd_sensors">Lär dig mer om sensorer.</string>
+    <string name="connect_obd_instructions_step4">Tryck \'%1$s,\' och välj din skanner i listan.</string>
+    <string name="new_trip_segment">Nytt segment av resa</string>
+    <string name="obd_ambient_air_temp_desc">Visar temperaturen utanför fordonet.</string>
+    <string name="energy_avg_info">Energistatistik (medel 1/ 5 / 15 minuter)</string>
+    <string name="quick_action_navigation_view_title">Navigationsvy</string>
+    <string name="connect_new_scanner">Anslut ny skanner</string>
+    <string name="shared_string_engine">Motor</string>
+    <string name="vehicle_metrics_recording_description">Välj vilka parametrar som ska lagras i GPX-filen.</string>
+    <string name="av_audio_sample_rate">Ljudsamplingsfrekvens</string>
+    <string name="av_audio_sample_rate_descr">Välj ljudsamplingsfrekvens.</string>
+    <string name="preview_next_turn">Förhandsvisa nästa sväng</string>
+    <string name="remaining_fuel_description">Visar återstående mängd bränsle i fordonets bränsletank</string>
+    <string name="remaining_fuel">Återstående bränsle</string>
+    <string name="obd_fuel_consumption">Bränsleförbrukning</string>
+    <string name="reset_average_value">Nollställ medelvärde</string>
+    <string name="average_temperature_slider_description">Välj tidsintervall för mätning av medeltemperaturen.</string>
+    <string name="current_temperature">Nuvarande temperatur</string>
+    <string name="average_temperature">Medeltemperatur</string>
+    <string name="shared_string_dynamic">Dynamisk</string>
+    <string name="obd_connected_to_device">Ansluten till %s</string>
+    <string name="obd_not_connected_to_device">Bortkopplad från %s</string>
+    <string name="obd_fuel_consumption_rate_liter_hour">Bränsleförbrukningstakt</string>
+    <string name="obd_nothing_found_text">Inga skannrar hittade</string>
+    <string name="obd_device_forget_sensor_description">Skannern kommer att tas bort från listan. Du kommer när som helst att kunna parkoppla denna skanner på nytt.</string>
+    <string name="connect_obd_instructions_step1">Anslut skannern till ditt fordons OBD-II-port.</string>
+    <string name="connect_obd_instructions_step2">Starta ditt fordons motor</string>
+    <string name="key_event_action_continuous_zoom_in">Kontinuerlig inzoomning</string>
+    <string name="shared_string_interface">Gränssnitt</string>
+    <string name="quick_action_verb_navigate">Navigera</string>
+    <string name="quick_action_previous_screen_desc">En knapp för att gå till föregående skärmbild.</string>
+    <string name="quick_action_drawer_desc">En knapp för att visa eller dölja sidomenyn.</string>
+    <string name="fuel_tank_capacity">Bränsletankens kapacitet</string>
+    <string name="shared_strings_dimensions">Dimensioner</string>
+    <string name="litres">Liter</string>
+    <string name="unit_of_volume_description">De valda enheterna kommer att användas för all volymrelaterad data i den nuvarande profilen.</string>
+    <string name="unit_of_volume">Volymenhet</string>
+    <string name="obd_battery_voltage_desc">Visar spänningsnivån hos fordonets batteri</string>
+    <string name="screen_is_unlocked">Pekskärmen är upplåst.</string>
+    <string name="screen_is_locked_by_external_button">Pekskärmen är låst. För att låsa upp den, tryck på %1$s-knappen eller tryck på knappen på skärmen.</string>
+    <string name="screen_is_locked_by_action_button">Pekskärmen är låst. Tryck på knappen för att låsa upp.</string>
+    <string name="quick_action_search_view_title">Sökvy</string>
+    <string name="obd_engine_runtime">Motorns körtid</string>
+    <string name="quick_action_search_view_desc">En knapp för att öppna eller stänga sökvyn.</string>
+    <string name="speedometer_maximum">Maximum</string>
+    <string name="l_100km">l/100km</string>
+    <string name="obd_fuel_consumption_rate_percent_hour_desc">Visar fordonets bränsleförbrukningstakt baserat på beräkningar (%/h)</string>
 </resources>

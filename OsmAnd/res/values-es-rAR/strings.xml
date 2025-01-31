@@ -1916,7 +1916,7 @@
     <string name="advanced_coords_search">Búsqueda avanzada de coordenadas</string>
     <string name="route_stops_before">%1$s parada(s) anterior(es)</string>
     <string name="rendering_attr_hideOverground_name">Objetos en superficie</string>
-    <string name="replace_favorite_confirmation">¿Reemplazar el favorito «%1$s»\?</string>
+    <string name="replace_favorite_confirmation">¿Reemplazar el favorito «%1$s»?</string>
     <string name="routing_attr_short_way_name">Ruta corta (bajo consumo)</string>
     <string name="shared_string_change">Cambiar</string>
     <string name="get_started">Empezar</string>
@@ -2017,7 +2017,7 @@
     <string name="quick_action_edit_action">Editar acción</string>
     <string name="dialog_add_action_title">Agregar acción</string>
     <string name="quick_actions_delete">Borrar acción</string>
-    <string name="quick_actions_delete_text">¿Borrar la acción «%s»\?</string>
+    <string name="quick_actions_delete_text">¿Borrar la acción «%s»?</string>
     <string name="quick_favorites_show_favorites_dialog">Mostrar diálogo de favoritos</string>
     <string name="quick_favorites_name_preset">Nombre predefinido</string>
     <string name="shared_string_action_name">Nombre de la acción</string>
@@ -2552,9 +2552,7 @@
     <string name="coord_input_save_as_track_descr">Añadiste %1$s puntos. Escribí un nombre de archivo y pulsá en «Guardar».</string>
     <string name="point_deleted">Punto %1$s borrado</string>
     <string name="shared_string_world">Mundo</string>
-    <string name="send_search_query_description">Enviaremos la consulta de búsqueda: «%1$s», así como la ubicación.
-\n
-\nNo se recopilan datos personales, los datos de búsqueda sólo se usan para mejorar el algoritmo de búsqueda.</string>
+    <string name="send_search_query_description">Enviaremos la consulta de búsqueda: «%1$s», así como la ubicación. \n \nNo se recopilan datos personales, los datos de búsqueda sólo se usan para mejorar el algoritmo de búsqueda.</string>
     <string name="send_search_query">¿Enviar consulta de búsqueda?</string>
     <string name="increase_search_radius_to">Ampliar el radio de búsqueda a %1$s</string>
     <string name="thank_you_for_feedback">Gracias por tus comentarios</string>
@@ -2773,7 +2771,7 @@
     <string name="profile_alert_need_save_title">Guardar cambios</string>
     <string name="profile_alert_need_save_msg">Guardá primero los cambios del perfil</string>
     <string name="profile_alert_delete_title">Borrar perfil</string>
-    <string name="profile_alert_delete_msg">¿Borrar el perfil «%s»\?</string>
+    <string name="profile_alert_delete_msg">¿Borrar el perfil «%s»?</string>
     <string name="select_base_profile_dialog_title">Elegí un perfil para comenzar</string>
     <string name="select_base_profile_dialog_message">El perfil personalizado se basa en uno de los perfiles de aplicación predefinidos, que define los ajustes básicos como la visibilidad predefinida de los widgets, las unidades de velocidad y distancia. Estos son los perfiles de aplicación predefinidos, junto con ejemplos de perfiles personalizados que se pueden ampliar:</string>
     <string name="select_nav_profile_dialog_title">Elegí el tipo de navegación</string>
@@ -4248,7 +4246,7 @@
     <string name="routing_attr_avoid_highway_description">Evita circular por caminos viales</string>
     <string name="map_widget_trip_recording_duration">Duración</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Sin restricciones)</string>
-    <string name="map_widget_trip_recording_distance">Distancia</string>
+    <string name="map_widget_distance">Distancia</string>
     <string name="routing_attr_hazmat_category_name">Categoría de materiales peligrosos</string>
     <string name="routing_attr_hazmat_category_description">Categoría de materiales peligrosos / Considera los permisos de acceso para vehículos con materiales peligrosos</string>
     <string name="routing_attr_avoid_fords_description">Evita pasar por vados</string>
@@ -4610,7 +4608,7 @@
     <string name="shared_string_inches">pulgadas</string>
     <string name="approximate_bearing">Rumbo aproximado</string>
     <string name="inch">in</string>
-    <string name="cloud_version_confirm_delete">¿Borrar «%1$s» de OsmAnd Cloud\?</string>
+    <string name="cloud_version_confirm_delete">¿Borrar «%1$s» de OsmAnd Cloud?</string>
     <string name="shared_string_in_progress">En curso</string>
     <string name="shared_string_original">Original</string>
     <string name="movement_speed">Velocidad de movimiento</string>
@@ -5532,4 +5530,18 @@
     <string name="location_interpolation_percent_desc">Define el porcentaje de interpolación de la ubicación, al navegar por la ruta. Esto reduce el desfase del movimiento de la ubicación en el mapa.</string>
     <string name="shared_string_interpolation">Interpolación</string>
     <string name="selected_delayed_profile">Perfil elegido «%s»</string>
+    <string name="default_buttons_corners_original_description">Cada botón mantendría su propio radio de esquina.</string>
+    <string name="default_buttons_opacity_original_description">Cada botón mantendría su propia opacidad de fondo.</string>
+    <string name="default_buttons_size_original_description">Cada botón mantendría su propio tamaño.</string>
+    <string name="calculating_indication_message">Calculando…</string>
+    <string name="calculate_size">Calcular tamaño</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Rutas de escalada</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Mostrar rutas de escalada</string>
+    <string name="display_distance_to_first_intermediate">Mostrar detalles de la ruta para la siguiente parada</string>
+    <string name="display_distance_to_first_intermediate_summary">Muestra primero el tiempo y la distancia a la siguiente parada. Desactivarla mostrará siempre los detalles del destino.</string>
+    <string name="shared_string_length">Longitud</string>
+    <string name="popular_places_nearby">Sitios populares cerca</string>
+    <string name="recently_visited">Visitados recientemente</string>
+    <string name="shared_string_avg_altitude">Altitud media</string>
+    <string name="shared_string_avg_speed">Velocidad media</string>
 </resources>

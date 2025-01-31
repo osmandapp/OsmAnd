@@ -165,8 +165,7 @@
     <string name="route_parameters_descr">လမ်းကြောင်း parameters များကိုပြုပြင်ပါ</string>
     <string name="route_parameters">လမ်းကြောင်း parameters များ</string>
     <string name="shared_string_walk">လမ်းလျှောက်</string>
-    <string name="save_poi_value_exceed_length">tag ၏အများဆုံးအရှည်မှအက္ခရာာ %s လုံးဖြစ်သည်။
-\nကျေးဇူးပြုပြီးတိုပေးပါ။</string>
+    <string name="save_poi_value_exceed_length">tag ၏အများဆုံးအရှည်မှအက္ခရာာ %s လုံးဖြစ်သည်။ \nကျေးဇူးပြုပြီးတိုပေးပါ။</string>
     <string name="avoid_pt_types_descr">လမ်းညွှန်ရန် မသုံးမြည့်ပြည်သူပို့ဆောင်ရေးအမျိုးအစားများကိုရွေးပါ။</string>
     <string name="avoid_pt_types">ရှောင်ထားသောပို့ဆောင်ရေးအမျိုးအစားများ</string>
     <string name="shared_string_degrees">ဒီဂရီ</string>
@@ -413,5 +412,5 @@
     <string name="add_group">အဖွဲ့တစ်ဖွဲ့ထည့်ပါ</string>
     <string name="open_settings">Settings ဖွင့်ပါ</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
-    <string name="output"></string>
+    <string name="output"/>
 </resources>
