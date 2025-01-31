@@ -5685,4 +5685,7 @@
     <string name="shared_string_avg_speed">Хв. швидкість</string>
     <string name="shared_string_length">Довжина</string>
     <string name="shared_string_avg_altitude">Середнє висота</string>
+    <string name="map_widget_route_information">Інформація про маршрут</string>
+    <string name="shared_string_default_view">Перегляд за замовчуванням</string>
+    <string name="map_widget_route_information_desc">Відображає приблизний час прибуття, час, що залишився в дорозі, і відстань для поточного маршруту навігації.</string>
 </resources>
