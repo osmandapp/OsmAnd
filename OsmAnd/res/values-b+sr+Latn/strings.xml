@@ -5659,4 +5659,7 @@
     <string name="shared_string_length">Dužina</string>
     <string name="shared_string_avg_altitude">Prosečna nadmorska visina</string>
     <string name="shared_string_avg_speed">Minimalna brzina</string>
+    <string name="shared_string_default_view">Podrazumevani prikaz</string>
+    <string name="map_widget_route_information">Informacije o ruti</string>
+    <string name="map_widget_route_information_desc">Prikazuje procenjeno vreme dolaska, preostalo vreme putovanja i udaljenost za trenutnu navigacionu rutu.</string>
 </resources>
