@@ -1524,7 +1524,7 @@
     <string name="rendering_attr_roadStyle_description">Izgled puta</string>
     <string name="parking_place">Mesta za parkiranje</string>
     <string name="rendering_attr_pisteGrooming_name">Ravnanje staze</string>
-    <string name="rendering_attr_pisteRoutes_name">Skijališta</string>
+    <string name="rendering_attr_pisteRoutes_name">Skijaške rute</string>
     <string name="days_behind">prethodni dani</string>
     <string name="debugging_and_development">OsmAnd razvoj</string>
     <string name="osmand_development_plugin_description">Podešavanja za razvoj i otklanjanje grešaka kao što su simuliranje navođenja, učinak iscrtavanja ili glasovni upiti. Namenjeno programerima, nepotrebno prilikom normalnog korišćenja.</string>
