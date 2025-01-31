@@ -1293,7 +1293,6 @@
     <string name="rendering_attr_showSurfaces_name">Prikazati površinu puteva</string>
     <string name="rendering_attr_showSurfaceGrade_name">Prikazati kvalitet puteva</string>
     <string name="rendering_attr_showAccess_name">Prikazuj ograničenja pristupa</string>
-    <string name="rendering_attr_hideAccess_name">Zabrane pristupa</string>
     <string name="rendering_attr_lessDetailed_name">Manje detalja</string>
     <string name="rendering_attr_moreDetailed_name">Više detalja</string>
     <string name="rendering_attr_buildings15zoom_name">Prikaz zgrada je na zumu 15</string>
@@ -3629,7 +3628,6 @@
     <string name="shared_string_add_photo">Dodaj fotografiju</string>
     <string name="register_on_openplacereviews">Registrujte se na
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Fotografije pruža projekat otvorenih podataka OpenPlaceReviews.org. Da biste postavili svoje fotografije, morate se prijaviti na veb stranicu.</string>
     <string name="register_opr_create_new_account">Napravi novi profil</string>
     <string name="register_opr_have_account">Već imam</string>
     <string name="shared_string_search_history">Pretraga istorije</string>
@@ -3646,7 +3644,6 @@
     <string name="select_groups_for_import">Izaberi grupe koje će biti uvezene.</string>
     <string name="select_items_for_import">Izaberi stavke koje će biti uvezene.</string>
     <string name="add_to_mapillary">Dodaj u Mapilari</string>
-    <string name="add_to_opr">Dodaj u OpenPlaceReviews</string>
     <string name="use_dev_url_descr">Pređi na upotrebu dev.openstreetmap.org umesto na openstreetmap.org radi probe otpremanja beleške OSM-a / TOI / GPX.</string>
     <string name="use_dev_url">Koristi dev.openstreetmap.org</string>
     <string name="add_photos_descr">OsmAnd prikazuje fotografije iz nekoliko izvora:
@@ -3742,9 +3739,6 @@
     <string name="open_place_reviews_plugin_description">Šaljite fotografije, recenzije i veze o javnim mestima kao što su restorani, hoteli, muzeji i putne tačke kao otvorene podatke na https://openplacereviews.org/data/.
 \n
 \nPročitajte više na https://openplacereviews.org</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Koristi test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Prijavite se za OpenPlaceReviews</string>
     <string name="activity_type_water_name">Voda</string>
     <string name="activity_type_winter_name">Zima</string>
     <string name="activity_type_snowmobile_name">Motorne sanke</string>
@@ -5572,7 +5566,6 @@
     <string name="obd_fuel_consumption_rate_l_h">Potrošnja goriva (L/h)</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Prikazuje potrošnju goriva na temelju senzora (L/h)</string>
     <string name="obd_fuel_consumption_rate_l_h_desc">Prikazuje potrošnju goriva na temelju proračuna (L/h)</string>
-    <string name="obd_fuel_left_percent">Preostalo goriva (%)</string>
     <string name="obd_fuel_level_percent">Nivo goriva (%)</string>
     <string name="liter">l</string>
     <string name="speedometer_maximum">Maksimum</string>
@@ -5597,7 +5590,6 @@
     <string name="us_gallons_unit">gal</string>
     <string name="unit_of_volume">Mera zapremine</string>
     <string name="unit_of_volume_description">Odabrane jedinice primeniće se na sve podatke koji se odnose na zapreminu u trenutnom profilu.</string>
-    <string name="imperial_gallons_unit">imp gal</string>
     <string name="fuel_tank_capacity_description">Unesi kapacitet goriva u rezervaru za tačno praćenje nivoa i potrošnje goriva</string>
     <string name="us_gallons">US galoni</string>
     <string name="record_obd_data">Snimi statistiku vozila</string>

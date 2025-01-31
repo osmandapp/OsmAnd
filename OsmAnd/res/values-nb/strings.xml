@@ -701,7 +701,6 @@
     <string name="rendering_attr_coloredBuildings_name">Fargekod bygninger etter type</string>
     <string name="rendering_attr_buildings15zoom_name">Bygninger på zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">Flere detaljer</string>
-    <string name="rendering_attr_hideAccess_name">Adgangsrestriksjoner</string>
     <string name="rendering_attr_showAccess_name">Vis adgangsrestriksjoner</string>
     <string name="rendering_attr_showSurfaceGrade_name">Vis veikvalitet</string>
     <string name="rendering_attr_showSurfaces_name">Vis veidekke</string>
@@ -3751,7 +3750,6 @@
     <string name="osm_login_descr">Logg inn med OAuth-metoden, eller bruk ditt OSM-brukernavn og passord.</string>
     <string name="register_on_openplacereviews">Registrer deg på
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Bilder tilbys av det åpne dataprosjektet OpenPlaceReviews.org. For å kunne laste opp bilder må du registrere deg på nettsiden deres.</string>
     <string name="manage_subscription">Håndter abonnement</string>
     <string name="shared_string_add_photo">Legg til bilde</string>
     <string name="register_opr_create_new_account">Opprett ny konto</string>
@@ -3766,7 +3764,6 @@
     <string name="app_mode_motorboat">Motorbåt</string>
     <string name="select_picture">Velg bilde</string>
     <string name="add_to_mapillary">Legg til i Mapillary</string>
-    <string name="add_to_opr">Legg til i OpenPlaceReviews</string>
     <string name="use_dev_url">Bruk dev.openstreetmap.org</string>
     <string name="add_photos_descr">OsmAnd viser bilder fra flere kilder:
 \nOpenPlaceReviews - interessepunktbilder;
@@ -3859,7 +3856,6 @@
     <string name="uploading_count">Laster opp %1$d av %2$d</string>
     <string name="select_segments">Velg segmenter</string>
     <string name="segments_count">Segment %1$d</string>
-    <string name="opr_use_dev_url">Bruk test.openplacereviews.org</string>
     <string name="activity_type_water_name">Vann</string>
     <string name="activity_type_winter_name">Vinter</string>
     <string name="activity_type_snowmobile_name">Snøskuter</string>
@@ -4004,7 +4000,6 @@
     <string name="osmand_online_routing_promo">Bruk forhåndsdefinerte maler, eller legg til OSRM, GraphHopper, openrouteservice, eller nettbasert GPX-ruting.</string>
     <string name="loading_list_of_routing_services">Laster inn liste over tilgjengelige ruteberegningstjenester</string>
     <string name="send_logcat_log">Send Logcat-logg</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="on_pause">Satt på pause</string>
     <string name="track_recording_description">Stopp opptak\?
 \nAll ulagret data vil gå tapt.</string>
@@ -4143,7 +4138,6 @@
     <string name="open_place_reviews_plugin_description">Gi bidrag til prosjektet OpenPlaceReviews som bilder, omtaler eller lenker om offentlige steder som restauranter, hoteller eller museer.
 \n
 \nFinn instruksjoner om hvordan du kan bidra på nettsiden vår %1$s.</string>
-    <string name="login_open_place_reviews">Logg inn på OpenPlaceReviews</string>
     <string name="temporary_conditional_routing_descr">Bruk veibegrensninger som er aktive nå på kartet</string>
     <string name="routing_attr_driving_style_description">Velg kjøreformål for å få kortere, raskere, eller tryggere rute</string>
     <string name="app_restart_required">Programomstart kreves for å bruke noen innstillinger.</string>
