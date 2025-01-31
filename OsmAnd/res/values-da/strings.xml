@@ -5704,4 +5704,7 @@
     <string name="shared_string_length">Længde</string>
     <string name="shared_string_avg_altitude">Gns. højde</string>
     <string name="shared_string_avg_speed">Min. hastighed</string>
+    <string name="map_widget_route_information">Ruteinformation</string>
+    <string name="map_widget_route_information_desc">Viser den forventede ankomsttid, resterende rejsetid og afstand for den aktuelle navigationsrute.</string>
+    <string name="shared_string_default_view">Standardvisning</string>
 </resources>
