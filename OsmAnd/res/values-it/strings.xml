@@ -5682,4 +5682,7 @@
     <string name="display_distance_to_first_intermediate">Mostra i dettagli del percorso per la prossima fermata</string>
     <string name="recently_visited">Visti di recente</string>
     <string name="popular_places_nearby">Luoghi popolari nelle vicinanze</string>
+    <string name="map_widget_route_information_desc">Mostra il tempo di arrivo stimato, il tempo di viaggio rimanente e la distanza per il percorso di navigazione corrente.</string>
+    <string name="shared_string_default_view">Vista predefinita</string>
+    <string name="map_widget_route_information">Informazioni sul percorso</string>
 </resources>
