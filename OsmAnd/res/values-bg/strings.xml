@@ -4660,4 +4660,6 @@
     <string name="shared_string_length">Дължина</string>
     <string name="shared_string_avg_speed">Мин. скорост</string>
     <string name="calculate_size">Изчисляване на големината</string>
+    <string name="map_widget_route_information_desc">Показва очакваното време на пристигане, оставащото време и разстоянието на текущия маршрут.</string>
+    <string name="map_widget_route_information">Сведения за маршрита</string>
 </resources>
