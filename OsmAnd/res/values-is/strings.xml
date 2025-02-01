@@ -819,7 +819,7 @@
 \nLengd %2$s</string>
     <string name="online_map">Nettengt kort</string>
     <string name="roads_only">Einungis vegir</string>
-    <string name="rendering_attr_pisteRoutes_name">Skíðabrekkur</string>
+    <string name="rendering_attr_pisteRoutes_name">Skíðaleiðir</string>
     <string name="free">Laust %1$s</string>
     <string name="device_memory">Minni tækis</string>
     <string name="rendering_attr_pisteGrooming_name">Verið að troða leið</string>
@@ -4843,7 +4843,7 @@
     <string name="approximate_bearing_descr">Reikna miðun út frá leið sem verið er að fylgja.</string>
     <string name="open_issue_on_github">Opnaðu verkbeiðni á GitHub</string>
     <string name="about_osmand">Um OsmAnd</string>
-    <string name="local_indexes_category_terrain">Yfirborðskort (3D</string>
+    <string name="local_indexes_category_terrain">Yfirborðskort (3D)</string>
     <string name="user_guide">Notendahandbók</string>
     <string name="send_logcat_log_descr">Ítarleg atvikaskrá</string>
     <string name="average_glide_time_interval_desc">Skilgreindu tímabilin sem notuð verða til að reikna meðalrennsli.</string>
@@ -5646,4 +5646,11 @@
     <string name="location_interpolation_percent">Prósentuhlutfall brúunar á staðsetningu</string>
     <string name="calculating_indication_message">Reikna…</string>
     <string name="display_distance_to_first_intermediate">Sýna ítarlegri upplýsingar um næsta áfangastað</string>
+    <string name="shared_string_avg_altitude">Meðalhæð</string>
+    <string name="shared_string_avg_speed">Lágm.hraði</string>
+    <string name="recently_visited">Nýlega heimsótt</string>
+    <string name="popular_places_nearby">Vinsælir staðir í nágrenninu</string>
+    <string name="shared_string_length">Lengd</string>
+    <string name="shared_string_default_view">Sjálfgefin sýn</string>
+    <string name="map_widget_route_information">Upplýsingar um leið</string>
 </resources>
