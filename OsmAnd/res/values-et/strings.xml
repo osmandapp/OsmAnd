@@ -80,7 +80,7 @@
     <string name="notes">Audio/video märkmed</string>
     <string name="online_map">Veebikaart</string>
     <string name="roads_only">Ainult teed</string>
-    <string name="rendering_attr_pisteRoutes_name">Suusamäed</string>
+    <string name="rendering_attr_pisteRoutes_name">Suusamarsruudid</string>
     <string name="free">Vaba %1$s</string>
     <string name="device_memory">Seadme mälu</string>
     <string name="edit_group">Muuda gruppi</string>
@@ -4960,4 +4960,10 @@
     <string name="quick_action_verb_start_pause">Käivita / Peata</string>
     <string name="wikimedia">Vikimeedia</string>
     <string name="sort_country_name_descending">Riigi nimi: Z – A</string>
+    <string name="shared_string_default_view">Vaikimisi vaade</string>
+    <string name="shared_string_length">Pikkus</string>
+    <string name="shared_string_avg_altitude">Keskmine kõrgus</string>
+    <string name="shared_string_avg_speed">Miinimumkiirus</string>
+    <string name="map_widget_route_information">Teekonna teave</string>
+    <string name="map_widget_route_information_desc">Kuvab hinnangulist saabumisaega, allesjäänud reisiaega ja kasutusel teekonna pikkust.</string>
 </resources>
