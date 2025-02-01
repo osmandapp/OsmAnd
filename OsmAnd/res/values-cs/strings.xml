@@ -1386,7 +1386,7 @@
     <string name="notes">A/V poznámky</string>
     <string name="online_map">On-line mapa</string>
     <string name="roads_only">Pouze cesty</string>
-    <string name="rendering_attr_pisteRoutes_name">Lyžařské svahy</string>
+    <string name="rendering_attr_pisteRoutes_name">Lyžařské trasy</string>
     <string name="free">%1$s volných</string>
     <string name="device_memory">Paměť zařízení</string>
     <string name="shared_string_audio">Audio</string>
