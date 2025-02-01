@@ -5024,4 +5024,10 @@
     <string name="poi_routes_cycling">Hjólreiðar</string>
     <string name="poi_cafe_yes">Já</string>
     <string name="poi_route_activity_type_train_riding">Lestaferðir</string>
+    <string name="poi_dog_sled_no">Hundasleðar: nei</string>
+    <string name="poi_dog_sled_yes">Hundasleðar: já</string>
+    <string name="poi_sled_yes">Sleðar: já</string>
+    <string name="poi_us_maps_recreation_area_activity_geocaching_and_letterboxing">GPS-feluleikir og ratleikir</string>
+    <string name="poi_sled_no">Sleðar: nei</string>
+    <string name="poi_access_notes">Athugasemdir varðandi aðgang</string>
 </resources>
