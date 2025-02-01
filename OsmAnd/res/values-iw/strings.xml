@@ -1423,7 +1423,7 @@
     <string name="notes">הערות ק/ו</string>
     <string name="online_map">מפה מקוונת</string>
     <string name="roads_only">דרכים בלבד</string>
-    <string name="rendering_attr_pisteRoutes_name">מדרוני סקי</string>
+    <string name="rendering_attr_pisteRoutes_name">מסלולי סקי</string>
     <string name="free">%1$s פנויים</string>
     <string name="device_memory">זיכרון המכשיר</string>
     <string name="rendering_attr_pisteGrooming_name">פילוס שלג</string>
