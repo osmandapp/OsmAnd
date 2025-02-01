@@ -1403,7 +1403,7 @@
     <string name="notes">Notes audio / vidéo</string>
     <string name="online_map">Carte en ligne</string>
     <string name="roads_only">Routes uniquement</string>
-    <string name="rendering_attr_pisteRoutes_name">Pistes de ski</string>
+    <string name="rendering_attr_pisteRoutes_name">Itinéraires à ski</string>
     <string name="watch">Suivre</string>
     <string name="shared_string_audio">Audio</string>
     <string name="share_note">Partager la note</string>
