@@ -2,6 +2,7 @@ package net.osmand.plus.configmap;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -37,10 +41,10 @@ import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import de.KnollFrank.lib.settingssearch.fragment.Fragments;
 
 public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataChangeUiAdapter,
 		InAppPurchaseListener, SelectGpxTaskListener {
@@ -76,8 +80,8 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater,
-	                         @Nullable ViewGroup container,
-	                         @Nullable Bundle savedInstanceState) {
+							 @Nullable ViewGroup container,
+							 @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		View view = inflater.inflate(R.layout.fragment_configure_map, container, false);
 		itemsContainer = view.findViewById(R.id.list);
@@ -166,7 +170,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	}
 
 	private void bindCategoryView(@NonNull ContextMenuItem category,
-	                              @NonNull List<ContextMenuItem> nestedItems) {
+								  @NonNull List<ContextMenuItem> nestedItems) {
 		// Use the same layout for all categories views
 		category.setLayout(R.layout.list_item_expandable_category);
 		category.setDescription(ContextMenuUtils.getCategoryDescription(nestedItems));
@@ -314,4 +318,48 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 		}
 	}
 
+	public PreferenceFragment asPreferenceFragment() {
+		return new PreferenceFragment();
+	}
+
+	public static class PreferenceFragment extends PreferenceFragmentCompat {
+
+		private List<ContextMenuItem> items;
+
+		public void setFragments(final Fragments fragments) {
+			items = getItems(fragments);
+		}
+
+		@Override
+		public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
+			final Context context = getPreferenceManager().getContext();
+			final PreferenceScreen screen = getPreferenceManager().createPreferenceScreen(context);
+			screen.setTitle("screen title");
+			screen.setSummary("screen summary");
+			PreferenceFragment
+					.asPreferences(items, context)
+					.forEach(screen::addPreference);
+			setPreferenceScreen(screen);
+		}
+
+		private List<ContextMenuItem> getItems(final Fragments fragments) {
+			final ConfigureMapFragment configureMapFragment = (ConfigureMapFragment) fragments.instantiateAndInitializeFragment(ConfigureMapFragment.class.getName(), Optional.empty());
+			return configureMapFragment.adapter.getItems();
+		}
+
+		private static List<Preference> asPreferences(final List<ContextMenuItem> contextMenuItems, final Context context) {
+			return contextMenuItems
+					.stream()
+					.map(contextMenuItem -> asPreference(contextMenuItem, context))
+					.collect(Collectors.toList());
+		}
+
+		private static Preference asPreference(final ContextMenuItem contextMenuItem, final Context context) {
+			final Preference preference = new Preference(context);
+			preference.setKey(contextMenuItem.getId());
+			preference.setTitle(contextMenuItem.getTitle());
+			preference.setSummary(contextMenuItem.getDescription());
+			return preference;
+		}
+	}
 }
