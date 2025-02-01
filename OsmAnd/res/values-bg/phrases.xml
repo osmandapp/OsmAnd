@@ -676,11 +676,26 @@
     <string name="poi_route_activity_type_golfing">Голф</string>
     <string name="poi_route_activity_type_fitness">Фитнес</string>
     <string name="poi_horse_riding">Конна езда</string>
-    <string name="poi_camp_site_deluxe">Луксозно</string>
+    <string name="poi_camp_site_deluxe">Луксозен</string>
     <string name="poi_us_maps_recreation_area_activity_horse_riding">Конна езда</string>
     <string name="poi_cafe_yes">Да</string>
     <string name="poi_destination">Местоназначение</string>
     <string name="poi_climbing_routes">Маршрути за скално катерене</string>
     <string name="poi_wiki_link">Уикипедия</string>
     <string name="poi_length">Дължина</string>
+    <string name="poi_route_activity_type_canoe">Кану</string>
+    <string name="poi_climbing_boulder">Скала за катерене</string>
+    <string name="poi_canoe">Кану</string>
+    <string name="poi_camp_site_standard">Обикновен</string>
+    <string name="poi_camp_site_basic">Основен</string>
+    <string name="poi_camp_site_serviced">Обслужваем</string>
+    <string name="poi_climbing_area">Място за катерене</string>
+    <string name="poi_climbing_route">Катерачен маршрът</string>
+    <string name="poi_climbing_route_bottom">Долна точка на катерачен маршрут</string>
+    <string name="poi_sled_yes">Шейна: да</string>
+    <string name="poi_sled_no">Шейна: не</string>
+    <string name="poi_dog_sled_yes">Кучешки впряг: да</string>
+    <string name="poi_dog_sled_no">Кучешки впряг: не</string>
+    <string name="poi_atv_yes">АТВ: да</string>
+    <string name="poi_atv_no">АТВ: не</string>
 </resources>
