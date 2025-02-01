@@ -102,13 +102,13 @@ object NearbyPlacesHelper {
 	fun showPointInContextMenu(mapActivity: MapActivity, point: OsmandApiFeatureData) {
 		val rendererView = app.osmandMap.mapView.mapRenderer
 		val mapContext = NativeCoreContext.getMapRendererContext()
+		var menuObject: MenuObject? = null
+		val latitude: Double = point.geometry.coordinates[1]
+		val longitude: Double = point.geometry.coordinates[0]
+		val latLon = LatLon(latitude, longitude)
 		if (rendererView != null && mapContext != null) {
-			var menuObject: MenuObject? = null
-			val latitude: Double = point.geometry.coordinates[1]
-			val longitude: Double = point.geometry.coordinates[0]
-			val zoom: ZoomLevel = rendererView.zoomLevel
-			val latLon = LatLon(latitude, longitude)
 			val pointI = NativeUtilities.getPoint31FromLatLon(latLon)
+			val zoom: ZoomLevel = rendererView.zoomLevel
 			val polygons: List<NativeLibrary.RenderedObject?> =
 				mapContext.retrievePolygonsAroundPoint(pointI, zoom, false)
 			if (!Algorithms.isEmpty(polygons)) {
@@ -124,29 +124,29 @@ object NearbyPlacesHelper {
 					}
 				}
 			}
-			val contextObject: IContextMenuProvider = mapActivity.mapLayers.poiMapLayer
-			val contextMenuLayer: ContextMenuLayer = mapActivity.mapLayers.contextMenuLayer
-			val pointDescription: PointDescription
-			val contextMenuObject: Any?
-			if (menuObject == null) {
-				val amenity: Amenity? = point.amenity
-				pointDescription = PointDescription(
-					PointDescription.POINT_TYPE_NEARBY_PLACE,
-					point.properties.wikiTitle)
-				contextMenuObject = if (amenity != null) {
-					point.amenity
-				} else {
-					null
-				}
-			} else {
-				pointDescription = menuObject.pointDescription
-				contextMenuObject = menuObject.getObject()
-			}
-			contextMenuLayer.showContextMenu(
-				latLon,
-				pointDescription,
-				contextMenuObject,
-				contextObject)
 		}
+		val contextObject: IContextMenuProvider = mapActivity.mapLayers.poiMapLayer
+		val contextMenuLayer: ContextMenuLayer = mapActivity.mapLayers.contextMenuLayer
+		val pointDescription: PointDescription
+		val contextMenuObject: Any?
+		if (menuObject == null) {
+			val amenity: Amenity? = point.amenity
+			pointDescription = PointDescription(
+				PointDescription.POINT_TYPE_NEARBY_PLACE,
+				point.properties.wikiTitle)
+			contextMenuObject = if (amenity != null) {
+				point.amenity
+			} else {
+				null
+			}
+		} else {
+			pointDescription = menuObject.pointDescription
+			contextMenuObject = menuObject.getObject()
+		}
+		contextMenuLayer.showContextMenu(
+			latLon,
+			pointDescription,
+			contextMenuObject,
+			contextObject)
 	}
 }

@@ -30,7 +30,6 @@ import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.NearbyPlacesTileProvider;
-import net.osmand.plus.views.layers.core.NearbyPlacesTileProvider.NearbyPlaceCacheItem;
 import net.osmand.wiki.WikiCoreHelper;
 import net.osmand.wiki.WikiImage;
 
@@ -51,7 +50,6 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 	private boolean showNearbyPoints;
 	private boolean nightMode;
 	private Object selectedObject;
-	private final Map<String, NearbyPlacesTileProvider.NearbyPlaceCacheItem> bigBitmapCache = new ConcurrentHashMap<>();
 
 	private final List<Target> imageLoadingTargets = new ArrayList<>();
 	private Bitmap cachedSmallIconBitmap;
@@ -162,15 +160,10 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 		for (NearbyPlacePoint point : fullObjects) {
 			Bitmap bitmap = point.imageBitmap;
 			if (bitmap != null) {
-				String key = point.photoTitle;
-				NearbyPlaceCacheItem cacheItem = bigBitmapCache.get(key);
-				if (cacheItem == null || cacheItem.isSelected != point.isSelected) {
-					Bitmap bigBitmap = PointImageUtils.createBigBitmap(getApplication(), bitmap, point == selectedObject);
-					cacheItem = new NearbyPlaceCacheItem(bigBitmap, point.isSelected);
-				}
+				Bitmap bigBitmap = PointImageUtils.createBigBitmap(getApplication(), bitmap, point.isSelected(selectedObject));
 				float x = tileBox.getPixXFromLatLon(point.getLatitude(), point.getLongitude());
 				float y = tileBox.getPixYFromLatLon(point.getLatitude(), point.getLongitude());
-				canvas.drawBitmap(cacheItem.bitmap, x, y, pointPaint);
+				canvas.drawBitmap(bigBitmap, x - bigBitmap.getWidth() / 2, y - bigBitmap.getHeight() / 2, pointPaint);
 			}
 		}
 	}
@@ -183,7 +176,8 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 		clearNearbyPoints();
 		nearbyPlacesMapLayerProvider = new NearbyPlacesTileProvider(getApplication(),
 				getPointsOrder(),
-				view.getDensity());
+				view.getDensity(),
+				selectedObject);
 
 		List<NearbyPlacePoint> points = customObjectsDelegate.getMapObjects();
 		showNearbyPoints(points);
@@ -192,7 +186,6 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 
 	private void showNearbyPoints(List<NearbyPlacePoint> points) {
 		for (NearbyPlacePoint nearbyPlacePoint : points) {
-			nearbyPlacePoint.isSelected = nearbyPlacePoint == selectedObject;
 			nearbyPlacesMapLayerProvider.addToData(nearbyPlacePoint);
 		}
 	}

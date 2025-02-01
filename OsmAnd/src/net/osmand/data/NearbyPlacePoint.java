@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.binary.ObfConstants;
 import net.osmand.util.Algorithms;
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData;
 
@@ -28,7 +29,6 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 	private double latitude;
 	private double longitude;
 	private double altitude = Double.NaN;
-	public boolean isSelected;
 
 	private int color;
 	private BackgroundType backgroundType;
@@ -129,7 +129,7 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 		}
 
 		NearbyPlacePoint point = (NearbyPlacePoint) o;
-		if(point.imageBitmap != imageBitmap) {
+		if (point.imageBitmap != imageBitmap) {
 			return false;
 		}
 
@@ -170,5 +170,18 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 		result = prime * result + ((poisubtype == null) ? 0 : poisubtype.hashCode());
 		result = prime * result + ((wikiDesc == null) ? 0 : wikiDesc.hashCode());
 		return result;
+	}
+
+	public boolean isSelected(@Nullable Object selectedObject) {
+		if (selectedObject == null) {
+			return false;
+		} else if (selectedObject instanceof NearbyPlacePoint) {
+			return selectedObject == this;
+		} else if (selectedObject instanceof Amenity amenity) {
+			long selectedId = ObfConstants.getOsmObjectId(amenity);
+			return featureData.properties.osmid == selectedId;
+		} else {
+			return false;
+		}
 	}
 }

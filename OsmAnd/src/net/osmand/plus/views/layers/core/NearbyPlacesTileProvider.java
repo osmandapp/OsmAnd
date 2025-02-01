@@ -28,37 +28,26 @@ import org.apache.commons.logging.LogFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvider {
 
 	private static final Log log = LogFactory.getLog(NearbyPlacesTileProvider.class);
 	private final QListPointI points31 = new QListPointI();
 	private final List<MapLayerData> mapLayerDataList = new ArrayList<>();
-	private final Map<String, NearbyPlaceCacheItem> bigBitmapCache = new ConcurrentHashMap<>();
 	private Bitmap cachedSmallBitmap;
 	private final OsmandApplication app;
 	private final float density;
 	private final PointI offset;
 	private MapTiledCollectionProvider providerInstance;
 	private int baseOrder;
+	private Object selectedObject;
 
-	public static class NearbyPlaceCacheItem {
-		public final Bitmap bitmap;
-		public final boolean isSelected;
-
-		public NearbyPlaceCacheItem(@NonNull Bitmap bitmap, boolean isSelected) {
-			this.bitmap = bitmap;
-			this.isSelected = isSelected;
-		}
-	}
-
-	public NearbyPlacesTileProvider(@NonNull OsmandApplication context, int baseOrder, float density) {
+	public NearbyPlacesTileProvider(@NonNull OsmandApplication context, int baseOrder, float density, Object selectedObject) {
 		this.app = context;
 		this.baseOrder = baseOrder;
 		this.density = density;
 		this.offset = new PointI(0, 0);
+		this.selectedObject = selectedObject;
 	}
 
 	public void drawSymbols(@NonNull MapRendererView mapRenderer) {
@@ -117,26 +106,20 @@ public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvid
 
 	@Override
 	public SingleSkImage getImageBitmap(int index, boolean isFullSize) {
-		NearbyPlaceCacheItem cacheItem;
 		NearbyPlacesTileProvider.MapLayerData data = index < mapLayerDataList.size() ? mapLayerDataList.get(index) : null;
 		if (data == null) {
 			return SwigUtilities.nullSkImage();
 		}
-		String key = data.nearbyPlace.photoTitle;
+		Bitmap bitmap;
 		if (isFullSize && data.nearbyPlace.imageBitmap != null) {
-			cacheItem = bigBitmapCache.get(key);
-			if (cacheItem == null || cacheItem.isSelected != data.nearbyPlace.isSelected) {
-				Bitmap bitmap = PointImageUtils.createBigBitmap(app, data.nearbyPlace.imageBitmap, data.nearbyPlace.isSelected);
-				cacheItem = new NearbyPlaceCacheItem(bitmap, data.nearbyPlace.isSelected);
-				bigBitmapCache.put(key, cacheItem);
-			}
+			bitmap = PointImageUtils.createBigBitmap(app, data.nearbyPlace.imageBitmap, data.nearbyPlace.isSelected(selectedObject));
 		} else {
 			if (cachedSmallBitmap == null) {
 				cachedSmallBitmap = PointImageUtils.createSmallPointBitmap(app);
 			}
-			cacheItem = new NearbyPlaceCacheItem(cachedSmallBitmap, data.nearbyPlace.isSelected);
+			bitmap = cachedSmallBitmap;
 		}
-		return NativeUtilities.createSkImageFromBitmap(cacheItem.bitmap);
+		return NativeUtilities.createSkImageFromBitmap(bitmap);
 	}
 
 	@Override
