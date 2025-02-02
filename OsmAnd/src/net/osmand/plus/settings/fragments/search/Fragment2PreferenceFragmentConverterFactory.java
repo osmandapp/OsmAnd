@@ -25,13 +25,6 @@ class Fragment2PreferenceFragmentConverterFactory implements de.KnollFrank.lib.s
 										Optional.empty())) :
 						Optional.empty();
 			}
-
-			@Override
-			public Optional<Class<? extends PreferenceFragmentCompat>> asPreferenceFragment(final Class<? extends Fragment> fragment) {
-				return ConfigureMapFragment.class.isAssignableFrom(fragment) ?
-						Optional.of(ConfigureMapFragment.PreferenceFragment.class) :
-						Optional.empty();
-			}
 		};
 	}
 }
