@@ -146,7 +146,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return builder.isTransliterateNames();
 	}
 
-	public void setMapContextMenu(MapContextMenu mapContextMenu) {
+	public void setMapContextMenu(@Nullable MapContextMenu mapContextMenu) {
 		this.mapContextMenu = mapContextMenu;
 		builder.setMapContextMenu(mapContextMenu);
 	}
