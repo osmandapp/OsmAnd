@@ -1,5 +1,6 @@
 package net.osmand.plus.nearbyplaces
 
+import com.squareup.picasso.Picasso
 import net.osmand.NativeLibrary
 import net.osmand.ResultMatcher
 import net.osmand.binary.BinaryMapIndexReader
@@ -21,6 +22,7 @@ import net.osmand.plus.views.layers.ContextMenuLayer
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider
 import net.osmand.util.Algorithms
 import net.osmand.util.CollectionUtils
+import net.osmand.wiki.WikiCoreHelper
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData
 import java.util.Collections
 import kotlin.math.min
@@ -47,7 +49,15 @@ object NearbyPlacesHelper {
 
 			override fun onFinish(result: List<OsmandApiFeatureData>) {
 				val newListSize = min(result.size, PLACES_LIMIT)
-				dataCollection = result.subList(0, newListSize)
+				dataCollection = result.filter { !Algorithms.isEmpty(it.properties.photoTitle) }.subList(0, newListSize)
+				dataCollection?.let {
+					for (image in it) {
+						val wikiImage = WikiCoreHelper.getImageData(image.properties.photoTitle)
+						Picasso.get()
+							.load(wikiImage.imageIconUrl)
+							.fetch()
+					}
+				}
 				updateLastModifiedTime()
 				notifyListeners()
 			}

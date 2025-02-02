@@ -1,10 +1,6 @@
 package net.osmand.plus.search
 
 import android.net.TrafficStats
-import net.osmand.ResultMatcher
-import net.osmand.binary.BinaryMapIndexReader
-import net.osmand.binary.ObfConstants
-import net.osmand.data.Amenity
 import net.osmand.data.QuadRect
 import net.osmand.plus.OsmandApplication
 import net.osmand.shared.KAsyncTask

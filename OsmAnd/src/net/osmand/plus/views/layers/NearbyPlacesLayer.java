@@ -292,7 +292,7 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 			imageLoadingTargets.add(imgLoadTarget);
 			if (wikiImage != null) {
 				Picasso.get()
-						.load(wikiImage.getImageStubUrl())
+						.load(wikiImage.getImageIconUrl())
 						.tag(LOAD_NEARBY_IMAGES_TAG)
 						.into(imgLoadTarget);
 			}
