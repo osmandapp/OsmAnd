@@ -4337,7 +4337,7 @@ POIの更新は利用できません</string>
     <string name="storage_copied_files_size">%1$s個のファイル(%2$s)を処理しました</string>
     <string name="routeInfo_tracktype_description">ルートまたは経路の線でその路面構成に応じて色付けします。通常、道路網がほとんど舗装されていない場合に適用されます。</string>
     <string name="routeInfo_smoothness_description">特に表面の規則性/平坦性の観点での、車輪の付いたあらゆる乗り物においてそれぞれの通行が認められる歩道および車道の操縦性分類です。</string>
-    <string name="not_enough_contributions_descr">無制限の%1$s毎の地図更新を有効にするには、過去2か月間に最低%2$sの変更が必要です。</string>
+    <string name="not_enough_contributions_descr">無制限の%2$s毎の地図更新を有効にするには、過去2か月間に最低%1$sの変更が必要です。</string>
     <string name="setting_supported_by_style">この設定は、\'%1$s\'というマップスタイル時に提供されます</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">ノードネットワークのタイプ(国際、地域、ローカル)に応じてルートに色付けします。</string>
     <string name="shared_string_show_slope">勾配を表示</string>
