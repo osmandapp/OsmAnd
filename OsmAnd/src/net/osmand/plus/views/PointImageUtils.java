@@ -166,9 +166,9 @@ public class PointImageUtils {
 	}
 
 	public static Bitmap createSmallPointBitmap(@NonNull Context ctx) {
-		int borderWidth = AndroidUtils.dpToPxAuto(ctx, SMALL_ICON_BORDER_DP);
+		int borderWidth = AndroidUtils.dpToPx(ctx, SMALL_ICON_BORDER_DP);
 		Bitmap circle = getCircle(ctx);
-		int smallIconSize = AndroidUtils.dpToPxAuto(ctx, SMALL_ICON_SIZE_DP);
+		int smallIconSize = AndroidUtils.dpToPx(ctx, SMALL_ICON_SIZE_DP);
 		Bitmap bitmapResult = Bitmap.createBitmap(smallIconSize, smallIconSize, Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmapResult);
 		BITMAP_PAINT.setColorFilter(new PorterDuffColorFilter(POINT_OUTER_COLOR, PorterDuff.Mode.SRC_IN));
