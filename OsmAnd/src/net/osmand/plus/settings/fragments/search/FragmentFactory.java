@@ -18,41 +18,48 @@ import de.KnollFrank.lib.settingssearch.fragment.Fragments;
 class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.FragmentFactory {
 
 	@Override
-	public Fragment instantiate(final Class<? extends Fragment> fragmentClass,
-								final Optional<PreferenceWithHost> src,
-								final Context context,
-								final Fragments fragments) {
-		final Fragment fragment = _instantiate(fragmentClass, src, context, fragments);
+	public <T extends Fragment> T instantiate(final Class<T> fragmentClass,
+											  final Optional<PreferenceWithHost> src,
+											  final Context context,
+											  final Fragments fragments) {
+		final T fragment = _instantiate(fragmentClass, src, context, fragments);
 		if (ConfigureMapFragment.PreferenceFragment.class.equals(fragmentClass)) {
 			final ConfigureMapFragment.PreferenceFragment preferenceFragment = (ConfigureMapFragment.PreferenceFragment) fragment;
-			preferenceFragment.setFragments(fragments);
-			return preferenceFragment;
+			preferenceFragment.beforeOnCreate(fragments);
+			return (T) preferenceFragment;
 		}
 		setConfigureSettingsSearch(fragment, true);
 		return fragment;
 	}
 
-	private static Fragment _instantiate(final Class<? extends Fragment> fragmentClass,
-										 final Optional<PreferenceWithHost> src,
-										 final Context context,
-										 final Fragments fragments) {
+	private static <T extends Fragment> T _instantiate(final Class<T> fragmentClass,
+													   final Optional<PreferenceWithHost> src,
+													   final Context context,
+													   final Fragments fragments) {
 		return FragmentFactory
-				.instantiate(src, context)
+				.instantiate(src, context, fragmentClass)
 				.orElseGet(() -> createDefaultInstance(fragmentClass, src, context, fragments));
 	}
 
-	private static Optional<Fragment> instantiate(final Optional<PreferenceWithHost> src, final Context context) {
+	private static <T extends Fragment> Optional<T> instantiate(final Optional<PreferenceWithHost> src,
+																final Context context,
+																final Class<T> classOfT) {
 		return src
 				.filter(preferenceWithHost -> preferenceWithHost.host() instanceof PreferenceFragmentHandlerProvider)
 				.flatMap(preferenceWithHost -> ((PreferenceFragmentHandlerProvider) preferenceWithHost.host()).getPreferenceFragmentHandler(preferenceWithHost.preference()))
-				.map(preferenceFragmentHandler -> preferenceFragmentHandler.createPreferenceFragment(context, Optional.empty()));
+				.map(preferenceFragmentHandler -> preferenceFragmentHandler.createPreferenceFragment(context, Optional.empty()))
+				.flatMap(
+						preferenceFragment ->
+								classOfT.isAssignableFrom(preferenceFragment.getClass()) ?
+										Optional.of((T) preferenceFragment) :
+										Optional.empty());
 	}
 
-	private static Fragment createDefaultInstance(final Class<? extends Fragment> fragmentClass,
-												  final Optional<PreferenceWithHost> src,
-												  final Context context,
-												  final Fragments fragments) {
-		final Fragment fragment = new DefaultFragmentFactory().instantiate(fragmentClass, src, context, fragments);
+	private static <T extends Fragment> T createDefaultInstance(final Class<T> fragmentClass,
+																final Optional<PreferenceWithHost> src,
+																final Context context,
+																final Fragments fragments) {
+		final T fragment = new DefaultFragmentFactory().instantiate(fragmentClass, src, context, fragments);
 		src.ifPresent(_src -> configureFragment(fragment, _src));
 		return fragment;
 	}

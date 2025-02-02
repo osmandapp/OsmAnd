@@ -326,7 +326,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 
 		private List<ContextMenuItem> items;
 
-		public void setFragments(final Fragments fragments) {
+		public void beforeOnCreate(final Fragments fragments) {
 			items = getItems(fragments);
 		}
 
@@ -343,7 +343,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 		}
 
 		private List<ContextMenuItem> getItems(final Fragments fragments) {
-			final ConfigureMapFragment configureMapFragment = (ConfigureMapFragment) fragments.instantiateAndInitializeFragment(ConfigureMapFragment.class, Optional.empty());
+			final ConfigureMapFragment configureMapFragment = fragments.instantiateAndInitializeFragment(ConfigureMapFragment.class, Optional.empty());
 			return configureMapFragment.adapter.getItems();
 		}
 
