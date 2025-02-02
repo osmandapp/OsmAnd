@@ -18,12 +18,12 @@ import de.KnollFrank.lib.settingssearch.fragment.Fragments;
 class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.FragmentFactory {
 
 	@Override
-	public Fragment instantiate(final String fragmentClassName,
+	public Fragment instantiate(final Class<? extends Fragment> fragmentClass,
 								final Optional<PreferenceWithHost> src,
 								final Context context,
 								final Fragments fragments) {
-		final Fragment fragment = _instantiate(fragmentClassName, src, context, fragments);
-		if (ConfigureMapFragment.PreferenceFragment.class.getName().equals(fragmentClassName)) {
+		final Fragment fragment = _instantiate(fragmentClass, src, context, fragments);
+		if (ConfigureMapFragment.PreferenceFragment.class.equals(fragmentClass)) {
 			final ConfigureMapFragment.PreferenceFragment preferenceFragment = (ConfigureMapFragment.PreferenceFragment) fragment;
 			preferenceFragment.setFragments(fragments);
 			return preferenceFragment;
@@ -32,13 +32,13 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 		return fragment;
 	}
 
-	private static Fragment _instantiate(final String fragmentClassName,
+	private static Fragment _instantiate(final Class<? extends Fragment> fragmentClass,
 										 final Optional<PreferenceWithHost> src,
 										 final Context context,
 										 final Fragments fragments) {
 		return FragmentFactory
 				.instantiate(src, context)
-				.orElseGet(() -> createDefaultInstance(fragmentClassName, src, context, fragments));
+				.orElseGet(() -> createDefaultInstance(fragmentClass, src, context, fragments));
 	}
 
 	private static Optional<Fragment> instantiate(final Optional<PreferenceWithHost> src, final Context context) {
@@ -48,11 +48,11 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 				.map(preferenceFragmentHandler -> preferenceFragmentHandler.createPreferenceFragment(context, Optional.empty()));
 	}
 
-	private static Fragment createDefaultInstance(final String fragmentClassName,
+	private static Fragment createDefaultInstance(final Class<? extends Fragment> fragmentClass,
 												  final Optional<PreferenceWithHost> src,
 												  final Context context,
 												  final Fragments fragments) {
-		final Fragment fragment = new DefaultFragmentFactory().instantiate(fragmentClassName, src, context, fragments);
+		final Fragment fragment = new DefaultFragmentFactory().instantiate(fragmentClass, src, context, fragments);
 		src.ifPresent(_src -> configureFragment(fragment, _src));
 		return fragment;
 	}

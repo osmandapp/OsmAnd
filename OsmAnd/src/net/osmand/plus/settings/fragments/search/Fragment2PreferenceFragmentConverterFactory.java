@@ -21,7 +21,7 @@ class Fragment2PreferenceFragmentConverterFactory implements de.KnollFrank.lib.s
 				return fragment instanceof final ConfigureMapFragment configureMapFragment ?
 						Optional.of(
 								(PreferenceFragmentCompat) fragments.instantiateAndInitializeFragment(
-										configureMapFragment.asPreferenceFragment().getClass().getName(),
+										configureMapFragment.asPreferenceFragment().getClass(),
 										Optional.empty())) :
 						Optional.empty();
 			}
