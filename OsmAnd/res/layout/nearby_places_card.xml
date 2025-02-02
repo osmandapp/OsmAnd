@@ -89,15 +89,4 @@
 
 	<include layout="@layout/list_item_divider" />
 
-	<net.osmand.plus.widgets.TextViewEx
-		style="@style/TitleStyle.Medium"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="?attr/list_background_color"
-		android:paddingStart="@dimen/content_padding"
-		android:paddingTop="@dimen/content_padding_small"
-		android:paddingBottom="@dimen/content_padding_small"
-		android:text="@string/recently_visited"
-		android:textColor="?android:textColorPrimary" />
-
 </LinearLayout>
