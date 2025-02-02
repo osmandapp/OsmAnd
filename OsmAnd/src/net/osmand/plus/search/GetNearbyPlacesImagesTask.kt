@@ -34,29 +34,6 @@ class GetNearbyPlacesImagesTask(
 			LOG.debug("Load nearby images error $error")
 		}
 		LOG.debug("Finish loading nearby places. Found ${wikimediaImageList.size} items")
-
-		val amenities: List<Amenity> = app.resourceManager.searchAmenities(
-			BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER,
-			mapRect.top, mapRect.left, mapRect.bottom, mapRect.right,
-			-1, true,
-			object : ResultMatcher<Amenity?> {
-				override fun publish(amenity: Amenity?): Boolean {
-					var idFound = false
-					val id = ObfConstants.getOsmObjectId(amenity)
-					for (data in wikimediaImageList) {
-						if(data.properties.osmid == id) {
-							data.amenity = amenity
-							idFound = true
-						}
-					}
-					return idFound
-				}
-
-				override fun isCancelled(): Boolean {
-					return false
-				}
-			})
-		LOG.debug("Found ${amenities.size} amenities for nearbyPlaces")
 		return wikimediaImageList
 	}
 

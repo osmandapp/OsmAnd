@@ -308,7 +308,6 @@ public class WikiCoreHelper {
 	}
 
 	public static class OsmandApiFeatureData {
-		public Amenity amenity;
 		@Expose
 		public WikiDataProperties properties;
 		@Expose

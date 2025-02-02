@@ -1,6 +1,8 @@
 package net.osmand.plus.nearbyplaces
 
 import net.osmand.NativeLibrary
+import net.osmand.ResultMatcher
+import net.osmand.binary.BinaryMapIndexReader
 import net.osmand.binary.ObfConstants
 import net.osmand.core.jni.ZoomLevel
 import net.osmand.data.Amenity
@@ -130,23 +132,50 @@ object NearbyPlacesHelper {
 		val pointDescription: PointDescription
 		val contextMenuObject: Any?
 		if (menuObject == null) {
-			val amenity: Amenity? = point.amenity
+			val amenity: Amenity? = getAmenity(latLon, point)
 			pointDescription = PointDescription(
 				PointDescription.POINT_TYPE_NEARBY_PLACE,
 				point.properties.wikiTitle)
-			contextMenuObject = if (amenity != null) {
-				point.amenity
-			} else {
-				null
-			}
+			contextMenuObject = amenity
 		} else {
 			pointDescription = menuObject.pointDescription
 			contextMenuObject = menuObject.getObject()
 		}
+		val mapView = app.osmandMap.mapView
+		mapView.currentRotatedTileBox.setLatLonCenter(latLon.latitude, latLon.longitude)
 		contextMenuLayer.showContextMenu(
 			latLon,
 			pointDescription,
 			contextMenuObject,
 			contextObject)
+	}
+
+	fun getAmenity(latLon: LatLon, point: OsmandApiFeatureData): Amenity? {
+		val mapView = app.osmandMap.mapView
+		val tb = mapView.currentRotatedTileBox.copy()
+		tb.setLatLonCenter(latLon.latitude, latLon.longitude)
+		tb.zoom = 15
+		val mapRect = tb.latLonBounds
+		var foundAmenity: Amenity? = null
+		app.resourceManager.searchAmenities(
+			BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER,
+			mapRect.top, mapRect.left, mapRect.bottom, mapRect.right,
+			-1, true,
+			object : ResultMatcher<Amenity?> {
+				override fun publish(amenity: Amenity?): Boolean {
+					var idFound = false
+					val id = ObfConstants.getOsmObjectId(amenity)
+					if (point.properties.osmid == id) {
+						foundAmenity = amenity
+						idFound = true
+					}
+					return idFound
+				}
+
+				override fun isCancelled(): Boolean {
+					return false
+				}
+			})
+		return foundAmenity
 	}
 }
