@@ -100,7 +100,6 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-
 						{
 								"FuelTankCapacityBottomSheet: title",
 								new SettingsSearchTestTemplate() {
