@@ -8,12 +8,12 @@ import net.osmand.plus.configmap.ConfigureMapFragment;
 import java.util.Optional;
 
 import de.KnollFrank.lib.settingssearch.Fragment2PreferenceFragmentConverter;
-import de.KnollFrank.lib.settingssearch.fragment.Fragments;
+import de.KnollFrank.lib.settingssearch.fragment.IFragments;
 
 class Fragment2PreferenceFragmentConverterFactory implements de.KnollFrank.lib.settingssearch.Fragment2PreferenceFragmentConverterFactory {
 
 	@Override
-	public Fragment2PreferenceFragmentConverter createFragment2PreferenceFragmentConverter(final Fragments fragments) {
+	public Fragment2PreferenceFragmentConverter createFragment2PreferenceFragmentConverter(final IFragments fragments) {
 		return new Fragment2PreferenceFragmentConverter() {
 
 			@Override

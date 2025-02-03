@@ -44,7 +44,7 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import de.KnollFrank.lib.settingssearch.fragment.Fragments;
+import de.KnollFrank.lib.settingssearch.fragment.IFragments;
 
 public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataChangeUiAdapter,
 		InAppPurchaseListener, SelectGpxTaskListener {
@@ -326,7 +326,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 
 		private List<ContextMenuItem> items;
 
-		public void beforeOnCreate(final Fragments fragments) {
+		public void beforeOnCreate(final IFragments fragments) {
 			items = getItems(fragments);
 		}
 
@@ -342,7 +342,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 			setPreferenceScreen(screen);
 		}
 
-		private List<ContextMenuItem> getItems(final Fragments fragments) {
+		private List<ContextMenuItem> getItems(final IFragments fragments) {
 			final ConfigureMapFragment configureMapFragment = fragments.instantiateAndInitializeFragment(ConfigureMapFragment.class, Optional.empty());
 			return configureMapFragment.adapter.getItems();
 		}
