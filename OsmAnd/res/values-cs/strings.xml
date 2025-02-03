@@ -5668,4 +5668,7 @@
     <string name="shared_string_default_view">Výchozí zobrazení</string>
     <string name="map_widget_route_information">Informace o trase</string>
     <string name="map_widget_route_information_desc">Zobrazuje odhadovaný čas příjezdu, zbývající čas jízdy a vzdálenost pro aktuální navigační trasu.</string>
+    <string name="ais_load_data">Načíst data AIS ze souboru</string>
+    <string name="ais_address_settings">Nastavení IP adresy</string>
+    <string name="ais_address_settings_description">Zvolte protokol NMEA (UDP/TCP) a nastavte adresy</string>
 </resources>
