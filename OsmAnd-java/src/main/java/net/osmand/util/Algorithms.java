@@ -1054,13 +1054,13 @@ public class Algorithms {
 	public static String formatMinutesDuration(int minutes, boolean compact) {
 		int min = minutes % 60;
 		int hours = minutes / 60;
-		if (compact && min == 0) {
-			return String.format(Locale.UK, "%d", hours);
-		} else if (compact) {
+		if (compact) {
+			if (min == 0) {
+				return String.format(Locale.UK, "%d", hours);
+			}
 			return String.format(Locale.UK, "%d:%02d", hours, min);
-		} else {
-			return String.format(Locale.UK, "%02d:%02d", hours, min);
 		}
+		return String.format(Locale.UK, "%02d:%02d", hours, min);
 	}
 
 	public static <T extends Enum<T>> T parseEnumValue(T[] cl, String val, T defaultValue) {
