@@ -55,12 +55,14 @@ class NearbyPlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIte
 			object : OnBackPressedCallback(true) {
 				override fun handleOnBackPressed() {
 					if (isHidden) {
-						parentFragmentManager.beginTransaction()
-							.show(this@NearbyPlacesFragment)
-							.commit()
+						activity?.supportFragmentManager?.beginTransaction()
+							?.show(this@NearbyPlacesFragment)
+							?.commit()
 						mapActivity?.contextMenu?.hideMenus()
 					} else {
-						fragmentManager?.popBackStack()
+						activity?.supportFragmentManager?.beginTransaction()
+							?.remove(this@NearbyPlacesFragment)
+							?.commit()
 						val fragmentsHelper = mapActivity?.fragmentsHelper
 						val quickSearchDialogFragment = fragmentsHelper?.quickSearchDialogFragment
 						quickSearchDialogFragment?.let {
@@ -129,7 +131,6 @@ class NearbyPlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIte
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 				manager.beginTransaction()
 					.replace(R.id.fragmentContainer, NearbyPlacesFragment(), TAG)
-					.addToBackStack(null)
 					.commitAllowingStateLoss()
 			}
 		}
@@ -143,7 +144,7 @@ class NearbyPlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIte
 	}
 
 	fun hide() {
-		val transaction = fragmentManager?.beginTransaction()
+		val transaction = activity?.supportFragmentManager?.beginTransaction()
 		transaction?.hide(this)
 		transaction?.commit()
 	}
