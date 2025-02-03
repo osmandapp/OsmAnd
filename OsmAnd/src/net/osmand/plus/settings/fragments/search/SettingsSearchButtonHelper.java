@@ -71,7 +71,7 @@ public class SettingsSearchButtonHelper {
 						new SearchDatabaseConfigBuilder()
 								.withFragmentFactory(new FragmentFactory())
 								.withRootPreferenceFragmentOfActivityProvider(new RootPreferenceFragmentOfActivityProvider())
-								.withFragment2PreferenceFragmentConverterFactory(new Fragment2PreferenceFragmentConverterFactory())
+								.withFragment2PreferenceFragmentConverter(new Fragment2PreferenceFragmentConverter())
 								.withPreferenceFragmentConnected2PreferenceProvider(new PreferenceFragmentConnected2PreferenceProvider())
 								.withSearchableInfoProvider(SettingsSearchButtonHelper::getSearchableInfo)
 								.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
