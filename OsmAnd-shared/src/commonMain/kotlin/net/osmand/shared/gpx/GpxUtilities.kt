@@ -469,18 +469,18 @@ object GpxUtilities {
 			if (author != null) {
 				serializer.attribute(null, "creator", author)
 			}
-			serializer.attribute(null, "xmlns", "https://www.topografix.com/GPX/1/1")
+			serializer.attribute(null, "xmlns", "http://www.topografix.com/GPX/1/1")
 			serializer.attribute(null, "xmlns:osmand", "https://osmand.net/docs/technical/osmand-file-formats/osmand-gpx")
 			serializer.attribute(
 				null,
 				"xmlns:gpxtpx",
 				"https://www8.garmin.com/xmlschemas/TrackPointExtensionv1.xsd"
 			)
-			serializer.attribute(null, "xmlns:xsi", "https://www.w3.org/2001/XMLSchema-instance")
+			serializer.attribute(null, "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance")
 			serializer.attribute(
 				null,
 				"xsi:schemaLocation",
-				"https://www.topografix.com/GPX/1/1 https://www.topografix.com/GPX/1/1/gpx.xsd"
+				"http://www.topografix.com/GPX/1/1 https://www.topografix.com/GPX/1/1/gpx.xsd"
 			)
 
 			assignPointsGroupsExtensionWriter(gpxFile)
@@ -553,7 +553,6 @@ object GpxUtilities {
 		serializer.startTag(null, "metadata")
 		writeNotNullText(serializer, "name", trackName)
 		writeNotNullText(serializer, "desc", file.metadata.desc)
-		writeNotNullLink(serializer, file.metadata.link)
 		val author = file.metadata.author
 		if (author != null) {
 			serializer.startTag(null, "author")
@@ -566,6 +565,7 @@ object GpxUtilities {
 			writeCopyright(serializer, copyright)
 			serializer.endTag(null, "copyright")
 		}
+		writeNotNullLink(serializer, file.metadata.link)
 		if (file.metadata.time != 0L) {
 			writeNotNullText(serializer, "time", formatTime(file.metadata.time))
 		}
@@ -619,6 +619,7 @@ object GpxUtilities {
 				serializer.startTag(null, "trk")
 				writeNotNullText(serializer, "name", track.name)
 				writeNotNullText(serializer, "desc", track.desc)
+				writeExtensions(serializer, track, null)
 				for (segment in track.segments) {
 					serializer.startTag(null, "trkseg")
 					writeNotNullText(serializer, "name", segment.name)
@@ -631,7 +632,6 @@ object GpxUtilities {
 					writeExtensions(serializer, segment, null)
 					serializer.endTag(null, "trkseg")
 				}
-				writeExtensions(serializer, track, null)
 				serializer.endTag(null, "trk")
 			}
 		}
@@ -735,10 +735,10 @@ object GpxUtilities {
 			writeNotNullText(serializer, "time", formatTime(p.time))
 		}
 		writeNotNullText(serializer, "name", p.name)
-		writeNotNullText(serializer, "desc", p.desc)
-		writeNotNullText(serializer, "type", p.category)
 		writeNotNullText(serializer, "cmt", p.comment)
+		writeNotNullText(serializer, "desc", p.desc)
 		writeNotNullLink(serializer, p.link)
+		writeNotNullText(serializer, "type", p.category)
 		if (!p.hdop.isNaN()) {
 			writeNotNullText(serializer, "hdop", formatDecimal(p.hdop))
 		}
