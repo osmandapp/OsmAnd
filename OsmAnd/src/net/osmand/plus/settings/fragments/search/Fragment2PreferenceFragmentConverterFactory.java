@@ -17,12 +17,9 @@ class Fragment2PreferenceFragmentConverterFactory implements de.KnollFrank.lib.s
 		return new Fragment2PreferenceFragmentConverter() {
 
 			@Override
-			public Optional<PreferenceFragmentCompat> asPreferenceFragment(final Fragment fragment) {
-				return fragment instanceof final ConfigureMapFragment configureMapFragment ?
-						Optional.of(
-								(PreferenceFragmentCompat) fragments.instantiateAndInitializeFragment(
-										configureMapFragment.asPreferenceFragment().getClass(),
-										Optional.empty())) :
+			public Optional<Class<? extends PreferenceFragmentCompat>> asPreferenceFragment(final Class<? extends Fragment> fragment) {
+				return ConfigureMapFragment.class.equals(fragment) ?
+						Optional.of(ConfigureMapFragment.PreferenceFragment.class) :
 						Optional.empty();
 			}
 		};

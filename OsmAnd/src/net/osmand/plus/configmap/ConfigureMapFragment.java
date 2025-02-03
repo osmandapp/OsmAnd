@@ -318,10 +318,6 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 		}
 	}
 
-	public PreferenceFragment asPreferenceFragment() {
-		return new PreferenceFragment();
-	}
-
 	public static class PreferenceFragment extends PreferenceFragmentCompat {
 
 		private List<ContextMenuItem> items;
