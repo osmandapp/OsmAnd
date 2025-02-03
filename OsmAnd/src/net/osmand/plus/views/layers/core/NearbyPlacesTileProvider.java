@@ -1,6 +1,14 @@
 package net.osmand.plus.views.layers.core;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.Rect;
+import android.graphics.RectF;
 
 import androidx.annotation.NonNull;
 
@@ -19,6 +27,10 @@ import net.osmand.core.jni.interface_MapTiledCollectionProvider;
 import net.osmand.data.NearbyPlacePoint;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.PointImageUtils;
 import net.osmand.util.MapUtils;
@@ -41,6 +53,30 @@ public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvid
 	private MapTiledCollectionProvider providerInstance;
 	private int baseOrder;
 	private long selectedObjectId;
+
+	private static final int SMALL_ICON_BORDER_DP = 1;
+	private static final int BIG_ICON_BORDER_DP = 2;
+	private static final int SMALL_ICON_SIZE_DP = 20;
+	private static final int BIG_ICON_SIZE_DP = 40;
+	private static final int POINT_OUTER_COLOR = 0xffffffff;
+
+	private static Bitmap circleBitmap;
+
+	private static Bitmap getCircle(@NonNull Context ctx) {
+		if (circleBitmap == null) {
+			circleBitmap = RenderingIcons.getBitmapFromVectorDrawable(ctx, R.drawable.bg_point_circle);
+		}
+		return circleBitmap;
+	}
+
+	private static Paint createBitmapPaint() {
+		Paint bitmapPaint = new Paint();
+		bitmapPaint.setAntiAlias(true);
+		bitmapPaint.setDither(true);
+		bitmapPaint.setFilterBitmap(true);
+		return bitmapPaint;
+	}
+
 
 	public NearbyPlacesTileProvider(@NonNull OsmandApplication context, int baseOrder, float density, long selectedObjectId) {
 		this.app = context;
@@ -112,10 +148,10 @@ public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvid
 		}
 		Bitmap bitmap;
 		if (isFullSize && data.nearbyPlace.imageBitmap != null) {
-			bitmap = PointImageUtils.createBigBitmap(app, data.nearbyPlace.imageBitmap, data.nearbyPlace.id == selectedObjectId);
+			bitmap = createBigBitmap(app, data.nearbyPlace.imageBitmap, data.nearbyPlace.id == selectedObjectId);
 		} else {
 			if (cachedSmallBitmap == null) {
-				cachedSmallBitmap = PointImageUtils.createSmallPointBitmap(app);
+				cachedSmallBitmap = createSmallPointBitmap(app);
 			}
 			bitmap = cachedSmallBitmap;
 		}
@@ -180,4 +216,56 @@ public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvid
 			this.nearbyPlace = nearbyPlace;
 		}
 	}
+
+	public static Bitmap createSmallPointBitmap(@NonNull Context ctx) {
+		int borderWidth = AndroidUtils.dpToPx(ctx, SMALL_ICON_BORDER_DP);
+		Bitmap circle = getCircle(ctx);
+		int smallIconSize = AndroidUtils.dpToPx(ctx, SMALL_ICON_SIZE_DP);
+		Bitmap bitmapResult = Bitmap.createBitmap(smallIconSize, smallIconSize, Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(bitmapResult);
+		Paint bitmapPaint = createBitmapPaint();
+		bitmapPaint.setColorFilter(new PorterDuffColorFilter(POINT_OUTER_COLOR, PorterDuff.Mode.SRC_IN));
+		Rect srcRect = new Rect(0, 0, circle.getWidth(), circle.getHeight());
+		RectF dstRect = new RectF(0f, 0f, (float) smallIconSize, (float) smallIconSize);
+		canvas.drawBitmap(circle, srcRect, dstRect, bitmapPaint);
+		bitmapPaint.setColorFilter(new PorterDuffColorFilter(
+				ColorUtilities.getColor(ctx, R.color.poi_background), PorterDuff.Mode.SRC_IN));
+		dstRect = new RectF(
+				(float) borderWidth,
+				(float) borderWidth,
+				(float) (smallIconSize - borderWidth * 2),
+				(float) (smallIconSize - borderWidth * 2));
+		canvas.drawBitmap(circle, srcRect, dstRect, bitmapPaint);
+		bitmapResult = AndroidUtils.scaleBitmap(bitmapResult, smallIconSize, smallIconSize, false);
+		return bitmapResult;
+	}
+
+	public static Bitmap createBigBitmap(@NonNull OsmandApplication app, Bitmap loadedBitmap, boolean isSelected) {
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		int borderWidth = AndroidUtils.dpToPxAuto(app, BIG_ICON_BORDER_DP);
+		Bitmap circle = getCircle(app);
+		int bigIconSize = AndroidUtils.dpToPxAuto(app, BIG_ICON_SIZE_DP);
+		Bitmap bitmapResult = Bitmap.createBitmap(bigIconSize, bigIconSize, Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(bitmapResult);
+		Paint bitmapPaint = createBitmapPaint();
+		bitmapPaint.setColorFilter(new PorterDuffColorFilter(isSelected ? app.getColor(ColorUtilities.getActiveColorId(nightMode)) : POINT_OUTER_COLOR, PorterDuff.Mode.SRC_IN));
+		canvas.drawBitmap(circle, 0f, 0f, bitmapPaint);
+		int cx = circle.getWidth() / 2;
+		int cy = circle.getHeight() / 2;
+		int radius = (Math.min(cx, cy) - borderWidth * 2);
+		canvas.save();
+		canvas.clipRect(0, 0, circle.getWidth(), circle.getHeight());
+		Path circularPath = new Path();
+		circularPath.addCircle((float) cx, (float) cy, (float) radius, Path.Direction.CW);
+		canvas.clipPath(circularPath);
+		Rect srcRect = new Rect(0, 0, loadedBitmap.getWidth(), loadedBitmap.getHeight());
+		RectF dstRect = new RectF(0f, 0f, (float) circle.getWidth(), (float) circle.getHeight());
+		bitmapPaint.setColorFilter(null);
+		canvas.drawBitmap(loadedBitmap, srcRect, dstRect, bitmapPaint);
+		canvas.restore();
+		bitmapResult = AndroidUtils.scaleBitmap(bitmapResult, bigIconSize, bigIconSize, false);
+		return bitmapResult;
+	}
+
+
 }

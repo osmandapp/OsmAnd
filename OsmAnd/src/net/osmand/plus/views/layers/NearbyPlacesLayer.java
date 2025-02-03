@@ -72,7 +72,7 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 	}
 
 	private void recreateBitmaps() {
-		cachedSmallIconBitmap = PointImageUtils.createSmallPointBitmap(getApplication());
+		cachedSmallIconBitmap = NearbyPlacesTileProvider.createSmallPointBitmap(getApplication());
 	}
 
 	@Override
@@ -143,7 +143,7 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 		List<NearbyPlacePoint> fullObjects = new ArrayList<>();
 		Paint pointPaint = new Paint();
 		if (cachedSmallIconBitmap == null) {
-			cachedSmallIconBitmap = PointImageUtils.createSmallPointBitmap(getApplication());
+			cachedSmallIconBitmap = NearbyPlacesTileProvider.createSmallPointBitmap(getApplication());
 		}
 		for (NearbyPlacePoint nearbyPoint : pointsToDraw) {
 			double lat = nearbyPoint.getLatitude();
@@ -165,7 +165,7 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 		for (NearbyPlacePoint point : fullObjects) {
 			Bitmap bitmap = point.imageBitmap;
 			if (bitmap != null) {
-				Bitmap bigBitmap = PointImageUtils.createBigBitmap(getApplication(), bitmap, point.id == getSelectedObjectId());
+				Bitmap bigBitmap = NearbyPlacesTileProvider.createBigBitmap(getApplication(), bitmap, point.id == getSelectedObjectId());
 				float x = tileBox.getPixXFromLatLon(point.getLatitude(), point.getLongitude());
 				float y = tileBox.getPixYFromLatLon(point.getLatitude(), point.getLongitude());
 				canvas.drawBitmap(bigBitmap, x - bigBitmap.getWidth() / 2, y - bigBitmap.getHeight() / 2, pointPaint);
