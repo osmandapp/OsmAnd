@@ -5980,4 +5980,14 @@
     <string name="obd_calculated_engine_load_desc">Mostra a carga do motor calculada pelo veículo com base no sensor</string>
     <string name="obd_engine_oil_temperature">Temperatura do óleo do motor</string>
     <string name="rendering_attr_showClimbingRoutes_name">Rotas de escalada</string>
+    <string name="shared_string_avg_altitude">Altitude méd.</string>
+    <string name="shared_string_avg_speed">Velocidade mínima</string>
+    <string name="recently_visited">Visitados recentemente</string>
+    <string name="map_widget_route_information_desc">Exibe o tempo estimado de chegada, o tempo restante de viagem e a distância da rota de navegação atual.</string>
+    <string name="map_widget_route_information">Informações da rota</string>
+    <string name="popular_places_nearby">Locais populares nas proximidades</string>
+    <string name="display_distance_to_first_intermediate">Mostrar detalhes da rota para a próxima parada</string>
+    <string name="display_distance_to_first_intermediate_summary">Mostra primeiro o tempo e a distância para a próxima parada. Desative para mostrar sempre os detalhes do destino.</string>
+    <string name="shared_string_default_view">Visualização padrão</string>
+    <string name="shared_string_length">Comprimento</string>
 </resources>
