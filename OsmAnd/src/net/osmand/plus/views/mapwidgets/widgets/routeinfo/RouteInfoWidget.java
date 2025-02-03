@@ -326,11 +326,9 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	}
 
 	@NonNull
-	public static String formatDuration(@NonNull Context ctx, long timeLeft) {
-		long diffInMinutes = TimeUnit.MINUTES.convert(timeLeft, TimeUnit.MILLISECONDS);
-		String hour = ctx.getString(R.string.int_hour);
-		String formattedDuration = Algorithms.formatMinutesDuration((int) diffInMinutes, true);
-		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, formattedDuration, hour);
+	public static String formatDuration(@NonNull OsmandApplication app, long timeLeft) {
+		long diffInMinutes = TimeUnit.SECONDS.convert(timeLeft, TimeUnit.MILLISECONDS);
+		return OsmAndFormatter.getFormattedDuration(diffInMinutes, app);
 	}
 
 	@NonNull
