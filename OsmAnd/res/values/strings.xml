@@ -10,21 +10,44 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="ais_load_data">Load AIS data from file</string>
+    <string name="ais_address_settings">IP address settings</string>
+    <string name="ais_address_settings_description">Choose NMEA protocol (UDP/TCP) and define addresses</string>
+    <string name="ais_nmea_protocol">Protocol for NMEA data reception</string>
+    <string name="ais_nmea_protocol_description">Choose protocol for NMEA data reception</string>
+    <string name="ais_address_nmea_server">IP address of NMEA data source</string>
+    <string name="ais_address_nmea_server_description">Define IP address of the NMEA data source (if TCP is used)</string>
+    <string name="ais_port_nmea_server">TCP port of NMEA data source</string>
+    <string name="ais_port_nmea_server_description">Define TCP port number of the NMEA data source</string>
+    <string name="ais_port_nmea_local">UDP port of local NMEA data receiver</string>
+    <string name="ais_port_nmea_local_description">Define UPD port where OsmAnd receives NMEA data</string>
+    <string name="ais_object_lost_timeouts">Timeout settings for AIS signal reception</string>
+    <string name="ais_object_lost_timeouts_description">Set timeout values to identify lost AIS objects if no signal was received for a specific time.</string>
+    <string name="ais_object_lost_timeout">Timeout for visibility when object is lost</string>
+    <string name="ais_object_lost_timeout_description">Set Timeout for visibility of AIS objects: After this time without signal reception, the AIS object will be removed from screen.</string>
+    <string name="ais_ship_lost_timeout">Timeout for ship visibility when no signal received</string>
+    <string name="ais_ship_lost_timeout_description">Set timeout for ship visibility: After this time without signal reception, the ship symbol will change its state on screen: It will be crossed out.</string>
+    <string name="ais_cpa_settings">Settings related to CPA</string>
+    <string name="ais_cpa_settings_description">These values define the presentation of AIS objects that may come too close to the own position.</string>
+    <string name="ais_cpa_warning_time">Warning time to reach the Closest Point of Approach (CPA)</string>
+    <string name="ais_cpa_warning_time_description">If the TCPA (time to reach the CPA with another vessel) is less than this value, the vessel is marked with red color.</string>
+    <string name="ais_cpa_warning_distance">Warning distance for the Closes Point of Approach (CPA)</string>
+    <string name="ais_cpa_warning_distance_description">Vessels are marked with red color if the CPA is less than this value and the CPA is reached in the near future (see setting "Warning time to reach the CPA").</string>
+    <string name="plugin_ais_tracker_name">AIS vessel tracker</string>
+    <string name="plugin_ais_tracker_description">Display AIS positions and information about surrounding vessels. The AIS data is received via network from an external AIS receiver.</string>
+    <string name="plugin_ais_tracker_disclaimer">DISCLAIMER\n\nThis plugin is a hobby project and not designed for reliability and correctness. DO NOT rely upon this software in any way including for navigation and/or safety of life.</string>
     <string name="shared_string_length">Length</string>
     <string name="shared_string_avg_altitude">Avg. altitude</string>
     <string name="shared_string_avg_speed">Min. speed</string>
     <string name="popular_places_nearby">Popular places nearby</string>
     <string name="recently_visited">Recently visited</string>
-
     <string name="shared_string_default_view">Default view</string>
     <string name="map_widget_route_information">Route information</string>
     <string name="map_widget_route_information_desc">Displays the estimated arrival time, remaining travel time, and distance for the current navigation route.</string>
     <string name="display_distance_to_first_intermediate">Show route details for the next stop</string>
     <string name="display_distance_to_first_intermediate_summary">Shows time and distance for the next stop first. Turn off to always show details for the destination.</string>
-
     <string name="rendering_attr_showClimbingRoutes_name">Climbing routes</string>
     <string name="rendering_attr_showClimbingRoutes_description">Show climbing routes</string>
-
     <string name="calculating_indication_message">Calculating…</string>
     <string name="calculate_size">Calculate size</string>
     <string name="default_buttons_size_original_description">Each button would keep its own size.</string>
