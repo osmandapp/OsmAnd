@@ -40,14 +40,14 @@ public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvid
 	private final PointI offset;
 	private MapTiledCollectionProvider providerInstance;
 	private int baseOrder;
-	private Object selectedObject;
+	private long selectedObjectId;
 
-	public NearbyPlacesTileProvider(@NonNull OsmandApplication context, int baseOrder, float density, Object selectedObject) {
+	public NearbyPlacesTileProvider(@NonNull OsmandApplication context, int baseOrder, float density, long selectedObjectId) {
 		this.app = context;
 		this.baseOrder = baseOrder;
 		this.density = density;
 		this.offset = new PointI(0, 0);
-		this.selectedObject = selectedObject;
+		this.selectedObjectId = selectedObjectId;
 	}
 
 	public void drawSymbols(@NonNull MapRendererView mapRenderer) {
@@ -112,7 +112,7 @@ public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvid
 		}
 		Bitmap bitmap;
 		if (isFullSize && data.nearbyPlace.imageBitmap != null) {
-			bitmap = PointImageUtils.createBigBitmap(app, data.nearbyPlace.imageBitmap, data.nearbyPlace.isSelected(selectedObject));
+			bitmap = PointImageUtils.createBigBitmap(app, data.nearbyPlace.imageBitmap, data.nearbyPlace.id == selectedObjectId);
 		} else {
 			if (cachedSmallBitmap == null) {
 				cachedSmallBitmap = PointImageUtils.createSmallPointBitmap(app);

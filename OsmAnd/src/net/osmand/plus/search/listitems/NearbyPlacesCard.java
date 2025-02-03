@@ -1,13 +1,11 @@
 package net.osmand.plus.search.listitems;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,10 +35,12 @@ public class NearbyPlacesCard extends FrameLayout implements NearbyPlacesListene
 	private NearbyPlacesAdapter adapter;
 	private OsmandApplication app;
 	private NearbyPlacesAdapter.NearbyItemClickListener clickListener;
+	private MapActivity mapActivity;
 
-	public NearbyPlacesCard(@NonNull Context context, @NonNull NearbyPlacesAdapter.NearbyItemClickListener clickListener) {
-		super(context);
-		app = (OsmandApplication) context.getApplicationContext();
+	public NearbyPlacesCard(@NonNull MapActivity mapActivity, @NonNull NearbyPlacesAdapter.NearbyItemClickListener clickListener) {
+		super(mapActivity);
+		app = (OsmandApplication) mapActivity.getApplicationContext();
+		this.mapActivity = mapActivity;
 		this.clickListener = clickListener;
 		init();
 	}
@@ -62,16 +62,10 @@ public class NearbyPlacesCard extends FrameLayout implements NearbyPlacesListene
 	private void setupShowAllNearbyPlacesBtn() {
 		showAllBtnContainer = findViewById(R.id.show_all_button);
 		findViewById(R.id.show_all_btn).setOnClickListener(v -> {
-			MapActivity activity = getMapActivity();
-			if (activity != null) {
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
-					NearbyPlacesFragment.Companion.showInstance(activity.getSupportFragmentManager());
-					QuickSearchDialogFragment dialogFragment = mapActivity.getFragmentsHelper().getQuickSearchDialogFragment();
-					if (dialogFragment != null) {
-						dialogFragment.hide();
-					}
-				}
+			NearbyPlacesFragment.Companion.showInstance(mapActivity.getSupportFragmentManager());
+			QuickSearchDialogFragment dialogFragment = mapActivity.getFragmentsHelper().getQuickSearchDialogFragment();
+			if (dialogFragment != null) {
+				dialogFragment.hide();
 			}
 		});
 	}
@@ -104,11 +98,6 @@ public class NearbyPlacesCard extends FrameLayout implements NearbyPlacesListene
 			adapter = new NearbyPlacesAdapter(app, nearbyData, false, clickListener);
 		}
 		return adapter;
-	}
-
-	@Nullable
-	private MapActivity getMapActivity() {
-		return app.getOsmandMap().getMapView().getMapActivity();
 	}
 
 	@Override

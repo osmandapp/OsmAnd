@@ -4,29 +4,22 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.nearbyplaces.NearbyPlacesFragment;
 import net.osmand.plus.nearbyplaces.NearbyPlacesHelper;
-import net.osmand.plus.nearbyplaces.NearbyPlacesListener;
 import net.osmand.plus.search.NearbyPlacesAdapter;
 import net.osmand.plus.search.listitems.NearbyPlacesCard;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.fragments.HistoryItemsFragment;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.wiki.WikiCoreHelper;
-import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData;
 
 import java.util.List;
 
@@ -117,7 +110,7 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 
 	private void setupNearByCard(@NonNull View view) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), !app.getSettings().isLightContent());
-		nearbyPlacesCard = new NearbyPlacesCard(requireContext(), this);
+		nearbyPlacesCard = new NearbyPlacesCard(requireMapActivity(), this);
 		getListView().addHeaderView(nearbyPlacesCard, null, false);
 		getListView().addHeaderView(themedInflater.inflate(R.layout.recently_visited_header, getListView(), false));
 	}

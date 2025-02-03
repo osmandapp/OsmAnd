@@ -30,15 +30,13 @@ import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.NearbyPlacesTileProvider;
+import net.osmand.util.Algorithms;
 import net.osmand.wiki.WikiCoreHelper;
-import net.osmand.wiki.WikiImage;
 
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuProvider {
 
@@ -49,14 +47,14 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 	protected List<NearbyPlacePoint> cache = new ArrayList<>();
 	private boolean showNearbyPoints;
 	private boolean nightMode;
-	private Object selectedObject;
+	private NearbyPlacePoint selectedObject;
 
-	private final List<Target> imageLoadingTargets = new ArrayList<>();
 	private Bitmap cachedSmallIconBitmap;
 
 	public CustomMapObjects<NearbyPlacePoint> customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
 
 	private NearbyPlacesTileProvider nearbyPlacesMapLayerProvider;
+	private NearbyPlacesTileProvider selectedNearbyPlacesMapLayerProvider;
 
 	public NearbyPlacesLayer(@NonNull Context ctx) {
 		super(ctx);
@@ -86,7 +84,10 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 	@Override
 	protected void cleanupResources() {
 		super.cleanupResources();
-		clearNearbyPoints();
+		clearNearbyPoints(nearbyPlacesMapLayerProvider);
+		clearNearbyPoints(selectedNearbyPlacesMapLayerProvider);
+		nearbyPlacesMapLayerProvider = null;
+		selectedNearbyPlacesMapLayerProvider = null;
 	}
 
 	@Override
@@ -103,17 +104,21 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 		boolean showNearbyPoints = !customObjectsDelegate.getMapObjects().isEmpty();
 		boolean showNearbyPlacesChanged = this.showNearbyPoints != showNearbyPoints;
 		this.showNearbyPoints = showNearbyPoints;
-		Object selectedObject = getSelectedObject();
-		boolean selectedObjectChanged = this.selectedObject != selectedObject;
+		NearbyPlacePoint selectedObject = getSelectedNearbyPlace();
+		long selectedObjectId = selectedObject == null ? 0 : selectedObject.id;
+		long lastSelectedObjectId = this.selectedObject == null ? 0 : this.selectedObject.id;
+		boolean selectedObjectChanged = selectedObjectId != lastSelectedObjectId;
 		this.selectedObject = selectedObject;
 		if (hasMapRenderer()) {
 			if ((mapActivityInvalidated || mapRendererChanged
-					|| selectedObjectChanged
 					|| nightModeChanged || showNearbyPlacesChanged
 					|| customObjectsDelegate.isChanged())) {
 				showNearbyPoints();
 				customObjectsDelegate.acceptChanges();
 				mapRendererChanged = false;
+			}
+			if (selectedObjectChanged) {
+				showSelectedNearbyPoint();
 			}
 		} else {
 			cache.clear();
@@ -160,7 +165,7 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 		for (NearbyPlacePoint point : fullObjects) {
 			Bitmap bitmap = point.imageBitmap;
 			if (bitmap != null) {
-				Bitmap bigBitmap = PointImageUtils.createBigBitmap(getApplication(), bitmap, point.isSelected(selectedObject));
+				Bitmap bigBitmap = PointImageUtils.createBigBitmap(getApplication(), bitmap, point.id == getSelectedObjectId());
 				float x = tileBox.getPixXFromLatLon(point.getLatitude(), point.getLongitude());
 				float y = tileBox.getPixYFromLatLon(point.getLatitude(), point.getLongitude());
 				canvas.drawBitmap(bigBitmap, x - bigBitmap.getWidth() / 2, y - bigBitmap.getHeight() / 2, pointPaint);
@@ -168,20 +173,41 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 		}
 	}
 
+	private long getSelectedObjectId() {
+		return selectedObject == null ? 0 : selectedObject.id;
+	}
+
 	public synchronized void showNearbyPoints() {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer == null) {
 			return;
 		}
-		clearNearbyPoints();
+		clearNearbyPoints(nearbyPlacesMapLayerProvider);
 		nearbyPlacesMapLayerProvider = new NearbyPlacesTileProvider(getApplication(),
 				getPointsOrder(),
 				view.getDensity(),
-				selectedObject);
+				getSelectedObjectId());
 
 		List<NearbyPlacePoint> points = customObjectsDelegate.getMapObjects();
 		showNearbyPoints(points);
 		nearbyPlacesMapLayerProvider.drawSymbols(mapRenderer);
+	}
+
+	public synchronized void showSelectedNearbyPoint() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null) {
+			return;
+		}
+		clearNearbyPoints(selectedNearbyPlacesMapLayerProvider);
+		if (selectedObject != null) {
+			selectedNearbyPlacesMapLayerProvider = new NearbyPlacesTileProvider(getApplication(),
+					getPointsOrder(),
+					view.getDensity(),
+					getSelectedObjectId());
+
+			selectedNearbyPlacesMapLayerProvider.addToData(selectedObject);
+			selectedNearbyPlacesMapLayerProvider.drawSymbols(mapRenderer);
+		}
 	}
 
 	private void showNearbyPoints(List<NearbyPlacePoint> points) {
@@ -190,13 +216,12 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 		}
 	}
 
-	public void clearNearbyPoints() {
+	public void clearNearbyPoints(@Nullable NearbyPlacesTileProvider provider) {
 		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer == null || nearbyPlacesMapLayerProvider == null) {
+		if (mapRenderer == null || provider == null) {
 			return;
 		}
-		nearbyPlacesMapLayerProvider.clearSymbols(mapRenderer);
-		nearbyPlacesMapLayerProvider = null;
+		provider.clearSymbols(mapRenderer);
 	}
 
 	@Override
@@ -217,11 +242,11 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
 		List<NearbyPlacePoint> points = customObjectsDelegate.getMapObjects();
 		if (!points.isEmpty()) {
-			getNearbyPLaceFromPoint(tileBox, point, res, points);
+			getNearbyPlaceFromPoint(tileBox, point, res, points);
 		}
 	}
 
-	private void getNearbyPLaceFromPoint(RotatedTileBox tb, PointF point, List<? super NearbyPlacePoint> res, List<NearbyPlacePoint> points) {
+	private void getNearbyPlaceFromPoint(RotatedTileBox tb, PointF point, List<? super NearbyPlacePoint> res, List<NearbyPlacePoint> points) {
 		MapRendererView mapRenderer = getMapRenderer();
 		float radius = getScaledTouchRadius(getApplication(), tb.getDefaultRadiusPoi()) * TOUCH_RADIUS_MULTIPLIER;
 		List<PointI> touchPolygon31 = null;
@@ -245,13 +270,13 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 	}
 
 	@Nullable
-	private Object getSelectedObject() {
+	private NearbyPlacePoint getSelectedNearbyPlace() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			MapContextMenu mapContextMenu = mapActivity.getContextMenu();
 			Object object = mapContextMenu.getObject();
-			if (mapContextMenu.isVisible()) {
-				return object;
+			if (object instanceof NearbyPlacePoint && mapContextMenu.isVisible()) {
+				return (NearbyPlacePoint) object;
 			}
 		}
 		return null;
@@ -267,18 +292,15 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 
 	public void setCustomMapObjects(List<WikiCoreHelper.OsmandApiFeatureData> nearbyPlacePoints) {
 		Picasso.get().cancelTag(LOAD_NEARBY_IMAGES_TAG);
-		imageLoadingTargets.clear();
 		List<NearbyPlacePoint> nearbyPlacePointsList = new ArrayList<>();
 		for (WikiCoreHelper.OsmandApiFeatureData data : nearbyPlacePoints) {
 			NearbyPlacePoint point = new NearbyPlacePoint(data);
 			nearbyPlacePointsList.add(point);
-			WikiImage wikiImage = WikiCoreHelper.getImageData(point.photoTitle);
 			Target imgLoadTarget = new Target() {
 				@Override
 				public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
 					point.imageBitmap = bitmap;
 					customObjectsDelegate.onMapObjectUpdated(point);
-					imageLoadingTargets.remove(this);
 				}
 
 				@Override
@@ -289,10 +311,9 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 				public void onPrepareLoad(Drawable placeHolderDrawable) {
 				}
 			};
-			imageLoadingTargets.add(imgLoadTarget);
-			if (wikiImage != null) {
+			if (!Algorithms.isEmpty(point.iconUrl)) {
 				Picasso.get()
-						.load(wikiImage.getImageIconUrl())
+						.load(point.iconUrl)
 						.tag(LOAD_NEARBY_IMAGES_TAG)
 						.into(imgLoadTarget);
 			}

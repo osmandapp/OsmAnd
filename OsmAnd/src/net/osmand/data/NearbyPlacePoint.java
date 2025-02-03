@@ -6,9 +6,10 @@ import android.graphics.Bitmap;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.binary.ObfConstants;
 import net.osmand.util.Algorithms;
+import net.osmand.wiki.WikiCoreHelper;
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData;
+import net.osmand.wiki.WikiImage;
 
 import java.io.Serializable;
 
@@ -20,12 +21,13 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 	public static final BackgroundType DEFAULT_BACKGROUND_TYPE = BackgroundType.CIRCLE;
 	@Nullable
 	public Bitmap imageBitmap;
+	public final long id;
 	public String photoTitle;
 	public String wikiTitle;
 	public String poitype;
 	public String poisubtype;
 	public String wikiDesc;
-	public OsmandApiFeatureData featureData;
+	public String iconUrl;
 	private double latitude;
 	private double longitude;
 	private double altitude = Double.NaN;
@@ -34,7 +36,9 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 	private BackgroundType backgroundType;
 
 	public NearbyPlacePoint(OsmandApiFeatureData featureData) {
-		this.featureData = featureData;
+		this.id = featureData.properties.osmid;
+		WikiImage wikiIMage = WikiCoreHelper.getImageData(featureData.properties.photoTitle);
+		this.iconUrl = wikiIMage == null ? "" : wikiIMage.getImageIconUrl();
 		this.latitude = featureData.geometry.coordinates[1];
 		this.longitude = featureData.geometry.coordinates[0];
 		this.photoTitle = featureData.properties.photoTitle;
@@ -129,10 +133,6 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 		}
 
 		NearbyPlacePoint point = (NearbyPlacePoint) o;
-		if (point.imageBitmap != imageBitmap) {
-			return false;
-		}
-
 		if (!Algorithms.stringsEqual(photoTitle, point.photoTitle)) {
 			return false;
 		}
@@ -170,18 +170,5 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 		result = prime * result + ((poisubtype == null) ? 0 : poisubtype.hashCode());
 		result = prime * result + ((wikiDesc == null) ? 0 : wikiDesc.hashCode());
 		return result;
-	}
-
-	public boolean isSelected(@Nullable Object selectedObject) {
-		if (selectedObject == null) {
-			return false;
-		} else if (selectedObject instanceof NearbyPlacePoint) {
-			return selectedObject == this;
-		} else if (selectedObject instanceof Amenity amenity) {
-			long selectedId = ObfConstants.getOsmObjectId(amenity);
-			return featureData.properties.osmid == selectedId;
-		} else {
-			return false;
-		}
 	}
 }
