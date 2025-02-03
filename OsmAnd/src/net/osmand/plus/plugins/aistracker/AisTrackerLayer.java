@@ -38,7 +38,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvider {
-	private static final int START_ZOOM = 10;
+	private static final int START_ZOOM = 6;
 	private final AisTrackerPlugin plugin = PluginsHelper.requirePlugin(AisTrackerPlugin.class);
 	private ConcurrentMap<Integer, AisObject> aisObjectList;
 	private static final int aisObjectListCounterMax = 200;
@@ -196,10 +196,19 @@ public class AisTrackerLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		AisObject.setOwnPosition(getApplication().getLocationProvider().getLastKnownLocation());
-		for (AisObject ais : aisObjectList.values()) {
-			if (isLocationVisible(tileBox, ais.getPosition())) {
-				ais.draw(this, bitmapPaint, canvas, tileBox);
+
+	}
+
+	@Override
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		super.onPrepareBufferImage(canvas, tileBox, settings);
+
+		if (tileBox.getZoom() >= START_ZOOM) {
+			AisObject.setOwnPosition(getApplication().getLocationProvider().getLastKnownLocation());
+			for (AisObject ais : aisObjectList.values()) {
+				if (isLocationVisible(tileBox, ais.getPosition())) {
+					ais.draw(this, bitmapPaint, canvas, tileBox);
+				}
 			}
 		}
 	}

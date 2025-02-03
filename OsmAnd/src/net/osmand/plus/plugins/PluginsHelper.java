@@ -112,13 +112,13 @@ public class PluginsHelper {
 		checkMarketPlugin(app, new SRTMPlugin(app));
 		allPlugins.add(new WeatherPlugin(app));
 		checkMarketPlugin(app, new NauticalMapsPlugin(app));
-		allPlugins.add(new AisTrackerPlugin(app));
+		if (Version.isDeveloperVersion(app)) {
+			allPlugins.add(new AisTrackerPlugin(app));
+		}
 		checkMarketPlugin(app, new SkiMapsPlugin(app));
 		allPlugins.add(new AudioVideoNotesPlugin(app));
 		checkMarketPlugin(app, new ParkingPositionPlugin(app));
 		allPlugins.add(new OsmEditingPlugin(app));
-		// OpenPlaceReviews has been discontinued in 15 June 2023 (schedule to delete the code).
-		// allPlugins.add(new OpenPlaceReviewsPlugin(app));
 		allPlugins.add(new MapillaryPlugin(app));
 		allPlugins.add(new ExternalSensorsPlugin(app));
 		allPlugins.add(new VehicleMetricsPlugin(app));
