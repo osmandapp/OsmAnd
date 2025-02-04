@@ -55,6 +55,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	private TextState textState;
 	private final RouteInfoCalculator calculator;
 	private List<DestinationInfo> cachedRouteInfo;
+	private RouteInfoDisplayMode cachedDisplayMode;
 	private int cachedContentLayoutId;
 	private Integer cachedMetricSystem;
 	private boolean forceUpdate = false;
@@ -250,6 +251,11 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		boolean metricSystemChanged = cachedMetricSystem == null || cachedMetricSystem != metricSystem;
 		cachedMetricSystem = metricSystem;
 		if (metricSystemChanged) {
+			return true;
+		}
+		RouteInfoDisplayMode displayMode = widgetState.getDisplayMode();
+		if (cachedDisplayMode != displayMode) {
+			cachedDisplayMode = displayMode;
 			return true;
 		}
 		if (Algorithms.isEmpty(cachedRouteInfo) || isDataChanged(cachedRouteInfo.get(0), routeInfo.get(0))) {
