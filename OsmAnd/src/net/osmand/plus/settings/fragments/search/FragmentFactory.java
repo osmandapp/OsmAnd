@@ -6,7 +6,6 @@ import android.content.Context;
 
 import androidx.fragment.app.Fragment;
 
-import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 
 import java.util.Optional;
@@ -23,11 +22,6 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 											  final Context context,
 											  final IFragments fragments) {
 		final T fragment = _instantiate(fragmentClass, src, context, fragments);
-		if (ConfigureMapFragment.PreferenceFragment.class.equals(fragmentClass)) {
-			final ConfigureMapFragment.PreferenceFragment preferenceFragment = (ConfigureMapFragment.PreferenceFragment) fragment;
-			preferenceFragment.beforeOnCreate(fragments);
-			return (T) preferenceFragment;
-		}
 		setConfigureSettingsSearch(fragment, true);
 		return fragment;
 	}

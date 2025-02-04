@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments.search;
 
+import static net.osmand.plus.settings.fragments.search.ActivitySearchDatabaseConfigs.createActivitySearchDatabaseConfigs;
+
 import android.view.View;
 import android.widget.ImageView;
 
@@ -17,8 +19,8 @@ import java.util.function.Supplier;
 
 import de.KnollFrank.lib.settingssearch.client.SearchConfigBuilder;
 import de.KnollFrank.lib.settingssearch.client.SearchConfiguration;
-import de.KnollFrank.lib.settingssearch.client.SearchDatabaseConfigBuilder;
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
+import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.*;
 import de.KnollFrank.lib.settingssearch.common.task.AsyncTaskWithProgressUpdateListeners;
 
 public class SettingsSearchButtonHelper {
@@ -70,8 +72,7 @@ public class SettingsSearchButtonHelper {
 				.withSearchDatabaseConfig(
 						new SearchDatabaseConfigBuilder()
 								.withFragmentFactory(new FragmentFactory())
-								.withRootPreferenceFragmentOfActivityProvider(new RootPreferenceFragmentOfActivityProvider())
-								.withFragment2PreferenceFragmentConverter(new Fragment2PreferenceFragmentConverter())
+								.withActivitySearchDatabaseConfigs(createActivitySearchDatabaseConfigs())
 								.withPreferenceFragmentConnected2PreferenceProvider(new PreferenceFragmentConnected2PreferenceProvider())
 								.withSearchableInfoProvider(SettingsSearchButtonHelper::getSearchableInfo)
 								.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
