@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<net.osmand.plus.widgets.TextViewEx xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/TitleStyle.Medium"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/list_background_color"
+	android:paddingStart="@dimen/content_padding"
+	android:paddingTop="@dimen/content_padding_small"
+	android:paddingBottom="@dimen/content_padding_small"
+	android:text="@string/recently_visited"
+	android:textColor="?android:textColorPrimary" />

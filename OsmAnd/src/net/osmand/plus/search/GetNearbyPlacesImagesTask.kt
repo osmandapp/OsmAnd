@@ -2,6 +2,7 @@ package net.osmand.plus.search
 
 import android.net.TrafficStats
 import net.osmand.data.QuadRect
+import net.osmand.plus.OsmandApplication
 import net.osmand.shared.KAsyncTask
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.wiki.WikiCoreHelper
@@ -9,6 +10,7 @@ import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData
 import java.util.Collections
 
 class GetNearbyPlacesImagesTask(
+	val app: OsmandApplication,
 	val mapRect: QuadRect,
 	val zoom: Int,
 	val locale: String,
