@@ -398,7 +398,7 @@ public class ConfigureMapMenu {
 				})
 				.setItemDeleteAction(settings.MAP_DENSITY));
 
-		ContextMenuItem props = createRenderingProperty(customRules, adapter, activity,
+		ContextMenuItem props = createRenderingProperty(customRules, activity,
 				R.drawable.ic_action_intersection, ROAD_STYLE_ATTR, ROAD_STYLE_ID, nightMode);
 		if (props != null) {
 			adapter.addItem(props);
@@ -534,7 +534,7 @@ public class ConfigureMapMenu {
 	                                             boolean nightMode) {
 		for (RenderingRuleProperty p : customRules) {
 			if (isPropertyAccepted(p)) {
-				adapter.addItem(createRenderingProperty(adapter, activity, INVALID_ID, p, CUSTOM_RENDERING_ITEMS_ID_SCHEME + p.getName(), nightMode));
+				adapter.addItem(createRenderingProperty(activity, INVALID_ID, p, CUSTOM_RENDERING_ITEMS_ID_SCHEME + p.getName(), nightMode));
 			}
 		}
 	}
@@ -550,32 +550,28 @@ public class ConfigureMapMenu {
 	}
 
 	private ContextMenuItem createRenderingProperty(List<RenderingRuleProperty> customRules,
-	                                                ContextMenuAdapter adapter, MapActivity activity,
+	                                                MapActivity activity,
 	                                                @DrawableRes int icon, String attrName, String id,
 	                                                boolean nightMode) {
 		for (RenderingRuleProperty p : customRules) {
 			if (p.getAttrName().equals(attrName)) {
-				return createRenderingProperty(adapter, activity, icon, p, id, nightMode);
+				return createRenderingProperty(activity, icon, p, id, nightMode);
 			}
 		}
 		return null;
 	}
 
-	public static ContextMenuItem createRenderingProperty(ContextMenuAdapter adapter, MapActivity activity,
-	                                                      @DrawableRes int icon, RenderingRuleProperty p, String id,
+	public static ContextMenuItem createRenderingProperty(MapActivity activity, @DrawableRes int icon,
+	                                                      RenderingRuleProperty p, String id,
 	                                                      boolean nightMode) {
 		OsmandApplication app = activity.getMyApplication();
+		OsmandSettings settings = app.getSettings();
 		if (p.isBoolean()) {
 			String name = AndroidUtils.getRenderingStringPropertyName(activity, p.getAttrName(), p.getName());
 			return createBooleanRenderingProperty(activity, p.getAttrName(), name, id, p, icon, nightMode, null);
 		} else {
-			CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(p.getAttrName());
-			String descr;
-			if (!Algorithms.isEmpty(pref.get())) {
-				descr = AndroidUtils.getRenderingStringPropertyValue(activity, pref.get());
-			} else {
-				descr = AndroidUtils.getRenderingStringPropertyValue(app, p.getDefaultValueDescription());
-			}
+			CommonPreference<String> pref = settings.getCustomRenderProperty(p.getAttrName());
+			String description = AndroidUtils.getRenderingStringPropertyValue(app, p);
 			String propertyName = AndroidUtils.getRenderingStringPropertyName(app, p.getAttrName(), p.getName());
 			ContextMenuItem item = new ContextMenuItem(id)
 					.setTitle(propertyName)
@@ -585,7 +581,7 @@ public class ConfigureMapMenu {
 						}
 						return false;
 					})
-					.setDescription(descr)
+					.setDescription(description)
 					.setItemDeleteAction(pref)
 					.setLayout(R.layout.list_item_single_line_descrition_narrow);
 			if (icon != INVALID_ID) {

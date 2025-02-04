@@ -866,7 +866,7 @@ public class MapRenderRepositories {
 					renderingReq.setIntFilter(property, 0);
 				}
 			} else {
-				String value = settings.getRenderPropertyValue(attrName);
+				String value = settings.getRenderPropertyValue(property);
 				if (!Algorithms.isEmpty(value)) {
 					if (property.isString()) {
 						renderingReq.setStringFilter(property, value);

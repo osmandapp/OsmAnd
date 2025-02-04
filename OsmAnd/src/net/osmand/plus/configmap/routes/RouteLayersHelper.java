@@ -22,8 +22,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 public class RouteLayersHelper {
@@ -219,8 +217,7 @@ public class RouteLayersHelper {
 
 	public boolean isHikingRoutesEnabled() {
 		RenderingRuleProperty property = getHikingRenderingRuleProperty();
-		List<String> possibleValues = property != null ? Arrays.asList(property.getPossibleValues()) : null;
-		return possibleValues != null && possibleValues.contains(hikingRoutesPreference.get());
+		return property != null && property.containsValue(hikingRoutesPreference.get());
 	}
 
 	@NonNull

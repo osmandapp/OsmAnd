@@ -103,12 +103,15 @@ public class ConfigureMapUtils {
 		return customRules;
 	}
 
-	protected static String[] getRenderingPropertyPossibleValues(OsmandApplication app, RenderingRuleProperty p) {
-		String[] possibleValuesString = new String[p.getPossibleValues().length + 1];
+	@NonNull
+	protected static String[] getRenderingPropertyPossibleValues(@NonNull OsmandApplication app,
+	                                                             @NonNull RenderingRuleProperty p) {
+		String[] possibleValues = p.getPossibleValues();
+		String[] possibleValuesString = new String[possibleValues.length + 1];
 		possibleValuesString[0] = AndroidUtils.getRenderingStringPropertyValue(app, p.getDefaultValueDescription());
 
-		for (int j = 0; j < p.getPossibleValues().length; j++) {
-			possibleValuesString[j + 1] = AndroidUtils.getRenderingStringPropertyValue(app, p.getPossibleValues()[j]);
+		for (int j = 0; j < possibleValues.length; j++) {
+			possibleValuesString[j + 1] = AndroidUtils.getRenderingStringPropertyValue(app, possibleValues[j]);
 		}
 		return possibleValuesString;
 	}
