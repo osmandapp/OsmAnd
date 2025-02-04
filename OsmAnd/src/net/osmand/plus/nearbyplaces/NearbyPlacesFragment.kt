@@ -49,30 +49,24 @@ class NearbyPlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIte
 		setupShowAll(view)
 		setupToolBar(view)
 		setupVerticalNearbyList(view)
+	}
 
-		requireActivity().onBackPressedDispatcher.addCallback(
-			viewLifecycleOwner,
-			object : OnBackPressedCallback(true) {
-				override fun handleOnBackPressed() {
-					if (isHidden) {
-						activity?.supportFragmentManager?.beginTransaction()
-							?.show(this@NearbyPlacesFragment)
-							?.commit()
-						mapActivity?.contextMenu?.hideMenus()
-					} else {
-						activity?.supportFragmentManager?.beginTransaction()
-							?.remove(this@NearbyPlacesFragment)
-							?.commit()
-						val fragmentsHelper = mapActivity?.fragmentsHelper
-						val quickSearchDialogFragment = fragmentsHelper?.quickSearchDialogFragment
-						quickSearchDialogFragment?.let {
-							if (quickSearchDialogFragment.isSearchHidden) {
-								fragmentsHelper.showQuickSearch(ShowQuickSearchMode.CURRENT, false)
-							}
-						}
-					}
-				}
-			})
+	fun onBackPress(): Boolean {
+		if (isHidden) {
+			if (mapActivity?.contextMenu?.isVisible == true) {
+				mapActivity?.contextMenu?.hideMenus();
+			} else {
+				activity?.supportFragmentManager?.beginTransaction()
+					?.show(this@NearbyPlacesFragment)
+					?.commit()
+			}
+			return true
+		} else {
+			activity?.supportFragmentManager?.beginTransaction()
+				?.remove(this@NearbyPlacesFragment)
+				?.commit()
+			return false
+		}
 	}
 
 	private fun setupShowAll(view: View) {

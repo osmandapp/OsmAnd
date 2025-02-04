@@ -26,7 +26,7 @@ object NearbyPlacesHelper {
 	private lateinit var app: OsmandApplication
 	private var lastModifiedTime: Long = 0
 	private const val PLACES_LIMIT = 50
-	private const val NEARBY_MIN_RADIUS: Int = 250
+	private const val NEARBY_MIN_RADIUS: Int = 50
 
 	private var prevMapRect: QuadRect = QuadRect()
 	private var prevZoom = 0
@@ -136,17 +136,15 @@ object NearbyPlacesHelper {
 			-1, true,
 			object : ResultMatcher<Amenity?> {
 				override fun publish(amenity: Amenity?): Boolean {
-					var idFound = false
 					val id = ObfConstants.getOsmObjectId(amenity)
 					if (osmId == id) {
 						foundAmenity = amenity
-						idFound = true
 					}
-					return idFound
+					return false
 				}
 
 				override fun isCancelled(): Boolean {
-					return false
+					return foundAmenity != null
 				}
 			})
 		return foundAmenity

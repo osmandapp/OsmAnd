@@ -517,10 +517,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (backStackEntryCount == 0 && launchPrevActivityIntent()) {
 			return;
 		}
-		QuickSearchDialogFragment quickSearchFragment = fragmentsHelper.getQuickSearchDialogFragment();
 		NearbyPlacesFragment nearbyPlacesFragment = fragmentsHelper.getNearbyPlacesFragment();
+		if(nearbyPlacesFragment != null && nearbyPlacesFragment.onBackPress()) {
+			return;
+		}
+		QuickSearchDialogFragment quickSearchFragment = fragmentsHelper.getQuickSearchDialogFragment();
 		if ((backStackEntryCount == 0 || mapContextMenu.isVisible()) && quickSearchFragment != null
-				&& quickSearchFragment.isSearchHidden() && nearbyPlacesFragment == null) {
+				&& quickSearchFragment.isSearchHidden()) {
 			fragmentsHelper.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
 			return;
 		}
