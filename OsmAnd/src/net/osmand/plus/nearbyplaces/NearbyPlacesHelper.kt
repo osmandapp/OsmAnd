@@ -119,8 +119,6 @@ object NearbyPlacesHelper {
 		val pointDescription = PointDescription(
 			PointDescription.POINT_TYPE_NEARBY_PLACE,
 			point.wikiTitle)
-		val mapView = app.osmandMap.mapView
-		mapView.currentRotatedTileBox.setLatLonCenter(latLon.latitude, latLon.longitude)
 		contextMenuLayer.showContextMenu(
 			latLon,
 			pointDescription,

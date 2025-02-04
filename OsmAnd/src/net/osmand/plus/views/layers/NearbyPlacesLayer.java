@@ -105,8 +105,8 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 		boolean showNearbyPlacesChanged = this.showNearbyPoints != showNearbyPoints;
 		this.showNearbyPoints = showNearbyPoints;
 		NearbyPlacePoint selectedObject = getSelectedNearbyPlace();
-		long selectedObjectId = selectedObject == null ? 0 : selectedObject.id;
-		long lastSelectedObjectId = this.selectedObject == null ? 0 : this.selectedObject.id;
+		long selectedObjectId = selectedObject == null ? 0 : selectedObject.getId();
+		long lastSelectedObjectId = this.selectedObject == null ? 0 : this.selectedObject.getId();
 		boolean selectedObjectChanged = selectedObjectId != lastSelectedObjectId;
 		this.selectedObject = selectedObject;
 		if (hasMapRenderer()) {
@@ -153,7 +153,7 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 				cache.add(nearbyPoint);
 				float x = tileBox.getPixXFromLatLon(lat, lon);
 				float y = tileBox.getPixYFromLatLon(lat, lon);
-				if (intersects(boundIntersections, x, y, iconSize, iconSize) || nearbyPoint.imageBitmap == null) {
+				if (intersects(boundIntersections, x, y, iconSize, iconSize) || nearbyPoint.getImageBitmap() == null) {
 					canvas.drawBitmap(cachedSmallIconBitmap, x, y, pointPaint);
 					smallObjectsLatLon.add(new LatLon(lat, lon));
 				} else {
@@ -163,9 +163,9 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 			}
 		}
 		for (NearbyPlacePoint point : fullObjects) {
-			Bitmap bitmap = point.imageBitmap;
+			Bitmap bitmap = point.getImageBitmap();
 			if (bitmap != null) {
-				Bitmap bigBitmap = NearbyPlacesTileProvider.createBigBitmap(getApplication(), bitmap, point.id == getSelectedObjectId());
+				Bitmap bigBitmap = NearbyPlacesTileProvider.createBigBitmap(getApplication(), bitmap, point.getId() == getSelectedObjectId());
 				float x = tileBox.getPixXFromLatLon(point.getLatitude(), point.getLongitude());
 				float y = tileBox.getPixYFromLatLon(point.getLatitude(), point.getLongitude());
 				canvas.drawBitmap(bigBitmap, x - bigBitmap.getWidth() / 2, y - bigBitmap.getHeight() / 2, pointPaint);
@@ -174,7 +174,7 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 	}
 
 	private long getSelectedObjectId() {
-		return selectedObject == null ? 0 : selectedObject.id;
+		return selectedObject == null ? 0 : selectedObject.getId();
 	}
 
 	public synchronized void showNearbyPoints() {
@@ -299,7 +299,7 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 			Target imgLoadTarget = new Target() {
 				@Override
 				public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-					point.imageBitmap = bitmap;
+					point.setImageBitmap(bitmap);
 					customObjectsDelegate.onMapObjectUpdated(point);
 				}
 
@@ -311,9 +311,9 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 				public void onPrepareLoad(Drawable placeHolderDrawable) {
 				}
 			};
-			if (!Algorithms.isEmpty(point.iconUrl)) {
+			if (!Algorithms.isEmpty(point.getIconUrl())) {
 				Picasso.get()
-						.load(point.iconUrl)
+						.load(point.getIconUrl())
 						.tag(LOAD_NEARBY_IMAGES_TAG)
 						.into(imgLoadTarget);
 			}

@@ -19,21 +19,17 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 	private static final long serialVersionUID = 829654300829771466L;
 
 	public static final BackgroundType DEFAULT_BACKGROUND_TYPE = BackgroundType.CIRCLE;
+	private final long id;
+	private final String photoTitle;
+	private final String wikiTitle;
+	private final String poitype;
+	private final String poisubtype;
+	private final String wikiDesc;
+	private final String iconUrl;
+	private final double latitude;
+	private final double longitude;
 	@Nullable
-	public Bitmap imageBitmap;
-	public final long id;
-	public String photoTitle;
-	public String wikiTitle;
-	public String poitype;
-	public String poisubtype;
-	public String wikiDesc;
-	public String iconUrl;
-	private double latitude;
-	private double longitude;
-	private double altitude = Double.NaN;
-
-	private int color;
-	private BackgroundType backgroundType;
+	private Bitmap imageBitmap;
 
 	public NearbyPlacePoint(OsmandApiFeatureData featureData) {
 		this.id = featureData.properties.osmid;
@@ -48,8 +44,25 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 		this.wikiDesc = featureData.properties.wikiDesc;
 	}
 
-	public int getColor() {
-		return color;
+	public long getId() {
+		return id;
+	}
+
+	@Nullable
+	public Bitmap getImageBitmap() {
+		return imageBitmap;
+	}
+
+	public void setImageBitmap(@Nullable Bitmap imageBitmap) {
+		this.imageBitmap = imageBitmap;
+	}
+
+	public String getIconUrl() {
+		return iconUrl;
+	}
+
+	public String getWikiTitle() {
+		return wikiTitle;
 	}
 
 	@Override
@@ -66,32 +79,17 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 		return new PointDescription(PointDescription.POINT_TYPE_NEARBY_PLACE, wikiDesc);
 	}
 
-	public void setColor(int color) {
-		this.color = color;
-	}
-
 	public double getLatitude() {
 		return latitude;
-	}
-
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
 	}
 
 	public double getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
-
-	public double getAltitude() {
-		return altitude;
-	}
-
-	public void setAltitude(double altitude) {
-		this.altitude = altitude;
+	@Override
+	public int getColor() {
+		return 0;
 	}
 
 	public String getDisplayName(@NonNull Context ctx) {
@@ -104,14 +102,6 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 
 	public String getDescription() {
 		return wikiDesc;
-	}
-
-	public BackgroundType getBackgroundType() {
-		return backgroundType == null ? DEFAULT_BACKGROUND_TYPE : backgroundType;
-	}
-
-	public void setBackgroundType(BackgroundType backgroundType) {
-		this.backgroundType = backgroundType;
 	}
 
 	@NonNull
@@ -151,10 +141,7 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 		}
 
 		return Double.compare(this.latitude, point.latitude) == 0
-				&& Double.compare(this.longitude, point.longitude) == 0
-				&& Double.compare(this.altitude, point.altitude) == 0
-				&& (this.color == point.color)
-				&& (this.backgroundType == point.backgroundType);
+				&& Double.compare(this.longitude, point.longitude) == 0;
 	}
 
 	@Override
@@ -163,7 +150,6 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 		int result = 1;
 		result = prime * result + (int) Math.floor(latitude * 10000);
 		result = prime * result + (int) Math.floor(longitude * 10000);
-		result = prime * result + (int) Math.floor(altitude * 10000);
 		result = prime * result + ((photoTitle == null) ? 0 : photoTitle.hashCode());
 		result = prime * result + ((wikiTitle == null) ? 0 : wikiTitle.hashCode());
 		result = prime * result + ((poitype == null) ? 0 : poitype.hashCode());

@@ -147,8 +147,8 @@ public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvid
 			return SwigUtilities.nullSkImage();
 		}
 		Bitmap bitmap;
-		if (isFullSize && data.nearbyPlace.imageBitmap != null) {
-			bitmap = createBigBitmap(app, data.nearbyPlace.imageBitmap, data.nearbyPlace.id == selectedObjectId);
+		if (isFullSize && data.nearbyPlace.getImageBitmap() != null) {
+			bitmap = createBigBitmap(app, data.nearbyPlace.getImageBitmap(), data.nearbyPlace.getId() == selectedObjectId);
 		} else {
 			if (cachedSmallBitmap == null) {
 				cachedSmallBitmap = createSmallPointBitmap(app);
