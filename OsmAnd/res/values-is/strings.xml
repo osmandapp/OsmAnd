@@ -5666,4 +5666,18 @@
     <string name="ais_port_nmea_local_description">Skilgreindu númer UPD-gáttar þar sem OsmAnd tekur við NMEA-gögnum</string>
     <string name="ais_object_lost_timeouts">Stillingar á tímamörkum fyrir móttöku AIS-merkis</string>
     <string name="plugin_ais_tracker_name">AIS-skipaskrásetjari</string>
+    <string name="ais_cpa_warning_time">Tími aðvörunar áður en náð er mörkum CPA-árekstrarviðvörunar (Closest Point of Approach)</string>
+    <string name="ais_cpa_warning_time_description">Ef TCPA (tími til að lenda innan CPA við annað skip) er minni en þetta gildi, verður skipið merkt með rauðum lit.</string>
+    <string name="ais_cpa_warning_distance_description">Skip verða merkt með rauðum lit ef gildi CPA er minna en þetta gildi og að CPA verði náð á næstunni (skoðaðu stillingar á aðvörunartíma áður en CPA er náð).</string>
+    <string name="plugin_ais_tracker_description">Birta AIS-staðsetningar og upplýsingar um nálæg skip. AIS-gögnin fást í gegnum netkerfi frá utanaðkomandi AIS-móttakara.</string>
+    <string name="plugin_ais_tracker_disclaimer">FYRIRVARI\n\nÞessi viðbót er áhugaverkefni sem er ekki hannað fyrir sérstakan áreiðanleika eða nákvæmni. EKKI reiða þig á virkni þessa hugbúnaðar á neinn þann hátt sem hefði úrslitaþýðingu fyrir leiðsögn og/eða öryggi.</string>
+    <string name="ais_object_lost_timeout_description">Settu tímamörk fyrir sýnileika AIS-atriða: ef ekkert merki hefur borist eftir þennan tíma, verður AIS-atriðið fjarlægt af skjánum.</string>
+    <string name="ais_ship_lost_timeout">Tímamörk sýnileika skips þegar ekkert merki berst</string>
+    <string name="ais_ship_lost_timeout_description">Settu tímamörk fyrir sýnileika skips: ef ekkert merki hefur borist eftir þennan tíma, breytist tákn skipsins á skjánum: krossað verður yfir það.</string>
+    <string name="ais_cpa_settings">Stillingar sem tengjast CPA-árekstrarviðvörun</string>
+    <string name="ais_cpa_settings_description">Þessi gildi skilgreina framsetningu AIS-atriða sem gæti komið of nálægt eigin staðsetningu.</string>
+    <string name="ais_object_lost_timeouts_description">Settu gildi tímamarka við að auðkenna týnd AIS-atriði ef ekkert merki hefur borist í tiltekinn tíma.</string>
+    <string name="ais_object_lost_timeout">Tímamörk sýnileika þegar AIS-atriði týnist</string>
+    <string name="ais_cpa_warning_distance">Vegalengd CPA-árekstrarviðvörunar (Closest Point of Approach)</string>
+    <string name="map_widget_route_information_desc">Birtir áætlaðan komutíma, ferðatíma sem eftir er og heildarlengd fyrirliggjandi siglingaleiðar.</string>
 </resources>
