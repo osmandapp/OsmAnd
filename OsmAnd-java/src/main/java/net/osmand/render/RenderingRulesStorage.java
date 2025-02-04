@@ -12,15 +12,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Stack;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
@@ -54,7 +47,6 @@ public class RenderingRulesStorage {
 	public TIntObjectHashMap<RenderingRule>[] tagValueGlobalRules = new TIntObjectHashMap[LENGTH_RULES];
 	
 	protected Map<String, RenderingRule> renderingAttributes = new LinkedHashMap<String, RenderingRule>();
-	protected Map<String, RenderingRule> renderingAssociations = new LinkedHashMap<String, RenderingRule>();
 	protected Map<String, RenderingClass> renderingClasses = new LinkedHashMap<String, RenderingClass>();
 	protected Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
 	
@@ -99,7 +91,6 @@ public class RenderingRulesStorage {
 			}
 		}
 		storage.renderingAttributes.putAll(renderingAttributes);
-		storage.renderingAssociations.putAll(renderingAssociations);
 		storage.renderingClasses.putAll(renderingClasses);
 		return storage;
 	}
@@ -161,20 +152,6 @@ public class RenderingRulesStorage {
 				e.getValue().addToBeginIfElseChildren(root);
 			} else {
 				renderingAttributes.put(e.getKey(), e.getValue());
-			}
-		}
-		it = depends.renderingAssociations.entrySet().iterator();
-		while (it.hasNext()) {
-			Entry<String, RenderingRule> e = it.next();
-			if (renderingAssociations.containsKey(e.getKey())) {
-				RenderingRule root = renderingAssociations.get(e.getKey());
-				List<RenderingRule> list = e.getValue().getIfElseChildren();
-				for (RenderingRule every : list) {
-					root.addIfElseChildren(every);
-				}
-				e.getValue().addToBeginIfElseChildren(root);
-			} else {
-				renderingAssociations.put(e.getKey(), e.getValue());
 			}
 		}
 		for (int i = 0; i < LENGTH_RULES; i++) {
@@ -272,7 +249,7 @@ public class RenderingRulesStorage {
 	private class RenderingRulesHandler {
 		private final XmlPullParser parser;
 		private int state;
-		Stack<RenderingRule> stack = new Stack<RenderingRule>();
+		private Stack<RenderingRule> stack = new Stack<RenderingRule>();
 		private final RenderingRulesStorageResolver resolver;
 		private final boolean addon;
 		private RenderingRulesStorage dependsStorage;
@@ -376,7 +353,7 @@ public class RenderingRulesStorage {
 				state = LINE_RULES;
 			} else if("polygon".equals(name)){ //$NON-NLS-1$
 				state = POLYGON_RULES;
-			} else if("renderingAttribute".equals(name)){ //$NON-NLS-1$
+			} else if ("renderingAttribute".equals(name)) { //$NON-NLS-1$
 				String attr = attrsMap.get("name");
 				RenderingRule root = new RenderingRule(new HashMap<String, String>(), false, RenderingRulesStorage.this);
 				if (renderingAttributes.containsKey(attr)) {
@@ -385,22 +362,13 @@ public class RenderingRulesStorage {
 					renderingAttributes.put(attr, root);
 				}
 				stack.push(root);
-			} else if("renderingAssociation".equals(name)){ //$NON-NLS-1$
-				String attr = attrsMap.get("name");
-				RenderingRule root = new RenderingRule(new HashMap<String, String>(), false, RenderingRulesStorage.this);
-				if (renderingAssociations.containsKey(attr)) {
-					renderingAssociations.get(attr).addIfElseChildren(root);
-				} else {
-					renderingAssociations.put(attr, root);
-				}
-				stack.push(root);
-			} else if("renderingProperty".equals(name)){ //$NON-NLS-1$
+			} else if ("renderingProperty".equals(name)) { //$NON-NLS-1$
 				String attr = attrsMap.get("attr");
 				RenderingRuleProperty prop;
 				String type = attrsMap.get("type");
-				if("boolean".equalsIgnoreCase(type)){
+				if ("boolean".equalsIgnoreCase(type)) {
 					prop = RenderingRuleProperty.createInputBooleanProperty(attr);
-				} else if("string".equalsIgnoreCase(type)){
+				} else if ("string".equalsIgnoreCase(type)) {
 					prop = RenderingRuleProperty.createInputStringProperty(attr);
 				} else {
 					prop = RenderingRuleProperty.createInputIntProperty(attr);
@@ -413,11 +381,11 @@ public class RenderingRulesStorage {
 					prop.setPossibleValues(attrsMap.get("possibleValues").split(","));
 				}
 				PROPS.registerRule(prop, !addon);
-			} else if("renderingConstant".equals(name)){ //$NON-NLS-1$
-				if(!renderingConstants.containsKey(attrsMap.get("name"))){
+			} else if ("renderingConstant".equals(name)) {
+				if (!renderingConstants.containsKey(attrsMap.get("name"))) {
 					renderingConstants.put(attrsMap.get("name"), attrsMap.get("value"));
 				}
-			} else if ("renderingStyle".equals(name)) { //$NON-NLS-1$
+			} else if ("renderingStyle".equals(name)) {
 				if (!addon) {
 					String depends = attrsMap.get("depends");
 					if (depends != null && depends.length() > 0) {
@@ -466,8 +434,8 @@ public class RenderingRulesStorage {
 				if (vl != null && vl.startsWith("$")) {
 					String cv = vl.substring(1);
 					if (!renderingConstants.containsKey(cv) && !renderingAttributes.containsKey(cv)
-							&& !renderingAssociations.containsKey(cv) && !renderingClasses.containsKey(cv)) {
-						throw new IllegalStateException("Rendering constant or attribute '" + cv + "' was not specified.");
+							&& !renderingClasses.containsKey(cv)) {
+						throw new IllegalStateException("Rendering constant, attribute or class '" + cv + "' was not specified.");
 					}
 					if (renderingConstants.containsKey(cv)) {
 						vl = renderingConstants.get(cv);
@@ -478,7 +446,6 @@ public class RenderingRulesStorage {
 			return m;
 		}
 
-
 		public void endElement(String name) throws XmlPullParserException {
 			if (isCase(name) || isSwitch(name)) {
 				RenderingRule renderingRule = (RenderingRule) stack.pop();
@@ -487,9 +454,7 @@ public class RenderingRulesStorage {
 				}
 			} else if (isApply(name)) {
 				stack.pop();
-			} else if ("renderingAttribute".equals(name)) { //$NON-NLS-1$
-				stack.pop();
-			} else if ("renderingAssociation".equals(name)) { //$NON-NLS-1$
+			} else if ("renderingAttribute".equals(name)) {
 				stack.pop();
 			}
 		}
@@ -539,15 +504,15 @@ public class RenderingRulesStorage {
 	public int getTagValueKey(String tag, String value){
 		int itag = getDictionaryValue(tag);
 		int ivalue = getDictionaryValue(value);
-		return (itag << SHIFT_TAG_VAL) | ivalue; 
+		return (itag << SHIFT_TAG_VAL) | ivalue;
 	}
 	
 	public String getValueString(int tagValueKey){
-		return getStringValue(tagValueKey & ((1 << SHIFT_TAG_VAL) - 1)); 
+		return getStringValue(tagValueKey & ((1 << SHIFT_TAG_VAL) - 1));
 	}
 	
 	public String getTagString(int tagValueKey){
-		return getStringValue(tagValueKey >> SHIFT_TAG_VAL); 
+		return getStringValue(tagValueKey >> SHIFT_TAG_VAL);
 	}
 	
 	protected RenderingRule getRule(int state, int itag, int ivalue){
@@ -567,24 +532,13 @@ public class RenderingRulesStorage {
 	public RenderingRule getRenderingAttributeRule(String attribute) {
 		return renderingAttributes.get(attribute);
 	}
-
-	public RenderingClass getRenderingClass(String name) {
-		return renderingClasses.get(name);
-	}
 	
 	public String[] getRenderingAttributeNames() {
 		return renderingAttributes.keySet().toArray(new String[0]);
 	}
+
 	public RenderingRule[] getRenderingAttributeValues() {
 		return renderingAttributes.values().toArray(new RenderingRule[0]);
-	}
-
-	public RenderingRule getRenderingAssociationRule(String association) {
-		return renderingAssociations.get(association);
-	}
-
-	public String[] getRenderingAssociationNames() {
-		return renderingAssociations.keySet().toArray(new String[0]);
 	}
 
 	public Map<String, RenderingClass> getRenderingClasses() {
