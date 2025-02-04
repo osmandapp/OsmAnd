@@ -5990,4 +5990,11 @@
     <string name="display_distance_to_first_intermediate_summary">Mostra primeiro o tempo e a distância para a próxima parada. Desative para mostrar sempre os detalhes do destino.</string>
     <string name="shared_string_default_view">Visualização padrão</string>
     <string name="shared_string_length">Comprimento</string>
+    <string name="ais_object_lost_timeout">Tempo limite para visibilidade quando o objeto é perdido</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Mostrar rotas de escalada</string>
+    <string name="default_buttons_size_original_description">Cada botão manteria seu próprio tamanho.</string>
+    <string name="calculating_indication_message">Calculando…</string>
+    <string name="calculate_size">Calcular tamanho</string>
+    <string name="ais_port_nmea_local_description">Definir a porta UPD em que o OsmAnd recebe dados NMEA</string>
+    <string name="ais_ship_lost_timeout">Tempo limite para a visibilidade do navio quando nenhum sinal é recebido</string>
 </resources>
