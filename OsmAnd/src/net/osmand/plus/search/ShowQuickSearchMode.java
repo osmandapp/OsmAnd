@@ -9,7 +9,9 @@ public enum ShowQuickSearchMode {
 	DESTINATION_SELECTION_AND_START,
 	INTERMEDIATE_SELECTION,
 	HOME_POINT_SELECTION,
-	WORK_POINT_SELECTION;
+	WORK_POINT_SELECTION,
+	CASERNE_POINT_SELECTION;
+
 
 	public boolean isPointSelection() {
 		return this != NEW && this != NEW_IF_EXPIRED && this != CURRENT;
