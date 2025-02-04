@@ -1,3 +1,47 @@
+## Pour que ça fonctionne
+
+Installer Android Studio.
+
+Avoir les bonnes variables d'environnement:
+
+* ANDROID_HOME=C:\Users\USER\AppData\Local\Android\Sdk
+* JAVA_HOME=C:\Program Files\Java\jdk-19
+
+Créer un fichier bat sur Windows et l'exécuter
+
+```bash
+@echo off
+mkdir osmand
+cd osmand
+git clone https://github.com/osmandapp/OsmAnd-resources.git resources
+git clone https://github.com/yohann1c/OsmAnd-SDIS33.git android
+git clone https://github.com/osmandapp/OsmAnd-core.git core-legacy
+git clone https://github.com/osmandapp/osmandapp.github.io help
+cd android/OsmAnd
+../gradlew --refresh-dependencies clean assembleAndroidFullLegacyFatDebug
+```
+
+Récupérer l'APK sur `./OSMAND/build/outputs/apk/AndroidFullLegacyFat/debug`
+
+## Aller plus loin
+
+* Remplacer le fichier `../resources/rendering_styles/default.render.xml` par un fichier render de son cru afin d'appliquer par défaut son style et lui donner le même nom.
+* Ajouter par défaut ses données dès le lancement de l'application
+
+```gradle
+tasks.register('data', Download) {
+	src 'http://adresseip/data.obf'
+	dest 'assets/data.obf'
+	onlyIfModified true
+}
+
+tasks.register('dataAnt') {
+	doLast {
+		ant.get(src: 'http://adresseip/data.obf', dest: 'assets/data.obf', skipexisting: 'true')
+	}
+}
+```
+
 OsmAnd (OSM Automated Navigation Directions)
 ------------
 This project aims at providing comfortable map viewing and navigation (routing) application for mobile devices. Particular stress lies with complete offline features (via pre-loaded offline map data) or economic internet usage.
