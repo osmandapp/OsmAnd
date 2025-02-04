@@ -30,7 +30,6 @@ class ActivitySearchDatabaseConfigs {
 										ConfigureMapFragment.class,
 										ConfigureMapFragment.PreferenceFragment.class)) {
 
-
 							@Override
 							protected void initializePreferenceFragmentWithFragment(final ConfigureMapFragment.PreferenceFragment preferenceFragment, final ConfigureMapFragment fragment) {
 								preferenceFragment.beforeOnCreate(fragment);
