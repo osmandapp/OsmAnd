@@ -5912,11 +5912,19 @@
     <string name="plugin_ais_tracker_name">AIS-трекер судов</string>
     <string name="ais_cpa_warning_distance_description">Суда помечаются красным цветом, если CPA меньше этого значения и CPA будет достигнуто в ближайшем будущем (см. настройку «Время предупреждения о достижении CPA»).</string>
     <string name="ais_ship_lost_timeout_description">Установите тайм-аут видимости судна: по истечении этого времени без приема сигнала символ судна на экране изменит свое состояние – он будет перечеркнут.</string>
-    <string name="plugin_ais_tracker_description">Отображение позиций AIS и информации об окружающих судах. Данные AIS принимаются по сети от внешнего приемника AIS.</string>
+    <string name="plugin_ais_tracker_description">Отображение позиций AIS и информации об окружающих судах. Данные принимаются по сети от внешнего приемника AIS.</string>
     <string name="ais_load_data">Загрузить данные AIS из файла</string>
     <string name="ais_object_lost_timeouts_description">Установите значения тайм-аута для определения потерянных объектов AIS, если в течение определенного времени не было получено никакого сигнала.</string>
     <string name="ais_object_lost_timeout_description">Установите тайм-аут видимости объектов AIS: по истечении этого времени без приема сигнала объект AIS будет удален с экрана.</string>
     <string name="ais_cpa_warning_distance">Расстояние предупреждения для точки наибольшего сближения (CPA)</string>
     <string name="plugin_ais_tracker_disclaimer">ОТКАЗ ОТ ОТВЕТСТВЕННОСТИ\n\nДанный плагин является хобби-проектом, и не гарантирует надежность или корректность работы.\nНИ В КОЕМ СЛУЧАЕ НЕ ПОЛАГАЙТЕСЬ на это программное обеспечение в любых целях, включая навигацию или обеспечение безопасности жизнедеятельности.</string>
     <string name="ais_port_nmea_local_description">Определить порт UDP, на который OsmAnd будет получать данные NMEA</string>
+    <string name="ais_cpa_settings">Настройки, связанные с CPA</string>
+    <string name="ais_cpa_settings_description">Эти параметры определяют отображение объектов AIS, которые могут приблизиться на опасное расстояние к текущему местоположению судна.</string>
+    <string name="show_utm_grids">Использовать UTM вместо WGS84</string>
+    <string name="show_grids_description">Разрешить отображение сетки на карте</string>
+    <string name="show_grids">Показать сетку карты</string>
+    <string name="map_grid">Сетка карты</string>
+    <string name="show_utm_grids_description">Показывать сетку в метрах UTM вместо градусов WGS84</string>
+    <string name="display_distance_to_first_intermediate_summary">Виджет показывает время и расстояние до следующей остановки. Отключите эту опцию, чтобы всегда показывать данные до конечного пункта.</string>
 </resources>
