@@ -36,6 +36,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
+import net.osmand.plus.mapcontextmenu.builders.cards.UrlImageCard;
 import net.osmand.plus.mapcontextmenu.gallery.GalleryController.DownloadMetadataListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -389,6 +390,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 	}
 
 	public void showContextWidgetMenu(@NonNull View view) {
+		ImageCard card = getSelectedImageCard();
 		List<PopUpMenuItem> items = new ArrayList<>();
 		UiUtilities uiUtilities = app.getUIUtilities();
 		int iconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
@@ -398,23 +400,28 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 				.setOnClickListener(item -> GalleryDetailsFragment.showInstance(getMapActivity(), selectedPosition))
 				.create());
 
-		items.add(new PopUpMenuItem.Builder(app)
-				.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_external_link, iconColor))
-				.setTitleId(R.string.open_in_browser)
-				.setOnClickListener(item -> {
-					FragmentActivity activity = getActivity();
-					ImageCard card = getSelectedImageCard();
-					if (activity != null && card instanceof WikiImageCard wikiImageCard) {
-						AndroidUtils.openUrl(activity, wikiImageCard.getWikiImage().getUrlWithCommonAttributions(), nightMode);
-					}
-				})
-				.create());
+		if (card instanceof WikiImageCard || card instanceof UrlImageCard urlCard && urlCard.getSuitableUrl() != null) {
+			items.add(new PopUpMenuItem.Builder(app)
+					.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_external_link, iconColor))
+					.setTitleId(R.string.open_in_browser)
+					.setOnClickListener(item -> {
+						FragmentActivity activity = getActivity();
+						if (activity != null) {
+							if (card instanceof WikiImageCard wikiImageCard) {
+								AndroidUtils.openUrl(activity, wikiImageCard.getWikiImage().getUrlWithCommonAttributions(), nightMode);
+							} else {
+								UrlImageCard urlImageCard = (UrlImageCard) card;
+								AndroidUtils.openUrl(activity, urlImageCard.getSuitableUrl(), nightMode);
+							}
+						}
+					})
+					.create());
+		}
 
 		items.add(new PopUpMenuItem.Builder(app)
 				.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_gsave_dark, iconColor))
 				.setTitleId(R.string.shared_string_download)
 				.setOnClickListener(item -> {
-					ImageCard card = getSelectedImageCard();
 					String downloadUrl = card.getImageHiresUrl();
 					if (Algorithms.isEmpty(downloadUrl)) {
 						downloadUrl = card.getImageUrl();
