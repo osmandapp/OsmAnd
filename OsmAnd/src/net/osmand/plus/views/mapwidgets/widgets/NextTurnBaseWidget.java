@@ -518,19 +518,29 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	}
 
 	private void formatSubText() {
+		if (distanceSubView == null || Algorithms.isEmpty(distanceSubView.getText().toString())) {
+			return;
+		}
+
+		WidgetSize currentWidgetSize = widgetState.getWidgetSizePref().get();
 		String subText = distanceSubView.getText().toString();
-
-		if (distanceSubView != null && !Algorithms.isEmpty(subText)) {
-			WidgetSize currentWidgetSize = widgetState.getWidgetSizePref().get();
-
-			if (!Algorithms.isEmpty(streetView.getText()) || !Algorithms.isEmpty(exitView.getText())) {
-				if (currentWidgetSize == WidgetSize.SMALL && !subText.endsWith(",")) {
-					subText = subText + ",";
-				} else if ((currentWidgetSize == WidgetSize.MEDIUM || currentWidgetSize == WidgetSize.LARGE) && subText.endsWith(",")) {
-					subText = subText.substring(0, subText.length() - 1);
+		String formattedSubText = null;
+		switch (currentWidgetSize) {
+			case SMALL -> {
+				boolean shouldShowComma = !Algorithms.isEmpty(streetView.getText()) || !Algorithms.isEmpty(exitView.getText());
+				if (shouldShowComma && !subText.endsWith(",")) {
+					formattedSubText = subText + ",";
 				}
-				distanceSubView.setText(subText);
 			}
+			case MEDIUM, LARGE -> {
+				if (subText.endsWith(",")) {
+					formattedSubText = subText.substring(0, subText.length() - 1);
+				}
+			}
+		}
+
+		if (formattedSubText != null) {
+			distanceSubView.setText(formattedSubText);
 		}
 	}
 
