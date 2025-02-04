@@ -327,7 +327,24 @@ public abstract class ImageCard extends AbstractCard {
 				progress.setVisibility(View.VISIBLE);
 				image.setImageBitmap(null);
 			} else if (!downloaded) {
-				MenuBuilder.execute(new DownloadImageTask(getMyApplication(), imageUrl, getDownloadImageListener()));
+				MenuBuilder.execute(new DownloadImageTask(getMyApplication(), imageUrl, new DownloadImageListener() {
+					@Override
+					public void onStartDownloading() {
+						downloading = true;
+						update();
+					}
+
+					@Override
+					public void onFinishDownloading(Bitmap bitmap) {
+						downloading = false;
+						downloaded = true;
+						ImageCard.this.bitmap = bitmap;
+						if (bitmap != null && Algorithms.isEmpty(getImageHiresUrl())) {
+							ImageCard.this.imageHiresUrl = getUrl();
+						}
+						update();
+					}
+				}));
 			} else {
 				progress.setVisibility(View.GONE);
 				image.setImageBitmap(bitmap);
@@ -369,26 +386,5 @@ public abstract class ImageCard extends AbstractCard {
 				button.setOnClickListener(null);
 			}
 		}
-	}
-
-	private DownloadImageListener getDownloadImageListener() {
-		return new DownloadImageListener() {
-			@Override
-			public void onStartDownloading() {
-				downloading = true;
-				update();
-			}
-
-			@Override
-			public void onFinishDownloading(Bitmap bitmap) {
-				downloading = false;
-				downloaded = true;
-				ImageCard.this.bitmap = bitmap;
-				if (bitmap != null && Algorithms.isEmpty(getImageHiresUrl())) {
-					ImageCard.this.imageHiresUrl = getUrl();
-				}
-				update();
-			}
-		};
 	}
 }
