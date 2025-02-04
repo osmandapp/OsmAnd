@@ -4472,7 +4472,7 @@
     <string name="shared_string_create">Loo</string>
     <string name="weather_data_sources_prompt">OsmAnd jagab ilmaennustust kahe andmeallika alusel:</string>
     <string name="navigation_position_icon_summary">Ikoon, mida kuvatakse, kui oled liikvel.</string>
-    <string name="help_article_navigation_routing_moped_routing_name">Teekonnad mopeedil</string>
+    <string name="help_article_navigation_routing_moped_routing_name">Teekonna koostamine mopeedisõiduks</string>
     <string name="storage_found_files_size">Leidsime %1$s faili %2$s</string>
     <string name="rendering_value_sector5_name">Sektor 5</string>
     <string name="shared_string_inches">tolli</string>
@@ -5004,4 +5004,22 @@
     <string name="skip_confirmation">Jah, jäta vahele</string>
     <string name="shared_string_skip_warning">Kas loobud andmete teisaldamisest? OsmAnd enam ei saa ligi sinu andmetele jagatud andmeruumid.\n\nJärgnevaga hakkab rakendus kasutama sinu uut andmekausta.</string>
     <string name="rendering_attr_showRunningRoutes_name">Jooksurajad</string>
+    <string name="help_article_navigation_routing_pedestrian_routing_name">Teekonna koostamine jalakäijatele</string>
+    <string name="help_article_navigation_routing_train_routing_name">Teekonna koostamine rongisõiduks</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">Teekonna koostamine jalgrattasõiduks (MTB)</string>
+    <string name="help_article_navigation_routing_public_transport_navigation_name">Teekonna koostamine kasutades ühistransporti</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">Teekonna koostamine paadisõiduks</string>
+    <string name="help_article_widgets_radius_ruler_name">Raadiuse joonlaud ja tavajoonlaud</string>
+    <string name="help_article_map_interact_with_map_name">Kaardi kasutamine</string>
+    <string name="help_article_navigation_routing_straight_line_routing_name">Teekonna koostamine linnulennul lendamiseks</string>
+    <string name="help_article_navigation_setup_gpx_navigation_name">Tee juhatamine raja alusel</string>
+    <string name="help_article_navigation_setup_markers_navigation_name">Tee juhatamine markerite alusel</string>
+    <string name="help_article_personal_color_palette_schemes_name">Värvikomplektid</string>
+    <string name="help_article_widgets_nav_widgets_name">Tee juhatamise vidinad</string>
+    <string name="help_article_navigation_routing_direct_to_point_routing_name">Otseteekonna koostamine paadisõiduks</string>
+    <string name="help_article_navigation_routing_horse_routing_name">Teekonna koostamine ratsutamiseks</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Teekonna koostamine suusatamiseks</string>
+    <string name="help_article_navigation_routing_online_routing_name">Teekonna koostamine võrguühenduse abil</string>
+    <string name="help_article_navigation_routing_osmand_routing_name">Teave OsmAndi teekonna koostamise kohta</string>
+    <string name="help_article_navigation_routing_car_based_routing_name">Teekonna koostamine autosõiduks (veoauto, mootorratas)</string>
 </resources>
