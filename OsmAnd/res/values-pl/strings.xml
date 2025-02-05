@@ -5763,4 +5763,20 @@
     <string name="connect_obd_instructions_step">1. Podłącz skaner do portu OBD-II pojazdu.\n\n2. Włącz silnik swojego pojazdu\n\n3. Włącz Bluetooth w swoim urządzeniu\n\n4. Kliknij \'%1$s\' i wybierz swój skaner z listy.</string>
     <string name="configure_map_description">Zmień styl mapy, warstwy i inne ustawienia.</string>
     <string name="lock_screen_description">Włącza lub wyłącza funkcję ekranu dotykowego, aby zapobiec przypadkowym dotknięciom</string>
+    <string name="ais_address_settings">Ustawienia adresu IP</string>
+    <string name="ais_address_settings_description">Wybierz protokół NMEA (UDP/TCP) i zdefiniuj adresy</string>
+    <string name="ais_nmea_protocol">Protokół odbioru danych NMEA</string>
+    <string name="ais_nmea_protocol_description">Wybierz protokół odbioru danych NMEA</string>
+    <string name="ais_address_nmea_server">Adres IP źródła danych NMEA</string>
+    <string name="ais_address_nmea_server_description">Zdefiniuj adres IP źródła danych NMEA (jeśli używany jest protokół TCP)</string>
+    <string name="ais_port_nmea_server">Port TCP źródła danych NMEA</string>
+    <string name="ais_port_nmea_server_description">Zdefiniuj numer portu TCP źródła danych NMEA</string>
+    <string name="ais_port_nmea_local">Port UDP lokalnego odbiornika danych NMEA</string>
+    <string name="ais_object_lost_timeouts">Ustawienia limitu czasu odbioru sygnału AIS</string>
+    <string name="ais_object_lost_timeout">Limit czasu widoczności w przypadku utraty obiektu</string>
+    <string name="ais_object_lost_timeout_description">Ustaw limit czasu widoczności obiektów AIS: Po upływie tego czasu bez odbioru sygnału obiekt AIS zostanie usunięty z ekranu.</string>
+    <string name="ais_ship_lost_timeout">Przekroczenie limitu widoczności statku w przypadku braku odbioru sygnału</string>
+    <string name="ais_load_data">Wczytaj dane AIS z pliku</string>
+    <string name="ais_port_nmea_local_description">Zdefiniuj port UDP, na którym OsmAnd odbiera dane NMEA</string>
+    <string name="ais_object_lost_timeouts_description">Ustaw wartości limitu czasu, aby zidentyfikować utracone obiekty AIS, jeśli przez określony czas nie odebrano żadnego sygnału.</string>
 </resources>
