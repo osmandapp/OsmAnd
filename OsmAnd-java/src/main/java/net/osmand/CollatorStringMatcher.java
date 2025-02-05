@@ -191,9 +191,6 @@ public class CollatorStringMatcher implements StringMatcher {
 	}
 	
 	private static String simplifyStringAndAlignChars(String fullText) {
-		if (fullText == null) {
-			System.out.println("----");
-		}
 		fullText = fullText.toLowerCase(Locale.getDefault());
 		fullText = alignChars(fullText);
 		return fullText;
