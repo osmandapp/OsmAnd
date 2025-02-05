@@ -5684,4 +5684,9 @@
     <string name="ais_object_lost_timeouts_description">Подесите вредности временског ограничења да бисте идентификовали изгубљене АИС објекте ако сигнал није примљен одређено време.</string>
     <string name="ais_ship_lost_timeout">Временско ограничење за видљивост брода када није примљен сигнал</string>
     <string name="ais_object_lost_timeouts">Подешавања временског ограничења за пријем АИС сигнала</string>
+    <string name="show_grids">Прикажи мрежу мапе</string>
+    <string name="show_grids_description">Дозволи приказ мреже преко мапе</string>
+    <string name="show_utm_grids">Користи УТМ уместо WGS84</string>
+    <string name="show_utm_grids_description">Прикажи мрежу у УТМ метрима уместо WGS84 степенима</string>
+    <string name="map_grid">Мреже мапе</string>
 </resources>
