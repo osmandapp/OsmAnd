@@ -5694,7 +5694,7 @@
     <string name="ais_cpa_warning_time_description">Pokud je TCPA (čas do dosažení CPA s jiným plavidlem) kratší než tato hodnota, bude plavidlo označeno červenou barvou.</string>
     <string name="ais_cpa_warning_distance_description">Plavidla budou označena červenou barvou, pokud je CPA nižší než tato hodnota a CPA bude dosaženo v blízké budoucnosti (viz Výstražná doba pro dosažení CPA).</string>
     <string name="plugin_ais_tracker_description">Zobrazení polohy AIS a informací o okolních plavidlech. Data AIS jsou přijímána prostřednictvím sítě z externího přijímače AIS.</string>
-    <string name="show_grids_description">Povoliz zobrazení mřížky přes mapu</string>
+    <string name="show_grids_description">Povolit zobrazení mřížky přes mapu</string>
     <string name="show_grids">Zobrazit mřížku mapy</string>
     <string name="show_utm_grids">Použít UTM namísto WGS84</string>
     <string name="show_utm_grids_description">Zobrazit mřížku v metrech UTM namísto stupňů WGS84</string>
