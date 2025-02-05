@@ -5680,4 +5680,9 @@
     <string name="ais_object_lost_timeout">Tímamörk sýnileika þegar AIS-atriði týnist</string>
     <string name="ais_cpa_warning_distance">Vegalengd CPA-árekstrarviðvörunar (Closest Point of Approach)</string>
     <string name="map_widget_route_information_desc">Birtir áætlaðan komutíma, ferðatíma sem eftir er og heildarlengd fyrirliggjandi siglingaleiðar.</string>
+    <string name="show_grids_description">Leyfa birtingu hnitanets yfir landakortinu</string>
+    <string name="show_utm_grids">Nota UTM í stað WGS84</string>
+    <string name="map_grid">Hnitanet korts</string>
+    <string name="show_utm_grids_description">Birta hnitanet í UTM-metum í staðinn fyrir WGS84-gráður</string>
+    <string name="show_grids">Birta hnitanet á korti</string>
 </resources>

@@ -5726,4 +5726,9 @@
     <string name="ais_cpa_warning_distance">Advarselsafstand for det nærmeste indsejlingsspunkt (CPA)</string>
     <string name="plugin_ais_tracker_name">AIS-fartøjssporing</string>
     <string name="plugin_ais_tracker_description">Vis AIS-positioner og oplysninger om omkringliggende fartøjer. AIS-dataene modtages via netværk fra en ekstern AIS-modtager.</string>
+    <string name="show_utm_grids">Brug UTM i stedet for WGS84</string>
+    <string name="show_utm_grids_description">Vis gradnet i UTM-meter i stedet for WGS84-grader</string>
+    <string name="map_grid">Kortgradnet</string>
+    <string name="show_grids">Vis gradnet på kort</string>
+    <string name="show_grids_description">Tillad visning af gradnet over kortet</string>
 </resources>

@@ -5680,4 +5680,9 @@
     <string name="ais_ship_lost_timeout_description">Podesi vremensko ograničenje za vidljivost broda: Nakon ovog vremena bez prijema signala, simbol broda će promeniti svoje stanje na ekranu: Biće precrtan.</string>
     <string name="ais_cpa_warning_time">Vreme upozorenja da se stigne do najbliže tačke pristupa (CPA)</string>
     <string name="ais_port_nmea_server">TCP port NMEA izvora podataka</string>
+    <string name="map_grid">Mreže mape</string>
+    <string name="show_grids">Prikaži mrežu mape</string>
+    <string name="show_utm_grids_description">Prikaži mrežu u UTM metrima umesto WGS84 stepenima</string>
+    <string name="show_grids_description">Dozvoli prikaz mreže preko mape</string>
+    <string name="show_utm_grids">Koristite UTM umesto WGS84</string>
 </resources>
