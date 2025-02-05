@@ -5686,4 +5686,23 @@
     <string name="shared_string_default_view">Vista predefinita</string>
     <string name="map_widget_route_information">Informazioni sul percorso</string>
     <string name="shared_string_length">Lunghezza</string>
+    <string name="ais_load_data">Carica i dati AIS dal file</string>
+    <string name="ais_nmea_protocol_description">Scegli il protocollo per la ricezione dei dati NMEA</string>
+    <string name="ais_address_nmea_server">Indirizzo IP della sorgente dati NMEA</string>
+    <string name="ais_address_nmea_server_description">Definisci l\'indirizzo IP della sorgente dati NMEA (se viene utilizzato TCP)</string>
+    <string name="ais_port_nmea_server">Porta TCP della sorgente dati NMEA</string>
+    <string name="ais_port_nmea_server_description">Definisci il numero della porta TCP della sorgente dati NMEA</string>
+    <string name="ais_object_lost_timeouts">Impostazioni di timeout per la ricezione del segnale AIS</string>
+    <string name="ais_object_lost_timeout">Timeout per la visibilità quando l\'oggetto viene perso</string>
+    <string name="ais_object_lost_timeout_description">Imposta il timeout per la visibilità degli oggetti AIS: trascorso questo periodo di tempo senza ricezione del segnale, l\'oggetto AIS verrà rimosso dallo schermo.</string>
+    <string name="ais_port_nmea_local_description">Definisci la porta UDP in cui OsmOnd riceve i dati NMEA</string>
+    <string name="ais_ship_lost_timeout_description">Imposta il timeout per la visibilità della nave: trascorso questo periodo di tempo senza ricezione del segnale, il simbolo della nave cambierà stato sullo schermo: sarà barrato.</string>
+    <string name="ais_cpa_settings">Impostazioni relative al CPA</string>
+    <string name="ais_cpa_settings_description">Questi valori definiscono la presentazione degli oggetti AIS che potrebbero avvicinarsi troppo alla propria posizione.</string>
+    <string name="ais_address_settings">Impostazioni dell\'indirizzo IP</string>
+    <string name="ais_address_settings_description">Scegli il protocollo NMEA (UDP/TCP) e definisci gli indirizzi</string>
+    <string name="ais_ship_lost_timeout">Timeout per la visibilità della nave quando non viene ricevuto alcun segnale</string>
+    <string name="ais_port_nmea_local">Porta UDP locale del ricevitore dati NMEA</string>
+    <string name="ais_object_lost_timeouts_description">Imposta valori di timeout per identificare oggetti AIS persi se non viene ricevuto alcun segnale per un periodo di tempo specifico.</string>
+    <string name="ais_nmea_protocol">Protocollo per la ricezione dei dati NMEA</string>
 </resources>
