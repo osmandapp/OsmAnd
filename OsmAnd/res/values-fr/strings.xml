@@ -5675,4 +5675,9 @@
     <string name="ais_load_data">Charger des données AIS à partir d\'un fichier</string>
     <string name="ais_address_nmea_server">Adresse IP de la source des données NMEA</string>
     <string name="ais_address_nmea_server_description">Définir l\'adresse IP de la source des données NMEA (si TCP est utilisé)</string>
+    <string name="show_utm_grids_description">Affiche la grille en mètres UTM au lieu de degrés WGS84</string>
+    <string name="map_grid">Grilles de carte</string>
+    <string name="show_utm_grids">Utiliser les coordonnées UTM au lieu de WGS84</string>
+    <string name="show_grids_description">Autorise l\'affichage de la grille sur la carte</string>
+    <string name="show_grids">Afficher la grille sur la carte</string>
 </resources>
