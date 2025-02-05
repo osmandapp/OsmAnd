@@ -5651,4 +5651,9 @@
     <string name="ais_cpa_warning_distance">Figyelmeztetési távolság a legközelebbi megközelítési pont eléréséhez (CPA)</string>
     <string name="plugin_ais_tracker_name">AIS hajókövető</string>
     <string name="plugin_ais_tracker_description">Jelenítse meg az AIS pozíciókat és információkat a környező hajókról. Az AIS-adatok hálózaton keresztül érkeznek egy külső AIS-vevőtől.</string>
+    <string name="map_grid">Térképrácsok</string>
+    <string name="show_utm_grids">UTM használata a WGS84 helyett</string>
+    <string name="show_grids_description">Rács megjelenítését engedélyezi a térképen</string>
+    <string name="show_grids">Térképrács mutatása</string>
+    <string name="show_utm_grids_description">WGS84 fokok helyett UTM méterben mutatja a rácsot</string>
 </resources>
