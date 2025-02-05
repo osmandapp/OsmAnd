@@ -3557,6 +3557,7 @@
     <string name="poi_climbing_crag_filter">Місце для скелелазіння</string>
     <string name="poi_rescue_box">Рятувальний ящик</string>
     <string name="poi_climbing_crag">Скеля для скелелазіння</string>
+    <string name="poi_osmand_climbing_crag">Скеля для скелелазіння</string>
     <string name="reddit">Reddit</string>
     <string name="poi_hazard_additional_erosion">Небезпека: ерозія</string>
     <string name="poi_hazard_additional_rockfall">Небезпека: каменепад</string>
@@ -4965,6 +4966,7 @@
     <string name="poi_route_activity_type_swimming_outdoor">Плавання на відкритому повітрі</string>
     <string name="poi_cafe_filter">кафе</string>
     <string name="poi_climbing_area">Зона скелелазіння</string>
+    <string name="poi_osmand_climbing_area">Зона скелелазіння</string>
     <string name="poi_cafe_yes">Иак</string>
     <string name="poi_climbing_route">Маршрут сходження</string>
     <string name="poi_climbing_route_bottom">Нижня частина маршруту сходження</string>

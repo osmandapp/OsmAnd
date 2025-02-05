@@ -717,6 +717,7 @@
     <string name="poi_computer_repair_yes">ஆம்; கணினி பழுது</string>
     <string name="poi_computer_parts_no">கணினி பாகங்கள்: இல்லை</string>
     <string name="poi_climbing_crag">ஆம்; கயிறு ஏறும்</string>
+    <string name="poi_osmand_climbing_crag">ஆம்; கயிறு ஏறும்</string>
     <string name="poi_museum_gallery">கேலரி</string>
     <string name="poi_museum_nature">இயற்கை</string>
     <string name="poi_museum_technology">தொழில்நுட்பம்</string>
@@ -4951,6 +4952,7 @@
     <string name="poi_camp_site_serviced">பணி</string>
     <string name="poi_camp_site_deluxe">டீலக்ச்</string>
     <string name="poi_climbing_area">ஏறும் பகுதி</string>
+    <string name="poi_osmand_climbing_area">ஏறும் பகுதி</string>
     <string name="poi_climbing_route">ஏறும் பாதை</string>
     <string name="poi_climbing_route_bottom">ஏறும் பாதை கீழே</string>
 </resources>

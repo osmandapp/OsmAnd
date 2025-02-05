@@ -2147,6 +2147,7 @@
     <string name="poi_access_bus">גישה לאוטובוס</string>
     <string name="poi_snowmobile_filter">גישה לאופנוע שלג</string>
     <string name="poi_climbing_crag">צוק טיפוס</string>
+    <string name="poi_osmand_climbing_crag">צוק טיפוס</string>
     <string name="poi_climbing_crag_filter">מצוק טיפוס</string>
     <string name="poi_rtsa_scale_filter">קטגוריית קושי</string>
     <string name="poi_fire_hydrant_type_pipe">צינור</string>

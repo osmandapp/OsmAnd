@@ -158,6 +158,7 @@
     <string name="poi_service_car">Avtomobil xidməti</string>
     <string name="poi_books_type">Kitablar</string>
     <string name="poi_climbing_crag">Bəli</string>
+    <string name="poi_osmand_climbing_crag">Bəli</string>
     <string name="poi_volcano_type">Növ</string>
     <string name="poi_video_telephone">Video</string>
     <string name="poi_fire_hydrant_pressure_filter">Təzyiq</string>

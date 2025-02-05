@@ -4661,6 +4661,7 @@
     <string name="poi_computer_repair_yes">Tá; Deisiú ríomhaire</string>
     <string name="poi_computer_sales_no">Díol ríomhairí: níl</string>
     <string name="poi_climbing_crag">Portán dreapadóireachta</string>
+    <string name="poi_osmand_climbing_crag">Portán dreapadóireachta</string>
     <string name="poi_museum_science">Eolaíocht</string>
     <string name="poi_museum_apis_mellifera">Beacha meala</string>
     <string name="poi_museum_history">Stair</string>
@@ -4962,6 +4963,7 @@
     <string name="poi_route_activity_type_fitness">Aclaíochta</string>
     <string name="poi_cafe_filter">Caifé</string>
     <string name="poi_climbing_area">Limistéar dreapadóireachta</string>
+    <string name="poi_osmand_climbing_area">Limistéar dreapadóireachta</string>
     <string name="poi_climbing_route">Bealach dreapadóireachta</string>
     <string name="poi_climbing_route_bottom">Bun an bhealaigh dreapadóireachta</string>
     <string name="poi_cafe_yes">Tá</string>

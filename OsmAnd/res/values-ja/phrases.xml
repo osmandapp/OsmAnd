@@ -3544,6 +3544,7 @@
     <string name="poi_healthcare_speciality_radiotherapy">放射線療法</string>
     <string name="poi_climbing_crag_filter">岩山登山</string>
     <string name="poi_climbing_crag">有り;岩山</string>
+    <string name="poi_osmand_climbing_crag">有り;岩山</string>
     <string name="reddit">Reddit</string>
     <string name="poi_historic_tank">歴史的な戦車</string>
     <string name="poi_generator_source_biomass">動力源:バイオマス燃料</string>

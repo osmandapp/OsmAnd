@@ -793,6 +793,7 @@
     <string name="poi_access_bus">Dostop z avtobusom</string>
     <string name="poi_snowmobile_filter">Dostop z motornimi sanmi</string>
     <string name="poi_climbing_crag">Plezalna pečina</string>
+    <string name="poi_osmand_climbing_crag">Plezalna pečina</string>
     <string name="poi_climbing_crag_filter">Plezalna pečina</string>
     <string name="poi_park_ride">Parkiraj in se pelji</string>
     <string name="poi_books_type">Knjige</string>

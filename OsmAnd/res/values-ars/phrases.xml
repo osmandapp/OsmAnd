@@ -3671,6 +3671,7 @@
     <string name="poi_access_bus">منفذ للحافلة</string>
     <string name="poi_snowmobile_filter">مدخل دراجة جليد</string>
     <string name="poi_climbing_crag">نعم ؛ صخور تسلق</string>
+    <string name="poi_osmand_climbing_crag">نعم ؛ صخور تسلق</string>
     <string name="poi_climbing_crag_filter">تسلق الصخور</string>
     <string name="poi_rtsa_scale_filter">تصنيف الصعوبة</string>
     <string name="poi_park_ride">اصطف واركب</string>

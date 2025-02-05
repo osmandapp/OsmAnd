@@ -3553,6 +3553,7 @@
     <string name="poi_climbing_crag_filter">Klifursvæði</string>
     <string name="poi_rescue_box">Björgunarkassi</string>
     <string name="poi_climbing_crag">Klifursvæði</string>
+    <string name="poi_osmand_climbing_crag">Klifursvæði</string>
     <string name="reddit">Reddit</string>
     <string name="poi_hazard_additional_erosion">Slysahætta: landrof</string>
     <string name="poi_hazard_additional_rockfall">Slysahætta: grjóthrun</string>
@@ -5017,6 +5018,7 @@
     <string name="poi_route_activity_type_fitness">Líkamsrækt (þol)</string>
     <string name="poi_route_activity_type_inline_skates">Línuskautar</string>
     <string name="poi_climbing_area">Klifursvæði</string>
+    <string name="poi_osmand_climbing_area">Klifursvæði</string>
     <string name="poi_climbing_route">Klifurleið</string>
     <string name="poi_climbing_route_bottom">Neðst í klifurleið</string>
     <string name="poi_healthcare_speciality_chronic">Krónískir sjúkdómar</string>

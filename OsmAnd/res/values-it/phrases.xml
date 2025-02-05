@@ -2383,6 +2383,7 @@
     <string name="poi_climbing_orientation_sw">Orientamento del muro:SO</string>
     <string name="poi_climbing_orientation_nw">Orientamento del muro: NO</string>
     <string name="poi_climbing_crag">Falesia per scalate</string>
+    <string name="poi_osmand_climbing_crag">Falesia per scalate</string>
     <string name="poi_distance_mark">Segno di distanza</string>
     <string name="poi_piste_skitour">Pista Skitour</string>
     <string name="poi_denomination_united_reformed">Riformata Unita</string>

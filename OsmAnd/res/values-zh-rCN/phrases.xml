@@ -416,6 +416,7 @@
     <string name="poi_capacity_disabled_yes">有；身障人士专用位置</string>
     <string name="poi_aerialway_heating_yes">是；暖气供应</string>
     <string name="poi_climbing_crag">是；攀岩</string>
+    <string name="poi_osmand_climbing_crag">是；攀岩</string>
     <string name="poi_aerialway_heating">加热</string>
     <string name="poi_power_supply">供电</string>
     <string name="poi_filling_station">加油站</string>

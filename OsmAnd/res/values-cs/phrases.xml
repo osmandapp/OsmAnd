@@ -4968,6 +4968,7 @@
     <string name="poi_climbing_route">Lezecká trasa</string>
     <string name="poi_cafe_filter">Kavárna</string>
     <string name="poi_climbing_area">Lezecká oblast</string>
+    <string name="poi_osmand_climbing_area">Lezecká oblast</string>
     <string name="poi_sled_yes">Saně: ano</string>
     <string name="poi_atv_no">ATV: ne</string>
     <string name="poi_access_notes">Poznámky o přístupu</string>

@@ -3553,6 +3553,7 @@
     <string name="poi_climbing_crag_filter">攀岩</string>
     <string name="poi_rescue_box">急救箱</string>
     <string name="poi_climbing_crag">是;攀岩</string>
+    <string name="poi_osmand_climbing_crag">是;攀岩</string>
     <string name="reddit">Reddit</string>
     <string name="poi_hazard_additional_erosion">危害：侵蝕</string>
     <string name="poi_hazard_additional_rockfall">危害：落石</string>
@@ -4964,6 +4965,7 @@
     <string name="poi_route_activity_type_surfing">衝浪</string>
     <string name="poi_route_activity_type_waterskiing">滑水</string>
     <string name="poi_climbing_area">攀岩區</string>
+    <string name="poi_osmand_climbing_area">攀岩區</string>
     <string name="poi_climbing_route">攀登路線</string>
     <string name="poi_climbing_route_bottom">攀登路線底部</string>
     <string name="poi_cafe_yes">是</string>

@@ -292,6 +292,7 @@
     <string name="poi_rtsa_scale_filter">Raskusastme kategooria</string>
     <string name="poi_climbing_crag_filter">Ronimiskragi</string>
     <string name="poi_climbing_crag">Kaljurünk ronimiseks</string>
+    <string name="poi_osmand_climbing_crag">Kaljurünk ronimiseks</string>
     <string name="poi_snowmobile_filter">Ligipääs mootorsaanidele</string>
     <string name="poi_access_bus">Ligipääs bussidele</string>
     <string name="poi_access_caravan">Ligipääs haagissuvilatele</string>
@@ -4928,6 +4929,7 @@
     <string name="poi_climbing_route">Ronimisrada</string>
     <string name="poi_cafe_yes">Jah</string>
     <string name="poi_climbing_area">Ronimisraja piirkond</string>
+    <string name="poi_osmand_climbing_area">Ronimisraja piirkond</string>
     <string name="poi_route_activity_type_sport_motorcycling">Mootorrattasport</string>
     <string name="poi_route_activity_type_road_motorcycling">Mootorrattasõit teedel</string>
     <string name="poi_route_activity_type_hiking">Matkamine</string>
