@@ -60,10 +60,12 @@ public class CollatorStringMatcher implements StringMatcher {
 
 	public static boolean cmatches(Collator collator, String fullName, String part, StringMatcherMode mode) {
 		if (ArabicNormalizer.isSpecialArabic(fullName)) {
-			fullName = ArabicNormalizer.normalize(fullName);
+			String normalized = ArabicNormalizer.normalize(fullName);
+			fullName = normalized == null ? fullName : normalized;
 		}
 		if (ArabicNormalizer.isSpecialArabic(part)) {
-			part = ArabicNormalizer.normalize(part);
+			String normalized = ArabicNormalizer.normalize(part);
+			part = normalized == null ? part : normalized;
 		}
 		switch (mode) {
 		case CHECK_CONTAINS:
