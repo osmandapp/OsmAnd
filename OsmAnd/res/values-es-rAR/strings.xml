@@ -5539,4 +5539,13 @@
     <string name="shared_string_default_view">Vista predefinida</string>
     <string name="map_widget_route_information_desc">Muestra la hora estimada de llegada, el tiempo de viaje restante y la distancia para la ruta de navegación actual.</string>
     <string name="map_widget_route_information">Información de la ruta</string>
+    <string name="ais_load_data">Cargar datos AIS desde un archivo</string>
+    <string name="ais_address_settings">Ajustes de la dirección IP</string>
+    <string name="ais_address_settings_description">Elegí el protocolo NMEA (UDP/TCP) y definí las direcciones</string>
+    <string name="ais_nmea_protocol">Protocolo NMEA para recepción de datos</string>
+    <string name="ais_nmea_protocol_description">Elegí el protocolo NMEA para la recepción de datos</string>
+    <string name="ais_address_nmea_server">Dirección IP del orígen de datos de NMEA</string>
+    <string name="ais_address_nmea_server_description">Definí la dirección IP del orígen de datos NMEA (al usar TCP)</string>
+    <string name="ais_port_nmea_server">Puerto TCP para el orígen de datos de NMEA</string>
+    <string name="ais_port_nmea_server_description">Definí el número de puerto TCP del orígen de datos NMEA</string>
 </resources>
