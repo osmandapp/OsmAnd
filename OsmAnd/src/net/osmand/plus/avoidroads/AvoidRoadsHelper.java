@@ -191,11 +191,11 @@ public class AvoidRoadsHelper {
 		}
 	}
 
-	public void replaceImpassableRoad(MapActivity activity,
-	                                  AvoidRoadInfo currentObject,
-	                                  LatLon newLoc,
-	                                  boolean showDialog,
-	                                  AvoidRoadsCallback callback) {
+	public void replaceImpassableRoad(@Nullable MapActivity activity,
+			@NonNull AvoidRoadInfo currentObject,
+			@NonNull LatLon newLoc,
+			boolean showDialog,
+			@Nullable AvoidRoadsCallback callback) {
 		Location ll = new Location("");
 		ll.setLatitude(newLoc.getLatitude());
 		ll.setLongitude(newLoc.getLongitude());
@@ -208,7 +208,9 @@ public class AvoidRoadsHelper {
 			@Override
 			public boolean publish(RouteDataObject object) {
 				if (object == null) {
-					Toast.makeText(activity, R.string.error_avoid_specific_road, Toast.LENGTH_LONG).show();
+					if (activity != null) {
+						Toast.makeText(activity, R.string.error_avoid_specific_road, Toast.LENGTH_LONG).show();
+					}
 					if (callback != null) {
 						callback.onAddImpassableRoad(false, null);
 					}
