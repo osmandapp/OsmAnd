@@ -4679,4 +4679,11 @@
     <string name="ais_port_nmea_local_description">Определяне на порт на UPD, на който OsmAnd получава данни от NMEA</string>
     <string name="ais_object_lost_timeout">Време на показване на изгубен обект</string>
     <string name="auto_25_chars_route_tshl">Завийте остро наляво</string>
+    <string name="routing_attr_avoid_cobblestone_name">Без калдъръм</string>
+    <string name="routing_attr_avoid_cobblestone_description">Без калдъръм</string>
+    <string name="show_grids_description">Дава възможност да бъде показана решетка върху картата</string>
+    <string name="show_grids">Решетка върху картата</string>
+    <string name="show_utm_grids">Използване на UTM вместо WGS84</string>
+    <string name="show_utm_grids_description">Решетка в UTM метри вместо в WGS84 градуси</string>
+    <string name="map_grid">Решетки на картата</string>
 </resources>

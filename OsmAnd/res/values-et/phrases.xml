@@ -4973,4 +4973,23 @@
     <string name="poi_sled_no">Kelk/regi: ei</string>
     <string name="poi_sled_yes">Kelk/regi: jah</string>
     <string name="poi_route_activity_type_road_cycling">Rattasõit teedel</string>
+    <string name="poi_barrier_tyres">Rehvidest tõke</string>
+    <string name="poi_sinkhole_ponor">Karst: pugem</string>
+    <string name="poi_sinkhole_estavelle">Karst: pugem/neeluauk</string>
+    <string name="poi_barrier_coupure">Suletav läbipääs tammist</string>
+    <string name="poi_sinkhole_bluehole">Karst: veealune neeluauk</string>
+    <string name="poi_spikes">Piitõke</string>
+    <string name="poi_wedge">Ülestõstetav kiilplokk</string>
+    <string name="poi_sump_buster">Madal tõkkeplokk sõiduautodele</string>
+    <string name="poi_surface_chipseal">Mustkate või freesasfalt</string>
+    <string name="poi_sinkhole_doline">Karst: lai karstilehter</string>
+    <string name="poi_padus_local_designation">Kohalik klassifikatsioon</string>
+    <string name="poi_padus_owner_fullname">Kohalik omanik</string>
+    <string name="poi_padus_manager_fullname">Vastutaja</string>
+    <string name="poi_padus_designation_type_fullname">Klassifikatsiooni tüüp</string>
+    <string name="poi_padus_manager_type_fullname">Vastutaja tüüp</string>
+    <string name="poi_padus_local_manager">Kohalik vastutaja</string>
+    <string name="poi_sinkhole_pit">Karst: kitsas karstilehter</string>
+    <string name="poi_barrier_bar">Staatiline tõkkepuu</string>
+    <string name="poi_barrier_board">Lühike piirdetõke</string>
 </resources>

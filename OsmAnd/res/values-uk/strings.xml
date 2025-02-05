@@ -5705,4 +5705,9 @@
     <string name="ais_port_nmea_server_description">Визначте номер порту TCP джерела даних NMEA</string>
     <string name="ais_object_lost_timeout_description">Встановіть час очікування для видимості об’єктів AIS: після закінчення цього часу без прийому сигналу об’єкт AIS буде видалено з екрана.</string>
     <string name="ais_cpa_warning_distance">Відстань попередження для точки наближення (CPA)</string>
+    <string name="show_grids">Показати сітку карти</string>
+    <string name="show_grids_description">Дозволити відображення сітки поверх карти</string>
+    <string name="show_utm_grids">Використовуйте UTM замість WGS84</string>
+    <string name="show_utm_grids_description">Показувати сітку в метрах UTM замість WGS84 градусів</string>
+    <string name="map_grid">Картографічні сітки</string>
 </resources>
