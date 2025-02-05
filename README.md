@@ -26,40 +26,46 @@ Récupérer l'APK sur `./OSMAND/build/outputs/apk/AndroidFullLegacyFat/debug`
 ## Aller plus loin
 
 * Remplacer le fichier `../resources/rendering_styles/default.render.xml` par un fichier render de son cru afin d'appliquer par défaut son style et lui donner le même nom.
-* Ajouter par défaut ses données dès le lancement de l'application
+* Ajouter par défaut ses données dès le lancement de l'application. On ajoute en amont son fichier dans le dossier `../../ressources/data` puis on écrit dans le fichier `build-common.gradle`
 
 ```gradle
-tasks.register('data', Download) {
-	src 'http://adresseip/data.obf'
-	dest 'assets/data.obf'
-	onlyIfModified true
-}
-
-tasks.register('dataAnt') {
-	doLast {
-		ant.get(src: 'http://adresseip/data.obf', dest: 'assets/data.obf', skipexisting: 'true')
+tasks.register('gironde', Copy) {
+	from("../../resources/data") {
+		include "France_new-aquitaine_gironde_europe.obf"
 	}
+	into "assets"
 }
 ```
 
+Cette partie intégrera le fichier dans le dossier `./assets` mais ne l'intégrera pas aux fichiers d'application. Pour cela, il faut modifier le fichier `../../ressources/bundled_assets.json`
+
+```json
+{
+    "source": "France_new-aquitaine_gironde_europe.obf",
+    "destination": "France_new-aquitaine_gironde_europe.obf",
+    "mode": "alwaysOverwriteOrCopy"
+},
+```
+
+
+
 OsmAnd (OSM Automated Navigation Directions)
-------------
+--------------------------------------------
+
 This project aims at providing comfortable map viewing and navigation (routing) application for mobile devices. Particular stress lies with complete offline features (via pre-loaded offline map data) or economic internet usage.
 To get started, continue with the basic description below, then find more detail on our Welcome Wiki Pages, the Project Homepage, or the OpenStreetMap OsmAnd Wiki Page.
 You are welcome to discuss any question regarding the project at the Google group OsmAnd. Please do not use comments on wiki pages because it is rather difficult to find them.
 
+| Android markets                                                                                                                                                                                               |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<a href="https://play.google.com/store/apps/dev?id=8483587772816822023" rel="Get it on Google Play">`![Google Play](https://github.com/osmandapp/OsmAnd-misc/blob/master/logo/stores/googleplay.png)`</a>` |
+| `<a href="https://appgallery.huawei.com/#/app/C101486545" rel="Explore it on AppGallery">`![Huawei AppGallery](https://github.com/osmandapp/OsmAnd-misc/blob/master/logo/stores/appgallery.png)`</a>`       |
+| `<a href="https://www.amazon.com/s?i=mobile-apps&rh=p_4%3AOsmAnd&search-type=ss" rel="Get it on Amazon">`![Amazon](https://github.com/osmandapp/OsmAnd-misc/blob/master/logo/stores/amazon.png)`</a>`       |
+| `<a href="https://f-droid.org/packages/net.osmand.plus/" rel="Get it on F-Droid">`![F-droid](https://github.com/osmandapp/OsmAnd-misc/blob/master/logo/stores/fdroid.png)`</a>`                             |
 
-
-|Android markets|
-|---------------|
-|<a href="https://play.google.com/store/apps/dev?id=8483587772816822023" rel="Get it on Google Play">![Google Play](https://github.com/osmandapp/OsmAnd-misc/blob/master/logo/stores/googleplay.png)</a>|
-|<a href="https://appgallery.huawei.com/#/app/C101486545" rel="Explore it on AppGallery">![Huawei AppGallery](https://github.com/osmandapp/OsmAnd-misc/blob/master/logo/stores/appgallery.png)</a>|
-|<a href="https://www.amazon.com/s?i=mobile-apps&rh=p_4%3AOsmAnd&search-type=ss" rel="Get it on Amazon">![Amazon](https://github.com/osmandapp/OsmAnd-misc/blob/master/logo/stores/amazon.png)</a>|
-|<a href="https://f-droid.org/packages/net.osmand.plus/" rel="Get it on F-Droid">![F-droid](https://github.com/osmandapp/OsmAnd-misc/blob/master/logo/stores/fdroid.png)</a>|
-
-|App Store - Apple|
-|---------------|
-|<a href="https://apps.apple.com/app/apple-store/id934850257" rel="Get it on AppStore">![App Store Apple](https://github.com/osmandapp/OsmAnd-misc/blob/master/logo/stores/appstore.png)</a>|
+| App Store - Apple                                                                                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<a href="https://apps.apple.com/app/apple-store/id934850257" rel="Get it on AppStore">`![App Store Apple](https://github.com/osmandapp/OsmAnd-misc/blob/master/logo/stores/appstore.png)`</a>` |
 
 <p>
 <a href="https://hosted.weblate.org/engage/osmand/">
@@ -69,64 +75,70 @@ You are welcome to discuss any question regarding the project at the Google grou
 
 Functionality
 -------------
+
 **OsmAnd (OSM Automated Navigation Directions)** is a map and navigation application with access to the free, worldwide, and high-quality OpenStreetMap (OSM) database.
 All map data can be stored on your device's memory card for offline use.
 Via your device's GPS, OsmAnd offers routing, with optical and voice guidance, for car, bike, and pedestrian usage.
 All main functionalities work both online and offline (no internet needed).
 
-
 ## Some of the main features:
 
 #### Navigation
- * Works online (fast) or offline (no roaming charges when you are abroad)
- * Turn-by-turn voice guidance (recorded and synthesized voices)
- * Optional lane guidance, street name display, and estimated time of arrival
- * Supports intermediate points on your itinerary
- * Automatic re-routing whenever you deviate from the route
- * Search for places by address, by type (e.g. restaurant, hotel, gas station, museum), or by geographical coordinates
+
+* Works online (fast) or offline (no roaming charges when you are abroad)
+* Turn-by-turn voice guidance (recorded and synthesized voices)
+* Optional lane guidance, street name display, and estimated time of arrival
+* Supports intermediate points on your itinerary
+* Automatic re-routing whenever you deviate from the route
+* Search for places by address, by type (e.g. restaurant, hotel, gas station, museum), or by geographical coordinates
 
 #### Map Viewing
- * Display your position and orientation on the map
- * Optionally align the map according to compass or your direction of motion
- * Save your most important places as Favorites
- * Display POIs (point of interests) around you
- * Can display specialized online tile maps
- * Can display satellite view (from Bing)
- * Can display different overlays like touring/navigation GPX tracks and additional maps with customizable transparency
- * Optionally display place names in English, local, or phonetic spelling
+
+* Display your position and orientation on the map
+* Optionally align the map according to compass or your direction of motion
+* Save your most important places as Favorites
+* Display POIs (point of interests) around you
+* Can display specialized online tile maps
+* Can display satellite view (from Bing)
+* Can display different overlays like touring/navigation GPX tracks and additional maps with customizable transparency
+* Optionally display place names in English, local, or phonetic spelling
 
 #### Use OpenStreetMap and Wikipedia Data
- * High quality information from the world's best collaborative projects
- * Global maps from OpenStreetMap, available per country or region
- * Wikipedia POIs, great for sightseeing (not available in free version)
- * Unlimited free downloading, directly from the app (download limit is 16 map files in free version)
- * Always up-to-date maps (updated at least once a month)
- * Compact offline vector maps
- * Select between complete map data and just road network (Example: All of Japan is 700 MB, or 200 MB for the road network only)
- * Also supports online or cached tile maps
+
+* High quality information from the world's best collaborative projects
+* Global maps from OpenStreetMap, available per country or region
+* Wikipedia POIs, great for sightseeing (not available in free version)
+* Unlimited free downloading, directly from the app (download limit is 16 map files in free version)
+* Always up-to-date maps (updated at least once a month)
+* Compact offline vector maps
+* Select between complete map data and just road network (Example: All of Japan is 700 MB, or 200 MB for the road network only)
+* Also supports online or cached tile maps
 
 #### Safety Features
- * Optional automated day/night view switching
- * Optional speed limit display, with reminder if you exceed it
- * Optional speed-dependent map zooming
- * Share your location so that your friends can find you
+
+* Optional automated day/night view switching
+* Optional speed limit display, with reminder if you exceed it
+* Optional speed-dependent map zooming
+* Share your location so that your friends can find you
 
 #### Bicycle and Pedestrian Features
- * The maps include foot, hiking, and bike paths (great for outdoor activities)
- * Special routing and display modes for bike and pedestrian usage
- * Optional public transport stops (bus, tram, train), including line names
- * Optional trip recording to local GPX file or online service
- * Optional speed and altitude display
- * Display of contour lines and hill-shading (via additional paid plugin)
+
+* The maps include foot, hiking, and bike paths (great for outdoor activities)
+* Special routing and display modes for bike and pedestrian usage
+* Optional public transport stops (bus, tram, train), including line names
+* Optional trip recording to local GPX file or online service
+* Optional speed and altitude display
+* Display of contour lines and hill-shading (via additional paid plugin)
 
 #### Directly Contribute to OpenStreetMap
- * Report map bugs
- * Upload GPX tracks to OSM directly from the app
- * Add POIs and directly upload them to OSM (or later if offline)
- * Optional trip recording in background mode (while device is in sleep mode)
 
+* Report map bugs
+* Upload GPX tracks to OSM directly from the app
+* Add POIs and directly upload them to OSM (or later if offline)
+* Optional trip recording in background mode (while device is in sleep mode)
 
 #### Contribute to OsmAnd
+
 OsmAnd is open-source and actively being developed.
 Everyone can contribute to the application by reporting bugs, [improving translations](https://hosted.weblate.org/projects/osmand/), or coding new features.
 The project experiences continuous improvement by all such forms of developer and user interaction.
@@ -141,8 +153,8 @@ According to research, OSM map data rivals and often surpasses commercially avai
 
 Comparing the different metrics, it is safe to say that OSM maps cover all continents and countries globally for all your travel needs, and you will find their quality and completeness nothing less than stunning in the vast majority of countries. Latest research mentions only few countries in continental Asia and central Africa where e.g the incorporation of a noticeable portion or roadways is still ongoing to catch up with the high levels already reached anywhere else.
 
-
 ##### List of countries supported
+
 Coverage is world wide, e.g.: Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla,
 Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan,
 Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda,

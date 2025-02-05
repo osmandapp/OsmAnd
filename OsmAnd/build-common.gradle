@@ -185,6 +185,13 @@ tasks.register('downloadWorldMiniBasemapAnt') {
 	}
 }
 
+tasks.register('gironde', Copy) {
+	from("../../resources/data") {
+		include "France_new-aquitaine_gironde_europe.obf"
+	}
+	into "assets"
+}
+
 tasks.register('collectVoiceAssets', Sync) {
 	from "../../resources/voice"
 	into "assets/voice"
@@ -303,6 +310,7 @@ tasks.register('collectExternalResources') {
 			copyPoiCategories,
 			copyRouteActivities,
 			downloadWorldMiniBasemap,
+			gironde,
 			collectTestResources,
 			copy3DModels
 }
