@@ -201,7 +201,7 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 		clearNearbyPoints(selectedNearbyPlacesMapLayerProvider);
 		if (selectedObject != null) {
 			selectedNearbyPlacesMapLayerProvider = new NearbyPlacesTileProvider(getApplication(),
-					getPointsOrder(),
+					getPointsOrder() - 1,
 					view.getDensity(),
 					getSelectedObjectId());
 
@@ -290,11 +290,10 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 		return null;
 	}
 
-	public void setCustomMapObjects(List<WikiCoreHelper.OsmandApiFeatureData> nearbyPlacePoints) {
+	public void setCustomMapObjects(List<NearbyPlacePoint> nearbyPlacePoints) {
 		Picasso.get().cancelTag(LOAD_NEARBY_IMAGES_TAG);
 		List<NearbyPlacePoint> nearbyPlacePointsList = new ArrayList<>();
-		for (WikiCoreHelper.OsmandApiFeatureData data : nearbyPlacePoints) {
-			NearbyPlacePoint point = new NearbyPlacePoint(data);
+		for (NearbyPlacePoint point : nearbyPlacePoints) {
 			nearbyPlacePointsList.add(point);
 			Target imgLoadTarget = new Target() {
 				@Override

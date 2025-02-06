@@ -26,6 +26,7 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 	private final String poisubtype;
 	private final String wikiDesc;
 	private final String iconUrl;
+	private final String imageStubUrl;
 	private final double latitude;
 	private final double longitude;
 	@Nullable
@@ -35,6 +36,7 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 		this.id = featureData.properties.osmid;
 		WikiImage wikiIMage = WikiCoreHelper.getImageData(featureData.properties.photoTitle);
 		this.iconUrl = wikiIMage == null ? "" : wikiIMage.getImageIconUrl();
+		this.imageStubUrl = wikiIMage == null ? "" : wikiIMage.getImageStubUrl();
 		this.latitude = featureData.geometry.coordinates[1];
 		this.longitude = featureData.geometry.coordinates[0];
 		this.photoTitle = featureData.properties.photoTitle;
@@ -63,6 +65,10 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 
 	public String getWikiTitle() {
 		return wikiTitle;
+	}
+
+	public String getWikiDesc() {
+		return wikiDesc;
 	}
 
 	@Override
@@ -102,6 +108,14 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 
 	public String getDescription() {
 		return wikiDesc;
+	}
+
+	public String getPoisubtype() {
+		return poisubtype;
+	}
+
+	public String getImageStubUrl() {
+		return imageStubUrl;
 	}
 
 	@NonNull

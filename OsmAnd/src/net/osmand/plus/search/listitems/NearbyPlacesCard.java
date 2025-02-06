@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.data.NearbyPlacePoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -18,7 +19,6 @@ import net.osmand.plus.nearbyplaces.NearbyPlacesHelper;
 import net.osmand.plus.nearbyplaces.NearbyPlacesListener;
 import net.osmand.plus.search.NearbyPlacesAdapter;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
-import net.osmand.wiki.WikiCoreHelper;
 
 import java.util.List;
 
@@ -94,7 +94,7 @@ public class NearbyPlacesCard extends FrameLayout implements NearbyPlacesListene
 
 	private NearbyPlacesAdapter getNearbyAdapter() {
 		if (adapter == null) {
-			List<WikiCoreHelper.OsmandApiFeatureData> nearbyData = NearbyPlacesHelper.INSTANCE.getDataCollection();
+			List<NearbyPlacePoint> nearbyData = NearbyPlacesHelper.INSTANCE.getDataCollection();
 			adapter = new NearbyPlacesAdapter(app, nearbyData, false, clickListener);
 		}
 		return adapter;

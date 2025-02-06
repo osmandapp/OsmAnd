@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.activity.OnBackPressedCallback
 import androidx.annotation.ColorRes
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.PlatformUtil
+import net.osmand.data.NearbyPlacePoint
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseOsmAndFragment
@@ -19,10 +19,8 @@ import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.nearbyplaces.NearbyPlacesHelper.getDataCollection
 import net.osmand.plus.nearbyplaces.NearbyPlacesHelper.showPointInContextMenu
 import net.osmand.plus.search.NearbyPlacesAdapter
-import net.osmand.plus.search.ShowQuickSearchMode
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
-import net.osmand.wiki.WikiCoreHelper
 import org.apache.commons.logging.Log
 
 class NearbyPlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyItemClickListener {
@@ -54,7 +52,7 @@ class NearbyPlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIte
 	fun onBackPress(): Boolean {
 		if (isHidden) {
 			if (mapActivity?.contextMenu?.isVisible == true) {
-				mapActivity?.contextMenu?.hideMenus();
+				mapActivity?.contextMenu?.hideMenus()
 			} else {
 				activity?.supportFragmentManager?.beginTransaction()
 					?.show(this@NearbyPlacesFragment)
@@ -62,6 +60,8 @@ class NearbyPlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIte
 			}
 			return true
 		} else {
+			val quickSearchFragment = mapActivity?.fragmentsHelper?.quickSearchDialogFragment
+			quickSearchFragment?.show()
 			activity?.supportFragmentManager?.beginTransaction()
 				?.remove(this@NearbyPlacesFragment)
 				?.commit()
@@ -130,7 +130,7 @@ class NearbyPlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIte
 		}
 	}
 
-	override fun onNearbyItemClicked(item: WikiCoreHelper.OsmandApiFeatureData) {
+	override fun onNearbyItemClicked(item: NearbyPlacePoint) {
 		mapActivity?.let {
 			showPointInContextMenu(it, item)
 			hide()

@@ -10,6 +10,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.data.NearbyPlacePoint;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
@@ -19,7 +20,6 @@ import net.osmand.plus.search.listitems.NearbyPlacesCard;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.fragments.HistoryItemsFragment;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.wiki.WikiCoreHelper;
 
 import java.util.List;
 
@@ -30,10 +30,10 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	private boolean selectionMode;
 	private NearbyPlacesCard nearbyPlacesCard;
 
-	public void onNearbyItemClicked(@NonNull WikiCoreHelper.OsmandApiFeatureData item) {
+	public void onNearbyItemClicked(@NonNull NearbyPlacePoint point) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			NearbyPlacesHelper.INSTANCE.showPointInContextMenu(mapActivity, item);
+			NearbyPlacesHelper.INSTANCE.showPointInContextMenu(mapActivity, point);
 			getDialogFragment().hideToolbar();
 			getDialogFragment().hide();
 		}
