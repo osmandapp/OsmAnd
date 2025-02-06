@@ -1144,7 +1144,6 @@
     <string name="live_monitoring_m_descr">Изпращане на изминатия път по Интернет, при условие, че записът в GPX е включен.</string>
     <string name="live_monitoring_start">Начало на проследяване в реално време</string>
     <string name="live_monitoring_stop">Край на проследяване в реално време</string>
-    <string name="rendering_attr_hideAccess_name">Ограничения за достъп</string>
     <string name="rendering_attr_showAccess_name">Ограничения на достъпа</string>
     <string name="rendering_attr_showSurfaceGrade_name">Качество на пътя</string>
     <string name="rendering_attr_showSurfaces_name">Вид на пътната настилка</string>
@@ -1322,7 +1321,7 @@
     <string name="notes">A/V бележки</string>
     <string name="online_map">Онлайн карта</string>
     <string name="roads_only">Само пътища</string>
-    <string name="rendering_attr_pisteRoutes_name">Ски писти</string>
+    <string name="rendering_attr_pisteRoutes_name">Ски маршрути</string>
     <string name="free">Свободни %1$s</string>
     <string name="device_memory">Памет на устройството</string>
     <string name="parking_place">Паркинг място</string>
@@ -2265,9 +2264,6 @@
     <string name="osm_live_subscription_desc">Абонаментът дава възможност за почасови, ежедневни, седмични обновявания и за неограничено изтегляне за всички карти в световен мащаб.</string>
     <string name="select_wikipedia_article_langs">Изберете езиците, на които публикациите в Уикипедия ще се появяват на картата. Можете да превключвате между наличните езици докато ги четете.</string>
     <string name="extra_maps_menu_group">Допълнителни карти</string>
-    <string name="opr_use_dev_url">Използване на test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Вход в OpenPlaceReviews</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="activity_type_water_name">Вода</string>
     <string name="activity_type_winter_name">Зима</string>
     <string name="activity_type_snowmobile_name">Моторни шейни</string>
@@ -2684,7 +2680,7 @@
     <string name="empty_state_favourites">Добавяне на избрани</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Скриване на военните зони</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Скриване на военните зони</string>
-    <string name="map_widget_trip_recording_distance">Разстояние</string>
+    <string name="map_widget_distance">Разстояние</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Без ограничения)</string>
     <string name="routing_attr_avoid_fords_name">Избягване на бродове</string>
     <string name="map_widget_trip_recording_downhill">Спyскане</string>
@@ -2888,10 +2884,10 @@
     <string name="shared_string_empty">Празно</string>
     <string name="show_more">Повече</string>
     <string name="shared_string_continue">Напред</string>
-    <string name="auto_25_chars_route_roundabout_kl">Излезте от %1$d изход и дръжте ляво</string>
+    <string name="auto_25_chars_route_roundabout_kl">Вземете %1$d изход и дръжте ляво</string>
     <string name="import_export">Внасяне/изнасяне</string>
     <string name="export_to_file">Изнасяне във файл</string>
-    <string name="auto_25_chars_route_roundabout_kr">Излезте от %1$d изход и дръжте дясно</string>
+    <string name="auto_25_chars_route_roundabout_kr">Вземете %1$d изход и дръжте дясно</string>
     <string name="stop_and_exit">Спиране и изход</string>
     <string name="exit_import_descr">Излизане без запазване на промените\?</string>
     <string name="history_actions_descr">Можете да изнесете историята във файл.</string>
@@ -3344,7 +3340,6 @@
     <string name="open_place_reviews_plugin_description">Направете принос към проекта OpenPlaceReviews, например снимки, отзиви или препратки за обществени места, като ресторанти, хотели или музеи.
 \n
 \nНамерете инструкции за това как да допринесете на адрес %1$s.</string>
-    <string name="add_to_opr">Добавяне в OpenPlaceReviews</string>
     <string name="angular_measeurement">Ъглови единици</string>
     <string name="display_zoom_level">Увеличение: %1$s</string>
     <string name="simulate_location_by_gpx">Симулиране на местоположението чрез GPX</string>
@@ -3435,7 +3430,6 @@
 \nOpenPlaceReviews - снимки на POI;
 \nMapillary - снимки от улицата;
 \nИнтернет / Wikimedia - снимки на POI по данни на OpenStreetMap.</string>
-    <string name="register_on_openplacereviews_desc">Снимките са предоставени от проекта за отворени данни OpenPlaceReviews.org. За да изпратите снимките си, трябва да се регистрирате.</string>
     <string name="routing_attr_length_name">Дължина</string>
     <string name="copy_from_other_profile">Копиране от друг профил</string>
     <string name="marker_moved_to_history">Маркерът е преместен в историята</string>
@@ -3598,11 +3592,11 @@
     <string name="save_track_to_gpx_descrp">Автоматично записване на трасето при маршрутизиране и автоматично запазване накрая.</string>
     <string name="attach_roads_warning">Само записано трасе може да бъде прикачено към пътя.</string>
     <string name="without_profiles_changing">Без смяна на профили</string>
-    <string name="auto_25_chars_route_tl_kr">Завйте на ляво и дръжте дясно</string>
-    <string name="auto_25_chars_route_tl_kl">Завйте на ляво и дръжте ляво</string>
-    <string name="auto_25_chars_route_tr_kl">Завйте на дясно и дръжте ляво</string>
+    <string name="auto_25_chars_route_tl_kr">Завийте наляво и дръжте дясно</string>
+    <string name="auto_25_chars_route_tl_kl">Завийте наляво и дръжте ляво</string>
+    <string name="auto_25_chars_route_tr_kl">Завийте надясно и дръжте ляво</string>
     <string name="auto_25_chars_route_tu_kr">Направете обратен завой и дръжте дясно</string>
-    <string name="auto_25_chars_route_tr_kr">Завйте на дясно и дръжте дясно</string>
+    <string name="auto_25_chars_route_tr_kr">Завийте надясно и дръжте дясно</string>
     <string name="duplacate_widget_added_snackbar">Дублираното приспособление е добавено в списъка.</string>
     <string name="av_notes_photo_widget_desc">При докосване приспособлението прави снимка.</string>
     <string name="av_notes_audio_widget_desc">При докосване приспособлението прави аудио бележка.</string>
@@ -3779,8 +3773,7 @@
     <string name="amz_manage_subscription_descr">Управлявайте абонамента си с помощта на приложението или страницата на Amazon.</string>
     <string name="cancel_anytime_in_amazon_app">Откажете го по всяко време от приложението на Amazon</string>
     <string name="routeInfo_winter_ice_road_description">Оцветяване на маршрутите или трасетата в зависимост от зимната класификация на пътя.</string>
-    <string name="auto_backup_preference_desc">По подразбиране Android запазва резервни копия на избрани точки, карти и настройки на OsmAnd, за да ги възстанови на нови устройства или след преинсталиране. Това резервно копие е ограничено до 25 MB.
-\nКогато използвате OsmAnd Cloud, това може да доведе до недоразумения след преинсталиране.</string>
+    <string name="auto_backup_preference_desc">По подразбиране Android запазва резервни копия на избрани точки, карти и настройки на OsmAnd, за да ги възстанови на нови устройства или след преинсталиране. Това резервно копие е ограничено до 25 MB.\nКогато използвате OsmAnd Cloud, това може да доведе до недоразумения след преинсталиране.</string>
     <string name="routing_attr_avoid_ferry_name">Без фериботи</string>
     <string name="provided_by">Предоставен от %1$s</string>
     <string name="snap_to_road_descr">Иконата за позиция ще се придържа към текущия маршрут</string>
@@ -3973,7 +3966,7 @@
     <string name="sort_country_name_descending">Име на държавата: Я – А</string>
     <string name="delete_map_description">Премахване на картата „%1$s“?</string>
     <string name="wikipedia_and_travel_maps">Уикипедия и пътеводители</string>
-    <string name="auto_25_chars_route_tl">Завийте на ляво</string>
+    <string name="auto_25_chars_route_tl">Завийте наляво</string>
     <string name="quick_action_new_route">Нов маршрут</string>
     <string name="select_groups_for_import">Избетете група, която да бъде внесена.</string>
     <string name="today">Днес</string>
@@ -3988,9 +3981,9 @@
     <string name="route_roundabout_exit">Излезте от %1$d изход</string>
     <string name="help_article_map_routes_name">Маршрути</string>
     <string name="update_all_maps_q">Обновяване на всички (%1$d) карти?</string>
-    <string name="auto_25_chars_route_tr">Завийте на дясно</string>
+    <string name="auto_25_chars_route_tr">Завийте надясно</string>
     <string name="auto_25_chars_route_kl">Дръжте ляво</string>
-    <string name="auto_25_chars_route_tu">Направете обратен</string>
+    <string name="auto_25_chars_route_tu">Направете обратен завой</string>
     <string name="update_all_maps">Обновяване на всички карти</string>
     <string name="move_all_to_history">Преместване всички в историята</string>
     <string name="ascendingly">А-Я</string>
@@ -4558,7 +4551,7 @@
     <string name="quick_action_verb_start_pause">Старт/пауза</string>
     <string name="zoom_animated">Мащабиране с анимация</string>
     <string name="reset_key_assignments">Нулиране на зададените клавиши</string>
-    <string name="height_legend_description">За визуализиране на релефа се използват цветни карти на надморската височина.</string>
+    <string name="height_legend_description">За изобразяване на релефа се използват цветни карти на надморската височина.</string>
     <string name="action_icon">Пиктограма на действие</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
     <string name="quick_action_add_configure_map">Настройки на картата</string>
@@ -4657,4 +4650,40 @@
     <string name="percent_hour">%/ч</string>
     <string name="calculating_indication_message">Изчисляване…</string>
     <string name="obd_engine_coolant_temp_desc">Показва температурата на охлаждащата течност на двигателя</string>
+    <string name="popular_places_nearby">Известни места наблизо</string>
+    <string name="display_distance_to_first_intermediate">Подробности за следващата точка от маршрута</string>
+    <string name="recently_visited">Скоро посетени</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Маршрути за скално катерене</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Показване на маршрути за скално катерене</string>
+    <string name="shared_string_avg_altitude">Средна надморска височина</string>
+    <string name="shared_string_length">Дължина</string>
+    <string name="shared_string_avg_speed">Мин. скорост</string>
+    <string name="calculate_size">Изчисляване на големината</string>
+    <string name="map_widget_route_information_desc">Показва очакваното време на пристигане, оставащото време и разстоянието на текущия маршрут.</string>
+    <string name="map_widget_route_information">Сведения за маршрита</string>
+    <string name="auto_25_chars_route_tsll">Завийте леко наляво</string>
+    <string name="auto_25_chars_route_tshr">Завийте остро надясно</string>
+    <string name="auto_25_chars_route_tslr">Завийте леко надясно</string>
+    <string name="ais_nmea_protocol">Протокол за получаване на данни от NMEA</string>
+    <string name="ais_object_lost_timeouts">Време за изчакване на приемането на сигнал от AIS</string>
+    <string name="ais_object_lost_timeouts_description">Задаване на стойности на времето за разпознаване на изгубени обекти на AIS, ако не е получен сигнал за определено време.</string>
+    <string name="ais_load_data">Зареждане на данни от AIS от файл</string>
+    <string name="ais_address_settings_description">Изберете протокол за NMEA (UDP/TCP) и въведете адресите</string>
+    <string name="ais_address_nmea_server_description">Определете IP адреса на източника на данни от NMEA (ако се използва TCP)</string>
+    <string name="ais_port_nmea_server_description">Определяне на номера на TCP порта на източника на данни от NMEA</string>
+    <string name="ais_address_settings">Настройки на IP адрес</string>
+    <string name="ais_nmea_protocol_description">Избор на протокол за приемане на данни от NMEA</string>
+    <string name="ais_address_nmea_server">IP адрес на източника на данни от NMEA</string>
+    <string name="ais_port_nmea_server">TCP порт на източника на данни от NMEA</string>
+    <string name="ais_port_nmea_local">UDP порт на местния приемник на данни от NMEA</string>
+    <string name="ais_port_nmea_local_description">Определяне на порт на UPD, на който OsmAnd получава данни от NMEA</string>
+    <string name="ais_object_lost_timeout">Време на показване на изгубен обект</string>
+    <string name="auto_25_chars_route_tshl">Завийте остро наляво</string>
+    <string name="routing_attr_avoid_cobblestone_name">Без калдъръм</string>
+    <string name="routing_attr_avoid_cobblestone_description">Без калдъръм</string>
+    <string name="show_grids_description">Дава възможност да бъде показана решетка върху картата</string>
+    <string name="show_grids">Решетка върху картата</string>
+    <string name="show_utm_grids">Използване на UTM вместо WGS84</string>
+    <string name="show_utm_grids_description">Решетка в UTM метри вместо в WGS84 градуси</string>
+    <string name="map_grid">Решетки на картата</string>
 </resources>

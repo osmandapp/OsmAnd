@@ -347,10 +347,10 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		boolean hasAvailableWidgets = !Algorithms.isEmpty(availableWidgets);
 		if (hasAvailableWidgets) {
 			List<WidgetType> defaultWidgets = excludeGroupsDuplicated(listDefaultWidgets(availableWidgets));
-			sortWidgetsItems(defaultWidgets, app, nightMode);
+			sortWidgetsItems(app, defaultWidgets, selectedPanel, nightMode);
 
 			List<MapWidgetInfo> externalWidgets = listExternalWidgets(availableWidgets);
-			sortWidgetsItems(externalWidgets, app, nightMode);
+			sortWidgetsItems(app, externalWidgets, selectedPanel, nightMode);
 
 			inflateAvailableDefaultWidgets(defaultWidgets, !Algorithms.isEmpty(externalWidgets));
 			inflateAvailableExternalWidgets(externalWidgets);
@@ -358,10 +358,11 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.available_widgets_container), hasAvailableWidgets);
 	}
 
-	public static void sortWidgetsItems(List<?> widgets, @NonNull OsmandApplication app, boolean nightMode) {
+	public static void sortWidgetsItems(@NonNull OsmandApplication app, @NonNull List<?> widgets,
+	                                    @NonNull WidgetsPanel panel, boolean nightMode) {
 		Collections.sort(widgets, (o1, o2) -> {
-			String firstName = getListItemName(o1, app, nightMode);
-			String secondName = getListItemName(o2, app, nightMode);
+			String firstName = getListItemName(app, o1, panel, nightMode);
+			String secondName = getListItemName(app, o2, panel, nightMode);
 			if (firstName != null && secondName != null) {
 				return firstName.compareTo(secondName);
 			}
@@ -370,11 +371,12 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 	}
 
 	@Nullable
-	public static String getListItemName(Object item, @NonNull OsmandApplication app, boolean nightMode) {
+	public static String getListItemName(@NonNull OsmandApplication app, @NonNull Object item,
+	                                     @NonNull WidgetsPanel panel, boolean nightMode) {
 		if (item instanceof WidgetType widgetType) {
 			WidgetGroup widgetGroup = widgetType.getGroup(widgetType.getPanel(app.getSettings()));
 			return widgetGroup != null
-					? String.valueOf(AvailableItemViewHolder.getGroupTitle(widgetGroup, app, nightMode))
+					? String.valueOf(AvailableItemViewHolder.getGroupTitle(app, widgetGroup, panel, nightMode))
 					: app.getString(widgetType.titleId);
 		} else if (item instanceof MapWidgetInfo) {
 			return ((MapWidgetInfo) item).getTitle(app);
@@ -423,7 +425,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			}
 
 			CharSequence title = widgetGroup != null
-					? AvailableItemViewHolder.getGroupTitle(widgetGroup, app, nightMode)
+					? AvailableItemViewHolder.getGroupTitle(app, widgetGroup, selectedPanel, nightMode)
 					: getString(widgetType.titleId);
 			((TextView) view.findViewById(R.id.title)).setText(title);
 

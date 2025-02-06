@@ -259,8 +259,9 @@ public class GpxBlockStatisticsBuilder {
 	}
 
 	public void prepareDataDistance(float totalDistance) {
+		GPXDataSetType secondType = analysis.hasSpeedData() ? GPXDataSetType.SPEED : null;
 		prepareData(app.getString(R.string.distance), OsmAndFormatter.getFormattedDistance(totalDistance, app),
-				R.drawable.ic_action_track_16, GPXDataSetType.ALTITUDE, GPXDataSetType.SPEED, ItemType.ITEM_DISTANCE);
+				R.drawable.ic_action_track_16, GPXDataSetType.ALTITUDE, secondType, ItemType.ITEM_DISTANCE);
 	}
 
 	public void prepareDataAverageAltitude() {

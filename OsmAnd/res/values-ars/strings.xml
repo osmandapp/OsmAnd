@@ -1479,7 +1479,6 @@
     <string name="si_kmh">كم/س</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">إظهار علامات الملاحظة</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
-    <string name="rendering_attr_hideAccess_name">قيود الدخول</string>
     <string name="av_use_external_camera_descr">استخدام تطبيق النظام للصور.</string>
     <string name="relief_3d">تضاريس 3D</string>
     <string name="map_widget_ant_bicycle_cadence_desc">إظهار السرعة التي يقوم بها المستخدم عند التدريج</string>
@@ -3885,7 +3884,7 @@
     <string name="auto_zoom_farthest">إلى مدى بعيد \"٥٠٠م\"</string>
     <string name="external_device_ant">مستشعر ANT+</string>
     <string name="shared_string_close">إغلاق</string>
-    <string name="map_widget_trip_recording_distance">المسافة</string>
+    <string name="map_widget_distance">المسافة</string>
     <string name="profile_alert_need_profile_name_msg">يجب تحديد اسم الوضع أولاً.</string>
     <string name="add_address">إضافة عنوان</string>
     <string name="fav_file_to_load_not_found">لم يتم العثور على ملف GPX يحتوي على الأماكن المفضلة في {0}</string>

@@ -21,6 +21,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.MAX_SPEED;
 import static net.osmand.plus.views.mapwidgets.WidgetType.NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.WidgetType.RADIUS_RULER;
 import static net.osmand.plus.views.mapwidgets.WidgetType.RELATIVE_BEARING;
+import static net.osmand.plus.views.mapwidgets.WidgetType.ROUTE_INFO;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SECOND_NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_1;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SIDE_MARKER_2;
@@ -86,6 +87,7 @@ public class WidgetsInitializer {
 		addWidgetInfo(COORDINATES_MAP_CENTER);
 		addWidgetInfo(STREET_NAME);
 		addWidgetInfo(LANES);
+		addWidgetInfo(ROUTE_INFO);
 		addWidgetInfo(MARKERS_TOP_BAR);
 	}
 

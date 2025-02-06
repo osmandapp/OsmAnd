@@ -174,7 +174,7 @@
     <string name="poi_hamlet">Piccolo borgo</string>
     <string name="poi_isolated_dwelling">Abitazione isolata</string>
     <string name="poi_suburb">Grande quartiere</string>
-    <string name="poi_neighbourhood">Quartiere</string>
+    <string name="poi_neighbourhood">Quartiere minore</string>
     <string name="poi_locality">Località non popolata</string>
     <string name="poi_pharmacy">Farmacia</string>
     <string name="poi_hospital">Ospedale</string>
@@ -1616,10 +1616,10 @@
     <string name="poi_solarium_yes">Servizi solarium</string>
     <string name="poi_tents_yes">Ammessi</string>
     <string name="poi_tents_no">Tende non ammessi</string>
-    <string name="poi_openfire_yes">Caminetto ammessi</string>
-    <string name="poi_openfire_no">Caminetto non ammessi</string>
-    <string name="poi_backcountry_yes">Sì;Paese di ritorno</string>
-    <string name="poi_backcountry_no">no</string>
+    <string name="poi_openfire_yes">Falò ammessi</string>
+    <string name="poi_openfire_no">Falò non ammessi</string>
+    <string name="poi_backcountry_yes">Sì;Zona isolata</string>
+    <string name="poi_backcountry_no">No</string>
     <string name="poi_washing_machine_yes">Sì;Lavatrice</string>
     <string name="poi_washing_machine_no">Lavatrice: no</string>
     <string name="poi_shower_filter_yes">Sì;Filtro doccia</string>
@@ -1793,7 +1793,7 @@
     <string name="poi_summer_camp">Campo estivo</string>
     <string name="poi_crossing_bell_yes">Campana di attraversamento</string>
     <string name="poi_crossing_bell_no">Campana di attraversamento: no</string>
-    <string name="poi_crossing_light_yes">Luce di passaggio</string>
+    <string name="poi_crossing_light_yes">Luce di segnalazione</string>
     <string name="poi_crossing_on_demand_yes">Attraversamento su richiesta</string>
     <string name="poi_crossing_on_demand_no">Attraversamento su richiesta: no</string>
     <string name="poi_dispensing_yes">Sì</string>
@@ -2000,7 +2000,7 @@
     <string name="poi_crossing_barrier_full">Barriera di attraversamento: completo</string>
     <string name="poi_crossing_barrier_half">Barriera di attraversamento: metà</string>
     <string name="poi_crossing_barrier_double_half">Barriera di attraversamento: doppio metà</string>
-    <string name="poi_crossing_light_no">Luce di attraversamento: no</string>
+    <string name="poi_crossing_light_no">Luce di segnalazione: no</string>
     <string name="poi_locksmith">Negozio del fabbro (chiavi)</string>
     <string name="poi_lighting">Apparecchi di illuminazione</string>
     <string name="poi_cliff">Falesia</string>
@@ -2382,7 +2382,7 @@
     <string name="poi_inscription_nw">Inscrizione:NO</string>
     <string name="poi_climbing_orientation_sw">Orientamento del muro:SO</string>
     <string name="poi_climbing_orientation_nw">Orientamento del muro: NO</string>
-    <string name="poi_climbing_crag">Sì</string>
+    <string name="poi_climbing_crag">Falesia per scalate</string>
     <string name="poi_distance_mark">Segno di distanza</string>
     <string name="poi_piste_skitour">Pista Skitour</string>
     <string name="poi_denomination_united_reformed">Riformata Unita</string>
@@ -2449,8 +2449,8 @@
     <string name="poi_resource_vanadium">Vanadio</string>
     <string name="poi_resource_zinc">Zinco</string>
     <string name="poi_resource_zircon">Zirconio</string>
-    <string name="poi_lit_yes">Luce: sì</string>
-    <string name="poi_lit_no">Luce: no</string>
+    <string name="poi_lit_yes">Illuminazione: sì</string>
+    <string name="poi_lit_no">Illuminazione: no</string>
     <string name="poi_surface_sett">Superficie: pavé</string>
     <string name="poi_surface_paving_stones">Superficie: mattonelle per pavimentazione stradale</string>
     <string name="poi_surface_pebblestone">Superficie: ciottoli</string>
@@ -3728,7 +3728,7 @@
     <string name="poi_substation_minor_distribution">Distribuzione minore</string>
     <string name="poi_park_ride_hov">HOV</string>
     <string name="poi_foot_private">Accesso pedoni: privato</string>
-    <string name="poi_shelter_no">Riparo: np</string>
+    <string name="poi_shelter_no">Riparo: no</string>
     <string name="poi_agrarian_agricultural_machinery">Macchinari agricoli</string>
     <string name="poi_generator_type_bwr_6">Tipo generatore: BWR-6</string>
     <string name="poi_generator_type_bwr_5">Tipo generatore: BWR-5</string>
@@ -3742,7 +3742,7 @@
     <string name="poi_provided_for_woman_yes">Fornito alle donne: sì</string>
     <string name="poi_provided_for_woman_no">Fornito alle donne: no</string>
     <string name="poi_provided_for_man_yes">Fornito agli uomini: sì</string>
-    <string name="poi_bicycle_parking_lockers">Lucchetti</string>
+    <string name="poi_bicycle_parking_lockers">Armadietti</string>
     <string name="poi_glacier_ele_top">Punto più alto</string>
     <string name="poi_counselling_type_crisis_no">Consulenza (crisi): no</string>
     <string name="poi_socket_type1_combo_current">Socket: Tipo 1 combo: corrente</string>
@@ -4422,4 +4422,14 @@
     <string name="poi_satellite_dish">Antenna parabolica</string>
     <string name="poi_checkpoint_hiking">Punto di controllo per escursioni</string>
     <string name="poi_groundskeeping">Negozio di giardinaggio</string>
+    <string name="poi_sled_no">Slitta: no</string>
+    <string name="poi_bicycle_parking_tree">Albero per biciclette</string>
+    <string name="poi_public_bookcase_type_reading_box">Tipo: scatola di lettura</string>
+    <string name="poi_cafe_filter">Caffetteria</string>
+    <string name="poi_sled_yes">Slitta: sì</string>
+    <string name="poi_dog_sled_yes">Slitta con cani: sì</string>
+    <string name="poi_dog_sled_no">Slitta con cani: no</string>
+    <string name="poi_atv_yes">ATV: sì</string>
+    <string name="poi_atv_no">ATV: no</string>
+    <string name="poi_access_notes">Note di accesso</string>
 </resources>

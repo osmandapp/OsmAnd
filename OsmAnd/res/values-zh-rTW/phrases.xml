@@ -3552,7 +3552,7 @@
     <string name="poi_change_delete">已刪除的物件</string>
     <string name="poi_climbing_crag_filter">攀岩</string>
     <string name="poi_rescue_box">急救箱</string>
-    <string name="poi_climbing_crag">是;攀岩</string>
+    <string name="poi_climbing_crag">攀岩</string>
     <string name="reddit">Reddit</string>
     <string name="poi_hazard_additional_erosion">危害：侵蝕</string>
     <string name="poi_hazard_additional_rockfall">危害：落石</string>
@@ -4968,4 +4968,11 @@
     <string name="poi_climbing_route_bottom">攀登路線底部</string>
     <string name="poi_cafe_yes">是</string>
     <string name="poi_cafe_filter">咖啡廳</string>
+    <string name="poi_sled_yes">雪橇：是</string>
+    <string name="poi_sled_no">雪橇：否</string>
+    <string name="poi_dog_sled_yes">狗拉雪橇：是</string>
+    <string name="poi_dog_sled_no">狗拉雪橇：否</string>
+    <string name="poi_atv_yes">ATV：是</string>
+    <string name="poi_atv_no">ATV：否</string>
+    <string name="poi_access_notes">通行權說明</string>
 </resources>

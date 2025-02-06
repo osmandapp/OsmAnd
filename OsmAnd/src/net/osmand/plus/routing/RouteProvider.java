@@ -1173,29 +1173,29 @@ public class RouteProvider {
 
 	public GpxFile createOsmandRouterGPX(RouteCalculationResult route, OsmandApplication ctx, String name) {
 		TargetPointsHelper helper = ctx.getTargetPointsHelper();
-		List<net.osmand.gpx.GPXUtilities.WptPt> points = new ArrayList<>();
+		List<net.osmand.shared.gpx.primitives.WptPt> points = new ArrayList<>();
 		List<TargetPoint> ps = helper.getIntermediatePointsWithTarget();
 		for (int k = 0; k < ps.size(); k++) {
-			net.osmand.gpx.GPXUtilities.WptPt pt = new net.osmand.gpx.GPXUtilities.WptPt();
-			pt.lat = ps.get(k).getLatitude();
-			pt.lon = ps.get(k).getLongitude();
+			net.osmand.shared.gpx.primitives.WptPt pt = new net.osmand.shared.gpx.primitives.WptPt();
+			pt.setLat(ps.get(k).getLatitude());
+			pt.setLon(ps.get(k).getLongitude());
 			if (k < ps.size()) {
-				pt.name = ps.get(k).getOnlyName() + "";
+				pt.setName(ps.get(k).getOnlyName() + "");
 				if (k == ps.size() - 1) {
 					String target = ctx.getString(R.string.destination_point, "");
-					if (pt.name.startsWith(target)) {
-						pt.name = ctx.getString(R.string.destination_point, pt.name);
+					if (pt.getName().startsWith(target)) {
+						pt.setName(ctx.getString(R.string.destination_point, pt.getName()));
 					}
 				} else {
 					String prefix = (k + 1) +". ";
-					if(Algorithms.isEmpty(pt.name)) {
-						pt.name = ctx.getString(R.string.target_point, pt.name);
+					if(Algorithms.isEmpty(pt.getName())) {
+						pt.setName(ctx.getString(R.string.target_point, pt.getName()));
 					}
-					if (pt.name.startsWith(prefix)) {
-						pt.name = prefix + pt.name;
+					if (pt.getName().startsWith(prefix)) {
+						pt.setName(prefix + pt.getName());
 					}
 				}
-				pt.desc = pt.name;
+				pt.setDesc(pt.getName());
 			}
 			points.add(pt);
 		}
@@ -1203,7 +1203,8 @@ public class RouteProvider {
 		List<Location> locations = route.getImmutableAllLocations();
 		List<RouteSegmentResult> originalRoute = route.getOriginalRoute();
 		RouteExporter exporter = new RouteExporter(name, originalRoute, locations, null, points);
-		return SharedUtil.kGpxFile(exporter.exportRoute());
+
+		return exporter.exportRoute();
 	}
 
 	private RouteCalculationResult findOnlineRoute(RouteCalculationParams params) throws IOException, JSONException {

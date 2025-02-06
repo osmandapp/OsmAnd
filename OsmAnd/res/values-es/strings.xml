@@ -1234,7 +1234,6 @@
     <string name="rendering_attr_buildings15zoom_name">Edificios en zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">Más detalles</string>
     <string name="rendering_attr_lessDetailed_name">Menos detalles</string>
-    <string name="rendering_attr_hideAccess_name">Restricciones de acceso</string>
     <string name="rendering_attr_showAccess_name">Ver restricciones de acceso</string>
     <string name="rendering_attr_showSurfaceGrade_name">Calidad de los caminos</string>
     <string name="rendering_attr_showSurfaces_name">Superficie de los caminos</string>
@@ -3760,7 +3759,6 @@
     <string name="app_mode_kayak">Kayak</string>
     <string name="app_mode_motorboat">Lancha a motor</string>
     <string name="add_to_mapillary">Añadir a Mapillary</string>
-    <string name="add_to_opr">Añadir a OpenPlaceReviews</string>
     <string name="add_photos_descr">OsmAnd muestra fotos de varios repositorios:
 \nOpenPlaceReviews (fotos de PDI);
 \nMapillary (imágenes a nivel de calle);
@@ -3823,7 +3821,6 @@
     <string name="subscription_on_hold_title">La suscripción a OsmAnd Live está en espera</string>
     <string name="markers_history">Historial de marcadores</string>
     <string name="osm_login_descr">Inicia sesión con las credenciales de OAuth u OpenStreetMap.</string>
-    <string name="register_on_openplacereviews_desc">Las fotos son provistas por el proyecto de datos abiertos OpenPlaceReviews.org. Para subir fotos debes registrarte en el sitio web.</string>
     <string name="cannot_upload_image">No se puede subir la imagen, inténtalo más tarde</string>
     <string name="select_picture">Elegir imagen</string>
     <string name="export_not_enough_space_descr">El dispositivo sólo tiene %1$s libre. Por favor, libera algo de espacio o desmarca algunos elementos a exportar.</string>
@@ -3846,17 +3843,14 @@
     <string name="routing_attr_allow_streams_name">Permitir arroyos y desagües</string>
     <string name="routing_attr_allow_intermittent_description">Permite cursos de agua intermitentes</string>
     <string name="voice_prompts_timetable">Tiempo de los avisos por voz</string>
-    <string name="opr_use_dev_url">Usar test.openplacereviews.org</string>
     <string name="open_place_reviews_plugin_description">Haz contribuciones al proyecto OpenPlaceReviews, como fotos, reseñas o enlaces de lugares públicos como restaurantes, hoteles o museos.
 \n
 \nEncuentra las instrucciones sobre cómo haber las contribuciones nuestro sitio web %1$s.</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="online_routing_example_hint">La URL con todos los parámetros se verá así:</string>
     <string name="online_routing_engines">Motores de navegación en línea</string>
     <string name="online_routing_engine">Motor de navegación en línea</string>
     <string name="message_server_error">Error de servidor: %1$s</string>
     <string name="message_name_is_already_exists">El nombre ya existe</string>
-    <string name="login_open_place_reviews">Acceder a OpenPlaceReviews</string>
     <string name="keep_it_empty_if_not">Si no, mantenerlo vacío</string>
     <string name="hillshade_slope_contour_lines">Curvas de nivel / Sombreado / Pendiente</string>
     <string name="edit_track">Editar traza</string>
@@ -4511,7 +4505,7 @@
     <string name="turn_on_public_transport_description">Activar para ver rutas de transporte público en el mapa.</string>
     <string name="time_to_go_desc">Tiempo en minutos u horas necesario para llegar a tu destino.</string>
     <string name="map_widget_trip_recording_duration">Duración</string>
-    <string name="map_widget_trip_recording_distance">Distancia</string>
+    <string name="map_widget_distance">Distancia</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Sin restricciones)</string>
     <string name="calculate_online">Calcular en línea</string>
     <string name="calculate_altitude">Calcular elevación</string>
@@ -5930,7 +5924,6 @@
     <string name="unit_of_volume">Unidad de volumen</string>
     <string name="unit_of_volume_description">Las unidades seleccionadas se aplicarán a todos los datos relacionados con el volumen en el perfil actual.</string>
     <string name="fuel_tank_capacity_description">Introduce la capacidad de tu depósito para controlar con precisión los niveles de combustible y el consumo</string>
-    <string name="imperial_gallons_unit">gal imp</string>
     <string name="record_obd_data">Registro de métricas del vehículo</string>
     <string name="wunderlinq_datagrid">Panel de datos de WunderLINQ</string>
     <string name="shared_string_hour">Hora</string>

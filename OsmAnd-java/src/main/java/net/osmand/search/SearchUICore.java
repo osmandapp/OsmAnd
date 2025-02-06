@@ -304,7 +304,7 @@ public class SearchUICore {
 					return MapUtils.getDistance(r1.location, r2.location) < similarityRadius;
 				}
 			} else if (r1.object != null && r2.object != null) {
-				return r1.object == r2.object;
+				return r1.object.equals(r2.object);
 			}
 			return false;
 		}

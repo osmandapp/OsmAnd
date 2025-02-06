@@ -1162,7 +1162,6 @@
     <string name="rendering_attr_buildings15zoom_name">Edifici da zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">Più dettagli</string>
     <string name="rendering_attr_lessDetailed_name">Meno dettagli</string>
-    <string name="rendering_attr_hideAccess_name">Limitazioni di accesso</string>
     <string name="rendering_attr_showAccess_name">Mostra restrizioni di accesso</string>
     <string name="rendering_attr_showSurfaceGrade_name">Mostra qualità strade</string>
     <string name="rendering_attr_showSurfaces_name">Mostra il tipo di superficie delle strade</string>
@@ -1941,7 +1940,7 @@
     <string name="postcode">Codice postale</string>
     <string name="shared_string_from">da</string>
     <string name="city_type_district">Distretto</string>
-    <string name="city_type_neighbourhood">Quartiere</string>
+    <string name="city_type_neighbourhood">Quartiere minore</string>
     <string name="map_widget_search">Cerca</string>
     <string name="lang_hsb">Sorabo superiore</string>
     <string name="rendering_attr_hideOverground_name">Oggetti sopra il terreno</string>
@@ -3629,7 +3628,6 @@
     <string name="shared_string_add_photo">Aggiungi foto</string>
     <string name="register_on_openplacereviews">Registrati su
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Le foto sono fornite dal progetto open data OpenPlaceReviews.org. Per caricare le tue foto devi registrarti sul sito web.</string>
     <string name="register_opr_create_new_account">Crea un nuovo account</string>
     <string name="register_opr_have_account">Ho già un account</string>
     <string name="shared_string_search_history">Cronologia di ricerca</string>
@@ -3657,7 +3655,6 @@
     <string name="gpx_upload_identifiable_visibility_descr">\"Identificabile\" significa che la traccia è visualizzabile nelle mie tracce GPS e nelle liste pubbliche, ad es. gli altri utenti potranno scaricare la traccia grezza e associarla con il tuo nome utente. I punti della traccia, con le loro informazioni temporali, saranno riconducibili, attraverso le API GPS, alla tua traccia originale.</string>
     <string name="gpx_upload_trackable_visibility_descr">\"Tracciabile\" significa che la traccia non è visualizzabile in alcuna lista pubblica, ma solo i suoi punti, processati, con le informazioni temporali (che non possono essere direttamente associati a te) attraverso le API GPS pubbliche.</string>
     <string name="add_to_mapillary">Aggiungi a Mapillary</string>
-    <string name="add_to_opr">Aggiungi a OpenPlaceReviews</string>
     <string name="add_photos_descr">OsmAnd mostra foto da diverse fonti:
 \nOpenPlaceReviews - foto PDI;
 \nMapillary - immagini stradali;
@@ -3709,9 +3706,6 @@
     <string name="open_place_reviews_plugin_description">Contribuisci al progetto OpenPlaceReviews con foto, recensioni o link di luoghi pubblici come ristoranti, hotel, o musei.
 \n
 \nTrova informazioni su come contribuire nel nostro sito: %1$s.</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Usa test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Accedi a OpenPlaceReviews</string>
     <string name="reverse_all_points">Inverti tutti i punti</string>
     <string name="voice_prompts_timetable">Tempo degli avvisi vocali</string>
     <string name="profile_type_osmand_string">Profilo OsmAnd</string>
@@ -4375,7 +4369,7 @@
     <string name="map_widget_trip_recording_downhill">Downhill</string>
     <string name="map_widget_trip_recording_uphill">Uphill</string>
     <string name="map_widget_trip_recording_duration">Durata</string>
-    <string name="map_widget_trip_recording_distance">Distanza</string>
+    <string name="map_widget_distance">Distanza</string>
     <string name="routing_attr_hazmat_category_description">Categoria materiali pericolosi / Considera i permessi di accesso per i materiali pericolosi</string>
     <string name="radius_rules_widget_desc">Lo strumento righello radiale mostra la distanza attorno al punto selezionato nella mappa attraverso dei cerchi.</string>
     <string name="no_altitude_data">Nessun dato di altitudine</string>
@@ -5541,7 +5535,6 @@
     <string name="litres">Litri</string>
     <string name="us_gallons_unit">gal</string>
     <string name="imperial_gallons">Galloni imperiali</string>
-    <string name="imperial_gallons_unit">imp gal</string>
     <string name="us_gallons">Galloni americani</string>
     <string name="obd_how_to_connect">Come connettere:</string>
     <string name="connect_obd_instructions_step">1. Connettere lo scanner alla porta OBD-II del veicolo.\n\n2. Avviare il motore del veicolo\n\n3. Abilitare il Bluetooth sul dispositivo\n\n4. Premere \'%1$s\' e selezionare lo scanner dalla lista.</string>
@@ -5565,7 +5558,6 @@
     <string name="obd_fuel_consumption_rate_l_h_desc">Mostra il tasso di consumo di carburante del veicolo in base ai calcoli (L/h)</string>
     <string name="obd_fuel_consumption_rate_sensor">Tasso di consumo di carburante (sensore)</string>
     <string name="obd_fuel_consumption_rate_sensor_desc">Mostra il tasso di consumo di carburante del veicolo basato sul sensore (L/h)</string>
-    <string name="obd_fuel_left_liter">Carburante rimasto (l)</string>
     <string name="obd_fuel_left_km">Carburante rimasto (km)</string>
     <string name="obd_fuel_consumption_rate_scanner">Tasso di consumo di carburante (obd)</string>
     <string name="obd_device_forget_sensor_description">Lo scanner verrà rimosso dalla lista. Sarà possibile accoppiare nuovamente questo scanner in qualsiasi momento.</string>
@@ -5580,7 +5572,6 @@
     <string name="obd_fuel_consumption_rate_l_km_desc">Mostra il tasso di consumo di carburante del veicolo in base ai calcoli (l/100km)</string>
     <string name="obd_fuel_level_liter">Livello carburante (l)</string>
     <string name="obd_fuel_level_percent">Livello carburante (%)</string>
-    <string name="obd_fuel_left_percent">Carburante rimasto (%)</string>
     <string name="shared_string_bluetooth">Bluetooth</string>
     <string name="speedometer_maximum">Massimo</string>
     <string name="obd_bluetooth_off_description">Accendere Bluetooth per trovare e collegare gli scanner.</string>
@@ -5689,4 +5680,29 @@
     <string name="rendering_attr_showClimbingRoutes_name">Percorsi arrampicata</string>
     <string name="display_distance_to_first_intermediate_summary">Mostra il tempo e la distanza per la prossima fermata. Disattiva per mostrare sempre i dettagli per la destinazione.</string>
     <string name="display_distance_to_first_intermediate">Mostra i dettagli del percorso per la prossima fermata</string>
+    <string name="recently_visited">Visti di recente</string>
+    <string name="popular_places_nearby">Luoghi popolari nelle vicinanze</string>
+    <string name="map_widget_route_information_desc">Mostra il tempo di arrivo stimato, il tempo di viaggio rimanente e la distanza per il percorso di navigazione corrente.</string>
+    <string name="shared_string_default_view">Vista predefinita</string>
+    <string name="map_widget_route_information">Informazioni sul percorso</string>
+    <string name="shared_string_length">Lunghezza</string>
+    <string name="ais_load_data">Carica i dati AIS dal file</string>
+    <string name="ais_nmea_protocol_description">Scegli il protocollo per la ricezione dei dati NMEA</string>
+    <string name="ais_address_nmea_server">Indirizzo IP della sorgente dati NMEA</string>
+    <string name="ais_address_nmea_server_description">Definisci l\'indirizzo IP della sorgente dati NMEA (se viene utilizzato TCP)</string>
+    <string name="ais_port_nmea_server">Porta TCP della sorgente dati NMEA</string>
+    <string name="ais_port_nmea_server_description">Definisci il numero della porta TCP della sorgente dati NMEA</string>
+    <string name="ais_object_lost_timeouts">Impostazioni di timeout per la ricezione del segnale AIS</string>
+    <string name="ais_object_lost_timeout">Timeout per la visibilità quando l\'oggetto viene perso</string>
+    <string name="ais_object_lost_timeout_description">Imposta il timeout per la visibilità degli oggetti AIS: trascorso questo periodo di tempo senza ricezione del segnale, l\'oggetto AIS verrà rimosso dallo schermo.</string>
+    <string name="ais_port_nmea_local_description">Definisci la porta UDP in cui OsmOnd riceve i dati NMEA</string>
+    <string name="ais_ship_lost_timeout_description">Imposta il timeout per la visibilità della nave: trascorso questo periodo di tempo senza ricezione del segnale, il simbolo della nave cambierà stato sullo schermo: sarà barrato.</string>
+    <string name="ais_cpa_settings">Impostazioni relative al CPA</string>
+    <string name="ais_cpa_settings_description">Questi valori definiscono la presentazione degli oggetti AIS che potrebbero avvicinarsi troppo alla propria posizione.</string>
+    <string name="ais_address_settings">Impostazioni dell\'indirizzo IP</string>
+    <string name="ais_address_settings_description">Scegli il protocollo NMEA (UDP/TCP) e definisci gli indirizzi</string>
+    <string name="ais_ship_lost_timeout">Timeout per la visibilità della nave quando non viene ricevuto alcun segnale</string>
+    <string name="ais_port_nmea_local">Porta UDP locale del ricevitore dati NMEA</string>
+    <string name="ais_object_lost_timeouts_description">Imposta valori di timeout per identificare oggetti AIS persi se non viene ricevuto alcun segnale per un periodo di tempo specifico.</string>
+    <string name="ais_nmea_protocol">Protocollo per la ricezione dei dati NMEA</string>
 </resources>

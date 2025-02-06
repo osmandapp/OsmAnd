@@ -1194,7 +1194,6 @@
     <string name="rendering_attr_buildings15zoom_name">Gebäude ab Zoomstufe 15 anzeigen</string>
     <string name="rendering_attr_moreDetailed_name">Mehr Details</string>
     <string name="rendering_attr_lessDetailed_name">Weniger Details</string>
-    <string name="rendering_attr_hideAccess_name">Zufahrtsbeschränkungen</string>
     <string name="rendering_attr_showAccess_name">Zugangsbeschränkungen anzeigen</string>
     <string name="rendering_attr_showSurfaceGrade_name">Straßenqualität anzeigen</string>
     <string name="rendering_attr_showSurfaces_name">Straßenoberfläche anzeigen</string>
@@ -1442,7 +1441,7 @@
     <string name="notes">Audio-/Videonotizen</string>
     <string name="online_map">Online-Karte</string>
     <string name="roads_only">Nur Straßen</string>
-    <string name="rendering_attr_pisteRoutes_name">Skipisten</string>
+    <string name="rendering_attr_pisteRoutes_name">Skirouten</string>
     <string name="shared_string_export">Exportieren</string>
     <string name="watch">Ansehen</string>
     <string name="share_note">Notiz mitteilen</string>
@@ -2989,7 +2988,7 @@
     <string name="pref_selected_by_default_for_profiles">Für Profile wird als Vorgabe diese Einstellung gewählt: %s</string>
     <string name="change_default_settings">Einstellung ändern</string>
     <string name="discard_changes">Änderung verwerfen</string>
-    <string name="apply_to_current_profile">Nur anwenden auf %1$s\\</string>
+    <string name="apply_to_current_profile">Nur anwenden auf \"%1$s\"</string>
     <string name="apply_to_all_profiles">Auf alle Profile anwenden</string>
     <string name="analytics_pref_title">Analyseinstrumente</string>
     <string name="turn_screen_on_info">Karte während der Navigation auf dem Sperrbildschirm anzeigen.</string>
@@ -3174,7 +3173,7 @@
     <string name="live_monitoring_adress">Webadresse</string>
     <string name="monitoring_notification">Benachrichtigung</string>
     <string name="monitoring_min_speed">Mindestgeschwindigkeit</string>
-    <string name="monitoring_min_accuracy">Minimale Genauigkeit</string>
+    <string name="monitoring_min_accuracy">Mindestgenauigkeit</string>
     <string name="monitoring_min_distance">Minimale Verschiebung</string>
     <string name="reset_plugin_to_default">Plugin-Einstellungen auf Voreinstellung zurücksetzen</string>
     <string name="osm_authorization_success">Autorisierung ist erfolgreich</string>
@@ -3652,14 +3651,12 @@
     <string name="shared_string_add_photo">Foto hinzufügen</string>
     <string name="register_on_openplacereviews">Registrieren bei
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Fotos werden vom offenen Datenprojekt OpenPlaceReviews.org zur Verfügung gestellt. Um Ihre Fotos hochladen zu können, müssen Sie sich auf der Website anmelden.</string>
     <string name="register_opr_create_new_account">Neues Konto erstellen</string>
     <string name="register_opr_have_account">Ich habe bereits ein Konto</string>
     <string name="shared_string_search_history">Suchverlauf</string>
     <string name="app_mode_kayak">Kajak</string>
     <string name="app_mode_motorboat">Motorboot</string>
     <string name="add_to_mapillary">Zu Mapillary hinzufügen</string>
-    <string name="add_to_opr">Zu OpenPlaceReviews hinzufügen</string>
     <string name="add_photos_descr">OsmAnd zeigt Fotos aus verschiedenen Quellen:
 \nOpenPlaceReviews - POI Fotos;
 \nMapillary - Bilder auf Straßenebene;
@@ -3760,9 +3757,6 @@
     <string name="open_place_reviews_plugin_description">Tragen Sie zum OpenPlaceReviews-Projekt bei, z. B. mit Fotos, Bewertungen oder Links für öffentliche Orte wie Restaurants, Hotels oder Museen.
 \n
 \nAuf unserer Website %1$s finden Sie Anweisungen, wie Sie einen Beitrag leisten können.</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">test.openplacereviews.org verwenden</string>
-    <string name="login_open_place_reviews">Anmelden bei OpenPlaceReviews</string>
     <string name="activity_type_water_name">Wasser</string>
     <string name="activity_type_winter_name">Winter</string>
     <string name="activity_type_snowmobile_name">Schneemobil</string>
@@ -4239,7 +4233,7 @@
     <string name="please_provide_group_name_message">Bitte benennen Sie die Gruppe.</string>
     <string name="exit_import">Beenden\?</string>
     <string name="import_tracks_descr">%1$s, enthält %2$s separate Tracks. Wählen Sie die zu importierenden Tracks aus.</string>
-    <string name="location_source_descr">Standardmäßig verwendet OsmAnd, wenn es von Google Play installiert wurde, %1$s zur Standortbestimmung.\n\nWenn Sie ungenaue Standortinformationen erhalten oder ein Gerät ohne %2$s verwenden, versuchen Sie, zu %3$s\\ zu wechseln</string>
+    <string name="location_source_descr">Standardmäßig verwendet OsmAnd, das von Google Play installiert wurde, %1$s zur Standortbestimmung.\n\nWenn du ungenaue Standortinformationen erhältst oder ein Gerät ohne %2$s verwendest, versuche, zu \"%3$s\" zu wechseln.</string>
     <string name="location_source">Standortquelle</string>
     <string name="points_selection_descr">Schließen und alle Änderungen verwerfen\?</string>
     <string name="exit_import_descr">Beenden, ohne die Änderungen zu speichern\?</string>
@@ -4334,7 +4328,7 @@
     <string name="routing_attr_avoid_fords_name">Furten vermeiden</string>
     <string name="routing_attr_hazmat_category_description">Gefahrgutkategorie / Zugangsgenehmigungen für Gefahrgut berücksichtigen</string>
     <string name="circle_settings">Kreiseinstellungen</string>
-    <string name="map_widget_trip_recording_distance">Entfernung</string>
+    <string name="map_widget_distance">Entfernung</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Militärische Bereiche ausblenden</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Militärische Bereiche</string>
     <string name="routing_attr_hazmat_category_name">Gefahrgutkategorie</string>
@@ -4970,7 +4964,7 @@
     <string name="write_bearing_description">Peilung zu jedem Trackpunkt bei Aufnahme speichern</string>
     <string name="feature_available_as_part_of_plan">%1$s verfügbar als Teil des %2$s-Plans</string>
     <string name="shared_string_included">Inbegriffen</string>
-    <string name="local_indexes_category_terrain">3D Geländekarten</string>
+    <string name="local_indexes_category_terrain">Geländekarten (3D)</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
     <string name="map_widget_group_glide_desc">Widgets zur Anzeige der Gleitzahl zum Ziel oder mittlere Gleitzahl der aktuellen Reise.</string>
     <string name="map_widget_glide_average_desc">Zeigt die mittlere Gleitzahl für das eingestellte Intervall an.</string>
@@ -5143,7 +5137,7 @@
     <string name="key_event_action_open_search_view">Suche öffnen</string>
     <string name="key_event_action_zoom_out">Herauszoomen</string>
     <string name="key_event_action_toggle_drower">Seitenmenü anzeigen/verbergen</string>
-    <string name="key_is_already_assigned_error">Der Schlüsse\"%1$s\" ist bereits der Aktion „%2$s“ zugeordnet</string>
+    <string name="key_is_already_assigned_error">Der Schlüssel \"%1$s\" ist bereits der Aktion \"%2$s\" zugeordnet</string>
     <string name="key_event_action_open_navigation_view">Navigationsansicht öffnen</string>
     <string name="external_input_device_title">Externes Eingabegerät</string>
     <string name="key_bindings">Tastenbelegung</string>
@@ -5331,7 +5325,7 @@
     <string name="no_assigned_keys">Keine zugewiesenen Tasten</string>
     <string name="shared_string_key">Taste</string>
     <string name="new_key_assignment">Neue Tastenzuweisung</string>
-    <string name="key_name_pattern">Taste %1$s\\</string>
+    <string name="key_name_pattern">Schlüssel \"%1$s\"</string>
     <string name="clear_key_assignment_summary">Tastenzuweisung für die ausgewählte Aktion wird gelöscht.</string>
     <string name="key_assignment_add_action">Aktion hinzufügen</string>
     <string name="clear_all_key_shortcuts_summary">Alle Tastenzuweisungen für den ausgewählten Typ werden gelöscht.</string>
@@ -5623,7 +5617,6 @@
     <string name="shared_strings_dimensions">Abmessungen</string>
     <string name="fuel_tank_capacity">Volumen des Kraftstofftanks</string>
     <string name="litres">Liter</string>
-    <string name="imperial_gallons_unit">imp gal</string>
     <string name="us_gallons_unit">gal</string>
     <string name="imperial_gallons">Imperiale Gallone</string>
     <string name="us_gallons">US Gallone</string>
@@ -5683,4 +5676,38 @@
     <string name="rendering_attr_showClimbingRoutes_description">Kletterrouten anzeigen</string>
     <string name="display_distance_to_first_intermediate_summary">Zeigt zuerst die Zeit und Entfernung für den nächsten Halt an. Schalte um, um immer Details zum Ziel anzuzeigen.</string>
     <string name="display_distance_to_first_intermediate">Zeige Routendetails zum nächsten Halt</string>
+    <string name="popular_places_nearby">Beliebte Orte in der Nähe</string>
+    <string name="recently_visited">Kürzlich besucht</string>
+    <string name="shared_string_avg_altitude">Durchschnittliche Höhe</string>
+    <string name="shared_string_avg_speed">Min. Geschwindigkeit</string>
+    <string name="shared_string_length">Länge</string>
+    <string name="map_widget_route_information">Routeninformationen</string>
+    <string name="shared_string_default_view">Standardansicht</string>
+    <string name="map_widget_route_information_desc">Zeigt die geschätzte Ankunftszeit, die verbleibende Reisezeit und die Distanz für die aktuelle Navigationsroute an.</string>
+    <string name="ais_nmea_protocol_description">Wähle Protokoll für NMEA-Datenempfang</string>
+    <string name="ais_ship_lost_timeout_description">Setze Timeout für Schiffssichtbarkeit: Nach dieser Zeit ohne Signalempfang ändert das Schiffssymbol seinen Status auf dem Bildschirm: Es wird durchgestrichen.</string>
+    <string name="plugin_ais_tracker_name">AIS-Schiffstracker</string>
+    <string name="ais_cpa_warning_time_description">Wenn die TCPA (Zeit bis zum Erreichen des CPA mit einem anderen Schiff) kleiner als dieser Wert ist, wird das Schiff rot markiert.</string>
+    <string name="ais_port_nmea_local_description">UPD-Port definieren, wo OsmAnd NMEA-Daten erhält</string>
+    <string name="ais_object_lost_timeouts">Timeout-Einstellungen für AIS-Signalempfang</string>
+    <string name="ais_address_nmea_server_description">IP-Adresse der NMEA-Datenquelle definieren (falls TCP verwendet wird)</string>
+    <string name="ais_load_data">AIS-Daten aus Datei laden</string>
+    <string name="ais_address_nmea_server">IP-Adresse der NMEA-Datenquelle</string>
+    <string name="ais_port_nmea_local">UDP-Port des lokalen NMEA-Datenempfängers</string>
+    <string name="ais_object_lost_timeout">Timeout für Sicht, wenn Objekt verloren ist</string>
+    <string name="ais_ship_lost_timeout">Timeout für die Sichtbarkeit des Schiffes, wenn kein Signal empfangen wird</string>
+    <string name="ais_cpa_warning_distance_description">Schiffe werden rot markiert, wenn der CPA-Wert unter diesem Wert liegt und der CPA-Wert in naher Zukunft erreicht wird (siehe Einstellung „Warnzeit bis zum Erreichen des CPA-Werts“).</string>
+    <string name="plugin_ais_tracker_disclaimer">HAFTUNGSAUSSCHLUSS\n\nDieses Plugin ist ein Hobbyprojekt und nicht auf Zuverlässigkeit und Korrektheit ausgelegt. Verlasst euch in keiner Weise auf diese Software, auch nicht für die Navigation und/oder die Sicherheit von Menschenleben.</string>
+    <string name="plugin_ais_tracker_description">Zeigt AIS-Positionen und Informationen über umliegende Schiffe an. Die AIS-Daten werden über ein Netzwerk von einem externen AIS-Empfänger empfangen.</string>
+    <string name="ais_address_settings">IP-Adresseneinstellungen</string>
+    <string name="ais_address_settings_description">Wähle NMEA-Protokoll (UDP/TCP) und definiere Adressen</string>
+    <string name="ais_nmea_protocol">Protokoll zur NMEA-Datenempfang</string>
+    <string name="ais_port_nmea_server">TCP-Port von NMEA-Datenquelle</string>
+    <string name="ais_port_nmea_server_description">Definiere TCP-Portnummer der NMEA-Datenquelle</string>
+    <string name="ais_object_lost_timeouts_description">Setze die Zeitwerte, um verlorene AIS-Objekte zu identifizieren, wenn für eine bestimmte Zeit kein Signal empfangen wurde.</string>
+    <string name="ais_object_lost_timeout_description">Lege die Zeitspanne für die Sichtbarkeit von AIS-Objekten fest: Nach dieser Zeit ohne Signalempfang wird das AIS-Objekt vom Bildschirm entfernt.</string>
+    <string name="ais_cpa_settings">Einstellungen im Zusammenhang mit CPA</string>
+    <string name="ais_cpa_settings_description">Diese Werte definieren die Darstellung von AIS-Objekten, die sich der eigenen Position zu sehr nähern.</string>
+    <string name="ais_cpa_warning_time">Warnzeit bis zum Erreichen des Punktes der größten Annäherung (CPA)</string>
+    <string name="ais_cpa_warning_distance">Warnentfernung für den Punkt der größten Annäherung (CPA)</string>
 </resources>

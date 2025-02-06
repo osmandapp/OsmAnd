@@ -748,7 +748,11 @@ public class RoutingHelper {
 	}
 
 	public int getLeftDistanceNextIntermediate() {
-		return route.getDistanceToNextIntermediate(lastFixedLocation);
+		return getLeftDistanceToIntermediate(0);
+	}
+
+	public int getLeftDistanceToIntermediate(int intermediateIndexOffset) {
+		return route.getDistanceToNextIntermediate(lastFixedLocation, intermediateIndexOffset);
 	}
 
 	public int getLeftTime() {
@@ -760,7 +764,11 @@ public class RoutingHelper {
 	}
 
 	public int getLeftTimeNextIntermediate() {
-		return route.getLeftTimeToNextIntermediate(lastFixedLocation);
+		return getLeftTimeNextIntermediate(0);
+	}
+
+	public int getLeftTimeNextIntermediate(int intermediateIndexOffset) {
+		return route.getLeftTimeToNextIntermediate(lastFixedLocation, intermediateIndexOffset);
 	}
 
 	public OsmandSettings getSettings() {

@@ -2418,7 +2418,6 @@
     <string name="rendering_attr_hideWoodScrubs_name">Matas e arbustos</string>
     <string name="rendering_attr_buildings15zoom_name">Edifícios no nível de ampliação 15</string>
     <string name="rendering_attr_lessDetailed_name">Menos detalhes</string>
-    <string name="rendering_attr_hideAccess_name">Restrições de acesso</string>
     <string name="no_index_file_to_download">Não foram encontrados descarregamentos, verifique se está ligado à Internet.</string>
     <string name="none_selected_gpx">Especificar primeiro um ficheiro GPX com um toque longo.</string>
     <string name="local_index_select_gpx_file">Selecione um trilho</string>
@@ -3635,7 +3634,6 @@
     <string name="shared_string_add_photo">Adicionar fotografia</string>
     <string name="register_on_openplacereviews">Crie uma conta em
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">As fotografias são fornecidas pelo projeto de dados abertos OpenPlaceReviews.org. Para enviar as suas fotografias tem de criar uma conta nesse site.</string>
     <string name="register_opr_create_new_account">Criar uma conta</string>
     <string name="register_opr_have_account">Já tenho uma conta</string>
     <string name="shared_string_search_history">Histórico de pesquisa</string>
@@ -3648,7 +3646,6 @@
     <string name="export_not_enough_space_descr">O seu dispositivo só tem disponível %1$s. Liberte algum espaço ou desmarque alguns itens para exportar.</string>
     <string name="export_not_enough_space">Não há espaço suficiente</string>
     <string name="add_to_mapillary">Adicionar ao Mapillary</string>
-    <string name="add_to_opr">Adicionar ao OpenPlaceReviews</string>
     <string name="add_photos_descr">OsmAnd mostra fotografias de várias origens:
 \nOpenPlaceReviews - fotografias de POI;
 \nMapillary - fotografias ao nível do solo;
@@ -3695,9 +3692,6 @@
     <string name="open_place_reviews_plugin_description">Faça contribuições para o projeto OpenPlaceReviews, como fotos, comentários ou hiperligações para locais públicos, como restaurantes, hotéis ou museus.
 \n
 \nVeja as instruções sobre como contribuir em %1$s.</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Usar test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Iniciar sessão no OpenPlaceReviews</string>
     <string name="activity_type_water_name">Água</string>
     <string name="activity_type_winter_name">Inverno</string>
     <string name="activity_type_snowmobile_name">Moto de neve</string>
@@ -4367,7 +4361,7 @@
     <string name="routing_attr_allow_private_for_truck_description">Permitir acesso a camiões em áreas privadas.</string>
     <string name="routing_attr_allow_private_for_truck_name">Permitir acesso privado (camião)</string>
     <string name="map_widget_trip_recording_duration">Duração</string>
-    <string name="map_widget_trip_recording_distance">Distância</string>
+    <string name="map_widget_distance">Distância</string>
     <string name="routing_attr_hazmat_category_description">Categoria de materiais perigosos / aplicar as permissões de acesso com materiais perigosos</string>
     <string name="routing_attr_avoid_fords_name">Evitar vaus</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Sem restrições)</string>
@@ -4959,7 +4953,7 @@
     <string name="open_issue_on_github">Abrir problema no GitHub</string>
     <string name="about_osmand">Sobre o OsmAnd</string>
     <string name="enable_to_use_external_input_device">Permite usar um dispositivo de entrada externo com o OsmAnd</string>
-    <string name="local_indexes_category_terrain">Mapas de terreno (3D</string>
+    <string name="local_indexes_category_terrain">Mapas de terreno (3D)</string>
     <string name="key_event_action_change_map_orientation">Alterar orientação do mapa</string>
     <string name="user_guide">Guia do utilizador</string>
     <string name="smart_folder_name_present">Essa pasta inteligente já existe</string>
@@ -5419,11 +5413,11 @@
 \nCPU (tempo de inatividade): %3$s
 \nCPU (à espera da GPU): %4$s</string>
     <string name="driving_region_uk">Reino Unido e similares</string>
-    <string name="ask_every_time">Perguntar todas as vezes</string>
-    <string name="detailed_track_guidance">Orientação pormenorizada do trilho</string>
+    <string name="ask_every_time">Perguntar sempre</string>
+    <string name="detailed_track_guidance">Orientação pormenorizada do percurso</string>
     <string name="shared_string_automatically">Automaticamente</string>
     <string name="hugerock_promo">Promoção Hugerock para %1$s meses</string>
-    <string name="detailed_track_guidance_description">O OsmAnd faz corresponder o seu trajeto a estradas próximas para uma melhor orientação curva a curva.</string>
+    <string name="detailed_track_guidance_description">O OsmAnd faz corresponder o seu trilho a estradas próximas para uma melhor orientação curva-a-curva.</string>
     <string name="quick_action_routes_summary">Uma opção para mostrar ou ocultar %1$s no mapa.</string>
     <string name="hugerock_promo_description">Acesso gratuito a funcionalidades, incluindo descarregamentos ilimitados de mapas, relevo 3D, etc. por %1$s /mês</string>
     <string name="driving_region_india">Índia</string>
@@ -5659,10 +5653,15 @@
     <string name="calculate_size">Calcular o tamanho</string>
     <string name="default_buttons_size_original_description">Cada botão manteria o seu próprio tamanho.</string>
     <string name="calculating_indication_message">A calcular…</string>
-    <string name="rendering_attr_showClimbingRoutes_name">Rotas de escalada</string>
-    <string name="rendering_attr_showClimbingRoutes_description">Mostrar rotas de escalada</string>
+    <string name="rendering_attr_showClimbingRoutes_name">Percursos de escalada</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Mostrar percursos de escalada</string>
     <string name="default_buttons_corners_original_description">Cada botão manteria o seu próprio raio de cantos.</string>
     <string name="default_buttons_opacity_original_description">Cada botão manteria a sua própria opacidade de fundo.</string>
     <string name="display_distance_to_first_intermediate_summary">Mostra primeiro a hora e a distância para a próxima paragem. Desativar para mostrar sempre os detalhes do destino.</string>
     <string name="display_distance_to_first_intermediate">Mostrar detalhes do itinerário para a próxima paragem</string>
+    <string name="shared_string_avg_speed">Velocidade mín.</string>
+    <string name="shared_string_length">Comprimento</string>
+    <string name="shared_string_avg_altitude">Altitude méd.</string>
+    <string name="popular_places_nearby">Lugares populares nas proximidades</string>
+    <string name="recently_visited">Recentemente visitado</string>
 </resources>

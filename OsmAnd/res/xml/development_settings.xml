@@ -168,6 +168,36 @@
 		android:title="@string/allow_display_on_top" />
 
 	<PreferenceCategory
+		android:key="grids"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/map_grid" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="show_grid"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/show_grids" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="show_utm_grid"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/show_utm_grids" />
+
+	<PreferenceCategory
+		android:key="aistracker"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/plugin_ais_tracker_name" />
+
+	<Preference
+		android:key="aistracker_simulation"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/ais_load_data" />
+
+	<PreferenceCategory
 		android:key="info"
 		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/info_button" />

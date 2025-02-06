@@ -1252,7 +1252,6 @@
     <string name="rendering_attr_buildings15zoom_name">Budynki na przybliżeniu 15</string>
     <string name="rendering_attr_moreDetailed_name">Więcej szczegółów</string>
     <string name="rendering_attr_lessDetailed_name">Mniej szczegółów</string>
-    <string name="rendering_attr_hideAccess_name">Ograniczenia dostępu</string>
     <string name="rendering_attr_showAccess_name">Ograniczenia dostępu i opłaty</string>
     <string name="rendering_attr_showSurfaceGrade_name">Jakość dróg</string>
     <string name="rendering_attr_showSurfaces_name">Nawierzchnia dróg</string>
@@ -3792,7 +3791,6 @@
     <string name="shared_string_add_photo">Dodaj zdjęcie</string>
     <string name="register_on_openplacereviews">Zarejestruj się w
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Zdjęcia są dostarczane przez otwarty projekt OpenPlaceReviews.org. Aby przesłać swoje zdjęcia, musisz zarejestrować się na stronie.</string>
     <string name="register_opr_create_new_account">Utwórz nowe konto</string>
     <string name="register_opr_have_account">Mam już konto</string>
     <string name="select_groups_for_import">Wybierz grupy, które zostaną zaimportowane.</string>
@@ -3813,7 +3811,6 @@
     <string name="app_mode_kayak">Kajak</string>
     <string name="app_mode_motorboat">Motorówka</string>
     <string name="add_to_mapillary">Dodaj do Mapillary</string>
-    <string name="add_to_opr">Dodaj do OpenPlaceReviews</string>
     <string name="gpx_upload_private_visibility_descr">„Prywatny” oznacza, że ślad nie pojawia się w żadnych publicznych wykazach, ale punkty śledzenia z niego w kolejności niechronologicznej są dostępne za pośrednictwem publicznego interfejsu API GPS bez sygnatur czasowych.</string>
     <string name="gpx_upload_identifiable_visibility_descr">\"Identyfikowalny\" oznacza, że ślad zostanie podany publicznie w śladach GPS i w publicznych wykazach śledzenia GPS, czyli inni użytkownicy będą mogli pobrać surowy ślad i skojarzyć go z twoją nazwą użytkownika. Publiczne dane śledzenia sygnatury czasowej z interfejsu API GPS obsługiwane za pośrednictwem interfejsu API punktów śladowych będą odwoływać się do oryginalnej strony śledzenia.</string>
     <string name="select_picture">Wybierz zdjęcie</string>
@@ -3912,8 +3909,6 @@
     <string name="open_place_reviews_plugin_description">Dodaj do projektu OpenPlaceReviews zdjęcia, recenzje i linki do miejsc publicznych takich jak restauracje, hotele czy muzea.
 \n
 \nZnajdź instrukcje jak to zrobić na naszej stronie %1$s.</string>
-    <string name="opr_use_dev_url">Użyj test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Zaloguj się do OpenPlaceReviews</string>
     <string name="activity_type_water_name">Zbiornik wodny</string>
     <string name="activity_type_winter_name">Zimowe</string>
     <string name="activity_type_snowmobile_name">Skuter śnieżny</string>
@@ -4046,7 +4041,6 @@
     <string name="resend_verification_code">Wyślij ponownie</string>
     <string name="verification_code_missing">Nie otrzymałem kodu uwierzytelniającego</string>
     <string name="verification_code_missing_description">Może to zająć do 10 minut. Użyj przycisku poniżej, jeśli nie znajduje się w folderze spamu.</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="select_nav_profile_dialog_message">„Rodzaj nawigacji” wybiera sposób obliczania tras z dostępnymi silnikami wyznaczania tras offline i online.</string>
     <string name="loading_list_of_routing_services">Wczytywanie listy dostępnych usług routingu</string>
     <string name="osmand_online_routing_promo">Użyj wstępnie zdefiniowanych szablonów, lub dodaj OSRM, Graphhopper, openrouteservice lub GPX wyznaczania tras online.</string>
@@ -4545,7 +4539,7 @@
     <string name="colour_of_circles">Kolor okręgów</string>
     <string name="compass_on_circles">Kompas na okręgach</string>
     <string name="routing_attr_avoid_4wd_only_description">Unikaj dróg nadających się dla pojazdów z napędem na 4 koła</string>
-    <string name="map_widget_trip_recording_distance">Odległość</string>
+    <string name="map_widget_distance">Odległość</string>
     <string name="rendering_attr_horseScale_name">Poziom trudności szlaków konnych</string>
     <string name="routing_attr_avoid_highway_name">Unikaj autostrad</string>
     <string name="rendering_attr_weatherTempContours_name">Izolinie temperatury</string>
@@ -5769,4 +5763,20 @@
     <string name="connect_obd_instructions_step">1. Podłącz skaner do portu OBD-II pojazdu.\n\n2. Włącz silnik swojego pojazdu\n\n3. Włącz Bluetooth w swoim urządzeniu\n\n4. Kliknij \'%1$s\' i wybierz swój skaner z listy.</string>
     <string name="configure_map_description">Zmień styl mapy, warstwy i inne ustawienia.</string>
     <string name="lock_screen_description">Włącza lub wyłącza funkcję ekranu dotykowego, aby zapobiec przypadkowym dotknięciom</string>
+    <string name="ais_address_settings">Ustawienia adresu IP</string>
+    <string name="ais_address_settings_description">Wybierz protokół NMEA (UDP/TCP) i zdefiniuj adresy</string>
+    <string name="ais_nmea_protocol">Protokół odbioru danych NMEA</string>
+    <string name="ais_nmea_protocol_description">Wybierz protokół odbioru danych NMEA</string>
+    <string name="ais_address_nmea_server">Adres IP źródła danych NMEA</string>
+    <string name="ais_address_nmea_server_description">Zdefiniuj adres IP źródła danych NMEA (jeśli używany jest protokół TCP)</string>
+    <string name="ais_port_nmea_server">Port TCP źródła danych NMEA</string>
+    <string name="ais_port_nmea_server_description">Zdefiniuj numer portu TCP źródła danych NMEA</string>
+    <string name="ais_port_nmea_local">Port UDP lokalnego odbiornika danych NMEA</string>
+    <string name="ais_object_lost_timeouts">Ustawienia limitu czasu odbioru sygnału AIS</string>
+    <string name="ais_object_lost_timeout">Limit czasu widoczności w przypadku utraty obiektu</string>
+    <string name="ais_object_lost_timeout_description">Ustaw limit czasu widoczności obiektów AIS: Po upływie tego czasu bez odbioru sygnału obiekt AIS zostanie usunięty z ekranu.</string>
+    <string name="ais_ship_lost_timeout">Przekroczenie limitu widoczności statku w przypadku braku odbioru sygnału</string>
+    <string name="ais_load_data">Wczytaj dane AIS z pliku</string>
+    <string name="ais_port_nmea_local_description">Zdefiniuj port UDP, na którym OsmAnd odbiera dane NMEA</string>
+    <string name="ais_object_lost_timeouts_description">Ustaw wartości limitu czasu, aby zidentyfikować utracone obiekty AIS, jeśli przez określony czas nie odebrano żadnego sygnału.</string>
 </resources>

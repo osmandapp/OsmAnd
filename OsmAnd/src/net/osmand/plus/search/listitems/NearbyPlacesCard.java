@@ -29,7 +29,6 @@ public class NearbyPlacesCard extends FrameLayout implements NearbyPlacesListene
 	private boolean collapsed;
 	private ImageView explicitIndicator;
 	private View titleContainer;
-	private View showAllBtnContainer;
 	private RecyclerView nearByList;
 	private MaterialProgressBar progressBar;
 	private NearbyPlacesAdapter adapter;
@@ -40,7 +39,6 @@ public class NearbyPlacesCard extends FrameLayout implements NearbyPlacesListene
 	private View emptyView;
 	private View cardContent;
 	private boolean isLoadingItems;
-
 
 	public NearbyPlacesCard(@NonNull MapActivity mapActivity, @NonNull NearbyPlacesAdapter.NearbyItemClickListener clickListener) {
 		super(mapActivity);
@@ -56,12 +54,11 @@ public class NearbyPlacesCard extends FrameLayout implements NearbyPlacesListene
 		nearByList = findViewById(R.id.nearByList);
 		explicitIndicator = findViewById(R.id.explicit_indicator);
 		titleContainer = findViewById(R.id.nearby_title_container);
-		showAllBtnContainer = findViewById(R.id.show_all_button);
 		noInternetCard = findViewById(R.id.no_internet);
 		emptyView = findViewById(R.id.empty_nearby_places);
 		cardContent = findViewById(R.id.card_content);
 		noInternetCard.findViewById(R.id.try_again_button).setOnClickListener((v) -> {
-			if(app.getSettings().isInternetConnectionAvailable(true)) {
+			if (app.getSettings().isInternetConnectionAvailable(true)) {
 				startLoadingNearbyPlaces();
 				updateExpandState();
 			}
@@ -74,7 +71,6 @@ public class NearbyPlacesCard extends FrameLayout implements NearbyPlacesListene
 	}
 
 	private void setupShowAllNearbyPlacesBtn() {
-		showAllBtnContainer = findViewById(R.id.show_all_button);
 		findViewById(R.id.show_all_btn).setOnClickListener(v -> {
 			NearbyPlacesFragment.Companion.showInstance(mapActivity.getSupportFragmentManager());
 			QuickSearchDialogFragment dialogFragment = mapActivity.getFragmentsHelper().getQuickSearchDialogFragment();
@@ -132,7 +128,7 @@ public class NearbyPlacesCard extends FrameLayout implements NearbyPlacesListene
 	}
 
 	private void onNearbyPlacesCollapseChanged() {
-		if (!collapsed &&  app.getSettings().isInternetConnectionAvailable()) {
+		if (!collapsed && app.getSettings().isInternetConnectionAvailable()) {
 			startLoadingNearbyPlaces();
 		}
 		updateExpandState();

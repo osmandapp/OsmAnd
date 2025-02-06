@@ -24,8 +24,8 @@ import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
 public abstract class DistanceToPointWidget extends SimpleWidget {
 
-	private static final int DISTANCE_CHANGE_THRESHOLD = 10;
-	private static final int DESTINATION_REACHED_THRESHOLD = 20;
+	public static final int DISTANCE_CHANGE_THRESHOLD = 10;
+	public static final int DESTINATION_REACHED_THRESHOLD = 20;
 
 	private final OsmandMapTileView view;
 	private final float[] calculations = new float[1];

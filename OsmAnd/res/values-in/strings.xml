@@ -944,7 +944,6 @@
     <string name="shared_string_add_photo">Tambahkan foto</string>
     <string name="register_on_openplacereviews">Daftar di
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Foto disediakan oleh proyek data terbuka OpenPlaceReviews.org. Untuk mengunggah foto, Anda perlu mendaftar di situs webnya.</string>
     <string name="register_opr_create_new_account">Buat akun baru</string>
     <string name="register_opr_have_account">Saya sudah memiliki sebuah akun</string>
     <string name="shared_string_search_history">Riwayat pencarian</string>
@@ -958,7 +957,6 @@
     <string name="select_groups_for_import">Pilih grup yang akan diimpor.</string>
     <string name="select_items_for_import">Pilih item yang akan diimpor.</string>
     <string name="add_to_mapillary">Tambahkan ke Mapillary</string>
-    <string name="add_to_opr">Tambahkan ke OpenPlaceReviews</string>
     <string name="use_dev_url">Gunakan dev.openstreetmap.org</string>
     <string name="app_mode_light_aircraft">Pesawat terbang ringan</string>
     <string name="plan_route_add_new_segment">Tambahkan segmen baru</string>
@@ -998,9 +996,6 @@
     <string name="uploading_count">Mengunggah %1$d dari %2$d</string>
     <string name="uploaded_count">%1$d dari %2$d terunggah</string>
     <string name="toast_select_edits_for_upload">Pilih suntingan untuk diunggah</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Gunakan test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Masuk ke OpenPlaceReviews</string>
     <string name="activity_type_water_name">Air</string>
     <string name="activity_type_snowmobile_name">Mobil Salju</string>
     <string name="activity_type_racing_name">Balapan</string>
@@ -3523,7 +3518,6 @@
     <string name="map_widget_appearance_rem">Elemen yang tersisa</string>
     <string name="traffic_warning_border_control">Gerbang perbatasan</string>
     <string name="traffic_warning_speed_camera">Kamera kecepatan</string>
-    <string name="rendering_attr_hideAccess_name">Pembatasan akses</string>
     <string name="rendering_attr_showCycleRoutes_name">Rute bersepeda</string>
     <string name="gpx_selection_number_of_points">%1$s titik</string>
     <string name="gpx_selection_point">Titik %1$s</string>
@@ -3708,7 +3702,7 @@
     <string name="monitoring_min_distance_descr_recommendation">Rekomendasi: Tetapkan perpindahan 5 meter jika Anda tidak ingin mencatat detail kecil dari rute Anda, dan tidak memerlukan data tambahan tentang periode istirahat Anda.</string>
     <string name="apply_preference_to_all_profiles">Terapkan perubahan ini ke semua atau profil yang dipilih.</string>
     <string name="routing_attr_allow_private_for_truck_description">Izinkan akses ke area pribadi untuk truk.</string>
-    <string name="map_widget_trip_recording_distance">Jarak</string>
+    <string name="map_widget_distance">Jarak</string>
     <string name="rendering_attr_horseRoutes_name">Rute kuda</string>
     <string name="osm_save_offline">Simpan secara luring</string>
     <string name="osn_reopen_dialog_title">Buka kembali catatan</string>
@@ -6007,7 +6001,6 @@
     <string name="fuel_tank_capacity">Kapasitas tangki bahan bakar</string>
     <string name="shared_strings_dimensions">Dimensi</string>
     <string name="litres">Liter</string>
-    <string name="imperial_gallons_unit">imp gal</string>
     <string name="us_gallons_unit">gal</string>
     <string name="imperial_gallons">Galon imperial</string>
     <string name="us_gallons">Galon AS</string>
@@ -6052,7 +6045,7 @@
     <string name="location_interpolation_percent">Persentase interpolasi lokasi</string>
     <string name="shared_string_interpolation">Interpolasi</string>
     <string name="location_interpolation_percent_desc">Tetapkan presentasi interpolasi lokasi saat navigasi rute. Parameter ini mengurangi kelambatan posisi lokasi di peta saat ada animasi.</string>
-    <string name="selected_delayed_profile">Profil \"%s\" terpilih</string>
+    <string name="selected_delayed_profile">Profil \"%s\\ terpilih</string>
     <string name="default_buttons_corners_original_description">Setiap tombol tetap memiliki radius bulatnya sendiri.</string>
     <string name="default_buttons_size_original_description">Setiap tombol tetap memiliki ukurannya sendiri.</string>
     <string name="default_buttons_opacity_original_description">Setiap tombol tetap memiliki opasitas latar belakangnya sendiri.</string>
@@ -6062,4 +6055,9 @@
     <string name="calculate_size">Hitung ukuran</string>
     <string name="display_distance_to_first_intermediate_summary">Menampilkan waktu dan jarak untuk perhentian pertama terlebih dahulu. Matikan untuk selalu menampilkan detail tujuan.</string>
     <string name="display_distance_to_first_intermediate">Tampilkan detail rute until perhentian berikutnya</string>
+    <string name="recently_visited">Dikunjungi baru-baru ini</string>
+    <string name="popular_places_nearby">Tempat-tempat sekitar yang populer</string>
+    <string name="shared_string_avg_altitude">Ketinggian rata-rata</string>
+    <string name="shared_string_length">Panjang</string>
+    <string name="shared_string_avg_speed">Kecepatan minimum</string>
 </resources>

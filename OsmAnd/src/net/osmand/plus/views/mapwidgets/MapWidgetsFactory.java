@@ -14,6 +14,7 @@ import net.osmand.plus.views.mapwidgets.widgets.AverageSpeedWidget;
 import net.osmand.plus.views.mapwidgets.widgets.BatteryWidget;
 import net.osmand.plus.views.mapwidgets.widgets.BearingWidget;
 import net.osmand.plus.views.mapwidgets.widgets.BearingWidget.BearingType;
+import net.osmand.plus.views.mapwidgets.widgets.routeinfo.RouteInfoWidget;
 import net.osmand.plus.views.mapwidgets.widgets.CoordinatesMapCenterWidget;
 import net.osmand.plus.views.mapwidgets.widgets.CoordinatesCurrentLocationWidget;
 import net.osmand.plus.views.mapwidgets.widgets.CurrentSpeedWidget;
@@ -73,6 +74,8 @@ public class MapWidgetsFactory {
 				return new MapMarkersBarWidget(mapActivity, customId);
 			case LANES:
 				return new LanesWidget(mapActivity);
+			case ROUTE_INFO:
+				return new RouteInfoWidget(mapActivity, customId);
 			case DISTANCE_TO_DESTINATION:
 				return new DistanceToDestinationWidget(mapActivity, customId, panel);
 			case INTERMEDIATE_DESTINATION:

@@ -31,7 +31,9 @@ public class SelectedGpxMenuController extends MenuController {
 		leftTitleButtonController = new TitleButtonController(this) {
 			@Override
 			public void buttonPressed() {
-				mapContextMenu.close();
+				if (mapContextMenu != null) {
+					mapContextMenu.close();
+				}
 				SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
 				TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint);
 			}

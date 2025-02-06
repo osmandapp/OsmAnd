@@ -444,4 +444,5 @@ dependencies {
 	androidTestImplementation ('androidx.test.espresso:espresso-contrib:3.5.1') {
 		exclude module: "protobuf-lite"
 	}
+	implementation 'net.sf.marineapi:marineapi:0.12.0'
 }

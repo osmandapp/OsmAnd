@@ -242,7 +242,6 @@
     <string name="rendering_attr_buildings15zoom_name">Edificios en zum 15</string>
     <string name="rendering_attr_moreDetailed_name">Más detalles</string>
     <string name="rendering_attr_lessDetailed_name">Menos detalles</string>
-    <string name="rendering_attr_hideAccess_name">Restricciones de acceso</string>
     <string name="rendering_attr_showAccess_name">Restricciones de acceso</string>
     <string name="rendering_attr_showSurfaceGrade_name">Calidad de los caminos</string>
     <string name="rendering_attr_showSurfaces_name">Superficie de los caminos</string>
@@ -3627,7 +3626,6 @@
     <string name="shared_string_add_photo">Añadir foto</string>
     <string name="register_opr_have_account">Ya tengo cuenta</string>
     <string name="register_opr_create_new_account">Crear nueva cuenta</string>
-    <string name="register_on_openplacereviews_desc">Las fotos son provistas por el proyecto de datos abiertos OpenPlaceReviews.org. Para subir fotos debes registrarte en el sitio web.</string>
     <string name="register_on_openplacereviews">Registrarse en
 \nOpenPlaceReviews.org</string>
     <string name="osm_login_descr">Inicia sesión con las credenciales de OAuth u OpenStreetMap.</string>
@@ -3642,7 +3640,6 @@
     <string name="approximate_file_size">Tamaño aproximado del archivo</string>
     <string name="app_mode_motorboat">Lancha a motor</string>
     <string name="app_mode_kayak">Kayak</string>
-    <string name="add_to_opr">Añadir a OpenPlaceReviews</string>
     <string name="add_to_mapillary">Añadir a Mapillary</string>
     <string name="add_photos_descr">OsmAnd muestra fotos de varios repositorios:
 \nOpenPlaceReviews (fotos de PDI);
@@ -3721,14 +3718,11 @@
     <string name="routing_engine_vehicle_type_cycling_regular">Ciclismo regular</string>
     <string name="routing_engine_vehicle_type_cycling_mountain">Ciclismo de montaña</string>
     <string name="routing_engine_vehicle_type_cycling_electric">Ciclismo eléctrico</string>
-    <string name="opr_use_dev_url">Usar test.openplacereviews.org</string>
     <string name="open_place_reviews_plugin_description">Haz contribuciones al proyecto OpenPlaceReviews, como fotos, reseñas o enlaces sobre lugares públicos como restaurantes, hoteles o museos.
 \n
 \nEn nuestro sitio web, hay una guía de cómo contribuir - %1$s.</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="message_server_error">Error de servidor: %1$s</string>
     <string name="message_name_is_already_exists">El nombre ya existe</string>
-    <string name="login_open_place_reviews">Acceder a OpenPlaceReviews</string>
     <string name="hillshade_slope_contour_lines">Curvas de nivel / Sombreado / Pendiente</string>
     <string name="delete_waypoints">Borrar puntos de referencia</string>
     <string name="delete_online_routing_engine">¿Quitar este motor de navegación en línea\?</string>
@@ -4357,7 +4351,7 @@
     <string name="explore_plans">Explorar planes</string>
     <string name="map_widget_trip_recording_downhill">Descenso</string>
     <string name="map_widget_trip_recording_uphill">Ascenso</string>
-    <string name="map_widget_trip_recording_distance">Distancia</string>
+    <string name="map_widget_distance">Distancia</string>
     <string name="routing_attr_hazmat_category_name">Categoría de materiales peligrosos</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Sin restricciones)</string>
     <string name="routing_attr_avoid_fords_name">Evitar vados</string>
@@ -5609,7 +5603,6 @@
     <string name="fuel_tank_capacity">Capacidad del tanque de combustible</string>
     <string name="shared_strings_dimensions">Dimensiones</string>
     <string name="litres">Litros</string>
-    <string name="imperial_gallons_unit">gal imp</string>
     <string name="us_gallons_unit">gal</string>
     <string name="imperial_gallons">Galones imperiales</string>
     <string name="us_gallons">Galones (EEUU)</string>

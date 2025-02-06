@@ -32,6 +32,9 @@ import androidx.annotation.Nullable;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.FColorARGB;
+import net.osmand.core.jni.GridConfiguration;
+import net.osmand.core.jni.GridConfiguration.Projection;
 import net.osmand.core.jni.MapAnimator;
 import net.osmand.core.jni.MapRendererDebugSettings;
 import net.osmand.core.jni.PointD;
@@ -61,6 +64,7 @@ import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityActionsProvider;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.utils.AndroidUtils;
@@ -2530,6 +2534,19 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			mapRenderer.enableBatterySavingMode();
 		} else {
 			mapRenderer.disableBatterySavingMode();
+		}
+	}
+
+	public void applyGridSettings(MapRendererView mapRenderer) {
+		OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+		if (plugin != null) {
+			boolean show = plugin.SHOW_GRID.get();
+			boolean useUTM = plugin.SHOW_UTM_GRID.get();
+			GridConfiguration gridConfiguration = new GridConfiguration();
+			gridConfiguration.setPrimaryProjection(useUTM ? Projection.UTM : Projection.WGS84);
+			FColorARGB primaryColor = new FColorARGB(show ? 1.0f : 0.0f, 1.0f, 1.0f, 0.0f);
+			gridConfiguration.setPrimaryColor(primaryColor);
+			mapRenderer.setGridConfiguration(gridConfiguration);
 		}
 	}
 

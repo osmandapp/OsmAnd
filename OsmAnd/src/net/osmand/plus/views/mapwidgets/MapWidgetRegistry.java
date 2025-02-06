@@ -281,9 +281,9 @@ public class MapWidgetRegistry {
 		Set<MapWidgetInfo> filteredWidgets = new TreeSet<>();
 		for (MapWidgetInfo widget : widgetInfos) {
 			boolean panelSupported = false;
-			if(sidePanel){
+			if (sidePanel) {
 				panelSupported = widget.widget instanceof ISupportSidePanel;
-			} else if(verticalPanel){
+			} else if (verticalPanel) {
 				panelSupported = widget.widget instanceof ISupportVerticalPanel;
 			}
 			if (panelSupported || includedWidgetTypes.contains(widget.getClass())) {

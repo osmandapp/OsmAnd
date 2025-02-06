@@ -5,6 +5,7 @@ import static net.osmand.osm.OsmRouteType.BICYCLE;
 import static net.osmand.osm.OsmRouteType.HIKING;
 import static net.osmand.osm.OsmRouteType.MTB;
 import static net.osmand.plus.configmap.ConfigureMapMenu.ALPINE_HIKING_SCALE_SCHEME_ATTR;
+import static net.osmand.plus.configmap.routes.AlpineHikingCard.getDifficultyClassificationDescription;
 import static net.osmand.plus.configmap.routes.RouteUtils.CYCLE_NODE_NETWORK_ROUTES_ATTR;
 
 import android.content.Context;
@@ -13,9 +14,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
@@ -41,6 +44,9 @@ public class RouteLayersHelper {
 	private final CommonPreference<Boolean> alpineHikingPreference;
 	private final CommonPreference<String> alpineHikingScaleScheme;
 
+	@Nullable
+	private String selectedAttrName;
+
 	public RouteLayersHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		settings = app.getSettings();
@@ -57,6 +63,15 @@ public class RouteLayersHelper {
 
 		alpineHikingPreference = settings.getCustomRenderBooleanProperty(ALPINE.getRenderingPropertyAttr());
 		alpineHikingScaleScheme = settings.getCustomRenderProperty(ALPINE_HIKING_SCALE_SCHEME_ATTR);
+	}
+
+	@Nullable
+	public String getSelectedAttrName() {
+		return selectedAttrName;
+	}
+
+	public void setSelectedAttrName(@Nullable String selectedAttrName) {
+		this.selectedAttrName = selectedAttrName;
 	}
 
 	public void toggleRoutesType(@NonNull String attrName) {
@@ -85,6 +100,32 @@ public class RouteLayersHelper {
 			return isAlpineHikingRoutesEnabled();
 		} else {
 			return settings.getCustomRenderBooleanProperty(attrName).get();
+		}
+	}
+
+	@NonNull
+	public String getRoutesTypeName(@NonNull String attrName) {
+		if (BICYCLE.getRenderingPropertyAttr().equals(attrName)) {
+			return app.getString(R.string.rendering_attr_showCycleRoutes_name);
+		} else if (MTB.getRenderingPropertyAttr().equals(attrName)) {
+			return app.getString(R.string.app_mode_mountain_bicycle);
+		} else if (HIKING.getRenderingPropertyAttr().equals(attrName)) {
+			return app.getString(R.string.rendering_attr_hikingRoutesOSMC_name);
+		} else if (ALPINE.getRenderingPropertyAttr().equals(attrName)) {
+			return app.getString(R.string.rendering_attr_alpineHiking_name);
+		}
+		return AndroidUtils.getRenderingStringPropertyName(app, attrName, attrName);
+	}
+
+	@NonNull
+	public String getRoutesTypeDescription(@NonNull String attrName) {
+		boolean enabled = isRoutesTypeEnabled(attrName);
+		if (MTB.getRenderingPropertyAttr().equals(attrName)) {
+			return enabled ? getSelectedMtbClassificationName(app) : app.getString(R.string.shared_string_disabled);
+		} else if (ALPINE.getRenderingPropertyAttr().equals(attrName)) {
+			return getDifficultyClassificationDescription(app);
+		} else {
+			return app.getString(enabled ? R.string.shared_string_enabled : R.string.shared_string_disabled);
 		}
 	}
 

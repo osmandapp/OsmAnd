@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/no_internet"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/no_internet"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/list_background_color"
@@ -47,11 +47,10 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="start"
-			app:dialogButtonTopMargin="@dimen/content_padding"
 			app:dialogButtonBottomMargin="@dimen/content_padding"
 			app:dialogButtonTitle="@string/try_again"
-			app:dialogButtonType="secondary"
-			/>
+			app:dialogButtonTopMargin="@dimen/content_padding"
+			app:dialogButtonType="secondary" />
 
 	</LinearLayout>
 </LinearLayout>
