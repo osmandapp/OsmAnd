@@ -5710,4 +5710,9 @@
     <string name="ais_cpa_settings_description">Diese Werte definieren die Darstellung von AIS-Objekten, die sich der eigenen Position zu sehr nähern.</string>
     <string name="ais_cpa_warning_time">Warnzeit bis zum Erreichen des Punktes der größten Annäherung (CPA)</string>
     <string name="ais_cpa_warning_distance">Warnentfernung für den Punkt der größten Annäherung (CPA)</string>
+    <string name="map_grid">Kartenraster</string>
+    <string name="show_grids">Kartenraster anzeigen</string>
+    <string name="show_grids_description">Erlaube die Anzeige eines Rasters über der Karte</string>
+    <string name="show_utm_grids">Verwende UTM statt WGS84</string>
+    <string name="show_utm_grids_description">Zeige Gitter in UTM-Metern statt in WGS84-Grad</string>
 </resources>
