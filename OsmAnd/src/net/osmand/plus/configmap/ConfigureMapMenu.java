@@ -239,9 +239,7 @@ public class ConfigureMapMenu {
 			}
 			customRules.remove(property);
 		}
-		ResourceManager manager = app.getResourceManager();
-		if (PluginsHelper.isDevelopment() &&
-				(!Algorithms.isEmpty(manager.getTravelMapRepositories()) || !Algorithms.isEmpty(manager.getTravelRepositories()))) {
+		if (PluginsHelper.isDevelopment()) {
 			adapter.addItem(createTravelRoutesItem(activity, nightMode));
 		}
 	}
