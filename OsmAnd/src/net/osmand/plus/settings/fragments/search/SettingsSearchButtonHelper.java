@@ -1,6 +1,6 @@
 package net.osmand.plus.settings.fragments.search;
 
-import static net.osmand.plus.settings.fragments.search.ActivitySearchDatabaseConfigs.createActivitySearchDatabaseConfigs;
+import static net.osmand.plus.settings.fragments.search.ActivitySearchDatabaseConfigsFactory.createActivitySearchDatabaseConfigs;
 
 import android.view.View;
 import android.widget.ImageView;

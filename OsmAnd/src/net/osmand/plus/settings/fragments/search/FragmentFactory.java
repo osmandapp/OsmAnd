@@ -12,7 +12,7 @@ import java.util.Optional;
 
 import de.KnollFrank.lib.settingssearch.PreferenceWithHost;
 import de.KnollFrank.lib.settingssearch.fragment.DefaultFragmentFactory;
-import de.KnollFrank.lib.settingssearch.fragment.IFragments;
+import de.KnollFrank.lib.settingssearch.fragment.InstantiateAndInitializeFragment;
 
 class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.FragmentFactory {
 
@@ -20,8 +20,8 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 	public <T extends Fragment> T instantiate(final Class<T> fragmentClass,
 											  final Optional<PreferenceWithHost> src,
 											  final Context context,
-											  final IFragments fragments) {
-		final T fragment = _instantiate(fragmentClass, src, context, fragments);
+											  final InstantiateAndInitializeFragment instantiateAndInitializeFragment) {
+		final T fragment = _instantiate(fragmentClass, src, context, instantiateAndInitializeFragment);
 		setConfigureSettingsSearch(fragment, true);
 		return fragment;
 	}
@@ -29,10 +29,10 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 	private static <T extends Fragment> T _instantiate(final Class<T> fragmentClass,
 													   final Optional<PreferenceWithHost> src,
 													   final Context context,
-													   final IFragments fragments) {
+													   final InstantiateAndInitializeFragment instantiateAndInitializeFragment) {
 		return FragmentFactory
 				.instantiate(src, context, fragmentClass)
-				.orElseGet(() -> createDefaultInstance(fragmentClass, src, context, fragments));
+				.orElseGet(() -> createDefaultInstance(fragmentClass, src, context, instantiateAndInitializeFragment));
 	}
 
 	private static <T extends Fragment> Optional<T> instantiate(final Optional<PreferenceWithHost> src,
@@ -52,8 +52,8 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 	private static <T extends Fragment> T createDefaultInstance(final Class<T> fragmentClass,
 																final Optional<PreferenceWithHost> src,
 																final Context context,
-																final IFragments fragments) {
-		final T fragment = new DefaultFragmentFactory().instantiate(fragmentClass, src, context, fragments);
+																final InstantiateAndInitializeFragment instantiateAndInitializeFragment) {
+		final T fragment = new DefaultFragmentFactory().instantiate(fragmentClass, src, context, instantiateAndInitializeFragment);
 		src.ifPresent(_src -> configureFragment(fragment, _src));
 		return fragment;
 	}
