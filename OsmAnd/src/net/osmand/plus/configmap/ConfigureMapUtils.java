@@ -1,5 +1,6 @@
 package net.osmand.plus.configmap;
 
+import static net.osmand.osm.RenderingPropertyAttr.*;
 import static net.osmand.plus.dialogs.DetailsBottomSheet.STREET_LIGHTING;
 import static net.osmand.plus.dialogs.DetailsBottomSheet.STREET_LIGHTING_NIGHT;
 import static net.osmand.plus.settings.backend.OsmandSettings.RENDERER_PREFERENCE_PREFIX;
@@ -22,13 +23,17 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 public class ConfigureMapUtils {
 
 	public static final String[] MAP_LANGUAGES_IDS = {"", "en", "af", "als", "ar", "az", "be", "ber", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "ckb", "cs", "cy", "da", "de", "el", "eo", "es", "et", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hsb", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "kab", "kk", "kn", "ko", "ku", "la", "lb", "lo", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "oc", "os", "pl", "pms", "pt", "ro", "ru", "sat", "sc", "sh", "sk", "sl", "sq", "sr", "sr-latn", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh", "zh-Hans", "zh-Hant"};
-
-	public static final String ROUTE_CLASS_PREFIX = ".route.";
 
 	@NonNull
 	public static Map<String, String> getSorterMapLanguages(@NonNull OsmandApplication app) {
@@ -51,7 +56,8 @@ public class ConfigureMapUtils {
 	 * @param unsortedLanguages map of entries like en:English. Empty key stands for device locale or default locale
 	 */
 	@NonNull
-	public static Comparator<String> getLanguagesComparator(@NonNull Map<String, String> unsortedLanguages) {
+	public static Comparator<String> getLanguagesComparator(
+			@NonNull Map<String, String> unsortedLanguages) {
 		return (leftKey, rightKey) -> {
 			int i1 = Algorithms.isEmpty(leftKey) ? 0 : (leftKey.equals("en") ? 1 : 2);
 			int i2 = Algorithms.isEmpty(rightKey) ? 0 : (rightKey.equals("en") ? 1 : 2);
@@ -66,7 +72,8 @@ public class ConfigureMapUtils {
 	}
 
 	@Nullable
-	public static RenderingRuleProperty getPropertyForAttr(@NonNull OsmandApplication app, @NonNull String attrName) {
+	public static RenderingRuleProperty getPropertyForAttr(@NonNull OsmandApplication app,
+			@NonNull String attrName) {
 		return getPropertyForAttr(getCustomRules(app), attrName);
 	}
 
@@ -81,7 +88,8 @@ public class ConfigureMapUtils {
 		return null;
 	}
 
-	public static List<RenderingRuleProperty> getCustomRules(@NonNull OsmandApplication app, String... skipCategories) {
+	public static List<RenderingRuleProperty> getCustomRules(@NonNull OsmandApplication app,
+			String... skipCategories) {
 		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 		if (renderer == null) {
 			return new ArrayList<>();
@@ -104,39 +112,8 @@ public class ConfigureMapUtils {
 		return customRules;
 	}
 
-	@NonNull
-	public static Map<String, RenderingClass> getRenderingClasses(@NonNull OsmandApplication app) {
-		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
-		if (renderer == null) {
-			return new LinkedHashMap<>();
-		}
-		return renderer.getRenderingClasses();
-	}
-
-	@NonNull
-	public static Pair<RenderingClass, List<RenderingClass>> getRenderingClassesForKey(
-			@NonNull OsmandApplication app, @NonNull String attrName) {
-		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
-		if (renderer == null) {
-			return null;
-		}
-		String key = ROUTE_CLASS_PREFIX + attrName.replace("show", "");
-		RenderingClass mainClass = renderer.getRenderingClass(key);
-		if (mainClass != null) {
-			List<RenderingClass> list = new ArrayList<>();
-			for (Map.Entry<String, RenderingClass> entry : renderer.getRenderingClasses().entrySet()) {
-				RenderingClass renderingClass = entry.getValue();
-				if (renderingClass.getName().startsWith(key + ".")) {
-					list.add(renderingClass);
-				}
-			}
-			return Pair.create(mainClass, list);
-		}
-		return null;
-	}
-
-	protected static String[] getRenderingPropertyPossibleValues(OsmandApplication app,
-			RenderingRuleProperty p) {
+	protected static String[] getRenderingPropertyPossibleValues(@NonNull OsmandApplication app,
+			@NonNull RenderingRuleProperty p) {
 		String[] possibleValuesString = new String[p.getPossibleValues().length + 1];
 		possibleValuesString[0] = AndroidUtils.getRenderingStringPropertyValue(app, p.getDefaultValueDescription());
 
@@ -146,8 +123,70 @@ public class ConfigureMapUtils {
 		return possibleValuesString;
 	}
 
+	@NonNull
+	public static Pair<RenderingClass, List<RenderingClass>> getRenderingClassWithChildren(
+			@NonNull OsmandApplication app, @NonNull String attrName) {
+		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		if (renderer != null) {
+			String key = getRenderingClassNameForAttr(app, attrName);
+			RenderingClass renderingClass = renderer.getRenderingClass(key);
+			if (renderingClass != null) {
+				List<RenderingClass> children = getChildrenRenderingClasses(app, renderingClass);
+				return Pair.create(renderingClass, children);
+			}
+		}
+		return null;
+	}
+
+	@NonNull
+	public static List<RenderingClass> getChildrenRenderingClasses(@NonNull OsmandApplication app,
+			@NonNull RenderingClass parentClass) {
+		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		if (renderer != null) {
+			String key = parentClass.getName();
+			return renderer.getRenderingClasses().values().stream()
+					.filter(renderingClass -> {
+						String name = renderingClass.getName();
+						return name.startsWith(key + ".") && name.lastIndexOf('.') == key.length();
+					})
+					.collect(Collectors.toList());
+		}
+		return null;
+	}
+
+	@NonNull
+	public static String getRenderingClassNameForAttr(@NonNull OsmandApplication app,
+			@NonNull String attrName) {
+		switch (attrName) {
+			case HIKING_ROUTES:
+				return ".route.hiking";
+			case CYCLE_ROUTES:
+				return ".route.bicycle";
+			case MTB_ROUTES:
+				return ".route.mtb";
+			case "showMtbScale":
+				return ".route.mtb.mtb_scale";
+			case "showMtbScaleIMBATrails":
+				return ".route.mtb.mtb_scale_imba";
+			case ALPINE_HIKING:
+				return ".road.alpinehiking";
+			case HORSE_ROUTES:
+				return ".route.horse";
+			case PISTE_ROUTES:
+				return ".route.piste";
+			case RUNNING_ROUTES:
+				return ".route.running";
+			case FITNESS_TRAILS:
+				return ".route.fitness_trail";
+			case DIRTBIKE_ROUTES:
+				return ".route.dirtbike";
+			default:
+				return attrName;
+		}
+	}
+
 	protected static String getDescription(@NonNull OsmandSettings settings,
-	                                       @NonNull List<CommonPreference<Boolean>> prefs) {
+			@NonNull List<CommonPreference<Boolean>> prefs) {
 		int count = 0;
 		int enabled = 0;
 

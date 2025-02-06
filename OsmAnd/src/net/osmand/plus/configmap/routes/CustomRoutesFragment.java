@@ -1,5 +1,7 @@
 package net.osmand.plus.configmap.routes;
 
+import static net.osmand.osm.OsmRouteType.MTB;
+
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.View;
@@ -36,12 +38,6 @@ public class CustomRoutesFragment extends MapRoutesFragment {
 		routeLayersHelper.toggleRoutesType(attrName);
 	}
 
-	@NonNull
-	@Override
-	protected @NotNull String getSelectedAttrName() {
-		return attrName;
-	}
-
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -72,9 +68,6 @@ public class CustomRoutesFragment extends MapRoutesFragment {
 	protected void createCards(@NonNull View view) {
 		super.createCards(view);
 
-		BaseCard card = createRenderingClassCard(getSelectedAttrName());
-		if (card != null) {
-			addCard(card);
-		}
+		addRenderingClassCard(attrName);
 	}
 }

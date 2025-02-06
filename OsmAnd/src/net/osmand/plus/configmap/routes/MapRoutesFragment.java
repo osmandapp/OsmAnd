@@ -59,9 +59,6 @@ public abstract class MapRoutesFragment extends BaseOsmAndFragment implements Ca
 
 	protected abstract void toggleMainPreference(@NonNull View view);
 
-	@NonNull
-	protected abstract String getSelectedAttrName();
-
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -108,9 +105,10 @@ public abstract class MapRoutesFragment extends BaseOsmAndFragment implements Ca
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.header_divider), !enabled);
 	}
 
-	protected void addCard(@NonNull BaseCard card) {
-		cards.add(card);
-		card.setListener(this);
+	protected void setupContent(@NonNull View view) {
+		createCards(view);
+		inflateCards(view);
+		AndroidUiHelper.updateVisibility(cardsContainer, isEnabled());
 	}
 
 	protected void createCards(@NonNull View view) {
@@ -134,27 +132,25 @@ public abstract class MapRoutesFragment extends BaseOsmAndFragment implements Ca
 		}
 	}
 
+	protected void addCard(@NonNull BaseCard card) {
+		cards.add(card);
+		card.setListener(this);
+	}
+
+	protected void addRenderingClassCard(@NonNull String attrName) {
+		BaseCard card = createRenderingClassCard(attrName);
+		if (card != null) {
+			addCard(card);
+		}
+	}
+
 	@Nullable
 	protected BaseCard createRenderingClassCard(@NonNull String attrName) {
-		Pair<RenderingClass, List<RenderingClass>> pair = ConfigureMapUtils.getRenderingClassesForKey(app, attrName);
+		Pair<RenderingClass, List<RenderingClass>> pair = ConfigureMapUtils.getRenderingClassWithChildren(app, attrName);
 		if (pair != null) {
-			addCard(new RenderingClassesCard(getMapActivity(), pair.first, pair.second));
+			return new RenderingClassesCard(getMapActivity(), pair.first, pair.second);
 		}
 		return null;
-	}
-
-	protected void setupContent(@NonNull View view) {
-		createCards(view);
-		inflateCards(view);
-		AndroidUiHelper.updateVisibility(cardsContainer, isEnabled());
-	}
-
-	protected void refreshMap() {
-		MapActivity mapActivity = (MapActivity) getMyActivity();
-		if (mapActivity != null) {
-			mapActivity.refreshMapComplete();
-			mapActivity.updateLayers();
-		}
 	}
 
 	@NonNull
@@ -173,6 +169,14 @@ public abstract class MapRoutesFragment extends BaseOsmAndFragment implements Ca
 		if (view != null) {
 			setupHeader(view);
 			setupContent(view);
+		}
+	}
+
+	protected void refreshMap() {
+		MapActivity mapActivity = (MapActivity) getMyActivity();
+		if (mapActivity != null) {
+			mapActivity.refreshMapComplete();
+			mapActivity.updateLayers();
 		}
 	}
 
@@ -199,7 +203,7 @@ public abstract class MapRoutesFragment extends BaseOsmAndFragment implements Ca
 				BICYCLE.getRenderingPropertyAttr(), MTB.getRenderingPropertyAttr(),
 				HIKING.getRenderingPropertyAttr(), ALPINE.getRenderingPropertyAttr());
 
-		Pair<RenderingClass, List<RenderingClass>> pair = ConfigureMapUtils.getRenderingClassesForKey(app, attrName);
+		Pair<RenderingClass, List<RenderingClass>> pair = ConfigureMapUtils.getRenderingClassWithChildren(app, attrName);
 		return defaultScreens || pair != null;
 	}
 

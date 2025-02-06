@@ -177,6 +177,34 @@ public class RenderingRulesStorage {
 				tagValueGlobalRules[i] = depends.tagValueGlobalRules[i];
 			}
 		}
+		for (Entry<String, RenderingClass> entry : depends.renderingClasses.entrySet()) {
+			String className = entry.getKey();
+			RenderingClass renderingClass = entry.getValue();
+
+			if (renderingClasses.containsKey(className)) {
+				RenderingClass existingClass = renderingClasses.get(className);
+				RenderingClass mergedClass = mergeRenderingClasses(existingClass, renderingClass);
+				renderingClasses.put(className, mergedClass);
+			} else {
+				renderingClasses.put(className, renderingClass);
+			}
+		}
+	}
+
+	private RenderingClass mergeRenderingClasses(RenderingClass existing, RenderingClass depends) {
+		return new RenderingClass(
+				existing.getTitle() != null ? existing.getTitle() : depends.getTitle(),
+				existing.getDescription() != null ? existing.getDescription() : depends.getDescription(),
+				existing.getCategory() != null ? existing.getCategory() : depends.getCategory(),
+				existing.getLegendObject() != null ? existing.getLegendObject() : depends.getLegendObject(),
+				existing.getInnerLegendObject() != null ? existing.getInnerLegendObject() : depends.getInnerLegendObject(),
+				existing.getInnerTitle() != null ? existing.getInnerTitle() : depends.getInnerTitle(),
+				existing.getInnerDescription() != null ? existing.getInnerDescription() : depends.getInnerDescription(),
+				existing.getInnerCategory() != null ? existing.getInnerCategory() : depends.getInnerCategory(),
+				existing.getInnerNames() != null ? existing.getInnerNames() : depends.getInnerNames(),
+				existing.isEnabledByDefault() || depends.isEnabledByDefault(),
+				existing.getName() != null ? existing.getName() : depends.getName()
+		);
 	}
 
 	public static String colorToString(int color) {
@@ -250,6 +278,7 @@ public class RenderingRulesStorage {
 		private final XmlPullParser parser;
 		private int state;
 		private Stack<RenderingRule> stack = new Stack<RenderingRule>();
+		private Stack<String> nodeNamesStack = new Stack<String>();
 		private final RenderingRulesStorageResolver resolver;
 		private final boolean addon;
 		private RenderingRulesStorage dependsStorage;
@@ -402,16 +431,90 @@ public class RenderingRulesStorage {
 			} else if ("renderer".equals(name)) { //$NON-NLS-1$
 				throw new XmlPullParserException("Rendering style is deprecated and no longer supported.");
 			} else if ("renderingClass".equals(name)) {
-				String title = attrsMap.get("title");
-				String className = attrsMap.get("name");
-				boolean enable = Boolean.parseBoolean(attrsMap.get("enable"));
-				renderingClasses.put(className, new RenderingClass(className, title, enable));
+				parseRenderingClass(attrsMap);
 			} else {
 				log.warn("Unknown tag : " + name); //$NON-NLS-1$
 			}
 
 			if (tagValueGlobalRules[state] == null) {
 				tagValueGlobalRules[state] = new TIntObjectHashMap<RenderingRule>();
+			}
+		}
+
+		private void parseRenderingClass(Map<String, String> attrsMap) {
+			StringBuilder path = new StringBuilder();
+			if (!nodeNamesStack.isEmpty()) {
+				for (String nodeName : nodeNamesStack) {
+					path.append(nodeName);
+				}
+			}
+
+			String name = attrsMap.get("name");
+			String title = attrsMap.get("title");
+			boolean enable = Boolean.parseBoolean(attrsMap.get("enable"));
+			String description = attrsMap.get("description");
+			String category = attrsMap.get("category");
+			String legendObject = attrsMap.get("legend-object");
+			String innerLegendObject = attrsMap.get("inner-legend-object");
+			String innerTitle = attrsMap.get("inner-title");
+			String innerDescription = attrsMap.get("inner-description");
+			String innerCategory = attrsMap.get("inner-category");
+			String innerNames = attrsMap.get("inner-names");
+
+			path.append(name);
+
+			RenderingClass renderingClass = new RenderingClass(title, description, category, legendObject,
+					innerLegendObject, innerTitle, innerDescription, innerCategory, innerNames, enable, path.toString());
+
+			nodeNamesStack.push(name);
+			renderingClasses.put(renderingClass.getName(), renderingClass);
+
+			parseInnerRenderingClasses(renderingClass);
+		}
+
+		private void parseInnerRenderingClasses(RenderingClass parentClass) {
+			String innerNames = parentClass.getInnerNames();
+			if (innerNames != null && !innerNames.isEmpty()) {
+				List<String> classNames = new ArrayList<>();
+				String nextPart = innerNames;
+				int splitPosition = 1;
+
+				while (splitPosition > 0) {
+					if (!nextPart.isEmpty() && !nextPart.startsWith(",")) {
+						splitPosition = nextPart.indexOf(',');
+						String symbolClassName = (splitPosition > 0) ? nextPart.substring(0, splitPosition) : nextPart;
+						if (!symbolClassName.isEmpty()) {
+							classNames.add(symbolClassName);
+						}
+					} else {
+						log.error(String.format("'%s' contains an empty name for inner class definition", innerNames));
+						break;
+					}
+					if (splitPosition > 0) {
+						nextPart = nextPart.substring(splitPosition + 1);
+					}
+				}
+
+				String temp = "$class";
+				String path = parentClass.getName();
+				boolean enabled = parentClass.isEnabledByDefault();
+				String innerLegendObject = parentClass.getInnerLegendObject();
+				String innerTitle = parentClass.getInnerTitle();
+				String innerDescription = parentClass.getInnerDescription();
+				String innerCategory = parentClass.getInnerCategory();
+
+				for (String className : classNames) {
+					String classTitle = innerTitle != null ? innerTitle.replace(temp, className) : null;
+					String classDescription = innerDescription != null ? innerDescription.replace(temp, className) : null;
+					String classCategory = innerCategory != null ? innerCategory.replace(temp, className) : null;
+					String classLegendObject = innerLegendObject != null ? innerLegendObject.replace(temp, className) : null;
+
+					RenderingClass newClass = new RenderingClass(classTitle, classDescription,
+							classCategory, classLegendObject, "", "",
+							"", "", "", enabled,
+							path.toString() + "." + className);
+					renderingClasses.put(newClass.getName(), newClass);
+				}
 			}
 		}
 
@@ -456,6 +559,8 @@ public class RenderingRulesStorage {
 				stack.pop();
 			} else if ("renderingAttribute".equals(name)) {
 				stack.pop();
+			} else if ("renderingClass".equals(name)) {
+				nodeNamesStack.pop();
 			}
 		}
 	}
@@ -539,6 +644,10 @@ public class RenderingRulesStorage {
 
 	public RenderingRule[] getRenderingAttributeValues() {
 		return renderingAttributes.values().toArray(new RenderingRule[0]);
+	}
+
+	public RenderingClass getRenderingClass(String name) {
+		return renderingClasses.get(name);
 	}
 
 	public Map<String, RenderingClass> getRenderingClasses() {

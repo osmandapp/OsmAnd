@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.AndroidUtils;
 
 public class MtbRoutesFragment extends MapRoutesFragment {
@@ -25,13 +24,6 @@ public class MtbRoutesFragment extends MapRoutesFragment {
 	@Override
 	protected void toggleMainPreference(@NonNull View view) {
 		routeLayersHelper.toggleMtbRoutes();
-	}
-
-	@NonNull
-	@Override
-	protected String getSelectedAttrName() {
-		MtbClassification classification = routeLayersHelper.getSelectedMtbClassification();
-		return classification != null ? classification.attrName : MTB.getRenderingPropertyAttr();
 	}
 
 	protected void setupHeader(@NonNull View view) {
@@ -54,11 +46,8 @@ public class MtbRoutesFragment extends MapRoutesFragment {
 	@Override
 	protected void createCards(@NonNull View view) {
 		super.createCards(view);
-		addCard(new MtbRoutesCard(getMapActivity()));
 
-		BaseCard card = createRenderingClassCard(getSelectedAttrName());
-		if (card != null) {
-			addCard(card);
-		}
+		addCard(new MtbRoutesCard(getMapActivity()));
+		addRenderingClassCard(MTB.getRenderingPropertyAttr());
 	}
 }

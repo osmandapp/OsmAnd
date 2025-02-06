@@ -7,22 +7,10 @@
 	android:background="?attr/list_background_color"
 	android:orientation="vertical">
 
-	<net.osmand.plus.widgets.TextViewEx
-		android:id="@+id/header"
-		style="@style/TitleStyle.Medium"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginHorizontal="@dimen/content_padding"
-		android:layout_marginVertical="@dimen/content_padding_small"
-		android:textColor="?android:textColorPrimary"
-		tools:text="@string/mtb_scale" />
-
 	<LinearLayout
 		android:id="@+id/container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:orientation="vertical">
-
-	</LinearLayout>
+		android:orientation="vertical" />
 
 </LinearLayout>

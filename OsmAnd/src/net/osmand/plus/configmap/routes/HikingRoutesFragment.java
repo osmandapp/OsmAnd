@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.AndroidUtils;
 
 public class HikingRoutesFragment extends MapRoutesFragment {
@@ -26,12 +25,6 @@ public class HikingRoutesFragment extends MapRoutesFragment {
 	@Override
 	protected void toggleMainPreference(@NonNull View view) {
 		routeLayersHelper.toggleHikingRoutes();
-	}
-
-	@NonNull
-	@Override
-	protected String getSelectedAttrName() {
-		return HIKING.getRenderingPropertyAttr();
 	}
 
 	protected void setupHeader(@NonNull View view) {
@@ -55,11 +48,8 @@ public class HikingRoutesFragment extends MapRoutesFragment {
 	@Override
 	protected void createCards(@NonNull View view) {
 		super.createCards(view);
-		addCard(new HikingRoutesCard(getMapActivity()));
 
-		BaseCard card = createRenderingClassCard(getSelectedAttrName());
-		if (card != null) {
-			addCard(card);
-		}
+		addCard(new HikingRoutesCard(getMapActivity()));
+		addRenderingClassCard(HIKING.getRenderingPropertyAttr());
 	}
 }

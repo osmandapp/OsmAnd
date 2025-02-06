@@ -1,6 +1,6 @@
 package net.osmand.osm;
 
-import static net.osmand.osm.OsmRouteType.RenderingPropertyAttr.*;
+import static net.osmand.osm.RenderingPropertyAttr.*;
 
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -447,19 +447,5 @@ public class OsmRouteType {
 			values.add(osmRouteType);
 			return osmRouteType;
 		}
-	}
-
-	protected static class RenderingPropertyAttr {
-		static final String HIKING_ROUTES = "hikingRoutesOSMC";
-		static final String CYCLE_ROUTES = "showCycleRoutes";
-		static final String MTB_ROUTES = "showMtbRoutes";
-		static final String ALPINE_HIKING = "alpineHiking";
-		static final String HORSE_ROUTES = "horseRoutes";
-		static final String PISTE_ROUTES = "pisteRoutes";
-		static final String WHITE_WATER_SPORTS = "whiteWaterSports";
-		static final String RUNNING_ROUTES = "showRunningRoutes";
-		static final String FITNESS_TRAILS = "showFitnessTrails";
-		static final String DIRTBIKE_ROUTES = "showDirtbikeTrails";
-		static final String CLIMBING_ROUTES = "showClimbingRoutes";
 	}
 }

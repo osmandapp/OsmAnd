@@ -9,11 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-
-import org.jetbrains.annotations.NotNull;
 
 public class CycleRoutesFragment extends MapRoutesFragment {
 
@@ -27,12 +24,6 @@ public class CycleRoutesFragment extends MapRoutesFragment {
 	@Override
 	protected void toggleMainPreference(@NonNull View view) {
 		routeLayersHelper.toggleCycleRoutes();
-	}
-
-	@NonNull
-	@Override
-	protected String getSelectedAttrName() {
-		return BICYCLE.getRenderingPropertyAttr();
 	}
 
 	protected void setupHeader(@NonNull View view) {
@@ -57,11 +48,8 @@ public class CycleRoutesFragment extends MapRoutesFragment {
 	@Override
 	protected void createCards(@NonNull View view) {
 		super.createCards(view);
-		addCard(new CycleRouteTypesCard(getMapActivity()));
 
-		BaseCard card = createRenderingClassCard(getSelectedAttrName());
-		if (card != null) {
-			addCard(card);
-		}
+		addCard(new CycleRouteTypesCard(getMapActivity()));
+		addRenderingClassCard(BICYCLE.getRenderingPropertyAttr());
 	}
 }

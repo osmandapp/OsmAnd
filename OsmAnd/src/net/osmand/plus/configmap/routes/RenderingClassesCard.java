@@ -1,31 +1,40 @@
 package net.osmand.plus.configmap.routes;
 
-import android.graphics.drawable.Drawable;
+import static net.osmand.plus.dashboard.DashboardType.RENDERING_CLASS;
+import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
+
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.ctxmenu.ViewCreator;
+import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingClass;
+import net.osmand.util.Algorithms;
 
 import java.util.List;
 
 public class RenderingClassesCard extends MapBaseCard {
 
-	private final RenderingClass mainClass;
-	private final List<RenderingClass> list;
+	private final RouteLayersHelper routeLayersHelper;
+	private final RenderingClass renderingClass;
+	private final List<RenderingClass> subclasses;
 
+	private ViewCreator viewCreator;
 	private ViewGroup container;
 
 	@Override
@@ -33,59 +42,88 @@ public class RenderingClassesCard extends MapBaseCard {
 		return R.layout.rendering_classes_card;
 	}
 
-	public RenderingClassesCard(@NonNull MapActivity activity, @NonNull RenderingClass mainClass,
-			@NonNull List<RenderingClass> list) {
+	public RenderingClassesCard(@NonNull MapActivity activity,
+			@Nullable RenderingClass renderingClass,
+			@Nullable List<RenderingClass> subclasses) {
 		super(activity, true);
-		this.mainClass = mainClass;
-		this.list = list;
+		this.renderingClass = renderingClass;
+		this.subclasses = subclasses;
+
+		routeLayersHelper = app.getRouteLayersHelper();
+
+		viewCreator = new ViewCreator(activity, nightMode);
+		viewCreator.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
+		viewCreator.setCustomControlsColor(settings.getApplicationMode().getProfileColor(nightMode));
 	}
 
 	@Override
 	protected void updateContent() {
-		setupHeader();
-		setupRenderingClasses();
-	}
-
-	private void setupHeader() {
-		TextView header = view.findViewById(R.id.header);
-		header.setText(mainClass.getTitle());
-	}
-
-	private void setupRenderingClasses() {
 		container = view.findViewById(R.id.container);
 		container.removeAllViews();
 
-		for (int i = 0; i < list.size(); i++) {
-			RenderingClass renderingClass = list.get(i);
-			container.addView(createRadioButton(renderingClass, i == list.size() - 1));
+		if (renderingClass != null) {
+			container.addView(createHeaderRow(renderingClass));
+		}
+
+		if (!Algorithms.isEmpty(subclasses)) {
+			container.addView(themedInflater.inflate(R.layout.simple_divider_item, container, false));
+
+			for (int i = 0; i < subclasses.size(); i++) {
+				RenderingClass renderingClass = subclasses.get(i);
+				boolean lastItem = i == subclasses.size() - 1;
+				List<RenderingClass> children = ConfigureMapUtils.getChildrenRenderingClasses(app, renderingClass);
+				container.addView(createItemRow(renderingClass, !Algorithms.isEmpty(children), !lastItem));
+			}
 		}
 	}
 
 	@NonNull
-	private View createRadioButton(@NonNull RenderingClass renderingClass, boolean lastItem) {
-		CommonPreference<Boolean> pref = settings.getСustomBooleanRenderClassProperty(renderingClass.getName(), renderingClass.isEnabledByDefault());
-		View view = themedInflater.inflate(R.layout.bottom_sheet_item_with_switch_56dp, container, false);
-
-		ImageView icon = view.findViewById(R.id.icon);
-		AndroidUiHelper.updateVisibility(icon, false);
+	private View createHeaderRow(@NonNull RenderingClass renderingClass) {
+		View view = createItemRow(renderingClass, false, false);
 
 		TextView title = view.findViewById(R.id.title);
-		title.setText(renderingClass.getTitle());
+		title.setTypeface(FontCache.getMediumFont(title.getTypeface()));
 
-		CompoundButton button = view.findViewById(R.id.compound_button);
-		UiUtilities.setupCompoundButton(nightMode, ColorUtilities.getActiveColor(app, nightMode), button);
-		button.setChecked(pref.get());
+		return view;
+	}
 
-		view.setOnClickListener(v -> {
-			boolean checked = !pref.get();
-			pref.set(checked);
-			button.setChecked(checked);
-			notifyCardPressed();
+	@NonNull
+	private View createItemRow(@NonNull RenderingClass renderingClass, boolean showSubscreen, boolean showDivider) {
+		CommonPreference<Boolean> pref = settings.getСustomBooleanRenderClassProperty(
+				renderingClass.getName(), renderingClass.isEnabledByDefault());
+		boolean enabled = pref.get();
+
+		ContextMenuItem item = new ContextMenuItem(renderingClass.getName())
+				.setSelected(enabled)
+				.setHideDivider(!showDivider)
+				.setTitle(renderingClass.getTitle())
+				.setColor(enabled ? settings.getApplicationMode().getProfileColor(nightMode) : null)
+				.setSecondaryIcon(showSubscreen ? R.drawable.ic_action_additional_option : INVALID_ID);
+
+		View view = viewCreator.getView(item, null);
+
+		CompoundButton compoundButton = view.findViewById(R.id.toggle_item);
+		compoundButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				pref.set(isChecked);
+				notifyCardPressed();
+			}
 		});
-
+		view.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (showSubscreen) {
+					routeLayersHelper.setSelectedRenderingClass(renderingClass);
+					mapActivity.getDashboard().setDashboardVisibility(true,
+							RENDERING_CLASS, AndroidUtils.getCenterViewCoordinates(view));
+				} else {
+					compoundButton.toggle();
+				}
+			}
+		});
 		int profileColor = settings.getApplicationMode().getProfileColor(nightMode);
-		Drawable background = UiUtilities.getColoredSelectableDrawable(app, profileColor, 0.3f);
-		AndroidUtils.setBackground(view, background);
+		AndroidUtils.setBackground(view, UiUtilities.getColoredSelectableDrawable(app, profileColor, 0.3f));
 
 		return view;
 	}

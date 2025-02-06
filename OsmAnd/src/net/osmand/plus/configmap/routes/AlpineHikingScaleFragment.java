@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.AndroidUtils;
 
 public class AlpineHikingScaleFragment extends MapRoutesFragment {
@@ -27,12 +26,6 @@ public class AlpineHikingScaleFragment extends MapRoutesFragment {
 		routeLayersHelper.toggleAlpineHikingRoutes();
 	}
 
-	@NonNull
-	@Override
-	protected String getSelectedAttrName() {
-		return ALPINE.getRenderingPropertyAttr();
-	}
-
 	protected void setupHeader(@NonNull View view) {
 		super.setupHeader(view);
 
@@ -43,14 +36,14 @@ public class AlpineHikingScaleFragment extends MapRoutesFragment {
 		title.setText(R.string.rendering_attr_alpineHiking_name);
 
 		TextView description = container.findViewById(R.id.description);
-		description.setText(routeLayersHelper.getRoutesTypeDescription(getSelectedAttrName()));
+		description.setText(routeLayersHelper.getRoutesTypeDescription(ALPINE.getRenderingPropertyAttr()));
 		AndroidUiHelper.updateVisibility(description, enabled);
 
 		int selectedColor = settings.getApplicationMode().getProfileColor(nightMode);
 		int disabledColor = AndroidUtils.getColorFromAttr(app, R.attr.default_icon_color);
 		ImageView icon = container.findViewById(R.id.icon);
-		icon.setImageDrawable(getPaintedContentIcon(RouteUtils.getIconIdForAttr(getSelectedAttrName()),
-				enabled ? selectedColor : disabledColor));
+		icon.setImageDrawable(getPaintedContentIcon(RouteUtils.getIconIdForAttr(
+				ALPINE.getRenderingPropertyAttr()), enabled ? selectedColor : disabledColor));
 	}
 
 	@Override
@@ -58,10 +51,6 @@ public class AlpineHikingScaleFragment extends MapRoutesFragment {
 		super.createCards(view);
 
 		addCard(new AlpineHikingCard(getMapActivity()));
-
-		BaseCard card = createRenderingClassCard(getSelectedAttrName());
-		if (card != null) {
-			addCard(card);
-		}
+		addRenderingClassCard(ALPINE.getRenderingPropertyAttr());
 	}
 }

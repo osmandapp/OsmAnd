@@ -18,4 +18,5 @@ public enum DashboardType {
 	WEATHER_CONTOURS,
 	NAUTICAL_DEPTH,
 	MAP_ROUTES,
+	RENDERING_CLASS
 }
