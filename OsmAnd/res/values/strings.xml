@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="no_places_available">No places available</string>
+    <string name="no_photo_for_location_desc">No user photos have been added to this location yet</string>
     <string name="popular_places_nearby">Popular places nearby</string>
     <string name="recently_visited">Recently visited</string>
 

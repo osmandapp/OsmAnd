@@ -36,6 +36,11 @@ public class NearbyPlacesCard extends FrameLayout implements NearbyPlacesListene
 	private OsmandApplication app;
 	private NearbyPlacesAdapter.NearbyItemClickListener clickListener;
 	private MapActivity mapActivity;
+	private View noInternetCard;
+	private View emptyView;
+	private View cardContent;
+	private boolean isLoadingItems;
+
 
 	public NearbyPlacesCard(@NonNull MapActivity mapActivity, @NonNull NearbyPlacesAdapter.NearbyItemClickListener clickListener) {
 		super(mapActivity);
@@ -52,6 +57,15 @@ public class NearbyPlacesCard extends FrameLayout implements NearbyPlacesListene
 		explicitIndicator = findViewById(R.id.explicit_indicator);
 		titleContainer = findViewById(R.id.nearby_title_container);
 		showAllBtnContainer = findViewById(R.id.show_all_button);
+		noInternetCard = findViewById(R.id.no_internet);
+		emptyView = findViewById(R.id.empty_nearby_places);
+		cardContent = findViewById(R.id.card_content);
+		noInternetCard.findViewById(R.id.try_again_button).setOnClickListener((v) -> {
+			if(app.getSettings().isInternetConnectionAvailable(true)) {
+				startLoadingNearbyPlaces();
+				updateExpandState();
+			}
+		});
 
 		setupRecyclerView();
 		setupShowAllNearbyPlacesBtn();
@@ -81,11 +95,15 @@ public class NearbyPlacesCard extends FrameLayout implements NearbyPlacesListene
 	private void updateExpandState() {
 		int iconRes = collapsed ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up;
 		explicitIndicator.setImageDrawable(app.getUIUtilities().getIcon(iconRes, !app.getSettings().isLightContent()));
-		AndroidUiHelper.updateVisibility(nearByList, !collapsed);
-		AndroidUiHelper.updateVisibility(showAllBtnContainer, !collapsed && getNearbyAdapter().getItemCount() > 0);
+		boolean internetAvailable = app.getSettings().isInternetConnectionAvailable();
+		boolean nearbyPointFound = getNearbyAdapter().getItemCount() > 0;
+		AndroidUiHelper.updateVisibility(cardContent, !collapsed && nearbyPointFound && internetAvailable);
+		AndroidUiHelper.updateVisibility(noInternetCard, !collapsed && !internetAvailable);
+		AndroidUiHelper.updateVisibility(emptyView, !collapsed && internetAvailable && !nearbyPointFound && !isLoadingItems);
 	}
 
 	public void updateNearbyItems() {
+		isLoadingItems = false;
 		AndroidUiHelper.updateVisibility(progressBar, false);
 		adapter.setItems(NearbyPlacesHelper.INSTANCE.getDataCollection());
 		adapter.notifyDataSetChanged();
@@ -114,12 +132,17 @@ public class NearbyPlacesCard extends FrameLayout implements NearbyPlacesListene
 	}
 
 	private void onNearbyPlacesCollapseChanged() {
-		updateExpandState();
-		if (!collapsed) {
-			AndroidUiHelper.updateVisibility(progressBar, true);
-			NearbyPlacesHelper.INSTANCE.startLoadingNearestPhotos();
+		if (!collapsed &&  app.getSettings().isInternetConnectionAvailable()) {
+			startLoadingNearbyPlaces();
 		}
+		updateExpandState();
 		app.getSettings().EXPLORE_NEARBY_ITEMS_ROW_COLLAPSED.set(collapsed);
+	}
+
+	private void startLoadingNearbyPlaces() {
+		isLoadingItems = true;
+		AndroidUiHelper.updateVisibility(progressBar, true);
+		NearbyPlacesHelper.INSTANCE.startLoadingNearestPhotos();
 	}
 
 	private void setupExpandNearbyPlacesIndicator() {
