@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.fragments.search;
 
-import static net.osmand.plus.settings.fragments.search.ActivitySearchDatabaseConfigsFactory.createActivitySearchDatabaseConfigs;
-
 import android.view.View;
 import android.widget.ImageView;
 
@@ -11,10 +9,13 @@ import androidx.preference.Preference;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Supplier;
 
 import de.KnollFrank.lib.settingssearch.client.SearchConfigBuilder;
@@ -89,6 +90,12 @@ public class SettingsSearchButtonHelper {
 								.build())
 				.withCreateSearchDatabaseTaskSupplier(createSearchDatabaseTaskSupplier)
 				.build();
+	}
+
+	private static ActivitySearchDatabaseConfigs createActivitySearchDatabaseConfigs() {
+		return new ActivitySearchDatabaseConfigs(
+				Set.of(new ActivityWithRootPreferenceFragment<>(MapActivity.class, ConfigureMapFragment.PreferenceFragment.class)),
+				Set.of(new FragmentWithPreferenceFragmentConnection<>(ConfigureMapFragment.class, ConfigureMapFragment.PreferenceFragment.class)));
 	}
 
 	private static Optional<String> getSearchableInfo(final Preference preference) {
