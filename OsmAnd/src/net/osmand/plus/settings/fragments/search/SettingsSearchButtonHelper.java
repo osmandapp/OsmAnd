@@ -14,6 +14,7 @@ import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Supplier;
@@ -94,7 +95,7 @@ public class SettingsSearchButtonHelper {
 
 	private static ActivitySearchDatabaseConfigs createActivitySearchDatabaseConfigs() {
 		return new ActivitySearchDatabaseConfigs(
-				Set.of(new ActivityWithRootPreferenceFragment<>(MapActivity.class, ConfigureMapFragment.PreferenceFragment.class)),
+				Map.of(MapActivity.class, ConfigureMapFragment.PreferenceFragment.class),
 				Set.of(new FragmentWithPreferenceFragmentConnection<>(ConfigureMapFragment.class, ConfigureMapFragment.PreferenceFragment.class)));
 	}
 
