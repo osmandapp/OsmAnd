@@ -1,5 +1,6 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.data.BackgroundType.SQUARE;
 import static net.osmand.osm.MapPoiTypes.ROUTES;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
@@ -76,7 +77,7 @@ import java.util.TreeSet;
 
 public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		MapTextProvider<Amenity>, IRouteInformationListener, OnFileVisibilityChangeListener {
-	private static final int START_ZOOM = 9;
+	private static final int START_ZOOM = 16;
 	private static final int START_ZOOM_ROUTE_TRACK = 11;
 	private static final int END_ZOOM_ROUTE_TRACK = 13;
 
@@ -423,9 +424,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 						float y = tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 
 						if (tileBox.containsPoint(x, y, iconSize)) {
-							boolean intersects = intersects(boundIntersections, x, y, iconSize, iconSize);
-							boolean shouldShowNearbyPoi = app.getSettings().SHOW_NEARBY_POI.get()
-									&& routingHelper.isFollowingMode();
+							boolean intersects = false;
+							boolean shouldShowNearbyPoi = false;
 							if (intersects || shouldShowNearbyPoi && !wph.isAmenityNoPassed(o)) {
 								pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
 								smallObjectsLatLon.add(latLon);
@@ -442,11 +442,38 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 					int y = (int) tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 					if (tileBox.containsPoint(x, y, iconSize)) {
 						String id = o.getGpxIcon();
-						if (id == null) {
-							id = RenderingIcons.getIconNameForAmenity(o);
-						}
-						if (id != null) {
-							PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(
+						if (id != null ) {
+							PointImageDrawable pointImageDrawable;
+							String category = o.getAdditionalInfo("ref");
+							if(o.getSubType().equals("fire_hydrant")) {
+								if (category != null && category.endsWith("PI 100 mm"))
+									pointImageDrawable = PointImageUtils.getOrCreate(
+											getContext(), 0,false, true, R.drawable.pi_100_mm,SQUARE);
+								else if (category != null && category.endsWith("PI 150 mm"))
+									pointImageDrawable = PointImageUtils.getOrCreate(
+											getContext(), 0,false, true, R.drawable.pi_150_mm,SQUARE);
+								else if (category != null && category.endsWith("PI 80 mm"))
+									pointImageDrawable = PointImageUtils.getOrCreate(
+											getContext(), 0,false, true, R.drawable.pi_80_mm,SQUARE);
+								else if (category != null && category.endsWith("BI 100 mm"))
+									pointImageDrawable = PointImageUtils.getOrCreate(
+											getContext(), 0,false, true, R.drawable.bi,SQUARE);
+								else if (category != null && category.contains("eau de mer"))
+									pointImageDrawable = PointImageUtils.getOrCreate(
+											getContext(), 0,false, true, R.drawable.bouche_eau_de_mer,SQUARE);
+
+								else
+									pointImageDrawable = PointImageUtils.getOrCreate(
+											getContext(), getColor(o), true, R.drawable.btn_circle_transparent);
+							} else if(o.getSubType().equals("works"))
+								pointImageDrawable = PointImageUtils.getOrCreate(
+										getContext(), 0,false, true, R.drawable.per,SQUARE);
+							else if(o.getSubType().equals("fire_water_pond"))
+								pointImageDrawable = PointImageUtils.getOrCreate(
+										getContext(), 0,false, true, R.drawable.pena,SQUARE);
+
+							else
+								pointImageDrawable = PointImageUtils.getOrCreate(
 									getContext(), getColor(o), true, RenderingIcons.getResId(id));
 							pointImageDrawable.setAlpha(0.8f);
 							pointImageDrawable.drawPoint(canvas, x, y, textScale, false);

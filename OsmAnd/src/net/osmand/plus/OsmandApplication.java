@@ -8,13 +8,17 @@ import static net.osmand.shared.settings.enums.MetricsConstants.MILES_AND_METERS
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
@@ -296,6 +300,9 @@ public class OsmandApplication extends MultiDexApplication {
 
 		SearchUICore.setDebugMode(PluginsHelper.isDevelopment());
 		BackupHelper.DEBUG = true;//PluginsHelper.isDevelopment();
+
+		retrievePerPdf();
+
 	}
 
 	public boolean isPlusVersionInApp() {
@@ -1136,6 +1143,64 @@ public class OsmandApplication extends MultiDexApplication {
 			analyticsHelper.addEvent("map_download_" + event + ": " + item.getFileName() + " in " + time + " msec", AnalyticsHelper.EVENT_TYPE_MAP_DOWNLOAD);
 		} catch (Exception e) {
 			LOG.error(e);
+		}
+	}
+
+	private void getMyFiles(File dir) {
+		SharedPreferences perPref= getSharedPreferences("SDIS_per_pdf_path", Context.MODE_PRIVATE);		//Creation de l'annuaire
+		SharedPreferences.Editor editor = perPref.edit();
+
+		File[] files = dir.listFiles();
+
+		if (files!=null){
+			for (File file : files) {
+				if (file.isDirectory()) {
+					getMyFiles(file);
+				} else {
+					try {
+						if(file.getName().indexOf("_",2) !=-1) {
+							System.out.println("file izi : " + file.getName());
+							String pdfName = file.getName().substring(0, file.getName().indexOf("_", file.getName().indexOf("_")+1));
+							pdfName = pdfName.replace("_", " ");
+							//if(pdfName.charAt(pdfName.length() - 1) == ('F')){				//On retire le F de certain per
+							//	pdfName=pdfName.substring(0, pdfName.length() - 1);
+							//}
+							editor.putString(pdfName.toUpperCase(), file.getAbsolutePath());	//On renseigne le code du batiment avec le chemin d'acces de son pdf
+							editor.apply();
+						}
+					} catch ( Exception e ) {
+						System.err.println(e);
+					}
+				}
+			}
+		}
+	}
+
+	public void retrievePerPdf(){						//Recuperation de tous les PDF de la carte SD situé dans le dossier Ressources operationnelles
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {		//Si c'est une version d'android recente on s'assure d'avoir les droits d'écriture
+			if (!Environment.isExternalStorageManager()) {
+				try {													//Obtention des droits
+					Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
+					Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri);
+					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+					startActivity(intent);
+					android.os.Process.killProcess(android.os.Process.myPid());
+
+				} catch (Exception ex){
+					android.os.Process.killProcess(android.os.Process.myPid());
+				}
+			}
+		}
+
+		File[] externalDirs = getExternalFilesDirs(null);
+		String sdCardPath = null;
+		if (externalDirs.length > 1) {							//Recuperation du chemin d'acces du stockage externe
+			sdCardPath = externalDirs[1].getAbsolutePath();
+			String fileName = sdCardPath.substring(0,sdCardPath.lastIndexOf("/Android"));
+			File rootDir = new File(fileName + "/Ressources operationnelles/Documents ER");
+			getMyFiles(rootDir);
 		}
 	}
 

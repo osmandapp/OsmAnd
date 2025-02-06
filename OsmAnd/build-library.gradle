@@ -55,6 +55,7 @@ android {
 			osmandTask.dependsOn(copy3DModels)
 			osmandTask.dependsOn(collectVoiceAssets)
 			osmandTask.dependsOn(downloadWorldMiniBasemap)
+			osmandTask.dependsOn(gironde)
 		}
 		def mapSourceSetPathsName= "map${taskName}SourceSetPaths"
 		tasks.named(mapSourceSetPathsName).configure { osmandTask ->

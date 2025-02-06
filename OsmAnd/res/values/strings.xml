@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="shared_string_navigation_firehouse">Naviguer vers caserne</string>
+    <string name="shared_string_navigation_hospital">Naviguer vers urgence</string>
+    <string name="shared_string_measure_distance">Mesurer une distance</string>
     <string name="ais_load_data">Load AIS data from file</string>
     <string name="ais_address_settings">IP address settings</string>
     <string name="ais_address_settings_description">Choose NMEA protocol (UDP/TCP) and define addresses</string>
