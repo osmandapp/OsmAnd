@@ -5714,4 +5714,9 @@
     <string name="plugin_ais_tracker_description">Visualizza le posizioni AIS e le informazioni sulle imbarcazioni circostanti. I dati AIS vengono ricevuti tramite rete da un ricevitore AIS esterno.</string>
     <string name="plugin_ais_tracker_disclaimer">ESCLUSIONE DI RESPONSABILITÀ\n\nQuesto plugin è un progetto amatoriale e non è progettato per essere affidabile e corretto. NON fare affidamento su questo software in alcun modo, ne per la navigazione ne/o per la sicurezza della vita.</string>
     <string name="ais_cpa_warning_time_description">Se il tempo impiegato per raggiungere il PAV con un\'altra imbarcazione è inferiore a questo valore, l\'imbarcazione viene contrassegnata in rosso.</string>
+    <string name="show_grids_description">Permette di mostrare una griglia sulla mappa</string>
+    <string name="show_utm_grids">Usa UTM invece di WGS84</string>
+    <string name="show_utm_grids_description">Mostra la griglia in metri UTM invece che in gradi WGS84</string>
+    <string name="map_grid">Griglie di mappa</string>
+    <string name="show_grids">Mostra griglia mappa</string>
 </resources>
