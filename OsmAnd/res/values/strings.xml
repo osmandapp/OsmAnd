@@ -12,8 +12,6 @@
 -->
 	<string name="popular_places_nearby">Popular places nearby</string>
 	<string name="recently_visited">Recently visited</string>
-	<string name="popular_places_nearby">Popular places nearby</string>
-	<string name="recently_visited">Recently visited</string>
     <string name="ais_load_data">Load AIS data from file</string>
     <string name="ais_address_settings">IP address settings</string>
     <string name="ais_address_settings_description">Choose NMEA protocol (UDP/TCP) and define addresses</string>
