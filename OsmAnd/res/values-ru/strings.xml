@@ -4690,7 +4690,7 @@
     <string name="attach_roads_warning">К дорогам можно привязать только записанный трек.</string>
     <string name="without_profiles_changing">Без смены профиля</string>
     <string name="connect_with_straight_line">Соединить прямой линией</string>
-    <string name="attach_roads_descr">«Автопритягивание» трека к подходящим дорогам для маршрутизации и совпадения навигационных указаний с дорогой.</string>
+    <string name="attach_roads_descr">«Автопритягивание» трека к подходящим дорогам для маршрутизации и совпадения навигационных указаний с дорогой.</string>
     <string name="included_in_your_current_plan">Включено в ваш текущий план «%1$s»</string>
     <string name="available_as_part_of_subscription_plan">Доступно в рамках подписки %1$s.</string>
     <string name="favorite_confirm_delete_group">Удалить группу «%1$s» и все включённые в неё точки (%2$d)?</string>
