@@ -130,7 +130,8 @@ public class ConfigureMapUtils {
 			@NonNull OsmandApplication app, @NonNull String attrName) {
 		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 		if (renderer != null) {
-			String key = RenderingPropertyAttr.getRenderingClassNameForAttr(attrName);
+			RenderingPropertyAttr attr = RenderingPropertyAttr.fromAttrName(attrName);
+			String key = RenderingPropertyAttr.getRenderingClassName(attrName);
 			RenderingClass renderingClass = renderer.getRenderingClass(key);
 			if (renderingClass != null) {
 				List<RenderingClass> children = getChildrenRenderingClasses(app, renderingClass);

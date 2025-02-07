@@ -443,8 +443,13 @@ public class OsmRouteType {
 			return this;
 		}
 
-		public RouteActivityTypeBuilder renderingPropertyAttr(String renderingPropertyAttr) {
-			osmRouteType.renderingPropertyAttr = renderingPropertyAttr;
+		public RouteActivityTypeBuilder renderingPropertyAttr(String propertyAttr) {
+			osmRouteType.renderingPropertyAttr = propertyAttr;
+			return this;
+		}
+
+		public RouteActivityTypeBuilder renderingPropertyAttr(RenderingPropertyAttr propertyAttr) {
+			renderingPropertyAttr(propertyAttr.getAttrName());
 			return this;
 		}
 
