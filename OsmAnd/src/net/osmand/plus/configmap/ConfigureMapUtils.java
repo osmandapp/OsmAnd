@@ -1,6 +1,5 @@
 package net.osmand.plus.configmap;
 
-import static net.osmand.osm.RenderingPropertyAttr.*;
 import static net.osmand.plus.dialogs.DetailsBottomSheet.STREET_LIGHTING;
 import static net.osmand.plus.dialogs.DetailsBottomSheet.STREET_LIGHTING_NIGHT;
 import static net.osmand.plus.settings.backend.OsmandSettings.RENDERER_PREFERENCE_PREFIX;
@@ -11,6 +10,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.osm.RenderingPropertyAttr;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -128,7 +128,7 @@ public class ConfigureMapUtils {
 			@NonNull OsmandApplication app, @NonNull String attrName) {
 		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 		if (renderer != null) {
-			String key = getRenderingClassNameForAttr(app, attrName);
+			String key = RenderingPropertyAttr.getRenderingClassNameForAttr(attrName);
 			RenderingClass renderingClass = renderer.getRenderingClass(key);
 			if (renderingClass != null) {
 				List<RenderingClass> children = getChildrenRenderingClasses(app, renderingClass);
@@ -152,37 +152,6 @@ public class ConfigureMapUtils {
 					.collect(Collectors.toList());
 		}
 		return null;
-	}
-
-	@NonNull
-	public static String getRenderingClassNameForAttr(@NonNull OsmandApplication app,
-			@NonNull String attrName) {
-		switch (attrName) {
-			case HIKING_ROUTES:
-				return ".route.hiking";
-			case CYCLE_ROUTES:
-				return ".route.bicycle";
-			case MTB_ROUTES:
-				return ".route.mtb";
-			case "showMtbScale":
-				return ".route.mtb.mtb_scale";
-			case "showMtbScaleIMBATrails":
-				return ".route.mtb.mtb_scale_imba";
-			case ALPINE_HIKING:
-				return ".road.alpinehiking";
-			case HORSE_ROUTES:
-				return ".route.horse";
-			case PISTE_ROUTES:
-				return ".route.piste";
-			case RUNNING_ROUTES:
-				return ".route.running";
-			case FITNESS_TRAILS:
-				return ".route.fitness_trail";
-			case DIRTBIKE_ROUTES:
-				return ".route.dirtbike";
-			default:
-				return attrName;
-		}
 	}
 
 	protected static String getDescription(@NonNull OsmandSettings settings,
