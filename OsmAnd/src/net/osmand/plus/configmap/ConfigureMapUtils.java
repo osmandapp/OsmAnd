@@ -4,10 +4,13 @@ import static net.osmand.plus.dialogs.DetailsBottomSheet.STREET_LIGHTING;
 import static net.osmand.plus.dialogs.DetailsBottomSheet.STREET_LIGHTING_NIGHT;
 import static net.osmand.plus.settings.backend.OsmandSettings.RENDERER_PREFERENCE_PREFIX;
 
+import android.util.Pair;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.osm.RenderingPropertyAttr;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -15,6 +18,7 @@ import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.render.RenderingClass;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -25,6 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 public class ConfigureMapUtils {
 
@@ -51,7 +56,8 @@ public class ConfigureMapUtils {
 	 * @param unsortedLanguages map of entries like en:English. Empty key stands for device locale or default locale
 	 */
 	@NonNull
-	public static Comparator<String> getLanguagesComparator(@NonNull Map<String, String> unsortedLanguages) {
+	public static Comparator<String> getLanguagesComparator(
+			@NonNull Map<String, String> unsortedLanguages) {
 		return (leftKey, rightKey) -> {
 			int i1 = Algorithms.isEmpty(leftKey) ? 0 : (leftKey.equals("en") ? 1 : 2);
 			int i2 = Algorithms.isEmpty(rightKey) ? 0 : (rightKey.equals("en") ? 1 : 2);
@@ -66,12 +72,14 @@ public class ConfigureMapUtils {
 	}
 
 	@Nullable
-	public static RenderingRuleProperty getPropertyForAttr(@NonNull OsmandApplication app, @NonNull String attrName) {
+	public static RenderingRuleProperty getPropertyForAttr(@NonNull OsmandApplication app,
+			@NonNull String attrName) {
 		return getPropertyForAttr(getCustomRules(app), attrName);
 	}
 
 	@Nullable
-	public static RenderingRuleProperty getPropertyForAttr(@NonNull List<RenderingRuleProperty> customRules, @NonNull String attrName) {
+	public static RenderingRuleProperty getPropertyForAttr(
+			@NonNull List<RenderingRuleProperty> customRules, @NonNull String attrName) {
 		for (RenderingRuleProperty property : customRules) {
 			if (Algorithms.stringsEqual(property.getAttrName(), attrName)) {
 				return property;
@@ -80,7 +88,8 @@ public class ConfigureMapUtils {
 		return null;
 	}
 
-	public static List<RenderingRuleProperty> getCustomRules(@NonNull OsmandApplication app, String... skipCategories) {
+	public static List<RenderingRuleProperty> getCustomRules(@NonNull OsmandApplication app,
+			String... skipCategories) {
 		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 		if (renderer == null) {
 			return new ArrayList<>();
@@ -116,8 +125,40 @@ public class ConfigureMapUtils {
 		return possibleValuesString;
 	}
 
+	@NonNull
+	public static Pair<RenderingClass, List<RenderingClass>> getRenderingClassWithChildren(
+			@NonNull OsmandApplication app, @NonNull String attrName) {
+		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		if (renderer != null) {
+			RenderingPropertyAttr attr = RenderingPropertyAttr.fromAttrName(attrName);
+			String key = RenderingPropertyAttr.getRenderingClassName(attrName);
+			RenderingClass renderingClass = renderer.getRenderingClass(key);
+			if (renderingClass != null) {
+				List<RenderingClass> children = getChildrenRenderingClasses(app, renderingClass);
+				return Pair.create(renderingClass, children);
+			}
+		}
+		return null;
+	}
+
+	@NonNull
+	public static List<RenderingClass> getChildrenRenderingClasses(@NonNull OsmandApplication app,
+			@NonNull RenderingClass parentClass) {
+		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		if (renderer != null) {
+			String key = parentClass.getName();
+			return renderer.getRenderingClasses().values().stream()
+					.filter(renderingClass -> {
+						String name = renderingClass.getName();
+						return name.startsWith(key + ".") && name.lastIndexOf('.') == key.length();
+					})
+					.collect(Collectors.toList());
+		}
+		return null;
+	}
+
 	protected static String getDescription(@NonNull OsmandSettings settings,
-	                                       @NonNull List<CommonPreference<Boolean>> prefs) {
+			@NonNull List<CommonPreference<Boolean>> prefs) {
 		int count = 0;
 		int enabled = 0;
 

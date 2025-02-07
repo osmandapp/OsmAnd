@@ -19,6 +19,7 @@ import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.render.RenderingClass;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
@@ -44,6 +45,8 @@ public class RouteLayersHelper {
 
 	@Nullable
 	private String selectedAttrName;
+	@Nullable
+	private RenderingClass selectedRenderingClass;
 
 	public RouteLayersHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -70,6 +73,15 @@ public class RouteLayersHelper {
 
 	public void setSelectedAttrName(@Nullable String selectedAttrName) {
 		this.selectedAttrName = selectedAttrName;
+	}
+
+	@Nullable
+	public RenderingClass getSelectedRenderingClass() {
+		return selectedRenderingClass;
+	}
+
+	public void setSelectedRenderingClass(@Nullable RenderingClass renderingClass) {
+		this.selectedRenderingClass = renderingClass;
 	}
 
 	public void toggleRoutesType(@NonNull String attrName) {
@@ -184,13 +196,19 @@ public class RouteLayersHelper {
 
 	@NonNull
 	public String getSelectedMtbClassificationName(@NonNull Context context) {
+		MtbClassification classification = getSelectedMtbClassification();
+		return classification != null ? context.getString(classification.nameId) : "";
+	}
+
+	@NonNull
+	public MtbClassification getSelectedMtbClassification() {
 		String selectedId = getSelectedMtbClassificationId();
 		for (MtbClassification classification : MtbClassification.values()) {
 			if (Objects.equals(classification.attrName, selectedId)) {
-				return context.getString(classification.nameId);
+				return classification;
 			}
 		}
-		return "";
+		return null;
 	}
 
 	@Nullable
