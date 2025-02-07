@@ -46,11 +46,10 @@ public class CycleRoutesFragment extends MapRoutesFragment {
 	}
 
 	@Override
-	protected void setupCards(@NonNull View view) {
-		super.setupCards(view);
+	protected void createCards(@NonNull View view) {
+		super.createCards(view);
 
-		cardsContainer.addView(createDivider(cardsContainer, true, true));
 		addCard(new CycleRouteTypesCard(getMapActivity()));
-		cardsContainer.addView(createDivider(cardsContainer, false, true));
+		addRenderingClassCard(BICYCLE.getRenderingPropertyAttr());
 	}
 }
