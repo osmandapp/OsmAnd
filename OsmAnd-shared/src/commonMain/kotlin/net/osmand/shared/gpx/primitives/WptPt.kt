@@ -1,6 +1,7 @@
 package net.osmand.shared.gpx.primitives
 
 import net.osmand.shared.extensions.currentTimeMillis
+import net.osmand.shared.gpx.GpxFormatter
 import net.osmand.shared.gpx.GpxUtilities
 import net.osmand.shared.gpx.PointAttributes
 import net.osmand.shared.routing.RouteColorize
@@ -271,8 +272,8 @@ class WptPt : GpxExtensions {
 			amenityOriginName: String?,
 			amenityExtensions: Map<String, String>?
 		): WptPt {
-			val latAdjusted = GpxUtilities.formatLatLon(lat).toDouble()
-			val lonAdjusted = GpxUtilities.formatLatLon(lon).toDouble()
+			val latAdjusted = GpxFormatter.formatLatLon(lat).toDouble()
+			val lonAdjusted = GpxFormatter.formatLatLon(lon).toDouble()
 			val point = WptPt(
 				latAdjusted,
 				lonAdjusted,
@@ -305,8 +306,8 @@ class WptPt : GpxExtensions {
 	}
 
 	fun updatePoint(pt: WptPt) {
-		lat = GpxUtilities.formatLatLon(pt.lat).toDouble()
-		lon = GpxUtilities.formatLatLon(pt.lon).toDouble()
+		lat = GpxFormatter.formatLatLon(pt.lat).toDouble()
+		lon = GpxFormatter.formatLatLon(pt.lon).toDouble()
 		time = currentTimeMillis()
 		desc = pt.desc
 		name = pt.name
