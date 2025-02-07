@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+	<string name="popular_places_nearby">Popular places nearby</string>
+	<string name="recently_visited">Recently visited</string>
     <string name="ais_load_data">Load AIS data from file</string>
     <string name="ais_address_settings">IP address settings</string>
     <string name="ais_address_settings_description">Choose NMEA protocol (UDP/TCP) and define addresses</string>
@@ -39,8 +41,8 @@
     <string name="shared_string_length">Length</string>
     <string name="shared_string_avg_altitude">Avg. altitude</string>
     <string name="shared_string_avg_speed">Min. speed</string>
-    <string name="popular_places_nearby">Popular places nearby</string>
-    <string name="recently_visited">Recently visited</string>
+    <string name="no_places_available">No places available</string>
+    <string name="no_photo_for_location_desc">No user photos have been added to this location yet</string>
     <string name="shared_string_default_view">Default view</string>
     <string name="map_widget_route_information">Route information</string>
     <string name="map_widget_route_information_desc">Displays the estimated arrival time, remaining travel time, and distance for the current navigation route.</string>

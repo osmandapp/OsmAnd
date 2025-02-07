@@ -71,6 +71,7 @@ public class SearchCoreFactory {
 	public static final int PREFERRED_COUNTRY_ZOOM = 7;
 	public static final int PREFERRED_CITY_ZOOM = 13;
 	public static final int PREFERRED_POI_ZOOM = 16;
+	public static final int PREFERRED_NEARBY_POINT_ZOOM = 16;
 	public static final int PREFERRED_WPT_ZOOM = 16;
 	public static final int PREFERRED_GPX_FILE_ZOOM = 17;
 	public static final int PREFERRED_DEFAULT_RECENT_ZOOM = 17;

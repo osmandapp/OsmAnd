@@ -33,7 +33,7 @@
 			android:layout_marginStart="@dimen/content_padding"
 			android:layout_marginEnd="@dimen/content_padding"
 			android:scaleType="center" />
-	</LinearLayout>
+	</LinearLayout> <!--Title-->
 
 	<me.zhanghai.android.materialprogressbar.MaterialProgressBar
 		android:id="@+id/progress_bar"
@@ -47,45 +47,63 @@
 		app:mpb_useIntrinsicPadding="false"
 		tools:visibility="visible" />
 
-	<androidx.recyclerview.widget.RecyclerView
-		android:id="@+id/nearByList"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="?attr/list_background_color"
-		android:padding="0dp" />
-
 	<FrameLayout
-		android:id="@+id/show_all_button"
+		android:id="@+id/card_content"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="?attr/list_background_color"
-		android:minHeight="@dimen/route_info_list_item_height"
-		android:orientation="vertical">
+		android:layout_height="wrap_content">
 
-		<View
-			android:id="@+id/divider_list"
+		<LinearLayout
 			android:layout_width="match_parent"
-			android:layout_height="1dp"
-			android:layout_gravity="top"
-			android:layout_marginStart="@dimen/content_padding"
-			android:background="?attr/divider_color_basic" />
-
-		<net.osmand.plus.widgets.TextViewEx
-			android:id="@+id/show_all_btn"
-			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical|start"
-			android:layout_marginStart="@dimen/content_padding"
-			android:paddingTop="@dimen/list_header_padding"
-			android:paddingBottom="@dimen/list_header_padding"
-			android:text="@string/shared_string_show_all"
-			android:textAllCaps="true"
-			android:textColor="?attr/active_color_basic"
-			android:textSize="@dimen/default_sub_text_size"
-			app:typefaceWeight="medium"
-			tools:text="SHOW ALL"
-			tools:visibility="visible" />
-	</FrameLayout>
+			android:orientation="vertical">
+
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/nearByList"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="?attr/list_background_color"
+				android:padding="0dp" />
+
+			<FrameLayout
+				android:id="@+id/show_all_button"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="?attr/list_background_color"
+				android:minHeight="@dimen/route_info_list_item_height"
+				android:orientation="vertical">
+
+				<View
+					android:id="@+id/divider_list"
+					android:layout_width="match_parent"
+					android:layout_height="1dp"
+					android:layout_gravity="top"
+					android:layout_marginStart="@dimen/content_padding"
+					android:background="?attr/divider_color_basic" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/show_all_btn"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical|start"
+					android:layout_marginStart="@dimen/content_padding"
+					android:paddingTop="@dimen/list_header_padding"
+					android:paddingBottom="@dimen/list_header_padding"
+					android:text="@string/shared_string_show_all"
+					android:textAllCaps="true"
+					android:textColor="?attr/active_color_basic"
+					android:textSize="@dimen/default_sub_text_size"
+					app:typefaceWeight="medium"
+					tools:text="SHOW ALL"
+					tools:visibility="visible" />
+			</FrameLayout>
+
+		</LinearLayout>
+
+	</FrameLayout> <!--Card content-->
+
+	<include layout="@layout/nearby_places_no_internet" />
+
+	<include layout="@layout/empty_nearby_places" />
 
 	<include layout="@layout/list_item_divider" />
 
