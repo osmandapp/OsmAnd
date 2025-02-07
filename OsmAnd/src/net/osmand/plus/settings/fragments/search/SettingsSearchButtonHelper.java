@@ -20,7 +20,6 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 import de.KnollFrank.lib.settingssearch.client.SearchConfigBuilder;
-import de.KnollFrank.lib.settingssearch.client.SearchConfiguration;
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.*;
 import de.KnollFrank.lib.settingssearch.common.task.AsyncTaskWithProgressUpdateListeners;
@@ -65,30 +64,25 @@ public class SettingsSearchButtonHelper {
 						availableAppModes);
 		return SearchPreferenceFragments
 				.builder(
-						new SearchConfiguration(
-								fragmentContainerViewId,
-								Optional.of("Search Settings"),
-								rootPreferenceFragment),
-						fragmentActivity.getSupportFragmentManager(),
-						fragmentActivity)
-				.withSearchDatabaseConfig(
-						new SearchDatabaseConfigBuilder()
+						new SearchDatabaseConfigBuilder(rootPreferenceFragment)
 								.withFragmentFactory(new FragmentFactory())
 								.withActivitySearchDatabaseConfigs(createActivitySearchDatabaseConfigs())
 								.withPreferenceFragmentConnected2PreferenceProvider(new PreferenceFragmentConnected2PreferenceProvider())
 								.withSearchableInfoProvider(SettingsSearchButtonHelper::getSearchableInfo)
 								.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
 								.withPreferenceSearchablePredicate(new PreferenceSearchablePredicate())
-								.build())
-				.withSearchConfig(
-						new SearchConfigBuilder(fragmentActivity)
+								.build(),
+						new SearchConfigBuilder(fragmentContainerViewId, fragmentActivity)
+								.withQueryHint("Search Settings")
 								.withSearchResultsFilter(searchResultsFilter)
 								.withPreferencePathDisplayer(PreferencePathDisplayerFactory.createPreferencePathDisplayer(fragmentActivity))
 								.withSearchPreferenceFragmentUI(new SearchPreferenceFragmentUI(searchResultsFilter))
 								.withSearchResultsFragmentUI(new SearchResultsFragmentUI())
 								.withPrepareShow(new PrepareShow())
 								.withIncludePreferenceInSearchResultsPredicate(new IncludePreferenceInSearchResultsPredicate())
-								.build())
+								.build(),
+						fragmentActivity.getSupportFragmentManager(),
+						fragmentActivity)
 				.withCreateSearchDatabaseTaskSupplier(createSearchDatabaseTaskSupplier)
 				.build();
 	}
