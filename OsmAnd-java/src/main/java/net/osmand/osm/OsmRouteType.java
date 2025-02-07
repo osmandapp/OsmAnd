@@ -50,9 +50,8 @@ public class OsmRouteType {
 	public static final OsmRouteType FERRY = createType("ferry").reg();
 	public static final OsmRouteType FOOT = createType("foot").reg();
 	public static final OsmRouteType LIGHT_RAIL = createType("light_rail").reg();
-	public static final OsmRouteType PISTE = createType("piste").reg();
 	public static final OsmRouteType RAILWAY = createType("railway").reg();
-	public static final OsmRouteType SKI = createType("ski").renderingPropertyAttr(PISTE_ROUTES).reg();
+	public static final OsmRouteType SKI = createType("piste").renderingPropertyAttr(PISTE_ROUTES).reg();
 	public static final OsmRouteType ALPINE = createType("alpine").renderingPropertyAttr(ALPINE_HIKING).reg();
 	public static final OsmRouteType FITNESS = createType("fitness").renderingPropertyAttr(FITNESS_TRAILS).reg();
 	public static final OsmRouteType INLINE_SKATES = createType("inline_skates").reg();
@@ -62,6 +61,7 @@ public class OsmRouteType {
 	public static final OsmRouteType TRAM = createType("tram").reg();
 	public static final OsmRouteType TROLLEYBUS = createType("trolleybus").reg();
 	public static final OsmRouteType CLIMBING = createType("climbing").renderingPropertyAttr(CLIMBING_ROUTES).reg();
+	public static final OsmRouteType UNKNOWN = createType("unknown").reg();
 
 	// less specific bottom order
 	private final String name;
@@ -157,7 +157,8 @@ public class OsmRouteType {
 			case "mtb ride":
 			case "disused:mtb":
 			case "abandoned:mtb":
-				return MOUNTAINBIKE;
+			case "mtb:scale":
+				return MTB;
 			case "hiking":
 			case "route=hiking":
 			case "mountain hiking":
@@ -306,8 +307,9 @@ public class OsmRouteType {
 			case "лыжня":
 			case "nordic":
 			case "piste":
-			case "piste:type=nordic":
-				return WINTER;
+			case "piste:type":
+			case "piste:difficulty":
+				return SKI;
 			case "snowmobile=designated":
 			case "snowmobile=permissive":
 			case "snowmobile=yes":
@@ -323,6 +325,9 @@ public class OsmRouteType {
 				return INLINE_SKATES;
 			case "fitness_trail":
 				return FITNESS;
+			case "dirtbike":
+			case "dirtbike:scale":
+				return DIRTBIKE;
 		}
 		return null;
 	}

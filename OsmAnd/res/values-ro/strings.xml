@@ -1106,7 +1106,6 @@
     <string name="rendering_attr_buildings15zoom_name">Clădirile la nivel de zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">Mai multe detalii</string>
     <string name="rendering_attr_lessDetailed_name">Mai puține detalii</string>
-    <string name="rendering_attr_hideAccess_name">Restricții de acces</string>
     <string name="rendering_attr_showAccess_name">Afișarea restricțiilor de acces</string>
     <string name="rendering_attr_showSurfaceGrade_name">Arată calitatea drumului</string>
     <string name="rendering_attr_showSurfaces_name">Arată suprafața drumului</string>
@@ -1457,7 +1456,7 @@
     <string name="simulate_your_location_stop_descr">Oprește simularea poziției tale.</string>
     <string name="simulate_your_location_descr">Simulează utilizând o rută calculată sau o înregistrare GPX.</string>
     <string name="looking_up_address">Se caută adresa</string>
-    <string name="lang_fy">Frysk</string>
+    <string name="lang_fy">limba Frysk</string>
     <string name="lang_als">Albaneză (Tosk)</string>
     <string name="share_geo">geo:</string>
     <string name="rendering_attr_currentTrackColor_description">Culoare GPX</string>
@@ -1468,7 +1467,7 @@
     <string name="lang_sq">Albaneză</string>
     <string name="lang_is">Islandeză</string>
     <string name="lang_bpy">Bișnupriya</string>
-    <string name="lang_nv">Navajo</string>
+    <string name="lang_nv">limba Navajo</string>
     <string name="lang_ga">Irlandeză</string>
     <string name="lang_la">Latină</string>
     <string name="lang_ku">Kurdă</string>
@@ -3206,13 +3205,10 @@
     <string name="open_place_reviews_plugin_description">Contribuiți la proiectul OpenPlaceReviews, cum ar fi fotografii, recenzii sau linkuri pentru locuri publice, cum ar fi restaurante, hoteluri sau muzee.
 \n
 \nGăsiți instrucțiuni despre cum să contribuiți pe site-ul nostru %1$s.</string>
-    <string name="open_place_reviews">OpenPlaceRecenzii</string>
-    <string name="opr_use_dev_url">Utilizați test.openplacereviews.org</string>
     <string name="use_volume_buttons_as_zoom_descr">Controlați nivelul de zoom al hărții cu ajutorul butoanelor de volum de pe dispozitiv.</string>
     <string name="quick_action_remove_next_destination_descr">Șterge următoarea destinație de pe traseu. Dacă aceasta este destinația finală, navigația se va opri.</string>
     <string name="plugin_wikipedia_description">Obțineți informații despre punctele de interes de pe Wikipedia, un ghid offline de buzunar care conține articole despre locuri și destinații.</string>
     <string name="add_hidden_group_info">Punctul adăugat poate fi găsit în \"%s\". Descoperă grupul selectat pentru a-l afișa pe hartă.</string>
-    <string name="login_open_place_reviews">Conectați-vă la OpenPlaceReviews</string>
     <string name="activity_type_water_name">Apă</string>
     <string name="activity_type_winter_name">Iarnă</string>
     <string name="activity_type_snowmobile_name">Snowmobil</string>
@@ -3273,7 +3269,7 @@
     <string name="contact_support">Contactează suportul tehnic</string>
     <string name="troubleshooting">Deparare</string>
     <string name="troubleshooting_description">Urmați acest link dacă aveți probleme cu achizițiile.</string>
-    <string name="osmand_live">OsmAnd Live</string>
+    <string name="osmand_live">OsmAnd în direct</string>
     <string name="annual_subscription">Abonament anual</string>
     <string name="monthly_subscription">Abonament lunar</string>
     <string name="three_months_subscription">Abonament pe trei luni</string>
@@ -3308,7 +3304,6 @@
     <string name="shared_string_add_photo">Adaugă fotografie</string>
     <string name="register_on_openplacereviews">Înregistrați-vă pe
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Fotografiile sunt furnizate de proiectul de date deschise OpenPlaceReviews.org. Pentru a vă încărca fotografiile, trebuie să vă înregistrați pe site-ul lor.</string>
     <string name="register_opr_create_new_account">Crează cont nou</string>
     <string name="register_opr_have_account">Am deja un cont</string>
     <string name="shared_string_search_history">Istoric de căutări</string>
@@ -3325,7 +3320,6 @@
     <string name="select_groups_for_import">Selectați grupurile care vor fi importate.</string>
     <string name="select_items_for_import">Selectați elementele care vor fi importate.</string>
     <string name="add_to_mapillary">Adaugă la Mapillary</string>
-    <string name="add_to_opr">Adaugați la OpenPlaceRecenzii</string>
     <string name="use_dev_url_descr">Comută la utilizarea dev.openstreetmap.org în loc de openstreetmap.org pentru a testa încărcarea de OSM Note / POI / GPX.</string>
     <string name="use_dev_url">Folosește dev.openstreetmap.org</string>
     <string name="add_photos_descr">OsmAnd prezintă fotografii din mai multe surse:
@@ -3628,7 +3622,7 @@
     <string name="lang_hsb">Sorabă (Superioară)</string>
     <string name="lang_ast">Asturiană</string>
     <string name="lang_oc">Occitană</string>
-    <string name="lang_lo">Lao</string>
+    <string name="lang_lo">limba Lao</string>
     <string name="simulate_your_location_gpx_descr">Simulați poziția dvs. cu ajutorul unei piste GPX înregistrate.</string>
     <string name="what_is_new">Ce este nou</string>
     <string name="show_map_markers_description">Activați funcția de marcare a hărții.</string>
@@ -3819,7 +3813,7 @@
     <string name="shared_string_language">Limbă</string>
     <string name="shared_string_all_languages">Toate limbile</string>
     <string name="wiki_menu_download_descr">Sunt necesare hărți suplimentare pentru a vizualiza POI-urile Wikipedia pe hartă.</string>
-    <string name="select_wikipedia_article_langs">Selectați limbile pentru articolele Wikipedia de pe hartă. Treceți la orice limbă disponibilă în timp ce citiți articolul.</string>
+    <string name="select_wikipedia_article_langs">Selectați limbile pentru articolele Wikipedia pe hartă. Treceți la orice limbă disponibilă în timp ce citiți articolul.</string>
     <string name="some_articles_may_not_available_in_lang">Este posibil ca unele articole din Wikipedia să nu fie disponibile în limba dumneavoastră.</string>
     <string name="lang_zhyue">Cantoneză</string>
     <string name="lang_zhminnan">Sud Min</string>
@@ -3841,7 +3835,7 @@
     <string name="lang_ky">Cîrgîză</string>
     <string name="lang_kk">Cazacă</string>
     <string name="lang_jv">Javaneză</string>
-    <string name="lang_gu">Gujarati</string>
+    <string name="lang_gu">limba Gujarati</string>
     <string name="lang_cv">Șuvash</string>
     <string name="lang_ce">Cecenă</string>
     <string name="lang_bar">Bavareză</string>
@@ -4571,7 +4565,7 @@
     <string name="shared_string_symbol">Simbol</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Zone militare</string>
     <string name="explore_plans">Explorează planurile</string>
-    <string name="map_widget_trip_recording_distance">Distanță</string>
+    <string name="map_widget_distance">Distanță</string>
     <string name="routing_attr_hazmat_category_name">Categorie materiale periculoase</string>
     <string name="parking_widget_desc">Arată distanța de la centrul ecranului până la locul de parcare.</string>
     <string name="mapillary_widget_desc">Oferă acces rapid la aplicația Mapillary pentru a adăuga imagini stradale.</string>
@@ -4609,7 +4603,7 @@
     <string name="calculate_online_altitude_descr">Calculați elevația online pe serverele OsmAnd, pe baza imaginilor din satelit și a modelelor digitale de elevație. Diferențele față de altitudinea înregistrată de dispozitiv pot fi utilizate drept corecție a altitudinii.</string>
     <string name="routing_attr_freeride_policy_prefer_offpiste_name">Preferă în afara pârtiei</string>
     <string name="routing_attr_difficulty_preference_no_preference_name">Fără preferință</string>
-    <string name="lang_sat">Santali</string>
+    <string name="lang_sat">limba Santali</string>
     <string name="map_widget_time_to_destination">Timp până la destinație</string>
     <string name="map_widget_time_to_intermediate">Timp până la intermediar</string>
     <string name="map_widget_distance_to_intermediate">Distanță până la intermediar</string>
@@ -5792,7 +5786,7 @@
     <string name="quick_action_photo_note">Notă fotografică</string>
     <string name="quick_action_verb_pause_resume">Pauză / Reluare</string>
     <string name="quick_action_verb_turn_on_off">Pornește / Oprește</string>
-    <string name="quick_action_verb_start_stop">Start / Stop</string>
+    <string name="quick_action_verb_start_stop">Pornit/ Oprit</string>
     <string name="weather_screen">Ecran meteorologic</string>
     <string name="shared_string_all_icons">Toate pictogramele</string>
     <string name="navigation_position_icon_summary">Pictograma afișată în timp ce navigați sau vă deplasați.</string>
@@ -5821,9 +5815,9 @@
 \nCPU (plăci): %2$s
 \nCPU (timp inactiv): %3$s
 \nCPU (așteaptă GPU): %4$s</string>
-    <string name="ask_every_time">Întreabă de fiecare dată</string>
+    <string name="ask_every_time">Întrebați de fiecare dată</string>
     <string name="shared_string_automatically">Automat</string>
-    <string name="detailed_track_guidance">Ghidare detaliată pentru traseu</string>
+    <string name="detailed_track_guidance">Ghid detaliat pentru traseu</string>
     <string name="driving_region_india">India</string>
     <string name="hugerock_promo_description">Acces gratuit la funcții, inclusiv descărcări nelimitate de hărți, relief 3D etc. pentru %1$s luni</string>
     <string name="driving_region_uk">Regatul Unit și similare</string>
@@ -6072,4 +6066,6 @@
     <string name="shared_string_avg_altitude">Altitudine medie</string>
     <string name="shared_string_length">Lungime</string>
     <string name="shared_string_avg_speed">Viteză min.</string>
+    <string name="shared_string_default_view">Vizualizare implicită</string>
+    <string name="map_widget_route_information">Informații despre traseu</string>
 </resources>

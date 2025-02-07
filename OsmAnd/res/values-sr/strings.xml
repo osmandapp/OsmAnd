@@ -622,7 +622,6 @@
     <string name="rendering_attr_buildings15zoom_name">Приказ зграда је на увеличању 15</string>
     <string name="rendering_attr_moreDetailed_name">Више појединости</string>
     <string name="rendering_attr_lessDetailed_name">Мање појединости</string>
-    <string name="rendering_attr_hideAccess_name">Забране приступа</string>
     <string name="rendering_attr_showAccess_name">Приказуј ограничења приступа</string>
     <string name="rendering_attr_showSurfaceGrade_name">Приказуј стање путева</string>
     <string name="rendering_attr_showSurfaces_name">Приказуј материјале путева</string>
@@ -1531,7 +1530,7 @@
     <string name="lang_ht">Хаићански</string>
     <string name="lang_gl">Галицијски</string>
     <string name="lang_ast">Астуријски</string>
-    <string name="rendering_attr_pisteRoutes_name">Скијалишта</string>
+    <string name="rendering_attr_pisteRoutes_name">Скијашке руте</string>
     <string name="rendering_value_germanRoadAtlas_name">Немачки атлас путева</string>
     <string name="rendering_value_highContrastRoads_name">Путеви са великим контрастом</string>
     <string name="rendering_value_americanRoadAtlas_name">Амерички атлас путева</string>
@@ -3549,14 +3548,12 @@
     <string name="shared_string_add_photo">Додај фотографију</string>
     <string name="register_on_openplacereviews">Упишите се на
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Фотографије пружају пројекат отворених података OpenPlaceReviews.org. Ради постављања своје слике, морате се пријавити на странницу веба.</string>
     <string name="register_opr_create_new_account">Направите нови налог</string>
     <string name="register_opr_have_account">Већ имам</string>
     <string name="shared_string_search_history">Претрага историје</string>
     <string name="app_mode_kayak">Кајак</string>
     <string name="app_mode_motorboat">Моторни чамац</string>
     <string name="add_to_mapillary">Додај у Мапилари</string>
-    <string name="add_to_opr">Додај у ОпенПлејсРевју</string>
     <string name="add_photos_descr">ОсмАнд приказује фотографије из неколико извора:
 \nOpenPlaceReviews - фотографије тачака занимања;
 \nMapillary - слике улица;
@@ -3691,7 +3688,6 @@
     <string name="shared_string_interval">Међувреме</string>
     <string name="track_has_no_altitude">Траг не садржи податке о надморској висини.</string>
     <string name="track_has_no_speed">Траг не садржи податке о брзини.</string>
-    <string name="opr_use_dev_url">Користи test.openplacereviews.org</string>
     <string name="temporary_conditional_routing_descr">Користи ограничења на путу тренутно дејствена на карти</string>
     <string name="routing_attr_short_way_description">Прилагођени краћи пут (уштеда енергије)</string>
     <string name="routing_attr_driving_style_description">Одаберите разлог путовања да добијете краћи, бржи или сигурнији пут</string>
@@ -3774,8 +3770,6 @@
     <string name="delete_waypoints">Обриши пролазну тачку</string>
     <string name="copy_to_map_markers">Копирај у ознаке карте</string>
     <string name="hillshade_slope_contour_lines">Рељеф / Нагиб / Изохипсе</string>
-    <string name="open_place_reviews">Утисци отворених места (OpenPlaceReviews)</string>
-    <string name="login_open_place_reviews">Пријавите се на OpenPlaceReviews</string>
     <string name="activity_type_offroad_name">Вожња ван пута</string>
     <string name="quick_action_coordinates_widget_descr">Прекидач да на карти покаже или сакрије справицу са координатама.</string>
     <string name="map_widget_distance_by_tap">Удаљеност по кликтању</string>
@@ -4285,7 +4279,7 @@
     <string name="routing_attr_allow_private_for_truck_name">Дозвољен приватни приступ (теретно возило)</string>
     <string name="map_widget_trip_recording_uphill">Узбрдо</string>
     <string name="map_widget_trip_recording_duration">Трајање</string>
-    <string name="map_widget_trip_recording_distance">Растојање</string>
+    <string name="map_widget_distance">Растојање</string>
     <string name="shared_string_mode">Начин</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (нема ограничења)</string>
     <string name="av_def_action_choose">На захтев</string>
@@ -5416,8 +5410,8 @@
     <string name="hugerock_promo">Попуст цена Хјуџрока за %1$s месеца</string>
     <string name="driving_region_uk">ВБ и слично</string>
     <string name="ask_every_time">Питај сваки пут</string>
-    <string name="detailed_track_guidance">Подробни водич трага</string>
-    <string name="detailed_track_guidance_description">ОсмАнд ће ускладити ваш траг са оближњим путевима ради бољег навођења на кривинама.</string>
+    <string name="detailed_track_guidance">Детаљан водич за стазу</string>
+    <string name="detailed_track_guidance_description">ОсмАнд ће ускладити вашу руту са оближњим путевима како би се боље оријентисао на сваком завоју.</string>
     <string name="quick_action_routes_summary">Прекидач за приказ или сакривање %1$s на карти.</string>
     <string name="shared_string_automatically">Самостално</string>
     <string name="compass_click_north_is_up">Да бисте променили режим оријентације, кликните и држите</string>
@@ -5601,7 +5595,6 @@
     <string name="us_gallons">Амерички галони</string>
     <string name="unit_of_volume">Јединица запремине</string>
     <string name="fuel_tank_capacity_description">Унесите капацитет резервоара да бисте прецизно пратили нивое горива и потрошњу</string>
-    <string name="imperial_gallons_unit">imp gal</string>
     <string name="unit_of_volume_description">Изабране јединице ће бити примењене на све податке који се односе на запремину у тренутном профилу.</string>
     <string name="record_obd_data">Сними метрику возила</string>
     <string name="wunderlinq_datagrid">WunderLINQ Мрежа података</string>
@@ -5662,4 +5655,38 @@
     <string name="shared_string_length">Дужина</string>
     <string name="shared_string_avg_altitude">Просечна надморска висина</string>
     <string name="shared_string_avg_speed">Минимална брзина</string>
+    <string name="map_widget_route_information">Информације о рути</string>
+    <string name="shared_string_default_view">Подразумевани приказ</string>
+    <string name="map_widget_route_information_desc">Приказује процењено време доласка, преостало време путовања и удаљеност за тренутну навигациону руту.</string>
+    <string name="ais_port_nmea_server">ТЦП порт НМЕА извора података</string>
+    <string name="ais_port_nmea_server_description">Дефинишите број ТЦП порта НМЕА извора података</string>
+    <string name="ais_load_data">Учитајте АИС податке из фајла</string>
+    <string name="ais_address_settings">Подешавања ИП адресе</string>
+    <string name="ais_address_settings_description">Изаберите НМЕА протокол (УДП/ТЦП) и дефинишите адресе</string>
+    <string name="ais_nmea_protocol">Протокол за пријем НМЕА података</string>
+    <string name="ais_nmea_protocol_description">Изаберите протокол за пријем НМЕА података</string>
+    <string name="ais_address_nmea_server">ИП адреса НМЕА извора података</string>
+    <string name="ais_address_nmea_server_description">Дефинишите ИП адресу НМЕА извора података (ако се користи ТЦП)</string>
+    <string name="ais_port_nmea_local">УДП порт локалног НМЕА пријемника података</string>
+    <string name="ais_port_nmea_local_description">Дефинишите УДП порт на који ОсмАнд прима НМЕА податке</string>
+    <string name="ais_object_lost_timeout">Временско ограничење за видљивост када се објекат изгуби</string>
+    <string name="ais_object_lost_timeout_description">Подесите временско ограничење за видљивост АИС објеката: Након овог времена без пријема сигнала, АИС објекат ће бити уклоњен са екрана.</string>
+    <string name="ais_ship_lost_timeout_description">Подесите временско ограничење за видљивост брода: Након овог времена без пријема сигнала, симбол брода ће променити своје стање на екрану: Биће прецртан.</string>
+    <string name="ais_cpa_settings">Подешавања која се односе на ЦПА</string>
+    <string name="ais_cpa_settings_description">Ове вредности дефинишу презентацију АИС објеката који се могу превише приближити сопственој позицији.</string>
+    <string name="ais_cpa_warning_time">Време упозорења да се стигне до најближе тачке приступа (ЦПА)</string>
+    <string name="ais_cpa_warning_time_description">Ако је ТЦПА (време за достизање ЦПА са другим пловилом) мањи од ове вредности, пловило је означено црвеном бојом.</string>
+    <string name="ais_cpa_warning_distance">Упозорење удаљености за најближу тачку приближавања (ЦПА)</string>
+    <string name="ais_cpa_warning_distance_description">Пловила су означена црвеном бојом ако је ЦПА мања од ове вредности и ЦПА је достигнута у блиској будућности (погледајте подешавање времена упозорења за достизање ЦПА).</string>
+    <string name="plugin_ais_tracker_name">АИС трагач пловила</string>
+    <string name="plugin_ais_tracker_description">Приказ АИС позиција и информација о околним пловилима. АИС подаци се примају преко мреже са екстерног АИС пријемника.</string>
+    <string name="plugin_ais_tracker_disclaimer">ОДРИЦАЊЕ ОДГОВОРНОСТИ\n\nОвај додатак је хоби пројекат и није дизајниран за поузданост и исправност. НЕМОЈТЕ се ослањати на овај софтвер ни на који начин укључујући навигацију и/или безбедност живота.</string>
+    <string name="ais_object_lost_timeouts_description">Подесите вредности временског ограничења да бисте идентификовали изгубљене АИС објекте ако сигнал није примљен одређено време.</string>
+    <string name="ais_ship_lost_timeout">Временско ограничење за видљивост брода када није примљен сигнал</string>
+    <string name="ais_object_lost_timeouts">Подешавања временског ограничења за пријем АИС сигнала</string>
+    <string name="show_grids">Прикажи мрежу мапе</string>
+    <string name="show_grids_description">Дозволи приказ мреже преко мапе</string>
+    <string name="show_utm_grids">Користи УТМ уместо WGS84</string>
+    <string name="show_utm_grids_description">Прикажи мрежу у УТМ метрима уместо WGS84 степенима</string>
+    <string name="map_grid">Мреже мапе</string>
 </resources>

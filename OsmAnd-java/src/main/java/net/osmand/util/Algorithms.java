@@ -1048,8 +1048,18 @@ public class Algorithms {
 	}
 
 	public static String formatMinutesDuration(int minutes) {
+		return formatMinutesDuration(minutes, false);
+	}
+
+	public static String formatMinutesDuration(int minutes, boolean compact) {
 		int min = minutes % 60;
 		int hours = minutes / 60;
+		if (compact) {
+			if (min == 0) {
+				return String.format(Locale.UK, "%d", hours);
+			}
+			return String.format(Locale.UK, "%d:%02d", hours, min);
+		}
 		return String.format(Locale.UK, "%02d:%02d", hours, min);
 	}
 

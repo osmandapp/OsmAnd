@@ -390,7 +390,6 @@
     <string name="rendering_attr_buildings15zoom_name">Edifìtzios dae s\'ismanniamentu 15</string>
     <string name="rendering_attr_moreDetailed_name">Prus minujas (a sa minuda)</string>
     <string name="rendering_attr_lessDetailed_name">Minujas de mancu</string>
-    <string name="rendering_attr_hideAccess_name">Restritziones de atzessu</string>
     <string name="rendering_attr_showAccess_name">Ammustra restritziones de atzessu e pedàgios</string>
     <string name="rendering_attr_showSurfaceGrade_name">Ammustra sa calidade de sos caminos</string>
     <string name="rendering_attr_showSurfaces_name">Ammustra su tipu de superfìtzie de sos caminos</string>
@@ -3816,14 +3815,12 @@
     <string name="shared_string_add_photo">Annanghe una fotografia</string>
     <string name="register_on_openplacereviews">Registra·ti in
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Sas fotografias benint frunidas dae su progetu a datos abertos OpenPlaceReviews.org. Pro carrigare sas fotografias tuas ti depes registrare a su situ issoro.</string>
     <string name="register_opr_create_new_account">Crea unu contu nou</string>
     <string name="register_opr_have_account">Tèngio giai unu contu</string>
     <string name="shared_string_search_history">Cronologia de chirca</string>
     <string name="app_mode_kayak">Kàyak</string>
     <string name="app_mode_motorboat">Motoscafu</string>
     <string name="add_to_mapillary">Annanghe a Mapillary</string>
-    <string name="add_to_opr">Annanghe a OpenPlaceReviews</string>
     <string name="add_photos_descr">OsmAnd ammustrat fotografias dae fontes medas:
 \nOpenPlaceReviews - fotografias de sos PDI;
 \nMapillary - immàgines a livellu de su caminu;
@@ -3936,9 +3933,6 @@
     <string name="announcement_time_arrive">Arrivu a destinatzione</string>
     <string name="shared_string_turn">Bortada</string>
     <string name="hillshade_slope_contour_lines">Umbradura de sos rilievos / Pendèntzia / Lìnias de livellu</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Imprea test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Intra in OpenPlaceReviews</string>
     <string name="activity_type_water_name">Abba</string>
     <string name="activity_type_winter_name">Ierru</string>
     <string name="activity_type_snowmobile_name">Motoislita</string>
@@ -4623,7 +4617,7 @@
     <string name="use_latin_name_if_missing">Imprea su nùmene latinu si mancat</string>
     <string name="average_speed_skip_stops">Piga in cunsideru sas firmadas</string>
     <string name="transport_hazmat_yes_desc">Seletziona sa categoria adeguada.</string>
-    <string name="map_widget_trip_recording_distance">Distàntzia</string>
+    <string name="map_widget_distance">Distàntzia</string>
     <string name="routing_attr_hazmat_category_name">Categoria de materiale perigulosu</string>
     <string name="routing_attr_hazmat_category_description">Categoria de materiales perigulosos / Piga in cunsideru sos permissos de atzessu a sos materiales perigulosos</string>
     <string name="rendering_attr_weatherTempContours_name">Isolìnias de sa temperadura</string>

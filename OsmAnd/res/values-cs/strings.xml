@@ -1226,7 +1226,6 @@
     <string name="rendering_attr_buildings15zoom_name">Budovy při přiblížení 15</string>
     <string name="rendering_attr_moreDetailed_name">Více detailů</string>
     <string name="rendering_attr_lessDetailed_name">Méně detailů</string>
-    <string name="rendering_attr_hideAccess_name">Omezení přístupu</string>
     <string name="rendering_attr_showAccess_name">Zobrazit omezení přístupu</string>
     <string name="rendering_attr_showSurfaceGrade_name">Zobrazit kvalitu cesty</string>
     <string name="rendering_attr_subwayMode_name">Trasy metra</string>
@@ -1387,7 +1386,7 @@
     <string name="notes">A/V poznámky</string>
     <string name="online_map">On-line mapa</string>
     <string name="roads_only">Pouze cesty</string>
-    <string name="rendering_attr_pisteRoutes_name">Lyžařské svahy</string>
+    <string name="rendering_attr_pisteRoutes_name">Lyžařské trasy</string>
     <string name="free">%1$s volných</string>
     <string name="device_memory">Paměť zařízení</string>
     <string name="shared_string_audio">Audio</string>
@@ -3605,7 +3604,6 @@
     <string name="shared_string_add_photo">Přidat fotku</string>
     <string name="register_on_openplacereviews">Zaregistrovat na
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Fotografie poskytuje open data projekt OpenPlaceReviews.org. Abyste mohli nahrát své fotografie, musíte se přihlásit na jeho webové stránce.</string>
     <string name="register_opr_create_new_account">Vytvořit nový účet</string>
     <string name="register_opr_have_account">Už mám účet</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
@@ -3640,7 +3638,6 @@
     <string name="app_mode_kayak">Kajak</string>
     <string name="app_mode_motorboat">Motorový člun</string>
     <string name="add_to_mapillary">Přidat do Mapillary</string>
-    <string name="add_to_opr">Přidat do OpenPlaceReviews</string>
     <string name="add_photos_descr">OsmAnd zobrazuje fotografie z několika zdrojů:
 \nOpenPlaceReviews - fotografie bodů zájmu
 \nMapillary - pouliční fotografie
@@ -3745,9 +3742,6 @@
     <string name="open_place_reviews_plugin_description">Přispívejte do projektu OpenPlaceReviews, například fotografiemi, recenzemi nebo odkazy na veřejná místa, jako jsou restaurace, hotely nebo muzea.
 \n
 \nNávod, jak přispět, najdete na našich webových stránkách %1$s.</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Použít test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Přihlásit se do OpenPlaceReviews</string>
     <string name="select_segments">Vybrat úseky</string>
     <string name="select_segments_description">%1$s obsahuje více než jeden úsek, musíte určit potřebnou část pro navigaci.</string>
     <string name="segments_count">Úsek %1$d</string>
@@ -4303,7 +4297,7 @@
     <string name="open_weather_action_description">Umožňuje otevřít obrazovku s podrobnými informacemi o počasí.</string>
     <string name="average_speed_skip_stops_desc">Rychlost menší než %1$s bude započítaná a ovlivní vaši průměrnou rychlost.</string>
     <string name="weather_offline_forecast">Předpověď v režimu offline</string>
-    <string name="auto_25_chars_route_tr_kl">Odbočte vpravo a držte se vlevo</string>
+    <string name="auto_25_chars_route_tr_kl">Zahněte vpravo a držte se vlevo</string>
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">Mezinárodní asociace horské cyklistiky</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Izolinie srážek</string>
@@ -4472,7 +4466,7 @@
     <string name="trip_recording_downhill_widget_desc">Zobrazuje součet všech klesání aktuálně zaznamenané jízdy.</string>
     <string name="distance_to_intermediate_widget_desc">Widget zobrazuje vzdálenost, která zbývá do prvního mezilehlého bodu. Po překročení mezilehlých bodů se vzdálenost aktualizuje k dalšímu mezilehlému bodu.</string>
     <string name="shared_string_large">Velký</string>
-    <string name="auto_25_chars_route_tr_kr">Odbočte vpravo a držte se vpravo</string>
+    <string name="auto_25_chars_route_tr_kr">Zahněte vpravo a držte se vpravo</string>
     <string name="import_as_one_track">Importovat jako jednu stopa</string>
     <string name="shared_string_kilograms">kilogramů</string>
     <string name="routing_attr_avoid_highway_name">Vyhnout se dálnicím</string>
@@ -4585,8 +4579,8 @@
     <string name="connect_with_straight_line">Připojit přímou čarou</string>
     <string name="attach_roads_descr">Aproximujte svoji stopu pomocí povolených cest pro navigaci mezi body a přiřazení přesných navigačních pokynů a vlastností trasy.</string>
     <string name="without_profiles_changing">Bez změny profilů</string>
-    <string name="auto_25_chars_route_tl_kl">Odbočte vlevo a držte se vlevo</string>
-    <string name="auto_25_chars_route_tl_kr">Odbočte vlevo a držte se vpravo</string>
+    <string name="auto_25_chars_route_tl_kl">Zahněte vlevo a držte se vlevo</string>
+    <string name="auto_25_chars_route_tl_kr">Zahněte vlevo a držte se vpravo</string>
     <string name="auto_25_chars_route_tu_kl">Otočte se a držte se vlevo</string>
     <string name="auto_25_chars_route_roundabout_kl">Použijte %1$d. výjezd a držte se vlevo</string>
     <string name="duplacate_widget_added_snackbar">Do seznamu se přidává duplicitní nástroj.</string>
@@ -4637,7 +4631,7 @@
     <string name="calculate_online">Výpočet online</string>
     <string name="explore_plans">Prozkoumat možnosti předplatného</string>
     <string name="arrival_time_widget_desc">Čas příjezdu do cílového bodu.</string>
-    <string name="map_widget_trip_recording_distance">Vzdálenost</string>
+    <string name="map_widget_distance">Vzdálenost</string>
     <string name="shared_string_widget">Nástroj</string>
     <string name="time_to_navigation_point_widget_settings_desc">Klepnutím na nástroj přepnete režimy.</string>
     <string name="elevation_profile_widget_desc">Zobrazuje výškový profil a profil sklonu aktuální trasy.</string>
@@ -5284,18 +5278,18 @@
     <string name="quick_action_map_underlay">Podklad</string>
     <string name="choose_map_orientation">Zvolte orientaci mapy</string>
     <string name="shared_string_automatically">Automaticky</string>
-    <string name="ask_every_time">Pokaždé se zeptat</string>
-    <string name="detailed_track_guidance">Detailní navádění stopou</string>
+    <string name="ask_every_time">Pokaždé se ptejte</string>
+    <string name="detailed_track_guidance">Podrobné pokyny ke stopě</string>
     <string name="quick_action_routes_summary">Přepínač pro zobrazení nebo skrytí %1$s na mapě.</string>
     <string name="hugerock_promo">Promoakce Hugerock na %1$s měsíců</string>
     <string name="hugerock_promo_description">Bezplatný přístup k funkcím včetně neomezeného stahování map, 3D reliéfu atd. na %1$s měsíců</string>
     <string name="driving_region_india">Indie</string>
-    <string name="auto_25_chars_route_tr">Odbočte doprava</string>
-    <string name="auto_25_chars_route_tshr">Odbočte ostře doprava</string>
-    <string name="auto_25_chars_route_tslr">Odbočte mírně doprava</string>
-    <string name="auto_25_chars_route_tl">Odbočte doleva</string>
-    <string name="auto_25_chars_route_tshl">Odbočte ostře doleva</string>
-    <string name="auto_25_chars_route_tsll">Odbočte mírně doleva</string>
+    <string name="auto_25_chars_route_tr">Zahněte vpravo</string>
+    <string name="auto_25_chars_route_tshr">Zahněte ostře vpravo</string>
+    <string name="auto_25_chars_route_tslr">Zahněte mírně vpravo</string>
+    <string name="auto_25_chars_route_tl">Zahněte vlevo</string>
+    <string name="auto_25_chars_route_tshl">Zahněte ostře vlevo</string>
+    <string name="auto_25_chars_route_tsll">Zahněte mírně vlevo</string>
     <string name="energy_avg_info">Statistika energie (průměr za 1 / 5 / 15 minut)</string>
     <string name="energy_avg_info_description">Úroveň baterie za minutu: %1$s
 \nSpotřeba energie (mAh): %2$s</string>
@@ -5389,7 +5383,7 @@
     <string name="top_and_bottom">Nahoře a dole</string>
     <string name="wall_color">Barva zdi</string>
     <string name="use_nearby_roads">Použít blízké cesty</string>
-    <string name="detailed_track_guidance_description">Aplikace OsmAnd přiřadí vaši trasu k okolním cestám, abyste měli lepší navigaci krok za krokem.</string>
+    <string name="detailed_track_guidance_description">OsmAnd přizpůsobí vaši stopu blízkým silnicím pro vylepšené navádění krok za krokem.</string>
     <string name="change_terrain_color_scheme">Změnit barevné schéma terénu</string>
     <string name="play_weather_forecast">Přehrát předpověď počasí</string>
     <string name="quick_action_previous_app_profile">Profil aplikace k předchozí</string>
@@ -5622,7 +5616,6 @@
     <string name="current_temperature">Aktuální teplota</string>
     <string name="show_minor_turns">Zobrazení na menších křižovatkách při přímé navigaci</string>
     <string name="litres">Litry</string>
-    <string name="imperial_gallons_unit">imp gal</string>
     <string name="imperial_gallons">Imperiální galony</string>
     <string name="us_gallons">US galony</string>
     <string name="record_obd_data">Záznam metrik vozidla</string>
@@ -5672,4 +5665,38 @@
     <string name="shared_string_length">Délka</string>
     <string name="shared_string_avg_altitude">Prům. výška</string>
     <string name="shared_string_avg_speed">Min. rychlost</string>
+    <string name="shared_string_default_view">Výchozí zobrazení</string>
+    <string name="map_widget_route_information">Informace o trase</string>
+    <string name="map_widget_route_information_desc">Zobrazuje odhadovaný čas příjezdu, zbývající čas jízdy a vzdálenost pro aktuální navigační trasu.</string>
+    <string name="ais_load_data">Načíst data AIS ze souboru</string>
+    <string name="ais_address_settings">Nastavení IP adresy</string>
+    <string name="ais_address_settings_description">Zvolte protokol NMEA (UDP/TCP) a nastavte adresy</string>
+    <string name="ais_nmea_protocol">Protokol pro získávání dat NMEA</string>
+    <string name="ais_nmea_protocol_description">Zvolte protokol pro získávání dat NMEA</string>
+    <string name="ais_address_nmea_server">IP adresa zdroje dat NMEA</string>
+    <string name="ais_port_nmea_server">TCP port zdroje dat NMEA</string>
+    <string name="ais_port_nmea_server_description">Definovat číslo TCP portu zdroje dat NMEA</string>
+    <string name="ais_port_nmea_local">UDP port lokálního přijímače dat NMEA</string>
+    <string name="ais_port_nmea_local_description">Definovat UDP port, kde bude OsmAnd získávat data NMEA</string>
+    <string name="ais_object_lost_timeouts">Nastavení časového limitu pro příjem signálu AIS</string>
+    <string name="ais_object_lost_timeouts_description">Nastavit hodnoty pro rozpoznání ztracených objektů AIS, pokud nebyl po určitou dobu obdržen žádný signál.</string>
+    <string name="ais_object_lost_timeout">Časový limit pro viditelnost při ztrátě objektu</string>
+    <string name="ais_object_lost_timeout_description">Nastavit časový limit viditelnosti objektů AIS: po tomto čase bez příjmu signálu bude objekt AIS odebrán z obrazovky.</string>
+    <string name="ais_ship_lost_timeout">Časový limit pro viditelnost lodě, když není obdržen žádný signál</string>
+    <string name="ais_ship_lost_timeout_description">Nastavit časový limit viditelnosti lodě: po tomto čase bez příjmu signálu změní symbol lodě svůj stav na obrazovce: bude přeškrtnutý.</string>
+    <string name="ais_cpa_settings">Nastavení týkající se CPA</string>
+    <string name="ais_cpa_settings_description">Tyto hodnoty definují zobrazení objektů AIS, které se mohou příliš přiblížit k vlastní poloze.</string>
+    <string name="ais_cpa_warning_time">Výstražná doba pro dosažení nejbližšího bodu přiblížení (CPA)</string>
+    <string name="ais_cpa_warning_distance">Výstražná vzdálenost pro nejbližší bod přiblížení (CPA)</string>
+    <string name="plugin_ais_tracker_name">Sledování plavidel AIS</string>
+    <string name="plugin_ais_tracker_disclaimer">UPOZORNĚNÍ\n\nTento modul je volnočasovým projektem a není navržen s ohledem na spolehlivost a správnost. V žádném případě se NESPOLÉHEJTE na tento software, včetně navigace a/nebo bezpečnosti života.</string>
+    <string name="ais_address_nmea_server_description">Definovat IP adresu zdroje dat NMEA (pokud je použito TCP)</string>
+    <string name="ais_cpa_warning_time_description">Pokud je TCPA (čas do dosažení CPA s jiným plavidlem) kratší než tato hodnota, bude plavidlo označeno červenou barvou.</string>
+    <string name="ais_cpa_warning_distance_description">Plavidla budou označena červenou barvou, pokud je CPA nižší než tato hodnota a CPA bude dosaženo v blízké budoucnosti (viz Výstražná doba pro dosažení CPA).</string>
+    <string name="plugin_ais_tracker_description">Zobrazení polohy AIS a informací o okolních plavidlech. Data AIS jsou přijímána prostřednictvím sítě z externího přijímače AIS.</string>
+    <string name="show_grids_description">Povolit zobrazení mřížky přes mapu</string>
+    <string name="show_grids">Zobrazit mřížku mapy</string>
+    <string name="show_utm_grids">Použít UTM namísto WGS84</string>
+    <string name="show_utm_grids_description">Zobrazit mřížku v metrech UTM namísto stupňů WGS84</string>
+    <string name="map_grid">Mapové mřížky</string>
 </resources>

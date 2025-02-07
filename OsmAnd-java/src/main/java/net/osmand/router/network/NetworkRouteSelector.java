@@ -745,7 +745,7 @@ public class NetworkRouteSelector {
 			String prefix = "route_" + type.getName() + ROUTE_KEY_VALUE_SEPARATOR;
 			if (tag.startsWith(prefix) && tag.length() > prefix.length()) {
 				int endIdx = tag.indexOf(ROUTE_KEY_VALUE_SEPARATOR, prefix.length());
-				return tag.substring(prefix.length(), endIdx);
+				return tag.substring(prefix.length(), endIdx != -1 ? endIdx : tag.length());
 			}
 			return "";
 		}
@@ -776,7 +776,18 @@ public class NetworkRouteSelector {
 				return transliteration ? TransliterationHelper.transliterate(name) : name;
 			}
 			name = getValue("ref");
-			return !name.isEmpty() ? name : getRelationID();
+			if (!name.isEmpty()) {
+				return name;
+			}
+			name = getFromTo();
+			if (!name.isEmpty()) {
+				return name;
+			}
+			name = getRelationID();
+			if (!name.isEmpty()) {
+				return name;
+			}
+			return this.type.getName(); // avoid emptiness
 		}
 
 		public String getRelationID() {
@@ -801,6 +812,19 @@ public class NetworkRouteSelector {
 
 		public String getWikipedia() {
 			return getValue("wikipedia");
+		}
+
+		public String getRef() {
+			return getValue("ref");
+		}
+
+		public String getFromTo() {
+			String from = getValue("from");
+			String to = getValue("to");
+			if (!Algorithms.isEmpty(from) && !Algorithms.isEmpty(to)) {
+				return from + " - " + to;
+			}
+			return "";
 		}
 
 		public static RouteKey fromGpx(Map<String, String> networkRouteKeyTags) {

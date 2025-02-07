@@ -1863,7 +1863,7 @@
     <string name="auto_backup_preference_desc">Theo mặc định, Android lưu các bản sao lưu của những thứ yêu thích, mã điện tử bản đồ và các cài đặt OsmAnd để khôi phục chúng trên thiết bị mới hoặc sau khi cài đặt lại. Bản sao lưu này bị giới hạn tới 25MB.\nKhi sử dụng OsmAnd Cloud, điều này có thể dẫn tới những hiểu lầm sau khi cài đặt lại.</string>
     <string name="rendering_attr_weatherTempContours_name">Đường đẳng nhiệt</string>
     <string name="rendering_attr_weatherPressureContours_name">Đường đẳng áp</string>
-    <string name="map_widget_trip_recording_distance">Khoảng cách</string>
+    <string name="map_widget_distance">Khoảng cách</string>
     <string name="colour_of_circles">Màu vòng tròn</string>
     <string name="compass_on_circles">La bàn trên vòng tròn</string>
     <string name="map_widget_ant_bicycle_dist">Nhịp đạp xe đạp</string>
@@ -2002,7 +2002,6 @@
     <string name="fuel_tank_capacity">Dung tích bình xăng</string>
     <string name="shared_strings_dimensions">Kích thước</string>
     <string name="litres">Lít</string>
-    <string name="imperial_gallons_unit">imp ga-lông</string>
     <string name="us_gallons_unit">ga-lông</string>
     <string name="imperial_gallons">Ga-lông hệ đo imperial</string>
     <string name="us_gallons">Ga-lông hệ US</string>

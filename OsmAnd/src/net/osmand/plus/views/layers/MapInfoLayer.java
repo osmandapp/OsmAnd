@@ -415,7 +415,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			ts.panelBorderColorId = R.color.widget_panel_border_transparent;
 		} else if (nightMode) {
 			ts.boxTop = R.drawable.btn_flat_night;
-			ts.widgetBackgroundId = verticalWidget ? R.color.widget_background_color_dark : R.drawable.bs_side_widget_night;
+			ts.widgetBackgroundId = verticalWidget ? R.drawable.bs_vertical_widget_night : R.drawable.bs_side_widget_night;
 			ts.boxFree = R.drawable.btn_round_night;
 			ts.widgetDividerColorId = R.color.divider_color_dark;
 			ts.panelBorderColorId = R.color.icon_color_secondary_dark;

@@ -1765,7 +1765,6 @@
     <string name="rendering_attr_hideNonVehicleHighways_name">Araç olmayan otoyollar</string>
     <string name="rendering_attr_hideWoodScrubs_name">Ağaç ve çalılıklar</string>
     <string name="rendering_attr_buildings15zoom_name">Binalar üzerinde yakınlaştırma 15</string>
-    <string name="rendering_attr_hideAccess_name">Erişim kısıtlamaları</string>
     <string name="rendering_attr_showAccess_name">Erişim ve geçiş ücreti kısıtlamalarını göster</string>
     <string name="rendering_attr_showSurfaces_name">Yol yüzeyi göster</string>
     <string name="rendering_attr_showCycleRoutes_name">Bisiklet rotaları</string>
@@ -3788,14 +3787,12 @@
     <string name="shared_string_add_photo">Fotoğraf ekle</string>
     <string name="register_on_openplacereviews">OpenPlaceReviews.org\'a
 \nkaydolun</string>
-    <string name="register_on_openplacereviews_desc">Fotoğraflar OpenPlaceReviews.org açık veri projesi tarafından sağlanmaktadır. Fotoğraflarınızı yüklemek için web sitelerine kaydolmanız gerekir.</string>
     <string name="register_opr_create_new_account">Yeni hesap oluştur</string>
     <string name="register_opr_have_account">Zaten bir hesabım var</string>
     <string name="shared_string_search_history">Arama geçmişi</string>
     <string name="app_mode_kayak">Kano</string>
     <string name="app_mode_motorboat">Motorlu tekne</string>
     <string name="add_to_mapillary">Mapillary\'ye ekle</string>
-    <string name="add_to_opr">OpenPlaceReviews\'a ekle</string>
     <string name="add_photos_descr">OsmAnd çeşitli kaynaklardan fotoğraflar gösterir:
 \nOpenPlaceReviews - POI fotoğrafları;
 \nMapillary - sokak düzeyinde görüntüler;
@@ -3908,9 +3905,6 @@
     <string name="open_place_reviews_plugin_description">OpenPlaceReviews projesine katkıda bulunmanızı sağlar. Fotoğraflar, yorumlar, restoranlar, oteller, müzeler ve yol noktaları gibi halka açık yerler hakkında bağlantılar gibi.
 \n
 \nNasıl katkıda bulunacağınıza ilişkin talimatları web sitemizde bulabilirsiniz - %1$s</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">test.openplacereviews.org adresini kullan</string>
-    <string name="login_open_place_reviews">OpenPlaceReviews\'te oturum aç</string>
     <string name="activity_type_water_name">Su</string>
     <string name="activity_type_winter_name">Kış</string>
     <string name="activity_type_snowmobile_name">Kar arabası</string>
@@ -4591,7 +4585,7 @@
     <string name="rendering_attr_weatherTempContours_name">Sıcaklık eş değer eğrileri</string>
     <string name="map_widget_trip_recording_downhill">Yokuş aşağı</string>
     <string name="map_widget_trip_recording_uphill">Yokuş yukarı</string>
-    <string name="map_widget_trip_recording_distance">Mesafe</string>
+    <string name="map_widget_distance">Mesafe</string>
     <string name="routing_attr_hazmat_category_name">Tehlikeli madde kategorisi</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Kısıtlama yok)</string>
     <string name="routing_attr_avoid_fords_description">Nehir geçişlerinden kaçının</string>

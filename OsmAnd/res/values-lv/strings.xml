@@ -1217,7 +1217,6 @@
     <string name="rendering_attr_buildings15zoom_name">15x palielinājums ēkām</string>
     <string name="rendering_attr_moreDetailed_name">Vairāk detaļu</string>
     <string name="rendering_attr_lessDetailed_name">Mazāk detaļu</string>
-    <string name="rendering_attr_hideAccess_name">Pieejas ierobežojumi</string>
     <string name="rendering_attr_showAccess_name">Rādīt ierobežotas pieejamības un maksas ceļus</string>
     <string name="rendering_attr_showSurfaceGrade_name">Rādīt ceļa kvalitāti</string>
     <string name="rendering_attr_showSurfaces_name">Rādīt ceļa segumu</string>
@@ -3153,7 +3152,6 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="shared_string_add_photo">Pievienot foto</string>
     <string name="register_on_openplacereviews">Reģistrēties
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Fotogrāfijas nodrošina atvērtā koda projekts OpenPlaceReviews.org. Lai augšupielādētu savas fotogrāfijas, pierakstieties interneta vietnē.</string>
     <string name="register_opr_create_new_account">Izveidot jaunu kontu</string>
     <string name="icon_group_symbols">Simboli</string>
     <string name="icon_group_sport">Sports</string>
@@ -3165,7 +3163,6 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="app_mode_kayak">Kajaks</string>
     <string name="app_mode_motorboat">Motorlaiva</string>
     <string name="add_to_mapillary">Pievienot Mapillary</string>
-    <string name="add_to_opr">Pievienot OpenPlaceReviews</string>
     <string name="add_photos_descr">OsmAnd rāda attēlus no dažādiem avotiem:
 \nOpenPlaceReviews - POI bildes;
 \nMapillary - ielas līmeņa attēli;

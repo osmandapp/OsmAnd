@@ -14,6 +14,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.UnmovableItem;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AddedWidgetViewHolder.AddedWidgetUiInfo;
 
 import androidx.annotation.NonNull;
@@ -44,9 +45,10 @@ public class AvailableItemViewHolder extends ViewHolder implements UnmovableItem
 	}
 
 	@NonNull
-	public static Spannable getGroupTitle(@NonNull WidgetGroup group, @NonNull OsmandApplication app, boolean nightMode) {
+	public static Spannable getGroupTitle(@NonNull OsmandApplication app, @NonNull WidgetGroup group,
+	                                      @NonNull WidgetsPanel panel, boolean nightMode) {
 		String groupName = app.getString(group.titleId);
-		int widgetsCount = group.getWidgets().size();
+		int widgetsCount = group.getWidgets(panel).size();
 		String title = app.getString(R.string.ltr_or_rtl_combine_via_dash, groupName, String.valueOf(widgetsCount));
 		SpannableString spannableTitle = new SpannableString(title);
 		int spanFlag = Spannable.SPAN_EXCLUSIVE_EXCLUSIVE;

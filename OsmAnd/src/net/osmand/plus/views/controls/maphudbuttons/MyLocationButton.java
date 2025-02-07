@@ -87,7 +87,11 @@ public class MyLocationButton extends MapButton {
 			if (showLocationMenu) {
 				showContextMenuForMyLocation();
 			} else if (!mapActivity.getContextMenu().isVisible()) {
-				app.getMapViewTrackingUtilities().backToLocationImpl();
+				if (app.accessibilityEnabled()) {
+					mapActivity.getMapActions().whereAmIDialog();
+				} else {
+					mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
+				}
 			}
 		} else {
 			ActivityCompat.requestPermissions(mapActivity,

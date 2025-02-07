@@ -3556,7 +3556,7 @@
     <string name="poi_healthcare_speciality_radiotherapy">Променева терапія</string>
     <string name="poi_climbing_crag_filter">Місце для скелелазіння</string>
     <string name="poi_rescue_box">Рятувальний ящик</string>
-    <string name="poi_climbing_crag">Так;Скеля для скелелазіння</string>
+    <string name="poi_climbing_crag">Скеля для скелелазіння</string>
     <string name="reddit">Reddit</string>
     <string name="poi_hazard_additional_erosion">Небезпека: ерозія</string>
     <string name="poi_hazard_additional_rockfall">Небезпека: каменепад</string>
@@ -4968,4 +4968,11 @@
     <string name="poi_cafe_yes">Иак</string>
     <string name="poi_climbing_route">Маршрут сходження</string>
     <string name="poi_climbing_route_bottom">Нижня частина маршруту сходження</string>
+    <string name="poi_sled_yes">Сани: так</string>
+    <string name="poi_sled_no">Санки: ні</string>
+    <string name="poi_dog_sled_yes">Собачі упряжки: так</string>
+    <string name="poi_dog_sled_no">Собачі упряжки: ні</string>
+    <string name="poi_atv_yes">ATV: так</string>
+    <string name="poi_atv_no">ATV: ні</string>
+    <string name="poi_access_notes">Доступ до приміток</string>
 </resources>

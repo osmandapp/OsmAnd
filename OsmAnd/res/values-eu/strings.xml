@@ -1761,7 +1761,6 @@
     <string name="rendering_value_car_name">Kotxea</string>
     <string name="rendering_value_bicycle_name">Bizikleta</string>
     <string name="rendering_value_pedestrian_name">Oinez</string>
-    <string name="rendering_attr_hideAccess_name">Sarbide murrizketak</string>
     <string name="rendering_attr_showAccess_name">Erakutsi sarbide- eta bidesari-murrizketak</string>
     <string name="local_index_select_gpx_file">Hautatu arrastoa</string>
     <string name="sort_by_distance">Ordenatu distantziaren arabera</string>
@@ -3705,8 +3704,6 @@
     <string name="osm_login_descr">Hasi saioa OAuth metodoa edo zure OSM erabiltzaile-izena eta pasahitza erabiliz.</string>
     <string name="register_on_openplacereviews">Erregistratu hemen:
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Argazkiak OpenPlaceReviews.org open data proiektuak eskaintzen ditu. Zure argazkiak igotzeko bere webgunean izena eman behar duzu.</string>
-    <string name="add_to_opr">Gehitu OpenPlaceReviews-era</string>
     <string name="add_photos_descr">OsmAnd-ek hainbat iturritako argazkiak erakusten ditu:
 \nOpenPlaceReviews - Interesguneen argazkiak;
 \nMapillary - Kale mailako irudiak;
@@ -4422,10 +4419,7 @@
     <string name="activity_type_walking_name">Oinezkoa</string>
     <string name="activity_type_snowmobile_name">Elur-motorra</string>
     <string name="activity_type_running_name">Korrikalaria</string>
-    <string name="opr_use_dev_url">Erabili test.openplacereviews.org</string>
     <string name="activity_type_water_name">Ura</string>
-    <string name="login_open_place_reviews">Hasi saioa OpenPlaceReviews-en</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="open_place_reviews_plugin_description">Egin ekarpenak OpenPlaceReviews proiektuan, hala nola, argazkiak, iritziak edo toki publikoetarako estekak, hala nola jatetxe, hotel edo museoetarako.
 \n
 \nAurkitu gure webgunean ekarpenak egiteko argibideak %1$s.</string>
@@ -4926,7 +4920,7 @@
     <string name="rendering_attr_horseScale_name">Zaldi-ibilbideen zailtasuna</string>
     <string name="map_widget_trip_recording_uphill">Maldan gora</string>
     <string name="map_widget_trip_recording_duration">Iraupena</string>
-    <string name="map_widget_trip_recording_distance">Distantzia</string>
+    <string name="map_widget_distance">Distantzia</string>
     <string name="rendering_attr_weatherTempContours_name">Tenperaturako isolineak</string>
     <string name="rendering_attr_weatherPressureContours_name">Presio-isolineak</string>
     <string name="widget_secondary_desc_part_of">%1$s gehigarriaren zatia.</string>

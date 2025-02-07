@@ -1118,7 +1118,6 @@
     <string name="rendering_value_translucent_lightgreen_name">Vèrd clar translucid</string>
     <string name="rendering_value_lightgreen_name">Verdau</string>
     <string name="rendering_attr_showSurfaces_name">Mostrar la natura de la superficia dei rotas</string>
-    <string name="rendering_attr_hideAccess_name">Limitacion d\'accès</string>
     <string name="rendering_attr_roadColors_description">Seleccionatz una combinason de colors per lei rotas:</string>
     <string name="rendering_attr_roadColors_name">Combinason de colors per lei rotas</string>
     <string name="shared_storage_first_step">Quichar sus \"%1$s\".
@@ -1615,9 +1614,6 @@
     <string name="routing_attr_driving_style_description">Chausissètz lo mòde de conducha per obtenir un percors pus breu, rapide e segur</string>
     <string name="routing_attr_short_way_description">Prioritat a un percors breu e esparnhaire en energia</string>
     <string name="activity_type_running_name">A la corsa</string>
-    <string name="login_open_place_reviews">Connectatz-vos a OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Utilizar test.openplacereviews.org</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="hillshade_slope_contour_lines">Ombras dau relèu/ Penda/ Corbas de nivèu</string>
     <string name="subscription_on_hold_title">L\'abonament a OsmAnd LIve es en suspens</string>
     <string name="subscription_expired_title">L\'abonament a OsmAnd Live es acabat</string>
@@ -1829,7 +1825,6 @@
     <string name="routing_attr_allow_intermittent_description">Permetre lei vias navigablas non permanentas</string>
     <string name="routing_attr_allow_streams_description">Permetre rius e vabres</string>
     <string name="routing_attr_allow_streams_name">Permetre rius e vabres</string>
-    <string name="add_to_opr">Ajustar a OpenPlaceReviews</string>
     <string name="export_not_enough_space">Pas pron d\'espaci</string>
     <string name="select_items_for_import">Seleccionatz leis elements que s\'importaràn.</string>
     <string name="export_not_enough_space_descr">Vòstre aparelh contèn ren que %1$s de liures. Aliberatz d\'espaci ò desseleccionatz d\'uneis articles per exportar.</string>
@@ -1839,7 +1834,6 @@
     <string name="select_groups_for_import">Seleccionatz lei grops que s\'importaràn.</string>
     <string name="osm_login_descr">Connectatz-vos amb lo metòde OAuth ò vòstre nom d\'utilizator e lo senhau OSM.</string>
     <string name="osm_edit_comment_note">Comentari de la nòta d\'OSM</string>
-    <string name="register_on_openplacereviews_desc">Lei fòtos son fornidas per lo projècte de donadas dobèrtas OpenPlaceReviews.org. Per poder telecargar vòstrei fòtos, vos devètz marcar sus son sit oèb.</string>
     <string name="register_on_openplacereviews">Registratz-vos sus
 \nOpenPlaceReviews.org</string>
     <string name="send_files_to_openstreetmap">Mandar lo fichier GPX a OpenStreetMap</string>
@@ -2241,7 +2235,7 @@
     <string name="external_device_disconnected">Desconnectat</string>
     <string name="external_device_characteristic_heart_rate">Frequéncia cardiaca</string>
     <string name="map_widget_camera_distance">Elevacion de l’aparelh fòto</string>
-    <string name="map_widget_trip_recording_distance">Distància</string>
+    <string name="map_widget_distance">Distància</string>
     <string name="nothing_found">Ges de resultat</string>
     <string name="route_info">Informacions sus lo percors</string>
     <string name="quick_action_transport_descr">Boton per mostrar ò amagar lo transpòrt public sus la mapa.</string>

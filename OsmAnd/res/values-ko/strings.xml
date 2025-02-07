@@ -1145,7 +1145,6 @@
     <string name="rendering_attr_buildings15zoom_name">줌 레벨 15에 있는 건물 표시</string>
     <string name="rendering_attr_moreDetailed_name">상세 접보</string>
     <string name="rendering_attr_lessDetailed_name">덜 상세</string>
-    <string name="rendering_attr_hideAccess_name">접근 제한 숨기기</string>
     <string name="rendering_attr_showAccess_name">접근 제한 표시</string>
     <string name="rendering_attr_showSurfaceGrade_name">도로 등급 표시</string>
     <string name="rendering_attr_showSurfaces_name">도로 표면 표시</string>
@@ -1809,7 +1808,6 @@
     <string name="plan_route_split_after">다음 후 분할</string>
     <string name="copy_to_map_markers">지도 마커에 복사</string>
     <string name="backup_and_restore">백업 &amp; 복원</string>
-    <string name="login_open_place_reviews">OpenPlaceReviews에 로그인</string>
     <string name="ui_customization">UI 사용자 지정</string>
     <string name="profile_appearance">프로필 모양</string>
     <string name="analytics_pref_title">진단공유</string>
@@ -1887,7 +1885,6 @@
     <string name="shared_string_subtype">하위 유형</string>
     <string name="profile_type_user_string">사용자 프로필</string>
     <string name="use_dev_url">사용 dev.openstreetmap.org</string>
-    <string name="add_to_opr">OpenPlaceReviews에 추가</string>
     <string name="routing_attr_piste_type_nordic_description">노르딕 또는 크로스컨트리 스키용 트레일.</string>
     <string name="routing_attr_piste_type_downhill_name">알파인 및 활강 스키</string>
     <string name="pro_features">프로 피쳐</string>
@@ -1919,7 +1916,6 @@
     <string name="activity_type_walking_name">걷기</string>
     <string name="activity_type_winter_name">겨울</string>
     <string name="activity_type_water_name">물</string>
-    <string name="opr_use_dev_url">사용 test.openplacereviews.org</string>
     <string name="routing_engine_vehicle_type_cycling_road">도로 사이클링</string>
     <string name="routing_engine_vehicle_type_cycling_mountain">산악 사이클</string>
     <string name="routing_engine_vehicle_type_cycling_electric">전기 사이클링</string>
@@ -2870,7 +2866,7 @@
 \n</string>
     <string name="quick_action_item">빠른 작업</string>
     <string name="configure_screen_quick_action">빠른 작업</string>
-    <string name="map_widget_trip_recording_distance">거리</string>
+    <string name="map_widget_distance">거리</string>
     <string name="show_polygons">다각형 표시</string>
     <string name="show_transparency_seekbar">투명 탐색 표시줄 표시</string>
     <string name="map_markers_bar">지도 마커 막대</string>

@@ -278,11 +278,11 @@ public class RoutingHelperUtils {
 
 	@NonNull
 	public static List<Location> predictLocations(@NonNull Location previousLocation, @NonNull Location currentLocation,
-	                                        double timeInSeconds, @NonNull RouteCalculationResult route) {
+	                                        double timeInSeconds, @NonNull RouteCalculationResult route, int interpolationPercent) {
 		float speedPrev = previousLocation.getSpeed();
 		float speedNew = currentLocation.getSpeed();
 		double avgSpeed = (speedPrev + speedNew) / 2.0;
-		double remainingDistance = avgSpeed * timeInSeconds * 0.8;
+		double remainingDistance = avgSpeed * timeInSeconds * (interpolationPercent / 100.0);
 
 		List<Location> predictedLocations = new ArrayList<>();
 		int currentRoute = route.getCurrentRouteForLocation(currentLocation) + 1;

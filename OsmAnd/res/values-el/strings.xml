@@ -1163,7 +1163,6 @@
     <string name="rendering_attr_hideWoodScrubs_name">Δάση και θάμνοι</string>
     <string name="rendering_attr_moreDetailed_name">Περισσότερες λεπτομέρειες</string>
     <string name="rendering_attr_lessDetailed_name">Λιγότερες λεπτομέρειες</string>
-    <string name="rendering_attr_hideAccess_name">Περιορισμοί πρόσβασης</string>
     <string name="rendering_attr_showAccess_name">Εμφάνιση πρόσβασης και περιορισμών διοδίων</string>
     <string name="rendering_attr_showSurfaceGrade_name">Εμφάνιση ποιότητας των δρόμων</string>
     <string name="rendering_attr_coloredBuildings_name">Χρωματισμός κτιρίων κατά τύπο</string>
@@ -3655,7 +3654,6 @@
     <string name="shared_string_reading_file">Ανάγνωση αρχείου…</string>
     <string name="simulation_real_mode_title">Ρεαλιστική προσομοίωση</string>
     <string name="profile_type_osmand_string">Προφίλ OsmAnd</string>
-    <string name="add_to_opr">Προσθήκη στο OpenPlaceReviews</string>
     <string name="default_appearance">Προεπιλεγμένη εμφάνιση</string>
     <string name="shared_string_shape">Σχήμα</string>
     <string name="osm_edit_close_note">Κλείσιμο Σημείωσης OSM</string>

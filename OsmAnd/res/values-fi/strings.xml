@@ -1352,7 +1352,6 @@
     <string name="rendering_attr_buildings15zoom_name">Rakennukset zoomaustasolla 15</string>
     <string name="rendering_attr_moreDetailed_name">Lisää yksityiskohtia</string>
     <string name="rendering_attr_lessDetailed_name">Vähemmän yksityiskohtia</string>
-    <string name="rendering_attr_hideAccess_name">Käyttörajoituksia</string>
     <string name="rendering_attr_showAccess_name">Näytä käyttörajoitukset ja tietullit</string>
     <string name="rendering_attr_showSurfaceGrade_name">Näytä tien laatu</string>
     <string name="rendering_attr_showSurfaces_name">Näytä tien päällyste</string>
@@ -2657,7 +2656,6 @@
     <string name="shared_string_add_photo">Lisää kuva</string>
     <string name="register_on_openplacereviews">Rekistöröidy
 \nOpenPlaceReviews.org-sivulla</string>
-    <string name="register_on_openplacereviews_desc">Kuvat ovat peräisin OpenPlaceReviews.org-sivun vapaasta dataprojektista. Jos haluat lähettää omia kuvia, sinun pitää luoda tunnukset heidän sivulla.</string>
     <string name="register_opr_create_new_account">Luo uudet tunnukset</string>
     <string name="register_opr_have_account">Minulla on jo tunnukset</string>
     <string name="shared_string_search_history">Hakuhistoria</string>
@@ -2799,7 +2797,6 @@
     <string name="select_groups_for_import">Valitse tuotavat ryhmät.</string>
     <string name="select_items_for_import">Valitse tuotavat kohteet.</string>
     <string name="add_to_mapillary">Lisää Mapillaryyn</string>
-    <string name="add_to_opr">Lisää OpenPlaceReviewsiin</string>
     <string name="use_dev_url_descr">Käyttää dev.openstreetmap.org-osoitetta openstreetmap.org-osoitteen sijasta OSM-huomautuksen / KP:n / GPX:n lähettämisen kokeiluun.</string>
     <string name="use_dev_url">Käytä dev.openstreetmap.org</string>
     <string name="reverse_all_points">Käännä kaikki pisteet päinvastaisiksi</string>
@@ -2832,9 +2829,6 @@
     <string name="activity_type_offroad_name">Maastoajelu</string>
     <string name="activity_type_motorbike_name">Moottoripyöräily</string>
     <string name="activity_type_car_name">Autoilu</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Käytä test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Kirjaudu OpenPlaceReviewsiin</string>
     <string name="activity_type_water_name">Vesi</string>
     <string name="activity_type_winter_name">Talvi</string>
     <string name="activity_type_snowmobile_name">Moottorikelkkailu</string>

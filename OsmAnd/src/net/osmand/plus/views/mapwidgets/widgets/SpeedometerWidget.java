@@ -44,6 +44,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.DrivingRegion;
+import net.osmand.router.RouteSegmentResult;
 import net.osmand.shared.settings.enums.SpeedConstants;
 import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.utils.AndroidUtils;
@@ -614,7 +615,13 @@ public class SpeedometerWidget {
 		AlarmInfo alarm = waypointHelper.getSpeedLimitAlarm(speedFormat, whenExceeded);
 		if (alarm == null) {
 			Location loc = provider.getLastKnownLocation();
-			RouteDataObject dataObject = provider.getLastKnownRouteSegment();
+			RouteSegmentResult current = routingHelper.getRoute().getCurrentSegmentResult();
+			RouteDataObject dataObject = null;
+			if (current != null) {
+				dataObject = current.getObject();
+			} else {
+				dataObject = provider.getLastKnownRouteSegment();
+			}
 			if (dataObject != null && loc != null) {
 				alarm = waypointHelper.calculateSpeedLimitAlarm(dataObject, loc, speedFormat, whenExceeded);
 			}

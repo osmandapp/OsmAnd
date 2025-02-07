@@ -22,7 +22,8 @@ class SelectionDialogAdapter extends BaseAdapter {
 
 	public static final int INVALID_ID = -1;
 
-	private final CharSequence[] items;
+	private final int layoutId;
+	private final SelectionDialogItem[] items;
 	private final boolean useMultiSelection;
 	private final boolean nightMode;
 	private int selectedIndex = INVALID_ID;
@@ -35,11 +36,12 @@ class SelectionDialogAdapter extends BaseAdapter {
 	private final LayoutInflater inflater;
 
 	public SelectionDialogAdapter(
-			@NonNull Context ctx, @NonNull CharSequence[] items, int selected,
-			@Nullable boolean[] checkedItems, @ColorInt @Nullable Integer controlsColor,
+			@NonNull Context ctx, @Nullable Integer layoutId, @NonNull SelectionDialogItem[] items,
+			int selected, @Nullable boolean[] checkedItems, @ColorInt @Nullable Integer controlsColor,
 			boolean nightMode, @Nullable View.OnClickListener listener,
 			boolean useMultiSelection
 	) {
+		this.layoutId = layoutId != null ? layoutId : R.layout.dialog_list_item_with_compound_button;
 		this.items = items;
 		this.selectedIndex = selected;
 		this.checkedItems = checkedItems;
@@ -75,7 +77,7 @@ class SelectionDialogAdapter extends BaseAdapter {
 	public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 		View view;
 		if (convertView == null) {
-			view = inflater.inflate(R.layout.dialog_list_item_with_compound_button, parent, false);
+			view = inflater.inflate(layoutId, parent, false);
 		} else {
 			view = convertView;
 		}
@@ -106,8 +108,18 @@ class SelectionDialogAdapter extends BaseAdapter {
 			Drawable selectable = UiUtilities.getColoredSelectableDrawable(ctx, controlsColor, 0.3f);
 			AndroidUtils.setBackground(button, selectable);
 		}
-		TextView text = view.findViewById(R.id.text);
-		text.setText(items[position]);
+		TextView tvTitle = view.findViewById(R.id.text);
+		tvTitle.setText(items[position].title());
+		TextView tvDescription = view.findViewById(R.id.description);
+		if (tvDescription != null) {
+			CharSequence description = items[position].description();
+			if (description != null) {
+				tvDescription.setVisibility(View.VISIBLE);
+				tvDescription.setText(description);
+			} else {
+				tvDescription.setVisibility(View.GONE);
+			}
+		}
 		return view;
 	}
 }

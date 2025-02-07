@@ -244,12 +244,13 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		myLocationTime = locationTime;
 
 		Location predictedLocation = null;
+		Integer interpolationPercent = app.getSettings().LOCATION_INTERPOLATION_PERCENT.get();
 		if (location != null && prevLocation != null && animateMyLocation(location) && movingTime > 100
 				&& app.getSettings().SNAP_TO_ROAD.get()
 				&& routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()
-				&& app.getSettings().LOCATION_INTERPOLATION_PERCENT.get() > 0) {
+				&& interpolationPercent > 0) {
 			List<Location> predictedLocations = RoutingHelperUtils.predictLocations(prevLocation,
-					location, movingTime / 1000.0, routingHelper.getRoute());
+					location, movingTime / 1000.0, routingHelper.getRoute(), interpolationPercent);
 			if (!predictedLocations.isEmpty()) {
 				predictedLocation = predictedLocations.get(0);
 			}

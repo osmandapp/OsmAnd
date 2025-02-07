@@ -44,7 +44,7 @@ class RouteTypesComparator implements Comparator<MenuObject> {
 				ROAD.getName(), DETOUR.getName(), BICYCLE.getName(), MOUNTAINBIKE.getName());
 		addRouteTypes(ApplicationMode.PUBLIC_TRANSPORT,
 				BUS.getName(), TRAM.getName(), TROLLEYBUS.getName(), SUBWAY.getName(), TRAIN.getName(),
-				RAILWAY.getName(), TRACKS.getName(), LIGHT_RAIL.getName(), PISTE.getName());
+				RAILWAY.getName(), TRACKS.getName(), LIGHT_RAIL.getName());
 		addRouteTypes(ApplicationMode.TRAIN,
 				TRAIN.getName(), LIGHT_RAIL.getName(), TRACKS.getName(), SUBWAY.getName(), TRAM.getName());
 		addRouteTypes(ApplicationMode.BOAT,

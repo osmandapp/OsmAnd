@@ -633,7 +633,6 @@
     <string name="rendering_attr_buildings15zoom_name">Konstruaĵoj ĉe skal-nivelo 15</string>
     <string name="rendering_attr_moreDetailed_name">Pli detaloj</string>
     <string name="rendering_attr_lessDetailed_name">Malpli detaloj</string>
-    <string name="rendering_attr_hideAccess_name">Aliraj baroj</string>
     <string name="rendering_attr_showAccess_name">Aliraj limigoj</string>
     <string name="rendering_attr_showSurfaceGrade_name">Kvalito de vojoj</string>
     <string name="rendering_attr_showSurfaces_name">Pavimo de vojoj</string>
@@ -3639,7 +3638,6 @@
     <string name="shared_string_add_photo">Aldoni foton</string>
     <string name="register_on_openplacereviews">Registri ĉe
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Fotoj estas liverataj de la malferm‑datuma projekto OpenPlaceReviews.org. Por alŝuti viajn fotojn, vi devas enlasaluti en la retejon.</string>
     <string name="register_opr_create_new_account">Krei novan konton</string>
     <string name="register_opr_have_account">Mi jam havas konton</string>
     <string name="shared_string_search_history">Historio de serĉoj</string>
@@ -3656,7 +3654,6 @@
     <string name="export_not_enough_space_descr">En via aparato estas nur %1$s da libera spaco. Liberigu iom da spaco aŭ malelektu iujn elementojn de elporto.</string>
     <string name="export_not_enough_space">Mankas spaco</string>
     <string name="add_to_mapillary">Aldoni al Mapillary</string>
-    <string name="add_to_opr">Aldoni al OpenPlaceReviews</string>
     <string name="select_groups_for_import">Elektu grupojn por enporti.</string>
     <string name="select_items_for_import">Elektu elementojn por enporti.</string>
     <string name="use_dev_url_descr">Baskuli al dev.openstreetmap.org anstataŭ openstreetmap.org por testi alŝuti OSM‑rimarkojn, interesejojn, GPX‑spurojn.</string>
@@ -3751,9 +3748,6 @@
     <string name="open_place_reviews_plugin_description">Ebligas kontribui al la projekto OpenPlaceReviews – per aldoni fotojn, opiniojn kaj ligilojn pri publikaj ejoj: restoracioj, hoteloj, muzeoj kaj pli.
 \n
 \nInstrukcioj (en la angla) pri kiel kontribui troviĝas sur nia retejo: %1$s</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Uzi test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Ensaluti al OpenPlaceReviews</string>
     <string name="activity_type_water_name">Akvo</string>
     <string name="activity_type_winter_name">Vintro</string>
     <string name="activity_type_snowmobile_name">Motorsledo</string>
@@ -4340,7 +4334,7 @@
     <string name="routing_attr_allow_private_for_truck_description">Permesi aliron al privataj areoj por kamionoj.</string>
     <string name="rendering_attr_weatherPressureContours_name">Egal-aerprem-linioj (izobaroj)</string>
     <string name="rendering_attr_horseScale_name">Facilo de ĉevalvojoj</string>
-    <string name="map_widget_trip_recording_distance">Distanco</string>
+    <string name="map_widget_distance">Distanco</string>
     <string name="map_widget_trip_recording_downhill">Malsupreniroj</string>
     <string name="routing_attr_avoid_4wd_only_name">Eviti vojojn por terenaj aŭtomobiloj</string>
     <string name="routing_attr_avoid_4wd_only_description">Eviti vojojn travetureblajn nur per ajnagrundaj aŭtomobiloj</string>
@@ -5554,7 +5548,6 @@
     <string name="fuel_tank_capacity">Enhaveco de brulaĵujo</string>
     <string name="shared_strings_dimensions">Dimensioj</string>
     <string name="litres">Litroj</string>
-    <string name="imperial_gallons_unit">gal</string>
     <string name="us_gallons_unit">gal</string>
     <string name="imperial_gallons">Britaj galjonoj</string>
     <string name="us_gallons">Usonaj galjonoj</string>
@@ -5584,11 +5577,9 @@
     <string name="obd_fuel_consumption_rate_sensor">Konsumo de brulaĵo (sentilo)</string>
     <string name="obd_fuel_level_liter">Nivelo de brulaĵo (l)</string>
     <string name="obd_fuel_consumption_rate_l_h_desc">Montras konsumon de brulaĵo de via veturilo surbaze de kalkuloj (l/h)</string>
-    <string name="obd_fuel_left_liter">Resta brulaĵo (l)</string>
     <string name="obd_fuel_left_km">Resta brulaĵo (km)</string>
     <string name="obd_calculated_engine_load_desc">Montras elcenton de aktuale uzata povo de la motoro.</string>
     <string name="obd_engine_oil_temperature_desc">Montras temperaturon de motoroleo.</string>
-    <string name="obd_fuel_left_percent">Resta brulaĵo (%)</string>
     <string name="obd_fuel_consumption_rate_scanner">Konsumo de brulaĵo (OBD)</string>
     <string name="obd_fuel_consumption_rate_liter_hour">Konsumo de brulaĵo</string>
     <string name="percent_hour">%/h</string>

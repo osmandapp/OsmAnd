@@ -1,10 +1,23 @@
 package net.osmand.plus.nearbyplaces
 
+import com.squareup.picasso.Picasso
+import net.osmand.ResultMatcher
+import net.osmand.binary.BinaryMapIndexReader
+import net.osmand.binary.ObfConstants
+import net.osmand.data.Amenity
+import net.osmand.data.LatLon
+import net.osmand.data.NearbyPlacePoint
+import net.osmand.data.PointDescription
 import net.osmand.data.QuadRect
 import net.osmand.plus.OsmandApplication
+import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.search.GetNearbyPlacesImagesTask
+import net.osmand.plus.views.layers.ContextMenuLayer
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider
 import net.osmand.util.Algorithms
 import net.osmand.util.CollectionUtils
+import net.osmand.util.MapUtils
+import net.osmand.wiki.WikiCoreHelper
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData
 import java.util.Collections
 import kotlin.math.min
@@ -13,9 +26,11 @@ object NearbyPlacesHelper {
 	private lateinit var app: OsmandApplication
 	private var lastModifiedTime: Long = 0
 	private const val PLACES_LIMIT = 50
-	private var prevMapRect: QuadRect? = null
-	private var prevZoom: Int? = null
-	private var prevLang: String? = null
+	private const val NEARBY_MIN_RADIUS: Int = 50
+
+	private var prevMapRect: QuadRect = QuadRect()
+	private var prevZoom = 0
+	private var prevLang = ""
 
 	fun init(app: OsmandApplication) {
 		this.app = app
@@ -30,8 +45,19 @@ object NearbyPlacesHelper {
 			}
 
 			override fun onFinish(result: List<OsmandApiFeatureData>) {
-				val newListSize = min(result.size, PLACES_LIMIT)
-				dataCollection = result.subList(0, newListSize)
+				dataCollection = result.filter { !Algorithms.isEmpty(it.properties.photoTitle) }
+				dataCollection?.let {
+					val newListSize = min(it.size, PLACES_LIMIT)
+					dataCollection = it.subList(0, newListSize)
+				}
+				dataCollection?.let {
+					for (image in it) {
+						val wikiImage = WikiCoreHelper.getImageData(image.properties.photoTitle)
+						Picasso.get()
+							.load(wikiImage.imageIconUrl)
+							.fetch()
+					}
+				}
 				updateLastModifiedTime()
 				notifyListeners()
 			}
@@ -69,8 +95,9 @@ object NearbyPlacesHelper {
 			prevZoom = mapView.zoom
 			prevLang = preferredLang
 			GetNearbyPlacesImagesTask(
-				prevMapRect!!, prevZoom!!,
-				prevLang!!, loadNearbyPlacesListener).execute()
+				app,
+				prevMapRect, prevZoom,
+				prevLang, loadNearbyPlacesListener).execute()
 		} else {
 			notifyListeners()
 		}
@@ -82,5 +109,46 @@ object NearbyPlacesHelper {
 
 	fun getLastModifiedTime(): Long {
 		return lastModifiedTime
+	}
+
+	fun showPointInContextMenu(mapActivity: MapActivity, data: OsmandApiFeatureData) {
+		val point = NearbyPlacePoint(data)
+		val latitude: Double = point.latitude
+		val longitude: Double = point.longitude
+		val latLon = LatLon(latitude, longitude)
+		val contextObject: IContextMenuProvider = mapActivity.mapLayers.nearbyPlacesLayer
+		val contextMenuLayer: ContextMenuLayer = mapActivity.mapLayers.contextMenuLayer
+		val pointDescription = PointDescription(
+			PointDescription.POINT_TYPE_NEARBY_PLACE,
+			point.wikiTitle)
+		contextMenuLayer.showContextMenu(
+			latLon,
+			pointDescription,
+			point,
+			contextObject)
+	}
+
+	fun getAmenity(latLon: LatLon, osmId: Long): Amenity? {
+		var foundAmenity: Amenity? = null
+		val radius = NEARBY_MIN_RADIUS
+		val rect = MapUtils.calculateLatLonBbox(latLon.latitude, latLon.longitude, radius)
+		app.resourceManager.searchAmenities(
+			BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER,
+			rect.top, rect.left, rect.bottom, rect.right,
+			-1, true,
+			object : ResultMatcher<Amenity?> {
+				override fun publish(amenity: Amenity?): Boolean {
+					val id = ObfConstants.getOsmObjectId(amenity)
+					if (osmId == id) {
+						foundAmenity = amenity
+					}
+					return false
+				}
+
+				override fun isCancelled(): Boolean {
+					return foundAmenity != null
+				}
+			})
+		return foundAmenity
 	}
 }
