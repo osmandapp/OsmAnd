@@ -94,6 +94,7 @@ import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
+import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.shared.obd.OBDDataComputer;
@@ -3043,9 +3044,11 @@ public class OsmandSettings {
 		}
 	}
 
-	@Nullable
-	public String getRenderPropertyValue(@NonNull String attrName) {
-		return getCustomRenderProperty(attrName).get();
+	@NonNull
+	public String getRenderPropertyValue(@NonNull RenderingRuleProperty property) {
+		CommonPreference<String> preference = getCustomRenderProperty(property.getAttrName());
+		String value = preference.get();
+		return property.containsValue(value) ? value : preference.getDefaultValue();
 	}
 
 	@NonNull

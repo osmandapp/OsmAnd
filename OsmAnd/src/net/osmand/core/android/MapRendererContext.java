@@ -322,7 +322,7 @@ public class MapRendererContext {
 			if (property.isBoolean()) {
 				properties.put(attrName, String.valueOf(settings.getRenderBooleanPropertyValue(attrName)));
 			} else {
-				String value = settings.getRenderPropertyValue(attrName);
+				String value = settings.getRenderPropertyValue(property);
 				if (!Algorithms.isEmpty(value)) {
 					properties.put(attrName, value);
 				}
