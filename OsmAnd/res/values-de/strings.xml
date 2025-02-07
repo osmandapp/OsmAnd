@@ -4484,7 +4484,7 @@
     <string name="shared_string_only_missing">Nur fehlende</string>
     <string name="included_in_your_current_plan">In Ihrem aktuellen Plan „%1$s“ enthalten</string>
     <string name="available_as_part_of_subscription_plan">Verfügbar im Rahmen des %1$s Abonnements.</string>
-    <string name="favorite_confirm_delete_group">Gruppe „%1$s\" und alle enthaltenen Punkte (%2$d) löschen?</string>
+    <string name="favorite_confirm_delete_group">Gruppe „%1$s“ und alle enthaltenen Punkte (%2$d) löschen?</string>
     <string name="favorite_delete_group">Gruppe löschen</string>
     <string name="download_heightmap_maps">Höhenkarte</string>
     <string name="display_position">Positionsanzeige</string>
@@ -5704,7 +5704,7 @@
     <string name="ais_nmea_protocol">Protokoll für NMEA-Datenempfang</string>
     <string name="ais_port_nmea_server">TCP-Port der NMEA-Datenquelle</string>
     <string name="ais_port_nmea_server_description">TCP-Portnummer der NMEA-Datenquelle definieren</string>
-    <string name="ais_object_lost_timeouts_description">TImeout-Werte festlegen, um verlorene AIS-Objekte zu identifizieren, wenn für eine bestimmte Zeit kein Signal empfangen wurde.</string>
+    <string name="ais_object_lost_timeouts_description">Timeout-Werte festlegen, um verlorene AIS-Objekte zu identifizieren, wenn für eine bestimmte Zeit kein Signal empfangen wurde.</string>
     <string name="ais_object_lost_timeout_description">Timeout für die Sichtbarkeit von AIS-Objekten festlegen: Nach dieser Zeit ohne Signalempfang wird das AIS-Objekt vom Bildschirm entfernt.</string>
     <string name="ais_cpa_settings">Einstellungen im Zusammenhang mit CPA</string>
     <string name="ais_cpa_settings_description">Diese Werte definieren die Darstellung von AIS-Objekten, die sich der eigenen Position zu sehr nähern.</string>
@@ -5712,7 +5712,7 @@
     <string name="ais_cpa_warning_distance">Warnabstand für den Punkt der größten Annäherung (CPA)</string>
     <string name="map_grid">Kartenraster</string>
     <string name="show_grids">Kartenraster anzeigen</string>
-    <string name="show_grids_description">Erlaube die Anzeige eines Rasters über der Karte</string>
-    <string name="show_utm_grids">Verwende UTM statt WGS84</string>
-    <string name="show_utm_grids_description">Zeige Gitter in UTM-Metern statt in WGS84-Grad</string>
+    <string name="show_grids_description">Anzeige eines Rasters über der Karte erlauben</string>
+    <string name="show_utm_grids">UTM statt WGS84 verwenden</string>
+    <string name="show_utm_grids_description">Gitter in UTM-Metern statt in WGS84-Grad anzeigen</string>
 </resources>
