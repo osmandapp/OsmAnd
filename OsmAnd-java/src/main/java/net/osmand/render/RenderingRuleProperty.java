@@ -146,9 +146,12 @@ public class RenderingRuleProperty {
 	}
 
 	public boolean containsValue(String value) {
-		for (String v : getPossibleValues()) {
-			if (Algorithms.objectEquals(v, value)) {
-				return true;
+		String[] values = getPossibleValues();
+		if (!Algorithms.isEmpty(values)) {
+			for (String v : values) {
+				if (Algorithms.objectEquals(v, value)) {
+					return true;
+				}
 			}
 		}
 		return false;
