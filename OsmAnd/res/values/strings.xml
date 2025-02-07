@@ -1324,7 +1324,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Show MTB IMBA trails</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Show dedicated mountain biking trails.</string>
     <string name="connect_with_straight_line">Connect with a straight line</string>
-    <string name="attach_roads_descr">Approximate your track to allowed roads to route between points and associate precise turn instructions and route properties.</string>
+    <string name="attach_roads_descr">Attach your track to roads to get detailed route information, including turn-by-turn instructions and road attributes.</string>
     <string name="attach_roads_warning">Only a recorded track can be attached to the roads.</string>
     <string name="without_profiles_changing">Without profiles changing</string>
     <string name="shared_string_only_missing">Only missing</string>
