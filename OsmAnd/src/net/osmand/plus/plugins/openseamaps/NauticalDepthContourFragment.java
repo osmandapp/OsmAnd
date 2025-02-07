@@ -113,19 +113,17 @@ public class NauticalDepthContourFragment extends BaseOsmAndFragment {
 
 	private View createPropertyView(@NonNull RenderingRuleProperty property, @NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
 		String attrName = property.getAttrName();
-		View view = inflater.inflate(R.layout.configure_screen_list_item, container, false);
+		CommonPreference<String> pref = settings.getCustomRenderProperty(attrName);
 
+		View view = inflater.inflate(R.layout.configure_screen_list_item, container, false);
 		ImageView icon = view.findViewById(R.id.icon);
 		TextView title = view.findViewById(R.id.title);
 		TextView description = view.findViewById(R.id.description);
 		AndroidUiHelper.updateVisibility(description, true);
 
-		CommonPreference<String> pref = settings.getCustomRenderProperty(attrName);
-		String propertyValue = Algorithms.isEmpty(pref.get()) ? property.getDefaultValueDescription() : pref.get();
-
 		icon.setImageDrawable(getPropertyIcon(attrName));
 		title.setText(AndroidUtils.getRenderingStringPropertyName(app, attrName, property.getName()));
-		description.setText(AndroidUtils.getRenderingStringPropertyValue(app, propertyValue));
+		description.setText(AndroidUtils.getRenderingStringPropertyValue(app, property));
 
 		View button = view.findViewById(R.id.button_container);
 		button.setOnClickListener(v -> showPreferenceDialog(property, pref, description));
