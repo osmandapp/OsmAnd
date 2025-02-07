@@ -3545,7 +3545,7 @@
     <string name="tts_missing_language_data_title">Data hilang</string>
     <string name="track_points">Titik trek</string>
     <string name="days_behind">hari di belakang</string>
-    <string name="rendering_attr_pisteRoutes_name">Lereng ski</string>
+    <string name="rendering_attr_pisteRoutes_name">Rute ski</string>
     <string name="rendering_attr_pisteGrooming_name">Perawatan piste</string>
     <string name="gpx_selection_points">%1$s
 \nTitik</string>
@@ -6060,4 +6060,38 @@
     <string name="shared_string_avg_altitude">Ketinggian rata-rata</string>
     <string name="shared_string_length">Panjang</string>
     <string name="shared_string_avg_speed">Kecepatan minimum</string>
+    <string name="map_widget_route_information">Informasi rute</string>
+    <string name="map_widget_route_information_desc">Menampilkan waktu tiba, sisa waktu perjalanan, dan jarak untuk rute navigasi saat ini.</string>
+    <string name="ais_nmea_protocol">Protokol untuk penerimaan data NMEA</string>
+    <string name="ais_address_nmea_server">Alamat IP sumber data NMEA</string>
+    <string name="ais_address_settings">Pengaturan alamat IP</string>
+    <string name="ais_load_data">Muat data AIS dari berkas</string>
+    <string name="ais_nmea_protocol_description">Pilih protokol untuk penerimaan data NMEA</string>
+    <string name="ais_ship_lost_timeout_description">Tetapkan habisnya waktu keterlihatan kapal: Setelah waktu ini tanpa penerimaan sinyal, simbol kapal akan berubah keadaannya pada layar: Akan di silang.</string>
+    <string name="plugin_ais_tracker_disclaimer">PENAFIAN\n\nPlugin ini merupakan proyek hobi dan tidak dirancang untuk keandalan dan kebenaran. JANGAN bergantung pada perangkat lunak ini dengan cara apa pun termasuk navigasi dan/atau keamanan kehidupan.</string>
+    <string name="ais_cpa_warning_distance_description">Kapal ditandai dengan warna merah jika CPA lebih sedikit daripada nilai ini dan jika CPA tercapai dalam waktu dekat (lihat penetapan Waktu peringatan untuk mencapai CPA).</string>
+    <string name="ais_address_settings_description">Pilih protokol NMEA (UDP/TCP) dan tentukan alamat</string>
+    <string name="ais_address_nmea_server_description">Tentukan alamat IP sumber data NMEA (jika TCP digunakan)</string>
+    <string name="ais_port_nmea_server">Porta TCP sumber data NMEA</string>
+    <string name="ais_port_nmea_server_description">Tentukan nomor porta TCP sumber data NMEA</string>
+    <string name="ais_port_nmea_local">Porta UDP penerima data NMEA lokal</string>
+    <string name="ais_port_nmea_local_description">Tentukan porta UDP di mana OsmAnd menerima data NMEA</string>
+    <string name="ais_object_lost_timeouts">Pengaturan habisnya waktu untuk penerimaan sinyal AIS</string>
+    <string name="ais_object_lost_timeouts_description">Tetapkan nilai habisnya waktu mengenal objek AIS yang hilang jika tidak ada sinyal yang diterima pada waktu tertentu.</string>
+    <string name="ais_object_lost_timeout">Habisnya waktu keterlihatan ketika objek hilang</string>
+    <string name="ais_object_lost_timeout_description">Tetapkan habisnya waktu keterlihatan objek AIS: Setelah waktu ini tanpa penerimaan sinyal, objek AIS akan dihilangkan dari layar.</string>
+    <string name="ais_ship_lost_timeout">Habisnya waktu keterlihatan kapal ketika tidak ada sinyal yang diterima</string>
+    <string name="ais_cpa_settings">Pengaturan berkaitan dengan CPA</string>
+    <string name="ais_cpa_settings_description">Nilai-nilai ini menentukan penampilan objek AIS yang mungkin terlalu dekat dengan posisinya.</string>
+    <string name="ais_cpa_warning_time">Waktu peringatan mencapai Titik Pendekatan Terdekat (CPA)</string>
+    <string name="ais_cpa_warning_time_description">Jika TCPA (waktu mencapai CPA dengan kapal lain) lebih sedikit daripada nilai ini, kapal akan ditandai dengan warna merah.</string>
+    <string name="ais_cpa_warning_distance">Peringatan jarak untuk Titik Pendekatan Terdekat (CPA)</string>
+    <string name="plugin_ais_tracker_name">Pelacak kapal AIS</string>
+    <string name="plugin_ais_tracker_description">Menampilkan posisi dan informasi AIS tentang kapal di sekitar. Data AIS diterima melalui jaringan dari penerima AIS eksternal.</string>
+    <string name="shared_string_default_view">Tampilan bawaan</string>
+    <string name="show_utm_grids">Gunakan UTM daripada WGS84</string>
+    <string name="map_grid">Kisi peta</string>
+    <string name="show_utm_grids_description">Tampilkan kisi dalam meter UTM daripada derajat WGS84</string>
+    <string name="show_grids_description">Perbolehkan menampilkan kisi pada peta</string>
+    <string name="show_grids">Tampilkan kisi peta</string>
 </resources>

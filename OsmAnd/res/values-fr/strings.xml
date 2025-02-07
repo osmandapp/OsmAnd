@@ -5680,4 +5680,9 @@
     <string name="show_utm_grids">Utiliser les coordonnées UTM au lieu de WGS84</string>
     <string name="show_grids_description">Autorise l\'affichage de la grille sur la carte</string>
     <string name="show_grids">Afficher la grille sur la carte</string>
+    <string name="ais_port_nmea_local">Port UDP du récepteur de données locales NMEA</string>
+    <string name="ais_port_nmea_local_description">Définir le port UDP où OsmAnd récupère les données NMEA</string>
+    <string name="ais_object_lost_timeouts">Paramètres du délai d\'expiration pour la réception du signal AIS</string>
+    <string name="ais_object_lost_timeouts_description">Définir des valeurs de délais d\'expiration pour identifier des objets AIS perdus si aucun signal n\'est reçu pendant un certain temps.</string>
+    <string name="ais_object_lost_timeout">Délai d\'expiration pour la visibilité lorsqu\'un objet est perdu</string>
 </resources>
