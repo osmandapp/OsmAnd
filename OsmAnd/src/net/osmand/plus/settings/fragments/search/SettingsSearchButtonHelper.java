@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Supplier;
 
-import de.KnollFrank.lib.settingssearch.client.SearchConfigBuilder;
+import de.KnollFrank.lib.settingssearch.client.SearchConfig;
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.*;
 import de.KnollFrank.lib.settingssearch.common.task.AsyncTaskWithProgressUpdateListeners;
@@ -64,7 +64,8 @@ public class SettingsSearchButtonHelper {
 						availableAppModes);
 		return SearchPreferenceFragments
 				.builder(
-						new SearchDatabaseConfigBuilder(rootPreferenceFragment)
+						SearchDatabaseConfig
+								.builder(rootPreferenceFragment)
 								.withFragmentFactory(new FragmentFactory())
 								.withActivitySearchDatabaseConfigs(createActivitySearchDatabaseConfigs())
 								.withPreferenceFragmentConnected2PreferenceProvider(new PreferenceFragmentConnected2PreferenceProvider())
@@ -72,7 +73,8 @@ public class SettingsSearchButtonHelper {
 								.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
 								.withPreferenceSearchablePredicate(new PreferenceSearchablePredicate())
 								.build(),
-						new SearchConfigBuilder(fragmentContainerViewId, fragmentActivity)
+						SearchConfig
+								.builder(fragmentContainerViewId, fragmentActivity)
 								.withQueryHint("Search Settings")
 								.withSearchResultsFilter(searchResultsFilter)
 								.withPreferencePathDisplayer(PreferencePathDisplayerFactory.createPreferencePathDisplayer(fragmentActivity))
