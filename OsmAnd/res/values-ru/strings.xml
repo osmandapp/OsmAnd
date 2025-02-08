@@ -5927,4 +5927,6 @@
     <string name="map_grid">Сетка карты</string>
     <string name="show_utm_grids_description">Показывать сетку в метрах UTM вместо градусов WGS84</string>
     <string name="display_distance_to_first_intermediate_summary">Виджет показывает время и расстояние до следующей остановки. Отключите эту опцию, чтобы всегда показывать данные до конечного пункта.</string>
+    <string name="no_places_available">Нет доступных мест</string>
+    <string name="no_photo_for_location_desc">Пока что в это местоположение не добавлено ни одной пользовательской фотографии</string>
 </resources>
