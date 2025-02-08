@@ -351,7 +351,7 @@
     <string name="favorite_friends_category">Freunde</string>
     <string name="favorite_places_category">Sehenswertes</string>
     <string name="shared_string_others">Andere</string>
-    <string name="shared_string_name">Name</string>
+    <string name="shared_string_name"></string>
     <string name="favourites_edit_dialog_category">Kategorie</string>
     <string name="shared_string_no_thanks">Nicht verwendet</string>
     <string name="basemap_missing">Laden Sie die Basis-Weltkarte herunter, um einen Überblick über die ganze Welt bei niedrigen Vergrößerungsstufen zu erhalten.</string>
@@ -2122,7 +2122,7 @@
     <string name="select_gpx_folder">GPX-Datei-Ordner wählen</string>
     <string name="file_can_not_be_moved">Datei konnte nicht verschoben werden.</string>
     <string name="shared_string_move">Verschieben</string>
-    <string name="shared_string_gpx_tracks">Tracks</string>
+    <string name="shared_string_gpx_tracks"></string>
     <string name="shared_string_time_moving">Zeit in Bewegung</string>
     <string name="shared_string_time_span">Dauer</string>
     <string name="shared_string_max">Max.</string>
@@ -5715,4 +5715,6 @@
     <string name="show_grids_description">Anzeige eines Rasters über der Karte erlauben</string>
     <string name="show_utm_grids">UTM statt WGS84 verwenden</string>
     <string name="show_utm_grids_description">Gitter in UTM-Metern statt in WGS84-Grad anzeigen</string>
+    <string name="no_places_available">Keine Plätze verfügbar</string>
+    <string name="no_photo_for_location_desc">Es wurden noch keine Benutzerfotos zu diesem Ort hinzugefügt</string>
 </resources>
