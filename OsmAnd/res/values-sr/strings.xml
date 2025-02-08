@@ -4659,7 +4659,7 @@
     <string name="export_to_file">Извези у датотеку</string>
     <string name="terms_of_service_desc">Преузимајући карте се слажете са %1$s и %2$s.</string>
     <string name="map_widget_ant_heart_rate_desc">Приказује тренутне корисникове срчане откуцаје приликом датог дејства</string>
-    <string name="attach_roads_descr">Уопштите свој траг ради дозвољавања путевима у путање између тачака и придружите тачна упутства скретања и својства путање.</string>
+    <string name="attach_roads_descr">Причврстите своју стазу на путеве да бисте добили детаљне информације о рути, укључујући упутства скретање по скретање и атрибуте пута.</string>
     <string name="auto_backup_preference_desc">Подразумевано, Андроид чува складиште омиљених, значака карата, и поставке Османда ради њиховог повраћаја на нове уређаје након поновне уградње. Складиште је ограничено на 25 МБ.
 \nПриликом коришћења Облака Османда, ово може одвести до неразумевања након поновне уградње.</string>
     <string name="first_marker_widget_desc">Можете подесити справицу да приказује растојање или процењено преостало време доласка на првој ознаци карте.</string>
@@ -5689,4 +5689,6 @@
     <string name="show_utm_grids">Користи УТМ уместо WGS84</string>
     <string name="show_utm_grids_description">Прикажи мрежу у УТМ метрима уместо WGS84 степенима</string>
     <string name="map_grid">Мреже мапе</string>
+    <string name="no_places_available">Нема слободних места</string>
+    <string name="no_photo_for_location_desc">Још увек није додата ниједна корисничка фотографија на ову локацију</string>
 </resources>
