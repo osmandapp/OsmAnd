@@ -5699,4 +5699,6 @@
     <string name="show_utm_grids">Použít UTM namísto WGS84</string>
     <string name="show_utm_grids_description">Zobrazit mřížku v metrech UTM namísto stupňů WGS84</string>
     <string name="map_grid">Mapové mřížky</string>
+    <string name="no_places_available">Žádná volná místa</string>
+    <string name="no_photo_for_location_desc">K této lokalitě zatím nebyly přidány žádné uživatelské fotografie</string>
 </resources>
