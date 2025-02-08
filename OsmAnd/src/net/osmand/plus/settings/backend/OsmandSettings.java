@@ -1626,7 +1626,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_FAVORITES = new BooleanPreference(this, "announce_nearby_favorites", false).makeProfile().cache();
 
-	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_POI = new BooleanPreference(this, "announce_nearby_poi", false).makeProfile().cache();
+	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_POI = new BooleanPreference(this, "announce_nearby_poi", true).makeProfile().cache();
 
 	public final OsmandPreference<Boolean> GPX_ROUTE_CALC_OSMAND_PARTS = new BooleanPreference(this, "gpx_routing_calculate_osmand_route", true).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> GPX_CALCULATE_RTEPT = new BooleanPreference(this, "gpx_routing_calculate_rtept", true).makeGlobal().makeShared().cache();
