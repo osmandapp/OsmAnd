@@ -5063,7 +5063,7 @@
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Prikazati MTB IMBA trase</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Prikazuj odgovarajuće planinske biciklističke staze.</string>
     <string name="attach_roads_warning">Samo snimljena ruta može da se slepi uz puteve.</string>
-    <string name="attach_roads_descr">Automatsko privlačenje trase na put između tačaka i dodaj precizna uputstva za navigaciju i informacije o ruti.</string>
+    <string name="attach_roads_descr">Pričvrstite svoju stazu na puteve da biste dobili detaljne informacije o ruti, uključujući uputstva skretanje po skretanje i atribute puta.</string>
     <string name="without_profiles_changing">Bez promene profila</string>
     <string name="shared_string_only_missing">Samo nedostajuće</string>
     <string name="auto_25_chars_route_tl_kl">Skreni levo i drži levo</string>
@@ -5685,4 +5685,6 @@
     <string name="show_utm_grids_description">Prikaži mrežu u UTM metrima umesto WGS84 stepenima</string>
     <string name="show_grids_description">Dozvoli prikaz mreže preko mape</string>
     <string name="show_utm_grids">Koristite UTM umesto WGS84</string>
+    <string name="no_photo_for_location_desc">Još uvek nije dodata nijedna korisnička fotografija na ovu lokaciju</string>
+    <string name="no_places_available">Nema slobodnih mesta</string>
 </resources>
