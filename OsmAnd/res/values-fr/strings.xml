@@ -4461,7 +4461,7 @@
     <string name="shared_string_only_missing">Manquant seulement</string>
     <string name="connect_with_straight_line">Connecter en ligne droite</string>
     <string name="attach_roads_warning">Seule une trace déjà enregistrée peut être attachée aux routes.</string>
-    <string name="attach_roads_descr">Déplace votre itinéraire entre points sur les routes autorisées afin obtenir un meilleur guidage et de disposer d\'informations plus justes.</string>
+    <string name="attach_roads_descr">Déplace votre trace sur les routes pour obtenir plus d\'informations comme des instructions de guidage pas-à- pas et les caractéristiques des routes.</string>
     <string name="included_in_your_current_plan">Inclus dans votre abonnement %1$s</string>
     <string name="available_as_part_of_subscription_plan">Disponible avec l\'abonnement %1$s.</string>
     <string name="favorite_delete_group">Supprimer le groupe</string>
@@ -5685,4 +5685,7 @@
     <string name="ais_object_lost_timeouts">Paramètres du délai d\'expiration pour la réception du signal AIS</string>
     <string name="ais_object_lost_timeouts_description">Définir des valeurs de délais d\'expiration pour identifier des objets AIS perdus si aucun signal n\'est reçu pendant un certain temps.</string>
     <string name="ais_object_lost_timeout">Délai d\'expiration pour la visibilité lorsqu\'un objet est perdu</string>
+    <string name="plugin_ais_tracker_name">Suivi AIS du navire</string>
+    <string name="no_places_available">Aucun lieu disponible</string>
+    <string name="no_photo_for_location_desc">Aucune photo d\'utilisateur n\'a encore été ajoutée pour ce lieu</string>
 </resources>
