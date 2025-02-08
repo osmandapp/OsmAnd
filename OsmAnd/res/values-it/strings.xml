@@ -4464,7 +4464,7 @@
     <string name="attach_roads_warning">Soltanto una traccia registrata può essere allegata alle strade.</string>
     <string name="second_next_turn_widget_desc">Il widget mostra le informazioni sulla seconda prossima svolta, che sono abilitate se la seconda svolta è immediatamente dopo la prima.</string>
     <string name="next_turn_widget_desc">Il widget mostra le informazioni sulla prossima svolta con una immagine e la distanza che manca.</string>
-    <string name="attach_roads_descr">Approssima la tua traccia alle strade consentite per il percorso tra i punti e associa precise istruzioni di svolta e proprietà del percorso.</string>
+    <string name="attach_roads_descr">Collega la tua traccia alle strade per ricevere informazioni dettagliate sul percorso, incluse istruzioni di svolta e proprietà della strada.</string>
     <string name="second_marker_widget_desc">Puoi configurare il widget per mostrare la distanza o il tempo stimato di arrivo al secondo marcatore della mappa.</string>
     <string name="time_to_intermediate_widget_desc">Il widget mostra \"Ora di arrivo\" o \"Tempo mancante\" al primo punto intermedio. Il tempo è costantemente aggiornato durante la navigazione, quando il punto intermedio viene raggiunto, il tempo verrà aggiornato al successivo punto intermedio.</string>
     <string name="distance_to_intermediate_widget_desc">Il widget mostra la distanza al primo punto intermedio. Quando il punto intermedio viene raggiunto, la distanza verrà aggiornata al successivo punto intermedio.</string>
@@ -5719,4 +5719,6 @@
     <string name="show_utm_grids_description">Mostra la griglia in metri UTM invece che in gradi WGS84</string>
     <string name="map_grid">Griglie di mappa</string>
     <string name="show_grids">Mostra griglia mappa</string>
+    <string name="no_photo_for_location_desc">Ancora nessuna foto è stata aggiunta dagli utenti a questo luogo</string>
+    <string name="no_places_available">Nessun luogo disponibile</string>
 </resources>
