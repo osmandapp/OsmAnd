@@ -3470,7 +3470,7 @@
     <string name="shared_string_reset">Нулиране</string>
     <string name="hillshade_purchase_header">Инсталирайте добавката „Релеф“, за да виждате градуирани вертикални области.</string>
     <string name="shared_string_large">Голям</string>
-    <string name="attach_roads_descr">Осреднява трасето до разрешените пътища при маршрутизиране между точките и свързва точни инструкции за завоите със свойствата на маршрута.</string>
+    <string name="attach_roads_descr">Придържа маршрута към пътя с цел получаване на подробна информация като точни инструкции за завоите и свойствата на пътя.</string>
     <string name="elevation_profile_widget_desc">Показва профила на надморската височина и наклона на текущия маршрут.</string>
     <string name="mapillary_widget_desc">Осигурява бърз достъп до приложението Mapillary за добавяне на снимки от улицата.</string>
     <string name="zoom_levels_difference_description">Голямата разлика между нивата на увеличенията може да направи размера на изтеглените данни по-голям.</string>
