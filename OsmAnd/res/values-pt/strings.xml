@@ -4652,7 +4652,7 @@
     <string name="open_weather_action_description">Permite que abra um ecrã com informações meteorológicas detalhadas.</string>
     <string name="shared_string_open">Aberto</string>
     <string name="shared_string_expires">Expira</string>
-    <string name="shared_string_purchased_on">Comprado em</string>
+    <string name="shared_string_purchased_on">Comprado a</string>
     <string name="choose_what_to_sync">Escolha o que sincronizar</string>
     <string name="cloud_sync_progress">A sincronizar… %1$s</string>
     <string name="checking_progress">A verificar…</string>
@@ -4793,7 +4793,7 @@
     <string name="external_device_details_received_data">Dados recebidos</string>
     <string name="external_device_details_connection">Conexão</string>
     <string name="ant_plus_open_settings">Abrir configurações</string>
-    <string name="ant_plus_pair_new_sensor_ble">Emparelhar sensor Bluetooth de baixa energia</string>
+    <string name="ant_plus_pair_new_sensor_ble">Emparelhar sensor Bluetooth LE</string>
     <string name="rendering_attr_lightDetail_name">Detalhes de luzes</string>
     <string name="rendering_value_sector4_name">Setor 4</string>
     <string name="shared_string_chest">Peito</string>
@@ -4823,7 +4823,7 @@
 \n– Este dispositivo está perto do sensor</string>
     <string name="ant_plus_searching_text_description">Mantenha o dispositivo perto do sensor. Tem de ativar o sensor para que o OsmAnd possa encontrá-lo.</string>
     <string name="learn_more_about_sensors_link">Saber mais sobre sensores.</string>
-    <string name="ant_plus_pair_bluetooth_prompt">Pode emparelhar sensores Bluetooth LE (baixa energia) e ANT+ com o OsmAnd.</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Pode emparelhar sensores Bluetooth LE e ANT+ com o OsmAnd.</string>
     <string name="external_device_low_battery">Bateria fraca</string>
     <string name="external_device_forget_sensor">Esquecer o sensor</string>
     <string name="external_device_forget_sensor_description">O sensor será removido da lista. Se quiser poderá emparelhar este sensor novamente a qualquer momento.</string>
@@ -4847,7 +4847,7 @@
     <string name="external_device_details_disconnect">Desconectar</string>
     <string name="bluetooth_disconnected">Desconectado, %s</string>
     <string name="bluetooth_connected">Conectado, %s</string>
-    <string name="external_device_ble">Bluetooth de baixa energia</string>
+    <string name="external_device_ble">BLE</string>
     <string name="external_device_ant">ANT</string>
     <string name="bluetooth_found_title">Encontrado: %d</string>
     <string name="bluetooth_not_supported">Bluetooth não suportado</string>
