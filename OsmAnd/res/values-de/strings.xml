@@ -351,7 +351,7 @@
     <string name="favorite_friends_category">Freunde</string>
     <string name="favorite_places_category">Sehenswertes</string>
     <string name="shared_string_others">Andere</string>
-    <string name="shared_string_name"></string>
+    <string name="shared_string_name">Name</string>
     <string name="favourites_edit_dialog_category">Kategorie</string>
     <string name="shared_string_no_thanks">Nicht verwendet</string>
     <string name="basemap_missing">Laden Sie die Basis-Weltkarte herunter, um einen Überblick über die ganze Welt bei niedrigen Vergrößerungsstufen zu erhalten.</string>
@@ -2122,7 +2122,7 @@
     <string name="select_gpx_folder">GPX-Datei-Ordner wählen</string>
     <string name="file_can_not_be_moved">Datei konnte nicht verschoben werden.</string>
     <string name="shared_string_move">Verschieben</string>
-    <string name="shared_string_gpx_tracks"></string>
+    <string name="shared_string_gpx_tracks">Tracks</string>
     <string name="shared_string_time_moving">Zeit in Bewegung</string>
     <string name="shared_string_time_span">Dauer</string>
     <string name="shared_string_max">Max.</string>
@@ -4478,7 +4478,7 @@
     <string name="download_tiles">Kacheln herunterladen</string>
     <string name="connect_with_straight_line">Mit gerader Linie verbinden</string>
     <string name="average_speed_skip_stops_desc">Geschwindigkeiten unter %1$s werden berücksichtigt und beeinflussen die Durchschnittsgeschwindigkeit.</string>
-    <string name="attach_roads_descr">Ihren Track an zulässigen Straßen annähern, um zwischen Punkten zu navigieren und genauen Abbiegeanweisungen und Routeneigenschaften zuzuordnen.</string>
+    <string name="attach_roads_descr">Verbinde dein Track mit Straßen, um detaillierte Routeninformationen zu erhalten, einschließlich Abbiegehinweisen und Straßenattributen.</string>
     <string name="attach_roads_warning">Nur ein aufgezeichneter Track kann an Straßen angehängt werden.</string>
     <string name="without_profiles_changing">Ohne Profilwechsel</string>
     <string name="shared_string_only_missing">Nur fehlende</string>
