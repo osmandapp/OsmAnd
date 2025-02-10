@@ -356,8 +356,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		configureMap.setIcon(getContentIcon(R.drawable.ic_action_layers));
 
 		Intent intent = new Intent(ctx, MapActivity.class);
-		intent.putExtra(OPEN_CONFIG_ON_MAP, MAP_CONFIG);
-		intent.putExtra(APP_MODE_KEY, getSelectedAppMode().getStringKey());
+		intent.putExtras(createMapActivityExtras());
 		configureMap.setIntent(intent);
 	}
 
@@ -489,13 +488,13 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			final String prefId = preference.getKey();
 			final ApplicationMode selectedMode = getSelectedAppMode();
 			if (CONFIGURE_MAP.equals(prefId)) {
-				sepAppModeToSelected();
+				setAppModeToSelected();
 				fragmentManager.beginTransaction()
 						.remove(this)
 						.addToBackStack(TAG)
 						.commitAllowingStateLoss();
 			} else if (isConfigureScreen(preference)) {
-				sepAppModeToSelected();
+				setAppModeToSelected();
 				createConfigureScreenFragment().show();
 				return true;
 			} else if (EXPORT_PROFILE.equals(prefId)) {
@@ -509,7 +508,14 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		return super.onPreferenceClick(preference);
 	}
 
-	private void sepAppModeToSelected() {
+	public Bundle createMapActivityExtras() {
+		final Bundle extras = new Bundle();
+		extras.putString(OPEN_CONFIG_ON_MAP, MAP_CONFIG);
+		extras.putString(APP_MODE_KEY, getSelectedAppMode().getStringKey());
+		return extras;
+	}
+
+	public void setAppModeToSelected() {
 		ApplicationMode selectedMode = getSelectedAppMode();
 		if (!ApplicationMode.values(app).contains(selectedMode)) {
 			ApplicationMode.changeProfileAvailability(selectedMode, true, app);

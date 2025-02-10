@@ -1,10 +1,12 @@
 package net.osmand.plus.settings.fragments.search;
 
+import android.app.Activity;
 import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.IdRes;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
 import net.osmand.plus.OsmandApplication;
@@ -23,6 +25,7 @@ import de.KnollFrank.lib.settingssearch.client.SearchConfig;
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.*;
 import de.KnollFrank.lib.settingssearch.common.task.AsyncTaskWithProgressUpdateListeners;
+import de.KnollFrank.lib.settingssearch.provider.ActivityInitializer;
 
 public class SettingsSearchButtonHelper {
 
@@ -62,12 +65,14 @@ public class SettingsSearchButtonHelper {
 				SearchResultsFilterFactory.createSearchResultsFilter(
 						PreferencePathDisplayerFactory.getApplicationModeKeys(),
 						availableAppModes);
+		final FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
 		return SearchPreferenceFragments
 				.builder(
 						SearchDatabaseConfig
 								.builder(rootPreferenceFragment)
 								.withFragmentFactory(new FragmentFactory())
 								.withActivitySearchDatabaseConfigs(createActivitySearchDatabaseConfigs())
+								.withActivityInitializerByActivity(getActivityInitializerByActivity(fragmentManager))
 								.withPreferenceFragmentConnected2PreferenceProvider(new PreferenceFragmentConnected2PreferenceProvider())
 								.withSearchableInfoProvider(SettingsSearchButtonHelper::getSearchableInfo)
 								.withPreferenceDialogAndSearchableInfoProvider(new PreferenceDialogAndSearchableInfoProvider())
@@ -83,7 +88,7 @@ public class SettingsSearchButtonHelper {
 								.withPrepareShow(new PrepareShow())
 								.withIncludePreferenceInSearchResultsPredicate(new IncludePreferenceInSearchResultsPredicate())
 								.build(),
-						fragmentActivity.getSupportFragmentManager(),
+						fragmentManager,
 						fragmentActivity)
 				.withCreateSearchDatabaseTaskSupplier(createSearchDatabaseTaskSupplier)
 				.build();
@@ -93,6 +98,12 @@ public class SettingsSearchButtonHelper {
 		return new ActivitySearchDatabaseConfigs(
 				Map.of(MapActivity.class, ConfigureMapFragment.PreferenceFragment.class),
 				Set.of(new FragmentWithPreferenceFragmentConnection<>(ConfigureMapFragment.class, ConfigureMapFragment.PreferenceFragment.class)));
+	}
+
+	private static Map<Class<? extends Activity>, ActivityInitializer> getActivityInitializerByActivity(final FragmentManager fragmentManager) {
+		return Map.of(
+				MapActivity.class,
+				new MapActivityActivityInitializer(fragmentManager));
 	}
 
 	private static Optional<String> getSearchableInfo(final Preference preference) {
