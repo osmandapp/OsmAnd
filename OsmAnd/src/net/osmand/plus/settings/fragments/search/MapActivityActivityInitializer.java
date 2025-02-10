@@ -12,7 +12,7 @@ import java.util.Optional;
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
 import de.KnollFrank.lib.settingssearch.provider.ActivityInitializer;
 
-class MapActivityActivityInitializer implements ActivityInitializer {
+class MapActivityActivityInitializer implements ActivityInitializer<ConfigureProfileFragment> {
 
 	private final FragmentManager fragmentManager;
 
@@ -21,15 +21,13 @@ class MapActivityActivityInitializer implements ActivityInitializer {
 	}
 
 	@Override
-	public void beforeStartActivity(final PreferenceFragmentCompat src) {
-		final ConfigureProfileFragment configureProfileFragment = (ConfigureProfileFragment) src;
-		configureProfileFragment.setAppModeToSelected();
+	public void beforeStartActivity(final ConfigureProfileFragment src) {
+		src.setAppModeToSelected();
 		SearchPreferenceFragments.hideSearchPreferenceFragment(fragmentManager);
 	}
 
 	@Override
-	public Optional<Bundle> createExtras(final PreferenceFragmentCompat src) {
-		final ConfigureProfileFragment configureProfileFragment = (ConfigureProfileFragment) src;
-		return Optional.of(configureProfileFragment.createMapActivityExtras());
+	public Optional<Bundle> createExtras(final ConfigureProfileFragment src) {
+		return Optional.of(src.createMapActivityExtras());
 	}
 }

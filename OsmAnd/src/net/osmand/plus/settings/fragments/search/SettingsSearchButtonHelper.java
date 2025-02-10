@@ -100,7 +100,7 @@ public class SettingsSearchButtonHelper {
 				Set.of(new FragmentWithPreferenceFragmentConnection<>(ConfigureMapFragment.class, ConfigureMapFragment.PreferenceFragment.class)));
 	}
 
-	private static Map<Class<? extends Activity>, ActivityInitializer> getActivityInitializerByActivity(final FragmentManager fragmentManager) {
+	private static Map<Class<? extends Activity>, ActivityInitializer<?>> getActivityInitializerByActivity(final FragmentManager fragmentManager) {
 		return Map.of(
 				MapActivity.class,
 				new MapActivityActivityInitializer(fragmentManager));
