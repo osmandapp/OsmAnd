@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.purchase.data;
 
+import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.HMD_PROMO;
 import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.HUGEROCK_PROMO;
 import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.PROMO;
 import static net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin.TRIPLTEK_PROMO;
@@ -195,6 +196,14 @@ public class PurchaseUiDataUtils {
 		SubscriptionState state = InAppPurchaseUtils.isHugerockPromoAvailable(app) ? ACTIVE : EXPIRED;
 
 		return createPromoUiData(app, HUGEROCK_PROMO, state, expireTime);
+	}
+
+	@NonNull
+	public static PurchaseUiData createHMDPurchaseUiData(@NonNull OsmandApplication app) {
+		long expireTime = InAppPurchaseUtils.getHMDPromoExpirationTime(app);
+		SubscriptionState state = InAppPurchaseUtils.isHMDPromoAvailable(app) ? ACTIVE : EXPIRED;
+
+		return createPromoUiData(app, HMD_PROMO, state, expireTime);
 	}
 
 	@NonNull
