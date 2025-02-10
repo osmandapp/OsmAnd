@@ -5694,7 +5694,7 @@
     <string name="plugin_ais_tracker_disclaimer">CLAUSE DE NON-RESPONSABILITÉ\n\nCette extension est un projet de loisir et n\'est pas conçu pour la fiabilité et l\'intégrité. NE VOUS FIEZ PAS à ce logiciel de quelque manière que ce soit, y compris le guidage et/ou votre sécurité.</string>
     <string name="ais_ship_lost_timeout_description">Définir le délai pour la visibilité des bateaux : après ce délai sans réception de signal, le symbole du bateau changera sur l\'écran : il sera barré.</string>
     <string name="ais_cpa_settings">Paramètres liés au CPA</string>
-    <string name="ais_cpa_settings_description">Ces valeurs définissent la présentation des objets AIS qui pourraient devenir trop proches de la position propre.</string>
+    <string name="ais_cpa_settings_description">Ces valeurs définissent l\'apparence des objets AIS qui pourraient devenir trop proches de votre position.</string>
     <string name="ais_cpa_warning_distance">Distance d\'avertissement pour le Point d\'Approche le plus proche (CPA)</string>
     <string name="ais_cpa_warning_time_description">Si le TCPA (temps pour atteindre le CPA avec un autre navire) est inférieur à cette valeur, le navire sera marqué en rouge.</string>
     <string name="ais_ship_lost_timeout">Délai d\'expiration pour la visibilité des bateaux lorsque aucun signal n\'est reçu</string>
