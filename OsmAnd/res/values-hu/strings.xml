@@ -4431,7 +4431,7 @@
     <string name="attach_roads_warning">Az utakhoz csak rögzített nyomvonal csatolható.</string>
     <string name="shared_string_only_missing">Csak hiányzó</string>
     <string name="connect_with_straight_line">Összekötés egyenes vonallal</string>
-    <string name="attach_roads_descr">A pontok közötti útvonaltervezés érdekében a nyomvonal közelítése az engedélyezett utakhoz, valamint pontos kanyarodási utasítások és útvonaltulajdonságok hozzárendelése.</string>
+    <string name="attach_roads_descr">Csatlakoztassa a nyomvonalait az utakhoz, hogy részletes útvonaladatokat kaphasson, beleértve a kanyarodási utasításokat és útvonal-tulajdonságokat.</string>
     <string name="included_in_your_current_plan">A jelenlegi \"%1$s\" előfizetése tartalmazza</string>
     <string name="available_as_part_of_subscription_plan">A következő előfizetés részeként érhető el: %1$s.</string>
     <string name="favorite_confirm_delete_group">Törölni akarja a(z) \"%1$s\" csoportot és minden benne foglalt pontot (%2$d)?</string>
@@ -5656,4 +5656,6 @@
     <string name="show_grids_description">Rács megjelenítését engedélyezi a térképen</string>
     <string name="show_grids">Térképrács mutatása</string>
     <string name="show_utm_grids_description">WGS84 fokok helyett UTM méterben mutatja a rácsot</string>
+    <string name="no_photo_for_location_desc">Még nem adtak hozzá felhasználói fotókat ehhez a helyhez</string>
+    <string name="no_places_available">Nincsenek helyek</string>
 </resources>

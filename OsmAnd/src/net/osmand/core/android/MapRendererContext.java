@@ -29,7 +29,10 @@ import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.render.RenderingClass;
+import net.osmand.render.RenderingRule;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRuleStorageProperties;
@@ -317,17 +320,24 @@ public class MapRendererContext {
 		for (RenderingRuleProperty property : storage.PROPS.getCustomRules()) {
 			String attrName = property.getAttrName();
 			if (property.isBoolean()) {
-				properties.put(attrName, settings.getRenderBooleanPropertyValue(attrName) + "");
+				properties.put(attrName, String.valueOf(settings.getRenderBooleanPropertyValue(attrName)));
 			} else {
-				String value = settings.getRenderPropertyValue(attrName);
+				String value = settings.getRenderPropertyValue(property);
 				if (!Algorithms.isEmpty(value)) {
 					properties.put(attrName, value);
 				}
 			}
 		}
+		for (Map.Entry<String, RenderingClass> entry : storage.getRenderingClasses().entrySet()) {
+			RenderingClass renderingClass = entry.getValue();
 
+			String name = renderingClass.getName();
+			boolean enabled = renderingClass.isEnabledByDefault();
+			CommonPreference<Boolean> preference = settings.getСustomBooleanRenderClassProperty(name, enabled);
+			properties.put(name, String.valueOf(preference.get()));
+		}
 		QStringStringHash styleSettings = new QStringStringHash();
-		for (Entry<String, String> setting : properties.entrySet()) {
+		for (Map.Entry<String, String> setting : properties.entrySet()) {
 			styleSettings.set(setting.getKey(), setting.getValue());
 		}
 		if (nightMode) {

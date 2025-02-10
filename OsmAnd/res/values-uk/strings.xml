@@ -4474,7 +4474,7 @@
     <string name="attach_roads_warning">До доріг можна прикріпити лише записаний трек.</string>
     <string name="without_profiles_changing">Без зміни профілів</string>
     <string name="download_tiles">Завантажити тайли</string>
-    <string name="attach_roads_descr">Додайте контрольні точки треку вздовж доріг, по яких рух дозволений, щоб прокласти маршрут між ними з урахуванням наявних обмежень та особливостей маршруту.</string>
+    <string name="attach_roads_descr">Прив’яжіть свій трек до доріг, щоб отримати детальну інформацію про маршрут, включаючи покрокові інструкції та атрибути дороги.</string>
     <string name="shared_string_only_missing">Лише відсутні</string>
     <string name="included_in_your_current_plan">Включено до поточного плану \"%1$s\"</string>
     <string name="available_as_part_of_subscription_plan">Доступно в рамках передплати %1$s.</string>
@@ -5710,4 +5710,6 @@
     <string name="show_utm_grids">Використовувати UTM замість WGS84</string>
     <string name="show_utm_grids_description">Показувати сітку в метрах UTM замість WGS84 градусів</string>
     <string name="map_grid">Картографічні сітки</string>
+    <string name="no_places_available">Немає доступних місць</string>
+    <string name="no_photo_for_location_desc">До цього місця ще не додано жодної фотографії користувача</string>
 </resources>

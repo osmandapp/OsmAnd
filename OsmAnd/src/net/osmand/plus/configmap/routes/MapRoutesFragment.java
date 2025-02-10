@@ -6,6 +6,7 @@ import static net.osmand.osm.OsmRouteType.HIKING;
 import static net.osmand.osm.OsmRouteType.MTB;
 
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,11 +23,13 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.configmap.ConfigureMapUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.render.RenderingClass;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
@@ -70,8 +73,7 @@ public abstract class MapRoutesFragment extends BaseOsmAndFragment implements Ca
 		View view = themedInflater.inflate(R.layout.map_routes_fragment, container, false);
 
 		setupHeader(view);
-		setupCards(view);
-		updateContent();
+		setupContent(view);
 
 		return view;
 	}
@@ -83,7 +85,7 @@ public abstract class MapRoutesFragment extends BaseOsmAndFragment implements Ca
 		preferenceContainer.setOnClickListener(v -> {
 			toggleMainPreference(view);
 			setupHeader(view);
-			updateContent();
+			setupContent(view);
 			refreshMap();
 		});
 
@@ -103,31 +105,52 @@ public abstract class MapRoutesFragment extends BaseOsmAndFragment implements Ca
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.header_divider), !enabled);
 	}
 
-	protected void addCard(@NonNull BaseCard card) {
-		cards.add(card);
-		card.setListener(this);
-		cardsContainer.addView(card.build(cardsContainer.getContext()));
-	}
-
-	protected void setupCards(@NonNull View view) {
-		cards.clear();
-		cardsContainer = view.findViewById(R.id.cards_container);
-		cardsContainer.removeAllViews();
-	}
-
-	protected void updateContent() {
-		for (BaseCard card : cards) {
-			card.update();
-		}
+	protected void setupContent(@NonNull View view) {
+		createCards(view);
+		inflateCards(view);
 		AndroidUiHelper.updateVisibility(cardsContainer, isEnabled());
 	}
 
-	protected void refreshMap() {
-		MapActivity mapActivity = (MapActivity) getMyActivity();
-		if (mapActivity != null) {
-			mapActivity.refreshMapComplete();
-			mapActivity.updateLayers();
+	protected void createCards(@NonNull View view) {
+		cards.clear();
+	}
+
+	protected void inflateCards(@NonNull View view) {
+		cardsContainer = view.findViewById(R.id.cards_container);
+		cardsContainer.removeAllViews();
+
+		for (int i = 0; i < cards.size(); i++) {
+			BaseCard card = cards.get(i);
+
+			if (i == 0) {
+				cardsContainer.addView(createDivider(cardsContainer, true, true));
+			}
+			cardsContainer.addView(card.build(cardsContainer.getContext()));
+
+			boolean lastItem = i == cards.size() - 1;
+			cardsContainer.addView(createDivider(cardsContainer, !lastItem, true));
 		}
+	}
+
+	protected void addCard(@NonNull BaseCard card) {
+		cards.add(card);
+		card.setListener(this);
+	}
+
+	protected void addRenderingClassCard(@NonNull String attrName) {
+		BaseCard card = createRenderingClassCard(attrName);
+		if (card != null) {
+			addCard(card);
+		}
+	}
+
+	@Nullable
+	protected BaseCard createRenderingClassCard(@NonNull String attrName) {
+		Pair<RenderingClass, List<RenderingClass>> pair = ConfigureMapUtils.getRenderingClassWithChildren(app, attrName);
+		if (pair != null) {
+			return new RenderingClassesCard(getMapActivity(), pair.first, pair.second);
+		}
+		return null;
 	}
 
 	@NonNull
@@ -145,6 +168,15 @@ public abstract class MapRoutesFragment extends BaseOsmAndFragment implements Ca
 		View view = getView();
 		if (view != null) {
 			setupHeader(view);
+			setupContent(view);
+		}
+	}
+
+	protected void refreshMap() {
+		MapActivity mapActivity = (MapActivity) getMyActivity();
+		if (mapActivity != null) {
+			mapActivity.refreshMapComplete();
+			mapActivity.updateLayers();
 		}
 	}
 
@@ -167,9 +199,12 @@ public abstract class MapRoutesFragment extends BaseOsmAndFragment implements Ca
 	}
 
 	public static boolean shouldShow(@NonNull OsmandApplication app, @NonNull String attrName) {
-		return CollectionUtils.equalsToAny(attrName,
+		boolean defaultScreens = CollectionUtils.equalsToAny(attrName,
 				BICYCLE.getRenderingPropertyAttr(), MTB.getRenderingPropertyAttr(),
 				HIKING.getRenderingPropertyAttr(), ALPINE.getRenderingPropertyAttr());
+
+		Pair<RenderingClass, List<RenderingClass>> pair = ConfigureMapUtils.getRenderingClassWithChildren(app, attrName);
+		return defaultScreens || pair != null;
 	}
 
 	@Nullable
@@ -183,7 +218,7 @@ public abstract class MapRoutesFragment extends BaseOsmAndFragment implements Ca
 		} else if (Algorithms.stringsEqual(ALPINE.getRenderingPropertyAttr(), attrName)) {
 			return AlpineHikingScaleFragment.class.getName();
 		}
-		return null;
+		return CustomRoutesFragment.class.getName();
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull String attrName) {

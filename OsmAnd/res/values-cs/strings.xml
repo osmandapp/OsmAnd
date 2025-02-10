@@ -4577,7 +4577,7 @@
     <string name="map_marker_interval_dialog_desc">Zadejte časový interval, ve kterém se bude měřit průměrná rychlost pro výpočet odhadovaného času příjezdu.</string>
     <string name="included_in_your_current_plan">Zahrnuto ve vašem aktuálním plánu \"%1$s\"</string>
     <string name="connect_with_straight_line">Připojit přímou čarou</string>
-    <string name="attach_roads_descr">Aproximujte svoji stopu pomocí povolených cest pro navigaci mezi body a přiřazení přesných navigačních pokynů a vlastností trasy.</string>
+    <string name="attach_roads_descr">Připojte svoji stopu k cestám, abyste získali detailní informace o trase včetně navigačních pokynů a vlastností cest.</string>
     <string name="without_profiles_changing">Bez změny profilů</string>
     <string name="auto_25_chars_route_tl_kl">Zahněte vlevo a držte se vlevo</string>
     <string name="auto_25_chars_route_tl_kr">Zahněte vlevo a držte se vpravo</string>
@@ -5699,4 +5699,6 @@
     <string name="show_utm_grids">Použít UTM namísto WGS84</string>
     <string name="show_utm_grids_description">Zobrazit mřížku v metrech UTM namísto stupňů WGS84</string>
     <string name="map_grid">Mapové mřížky</string>
+    <string name="no_places_available">Žádná volná místa</string>
+    <string name="no_photo_for_location_desc">K této lokalitě zatím nebyly přidány žádné uživatelské fotografie</string>
 </resources>

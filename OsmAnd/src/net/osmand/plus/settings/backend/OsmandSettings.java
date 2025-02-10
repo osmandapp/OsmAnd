@@ -94,6 +94,7 @@ import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
+import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.shared.obd.OBDDataComputer;
@@ -142,6 +143,7 @@ public class OsmandSettings {
 	private final Map<String, CommonPreference<String>> customRendersProps = new LinkedHashMap<>();
 	private final Map<String, CommonPreference<Boolean>> customBooleanRoutingProps = new LinkedHashMap<>();
 	private final Map<String, CommonPreference<Boolean>> customBooleanRendersProps = new LinkedHashMap<>();
+	private final Map<String, CommonPreference<Boolean>> customBooleanRenderClassProps = new LinkedHashMap<>();
 
 	private final ImpassableRoadsStorage impassableRoadsStorage = new ImpassableRoadsStorage(this);
 	private final IntermediatePointsStorage intermediatePointsStorage = new IntermediatePointsStorage(this);
@@ -1624,7 +1626,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_FAVORITES = new BooleanPreference(this, "announce_nearby_favorites", false).makeProfile().cache();
 
-	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_POI = new BooleanPreference(this, "announce_nearby_poi", false).makeProfile().cache();
+	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_POI = new BooleanPreference(this, "announce_nearby_poi", true).makeProfile().cache();
 
 	public final OsmandPreference<Boolean> GPX_ROUTE_CALC_OSMAND_PARTS = new BooleanPreference(this, "gpx_routing_calculate_osmand_route", true).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> GPX_CALCULATE_RTEPT = new BooleanPreference(this, "gpx_routing_calculate_rtept", true).makeGlobal().makeShared().cache();
@@ -3042,9 +3044,11 @@ public class OsmandSettings {
 		}
 	}
 
-	@Nullable
-	public String getRenderPropertyValue(@NonNull String attrName) {
-		return getCustomRenderProperty(attrName).get();
+	@NonNull
+	public String getRenderPropertyValue(@NonNull RenderingRuleProperty property) {
+		CommonPreference<String> preference = getCustomRenderProperty(property.getAttrName());
+		String value = preference.get();
+		return property.containsValue(value) ? value : preference.getDefaultValue();
 	}
 
 	@NonNull
@@ -3108,6 +3112,16 @@ public class OsmandSettings {
 			customBooleanRoutingProps.put(attrName, new BooleanStringPreference(this, id, defaultValue).makeProfile());
 		}
 		return customBooleanRoutingProps.get(attrName);
+	}
+
+	@NonNull
+	public CommonPreference<Boolean> getСustomBooleanRenderClassProperty(@NonNull String name, boolean defaultValue) {
+		if (!customBooleanRenderClassProps.containsKey(name)) {
+			CommonPreference<Boolean> preference = new BooleanPreference(this, name, defaultValue).makeProfile();
+			customBooleanRenderClassProps.put(name, preference);
+			return preference;
+		}
+		return customBooleanRenderClassProps.get(name);
 	}
 
 	public final OsmandPreference<Boolean> SHOW_TRAVEL = new BooleanPreference(this, "show_travel_routes", false).makeProfile().cache();

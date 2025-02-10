@@ -4486,7 +4486,7 @@
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Vis stier beregnet til mountainbiking.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Vis MTB IMBA-spor</string>
     <string name="connect_with_straight_line">Forbind med en lige linje</string>
-    <string name="attach_roads_descr">Tilnærm dit spor til tilladte veje for at følge punkter og tilknytte præcise svinginstruktioner og ruteegenskaber.</string>
+    <string name="attach_roads_descr">Fastgør dit spor til veje for at få detaljerede ruteoplysninger, inklusive præcise svinginstruktioner og vejegenskaber.</string>
     <string name="attach_roads_warning">Kun et optaget spor kan vedhæftes vejene.</string>
     <string name="download_tiles">Download kortfliser</string>
     <string name="shared_string_only_missing">Kun manglende</string>
@@ -5731,4 +5731,6 @@
     <string name="map_grid">Kortgradnet</string>
     <string name="show_grids">Vis gradnet på kort</string>
     <string name="show_grids_description">Tillad visning af gradnet over kortet</string>
+    <string name="no_places_available">Ingen steder til rådighed</string>
+    <string name="no_photo_for_location_desc">Der er endnu ikke tilføjet nogen brugerbilleder til dette sted</string>
 </resources>

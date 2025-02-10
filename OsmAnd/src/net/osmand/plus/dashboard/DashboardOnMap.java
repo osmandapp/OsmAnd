@@ -43,8 +43,11 @@ import net.osmand.data.ValueHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.configmap.routes.*;
 import net.osmand.plus.configmap.ConfigureMapFragment;
+import net.osmand.plus.configmap.routes.MapRoutesFragment;
+import net.osmand.plus.configmap.routes.RenderingClassFragment;
+import net.osmand.plus.configmap.routes.RouteLayersHelper;
+import net.osmand.plus.configmap.routes.TravelRoutesFragment;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dashboard.tools.DashboardSettingsDialogFragment;
 import net.osmand.plus.dashboard.tools.TransactionBuilder;
@@ -87,6 +90,7 @@ import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.wikipedia.WikipediaPoiMenu;
+import net.osmand.render.RenderingClass;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -321,6 +325,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		} else if (isCurrentType(MAP_ROUTES)) {
 			RouteLayersHelper helper = getMyApplication().getRouteLayersHelper();
 			tv.setText(helper.getRoutesTypeName(helper.getSelectedAttrName()));
+		} else if (isCurrentType(RENDERING_CLASS)) {
+			RouteLayersHelper helper = getMyApplication().getRouteLayersHelper();
+			RenderingClass renderingClass = helper.getSelectedRenderingClass();
+			if (renderingClass != null) {
+				tv.setText(renderingClass.getTitle());
+			}
 		}
 		ImageView edit = dashboardView.findViewById(R.id.toolbar_edit);
 		edit.setVisibility(View.GONE);
@@ -559,7 +569,17 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				} else if (isCurrentType(WEATHER_CONTOURS)) {
 					WeatherContoursFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(MAP_ROUTES)) {
-					MapRoutesFragment.showInstance(mapActivity, getMyApplication().getRouteLayersHelper().getSelectedAttrName());
+					RouteLayersHelper helper = getMyApplication().getRouteLayersHelper();
+					String attrName = helper.getSelectedAttrName();
+					if (attrName != null) {
+						MapRoutesFragment.showInstance(mapActivity, attrName);
+					}
+				} else if (isCurrentType(RENDERING_CLASS)) {
+					RouteLayersHelper helper = getMyApplication().getRouteLayersHelper();
+					RenderingClass renderingClass = helper.getSelectedRenderingClass();
+					if (renderingClass != null) {
+						RenderingClassFragment.showInstance(mapActivity, renderingClass);
+					}
 				}
 				scrollView.setVisibility(View.VISIBLE);
 				listViewLayout.setVisibility(View.GONE);
@@ -624,7 +644,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		} else {
 			listView.setBackgroundColor(backgroundColor);
 		}
-		if (isNoCurrentType(CONFIGURE_MAP, CONTOUR_LINES, TERRAIN, MAP_ROUTES, TRAVEL_ROUTES,
+		if (isNoCurrentType(CONFIGURE_MAP, CONTOUR_LINES, TERRAIN, MAP_ROUTES, RENDERING_CLASS, TRAVEL_ROUTES,
 				OSM_NOTES, WIKIPEDIA, TRANSPORT_LINES, WEATHER, WEATHER_LAYER, WEATHER_CONTOURS, NAUTICAL_DEPTH)) {
 			listView.setDivider(dividerDrawable);
 			listView.setDividerHeight(AndroidUtils.dpToPx(mapActivity, 1f));
@@ -962,8 +982,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	public boolean isCurrentTypeHasIndividualFragment() {
 		return isCurrentType(
-				CONFIGURE_MAP, MAPILLARY, TERRAIN, RELIEF_3D, MAP_ROUTES, TRAVEL_ROUTES,
-				TRANSPORT_LINES, WEATHER, WEATHER_LAYER, WEATHER_CONTOURS, NAUTICAL_DEPTH
+				CONFIGURE_MAP, MAPILLARY, TERRAIN, RELIEF_3D, MAP_ROUTES, RENDERING_CLASS,
+				TRAVEL_ROUTES, TRANSPORT_LINES, WEATHER, WEATHER_LAYER, WEATHER_CONTOURS, NAUTICAL_DEPTH
 		);
 	}
 

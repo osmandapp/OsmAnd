@@ -7,17 +7,16 @@ import net.osmand.binary.ObfConstants
 import net.osmand.data.Amenity
 import net.osmand.data.LatLon
 import net.osmand.data.NearbyPlacePoint
-import net.osmand.data.PointDescription
 import net.osmand.data.QuadRect
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.search.GetNearbyPlacesImagesTask
 import net.osmand.plus.views.layers.ContextMenuLayer
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider
+import net.osmand.search.core.SearchCoreFactory
 import net.osmand.util.Algorithms
 import net.osmand.util.CollectionUtils
 import net.osmand.util.MapUtils
-import net.osmand.wiki.WikiCoreHelper
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData
 import java.util.Collections
 import kotlin.math.min
@@ -37,7 +36,7 @@ object NearbyPlacesHelper {
 	}
 
 	private var listeners: List<NearbyPlacesListener> = Collections.emptyList()
-	private var dataCollection: List<OsmandApiFeatureData>? = null
+	private var dataCollection: List<NearbyPlacePoint>? = null
 
 	private val loadNearbyPlacesListener: GetNearbyPlacesImagesTask.GetImageCardsListener =
 		object : GetNearbyPlacesImagesTask.GetImageCardsListener {
@@ -46,15 +45,15 @@ object NearbyPlacesHelper {
 
 			override fun onFinish(result: List<OsmandApiFeatureData>) {
 				dataCollection = result.filter { !Algorithms.isEmpty(it.properties.photoTitle) }
+					.map { NearbyPlacePoint(it) }
 				dataCollection?.let {
 					val newListSize = min(it.size, PLACES_LIMIT)
 					dataCollection = it.subList(0, newListSize)
 				}
 				dataCollection?.let {
-					for (image in it) {
-						val wikiImage = WikiCoreHelper.getImageData(image.properties.photoTitle)
+					for (point in it) {
 						Picasso.get()
-							.load(wikiImage.imageIconUrl)
+							.load(point.iconUrl)
 							.fetch()
 					}
 				}
@@ -79,7 +78,7 @@ object NearbyPlacesHelper {
 		}
 	}
 
-	fun getDataCollection(): List<OsmandApiFeatureData> {
+	fun getDataCollection(): List<NearbyPlacePoint> {
 		return this.dataCollection ?: Collections.emptyList()
 	}
 
@@ -111,21 +110,17 @@ object NearbyPlacesHelper {
 		return lastModifiedTime
 	}
 
-	fun showPointInContextMenu(mapActivity: MapActivity, data: OsmandApiFeatureData) {
-		val point = NearbyPlacePoint(data)
+	fun showPointInContextMenu(mapActivity: MapActivity, point: NearbyPlacePoint) {
 		val latitude: Double = point.latitude
 		val longitude: Double = point.longitude
-		val latLon = LatLon(latitude, longitude)
-		val contextObject: IContextMenuProvider = mapActivity.mapLayers.nearbyPlacesLayer
-		val contextMenuLayer: ContextMenuLayer = mapActivity.mapLayers.contextMenuLayer
-		val pointDescription = PointDescription(
-			PointDescription.POINT_TYPE_NEARBY_PLACE,
-			point.wikiTitle)
-		contextMenuLayer.showContextMenu(
-			latLon,
-			pointDescription,
-			point,
-			contextObject)
+		app.settings.setMapLocationToShow(
+			latitude,
+			longitude,
+			SearchCoreFactory.PREFERRED_NEARBY_POINT_ZOOM,
+			point.getPointDescription(app),
+			true,
+			point)
+		MapActivity.launchMapActivityMoveToTop(mapActivity)
 	}
 
 	fun getAmenity(latLon: LatLon, osmId: Long): Amenity? {

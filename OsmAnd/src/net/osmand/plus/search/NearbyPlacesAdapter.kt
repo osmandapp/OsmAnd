@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import net.osmand.data.NearbyPlacePoint
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
@@ -14,19 +15,17 @@ import net.osmand.plus.render.RenderingIcons
 import net.osmand.plus.utils.PicassoUtils
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.util.Algorithms
-import net.osmand.wiki.WikiCoreHelper
-import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData
 import net.osmand.wiki.WikiImage
 
 class NearbyPlacesAdapter(
 	val app: OsmandApplication,
-	var items: List<OsmandApiFeatureData>,
+	var items: List<NearbyPlacePoint>,
 	private var isVertical: Boolean,
 	private val onItemClickListener: NearbyItemClickListener
 ) : RecyclerView.Adapter<NearbyPlacesAdapter.NearbyViewHolder>() {
 
 	interface NearbyItemClickListener {
-		fun onNearbyItemClicked(item: OsmandApiFeatureData)
+		fun onNearbyItemClicked(item: NearbyPlacePoint)
 	}
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NearbyViewHolder {
@@ -56,13 +55,11 @@ class NearbyPlacesAdapter(
 		private val titleTextView: TextView = itemView.findViewById(R.id.item_title)
 		private val descriptionTextView: TextView? = itemView.findViewById(R.id.item_description)
 		private val itemTypeTextView: TextView = itemView.findViewById(R.id.item_type)
-		private var imageData: WikiImage? = null
 
-		fun bind(item: OsmandApiFeatureData, onItemClickListener: NearbyItemClickListener) {
-			imageData = WikiCoreHelper.getImageData(item.properties.photoTitle);
+		fun bind(item: NearbyPlacePoint, onItemClickListener: NearbyItemClickListener) {
 			val app = imageView.context.applicationContext as OsmandApplication
 			val poiTypes = app.poiTypes
-			val subType = poiTypes.getPoiTypeByKey(item.properties.poisubtype)
+			val subType = poiTypes.getPoiTypeByKey(item.poisubtype)
 			val poiIcon = RenderingIcons.getBigIcon(app, subType.keyName)
 			val uiUtilities = app.uiUtilities
 			val nightMode = app.daynightHelper.isNightMode
@@ -78,27 +75,27 @@ class NearbyPlacesAdapter(
 			iconImageView.setImageDrawable(coloredIcon)
 			val picasso = PicassoUtils.getPicasso(app)
 
-			imageData?.let {
+			item.imageStubUrl?.let {
 				val creator = Picasso.get()
-					.load(it.imageStubUrl)
+					.load(it)
 				if (coloredIcon != null) {
 					creator.error(coloredIcon)
 				}
 				creator.into(imageView, object : Callback {
 					override fun onSuccess() {
-						picasso.setResultLoaded(it.imageStubUrl, true)
+						picasso.setResultLoaded(it, true)
 					}
 
 					override fun onError(e: Exception?) {
-						picasso.setResultLoaded(it.imageStubUrl, true)
+						picasso.setResultLoaded(it, true)
 					}
 				})
 			}
-			descriptionTextView?.text = item.properties.wikiDesc
+			descriptionTextView?.text = item.wikiDesc
 			descriptionTextView?.let {
-				AndroidUiHelper.updateVisibility(it, !Algorithms.isEmpty(item.properties.wikiDesc))
+				AndroidUiHelper.updateVisibility(it, !Algorithms.isEmpty(item.wikiDesc))
 			}
-			titleTextView.text = item.properties.wikiTitle
+			titleTextView.text = item.wikiTitle
 			itemTypeTextView.text = subType.translation
 			itemView.setOnClickListener { onItemClickListener.onNearbyItemClicked(item) }
 		}
