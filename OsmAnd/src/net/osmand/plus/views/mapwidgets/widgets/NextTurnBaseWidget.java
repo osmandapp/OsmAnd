@@ -235,7 +235,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		if (Algorithms.isEmpty(streetName.exitRef)) {
 			AndroidUiHelper.updateVisibility(exitView, false);
 		} else {
-			String exit = app.getString(R.string.shared_string_exit);
+			String exit = app.getString(R.string.shared_string_road_exit);
 			String exitViewText = app.getString(R.string.ltr_or_rtl_combine_via_space, exit, streetName.exitRef);
 			exitView.setText(exitViewText);
 			AndroidUiHelper.updateVisibility(exitView, true);
