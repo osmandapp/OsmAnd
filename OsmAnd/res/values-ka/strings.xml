@@ -3285,4 +3285,6 @@
     <string name="keep_both_desc">შემოტანილი ელემენტები პრეფიქსით დაემატება</string>
     <string name="units_and_formats">ერთეულები და ფორმატები</string>
     <string name="switch_start_finish">საწყისი წერტილის და დანიშნულების პუნქტის შებრუნება</string>
+    <string name="weather_wind_kilimeters_per_hour">კილომეტრი საათში</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
 </resources>
