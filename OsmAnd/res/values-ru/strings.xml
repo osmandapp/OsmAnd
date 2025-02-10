@@ -5929,4 +5929,5 @@
     <string name="display_distance_to_first_intermediate_summary">Виджет показывает время и расстояние до следующей остановки. Отключите эту опцию, чтобы всегда показывать данные до конечного пункта.</string>
     <string name="no_places_available">Нет доступных мест</string>
     <string name="no_photo_for_location_desc">Пока что в это местоположение не добавлено ни одной пользовательской фотографии</string>
+    <string name="shared_string_road_exit">Съезд</string>
 </resources>
