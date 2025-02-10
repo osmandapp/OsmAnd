@@ -57,6 +57,7 @@ import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.HMDPromoFragment;
 import net.osmand.plus.chooseplan.HugerockPromoFragment;
 import net.osmand.plus.chooseplan.TripltekPromoFragment;
 import net.osmand.plus.configmap.ConfigureMapFragment;
@@ -594,6 +595,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			} else if (HugerockPromoFragment.shouldShow(app)) {
 				SecondSplashScreenFragment.SHOW = false;
 				HugerockPromoFragment.showInstance(fragmentManager);
+			} else if (HMDPromoFragment.shouldShow(app)) {
+				SecondSplashScreenFragment.SHOW = false;
+				HMDPromoFragment.showInstance(fragmentManager);
 			}
 		}
 

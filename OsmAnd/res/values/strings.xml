@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="hmd_promo">HMD Promo for %1$s months</string>
+    <string name="hmd_promo_description">Free access to features including unlimited map downloads, 3D relief etc. for %1$s month</string>
 	<string name="shared_string_road_exit">Exit</string>
 	<string name="popular_places_nearby">Popular places nearby</string>
 	<string name="recently_visited">Recently visited</string>
