@@ -5721,4 +5721,7 @@
     <string name="show_grids">Mostra griglia mappa</string>
     <string name="no_photo_for_location_desc">Ancora nessuna foto è stata aggiunta dagli utenti a questo luogo</string>
     <string name="no_places_available">Nessun luogo disponibile</string>
+    <string name="shared_string_road_exit">Uscita</string>
+    <string name="hmd_promo_description">Accesso gratuito alle funzionalità, inclusi scaricamenti mappe illimitati, rilievi 3D, ecc. per %1$s mese</string>
+    <string name="hmd_promo">Promozione HMD per%1$s mesi</string>
 </resources>
