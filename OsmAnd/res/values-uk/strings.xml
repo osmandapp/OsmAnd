@@ -5712,4 +5712,7 @@
     <string name="map_grid">Картографічні сітки</string>
     <string name="no_places_available">Немає доступних місць</string>
     <string name="no_photo_for_location_desc">До цього місця ще не додано жодної фотографії користувача</string>
+    <string name="hmd_promo_description">Безкоштовний доступ до функцій, включаючи необмежену кількість завантажень карт, 3D-рельєф тощо протягом %1$s місяця</string>
+    <string name="shared_string_road_exit">Вихід</string>
+    <string name="hmd_promo">Промо HMD на %1$s місяців</string>
 </resources>
