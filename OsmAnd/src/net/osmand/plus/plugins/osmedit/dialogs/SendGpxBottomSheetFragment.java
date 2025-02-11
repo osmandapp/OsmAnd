@@ -44,7 +44,12 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment implements UploadGpxListener {
 
@@ -184,13 +189,21 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 			Editable descrText = messageField.getText();
 			Editable tagsText = tagsField.getText();
 			String description = descrText != null ? descrText.toString() : "";
-			String tags = tagsText != null ? tagsText.toString() : "";
+			Set<String> tags = tagsText != null ? parseTags(tagsText.toString()) : Collections.emptySet();
 
 			OsmandApplication app = getMyApplication();
 			UploadGPXFilesTask task = new UploadGPXFilesTask(app, tags, description, defaultActivity, uploadVisibility, this);
 			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, files);
 		}
 		dismiss();
+	}
+
+	@NonNull
+	private Set<String> parseTags(@NonNull String tags) {
+		return Arrays.stream(tags.split(","))
+				.map(String::trim)
+				.filter(tag -> !Algorithms.isEmpty(tag))
+				.collect(Collectors.toCollection(LinkedHashSet::new));
 	}
 
 	@Override

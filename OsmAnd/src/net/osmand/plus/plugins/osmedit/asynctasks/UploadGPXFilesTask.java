@@ -16,7 +16,8 @@ import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class UploadGPXFilesTask extends AsyncTask<File, String, String> {
@@ -24,14 +25,13 @@ public class UploadGPXFilesTask extends AsyncTask<File, String, String> {
 	private final OsmandApplication app;
 	private final GpxDbHelper gpxDbHelper;
 	private final OpenstreetmapRemoteUtil remoteUtil;
-
-	private final String tags;
+	private final Set<String> tags;
 	private final String visibility;
 	private final String description;
 	private final String defaultActivity;
 	private final UploadGpxListener listener;
 
-	public UploadGPXFilesTask(@NonNull OsmandApplication app, @NonNull String tags,
+	public UploadGPXFilesTask(@NonNull OsmandApplication app, @NonNull Set<String> tags,
 			@NonNull String description, @Nullable String defaultActivity,
 			@Nullable UploadVisibility visibility, @Nullable UploadGpxListener listener) {
 		this.app = app;
@@ -59,9 +59,10 @@ public class UploadGPXFilesTask extends AsyncTask<File, String, String> {
 
 		for (File file : params) {
 			if (isCancelled() || file == null) continue;
-			String updatedTags = adjustTags(file, includeActivity);
+			Set<String> updatedTags = getAdjustedTags(file, includeActivity);
+			String tagsText = String.join(", ", updatedTags);
 			String fileDescription = getGpxDescription(file);
-			String warning = remoteUtil.uploadGPXFile(updatedTags, fileDescription, visibility, file);
+			String warning = remoteUtil.uploadGPXFile(tagsText, fileDescription, visibility, file);
 
 			if (warning == null) {
 				count++;
@@ -83,23 +84,21 @@ public class UploadGPXFilesTask extends AsyncTask<File, String, String> {
 	}
 
 	@NonNull
-	private String adjustTags(@NonNull File file, boolean includeActivity) {
+	private Set<String> getAdjustedTags(@NonNull File file, boolean includeActivity) {
 		if (includeActivity) {
+			Set<String> updatedTags = new LinkedHashSet<>(tags);
+
 			String activity = getGpxActivity(file);
-			if (Algorithms.isEmpty(activity)) {
-				return removeDefaultActivity();
+			if (!Algorithms.isEmpty(activity)) {
+				return updatedTags.stream()
+						.map(tag -> tag.equals(defaultActivity) ? activity : tag)
+						.collect(Collectors.toCollection(LinkedHashSet::new));
+			} else {
+				updatedTags.remove(defaultActivity);
 			}
-			return tags.contains(activity) ? tags : tags.replaceFirst(defaultActivity, activity);
+			return updatedTags;
 		}
 		return tags;
-	}
-
-	@NonNull
-	private String removeDefaultActivity() {
-		return Arrays.stream(tags.split(","))
-				.map(String::trim)
-				.filter(tag -> !tag.equals(defaultActivity))
-				.collect(Collectors.joining(", "));
 	}
 
 	@Nullable
