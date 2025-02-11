@@ -5658,4 +5658,7 @@
     <string name="show_utm_grids_description">WGS84 fokok helyett UTM méterben mutatja a rácsot</string>
     <string name="no_photo_for_location_desc">Még nem adtak hozzá felhasználói fotókat ehhez a helyhez</string>
     <string name="no_places_available">Nincsenek helyek</string>
+    <string name="hmd_promo_description">Ingyenes hozzáférés %1$s hónapig a funkciókhoz, beleértve a korlátlan térképletöltést, a 3D domborzatot stb</string>
+    <string name="shared_string_road_exit">Kijárat</string>
+    <string name="hmd_promo">%1$s hónapos HMD promóció</string>
 </resources>

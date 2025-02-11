@@ -5701,4 +5701,7 @@
     <string name="map_grid">Mapové mřížky</string>
     <string name="no_places_available">Žádná volná místa</string>
     <string name="no_photo_for_location_desc">K této lokalitě zatím nebyly přidány žádné uživatelské fotografie</string>
+    <string name="hmd_promo_description">Bezplatný přístup k funkcím včetně neomezeného stahování map, 3D reliéfu a dalších na %1$s měsíců</string>
+    <string name="shared_string_road_exit">Výjezd</string>
+    <string name="hmd_promo">HMD Promo na %1$s měsíců</string>
 </resources>

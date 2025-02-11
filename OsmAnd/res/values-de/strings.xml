@@ -5717,4 +5717,7 @@
     <string name="show_utm_grids_description">Gitter in UTM-Metern statt in WGS84-Grad anzeigen</string>
     <string name="no_places_available">Keine Plätze verfügbar</string>
     <string name="no_photo_for_location_desc">Es wurden noch keine Benutzerfotos zu diesem Ort hinzugefügt</string>
+    <string name="shared_string_road_exit">Ausfahrt</string>
+    <string name="hmd_promo_description">Kostenloser Zugriff auf Funktionen wie unbegrenzte Karten-Downloads, 3D-Reliefs usw. für einen Monat (%1$s)</string>
+    <string name="hmd_promo">HMD Promo für %1$s Monate</string>
 </resources>
