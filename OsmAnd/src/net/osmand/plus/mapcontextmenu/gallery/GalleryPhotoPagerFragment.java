@@ -95,7 +95,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		ViewGroup view = (ViewGroup) themedInflater.inflate(R.layout.gallery_photo_fragment, container, false);
+		ViewGroup view = (ViewGroup) inflate(R.layout.gallery_photo_fragment, container);
 
 		toolbar = view.findViewById(R.id.toolbar);
 		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -231,7 +231,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 		}
 	}
 
-	private boolean shouldDownloadMetadata(@NonNull WikiImageCard wikiImageCard){
+	private boolean shouldDownloadMetadata(@NonNull WikiImageCard wikiImageCard) {
 		Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
 		String date = metadata.getDate();
 		String author = metadata.getAuthor();

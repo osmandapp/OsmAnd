@@ -13,19 +13,6 @@ public class UrlImageCard extends ImageCard {
 
 	public UrlImageCard(MapActivity mapActivity, JSONObject imageObject) {
 		super(mapActivity, imageObject);
-
-		if (!Algorithms.isEmpty(getSuitableUrl())) {
-			OnClickListener onClickListener = v -> {
-				boolean hasImageUrl = !Algorithms.isEmpty(getImageHiresUrl());
-				boolean externalLink = isExternalLink() || !hasImageUrl;
-				openUrl(mapActivity, app, getTitle(), getSuitableUrl(), externalLink, hasImageUrl);
-			};
-			if (!Algorithms.isEmpty(buttonText)) {
-				this.onButtonClickListener = onClickListener;
-			} else {
-				this.onClickListener = onClickListener;
-			}
-		}
 	}
 
 	/**
@@ -47,7 +34,8 @@ public class UrlImageCard extends ImageCard {
 	 * "image" URL in this case to avoid potential crashes.
 	 * Some high-resolution images may be too large to be properly rendered on a canvas bitmap.
 	 * To prevent crashes, this implementation uses URL with lower-quality image.
-	 */	@Nullable
+	 */
+	@Nullable
 	@Override
 	public String getGalleryFullSizeUrl() {
 		return getImageUrl();
