@@ -51,7 +51,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment implements UploadGpxListener {
+public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = SendGpxBottomSheetFragment.class.getSimpleName();
 
@@ -192,7 +192,8 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 			Set<String> tags = tagsText != null ? parseTags(tagsText.toString()) : Collections.emptySet();
 
 			OsmandApplication app = getMyApplication();
-			UploadGPXFilesTask task = new UploadGPXFilesTask(app, tags, description, defaultActivity, uploadVisibility, this);
+			UploadGpxListener listener = getUploadListener(activity);
+			UploadGPXFilesTask task = new UploadGPXFilesTask(app, tags, description, defaultActivity, uploadVisibility, listener);
 			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, files);
 		}
 		dismiss();
@@ -206,25 +207,29 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment im
 				.collect(Collectors.toCollection(LinkedHashSet::new));
 	}
 
-	@Override
-	public void onGpxUploadStarted() {
-		updateProgressVisibility(true);
-	}
+	@NonNull
+	private UploadGpxListener getUploadListener(@NonNull FragmentActivity activity) {
+		return new UploadGpxListener() {
+			@Override
+			public void onGpxUploadStarted() {
+				updateProgressVisibility(true);
+			}
 
-	public void onGpxUploadFinished(String result) {
-		updateProgressVisibility(false);
+			public void onGpxUploadFinished(String result) {
+				updateProgressVisibility(false);
 
-		Fragment target = getTargetFragment();
-		if (target instanceof UploadGpxListener) {
-			((UploadGpxListener) target).onGpxUploadFinished(result);
-		}
-	}
+				Fragment target = getTargetFragment();
+				if (target instanceof UploadGpxListener) {
+					((UploadGpxListener) target).onGpxUploadFinished(result);
+				}
+			}
 
-	private void updateProgressVisibility(boolean visible) {
-		FragmentActivity activity = getActivity();
-		if (AndroidUtils.isActivityNotDestroyed(activity)) {
-			activity.setProgressBarIndeterminateVisibility(visible);
-		}
+			private void updateProgressVisibility(boolean visible) {
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
+					activity.setProgressBarIndeterminateVisibility(visible);
+				}
+			}
+		};
 	}
 
 	protected static void showOpenStreetMapScreen(@NonNull FragmentActivity activity) {
