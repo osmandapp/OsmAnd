@@ -1243,10 +1243,18 @@ public class TravelObfHelper implements TravelHelper {
 			@Override
 			public boolean publish(BinaryMapDataObject object) {
 				if (object.getPointsLength() > 1) {
-					if (object.getTagValue(REF).equals(article.ref)
-							&& (object.getTagValue(ROUTE_ID).equals(article.routeId)
-							|| object.getName().equals(article.getTitle()))) {
-						segmentList.add(object);
+					String routeId = article.getRouteId();
+					boolean equalRouteId = !Algorithms.isEmpty(routeId) && routeId.equals(object.getTagValue(ROUTE_ID));
+
+					if (article instanceof TravelGpx && equalRouteId) {
+						segmentList.add(object); // GPX-in-OBF requires mandatory route_id
+					} else {
+						String name = article.getTitle(), ref = article.ref;
+						boolean equalName = !Algorithms.isEmpty(name) && name.equals(object.getName());
+						boolean equalRef = !Algorithms.isEmpty(ref) && ref.equals(object.getTagValue(REF));
+						if ((equalRouteId && (equalRef || equalName) || (equalRef && equalName))) {
+							segmentList.add(object); // Wikivoyage is allowed to match mixed tags
+						}
 					}
 				}
 				return false;
