@@ -5695,7 +5695,7 @@
     <string name="ais_object_lost_timeouts">Impostazioni di timeout per la ricezione del segnale AIS</string>
     <string name="ais_object_lost_timeout">Timeout per la visibilità quando l\'oggetto viene perso</string>
     <string name="ais_object_lost_timeout_description">Imposta il timeout per la visibilità degli oggetti AIS: trascorso questo periodo di tempo senza ricezione del segnale, l\'oggetto AIS verrà rimosso dallo schermo.</string>
-    <string name="ais_port_nmea_local_description">Definisci la porta UDP in cui OsmOnd riceve i dati NMEA</string>
+    <string name="ais_port_nmea_local_description">Definisci la porta UDP in cui OsmAnd riceve i dati NMEA</string>
     <string name="ais_ship_lost_timeout_description">Imposta il timeout per la visibilità della nave: trascorso questo periodo di tempo senza ricezione del segnale, il simbolo della nave cambierà stato sullo schermo: sarà barrato.</string>
     <string name="ais_cpa_settings">Impostazioni relative al PAV</string>
     <string name="ais_cpa_settings_description">Questi valori definiscono la presentazione degli oggetti AIS che potrebbero avvicinarsi troppo alla propria posizione.</string>
