@@ -56,13 +56,13 @@ public final class NavigationCarAppService extends CarAppService implements Acti
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		getApp().setAndroidAutoPermissionRequestResultListener(this);
+		getApp().setCarAppPermissionListener(this);
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		getApp().setAndroidAutoPermissionRequestResultListener(null);
+		getApp().setCarAppPermissionListener(null);
 		getApp().setNavigationCarAppService(null);
 	}
 

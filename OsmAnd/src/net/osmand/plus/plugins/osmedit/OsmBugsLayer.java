@@ -305,13 +305,13 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 		List<OpenStreetNote> bugs = new ArrayList<>();
 		StringBuilder b = new StringBuilder();
-		b.append(SITE_API).append("api/0.6/notes?bbox="); 
-		b.append(leftLongitude); 
-		b.append(",").append(bottomLatitude); 
-		b.append(",").append(rightLongitude); 
-		b.append(",").append(topLatitude); 
+		b.append(SITE_API).append("api/0.6/notes?bbox=");
+		b.append(leftLongitude);
+		b.append(",").append(bottomLatitude);
+		b.append(",").append(rightLongitude);
+		b.append(",").append(topLatitude);
 		try {
-			log.info("Loading bugs " + b); 
+			log.info("Loading bugs " + b);
 			URLConnection connection = NetworkUtils.getHttpURLConnection(b.toString());
 			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			XmlPullParser parser = Xml.newPullParser();
@@ -351,7 +351,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 				note.acquireDescriptionAndType();
 			}
 		} catch (IOException | RuntimeException | XmlPullParserException e) {
-			log.warn("Error loading bugs", e); 
+			log.warn("Error loading bugs", e);
 		}
 		return bugs;
 	}
@@ -438,9 +438,10 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			if (mapActivity.isFinishing()) {
 				return;
 			}
+			OsmandApplication app = getApplication();
 			if (obj != null && obj.warning == null) {
 				if (local == getOsmBugsUtil(bug)) {
-					Toast.makeText(ctx, R.string.osm_changes_added_to_local_edits, Toast.LENGTH_LONG).show();
+					app.showToastMessage(R.string.osm_changes_added_to_local_edits);
 					if (obj.local != null) {
 						PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_OSM_BUG, obj.local.getText());
 						mapActivity.getContextMenu().show(new LatLon(obj.local.getLatitude(), obj.local.getLongitude()),
@@ -449,13 +450,13 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 					}
 				} else {
 					if (action == Action.REOPEN) {
-						Toast.makeText(ctx, R.string.osn_add_dialog_success, Toast.LENGTH_LONG).show();
+						app.showToastMessage(R.string.osn_add_dialog_success);
 					} else if (action == Action.MODIFY) {
-						Toast.makeText(ctx, R.string.osb_comment_dialog_success, Toast.LENGTH_LONG).show();
+						app.showToastMessage(R.string.osb_comment_dialog_success);
 					} else if (action == Action.DELETE) {
-						Toast.makeText(ctx, R.string.osn_close_dialog_success, Toast.LENGTH_LONG).show();
+						app.showToastMessage(R.string.osn_close_dialog_success);
 					} else if (action == Action.CREATE) {
-						Toast.makeText(ctx, R.string.osn_add_dialog_success, Toast.LENGTH_LONG).show();
+						app.showToastMessage(R.string.osn_add_dialog_success);
 					}
 				}
 				clearCache();
@@ -476,7 +477,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 				} else {
 					commentBug(mapActivity, bug, text);
 				}
-				Toast.makeText(ctx, ctx.getResources().getString(r) + "\n" + obj, Toast.LENGTH_LONG).show();
+				app.showToastMessage(ctx.getResources().getString(r) + "\n" + obj);
 			}
 		};
 	}

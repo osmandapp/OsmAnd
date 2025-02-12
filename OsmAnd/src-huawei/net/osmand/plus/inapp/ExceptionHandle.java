@@ -95,9 +95,9 @@ public class ExceptionHandle {
         }
     }
 
-    private static void showToast(@Nullable Activity activity, String s) {
+    private static void showToast(@Nullable Activity activity, String text) {
         if (AndroidUtils.isActivityNotDestroyed(activity)) {
-            Toast.makeText(activity, s, Toast.LENGTH_SHORT).show();
+            AndroidUtils.getApp(activity).showShortToastMessage(text);
         }
     }
 }

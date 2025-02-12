@@ -290,7 +290,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 				builder.play();
 				if (description.startsWith("\u25BA (11.1)")) {
 					buttonInfo.setText("\u25BA (11.1) Voice system info:\n" + getVoiceSystemInfo());
-					// Toast.makeText(TestVoiceActivity.this, "Info refreshed.", Toast.LENGTH_LONG).show();
+					// app.showToastMessage("Info refreshed.");
 				}
 				if (description.startsWith("\u25BA (11.2)")) {
 					int ams = ((OsmandApplication) getApplication()).getSettings().AUDIO_MANAGER_STREAM.getModeValue(((OsmandApplication) getApplication()).getRoutingHelper().getAppMode());
@@ -301,7 +301,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 						} else {
 							pref.set(pref.get() + 500);
 						}
-						// Toast.makeText(TestVoiceActivity.this, "Voice prompt delay changed to " + pref.get() + "\u00A0ms.", Toast.LENGTH_LONG).show();
+						// app.showToastMessage("Voice prompt delay changed to " + pref.get() + "\u00A0ms.");
 					}
 					buttonDelay.setText("\u25BA (11.2) (TAP TO CHANGE)\n \u25CF Voice prompt delay for selected output: " +
 							((OsmandApplication) getApplication()).getSettings().VOICE_PROMPT_DELAY[ams].get() +

@@ -172,7 +172,7 @@ public class GalleryDetailsFragment extends BaseOsmAndFragment implements Downlo
 		descriptionView.setText(description);
 
 		view.setOnLongClickListener(v -> {
-			ShareMenu.copyToClipboardWithToast(app, description, Toast.LENGTH_SHORT);
+			ShareMenu.copyToClipboardWithToast(app, description, false);
 			return true;
 		});
 		if (isUrl) {

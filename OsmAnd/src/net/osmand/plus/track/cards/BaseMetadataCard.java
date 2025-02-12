@@ -69,7 +69,7 @@ public abstract class BaseMetadataCard extends MapBaseCard {
 		AndroidUiHelper.updateVisibility(iconIv, icon != null);
 
 		view.setOnLongClickListener(v -> {
-			ShareMenu.copyToClipboardWithToast(activity, description, Toast.LENGTH_SHORT);
+			ShareMenu.copyToClipboardWithToast(activity, description, false);
 			return true;
 		});
 
