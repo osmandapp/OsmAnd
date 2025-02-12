@@ -1252,7 +1252,7 @@
     <string name="voice_data_not_supported">Versión de datos de voz no admitida</string>
     <string name="voice_data_corrupted">El dato de voz indicado está corrupto</string>
     <string name="voice_data_unavailable">Paquete de indicaciones por voz elegido, no disponible</string>
-    <string name="sd_unmounted">Tarjeta de memoria inaccesible. \nNo podés ver mapas ni encontrar cosas.</string>
+    <string name="sd_unmounted">Tarjeta de memoria inaccesible. \nNo podrás ver mapas ni encontrar cosas.</string>
     <string name="sd_mounted_ro">Tarjeta de memoria en sólo lectura. 
 \nAhora, sólo es posible ver el mapa precargado y no pueden descargarse nuevas áreas.</string>
     <string name="unzipping_file">Descomprimiendo archivo…</string>
@@ -1449,7 +1449,7 @@
     <string name="edit_filter_create_message">Filtro «%1$s» creado</string>
     <string name="email">correo electrónico</string>
     <string name="av_camera_focus">Método de enfoque</string>
-    <string name="av_camera_focus_descr">Tipo de enfoque de la cámara:</string>
+    <string name="av_camera_focus_descr">Modo de enfoque de la cámara:</string>
     <string name="av_camera_focus_auto">Enfoque automático</string>
     <string name="av_camera_focus_hiperfocal">Enfoque hiperfocal</string>
     <string name="av_camera_focus_edof">Profundidad de campo extendido (EDOF)</string>
@@ -1538,7 +1538,7 @@
     <string name="rendering_value_defaultTranslucentCyan_name">Predefinido (cian translúcido)</string>
     <string name="do_you_like_osmand">¿Te gusta OsmAnd?</string>
     <string name="rate_this_app">Calificá la aplicación</string>
-    <string name="rate_this_app_long">Por favor, calificá OsmAnd en Google Play</string>
+    <string name="rate_this_app_long">Por favor, calificá a OsmAnd en Google Play</string>
     <string name="user_hates_app_get_feedback">Decinos por qué.</string>
     <string name="user_hates_app_get_feedback_long">Por favor, hacenos saber cualquier sugerencia.</string>
     <string name="download_live_updates">Actualizaciones en vivo</string>
@@ -2121,7 +2121,7 @@
     <string name="shared_string_automatic">Automático</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OSM, en todo el mundo y de alta calidad. \n \n Disfrutá del navegador por voz y óptico, la visualización de PDI (puntos de interés), la creación y gestión de trazas GPX, usando la visualización de las curvas de nivel y la información topográfica (mediante un complemento), elegí entre los modos de automóvil, bicicleta o peatón, editá en OSM y mucho más.</string>
     <string name="osmand_extended_description_part2">Navegación GPS\n• Elegí entre los modos sin conexión (sin cargos de roaming al viajar al extranjero) o en línea (más rápido)\n• La guía por voz giro-a-giro te guía a lo largo del camino (voces grabadas y sintetizadas)\n• La ruta se recalcula al salirse de la misma\n• Guía de carriles, nombres de calles y tiempo estimado al destino, te ayudará a lo largo de la ruta\n• Para hacer tu viaje seguro, los modos diurno/nocturno se alternan automáticamente\n• Mostrá los límites de velocidad y obtené un aviso al excederte del mismo\n• El zum del mapa se ajusta a la velocidad\n• Buscá destinos por dirección, por tipo (por ejemplo: estacionamientos, restaurantes, hoteles, estaciones de servicio, museos), o por coordenadas geográficas\n• Admite puntos intermedios en el itinerario\n• Grabá tu viaje o subí una traza GPX y seguila</string>
-    <string name="osmand_extended_description_part3">Mapa\n• Mostrá los PDI (puntos de interés) a tu alrededor\n• Ajustá el mapa a la dirección del movimiento (o brújula)\n• Mostrá tu ubicación y la dirección hacia dónde mirás\n• Compartí la ubicación para que tus amigos te encuentren\n• Guardá sitios importantes en «Mis favoritos»\n• Elegí cómo mostrar los nombres en el mapa: En inglés, local, u ortografía fonética\n• Mostrá las teselas en línea especiales, vista satelital (de Bing), diferentes superposiciones como trazas de travesía/navegación GPX y capas adicionales con transparencia personalizable</string>
+    <string name="osmand_extended_description_part3">Mapa\n• Mostrá los PDI (puntos de interés) a tu alrededor\n• Ajustá el mapa a la dirección del movimiento (o brújula)\n• Mostrá tu ubicación y la dirección hacia dónde mirás\n• Compartí la ubicación para que tus amigos te encuentren\n• Guardá los sitios importantes en «Mis favoritos»\n• Elegí cómo mostrar los nombres en el mapa: En inglés, local, u ortografía fonética\n• Mostrá las teselas en línea especiales, vista satelital (de Bing), diferentes superposiciones como trazas de travesía/navegación GPX y capas adicionales con transparencia personalizable</string>
     <string name="osmand_extended_description_part4">Esquí
 \nEl complemento de OsmAnd para el estilo del mapa invernal, muestra trazas con nivel de complejidad y alguna información adicional, como la ubicación de los ascensores y otras instalaciones invernales.</string>
     <string name="osmand_extended_description_part5">Ciclismo \n• Encontrá rutas de ciclismo en el mapa \n• La navegación GPS en el modo bicicleta, construye la ruta usando rutas de ciclismo \n• Mirá la velocidad y altitud \n• La opción de grabación GPX, permite grabar el viaje y compartirlo \n• Mediante un complemento adicional, podés activar las curvas de nivel y el sombreado</string>
@@ -2129,7 +2129,7 @@
     <string name="osmand_extended_description_part7">Contribuí con OSM\n• Informá sobre problemas de datos en el mapa\n• Subí trazas GPX a OSM directamente desde la aplicación\n• Añadí PDI y subilos directamente a OSM (o más tarde, si estás desconectado)</string>
     <string name="osmand_extended_description_part8">OsmAnd es un software de código abierto, activamente desarrollado. Cualquiera puede contribuir con la aplicación informando sobre errores, mejorando las traducciones o desarrollando nuevas funciones. Además, el proyecto también depende de contribuciones financieras para financiar el desarrollo y las pruebas de nuevas funcionalidades. \n Cobertura y calidad aproximada del mapa: \n • Europa Occidental: **** \n • Europa Oriental: *** \n • Rusia: *** \n • Norteamérica: *** \n • Sudamérica: ** \n • Asia: ** \n • Japón y Corea: *** \n • Medio Oriente: ** \n • África: ** \n • Antártida: * \n ¡Más países alrededor del globo están disponibles para descargar! \n Obtené un navegador confiable en tu país - ya sea Francia, Alemania, México, Reino Unido, España, Países bajos, Estados Unidos, Rusia, Brasil o cualquier otro.</string>
     <string name="osmand_plus_extended_description_part2">Navegación GPS\n• Funciona en línea (rápido) o sin conexión (sin cargos de roaming al viajar al extranjero)\n• Guía por voz giro-a-giro (voces grabadas y sintetizadas)\n• (Opcional) Guía de carriles, nombres de calles y tiempo estimado al destino\n• Admite puntos intermedios en el itinerario\n• La ruta se recalcula al salirse de la misma\n• Buscá destinos por dirección, por tipo (por ejemplo: Restaurantes, hoteles, estaciones de servicio, museos), o por coordenada geográfica</string>
-    <string name="osmand_plus_extended_description_part3">Vista del mapa\n• Mostrá tu ubicación y orientación\n• (Opcional) Ajustá el mapa a la dirección del movimiento (o la brújula)\n• Guardá sitios importantes en «Favoritos»\n• Mostrá los PDI (puntos de interés) a tu alrededor\n• Mostrá las teselas en línea especiales, vista satelital (de Bing), diferentes superposiciones como trazas de travesía/navegación GPX y capas adicionales con transparencia personalizable\n• Elegí como mostrar los nombres en el mapa: en inglés, local, u ortografía fonética</string>
+    <string name="osmand_plus_extended_description_part3">Vista del mapa\n• Mostrá tu ubicación y orientación\n• (Opcional) Ajustá el mapa a la dirección del movimiento (o la brújula)\n• Guardá los sitios importantes en «Favoritos»\n• Mostrá los PDI (puntos de interés) a tu alrededor\n• Mostrá las teselas en línea especiales, vista satelital (de Bing), diferentes superposiciones como trazas de travesía/navegación GPX y capas adicionales con transparencia personalizable\n• Elegí como mostrar los nombres en el mapa: en inglés, local, u ortografía fonética</string>
     <string name="osmand_plus_extended_description_part4">Uso de datos de OSM y Wikipedia \n • Información de alta calidad del mejor proyecto colaborativo del mundo \n • Datos OSM disponibles por país o región \n • PDI de Wikipedia, ideal para el turismo \n • Descargas gratis ilimitadas, directamente desde la aplicación \n • Mapas vectoriales reducidos sin conexión, actualizados al menos una vez cada mes \n \n • Elegí entre datos completos de la región o sólo la red de rutas (Ejemplo: Todo Japón tiene 700 MB o sólo 200 MB para la red de rutas)</string>
     <string name="osmand_plus_extended_description_part5">Funciones de seguridad\n• (Opcional) El modo diurno/nocturno se alterna automáticamente\n• (Opcional) Visualización del límite de velocidad, con aviso al excederte\n• (Opcional) Zum del mapa según la velocidad\n• Compartí la ubicación para que tus amigos puedan encontrarte</string>
     <string name="osmand_plus_extended_description_part6">Funciones de ciclismo y peatón\n • Vistas de senderos para peatones, excursionistas y ciclistas, ideal para actividades al aire libre\n • Navegación especial y modos de visualización para ciclistas y peatones\n • (Opcional) Paradas de transporte público (colectivo, tranvía, tren) incluyendo nombres de líneas\n • (Opcional) Grabá el viaje en un archivo GPX local o en un servicio en línea\n • (Opcional) Mostrá la velocidad y altitud\n • Mostrá las curvas de nivel y el sombreado de colinas (mediante un complemento adicional)</string>
@@ -2763,7 +2763,7 @@
     <string name="profile_alert_need_routing_type_title">Elegí el tipo de navegación</string>
     <string name="profile_alert_need_routing_type_msg">Elegí un tipo de navegación para el nuevo perfil de aplicación</string>
     <string name="profile_alert_need_profile_name_title">Ingresá el nombre del perfil</string>
-    <string name="profile_alert_need_profile_name_msg">Debés indicar primero un nombre de perfil.</string>
+    <string name="profile_alert_need_profile_name_msg">Indicá primero un nombre de perfil.</string>
     <string name="profile_alert_duplicate_name_title">Nombre duplicado</string>
     <string name="profile_alert_duplicate_name_msg">Ya existe un perfil con ese nombre</string>
     <string name="profile_alert_cant_delete_base">No se pueden borrar los perfiles base de OsmAnd</string>
@@ -2838,7 +2838,7 @@
     <string name="edit_profile_setup_map_subtitle">Elegí las opciones de mapa para el perfil</string>
     <string name="edit_profile_screen_options_subtitle">Elegí las opciones de pantalla para el perfil</string>
     <string name="edit_profile_nav_settings_subtitle">Elegí los ajustes de navegación para el perfil</string>
-    <string name="routing_attr_max_num_changes_description">Especificá el número máximo de transbordos</string>
+    <string name="routing_attr_max_num_changes_description">Indicá el número máximo de transbordos</string>
     <string name="routing_attr_max_num_changes_name">Número de transbordos</string>
     <string name="turn_screen_on_router">Despertar al girar</string>
     <string name="turn_screen_on_time_descr">Definí durante cuánto tiempo debe encenderse la pantalla.</string>
@@ -5023,7 +5023,7 @@
     <string name="add_row">Agregar fila</string>
     <string name="discard_changes_prompt">¿Descartar cambios?</string>
     <string name="row_number">Fila %1$s</string>
-    <string name="tripltek_promo">Promoción Tripltek por %1$s meses</string>
+    <string name="tripltek_promo">Promoción de Tripltek por %1$s meses</string>
     <string name="tripltek_promo_description">Libre acceso a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s mes</string>
     <string name="see_all_plans">Ver todos los planes</string>
     <string name="key_assignments">Asignaciones de teclas</string>
@@ -5416,7 +5416,7 @@
     <string name="quick_action_showhide_osm_edits_descr">Un botón que muestra u oculta las ediciones locales de OSM en el mapa.</string>
     <string name="rendering_attr_showDirtbikeTrails_name">Senderos para motos todoterreno</string>
     <string name="liter_per_hour">L/h</string>
-    <string name="release_4_9">• Se agregó un visor de imágenes de Wikimedia a pantalla completa\n\n• Se agregó un nuevo complemento « Estadísticas del vehículo» para supervisar el rendimiento del vehículo mediante el protocolo OBD-II\n\n• Se agregó la posibilidad de asignar actividades a las trazas y filtrarlas en consecuencia\n\n• Se implementaron nuevas acciones rápidas para la grabación de viajes y el bloqueo de la pantalla táctil\n\n• Se agregó la personalización de los botones del mapa y una cuadrícula precisa\n\n• Se agregó a los widgets un menú contextual y la acción «Restablecer velocidad media»\n\n• Se agregó una nueva capa de ruta «Senderos para motos todoterreno»\n\n• Se corrigió la «Grabación automática de la traza al navegar»\n\n• Se corrigió el problema con las coordenadas invertidas en RTL\n\n• Se corrigió la falta de datos del sensor para la traza en curso\n\n• Se agregó información sobre las áreas circundantes para el punto marcado\n\n• Se agregó una acción rápida para controlar la visibilidad de las ediciones de OSM\n\n• Se separaron los parámetros de visibilidad para las opciones de coloración del terreno\n\n• Se agregó un ícono táctil para mostrar el acceso u otros atributos de caminos o senderos</string>
+    <string name="release_4_9">• Se agregó un visor de imágenes de Wikimedia a pantalla completa\n\n• Se agregó un nuevo complemento «Estadísticas del vehículo» para supervisar el rendimiento del vehículo mediante el protocolo OBD-II\n\n• Se agregó la posibilidad de asignar actividades a las trazas y filtrarlas en consecuencia\n\n• Se implementaron nuevas acciones rápidas para la grabación de viajes y el bloqueo de la pantalla táctil\n\n• Se agregó la personalización de los botones del mapa y una cuadrícula precisa\n\n• Se agregó a los widgets un menú contextual y la acción «Restablecer velocidad media»\n\n• Se agregó una nueva capa de ruta «Senderos para motos todoterreno»\n\n• Se corrigió la «Grabación automática de la traza al navegar»\n\n• Se corrigió el problema con las coordenadas invertidas en RTL\n\n• Se corrigió la falta de datos del sensor para la traza en curso\n\n• Se agregó información sobre las áreas circundantes para el punto marcado\n\n• Se agregó una acción rápida para controlar la visibilidad de las ediciones de OSM\n\n• Se separaron los parámetros de visibilidad para las opciones de coloración del terreno\n\n• Se agregó un ícono táctil para mostrar el acceso u otros atributos de caminos o senderos</string>
     <string name="screen_is_locked_by_action_button">Pantalla táctil bloqueada. Pulsá el botón para desbloquearla.</string>
     <string name="screen_is_locked_by_external_button">La pantalla táctil está bloqueada. Para desbloquearla, pulsá el botón «%1$s» o el botón en la pantalla.</string>
     <string name="screen_is_unlocked">Pantalla táctil desbloqueada.</string>
@@ -5488,7 +5488,7 @@
     <string name="remaining_fuel">Combustible restante</string>
     <string name="obd_fuel_consumption_desc">Muestra la tasa de consumo de combustible del motor, calculada en función del combustible restante, el tamaño del tanque y la distancia recorrida según el GPS.</string>
     <string name="reset_average_value">Restablecer valor promedio</string>
-    <string name="average_temperature_slider_description">Marca el intervalo de tiempo para medir la temperatura promedio.</string>
+    <string name="average_temperature_slider_description">Marcá el intervalo de tiempo para medir la temperatura promedio.</string>
     <string name="shared_string_instant">Al instante</string>
     <string name="current_temperature">Temperatura actual</string>
     <string name="average_temperature">Temperatura promedio</string>
@@ -5501,8 +5501,8 @@
     <string name="obd_fuel_consumption">Consumo de combustible</string>
     <string name="obd_air_intake_temp_desc">Muestra la temperatura del aire que entra en el colector de admisión del motor.</string>
     <string name="remaining_fuel_description">Muestra la cantidad de combustible que queda en el tanque del vehículo</string>
-    <string name="average_value_slider_description">Marca el intervalo de tiempo para medir el valor promedio.</string>
-    <string name="obd_engine_runtime_desc">Muestra cuánto tiempo ha estado funcionando el motor desde que se puso en marcha.</string>
+    <string name="average_value_slider_description">Marcá el intervalo de tiempo para medir el valor promedio.</string>
+    <string name="obd_engine_runtime_desc">Muestra cuánto tiempo estuvo funcionando el motor desde el arranque.</string>
     <string name="obd_calculated_engine_load">Carga calculada del motor</string>
     <string name="obd_throttle_position_desc">Muestra el ángulo del pedal del acelerador en el cuerpo del acelerador.</string>
     <string name="obd_throttle_position">Posición del acelerador</string>
@@ -5550,7 +5550,7 @@
     <string name="ais_port_nmea_server_description">Definí el número de puerto TCP del orígen de datos NMEA</string>
     <string name="ais_object_lost_timeouts">Ajustes del tiempo límite para la recepción de la señal AIS</string>
     <string name="ais_object_lost_timeout">Tiempo máximo de visibilidad al perder el objeto</string>
-    <string name="ais_object_lost_timeout_description">Define el tiempo máximo de visibilidad de los objetos AIS: Después de este tiempo sin recepción de señal, el objeto AIS se quitará de la pantalla.</string>
+    <string name="ais_object_lost_timeout_description">Definí el tiempo máximo de visibilidad de los objetos AIS: Después de este tiempo sin recepción de señal, el objeto AIS se quitará de la pantalla.</string>
     <string name="ais_ship_lost_timeout">Tiempo máximo para ver el barco al no recibir señal</string>
     <string name="ais_cpa_settings">Ajustes relacionados con el CPA</string>
     <string name="ais_cpa_settings_description">Estos valores definen la presentación de los objetos AIS que pueden acercarse demasiado respecto a tu propia ubicación.</string>
@@ -5574,5 +5574,5 @@
     <string name="no_photo_for_location_desc">Aún no se añadieron fotos de usuarios a esta ubicación</string>
     <string name="shared_string_road_exit">Salida</string>
     <string name="hmd_promo_description">Libre acceso a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s mes</string>
-    <string name="hmd_promo">Promo HDM por %1$s meses</string>
+    <string name="hmd_promo">Promo de HMD por %1$s meses</string>
 </resources>
