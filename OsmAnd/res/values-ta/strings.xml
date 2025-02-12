@@ -3265,7 +3265,7 @@
     <string name="transport_stops_to_pass">கடந்து செல்வதை நிறுத்துகிறது</string>
     <string name="map_screen_orientation_descr">உருவப்படம், நிலப்பரப்பு அல்லது சாதனம்.</string>
     <string name="show_transport_over_map_description">வரைபடத்தில் பொது போக்குவரத்து நிறுத்தங்களைக் காட்டு.</string>
-    <string name="new_route_calculated_dist_dbg">பாதை: தூரம் %1$s, திசைவி நேரம் %2$s\n கணக்கீடு: %3$.1f நொடி, %4$d டி சாலைகள், %5$d டி ஓடுகள்)</string>
+    <string name="new_route_calculated_dist_dbg">பாதை: தூரம் %1$s, திசைவி நேரம் %2$s\n கணக்கீடு: %3 $ .1f நொடி, %4 $ டி சாலைகள், %5 $ டி ஓடுகள்)</string>
     <string name="invalid_locations">தவறான ஆயத்தொலைவுகள்</string>
     <string name="use_online_routing">நிகழ்நிலை வழிசெலுத்தலைப் பயன்படுத்தவும்</string>
     <string name="search_address_street_option">வெட்டும் தெரு</string>
@@ -3967,7 +3967,7 @@
     <string name="ask_every_time">ஒவ்வொரு முறையும் கேளுங்கள்</string>
     <string name="detailed_track_guidance">விரிவான தட வழிகாட்டுதல்</string>
     <string name="quick_action_routes_summary">வரைபடத்தில் %1$s ஐக் காட்ட அல்லது மறைக்க ஒரு மாற்று.</string>
-    <string name="rendering_avg_info_details">கடந்த 1 சட்டத்தால் FPS: %1$s\n சிபியு (ஓடுகள்): %2$s\n சிபியு (செயலற்ற நேரம்): %3$s\n சிபியு (GPU காத்திருங்கள்): %4$s</string>
+    <string name="rendering_avg_info_details">கடந்த 1 சட்டத்தால் FPS: %1$s\n சிபியு (ஓடுகள்): %2$s\n சிபியு (செயலற்ற நேரம்): %3$s\n சிபியு (GPU காத்திருங்கள்): %4 $ s</string>
     <string name="quick_action_video_note">வீடியோ குறிப்பு</string>
     <string name="quick_action_photo_note">புகைப்பட குறிப்பு</string>
     <string name="daynight_mode_sensor_summary">சுற்றுப்புற ஒளி நிலைகளுக்கு ஏற்ப ஒளி மற்றும் இருண்ட கருப்பொருள்களுக்கு இடையில் மாறுவதற்கு சாதனத்தின் ஒளி சென்சாரைப் பயன்படுத்துகிறது.</string>
@@ -4110,7 +4110,7 @@
     <string name="auto_25_chars_route_roundabout_kr">%1$d வெளியேறவும், சரியாக வைத்திருங்கள்</string>
     <string name="waypoint_template">வே பாயிண்ட் வார்ப்புரு</string>
     <string name="continue_on_phone">மொபைல் சாதனத்தில் தொடரவும்</string>
-    <string name="storage_found_files_descr">\"%3$s\" இலிருந்து \"%4$s\" க்கு%2$s கோப்புகளை நகலெடுக்க \"%1$s\" ஐத் தட்டவும். இதற்கு சிறிது நேரம் ஆகலாம்.</string>
+    <string name="storage_found_files_descr">\"%3$s\" இலிருந்து \"%4 $ s\" க்கு%2$s கோப்புகளை நகலெடுக்க \"%1$s\" ஐத் தட்டவும். இதற்கு சிறிது நேரம் ஆகலாம்.</string>
     <string name="add_online_routing_engine">நிகழ்நிலை ரூட்டிங் இயந்திரத்தைச் சேர்க்கவும்</string>
     <string name="send_files_to_openstreetmap">OpenstreetMap க்கு GPX கோப்பை அனுப்பவும்</string>
     <string name="plan_route_import_track">டிராக் இறக்குமதி</string>
@@ -4923,7 +4923,7 @@
     <string name="route_between_points_desc">ஒரு நேர் கோடு மூலம் புள்ளிகளை எவ்வாறு இணைப்பது என்பதைத் தேர்வுசெய்க அல்லது கீழே குறிப்பிடப்பட்டுள்ளபடி அவற்றுக்கிடையே ஒரு வழியைக் கணக்கிடுங்கள்.</string>
     <string name="please_provide_point_name_error">புள்ளிக்கு ஒரு பெயரை வழங்கவும்</string>
     <string name="vessel_height_warning">குறைந்த பாலங்களைத் தவிர்க்க ஒரு கப்பல் உயரத்தை அமைக்கவும். பாலம் நகரக்கூடியதாக இருந்தால், திறந்த நிலையில் உயரம் பயன்படுத்தப்படும்.</string>
-    <string name="delete_all_actions_message_q">%d விரைவான செயல்களை மாற்றமுடியாமல் நீக்கவா?</string>
+    <string name="delete_all_actions_message_q">விரைவான செயல்களை மாற்றமுடியாமல் நீக்கவா?</string>
     <string name="export_import_quick_actions_with_profiles_promo">பயன்பாட்டு சுயவிவரங்களுடன் விரைவான செயல்களை ஏற்றுமதி செய்யுங்கள் அல்லது இறக்குமதி செய்க.</string>
     <string name="storage_format">சேமிப்பக வடிவம்</string>
     <string name="online_map_url_helper_text">நிகழ்நிலை மூலத்திற்கு முகவரி ஐ உள்ளிடவும் அல்லது ஒட்டவும்.</string>
@@ -5359,7 +5359,7 @@
     <string name="bg_service_interval">விழித்தெழுந்த இடைவெளியை அமைக்கவும்:</string>
     <string name="profile_alert_need_routing_type_title">வழிசெலுத்தல் வகையைத் தேர்ந்தெடுக்கவும்</string>
     <string name="profile_alert_duplicate_name_title">நகல் பெயர்</string>
-    <string name="favorite_confirm_delete_group">\"%1$s\" குழுவை நீக்கு மற்றும் அனைத்தும் சேர்க்கப்பட்ட புள்ளிகள் (%2$D)?</string>
+    <string name="favorite_confirm_delete_group">\"%1$s\" குழுவை நீக்கு மற்றும் அனைத்தும் சேர்க்கப்பட்ட புள்ளிகள் (%2 $ D)?</string>
     <string name="included_in_your_current_plan">உங்கள் தற்போதைய \"%1$s\" திட்டத்தில் சேர்க்கப்பட்டுள்ளது</string>
     <string name="download_tiles">ஓடுகளைப் பதிவிறக்கவும்</string>
     <string name="restore_all_profile_settings_descr">இந்த சுயவிவரத்தை உருவாக்க/இறக்குமதி செய்த பிறகு அனைத்து சுயவிவர அமைப்புகளும் அவற்றின் அசல் நிலைக்கு மீட்டமைக்கப்படும்.</string>
@@ -5382,7 +5382,7 @@
     <string name="release_4_0_beta">The கால்களில் விளிம்பு கோடுகளை பதிவிறக்கம் செய்ய விருப்பம் சேர்க்கப்பட்டது\n\n Rathow பாதை நிலப்பரப்பைத் திட்டமிடுங்கள்: புள்ளிகள் அல்லது வரைபடங்களுக்கு இடையில் மாற தாவல்களைச் சேர்த்தது\n\n • OSMand நேரடி புதுப்பிப்புகள் \"பதிவிறக்கங்கள்&gt; புதுப்பிப்புகள்\"\n\n • தடங்களை இப்போது உயரம், விரைவு அல்லது சாய்வால் வண்ணமயமாக்கலாம்.\n\n வரி பாதை வரி தோற்றத்தை மாற்ற விருப்பம் சேர்க்கப்பட்டது.\n\n • புதுப்பிக்கப்பட்ட \"ட்ரிப் ரெக்கார்டிங்\" உரையாடல்</string>
     <string name="shared_string_route_line">பாதை வரி</string>
     <string name="quick_action_show_hide_title">காட்டு/மறைக்க</string>
-    <string name="live_update_delete_updates_msg">அனைத்து %sநேரடி புதுப்பிப்புகளையும் நீக்கவா?</string>
+    <string name="live_update_delete_updates_msg">அனைத்து %நேரடி புதுப்பிப்புகளையும் நீக்கவா?</string>
     <string name="latest_openstreetmap_update">அண்மைக் கால ஓபன்ச்ட்ரீட்மேப் புதுப்பிப்பு கிடைக்கிறது:</string>
     <string name="temporary_conditional_routing_descr">வரைபடத்தில் இப்போது செயலில் உள்ள சாலை கட்டுப்பாடுகளைப் பயன்படுத்தவும்</string>
     <string name="hillshade_slope_contour_lines">விளிம்பு கோடுகள் / இல்சேட் / சாய்வு</string>
@@ -5392,7 +5392,7 @@
     <string name="export_not_enough_space">போதுமான இடம் இல்லை</string>
     <string name="app_mode_motorboat">மின்னோடி படகு</string>
     <string name="app_mode_kayak">கயாக்</string>
-    <string name="message_need_calculate_route_before_show_graph">%1$s தரவு சாலைகளில் மட்டுமே கிடைக்கும், வரைபடங்களைக் காண “புள்ளிகளுக்கு இடையிலான பாதை” ஐப் பயன்படுத்தி ஒரு வழியைக் கணக்கிடுங்கள்.</string>
+    <string name="message_need_calculate_route_before_show_graph">1 $ s தரவு சாலைகளில் மட்டுமே கிடைக்கும், வரைபடங்களைக் காண “புள்ளிகளுக்கு இடையிலான பாதை” ஐப் பயன்படுத்தி ஒரு வழியைக் கணக்கிடுங்கள்.</string>
     <string name="shared_string_graph">வரைபடம்</string>
     <string name="file_already_imported">கோப்பு ஏற்கனவே OSMand இல் இறக்குமதி செய்யப்பட்டுள்ளது</string>
     <string name="use_live_routing">ஒச்மண்ட் நேரடி தரவு</string>
@@ -5467,7 +5467,7 @@
     <string name="osmand_plus_extended_description_part6">சைக்கிள் மற்றும் பாதசாரி நற்பொருத்தங்கள்\n Foot கால், ஐகிங் மற்றும் பைக் பாதைகளைப் பார்ப்பது, வெளிப்புற நடவடிக்கைகளுக்கு சிறந்தது\n Bike பைக் மற்றும் பாதசாரிக்கான சிறப்பு ரூட்டிங் மற்றும் காட்சி முறைகள்\n Pations விருப்பமான பொது போக்குவரத்து நிறுத்தங்கள் (பச், டிராம், ரயில்) வரி பெயர்கள் உட்பட\n G சிபிஎக்ச் கோப்பு அல்லது நிகழ்நிலை சேவைக்கு விருப்ப பயண பதிவு\n விரைவு விருப்ப விரைவு மற்றும் உயர காட்சி\n Conture விளிம்பு கோடுகள் மற்றும் இல்சேடிங் காட்சி (கூடுதல் சொருகி வழியாக)</string>
     <string name="osmand_plus_extended_description_part8">தோராயமான வரைபடக் கவரேச் மற்றும் தரம்:\n • மேற்கு ஐரோப்பா: ****\n • கிழக்கு ஐரோப்பா: ***\n • ரச்யா: ***\n • வட அமெரிக்கா: ***\n • தென் அமெரிக்கா: **\n • ஆசியா: **\n • சப்பான் மற்றும் கொரியா: ***\n • நடு கிழக்கு: **\n • ஆப்பிரிக்கா: **\n • அண்டார்டிகா: *\n உலகெங்கிலும் உள்ள பெரும்பாலான நாடுகள் பதிவிறக்கங்களாக கிடைக்கின்றன\n ஆப்கானிச்தானில் இருந்து சிம்பாப்வே வரை, ஆச்திரேலியாவிலிருந்து அமெரிக்கா வரை. அர்சென்டினா, பிரேசில், கனடா, பிரான்ச், செர்மனி, மெக்சிகோ, யுகே, ச்பெயின்,…</string>
     <string name="osmand_parking_minutes">நிமிடங்கள்</string>
-    <string name="native_app_allocated_memory_descr">பயன்பாடு %1$s MB (டால்விக் %2$s MB, பிற %3$s MB) ஆல் ஒதுக்கப்பட்ட மொத்த சொந்த நினைவகம்.\n விகிதாசார நினைவகம் %4$S MB (Android Limit %5$S MB, டால்விக் %6$S MB).</string>
+    <string name="native_app_allocated_memory_descr">பயன்பாடு %1$s MB (டால்விக் %2$s MB, பிற %3$s MB) ஆல் ஒதுக்கப்பட்ட மொத்த சொந்த நினைவகம்.\n விகிதாசார நினைவகம் %4 $ S MB (Android Limit %5 $ S MB, டால்விக் %6 $ S MB).</string>
     <string name="native_app_allocated_memory">மொத்த சொந்த நினைவகம்</string>
     <string name="osmand_parking_event">பார்க்கிங்கிலிருந்து காரை எடுத்துக் கொள்ளுங்கள்</string>
 </resources>
