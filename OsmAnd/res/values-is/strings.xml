@@ -5687,4 +5687,7 @@
     <string name="show_grids">Birta hnitanet á korti</string>
     <string name="no_places_available">Engir staðir tiltækir</string>
     <string name="no_photo_for_location_desc">Engum notendamyndum hefur ennþá verið bætt við þessa staðsetningu</string>
+    <string name="hmd_promo_description">Ókeypis aðgangur að eiginleikum á borð við ótakmörkuð niðurhöl korta, þrívíddarlandslag, o.fl. fyrir %1$s á mánuði</string>
+    <string name="shared_string_road_exit">Útkeyrsla</string>
+    <string name="hmd_promo">HMD-kynning í %1$s mánuði</string>
 </resources>
