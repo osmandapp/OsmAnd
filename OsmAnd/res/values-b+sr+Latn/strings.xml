@@ -5687,4 +5687,7 @@
     <string name="show_utm_grids">Koristite UTM umesto WGS84</string>
     <string name="no_photo_for_location_desc">Još uvek nije dodata nijedna korisnička fotografija na ovu lokaciju</string>
     <string name="no_places_available">Nema slobodnih mesta</string>
+    <string name="shared_string_road_exit">Izlaz</string>
+    <string name="hmd_promo_description">Besplatan pristup funkcijama uključujući neograničeno preuzimanje mapa, 3D reljef itd. za %1$s mesec</string>
+    <string name="hmd_promo">HMD promocija za %1$s meseci</string>
 </resources>

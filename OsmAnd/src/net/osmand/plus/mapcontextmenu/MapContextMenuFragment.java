@@ -489,9 +489,9 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		((TextView) view.findViewById(R.id.context_menu_line1))
 				.setTextColor(ColorUtilities.getPrimaryTextColor(mapActivity, nightMode));
-		View menuLine2 = view.findViewById(R.id.context_menu_line2);
+		TextView menuLine2 = view.findViewById(R.id.context_menu_line2);
 		if (menuLine2 != null) {
-			((TextView) menuLine2).setTextColor(ContextCompat.getColor(mapActivity, R.color.text_color_secondary_light));
+			menuLine2.setTextColor(ColorUtilities.getSecondaryTextColor(view.getContext(), nightMode));
 		}
 		((TextView) view.findViewById(R.id.distance)).setTextColor(ContextCompat.getColor(mapActivity,
 				nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light));

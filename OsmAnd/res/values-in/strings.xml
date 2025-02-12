@@ -4040,7 +4040,7 @@
     <string name="trip_recording_duration_widget_desc">Menampilkan waktu perekaman trek, durasi dalam menit/jam dari perjalanan yang sedang direkam.</string>
     <string name="download_tiles">Unduh ubin</string>
     <string name="connect_with_straight_line">Hubungkan dengan garis lurus</string>
-    <string name="attach_roads_descr">Perkirakan trek Anda ke jalan yang diperbolehkan untuk merute antara titik dan kaitkan instruksi belokan tepat dan properti rute.</string>
+    <string name="attach_roads_descr">Pasang trek Anda pada jalan untuk mendapatkan informasi rute detail, termasuk petunjuk putaran dan atribut jalan.</string>
     <string name="auto_backup_title">Pencadangan otomatis</string>
     <string name="without_profiles_changing">Tanpa perubahan profil</string>
     <string name="shared_string_only_missing">Hanya hilang</string>
@@ -6094,4 +6094,6 @@
     <string name="show_utm_grids_description">Tampilkan kisi dalam meter UTM daripada derajat WGS84</string>
     <string name="show_grids_description">Perbolehkan menampilkan kisi pada peta</string>
     <string name="show_grids">Tampilkan kisi peta</string>
+    <string name="no_places_available">Tidak ada tempat yang tersedia</string>
+    <string name="no_photo_for_location_desc">Belum ada foto pengguna yang ditambahkan ke tempat ini</string>
 </resources>

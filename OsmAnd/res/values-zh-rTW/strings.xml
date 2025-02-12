@@ -4447,7 +4447,7 @@
     <string name="rendering_attr_showMtbScaleIMBATrails_description">顯示山地自行車專用路徑。</string>
     <string name="average_speed_skip_stops_desc">低於 %1$s 的速度將會被計算，且會影響平均速度。</string>
     <string name="connect_with_straight_line">以直線連結</string>
-    <string name="attach_roads_descr">將您的軌跡趨近為允許在點之間路線規劃的道路，並與精確的轉彎指令與路線屬性相關聯。</string>
+    <string name="attach_roads_descr">將追蹤路徑附在道路上，即可獲得詳細的路徑資訊，包括轉彎指示與道路屬性。</string>
     <string name="attach_roads_warning">僅紀錄的軌跡可以附加至道路上。</string>
     <string name="without_profiles_changing">不需變更設定檔</string>
     <string name="shared_string_only_missing">僅遺失</string>
@@ -5686,4 +5686,9 @@
     <string name="map_grid">地圖網格</string>
     <string name="shared_string_default_view">預設檢視</string>
     <string name="ais_address_settings_description">選擇 NMEA 通訊協定 (UDP/TCP) 並定義位址</string>
+    <string name="no_places_available">沒有位置</string>
+    <string name="no_photo_for_location_desc">此位置尚未新增使用者照片</string>
+    <string name="hmd_promo_description">%1$s個月免費使用功能，包括無限制地圖下載、3D 浮雕等</string>
+    <string name="shared_string_road_exit">離開</string>
+    <string name="hmd_promo">HMD 的%1$s個月促銷</string>
 </resources>

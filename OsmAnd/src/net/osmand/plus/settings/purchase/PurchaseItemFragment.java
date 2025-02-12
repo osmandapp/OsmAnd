@@ -105,6 +105,8 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 			purchase = PurchaseUiDataUtils.createTripltekPurchaseUiData(app);
 		} else if (CollectionUtils.startsWithAny(promoType, app.getString(R.string.hugerock))) {
 			purchase = PurchaseUiDataUtils.createHugerockPurchaseUiData(app);
+		}  else if (CollectionUtils.startsWithAny(promoType, app.getString(R.string.hmd))) {
+			purchase = PurchaseUiDataUtils.createHMDPurchaseUiData(app);
 		} else {
 			purchase = PurchaseUiDataUtils.createBackupSubscriptionUiData(app);
 		}

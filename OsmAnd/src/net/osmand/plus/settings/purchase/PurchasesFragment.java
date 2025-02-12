@@ -97,6 +97,20 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 			cardsContainer.addView(purchaseCard.build(activity));
 		}
 
+		setupPromoCard(activity);
+
+		boolean hasMainPurchases = !Algorithms.isEmpty(mainPurchases);
+		if (!needToShowFreeAccountSubscriptionCard && (!Version.isPaidVersion(app) || (!hasMainPurchases && !showBackupSubscription))) {
+			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
+			cardsContainer.addView(new NoPurchasesCard(activity, this).build(activity));
+		} else {
+			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
+			cardsContainer.addView(new ExploreOsmAndPlansCard(activity, this).build(activity));
+		}
+		cardsContainer.addView(new TroubleshootingCard(activity, purchaseHelper, false).build(activity));
+	}
+
+	private void setupPromoCard(@NonNull FragmentActivity activity) {
 		if (Version.isTripltekBuild()) {
 			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
 			PurchaseUiData purchase = PurchaseUiDataUtils.createTripltekPurchaseUiData(app);
@@ -109,17 +123,13 @@ public class PurchasesFragment extends BaseOsmAndDialogFragment implements InApp
 			PurchaseItemCard purchaseCard = new PurchaseItemCard(activity, purchaseHelper, purchase);
 			purchaseCard.setListener(PurchasesFragment.this);
 			cardsContainer.addView(purchaseCard.build(activity));
-		}
-
-		boolean hasMainPurchases = !Algorithms.isEmpty(mainPurchases);
-		if (!needToShowFreeAccountSubscriptionCard && (!Version.isPaidVersion(app) || (!hasMainPurchases && !showBackupSubscription))) {
+		} else if (Version.isHMDBuild()) {
 			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
-			cardsContainer.addView(new NoPurchasesCard(activity, this).build(activity));
-		} else {
-			themedInflater.inflate(R.layout.list_item_divider, cardsContainer);
-			cardsContainer.addView(new ExploreOsmAndPlansCard(activity, this).build(activity));
+			PurchaseUiData purchase = PurchaseUiDataUtils.createHMDPurchaseUiData(app);
+			PurchaseItemCard purchaseCard = new PurchaseItemCard(activity, purchaseHelper, purchase);
+			purchaseCard.setListener(PurchasesFragment.this);
+			cardsContainer.addView(purchaseCard.build(activity));
 		}
-		cardsContainer.addView(new TroubleshootingCard(activity, purchaseHelper, false).build(activity));
 	}
 
 	@Nullable

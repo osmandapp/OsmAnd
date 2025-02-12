@@ -5997,4 +5997,12 @@
     <string name="calculate_size">Calcular tamanho</string>
     <string name="ais_port_nmea_local_description">Definir a porta UPD em que o OsmAnd recebe dados NMEA</string>
     <string name="ais_ship_lost_timeout">Tempo limite para a visibilidade do navio quando nenhum sinal é recebido</string>
+    <string name="ais_address_settings">Configurações de endereço IP</string>
+    <string name="ais_address_settings_description">Escolha o protocolo NMEA (UDP/TCP) e defina os endereços</string>
+    <string name="ais_nmea_protocol">Protocolo para recepção de dados NMEA</string>
+    <string name="ais_nmea_protocol_description">Escolha o protocolo para a recepção de dados NMEA</string>
+    <string name="ais_address_nmea_server">Endereço IP da fonte de dados NMEA</string>
+    <string name="ais_address_nmea_server_description">Definir o endereço IP da fonte de dados NMEA (se for usado TCP)</string>
+    <string name="ais_port_nmea_server">Porta TCP da fonte de dados NMEA</string>
+    <string name="hmd_promo_description">Acesso gratuito a recursos, incluindo downloads ilimitados de mapas, relevo 3D etc. por %1$s mês</string>
 </resources>

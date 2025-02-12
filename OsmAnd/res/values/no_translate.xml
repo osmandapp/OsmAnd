@@ -8,6 +8,7 @@
     <string name="app_store_name">OsmAnd Maps</string>
     
     <!-- Not translatable -->
+    <string name="hmd">HMD</string>
     <string name="hugerock">Hugerock</string>
     <string name="tripltek">TRIPLTEK</string>
     <string name="number_in_breckets">(%d)</string>

@@ -27,6 +27,10 @@ public class Version {
 
 	public static final String TRIPLTEK_NAME = "TRIPLTEK";
 	public static final String HUGEROCK_NAME = "Hugerock";
+	public static final String HMD_BRAND_NAME = "HMD";
+	public static final String HMD_MANUFACTURER_NAME = "HMD Global";
+	public static final String HMD_MODEL_NAME = "Cupra";
+
 	public static final String FULL_VERSION_NAME = "net.osmand.plus";
 	private static final String FREE_VERSION_NAME = "net.osmand";
 	private static final String FREE_DEV_VERSION_NAME = "net.osmand.dev";
@@ -160,8 +164,7 @@ public class Version {
 				|| InAppPurchaseUtils.isLiveUpdatesAvailable(app)
 				|| InAppPurchaseUtils.isMapsPlusAvailable(app)
 				|| InAppPurchaseUtils.isOsmAndProAvailable(app)
-				|| InAppPurchaseUtils.isTripltekPromoAvailable(app)
-				|| InAppPurchaseUtils.isHugerockPromoAvailable(app);
+				|| InAppPurchaseUtils.isBrandPromoAvailable(app);
 	}
 
 	public static boolean isDeveloperVersion(@NonNull OsmandApplication app) {
@@ -179,6 +182,12 @@ public class Version {
 	public static boolean isHugerockBuild() {
 		return HUGEROCK_NAME.equalsIgnoreCase(Build.BRAND) || HUGEROCK_NAME.equalsIgnoreCase(Build.MANUFACTURER)
 				|| "alps".equalsIgnoreCase(Build.BRAND) && "SOTEN".equalsIgnoreCase(Build.MANUFACTURER);
+	}
+
+	public static boolean isHMDBuild() {
+		return HMD_BRAND_NAME.equalsIgnoreCase(Build.BRAND)
+				&& HMD_MANUFACTURER_NAME.equalsIgnoreCase(Build.MANUFACTURER)
+				&& HMD_MODEL_NAME.equalsIgnoreCase(Build.MODEL);
 	}
 
 	public static String getVersionForTracker(@NonNull OsmandApplication app) {

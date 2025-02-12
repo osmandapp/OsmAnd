@@ -5691,4 +5691,7 @@
     <string name="map_grid">Мреже мапе</string>
     <string name="no_places_available">Нема слободних места</string>
     <string name="no_photo_for_location_desc">Још увек није додата ниједна корисничка фотографија на ову локацију</string>
+    <string name="hmd_promo_description">Бесплатан приступ функцијама укључујући неограничено преузимање мапа, 3Д рељеф итд. за %1$s месец</string>
+    <string name="shared_string_road_exit">Излаз</string>
+    <string name="hmd_promo">ХМД промоција за %1$s месеци</string>
 </resources>

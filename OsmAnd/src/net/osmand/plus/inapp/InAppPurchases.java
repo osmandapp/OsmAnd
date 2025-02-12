@@ -259,7 +259,8 @@ public abstract class InAppPurchases {
 			IOS(R.string.apple_app_store),
 			PROMO(R.string.promo),
 			TRIPLTEK_PROMO(R.string.tripltek),
-			HUGEROCK_PROMO(R.string.hugerock);
+			HUGEROCK_PROMO(R.string.hugerock),
+			HMD_PROMO(R.string.hmd);
 
 			private final int storeNameId;
 
