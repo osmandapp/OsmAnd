@@ -6006,4 +6006,6 @@
     <string name="ais_port_nmea_server">Porta TCP da fonte de dados NMEA</string>
     <string name="hmd_promo_description">Acesso gratuito a recursos, incluindo downloads ilimitados de mapas, relevo 3D etc. por %1$s mês</string>
     <string name="shared_string_road_exit">Sair</string>
+    <string name="shared_string_engine">Motor</string>
+    <string name="vehicle_metrics_recording_description">Selecione os parâmetros que serão registrados no arquivo GPX.</string>
 </resources>
