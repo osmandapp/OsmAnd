@@ -29,8 +29,7 @@ class NearbyPlacesAdapter(
 	}
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NearbyViewHolder {
-		val app = parent.context.applicationContext as OsmandApplication
-		val inflater = UiUtilities.getInflater(app, isNightMode())
+		val inflater = UiUtilities.getInflater(parent.context, isNightMode())
 		val view = inflater.inflate(
 			if (isVertical) R.layout.search_nearby_item_vertical else R.layout.search_nearby_item,
 			parent,
