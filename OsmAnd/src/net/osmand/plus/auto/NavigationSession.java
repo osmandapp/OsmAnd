@@ -293,7 +293,8 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 		String action = intent.getAction();
 		if (ACTION_NAVIGATE.equals(action)) {
-			CarToast.makeText(getCarContext(), "Navigation intent: " + intent.getDataString(), CarToast.LENGTH_LONG).show();
+			String text = "Navigation intent: " + intent.getDataString();
+			getApp().getToastHelper().showCarToast(text, true);
 		}
 
 		landingScreen = new LandingScreen(getCarContext(), settingsAction);
@@ -566,9 +567,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 				});
 			}
 		} catch (SecurityException e) {
-			Toast.makeText(getCarContext(), R.string.no_location_permission, Toast.LENGTH_LONG).show();
+			getApp().showToastMessage(R.string.no_location_permission);
 		} catch (IllegalArgumentException e) {
-			Toast.makeText(getCarContext(), R.string.gps_not_available, Toast.LENGTH_LONG).show();
+			getApp().showToastMessage(R.string.gps_not_available);
 		}
 	}
 
@@ -614,7 +615,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 
 				@Override
 				public void onAutoDriveEnabled() {
-					CarToast.makeText(carContext, "Auto drive enabled", CarToast.LENGTH_LONG).show();
+					getApp().getToastHelper().showCarToast("Auto drive enabled", true);
 					if (!settings.simulateNavigation) {
 						OsmAndLocationSimulation sim = getApp().getLocationProvider().getLocationSimulation();
 						sim.startStopRouteAnimation(null);

@@ -216,7 +216,7 @@ public class MenuRowBuilder {
 	}
 
 	public void copyToClipboard(String text, Context ctx) {
-		ShareMenu.copyToClipboardWithToast(ctx, text, Toast.LENGTH_SHORT);
+		ShareMenu.copyToClipboardWithToast(ctx, text, false);
 	}
 
 	@NonNull

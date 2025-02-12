@@ -704,7 +704,7 @@ public class MapActivityActions extends MapActions {
 					String text = releaseText == null
 							? osmAndVersion
 							: app.getString(R.string.ltr_or_rtl_combine_via_comma, osmAndVersion, releaseText);
-					ShareMenu.copyToClipboardWithToast(app, text, Toast.LENGTH_SHORT);
+					ShareMenu.copyToClipboardWithToast(app, text, false);
 					return true;
 				});
 	}

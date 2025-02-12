@@ -553,7 +553,7 @@ public class PoiFiltersHelper {
 
 	public String getFiltersName(Set<PoiUIFilter> filters) {
 		if (filters.isEmpty()) {
-			return app.getResources().getString(R.string.shared_string_none);
+			return app.getString(R.string.shared_string_none);
 		} else {
 			List<String> names = new ArrayList<>();
 			for (PoiUIFilter filter : filters) {

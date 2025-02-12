@@ -5,7 +5,6 @@ import static net.osmand.plus.quickaction.QuickActionIds.MAP_OVERLAY_ACTION_ID;
 import android.content.Context;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -24,6 +23,7 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.lang.reflect.Type;
@@ -136,8 +136,8 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 				settings.MAP_OVERLAY_PREVIOUS.set(null);
 			}
 			plugin.updateMapLayers(mapActivity, mapActivity, settings.MAP_OVERLAY);
-			Toast.makeText(mapActivity, mapActivity.getString(R.string.quick_action_map_overlay_switch,
-					getTranslatedItemName(mapActivity, params)), Toast.LENGTH_SHORT).show();
+			AndroidUtils.getApp(mapActivity).showShortToastMessage(R.string.quick_action_map_overlay_switch,
+					getTranslatedItemName(mapActivity, params));
 		}
 	}
 

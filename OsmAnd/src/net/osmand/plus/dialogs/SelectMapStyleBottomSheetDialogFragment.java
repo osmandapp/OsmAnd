@@ -155,7 +155,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 			DashboardOnMap dashboard = mapActivity.getDashboard();
 			dashboard.refreshContent(false);
 		} else {
-			Toast.makeText(mapActivity, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
+			app.showShortToastMessage(R.string.renderer_load_exception);
 		}
 		dismiss();
 	}

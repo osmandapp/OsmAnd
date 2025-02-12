@@ -19,6 +19,7 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
@@ -137,8 +138,8 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 			}
 			plugin.updateMapLayers(mapActivity, mapActivity, settings.MAP_UNDERLAY);
 			mapActivity.refreshMapComplete();
-			Toast.makeText(mapActivity, mapActivity.getString(R.string.quick_action_map_underlay_switch,
-					getTranslatedItemName(mapActivity, params)), Toast.LENGTH_SHORT).show();
+			AndroidUtils.getApp(mapActivity).showShortToastMessage(R.string.quick_action_map_underlay_switch,
+					getTranslatedItemName(mapActivity, params));
 		}
 	}
 

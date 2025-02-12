@@ -14,15 +14,16 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -89,8 +90,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 			String nextStyle = getNextSelectedItem(mapActivity.getMyApplication());
 			executeWithParams(mapActivity, nextStyle);
 		} else {
-			Toast.makeText(mapActivity, R.string.quick_action_need_to_add_item_to_list,
-					Toast.LENGTH_LONG).show();
+			AndroidUtils.getApp(mapActivity).showToastMessage(R.string.quick_action_need_to_add_item_to_list);
 		}
 	}
 
@@ -105,10 +105,10 @@ public class MapStyleAction extends SwitchableAction<String> {
 			app.getRendererRegistry().setCurrentSelectedRender(loaded);
 			mapActivity.refreshMapComplete();
 
-			Toast.makeText(mapActivity, mapActivity.getString(R.string.quick_action_map_style_switch,
-					getTranslatedItemName(mapActivity, params)), Toast.LENGTH_SHORT).show();
+			app.showShortToastMessage(R.string.quick_action_map_style_switch,
+					getTranslatedItemName(mapActivity, params));
 		} else {
-			Toast.makeText(mapActivity, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
+			app.showShortToastMessage(R.string.renderer_load_exception);
 		}
 	}
 

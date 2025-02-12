@@ -58,9 +58,9 @@ public class FileUtils {
 	}
 
 	@Nullable
-	public static File renameSQLiteFile(OsmandApplication ctx, File source, String newName,
-			RenameCallback callback) {
-		File dest = checkRenamePossibility(ctx, source, newName, false);
+	public static File renameSQLiteFile(@NonNull OsmandApplication app, @NonNull File source,
+			@NonNull String newName, @Nullable RenameCallback callback) {
+		File dest = checkRenamePossibility(app, source, newName, false);
 		if (dest == null) {
 			return null;
 		}
@@ -71,9 +71,9 @@ public class FileUtils {
 		if (source.renameTo(dest)) {
 			String[] suffixes = {"-journal", "-wal", "-shm"};
 			for (String s : suffixes) {
-				File file = new File(ctx.getDatabasePath(source + s).toString());
+				File file = new File(app.getDatabasePath(source + s).toString());
 				if (file.exists()) {
-					file.renameTo(ctx.getDatabasePath(dest + s));
+					file.renameTo(app.getDatabasePath(dest + s));
 				}
 			}
 			if (callback != null) {
@@ -81,7 +81,7 @@ public class FileUtils {
 			}
 			return dest;
 		} else {
-			Toast.makeText(ctx, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
+			app.showToastMessage(R.string.file_can_not_be_renamed);
 		}
 		return null;
 	}
@@ -99,7 +99,7 @@ public class FileUtils {
 				callback.fileRenamed(source, res);
 			}
 		} else {
-			Toast.makeText(app, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
+			app.showToastMessage(R.string.file_can_not_be_renamed);
 		}
 		return res;
 	}
@@ -121,7 +121,7 @@ public class FileUtils {
 				callback.fileRenamed(source, res);
 			}
 		} else {
-			Toast.makeText(app, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
+			app.showToastMessage(R.string.file_can_not_be_renamed);
 		}
 		return res;
 	}
@@ -236,17 +236,17 @@ public class FileUtils {
 	public static File checkRenamePossibility(@NonNull OsmandApplication app, @NonNull File source,
 			@NonNull String newName, boolean dirAllowed) {
 		if (Algorithms.isEmpty(newName)) {
-			Toast.makeText(app, R.string.empty_filename, Toast.LENGTH_LONG).show();
+			app.showToastMessage(R.string.empty_filename);
 			return null;
 		}
 		Pattern illegalCharactersPattern = dirAllowed ? ILLEGAL_PATH_NAME_CHARACTERS : ILLEGAL_FILE_NAME_CHARACTERS;
 		if (illegalCharactersPattern.matcher(newName).find()) {
-			Toast.makeText(app, R.string.file_name_containes_illegal_char, Toast.LENGTH_LONG).show();
+			app.showToastMessage(R.string.file_name_containes_illegal_char);
 			return null;
 		}
 		File dest = new File(source.getParentFile(), newName);
 		if (dest.exists()) {
-			Toast.makeText(app, R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
+			app.showToastMessage(R.string.file_with_name_already_exists);
 			return null;
 		}
 		return dest;

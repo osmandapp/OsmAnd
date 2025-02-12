@@ -337,8 +337,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			btDevice?.apply {
 				val isBondingStarted = createBond()
 				if (!isBondingStarted) {
-					Toast.makeText(activity, R.string.bt_start_pair_failed, Toast.LENGTH_SHORT)
-						.show()
+					app.showShortToastMessage(R.string.bt_start_pair_failed)
 				} else {
 					pairingDevice = BTDeviceInfo(getAliasName(activity), device.address)
 				}

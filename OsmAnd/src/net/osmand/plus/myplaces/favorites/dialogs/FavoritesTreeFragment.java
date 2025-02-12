@@ -564,7 +564,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 
 	private void shareFavourites() {
 		if (adapter.isEmpty()) {
-			Toast.makeText(getActivity(), R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
+			app.showToastMessage(R.string.no_fav_to_save);
 		} else {
 			shareFavorites(null);
 		}

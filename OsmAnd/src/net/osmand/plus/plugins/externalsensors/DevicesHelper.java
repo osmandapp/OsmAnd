@@ -649,7 +649,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 			}
 		} else {
 			bluetoothEnabled = false;
-//			Toast.makeText(activity, "Bluetooth LE isnt supported on this device", Toast.LENGTH_SHORT).show();
+//			app.showToastMessage("Bluetooth LE isnt supported on this device");
 		}
 		return bluetoothEnabled;
 	}
