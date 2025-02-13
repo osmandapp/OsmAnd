@@ -83,7 +83,6 @@ import net.osmand.plus.track.clickable.ClickableWayHelper;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -225,8 +224,13 @@ public class MapSelectionHelper {
 		if (renderedObjects != null) {
 			double cosRotateTileSize = Math.cos(Math.toRadians(rc.rotate)) * TILE_SIZE;
 			double sinRotateTileSize = Math.sin(Math.toRadians(rc.rotate)) * TILE_SIZE;
-			boolean isDerivedGpxSelected = false;
+			Set<Long> uniqueRenderedObjectIds = new HashSet<>();
 			for (RenderedObject renderedObject : renderedObjects) {
+				Long objectId = renderedObject.getId();
+				if (objectId != null && uniqueRenderedObjectIds.contains(objectId)) {
+					log.warn("selectObjectsFromNative(v1) got duplicate: " + renderedObject);
+					continue;
+				}
 				Map<String, String> tags = renderedObject.getTags();
 				String travelGpxFilter = renderedObject.getRouteID();
 
@@ -264,17 +268,14 @@ public class MapSelectionHelper {
 				}
 				LatLon searchLatLon = result.objectLatLon != null ? result.objectLatLon : result.pointLatLon;
 
-				if (!isDerivedGpxSelected) {
-					if (isOsmRoute) {
-						isDerivedGpxSelected |= addOsmRoute(result, tileBox, point, createRouteFilter());
-					}
-					if (isTravelGpx) {
-						isDerivedGpxSelected |= addTravelGpx(result, travelGpxFilter, renderedObject.getTagValue("ref"));
-					}
-					if (isClickableWay) {
-						isDerivedGpxSelected |= addClickableWay(result,
-								clickableWayHelper.loadClickableWay(result.pointLatLon, renderedObject));
-					}
+				if (isOsmRoute) {
+					addOsmRoute(result, tileBox, point, createRouteFilter());
+				}
+				if (isTravelGpx) {
+					addTravelGpx(result, travelGpxFilter, renderedObject.getTagValue("ref"));
+				}
+				if (isClickableWay) {
+					addClickableWay(result, clickableWayHelper.loadClickableWay(result.pointLatLon, renderedObject));
 				}
 
 				if (!isClickableWay && !isOsmRoute && !isTravelGpx) {
@@ -282,6 +283,9 @@ public class MapSelectionHelper {
 					if (!amenityAdded) {
 						result.selectedObjects.put(renderedObject, null);
 					}
+				}
+				if (objectId != null) {
+					uniqueRenderedObjectIds.add(objectId);
 				}
 			}
 		}
