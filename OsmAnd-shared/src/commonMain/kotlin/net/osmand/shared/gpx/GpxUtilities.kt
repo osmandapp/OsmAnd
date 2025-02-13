@@ -202,6 +202,23 @@ object GpxUtilities {
 		var pointTypes: String? = null
 		var names: String? = null
 
+		constructor()
+
+		constructor(other: RouteSegment) {
+			this.id = other.id
+			this.length = other.length
+			this.startTrackPointIndex = other.startTrackPointIndex
+			this.segmentTime = other.segmentTime
+			this.speed = other.speed
+			this.turnType = other.turnType
+			this.turnLanes = other.turnLanes
+			this.turnAngle = other.turnAngle
+			this.skipTurn = other.skipTurn
+			this.types = other.types
+			this.pointTypes = other.pointTypes
+			this.names = other.names
+		}
+
 		companion object {
 			const val START_TRKPT_IDX_ATTR = "startTrkptIdx"
 
@@ -245,6 +262,13 @@ object GpxUtilities {
 		var tag: String? = null
 		var value: String? = null
 
+		constructor()
+
+		constructor(routeType: RouteType) {
+			this.tag = routeType.tag
+			this.value = routeType.value
+		}
+
 		companion object {
 			fun fromStringBundle(bundle: StringBundle): RouteType {
 				val t = RouteType()
@@ -281,6 +305,14 @@ object GpxUtilities {
 			color = point.getColor()
 			iconName = point.getIconName()
 			backgroundType = point.getBackgroundType()
+		}
+
+		constructor(other: PointsGroup) : this(other.name) {
+			this.iconName = other.iconName
+			this.backgroundType = other.backgroundType
+			this.points = other.points.map { WptPt(it) }.toMutableList()
+			this.color = other.color
+			this.hidden = other.hidden
 		}
 
 		fun isHidden(): Boolean {
