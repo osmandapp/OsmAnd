@@ -271,11 +271,9 @@ public class MapSelectionHelper {
 
 				if (isOsmRoute && !osmRoutesAlreadyAdded) {
 					osmRoutesAlreadyAdded = addOsmRoutesAround(result, tileBox, point, createRouteFilter());
-				}
-				if (isTravelGpx) {
+				} else if (isTravelGpx) {
 					addTravelGpx(result, travelGpxFilter);
-				}
-				if (isClickableWay) {
+				} else if (isClickableWay) {
 					addClickableWay(result, clickableWayHelper.loadClickableWay(result.pointLatLon, renderedObject));
 				}
 
@@ -363,27 +361,26 @@ public class MapSelectionHelper {
 
 							if (isOsmRoute && !osmRoutesAlreadyAdded) {
 								osmRoutesAlreadyAdded = addOsmRoutesAround(result, tileBox, point, createRouteFilter());
-							}
-							if (isTravelGpx) {
+							} else if (isTravelGpx) {
 								addTravelGpx(result, tags.get(ROUTE_ID));
-							}
-							if (isClickableWay) {
-								addClickableWay(result, clickableWayHelper.loadClickableWay(result.pointLatLon, obfMapObject, tags));
-							}
-
-							IOnPathMapSymbol onPathMapSymbol = getOnPathMapSymbol(symbolInfo);
-							if (onPathMapSymbol == null) {
-								LatLon latLon = result.objectLatLon;
-								if (tags.containsKey(TAG_POI_LAT_LON)) {
-									LatLon l = parsePoiLatLon(tags.get(TAG_POI_LAT_LON));
-									latLon = l == null ? latLon : l;
-									tags.remove(TAG_POI_LAT_LON);
-								}
-								amenity = getAmenity(latLon, obfMapObject, tags);
-								if (amenity != null) {
-									amenity.setMapIconName(getMapIconName(symbolInfo));
-								} else if (!isOsmRoute && !isTravelGpx && !isClickableWay) {
-									addRenderedObject(result, symbolInfo, obfMapObject, tags);
+							} else if (isClickableWay) {
+								addClickableWay(result,
+										clickableWayHelper.loadClickableWay(result.pointLatLon, obfMapObject, tags));
+							} else {
+								IOnPathMapSymbol onPathMapSymbol = getOnPathMapSymbol(symbolInfo);
+								if (onPathMapSymbol == null) {
+									LatLon latLon = result.objectLatLon;
+									if (tags.containsKey(TAG_POI_LAT_LON)) {
+										LatLon l = parsePoiLatLon(tags.get(TAG_POI_LAT_LON));
+										latLon = l == null ? latLon : l;
+										tags.remove(TAG_POI_LAT_LON);
+									}
+									amenity = getAmenity(latLon, obfMapObject, tags);
+									if (amenity != null) {
+										amenity.setMapIconName(getMapIconName(symbolInfo));
+									} else if (!isOsmRoute && !isTravelGpx && !isClickableWay) {
+										addRenderedObject(result, symbolInfo, obfMapObject, tags);
+									}
 								}
 							}
 						}
