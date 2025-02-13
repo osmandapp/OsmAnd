@@ -273,7 +273,7 @@ public class MapSelectionHelper {
 					osmRoutesAlreadyAdded = addOsmRoutesAround(result, tileBox, point, createRouteFilter());
 				}
 				if (isTravelGpx) {
-					addTravelGpx(result, travelGpxFilter, renderedObject.getTagValue("ref"));
+					addTravelGpx(result, travelGpxFilter);
 				}
 				if (isClickableWay) {
 					addClickableWay(result, clickableWayHelper.loadClickableWay(result.pointLatLon, renderedObject));
@@ -365,7 +365,7 @@ public class MapSelectionHelper {
 								osmRoutesAlreadyAdded = addOsmRoutesAround(result, tileBox, point, createRouteFilter());
 							}
 							if (isTravelGpx) {
-								addTravelGpx(result, tags.get(ROUTE_ID), null);
+								addTravelGpx(result, tags.get(ROUTE_ID));
 							}
 							if (isClickableWay) {
 								addClickableWay(result, clickableWayHelper.loadClickableWay(result.pointLatLon, obfMapObject, tags));
@@ -482,8 +482,8 @@ public class MapSelectionHelper {
 		return amenity;
 	}
 
-	private boolean addTravelGpx(@NonNull MapSelectionResult result, @Nullable String routeId, @Nullable String ref) {
-		TravelGpx travelGpx = app.getTravelHelper().searchGpx(result.pointLatLon, routeId, ref);
+	private boolean addTravelGpx(@NonNull MapSelectionResult result, @Nullable String routeId) {
+		TravelGpx travelGpx = app.getTravelHelper().searchTravelGpx(result.pointLatLon, routeId);
 		if (travelGpx != null && isUniqueTravelGpx(result.selectedObjects, travelGpx)) {
 			WptPt selectedPoint = new WptPt();
 			selectedPoint.setLat(result.pointLatLon.getLatitude());
@@ -492,7 +492,7 @@ public class MapSelectionHelper {
 			result.selectedObjects.put(new Pair<>(travelGpx, selectedGpxPoint), mapLayers.getTravelSelectionLayer());
 			return true;
 		} else if (travelGpx == null) {
-			log.error("addTravelGpx() searchGpx() travelGpx is null");
+			log.error("addTravelGpx() searchTravelGpx() travelGpx is null");
 		}
 		return false;
 	}

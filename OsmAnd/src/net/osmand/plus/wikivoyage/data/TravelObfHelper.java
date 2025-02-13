@@ -238,9 +238,12 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@Nullable
-	public synchronized TravelGpx searchGpx(@NonNull LatLon location, @Nullable String filter, @Nullable String ref) {
-		final String lcFilter = filter != null ? filter.toLowerCase() : null;
-		final String lcSearchRef = ref != null ? ref.toLowerCase() : null;
+	public synchronized TravelGpx searchTravelGpx(@NonNull LatLon location, @Nullable String routeId) {
+		final String lcSearchRouteId = routeId != null ? routeId.toLowerCase() : null;
+		if (Algorithms.isEmpty(lcSearchRouteId)) {
+			LOG.error(String.format("searchTravelGpx(%s, null) failed due to empty routeId", location));
+			return null;
+		}
 		List<Pair<File, Amenity>> foundAmenities = new ArrayList<>();
 		int searchRadius = ARTICLE_SEARCH_RADIUS;
 		TravelGpx travelGpx = null;
@@ -254,14 +257,9 @@ public class TravelObfHelper implements TravelHelper {
 			}
 			for (Pair<File, Amenity> foundGpx : foundAmenities) {
 				Amenity amenity = foundGpx.second;
-				final String aRef = amenity.getRef();
-				final String aName = amenity.getName();
 				final String aRouteId = amenity.getRouteId();
-				final String lcRef = aRef != null ? aRef.toLowerCase() : null;
-				final String lcName = aName != null ? aName.toLowerCase() : null;
 				final String lcRouteId = aRouteId != null ? aRouteId.toLowerCase() : null;
-				if ((Algorithms.objectEquals(lcRouteId, lcFilter) || Algorithms.objectEquals(lcName, lcFilter))
-						&& (lcSearchRef == null || Algorithms.objectEquals(lcRef, lcSearchRef))) {
+				if (lcSearchRouteId.equals(lcRouteId)) {
 					travelGpx = getTravelGpx(foundGpx.first, amenity);
 					break;
 				}
@@ -269,7 +267,7 @@ public class TravelObfHelper implements TravelHelper {
 			searchRadius *= 2;
 		} while (travelGpx == null && searchRadius < MAX_SEARCH_RADIUS);
 		if (travelGpx == null) {
-			LOG.error(String.format("searchGpx(%s, %s, %s) failed", location, filter, ref));
+			LOG.error(String.format("searchTravelGpx(%s, %s) failed", location, routeId));
 		}
 		return travelGpx;
 	}

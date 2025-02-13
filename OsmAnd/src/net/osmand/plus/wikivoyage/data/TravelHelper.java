@@ -64,7 +64,7 @@ public interface TravelHelper {
 	boolean isTravelGpxTags(@NonNull Map<String, String> tags);
 
 	@Nullable
-	TravelGpx searchGpx(@NonNull LatLon location, @Nullable String fileName, @Nullable String ref);
+	TravelGpx searchTravelGpx(@NonNull LatLon location, @Nullable String routeId);
 
 	void openTrackMenu(@NonNull TravelArticle article, @NonNull MapActivity mapActivity,
 					   @NonNull String gpxFileName, @NonNull LatLon location, boolean adjustMapPosition);
