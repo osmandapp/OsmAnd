@@ -10,6 +10,10 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="original_color_description">Each point would keep its own color.</string>
+    <string name="original_icon_description">Each point would keep its own icon.</string>
+    <string name="original_shape_description">Each point would keep its own shape.</string>
+    <string name="apply_to_all_points">Apply to all points</string>
     <string name="ais_load_data">Load AIS data from file</string>
     <string name="ais_address_settings">IP address settings</string>
     <string name="ais_address_settings_description">Choose NMEA protocol (UDP/TCP) and define addresses</string>

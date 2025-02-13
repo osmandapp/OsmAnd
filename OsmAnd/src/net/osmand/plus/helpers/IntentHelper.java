@@ -26,6 +26,7 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.mapcontextmenu.editors.FavoriteAppearanceFragment;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.AppInitializeListener;
@@ -46,7 +47,6 @@ import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.configmap.tracks.TracksTabsFragment;
 import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
-import net.osmand.plus.mapcontextmenu.editors.FavouriteGroupEditorFragment;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
@@ -533,7 +533,9 @@ public class IntentHelper {
 
 				PointsGroup pointsGroup = favoriteGroup != null ? favoriteGroup.toPointsGroup(app) : null;
 				FragmentManager manager = mapActivity.getSupportFragmentManager();
-				FavouriteGroupEditorFragment.showInstance(manager, pointsGroup, null, true);
+				if (pointsGroup != null) {
+					FavoriteAppearanceFragment.showInstance(manager, pointsGroup, true);
+				}
 
 				clearIntent(intent);
 			}
