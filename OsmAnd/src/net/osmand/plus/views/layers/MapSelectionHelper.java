@@ -227,13 +227,10 @@ public class MapSelectionHelper {
 			double sinRotateTileSize = Math.sin(Math.toRadians(rc.rotate)) * TILE_SIZE;
 			boolean isDerivedGpxSelected = false;
 			for (RenderedObject renderedObject : renderedObjects) {
-				String routeID = renderedObject.getRouteID();
-				String fileName = renderedObject.getGpxFileName();
-				String travelGpxFilter = routeID != null ? routeID : fileName;
-
 				Map<String, String> tags = renderedObject.getTags();
+				String travelGpxFilter = renderedObject.getRouteID();
 
-				boolean isTravelGpx = !Algorithms.isEmpty(travelGpxFilter);
+				boolean isTravelGpx = app.getTravelHelper().isTravelGpxTags(tags);
 				boolean isOsmRoute = !Algorithms.isEmpty(OsmRouteType.getRouteKeys(tags));
 				boolean isClickableWay = clickableWayHelper.isClickableWay(renderedObject);
 
