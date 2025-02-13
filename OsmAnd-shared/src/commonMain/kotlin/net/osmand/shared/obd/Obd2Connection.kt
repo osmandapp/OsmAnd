@@ -25,6 +25,10 @@ class Obd2Connection(
 		finished = true
 	}
 
+	fun reInit() {
+		runInitCommands()
+	}
+
 	private fun runInitCommands() {
 		for (command in initCommands) {
 			runImpl(command)
@@ -67,10 +71,10 @@ class Obd2Connection(
 			"BUS INIT",
 			"BUSINIT",
 			"BUS ERROR",
-			"BUSERROR",
-			"STOPPED"
+			"BUSERROR"
 		)
 		when (response) {
+			"STOPPED" -> return OBDResponse.STOPPED
 			"OK" -> return OBDResponse.OK
 			"?" -> return OBDResponse.QUESTION_MARK
 			"NODATA" -> return OBDResponse.NO_DATA
