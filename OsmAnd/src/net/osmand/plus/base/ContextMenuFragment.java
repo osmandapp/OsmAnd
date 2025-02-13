@@ -1075,7 +1075,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	}
 
 	protected void copyToClipboard(@NonNull String text, @NonNull Context ctx) {
-		ShareMenu.copyToClipboardWithToast(ctx, text, Toast.LENGTH_SHORT);
+		ShareMenu.copyToClipboardWithToast(ctx, text, false);
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager manager, @NonNull ContextMenuFragment fragment) {

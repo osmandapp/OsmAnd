@@ -1,5 +1,7 @@
 package net.osmand.plus.configmap.routes;
 
+import static net.osmand.osm.OsmRouteType.ALPINE;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,21 +36,21 @@ public class AlpineHikingScaleFragment extends MapRoutesFragment {
 		title.setText(R.string.rendering_attr_alpineHiking_name);
 
 		TextView description = container.findViewById(R.id.description);
-		description.setText(AlpineHikingCard.getDifficultyClassificationDescription(app));
+		description.setText(routeLayersHelper.getRoutesTypeDescription(ALPINE.getRenderingPropertyAttr()));
 		AndroidUiHelper.updateVisibility(description, enabled);
 
 		int selectedColor = settings.getApplicationMode().getProfileColor(nightMode);
 		int disabledColor = AndroidUtils.getColorFromAttr(app, R.attr.default_icon_color);
 		ImageView icon = container.findViewById(R.id.icon);
-		icon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_trekking_dark, enabled ? selectedColor : disabledColor));
+		icon.setImageDrawable(getPaintedContentIcon(RouteUtils.getIconIdForAttr(
+				ALPINE.getRenderingPropertyAttr()), enabled ? selectedColor : disabledColor));
 	}
 
 	@Override
-	protected void setupCards(@NonNull View view) {
-		super.setupCards(view);
+	protected void createCards(@NonNull View view) {
+		super.createCards(view);
 
-		cardsContainer.addView(createDivider(cardsContainer, true, true));
 		addCard(new AlpineHikingCard(getMapActivity()));
-		cardsContainer.addView(createDivider(cardsContainer, false, true));
+		addRenderingClassCard(ALPINE.getRenderingPropertyAttr());
 	}
 }

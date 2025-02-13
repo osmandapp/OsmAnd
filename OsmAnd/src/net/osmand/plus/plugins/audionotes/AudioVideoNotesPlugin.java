@@ -451,7 +451,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public void makeAction(@NonNull MapActivity mapActivity, int actionId) {
 		Location loc = app.getLocationProvider().getLastKnownLocation();
 		if (loc == null) {
-			Toast.makeText(app, R.string.audionotes_location_not_defined, Toast.LENGTH_LONG).show();
+			app.showToastMessage(R.string.audionotes_location_not_defined);
 			return;
 		}
 		double lon = loc.getLongitude();
@@ -716,7 +716,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	private void logErr(Exception e) {
 		log.error("Error starting recorder ", e);
-		Toast.makeText(app, app.getString(R.string.recording_error) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
+		app.showToastMessage(app.getString(R.string.recording_error) + " : " + e.getMessage());
 	}
 
 	protected void openCamera() {
@@ -857,7 +857,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					mediaRecFile = f;
 
 				} catch (Exception e) {
-					Toast.makeText(app, e.getMessage(), Toast.LENGTH_LONG).show();
+					app.showToastMessage(e.getMessage());
 					log.error(e.getMessage(), e);
 					res = false;
 				}
@@ -888,8 +888,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			} catch (Exception e) {
 				unmuteStreamMusicAndOutputGuidance();
 				log.error("Error starting audio recorder ", e);
-				Toast.makeText(app, app.getString(R.string.recording_error) + " : "
-						+ e.getMessage(), Toast.LENGTH_LONG).show();
+				app.showToastMessage(app.getString(R.string.recording_error) + " : "
+						+ e.getMessage());
 			}
 		} else {
 			actionLat = lat;
@@ -1187,7 +1187,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			AndroidUtils.startActivityForResultIfSafe(mapActivity, takePictureIntent, 205);
 		} catch (Exception e) {
 			log.error("Error taking a picture ", e);
-			Toast.makeText(app, app.getString(R.string.recording_error) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
+			app.showToastMessage(app.getString(R.string.recording_error) + " : " + e.getMessage());
 		}
 	}
 

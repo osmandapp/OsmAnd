@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -46,8 +47,8 @@ public class ContourLinesAction extends QuickAction {
 				OsmandApplication app = mapActivity.getMyApplication();
 				RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
 				if (contourLinesProp != null) {
-					CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(contourLinesProp.getAttrName());
-					if (!pref.get().equals(CONTOUR_LINES_DISABLED_VALUE)) {
+					OsmandSettings settings = app.getSettings();
+					if (!settings.getRenderPropertyValue(contourLinesProp).equals(CONTOUR_LINES_DISABLED_VALUE)) {
 						PluginsHelper.enablePluginIfNeeded(mapActivity, app, plugin, true);
 					}
 					mapActivity.refreshMapComplete();

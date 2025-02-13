@@ -57,6 +57,7 @@ import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.HMDPromoFragment;
 import net.osmand.plus.chooseplan.HugerockPromoFragment;
 import net.osmand.plus.chooseplan.TripltekPromoFragment;
 import net.osmand.plus.configmap.ConfigureMapFragment;
@@ -87,6 +88,7 @@ import net.osmand.plus.mapmarkers.PlanRouteFragment;
 import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
+import net.osmand.plus.nearbyplaces.NearbyPlacesFragment;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -516,8 +518,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (backStackEntryCount == 0 && launchPrevActivityIntent()) {
 			return;
 		}
-		QuickSearchDialogFragment fragment = fragmentsHelper.getQuickSearchDialogFragment();
-		if ((backStackEntryCount == 0 || mapContextMenu.isVisible()) && fragment != null && fragment.isSearchHidden()) {
+		NearbyPlacesFragment nearbyPlacesFragment = fragmentsHelper.getNearbyPlacesFragment();
+		if(nearbyPlacesFragment != null && nearbyPlacesFragment.onBackPress()) {
+			return;
+		}
+		QuickSearchDialogFragment quickSearchFragment = fragmentsHelper.getQuickSearchDialogFragment();
+		if ((backStackEntryCount == 0 || mapContextMenu.isVisible()) && quickSearchFragment != null
+				&& quickSearchFragment.isSearchHidden()) {
 			fragmentsHelper.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
 			return;
 		}
@@ -588,6 +595,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			} else if (HugerockPromoFragment.shouldShow(app)) {
 				SecondSplashScreenFragment.SHOW = false;
 				HugerockPromoFragment.showInstance(fragmentManager);
+			} else if (HMDPromoFragment.shouldShow(app)) {
+				SecondSplashScreenFragment.SHOW = false;
+				HMDPromoFragment.showInstance(fragmentManager);
 			}
 		}
 
@@ -1544,7 +1554,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				sim.startStopRouteAnimation(this);
 			}
 		}
-		for (OsmandPlugin plugin: PluginsHelper.getEnabledPlugins()) {
+		for (OsmandPlugin plugin : PluginsHelper.getEnabledPlugins()) {
 			plugin.newRouteIsCalculated(newRoute);
 		}
 	}

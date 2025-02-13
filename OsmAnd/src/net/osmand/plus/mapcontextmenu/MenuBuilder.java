@@ -420,7 +420,7 @@ public class MenuBuilder {
 		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
 		for (int i = 0; i < menuObjects.size(); i++) {
 			MenuObject menuObject = menuObjects.get(i);
-			View container = createRowContainer(app, null);
+			View container = createRowContainer(mapActivity, null);
 			String rowTextPrefix, rowText;
 			String title = menuObject.getTitleStr();
 			if (title.contains(":")) {
@@ -1423,7 +1423,7 @@ public class MenuBuilder {
 	private void buildGetWikipediaBanner(ViewGroup viewGroup) {
 		boolean light = isLightContent();
 		OsmAndFeature feature = OsmAndFeature.WIKIPEDIA;
-		LinearLayout view = buildCollapsableContentView(app, false, true);
+		LinearLayout view = buildCollapsableContentView(viewGroup.getContext(), false, true);
 
 		View banner = UiUtilities.getInflater(mapActivity, !light)
 				.inflate(R.layout.get_wikipedia_context_menu_banner, view, false);
@@ -1439,7 +1439,7 @@ public class MenuBuilder {
 			}
 		});
 
-		View row = createRowContainer(app, NEAREST_WIKI_KEY);
+		View row = createRowContainer(viewGroup.getContext(), NEAREST_WIKI_KEY);
 		view.addView(banner);
 		String text = app.getString(R.string.wiki_around);
 		CollapsableView collapsableView = new CollapsableView(view, this, false);

@@ -5030,4 +5030,16 @@
     <string name="poi_us_maps_recreation_area_activity_geocaching_and_letterboxing">GPS-feluleikir og ratleikir</string>
     <string name="poi_sled_no">Sleðar: nei</string>
     <string name="poi_access_notes">Athugasemdir varðandi aðgang</string>
+    <string name="poi_healthcare_speciality_body">Líkamstengd sálfræðimeðferð</string>
+    <string name="poi_healthcare_speciality_physical_therapy">Sjúkraþjálfun</string>
+    <string name="poi_healthcare_speciality_otorhinolaryngology">Háls- nef- og eyrnalækningar</string>
+    <string name="poi_healthcare_speciality_implantology">Tannplantafræði</string>
+    <string name="poi_healthcare_speciality_sophrologist">Slökunaræfingar</string>
+    <string name="poi_us_maps_recreation_area_activity_day_use_site">Svæði til notkunar yfir daginn; Staður til notkunar yfir daginn; Svæði til afþreyingar yfir daginn; Staður til afþreyingar yfir daginn</string>
+    <string name="poi_atv_yes">Utanvegafarartæki: já</string>
+    <string name="poi_atv_no">Utanvegafarartæki: nei</string>
+    <string name="poi_healthcare_speciality_pedorthist">Fótameinafræðingur</string>
+    <string name="poi_healthcare_speciality_humanistic">Húmanísk sálfræðimeðferð</string>
+    <string name="poi_healthcare_speciality_proctology">Endaþarmslækningar</string>
+    <string name="poi_healthcare_speciality_systemic">Kerfisbundin meðferð</string>
 </resources>

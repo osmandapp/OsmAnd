@@ -4965,4 +4965,11 @@
     <string name="poi_climbing_route">Bealach dreapadóireachta</string>
     <string name="poi_climbing_route_bottom">Bun an bhealaigh dreapadóireachta</string>
     <string name="poi_cafe_yes">Tá</string>
+    <string name="poi_dog_sled_no">Sled madra: níl</string>
+    <string name="poi_sled_yes">Sled: tá</string>
+    <string name="poi_sled_no">Sled: Níl</string>
+    <string name="poi_dog_sled_yes">Sled madra: tá</string>
+    <string name="poi_atv_yes">ATV: tá</string>
+    <string name="poi_atv_no">ATV: níl</string>
+    <string name="poi_access_notes">Nótaí rochtana</string>
 </resources>

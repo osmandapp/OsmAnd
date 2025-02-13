@@ -287,9 +287,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		builder.setNegativeButton(R.string.shared_string_no, null);
 		builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
 			if (app.getPoiFilters().removePoiFilter(filter)) {
-				Toast.makeText(getContext(),
-						getContext().getString(R.string.edit_filter_delete_message, filter.getName()),
-						Toast.LENGTH_SHORT).show();
+				app.showShortToastMessage(R.string.edit_filter_delete_message, filter.getName());
 				app.getSearchUICore().refreshCustomPoiFilters();
 				QuickSearchDialogFragment quickSearchDialogFragment = (QuickSearchDialogFragment) getParentFragment();
 				quickSearchDialogFragment.reloadCategories();
@@ -335,9 +333,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 				nFilter.setSavedFilterByName(filter.getFilterByName());
 			}
 			if (app.getPoiFilters().createPoiFilter(nFilter, false)) {
-				Toast.makeText(getContext(),
-					       getContext().getString(R.string.edit_filter_create_message, filterName),
-					       Toast.LENGTH_SHORT).show();
+				app.showShortToastMessage(R.string.edit_filter_create_message, filterName);
 				app.getSearchUICore().refreshCustomPoiFilters();
 				QuickSearchDialogFragment fragment = (QuickSearchDialogFragment) getParentFragment();
 				if (fragment != null) {

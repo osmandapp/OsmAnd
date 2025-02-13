@@ -12,6 +12,8 @@ import net.osmand.shared.KException
 import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.extensions.currentTimeMillis
 import net.osmand.shared.gpx.GpxFile.Companion.XML_COLON
+import net.osmand.shared.gpx.GpxFormatter.formatDecimal
+import net.osmand.shared.gpx.GpxFormatter.formatLatLon
 import net.osmand.shared.gpx.primitives.Author
 import net.osmand.shared.gpx.primitives.Bounds
 import net.osmand.shared.gpx.primitives.Copyright
@@ -145,33 +147,6 @@ object GpxUtilities {
 			fun getColorFromName(name: String): GpxColor? {
 				return entries.firstOrNull { it.name.equals(name, ignoreCase = true) }
 			}
-		}
-	}
-
-	// "0.00#####"
-	fun formatLatLon(number: Double): String {
-		val roundedNumber = kotlin.math.round(number * 10000000) / 10000000
-		val numberString = roundedNumber.toString()
-		val parts = numberString.split('.')
-		val integerPart = parts[0]
-		var fractionalPart = parts.getOrElse(1) { "00" }
-		if (fractionalPart.length < 2) {
-			fractionalPart += "0"
-		}
-		return "$integerPart.$fractionalPart"
-	}
-
-	// "#.#"
-	fun formatDecimal(number: Double): String {
-		val roundedNumber = kotlin.math.round(number * 10) / 10
-		val numberString = roundedNumber.toString()
-		val parts = numberString.split('.')
-		val integerPart = parts[0]
-		val fractionalPart = parts.getOrElse(1) { "0" }
-		return if (fractionalPart == "0") {
-			integerPart
-		} else {
-			"$integerPart.$fractionalPart"
 		}
 	}
 

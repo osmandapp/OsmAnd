@@ -62,6 +62,7 @@ import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer.OpenStreetNote;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.track.clickable.ClickableWay;
 import net.osmand.plus.utils.NativeUtilities;
@@ -100,6 +101,7 @@ public class MapSelectionHelper {
 	private static final String TAG_POI_LAT_LON = "osmand_poi_lat_lon";
 
 	private final OsmandApplication app;
+	private final OsmandSettings settings;
 	private final OsmandMapTileView view;
 	private final MapLayers mapLayers;
 
@@ -112,6 +114,7 @@ public class MapSelectionHelper {
 
 	public MapSelectionHelper(@NonNull Context context) {
 		app = (OsmandApplication) context.getApplicationContext();
+		settings = app.getSettings();
 		view = app.getOsmandMap().getMapView();
 		mapLayers = app.getOsmandMap().getMapLayers();
 		clickableWayHelper = new ClickableWayHelper(app, view);
@@ -568,11 +571,10 @@ public class MapSelectionHelper {
 			if (osmRouteType != null) {
 				boolean enabled;
 				if (HIKING.getRenderingPropertyAttr().equals(attrName)) {
-					CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(attrName);
-					enabled = Arrays.asList(property.getPossibleValues()).contains(pref.get());
+					CommonPreference<String> pref = settings.getCustomRenderProperty(attrName);
+					enabled = property.containsValue(pref.get());
 				} else {
-					CommonPreference<Boolean> pref = app.getSettings().getCustomRenderBooleanProperty(attrName);
-					enabled = pref.get();
+					enabled = settings.getRenderBooleanPropertyValue(attrName);
 				}
 				if (enabled) {
 					filteredOsmRouteTypes.add(osmRouteType);

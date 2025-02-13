@@ -5990,4 +5990,22 @@
     <string name="display_distance_to_first_intermediate_summary">Mostra primeiro o tempo e a distância para a próxima parada. Desative para mostrar sempre os detalhes do destino.</string>
     <string name="shared_string_default_view">Visualização padrão</string>
     <string name="shared_string_length">Comprimento</string>
+    <string name="ais_object_lost_timeout">Tempo limite para visibilidade quando o objeto é perdido</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Mostrar rotas de escalada</string>
+    <string name="default_buttons_size_original_description">Cada botão manteria seu próprio tamanho.</string>
+    <string name="calculating_indication_message">Calculando…</string>
+    <string name="calculate_size">Calcular tamanho</string>
+    <string name="ais_port_nmea_local_description">Definir a porta UPD em que o OsmAnd recebe dados NMEA</string>
+    <string name="ais_ship_lost_timeout">Tempo limite para a visibilidade do navio quando nenhum sinal é recebido</string>
+    <string name="ais_address_settings">Configurações de endereço IP</string>
+    <string name="ais_address_settings_description">Escolha o protocolo NMEA (UDP/TCP) e defina os endereços</string>
+    <string name="ais_nmea_protocol">Protocolo para recepção de dados NMEA</string>
+    <string name="ais_nmea_protocol_description">Escolha o protocolo para a recepção de dados NMEA</string>
+    <string name="ais_address_nmea_server">Endereço IP da fonte de dados NMEA</string>
+    <string name="ais_address_nmea_server_description">Definir o endereço IP da fonte de dados NMEA (se for usado TCP)</string>
+    <string name="ais_port_nmea_server">Porta TCP da fonte de dados NMEA</string>
+    <string name="hmd_promo_description">Acesso gratuito a recursos, incluindo downloads ilimitados de mapas, relevo 3D etc. por %1$s mês</string>
+    <string name="shared_string_road_exit">Sair</string>
+    <string name="shared_string_engine">Motor</string>
+    <string name="vehicle_metrics_recording_description">Selecione os parâmetros que serão registrados no arquivo GPX.</string>
 </resources>

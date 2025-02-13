@@ -32,7 +32,7 @@ public class ArabicNormalizer {
     }
 
     private static String replaceDigits(String text) {
-        if (text == null) {
+        if (text == null || text.isEmpty()) {
             return null;  // Handle null input
         }
         char first = text.charAt(0);

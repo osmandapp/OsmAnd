@@ -407,20 +407,19 @@ public class SRTMPlugin extends OsmandPlugin {
 			}
 
 			@Override
-			public boolean onContextMenuClick(@Nullable OnDataChangeUiAdapter uiAdapter, @Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
+			public boolean onContextMenuClick(@NonNull OnDataChangeUiAdapter uiAdapter, @Nullable View view, @NotNull ContextMenuItem item, boolean isChecked) {
 				int itemId = item.getTitleId();
 				if (itemId == R.string.download_srtm_maps) {
 					toggleContourLines(mapActivity, isChecked, () -> {
 						RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
 						if (contourLinesProp != null) {
-							CommonPreference<String> pref = settings.getCustomRenderProperty(contourLinesProp.getAttrName());
-							boolean selected = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
+							boolean selected = !settings.getRenderPropertyValue(contourLinesProp).equals(CONTOUR_LINES_DISABLED_VALUE);
 
 							SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 							PluginsHelper.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
 
 							item.setDescription(app.getString(R.string.display_zoom_level,
-									getPrefDescription(app, contourLinesProp, pref)));
+									AndroidUtils.getRenderingStringPropertyValue(app, contourLinesProp)));
 							item.setColor(app, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 							item.setSelected(selected);
 							uiAdapter.onDataSetChanged();
@@ -459,9 +458,8 @@ public class SRTMPlugin extends OsmandPlugin {
 
 		RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
 		if (contourLinesProp != null) {
-			CommonPreference<String> pref = settings.getCustomRenderProperty(contourLinesProp.getAttrName());
 			boolean contourLinesSelected = isContourLinesLayerEnabled(app);
-			String descr = getPrefDescription(app, contourLinesProp, pref);
+			String descr = AndroidUtils.getRenderingStringPropertyValue(app, contourLinesProp);
 			adapter.addItem(new ContextMenuItem(CONTOUR_LINES)
 					.setTitleId(R.string.download_srtm_maps, mapActivity)
 					.setSelected(contourLinesSelected)
@@ -570,15 +568,6 @@ public class SRTMPlugin extends OsmandPlugin {
 		}
 	}
 
-	public String getPrefDescription(Context ctx, RenderingRuleProperty p, CommonPreference<String> pref) {
-		String value = pref.get();
-		if (!Algorithms.isEmpty(value) && p.containsValue(value)) {
-			return AndroidUtils.getRenderingStringPropertyValue(ctx, pref.get());
-		} else {
-			return AndroidUtils.getRenderingStringPropertyValue(ctx, p.getDefaultValueDescription());
-		}
-	}
-
 	public void selectPropertyValue(MapActivity activity, RenderingRuleProperty p,
 	                                CommonPreference<String> pref, Runnable callback) {
 		boolean nightMode = isNightMode(activity, app);
@@ -587,12 +576,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		possibleValuesList.remove(CONTOUR_LINES_DISABLED_VALUE);
 		String[] possibleValues = possibleValuesList.toArray(new String[0]);
 
-		int i = possibleValuesList.indexOf(pref.get());
-		if (i >= 0) {
-			i++;
-		} else if (Algorithms.isEmpty(pref.get())) {
-			i = 0;
-		}
+		int selectedIndex = AndroidUtils.getRenderPropertySelectedValueIndex(app, p);
 
 		String[] possibleValuesString = new String[possibleValues.length + 1];
 		possibleValuesString[0] = AndroidUtils.getRenderingStringPropertyValue(activity,
@@ -613,7 +597,7 @@ public class SRTMPlugin extends OsmandPlugin {
 					}
 				});
 
-		CustomAlert.showSingleSelection(dialogData, possibleValuesString, i, v -> {
+		CustomAlert.showSingleSelection(dialogData, possibleValuesString, selectedIndex, v -> {
 			int which = (int) v.getTag();
 			if (which == 0) {
 				pref.set("");

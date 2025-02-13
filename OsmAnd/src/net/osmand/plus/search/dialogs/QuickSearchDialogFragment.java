@@ -592,7 +592,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			OsmandApplication app = getMyApplication();
 			if (app != null) {
 				if (!app.getSettings().isInternetConnectionAvailable()) {
-					Toast.makeText(app, R.string.internet_not_available, Toast.LENGTH_LONG).show();
+					app.showToastMessage(R.string.internet_not_available);
 				} else {
 					if (searchQuery != null) {
 						Bundle args = new Bundle();
@@ -681,7 +681,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				nFilter.setSavedFilterByName(filter.getFilterByName());
 			}
 			if (app.getPoiFilters().createPoiFilter(nFilter, false)) {
-				Toast.makeText(getContext(), getString(R.string.edit_filter_create_message, editText.getText().toString()), Toast.LENGTH_SHORT).show();
+				app.showShortToastMessage(R.string.edit_filter_create_message, editText.getText().toString());
 				app.getSearchUICore().refreshCustomPoiFilters();
 				replaceQueryWithUiFilter(nFilter, "");
 				reloadCategories();
@@ -1155,7 +1155,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_world_globe_dark, app.getString(R.string.search_online_address), view -> {
 					OsmandSettings settings = app.getSettings();
 					if (!settings.isInternetConnectionAvailable()) {
-						Toast.makeText(app, R.string.internet_not_available, Toast.LENGTH_LONG).show();
+						app.showToastMessage(R.string.internet_not_available);
 						return;
 					}
 					startOnlineSearch();
@@ -1818,7 +1818,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				public void onSecondaryButtonClick() {
 					OsmandSettings settings = app.getSettings();
 					if (!settings.isInternetConnectionAvailable()) {
-						Toast.makeText(app, R.string.internet_not_available, Toast.LENGTH_LONG).show();
+						app.showToastMessage(R.string.internet_not_available);
 						return;
 					}
 					startOnlineSearch();

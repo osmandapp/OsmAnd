@@ -338,7 +338,7 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 	@Nullable
 	@Override
 	public SettingsItemWriter<? extends SettingsItem> getWriter() {
-		return new OsmandSettingsItemWriter<ProfileSettingsItem>(this, getSettings()) {
+		return new OsmandSettingsItemWriter<>(this, getSettings()) {
 			@Override
 			protected void writePreferenceToJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
 				if (!appModeBeanPrefsIds.contains(preference.getId())) {

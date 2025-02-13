@@ -443,8 +443,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements FilesCo
 				((StorageSelectionListener) target).onStorageSelected(newStorageDirectory);
 			}
 		} else {
-			Toast.makeText(activity, R.string.specified_directiory_not_writeable,
-					Toast.LENGTH_LONG).show();
+			app.showToastMessage(R.string.specified_directiory_not_writeable);
 		}
 		refreshDataInfo();
 		updateAllSettings();

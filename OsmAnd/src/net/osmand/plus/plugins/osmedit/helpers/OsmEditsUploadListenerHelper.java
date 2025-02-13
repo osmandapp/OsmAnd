@@ -70,10 +70,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 			}
 		}
 		if (uploaded == pointsNum) {
-			Toast.makeText(activity,
-					MessageFormat.format(numberFormat, uploaded),
-					Toast.LENGTH_LONG)
-					.show();
+			AndroidUtils.getApp(activity).showToastMessage(MessageFormat.format(numberFormat, uploaded));
 		} else if (pointsNum == 1) {
 			Log.v(TAG, "in if1");
 			OsmPoint point = loadErrorsMap.keySet().iterator().next();

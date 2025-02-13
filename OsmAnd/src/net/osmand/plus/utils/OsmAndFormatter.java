@@ -27,6 +27,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SwissGridApproximation;
+import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
@@ -42,6 +43,7 @@ import java.text.DateFormatSymbols;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.MessageFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -112,17 +114,20 @@ public class OsmAndFormatter {
 	}
 
 	public static String getFormattedDuration(long seconds, @NonNull OsmandApplication app) {
+		LocaleHelper localeHelper = app.getLocaleHelper();
+		Locale locale = localeHelper.getPreferredLocale() != null ? localeHelper.getPreferredLocale() : localeHelper.getDefaultLocale();
+		NumberFormat numberFormat = NumberFormat.getInstance(locale);
 		long hours = seconds / (60 * 60);
 		long minutes = (seconds / 60) % 60;
 		if (hours > 0) {
-			return hours + " "
+			return numberFormat.format(hours) + " "
 					+ app.getString(R.string.osmand_parking_hour)
-					+ (minutes > 0 ? " " + minutes + " "
+					+ (minutes > 0 ? " " + numberFormat.format(minutes) + " "
 					+ app.getString(R.string.shared_string_minute_lowercase) : "");
 		} else if (minutes > 0) {
-			return minutes + " " + app.getString(R.string.shared_string_minute_lowercase);
+			return numberFormat.format(minutes) + " " + app.getString(R.string.shared_string_minute_lowercase);
 		} else {
-			return "<1 " + app.getString(R.string.shared_string_minute_lowercase);
+			return "<" + numberFormat.format(1) + " " + app.getString(R.string.shared_string_minute_lowercase);
 		}
 	}
 

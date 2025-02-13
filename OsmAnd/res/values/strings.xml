@@ -10,10 +10,15 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-    <string name="original_color_description">Each point would keep its own color.</string>
-    <string name="original_icon_description">Each point would keep its own icon.</string>
-    <string name="original_shape_description">Each point would keep its own shape.</string>
-    <string name="apply_to_all_points">Apply to all points</string>
+	<string name="original_color_description">Each point would keep its own color.</string>
+	<string name="original_icon_description">Each point would keep its own icon.</string>
+	<string name="original_shape_description">Each point would keep its own shape.</string>
+	<string name="apply_to_all_points">Apply to all points</string>
+    <string name="hmd_promo">HMD Promo for %1$s months</string>
+    <string name="hmd_promo_description">Free access to features including unlimited map downloads, 3D relief etc. for %1$s month</string>
+	<string name="shared_string_road_exit">Exit</string>
+	<string name="popular_places_nearby">Popular places nearby</string>
+	<string name="recently_visited">Recently visited</string>
     <string name="ais_load_data">Load AIS data from file</string>
     <string name="ais_address_settings">IP address settings</string>
     <string name="ais_address_settings_description">Choose NMEA protocol (UDP/TCP) and define addresses</string>
@@ -43,8 +48,8 @@
     <string name="shared_string_length">Length</string>
     <string name="shared_string_avg_altitude">Avg. altitude</string>
     <string name="shared_string_avg_speed">Min. speed</string>
-    <string name="popular_places_nearby">Popular places nearby</string>
-    <string name="recently_visited">Recently visited</string>
+    <string name="no_places_available">No places available</string>
+    <string name="no_photo_for_location_desc">No user photos have been added to this location yet</string>
     <string name="shared_string_default_view">Default view</string>
     <string name="map_widget_route_information">Route information</string>
     <string name="map_widget_route_information_desc">Displays the estimated arrival time, remaining travel time, and distance for the current navigation route.</string>
@@ -435,6 +440,11 @@ You will be able to pair this scanner again at any time.</string>
     <string name="show_debug_info">Show debug information</string>
     <string name="show_debug_info_description">Display graphical info about placement of each map text</string>
     <string name="map_text">Map texts</string>
+    <string name="show_grids">Show map grid</string>
+    <string name="show_grids_description">Allow displaying grid over the map</string>
+    <string name="show_utm_grids">Use UTM instead of WGS84</string>
+    <string name="show_utm_grids_description">Show grid in UTM meters instead of WGS84 degrees</string>
+    <string name="map_grid">Map grids</string>
     <string name="routing_attr_avoid_cobblestone_name">Avoid cobblestone</string>
     <string name="routing_attr_avoid_cobblestone_description">Avoid cobblestone</string>
     <string name="release_4_8">
@@ -1323,7 +1333,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Show MTB IMBA trails</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Show dedicated mountain biking trails.</string>
     <string name="connect_with_straight_line">Connect with a straight line</string>
-    <string name="attach_roads_descr">Approximate your track to allowed roads to route between points and associate precise turn instructions and route properties.</string>
+    <string name="attach_roads_descr">Attach your track to roads to get detailed route information, including turn-by-turn instructions and road attributes.</string>
     <string name="attach_roads_warning">Only a recorded track can be attached to the roads.</string>
     <string name="without_profiles_changing">Without profiles changing</string>
     <string name="shared_string_only_missing">Only missing</string>

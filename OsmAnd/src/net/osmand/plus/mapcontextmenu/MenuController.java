@@ -43,6 +43,7 @@ import net.osmand.plus.mapcontextmenu.controllers.*;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.nearbyplaces.NearbyPlacesHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.aistracker.AisObject;
@@ -188,6 +189,11 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				}
 			} else if (object instanceof SearchHistoryHelper.HistoryEntry) {
 				menuController = new HistoryMenuController(mapActivity, pointDescription, (SearchHistoryHelper.HistoryEntry) object);
+			} else if (object instanceof NearbyPlacePoint point) {
+				Amenity amenity = NearbyPlacesHelper.INSTANCE.getAmenity(new LatLon(point.getLatitude(), point.getLongitude()), point.getId());
+				if (amenity != null) {
+					menuController = new AmenityMenuController(mapActivity, pointDescription, amenity);
+				}
 			} else if (object instanceof TargetPoint) {
 				menuController = new TargetPointMenuController(mapActivity, pointDescription, (TargetPoint) object);
 			} else if (object instanceof Recording) {

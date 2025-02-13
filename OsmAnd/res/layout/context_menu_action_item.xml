@@ -22,7 +22,7 @@
 		android:layout_height="wrap_content"
 		android:ellipsize="end"
 		android:maxLines="1"
-		android:textColor="@color/text_color_secondary_light"
+		android:textColor="?android:attr/textColorSecondary"
 		android:textSize="@dimen/default_desc_text_size"
 		android:textStyle="normal" />
 
