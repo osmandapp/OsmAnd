@@ -116,11 +116,11 @@ public class AmenityMenuController extends MenuController {
 				travelHelper.openTrackMenu(article, mapActivity, name, amenity.getLocation(), false);
 			}
 		} else if (ROUTE_TRACK_POINT.equals(amenity.getSubType())) {
-			TravelGpx travelGpx = travelHelper.searchGpx(amenity.getLocation(), amenity.getRouteId(), amenity.getRef());
+			TravelGpx travelGpx = travelHelper.searchTravelGpx(amenity.getLocation(), amenity.getRouteId());
 			if (travelGpx != null) {
 				travelHelper.openTrackMenu(travelGpx, mapActivity, travelGpx.getTitle(), amenity.getLocation(), false);
 			} else {
-				LOG.error("openTrack() searchGpx() travelGpx is null");
+				LOG.error("openTrack() searchTravelGpx() travelGpx is null");
 			}
 		}
 	}
