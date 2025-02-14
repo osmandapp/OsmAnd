@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="osm_live_subscriptions">சந்தாக்கள்
-\n</string>
+    <string name="osm_live_subscriptions">சந்தாக்கள்</string>
     <string name="powered_by_osmand">ஆச்மண்ட் எழுதியது</string>
     <string name="osm_live_plan_pricing">திட்டம் &amp; விலை</string>
     <string name="osm_live_payment_monthly_title">மாதாந்திர</string>
@@ -16,7 +15,7 @@
     <string name="edit_map_marker">வரைபட குறியீட்டை திருத்த</string>
     <string name="third_party_application">மூன்றாம் தரப்பு பயன்பாடு</string>
     <string name="search_street">தெருவை தேட</string>
-    <string name="start_search_from_city">முதலில் நகரம்/நகரம்/வட்டாரத்தைக் குறிப்பிடவும்</string>
+    <string name="start_search_from_city">முதலில் மாநகரம்/நகரம்/வட்டாரத்தைக் குறிப்பிடவும்</string>
     <string name="shared_string_restore">மீட்டெடு</string>
     <string name="keep_passed_markers_descr">பிடித்தவர்களின் குழுவாக அல்லது ஜி.பீ.எக்ஸ் வழிப்பாதைகளின் வரைபடத்தில் இருக்கும் கடவுச்சொல் என குறியிடப்படும் குறிப்பான்கள் சேர்க்கப்பட்டுள்ளன. குழு செயலில் இல்லை என்றால், குறிப்பான்கள் வரைபடத்தில் இருந்து மறைந்துவிடும்.</string>
     <string name="keep_passed_markers">கடந்த அடையாளக்குறியை வரைபடத்தில் குறிக்கவும்</string>
@@ -27,12 +26,9 @@
     <string name="coord_input_edit_point">திருத்தும் நிலை</string>
     <string name="quick_action_edit_actions">செயல்களை திருத்த</string>
     <string name="poi_cannot_be_found">முனை அல்லது வழியைக் கண்டுபிடிக்க முடியவில்லை.</string>
-    <string name="search_no_results_feedback">தேடல் முடிவு இல்லையா\?
-\nஎங்களுக்கு கருத்து தெரிவிக்கவும்
-\n</string>
+    <string name="search_no_results_feedback">தேடல் முடிவு இல்லையா? \nகருத்து தெரிவி</string>
     <string name="increase_search_radius_to">தேடல் ஆரம் %1$s க்கு நீட்டிக்கவும்</string>
-    <string name="send_search_query_description">நாங்கள் உங்களின் தேடல்: 1\"%1$s\"2, மற்றும் இருப்பிடத்தை அனுப்புவோம்.\n3\n"4 நாங்கள் உங்களது தனிப்பட்ட விவரத்தை  சேகரிக்க மாட்டோம், எங்களுடைய தேடுதல்
-\n வழிமுறையை மேம்படுத்த உங்களின் தேடுதல் தகவல் தேவை படுகிறது ."\n5</string>
+    <string name="send_search_query_description">உங்களின் தேடல்\"%1$s\" இதற்கு அனுப்புவோம், இருப்பிடத்துடன்.\n\nதனிப்பட்ட விவரத்தைச் சேகரிக்க மாட்டோம், தேடுதல் வழிமுறையை மேம்படுத்தத் தேடுதல் தகவல் மட்டும்.</string>
     <string name="shared_string_world">உலகம்</string>
     <string name="point_deleted">புள்ளி %1$s நீக்கப்பட்டது</string>
     <string name="coord_input_add_point">புள்ளியே சேர்க்க</string>
@@ -58,19 +54,17 @@
     <string name="paid_app">பணம் செளுதவெண்டிய செயலி</string>
     <string name="paid_plugin">கட்டண சொருகி</string>
     <string name="travel_card_update_descr">புதுப்பிப்பு செய்து, புதிய Wikivoyage தரவை அனுபவியுங்கள்.</string>
-    <string name="travel_card_download_descr">"இணையத்துடன் ஒரு இணைப்பு இல்லாமல் உலகெங்கிலும் உள்ள இடங்களைப் பற்றிய கட்டுரைகளைப் பார்வையிட   Wikivoyage  பயண வழிகாட்டிகளைப் பதிவிறக்கவும்."</string>
+    <string name="travel_card_download_descr">இணையத்துடன் ஒரு இணைப்பு இல்லாமல் உலகெங்கிலும் உள்ள இடங்களைப் பற்றிய கட்டுரைகளைப் பார்வையிட விக்கிபயணம் பயண வழிகாட்டிகளைப் பதிவிறக்கவும்.</string>
     <string name="download_file">பதிவிறக்க கோப்பு</string>
     <string name="start_editing_card_image_text">இலவச உலகளாவிய பயண வழிகாட்டி எவரும் திருத்த முடியும்.</string>
-    <string name="start_editing_card_description">உங்களால் எல்லா வகையான கட்டுரைகளை திருத்த முடியும்.
-\nஅறிவு, அனுபவம், திறமை மற்றும் உங்கள் கவனத்தை பகிர்ந்து கொள்ளுங்கள்</string>
+    <string name="start_editing_card_description">உங்களால் எல்லா வகையான கட்டுரைகளைத் திருத்த முடியும். அறிவு, அனுபவம், திறமை மற்றும் உங்கள் கவனத்தை பகிர்ந்து கொள்ளுங்கள்.</string>
     <string name="start_editing">திருத்தம் செய்ய தொடங்கவும்</string>
     <string name="get_unlimited_access">வரம்பற்ற அணுகலைப் பெறுக</string>
     <string name="welcome_to_open_beta">திறந்த பீட்டாவை வரவேற்கிறோம்</string>
     <string name="wikivoyage_travel_guide">பயண வழிகாட்டிகள்</string>
     <string name="wikivoyage_travel_guide_descr">இணையத்தில் ஒரு இணைப்பு இல்லாமல், கிரகதில் உள்ள மிகவும் சுவாரஸ்யமான இடங்களுக்கு OsmAnd உள்ளே வழிகாட்டபட்டுளது.</string>
     <string name="monthly_map_updates">மாதாந்திர வரைபட புதுப்பிப்புகள்</string>
-    <string name="daily_map_updates">வரைபட புதுப்பிப்புகள்:1 எல்லா
-\nமணிநேரமும் 2</string>
+    <string name="daily_map_updates">மணிநேர வரைபட புதுப்பிப்புகள்</string>
     <string name="shared_string_result">முடிவு</string>
     <string name="use_two_digits_longitude">இரட்டை இலக்கு தீர்க்கரேகையை பயன்படுத்துக</string>
     <string name="shared_string_travel_guides">பயண வழிகாட்டிகள்</string>
@@ -120,8 +114,7 @@
     <string name="map_imported_successfully">வரைபடம் இறக்குமதி செய்யப்பட்டது</string>
     <string name="make_as_start_point">இதை புறப்படும் புள்ளியாக மாற்றவும்</string>
     <string name="shared_string_current">தற்போதைய</string>
-    <string name="last_intermediate_dest_description">இடைநிலை நிறுத்தத்தை சேர்க்கிறது
-\n</string>
+    <string name="last_intermediate_dest_description">இடைநிலை நிறுத்தத்தைச் சேர்க்கிறது</string>
     <string name="first_intermediate_dest_description">ஆரம்ப நிறுத்தத்தை சேர்க்கிறது</string>
     <string name="subsequent_dest_description">இலக்கை நகர்த்தி அதை உருவாக்கவும்</string>
     <string name="show_closed_notes">மூடிய குறிப்புகளை காட்டவும்</string>
@@ -158,7 +151,7 @@
     <string name="yesterday">நேற்று</string>
     <string name="last_seven_days">கடந்த 7 நாட்கள்</string>
     <string name="this_year">இந்த வருடம்</string>
-    <string name="show_direction">"இடைத்தூரம்   அறிகுறி"</string>
+    <string name="show_direction">இடைத்தூரம் அறிகுறி</string>
     <string name="sort_by">வரிசைப்படுத்து</string>
     <string name="do_not_use_animations">உயிரூட்டுதல் இல்லை</string>
     <string name="do_not_use_animations_descr">வரைபட அனிமேசனை அணைக்கவும்.</string>
@@ -173,8 +166,7 @@
     <string name="add_point_after">பிறகு புள்ளியைச் சேர்க்கவும்</string>
     <string name="shared_string_options">விருப்பங்கள்</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd தேர்ந்தெடுக்கப்பட்ட சுயவிவரத்தை வைத்து பாதையை புள்ளிகள் மூலம் இணைக்கும்.</string>
-    <string name="measurement_tool_save_as_new_track_descr">புள்ளிகளை வழிபுள்ளியாக அல்லது கோடாக சேமி.
-\n</string>
+    <string name="measurement_tool_save_as_new_track_descr">புள்ளிகளை வழிபுள்ளியாக அல்லது கோடாகச் சேமி.</string>
     <string name="choose_navigation_type">வழிசெலுத்தல் சுயவிவரத்தைத் தேர்ந்தெடுக்கவும்</string>
     <string name="none_point_error">குறைந்தபட்சம் ஒரு புள்ளியைச் சேர்க்கவும்.</string>
     <string name="enter_gpx_name">சிபிஎக்ச் கோப்பு பெயர்:</string>
@@ -194,7 +186,7 @@
     <string name="osm_edit_context_menu_delete">ஓஎஸ்எம் தொகுப்பை நீக்கு</string>
     <string name="rendering_value_disabled_name">முடக்கியது</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">பிணையம் இணைப்பு</string>
-    <string name="shared_string_logoff">வெளியேறு</string>
+    <string name="shared_string_logoff">விடுபதிகை</string>
     <string name="rendering_attr_hideHouseNumbers_name">வீட்டு எண்</string>
     <string name="application_dir_change_warning3">OSMAND தரவு கோப்புகளை புதிய இலக்குக்கு நகர்த்தவா?</string>
     <string name="specified_directiory_not_writeable">வரைபட உருவாக்கம் குறிப்பிட்ட அடைவில்தான் நடக்கவேண்டும்</string>
@@ -215,7 +207,7 @@
     <string name="shared_string_edit">தொகுப்பு</string>
     <string name="shared_string_places">இடங்கள்</string>
     <string name="shared_string_search">தேடல்</string>
-    <string name="shared_string_show_description">விவரத்தை காட்டு</string>
+    <string name="shared_string_show_description">விவரத்தைக் காட்டு.</string>
     <string name="shared_string_message">குறுஞ்செய்தி</string>
     <string name="welmode_download_maps">வரைபடத்தை பதிவிறக்கு</string>
     <string name="welcome_select_region">உங்களின் சாலை விளக்குகளின் சைகைகளையும் ,விதிமுறைகளையும் சரியாக அறிய உங்கள் பகுதியை குறிப்பிடவும்:</string>
@@ -284,11 +276,10 @@
     <string name="shared_string_do">செய்</string>
     <string name="shared_string_only_with_wifi">Wi-Fi இல் மட்டும்</string>
     <string name="wikivoyage_download_pics">படங்களைப் பதிவிறக்க</string>
-    <string name="wikivoyage_download_pics_descr">"கட்டுரையின் புகைப்படங்கள் இணையாநிலையில் பதிவிறக்கம் செய்ய.
-\nஎப்போதும் \'ஆராய்தல்\' → \'விருப்பங்கள்\'  உபயோகிக்கவும்."</string>
+    <string name="wikivoyage_download_pics_descr">கட்டுரையின் புகைப்படங்கள் இணையாநிலையில் பதிவிறக்கம் செய்ய.\nஎப்போதும் \'ஆராய்தல்\' → \'விருப்பங்கள்\' இதில் கிடைக்கும்.</string>
     <string name="select_travel_book">பயண புத்தகத்தைத் தேர்ந்தெடுக்கவும்</string>
     <string name="shared_string_travel_book">பயண நூல்</string>
-    <string name="online_webpage_warning">"பக்கம் நிகழ்நிலையில்  மட்டுமே கிடைக்கும். வலை உலாவியில் திறக்கவா\?"</string>
+    <string name="online_webpage_warning">பக்கம் நிகழ்நிலையில் மட்டுமே கிடைக்கும். வலை உலாவியில் திறக்கவா?</string>
     <string name="delete_search_history">தேடல் வரலாற்றை நீக்கு</string>
     <string name="download_images">புகைப்படம் பதிவிறக்க</string>
     <string name="download_maps_travel">பயண வழிகாட்டிகள்</string>
@@ -312,7 +303,7 @@
     <string name="shared_string_deleted">அழிக்கப்பட்டது</string>
     <string name="shared_string_edited">திருத்தப்பட்டது</string>
     <string name="shared_string_added">சேர்க்கப்பட்டது</string>
-    <string name="marker_activated">"குறியீடு  %s செயல்படுத்தப்பட்டது."</string>
+    <string name="marker_activated">குறியீடு %s செயல்படுத்தப்பட்டது.</string>
     <string name="empty_state_av_notes">குறிப்புகளை உருவாக்குங்கள்!</string>
     <string name="empty_state_av_notes_desc">விட்செட்டுகள் அல்லது சூழல் மெனுக்களைப் பயன்படுத்தி வரைபடத்தில் எந்த கட்டத்திலும் ஆடியோ, வீடியோ அல்லது புகைப்படக் குறிப்புகளைச் சேர்க்கவும்.</string>
     <string name="notes_by_date">A/V குறிப்புகள் தேதி</string>
@@ -322,8 +313,7 @@
     <string name="shared_string_more_without_dots">மேலும்</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / மாதம்</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f%2$s / மாதம்</string>
-    <string name="default_price_currency_format">%1$.2f %2$s
-\n</string>
+    <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="shared_string_recorded">பதிவு</string>
     <string name="shared_string_record">பதிவு</string>
     <string name="gpx_logging_no_data">தகவல் இல்லை</string>
@@ -338,8 +328,7 @@
     <string name="christmas_desc_q">கிறிச்துமச் விடுமுறை போயிசைக் காட்டவா?</string>
     <string name="rendering_value_light_brown_name">இளம் பழுப்பு நிறம்</string>
     <string name="rendering_value_dark_brown_name">இருண்ட பழுப்பு</string>
-    <string name="rendering_attr_contourColorScheme_name">விளிம்பு கோடுகள் வண்ணங்கள்
-\n</string>
+    <string name="rendering_attr_contourColorScheme_name">விளிம்புக் கோடுகள் வண்ணங்கள் திட்டம்</string>
     <string name="rendering_attr_surfaceIntegrity_name">சாலை மேற்பரப்பு ஒருமைப்பாடு</string>
     <string name="search_hint">நகரம், முகவரி, POI பெயர்</string>
     <string name="translit_names">பெயரிடும் பெயர்கள்</string>
@@ -364,16 +353,13 @@
     <string name="osmand_plus_banner_desc">வரம்பற்ற வரைபட பதிவிறக்கங்கள், புதுப்பிப்புகள் மற்றும் விக்கிபீடியா சொருகி.</string>
     <string name="si_mi_meters">மைல்கள் / மீட்டர்</string>
     <string name="skip_map_downloading">வரைபடங்களைப் பதிவிறக்குக</string>
-    <string name="skip_map_downloading_desc">உங்களிடம் ஆஃப்லைன் வரைபடம் நிறுவப்படவில்லை. பட்டியலில் இருந்து ஒரு வரைபடத்தை தேர்வு செய்யலாம் அல்லது \'மெனு -%1$s\' வழியாக பின்னர் வரைபடங்களைப் பதிவிறக்குங்கள்.
-\n</string>
+    <string name="skip_map_downloading_desc">உங்களிடம் இணையமில்லா வரைபடம் நிறுவப்படவில்லை. பட்டியலிலிருந்து ஒரு வரைபடத்தைத் தேர்வு செய்யலாம் அல்லது \'பட்டியல் -%1$s\' வழியாகப் பின்னர் வரைபடங்களைப் பதிவிறக்குங்கள்.</string>
     <string name="search_another_country">மற்றொரு பகுதியைத் தேர்ந்தெடுக்கவும்</string>
     <string name="search_map">வரைபடங்களை தேடுகிறது …</string>
-    <string name="first_usage_wizard_desc">OsmAnd உங்கள் இருப்பிடத்தை நிர்ணயித்து, அந்தப் பிராந்தியத்திற்கு ஏற்ற வரைபடங்களை பரிந்துரைக்கவும்.
-\n</string>
+    <string name="first_usage_wizard_desc">OsmAnd உங்கள் இருப்பிடத்தை நிர்ணயித்து, அந்தப் பிராந்தியத்திற்கு ஏற்ற வரைபடங்களைப் பரிந்துரைக்கவும்.</string>
     <string name="location_not_found">இடம் காணப்படவில்லை</string>
     <string name="no_inet_connection">இணைய இணைப்பு இல்லை</string>
-    <string name="no_inet_connection_desc_map">வரைபடங்கள் பதிவிறக்க வேண்டும்.
-\n</string>
+    <string name="no_inet_connection_desc_map">வரைபடங்கள் பதிவிறக்க வேண்டும்.</string>
     <string name="search_location">இடம் தேடுகிறது …</string>
     <string name="storage_free_space">வெற்று இடம்</string>
     <string name="storage_place_description">OSMAND இன் தரவு சேமிப்பிடம் (வரைபடங்கள், ட்ராக் கோப்புகள் போன்றவற்றுக்கு): %1$s.</string>
@@ -425,8 +411,7 @@
     <string name="access_disable_wrong_direction_recalc">எதிர் திசையில் பாதை வழிகாட்டி இல்லை</string>
     <string name="access_disable_wrong_direction_recalc_descr">எதிர் திசையில் நகரும் போது எந்த வழிகாட்டுதலும் இல்லை.</string>
     <string name="access_smart_autoannounce">ஸ்மார்ட் கார் அறிவிக்கிறது</string>
-    <string name="access_smart_autoannounce_descr">இலக்கு புள்ளி மாற்றங்களுக்கு திசையை மட்டும் அறிவிக்க வேண்டும்.
-\n</string>
+    <string name="access_smart_autoannounce_descr">இலக்குப் புள்ளி மாற்றங்களுக்குத் திசையை மட்டும் அறிவிக்க வேண்டும்.</string>
     <string name="access_autoannounce_period">ஆட்டோ அறிவிப்பு காலம்</string>
     <string name="access_autoannounce_period_descr">அறிவிப்புகள் இடையே குறைந்த இடைவெளி.</string>
     <string name="access_default_color">இயல்புநிலை நிறம்</string>
@@ -488,7 +473,7 @@
     <string name="osm_live_region_desc">அந்த பகுதியில் வரைபடத்தில் மாற்றங்களைச் சமர்ப்பிக்கும் ஓ.எஸ்.எம் பயனர்களுக்கு உங்கள் நன்கொடையின் ஒரு பகுதி அனுப்பப்படும்.</string>
     <string name="osm_live_subscription_settings">சந்தா அமைப்புகள்</string>
     <string name="osm_live_ask_for_purchase">முதலாவதாக OsmAnd இன் சந்தாவை வாங்கவும்</string>
-    <string name="osm_live_header">இந்த சந்தா உலகெங்கிலும் உள்ள அனைத்து வரைபடங்களுக்கும் மணிநேர புதுப்பிப்புகளை செயல்படுத்துகிறது.\n வருமானத்தின் ஒரு பகுதி ஓஎச்எம் சமூகத்திற்குச் சென்று ஒவ்வொரு ஓஎச்எம் பங்களிப்புக்கும் செலுத்தப்படுகிறது.\n நீங்கள் ஒச்மண்ட் மற்றும் ஓஎச்எம் ஆகியவற்றை நேசிக்கிறீர்கள் என்றால், அவர்களை ஆதரிக்கவும் ஆதரிக்கவும் விரும்பினால், இதைச் செய்வதற்கான சரியான வழி இதுதான்.</string>
+    <string name="osm_live_header">இந்தச் சந்தா உலகெங்கிலும் உள்ள அனைத்து வரைபடங்களுக்கும் மணிநேர புதுப்பிப்புகளை செயல்படுத்துகிறது.\n வருமானத்தின் ஒரு பகுதி ஓஎச்எம் சமூகத்திற்குச் சென்று ஒவ்வொரு ஓஎச்எம் பங்களிப்புக்கும் செலுத்தப்படுகிறது.\n நீங்கள் ஒச்மண்ட் மற்றும் ஓஎச்எம் ஆகியவற்றை நேசிக்கிறீர்கள் என்றால், அவர்களை ஆதரிக்கவும் விரும்பினால், இதைச் செய்வதற்கான சரியான வழி இதுதான்.</string>
     <string name="select_map_marker">வரைபட மார்க்கைத் தேர்ந்தெடுக்கவும்</string>
     <string name="map_markers_other">மற்ற குறிப்பான்கள்</string>
     <string name="upload_anonymously">அநாமதேயமாக பதிவேற்றவும்</string>
@@ -505,8 +490,7 @@
     <string name="shared_string_add_to_map_markers">வரைபட குறிப்பான்களுக்குச் சேர்க்கவும்</string>
     <string name="select_map_markers">வரைபட குறிப்பான்களைத் தேர்ந்தெடுக்கவும்</string>
     <string name="shared_string_reverse_order">பின்னோக்கு வரிசை</string>
-    <string name="show_map_markers_description">வரைபட குறிப்பான்கள் அம்சத்தை இயக்கவும்.
-\n</string>
+    <string name="show_map_markers_description">வரைபட குறிப்பான்கள் நற்பண்பை இயக்கவும்.</string>
     <string name="clear_active_markers_q">அனைத்து செயலில் உள்ள குறிப்பான்களை அகற்றவா\?</string>
     <string name="clear_markers_history_q">வரைபட மார்க்கர் வரலாற்றை நீக்கவா\?</string>
     <string name="active_markers">செயலில் உள்ள குறிப்பான்கள்</string>
@@ -590,8 +574,7 @@
     <string name="background_service_is_enabled_question">OsmAnd பின்னணி சேவை இன்னும் இயங்கும். அதை நிறுத்துங்கள், கூடவா\?</string>
     <string name="sleep_mode_stop_dialog">GPS பின்னணி பயன்முறையை நிறுத்தவா\?</string>
     <string name="stop_navigation_service">நிறுத்து</string>
-    <string name="confirm_every_run">எப்போதும் கேள்
-\n</string>
+    <string name="confirm_every_run">எப்போதும் கேள்</string>
     <string name="save_global_track_interval">பொது பதிவு இடைவெளி</string>
     <string name="background_service_int">ஜிபிஎஸ் வேக் அப் இடைவேளை</string>
     <string name="enable_sleep_mode">ஜி.பி.எஸ் பின்னணி பயன்முறையை இயக்கு</string>
@@ -601,8 +584,7 @@
     <string name="save_current_track">தற்போதைய பாதையை சேமிக்கவும்</string>
     <string name="save_track_to_gpx">வழிசெலுத்தலின் போது தானாக பதிவுசெய்த பாதையில்</string>
     <string name="save_track_interval_globally">பதிவு இடைவெளி</string>
-    <string name="save_track_interval">வழிசெலுத்தலின் போது உள்நுழைவு இடைவெளி
-\n</string>
+    <string name="save_track_interval">வழிசெலுத்தலின்போது பதிவு இடைவெளி</string>
     <string name="save_track_interval_descr">வழிசெலுத்தலின் போது தட பதிவுக்கான பதிவு இடைவெளியைக் குறிப்பிடவும்</string>
     <string name="voice_provider_descr">வழிசெலுத்தல் க்கான குரல் வழிகாட்டியைத் தேர்ந்தெடுக்கவும்.</string>
     <string name="voice_provider">குரல் வழிகாட்டுதல்</string>
@@ -622,7 +604,7 @@
     <string name="ascent_descent">ஏற்றம்/இறங்க</string>
     <string name="moving_time">இயக்கத்தில் நேரம்</string>
     <string name="max_min">அதிகபட்ச/குறைந்தபட்ச</string>
-    <string name="min_max">"குறைந்தபட்ச/அதிகபட்ச "</string>
+    <string name="min_max">குறைந்தபட்ச/அதிகபட்ச</string>
     <string name="index_tours">சுற்றுப்பயணம்</string>
     <string name="shared_string_all">அனைத்து</string>
     <string name="shared_string_waypoints">பாதை புள்ளிகளின்</string>
@@ -654,7 +636,7 @@
     <string name="impassable_road">சாலைகள் தவிர்க்கவும் …</string>
     <string name="rendering_attr_trainLightrailRoutes_name">ரயில் பாதைகள்</string>
     <string name="rendering_attr_tramRoutes_name">டிராம் வழித்தடங்கள்</string>
-    <string name="rendering_attr_shareTaxiRoutes_name">"டாக்ஸி பாதைகளில் பகிர் "</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">டாக்ஸி பாதைகளில் பகிர்</string>
     <string name="rendering_value_pedestrian_name">காலில்</string>
     <string name="rendering_attr_coloredBuildings_name">வண்ண வகை குறியீடு கட்டிடங்கள்</string>
     <string name="continue_navigation">ஊடுருவல் தொடரவும்</string>
@@ -698,13 +680,9 @@
     <string name="loading_smth">%1$s ஐ ஏற்றுகிறது …</string>
     <string name="map_widget_plain_time">தற்போதைய நேரம்</string>
     <string name="shared_string_waypoint">பாதைப்புள்ளி</string>
-    <string name="selected_gpx_info_show">"
-\n
-\nவரைபடத்தில் காண நீண்ட நேரம் தட்டவும்"</string>
+    <string name="selected_gpx_info_show">\n\nவரைபடத்தில் காண நீண்ட நேரம் தட்டவும்</string>
     <string name="delay_navigation_start">தானாகவே திரும்பத் திரும்ப வழிகாட்டலைத் தொடங்குங்கள்</string>
-    <string name="local_index_gpx_info_show">"
-\n
-\nவிருப்பங்களுக்கான நீண்ட தட்டு"</string>
+    <string name="local_index_gpx_info_show">\n\nவிருப்பங்களுக்கான நீண்ட தட்டு</string>
     <string name="gpx_info_subtracks">துணை தடங்கள்: %1$s</string>
     <string name="gpx_info_waypoints">பாதை புள்ளிகள்: %1$s</string>
     <string name="gpx_info_distance">தூரம்: %1$s (%2$s புள்ளிகள்)</string>
@@ -719,7 +697,7 @@
     <string name="gpx_timemoving">நகரும் நேரம்: %1$s</string>
     <string name="gpx_selection_segment_title">பிரிவு</string>
     <string name="gpx_selection_number_of_points">%1$s புள்ளிகள்</string>
-    <string name="gpx_selection_point">"புள்ளிகள் %1$s "</string>
+    <string name="gpx_selection_point">புள்ளிகள் %1$s</string>
     <string name="gpx_selection_route_points">%1$s.
 \nபாதை புள்ளிகள் %2$s</string>
     <string name="gpx_selection_points">%1$s.
@@ -738,8 +716,7 @@
     <string name="index_item_nation_addresses">நாடு தழுவிய முகவரிகள்</string>
     <string name="index_item_world_altitude_correction">உலக உயரடுக்கின் திருத்தம்</string>
     <string name="index_item_world_seamarks">உலக கடல் குறிகள்</string>
-    <string name="index_item_world_bitcoin_payments">உலக பிட் நாணயம் கொடுப்பனவுகள்
-\n</string>
+    <string name="index_item_world_bitcoin_payments">உலக பிட் நாணயம் கொடுப்பனவுகள்</string>
     <string name="index_item_world_basemap">உலக கண்ணோட்ட வரைபடம்</string>
     <string name="index_item_world_ski">உலக ஸ்கை வரைபடம்</string>
     <string name="lang_zh">சீன</string>
@@ -811,8 +788,7 @@
     <string name="routing_attr_prefer_motorway_name">மோட்டார் வாகனங்களை விரும்புங்கள்</string>
     <string name="routing_attr_prefer_motorway_description">மோட்டார் வாகனங்களை விரும்புங்கள்</string>
     <string name="routing_attr_avoid_toll_name">கட்டண சாலைகள் இல்லை</string>
-    <string name="routing_attr_avoid_toll_description">கட்டண சாலைகள் தவிர்க்கவும்
-\n</string>
+    <string name="routing_attr_avoid_toll_description">கட்டண சாலைகள் தவிர்</string>
     <string name="routing_attr_avoid_unpaved_name">செப்பனிடப்படாத சாலைகள் இல்லை</string>
     <string name="routing_attr_avoid_unpaved_description">செப்பனிடப்படாத சாலைகளைத் தவிர்க்கிறது</string>
     <string name="routing_attr_avoid_ferries_name">படகுகள் இல்லை</string>
@@ -896,7 +872,7 @@
     <string name="keep_intermediate_points">இடைநிலை இலக்குகளை வைத்திருங்கள்</string>
     <string name="new_directions_point_dialog">நீங்கள் ஏற்கனவே இடைநிலை இலக்குகளை அமைக்கப்பட்டுள்ளீர்கள்.</string>
     <string name="context_menu_item_directions_to">திசைகள்</string>
-    <string name="context_menu_item_directions_from">"திசைகள் இருந்து "</string>
+    <string name="context_menu_item_directions_from">திசைகள் இதிலிருந்து</string>
     <string name="route_descr_map_location">வரைபடம்:</string>
     <string name="route_descr_lat_lon">லாட் %1$.3f, லோன் %2$.3f</string>
     <string name="route_descr_destination">இலக்கு</string>
@@ -908,8 +884,7 @@
     <string name="context_menu_item_destination_point">இலக்காக அமை</string>
     <string name="please_select_address">முதலில் நகரம் அல்லது தெருவை அமைக்கவும்</string>
     <string name="search_street_in_neighborhood_cities">அருகில் உள்ள நகரங்களில் தெருவுக்குத் தேடுங்கள்</string>
-    <string name="intermediate_items_sort_return">இலக்கை அடைவதற்கு இடைநிலை இடங்களுக்கு உகந்த வழிமுறை.
-\n</string>
+    <string name="intermediate_items_sort_return">இலக்கை அடைவதற்கு இடைநிலை இடங்களுக்கு உகந்த வழிமுறை.</string>
     <string name="intermediate_items_sort_by_distance">கதவை க்கு கதவை வரிசைப்படுத்த</string>
     <string name="local_osm_changes_backup_successful">OSM மாற்றம் கோப்பு %1$s ஆனது</string>
     <string name="local_osm_changes_backup_failed">OSM மாற்றங்களை ஆதரிக்க முடியவில்லை.</string>
@@ -977,8 +952,7 @@
     <string name="av_video_format_descr">வீடியோ வெளியீட்டு வடிவம்:</string>
     <string name="av_video_format">வீடியோ வெளியீட்டு வடிவம்</string>
     <string name="av_use_external_recorder_descr">வீடியோவுக்கு கணினி ரெக்கார்டர் பயன்படுத்தவும்.</string>
-    <string name="av_use_external_recorder">கணினி ரெக்கார்டர் பயன்படுத்தவும்
-\n</string>
+    <string name="av_use_external_recorder">கணினி ரெக்கார்டர் பயன்படுத்தவும்</string>
     <string name="av_use_external_camera_descr">புகைப்படங்களுக்கான கணினி பயன்பாட்டைப் பயன்படுத்தவும்.</string>
     <string name="av_use_external_camera">கேமரா பயன்பாட்டைப் பயன்படுத்துக</string>
     <string name="av_settings_descr">ஆடியோ மற்றும் வீடியோ அமைப்புகளை அமைக்கவும்.</string>
@@ -1011,11 +985,10 @@
     <string name="rendering_attr_hikingRoutesOSMC_name">ஐக்கிங் வழிகள்</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">OSMC தடங்களின் படி பாதைகளை வழங்கவும்.</string>
     <string name="rendering_attr_noAdminboundaries_name">எல்லைகள்</string>
-    <string name="rendering_attr_noAdminboundaries_description">பிராந்திய எல்லைகளை காட்சிப்படுத்த (நிர்வாகம் அளவு 5-9).
-\n</string>
+    <string name="rendering_attr_noAdminboundaries_description">பிராந்திய எல்லைகளைக் காட்சிப்படுத்த (நிர்வாகம் அளவு 5-9).</string>
     <string name="map_widget_max_speed">வேக வரம்பு</string>
     <string name="no_buildings_found">கட்டிடங்கள் இல்லை.</string>
-    <string name="incremental_search_city">"நகரத்தை தேடுங்கள் படிப்படியாக "</string>
+    <string name="incremental_search_city">நகரத்தைத் தேடுங்கள் படிப்படியாக</string>
     <string name="search_villages_and_postcodes">மேலும் கிராமங்கள்/அஞ்சல் குறியீடுகளைத் தேடுங்கள்</string>
     <string name="rendering_attr_showRoadMaps_description">சாலைகள் மட்டுமே வரைபடங்களைக் காண்பிக்கும்போது தேர்வுசெய்க:</string>
     <string name="rendering_attr_showRoadMaps_name">சாலைகள் மட்டுமே வரைபடங்கள்</string>
@@ -1048,7 +1021,7 @@
     <string name="map_underlay">வரைபடத்தின் கீழ்</string>
     <string name="map_underlay_descr">அண்டர்லே வரைபடத்தைத் தேர்வுசெய்க</string>
     <string name="layer_overlay">மேலடுக்கு வரைபடம் …</string>
-    <string name="map_overlay">"மேலடுக்கு வரைபடம் "</string>
+    <string name="map_overlay">மேலடுக்கு வரைபடம்</string>
     <string name="map_overlay_descr">மேலடுக்கு வரைபடத்தைத் தேர்வுசெய்க</string>
     <string name="tile_source_already_installed">வரைபடம் ஏற்கனவே நிறுவப்பட்டது, \'அமைப்புகள்\' புதுப்பிக்கப்படும்.</string>
     <string name="select_tile_source_to_install">ஓடு வரைபட ஆதாரங்களைத் தேர்ந்தெடுக்கவும்:</string>
@@ -1061,8 +1034,7 @@
     <string name="error_doing_search">ஆஃப்லைன் தேடலைச் செயல்படுத்த முடியவில்லை.</string>
     <string name="search_osm_offline">புவி இருப்பிடத்தைத் தேடு</string>
     <string name="system_locale">முறை</string>
-    <string name="preferred_locale_descr">காட்சி மொழியை தேர்ந்தெடு (OsmAnd மறுதொடக்கம் செய்யப்படும் போது நடைமுறைக்கு வரும்).
-\n</string>
+    <string name="preferred_locale_descr">காட்சி மொழியைத் தேர்ந்தெடு (OsmAnd மறுதொடக்கம் செய்யப்படும்போது நடைமுறைக்கு வரும்).</string>
     <string name="preferred_locale">காட்சி மொழி</string>
     <string name="incomplete_locale">முழுமையற்ற</string>
     <string name="unit_of_length_descr">என்ன தூரம் அளவிடப்படுகிறது என்பதை மாற்றவும்.</string>
@@ -1108,8 +1080,7 @@
     <string name="km">கி.மீ.</string>
     <string name="km_h">கிமீ / மணி</string>
     <string name="m">மீ</string>
-    <string name="old_map_index_is_not_supported">நீக்கப்பட்ட வரைபட தரவு வடிவமைப்பு \'\' {0} \'\', ஆதரிக்கப்படவில்லை
-\n</string>
+    <string name="old_map_index_is_not_supported">நீக்கப்பட்ட வரைபட தரவு வடிவமைப்பு \'\' {0} \'\', ஆதரிக்கப்படவில்லை</string>
     <string name="poi_filter_closest_poi">அருகில் உள்ள POI கள்</string>
     <string name="poi_filter_custom_filter">விருப்ப வடிப்பான்</string>
     <string name="poi_filter_namefinder">ஆன்லைன் பெயர் தேடுபவர்</string>
@@ -1203,7 +1174,7 @@
     <string name="backToMenu">மெனுவிற்குத் திரும்புக</string>
     <string name="zoomOut">சிறிதாக்கு</string>
     <string name="zoomIn">பெரிதாக்கு</string>
-    <string name="zoomIs">"பெரிதாக்கும் அளவு "</string>
+    <string name="zoomIs">பெரிதாக்கும் அளவு</string>
     <string name="north">வடக்கு</string>
     <string name="north_north_east">வடக்கு-வடகிழக்கு</string>
     <string name="north_east">வடகிழக்கு</string>
@@ -1273,7 +1244,7 @@
     <string name="wiki_article_search_text">குறிப்பிட்ட விக்கிபீடியா கட்டுரை தேடப்பட்டு வருகிறது</string>
     <string name="wiki_article_not_found">கட்டுரை காணப்படவில்லை</string>
     <string name="how_to_open_wiki_title">எப்படி விக்கிபீடியா கட்டுரைகளை திறக்க வேண்டும்\?</string>
-    <string name="welcome_text">ஒஎஸ்எம்அண்ட் உலக வரைபடத்தையும் ,பாதை வழிகளையும் இணையம் இல்லாமல் பயண்படுத்தும் வசதியை தருகிறது</string>
+    <string name="welcome_text">ஒஎஸ்எம்அண்ட் உலக வரைபடத்தையும், பாதை வழிகளையும் இணையம் இல்லாமல் பயண்படுத்தும் வசதியைத் தருகிறது.</string>
     <string name="welcome_header">வருக</string>
     <string name="current_route">தற்போதைய பாதை</string>
     <string name="osm_changes_added_to_local_edits">ஓஎஸ்எம் மாற்றங்கள் உள்மாற்ற கூட்டமைப்பில் சேர்க்கபட்டது</string>
@@ -1322,20 +1293,20 @@
     <string name="add_group">ஒரு குழுவைச் சேர்க்கவும்</string>
     <string name="add_group_descr">பிடித்தவை அல்லது GPX வழிப்பாதைகளிலிருந்து குழுக்களை இறக்குமதி செய்.</string>
     <string name="empty_state_markers_active">வரைபட குறியீடை உருவாக்க!</string>
-    <string name="empty_state_markers_active_desc">"நீண்ட அல்லது குறுகிய தட்டளுக்கு  \' இடங்கள்\' , பின்னர் குறியீடு கொடி பொத்தானை தட்டவும்."</string>
+    <string name="empty_state_markers_active_desc">நீண்ட அல்லது குறுகிய தட்டளுக்கு \'இடங்கள்\', பின்னர் குறியீடு கொடி பொத்தானைத் தட்டவும்.</string>
     <string name="empty_state_markers_groups">குழுக்கள் இருக்குமதி செய்ய</string>
     <string name="empty_state_markers_groups_desc">குறிக்கோளிகளாக பிடித்த குழுக்கள் அல்லது பாதை புள்ளிகளை இறக்குமதி செய்யுங்கள்.</string>
     <string name="empty_state_markers_history_desc">இந்த திரையில் தோன்றியவாறு குறிக்கப்பட்ட குறிப்பான்கள் மாறும்.</string>
     <string name="shared_string_two">இரண்டு</string>
     <string name="shared_string_one">ஒன்று</string>
     <string name="show_guide_line_descr">உங்கள் நிலைப்பாட்டிலிருந்து செய்யலில் உள்ள குறியீடுளுக்கு திசை வழியைக் காண்பி.</string>
-    <string name="show_arrows_descr">"செய்யளில் உள்ள அடையாளங்களுக்கான திசையை குறிக்கும்  ஒன்று அல்லது இரண்டு அம்புகளை காட்டு."</string>
+    <string name="show_arrows_descr">செய்யளில் உள்ள அடையாளங்களுக்கான திசையைக் குறிக்கும் ஒன்று அல்லது இரண்டு அம்புகளைக் காட்டு.</string>
     <string name="distance_indication_descr">செய்யலிள் உள்ள குறியீடுகளை எவ்வாறு காட்ட வேண்டும் என்பதைத் தேர்வுசெய்யவும்.</string>
     <string name="active_markers_descr">திசை குறிகாட்டிகளின் எண்ணிக்கையைக் குறிப்பிடவும்.</string>
     <string name="shared_string_degrees">அளவு</string>
     <string name="shared_string_milliradians">மில்லிரடினஸ்</string>
     <string name="angular_measeurement">கோண அலகு</string>
-    <string name="angular_measeurement_descr">என்ன அசிம்மை அளவிடப்படுகிறது என்பதை மாற்றுக</string>
+    <string name="angular_measeurement_descr">என்ன அசிமுத்தை அளவிடப்படுகிறது என்பதை மாற்றுக.</string>
     <string name="avoid_pt_types_descr">வழிசெலுத்தலைத் தவிர்ப்பதற்கு பொதுப் போக்குவரத்து வகைகளைத் தேர்ந்தெடுக்கவும்:</string>
     <string name="quick_action_day_night_mode">%s விதம்</string>
     <string name="avoid_pt_types">போக்குவரத்து வகையை தவிர்க்க…</string>
@@ -1372,7 +1343,7 @@
     <string name="osmand_service">பின்னணி முறை</string>
     <string name="nm">என்.எம்.ஐ.</string>
     <string name="min_mile">n/m</string>
-    <string name="min_km">என்/கி.மீ.</string>
+    <string name="min_km">நிமையம்/கிமீ</string>
     <string name="m_s">எம்/கள்</string>
     <string name="si_kmh">ஒரு மணி நேரத்திற்கு கிலோமீட்டர்</string>
     <string name="si_mph">ஒரு மணி நேரத்திற்கு மைல்கள்</string>
@@ -1722,13 +1693,13 @@
     <string name="right_side_navigation">வலது கை போக்குவரத்து</string>
     <string name="si_nm_mt">கடல் மைல்கள்/மீட்டர்</string>
     <string name="si_nm_ft">கடல் மைல்கள்/அடி</string>
-    <string name="si_nm_h">ஒரு மணி நேரத்திற்கு கடல் மைல்கள் (முடிச்சுகள்)</string>
+    <string name="si_nm_h">மணி நேரத்திற்கு கடல் மைல்கள் (முடிச்சுகள்)</string>
     <string name="shared_string_tones">டோன்கள்</string>
     <string name="nothing_found">எதுவும் கிடைக்கவில்லை</string>
     <string name="nothing_found_descr">தேடலை மாற்றவும் அல்லது அதன் ஆரம் அதிகரிக்கவும்.</string>
     <string name="select_street">தெருவைத் தேர்ந்தெடுக்கவும்</string>
     <string name="select_city">நகரத்தைத் தேர்ந்தெடுக்கவும்</string>
-    <string name="type_city_town">நகரம்/நகரம்/இருப்பிடம் என தட்டச்சு செய்க</string>
+    <string name="type_city_town">மாநகரம்/நகரம்/இருப்பிடத்தை தட்டச்சு செய்க</string>
     <string name="select_postcode">அஞ்சல் குறியீடு தேடல்</string>
     <string name="type_postcode">அஞ்சல் குறியீடு தட்டச்சு செய்க</string>
     <string name="nearest_cities">அருகிலுள்ள நகரங்கள்</string>
@@ -2569,7 +2540,7 @@
     <string name="rendering_attr_alpineHiking_description">வழிகளுக்கான வகைப்பாடு வகைகளில் தொல்லை.</string>
     <string name="rendering_attr_highway_class_bridleway_name">பிரிட்ல்வே</string>
     <string name="routing_attr_avoid_share_taxi_name">பங்கு டாக்சி இல்லை</string>
-    <string name="rendering_attr_pisteRoutes_name">ச்கை சரிவுகள்</string>
+    <string name="rendering_attr_pisteRoutes_name">ச்கை பாதைகள்</string>
     <string name="rendering_attr_piste_type_sled_name">ச்லெட்</string>
     <string name="rendering_attr_noPolygons_description">வரைபடத்தில் உள்ள அனைத்து ஏரியல் லேண்ட் அம்சங்களையும் வெளிப்படையானதாக ஆக்குங்கள்.</string>
     <string name="routing_attr_allow_classic_only_description">ச்கேட்டிங் பாதைகள் இல்லாமல் மட்டுமே கிளாசிக் பாணிக்கு வழிகள் உருவாகின. ஒரு சிறிய ச்னோமொபைல் மூலம் தளர்வான பிச்டுடன் வளர்ந்த வழிகள் இதில் அடங்கும்.</string>
@@ -3034,7 +3005,7 @@
     <string name="routing_attr_allow_via_ferrata_description">நிலையான கேபிள்கள், தண்டுகள், ஏணிகள் மற்றும் பாலங்கள் பொருத்தப்பட்ட ஒரு மலை பாதை.</string>
     <string name="rendering_attr_showToll_description">சாலைகளில் கட்டண கட்டுப்பாடுகளைக் காட்டுங்கள்</string>
     <string name="rendering_attr_lightDetail_name">ஒளி விவரம்</string>
-    <string name="rendering_attr_lightDetail_description">இயல்புநிலை: சீமார்க் பெயர் (ஒளி எழுத்து. குழு.</string>
+    <string name="rendering_attr_lightDetail_description">இயல்புநிலை: சீமார்க் பெயர் (ஒளி எழுத்து. குழு.காலம்), 1 முதல் 3 அல்லது பிரிவு 1,2,3,4,5 ஒளி எழுத்துபற்றிய கூடுதல் தகவல்களைத் தேர்ந்தெடு</string>
     <string name="rendering_attr_padusDisplayMode_description">அணுகல் வகை அல்லது மேலாளர் பெயர் மூலம்</string>
     <string name="rendering_value_access_name">அணுகல் வகை மூலம்</string>
     <string name="rendering_value_sector4_name">பிரிவு 4</string>
@@ -3265,7 +3236,7 @@
     <string name="transport_stops_to_pass">கடந்து செல்வதை நிறுத்துகிறது</string>
     <string name="map_screen_orientation_descr">உருவப்படம், நிலப்பரப்பு அல்லது சாதனம்.</string>
     <string name="show_transport_over_map_description">வரைபடத்தில் பொது போக்குவரத்து நிறுத்தங்களைக் காட்டு.</string>
-    <string name="new_route_calculated_dist_dbg">பாதை: தூரம் %1$s, திசைவி நேரம் %2$s\n கணக்கீடு: %3 $ .1f நொடி, %4 $ டி சாலைகள், %5 $ டி ஓடுகள்)</string>
+    <string name="new_route_calculated_dist_dbg">பாதை: தூரம் %1$s, திசைவி நேரம் %2$s\n கணக்கீடு: %3$.1f நொடி, %4$d டி சாலைகள், %5$d டி ஓடுகள்)</string>
     <string name="invalid_locations">தவறான ஆயத்தொலைவுகள்</string>
     <string name="use_online_routing">நிகழ்நிலை வழிசெலுத்தலைப் பயன்படுத்தவும்</string>
     <string name="search_address_street_option">வெட்டும் தெரு</string>
@@ -3460,7 +3431,7 @@
     <string name="shared_string_extensions">நீட்டிப்புகள்</string>
     <string name="shared_string_copyright">பதிப்புரிமை</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
-    <string name="battery_optimization_desc">ஆண்ட்ராய்டு இல் பேட்டரி தேர்வுமுறை பதிவுசெய்யப்பட்ட தடங்களில் இடைவெளிகளையும் தவறுகளையும் ஏற்படுத்தும்.\n\n இந்த சிக்கல்களில் ஏதேனும் ஒன்றை நீங்கள் அனுபவித்தால், பேட்டரி பயன்பாட்டை \'கட்டுப்பாடற்றதாக\' மாற்ற முயற்சி செய்யலாம்.</string>
+    <string name="battery_optimization_desc">ஆண்ட்ராய்டு இல் பேட்டரி தேர்வுமுறை பதிவுசெய்யப்பட்ட தடங்களில் இடைவெளிகளையும் தவறுகளையும் ஏற்படுத்தும்.\n\n இந்தச் சிக்கல்களில் ஏதேனும் ஒன்றை நீங்கள் அனுபவித்தால், பேட்டரி பயன்பாட்டை \'கட்டுப்பாடற்றதாக\' மாற்ற முயற்சி செய்யலாம்</string>
     <string name="shared_string_all_tracks">அனைத்து தடங்களும்</string>
     <string name="button_already_assigned_to_this_action">இந்த செயலுக்கு ஏற்கனவே ஒதுக்கப்பட்ட பொத்தான்.</string>
     <string name="reset_key_assignments">முக்கிய பணிகளை மீட்டமைக்கவும்</string>
@@ -3705,7 +3676,7 @@
     <string name="use_osm_live_public_transport_description">OSMand நேரடி மாற்றங்களுக்கான பொது போக்குவரத்தை இயக்கவும்.</string>
     <string name="shared_string_in_name">%1$s இல்</string>
     <string name="fonts_header">வரைபட எழுத்துருக்கள்</string>
-    <string name="do_not_send_anonymous_app_usage">அநாமதேய பயன்பாட்டு பயன்பாட்டு புள்ளிவிவரங்களை அனுப்ப வேண்டாம்</string>
+    <string name="do_not_send_anonymous_app_usage">பெயரிலி பயன்பாட்டு பயன் புள்ளிவிவரங்களை அனுப்ப வேண்டாம்</string>
     <string name="file_can_not_be_moved">கோப்பை நகர்த்த முடியவில்லை.</string>
     <string name="navigate_point_olc_info_invalid">தவறான OLC\n</string>
     <string name="sound_beep_simple_loud">பீப்: எளிய உரத்த</string>
@@ -3755,7 +3726,7 @@
     <string name="empty_screen_weather_clouds_layer">வரைபடத்தில் முகில் கவரேச் அடுக்கைக் காண இயக்கவும்.</string>
     <string name="map_rendering_engine_v2">பதிப்பு 2 (ஓபன்சிஎல்)</string>
     <string name="connect_with_straight_line">ஒரு நேர் கோட்டுடன் இணைக்கவும்</string>
-    <string name="attach_roads_descr">புள்ளிகள் மற்றும் துல்லியமான திருப்ப வழிமுறைகள் மற்றும் பாதை பண்புகளை இணைப்பதற்கு இடையே செல்ல சாலைகளை அனுமதிக்க உங்கள் பாதையை தோராயமாக மதிப்பிடுங்கள்.</string>
+    <string name="attach_roads_descr">திருப்புமுனை அறிவுறுத்தல்கள் மற்றும் சாலை பண்புக்கூறுகள் உள்ளிட்ட விரிவான பாதை தகவல்களைப் பெற உங்கள் பாதையைச் சாலைகளில் இணைக்கவும்.</string>
     <string name="without_profiles_changing">சுயவிவரங்கள் மாறாமல்</string>
     <string name="shared_string_only_missing">மட்டுமே காணவில்லை</string>
     <string name="goods_delivery_desc">டெலிவரி வாகனங்கள் சில சாலைகளில் கட்டுப்படுத்தப்படலாம்.</string>
@@ -3967,7 +3938,7 @@
     <string name="ask_every_time">ஒவ்வொரு முறையும் கேளுங்கள்</string>
     <string name="detailed_track_guidance">விரிவான தட வழிகாட்டுதல்</string>
     <string name="quick_action_routes_summary">வரைபடத்தில் %1$s ஐக் காட்ட அல்லது மறைக்க ஒரு மாற்று.</string>
-    <string name="rendering_avg_info_details">கடந்த 1 சட்டத்தால் FPS: %1$s\n சிபியு (ஓடுகள்): %2$s\n சிபியு (செயலற்ற நேரம்): %3$s\n சிபியு (GPU காத்திருங்கள்): %4 $ s</string>
+    <string name="rendering_avg_info_details">கடந்த 1 சட்டத்தால் FPS: %1$s\n சிபியு (ஓடுகள்): %2$s\n சிபியு (செயலற்ற நேரம்): %3$s\n சிபியு (GPU காத்திருங்கள்): %4$s</string>
     <string name="quick_action_video_note">வீடியோ குறிப்பு</string>
     <string name="quick_action_photo_note">புகைப்பட குறிப்பு</string>
     <string name="daynight_mode_sensor_summary">சுற்றுப்புற ஒளி நிலைகளுக்கு ஏற்ப ஒளி மற்றும் இருண்ட கருப்பொருள்களுக்கு இடையில் மாறுவதற்கு சாதனத்தின் ஒளி சென்சாரைப் பயன்படுத்துகிறது.</string>
@@ -3997,7 +3968,7 @@
     <string name="bluetooth_connected">இணைக்கப்பட்டுள்ளது, %s</string>
     <string name="camera_app">கேமரா பயன்பாடு</string>
     <string name="sort_duration_ascending">முதலில் குறுகிய காலம்</string>
-    <string name="value_downloaded_of_mb">%1 $ .1f/ %2 $ .1f Mb ஐ பதிவிறக்குகிறது</string>
+    <string name="value_downloaded_of_mb">%1$.1f/ %2$.1f மெபை பதிவிறக்குகிறது</string>
     <string name="mtb_scale">எம்டிபி அளவு</string>
     <string name="storage_migration_fragment_close_descr">நகலெடுப்பது%1$s %% மட்டுமே. நீங்கள் இப்போது நிறுத்தினால், பயன்பாடு சரியாக வேலை செய்யாது.</string>
     <string name="weather_wind_miles_per_hour">ஒரு மணி நேரத்திற்கு மைல்கள்</string>
@@ -4110,7 +4081,7 @@
     <string name="auto_25_chars_route_roundabout_kr">%1$d வெளியேறவும், சரியாக வைத்திருங்கள்</string>
     <string name="waypoint_template">வே பாயிண்ட் வார்ப்புரு</string>
     <string name="continue_on_phone">மொபைல் சாதனத்தில் தொடரவும்</string>
-    <string name="storage_found_files_descr">\"%3$s\" இலிருந்து \"%4 $ s\" க்கு%2$s கோப்புகளை நகலெடுக்க \"%1$s\" ஐத் தட்டவும். இதற்கு சிறிது நேரம் ஆகலாம்.</string>
+    <string name="storage_found_files_descr">\"%3$s\" இலிருந்து \"%4$s\" க்கு%2$s கோப்புகளை நகலெடுக்க \"%1$s\" ஐத் தட்டவும். இதற்கு சிறிது நேரம் ஆகலாம்.</string>
     <string name="add_online_routing_engine">நிகழ்நிலை ரூட்டிங் இயந்திரத்தைச் சேர்க்கவும்</string>
     <string name="send_files_to_openstreetmap">OpenstreetMap க்கு GPX கோப்பை அனுப்பவும்</string>
     <string name="plan_route_import_track">டிராக் இறக்குமதி</string>
@@ -4338,7 +4309,7 @@
     <string name="vector_data_missing">வரைபடங்களை ஆஃப்லைனில் பயன்படுத்த (\'ஆஃப்லைன்\') தரவு பதிவிறக்கவும்.</string>
     <string name="context_menu_item_update_map">வரைபடத்தைப் புதுப்பிக்கவும்</string>
     <string name="favourites_context_menu_delete">பிடித்ததை நீக்கு</string>
-    <string name="value_downloaded_of_max">%1 $ .1f %2 $ .1f mb</string>
+    <string name="value_downloaded_of_max">%1$.1f of %2$.1f மெபை</string>
     <string name="application_dir_description">வரைபடங்கள் மற்றும் பிற தரவுக் கோப்புகளை நீங்கள் எங்கு சேமிக்க விரும்புகிறீர்கள் என்பதைத் தேர்வுசெய்க.</string>
     <string name="quick_action_gpx_category_descr">விருப்ப வகையைத் தேர்வுசெய்க.</string>
     <string name="quick_action_empty_param_error">அனைத்து அளவுருக்களையும் நிரப்பவும்</string>
@@ -4410,7 +4381,7 @@
     <string name="show_track_on_map">வரைபடத்தில் தடத்தைக் காட்டு</string>
     <string name="osm_edits_view_descr">நீங்கள் இன்னும் பதிவேற்றப்படாத திருத்தங்கள் அல்லது OSM பிழைகள் அனைத்தையும் %1$s இல் காண்க. ஏற்கனவே பதிவேற்றிய மாற்றங்கள் இனி காண்பிக்கப்படாது.</string>
     <string name="gpx_monitoring_stop">பயணப் பதிவு இடைநிறுத்தம்</string>
-    <string name="l_100km">எல்/100 கி.மீ.</string>
+    <string name="l_100km">எல்/100 கிமீ</string>
     <string name="change_key_binding">விசை பிணைப்பை மாற்றவும்</string>
     <string name="monitoring_notification">அறிவிப்பு</string>
     <string name="digits_quantity">தசம இலக்கங்களின் எண்ணிக்கை</string>
@@ -4811,7 +4782,7 @@
     <string name="obd_fuel_type_electric">மின்சாரம்</string>
     <string name="obd_fuel_type_bifuel_gasoline">பிஃபுவல் இயங்கும் பெட்ரோல்</string>
     <string name="obd_fuel_type_bifuel_methanol">பிஃபுவல் இயங்கும் மெத்தனால்</string>
-    <string name="obd_fuel_type_bifuel_cng">சி.என்.சி.</string>
+    <string name="obd_fuel_type_bifuel_cng">இருஎரிபொருள் உருகியோடல் சிஎன்சி</string>
     <string name="obd_fuel_type_hybrid_regenerative">கலப்பின மீளுருவாக்கம்</string>
     <string name="obd_fuel_type_hybrid_hydrogen">கலப்பின ஐட்ரசன்</string>
     <string name="quick_action_move_map_right">வலதுபுறம் வரைபடம்</string>
@@ -4872,7 +4843,7 @@
     <string name="switch_widget_mode_desc">விட்செட் சுவிட்சுகள் முறைகளைத் தட்டுகிறது.</string>
     <string name="compass_desc">வடக்கே திசையைக் காட்டுகிறது.</string>
     <string name="map_marker_average_speed_desc">வேக சராசரியான நேர இடைவெளியைக் குறிப்பிடவும் (வருகை நேர மதிப்பீட்டிற்குப் பயன்படுத்தப்படுகிறது).</string>
-    <string name="next_live_update_date_and_time">%2$s இல் %1$s இல் அடுத்த புதுப்பிப்பு.</string>
+    <string name="next_live_update_date_and_time">%1$s அன்று %2$s இல் அடுத்த புதுப்பிப்பு.</string>
     <string name="next_live_update_time">அடுத்த புதுப்பிப்பு %1$s.</string>
     <string name="live_update_frequency_day_variant">வரைபட புதுப்பிப்புகள் தினமும் சரிபார்க்கப்படுகின்றன.</string>
     <string name="altitude_correction">உயரம் திருத்தம்</string>
@@ -4923,7 +4894,7 @@
     <string name="route_between_points_desc">ஒரு நேர் கோடு மூலம் புள்ளிகளை எவ்வாறு இணைப்பது என்பதைத் தேர்வுசெய்க அல்லது கீழே குறிப்பிடப்பட்டுள்ளபடி அவற்றுக்கிடையே ஒரு வழியைக் கணக்கிடுங்கள்.</string>
     <string name="please_provide_point_name_error">புள்ளிக்கு ஒரு பெயரை வழங்கவும்</string>
     <string name="vessel_height_warning">குறைந்த பாலங்களைத் தவிர்க்க ஒரு கப்பல் உயரத்தை அமைக்கவும். பாலம் நகரக்கூடியதாக இருந்தால், திறந்த நிலையில் உயரம் பயன்படுத்தப்படும்.</string>
-    <string name="delete_all_actions_message_q">விரைவான செயல்களை மாற்றமுடியாமல் நீக்கவா?</string>
+    <string name="delete_all_actions_message_q">%d விரைவான செயல்களை மாற்றமுடியாமல் நீக்கவா?</string>
     <string name="export_import_quick_actions_with_profiles_promo">பயன்பாட்டு சுயவிவரங்களுடன் விரைவான செயல்களை ஏற்றுமதி செய்யுங்கள் அல்லது இறக்குமதி செய்க.</string>
     <string name="storage_format">சேமிப்பக வடிவம்</string>
     <string name="online_map_url_helper_text">நிகழ்நிலை மூலத்திற்கு முகவரி ஐ உள்ளிடவும் அல்லது ஒட்டவும்.</string>
@@ -5359,13 +5330,13 @@
     <string name="bg_service_interval">விழித்தெழுந்த இடைவெளியை அமைக்கவும்:</string>
     <string name="profile_alert_need_routing_type_title">வழிசெலுத்தல் வகையைத் தேர்ந்தெடுக்கவும்</string>
     <string name="profile_alert_duplicate_name_title">நகல் பெயர்</string>
-    <string name="favorite_confirm_delete_group">\"%1$s\" குழுவை நீக்கு மற்றும் அனைத்தும் சேர்க்கப்பட்ட புள்ளிகள் (%2 $ D)?</string>
+    <string name="favorite_confirm_delete_group">\"%1$s\" குழுவை நீக்கு மற்றும் அனைத்தும் சேர்க்கப்பட்ட புள்ளிகள் (%2$d)?</string>
     <string name="included_in_your_current_plan">உங்கள் தற்போதைய \"%1$s\" திட்டத்தில் சேர்க்கப்பட்டுள்ளது</string>
     <string name="download_tiles">ஓடுகளைப் பதிவிறக்கவும்</string>
     <string name="restore_all_profile_settings_descr">இந்த சுயவிவரத்தை உருவாக்க/இறக்குமதி செய்த பிறகு அனைத்து சுயவிவர அமைப்புகளும் அவற்றின் அசல் நிலைக்கு மீட்டமைக்கப்படும்.</string>
     <string name="shared_string_app_default_w_val">பயன்பாட்டு இயல்புநிலை (%s)</string>
     <string name="replace_point_descr">இதனுடன் மற்றொரு புள்ளியை மாற்றவும்.</string>
-    <string name="release_4_4">Map வரைபடத்தை உள்ளமைக்கவும் \"மேம்படுத்தப்பட்ட\" தடங்கள் \"மெனு\n\n • சூழல் பட்டியல் இப்போது POI க்கான உள்ளூர்மயமாக்கப்பட்ட பெயர்களைக் காட்டுகிறது\n\n இணைப்பு இணைப்பு மூலம் வழியைப் பகிர விருப்பம் சேர்க்கப்பட்டது\n\n \"\" கடல் மைல்கள்/அடி \"அலகு நீளம் சேர்க்கப்பட்டது\n\n • வரைபட நோக்குநிலை புதிய நிலையான பயன்முறையைச் சேர்த்தது\n\n தொடங்கு எளிமைப்படுத்தப்பட்ட தொடக்கத் திரை\n\n And ஆண்ட்ராய்டு ஆட்டோவில் பிளவு திரை பயன்முறையில் நிலையான இருப்பிட நிலை\n\n மின்தடம் தட பகுப்பாய்விற்கு \"வேகம்/சாய்வு\" வரைபடம் சேர்க்கப்பட்டது\n\n • ஆண்ட்ராய்டு 13 பயன்பாட்டு மொழி தேர்வை கணினி அமைப்புகளுக்கு நகர்த்தியது\n\n சைவ இடங்களைக் காண்பிப்பதில் நிலையான சிக்கல்கள்\n\n \"\" மேலடுக்கு \"அல்லது\" அண்டர்லே \"வரைபடங்களாகப் பயன்படுத்தப்படும் நிகழ்நிலை ஓடுகளைப் பதிவிறக்குவதற்கான சாத்தியத்தை சேர்க்கப்பட்டது\n\n \"வாகன அளவுருக்கள்\" க்கு ஏகாதிபத்திய அலகுகளின் உதவி சேர்க்கப்பட்டது\n\n Mo புதிய மொபெட் சுயவிவரம்\n\n • \"காட்சி நிலை\" புதிய விருப்பத்தை \"தானியங்கி\" சேர்த்தது\n\n Tild சாய்வு, பெரிதாக்கு மற்றும் சுழற்சிக்கான நிலையான வரைபட சைகைகள்</string>
+    <string name="release_4_4">Map வரைபடத்தை உள்ளமைக்கவும் \"மேம்படுத்தப்பட்ட\" தடங்கள் \"மெனு\n\n • சூழல் பட்டியல் இப்போது POI க்கான உள்ளூர்மயமாக்கப்பட்ட பெயர்களைக் காட்டுகிறது\n\n இணைப்பு இணைப்புமூலம் வழியைப் பகிர விருப்பம் சேர்க்கப்பட்டது\n\n \"\" கடல் மைல்கள்/அடி \"அலகு நீளம் சேர்க்கப்பட்டது\n\n • வரைபட நோக்குநிலை புதிய நிலையான பயன்முறையைச் சேர்த்தது\n\n தொடங்கு எளிமைப்படுத்தப்பட்ட தொடக்கத் திரை\n\n And ஆண்ட்ராய்டு ஆட்டோவில் பிளவுத் திரை பயன்முறையில் நிலையான இருப்பிட நிலை\n\n மின்தடம் தட பகுப்பாய்விற்கு \"வேகம்/சாய்வு\" வரைபடம் சேர்க்கப்பட்டது\n\n • ஆண்ட்ராய்டு 13 பயன்பாட்டு மொழி தேர்வைக் கணினி அமைப்புகளுக்கு நகர்த்தியது\n\n சைவ இடங்களைக் காண்பிப்பதில் நிலையான சிக்கல்கள்\n\n \"\" மேலடுக்கு \"அல்லது\" அண்டர்லே \"வரைபடங்களாகப் பயன்படுத்தப்படும் நிகழ்நிலை ஓடுகளைப் பதிவிறக்குவதற்கான சாத்தியத்தைச் சேர்க்கப்பட்டது\n\n \"வாகன அளவுருக்கள்\" க்கு ஏகாதிபத்திய அலகுகளின் உதவி சேர்க்கப்பட்டது\n\n Mo புதிய மொபெட் சுயவிவரம்\n\n • \"காட்சி நிலை\" புதிய விருப்பத்தை \"தானியங்கி\" சேர்த்தது\n\n Tild சாய்வு, பெரிதாக்கு மற்றும் சுழற்சிக்கான நிலையான வரைபட சைகைகள்</string>
     <string name="choose_what_to_sync">ஒத்திசைக்க என்ன என்பதைத் தேர்வுசெய்க</string>
     <string name="cloud_sync_progress">ஒத்திசைவு… %1$s</string>
     <string name="shared_string_purchased_on">வாங்கப்பட்டது</string>
@@ -5375,14 +5346,14 @@
     <string name="empty_screen_weather_wind_layer">வரைபடத்தில் காற்று அடுக்கைக் காண இயக்கவும்.</string>
     <string name="empty_screen_weather_temperature_layer">வரைபடத்தில் வெப்பநிலை அடுக்கைக் காண இயக்கவும்.</string>
     <string name="rendering_engine_failed_descr">ஒச்மண்ட் \'பதிப்பு 1\' வரைபட ரெண்டரிங்கிற்கு திரும்பியுள்ளது. அமைப்புகளில் புதிய \'பதிப்பு 2 (ஓபன்சிஎல்)\' வழங்குதல் எஞ்சினுக்கு மாற முயற்சி செய்யலாம்.\n\n உங்கள் பிழை பதிவை வழங்குவதன் மூலம் மேம்பாடுகளை ஆதரிக்கவும்.</string>
-    <string name="release_4_3">• புதிய, வேகமான பதிப்பு 2 (ஓபன்சிஎல்) வரைபட வழங்குதல் எஞ்சின், 2.5 டி பார்வையுடன்\n\n The இயக்கத்தில் இருக்கும்போது இருப்பிட மாற்றங்களின் மென்மையான அனிமேசன்\n\n Center வரைபட மைய ஒருங்கிணைப்புகளுக்கான புதிய விட்செட்டுகள் மற்றும் புவிஇவியலின் உயர்வு\n\n • \"தட்டுவதற்கான தூரம்\": உரை அளவு விருப்பங்கள் சேர்க்கப்பட்டன\n\n • \"வரைபட மார்க்கர்\" விட்செட்: சொடுக்கு நடத்தை மாற்ற விருப்பத்தை சேர்க்கவும்\n\n • நிலையான \"நிலை வேலை வாய்ப்பு\" விருப்பம்\n\n • சிபிஎக்ச்: \"இணைப்பு\", \"சிஎம்டி\", \"டெச்க்\" குறிச்சொற்கள் மற்றும் எந்தவொரு தனிப்பயன் நீட்டிப்புகளுக்கும் உதவி சேர்க்கப்பட்டது\n\n • மறுசீரமைக்கப்பட்ட \"கடல் வரைபடங்கள்\" பட்டியல்\n\n Ant ANT+ சென்சார்களுக்கான உதவி சேர்க்கப்பட்டது\n\n பதிவிறக்கம் பதிவிறக்கம் UUID ஐ முடக்க விருப்பம் சேர்க்கப்பட்டது\n\n • உயரம் சார்ந்த நடைபயிற்சி/ஐகிங்/இயங்கும் பயண நேரங்களுக்கான இயல்புநிலை-வேக சரிசெய்யக்கூடிய முன்னறிவிப்பு\n\n • நிலையான ஆடியோ வெளியீடு மற்றும் தொகுதி ச்லைடர் நடத்தை</string>
+    <string name="release_4_3">• புதிய, வேகமான பதிப்பு 2 (ஓபன்சிஎல்) வரைபட வழங்குதல் எஞ்சின், 2.5 டி பார்வையுடன்\n\n The இயக்கத்தில் இருக்கும்போது இருப்பிட மாற்றங்களின் மென்மையான அனிமேசன்\n\n Center வரைபட மைய ஒருங்கிணைப்புகளுக்கான புதிய விட்செட்டுகள் மற்றும் புவிஇவியலின் உயர்வு\n\n • \"தட்டுவதற்கான தூரம்\": உரை அளவு விருப்பங்கள் சேர்க்கப்பட்டன\n\n • \"வரைபட மார்க்கர்\" விட்செட்: சொடுக்கு நடத்தை மாற்ற விருப்பத்தைச் சேர்க்கவும்\n\n • நிலையான \"நிலை வேலை வாய்ப்பு\" விருப்பம்\n\n • சிபிஎக்ச்: \"இணைப்பு\", \"சிஎம்டி\", \"டெச்க்\" குறிச்சொற்கள் மற்றும் எந்தவொரு தனிப்பயன் நீட்டிப்புகளுக்கும் உதவி சேர்க்கப்பட்டது\n\n • மறுசீரமைக்கப்பட்ட \"கடல் வரைபடங்கள்\" பட்டியல்\n\n Ant ANT+ சென்சார்களுக்கான உதவி சேர்க்கப்பட்டது\n\n பதிவிறக்கம் UUID ஐ முடக்க விருப்பம் சேர்க்கப்பட்டது\n\n • உயரம் சார்ந்த நடைபயிற்சி/ஐகிங்/இயங்கும் பயண நேரங்களுக்கான இயல்புநிலை-வேக சரிசெய்யக்கூடிய முன்னறிவிப்பு\n\n • நிலையான ஆடியோ வெளியீடு மற்றும் தொகுதி ச்லைடர் நடத்தை</string>
     <string name="ant_missing_dependency_descr">தேவையான சேவையை \"%1$s\" கண்டுபிடிக்க முடியவில்லை.\n நீங்கள் ANT+ செருகுநிரல்கள் சேவையை நிறுவ வேண்டும் அல்லது புதுப்பிக்க வேண்டும்.\n அதைச் செய்ய நீங்கள் பிளே ச்டோரைத் தொடங்க விரும்புகிறீர்களா?</string>
     <string name="ant_go_to_store">கடைக்குச் செல்லுங்கள்</string>
     <string name="reorder_or_hide_from">%1$s இலிருந்து பொருட்களை மறுவரிசைப்படுத்தவும் அல்லது மறைக்கவும்.</string>
     <string name="release_4_0_beta">The கால்களில் விளிம்பு கோடுகளை பதிவிறக்கம் செய்ய விருப்பம் சேர்க்கப்பட்டது\n\n Rathow பாதை நிலப்பரப்பைத் திட்டமிடுங்கள்: புள்ளிகள் அல்லது வரைபடங்களுக்கு இடையில் மாற தாவல்களைச் சேர்த்தது\n\n • OSMand நேரடி புதுப்பிப்புகள் \"பதிவிறக்கங்கள்&gt; புதுப்பிப்புகள்\"\n\n • தடங்களை இப்போது உயரம், விரைவு அல்லது சாய்வால் வண்ணமயமாக்கலாம்.\n\n வரி பாதை வரி தோற்றத்தை மாற்ற விருப்பம் சேர்க்கப்பட்டது.\n\n • புதுப்பிக்கப்பட்ட \"ட்ரிப் ரெக்கார்டிங்\" உரையாடல்</string>
     <string name="shared_string_route_line">பாதை வரி</string>
     <string name="quick_action_show_hide_title">காட்டு/மறைக்க</string>
-    <string name="live_update_delete_updates_msg">அனைத்து %நேரடி புதுப்பிப்புகளையும் நீக்கவா?</string>
+    <string name="live_update_delete_updates_msg">அனைத்து %s நேரடி புதுப்பிப்புகளையும் நீக்கவா?</string>
     <string name="latest_openstreetmap_update">அண்மைக் கால ஓபன்ச்ட்ரீட்மேப் புதுப்பிப்பு கிடைக்கிறது:</string>
     <string name="temporary_conditional_routing_descr">வரைபடத்தில் இப்போது செயலில் உள்ள சாலை கட்டுப்பாடுகளைப் பயன்படுத்தவும்</string>
     <string name="hillshade_slope_contour_lines">விளிம்பு கோடுகள் / இல்சேட் / சாய்வு</string>
@@ -5392,7 +5363,7 @@
     <string name="export_not_enough_space">போதுமான இடம் இல்லை</string>
     <string name="app_mode_motorboat">மின்னோடி படகு</string>
     <string name="app_mode_kayak">கயாக்</string>
-    <string name="message_need_calculate_route_before_show_graph">1 $ s தரவு சாலைகளில் மட்டுமே கிடைக்கும், வரைபடங்களைக் காண “புள்ளிகளுக்கு இடையிலான பாதை” ஐப் பயன்படுத்தி ஒரு வழியைக் கணக்கிடுங்கள்.</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s தரவு சாலைகளில் மட்டுமே கிடைக்கும், வரைபடங்களைக் காண “புள்ளிகளுக்கு இடையிலான பாதை” ஐப் பயன்படுத்தி ஒரு வழியைக் கணக்கிடுங்கள்.</string>
     <string name="shared_string_graph">வரைபடம்</string>
     <string name="file_already_imported">கோப்பு ஏற்கனவே OSMand இல் இறக்குமதி செய்யப்பட்டுள்ளது</string>
     <string name="use_live_routing">ஒச்மண்ட் நேரடி தரவு</string>
@@ -5411,9 +5382,9 @@
     <string name="system_screen_timeout">கணினி திரை நேரம் முடிந்தது</string>
     <string name="unsupported_type_error">ஆதரிக்கப்படாத வகை</string>
     <string name="profiles_for_action_not_found">அத்தகைய சுயவிவரங்கள் எதுவும் கண்டுபிடிக்க முடியவில்லை.</string>
-    <string name="release_3_7">• புதிய இணைப்பில்லாத சாய்வு வரைபடங்கள்\n\n • பிடித்தவை மற்றும் சி.பி.எக்ச் வழிப்புள்ளிகளின் முழு தனிப்பயனாக்கம் - தனிப்பயன் வண்ணங்கள், சின்னங்கள், வடிவங்கள்\n\n செய்தி சூழல் பட்டியல் \",\" வரைபடத்தை உள்ளமை \"மற்றும்\" அலமாரியில் \"உருப்படிகளை வரிசைப்படுத்துங்கள்\n\n M வரைபடத்தில் ஒரு தனி அடுக்காக விக்கிபீடியா, தேவையான மொழிகளை மட்டும் தேர்ந்தெடுக்கவும்\n\n Neg மொத்த நெகிழ்வுத்தன்மையுடன் உங்கள் சொந்த POI வடிகட்டி / வரைபடங்களை உருவாக்கவும்\n\n தனிப்பயன் தனிப்பயன் சுயவிவரங்களுக்கான அமைப்புகளை மீட்டெடுக்க விருப்பங்கள் சேர்க்கப்பட்டன\n\n வழிசெலுத்தல் உதவி போக்குவரத்து பாதைகள் மற்றும் முழுமையான திருப்ப வழிமுறைகளிலிருந்து முழு சி.பி.எக்ச் வழிகள்\n\n The மாத்திரைகளில் இடைமுகம் அளவுகளை சரிசெய்யவும்\n\n R ஆர்டிஎல் மூலம் பிழைகளை சரிசெய்யவும்\n\n</string>
+    <string name="release_3_7">• புதிய இணைப்பில்லாத சாய்வு வரைபடங்கள்\n\n • பிடித்தவை மற்றும் சி.பி.எக்ச் வழிப்புள்ளிகளின் முழுதனிப்பயனாக்கம் - தனிப்பயன் வண்ணங்கள், சின்னங்கள், வடிவங்கள்\n\n • செய்தி சூழல் பட்டியல் \",\" வரைபடத்தை உள்ளமை \"மற்றும்\" அலமாரியில் \"உருப்படிகளை வரிசைப்படுத்துங்கள்\n\n • வரைபடத்தில் ஒரு தனி அடுக்காக விக்கிபீடியா, தேவையான மொழிகளை மட்டும் தேர்ந்தெடுக்கவும்\n\n • மொத்த நெகிழ்வுத்தன்மையுடன் உங்கள் சொந்த POI வடிகட்டி / வரைபடங்களை உருவாக்கவும்\n\n • தனிப்பயன் சுயவிவரங்களுக்கான அமைப்புகளை மீட்டெடுக்க விருப்பங்கள் சேர்க்கப்பட்டன\n\n • வழிசெலுத்தல் உதவி போக்குவரத்து பாதைகள் மற்றும் முழுமையான திருப்ப வழிமுறைகளிலிருந்து முழு சி.பி.எக்ச் வழிகள்\n\n • மாத்திரைகளில் இடைமுகம் அளவுகளைச் சரிசெய்யவும்\n\n • ஆர்டிஎல் மூலம் பிழைகளைச் சரிசெய்யவும்\n\n</string>
     <string name="monitoring_min_speed_descr_recommendation">பரிந்துரை: பதிவு குறைந்தபட்ச இடப்பெயர்ச்சி வடிகட்டி (ஆ) வழியாக இயக்க கண்டறிதலைப் பயன்படுத்த முயற்சிக்கவும், முதலில், இது சிறந்த முடிவுகளைத் தரக்கூடும், மேலும் நீங்கள் குறைவான தரவை இழப்பீர்கள். உங்கள் தடங்கள் குறைந்த வேகத்தில் சத்தமாக இருந்தால், பூச்சியமற்ற மதிப்புகளை இங்கே முயற்சிக்கவும். சில அளவீடுகள் எந்த வேக மதிப்பையும் (சில பிணைய அடிப்படையிலான முறைகள்) தெரிவிக்காது என்பதை நினைவில் கொள்க, இந்த விசயத்தில் நீங்கள் எதையும் பதிவு செய்ய மாட்டீர்கள்.</string>
-    <string name="monitoring_min_accuracy_descr">இது குறைந்தபட்ச துல்லியமான அறிகுறியுடன் அளவிடப்படும் புள்ளிகளை மட்டுமே பதிவு செய்யும் (மீட்டர்/அடி, உங்கள் சிப்செட்டுக்கு ஆண்ட்ராய்டு ஆல் அறிவிக்கப்பட்டபடி). துல்லியம் என்பது உண்மையான நிலைக்கு அளவீடுகளின் அருகாமையாகும், மேலும் இது துல்லியத்துடன் நேரடியாக தொடர்புடையது அல்ல, இது மீண்டும் மீண்டும் அளவீடுகளின் சிதறல் ஆகும்.</string>
+    <string name="monitoring_min_accuracy_descr">இது குறைந்தபட்ச துல்லியமான அறிகுறியுடன் அளவிடப்படும் புள்ளிகளை மட்டுமே பதிவு செய்யும் (மீட்டர்/அடி, உங்கள் சிப்செட்டுக்கு ஆண்ட்ராய்டு ஆல் அறிவிக்கப்பட்டபடி). துல்லியம் என்பது உண்மையான நிலைக்கு அளவீடுகளின் அருகாமையாகும், மேலும் இது துல்லியத்துடன் நேரடியாகத் தொடர்புடையது அல்ல, இது அடிக்கடிஅளவீடுகளின் சிதறல் ஆகும்.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">பக்க விளைவு: துல்லியத்தால் வடிகட்டுவதன் விளைவாக, புள்ளிகள் முற்றிலும் காணாமல் போகலாம் எ.கா. பாலங்களுக்குக் கீழே, மரங்களின் கீழ், உயர் கட்டிடங்களுக்கு இடையில் அல்லது சில வானிலை நிலைமைகளுடன்.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">பரிந்துரை: என்ன பதிவு செய்யப்படும், எது இல்லை என்று கணிப்பது கடினம், இந்த வடிப்பானை அணைப்பது சிறந்தது.</string>
     <string name="monitoring_min_accuracy_descr_remark">குறிப்பு: ஒரு பதிவுக்கு முன்பே சி.பி.எச் முடக்கப்பட்டிருந்தால், அளவிடப்பட்ட முதல் புள்ளி துல்லியமான துல்லியத்தைக் கொண்டிருக்கலாம், எனவே எங்கள் குறியீட்டில் ஒரு புள்ளியைப் பதிவு செய்வதற்கு முன் இரண்டாவது அல்லது அதற்கு மேல் காத்திருக்க விரும்பலாம் (அல்லது தொடர்ச்சியாக 3 புள்ளிகளில் சிறந்ததைப் பதிவுசெய்க. .), ஆனால் இது இன்னும் செயல்படுத்தப்படவில்லை.</string>
@@ -5434,11 +5405,11 @@
     <string name="osmand_settings_descr">முழு பயன்பாட்டிற்கும் பயனுள்ளதாக இருக்கும்</string>
     <string name="turn_screen_on_time_descr">திரை எவ்வளவு காலம் இருக்க வேண்டும் என்பதை சரிசெய்யவும்.</string>
     <string name="turn_screen_on_sensor">அருகாமையில் சென்சார் பயன்படுத்தவும்</string>
-    <string name="release_3_4">• பயன்பாட்டு சுயவிவரங்கள்: தனிப்பயன் படவுரு மற்றும் வண்ணத்துடன் உங்கள் சொந்த தேவைகளுக்கு தனிப்பயன் சுயவிவரத்தை உருவாக்கவும்\n\n • இப்போது எந்த சுயவிவரத்தின் இயல்புநிலை மற்றும் நிமிடம்/அதிகபட்ச வேகத்தைத் தனிப்பயனாக்கவும்\n\n Product தற்போதைய ஆயத்தொகுதிகளுக்கு ஒரு விட்செட்டைச் சேர்த்தது\n\n Compact வரைபடத்தில் திசைகாட்டி மற்றும் ஒரு ஆரம் ஆட்சியாளரைக் காண்பிப்பதற்கான விருப்பங்கள் சேர்க்கப்பட்டன\n\n Prock பின்னணி தடத்தை சரிசெய்யவும்\n\n • மேம்படுத்தப்பட்ட பின்னணி வரைபடம் பதிவிறக்கங்கள்\n\n • திரும்பிய \'திரை ஆன் ஆன்\' விருப்பம்\n\n • நிலையான விக்கிபீடியா மொழி தேர்வு\n\n வழிசெலுத்தலின் போது நிலையான திசைகாட்டி பொத்தான் நடத்தை\n\n • பிற பிழைத்திருத்தங்கள்</string>
+    <string name="release_3_4">• பயன்பாட்டு சுயவிவரங்கள்: தனிப்பயன் படவுரு மற்றும் வண்ணத்துடன் உங்கள் சொந்த தேவைகளுக்குத் தனிப்பயன் சுயவிவரத்தை உருவாக்கவும்\n\n • இப்போது எந்தச் சுயவிவரத்தின் இயல்புநிலை மற்றும் நிமிடம்/அதிகபட்ச வேகத்தைத் தனிப்பயனாக்கவும்\n\n Product தற்போதைய ஆயத்தொகுதிகளுக்கு ஒரு விட்செட்டைச் சேர்த்தது\n\n Compact வரைபடத்தில் திசைகாட்டி மற்றும் ஒரு ஆரம் ஆட்சியாளரைக் காண்பிப்பதற்கான விருப்பங்கள் சேர்க்கப்பட்டன\n\n Prock பின்னணி தடத்தைச் சரிசெய்யவும்\n\n • மேம்படுத்தப்பட்ட பின்னணி வரைபடம் பதிவிறக்கங்கள்\n\n • திரும்பிய \'திரை இயக்கு\' விருப்பம்\n\n • நிலையான விக்கிபீடியா மொழி தேர்வு\n\n வழிசெலுத்தலின்போது நிலையான திசைகாட்டி பொத்தான் நடத்தை\n\n • பிற பிழைத்திருத்தங்கள்</string>
     <string name="minmax_speed_dialog_title">நிமிடம்/அதிகபட்ச வேகத்தை அமைக்கவும்</string>
     <string name="shared_string_crash">செயலிழப்பு</string>
     <string name="last_launch_crashed">கடைசியாக ஒச்மண்ட் ரன் செயலிழந்தது. பிழை செய்தியைப் பகிர்வதன் மூலம் ஒச்மாண்டை மேம்படுத்த எங்களுக்கு உதவுங்கள்.</string>
-    <string name="make_osmand_better_descr">அநாமதேய பயன்பாட்டு பயன்பாட்டு தரவை சேகரித்து செயலாக்க OSMand ஐ அனுமதிக்கவும். உங்கள் நிலை அல்லது வரைபடத்தில் நீங்கள் காணும் இடங்களைப் பற்றிய தரவு எதுவும் சேகரிக்கப்படவில்லை.\n\n \'அமைப்புகள்\' → \'தனியுரிமை மற்றும் பாதுகாப்பு\' இல் எந்த நேரத்தையும் உள்ளமைக்கவும்.</string>
+    <string name="make_osmand_better_descr">பெயரிலி பயன்பாட்டு தரவைச் சேகரித்து செயலாக்க OSMand ஐ அனுமதிக்கவும். உங்கள் நிலை அல்லது வரைபடத்தில் நீங்கள் காணும் இடங்களைப் பற்றிய தரவு எதுவும் சேகரிக்கப்படவில்லை.\n\n \'அமைப்புகள்\' → \'தனியுரிமை மற்றும் பாதுகாப்பு\' இல் எந்த நேரத்தையும் உள்ளமைக்கவும்.</string>
     <string name="plugin_touringview_descr">இந்த பார்வையை செயல்படுத்துவது ஒச்மாண்டின் வரைபட பாணியை \'டூரிங் வியூ\' ஆக மாற்றுகிறது, இது பயணிகள் மற்றும் தொழில்முறை ஓட்டுநர்களுக்கான சிறப்பு உயர்-விரிவான பார்வையாகும்.\n\n இந்த பார்வை, எந்தவொரு வரைபட பெரிதாக்கத்திலும், வரைபடத் தரவில் (குறிப்பாக சாலைகள், தடங்கள், பாதைகள் மற்றும் நோக்குநிலை மதிப்பெண்கள்) கிடைக்கும் அதிகபட்ச பயண விவரங்களை வழங்குகிறது.\n\n வண்ண குறியீட்டு முறையால் அனைத்து வகையான சாலைகளையும் சந்தேகத்திற்கு இடமின்றி இது தெளிவாக சித்தரிக்கிறது, இது எ.கா. பெரிய வாகனங்களை ஓட்டுதல்.\n\n இது சைக்கிள் வழிகள் அல்லது ஆல்பைன் மலை வழித்தடங்களைக் காண்பிப்பது போன்ற சிறப்பு சுற்றுப்பயண விருப்பங்களை வழங்குகிறது.\n\n ஒரு சிறப்பு வரைபட பதிவிறக்க தேவையில்லை, எங்கள் நிலையான வரைபடங்களிலிருந்து பார்வை உருவாக்கப்பட்டது.\n\n இந்த பார்வையை மீண்டும் இங்கே செயலாக்குவதன் மூலமோ அல்லது விரும்பியபடி \'வரைபடத்தை உள்ளமைக்கும்\' கீழ் \'வரைபட பாணியை\' மாற்றுவதன் மூலமோ மாற்றலாம்.</string>
     <string name="audionotes_plugin_description">வரைபட பொத்தான் அல்லது இருப்பிட சூழல் மெனுவைப் பயன்படுத்தி பயணத்தின் போது ஆடியோ/புகைப்படம்/வீடியோ குறிப்புகளை எடுத்துக் கொள்ளுங்கள்.</string>
     <string name="osmand_distance_planning_plugin_description">வரைபடத்தைத் தட்டுவதன் மூலம் அல்லது ஏற்கனவே உள்ள சிபிஎக்ச் கோப்புகளைப் பயன்படுத்துவதன் மூலமோ அல்லது மாற்றியமைப்பதன் மூலமோ பாதைகளை உருவாக்கவும், ஒரு பயணத்தைத் திட்டமிடவும், புள்ளிகளுக்கு இடையிலான தூரத்தை அளவிடவும். இதன் விளைவாக வழிகாட்டுதலுக்கு பின்னர் பயன்படுத்த சிபிஎக்ச் கோப்பாக சேமிக்க முடியும்.</string>
@@ -5467,7 +5438,56 @@
     <string name="osmand_plus_extended_description_part6">சைக்கிள் மற்றும் பாதசாரி நற்பொருத்தங்கள்\n Foot கால், ஐகிங் மற்றும் பைக் பாதைகளைப் பார்ப்பது, வெளிப்புற நடவடிக்கைகளுக்கு சிறந்தது\n Bike பைக் மற்றும் பாதசாரிக்கான சிறப்பு ரூட்டிங் மற்றும் காட்சி முறைகள்\n Pations விருப்பமான பொது போக்குவரத்து நிறுத்தங்கள் (பச், டிராம், ரயில்) வரி பெயர்கள் உட்பட\n G சிபிஎக்ச் கோப்பு அல்லது நிகழ்நிலை சேவைக்கு விருப்ப பயண பதிவு\n விரைவு விருப்ப விரைவு மற்றும் உயர காட்சி\n Conture விளிம்பு கோடுகள் மற்றும் இல்சேடிங் காட்சி (கூடுதல் சொருகி வழியாக)</string>
     <string name="osmand_plus_extended_description_part8">தோராயமான வரைபடக் கவரேச் மற்றும் தரம்:\n • மேற்கு ஐரோப்பா: ****\n • கிழக்கு ஐரோப்பா: ***\n • ரச்யா: ***\n • வட அமெரிக்கா: ***\n • தென் அமெரிக்கா: **\n • ஆசியா: **\n • சப்பான் மற்றும் கொரியா: ***\n • நடு கிழக்கு: **\n • ஆப்பிரிக்கா: **\n • அண்டார்டிகா: *\n உலகெங்கிலும் உள்ள பெரும்பாலான நாடுகள் பதிவிறக்கங்களாக கிடைக்கின்றன\n ஆப்கானிச்தானில் இருந்து சிம்பாப்வே வரை, ஆச்திரேலியாவிலிருந்து அமெரிக்கா வரை. அர்சென்டினா, பிரேசில், கனடா, பிரான்ச், செர்மனி, மெக்சிகோ, யுகே, ச்பெயின்,…</string>
     <string name="osmand_parking_minutes">நிமிடங்கள்</string>
-    <string name="native_app_allocated_memory_descr">பயன்பாடு %1$s MB (டால்விக் %2$s MB, பிற %3$s MB) ஆல் ஒதுக்கப்பட்ட மொத்த சொந்த நினைவகம்.\n விகிதாசார நினைவகம் %4 $ S MB (Android Limit %5 $ S MB, டால்விக் %6 $ S MB).</string>
+    <string name="native_app_allocated_memory_descr">பயன்பாடு %1$s MB (டால்விக் %2$s MB, பிற %3$s MB) ஆல் ஒதுக்கப்பட்ட மொத்த சொந்த நினைவகம்.\n விகிதாசார நினைவகம் %4$s MB (Android Limit %5$s MB, டால்விக் %6$s MB).</string>
     <string name="native_app_allocated_memory">மொத்த சொந்த நினைவகம்</string>
     <string name="osmand_parking_event">பார்க்கிங்கிலிருந்து காரை எடுத்துக் கொள்ளுங்கள்</string>
+    <string name="ais_load_data">கோப்பிலிருந்து AIS தரவை ஏற்றவும்</string>
+    <string name="ais_address_settings">ஐபி முகவரி அமைப்புகள்</string>
+    <string name="ais_address_settings_description">NMEA நெறிமுறை (UDP/TCP) ஐத் தேர்ந்தெடுத்து முகவரிகளை வரையறுக்கவும்</string>
+    <string name="ais_nmea_protocol">NMEA தரவு வரவேற்புக்கான நெறிமுறை</string>
+    <string name="ais_nmea_protocol_description">NMEA தரவு வரவேற்புக்கான நெறிமுறையைத் தேர்வுசெய்க</string>
+    <string name="ais_port_nmea_local_description">OSMAND NMEA தரவைப் பெறும் UDP போர்ட்டை வரையறுக்கவும்</string>
+    <string name="ais_object_lost_timeouts">AIS சமிக்ஞை வரவேற்புக்கான காலக்கெடு அமைப்புகள்</string>
+    <string name="ais_object_lost_timeouts_description">ஒரு குறிப்பிட்ட நேரத்திற்கு எந்த சமிக்ஞையும் பெறப்படாவிட்டால் இழந்த AIS பொருள்களை அடையாளம் காண காலக்கெடு மதிப்புகளை அமைக்கவும்.</string>
+    <string name="ais_cpa_warning_distance">அணுகுமுறையின் மூடு புள்ளிக்கான எச்சரிக்கை தூரம் (சிபிஏ)</string>
+    <string name="plugin_ais_tracker_name">AIS வெசெல் டிராக்கர்</string>
+    <string name="plugin_ais_tracker_description">AIS நிலைகள் மற்றும் சுற்றியுள்ள கப்பல்களைப் பற்றிய தகவல்களைக் காண்பி. AIS தரவு வெளிப்புற AIS பெறுநரிடமிருந்து பிணையம் வழியாக பெறப்படுகிறது.</string>
+    <string name="shared_string_default_view">இயல்புநிலை பார்வை</string>
+    <string name="shared_string_length">நீளம்</string>
+    <string name="shared_string_avg_altitude">ஏ.வி.சி. உயரம்</string>
+    <string name="shared_string_avg_speed">மணித்துளி. விரைவு</string>
+    <string name="key_is_already_assigned_error">\"%1$s\" விசை ஏற்கனவே செயலுக்கு ஒதுக்கப்பட்டுள்ளது: \"%2$s\"</string>
+    <string name="selected_delayed_profile">தேர்ந்தெடுக்கப்பட்ட சுயவிவரம் \"%s\"</string>
+    <string name="apply_to_current_profile">\"%1$s\" க்கு மட்டுமே பொருந்தும்</string>
+    <string name="ais_cpa_settings">CPA தொடர்பான அமைப்புகள்</string>
+    <string name="no_places_available">இடங்கள் எதுவும் கிடைக்கவில்லை</string>
+    <string name="no_photo_for_location_desc">இந்த இடத்தில் பயனர் புகைப்படங்கள் எதுவும் சேர்க்கப்படவில்லை</string>
+    <string name="map_widget_route_information_desc">மதிப்பிடப்பட்ட வருகை நேரம், மீதமுள்ள பயண நேரம் மற்றும் தற்போதைய வழிசெலுத்தல் வழிக்கான தூரத்தைக் காட்டுகிறது.</string>
+    <string name="map_grid">வரைபட கட்டங்கள்</string>
+    <string name="key_name_pattern">விசை \"%1$s\"</string>
+    <string name="location_source_descr">இயல்பாக, கூகிள் பிளேயிலிருந்து நிறுவப்பட்ட OSMAND இருப்பிடத்தை தீர்மானிக்க %1$s ஐப் பயன்படுத்துகிறது.\n\n நீங்கள் தவறான இருப்பிடத் தகவலைப் பெற்றால் அல்லது %2$s இல்லாமல் சாதனத்தைப் பயன்படுத்தினால், \" %3$s\" க்கு மாற முயற்சிக்கவும்</string>
+    <string name="application_profile_changed">பயன்பாட்டு சுயவிவரம் \"%s\" ஆக மாற்றப்பட்டது</string>
+    <string name="show_utm_grids">WGS84 க்கு பதிலாக UTM ஐப் பயன்படுத்தவும்</string>
+    <string name="show_utm_grids_description">WGS84 டிகிரிக்கு பதிலாக UTM மீட்டர்களில் கட்டத்தைக் காட்டு</string>
+    <string name="hmd_promo">%1$s மாதங்களுக்கு HMD விளம்பர</string>
+    <string name="ais_address_nmea_server_description">NMEA தரவு மூலத்தின் ஐபி முகவரியை வரையறுக்கவும் (TCP பயன்படுத்தப்பட்டால்)</string>
+    <string name="ais_port_nmea_server">NMEA தரவு மூலத்தின் TCP துறைமுகம்</string>
+    <string name="ais_port_nmea_server_description">NMEA தரவு மூலத்தின் TCP துறைமுகம் எண்ணை வரையறுக்கவும்</string>
+    <string name="ais_port_nmea_local">உள்ளக NMEA தரவு பெறுநரின் யுடிபி துறைமுகம்</string>
+    <string name="hmd_promo_description">வரம்பற்ற வரைபட பதிவிறக்கங்கள், 3D ஈடு போன்ற அம்சங்களுக்கான இலவச அணுகல் %1$s மாதத்திற்கு</string>
+    <string name="shared_string_road_exit">வெளியேறு</string>
+    <string name="ais_address_nmea_server">NMEA தரவு மூலத்தின் ஐபி முகவரி</string>
+    <string name="ais_object_lost_timeout">பொருள் தொலைந்து போகும்போது தெரிவுநிலைக்கான நேரம் முடிந்தது</string>
+    <string name="ais_object_lost_timeout_description">AIS பொருள்களின் தெரிவுநிலைக்கு நேரத்தை அமைக்கவும்: சமிக்ஞை வரவேற்பு இல்லாமல் இந்த நேரத்திற்குப் பிறகு, AIS பொருள் திரையில் இருந்து அகற்றப்படும்.</string>
+    <string name="ais_ship_lost_timeout">சமிக்ஞை பெறாதபோது கப்பல் தெரிவுநிலைக்கான நேரம் முடிந்தது</string>
+    <string name="ais_cpa_warning_time">அணுகுமுறையின் மிக நெருக்கமான இடத்தை அடைய எச்சரிக்கை நேரம் (சிபிஏ)</string>
+    <string name="ais_ship_lost_timeout_description">கப்பல் தெரிவுநிலைக்கு நேரத்தை அமைக்கவும்: சமிக்ஞை வரவேற்பு இல்லாமல் இந்த நேரத்திற்குப் பிறகு, கப்பல் அடையாளம் அதன் நிலையை திரையில் மாற்றும்: அது கடக்கப்படும்.</string>
+    <string name="ais_cpa_settings_description">இந்த மதிப்புகள் சொந்த நிலைக்கு மிக நெருக்கமாக வரக்கூடிய AIS பொருள்களின் விளக்கக்காட்சியை வரையறுக்கின்றன.</string>
+    <string name="ais_cpa_warning_time_description">TCPA (மற்றொரு கப்பலுடன் CPA ஐ அடைய வேண்டிய நேரம்) இந்த மதிப்பை விட குறைவாக இருந்தால், கப்பல் சிவப்பு நிறத்துடன் குறிக்கப்பட்டுள்ளது.</string>
+    <string name="ais_cpa_warning_distance_description">CPA இந்த மதிப்பை விட குறைவாகவும், எதிர்காலத்தில் CPA ஐ அடைந்தால் கப்பல்கள் சிவப்பு நிறத்துடன் குறிக்கப்பட்டுள்ளன (CPA ஐ அடைய எச்சரிக்கை நேரத்தை அமைப்பதைப் பார்க்கவும்).</string>
+    <string name="plugin_ais_tracker_disclaimer">மறுப்பு\n\n இந்த சொருகி ஒரு பொழுதுபோக்கு திட்டம் மற்றும் நம்பகத்தன்மை மற்றும் சரியான தன்மைக்காக வடிவமைக்கப்படவில்லை. வழிசெலுத்தல் மற்றும்/அல்லது வாழ்க்கையின் பாதுகாப்பு உட்பட எந்த வகையிலும் இந்த மென்பொருளை நம்ப வேண்டாம்.</string>
+    <string name="map_widget_route_information">பாதை செய்தி</string>
+    <string name="show_grids">வரைபட கட்டத்தைக் காட்டு</string>
+    <string name="show_grids_description">வரைபடத்தில் கட்டத்தைக் காண்பிக்க அனுமதிக்கவும்</string>
+    <string name="map_widget_distance">தூரம்</string>
 </resources>

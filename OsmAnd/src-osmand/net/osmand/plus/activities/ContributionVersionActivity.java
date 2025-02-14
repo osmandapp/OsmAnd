@@ -21,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.FileProvider;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.R;
@@ -110,22 +111,16 @@ public class ContributionVersionActivity extends OsmandListActivity {
 		}
 		if (operationId == DOWNLOAD_BUILDS_LIST) {
 			if (e != null) {
-				Toast.makeText(this, getString(R.string.loading_builds_failed) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
+				getMyApplication().showToastMessage(getString(R.string.loading_builds_failed) + " : " + e.getMessage());
 				finish();
 			} else {
 				setListAdapter(new OsmandBuildsAdapter(downloadedBuilds));
 			}
 		} else if (operationId == INSTALL_BUILD) {
 			if (currentSelectedBuild != null) {
-				Intent intent;
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-					Uri apkUri = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", pathToDownload);
-					intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
-					intent.setData(apkUri);
-				} else {
-					intent = new Intent(Intent.ACTION_VIEW);
-					intent.setDataAndType(Uri.fromFile(pathToDownload), "application/vnd.android.package-archive");
-				}
+				Uri uri = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", pathToDownload);
+				Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
+				intent.setData(uri);
 				intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 				startActivityForResult(intent, ACTIVITY_TO_INSTALL);
 				updateInstalledApp(false, currentSelectedBuild.date);
@@ -142,13 +137,12 @@ public class ContributionVersionActivity extends OsmandListActivity {
 	}
 
 	private void updateInstalledApp(boolean showMessage, Date d) {
+		OsmandApplication app = getMyApplication();
 		if (showMessage) {
-			Toast.makeText(this,
-					MessageFormat.format(getString(R.string.build_installed), currentSelectedBuild.tag,
-							AndroidUtils.formatDateTime(getMyApplication(), currentSelectedBuild.date.getTime())),
-					Toast.LENGTH_LONG).show();
+			app.showToastMessage(MessageFormat.format(getString(R.string.build_installed),
+					currentSelectedBuild.tag, AndroidUtils.formatDateTime(app, currentSelectedBuild.date.getTime())));
 		}
-		getMyApplication().getSettings().CONTRIBUTION_INSTALL_APP_DATE.set(dateFormat.format(d));
+		app.getSettings().CONTRIBUTION_INSTALL_APP_DATE.set(dateFormat.format(d));
 	}
 
 	protected void executeThreadOperation(int operationId) throws Exception {

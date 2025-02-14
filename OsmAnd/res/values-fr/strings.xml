@@ -5699,4 +5699,7 @@
     <string name="ais_cpa_warning_time_description">Si le TCPA (temps pour atteindre le CPA avec un autre navire) est inférieur à cette valeur, le navire sera marqué en rouge.</string>
     <string name="ais_ship_lost_timeout">Délai d\'expiration pour la visibilité des bateaux lorsque aucun signal n\'est reçu</string>
     <string name="plugin_ais_tracker_description">Affiche les positions AIS et des informations à propos des navires à proximité. Les données AIS sont reçues via le réseau à partir d\'un récepteur AIS externe.</string>
+    <string name="hmd_promo_description">Accès gratuit à certaines fonctionnalités comme le téléchargement illimité de cartes, le relief 3D, etc. pour %1$s mois</string>
+    <string name="shared_string_road_exit">Sortie</string>
+    <string name="hmd_promo">Promotion HMD pour %1$s mois</string>
 </resources>

@@ -195,7 +195,7 @@ public class MoveFilesTask extends AsyncTask<Void, Object, Map<String, Pair<Stri
 		Context ctx = context.get();
 
 		if (ctx != null && !Algorithms.isEmpty(errors)) {
-			Toast.makeText(ctx, ctx.getString(R.string.shared_string_io_error), Toast.LENGTH_LONG).show();
+			app.showToastMessage(R.string.shared_string_io_error);
 		}
 
 		DataStorageHelper storageHelper = new DataStorageHelper(app);

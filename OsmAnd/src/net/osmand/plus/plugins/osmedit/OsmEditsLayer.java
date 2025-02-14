@@ -356,7 +356,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 				OsmNotesPoint objectInMotion = (OsmNotesPoint) o;
 				objectInMotion.setLatitude(position.getLatitude());
 				objectInMotion.setLongitude(position.getLongitude());
-				new SaveOsmNoteAsyncTask(objectInMotion.getText(), ctx, callback, plugin, mOsmBugsUtil)
+				new SaveOsmNoteAsyncTask(getApplication(), mOsmBugsUtil, objectInMotion.getText(), callback)
 						.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, objectInMotion);
 			}
 			applyMovableObject(position);

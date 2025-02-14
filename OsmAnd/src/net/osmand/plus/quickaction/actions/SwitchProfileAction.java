@@ -23,6 +23,7 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.maphudbuttons.QuickActionButton;
 
@@ -93,8 +94,7 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 	public void execute(@NonNull MapActivity mapActivity) {
 		List<String> profiles = loadListFromParams();
 		if (profiles.size() == 0) {
-			Toast.makeText(mapActivity, mapActivity.getString(R.string.profiles_for_action_not_found),
-					Toast.LENGTH_SHORT).show();
+			AndroidUtils.getApp(mapActivity).showShortToastMessage(R.string.profiles_for_action_not_found);
 			return;
 		}
 
@@ -122,7 +122,7 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 
 			String message = String.format(mapActivity.getString(
 					R.string.application_profile_changed), appMode.toHumanString());
-			Toast.makeText(mapActivity, message, Toast.LENGTH_SHORT).show();
+			AndroidUtils.getApp(mapActivity).showShortToastMessage(message);
 		}
 	}
 

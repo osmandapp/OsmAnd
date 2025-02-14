@@ -5505,4 +5505,7 @@
     <string name="show_utm_grids">Úsáid UTM in ionad WGS84</string>
     <string name="no_places_available">Níl áiteanna ar fáil</string>
     <string name="no_photo_for_location_desc">Níor cuireadh aon ghrianghraif úsáideora leis an suíomh seo fós</string>
+    <string name="hmd_promo">Promo HMD ar feadh %1$s mí</string>
+    <string name="hmd_promo_description">Rochtain saor in aisce ar ghnéithe lena n-áirítear íoslódálacha neamhtheoranta léarscáileanna, faoiseamh 3D srl. ar feadh %1$s mí</string>
+    <string name="shared_string_road_exit">Scoir</string>
 </resources>

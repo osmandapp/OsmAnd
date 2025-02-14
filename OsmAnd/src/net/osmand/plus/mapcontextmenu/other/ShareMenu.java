@@ -19,7 +19,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.service.chooser.ChooserAction;
 import android.text.Html;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -185,24 +184,24 @@ public class ShareMenu extends BaseMenuController {
 				sendMessage(context, sms);
 				break;
 			case CLIPBOARD:
-				copyToClipboardWithToast(context, sms, Toast.LENGTH_LONG);
+				copyToClipboardWithToast(context, sms, true);
 				break;
 			case ADDRESS:
 				if (!Algorithms.isEmpty(address)) {
-					copyToClipboardWithToast(context, address, Toast.LENGTH_LONG);
+					copyToClipboardWithToast(context, address, true);
 				} else {
-					Toast.makeText(context, R.string.no_address_found, Toast.LENGTH_LONG).show();
+					AndroidUtils.getApp(context).showToastMessage(R.string.no_address_found);
 				}
 				break;
 			case NAME:
 				if (!Algorithms.isEmpty(title)) {
-					copyToClipboardWithToast(context, title, Toast.LENGTH_LONG);
+					copyToClipboardWithToast(context, title, true);
 				} else {
-					Toast.makeText(context, R.string.toast_empty_name_error, Toast.LENGTH_LONG).show();
+					AndroidUtils.getApp(context).showToastMessage(R.string.toast_empty_name_error);
 				}
 				break;
 			case COORDINATES:
-				copyToClipboardWithToast(context, coordinates, Toast.LENGTH_LONG);
+				copyToClipboardWithToast(context, coordinates, true);
 				break;
 			case GEO:
 				if (!Algorithms.isEmpty(geoUrl)) {
@@ -252,30 +251,19 @@ public class ShareMenu extends BaseMenuController {
 		AndroidUtils.startActivityIfSafe(context, intent, chooserIntent);
 	}
 
-	public static void copyToClipboardWithToast(@NonNull Context context, @NonNull String text, int duration) {
-		copyToClipboard(context, text, true, duration);
+	public static void copyToClipboardWithToast(@NonNull Context context, @NonNull String text,
+			boolean longToast) {
+		copyToClipboard(context, text);
+
+		String message = context.getString(R.string.copied_to_clipboard) + ":\n" + text;
+		AndroidUtils.getApp(context).getToastHelper().showToast(message, longToast);
 	}
 
-	/**
-	 * @return true if text was copied
-	 */
 	public static boolean copyToClipboard(@NonNull Context context, @NonNull String text) {
-		return copyToClipboard(context, text, false, -1);
-	}
-
-	/**
-	 * @return true if text was copied
-	 */
-	private static boolean copyToClipboard(@NonNull Context context, @NonNull String text,
-	                                       boolean showToast, int duration) {
 		Object object = context.getSystemService(Activity.CLIPBOARD_SERVICE);
-		if (object instanceof ClipboardManager clipboardManager) {
+		if (object instanceof ClipboardManager manager) {
 			String cleanText = TextDirectionUtil.clearDirectionMarks(text);
-			clipboardManager.setPrimaryClip(ClipData.newPlainText("", cleanText));
-			if (showToast) {
-				String toastMessage = context.getString(R.string.copied_to_clipboard) + ":\n" + text;
-				Toast.makeText(context, toastMessage, duration).show();
-			}
+			manager.setPrimaryClip(ClipData.newPlainText("", cleanText));
 			return true;
 		}
 		return false;

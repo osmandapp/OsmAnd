@@ -170,7 +170,7 @@ public class AvoidRoadsHelper {
 			public boolean publish(RouteDataObject object) {
 				if (object == null) {
 					if (mapActivity != null) {
-						Toast.makeText(mapActivity, R.string.error_avoid_specific_road, Toast.LENGTH_LONG).show();
+						app.showToastMessage(R.string.error_avoid_specific_road);
 					}
 				} else {
 					AvoidRoadInfo avoidRoadInfo = getOrCreateAvoidRoadInfo(object, ll.getLatitude(), ll.getLongitude(), appMode.getStringKey());
@@ -209,7 +209,7 @@ public class AvoidRoadsHelper {
 			public boolean publish(RouteDataObject object) {
 				if (object == null) {
 					if (activity != null) {
-						Toast.makeText(activity, R.string.error_avoid_specific_road, Toast.LENGTH_LONG).show();
+						app.showToastMessage(R.string.error_avoid_specific_road);
 					}
 					if (callback != null) {
 						callback.onAddImpassableRoad(false, null);

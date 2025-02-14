@@ -263,18 +263,19 @@ public class AndroidUtils {
 			return true;
 		} catch (ActivityNotFoundException e) {
 			LOG.error(e);
-			Toast.makeText(context, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
+			getApp(context).showToastMessage(R.string.no_activity_for_intent);
 			return false;
 		}
 	}
 
-	public static boolean startActivityForResultIfSafe(@NonNull Activity activity, @NonNull Intent intent, int requestCode) {
+	public static boolean startActivityForResultIfSafe(@NonNull Activity activity,
+			@NonNull Intent intent, int requestCode) {
 		try {
 			activity.startActivityForResult(intent, requestCode);
 			return true;
 		} catch (ActivityNotFoundException e) {
 			LOG.error(e);
-			Toast.makeText(activity, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
+			getApp(activity).showToastMessage(R.string.no_activity_for_intent);
 			return false;
 		}
 	}
@@ -286,7 +287,7 @@ public class AndroidUtils {
 			LOG.error(e);
 			Context context = fragment.getContext();
 			if (context != null) {
-				Toast.makeText(context, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
+				getApp(context).showToastMessage(R.string.no_activity_for_intent);
 			}
 		}
 	}
@@ -1281,7 +1282,7 @@ public class AndroidUtils {
 		try {
 			customTabsIntent.launchUrl(context, uri);
 		} catch (ActivityNotFoundException e) {
-			Toast.makeText(context, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
+			getApp(context).showToastMessage(R.string.no_activity_for_intent);
 		}
 	}
 
@@ -1437,5 +1438,10 @@ public class AndroidUtils {
 		} else {
 			return new int[] {leftMargin, topMargin, rightMargin, bottomMargin};
 		}
+	}
+
+	@NonNull
+	public static OsmandApplication getApp(@NonNull Context context) {
+		return ((OsmandApplication) context.getApplicationContext());
 	}
 }

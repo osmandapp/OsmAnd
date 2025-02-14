@@ -118,13 +118,11 @@ public class MapDataMenuController extends MenuController {
 								Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL()));
 								AndroidUtils.startActivityIfSafe(activity, intent);
 							} else {
-								Toast.makeText(activity.getApplicationContext(),
-										activity.getString(R.string.activate_srtm_plugin), Toast.LENGTH_LONG).show();
+								app.showToastMessage(R.string.activate_srtm_plugin);
 							}
 						} else {
 							PluginsFragment.showInstance(activity.getSupportFragmentManager());
-							Toast.makeText(activity, activity.getString(R.string.activate_srtm_plugin),
-									Toast.LENGTH_SHORT).show();
+							app.showShortToastMessage(R.string.activate_srtm_plugin);
 						}
 					} else if (!downloaded || indexItem.isOutdated()) {
 						startDownload(mapActivity, indexItem);

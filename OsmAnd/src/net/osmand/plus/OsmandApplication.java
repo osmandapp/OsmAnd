@@ -22,8 +22,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.car.app.CarToast;
-import androidx.core.app.ActivityCompat;
+import androidx.annotation.StringRes;
+import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
@@ -31,9 +31,6 @@ import androidx.lifecycle.ProcessLifecycleOwner;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
-import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
-import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.shared.OsmAndContextImpl;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.data.LatLon;
@@ -55,6 +52,7 @@ import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.configmap.routes.RouteLayersHelper;
+import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
@@ -62,17 +60,7 @@ import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.feedback.FeedbackHelper;
 import net.osmand.plus.feedback.RateUsHelper;
 import net.osmand.plus.feedback.RateUsState;
-import net.osmand.plus.helpers.AndroidApiLocationServiceHelper;
-import net.osmand.plus.helpers.ColorPaletteHelper;
-import net.osmand.plus.helpers.DayNightHelper;
-import net.osmand.plus.helpers.GmsLocationServiceHelper;
-import net.osmand.plus.helpers.LauncherShortcutsHelper;
-import net.osmand.plus.helpers.LocaleHelper;
-import net.osmand.plus.helpers.LocationServiceHelper;
-import net.osmand.plus.helpers.LockHelper;
-import net.osmand.plus.helpers.Model3dHelper;
-import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.helpers.*;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.keyevent.InputDevicesHelper;
@@ -81,9 +69,9 @@ import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
-import net.osmand.plus.nearbyplaces.NearbyPlacesHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityMode;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
@@ -108,6 +96,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.LocationSource;
+import net.osmand.plus.shared.OsmAndContextImpl;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
@@ -135,13 +124,7 @@ import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import btools.routingapp.BRouterServiceConnection;
@@ -161,12 +144,13 @@ public class OsmandApplication extends MultiDexApplication {
 
 	NavigationCarAppService navigationCarAppService;
 	NavigationSession carNavigationSession;
-	ActivityCompat.OnRequestPermissionsResultCallback androidAutoPermissionRequestResultListener;
+	OnRequestPermissionsResultCallback carAppPermissionListener;
 
 	private final SQLiteAPI sqliteAPI = new SQLiteAPIImpl(this);
 	private final OsmAndTaskManager taskManager = new OsmAndTaskManager(this);
 	private final UiUtilities iconsCache = new UiUtilities(this);
 	private final LocaleHelper localeHelper = new LocaleHelper(this);
+	private final ToastHelper toastHelper = new ToastHelper(this);
 
 	// start variables
 	ResourceManager resourceManager;
@@ -343,6 +327,11 @@ public class OsmandApplication extends MultiDexApplication {
 			protected void onPostExecute(Void result) {
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	@NonNull
+	public Handler getUiHandler() {
+		return uiHandler;
 	}
 
 	@NonNull
@@ -679,8 +668,8 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void initVoiceCommandPlayer(@NonNull Context context, @NonNull ApplicationMode appMode,
-	                                   @Nullable Runnable onCommandPlayerCreated, boolean warnNoProvider,
-	                                   boolean showProgress, boolean forceInitialization, boolean applyAllModes) {
+			@Nullable Runnable onCommandPlayerCreated, boolean warnNoProvider,
+			boolean showProgress, boolean forceInitialization, boolean applyAllModes) {
 		String voiceProvider = settings.VOICE_PROVIDER.getModeValue(appMode);
 		if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 			settings.VOICE_MUTE.setModeValue(appMode, true);
@@ -709,17 +698,17 @@ public class OsmandApplication extends MultiDexApplication {
 		return navigationCarAppService;
 	}
 
-	public void setNavigationCarAppService(@Nullable NavigationCarAppService navigationCarAppService) {
-		this.navigationCarAppService = navigationCarAppService;
+	public void setNavigationCarAppService(@Nullable NavigationCarAppService carAppService) {
+		this.navigationCarAppService = carAppService;
 	}
 
 	@Nullable
-	public ActivityCompat.OnRequestPermissionsResultCallback getAndroidAutoPermissionRequestResultListener() {
-		return androidAutoPermissionRequestResultListener;
+	public OnRequestPermissionsResultCallback getCarAppPermissionListener() {
+		return carAppPermissionListener;
 	}
 
-	public void setAndroidAutoPermissionRequestResultListener(@Nullable ActivityCompat.OnRequestPermissionsResultCallback callback) {
-		this.androidAutoPermissionRequestResultListener = callback;
+	public void setCarAppPermissionListener(@Nullable OnRequestPermissionsResultCallback callback) {
+		this.carAppPermissionListener = callback;
 	}
 
 	@Nullable
@@ -805,46 +794,24 @@ public class OsmandApplication extends MultiDexApplication {
 		return mapMarkersDbHelper;
 	}
 
-	public void showShortToastMessage(int msgId, Object... args) {
-		uiHandler.post(() -> {
-			Toast.makeText(this, getString(msgId, args), Toast.LENGTH_SHORT).show();
-			NavigationSession carNavigationSession = this.carNavigationSession;
-			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
-				CarToast.makeText(carNavigationSession.getCarContext(), getString(msgId, args), CarToast.LENGTH_SHORT).show();
-			}
-		});
-	}
-
-	public void showShortToastMessage(String msg) {
-		uiHandler.post(() -> {
-			Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-			NavigationSession carNavigationSession = this.carNavigationSession;
-			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
-				CarToast.makeText(carNavigationSession.getCarContext(), msg, CarToast.LENGTH_SHORT).show();
-			}
-		});
-	}
-
-	public void showToastMessage(int msgId, Object... args) {
-		uiHandler.post(() -> {
-			Toast.makeText(this, getString(msgId, args), Toast.LENGTH_LONG).show();
-			NavigationSession carNavigationSession = this.carNavigationSession;
-			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
-				CarToast.makeText(carNavigationSession.getCarContext(), getString(msgId, args), CarToast.LENGTH_LONG).show();
-			}
-		});
+	public ToastHelper getToastHelper() {
+		return toastHelper;
 	}
 
 	public void showToastMessage(@Nullable String text) {
-		if (!Algorithms.isEmpty(text)) {
-			uiHandler.post(() -> {
-				Toast.makeText(this, text, Toast.LENGTH_LONG).show();
-				NavigationSession carNavigationSession = this.carNavigationSession;
-				if (carNavigationSession != null && carNavigationSession.hasStarted()) {
-					CarToast.makeText(carNavigationSession.getCarContext(), text, CarToast.LENGTH_LONG).show();
-				}
-			});
-		}
+		toastHelper.showToast(text, true);
+	}
+
+	public void showToastMessage(@StringRes int textId, Object... args) {
+		toastHelper.showToast(textId, true, args);
+	}
+
+	public void showShortToastMessage(@Nullable String text) {
+		toastHelper.showToast(text, false);
+	}
+
+	public void showShortToastMessage(@StringRes int textId, Object... args) {
+		toastHelper.showToast(textId, false, args);
 	}
 
 	public SQLiteAPI getSQLiteAPI() {

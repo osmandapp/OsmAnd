@@ -1,6 +1,5 @@
 package net.osmand.plus.render;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.os.Handler;
@@ -70,7 +69,7 @@ public class MapRenderRepositories {
 	public static boolean checkForDuplicateObjectIds = true;
 	
 	private static final Log log = PlatformUtil.getLog(MapRenderRepositories.class);
-	private final OsmandApplication context;
+	private final OsmandApplication app;
 	private static final int zoomOnlyForBasemaps = 11;
 
 	private static final int REPLACE_LOCAL_NAMES_MAX_ZOOM = 6;
@@ -115,21 +114,21 @@ public class MapRenderRepositories {
 	private SearchRequest<BinaryMapDataObject> searchRequest;
 	private OsmandSettings settings;
 
-	public MapRenderRepositories(OsmandApplication context) {
-		this.context = context;
-		this.renderer = new OsmandRenderer(context);
+	public MapRenderRepositories(OsmandApplication app) {
+		this.app = app;
+		this.renderer = new OsmandRenderer(app);
 		handler = new Handler(Looper.getMainLooper());
-		settings = context.getSettings();
+		settings = app.getSettings();
 
 		OsmAndAppCustomizationListener customizationListener = () -> {
-			settings = MapRenderRepositories.this.context.getSettings();
+			settings = MapRenderRepositories.this.app.getSettings();
 			clearCache();
 		};
-		context.getAppCustomization().addListener(customizationListener);
+		app.getAppCustomization().addListener(customizationListener);
 	}
 
-	public Context getContext() {
-		return context;
+	public OsmandApplication getApp() {
+		return app;
 	}
 
 	public OsmandRenderer getRenderer() {
@@ -328,7 +327,7 @@ public class MapRenderRepositories {
 			return;
 		}
 		boolean containsJapanMapData = false;
-		boolean useLive = context.getSettings().USE_OSM_LIVE_FOR_ROUTING.get();
+		boolean useLive = app.getSettings().USE_OSM_LIVE_FOR_ROUTING.get();
 		for (Map.Entry<String, BinaryMapIndexReader> entry : files.entrySet()) {
 			String mapName = entry.getKey();
 			BinaryMapIndexReader fr = entry.getValue();
@@ -661,7 +660,6 @@ public class MapRenderRepositories {
 		}
 		try {
 			// find selected rendering type
-			OsmandApplication app = ((OsmandApplication) context.getApplicationContext());
 			boolean nightMode = app.getDaynightHelper().isNightMode();
 
 			// boolean moreDetail = prefs.SHOW_MORE_MAP_DETAIL.get();
@@ -670,7 +668,7 @@ public class MapRenderRepositories {
 			RenderingRuleSearchRequest renderingReq = getSearchRequestWithAppliedCustomRules(storage, nightMode);
 
 			renderingReq.saveState();
-			NativeOsmandLibrary nativeLib = !settings.SAFE_MODE.get() ? NativeOsmandLibrary.getLibrary(storage, context) : null;
+			NativeOsmandLibrary nativeLib = !settings.SAFE_MODE.get() ? NativeOsmandLibrary.getLibrary(storage, app) : null;
 
 
 			// calculate data box
@@ -707,7 +705,7 @@ public class MapRenderRepositories {
 			}
 			long searchTime = System.currentTimeMillis() - now;
 
-			currentRenderingContext = new OsmandRenderer.RenderingContext(context);
+			currentRenderingContext = new OsmandRenderer.RenderingContext(app);
 			renderingReq.clearState();
 			renderingReq.setIntFilter(renderingReq.ALL.R_MINZOOM, requestedBox.getZoom());
 			if(renderingReq.searchRenderingAttribute(RenderingRuleStorageProperties.A_DEFAULT_COLOR)) {
@@ -818,11 +816,11 @@ public class MapRenderRepositories {
 				}
 				String msg = timeInfo;
 				log.info(msg);
-				handler.post(() -> Toast.makeText(context, msg, Toast.LENGTH_LONG).show());
+				app.showToastMessage(msg);
 			}
 		} catch (RuntimeException e) {
 			log.error("Runtime memory exception", e); //$NON-NLS-1$
-			handler.post(() -> Toast.makeText(context, R.string.rendering_exception, Toast.LENGTH_SHORT).show());
+			app.showShortToastMessage(R.string.rendering_exception);
 		} catch (OutOfMemoryError e) {
 			log.error("Out of memory error", e); //$NON-NLS-1$
 			cObjects = new ArrayList<BinaryMapDataObject>();
@@ -835,14 +833,13 @@ public class MapRenderRepositories {
 				int max = (int) (Runtime.getRuntime().maxMemory() / (1 << 20));
 				int avl = (int) (Runtime.getRuntime().freeMemory() / (1 << 20));
 				String s = " (" + avl + " MB available of " + max  + ") ";
-				Toast.makeText(context, context.getString(R.string.rendering_out_of_memory) + s , Toast.LENGTH_SHORT).show();
+				app.showShortToastMessage(app.getString(R.string.rendering_out_of_memory) + s);
 			});
 		} finally {
 			if(currentRenderingContext != null) {
 				currentRenderingContext.ended = true;
 			}
 		}
-
 	}
 
 	public RenderingRuleSearchRequest getSearchRequestWithAppliedCustomRules(RenderingRulesStorage storage, boolean nightMode) {

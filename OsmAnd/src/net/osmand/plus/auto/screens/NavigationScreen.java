@@ -341,9 +341,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		// pressing the select button again.
 		builder.setPanModeListener(isInPanMode -> {
 			if (isInPanMode) {
-				CarToast.makeText(getCarContext(),
-						R.string.exit_pan_mode_descr,
-						CarToast.LENGTH_LONG).show();
+				getApp().getToastHelper().showCarToast(getApp().getString(R.string.exit_pan_mode_descr), true);
 			}
 			panMode = isInPanMode;
 			invalidate();

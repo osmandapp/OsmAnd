@@ -259,8 +259,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 				OBDConnectionState.CONNECTING -> R.string.obd_connecting_to_device
 				OBDConnectionState.DISCONNECTED -> R.string.obd_not_connected_to_device
 			}
-			Toast.makeText(app, app.getString(textId, deviceInfo.name), Toast.LENGTH_SHORT)
-				.show()
+			app.showShortToastMessage(app.getString(textId, deviceInfo.name))
 		}
 		updatePairedSensorsList()
 	}

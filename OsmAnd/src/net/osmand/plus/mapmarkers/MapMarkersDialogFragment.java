@@ -380,7 +380,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 			public void buildRouteOnClick() {
 				if (mapActivity != null) {
 					if (mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers().isEmpty()) {
-						Toast.makeText(mapActivity, getString(R.string.plan_route_no_markers_toast), Toast.LENGTH_SHORT).show();
+						app.showShortToastMessage(R.string.plan_route_no_markers_toast);
 					} else {
 						PlanRouteFragment.showInstance(mapActivity);
 						MapMarkersDialogFragment.this.dismiss();
@@ -392,7 +392,7 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 			public void saveAsNewTrackOnClick() {
 				if (mapActivity != null) {
 					if (mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers().isEmpty()) {
-						Toast.makeText(mapActivity, getString(R.string.plan_route_no_markers_toast), Toast.LENGTH_SHORT).show();
+						app.showShortToastMessage(R.string.plan_route_no_markers_toast);
 					} else {
 						SaveAsTrackBottomSheetDialogFragment fragment = new SaveAsTrackBottomSheetDialogFragment();
 						fragment.setListener(createSaveAsTrackFragmentListener());

@@ -193,8 +193,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 							app.smartFolderHelper.saveSmartFolder(
 								smartFolder!!,
 								filter.currentFilters)
-							Toast.makeText(app, R.string.smart_folder_saved, Toast.LENGTH_SHORT)
-								.show()
+							app.showShortToastMessage(R.string.smart_folder_saved)
 							dismiss()
 						} else {
 							app.dialogManager.showSaveSmartFolderDialog(

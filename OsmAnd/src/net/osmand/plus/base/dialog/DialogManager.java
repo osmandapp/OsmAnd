@@ -122,7 +122,7 @@ public class DialogManager {
 					} else {
 						SmartFolderHelper smartFolderHelper = app.getSmartFolderHelper();
 						if (smartFolderHelper.isSmartFolderPresent(newSmartFolderName)) {
-							Toast.makeText(app, R.string.smart_folder_name_present, Toast.LENGTH_SHORT).show();
+							app.showShortToastMessage(R.string.smart_folder_name_present);
 						} else {
 							smartFolderHelper.saveNewSmartFolder(newSmartFolderName, filters);
 							dialog.dismiss();

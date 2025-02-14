@@ -466,8 +466,8 @@ public class AndroidNetworkUtils {
 			}
 		} catch (MalformedURLException e) {
 			if (app != null) {
-				error = MessageFormat.format(app.getResources().getString(R.string.shared_string_action_template)
-						+ ": " + app.getResources().getString(R.string.shared_string_unexpected_error), userOperation);
+				error = MessageFormat.format(app.getString(R.string.shared_string_action_template)
+						+ ": " + app.getString(R.string.shared_string_unexpected_error), userOperation);
 			} else {
 				error = "Action " + userOperation + ": Unexpected error";
 			}
@@ -547,8 +547,8 @@ public class AndroidNetworkUtils {
 	private static String processIOError(@Nullable OsmandApplication app, @Nullable String userOperation, boolean toastAllowed) {
 		String error = null;
 		if (app != null) {
-			error = MessageFormat.format(app.getResources().getString(R.string.shared_string_action_template)
-					+ ": " + app.getResources().getString(R.string.shared_string_io_error), userOperation);
+			error = MessageFormat.format(app.getString(R.string.shared_string_action_template)
+					+ ": " + app.getString(R.string.shared_string_io_error), userOperation);
 		} else {
 			error = "Action " + userOperation + ": I/O error";
 		}

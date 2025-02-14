@@ -83,7 +83,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(app, !app.getSettings().isLightContent());
+		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), !app.getSettings().isLightContent());
 		return themedInflater.inflate(getLayoutId(), container, false);
 	}
 
