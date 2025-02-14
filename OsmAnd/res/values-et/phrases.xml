@@ -4990,4 +4990,5 @@
     <string name="poi_sinkhole_pit">Karst: kitsas karstilehter</string>
     <string name="poi_barrier_bar">Staatiline tõkkepuu</string>
     <string name="poi_barrier_board">Lühike piirdetõke</string>
+    <string name="poi_contact_website">Veebisait</string>
 </resources>
