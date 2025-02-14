@@ -1119,10 +1119,11 @@ public class TravelObfHelper implements TravelHelper {
 	                                    List<BinaryMapDataObject> segmentList, List<Amenity> pointList,
 	                                    Map<String, String> gpxFileExtensions, List<String> pgNames,
 	                                    List<String> pgIcons, List<String> pgColors, List<String> pgBackgrounds) {
+		boolean allowReadFromMultipleMaps = article.hasOsmRouteId() && article.routeRadius > 0;
 		for (BinaryMapIndexReader reader : readers) {
 			try {
-				if (article.file != null && !article.file.equals(reader.getFile())) {
-					continue;
+				if (!allowReadFromMultipleMaps && !reader.getFile().equals(article.file)) {
+					continue; // fast up read Wikivoyage and User's GPX files in OBF
 				}
 				if (article instanceof TravelGpx) {
 					BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> sr = BinaryMapIndexReader.buildSearchRequest(
@@ -1146,8 +1147,8 @@ public class TravelObfHelper implements TravelHelper {
 				} else {
 					reader.searchPoi(pointRequest);
 				}
-				if (!Algorithms.isEmpty(segmentList)) {
-					break;
+				if (!allowReadFromMultipleMaps && !Algorithms.isEmpty(segmentList)) {
+					break; // fast up read User's GPX files
 				}
 			} catch (Exception e) {
 				LOG.error(e.getMessage());
