@@ -1,7 +1,6 @@
 package net.osmand.shared.obd
 
 import net.osmand.shared.util.LoggerFactory
-import okio.IOException
 
 class Obd2Connection(
 	private val connection: UnderlyingTransport,
@@ -10,13 +9,21 @@ class Obd2Connection(
 		LIVE(0x41), FREEZE(0x42), IDENTIFICATION(0x49)
 	}
 
+	private val sideDataToRemoveFromAnswer = arrayOf(
+		"SEARCHING",
+		"ERROR",
+		"BUS INIT",
+		"BUSINIT",
+		"BUS ERROR",
+		"BUSERROR"
+	)
+
 	private val log = LoggerFactory.getLogger("Obd2Connection")
 	private var initialized = false
 	private var finished = false
 
 	init {
-		runInitCommands()
-		initialized = true
+		initialized = runInitCommands()
 	}
 
 	fun isFinished() = finished
@@ -29,10 +36,17 @@ class Obd2Connection(
 		runInitCommands()
 	}
 
-	private fun runInitCommands() {
+	private fun runInitCommands(): Boolean {
 		for (command in initCommands) {
-			runImpl(command)
+			var responseString = runImpl(command)
+			responseString = normalizeResponseString(command, responseString)
+			val systemResponse = getSystemResponse(responseString)
+			if (systemResponse == OBDResponse.STOPPED || systemResponse == OBDResponse.ERROR) {
+				log.error("error while init obd $systemResponse")
+				return false
+			}
 		}
+		return true
 	}
 
 	private fun runImpl(command: String): String {
@@ -58,22 +72,33 @@ class Obd2Connection(
 		if (finished) {
 			return OBDResponse.ERROR
 		}
-		var response = runImpl(fullCommand)
-		val originalResponseValue = response
-		val unspacedCommand = fullCommand.replace(" ", "")
-		if (response.startsWith(unspacedCommand))
-			response = response.substring(unspacedCommand.length)
-		response = unpackLongFrame(response)
-		response = removeSideData(
-			response,
-			"SEARCHING",
-			"ERROR",
-			"BUS INIT",
-			"BUSINIT",
-			"BUS ERROR",
-			"BUSERROR"
-		)
-		when (response) {
+		var responseString = runImpl(fullCommand)
+		val originalResponseValue = responseString
+		responseString = normalizeResponseString(fullCommand, responseString)
+		val systemResponse = getSystemResponse(responseString)
+		if (systemResponse != null) {
+			return systemResponse
+		}
+		try {
+			var hexValues = toHexValues(responseString)
+			if (hexValues.size < 3 ||
+				hexValues[0] != commandType.code ||
+				hexValues[1] != command) {
+				log("Incorrect answer data (size ${hexValues.size}) for $fullCommand")
+			} else {
+				hexValues = hexValues.copyOfRange(2, hexValues.size)
+			}
+			return OBDResponse(hexValues)
+		} catch (e: IllegalArgumentException) {
+			log(
+				"Conversion error: command: '$fullCommand', original response: '$originalResponseValue', processed response: '$responseString'"
+			)
+			return OBDResponse.ERROR
+		}
+	}
+
+	private fun getSystemResponse(responseString: String): OBDResponse? {
+		return when (responseString) {
 			"STOPPED" -> return OBDResponse.STOPPED
 			"OK" -> return OBDResponse.OK
 			"?" -> return OBDResponse.QUESTION_MARK
@@ -88,23 +113,19 @@ class Obd2Connection(
 				log.error("CAN bus error")
 				return OBDResponse.ERROR
 			}
+
+			else -> null
 		}
-		try {
-			var hexValues = toHexValues(response)
-			if (hexValues.size < 3 ||
-				hexValues[0] != commandType.code ||
-				hexValues[1] != command) {
-				log("Incorrect answer data (size ${hexValues.size}) for $fullCommand")
-			} else {
-				hexValues = hexValues.copyOfRange(2, hexValues.size)
-			}
-			return OBDResponse(hexValues)
-		} catch (e: IllegalArgumentException) {
-			log(
-				"Conversion error: command: '$fullCommand', original response: '$originalResponseValue', processed response: '$response'"
-			)
-			return OBDResponse.ERROR
-		}
+	}
+
+	private fun normalizeResponseString(fullCommand: String, response: String): String {
+		var response1 = response
+		val unspacedCommand = fullCommand.replace(" ", "")
+		if (response1.startsWith(unspacedCommand))
+			response1 = response1.substring(unspacedCommand.length)
+		response1 = unpackLongFrame(response1)
+		response1 = removeSideData(response1)
+		return response1
 	}
 
 	private fun toHexValues(buffer: String): IntArray {
@@ -128,9 +149,9 @@ class Obd2Connection(
 		}
 	}
 
-	private fun removeSideData(response: String, vararg patterns: String): String {
+	private fun removeSideData(response: String): String {
 		var result = response
-		for (pattern in patterns) {
+		for (pattern in sideDataToRemoveFromAnswer) {
 			result = result.replace(pattern, "")
 		}
 		return result

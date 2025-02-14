@@ -120,10 +120,12 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		fun onStateChanged(state: OBDConnectionState, deviceInfo: BTDeviceInfo)
 	}
 
+	val OBD_DEVICES_SETTINGS_PREF_ID: String = "obd_devices_settings"
+
 	private val deviceSettingsPreferenceProvider: CommonPreferenceProvider<String> =
 		object : CommonPreferenceProvider<String> {
 			override fun getPreference(): CommonPreference<String> {
-				return registerStringPref(DevicesHelper.DEVICES_SETTINGS_PREF_ID, "")
+				return registerStringPref(OBD_DEVICES_SETTINGS_PREF_ID, "")
 			}
 		}
 

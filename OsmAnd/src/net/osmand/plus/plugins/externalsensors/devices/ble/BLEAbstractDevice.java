@@ -286,7 +286,7 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 			}
 
 			bluetoothGatt = device.connectGatt(context, true, gattCallback, BluetoothDevice.TRANSPORT_LE);
-			LOG.debug("Trying to create new connection");
+			LOG.debug("Trying to create new connection " + device.getAddress());
 			setCurrentState(DeviceConnectionState.CONNECTING);
 			for (DeviceListener listener : listeners) {
 				listener.onDeviceConnecting(this);

@@ -198,6 +198,8 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 				return new AntBikeSpeedCadenceDevice(deviceId);
 			case ANT_BICYCLE_SD:
 				return new AntBikeSpeedDistanceDevice(deviceId);
+			case BLE_OBD:
+				return bluetoothAdapter != null ? new BLEOBDDevice(bluetoothAdapter, deviceId) : null;
 			case BLE_TEMPERATURE:
 				return bluetoothAdapter != null ? new BLETemperatureDevice(bluetoothAdapter, deviceId) : null;
 			case BLE_HEART_RATE:

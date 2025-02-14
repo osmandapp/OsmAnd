@@ -99,6 +99,7 @@ class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String) :
 		val fullCommand = source.readUtf8()
 		enqueueCommand {
 			if (writeCharacteristic != null) {
+				bleReadSensor.resetData()
 				sendCommand(fullCommand)
 			}
 			completedCommand()
@@ -107,9 +108,9 @@ class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String) :
 
 	override fun read(sink: Buffer, byteCount: Long): Long {
 		if (Algorithms.isEmpty(bufferToRead)) {
-			val lastSensorDataList = bleReadSensor.lastSensorDataList
-			if (!Algorithms.isEmpty(lastSensorDataList)) {
-				val lastSensorData = lastSensorDataList[0] as BLEOBDSensor.OBDData
+			val lastSensorDataList = bleReadSensor.getLastSensorDataQueue()
+			while (!Algorithms.isEmpty(lastSensorDataList)) {
+				val lastSensorData = lastSensorDataList.removeFirst()
 				if (lastSensorData.timestamp > lastDataUpdate) {
 					bufferToRead = lastSensorData.response
 					lastDataUpdate = lastSensorData.timestamp

@@ -16,7 +16,7 @@ import java.util.Collections
 import java.util.UUID
 
 class BLEOBDSensor(device: BLEOBDDevice) : BLEAbstractSensor(device, device.deviceId + "_OBD") {
-	private var lastOBDData: OBDData? = null
+	private val lastOBDData: ArrayDeque<OBDData> = ArrayDeque()
 
 	class OBDData internal constructor(val timestamp: Long, val response: String) : SensorData {
 		override fun getDataFields(): List<SensorDataField> {
@@ -52,8 +52,15 @@ class BLEOBDSensor(device: BLEOBDDevice) : BLEAbstractSensor(device, device.devi
 	}
 
 	override fun getLastSensorDataList(): List<SensorData> {
-		val data = lastOBDData
-		return if (data == null) emptyList() else listOf<SensorData>(data)
+		return getLastSensorDataQueue()
+	}
+
+	fun getLastSensorDataQueue(): ArrayDeque<OBDData> {
+		return lastOBDData
+	}
+
+	fun resetData() {
+		lastOBDData.clear()
 	}
 
 	override fun onCharacteristicRead(
@@ -86,10 +93,8 @@ class BLEOBDSensor(device: BLEOBDDevice) : BLEAbstractSensor(device, device.devi
 	}
 
 	private fun extrudeOBDData(data: ByteArray?) {
-		lastOBDData = if (data == null) {
-			null
-		} else {
-			OBDData(System.currentTimeMillis(), String(data))
+		if (data != null) {
+			lastOBDData.addLast(OBDData(System.currentTimeMillis(), String(data)))
 		}
 	}
 
