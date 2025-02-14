@@ -5779,4 +5779,11 @@
     <string name="ais_load_data">Wczytaj dane AIS z pliku</string>
     <string name="ais_port_nmea_local_description">Zdefiniuj port UDP, na którym OsmAnd odbiera dane NMEA</string>
     <string name="ais_object_lost_timeouts_description">Ustaw wartości limitu czasu, aby zidentyfikować utracone obiekty AIS, jeśli przez określony czas nie odebrano żadnego sygnału.</string>
+    <string name="ais_ship_lost_timeout_description">Ustawianie limitu czasu widoczności statku: Po upływie tego czasu bez odbioru sygnału symbol statku zmieni swój stan na ekranie: Zostanie przekreślony.</string>
+    <string name="ais_cpa_settings">Ustawienia dotyczące CPA</string>
+    <string name="ais_cpa_settings_description">Wartości te określają sposób prezentacji obiektów AIS, które mogą znajdować się zbyt blisko własnej pozycji.</string>
+    <string name="popular_places_nearby">Popularne miejsca w pobliżu</string>
+    <string name="recently_visited">Ostatnio odwiedzone</string>
+    <string name="shared_string_road_exit">Wyjdź</string>
+    <string name="hmd_promo">Promocja HMD na %1$s miesięcy</string>
 </resources>
