@@ -1,6 +1,13 @@
 package net.osmand.shared.obd
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.ensureActive
+import kotlinx.coroutines.launch
 import net.osmand.shared.extensions.format
 import net.osmand.shared.util.KCollectionUtils
 import net.osmand.shared.util.LoggerFactory
@@ -52,11 +59,20 @@ class OBDDispatcher(val debug: Boolean = false) {
 		val connection = Obd2Connection(createTransport(), this)
 		try {
 			while (isConnected(connection)) {
+				var connectedScannerIsStopped = false
 				commandQueue.forEach { command ->
 					context.ensureActive()
-					handleCommand(command, connection)
+					val result = handleCommand(command, connection)
+					if (result == OBDResponse.STOPPED) {
+						connectedScannerIsStopped = true
+						return
+					}
 				}
 				context.ensureActive()
+				if (connectedScannerIsStopped) {
+					connection.reInit()
+					continue
+				}
 				OBDDataComputer.acceptValue(sensorDataCache)
 			}
 		} finally {
@@ -79,9 +95,9 @@ class OBDDispatcher(val debug: Boolean = false) {
 	private fun isConnected(connection: Obd2Connection): Boolean =
 		inputStream != null && outputStream != null && !connection.isFinished()
 
-	private fun handleCommand(command: OBDCommand, connection: Obd2Connection) {
+	private fun handleCommand(command: OBDCommand, connection: Obd2Connection): OBDResponse {
 		if (command.isStale && sensorDataCache[command] != null) {
-			return
+			return OBDResponse.OK
 		}
 
 		val fullCommand = "%02X%02X".format(command.commandGroup, command.command)
@@ -97,6 +113,7 @@ class OBDDispatcher(val debug: Boolean = false) {
 				else -> log("Incorrect response length or unknown error for command $command")
 			}
 		}
+		return commandResult
 	}
 
 	fun addCommand(commandToRead: OBDCommand) {

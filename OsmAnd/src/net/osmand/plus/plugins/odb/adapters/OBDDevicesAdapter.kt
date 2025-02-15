@@ -46,6 +46,11 @@ open class OBDDevicesAdapter(
 		val isConnected = connectedDevice?.address == device.address
 
 		holder.name.text = device.name
+		if(device.isBLE) {
+			holder.name.setCompoundDrawablesWithIntrinsicBounds(null, null, app.getDrawable(R.drawable.ic_action_car_obd2), null)
+		} else {
+			holder.name.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
+		}
 		holder.icon.setImageResource(if (isConnected) R.drawable.ic_action_car_obd2 else if (nightMode) R.drawable.widget_obd_car_day else R.drawable.widget_obd_car_night)
 		holder.description.visibility = View.VISIBLE
 		holder.description.text = device.address

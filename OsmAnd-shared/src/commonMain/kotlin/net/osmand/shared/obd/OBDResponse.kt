@@ -6,6 +6,7 @@ data class OBDResponse(val result: IntArray) {
 		val QUESTION_MARK = OBDResponse(intArrayOf(0))
 		val NO_DATA = OBDResponse(intArrayOf())
 		val ERROR = OBDResponse(intArrayOf(-1))
+		val STOPPED = OBDResponse(intArrayOf())
 	}
 
 	fun isValid(): Boolean {
