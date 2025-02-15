@@ -113,11 +113,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		super.onCreate(savedInstanceState);
 		adapter = new FavouritesAdapter(requireActivity());
 		importHelper = app.getImportHelper();
-
 		helper = app.getFavoritesHelper();
-		if (helper.isFavoritesLoaded()) {
-			adapter.synchronizeGroups();
-		} else {
+
+		adapter.synchronizeGroups();
+		if (!helper.isFavoritesLoaded()) {
 			helper.addListener(favoritesListener = new FavoritesListener() {
 				@Override
 				public void onFavoritesLoaded() {
