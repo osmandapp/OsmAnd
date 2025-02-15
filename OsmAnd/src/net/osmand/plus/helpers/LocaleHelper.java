@@ -67,11 +67,18 @@ public class LocaleHelper {
 		}
 		settings.PREFERRED_LOCALE.addListener(localeListener);
 
-		String[] splitScript = locale.split("\\+");
-		String script = (splitScript.length > 1) ? splitScript[1] : "";
-		String[] splitCountry = splitScript[0].split("_");
-		String lang = splitCountry[0];
-		String country = (splitCountry.length > 1) ? splitCountry[1] : "";
+		String[] localeSplit = locale.split("_");
+		String lang = localeSplit[0];
+		String country = (localeSplit.length > 1) ? localeSplit[1] : "";
+
+		String[] scriptSplit = locale.split("\\+");
+		String script = (scriptSplit.length > 1) ? scriptSplit[1] : "";
+		if (Algorithms.isEmpty(script) && localeSplit.length > 2) {
+			script = localeSplit[2];
+			if (script.startsWith("#")) {
+				script = script.substring(1);
+			}
+		}
 
 		if (!Algorithms.isEmpty(lang)) {
 			Locale.Builder builder = new Locale.Builder();
