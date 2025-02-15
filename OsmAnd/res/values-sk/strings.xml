@@ -1332,7 +1332,7 @@
     <string name="rendering_attr_pisteGrooming_name">Úprava zjazdovky</string>
     <string name="free">%1$s voľných</string>
     <string name="device_memory">Pamäť zariadenia</string>
-    <string name="rendering_attr_pisteRoutes_name">Lyžiarske svahy</string>
+    <string name="rendering_attr_pisteRoutes_name">Lyžiarske trasy</string>
     <string name="share_note">Zdieľať poznámku</string>
     <string name="notes">A/V poznámky</string>
     <string name="online_map">Online mapa</string>
@@ -4482,7 +4482,7 @@
     <string name="without_profiles_changing">Bez zmeny profilov</string>
     <string name="shared_string_only_missing">Len chýbajúce</string>
     <string name="download_tiles">Stiahnuť dlaždice</string>
-    <string name="attach_roads_descr">Aproximujte vašu stopu pomocou povolených ciest na medzi bodmi a pre priradenie presných navigačných pokynov a informácií o ceste.</string>
+    <string name="attach_roads_descr">Pripojte vašu stopu k cestám, aby ste získali podrobné informácie o trase, navigačné pokyny a informácie o ceste.</string>
     <string name="connect_with_straight_line">Spojiť priamou čiarou</string>
     <string name="external_sensors_plugin_name">Externé senzory</string>
     <string name="map_widget_altitude_map_center">Nadmorská výška: stred mapy</string>
