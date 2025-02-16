@@ -4975,4 +4975,5 @@
     <string name="poi_atv_yes">ATV: sí</string>
     <string name="poi_atv_no">ATV: no</string>
     <string name="poi_access_notes">Notas de acceso</string>
+    <string name="poi_contact_website">Sitio web</string>
 </resources>
