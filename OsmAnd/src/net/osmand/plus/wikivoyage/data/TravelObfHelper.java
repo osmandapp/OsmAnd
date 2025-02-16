@@ -51,7 +51,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.plus.Version;
 import net.osmand.plus.resources.AmenityIndexRepository;
-import net.osmand.plus.resources.AmenityIndexRepositoryBinary;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -250,7 +249,10 @@ public class TravelObfHelper implements TravelHelper {
 		do {
 			for (BinaryMapIndexReader reader : getAmenityReaders()) {
 				try {
-					searchAmenity(foundAmenities, location, reader, searchRadius, 15, ROUTE_TRACK, null);
+					AmenityIndexRepository monitor = getAmenityIndexRepositoryToMonitor(reader);
+					synchronized (monitor != null ? monitor : this) {
+						searchAmenity(foundAmenities, location, reader, searchRadius, 15, ROUTE_TRACK, null);
+					}
 				} catch (Exception e) {
 					LOG.error(e.getMessage(), e);
 				}
@@ -1121,6 +1123,7 @@ public class TravelObfHelper implements TravelHelper {
 	                                    List<String> pgIcons, List<String> pgColors, List<String> pgBackgrounds) {
 		boolean allowReadFromMultipleMaps = article.hasOsmRouteId() && article.routeRadius > 0;
 		for (BinaryMapIndexReader reader : readers) {
+			AmenityIndexRepository monitor = getAmenityIndexRepositoryToMonitor(reader);
 			try {
 				if (!allowReadFromMultipleMaps && !reader.getFile().equals(article.file)) {
 					continue; // fast up read Wikivoyage and User's GPX files in OBF
@@ -1132,7 +1135,9 @@ public class TravelObfHelper implements TravelHelper {
 					if (article.routeRadius >= 0) {
 						sr.setBBoxRadius(article.lat, article.lon, article.routeRadius);
 					}
-					reader.searchMapIndex(sr);
+					synchronized (monitor != null ? monitor : this) {
+						reader.searchMapIndex(sr); // TODO speed up overall (fix radius?!)
+					}
 				}
 				BinaryMapIndexReader.SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
 						0, 0, Algorithms.emptyIfNull(article.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
@@ -1142,10 +1147,12 @@ public class TravelObfHelper implements TravelHelper {
 				if (article.routeRadius >= 0) {
 					pointRequest.setBBoxRadius(article.lat, article.lon, article.routeRadius);
 				}
-				if (!Algorithms.isEmpty(article.title)) {
-					reader.searchPoiByName(pointRequest);
-				} else {
-					reader.searchPoi(pointRequest);
+				synchronized (monitor != null ? monitor : this) {
+					if (!Algorithms.isEmpty(article.title)) {
+						reader.searchPoiByName(pointRequest);
+					} else {
+						reader.searchPoi(pointRequest);
+					}
 				}
 				if (!allowReadFromMultipleMaps && !Algorithms.isEmpty(segmentList)) {
 					break; // fast up read User's GPX files
@@ -1385,6 +1392,14 @@ public class TravelObfHelper implements TravelHelper {
 				gpxFile.addPointsGroup(pg);
 			}
 		}
+	}
+
+	@Nullable
+	private AmenityIndexRepository getAmenityIndexRepositoryToMonitor(BinaryMapIndexReader reader) {
+		if (!app.isApplicationInitializing()) {
+			return app.getResourceManager().getAmenityRepositoryByFileName(reader.getFile().getName());
+		}
+		return null;
 	}
 
 	private class GpxFileReader extends AsyncTask<Void, Void, GpxFile> {
