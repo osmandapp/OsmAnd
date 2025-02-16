@@ -92,6 +92,7 @@ public class BinaryMapIndexReader {
 	public static final int SHIFT_COORDINATES = 5;
 	public static final int LABEL_ZOOM_ENCODE = 31 - SHIFT_COORDINATES;
 	private final static Log log = PlatformUtil.getLog(BinaryMapIndexReader.class);
+	public static int DEPTH_CACHE = 7;
 	public static boolean READ_STATS = false;
 	public static final SearchPoiTypeFilter ACCEPT_ALL_POI_TYPE_FILTER = new SearchPoiTypeFilter() {
 		@Override
@@ -987,13 +988,7 @@ public class BinaryMapIndexReader {
 					}
 
 					for (MapTree tree : index.trees) {
-						if (tree.right < req.left || tree.left > req.right || tree.top > req.bottom || tree.bottom < req.top) {
-							continue;
-						}
-						codedIS.seek(tree.filePointer);
-						long oldLimit = codedIS.pushLimitLong((long) tree.length);
-						searchMapTreeBounds(tree, index, req, foundSubtrees);
-						codedIS.popLimit(oldLimit);
+						searchMapTreeBoundsCache(tree, index, req, foundSubtrees);
 					}
 
 					Collections.sort(foundSubtrees, new Comparator<MapTree>() {
@@ -1098,6 +1093,24 @@ public class BinaryMapIndexReader {
 		}
 
 	}
+	
+	
+	protected void searchMapTreeBoundsCache(MapTree current, MapTree parent,
+			SearchRequest<BinaryMapDataObject> req, List<MapTree> foundSubtrees) throws IOException {
+		if (current.right < req.left || current.left > req.right || current.top > req.bottom || current.bottom < req.top) {
+			return;
+		}
+		if (current.children != null) {
+			for (MapTree ch : current.children) {
+				searchMapTreeBoundsCache(ch, current, req, foundSubtrees);
+			}
+		} else {
+			codedIS.seek(current.filePointer);
+			long oldLimit = codedIS.pushLimitLong((long) current.length);
+			searchMapTreeBounds(current, parent, req, foundSubtrees);
+			codedIS.popLimit(oldLimit);
+		}
+	}
 
 	protected void searchMapTreeBounds(MapTree current, MapTree parent,
 			SearchRequest<BinaryMapDataObject> req, List<MapTree> foundSubtrees) throws IOException {
@@ -1152,16 +1165,23 @@ public class BinaryMapIndexReader {
 				break;
 			case MapDataBox.BOXES_FIELD_NUMBER :
 				// left, ... already initialized
+				if (current.depth < DEPTH_CACHE && current.children == null) {
+					current.children = new ArrayList<>();
+				}
 				MapTree child = new MapTree();
 				child.length = readInt();
+				child.depth = current.depth + 1;
 				child.filePointer = codedIS.getTotalBytesRead();
 				long oldLimit = codedIS.pushLimitLong((long) child.length);
-				if(current.ocean != null ){
+				if (current.ocean != null) {
 					child.ocean = current.ocean;
 				}
 				searchMapTreeBounds(child, current, req, foundSubtrees);
 				codedIS.popLimit(oldLimit);
 				codedIS.seek(child.filePointer + child.length);
+				if (current.children != null) {
+					current.children.add(child);
+				}
 				break;
 			default:
 				skipUnknownField(t);
@@ -2232,12 +2252,15 @@ public class BinaryMapIndexReader {
 
 		long mapDataBlock = 0;
 		Boolean ocean = null;
+		int depth;
 
 		int left = 0;
 		int right = 0;
 		int top = 0;
 		int bottom = 0;
-
+		List<MapTree> children = null;
+		
+		
 		public int getLeft() {
 			return left;
 		}
