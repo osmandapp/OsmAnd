@@ -5694,12 +5694,12 @@
     <string name="ais_load_data">AIS-Daten aus Datei laden</string>
     <string name="ais_address_nmea_server">IP-Adresse der NMEA-Datenquelle</string>
     <string name="ais_port_nmea_local">UDP-Port des lokalen NMEA-Datenempfängers</string>
-    <string name="ais_object_lost_timeout">Timeout für Sicht, wenn Objekt verloren ist</string>
+    <string name="ais_object_lost_timeout">Timeout für Sichtbarkeit bei Objektverlust</string>
     <string name="ais_ship_lost_timeout">Timeout für die Sichtbarkeit des Schiffes, wenn kein Signal empfangen wird</string>
     <string name="ais_cpa_warning_distance_description">Schiffe werden rot markiert, wenn der CPA-Wert unter diesem Wert liegt und der CPA-Wert in naher Zukunft erreicht wird (siehe Einstellung „Warnzeit bis zum Erreichen des CPA-Werts“).</string>
     <string name="plugin_ais_tracker_disclaimer">HAFTUNGSAUSSCHLUSS\n\nDieses Plugin ist ein Hobbyprojekt und nicht auf Zuverlässigkeit und Korrektheit ausgelegt. Verlassen Sie sich NICHT auf diese Software, auch nicht für die Navigation und/oder die Sicherheit von Menschenleben.</string>
     <string name="plugin_ais_tracker_description">Zeigt AIS-Positionen und Informationen über umliegende Schiffe an. Die AIS-Daten werden über ein Netzwerk von einem externen AIS-Empfänger empfangen.</string>
-    <string name="ais_address_settings">IP-Adresseneinstellungen</string>
+    <string name="ais_address_settings">IP-Adresseinstellungen</string>
     <string name="ais_address_settings_description">NMEA-Protokoll (UDP/TCP) auswählen und Adressen definieren</string>
     <string name="ais_nmea_protocol">Protokoll für NMEA-Datenempfang</string>
     <string name="ais_port_nmea_server">TCP-Port der NMEA-Datenquelle</string>
