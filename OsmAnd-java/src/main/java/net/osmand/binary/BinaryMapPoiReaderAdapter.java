@@ -818,6 +818,9 @@ public class BinaryMapPoiReaderAdapter {
 						}
 					}
 				}
+				if (req.tagGroupFilter != null && am.hasTagGroups() && !req.tagGroupFilter.isAccept(am.getTagGroups().keySet())) {
+					return null;
+				}
 				am.setRegionName(region.getName());
 				return am;
 			case OsmandOdb.OsmAndPoiBoxDataAtom.DX_FIELD_NUMBER:
@@ -1152,6 +1155,9 @@ public class BinaryMapPoiReaderAdapter {
 							tagValuePairs.add(new TagValuePair(tagValues.get(i), tagValues.get(i + 1), -1));
 						}
 						tagGroups.put(id, tagValuePairs);
+						if (req.matchTagGroups(tagValuePairs)) {
+							req.addTagGroupIdFilter(id);
+						}
 					}
 					return;
 				case OsmandOdb.OsmAndPoiTagGroup.ID_FIELD_NUMBER:
