@@ -1126,7 +1126,7 @@ public class TravelObfHelper implements TravelHelper {
 			AmenityIndexRepository monitor = getAmenityIndexRepositoryToMonitor(reader);
 			try {
 				if (!allowReadFromMultipleMaps && !reader.getFile().equals(article.file)) {
-					continue; // fast up read Wikivoyage and User's GPX files in OBF
+					continue; // speed up reading of Wikivoyage and User's GPX files in OBF
 				}
 				if (article instanceof TravelGpx) {
 					BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> sr = BinaryMapIndexReader.buildSearchRequest(
@@ -1136,7 +1136,7 @@ public class TravelObfHelper implements TravelHelper {
 						sr.setBBoxRadius(article.lat, article.lon, article.routeRadius);
 					}
 					synchronized (monitor != null ? monitor : this) {
-						reader.searchMapIndex(sr); // TODO speed up overall (fix radius?!)
+						reader.searchMapIndex(sr); // TODO radius is excessive; consider route_bbox_latlon
 					}
 				}
 				BinaryMapIndexReader.SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
@@ -1155,7 +1155,7 @@ public class TravelObfHelper implements TravelHelper {
 					}
 				}
 				if (!allowReadFromMultipleMaps && !Algorithms.isEmpty(segmentList)) {
-					break; // fast up read User's GPX files
+					break; // speed up reading of User's GPX files
 				}
 			} catch (Exception e) {
 				LOG.error(e.getMessage());
