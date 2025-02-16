@@ -382,9 +382,8 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			FavoritesItemsAdapter adapter = new FavoritesItemsAdapter(app, items);
 			adapter.setItemClickListener(getAdapterOnClickListener(items));
 			FavouritesHelper helper = app.getFavoritesHelper();
-			if (helper.isFavoritesLoaded()) {
-				loadFavoritesItems(items, helper);
-			} else {
+			loadFavoritesItems(items, helper);
+			if (!helper.isFavoritesLoaded()) {
 				addMainScrollItems(items);
 				helper.addListener(new FavoritesListener() {
 

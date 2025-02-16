@@ -149,7 +149,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 		} else {
 			cache.clear();
-			if (showFavorites && favouritesHelper.isFavoritesLoaded()) {
+			if (showFavorites) {
 				if (tileBox.getZoom() >= START_ZOOM || customObjectsDelegate != null) {
 					float iconSize = getIconSize(view.getApplication());
 					QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
@@ -265,7 +265,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 			List<FavouritePoint> points = customObjectsDelegate.getMapObjects();
 			showFavoritePoints(textScale, false, points);
 			favoritesMapLayerProvider.drawSymbols(mapRenderer);
-		} else if (settings.SHOW_FAVORITES.get() && favouritesHelper.isFavoritesLoaded()) {
+		} else if (settings.SHOW_FAVORITES.get()) {
 			for (FavoriteGroup group : getFavoriteGroups()) {
 				boolean synced = isSynced(group);
 				List<FavouritePoint> points = new ArrayList<>(group.getPoints());

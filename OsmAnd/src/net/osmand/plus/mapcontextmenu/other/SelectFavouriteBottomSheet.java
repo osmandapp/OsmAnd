@@ -71,9 +71,8 @@ public abstract class SelectFavouriteBottomSheet extends MenuBottomSheetDialogFr
 		}
 		mAdapter = new FavouritesAdapter(requireContext(), mPoints);
 		mFavouritesHelper = app.getFavoritesHelper();
-		if (mFavouritesHelper.isFavoritesLoaded()) {
-			loadFavorites();
-		} else {
+		loadFavorites();
+		if (!mFavouritesHelper.isFavoritesLoaded()) {
 			mFavouritesHelper.addListener(getFavouritesListener());
 		}
 		rvPoints = new RecyclerView(getContext());

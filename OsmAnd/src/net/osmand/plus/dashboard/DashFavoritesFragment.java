@@ -68,9 +68,8 @@ public class DashFavoritesFragment extends DashLocationFragment {
 	@Override
 	public void onOpenDash() {
 		FavouritesHelper helper = getMyApplication().getFavoritesHelper();
-		if (helper.isFavoritesLoaded()) {
-			setupFavorites();
-		} else {
+		setupFavorites();
+		if (!helper.isFavoritesLoaded()) {
 			helper.addListener(favoritesListener = new FavoritesListener() {
 				@Override
 				public void onFavoritesLoaded() {
