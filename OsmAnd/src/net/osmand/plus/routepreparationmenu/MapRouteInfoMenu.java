@@ -284,7 +284,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				}
 				choosePointTypeAction(selectedPoint, selectFromMapPointType, name, null);
 				if (selectFromMapWaypoints) {
-					WaypointsFragment.showInstance(mapActivity.getSupportFragmentManager(), true);
+					WaypointsFragment.showInstance(mapActivity, true);
 				} else {
 					show(selectFromMapMenuState);
 				}
@@ -1601,7 +1601,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					AddPointBottomSheetDialog.showInstance(mapActivity12, PointType.TARGET);
 				} else if (mapActivity12.getMyApplication().getTargetPointsHelper().checkPointToNavigateShort()) {
 					hide();
-					WaypointsFragment.showInstance(mapActivity12.getSupportFragmentManager(), true);
+					WaypointsFragment.showInstance(mapActivity12, true);
 				}
 			}
 		});

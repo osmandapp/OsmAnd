@@ -242,8 +242,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 				convertView = createItemForRadiusProximity(themedInflater, group.type);
 			} else if (child instanceof InfoItem) {
 				convertView = createInfoItem(themedInflater);
-			} else if (child instanceof PointItem) {
-				PointItem item = (PointItem) child;
+			} else if (child instanceof PointItem item) {
 				convertView = themedInflater.inflate(R.layout.along_the_route_point_item, parent, false);
 				WaypointDialogHelper.updatePointInfoView(app, mapActivity, convertView, item.point, true, nightMode, true, false);
 
