@@ -10,21 +10,49 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="hmd_promo">HMD Promo for %1$s months</string>
+    <string name="hmd_promo_description">Free access to features including unlimited map downloads, 3D relief etc. for %1$s month</string>
+	<string name="shared_string_road_exit">Exit</string>
+	<string name="popular_places_nearby">Popular places nearby</string>
+	<string name="recently_visited">Recently visited</string>
+    <string name="ais_load_data">Load AIS data from file</string>
+    <string name="ais_address_settings">IP address settings</string>
+    <string name="ais_address_settings_description">Choose NMEA protocol (UDP/TCP) and define addresses</string>
+    <string name="ais_nmea_protocol">Protocol for NMEA data reception</string>
+    <string name="ais_nmea_protocol_description">Choose protocol for NMEA data reception</string>
+    <string name="ais_address_nmea_server">IP address of NMEA data source</string>
+    <string name="ais_address_nmea_server_description">Define IP address of the NMEA data source (if TCP is used)</string>
+    <string name="ais_port_nmea_server">TCP port of NMEA data source</string>
+    <string name="ais_port_nmea_server_description">Define TCP port number of the NMEA data source</string>
+    <string name="ais_port_nmea_local">UDP port of local NMEA data receiver</string>
+    <string name="ais_port_nmea_local_description">Define UPD port where OsmAnd receives NMEA data</string>
+    <string name="ais_object_lost_timeouts">Timeout settings for AIS signal reception</string>
+    <string name="ais_object_lost_timeouts_description">Set timeout values to identify lost AIS objects if no signal was received for a specific time.</string>
+    <string name="ais_object_lost_timeout">Timeout for visibility when object is lost</string>
+    <string name="ais_object_lost_timeout_description">Set Timeout for visibility of AIS objects: After this time without signal reception, the AIS object will be removed from screen.</string>
+    <string name="ais_ship_lost_timeout">Timeout for ship visibility when no signal received</string>
+    <string name="ais_ship_lost_timeout_description">Set timeout for ship visibility: After this time without signal reception, the ship symbol will change its state on screen: It will be crossed out.</string>
+    <string name="ais_cpa_settings">Settings related to CPA</string>
+    <string name="ais_cpa_settings_description">These values define the presentation of AIS objects that may come too close to the own position.</string>
+    <string name="ais_cpa_warning_time">Warning time to reach the Closest Point of Approach (CPA)</string>
+    <string name="ais_cpa_warning_time_description">If the TCPA (time to reach the CPA with another vessel) is less than this value, the vessel is marked with red color.</string>
+    <string name="ais_cpa_warning_distance">Warning distance for the Closes Point of Approach (CPA)</string>
+    <string name="ais_cpa_warning_distance_description">Vessels are marked with red color if the CPA is less than this value and the CPA is reached in the near future (see setting "Warning time to reach the CPA").</string>
+    <string name="plugin_ais_tracker_name">AIS vessel tracker</string>
+    <string name="plugin_ais_tracker_description">Display AIS positions and information about surrounding vessels. The AIS data is received via network from an external AIS receiver.</string>
+    <string name="plugin_ais_tracker_disclaimer">DISCLAIMER\n\nThis plugin is a hobby project and not designed for reliability and correctness. DO NOT rely upon this software in any way including for navigation and/or safety of life.</string>
     <string name="shared_string_length">Length</string>
     <string name="shared_string_avg_altitude">Avg. altitude</string>
     <string name="shared_string_avg_speed">Min. speed</string>
-    <string name="popular_places_nearby">Popular places nearby</string>
-    <string name="recently_visited">Recently visited</string>
-
+    <string name="no_places_available">No places available</string>
+    <string name="no_photo_for_location_desc">No user photos have been added to this location yet</string>
     <string name="shared_string_default_view">Default view</string>
     <string name="map_widget_route_information">Route information</string>
     <string name="map_widget_route_information_desc">Displays the estimated arrival time, remaining travel time, and distance for the current navigation route.</string>
     <string name="display_distance_to_first_intermediate">Show route details for the next stop</string>
     <string name="display_distance_to_first_intermediate_summary">Shows time and distance for the next stop first. Turn off to always show details for the destination.</string>
-
     <string name="rendering_attr_showClimbingRoutes_name">Climbing routes</string>
     <string name="rendering_attr_showClimbingRoutes_description">Show climbing routes</string>
-
     <string name="calculating_indication_message">Calculating…</string>
     <string name="calculate_size">Calculate size</string>
     <string name="default_buttons_size_original_description">Each button would keep its own size.</string>
@@ -408,6 +436,11 @@ You will be able to pair this scanner again at any time.</string>
     <string name="show_debug_info">Show debug information</string>
     <string name="show_debug_info_description">Display graphical info about placement of each map text</string>
     <string name="map_text">Map texts</string>
+    <string name="show_grids">Show map grid</string>
+    <string name="show_grids_description">Allow displaying grid over the map</string>
+    <string name="show_utm_grids">Use UTM instead of WGS84</string>
+    <string name="show_utm_grids_description">Show grid in UTM meters instead of WGS84 degrees</string>
+    <string name="map_grid">Map grids</string>
     <string name="routing_attr_avoid_cobblestone_name">Avoid cobblestone</string>
     <string name="routing_attr_avoid_cobblestone_description">Avoid cobblestone</string>
     <string name="release_4_8">
@@ -1296,7 +1329,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Show MTB IMBA trails</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Show dedicated mountain biking trails.</string>
     <string name="connect_with_straight_line">Connect with a straight line</string>
-    <string name="attach_roads_descr">Approximate your track to allowed roads to route between points and associate precise turn instructions and route properties.</string>
+    <string name="attach_roads_descr">Attach your track to roads to get detailed route information, including turn-by-turn instructions and road attributes.</string>
     <string name="attach_roads_warning">Only a recorded track can be attached to the roads.</string>
     <string name="without_profiles_changing">Without profiles changing</string>
     <string name="shared_string_only_missing">Only missing</string>
@@ -4257,7 +4290,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="notes">A/V notes</string>
     <string name="online_map">Online map</string>
     <string name="roads_only">Roads only</string>
-    <string name="rendering_attr_pisteRoutes_name">Ski slopes</string>
+    <string name="rendering_attr_pisteRoutes_name">Ski routes</string>
     <string name="free">Free %1$s </string>
     <string name="device_memory">Device memory</string>
     <string name="rendering_attr_pisteGrooming_name">Piste grooming</string>

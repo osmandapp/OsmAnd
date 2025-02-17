@@ -704,15 +704,6 @@ public class NativeLibrary {
 			return null;
 		}
 
-		public String getGpxFileName() {
-			for (String name : getOriginalNames()) {
-				if (name.endsWith(GPX_FILE_EXT) || name.endsWith(GPX_GZ_FILE_EXT)) {
-					return name;
-				}
-			}
-			return null;
-		}
-
 		@Override
 		public String toString() {
 			String s = getClass().getSimpleName() + " " + name;

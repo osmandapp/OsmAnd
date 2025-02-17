@@ -64,9 +64,6 @@ public class RenderingRule {
 						attributesRef = new RenderingRule[attributes.size()];
 					}
 					attributesRef[i] = storage.getRenderingAttributeRule(vl.substring(1));
-					if (attributesRef[i] == null) {
-						attributesRef[i] = storage.getRenderingAssociationRule(vl.substring(1));
-					}
 				} else if (property.isString()) {
 					intProperties[i] = storage.getDictionaryValue(vl);
 				} else {

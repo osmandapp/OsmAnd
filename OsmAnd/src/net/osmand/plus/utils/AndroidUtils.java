@@ -76,7 +76,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMap;
+import net.osmand.render.RenderingRuleProperty;
 import net.osmand.shared.gpx.primitives.RouteActivity;
 import net.osmand.util.Algorithms;
 
@@ -261,18 +263,19 @@ public class AndroidUtils {
 			return true;
 		} catch (ActivityNotFoundException e) {
 			LOG.error(e);
-			Toast.makeText(context, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
+			getApp(context).showToastMessage(R.string.no_activity_for_intent);
 			return false;
 		}
 	}
 
-	public static boolean startActivityForResultIfSafe(@NonNull Activity activity, @NonNull Intent intent, int requestCode) {
+	public static boolean startActivityForResultIfSafe(@NonNull Activity activity,
+			@NonNull Intent intent, int requestCode) {
 		try {
 			activity.startActivityForResult(intent, requestCode);
 			return true;
 		} catch (ActivityNotFoundException e) {
 			LOG.error(e);
-			Toast.makeText(activity, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
+			getApp(activity).showToastMessage(R.string.no_activity_for_intent);
 			return false;
 		}
 	}
@@ -284,7 +287,7 @@ public class AndroidUtils {
 			LOG.error(e);
 			Context context = fragment.getContext();
 			if (context != null) {
-				Toast.makeText(context, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
+				getApp(context).showToastMessage(R.string.no_activity_for_intent);
 			}
 		}
 	}
@@ -1151,13 +1154,35 @@ public class AndroidUtils {
 		return value != null ? value : defValue;
 	}
 
-	public static String getIconStringPropertyName(Context ctx, String propertyName) {
+	public static String getIconStringPropertyName(@NonNull Context ctx, @NonNull String propertyName) {
 		String value = getStringByProperty(ctx, "icon_group_" + propertyName);
 		return value != null ? value : propertyName;
 	}
 
+	public static int getRenderPropertySelectedValueIndex(@NonNull OsmandApplication app,
+	                                                      @NonNull RenderingRuleProperty property) {
+		OsmandSettings settings = app.getSettings();
+		String value = settings.getRenderPropertyValue(property);
+		int index = List.of(property.getPossibleValues()).indexOf(value);
+		if (index >= 0) {
+			return ++index;
+		} else if (Algorithms.isEmpty(value)) {
+			return 0;
+		}
+		return index;
+	}
+
 	@NonNull
-	public static String getRenderingStringPropertyValue(Context ctx, String propertyValue) {
+	public static String getRenderingStringPropertyValue(@NonNull OsmandApplication app,
+	                                                     @NonNull RenderingRuleProperty property) {
+		OsmandSettings settings = app.getSettings();
+		String value = settings.getRenderPropertyValue(property);
+		String key = !Algorithms.isEmpty(value) ? value : property.getDefaultValueDescription();
+		return AndroidUtils.getRenderingStringPropertyValue(app, key);
+	}
+
+	@NonNull
+	public static String getRenderingStringPropertyValue(@NonNull Context ctx, @Nullable String propertyValue) {
 		if (propertyValue == null) {
 			return "";
 		}
@@ -1257,7 +1282,7 @@ public class AndroidUtils {
 		try {
 			customTabsIntent.launchUrl(context, uri);
 		} catch (ActivityNotFoundException e) {
-			Toast.makeText(context, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
+			getApp(context).showToastMessage(R.string.no_activity_for_intent);
 		}
 	}
 
@@ -1413,5 +1438,10 @@ public class AndroidUtils {
 		} else {
 			return new int[] {leftMargin, topMargin, rightMargin, bottomMargin};
 		}
+	}
+
+	@NonNull
+	public static OsmandApplication getApp(@NonNull Context context) {
+		return ((OsmandApplication) context.getApplicationContext());
 	}
 }

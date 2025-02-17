@@ -34,6 +34,7 @@ import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.osm.OsmRouteType;
 
 import java.io.File;
 import java.util.List;
@@ -46,7 +47,9 @@ public class ClickableWayHelper {
     public static final Set<String> CLICKABLE_TAGS =
             Set.of("piste:type", "piste:difficulty", "mtb:scale", "dirtbike:scale");
     public static final Map<String, String> FORBIDDEN_TAGS =
-            Map.of("area", "yes", "access", "no");
+            Map.of("area", "yes", "access", "no", "aerialway", "*");
+    public static final Set<String> REQUIRED_TAGS_ANY =
+            Set.of("name", "ref", "piste:name");
     public static final Map<String, String> GPX_COLORS = Map.ofEntries(
             Map.entry("0", "brown"),
             Map.entry("1", "green"),
@@ -120,24 +123,20 @@ public class ClickableWayHelper {
                                           TIntArrayList xPoints, TIntArrayList yPoints,
                                           long osmId, String name, Map<String, String> tags) {
         GpxFile gpxFile = new GpxFile(Version.getFullVersion(app));
-
-        if (!Algorithms.isEmpty(name)) {
-            gpxFile.getMetadata().setName(name);
-        } else {
-            gpxFile.getMetadata().setName(Long.toString(osmId));
-        }
-
         RouteActivityHelper helper = app.getRouteActivityHelper();
-        for (String tag : tags.keySet()) {
-            RouteActivity activity = helper.findActivityByTag(tag);
-            if (activity != null) {
-                String activityType = activity.getId();
-                gpxFile.getMetadata().getExtensionsToWrite().put(GpxUtilities.ACTIVITY_TYPE, activityType);
-                break;
+        for (String clickableTag : CLICKABLE_TAGS) {
+            if (tags.containsKey(clickableTag)) {
+                RouteActivity activity = helper.findActivityByTag(clickableTag);
+                if (activity != null) {
+                    String activityType = activity.getId();
+                    gpxFile.getMetadata().getExtensionsToWrite().put(GpxUtilities.ACTIVITY_TYPE, activityType);
+                    break;
+                }
             }
         }
 
         gpxFile.getExtensionsToWrite().putAll(tags);
+        gpxFile.getExtensionsToWrite().put("way_id", Long.toString(osmId));
 
         TrkSegment trkSegment = new TrkSegment();
         for (int i = 0; i < Math.min(xPoints.size(), yPoints.size()); i++) {
@@ -184,13 +183,19 @@ public class ClickableWayHelper {
 
     private boolean isClickableWayTags(@NonNull Map<String, String> tags) {
         for (Map.Entry<String, String> forbidden : FORBIDDEN_TAGS.entrySet()) {
-            if (forbidden.getValue().equals(tags.get(forbidden.getKey()))) {
+            if (forbidden.getValue().equals(tags.get(forbidden.getKey()))
+                    || "*".equals(forbidden.getValue()) && tags.containsKey(forbidden.getKey())
+            ) {
                 return false;
             }
         }
-        for (String key : tags.keySet()) {
-            if (CLICKABLE_TAGS.contains(key)) {
-                return true;
+        for (String required : REQUIRED_TAGS_ANY) {
+            if (tags.containsKey(required)) {
+                for (String key : tags.keySet()) {
+                    if (CLICKABLE_TAGS.contains(key)) {
+                        return true;
+                    }
+                }
             }
         }
         return false;

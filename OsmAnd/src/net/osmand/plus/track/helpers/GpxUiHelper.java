@@ -500,7 +500,7 @@ public class GpxUiHelper {
 			String warn = builder.toString();
 			activity.runOnUiThread(() -> {
 				if (warn.length() > 0) {
-					Toast.makeText(activity, warn, Toast.LENGTH_LONG).show();
+					AndroidUtils.getApp(activity).showToastMessage(warn);
 				} else {
 					callback.processResult(result);
 				}

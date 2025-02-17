@@ -22,6 +22,11 @@ public class RouteInfoWidgetState extends ResizableWidgetState {
 	}
 
 	@NonNull
+	public RouteInfoDisplayMode getDisplayMode() {
+		return getDisplayMode(settings.getApplicationMode());
+	}
+
+	@NonNull
 	public RouteInfoDisplayMode getDisplayMode(@NonNull ApplicationMode appMode) {
 		return displayModePref.getModeValue(appMode);
 	}

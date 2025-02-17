@@ -37,6 +37,7 @@ public class WikiCoreHelper {
 	public static final String WIKIMEDIA_FILE = "File:";
 	public static final String WIKIMEDIA_CATEGORY = "Category:";
 	private static final int THUMB_SIZE = 480;
+	private static final int ICON_SIZE = 64;
 	public static final String OSMAND_API_ENDPOINT = "https://osmand.net/api/";
 	public static final String OSMAND_SEARCH_ENDPOINT = "https://osmand.net/search/";
 	private static final String WIKI_PLACE_ACTION = "wiki_place?";
@@ -259,7 +260,8 @@ public class WikiCoreHelper {
 			String imageFileName = Algorithms.getFileWithoutDirs(imageUrl);
 			String imageName = Algorithms.getFileNameWithoutExtension(imageUrl);
 			String imageStubUrl = imageHiResUrl + "?width=" + THUMB_SIZE;
-			return new WikiImage(imageFileName, imageName, imageStubUrl, imageHiResUrl);
+			String imageIconUrl = imageHiResUrl + "?width=" + ICON_SIZE;
+			return new WikiImage(imageFileName, imageName, imageStubUrl, imageHiResUrl, imageIconUrl);
 		} catch (UnsupportedEncodingException e) {
 			LOG.error(e.getLocalizedMessage());
 		}
@@ -273,7 +275,8 @@ public class WikiCoreHelper {
 			imageName = imageName.substring(0, imageName.lastIndexOf("."));
 			String imageHiResUrl = IMAGE_BASE_URL + imageFileName;
 			String imageStubUrl = IMAGE_BASE_URL + imageFileName + "?width=" + THUMB_SIZE;
-			return new WikiImage(imageFileName, imageName, imageStubUrl, imageHiResUrl);
+			String imageIconUrl = IMAGE_BASE_URL + imageFileName + "?width=" + ICON_SIZE;
+			return new WikiImage(imageFileName, imageName, imageStubUrl, imageHiResUrl, imageIconUrl);
 
 		} catch (Exception e) {
 			LOG.error(e.getLocalizedMessage());
@@ -332,7 +335,7 @@ public class WikiCoreHelper {
 		private String depTitle;
 		private String wikiLang;
 		public String wikiDesc;
-		private String osmid;
+		public Long osmid;
 		private String osmtype;
 	}
 

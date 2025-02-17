@@ -1,5 +1,7 @@
 package net.osmand.plus.configmap.routes;
 
+import static net.osmand.osm.OsmRouteType.HIKING;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -44,11 +46,10 @@ public class HikingRoutesFragment extends MapRoutesFragment {
 	}
 
 	@Override
-	protected void setupCards(@NonNull View view) {
-		super.setupCards(view);
+	protected void createCards(@NonNull View view) {
+		super.createCards(view);
 
-		cardsContainer.addView(createDivider(cardsContainer, true, true));
 		addCard(new HikingRoutesCard(getMapActivity()));
-		cardsContainer.addView(createDivider(cardsContainer, false, true));
+		addRenderingClassCard(HIKING.getRenderingPropertyAttr());
 	}
 }

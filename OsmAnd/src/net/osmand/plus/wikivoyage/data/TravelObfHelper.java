@@ -238,9 +238,12 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@Nullable
-	public synchronized TravelGpx searchGpx(@NonNull LatLon location, @Nullable String filter, @Nullable String ref) {
-		final String lcFilter = filter != null ? filter.toLowerCase() : null;
-		final String lcSearchRef = ref != null ? ref.toLowerCase() : null;
+	public synchronized TravelGpx searchTravelGpx(@NonNull LatLon location, @Nullable String routeId) {
+		final String lcSearchRouteId = routeId != null ? routeId.toLowerCase() : null;
+		if (Algorithms.isEmpty(lcSearchRouteId)) {
+			LOG.error(String.format("searchTravelGpx(%s, null) failed due to empty routeId", location));
+			return null;
+		}
 		List<Pair<File, Amenity>> foundAmenities = new ArrayList<>();
 		int searchRadius = ARTICLE_SEARCH_RADIUS;
 		TravelGpx travelGpx = null;
@@ -254,14 +257,9 @@ public class TravelObfHelper implements TravelHelper {
 			}
 			for (Pair<File, Amenity> foundGpx : foundAmenities) {
 				Amenity amenity = foundGpx.second;
-				final String aRef = amenity.getRef();
-				final String aName = amenity.getName();
 				final String aRouteId = amenity.getRouteId();
-				final String lcRef = aRef != null ? aRef.toLowerCase() : null;
-				final String lcName = aName != null ? aName.toLowerCase() : null;
 				final String lcRouteId = aRouteId != null ? aRouteId.toLowerCase() : null;
-				if ((Algorithms.objectEquals(lcRouteId, lcFilter) || Algorithms.objectEquals(lcName, lcFilter))
-						&& (lcSearchRef == null || Algorithms.objectEquals(lcRef, lcSearchRef))) {
+				if (lcSearchRouteId.equals(lcRouteId)) {
 					travelGpx = getTravelGpx(foundGpx.first, amenity);
 					break;
 				}
@@ -269,7 +267,7 @@ public class TravelObfHelper implements TravelHelper {
 			searchRadius *= 2;
 		} while (travelGpx == null && searchRadius < MAX_SEARCH_RADIUS);
 		if (travelGpx == null) {
-			LOG.error(String.format("searchGpx(%s, %s, %s) failed", location, filter, ref));
+			LOG.error(String.format("searchTravelGpx(%s, %s) failed", location, routeId));
 		}
 		return travelGpx;
 	}
@@ -1121,10 +1119,11 @@ public class TravelObfHelper implements TravelHelper {
 	                                    List<BinaryMapDataObject> segmentList, List<Amenity> pointList,
 	                                    Map<String, String> gpxFileExtensions, List<String> pgNames,
 	                                    List<String> pgIcons, List<String> pgColors, List<String> pgBackgrounds) {
+		boolean allowReadFromMultipleMaps = article.hasOsmRouteId() && article.routeRadius > 0;
 		for (BinaryMapIndexReader reader : readers) {
 			try {
-				if (article.file != null && !article.file.equals(reader.getFile())) {
-					continue;
+				if (!allowReadFromMultipleMaps && !reader.getFile().equals(article.file)) {
+					continue; // fast up read Wikivoyage and User's GPX files in OBF
 				}
 				if (article instanceof TravelGpx) {
 					BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> sr = BinaryMapIndexReader.buildSearchRequest(
@@ -1148,8 +1147,8 @@ public class TravelObfHelper implements TravelHelper {
 				} else {
 					reader.searchPoi(pointRequest);
 				}
-				if (!Algorithms.isEmpty(segmentList)) {
-					break;
+				if (!allowReadFromMultipleMaps && !Algorithms.isEmpty(segmentList)) {
+					break; // fast up read User's GPX files
 				}
 			} catch (Exception e) {
 				LOG.error(e.getMessage());
@@ -1243,10 +1242,18 @@ public class TravelObfHelper implements TravelHelper {
 			@Override
 			public boolean publish(BinaryMapDataObject object) {
 				if (object.getPointsLength() > 1) {
-					if (object.getTagValue(REF).equals(article.ref)
-							&& (object.getTagValue(ROUTE_ID).equals(article.routeId)
-							|| object.getName().equals(article.getTitle()))) {
-						segmentList.add(object);
+					String routeId = article.getRouteId();
+					boolean equalRouteId = !Algorithms.isEmpty(routeId) && routeId.equals(object.getTagValue(ROUTE_ID));
+
+					if (article instanceof TravelGpx && equalRouteId) {
+						segmentList.add(object); // GPX-in-OBF requires mandatory route_id
+					} else {
+						String name = article.getTitle(), ref = article.ref;
+						boolean equalName = !Algorithms.isEmpty(name) && name.equals(object.getName());
+						boolean equalRef = !Algorithms.isEmpty(ref) && ref.equals(object.getTagValue(REF));
+						if ((equalRouteId && (equalRef || equalName) || (equalRef && equalName))) {
+							segmentList.add(object); // Wikivoyage is allowed to match mixed tags
+						}
 					}
 				}
 				return false;

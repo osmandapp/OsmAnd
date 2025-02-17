@@ -1761,7 +1761,6 @@
     <string name="rendering_value_car_name">Kotxea</string>
     <string name="rendering_value_bicycle_name">Bizikleta</string>
     <string name="rendering_value_pedestrian_name">Oinez</string>
-    <string name="rendering_attr_hideAccess_name">Sarbide murrizketak</string>
     <string name="rendering_attr_showAccess_name">Erakutsi sarbide- eta bidesari-murrizketak</string>
     <string name="local_index_select_gpx_file">Hautatu arrastoa</string>
     <string name="sort_by_distance">Ordenatu distantziaren arabera</string>
@@ -3705,8 +3704,6 @@
     <string name="osm_login_descr">Hasi saioa OAuth metodoa edo zure OSM erabiltzaile-izena eta pasahitza erabiliz.</string>
     <string name="register_on_openplacereviews">Erregistratu hemen:
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Argazkiak OpenPlaceReviews.org open data proiektuak eskaintzen ditu. Zure argazkiak igotzeko bere webgunean izena eman behar duzu.</string>
-    <string name="add_to_opr">Gehitu OpenPlaceReviews-era</string>
     <string name="add_photos_descr">OsmAnd-ek hainbat iturritako argazkiak erakusten ditu:
 \nOpenPlaceReviews - Interesguneen argazkiak;
 \nMapillary - Kale mailako irudiak;
@@ -4422,10 +4419,7 @@
     <string name="activity_type_walking_name">Oinezkoa</string>
     <string name="activity_type_snowmobile_name">Elur-motorra</string>
     <string name="activity_type_running_name">Korrikalaria</string>
-    <string name="opr_use_dev_url">Erabili test.openplacereviews.org</string>
     <string name="activity_type_water_name">Ura</string>
-    <string name="login_open_place_reviews">Hasi saioa OpenPlaceReviews-en</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="open_place_reviews_plugin_description">Egin ekarpenak OpenPlaceReviews proiektuan, hala nola, argazkiak, iritziak edo toki publikoetarako estekak, hala nola jatetxe, hotel edo museoetarako.
 \n
 \nAurkitu gure webgunean ekarpenak egiteko argibideak %1$s.</string>
@@ -5870,4 +5864,22 @@
     <string name="connect_obd_instructions_step4">Sakatu \'%1$s\' eta hautatu zure eskanerra zerrendatik.</string>
     <string name="learn_more_about_obd_sensors">Lortu informazio gehiago sentsoreei buruz.</string>
     <string name="release_4_9">• Pantaila osoko galeria-ikustaile bat gehitu da Wikimediako irudietarako\n\n • \"Ibilgailuen neurketak\" plugin berri bat aurkeztu du ibilgailuen errendimendua OBD-II protokoloa erabiliz kontrolatzeko\n\n • Arrastoei jarduerak esleitzeko eta horren arabera iragazteko gaitasuna gehitu da\n\n • Bidaiak grabatzeko eta ukipen-pantaila blokeatzeko ekintza azkar berriak ezarri dira\n\n • Maparen botoiaren itxura pertsonalizagarria eta sareta zehatza sartu ditu\n\n • Testuinguru-menua eta \"Berrezarri batez besteko abiadura\" ekintza bat gehitu ditu trepetetan\n\n • Ibilbide geruza berria gehitu da \"Motocros ibilbideak\"\n\n • \"Auto-grabatu arrastoa nabigazioan\" konpondu da\n\n • Arazoa konpondu da RTL-n iraulitako koordenatuekin\n\n • Unean grabatutako arrastoetarako galdutako sentsoreen datuak konpondu dira\n\n • Hautatutako punturako inguruko eremuei buruzko informazioa gehitu da\n\n • Ekintza azkarra gehitu da OSM edizioen ikusgarritasuna kontrolatzeko\n\n • Lurra koloreztatzeko aukeren ikusgarritasun parametro bereiziak\n\n • Saka daitekeen ikono bat gehitu da sarbidea edo beste errepide edo bide-atributu batzuk bistaratzeko</string>
+    <string name="ais_load_data">Kargatu AIS datuak fitxategitik</string>
+    <string name="ais_port_nmea_local_description">Definitu UPD ataka non OsmAnd-ek NMEA datuak jasotzen dituen</string>
+    <string name="ais_object_lost_timeout_description">Ezarri AIS objektuak ikusteko denbora-muga: Seinalerik jaso gabe, AIS objektua pantailatik kenduko da.</string>
+    <string name="ais_cpa_settings_description">Balio hauek AIS objektuen aurkezpena definitzen dute, bere posiziotik oso hurbil egon daitezkeenak.</string>
+    <string name="ais_address_settings">IP helbideen ezarpenak</string>
+    <string name="ais_address_settings_description">Aukeratu NMEA protokoloa (UDP / TCP) eta zehaztu helbideak</string>
+    <string name="ais_nmea_protocol">NMEA datuak jasotzeko protokoloa</string>
+    <string name="ais_nmea_protocol_description">Hautatu NMEA datuak jasotzeko protokoloa</string>
+    <string name="ais_address_nmea_server">NMEA datu-iturburuaren IP helbidea</string>
+    <string name="ais_address_nmea_server_description">Definitu NMEA datu-iturburuaren IP helbidea ( TCP erabiltzen bada)</string>
+    <string name="ais_port_nmea_server">NMEA datu-iturburuko TCP ataka</string>
+    <string name="ais_port_nmea_server_description">Definitu NMEA datu-iturburuaren TCP ataka-zenbakia</string>
+    <string name="ais_port_nmea_local">NMEA datu-hartzaile lokaleko UDP ataka</string>
+    <string name="ais_object_lost_timeouts">Denbora-muga ezarpenak AIS seinalearen harrerarako</string>
+    <string name="ais_object_lost_timeouts_description">Ezarri denbora-mugaren balioak galdutako AIS objektuak identifikatzeko seinalerik jaso ez bada denbora jakin batean.</string>
+    <string name="ais_object_lost_timeout">Denbora-muga objektu bat galtzen denean ikusteko</string>
+    <string name="ais_cpa_settings">CPAren ezarpenak</string>
+    <string name="ais_cpa_warning_time">Hurbiltze puntu hurbilenera (CPA) iristeko abisua</string>
 </resources>

@@ -1172,7 +1172,6 @@
     <string name="rendering_attr_buildings15zoom_name">建築物在 15 級縮放</string>
     <string name="rendering_attr_moreDetailed_name">更多細節</string>
     <string name="rendering_attr_lessDetailed_name">較少細節</string>
-    <string name="rendering_attr_hideAccess_name">存取限制</string>
     <string name="rendering_attr_showAccess_name">顯示進入限制</string>
     <string name="rendering_attr_showSurfaceGrade_name">顯示道路品質</string>
     <string name="rendering_attr_showSurfaces_name">顯示路面</string>
@@ -1343,7 +1342,7 @@
     <string name="rendering_attr_pisteGrooming_name">滑雪道修整</string>
     <string name="free">%1$s 可用</string>
     <string name="device_memory">裝置記憶體</string>
-    <string name="rendering_attr_pisteRoutes_name">滑雪斜坡</string>
+    <string name="rendering_attr_pisteRoutes_name">滑雪路線</string>
     <string name="roads_only">僅道路</string>
     <string name="watch">觀看</string>
     <string name="notes">音訊與視訊註記</string>
@@ -3622,14 +3621,12 @@
     <string name="shared_string_add_photo">新增照片</string>
     <string name="register_on_openplacereviews">註冊於
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">照片由 OpenPlaceReviews.org 開放資料專案提供。為了上傳您的照片，您需要在他們的網站上註冊。</string>
     <string name="register_opr_create_new_account">建立新帳號</string>
     <string name="register_opr_have_account">我已經有帳號了</string>
     <string name="shared_string_search_history">搜尋歷史紀錄</string>
     <string name="app_mode_kayak">皮艇</string>
     <string name="app_mode_motorboat">快艇</string>
     <string name="add_to_mapillary">新增到 Mapillary</string>
-    <string name="add_to_opr">新增到 OpenPlaceReviews</string>
     <string name="add_photos_descr">OsmAnd 從多個來源顯示照片：
 \nOpenPlaceReviews - POI 照片；
 \nMapillary - 街景；
@@ -3737,9 +3734,6 @@
     <string name="open_place_reviews_plugin_description">為 OpenPlaceReviews 專案做出貢獻，例如餐廳、旅館或博物館等公共場所的照片、評論或連結。
 \n
 \n在我們的網站上找到關於如何貢獻的說明 %1$s。</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">使用 test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">登入至 OpenPlaceReviews</string>
     <string name="activity_type_water_name">水上</string>
     <string name="activity_type_winter_name">冬季</string>
     <string name="activity_type_snowmobile_name">雪地摩托車</string>
@@ -4453,7 +4447,7 @@
     <string name="rendering_attr_showMtbScaleIMBATrails_description">顯示山地自行車專用路徑。</string>
     <string name="average_speed_skip_stops_desc">低於 %1$s 的速度將會被計算，且會影響平均速度。</string>
     <string name="connect_with_straight_line">以直線連結</string>
-    <string name="attach_roads_descr">將您的軌跡趨近為允許在點之間路線規劃的道路，並與精確的轉彎指令與路線屬性相關聯。</string>
+    <string name="attach_roads_descr">將追蹤路徑附在道路上，即可獲得詳細的路徑資訊，包括轉彎指示與道路屬性。</string>
     <string name="attach_roads_warning">僅紀錄的軌跡可以附加至道路上。</string>
     <string name="without_profiles_changing">不需變更設定檔</string>
     <string name="shared_string_only_missing">僅遺失</string>
@@ -5594,7 +5588,6 @@
     <string name="fuel_tank_capacity">油箱容量</string>
     <string name="shared_strings_dimensions">尺寸</string>
     <string name="litres">公升</string>
-    <string name="imperial_gallons_unit">英制加侖</string>
     <string name="us_gallons_unit">加侖</string>
     <string name="imperial_gallons">英制加侖</string>
     <string name="us_gallons">美制加侖</string>
@@ -5656,4 +5649,46 @@
     <string name="display_distance_to_first_intermediate">顯示下一站的路線詳細資訊</string>
     <string name="recently_visited">最近造訪</string>
     <string name="popular_places_nearby">附近的熱門地點</string>
+    <string name="ais_cpa_warning_time_description">如果 TCPA（與其他船隻達到 CPA 的時間）小於此值，則該船隻會以紅色標示。</string>
+    <string name="ais_cpa_warning_distance">最接近之最短距離 (CPA) 的警告距離</string>
+    <string name="show_grids">顯示地圖網格</string>
+    <string name="ais_cpa_warning_distance_description">如果 CPA 小於此值，且在不久的將來就會達到 CPA（請參閱設定達到 CPA 的警告時間），則船隻會以紅色標記。</string>
+    <string name="show_grids_description">允許在地圖上顯示網格</string>
+    <string name="show_utm_grids_description">以 UTM 公尺而非 WGS84 度數顯示網格</string>
+    <string name="ais_address_settings">IP 位址設定</string>
+    <string name="ais_load_data">從檔案載入 AIS 資料</string>
+    <string name="plugin_ais_tracker_disclaimer">免責聲明\n\n本外掛程式為業餘專案，並非為可靠性與正確性而設計。請勿以任何方式依賴此軟體，包括導航及/或生命安全。</string>
+    <string name="ais_port_nmea_server_description">定義 NMEA 資料來源的 TCP 連接埠編號</string>
+    <string name="ais_object_lost_timeouts_description">設定逾時值，以便在特定時間內未收到訊號時識別遺失的 AIS 物件。</string>
+    <string name="ais_object_lost_timeout_description">設定 AIS 物件可見的逾時時間：過了這段時間沒有訊號接收，AIS 物件就會從螢幕上移除。</string>
+    <string name="ais_nmea_protocol">NMEA 資料接收通訊協定</string>
+    <string name="ais_nmea_protocol_description">選擇 NMEA 資料接收通訊協定</string>
+    <string name="ais_address_nmea_server">NMEA 資料來源的 IP 位址</string>
+    <string name="ais_address_nmea_server_description">定義 NMEA 資料來源的 IP 位址（若使用 TCP）</string>
+    <string name="ais_port_nmea_server">NMEA 資料來源的 TCP 連接埠</string>
+    <string name="ais_port_nmea_local">本機 NMEA 資料接收器的 UDP 連接埠</string>
+    <string name="ais_port_nmea_local_description">定義 OsmAnd 接收 NMEA 資料的 UDP 連接埠</string>
+    <string name="ais_object_lost_timeouts">AIS 訊號接收的逾時設定</string>
+    <string name="ais_object_lost_timeout">物件遺失時的能見度逾時</string>
+    <string name="ais_ship_lost_timeout">未收到訊號時，船隻能見度的逾時時間</string>
+    <string name="ais_ship_lost_timeout_description">設定船隻可見度的逾時時間： 在這段時間內沒有接收到訊號，螢幕上的船隻符號就會改變狀態：它會被劃掉。</string>
+    <string name="ais_cpa_settings">與 CPA 相關的設定</string>
+    <string name="ais_cpa_settings_description">這些值定義了可能太接近自身位置的 AIS 物件的呈現方式。</string>
+    <string name="ais_cpa_warning_time">抵達最接近之最短距離 (CPA) 的警告時間</string>
+    <string name="plugin_ais_tracker_name">AIS 船隻追蹤器</string>
+    <string name="plugin_ais_tracker_description">顯示 AIS 位置及周遭船隻資訊。AIS 資料透過網路從外部 AIS 接收器接收。</string>
+    <string name="shared_string_length">長度</string>
+    <string name="shared_string_avg_altitude">平均海拔高度</string>
+    <string name="shared_string_avg_speed">最低速度</string>
+    <string name="map_widget_route_information">路線資訊</string>
+    <string name="map_widget_route_information_desc">顯示目前導航航線的預計抵達時間、剩餘行駛時間與距離。</string>
+    <string name="show_utm_grids">使用 UTM 取代 WGS84</string>
+    <string name="map_grid">地圖網格</string>
+    <string name="shared_string_default_view">預設檢視</string>
+    <string name="ais_address_settings_description">選擇 NMEA 通訊協定 (UDP/TCP) 並定義位址</string>
+    <string name="no_places_available">沒有位置</string>
+    <string name="no_photo_for_location_desc">此位置尚未新增使用者照片</string>
+    <string name="hmd_promo_description">%1$s個月免費使用功能，包括無限制地圖下載、3D 浮雕等</string>
+    <string name="shared_string_road_exit">離開</string>
+    <string name="hmd_promo">HMD 的%1$s個月促銷</string>
 </resources>

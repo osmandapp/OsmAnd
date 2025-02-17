@@ -71,6 +71,7 @@ public class SearchCoreFactory {
 	public static final int PREFERRED_COUNTRY_ZOOM = 7;
 	public static final int PREFERRED_CITY_ZOOM = 13;
 	public static final int PREFERRED_POI_ZOOM = 16;
+	public static final int PREFERRED_NEARBY_POINT_ZOOM = 16;
 	public static final int PREFERRED_WPT_ZOOM = 16;
 	public static final int PREFERRED_GPX_FILE_ZOOM = 17;
 	public static final int PREFERRED_DEFAULT_RECENT_ZOOM = 17;
@@ -553,7 +554,8 @@ public class SearchCoreFactory {
 						SearchPhraseDataType.ADDRESS);
 				String wordToSearch = phrase.getUnknownWordToSearch();
 				if (ArabicNormalizer.isSpecialArabic(wordToSearch)) {
-					wordToSearch = ArabicNormalizer.normalize(wordToSearch);
+					String normalized = ArabicNormalizer.normalize(wordToSearch);
+					wordToSearch = normalized == null ? wordToSearch : normalized;
 				}
 				while (offlineIterator.hasNext() && wordToSearch.length() > 0) {
 					BinaryMapIndexReader r = offlineIterator.next();
@@ -609,7 +611,8 @@ public class SearchCoreFactory {
 					SearchPhraseDataType.POI);
 			String searchWord = phrase.getUnknownWordToSearch();
 			if (ArabicNormalizer.isSpecialArabic(searchWord)) {
-				searchWord = ArabicNormalizer.normalize(searchWord);
+				String normalized = ArabicNormalizer.normalize(searchWord);
+				searchWord = normalized == null ? searchWord : normalized;
 			}
 			final NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
 			QuadRect bbox = phrase.getFileRequest() != null ? phrase.getRadiusBBoxToSearch(BBOX_RADIUS_POI_IN_CITY) : phrase.getRadiusBBoxToSearch(BBOX_RADIUS_INSIDE);

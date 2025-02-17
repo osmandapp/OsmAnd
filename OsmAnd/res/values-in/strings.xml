@@ -944,7 +944,6 @@
     <string name="shared_string_add_photo">Tambahkan foto</string>
     <string name="register_on_openplacereviews">Daftar di
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Foto disediakan oleh proyek data terbuka OpenPlaceReviews.org. Untuk mengunggah foto, Anda perlu mendaftar di situs webnya.</string>
     <string name="register_opr_create_new_account">Buat akun baru</string>
     <string name="register_opr_have_account">Saya sudah memiliki sebuah akun</string>
     <string name="shared_string_search_history">Riwayat pencarian</string>
@@ -958,7 +957,6 @@
     <string name="select_groups_for_import">Pilih grup yang akan diimpor.</string>
     <string name="select_items_for_import">Pilih item yang akan diimpor.</string>
     <string name="add_to_mapillary">Tambahkan ke Mapillary</string>
-    <string name="add_to_opr">Tambahkan ke OpenPlaceReviews</string>
     <string name="use_dev_url">Gunakan dev.openstreetmap.org</string>
     <string name="app_mode_light_aircraft">Pesawat terbang ringan</string>
     <string name="plan_route_add_new_segment">Tambahkan segmen baru</string>
@@ -998,9 +996,6 @@
     <string name="uploading_count">Mengunggah %1$d dari %2$d</string>
     <string name="uploaded_count">%1$d dari %2$d terunggah</string>
     <string name="toast_select_edits_for_upload">Pilih suntingan untuk diunggah</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Gunakan test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Masuk ke OpenPlaceReviews</string>
     <string name="activity_type_water_name">Air</string>
     <string name="activity_type_snowmobile_name">Mobil Salju</string>
     <string name="activity_type_racing_name">Balapan</string>
@@ -3523,7 +3518,6 @@
     <string name="map_widget_appearance_rem">Elemen yang tersisa</string>
     <string name="traffic_warning_border_control">Gerbang perbatasan</string>
     <string name="traffic_warning_speed_camera">Kamera kecepatan</string>
-    <string name="rendering_attr_hideAccess_name">Pembatasan akses</string>
     <string name="rendering_attr_showCycleRoutes_name">Rute bersepeda</string>
     <string name="gpx_selection_number_of_points">%1$s titik</string>
     <string name="gpx_selection_point">Titik %1$s</string>
@@ -3551,7 +3545,7 @@
     <string name="tts_missing_language_data_title">Data hilang</string>
     <string name="track_points">Titik trek</string>
     <string name="days_behind">hari di belakang</string>
-    <string name="rendering_attr_pisteRoutes_name">Lereng ski</string>
+    <string name="rendering_attr_pisteRoutes_name">Rute ski</string>
     <string name="rendering_attr_pisteGrooming_name">Perawatan piste</string>
     <string name="gpx_selection_points">%1$s
 \nTitik</string>
@@ -4046,7 +4040,7 @@
     <string name="trip_recording_duration_widget_desc">Menampilkan waktu perekaman trek, durasi dalam menit/jam dari perjalanan yang sedang direkam.</string>
     <string name="download_tiles">Unduh ubin</string>
     <string name="connect_with_straight_line">Hubungkan dengan garis lurus</string>
-    <string name="attach_roads_descr">Perkirakan trek Anda ke jalan yang diperbolehkan untuk merute antara titik dan kaitkan instruksi belokan tepat dan properti rute.</string>
+    <string name="attach_roads_descr">Pasang trek Anda pada jalan untuk mendapatkan informasi rute detail, termasuk petunjuk putaran dan atribut jalan.</string>
     <string name="auto_backup_title">Pencadangan otomatis</string>
     <string name="without_profiles_changing">Tanpa perubahan profil</string>
     <string name="shared_string_only_missing">Hanya hilang</string>
@@ -6007,7 +6001,6 @@
     <string name="fuel_tank_capacity">Kapasitas tangki bahan bakar</string>
     <string name="shared_strings_dimensions">Dimensi</string>
     <string name="litres">Liter</string>
-    <string name="imperial_gallons_unit">imp gal</string>
     <string name="us_gallons_unit">gal</string>
     <string name="imperial_gallons">Galon imperial</string>
     <string name="us_gallons">Galon AS</string>
@@ -6067,4 +6060,40 @@
     <string name="shared_string_avg_altitude">Ketinggian rata-rata</string>
     <string name="shared_string_length">Panjang</string>
     <string name="shared_string_avg_speed">Kecepatan minimum</string>
+    <string name="map_widget_route_information">Informasi rute</string>
+    <string name="map_widget_route_information_desc">Menampilkan waktu tiba, sisa waktu perjalanan, dan jarak untuk rute navigasi saat ini.</string>
+    <string name="ais_nmea_protocol">Protokol untuk penerimaan data NMEA</string>
+    <string name="ais_address_nmea_server">Alamat IP sumber data NMEA</string>
+    <string name="ais_address_settings">Pengaturan alamat IP</string>
+    <string name="ais_load_data">Muat data AIS dari berkas</string>
+    <string name="ais_nmea_protocol_description">Pilih protokol untuk penerimaan data NMEA</string>
+    <string name="ais_ship_lost_timeout_description">Tetapkan habisnya waktu keterlihatan kapal: Setelah waktu ini tanpa penerimaan sinyal, simbol kapal akan berubah keadaannya pada layar: Akan di silang.</string>
+    <string name="plugin_ais_tracker_disclaimer">PENAFIAN\n\nPlugin ini merupakan proyek hobi dan tidak dirancang untuk keandalan dan kebenaran. JANGAN bergantung pada perangkat lunak ini dengan cara apa pun termasuk navigasi dan/atau keamanan kehidupan.</string>
+    <string name="ais_cpa_warning_distance_description">Kapal ditandai dengan warna merah jika CPA lebih sedikit daripada nilai ini dan jika CPA tercapai dalam waktu dekat (lihat penetapan Waktu peringatan untuk mencapai CPA).</string>
+    <string name="ais_address_settings_description">Pilih protokol NMEA (UDP/TCP) dan tentukan alamat</string>
+    <string name="ais_address_nmea_server_description">Tentukan alamat IP sumber data NMEA (jika TCP digunakan)</string>
+    <string name="ais_port_nmea_server">Porta TCP sumber data NMEA</string>
+    <string name="ais_port_nmea_server_description">Tentukan nomor porta TCP sumber data NMEA</string>
+    <string name="ais_port_nmea_local">Porta UDP penerima data NMEA lokal</string>
+    <string name="ais_port_nmea_local_description">Tentukan porta UDP di mana OsmAnd menerima data NMEA</string>
+    <string name="ais_object_lost_timeouts">Pengaturan habisnya waktu untuk penerimaan sinyal AIS</string>
+    <string name="ais_object_lost_timeouts_description">Tetapkan nilai habisnya waktu mengenal objek AIS yang hilang jika tidak ada sinyal yang diterima pada waktu tertentu.</string>
+    <string name="ais_object_lost_timeout">Habisnya waktu keterlihatan ketika objek hilang</string>
+    <string name="ais_object_lost_timeout_description">Tetapkan habisnya waktu keterlihatan objek AIS: Setelah waktu ini tanpa penerimaan sinyal, objek AIS akan dihilangkan dari layar.</string>
+    <string name="ais_ship_lost_timeout">Habisnya waktu keterlihatan kapal ketika tidak ada sinyal yang diterima</string>
+    <string name="ais_cpa_settings">Pengaturan berkaitan dengan CPA</string>
+    <string name="ais_cpa_settings_description">Nilai-nilai ini menentukan penampilan objek AIS yang mungkin terlalu dekat dengan posisinya.</string>
+    <string name="ais_cpa_warning_time">Waktu peringatan mencapai Titik Pendekatan Terdekat (CPA)</string>
+    <string name="ais_cpa_warning_time_description">Jika TCPA (waktu mencapai CPA dengan kapal lain) lebih sedikit daripada nilai ini, kapal akan ditandai dengan warna merah.</string>
+    <string name="ais_cpa_warning_distance">Peringatan jarak untuk Titik Pendekatan Terdekat (CPA)</string>
+    <string name="plugin_ais_tracker_name">Pelacak kapal AIS</string>
+    <string name="plugin_ais_tracker_description">Menampilkan posisi dan informasi AIS tentang kapal di sekitar. Data AIS diterima melalui jaringan dari penerima AIS eksternal.</string>
+    <string name="shared_string_default_view">Tampilan bawaan</string>
+    <string name="show_utm_grids">Gunakan UTM daripada WGS84</string>
+    <string name="map_grid">Kisi peta</string>
+    <string name="show_utm_grids_description">Tampilkan kisi dalam meter UTM daripada derajat WGS84</string>
+    <string name="show_grids_description">Perbolehkan menampilkan kisi pada peta</string>
+    <string name="show_grids">Tampilkan kisi peta</string>
+    <string name="no_places_available">Tidak ada tempat yang tersedia</string>
+    <string name="no_photo_for_location_desc">Belum ada foto pengguna yang ditambahkan ke tempat ini</string>
 </resources>

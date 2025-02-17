@@ -439,7 +439,7 @@ public class ImportHelper {
 				mapActivity.startActivityForResult(intent, IMPORT_FILE_REQUEST);
 				mapActivity.registerActivityResultListener(listener);
 			} catch (ActivityNotFoundException e) {
-				Toast.makeText(mapActivity, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
+				app.showToastMessage(R.string.no_activity_for_intent);
 			}
 		}
 	}

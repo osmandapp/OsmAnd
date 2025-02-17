@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -274,6 +275,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 
 	private ExpandableListAdapter createNavigationListView(Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> navigationMap) {
 		Context ctx = requireContext();
+		OsmandApplication app = AndroidUtils.getApp(ctx);
 
 		expListView = new ExpandableListView(ctx);
 		ExpandableListAdapter listAdapter = new ExpandableListAdapter(ctx, navigationMap);
@@ -294,7 +296,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 				String selectTravelBook = ctx.getString(R.string.select_travel_book);
 				String title = articleItem.getArticleTitle();
 				String toastTitle = ctx.getString(R.string.ltr_or_rtl_combine_via_colon_with_space, selectTravelBook, title);
-				Toast.makeText(ctx, toastTitle, Toast.LENGTH_LONG).show();
+				app.showToastMessage(toastTitle);
 			}
 			dismiss();
 			return true;
@@ -303,7 +305,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 			WikivoyageSearchResult articleItem = (WikivoyageSearchResult) listAdapter.getGroup(groupPosition);
 			String title = articleItem.getArticleTitle();
 			if (Algorithms.isEmpty(title)) {
-				Toast.makeText(ctx, R.string.wiki_article_not_found, Toast.LENGTH_LONG).show();
+				app.showToastMessage(R.string.wiki_article_not_found);
 			} else {
 				showWikivoyageArticleDialogFragment(articleItem);
 				dismiss();

@@ -153,7 +153,7 @@
     <string name="by_distance">தூரம் மூலம்</string>
     <string name="by_group">குழு மூலம்</string>
     <string name="turn_off_all">அனைத்தையும் அணைக்கவும்</string>
-    <string name="shared_string_sort">வரிசைப்படுத்து</string>
+    <string name="shared_string_sort">வகைபடுத்து.</string>
     <string name="shared_string_sort_by">வரிசைப்படுத்தவும்</string>
     <string name="choose_osmand_desc">வரைபடத்தில் தொடர்புகள் காண்பிக்கப்படும் OSMAND பதிப்பைத் தேர்ந்தெடுக்கவும்.</string>
     <string name="choose_osmand">பயன்படுத்த OSMand பதிப்பைத் தேர்ந்தெடுக்கவும்</string>
@@ -254,7 +254,7 @@
     <string name="m">மீ</string>
     <string name="nm">என்.எம்.ஐ.</string>
     <string name="min_mile">n/m</string>
-    <string name="min_km">என்/கி.மீ.</string>
+    <string name="min_km">நிமையம்/கிமீ</string>
     <string name="nm_h">என்.எம்.ஐ/எச்</string>
     <string name="m_s">எம்/கள்</string>
     <string name="km_h">கிமீ / மணி</string>

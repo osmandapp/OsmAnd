@@ -18,15 +18,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.TypedValue;
-import android.view.GestureDetector;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.*;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -34,7 +26,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
@@ -65,6 +56,7 @@ import net.osmand.plus.mapmarkers.CoordinateInputBottomSheetDialogFragment.Coord
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.DDM;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.DMS;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
+import net.osmand.plus.mapmarkers.SaveAsTrackBottomSheetDialogFragment.MarkerSaveAsTrackFragmentListener;
 import net.osmand.plus.mapmarkers.adapters.CoordinateInputAdapter;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
@@ -96,6 +88,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private static final String SELECTED_POINT_KEY = "selected_point_key";
 	public static final double SOFT_KEYBOARD_MIN_DETECTION_SIZE = 0.15;
 
+	private OsmandApplication app;
 	private GpxFile newGpxFile;
 	private OnPointsSavedListener listener;
 	private WptPt selectedWpt;
@@ -132,8 +125,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		OsmandApplication app = getMyApplication();
 
+		app = getMyApplication();
 		lightTheme = app.getSettings().isLightContent();
 		setStyle(STYLE_NO_FRAME, lightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 		newGpxFile = new GpxFile(Version.getFullVersion(app));
@@ -147,14 +140,15 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private void syncGpx(GpxFile gpxFile) {
-		MapMarkersHelper helper = getMyApplication().getMapMarkersHelper();
+		MapMarkersHelper helper = app.getMapMarkersHelper();
 		MapMarkersGroup group = helper.getMarkersGroup(gpxFile);
 		if (group != null) {
 			helper.runSynchronization(group);
 		}
 	}
 
-	protected void addWpt(GpxFile gpx, String description, String name, String category, int color, double lat, double lon) {
+	protected void addWpt(GpxFile gpx, String description, String name, String category, int color,
+			double lat, double lon) {
 		if (gpx != null) {
 			if (gpx.isShowCurrentTrack()) {
 				savingTrackHelper.insertPointData(lat, lon, description, name, category, color);
@@ -166,7 +160,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		}
 	}
 
-	protected void updateWpt(GpxFile gpx, @Nullable String description, String name, String category, int color, double lat, double lon) {
+	protected void updateWpt(GpxFile gpx, @Nullable String description, String name,
+			String category, int color, double lat, double lon) {
 		if (gpx != null) {
 			if (gpx.isShowCurrentTrack()) {
 				savingTrackHelper.updatePointData(selectedWpt, lat, lon, description, name, category, color, null, null);
@@ -185,7 +180,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				showSaveDialog();
 			} else {
 				GpxFile gpx = getGpx();
-				new SaveGpxAsyncTask(getMyApplication(), gpx, null, false).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				new SaveGpxAsyncTask(app, gpx, null, false).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				syncGpx(gpx);
 				if (listener != null) {
 					listener.onPointsSaved();
@@ -239,7 +234,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+			@Nullable Bundle savedInstanceState) {
 		if (savedInstanceState != null) {
 			int pos = savedInstanceState.getInt(SELECTED_POINT_KEY, -1);
 			if (pos != -1) {
@@ -317,7 +313,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			lonBackspaceBtn.setOnClickListener(backspaceOnClickListener);
 
 		} else {
-			boolean rightHand = getMyApplication().getSettings().COORDS_INPUT_USE_RIGHT_SIDE.get();
+			boolean rightHand = app.getSettings().COORDS_INPUT_USE_RIGHT_SIDE.get();
 			LinearLayout handContainer = mainView.findViewById(R.id.hand_container);
 
 			View dataAreaView = View.inflate(ctx, R.layout.coordinate_input_land_data_area, null);
@@ -552,7 +548,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		recyclerView.setPadding(recyclerView.getPaddingLeft(), recyclerView.getPaddingTop(), recyclerView.getPaddingRight(), padding);
 	}
 
-	private void setupKeyboardItems(View keyboardView, View.OnClickListener listener, @IdRes int... itemsIds) {
+	private void setupKeyboardItems(View keyboardView, View.OnClickListener listener,
+			@IdRes int... itemsIds) {
 		@DrawableRes int itemBg = lightTheme ? R.drawable.keyboard_item_light_bg : R.drawable.keyboard_item_dark_bg;
 		@DrawableRes int controlItemBg = lightTheme ? R.drawable.keyboard_item_control_light_bg : R.drawable.keyboard_item_control_dark_bg;
 
@@ -683,7 +680,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private void setupSideOfTheWorldBtns(int... ids) {
-		boolean doNotUseAnimations = getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get();
+		boolean doNotUseAnimations = app.getSettings().DO_NOT_USE_ANIMATIONS.get();
 		for (int id : ids) {
 			View sideOfTheWorldBtn = mainView.findViewById(id);
 			if (doNotUseAnimations) {
@@ -875,8 +872,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		clearInputs();
 
-		Format format = getMyApplication().getSettings().COORDS_INPUT_FORMAT.get();
-		boolean useTwoDigitsLongtitude = getMyApplication().getSettings().COORDS_INPUT_TWO_DIGITS_LONGTITUDE.get();
+		Format format = app.getSettings().COORDS_INPUT_FORMAT.get();
+		boolean useTwoDigitsLongtitude = app.getSettings().COORDS_INPUT_TWO_DIGITS_LONGTITUDE.get();
 		setupEditTextEx(R.id.lat_first_input_et, format.getFirstPartSymbolsCount(true, useTwoDigitsLongtitude), true);
 		setupEditTextEx(R.id.lon_first_input_et, format.getFirstPartSymbolsCount(false, useTwoDigitsLongtitude), false);
 
@@ -950,11 +947,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private boolean isOsmandKeyboardOn() {
-		return getMyApplication().getSettings().COORDS_INPUT_USE_OSMAND_KEYBOARD.get();
+		return app.getSettings().COORDS_INPUT_USE_OSMAND_KEYBOARD.get();
 	}
 
 	private void changeOsmandKeyboardSetting() {
-		OsmandPreference<Boolean> pref = getMyApplication().getSettings().COORDS_INPUT_USE_OSMAND_KEYBOARD;
+		OsmandPreference<Boolean> pref = app.getSettings().COORDS_INPUT_USE_OSMAND_KEYBOARD;
 		pref.set(!pref.get());
 	}
 
@@ -994,23 +991,17 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 			@Override
 			public void saveAsTrack() {
-				OsmandApplication app = getMyApplication();
-				if (app != null) {
-					if (!getGpx().hasWptPt()) {
-						Toast.makeText(app, getString(R.string.plan_route_no_markers_toast), Toast.LENGTH_SHORT).show();
-					} else {
-						showSaveDialog();
-					}
+				if (!getGpx().hasWptPt()) {
+					app.showShortToastMessage(R.string.plan_route_no_markers_toast);
+				} else {
+					showSaveDialog();
 				}
-
 			}
 		};
 	}
 
-	private SaveAsTrackBottomSheetDialogFragment.MarkerSaveAsTrackFragmentListener createSaveAsTrackFragmentListener() {
-		return new SaveAsTrackBottomSheetDialogFragment.MarkerSaveAsTrackFragmentListener() {
-
-			final OsmandApplication app = getMyApplication();
+	private MarkerSaveAsTrackFragmentListener createSaveAsTrackFragmentListener() {
+		return new MarkerSaveAsTrackFragmentListener() {
 
 			@Override
 			public void saveGpx(String fileName) {
@@ -1089,7 +1080,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				scrollToLastPoint();
 			}
 		} else {
-			setPaddingToRecyclerViewBottom(AndroidUtils.dpToPx(getMyApplication(), 72));
+			setPaddingToRecyclerViewBottom(AndroidUtils.dpToPx(app, 72));
 		}
 	}
 
@@ -1135,7 +1126,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	private void enterEditingMode(WptPt wptPt) {
 		selectedWpt = wptPt;
-		Format format = getMyApplication().getSettings().COORDS_INPUT_FORMAT.get();
+		Format format = app.getSettings().COORDS_INPUT_FORMAT.get();
 		double lat = Math.abs(wptPt.getLat());
 		double lon = Math.abs(wptPt.getLon());
 		if (format == Format.DD_MM_MMM || format == Format.DD_MM_MMMM) {
@@ -1237,11 +1228,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		String latitude = getStringCoordinate(true);
 		String longitude = getStringCoordinate(false);
 		if (latitude.isEmpty() && longitude.isEmpty()) {
-			Toast.makeText(getContext(), R.string.enter_lat_and_lon, Toast.LENGTH_SHORT).show();
+			app.showShortToastMessage(R.string.enter_lat_and_lon);
 		} else if (latitude.isEmpty()) {
-			Toast.makeText(getContext(), R.string.enter_lat, Toast.LENGTH_SHORT).show();
+			app.showShortToastMessage(R.string.enter_lat);
 		} else if (longitude.isEmpty()) {
-			Toast.makeText(getContext(), R.string.enter_lon, Toast.LENGTH_SHORT).show();
+			app.showShortToastMessage(R.string.enter_lon);
 		} else {
 			double lat = parseCoordinate(latitude);
 			double lon = parseCoordinate(longitude);
@@ -1281,7 +1272,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			secondPart = "0";
 		}
 
-		Format format = getMyApplication().getSettings().COORDS_INPUT_FORMAT.get();
+		Format format = app.getSettings().COORDS_INPUT_FORMAT.get();
 		StringBuilder res = new StringBuilder();
 		if ((latitude && !north) || (!latitude && !east)) {
 			res.append("-");
@@ -1331,7 +1322,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private Drawable getColoredIcon(@DrawableRes int resId, @ColorRes int colorResId) {
-		return getMyApplication().getUIUtilities().getIcon(resId, colorResId);
+		return app.getUIUtilities().getIcon(resId, colorResId);
 	}
 
 	private OsmandApplication getMyApplication() {
@@ -1371,7 +1362,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private void startLocationUpdate() {
-		OsmandApplication app = getMyApplication();
 		if (app != null && !locationUpdateStarted) {
 			locationUpdateStarted = true;
 			app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
@@ -1382,7 +1372,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	private void stopLocationUpdate() {
-		OsmandApplication app = getMyApplication();
 		if (app != null && locationUpdateStarted) {
 			locationUpdateStarted = false;
 			app.getLocationProvider().removeLocationListener(this);

@@ -1,5 +1,7 @@
 package net.osmand.plus.configmap.routes;
 
+import static net.osmand.osm.OsmRouteType.MTB;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,7 +33,7 @@ public class MtbRoutesFragment extends MapRoutesFragment {
 		View container = view.findViewById(R.id.preference_container);
 
 		TextView title = container.findViewById(R.id.title);
-		title.setText(R.string.rendering_attr_showMtbRoutes_name);
+		title.setText(routeLayersHelper.getRoutesTypeName(MTB.getRenderingPropertyAttr()));
 
 		int selectedColor = settings.getApplicationMode().getProfileColor(nightMode);
 		int disabledColor = AndroidUtils.getColorFromAttr(app, R.attr.default_icon_color);
@@ -42,11 +44,10 @@ public class MtbRoutesFragment extends MapRoutesFragment {
 	}
 
 	@Override
-	protected void setupCards(@NonNull View view) {
-		super.setupCards(view);
+	protected void createCards(@NonNull View view) {
+		super.createCards(view);
 
-		cardsContainer.addView(createDivider(cardsContainer, true, true));
 		addCard(new MtbRoutesCard(getMapActivity()));
-		cardsContainer.addView(createDivider(cardsContainer, false, true));
+		addRenderingClassCard(MTB.getRenderingPropertyAttr());
 	}
 }

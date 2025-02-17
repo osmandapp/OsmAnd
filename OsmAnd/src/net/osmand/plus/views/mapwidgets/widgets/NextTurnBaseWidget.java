@@ -85,7 +85,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	protected boolean verticalWidget;
 
 	public NextTurnBaseWidget(@NonNull MapActivity mapActivity, @Nullable String customId,
-			@NonNull WidgetType widgetType, @Nullable WidgetsPanel panel, boolean horizontalMini) {
+	                          @NonNull WidgetType widgetType, @Nullable WidgetsPanel panel, boolean horizontalMini) {
 		super(mapActivity, widgetType);
 		this.horizontalMini = horizontalMini;
 		this.customId = customId;
@@ -235,7 +235,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		if (Algorithms.isEmpty(streetName.exitRef)) {
 			AndroidUiHelper.updateVisibility(exitView, false);
 		} else {
-			String exit = app.getString(R.string.shared_string_exit);
+			String exit = app.getString(R.string.shared_string_road_exit);
 			String exitViewText = app.getString(R.string.ltr_or_rtl_combine_via_space, exit, streetName.exitRef);
 			exitView.setText(exitViewText);
 			AndroidUiHelper.updateVisibility(exitView, true);
@@ -328,11 +328,8 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			if (subText == null) {
 				subText = "";
 			}
-			if (widgetState.getWidgetSizePref().get() == WidgetSize.SMALL &&
-					(!Algorithms.isEmpty(streetView.getText()) || !Algorithms.isEmpty(exitView.getText()))) {
-				subText = subText + ",";
-			}
 			distanceSubView.setText(subText);
+			formatSubText();
 		} else {
 			setTextNoUpdateVisibility(text, subText);
 		}
@@ -391,13 +388,11 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		bg.setBackgroundResource(textState.widgetBackgroundId);
 	}
 
-	private int getVerticalExitOutTextSize(){
+	private int getVerticalExitOutTextSize() {
 		return switch (widgetState.getWidgetSizePref().get()) {
 			case SMALL -> EXIT_OUT_TEXT_SIZE_S;
-			case MEDIUM ->
-					isFullRow ? EXIT_OUT_TEXT_SIZE_M : EXIT_OUT_TEXT_SIZE_S;
-			case LARGE ->
-					isFullRow ? EXIT_OUT_TEXT_SIZE_L : EXIT_OUT_TEXT_SIZE_M;
+			case MEDIUM -> isFullRow ? EXIT_OUT_TEXT_SIZE_M : EXIT_OUT_TEXT_SIZE_S;
+			case LARGE -> isFullRow ? EXIT_OUT_TEXT_SIZE_L : EXIT_OUT_TEXT_SIZE_M;
 		};
 	}
 
@@ -485,7 +480,9 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			TurnType type = turnDrawable.getTurnType();
 			int turnImminent = turnDrawable.getTurnImminent();
 			boolean deviatedFromRoute = turnDrawable.isDeviatedFromRoute();
+
 			setupViews();
+
 			turnDrawable = new TurnDrawable(mapActivity, !verticalWidget && horizontalMini);
 			turnDrawable.setTurnType(type);
 			turnDrawable.setTurnImminent(turnImminent, deviatedFromRoute);
@@ -496,6 +493,8 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			copyTextView(distanceSubView, oldDistanceSubView);
 			copyTextView(streetView, oldStreetView);
 			copyTextView(exitView, oldExitView);
+
+			formatSubText();
 		} else {
 			ImageView oldImageView = imageView;
 			TextView oldTextView = textView;
@@ -503,7 +502,9 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			TextView oldSmallTextView = smallTextView;
 			TextView oldSmallTextViewShadow = smallTextViewShadow;
 			View oldEmptyBanner = emptyBanner;
+
 			setupViews();
+
 			imageView.setImageDrawable(oldImageView.getDrawable());
 			copyView(imageView, oldImageView);
 			copyTextView(textView, oldTextView);
@@ -514,6 +515,33 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		}
 		view.setOnClickListener(getOnClickListener());
 		view.setVisibility(oldContainer.getVisibility());
+	}
+
+	private void formatSubText() {
+		if (distanceSubView == null || Algorithms.isEmpty(distanceSubView.getText().toString())) {
+			return;
+		}
+
+		WidgetSize currentWidgetSize = widgetState.getWidgetSizePref().get();
+		String subText = distanceSubView.getText().toString();
+		String formattedSubText = null;
+		switch (currentWidgetSize) {
+			case SMALL -> {
+				boolean shouldShowComma = !Algorithms.isEmpty(streetView.getText()) || !Algorithms.isEmpty(exitView.getText());
+				if (shouldShowComma && !subText.endsWith(",")) {
+					formattedSubText = subText + ",";
+				}
+			}
+			case MEDIUM, LARGE -> {
+				if (subText.endsWith(",")) {
+					formattedSubText = subText.substring(0, subText.length() - 1);
+				}
+			}
+		}
+
+		if (formattedSubText != null) {
+			distanceSubView.setText(formattedSubText);
+		}
 	}
 
 	protected View.OnClickListener getOnClickListener() {

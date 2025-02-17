@@ -323,7 +323,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 			TracksSearchFilter filter = (TracksSearchFilter) adapter.getFilter();
 			if (smartFolder != null) {
 				app.getSmartFolderHelper().saveSmartFolder(smartFolder, filter.getCurrentFilters());
-				Toast.makeText(app, R.string.smart_folder_saved, Toast.LENGTH_SHORT).show();
+				app.showShortToastMessage(R.string.smart_folder_saved);
 				dismiss();
 			}
 		});

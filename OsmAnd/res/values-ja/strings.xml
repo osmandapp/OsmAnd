@@ -1144,7 +1144,6 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_buildings15zoom_name">ズーム15で建物表示</string>
     <string name="rendering_attr_moreDetailed_name">詳細を表示</string>
     <string name="rendering_attr_lessDetailed_name">詳細を省く</string>
-    <string name="rendering_attr_hideAccess_name">通行制限</string>
     <string name="rendering_attr_showAccess_name">通行制限と料金所を表示</string>
     <string name="rendering_attr_showSurfaceGrade_name">道路の品質を表示</string>
     <string name="rendering_attr_showSurfaces_name">路面を表示</string>
@@ -3837,9 +3836,6 @@ POIの更新は利用できません</string>
     <string name="hillshade_slope_contour_lines">陰影起伏図 / 勾配 / 等高線</string>
     <string name="open_place_reviews_plugin_description">"OpenPlaceReviewsプロジェクトに貢献しましょう。例えば、レストラン、ホテル、美術館のような公共の場所の写真、レビュー、リンクなどを投稿してください。
 \n貢献の方法については、私たちのウェブサイト%1$s  を参照してください。"</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">test.openplacereviews.orgを使用</string>
-    <string name="login_open_place_reviews">OpenPlaceReviewsにログイン</string>
     <string name="activity_type_water_name">水</string>
     <string name="activity_type_winter_name">冬</string>
     <string name="activity_type_snowmobile_name">スノーモービル</string>
@@ -3892,8 +3888,6 @@ POIの更新は利用できません</string>
     <string name="osm_edit_comment_note">OSMメモへのコメント</string>
     <string name="osm_login_descr">OAuth方式、またはOSMのユーザー名とパスワードを利用しての直接ログインも可能です。</string>
     <string name="shared_string_add_photo">写真の追加</string>
-    <string name="register_on_openplacereviews">OpenPlaceReviews.orgに登録</string>
-    <string name="register_on_openplacereviews_desc">写真はOpenPlaceReviews.orgオープンデータプロジェクトを介して提供されています。そのため写真をアップロードするためには前述のウェブサイトにログインする必要があります。</string>
     <string name="register_opr_create_new_account">新しいアカウントを作成</string>
     <string name="register_opr_have_account">私はすでにアカウントを持っています</string>
     <string name="shared_string_search_history">検索履歴</string>
@@ -3910,7 +3904,6 @@ POIの更新は利用できません</string>
     <string name="select_groups_for_import">インポートするグループを選択します。</string>
     <string name="select_items_for_import">インポートするアイテムを選択します。</string>
     <string name="add_to_mapillary">Mapillaryに追加</string>
-    <string name="add_to_opr">OpenPlaceReviewsに追加</string>
     <string name="add_photos_descr">OsmAndは、いくつかのソースからの写真を表示します:
 \nOpenPlaceReviewsはPOIの写真;
 \nMapillaryは投稿されたストリート画像;
@@ -4344,7 +4337,7 @@ POIの更新は利用できません</string>
     <string name="storage_copied_files_size">%1$s個のファイル(%2$s)を処理しました</string>
     <string name="routeInfo_tracktype_description">ルートまたは経路の線でその路面構成に応じて色付けします。通常、道路網がほとんど舗装されていない場合に適用されます。</string>
     <string name="routeInfo_smoothness_description">特に表面の規則性/平坦性の観点での、車輪の付いたあらゆる乗り物においてそれぞれの通行が認められる歩道および車道の操縦性分類です。</string>
-    <string name="not_enough_contributions_descr">無制限の%1$s毎の地図更新を有効にするには、過去2か月間に最低%2$sの変更が必要です。</string>
+    <string name="not_enough_contributions_descr">無制限の%2$s毎の地図更新を有効にするには、過去2か月間に最低%1$sの変更が必要です。</string>
     <string name="setting_supported_by_style">この設定は、\'%1$s\'というマップスタイル時に提供されます</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">ノードネットワークのタイプ(国際、地域、ローカル)に応じてルートに色付けします。</string>
     <string name="shared_string_show_slope">勾配を表示</string>

@@ -355,7 +355,7 @@ public class DownloadIndexesThread {
 	private boolean checkRunning(boolean silent) {
 		if (getCurrentRunningTask() != null) {
 			if (!silent) {
-				Toast.makeText(app, R.string.wait_current_task_finished, Toast.LENGTH_SHORT).show();
+				app.showShortToastMessage(R.string.wait_current_task_finished);
 			}
 			return true;
 		}
@@ -500,7 +500,7 @@ public class DownloadIndexesThread {
 		@Override
 		protected void onPostExecute(String result) {
 			if (result != null && result.length() > 0) {
-				Toast.makeText(ctx, result, Toast.LENGTH_LONG).show();
+				app.showToastMessage(result);
 			}
 			if (uiActivity instanceof Activity) {
 				View mainView = ((Activity) uiActivity).findViewById(R.id.MainLayout);

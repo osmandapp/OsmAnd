@@ -1,14 +1,6 @@
 package net.osmand.plus.download.ui;
 
-import static net.osmand.plus.download.DownloadActivityType.DEPTH_CONTOUR_FILE;
-import static net.osmand.plus.download.DownloadActivityType.DEPTH_MAP_FILE;
-import static net.osmand.plus.download.DownloadActivityType.GEOTIFF_FILE;
-import static net.osmand.plus.download.DownloadActivityType.HILLSHADE_FILE;
-import static net.osmand.plus.download.DownloadActivityType.SLOPE_FILE;
-import static net.osmand.plus.download.DownloadActivityType.SRTM_COUNTRY_FILE;
-import static net.osmand.plus.download.DownloadActivityType.TRAVEL_FILE;
-import static net.osmand.plus.download.DownloadActivityType.WEATHER_FORECAST;
-import static net.osmand.plus.download.DownloadActivityType.WIKIPEDIA_FILE;
+import static net.osmand.plus.download.DownloadActivityType.*;
 import static net.osmand.plus.download.DownloadResources.WORLD_SEAMARKS_KEY;
 import static net.osmand.plus.download.local.OperationType.DELETE_OPERATION;
 import static net.osmand.plus.download.ui.ItemViewHolder.RightButtonAction.ASK_FOR_SRTM_PLUGIN_ENABLE;
@@ -45,15 +37,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
-import net.osmand.plus.download.CityItem;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.download.DownloadIndexesThread;
-import net.osmand.plus.download.DownloadItem;
-import net.osmand.plus.download.DownloadResourceGroup;
-import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.MultipleDownloadItem;
-import net.osmand.plus.download.SelectIndexesHelper;
+import net.osmand.plus.download.*;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.LocalItemUtils;
@@ -71,6 +55,7 @@ import java.util.List;
 
 public class ItemViewHolder {
 
+	protected final OsmandApplication app;
 	protected final TextView tvName;
 	protected final TextView tvDesc;
 	protected final ImageView ivLeft;
@@ -111,8 +96,9 @@ public class ItemViewHolder {
 	}
 
 
-	public ItemViewHolder(View view, DownloadActivity context) {
+	public ItemViewHolder(@NonNull View view, @NonNull DownloadActivity context) {
 		this.context = context;
+		this.app = context.getMyApplication();
 		dateFormat = android.text.format.DateFormat.getMediumDateFormat(context);
 		pbProgress = view.findViewById(R.id.progressBar);
 		btnRight = view.findViewById(R.id.rightButton);
@@ -162,7 +148,6 @@ public class ItemViewHolder {
 	}
 
 	private void initAppStatusVariables() {
-		OsmandApplication app = context.getMyApplication();
 		srtmDisabled = context.isSrtmDisabled();
 		nauticalPluginDisabled = context.isNauticalPluginDisabled();
 		srtmNeedsInstallation = context.isSrtmNeedsInstallation();
@@ -176,7 +161,6 @@ public class ItemViewHolder {
 
 	public void bindDownloadItem(DownloadItem downloadItem, String cityName) {
 		initAppStatusVariables();
-		OsmandApplication app = context.getMyApplication();
 		boolean isDownloading = downloadItem.isDownloading(context.getDownloadThread());
 		float progress = -1;
 		DownloadIndexesThread downloadThread = context.getDownloadThread();
@@ -196,7 +180,8 @@ public class ItemViewHolder {
 		ViewCompat.setAccessibilityDelegate(ivBtnRight, new AccessibilityAssistant(context) {
 
 			@Override
-			public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfoCompat info) {
+			public void onInitializeAccessibilityNodeInfo(View host,
+					AccessibilityNodeInfoCompat info) {
 				super.onInitializeAccessibilityNodeInfo(host, info);
 				info.setContentDescription(context.getString(R.string.shared_string_download) + tvName.getText());
 				info.addAction(new AccessibilityNodeInfoCompat.AccessibilityActionCompat(
@@ -392,14 +377,14 @@ public class ItemViewHolder {
 				action = RightButtonAction.ASK_FOR_SEAMARKS_PLUGIN;
 			} else if ((type == SRTM_COUNTRY_FILE || type == HILLSHADE_FILE || type == SLOPE_FILE || type == GEOTIFF_FILE) && srtmDisabled) {
 				action = srtmNeedsInstallation ? ASK_FOR_SRTM_PLUGIN_PURCHASE : ASK_FOR_SRTM_PLUGIN_ENABLE;
-			} else if ((type == WIKIPEDIA_FILE || type == TRAVEL_FILE) && !Version.isPaidVersion(context.getMyApplication())) {
+			} else if ((type == WIKIPEDIA_FILE || type == TRAVEL_FILE) && !Version.isPaidVersion(app)) {
 				action = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
 			} else if ((type == DEPTH_CONTOUR_FILE || type == DEPTH_MAP_FILE) && !depthContoursPurchased) {
 				action = RightButtonAction.ASK_FOR_DEPTH_CONTOURS_PURCHASE;
 			} else if (item.getType() == WEATHER_FORECAST && !weatherAvailable) {
 				action = RightButtonAction.ASK_FOR_WEATHER_PURCHASE;
 			} else if ((item.getType() == WIKIPEDIA_FILE || item.getType() == TRAVEL_FILE)
-					&& !Version.isPaidVersion(context.getMyApplication())) {
+					&& !Version.isPaidVersion(app)) {
 				action = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
 			} else if ((item.getType() == DEPTH_CONTOUR_FILE || item.getType() == DEPTH_MAP_FILE) && !depthContoursPurchased) {
 				action = RightButtonAction.ASK_FOR_DEPTH_CONTOURS_PURCHASE;
@@ -415,11 +400,11 @@ public class ItemViewHolder {
 				public void onClick(View v) {
 					switch (clickAction) {
 						case ASK_FOR_FULL_VERSION_PURCHASE:
-							context.getMyApplication().logEvent("in_app_purchase_show_from_wiki_context_menu");
+							app.logEvent("in_app_purchase_show_from_wiki_context_menu");
 							ChoosePlanFragment.showInstance(context, OsmAndFeature.WIKIPEDIA);
 							break;
 						case ASK_FOR_WEATHER_PURCHASE:
-							context.getMyApplication().logEvent("in_app_purchase_show_from_weather_context_menu");
+							app.logEvent("in_app_purchase_show_from_weather_context_menu");
 							ChoosePlanFragment.showInstance(context, OsmAndFeature.WEATHER);
 							break;
 						case ASK_FOR_DEPTH_CONTOURS_PURCHASE:
@@ -427,16 +412,14 @@ public class ItemViewHolder {
 							break;
 						case ASK_FOR_SEAMARKS_PLUGIN:
 							showPluginsScreen();
-							Toast.makeText(context.getApplicationContext(),
-									context.getString(R.string.activate_seamarks_plugin), Toast.LENGTH_SHORT).show();
+							app.showShortToastMessage(R.string.activate_seamarks_plugin);
 							break;
 						case ASK_FOR_SRTM_PLUGIN_PURCHASE:
 							ChoosePlanFragment.showInstance(context, OsmAndFeature.TERRAIN);
 							break;
 						case ASK_FOR_SRTM_PLUGIN_ENABLE:
 							showPluginsScreen();
-							Toast.makeText(context, context.getString(R.string.activate_srtm_plugin),
-									Toast.LENGTH_SHORT).show();
+							app.showShortToastMessage(R.string.activate_srtm_plugin);
 							break;
 						case DOWNLOAD:
 							break;
@@ -469,9 +452,8 @@ public class ItemViewHolder {
 	}
 
 	protected void showContextMenu(View v,
-	                               DownloadItem downloadItem,
-	                               DownloadResourceGroup parentOptional) {
-		OsmandApplication app = context.getMyApplication();
+			DownloadItem downloadItem,
+			DownloadResourceGroup parentOptional) {
 		PopupMenu optionsMenu = new PopupMenu(context, v);
 
 		OnMenuItemClickListener removeItemClickListener = null;
@@ -505,7 +487,7 @@ public class ItemViewHolder {
 		if (parentOptional != null && item instanceof IndexItem) {
 			IndexItem indexItem = (IndexItem) item;
 			WorldRegion region = DownloadResourceGroup.getRegion(parentOptional);
-			context.setDownloadItem(region, indexItem.getTargetFile(context.getMyApplication()).getAbsolutePath());
+			context.setDownloadItem(region, indexItem.getTargetFile(app).getAbsolutePath());
 		}
 		if (item.getType() == DownloadActivityType.ROADS_FILE && parentOptional != null) {
 			for (IndexItem ii : parentOptional.getIndividualResources()) {
@@ -548,8 +530,8 @@ public class ItemViewHolder {
 		});
 	}
 
-	private void confirmRemove(@NonNull DownloadItem downloadItem, @NonNull List<File> downloadedFiles) {
-		OsmandApplication app = context.getMyApplication();
+	private void confirmRemove(@NonNull DownloadItem downloadItem,
+			@NonNull List<File> downloadedFiles) {
 		AlertDialog.Builder confirm = new AlertDialog.Builder(context);
 
 		String message;
@@ -570,7 +552,6 @@ public class ItemViewHolder {
 	}
 
 	private void remove(@NonNull List<File> filesToDelete) {
-		OsmandApplication app = context.getMyApplication();
 		LocalItem[] params = new LocalItem[filesToDelete.size()];
 		for (int i = 0; i < filesToDelete.size(); i++) {
 			File file = filesToDelete.get(i);
@@ -584,10 +565,10 @@ public class ItemViewHolder {
 	}
 
 	private Drawable getThemedIcon(DownloadActivity context, int resourceId) {
-		return context.getMyApplication().getUIUtilities().getThemedIcon(resourceId);
+		return app.getUIUtilities().getThemedIcon(resourceId);
 	}
 
 	private Drawable getContentIcon(DownloadActivity context, int resourceId, int color) {
-		return context.getMyApplication().getUIUtilities().getPaintedIcon(resourceId, color);
+		return app.getUIUtilities().getPaintedIcon(resourceId, color);
 	}
 }

@@ -38,6 +38,14 @@ public class ObfConstants {
 		return "";
 	}
 
+	public static long getOsmIdFromPrefixedRouteId(String routeId) {
+		long osmId = 0;
+		if (routeId.startsWith(Amenity.ROUTE_ID_OSM_PREFIX)) {
+			osmId = Algorithms.parseLongSilently(routeId.replace(Amenity.ROUTE_ID_OSM_PREFIX, ""), 0);
+		}
+		return osmId;
+	}
+
 	public static long getOsmObjectId(MapObject object) {
 		long originalId = -1;
 		Long id = object.getId();

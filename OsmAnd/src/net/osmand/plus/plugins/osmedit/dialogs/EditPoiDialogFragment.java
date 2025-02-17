@@ -517,7 +517,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	                                OpenstreetmapUtil openstreetmapUtil,
 	                                @Nullable Set<String> changedTags) {
 		if (info == null && Action.CREATE != action && openstreetmapUtil instanceof OpenstreetmapRemoteUtil) {
-			Toast.makeText(activity, activity.getResources().getString(R.string.poi_error_info_not_loaded), Toast.LENGTH_LONG).show();
+			AndroidUtils.getApp(activity).showToastMessage(R.string.poi_error_info_not_loaded);
 			return;
 		}
 		new AsyncTask<Void, Void, Entity>() {
@@ -671,9 +671,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 							createInstance(entityToEdit, false);
 					fragment.show(activity.getSupportFragmentManager(), TAG);
 				} else {
-					Toast.makeText(activity,
-							activity.getString(R.string.poi_cannot_be_found),
-							Toast.LENGTH_LONG).show();
+					app.showToastMessage(R.string.poi_cannot_be_found);
 				}
 			}
 
@@ -753,10 +751,11 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		}
 
 		void deletePoiWithDialog(Entity entity) {
-			boolean nightMode = ((OsmandApplication) activity.getApplication()).getDaynightHelper().isNightModeForMapControls();
+			OsmandApplication app  = AndroidUtils.getApp(activity);
+			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 			Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 			if (entity == null) {
-				Toast.makeText(themedContext, activity.getResources().getString(R.string.poi_cannot_be_found), Toast.LENGTH_LONG).show();
+				app.showToastMessage(R.string.poi_cannot_be_found);
 				return;
 			}
 			AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
@@ -811,8 +810,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 									mapActivity.getMapLayers().getContextMenuLayer().updateContextMenu();
 								}
 							} else {
-								Toast.makeText(activity, R.string.poi_remove_success, Toast.LENGTH_LONG)
-										.show();
+								AndroidUtils.getApp(activity).showToastMessage(R.string.poi_remove_success);
 							}
 							if (activity instanceof MapActivity) {
 								((MapActivity) activity).getMapView().refreshMap(true);

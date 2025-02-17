@@ -56,7 +56,12 @@ public class ClickableWay {
 
     @NonNull
     public String getWayName() {
-        return Algorithms.isEmpty(name) ? Long.toString(osmId) : name;
+        if (!Algorithms.isEmpty(name)) {
+            return name;
+        } else {
+            String altName = gpxFile.getExtensionsToRead().get("ref");
+            return altName != null ? altName : Long.toString(osmId);
+        }
     }
 
     @Override

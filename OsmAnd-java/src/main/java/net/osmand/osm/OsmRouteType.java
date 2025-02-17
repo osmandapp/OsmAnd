@@ -1,6 +1,6 @@
 package net.osmand.osm;
 
-import static net.osmand.osm.OsmRouteType.RenderingPropertyAttr.*;
+import static net.osmand.osm.RenderingPropertyAttr.*;
 
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -50,9 +50,8 @@ public class OsmRouteType {
 	public static final OsmRouteType FERRY = createType("ferry").reg();
 	public static final OsmRouteType FOOT = createType("foot").reg();
 	public static final OsmRouteType LIGHT_RAIL = createType("light_rail").reg();
-	public static final OsmRouteType PISTE = createType("piste").reg();
 	public static final OsmRouteType RAILWAY = createType("railway").reg();
-	public static final OsmRouteType SKI = createType("ski").renderingPropertyAttr(PISTE_ROUTES).reg();
+	public static final OsmRouteType SKI = createType("piste").renderingPropertyAttr(PISTE_ROUTES).reg();
 	public static final OsmRouteType ALPINE = createType("alpine").renderingPropertyAttr(ALPINE_HIKING).reg();
 	public static final OsmRouteType FITNESS = createType("fitness").renderingPropertyAttr(FITNESS_TRAILS).reg();
 	public static final OsmRouteType INLINE_SKATES = createType("inline_skates").reg();
@@ -62,6 +61,7 @@ public class OsmRouteType {
 	public static final OsmRouteType TRAM = createType("tram").reg();
 	public static final OsmRouteType TROLLEYBUS = createType("trolleybus").reg();
 	public static final OsmRouteType CLIMBING = createType("climbing").renderingPropertyAttr(CLIMBING_ROUTES).reg();
+	public static final OsmRouteType UNKNOWN = createType("unknown").reg();
 
 	// less specific bottom order
 	private final String name;
@@ -157,7 +157,8 @@ public class OsmRouteType {
 			case "mtb ride":
 			case "disused:mtb":
 			case "abandoned:mtb":
-				return MOUNTAINBIKE;
+			case "mtb:scale":
+				return MTB;
 			case "hiking":
 			case "route=hiking":
 			case "mountain hiking":
@@ -306,8 +307,9 @@ public class OsmRouteType {
 			case "лыжня":
 			case "nordic":
 			case "piste":
-			case "piste:type=nordic":
-				return WINTER;
+			case "piste:type":
+			case "piste:difficulty":
+				return SKI;
 			case "snowmobile=designated":
 			case "snowmobile=permissive":
 			case "snowmobile=yes":
@@ -323,6 +325,9 @@ public class OsmRouteType {
 				return INLINE_SKATES;
 			case "fitness_trail":
 				return FITNESS;
+			case "dirtbike":
+			case "dirtbike:scale":
+				return DIRTBIKE;
 		}
 		return null;
 	}
@@ -438,8 +443,13 @@ public class OsmRouteType {
 			return this;
 		}
 
-		public RouteActivityTypeBuilder renderingPropertyAttr(String renderingPropertyAttr) {
-			osmRouteType.renderingPropertyAttr = renderingPropertyAttr;
+		public RouteActivityTypeBuilder renderingPropertyAttr(String propertyAttr) {
+			osmRouteType.renderingPropertyAttr = propertyAttr;
+			return this;
+		}
+
+		public RouteActivityTypeBuilder renderingPropertyAttr(RenderingPropertyAttr propertyAttr) {
+			renderingPropertyAttr(propertyAttr.getAttrName());
 			return this;
 		}
 
@@ -447,19 +457,5 @@ public class OsmRouteType {
 			values.add(osmRouteType);
 			return osmRouteType;
 		}
-	}
-
-	protected static class RenderingPropertyAttr {
-		static final String HIKING_ROUTES = "hikingRoutesOSMC";
-		static final String CYCLE_ROUTES = "showCycleRoutes";
-		static final String MTB_ROUTES = "showMtbRoutes";
-		static final String ALPINE_HIKING = "alpineHiking";
-		static final String HORSE_ROUTES = "horseRoutes";
-		static final String PISTE_ROUTES = "pisteRoutes";
-		static final String WHITE_WATER_SPORTS = "whiteWaterSports";
-		static final String RUNNING_ROUTES = "showRunningRoutes";
-		static final String FITNESS_TRAILS = "showFitnessTrails";
-		static final String DIRTBIKE_ROUTES = "showDirtbikeTrails";
-		static final String CLIMBING_ROUTES = "showClimbingRoutes";
 	}
 }

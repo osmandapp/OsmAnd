@@ -43,8 +43,11 @@ import net.osmand.plus.mapcontextmenu.controllers.*;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.nearbyplaces.NearbyPlacesHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.aistracker.AisObject;
+import net.osmand.plus.plugins.aistracker.AisObjectMenuController;
 import net.osmand.plus.plugins.audionotes.AudioVideoNoteMenuController;
 import net.osmand.plus.plugins.audionotes.Recording;
 import net.osmand.plus.plugins.mapillary.MapillaryImage;
@@ -146,7 +149,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return builder.isTransliterateNames();
 	}
 
-	public void setMapContextMenu(MapContextMenu mapContextMenu) {
+	public void setMapContextMenu(@Nullable MapContextMenu mapContextMenu) {
 		this.mapContextMenu = mapContextMenu;
 		builder.setMapContextMenu(mapContextMenu);
 	}
@@ -186,6 +189,11 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				}
 			} else if (object instanceof SearchHistoryHelper.HistoryEntry) {
 				menuController = new HistoryMenuController(mapActivity, pointDescription, (SearchHistoryHelper.HistoryEntry) object);
+			} else if (object instanceof NearbyPlacePoint point) {
+				Amenity amenity = NearbyPlacesHelper.INSTANCE.getAmenity(new LatLon(point.getLatitude(), point.getLongitude()), point.getId());
+				if (amenity != null) {
+					menuController = new AmenityMenuController(mapActivity, pointDescription, amenity);
+				}
 			} else if (object instanceof TargetPoint) {
 				menuController = new TargetPointMenuController(mapActivity, pointDescription, (TargetPoint) object);
 			} else if (object instanceof Recording) {
@@ -218,6 +226,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				menuController = new RenderedObjectMenuController(mapActivity, pointDescription, (RenderedObject) object);
 			} else if (object instanceof MapillaryImage) {
 				menuController = new MapillaryMenuController(mapActivity, pointDescription, (MapillaryImage) object);
+			} else if (object instanceof AisObject) {
+				menuController = new AisObjectMenuController(mapActivity, pointDescription, (AisObject) object);
 			} else if (object instanceof SelectedGpxPoint) {
 				menuController = new SelectedGpxMenuController(mapActivity, pointDescription, (SelectedGpxPoint) object);
 			} else if (object instanceof ClickableWay) {

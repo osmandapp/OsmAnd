@@ -376,7 +376,6 @@
     <string name="rendering_attr_buildings15zoom_name">Edifícios em zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">Mais detalhes</string>
     <string name="rendering_attr_lessDetailed_name">Menos detalhes</string>
-    <string name="rendering_attr_hideAccess_name">Restrições de acesso</string>
     <string name="rendering_attr_showAccess_name">Mostrar restrições de acesso</string>
     <string name="rendering_attr_showSurfaceGrade_name">Mostrar qualidade da via</string>
     <string name="rendering_attr_showSurfaces_name">Mostrar superfície da via</string>
@@ -3779,14 +3778,12 @@
     <string name="shared_string_add_photo">Adicionar foto</string>
     <string name="register_on_openplacereviews">Cadastre-se em
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">As fotos são fornecidas pelo projeto de dados abertos OpenPlaceReviews.org. Para enviar suas fotos, você precisa se inscrever em seu site.</string>
     <string name="register_opr_create_new_account">Criar nova conta</string>
     <string name="register_opr_have_account">Eu já tenho uma conta</string>
     <string name="shared_string_search_history">Histórico de busca</string>
     <string name="app_mode_kayak">Caiaque</string>
     <string name="app_mode_motorboat">Lancha</string>
     <string name="add_to_mapillary">Adicionar ao Mapillary</string>
-    <string name="add_to_opr">Adicionar ao OpenPlaceReviews</string>
     <string name="add_photos_descr">OsmAnd mostra fotos de várias fontes:
 \nOpenPlaceReviews - fotos de POI;
 \nMapillary - imagens de nível da rua;
@@ -3892,9 +3889,6 @@
 \n
 \nVeja as instruções sobre como contribuir em %1$s.</string>
     <string name="activity_type_motorbike_name">Motocicleta</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Usar test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Entrar para OpenPlaceReviews</string>
     <string name="activity_type_water_name">Água</string>
     <string name="activity_type_winter_name">Inverno</string>
     <string name="activity_type_snowmobile_name">Moto de neve</string>
@@ -5986,4 +5980,33 @@
     <string name="obd_calculated_engine_load_desc">Mostra a carga do motor calculada pelo veículo com base no sensor</string>
     <string name="obd_engine_oil_temperature">Temperatura do óleo do motor</string>
     <string name="rendering_attr_showClimbingRoutes_name">Rotas de escalada</string>
+    <string name="shared_string_avg_altitude">Altitude méd.</string>
+    <string name="shared_string_avg_speed">Velocidade mínima</string>
+    <string name="recently_visited">Visitados recentemente</string>
+    <string name="map_widget_route_information_desc">Exibe o tempo estimado de chegada, o tempo restante de viagem e a distância da rota de navegação atual.</string>
+    <string name="map_widget_route_information">Informações da rota</string>
+    <string name="popular_places_nearby">Locais populares nas proximidades</string>
+    <string name="display_distance_to_first_intermediate">Mostrar detalhes da rota para a próxima parada</string>
+    <string name="display_distance_to_first_intermediate_summary">Mostra primeiro o tempo e a distância para a próxima parada. Desative para mostrar sempre os detalhes do destino.</string>
+    <string name="shared_string_default_view">Visualização padrão</string>
+    <string name="shared_string_length">Comprimento</string>
+    <string name="ais_object_lost_timeout">Tempo limite para visibilidade quando o objeto é perdido</string>
+    <string name="rendering_attr_showClimbingRoutes_description">Mostrar rotas de escalada</string>
+    <string name="default_buttons_size_original_description">Cada botão manteria seu próprio tamanho.</string>
+    <string name="calculating_indication_message">Calculando…</string>
+    <string name="calculate_size">Calcular tamanho</string>
+    <string name="ais_port_nmea_local_description">Definir a porta UPD em que o OsmAnd recebe dados NMEA</string>
+    <string name="ais_ship_lost_timeout">Tempo limite para a visibilidade do navio quando nenhum sinal é recebido</string>
+    <string name="ais_address_settings">Configurações de endereço IP</string>
+    <string name="ais_address_settings_description">Escolha o protocolo NMEA (UDP/TCP) e defina os endereços</string>
+    <string name="ais_nmea_protocol">Protocolo para recepção de dados NMEA</string>
+    <string name="ais_nmea_protocol_description">Escolha o protocolo para a recepção de dados NMEA</string>
+    <string name="ais_address_nmea_server">Endereço IP da fonte de dados NMEA</string>
+    <string name="ais_address_nmea_server_description">Definir o endereço IP da fonte de dados NMEA (se for usado TCP)</string>
+    <string name="ais_port_nmea_server">Porta TCP da fonte de dados NMEA</string>
+    <string name="hmd_promo_description">Acesso gratuito a recursos, incluindo downloads ilimitados de mapas, relevo 3D etc. por %1$s mês</string>
+    <string name="shared_string_road_exit">Sair</string>
+    <string name="shared_string_engine">Motor</string>
+    <string name="vehicle_metrics_recording_description">Selecione os parâmetros que serão registrados no arquivo GPX.</string>
+    <string name="current_temperature">Temperatura atual</string>
 </resources>

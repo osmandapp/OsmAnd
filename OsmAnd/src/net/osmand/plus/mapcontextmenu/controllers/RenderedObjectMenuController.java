@@ -125,6 +125,10 @@ public class RenderedObjectMenuController extends MenuController {
 				otherPt = mapPoiTypes.getPoiTypeByKey(e.getKey());
 			}
 			pt = mapPoiTypes.getPoiTypeByKey(e.getKey() + "_" + e.getValue());
+			if (pt == null && e.getKey().startsWith("osmand_")) {
+				String key = e.getKey().replace("osmand_", "");
+				pt = mapPoiTypes.getPoiTypeByKey(key + "_" + e.getValue());
+			}
 			if (pt != null) {
 				break;
 			}

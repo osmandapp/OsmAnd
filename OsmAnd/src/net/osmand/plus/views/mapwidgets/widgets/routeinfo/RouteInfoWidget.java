@@ -55,8 +55,10 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	private TextState textState;
 	private final RouteInfoCalculator calculator;
 	private List<DestinationInfo> cachedRouteInfo;
+	private RouteInfoDisplayMode cachedDisplayMode;
 	private int cachedContentLayoutId;
 	private Integer cachedMetricSystem;
+	private boolean forceUpdate = false;
 
 	// views
 	private View buttonTappableArea;
@@ -169,10 +171,10 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 
 	@Override
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
-		updateInfoInternal(false);
+		updateInfoInternal();
 	}
 
-	private void updateInfoInternal(boolean forceUpdate) {
+	private void updateInfoInternal() {
 		if (cachedContentLayoutId != getContentLayoutId()) {
 			// Recreating the widget is necessary because small widget size uses
 			// different layouts depending on the number of route points.
@@ -182,21 +184,21 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		boolean shouldHideTopWidgets = mapActivity.getWidgetsVisibilityHelper().shouldHideVerticalWidgets();
 		boolean typeAllowed = widgetType != null && widgetType.isAllowed();
 		if (typeAllowed && !shouldHideTopWidgets) {
-			updateRouteInformation(forceUpdate);
+			updateRouteInformation();
 		} else {
 			updateVisibility(false);
 		}
 	}
 
-	private void updateRouteInformation(boolean forceUpdate) {
+	private void updateRouteInformation() {
 		List<DestinationInfo> calculatedRouteInfo = calculator.calculateRouteInformation();
 		if (Algorithms.isEmpty(calculatedRouteInfo)) {
 			updateVisibility(false);
 			return;
 		}
-		updateVisibility(true);
+		boolean visibilityChanged = updateVisibility(true);
 
-		if (!forceUpdate && !isUpdateNeeded(calculatedRouteInfo)) {
+		if (!forceUpdate && !visibilityChanged && !isUpdateNeeded(calculatedRouteInfo)) {
 			return;
 		}
 		cachedRouteInfo = calculatedRouteInfo;
@@ -214,6 +216,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 				updateSecondaryBlock(cachedRouteInfo.get(1), orderedDisplayModes);
 			}
 		}
+		forceUpdate = false;
 	}
 
 	private void updatePrimaryBlock(@NonNull DestinationInfo destinationInfo,
@@ -244,10 +247,15 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	}
 
 	private boolean isUpdateNeeded(@NonNull List<DestinationInfo> routeInfo) {
-		int metricSystem = app.getSettings().METRIC_SYSTEM.get().ordinal();
+		int metricSystem = settings.METRIC_SYSTEM.get().ordinal();
 		boolean metricSystemChanged = cachedMetricSystem == null || cachedMetricSystem != metricSystem;
 		cachedMetricSystem = metricSystem;
 		if (metricSystemChanged) {
+			return true;
+		}
+		RouteInfoDisplayMode displayMode = widgetState.getDisplayMode();
+		if (cachedDisplayMode != displayMode) {
+			cachedDisplayMode = displayMode;
 			return true;
 		}
 		if (Algorithms.isEmpty(cachedRouteInfo) || isDataChanged(cachedRouteInfo.get(0), routeInfo.get(0))) {
@@ -295,8 +303,9 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 
 	@Override
 	public void recreateView() {
+		forceUpdate = true;
 		setupViews();
-		updateInfoInternal(true);
+		updateInfoInternal();
 	}
 
 	private boolean isSecondaryDataAvailable() {
@@ -323,11 +332,9 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	}
 
 	@NonNull
-	public static String formatDuration(@NonNull Context ctx, long timeLeft) {
-		long diffInMinutes = TimeUnit.MINUTES.convert(timeLeft, TimeUnit.MILLISECONDS);
-		String hour = ctx.getString(R.string.int_hour);
-		String formattedDuration = Algorithms.formatMinutesDuration((int) diffInMinutes, true);
-		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, formattedDuration, hour);
+	public static String formatDuration(@NonNull OsmandApplication app, long timeLeft) {
+		long diffInMinutes = TimeUnit.SECONDS.convert(timeLeft, TimeUnit.MILLISECONDS);
+		return OsmAndFormatter.getFormattedDuration(diffInMinutes, app);
 	}
 
 	@NonNull

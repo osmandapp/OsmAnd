@@ -94,6 +94,7 @@ import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
+import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.shared.gpx.ColoringPurpose;
 import net.osmand.shared.obd.OBDDataComputer;
@@ -142,6 +143,7 @@ public class OsmandSettings {
 	private final Map<String, CommonPreference<String>> customRendersProps = new LinkedHashMap<>();
 	private final Map<String, CommonPreference<Boolean>> customBooleanRoutingProps = new LinkedHashMap<>();
 	private final Map<String, CommonPreference<Boolean>> customBooleanRendersProps = new LinkedHashMap<>();
+	private final Map<String, CommonPreference<Boolean>> customBooleanRenderClassProps = new LinkedHashMap<>();
 
 	private final ImpassableRoadsStorage impassableRoadsStorage = new ImpassableRoadsStorage(this);
 	private final IntermediatePointsStorage intermediatePointsStorage = new IntermediatePointsStorage(this);
@@ -1368,6 +1370,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_POI_LABEL = new BooleanPreference(this, "show_poi_label", false).makeProfile();
 
 	public final OsmandPreference<Boolean> ONLINE_PHOTOS_ROW_COLLAPSED = new BooleanPreference(this, "online_photos_menu_collapsed", true).makeGlobal().makeShared();
+	public final OsmandPreference<Boolean> EXPLORE_NEARBY_ITEMS_ROW_COLLAPSED = new BooleanPreference(this, "online_photos_menu_collapsed", true).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> WEBGL_SUPPORTED = new BooleanPreference(this, "webgl_supported", true).makeGlobal();
 
 	public final OsmandPreference<String> PREFERRED_LOCALE = new StringPreference(this, "preferred_locale", "").makeGlobal().makeShared();
@@ -1623,7 +1626,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_FAVORITES = new BooleanPreference(this, "announce_nearby_favorites", false).makeProfile().cache();
 
-	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_POI = new BooleanPreference(this, "announce_nearby_poi", false).makeProfile().cache();
+	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_POI = new BooleanPreference(this, "announce_nearby_poi", true).makeProfile().cache();
 
 	public final OsmandPreference<Boolean> GPX_ROUTE_CALC_OSMAND_PARTS = new BooleanPreference(this, "gpx_routing_calculate_osmand_route", true).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> GPX_CALCULATE_RTEPT = new BooleanPreference(this, "gpx_routing_calculate_rtept", true).makeGlobal().makeShared().cache();
@@ -3041,9 +3044,11 @@ public class OsmandSettings {
 		}
 	}
 
-	@Nullable
-	public String getRenderPropertyValue(@NonNull String attrName) {
-		return getCustomRenderProperty(attrName).get();
+	@NonNull
+	public String getRenderPropertyValue(@NonNull RenderingRuleProperty property) {
+		CommonPreference<String> preference = getCustomRenderProperty(property.getAttrName());
+		String value = preference.get();
+		return property.containsValue(value) ? value : preference.getDefaultValue();
 	}
 
 	@NonNull
@@ -3107,6 +3112,16 @@ public class OsmandSettings {
 			customBooleanRoutingProps.put(attrName, new BooleanStringPreference(this, id, defaultValue).makeProfile());
 		}
 		return customBooleanRoutingProps.get(attrName);
+	}
+
+	@NonNull
+	public CommonPreference<Boolean> getСustomBooleanRenderClassProperty(@NonNull String name, boolean defaultValue) {
+		if (!customBooleanRenderClassProps.containsKey(name)) {
+			CommonPreference<Boolean> preference = new BooleanPreference(this, name, defaultValue).makeProfile();
+			customBooleanRenderClassProps.put(name, preference);
+			return preference;
+		}
+		return customBooleanRenderClassProps.get(name);
 	}
 
 	public final OsmandPreference<Boolean> SHOW_TRAVEL = new BooleanPreference(this, "show_travel_routes", false).makeProfile().cache();
@@ -3305,6 +3320,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> TRIPLTEK_PROMO_SHOWED = new BooleanPreference(this, "tripltek_promo_showed", false).makeGlobal().makeShared();
 	public final OsmandPreference<Boolean> HUGEROCK_PROMO_SHOWED = new BooleanPreference(this, "hugerock_promo_showed", false).makeGlobal().makeShared();
+	public final OsmandPreference<Boolean> HMD_PROMO_SHOWED = new BooleanPreference(this, "hmd_promo_showed", false).makeGlobal().makeShared();
 	public final CommonPreference<Integer> CONTEXT_GALLERY_SPAN_GRID_COUNT = new IntPreference(this, "context_gallery_span_grid_count", 3).makeProfile();
 	public final CommonPreference<Integer> CONTEXT_GALLERY_SPAN_GRID_COUNT_LANDSCAPE = new IntPreference(this, "context_gallery_span_grid_count_landscape", 7).makeProfile();
 }

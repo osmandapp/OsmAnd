@@ -1204,7 +1204,6 @@
     <string name="rendering_attr_buildings15zoom_name">Épületek 15-ös szintű nagyításnál</string>
     <string name="rendering_attr_moreDetailed_name">Több részlet</string>
     <string name="rendering_attr_lessDetailed_name">Kevesebb részlet</string>
-    <string name="rendering_attr_hideAccess_name">Behajtási korlátozások</string>
     <string name="rendering_attr_showAccess_name">Behajtási korlátozások megjelenítése</string>
     <string name="rendering_attr_showSurfaceGrade_name">Útminőség megjelenítése</string>
     <string name="rendering_attr_showSurfaces_name">Útfelszín megjelenítése</string>
@@ -2965,7 +2964,7 @@
     <string name="app_mode_utv">UTV (kis terepautó)</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Kötélpályás felvonó</string>
     <string name="switch_profile">Profil váltás</string>
-    <string name="application_profile_changed">Alkalmazásprofil módosítva erre: %s\\</string>
+    <string name="application_profile_changed">Alkalmazásprofil módosítva erre: \"%s\"</string>
     <string name="change_data_storage_full_description">Áthelyezi az OsmAnd fájlokat az új helyre\?
 \n%1$s &gt; %2$s</string>
     <string name="rendering_value_white_name">Fehér</string>
@@ -3606,7 +3605,6 @@
     <string name="shared_string_add_photo">Fénykép hozzáadása</string>
     <string name="register_on_openplacereviews">Regisztráció az
 \nOpenPlaceReviews.org oldalon</string>
-    <string name="register_on_openplacereviews_desc">A fényképeket a OpenPlaceReviews.org nyíltadat-projekt biztosítja. Saját fényképei feltöltéséhez be kell jelentkeznie a weboldalukon.</string>
     <string name="register_opr_create_new_account">Új fiók létrehozása</string>
     <string name="register_opr_have_account">Már van fiókom</string>
     <string name="app_mode_motorboat">Motorcsónak</string>
@@ -3614,7 +3612,6 @@
     <string name="shared_string_search_history">Keresési előzmények</string>
     <string name="shared_string_resources">Erőforrások</string>
     <string name="add_to_mapillary">Hozzáadás a Mapillaryhez</string>
-    <string name="add_to_opr">Hozzáadás az OpenPlaceReviews-hoz</string>
     <string name="add_photos_descr">Az OsmAnd több forrásból jelenít meg fényképeket:
 \nOpenPlaceReviews – POI-fotók;
 \nMapillary – utcaszintű képek;
@@ -3719,9 +3716,6 @@
     <string name="open_place_reviews_plugin_description">Hozzájárulhat az OpenPlaceReviews projekthez, például éttermekről, szállodákról vagy múzeumokról készült fényképekkel, véleményekkel vagy linkekkel.
 \n
 \nA közreműködés módjáról olvashat a %1$s weboldalunkon.</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">A test.openplacereviews.org használata</string>
-    <string name="login_open_place_reviews">Bejelentkezés az OpenPlaceReviews-ba</string>
     <string name="activity_type_water_name">Víz</string>
     <string name="activity_type_winter_name">Tél</string>
     <string name="activity_type_riding_name">Lovaglás</string>
@@ -4437,7 +4431,7 @@
     <string name="attach_roads_warning">Az utakhoz csak rögzített nyomvonal csatolható.</string>
     <string name="shared_string_only_missing">Csak hiányzó</string>
     <string name="connect_with_straight_line">Összekötés egyenes vonallal</string>
-    <string name="attach_roads_descr">A pontok közötti útvonaltervezés érdekében a nyomvonal közelítése az engedélyezett utakhoz, valamint pontos kanyarodási utasítások és útvonaltulajdonságok hozzárendelése.</string>
+    <string name="attach_roads_descr">Csatlakoztassa a nyomvonalait az utakhoz, hogy részletes útvonaladatokat kaphasson, beleértve a kanyarodási utasításokat és útvonal-tulajdonságokat.</string>
     <string name="included_in_your_current_plan">A jelenlegi \"%1$s\" előfizetése tartalmazza</string>
     <string name="available_as_part_of_subscription_plan">A következő előfizetés részeként érhető el: %1$s.</string>
     <string name="favorite_confirm_delete_group">Törölni akarja a(z) \"%1$s\" csoportot és minden benne foglalt pontot (%2$d)?</string>
@@ -5280,7 +5274,7 @@
     <string name="shared_string_key">Billentyű</string>
     <string name="no_assigned_keys">Nincsenek hozzárendelt billentyűk</string>
     <string name="clear_all_key_shortcuts_summary">A kiválasztott típushoz tartozó összes billentyű-hozzárendelés el lesz távolítva.</string>
-    <string name="key_name_pattern">\"%1$s\\ gomb</string>
+    <string name="key_name_pattern">\"%1$s\" gomb</string>
     <string name="clear_key_assignment_summary">A kiválasztott művelethez tartozó billentyű-hozzárendelés törlődik.</string>
     <string name="key_assignment_add_key">Billentyű hozzáadása</string>
     <string name="action_icon">Műveletikon</string>
@@ -5562,7 +5556,6 @@
     <string name="obd_connecting_to_device">Kapcsolódás ehhez: %s</string>
     <string name="fuel_tank_capacity">Üzemanyagtartály kapacitása</string>
     <string name="shared_strings_dimensions">Méretek</string>
-    <string name="imperial_gallons_unit">birodalmi gallon</string>
     <string name="us_gallons">Amerikai gallon</string>
     <string name="unit_of_volume_description">A kiválasztott egységek alkalmazása a jelenlegi profilban lévő összes térfogattal kapcsolatos adatra.</string>
     <string name="unit_of_volume">Térfogategység</string>
@@ -5629,4 +5622,43 @@
     <string name="shared_string_avg_altitude">Átlagos magasság</string>
     <string name="shared_string_avg_speed">Legkisebb sebesség</string>
     <string name="shared_string_length">Hosszúság</string>
+    <string name="map_widget_route_information">Útvonalinformációk</string>
+    <string name="shared_string_default_view">Alapértelmezett nézet</string>
+    <string name="map_widget_route_information_desc">Megjeleníti a becsült érkezési időt, a fennmaradó utazási időt és az aktuális navigációs útvonal távolságát.</string>
+    <string name="ais_cpa_warning_distance_description">A hajók piros színnel vannak jelölve, ha a CPA kisebb, mint ez az érték, és a CPA-t a közeljövőben elérik (lásd a figyelmeztetési idő beállítása a CPA eléréséhez).</string>
+    <string name="ais_object_lost_timeout_description">Állítsa be az AIS objektumok láthatóságának időtúllépését: a jel vétele nélkül ennyi idő után kerül az AIS objektum eltávolításra a képernyőről.</string>
+    <string name="ais_load_data">AIS adat betöltése fájlból</string>
+    <string name="ais_port_nmea_local_description">Határozza meg az UPD portot, amelyen az OsmAnd NMEA adatokat kap</string>
+    <string name="ais_object_lost_timeouts_description">Állítsa be az időtúllépési értékeket az elveszett AIS objektumok azonosításához, ha egy adott ideig nem érkezett jel.</string>
+    <string name="ais_object_lost_timeout">A láthatóság időtúllépése az objektum elvesztésekor</string>
+    <string name="ais_ship_lost_timeout_description">Állítsa be a hajó láthatóságának időtúllépését: a jel vétele nélkül ennyi idő után kerül megváltozásra a hajó szimbólum állapota a képernyőn, kihúzásra kerül.</string>
+    <string name="plugin_ais_tracker_disclaimer">FIGYELMEZTETÉS\n\nEz a plugin egy hobbiprojekt, nem garantálható a tökéletes megbízhatósága és pontossága. Semmiképp NE hagyatkozzon erre a szoftverre, beleértve a navigációt és/vagy az életbiztonságot.</string>
+    <string name="ais_address_settings">IP-cím beállításai</string>
+    <string name="ais_address_settings_description">Válasszon NMEA protokollt (UDP/TCP) és határozza meg a címeket</string>
+    <string name="ais_nmea_protocol">Protokoll az NMEA adatfogadáshoz</string>
+    <string name="ais_nmea_protocol_description">Válasszon protokollt az NMEA adatfogadáshoz</string>
+    <string name="ais_address_nmea_server">Az NMEA adatforrás IP -címe</string>
+    <string name="ais_address_nmea_server_description">Határozza meg az NMEA adatforrás IP -címét (ha TCP van használva)</string>
+    <string name="ais_port_nmea_server">Az NMEA adatforrás TCP portja</string>
+    <string name="ais_port_nmea_server_description">Határozza meg az NMEA adatforrás TCP portszámát</string>
+    <string name="ais_port_nmea_local">Helyi NMEA adatfogadó UDP portja</string>
+    <string name="ais_object_lost_timeouts">Időtúllépési beállítások az AIS jel fogadásához</string>
+    <string name="ais_ship_lost_timeout">A hajó láthatóságának időtúllépése, ha nem érkezik jel</string>
+    <string name="ais_cpa_settings">A CPA-val kapcsolatos beállítások</string>
+    <string name="ais_cpa_settings_description">Ezek az értékek határozzák meg azon AIS-objektumok megjelenítését, amelyek túl közel kerülhetnek a saját pozícióhoz.</string>
+    <string name="ais_cpa_warning_time">Figyelmeztetési idő a legközelebbi megközelítési pont eléréséhez (CPA)</string>
+    <string name="ais_cpa_warning_time_description">Ha a TCPA (a másik hajóval a CPA eléréséhez szükséges idő) kevesebb, mint ez az érték, a hajó piros színnel jelölt.</string>
+    <string name="ais_cpa_warning_distance">Figyelmeztetési távolság a legközelebbi megközelítési pont eléréséhez (CPA)</string>
+    <string name="plugin_ais_tracker_name">AIS hajókövető</string>
+    <string name="plugin_ais_tracker_description">Jelenítse meg az AIS pozíciókat és információkat a környező hajókról. Az AIS-adatok hálózaton keresztül érkeznek egy külső AIS-vevőtől.</string>
+    <string name="map_grid">Térképrácsok</string>
+    <string name="show_utm_grids">UTM használata a WGS84 helyett</string>
+    <string name="show_grids_description">Rács megjelenítését engedélyezi a térképen</string>
+    <string name="show_grids">Térképrács mutatása</string>
+    <string name="show_utm_grids_description">WGS84 fokok helyett UTM méterben mutatja a rácsot</string>
+    <string name="no_photo_for_location_desc">Még nem adtak hozzá felhasználói fotókat ehhez a helyhez</string>
+    <string name="no_places_available">Nincsenek helyek</string>
+    <string name="hmd_promo_description">Ingyenes hozzáférés %1$s hónapig a funkciókhoz, beleértve a korlátlan térképletöltést, a 3D domborzatot stb</string>
+    <string name="shared_string_road_exit">Kijárat</string>
+    <string name="hmd_promo">%1$s hónapos HMD promóció</string>
 </resources>

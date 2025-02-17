@@ -98,8 +98,7 @@ public class TerrainColorSchemeAction extends SwitchableAction<String> {
 			String nextStyle = getNextSelectedItem(mapActivity.getMyApplication());
 			executeWithParams(mapActivity, nextStyle);
 		} else {
-			Toast.makeText(mapActivity, R.string.quick_action_need_to_add_item_to_list,
-					Toast.LENGTH_LONG).show();
+			mapActivity.getMyApplication().showToastMessage(R.string.quick_action_need_to_add_item_to_list);
 		}
 	}
 

@@ -208,7 +208,7 @@ public class HelpArticlesHelper implements LoadArticlesListener {
 		items.add(createMenuItem(app.getString(R.string.what_is_new), version, R.drawable.ic_action_clipboard_notes,
 				getArticleItemClickListener(activity, app.getString(R.string.what_is_new), app.getString(R.string.docs_latest_version)))
 				.setLongClickListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
-					ShareMenu.copyToClipboardWithToast(adapter.getContext(), version, Toast.LENGTH_SHORT);
+					ShareMenu.copyToClipboardWithToast(adapter.getContext(), version, false);
 					return false;
 				}));
 

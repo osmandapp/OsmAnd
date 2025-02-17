@@ -252,8 +252,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	public void purchaseContourLines(@NonNull Activity activity) throws UnsupportedOperationException {
 		OsmandPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 		if (plugin == null || plugin.getInstallURL() == null) {
-			Toast.makeText(activity.getApplicationContext(),
-					activity.getString(R.string.activate_srtm_plugin), Toast.LENGTH_LONG).show();
+			AndroidUtils.getApp(activity).showToastMessage(R.string.activate_srtm_plugin);
 		} else {
 			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL()));
 			AndroidUtils.startActivityIfSafe(activity, intent);

@@ -134,7 +134,7 @@ public class StartGPSStatus {
 			builder.setNegativeButton(mapActivity.getString(R.string.shared_string_no), null);
 			builder.show();
 		} else {
-			Toast.makeText(mapActivity, R.string.gps_status_app_not_found, Toast.LENGTH_LONG).show();
+			app.showToastMessage(R.string.gps_status_app_not_found);
 		}
 	}
 

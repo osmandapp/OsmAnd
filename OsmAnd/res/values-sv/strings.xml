@@ -1187,7 +1187,6 @@
     <string name="rendering_attr_buildings15zoom_name">Byggnader vid zoom 15</string>
     <string name="rendering_attr_moreDetailed_name">Fler detaljer</string>
     <string name="rendering_attr_lessDetailed_name">Färre detaljer</string>
-    <string name="rendering_attr_hideAccess_name">Tillfartsinskränkningar</string>
     <string name="rendering_attr_showAccess_name">Visa åtkomstbegränsningar</string>
     <string name="rendering_attr_showSurfaceGrade_name">Visa vägkvalitet</string>
     <string name="rendering_attr_showSurfaces_name">Visa vägbeläggning</string>
@@ -2960,7 +2959,6 @@
     <string name="shared_string_add_photo">Lägg till bild</string>
     <string name="register_on_openplacereviews">Registrera dig hos
 \nOpenPlaceReviews.org</string>
-    <string name="register_on_openplacereviews_desc">Bilder tillhandahålls av OpenPlaceReviews.org\'s öppen data projekt. För att kunna ladda upp dina bilder behöver du registrera dig på deras webbsida.</string>
     <string name="register_opr_create_new_account">Registrera ett nytt konto</string>
     <string name="register_opr_have_account">Jag har redan ett konto</string>
     <string name="shared_string_search_history">Sökhistorik</string>
@@ -2977,7 +2975,6 @@
     <string name="select_items_for_import">Välj vilka föremål som skall importeras.</string>
     <string name="select_groups_for_import">Välj vilka grupper som skall importeras.</string>
     <string name="add_to_mapillary">Lägg till i Mapillary</string>
-    <string name="add_to_opr">Lägg till i OpenPlaceReviews</string>
     <string name="use_dev_url_descr">Byt till att använda dev.openstreetmap.org istället för openstreetmap.org för att testa uppladdning av OSM Anteckningar / Sevärdheter / GPX.</string>
     <string name="use_dev_url">Använd dev.openstreetmap.org</string>
     <string name="app_mode_light_aircraft">Mindre flyplan</string>
@@ -3239,9 +3236,6 @@
     <string name="uploaded_count">Uppladdat %1$d av %2$d</string>
     <string name="toast_select_edits_for_upload">Välj redigeringar för uppladdning</string>
     <string name="hillshade_slope_contour_lines">Höjdkurvor / Terrängskuggning / Lutning</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
-    <string name="opr_use_dev_url">Använd test.openplacereviews.org</string>
-    <string name="login_open_place_reviews">Logga in på OpenPlaCereViews</string>
     <string name="activity_type_water_name">Vatten</string>
     <string name="activity_type_winter_name">Vinter</string>
     <string name="activity_type_snowmobile_name">Snöskoter</string>
