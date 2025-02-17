@@ -2184,7 +2184,7 @@
     <string name="animate_my_location_desc">Scorrimento fluido della mappa quando sei in movimento. Introduce un leggero ritardo.</string>
     <string name="shared_string_overview">Panoramica</string>
     <string name="show_from_zoom_level">Mostra dal livello di zoom</string>
-    <string name="display_zoom_level">Mostra il livello dello zoom: %1$s</string>
+    <string name="display_zoom_level">Mostra il livello di zoom: %1$s</string>
     <string name="favorite_group_name">Nome del gruppo</string>
     <string name="change_color">Cambia il colore</string>
     <string name="private_access_routing_req">La tua destinazione si trova in un\'area privata. Permettere l\'accesso alle strade private per questo viaggio\?</string>
