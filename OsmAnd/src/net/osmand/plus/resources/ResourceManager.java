@@ -737,20 +737,6 @@ public class ResourceManager {
 		return fileNames;
 	}
 
-	public List<BinaryMapIndexReader> getTravelMapRepositories() {
-		List<BinaryMapIndexReader> res = new ArrayList<>();
-		for (String fileName : getTravelRepositoryNames()) {
-			BinaryMapReaderResource resource = travelRepositories.get(fileName);
-			if (resource != null) {
-				BinaryMapIndexReader shallowReader = resource.getShallowReader();
-				if (shallowReader != null && shallowReader.containsMapData()) {
-					res.add(shallowReader);
-				}
-			}
-		}
-		return res;
-	}
-
 	public List<BinaryMapIndexReader> getTravelRepositories() {
 		List<BinaryMapIndexReader> res = new ArrayList<>();
 		for (String fileName : getTravelRepositoryNames()) {
