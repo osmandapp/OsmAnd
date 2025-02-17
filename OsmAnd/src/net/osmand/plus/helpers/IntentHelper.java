@@ -12,6 +12,8 @@ import static net.osmand.plus.track.fragments.TrackMenuFragment.RETURN_SCREEN_NA
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TEMPORARY_SELECTED;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
 
+import static de.KnollFrank.lib.settingssearch.fragment.navigation.ContinueWithPreferencePathNavigation.continueWithPreferencePathNavigation;
+
 import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
@@ -26,6 +28,8 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.settings.fragments.MainSettingsFragment;
+import net.osmand.plus.settings.fragments.search.SettingsSearchButtonHelper;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.AppInitializeListener;
@@ -139,6 +143,21 @@ public class IntentHelper {
 				|| parseOpenGpxIntent()
 				|| parseSendIntent()
 				|| parseOAuthIntent();
+	}
+
+	private void parseContinueWithPreferencePathNavigation() {
+		continueWithPreferencePathNavigation(
+				mapActivity,
+				mapActivity.findViewById(R.id.content),
+				MapActivity.FRAGMENT_CONTAINER_VIEW_ID,
+				onMergedPreferenceScreenAvailable ->
+						SettingsSearchButtonHelper.createSearchPreferenceFragments(
+								mapActivity::getCreateSearchDatabaseTask,
+								onMergedPreferenceScreenAvailable,
+								mapActivity,
+								MapActivity.FRAGMENT_CONTAINER_VIEW_ID,
+								MainSettingsFragment.class,
+								app.getSettings().AVAILABLE_APP_MODES));
 	}
 
 	private boolean parseNavigationIntent() {
@@ -463,6 +482,7 @@ public class IntentHelper {
 	}
 
 	public void parseContentIntent() {
+		parseContinueWithPreferencePathNavigation();
 		Intent intent = mapActivity.getIntent();
 		if (intent != null) {
 			String action = intent.getAction();

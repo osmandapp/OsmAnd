@@ -19,6 +19,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.common.collect.Iterables;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -41,13 +44,19 @@ import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
+import org.threeten.bp.Duration;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
+import de.KnollFrank.lib.settingssearch.results.PositionOfSettingProvider;
+import de.KnollFrank.lib.settingssearch.results.Setting;
+import de.KnollFrank.lib.settingssearch.results.SettingHighlighter;
+import de.KnollFrank.lib.settingssearch.results.SettingHighlighterProvider;
 
 public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataChangeUiAdapter,
-		InAppPurchaseListener, SelectGpxTaskListener {
+		InAppPurchaseListener, SelectGpxTaskListener, SettingHighlighterProvider, PositionOfSettingProvider {
 
 	public static final String TAG = ConfigureMapFragment.class.getSimpleName();
 
@@ -316,6 +325,25 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 					.replace(R.id.content, new ConfigureMapFragment(), TAG)
 					.commitAllowingStateLoss();
 		}
+	}
+
+	@Override
+	public OptionalInt getPositionOfSetting(final Setting setting) {
+		final int settingAdapterPosition =
+				Iterables.indexOf(
+						adapter.getItems(),
+						item -> Objects.equals(item.getId(), setting.getKey()));
+		return settingAdapterPosition != RecyclerView.NO_POSITION ?
+				OptionalInt.of(settingAdapterPosition) :
+				OptionalInt.empty();
+	}
+
+	@Override
+	public SettingHighlighter getSettingHighlighter() {
+		return new ItemOfLinearLayoutHighlighter(
+				itemsContainer,
+				this,
+				Duration.ofSeconds(1));
 	}
 
 	public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<ConfigureMapFragment> {

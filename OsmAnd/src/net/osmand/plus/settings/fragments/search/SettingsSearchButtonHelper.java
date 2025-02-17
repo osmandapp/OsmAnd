@@ -19,8 +19,10 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+import de.KnollFrank.lib.settingssearch.MergedPreferenceScreen;
 import de.KnollFrank.lib.settingssearch.client.SearchConfig;
 import de.KnollFrank.lib.settingssearch.client.SearchPreferenceFragments;
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.*;
@@ -57,6 +59,7 @@ public class SettingsSearchButtonHelper {
 
 	public static SearchPreferenceFragments createSearchPreferenceFragments(
 			final Supplier<Optional<AsyncTaskWithProgressUpdateListeners<?>>> createSearchDatabaseTaskSupplier,
+			final Consumer<MergedPreferenceScreen> onMergedPreferenceScreenAvailable,
 			final FragmentActivity fragmentActivity,
 			final @IdRes int fragmentContainerViewId,
 			final Class<? extends BaseSettingsFragment> rootPreferenceFragment,
@@ -91,6 +94,7 @@ public class SettingsSearchButtonHelper {
 						fragmentManager,
 						fragmentActivity)
 				.withCreateSearchDatabaseTaskSupplier(createSearchDatabaseTaskSupplier)
+				.withOnMergedPreferenceScreenAvailable(onMergedPreferenceScreenAvailable)
 				.build();
 	}
 
@@ -114,6 +118,8 @@ public class SettingsSearchButtonHelper {
 		final SearchPreferenceFragments searchPreferenceFragments =
 				createSearchPreferenceFragments(
 						createSearchDatabaseTaskSupplier,
+						mergedPreferenceScreen -> {
+						},
 						rootSearchPreferenceFragment.requireActivity(),
 						fragmentContainerViewId,
 						rootSearchPreferenceFragment.getClass(),
