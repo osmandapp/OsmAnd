@@ -1573,9 +1573,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 		if (routeParams != null) {
 			viaLayout.setOnClickListener(v -> {
-				MapActivity mapActivity1 = getMapActivity();
-				if (mapActivity1 != null) {
-					GPXRouteParamsBuilder routeParams1 = mapActivity1.getRoutingHelper().getCurrentGPXRoute();
+				MapActivity activity = getMapActivity();
+				if (activity != null) {
+					GPXRouteParamsBuilder routeParams1 = activity.getRoutingHelper().getCurrentGPXRoute();
 					if (routeParams1 != null) {
 						hide();
 						chooseAndShowFollowTrack();
@@ -1594,14 +1594,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		AndroidUiHelper.updateVisibility(viaButton, routeParams == null || isFinishPointFromTrack());
 
 		viaButton.setOnClickListener(v -> {
-			MapActivity mapActivity12 = getMapActivity();
-			if (mapActivity12 != null) {
-				GPXRouteParamsBuilder routeParams12 = mapActivity12.getRoutingHelper().getCurrentGPXRoute();
+			MapActivity activity = getMapActivity();
+			if (activity != null) {
+				GPXRouteParamsBuilder routeParams12 = activity.getRoutingHelper().getCurrentGPXRoute();
 				if (routeParams12 != null) {
-					AddPointBottomSheetDialog.showInstance(mapActivity12, PointType.TARGET);
-				} else if (mapActivity12.getMyApplication().getTargetPointsHelper().checkPointToNavigateShort()) {
+					AddPointBottomSheetDialog.showInstance(activity, PointType.TARGET);
+				} else if (activity.getMyApplication().getTargetPointsHelper().checkPointToNavigateShort()) {
 					hide();
-					WaypointsFragment.showInstance(mapActivity12, true);
+					WaypointsFragment.showInstance(activity, true);
 				}
 			}
 		});
