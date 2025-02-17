@@ -131,17 +131,6 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 		return reader != null && reader.containsPoiData(left31, top31, right31, bottom31);
 	}
 
-	// TODO remove (never used)
-//	public synchronized Map<PoiCategory, List<String>> searchAmenityCategoriesByName(String query, Map<PoiCategory, List<String>> map) {
-//		try {
-//			BinaryMapIndexReader reader = getOpenReader();
-//			return reader != null ? reader.searchPoiCategoriesByName(query, map) : new HashMap<PoiCategory, List<String>>();
-//		} catch (IOException e) {
-//			log.error("Error searching amenities", e); //$NON-NLS-1$
-//		}
-//		return map;
-//	}
-
 	@NonNull
 	public synchronized List<PoiSubType> searchPoiSubTypesByPrefix(@NonNull String query) {
 		List<PoiSubType> poiSubTypes = new ArrayList<>();

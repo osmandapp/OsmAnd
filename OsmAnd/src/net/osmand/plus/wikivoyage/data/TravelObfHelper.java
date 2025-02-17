@@ -1002,24 +1002,6 @@ public class TravelObfHelper implements TravelHelper {
 		}
 	}
 
-	// TODO remove
-//	private List<BinaryMapIndexReader> getTravelReaders() {
-//		if (!app.isApplicationInitializing()) {
-//			return app.getResourceManager().getTravelRepositories();
-//		} else {
-//			return new ArrayList<>();
-//		}
-//	}
-
-	// TODO remove
-//	private List<BinaryMapIndexReader> getAmenityReaders() {
-//		if (!app.isApplicationInitializing()) {
-//			return app.getResourceManager().getAmenityReaders(true);
-//		} else {
-//			return new ArrayList<>();
-//		}
-//	}
-
 	@Nullable
 	@Override
 	public TravelArticleIdentifier getArticleId(@NonNull String title, @NonNull String lang) {

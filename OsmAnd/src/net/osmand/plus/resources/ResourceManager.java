@@ -742,18 +742,6 @@ public class ResourceManager {
 		return fileNames;
 	}
 
-	// TODO remove
-//	public List<BinaryMapIndexReader> getTravelRepositories() {
-//		List<BinaryMapIndexReader> res = new ArrayList<>();
-//		for (String fileName : getTravelRepositoryNames()) {
-//			BinaryMapReaderResource r = travelRepositories.get(fileName);
-//			if (r != null) {
-//				res.add(r.getReader(BinaryMapReaderResourceType.POI));
-//			}
-//		}
-//		return res;
-//	}
-
 	public List<AmenityIndexRepository> getTravelGpxRepositories() {
 		return getAmenityRepositories(true);
 	}
@@ -798,17 +786,6 @@ public class ResourceManager {
 		}
 		return res;
 	}
-
-	// TODO remove
-//	@NonNull
-//	public List<BinaryMapIndexReader> getAmenityReaders(boolean includeTravel) {
-//		List<BinaryMapIndexReader> readers = new ArrayList<>();
-//		List<AmenityIndexRepository> repos = app.getResourceManager().getAmenityRepositories(includeTravel);
-//		for (AmenityIndexRepository repo : repos) {
-//			readers.add(((AmenityIndexRepositoryBinary) repo).getOpenFile());
-//		}
-//		return readers;
-//	}
 
 	@NonNull
 	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter, QuadRect rect,
