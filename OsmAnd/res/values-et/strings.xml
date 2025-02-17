@@ -5022,4 +5022,10 @@
     <string name="help_article_navigation_routing_online_routing_name">Teekonna koostamine võrguühenduse abil</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Teave OsmAndi teekonna koostamise kohta</string>
     <string name="help_article_navigation_routing_car_based_routing_name">Teekonna koostamine autosõiduks (veoauto, mootorratas)</string>
+    <string name="auto_25_chars_route_tr_kl">Pööra paremale ja hoia vasakule</string>
+    <string name="auto_25_chars_route_tl_kr">Pööra vasakule ja hoia paremale</string>
+    <string name="auto_25_chars_route_tr_kr">Pööra paremale ja hoia paremale</string>
+    <string name="auto_25_chars_route_tu_kr">Pööra tagasi ja hoia paremale</string>
+    <string name="auto_25_chars_route_tu_kl">Pööra tagasi ja hoia vasakule</string>
+    <string name="auto_25_chars_route_tl_kl">Pööra vasakule ja hoia vasakule</string>
 </resources>
