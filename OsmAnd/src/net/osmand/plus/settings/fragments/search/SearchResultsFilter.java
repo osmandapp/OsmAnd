@@ -1,8 +1,6 @@
 package net.osmand.plus.settings.fragments.search;
 
-import java.util.Collection;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import de.KnollFrank.lib.settingssearch.PreferencePath;
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreference;
@@ -29,13 +27,6 @@ class SearchResultsFilter implements de.KnollFrank.lib.settingssearch.results.Se
 
 	public void setRemoveSearchResultsConnectedToDisabledProfiles(final boolean removeSearchResultsConnectedToDisabledProfiles) {
 		this.removeSearchResultsConnectedToDisabledProfiles = removeSearchResultsConnectedToDisabledProfiles;
-	}
-
-	private Collection<SearchablePreference> removeSearchResultsConnectedToDisabledProfiles(final Collection<SearchablePreference> searchResults) {
-		return searchResults
-				.stream()
-				.filter(searchResult -> !isConnectedToDisabledProfile(searchResult))
-				.collect(Collectors.toList());
 	}
 
 	private boolean isConnectedToDisabledProfile(final SearchablePreference searchablePreference) {
