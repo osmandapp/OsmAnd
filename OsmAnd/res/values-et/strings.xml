@@ -5036,4 +5036,10 @@
     <string name="obd_fuel_type_desc">Näitab sõiduki kütuse tüüpi OBD anduri vahendusel</string>
     <string name="obd_rpm_desc">Näitab sõiduki tahhomeetri andmeid pööretes minuti kohta OBD anduri vahendusel</string>
     <string name="obd_fuel_level_desc">Näitab sõiduki kütusepaagi täituvust OBD anduri vahendusel</string>
+    <string name="max_sensor_cadence">Jalgratta maksimaalne väntamissagedus</string>
+    <string name="avg_sensor_bycicle_power">Jalgratta keskmine võimsus</string>
+    <string name="max_sensor_heartrate">Südame maksimaalne löögisagedus</string>
+    <string name="avg_sensor_heartrate">Südame keskmine löögisagedus</string>
+    <string name="max_sensor_bycicle_power">Jalgratta maksimaalne võimsus</string>
+    <string name="avg_sensor_cadence">Jalgratta keskmine väntamissagedus</string>
 </resources>
