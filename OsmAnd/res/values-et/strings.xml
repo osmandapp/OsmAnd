@@ -5028,4 +5028,7 @@
     <string name="auto_25_chars_route_tu_kr">Pööra tagasi ja hoia paremale</string>
     <string name="auto_25_chars_route_tu_kl">Pööra tagasi ja hoia vasakule</string>
     <string name="auto_25_chars_route_tl_kl">Pööra vasakule ja hoia vasakule</string>
+    <string name="power_watts_unit">vatti</string>
+    <string name="rpm_unit">p/min</string>
+    <string name="revolutions_per_minute_unit">p/min</string>
 </resources>
