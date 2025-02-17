@@ -141,7 +141,7 @@ public class ResourceManager {
 	protected final Map<String, AmenityIndexRepository> amenityRepositories = new ConcurrentHashMap<>();
 	//	protected final Map<String, BinaryMapIndexReader> routingMapFiles = new ConcurrentHashMap<>();
 	protected final Map<String, BinaryMapReaderResource> transportRepositories = new ConcurrentHashMap<>();
-	protected final Map<String, BinaryMapReaderResource> travelRepositories = new ConcurrentHashMap<>();
+	protected final Map<String, AmenityIndexRepository> travelRepositories = new ConcurrentHashMap<>();
 	protected final Map<String, String> indexFileNames = new ConcurrentHashMap<>();
 	protected final Map<String, File> indexFiles = new ConcurrentHashMap<>();
 	protected final Map<String, String> basemapFileNames = new ConcurrentHashMap<>();
@@ -653,12 +653,17 @@ public class ResourceManager {
 					}
 					renderer.initializeNewResource(f, mapReader);
 					BinaryMapReaderResource resource = new BinaryMapReaderResource(f, mapReader);
+					boolean isTravelObfExt = resource.getFileName().endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT);
 					if (mapReader.containsPoiData()) {
-						amenityRepositories.put(fileName, new AmenityIndexRepositoryBinary(resource, app));
+						AmenityIndexRepositoryBinary amenityResource = new AmenityIndexRepositoryBinary(f, resource, app);
+						amenityRepositories.put(fileName, amenityResource);
+						if (isTravelObfExt) {
+							// reuse until new BinaryMapReaderResourceType.TRAVEL_GPX
+							travelRepositories.put(resource.getFileName(), amenityResource);
+						}
 					}
 					fileReaders.put(fileName, resource);
-					if (resource.getFileName().endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
-						travelRepositories.put(resource.getFileName(), resource);
+					if (isTravelObfExt) {
 						// travel files should be indexed separately (so it's possible to turn on / off)
 						continue;
 					}
@@ -737,19 +742,28 @@ public class ResourceManager {
 		return fileNames;
 	}
 
-	public List<BinaryMapIndexReader> getTravelRepositories() {
-		List<BinaryMapIndexReader> res = new ArrayList<>();
-		for (String fileName : getTravelRepositoryNames()) {
-			BinaryMapReaderResource r = travelRepositories.get(fileName);
-			if (r != null) {
-				res.add(r.getReader(BinaryMapReaderResourceType.POI));
-			}
-		}
-		return res;
+	// TODO remove
+//	public List<BinaryMapIndexReader> getTravelRepositories() {
+//		List<BinaryMapIndexReader> res = new ArrayList<>();
+//		for (String fileName : getTravelRepositoryNames()) {
+//			BinaryMapReaderResource r = travelRepositories.get(fileName);
+//			if (r != null) {
+//				res.add(r.getReader(BinaryMapReaderResourceType.POI));
+//			}
+//		}
+//		return res;
+//	}
+
+	public List<AmenityIndexRepository> getTravelGpxRepositories() {
+		return getAmenityRepositories(true);
 	}
 
-	public boolean isTravelGuidesRepositoryEmpty() {
-		return getTravelRepositories().isEmpty();
+	public List<AmenityIndexRepository> getWikivoyageRepositories() {
+		return new ArrayList<>(travelRepositories.values());
+	}
+
+	public boolean isWikivoyageRepositoryEmpty() {
+		return getWikivoyageRepositories().isEmpty();
 	}
 
 	public void initMapBoundariesCacheNative() {
@@ -785,15 +799,16 @@ public class ResourceManager {
 		return res;
 	}
 
-	@NonNull
-	public List<BinaryMapIndexReader> getAmenityReaders(boolean includeTravel) {
-		List<BinaryMapIndexReader> readers = new ArrayList<>();
-		List<AmenityIndexRepository> repos = app.getResourceManager().getAmenityRepositories(includeTravel);
-		for (AmenityIndexRepository repo : repos) {
-			readers.add(((AmenityIndexRepositoryBinary) repo).getOpenFile());
-		}
-		return readers;
-	}
+	// TODO remove
+//	@NonNull
+//	public List<BinaryMapIndexReader> getAmenityReaders(boolean includeTravel) {
+//		List<BinaryMapIndexReader> readers = new ArrayList<>();
+//		List<AmenityIndexRepository> repos = app.getResourceManager().getAmenityRepositories(includeTravel);
+//		for (AmenityIndexRepository repo : repos) {
+//			readers.add(((AmenityIndexRepositoryBinary) repo).getOpenFile());
+//		}
+//		return readers;
+//	}
 
 	@NonNull
 	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter, QuadRect rect,

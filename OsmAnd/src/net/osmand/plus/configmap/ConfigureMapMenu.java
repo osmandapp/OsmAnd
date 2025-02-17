@@ -59,7 +59,6 @@ import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
-import net.osmand.render.RenderingClass;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 import net.osmand.util.SunriseSunset;
@@ -72,7 +71,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 public class ConfigureMapMenu {
 
@@ -138,7 +136,7 @@ public class ConfigureMapMenu {
 
 		ResourceManager resourceManager = app.getResourceManager();
 		boolean hasPoiData = !Algorithms.isEmpty(resourceManager.getAmenityRepositories())
-				|| !Algorithms.isEmpty(resourceManager.getTravelRepositories());
+				|| !resourceManager.isWikivoyageRepositoryEmpty();
 		if (hasPoiData) {
 			PoiFiltersHelper poiFilters = app.getPoiFilters();
 			selected = poiFilters.isShowingAnyGeneralPoi();
