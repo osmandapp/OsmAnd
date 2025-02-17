@@ -187,10 +187,11 @@ public class CachedTrack {
 				RouteColorizationPoint outlinePoint = outlineColors != null && outlineColors.second.size() > colorPointIdx ? outlineColors.second.get(colorPointIdx) : null;
 				if (point != null && point.getId() == id || outlinePoint != null && outlinePoint.getId() == id) {
 					simplifiedSegment.getPoints().add(pt);
-					if (point != null) {
+
+					if (point != null && colorizationType != null) {
 						pt.setColor(colorizationType, point.getPrimaryColor());
 					}
-					if (outlinePoint != null) {
+					if (outlinePoint != null && outlineColorizationType != null) {
 						pt.setColor(outlineColorizationType, outlinePoint.getPrimaryColor());
 					}
 					colorPointIdx++;
@@ -215,12 +216,17 @@ public class CachedTrack {
 		WptPt nextSegmentFirstPoint = segments.get(segIdx + 1).getPoints().get(0);
 		WptPt firstPoint = new WptPt(currentSegmentLastPoint);
 		WptPt lastPoint = new WptPt(nextSegmentFirstPoint);
-		firstPoint.setColor(colorizationType, ColorPalette.Companion.getLIGHT_GREY());
-		lastPoint.setColor(colorizationType, ColorPalette.Companion.getLIGHT_GREY());
-		firstPoint.setColor(outlineColorizationType, LIGHT_GREY);
-		lastPoint.setColor(outlineColorizationType, LIGHT_GREY);
-		firstPoint.setColor(outlineColorizationType, LIGHT_GREY);
-		lastPoint.setColor(outlineColorizationType, LIGHT_GREY);
+
+		if (colorizationType != null) {
+			firstPoint.setColor(colorizationType, ColorPalette.Companion.getLIGHT_GREY());
+			lastPoint.setColor(colorizationType, ColorPalette.Companion.getLIGHT_GREY());
+		}
+		if (outlineColorizationType != null) {
+			firstPoint.setColor(outlineColorizationType, LIGHT_GREY);
+			lastPoint.setColor(outlineColorizationType, LIGHT_GREY);
+			firstPoint.setColor(outlineColorizationType, LIGHT_GREY);
+			lastPoint.setColor(outlineColorizationType, LIGHT_GREY);
+		}
 		straightSegment.getPoints().add(firstPoint);
 		straightSegment.getPoints().add(lastPoint);
 		return straightSegment;
