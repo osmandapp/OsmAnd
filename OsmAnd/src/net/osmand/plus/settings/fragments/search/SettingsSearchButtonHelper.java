@@ -101,9 +101,7 @@ public class SettingsSearchButtonHelper {
 	}
 
 	private static Map<Class<? extends Activity>, ActivityInitializer<?>> getActivityInitializerByActivity(final FragmentManager fragmentManager) {
-		return Map.of(
-				MapActivity.class,
-				new MapActivityActivityInitializer(fragmentManager));
+		return Map.of(MapActivity.class, new MapActivityInitializer(fragmentManager));
 	}
 
 	private static Optional<String> getSearchableInfo(final Preference preference) {
