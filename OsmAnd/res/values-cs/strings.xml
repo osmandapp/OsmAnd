@@ -5037,7 +5037,7 @@
     <string name="delete_map_description">Odstranit mapu %1$s?</string>
     <string name="maps_and_resources">Mapy a zdroje</string>
     <string name="help_article_navigation_routing_osmand_routing_name">O OsmAnd navigaci</string>
-    <string name="empty_smart_folder_title">Žádná odpovídající trasa</string>
+    <string name="empty_smart_folder_title">Žádná odpovídající stopa</string>
     <string name="smart_folder_name_present">Taková chytrá složka již existuje</string>
     <string name="help_article_search_search_coordinates_name">Hledat souřadnice</string>
     <string name="empty_smart_folder_description">Odpovídající trasy se zobrazí zde</string>
@@ -5708,4 +5708,5 @@
     <string name="original_icon_description">Každý bod by si ponechal vlastní ikonu.</string>
     <string name="original_shape_description">Každý bod by si zachoval svůj vlastní tvar.</string>
     <string name="save_favorite_default_appearance">Použít změny na stávající body ve složce, nebo pouze na nové?</string>
+    <string name="apply_to_all_points">Použít pro všechny body</string>
 </resources>
