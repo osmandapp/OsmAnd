@@ -84,18 +84,29 @@ public class AverageSpeedComputer extends AverageValueComputer {
 	}
 
 	/**
-	 * @return average speed in meters/second or {@link Float#NaN} if average speed cannot be calculated
+	 * Calculate average speed for locations recorded after the specified start timestamp.
+	 *
+	 * @param startTimestamp Only locations recorded after this timestamp will be considered.
+	 * @param measuredInterval The time interval over which to calculate the average speed.
+	 * @param skipLowSpeed Whether to skip low-speed locations.
+	 * @return The average speed in meters/second, or {@link Float#NaN} if no valid data is available.
 	 */
-	public float getAverageSpeed(long measuredInterval, boolean skipLowSpeed) {
+	public float getAverageSpeed(long startTimestamp, long measuredInterval, boolean skipLowSpeed) {
 		if (CALCULATE_UNIFORM_SPEED) {
-			return calculateUniformSpeed(measuredInterval, skipLowSpeed);
+			return calculateUniformSpeed(startTimestamp, measuredInterval, skipLowSpeed);
 		} else {
-			return calculateNonUniformSpeed(measuredInterval, skipLowSpeed);
+			return calculateNonUniformSpeed(startTimestamp, measuredInterval, skipLowSpeed);
 		}
 	}
 
-	private float calculateUniformSpeed(long measuredInterval, boolean skipLowSpeed) {
-		List<Location> locationsToUse = new ArrayList<>(locations);
+
+	private float calculateUniformSpeed(long startTimestamp, long measuredInterval, boolean skipLowSpeed) {
+		List<Location> locationsToUse = new ArrayList<>();
+		for (Location location : locations) {
+			if (location.getTime() >= startTimestamp) {
+				locationsToUse.add(location);
+			}
+		}
 		clearExpiredLocations(locationsToUse, measuredInterval);
 
 		if (!Algorithms.isEmpty(locationsToUse)) {
@@ -114,9 +125,9 @@ public class AverageSpeedComputer extends AverageValueComputer {
 		return Float.NaN;
 	}
 
-	private float calculateNonUniformSpeed(long measuredInterval, boolean skipLowSpeed) {
+	private float calculateNonUniformSpeed(long startTimestamp, long measuredInterval, boolean skipLowSpeed) {
 		long intervalStart = System.currentTimeMillis() - measuredInterval;
-		List<Segment> segments = segmentsList.getSegments(intervalStart);
+		List<Segment> segments = segmentsList.getSegments(Math.max(startTimestamp, intervalStart));
 
 		double totalDistance = 0;
 		double totalTimeMillis = 0;

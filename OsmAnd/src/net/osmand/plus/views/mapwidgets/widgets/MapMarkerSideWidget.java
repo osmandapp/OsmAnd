@@ -158,7 +158,7 @@ public class MapMarkerSideWidget extends SimpleWidget implements CustomLatLonLis
 
 		AverageSpeedComputer averageSpeedComputer = app.getAverageSpeedComputer();
 		long interval = widgetState.getAverageSpeedIntervalPref().get();
-		float averageSpeed = averageSpeedComputer.getAverageSpeed(interval, false);
+		float averageSpeed = averageSpeedComputer.getAverageSpeed(0, interval, false);
 
 		if (Float.isNaN(averageSpeed) || averageSpeed == 0) {
 			setText(NO_VALUE, null);
