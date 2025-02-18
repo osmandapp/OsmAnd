@@ -19,9 +19,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.common.collect.Iterables;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -329,19 +326,30 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 
 	@Override
 	public OptionalInt getPositionOfSetting(final Setting setting) {
-		final int settingAdapterPosition =
-				Iterables.indexOf(
-						adapter.getItems(),
-						item -> Objects.equals(item.getId(), setting.getKey()));
-		return settingAdapterPosition != RecyclerView.NO_POSITION ?
-				OptionalInt.of(settingAdapterPosition) :
-				OptionalInt.empty();
+		return asOptionalInt(
+				this
+						.getContextMenuItemById(setting.getKey())
+						.map(ContextMenuItem::getTitleId));
+	}
+
+	private Optional<ContextMenuItem> getContextMenuItemById(final String id) {
+		return adapter
+				.getItems()
+				.stream()
+				.filter(contextMenuItem -> Objects.equals(contextMenuItem.getId(), id))
+				.findFirst();
+	}
+
+	private static OptionalInt asOptionalInt(final Optional<Integer> optionalInteger) {
+		return optionalInteger
+				.map(OptionalInt::of)
+				.orElseGet(OptionalInt::empty);
 	}
 
 	@Override
 	public SettingHighlighter getSettingHighlighter() {
 		return new ItemOfLinearLayoutHighlighter(
-				itemsContainer,
+				views,
 				this,
 				Duration.ofSeconds(1));
 	}

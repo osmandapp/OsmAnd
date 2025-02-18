@@ -4,13 +4,13 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import androidx.annotation.ColorInt;
 import androidx.fragment.app.Fragment;
 
 import org.threeten.bp.Duration;
 
+import java.util.Map;
 import java.util.OptionalInt;
 
 import de.KnollFrank.lib.settingssearch.common.Attributes;
@@ -20,14 +20,14 @@ import de.KnollFrank.lib.settingssearch.results.SettingHighlighter;
 
 public class ItemOfLinearLayoutHighlighter implements SettingHighlighter {
 
-	private final LinearLayout itemsContainer;
+	private final Map<Integer, View> views;
 	private final PositionOfSettingProvider positionOfSettingProvider;
 	private final Duration highlightDuration;
 
-	public ItemOfLinearLayoutHighlighter(final LinearLayout itemsContainer,
+	public ItemOfLinearLayoutHighlighter(final Map<Integer, View> views,
 										 final PositionOfSettingProvider positionOfSettingProvider,
 										 final Duration highlightDuration) {
-		this.itemsContainer = itemsContainer;
+		this.views = views;
 		this.positionOfSettingProvider = positionOfSettingProvider;
 		this.highlightDuration = highlightDuration;
 	}
@@ -49,18 +49,18 @@ public class ItemOfLinearLayoutHighlighter implements SettingHighlighter {
 
 	private void _highlightItem(final int itemPosition) {
 		// itemsContainer.scrollToPosition(itemPosition);
-		itemsContainer.postDelayed(
-				() -> {
-					final View view = itemsContainer.getChildAt(itemPosition);
-					if (view != null) {
+		final View view = views.get(itemPosition);
+		if (view != null) {
+			view.postDelayed(
+					() -> {
 						final Drawable oldBackground = view.getBackground();
-						final @ColorInt int color = Attributes.getColorFromAttr(itemsContainer.getContext(), android.R.attr.textColorPrimary);
+						final @ColorInt int color = Attributes.getColorFromAttr(view.getContext(), android.R.attr.textColorPrimary);
 						view.setBackgroundColor(color & 0xffffff | 0x33000000);
 						new Handler().postDelayed(
 								() -> view.setBackgroundDrawable(oldBackground),
 								highlightDuration.toMillis());
-					}
-				},
-				200);
+					},
+					200);
+		}
 	}
 }
