@@ -217,18 +217,14 @@ public class WaypointsFragment extends BaseOsmAndFragment implements IContextDia
 		}));
 
 		View applyButton = view.findViewById(R.id.start_button);
-		applyButton.setOnClickListener(v -> {
-			updateRouteCalculationProgress(0);
-			controller.onApplyChanges(listAdapter.getActiveObjects(), this::dismiss);
-		});
+		applyButton.setOnClickListener(
+				v -> controller.onApplyChanges(listAdapter.getActiveObjects(), this::dismiss));
 
 		View cancelButton = view.findViewById(R.id.cancel_button);
 		TextViewEx cancelTitle = view.findViewById(R.id.cancel_button_descr);
 		cancelTitle.setText(R.string.shared_string_cancel);
-		cancelButton.setOnClickListener(v -> {
-			updateRouteCalculationProgress(0);
-			controller.onCancelChanges(this::dismiss);
-		});
+		cancelButton.setOnClickListener(
+				v -> controller.onCancelChanges(this::dismiss));
 
 		onStateChangedListener = change -> app.runInUIThread(() -> {
 			reloadAdapter();

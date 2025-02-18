@@ -1142,8 +1142,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private void setupRouteCalculationButtonProgressBar(@NonNull ProgressBar pb, @NonNull TextViewExProgress textProgress, @ColorRes int progressTextColor, @ColorRes int bgTextColor) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			int progressColor = ContextCompat.getColor(mapActivity, ColorUtilities.getActiveColorId(nightMode));
-			pb.setProgressDrawable(AndroidUtils.createProgressDrawable(ContextCompat.getColor(mapActivity, R.color.color_transparent), ContextCompat.getColor(mapActivity, progressTextColor)));
+			int progressColor = ColorUtilities.getActiveColor(mapActivity, nightMode);
+			pb.setProgressDrawable(AndroidUtils.createProgressDrawable(ColorUtilities.getTransparentColor(mapActivity), ColorUtilities.getColor(mapActivity, progressTextColor)));
 			textProgress.paint.setColor(progressColor);
 			textProgress.setTextColor(ContextCompat.getColor(mapActivity, bgTextColor));
 		}

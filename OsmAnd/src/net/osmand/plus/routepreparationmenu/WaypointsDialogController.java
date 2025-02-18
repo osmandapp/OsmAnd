@@ -12,8 +12,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.base.dialog.interfaces.controller.IDialogProgressChanged;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
 import net.osmand.plus.helpers.LocationPointWrapper;
+import net.osmand.plus.helpers.MapRouteCalculationProgressListener;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.helpers.WaypointHelper;
@@ -23,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class WaypointsDialogController extends BaseDialogController {
+public class WaypointsDialogController extends BaseDialogController implements IDialogProgressChanged {
 
 	private static final String PROCESS_ID = "manage_route_waypoints";
 
@@ -49,6 +51,15 @@ public class WaypointsDialogController extends BaseDialogController {
 
 	public boolean isUseRouteInfoMenu() {
 		return useRouteInfoMenu;
+	}
+
+	@Override
+	public void onDialogProgressChanged(@NonNull String progressTag, int progress) {
+		if (Objects.equals(progressTag, MapRouteCalculationProgressListener.TAG)) {
+			if (getDialog() instanceof WaypointsFragment fragment) {
+				fragment.updateRouteCalculationProgress(progress);
+			}
+		}
 	}
 
 	public void onClearClicked(@NonNull OnCompleteCallback callback) {
