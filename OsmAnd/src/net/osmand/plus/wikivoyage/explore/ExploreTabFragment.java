@@ -247,7 +247,7 @@ public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEv
 
 	private boolean isTravelGuidesRepositoryEmpty() {
 		if (!app.isApplicationInitializing()) {
-			return app.getResourceManager().isTravelGuidesRepositoryEmpty();
+			return app.getResourceManager().isWikivoyageRepositoryEmpty();
 		}
 		return true;
 	}
