@@ -110,9 +110,9 @@ public class TravelObfHelper implements TravelHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(TravelObfHelper.class);
 	private static final String WORLD_WIKIVOYAGE_FILE_NAME = "World_wikivoyage.travel.obf";
-	public static final int ARTICLE_SEARCH_RADIUS = 50 * 1000;
-	public static final int SAVED_ARTICLE_SEARCH_RADIUS = 30 * 1000;
-	public static final int MAX_SEARCH_RADIUS = 800 * 1000;
+	private static final int ARTICLE_SEARCH_RADIUS = 50 * 1000;
+	private static final int SAVED_ARTICLE_SEARCH_RADIUS = 30 * 1000;
+	private static final int MAX_SEARCH_RADIUS = 800 * 1000;
 
 	private final OsmandApplication app;
 	private final Collator collator;
@@ -167,7 +167,7 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@NonNull
-	public synchronized PopularArticles loadPopularArticles() {
+	private synchronized PopularArticles loadPopularArticles() {
 		String lang = app.getLanguage();
 		PopularArticles popularArticles = loadPopularArticlesForLang(lang);
 		if (popularArticles.isEmpty()) {
@@ -509,11 +509,11 @@ public class TravelObfHelper implements TravelHelper {
 		return langs;
 	}
 
-	public void sortSearchResults(@NonNull List<WikivoyageSearchResult> results, @NonNull String searchQuery) {
+	private void sortSearchResults(@NonNull List<WikivoyageSearchResult> results, @NonNull String searchQuery) {
 		results.sort(new SearchResultComparator(searchQuery, collator));
 	}
 
-	public static class SearchResultComparator implements Comparator<WikivoyageSearchResult> {
+	private static class SearchResultComparator implements Comparator<WikivoyageSearchResult> {
 		private final Collator collator;
 		private final String searchQuery;
 		private final String searchQueryLC;
