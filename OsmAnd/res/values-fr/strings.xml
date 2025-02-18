@@ -4281,7 +4281,7 @@
     <string name="rendering_attr_horse_scale_dangerous_name">Dangereux</string>
     <string name="apply_only_to_new_points">Appliquer seulement aux nouveaux points</string>
     <string name="apply_only_to_new_favorites">Appliquer seulement aux nouveaux favoris</string>
-    <string name="apply_to_existing">Appliquer à tous les points</string>
+    <string name="apply_to_existing">Appliquer à tous les points existants</string>
     <string name="apply_to_existing_favorites_descr">Appliquer les modifications à tous les points favoris ou seulement aux nouveaux \?</string>
     <string name="change_default_appearance">Modifier l’apparence par défaut</string>
     <string name="apply_to_existing_points_descr">Appliquer les modifications à tous les points du groupe ou seulement aux nouveaux \?</string>
@@ -5702,4 +5702,8 @@
     <string name="hmd_promo_description">Accès gratuit à certaines fonctionnalités comme le téléchargement illimité de cartes, le relief 3D, etc. pour %1$s mois</string>
     <string name="shared_string_road_exit">Sortie</string>
     <string name="hmd_promo">Promotion HMD pour %1$s mois</string>
+    <string name="original_color_description">Chaque point conservera sa propre couleur.</string>
+    <string name="apply_to_all_points">Appliquer à tous les points</string>
+    <string name="original_icon_description">Chaque point conservera sa propre icône.</string>
+    <string name="original_shape_description">Chaque point conservera sa propre forme.</string>
 </resources>
