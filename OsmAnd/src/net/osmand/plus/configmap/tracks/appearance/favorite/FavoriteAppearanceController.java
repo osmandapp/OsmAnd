@@ -3,21 +3,18 @@ package net.osmand.plus.configmap.tracks.appearance.favorite;
 import static net.osmand.shared.gpx.GpxParameter.COLOR;
 import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
 
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.icon.OnIconsPaletteListener;
-import net.osmand.plus.configmap.tracks.appearance.DefaultAppearanceController;
-import net.osmand.plus.configmap.tracks.appearance.DefaultAppearanceFragment;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.mapcontextmenu.editors.FavoriteShapesCardController;
 import net.osmand.plus.mapcontextmenu.editors.ShapesCard;
@@ -25,7 +22,6 @@ import net.osmand.plus.mapcontextmenu.editors.icon.FavoriteEditorIconController;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
-import net.osmand.shared.gpx.data.TrackFolder;
 import net.osmand.shared.routing.ColoringType;
 
 public class FavoriteAppearanceController implements IDialogController, IColorCardControllerListener, CardListener, OnIconsPaletteListener<String> {
@@ -59,7 +55,7 @@ public class FavoriteAppearanceController implements IDialogController, IColorCa
 		colorCardController = new FavoriteColorCardController(app, appearanceData, this);
 		colorCardController.setListener(this);
 
-		editorIconController = new FavoriteEditorIconController(app);
+		editorIconController = new FavoriteEditorIconController(app, this);
 		if (selectedIconName != null) {
 			editorIconController.setSelectedIconKey(selectedIconName);
 		}
@@ -140,6 +136,11 @@ public class FavoriteAppearanceController implements IDialogController, IColorCa
 	@Nullable
 	public String getIcon() {
 		return selectedIconName;
+	}
+
+	@NonNull
+	public String requireIcon() {
+		return selectedIconName != null ? selectedIconName : favoriteListener.getOriginalIconKey();
 	}
 
 	public void setColor(@Nullable Integer color) {

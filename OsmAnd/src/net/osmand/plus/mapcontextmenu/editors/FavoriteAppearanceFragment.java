@@ -37,6 +37,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
+import net.osmand.util.Algorithms;
 
 public class FavoriteAppearanceFragment extends BaseOsmAndFragment {
 
@@ -123,7 +124,6 @@ public class FavoriteAppearanceFragment extends BaseOsmAndFragment {
 
 		MultiStateCard shapeCard = new MultiStateCard(requireMapActivity(), controller.getShapesController());
 		cardContainer.addView(shapeCard.build());
-		inflate(R.layout.list_item_divider, cardContainer, true);
 
 		return view;
 	}
@@ -166,6 +166,11 @@ public class FavoriteAppearanceFragment extends BaseOsmAndFragment {
 
 	public void setBackgroundType(@NonNull BackgroundType backgroundType) {
 		this.backgroundType = backgroundType;
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
 
 	@Nullable
@@ -224,10 +229,12 @@ public class FavoriteAppearanceFragment extends BaseOsmAndFragment {
 			if (controller.getColor() != null) {
 				favouritesHelper.updateGroupColor(favoriteGroup, controller.getColor(), saveOption, false);
 				shouldSave = true;
+				controller.getColorCardController().getColorsPaletteController().refreshLastUsedTime();
 			}
 			if (controller.getIcon() != null) {
 				favouritesHelper.updateGroupIconName(favoriteGroup, controller.getIcon(), saveOption, false);
 				shouldSave = true;
+				controller.getIconController().addIconToLastUsed(controller.getIcon());
 			}
 			if (controller.getShape() != null) {
 				favouritesHelper.updateGroupBackgroundType(favoriteGroup, controller.getShape(), saveOption, false);

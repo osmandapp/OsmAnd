@@ -10,6 +10,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.card.base.simple.DescriptionCard;
 import net.osmand.plus.card.icon.IconsPaletteCard;
+import net.osmand.plus.configmap.tracks.appearance.favorite.FavoriteAppearanceController;
 import net.osmand.plus.mapcontextmenu.editors.icon.data.IconsCategory;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -18,11 +19,14 @@ import java.util.List;
 
 public class FavoriteEditorIconController extends EditorIconController {
 
+	private final FavoriteAppearanceController favoriteAppearanceController;
+
 	public static final String ORIGINAL_KEY = "original";
 	public static final String PROCESS_ID = "favorite_editor_process_select_icon";
 
-	public FavoriteEditorIconController(@NonNull OsmandApplication app) {
+	public FavoriteEditorIconController(@NonNull OsmandApplication app, @NonNull FavoriteAppearanceController favoriteAppearanceController) {
 		super(app);
+		this.favoriteAppearanceController = favoriteAppearanceController;
 	}
 
 	@Override
@@ -45,6 +49,9 @@ public class FavoriteEditorIconController extends EditorIconController {
 			}
 		} else if (getSelectedIconKey() != null) {
 			onIconSelectedFromPalette(getSelectedIconKey(), null);
+		} else if (getSelectedIconKey() == null) {
+			onIconSelectedFromPalette(favoriteAppearanceController.requireIcon(), null);
+			cardController.updateIconsSelection();
 		}
 	}
 

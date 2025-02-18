@@ -83,6 +83,11 @@ public class DefaultFavoriteAppearanceSaveBottomSheet extends SaveGroupConfirmat
 		dismiss();
 	}
 
+	@Override
+	public int getSecondDividerHeight() {
+		return getResources().getDimensionPixelSize(R.dimen.content_padding);
+	}
+
 	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target,
 	                                @NonNull String editorTag, int pointsSize) {
 		if (!manager.isStateSaved()) {

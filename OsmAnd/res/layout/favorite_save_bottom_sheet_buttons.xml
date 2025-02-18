@@ -36,7 +36,7 @@
 
 	<View
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/content_padding"
+		android:layout_height="@dimen/horizontal_divider_height"
 		tools:visibility="visible" />
 
 	<net.osmand.plus.widgets.dialogbutton.DialogButton

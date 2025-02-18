@@ -53,7 +53,7 @@ public class EditorIconController extends BaseDialogController {
 	protected List<String> lastUsedIcons;
 	private String selectedIconKey;
 
-	private EditorIconCardController cardController;
+	protected EditorIconCardController cardController;
 	private EditorIconScreenController screenController;
 	private IconsPaletteElements<String> paletteElements;
 	private Fragment targetFragment;
