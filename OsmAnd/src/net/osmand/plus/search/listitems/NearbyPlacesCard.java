@@ -73,10 +73,6 @@ public class NearbyPlacesCard extends FrameLayout implements NearbyPlacesListene
 	private void setupShowAllNearbyPlacesBtn() {
 		findViewById(R.id.show_all_btn).setOnClickListener(v -> {
 			NearbyPlacesFragment.Companion.showInstance(mapActivity.getSupportFragmentManager());
-			QuickSearchDialogFragment dialogFragment = mapActivity.getFragmentsHelper().getQuickSearchDialogFragment();
-			if (dialogFragment != null) {
-				dialogFragment.hide();
-			}
 		});
 	}
 

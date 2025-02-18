@@ -47,6 +47,8 @@ class NearbyPlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIte
 		setupShowAll(view)
 		setupToolBar(view)
 		setupVerticalNearbyList(view)
+		val dialogFragment = mapActivity?.fragmentsHelper?.quickSearchDialogFragment
+		dialogFragment?.hide()
 	}
 
 	fun onBackPress(): Boolean {
@@ -65,7 +67,7 @@ class NearbyPlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIte
 			activity?.supportFragmentManager?.beginTransaction()
 				?.remove(this@NearbyPlacesFragment)
 				?.commit()
-			return false
+			return true
 		}
 	}
 
