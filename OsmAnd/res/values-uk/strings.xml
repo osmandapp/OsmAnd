@@ -5075,7 +5075,7 @@
     <string name="delete_map_description">Видалити мапу %1$s?</string>
     <string name="maps_and_resources">Мапи й ресурси</string>
     <string name="shared_string_show_icon">Показати піктограму</string>
-    <string name="smart_folder_name_present">Така розумна тека вже існує</string>
+    <string name="smart_folder_name_present">Така розумна папка вже є</string>
     <string name="smart_folder_saved">Розумну теку збережено</string>
     <string name="add_smart_folder">Додати розумну папку</string>
     <string name="empty_name">Назви немає</string>
