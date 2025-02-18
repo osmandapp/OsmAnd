@@ -5740,4 +5740,5 @@
     <string name="original_icon_description">Hvert punkt beholder sit eget ikon.</string>
     <string name="original_shape_description">Hvert punkt beholder sin egen form.</string>
     <string name="apply_to_all_points">Anvend på alle punkter</string>
+    <string name="save_favorite_default_appearance">Anvend ændringer på de eksisterende punkter i mappen eller kun på de nye?</string>
 </resources>
