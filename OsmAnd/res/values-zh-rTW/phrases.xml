@@ -4975,4 +4975,5 @@
     <string name="poi_atv_yes">ATV：是</string>
     <string name="poi_atv_no">ATV：否</string>
     <string name="poi_access_notes">通行權說明</string>
+    <string name="poi_contact_website">網站</string>
 </resources>

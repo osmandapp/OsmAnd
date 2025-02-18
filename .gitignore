@@ -5,6 +5,7 @@ poi_types.xml
 *.map_styles_presets.xml
 routing*.xml
 rendering_types.xml
+activities.json
 countries.reginfo
 regions.ocbf
 h_*.png

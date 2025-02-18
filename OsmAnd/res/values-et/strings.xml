@@ -5022,4 +5022,24 @@
     <string name="help_article_navigation_routing_online_routing_name">Teekonna koostamine võrguühenduse abil</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Teave OsmAndi teekonna koostamise kohta</string>
     <string name="help_article_navigation_routing_car_based_routing_name">Teekonna koostamine autosõiduks (veoauto, mootorratas)</string>
+    <string name="auto_25_chars_route_tr_kl">Pööra paremale ja hoia vasakule</string>
+    <string name="auto_25_chars_route_tl_kr">Pööra vasakule ja hoia paremale</string>
+    <string name="auto_25_chars_route_tr_kr">Pööra paremale ja hoia paremale</string>
+    <string name="auto_25_chars_route_tu_kr">Pööra tagasi ja hoia paremale</string>
+    <string name="auto_25_chars_route_tu_kl">Pööra tagasi ja hoia vasakule</string>
+    <string name="auto_25_chars_route_tl_kl">Pööra vasakule ja hoia vasakule</string>
+    <string name="power_watts_unit">vatti</string>
+    <string name="rpm_unit">p/min</string>
+    <string name="revolutions_per_minute_unit">p/min</string>
+    <string name="with_waypoints">Koos teekonnapunktidega</string>
+    <string name="obd_fuel_left_distance_desc">Näitab väimalikku läbisõitu allesjäänud kütusega OBD anduri vahendusel</string>
+    <string name="obd_fuel_type_desc">Näitab sõiduki kütuse tüüpi OBD anduri vahendusel</string>
+    <string name="obd_rpm_desc">Näitab sõiduki tahhomeetri andmeid pööretes minuti kohta OBD anduri vahendusel</string>
+    <string name="obd_fuel_level_desc">Näitab sõiduki kütusepaagi täituvust OBD anduri vahendusel</string>
+    <string name="max_sensor_cadence">Jalgratta maksimaalne väntamissagedus</string>
+    <string name="avg_sensor_bycicle_power">Jalgratta keskmine võimsus</string>
+    <string name="max_sensor_heartrate">Südame maksimaalne löögisagedus</string>
+    <string name="avg_sensor_heartrate">Südame keskmine löögisagedus</string>
+    <string name="max_sensor_bycicle_power">Jalgratta maksimaalne võimsus</string>
+    <string name="avg_sensor_cadence">Jalgratta keskmine väntamissagedus</string>
 </resources>

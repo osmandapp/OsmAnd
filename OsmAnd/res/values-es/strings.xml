@@ -5976,4 +5976,11 @@
     <string name="calculate_size">Calcular tamaño</string>
     <string name="rendering_attr_showClimbingRoutes_description">Mostrar vías de escalada</string>
     <string name="rendering_attr_showClimbingRoutes_name">Vías de escalada</string>
+    <string name="ais_load_data">Cargar datos AIS desde archivo</string>
+    <string name="ais_address_settings">Configuración de la dirección IP</string>
+    <string name="ais_address_settings_description">Elija el protocolo NMEA (UDP/TCP) y defina las direcciones</string>
+    <string name="shared_string_road_exit">Salida</string>
+    <string name="popular_places_nearby">Lugares populares cercanos</string>
+    <string name="recently_visited">Recientemente visitado</string>
+    <string name="hmd_promo_description">Acceso gratuito a funciones, incluidas descargas ilimitadas de mapas, relieve 3D, etc., durante %1$s / mes</string>
 </resources>

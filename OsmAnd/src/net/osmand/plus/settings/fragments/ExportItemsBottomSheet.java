@@ -63,6 +63,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.mapwidgets.configure.buttons.ButtonStateBean;
 import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxDbHelper.GpxDataItemCallback;
@@ -324,10 +325,10 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 			int iconRes = profileIconRes != 0 ? profileIconRes : R.drawable.ic_world_globe_dark;
 			item.setIcon(uiUtilities.getPaintedIcon(iconRes, actualIconColor));
-		} else if (object instanceof QuickActionButtonState) {
-			QuickActionButtonState buttonState = (QuickActionButtonState) object;
-			item.setTitle(buttonState.getName());
-			item.setIcon(buttonState.getIcon(ColorUtilities.getColor(app, getItemIconColor(object)), nightMode, false));
+		} else if (object instanceof ButtonStateBean) {
+			ButtonStateBean stateBean = (ButtonStateBean) object;
+			item.setTitle(stateBean.getName(app));
+			item.setIcon(uiUtilities.getIcon(stateBean.getIconId(app), getItemIconColor(object)));
 		} else if (object instanceof PoiUIFilter) {
 			PoiUIFilter poiUIFilter = (PoiUIFilter) object;
 			item.setTitle(poiUIFilter.getName());
