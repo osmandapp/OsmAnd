@@ -2,7 +2,6 @@ package net.osmand.plus.helpers;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -10,12 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.routepreparationmenu.SortTargetPointsTask;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.Location;
-import net.osmand.TspAnt;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
@@ -36,9 +34,6 @@ import java.util.List;
 
 public class WaypointDialogHelper {
 
-	private final OsmandApplication app;
-	private final WaypointHelper waypointHelper;
-	private final MapActivity mapActivity;
 	private final List<WaypointDialogHelperCallback> helperCallbacks = new ArrayList<>();
 
 	public interface WaypointDialogHelperCallback {
@@ -55,16 +50,11 @@ public class WaypointDialogHelper {
 		helperCallbacks.remove(callback);
 	}
 
-	public WaypointDialogHelper(MapActivity mapActivity) {
-		this.mapActivity = mapActivity;
-		this.app = mapActivity.getMyApplication();
-		waypointHelper = this.app.getWaypointHelper();
-	}
-
-	public static void updatePointInfoView(OsmandApplication app, Activity activity,
-	                                       View localView, LocationPointWrapper ps,
+	public static void updatePointInfoView(@NonNull Activity activity, @NonNull View localView,
+	                                       @NonNull LocationPointWrapper ps,
 	                                       boolean mapCenter, boolean nightMode,
 	                                       boolean edit, boolean topBar) {
+		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		WaypointHelper wh = app.getWaypointHelper();
 		LocationPoint point = ps.getPoint();
 		TextView text = localView.findViewById(R.id.waypoint_text);
@@ -166,74 +156,14 @@ public class WaypointDialogHelper {
 		}
 	}
 
-	@NonNull
-	public List<Object> getTargetPoints() {
-		List<Object> points = new ArrayList<>();
-		for (int i = 0; i < WaypointHelper.MAX; i++) {
-			List<LocationPointWrapper> tp = waypointHelper.getWaypoints(i);
-			if ((i == WaypointHelper.WAYPOINTS || i == WaypointHelper.TARGETS) && waypointHelper.isTypeVisible(i)) {
-				if (i == WaypointHelper.TARGETS) {
-					TargetPoint start = app.getTargetPointsHelper().getPointToStart();
-					if (start == null) {
-						LatLon latLon;
-						Location loc = app.getLocationProvider().getLastKnownLocation();
-						if (loc != null) {
-							latLon = new LatLon(loc.getLatitude(), loc.getLongitude());
-						} else {
-							latLon = new LatLon(mapActivity.getMapView().getLatitude(),
-									mapActivity.getMapView().getLongitude());
-						}
-						start = TargetPoint.createStartPoint(latLon,
-								new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION,
-										mapActivity.getString(R.string.shared_string_my_location)));
-					} else {
-						String oname = !start.getOnlyName().isEmpty() ? start.getOnlyName()
-								: (mapActivity.getString(R.string.route_descr_map_location)
-								+ " " + mapActivity.getString(R.string.route_descr_lat_lon, start.getLatitude(), start.getLongitude()));
-
-						start = TargetPoint.createStartPoint(new LatLon(start.getLatitude(), start.getLongitude()),
-								new PointDescription(PointDescription.POINT_TYPE_LOCATION,
-										oname));
-					}
-					points.add(new LocationPointWrapper(WaypointHelper.TARGETS, start, 0f, 0));
-
-				}
-				if (tp != null && !tp.isEmpty()) {
-					points.addAll(tp);
-				}
-			}
-		}
-		return points;
-	}
-
-	@NonNull
-	public List<Object> getActivePoints(List<Object> points) {
-		List<Object> activePoints = new ArrayList<>();
-		for (Object p : points) {
-			if (p instanceof LocationPointWrapper w) {
-				if (w.type == WaypointHelper.TARGETS) {
-					activePoints.add(p);
-				}
-			}
-		}
-		return activePoints;
-	}
-
-	public static void updateRouteInfoMenu(Activity ctx) {
+	public static void updateRouteInfoMenu(@Nullable Activity ctx) {
 		if (ctx instanceof MapActivity) {
 			((MapActivity) ctx).getMapRouteInfoMenu().updateMenu();
 		}
 	}
 
-	public void notifyReloadAdapter() {
-		if (!helperCallbacks.isEmpty()) {
-			for (WaypointDialogHelperCallback callback : helperCallbacks) {
-				callback.reloadAdapter();
-			}
-		}
-	}
-
-	public static void switchStartAndFinish(OsmandApplication app, Activity ctx, WaypointDialogHelper helper, boolean updateRoute) {
+	public static void switchStartAndFinish(@NonNull MapActivity mapActivity, boolean updateRoute) {
+		OsmandApplication app = mapActivity.getMyApplication();
 		TargetPointsHelper targetsHelper = app.getTargetPointsHelper();
 		TargetPoint finish = targetsHelper.getPointToNavigate();
 		TargetPoint start = targetsHelper.getPointToStart();
@@ -241,11 +171,12 @@ public class WaypointDialogHelper {
 			app.showShortToastMessage(R.string.mark_final_location_first);
 		} else {
 			switchStartAndFinish(app, start, finish, updateRoute);
-			updateControls(ctx, helper);
+			updateControls(mapActivity);
 		}
 	}
 
-	private static void switchStartAndFinish(OsmandApplication app, TargetPoint start, TargetPoint finish, boolean updateRoute) {
+	private static void switchStartAndFinish(@NonNull OsmandApplication app, @Nullable TargetPoint start,
+	                                         @NonNull TargetPoint finish, boolean updateRoute) {
 		TargetPointsHelper targetsHelper = app.getTargetPointsHelper();
 		targetsHelper.setStartPoint(new LatLon(finish.getLatitude(), finish.getLongitude()),
 				false, finish.getPointDescription(app));
@@ -261,57 +192,67 @@ public class WaypointDialogHelper {
 		}
 	}
 
-	public static void reverseAllPoints(OsmandApplication app, Activity ctx, WaypointDialogHelper helper) {
+	public static void reverseAllPoints(@NonNull MapActivity mapActivity) {
+		OsmandApplication app = mapActivity.getMyApplication();
 		TargetPointsHelper targetsHelper = app.getTargetPointsHelper();
+
 		TargetPoint finish = targetsHelper.getPointToNavigate();
 		TargetPoint start = targetsHelper.getPointToStart();
 		switchStartAndFinish(app, start, finish, false);
+
 		List<TargetPoint> points = targetsHelper.getIntermediatePoints();
 		Collections.reverse(points);
 		targetsHelper.reorderIntermediatePoints(points, true);
-		updateControls(ctx, helper);
+
+		updateControls(mapActivity);
 	}
 
-	public static void updateControls(Activity ctx, WaypointDialogHelper helper) {
-		if (helper != null && helper.helperCallbacks != null) {
+	public static void updateControls(@NonNull MapActivity mapActivity) {
+		WaypointDialogHelper helper = mapActivity.getDashboard().getWaypointDialogHelper();
+		if (helper != null) {
 			for (WaypointDialogHelperCallback callback : helper.helperCallbacks) {
 				callback.reloadAdapter();
 			}
 		}
-		updateRouteInfoMenu(ctx);
+		updateRouteInfoMenu(mapActivity);
 	}
 
-	public static void clearAllIntermediatePoints(Activity ctx, TargetPointsHelper targetPointsHelper, WaypointDialogHelper helper) {
-		targetPointsHelper.clearAllIntermediatePoints(true);
-		updateControls(ctx, helper);
+	public static void updateAfterDeleteWaypoint(@NonNull MapActivity mapActivity, int position) {
+		WaypointDialogHelper helper = mapActivity.getDashboard().getWaypointDialogHelper();
+		if (helper != null) {
+			for (WaypointDialogHelperCallback callback : helper.helperCallbacks) {
+				callback.deleteWaypoint(position);
+			}
+		}
+		updateRouteInfoMenu(mapActivity);
 	}
 
-	public static void replaceStartWithFirstIntermediate(TargetPointsHelper targetPointsHelper, Activity ctx,
-														 WaypointDialogHelper helper) {
+	public static void clearAllIntermediatePoints(@NonNull MapActivity mapActivity) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		app.getTargetPointsHelper().clearAllIntermediatePoints(true);
+		updateControls(mapActivity);
+	}
+
+	public static void replaceStartWithFirstIntermediate(@NonNull MapActivity mapActivity) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+
 		List<TargetPoint> intermediatePoints = targetPointsHelper.getIntermediatePointsWithTarget();
 		TargetPoint firstIntermediate = intermediatePoints.remove(0);
-		targetPointsHelper.setStartPoint(new LatLon(firstIntermediate.getLatitude(),
-				firstIntermediate.getLongitude()), false, firstIntermediate.getPointDescription(ctx));
+		LatLon latLon = new LatLon(firstIntermediate.getLatitude(), firstIntermediate.getLongitude());
+		targetPointsHelper.setStartPoint(latLon, false, firstIntermediate.getPointDescription(mapActivity));
 		targetPointsHelper.reorderAllTargetPoints(intermediatePoints, true);
 
-		updateControls(ctx, helper);
+		updateControls(mapActivity);
 	}
 
-	public static void deletePoint(OsmandApplication app, Activity ctx,
-	                               ArrayAdapter<Object> adapter,
-	                               WaypointDialogHelper helper,
-	                               Object item,
-	                               List<LocationPointWrapper> deletedPoints,
-	                               boolean needCallback) {
-
+	public static void deletePoint(@NonNull MapActivity mapActivity,
+	                               @Nullable ArrayAdapter<Object> adapter, @NonNull Object item,
+	                               @NonNull List<LocationPointWrapper> deletedPoints) {
+		OsmandApplication app = mapActivity.getMyApplication();
 		if (item instanceof LocationPointWrapper point && adapter != null) {
 			if (point.type == WaypointHelper.TARGETS && adapter instanceof StableArrayAdapter stableAdapter) {
-				if (helper != null && !helper.helperCallbacks.isEmpty() && needCallback) {
-					for (WaypointDialogHelperCallback callback : helper.helperCallbacks) {
-						callback.deleteWaypoint(stableAdapter.getPosition(item));
-					}
-				}
-				updateRouteInfoMenu(ctx);
+				updateAfterDeleteWaypoint(mapActivity, stableAdapter.getPosition(point));
 			} else {
 				ArrayList<LocationPointWrapper> arr = new ArrayList<>();
 				arr.add(point);
@@ -345,7 +286,6 @@ public class WaypointDialogHelper {
 
 	@SuppressLint("StaticFieldLeak")
 	public static void sortAllTargets(@NonNull MapActivity mapActivity) {
-		WaypointDialogHelper helper = mapActivity.getDashboard().getWaypointDialogHelper();
-		new SortTargetPointsTask(mapActivity, helper).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		new SortTargetPointsTask(mapActivity).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 }

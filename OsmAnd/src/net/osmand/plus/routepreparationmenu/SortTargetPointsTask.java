@@ -11,6 +11,7 @@ import net.osmand.TspAnt;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.helpers.WaypointDialogHelper;
@@ -22,17 +23,18 @@ import java.util.List;
 
 public class SortTargetPointsTask extends AsyncTask<Void, Void, int[]> {
 
-	protected WeakReference<FragmentActivity> activityRef;
 	private final OsmandApplication app;
-	private final WaypointDialogHelper helper;
+	private final WeakReference<MapActivity> activityRef;
+	private final TargetPointsHelper targets;
+
 	private ProgressDialog dlg;
 	private long startDialogTime;
 	private List<TargetPoint> intermediates;
 
-	public SortTargetPointsTask(@NonNull FragmentActivity activity, @NonNull WaypointDialogHelper helper) {
+	public SortTargetPointsTask(@NonNull MapActivity activity) {
 		app = (OsmandApplication) activity.getApplicationContext();
+		targets = app.getTargetPointsHelper();
 		activityRef = new WeakReference<>(activity);
-		this.helper = helper;
 	}
 
 	protected void onPreExecute() {
@@ -47,7 +49,6 @@ public class SortTargetPointsTask extends AsyncTask<Void, Void, int[]> {
 	}
 
 	protected int[] doInBackground(Void[] params) {
-		TargetPointsHelper targets = app.getTargetPointsHelper();
 		intermediates = targets.getIntermediatePointsWithTarget();
 
 		Location cll = app.getLocationProvider().getLastKnownLocation();
@@ -57,8 +58,8 @@ public class SortTargetPointsTask extends AsyncTask<Void, Void, int[]> {
 		if (cll != null) {
 			LatLon ll = new LatLon(cll.getLatitude(), cll.getLongitude());
 			start = TargetPoint.create(ll, null);
-		} else if (app.getTargetPointsHelper().getPointToStart() != null) {
-			TargetPoint ps = app.getTargetPointsHelper().getPointToStart();
+		} else if (targets.getPointToStart() != null) {
+			TargetPoint ps = targets.getPointToStart();
 			LatLon ll = new LatLon(ps.getLatitude(), ps.getLongitude());
 			start = TargetPoint.create(ll, null);
 		} else {
@@ -98,7 +99,6 @@ public class SortTargetPointsTask extends AsyncTask<Void, Void, int[]> {
 		intermediates.clear();
 		intermediates.addAll(alocs);
 
-		TargetPointsHelper targets = app.getTargetPointsHelper();
 		List<TargetPoint> cur = targets.getIntermediatePointsWithTarget();
 		boolean eq = true;
 		for (int j = 0; j < cur.size() && j < intermediates.size(); j++) {
@@ -110,10 +110,9 @@ public class SortTargetPointsTask extends AsyncTask<Void, Void, int[]> {
 		if (!eq) {
 			targets.reorderAllTargetPoints(intermediates, true);
 		}
-		helper.notifyReloadAdapter();
-		FragmentActivity activity = activityRef.get();
+		MapActivity activity = activityRef.get();
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
-			WaypointDialogHelper.updateRouteInfoMenu(activity);
+			WaypointDialogHelper.updateControls(activity);
 		}
 	}
 }

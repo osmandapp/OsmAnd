@@ -1801,9 +1801,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		setupButtonIcon(swapDirectionView, R.drawable.ic_action_change_navigation_points);
 
 		fromButton.setOnClickListener(view -> {
-			MapActivity mapActv = getMapActivity();
-			if (mapActv != null) {
-				OsmandApplication app = mapActv.getMyApplication();
+			MapActivity activity = getMapActivity();
+			if (activity != null) {
+				OsmandApplication app = activity.getMyApplication();
 				TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 				TargetPoint startPoint = targetPointsHelper.getPointToStart();
 				TargetPoint endPoint = targetPointsHelper.getPointToNavigate();
@@ -1821,15 +1821,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					} else {
 						if (startPoint == null && loc != null) {
 							startPoint = TargetPoint.createStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()),
-									new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION, mapActv.getString(R.string.shared_string_my_location)));
+									new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION, activity.getString(R.string.shared_string_my_location)));
 						}
 						if (startPoint != null) {
 							int intermediateSize = targetPointsHelper.getIntermediatePoints().size();
 							if (intermediateSize > 1) {
-								WaypointDialogHelper.reverseAllPoints(app, mapActv, mapActv.getDashboard().getWaypointDialogHelper());
+								WaypointDialogHelper.reverseAllPoints(activity);
 							} else {
-								WaypointDialogHelper.switchStartAndFinish(mapActv.getMyApplication(),
-										mapActv, mapActv.getDashboard().getWaypointDialogHelper(), true);
+								WaypointDialogHelper.switchStartAndFinish(activity, true);
 							}
 						} else {
 							app.showShortToastMessage(R.string.route_add_start_point);

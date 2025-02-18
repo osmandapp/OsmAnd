@@ -244,7 +244,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 				convertView = createInfoItem(themedInflater);
 			} else if (child instanceof PointItem item) {
 				convertView = themedInflater.inflate(R.layout.along_the_route_point_item, parent, false);
-				WaypointDialogHelper.updatePointInfoView(app, mapActivity, convertView, item.point, true, nightMode, true, false);
+				WaypointDialogHelper.updatePointInfoView(mapActivity, convertView, item.point, true, nightMode, true, false);
 
 				convertView.findViewById(R.id.waypoint_container).setOnClickListener(v -> {
 					Fragment fragment = getTargetFragment();

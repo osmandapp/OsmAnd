@@ -45,9 +45,9 @@ public class TargetOptionsBottomSheetDialogFragment extends MenuBottomSheetDialo
 				.setTitle(getString(R.string.switch_start_finish))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
 				.setOnClickListener(v -> {
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						WaypointDialogHelper.switchStartAndFinish(app, mapActivity, mapActivity.getDashboard().getWaypointDialogHelper(), true);
+					MapActivity activity = getMapActivity();
+					if (activity != null) {
+						WaypointDialogHelper.switchStartAndFinish(activity, true);
 					}
 					dismiss();
 				})
@@ -62,11 +62,7 @@ public class TargetOptionsBottomSheetDialogFragment extends MenuBottomSheetDialo
 					.setOnClickListener(v -> {
 						MapActivity mapActivity = getMapActivity();
 						if (mapActivity != null) {
-							WaypointDialogHelper.reverseAllPoints(
-									app,
-									mapActivity,
-									mapActivity.getDashboard().getWaypointDialogHelper()
-							);
+							WaypointDialogHelper.reverseAllPoints(mapActivity);
 						}
 						dismiss();
 					})
@@ -93,10 +89,7 @@ public class TargetOptionsBottomSheetDialogFragment extends MenuBottomSheetDialo
 				.setOnClickListener(v -> {
 					MapActivity activity = getMapActivity();
 					if (activity != null) {
-						WaypointDialogHelper.clearAllIntermediatePoints(
-								activity, app.getTargetPointsHelper(),
-								activity.getDashboard().getWaypointDialogHelper()
-						);
+						WaypointDialogHelper.clearAllIntermediatePoints(activity);
 					}
 					dismiss();
 				})

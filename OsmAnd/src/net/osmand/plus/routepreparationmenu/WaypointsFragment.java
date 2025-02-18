@@ -34,6 +34,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.dialog.interfaces.dialog.IContextDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
@@ -60,7 +61,7 @@ import java.util.List;
 
 import static net.osmand.plus.helpers.WaypointDialogHelper.showOnMap;
 
-public class WaypointsFragment extends BaseOsmAndFragment implements ObservableScrollViewCallbacks,
+public class WaypointsFragment extends BaseOsmAndFragment implements IContextDialog, ObservableScrollViewCallbacks,
 		DynamicListViewCallbacks, WaypointDialogHelper.WaypointDialogHelperCallback, AddPointBottomSheetDialog.DialogListener {
 
 	public static final String TAG = "WaypointsFragment";
@@ -74,6 +75,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	private SwipeDismissListViewTouchListener swipeDismissListener;
 
 	private StateChangedListener<Void> onStateChangedListener;
+	private TargetPointsHelper targetPointsHelper;
 	private WaypointsDialogController controller;
 
 	private boolean portrait;
@@ -89,8 +91,11 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		targetPointsHelper = app.getTargetPointsHelper();
 		controller = WaypointsDialogController.getInstance(app);
-		if (controller == null) {
+		if (controller != null) {
+			controller.bindDialog(this);
+		} else {
 			dismiss();
 		}
 	}
@@ -149,9 +154,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 
 		mainView.setOnClickListener(null);
 
-		swipeDismissListener = new SwipeDismissListViewTouchListener(
-				mapActivity,
-				listView,
+		swipeDismissListener = new SwipeDismissListViewTouchListener(mapActivity, listView,
 				new DismissCallbacks() {
 
 					@Override
@@ -181,7 +184,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 							stableAdapter.getActiveObjects().remove(item);
 							stableAdapter.refreshData();
 							stableAdapter.notifyDataSetChanged();
-							controller.onApplyChanges(stableAdapter.getActiveObjects(), () -> {});
+							controller.onApplyChanges(stableAdapter.getActiveObjects());
 						}
 						return null;
 					}
@@ -266,7 +269,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			MapRouteInfoMenu.waypointsVisible = true;
 			wasDrawerDisabled = mapActivity.isDrawerDisabled();
 			mapActivity.getDashboard().getWaypointDialogHelper().addHelperCallback(this);
-			app.getTargetPointsHelper().addListener(onStateChangedListener);
+			targetPointsHelper.addListener(onStateChangedListener);
 			if (!wasDrawerDisabled) {
 				mapActivity.disableDrawer();
 			}
@@ -282,7 +285,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		if (mapActivity != null) {
 			MapRouteInfoMenu.waypointsVisible = false;
 			mapActivity.getDashboard().getWaypointDialogHelper().removeHelperCallback(this);
-			app.getTargetPointsHelper().removeListener(onStateChangedListener);
+			targetPointsHelper.removeListener(onStateChangedListener);
 			if (!wasDrawerDisabled) {
 				mapActivity.enableDrawer();
 			}
@@ -328,6 +331,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 
 	@Override
 	public void onItemsSwapped(List<Object> items) {
+		controller.onApplyChanges(items);
 	}
 
 	@Nullable
@@ -387,17 +391,16 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		if (mapActivity == null) {
 			return;
 		}
-		WaypointDialogHelper waypointDialogHelper = mapActivity.getDashboard().getWaypointDialogHelper();
-		mapActivity.getMyApplication().getWaypointHelper().removeVisibleLocationPoint(new ArrayList<>());
+		app.getWaypointHelper().removeVisibleLocationPoint(new ArrayList<>());
 
 		listAdapter.setNotifyOnChange(false);
 		listAdapter.clear();
-		List<Object> points = waypointDialogHelper.getTargetPoints();
+		List<Object> points = controller.getTargetPoints();
 		for (Object point : points) {
 			listAdapter.add(point);
 		}
-		if (listAdapter instanceof StableArrayAdapter) {
-			((StableArrayAdapter) listAdapter).updateObjects(points, waypointDialogHelper.getActivePoints(points));
+		if (listAdapter instanceof StableArrayAdapter stableArrayAdapter) {
+			stableArrayAdapter.updateObjects(points, controller.getActivePoints(points));
 		}
 		listAdapter.notifyDataSetChanged();
 	}
@@ -413,14 +416,10 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		};
 	}
 
-	public StableArrayAdapter getWaypointsDrawerAdapter(
-			boolean edit, List<LocationPointWrapper> deletedPoints,
-			MapActivity ctx, boolean flat, boolean nightMode) {
-
-		WaypointDialogHelper waypointDialogHelper = ctx.getDashboard().getWaypointDialogHelper();
-
-		List<Object> points = waypointDialogHelper.getTargetPoints();
-		List<Object> activePoints = waypointDialogHelper.getActivePoints(points);
+	public StableArrayAdapter getWaypointsDrawerAdapter(boolean edit, List<LocationPointWrapper> deletedPoints,
+	                                                    MapActivity ctx, boolean flat, boolean nightMode) {
+		List<Object> points = controller.getTargetPoints();
+		List<Object> activePoints = controller.getActivePoints(points);
 
 		StableArrayAdapter listAdapter = new StableArrayAdapter(ctx,
 				R.layout.route_waypoint_item, R.id.waypoint_text, points, activePoints) {
@@ -511,7 +510,6 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		AdapterView.OnItemClickListener listener = getDrawerItemClickListener(mapActivity, listAdapter);
 		setDynamicListItems(listView, listAdapter);
 		updateListAdapter(listAdapter, listener);
-		controller.setInitialTargetPoints(listAdapter.getActiveObjects());
 	}
 
 	private void updateListAdapter(StableArrayAdapter listAdapter, AdapterView.OnItemClickListener listener) {
@@ -537,7 +535,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	private void updateTitle() {
 		if (isAdded()) {
 			TextViewEx title = view.findViewById(R.id.title);
-			int pointsSize = app.getTargetPointsHelper().getAllPoints().size();
+			int pointsSize = targetPointsHelper.getAllPoints().size();
 			String text = getString(R.string.shared_string_target_points);
 			String countText = "(" + (pointsSize != 0 ? pointsSize : 1) + ")";
 			text = getString(R.string.ltr_or_rtl_combine_via_space, text, countText);
@@ -545,6 +543,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		}
 	}
 
+	@NonNull
 	private View updateWaypointItemView(boolean edit, List<LocationPointWrapper> deletedPoints,
 	                                    MapActivity mapActivity, View v,
 	                                    LocationPointWrapper point,
@@ -569,7 +568,6 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			boolean targets = point.type == WaypointHelper.TARGETS;
 			boolean notFlatTargets = targets && !flat;
 			boolean startPoint = notFlatTargets && ((TargetPoint) point.point).start;
-			TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 			boolean canRemove = !targets || !targetPointsHelper.getIntermediatePoints().isEmpty();
 
 			remove.setVisibility(View.VISIBLE);
@@ -581,15 +579,15 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 					remove.setOnClickListener(view -> {
 						if (targetPointsHelper.getPointToStart() == null) {
 							if (!targetPointsHelper.getIntermediatePoints().isEmpty()) {
-								WaypointDialogHelper.replaceStartWithFirstIntermediate(targetPointsHelper, mapActivity, helper);
+								WaypointDialogHelper.replaceStartWithFirstIntermediate(mapActivity);
 							}
 						} else {
 							targetPointsHelper.setStartPoint(null, true, null);
-							WaypointDialogHelper.updateControls(mapActivity, helper);
+							WaypointDialogHelper.updateControls(mapActivity);
 						}
 					});
 				} else {
-					remove.setOnClickListener(view -> WaypointDialogHelper.deletePoint(app, mapActivity, adapter, helper, point, deletedPoints, true));
+					remove.setOnClickListener(view -> WaypointDialogHelper.deletePoint(mapActivity, adapter, point, deletedPoints));
 				}
 			}
 

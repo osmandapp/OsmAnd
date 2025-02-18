@@ -197,7 +197,7 @@ public class StreetNameWidget extends MapWidget {
 			AndroidUiHelper.updateVisibility(addressTextShadow, false);
 			boolean updated = AndroidUiHelper.updateVisibility(waypointInfoBar, true);
 			// pass top bar to make it clickable
-			WaypointDialogHelper.updatePointInfoView(app, mapActivity, view, point, true,
+			WaypointDialogHelper.updatePointInfoView(mapActivity, view, point, true,
 					isNightMode(), false, true);
 			if (updated || changed) {
 				ImageView moreButton = waypointInfoBar.findViewById(R.id.waypoint_more);
