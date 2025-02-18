@@ -83,20 +83,25 @@ public class GalleryPhotoViewerFragment extends BaseOsmAndFragment {
 	}
 
 	private void downloadThumbnail(@NonNull ImageCard imageCard) {
-		Picasso.get()
-				.load(imageCard.getThumbnailUrl())
-				.into(imageView, new Callback() {
-					@Override
-					public void onSuccess() {
-						downloadHiResImage(imageCard);
-					}
+		String thumbnailUrl = imageCard.getThumbnailUrl();
+		if (thumbnailUrl != null) {
+			Picasso.get()
+					.load(thumbnailUrl)
+					.into(imageView, new Callback() {
+						@Override
+						public void onSuccess() {
+							downloadHiResImage(imageCard);
+						}
 
-					@Override
-					public void onError(Exception e) {
-						downloadHiResImage(imageCard);
-						LOG.error(e);
-					}
-				});
+						@Override
+						public void onError(Exception e) {
+							downloadHiResImage(imageCard);
+							LOG.error(e);
+						}
+					});
+		} else {
+			downloadHiResImage(imageCard);
+		}
 	}
 
 	private void downloadHiResImage(@NonNull ImageCard imageCard) {

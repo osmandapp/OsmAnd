@@ -1,13 +1,10 @@
 package net.osmand.plus.wikipedia;
 
-import android.view.View;
-
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
-import net.osmand.util.Algorithms;
 import net.osmand.wiki.WikiImage;
 
 public class WikiImageCard extends ImageCard {
@@ -27,15 +24,6 @@ public class WikiImageCard extends ImageCard {
 		this.title = wikiImage.getImageName();
 		this.url = this.imageUrl;
 		this.imageHiresUrl = wikiImage.getImageHiResUrl();
-
-		View.OnClickListener listener = v -> openUrl(mapActivity, app, getTitle(),
-				wikiImage.getUrlWithCommonAttributions(), false, false);
-
-		if (!Algorithms.isEmpty(buttonText)) {
-			this.onButtonClickListener = listener;
-		} else {
-			this.onClickListener = listener;
-		}
 	}
 
 	@NonNull

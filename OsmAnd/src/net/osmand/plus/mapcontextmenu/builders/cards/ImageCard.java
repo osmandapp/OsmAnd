@@ -1,24 +1,13 @@
 package net.osmand.plus.mapcontextmenu.builders.cards;
 
-import android.content.res.ColorStateList;
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatButton;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.MenuBuilder;
-import net.osmand.plus.mapcontextmenu.gallery.tasks.DownloadImageTask;
-import net.osmand.plus.mapcontextmenu.gallery.tasks.DownloadImageTask.DownloadImageListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
@@ -68,15 +57,10 @@ public abstract class ImageCard extends AbstractCard {
 	private final int defaultCardLayoutId = R.layout.context_menu_card_image;
 
 	protected Drawable icon;
-	protected Drawable buttonIcon;
-	protected OnClickListener onClickListener;
-	protected OnClickListener onButtonClickListener;
 
 	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
 
-	private boolean downloading;
-	private boolean downloaded;
-	private Bitmap bitmap;
+	private boolean imageDownloadFailed = false;
 	private float bearingDiff = Float.NaN;
 	private float distance = Float.NaN;
 
@@ -126,10 +110,10 @@ public abstract class ImageCard extends AbstractCard {
 				}
 				if (imageObject.has("topIcon") && !imageObject.isNull("topIcon")) {
 					String topIcon = imageObject.getString("topIcon");
-					this.topIconId = AndroidUtils.getDrawableId(getMyApplication(), topIcon);
+					this.topIconId = AndroidUtils.getDrawableId(app, topIcon);
 				}
 				if (imageObject.has("buttonIcon") && !imageObject.isNull("buttonIcon")) {
-					this.buttonIconId = AndroidUtils.getDrawableId(getMyApplication(), imageObject.getString("buttonIcon"));
+					this.buttonIconId = AndroidUtils.getDrawableId(app, imageObject.getString("buttonIcon"));
 				}
 				if (imageObject.has("buttonText") && !imageObject.isNull("buttonText")) {
 					this.buttonText = imageObject.getString("buttonText");
@@ -217,36 +201,12 @@ public abstract class ImageCard extends AbstractCard {
 		return getImageHiresUrl() + "?width=" + GALLERY_FULL_SIZE_WIDTH;
 	}
 
-	public boolean isExternalLink() {
-		return externalLink;
-	}
-
 	public int getTopIconId() {
 		return topIconId;
 	}
 
-	public int getButtonIconId() {
-		return buttonIconId;
-	}
-
 	public String getButtonText() {
 		return buttonText;
-	}
-
-	public int getButtonIconColor() {
-		return buttonIconColor;
-	}
-
-	public int getButtonColor() {
-		return buttonColor;
-	}
-
-	public int getButtonTextColor() {
-		return buttonTextColor;
-	}
-
-	public int getDefaultCardLayoutId() {
-		return defaultCardLayoutId;
 	}
 
 	@Override
@@ -258,33 +218,12 @@ public abstract class ImageCard extends AbstractCard {
 		return icon;
 	}
 
-	public OnClickListener getOnClickListener() {
-		return onClickListener;
+	public void markImageDownloadFailed(boolean imageDownloadFailed) {
+		this.imageDownloadFailed = imageDownloadFailed;
 	}
 
-
-	public boolean isDownloading() {
-		return downloading;
-	}
-
-	public void setDownloading(boolean downloading) {
-		this.downloading = downloading;
-	}
-
-	public Bitmap getBitmap() {
-		return bitmap;
-	}
-
-	public void setBitmap(Bitmap bitmap) {
-		this.bitmap = bitmap;
-	}
-
-	public float getBearingDiff() {
-		return bearingDiff;
-	}
-
-	public void setBearingDiff(float bearingDiff) {
-		this.bearingDiff = bearingDiff;
+	public boolean isImageDownloadFailed() {
+		return imageDownloadFailed;
 	}
 
 	public float getDistance() {
@@ -293,102 +232,5 @@ public abstract class ImageCard extends AbstractCard {
 
 	public void setDistance(float distance) {
 		this.distance = distance;
-	}
-
-	public void update() {
-		if (view != null) {
-			ImageView image = view.findViewById(R.id.image);
-			ImageView iconImageView = view.findViewById(R.id.icon);
-			TextView urlTextView = view.findViewById(R.id.url);
-			TextView watermarkTextView = view.findViewById(R.id.watermark);
-			ProgressBar progress = view.findViewById(R.id.progress);
-			AppCompatButton button = view.findViewById(R.id.button);
-
-			boolean night = getMyApplication().getDaynightHelper().isNightModeForMapControls();
-			AndroidUtils.setBackground(getMapActivity(), view.findViewById(R.id.card_background), night,
-					R.drawable.context_menu_card_light, R.drawable.context_menu_card_dark);
-
-			if (icon == null && topIconId != 0) {
-				icon = getMyApplication().getUIUtilities().getIcon(topIconId);
-			}
-			if (icon == null) {
-				iconImageView.setVisibility(View.GONE);
-			} else {
-				iconImageView.setImageDrawable(icon);
-				iconImageView.setVisibility(View.VISIBLE);
-			}
-			if (Algorithms.isEmpty(userName)) {
-				watermarkTextView.setVisibility(View.GONE);
-			} else {
-				watermarkTextView.setText("@" + userName);
-				watermarkTextView.setVisibility(View.VISIBLE);
-			}
-			if (downloading) {
-				progress.setVisibility(View.VISIBLE);
-				image.setImageBitmap(null);
-			} else if (!downloaded) {
-				MenuBuilder.execute(new DownloadImageTask(getMyApplication(), imageUrl, getDownloadImageListener()));
-			} else {
-				progress.setVisibility(View.GONE);
-				image.setImageBitmap(bitmap);
-				if (bitmap == null) {
-					urlTextView.setVisibility(View.VISIBLE);
-					urlTextView.setText(getUrl());
-				} else {
-					urlTextView.setVisibility(View.GONE);
-				}
-			}
-			if (onClickListener != null) {
-				view.findViewById(R.id.image_card).setOnClickListener(v -> onClickListener.onClick(v));
-			} else {
-				view.findViewById(R.id.image_card).setOnClickListener(null);
-			}
-
-			if (!Algorithms.isEmpty(buttonText)) {
-				button.setText(buttonText);
-			}
-			if (buttonIcon == null && buttonIconId != 0) {
-				if (buttonIconColor != 0) {
-					buttonIcon = getMyApplication().getUIUtilities().getPaintedIcon(buttonIconId, buttonIconColor);
-				} else {
-					buttonIcon = getMyApplication().getUIUtilities().getIcon(buttonIconId);
-				}
-			}
-			button.setCompoundDrawablesWithIntrinsicBounds(buttonIcon, null, null, null);
-			if (buttonColor != 0) {
-				button.setSupportBackgroundTintList(ColorStateList.valueOf(buttonColor));
-			}
-			if (buttonTextColor != 0) {
-				button.setTextColor(buttonTextColor);
-			}
-			if (onButtonClickListener != null) {
-				button.setVisibility(View.VISIBLE);
-				button.setOnClickListener(v -> onButtonClickListener.onClick(v));
-			} else {
-				button.setVisibility(View.GONE);
-				button.setOnClickListener(null);
-			}
-		}
-	}
-
-	private DownloadImageListener getDownloadImageListener() {
-		return new DownloadImageListener() {
-			@Override
-			public void onStartDownloading() {
-				downloading = true;
-				update();
-			}
-
-			@Override
-			public void onFinishDownloading(Bitmap bitmap) {
-				downloading = false;
-				downloaded = true;
-				ImageCard.this.bitmap = bitmap;
-				if (bitmap != null && Algorithms.isEmpty(getImageHiresUrl())) {
-					ImageCard.this.imageHiresUrl = getUrl();
-				}
-				update();
-			}
-		};
 	}
 }
