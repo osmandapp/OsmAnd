@@ -5704,4 +5704,8 @@
     <string name="hmd_promo_description">Bezplatný přístup k funkcím včetně neomezeného stahování map, 3D reliéfu a dalších na %1$s měsíců</string>
     <string name="shared_string_road_exit">Výjezd</string>
     <string name="hmd_promo">HMD Promo na %1$s měsíců</string>
+    <string name="original_color_description">Každý bod by si zachoval svou vlastní barvu.</string>
+    <string name="original_icon_description">Každý bod by si ponechal vlastní ikonu.</string>
+    <string name="original_shape_description">Každý bod by si zachoval svůj vlastní tvar.</string>
+    <string name="save_favorite_default_appearance">Použít změny na stávající body ve složce, nebo pouze na nové?</string>
 </resources>
