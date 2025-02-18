@@ -59,10 +59,7 @@ class PreferencePathDisplayer implements de.KnollFrank.lib.settingssearch.result
 	}
 
 	private boolean isApplicationMode(final SearchablePreference preference) {
-		return preference
-				.getKey()
-				.filter(applicationModeKeys::contains)
-				.isPresent();
+		return applicationModeKeys.contains(preference.getKey());
 	}
 
 	private void highlight(final Spannable spannable) {

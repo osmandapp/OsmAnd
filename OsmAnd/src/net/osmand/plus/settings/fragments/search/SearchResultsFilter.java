@@ -35,6 +35,6 @@ class SearchResultsFilter implements de.KnollFrank.lib.settingssearch.results.Se
 
 	private boolean startsWithDisabledProfile(final PreferencePath preferencePath) {
 		final var startOfPreferencePath = preferencePath.preferences().get(0);
-		return isDisabledProfile.test(startOfPreferencePath.getKey().orElseThrow());
+		return isDisabledProfile.test(startOfPreferencePath.getKey());
 	}
 }
