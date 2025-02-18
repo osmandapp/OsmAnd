@@ -5724,4 +5724,5 @@
     <string name="shared_string_road_exit">Uscita</string>
     <string name="hmd_promo_description">Accesso gratuito alle funzionalità, inclusi scaricamenti mappe illimitati, rilievi 3D, ecc. per %1$s mese</string>
     <string name="hmd_promo">Promozione HMD per%1$s mesi</string>
+    <string name="apply_to_all_points">Applica a tutti i punti</string>
 </resources>
