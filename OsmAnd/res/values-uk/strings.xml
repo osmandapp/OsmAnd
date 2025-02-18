@@ -5077,10 +5077,10 @@
     <string name="shared_string_show_icon">Показати піктограму</string>
     <string name="smart_folder_name_present">Така розумна тека вже існує</string>
     <string name="smart_folder_saved">Розумну теку збережено</string>
-    <string name="add_smart_folder">Додати розумну теку</string>
+    <string name="add_smart_folder">Додати розумну папку</string>
     <string name="empty_name">Назви немає</string>
     <string name="edit_filter">Змінити фільтр</string>
-    <string name="save_as_smart_folder">Зберегти як розумну теку</string>
+    <string name="save_as_smart_folder">Зберегти як розумну папку</string>
     <string name="delete_smart_folder_dialog_message">Це видалить розумну папку \"%1$s\". (Жодна композиція не буде видалена.)</string>
     <string name="average_glide_time_interval_desc">Вкажіть інтервал часу для усереднення ковзання.</string>
     <string name="release_4_6">• Android Auto: додано режим 3D \n\n • Треки: представлено фільтри та розумні папки, оптимізовано пам’ять для великих файлів \n\n • Покращено верхню та нижню панелі віджетів для розміщення всіх віджетів \n\n • Покращене управління місцевими ресурсами \n\n • Настроюване відображення кнопок для зовнішніх контролерів \n\n • Нові віджети: «Коефіцієнт ковзання» та «Позиція сонця» \n\n • OsmAnd Cloud: тепер доступ до видалених файлів \n\n • Покращене забарвлення доріжки в режимі нахилу з новим симетричним градієнтом \n\n • Вирішено проблеми з прозорим рядком стану \n\n • Додано підтримку віджета температури ANT+ \n\n • Представлено віджет «Доступна оперативна пам’ять»</string>
@@ -5715,4 +5715,9 @@
     <string name="hmd_promo_description">Безкоштовний доступ до функцій, включаючи необмежену кількість завантажень карт, 3D-рельєф тощо протягом %1$s місяця</string>
     <string name="shared_string_road_exit">Вихід</string>
     <string name="hmd_promo">Промо HMD на %1$s місяців</string>
+    <string name="original_color_description">Кожна точка зберігає свій колір.</string>
+    <string name="original_icon_description">Кожна точка матиме власний значок.</string>
+    <string name="original_shape_description">Кожна точка зберігає власну форму.</string>
+    <string name="save_favorite_default_appearance">Застосувати зміни до наявних точок у папці чи лише до нових?</string>
+    <string name="apply_to_all_points">Застосувати до всіх точок</string>
 </resources>
