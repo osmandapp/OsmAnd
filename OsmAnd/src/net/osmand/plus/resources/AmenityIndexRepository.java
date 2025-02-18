@@ -31,8 +31,12 @@ public interface AmenityIndexRepository {
 			ResultMatcher<Amenity> matcher);
 
 	File getFile();
+
 	List<BinaryMapPoiReaderAdapter.PoiRegion> getReaderPoiIndexes();
+
 	void searchMapIndex(BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> sr);
+
 	void searchPoi(BinaryMapIndexReader.SearchRequest<Amenity> amenitySearchRequest);
+
 	List<Amenity> searchPoiByName(BinaryMapIndexReader.SearchRequest<Amenity> searchRequest);
 }
