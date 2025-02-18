@@ -22,6 +22,7 @@ import com.github.mikephil.charting.charts.LineChart;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.settings.backend.preferences.CommonPreferenceProvider;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.plus.OsmandApplication;
@@ -74,6 +75,13 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	public final CommonPreference<String> TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE_ID;
 
 	private ScanDevicesListener scanDevicesListener;
+	private CommonPreferenceProvider<String> deviceSettingsPreferenceProvider = new CommonPreferenceProvider<>() {
+		@NonNull
+		@Override
+		public CommonPreference<String> getPreference() {
+			return registerStringPref(DevicesHelper.DEVICES_SETTINGS_PREF_ID, "");
+		}
+	};
 
 	public ExternalSensorsPlugin(@NonNull OsmandApplication app) {
 		super(app);
@@ -83,7 +91,7 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 		HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE_ID = registerStringPreference(ExternalSensorTrackDataType.HEART_RATE.getPreferenceId(), "").makeProfile().cache();
 		TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE_ID = registerStringPreference(ExternalSensorTrackDataType.TEMPERATURE.getPreferenceId(), "").makeProfile().cache();
 
-		devicesHelper = new DevicesHelper(app, this);
+		devicesHelper = new DevicesHelper(app, this, deviceSettingsPreferenceProvider);
 		settings = app.getSettings();
 	}
 

@@ -94,10 +94,10 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 	@NonNull
 	protected SearchTracksAdapter createAdapter(@NonNull Context context, List<TrackItem> trackItems) {
 		if (externalFilter != null) {
-			return new SearchTracksAdapter(app, trackItems, nightMode, selectionMode, externalFilter);
+			return new SearchTracksAdapter(requireActivity(), trackItems, nightMode, selectionMode, externalFilter);
 		} else {
 			TracksSearchFilter filter = new TracksSearchFilter(app, trackItems, currentFolder, null);
-			return new SearchTracksAdapter(app, trackItems, nightMode, selectionMode, filter);
+			return new SearchTracksAdapter(requireActivity(), trackItems, nightMode, selectionMode, filter);
 		}
 	}
 

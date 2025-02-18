@@ -14,6 +14,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.UiContext;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
@@ -88,7 +89,7 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 
 		Fragment fragment = getTargetFragment();
 		List<TrackItem> trackItems = new ArrayList<>(selectionHelper.getAllItems());
-		adapter = createAdapter(view.getContext(), trackItems);
+		adapter = createAdapter(requireActivity(), trackItems);
 		adapter.setTracksSortMode(getTracksSortMode());
 		adapter.setSortTracksListener(this);
 		adapter.setSelectionListener(getTrackSelectionListener());
@@ -121,7 +122,7 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 	}
 
 	@NonNull
-	protected SearchTracksAdapter createAdapter(@NonNull Context context, List<TrackItem> trackItems) {
+	protected SearchTracksAdapter createAdapter(@NonNull @UiContext Context context, List<TrackItem> trackItems) {
 		TracksSearchFilter filter = new TracksSearchFilter(app, trackItems);
 		return new SearchTracksAdapter(context, trackItems, nightMode, selectionMode, filter);
 	}

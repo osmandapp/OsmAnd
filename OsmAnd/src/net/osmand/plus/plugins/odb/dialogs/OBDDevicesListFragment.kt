@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
+import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin
 import net.osmand.plus.plugins.odb.VehicleMetricsPlugin.OBDConnectionState
 import net.osmand.plus.plugins.odb.adapters.OBDDevicesAdapter
@@ -162,7 +163,7 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	private fun updatePairedSensorsList() {
 		if (view != null) {
 			vehicleMetricsPlugin.let { plugin ->
-				val connectedDevice = plugin.getConnectedDeviceInfo()
+				var connectedDevice = plugin.getConnectedDeviceInfo()
 				val connectedDevices: List<BTDeviceInfo> =
 					if (connectedDevice == null) emptyList() else arrayListOf(connectedDevice)
 				val usedDevices = plugin.getUsedOBDDevicesList().toMutableList()
@@ -172,6 +173,14 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 				val disconnectedDevices =
 					usedDevices.filter { it.address != connectedDevice?.address }
 						.toMutableList()
+				val devices: List<AbstractDevice<*>> = externalDevicesPlugin.pairedDevices
+				val connectedBLEDevices: MutableList<AbstractDevice<*>> = java.util.ArrayList()
+				for (device in devices) {
+					if (device.isConnected) {
+						connectedDevice = BTDeviceInfo(device.name, "", true)
+						connectedBLEDevices.add(device)
+					}
+				}
 				if (Algorithms.isEmpty(disconnectedDevices) && Algorithms.isEmpty(connectedDevices)) {
 					emptyView?.visibility = View.VISIBLE
 					contentView?.visibility = View.GONE
@@ -253,14 +262,6 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	override fun onStateChanged(
 		state: OBDConnectionState,
 		deviceInfo: BTDeviceInfo) {
-		activity?.let {
-			val textId = when (state) {
-				OBDConnectionState.CONNECTED -> R.string.obd_connected_to_device
-				OBDConnectionState.CONNECTING -> R.string.obd_connecting_to_device
-				OBDConnectionState.DISCONNECTED -> R.string.obd_not_connected_to_device
-			}
-			app.showShortToastMessage(app.getString(textId, deviceInfo.name))
-		}
 		updatePairedSensorsList()
 	}
 }

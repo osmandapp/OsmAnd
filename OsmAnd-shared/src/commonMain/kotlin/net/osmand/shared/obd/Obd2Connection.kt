@@ -1,22 +1,33 @@
 package net.osmand.shared.obd
 
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.ensureActive
+import kotlinx.coroutines.runBlocking
 import net.osmand.shared.util.LoggerFactory
-import okio.IOException
+import kotlin.coroutines.CoroutineContext
 
 class Obd2Connection(
 	private val connection: UnderlyingTransport,
-	private val obdDispatcher: OBDDispatcher) {
+	private val obdDispatcher: OBDDispatcher,
+	private val context: CoroutineContext) {
 	enum class COMMAND_TYPE(val code: Int) {
 		LIVE(0x41), FREEZE(0x42), IDENTIFICATION(0x49)
 	}
 
+	private val sideDataToRemoveFromAnswer = arrayOf(
+		"SEARCHING",
+		"ERROR",
+		"BUS INIT",
+		"BUSINIT",
+		"BUS ERROR",
+		"BUSERROR"
+	)
+
 	private val log = LoggerFactory.getLogger("Obd2Connection")
-	private var initialized = false
 	private var finished = false
 
 	init {
 		runInitCommands()
-		initialized = true
 	}
 
 	fun isFinished() = finished
@@ -25,18 +36,35 @@ class Obd2Connection(
 		finished = true
 	}
 
-	private fun runInitCommands() {
+	fun reInit() {
+		runInitCommands()
+	}
+
+	private fun runInitCommands(): Boolean = runBlocking (context) {
 		for (command in initCommands) {
-			runImpl(command)
+			var responseString = runImpl(command)
+			responseString = normalizeResponseString(command, responseString)
+			val systemResponse = getSystemResponse(responseString)
+			if (systemResponse == OBDResponse.STOPPED || systemResponse == OBDResponse.ERROR) {
+				log.error("error while init obd $systemResponse")
+				finished = true
+//				connection.onInitFailed()
+				return@runBlocking  false
+			}
+			delay(200)
 		}
+		return@runBlocking  true
 	}
 
 	private fun runImpl(command: String): String {
 		val response = StringBuilder()
 		connection.write((command + "\r").encodeToByteArray())
+//		log("runImpl start reading...")
 		while (!finished) {
+			context.ensureActive()
 			val value = connection.readByte() ?: continue
 			val c = value.toChar()
+//			log("runImpl($command) returning $c")
 			// this is the prompt, stop here
 			if (c == '>') break
 			if (c == '\r' || c == '\n' || c == ' ' || c == '\t' || c == '.') continue
@@ -54,39 +82,15 @@ class Obd2Connection(
 		if (finished) {
 			return OBDResponse.ERROR
 		}
-		var response = runImpl(fullCommand)
-		val originalResponseValue = response
-		val unspacedCommand = fullCommand.replace(" ", "")
-		if (response.startsWith(unspacedCommand))
-			response = response.substring(unspacedCommand.length)
-		response = unpackLongFrame(response)
-		response = removeSideData(
-			response,
-			"SEARCHING",
-			"ERROR",
-			"BUS INIT",
-			"BUSINIT",
-			"BUS ERROR",
-			"BUSERROR",
-			"STOPPED"
-		)
-		when (response) {
-			"OK" -> return OBDResponse.OK
-			"?" -> return OBDResponse.QUESTION_MARK
-			"NODATA" -> return OBDResponse.NO_DATA
-			"UNABLETOCONNECT" -> {
-				finished = true
-				log.error("connection failure")
-				return OBDResponse.ERROR
-			}
-
-			"CANERROR" -> {
-				log.error("CAN bus error")
-				return OBDResponse.ERROR
-			}
+		var responseString = runImpl(fullCommand)
+		val originalResponseValue = responseString
+		responseString = normalizeResponseString(fullCommand, responseString)
+		val systemResponse = getSystemResponse(responseString)
+		if (systemResponse != null) {
+			return systemResponse
 		}
 		try {
-			var hexValues = toHexValues(response)
+			var hexValues = toHexValues(responseString)
 			if (hexValues.size < 3 ||
 				hexValues[0] != commandType.code ||
 				hexValues[1] != command) {
@@ -97,10 +101,40 @@ class Obd2Connection(
 			return OBDResponse(hexValues)
 		} catch (e: IllegalArgumentException) {
 			log(
-				"Conversion error: command: '$fullCommand', original response: '$originalResponseValue', processed response: '$response'"
+				"Conversion error: command: '$fullCommand', original response: '$originalResponseValue', processed response: '$responseString'"
 			)
 			return OBDResponse.ERROR
 		}
+	}
+
+	private fun getSystemResponse(responseString: String): OBDResponse? {
+		return when (responseString) {
+			"STOPPED" -> return OBDResponse.STOPPED
+			"OK" -> return OBDResponse.OK
+			"?" -> return OBDResponse.QUESTION_MARK
+			"NODATA" -> return OBDResponse.NO_DATA
+			"UNABLETOCONNECT" -> {
+				log.error("connection failure")
+				return OBDResponse.ERROR
+			}
+
+			"CANERROR" -> {
+				log.error("CAN bus error")
+				return OBDResponse.ERROR
+			}
+
+			else -> null
+		}
+	}
+
+	private fun normalizeResponseString(fullCommand: String, response: String): String {
+		var response1 = response
+		val unspacedCommand = fullCommand.replace(" ", "")
+		if (response1.startsWith(unspacedCommand))
+			response1 = response1.substring(unspacedCommand.length)
+		response1 = unpackLongFrame(response1)
+		response1 = removeSideData(response1)
+		return response1
 	}
 
 	private fun toHexValues(buffer: String): IntArray {
@@ -124,9 +158,9 @@ class Obd2Connection(
 		}
 	}
 
-	private fun removeSideData(response: String, vararg patterns: String): String {
+	private fun removeSideData(response: String): String {
 		var result = response
-		for (pattern in patterns) {
+		for (pattern in sideDataToRemoveFromAnswer) {
 			result = result.replace(pattern, "")
 		}
 		return result
@@ -180,7 +214,7 @@ class Obd2Connection(
 
 	companion object {
 		private val initCommands =
-			arrayOf("ATD", "ATZ", "AT E0", "AT L0", "AT S0", "AT H0", "AT SP 0")
+			arrayOf("ATD", "ATZ", "AT E0", "AT L1", "AT S0", "AT H0", "AT AR", "AT SP 0")
 
 		fun isInitCommand(command: String): Boolean {
 			return initCommands.contains(command)
