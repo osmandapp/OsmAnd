@@ -114,6 +114,10 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 			selectedPosition = args.getInt(SELECTED_POSITION_KEY);
 		}
 
+		if (selectedPosition > controller.getOnlinePhotoCards().size()) {
+			dismiss();
+		}
+
 		ViewPager photoPager = view.findViewById(R.id.photo_pager);
 		ViewPagerAdapter adapter = new ViewPagerAdapter(getMapActivity().getSupportFragmentManager(), controller.getOnlinePhotoCards(), this);
 		photoPager.setAdapter(adapter);
@@ -143,6 +147,13 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 		preloadThumbNails();
 		updateImageDescriptionRow(getSelectedImageCard(), true, null);
 		return view;
+	}
+
+	public void dismiss() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			activity.getSupportFragmentManager().popBackStack();
+		}
 	}
 
 	@Override
