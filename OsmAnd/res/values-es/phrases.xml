@@ -4909,4 +4909,5 @@
     <string name="poi_route_activity_type_motocross">Motocrós</string>
     <string name="poi_route_activity_type_car">Coche</string>
     <string name="poi_route_activity_type_truck_hgv">Camión (vehículo pesado)</string>
+    <string name="poi_contact_website">Sitio web</string>
 </resources>
