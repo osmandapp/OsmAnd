@@ -5694,4 +5694,8 @@
     <string name="hmd_promo_description">Бесплатан приступ функцијама укључујући неограничено преузимање мапа, 3Д рељеф итд. за %1$s месец</string>
     <string name="shared_string_road_exit">Излаз</string>
     <string name="hmd_promo">ХМД промоција за %1$s месеци</string>
+    <string name="original_icon_description">Свака тачка би задржала своју икону.</string>
+    <string name="original_shape_description">Свака тачка би задржала своју oblik.</string>
+    <string name="apply_to_all_points">Примени на све тачке</string>
+    <string name="original_color_description">Свака тачка би задржала своју боју.</string>
 </resources>
