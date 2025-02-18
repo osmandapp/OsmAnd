@@ -347,7 +347,7 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		if (forgetCurrentDeviceConnected) {
 			setLastConnectedDevice(null)
 		}
-		onDisconnected(lastConnectedDeviceInfo)
+		onDisconnected(lastConnectedDeviceInfo)//???
 	}
 
 	@SuppressLint("MissingPermission")
@@ -383,7 +383,10 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		if (deviceInfo.isBLE) {
 			val bleDevice = getBLEDeviceById(deviceInfo.address)
 			if (bleDevice != null) {
-				connectDevice(activity, bleDevice)
+				if(!isDevicePaired(bleDevice)) {
+					pairDevice(bleDevice)
+				}
+				connectToBLEDevice(activity, bleDevice)
 			}
 		} else {
 			currentReconnectAttempt = RECONNECT_ATTEMPTS_COUNT
@@ -463,13 +466,6 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 	}
 
 	fun connectToDevice(device: BLEOBDDevice) {
-		app.runInUIThread {
-			val deviceToConnect = BTDeviceInfo(
-				device.name,
-				device.deviceId,
-				true)
-			onDeviceConnected(deviceToConnect)
-		}
 		createOBDDispatcher().connect(object : OBDConnector {
 
 			override fun connect(): Pair<Source, Sink> {
@@ -481,9 +477,15 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 			}
 
 			override fun onConnectionSuccess() {
+				val deviceToConnect = BTDeviceInfo(
+					device.name,
+					device.deviceId,
+					true)
+				onDeviceConnected(deviceToConnect)
 			}
 
 			override fun onConnectionFailed() {
+				LOG.debug("onConnectionFailed")
 			}
 		})
 	}
@@ -1102,7 +1104,10 @@ class VehicleMetricsPlugin(app: OsmandApplication) : OsmandPlugin(app), OBDReadS
 		devicesHelper.dropUnpairedDevices()
 	}
 
-	private fun connectDevice(activity: Activity?, device: BLEOBDDevice) {
+	private fun connectToBLEDevice(activity: Activity?, device: BLEOBDDevice) {
+		if(device.isConnected) {
+			device.disconnect()
+		}
 		if (isDevicePaired(device)) {
 			devicesHelper.setDeviceEnabled(device, true)
 		}

@@ -46,7 +46,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor> {
 
-	protected static final Log LOG = PlatformUtil.getLog(BLEAbstractDevice.class);
+	protected static final Log LOG = PlatformUtil.getLog("OBD2");
 
 	protected BluetoothAdapter bluetoothAdapter;
 	protected BluetoothDevice device;
@@ -181,11 +181,11 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 			for (BLEAbstractSensor sensor : sensors) {
 				sensor.requestCharacteristic(cachedCharacteristics);
 			}
-			enqueueCommand(() -> {
-				if (!gatt.readRemoteRssi()) {
-					completedCommand();
-				}
-			});
+//			enqueueCommand(() -> {
+//				if (!gatt.readRemoteRssi()) {
+//					completedCommand();
+//				}
+//			});
 		} else {
 			LOG.debug("onServicesDiscovered received: " + status);
 		}
@@ -321,12 +321,12 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 		if (bluetoothAdapter == null || bluetoothGatt == null) {
 			return;
 		}
-		enqueueCommand(() -> {
+//		enqueueCommand(() -> {
 			if (!bluetoothGatt.readCharacteristic(characteristic)) {
 				LOG.error("Device readCharacteristic failed " + getName());
-				completedCommand();
+//				completedCommand();
 			}
-		});
+//		});
 	}
 
 	@SuppressLint("MissingPermission")
@@ -343,12 +343,12 @@ public abstract class BLEAbstractDevice extends AbstractDevice<BLEAbstractSensor
 		BluetoothGattDescriptor descriptor =
 				characteristic.getDescriptor(GattAttributes.UUID_CHARACTERISTIC_CLIENT_CONFIG);
 		descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-		enqueueCommand(() -> {
+//		enqueueCommand(() -> {
 			if (!bluetoothGatt.writeDescriptor(descriptor)) {
 				LOG.error("Device writeDescriptor failed " + getName());
-				completedCommand();
 			}
-		});
+//			completedCommand();
+//		});
 	}
 
 	protected boolean enqueueCommand(@NonNull Runnable command) {

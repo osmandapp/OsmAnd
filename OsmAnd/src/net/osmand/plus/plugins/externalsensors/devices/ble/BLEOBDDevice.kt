@@ -67,24 +67,29 @@ class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String) :
 	}
 
 	@SuppressLint("MissingPermission")
-	fun sendCommand(command: String) {
+	fun sendCommand(command: String): Int {
+		var sendResult = 0
 		writeCharacteristic?.let {
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-				val res = bluetoothGatt?.writeCharacteristic(
-					it,
-					command.toByteArray(),
-					BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT
-				)
-				if (res == BluetoothStatusCodes.SUCCESS) {
-					cachedCharacteristics?.let {
+			bluetoothGatt?.let { gatt ->
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+					sendResult = gatt.writeCharacteristic(
+						it,
+						command.toByteArray(),
+						BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT
+					)
+					if (sendResult == BluetoothStatusCodes.SUCCESS) {
+						cachedCharacteristics?.let {
+						}
 					}
+					log.debug("Відправлено команду1: $command; result $sendResult")
+				} else {
+					val res = gatt.writeCharacteristic(it)
+					sendResult = if (res) 0 else Int.MAX_VALUE
+					log.debug("Відправлено команду2: $command; result $sendResult")
 				}
-				log.debug("Відправлено команду: $command; result $res")
-			} else {
-				val res = bluetoothGatt?.writeCharacteristic(it)
-				log.debug("Відправлено команду: $command; result $res")
 			}
 		}
+		return sendResult
 	}
 
 	companion object {
@@ -97,13 +102,15 @@ class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String) :
 
 	override fun write(source: Buffer, byteCount: Long) {
 		val fullCommand = source.readUtf8()
-		enqueueCommand {
-			if (writeCharacteristic != null) {
-				bleReadSensor.resetData()
-				sendCommand(fullCommand)
+//		enqueueCommand {
+		if (writeCharacteristic != null) {
+//				bleReadSensor.resetData()
+			while (sendCommand(fullCommand) == 201) {
+				Thread.sleep(200)
 			}
-			completedCommand()
 		}
+//			completedCommand()
+//		}
 	}
 
 	override fun read(sink: Buffer, byteCount: Long): Long {
@@ -111,12 +118,18 @@ class BLEOBDDevice(bluetoothAdapter: BluetoothAdapter, deviceId: String) :
 			val lastSensorDataList = bleReadSensor.getLastSensorDataQueue()
 			while (!Algorithms.isEmpty(lastSensorDataList)) {
 				val lastSensorData = lastSensorDataList.removeFirst()
+				log.debug("read attempt \"${lastSensorData.response}\"")
 				if (lastSensorData.timestamp > lastDataUpdate) {
+					log.debug("read success")
 					bufferToRead = lastSensorData.response
 					lastDataUpdate = lastSensorData.timestamp
+					break
+				} else {
+					log.debug("read outdated")
 				}
 			}
 		}
+//		log.info("bufferToRead ${bufferToRead}")
 		bufferToRead?.let {
 			val readCount = min(byteCount, it.length.toLong())
 			if (readCount > 0) {

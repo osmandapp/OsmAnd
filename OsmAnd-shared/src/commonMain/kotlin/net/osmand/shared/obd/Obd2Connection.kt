@@ -1,10 +1,15 @@
 package net.osmand.shared.obd
 
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.ensureActive
+import kotlinx.coroutines.runBlocking
 import net.osmand.shared.util.LoggerFactory
+import kotlin.coroutines.CoroutineContext
 
 class Obd2Connection(
 	private val connection: UnderlyingTransport,
-	private val obdDispatcher: OBDDispatcher) {
+	private val obdDispatcher: OBDDispatcher,
+	private val context: CoroutineContext) {
 	enum class COMMAND_TYPE(val code: Int) {
 		LIVE(0x41), FREEZE(0x42), IDENTIFICATION(0x49)
 	}
@@ -19,11 +24,10 @@ class Obd2Connection(
 	)
 
 	private val log = LoggerFactory.getLogger("Obd2Connection")
-	private var initialized = false
 	private var finished = false
 
 	init {
-		initialized = runInitCommands()
+		runInitCommands()
 	}
 
 	fun isFinished() = finished
@@ -36,25 +40,31 @@ class Obd2Connection(
 		runInitCommands()
 	}
 
-	private fun runInitCommands(): Boolean {
+	private fun runInitCommands(): Boolean = runBlocking (context) {
 		for (command in initCommands) {
 			var responseString = runImpl(command)
 			responseString = normalizeResponseString(command, responseString)
 			val systemResponse = getSystemResponse(responseString)
 			if (systemResponse == OBDResponse.STOPPED || systemResponse == OBDResponse.ERROR) {
 				log.error("error while init obd $systemResponse")
-				return false
+				finished = true
+//				connection.onInitFailed()
+				return@runBlocking  false
 			}
+			delay(200)
 		}
-		return true
+		return@runBlocking  true
 	}
 
 	private fun runImpl(command: String): String {
 		val response = StringBuilder()
 		connection.write((command + "\r").encodeToByteArray())
+//		log("runImpl start reading...")
 		while (!finished) {
+			context.ensureActive()
 			val value = connection.readByte() ?: continue
 			val c = value.toChar()
+//			log("runImpl($command) returning $c")
 			// this is the prompt, stop here
 			if (c == '>') break
 			if (c == '\r' || c == '\n' || c == ' ' || c == '\t' || c == '.') continue
@@ -104,7 +114,6 @@ class Obd2Connection(
 			"?" -> return OBDResponse.QUESTION_MARK
 			"NODATA" -> return OBDResponse.NO_DATA
 			"UNABLETOCONNECT" -> {
-				finished = true
 				log.error("connection failure")
 				return OBDResponse.ERROR
 			}
@@ -205,7 +214,7 @@ class Obd2Connection(
 
 	companion object {
 		private val initCommands =
-			arrayOf("ATD", "ATZ", "AT E0", "AT L0", "AT S0", "AT H0", "AT SP 0")
+			arrayOf("ATD", "ATZ", "AT E0", "AT L1", "AT S0", "AT H0", "AT AR", "AT SP 0")
 
 		fun isInitCommand(command: String): Boolean {
 			return initCommands.contains(command)

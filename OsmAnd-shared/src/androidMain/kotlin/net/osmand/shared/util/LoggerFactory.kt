@@ -8,7 +8,7 @@ actual object LoggerFactory {
 
 class AndroidLogger(private val tag: String) : Logger {
 	override fun debug(message: String) {
-		Log.d(tag, message)
+		Log.d(tag, message + "{${Thread.currentThread().name}}")
 	}
 
 	override fun info(message: String) {

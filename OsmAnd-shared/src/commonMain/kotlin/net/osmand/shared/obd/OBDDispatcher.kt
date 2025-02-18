@@ -6,6 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.launch
 import net.osmand.shared.extensions.format
@@ -54,9 +55,12 @@ class OBDDispatcher(val debug: Boolean = false) {
 		}
 	}
 
-	private fun startReadObdLooper(context: CoroutineContext) {
+	private suspend fun startReadObdLooper(context: CoroutineContext) {
 		log("Start reading obd with $inputStream and $outputStream")
-		val connection = Obd2Connection(createTransport(), this)
+		val connection = Obd2Connection(createTransport(), this, context)
+		if(connection.isFinished()) {
+			readStatusListener?.onIOError()
+		}
 		try {
 			while (isConnected(connection)) {
 				var connectedScannerIsStopped = false
@@ -67,6 +71,7 @@ class OBDDispatcher(val debug: Boolean = false) {
 						connectedScannerIsStopped = true
 						return
 					}
+					delay(100)
 				}
 				context.ensureActive()
 				if (connectedScannerIsStopped) {

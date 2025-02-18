@@ -452,8 +452,10 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 						((BLEOBDDevice) device).setDeviceReadyListener(new BLEOBDDevice.DeviceReadyListener() {
 							@Override
 							public void onDeviceReadyStateChange(boolean isReady) {
-								VehicleMetricsPlugin vehicleMetricsPlugin = PluginsHelper.getPlugin(VehicleMetricsPlugin.class);
-								vehicleMetricsPlugin.connectToDevice((BLEOBDDevice) device);
+								if (isReady) {
+									VehicleMetricsPlugin vehicleMetricsPlugin = PluginsHelper.getPlugin(VehicleMetricsPlugin.class);
+									vehicleMetricsPlugin.connectToDevice((BLEOBDDevice) device);
+								}
 							}
 						});
 					}
@@ -487,6 +489,13 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 
 	@Override
 	public void onDeviceDisconnect(@NonNull AbstractDevice<?> device) {
+//		if (device instanceof BLEOBDDevice && vehicleMetricsPlugin != null) {
+//			app.runInUIThread(() -> {
+//				vehicleMetricsPlugin.disconnect(false);
+//
+//			});
+//		}
+//
 		LOG.debug(device + " disconnected");
 		app.showShortToastMessage(R.string.device_disconnected, getFormattedDevicePropertyValue(device, NAME));
 	}

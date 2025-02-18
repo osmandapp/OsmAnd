@@ -86,15 +86,19 @@ class BLEOBDSensor(device: BLEOBDDevice) : BLEAbstractSensor(device, device.devi
 
 		log.debug(
 			"OBD onCharacteristicChanged " + characteristic.uuid + ". data " + String(
-				characteristic.value))
+				characteristic.value).replace("\r", "\\r") + ". datalist size ${lastOBDData.size}")
 		if (requestedCharacteristicUUID == charaUUID) {
 			extrudeOBDData(characteristic.value)
 		}
+		log.debug("datalist size after process ${lastOBDData.size}")
 	}
 
 	private fun extrudeOBDData(data: ByteArray?) {
 		if (data != null) {
-			lastOBDData.addLast(OBDData(System.currentTimeMillis(), String(data)))
+			val stringData = String(data)
+//			if (stringData.contains(">")) {
+				lastOBDData.addLast(OBDData(System.nanoTime(), stringData))
+//			}
 		}
 	}
 

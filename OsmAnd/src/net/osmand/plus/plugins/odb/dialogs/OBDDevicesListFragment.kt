@@ -262,14 +262,6 @@ class OBDDevicesListFragment : OBDDevicesBaseFragment(),
 	override fun onStateChanged(
 		state: OBDConnectionState,
 		deviceInfo: BTDeviceInfo) {
-		activity?.let {
-			val textId = when (state) {
-				OBDConnectionState.CONNECTED -> R.string.obd_connected_to_device
-				OBDConnectionState.CONNECTING -> R.string.obd_connecting_to_device
-				OBDConnectionState.DISCONNECTED -> R.string.obd_not_connected_to_device
-			}
-			app.showShortToastMessage(app.getString(textId, deviceInfo.name))
-		}
 		updatePairedSensorsList()
 	}
 }

@@ -66,11 +66,12 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 
 	@SuppressWarnings("unchecked")
 	private void initFilters(@NonNull OsmandApplication app) {
-		recreateFilters();
+
 
 		app.getTaskManager().runInBackground(new OsmAndTaskManager.OsmAndTaskRunnable<Void, Void, Void>() {
 			@Override
 			protected Void doInBackground(Void... voids) {
+				recreateFilters();
 				DateTrackFilter dateFilter = (DateTrackFilter) getFilterByType(TrackFilterType.DATE_CREATION);
 				if (dateFilter != null) {
 					long minDate = app.getGpxDbHelper().getTracksMinCreateDate();
@@ -287,7 +288,7 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 	@Override
 	public void onFilterChanged() {
 		for (FilterChangedListener listener : filterChangedListeners) {
-			listener.onFilterChanged();
+			app.runInUIThread(listener::onFilterChanged);
 		}
 
 	}

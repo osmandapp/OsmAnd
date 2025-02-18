@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import androidx.annotation.UiContext
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.CallbackWithObject
 import net.osmand.plus.OsmandApplication
@@ -29,6 +30,7 @@ import net.osmand.util.Algorithms
 import java.util.Collections
 
 class SearchTracksAdapter(
+    @UiContext
 	context: Context,
 	private var trackItems: List<TrackItem>,
 	private val nightMode: Boolean,
