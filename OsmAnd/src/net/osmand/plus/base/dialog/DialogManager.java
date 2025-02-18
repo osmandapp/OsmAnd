@@ -2,7 +2,6 @@ package net.osmand.plus.base.dialog;
 
 import android.content.DialogInterface;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +16,7 @@ import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemClicked;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemSelected;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
 import net.osmand.plus.base.dialog.interfaces.controller.IOnDialogDismissed;
+import net.osmand.plus.base.dialog.interfaces.controller.IDialogProgressChanged;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
@@ -100,6 +100,14 @@ public class DialogManager {
 		IDialog dialog = dialogs.get(processId);
 		if (dialog instanceof IAskRefreshDialogCompletely) {
 			((IAskRefreshDialogCompletely) dialog).onAskRefreshDialogCompletely(processId);
+		}
+	}
+
+	public void notifyOnProgress(@NonNull String progressTag, int progress) {
+		for (IDialogController controller : controllers.values()) {
+			if (controller instanceof IDialogProgressChanged callback) {
+				callback.onDialogProgressChanged(progressTag, progress);
+			}
 		}
 	}
 

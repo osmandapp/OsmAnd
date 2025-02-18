@@ -284,7 +284,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				}
 				choosePointTypeAction(selectedPoint, selectFromMapPointType, name, null);
 				if (selectFromMapWaypoints) {
-					WaypointsFragment.showInstance(mapActivity.getSupportFragmentManager(), true);
+					WaypointsFragment.showInstance(mapActivity, true);
 				} else {
 					show(selectFromMapMenuState);
 				}
@@ -1142,8 +1142,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private void setupRouteCalculationButtonProgressBar(@NonNull ProgressBar pb, @NonNull TextViewExProgress textProgress, @ColorRes int progressTextColor, @ColorRes int bgTextColor) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			int progressColor = ContextCompat.getColor(mapActivity, ColorUtilities.getActiveColorId(nightMode));
-			pb.setProgressDrawable(AndroidUtils.createProgressDrawable(ContextCompat.getColor(mapActivity, R.color.color_transparent), ContextCompat.getColor(mapActivity, progressTextColor)));
+			int progressColor = ColorUtilities.getActiveColor(mapActivity, nightMode);
+			pb.setProgressDrawable(AndroidUtils.createProgressDrawable(ColorUtilities.getTransparentColor(mapActivity), ColorUtilities.getColor(mapActivity, progressTextColor)));
 			textProgress.paint.setColor(progressColor);
 			textProgress.setTextColor(ContextCompat.getColor(mapActivity, bgTextColor));
 		}
@@ -1573,9 +1573,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 		if (routeParams != null) {
 			viaLayout.setOnClickListener(v -> {
-				MapActivity mapActivity1 = getMapActivity();
-				if (mapActivity1 != null) {
-					GPXRouteParamsBuilder routeParams1 = mapActivity1.getRoutingHelper().getCurrentGPXRoute();
+				MapActivity activity = getMapActivity();
+				if (activity != null) {
+					GPXRouteParamsBuilder routeParams1 = activity.getRoutingHelper().getCurrentGPXRoute();
 					if (routeParams1 != null) {
 						hide();
 						chooseAndShowFollowTrack();
@@ -1594,14 +1594,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		AndroidUiHelper.updateVisibility(viaButton, routeParams == null || isFinishPointFromTrack());
 
 		viaButton.setOnClickListener(v -> {
-			MapActivity mapActivity12 = getMapActivity();
-			if (mapActivity12 != null) {
-				GPXRouteParamsBuilder routeParams12 = mapActivity12.getRoutingHelper().getCurrentGPXRoute();
+			MapActivity activity = getMapActivity();
+			if (activity != null) {
+				GPXRouteParamsBuilder routeParams12 = activity.getRoutingHelper().getCurrentGPXRoute();
 				if (routeParams12 != null) {
-					AddPointBottomSheetDialog.showInstance(mapActivity12, PointType.TARGET);
-				} else if (mapActivity12.getMyApplication().getTargetPointsHelper().checkPointToNavigateShort()) {
+					AddPointBottomSheetDialog.showInstance(activity, PointType.TARGET);
+				} else if (activity.getMyApplication().getTargetPointsHelper().checkPointToNavigateShort()) {
 					hide();
-					WaypointsFragment.showInstance(mapActivity12.getSupportFragmentManager(), true);
+					WaypointsFragment.showInstance(activity, true);
 				}
 			}
 		});
@@ -1801,9 +1801,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		setupButtonIcon(swapDirectionView, R.drawable.ic_action_change_navigation_points);
 
 		fromButton.setOnClickListener(view -> {
-			MapActivity mapActv = getMapActivity();
-			if (mapActv != null) {
-				OsmandApplication app = mapActv.getMyApplication();
+			MapActivity activity = getMapActivity();
+			if (activity != null) {
+				OsmandApplication app = activity.getMyApplication();
 				TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 				TargetPoint startPoint = targetPointsHelper.getPointToStart();
 				TargetPoint endPoint = targetPointsHelper.getPointToNavigate();
@@ -1821,15 +1821,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					} else {
 						if (startPoint == null && loc != null) {
 							startPoint = TargetPoint.createStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()),
-									new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION, mapActv.getString(R.string.shared_string_my_location)));
+									new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION, activity.getString(R.string.shared_string_my_location)));
 						}
 						if (startPoint != null) {
 							int intermediateSize = targetPointsHelper.getIntermediatePoints().size();
 							if (intermediateSize > 1) {
-								WaypointDialogHelper.reverseAllPoints(app, mapActv, mapActv.getDashboard().getWaypointDialogHelper());
+								WaypointDialogHelper.reverseAllPoints(activity);
 							} else {
-								WaypointDialogHelper.switchStartAndFinish(mapActv.getMyApplication(),
-										mapActv, mapActv.getDashboard().getWaypointDialogHelper(), true);
+								WaypointDialogHelper.switchStartAndFinish(activity, true);
 							}
 						} else {
 							app.showShortToastMessage(R.string.route_add_start_point);

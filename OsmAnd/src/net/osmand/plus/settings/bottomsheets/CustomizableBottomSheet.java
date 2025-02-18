@@ -20,12 +20,14 @@ import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
 import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.data.DisplayItem;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialogNightModeInfoProvider;
+import net.osmand.plus.base.dialog.interfaces.dialog.IContextDialog;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
 public abstract class CustomizableBottomSheet extends MenuBottomSheetDialogFragment
-		implements IDialog, IAskDismissDialog, IAskRefreshDialogCompletely, IDialogNightModeInfoProvider {
+		implements IDialog, IContextDialog, IAskDismissDialog, IAskRefreshDialogCompletely,
+		IDialogNightModeInfoProvider {
 
 	private static final String PROCESS_ID_ATTR = "process_id";
 

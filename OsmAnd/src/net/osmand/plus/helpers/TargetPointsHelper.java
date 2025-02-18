@@ -570,7 +570,7 @@ public class TargetPointsHelper {
 		cancelTargetPointAddressRequest();
 		cancelAllIntermediatePointsAddressRequests();
 		settings.clearPointToNavigate();
-		if (point.size() > 0) {
+		if (!point.isEmpty()) {
 			List<TargetPoint> subList = point.subList(0, point.size() - 1);
 			ArrayList<String> names = new ArrayList<>(subList.size());
 			ArrayList<LatLon> ls = new ArrayList<>(subList.size());
@@ -590,7 +590,7 @@ public class TargetPointsHelper {
 
 	public void reorderIntermediatePoints(List<TargetPoint> points, boolean updateRoute) {
 		cancelAllIntermediatePointsAddressRequests();
-		if (points.size() > 0) {
+		if (!points.isEmpty()) {
 			ArrayList<String> names = new ArrayList<>(points.size());
 			ArrayList<LatLon> ls = new ArrayList<>(points.size());
 			for (int i = 0; i < points.size(); i++) {
