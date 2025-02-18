@@ -166,15 +166,13 @@ public class TravelObfHelper implements TravelHelper {
 		loadPopularArticles();
 	}
 
-	@NonNull
-	private synchronized PopularArticles loadPopularArticles() {
+	private synchronized void loadPopularArticles() {
 		String lang = app.getLanguage();
 		PopularArticles popularArticles = loadPopularArticlesForLang(lang);
 		if (popularArticles.isEmpty()) {
 			popularArticles = loadPopularArticlesForLang("en");
 		}
 		this.popularArticles = popularArticles;
-		return popularArticles;
 	}
 
 	@NonNull
@@ -616,11 +614,7 @@ public class TravelObfHelper implements TravelHelper {
 				if (!childTitle.isEmpty()) {
 					WikivoyageSearchResult searchResult = new WikivoyageSearchResult("", childTitle, null,
 							null, Collections.singletonList(parentLang));
-					List<WikivoyageSearchResult> resultList = navMap.get(header);
-					if (resultList == null) {
-						resultList = new ArrayList<>();
-						navMap.put(header, resultList);
-					}
+					List<WikivoyageSearchResult> resultList = navMap.computeIfAbsent(header, k -> new ArrayList<>());
 					resultList.add(searchResult);
 					if (headers.contains(childTitle)) {
 						headerObjs.put(childTitle, searchResult);
@@ -806,10 +800,9 @@ public class TravelObfHelper implements TravelHelper {
 	public synchronized TravelArticle findSavedArticle(@NonNull TravelArticle savedArticle) {
 		List<Pair<File, Amenity>> amenities = new ArrayList<>();
 		TravelArticle article = null;
-		TravelArticleIdentifier articleId = savedArticle.generateIdentifier();
+		final TravelArticleIdentifier articleId = savedArticle.generateIdentifier();
 		String lang = savedArticle.getLang();
 		long lastModified = savedArticle.getLastModified();
-		TravelArticleIdentifier finalArticleId = articleId;
 		SearchRequest<Amenity> req = null;
 		for (AmenityIndexRepository repo : getWikivoyageRepositories()) {
 			if (articleId.file != null && articleId.file.equals(repo.getFile())) {
@@ -821,7 +814,7 @@ public class TravelObfHelper implements TravelHelper {
 
 								@Override
 								public boolean publish(Amenity amenity) {
-									if (Algorithms.stringsEqual(finalArticleId.routeId,
+									if (Algorithms.stringsEqual(articleId.routeId,
 											Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID)))) {
 										amenities.add(new Pair<>(repo.getFile(), amenity));
 										done = true;
@@ -875,9 +868,9 @@ public class TravelObfHelper implements TravelHelper {
 
 							@Override
 							public boolean publish(Amenity amenity) {
-								if (Algorithms.stringsEqual(finalArticleId.routeId,
+								if (Algorithms.stringsEqual(articleId.routeId,
 										Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID)))
-										&& Algorithms.stringsEqual(finalArticleId.routeSource,
+										&& Algorithms.stringsEqual(articleId.routeSource,
 										Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_SOURCE)))) {
 									amenities.add(new Pair<>(repo.getFile(), amenity));
 									done = true;
@@ -1168,16 +1161,12 @@ public class TravelObfHelper implements TravelHelper {
 							for (String tag : amenity.getAdditionalInfoKeys()) {
 								String value = amenity.getAdditionalInfo(tag);
 								if (tag.startsWith(OBF_POINTS_GROUPS_PREFIX)) {
-									final String delimiter = OBF_POINTS_GROUPS_DELIMITER;
-									List<String> values = Arrays.asList(value.split(delimiter));
-									if (OBF_POINTS_GROUPS_NAMES.equals(tag)) {
-										pgNames.addAll(values);
-									} else if (OBF_POINTS_GROUPS_ICONS.equals(tag)) {
-										pgIcons.addAll(values);
-									} else if (OBF_POINTS_GROUPS_COLORS.equals(tag)) {
-										pgColors.addAll(values);
-									} else if (OBF_POINTS_GROUPS_BACKGROUNDS.equals(tag)) {
-										pgBackgrounds.addAll(values);
+									List<String> values = Arrays.asList(value.split(OBF_POINTS_GROUPS_DELIMITER));
+									switch (tag) {
+										case OBF_POINTS_GROUPS_NAMES -> pgNames.addAll(values);
+										case OBF_POINTS_GROUPS_ICONS -> pgIcons.addAll(values);
+										case OBF_POINTS_GROUPS_COLORS -> pgColors.addAll(values);
+										case OBF_POINTS_GROUPS_BACKGROUNDS -> pgBackgrounds.addAll(values);
 									}
 								} else if (!doNotSaveAmenityGpxTags.contains(tag)) {
 									gpxFileExtensions.put(tag, value);
@@ -1340,13 +1329,17 @@ public class TravelObfHelper implements TravelHelper {
 			Gson gson = new Gson();
 			Type type = new TypeToken<Map<String, String>>() {}.getType();
 			if (gpxFileExtensions.containsKey(EXTENSIONS_EXTRA_TAGS)) {
-				gpxFile.getExtensionsToWrite()
-						.putAll(gson.fromJson(gpxFileExtensions.get(EXTENSIONS_EXTRA_TAGS), type));
+				Map<String, String> jsonMap = gson.fromJson(gpxFileExtensions.get(EXTENSIONS_EXTRA_TAGS), type);
+				if (jsonMap != null) {
+					gpxFile.getExtensionsToWrite().putAll(jsonMap);
+				}
 				gpxFileExtensions.remove(EXTENSIONS_EXTRA_TAGS);
 			}
 			if (gpxFileExtensions.containsKey(METADATA_EXTRA_TAGS)) {
-				gpxFile.getMetadata().getExtensionsToWrite()
-						.putAll(gson.fromJson(gpxFileExtensions.get(METADATA_EXTRA_TAGS), type));
+				Map<String, String> jsonMap = gson.fromJson(gpxFileExtensions.get(METADATA_EXTRA_TAGS), type);
+				if (jsonMap != null) {
+					gpxFile.getMetadata().getExtensionsToWrite().putAll(jsonMap);
+				}
 				gpxFileExtensions.remove(METADATA_EXTRA_TAGS);
 			}
 
