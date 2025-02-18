@@ -653,17 +653,17 @@ public class ResourceManager {
 					}
 					renderer.initializeNewResource(f, mapReader);
 					BinaryMapReaderResource resource = new BinaryMapReaderResource(f, mapReader);
-					boolean isTravelObfExt = resource.getFileName().endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT);
+					boolean isTravelObf = resource.getFileName().endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT);
 					if (mapReader.containsPoiData()) {
 						AmenityIndexRepositoryBinary amenityResource = new AmenityIndexRepositoryBinary(f, resource, app);
 						amenityRepositories.put(fileName, amenityResource);
-						if (isTravelObfExt) {
+						if (isTravelObf) {
 							// reuse until new BinaryMapReaderResourceType.TRAVEL_GPX
 							travelRepositories.put(resource.getFileName(), amenityResource);
 						}
 					}
 					fileReaders.put(fileName, resource);
-					if (isTravelObfExt) {
+					if (isTravelObf) {
 						// travel files should be indexed separately (so it's possible to turn on / off)
 						continue;
 					}
@@ -751,7 +751,7 @@ public class ResourceManager {
 	}
 
 	public boolean isWikivoyageRepositoryEmpty() {
-		return getWikivoyageRepositories().isEmpty();
+		return travelRepositories.isEmpty();
 	}
 
 	public void initMapBoundariesCacheNative() {

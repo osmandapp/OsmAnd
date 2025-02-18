@@ -109,7 +109,7 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 	}
 
 	@Nullable
-	private synchronized BinaryMapIndexReader getOpenReader() {
+	private BinaryMapIndexReader getOpenReader() {
 		return resource.getReader(BinaryMapReaderResourceType.POI);
 	}
 
