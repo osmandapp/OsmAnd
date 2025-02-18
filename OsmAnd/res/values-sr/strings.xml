@@ -5109,7 +5109,7 @@
     <string name="shared_string_loading">Учитава се</string>
     <string name="delete_trash_item_confirmation_desc">Избрисати \"%1$s\" трајно?</string>
     <string name="cloud_trash_clear_confirmation">Обрисати трајно све ставке из канте отпада?</string>
-    <string name="empty_smart_folder_title">Нема подударајућег трага</string>
+    <string name="empty_smart_folder_title">Нема подударајуће стазе</string>
     <string name="key_event_action_emit_navigation_hint">Пошаљи савет за навигацију</string>
     <string name="key_event_action_move_down">Помери доле</string>
     <string name="key_event_action_next_app_profile">Следећи профил апликације</string>
