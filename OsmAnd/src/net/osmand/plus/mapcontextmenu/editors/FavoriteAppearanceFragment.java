@@ -24,13 +24,14 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.card.base.multistate.IMultiStateCardController;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.configmap.tracks.appearance.favorite.FavoriteAppearanceController;
 import net.osmand.plus.configmap.tracks.appearance.favorite.FavoriteAppearanceController.DefaultFavoriteListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.editors.DefaultFavoriteAppearanceSaveBottomSheet.SaveOption;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.myplaces.favorites.FavouritesHelper.SaveOption;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -110,22 +111,23 @@ public class FavoriteAppearanceFragment extends BaseOsmAndFragment {
 		setupToolbar();
 		setupButtons();
 
-		FragmentActivity activity = requireActivity();
-		ViewGroup cardContainer = view.findViewById(R.id.cards_container);
-		inflate(R.layout.list_item_divider, cardContainer, true);
-
-		MultiStateCard colorsCard = new MultiStateCard(activity, controller.getColorCardController(), false);
-		cardContainer.addView(colorsCard.build());
-		inflate(R.layout.list_item_divider, cardContainer, true);
-
-		MultiStateCard iconsCard = new MultiStateCard(requireMapActivity(), controller.getIconController().getCardController());
-		cardContainer.addView(iconsCard.build());
-		inflate(R.layout.list_item_divider, cardContainer, true);
-
-		MultiStateCard shapeCard = new MultiStateCard(requireMapActivity(), controller.getShapesController());
-		cardContainer.addView(shapeCard.build());
+		setupCards();
 
 		return view;
+	}
+
+	private void setupCards(){
+		FragmentActivity activity = requireActivity();
+		ViewGroup cardContainer = view.findViewById(R.id.cards_container);
+		setupCard(activity, cardContainer, controller.getColorCardController());
+		setupCard(activity, cardContainer, controller.getIconController().getCardController());
+		setupCard(activity, cardContainer, controller.getShapesController());
+	}
+
+	private void setupCard(@NonNull FragmentActivity activity, @NonNull ViewGroup cardContainer, @NonNull IMultiStateCardController controller){
+		inflate(R.layout.list_item_divider, cardContainer, true);
+		MultiStateCard card = new MultiStateCard(activity, controller, false);
+		cardContainer.addView(card.build());
 	}
 
 	@ColorInt
@@ -205,12 +207,15 @@ public class FavoriteAppearanceFragment extends BaseOsmAndFragment {
 	}
 
 	protected void setupButtons() {
-		DialogButton saveButton = view.findViewById(R.id.apply_button);
+		DialogButton saveButton = view.findViewById(R.id.right_bottom_button);
 		AndroidUiHelper.updateVisibility(saveButton, true);
 		saveButton.setOnClickListener(v -> savePressed());
 		saveButton.setButtonType(DialogButtonType.PRIMARY);
 		saveButton.setTitleId(R.string.shared_string_save);
 		AndroidUtils.setBackgroundColor(app, view.findViewById(R.id.buttons_container), ColorUtilities.getListBgColorId(nightMode));
+
+		DialogButton dismissButton = view.findViewById(R.id.dismiss_button);
+		AndroidUiHelper.updateVisibility(dismissButton, false);
 	}
 
 	protected void savePressed() {

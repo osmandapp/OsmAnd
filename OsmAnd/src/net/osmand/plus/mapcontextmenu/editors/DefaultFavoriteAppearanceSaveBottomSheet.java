@@ -1,15 +1,10 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
-import static net.osmand.plus.mapcontextmenu.editors.DefaultFavoriteAppearanceSaveBottomSheet.SaveOption.APPLY_TO_ALL;
-import static net.osmand.plus.mapcontextmenu.editors.DefaultFavoriteAppearanceSaveBottomSheet.SaveOption.APPLY_TO_EXISTING;
-import static net.osmand.plus.mapcontextmenu.editors.DefaultFavoriteAppearanceSaveBottomSheet.SaveOption.APPLY_TO_NEW;
+import static net.osmand.plus.myplaces.favorites.FavouritesHelper.SaveOption.APPLY_TO_ALL;
+import static net.osmand.plus.myplaces.favorites.FavouritesHelper.SaveOption.APPLY_TO_EXISTING;
+import static net.osmand.plus.myplaces.favorites.FavouritesHelper.SaveOption.APPLY_TO_NEW;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,47 +12,75 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemButton;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 public class DefaultFavoriteAppearanceSaveBottomSheet extends SaveGroupConfirmationBottomSheet {
 
-	protected DialogButton applyToAll;
+	public static final String TAG = DefaultFavoriteAppearanceSaveBottomSheet.class.getSimpleName();
 
 	@Override
-	protected void setupBottomButtons(ViewGroup view) {
-		if (isWptEditor()) {
-			super.setupBottomButtons(view);
-		} else {
-			Activity activity = requireActivity();
-			LayoutInflater themedInflater = UiUtilities.getInflater(activity, nightMode);
-			buttonsContainer = (LinearLayout) themedInflater.inflate(R.layout.favorite_save_bottom_sheet_buttons, view);
-			setupThirdButton();
-			setupRightButton();
-			setupDismissButton();
-			setupApplyToAllButton();
-			updateBottomButtons();
-		}
-	}
+	public void createMenuItems(Bundle savedInstanceState) {
+		String description = getString(isWptEditor() ? R.string.apply_to_existing_points_descr : R.string.save_favorite_default_appearance);
+		items.add(new ShortDescriptionItem.Builder()
+				.setDescription(description)
+				.setDescriptionColorId(ColorUtilities.getSecondaryTextColorId(nightMode))
+				.setTitle(getString(R.string.shared_string_save))
+				.setLayoutId(R.layout.bottom_sheet_item_list_title_with_descr)
+				.create());
 
-	private void setupApplyToAllButton() {
-		applyToAll = buttonsContainer.findViewById(R.id.apply_to_all);
-		applyToAll.setButtonHeight(getRightButtonHeight());
+		items.add(new DividerSpaceItem(getContext(), getResources().getDimensionPixelSize(R.dimen.bottom_sheet_exit_button_margin)));
 
-		applyToAll.setTitleId(R.string.apply_to_all_points);
-		applyToAll.setButtonType(DialogButtonType.PRIMARY);
-		applyToAll.setOnClickListener(v -> onApplyToAllBottomButtonClick());
-		View divider = buttonsContainer.findViewById(R.id.buttons_divider);
-		divider.getLayoutParams().height = getFirstDividerHeight();
+		String applyExisting = getString(R.string.apply_to_existing);
+		String text = getString(R.string.ltr_or_rtl_combine_via_space, applyExisting, "(" + pointsSize + ")");
+		items.add(new BottomSheetItemButton.Builder()
+				.setButtonType(DialogButtonType.SECONDARY)
+				.setTitle(text)
+				.setLayoutId(R.layout.bottom_sheet_button)
+				.setOnClickListener(v -> {
+					Fragment fragment = getTargetFragment();
+					if (fragment instanceof FavoriteAppearanceFragment) {
+						((FavoriteAppearanceFragment) fragment).editPointsGroup(APPLY_TO_EXISTING);
+					}
+					dismiss();
+				})
+				.create());
+
+		items.add(new DividerSpaceItem(getContext(), getResources().getDimensionPixelSize(R.dimen.context_menu_buttons_padding_bottom)));
 	}
 
 	@Override
-	protected DialogButtonType getRightBottomButtonType() {
-		return DialogButtonType.SECONDARY;
+	protected void setupRightButton() {
+		super.setupRightButton();
+		int textId = R.string.apply_to_all_points;
+		rightButton.setButtonType(getRightBottomButtonType());
+		rightButton.setTitleId(textId);
 	}
 
-	protected void onApplyToAllBottomButtonClick() {
+	@Override
+	protected void setupThirdButton() {
+		super.setupThirdButton();
+		String newPoints = getString(isWptEditor() ? R.string.apply_only_to_new_points : R.string.apply_only_to_new_favorites);
+		thirdButton.setButtonType(getThirdBottomButtonType());
+		thirdButton.setTitle(newPoints);
+	}
+
+	@Override
+	protected int getRightBottomButtonTextId() {
+		return R.string.apply_to_all_points;
+	}
+
+	@Override
+	protected int getThirdBottomButtonTextId() {
+		return isWptEditor() ? R.string.apply_only_to_new_points : R.string.apply_only_to_new_favorites;
+	}
+
+	@Override
+	protected void onRightBottomButtonClick() {
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof FavoriteAppearanceFragment) {
 			((FavoriteAppearanceFragment) fragment).editPointsGroup(APPLY_TO_ALL);
@@ -66,7 +89,7 @@ public class DefaultFavoriteAppearanceSaveBottomSheet extends SaveGroupConfirmat
 	}
 
 	@Override
-	protected void onRightBottomButtonClick() {
+	protected void onThirdBottomButtonClick() {
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof FavoriteAppearanceFragment) {
 			((FavoriteAppearanceFragment) fragment).editPointsGroup(APPLY_TO_NEW);
@@ -75,22 +98,13 @@ public class DefaultFavoriteAppearanceSaveBottomSheet extends SaveGroupConfirmat
 	}
 
 	@Override
-	protected void onThirdBottomButtonClick() {
-		Fragment fragment = getTargetFragment();
-		if (fragment instanceof FavoriteAppearanceFragment) {
-			((FavoriteAppearanceFragment) fragment).editPointsGroup(APPLY_TO_EXISTING);
-		}
-		dismiss();
-	}
-
-	@Override
 	public int getSecondDividerHeight() {
-		return getResources().getDimensionPixelSize(R.dimen.content_padding);
+		return getResources().getDimensionPixelSize(R.dimen.horizontal_divider_height);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target,
 	                                @NonNull String editorTag, int pointsSize) {
-		if (!manager.isStateSaved()) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			Bundle bundle = new Bundle();
 			bundle.putString(EDITOR_TAG_KEY, editorTag);
 			bundle.putInt(POINTS_SIZE_KEY, pointsSize);
@@ -100,11 +114,5 @@ public class DefaultFavoriteAppearanceSaveBottomSheet extends SaveGroupConfirmat
 			fragment.setTargetFragment(target, 0);
 			fragment.show(manager, TAG);
 		}
-	}
-
-	public enum SaveOption {
-		APPLY_TO_EXISTING,
-		APPLY_TO_NEW,
-		APPLY_TO_ALL
 	}
 }
