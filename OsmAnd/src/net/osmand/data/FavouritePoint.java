@@ -329,6 +329,10 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.backgroundType = backgroundType;
 	}
 
+	public boolean isBackgroundSet(){
+		return backgroundType != null;
+	}
+
 	@NonNull
 	@Override
 	public String toString() {

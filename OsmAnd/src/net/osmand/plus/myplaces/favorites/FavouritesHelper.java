@@ -1,6 +1,7 @@
 package net.osmand.plus.myplaces.favorites;
 
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.plus.mapcontextmenu.editors.DefaultFavoriteAppearanceSaveBottomSheet.SaveOption.*;
 import static net.osmand.shared.gpx.GpxUtilities.DEFAULT_ICON_NAME;
 
 import android.graphics.drawable.Drawable;
@@ -20,6 +21,7 @@ import net.osmand.data.SpecialPointType;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.mapcontextmenu.editors.DefaultFavoriteAppearanceSaveBottomSheet.SaveOption;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.SaveFavoritesTask.SaveFavoritesListener;
@@ -686,13 +688,36 @@ public class FavouritesHelper {
 		};
 	}
 
-	public void updateGroupColor(@NonNull FavoriteGroup group, int color, boolean updatePoints, boolean saveImmediately) {
-		if (updatePoints) {
+	public void updateGroupColor(@NonNull FavoriteGroup group, int color, @NonNull SaveOption saveOption, boolean saveImmediately) {
+		if (APPLY_TO_ALL == saveOption || APPLY_TO_EXISTING == saveOption) {
 			for (FavouritePoint point : group.getPoints()) {
 				point.setColor(color);
 			}
 		}
-		group.setColor(color);
+		if (APPLY_TO_ALL == saveOption || APPLY_TO_NEW == saveOption) {
+			group.setColor(color);
+		}
+		runSyncWithMarkers(group);
+		if (saveImmediately) {
+			saveCurrentPointsIntoFile(false);
+		}
+	}
+
+	public void updateGroupColor(@NonNull FavoriteGroup group, int color, boolean updatePoints, boolean saveImmediately) {
+		SaveOption saveOption = updatePoints ? APPLY_TO_ALL : APPLY_TO_NEW;
+		updateGroupColor(group, color, saveOption, saveImmediately);
+	}
+
+	public void updateGroupIconName(@NonNull FavoriteGroup group, @NonNull String iconName,
+	                                @NonNull SaveOption saveOption, boolean saveImmediately) {
+		if (APPLY_TO_ALL == saveOption || APPLY_TO_EXISTING == saveOption) {
+			for (FavouritePoint point : group.getPoints()) {
+				point.setIconIdFromName(iconName);
+			}
+		}
+		if (APPLY_TO_ALL == saveOption || APPLY_TO_NEW == saveOption) {
+			group.setIconName(iconName);
+		}
 		runSyncWithMarkers(group);
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile(false);
@@ -701,12 +726,20 @@ public class FavouritesHelper {
 
 	public void updateGroupIconName(@NonNull FavoriteGroup group, @NonNull String iconName,
 	                                boolean updatePoints, boolean saveImmediately) {
-		if (updatePoints) {
+		SaveOption saveOption = updatePoints ? APPLY_TO_ALL : APPLY_TO_NEW;
+		updateGroupIconName(group, iconName, saveOption, saveImmediately);
+	}
+
+	public void updateGroupBackgroundType(@NonNull FavoriteGroup group, @NonNull BackgroundType backgroundType,
+	                                      @NonNull SaveOption saveOption, boolean saveImmediately) {
+		if (APPLY_TO_ALL == saveOption || APPLY_TO_EXISTING == saveOption) {
 			for (FavouritePoint point : group.getPoints()) {
-				point.setIconIdFromName(iconName);
+				point.setBackgroundType(backgroundType);
 			}
 		}
-		group.setIconName(iconName);
+		if (APPLY_TO_ALL == saveOption || APPLY_TO_NEW == saveOption) {
+			group.setBackgroundType(backgroundType);
+		}
 		runSyncWithMarkers(group);
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile(false);
@@ -715,16 +748,8 @@ public class FavouritesHelper {
 
 	public void updateGroupBackgroundType(@NonNull FavoriteGroup group, @NonNull BackgroundType backgroundType,
 	                                      boolean updatePoints, boolean saveImmediately) {
-		if (updatePoints) {
-			for (FavouritePoint point : group.getPoints()) {
-				point.setBackgroundType(backgroundType);
-			}
-		}
-		group.setBackgroundType(backgroundType);
-		runSyncWithMarkers(group);
-		if (saveImmediately) {
-			saveCurrentPointsIntoFile(false);
-		}
+		SaveOption saveOption = updatePoints ? APPLY_TO_ALL : APPLY_TO_NEW;
+		updateGroupBackgroundType(group, backgroundType, saveOption, saveImmediately);
 	}
 
 	public void updateGroupVisibility(@NonNull FavoriteGroup group, boolean visible, boolean saveImmediately) {

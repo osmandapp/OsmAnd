@@ -381,7 +381,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		}
 	}
 
-	private void setupDismissButton() {
+	protected void setupDismissButton() {
 		dismissButton = buttonsContainer.findViewById(R.id.dismiss_button);
 		dismissButton.setButtonHeight(getDismissButtonHeight());
 		int buttonTextId = getDismissButtonTextId();

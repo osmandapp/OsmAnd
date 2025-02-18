@@ -47,7 +47,7 @@ public class SaveGroupConfirmationBottomSheet extends MenuBottomSheetDialogFragm
 		items.add(new DividerSpaceItem(getContext(), getResources().getDimensionPixelSize(R.dimen.bottom_sheet_exit_button_margin)));
 	}
 
-	private boolean isWptEditor() {
+	protected boolean isWptEditor() {
 		return WptPtEditor.TAG.equals(editorTag);
 	}
 

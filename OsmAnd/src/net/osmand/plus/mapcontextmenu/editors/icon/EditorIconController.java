@@ -53,17 +53,19 @@ public class EditorIconController extends BaseDialogController {
 	protected List<String> lastUsedIcons;
 	private String selectedIconKey;
 
-	private EditorIconCardController cardController;
+	protected EditorIconCardController cardController;
 	private EditorIconScreenController screenController;
 	private IconsPaletteElements<String> paletteElements;
 	private Fragment targetFragment;
+	@Nullable
+	protected OnIconsPaletteListener<String> iconsPaletteListener;
 	private int controlsAccentColor;
 
 	public EditorIconController(@NonNull OsmandApplication app) {
 		super(app);
 	}
 
-	protected void init() {
+	public void init() {
 		initIconCategories();
 		this.selectedCategory = findInitialIconCategory();
 		this.cardController = createCardController();
@@ -217,6 +219,10 @@ public class EditorIconController extends BaseDialogController {
 		this.targetFragment = targetFragment;
 	}
 
+	public void setIconsPaletteListener(@Nullable OnIconsPaletteListener<String> iconsPaletteListener) {
+		this.iconsPaletteListener = iconsPaletteListener;
+	}
+
 	@Nullable
 	public Fragment getTargetFragment() {
 		return targetFragment;
@@ -292,6 +298,8 @@ public class EditorIconController extends BaseDialogController {
 		}
 		if (targetFragment instanceof OnIconsPaletteListener<?>) {
 			((OnIconsPaletteListener<String>) targetFragment).onIconSelectedFromPalette(iconKey);
+		} else if (iconsPaletteListener != null) {
+			iconsPaletteListener.onIconSelectedFromPalette(iconKey);
 		}
 	}
 
