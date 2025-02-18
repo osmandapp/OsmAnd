@@ -5694,4 +5694,5 @@
     <string name="original_icon_description">Svaka bi tačka zadržala svoju ikonu.</string>
     <string name="original_shape_description">Svaka bi tačka zadržala svoj oblik.</string>
     <string name="original_color_description">Svaka bi tačka zadržala svoju boju.</string>
+    <string name="save_favorite_default_appearance">Primenjujete promene na postojeće tačke u folderu ili samo na nove?</string>
 </resources>
