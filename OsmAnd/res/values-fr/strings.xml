@@ -5706,4 +5706,5 @@
     <string name="apply_to_all_points">Appliquer à tous les points</string>
     <string name="original_icon_description">Chaque point conservera sa propre icône.</string>
     <string name="original_shape_description">Chaque point conservera sa propre forme.</string>
+    <string name="save_favorite_default_appearance">Appliquer les changements à tous les points existants dans le dossier ou seulement aux nouveaux ?</string>
 </resources>
