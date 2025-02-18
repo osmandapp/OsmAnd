@@ -5698,4 +5698,5 @@
     <string name="original_shape_description">Свака тачка би задржала своју oblik.</string>
     <string name="apply_to_all_points">Примени на све тачке</string>
     <string name="original_color_description">Свака тачка би задржала своју боју.</string>
+    <string name="save_favorite_default_appearance">Примењујете промене на постојеће тачке у фолдеру или само на нове?</string>
 </resources>
