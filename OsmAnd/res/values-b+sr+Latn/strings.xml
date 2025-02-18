@@ -5119,7 +5119,7 @@
     <string name="root_folder">Rut folder</string>
     <string name="shared_string_loading">Učitavanje</string>
     <string name="searching_matching_tracks">Pretraži sve podudarne trase</string>
-    <string name="empty_smart_folder_title">Nema odgovarajućeg staza</string>
+    <string name="empty_smart_folder_title">Nema odgovarajuće staze</string>
     <string name="empty_smart_folder_description">Odgovarajuće trase automatski će se pojaviti ovde</string>
     <string name="smart_folder_saved">Pametan folder je snimljen</string>
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
@@ -5131,7 +5131,7 @@
     <string name="shared_string_delete_immediately">Obriši odmah</string>
     <string name="shared_string_delete_item">Obriši stavku</string>
     <string name="delete_smart_folder_dialog_message">Ovo će ukloniti pametan folder \"%1$s\". (Nijedna putanja neće biti izbrisana.)</string>
-    <string name="smart_folder_name_present">Takva pametan folder već je prisutan</string>
+    <string name="smart_folder_name_present">Takav pametan folder već je prisutan</string>
     <string name="empty_name">Prazno ime</string>
     <string name="loading_tracks">Ponovno učitavanje staza</string>
     <string name="filter_by_name">Filtriranje po nazivu</string>
