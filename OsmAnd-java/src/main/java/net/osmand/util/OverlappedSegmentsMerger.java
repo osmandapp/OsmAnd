@@ -7,7 +7,7 @@ import net.osmand.shared.util.KMapUtils;
 
 import java.util.*;
 
-public class AdvancedTrackMerger {
+public class OverlappedSegmentsMerger {
 
     private static final double PRECISION = KMapUtils.HIGH_LATLON_PRECISION;
 
@@ -87,17 +87,15 @@ public class AdvancedTrackMerger {
     }
 
     private static boolean createsLoop(List<WptPt> a, List<WptPt> b, int overlap) {
-        // Проверка валидности overlap
         if (overlap <= 0 || overlap > a.size() || overlap > b.size()) {
             return false;
         }
 
-        // Вычисление индексов с проверкой границ
         int indexA = a.size() - overlap - 1;
         int indexB = overlap;
 
         if (indexA < 0 || indexA >= a.size() || indexB >= b.size()) {
-            return false; // Некорректные индексы → петля не образуется
+            return false;
         }
 
         WptPt firstAfterMerge = a.get(indexA);
@@ -116,9 +114,8 @@ public class AdvancedTrackMerger {
         List<WptPt> points = segment.getPoints();
         if (points.size() < 2) return false;
 
-        // Проверка на петлю внутри сегмента
         for (int i = 1; i < points.size(); i++) {
-            if (equals(points.get(i-1), points.get(i))) return false;
+            if (equals(points.get(i - 1), points.get(i))) return false;
         }
         return true;
     }
