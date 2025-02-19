@@ -49,7 +49,9 @@ import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.binary.HeightDataLoader.InterfaceIsCancelled;
 import net.osmand.plus.Version;
+import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.resources.AmenityIndexRepository;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.binary.BinaryMapDataObject;
@@ -740,7 +742,13 @@ public class TravelObfHelper implements TravelHelper {
 
 	private void readGpxFile(@NonNull TravelArticle article, @Nullable GpxReadCallback callback) {
 		if (!article.gpxFileRead) {
-			new GpxFileReader(article, callback, getTravelGpxRepositories()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			if (!app.isApplicationInitializing()) {
+				MapActivity mapActivity = app.getOsmandMap().getMapView().getMapActivity();
+				if (mapActivity != null) {
+					new GpxFileReader(mapActivity, article, callback, getTravelGpxRepositories())
+							.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				}
+			}
 		} else if (callback != null) {
 			callback.onGpxFileRead(article.gpxFile);
 		}
@@ -1087,18 +1095,22 @@ public class TravelObfHelper implements TravelHelper {
 		}
 	}
 
-	private void fetchSegmentsAndPoints(@NonNull List<AmenityIndexRepository> repos,
-	                                    @NonNull TravelArticle article,
-	                                    @NonNull List<BinaryMapDataObject> segmentList,
-	                                    @NonNull List<Amenity> pointList,
-	                                    @NonNull Map<String, String> gpxFileExtensions,
-	                                    @NonNull List<String> pgNames,
-	                                    @NonNull List<String> pgIcons,
-	                                    @NonNull List<String> pgColors,
-	                                    @NonNull List<String> pgBackgrounds) {
+	private boolean fetchSegmentsAndPoints(@NonNull List<AmenityIndexRepository> repos,
+	                                       @NonNull TravelArticle article,
+	                                       @NonNull List<BinaryMapDataObject> segmentList,
+	                                       @NonNull List<Amenity> pointList,
+	                                       @NonNull Map<String, String> gpxFileExtensions,
+	                                       @NonNull List<String> pgNames,
+	                                       @NonNull List<String> pgIcons,
+	                                       @NonNull List<String> pgColors,
+	                                       @NonNull List<String> pgBackgrounds,
+	                                       @NonNull InterfaceIsCancelled isCancelled) {
 		boolean allowReadFromMultipleMaps = article.hasOsmRouteId() && article.routeRadius > 0;
 		for (AmenityIndexRepository repo : repos) {
 			try {
+				if (isCancelled.isCancelled()) {
+					return false;
+				}
 				if (!allowReadFromMultipleMaps &&
 						!Algorithms.objectEquals(repo.getFile(), article.file)) {
 					continue; // speed up reading of Wikivoyage and User's GPX files in OBF
@@ -1106,7 +1118,7 @@ public class TravelObfHelper implements TravelHelper {
 				if (article instanceof TravelGpx) {
 					BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> sr = BinaryMapIndexReader.buildSearchRequest(
 							0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, 15, null,
-							matchSegmentsByRefTitleRouteId(article, segmentList));
+							matchSegmentsByRefTitleRouteId(article, segmentList, isCancelled));
 					if (article.routeRadius >= 0) {
 						sr.setBBoxRadius(article.lat, article.lon, article.routeRadius);
 					}
@@ -1115,7 +1127,7 @@ public class TravelObfHelper implements TravelHelper {
 				BinaryMapIndexReader.SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
 						0, 0, Algorithms.emptyIfNull(article.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
 						getSearchFilter(article.getMainFilterString(), article.getPointFilterString()),
-						matchPointsAndTags(article, pointList, gpxFileExtensions, pgNames, pgIcons, pgColors, pgBackgrounds),
+						matchPointsAndTags(article, pointList, gpxFileExtensions, pgNames, pgIcons, pgColors, pgBackgrounds, isCancelled),
 						null);
 				if (article.routeRadius >= 0) {
 					pointRequest.setBBoxRadius(article.lat, article.lon, article.routeRadius);
@@ -1132,6 +1144,7 @@ public class TravelObfHelper implements TravelHelper {
 				LOG.error(e.getMessage());
 			}
 		}
+		return !isCancelled.isCancelled(); // might be partially succeed
 	}
 
 	@NonNull
@@ -1141,7 +1154,8 @@ public class TravelObfHelper implements TravelHelper {
 	                                                  @NonNull List<String> pgNames,
 	                                                  @NonNull List<String> pgIcons,
 	                                                  @NonNull List<String> pgColors,
-	                                                  @NonNull List<String> pgBackgrounds) {
+	                                                  @NonNull List<String> pgBackgrounds,
+	                                                  @NonNull InterfaceIsCancelled isCancelled) {
 		return new ResultMatcher<Amenity>() {
 			boolean isAlreadyProcessed = false;
 			@Override
@@ -1186,7 +1200,7 @@ public class TravelObfHelper implements TravelHelper {
 			}
 			@Override
 			public boolean isCancelled() {
-				return false;
+				return isCancelled.isCancelled();
 			}
 		};
 	}
@@ -1218,7 +1232,9 @@ public class TravelObfHelper implements TravelHelper {
 
 	@NonNull
 	private ResultMatcher<BinaryMapDataObject> matchSegmentsByRefTitleRouteId(
-			@NonNull TravelArticle article, @NonNull List<BinaryMapDataObject> segmentList) {
+			@NonNull TravelArticle article,
+			@NonNull List<BinaryMapDataObject> segmentList,
+			@NonNull InterfaceIsCancelled isCancelled) {
 		return new ResultMatcher<BinaryMapDataObject>() {
 			@Override
 			public boolean publish(BinaryMapDataObject object) {
@@ -1241,14 +1257,15 @@ public class TravelObfHelper implements TravelHelper {
 			}
 			@Override
 			public boolean isCancelled() {
-				return false;
+				return isCancelled.isCancelled();
 			}
 		};
 	}
 
-	@NonNull
+	@Nullable
 	private synchronized GpxFile buildGpxFile(@NonNull List<AmenityIndexRepository> repos,
-	                                          @NonNull TravelArticle article) {
+	                                          @NonNull TravelArticle article,
+	                                          @NonNull InterfaceIsCancelled isCancelled) {
 		List<BinaryMapDataObject> segmentList = new ArrayList<>();
 		Map<String, String> gpxFileExtensions = new TreeMap<>();
 		List<Amenity> pointList = new ArrayList<>();
@@ -1257,8 +1274,12 @@ public class TravelObfHelper implements TravelHelper {
 		List<String> pgColors = new ArrayList<>();
 		List<String> pgBackgrounds = new ArrayList<>();
 
-		fetchSegmentsAndPoints(repos, article, segmentList, pointList, gpxFileExtensions,
-				pgNames, pgIcons, pgColors, pgBackgrounds);
+		boolean loaded = fetchSegmentsAndPoints(repos, article, segmentList, pointList, gpxFileExtensions,
+				pgNames, pgIcons, pgColors, pgBackgrounds, isCancelled);
+
+		if (!loaded || isCancelled.isCancelled()) {
+			return null;
+		}
 
 		GpxFile gpxFile;
 		if (article instanceof TravelGpx) {
@@ -1376,14 +1397,17 @@ public class TravelObfHelper implements TravelHelper {
 		}
 	}
 
-	private class GpxFileReader extends AsyncTask<Void, Void, GpxFile> {
+	private class GpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFile> {
 
 		private final TravelArticle article;
 		private final GpxReadCallback callback;
 		private final List<AmenityIndexRepository> repos;
 
-		public GpxFileReader(@NonNull TravelArticle article, @Nullable GpxReadCallback callback,
+		public GpxFileReader(@NonNull MapActivity mapActivity,
+		                     @NonNull TravelArticle article,
+		                     @Nullable GpxReadCallback callback,
 		                     @NonNull List<AmenityIndexRepository> repos) {
+			super(mapActivity);
 			this.article = article;
 			this.callback = callback;
 			this.repos = repos;
@@ -1391,6 +1415,9 @@ public class TravelObfHelper implements TravelHelper {
 
 		@Override
 		protected void onPreExecute() {
+			if (isShouldShowProgress()) {
+				showProgress(true);
+			}
 			if (callback != null) {
 				callback.onGpxFileReading();
 			}
@@ -1398,16 +1425,19 @@ public class TravelObfHelper implements TravelHelper {
 
 		@Override
 		protected GpxFile doInBackground(Void... voids) {
-			return buildGpxFile(repos, article);
+			return buildGpxFile(repos, article, this::isCancelled);
 		}
 
 		@Override
-		protected void onPostExecute(GpxFile gpxFile) {
-			article.gpxFileRead = true;
-			article.gpxFile = gpxFile;
-			if (callback != null) {
-				callback.onGpxFileRead(gpxFile);
+		protected void onPostExecute(@Nullable GpxFile gpxFile) {
+			if (gpxFile != null) {
+				article.gpxFileRead = true;
+				article.gpxFile = gpxFile;
+				if (callback != null) {
+					callback.onGpxFileRead(gpxFile);
+				}
 			}
+			hideProgress();
 		}
 	}
 }
