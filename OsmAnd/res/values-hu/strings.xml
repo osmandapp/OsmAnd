@@ -5661,4 +5661,9 @@
     <string name="hmd_promo_description">Ingyenes hozzáférés %1$s hónapig a funkciókhoz, beleértve a korlátlan térképletöltést, a 3D domborzatot stb</string>
     <string name="shared_string_road_exit">Kijárat</string>
     <string name="hmd_promo">%1$s hónapos HMD promóció</string>
+    <string name="original_color_description">Minden pont megtartja a saját színét.</string>
+    <string name="save_favorite_default_appearance">Alkalmazza a változtatásokat a mappában lévő meglévő pontokra, vagy csak az újakra?</string>
+    <string name="original_icon_description">Minden pont megtartja a saját ikonját.</string>
+    <string name="original_shape_description">Minden pont megtartja a saját alakját.</string>
+    <string name="apply_to_all_points">Alkalmazza az összes pontra</string>
 </resources>
