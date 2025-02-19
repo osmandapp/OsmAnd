@@ -46,14 +46,14 @@ open class OBDDevicesAdapter(
 		val isConnected = connectedDevice?.address == device.address
 
 		holder.name.text = device.name
-		if(device.isBLE) {
-			holder.name.setCompoundDrawablesWithIntrinsicBounds(null, null, app.getDrawable(R.drawable.ic_action_car_obd2), null)
-		} else {
-			holder.name.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null)
-		}
+		val btProtocolPrefix =
+			if (device.isBLE) R.string.external_device_ble else R.string.shared_string_bluetooth
 		holder.icon.setImageResource(if (isConnected) R.drawable.ic_action_car_obd2 else if (nightMode) R.drawable.widget_obd_car_day else R.drawable.widget_obd_car_night)
 		holder.description.visibility = View.VISIBLE
-		holder.description.text = device.address
+		holder.description.text = app.getString(
+			R.string.ltr_or_rtl_combine_via_comma,
+			app.getString(btProtocolPrefix), device.address)
+
 		holder.description.gravity = Gravity.CENTER_VERTICAL
 		holder.itemView.setOnClickListener { _: View? ->
 			deviceClickListener?.onDeviceClicked(device)

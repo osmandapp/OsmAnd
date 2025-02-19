@@ -119,10 +119,11 @@ class OBDMainFragment : OBDDevicesBaseFragment(), VehicleMetricsPlugin.Connectio
 			if (connected) R.string.external_device_connected else R.string.external_device_disconnected
 		)
 		view.findViewById<TextView>(R.id.device_name).text = device.name
+		val deviceProtocolStringId = if(device.isBLE) R.string.external_device_ble else R.string.shared_string_bluetooth
 		view.findViewById<TextView>(R.id.connection_state).text = app.getString(
 			R.string.ltr_or_rtl_combine_via_comma,
 			connectedText,
-			app.getString(R.string.shared_string_bluetooth)
+			app.getString(deviceProtocolStringId)
 		)
 
 		view.findViewById<ImageView?>(R.id.widget_icon).apply {
