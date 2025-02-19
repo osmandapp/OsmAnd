@@ -73,6 +73,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	public static final String CONTOUR_LINES_DISABLED_VALUE = "disabled";
 	public static final String CONTOUR_WIDTH_ATTR = "contourWidth";
 	public static final String CONTOUR_DENSITY_ATTR = "contourDensity";
+	public static final String ELEVATION_UNITS_ATTR = "eleUnits";
 
 	public static final int TERRAIN_MIN_SUPPORTED_ZOOM = 4;
 	public static final int TERRAIN_MAX_SUPPORTED_ZOOM = 19;

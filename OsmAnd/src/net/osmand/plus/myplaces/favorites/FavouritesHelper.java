@@ -1,7 +1,8 @@
 package net.osmand.plus.myplaces.favorites;
 
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-import static net.osmand.plus.mapcontextmenu.editors.DefaultFavoriteAppearanceSaveBottomSheet.SaveOption.*;
+import static net.osmand.plus.myplaces.favorites.FavouritesHelper.SaveOption.APPLY_TO_ALL;
+import static net.osmand.plus.myplaces.favorites.FavouritesHelper.SaveOption.APPLY_TO_NEW;
 import static net.osmand.shared.gpx.GpxUtilities.DEFAULT_ICON_NAME;
 
 import android.graphics.drawable.Drawable;
@@ -21,7 +22,6 @@ import net.osmand.data.SpecialPointType;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.mapcontextmenu.editors.DefaultFavoriteAppearanceSaveBottomSheet.SaveOption;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.SaveFavoritesTask.SaveFavoritesListener;
@@ -689,12 +689,12 @@ public class FavouritesHelper {
 	}
 
 	public void updateGroupColor(@NonNull FavoriteGroup group, int color, @NonNull SaveOption saveOption, boolean saveImmediately) {
-		if (APPLY_TO_ALL == saveOption || APPLY_TO_EXISTING == saveOption) {
+		if (saveOption.shouldUpdatePoints()) {
 			for (FavouritePoint point : group.getPoints()) {
 				point.setColor(color);
 			}
 		}
-		if (APPLY_TO_ALL == saveOption || APPLY_TO_NEW == saveOption) {
+		if (saveOption.shouldUpdateGroup()) {
 			group.setColor(color);
 		}
 		runSyncWithMarkers(group);
@@ -710,12 +710,12 @@ public class FavouritesHelper {
 
 	public void updateGroupIconName(@NonNull FavoriteGroup group, @NonNull String iconName,
 	                                @NonNull SaveOption saveOption, boolean saveImmediately) {
-		if (APPLY_TO_ALL == saveOption || APPLY_TO_EXISTING == saveOption) {
+		if (saveOption.shouldUpdatePoints()) {
 			for (FavouritePoint point : group.getPoints()) {
 				point.setIconIdFromName(iconName);
 			}
 		}
-		if (APPLY_TO_ALL == saveOption || APPLY_TO_NEW == saveOption) {
+		if (saveOption.shouldUpdateGroup()) {
 			group.setIconName(iconName);
 		}
 		runSyncWithMarkers(group);
@@ -732,12 +732,12 @@ public class FavouritesHelper {
 
 	public void updateGroupBackgroundType(@NonNull FavoriteGroup group, @NonNull BackgroundType backgroundType,
 	                                      @NonNull SaveOption saveOption, boolean saveImmediately) {
-		if (APPLY_TO_ALL == saveOption || APPLY_TO_EXISTING == saveOption) {
+		if (saveOption.shouldUpdatePoints()) {
 			for (FavouritePoint point : group.getPoints()) {
 				point.setBackgroundType(backgroundType);
 			}
 		}
-		if (APPLY_TO_ALL == saveOption || APPLY_TO_NEW == saveOption) {
+		if (saveOption.shouldUpdateGroup()) {
 			group.setBackgroundType(backgroundType);
 		}
 		runSyncWithMarkers(group);
@@ -837,5 +837,19 @@ public class FavouritesHelper {
 			favouritePoints.addAll(group.getPoints());
 		}
 		return favouritePoints;
+	}
+
+	public enum SaveOption {
+		APPLY_TO_EXISTING,
+		APPLY_TO_NEW,
+		APPLY_TO_ALL;
+
+		public boolean shouldUpdatePoints() {
+			return this == APPLY_TO_EXISTING || this == APPLY_TO_ALL;
+		}
+
+		public boolean shouldUpdateGroup(){
+			return this == APPLY_TO_NEW || this == APPLY_TO_ALL;
+		}
 	}
 }

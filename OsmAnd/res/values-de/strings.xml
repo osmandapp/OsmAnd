@@ -5720,4 +5720,9 @@
     <string name="shared_string_road_exit">Ausfahrt</string>
     <string name="hmd_promo_description">Kostenloser Zugriff auf Funktionen wie unbegrenzte Karten-Downloads, 3D-Reliefs usw. für einen Monat (%1$s)</string>
     <string name="hmd_promo">HMD Promo für %1$s Monate</string>
+    <string name="apply_to_all_points">Auf alle Punkte anwenden</string>
+    <string name="save_favorite_default_appearance">Änderungen auf die vorhandenen Punkte im Ordner anwenden oder nur auf neue?</string>
+    <string name="original_color_description">Jeder Punkt würde seine eigene Farbe behalten.</string>
+    <string name="original_icon_description">Jeder Punkt würde sein eigenes Symbol behalten.</string>
+    <string name="original_shape_description">Jeder Punkt würde seine eigene Form behalten.</string>
 </resources>

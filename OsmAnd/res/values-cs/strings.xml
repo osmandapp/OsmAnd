@@ -5037,7 +5037,7 @@
     <string name="delete_map_description">Odstranit mapu %1$s?</string>
     <string name="maps_and_resources">Mapy a zdroje</string>
     <string name="help_article_navigation_routing_osmand_routing_name">O OsmAnd navigaci</string>
-    <string name="empty_smart_folder_title">Žádná odpovídající trasa</string>
+    <string name="empty_smart_folder_title">Žádná odpovídající stopa</string>
     <string name="smart_folder_name_present">Taková chytrá složka již existuje</string>
     <string name="help_article_search_search_coordinates_name">Hledat souřadnice</string>
     <string name="empty_smart_folder_description">Odpovídající trasy se zobrazí zde</string>
@@ -5704,4 +5704,9 @@
     <string name="hmd_promo_description">Bezplatný přístup k funkcím včetně neomezeného stahování map, 3D reliéfu a dalších na %1$s měsíců</string>
     <string name="shared_string_road_exit">Výjezd</string>
     <string name="hmd_promo">HMD Promo na %1$s měsíců</string>
+    <string name="original_color_description">Každý bod by si zachoval svou vlastní barvu.</string>
+    <string name="original_icon_description">Každý bod by si ponechal vlastní ikonu.</string>
+    <string name="original_shape_description">Každý bod by si zachoval svůj vlastní tvar.</string>
+    <string name="save_favorite_default_appearance">Použít změny na stávající body ve složce, nebo pouze na nové?</string>
+    <string name="apply_to_all_points">Použít pro všechny body</string>
 </resources>
