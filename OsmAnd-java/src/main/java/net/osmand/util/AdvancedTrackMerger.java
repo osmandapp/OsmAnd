@@ -12,8 +12,8 @@ public class AdvancedTrackMerger {
     private static final double PRECISION = KMapUtils.HIGH_LATLON_PRECISION;
 
     public static Track mergeSegmentsWithOverlapHandling(Track originalTrack) {
-        List<TrkSegment> originalSegments = originalTrack.getSegments();
-        List<TrkSegment> mergedSegments = mergeSegments(new ArrayList<>(originalSegments));
+        List<TrkSegment> originalSegments = new ArrayList<>(originalTrack.getSegments());
+        List<TrkSegment> mergedSegments = mergeSegments(originalSegments);
 
         Track resultTrack = new Track();
         resultTrack.getSegments().addAll(mergedSegments);
@@ -28,15 +28,15 @@ public class AdvancedTrackMerger {
             changed = false;
             for (int i = 0; i < workList.size(); i++) {
                 TrkSegment current = workList.get(i);
-                if (current == null) continue;
+                if (current == null || current.getPoints().size() < 2) continue;
 
                 for (int j = 0; j < workList.size(); j++) {
                     if (i == j) continue;
                     TrkSegment other = workList.get(j);
-                    if (other == null) continue;
+                    if (other == null || other.getPoints().size() < 2) continue;
 
                     TrkSegment merged = tryMerge(current, other);
-                    if (merged != null) {
+                    if (merged != null && isValidSegment(merged)) {
                         workList.set(i, merged);
                         workList.set(j, null);
                         changed = true;
@@ -53,7 +53,7 @@ public class AdvancedTrackMerger {
     private static TrkSegment tryMerge(TrkSegment a, TrkSegment b) {
         for (ConnectionType type : ConnectionType.values()) {
             TrkSegment merged = attemptMerge(a, b, type);
-            if (merged != null) return merged;
+            if (merged != null && isValidSegment(merged)) return merged;
         }
         return null;
     }
@@ -62,27 +62,51 @@ public class AdvancedTrackMerger {
         List<WptPt> aPoints = type.reverseA ? reverse(a.getPoints()) : a.getPoints();
         List<WptPt> bPoints = type.reverseB ? reverse(b.getPoints()) : b.getPoints();
 
-        int overlap = findMaxOverlap(aPoints, bPoints);
+        int overlap = findValidOverlap(aPoints, bPoints);
         if (overlap > 0) {
-            List<WptPt> merged = new ArrayList<>(aPoints);
-            merged.addAll(bPoints.subList(overlap, bPoints.size()));
+            List<WptPt> merged = new ArrayList<>(aPoints.subList(0, aPoints.size() - overlap));
+            merged.addAll(bPoints);
             return createSegment(merged);
         }
         return null;
     }
 
-    private static int findMaxOverlap(List<WptPt> a, List<WptPt> b) {
+    private static int findValidOverlap(List<WptPt> a, List<WptPt> b) {
         for (int overlap = Math.min(a.size(), b.size()); overlap > 0; overlap--) {
-            if (isOverlap(a.subList(a.size() - overlap, a.size()), b.subList(0, overlap))) {
+            if (isEdgeOverlap(a, b, overlap) && !createsLoop(a, b, overlap)) {
                 return overlap;
             }
         }
         return 0;
     }
 
+    private static boolean isEdgeOverlap(List<WptPt> a, List<WptPt> b, int overlap) {
+        List<WptPt> aPart = a.subList(a.size() - overlap, a.size());
+        List<WptPt> bPart = b.subList(0, overlap);
+        return isOverlap(aPart, bPart);
+    }
+
+    private static boolean createsLoop(List<WptPt> a, List<WptPt> b, int overlap) {
+        // Проверка, что объединение не создаёт петлю
+        WptPt firstAfterMerge = a.get(a.size() - overlap - 1);
+        WptPt lastAfterMerge = b.get(overlap);
+        return equals(firstAfterMerge, lastAfterMerge);
+    }
+
     private static boolean isOverlap(List<WptPt> aPart, List<WptPt> bPart) {
         for (int i = 0; i < aPart.size(); i++) {
             if (!equals(aPart.get(i), bPart.get(i))) return false;
+        }
+        return true;
+    }
+
+    private static boolean isValidSegment(TrkSegment segment) {
+        List<WptPt> points = segment.getPoints();
+        if (points.size() < 2) return false;
+
+        // Проверка на петлю внутри сегмента
+        for (int i = 1; i < points.size(); i++) {
+            if (equals(points.get(i-1), points.get(i))) return false;
         }
         return true;
     }
