@@ -87,9 +87,21 @@ public class AdvancedTrackMerger {
     }
 
     private static boolean createsLoop(List<WptPt> a, List<WptPt> b, int overlap) {
-        // Проверка, что объединение не создаёт петлю
-        WptPt firstAfterMerge = a.get(a.size() - overlap - 1);
-        WptPt lastAfterMerge = b.get(overlap);
+        // Проверка валидности overlap
+        if (overlap <= 0 || overlap > a.size() || overlap > b.size()) {
+            return false;
+        }
+
+        // Вычисление индексов с проверкой границ
+        int indexA = a.size() - overlap - 1;
+        int indexB = overlap;
+
+        if (indexA < 0 || indexA >= a.size() || indexB >= b.size()) {
+            return false; // Некорректные индексы → петля не образуется
+        }
+
+        WptPt firstAfterMerge = a.get(indexA);
+        WptPt lastAfterMerge = b.get(indexB);
         return equals(firstAfterMerge, lastAfterMerge);
     }
 
