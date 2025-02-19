@@ -16,8 +16,8 @@ public class SimpleWidgetState extends ResizableWidgetState {
 	private final CommonPreference<Boolean> showIconPref;
 	private final WidgetType widgetType;
 
-	public SimpleWidgetState(@NonNull OsmandApplication app, @Nullable String customId, @NonNull WidgetType widgetType) {
-		super(app, customId, widgetType);
+	public SimpleWidgetState(@NonNull OsmandApplication app, @Nullable String customId, @NonNull WidgetType widgetType, @NonNull WidgetSize defaultWidgetSize) {
+		super(app, customId, widgetType, defaultWidgetSize);
 		this.showIconPref = registerShowIconPref(customId, widgetType);
 		this.widgetType = widgetType;
 	}

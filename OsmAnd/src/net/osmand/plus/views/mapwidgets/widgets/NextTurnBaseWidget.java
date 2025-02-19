@@ -89,7 +89,7 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		super(mapActivity, widgetType);
 		this.horizontalMini = horizontalMini;
 		this.customId = customId;
-		widgetState = new ResizableWidgetState(app, customId, widgetType);
+		widgetState = new ResizableWidgetState(app, customId, widgetType, WidgetSize.MEDIUM);
 
 		WidgetsPanel selectedPanel = panel != null ? panel : widgetType.getPanel(customId != null ? customId : widgetType.id, settings);
 		setVerticalWidget(selectedPanel);
