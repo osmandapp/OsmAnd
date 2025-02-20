@@ -1411,6 +1411,7 @@ public class TravelObfHelper implements TravelHelper {
 			this.article = article;
 			this.callback = callback;
 			this.repos = repos;
+			this.setShouldShowProgress(article instanceof TravelGpx);
 		}
 
 		@Override
