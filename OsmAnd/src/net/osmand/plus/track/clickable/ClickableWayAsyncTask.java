@@ -4,18 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.binary.HeightDataLoader.InterfaceCancellableCallback;
+import net.osmand.binary.HeightDataLoader.CancellableCallback;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 
 public class ClickableWayAsyncTask extends BaseLoadAsyncTask<Void, Void, ClickableWay> {
     private final ClickableWay clickableWay;
-    private final InterfaceCancellableCallback<ClickableWay> readHeightData;
+    private final CancellableCallback<ClickableWay> readHeightData;
     private final CallbackWithObject<ClickableWay> openAsGpxFile;
 
     public ClickableWayAsyncTask(@NonNull MapActivity mapActivity,
                                  @NonNull ClickableWay clickableWay,
-                                 @NonNull InterfaceCancellableCallback<ClickableWay> readHeightData,
+                                 @NonNull CancellableCallback<ClickableWay> readHeightData,
                                  @NonNull CallbackWithObject<ClickableWay> openAsGpxFile) {
         super(mapActivity);
         this.clickableWay = clickableWay;

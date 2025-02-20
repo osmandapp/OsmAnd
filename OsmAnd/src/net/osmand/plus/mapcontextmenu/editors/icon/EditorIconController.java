@@ -47,6 +47,7 @@ public class EditorIconController extends BaseDialogController {
 	public static final String SPECIAL_KEY = "special";
 	public static final String SYMBOLS_KEY = "symbols";
 	public static final String ACTIVITIES_KEY = "activities";
+	public static final String TRAVEL_KEY = "travel";
 
 	protected final List<IconsCategory> categories = new ArrayList<>();
 	protected IconsCategory selectedCategory;
@@ -89,7 +90,7 @@ public class EditorIconController extends BaseDialogController {
 
 	protected void initAssetsCategories() {
 		try {
-			categories.addAll(readCategoriesFromAssets(Arrays.asList(SPECIAL_KEY, SYMBOLS_KEY)));
+			categories.addAll(readCategoriesFromAssets(Arrays.asList(SPECIAL_KEY, SYMBOLS_KEY, TRAVEL_KEY)));
 		} catch (JSONException e) {
 			LOG.error(e.getMessage());
 		}
