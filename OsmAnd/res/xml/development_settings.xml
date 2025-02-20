@@ -186,6 +186,27 @@
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/show_utm_grids" />
 
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="show_mercator_grid"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/show_mercator_grids" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="show_dms_grid"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/show_dms_grids" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="show_dm_grid"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/show_dm_grids" />
+
 	<PreferenceCategory
 		android:key="aistracker"
 		android:layout="@layout/preference_category_with_descr"

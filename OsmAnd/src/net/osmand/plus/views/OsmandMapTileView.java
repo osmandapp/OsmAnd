@@ -32,13 +32,16 @@ import androidx.annotation.Nullable;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.ColorARGB;
 import net.osmand.core.jni.FColorARGB;
 import net.osmand.core.jni.GridConfiguration;
 import net.osmand.core.jni.GridConfiguration.Projection;
+import net.osmand.core.jni.GridMarksProvider;
 import net.osmand.core.jni.MapAnimator;
 import net.osmand.core.jni.MapRendererDebugSettings;
 import net.osmand.core.jni.PointD;
 import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.TextRasterizer;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
@@ -132,6 +135,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private float minAllowedElevationAngle = MIN_ALLOWED_ELEVATION_ANGLE;
 
+	GridMarksProvider gridMarksProvider;
 
 	private static class CanvasColors {
 		int colorDay = MAP_DEFAULT_COLOR;
@@ -2535,13 +2539,56 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void applyGridSettings(MapRendererView mapRenderer) {
 		OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
 		if (plugin != null) {
+			float textScale = app.getSettings().TEXT_SCALE.get() * getDensity();
 			boolean show = plugin.SHOW_GRID.get();
 			boolean useUTM = plugin.SHOW_UTM_GRID.get();
+			boolean useMercator = plugin.SHOW_MERCATOR_GRID.get();
+			boolean useDMS = plugin.SHOW_DMS_GRID.get();
+			boolean useDM = plugin.SHOW_DM_GRID.get();
+			FColorARGB color = new FColorARGB(1.0f, 0.1f, 0.0f, 0.8f);
 			GridConfiguration gridConfiguration = new GridConfiguration();
-			gridConfiguration.setPrimaryProjection(useUTM ? Projection.UTM : Projection.WGS84);
-			FColorARGB primaryColor = new FColorARGB(show ? 1.0f : 0.0f, 1.0f, 1.0f, 0.0f);
-			gridConfiguration.setPrimaryColor(primaryColor);
+			gridConfiguration.setPrimaryGrid(show);
+			gridConfiguration.setPrimaryProjection(Projection.WGS84);
+			gridConfiguration.setPrimaryColor(color);
+			gridConfiguration.setSecondaryGrid(show);
+			gridConfiguration.setSecondaryProjection(useMercator ? Projection.Mercator
+					: (useUTM ? Projection.UTM : Projection.WGS84));
+			gridConfiguration.setSecondaryFormat(useDM ? GridConfiguration.Format.DM
+					: (useDMS ? GridConfiguration.Format.DMS : GridConfiguration.Format.Decimal));
+			gridConfiguration.setSecondaryColor(color);
 			mapRenderer.setGridConfiguration(gridConfiguration);
+			if (gridMarksProvider != null) {
+				mapRenderer.removeSymbolsProvider(gridMarksProvider);
+				gridMarksProvider = null;
+			}
+			if (show) {
+				gridMarksProvider = new GridMarksProvider();
+				FColorARGB haloColor = new FColorARGB(0.5f, 1.0f, 1.0f, 1.0f);
+				TextRasterizer.Style primaryMarksStyle = new TextRasterizer.Style();
+				primaryMarksStyle.setColor(new ColorARGB(color));
+				primaryMarksStyle.setHaloColor(new ColorARGB(haloColor));
+				primaryMarksStyle.setHaloRadius((int) (3.0f * textScale));
+				primaryMarksStyle.setSize(16.0f * textScale);
+				primaryMarksStyle.setBold(true);
+				primaryMarksStyle.setTextAlignment(TextRasterizer.Style.TextAlignment.Under);
+				gridMarksProvider.setPrimaryStyle(primaryMarksStyle, 2.0f * textScale);
+				gridMarksProvider.setPrimary(false, "Equator", "", "Prime meridian", "180th meridian");
+				TextRasterizer.Style secondaryMarksStyle = new TextRasterizer.Style();
+				secondaryMarksStyle.setColor(new ColorARGB(color));
+				secondaryMarksStyle.setHaloColor(new ColorARGB(haloColor));
+				secondaryMarksStyle.setHaloRadius((int) (3.0f * textScale));
+				secondaryMarksStyle.setSize(16.0f * textScale);
+				secondaryMarksStyle.setBold(true);
+				gridMarksProvider.setSecondaryStyle(secondaryMarksStyle, 2.0f * textScale);
+				if (useMercator) {
+					gridMarksProvider.setSecondary(true, "km", "km", "km", "km");
+				} else if (useUTM) {
+					gridMarksProvider.setSecondary(true, "", "", "", "");
+				} else {
+					gridMarksProvider.setSecondary(true, "N", "S", "E", "W");
+				}
+				mapRenderer.addSymbolsProvider(gridMarksProvider);
+			}
 		}
 	}
 
