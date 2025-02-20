@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.binary.HeightDataLoader.InterfaceCancellableCallback;
+import net.osmand.binary.HeightDataLoader.CancellableCallback;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -20,11 +20,11 @@ import java.util.List;
 
 public class ClickableWayMenuProvider implements ContextMenuLayer.IContextMenuProvider {
     private final OsmandMapTileView view;
-    private final InterfaceCancellableCallback<ClickableWay> readHeightData;
+    private final CancellableCallback<ClickableWay> readHeightData;
     private final CallbackWithObject<ClickableWay> openAsGpxFile;
 
     public ClickableWayMenuProvider(@NonNull OsmandMapTileView view,
-                                    @NonNull InterfaceCancellableCallback<ClickableWay> readHeightData,
+                                    @NonNull CancellableCallback<ClickableWay> readHeightData,
                                     @NonNull CallbackWithObject<ClickableWay> openAsGpxFile) {
         this.view = view;
         this.readHeightData = readHeightData;
