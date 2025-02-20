@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.data.NearbyPlacePoint;
+import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -80,7 +81,8 @@ public class NearbyPlacesCard extends FrameLayout implements NearbyPlacesListene
 		LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
 		nearByList.setLayoutManager(layoutManager);
 		nearByList.setItemAnimator(null);
-		adapter = new NearbyPlacesAdapter(app, NearbyPlacesHelper.INSTANCE.getDataCollection(), false, clickListener);
+		QuadRect mapRect = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getLatLonBounds();
+		adapter = new NearbyPlacesAdapter(app, NearbyPlacesHelper.INSTANCE.getDataCollection(mapRect), false, clickListener);
 		nearByList.setAdapter(adapter);
 	}
 

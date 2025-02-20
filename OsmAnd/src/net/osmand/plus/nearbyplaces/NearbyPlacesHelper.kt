@@ -1,5 +1,6 @@
 package net.osmand.plus.nearbyplaces
 
+import android.os.AsyncTask
 import com.squareup.picasso.Picasso
 import net.osmand.ResultMatcher
 import net.osmand.binary.BinaryMapIndexReader
@@ -11,28 +12,32 @@ import net.osmand.data.QuadRect
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.search.GetNearbyPlacesImagesTask
-import net.osmand.plus.views.layers.ContextMenuLayer
-import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider
 import net.osmand.search.core.SearchCoreFactory
+import net.osmand.shared.data.KLatLon
+import net.osmand.shared.data.KQuadRect
+import net.osmand.shared.util.KMapUtils
 import net.osmand.util.Algorithms
 import net.osmand.util.CollectionUtils
 import net.osmand.util.MapUtils
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData
 import java.util.Collections
+import kotlin.math.max
 import kotlin.math.min
 
 object NearbyPlacesHelper {
 	private lateinit var app: OsmandApplication
 	private var lastModifiedTime: Long = 0
-	private const val PLACES_LIMIT = 50
+	private const val PLACES_LIMIT = 50000
 	private const val NEARBY_MIN_RADIUS: Int = 50
 
-	private var prevMapRect: QuadRect = QuadRect()
+	private var prevMapRect: KQuadRect = KQuadRect()
 	private var prevZoom = 0
 	private var prevLang = ""
 
 	fun init(app: OsmandApplication) {
 		this.app = app
+		val loadSavedPlaces = NearbyPlacesLoadSavedTask(app)
+		loadSavedPlaces.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private var listeners: List<NearbyPlacesListener> = Collections.emptyList()
@@ -56,6 +61,7 @@ object NearbyPlacesHelper {
 							.load(point.iconUrl)
 							.fetch()
 					}
+					SaveNearbyPlacesTask(app, it).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
 				}
 				updateLastModifiedTime()
 				notifyListeners()
@@ -82,15 +88,51 @@ object NearbyPlacesHelper {
 		return this.dataCollection ?: Collections.emptyList()
 	}
 
+	fun onCacheLoaded(cachedPLaces: List<NearbyPlacePoint>) {
+		if (!Algorithms.isEmpty(cachedPLaces)) {
+			val firstPoint = cachedPLaces[0]
+			val qRect = KQuadRect(
+				firstPoint.latitude,
+				firstPoint.longitude,
+				firstPoint.latitude,
+				firstPoint.longitude)
+			cachedPLaces.forEach { _ ->
+				qRect.left = min(firstPoint.latitude, qRect.left)
+				qRect.right = max(firstPoint.latitude, qRect.right)
+				qRect.top = min(firstPoint.longitude, qRect.top)
+				qRect.left = min(firstPoint.longitude, qRect.bottom)
+			}
+			dataCollection = cachedPLaces
+			prevMapRect = qRect
+		}
+	}
+
+	fun getDataCollection(rect: QuadRect): List<NearbyPlacePoint> {
+		val qRect = KQuadRect(rect.left, rect.top, rect.right, rect.bottom)
+		val fullCollection = this.dataCollection ?: Collections.emptyList()
+		return fullCollection.filter { qRect.contains(KLatLon(it.latitude, it.longitude)) }
+	}
+
 	fun startLoadingNearestPhotos() {
 		val mapView = app.osmandMap.mapView
-		val mapRect = mapView.currentRotatedTileBox.latLonBounds
+		var rect = QuadRect(mapView.currentRotatedTileBox.latLonBounds)
+		val qRect = KQuadRect(rect.left, rect.top, rect.right, rect.bottom)
+//		var mapRect = calculatedRect
+//		mapRect.left = get31LongitudeX(calculatedRect.left.toInt())
+//		mapRect.top = get31LatitudeY(calculatedRect.top.toInt())
+//		mapRect.right = get31LongitudeX(calculatedRect.right.toInt())
+//		mapRect.bottom = get31LatitudeY(calculatedRect.bottom.toInt())
+//		Log.d("Corwin", "startLoadingNearestPhotos: ${mapRect}")
+
 		var preferredLang = app.settings.MAP_PREFERRED_LOCALE.get()
 		if (Algorithms.isEmpty(preferredLang)) {
 			preferredLang = app.language
 		}
-		if (prevMapRect != mapRect || prevZoom != mapView.zoom || prevLang != preferredLang) {
-			prevMapRect = mapRect
+		if (!prevMapRect.contains(qRect) ||
+			prevLang != preferredLang) {
+			val mapCenter = mapView.currentRotatedTileBox.centerLatLon
+			prevMapRect =
+				KMapUtils.calculateLatLonBbox(mapCenter.latitude, mapCenter.longitude, 30000)
 			prevZoom = mapView.zoom
 			prevLang = preferredLang
 			GetNearbyPlacesImagesTask(

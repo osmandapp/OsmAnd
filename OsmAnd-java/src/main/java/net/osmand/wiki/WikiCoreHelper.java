@@ -9,6 +9,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.io.NetworkUtils;
+import net.osmand.shared.data.KQuadRect;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -46,12 +47,12 @@ public class WikiCoreHelper {
 	private static final List<String> IMAGE_EXTENSIONS = new ArrayList<>(Arrays.asList(".jpeg", ".jpg", ".png", ".gif"));
 
 
-	public static List<OsmandApiFeatureData> getExploreImageList(QuadRect mapRect, int zoom, String lang) {
+	public static List<OsmandApiFeatureData> getExploreImageList(KQuadRect mapRect, int zoom, String lang) {
 		List<OsmandApiFeatureData> wikiImages = new ArrayList<>();
 		StringBuilder url = new StringBuilder();
 		String baseApiActionUrl = OSMAND_SEARCH_ENDPOINT + GET_WIKI_DATA_ACTION;
-		String northWest = String.format(Locale.US, "%f,%f", mapRect.top, mapRect.left);
-		String southEast = String.format(Locale.US, "%f,%f", mapRect.bottom, mapRect.right);
+		String northWest = String.format(Locale.US, "%f,%f", mapRect.getTop(), mapRect.getLeft());
+		String southEast = String.format(Locale.US, "%f,%f", mapRect.getBottom(), mapRect.getRight());
 		url.append(baseApiActionUrl);
 		try {
 			url.append(String.format(Locale.US, "northWest=%s", URLEncoder.encode(northWest, "UTF-8")));
