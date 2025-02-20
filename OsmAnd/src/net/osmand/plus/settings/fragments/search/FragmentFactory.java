@@ -31,20 +31,20 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 													   final Context context,
 													   final InstantiateAndInitializeFragment instantiateAndInitializeFragment) {
 		return FragmentFactory
-				.instantiate(src, context, fragmentClass)
+				.instantiate(fragmentClass, src, context)
 				.orElseGet(() -> createDefaultInstance(fragmentClass, src, context, instantiateAndInitializeFragment));
 	}
 
-	private static <T extends Fragment> Optional<T> instantiate(final Optional<PreferenceWithHost> src,
-																final Context context,
-																final Class<T> classOfT) {
+	private static <T extends Fragment> Optional<T> instantiate(final Class<T> fragmentClass,
+																final Optional<PreferenceWithHost> src,
+																final Context context) {
 		return src
 				.filter(preferenceWithHost -> preferenceWithHost.host() instanceof PreferenceFragmentHandlerProvider)
 				.flatMap(preferenceWithHost -> ((PreferenceFragmentHandlerProvider) preferenceWithHost.host()).getPreferenceFragmentHandler(preferenceWithHost.preference()))
 				.map(preferenceFragmentHandler -> preferenceFragmentHandler.createPreferenceFragment(context, Optional.empty()))
 				.flatMap(
 						preferenceFragment ->
-								classOfT.isAssignableFrom(preferenceFragment.getClass()) ?
+								fragmentClass.isAssignableFrom(preferenceFragment.getClass()) ?
 										Optional.of((T) preferenceFragment) :
 										Optional.empty());
 	}
