@@ -1333,8 +1333,11 @@ public class TravelObfHelper implements TravelHelper {
 				track.getSegments().add(trkSegment);
 			}
 			gpxFile.setTracks(new ArrayList<>());
+
+			gpxFile.getTracks().add(track); // TODO analyze both DS and GPT methods
 //			gpxFile.getTracks().add(OverlappedSegmentsMergerDS.mergeSegmentsWithOverlapHandling(track));
-			gpxFile.getTracks().add(OverlappedSegmentsMergerGPT.mergeSegmentsWithOverlapHandling(track));
+//			gpxFile.getTracks().add(OverlappedSegmentsMergerGPT.mergeSegmentsWithOverlapHandling(track));
+
 			if (!(article instanceof TravelGpx)) {
 				gpxFile.setRef(article.ref);
 			}
