@@ -9,7 +9,7 @@ import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.util.KMapUtils;
 
-public class GpxTrackProcessor {
+public class OverlappedSegmentsMergerGPT {
 
     /**
      * Processes the input Track as follows:
@@ -28,7 +28,7 @@ public class GpxTrackProcessor {
      * @param track the input Track containing one or more segments
      * @return a new Track consisting of segments without duplicate overlaps and loops
      */
-    public static Track processTrack(Track track) {
+    public static Track mergeSegmentsWithOverlapHandling(Track track) {
         // Step 1. Extract polylines from segments
         List<List<WptPt>> polylines = new ArrayList<>();
         for (TrkSegment seg : track.getSegments()) {

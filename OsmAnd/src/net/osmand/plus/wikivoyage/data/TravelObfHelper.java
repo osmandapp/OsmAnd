@@ -82,9 +82,9 @@ import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.util.KAlgorithms;
 import net.osmand.shared.util.KMapAlgorithms;
 import net.osmand.util.Algorithms;
-import net.osmand.util.GpxTrackProcessor;
 import net.osmand.util.MapUtils;
-import net.osmand.util.OverlappedSegmentsMerger;
+import net.osmand.util.OverlappedSegmentsMergerDS;
+import net.osmand.util.OverlappedSegmentsMergerGPT;
 
 import org.apache.commons.logging.Log;
 
@@ -1333,8 +1333,8 @@ public class TravelObfHelper implements TravelHelper {
 				track.getSegments().add(trkSegment);
 			}
 			gpxFile.setTracks(new ArrayList<>());
-//			gpxFile.getTracks().add(OverlappedSegmentsMerger.mergeSegmentsWithOverlapHandling(track));
-			gpxFile.getTracks().add(GpxTrackProcessor.processTrack(track));
+//			gpxFile.getTracks().add(OverlappedSegmentsMergerDS.mergeSegmentsWithOverlapHandling(track));
+			gpxFile.getTracks().add(OverlappedSegmentsMergerGPT.mergeSegmentsWithOverlapHandling(track));
 			if (!(article instanceof TravelGpx)) {
 				gpxFile.setRef(article.ref);
 			}

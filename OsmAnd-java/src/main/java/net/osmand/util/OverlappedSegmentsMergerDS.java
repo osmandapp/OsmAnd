@@ -7,7 +7,7 @@ import net.osmand.shared.util.KMapUtils;
 
 import java.util.*;
 
-public class OverlappedSegmentsMerger {
+public class OverlappedSegmentsMergerDS {
 
     private static final double PRECISION = KMapUtils.HIGH_LATLON_PRECISION;
 
