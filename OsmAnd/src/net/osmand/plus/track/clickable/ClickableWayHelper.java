@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.binary.HeightDataLoader;
-import net.osmand.binary.HeightDataLoader.InterfaceIsCancelled;
+import net.osmand.binary.HeightDataLoader.Cancellable;
 import net.osmand.binary.ObfConstants;
 import net.osmand.core.jni.ObfMapObject;
 import net.osmand.core.jni.QVectorPointI;
@@ -34,7 +34,6 @@ import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import net.osmand.osm.OsmRouteType;
 
 import java.io.File;
 import java.util.List;
@@ -201,7 +200,7 @@ public class ClickableWayHelper {
         return false;
     }
 
-    private boolean readHeightData(@Nullable ClickableWay clickableWay, @Nullable InterfaceIsCancelled canceller) {
+    private boolean readHeightData(@Nullable ClickableWay clickableWay, @Nullable Cancellable canceller) {
         if (clickableWay != null) {
             HeightDataLoader loader = new HeightDataLoader(app.getResourceManager().getReverseGeocodingMapFiles());
             List<WptPt> waypoints =

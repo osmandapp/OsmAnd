@@ -49,7 +49,7 @@ import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.binary.HeightDataLoader.InterfaceIsCancelled;
+import net.osmand.binary.HeightDataLoader.Cancellable;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.resources.AmenityIndexRepository;
@@ -1104,7 +1104,7 @@ public class TravelObfHelper implements TravelHelper {
 	                                       @NonNull List<String> pgIcons,
 	                                       @NonNull List<String> pgColors,
 	                                       @NonNull List<String> pgBackgrounds,
-	                                       @NonNull InterfaceIsCancelled isCancelled) {
+	                                       @NonNull Cancellable isCancelled) {
 		boolean allowReadFromMultipleMaps = article.hasOsmRouteId() && article.routeRadius > 0;
 		for (AmenityIndexRepository repo : repos) {
 			try {
@@ -1155,7 +1155,7 @@ public class TravelObfHelper implements TravelHelper {
 	                                                  @NonNull List<String> pgIcons,
 	                                                  @NonNull List<String> pgColors,
 	                                                  @NonNull List<String> pgBackgrounds,
-	                                                  @NonNull InterfaceIsCancelled isCancelled) {
+	                                                  @NonNull Cancellable isCancelled) {
 		return new ResultMatcher<Amenity>() {
 			boolean isAlreadyProcessed = false;
 			@Override
@@ -1234,7 +1234,7 @@ public class TravelObfHelper implements TravelHelper {
 	private ResultMatcher<BinaryMapDataObject> matchSegmentsByRefTitleRouteId(
 			@NonNull TravelArticle article,
 			@NonNull List<BinaryMapDataObject> segmentList,
-			@NonNull InterfaceIsCancelled isCancelled) {
+			@NonNull Cancellable isCancelled) {
 		return new ResultMatcher<BinaryMapDataObject>() {
 			@Override
 			public boolean publish(BinaryMapDataObject object) {
@@ -1265,7 +1265,7 @@ public class TravelObfHelper implements TravelHelper {
 	@Nullable
 	private synchronized GpxFile buildGpxFile(@NonNull List<AmenityIndexRepository> repos,
 	                                          @NonNull TravelArticle article,
-	                                          @NonNull InterfaceIsCancelled isCancelled) {
+	                                          @NonNull Cancellable isCancelled) {
 		List<BinaryMapDataObject> segmentList = new ArrayList<>();
 		Map<String, String> gpxFileExtensions = new TreeMap<>();
 		List<Amenity> pointList = new ArrayList<>();

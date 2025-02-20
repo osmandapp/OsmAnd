@@ -24,12 +24,12 @@ public class HeightDataLoader {
     public static final int ZOOM_TO_LOAD_TILES_SHIFT_L = ZOOM_TO_LOAD_TILES + 1;
     public static final int ZOOM_TO_LOAD_TILES_SHIFT_R = 31 - ZOOM_TO_LOAD_TILES;
 
-    public interface InterfaceIsCancelled {
+    public interface Cancellable {
         boolean isCancelled();
     }
 
-    public interface InterfaceCancellableCallback<T> {
-        boolean callback(T object, InterfaceIsCancelled canceller);
+    public interface CancellableCallback<T> {
+        boolean callback(T object, Cancellable canceller);
     }
 
     private final static Log log = PlatformUtil.getLog(HeightDataLoader.class);
@@ -50,7 +50,7 @@ public class HeightDataLoader {
         }
     }
 
-    public List<WptPt> loadHeightDataAsWaypoints(long osmId, QuadRect bbox31, InterfaceIsCancelled canceller) {
+    public List<WptPt> loadHeightDataAsWaypoints(long osmId, QuadRect bbox31, Cancellable canceller) {
         Map<Long, RouteDataObject> results = new HashMap<>();
         ResultMatcher<RouteDataObject> matcher = new ResultMatcher<>() {
             @Override
