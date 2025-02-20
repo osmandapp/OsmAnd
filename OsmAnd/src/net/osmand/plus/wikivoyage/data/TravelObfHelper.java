@@ -1430,12 +1430,10 @@ public class TravelObfHelper implements TravelHelper {
 
 		@Override
 		protected void onPostExecute(@Nullable GpxFile gpxFile) {
-			if (gpxFile != null) {
-				article.gpxFileRead = true;
-				article.gpxFile = gpxFile;
-				if (callback != null) {
-					callback.onGpxFileRead(gpxFile);
-				}
+			article.gpxFileRead = gpxFile != null;
+			article.gpxFile = gpxFile;
+			if (callback != null) {
+				callback.onGpxFileRead(gpxFile);
 			}
 			hideProgress();
 		}
