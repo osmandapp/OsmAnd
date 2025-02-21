@@ -38,7 +38,7 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 	private static final int DEFAULT_LIMIT_POINTS = 200;
 	private static final int NEARBY_MIN_RADIUS = 50;
 
-	private final int MAX_LEVEL_ZOOM_CACHE = 13;
+
 	private static final int MAX_TILES_PER_QUAD_RECT = 12;
 	private static final double LOAD_ALL_TINY_RECT = 0.5;
 

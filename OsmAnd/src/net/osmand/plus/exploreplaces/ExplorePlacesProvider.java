@@ -12,6 +12,7 @@ import java.util.List;
 
 public interface ExplorePlacesProvider {
 
+	public final int MAX_LEVEL_ZOOM_CACHE = 13;
 	@NotNull List<ExploreTopPlacePoint> getDataCollection(QuadRect mapRect);
 
 	@NotNull List<ExploreTopPlacePoint> getDataCollection(QuadRect mapRect, int limit);

@@ -50,6 +50,7 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 	private Bitmap cachedSmallIconBitmap;
 
 	private QuadRect requestQuadRect = null; // null means disabled
+	private int requestZoom = 0; // null means disabled
 
 
 	private ExploreTopPlacesTileProvider topPlacesMapLayerProvider;
@@ -113,16 +114,18 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 		boolean nightMode = settings != null && settings.isNightMode();
 		boolean nightModeChanged = this.nightMode != nightMode;
 		this.nightMode = nightMode;
-		QuadRect cachedRect = requestQuadRect;
 		boolean placesUpdated = false;
 		if (requestQuadRect != null) {
 			int exploreDataVersion = explorePlacesProvider.getDataVersion();
-			if (!cachedRect.contains(tileBox.getLatLonBounds()) || cachedExploreDataVersion < exploreDataVersion ||
-					places == null) {
+			if (!requestQuadRect.contains(tileBox.getLatLonBounds()) ||
+					cachedExploreDataVersion < exploreDataVersion || places == null ||
+					(requestZoom < tileBox.getZoom() && requestZoom < ExplorePlacesProvider.MAX_LEVEL_ZOOM_CACHE)) {
 				placesUpdated = true;
 				RotatedTileBox extended = tileBox.copy();
 				extended.increasePixelDimensions(tileBox.getPixWidth() / 2, tileBox.getPixHeight() / 2);
 				requestQuadRect = extended.getLatLonBounds();
+				requestZoom = tileBox.getZoom();
+
 				cachedExploreDataVersion = explorePlacesProvider.getDataVersion();
 				places = explorePlacesProvider.getDataCollection(requestQuadRect);
 				scheduleImageRefreshes(places);
@@ -353,7 +356,8 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 	}
 
 	public void enableLayer(boolean enable) {
-		requestQuadRect = enable ? new QuadRect() : null;
+		requestQuadRect = enable ?
+				new QuadRect() : null;
 	}
 
 	@Override
