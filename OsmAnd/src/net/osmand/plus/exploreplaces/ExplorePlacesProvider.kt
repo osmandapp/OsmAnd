@@ -1,4 +1,4 @@
-package net.osmand.plus.nearbyplaces
+package net.osmand.plus.exploreplaces
 
 import android.os.AsyncTask
 import com.squareup.picasso.Picasso
@@ -24,23 +24,21 @@ import java.util.Collections
 import kotlin.math.max
 import kotlin.math.min
 
-object NearbyPlacesHelper {
+class ExplorePlacesProvider {
 	private lateinit var app: OsmandApplication
 	private var lastModifiedTime: Long = 0
-	private const val PLACES_LIMIT = 50000
-	private const val NEARBY_MIN_RADIUS: Int = 50
+	private val PLACES_LIMIT = 50000
+	private val NEARBY_MIN_RADIUS: Int = 50
 
 	private var prevMapRect: KQuadRect = KQuadRect()
 	private var prevZoom = 0
 	private var prevLang = ""
 
-	fun init(app: OsmandApplication) {
+	constructor(app: OsmandApplication) {
 		this.app = app
-		val loadSavedPlaces = NearbyPlacesLoadSavedTask(app)
-		loadSavedPlaces.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	private var listeners: List<NearbyPlacesListener> = Collections.emptyList()
+	private var listeners: List<ExplorePlacesListener> = Collections.emptyList()
 	private var dataCollection: List<NearbyPlacePoint>? = null
 
 	private val loadNearbyPlacesListener: GetNearbyPlacesImagesTask.GetImageCardsListener =
@@ -61,18 +59,17 @@ object NearbyPlacesHelper {
 							.load(point.iconUrl)
 							.fetch()
 					}
-					SaveNearbyPlacesTask(app, it).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
 				}
 				updateLastModifiedTime()
 				notifyListeners()
 			}
 		}
 
-	fun addListener(listener: NearbyPlacesListener) {
+	fun addListener(listener: ExplorePlacesListener) {
 		listeners = CollectionUtils.addToList(listeners, listener)
 	}
 
-	fun removeListener(listener: NearbyPlacesListener) {
+	fun removeListener(listener: ExplorePlacesListener) {
 		listeners = CollectionUtils.removeFromList(listeners, listener)
 	}
 

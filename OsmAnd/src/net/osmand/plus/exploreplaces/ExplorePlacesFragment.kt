@@ -1,4 +1,4 @@
-package net.osmand.plus.nearbyplaces
+package net.osmand.plus.exploreplaces
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,16 +16,14 @@ import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseOsmAndFragment
 import net.osmand.plus.helpers.AndroidUiHelper
-import net.osmand.plus.nearbyplaces.NearbyPlacesHelper.getDataCollection
-import net.osmand.plus.nearbyplaces.NearbyPlacesHelper.showPointInContextMenu
 import net.osmand.plus.search.NearbyPlacesAdapter
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import org.apache.commons.logging.Log
 
-class NearbyPlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyItemClickListener {
+class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyItemClickListener {
 	private val log: Log = PlatformUtil.getLog(
-		NearbyPlacesFragment::class.java)
+		ExplorePlacesFragment::class.java)
 
 	private lateinit var verticalNearbyAdapter: NearbyPlacesAdapter
 
@@ -57,7 +55,7 @@ class NearbyPlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIte
 				mapActivity?.contextMenu?.hideMenus()
 			} else {
 				activity?.supportFragmentManager?.beginTransaction()
-					?.show(this@NearbyPlacesFragment)
+					?.show(this@ExplorePlacesFragment)
 					?.commit()
 			}
 			return true
@@ -65,17 +63,18 @@ class NearbyPlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIte
 			val quickSearchFragment = mapActivity?.fragmentsHelper?.quickSearchDialogFragment
 			quickSearchFragment?.show()
 			activity?.supportFragmentManager?.beginTransaction()
-				?.remove(this@NearbyPlacesFragment)
+				?.remove(this@ExplorePlacesFragment)
 				?.commit()
 			return true
 		}
 	}
 
 	private fun setupShowAll(view: View) {
+
 		view.findViewById<ImageView>(R.id.location_icon)
 			.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_marker_dark, nightMode))
 		view.findViewById<View>(R.id.show_on_map).setOnClickListener {
-			app.osmandMap.mapLayers.nearbyPlacesLayer.setCustomMapObjects(getDataCollection())
+			app.osmandMap.mapLayers.nearbyPlacesLayer.setCustomMapObjects(app.explorePlacesProvider.getDataCollection())
 			hide()
 		}
 	}
@@ -104,7 +103,7 @@ class NearbyPlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIte
 
 	private fun setupVerticalNearbyList(view: View) {
 		val verticalNearbyList = view.findViewById<RecyclerView>(R.id.vertical_nearby_list)
-		val nearbyData = NearbyPlacesHelper.getDataCollection()
+		val nearbyData = app.explorePlacesProvider.getDataCollection()
 		verticalNearbyAdapter = NearbyPlacesAdapter(app, nearbyData, true, this)
 		verticalNearbyList.layoutManager = LinearLayoutManager(requireContext())
 		verticalNearbyList.adapter = verticalNearbyAdapter
@@ -122,11 +121,11 @@ class NearbyPlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIte
 		}
 
 	companion object {
-		val TAG: String = NearbyPlacesFragment::class.java.simpleName
+		val TAG: String = ExplorePlacesFragment::class.java.simpleName
 		fun showInstance(manager: FragmentManager) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 				manager.beginTransaction()
-					.replace(R.id.fragmentContainer, NearbyPlacesFragment(), TAG)
+					.replace(R.id.fragmentContainer, ExplorePlacesFragment(), TAG)
 					.commitAllowingStateLoss()
 			}
 		}
@@ -134,7 +133,7 @@ class NearbyPlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIte
 
 	override fun onNearbyItemClicked(item: NearbyPlacePoint) {
 		mapActivity?.let {
-			showPointInContextMenu(it, item)
+			app.explorePlacesProvider.showPointInContextMenu(it, item)
 			hide()
 		}
 	}

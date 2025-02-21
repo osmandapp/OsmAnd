@@ -69,6 +69,7 @@ import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.exploreplaces.ExplorePlacesProvider;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -208,6 +209,7 @@ public class OsmandApplication extends MultiDexApplication {
 	RouteLayersHelper routeLayersHelper;
 	Model3dHelper model3dHelper;
 	TrackSortModesHelper trackSortModesHelper;
+	ExplorePlacesProvider explorePlacesProvider;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -616,6 +618,10 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public AverageSpeedComputer getAverageSpeedComputer() {
 		return averageSpeedComputer;
+	}
+
+	public ExplorePlacesProvider getExplorePlacesProvider() {
+		return explorePlacesProvider;
 	}
 
 	@NonNull

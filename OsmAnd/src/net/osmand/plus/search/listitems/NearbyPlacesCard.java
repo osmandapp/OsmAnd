@@ -15,17 +15,16 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.nearbyplaces.NearbyPlacesFragment;
-import net.osmand.plus.nearbyplaces.NearbyPlacesHelper;
-import net.osmand.plus.nearbyplaces.NearbyPlacesListener;
+import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
+import net.osmand.plus.exploreplaces.ExplorePlacesProvider;
+import net.osmand.plus.exploreplaces.ExplorePlacesListener;
 import net.osmand.plus.search.NearbyPlacesAdapter;
-import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 
 import java.util.List;
 
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
-public class NearbyPlacesCard extends FrameLayout implements NearbyPlacesListener {
+public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesListener {
 
 	private boolean collapsed;
 	private ImageView explicitIndicator;
@@ -73,7 +72,7 @@ public class NearbyPlacesCard extends FrameLayout implements NearbyPlacesListene
 
 	private void setupShowAllNearbyPlacesBtn() {
 		findViewById(R.id.show_all_btn).setOnClickListener(v -> {
-			NearbyPlacesFragment.Companion.showInstance(mapActivity.getSupportFragmentManager());
+			ExplorePlacesFragment.Companion.showInstance(mapActivity.getSupportFragmentManager());
 		});
 	}
 
@@ -82,7 +81,7 @@ public class NearbyPlacesCard extends FrameLayout implements NearbyPlacesListene
 		nearByList.setLayoutManager(layoutManager);
 		nearByList.setItemAnimator(null);
 		QuadRect mapRect = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getLatLonBounds();
-		adapter = new NearbyPlacesAdapter(app, NearbyPlacesHelper.INSTANCE.getDataCollection(mapRect), false, clickListener);
+		adapter = new NearbyPlacesAdapter(app, app.getExplorePlacesProvider().getDataCollection(mapRect), false, clickListener);
 		nearByList.setAdapter(adapter);
 	}
 
@@ -99,14 +98,14 @@ public class NearbyPlacesCard extends FrameLayout implements NearbyPlacesListene
 	public void updateNearbyItems() {
 		isLoadingItems = false;
 		AndroidUiHelper.updateVisibility(progressBar, false);
-		adapter.setItems(NearbyPlacesHelper.INSTANCE.getDataCollection());
+		adapter.setItems(app.getExplorePlacesProvider().getDataCollection());
 		adapter.notifyDataSetChanged();
 		updateExpandState();
 	}
 
 	private NearbyPlacesAdapter getNearbyAdapter() {
 		if (adapter == null) {
-			List<NearbyPlacePoint> nearbyData = NearbyPlacesHelper.INSTANCE.getDataCollection();
+			List<NearbyPlacePoint> nearbyData = app.getExplorePlacesProvider().getDataCollection();
 			adapter = new NearbyPlacesAdapter(app, nearbyData, false, clickListener);
 		}
 		return adapter;
@@ -118,11 +117,11 @@ public class NearbyPlacesCard extends FrameLayout implements NearbyPlacesListene
 	}
 
 	public void onResume() {
-		NearbyPlacesHelper.INSTANCE.addListener(this);
+		app.getExplorePlacesProvider().addListener(this);
 	}
 
 	public void onPause() {
-		NearbyPlacesHelper.INSTANCE.removeListener(this);
+		app.getExplorePlacesProvider().removeListener(this);
 	}
 
 	private void onNearbyPlacesCollapseChanged() {
@@ -136,7 +135,7 @@ public class NearbyPlacesCard extends FrameLayout implements NearbyPlacesListene
 	private void startLoadingNearbyPlaces() {
 		isLoadingItems = true;
 		AndroidUiHelper.updateVisibility(progressBar, true);
-		NearbyPlacesHelper.INSTANCE.startLoadingNearestPhotos();
+		app.getExplorePlacesProvider().startLoadingNearestPhotos();
 	}
 
 	private void setupExpandNearbyPlacesIndicator() {

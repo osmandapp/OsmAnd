@@ -14,7 +14,7 @@ import net.osmand.data.NearbyPlacePoint;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.nearbyplaces.NearbyPlacesHelper;
+import net.osmand.plus.exploreplaces.ExplorePlacesProvider;
 import net.osmand.plus.search.NearbyPlacesAdapter;
 import net.osmand.plus.search.listitems.NearbyPlacesCard;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
@@ -33,7 +33,7 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	public void onNearbyItemClicked(@NonNull NearbyPlacePoint point) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			NearbyPlacesHelper.INSTANCE.showPointInContextMenu(mapActivity, point);
+			getMyApplication().getExplorePlacesProvider().showPointInContextMenu(mapActivity, point);
 			getDialogFragment().hideToolbar();
 			getDialogFragment().hide();
 		}
