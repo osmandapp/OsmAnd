@@ -139,14 +139,11 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	}
 
 	public void updateWidgetView() {
+		boolean showIcon = shouldShowIcon();
+		AndroidUiHelper.updateVisibility(imageView, showIcon);
+		updateWidgetName();
 		if (verticalWidget) {
-			boolean showIcon = shouldShowIcon();
-			AndroidUiHelper.updateVisibility(imageView, showIcon);
-			updateWidgetName();
 			app.getOsmandMap().getMapLayers().getMapInfoLayer().updateRow(this);
-		} else {
-			updateWidgetName();
-			AndroidUiHelper.updateVisibility(imageView, shouldShowIcon());
 		}
 	}
 
