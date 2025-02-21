@@ -5723,4 +5723,7 @@
     <string name="show_mercator_grids_description">Показувати сітку в кілометрах Меркатора замість WGS84 або UTM</string>
     <string name="show_dm_grids_description">Показувати сітку в градусах і хвилинах замість градусів або DMS</string>
     <string name="show_dms_grids_description">Показати сітку в градусах, хвилинах, секундах замість градусів</string>
+    <string name="show_dm_grids">Використовувати DM замість градусів або DMS</string>
+    <string name="show_dms_grids">Використовувати DMS замість градусів</string>
+    <string name="show_mercator_grids">Використовувати Mercator замість WGS84 або UTM</string>
 </resources>
