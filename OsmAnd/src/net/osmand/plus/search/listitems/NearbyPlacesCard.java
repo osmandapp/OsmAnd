@@ -16,7 +16,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
-import net.osmand.plus.exploreplaces.ExplorePlacesProvider;
 import net.osmand.plus.exploreplaces.ExplorePlacesListener;
 import net.osmand.plus.search.NearbyPlacesAdapter;
 

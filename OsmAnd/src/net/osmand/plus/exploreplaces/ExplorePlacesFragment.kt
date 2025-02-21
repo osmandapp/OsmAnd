@@ -74,7 +74,8 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		view.findViewById<ImageView>(R.id.location_icon)
 			.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_marker_dark, nightMode))
 		view.findViewById<View>(R.id.show_on_map).setOnClickListener {
-			app.osmandMap.mapLayers.nearbyPlacesLayer.setCustomMapObjects(app.explorePlacesProvider.getDataCollection())
+			app.osmandMap.mapLayers.nearbyPlacesLayer.setCustomMapObjects(app.explorePlacesProvider.getDataCollection()
+			)
 			hide()
 		}
 	}

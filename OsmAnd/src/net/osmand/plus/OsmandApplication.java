@@ -56,6 +56,8 @@ import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.exploreplaces.ExplorePlacesProvider;
+import net.osmand.plus.exploreplaces.ExplorePlacesProviderJava;
 import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.feedback.FeedbackHelper;
 import net.osmand.plus.feedback.RateUsHelper;
@@ -69,7 +71,7 @@ import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
-import net.osmand.plus.exploreplaces.ExplorePlacesProvider;
+import net.osmand.plus.exploreplaces.ExplorePlacesProviderKotlin;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -209,7 +211,7 @@ public class OsmandApplication extends MultiDexApplication {
 	RouteLayersHelper routeLayersHelper;
 	Model3dHelper model3dHelper;
 	TrackSortModesHelper trackSortModesHelper;
-	ExplorePlacesProvider explorePlacesProvider;
+	ExplorePlacesProviderJava explorePlacesProvider;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;

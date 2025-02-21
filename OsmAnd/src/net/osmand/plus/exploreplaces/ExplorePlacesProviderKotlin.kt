@@ -1,6 +1,5 @@
 package net.osmand.plus.exploreplaces
 
-import android.os.AsyncTask
 import com.squareup.picasso.Picasso
 import net.osmand.ResultMatcher
 import net.osmand.binary.BinaryMapIndexReader
@@ -24,7 +23,7 @@ import java.util.Collections
 import kotlin.math.max
 import kotlin.math.min
 
-class ExplorePlacesProvider {
+class ExplorePlacesProviderKotlin: ExplorePlacesProvider {
 	private lateinit var app: OsmandApplication
 	private var lastModifiedTime: Long = 0
 	private val PLACES_LIMIT = 50000
@@ -65,11 +64,11 @@ class ExplorePlacesProvider {
 			}
 		}
 
-	fun addListener(listener: ExplorePlacesListener) {
+	override fun addListener(listener: ExplorePlacesListener) {
 		listeners = CollectionUtils.addToList(listeners, listener)
 	}
 
-	fun removeListener(listener: ExplorePlacesListener) {
+	override fun removeListener(listener: ExplorePlacesListener) {
 		listeners = CollectionUtils.removeFromList(listeners, listener)
 	}
 
@@ -81,7 +80,7 @@ class ExplorePlacesProvider {
 		}
 	}
 
-	fun getDataCollection(): List<NearbyPlacePoint> {
+	override fun getDataCollection(): List<NearbyPlacePoint> {
 		return this.dataCollection ?: Collections.emptyList()
 	}
 
@@ -104,13 +103,13 @@ class ExplorePlacesProvider {
 		}
 	}
 
-	fun getDataCollection(rect: QuadRect): List<NearbyPlacePoint> {
+	override fun getDataCollection(rect: QuadRect): List<NearbyPlacePoint> {
 		val qRect = KQuadRect(rect.left, rect.top, rect.right, rect.bottom)
 		val fullCollection = this.dataCollection ?: Collections.emptyList()
 		return fullCollection.filter { qRect.contains(KLatLon(it.latitude, it.longitude)) }
 	}
 
-	fun startLoadingNearestPhotos() {
+	override fun startLoadingNearestPhotos() {
 		val mapView = app.osmandMap.mapView
 		var rect = QuadRect(mapView.currentRotatedTileBox.latLonBounds)
 		val qRect = KQuadRect(rect.left, rect.top, rect.right, rect.bottom)
@@ -149,7 +148,7 @@ class ExplorePlacesProvider {
 		return lastModifiedTime
 	}
 
-	fun showPointInContextMenu(mapActivity: MapActivity, point: NearbyPlacePoint) {
+	override fun showPointInContextMenu(mapActivity: MapActivity, point: NearbyPlacePoint) {
 		val latitude: Double = point.latitude
 		val longitude: Double = point.longitude
 		app.settings.setMapLocationToShow(
@@ -162,7 +161,7 @@ class ExplorePlacesProvider {
 		MapActivity.launchMapActivityMoveToTop(mapActivity)
 	}
 
-	fun getAmenity(latLon: LatLon, osmId: Long): Amenity? {
+	override fun getAmenity(latLon: LatLon, osmId: Long): Amenity? {
 		var foundAmenity: Amenity? = null
 		val radius = NEARBY_MIN_RADIUS
 		val rect = MapUtils.calculateLatLonBbox(latLon.latitude, latLon.longitude, radius)
