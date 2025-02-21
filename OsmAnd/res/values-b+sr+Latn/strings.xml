@@ -5682,7 +5682,7 @@
     <string name="ais_port_nmea_server">TCP port NMEA izvora podataka</string>
     <string name="map_grid">Mreže mape</string>
     <string name="show_grids">Prikaži mrežu mape</string>
-    <string name="show_utm_grids_description">Prikaži mrežu u UTM metrima umesto WGS84 stepenima</string>
+    <string name="show_utm_grids_description">Prikaži mrežu u UTM metrima umesto WGS84</string>
     <string name="show_grids_description">Dozvoli prikaz mreže preko mape</string>
     <string name="show_utm_grids">Koristite UTM umesto WGS84</string>
     <string name="no_photo_for_location_desc">Još uvek nije dodata nijedna korisnička fotografija na ovu lokaciju</string>
@@ -5695,4 +5695,10 @@
     <string name="original_shape_description">Svaka bi tačka zadržala svoj oblik.</string>
     <string name="original_color_description">Svaka bi tačka zadržala svoju boju.</string>
     <string name="save_favorite_default_appearance">Primenjujete promene na postojeće tačke u folderu ili samo na nove?</string>
+    <string name="show_mercator_grids">Koristi Mercator umesto WGS84 ili UTM</string>
+    <string name="show_mercator_grids_description">Prikaži mrežu u Merkator km umesto WGS84 ili UTM</string>
+    <string name="show_dms_grids">Koristi DMS umesto stepeni</string>
+    <string name="show_dms_grids_description">Prikaži mrežu u stepenima, minutima, sekundama umesto u stepenima</string>
+    <string name="show_dm_grids_description">Prikaži mrežu u stepenima i minutima umesto u stepenima ili DMS</string>
+    <string name="show_dm_grids">Koristi DM umesto stepeni ili DMS</string>
 </resources>
