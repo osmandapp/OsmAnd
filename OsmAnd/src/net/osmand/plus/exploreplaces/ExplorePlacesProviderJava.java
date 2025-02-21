@@ -32,7 +32,8 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 // TODO use gzip in loading
-// TODO use hierarchy of caches
+// TODO use hierarchy of caches for zooms +
+// TODO errors go with "" into cache!
 public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 
 	private OsmandApplication app;
@@ -92,6 +93,7 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 		int maxDimensionTiles = MAX_DIMENSION_TILES;
 
 		// Adjust zoom level to ensure width and height in tiles are <= maxDimensionTiles
+		// TODO calculate that maximum only 16 tiles will be loaded
 		while (zoom >= 0) {
 			int tileWidth = (int) (MapUtils.getTileNumberX(zoom, rect.right) - MapUtils.getTileNumberX(zoom, rect.left));
 			int tileHeight = (int) (MapUtils.getTileNumberY(zoom, rect.bottom) - MapUtils.getTileNumberX(zoom, rect.top));
@@ -123,17 +125,21 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 				if (!dbHelper.isDataExpired(zoom, tileX, tileY, queryLang)) {
 					List<OsmandApiFeatureData> places = dbHelper.getPlaces(zoom, tileX, tileY, queryLang);
 					for (OsmandApiFeatureData item : places) {
-						if (!Algorithms.isEmpty(item.properties.photoTitle)) {
-							NearbyPlacePoint point = new NearbyPlacePoint(item);
-							double lat = point.getLatitude();
-							double lon = point.getLongitude();
+						// TODO
+						if (Algorithms.isEmpty(item.properties.photoTitle)
+								|| item.properties.poitype == null ||
+								item.properties.poisubtype == null) {
+							continue;
+						}
+						NearbyPlacePoint point = new NearbyPlacePoint(item);
+						double lat = point.getLatitude();
+						double lon = point.getLongitude();
 
-							// Filter by QuadRect or if the bounding box is small (width <= 0.5 tile size at zoom 12)
-							boolean loadAll = (maxTileX - minTileX) <= MIN_TILE_QUERY
-									|| (maxTileY - minTileY) <= MIN_TILE_QUERY;
-							if ((rect.contains(lon, lat, lon, lat) || loadAll) && uniqueIds.add(point.getId())) {
-								filteredPoints.add(point);
-							}
+						// Filter by QuadRect or if the bounding box is small (width <= 0.5 tile size at zoom 12)
+						boolean loadAll = (maxTileX - minTileX) <= MIN_TILE_QUERY
+								|| (maxTileY - minTileY) <= MIN_TILE_QUERY;
+						if ((rect.contains(lon, lat, lon, lat) || loadAll) && uniqueIds.add(point.getId())) {
+							filteredPoints.add(point);
 						}
 					}
 				} else {
@@ -155,8 +161,6 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 
 	@SuppressLint("DefaultLocale")
 	private void loadTile(int zoom, int tileX, int tileY, String queryLang, PlacesDatabaseHelper dbHelper) {
-		// Calculate the bounding box for the current tile
-		Log.i("DOWNLOAD", String.format("Download tile %d %d %d", tileX, tileY, zoom));
 		double left = MapUtils.getLongitudeFromTile(zoom, tileX);
 		double right = MapUtils.getLongitudeFromTile(zoom, tileX + 1);
 		double top = MapUtils.getLatitudeFromTile(zoom, tileY);
