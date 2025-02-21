@@ -9,7 +9,7 @@ import java.util.*;
 
 public class OverlappedSegmentsMergerDS {
 
-    private static final double PRECISION = KMapUtils.HIGH_LATLON_PRECISION;
+    private static final double PRECISION = KMapUtils.DEFAULT_LATLON_PRECISION;
 
     public static Track mergeSegmentsWithOverlapHandling(Track originalTrack) {
         List<TrkSegment> originalSegments = new ArrayList<>(originalTrack.getSegments());

@@ -28,6 +28,8 @@ public class OverlappedSegmentsMergerGPT {
      * @param track the input Track containing one or more segments
      * @return a new Track consisting of segments without duplicate overlaps and loops
      */
+    private static final double PRECISION = KMapUtils.DEFAULT_LATLON_PRECISION;
+
     public static Track mergeSegmentsWithOverlapHandling(Track track) {
         // Step 1. Extract polylines from segments
         List<List<WptPt>> polylines = new ArrayList<>();
@@ -192,6 +194,6 @@ public class OverlappedSegmentsMergerGPT {
     private static boolean pointsEqual(WptPt a, WptPt b) {
         KLatLon p1 = new KLatLon(a.getLatitude(), a.getLongitude());
         KLatLon p2 = new KLatLon(b.getLatitude(), b.getLongitude());
-        return KMapUtils.INSTANCE.areLatLonEqual(p1, p2);
+        return KMapUtils.INSTANCE.areLatLonEqual(p1, p2, PRECISION);
     }
 }

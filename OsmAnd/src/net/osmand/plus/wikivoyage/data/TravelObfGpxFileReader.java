@@ -49,6 +49,8 @@ import net.osmand.shared.util.KAlgorithms;
 import net.osmand.shared.util.KMapAlgorithms;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.util.OverlappedSegmentsMergerDS;
+import net.osmand.util.OverlappedSegmentsMergerGPT;
 
 import org.apache.commons.logging.Log;
 
