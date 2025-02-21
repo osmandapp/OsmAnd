@@ -35,8 +35,7 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 
 	private final int LEVEL_ZOOM_CACHE = 12; // Constant zoom level
 	private final int DEFAULT_QUERY_RADIUS = 30000;
-
-	private static final long DATA_EXPIRATION_TIME = TimeUnit.DAYS.toMillis(30); // 1 month
+//	private final int DEFAULT_QUERY_RADIUS = 0;
 
 	public ExplorePlacesProviderJava(OsmandApplication app) {
 		this.app = app;
@@ -112,16 +111,18 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 	}
 
 	public void loadPlaces(QuadRect rect, ExplorePlacesListener listener) {
+		// TODO check gzip header passed
 		addListener(listener);
 		KQuadRect qRect = new KQuadRect(rect.left, rect.top, rect.right, rect.bottom);
 		int zoom = LEVEL_ZOOM_CACHE; // Constant zoom level
+		final KQuadRect queryRect =
+				KMapUtils.INSTANCE.calculateLatLonBbox(qRect.centerY(), qRect.centerX(), DEFAULT_QUERY_RADIUS);
 		// Calculate min/max tile coordinates for the QuadRect
-		int minTileX = (int) MapUtils.getTileNumberX(zoom, rect.left);
-		int maxTileX = (int) MapUtils.getTileNumberX(zoom, rect.right);
-		int minTileY = (int) MapUtils.getTileNumberY(zoom, rect.top);
-		int maxTileY = (int) MapUtils.getTileNumberY(zoom, rect.bottom);
-		final KQuadRect queryRect = KMapUtils.INSTANCE.calculateLatLonBbox(qRect.centerY(), qRect.centerX(), DEFAULT_QUERY_RADIUS);
-//			final KQuadRect queryRect = qRect;
+		int minTileX = (int) MapUtils.getTileNumberX(zoom, queryRect.getLeft());
+		int maxTileX = (int) MapUtils.getTileNumberX(zoom, queryRect.getRight());
+		int minTileY = (int) MapUtils.getTileNumberY(zoom, queryRect.getTop());
+		int maxTileY = (int) MapUtils.getTileNumberY(zoom, queryRect.getBottom());
+
 		final int queryZoom = LEVEL_ZOOM_CACHE; //app.getOsmandMap().getMapView().getZoom();
 		final String queryLang = getLang();
 		boolean hasData = false;

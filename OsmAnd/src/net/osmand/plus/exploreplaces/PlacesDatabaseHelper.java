@@ -18,6 +18,9 @@ import java.util.concurrent.TimeUnit;
 public class PlacesDatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "places.db";
+
+    private static final long DATA_EXPIRATION_TIME = TimeUnit.DAYS.toMillis(30); // 1 month
+
     private static final int DATABASE_VERSION = 2; // Incremented version for schema changes
     private static final String TABLE_PLACES = "places";
     private static final String COLUMN_ZOOM = "zoom";
@@ -99,7 +102,7 @@ public class PlacesDatabaseHelper extends SQLiteOpenHelper {
             long timestamp = cursor.getLong(tc);
             long currentTime = System.currentTimeMillis();
             cursor.close();
-            return (currentTime - timestamp) > TimeUnit.DAYS.toMillis(30); // 1 month expiration
+            return (currentTime - timestamp) > DATA_EXPIRATION_TIME; // 1 month expiration
         }
         cursor.close();
         return true; // Data is expired if it doesn't exist
