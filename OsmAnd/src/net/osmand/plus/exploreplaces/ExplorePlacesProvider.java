@@ -14,15 +14,17 @@ public interface ExplorePlacesProvider {
 
 	@NotNull List<NearbyPlacePoint> getDataCollection(QuadRect mapRect);
 
+	@NotNull List<NearbyPlacePoint> getDataCollection(QuadRect mapRect, int limit);
+
 	void showPointInContextMenu(@NotNull MapActivity it, @NotNull NearbyPlacePoint item);
 
 	void addListener(ExplorePlacesListener listener);
 
 	void removeListener(ExplorePlacesListener listener);
 
-	void loadPlaces(QuadRect rect, ExplorePlacesListener listener);
-
 	Amenity getAmenity(LatLon latLon, long id);
+
+	boolean isLoading();
 
 
 	interface ExplorePlacesListener {

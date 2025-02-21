@@ -106,7 +106,7 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvid
 	@Override
 	public void onNewExplorePlacesDownloaded() {
 		isLoadingItems = false;
-		AndroidUiHelper.updateVisibility(progressBar, false);
+		AndroidUiHelper.updateVisibility(progressBar, app.getExplorePlacesProvider().isLoading());
 		adapter.setItems(app.getExplorePlacesProvider().getDataCollection(visiblePlacesRect));
 		adapter.notifyDataSetChanged();
 		updateExpandState();
@@ -130,10 +130,10 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvid
 
 	private void startLoadingNearbyPlaces() {
 		isLoadingItems = true;
-		AndroidUiHelper.updateVisibility(progressBar, true);
-		app.getExplorePlacesProvider().loadPlaces(
-				app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getLatLonBounds(), this
+		app.getExplorePlacesProvider().getDataCollection(
+				app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getLatLonBounds()
 		);
+		AndroidUiHelper.updateVisibility(progressBar, app.getExplorePlacesProvider().isLoading());
 	}
 
 	private void setupExpandNearbyPlacesIndicator() {
