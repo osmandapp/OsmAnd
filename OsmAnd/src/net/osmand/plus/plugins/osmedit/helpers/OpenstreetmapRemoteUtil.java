@@ -195,7 +195,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		return null;
 	}
 
-	public long openChangeSet(String comment) {
+	public long openChangeSet(@Nullable String comment) {
 		long id = -1;
 		StringWriter writer = new StringWriter(256);
 		XmlSerializer ser = Xml.newSerializer();
@@ -236,27 +236,28 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		return id;
 	}
 
-	private void writeNode(Node n, EntityInfo i, XmlSerializer ser, long changeSetId, String user)
+	private void writeNode(@NonNull Node node, @Nullable EntityInfo info,
+			@NonNull XmlSerializer ser, long changeSetId, String user)
 			throws IllegalArgumentException, IllegalStateException, IOException {
 		ser.startTag(null, "node"); //$NON-NLS-1$
-		ser.attribute(null, "id", n.getId() + ""); //$NON-NLS-1$ //$NON-NLS-2$
-		ser.attribute(null, "lat", n.getLatitude() + ""); //$NON-NLS-1$ //$NON-NLS-2$
-		ser.attribute(null, "lon", n.getLongitude() + ""); //$NON-NLS-1$ //$NON-NLS-2$
-		if (i != null) {
-			// ser.attribute(null, "timestamp", i.getETimestamp());
-			// ser.attribute(null, "uid", i.getUid());
-			// ser.attribute(null, "user", i.getUser());
-			ser.attribute(null, "visible", i.getVisible()); //$NON-NLS-1$
-			ser.attribute(null, "version", i.getVersion()); //$NON-NLS-1$
+		ser.attribute(null, "id", node.getId() + ""); //$NON-NLS-1$ //$NON-NLS-2$
+		ser.attribute(null, "lat", node.getLatitude() + ""); //$NON-NLS-1$ //$NON-NLS-2$
+		ser.attribute(null, "lon", node.getLongitude() + ""); //$NON-NLS-1$ //$NON-NLS-2$
+		if (info != null) {
+			// ser.attribute(null, "timestamp", info.getETimestamp());
+			// ser.attribute(null, "uid", info.getUid());
+			// ser.attribute(null, "user", info.getUser());
+			ser.attribute(null, "visible", info.getVisible()); //$NON-NLS-1$
+			ser.attribute(null, "version", info.getVersion()); //$NON-NLS-1$
 		}
 		ser.attribute(null, "changeset", changeSetId + ""); //$NON-NLS-1$ //$NON-NLS-2$
 
-		writeTags(n, ser);
+		writeTags(node, ser);
 		ser.endTag(null, "node"); //$NON-NLS-1$
 	}
 
-	private void writeWay(Way way, EntityInfo i, XmlSerializer ser, long changeSetId, String user)
-			throws IllegalArgumentException, IllegalStateException, IOException {
+	private void writeWay(@NonNull Way way, @Nullable EntityInfo i, @NonNull XmlSerializer ser,
+			long changeSetId, String user) throws IllegalArgumentException, IllegalStateException, IOException {
 		ser.startTag(null, "way"); //$NON-NLS-1$
 		ser.attribute(null, "id", way.getId() + ""); //$NON-NLS-1$ //$NON-NLS-2$
 		if (i != null) {
@@ -308,9 +309,9 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	}
 
 	@Override
-	public Entity commitEntityImpl(@NonNull Action action, Entity entity, EntityInfo info,
-			String comment,
-			boolean closeChangeSet, Set<String> changedTags) {
+	public Entity commitEntityImpl(@NonNull Action action, @NonNull Entity entity,
+			@Nullable EntityInfo info, @Nullable String comment, boolean closeChangeSet,
+			@Nullable Set<String> changedTags) {
 		if (isNewChangesetRequired()) {
 			changeSetId = openChangeSet(comment);
 			changeSetTimeStamp = System.currentTimeMillis();
@@ -452,6 +453,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		return entity.getTagKeySet().contains(REMOVE_TAG_PREFIX + tag);
 	}
 
+	@Nullable
 	@Override
 	public Entity loadEntity(@NonNull MapObject object) {
 		EntityType type = ObfConstants.getOsmEntityType(object);
