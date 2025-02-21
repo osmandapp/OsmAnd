@@ -11,8 +11,9 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public abstract class AverageValueComputer {
 
@@ -34,10 +35,8 @@ public abstract class AverageValueComputer {
 	}
 
 	protected final OsmandApplication app;
-
 	protected final OsmandSettings settings;
-
-	protected final List<Location> locations = new LinkedList<>();
+	protected final Queue<Location> locations = new ConcurrentLinkedQueue<>();
 
 	public AverageValueComputer(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -54,9 +53,10 @@ public abstract class AverageValueComputer {
 		}
 	}
 
-	protected void clearExpiredLocations(@NonNull List<Location> locations, long measuredInterval) {
+	protected void clearExpiredLocations(long measuredInterval) {
 		long expirationTime = System.currentTimeMillis() - measuredInterval;
-		for (Iterator<Location> iterator = locations.iterator(); iterator.hasNext(); ) {
+		Iterator<Location> iterator = locations.iterator();
+		while (iterator.hasNext()) {
 			Location location = iterator.next();
 			if (location.getTime() < expirationTime) {
 				iterator.remove();
