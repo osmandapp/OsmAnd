@@ -11,27 +11,24 @@ import net.osmand.shared.util.KMapUtils;
 
 public class OverlappedSegmentsMergerGPT {
 
-    /**
-     * Processes the input Track as follows:
-     * 1. Extracts polylines (lists of points) from the original segments.
-     * 2. Attempts to merge pairs of polylines if there is an overlap at their boundaries.
-     *    It determines the maximum number of consecutive points (overlap) that match at the junction
-     *    and merges the segments so that the overlapping part appears only once.
-     *    If necessary, one of the polylines is reversed to allow a proper connection.
-     * 3. After merging, each resulting polyline is cleaned from self-intersections (loops),
-     *    meaning that if a point appears again, the looped section is removed and only the first occurrence is kept.
-     * 4. The final polylines are converted into segments and assembled into a new Track.
-     *
-     * In the final result, overlapping segments retain exactly one instance of the shared points,
-     * while duplicate points are removed.
-     *
-     * @param track the input Track containing one or more segments
-     * @return a new Track consisting of segments without duplicate overlaps and loops
-     */
     private static final double PRECISION = KMapUtils.DEFAULT_LATLON_PRECISION;
 
+    /**
+     * Merges segments with overlap handling.
+     * <p>
+     * The method extracts polylines (lists of points) from the original segments,
+     * then iteratively merges polylines that overlap at their boundaries.
+     * The maximum overlap (i.e. the maximum number of consecutive points that match at the junction)
+     * is determined and used so that the overlapping part appears only once.
+     * If needed, one of the polylines is reversed to obtain a proper match.
+     * After merging, self-intersections (loops) are removed from each polyline.
+     * Finally, the resulting polylines are converted back to segments and assembled into a new Track.
+     *
+     * @param track the input Track containing one or more segments
+     * @return a new Track consisting of segments merged with proper overlap handling
+     */
     public static Track mergeSegmentsWithOverlapHandling(Track track) {
-        // Step 1. Extract polylines from segments
+        // Step 1. Extract polylines from segments.
         List<List<WptPt>> polylines = new ArrayList<>();
         for (TrkSegment seg : track.getSegments()) {
             List<WptPt> pts = new ArrayList<>(seg.getPoints());
@@ -40,8 +37,7 @@ public class OverlappedSegmentsMergerGPT {
             }
         }
 
-        // Step 2. Merge polylines if there is an overlap at their boundaries.
-        // Perform iterative merging until at least one pair is successfully merged.
+        // Step 2. Iteratively merge polylines if their boundaries overlap.
         boolean mergedSomething = true;
         while (mergedSomething) {
             mergedSomething = false;
@@ -61,7 +57,7 @@ public class OverlappedSegmentsMergerGPT {
             }
         }
 
-        // Step 3. Remove self-intersections (loops) in each resulting polyline.
+        // Step 3. Remove self-intersections (loops) from each polyline.
         List<List<WptPt>> finalPolylines = new ArrayList<>();
         for (List<WptPt> poly : polylines) {
             List<WptPt> cleaned = removeSelfLoops(poly);
@@ -84,10 +80,10 @@ public class OverlappedSegmentsMergerGPT {
 
     /**
      * Attempts to merge two polylines if their boundaries overlap.
-     * The method considers the following cases:
-     * - Consecutive matching of poly1's end with poly2's start.
-     * - Consecutive matching of poly2's end with poly1's start.
-     * - If needed, reversing one of the polylines to obtain a proper match.
+     * The method considers these cases:
+     * - The end of poly1 matches the start of poly2.
+     * - The end of poly2 matches the start of poly1.
+     * - If needed, one of the polylines is reversed to obtain a proper match.
      * If an overlap (of length >= 1) is found, the merged polyline is returned; otherwise, null is returned.
      */
     private static List<WptPt> mergePolylines(List<WptPt> poly1, List<WptPt> poly2) {
@@ -96,7 +92,7 @@ public class OverlappedSegmentsMergerGPT {
         if (overlap >= 1) {
             return mergeBySuffixPrefix(poly1, poly2, overlap);
         }
-        // Option 2: if the end of poly2 equals the start of poly1
+        // Option 2: merge if the end of poly2 equals the start of poly1
         overlap = getMaxOverlap(poly2, poly1);
         if (overlap >= 1) {
             return mergeBySuffixPrefix(poly2, poly1, overlap);
@@ -141,12 +137,11 @@ public class OverlappedSegmentsMergerGPT {
 
     /**
      * Merges two polylines, assuming that the last L points of the first polyline match the first L points
-     * of the second polyline. The result is the first polyline with the second polyline appended starting at index L,
+     * of the second polyline. The result is the first polyline appended with the second polyline starting from index L,
      * thus avoiding duplication of the overlapping segment.
      */
     private static List<WptPt> mergeBySuffixPrefix(List<WptPt> first, List<WptPt> second, int overlap) {
         List<WptPt> merged = new ArrayList<>(first);
-        // Append points from the second polyline starting at index 'overlap'
         for (int i = overlap; i < second.size(); i++) {
             merged.add(second.get(i));
         }
@@ -166,7 +161,6 @@ public class OverlappedSegmentsMergerGPT {
         for (WptPt pt : poly) {
             int index = indexOfPoint(result, pt);
             if (index != -1) {
-                // Remove all points after the first occurrence, keeping that occurrence
                 result = new ArrayList<>(result.subList(0, index + 1));
             } else {
                 result.add(pt);
@@ -176,7 +170,7 @@ public class OverlappedSegmentsMergerGPT {
     }
 
     /**
-     * Returns the index of the first point in the list that is equal to pt (using areLatLonEqual),
+     * Returns the index of the first point in the list that is equal to pt (using pointsEqual),
      * or -1 if no such point is found.
      */
     private static int indexOfPoint(List<WptPt> list, WptPt pt) {
@@ -189,7 +183,8 @@ public class OverlappedSegmentsMergerGPT {
     }
 
     /**
-     * Compares two WptPt points using the library method areLatLonEqual.
+     * Compares two WptPt points using the library method areLatLonEqual with precision.
+     * Two points are considered equal if the library method returns true for the given precision.
      */
     private static boolean pointsEqual(WptPt a, WptPt b) {
         KLatLon p1 = new KLatLon(a.getLatitude(), a.getLongitude());
