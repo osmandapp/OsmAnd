@@ -10,7 +10,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.data.NearbyPlacePoint;
+import net.osmand.data.ExploreTopPlacePoint;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
@@ -29,7 +29,7 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	private boolean selectionMode;
 	private NearbyPlacesCard nearbyPlacesCard;
 
-	public void onNearbyItemClicked(@NonNull NearbyPlacePoint point) {
+	public void onNearbyItemClicked(@NonNull ExploreTopPlacePoint point) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			getMyApplication().getExplorePlacesProvider().showPointInContextMenu(mapActivity, point);

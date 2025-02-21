@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.PlatformUtil
-import net.osmand.data.NearbyPlacePoint
+import net.osmand.data.ExploreTopPlacePoint
 import net.osmand.data.QuadRect
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
@@ -84,10 +84,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 			.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_marker_dark, nightMode))
 
 		view.findViewById<View>(R.id.show_on_map).setOnClickListener {
-			// TODO make dynamic load
-			app.osmandMap.mapLayers.nearbyPlacesLayer.setCustomMapObjects(
-				app.explorePlacesProvider.getDataCollection(app.osmandMap.mapView.currentRotatedTileBox.latLonBounds)
-			)
+			app.osmandMap.mapLayers.explorePlacesLayer.enableLayer(true)
 			hide()
 		}
 	}
@@ -152,7 +149,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 
 	}
 
-	override fun onNearbyItemClicked(item: NearbyPlacePoint) {
+	override fun onNearbyItemClicked(item: ExploreTopPlacePoint) {
 		mapActivity?.let {
 			app.explorePlacesProvider.showPointInContextMenu(it, item)
 			hide()

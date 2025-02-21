@@ -9,7 +9,7 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
-import net.osmand.data.NearbyPlacePoint;
+import net.osmand.data.ExploreTopPlacePoint;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
@@ -31,16 +31,18 @@ import java.util.Set;
 // TODO errors shouldn'go with empty response "" into cache!
 // TODO remove checks poi type subtype null
 // TODO display all data downloaded even if maps are not loaded
+// TODO: why recreate provider when new points are loaded? that causes blinking
 // Extra: display new categories from web
 public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 
-	private OsmandApplication app;
+	private static final int DEFAULT_LIMIT_POINTS = 200;
 	private static final int NEARBY_MIN_RADIUS = 50;
 
 	private final int MAX_LEVEL_ZOOM_CACHE = 13;
 	private static final int MAX_TILES_PER_QUAD_RECT = 12;
 	private static final double LOAD_ALL_TINY_RECT = 0.5;
 
+	private OsmandApplication app;
 	private volatile int startedTasks = 0;
 	private volatile int finishedTasks = 0;
 
@@ -90,11 +92,11 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 		return preferredLang;
 	}
 
-	public List<NearbyPlacePoint> getDataCollection(QuadRect rect) {
-		return getDataCollection(rect, 1000);
+	public List<ExploreTopPlacePoint> getDataCollection(QuadRect rect) {
+		return getDataCollection(rect, DEFAULT_LIMIT_POINTS);
 	}
 
-	public List<NearbyPlacePoint> getDataCollection(QuadRect rect, int limit) {
+	public List<ExploreTopPlacePoint> getDataCollection(QuadRect rect, int limit) {
 		if (rect == null) {
 			return Collections.emptyList();
 		}
@@ -121,7 +123,7 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 
 		// Fetch data for all tiles within the bounds
 		PlacesDatabaseHelper dbHelper = new PlacesDatabaseHelper(app);
-		List<NearbyPlacePoint> filteredPoints = new ArrayList<>();
+		List<ExploreTopPlacePoint> filteredPoints = new ArrayList<>();
 		Set<Long> uniqueIds = new HashSet<>(); // Use a Set to track unique IDs
 		final String queryLang = getLang();
 
@@ -136,7 +138,7 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 								|| item.properties.poitype == null || item.properties.poisubtype == null) {
 							continue;
 						}
-						NearbyPlacePoint point = new NearbyPlacePoint(item);
+						ExploreTopPlacePoint point = new ExploreTopPlacePoint(item);
 						double lat = point.getLatitude();
 						double lon = point.getLongitude();
 						if ((rect.contains(lon, lat, lon, lat) || loadAll) && uniqueIds.add(point.getId())) {
@@ -209,7 +211,7 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 		}).execute();
 	}
 
-	public void showPointInContextMenu(MapActivity mapActivity, NearbyPlacePoint point) {
+	public void showPointInContextMenu(MapActivity mapActivity, ExploreTopPlacePoint point) {
 		double latitude = point.getLatitude();
 		double longitude = point.getLongitude();
 		app.getSettings().setMapLocationToShow(

@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.data.NearbyPlacePoint;
+import net.osmand.data.ExploreTopPlacePoint;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -97,7 +97,7 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvid
 
 	private NearbyPlacesAdapter getNearbyAdapter() {
 		if (adapter == null) {
-			List<NearbyPlacePoint> nearbyData = app.getExplorePlacesProvider().getDataCollection(visiblePlacesRect);
+			List<ExploreTopPlacePoint> nearbyData = app.getExplorePlacesProvider().getDataCollection(visiblePlacesRect);
 			adapter = new NearbyPlacesAdapter(app, nearbyData, false, clickListener);
 		}
 		return adapter;

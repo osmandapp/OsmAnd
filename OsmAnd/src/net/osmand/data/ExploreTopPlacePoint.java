@@ -14,7 +14,7 @@ import net.osmand.wiki.WikiImage;
 import java.io.Serializable;
 
 
-public class NearbyPlacePoint implements Serializable, LocationPoint {
+public class ExploreTopPlacePoint implements Serializable, LocationPoint {
 
 	private static final long serialVersionUID = 829654300829771466L;
 
@@ -35,7 +35,7 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 	@Nullable
 	private Bitmap imageBitmap;
 
-	public NearbyPlacePoint(OsmandApiFeatureData featureData) {
+	public ExploreTopPlacePoint(OsmandApiFeatureData featureData) {
 		this.id = featureData.properties.osmid;
 		WikiImage wikiIMage = WikiCoreHelper.getImageData(featureData.properties.photoTitle);
 		this.iconUrl = wikiIMage == null ? "" : wikiIMage.getImageIconUrl();
@@ -144,7 +144,7 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 			return false;
 		}
 
-		NearbyPlacePoint point = (NearbyPlacePoint) o;
+		ExploreTopPlacePoint point = (ExploreTopPlacePoint) o;
 		if (!Algorithms.stringsEqual(photoTitle, point.photoTitle)) {
 			return false;
 		}

@@ -9,7 +9,7 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import net.osmand.Location
 import net.osmand.data.LatLon
-import net.osmand.data.NearbyPlacePoint
+import net.osmand.data.ExploreTopPlacePoint
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
@@ -22,13 +22,13 @@ import net.osmand.util.Algorithms
 
 class NearbyPlacesAdapter(
 	val app: OsmandApplication,
-	var items: List<NearbyPlacePoint>,
+	var items: List<ExploreTopPlacePoint>,
 	private var isVertical: Boolean,
 	private val onItemClickListener: NearbyItemClickListener
 ) : RecyclerView.Adapter<NearbyPlacesAdapter.NearbyViewHolder>() {
 
 	interface NearbyItemClickListener {
-		fun onNearbyItemClicked(item: NearbyPlacePoint)
+		fun onNearbyItemClicked(item: ExploreTopPlacePoint)
 	}
 
 	// Initialize the UpdateLocationViewCache
@@ -67,7 +67,7 @@ class NearbyPlacesAdapter(
 		private val distanceTextView: TextView? = itemView.findViewById(R.id.distance)
 		private val arrowImageView: ImageView? = itemView.findViewById(R.id.direction)
 
-		fun bind(item: NearbyPlacePoint, onItemClickListener: NearbyItemClickListener, position: Int) {
+		fun bind(item: ExploreTopPlacePoint, onItemClickListener: NearbyItemClickListener, position: Int) {
 			val app = imageView.context.applicationContext as OsmandApplication
 			val poiTypes = app.poiTypes
 			val subType = poiTypes.getPoiTypeByKey(item.poisubtype)
@@ -133,7 +133,7 @@ class NearbyPlacesAdapter(
 			itemView.setOnClickListener { onItemClickListener.onNearbyItemClicked(item) }
 		}
 
-		private fun calculateDistance(app: OsmandApplication, item: NearbyPlacePoint): Float? {
+		private fun calculateDistance(app: OsmandApplication, item: ExploreTopPlacePoint): Float? {
 			val currentLocation = app.locationProvider?.lastKnownLocation
 			if (currentLocation != null) {
 				val results = FloatArray(1)

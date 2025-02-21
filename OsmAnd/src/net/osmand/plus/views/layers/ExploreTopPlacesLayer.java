@@ -17,62 +17,73 @@ import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
-import net.osmand.data.NearbyPlacePoint;
+import net.osmand.data.ExploreTopPlacePoint;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.exploreplaces.ExplorePlacesProvider;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
-import net.osmand.plus.views.layers.core.NearbyPlacesTileProvider;
+import net.osmand.plus.views.layers.core.ExploreTopPlacesTileProvider;
 import net.osmand.util.Algorithms;
-import net.osmand.wiki.WikiCoreHelper;
 
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuProvider {
+public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMenuProvider, ExplorePlacesProvider.ExplorePlacesListener {
 
-	private static final int START_ZOOM = 6;
-	private static final Log LOG = PlatformUtil.getLog(NearbyPlacesLayer.class);
+	private static final int START_ZOOM = 2;
+	private static final Log LOG = PlatformUtil.getLog(ExploreTopPlacesLayer.class);
 	public static final String LOAD_NEARBY_IMAGES_TAG = "load_nearby_images";
 
-	protected List<NearbyPlacePoint> cache = new ArrayList<>();
-	private boolean showNearbyPoints;
+
 	private boolean nightMode;
-	private NearbyPlacePoint selectedObject;
+	private ExploreTopPlacePoint selectedObject;
 
 	private Bitmap cachedSmallIconBitmap;
 
-	public CustomMapObjects<NearbyPlacePoint> customObjectsDelegate = new OsmandMapLayer.CustomMapObjects<>();
+	private QuadRect requestQuadRect = null; // null means disabled
 
-	private NearbyPlacesTileProvider nearbyPlacesMapLayerProvider;
-	private NearbyPlacesTileProvider selectedNearbyPlacesMapLayerProvider;
 
-	public NearbyPlacesLayer(@NonNull Context ctx) {
+	private ExploreTopPlacesTileProvider topPlacesMapLayerProvider;
+	private ExploreTopPlacesTileProvider selectedTopPlacesMapLayerProvider;
+	private ExplorePlacesProvider explorePlacesProvider;
+	private int cachedExploreDataVersion;
+	private List<ExploreTopPlacePoint> places;
+	private int imagesUpdatedVersion;
+	private long lastImageCacheRefreshed = 0;
+	private static final long DEBOUNCE_IMAGE_REFRESH = 5000;
+	private int imagesCachedVersion;
+
+	public ExploreTopPlacesLayer(@NonNull Context ctx) {
 		super(ctx);
 	}
 
 	@Override
 	public void initLayer(@NonNull OsmandMapTileView view) {
 		super.initLayer(view);
+
 		nightMode = getApplication().getDaynightHelper().isNightMode();
+		explorePlacesProvider = getApplication().getExplorePlacesProvider();
+		explorePlacesProvider.addListener(this);
 		recreateBitmaps();
 	}
+
+
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 	}
 
 	private void recreateBitmaps() {
-		cachedSmallIconBitmap = NearbyPlacesTileProvider.createSmallPointBitmap(getApplication());
+		cachedSmallIconBitmap = ExploreTopPlacesTileProvider.createSmallPointBitmap(getApplication());
 	}
 
 	@Override
@@ -84,10 +95,11 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 	@Override
 	protected void cleanupResources() {
 		super.cleanupResources();
-		clearNearbyPoints(nearbyPlacesMapLayerProvider);
-		clearNearbyPoints(selectedNearbyPlacesMapLayerProvider);
-		nearbyPlacesMapLayerProvider = null;
-		selectedNearbyPlacesMapLayerProvider = null;
+		deleteProvider(topPlacesMapLayerProvider);
+		deleteProvider(selectedTopPlacesMapLayerProvider);
+		topPlacesMapLayerProvider = null;
+		selectedTopPlacesMapLayerProvider = null;
+		explorePlacesProvider.removeListener(this);
 	}
 
 	@Override
@@ -101,34 +113,56 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 		boolean nightMode = settings != null && settings.isNightMode();
 		boolean nightModeChanged = this.nightMode != nightMode;
 		this.nightMode = nightMode;
-		boolean showNearbyPoints = !customObjectsDelegate.getMapObjects().isEmpty();
-		boolean showNearbyPlacesChanged = this.showNearbyPoints != showNearbyPoints;
-		this.showNearbyPoints = showNearbyPoints;
-		NearbyPlacePoint selectedObject = getSelectedNearbyPlace();
+		QuadRect cachedRect = requestQuadRect;
+		boolean placesUpdated = false;
+		if (requestQuadRect != null) {
+			int exploreDataVersion = explorePlacesProvider.getDataVersion();
+			if (!cachedRect.contains(tileBox.getLatLonBounds()) || cachedExploreDataVersion < exploreDataVersion ||
+					places == null) {
+				placesUpdated = true;
+				RotatedTileBox extended = tileBox.copy();
+				extended.increasePixelDimensions(tileBox.getPixWidth() / 2, tileBox.getPixHeight() / 2);
+				requestQuadRect = extended.getLatLonBounds();
+				cachedExploreDataVersion = explorePlacesProvider.getDataVersion();
+				places = explorePlacesProvider.getDataCollection(requestQuadRect);
+				scheduleImageRefreshes(places);
+				lastImageCacheRefreshed = System.currentTimeMillis();
+				imagesCachedVersion = imagesUpdatedVersion;
+			}
+		} else {
+			if (places != null) {
+				placesUpdated = true;
+				places = null;
+			}
+		}
+		if (imagesCachedVersion != imagesUpdatedVersion && System.currentTimeMillis() - lastImageCacheRefreshed >
+				DEBOUNCE_IMAGE_REFRESH) {
+			lastImageCacheRefreshed = System.currentTimeMillis();
+			imagesCachedVersion = imagesUpdatedVersion;
+			placesUpdated = true;
+		}
+		ExploreTopPlacePoint selectedObject = getSelectedNearbyPlace();
 		long selectedObjectId = selectedObject == null ? 0 : selectedObject.getId();
 		long lastSelectedObjectId = this.selectedObject == null ? 0 : this.selectedObject.getId();
 		boolean selectedObjectChanged = selectedObjectId != lastSelectedObjectId;
 		this.selectedObject = selectedObject;
 		if (hasMapRenderer()) {
 			if ((mapActivityInvalidated || mapRendererChanged
-					|| nightModeChanged || showNearbyPlacesChanged
-					|| customObjectsDelegate.isChanged())) {
-				showNearbyPoints();
-				customObjectsDelegate.acceptChanges();
+					|| nightModeChanged || placesUpdated)) {
+				initProviderWithPoints(places);
 				mapRendererChanged = false;
 			}
 			if (selectedObjectChanged) {
 				showSelectedNearbyPoint();
 			}
 		} else {
-			cache.clear();
-			if (showNearbyPoints && tileBox.getZoom() >= START_ZOOM) {
+			if (places != null && tileBox.getZoom() >= START_ZOOM) {
 				float iconSize = getIconSize(view.getApplication());
 				QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 				QuadRect latLonBounds = tileBox.getLatLonBounds();
 				List<LatLon> fullObjectsLatLon = new ArrayList<>();
 				List<LatLon> smallObjectsLatLon = new ArrayList<>();
-				drawPoints(customObjectsDelegate.getMapObjects(), latLonBounds, false, tileBox, boundIntersections, iconSize, canvas,
+				drawPoints(places, latLonBounds, false, tileBox, boundIntersections, iconSize, canvas,
 						fullObjectsLatLon, smallObjectsLatLon);
 				this.fullObjectsLatLon = fullObjectsLatLon;
 				this.smallObjectsLatLon = smallObjectsLatLon;
@@ -137,20 +171,19 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 		mapActivityInvalidated = false;
 	}
 
-	private void drawPoints(List<NearbyPlacePoint> pointsToDraw, QuadRect latLonBounds, boolean synced, RotatedTileBox tileBox,
+	private void drawPoints(List<ExploreTopPlacePoint> pointsToDraw, QuadRect latLonBounds, boolean synced, RotatedTileBox tileBox,
 	                        QuadTree<QuadRect> boundIntersections, float iconSize, Canvas canvas,
 	                        List<LatLon> fullObjectsLatLon, List<LatLon> smallObjectsLatLon) {
-		List<NearbyPlacePoint> fullObjects = new ArrayList<>();
+		List<ExploreTopPlacePoint> fullObjects = new ArrayList<>();
 		Paint pointPaint = new Paint();
 		if (cachedSmallIconBitmap == null) {
-			cachedSmallIconBitmap = NearbyPlacesTileProvider.createSmallPointBitmap(getApplication());
+			cachedSmallIconBitmap = ExploreTopPlacesTileProvider.createSmallPointBitmap(getApplication());
 		}
-		for (NearbyPlacePoint nearbyPoint : pointsToDraw) {
+		for (ExploreTopPlacePoint nearbyPoint : pointsToDraw) {
 			double lat = nearbyPoint.getLatitude();
 			double lon = nearbyPoint.getLongitude();
 			if (lat >= latLonBounds.bottom && lat <= latLonBounds.top
 					&& lon >= latLonBounds.left && lon <= latLonBounds.right) {
-				cache.add(nearbyPoint);
 				float x = tileBox.getPixXFromLatLon(lat, lon);
 				float y = tileBox.getPixYFromLatLon(lat, lon);
 				if (intersects(boundIntersections, x, y, iconSize, iconSize) || nearbyPoint.getImageBitmap() == null) {
@@ -162,10 +195,10 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 				}
 			}
 		}
-		for (NearbyPlacePoint point : fullObjects) {
+		for (ExploreTopPlacePoint point : fullObjects) {
 			Bitmap bitmap = point.getImageBitmap();
 			if (bitmap != null) {
-				Bitmap bigBitmap = NearbyPlacesTileProvider.createBigBitmap(getApplication(), bitmap, point.getId() == getSelectedObjectId());
+				Bitmap bigBitmap = ExploreTopPlacesTileProvider.createBigBitmap(getApplication(), bitmap, point.getId() == getSelectedObjectId());
 				float x = tileBox.getPixXFromLatLon(point.getLatitude(), point.getLongitude());
 				float y = tileBox.getPixYFromLatLon(point.getLatitude(), point.getLongitude());
 				canvas.drawBitmap(bigBitmap, x - bigBitmap.getWidth() / 2, y - bigBitmap.getHeight() / 2, pointPaint);
@@ -177,20 +210,24 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 		return selectedObject == null ? 0 : selectedObject.getId();
 	}
 
-	public synchronized void showNearbyPoints() {
+	private void initProviderWithPoints(List<ExploreTopPlacePoint> points) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer == null) {
 			return;
 		}
-		clearNearbyPoints(nearbyPlacesMapLayerProvider);
-		nearbyPlacesMapLayerProvider = new NearbyPlacesTileProvider(getApplication(),
+		deleteProvider(topPlacesMapLayerProvider);
+		if (points == null) {
+			topPlacesMapLayerProvider = null;
+			return;
+		}
+		topPlacesMapLayerProvider = new ExploreTopPlacesTileProvider(getApplication(),
 				getPointsOrder(),
 				view.getDensity(),
 				getSelectedObjectId());
-
-		List<NearbyPlacePoint> points = customObjectsDelegate.getMapObjects();
-		showNearbyPoints(points);
-		nearbyPlacesMapLayerProvider.drawSymbols(mapRenderer);
+		for (ExploreTopPlacePoint nearbyPlacePoint : points) {
+			topPlacesMapLayerProvider.addToData(nearbyPlacePoint);
+		}
+		topPlacesMapLayerProvider.initProvider(mapRenderer);
 	}
 
 	public synchronized void showSelectedNearbyPoint() {
@@ -198,30 +235,25 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 		if (mapRenderer == null) {
 			return;
 		}
-		clearNearbyPoints(selectedNearbyPlacesMapLayerProvider);
+		deleteProvider(selectedTopPlacesMapLayerProvider);
 		if (selectedObject != null) {
-			selectedNearbyPlacesMapLayerProvider = new NearbyPlacesTileProvider(getApplication(),
+			selectedTopPlacesMapLayerProvider = new ExploreTopPlacesTileProvider(getApplication(),
 					getPointsOrder() - 1,
 					view.getDensity(),
 					getSelectedObjectId());
 
-			selectedNearbyPlacesMapLayerProvider.addToData(selectedObject);
-			selectedNearbyPlacesMapLayerProvider.drawSymbols(mapRenderer);
+			selectedTopPlacesMapLayerProvider.addToData(selectedObject);
+			selectedTopPlacesMapLayerProvider.initProvider(mapRenderer);
 		}
 	}
 
-	private void showNearbyPoints(List<NearbyPlacePoint> points) {
-		for (NearbyPlacePoint nearbyPlacePoint : points) {
-			nearbyPlacesMapLayerProvider.addToData(nearbyPlacePoint);
-		}
-	}
 
-	public void clearNearbyPoints(@Nullable NearbyPlacesTileProvider provider) {
+	public void deleteProvider(@Nullable ExploreTopPlacesTileProvider provider) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer == null || provider == null) {
 			return;
 		}
-		provider.clearSymbols(mapRenderer);
+		provider.deleteProvider(mapRenderer);
 	}
 
 	@Override
@@ -231,8 +263,8 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 
 	@Override
 	public PointDescription getObjectName(Object o) {
-		if (o instanceof NearbyPlacePoint) {
-			return ((NearbyPlacePoint) o).getPointDescription(getContext());
+		if (o instanceof ExploreTopPlacePoint) {
+			return ((ExploreTopPlacePoint) o).getPointDescription(getContext());
 		}
 		return null;
 	}
@@ -240,13 +272,13 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
-		List<NearbyPlacePoint> points = customObjectsDelegate.getMapObjects();
-		if (!points.isEmpty()) {
+		List<ExploreTopPlacePoint> points = places;
+		if (points != null) {
 			getNearbyPlaceFromPoint(tileBox, point, res, points);
 		}
 	}
 
-	private void getNearbyPlaceFromPoint(RotatedTileBox tb, PointF point, List<? super NearbyPlacePoint> res, List<NearbyPlacePoint> points) {
+	private void getNearbyPlaceFromPoint(RotatedTileBox tb, PointF point, List<? super ExploreTopPlacePoint> res, List<ExploreTopPlacePoint> points) {
 		MapRendererView mapRenderer = getMapRenderer();
 		float radius = getScaledTouchRadius(getApplication(), tb.getDefaultRadiusPoi()) * TOUCH_RADIUS_MULTIPLIER;
 		List<PointI> touchPolygon31 = null;
@@ -257,7 +289,7 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 			}
 		}
 
-		for (NearbyPlacePoint nearbyPoint : points) {
+		for (ExploreTopPlacePoint nearbyPoint : points) {
 			double lat = nearbyPoint.getLatitude();
 			double lon = nearbyPoint.getLongitude();
 			boolean add = mapRenderer != null
@@ -270,13 +302,13 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 	}
 
 	@Nullable
-	private NearbyPlacePoint getSelectedNearbyPlace() {
+	private ExploreTopPlacePoint getSelectedNearbyPlace() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			MapContextMenu mapContextMenu = mapActivity.getContextMenu();
 			Object object = mapContextMenu.getObject();
-			if (object instanceof NearbyPlacePoint && mapContextMenu.isVisible()) {
-				return (NearbyPlacePoint) object;
+			if (object instanceof ExploreTopPlacePoint && mapContextMenu.isVisible()) {
+				return (ExploreTopPlacePoint) object;
 			}
 		}
 		return null;
@@ -284,22 +316,23 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 
 	@Override
 	public LatLon getObjectLocation(Object o) {
-		if (o instanceof NearbyPlacePoint) {
-			return new LatLon(((NearbyPlacePoint) o).getLatitude(), ((NearbyPlacePoint) o).getLongitude());
+		if (o instanceof ExploreTopPlacePoint) {
+			return new LatLon(((ExploreTopPlacePoint) o).getLatitude(), ((ExploreTopPlacePoint) o).getLongitude());
 		}
 		return null;
 	}
 
-	public void setCustomMapObjects(List<NearbyPlacePoint> nearbyPlacePoints) {
+	private void scheduleImageRefreshes(List<ExploreTopPlacePoint> nearbyPlacePoints) {
 		Picasso.get().cancelTag(LOAD_NEARBY_IMAGES_TAG);
-		List<NearbyPlacePoint> nearbyPlacePointsList = new ArrayList<>();
-		for (NearbyPlacePoint point : nearbyPlacePoints) {
+
+		List<ExploreTopPlacePoint> nearbyPlacePointsList = new ArrayList<>();
+		for (ExploreTopPlacePoint point : nearbyPlacePoints) {
 			nearbyPlacePointsList.add(point);
 			Target imgLoadTarget = new Target() {
 				@Override
 				public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
 					point.setImageBitmap(bitmap);
-					customObjectsDelegate.onMapObjectUpdated(point);
+					imagesUpdatedVersion++;
 				}
 
 				@Override
@@ -317,7 +350,14 @@ public class NearbyPlacesLayer extends OsmandMapLayer implements IContextMenuPro
 						.into(imgLoadTarget);
 			}
 		}
-		customObjectsDelegate.setCustomMapObjects(nearbyPlacePointsList);
+	}
+
+	public void enableLayer(boolean enable) {
+		requestQuadRect = enable ? new QuadRect() : null;
+	}
+
+	@Override
+	public void onNewExplorePlacesDownloaded() {
 		getApplication().getOsmandMap().refreshMap();
 	}
 }
