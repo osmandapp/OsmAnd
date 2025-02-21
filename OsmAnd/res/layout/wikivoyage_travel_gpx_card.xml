@@ -56,7 +56,7 @@
 							android:ellipsize="end"
 							android:maxLines="1"
 							android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
-							android:textColor="@null"
+							android:textColor="?android:attr/textColorSecondary"
 							tools:text="5.3 km" />
 
 						<androidx.appcompat.widget.AppCompatImageView
@@ -86,7 +86,7 @@
 							android:ellipsize="end"
 							android:maxLines="1"
 							android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
-							android:textColor="@null"
+							android:textColor="?android:attr/textColorSecondary"
 							tools:text="145 m" />
 
 						<androidx.appcompat.widget.AppCompatImageView
@@ -117,7 +117,7 @@
 							android:ellipsize="end"
 							android:maxLines="1"
 							android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
-							android:textColor="@null"
+							android:textColor="?android:attr/textColorSecondary"
 							tools:text="15 m" />
 
 						<androidx.appcompat.widget.AppCompatImageView

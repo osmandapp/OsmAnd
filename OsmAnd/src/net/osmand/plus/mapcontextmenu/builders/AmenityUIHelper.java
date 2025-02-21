@@ -904,7 +904,7 @@ public class AmenityUIHelper extends MenuBuilder {
 
 		if (isWiki) {
 			buildReadFullButton(llText, app.getString(R.string.context_menu_read_full_article), v -> {
-				WikipediaDialogFragment.showInstance(mapActivity, wikiAmenity);
+				WikipediaDialogFragment.showInstance(mapActivity, wikiAmenity, null);
 			});
 		}
 
@@ -931,7 +931,7 @@ public class AmenityUIHelper extends MenuBuilder {
 				}
 			});
 		} else if (isWiki) {
-			ll.setOnClickListener(v -> WikipediaDialogFragment.showInstance(mapActivity, wikiAmenity));
+			ll.setOnClickListener(v -> WikipediaDialogFragment.showInstance(mapActivity, wikiAmenity, null));
 		} else if (isText && text.length() > 200) {
 			ll.setOnClickListener(v -> POIMapLayer.showPlainDescriptionDialog(view.getContext(), app, text, textPrefix));
 		}
