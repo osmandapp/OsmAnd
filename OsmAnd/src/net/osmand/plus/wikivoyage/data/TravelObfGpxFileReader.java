@@ -49,6 +49,8 @@ import net.osmand.shared.util.KAlgorithms;
 import net.osmand.shared.util.KMapAlgorithms;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.util.OverlappedSegmentsMergerDS;
+import net.osmand.util.OverlappedSegmentsMergerGPT;
 
 import org.apache.commons.logging.Log;
 
@@ -180,7 +182,11 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                 track.getSegments().add(trkSegment);
             }
             gpxFile.setTracks(new ArrayList<>());
-            gpxFile.getTracks().add(track);
+
+//            gpxFile.getTracks().add(track); // TODO analyze both DS and GPT methods
+//            gpxFile.getTracks().add(OverlappedSegmentsMergerDS.mergeSegmentsWithOverlapHandling(track));
+            gpxFile.getTracks().add(OverlappedSegmentsMergerGPT.mergeSegmentsWithOverlapHandling(track));
+
             if (!(article instanceof TravelGpx)) {
                 gpxFile.setRef(article.ref);
             }
