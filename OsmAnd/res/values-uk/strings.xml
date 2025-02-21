@@ -5708,7 +5708,7 @@
     <string name="show_grids">Показати сітку карти</string>
     <string name="show_grids_description">Дозволити відображення сітки поверх карти</string>
     <string name="show_utm_grids">Використовувати UTM замість WGS84</string>
-    <string name="show_utm_grids_description">Показувати сітку в метрах UTM замість WGS84 градусів</string>
+    <string name="show_utm_grids_description">Показати сітку в метрах UTM замість WGS84</string>
     <string name="map_grid">Картографічні сітки</string>
     <string name="no_places_available">Немає доступних місць</string>
     <string name="no_photo_for_location_desc">До цього місця ще не додано жодної фотографії користувача</string>
@@ -5720,4 +5720,7 @@
     <string name="original_shape_description">Кожна точка зберігає власну форму.</string>
     <string name="save_favorite_default_appearance">Застосувати зміни до наявних точок у папці чи лише до нових?</string>
     <string name="apply_to_all_points">Застосувати до всіх точок</string>
+    <string name="show_mercator_grids_description">Показувати сітку в кілометрах Меркатора замість WGS84 або UTM</string>
+    <string name="show_dm_grids_description">Показувати сітку в градусах і хвилинах замість градусів або DMS</string>
+    <string name="show_dms_grids_description">Показати сітку в градусах, хвилинах, секундах замість градусів</string>
 </resources>
