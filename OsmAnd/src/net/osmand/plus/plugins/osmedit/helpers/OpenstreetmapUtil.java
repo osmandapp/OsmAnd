@@ -20,8 +20,10 @@ public interface OpenstreetmapUtil {
 
 	}
 
-	Entity commitEntityImpl(@NonNull Action action, Entity entity, EntityInfo info, String comment,
-	                        boolean closeChangeSet, @Nullable Set<String> changedTags);
+	Entity commitEntityImpl(@NonNull Action action, @NonNull Entity entity,
+			@Nullable EntityInfo info, @Nullable String comment,
+			boolean closeChangeSet, @Nullable Set<String> changedTags);
 
+	@Nullable
 	Entity loadEntity(@NonNull MapObject mapObject);
 }
