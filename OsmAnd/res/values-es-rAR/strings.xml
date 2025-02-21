@@ -5575,4 +5575,9 @@
     <string name="shared_string_road_exit">Salida</string>
     <string name="hmd_promo_description">Libre acceso a las características, incluyendo descargas ilimitadas de mapas, relieve 3D, etc. por %1$s mes</string>
     <string name="hmd_promo">Promo de HMD por %1$s meses</string>
+    <string name="original_shape_description">Cada punto mantendría su propia forma.</string>
+    <string name="save_favorite_default_appearance">¿Aplicar cambios a los puntos existentes en la carpeta o sólo a los nuevos?</string>
+    <string name="original_color_description">Cada punto mantendría su propio color.</string>
+    <string name="apply_to_all_points">Aplicar a todos los puntos</string>
+    <string name="original_icon_description">Cada punto mantendría su propio ícono.</string>
 </resources>
