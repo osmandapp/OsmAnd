@@ -63,11 +63,12 @@ public class WikiCoreHelper {
 			url.append("&");
 			url.append(String.format(Locale.US, "lang=%s", lang));
 			url.append("&");
-			url.append(String.format(Locale.US, "filters=%s", "tourism%2Cleisure%2Centertainment"));
+			url.append(String.format(Locale.US, "filters="));
 
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException(e);
 		}
+		LOG.debug("Download images " + url.toString());
 		getNearbyImagesOsmAndAPIRequest(url.toString(), wikiImages);
 		return wikiImages;
 	}

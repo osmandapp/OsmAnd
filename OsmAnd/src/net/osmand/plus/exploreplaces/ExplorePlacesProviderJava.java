@@ -1,5 +1,8 @@
 package net.osmand.plus.exploreplaces;
 
+import android.annotation.SuppressLint;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.squareup.picasso.Picasso;
@@ -28,16 +31,19 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+// TODO use gzip in loading
+// TODO use hierarchy of caches
 public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
+
 	private OsmandApplication app;
-	private long lastModifiedTime = 0;
 	private static final int NEARBY_MIN_RADIUS = 50;
 
 	private final int LEVEL_ZOOM_CACHE = 12; // Constant zoom level
-	private final int DEFAULT_QUERY_RADIUS = 30000;
+	private static final int MAX_DIMENSION_TILES = 2;
+	private static final double MIN_TILE_QUERY = 0.5;
+
 	private volatile int runningTasks = 0;
 
-//	private final int DEFAULT_QUERY_RADIUS = 0;
 
 	public ExplorePlacesProviderJava(OsmandApplication app) {
 		this.app = app;
@@ -76,57 +82,81 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 	public List<NearbyPlacePoint> getDataCollection(QuadRect rect) {
 		return getDataCollection(rect, 1000);
 	}
+
 	public List<NearbyPlacePoint> getDataCollection(QuadRect rect, int limit) {
 		if (rect == null) {
 			return Collections.emptyList();
 		}
-		// Calculate tile bounds for the QuadRect and cast to int
+		// Calculate the initial zoom level
 		int zoom = LEVEL_ZOOM_CACHE;
-		int minTileX = (int) MapUtils.getTileNumberX(zoom, rect.left);
-		int maxTileX = (int) MapUtils.getTileNumberX(zoom, rect.right);
-		int minTileY = (int) MapUtils.getTileNumberY(zoom, rect.top);
-		int maxTileY = (int) MapUtils.getTileNumberY(zoom, rect.bottom);
+		int maxDimensionTiles = MAX_DIMENSION_TILES;
+
+		// Adjust zoom level to ensure width and height in tiles are <= maxDimensionTiles
+		while (zoom >= 0) {
+			int tileWidth = (int) (MapUtils.getTileNumberX(zoom, rect.right) - MapUtils.getTileNumberX(zoom, rect.left));
+			int tileHeight = (int) (MapUtils.getTileNumberY(zoom, rect.bottom) - MapUtils.getTileNumberX(zoom, rect.top));
+
+			if (tileWidth <= maxDimensionTiles && tileHeight <= maxDimensionTiles) {
+				break;
+			}
+			zoom -= 3;
+		}
+
+		// If zoom level is less than 0, set it to 0
+		zoom = Math.max(zoom, 0);
+
+		// Calculate tile bounds for the QuadRect as float values
+		float minTileX = (float) MapUtils.getTileNumberX(zoom, rect.left);
+		float maxTileX = (float) MapUtils.getTileNumberX(zoom, rect.right);
+		float minTileY = (float) MapUtils.getTileNumberY(zoom, rect.top);
+		float maxTileY = (float) MapUtils.getTileNumberY(zoom, rect.bottom);
 
 		// Fetch data for all tiles within the bounds
 		PlacesDatabaseHelper dbHelper = new PlacesDatabaseHelper(app);
 		List<NearbyPlacePoint> filteredPoints = new ArrayList<>();
 		Set<Long> uniqueIds = new HashSet<>(); // Use a Set to track unique IDs
 		final String queryLang = getLang();
-		for (int tileX = minTileX; tileX <= maxTileX; tileX++) {
-			for (int tileY = minTileY; tileY <= maxTileY; tileY++) {
-				// Check if data is already present and not expired
+
+		// Iterate over the tiles and load data
+		for (int tileX = (int) minTileX; tileX <= (int) maxTileX; tileX++) {
+			for (int tileY = (int) minTileY; tileY <= (int) maxTileY; tileY++) {
 				if (!dbHelper.isDataExpired(zoom, tileX, tileY, queryLang)) {
-					List<OsmandApiFeatureData> places = dbHelper.getPlaces(LEVEL_ZOOM_CACHE, tileX, tileY, getLang());
+					List<OsmandApiFeatureData> places = dbHelper.getPlaces(zoom, tileX, tileY, queryLang);
 					for (OsmandApiFeatureData item : places) {
 						if (!Algorithms.isEmpty(item.properties.photoTitle)) {
 							NearbyPlacePoint point = new NearbyPlacePoint(item);
 							double lat = point.getLatitude();
 							double lon = point.getLongitude();
 
-							// Filter by QuadRect and check for duplicates using the ID
-							if (rect.contains(lon, lat, lon, lat) && uniqueIds.add(point.getId())) {
+							// Filter by QuadRect or if the bounding box is small (width <= 0.5 tile size at zoom 12)
+							boolean loadAll = (maxTileX - minTileX) <= MIN_TILE_QUERY
+									|| (maxTileY - minTileY) <= MIN_TILE_QUERY;
+							if ((rect.contains(lon, lat, lon, lat) || loadAll) && uniqueIds.add(point.getId())) {
 								filteredPoints.add(point);
 							}
 						}
 					}
-					continue; // Skip downloading if data is present and not expired
 				} else {
 					loadTile(zoom, tileX, tileY, queryLang, dbHelper);
 				}
-
 			}
 		}
-		filteredPoints.sort((p1, p2) -> {
-			return Double.compare(p2.getElo(), p1.getElo());  // Sort in descending order (highest elo first)
-		});
+
+		// Sort the points by Elo in descending order
+		filteredPoints.sort((p1, p2) -> Double.compare(p2.getElo(), p1.getElo()));
+
+		// Limit the number of points
 		if (filteredPoints.size() > limit) {
 			filteredPoints = filteredPoints.subList(0, limit);
 		}
+
 		return filteredPoints;
 	}
 
+	@SuppressLint("DefaultLocale")
 	private void loadTile(int zoom, int tileX, int tileY, String queryLang, PlacesDatabaseHelper dbHelper) {
 		// Calculate the bounding box for the current tile
+		Log.i("DOWNLOAD", String.format("Download tile %d %d %d", tileX, tileY, zoom));
 		double left = MapUtils.getLongitudeFromTile(zoom, tileX);
 		double right = MapUtils.getLongitudeFromTile(zoom, tileX + 1);
 		double top = MapUtils.getLatitudeFromTile(zoom, tileY);

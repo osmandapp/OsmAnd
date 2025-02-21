@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 public class PlacesDatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "places.db";
+    private static final String DATABASE_NAME = "places-1.db";
 
     private static final long DATA_EXPIRATION_TIME = TimeUnit.DAYS.toMillis(30); // 1 month
 
