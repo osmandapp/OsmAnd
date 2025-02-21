@@ -59,7 +59,7 @@ class KQuadRect {
 	}
 
 	fun contains(point: KLatLon): Boolean {
-		return point.latitude in left..right && point.longitude in top..bottom
+		return point.longitude in left..right && point.latitude in bottom..top
 	}
 
 	companion object {

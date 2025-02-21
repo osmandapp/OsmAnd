@@ -14,16 +14,16 @@ import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.exploreplaces.ExplorePlacesProvider;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
-import net.osmand.plus.exploreplaces.ExplorePlacesListener;
 import net.osmand.plus.search.NearbyPlacesAdapter;
 
 import java.util.List;
 
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
-public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesListener {
+public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvider.ExplorePlacesListener {
 
 	private boolean collapsed;
 	private ImageView explicitIndicator;
@@ -38,6 +38,7 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesListen
 	private View emptyView;
 	private View cardContent;
 	private boolean isLoadingItems;
+	private QuadRect visiblePlacesRect;
 
 	public NearbyPlacesCard(@NonNull MapActivity mapActivity, @NonNull NearbyPlacesAdapter.NearbyItemClickListener clickListener) {
 		super(mapActivity);
@@ -71,7 +72,7 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesListen
 
 	private void setupShowAllNearbyPlacesBtn() {
 		findViewById(R.id.show_all_btn).setOnClickListener(v -> {
-			ExplorePlacesFragment.Companion.showInstance(mapActivity.getSupportFragmentManager());
+			ExplorePlacesFragment.Companion.showInstance(mapActivity.getSupportFragmentManager(), visiblePlacesRect);
 		});
 	}
 
@@ -79,8 +80,8 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesListen
 		LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
 		nearByList.setLayoutManager(layoutManager);
 		nearByList.setItemAnimator(null);
-		QuadRect mapRect = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getLatLonBounds();
-		adapter = new NearbyPlacesAdapter(app, app.getExplorePlacesProvider().getDataCollection(mapRect), false, clickListener);
+		visiblePlacesRect = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getLatLonBounds();
+		adapter = new NearbyPlacesAdapter(app, app.getExplorePlacesProvider().getDataCollection(visiblePlacesRect), false, clickListener);
 		nearByList.setAdapter(adapter);
 	}
 
@@ -94,25 +95,21 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesListen
 		AndroidUiHelper.updateVisibility(emptyView, !collapsed && internetAvailable && !nearbyPointFound && !isLoadingItems);
 	}
 
-	public void updateNearbyItems() {
-		isLoadingItems = false;
-		AndroidUiHelper.updateVisibility(progressBar, false);
-		adapter.setItems(app.getExplorePlacesProvider().getDataCollection());
-		adapter.notifyDataSetChanged();
-		updateExpandState();
-	}
-
 	private NearbyPlacesAdapter getNearbyAdapter() {
 		if (adapter == null) {
-			List<NearbyPlacePoint> nearbyData = app.getExplorePlacesProvider().getDataCollection();
+			List<NearbyPlacePoint> nearbyData = app.getExplorePlacesProvider().getDataCollection(visiblePlacesRect);
 			adapter = new NearbyPlacesAdapter(app, nearbyData, false, clickListener);
 		}
 		return adapter;
 	}
 
 	@Override
-	public void onNearbyPlacesUpdated() {
-		updateNearbyItems();
+	public void onNewExplorePlacesDownloaded() {
+		isLoadingItems = false;
+		AndroidUiHelper.updateVisibility(progressBar, false);
+		adapter.setItems(app.getExplorePlacesProvider().getDataCollection(visiblePlacesRect));
+		adapter.notifyDataSetChanged();
+		updateExpandState();
 	}
 
 	public void onResume() {
@@ -134,7 +131,9 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesListen
 	private void startLoadingNearbyPlaces() {
 		isLoadingItems = true;
 		AndroidUiHelper.updateVisibility(progressBar, true);
-		app.getExplorePlacesProvider().startLoadingNearestPhotos();
+		app.getExplorePlacesProvider().loadPlaces(
+				app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getLatLonBounds(), this
+		);
 	}
 
 	private void setupExpandNearbyPlacesIndicator() {

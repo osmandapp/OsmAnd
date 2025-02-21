@@ -77,7 +77,9 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 			};
 
 	public void addListener(ExplorePlacesListener listener) {
-		listeners = CollectionUtils.addToList(listeners, listener);
+		if (!listeners.contains(listener)) {
+			listeners = CollectionUtils.addToList(listeners, listener);
+		}
 	}
 
 	public void removeListener(ExplorePlacesListener listener) {
@@ -89,36 +91,17 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 			@Override
 			public void run() {
 				for (ExplorePlacesListener listener: listeners) {
-					listener.onNearbyPlacesUpdated();
+					listener.onNewExplorePlacesDownloaded();
 				}
 			}
 		});
 	}
 
-	public List<NearbyPlacePoint> getDataCollection() {
-		return this.dataCollection == null? Collections.emptyList(): this.dataCollection;
-	}
-
-	public void onCacheLoaded(List<NearbyPlacePoint> cachedPLaces) {
-		if (!Algorithms.isEmpty(cachedPLaces)) {
-			NearbyPlacePoint firstPoint = cachedPLaces.get(0);
-			KQuadRect qRect = new KQuadRect(
-					firstPoint.getLatitude(),
-					firstPoint.getLongitude(),
-					firstPoint.getLatitude(),
-					firstPoint.getLongitude());
-			for (NearbyPlacePoint point: cachedPLaces) {
-				qRect.setLeft(Math.min(firstPoint.getLatitude(), qRect.getLeft()));
-				qRect.setRight(Math.max(firstPoint.getLatitude(), qRect.getRight()));
-				qRect.setTop(Math.min(firstPoint.getLongitude(), qRect.getTop()));
-				qRect.setBottom(Math.max(firstPoint.getLongitude(), qRect.getBottom()));
-			}
-			dataCollection = cachedPLaces;
-			prevMapRect = qRect;
-		}
-	}
 
 	public List<NearbyPlacePoint> getDataCollection(QuadRect rect) {
+		if (rect == null) {
+			return Collections.emptyList();
+		}
 		KQuadRect qRect = new KQuadRect(rect.left, rect.top, rect.right, rect.bottom);
 		List<NearbyPlacePoint> fullCollection = this.dataCollection == null? Collections.emptyList(): this.dataCollection;
 		List<NearbyPlacePoint> filteredList = new ArrayList<>();
@@ -130,9 +113,8 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 		return filteredList;
 	}
 
-	public void startLoadingNearestPhotos() {
-		net.osmand.data.RotatedTileBox rotatedTileBox = app.getOsmandMap().getMapView().getCurrentRotatedTileBox();
-		QuadRect rect = new QuadRect(rotatedTileBox.getLatLonBounds());
+	public void loadPlaces(QuadRect rect, ExplorePlacesListener listener) {
+		addListener(listener);
 		KQuadRect qRect = new KQuadRect(rect.left, rect.top, rect.right, rect.bottom);
 
 		String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
@@ -141,7 +123,7 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 		}
 		if (!prevMapRect.contains(qRect) ||
 				!prevLang.equals(preferredLang)) {
-			LatLon mapCenter = rotatedTileBox.getCenterLatLon();
+			LatLon mapCenter = new LatLon(rect.centerY(), rect.centerX());
 			prevMapRect =
 					KMapUtils.INSTANCE.calculateLatLonBbox(mapCenter.getLatitude(), mapCenter.getLongitude(), 30000);
 			prevZoom = app.getOsmandMap().getMapView().getZoom();

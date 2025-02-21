@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import net.osmand.PlatformUtil
 import net.osmand.data.NearbyPlacePoint
+import net.osmand.data.QuadRect
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseOsmAndFragment
@@ -22,6 +23,7 @@ import net.osmand.plus.utils.ColorUtilities
 import org.apache.commons.logging.Log
 
 class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyItemClickListener {
+	private lateinit var visiblePlacesRect: QuadRect
 	private val log: Log = PlatformUtil.getLog(
 		ExplorePlacesFragment::class.java)
 
@@ -42,6 +44,13 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		AndroidUtils.addStatusBarPadding21v(requireActivity(), view)
+		arguments?.let {
+			val left = it.getDouble("left")
+			val right = it.getDouble("right")
+			val top = it.getDouble("top")
+			val bottom = it.getDouble("bottom")
+			visiblePlacesRect = QuadRect(left, top, right, bottom) // Create QuadRect
+		}
 		setupShowAll(view)
 		setupToolBar(view)
 		setupVerticalNearbyList(view)
@@ -73,8 +82,11 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 
 		view.findViewById<ImageView>(R.id.location_icon)
 			.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_marker_dark, nightMode))
+
 		view.findViewById<View>(R.id.show_on_map).setOnClickListener {
-			app.osmandMap.mapLayers.nearbyPlacesLayer.setCustomMapObjects(app.explorePlacesProvider.getDataCollection()
+			// TODO make dynamic load
+			app.osmandMap.mapLayers.nearbyPlacesLayer.setCustomMapObjects(
+				app.explorePlacesProvider.getDataCollection(app.osmandMap.mapView.currentRotatedTileBox.latLonBounds)
 			)
 			hide()
 		}
@@ -104,7 +116,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 
 	private fun setupVerticalNearbyList(view: View) {
 		val verticalNearbyList = view.findViewById<RecyclerView>(R.id.vertical_nearby_list)
-		val nearbyData = app.explorePlacesProvider.getDataCollection()
+		val nearbyData = app.explorePlacesProvider.getDataCollection(visiblePlacesRect)
 		verticalNearbyAdapter = NearbyPlacesAdapter(app, nearbyData, true, this)
 		verticalNearbyList.layoutManager = LinearLayoutManager(requireContext())
 		verticalNearbyList.adapter = verticalNearbyAdapter
@@ -123,13 +135,21 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 
 	companion object {
 		val TAG: String = ExplorePlacesFragment::class.java.simpleName
-		fun showInstance(manager: FragmentManager) {
+		fun showInstance(manager: FragmentManager, visiblePlacesRect: QuadRect) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+				val fragment = ExplorePlacesFragment()
+				val bundle = Bundle()
+				bundle.putDouble("left", visiblePlacesRect.left)
+				bundle.putDouble("right", visiblePlacesRect.right)
+				bundle.putDouble("top", visiblePlacesRect.top)
+				bundle.putDouble("bottom", visiblePlacesRect.bottom)
+				fragment.arguments = bundle
 				manager.beginTransaction()
-					.replace(R.id.fragmentContainer, ExplorePlacesFragment(), TAG)
+					.replace(R.id.fragmentContainer, fragment, TAG)
 					.commitAllowingStateLoss()
 			}
 		}
+
 	}
 
 	override fun onNearbyItemClicked(item: NearbyPlacePoint) {
