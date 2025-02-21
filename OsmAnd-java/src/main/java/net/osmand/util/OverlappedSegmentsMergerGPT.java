@@ -12,6 +12,7 @@ import net.osmand.shared.util.KMapUtils;
 public class OverlappedSegmentsMergerGPT {
 
     private static final double PRECISION = KMapUtils.DEFAULT_LATLON_PRECISION;
+    private static final double MAX_OVERLAP_DISTANCE = 10.0;
 
     /**
      * Merges segments with overlap handling.
@@ -117,15 +118,58 @@ public class OverlappedSegmentsMergerGPT {
     /**
      * Computes the maximum number of points (L) such that the last L points of list A match
      * the first L points of list B.
+     * For the first and last points of the overlapping region, if the points do not exactly match,
+     * an additional fuzzy check using orthogonal distance (max MAX_OVERLAP_DISTANCE meters) is applied.
      */
     private static int getMaxOverlap(List<WptPt> A, List<WptPt> B) {
         int maxPossible = Math.min(A.size(), B.size());
         for (int L = maxPossible; L >= 1; L--) {
             boolean match = true;
             for (int i = 0; i < L; i++) {
-                if (!pointsEqual(A.get(A.size() - L + i), B.get(i))) {
-                    match = false;
-                    break;
+                WptPt a = A.get(A.size() - L + i);
+                WptPt b = B.get(i);
+                KLatLon p1 = new KLatLon(a.getLatitude(), a.getLongitude());
+                KLatLon p2 = new KLatLon(b.getLatitude(), b.getLongitude());
+                if (i == 0) {
+                    if (!KMapUtils.INSTANCE.areLatLonEqual(p1, p2, PRECISION)) {
+                        if (B.size() >= 2) {
+                            WptPt b1 = B.get(0);
+                            WptPt b2 = B.get(1);
+                            double d = KMapUtils.INSTANCE.getOrthogonalDistance(
+                                    a.getLatitude(), a.getLongitude(),
+                                    b1.getLatitude(), b1.getLongitude(),
+                                    b2.getLatitude(), b2.getLongitude());
+                            if (d > MAX_OVERLAP_DISTANCE) {
+                                match = false;
+                                break;
+                            }
+                        } else {
+                            match = false;
+                            break;
+                        }
+                    }
+                } else if (i == L - 1) {
+                    if (!KMapUtils.INSTANCE.areLatLonEqual(p1, p2, PRECISION)) {
+                        if (A.size() >= 2) {
+                            WptPt aPrev = A.get(A.size() - 2);
+                            double d = KMapUtils.INSTANCE.getOrthogonalDistance(
+                                    b.getLatitude(), b.getLongitude(),
+                                    aPrev.getLatitude(), aPrev.getLongitude(),
+                                    a.getLatitude(), a.getLongitude());
+                            if (d > MAX_OVERLAP_DISTANCE) {
+                                match = false;
+                                break;
+                            }
+                        } else {
+                            match = false;
+                            break;
+                        }
+                    }
+                } else {
+                    if (!KMapUtils.INSTANCE.areLatLonEqual(p1, p2, PRECISION)) {
+                        match = false;
+                        break;
+                    }
                 }
             }
             if (match) {
