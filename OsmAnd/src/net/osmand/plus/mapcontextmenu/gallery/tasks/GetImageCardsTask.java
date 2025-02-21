@@ -141,7 +141,7 @@ public class GetImageCardsTask extends AsyncTask<Void, Void, ImageCardsHolder> {
 
 	@Override
 	protected void onPostExecute(ImageCardsHolder holder) {
-		if (listener != null) {
+		if (listener != null && !isCancelled()) {
 			listener.onFinish(holder);
 		}
 	}
