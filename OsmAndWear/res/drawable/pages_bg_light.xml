@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+	<item>
+		<nine-patch android:src="@drawable/bg_route_indicator"/>
+	</item>
+	<item>
+		<shape>
+			<solid android:color="@color/card_and_list_background_light"/>
+			<corners android:radius="6dp"/>
+		</shape>
+	</item>
+</layer-list>

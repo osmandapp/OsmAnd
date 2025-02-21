@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+	<item
+		android:id="@+id/action_select"
+		android:icon="@drawable/ic_action_select_all"
+		android:title="@string/shared_string_select_all"
+		app:showAsAction="always" />
+	<item
+		android:id="@+id/action_overflow_menu"
+		android:contentDescription="@string/shared_string_more"
+		android:icon="@drawable/ic_overflow_menu_white"
+		android:title="@string/shared_string_more_actions"
+		app:showAsAction="always" />
+</menu>
