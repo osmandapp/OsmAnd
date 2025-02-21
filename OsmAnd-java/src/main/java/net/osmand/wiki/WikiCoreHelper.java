@@ -337,6 +337,8 @@ public class WikiCoreHelper {
 		private String wikiLang;
 		public String wikiDesc;
 		public Long osmid;
+
+		public Double elo;
 		private String osmtype;
 	}
 

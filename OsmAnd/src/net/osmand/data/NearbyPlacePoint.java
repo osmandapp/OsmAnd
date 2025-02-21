@@ -19,6 +19,7 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 	private static final long serialVersionUID = 829654300829771466L;
 
 	public static final BackgroundType DEFAULT_BACKGROUND_TYPE = BackgroundType.CIRCLE;
+	private static final double DEFAULT_ELO = 900;
 	private final long id;
 	private final String photoTitle;
 	private final String wikiTitle;
@@ -29,6 +30,8 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 	private final String imageStubUrl;
 	private final double latitude;
 	private final double longitude;
+
+	private final double elo;
 	@Nullable
 	private Bitmap imageBitmap;
 
@@ -44,6 +47,7 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 		this.poitype = featureData.properties.poitype;
 		this.wikiTitle = featureData.properties.wikiTitle;
 		this.wikiDesc = featureData.properties.wikiDesc;
+		this.elo = featureData.properties.elo != null ? featureData.properties.elo : DEFAULT_ELO;
 	}
 
 	public long getId() {
@@ -83,6 +87,10 @@ public class NearbyPlacePoint implements Serializable, LocationPoint {
 	@Override
 	public PointDescription getPointDescription(@NonNull Context ctx) {
 		return new PointDescription(PointDescription.POINT_TYPE_NEARBY_PLACE, wikiDesc);
+	}
+
+	public double getElo() {
+		return elo;
 	}
 
 	public double getLatitude() {

@@ -23,58 +23,26 @@ import net.osmand.util.MapUtils;
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 	private OsmandApplication app;
 	private long lastModifiedTime = 0;
-	private static final int PLACES_LIMIT = 50000;
 	private static final int NEARBY_MIN_RADIUS = 50;
 
-	private KQuadRect prevMapRect = new KQuadRect();
-	private int prevZoom = 0;
-	private String prevLang = "";
+	private final int LEVEL_ZOOM_CACHE = 12; // Constant zoom level
+	private final int DEFAULT_QUERY_RADIUS = 30000;
+
+	private static final long DATA_EXPIRATION_TIME = TimeUnit.DAYS.toMillis(30); // 1 month
 
 	public ExplorePlacesProviderJava(OsmandApplication app) {
 		this.app = app;
 	}
 
 	private List<ExplorePlacesListener> listeners = Collections.emptyList();
-	private List<NearbyPlacePoint> dataCollection;
-
-	private GetNearbyPlacesImagesTask.GetImageCardsListener loadNearbyPlacesListener =
-			new GetNearbyPlacesImagesTask.GetImageCardsListener() {
-				@Override
-				public void onTaskStarted() {
-				}
-
-				@Override
-				public void onFinish(@NonNull List<? extends OsmandApiFeatureData> result) {
-					if (result == null) {
-						dataCollection = Collections.emptyList();
-					} else {
-						List<NearbyPlacePoint> filteredList = new ArrayList<>();
-						for (OsmandApiFeatureData item: result) {
-							if (!Algorithms.isEmpty(item.properties.photoTitle)) {
-								filteredList.add(new NearbyPlacePoint(item));
-							}
-						}
-						int newListSize = Math.min(filteredList.size(), PLACES_LIMIT);
-						dataCollection = filteredList.subList(0, newListSize);
-
-						if (dataCollection!= null) {
-							for (NearbyPlacePoint point: dataCollection) {
-								Picasso.get()
-										.load(point.getIconUrl())
-										.fetch();
-							}
-						}
-					}
-					updateLastModifiedTime();
-					notifyListeners();
-				}
-
-			};
 
 	public void addListener(ExplorePlacesListener listener) {
 		if (!listeners.contains(listener)) {
@@ -96,54 +64,112 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 			}
 		});
 	}
-
+	private String getLang() {
+		String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+		if (Algorithms.isEmpty(preferredLang)) {
+			preferredLang = app.getLanguage();
+		}
+		return preferredLang;
+	}
 
 	public List<NearbyPlacePoint> getDataCollection(QuadRect rect) {
 		if (rect == null) {
 			return Collections.emptyList();
 		}
-		KQuadRect qRect = new KQuadRect(rect.left, rect.top, rect.right, rect.bottom);
-		List<NearbyPlacePoint> fullCollection = this.dataCollection == null? Collections.emptyList(): this.dataCollection;
-		List<NearbyPlacePoint> filteredList = new ArrayList<>();
-		for (NearbyPlacePoint point: fullCollection) {
-			if (qRect.contains(new KLatLon(point.getLatitude(), point.getLongitude()))) {
-				filteredList.add(point);
+		// Calculate tile bounds for the QuadRect and cast to int
+		int minTileX = (int) MapUtils.getTileNumberX(LEVEL_ZOOM_CACHE, rect.left);
+		int maxTileX = (int) MapUtils.getTileNumberX(LEVEL_ZOOM_CACHE, rect.right);
+		int minTileY = (int) MapUtils.getTileNumberY(LEVEL_ZOOM_CACHE, rect.top);
+		int maxTileY = (int) MapUtils.getTileNumberY(LEVEL_ZOOM_CACHE, rect.bottom);
+
+		// Fetch data for all tiles within the bounds
+		PlacesDatabaseHelper dbHelper = new PlacesDatabaseHelper(app);
+		List<NearbyPlacePoint> filteredPoints = new ArrayList<>();
+		Set<Long> uniqueIds = new HashSet<>(); // Use a Set to track unique IDs
+
+		for (int tileX = minTileX; tileX <= maxTileX; tileX++) {
+			for (int tileY = minTileY; tileY <= maxTileY; tileY++) {
+				List<OsmandApiFeatureData> places = dbHelper.getPlaces(LEVEL_ZOOM_CACHE, tileX, tileY, getLang());
+				for (OsmandApiFeatureData item : places) {
+					if (!Algorithms.isEmpty(item.properties.photoTitle)) {
+						NearbyPlacePoint point = new NearbyPlacePoint(item);
+						double lat = point.getLatitude();
+						double lon = point.getLongitude();
+
+						// Filter by QuadRect and check for duplicates using the ID
+						if (rect.contains(lon, lat, lon, lat) && uniqueIds.add(point.getId())) {
+							filteredPoints.add(point);
+						}
+					}
+				}
 			}
 		}
-		return filteredList;
+		filteredPoints.sort((p1, p2) -> {
+			return Double.compare(p2.getElo(), p1.getElo());  // Sort in descending order (highest elo first)
+		});
+
+		return filteredPoints;
 	}
 
 	public void loadPlaces(QuadRect rect, ExplorePlacesListener listener) {
 		addListener(listener);
 		KQuadRect qRect = new KQuadRect(rect.left, rect.top, rect.right, rect.bottom);
+		int zoom = LEVEL_ZOOM_CACHE; // Constant zoom level
+		// Calculate min/max tile coordinates for the QuadRect
+		int minTileX = (int) MapUtils.getTileNumberX(zoom, rect.left);
+		int maxTileX = (int) MapUtils.getTileNumberX(zoom, rect.right);
+		int minTileY = (int) MapUtils.getTileNumberY(zoom, rect.top);
+		int maxTileY = (int) MapUtils.getTileNumberY(zoom, rect.bottom);
+		final KQuadRect queryRect = KMapUtils.INSTANCE.calculateLatLonBbox(qRect.centerY(), qRect.centerX(), DEFAULT_QUERY_RADIUS);
+//			final KQuadRect queryRect = qRect;
+		final int queryZoom = LEVEL_ZOOM_CACHE; //app.getOsmandMap().getMapView().getZoom();
+		final String queryLang = getLang();
+		boolean hasData = false;
+		for (int tileX = minTileX; tileX <= maxTileX; tileX++) {
+			for (int tileY = minTileY; tileY <= maxTileY; tileY++) {
+				PlacesDatabaseHelper dbHelper = new PlacesDatabaseHelper(app);
 
-		String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
-		if (Algorithms.isEmpty(preferredLang)) {
-			preferredLang = app.getLanguage();
+				// Check if data is already present and not expired
+				if (!dbHelper.isDataExpired(zoom, tileX, tileY, queryLang)) {
+					hasData = true;
+					continue; // Skip downloading if data is present and not expired
+				}
+
+				// Calculate the bounding box for the current tile
+				double left = MapUtils.getLongitudeFromTile(zoom, tileX);
+				double right = MapUtils.getLongitudeFromTile(zoom, tileX + 1);
+				double top = MapUtils.getLatitudeFromTile(zoom, tileY);
+				double bottom = MapUtils.getLatitudeFromTile(zoom, tileY + 1);
+
+				KQuadRect tileRect = new KQuadRect(left, top, right, bottom);
+
+				// Create and execute a task for the current tile
+				int ftileX = tileX;
+				int ftileY = tileY;
+				new GetNearbyPlacesImagesTask(
+						app,
+						tileRect, queryZoom,
+						queryLang, new GetNearbyPlacesImagesTask.GetImageCardsListener() {
+					@Override
+					public void onTaskStarted() {
+					}
+
+					@Override
+					public void onFinish(@NonNull List<? extends OsmandApiFeatureData> result) {
+						if (result != null) {
+							// Store the data in the database for the current tile
+							dbHelper.insertPlaces(zoom, ftileX, ftileY, queryLang, result);
+						}
+						notifyListeners();
+					}
+				}).execute();
+			}
 		}
-		if (!prevMapRect.contains(qRect) ||
-				!prevLang.equals(preferredLang)) {
-			LatLon mapCenter = new LatLon(rect.centerY(), rect.centerX());
-			prevMapRect =
-					KMapUtils.INSTANCE.calculateLatLonBbox(mapCenter.getLatitude(), mapCenter.getLongitude(), 30000);
-			prevZoom = app.getOsmandMap().getMapView().getZoom();
-			prevLang = preferredLang;
-			new GetNearbyPlacesImagesTask(
-					app,
-					prevMapRect, prevZoom,
-					prevLang, loadNearbyPlacesListener).execute();
-//					executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-		} else {
+
+		// Notify listeners if at least one tile has data
+		if (hasData) {
 			notifyListeners();
 		}
-	}
-
-	private void updateLastModifiedTime() {
-		lastModifiedTime = System.currentTimeMillis();
-	}
-
-	public long getLastModifiedTime() {
-		return lastModifiedTime;
 	}
 
 	public void showPointInContextMenu(MapActivity mapActivity, NearbyPlacePoint point) {
