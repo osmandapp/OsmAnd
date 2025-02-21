@@ -1,11 +1,9 @@
 package net.osmand.plus.exploreplaces;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.squareup.picasso.Picasso;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
@@ -17,34 +15,36 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.search.GetNearbyPlacesImagesTask;
 import net.osmand.search.core.SearchCoreFactory;
-import net.osmand.shared.data.KLatLon;
 import net.osmand.shared.data.KQuadRect;
-import net.osmand.shared.util.KMapUtils;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 // TODO use gzip in loading
-// TODO use hierarchy of caches for zooms +
-// TODO errors go with "" into cache!
+// TODO errors shouldn'go with empty response "" into cache!
+// TODO remove checks poi type subtype null
+// TODO display all data downloaded even if maps are not loaded
+// Extra: display new categories from web
 public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 
 	private OsmandApplication app;
 	private static final int NEARBY_MIN_RADIUS = 50;
 
-	private final int LEVEL_ZOOM_CACHE = 12; // Constant zoom level
-	private static final int MAX_DIMENSION_TILES = 2;
-	private static final double MIN_TILE_QUERY = 0.5;
+	private final int MAX_LEVEL_ZOOM_CACHE = 13;
+	private static final int MAX_TILES_PER_QUAD_RECT = 12;
+	private static final double LOAD_ALL_TINY_RECT = 0.5;
 
-	private volatile int runningTasks = 0;
+	private volatile int startedTasks = 0;
+	private volatile int finishedTasks = 0;
 
+	private final Set<String> loadingTiles = new HashSet<>(); // Track tiles being loaded
 
 	public ExplorePlacesProviderJava(OsmandApplication app) {
 		this.app = app;
@@ -62,16 +62,26 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 		listeners = CollectionUtils.removeFromList(listeners, listener);
 	}
 
-	public void notifyListeners() {
+	/**
+	 * Notify listeners about new data being downloaded.
+	 *
+	 * @param isPartial Whether the notification is for a partial update or a full update.
+	 */
+	public void notifyListeners(boolean isPartial) {
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
-				for (ExplorePlacesListener listener: listeners) {
-					listener.onNewExplorePlacesDownloaded();
+				for (ExplorePlacesListener listener : listeners) {
+					if (isPartial) {
+						listener.onPartialExplorePlacesDownloaded(); // Notify for partial updates
+					} else {
+						listener.onNewExplorePlacesDownloaded(); // Notify for full updates
+					}
 				}
 			}
 		});
 	}
+
 	private String getLang() {
 		String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		if (Algorithms.isEmpty(preferredLang)) {
@@ -89,29 +99,25 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 			return Collections.emptyList();
 		}
 		// Calculate the initial zoom level
-		int zoom = LEVEL_ZOOM_CACHE;
-		int maxDimensionTiles = MAX_DIMENSION_TILES;
-
-		// Adjust zoom level to ensure width and height in tiles are <= maxDimensionTiles
-		// TODO calculate that maximum only 16 tiles will be loaded
+		int zoom = MAX_LEVEL_ZOOM_CACHE;
 		while (zoom >= 0) {
-			int tileWidth = (int) (MapUtils.getTileNumberX(zoom, rect.right) - MapUtils.getTileNumberX(zoom, rect.left));
-			int tileHeight = (int) (MapUtils.getTileNumberY(zoom, rect.bottom) - MapUtils.getTileNumberX(zoom, rect.top));
-
-			if (tileWidth <= maxDimensionTiles && tileHeight <= maxDimensionTiles) {
+			int tileWidth = (int) (MapUtils.getTileNumberX(zoom, rect.right)) -
+					((int) MapUtils.getTileNumberX(zoom, rect.left)) + 1;
+			int tileHeight = (int) (MapUtils.getTileNumberY(zoom, rect.bottom)) -
+					((int) MapUtils.getTileNumberY(zoom, rect.top)) + 1;
+			if (tileWidth * tileHeight <= MAX_TILES_PER_QUAD_RECT) {
 				break;
 			}
 			zoom -= 3;
 		}
-
-		// If zoom level is less than 0, set it to 0
-		zoom = Math.max(zoom, 0);
-
+		zoom = Math.max(zoom, 1);
 		// Calculate tile bounds for the QuadRect as float values
 		float minTileX = (float) MapUtils.getTileNumberX(zoom, rect.left);
 		float maxTileX = (float) MapUtils.getTileNumberX(zoom, rect.right);
 		float minTileY = (float) MapUtils.getTileNumberY(zoom, rect.top);
 		float maxTileY = (float) MapUtils.getTileNumberY(zoom, rect.bottom);
+		boolean loadAll = zoom == MAX_LEVEL_ZOOM_CACHE &&
+				Math.abs(maxTileX - minTileX) <= LOAD_ALL_TINY_RECT || Math.abs(maxTileY - minTileY) <= LOAD_ALL_TINY_RECT;
 
 		// Fetch data for all tiles within the bounds
 		PlacesDatabaseHelper dbHelper = new PlacesDatabaseHelper(app);
@@ -125,19 +131,14 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 				if (!dbHelper.isDataExpired(zoom, tileX, tileY, queryLang)) {
 					List<OsmandApiFeatureData> places = dbHelper.getPlaces(zoom, tileX, tileY, queryLang);
 					for (OsmandApiFeatureData item : places) {
-						// TODO
+						// TODO remove checks poi type subtype null
 						if (Algorithms.isEmpty(item.properties.photoTitle)
-								|| item.properties.poitype == null ||
-								item.properties.poisubtype == null) {
+								|| item.properties.poitype == null || item.properties.poisubtype == null) {
 							continue;
 						}
 						NearbyPlacePoint point = new NearbyPlacePoint(item);
 						double lat = point.getLatitude();
 						double lon = point.getLongitude();
-
-						// Filter by QuadRect or if the bounding box is small (width <= 0.5 tile size at zoom 12)
-						boolean loadAll = (maxTileX - minTileX) <= MIN_TILE_QUERY
-								|| (maxTileY - minTileY) <= MIN_TILE_QUERY;
 						if ((rect.contains(lon, lat, lon, lat) || loadAll) && uniqueIds.add(point.getId())) {
 							filteredPoints.add(point);
 						}
@@ -161,6 +162,13 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 
 	@SuppressLint("DefaultLocale")
 	private void loadTile(int zoom, int tileX, int tileY, String queryLang, PlacesDatabaseHelper dbHelper) {
+		synchronized (loadingTiles) {
+			String tileKey = zoom + "_" + tileX + "_" + tileY;
+			if (loadingTiles.contains(tileKey)) {
+				return;
+			}
+			loadingTiles.add(tileKey);
+		}
 		double left = MapUtils.getLongitudeFromTile(zoom, tileX);
 		double right = MapUtils.getLongitudeFromTile(zoom, tileX + 1);
 		double top = MapUtils.getLatitudeFromTile(zoom, tileY);
@@ -169,7 +177,7 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 		KQuadRect tileRect = new KQuadRect(left, top, right, bottom);
 		// Increment the task counter
 		synchronized (this) {
-			runningTasks++;
+			startedTasks++;
 		}
 		// Create and execute a task for the current tile
 		int ftileX = tileX;
@@ -185,13 +193,18 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 			@Override
 			public void onFinish(@NonNull List<? extends OsmandApiFeatureData> result) {
 				synchronized (ExplorePlacesProviderJava.this) {
-					runningTasks--; // Decrement the task counter
+					finishedTasks++; // Increment the finished task counter
+					notifyListeners(startedTasks != finishedTasks);
 				}
 				if (result != null) {
 					// Store the data in the database for the current tile
 					dbHelper.insertPlaces(zoom, ftileX, ftileY, queryLang, result);
 				}
-				notifyListeners();
+				// Remove the tile from the loading set
+				String tileKey = zoom + "_" + ftileX + "_" + ftileY;
+				synchronized (loadingTiles) {
+					loadingTiles.remove(tileKey);
+				}
 			}
 		}).execute();
 	}
@@ -238,7 +251,12 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 
 	@Override
 	public boolean isLoading() {
-		return runningTasks > 0; // Return true if any task is running
+		return startedTasks > finishedTasks; // Return true if any task is running
 	}
 
+	@Override
+	public int getDataVersion() {
+		// data version is increased once new data is downloaded
+		return finishedTasks;
+	}
 }

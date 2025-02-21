@@ -26,8 +26,13 @@ public interface ExplorePlacesProvider {
 
 	boolean isLoading();
 
+	// data version is increased once new data is downloaded
+	int getDataVersion();
 
 	interface ExplorePlacesListener {
+		// once new data is downloaded data version is increased
 		void onNewExplorePlacesDownloaded();
+
+		default void onPartialExplorePlacesDownloaded() {}
 	}
 }
