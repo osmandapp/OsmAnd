@@ -5563,7 +5563,7 @@
     <string name="ais_ship_lost_timeout_description">Definir el tiempo máximo para ver el barco: Después de este tiempo sin recibir señal, el símbolo del barco cambiará su estado en pantalla: Estará tachado.</string>
     <string name="ais_port_nmea_local_description">Definí el puerto UPD donde OsmAnd recibirá los datos NMEA</string>
     <string name="ais_port_nmea_local">Puerto UDP del receptor local de datos NMEA</string>
-    <string name="show_utm_grids_description">Mostrar cuadrícula en metros UTM, en lugar de grados WGS84</string>
+    <string name="show_utm_grids_description">Muestra la cuadrícula en metros UTM, en lugar de WGS84</string>
     <string name="ais_object_lost_timeouts_description">Definí valores de tiempo límite para identificar objetos AIS perdidos, si no se recibió ninguna señal durante un tiempo específico.</string>
     <string name="plugin_ais_tracker_disclaimer">AVISO LEGAL\n\nEste complemento es un proyecto como hobby y no está diseñado para ser fiable y correcto. NO confíes en este software de ninguna manera, incluyendo para la navegación y/o la seguridad de la vida.</string>
     <string name="show_utm_grids">Usar UTM en lugar de WGS84</string>
@@ -5582,4 +5582,8 @@
     <string name="original_icon_description">Cada punto mantendría su propio ícono.</string>
     <string name="show_mercator_grids_description">Muestra la cuadrícula en kilómetros de Mercator, en lugar de WGS84 o UTM</string>
     <string name="show_mercator_grids">Usar Mercator en lugar de WGS84 o UTM</string>
+    <string name="show_dms_grids">Usar DMS en lugar de grados</string>
+    <string name="show_dm_grids">Usar DM en lugar de grados o DMS</string>
+    <string name="show_dm_grids_description">Muestra la cuadrícula en grados y minutos, en lugar de sólo grados o DMS</string>
+    <string name="show_dms_grids_description">Muestra la cuadrícula en grados, minutos y segundos, en lugar de sólo grados</string>
 </resources>
