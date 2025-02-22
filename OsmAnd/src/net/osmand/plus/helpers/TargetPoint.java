@@ -12,6 +12,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
 
 public class TargetPoint implements LocationPoint {
 
@@ -54,6 +55,14 @@ public class TargetPoint implements LocationPoint {
 			String type = ctx.getString(R.string.destination_point, "");
 			return new PointDescription(POINT_TYPE_TARGET, type, name);
 		}
+	}
+
+	public String getRoutePointDescription(@NonNull Context ctx) {
+		String name = getOnlyName();
+		if (!Algorithms.isEmpty(name)) {
+			return name.replace(':', ' ');
+		}
+		return PointDescription.getLocationNamePlain(ctx, latLon.getLatitude(), latLon.getLongitude());
 	}
 
 	@NonNull

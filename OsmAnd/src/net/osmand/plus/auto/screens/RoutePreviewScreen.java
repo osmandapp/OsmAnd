@@ -21,7 +21,10 @@ import androidx.lifecycle.LifecycleOwner;
 
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.auto.TripUtils;
+import net.osmand.plus.helpers.TargetPoint;
+import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.data.QuadRect;
@@ -122,12 +125,14 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 
 	private void updateRoute(boolean newRoute) {
 		OsmandApplication app = getApp();
-		RoutingHelper rh = app.getRoutingHelper();
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+
 		Distance distance = null;
 		int leftTimeSec = 0;
-		if (newRoute && rh.isRoutePlanningMode()) {
-			distance = TripUtils.getDistance(app, rh.getLeftDistance());
-			leftTimeSec = rh.getLeftTime();
+		if (newRoute && routingHelper.isRoutePlanningMode()) {
+			distance = TripUtils.getDistance(app, routingHelper.getLeftDistance());
+			leftTimeSec = routingHelper.getLeftTime();
 		}
 		if (distance != null && leftTimeSec > 0) {
 			List<Row> routeRows = new ArrayList<>();
@@ -135,9 +140,14 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 			description.setSpan(DistanceSpan.create(distance), 0, 1, 0);
 			description.setSpan(DurationSpan.create(leftTimeSec), 4, 5, 0);
 
-			String name = QuickSearchListItem.getName(app, searchResult);
-			String typeName = QuickSearchListItem.getTypeName(app, searchResult);
-			String title = Algorithms.isEmpty(name) ? typeName : name;
+			TargetPoint finish = targetPointsHelper.getPointToNavigate();
+			String title = finish != null ? finish.getRoutePointDescription(app) : null;
+
+			if (Algorithms.isEmpty(title)) {
+				String name = QuickSearchListItem.getName(app, searchResult);
+				String typeName = QuickSearchListItem.getTypeName(app, searchResult);
+				title = Algorithms.isEmpty(name) ? typeName : name;
+			}
 			routeRows.add(new Row.Builder().setTitle(title).addText(description).build());
 			this.routeRows = routeRows;
 			calculating = app.getRoutingHelper().isRouteBeingCalculated();
