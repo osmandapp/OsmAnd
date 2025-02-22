@@ -5686,7 +5686,7 @@
     <string name="ais_object_lost_timeouts">Подешавања временског ограничења за пријем АИС сигнала</string>
     <string name="show_grids">Прикажи мрежу мапе</string>
     <string name="show_grids_description">Дозволи приказ мреже преко мапе</string>
-    <string name="show_utm_grids">Користи УТМ уместо WGS84</string>
+    <string name="show_utm_grids">Користи UTM уместо WGS84</string>
     <string name="show_utm_grids_description">Прикажи мрежу у UTM метрима уместо WGS84</string>
     <string name="map_grid">Мреже мапе</string>
     <string name="no_places_available">Нема слободних места</string>
