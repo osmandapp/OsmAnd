@@ -1,5 +1,6 @@
 package net.osmand.gpx;
 
+import net.osmand.shared.data.KLatLon;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -13,19 +14,19 @@ public class GpxOptimizer {
 	private static final double EDGE_POINTS_MAX_ORTHOGONAL_DISTANCE = 10.0;
 	private static final double PRECISION = KMapUtils.DEFAULT_LATLON_PRECISION;
 
-	public static Track deduplicateAndSpliceTrackSegments(Track track) {
+	public static Track deduplicateAndJoinTrackSegments(Track track) {
 		Set<String> duplicates = new HashSet<>();
 		findDisplacedEdgePointsToDeduplicate(track, duplicates);
 
 		List<TrkSegment> cleanedSegments = new ArrayList<>();
 		deduplicatePointsToCleanedSegments(track, duplicates, cleanedSegments);
 
-		List<TrkSegment> splicedSegments = new ArrayList<>();
-		spliceCleanedSegments(cleanedSegments, splicedSegments);
+		List<TrkSegment> joinedSegments = new ArrayList<>();
+		joinCleanedSegments(cleanedSegments, joinedSegments);
 
-		Track splicedTrack = new Track();
-		splicedTrack.setSegments(splicedSegments);
-		return splicedTrack;
+		Track joinedTrack = new Track();
+		joinedTrack.setSegments(joinedSegments);
+		return joinedTrack;
 	}
 
 	private static String llKey(WptPt edge) {
@@ -94,7 +95,82 @@ public class GpxOptimizer {
 				|| (i == points.size() - 1 && points.size() > 1 && duplicates.contains(llKey(points.get(i - 1))));
 	}
 
-	private static void spliceCleanedSegments(List<TrkSegment> cleanedSegments, List<TrkSegment> splicedSegments) {
-		// TODO based on IndexRouteRelationCreator.spliceWaysIntoSegments
+	private static void joinCleanedSegments(List<TrkSegment> segmentsToJoin, List<TrkSegment> joinedSegments) {
+		boolean[] done = new boolean[segmentsToJoin.size()];
+		while (true) {
+			List<WptPt> result = new ArrayList<>();
+			for (int i = 0; i < segmentsToJoin.size(); i++) {
+				if (!done[i]) {
+					done[i] = true;
+					if (!segmentsToJoin.get(i).getPoints().isEmpty()) {
+						addSegmentToResult(result, false, segmentsToJoin.get(i), false); // "head" segment
+						while (true) {
+							boolean stop = true;
+							for (int j = 0; j < segmentsToJoin.size(); j++) {
+								if (!done[j] && considerSegmentToJoin(result, segmentsToJoin.get(j))) {
+									done[j] = true;
+									stop = false;
+								}
+							}
+							if (stop) {
+								break; // nothing joined
+							}
+						}
+						break; // segment is done
+					}
+				}
+			}
+			if (result.isEmpty()) {
+				break; // all done
+			}
+			TrkSegment joined = new TrkSegment();
+			joined.getPoints().addAll(result);
+			joinedSegments.add(joined);
+		}
+	}
+
+	private static void addSegmentToResult(List<WptPt> result, boolean insert, TrkSegment segment, boolean reverse) {
+		List<WptPt> points = new ArrayList<>();
+		for (WptPt wpt : segment.getPoints()) {
+			points.add(new WptPt(wpt.getLatitude(), wpt.getLongitude()));
+		}
+		if (reverse) {
+			Collections.reverse(points);
+		}
+		result.addAll(insert ? 0 : result.size(), points);
+	}
+
+	private static boolean considerSegmentToJoin(List<WptPt> result, TrkSegment candidate) {
+		if (result.isEmpty()) {
+			return false;
+		}
+
+		if (candidate.getPoints().isEmpty()) {
+			return true;
+		}
+
+		WptPt firstPoint = result.get(0);
+		WptPt lastPoint = result.get(result.size() - 1);
+		WptPt firstCandidate = candidate.getPoints().get(0);
+		WptPt lastCandidate = candidate.getPoints().get(candidate.getPoints().size() - 1);
+
+		KLatLon firstPointLL = new KLatLon(firstPoint.getLatitude(), firstPoint.getLongitude());
+		KLatLon lastPointLL = new KLatLon(lastPoint.getLatitude(), lastPoint.getLongitude());
+		KLatLon firstCandidateLL = new KLatLon(firstCandidate.getLatitude(), firstCandidate.getLongitude());
+		KLatLon lastCandidateLL = new KLatLon(lastCandidate.getLatitude(), lastCandidate.getLongitude());
+
+		if (KMapUtils.INSTANCE.areLatLonEqual(lastPointLL, firstCandidateLL, PRECISION)) {
+			addSegmentToResult(result, false, candidate, false); // nodes + Candidate
+		} else if (KMapUtils.INSTANCE.areLatLonEqual(lastPointLL, lastCandidateLL, PRECISION)) {
+			addSegmentToResult(result, false, candidate, true); // nodes + etadidnaC
+		} else if (KMapUtils.INSTANCE.areLatLonEqual(firstPointLL, firstCandidateLL, PRECISION)) {
+			addSegmentToResult(result, true, candidate, true); // etadidnaC + nodes
+		} else if (KMapUtils.INSTANCE.areLatLonEqual(firstPointLL, lastCandidateLL, PRECISION)) {
+			addSegmentToResult(result, true, candidate, false); // Candidate + nodes
+		} else {
+			return false;
+		}
+
+		return true;
 	}
 }
