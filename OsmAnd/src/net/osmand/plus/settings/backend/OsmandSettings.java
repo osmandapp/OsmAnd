@@ -286,23 +286,20 @@ public class OsmandSettings {
 			return false;
 		}
 		if (preference == APPLICATION_MODE) {
-			if (value instanceof String) {
-				String appModeKey = (String) value;
+			if (value instanceof String appModeKey) {
 				ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, null);
 				if (appMode != null) {
 					return setApplicationMode(appMode);
 				}
 			}
 		} else if (preference == DEFAULT_APPLICATION_MODE) {
-			if (value instanceof String) {
-				String appModeKey = (String) value;
+			if (value instanceof String appModeKey) {
 				ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, null);
 				if (appMode != null) {
 					return DEFAULT_APPLICATION_MODE.set(appMode);
 				}
 			}
-		} else if (preference instanceof EnumStringPreference) {
-			EnumStringPreference enumPref = (EnumStringPreference) preference;
+		} else if (preference instanceof EnumStringPreference enumPref) {
 			if (value instanceof String) {
 				Enum<?> enumValue = enumPref.parseString((String) value);
 				if (enumValue != null) {
