@@ -9,7 +9,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 
@@ -41,7 +41,7 @@ public class RouteInfoCalculator {
 		if (destinationInfos.size() < POINTS_LIMIT) {
 			TargetPoint finalDestination = mapActivity.getPointToNavigate();
 			if (finalDestination != null) {
-				int distance = getDistanceToDestination(finalDestination.point);
+				int distance = getDistanceToDestination(finalDestination.getLatLon());
 				int leftTime = getEstimatedTimeToDestination();
 				if (isPointNotPassed(distance, leftTime)) {
 					destinationInfos.add(createDestinationInfo(distance, leftTime));
@@ -58,7 +58,7 @@ public class RouteInfoCalculator {
 		TargetPoint intermediate;
 		int intermediatePointIndex = 0;
 		while ((intermediate = targetPointsHelper.getIntermediatePoint(intermediatePointIndex)) != null) {
-			int distance = getDistanceToIntermediate(intermediate.point, intermediatePointIndex);
+			int distance = getDistanceToIntermediate(intermediate.getLatLon(), intermediatePointIndex);
 			int estimatedTime = getEstimatedTimeToIntermediate(intermediatePointIndex);
 
 			if (isPointNotPassed(distance, estimatedTime)) {

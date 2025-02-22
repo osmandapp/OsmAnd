@@ -17,7 +17,7 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.resources.DetectRegionTask;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -156,6 +156,6 @@ public class EmissionHelper {
 		if (targetPoint == null) {
 			targetPoint = targetPointsHelper.getMyLocationToStart();
 		}
-		return targetPoint != null ? targetPoint.point : null;
+		return targetPoint != null ? targetPoint.getLatLon() : null;
 	}
 }

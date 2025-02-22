@@ -70,7 +70,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenuFragment;
@@ -2217,12 +2217,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				}
 				TargetPoint p = points.get(i);
 				String description = p.getOnlyName();
-				via.append(getRoutePointDescription(p.point, description));
+				via.append(getRoutePointDescription(p.getLatLon(), description));
 				boolean needAddress = new PointDescription(PointDescription.POINT_TYPE_LOCATION, description).isSearchingAddress(mapActivity)
-						&& !intermediateRequestsLatLon.contains(p.point);
+						&& !intermediateRequestsLatLon.contains(p.getLatLon());
 				if (needAddress) {
-					AddressLookupRequest lookupRequest = new AddressLookupRequest(p.point, address -> updateMenu(), null);
-					intermediateRequestsLatLon.add(p.point);
+					AddressLookupRequest lookupRequest = new AddressLookupRequest(p.getLatLon(), address -> updateMenu(), null);
+					intermediateRequestsLatLon.add(p.getLatLon());
 					app.getGeocodingLookupService().lookupAddress(lookupRequest);
 				}
 			}
@@ -2259,7 +2259,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				name = start.getOnlyName().length() > 0 ? start.getOnlyName() :
 						(mapActivity.getString(R.string.route_descr_map_location) + " " + getRoutePointDescription(start.getLatitude(), start.getLongitude()));
 
-				LatLon latLon = start.point;
+				LatLon latLon = start.getLatLon();
 				PointDescription pointDescription = start.getOriginalPointDescription();
 				boolean needAddress = pointDescription != null && pointDescription.isSearchingAddress(mapActivity);
 				cancelStartPointAddressRequest();
@@ -2293,13 +2293,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			TargetPointsHelper targets = app.getTargetPointsHelper();
 			TargetPoint finish = targets.getPointToNavigate();
 			if (finish != null) {
-				toText.setText(getRoutePointDescription(finish.point, finish.getOnlyName()));
+				toText.setText(getRoutePointDescription(finish.getLatLon(), finish.getOnlyName()));
 
 				PointDescription pointDescription = finish.getOriginalPointDescription();
 				boolean needAddress = pointDescription != null && pointDescription.isSearchingAddress(mapActivity);
 				cancelTargetPointAddressRequest();
 				if (needAddress) {
-					targetPointRequest = new AddressLookupRequest(finish.point, address -> {
+					targetPointRequest = new AddressLookupRequest(finish.getLatLon(), address -> {
 						targetPointRequest = null;
 						updateMenu();
 					}, null);
