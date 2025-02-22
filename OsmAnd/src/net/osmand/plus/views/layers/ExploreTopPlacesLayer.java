@@ -42,6 +42,7 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 	private static final int START_ZOOM = 2;
 	private static final Log LOG = PlatformUtil.getLog(ExploreTopPlacesLayer.class);
 	public static final String LOAD_NEARBY_IMAGES_TAG = "load_nearby_images";
+	private static final int TOP_LOAD_PHOTOS = 15;
 
 
 	private boolean nightMode;
@@ -329,24 +330,25 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 		Picasso.get().cancelTag(LOAD_NEARBY_IMAGES_TAG);
 
 		List<ExploreTopPlacePoint> nearbyPlacePointsList = new ArrayList<>();
+		int ind = 0;
 		for (ExploreTopPlacePoint point : nearbyPlacePoints) {
 			nearbyPlacePointsList.add(point);
-			Target imgLoadTarget = new Target() {
-				@Override
-				public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-					point.setImageBitmap(bitmap);
-					imagesUpdatedVersion++;
-				}
+			if (!Algorithms.isEmpty(point.getIconUrl()) && ind ++ < TOP_LOAD_PHOTOS) {
+				Target imgLoadTarget = new Target() {
+					@Override
+					public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+						point.setImageBitmap(bitmap);
+						imagesUpdatedVersion++;
+					}
 
-				@Override
-				public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-				}
+					@Override
+					public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+					}
 
-				@Override
-				public void onPrepareLoad(Drawable placeHolderDrawable) {
-				}
-			};
-			if (!Algorithms.isEmpty(point.getIconUrl())) {
+					@Override
+					public void onPrepareLoad(Drawable placeHolderDrawable) {
+					}
+				};
 				Picasso.get()
 						.load(point.getIconUrl())
 						.tag(LOAD_NEARBY_IMAGES_TAG)

@@ -37,7 +37,7 @@ import java.util.Set;
 // TODO images shouldn't be queried if they are not visible in all lists! size doesn't matter !
 // TODO show on map close button is not visible
 // TODO layer sometimes becomes non-interactive - MAP FPS drops
-// TODO Context menu doesn't work correctly and duplicates actual POI  
+// TODO Context menu doesn't work correctly and duplicates actual POI
 // Extra: display new categories from web
 public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 
