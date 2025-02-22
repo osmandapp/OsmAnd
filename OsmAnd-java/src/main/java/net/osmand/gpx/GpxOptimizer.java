@@ -1,6 +1,5 @@
 package net.osmand.gpx;
 
-import net.osmand.shared.data.KLatLon;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -137,6 +136,9 @@ public class GpxOptimizer {
 		if (reverse) {
 			Collections.reverse(points);
 		}
+		if (!result.isEmpty() && !points.isEmpty()) {
+			points.remove(insert ? points.size() - 1 : 0); // avoid duplicate point at joints
+		}
 		result.addAll(insert ? 0 : result.size(), points);
 	}
 
@@ -154,23 +156,23 @@ public class GpxOptimizer {
 		WptPt firstCandidate = candidate.getPoints().get(0);
 		WptPt lastCandidate = candidate.getPoints().get(candidate.getPoints().size() - 1);
 
-		KLatLon firstPointLL = new KLatLon(firstPoint.getLatitude(), firstPoint.getLongitude());
-		KLatLon lastPointLL = new KLatLon(lastPoint.getLatitude(), lastPoint.getLongitude());
-		KLatLon firstCandidateLL = new KLatLon(firstCandidate.getLatitude(), firstCandidate.getLongitude());
-		KLatLon lastCandidateLL = new KLatLon(lastCandidate.getLatitude(), lastCandidate.getLongitude());
-
-		if (KMapUtils.INSTANCE.areLatLonEqual(lastPointLL, firstCandidateLL, PRECISION)) {
+		if (equalWptPt(lastPoint, firstCandidate)) {
 			addSegmentToResult(result, false, candidate, false); // nodes + Candidate
-		} else if (KMapUtils.INSTANCE.areLatLonEqual(lastPointLL, lastCandidateLL, PRECISION)) {
+		} else if (equalWptPt(lastPoint, lastCandidate)) {
 			addSegmentToResult(result, false, candidate, true); // nodes + etadidnaC
-		} else if (KMapUtils.INSTANCE.areLatLonEqual(firstPointLL, firstCandidateLL, PRECISION)) {
+		} else if (equalWptPt(firstPoint, firstCandidate)) {
 			addSegmentToResult(result, true, candidate, true); // etadidnaC + nodes
-		} else if (KMapUtils.INSTANCE.areLatLonEqual(firstPointLL, lastCandidateLL, PRECISION)) {
+		} else if (equalWptPt(firstPoint, lastCandidate)) {
 			addSegmentToResult(result, true, candidate, false); // Candidate + nodes
 		} else {
 			return false;
 		}
 
 		return true;
+	}
+
+	private static boolean equalWptPt(WptPt p1, WptPt p2) {
+		return KMapUtils.INSTANCE.
+				areLatLonEqual(p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude(), PRECISION);
 	}
 }
