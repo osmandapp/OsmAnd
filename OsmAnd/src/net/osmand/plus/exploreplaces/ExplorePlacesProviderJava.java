@@ -33,11 +33,11 @@ import java.util.Set;
 // TODO display all data downloaded even if maps are not loaded
 // TODO: why recreate provider when new points are loaded? that causes blinking
 // TODO: scheduleImageRefreshes in layer is incorrect it starts downloading all images and stops interacting
-//.      images for download should be correctly calculated before schedule based on overlap
 // TODO images shouldn't be queried if they are not visible in all lists! size doesn't matter !
 // TODO show on map close button is not visible
 // TODO layer sometimes becomes non-interactive - MAP FPS drops
 // TODO Context menu doesn't work correctly and duplicates actual POI
+// TODO compass is not rotating
 // Extra: display new categories from web
 public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 

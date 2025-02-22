@@ -25,6 +25,7 @@ import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvider.ExplorePlacesListener {
 
+	private static final int DISPLAY_ITEMS = 25;
 	private boolean collapsed;
 	private ImageView explicitIndicator;
 	private View titleContainer;
@@ -81,7 +82,7 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvid
 		nearByList.setLayoutManager(layoutManager);
 		nearByList.setItemAnimator(null);
 		visiblePlacesRect = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getLatLonBounds();
-		adapter = new NearbyPlacesAdapter(app, app.getExplorePlacesProvider().getDataCollection(visiblePlacesRect), false, clickListener);
+		adapter = new NearbyPlacesAdapter(app, app.getExplorePlacesProvider().getDataCollection(visiblePlacesRect, DISPLAY_ITEMS), false, clickListener);
 		nearByList.setAdapter(adapter);
 	}
 
@@ -97,7 +98,7 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvid
 
 	private NearbyPlacesAdapter getNearbyAdapter() {
 		if (adapter == null) {
-			List<ExploreTopPlacePoint> nearbyData = app.getExplorePlacesProvider().getDataCollection(visiblePlacesRect);
+			List<ExploreTopPlacePoint> nearbyData = app.getExplorePlacesProvider().getDataCollection(visiblePlacesRect, DISPLAY_ITEMS);
 			adapter = new NearbyPlacesAdapter(app, nearbyData, false, clickListener);
 		}
 		return adapter;
@@ -107,7 +108,7 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvid
 	public void onNewExplorePlacesDownloaded() {
 		isLoadingItems = false;
 		AndroidUiHelper.updateVisibility(progressBar, app.getExplorePlacesProvider().isLoading());
-		adapter.setItems(app.getExplorePlacesProvider().getDataCollection(visiblePlacesRect));
+		adapter.setItems(app.getExplorePlacesProvider().getDataCollection(visiblePlacesRect, DISPLAY_ITEMS));
 		adapter.notifyDataSetChanged();
 		updateExpandState();
 	}
@@ -131,7 +132,8 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvid
 	private void startLoadingNearbyPlaces() {
 		isLoadingItems = true;
 		app.getExplorePlacesProvider().getDataCollection(
-				app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getLatLonBounds()
+				app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getLatLonBounds(),
+				DISPLAY_ITEMS
 		);
 		AndroidUiHelper.updateVisibility(progressBar, app.getExplorePlacesProvider().isLoading());
 	}

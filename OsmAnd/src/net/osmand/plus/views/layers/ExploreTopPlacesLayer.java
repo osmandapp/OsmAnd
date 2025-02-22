@@ -328,16 +328,14 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 
 	private void scheduleImageRefreshes(List<ExploreTopPlacePoint> nearbyPlacePoints) {
 		Picasso.get().cancelTag(LOAD_NEARBY_IMAGES_TAG);
-
-		List<ExploreTopPlacePoint> nearbyPlacePointsList = new ArrayList<>();
 		int ind = 0;
 		for (ExploreTopPlacePoint point : nearbyPlacePoints) {
-			nearbyPlacePointsList.add(point);
 			if (!Algorithms.isEmpty(point.getIconUrl()) && ind ++ < TOP_LOAD_PHOTOS) {
 				Target imgLoadTarget = new Target() {
 					@Override
 					public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
 						point.setImageBitmap(bitmap);
+						LOG.info(String.format("Picasso loaded %s", point.getIconUrl()));
 						imagesUpdatedVersion++;
 					}
 
