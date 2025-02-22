@@ -41,9 +41,6 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 
 	private static final int START_ZOOM = 2;
 	private static final Log LOG = PlatformUtil.getLog(ExploreTopPlacesLayer.class);
-	public static final String LOAD_NEARBY_IMAGES_TAG = "load_nearby_images";
-	private static final int TOP_LOAD_PHOTOS = 15;
-
 
 	private boolean nightMode;
 	private ExploreTopPlacePoint selectedObject;
@@ -53,16 +50,24 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 	private QuadRect requestQuadRect = null; // null means disabled
 	private int requestZoom = 0; // null means disabled
 
-
 	private ExploreTopPlacesTileProvider topPlacesMapLayerProvider;
 	private ExploreTopPlacesTileProvider selectedTopPlacesMapLayerProvider;
 	private ExplorePlacesProvider explorePlacesProvider;
 	private int cachedExploreDataVersion;
 	private List<ExploreTopPlacePoint> places;
-	private int imagesUpdatedVersion;
-	private long lastImageCacheRefreshed = 0;
+
+
+	// To refresh images
+	public static final String LOAD_NEARBY_IMAGES_TAG = "load_nearby_images";
+	private static final int TOP_LOAD_PHOTOS = 15;
 	private static final long DEBOUNCE_IMAGE_REFRESH = 5000;
+
+
+	private RotatedTileBox imagesDisplayedBox = null;
+	private int imagesUpdatedVersion;
 	private int imagesCachedVersion;
+	private long lastImageCacheRefreshed = 0;
+
 
 	public ExploreTopPlacesLayer(@NonNull Context ctx) {
 		super(ctx);
@@ -126,12 +131,8 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 				extended.increasePixelDimensions(tileBox.getPixWidth() / 2, tileBox.getPixHeight() / 2);
 				requestQuadRect = extended.getLatLonBounds();
 				requestZoom = tileBox.getZoom();
-
 				cachedExploreDataVersion = explorePlacesProvider.getDataVersion();
 				places = explorePlacesProvider.getDataCollection(requestQuadRect);
-				scheduleImageRefreshes(places);
-				lastImageCacheRefreshed = System.currentTimeMillis();
-				imagesCachedVersion = imagesUpdatedVersion;
 			}
 		} else {
 			if (places != null) {
@@ -139,12 +140,8 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 				places = null;
 			}
 		}
-		if (imagesCachedVersion != imagesUpdatedVersion && System.currentTimeMillis() - lastImageCacheRefreshed >
-				DEBOUNCE_IMAGE_REFRESH) {
-			lastImageCacheRefreshed = System.currentTimeMillis();
-			imagesCachedVersion = imagesUpdatedVersion;
-			placesUpdated = true;
-		}
+		placesUpdated = placesUpdated || scheduleImageRefreshes(places, tileBox);
+
 		ExploreTopPlacePoint selectedObject = getSelectedNearbyPlace();
 		long selectedObjectId = selectedObject == null ? 0 : selectedObject.getId();
 		long lastSelectedObjectId = this.selectedObject == null ? 0 : this.selectedObject.getId();
@@ -326,33 +323,76 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 		return null;
 	}
 
-	private void scheduleImageRefreshes(List<ExploreTopPlacePoint> nearbyPlacePoints) {
-		Picasso.get().cancelTag(LOAD_NEARBY_IMAGES_TAG);
-		int ind = 0;
-		for (ExploreTopPlacePoint point : nearbyPlacePoints) {
-			if (!Algorithms.isEmpty(point.getIconUrl()) && ind ++ < TOP_LOAD_PHOTOS) {
-				Target imgLoadTarget = new Target() {
-					@Override
-					public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-						point.setImageBitmap(bitmap);
-						LOG.info(String.format("Picasso loaded %s", point.getIconUrl()));
-						imagesUpdatedVersion++;
-					}
+	private boolean scheduleImageRefreshes(List<ExploreTopPlacePoint> nearbyPlacePoints, RotatedTileBox tileBox) {
+		if (places == null) {
+			if (imagesDisplayedBox != null) {
+				LOG.info(String.format("Picasso cancel loading"));
+				Picasso.get().cancelTag(LOAD_NEARBY_IMAGES_TAG);
+				imagesDisplayedBox = null;
+			}
+			return false;
+		}
+		if (imagesDisplayedBox == null || imagesDisplayedBox.getZoom() != tileBox.getZoom() ||
+				!imagesDisplayedBox.containsTileBox(tileBox)) {
+			imagesDisplayedBox = tileBox.copy();
+			imagesDisplayedBox.increasePixelDimensions(tileBox.getPixWidth() / 2, tileBox.getPixHeight() / 2);
+			imagesUpdatedVersion++;
+			List<ExploreTopPlacePoint> placesToDisplayWithPhotos = new ArrayList<>();
 
-					@Override
-					public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+			boolean missingPhoto = false;
+			for (ExploreTopPlacePoint point : nearbyPlacePoints) {
+				if (imagesDisplayedBox.containsLatLon(point.getLatitude(), point.getLongitude()) &&
+						!Algorithms.isEmpty(point.getIconUrl())) {
+					placesToDisplayWithPhotos.add(point);
+					if (point.getImageBitmap() == null) {
+						missingPhoto = true;
 					}
+					if (placesToDisplayWithPhotos.size() > TOP_LOAD_PHOTOS) {
+						break;
+					}
+				}
+			}
+			if (missingPhoto) {
+				Picasso.get().cancelTag(LOAD_NEARBY_IMAGES_TAG);
+				LOG.info(String.format("Picasso cancel loading"));
 
-					@Override
-					public void onPrepareLoad(Drawable placeHolderDrawable) {
+				for (ExploreTopPlacePoint point : placesToDisplayWithPhotos) {
+					if (point.getImageBitmap() != null) {
+						continue;
 					}
-				};
-				Picasso.get()
-						.load(point.getIconUrl())
-						.tag(LOAD_NEARBY_IMAGES_TAG)
-						.into(imgLoadTarget);
+					Target imgLoadTarget = new Target() {
+						@Override
+						public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+							point.setImageBitmap(bitmap);
+							LOG.info(String.format("Picasso loaded %s", point.getIconUrl()));
+							imagesUpdatedVersion++;
+						}
+
+						@Override
+						public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+						}
+
+						@Override
+						public void onPrepareLoad(Drawable placeHolderDrawable) {
+						}
+					};
+					LOG.info(String.format("Picasso schedule %s", point.getIconUrl()));
+					Picasso.get()
+							.load(point.getIconUrl())
+							.tag(LOAD_NEARBY_IMAGES_TAG)
+							.into(imgLoadTarget);
+				}
 			}
 		}
+		if (imagesCachedVersion != imagesUpdatedVersion && System.currentTimeMillis() - lastImageCacheRefreshed >
+				DEBOUNCE_IMAGE_REFRESH) {
+			lastImageCacheRefreshed = System.currentTimeMillis();
+			imagesCachedVersion = imagesUpdatedVersion;
+			return true;
+		}
+		return false;
+
+
 	}
 
 	public void enableLayer(boolean enable) {
