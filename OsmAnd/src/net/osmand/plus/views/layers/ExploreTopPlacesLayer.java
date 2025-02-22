@@ -59,7 +59,7 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 
 	// To refresh images
 	public static final String LOAD_NEARBY_IMAGES_TAG = "load_nearby_images";
-	private static final int TOP_LOAD_PHOTOS = 15;
+	private static final int TOP_LOAD_PHOTOS = 25;
 	private static final long DEBOUNCE_IMAGE_REFRESH = 5000;
 
 
@@ -354,7 +354,7 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 			}
 			if (missingPhoto) {
 				Picasso.get().cancelTag(LOAD_NEARBY_IMAGES_TAG);
-				LOG.info(String.format("Picasso cancel loading"));
+//				LOG.info(String.format("Picasso cancel loading"));
 
 				for (ExploreTopPlacePoint point : placesToDisplayWithPhotos) {
 					if (point.getImageBitmap() != null) {
@@ -364,19 +364,20 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 						@Override
 						public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
 							point.setImageBitmap(bitmap);
-							LOG.info(String.format("Picasso loaded %s", point.getIconUrl()));
+//							LOG.info(String.format("Picasso loaded %s", point.getIconUrl()));
 							imagesUpdatedVersion++;
 						}
 
 						@Override
 						public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+							LOG.error(String.format("Picasso failed to load %s", point.getIconUrl()), e);
 						}
 
 						@Override
 						public void onPrepareLoad(Drawable placeHolderDrawable) {
 						}
 					};
-					LOG.info(String.format("Picasso schedule %s", point.getIconUrl()));
+//					LOG.info(String.format("Picasso schedule %s", point.getIconUrl()));
 					Picasso.get()
 							.load(point.getIconUrl())
 							.tag(LOAD_NEARBY_IMAGES_TAG)
