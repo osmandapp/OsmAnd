@@ -10,50 +10,43 @@ import java.util.*;
 public class OverlappedSegmentsMergerDS {
 
     private static final double PRECISION = KMapUtils.DEFAULT_LATLON_PRECISION;
+    private static final double MAX_DISTANCE_METERS = 10.0;
 
     public static Track mergeSegmentsWithOverlapHandling(Track originalTrack) {
-        List<TrkSegment> originalSegments = new ArrayList<>(originalTrack.getSegments());
-        List<TrkSegment> mergedSegments = mergeSegments(originalSegments);
+        List<TrkSegment> segments = new ArrayList<>(originalTrack.getSegments());
+        List<TrkSegment> mergedSegments = new ArrayList<>();
 
-        Track resultTrack = new Track();
-        resultTrack.getSegments().addAll(mergedSegments);
-        return resultTrack;
-    }
+        while (!segments.isEmpty()) {
+            TrkSegment current = segments.remove(0);
+            boolean merged = false;
 
-    private static List<TrkSegment> mergeSegments(List<TrkSegment> segments) {
-        List<TrkSegment> workList = new ArrayList<>(segments);
-        boolean changed;
+            for (int i = 0; i < segments.size(); i++) {
+                TrkSegment other = segments.get(i);
+                TrkSegment mergedSegment = mergeSegments(current, other);
 
-        do {
-            changed = false;
-            for (int i = 0; i < workList.size(); i++) {
-                TrkSegment current = workList.get(i);
-                if (current == null || current.getPoints().size() < 2) continue;
-
-                for (int j = 0; j < workList.size(); j++) {
-                    if (i == j) continue;
-                    TrkSegment other = workList.get(j);
-                    if (other == null || other.getPoints().size() < 2) continue;
-
-                    TrkSegment merged = tryMerge(current, other);
-                    if (merged != null && isValidSegment(merged)) {
-                        workList.set(i, merged);
-                        workList.set(j, null);
-                        changed = true;
-                        break;
-                    }
+                if (mergedSegment != null) {
+                    segments.set(i, mergedSegment);
+                    merged = true;
+                    break;
                 }
             }
-            workList.removeIf(Objects::isNull);
-        } while (changed);
 
-        return workList;
+            if (!merged) {
+                mergedSegments.add(current);
+            }
+        }
+
+        Track result = new Track();
+        result.getSegments().addAll(mergedSegments);
+        return result;
     }
 
-    private static TrkSegment tryMerge(TrkSegment a, TrkSegment b) {
+    private static TrkSegment mergeSegments(TrkSegment a, TrkSegment b) {
         for (ConnectionType type : ConnectionType.values()) {
             TrkSegment merged = attemptMerge(a, b, type);
-            if (merged != null && isValidSegment(merged)) return merged;
+            if (merged != null) {
+                return merged;
+            }
         }
         return null;
     }
@@ -62,82 +55,57 @@ public class OverlappedSegmentsMergerDS {
         List<WptPt> aPoints = type.reverseA ? reverse(a.getPoints()) : a.getPoints();
         List<WptPt> bPoints = type.reverseB ? reverse(b.getPoints()) : b.getPoints();
 
-        int overlap = findValidOverlap(aPoints, bPoints);
+        // Проверка перекрытия конца A и начала B
+        int overlap = findMaxOverlap(aPoints, bPoints);
         if (overlap > 0) {
-            List<WptPt> merged = new ArrayList<>(aPoints.subList(0, aPoints.size() - overlap));
-            merged.addAll(bPoints);
-            return createSegment(merged);
+            return buildMergedSegment(aPoints, bPoints, overlap);
         }
         return null;
     }
 
-    private static int findValidOverlap(List<WptPt> a, List<WptPt> b) {
-        for (int overlap = Math.min(a.size(), b.size()); overlap > 0; overlap--) {
-            if (isEdgeOverlap(a, b, overlap) && !createsLoop(a, b, overlap)) {
+    private static int findMaxOverlap(List<WptPt> a, List<WptPt> b) {
+        int maxOverlap = Math.min(a.size(), b.size());
+        for (int overlap = maxOverlap; overlap >= 1; overlap--) {
+            if (isValidOverlap(a, b, overlap)) {
                 return overlap;
             }
         }
         return 0;
     }
 
-    private static boolean isEdgeOverlap(List<WptPt> a, List<WptPt> b, int overlap) {
+    private static boolean isValidOverlap(List<WptPt> a, List<WptPt> b, int overlap) {
         List<WptPt> aPart = a.subList(a.size() - overlap, a.size());
         List<WptPt> bPart = b.subList(0, overlap);
-        return isOverlap(aPart, bPart);
-    }
 
-    private static boolean createsLoop(List<WptPt> a, List<WptPt> b, int overlap) {
-        if (overlap <= 0 || overlap > a.size() || overlap > b.size()) {
-            return false;
-        }
-
-        int indexA = a.size() - overlap - 1;
-        int indexB = overlap;
-
-        if (indexA < 0 || indexA >= a.size() || indexB >= b.size()) {
-            return false;
-        }
-
-        WptPt firstAfterMerge = a.get(indexA);
-        WptPt lastAfterMerge = b.get(indexB);
-        return equals(firstAfterMerge, lastAfterMerge);
-    }
-
-    private static boolean isOverlap(List<WptPt> aPart, List<WptPt> bPart) {
-        for (int i = 0; i < aPart.size(); i++) {
-            if (!equals(aPart.get(i), bPart.get(i))) return false;
+        for (int i = 0; i < overlap; i++) {
+            WptPt aPt = aPart.get(i);
+            WptPt bPt = bPart.get(i);
+            if (KMapUtils.INSTANCE.getDistance(
+                    aPt.getLatitude(), aPt.getLongitude(),
+                    bPt.getLatitude(), bPt.getLongitude()
+            ) > MAX_DISTANCE_METERS) {
+                return false;
+            }
         }
         return true;
     }
 
-    private static boolean isValidSegment(TrkSegment segment) {
-        List<WptPt> points = segment.getPoints();
-        if (points.size() < 2) return false;
-
-        for (int i = 1; i < points.size(); i++) {
-            if (equals(points.get(i - 1), points.get(i))) return false;
-        }
-        return true;
-    }
-
-    private static boolean equals(WptPt p1, WptPt p2) {
-        return KMapUtils.INSTANCE.areLatLonEqual(
-                p1.getLatitude(), p1.getLongitude(),
-                p2.getLatitude(), p2.getLongitude(),
-                PRECISION
-        );
-    }
-
-    private static List<WptPt> reverse(List<WptPt> list) {
-        List<WptPt> reversed = new ArrayList<>(list);
-        Collections.reverse(reversed);
-        return reversed;
+    private static TrkSegment buildMergedSegment(List<WptPt> a, List<WptPt> b, int overlap) {
+        List<WptPt> merged = new ArrayList<>(a.subList(0, a.size() - overlap));
+        merged.addAll(b);
+        return createSegment(merged);
     }
 
     private static TrkSegment createSegment(List<WptPt> points) {
         TrkSegment segment = new TrkSegment();
         segment.getPoints().addAll(points);
         return segment;
+    }
+
+    private static List<WptPt> reverse(List<WptPt> list) {
+        List<WptPt> reversed = new ArrayList<>(list);
+        Collections.reverse(reversed);
+        return reversed;
     }
 
     private enum ConnectionType {
