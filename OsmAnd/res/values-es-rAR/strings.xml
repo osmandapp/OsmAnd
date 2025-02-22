@@ -5580,4 +5580,6 @@
     <string name="original_color_description">Cada punto mantendría su propio color.</string>
     <string name="apply_to_all_points">Aplicar a todos los puntos</string>
     <string name="original_icon_description">Cada punto mantendría su propio ícono.</string>
+    <string name="show_mercator_grids_description">Muestra la cuadrícula en kilómetros de Mercator, en lugar de WGS84 o UTM</string>
+    <string name="show_mercator_grids">Usar Mercator en lugar de WGS84 o UTM</string>
 </resources>
