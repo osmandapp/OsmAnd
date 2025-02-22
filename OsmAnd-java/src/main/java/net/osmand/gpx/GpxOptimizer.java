@@ -140,7 +140,7 @@ public class GpxOptimizer {
 			List<WptPt> skipLeadingPoint = points.subList(insert ? 0 : 1, points.size() - (insert ? 1 : 0));
 			result.addAll(insert ? 0 : result.size(), skipLeadingPoint); // avoid duplicate point at joints
 		} else {
-			result.addAll(insert ? 0 : result.size(), points); // first append to result
+			result.addAll(insert ? 0 : result.size(), points); // first addition to the result
 		}
 	}
 

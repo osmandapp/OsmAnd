@@ -33,6 +33,7 @@ import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.HeightDataLoader;
 import net.osmand.data.Amenity;
+import net.osmand.gpx.GpxOptimizer;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseLoadAsyncTask;
@@ -49,8 +50,6 @@ import net.osmand.shared.util.KAlgorithms;
 import net.osmand.shared.util.KMapAlgorithms;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import net.osmand.util.OverlappedSegmentsMergerDS;
-import net.osmand.util.OverlappedSegmentsMergerGPT;
 
 import org.apache.commons.logging.Log;
 
@@ -183,9 +182,9 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             }
             gpxFile.setTracks(new ArrayList<>());
 
-//            gpxFile.getTracks().add(track); // TODO analyze both DS and GPT methods
+            gpxFile.getTracks().add(GpxOptimizer.deduplicateAndJoinTrackSegments(track));
 //            gpxFile.getTracks().add(OverlappedSegmentsMergerDS.mergeSegmentsWithOverlapHandling(track));
-            gpxFile.getTracks().add(OverlappedSegmentsMergerGPT.mergeSegmentsWithOverlapHandling(track));
+//            gpxFile.getTracks().add(OverlappedSegmentsMergerGPT.mergeSegmentsWithOverlapHandling(track));
 
             if (!(article instanceof TravelGpx)) {
                 gpxFile.setRef(article.ref);
