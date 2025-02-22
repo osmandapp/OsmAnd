@@ -37,6 +37,7 @@ import net.osmand.plus.configmap.routes.RouteLayersHelper;
 import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
 import net.osmand.plus.download.local.LocalIndexHelper;
 import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.exploreplaces.ExplorePlacesProviderJava;
 import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.feedback.FeedbackHelper;
 import net.osmand.plus.helpers.*;
@@ -48,7 +49,6 @@ import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
-import net.osmand.plus.nearbyplaces.NearbyPlacesHelper;
 import net.osmand.plus.notifications.NotificationHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -337,9 +337,8 @@ public class AppInitializer implements IProgress {
 		app.routeLayersHelper = startupInit(new RouteLayersHelper(app), RouteLayersHelper.class);
 		app.model3dHelper = startupInit(new Model3dHelper(app), Model3dHelper.class);
 		app.trackSortModesHelper = startupInit(new TrackSortModesHelper(app), TrackSortModesHelper.class);
-
+		app.explorePlacesProvider = startupInit(new ExplorePlacesProviderJava(app), ExplorePlacesProviderJava.class);
 		initOpeningHoursParser();
-		NearbyPlacesHelper.INSTANCE.init(app);
 	}
 
 	private void initOpeningHoursParser() {

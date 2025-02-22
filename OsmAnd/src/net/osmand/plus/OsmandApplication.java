@@ -56,6 +56,8 @@ import net.osmand.plus.configmap.tracks.TrackSortModesHelper;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.exploreplaces.ExplorePlacesProvider;
+import net.osmand.plus.exploreplaces.ExplorePlacesProviderJava;
 import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.feedback.FeedbackHelper;
 import net.osmand.plus.feedback.RateUsHelper;
@@ -208,6 +210,7 @@ public class OsmandApplication extends MultiDexApplication {
 	RouteLayersHelper routeLayersHelper;
 	Model3dHelper model3dHelper;
 	TrackSortModesHelper trackSortModesHelper;
+	ExplorePlacesProviderJava explorePlacesProvider;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -616,6 +619,10 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public AverageSpeedComputer getAverageSpeedComputer() {
 		return averageSpeedComputer;
+	}
+
+	public ExplorePlacesProvider getExplorePlacesProvider() {
+		return explorePlacesProvider;
 	}
 
 	@NonNull

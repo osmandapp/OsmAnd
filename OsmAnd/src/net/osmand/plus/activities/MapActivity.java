@@ -88,7 +88,7 @@ import net.osmand.plus.mapmarkers.PlanRouteFragment;
 import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
-import net.osmand.plus.nearbyplaces.NearbyPlacesFragment;
+import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -518,7 +518,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (backStackEntryCount == 0 && launchPrevActivityIntent()) {
 			return;
 		}
-		NearbyPlacesFragment nearbyPlacesFragment = fragmentsHelper.getNearbyPlacesFragment();
+		ExplorePlacesFragment nearbyPlacesFragment = fragmentsHelper.getNearbyPlacesFragment();
 		if(nearbyPlacesFragment != null && nearbyPlacesFragment.onBackPress()) {
 			return;
 		}
