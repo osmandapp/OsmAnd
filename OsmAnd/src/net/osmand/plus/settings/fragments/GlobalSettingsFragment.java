@@ -211,7 +211,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 
 	private void setupPreferredLocalePref() {
 		boolean visible = Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU;
-		ListPreferenceEx preference = findPreference(settings.PREFERRED_LOCALE.getId());
+		ListPreferenceEx preference = requirePreference(settings.PREFERRED_LOCALE.getId());
 		preference.setVisible(visible);
 		if (visible) {
 			preference.setIcon(getContentIcon(R.drawable.ic_action_map_language));
@@ -224,7 +224,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 			preference.setEntryValues(languagesIds);
 
 			// Add " (Display language)" to menu title in Latin letters for all non-en languages
-			if (!getResources().getString(R.string.preferred_locale).equals(getResources().getString(R.string.preferred_locale_no_translate))) {
+			if (!getString(R.string.preferred_locale).equals(getString(R.string.preferred_locale_no_translate))) {
 				preference.setTitle(getString(R.string.preferred_locale) + " (" + getString(R.string.preferred_locale_no_translate) + ")");
 			}
 		}
