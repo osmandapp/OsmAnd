@@ -49,10 +49,16 @@ public class GpxOptimizer {
 						WptPt p1 = points.get(i);
 						WptPt p2 = points.get(i - 1);
 						for (WptPt edge : edgePoints) {
-							double d = KMapUtils.INSTANCE.getOrthogonalDistance(edge.getLatitude(), edge.getLongitude(),
-									p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude());
-							if (d > 0 && d < EDGE_POINTS_MAX_ORTHOGONAL_DISTANCE) {
-								duplicates.add(llKey(edge));
+							double coeff = KMapUtils.INSTANCE.
+									getProjectionCoeff(edge.getLatitude(), edge.getLongitude(),
+											p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude());
+							if (coeff > 0.0 && coeff < 1.0) {
+								double dist = KMapUtils.INSTANCE.
+										getOrthogonalDistance(edge.getLatitude(), edge.getLongitude(),
+												p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude());
+								if (dist > 0 && dist < EDGE_POINTS_MAX_ORTHOGONAL_DISTANCE) {
+									duplicates.add(llKey(edge));
+								}
 							}
 						}
 					}
