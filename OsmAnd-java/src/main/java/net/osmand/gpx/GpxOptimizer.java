@@ -77,8 +77,8 @@ public class GpxOptimizer {
 				for (int i = 0; i < points.size(); i++) {
 					WptPt p = points.get(i);
 					String key = llKey(p);
-					if (!duplicates.contains(key)) {
-						if (!isPossiblyDisplacedEdgePoint(i, points, duplicates)) {
+					if (!duplicates.contains(key) || isEdgePointOfUniqueSegment(i, points, duplicates)) {
+						if (!isDisplacedEdgePoint(i, points, duplicates)) {
 							clean.getPoints().add(p);
 						}
 						if (i != 0 && i != points.size() - 1) {
@@ -94,10 +94,15 @@ public class GpxOptimizer {
 		}
 	}
 
-	private static boolean isPossiblyDisplacedEdgePoint(int i, List<WptPt> points, Set<String> duplicates) {
+	private static boolean isDisplacedEdgePoint(int i, List<WptPt> points, Set<String> duplicates) {
 		// fast fallback method if findDisplacedEdgePointsToDeduplicate has failed
 		return (i == 0 && points.size() > 1 && duplicates.contains(llKey(points.get(i + 1))))
 				|| (i == points.size() - 1 && points.size() > 1 && duplicates.contains(llKey(points.get(i - 1))));
+	}
+
+	private static boolean isEdgePointOfUniqueSegment(int i, List<WptPt> points, Set<String> duplicates) {
+		return (i == 0 && points.size() > 1 && !duplicates.contains(llKey(points.get(i + 1))))
+				|| (i == points.size() - 1 && points.size() > 1 && !duplicates.contains(llKey(points.get(i - 1))));
 	}
 
 	private static void joinCleanedSegments(List<TrkSegment> segmentsToJoin, List<TrkSegment> joinedSegments) {
