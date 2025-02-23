@@ -4512,4 +4512,17 @@
     <string name="local_backup">Τοπικό αντίγραφο ασφαλείας</string>
     <string name="custom_buttons">Προσαρμοσμένα κουμπιά</string>
     <string name="open_saved_track">Άνοιγμα αποθηκευμένου ίχνους</string>
+    <string name="backup_restore_data">Επαναφορά δεδομένων</string>
+    <string name="resend_verification_code">Επαναποστολή</string>
+    <string name="backup_error_subscription_was_expired">Η συνδρομή έληξε</string>
+    <string name="routing_attr_motor_type_electric_name">Ηλεκτρικό</string>
+    <string name="backup_error_file_not_available">Το αρχείο δεν είναι διαθέσιμο</string>
+    <string name="icon_group_special">Ειδικό</string>
+    <string name="verification_code_missing">Δεν έλαβα κωδικό επαλήθευσης</string>
+    <string name="service_is_not_available_please_try_later">Η υπηρεσία δεν είναι διαθέσιμη. Παρακαλώ δοκιμάστε αργότερα.</string>
+    <string name="promo_subscription">Προωθητική συνδρομή</string>
+    <string name="new_file">Νέο αρχείο</string>
+    <string name="deleted_file">Διαγραμμένο αρχείο</string>
+    <string name="measurement_units">Μονάδες μέτρησης</string>
+    <string name="context_menu_edit_descr">Επεξεργασία περιγραφής</string>
 </resources>
