@@ -9,11 +9,13 @@ import java.util.*;
 
 // Human-based version of OverlappedSegmentsMergerDS / OverlappedSegmentsMergerGPT
 
+// TODO implement deduplication that started only from the edges of a segment (OSM5802961 bug)
+
 public class GpxOptimizer {
 	private static final double EDGE_POINTS_MAX_ORTHOGONAL_DISTANCE = 10.0;
 	private static final double PRECISION = KMapUtils.DEFAULT_LATLON_PRECISION;
 
-	public static Track deduplicateAndJoinTrackSegments(Track track) {
+	public static Track deduplicateAndJoinTravelGpxSegments(Track track) {
 		Set<String> duplicates = new HashSet<>();
 		findDisplacedEdgePointsToDeduplicate(track, duplicates);
 

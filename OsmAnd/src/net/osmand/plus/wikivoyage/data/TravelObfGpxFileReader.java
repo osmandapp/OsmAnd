@@ -182,7 +182,8 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             }
             gpxFile.setTracks(new ArrayList<>());
 
-            gpxFile.getTracks().add(GpxOptimizer.deduplicateAndJoinTrackSegments(track));
+//            gpxFile.getTracks().add(track);
+            gpxFile.getTracks().add(GpxOptimizer.deduplicateAndJoinTravelGpxSegments(track));
 //            gpxFile.getTracks().add(OverlappedSegmentsMergerDS.mergeSegmentsWithOverlapHandling(track));
 //            gpxFile.getTracks().add(OverlappedSegmentsMergerGPT.mergeSegmentsWithOverlapHandling(track));
 
