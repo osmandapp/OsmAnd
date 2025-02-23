@@ -32,7 +32,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -973,7 +972,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				fragmentManager.popBackStack();
 			}
 		}
-		app.getOsmandMap().getMapLayers().getNearbyPlacesLayer().customObjectsDelegate.setCustomMapObjects(null);
+		app.getOsmandMap().getMapLayers().getExplorePlacesLayer().enableLayer(false);
 		super.onDismiss(dialog);
 	}
 

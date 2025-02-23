@@ -58,6 +58,10 @@ class KQuadRect {
 		return contains(box.left, box.top, box.right, box.bottom)
 	}
 
+	fun contains(point: KLatLon): Boolean {
+		return point.longitude in left..right && point.latitude in bottom..top
+	}
+
 	companion object {
 		fun intersects(a: KQuadRect, b: KQuadRect): Boolean {
 			return kotlin.math.min(a.left, a.right) <= kotlin.math.max(b.left, b.right)
@@ -107,6 +111,24 @@ class KQuadRect {
 
 	fun hasInitialState(): Boolean {
 		return left == 0.0 && right == 0.0 && top == 0.0 && bottom == 0.0
+	}
+
+	override fun equals(other: Any?): Boolean {
+		if (this === other) return true
+		if (other !is KQuadRect) return false
+
+		return left == other.left &&
+				right == other.right &&
+				top == other.top &&
+				bottom == other.bottom
+	}
+
+	override fun hashCode(): Int {
+		var result = left.hashCode()
+		result = 31 * result + right.hashCode()
+		result = 31 * result + top.hashCode()
+		result = 31 * result + bottom.hashCode()
+		return result
 	}
 
 	override fun toString(): String {

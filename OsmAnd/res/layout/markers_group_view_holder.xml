@@ -44,7 +44,7 @@
 			android:ellipsize="end"
 			android:maxLines="1"
 			android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
-			android:textColor="@null"
+			android:textColor="?android:attr/textColorSecondary"
 			android:visibility="gone"
 			tools:text="Some description"
 			tools:visibility="visible"/>

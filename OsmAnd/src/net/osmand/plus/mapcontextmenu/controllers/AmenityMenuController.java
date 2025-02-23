@@ -95,7 +95,7 @@ public class AmenityMenuController extends MenuController {
 				public void buttonPressed() {
 					MapActivity activity = getMapActivity();
 					if (activity != null) {
-						WikipediaDialogFragment.showInstance(activity, amenity);
+						WikipediaDialogFragment.showInstance(activity, amenity, null);
 					}
 				}
 			};

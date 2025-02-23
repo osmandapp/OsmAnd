@@ -5727,7 +5727,7 @@
     <string name="plugin_ais_tracker_name">AIS-fartøjssporing</string>
     <string name="plugin_ais_tracker_description">Vis AIS-positioner og oplysninger om omkringliggende fartøjer. AIS-dataene modtages via netværk fra en ekstern AIS-modtager.</string>
     <string name="show_utm_grids">Brug UTM i stedet for WGS84</string>
-    <string name="show_utm_grids_description">Vis gradnet i UTM-meter i stedet for WGS84-grader</string>
+    <string name="show_utm_grids_description">Vis gradnet i UTM-meter i stedet for WGS84</string>
     <string name="map_grid">Kortgradnet</string>
     <string name="show_grids">Vis gradnet på kort</string>
     <string name="show_grids_description">Tillad visning af gradnet over kortet</string>
@@ -5741,4 +5741,10 @@
     <string name="original_shape_description">Hvert punkt beholder sin egen form.</string>
     <string name="apply_to_all_points">Anvend på alle punkter</string>
     <string name="save_favorite_default_appearance">Anvend ændringer på de eksisterende punkter i mappen eller kun på de nye?</string>
+    <string name="show_mercator_grids_description">Vis gradnet i Mercator km i stedet for WGS84 eller UTM</string>
+    <string name="show_dms_grids_description">Vis gradnet i grader, minutter, sekunder i stedet for grader</string>
+    <string name="show_dm_grids">Brug DM i stedet for grader eller DMS</string>
+    <string name="show_dm_grids_description">Vis gradnet i grader og minutter i stedet for grader eller DMS</string>
+    <string name="show_dms_grids">Vis DMS i stedet for grader</string>
+    <string name="show_mercator_grids">Brug Mercator i stedet for WGS84 eller UTM</string>
 </resources>

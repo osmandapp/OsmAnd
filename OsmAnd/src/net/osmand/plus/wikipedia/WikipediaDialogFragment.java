@@ -1,5 +1,7 @@
 package net.osmand.plus.wikipedia;
 
+import static net.osmand.plus.wikipedia.WikipediaOptionsBottomSheetDialogFragment.SHOW_PICTURES_CHANGED_REQUEST_CODE;
+
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
@@ -21,7 +23,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -34,7 +35,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
@@ -264,46 +264,39 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		}
 	}
 
+	@NonNull
 	protected Drawable getIcon(int resId) {
 		int colorId = nightMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n;
 		return getIcon(resId, colorId);
-	}
-
-	public static boolean showInstance(@NonNull FragmentActivity activity, @NonNull Amenity amenity, @Nullable String lang) {
-		try {
-			if (!amenity.getType().isWiki()) {
-				return false;
-			}
-			OsmandApplication app = (OsmandApplication) activity.getApplication();
-			OsmandSettings settings = app.getSettings();
-
-			WikipediaDialogFragment wikipediaDialogFragment = new WikipediaDialogFragment();
-			wikipediaDialogFragment.setAmenity(amenity);
-			WikipediaPlugin plugin = PluginsHelper.getPlugin(WikipediaPlugin.class);
-			if (lang == null && plugin != null) {
-				String preferredLocale = settings.MAP_PREFERRED_LOCALE.get();
-				lang = plugin.getMapObjectsLocale(amenity, preferredLocale);
-			}
-			wikipediaDialogFragment.setLanguage(lang);
-			wikipediaDialogFragment.setRetainInstance(true);
-			wikipediaDialogFragment.show(activity.getSupportFragmentManager(), TAG);
-			return true;
-		} catch (RuntimeException e) {
-			return false;
-		}
-	}
-
-	public static boolean showInstance(@NonNull AppCompatActivity activity, @NonNull Amenity amenity) {
-		return showInstance(activity, amenity, null);
 	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == WikipediaOptionsBottomSheetDialogFragment.REQUEST_CODE
-				&& resultCode == WikipediaOptionsBottomSheetDialogFragment.SHOW_PICTURES_CHANGED_REQUEST_CODE) {
+				&& resultCode == SHOW_PICTURES_CHANGED_REQUEST_CODE) {
 			updateWebSettings();
 			populateArticle();
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity, @NonNull Amenity amenity,
+			@Nullable String lang) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG, true)
+				&& amenity.getType().isWiki()) {
+
+			WikipediaPlugin plugin = PluginsHelper.getPlugin(WikipediaPlugin.class);
+			if (lang == null && plugin != null) {
+				OsmandApplication app = (OsmandApplication) activity.getApplication();
+				String preferredlocale = app.getSettings().MAP_PREFERRED_LOCALE.get();
+				lang = plugin.getMapObjectsLocale(amenity, preferredlocale);
+			}
+			WikipediaDialogFragment fragment = new WikipediaDialogFragment();
+			fragment.setAmenity(amenity);
+			fragment.setLanguage(lang);
+			fragment.setRetainInstance(true);
+			fragment.show(activity.getSupportFragmentManager(), TAG);
 		}
 	}
 }

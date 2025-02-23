@@ -664,7 +664,7 @@
     <string name="lang_sw">Swahili</string>
     <string name="lang_he">Hebraisk</string>
     <string name="rendering_attr_hideText_name">Tekst</string>
-    <string name="switch_to_raster_map_to_see">Ingen (nett)frakoblet vektorkart foreligger for dette stedet. Last ned et kart i \'Meny\' - \'Kartnedlasting\', eller skift til programtillegget for nettbaserte kart.</string>
+    <string name="switch_to_raster_map_to_see">Last ned et frakoblet vektorkart for dette stedet i \'Meny\' (\'Kartnedlasting\'), eller skift til programtillegget for nettbaserte kart.</string>
     <string name="rendering_category_others">Andre kartattributter</string>
     <string name="rendering_attr_publicTransportMode_name">Buss-, trolleybuss-, skyttelbussruter</string>
     <string name="rendering_attr_tramTrainRoutes_name">Trikk- og togruter</string>
@@ -2524,11 +2524,7 @@
     <string name="show_images">Vis bilder</string>
     <string name="online_webpage_warning">Siden er kun tilgjengelig på nett. Åpne i nettleser\?</string>
     <string name="index_item_world_wikivoyage">Verdensomspennende Wikivoyage-artikler</string>
-    <string name="osmand_rastermaps_plugin_description">Få tilgang til mange typer nettbaserte kart (såkalte flis- eller rasterkart), fra forhåndsdefinerte OpenStreetMap-kartfliser (som Mapnik) til satellittbilder og kartlag til spesielle formål som vær, klima, geologi, relieffskygger etc.
-\n
-\nAlle disse kartene kan brukes som hovedkart (basiskart), eller som et overlegg eller underlag til et annet basiskart (som de nettfrakoblede vektorkartene til OsmAnd). For å gjøre underlagskart mer synlig, kan visse elementer i vektorkartene til OsmAnd skjules via menyen \'Kartinnstilling\'.
-\n
-\nLast ned fliskart direkte, eller kopier dem som SQLite-databasefiler til datamappen til OsmAnd ved å bruke en av mange tredjeparts kartbearbeidingsprogrammer.</string>
+    <string name="osmand_rastermaps_plugin_description">Få tilgang til mange typer nettbaserte kart (såkalte flis- eller rasterkart), som forhåndsopptegnede OpenStreetMap-kartfliser, satellittbilder og kartlag til spesielle formål som vær, klima, geologi, relieffskygger etc.\n\n Alle disse kartene kan brukes som hovedkart (basiskart), eller som et overlegg eller underlag til et annet basiskart (som de nettfrakoblede vektorkartene til OsmAnd). For å gjøre underlagskart mer synlig, kan visse elementer i vektorkartene til OsmAnd skjules via menyen \'Kartinnstilling\'.\n\n Last ned fliskart direkte, eller kopier dem som SQLite-databasefiler til datamappen til OsmAnd ved å bruke en av mange tredjeparts kartbearbeidingsprogrammer.</string>
     <string name="record_plugin_description">Ta opp turene eller treningene dine og analyser dataene når det gjelder hastighet, akkumulerte opp- og nedstigninger, høydeprofil etc. Spor som er tatt opp kan arkiveres, deles med venner, redigeres og etterbehandles.
 \n
 \nMer lesing på %1$s.</string>
@@ -4171,7 +4167,7 @@
     <string name="routeInfo_winter_ice_road_description">Fargelegg rute eller sporlinje etter vinterveiklassifisering.</string>
     <string name="routeInfo_smoothness_description">Klassifisering av manøvrerbarhet på vei/gangvei for kjøretøy med hjul, spesielt når det gjelder overflateregelmessighet/planhet.</string>
     <string name="routeInfo_surface_description">Angi informasjon om fysisk overflate for veier/gangstier.</string>
-    <string name="routeInfo_roadClass_description">Fargelegging av ruten eller rutelinje i henhold til veiklassifisering.</string>
+    <string name="routeInfo_roadClass_description">Fargelegg ruten eller sporlinjen etter veiklassifisering.</string>
     <string name="no_items_of_type_message">Du har ingen elementer av denne typen</string>
     <string name="add_group_to_markers">Legg til gruppe i markørliste</string>
     <string name="remove_group_from_markers">Fjern gruppe fra markørliste</string>
@@ -4209,8 +4205,8 @@
     <string name="history_preferences_descr">Du kan skru av historikklogging individuelt for hver av historikktypene.</string>
     <string name="shortcut_start_recording">Start opptak</string>
     <string name="shortcut_navigate_to">Naviger til …</string>
-    <string name="shortcut_navigate_to_work">Jobb</string>
-    <string name="shortcut_navigate_to_home">Hjem</string>
+    <string name="shortcut_navigate_to_work">Naviger til \'Jobb\'</string>
+    <string name="shortcut_navigate_to_home">Naviger til \'Hjem\'</string>
     <string name="android_auto_map_placeholder_title">Kartet vises på kjøretøyskjermen.</string>
     <string name="android_auto_map_placeholder_descr">Koble fra enheten din fra Android Auto for å vise kartet i programmet.</string>
     <string name="android_auto_purchase_request_title">Kjøp OsmAnd Pro eller Maps+ for å bruke OsmAnd med Android Auto</string>
@@ -4224,7 +4220,7 @@
     <string name="transparent_status_bar">Gjennomsiktig statusfelt</string>
     <string name="markers_history_is_disabled_descr">Skru på historikk for å få en liste over besøkte kartmarkører.</string>
     <string name="clear_all_history_warning">Fjerne alle historikkoppføringer i programmet inkludert søk, navigering og markørhistorikk\?</string>
-    <string name="location_access_request_title">OsmAnd trenger tilgang til posisjon for å navigere</string>
+    <string name="location_access_request_title">OsmAnd trenger posisjonstillatelse for å navigere.</string>
     <string name="routing_attr_only_permitted_ways_description">Kun bruk veier (stier, tråkk, osv) som er ettertrykkelig tillatt</string>
     <string name="routing_attr_allow_gate_name">Tillat grindbruk</string>
     <string name="upload_gpx_description_hint">La stå tomt. Spornavn vil bli brukt som beskrivelse. Innskrevet beskrivelse vil bli brukt for hvert spor.</string>
@@ -5708,11 +5704,38 @@
     <string name="show_utm_grids">Bruk UTM istedenfor WGS84</string>
     <string name="show_grids_description">Tillat visning av rutenett over kartet</string>
     <string name="shared_string_road_exit">Avkjøring</string>
-    <string name="show_utm_grids_description">Vis rutenett i UTM-meter istedenfor WGS84-grader</string>
+    <string name="show_utm_grids_description">Vis rutenett i UTM-meter istedenfor WGS84</string>
     <string name="original_icon_description">Hvert punkt beholder sitt eget ikon.</string>
     <string name="map_widget_route_information_desc">Viser beregnet ankomsttid, gjenværende reisetid og distanse for den aktuelle navigeringsruten.</string>
     <string name="save_favorite_default_appearance">Bruke endringer på de eksisterende punkter i mappen eller kun på nye?</string>
     <string name="original_color_description">Hvert punkt beholder sin egen farge.</string>
     <string name="original_shape_description">Hvert punkt beholder sin egen form.</string>
     <string name="apply_to_all_points">Bruk på alle punkter</string>
+    <string name="daynight_mode_app_theme_summary">Kartets visning tilpasses appens overordnede tema - dagmodus for et lyst tema og nattmodus for et mørkt tema</string>
+    <string name="daynight_mode_sensor_summary">Bruker enhetens lyssensor til å veksle mellom lyse og mørke temaer i henhold til lysnivået i omgivelsene.</string>
+    <string name="missing_maps_description">Noen offline-kart som kreves for denne ruten, mangler eller er ikke oppdaterte. Last ned eller oppdater disse kartene.</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd kan hente høydedata fra nærliggende veier eller terrengkart.</string>
+    <string name="press_button_to_link_with_action">Trykk på knappen på enheten for å tilordne den til handlingen: %1$s</string>
+    <string name="cloud_trash_clear_confirmation">Slette alle elementer i papirkurven permanent?</string>
+    <string name="obd_fuel_type_gasoline">Bensin</string>
+    <string name="obd_fuel_type_methanol">Metanol</string>
+    <string name="obd_fuel_type_ethanol">Etanol</string>
+    <string name="obd_fuel_type_electric">Elektrisk</string>
+    <string name="quick_action_first_intermediate">Første mellomliggende</string>
+    <string name="screen_is_locked_by_action_button">Berøringsskjermen er låst. Trykk på knappen for å låse opp.</string>
+    <string name="no_assigned_keys_desc">Velg en handling og tilordne en tast ved å trykke på knappen \'Legg til\'.</string>
+    <string name="help_article_setup_a_route_name">Sett opp en rute</string>
+    <string name="delete_actions_button_confirmation">Er du sikker på at du vil slette \"%1$s\" med alle handlinger som er lagt til?</string>
+    <string name="lock_screen_description">Aktiverer eller deaktiverer berøringsskjermfunksjonalitet for å forhindre utilsiktede trykk</string>
+    <string name="obd_fuel_type_not_provided">Ingen drivstofftype angitt</string>
+    <string name="obd_fuel_type_propane">Propan</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Bytter automatisk mellom dag- og natt-temaer basert på lokale soloppgangs- og solnedgangstider.</string>
+    <string name="battery_saving_mode">Strømsparingsmodus</string>
+    <string name="daynight_mode_day_summary">Viser alltid kartet i et lyst tema, ideelt for synlighet på dagtid.</string>
+    <string name="daynight_mode_night_summary">Viser alltid kartet i et mørkt tema, egnet for nattlige forhold eller forhold med lite lys.</string>
+    <string name="sorted_sufolders_toast">Undermapper i “%1$s” er sortert etter: “%2$s”</string>
+    <string name="special_routing_cpp">Spesiell rutingstype</string>
+    <string name="relief_3d_download_description">Ytterligere kart er nødvendig for å vise terreng på kartet.</string>
+    <string name="obd_fuel_type_diesel">Diesel</string>
+    <string name="show_mercator_grids">Bruk Mercator istedenfor WGS84 eller UTM</string>
 </resources>

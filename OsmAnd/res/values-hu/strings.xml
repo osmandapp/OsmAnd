@@ -5655,7 +5655,7 @@
     <string name="show_utm_grids">UTM használata a WGS84 helyett</string>
     <string name="show_grids_description">Rács megjelenítését engedélyezi a térképen</string>
     <string name="show_grids">Térképrács mutatása</string>
-    <string name="show_utm_grids_description">WGS84 fokok helyett UTM méterben mutatja a rácsot</string>
+    <string name="show_utm_grids_description">WGS84 helyett UTM méterben mutatja a rácsot</string>
     <string name="no_photo_for_location_desc">Még nem adtak hozzá felhasználói fotókat ehhez a helyhez</string>
     <string name="no_places_available">Nincsenek helyek</string>
     <string name="hmd_promo_description">Ingyenes hozzáférés %1$s hónapig a funkciókhoz, beleértve a korlátlan térképletöltést, a 3D domborzatot stb</string>
@@ -5666,4 +5666,10 @@
     <string name="original_icon_description">Minden pont megtartja a saját ikonját.</string>
     <string name="original_shape_description">Minden pont megtartja a saját alakját.</string>
     <string name="apply_to_all_points">Alkalmazza az összes pontra</string>
+    <string name="show_dms_grids_description">Fok, perc, mp-ben mutatja a rácsot a csak fokok helyett</string>
+    <string name="show_dms_grids">Használjon fok-perc-mp-et a csak fok helyett</string>
+    <string name="show_dm_grids_description">Fok-percben mutatja a rácsot a csak fok vagy fok-perc-mp helyett</string>
+    <string name="show_dm_grids">Használjon fok-percet a csak fok vagy fok-perc-mp helyett</string>
+    <string name="show_mercator_grids">Használjon Mercatort a WGS84 vagy az UTM helyett</string>
+    <string name="show_mercator_grids_description">WGS84 vagy UTM helyett Mercatorban mutatja a rácsot</string>
 </resources>

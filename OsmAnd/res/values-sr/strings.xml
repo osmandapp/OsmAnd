@@ -5686,8 +5686,8 @@
     <string name="ais_object_lost_timeouts">Подешавања временског ограничења за пријем АИС сигнала</string>
     <string name="show_grids">Прикажи мрежу мапе</string>
     <string name="show_grids_description">Дозволи приказ мреже преко мапе</string>
-    <string name="show_utm_grids">Користи УТМ уместо WGS84</string>
-    <string name="show_utm_grids_description">Прикажи мрежу у УТМ метрима уместо WGS84 степенима</string>
+    <string name="show_utm_grids">Користи UTM уместо WGS84</string>
+    <string name="show_utm_grids_description">Прикажи мрежу у UTM метрима уместо WGS84</string>
     <string name="map_grid">Мреже мапе</string>
     <string name="no_places_available">Нема слободних места</string>
     <string name="no_photo_for_location_desc">Још увек није додата ниједна корисничка фотографија на ову локацију</string>
@@ -5699,4 +5699,10 @@
     <string name="apply_to_all_points">Примени на све тачке</string>
     <string name="original_color_description">Свака тачка би задржала своју боју.</string>
     <string name="save_favorite_default_appearance">Примењујете промене на постојеће тачке у фолдеру или само на нове?</string>
+    <string name="show_mercator_grids">Користи Меркатор уместо WGS84 или UTM</string>
+    <string name="show_mercator_grids_description">Прикажи мрежу у Меркатор km уместо WGS84 или UTM</string>
+    <string name="show_dms_grids">Користи DMS уместо степени</string>
+    <string name="show_dms_grids_description">Прикажи мрежу у степенима, минутима, секундама уместо у степенима</string>
+    <string name="show_dm_grids">Користи DM уместо степени или DMS</string>
+    <string name="show_dm_grids_description">Прикажи мрежу у степенима и минутима уместо у степенима или DMS</string>
 </resources>

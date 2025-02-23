@@ -7,34 +7,41 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import net.osmand.data.NearbyPlacePoint
+import net.osmand.Location
+import net.osmand.data.LatLon
+import net.osmand.data.ExploreTopPlacePoint
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.render.RenderingIcons
+import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.plus.utils.PicassoUtils
 import net.osmand.plus.utils.UiUtilities
+import net.osmand.plus.utils.UpdateLocationUtils
 import net.osmand.util.Algorithms
-import net.osmand.wiki.WikiImage
 
 class NearbyPlacesAdapter(
 	val app: OsmandApplication,
-	var items: List<NearbyPlacePoint>,
+	var items: List<ExploreTopPlacePoint>,
 	private var isVertical: Boolean,
 	private val onItemClickListener: NearbyItemClickListener
 ) : RecyclerView.Adapter<NearbyPlacesAdapter.NearbyViewHolder>() {
 
 	interface NearbyItemClickListener {
-		fun onNearbyItemClicked(item: NearbyPlacePoint)
+		fun onNearbyItemClicked(item: ExploreTopPlacePoint)
 	}
+
+	// Initialize the UpdateLocationViewCache
+	private val updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app)
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NearbyViewHolder {
 		val inflater = UiUtilities.getInflater(parent.context, isNightMode())
 		val view = inflater.inflate(
 			if (isVertical) R.layout.search_nearby_item_vertical else R.layout.search_nearby_item,
 			parent,
-			false)
-		return NearbyViewHolder(view)
+			false
+		)
+		return NearbyViewHolder(view, updateLocationViewCache)
 	}
 
 	private fun isNightMode(): Boolean {
@@ -43,19 +50,24 @@ class NearbyPlacesAdapter(
 
 	override fun onBindViewHolder(holder: NearbyViewHolder, position: Int) {
 		val item = items[position]
-		holder.bind(item, onItemClickListener)
+		holder.bind(item, onItemClickListener, position)
 	}
 
 	override fun getItemCount(): Int = items.size
 
-	class NearbyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+	class NearbyViewHolder(
+		itemView: View,
+		private val updateLocationViewCache: UpdateLocationUtils.UpdateLocationViewCache
+	) : RecyclerView.ViewHolder(itemView) {
 		private val imageView: ImageView = itemView.findViewById(R.id.item_image)
 		private val iconImageView: ImageView = itemView.findViewById(R.id.item_icon)
 		private val titleTextView: TextView = itemView.findViewById(R.id.item_title)
 		private val descriptionTextView: TextView? = itemView.findViewById(R.id.item_description)
 		private val itemTypeTextView: TextView = itemView.findViewById(R.id.item_type)
+		private val distanceTextView: TextView? = itemView.findViewById(R.id.distance)
+		private val arrowImageView: ImageView? = itemView.findViewById(R.id.direction)
 
-		fun bind(item: NearbyPlacePoint, onItemClickListener: NearbyItemClickListener) {
+		fun bind(item: ExploreTopPlacePoint, onItemClickListener: NearbyItemClickListener, position: Int) {
 			val app = imageView.context.applicationContext as OsmandApplication
 			val poiTypes = app.poiTypes
 			val subType = poiTypes.getPoiTypeByKey(item.poisubtype)
@@ -66,8 +78,8 @@ class NearbyPlacesAdapter(
 				uiUtilities.getRenderingIcon(
 					app,
 					subType.keyName,
-					nightMode)
-
+					nightMode
+				)
 			} else {
 				uiUtilities.getIcon(R.drawable.ic_action_info_dark, nightMode)
 			}
@@ -90,13 +102,51 @@ class NearbyPlacesAdapter(
 					}
 				})
 			}
+
+			// Add row number to the title
+			titleTextView.text = "${position + 1}. ${item.wikiTitle}"
+
 			descriptionTextView?.text = item.wikiDesc
 			descriptionTextView?.let {
 				AndroidUiHelper.updateVisibility(it, !Algorithms.isEmpty(item.wikiDesc))
 			}
-			titleTextView.text = item.wikiTitle
+
 			itemTypeTextView.text = subType.translation
+
+			// Calculate distance and show arrow
+			if (distanceTextView != null && arrowImageView != null) {
+				val distance = calculateDistance(app, item)
+				if (distance != null) {
+					distanceTextView.text = OsmAndFormatter.getFormattedDistance(distance, app)
+					distanceTextView.visibility = View.VISIBLE
+					arrowImageView.visibility = View.VISIBLE
+
+					// Update compass icon rotation
+					val latLon = LatLon(item.latitude, item.longitude)
+					UpdateLocationUtils.updateLocationView(app, updateLocationViewCache, arrowImageView, distanceTextView, latLon)
+				} else {
+					distanceTextView.visibility = View.GONE
+					arrowImageView.visibility = View.GONE
+				}
+			}
+
 			itemView.setOnClickListener { onItemClickListener.onNearbyItemClicked(item) }
+		}
+
+		private fun calculateDistance(app: OsmandApplication, item: ExploreTopPlacePoint): Float? {
+			val currentLocation = app.locationProvider?.lastKnownLocation
+			if (currentLocation != null) {
+				val results = FloatArray(1)
+				Location.distanceBetween(
+					currentLocation.latitude,
+					currentLocation.longitude,
+					item.latitude,
+					item.longitude,
+					results
+				)
+				return results[0]
+			}
+			return null
 		}
 	}
 }
