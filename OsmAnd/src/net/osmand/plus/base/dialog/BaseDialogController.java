@@ -13,19 +13,25 @@ import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
 import net.osmand.plus.base.dialog.interfaces.dialog.IDialogNightModeInfoProvider;
 import net.osmand.plus.base.dialog.interfaces.dialog.IContextDialog;
-import net.osmand.plus.settings.bottomsheets.CustomizableBottomSheet;
-import net.osmand.plus.utils.UiUtilities;
 
 public abstract class BaseDialogController implements IDialogController {
 
 	protected final OsmandApplication app;
-	protected final UiUtilities uiUtilities;
 	protected final DialogManager dialogManager;
 
 	public BaseDialogController(@NonNull OsmandApplication app) {
 		this.app = app;
-		this.uiUtilities = app.getUIUtilities();
 		this.dialogManager = app.getDialogManager();
+	}
+
+	public void registerDialog(@NonNull IDialog dialog) {
+		dialogManager.register(getProcessId(), dialog);
+	}
+
+	public void finishProcessIfNeeded(@Nullable FragmentActivity activity) {
+		if (activity != null && !activity.isChangingConfigurations()) {
+			dialogManager.unregister(getProcessId());
+		}
 	}
 
 	@NonNull

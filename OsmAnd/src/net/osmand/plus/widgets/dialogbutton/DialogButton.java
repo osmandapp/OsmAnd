@@ -36,7 +36,7 @@ public class DialogButton extends LinearLayout {
 		viewHolder.updateTitle();
 	}
 
-	public void setTitle(@Nullable String title) {
+	public void setTitle(@Nullable CharSequence title) {
 		attrs.setTitle(title);
 		viewHolder.updateTitle();
 	}

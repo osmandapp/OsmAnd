@@ -1,0 +1,115 @@
+package net.osmand.plus.configmap;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
+
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
+
+public class SelectLocationFragment extends ConfigureMapOptionFragment implements IAskRefreshDialogCompletely {
+
+	private SelectLocationController controller;
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		controller = SelectLocationController.getExistedInstance(app);
+		if (controller != null) {
+			controller.registerDialog(this);
+		} else {
+			dismiss();
+		}
+		MapActivity activity = requireMapActivity();
+		activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+			@Override
+			public void handleOnBackPressed() {
+				activity.getSupportFragmentManager().popBackStack();
+				//TODO: implement returning to previous screen if needed
+			}
+		});
+	}
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		updateApplyButton(true);
+	}
+
+	@Nullable
+	@Override
+	protected String getToolbarTitle() {
+		return controller.getDialogTitle();
+	}
+
+	@Override
+	protected void setupMainContent(@NonNull ViewGroup container) {
+		View view = inflate(R.layout.fragment_select_location, container);
+		updateContent(view);
+		container.addView(view);
+	}
+
+	@Override
+	protected void setupApplyButton(@NonNull DialogButton applyButton) {
+		super.setupApplyButton(applyButton);
+		applyButton.setTitleId(R.string.shared_string_select);
+	}
+
+	@Override
+	public void onAskRefreshDialogCompletely(@NonNull String processId) {
+		View view = getView();
+		if (view != null) {
+			updateContent(view);
+		}
+	}
+
+	private void updateContent(@NonNull View view) {
+		updateCoordinatesView(view);
+	}
+
+	private void updateCoordinatesView(@NonNull View view) {
+		TextView tvCoordinates = view.findViewById(R.id.coordinates);
+		tvCoordinates.setText(controller.getFormattedCoordinates());
+	}
+
+	@Override
+	protected void applyChanges() {
+		controller.onApplySelection();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		controller.onResume();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		controller.onPause();
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		controller.finishProcessIfNeeded(getActivity());
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			manager.beginTransaction()
+					.replace(R.id.fragmentContainer, new SelectLocationFragment(), TAG)
+					.addToBackStack(null)
+					.commitAllowingStateLoss();
+		}
+	}
+}
