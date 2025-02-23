@@ -43,7 +43,7 @@
     <string name="poi_mall">Kaubanduskeskus</string>
     <string name="poi_beverages">Joogipood</string>
     <string name="poi_butcher">Lihaturg</string>
-    <string name="poi_deli">Delikatesstoodete pood</string>
+    <string name="poi_deli">Delikatesstoitude pood</string>
     <string name="poi_farm">Talupood</string>
     <string name="poi_greengrocer">Puu- ja köögiviljapood</string>
     <string name="poi_seafood">Mereandide pood</string>
@@ -2908,9 +2908,9 @@
     <string name="poi_cuisine_steak">Praad</string>
     <string name="poi_cuisine_tapas">Tapad</string>
     <string name="poi_cuisine_gastropub">Gastropub</string>
-    <string name="poi_cuisine_heuriger">Heuriger</string>
+    <string name="poi_cuisine_heuriger">Austria hooajaline veinikõrts (heuriger)</string>
     <string name="poi_cuisine_curry">Karri</string>
-    <string name="poi_cuisine_buschenschank">Buschenschank</string>
+    <string name="poi_cuisine_buschenschank">Austria veinikõrts (buschenschank)</string>
     <string name="poi_cuisine_grill">Grill</string>
     <string name="poi_cuisine_bagel">Rõngassaiake</string>
     <string name="poi_cuisine_diner">Söökla</string>
