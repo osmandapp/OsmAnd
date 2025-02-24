@@ -2566,7 +2566,7 @@
     <string name="purchase_unlim_title">Αγορά - %1$s</string>
     <string name="wikivoyage_offline">Βικιταξίδια εκτός σύνδεσης</string>
     <string name="unlimited_downloads">Απεριόριστες λήψεις</string>
-    <string name="wikipedia_offline">Βικιπαίδεια χωρίς διαδίκτυο</string>
+    <string name="wikipedia_offline">Βικιπαίδεια χωρίς σύνδεση</string>
     <string name="unlock_all_features">Ξεκλείδωμα όλων των χαρακτηριστικών του OsmAnd</string>
     <string name="popular_destinations">Δημοφιλείς προορισμοί</string>
     <string name="paid_app">Εφαρμογή επί πληρωμή</string>
@@ -3340,7 +3340,7 @@
     <string name="track_coloring_solid">Συμπαγές</string>
     <string name="plan_route_last_edited">Τελευταία επεξεργασμένο</string>
     <string name="plan_route_import_track">Εισαγωγή ίχνους</string>
-    <string name="plan_route_open_existing_track">Ανοίξτε υφιστάμενο ίχνος</string>
+    <string name="plan_route_open_existing_track">Άνοιγμα υφιστάμενου ίχνους</string>
     <string name="plan_route_select_track_file_for_open">Επιλέξτε ένα αρχείο ίχνους για άνοιγμα.</string>
     <string name="plan_route_create_new_route">Δημιουργία νέας διαδρομής</string>
     <string name="shared_string_done">Έτοιμο</string>
@@ -4250,7 +4250,7 @@
     <string name="search_more">Αναζήτηση περισσότερων…</string>
     <string name="next_billing_date">Επόμενη ημερομηνία τιμολόγησης: %1$s</string>
     <string name="contact_support">Επικοινωνήστε με την υποστήριξη</string>
-    <string name="update_frequency">Ενημέρωση συχνότητας</string>
+    <string name="update_frequency">Συχνότητα ενημέρωσης</string>
     <string name="select_category_descr">Επιλέξτε κατηγορία ή προσθέστε μια καινούργια</string>
     <string name="delete_updates">Διαγραφή ενημερώσεων</string>
     <string name="map_widget_camera_tilt">Κλίση κάμερας</string>
