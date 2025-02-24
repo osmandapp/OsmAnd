@@ -1655,7 +1655,7 @@
     <string name="poi_material_marble">Materiaali: marmori</string>
     <string name="poi_material_steel">Materiaali: teräs</string>
     <string name="poi_material_concrete">Materiaali: betoni</string>
-    <string name="poi_impromptu_yes">Yllättäen: kyllä</string>
+    <string name="poi_impromptu_yes">Kyllä</string>
     <string name="poi_free_flying_official_yes">Virallinen: kyllä</string>
     <string name="poi_counselling_type_addiction_no">Neuvonta (riippuvuus): ei</string>
     <string name="poi_counselling_type_crisis_no">Neuvonta (kriisi): ei</string>
@@ -1902,4 +1902,22 @@
     <string name="poi_not_pt_shelter_yes">Katos (ei julkista liikennettä varten)</string>
     <string name="poi_aerialway_gondola">Gondoli</string>
     <string name="poi_ship_chandler">Laivan varustaja</string>
+    <string name="poi_surface_snow">Pinta: lumi</string>
+    <string name="poi_internet_access_no">Internet-yhteys: ei</string>
+    <string name="poi_indoor_seating_yes">Istumapaikkoja sisällä: kyllä</string>
+    <string name="poi_surface_grass_paver">Pinta: betoninen nurmikivi</string>
+    <string name="poi_surface_grass">Pinta: ruoho</string>
+    <string name="poi_surface_ground">Pinta: maa</string>
+    <string name="poi_backrest_no">Selkänoja: ei</string>
+    <string name="poi_surface_ice">Pinta: jää</string>
+    <string name="poi_impromptu_no">Ei</string>
+    <string name="poi_surface_compacted">Pinta: tiivistetty kivimurske</string>
+    <string name="poi_foot_no">Jalankulkien pääsy: ei</string>
+    <string name="poi_surface_mud">Pinta: muta</string>
+    <string name="poi_surface_pebblestone">Pinta: pikkukivi</string>
+    <string name="poi_foot_yes">Jalankulkien pääsy: kyllä</string>
+    <string name="poi_bicycle_yes">Polkupyörä: kyllä</string>
+    <string name="poi_bicycle_no">Polkupyörä: ei</string>
+    <string name="poi_surface_artificial_turf">Tekonurmi</string>
+    <string name="poi_backcountry_no">Ei</string>
 </resources>
