@@ -5704,7 +5704,7 @@
     <string name="show_utm_grids">Bruk UTM istedenfor WGS84</string>
     <string name="show_grids_description">Tillat visning av rutenett over kartet</string>
     <string name="shared_string_road_exit">Avkjøring</string>
-    <string name="show_utm_grids_description">Vis rutenett i UTM-meter istedenfor WGS84-grader</string>
+    <string name="show_utm_grids_description">Vis rutenett i UTM-meter istedenfor WGS84</string>
     <string name="original_icon_description">Hvert punkt beholder sitt eget ikon.</string>
     <string name="map_widget_route_information_desc">Viser beregnet ankomsttid, gjenværende reisetid og distanse for den aktuelle navigeringsruten.</string>
     <string name="save_favorite_default_appearance">Bruke endringer på de eksisterende punkter i mappen eller kun på nye?</string>
@@ -5737,4 +5737,5 @@
     <string name="special_routing_cpp">Spesiell rutingstype</string>
     <string name="relief_3d_download_description">Ytterligere kart er nødvendig for å vise terreng på kartet.</string>
     <string name="obd_fuel_type_diesel">Diesel</string>
+    <string name="show_mercator_grids">Bruk Mercator istedenfor WGS84 eller UTM</string>
 </resources>

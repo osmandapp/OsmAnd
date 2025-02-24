@@ -5930,4 +5930,10 @@
     <string name="no_places_available">Нет доступных мест</string>
     <string name="no_photo_for_location_desc">Пока что в это местоположение не добавлено ни одной пользовательской фотографии</string>
     <string name="shared_string_road_exit">Съезд</string>
+    <string name="show_dms_grids">Использовать DMS вместо десятичных градусов</string>
+    <string name="show_dms_grids_description">Показывать сетку в градусах, минутах, секундах вместо десятичных градусов</string>
+    <string name="show_dm_grids_description">Показывать сетку в градусах и минутах вместо десятичных градусов или DMS</string>
+    <string name="show_dm_grids">Использовать DM вместо десятичных градусов или DMS</string>
+    <string name="show_mercator_grids">Использовать Меркатор вместо WGS84 или UTM</string>
+    <string name="show_mercator_grids_description">Показывать сетку в километрах Меркатор вместо WGS84 или UTM</string>
 </resources>

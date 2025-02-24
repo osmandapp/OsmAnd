@@ -24,7 +24,7 @@ import net.osmand.core.jni.TextRasterizer;
 import net.osmand.core.jni.TileId;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.core.jni.interface_MapTiledCollectionProvider;
-import net.osmand.data.NearbyPlacePoint;
+import net.osmand.data.ExploreTopPlacePoint;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -32,7 +32,6 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
-import net.osmand.plus.views.PointImageUtils;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -41,9 +40,9 @@ import org.apache.commons.logging.LogFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvider {
+public class ExploreTopPlacesTileProvider extends interface_MapTiledCollectionProvider {
 
-	private static final Log log = LogFactory.getLog(NearbyPlacesTileProvider.class);
+	private static final Log log = LogFactory.getLog(ExploreTopPlacesTileProvider.class);
 	private final QListPointI points31 = new QListPointI();
 	private final List<MapLayerData> mapLayerDataList = new ArrayList<>();
 	private Bitmap cachedSmallBitmap;
@@ -78,7 +77,7 @@ public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvid
 	}
 
 
-	public NearbyPlacesTileProvider(@NonNull OsmandApplication context, int baseOrder, float density, long selectedObjectId) {
+	public ExploreTopPlacesTileProvider(@NonNull OsmandApplication context, int baseOrder, float density, long selectedObjectId) {
 		this.app = context;
 		this.baseOrder = baseOrder;
 		this.density = density;
@@ -86,14 +85,14 @@ public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvid
 		this.selectedObjectId = selectedObjectId;
 	}
 
-	public void drawSymbols(@NonNull MapRendererView mapRenderer) {
+	public void initProvider(@NonNull MapRendererView mapRenderer) {
 		if (providerInstance == null) {
 			providerInstance = instantiateProxy();
 		}
 		mapRenderer.addSymbolsProvider(providerInstance);
 	}
 
-	public void clearSymbols(@NonNull MapRendererView mapRenderer) {
+	public void deleteProvider(@NonNull MapRendererView mapRenderer) {
 		if (providerInstance != null) {
 			mapRenderer.removeSymbolsProvider(providerInstance);
 			providerInstance = null;
@@ -142,7 +141,7 @@ public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvid
 
 	@Override
 	public SingleSkImage getImageBitmap(int index, boolean isFullSize) {
-		NearbyPlacesTileProvider.MapLayerData data = index < mapLayerDataList.size() ? mapLayerDataList.get(index) : null;
+		ExploreTopPlacesTileProvider.MapLayerData data = index < mapLayerDataList.size() ? mapLayerDataList.get(index) : null;
 		if (data == null) {
 			return SwigUtilities.nullSkImage();
 		}
@@ -199,7 +198,7 @@ public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvid
 		return offset;
 	}
 
-	public void addToData(@NonNull NearbyPlacePoint nearbyPlacePoint) throws IllegalStateException {
+	public void addToData(@NonNull ExploreTopPlacePoint nearbyPlacePoint) throws IllegalStateException {
 		if (providerInstance != null) {
 			throw new IllegalStateException("Provider already instantiated. Data cannot be modified at this stage.");
 		}
@@ -210,9 +209,9 @@ public class NearbyPlacesTileProvider extends interface_MapTiledCollectionProvid
 	}
 
 	private static class MapLayerData {
-		NearbyPlacePoint nearbyPlace;
+		ExploreTopPlacePoint nearbyPlace;
 
-		MapLayerData(@NonNull NearbyPlacePoint nearbyPlace) {
+		MapLayerData(@NonNull ExploreTopPlacePoint nearbyPlace) {
 			this.nearbyPlace = nearbyPlace;
 		}
 	}
