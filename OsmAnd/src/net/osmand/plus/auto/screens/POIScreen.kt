@@ -57,8 +57,12 @@ class POIScreen(
             templateBuilder.setLoading(false)
             templateBuilder.setItemList(itemList)
         }
+        var title = QuickSearchListItem.getName(app, categoryResult);
+        if (Algorithms.isEmpty(title)) {
+            title = QuickSearchListItem.getTypeName(app, categoryResult);
+        }
         return templateBuilder
-            .setTitle(QuickSearchListItem.getName(app, categoryResult))
+            .setTitle(title)
             .setActionStrip(ActionStrip.Builder()
                 .addAction(createSearchAction())
                 .build())

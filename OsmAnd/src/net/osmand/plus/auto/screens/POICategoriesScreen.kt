@@ -16,6 +16,7 @@ import net.osmand.plus.search.listitems.QuickSearchListItem
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI
 import net.osmand.search.core.SearchResult
+import net.osmand.util.Algorithms
 import org.apache.commons.logging.Log
 import java.io.IOException
 
@@ -64,7 +65,10 @@ class POICategoriesScreen(
 		val limitedCategories = categories.subList(0, categoriesSize.coerceAtMost(contentLimit - 1))
 
 		for (result in limitedCategories) {
-			val title = QuickSearchListItem.getName(app, result);
+			var title = QuickSearchListItem.getName(app, result);
+			if (Algorithms.isEmpty(title)) {
+				title = QuickSearchListItem.getTypeName(app, result);
+			}
 			var groupIcon = QuickSearchListItem.getIcon(app, result)
 			if (groupIcon == null) {
 				groupIcon = app.uiUtilities.getIcon(R.drawable.mx_special_custom_category)
