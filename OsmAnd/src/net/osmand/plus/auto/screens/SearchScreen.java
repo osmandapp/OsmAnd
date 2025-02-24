@@ -26,7 +26,7 @@ import net.osmand.plus.auto.SearchHelper;
 import net.osmand.plus.auto.SearchHelper.SearchHelperListener;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routing.RoutingHelper;
@@ -301,8 +301,8 @@ public final class SearchScreen extends BaseSearchScreen implements DefaultLifec
 					!description.getName().equals(app.getString(R.string.no_address_found))) {
 				name = description.getName();
 			} else {
-				name = PointDescription.getLocationName(app, targetPoint.point.getLatitude(),
-						targetPoint.point.getLongitude(), true).replace('\n', ' ');
+				name = PointDescription.getLocationName(app, targetPoint.getLatLon().getLatitude(),
+						targetPoint.getLatLon().getLongitude(), true).replace('\n', ' ');
 			}
 		}
 		return name;
