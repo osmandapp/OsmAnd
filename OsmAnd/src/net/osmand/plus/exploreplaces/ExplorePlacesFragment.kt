@@ -10,9 +10,13 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import net.osmand.Location
 import net.osmand.PlatformUtil
 import net.osmand.data.ExploreTopPlacePoint
 import net.osmand.data.QuadRect
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener
+import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseOsmAndFragment
@@ -22,12 +26,15 @@ import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import org.apache.commons.logging.Log
 
-class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyItemClickListener {
+class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyItemClickListener, OsmAndLocationListener, OsmAndCompassListener {
+
 	private lateinit var visiblePlacesRect: QuadRect
 	private val log: Log = PlatformUtil.getLog(
 		ExplorePlacesFragment::class.java)
 
 	private lateinit var verticalNearbyAdapter: NearbyPlacesAdapter
+	private var location: Location? = null
+	private var heading: Float? = null
 
 	override fun getContentStatusBarNightMode(): Boolean {
 		return nightMode
@@ -37,6 +44,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		inflater: LayoutInflater,
 		container: ViewGroup?,
 		savedInstanceState: Bundle?): View? {
+		location = app.locationProvider.lastKnownLocation
 		updateNightMode()
 		return themedInflater.inflate(R.layout.fragment_nearby_places, container, false)
 	}
@@ -78,8 +86,31 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		}
 	}
 
-	private fun setupShowAll(view: View) {
+	override fun onResume() {
+		super.onResume()
+		val app = requireActivity().application as OsmandApplication
+		app.locationProvider.addLocationListener(this)
+		app.locationProvider.addCompassListener(this)
+	}
 
+	override fun onPause() {
+		super.onPause()
+		val app = requireActivity().application as OsmandApplication
+		app.locationProvider.removeLocationListener(this)
+		app.locationProvider.removeCompassListener(this)
+	}
+
+	override fun updateLocation(location: Location?) {
+		this.location = location
+		verticalNearbyAdapter.updateLocation(location, heading)
+	}
+
+	override fun updateCompassValue(value: Float) {
+		this.heading = value
+		verticalNearbyAdapter.updateLocation(location, heading)
+	}
+
+	private fun setupShowAll(view: View) {
 		view.findViewById<ImageView>(R.id.location_icon)
 			.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_marker_dark, nightMode))
 
@@ -114,7 +145,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	private fun setupVerticalNearbyList(view: View) {
 		val verticalNearbyList = view.findViewById<RecyclerView>(R.id.vertical_nearby_list)
 		val nearbyData = app.explorePlacesProvider.getDataCollection(visiblePlacesRect)
-		verticalNearbyAdapter = NearbyPlacesAdapter(app, nearbyData, true, this)
+		verticalNearbyAdapter = NearbyPlacesAdapter(requireActivity(), nearbyData, true, this)
 		verticalNearbyList.layoutManager = LinearLayoutManager(requireContext())
 		verticalNearbyList.adapter = verticalNearbyAdapter
 		verticalNearbyAdapter.notifyDataSetChanged()
@@ -146,7 +177,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 					.commitAllowingStateLoss()
 			}
 		}
-
 	}
 
 	override fun onNearbyItemClicked(item: ExploreTopPlacePoint) {

@@ -82,7 +82,7 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvid
 		nearByList.setLayoutManager(layoutManager);
 		nearByList.setItemAnimator(null);
 		visiblePlacesRect = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getLatLonBounds();
-		adapter = new NearbyPlacesAdapter(app, app.getExplorePlacesProvider().getDataCollection(visiblePlacesRect, DISPLAY_ITEMS), false, clickListener);
+		adapter = new NearbyPlacesAdapter(mapActivity, app.getExplorePlacesProvider().getDataCollection(visiblePlacesRect, DISPLAY_ITEMS), false, clickListener);
 		nearByList.setAdapter(adapter);
 	}
 
@@ -99,7 +99,7 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvid
 	private NearbyPlacesAdapter getNearbyAdapter() {
 		if (adapter == null) {
 			List<ExploreTopPlacePoint> nearbyData = app.getExplorePlacesProvider().getDataCollection(visiblePlacesRect, DISPLAY_ITEMS);
-			adapter = new NearbyPlacesAdapter(app, nearbyData, false, clickListener);
+			adapter = new NearbyPlacesAdapter(mapActivity, nearbyData, false, clickListener);
 		}
 		return adapter;
 	}
