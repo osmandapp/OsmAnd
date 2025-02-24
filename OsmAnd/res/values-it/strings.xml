@@ -5716,7 +5716,7 @@
     <string name="ais_cpa_warning_time_description">Se il tempo impiegato per raggiungere il PAV con un\'altra imbarcazione è inferiore a questo valore, l\'imbarcazione viene contrassegnata in rosso.</string>
     <string name="show_grids_description">Permette di mostrare una griglia sulla mappa</string>
     <string name="show_utm_grids">Usa UTM invece di WGS84</string>
-    <string name="show_utm_grids_description">Mostra la griglia in metri UTM invece che in gradi WGS84</string>
+    <string name="show_utm_grids_description">Mostra la griglia in metri UTM invece che in WGS84</string>
     <string name="map_grid">Griglie di mappa</string>
     <string name="show_grids">Mostra griglia mappa</string>
     <string name="no_photo_for_location_desc">Ancora nessuna foto è stata aggiunta dagli utenti a questo luogo</string>
