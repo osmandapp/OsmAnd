@@ -5662,7 +5662,7 @@
     <string name="ais_port_nmea_server_description">Одредите број ТЦП прикључника извора података НМЕА</string>
     <string name="ais_load_data">Учитајте податке АИС из датотеке</string>
     <string name="ais_address_settings">Подешавања адресе ИП</string>
-    <string name="ais_address_settings_description">"Изаберите правилник НМЕА  (УДП/ТЦП) и одредите адресе"</string>
+    <string name="ais_address_settings_description">Изаберите правилник НМЕА (УДП/ТЦП) и одредите адресе</string>
     <string name="ais_nmea_protocol">Правилник за пријем података НМЕА</string>
     <string name="ais_nmea_protocol_description">Изаберите правилник за пријем података НМЕА</string>
     <string name="ais_address_nmea_server">ИП адреса НМЕА извора података</string>
