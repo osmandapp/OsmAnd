@@ -46,6 +46,8 @@
 			android:maxLines="1"
 			android:ellipsize="end"
 			tools:text="Monument" />
+
+
 	</LinearLayout>
 
 </LinearLayout>

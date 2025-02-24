@@ -48,7 +48,7 @@
 					android:id="@+id/item_icon"
 					android:layout_width="16dp"
 					android:layout_height="16dp"
-					android:layout_gravity="center_vertical|top"
+					android:layout_gravity="center_vertical"
 					android:layout_marginEnd="6dp" />
 
 				<TextView
@@ -58,6 +58,33 @@
 					android:textColor="?android:textColorSecondary"
 					android:textSize="14sp"
 					tools:text="Monument" />
+
+				<LinearLayout
+					android:id="@+id/compass_layout"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:gravity="bottom|right"
+					android:orientation="horizontal">
+
+					<androidx.appcompat.widget.AppCompatImageView
+						android:id="@+id/direction"
+						android:layout_width="@dimen/directionIconSize"
+						android:layout_height="@dimen/directionIconSize"
+						android:layout_marginTop="1sp"
+						android:layout_gravity="center_vertical"/>
+
+					<TextView
+						android:id="@+id/distance"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_vertical"
+						android:layout_marginLeft="2dp"
+						android:textColor="?android:textColorSecondary"
+						android:textSize="@dimen/default_sub_text_size"
+						tools:text="100500 km"
+						android:layout_marginStart="2dp" />
+
+				</LinearLayout>
 			</LinearLayout>
 
 		</LinearLayout>

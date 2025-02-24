@@ -5725,4 +5725,14 @@
     <string name="hmd_promo_description">Accesso gratuito alle funzionalità, inclusi scaricamenti mappe illimitati, rilievi 3D, ecc. per %1$s mese</string>
     <string name="hmd_promo">Promozione HMD per%1$s mesi</string>
     <string name="apply_to_all_points">Applica a tutti i punti</string>
+    <string name="show_mercator_grids">Usa Mercator invece di WGS84 o UTM</string>
+    <string name="show_mercator_grids_description">Mostra la griglia in km di Mercatore invece che in WGS84 o UTM</string>
+    <string name="show_dms_grids">Usa DMS invece di gradi</string>
+    <string name="show_dms_grids_description">Mostra la griglia in gradi, minuti, secondi invece che gradi</string>
+    <string name="show_dm_grids">Usa DM invece di gradi o DMS</string>
+    <string name="original_color_description">Ogni punto manterrebbe il proprio colore.</string>
+    <string name="original_shape_description">Ogni punto manterrebbe la propria forma.</string>
+    <string name="original_icon_description">Ogni punto manterrebbe la propria icona.</string>
+    <string name="show_dm_grids_description">Mostra la griglia in gradi e minuti invece che in gradi o DMS</string>
+    <string name="save_favorite_default_appearance">Applicare le modifiche ai punti esistenti nella cartella o solo a quelli nuovi?</string>
 </resources>

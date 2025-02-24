@@ -15,7 +15,6 @@ import androidx.car.app.model.Row
 import androidx.car.app.model.Template
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
-import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import net.osmand.data.Amenity
@@ -23,8 +22,7 @@ import net.osmand.data.LatLon
 import net.osmand.data.QuadRect
 import net.osmand.plus.R
 import net.osmand.plus.auto.TripUtils
-import net.osmand.plus.poi.PoiUIFilter
-import net.osmand.plus.render.RenderingIcons
+import net.osmand.plus.search.listitems.QuickSearchListItem
 import net.osmand.plus.settings.enums.CompassMode
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.views.layers.base.OsmandMapLayer
@@ -38,7 +36,7 @@ import net.osmand.util.MapUtils
 class POIScreen(
     carContext: CarContext,
     private val settingsAction: Action,
-    private val group: PoiUIFilter
+    private val categoryResult: SearchResult
 ) : BaseSearchScreen(carContext), LifecycleObserver {
     private lateinit var itemList: ItemList
     private var searchRadius = 0.0
@@ -60,7 +58,7 @@ class POIScreen(
             templateBuilder.setItemList(itemList)
         }
         return templateBuilder
-            .setTitle(group.name)
+            .setTitle(QuickSearchListItem.getName(app, categoryResult))
             .setActionStrip(ActionStrip.Builder()
                 .addAction(createSearchAction())
                 .build())
@@ -117,7 +115,7 @@ class POIScreen(
                     Algorithms.extendRectToContainPoint(mapRect, latLon.longitude, latLon.latitude)
                 }
                 val title = point.localeName
-                var groupIcon = RenderingIcons.getBigIcon(app, group.iconId)
+                var groupIcon = QuickSearchListItem.getIcon(app, categoryResult)
                 if (groupIcon == null) {
                     groupIcon = app.getDrawable(R.drawable.mx_special_custom_category)
                 }
@@ -151,14 +149,8 @@ class POIScreen(
     }
 
     private fun loadPOI() {
-        val objectLocalizedName = group.name;
-        val sr = SearchResult()
-        sr.localeName = objectLocalizedName
-        sr.`object` = group
-        sr.priority = SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY.toDouble()
-        sr.priorityDistance = searchRadius
-        sr.objectType = ObjectType.POI_TYPE
-        searchHelper.completeQueryWithObject(sr)
+        categoryResult.priorityDistance = searchRadius
+        searchHelper.completeQueryWithObject(categoryResult)
         loading = true
     }
 
