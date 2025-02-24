@@ -4669,4 +4669,14 @@
     <string name="poi_healthcare_speciality_diabetology">طب مرض السكر</string>
     <string name="poi_healthcare_speciality_neonatology">طب المواليد</string>
     <string name="poi_healthcare_speciality_psychology">علم نفس</string>
+    <string name="poi_indoor_seating_yes">الجلوس في الداخل: نعم</string>
+    <string name="poi_music_venue">قاعة موسيقى</string>
+    <string name="poi_shop_general">متجر عام</string>
+    <string name="poi_indoor_seating_no">لا جلوس في للداخل</string>
+    <string name="poi_indoor_seating_bar_table">الجلوس في الداخل: طاولة بار</string>
+    <string name="poi_cuisine_fish">سمك</string>
+    <string name="poi_us_maps_recreation_area_activity_other_activities">أنشطة أخرى</string>
+    <string name="poi_photo_booth">كابينة تصوير</string>
+    <string name="poi_emergency_bay">خليج طوارئ</string>
+    <string name="poi_cafe_filter">مقهى</string>
 </resources>
