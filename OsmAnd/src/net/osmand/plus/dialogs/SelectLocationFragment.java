@@ -1,19 +1,25 @@
-package net.osmand.plus.configmap;
+package net.osmand.plus.dialogs;
 
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
+import net.osmand.plus.configmap.ConfigureMapOptionFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 public class SelectLocationFragment extends ConfigureMapOptionFragment implements IAskRefreshDialogCompletely {
@@ -43,6 +49,25 @@ public class SelectLocationFragment extends ConfigureMapOptionFragment implement
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		updateApplyButton(true);
+	}
+
+	@Override
+	protected void setupToolBar(@NonNull View view) {
+		super.setupToolBar(view);
+		View appbar = view.findViewById(R.id.appbar);
+
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
+		toolbar.setBackgroundColor(ColorUtilities.getAppBarColor(app, nightMode));
+
+		int contentColor = ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode);
+		TextView title = appbar.findViewById(R.id.title);
+		title.setTextColor(contentColor);
+
+		ImageView backButton = appbar.findViewById(R.id.back_button);
+		backButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_close, contentColor));
+
+		ImageButton resetButton = appbar.findViewById(R.id.reset_button);
+		resetButton.setVisibility(View.GONE);
 	}
 
 	@Nullable
@@ -84,6 +109,12 @@ public class SelectLocationFragment extends ConfigureMapOptionFragment implement
 	@Override
 	protected void applyChanges() {
 		controller.onApplySelection();
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		AndroidUiHelper.setStatusBarContentColor(getView(), !nightMode);
+		return ColorUtilities.getAppBarColorId(nightMode);
 	}
 
 	@Override

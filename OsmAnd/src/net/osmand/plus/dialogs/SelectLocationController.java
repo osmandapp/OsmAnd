@@ -1,4 +1,4 @@
-package net.osmand.plus.configmap;
+package net.osmand.plus.dialogs;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,17 +19,14 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
 
-//TODO: improve packaging and move this class to more relevant package
 public class SelectLocationController extends BaseDialogController implements IMapLocationListener {
 
 	private static final String PROCESS_ID = "select_location_on_map";
 
-	private final OsmandSettings settings;
 	private OnResultCallback<LatLon> onResultCallback;
 
 	public SelectLocationController(@NonNull OsmandApplication app) {
 		super(app);
-		settings = app.getSettings();
 	}
 
 	@NonNull
@@ -51,7 +48,7 @@ public class SelectLocationController extends BaseDialogController implements IM
 	@NonNull
 	public String getFormattedCoordinates() {
 		LatLon latLon = getMapCenterCoordinates(app);
-		int format = settings.COORDINATES_FORMAT.get();
+		int format = app.getSettings().COORDINATES_FORMAT.get();
 		return OsmAndFormatter.getFormattedCoordinates(latLon.getLatitude(), latLon.getLongitude(), format);
 	}
 
