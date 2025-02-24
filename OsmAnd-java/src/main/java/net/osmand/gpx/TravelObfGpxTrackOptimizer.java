@@ -9,18 +9,19 @@ import java.util.*;
 
 // Human-based version of OverlappedSegmentsMergerDS / OverlappedSegmentsMergerGPT
 
-// TODO implement deduplication that started only from the edges of a segment (OSM5802961 bug)
+// TODO avoid static methods
+// TODO think about PRECISION_DUPES / PRECISION_TO_MERGE / skipLeadingPoint if (llKey1 == llKey2)
 
-public class GpxOptimizer {
+public class TravelObfGpxTrackOptimizer {
 	private static final double EDGE_POINTS_MAX_ORTHOGONAL_DISTANCE = 10.0;
 	private static final double PRECISION = KMapUtils.DEFAULT_LATLON_PRECISION;
 
-	public static Track deduplicateAndJoinTravelGpxSegments(Track track) {
+	public static Track mergeOverlappedSegmentsAtEdges(Track track) {
 		Set<String> duplicates = new HashSet<>();
 		findDisplacedEdgePointsToDeduplicate(track, duplicates);
 
 		List<TrkSegment> cleanedSegments = new ArrayList<>();
-		deduplicatePointsToCleanedSegments(track, duplicates, cleanedSegments);
+		deduplicatePointsFromEdges(track, duplicates, cleanedSegments);
 
 		List<TrkSegment> joinedSegments = new ArrayList<>();
 		joinCleanedSegments(cleanedSegments, joinedSegments);
@@ -69,25 +70,40 @@ public class GpxOptimizer {
 		}
 	}
 
-	private static void deduplicatePointsToCleanedSegments(Track track, Set<String> duplicates,
-	                                                       List<TrkSegment> cleanedSegments) {
+	private static void deduplicatePointsFromEdges(Track track, Set<String> duplicates,
+	                                               List<TrkSegment> cleanedSegments) {
 		for (TrkSegment seg : track.getSegments()) {
 			TrkSegment clean = new TrkSegment();
 			List<WptPt> points = seg.getPoints();
 			if (!points.isEmpty()) {
 				Set<String> nextDuplicates = new HashSet<>();
-				for (int i = 0; i < points.size(); i++) {
-					WptPt p = points.get(i);
-					String key = llKey(p);
-					if (!duplicates.contains(key) || isEdgePointOfUniqueSegment(i, points, duplicates)) {
-						if (!isDisplacedEdgePoint(i, points, duplicates)) {
-							clean.getPoints().add(p);
-						}
-						if (i != 0 && i != points.size() - 1) {
-							nextDuplicates.add(key);
-						}
+
+				// edges [0, -1] must not be considered as future duplicates
+				for (int i = 1; i < points.size() - 1; i++) {
+					String key = llKey(points.get(i));
+					nextDuplicates.add(key);
+				}
+
+				int fromIndex = 0, toIndex = points.size() - 1; // inclusive indexes
+				fromIndex += hasDisplacedStartPoint(points, duplicates) ? 1 : 0;
+				toIndex -= hasDisplacedEndPoint(points, duplicates) ? 1 : 0;
+
+				if (hasTwoDuplicatesForward(fromIndex, toIndex, points, duplicates)) {
+					while (fromIndex <= toIndex && duplicates.contains(llKey(points.get(fromIndex)))) {
+						fromIndex++;
 					}
 				}
+
+				if (hasTwoDuplicatesBackward(fromIndex, toIndex, points, duplicates)) {
+					while (toIndex >= fromIndex && duplicates.contains(llKey(points.get(toIndex)))) {
+						toIndex--;
+					}
+				}
+
+				if (fromIndex < toIndex) {
+					clean.getPoints().addAll(points.subList(fromIndex, toIndex + 1));
+				}
+
 				duplicates.addAll(nextDuplicates);
 			}
 			if (!clean.getPoints().isEmpty()) {
@@ -96,15 +112,24 @@ public class GpxOptimizer {
 		}
 	}
 
-	private static boolean isDisplacedEdgePoint(int i, List<WptPt> points, Set<String> duplicates) {
-		// fast fallback method if findDisplacedEdgePointsToDeduplicate has failed
-		return (i == 0 && points.size() > 1 && duplicates.contains(llKey(points.get(i + 1))))
-				|| (i == points.size() - 1 && points.size() > 1 && duplicates.contains(llKey(points.get(i - 1))));
+	private static boolean hasTwoDuplicatesForward(int from, int to, List<WptPt> points, Set<String> duplicates) {
+		return from < to
+				&& duplicates.contains(llKey(points.get(from)))
+				&& duplicates.contains(llKey(points.get(from + 1)));
 	}
 
-	private static boolean isEdgePointOfUniqueSegment(int i, List<WptPt> points, Set<String> duplicates) {
-		return (i == 0 && points.size() > 1 && !duplicates.contains(llKey(points.get(i + 1))))
-				|| (i == points.size() - 1 && points.size() > 1 && !duplicates.contains(llKey(points.get(i - 1))));
+	private static boolean hasTwoDuplicatesBackward(int from, int to, List<WptPt> points, Set<String> duplicates) {
+		return from < to
+				&& duplicates.contains(llKey(points.get(to)))
+				&& duplicates.contains(llKey(points.get(to - 1)));
+	}
+
+	private static boolean hasDisplacedStartPoint(List<WptPt> points, Set<String> duplicates) {
+		return points.size() > 1 && duplicates.contains(llKey(points.get(1)));
+	}
+
+	private static boolean hasDisplacedEndPoint(List<WptPt> points, Set<String> duplicates) {
+		return points.size() > 1 && duplicates.contains(llKey(points.get(points.size() - 2)));
 	}
 
 	private static void joinCleanedSegments(List<TrkSegment> segmentsToJoin, List<TrkSegment> joinedSegments) {

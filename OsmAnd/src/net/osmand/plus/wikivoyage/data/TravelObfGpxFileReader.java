@@ -33,7 +33,7 @@ import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.HeightDataLoader;
 import net.osmand.data.Amenity;
-import net.osmand.gpx.GpxOptimizer;
+import net.osmand.gpx.TravelObfGpxTrackOptimizer;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseLoadAsyncTask;
@@ -183,7 +183,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             gpxFile.setTracks(new ArrayList<>());
 
 //            gpxFile.getTracks().add(track);
-            gpxFile.getTracks().add(GpxOptimizer.deduplicateAndJoinTravelGpxSegments(track));
+            gpxFile.getTracks().add(TravelObfGpxTrackOptimizer.mergeOverlappedSegmentsAtEdges(track));
 //            gpxFile.getTracks().add(OverlappedSegmentsMergerDS.mergeSegmentsWithOverlapHandling(track));
 //            gpxFile.getTracks().add(OverlappedSegmentsMergerGPT.mergeSegmentsWithOverlapHandling(track));
 
