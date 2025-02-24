@@ -9,12 +9,11 @@ import java.util.*;
 
 // Human-based version of OverlappedSegmentsMergerDS / OverlappedSegmentsMergerGPT
 
-// TODO avoid static methods
-// TODO think about PRECISION_DUPES / PRECISION_TO_MERGE / skipLeadingPoint if (llKey1 == llKey2)
-
 public class TravelObfGpxTrackOptimizer {
 	private static final double EDGE_POINTS_MAX_ORTHOGONAL_DISTANCE = 10.0;
-	private static final double PRECISION = KMapUtils.DEFAULT_LATLON_PRECISION;
+	private static final double PRECISION_DUPES = KMapUtils.DEFAULT_LATLON_PRECISION;
+	private static final double PRECISION_EQUAL = KMapUtils.DEFAULT_LATLON_PRECISION; // ~1 meter
+	private static final double PRECISION_CLOSE = KMapUtils.DEFAULT_LATLON_PRECISION * 50; // ~50 meters
 
 	public static Track mergeOverlappedSegmentsAtEdges(Track track) {
 		Set<String> duplicates = new HashSet<>();
@@ -29,10 +28,6 @@ public class TravelObfGpxTrackOptimizer {
 		Track joinedTrack = new Track();
 		joinedTrack.setSegments(joinedSegments);
 		return joinedTrack;
-	}
-
-	private static String llKey(WptPt edge) {
-		return (int) (edge.getLatitude() / PRECISION) + "," + (int) (edge.getLongitude() / PRECISION); // String is fast
 	}
 
 	private static void findDisplacedEdgePointsToDeduplicate(Track track, Set<String> duplicates) {
@@ -174,11 +169,14 @@ public class TravelObfGpxTrackOptimizer {
 		if (reverse) {
 			Collections.reverse(points);
 		}
-		if (!result.isEmpty() && !points.isEmpty()) {
-			List<WptPt> skipLeadingPoint = points.subList(insert ? 0 : 1, points.size() - (insert ? 1 : 0));
-			result.addAll(insert ? 0 : result.size(), skipLeadingPoint); // avoid duplicate point at joints
+		if (insert) {
+			boolean skipTrailingPoint = !result.isEmpty() && !points.isEmpty()
+					&& equalWptPts(points.get(points.size() - 1), result.get(0));
+			result.addAll(0, points.subList(0, points.size() - (skipTrailingPoint ? 1 : 0))); // insert
 		} else {
-			result.addAll(insert ? 0 : result.size(), points); // first addition to the result
+			boolean skipLeadingPoint = !result.isEmpty() && !points.isEmpty()
+					&& equalWptPts(points.get(0), result.get(result.size() - 1));
+			result.addAll(result.size(), points.subList(skipLeadingPoint ? 1 : 0, points.size())); // append
 		}
 	}
 
@@ -196,14 +194,19 @@ public class TravelObfGpxTrackOptimizer {
 		WptPt firstCandidate = candidate.getPoints().get(0);
 		WptPt lastCandidate = candidate.getPoints().get(candidate.getPoints().size() - 1);
 
-		if (equalWptPt(lastPoint, firstCandidate)) {
-			addSegmentToResult(result, false, candidate, false); // nodes + Candidate
-		} else if (equalWptPt(lastPoint, lastCandidate)) {
-			addSegmentToResult(result, false, candidate, true); // nodes + etadidnaC
-		} else if (equalWptPt(firstPoint, firstCandidate)) {
-			addSegmentToResult(result, true, candidate, true); // etadidnaC + nodes
-		} else if (equalWptPt(firstPoint, lastCandidate)) {
-			addSegmentToResult(result, true, candidate, false); // Candidate + nodes
+		boolean avoidClosedLoop = (result.size() > 1 && equalWptPts(firstPoint, lastPoint))
+				|| (candidate.getPoints().size() > 1 && equalWptPts(firstCandidate, lastCandidate));
+
+		if (avoidClosedLoop) {
+			return false;
+		} else if (closeWptPts(lastPoint, firstCandidate)) {
+			addSegmentToResult(result, false, candidate, false); // result + Candidate
+		} else if (closeWptPts(lastPoint, lastCandidate)) {
+			addSegmentToResult(result, false, candidate, true); // result + etadidnaC
+		} else if (closeWptPts(firstPoint, firstCandidate)) {
+			addSegmentToResult(result, true, candidate, true); // etadidnaC + result
+		} else if (closeWptPts(firstPoint, lastCandidate)) {
+			addSegmentToResult(result, true, candidate, false); // Candidate + result
 		} else {
 			return false;
 		}
@@ -211,8 +214,17 @@ public class TravelObfGpxTrackOptimizer {
 		return true;
 	}
 
-	private static boolean equalWptPt(WptPt p1, WptPt p2) {
-		return KMapUtils.INSTANCE.
-				areLatLonEqual(p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude(), PRECISION);
+	private static boolean equalWptPts(WptPt p1, WptPt p2) {
+		return KMapUtils.INSTANCE.areLatLonEqual(
+				p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude(), PRECISION_EQUAL);
+	}
+
+	private static boolean closeWptPts(WptPt p1, WptPt p2) {
+		return KMapUtils.INSTANCE.areLatLonEqual(
+				p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude(), PRECISION_CLOSE);
+	}
+
+	private static String llKey(WptPt edge) {
+		return (int) (edge.getLatitude() / PRECISION_DUPES) + "," + (int) (edge.getLongitude() / PRECISION_DUPES);
 	}
 }
