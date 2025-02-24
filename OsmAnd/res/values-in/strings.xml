@@ -6091,9 +6091,23 @@
     <string name="shared_string_default_view">Tampilan bawaan</string>
     <string name="show_utm_grids">Gunakan UTM daripada WGS84</string>
     <string name="map_grid">Kisi peta</string>
-    <string name="show_utm_grids_description">Tampilkan kisi dalam meter UTM daripada derajat WGS84</string>
+    <string name="show_utm_grids_description">Tampilkan kisi dalam meter UTM daripada WGS84</string>
     <string name="show_grids_description">Perbolehkan menampilkan kisi pada peta</string>
     <string name="show_grids">Tampilkan kisi peta</string>
     <string name="no_places_available">Tidak ada tempat yang tersedia</string>
     <string name="no_photo_for_location_desc">Belum ada foto pengguna yang ditambahkan ke tempat ini</string>
+    <string name="show_mercator_grids">Gunakan Mercator daripada WGS84 atau UTM</string>
+    <string name="show_mercator_grids_description">Tampilkan kisi dalam km Mercator daripada WGS84 atau UTM</string>
+    <string name="show_dms_grids_description">Tampilkan kisi dalam derajat, menit, detik daripada derajat</string>
+    <string name="show_dm_grids">Gunakan DM daripada derajat atau DMS</string>
+    <string name="show_dm_grids_description">Tampilkan kisi dalam derajat dan menit daripada derajat atau DMS</string>
+    <string name="original_color_description">Setiap titik menyimpan warnanya sendiri.</string>
+    <string name="original_icon_description">Setiap titik menyimpan ikonnya sendiri.</string>
+    <string name="apply_to_all_points">Tetapkan ke semua titik</string>
+    <string name="original_shape_description">Setiap titik menyimpan bentuknya sendiri.</string>
+    <string name="save_favorite_default_appearance">Tetapkan perubahan pada titik-titik yang sudah ada dalam folder atau hanya yang baru?</string>
+    <string name="show_dms_grids">Gunakan DMS daripada derajat</string>
+    <string name="hmd_promo">Promo HMD selama %1$s bulan</string>
+    <string name="hmd_promo_description">Akses fitur secara gratis termasuk pengunduhan peta tidak terbatas, relief 3D, dll. selama %1$s bulan</string>
+    <string name="shared_string_road_exit">Keluar</string>
 </resources>
