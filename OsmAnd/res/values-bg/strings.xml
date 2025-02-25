@@ -4689,4 +4689,7 @@
     <string name="show_mercator_grids">Използване на Mercator вместо WGS84 или UTM</string>
     <string name="show_mercator_grids_description">Показване на решетката в км Mercator вместо WGS84 или UTM</string>
     <string name="show_dms_grids">Използване на DMS вместо десетични градуси</string>
+    <string name="show_dms_grids_description">Показване на решетката в градуси, минути и секунди вместо в десетични градуси</string>
+    <string name="show_dm_grids">Използване на ГМ вместо десетични градуси или ГМС</string>
+    <string name="show_dm_grids_description">Показване на решетката в градуси и минути вместо десетични градуси или ГМС</string>
 </resources>
