@@ -273,10 +273,6 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
-		List<ExploreTopPlacePoint> points = places;
-		if (points != null) {
-			getNearbyPlaceFromPoint(tileBox, point, res, points);
-		}
 	}
 
 	private void getNearbyPlaceFromPoint(RotatedTileBox tb, PointF point, List<? super ExploreTopPlacePoint> res, List<ExploreTopPlacePoint> points) {
