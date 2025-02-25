@@ -5936,4 +5936,10 @@
     <string name="show_dm_grids">Использовать DM вместо десятичных градусов или DMS</string>
     <string name="show_mercator_grids">Использовать Меркатор вместо WGS84 или UTM</string>
     <string name="show_mercator_grids_description">Показывать сетку в километрах Меркатор вместо WGS84 или UTM</string>
+    <string name="original_shape_description">Форма каждой точки сохранится.</string>
+    <string name="original_icon_description">Иконки каждой точки сохранятся.</string>
+    <string name="original_color_description">Цвет каждой точки сохранится.</string>
+    <string name="apply_to_all_points">Применить для всех точек</string>
+    <string name="hmd_promo">HMD Промо за %1$s месяцев</string>
+    <string name="hmd_promo_description">Полный доступ к таким возможностям как безлимитная загрузка карт, 3D рельеф и т.д. за %1$s месяц</string>
 </resources>
