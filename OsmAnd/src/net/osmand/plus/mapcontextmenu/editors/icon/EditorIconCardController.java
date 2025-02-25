@@ -21,7 +21,7 @@ import java.util.List;
 public class EditorIconCardController extends BaseMultiStateCardController {
 
 	private final EditorIconController centralController;
-	private IconsPaletteController<String> paletteController;
+	protected IconsPaletteController<String> paletteController;
 
 	public EditorIconCardController(@NonNull OsmandApplication app,
 	                                @NonNull EditorIconController centralController) {
@@ -83,13 +83,13 @@ public class EditorIconCardController extends BaseMultiStateCardController {
 	}
 
 	@NonNull
-	private List<String> getSelectedCategoryIconKeys() {
+	protected List<String> getSelectedCategoryIconKeys() {
 		IconsCategory selectedCategory = (IconsCategory) selectedState.getTag();
 		return selectedCategory != null ? selectedCategory.getIconKeys() : new ArrayList<>();
 	}
 
 	@NonNull
-	private String getSelectedIconKey() {
+	protected String getSelectedIconKey() {
 		String selectedIconKey = centralController.getSelectedIconKey();
 		return selectedIconKey != null ? selectedIconKey : "";
 	}

@@ -13,7 +13,7 @@ import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.helpers.TargetPointsHelper;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -177,14 +177,14 @@ public class OsmandMap {
 				top = Math.max(top, l.getLatitude());
 				bottom = Math.min(bottom, l.getLatitude());
 			}
-			List<TargetPointsHelper.TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
+			List<TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
 			if (rh.getRoute().hasMissingMaps()) {
-				TargetPointsHelper.TargetPoint pointToStart = app.getTargetPointsHelper().getPointToStart();
+				TargetPoint pointToStart = app.getTargetPointsHelper().getPointToStart();
 				if (pointToStart != null) {
 					targetPoints.add(pointToStart);
 				}
 			}
-			for (TargetPointsHelper.TargetPoint l : targetPoints) {
+			for (TargetPoint l : targetPoints) {
 				left = Math.min(left, l.getLongitude());
 				right = Math.max(right, l.getLongitude());
 				top = Math.max(top, l.getLatitude());

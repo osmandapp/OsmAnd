@@ -115,6 +115,7 @@ public class WidgetsVisibilityHelper {
 				&& !isInFollowTrackMode()
 				&& !isInRouteLineAppearanceMode()
 				&& !isInConfigureMapOptionMode()
+				&& !isContextMenuFragmentVisible()
 				&& shouldShowElementOnActiveScreen(BOTTOM_MENU_BUTTONS);
 	}
 
@@ -124,6 +125,7 @@ public class WidgetsVisibilityHelper {
 				&& !isInChoosingRoutesMode()
 				&& !isInWaypointsChoosingMode()
 				&& !isInRouteLineAppearanceMode()
+				&& !isContextMenuFragmentVisible()
 				&& screensAllowed;
 		boolean showTopControls = !mapActivity.shouldHideTopControls()
 				|| (isInTrackMenuMode() && !isPortrait());
@@ -162,6 +164,7 @@ public class WidgetsVisibilityHelper {
 				&& !isInWaypointsChoosingMode()
 				&& !isInFollowTrackMode()
 				&& !isInRouteLineAppearanceMode()
+				&& !isContextMenuFragmentVisible()
 				&& screensAllowed;
 		boolean showTopControls = !mapActivity.shouldHideTopControls()
 				|| (isInTrackMenuMode() && !isPortrait());

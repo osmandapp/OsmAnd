@@ -23,7 +23,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.avoidroads.AvoidRoadsHelper;
 import net.osmand.plus.avoidroads.DirectionPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.measurementtool.GpxApproximationHelper;
 import net.osmand.plus.measurementtool.GpxApproximationParams;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;

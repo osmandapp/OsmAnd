@@ -75,8 +75,10 @@ public class TravelGpxCard extends BaseTravelCard {
 
 									@Override
 									public void onGpxFileRead(@Nullable GpxFile gpxFile) {
-										File file = app.getTravelHelper().createGpxFile(article);
-										TrackMenuFragment.openTrack(activity, file, null);
+										if (gpxFile != null) {
+											File file = app.getTravelHelper().createGpxFile(article);
+											TrackMenuFragment.openTrack(activity, file, null);
+										}
 									}
 								});
 					}

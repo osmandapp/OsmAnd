@@ -59,6 +59,7 @@ public class PicassoUtils {
 		OkHttpClient okHttpClient = new OkHttpClient.Builder().cache(diskCache).build();
 		Picasso picasso = new Picasso.Builder(app)
 				.downloader(new OkHttp3Downloader(okHttpClient))
+//				.loggingEnabled(true)
 				.memoryCache(memoryCache)
 				.build();
 

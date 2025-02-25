@@ -6008,4 +6008,5 @@
     <string name="shared_string_road_exit">Sair</string>
     <string name="shared_string_engine">Motor</string>
     <string name="vehicle_metrics_recording_description">Selecione os parâmetros que serão registrados no arquivo GPX.</string>
+    <string name="current_temperature">Temperatura atual</string>
 </resources>

@@ -22,7 +22,7 @@ public class ShapesCard extends MapBaseCard {
 	@NonNull
 	private BackgroundType selectedShape;
 	@ColorInt
-	private int selectedColor;
+	protected int selectedColor;
 
 	public ShapesCard(@NonNull MapActivity mapActivity, @NonNull BackgroundType shape, @ColorInt int color) {
 		super(mapActivity);
@@ -74,7 +74,7 @@ public class ShapesCard extends MapBaseCard {
 		return shapeItemView;
 	}
 
-	private Drawable getOutlineDrawable(@DrawableRes int shapeIconId) {
+	protected Drawable getOutlineDrawable(@DrawableRes int shapeIconId) {
 		Resources resources = app.getResources();
 		String shapeIconName = resources.getResourceName(shapeIconId);
 		String shapeBackgroundIconName = shapeIconName + "_contour";
@@ -109,7 +109,7 @@ public class ShapesCard extends MapBaseCard {
 		}
 	}
 
-	private void setUnselectedBackground(@NonNull BackgroundType backgroundType, @NonNull ImageView background) {
+	protected void setUnselectedBackground(@NonNull BackgroundType backgroundType, @NonNull ImageView background) {
 		int inactiveColorId = ColorUtilities.getInactiveButtonsAndLinksColorId(nightMode);
 		Drawable inactiveIcon = getColoredIcon(backgroundType.getIconId(), inactiveColorId);
 		background.setImageDrawable(inactiveIcon);

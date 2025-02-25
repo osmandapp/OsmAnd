@@ -5654,7 +5654,7 @@
     <string name="show_grids">顯示地圖網格</string>
     <string name="ais_cpa_warning_distance_description">如果 CPA 小於此值，且在不久的將來就會達到 CPA（請參閱設定達到 CPA 的警告時間），則船隻會以紅色標記。</string>
     <string name="show_grids_description">允許在地圖上顯示網格</string>
-    <string name="show_utm_grids_description">以 UTM 公尺而非 WGS84 度數顯示網格</string>
+    <string name="show_utm_grids_description">以 UTM而非 WGS84 度數顯示網格</string>
     <string name="ais_address_settings">IP 位址設定</string>
     <string name="ais_load_data">從檔案載入 AIS 資料</string>
     <string name="plugin_ais_tracker_disclaimer">免責聲明\n\n本外掛程式為業餘專案，並非為可靠性與正確性而設計。請勿以任何方式依賴此軟體，包括導航及/或生命安全。</string>
@@ -5691,4 +5691,15 @@
     <string name="hmd_promo_description">%1$s個月免費使用功能，包括無限制地圖下載、3D 浮雕等</string>
     <string name="shared_string_road_exit">離開</string>
     <string name="hmd_promo">HMD 的%1$s個月促銷</string>
+    <string name="original_shape_description">每個點都會維持其形狀。</string>
+    <string name="save_favorite_default_appearance">對資料夾中的現有點套用變更，或是僅對新的點套用？</string>
+    <string name="original_icon_description">每個點都會維持其圖示。</string>
+    <string name="original_color_description">每個點都會維持其色彩。</string>
+    <string name="apply_to_all_points">套用至所有點</string>
+    <string name="show_mercator_grids">使用麥卡托取代 WGS84 或 UTM</string>
+    <string name="show_mercator_grids_description">以麥卡托公里為單位顯示網格，而非 WGS84 或 UTM</string>
+    <string name="show_dms_grids">使用 DMS 代替度數</string>
+    <string name="show_dms_grids_description">以度、分、秒而不是度為單位顯示網格</string>
+    <string name="show_dm_grids">使用 DM 代替角度或 DMS</string>
+    <string name="show_dm_grids_description">以度和分而不是度數或 DMS 顯示網格</string>
 </resources>

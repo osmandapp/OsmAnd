@@ -4684,6 +4684,12 @@
     <string name="show_grids_description">Дава възможност да бъде показана решетка върху картата</string>
     <string name="show_grids">Решетка върху картата</string>
     <string name="show_utm_grids">Използване на UTM вместо WGS84</string>
-    <string name="show_utm_grids_description">Решетка в UTM метри вместо в WGS84 градуси</string>
+    <string name="show_utm_grids_description">Решетка в UTM метри вместо WGS84</string>
     <string name="map_grid">Решетки на картата</string>
+    <string name="show_mercator_grids">Използване на Mercator вместо WGS84 или UTM</string>
+    <string name="show_mercator_grids_description">Показване на решетката в км Mercator вместо WGS84 или UTM</string>
+    <string name="show_dms_grids">Използване на DMS вместо десетични градуси</string>
+    <string name="show_dms_grids_description">Показване на решетката в градуси, минути и секунди вместо в десетични градуси</string>
+    <string name="show_dm_grids">Използване на ГМ вместо десетични градуси или ГМС</string>
+    <string name="show_dm_grids_description">Показване на решетката в градуси и минути вместо десетични градуси или ГМС</string>
 </resources>

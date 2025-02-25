@@ -197,7 +197,7 @@ public class ImportFileTask extends AsyncTask<Void, Void, List<SettingsItem>> {
 				}
 			} else if (item instanceof QuickActionsSettingsItem) {
 				if (item.exists()) {
-					duplicateItems.add(((QuickActionsSettingsItem) item).getButtonState());
+					duplicateItems.add(((QuickActionsSettingsItem) item).getStateBean());
 				}
 			}
 		}

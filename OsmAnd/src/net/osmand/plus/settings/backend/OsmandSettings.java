@@ -10,6 +10,9 @@ import static net.osmand.plus.download.DownloadOsmandIndexesHelper.downloadTtsWi
 import static net.osmand.plus.download.DownloadOsmandIndexesHelper.getSupportedTtsByLanguages;
 import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.HIDE_WATER_POLYGONS_ATTR;
 import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.NO_POLYGONS_ATTR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.ELEVATION_UNITS_ATTR;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.ELEVATION_UNITS_FEET_VALUE;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.ELEVATION_UNITS_METERS_VALUE;
 import static net.osmand.plus.routing.GpxApproximator.DEFAULT_POINT_APPROXIMATION;
 import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 import static net.osmand.plus.settings.backend.storages.IntermediatePointsStorage.INTERMEDIATE_POINTS;
@@ -3046,7 +3049,12 @@ public class OsmandSettings {
 
 	@NonNull
 	public String getRenderPropertyValue(@NonNull RenderingRuleProperty property) {
-		CommonPreference<String> preference = getCustomRenderProperty(property.getAttrName());
+		String attrName = property.getAttrName();
+		if (ELEVATION_UNITS_ATTR.equals(attrName)) {
+			boolean useFeet = METRIC_SYSTEM.get().shouldUseFeet();
+			return useFeet ? ELEVATION_UNITS_FEET_VALUE : ELEVATION_UNITS_METERS_VALUE;
+		}
+		CommonPreference<String> preference = getCustomRenderProperty(attrName);
 		String value = preference.get();
 		return property.containsValue(value) ? value : preference.getDefaultValue();
 	}

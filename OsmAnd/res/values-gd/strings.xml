@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="original_color_description">Chumadh a dath fhèin aig gach puing.</string>
+    <string name="litres">Liotairean</string>
+    <string name="default_buttons_size_original_description">Chumadh a meud fhèin aig gach puing.</string>
+    <string name="shared_string_length">Fad</string>
+    <string name="original_icon_description">Chumadh a dealbhaig fhèin aig gach puing.</string>
+    <string name="shared_string_road_exit">Fàg</string>
+    <string name="calculate_size">Obraich a-mach am meud</string>
+    <string name="shared_string_engine">Einnsean</string>
+    <string name="shared_string_hour">Uair</string>
+    <string name="ltr_or_rtl_combine_via_per">%1$s san %2$s</string>
+    <string name="remaining_fuel">Connadh air fhàgail</string>
+    <string name="us_gallons_unit">gal</string>
+    <string name="calculating_indication_message">Ag obrachadh a-mach…</string>
+</resources>

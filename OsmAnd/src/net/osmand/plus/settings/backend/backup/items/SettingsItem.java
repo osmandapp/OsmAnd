@@ -50,7 +50,7 @@ public abstract class SettingsItem {
 		init();
 	}
 
-	public SettingsItem(OsmandApplication app, @NonNull JSONObject json) throws JSONException {
+	public SettingsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		this.app = app;
 		this.fromJson = true;
 		init();

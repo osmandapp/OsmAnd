@@ -25,6 +25,7 @@ import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
@@ -309,7 +310,7 @@ public class MapActions {
 			MapActivity.clearPrevActivityIntent();
 
 			if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
-				TargetPointsHelper.TargetPoint start = targetHelper.getPointToStart();
+				TargetPoint start = targetHelper.getPointToStart();
 				if (start != null) {
 					LatLon latLon = new LatLon(start.getLatitude(), start.getLongitude());
 					activity.getMapActions().enterRoutePlanningMode(latLon, start.getOriginalPointDescription());
@@ -398,9 +399,9 @@ public class MapActions {
 		if (!hasPointToStart) {
 			mapActions.enterRoutePlanningModeGivenGpx(null, null, null, true, true, HEADER_ONLY);
 		} else {
-			TargetPointsHelper.TargetPoint start = targets.getPointToStart();
+			TargetPoint start = targets.getPointToStart();
 			if (start != null) {
-				mapActions.enterRoutePlanningModeGivenGpx(null, start.point, start.getOriginalPointDescription(), true, true, HEADER_ONLY);
+				mapActions.enterRoutePlanningModeGivenGpx(null, start.getLatLon(), start.getOriginalPointDescription(), true, true, HEADER_ONLY);
 			} else {
 				mapActions.enterRoutePlanningModeGivenGpx(null, null, null, true, true, HEADER_ONLY);
 			}

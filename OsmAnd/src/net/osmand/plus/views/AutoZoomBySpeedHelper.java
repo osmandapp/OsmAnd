@@ -9,7 +9,7 @@ import com.github.mikephil.charting.data.Entry;
 
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.MapRendererState;
+import net.osmand.core.jni.MapState;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
@@ -184,7 +184,7 @@ public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener 
 	@Nullable
 	public ComplexZoom calculateRawZoomBySpeedForChart(@NonNull MapRendererView mapRenderer, float currentZoom, double lat, double lon, float rotation, float speed) {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
-		MapRendererState state = mapRenderer.getState();
+		MapState state = mapRenderer.getState();
 
 		AutoZoomMap autoZoomScale = settings.AUTO_ZOOM_MAP_SCALE.get();
 

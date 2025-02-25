@@ -5037,7 +5037,7 @@
     <string name="delete_map_description">Odstranit mapu %1$s?</string>
     <string name="maps_and_resources">Mapy a zdroje</string>
     <string name="help_article_navigation_routing_osmand_routing_name">O OsmAnd navigaci</string>
-    <string name="empty_smart_folder_title">Žádná odpovídající trasa</string>
+    <string name="empty_smart_folder_title">Žádná odpovídající stopa</string>
     <string name="smart_folder_name_present">Taková chytrá složka již existuje</string>
     <string name="help_article_search_search_coordinates_name">Hledat souřadnice</string>
     <string name="empty_smart_folder_description">Odpovídající trasy se zobrazí zde</string>
@@ -5697,11 +5697,22 @@
     <string name="show_grids_description">Povolit zobrazení mřížky přes mapu</string>
     <string name="show_grids">Zobrazit mřížku mapy</string>
     <string name="show_utm_grids">Použít UTM namísto WGS84</string>
-    <string name="show_utm_grids_description">Zobrazit mřížku v metrech UTM namísto stupňů WGS84</string>
+    <string name="show_utm_grids_description">Zobrazit mřížku v metrech UTM namísto WGS84</string>
     <string name="map_grid">Mapové mřížky</string>
     <string name="no_places_available">Žádná volná místa</string>
     <string name="no_photo_for_location_desc">K této lokalitě zatím nebyly přidány žádné uživatelské fotografie</string>
     <string name="hmd_promo_description">Bezplatný přístup k funkcím včetně neomezeného stahování map, 3D reliéfu a dalších na %1$s měsíců</string>
     <string name="shared_string_road_exit">Výjezd</string>
     <string name="hmd_promo">HMD Promo na %1$s měsíců</string>
+    <string name="original_color_description">Každý bod by si zachoval svou vlastní barvu.</string>
+    <string name="original_icon_description">Každý bod by si ponechal vlastní ikonu.</string>
+    <string name="original_shape_description">Každý bod by si zachoval svůj vlastní tvar.</string>
+    <string name="save_favorite_default_appearance">Použít změny na stávající body ve složce, nebo pouze na nové?</string>
+    <string name="apply_to_all_points">Použít pro všechny body</string>
+    <string name="show_mercator_grids">Použít projekci Mercator namísto WGS84 nebo UTM</string>
+    <string name="show_dms_grids">Použít DMS namísto stupňů</string>
+    <string name="show_mercator_grids_description">Zobrazit mřížku v Mercator km namísto WGS84 nebo UTM</string>
+    <string name="show_dms_grids_description">Zobrazit mřížku ve stupních, minutách a vteřinách namísto stupňů</string>
+    <string name="show_dm_grids">Použít DM namísto stupňů nebo DMS</string>
+    <string name="show_dm_grids_description">Zobrazit mřížku ve stupních a minutách namísto stupňů nebo DMS</string>
 </resources>

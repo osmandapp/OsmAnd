@@ -107,7 +107,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	@Override
 	public void onListItemClick(@NonNull ListView listView, @NonNull View view, int position, long id) {
 		int index = position - listView.getHeaderViewsCount();
-		if (index < listAdapter.getCount()) {
+		if (index >= 0 && index < listAdapter.getCount()) {
 			QuickSearchListItem item = listAdapter.getItem(index);
 			if (item != null) {
 				if (item.getType() == QuickSearchListItemType.BUTTON) {
@@ -212,11 +212,11 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		if (pair.second instanceof Amenity && ((Amenity) pair.second).isRouteTrack()) {
 			Amenity amenity = (Amenity) pair.second;
 			TravelHelper travelHelper = app.getTravelHelper();
-			TravelGpx travelGpx = travelHelper.searchGpx(amenity.getLocation(), amenity.getRouteId(), amenity.getRef());
+			TravelGpx travelGpx = travelHelper.searchTravelGpx(amenity.getLocation(), amenity.getRouteId());
 			if (travelGpx != null) {
 				travelHelper.openTrackMenu(travelGpx, getMapActivity(), amenity.getGpxFileName(null), amenity.getLocation(), true);
 			} else {
-				LOG.error("showResultWithLocation() searchGpx() travelGpx is null");
+				LOG.error("showResultWithLocation() searchTravelGpx() travelGpx is null");
 			}
 		} else {
 			showOnMap(getMapActivity(), dialogFragment,

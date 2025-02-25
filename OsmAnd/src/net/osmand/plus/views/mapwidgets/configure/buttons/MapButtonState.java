@@ -231,12 +231,15 @@ public abstract class MapButtonState {
 
 	@Nullable
 	public Drawable getIcon(@ColorInt int color, boolean nightMode, boolean mapIcon) {
+		int iconId = getIconId();
+		return iconId != 0 ? getIcon(iconId, color, nightMode, mapIcon) : null;
+	}
+
+	@DrawableRes
+	public int getIconId() {
 		String iconName = createAppearanceParams().getIconName();
 		int iconId = AndroidUtils.getDrawableId(app, iconName);
-		if (iconId == 0) {
-			iconId = RenderingIcons.getBigIconResourceId(iconName);
-		}
-		return iconId != 0 ? getIcon(iconId, color, nightMode, mapIcon) : null;
+		return iconId != 0 ? iconId : RenderingIcons.getBigIconResourceId(iconName);
 	}
 
 	@Nullable

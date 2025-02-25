@@ -19,7 +19,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.search.ShareHistoryAsyncTask;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.utils.AndroidUtils;

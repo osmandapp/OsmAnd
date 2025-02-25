@@ -440,7 +440,7 @@
     <string name="poi_aerialway_j_bar">Ardaitheoir J-bar</string>
     <string name="poi_aerialway_station">Stáisiún ón aer</string>
     <string name="poi_aerialway_cable_car">Carr cábla</string>
-    <string name="poi_aerialway_gondola">Gondola</string>
+    <string name="poi_aerialway_gondola">Gondala</string>
     <string name="poi_aerialway_chair_lift">Ardaitheoir cathaoir</string>
     <string name="poi_aerialway_t_bar">Ardaitheoir T-bharra</string>
     <string name="poi_aerialway_platter">Ardaitheoir platter</string>
@@ -2018,7 +2018,7 @@
     <string name="poi_recycling_accepted_waste">Dramhaíl a nglactar léi</string>
     <string name="poi_water_characteristic">Saintréith uisce</string>
     <string name="poi_beach_surface_type">Dromchla</string>
-    <string name="poi_nudism">Nudism</string>
+    <string name="poi_nudism">Nochtachas</string>
     <string name="poi_diet">Aiste bia</string>
     <string name="poi_washing_machine">Meaisín níocháin</string>
     <string name="poi_caravans">Carbháin</string>
@@ -2052,7 +2052,7 @@
     <string name="poi_fire_extinguisher">Múchtóir dóiteáin</string>
     <string name="poi_fire_flapper">Flapper dóiteáin</string>
     <string name="poi_emergency_access_point">Pointe rochtana éigeandála</string>
-    <string name="poi_ford">Ford</string>
+    <string name="poi_ford">Áth</string>
     <string name="poi_traffic_calming_rumble_strip">Stiall tormáin</string>
     <string name="poi_traffic_calming_table">Tábla Luais</string>
     <string name="poi_traffic_calming_cushion">Stuáilte Luais</string>
@@ -2833,7 +2833,7 @@
     <string name="poi_checkpoint_type">Cineál seicphointe</string>
     <string name="poi_substation_type">Cineál</string>
     <string name="poi_books_type">Leabhair</string>
-    <string name="poi_denotation">Denotation</string>
+    <string name="poi_denotation">Sainchiall</string>
     <string name="poi_park_ride">Páirceáil agus taisteal</string>
     <string name="poi_rtsa_scale_filter">Catagóir deacrachta</string>
     <string name="poi_climbing_crag_filter">Portán dreapadóireachta</string>
@@ -2905,7 +2905,7 @@
     <string name="poi_healthcare_speciality_laboratory">Speisialtacht cúram sláinte: saotharlann</string>
     <string name="poi_us_maps_recreation_area_activity">Gníomhaíocht limistéar áineasa</string>
     <string name="poi_us_maps_recreation_area_open_status">Stádas rochtana limistéar áineasa</string>
-    <string name="poi_impromptu">Impromptu</string>
+    <string name="poi_impromptu">Gan ullmhú</string>
     <string name="poi_reservation">Áirithint</string>
     <string name="poi_us_maps_recreation_area_facility">Áis limistéar áineasa</string>
     <string name="poi_ice_cream">Parlor uachtar reoite</string>
@@ -2967,7 +2967,7 @@
     <string name="poi_leather">Siopa leathair</string>
     <string name="poi_motorcycle">Siopa gluaisrothar</string>
     <string name="poi_musical_instrument">Uirlisí ceoil</string>
-    <string name="poi_optician">Optometrist</string>
+    <string name="poi_optician">Optaiméadraí</string>
     <string name="poi_paint">Siopa péinte</string>
     <string name="poi_pet">Siopa peataí</string>
     <string name="poi_photo">Siopa grianghraf</string>
@@ -4972,4 +4972,5 @@
     <string name="poi_atv_yes">ATV: tá</string>
     <string name="poi_atv_no">ATV: níl</string>
     <string name="poi_access_notes">Nótaí rochtana</string>
+    <string name="poi_contact_website">Suíomh Gréasáin</string>
 </resources>

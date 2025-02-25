@@ -317,9 +317,9 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				modifyOsmNote(mapActivity, (OsmNotesPoint) selectedObj);
 			} else if (resId == R.string.poi_context_menu_modify) {
 				if (selectedObj instanceof TransportStop && ((TransportStop) selectedObj).getAmenity() != null) {
-					EditPoiDialogFragment.showEditInstance(((TransportStop) selectedObj).getAmenity(), mapActivity);
+					EditPoiDialogFragment.showEditInstance(mapActivity, ((TransportStop) selectedObj).getAmenity());
 				} else if (selectedObj instanceof MapObject) {
-					EditPoiDialogFragment.showEditInstance((MapObject) selectedObj, mapActivity);
+					EditPoiDialogFragment.showEditInstance(mapActivity, (MapObject) selectedObj);
 				}
 			} else if (resId == R.string.poi_context_menu_modify_osm_change) {
 				Entity entity = ((OpenstreetmapPoint) selectedObj).getEntity();

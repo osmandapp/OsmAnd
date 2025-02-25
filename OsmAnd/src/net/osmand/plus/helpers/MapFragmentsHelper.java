@@ -35,7 +35,7 @@ import net.osmand.plus.mapmarkers.PlanRouteFragment;
 import net.osmand.plus.measurementtool.GpxApproximationFragment;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.SnapTrackWarningFragment;
-import net.osmand.plus.nearbyplaces.NearbyPlacesFragment;
+import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesFragment;
 import net.osmand.plus.plugins.weather.dialogs.WeatherForecastFragment;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
@@ -149,8 +149,8 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 	}
 
 	@Nullable
-	public NearbyPlacesFragment getNearbyPlacesFragment() {
-		return getFragment(NearbyPlacesFragment.Companion.getTAG());
+	public ExplorePlacesFragment getNearbyPlacesFragment() {
+		return getFragment(ExplorePlacesFragment.Companion.getTAG());
 	}
 
 	@Nullable

@@ -713,7 +713,7 @@ public class MapActivityActions extends MapActions {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			activity.hideContextAndRouteInfoMenues();
-			WaypointsFragment.showInstance(activity.getSupportFragmentManager());
+			WaypointsFragment.showInstance(activity);
 		}
 	}
 
