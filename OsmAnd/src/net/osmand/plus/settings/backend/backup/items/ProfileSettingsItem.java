@@ -181,7 +181,7 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 					.setIconColor(modeBean.iconColor)
 					.setLocationIcon(modeBean.locIcon)
 					.setNavigationIcon(modeBean.navIcon);
-			getSettings().copyPreferencesFromProfile(parent, builder.getApplicationMode());
+			getSettings().copyPreferencesFromProfile(parent, builder.getApplicationMode(), true);
 			appMode = ApplicationMode.saveProfile(builder, app);
 		} else if (!shouldReplace && exists()) {
 			renameProfile();

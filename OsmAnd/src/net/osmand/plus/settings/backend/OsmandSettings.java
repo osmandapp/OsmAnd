@@ -200,6 +200,21 @@ public class OsmandSettings {
 		return Collections.unmodifiableMap(registeredPreferences);
 	}
 
+	@NonNull
+	public Map<String, OsmandPreference<?>> getSavedPreferences(@Nullable ApplicationMode mode) {
+		Map<String, OsmandPreference<?>> map = new HashMap<>(registeredPreferences.size());
+		for (Map.Entry<String, OsmandPreference<?>> entry : registeredPreferences.entrySet()) {
+			OsmandPreference<?> value = entry.getValue();
+			if (entry.getValue() instanceof CommonPreference<?> preference) {
+				if ((mode == null && preference.isGlobal() && preference.isSet()) ||
+						(mode != null && !preference.isGlobal() && preference.isSetForMode(mode))) {
+					map.put(entry.getKey(), preference);
+				}
+			}
+		}
+		return map;
+	}
+
 	public static boolean isRendererPreference(String key) {
 		return key.startsWith(RENDERER_PREFERENCE_PREFIX);
 	}
@@ -382,8 +397,10 @@ public class OsmandSettings {
 		}
 	}
 
-	public void copyPreferencesFromProfile(ApplicationMode modeFrom, ApplicationMode modeTo) {
-		copyProfilePreferences(modeFrom, modeTo, new ArrayList<>(registeredPreferences.values()));
+	public void copyPreferencesFromProfile(@NonNull ApplicationMode modeFrom,
+			@NonNull ApplicationMode modeTo, boolean onlySaved) {
+		Map<String, OsmandPreference<?>> preferences = onlySaved ? getSavedPreferences(modeFrom) : registeredPreferences;
+		copyProfilePreferences(modeFrom, modeTo, new ArrayList<>(preferences.values()));
 	}
 
 	public void copyProfilePreferences(@NonNull ApplicationMode modeFrom,
