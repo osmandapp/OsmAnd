@@ -560,7 +560,7 @@ public class IntentHelper {
 			if (intent.hasExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
 				switch (intent.getStringExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
 					case BaseSettingsFragment.MAP_CONFIG:
-						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP, null);
+						showConfigureMapDashboard(mapActivity);
 						break;
 
 					case BaseSettingsFragment.SCREEN_CONFIG:
@@ -631,6 +631,10 @@ public class IntentHelper {
 				clearIntent(intent);
 			}
 		}
+	}
+
+	public static void showConfigureMapDashboard(final MapActivity mapActivity) {
+		mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP, null);
 	}
 
 	private void parseNavigationIntent(Intent intent) {
