@@ -10,6 +10,7 @@ import java.util.*;
 // Human-based version of OverlappedSegmentsMergerDS / OverlappedSegmentsMergerGPT (commit 17701568cb)
 
 public class TravelObfGpxTrackOptimizer {
+	private static final int MAX_JUMPS_OVER_UNIQUE_POINTS = 1;
 	private static final double EDGE_POINTS_MAX_ORTHOGONAL_DISTANCE = 10.0;
 	private static final double PRECISION_DUPES = KMapUtils.DEFAULT_LATLON_PRECISION;
 	private static final double PRECISION_EQUAL = KMapUtils.DEFAULT_LATLON_PRECISION; // ~1 meter
@@ -72,19 +73,11 @@ public class TravelObfGpxTrackOptimizer {
 			List<WptPt> points = seg.getPoints();
 			if (!points.isEmpty()) {
 				int fromIndex = 0, toIndex = points.size() - 1; // inclusive indexes
-				fromIndex += hasDisplacedStartPoint(points, duplicates) ? 1 : 0;
-				toIndex -= hasDisplacedEndPoint(points, duplicates) ? 1 : 0;
 
-				if (hasTwoDuplicatesForward(fromIndex, toIndex, points, duplicates)) {
-					while (fromIndex <= toIndex && duplicates.contains(llKey(points.get(fromIndex)))) {
-						fromIndex++;
-					}
-				}
-				if (hasTwoDuplicatesBackward(fromIndex, toIndex, points, duplicates)) {
-					while (toIndex >= fromIndex && duplicates.contains(llKey(points.get(toIndex)))) {
-						toIndex--;
-					}
-				}
+				markDanglingEdgePointsToDeduplicate(points, duplicates);
+
+				fromIndex += countDuplicates(true, fromIndex, toIndex, points, duplicates);
+				toIndex -= countDuplicates(false, fromIndex, toIndex, points, duplicates);
 
 				if (fromIndex < toIndex) {
 					clean.getPoints().addAll(points.subList(fromIndex, toIndex + 1));
@@ -102,24 +95,34 @@ public class TravelObfGpxTrackOptimizer {
 		}
 	}
 
-	private static boolean hasTwoDuplicatesForward(int from, int to, List<WptPt> points, Set<String> duplicates) {
-		return from < to
-				&& duplicates.contains(llKey(points.get(from)))
-				&& duplicates.contains(llKey(points.get(from + 1)));
+	private static int countDuplicates(boolean forward, int fromIndex, int toIndex,
+	                                   List<WptPt> points, Set<String> duplicates) {
+		int dupes = 0, uniques = 0;
+		int a = forward ? fromIndex : toIndex;
+		int b = forward ? toIndex : fromIndex;
+		for (int i = a; i != b; i += forward ? +1 : -1) {
+			if (duplicates.contains(llKey(points.get(i)))) {
+				dupes += uniques + 1; // jumped over
+				uniques = 0;
+			} else {
+				if (++uniques > MAX_JUMPS_OVER_UNIQUE_POINTS) {
+					break;
+				}
+			}
+		}
+
+		return dupes > 1 ? dupes : 0; // keep solitary duplicate at the edge
 	}
 
-	private static boolean hasTwoDuplicatesBackward(int from, int to, List<WptPt> points, Set<String> duplicates) {
-		return from < to
-				&& duplicates.contains(llKey(points.get(to)))
-				&& duplicates.contains(llKey(points.get(to - 1)));
-	}
-
-	private static boolean hasDisplacedStartPoint(List<WptPt> points, Set<String> duplicates) {
-		return points.size() > 1 && duplicates.contains(llKey(points.get(1)));
-	}
-
-	private static boolean hasDisplacedEndPoint(List<WptPt> points, Set<String> duplicates) {
-		return points.size() > 1 && duplicates.contains(llKey(points.get(points.size() - 2)));
+	private static void markDanglingEdgePointsToDeduplicate(List<WptPt> points, Set<String> duplicates) {
+		if (points.size() > 1) {
+			if (duplicates.contains(llKey(points.get(1)))) {
+				duplicates.add(llKey(points.get(0)));
+			}
+			if (duplicates.contains(llKey(points.get(points.size() - 2)))) {
+				duplicates.add(llKey(points.get(points.size() - 1)));
+			}
+		}
 	}
 
 	private static void joinCleanedSegments(List<TrkSegment> segmentsToJoin, List<TrkSegment> joinedSegments) {
