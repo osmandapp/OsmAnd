@@ -90,8 +90,8 @@ public class SettingsSearchButtonHelper {
 								.withSearchResultsFragmentUI(new SearchResultsFragmentUI())
 								.withPrepareShow(new PrepareShow())
 								.withIncludePreferenceInSearchResultsPredicate(new IncludePreferenceInSearchResultsPredicate())
+								.withShowSettingsFragmentAndHighlightSetting(new ShowSettingsFragmentAndHighlightSetting(fragmentContainerViewId))
 								.build(),
-						fragmentManager,
 						fragmentActivity)
 				.withCreateSearchDatabaseTaskSupplier(createSearchDatabaseTaskSupplier)
 				.withOnMergedPreferenceScreenAvailable(onMergedPreferenceScreenAvailable)
