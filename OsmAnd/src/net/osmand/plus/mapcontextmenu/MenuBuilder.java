@@ -342,15 +342,13 @@ public class MenuBuilder {
 	}
 
 	void onClose() {
-		if (getImageCardsTask != null) {
-			getImageCardsTask.cancel(false);
-		}
 		onlinePhotoCardsRow = null;
 		onlinePhotoCards = null;
 		if (galleryController != null) {
 			galleryController.clearHolder();
 		}
 		clearPluginRows();
+		stopLoadingImagesTask();
 	}
 
 	public boolean isHidden() {
@@ -585,12 +583,16 @@ public class MenuBuilder {
 		if (galleryController.isCurrentHolderEquals(latLon, params)) {
 			imageCardListener.onFinish(galleryController.getCurrentCardsHolder());
 		} else {
-			if (getImageCardsTask != null) {
-				getImageCardsTask.cancel(false);
-			}
+			stopLoadingImagesTask();
 			galleryController.clearHolder();
 			getImageCardsTask = new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(), imageCardListener);
 			execute(getImageCardsTask);
+		}
+	}
+
+	private void stopLoadingImagesTask() {
+		if (getImageCardsTask != null && getImageCardsTask.getStatus() == AsyncTask.Status.RUNNING) {
+			getImageCardsTask.cancel(false);
 		}
 	}
 
