@@ -5942,4 +5942,5 @@
     <string name="apply_to_all_points">Применить для всех точек</string>
     <string name="hmd_promo">HMD Промо за %1$s месяцев</string>
     <string name="hmd_promo_description">Полный доступ к таким возможностям как безлимитная загрузка карт, 3D рельеф и т.д. за %1$s месяц</string>
+    <string name="save_favorite_default_appearance">Применить изменения к существующим точкам в папке или только к новым?</string>
 </resources>
