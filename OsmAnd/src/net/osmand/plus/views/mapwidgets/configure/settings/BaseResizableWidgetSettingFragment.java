@@ -108,9 +108,8 @@ public class BaseResizableWidgetSettingFragment extends WidgetSettingsBaseFragme
 				updateRowWidgets(widgetInfo);
 			} else {
 				widgetResizing.getWidgetSizePref().set(selectedWidgetSize);
+				widgetResizing.recreateView();
 			}
-
-			widgetResizing.recreateView();
 		}
 		app.getOsmandMap().getMapLayers().getMapInfoLayer().recreateControls();
 	}
