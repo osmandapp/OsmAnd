@@ -57,8 +57,6 @@ import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import net.osmand.util.OverlappedSegmentsMergerDS;
-import net.osmand.util.OverlappedSegmentsMergerGPT;
 
 import org.apache.commons.logging.Log;
 

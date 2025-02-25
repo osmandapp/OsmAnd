@@ -7,7 +7,7 @@ import net.osmand.shared.util.KMapUtils;
 
 import java.util.*;
 
-// Human-based version of OverlappedSegmentsMergerDS / OverlappedSegmentsMergerGPT
+// Human-based version of OverlappedSegmentsMergerDS / OverlappedSegmentsMergerGPT (commit 17701568cb)
 
 public class TravelObfGpxTrackOptimizer {
 	private static final double EDGE_POINTS_MAX_ORTHOGONAL_DISTANCE = 10.0;
