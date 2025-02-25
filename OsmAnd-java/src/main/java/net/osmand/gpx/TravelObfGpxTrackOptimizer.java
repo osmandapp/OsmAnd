@@ -71,14 +71,6 @@ public class TravelObfGpxTrackOptimizer {
 			TrkSegment clean = new TrkSegment();
 			List<WptPt> points = seg.getPoints();
 			if (!points.isEmpty()) {
-				Set<String> nextDuplicates = new HashSet<>();
-
-				// edges [0, -1] must not be considered as future duplicates
-				for (int i = 1; i < points.size() - 1; i++) {
-					String key = llKey(points.get(i));
-					nextDuplicates.add(key);
-				}
-
 				int fromIndex = 0, toIndex = points.size() - 1; // inclusive indexes
 				fromIndex += hasDisplacedStartPoint(points, duplicates) ? 1 : 0;
 				toIndex -= hasDisplacedEndPoint(points, duplicates) ? 1 : 0;
@@ -88,7 +80,6 @@ public class TravelObfGpxTrackOptimizer {
 						fromIndex++;
 					}
 				}
-
 				if (hasTwoDuplicatesBackward(fromIndex, toIndex, points, duplicates)) {
 					while (toIndex >= fromIndex && duplicates.contains(llKey(points.get(toIndex)))) {
 						toIndex--;
@@ -99,7 +90,11 @@ public class TravelObfGpxTrackOptimizer {
 					clean.getPoints().addAll(points.subList(fromIndex, toIndex + 1));
 				}
 
-				duplicates.addAll(nextDuplicates);
+				// edges [0, -1] must not be considered as future duplicates
+				for (int i = 1; i < points.size() - 1; i++) {
+					String key = llKey(points.get(i));
+					duplicates.add(key);
+				}
 			}
 			if (!clean.getPoints().isEmpty()) {
 				cleanedSegments.add(clean);
