@@ -1,15 +1,18 @@
 package net.osmand.plus.settings.backend.preferences;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class StringPreference extends CommonPreference<String> {
 
-	public StringPreference(OsmandSettings settings, String id, String defaultValue) {
+	public StringPreference(@NonNull OsmandSettings settings, @NonNull String id,
+			String defaultValue) {
 		super(settings, id, defaultValue);
 	}
 
 	@Override
-	public String getValue(Object prefs, String defaultValue) {
+	public String getValue(@NonNull Object prefs, String defaultValue) {
 		return getSettingsAPI().getString(prefs, getId(), defaultValue);
 	}
 
