@@ -16,6 +16,7 @@ import com.squareup.picasso.Target;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
+import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.ExploreTopPlacePoint;
 import net.osmand.data.PointDescription;
@@ -273,6 +274,21 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
+		List<ExploreTopPlacePoint> points = places;
+		if (points != null) {
+			ArrayList<ExploreTopPlacePoint> foundPoints = new ArrayList<>();
+			getNearbyPlaceFromPoint(tileBox, point, foundPoints, points);
+			MapActivity activity = getMapActivity();
+			if(activity != null) {
+				for(ExploreTopPlacePoint foundPoint: foundPoints) {
+					Amenity amenity = getMapActivity().getMyApplication().getExplorePlacesProvider().getAmenity(
+							new LatLon(foundPoint.getLatitude(), foundPoint.getLongitude()), foundPoint.getId());
+					if(amenity == null) {
+						res.add(foundPoint);
+					}
+				}
+			}
+		}
 	}
 
 	private void getNearbyPlaceFromPoint(RotatedTileBox tb, PointF point, List<? super ExploreTopPlacePoint> res, List<ExploreTopPlacePoint> points) {

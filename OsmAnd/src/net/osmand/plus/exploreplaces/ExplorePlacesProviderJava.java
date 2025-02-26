@@ -35,7 +35,7 @@ import java.util.Set;
 // TODO: why recreate provider when new points are loaded? that causes blinking
 // TODO: scheduleImageRefreshes in layer is incorrect it starts downloading all images and stops interacting
 // TODO images shouldn't be queried if they are not visible in all lists! size doesn't matter !
-// TODO show on map close button is not visible
+// TODO show on map close button is not visible +
 // TODO layer sometimes becomes non-interactive - MAP FPS drops
 // TODO Context menu doesn't work correctly and duplicates actual POI +
 // TODO compass is not rotating +

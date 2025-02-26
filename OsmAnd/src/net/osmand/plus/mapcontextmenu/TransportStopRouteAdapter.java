@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu;
 
+import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.UiContext;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.utils.ColorUtilities;
@@ -24,10 +26,10 @@ public class TransportStopRouteAdapter extends ArrayAdapter<Object> {
 	private OnClickListener listener;
 	private final OsmandApplication app;
 
-	public TransportStopRouteAdapter(@NonNull OsmandApplication application, @NonNull List<Object> objects, boolean nightMode) {
-		super(application, 0, objects);
+	public TransportStopRouteAdapter(@UiContext @NonNull Context context, @NonNull List<Object> objects, boolean nightMode) {
+		super(context, 0, objects);
 		this.nightMode = nightMode;
-		this.app = application;
+		this.app = (OsmandApplication) context.getApplicationContext();
 	}
 
 	public void setListener(OnClickListener listener) {

@@ -116,7 +116,11 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 
 	fun onBackPress(): Boolean {
 		if (mainContent?.visibility == View.GONE) {
-			showList()
+			if (mapActivity?.contextMenu?.isVisible == true) {
+				mapActivity?.contextMenu?.hideMenus()
+			} else {
+				showList()
+			}
 		} else {
 			val quickSearchFragment = mapActivity?.fragmentsHelper?.quickSearchDialogFragment
 			quickSearchFragment?.show()
