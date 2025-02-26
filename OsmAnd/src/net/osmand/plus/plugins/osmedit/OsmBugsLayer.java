@@ -8,7 +8,6 @@ import android.graphics.PointF;
 import android.util.Xml;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -186,7 +185,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 					float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
 					float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 
-					PointImageDrawable pointImageDrawable = getOsmBugDrawable(o.isOpened());
+					PointImageDrawable pointImageDrawable = createOsmBugDrawable(o.isOpened());
 					int offsetY = pointImageDrawable.getBackgroundType().getOffsetY(ctx, textScale);
 					pointImageDrawable.drawPoint(canvas, x, y - offsetY, textScale, false);
 				}
@@ -196,7 +195,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		}
 	}
 
-	public PointImageDrawable getOsmBugDrawable(boolean opened) {
+	@NonNull
+	public PointImageDrawable createOsmBugDrawable(boolean opened) {
 		int iconId;
 		int backgroundColorRes;
 		if (opened) {
