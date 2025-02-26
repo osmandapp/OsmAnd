@@ -61,11 +61,13 @@ public class RenderingClassesCard extends MapBaseCard {
 		container = view.findViewById(R.id.container);
 		container.removeAllViews();
 
+		boolean showRows = true;
 		if (renderingClass != null) {
 			container.addView(createHeaderRow(renderingClass));
+			showRows = settings.getBooleanRenderClassProperty(renderingClass).get();
 		}
 
-		if (!Algorithms.isEmpty(subclasses)) {
+		if (!Algorithms.isEmpty(subclasses) && showRows) {
 			container.addView(themedInflater.inflate(R.layout.simple_divider_item, container, false));
 
 			for (int i = 0; i < subclasses.size(); i++) {
@@ -88,7 +90,8 @@ public class RenderingClassesCard extends MapBaseCard {
 	}
 
 	@NonNull
-	private View createItemRow(@NonNull RenderingClass renderingClass, boolean showSubscreen, boolean showDivider) {
+	private View createItemRow(@NonNull RenderingClass renderingClass, boolean showSubscreen,
+			boolean showDivider) {
 		CommonPreference<Boolean> pref = settings.getBooleanRenderClassProperty(renderingClass);
 		boolean enabled = pref.get();
 
