@@ -32,9 +32,7 @@ public class ItemOfLinearLayoutHighlighter implements SettingHighlighter {
 
 	@Override
 	public void highlightSetting(final Fragment settingsFragment, final Setting setting) {
-		positionOfSettingProvider
-				.getPositionOfSetting(setting)
-				.ifPresent(this::highlightItem);
+		highlightItem(positionOfSettingProvider.getPositionOfSetting(setting).orElseThrow());
 	}
 
 	private void highlightItem(final int itemPosition) {

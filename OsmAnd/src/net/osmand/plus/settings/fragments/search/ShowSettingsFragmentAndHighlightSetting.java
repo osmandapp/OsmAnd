@@ -57,6 +57,7 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 				.getDashboard()
 				.applyScrollPosition(
 						mapActivity.getDashboard().getMainScrollView(),
+						// FK-TODO: remove constant 3380
 						3380);
 	}
 
