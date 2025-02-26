@@ -1,11 +1,14 @@
 package net.osmand.plus.settings.fragments.search;
 
+import android.view.View;
+
 import androidx.annotation.IdRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapFragment;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.IntentHelper;
 
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreference;
@@ -46,23 +49,29 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 	private void showConfigureMapDashboardAndHighlightSetting(final MapActivity mapActivity,
 															  final Setting setting) {
 		IntentHelper.showConfigureMapDashboard(mapActivity);
-		scrollToSetting(mapActivity, setting);
-		highlightSetting(
-				getFragment(mapActivity, ConfigureMapFragment.TAG),
-				setting);
+		final ConfigureMapFragment configureMapFragment = getConfigureMapFragment(mapActivity);
+		scrollToSetting(mapActivity.getDashboard(), configureMapFragment, setting);
+		highlightSetting(configureMapFragment, setting);
 	}
 
-	private static void scrollToSetting(final MapActivity mapActivity, final Setting setting) {
-		mapActivity
-				.getDashboard()
-				.applyScrollPosition(
-						mapActivity.getDashboard().getMainScrollView(),
-						// FK-TODO: remove constant 3380
-						3380);
+	private static void scrollToSetting(final DashboardOnMap dashboard,
+										final ConfigureMapFragment configureMapFragment,
+										final Setting setting) {
+		dashboard.applyScrollPosition(
+				dashboard.getMainScrollView(),
+				getYOffsetOfChildWithinContainer(
+						getViewForSetting(configureMapFragment, setting),
+						dashboard.getMainScrollView()));
 	}
 
-	private Fragment getFragment(final MapActivity mapActivity, final String tag) {
-		return mapActivity.getSupportFragmentManager().findFragmentByTag(tag);
+	private static View getViewForSetting(final ConfigureMapFragment configureMapFragment, final Setting setting) {
+		return configureMapFragment
+				.getViewAtPosition(configureMapFragment.getPositionOfSetting(setting).orElseThrow())
+				.orElseThrow();
+	}
+
+	private ConfigureMapFragment getConfigureMapFragment(final MapActivity mapActivity) {
+		return (ConfigureMapFragment) mapActivity.getSupportFragmentManager().findFragmentByTag(ConfigureMapFragment.TAG);
 	}
 
 	private static void highlightSetting(final Fragment settingsFragment, final Setting setting) {
@@ -71,5 +80,11 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 					.getSettingHighlighter()
 					.highlightSetting(settingsFragment, setting);
 		}
+	}
+
+	private static int getYOffsetOfChildWithinContainer(final View child, final View container) {
+		return child == container ?
+				0 :
+				child.getTop() + getYOffsetOfChildWithinContainer((View) child.getParent(), container);
 	}
 }

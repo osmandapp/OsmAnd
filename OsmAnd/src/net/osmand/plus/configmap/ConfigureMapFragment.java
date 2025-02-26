@@ -324,6 +324,10 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 		}
 	}
 
+	public Optional<View> getViewAtPosition(final int position) {
+		return Optional.ofNullable(views.get(position));
+	}
+
 	@Override
 	public OptionalInt getPositionOfSetting(final Setting setting) {
 		return asOptionalInt(
