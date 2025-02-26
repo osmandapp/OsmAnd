@@ -41,17 +41,15 @@ public abstract class OsmandSettingsItemWriter<T extends OsmandSettingsItem> ext
 				SettingsHelper.LOG.error("Failed to write preference: " + pref.getId(), e);
 			}
 		}
-		if (json.length() > 0) {
-			try {
-				int bytesDivisor = 1024;
-				byte[] bytes = json.toString(2).getBytes("UTF-8");
-				if (progress != null) {
-					progress.startWork(bytes.length / bytesDivisor);
-				}
-				Algorithms.streamCopy(new ByteArrayInputStream(bytes), outputStream, progress, bytesDivisor);
-			} catch (JSONException e) {
-				SettingsHelper.LOG.error("Failed to write json to stream", e);
+		try {
+			int bytesDivisor = 1024;
+			byte[] bytes = json.toString(2).getBytes("UTF-8");
+			if (progress != null) {
+				progress.startWork(bytes.length / bytesDivisor);
 			}
+			Algorithms.streamCopy(new ByteArrayInputStream(bytes), outputStream, progress, bytesDivisor);
+		} catch (JSONException e) {
+			SettingsHelper.LOG.error("Failed to write json to stream", e);
 		}
 		if (progress != null) {
 			progress.finishTask();
