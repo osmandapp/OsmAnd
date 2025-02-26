@@ -139,9 +139,7 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 				if (!dbHelper.isDataExpired(zoom, tileX, tileY, queryLang)) {
 					List<OsmandApiFeatureData> places = dbHelper.getPlaces(zoom, tileX, tileY, queryLang);
 					for (OsmandApiFeatureData item : places) {
-						// TODO remove checks poi type subtype null
-						if (Algorithms.isEmpty(item.properties.photoTitle)
-								|| item.properties.poitype == null || item.properties.poisubtype == null) {
+						if (Algorithms.isEmpty(item.properties.photoTitle)) {
 							continue;
 						}
 						ExploreTopPlacePoint point = new ExploreTopPlacePoint(item);
@@ -231,7 +229,7 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 	}
 
 	public Amenity getAmenity(LatLon latLon, long osmId) {
-		final Amenity[] foundAmenity = new Amenity[]{null};
+		final Amenity[] foundAmenity = new Amenity[] {null};
 		int radius = NEARBY_MIN_RADIUS;
 		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
 		app.getResourceManager().searchAmenities(

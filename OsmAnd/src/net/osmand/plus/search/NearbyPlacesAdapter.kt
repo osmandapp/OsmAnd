@@ -89,7 +89,8 @@ class NearbyPlacesAdapter(
 			val app = imageView.context.applicationContext as OsmandApplication
 			val poiTypes = app.poiTypes
 			val subType = poiTypes.getPoiTypeByKey(item.poisubtype)
-			val poiIcon = RenderingIcons.getBigIcon(app, subType.keyName)
+			val poiIcon =
+				if (subType == null) null else RenderingIcons.getBigIcon(app, subType.keyName)
 			val uiUtilities = app.uiUtilities
 			val nightMode = app.daynightHelper.isNightMode
 			val coloredIcon = if (poiIcon != null) {
@@ -129,7 +130,9 @@ class NearbyPlacesAdapter(
 				AndroidUiHelper.updateVisibility(it, !Algorithms.isEmpty(item.wikiDesc))
 			}
 
-			itemTypeTextView.text = subType.translation
+			if (subType != null) {
+				itemTypeTextView.text = subType.translation
+			}
 
 			// Calculate distance and show arrow
 			if (distanceTextView != null && arrowImageView != null) {
@@ -155,11 +158,6 @@ class NearbyPlacesAdapter(
 
 			itemView.setOnClickListener {
 				onItemClickListener.onNearbyItemClicked(item)
-			}
-
-			itemView.setOnTouchListener { v, _ ->
-				v?.performClick()
-				true
 			}
 		}
 
