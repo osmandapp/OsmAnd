@@ -13,22 +13,23 @@ import de.KnollFrank.lib.settingssearch.results.Setting;
 
 class ShowConfigureMapDashboardAndHighlightSetting {
 
-	private final MapActivity mapActivity;
+	private final DashboardOnMap dashboardOnMap;
 	private final ConfigureMapFragment configureMapFragment;
 
 	public static ShowConfigureMapDashboardAndHighlightSetting from(final MapActivity mapActivity) {
 		return new ShowConfigureMapDashboardAndHighlightSetting(
-				mapActivity,
+				mapActivity.getDashboard(),
 				Objects.requireNonNull((ConfigureMapFragment) mapActivity.getSupportFragmentManager().findFragmentByTag(ConfigureMapFragment.TAG)));
 	}
 
-	private ShowConfigureMapDashboardAndHighlightSetting(final MapActivity mapActivity, final ConfigureMapFragment configureMapFragment) {
-		this.mapActivity = mapActivity;
+	private ShowConfigureMapDashboardAndHighlightSetting(final DashboardOnMap dashboardOnMap,
+														 final ConfigureMapFragment configureMapFragment) {
+		this.dashboardOnMap = dashboardOnMap;
 		this.configureMapFragment = configureMapFragment;
 	}
 
 	public void showConfigureMapDashboardAndHighlightSetting(final Setting setting) {
-		IntentHelper.showConfigureMapDashboard(mapActivity);
+		IntentHelper.showConfigureMapDashboard(dashboardOnMap);
 		highlightSetting(setting);
 	}
 
@@ -40,12 +41,11 @@ class ShowConfigureMapDashboardAndHighlightSetting {
 	}
 
 	private void scrollToSetting(final Setting setting) {
-		final DashboardOnMap dashboard = mapActivity.getDashboard();
-		dashboard.applyScrollPosition(
-				dashboard.getMainScrollView(),
+		dashboardOnMap.applyScrollPosition(
+				dashboardOnMap.getMainScrollView(),
 				getYOffsetOfChildWithinContainer(
 						getViewForSetting(setting),
-						dashboard.getMainScrollView()));
+						dashboardOnMap.getMainScrollView()));
 	}
 
 	private View getViewForSetting(final Setting setting) {

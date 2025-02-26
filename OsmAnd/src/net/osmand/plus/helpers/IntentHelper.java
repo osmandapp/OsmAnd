@@ -28,6 +28,7 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.settings.fragments.MainSettingsFragment;
 import net.osmand.plus.settings.fragments.search.SettingsSearchButtonHelper;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
@@ -560,7 +561,7 @@ public class IntentHelper {
 			if (intent.hasExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
 				switch (intent.getStringExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
 					case BaseSettingsFragment.MAP_CONFIG:
-						showConfigureMapDashboard(mapActivity);
+						showConfigureMapDashboard(mapActivity.getDashboard());
 						break;
 
 					case BaseSettingsFragment.SCREEN_CONFIG:
@@ -633,8 +634,8 @@ public class IntentHelper {
 		}
 	}
 
-	public static void showConfigureMapDashboard(final MapActivity mapActivity) {
-		mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP, null);
+	public static void showConfigureMapDashboard(final DashboardOnMap dashboardOnMap) {
+		dashboardOnMap.setDashboardVisibility(true, DashboardType.CONFIGURE_MAP, null);
 	}
 
 	private void parseNavigationIntent(Intent intent) {
