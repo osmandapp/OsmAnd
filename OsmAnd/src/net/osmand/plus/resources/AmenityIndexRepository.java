@@ -1,11 +1,15 @@
 package net.osmand.plus.resources;
 
+import java.io.File;
 import java.util.List;
 
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
+import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.data.Amenity;
 
 public interface AmenityIndexRepository {
@@ -26,5 +30,13 @@ public interface AmenityIndexRepository {
 	List<Amenity> searchAmenitiesOnThePath(List<Location> locations, double radius, SearchPoiTypeFilter filter, 
 			ResultMatcher<Amenity> matcher);
 
-	
+	File getFile();
+
+	List<BinaryMapPoiReaderAdapter.PoiRegion> getReaderPoiIndexes();
+
+	void searchMapIndex(BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> sr);
+
+	void searchPoi(BinaryMapIndexReader.SearchRequest<Amenity> amenitySearchRequest);
+
+	List<Amenity> searchPoiByName(BinaryMapIndexReader.SearchRequest<Amenity> searchRequest);
 }

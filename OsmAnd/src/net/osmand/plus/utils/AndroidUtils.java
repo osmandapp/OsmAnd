@@ -686,31 +686,31 @@ public class AndroidUtils {
 		return typedValue.data;
 	}
 
-	public static int resolveAttribute(Context ctx, int attribute) {
+	public static int resolveAttribute(@NonNull Context ctx, int attribute) {
 		TypedValue outValue = new TypedValue();
 		ctx.getTheme().resolveAttribute(attribute, outValue, true);
 		return outValue.resourceId;
 	}
 
-	public static float getFloatValueFromRes(Context ctx, int resId) {
+	public static float getFloatValueFromRes(@NonNull Context ctx, int resId) {
 		TypedValue outValue = new TypedValue();
 		ctx.getResources().getValue(resId, outValue, true);
 		return outValue.getFloat();
 	}
 
 	@DrawableRes
-	public static int getActivityIconId(@NonNull OsmandApplication app, @Nullable RouteActivity activity) {
+	public static int getActivityIconId(@NonNull Context app, @Nullable RouteActivity activity) {
 		return activity != null
 				? getDrawableId(app, activity.getIconName(), R.drawable.ic_action_info_dark)
 				: R.drawable.ic_action_activity;
 	}
 
-	public static boolean hasDrawableId(@NonNull OsmandApplication app, @NonNull String iconName) {
+	public static boolean hasDrawableId(@NonNull Context app, @NonNull String iconName) {
 		return getDrawableId(app, iconName, 0) != 0;
 	}
 
 	@DrawableRes
-	public static int getDrawableId(@NonNull OsmandApplication app, @NonNull String iconName, @DrawableRes int defRes) {
+	public static int getDrawableId(@NonNull Context app, @NonNull String iconName, @DrawableRes int defRes) {
 		int iconId = getDrawableId(app, iconName);
 		if (iconId <= 0) {
 			iconId = RenderingIcons.getBigIconResourceId(iconName);
@@ -725,7 +725,7 @@ public class AndroidUtils {
 		return 0;
 	}
 
-	public static int getStatusBarHeight(Context ctx) {
+	public static int getStatusBarHeight(@NonNull Context ctx) {
 		int result = 0;
 		int resourceId = ctx.getResources().getIdentifier("status_bar_height", "dimen", "android");
 		if (resourceId > 0) {
@@ -734,7 +734,7 @@ public class AndroidUtils {
 		return result;
 	}
 
-	public static int getCutoutHeight(Activity activity) {
+	public static int getCutoutHeight(@NonNull Activity activity) {
 		int cutoutHeight = 0;
 
 		if (activity != null && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
@@ -748,7 +748,7 @@ public class AndroidUtils {
 		return cutoutHeight;
 	}
 
-	public static void addStatusBarPadding21v(@NonNull Activity activity, View view) {
+	public static void addStatusBarPadding21v(@NonNull Activity activity, @NonNull View view) {
 		if (isInFullScreenMode(activity)) {
 			int paddingLeft = view.getPaddingLeft();
 			int paddingTop = view.getPaddingTop();

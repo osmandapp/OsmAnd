@@ -664,7 +664,7 @@
     <string name="lang_sw">Swahili</string>
     <string name="lang_he">Hebraisk</string>
     <string name="rendering_attr_hideText_name">Tekst</string>
-    <string name="switch_to_raster_map_to_see">Ingen (nett)frakoblet vektorkart foreligger for dette stedet. Last ned et kart i \'Meny\' - \'Kartnedlasting\', eller skift til programtillegget for nettbaserte kart.</string>
+    <string name="switch_to_raster_map_to_see">Last ned et frakoblet vektorkart for dette stedet i \'Meny\' (\'Kartnedlasting\'), eller skift til programtillegget for nettbaserte kart.</string>
     <string name="rendering_category_others">Andre kartattributter</string>
     <string name="rendering_attr_publicTransportMode_name">Buss-, trolleybuss-, skyttelbussruter</string>
     <string name="rendering_attr_tramTrainRoutes_name">Trikk- og togruter</string>
@@ -714,7 +714,7 @@
     <string name="lang_ar">Arabisk</string>
     <string name="lang_fa">Persisk</string>
     <string name="lang_sc">Sardisk</string>
-    <string name="route_descr_select_destination">Velg reisemål</string>
+    <string name="route_descr_select_destination">Angi reisemål</string>
     <string name="routing_attr_prefer_motorway_name">Foretrekk motorveier</string>
     <string name="routing_attr_prefer_motorway_description">Foretrekk motorveier</string>
     <string name="routing_attr_avoid_toll_name">Ingen bomveier</string>
@@ -893,7 +893,7 @@
     <string name="monitoring_settings">Turopptak</string>
     <string name="monitoring_settings_descr">Sett opp hvordan du gjør opptak av turer.</string>
     <string name="record_plugin_name">Turopptak</string>
-    <string name="download_additional_maps">Laste ned manglende kart %1$s (%2$d MB)\?</string>
+    <string name="download_additional_maps">Laste ned manglende kart %1$s (%2$d MB)?</string>
     <string name="keep_navigation_service">Hold</string>
     <string name="gps_wake_up_timer">GPS-vekkingsintervall</string>
     <string name="forward">Videre</string>
@@ -1590,7 +1590,7 @@
     <string name="rendering_value_low_name">Lav</string>
     <string name="rendering_attr_hideWaterPolygons_description">Vann</string>
     <string name="rendering_attr_hideWaterPolygons_name">Skjul vann</string>
-    <string name="wiki_around">Nærliggende Wikipiedia-artikler</string>
+    <string name="wiki_around">Wikipedia-artikler i nærheten</string>
     <string name="route_roundabout_short">Ta avkjøring %1$d og fortsett</string>
     <string name="route_calculation">Ruteberegning</string>
     <string name="shared_string_appearance">Utseende</string>
@@ -1892,7 +1892,7 @@
     <string name="nearest_cities">Nærmeste byer</string>
     <string name="select_city">Velg by</string>
     <string name="select_postcode">Postnummersøk</string>
-    <string name="quick_action_auto_zoom">Auto-zoom på/av</string>
+    <string name="quick_action_auto_zoom">Auto-zoom kart</string>
     <string name="quick_action_auto_zoom_on">Aktiver auto-zoom</string>
     <string name="quick_action_auto_zoom_off">Deaktiver auto-zoom</string>
     <string name="no_overlay">Ingen overlegg</string>
@@ -2292,7 +2292,7 @@
     <string name="tap_on_map_to_hide_interface_descr">Et trykk på kartet skjuler/viser kontrollknappene og miniprogrammene.</string>
     <string name="mark_passed">Marker som passert</string>
     <string name="osn_modify_dialog_error">Kunne ikke endre notatet.</string>
-    <string name="quick_action_auto_zoom_desc">Knapp til å slå av eller på hastighetsbasert auto-zoom.</string>
+    <string name="quick_action_auto_zoom_desc">Knapp til å slå av eller på hastighetsstyrt auto-zoom.</string>
     <string name="quick_action_add_destination_desc">En knapp for å gjøre skjermsenteret til rutemålet, et tidligere valgt reisemål blir det siste mellomliggende målet.</string>
     <string name="quick_action_replace_destination_desc">En knapp for å gjøre skjermsenteret til det nye rutemålet, erstatter det tidligere valgte reisemålet (hvis noe).</string>
     <string name="quick_action_add_first_intermediate_desc">En knapp for å gjøre skjermsenteret til det første mellomliggende reisemålet.</string>
@@ -2524,11 +2524,7 @@
     <string name="show_images">Vis bilder</string>
     <string name="online_webpage_warning">Siden er kun tilgjengelig på nett. Åpne i nettleser\?</string>
     <string name="index_item_world_wikivoyage">Verdensomspennende Wikivoyage-artikler</string>
-    <string name="osmand_rastermaps_plugin_description">Få tilgang til mange typer nettbaserte kart (såkalte flis- eller rasterkart), fra forhåndsdefinerte OpenStreetMap-kartfliser (som Mapnik) til satellittbilder og kartlag til spesielle formål som vær, klima, geologi, relieffskygger etc.
-\n
-\nAlle disse kartene kan brukes som hovedkart (basiskart), eller som et overlegg eller underlag til et annet basiskart (som de nettfrakoblede vektorkartene til OsmAnd). For å gjøre underlagskart mer synlig, kan visse elementer i vektorkartene til OsmAnd skjules via menyen \'Kartinnstilling\'.
-\n
-\nLast ned fliskart direkte, eller kopier dem som SQLite-databasefiler til datamappen til OsmAnd ved å bruke en av mange tredjeparts kartbearbeidingsprogrammer.</string>
+    <string name="osmand_rastermaps_plugin_description">Få tilgang til mange typer nettbaserte kart (såkalte flis- eller rasterkart), som forhåndsopptegnede OpenStreetMap-kartfliser, satellittbilder og kartlag til spesielle formål som vær, klima, geologi, relieffskygger etc.\n\n Alle disse kartene kan brukes som hovedkart (basiskart), eller som et overlegg eller underlag til et annet basiskart (som de nettfrakoblede vektorkartene til OsmAnd). For å gjøre underlagskart mer synlig, kan visse elementer i vektorkartene til OsmAnd skjules via menyen \'Kartinnstilling\'.\n\n Last ned fliskart direkte, eller kopier dem som SQLite-databasefiler til datamappen til OsmAnd ved å bruke en av mange tredjeparts kartbearbeidingsprogrammer.</string>
     <string name="record_plugin_description">Ta opp turene eller treningene dine og analyser dataene når det gjelder hastighet, akkumulerte opp- og nedstigninger, høydeprofil etc. Spor som er tatt opp kan arkiveres, deles med venner, redigeres og etterbehandles.
 \n
 \nMer lesing på %1$s.</string>
@@ -2866,8 +2862,8 @@
     <string name="shared_string_milliradians">Milliradianer</string>
     <string name="angular_measeurement">Vinkelenhet</string>
     <string name="angular_measeurement_descr">Endre hva asimut måles i.</string>
-    <string name="routing_attr_avoid_sett_name">Ingen kuppelstein eller brostein</string>
-    <string name="routing_attr_avoid_sett_description">Unngår kuppelstein og brostein</string>
+    <string name="routing_attr_avoid_sett_name">Ingen brostein</string>
+    <string name="routing_attr_avoid_sett_description">Unngår brostein</string>
     <string name="routing_attr_avoid_tram_name">Ingen trikk</string>
     <string name="routing_attr_avoid_tram_description">Unngår trikk</string>
     <string name="routing_attr_avoid_bus_name">Ingen buss</string>
@@ -3121,7 +3117,7 @@
     <string name="track_storage_directory_descrp">Spor kan lagres i \'rec\'-mappen, månedlige eller daglige mapper.</string>
     <string name="store_tracks_in_rec_directory">Ta opp spor til \'rec\'-mappen</string>
     <string name="store_tracks_in_daily_directories">Ta opp spor i daglige mapper</string>
-    <string name="store_tracks_in_daily_directories_descrp">Ta opp spor i undermapper for hver forskjellig dag (som 2018-01-01).</string>
+    <string name="store_tracks_in_daily_directories_descrp">Ta opp spor i undermapper for hver opptaksdag (som 2018-01-01).</string>
     <string name="shared_string_memory_used_tb_desc">%1$s TB brukt</string>
     <string name="shared_string_memory_used_gb_desc">%1$s GB brukt</string>
     <string name="shared_string_memory_used_mb_desc">%1$s MB brukt</string>
@@ -4171,7 +4167,7 @@
     <string name="routeInfo_winter_ice_road_description">Fargelegg rute eller sporlinje etter vinterveiklassifisering.</string>
     <string name="routeInfo_smoothness_description">Klassifisering av manøvrerbarhet på vei/gangvei for kjøretøy med hjul, spesielt når det gjelder overflateregelmessighet/planhet.</string>
     <string name="routeInfo_surface_description">Angi informasjon om fysisk overflate for veier/gangstier.</string>
-    <string name="routeInfo_roadClass_description">Fargelegging av ruten eller rutelinje i henhold til veiklassifisering.</string>
+    <string name="routeInfo_roadClass_description">Fargelegg ruten eller sporlinjen etter veiklassifisering.</string>
     <string name="no_items_of_type_message">Du har ingen elementer av denne typen</string>
     <string name="add_group_to_markers">Legg til gruppe i markørliste</string>
     <string name="remove_group_from_markers">Fjern gruppe fra markørliste</string>
@@ -4209,8 +4205,8 @@
     <string name="history_preferences_descr">Du kan skru av historikklogging individuelt for hver av historikktypene.</string>
     <string name="shortcut_start_recording">Start opptak</string>
     <string name="shortcut_navigate_to">Naviger til …</string>
-    <string name="shortcut_navigate_to_work">Jobb</string>
-    <string name="shortcut_navigate_to_home">Hjem</string>
+    <string name="shortcut_navigate_to_work">Naviger til \'Jobb\'</string>
+    <string name="shortcut_navigate_to_home">Naviger til \'Hjem\'</string>
     <string name="android_auto_map_placeholder_title">Kartet vises på kjøretøyskjermen.</string>
     <string name="android_auto_map_placeholder_descr">Koble fra enheten din fra Android Auto for å vise kartet i programmet.</string>
     <string name="android_auto_purchase_request_title">Kjøp OsmAnd Pro eller Maps+ for å bruke OsmAnd med Android Auto</string>
@@ -4224,7 +4220,7 @@
     <string name="transparent_status_bar">Gjennomsiktig statusfelt</string>
     <string name="markers_history_is_disabled_descr">Skru på historikk for å få en liste over besøkte kartmarkører.</string>
     <string name="clear_all_history_warning">Fjerne alle historikkoppføringer i programmet inkludert søk, navigering og markørhistorikk\?</string>
-    <string name="location_access_request_title">OsmAnd trenger tilgang til posisjon for å navigere</string>
+    <string name="location_access_request_title">OsmAnd trenger posisjonstillatelse for å navigere.</string>
     <string name="routing_attr_only_permitted_ways_description">Kun bruk veier (stier, tråkk, osv) som er ettertrykkelig tillatt</string>
     <string name="routing_attr_allow_gate_name">Tillat grindbruk</string>
     <string name="upload_gpx_description_hint">La stå tomt. Spornavn vil bli brukt som beskrivelse. Innskrevet beskrivelse vil bli brukt for hvert spor.</string>
@@ -4233,18 +4229,18 @@
     <string name="safe_settings">Trygg</string>
     <string name="no_plugins_enabled">Du har ingen programtillegg påslått. Du finner en liste i «Meny → Programtillegg».</string>
     <string name="use_external_timestamps">Bruk eksterne tidsstempler</string>
-    <string name="approx_safe_mode">Trygt GPX-anslag</string>
-    <string name="approx_safe_mode_description">Utfør GPX-anslag ved bruk av tregere Android-metode istedenfor systemspesifikk kode.</string>
+    <string name="approx_safe_mode">Sikker GPX-tilnærming</string>
+    <string name="approx_safe_mode_description">Utfør GPX-tilnærmingen ved hjelp av tregere Android i stedet for innebygd kode.</string>
     <string name="use_external_timestamps_description">Bruk den nettbaserte ruterens tidsstempler til å justere estimert tid og gjennomsnittshastighet</string>
     <string name="routing_attr_prefer_tactile_paving_description">Foretrekk taktile ledelinjer</string>
     <string name="enter_verification_code">Skriv inn engangspassord</string>
     <string name="files_remaining">Gjenstående filer: %1$s %2$s</string>
     <string name="copying_file">Kopierer filen %1$s …</string>
     <string name="from_to_with_params">Fra %1$s til %2$s</string>
-    <string name="storage_copied_files_size">Kopierte %1$s filer %2$s</string>
+    <string name="storage_copied_files_size">Behandlet %1$s fil(er), %2$s</string>
     <string name="storage_found_files_descr">Trykk «%1$s» for å kopiere %2$s filer fra «%3$s» til «%4$s». Det kan ta litt tid.</string>
     <string name="storage_found_files_size">Fant %1$s filer %2$s</string>
-    <string name="folder_access_denied">Tilgang til valgt mappe kreves.</string>
+    <string name="folder_access_denied">Tillatelse kreves for å få tilgang til valgt mappe.</string>
     <string name="shared_storage_second_step">Klikk «Bruk denne mappen».</string>
     <string name="shared_string_copy_to">Kopier til</string>
     <string name="copying_completed">Kopiert</string>
@@ -4286,7 +4282,7 @@
     <string name="shared_string_hide_all">Skjul alle</string>
     <string name="memory_allocated_for_routing">Minnetildelning for ruting</string>
     <string name="display_groups_visibility_dialog_description">Du kan kontrollere gryppesynlighet på kartet. Hvis et spor er skjult vil alle grupper også være det.</string>
-    <string name="migration_files_present">Det er %1$d filer (%2$s) i valgt mappe «%3$s».</string>
+    <string name="migration_files_present">%1$d fil(er) (%2$s) allerede tilstede på målet \'%3$s\' og ikke overskrevet.</string>
     <string name="shared_string_memory">Minne</string>
     <string name="save_changes_into_file">Lagre endringer til fil</string>
     <string name="save_as_copy">Lagre som kopi</string>
@@ -4335,7 +4331,7 @@
     <string name="track_file_description">Å trykke denne handlingen vil vise en utvalgsdialog over tilgjengelige spor.</string>
     <string name="please_provide_group_name_message">Gi gruppen et navn.</string>
     <string name="rendering_attr_seabedDetail_description">Ytterligere tekstinfo om overflatebeskaffenhet til havbunnen, kombinerte overflatetyper, kategori og art for tang og sjøgress.</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Vannveistunneler</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Øk synlighet for vannveitunneler</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Skjematisk visning av ikoner ved lav forstørrelse</string>
     <string name="gpx_no_routes_title">Det finnes ingen ruter</string>
     <string name="gpx_no_routes_descr">Du kan bruke «%1$s»-verktøyet for å lagre ruten i en fil.</string>
@@ -4346,7 +4342,7 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikoner ved lav forstørrelse</string>
     <string name="predefined_waypoint_appearance_description">Ved å trykke på denne handlingen auto-lagres rutepunktet med forhåndsdefinerte parametere.</string>
     <string name="always_ask_waypoint_appearance_description">Ved å trykke på denne handlingen åpnes «Legg til rutepunkt», der du kan endre navn og utseende.</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Ikke skjul vannveistunneler</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Øk synlighet for vannveitunneler</string>
     <string name="not_enough_contributions_descr">Minst %1$s endringer de siste to månedene %2$s kreves for ubegrenset tilgang til timevise kartoppdateringer.</string>
     <string name="shared_string_reading_file">Leser fil …</string>
     <string name="exit_import">Avslutte\?</string>
@@ -5708,5 +5704,38 @@
     <string name="show_utm_grids">Bruk UTM istedenfor WGS84</string>
     <string name="show_grids_description">Tillat visning av rutenett over kartet</string>
     <string name="shared_string_road_exit">Avkjøring</string>
-    <string name="show_utm_grids_description">Vis rutenett i UTM-meter istedenfor WGS84-grader</string>
+    <string name="show_utm_grids_description">Vis rutenett i UTM-meter istedenfor WGS84</string>
+    <string name="original_icon_description">Hvert punkt beholder sitt eget ikon.</string>
+    <string name="map_widget_route_information_desc">Viser beregnet ankomsttid, gjenværende reisetid og distanse for den aktuelle navigeringsruten.</string>
+    <string name="save_favorite_default_appearance">Bruke endringer på de eksisterende punkter i mappen eller kun på nye?</string>
+    <string name="original_color_description">Hvert punkt beholder sin egen farge.</string>
+    <string name="original_shape_description">Hvert punkt beholder sin egen form.</string>
+    <string name="apply_to_all_points">Bruk på alle punkter</string>
+    <string name="daynight_mode_app_theme_summary">Kartets visning tilpasses appens overordnede tema - dagmodus for et lyst tema og nattmodus for et mørkt tema</string>
+    <string name="daynight_mode_sensor_summary">Bruker enhetens lyssensor til å veksle mellom lyse og mørke temaer i henhold til lysnivået i omgivelsene.</string>
+    <string name="missing_maps_description">Noen offline-kart som kreves for denne ruten, mangler eller er ikke oppdaterte. Last ned eller oppdater disse kartene.</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd kan hente høydedata fra nærliggende veier eller terrengkart.</string>
+    <string name="press_button_to_link_with_action">Trykk på knappen på enheten for å tilordne den til handlingen: %1$s</string>
+    <string name="cloud_trash_clear_confirmation">Slette alle elementer i papirkurven permanent?</string>
+    <string name="obd_fuel_type_gasoline">Bensin</string>
+    <string name="obd_fuel_type_methanol">Metanol</string>
+    <string name="obd_fuel_type_ethanol">Etanol</string>
+    <string name="obd_fuel_type_electric">Elektrisk</string>
+    <string name="quick_action_first_intermediate">Første mellomliggende</string>
+    <string name="screen_is_locked_by_action_button">Berøringsskjermen er låst. Trykk på knappen for å låse opp.</string>
+    <string name="no_assigned_keys_desc">Velg en handling og tilordne en tast ved å trykke på knappen \'Legg til\'.</string>
+    <string name="help_article_setup_a_route_name">Sett opp en rute</string>
+    <string name="delete_actions_button_confirmation">Er du sikker på at du vil slette \"%1$s\" med alle handlinger som er lagt til?</string>
+    <string name="lock_screen_description">Aktiverer eller deaktiverer berøringsskjermfunksjonalitet for å forhindre utilsiktede trykk</string>
+    <string name="obd_fuel_type_not_provided">Ingen drivstofftype angitt</string>
+    <string name="obd_fuel_type_propane">Propan</string>
+    <string name="daynight_mode_sunrise_sunset_summary">Bytter automatisk mellom dag- og natt-temaer basert på lokale soloppgangs- og solnedgangstider.</string>
+    <string name="battery_saving_mode">Strømsparingsmodus</string>
+    <string name="daynight_mode_day_summary">Viser alltid kartet i et lyst tema, ideelt for synlighet på dagtid.</string>
+    <string name="daynight_mode_night_summary">Viser alltid kartet i et mørkt tema, egnet for nattlige forhold eller forhold med lite lys.</string>
+    <string name="sorted_sufolders_toast">Undermapper i “%1$s” er sortert etter: “%2$s”</string>
+    <string name="special_routing_cpp">Spesiell rutingstype</string>
+    <string name="relief_3d_download_description">Ytterligere kart er nødvendig for å vise terreng på kartet.</string>
+    <string name="obd_fuel_type_diesel">Diesel</string>
+    <string name="show_mercator_grids">Bruk Mercator istedenfor WGS84 eller UTM</string>
 </resources>

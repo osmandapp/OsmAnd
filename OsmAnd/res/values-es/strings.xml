@@ -5348,14 +5348,14 @@
     <string name="delete_map_description">¿Borrar el mapa %1$s?</string>
     <string name="maps_and_resources">Mapas y recursos</string>
     <string name="shared_string_show_icon">Mostrar el icono</string>
-    <string name="smart_folder_name_present">Esta carpeta inteligente ya está presente</string>
+    <string name="smart_folder_name_present">La carpeta inteligente ya existe</string>
     <string name="smart_folder_saved">Carpeta inteligente guardada</string>
-    <string name="add_smart_folder">Agregar una carpeta inteligente</string>
+    <string name="add_smart_folder">Añadir carpeta inteligente</string>
     <string name="empty_name">Nombre vacío</string>
     <string name="edit_filter">Editar filtro</string>
-    <string name="save_as_smart_folder">Guardar como una carpeta inteligente</string>
+    <string name="save_as_smart_folder">Guardar como carpeta inteligente</string>
     <string name="delete_smart_folder_dialog_message">Esto eliminará la carpeta inteligente « %1$s ». (No se eliminará ninguna pista.)</string>
-    <string name="empty_smart_folder_title">No hay pista coincidente</string>
+    <string name="empty_smart_folder_title">No hay traza coincidente</string>
     <string name="empty_smart_folder_description">Las pistas coincidentes aparecen aquí</string>
     <string name="configure_filter">Configurar el filtro</string>
     <string name="no_config_smart_folder_title">Sin configurar</string>
@@ -5976,4 +5976,11 @@
     <string name="calculate_size">Calcular tamaño</string>
     <string name="rendering_attr_showClimbingRoutes_description">Mostrar vías de escalada</string>
     <string name="rendering_attr_showClimbingRoutes_name">Vías de escalada</string>
+    <string name="ais_load_data">Cargar datos AIS desde archivo</string>
+    <string name="ais_address_settings">Configuración de la dirección IP</string>
+    <string name="ais_address_settings_description">Elija el protocolo NMEA (UDP/TCP) y defina las direcciones</string>
+    <string name="shared_string_road_exit">Salida</string>
+    <string name="popular_places_nearby">Lugares populares cercanos</string>
+    <string name="recently_visited">Recientemente visitado</string>
+    <string name="hmd_promo_description">Acceso gratuito a funciones, incluidas descargas ilimitadas de mapas, relieve 3D, etc., durante %1$s / mes</string>
 </resources>

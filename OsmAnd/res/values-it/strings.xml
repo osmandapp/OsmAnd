@@ -2184,7 +2184,7 @@
     <string name="animate_my_location_desc">Scorrimento fluido della mappa quando sei in movimento. Introduce un leggero ritardo.</string>
     <string name="shared_string_overview">Panoramica</string>
     <string name="show_from_zoom_level">Mostra dal livello di zoom</string>
-    <string name="display_zoom_level">Mostra il livello dello zoom: %1$s</string>
+    <string name="display_zoom_level">Mostra il livello di zoom: %1$s</string>
     <string name="favorite_group_name">Nome del gruppo</string>
     <string name="change_color">Cambia il colore</string>
     <string name="private_access_routing_req">La tua destinazione si trova in un\'area privata. Permettere l\'accesso alle strade private per questo viaggio\?</string>
@@ -3182,7 +3182,7 @@
     <string name="monitoring_min_speed_descr_recommendation">Raccomandazione: prova prima a utilizzare il sensore del movimento attraverso la registrazione del filtro del minimo dislocamento (B), potrebbe produrre migliori risultati, e perderai meno dati. Se le tue tracce continuano a essere sporche a basse velocità, prova con valori maggiori di zero. Si prega di notare che alcune misurazioni possono non riportare nessuna velocità (alcuni metodi basti sulle reti), in questi casi non registrerai alcun dato.</string>
     <string name="monitoring_min_speed_descr_remark">Note: controllo velocità &gt; 0. Molti chip GPS riportano un valore di velocità solo se l\'algoritmo determina che sei in movimento, e nessuno se invece non lo sei. Quindi utilizzando l\'impostazione &gt; 0 nel filtro, in un certo senso si usa il sensore di movimento del chip GPS. Ma anche se non filtrati nel momento della registrazione, comunque utilizziamo questa funzione nell\'analisi dei nostri file GPX per determinare la distanza corretta, es. il valore visualizzato in quel campo è la distanza registrata quando si era in movimento.</string>
     <string name="monitoring_min_accuracy_descr">Questo registrerà solo punti misurati con un\'accuratezza minima (in metri/piedi, come riportati da Android per il tuo chipset). L\'accuratezza è la vicinanza delle misurazioni alla posizione reale, e non è direttamente correlata alla precisione, che è la dispersione delle misurazioni ripetute.</string>
-    <string name="monitoring_min_accuracy_descr_side_effect">Effetto collaterale: come conseguenza del filtraggio in base alla precisione, i punti potrebbero mancare del tutto ad es. sotto i ponti, sotto gli alberi, tra edifici elevati, o in determinate condizioni atmosferiche.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Effetto collaterale: come conseguenza del filtraggio in base alla precisione, i punti potrebbero mancare del tutto ad es. sotto i ponti, sotto gli alberi, tra edifici alti, o in determinate condizioni atmosferiche.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Raccomandazione: è difficile predire cosa verrà registrato e cosa no, potrebbe essere preferibile disattivare questo filtro.</string>
     <string name="monitoring_min_accuracy_descr_remark">Nota: se il GPS era stato disattivato immediatamente prima di una registrazione, il primo punto misurato potrebbe avere una precisione ridotta, quindi nel nostro codice potremmo voler attendere circa un secondo prima di registrare un punto (o registrare il meglio di 3 punti consecutivi, ecc.), ma non è ancora stato implementato.</string>
     <string name="monitoring_min_distance_descr">L\'attivazione di questo filtro consente di evitare ulteriori registrazioni di dati quando il movimento non viene quasi rilevato. Migliora anche l\'aspetto spaziale delle tracce senza ulteriore elaborazione.</string>
@@ -3231,7 +3231,7 @@
     <string name="profile_type_custom_string">Profilo personalizzato</string>
     <string name="shared_string_angle_param">Angolo: %s°</string>
     <string name="shared_string_angle">Angolo</string>
-    <string name="recalc_angle_dialog_descr">Un extra segmento rettilineo verrà visualizzato tra la mia posizione e il percorso calcolato fino a quando il percorso non viene ricalcolato</string>
+    <string name="recalc_angle_dialog_descr">Un segmento rettilineo aggiuntivo verrà visualizzato tra la mia posizione e il percorso calcolato fino a quando il percorso non viene ricalcolato</string>
     <string name="recalc_angle_dialog_title">Angolo minimo tra la mia localizzazione e il percorso</string>
     <string name="shared_string_preparing">Preparando</string>
     <string name="shared_string_poi_types">Tipi di PDI</string>
@@ -3744,7 +3744,7 @@
     <string name="announcement_time_passing">Passaggio</string>
     <string name="announcement_time_approach">Avvicinamento</string>
     <string name="announcement_time_prepare_long">Preparazione lunga</string>
-    <string name="announcement_time_prepare">Prepara</string>
+    <string name="announcement_time_prepare">Prepararsi</string>
     <string name="announcement_time_off_route">Fuori percorso</string>
     <string name="announcement_time_intervals">Intervalli di tempo e distanza</string>
     <string name="announcement_time_descr">Le tempistiche degli annunci dei messaggi vocali dipendono dal tipo di messaggio, dalla velocità di navigazione corrente e dalla velocità di navigazione predefinita.</string>
@@ -5600,7 +5600,7 @@
     <string name="l_100km">L/100 km</string>
     <string name="lock_screen">Schermata di blocco</string>
     <string name="track_does_not_contain_data_to_save">La traccia non contiene dati da salvare.</string>
-    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Traccia i dati vitali del veicolo utilizzando il protocollo OBD-II. Monitorate le metriche chiave come la velocità, il numero di giri del motore, il consumo di carburante e altro ancora.</string>
+    <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Traccia i dati vitali del veicolo utilizzando il protocollo OBD-II. Monitora le metriche chiave come la velocità, il numero di giri del motore, il consumo di carburante e altro ancora.</string>
     <string name="vehicle_metrics_obd_ii">Metriche Veicolo (OBD-II)</string>
     <string name="shared_string_hour">Ora</string>
     <string name="ltr_or_rtl_combine_via_per">%1$s per %2$s</string>
@@ -5716,7 +5716,7 @@
     <string name="ais_cpa_warning_time_description">Se il tempo impiegato per raggiungere il PAV con un\'altra imbarcazione è inferiore a questo valore, l\'imbarcazione viene contrassegnata in rosso.</string>
     <string name="show_grids_description">Permette di mostrare una griglia sulla mappa</string>
     <string name="show_utm_grids">Usa UTM invece di WGS84</string>
-    <string name="show_utm_grids_description">Mostra la griglia in metri UTM invece che in gradi WGS84</string>
+    <string name="show_utm_grids_description">Mostra la griglia in metri UTM invece che in WGS84</string>
     <string name="map_grid">Griglie di mappa</string>
     <string name="show_grids">Mostra griglia mappa</string>
     <string name="no_photo_for_location_desc">Ancora nessuna foto è stata aggiunta dagli utenti a questo luogo</string>
@@ -5724,4 +5724,15 @@
     <string name="shared_string_road_exit">Uscita</string>
     <string name="hmd_promo_description">Accesso gratuito alle funzionalità, inclusi scaricamenti mappe illimitati, rilievi 3D, ecc. per %1$s mese</string>
     <string name="hmd_promo">Promozione HMD per%1$s mesi</string>
+    <string name="apply_to_all_points">Applica a tutti i punti</string>
+    <string name="show_mercator_grids">Usa Mercator invece di WGS84 o UTM</string>
+    <string name="show_mercator_grids_description">Mostra la griglia in km di Mercatore invece che in WGS84 o UTM</string>
+    <string name="show_dms_grids">Usa DMS invece di gradi</string>
+    <string name="show_dms_grids_description">Mostra la griglia in gradi, minuti, secondi invece che gradi</string>
+    <string name="show_dm_grids">Usa DM invece di gradi o DMS</string>
+    <string name="original_color_description">Ogni punto manterrebbe il proprio colore.</string>
+    <string name="original_shape_description">Ogni punto manterrebbe la propria forma.</string>
+    <string name="original_icon_description">Ogni punto manterrebbe la propria icona.</string>
+    <string name="show_dm_grids_description">Mostra la griglia in gradi e minuti invece che in gradi o DMS</string>
+    <string name="save_favorite_default_appearance">Applicare le modifiche ai punti esistenti nella cartella o solo a quelli nuovi?</string>
 </resources>

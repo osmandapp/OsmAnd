@@ -44,7 +44,7 @@ import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
@@ -614,7 +614,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		buildStartRow(infoContainer, icon, text, startTitle, imagesContainer, new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				showLocationOnMap(start != null ? start.point : null);
+				showLocationOnMap(start != null ? start.getLatLon() : null);
 			}
 		});
 		addWalkRouteIcon(imagesContainer);
@@ -730,7 +730,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		addWalkRouteIcon(imagesContainer);
 
 		String timeStr = OsmAndFormatter.getFormattedDurationShortMinutes(startTime[0] + walkTime);
-		String name = getRoutePointDescription(destination.point, destination.getOnlyName());
+		String name = getRoutePointDescription(destination.getLatLon(), destination.getOnlyName());
 		SpannableString title = new SpannableString(name);
 		title.setSpan(new CustomTypefaceSpan(typeface), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		title.setSpan(new ForegroundColorSpan(getActiveColor()), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -739,7 +739,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		secondaryText.setSpan(new CustomTypefaceSpan(typeface), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		secondaryText.setSpan(new ForegroundColorSpan(getMainFontColor()), 0, secondaryText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-		buildDestinationRow(infoContainer, timeStr, title, secondaryText, destination.point, imagesContainer, v -> showLocationOnMap(destination.point));
+		buildDestinationRow(infoContainer, timeStr, title, secondaryText, destination.getLatLon(), imagesContainer, v -> showLocationOnMap(destination.getLatLon()));
 
 		((ViewGroup) view).addView(baseItemView);
 	}

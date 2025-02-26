@@ -438,7 +438,10 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	@NonNull
 	private BackgroundType getInitialBackgroundType() {
 		FavouritePoint favorite = getFavorite();
-		BackgroundType backgroundType = favorite != null ? favorite.getBackgroundType() : null;
+		BackgroundType backgroundType = null;
+		if (favorite != null && favorite.isBackgroundSet()) {
+			backgroundType = favorite.getBackgroundType();
+		}
 		FavoriteGroup group = getGroup();
 		if (group != null && backgroundType == null) {
 			backgroundType = group.getBackgroundType();

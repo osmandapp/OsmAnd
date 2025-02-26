@@ -37,13 +37,12 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.SearchHistoryHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapseExpandListener;
 import net.osmand.plus.mapcontextmenu.controllers.*;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.nearbyplaces.NearbyPlacesHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.aistracker.AisObject;
@@ -189,8 +188,9 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				}
 			} else if (object instanceof SearchHistoryHelper.HistoryEntry) {
 				menuController = new HistoryMenuController(mapActivity, pointDescription, (SearchHistoryHelper.HistoryEntry) object);
-			} else if (object instanceof NearbyPlacePoint point) {
-				Amenity amenity = NearbyPlacesHelper.INSTANCE.getAmenity(new LatLon(point.getLatitude(), point.getLongitude()), point.getId());
+			} else if (object instanceof ExploreTopPlacePoint point) {
+				Amenity amenity = mapActivity.getMyApplication().getExplorePlacesProvider().getAmenity(
+						new LatLon(point.getLatitude(), point.getLongitude()), point.getId());
 				if (amenity != null) {
 					menuController = new AmenityMenuController(mapActivity, pointDescription, amenity);
 				}

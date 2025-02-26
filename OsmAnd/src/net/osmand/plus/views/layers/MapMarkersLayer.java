@@ -15,7 +15,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextPaint;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Pair;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -48,7 +47,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.render.OsmandDashPathEffect;
@@ -546,7 +545,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	public boolean overlappedByWaypoint(MapMarker marker) {
 		List<TargetPoint> targetPoints = getApplication().getTargetPointsHelper().getAllPoints();
 		for (TargetPoint t : targetPoints) {
-			if (t.point.equals(marker.point)) {
+			if (t.getLatLon().equals(marker.point)) {
 				return true;
 			}
 		}

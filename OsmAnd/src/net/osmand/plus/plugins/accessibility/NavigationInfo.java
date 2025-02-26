@@ -17,7 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.routing.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
@@ -327,7 +327,7 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 			}
 		} else {
 			TargetPoint target = app.getTargetPointsHelper().getPointToNavigate();
-			updateTargetDirection((target != null) ? target.point : null, heading);
+			updateTargetDirection((target != null) ? target.getLatLon() : null, heading);
 		}
 	}
 
@@ -336,7 +336,7 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 		List<String> attributes = new ArrayList<String>();
 		String item;
 
-		item = getDirectionString(point == null ? null : point.point, heading);
+		item = getDirectionString(point == null ? null : point.getLatLon(), heading);
 		if (item != null)
 			attributes.add(item);
 		item = getSpeedString();

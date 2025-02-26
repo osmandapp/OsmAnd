@@ -22,6 +22,8 @@ import java.util.List;
 
 public class MapRouteCalculationProgressListener implements RouteCalculationProgressListener {
 
+	public static final String TAG = "route_calculation_progress";
+
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final RoutingHelper routingHelper;
@@ -53,6 +55,7 @@ public class MapRouteCalculationProgressListener implements RouteCalculationProg
 			activity.getMapRouteInfoMenu().updateRouteCalculationProgress(progress);
 			activity.getDashboard().updateRouteCalculationProgress(progress);
 			activity.updateProgress(progress);
+			app.getDialogManager().notifyOnProgress(TAG, progress);
 		});
 	}
 
@@ -103,6 +106,7 @@ public class MapRouteCalculationProgressListener implements RouteCalculationProg
 		app.runInUIThread(() -> {
 			activity.getMapRouteInfoMenu().routeCalculationFinished();
 			activity.getDashboard().routeCalculationFinished();
+			app.getDialogManager().notifyOnProgress(TAG, 100);
 
 			ProgressBar progressBar = activity.findViewById(R.id.map_horizontal_progress);
 			AndroidUiHelper.updateVisibility(progressBar, false);

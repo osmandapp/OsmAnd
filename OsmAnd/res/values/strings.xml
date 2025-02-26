@@ -10,6 +10,11 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="save_favorite_default_appearance">Apply changes to the existing points in the folder or only to new ones?</string>
+	<string name="original_color_description">Each point would keep its own color.</string>
+	<string name="original_icon_description">Each point would keep its own icon.</string>
+	<string name="original_shape_description">Each point would keep its own shape.</string>
+	<string name="apply_to_all_points">Apply to all points</string>
     <string name="hmd_promo">HMD Promo for %1$s months</string>
     <string name="hmd_promo_description">Free access to features including unlimited map downloads, 3D relief etc. for %1$s month</string>
 	<string name="shared_string_road_exit">Exit</string>
@@ -439,7 +444,13 @@ You will be able to pair this scanner again at any time.</string>
     <string name="show_grids">Show map grid</string>
     <string name="show_grids_description">Allow displaying grid over the map</string>
     <string name="show_utm_grids">Use UTM instead of WGS84</string>
-    <string name="show_utm_grids_description">Show grid in UTM meters instead of WGS84 degrees</string>
+    <string name="show_utm_grids_description">Show grid in UTM meters instead of WGS84</string>
+    <string name="show_mercator_grids">Use Mercator instead of WGS84 or UTM</string>
+    <string name="show_mercator_grids_description">Show grid in Mercator km instead of WGS84 or UTM</string>
+    <string name="show_dms_grids">Use DMS instead of degrees</string>
+    <string name="show_dms_grids_description">Show grid in degrees, minutes, seconds instead of degrees</string>
+    <string name="show_dm_grids">Use DM instead of degrees or DMS</string>
+    <string name="show_dm_grids_description">Show grid in degrees and minutes instead of degrees or DMS</string>
     <string name="map_grid">Map grids</string>
     <string name="routing_attr_avoid_cobblestone_name">Avoid cobblestone</string>
     <string name="routing_attr_avoid_cobblestone_description">Avoid cobblestone</string>

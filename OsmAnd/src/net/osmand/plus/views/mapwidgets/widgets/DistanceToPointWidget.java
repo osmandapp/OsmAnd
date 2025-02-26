@@ -12,7 +12,7 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.FormattedValue;
 import net.osmand.plus.utils.OsmAndFormatterParams;
@@ -96,7 +96,7 @@ public abstract class DistanceToPointWidget extends SimpleWidget {
 		@Override
 		public LatLon getPointToNavigate() {
 			TargetPoint targetPoint = mapActivity.getPointToNavigate();
-			return targetPoint == null ? null : targetPoint.point;
+			return targetPoint == null ? null : targetPoint.getLatLon();
 		}
 
 		@Override
@@ -128,7 +128,7 @@ public abstract class DistanceToPointWidget extends SimpleWidget {
 		@Override
 		public LatLon getPointToNavigate() {
 			TargetPoint targetPoint = targetPointsHelper.getFirstIntermediatePoint();
-			return targetPoint == null ? null : targetPoint.point;
+			return targetPoint == null ? null : targetPoint.getLatLon();
 		}
 
 		@Override

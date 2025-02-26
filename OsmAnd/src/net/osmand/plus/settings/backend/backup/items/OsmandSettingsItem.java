@@ -3,6 +3,7 @@ package net.osmand.plus.settings.backend.backup.items;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 
@@ -25,6 +26,12 @@ public abstract class OsmandSettingsItem extends SettingsItem {
 		super(settings.getContext(), json);
 	}
 
+	@NonNull
+	public OsmandApplication getApp() {
+		return app;
+	}
+
+	@NonNull
 	public OsmandSettings getSettings() {
 		return app.getSettings();
 	}

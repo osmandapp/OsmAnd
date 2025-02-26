@@ -4281,7 +4281,7 @@
     <string name="rendering_attr_horse_scale_dangerous_name">Dangereux</string>
     <string name="apply_only_to_new_points">Appliquer seulement aux nouveaux points</string>
     <string name="apply_only_to_new_favorites">Appliquer seulement aux nouveaux favoris</string>
-    <string name="apply_to_existing">Appliquer à tous les points</string>
+    <string name="apply_to_existing">Appliquer à tous les points existants</string>
     <string name="apply_to_existing_favorites_descr">Appliquer les modifications à tous les points favoris ou seulement aux nouveaux \?</string>
     <string name="change_default_appearance">Modifier l’apparence par défaut</string>
     <string name="apply_to_existing_points_descr">Appliquer les modifications à tous les points du groupe ou seulement aux nouveaux \?</string>
@@ -5675,7 +5675,7 @@
     <string name="ais_load_data">Charger des données AIS à partir d\'un fichier</string>
     <string name="ais_address_nmea_server">Adresse IP de la source des données NMEA</string>
     <string name="ais_address_nmea_server_description">Définir l\'adresse IP de la source des données NMEA (si TCP est utilisé)</string>
-    <string name="show_utm_grids_description">Affiche la grille en mètres UTM au lieu de degrés WGS84</string>
+    <string name="show_utm_grids_description">Affiche la grille en mètres UTM au lieu de WGS84</string>
     <string name="map_grid">Grilles de carte</string>
     <string name="show_utm_grids">Utiliser les coordonnées UTM au lieu de WGS84</string>
     <string name="show_grids_description">Autorise l\'affichage de la grille sur la carte</string>
@@ -5702,4 +5702,15 @@
     <string name="hmd_promo_description">Accès gratuit à certaines fonctionnalités comme le téléchargement illimité de cartes, le relief 3D, etc. pour %1$s mois</string>
     <string name="shared_string_road_exit">Sortie</string>
     <string name="hmd_promo">Promotion HMD pour %1$s mois</string>
+    <string name="original_color_description">Chaque point conservera sa propre couleur.</string>
+    <string name="apply_to_all_points">Appliquer à tous les points</string>
+    <string name="original_icon_description">Chaque point conservera sa propre icône.</string>
+    <string name="original_shape_description">Chaque point conservera sa propre forme.</string>
+    <string name="save_favorite_default_appearance">Appliquer les modifications à tous les points existants dans le dossier ou seulement aux nouveaux ?</string>
+    <string name="show_dms_grids">Utilisez la notation DMS au lieu de degrés</string>
+    <string name="show_mercator_grids_description">Affiche la grille en km Mercator au lieu de WGS84 ou UTM</string>
+    <string name="show_mercator_grids">Utiliser Mercator au lieu de WGS84 ou UTM</string>
+    <string name="show_dms_grids_description">Affiche la grille en degrés, minutes, secondes au lieu de degrés</string>
+    <string name="show_dm_grids">Utiliser DM au lieu des degrés ou DMS</string>
+    <string name="show_dm_grids_description">Afficher la grille en degrés et minutes au lieu de degrés ou DMS</string>
 </resources>

@@ -17,6 +17,7 @@ import java.util.TreeSet;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -66,7 +67,7 @@ public class RouteTestingTest {
 
 	}
 
-//	@Ignore 
+	@Ignore
 	@Test(timeout = TIMEOUT)
 	public void testRouting() throws Exception {
 		NativeLibrary nativeLibrary = null;

@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.routeinfo.RouteInfoDisplayMode;
 import net.osmand.util.Algorithms;
@@ -17,7 +18,7 @@ public class RouteInfoWidgetState extends ResizableWidgetState {
 	private final CommonPreference<RouteInfoDisplayMode> displayModePref;
 
 	public RouteInfoWidgetState(@NonNull OsmandApplication app, @Nullable String customId) {
-		super(app, customId, WidgetType.ROUTE_INFO);
+		super(app, customId, WidgetType.ROUTE_INFO, WidgetSize.MEDIUM);
 		displayModePref = registerDisplayModePreference(customId);
 	}
 

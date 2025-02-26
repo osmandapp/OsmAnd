@@ -18,6 +18,7 @@ public class CarSurfaceView extends View {
 	public CarSurfaceView(Context context, SurfaceRenderer surfaceRenderer) {
 		super(context);
 		this.surfaceRenderer = surfaceRenderer;
+		density = 1.0f;
 	}
 
 	public void setSurfaceParams(int width, int height, int dpi) {

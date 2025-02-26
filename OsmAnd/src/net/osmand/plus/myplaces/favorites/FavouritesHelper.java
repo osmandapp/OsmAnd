@@ -1,6 +1,8 @@
 package net.osmand.plus.myplaces.favorites;
 
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.plus.myplaces.favorites.FavouritesHelper.SaveOption.APPLY_TO_ALL;
+import static net.osmand.plus.myplaces.favorites.FavouritesHelper.SaveOption.APPLY_TO_NEW;
 import static net.osmand.shared.gpx.GpxUtilities.DEFAULT_ICON_NAME;
 
 import android.graphics.drawable.Drawable;
@@ -686,13 +688,36 @@ public class FavouritesHelper {
 		};
 	}
 
-	public void updateGroupColor(@NonNull FavoriteGroup group, int color, boolean updatePoints, boolean saveImmediately) {
-		if (updatePoints) {
+	public void updateGroupColor(@NonNull FavoriteGroup group, int color, @NonNull SaveOption saveOption, boolean saveImmediately) {
+		if (saveOption.shouldUpdatePoints()) {
 			for (FavouritePoint point : group.getPoints()) {
 				point.setColor(color);
 			}
 		}
-		group.setColor(color);
+		if (saveOption.shouldUpdateGroup()) {
+			group.setColor(color);
+		}
+		runSyncWithMarkers(group);
+		if (saveImmediately) {
+			saveCurrentPointsIntoFile(false);
+		}
+	}
+
+	public void updateGroupColor(@NonNull FavoriteGroup group, int color, boolean updatePoints, boolean saveImmediately) {
+		SaveOption saveOption = updatePoints ? APPLY_TO_ALL : APPLY_TO_NEW;
+		updateGroupColor(group, color, saveOption, saveImmediately);
+	}
+
+	public void updateGroupIconName(@NonNull FavoriteGroup group, @NonNull String iconName,
+	                                @NonNull SaveOption saveOption, boolean saveImmediately) {
+		if (saveOption.shouldUpdatePoints()) {
+			for (FavouritePoint point : group.getPoints()) {
+				point.setIconIdFromName(iconName);
+			}
+		}
+		if (saveOption.shouldUpdateGroup()) {
+			group.setIconName(iconName);
+		}
 		runSyncWithMarkers(group);
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile(false);
@@ -701,12 +726,20 @@ public class FavouritesHelper {
 
 	public void updateGroupIconName(@NonNull FavoriteGroup group, @NonNull String iconName,
 	                                boolean updatePoints, boolean saveImmediately) {
-		if (updatePoints) {
+		SaveOption saveOption = updatePoints ? APPLY_TO_ALL : APPLY_TO_NEW;
+		updateGroupIconName(group, iconName, saveOption, saveImmediately);
+	}
+
+	public void updateGroupBackgroundType(@NonNull FavoriteGroup group, @NonNull BackgroundType backgroundType,
+	                                      @NonNull SaveOption saveOption, boolean saveImmediately) {
+		if (saveOption.shouldUpdatePoints()) {
 			for (FavouritePoint point : group.getPoints()) {
-				point.setIconIdFromName(iconName);
+				point.setBackgroundType(backgroundType);
 			}
 		}
-		group.setIconName(iconName);
+		if (saveOption.shouldUpdateGroup()) {
+			group.setBackgroundType(backgroundType);
+		}
 		runSyncWithMarkers(group);
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile(false);
@@ -715,16 +748,8 @@ public class FavouritesHelper {
 
 	public void updateGroupBackgroundType(@NonNull FavoriteGroup group, @NonNull BackgroundType backgroundType,
 	                                      boolean updatePoints, boolean saveImmediately) {
-		if (updatePoints) {
-			for (FavouritePoint point : group.getPoints()) {
-				point.setBackgroundType(backgroundType);
-			}
-		}
-		group.setBackgroundType(backgroundType);
-		runSyncWithMarkers(group);
-		if (saveImmediately) {
-			saveCurrentPointsIntoFile(false);
-		}
+		SaveOption saveOption = updatePoints ? APPLY_TO_ALL : APPLY_TO_NEW;
+		updateGroupBackgroundType(group, backgroundType, saveOption, saveImmediately);
 	}
 
 	public void updateGroupVisibility(@NonNull FavoriteGroup group, boolean visible, boolean saveImmediately) {
@@ -812,5 +837,19 @@ public class FavouritesHelper {
 			favouritePoints.addAll(group.getPoints());
 		}
 		return favouritePoints;
+	}
+
+	public enum SaveOption {
+		APPLY_TO_EXISTING,
+		APPLY_TO_NEW,
+		APPLY_TO_ALL;
+
+		public boolean shouldUpdatePoints() {
+			return this == APPLY_TO_EXISTING || this == APPLY_TO_ALL;
+		}
+
+		public boolean shouldUpdateGroup(){
+			return this == APPLY_TO_NEW || this == APPLY_TO_ALL;
+		}
 	}
 }

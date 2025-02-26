@@ -45,6 +45,7 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 	private int maxProgress;
 	private int importProgress;
 	private int exportProgress;
+	private boolean startSyncPending = true;
 
 	public SyncBackupTask(@NonNull OsmandApplication app, @NonNull String key,
 	                      @NonNull SyncOperationType operation,
@@ -81,7 +82,12 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 		return null;
 	}
 
-	private void startSync() {
+	private synchronized void startSync() {
+		if (!startSyncPending) {
+			return;
+		}
+		startSyncPending = false;
+
 		PrepareBackupResult backup = backupHelper.getBackup();
 		BackupInfo info = backup.getBackupInfo();
 
@@ -170,9 +176,6 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 	@Override
 	public void onBackupPrepared(@Nullable PrepareBackupResult backupResult) {
 		startSync();
-		if (syncListener != null) {
-			syncListener.onBackupSyncStarted();
-		}
 	}
 
 	@Override
