@@ -26,10 +26,15 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseOsmAndFragment
+import net.osmand.plus.dashboard.DashboardType
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.search.NearbyPlacesAdapter
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
+import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton
+import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton
+import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton
+import net.osmand.plus.views.mapwidgets.widgets.RulerWidget
 import net.osmand.plus.widgets.TextViewEx
 import org.apache.commons.logging.Log
 
@@ -48,6 +53,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	private var mainContent: LinearLayout? = null
 	private var showListContainer: View? = null
 	private var frameLayout: FrameLayout? = null
+	private var rulerWidget: RulerWidget? = null
 
 	override fun getContentStatusBarNightMode(): Boolean {
 		return nightMode
@@ -60,6 +66,31 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		location = app.locationProvider.lastKnownLocation
 		updateNightMode()
 		return themedInflater.inflate(R.layout.fragment_nearby_places, container, false)
+	}
+
+	private fun buildZoomButtons(view: View) {
+		val zoomButtonsView = view.findViewById<View>(R.id.map_hud_controls)
+		mapActivity?.let { activity ->
+			val mapLayers = activity.mapLayers
+			val layer = mapLayers.mapControlsLayer
+			val zoomInBtn = view.findViewById<ZoomInButton>(R.id.map_zoom_in_button)
+			if (zoomInBtn != null) {
+				layer.addCustomMapButton(zoomInBtn)
+			}
+			val zoomOutBtn = view.findViewById<ZoomOutButton>(R.id.map_zoom_out_button)
+			if (zoomOutBtn != null) {
+				layer.addCustomMapButton(zoomOutBtn)
+			}
+			val myLocationBtn = view.findViewById<MyLocationButton>(R.id.map_my_location_button)
+			if (myLocationBtn != null) {
+				layer.addCustomMapButton(myLocationBtn)
+			}
+			AndroidUiHelper.updateVisibility(zoomButtonsView, true)
+			val mapInfoLayer = mapLayers.mapInfoLayer
+			rulerWidget =
+				mapInfoLayer.setupRulerWidget(view.findViewById(R.id.map_ruler_layout))
+			activity.mapLayers.mapControlsLayer.addCustomMapButton(view.findViewById(R.id.map_compass_button))
+		}
 	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -78,6 +109,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		setupShowAll(view)
 		setupToolBar(view)
 		setupVerticalNearbyList(view)
+		buildZoomButtons(view)
 		val dialogFragment = mapActivity?.fragmentsHelper?.quickSearchDialogFragment
 		dialogFragment?.hide()
 	}
@@ -100,6 +132,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		val app = requireActivity().application as OsmandApplication
 		app.locationProvider.addLocationListener(this)
 		app.locationProvider.addCompassListener(this)
+		mapActivity?.dashboard?.setDashboardVisibility(true, DashboardType.EXPLORE_NEARBY_PLACES)
 	}
 
 	override fun onPause() {
