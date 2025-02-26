@@ -2,7 +2,6 @@ package net.osmand.plus.configmap;
 
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.ColorInt;
@@ -11,7 +10,6 @@ import androidx.fragment.app.Fragment;
 import org.threeten.bp.Duration;
 
 import java.util.Map;
-import java.util.OptionalInt;
 
 import de.KnollFrank.lib.settingssearch.common.Attributes;
 import de.KnollFrank.lib.settingssearch.results.PositionOfSettingProvider;
@@ -34,13 +32,9 @@ public class ItemOfLinearLayoutHighlighter implements SettingHighlighter {
 
 	@Override
 	public void highlightSetting(final Fragment settingsFragment, final Setting setting) {
-		highlightItem(positionOfSettingProvider.getPositionOfSetting(setting));
-	}
-
-	private void highlightItem(final OptionalInt itemPosition) {
-		itemPosition.ifPresentOrElse(
-				this::highlightItem,
-				() -> Log.e("doHighlight", "Setting not found on given screen"));
+		positionOfSettingProvider
+				.getPositionOfSetting(setting)
+				.ifPresent(this::highlightItem);
 	}
 
 	private void highlightItem(final int itemPosition) {

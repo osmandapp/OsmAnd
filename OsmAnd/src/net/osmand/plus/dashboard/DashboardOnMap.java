@@ -242,7 +242,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			}
 		};
 		toolbar = dashboardView.findViewById(R.id.toolbar);
-		ObservableScrollView scrollView = dashboardView.findViewById(R.id.main_scroll);
+		ObservableScrollView scrollView = getMainScrollView();
 		listView = dashboardView.findViewById(R.id.dash_list_view);
 		//listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		listView.setDrawSelectorOnTop(true);
@@ -289,6 +289,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 		initActionButtons();
 		dashboardView.addView(actionButton);
+	}
+
+	public ObservableScrollView getMainScrollView() {
+		return dashboardView.findViewById(R.id.main_scroll);
 	}
 
 	private void updateListBackgroundHeight() {
@@ -566,7 +570,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			}
 			updateDownloadBtn();
 			View listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
-			ScrollView scrollView = dashboardView.findViewById(R.id.main_scroll);
+			ScrollView scrollView = getMainScrollView();
 			if (isCurrentType(DASHBOARD) || isCurrentTypeHasIndividualFragment()) {
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				if (isCurrentType(DASHBOARD)) {
@@ -1119,7 +1123,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		applyScrollPosition(scrollView, lastKnownScroll != null ? lastKnownScroll : 0);
 	}
 
-	private void applyScrollPosition(@NonNull ScrollView scrollView, int scrollYPos) {
+	public void applyScrollPosition(@NonNull ScrollView scrollView, int scrollYPos) {
 		scrollView.postDelayed(() -> {
 			scrollView.scrollTo(0, scrollYPos);
 			onScrollChangedImpl(scrollYPos);
