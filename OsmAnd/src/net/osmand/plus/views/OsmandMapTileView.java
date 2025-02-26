@@ -24,7 +24,6 @@ import android.os.SystemClock;
 import android.util.DisplayMetrics;
 import android.view.*;
 import android.view.GestureDetector.SimpleOnGestureListener;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

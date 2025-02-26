@@ -13,20 +13,23 @@ import net.osmand.map.IMapLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.PointImageDrawable;
 
 public class SelectLocationController extends BaseDialogController implements IMapLocationListener {
 
 	private static final String PROCESS_ID = "select_location_on_map";
 
+	private final CenterIconProvider centerIconProvider;
 	private OnResultCallback<LatLon> onResultCallback;
 
-	public SelectLocationController(@NonNull OsmandApplication app) {
+	public SelectLocationController(@NonNull OsmandApplication app,
+	                                @NonNull CenterIconProvider centerIconProvider) {
 		super(app);
+		this.centerIconProvider = centerIconProvider;
 	}
 
 	@NonNull
@@ -79,6 +82,11 @@ public class SelectLocationController extends BaseDialogController implements IM
 		dialogManager.askRefreshDialogCompletely(getProcessId());
 	}
 
+	@Nullable
+	public PointImageDrawable getCenterPointIcon() {
+		return centerIconProvider != null ? centerIconProvider.getCenterPointIcon() : null;
+	}
+
 	@NonNull
 	private static LatLon getMapCenterCoordinates(@NonNull OsmandApplication app) {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
@@ -90,15 +98,16 @@ public class SelectLocationController extends BaseDialogController implements IM
 	}
 
 	@Nullable
-	public static SelectLocationController getExistedInstance(OsmandApplication app) {
+	public static SelectLocationController getExistedInstance(@NonNull OsmandApplication app) {
 		DialogManager dialogManager = app.getDialogManager();
 		return (SelectLocationController) dialogManager.findController(PROCESS_ID);
 	}
 
 	public static void showDialog(@NonNull FragmentActivity activity,
+								  @NonNull CenterIconProvider centerIconProvider,
 	                              @NonNull OnResultCallback<LatLon> onResultCallback) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-		SelectLocationController controller = new SelectLocationController(app);
+		SelectLocationController controller = new SelectLocationController(app, centerIconProvider);
 		controller.setOnResultCallback(onResultCallback);
 
 		DialogManager dialogManager = app.getDialogManager();

@@ -5,7 +5,6 @@ import static net.osmand.plus.quickaction.QuickActionIds.FAVORITE_ACTION_ID;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +12,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
-import net.osmand.plus.GeocodingLookupService.OnAddressLookupResult;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
@@ -29,9 +28,10 @@ import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 
-public class FavoriteAction extends QuickAction {
+public class FavoriteAction extends AddMapObjectAction {
 
 
 	public static final QuickActionType TYPE = new QuickActionType(FAVORITE_ACTION_ID,
@@ -57,8 +57,7 @@ public class FavoriteAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(@NonNull MapActivity mapActivity) {
-		LatLon latLon = getMapLocation(mapActivity);
+	protected void addMapObject(@NonNull MapActivity mapActivity, @NonNull LatLon latLon) {
 		String title = getParams().get(KEY_NAME);
 		if (title == null || title.isEmpty()) {
 			progressDialog = createProgressDialog(mapActivity, new DialogOnClickListener() {
@@ -80,12 +79,9 @@ public class FavoriteAction extends QuickAction {
 			});
 			progressDialog.show();
 
-			lookupRequest = new AddressLookupRequest(latLon, new OnAddressLookupResult() {
-				@Override
-				public void geocodingDone(String address) {
-					dismissProgressDialog();
-					addFavorite(mapActivity, latLon, address, !Boolean.valueOf(getParams().get(KEY_DIALOG)));
-				}
+			lookupRequest = new AddressLookupRequest(latLon, address -> {
+				dismissProgressDialog();
+				addFavorite(mapActivity, latLon, address, !Boolean.valueOf(getParams().get(KEY_DIALOG)));
 			}, null);
 
 			mapActivity.getMyApplication().getGeocodingLookupService().lookupAddress(lookupRequest);
@@ -94,24 +90,20 @@ public class FavoriteAction extends QuickAction {
 		}
 	}
 
+	@Nullable
+	@Override
+	protected PointImageDrawable getMapObjectDrawable() {
+		return null;
+	}
+
 	private ProgressDialog createProgressDialog(Context context, @NonNull DialogOnClickListener listener) {
 		ProgressDialog dialog = new ProgressDialog(context);
 		dialog.setCancelable(false);
 		dialog.setMessage(context.getString(R.string.search_address));
 		dialog.setButton(Dialog.BUTTON_POSITIVE, context.getString(R.string.shared_string_skip),
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						listener.skipOnClick();
-					}
-				});
+				(d, which) -> listener.skipOnClick());
 		dialog.setButton(Dialog.BUTTON_NEGATIVE, context.getString(R.string.access_hint_enter_name),
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						listener.enterNameOnClick();
-					}
-				});
+				(d, which) -> listener.enterNameOnClick());
 		return dialog;
 	}
 
