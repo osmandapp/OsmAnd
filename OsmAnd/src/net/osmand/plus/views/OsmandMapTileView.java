@@ -24,11 +24,11 @@ import android.os.SystemClock;
 import android.util.DisplayMetrics;
 import android.view.*;
 import android.view.GestureDetector.SimpleOnGestureListener;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
@@ -61,12 +61,14 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.auto.views.CarSurfaceView;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.card.color.palette.migration.ColorsMigrationAlgorithmV2;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.TwoFingerTapDetector;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityActionsProvider;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.render.UpdateRendererAsyncTask;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.utils.AndroidUtils;
@@ -92,6 +94,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class OsmandMapTileView implements IMapDownloaderCallback {
 
@@ -119,6 +123,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private final FPSMeasurement main = new FPSMeasurement();
 	private final FPSMeasurement additional = new FPSMeasurement();
 	private final MapRenderFPSMeasurement renderFPSMeasurement = new MapRenderFPSMeasurement();
+	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	private boolean DISABLE_MAP_LAYERS;
 	private StateChangedListener<Boolean> disableMapLayersListener;
@@ -1322,6 +1327,19 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			sendRefreshMapMsg(drawSettings, 20);
 			refreshBufferImage(drawSettings);
 		}
+	}
+
+	public void refreshMapComplete() {
+		app.getResourceManager().getRenderer().clearCache();
+		updateMapSettings(true, null);
+		refreshMap(true);
+	}
+
+	public void updateMapSettings(boolean updateMapRenderer, @Nullable CallbackWithObject<Boolean> callback) {
+		app.getAppInitializer().addOnFinishListener(init -> {
+			UpdateRendererAsyncTask task = new UpdateRendererAsyncTask(app, updateMapRenderer, callback);
+			task.executeOnExecutor(singleThreadExecutor);
+		});
 	}
 
 	private void sendRefreshMapMsg(@NonNull DrawSettings drawSettings, int delay) {
