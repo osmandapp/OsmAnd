@@ -3,6 +3,7 @@ package net.osmand.plus.exploreplaces;
 import android.annotation.SuppressLint;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -197,7 +198,7 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 			}
 
 			@Override
-			public void onFinish(@NonNull List<? extends OsmandApiFeatureData> result) {
+			public void onFinish(@Nullable List<? extends OsmandApiFeatureData> result) {
 				synchronized (ExplorePlacesProviderJava.this) {
 					finishedTasks++; // Increment the finished task counter
 					notifyListeners(startedTasks != finishedTasks);
