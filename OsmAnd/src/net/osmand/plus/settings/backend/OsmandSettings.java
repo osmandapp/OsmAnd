@@ -97,6 +97,7 @@ import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
+import net.osmand.render.RenderingClass;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.shared.gpx.ColoringPurpose;
@@ -3142,7 +3143,11 @@ public class OsmandSettings {
 	}
 
 	@NonNull
-	public CommonPreference<Boolean> getСustomBooleanRenderClassProperty(@NonNull String name, boolean defaultValue) {
+	public CommonPreference<Boolean> getBooleanRenderClassProperty(@NonNull RenderingClass renderingClass) {
+		return getBooleanRenderClassProperty(renderingClass.getName(), renderingClass.isEnabledByDefault());
+	}
+
+	public CommonPreference<Boolean> getBooleanRenderClassProperty(@NonNull String name, boolean defaultValue) {
 		if (!customBooleanRenderClassProps.containsKey(name)) {
 			CommonPreference<Boolean> preference = new BooleanPreference(this, name, defaultValue).makeProfile();
 			customBooleanRenderClassProps.put(name, preference);

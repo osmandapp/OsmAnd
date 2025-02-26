@@ -89,8 +89,7 @@ public class RenderingClassesCard extends MapBaseCard {
 
 	@NonNull
 	private View createItemRow(@NonNull RenderingClass renderingClass, boolean showSubscreen, boolean showDivider) {
-		CommonPreference<Boolean> pref = settings.getСustomBooleanRenderClassProperty(
-				renderingClass.getName(), renderingClass.isEnabledByDefault());
+		CommonPreference<Boolean> pref = settings.getBooleanRenderClassProperty(renderingClass);
 		boolean enabled = pref.get();
 
 		ContextMenuItem item = new ContextMenuItem(renderingClass.getName())
