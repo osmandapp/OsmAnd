@@ -100,4 +100,5 @@
     <string name="routing_attr_hazmat_category_usa_2_name">Gasan</string>
     <string name="routing_attr_hazmat_category_usa_9_name">Measgaichte</string>
     <string name="dangerous_goods">Bathar cunnartach</string>
+    <string name="shared_string_deleting">Dubhadh às</string>
 </resources>
