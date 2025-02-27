@@ -5727,4 +5727,7 @@
     <string name="original_shape_description">Jeder Punkt würde seine eigene Form behalten.</string>
     <string name="show_mercator_grids">Mercator statt WGS84 oder UTM verwenden</string>
     <string name="show_mercator_grids_description">Gitter in Mercator km statt WGS84 oder UTM anzeigen</string>
+    <string name="show_dms_grids">Verwende Dezimeter statt Grad</string>
+    <string name="show_dm_grids">Verwende Dezimeter statt Grad oder Dezimeter pro Meter</string>
+    <string name="show_dm_grids_description">Zeige Gitter in Grad und Minuten statt in Grad oder DMS</string>
 </resources>
