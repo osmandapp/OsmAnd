@@ -3437,4 +3437,22 @@
     <string name="route_between_points_add_track_desc">Chọn một tệp cung đường để thêm đoạn mới vào.</string>
     <string name="plan_route_open_existing_track">Mở cung đường đã có sẵn</string>
     <string name="plan_route_import_track">Nhập cung đường</string>
+    <string name="gpx_split_interval_descr">Chọn khoảng thời gian mà các dấu mốc với khoảng cách hoặc thời gian trên cung đường sẽ được hiển thị.</string>
+    <string name="select_track_width">Chọn chiều rộng</string>
+    <string name="app_mode_enduro_motorcycle">Xe mô tô địa hình</string>
+    <string name="add_hidden_group_info">Điểm đã thêm có thể được tìm thấy trong \"%s\". Bỏ ẩn nhóm đã chọn để hiện nó trên bản đồ.</string>
+    <string name="please_provide_point_name_error">Vui lòng cung cấp tên cho điểm</string>
+    <string name="use_volume_buttons_as_zoom_descr">Điều khiển mức thu phóng bản đồ bằng nút âm lượng của thiết bị.</string>
+    <string name="search_download_wikipedia_maps">Tải bản đồ Wikipedia</string>
+    <string name="use_volume_buttons_as_zoom">Nút âm lượng để thu phóng</string>
+    <string name="app_mode_wheelchair">Xe lăn</string>
+    <string name="plugin_wikipedia_description">Lấy thông tin về các điểm quan tâm từ Wikipedia, một hướng dẫn bỏ túi ngoại tuyến có chứa các bài viết về các địa điểm và điểm đến.</string>
+    <string name="app_mode_wheelchair_forward">Xe lăn về phía trước</string>
+    <string name="osm_edit_closed_note">Ghi chú OSM đã bị đóng</string>
+    <string name="app_mode_motor_scooter">Xe tay ga</string>
+    <string name="add_to_a_track">Thêm vào một cung đường</string>
+    <string name="quick_action_remove_next_destination_descr">Xoá đích đến kế tiếp trên tuyến đường của bạn. Nếu đó là đích đến cuối cùng, việc điều hướng sẽ dừng lại.</string>
+    <string name="route_between_points">Tuyến đường giữa các điểm</string>
+    <string name="set_working_days_to_continue">Đặt ngày làm việc để tiếp tục</string>
+    <string name="app_mode_go_cart">Xe đua nhỏ</string>
 </resources>
