@@ -44,11 +44,11 @@ class ShowConfigureMapDashboardAndHighlightSetting {
 		dashboardOnMap.applyScrollPosition(
 				dashboardOnMap.getMainScrollView(),
 				getYOffsetOfChildWithinContainer(
-						getViewForSetting(setting),
+						getView(setting),
 						dashboardOnMap.getMainScrollView()));
 	}
 
-	private View getViewForSetting(final Setting setting) {
+	private View getView(final Setting setting) {
 		return configureMapFragment
 				.getViewAtPosition(configureMapFragment.getPositionOfSetting(setting).orElseThrow())
 				.orElseThrow();
