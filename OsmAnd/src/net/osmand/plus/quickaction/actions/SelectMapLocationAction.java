@@ -13,44 +13,42 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.views.PointImageDrawable;
 
-public abstract class AddMapObjectAction extends QuickAction {
+public abstract class SelectMapLocationAction extends QuickAction {
 
-	public AddMapObjectAction(@NonNull QuickActionType type) {
+	public SelectMapLocationAction(@NonNull QuickActionType type) {
 		super(type);
 	}
 
-	public AddMapObjectAction(@NonNull QuickAction quickAction) {
+	public SelectMapLocationAction(@NonNull QuickAction quickAction) {
 		super(quickAction);
 	}
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-		requestLocation(mapActivity, latLon -> addMapObject(mapActivity, latLon));
+		requestLocation(mapActivity, latLon -> onLocationSelected(mapActivity, latLon));
 	}
 
 	private void requestLocation(@NonNull MapActivity mapActivity,
 	                             @NonNull OnResultCallback<LatLon> callback) {
 		if (shouldSelectLocationManually()) {
-			SelectLocationController.showDialog(mapActivity, this::getMapObjectDrawable, callback);
+			SelectLocationController.showDialog(mapActivity, () -> getLocationIcon(mapActivity), callback);
 		} else {
 			callback.onResult(getMapLocation(mapActivity));
 		}
 	}
 
-	protected abstract void addMapObject(@NonNull MapActivity mapActivity, @NonNull LatLon latLon);
+	protected abstract void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon);
 
 	@Nullable
-	protected abstract PointImageDrawable getMapObjectDrawable();
+	protected abstract PointImageDrawable getLocationIcon(@NonNull MapActivity mapActivity);
 
 	protected boolean shouldSelectLocationManually() {
-		//TODO: check preference instead of using hardcoded value
+		// TODO: Implement preference-based selection logic
 		return true;
 	}
 
 	@Override
 	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-		//TODO: extract UI for "select point" preference here
-//		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.quick_action_add_object, parent, false);
-//		parent.addView(view);
+		// TODO: Implement UI for "select location manually" preference
 	}
 }

@@ -6,6 +6,7 @@ import android.graphics.PointF;
 import android.util.Pair;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -14,6 +15,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.TextRasterizer;
+import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -232,19 +234,24 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		return markersGroup != null && !markersGroup.isDisabled();
 	}
 
-	private void drawBigPoint(Canvas canvas, FavouritePoint favoritePoint, float x, float y, @Nullable MapMarker marker,
-							  float textScale) {
-		PointImageDrawable pointImageDrawable;
-		boolean history = false;
-		if (marker != null) {
-			pointImageDrawable = PointImageUtils.getOrCreateSyncedIcon(getContext(),
-					favouritesHelper.getColorWithCategory(favoritePoint, defaultColor), favoritePoint);
-			history = marker.history;
-		} else {
-			pointImageDrawable = PointImageUtils.getFromPoint(getContext(),
-					favouritesHelper.getColorWithCategory(favoritePoint, defaultColor), true, favoritePoint);
-		}
-		pointImageDrawable.drawPoint(canvas, x, y, textScale, history);
+	private void drawBigPoint(Canvas canvas, FavouritePoint favoritePoint, float x, float y,
+	                          @Nullable MapMarker marker, float textScale) {
+		int pointColor = favouritesHelper.getColorWithCategory(favoritePoint, defaultColor);
+		int iconId = favoritePoint.getOverlayIconId(getContext());
+		BackgroundType bgType = favoritePoint.getBackgroundType();
+		boolean synced = marker != null;
+
+		PointImageDrawable icon = createFavoriteIcon(pointColor, iconId, bgType, synced);
+		boolean history = marker != null && marker.history;
+		icon.drawPoint(canvas, x, y, textScale, history);
+	}
+
+	@NonNull
+	public PointImageDrawable createFavoriteIcon(@ColorInt int pointColor, @DrawableRes int iconId,
+	                                             @NonNull BackgroundType bgType, boolean synced) {
+		boolean withShadows = true;
+		Context context = getContext();
+		return PointImageUtils.getOrCreate(context, pointColor, withShadows, synced, iconId, bgType);
 	}
 
 	private List<FavoriteGroup> getFavoriteGroups() {

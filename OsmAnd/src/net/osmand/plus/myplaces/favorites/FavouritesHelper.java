@@ -7,6 +7,7 @@ import static net.osmand.shared.gpx.GpxUtilities.DEFAULT_ICON_NAME;
 
 import android.graphics.drawable.Drawable;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -102,19 +103,19 @@ public class FavouritesHelper {
 	}
 
 	public int getColorWithCategory(@NonNull FavouritePoint point, int defaultColor) {
-		int color = 0;
-		if (point.getColor() != 0) {
-			color = point.getColor();
-		} else {
-			FavoriteGroup favoriteGroup = getGroup(point);
-			if (favoriteGroup != null) {
-				color = favoriteGroup.getColor();
-			}
-			if (color == 0) {
-				color = defaultColor;
-			}
+		FavoriteGroup favoriteGroup = getGroup(point);
+		int groupColor = favoriteGroup != null ? favoriteGroup.getColor() : 0;
+		return getColorWithCategory(point.getColor(), groupColor, defaultColor);
+	}
+
+	public int getColorWithCategory(@ColorInt int pointColor, @ColorInt int groupColor, @ColorInt int defaultColor) {
+		if (pointColor != 0) {
+			return pointColor;
 		}
-		return color;
+		if (groupColor != 0) {
+			return groupColor;
+		}
+		return defaultColor;
 	}
 
 	public void loadFavorites() {

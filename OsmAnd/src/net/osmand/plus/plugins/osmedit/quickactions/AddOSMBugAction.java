@@ -20,10 +20,12 @@ import net.osmand.plus.plugins.osmedit.OsmEditsLayer;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.quickaction.actions.AddMapObjectAction;
+import net.osmand.plus.quickaction.actions.SelectMapLocationAction;
 import net.osmand.plus.views.PointImageDrawable;
 
-public class AddOSMBugAction extends AddMapObjectAction {
+import java.util.Objects;
+
+public class AddOSMBugAction extends SelectMapLocationAction {
 
 	private static final String KEY_MESSAGE = "message";
 	private static final String KEY_SHO_DIALOG = "dialog";
@@ -43,54 +45,60 @@ public class AddOSMBugAction extends AddMapObjectAction {
 	}
 
 	@Override
-	protected void addMapObject(@NonNull MapActivity mapActivity, @NonNull LatLon latLon) {
+	public void execute(@NonNull MapActivity mapActivity) {
+		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
+		if (plugin != null) {
+		super.execute(mapActivity);
+		}
+	}
+
+	@Override
+	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon) {
 		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		if (plugin != null) {
 			double lat = latLon.getLatitude();
 			double lon = latLon.getLongitude();
-			plugin.openOsmNote(mapActivity, lat, lon, getMessage(), shouldAutofill());
+			plugin.openOsmNote(mapActivity, lat, lon, getMessage(), !shouldShowDialog());
 		}
-	}
-
-	private String getMessage() {
-		return getParams().isEmpty() ? "" : getParams().get(KEY_MESSAGE);
-	}
-
-	private boolean shouldAutofill() {
-		return getParams().isEmpty() || !Boolean.valueOf(getParams().get(KEY_SHO_DIALOG));
 	}
 
 	@Nullable
 	@Override
-	protected PointImageDrawable getMapObjectDrawable() {
+	protected PointImageDrawable getLocationIcon(@NonNull MapActivity mapActivity) {
 		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		OsmEditsLayer layer = plugin != null ? plugin.getOsmEditsLayer() : null;
 		return layer != null ? layer.createDrawableForOsmPoint(new OsmNotesPoint()) : null;
+	}
+
+	@NonNull
+	private String getMessage() {
+		return getParams().isEmpty() ? "" : Objects.requireNonNull(getParams().get(KEY_MESSAGE));
+	}
+
+	private boolean shouldShowDialog() {
+		return !getParams().isEmpty() && Boolean.parseBoolean(getParams().get(KEY_SHO_DIALOG));
 	}
 
 	@Override
 	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_add_bug, parent, false);
-		SwitchCompat showDialog = view.findViewById(R.id.dialogSwitch);
-		EditText message = view.findViewById(R.id.message_edit);
+		SwitchCompat swShowDialog = view.findViewById(R.id.dialogSwitch);
+		EditText etMessage = view.findViewById(R.id.message_edit);
 
 		if (!getParams().isEmpty()) {
-			showDialog.setChecked(Boolean.valueOf(getParams().get(KEY_SHO_DIALOG)));
-			message.setText(getParams().get(KEY_MESSAGE));
+			swShowDialog.setChecked(shouldShowDialog());
+			etMessage.setText(getMessage());
 		}
 		parent.addView(view);
 	}
 
 	@Override
 	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
-
-		SwitchCompat showDialog = root.findViewById(R.id.dialogSwitch);
-		EditText message = root.findViewById(R.id.message_edit);
-
-		getParams().put(KEY_SHO_DIALOG, String.valueOf(showDialog.isChecked()));
-		getParams().put(KEY_MESSAGE, message.getText().toString());
-
+		SwitchCompat swShowDialog = root.findViewById(R.id.dialogSwitch);
+		EditText etMessage = root.findViewById(R.id.message_edit);
+		getParams().put(KEY_SHO_DIALOG, String.valueOf(swShowDialog.isChecked()));
+		getParams().put(KEY_MESSAGE, etMessage.getText().toString());
 		return true;
 	}
 }
