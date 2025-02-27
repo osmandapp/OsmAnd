@@ -3455,4 +3455,6 @@
     <string name="route_between_points">Tuyến đường giữa các điểm</string>
     <string name="set_working_days_to_continue">Đặt ngày làm việc để tiếp tục</string>
     <string name="app_mode_go_cart">Xe đua nhỏ</string>
+    <string name="app_mode_inline_skates">Giày trượt patin bánh xe 1 hàng dọc</string>
+    <string name="shared_string_uninstall_and_restart">Gỡ cài đặt và Khởi động lại</string>
 </resources>
