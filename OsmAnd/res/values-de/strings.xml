@@ -5730,4 +5730,5 @@
     <string name="show_dms_grids">Verwende Dezimeter statt Grad</string>
     <string name="show_dm_grids">Verwende Dezimeter statt Grad oder Dezimeter pro Meter</string>
     <string name="show_dm_grids_description">Zeige Gitter in Grad und Minuten statt in Grad oder DMS</string>
+    <string name="show_dms_grids_description">Gitter in Grad, Minuten, Sekunden anzeigen statt in Grad</string>
 </resources>
