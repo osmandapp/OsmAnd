@@ -3420,4 +3420,21 @@
     <string name="plan_route_exit_dialog_descr">Huỷ bỏ tất cả thay đổi trong tuyến đường đã lập kế hoạch?</string>
     <string name="save_track_to_gpx_globally">Ghi cung đường thành tệp GPX</string>
     <string name="add_segment_to_the_track">Thêm vào một tệp cung đường</string>
+    <string name="plan_route_select_track_file_for_open">Chọn một tệp cung đường để mở.</string>
+    <string name="plan_route_create_new_route">Tạo tuyến đường mới</string>
+    <string name="gpx_split_interval_none_descr">Chọn cách chia tách mong muốn: bởi thời gian hoặc bởi khoảng cách.</string>
+    <string name="navigation_profile">Hồ sơ điều hướng</string>
+    <string name="reverse_route">Đảo ngược tuyến đường</string>
+    <string name="whole_track">Toàn bộ cung đường</string>
+    <string name="threshold_distance">Khoảng cách ngưỡng</string>
+    <string name="next_segment">Phân đoạn tiếp theo</string>
+    <string name="overwrite_track">Ghi đè cung đường</string>
+    <string name="route_between_points_desc">Chọn cách kết nối các điểm, bằng một đường thẳng, hoặc tính toán một tuyến đường giữa chúng như chỉ định ở dưới.</string>
+    <string name="plan_route_last_edited">Chỉnh sửa lần cuối</string>
+    <string name="route_between_points_whole_track_button_desc">Toàn bộ cung đường sẽ được tính lại sử dụng hồ sơ đã chọn.</string>
+    <string name="route_between_points_next_segment_button_desc">Chỉ phân đoạn tiếp theo sẽ được tính lại sử dụng hồ sơ đã chọn.</string>
+    <string name="save_as_new_track">Lưu dưới dạng cung đường mới</string>
+    <string name="route_between_points_add_track_desc">Chọn một tệp cung đường để thêm đoạn mới vào.</string>
+    <string name="plan_route_open_existing_track">Mở cung đường đã có sẵn</string>
+    <string name="plan_route_import_track">Nhập cung đường</string>
 </resources>
