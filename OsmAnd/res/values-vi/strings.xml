@@ -3416,4 +3416,8 @@
     <string name="context_menu_item_add_waypoint">Thêm điểm dừng cung đường</string>
     <string name="add_address">Thêm địa chỉ</string>
     <string name="marker_save_as_track">Lưu dưới dạng tệp cung đường</string>
+    <string name="shared_string_gpx_route">Cung đường đi</string>
+    <string name="plan_route_exit_dialog_descr">Huỷ bỏ tất cả thay đổi trong tuyến đường đã lập kế hoạch?</string>
+    <string name="save_track_to_gpx_globally">Ghi cung đường thành tệp GPX</string>
+    <string name="add_segment_to_the_track">Thêm vào một tệp cung đường</string>
 </resources>
