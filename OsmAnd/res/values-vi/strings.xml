@@ -3457,4 +3457,21 @@
     <string name="app_mode_go_cart">Xe đua nhỏ</string>
     <string name="app_mode_inline_skates">Giày trượt patin bánh xe 1 hàng dọc</string>
     <string name="shared_string_uninstall_and_restart">Gỡ cài đặt và Khởi động lại</string>
+    <string name="vessel_height_warning">Đặt chiều cao của tàu để tránh những cây cầu thấp. Nếu cây cầu có thể chuyển động, chiều cao khi mở được sử dụng.</string>
+    <string name="shared_string_meters">mét</string>
+    <string name="shared_string_tones">tấn</string>
+    <string name="details_dialog_decr">Hiện hoặc ẩn thêm chi tiết bổ sung của bản đồ</string>
+    <string name="speed_cameras_alert">Việc cảnh báo camera tốc độ ở một số quốc gia bị cấm bởi luật pháp.</string>
+    <string name="vessel_width_limit_description">Đặt chiều rộng của tàu để tránh những cây cầu hẹp</string>
+    <string name="add_online_source">Thêm nguồn trực tuyến</string>
+    <string name="keep_active">Giữ hoạt động</string>
+    <string name="vessel_height_limit_description">Đặt chiều cao của tàu để tránh những cây cầu thấp. Nhớ rằng, nếu cây cầu có thể chuyển động, chúng tôi sẽ dùng chiều cao của nó ở trạng thái mở.</string>
+    <string name="shared_string_uninstall">Gỡ cài đặt</string>
+    <string name="quick_action_showhide_mapillary_descr">Một công tắc để hiện hoặc ẩn lớp phủ Mapillary trên bản đồ.</string>
+    <string name="shared_string_night_map">Bản đồ tối</string>
+    <string name="vessel_height_warning_link">Đặt chiều cao của tàu</string>
+    <string name="routing_attr_length_description">Chỉ rõ chiều dài phương tiện được phép lưu thông trên đường.</string>
+    <string name="speed_cameras_restart_descr">Khởi động lại ứng dụng để xoá tất cả dữ liệu camera tốc độ.</string>
+    <string name="routing_attr_length_name">Chiều dài</string>
+    <string name="clear_tiles_warning">Áp dụng những thay đổi này sẽ xoá dữ liệu đã lưu vào bộ nhớ đệm cho nguồn của mảng này</string>
 </resources>
