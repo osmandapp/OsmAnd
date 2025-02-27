@@ -5632,11 +5632,25 @@
     <string name="quick_action_photo_note">Fotoğraflı not</string>
     <string name="quick_action_to_my_location">Konumuma</string>
     <string name="rendering_avg_info_details">Son 1000 karedeki FPS: %1$s\nİşlemci (çekirdek): %2$s\nİşlemci (boşta):%3$s\nİşlemci (GPU\'yu bekleyen): %4$s</string>
-    <string name="shared_string_replace"></string>
+    <string name="shared_string_replace"/>
     <string name="quick_action_display_position_in_center">Mevcut konumu her zaman ortada göster</string>
     <string name="quick_action_terrain_color_scheme">Yüzey renk düzeni</string>
     <string name="quick_action_directions_from">Başlangıç noktası</string>
     <string name="quick_action_parking_place">Park yeri</string>
     <string name="quick_action_verb_pause_resume">Duraklat / Devam ettir</string>
     <string name="weather_screen">Hava durumu ekranı</string>
+    <string name="navigation_position_icon">Navigasyon pozisyonu simgesi</string>
+    <string name="weather_source_ecmwf_title">ECMWF</string>
+    <string name="resting_position_icon">Dinlenme pozisyonu simgesi</string>
+    <string name="weather_source_GFS_title">GFS</string>
+    <string name="daynight_mode_app_theme_summary">Haritanın görünümü uygulama temasına uyum sağlar — gündüz modunda açık tema, gece modunda koyu tema</string>
+    <string name="navigation_position_icon_summary">Gezinirken ya da hareket ederken simge görünür.</string>
+    <string name="resting_position_icon_summary">Hareketsizken simge görünür.</string>
+    <string name="profile_icon">Profil simgesi</string>
+    <string name="map_grid">Harita kılavuzları</string>
+    <string name="show_grids">Harita kılavuzunu göster</string>
+    <string name="show_grids_description">Haritanın üzerinde kılavuz göstermeye izin ver</string>
+    <string name="show_utm_grids">WGS84 yerine UTM kullan</string>
+    <string name="fix_north_up">Kuzey kutbunu yukarı sabitle</string>
+    <string name="fix_north_up_descr">Kuzey kutbu yukarı sabitken haritayı parmak hareketleriyle döndürme</string>
 </resources>
