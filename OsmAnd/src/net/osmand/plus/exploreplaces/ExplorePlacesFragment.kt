@@ -26,7 +26,6 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseOsmAndFragment
-import net.osmand.plus.dashboard.DashboardType
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.search.NearbyPlacesAdapter
 import net.osmand.plus.utils.AndroidUtils
@@ -136,7 +135,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		val app = requireActivity().application as OsmandApplication
 		app.locationProvider.addLocationListener(this)
 		app.locationProvider.addCompassListener(this)
-		mapActivity?.dashboard?.setDashboardVisibility(true, DashboardType.EXPLORE_NEARBY_PLACES)
+		mapActivity?.let { activity -> updateWidgetsVisibility(activity, View.VISIBLE)}
 	}
 
 	override fun onPause() {
@@ -144,6 +143,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		val app = requireActivity().application as OsmandApplication
 		app.locationProvider.removeLocationListener(this)
 		app.locationProvider.removeCompassListener(this)
+		mapActivity?.let { activity -> updateWidgetsVisibility(activity, View.GONE)}
 	}
 
 	override fun updateLocation(location: Location?) {
@@ -250,5 +250,11 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		}
 		mainContent?.visibility = View.VISIBLE
 		showListContainer?.visibility = View.GONE
+	}
+
+	private fun updateWidgetsVisibility(activity: MapActivity, visibility: Int) {
+		AndroidUiHelper.setVisibility(
+			activity, visibility, R.id.map_left_widgets_panel,
+			R.id.map_right_widgets_panel, R.id.map_center_info)
 	}
 }

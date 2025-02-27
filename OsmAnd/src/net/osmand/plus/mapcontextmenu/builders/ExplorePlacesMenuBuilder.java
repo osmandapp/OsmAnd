@@ -29,7 +29,7 @@ public class ExplorePlacesMenuBuilder extends MenuBuilder {
 	protected void buildMainImage(View view) {
 		if (point.getImageStubUrl() != null) {
 			AppCompatImageView imageView = inflateAndGetMainImageView(view);
-			PicassoUtils.setupImageViewByUrl(app, imageView, point.getImageStubUrl(), true);
+			PicassoUtils.setupImageViewByUrl(app, imageView, point.getImageStubUrl(), false);
 		}
 	}
 

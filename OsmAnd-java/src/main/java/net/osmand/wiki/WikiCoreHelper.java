@@ -68,7 +68,7 @@ public class WikiCoreHelper {
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException(e);
 		}
-		LOG.debug("Download images " + url.toString());
+		LOG.debug("Download images " + url + " {" + Thread.currentThread().getName() + "}");
 		getNearbyImagesOsmAndAPIRequest(url.toString(), wikiImages);
 		return wikiImages;
 	}

@@ -28,7 +28,7 @@ class ExplorePlacesMenuController(
 	private fun initData() {
 		val poiTypes = app.poiTypes
 		val subType = poiTypes.getPoiTypeByKey(pointObject.poisubtype)
-		val poiIcon = RenderingIcons.getBigIcon(app, subType.keyName)
+		val poiIcon = RenderingIcons.getBigIcon(app, subType?.keyName)
 		val uiUtilities = app.uiUtilities
 		val nightMode = app.daynightHelper.isNightMode
 		coloredIcon = if (poiIcon != null) {
@@ -70,13 +70,13 @@ class ExplorePlacesMenuController(
 	override fun getTypeStr(): String {
 		val poiTypes = app.poiTypes
 		val subType = poiTypes.getPoiTypeByKey(pointObject.poisubtype)
-		return subType.translation
+		return subType?.translation ?: ""
 	}
 
 	override fun getCommonTypeStr(): String {
 		val poiTypes = app.poiTypes
 		val subType = poiTypes.getPoiTypeByKey(pointObject.poisubtype)
-		return subType.translation
+		return subType?.translation ?: ""
 	}
 
 	override fun needStreetName(): Boolean {
