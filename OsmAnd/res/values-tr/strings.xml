@@ -5653,4 +5653,13 @@
     <string name="show_utm_grids">WGS84 yerine UTM kullan</string>
     <string name="fix_north_up">Kuzey kutbunu yukarı sabitle</string>
     <string name="fix_north_up_descr">Kuzey kutbu yukarı sabitken haritayı parmak hareketleriyle döndürme</string>
+    <string name="rendering_attr_padusDisplayMode_name">Kamu arazilerini gösterme modu</string>
+    <string name="filter_screen_title">Filtrele</string>
+    <string name="filter_tracks_count">Filtrele: %d</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Kamu arazisi sınırlarını gizle</string>
+    <string name="app_mode_hang_gliding">Delta kanat sporu</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Kamu arazisi bölgelerini göster sınırlarını gizle</string>
+    <string name="max_sensor_cadence">Bisiklet Temposu, maksimum</string>
+    <string name="app_mode_paragliding">Yamaç paraşütü</string>
+    <string name="avg_sensor_cadence">Bisiklet Temposu, ortalama</string>
 </resources>
