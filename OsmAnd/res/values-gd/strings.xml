@@ -88,4 +88,11 @@
     <string name="shared_string_cache">Tasgadan</string>
     <string name="wikipedia_and_travel_maps">Uicipeid agus mapaichean siubhail</string>
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="delete_map_description">Dubh às mapa %1$s?</string>
+    <string name="delete_map">Dubh às mapa</string>
+    <string name="help_article_personal_name">An dàta agam</string>
+    <string name="help_article_personal_import_export_name">Steach-ghluais / Mach-ghluais</string>
+    <string name="help_article_search_search_all_name">Lorg uile</string>
+    <string name="help_article_start_with_name">Tòisich air OsmAnd</string>
+    <string name="shared_string_setup">Seatadh</string>
 </resources>
