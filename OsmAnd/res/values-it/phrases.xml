@@ -4432,4 +4432,7 @@
     <string name="poi_atv_yes">ATV: sì</string>
     <string name="poi_atv_no">ATV: no</string>
     <string name="poi_access_notes">Note di accesso</string>
+    <string name="poi_glacier_type_hanging">Sospeso</string>
+    <string name="poi_substation_inspection_gauge">Misuratore di ispezione</string>
+    <string name="poi_volcano_type_maar">Maar</string>
 </resources>
