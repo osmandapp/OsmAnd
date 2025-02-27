@@ -13,7 +13,6 @@ import net.osmand.data.LocationPoint;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.settings.enums.DrivingRegion;

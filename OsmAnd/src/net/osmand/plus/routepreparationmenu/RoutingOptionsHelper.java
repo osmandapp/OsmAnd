@@ -29,7 +29,7 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.routepreparationmenu.data.PermanentAppModeOptions;
 import net.osmand.plus.routepreparationmenu.data.RouteMenuAppModes;
 import net.osmand.plus.routepreparationmenu.data.parameters.*;
@@ -233,8 +233,8 @@ public class RoutingOptionsHelper {
 					TargetPoint pointToNavigate = tg.getPointToNavigate();
 					if (rp.getFile().hasRoute()) {
 						LatLon firstLatLon = new LatLon(firstLoc.getLatitude(), firstLoc.getLongitude());
-						LatLon endLocation = pointToStart != null ? pointToStart.point : new LatLon(lastLoc.getLatitude(), lastLoc.getLongitude());
-						LatLon startLocation = pointToNavigate != null ? pointToNavigate.point : firstLatLon;
+						LatLon endLocation = pointToStart != null ? pointToStart.getLatLon() : new LatLon(lastLoc.getLatitude(), lastLoc.getLongitude());
+						LatLon startLocation = pointToNavigate != null ? pointToNavigate.getLatLon() : firstLatLon;
 						tg.navigateToPoint(endLocation, false, -1);
 						if (pointToStart != null) {
 							tg.setStartPoint(startLocation, false, null);
@@ -243,12 +243,12 @@ public class RoutingOptionsHelper {
 					} else {
 						boolean update = false;
 						if (pointToNavigate == null
-								|| MapUtils.getDistance(pointToNavigate.point, new LatLon(firstLoc.getLatitude(), firstLoc.getLongitude())) < 10) {
+								|| MapUtils.getDistance(pointToNavigate.getLatLon(), new LatLon(firstLoc.getLatitude(), firstLoc.getLongitude())) < 10) {
 							tg.navigateToPoint(new LatLon(lastLoc.getLatitude(), lastLoc.getLongitude()), false, -1);
 							update = true;
 						}
 						if (pointToStart != null
-								&& MapUtils.getDistance(pointToStart.point,
+								&& MapUtils.getDistance(pointToStart.getLatLon(),
 								new LatLon(lastLoc.getLatitude(), lastLoc.getLongitude())) < 10) {
 							tg.setStartPoint(new LatLon(firstLoc.getLatitude(), firstLoc.getLongitude()), false, null);
 							update = true;

@@ -52,5 +52,5 @@ public abstract class OsmandSettingsItemReader<T extends OsmandSettingsItem> ext
 		readPreferencesFromJson(json);
 	}
 
-	public abstract void readPreferencesFromJson(JSONObject json);
+	public abstract void readPreferencesFromJson(@NonNull JSONObject json);
 }

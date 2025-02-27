@@ -29,10 +29,8 @@ import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.render.RenderingClass;
-import net.osmand.render.RenderingRule;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRuleStorageProperties;
@@ -46,6 +44,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -311,13 +310,17 @@ public class MapRendererContext {
 		}
 	}
 
+	@NonNull
 	protected QStringStringHash getMapStyleSettings() {
 		// Apply map style settings
 		OsmandSettings settings = app.getSettings();
 		RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
 
-		Map<String, String> properties = new HashMap<>();
-		for (RenderingRuleProperty property : storage.PROPS.getCustomRules()) {
+		List<RenderingRuleProperty> customRules = storage.PROPS.getCustomRules();
+		Map<String, RenderingClass> renderingClasses = storage.getRenderingClasses();
+		Map<String, String> properties = new LinkedHashMap<>(customRules.size() + renderingClasses.size());
+
+		for (RenderingRuleProperty property : customRules) {
 			String attrName = property.getAttrName();
 			if (property.isBoolean()) {
 				properties.put(attrName, String.valueOf(settings.getRenderBooleanPropertyValue(attrName)));
@@ -328,13 +331,18 @@ public class MapRendererContext {
 				}
 			}
 		}
-		for (Map.Entry<String, RenderingClass> entry : storage.getRenderingClasses().entrySet()) {
+		Map<String, Boolean> parentsStates = new HashMap<>();
+		for (Map.Entry<String, RenderingClass> entry : renderingClasses.entrySet()) {
+			String name = entry.getKey();
 			RenderingClass renderingClass = entry.getValue();
+			boolean enabled = settings.getBooleanRenderClassProperty(renderingClass).get();
 
-			String name = renderingClass.getName();
-			boolean enabled = renderingClass.isEnabledByDefault();
-			CommonPreference<Boolean> preference = settings.getСustomBooleanRenderClassProperty(name, enabled);
-			properties.put(name, String.valueOf(preference.get()));
+			String parentName = renderingClass.getParentName();
+			if (parentName != null && parentsStates.containsKey(parentName) && !parentsStates.get(parentName)) {
+				enabled = false;
+			}
+			properties.put(name, String.valueOf(enabled));
+			parentsStates.put(name, enabled);
 		}
 		QStringStringHash styleSettings = new QStringStringHash();
 		for (Map.Entry<String, String> setting : properties.entrySet()) {

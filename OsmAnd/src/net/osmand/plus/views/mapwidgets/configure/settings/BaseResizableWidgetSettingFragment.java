@@ -102,12 +102,12 @@ public class BaseResizableWidgetSettingFragment extends WidgetSettingsBaseFragme
 
 	@Override
 	protected void applySettings() {
-		if (widgetInfo != null) {
-			updateRowWidgets(widgetInfo);
-		}
-
-		if (widgetInfo != null) {
-			if (widgetInfo.widget instanceof ISupportWidgetResizing widgetResizing) {
+		if (widgetInfo != null && widgetInfo.widget instanceof ISupportWidgetResizing widgetResizing) {
+			boolean isVerticalPanel = widgetInfo.getWidgetPanel().isPanelVertical();
+			if (isVerticalPanel) {
+				updateRowWidgets(widgetInfo);
+			} else {
+				widgetResizing.getWidgetSizePref().set(selectedWidgetSize);
 				widgetResizing.recreateView();
 			}
 		}

@@ -12,7 +12,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.measurementtool.GpxApproximationParams;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;

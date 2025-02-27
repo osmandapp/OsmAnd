@@ -5675,7 +5675,7 @@
     <string name="ais_load_data">Charger des données AIS à partir d\'un fichier</string>
     <string name="ais_address_nmea_server">Adresse IP de la source des données NMEA</string>
     <string name="ais_address_nmea_server_description">Définir l\'adresse IP de la source des données NMEA (si TCP est utilisé)</string>
-    <string name="show_utm_grids_description">Affiche la grille en mètres UTM au lieu de degrés WGS84</string>
+    <string name="show_utm_grids_description">Affiche la grille en mètres UTM au lieu de WGS84</string>
     <string name="map_grid">Grilles de carte</string>
     <string name="show_utm_grids">Utiliser les coordonnées UTM au lieu de WGS84</string>
     <string name="show_grids_description">Autorise l\'affichage de la grille sur la carte</string>
@@ -5707,4 +5707,10 @@
     <string name="original_icon_description">Chaque point conservera sa propre icône.</string>
     <string name="original_shape_description">Chaque point conservera sa propre forme.</string>
     <string name="save_favorite_default_appearance">Appliquer les modifications à tous les points existants dans le dossier ou seulement aux nouveaux ?</string>
+    <string name="show_dms_grids">Utilisez la notation DMS au lieu de degrés</string>
+    <string name="show_mercator_grids_description">Affiche la grille en km Mercator au lieu de WGS84 ou UTM</string>
+    <string name="show_mercator_grids">Utiliser Mercator au lieu de WGS84 ou UTM</string>
+    <string name="show_dms_grids_description">Affiche la grille en degrés, minutes, secondes au lieu de degrés</string>
+    <string name="show_dm_grids">Utiliser DM au lieu des degrés ou DMS</string>
+    <string name="show_dm_grids_description">Afficher la grille en degrés et minutes au lieu de degrés ou DMS</string>
 </resources>

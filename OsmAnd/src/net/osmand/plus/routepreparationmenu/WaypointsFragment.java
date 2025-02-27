@@ -37,7 +37,7 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.dialog.interfaces.dialog.IContextDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.helpers.LocationPointWrapper;
@@ -438,7 +438,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements IContextDia
 					TargetPoint t = (TargetPoint) w.point;
 					if (t.getOriginalPointDescription() != null
 							&& t.getOriginalPointDescription().isSearchingAddress(ctx)) {
-						AddressLookupRequest lookupRequest = new AddressLookupRequest(t.point, address -> reloadListAdapter(listAdapter), null);
+						AddressLookupRequest lookupRequest = new AddressLookupRequest(t.getLatLon(), address -> reloadListAdapter(listAdapter), null);
 						ctx.getMyApplication().getGeocodingLookupService().lookupAddress(lookupRequest);
 					}
 				}

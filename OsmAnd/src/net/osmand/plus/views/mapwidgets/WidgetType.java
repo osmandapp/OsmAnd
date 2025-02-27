@@ -382,16 +382,13 @@ public enum WidgetType {
 
 		if (widgetInfo instanceof SimpleWidgetInfo) {
 			WidgetSettingsBaseFragment OBDSettingFragment = getOBDWidgetSettings(ctx, widgetInfo);
-			if (OBDSettingFragment != null){
+			if (OBDSettingFragment != null) {
 				return OBDSettingFragment;
 			}
 
-			SimpleWidget simpleWidget = (SimpleWidget) widgetInfo.widget;
-			if (simpleWidget.isVerticalWidget()) {
-				BaseSimpleWidgetSettingsFragment settingsFragment = new BaseSimpleWidgetSettingsFragment();
-				settingsFragment.setWidgetType(this);
-				return settingsFragment;
-			}
+			BaseSimpleWidgetSettingsFragment settingsFragment = new BaseSimpleWidgetSettingsFragment();
+			settingsFragment.setWidgetType(this);
+			return settingsFragment;
 		} else if (widgetInfo != null && widgetInfo.widget instanceof ISupportWidgetResizing) {
 			if (widgetInfo.widgetPanel.isPanelVertical()) {
 				BaseResizableWidgetSettingFragment settingFragment = new BaseResizableWidgetSettingFragment();

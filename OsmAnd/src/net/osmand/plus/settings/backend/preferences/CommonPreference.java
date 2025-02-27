@@ -36,7 +36,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	private boolean lastModifiedTimeStored;
 	private String pluginId;
 
-	public CommonPreference(OsmandSettings settings, String id, T defaultValue) {
+	public CommonPreference(@NonNull OsmandSettings settings, @NonNull String id, T defaultValue) {
 		this.settings = settings;
 		this.id = id;
 		this.defaultValue = defaultValue;
@@ -49,16 +49,16 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	}
 
 	// Methods to possibly override
-	public abstract T getValue(Object prefs, T defaultValue);
+	public abstract T getValue(@NonNull Object prefs, T defaultValue);
 
-	protected long getLastModifiedTime(Object prefs) {
+	protected long getLastModifiedTime(@NonNull Object prefs) {
 		if (!lastModifiedTimeStored) {
 			throw new IllegalStateException("Setting " + getId() + " is not granted to store last modified time");
 		}
 		return getSettingsAPI().getLong(prefs, getLastModifiedTimeId(), 0);
 	}
 
-	protected void setLastModifiedTime(Object prefs, long lastModifiedTime) {
+	protected void setLastModifiedTime(@NonNull Object prefs, long lastModifiedTime) {
 		if (!lastModifiedTimeStored) {
 			throw new IllegalStateException("Setting " + getId() + " is not granted to store last modified time");
 		}
@@ -248,7 +248,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	}
 
 	@Override
-	public final void resetModeToDefault(ApplicationMode mode) {
+	public final void resetModeToDefault(@Nullable ApplicationMode mode) {
 		if (global) {
 			resetToDefault();
 		} else if (mode != null) {
@@ -287,7 +287,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		return false;
 	}
 
-	public long getLastModifiedTimeModeValue(ApplicationMode mode) {
+	public long getLastModifiedTimeModeValue(@Nullable ApplicationMode mode) {
 		if (global) {
 			return getLastModifiedTime();
 		}
@@ -306,7 +306,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		return settings.isSet(global, getId());
 	}
 
-	public boolean isSetForMode(ApplicationMode mode) {
+	public boolean isSetForMode(@Nullable ApplicationMode mode) {
 		return settings.isSet(mode, getId());
 	}
 
@@ -322,6 +322,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		return lastModifiedTimeStored;
 	}
 
+	@Nullable
 	public OsmandPlugin getRelatedPlugin() {
 		return pluginId != null ? PluginsHelper.getPlugin(pluginId) : null;
 	}
@@ -334,12 +335,14 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		return isGlobal() ? getDefaultValue() == null : getProfileDefaultValue(mode) == null;
 	}
 
+	@NonNull
 	protected String getLastModifiedTimeId() {
 		return id + "_last_modified";
 	}
 
 	@Override
-	public boolean writeToJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+	public boolean writeToJson(@NonNull JSONObject json,
+			@Nullable ApplicationMode appMode) throws JSONException {
 		if (appMode != null) {
 			if (!global) {
 				if (isSetForMode(appMode)) {
@@ -363,7 +366,8 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	}
 
 	@Override
-	public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+	public void readFromJson(@NonNull JSONObject json,
+			@Nullable ApplicationMode appMode) throws JSONException {
 		if (appMode != null) {
 			if (!global) {
 				String modeValue = json.getString(getId());
@@ -382,8 +386,8 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 	}
 
 	@Override
-	public final String asStringModeValue(@Nullable ApplicationMode m) {
-		T v = getModeValue(m);
+	public final String asStringModeValue(@Nullable ApplicationMode mode) {
+		T v = getModeValue(mode);
 		return toString(v);
 	}
 

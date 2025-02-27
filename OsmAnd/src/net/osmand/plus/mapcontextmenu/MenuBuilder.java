@@ -138,6 +138,7 @@ public class MenuBuilder {
 	private List<AbstractCard> onlinePhotoCards;
 
 	private CollapseExpandListener collapseExpandListener;
+	private GetImageCardsTask getImageCardsTask;
 
 	private final String preferredMapLang;
 	private String preferredMapAppLang;
@@ -347,6 +348,7 @@ public class MenuBuilder {
 			galleryController.clearHolder();
 		}
 		clearPluginRows();
+		stopLoadingImagesTask();
 	}
 
 	public boolean isHidden() {
@@ -580,8 +582,18 @@ public class MenuBuilder {
 		Map<String, String> params = getAdditionalCardParams();
 		if (galleryController.isCurrentHolderEquals(latLon, params)) {
 			imageCardListener.onFinish(galleryController.getCurrentCardsHolder());
+		} else {
+			stopLoadingImagesTask();
+			galleryController.clearHolder();
+			getImageCardsTask = new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(), imageCardListener);
+			execute(getImageCardsTask);
 		}
-		execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(), imageCardListener));
+	}
+
+	private void stopLoadingImagesTask() {
+		if (getImageCardsTask != null && getImageCardsTask.getStatus() == AsyncTask.Status.RUNNING) {
+			getImageCardsTask.cancel(false);
+		}
 	}
 
 	protected Map<String, String> getAdditionalCardParams() {

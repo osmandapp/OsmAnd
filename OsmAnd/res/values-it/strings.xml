@@ -2120,7 +2120,7 @@
     <string name="shared_string_color">Colore</string>
     <string name="select_gpx_folder">Seleziona cartella dei file GPX</string>
     <string name="file_can_not_be_moved">Il file non può essere spostato.</string>
-    <string name="shared_string_move">Muovi</string>
+    <string name="shared_string_move">Sposta</string>
     <string name="shared_string_gpx_tracks">Tracce</string>
     <string name="average_speed">Velocità media</string>
     <string name="shared_string_time_moving">In movimento</string>
@@ -4011,13 +4011,13 @@
     <string name="backup_version_history">Cronologia della versione</string>
     <string name="backup_storage_taken">Memoria occupata</string>
     <string name="backup_version_history_delete_descr">Eliminare il registro delle modifiche per i tipi di dati deprecati da OsmAnd Cloud\?</string>
-    <string name="send_logcat_log">Invia registro di log</string>
+    <string name="send_logcat_log">Invia registro logcat</string>
     <string name="delete_version_history">Cancella la cronologia delle versioni</string>
     <string name="routing_attr_avoid_tunnels_description">Evita i tunnel</string>
     <string name="routing_attr_avoid_tunnels_name">Evita i tunnel</string>
     <string name="backup_promocode">Codice promozionale</string>
     <string name="send_crash_log">Invia rapporto errori</string>
-    <string name="purchases_feature_desc_terrain">Linee di contorno del terreno, ombreggiatura in scala di grigi e indicazione della pendenza in scala di colori, per mostrare picchi e pianure.</string>
+    <string name="purchases_feature_desc_terrain">Linee isoipse, ombreggiatura dei rilievi in scala di grigi e indicazione della pendenza in scala di colori, per mostrare picchi e pianure.</string>
     <string name="purchases_feature_desc_wikivoyage">Esplora Wikivoyage offline. Articoli divisi per nazione e regione e disponibili in tutte le lingue.</string>
     <string name="purchases_feature_desc_wikipedia">Fornisce offline tutti gli articoli di Wikipedia relativi ai luoghi, aiutandoti a conoscere i luoghi che visiti durante il tuo viaggio con semplici tocchi sulla mappa. Non dimenticare di scaricare i file cartografici di Wikipedia per le rispettive regioni.</string>
     <string name="purchases_feature_desc_combined_wiki">Esplora ovunque gli articoli Wikipedia, senza una connessione a internet. I dati offline sono divisi per nazione e disponibili in tutte le lingue.</string>
@@ -4068,7 +4068,7 @@
     <string name="routing_attr_allow_gate_description">Permetti l\'utilizzo dei cancelli</string>
     <string name="routing_attr_prefer_tactile_paving_name">Preferisci pavimentazione tattile</string>
     <string name="shared_storage_warning_title">Cambiamenti delle regole di acceso alla memorizzazione</string>
-    <string name="purchases_feature_desc_android_auto">Porta le mappe offline di OsmAnd nello schermo del tuo veicolo e integralo con i comandi del tuo veicolo.</string>
+    <string name="purchases_feature_desc_android_auto">Porta mappe e navigazione offline di OsmAnd sul display del tuo veicolo e le integra con i comandi di bordo.</string>
     <string name="icon_group_nautical">Nautico</string>
     <string name="routing_attr_only_permitted_streets_name">Strade esplicitamente permesse</string>
     <string name="routing_attr_only_permitted_streets_description">Utilizza solo le strade esplicitamente permesse</string>
@@ -5044,7 +5044,7 @@
     <string name="user_guide">Guida utente</string>
     <string name="free_versions_descr">Scarica e installa la versione gratuita di OsmAnd</string>
     <string name="telegram_chats_descr">Unisciti a una delle nostre chat Telegram locali.</string>
-    <string name="open_issue_on_github">Problema aperto su GitHub</string>
+    <string name="open_issue_on_github">Segnala un problema su GitHub</string>
     <string name="report_an_issues">Segnala un problema</string>
     <string name="copy_build_version">Copia la versione di compilazione</string>
     <string name="most_viewed">I più visti</string>
@@ -5716,7 +5716,7 @@
     <string name="ais_cpa_warning_time_description">Se il tempo impiegato per raggiungere il PAV con un\'altra imbarcazione è inferiore a questo valore, l\'imbarcazione viene contrassegnata in rosso.</string>
     <string name="show_grids_description">Permette di mostrare una griglia sulla mappa</string>
     <string name="show_utm_grids">Usa UTM invece di WGS84</string>
-    <string name="show_utm_grids_description">Mostra la griglia in metri UTM invece che in gradi WGS84</string>
+    <string name="show_utm_grids_description">Mostra la griglia in metri UTM invece che in WGS84</string>
     <string name="map_grid">Griglie di mappa</string>
     <string name="show_grids">Mostra griglia mappa</string>
     <string name="no_photo_for_location_desc">Ancora nessuna foto è stata aggiunta dagli utenti a questo luogo</string>
@@ -5725,4 +5725,14 @@
     <string name="hmd_promo_description">Accesso gratuito alle funzionalità, inclusi scaricamenti mappe illimitati, rilievi 3D, ecc. per %1$s mese</string>
     <string name="hmd_promo">Promozione HMD per%1$s mesi</string>
     <string name="apply_to_all_points">Applica a tutti i punti</string>
+    <string name="show_mercator_grids">Usa Mercator invece di WGS84 o UTM</string>
+    <string name="show_mercator_grids_description">Mostra la griglia in km di Mercatore invece che in WGS84 o UTM</string>
+    <string name="show_dms_grids">Usa DMS invece di gradi</string>
+    <string name="show_dms_grids_description">Mostra la griglia in gradi, minuti, secondi invece che gradi</string>
+    <string name="show_dm_grids">Usa DM invece di gradi o DMS</string>
+    <string name="original_color_description">Ogni punto manterrebbe il proprio colore.</string>
+    <string name="original_shape_description">Ogni punto manterrebbe la propria forma.</string>
+    <string name="original_icon_description">Ogni punto manterrebbe la propria icona.</string>
+    <string name="show_dm_grids_description">Mostra la griglia in gradi e minuti invece che in gradi o DMS</string>
+    <string name="save_favorite_default_appearance">Applicare le modifiche ai punti esistenti nella cartella o solo a quelli nuovi?</string>
 </resources>

@@ -14,7 +14,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
@@ -534,7 +534,7 @@ public class RoutingHelper {
 				List<TargetPoint> ll = targets.getIntermediatePointsNavigation();
 				int ind = -1;
 				for (int i = 0; i < ll.size(); i++) {
-					if (ll.get(i).point != null && MapUtils.getDistance(ll.get(i).point, rm) < 5) {
+					if (ll.get(i).getLatLon() != null && MapUtils.getDistance(ll.get(i).getLatLon(), rm) < 5) {
 						name = ll.get(i).getOnlyName();
 						ind = i;
 						break;

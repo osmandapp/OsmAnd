@@ -37,7 +37,7 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.SearchHistoryHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapseExpandListener;
 import net.osmand.plus.mapcontextmenu.controllers.*;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;

@@ -164,7 +164,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	@Override
 	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
 		ApplicationMode selectedAppMode = getSelectedAppMode();
-		app.getSettings().copyPreferencesFromProfile(appMode, selectedAppMode);
+		app.getSettings().copyPreferencesFromProfile(appMode, selectedAppMode, false);
 		updateCopiedOrResetPrefs();
 	}
 
