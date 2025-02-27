@@ -5610,7 +5610,9 @@
     <string name="view_angle">Görüntüleme açısı</string>
     <string name="location_radius_description">Mevcut konum doğruluğunuzu belirten dairesel alanı gösterir</string>
     <string name="auto_25_chars_route_tslr">Sağa hafif viraj</string>
-    <string name="energy_avg_info">Enerji istatistikleri (ortalama 1 / 5 / 15 dakika)</string>
+    <string name="energy_avg_info">Pil istatistikleri (ortalama 1 / 5 / 15 dakika)</string>
     <string name="auto_25_chars_route_tshr">Sağa keskin viraj</string>
     <string name="location_radius">Konum yarıçapı</string>
+    <string name="rendering_avg_info">Görüntü işleme istatistikleri (ortalama 1 / 5 / 15 dakika)</string>
+    <string name="energy_avg_info_description">Dakika başına pil seviyesi: %1$s\nPil tüketimi (mAh): %2$s</string>
 </resources>
