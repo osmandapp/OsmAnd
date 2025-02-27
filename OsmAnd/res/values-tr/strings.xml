@@ -5449,7 +5449,7 @@
     <string name="shared_string_avg_altitude">Ort. yükseklik</string>
     <string name="shared_string_avg_speed">Min. hız</string>
     <string name="default_buttons_corners_original_description">Her buton kendi köşe ayarında kalacak.</string>
-    <string name="shared_string_engine"></string>
+    <string name="shared_string_engine"/>
     <string name="shared_string_hour">Saat</string>
     <string name="obd_throttle_position">Gaz Kelebeği Konumu</string>
     <string name="obd_calculated_engine_load_desc">Motorun anlık kullanılabilir gücünü yüzde olarak gösterir.</string>
@@ -5463,4 +5463,25 @@
     <string name="ltr_or_rtl_combine_via_per">%2$s başına %1$s</string>
     <string name="ais_cpa_settings">CPA ile ilgili ayarlar</string>
     <string name="display_distance_to_first_intermediate">Sonraki durak için rota ayrıntılarını göster</string>
+    <string name="reset_average_value">Ortalama değeri sıfırla</string>
+    <string name="current_temperature">Anlık sıcaklık</string>
+    <string name="ais_port_nmea_server_description">NMEA veri kaynağının TCP port numarasını tanımlayın</string>
+    <string name="ais_port_nmea_local">Yerel NMEA veri alıcısının UDP portu</string>
+    <string name="average_value_slider_description">Ortalama değer ölçümü için zaman aralığını seçin.</string>
+    <string name="average_temperature_slider_description">Ortalama sıcaklık ölçümü için zaman aralığını seçin.</string>
+    <string name="average_temperature">Ortalama sıcaklık</string>
+    <string name="obd_fuel_consumption">Yakıt tüketimi</string>
+    <string name="remaining_fuel">Kalan yakıt</string>
+    <string name="remaining_fuel_description">Aracın deposunda kalan yakıt miktarını gösterir</string>
+    <string name="ais_address_nmea_server">NMEA veri kaynağının IP adresi</string>
+    <string name="ais_address_nmea_server_description">NMEA veri kaynağının IP adresini tanımlayın (TCP kullanılıyorsa)</string>
+    <string name="ais_port_nmea_local_description">OsmAnd\'ın NMEA verisini çekeceği UDP portunu tanımlayın</string>
+    <string name="obd_ambient_air_temp_desc">Araç dışı sıcaklığı gösterir.</string>
+    <string name="obd_air_intake_temp_desc">Emme manifoldundan motora giren havanın sıcaklığını gösterir.</string>
+    <string name="obd_fuel_consumption_desc">Motorun yakıt kullanımını, kalan yakıtı, depo kapasitesini ve GPS\'den gelen veriye göre katedilen mesafeyi gösterir.</string>
+    <string name="ais_port_nmea_server">NMEA veri kaynağının TCP portu</string>
+    <string name="ais_object_lost_timeout">Nesneler kaybolduğunda görünürlük zaman aşımı</string>
+    <string name="map_widget_route_information_desc">Tahmini varış süresini, kalan yolculuk süresini ve mevcut yol tarifinin mesafesini gösterir.</string>
+    <string name="obd_engine_oil_temperature_desc">Motor yağı sıcaklığını gösterir.</string>
+    <string name="obd_engine_oil_temperature">Motor Yağı Sıcaklığı</string>
 </resources>
