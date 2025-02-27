@@ -5415,4 +5415,15 @@
     <string name="map_markers_desc">Pencere öğesi, harita işaretçileri listesindeki ilk iki işaretçi için mesafeyi veya tahmini varış zamanını (TVZ) gösterir.</string>
     <string name="live_monitoring_adress_descr">Web adresini parametre sözdizimi ile belirtin: enlem={0}, boylam={1}, zaman damgası={2}, hdop={3}, rakım={4}, hız={5}, yön={6}.</string>
     <string name="weather_source_ecmwf_description">Avrupa Orta Vadeli Hava Tahminleri Merkezi (ECMWF)</string>
+    <string name="ais_load_data">AIS verisini dosyadan yükleyin</string>
+    <string name="ais_address_settings">IP adresi ayarları</string>
+    <string name="recently_visited">Son ziyaret edilenler</string>
+    <string name="apply_to_all_points">Bütün noktalara uygula</string>
+    <string name="original_color_description">Her nokta kendi renginde kalacak.</string>
+    <string name="original_icon_description">Her nokta kendi simgesiyle kalacak.</string>
+    <string name="original_shape_description">Her nokta kendi şekliyle kalacak.</string>
+    <string name="hmd_promo_description">%1$s aylığına sınırsız harita indirme, 3B kabartma vb. dahil ücretsiz erişim</string>
+    <string name="shared_string_road_exit">Çıkış</string>
+    <string name="popular_places_nearby">Yakınlardaki popüler mekanlar</string>
+    <string name="save_favorite_default_appearance">Değişiklikler klasördeki mevcut noktalara mı kaydolsun veya yeni oluşturulsun mu?</string>
 </resources>
