@@ -5539,7 +5539,7 @@
     <string name="obd_fuel_level_desc">Віджет показує рівень пального в машині за датчиком OBD</string>
     <string name="obd_fuel_consumption_rate_desc">Віджет показує споживання пального машиною на основі даних OBD про розташування</string>
     <string name="lock_screen">Екран блокування</string>
-    <string name="quick_action_verb_start_pause">Старт / Пауза</string>
+    <string name="quick_action_verb_start_pause">Пуск / Пауза</string>
     <string name="help_article_personal_color_palette_schemes_name">Кольорові схеми</string>
     <string name="quick_action_finish_trip_recording_summary">Кнопка для збереження GPX-треку і завершення запису подорожі.</string>
     <string name="start_trip_recording_first_m">Будь ласка, спочатку почніть запис треку.</string>
