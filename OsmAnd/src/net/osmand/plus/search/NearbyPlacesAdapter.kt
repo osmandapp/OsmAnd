@@ -1,6 +1,10 @@
 package net.osmand.plus.search
 
+import android.app.Activity
+import android.util.Log
+import android.view.MotionEvent
 import android.view.View
+import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -8,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import net.osmand.Location
-import net.osmand.data.LatLon
 import net.osmand.data.ExploreTopPlacePoint
+import net.osmand.data.LatLon
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
@@ -21,7 +25,7 @@ import net.osmand.plus.utils.UpdateLocationUtils
 import net.osmand.util.Algorithms
 
 class NearbyPlacesAdapter(
-	val app: OsmandApplication,
+	val activity: Activity,
 	var items: List<ExploreTopPlacePoint>,
 	private var isVertical: Boolean,
 	private val onItemClickListener: NearbyItemClickListener
@@ -32,7 +36,9 @@ class NearbyPlacesAdapter(
 	}
 
 	// Initialize the UpdateLocationViewCache
-	private val updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app)
+	private val updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(activity)
+	private var location: Location? = null
+	private var heading: Float? = null
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NearbyViewHolder {
 		val inflater = UiUtilities.getInflater(parent.context, isNightMode())
@@ -45,17 +51,24 @@ class NearbyPlacesAdapter(
 	}
 
 	private fun isNightMode(): Boolean {
+		val app = activity.applicationContext as OsmandApplication
 		return !app.getSettings().isLightContent
 	}
 
 	override fun onBindViewHolder(holder: NearbyViewHolder, position: Int) {
 		val item = items[position]
-		holder.bind(item, onItemClickListener, position)
+		holder.bind(item, onItemClickListener, position, location)
 	}
 
 	override fun getItemCount(): Int = items.size
 
-	class NearbyViewHolder(
+	fun updateLocation(location: Location?, heading: Float?) {
+		this.location = location
+		this.heading = heading
+		notifyDataSetChanged()
+	}
+
+	inner class NearbyViewHolder(
 		itemView: View,
 		private val updateLocationViewCache: UpdateLocationUtils.UpdateLocationViewCache
 	) : RecyclerView.ViewHolder(itemView) {
@@ -67,11 +80,17 @@ class NearbyPlacesAdapter(
 		private val distanceTextView: TextView? = itemView.findViewById(R.id.distance)
 		private val arrowImageView: ImageView? = itemView.findViewById(R.id.direction)
 
-		fun bind(item: ExploreTopPlacePoint, onItemClickListener: NearbyItemClickListener, position: Int) {
+		fun bind(
+			item: ExploreTopPlacePoint,
+			onItemClickListener: NearbyItemClickListener,
+			position: Int,
+			location: Location?
+		) {
 			val app = imageView.context.applicationContext as OsmandApplication
 			val poiTypes = app.poiTypes
 			val subType = poiTypes.getPoiTypeByKey(item.poisubtype)
-			val poiIcon = RenderingIcons.getBigIcon(app, subType.keyName)
+			val poiIcon =
+				if (subType == null) null else RenderingIcons.getBigIcon(app, subType.keyName)
 			val uiUtilities = app.uiUtilities
 			val nightMode = app.daynightHelper.isNightMode
 			val coloredIcon = if (poiIcon != null) {
@@ -111,11 +130,13 @@ class NearbyPlacesAdapter(
 				AndroidUiHelper.updateVisibility(it, !Algorithms.isEmpty(item.wikiDesc))
 			}
 
-			itemTypeTextView.text = subType.translation
+			if (subType != null) {
+				itemTypeTextView.text = subType.translation
+			}
 
 			// Calculate distance and show arrow
 			if (distanceTextView != null && arrowImageView != null) {
-				val distance = calculateDistance(app, item)
+				val distance = calculateDistance(app, item, location)
 				if (distance != null) {
 					distanceTextView.text = OsmAndFormatter.getFormattedDistance(distance, app)
 					distanceTextView.visibility = View.VISIBLE
@@ -123,23 +144,32 @@ class NearbyPlacesAdapter(
 
 					// Update compass icon rotation
 					val latLon = LatLon(item.latitude, item.longitude)
-					UpdateLocationUtils.updateLocationView(app, updateLocationViewCache, arrowImageView, distanceTextView, latLon)
+					UpdateLocationUtils.updateLocationView(
+						app,
+						updateLocationViewCache,
+						arrowImageView,
+						distanceTextView,
+						latLon)
 				} else {
 					distanceTextView.visibility = View.GONE
 					arrowImageView.visibility = View.GONE
 				}
 			}
 
-			itemView.setOnClickListener { onItemClickListener.onNearbyItemClicked(item) }
+			itemView.setOnClickListener {
+				onItemClickListener.onNearbyItemClicked(item)
+			}
 		}
 
-		private fun calculateDistance(app: OsmandApplication, item: ExploreTopPlacePoint): Float? {
-			val currentLocation = app.locationProvider?.lastKnownLocation
-			if (currentLocation != null) {
+		private fun calculateDistance(
+			app: OsmandApplication,
+			item: ExploreTopPlacePoint,
+			location: Location?): Float? {
+			if (location != null) {
 				val results = FloatArray(1)
 				Location.distanceBetween(
-					currentLocation.latitude,
-					currentLocation.longitude,
+					location.latitude,
+					location.longitude,
 					item.latitude,
 					item.longitude,
 					results

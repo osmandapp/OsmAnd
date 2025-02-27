@@ -86,7 +86,7 @@ public class ExploreTopPlacePoint implements Serializable, LocationPoint {
 
 	@Override
 	public PointDescription getPointDescription(@NonNull Context ctx) {
-		return new PointDescription(PointDescription.POINT_TYPE_NEARBY_PLACE, wikiDesc);
+		return new PointDescription(PointDescription.POINT_TYPE_NEARBY_PLACE, wikiTitle);
 	}
 
 	public double getElo() {

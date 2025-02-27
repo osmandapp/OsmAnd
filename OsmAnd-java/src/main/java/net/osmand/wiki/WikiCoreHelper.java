@@ -68,7 +68,7 @@ public class WikiCoreHelper {
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException(e);
 		}
-		LOG.debug("Download images " + url.toString());
+		LOG.debug("Download images " + url + " {" + Thread.currentThread().getName() + "}");
 		getNearbyImagesOsmAndAPIRequest(url.toString(), wikiImages);
 		return wikiImages;
 	}
@@ -144,7 +144,7 @@ public class WikiCoreHelper {
 	private static List<WikiImage> getWikimediaImageCategory(String categoryName, List<WikiImage> wikiImages, int depth) {
 		String url = WIKIMEDIA_API_ENDPOINT + WIKIMEDIA_ACTION + WIKIMEDIA_CATEGORY + categoryName + CM_LIMIT
 				+ FORMAT_JSON;
-		WikimediaResponse response = sendWikipediaApiRequest(url, WikimediaResponse.class);
+		WikimediaResponse response = sendWikipediaApiRequest(url, WikimediaResponse.class, false);
 		if (response != null) {
 			List<String> subCategories = new ArrayList<>();
 			for (Categorymember cm : response.query.categorymembers) {
@@ -169,7 +169,7 @@ public class WikiCoreHelper {
 
 	protected static List<WikiImage> getWikidataImageWikidata(String wikidataId, List<WikiImage> wikiImages) {
 		String url = WIKIDATA_API_ENDPOINT + WIKIDATA_ACTION + wikidataId + FORMAT_JSON;
-		WikidataResponse response = sendWikipediaApiRequest(url, WikidataResponse.class);
+		WikidataResponse response = sendWikipediaApiRequest(url, WikidataResponse.class, false);
 		if (response != null && response.claims != null && response.claims.p18 != null) {
 			for (P18 p18 : response.claims.p18) {
 				String imageFileName = p18.mainsnak.datavalue.value;
@@ -185,7 +185,7 @@ public class WikiCoreHelper {
 	}
 
 	private static List<WikiImage> getImagesOsmAndAPIRequestV2(String url, List<WikiImage> wikiImages) {
-		OsmandAPIResponseV2 response = sendWikipediaApiRequest(url, OsmandAPIResponseV2.class);
+		OsmandAPIResponseV2 response = sendWikipediaApiRequest(url, OsmandAPIResponseV2.class, false);
 		if (response != null && !Algorithms.isEmpty(response.images)) {
 			for (Map<String, String> image : response.images) {
 				WikiImage wikiImage = parseImageDataWithMetaData(image);
@@ -207,14 +207,14 @@ public class WikiCoreHelper {
 	}
 
 	private static void getNearbyImagesOsmAndAPIRequest(String url, List<OsmandApiFeatureData> wikiImages) {
-		OsmandAPIFeaturesResponse response = sendWikipediaApiRequest(url, OsmandAPIFeaturesResponse.class);
+		OsmandAPIFeaturesResponse response = sendWikipediaApiRequest(url, OsmandAPIFeaturesResponse.class, true);
 		if (response != null && !Algorithms.isEmpty(response.features)) {
 			wikiImages.addAll(response.features);
 		}
 	}
 
 	private static List<WikiImage> getImagesOsmAndAPIRequest(String url, List<WikiImage> wikiImages) {
-		OsmandAPIResponse response = sendWikipediaApiRequest(url, OsmandAPIResponse.class);
+		OsmandAPIResponse response = sendWikipediaApiRequest(url, OsmandAPIResponse.class, false);
 		if (response != null && !Algorithms.isEmpty(response.images)) {
 			for (String imageUrl : response.images) {
 				if (imageUrl != null) {
@@ -286,17 +286,24 @@ public class WikiCoreHelper {
 		return null;
 	}
 
-	private static <T> T sendWikipediaApiRequest(String url, Class<T> responseClass) {
+	private static <T> T sendWikipediaApiRequest(String url, Class<T> responseClass, boolean useGzip) {
 		StringBuilder rawResponse = new StringBuilder();
-		String errorMessage = NetworkUtils.sendGetRequest(url, null, rawResponse);
-		if (errorMessage == null) {
-			try {
-				return new Gson().fromJson(rawResponse.toString(), responseClass);
-			} catch (JsonSyntaxException e) {
-				errorMessage = e.getLocalizedMessage();
+		try {
+			// Send the GET request with GZIP support
+			String errorMessage = NetworkUtils.sendGetRequest(url, null, rawResponse, useGzip);
+			if (errorMessage == null) {
+				try {
+					// Parse the JSON response
+					return new Gson().fromJson(rawResponse.toString(), responseClass);
+				} catch (JsonSyntaxException e) {
+					LOG.error(e.getLocalizedMessage());
+				}
+			} else {
+				LOG.error(errorMessage);
 			}
+		} catch (Exception e) {
+			LOG.error(e.getLocalizedMessage());
 		}
-		LOG.error(errorMessage);
 		return null;
 	}
 

@@ -52,6 +52,12 @@ public class PlacesDatabaseHelper extends SQLiteOpenHelper {
     }
 
     @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PLACES);
+        onCreate(db);
+    }
+
+    @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion < 2) {
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_PLACES);
@@ -92,19 +98,18 @@ public class PlacesDatabaseHelper extends SQLiteOpenHelper {
 
     public boolean isDataExpired(int zoom, int tileX, int tileY, String lang) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_PLACES, new String[]{COLUMN_TIMESTAMP},
+        try (Cursor cursor = db.query(TABLE_PLACES, new String[] {COLUMN_TIMESTAMP},
                 COLUMN_ZOOM + "=? AND " + COLUMN_TILE_X + "=? AND " + COLUMN_TILE_Y + "=? AND " + COLUMN_LANG + "=?",
-                new String[]{String.valueOf(zoom), String.valueOf(tileX), String.valueOf(tileY), lang},
-                null, null, null);
+                new String[] {String.valueOf(zoom), String.valueOf(tileX), String.valueOf(tileY), lang},
+                null, null, null)) {
 
-        int tc = cursor.getColumnIndex(COLUMN_TIMESTAMP);
-        if (cursor.moveToFirst()) {
-            long timestamp = cursor.getLong(tc);
-            long currentTime = System.currentTimeMillis();
-            cursor.close();
-            return (currentTime - timestamp) > DATA_EXPIRATION_TIME; // 1 month expiration
+            if (cursor.moveToFirst()) {
+                int tc = cursor.getColumnIndex(COLUMN_TIMESTAMP);
+                long timestamp = cursor.getLong(tc);
+                long currentTime = System.currentTimeMillis();
+                return (currentTime - timestamp) > DATA_EXPIRATION_TIME; // 1 month expiration
+            }
+            return true; // Data is expired if it doesn't exist
         }
-        cursor.close();
-        return true; // Data is expired if it doesn't exist
     }
 }

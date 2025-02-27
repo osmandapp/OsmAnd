@@ -482,5 +482,6 @@
 
 	<dimen name="nearby_place_image_height">108dp</dimen>
 	<dimen name="nearby_place_image_width">144dp</dimen>
+	<dimen name="nearby_place_item_height">210dp</dimen>
 	<dimen name="nearby_place_image_vertical_size">66dp</dimen>
 </resources>

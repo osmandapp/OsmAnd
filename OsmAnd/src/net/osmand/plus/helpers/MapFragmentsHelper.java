@@ -149,7 +149,7 @@ public class MapFragmentsHelper implements OnPreferenceStartFragmentCallback {
 	}
 
 	@Nullable
-	public ExplorePlacesFragment getNearbyPlacesFragment() {
+	public ExplorePlacesFragment getExplorePlacesFragment() {
 		return getFragment(ExplorePlacesFragment.Companion.getTAG());
 	}
 

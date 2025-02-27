@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="@dimen/nearby_place_image_width"
-	android:layout_height="wrap_content"
+	android:layout_height="@dimen/nearby_place_item_height"
 	android:orientation="vertical"
 	android:paddingStart="@dimen/content_padding"
 	android:paddingTop="@dimen/content_padding"
@@ -21,6 +21,8 @@
 		android:layout_height="wrap_content"
 		android:layout_marginTop="9dp"
 		android:textColor="?android:textColorPrimary"
+		android:maxLines="2"
+		android:ellipsize="end"
 		android:textSize="16sp"
 		tools:text="Eiffel Tower" />
 
