@@ -5598,4 +5598,19 @@
     <string name="driving_region_india">Hindistan</string>
     <string name="auto_25_chars_route_kl">Solda tut</string>
     <string name="auto_25_chars_route_kr">Sağda tut</string>
+    <string name="navigation_position">Navigasyon pozisyonu</string>
+    <string name="auto_25_chars_route_tl">Sola dönüş</string>
+    <string name="resting_navigation_position">Dinlenme &amp; navigasyon pozisyonu</string>
+    <string name="resting_position">Dinlenme pozisyonu</string>
+    <string name="choose_map_orientation">Harita yönünü seçin</string>
+    <string name="auto_25_chars_route_tsll">Sola hafif viraj</string>
+    <string name="rendering_value_pale_name">Soluk</string>
+    <string name="auto_25_chars_route_tshl">Sola keskin viraj</string>
+    <string name="auto_25_chars_route_tu">U dönüşü yapın</string>
+    <string name="view_angle">Görüntüleme açısı</string>
+    <string name="location_radius_description">Mevcut konum doğruluğunuzu belirten dairesel alanı gösterir</string>
+    <string name="auto_25_chars_route_tslr">Sağa hafif viraj</string>
+    <string name="energy_avg_info">Enerji istatistikleri (ortalama 1 / 5 / 15 dakika)</string>
+    <string name="auto_25_chars_route_tshr">Sağa keskin viraj</string>
+    <string name="location_radius">Konum yarıçapı</string>
 </resources>
