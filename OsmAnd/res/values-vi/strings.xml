@@ -1917,7 +1917,7 @@
     <string name="shared_string_shows">Hiện</string>
     <string name="distance_by_tap_use_description">Chạm vào bản đồ để xem khoảng cách giữa vị trí hiện tại của bạn và điểm đã chạm.\nChạm 2 ngón vào bản đồ để xem khoảng cách giữa các điểm đó</string>
     <string name="true_bearing_wdiget_desc">Góc giữa hướng bắc chuẩn và điểm đích được lấy từ vị trí của bạn.</string>
-    <string name="altitude_correction">Sửa chính xác độ cao</string>
+    <string name="altitude_correction">Sửa độ cao</string>
     <string name="map_widget_ant_bicycle_power">Sức mạnh xe đạp</string>
     <string name="switch_widget_mode_desc">Chạm vào widget sẽ chuyển các chế độ.</string>
     <string name="external_sensors_plugin_name">Cảm biến bên ngoài</string>
@@ -3396,4 +3396,24 @@
     <string name="shared_string_empty">Trống</string>
     <string name="display_distance_to_first_intermediate">Hiện chi tiết tuyến đường cho điểm dừng tiếp theo</string>
     <string name="travel_routes">Tuyến đường du lịch</string>
+    <string name="empty_state_my_tracks_desc">Nhập hoặc ghi các tệp cung đường</string>
+    <string name="empty_state_my_tracks">Thêm tệp cung đường</string>
+    <string name="pass_whole_track_descr">Điểm của cung đường để điều hướng</string>
+    <string name="follow_track">Đi theo cung đường</string>
+    <string name="plan_route_trim_before">Cắt bỏ trước</string>
+    <string name="plan_route_trim_after">Cắt bỏ sau</string>
+    <string name="nearest_point">Điểm gần nhất</string>
+    <string name="access_hint_enter_address">Nhập địa chỉ</string>
+    <string name="simplified_track">Cung đường đơn giản hoá</string>
+    <string name="attach_to_the_roads">Gắn với các con đường</string>
+    <string name="plan_route_change_route_type_before">Thay đổi loại tuyến đường trước</string>
+    <string name="simplified_track_description">Chỉ có tuyến đường sẽ được lưu lại, các điểm dừng sẽ bị xóa.</string>
+    <string name="delete_address">Xoá địa chỉ</string>
+    <string name="start_of_the_track">Điểm bắt đầu của cung đường</string>
+    <string name="import_track_descr">Chọn tệp cung đường để đi theo hoặc nhập nó từ thiết bị của bạn.</string>
+    <string name="follow_track_descr">Chọn tệp cung đường để đi theo</string>
+    <string name="plan_route_change_route_type_after">Thay đổi loại tuyến đường sau</string>
+    <string name="context_menu_item_add_waypoint">Thêm điểm dừng cung đường</string>
+    <string name="add_address">Thêm địa chỉ</string>
+    <string name="marker_save_as_track">Lưu dưới dạng tệp cung đường</string>
 </resources>
