@@ -95,4 +95,9 @@
     <string name="help_article_search_search_all_name">Lorg uile</string>
     <string name="help_article_start_with_name">Tòisich air OsmAnd</string>
     <string name="shared_string_setup">Seatadh</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Stuthan-spreadhaidh</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gasan</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Measgaichte</string>
+    <string name="dangerous_goods">Bathar cunnartach</string>
 </resources>
