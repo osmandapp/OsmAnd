@@ -239,7 +239,7 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 		if (show) {
 			if (topPlacesMapLayerProvider == null) {
 				topPlacesMapLayerProvider = new ExploreTopPlacesTileProvider(getApplication(),
-						getPointsOrder() + 100, DEFAULT_LIMIT_POINTS / 4);
+						getPointsOrder() + 100, DEFAULT_LIMIT_POINTS / 8);
 				topPlacesMapLayerProvider.initProvider(mapRenderer);
 			}
 		} else {

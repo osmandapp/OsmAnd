@@ -47,7 +47,7 @@ public class ExploreTopPlacesTileProvider extends interface_MapTiledCollectionPr
 	private final ExplorePlacesProvider explorePlacesProvider;
 	private MapTiledCollectionProvider providerInstance;
 
-	private static final int TILE_LOADING_TIMEOUT = 2000;
+	private static final int TILE_LOADING_TIMEOUT = 5000;
 	private static final int SLEEP_INTERVAL = 100;
 
 	private static final int SMALL_ICON_BORDER_DP = 1;
