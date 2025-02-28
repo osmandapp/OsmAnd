@@ -116,4 +116,11 @@
     <string name="external_device_characteristic_heart_rate">Reat-cridhe</string>
     <string name="external_device_characteristic_pulse_rate">Reat bhuillean-cuisle</string>
     <string name="external_device_characteristic_temperature">Teòthachd</string>
+    <string name="external_device_details_connection">Ceangal</string>
+    <string name="external_device_details_battery">Bataraidh</string>
+    <string name="external_device_details_speed">Luaths</string>
+    <string name="external_device_details_total_distance">Astar iomlan</string>
+    <string name="external_device_details_distance">Astar</string>
+    <string name="external_device_details_connect">Ceangal</string>
+    <string name="external_device_details_disconnect">Geàrr ceangal</string>
 </resources>
