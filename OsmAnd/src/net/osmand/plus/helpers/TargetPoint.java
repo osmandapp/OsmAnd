@@ -57,10 +57,18 @@ public class TargetPoint implements LocationPoint {
 		}
 	}
 
-	public String getRoutePointDescription(@NonNull Context ctx) {
-		String name = getOnlyName();
-		if (!Algorithms.isEmpty(name)) {
-			return name.replace(':', ' ');
+	@NonNull
+	public String getRoutePointDescription(@NonNull Context ctx, boolean includeAddress) {
+		if (pointDescription != null) {
+			String name = pointDescription.getName();
+			String typeName = pointDescription.getTypeName();
+
+			if (!Algorithms.isEmpty(name)) {
+				if (includeAddress && pointDescription.isAddress() && !Algorithms.isEmpty(typeName)) {
+					name = ctx.getString(R.string.ltr_or_rtl_combine_via_comma, name, typeName);
+				}
+				return name.replace(':', ' ');
+			}
 		}
 		return PointDescription.getLocationNamePlain(ctx, latLon.getLatitude(), latLon.getLongitude());
 	}

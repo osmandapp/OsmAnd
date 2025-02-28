@@ -141,7 +141,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 			description.setSpan(DurationSpan.create(leftTimeSec), 4, 5, 0);
 
 			TargetPoint finish = targetPointsHelper.getPointToNavigate();
-			String title = finish != null ? finish.getRoutePointDescription(app) : null;
+			String title = finish != null ? finish.getRoutePointDescription(app, true) : null;
 
 			if (Algorithms.isEmpty(title)) {
 				String name = QuickSearchListItem.getName(app, searchResult);
