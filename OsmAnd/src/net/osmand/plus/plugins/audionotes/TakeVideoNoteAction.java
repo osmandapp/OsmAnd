@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -15,8 +16,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.quickaction.actions.SelectMapLocationAction;
 
-public class TakeVideoNoteAction extends QuickAction {
+public class TakeVideoNoteAction extends SelectMapLocationAction {
+
 	public static final QuickActionType TYPE = new QuickActionType(TAKE_VIDEO_NOTE_ACTION_ID,
 			"video.note", TakeVideoNoteAction.class).
 			nameRes(R.string.quick_action_video_note).iconRes(R.drawable.ic_action_video_dark).nonEditable().
@@ -33,10 +36,26 @@ public class TakeVideoNoteAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-		LatLon latLon = getMapLocation(mapActivity);
 		AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
-		if (plugin != null)
+		if (plugin != null) {
+			super.execute(mapActivity);
+		}
+	}
+
+	@Override
+	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon) {
+		AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
+		if (plugin != null) {
 			plugin.recordVideo(latLon.getLatitude(), latLon.getLongitude(), mapActivity, false);
+		}
+	}
+
+	@Override
+	@Nullable
+	protected Object getLocationIcon(@NonNull MapActivity mapActivity) {
+		AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
+		AudioNotesLayer layer = plugin != null ? plugin.getAudioNotesLayer() : null;
+		return layer != null ? layer.getVideoNoteIcon() : null;
 	}
 
 	@Override

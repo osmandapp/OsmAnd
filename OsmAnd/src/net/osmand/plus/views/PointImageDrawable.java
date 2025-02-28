@@ -33,6 +33,7 @@ public class PointImageDrawable extends Drawable {
 	private final int dp_12_px;
 	private final boolean withShadow;
 	private boolean history;
+	private BackgroundType backgroundType;
 	private final Drawable mapIcon;
 	private Bitmap mapIconBitmap;
 	private final Bitmap mapIconBackgroundTop;
@@ -74,6 +75,7 @@ public class PointImageDrawable extends Drawable {
 		mapIconBackgroundTopSmall = type.getMapBackgroundIconId(context, "top", true);
 		mapIconBackgroundCenterSmall = type.getMapBackgroundIconId(context, "center", true);
 		mapIconBackgroundBottomSmall = type.getMapBackgroundIconId(context, "bottom", true);
+		backgroundType = type;
 
 		colorFilter = new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN);
 		grayFilter = new PorterDuffColorFilter(ContextCompat.getColor(context, R.color.color_favorite_gray), PorterDuff.Mode.SRC_IN);
@@ -118,6 +120,11 @@ public class PointImageDrawable extends Drawable {
 			return mapIconBackgroundCenter.getWidth();
 		}
 		return uiBackgroundIcon.getIntrinsicWidth();
+	}
+
+	@NonNull
+	public BackgroundType getBackgroundType() {
+		return backgroundType;
 	}
 
 	@Override

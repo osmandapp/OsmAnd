@@ -7,6 +7,7 @@ import static net.osmand.shared.gpx.GpxUtilities.DEFAULT_ICON_NAME;
 
 import android.graphics.drawable.Drawable;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -25,6 +26,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.SaveFavoritesTask.SaveFavoritesListener;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
@@ -102,19 +104,19 @@ public class FavouritesHelper {
 	}
 
 	public int getColorWithCategory(@NonNull FavouritePoint point, int defaultColor) {
-		int color = 0;
-		if (point.getColor() != 0) {
-			color = point.getColor();
-		} else {
-			FavoriteGroup favoriteGroup = getGroup(point);
-			if (favoriteGroup != null) {
-				color = favoriteGroup.getColor();
-			}
-			if (color == 0) {
-				color = defaultColor;
-			}
+		FavoriteGroup favoriteGroup = getGroup(point);
+		int groupColor = favoriteGroup != null ? favoriteGroup.getColor() : 0;
+		return getColorWithCategory(point.getColor(), groupColor, defaultColor);
+	}
+
+	public int getColorWithCategory(@ColorInt int pointColor, @ColorInt int groupColor, @ColorInt int defaultColor) {
+		if (pointColor != 0) {
+			return pointColor;
 		}
-		return color;
+		if (groupColor != 0) {
+			return groupColor;
+		}
+		return defaultColor;
 	}
 
 	public void loadFavorites() {
@@ -373,7 +375,7 @@ public class FavouritesHelper {
 		if (!point.getName().isEmpty()) {
 			point.setVisible(group.isVisible());
 			if (SpecialPointType.PARKING == point.getSpecialPointType()) {
-				point.setColor(ContextCompat.getColor(app, R.color.parking_icon_background));
+				point.setColor(getParkingIconColor());
 			} else if (point.getColor() == 0) {
 				point.setColor(group.getColor());
 			}
@@ -419,6 +421,11 @@ public class FavouritesHelper {
 			app.getGeocodingLookupService().cancel(request);
 			addressRequestMap.remove(point);
 		}
+	}
+
+	@ColorInt
+	public int getParkingIconColor() {
+		return ColorUtilities.getColor(app, R.color.parking_icon_background);
 	}
 
 	public boolean editFavouriteName(FavouritePoint p, String newName, String category, String descr, String address) {

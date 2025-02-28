@@ -27,12 +27,7 @@ public class ParkingTypeBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				.setIcon(getContentIcon(R.drawable.ic_action_time_start))
 				.setTitle(getString(R.string.osmand_parking_no_lim_text))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						addParkingPosition(false);
-					}
-				})
+				.setOnClickListener(v -> addParkingPosition(false))
 				.create();
 		items.add(byTypeItem);
 
@@ -40,22 +35,17 @@ public class ParkingTypeBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				.setIcon(getContentIcon(R.drawable.ic_action_time_span))
 				.setTitle(getString(R.string.osmand_parking_time_limit))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						addParkingPosition(true);
-					}
-				})
+				.setOnClickListener(v -> addParkingPosition(true))
 				.create();
 
 		items.add(byDateItem);
 	}
 
 	private void addParkingPosition(boolean limited) {
+		Bundle args = getArguments();
+		MapActivity mapActivity = (MapActivity) getActivity();
 		ParkingPositionPlugin plugin = PluginsHelper.getActivePlugin(ParkingPositionPlugin.class);
-		if (plugin != null) {
-			MapActivity mapActivity = (MapActivity) getActivity();
-			Bundle args = getArguments();
+		if (args != null && mapActivity != null && plugin != null) {
 			double latitude = args.getDouble(LAT_KEY);
 			double longitude = args.getDouble(LON_KEY);
 

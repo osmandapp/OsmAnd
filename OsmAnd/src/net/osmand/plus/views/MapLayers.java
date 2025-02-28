@@ -82,6 +82,7 @@ public class MapLayers {
 	private RadiusRulerControlLayer radiusRulerControlLayer;
 	private DistanceRulerControlLayer distanceRulerControlLayer;
 	private PointNavigationLayer navigationLayer;
+	private SelectLocationLayer selectLocationLayer;
 	private MapMarkersLayer mapMarkersLayer;
 	private ImpassableRoadsLayer impassableRoadsLayer;
 	private MapInfoLayer mapInfoLayer;
@@ -168,6 +169,9 @@ public class MapLayers {
 		// 7. point navigation layer
 		navigationLayer = new PointNavigationLayer(app);
 		mapView.addLayer(navigationLayer, 7);
+		// 7.2 select location layer
+		selectLocationLayer = new SelectLocationLayer(app);
+		mapView.addLayer(selectLocationLayer, 7.2f);
 		// 7.3 map markers layer
 		mapMarkersLayer = new MapMarkersLayer(app);
 		mapView.addLayer(mapMarkersLayer, 7.3f);
@@ -597,6 +601,10 @@ public class MapLayers {
 
 	public PointNavigationLayer getNavigationLayer() {
 		return navigationLayer;
+	}
+
+	public SelectLocationLayer getSelectLocationLayer() {
+		return selectLocationLayer;
 	}
 
 	public ImpassableRoadsLayer getImpassableRoadsLayer() {

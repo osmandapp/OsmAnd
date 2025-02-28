@@ -8,7 +8,6 @@ import android.graphics.PointF;
 import android.util.Xml;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -94,7 +93,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	public void initLayer(@NonNull OsmandMapTileView view) {
 		super.initLayer(view);
 
-		data = new OsmandMapLayer.MapLayerData<List<OpenStreetNote>>() {
+		data = new OsmandMapLayer.MapLayerData<>() {
 
 			{
 				ZOOM_THRESHOLD = 1;
@@ -185,26 +184,31 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 					}
 					float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
 					float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
-					int iconId;
-					int backgroundColorRes;
-					if (o.isOpened()) {
-						iconId = R.drawable.mx_special_symbol_remove;
-						backgroundColorRes = R.color.osm_bug_unresolved_icon_color;
-					} else {
-						iconId = R.drawable.mx_special_symbol_check_mark;
-						backgroundColorRes = R.color.osm_bug_resolved_icon_color;
-					}
-					BackgroundType backgroundType = BackgroundType.COMMENT;
-					PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
-							ContextCompat.getColor(ctx, backgroundColorRes), true, false, iconId,
-							backgroundType);
-					int offsetY = backgroundType.getOffsetY(ctx, textScale);
+
+					PointImageDrawable pointImageDrawable = createOsmBugDrawable(o.isOpened());
+					int offsetY = pointImageDrawable.getBackgroundType().getOffsetY(ctx, textScale);
 					pointImageDrawable.drawPoint(canvas, x, y - offsetY, textScale, false);
 				}
 				this.fullObjectsLatLon = fullObjectsLatLon;
 				this.smallObjectsLatLon = smallObjectsLatLon;
 			}
 		}
+	}
+
+	@NonNull
+	public PointImageDrawable createOsmBugDrawable(boolean opened) {
+		int iconId;
+		int backgroundColorRes;
+		if (opened) {
+			iconId = R.drawable.mx_special_symbol_remove;
+			backgroundColorRes = R.color.osm_bug_unresolved_icon_color;
+		} else {
+			iconId = R.drawable.mx_special_symbol_check_mark;
+			backgroundColorRes = R.color.osm_bug_resolved_icon_color;
+		}
+		int color = ContextCompat.getColor(ctx, backgroundColorRes);
+		BackgroundType backgroundType = BackgroundType.COMMENT;
+		return PointImageUtils.getOrCreate(ctx, color, true, false, iconId, backgroundType);
 	}
 
 	@Override
@@ -494,8 +498,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public PointDescription getObjectName(Object o) {
-		if (o instanceof OpenStreetNote) {
-			OpenStreetNote bug = (OpenStreetNote) o;
+		if (o instanceof OpenStreetNote bug) {
 			String name = bug.description != null ? bug.description : "";
 			String typeName = bug.typeName != null ? bug.typeName : ctx.getString(R.string.osn_bug_name);
 			return new PointDescription(PointDescription.POINT_TYPE_OSM_NOTE, typeName, name);
