@@ -137,4 +137,10 @@
     <string name="shared_string_cloud">Sgòth</string>
     <string name="new_file">Faidhle ùr</string>
     <string name="sync_now">Co-thìmich an-dràsta</string>
+    <string name="cloud_conflict">Còmhstri</string>
+    <string name="cloud_conflicts">Còmhstrithean</string>
+    <string name="upload_all">Luchdaich suas uile</string>
+    <string name="import_export">Steach-ghluais/mach-ghluais</string>
+    <string name="shared_string_open">Fosgail</string>
+    <string name="open_weather_action">Fosgail aimsir</string>
 </resources>
