@@ -1,7 +1,5 @@
 package net.osmand.plus.quickaction.actions;
 
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 import static net.osmand.plus.quickaction.QuickActionIds.FAVORITE_ACTION_ID;
 
 import android.app.Dialog;
@@ -32,7 +30,6 @@ import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.views.layers.FavouritesLayer;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 
@@ -76,12 +73,9 @@ public class FavoriteAction extends SelectMapLocationAction {
 
 	@Override
 	@Nullable
-	protected PointImageDrawable getLocationIcon(@NonNull MapActivity mapActivity) {
+	protected Object getLocationIcon(@NonNull MapActivity mapActivity) {
 		FavouritesLayer layer = mapActivity.getMapLayers().getFavouritesLayer();
-		if (layer != null) {
-			return layer.createFavoriteIcon(getColor(mapActivity), DEFAULT_UI_ICON_ID, DEFAULT_BACKGROUND_TYPE, false);
-		}
-		return null;
+		return layer.createDefaultFavoriteIcon(getColor(mapActivity));
 	}
 
 	private void addFavorite(MapActivity mapActivity, LatLon latLon, String title, boolean autoFill) {

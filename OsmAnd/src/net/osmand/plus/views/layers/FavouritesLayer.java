@@ -1,5 +1,8 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.PointF;
@@ -22,6 +25,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.data.SpecialPointType;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
@@ -247,11 +251,21 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@NonNull
+	public PointImageDrawable createParkingIcon() {
+		int pointColor = favouritesHelper.getParkingIconColor();
+		int iconId = SpecialPointType.PARKING.getIconId(getContext());
+		return createFavoriteIcon(pointColor, iconId, DEFAULT_BACKGROUND_TYPE, false);
+	}
+
+	@NonNull
+	public PointImageDrawable createDefaultFavoriteIcon(@ColorInt int pointColor) {
+		return createFavoriteIcon(pointColor, DEFAULT_UI_ICON_ID, DEFAULT_BACKGROUND_TYPE, false);
+	}
+
+	@NonNull
 	public PointImageDrawable createFavoriteIcon(@ColorInt int pointColor, @DrawableRes int iconId,
 	                                             @NonNull BackgroundType bgType, boolean synced) {
-		boolean withShadows = true;
-		Context context = getContext();
-		return PointImageUtils.getOrCreate(context, pointColor, withShadows, synced, iconId, bgType);
+		return PointImageUtils.getOrCreate(getContext(), pointColor, true, synced, iconId, bgType);
 	}
 
 	private List<FavoriteGroup> getFavoriteGroups() {

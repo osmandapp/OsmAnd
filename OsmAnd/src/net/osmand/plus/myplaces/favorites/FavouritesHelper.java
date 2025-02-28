@@ -26,6 +26,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.SaveFavoritesTask.SaveFavoritesListener;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
@@ -374,7 +375,7 @@ public class FavouritesHelper {
 		if (!point.getName().isEmpty()) {
 			point.setVisible(group.isVisible());
 			if (SpecialPointType.PARKING == point.getSpecialPointType()) {
-				point.setColor(ContextCompat.getColor(app, R.color.parking_icon_background));
+				point.setColor(getParkingIconColor());
 			} else if (point.getColor() == 0) {
 				point.setColor(group.getColor());
 			}
@@ -420,6 +421,11 @@ public class FavouritesHelper {
 			app.getGeocodingLookupService().cancel(request);
 			addressRequestMap.remove(point);
 		}
+	}
+
+	@ColorInt
+	public int getParkingIconColor() {
+		return ColorUtilities.getColor(app, R.color.parking_icon_background);
 	}
 
 	public boolean editFavouriteName(FavouritePoint p, String newName, String category, String descr, String address) {
