@@ -48,6 +48,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.base.containers.ShiftedBitmap;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
@@ -212,6 +213,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 	}
 
+	@NonNull
 	private Paint createPaintDest(int colorId) {
 		Paint paint = new Paint();
 		paint.setDither(true);
@@ -222,46 +224,38 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		return paint;
 	}
 
+	@NonNull
 	private Paint getMarkerDestPaint(int colorIndex) {
-		switch (colorIndex) {
-			case 0:
-				return bitmapPaintDestBlue;
-			case 1:
-				return bitmapPaintDestGreen;
-			case 2:
-				return bitmapPaintDestOrange;
-			case 3:
-				return bitmapPaintDestRed;
-			case 4:
-				return bitmapPaintDestYellow;
-			case 5:
-				return bitmapPaintDestTeal;
-			case 6:
-				return bitmapPaintDestPurple;
-			default:
-				return bitmapPaintDestBlue;
-		}
+		return switch (colorIndex) {
+			case 0 -> bitmapPaintDestBlue;
+			case 1 -> bitmapPaintDestGreen;
+			case 2 -> bitmapPaintDestOrange;
+			case 3 -> bitmapPaintDestRed;
+			case 4 -> bitmapPaintDestYellow;
+			case 5 -> bitmapPaintDestTeal;
+			case 6 -> bitmapPaintDestPurple;
+			default -> bitmapPaintDestBlue;
+		};
 	}
 
+	@NonNull
 	private Bitmap getMapMarkerBitmap(int colorIndex) {
-		switch (colorIndex) {
-			case 0:
-				return markerBitmapBlue;
-			case 1:
-				return markerBitmapGreen;
-			case 2:
-				return markerBitmapOrange;
-			case 3:
-				return markerBitmapRed;
-			case 4:
-				return markerBitmapYellow;
-			case 5:
-				return markerBitmapTeal;
-			case 6:
-				return markerBitmapPurple;
-			default:
-				return markerBitmapBlue;
-		}
+		return switch (colorIndex) {
+			case 0 -> markerBitmapBlue;
+			case 1 -> markerBitmapGreen;
+			case 2 -> markerBitmapOrange;
+			case 3 -> markerBitmapRed;
+			case 4 -> markerBitmapYellow;
+			case 5 -> markerBitmapTeal;
+			case 6 -> markerBitmapPurple;
+			default -> markerBitmapBlue;
+		};
+	}
+
+	@NonNull
+	public ShiftedBitmap getMapMarkerShiftedBitmap(int colorIndex) {
+		Bitmap bitmap = getMapMarkerBitmap(colorIndex);
+		return new ShiftedBitmap(bitmap, bitmap.getWidth() / 6f, bitmap.getHeight());
 	}
 
 	public void setRoute(TrkSegment route) {
@@ -304,7 +298,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			mapActivityInvalidated = false;
 		}
 
-		if (route != null && route.getPoints().size() > 0) {
+		if (route != null && !route.getPoints().isEmpty()) {
 			planRouteAttrs.updatePaints(app, drawSettings, tileBox);
 			if (mapRenderer != null) {
 				boolean shouldDraw = shouldDrawPoints();
@@ -396,13 +390,13 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			for (MapMarker marker : markers) {
 				if (isMarkerVisible(tileBox, marker) && !overlappedByWaypoint(marker)
 						&& !isInMotion(marker) && !isSynced(marker)) {
-					Bitmap bmp = getMapMarkerBitmap(marker.colorIndex);
-					int marginX = bmp.getWidth() / 6;
-					int marginY = bmp.getHeight();
+					ShiftedBitmap bmp = getMapMarkerShiftedBitmap(marker.colorIndex);
+					float marginX = bmp.getMarginX();
+					float marginY = bmp.getMarginY();
 					int locationX = tileBox.getPixXFromLonNoRot(marker.getLongitude());
 					int locationY = tileBox.getPixYFromLatNoRot(marker.getLatitude());
 					canvas.rotate(-tileBox.getRotate(), locationX, locationY);
-					canvas.drawBitmap(bmp, locationX - marginX, locationY - marginY, bitmapPaint);
+					canvas.drawBitmap(bmp.getBitmap(), locationX - marginX, locationY - marginY, bitmapPaint);
 					canvas.rotate(tileBox.getRotate(), locationX, locationY);
 				}
 			}
@@ -555,13 +549,13 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	private void drawMovableMarker(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox, @NonNull MapMarker movableMarker) {
 		PointF point = contextMenuLayer.getMovableCenterPoint(tileBox);
-		Bitmap bitmap = getMapMarkerBitmap(movableMarker.colorIndex);
-		int marginX = bitmap.getWidth() / 6;
-		int marginY = bitmap.getHeight();
+		ShiftedBitmap bitmap = getMapMarkerShiftedBitmap(movableMarker.colorIndex);
+		float marginX = bitmap.getMarginX();
+		float marginY = bitmap.getMarginY();
 
 		canvas.save();
 		canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-		canvas.drawBitmap(bitmap, point.x - marginX, point.y - marginY, bitmapPaint);
+		canvas.drawBitmap(bitmap.getBitmap(), point.x - marginX, point.y - marginY, bitmapPaint);
 		canvas.restore();
 	}
 

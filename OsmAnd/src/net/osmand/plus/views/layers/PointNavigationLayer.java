@@ -432,9 +432,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	@NonNull
 	private ShiftedBitmap getShiftedBitmap(@NonNull Bitmap bitmap) {
-		int marginX = bitmap.getWidth() / 6;
-		int marginY = bitmap.getHeight();
-		return new ShiftedBitmap(bitmap, marginX, marginY);
+		return new ShiftedBitmap(bitmap, bitmap.getWidth() / 6f, bitmap.getHeight());
 	}
 
 	private void drawPointImpl(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
