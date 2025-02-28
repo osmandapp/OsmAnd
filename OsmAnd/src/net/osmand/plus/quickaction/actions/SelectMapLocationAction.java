@@ -11,7 +11,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.SelectLocationController;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.views.PointImageDrawable;
 
 public abstract class SelectMapLocationAction extends QuickAction {
 
@@ -40,7 +39,7 @@ public abstract class SelectMapLocationAction extends QuickAction {
 	protected abstract void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon);
 
 	@Nullable
-	protected abstract PointImageDrawable getLocationIcon(@NonNull MapActivity mapActivity);
+	protected abstract Object getLocationIcon(@NonNull MapActivity mapActivity);
 
 	protected boolean shouldSelectLocationManually() {
 		// TODO: Implement preference-based selection logic

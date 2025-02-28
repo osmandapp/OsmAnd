@@ -12,6 +12,7 @@ import net.osmand.data.BackgroundType;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.base.containers.ShiftedBitmap;
 import net.osmand.plus.dialogs.SelectLocationController;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
@@ -43,8 +44,8 @@ public class SelectLocationLayer extends OsmandMapLayer {
 		SelectLocationController controller = SelectLocationController.getExistedInstance(app);
 
 		if (controller != null) {
-			PointImageDrawable icon = controller.getCenterPointIcon();
-			if (icon != null) {
+			Object iconObject = controller.getCenterPointIcon();
+			if (iconObject instanceof PointImageDrawable icon) {
 				float x = tileBox.getCenterPixelX();
 				float y = tileBox.getCenterPixelY();
 				BackgroundType backgroundType = icon.getBackgroundType();
@@ -53,6 +54,8 @@ public class SelectLocationLayer extends OsmandMapLayer {
 				canvas.rotate(-tileBox.getRotate(), x, y);
 				icon.drawPoint(canvas, x, y - offsetY, getTextScale(), false);
 				canvas.rotate(tileBox.getRotate(), x, y);
+			} else if (iconObject instanceof ShiftedBitmap icon) {
+				drawCenterIcon(canvas, tileBox, icon.getBitmap(), icon.getMarginX(), icon.getMarginY());
 			} else {
 				Bitmap centerIcon = settings.isNightMode() ? defaultIconNight : defaultIconDay;
 				drawCenterIcon(canvas, tileBox, centerIcon);
@@ -66,12 +69,17 @@ public class SelectLocationLayer extends OsmandMapLayer {
 	}
 
 	private void drawCenterIcon(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox, @NonNull Bitmap icon) {
-		float centerX = tileBox.getCenterPixelX() - icon.getWidth() / 2f;
-		float centerY = tileBox.getCenterPixelY() - icon.getHeight() / 2f;
+		drawCenterIcon(canvas, tileBox, icon, icon.getWidth() / 2f, icon.getHeight() / 2f);
+	}
+
+	private void drawCenterIcon(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
+	                            @NonNull Bitmap bitmap, float marginX, float marginY) {
+		float centerX = tileBox.getCenterPixelX();
+		float centerY = tileBox.getCenterPixelY();
 
 		canvas.save();
-		canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-		canvas.drawBitmap(icon, centerX, centerY, bitmapPaint);
+		canvas.rotate(-tileBox.getRotate(), centerX, centerY);
+		canvas.drawBitmap(bitmap, centerX - marginX, centerY - marginY, bitmapPaint);
 		canvas.restore();
 	}
 }

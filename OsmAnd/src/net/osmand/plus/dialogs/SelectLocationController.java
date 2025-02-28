@@ -17,7 +17,6 @@ import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.PointImageDrawable;
 
 public class SelectLocationController extends BaseDialogController implements IMapLocationListener {
 
@@ -83,7 +82,7 @@ public class SelectLocationController extends BaseDialogController implements IM
 	}
 
 	@Nullable
-	public PointImageDrawable getCenterPointIcon() {
+	public Object getCenterPointIcon() {
 		return centerIconProvider != null ? centerIconProvider.getCenterPointIcon() : null;
 	}
 
