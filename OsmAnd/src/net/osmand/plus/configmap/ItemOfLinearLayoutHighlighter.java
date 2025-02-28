@@ -1,20 +1,18 @@
 package net.osmand.plus.configmap;
 
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.view.View;
 
-import androidx.annotation.ColorInt;
 import androidx.fragment.app.Fragment;
 
 import org.threeten.bp.Duration;
 
 import java.util.Map;
 
-import de.KnollFrank.lib.settingssearch.common.Attributes;
 import de.KnollFrank.lib.settingssearch.results.PositionOfSettingProvider;
 import de.KnollFrank.lib.settingssearch.results.Setting;
 import de.KnollFrank.lib.settingssearch.results.SettingHighlighter;
+import de.KnollFrank.lib.settingssearch.results.ViewHighlighter;
 
 public class ItemOfLinearLayoutHighlighter implements SettingHighlighter {
 
@@ -44,14 +42,7 @@ public class ItemOfLinearLayoutHighlighter implements SettingHighlighter {
 		final View view = views.get(itemPosition);
 		if (view != null) {
 			view.postDelayed(
-					() -> {
-						final Drawable oldBackground = view.getBackground();
-						final @ColorInt int color = Attributes.getColorFromAttr(view.getContext(), android.R.attr.textColorPrimary);
-						view.setBackgroundColor(color & 0xffffff | 0x33000000);
-						new Handler().postDelayed(
-								() -> view.setBackgroundDrawable(oldBackground),
-								highlightDuration.toMillis());
-					},
+					() -> ViewHighlighter.highlightView(view, highlightDuration),
 					200);
 		}
 	}
