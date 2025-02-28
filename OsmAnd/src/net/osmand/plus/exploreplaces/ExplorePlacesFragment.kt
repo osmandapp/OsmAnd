@@ -135,7 +135,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		val app = requireActivity().application as OsmandApplication
 		app.locationProvider.addLocationListener(this)
 		app.locationProvider.addCompassListener(this)
-		mapActivity?.let { activity -> updateWidgetsVisibility(activity, View.VISIBLE)}
+		mapActivity?.let { activity -> updateWidgetsVisibility(activity, View.GONE)}
 	}
 
 	override fun onPause() {
@@ -143,7 +143,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		val app = requireActivity().application as OsmandApplication
 		app.locationProvider.removeLocationListener(this)
 		app.locationProvider.removeCompassListener(this)
-		mapActivity?.let { activity -> updateWidgetsVisibility(activity, View.GONE)}
+		mapActivity?.let { activity -> updateWidgetsVisibility(activity, View.VISIBLE)}
 	}
 
 	override fun updateLocation(location: Location?) {
