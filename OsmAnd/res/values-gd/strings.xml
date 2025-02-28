@@ -133,4 +133,8 @@
     <string name="shared_string_on_map">Air a\' mhapa</string>
     <string name="y_axis">Y-axis</string>
     <string name="x_axis">X-axis</string>
+    <string name="cloud_sync_progress">Co-thímich… %1$s</string>
+    <string name="shared_string_cloud">Sgòth</string>
+    <string name="new_file">Faidhle ùr</string>
+    <string name="sync_now">Co-thìmich an-dràsta</string>
 </resources>
