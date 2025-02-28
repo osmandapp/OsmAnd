@@ -371,8 +371,8 @@ public class BinaryMapDataObject {
 		for(int i = 0; i < len; i++) {
 			sum += coordinates[2 * i];
 		}
-		int average = ((int) (sum >> BinaryMapIndexReader.SHIFT_COORDINATES)/ len) 
-				<< (BinaryMapIndexReader.SHIFT_COORDINATES - LABEL_SHIFT);
+		int l = (int) ((sum >> BinaryMapIndexReader.SHIFT_COORDINATES)/ len);
+		int average = l << (BinaryMapIndexReader.SHIFT_COORDINATES - LABEL_SHIFT);
 		int label31X = (average + this.labelX) << LABEL_SHIFT;
 		return label31X;
 	}
@@ -384,8 +384,8 @@ public class BinaryMapDataObject {
 		for(int i = 0; i < len; i++) {
 			sum += coordinates[2 * i + 1];
 		}
-		int average = ((int) (sum >> BinaryMapIndexReader.SHIFT_COORDINATES)/ len) 
-				<< (BinaryMapIndexReader.SHIFT_COORDINATES - LABEL_SHIFT);
+		int l = (int) ((sum >> BinaryMapIndexReader.SHIFT_COORDINATES)/ len);
+		int average = l << (BinaryMapIndexReader.SHIFT_COORDINATES - LABEL_SHIFT);
 		int label31Y = (average + this.labelY) << LABEL_SHIFT;
 		return label31Y;
 	}
