@@ -101,4 +101,17 @@
     <string name="routing_attr_hazmat_category_usa_9_name">Measgaichte</string>
     <string name="dangerous_goods">Bathar cunnartach</string>
     <string name="shared_string_deleting">Dubhadh às</string>
+    <string name="shared_string_wrist">Caol-dùirn</string>
+    <string name="shared_string_finger">Corrag</string>
+    <string name="shared_string_chest">Broilleach</string>
+    <string name="shared_string_hand">Làmh</string>
+    <string name="shared_string_foot">Cas</string>
+    <string name="nav_profile_confirm_delete">Dubh às \"%1$s\"?</string>
+    <string name="external_device_connected">Co-cheangailte</string>
+    <string name="external_device_menu_forget">Dìochuimhnich</string>
+    <string name="external_device_characteristic_speed">Luaths</string>
+    <string name="external_device_characteristic_distance">Astar</string>
+    <string name="external_device_characteristic_total_distance">Astar iomlan</string>
+    <string name="external_device_characteristic_battery_level">Bataraidh</string>
+    <string name="external_device_characteristic_heart_rate">Reat cridhe</string>
 </resources>
