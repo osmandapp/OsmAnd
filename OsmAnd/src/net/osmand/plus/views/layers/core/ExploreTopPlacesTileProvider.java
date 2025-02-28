@@ -13,6 +13,7 @@ import android.graphics.RectF;
 import androidx.annotation.NonNull;
 
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapTiledCollectionProvider;
 import net.osmand.core.jni.PointI;
@@ -22,36 +23,32 @@ import net.osmand.core.jni.SingleSkImage;
 import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.TextRasterizer;
 import net.osmand.core.jni.TileId;
+import net.osmand.core.jni.Utilities;
 import net.osmand.core.jni.ZoomLevel;
+import net.osmand.core.jni.interface_MapTiledCollectionPoint;
 import net.osmand.core.jni.interface_MapTiledCollectionProvider;
 import net.osmand.data.ExploreTopPlacePoint;
-import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.exploreplaces.ExplorePlacesProvider;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.util.MapUtils;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class ExploreTopPlacesTileProvider extends interface_MapTiledCollectionProvider {
 
-	private static final Log log = LogFactory.getLog(ExploreTopPlacesTileProvider.class);
-	private final QListPointI points31 = new QListPointI();
-	private final List<MapLayerData> mapLayerDataList = new ArrayList<>();
-	private Bitmap cachedSmallBitmap;
-	private final OsmandApplication app;
-	private final float density;
-	private final PointI offset;
+	private final Context ctx;
+	private final ExplorePlacesProvider explorePlacesProvider;
 	private MapTiledCollectionProvider providerInstance;
-	private int baseOrder;
-	private long selectedObjectId;
+
+	private static final int TILE_LOADING_TIMEOUT = 2000;
+	private static final int SLEEP_INTERVAL = 100;
 
 	private static final int SMALL_ICON_BORDER_DP = 1;
 	private static final int BIG_ICON_BORDER_DP = 2;
@@ -59,30 +56,49 @@ public class ExploreTopPlacesTileProvider extends interface_MapTiledCollectionPr
 	private static final int BIG_ICON_SIZE_DP = 40;
 	private static final int POINT_OUTER_COLOR = 0xffffffff;
 
+	private final int baseOrder;
+	private final int tilePointsLimit;
+	private Bitmap cachedSmallBitmap;
+	private final PointI pinIconOffset;
 	private static Bitmap circleBitmap;
 
-	private static Bitmap getCircle(@NonNull Context ctx) {
-		if (circleBitmap == null) {
-			circleBitmap = RenderingIcons.getBitmapFromVectorDrawable(ctx, R.drawable.bg_point_circle);
+	private class TopPlaceCollectionPoint extends interface_MapTiledCollectionPoint {
+
+        private final PointI point31;
+
+		public TopPlaceCollectionPoint(@NonNull ExploreTopPlacePoint point) {
+            int x = MapUtils.get31TileNumberX(point.getLongitude());
+			int y = MapUtils.get31TileNumberY(point.getLatitude());
+			this.point31 = new PointI(x, y);
 		}
-		return circleBitmap;
+
+		@Override
+		public PointI getPoint31() {
+			return point31;
+		}
+
+		@Override
+		public SingleSkImage getImageBitmap(boolean isFullSize) {
+			Bitmap bitmap;
+			if (cachedSmallBitmap == null) {
+				cachedSmallBitmap = createSmallPointBitmap(ctx);
+			}
+			bitmap = cachedSmallBitmap;
+			return NativeUtilities.createSkImageFromBitmap(bitmap);
+		}
+
+		@Override
+		public String getCaption() {
+			return "";
+		}
 	}
 
-	private static Paint createBitmapPaint() {
-		Paint bitmapPaint = new Paint();
-		bitmapPaint.setAntiAlias(true);
-		bitmapPaint.setDither(true);
-		bitmapPaint.setFilterBitmap(true);
-		return bitmapPaint;
-	}
-
-
-	public ExploreTopPlacesTileProvider(@NonNull OsmandApplication context, int baseOrder, float density, long selectedObjectId) {
-		this.app = context;
+	public ExploreTopPlacesTileProvider(@NonNull Context ctx, int baseOrder, int tilePointsLimit) {
+		this.ctx = ctx;
 		this.baseOrder = baseOrder;
-		this.density = density;
-		this.offset = new PointI(0, 0);
-		this.selectedObjectId = selectedObjectId;
+		this.tilePointsLimit = tilePointsLimit;
+		this.pinIconOffset = new PointI(0, 0);
+		this.explorePlacesProvider = ((OsmandApplication) ctx.getApplicationContext()).getExplorePlacesProvider();
 	}
 
 	public void initProvider(@NonNull MapRendererView mapRenderer) {
@@ -106,7 +122,7 @@ public class ExploreTopPlacesTileProvider extends interface_MapTiledCollectionPr
 
 	@Override
 	public QListPointI getPoints31() {
-		return points31;
+		return new QListPointI();
 	}
 
 	@Override
@@ -126,7 +142,7 @@ public class ExploreTopPlacesTileProvider extends interface_MapTiledCollectionPr
 
 	@Override
 	public double getCaptionTopSpace() {
-		return -4.0 * density;
+		return 0.0;
 	}
 
 	@Override
@@ -139,33 +155,64 @@ public class ExploreTopPlacesTileProvider extends interface_MapTiledCollectionPr
 		return 1.0d;
 	}
 
+	private static Bitmap getCircle(@NonNull Context ctx) {
+		if (circleBitmap == null) {
+			circleBitmap = RenderingIcons.getBitmapFromVectorDrawable(ctx, R.drawable.bg_point_circle);
+		}
+		return circleBitmap;
+	}
+
+	private static Paint createBitmapPaint() {
+		Paint bitmapPaint = new Paint();
+		bitmapPaint.setAntiAlias(true);
+		bitmapPaint.setDither(true);
+		bitmapPaint.setFilterBitmap(true);
+		return bitmapPaint;
+	}
+
 	@Override
 	public SingleSkImage getImageBitmap(int index, boolean isFullSize) {
-		ExploreTopPlacesTileProvider.MapLayerData data = index < mapLayerDataList.size() ? mapLayerDataList.get(index) : null;
-		if (data == null) {
-			return SwigUtilities.nullSkImage();
-		}
-		Bitmap bitmap;
-		if ((isFullSize || data.nearbyPlace.getId() == selectedObjectId) && data.nearbyPlace.getImageBitmap() != null) {
-			bitmap = createBigBitmap(app, data.nearbyPlace.getImageBitmap(), data.nearbyPlace.getId() == selectedObjectId);
-		} else {
-			if (cachedSmallBitmap == null) {
-				cachedSmallBitmap = createSmallPointBitmap(app);
-			}
-			bitmap = cachedSmallBitmap;
-		}
-		return NativeUtilities.createSkImageFromBitmap(bitmap);
+		return SwigUtilities.nullSkImage();
 	}
 
 	@Override
 	public String getCaption(int index) {
-		MapLayerData data = index < mapLayerDataList.size() ? mapLayerDataList.get(index) : null;
-		return data != null ? PointDescription.getSimpleName(data.nearbyPlace, app) : "";
+		return "";
 	}
 
 	@Override
 	public QListMapTiledCollectionPoint getTilePoints(TileId tileId, ZoomLevel zoom) {
-		return new QListMapTiledCollectionPoint();
+		if (OsmandMapLayer.isMapRendererLost(ctx)) {
+			return new QListMapTiledCollectionPoint();
+		}
+
+		AreaI tileBBox31 = Utilities.tileBoundingBox31(tileId, zoom);
+		double l = MapUtils.get31LongitudeX(tileBBox31.getTopLeft().getX());
+		double t = MapUtils.get31LatitudeY(tileBBox31.getTopLeft().getY());
+		double r = MapUtils.get31LongitudeX(tileBBox31.getBottomRight().getX());
+		double b = MapUtils.get31LatitudeY(tileBBox31.getBottomRight().getY());
+
+		QuadRect tileRect = new QuadRect(l, t, r, b);
+		List<ExploreTopPlacePoint> places = explorePlacesProvider.getDataCollection(tileRect, tilePointsLimit);
+		int i = 0;
+		while (explorePlacesProvider.isLoadingRect(tileRect) && i++ * SLEEP_INTERVAL < TILE_LOADING_TIMEOUT) {
+			try {
+				Thread.sleep(SLEEP_INTERVAL);
+			} catch (InterruptedException ignore) {
+			}
+		}
+		places = explorePlacesProvider.getDataCollection(tileRect, tilePointsLimit);
+		if (places.isEmpty() || OsmandMapLayer.isMapRendererLost(ctx)) {
+			return new QListMapTiledCollectionPoint();
+		}
+
+		QListMapTiledCollectionPoint res = new QListMapTiledCollectionPoint();
+		for (ExploreTopPlacePoint place : places) {
+            TopPlaceCollectionPoint point = new TopPlaceCollectionPoint(place);
+            res.add(point.instantiateProxy(true));
+            point.swigReleaseOwnership();
+		}
+		return res;
 	}
 
 	@Override
@@ -180,7 +227,7 @@ public class ExploreTopPlacesTileProvider extends interface_MapTiledCollectionPr
 
 	@Override
 	public boolean supportsNaturalObtainDataAsync() {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -195,25 +242,7 @@ public class ExploreTopPlacesTileProvider extends interface_MapTiledCollectionPr
 
 	@Override
 	public PointI getPinIconOffset() {
-		return offset;
-	}
-
-	public void addToData(@NonNull ExploreTopPlacePoint nearbyPlacePoint) throws IllegalStateException {
-		if (providerInstance != null) {
-			throw new IllegalStateException("Provider already instantiated. Data cannot be modified at this stage.");
-		}
-		int x31 = MapUtils.get31TileNumberX(nearbyPlacePoint.getLongitude());
-		int y31 = MapUtils.get31TileNumberY(nearbyPlacePoint.getLatitude());
-		points31.add(new PointI(x31, y31));
-		mapLayerDataList.add(new MapLayerData(nearbyPlacePoint));
-	}
-
-	private static class MapLayerData {
-		ExploreTopPlacePoint nearbyPlace;
-
-		MapLayerData(@NonNull ExploreTopPlacePoint nearbyPlace) {
-			this.nearbyPlace = nearbyPlace;
-		}
+		return pinIconOffset;
 	}
 
 	public static Bitmap createSmallPointBitmap(@NonNull Context ctx) {
@@ -243,7 +272,7 @@ public class ExploreTopPlacesTileProvider extends interface_MapTiledCollectionPr
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		int borderWidth = AndroidUtils.dpToPxAuto(app, BIG_ICON_BORDER_DP);
 		Bitmap circle = getCircle(app);
-		int bigIconSize = AndroidUtils.dpToPxAuto(app, BIG_ICON_SIZE_DP);
+		int bigIconSize = getBigIconSize(app);
 		Bitmap bitmapResult = Bitmap.createBitmap(bigIconSize, bigIconSize, Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmapResult);
 		Paint bitmapPaint = createBitmapPaint();
@@ -266,5 +295,7 @@ public class ExploreTopPlacesTileProvider extends interface_MapTiledCollectionPr
 		return bitmapResult;
 	}
 
-
+	public static int getBigIconSize(@NonNull OsmandApplication app) {
+		return AndroidUtils.dpToPxAuto(app, BIG_ICON_SIZE_DP);
+	}
 }
