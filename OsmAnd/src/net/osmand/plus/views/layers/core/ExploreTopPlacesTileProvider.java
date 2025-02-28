@@ -62,25 +62,26 @@ public class ExploreTopPlacesTileProvider extends interface_MapTiledCollectionPr
 	private static Bitmap smallCircleBitmap;
 	private static Bitmap bigCircleBitmap;
 
-	private static Bitmap getCircleBitmap(@NonNull Context ctx, int iconSizeDp, int drawableResId) {
+	private static Bitmap getCircleBitmap(@NonNull Context ctx, int iconSizeDp){
 		int iconSizePx = AndroidUtils.dpToPxAuto(ctx, iconSizeDp);
-		Bitmap tmpBmp = RenderingIcons.getBitmapFromVectorDrawable(ctx, drawableResId);
-		Bitmap scaledBitmap = Bitmap.createScaledBitmap(tmpBmp, iconSizePx, iconSizePx, true);
-		Canvas canvas = new Canvas(scaledBitmap);
+		Bitmap tmpBmp = RenderingIcons.getBitmapFromVectorDrawable(ctx, R.drawable.bg_point_circle);
+		Bitmap result = Bitmap.createBitmap(iconSizePx, iconSizePx, Bitmap.Config.ARGB_8888);
+		tmpBmp = Bitmap.createScaledBitmap(tmpBmp, iconSizePx, iconSizePx, true);
+		Canvas canvas = new Canvas(result);
 		canvas.drawBitmap(tmpBmp, 0, 0, new Paint());
-		return scaledBitmap;
+		return result;
 	}
 
 	private static Bitmap getBigCircle(@NonNull Context ctx) {
 		if (bigCircleBitmap == null) {
-			bigCircleBitmap = getCircleBitmap(ctx, BIG_ICON_SIZE_DP, R.drawable.bg_point_circle);
+			bigCircleBitmap = getCircleBitmap(ctx, BIG_ICON_SIZE_DP);
 		}
 		return bigCircleBitmap;
 	}
 
 	private static Bitmap getSmallCircle(@NonNull Context ctx) {
 		if (smallCircleBitmap == null) {
-			smallCircleBitmap = getCircleBitmap(ctx, SMALL_ICON_SIZE_DP, R.drawable.bg_point_circle);
+			smallCircleBitmap = getCircleBitmap(ctx, SMALL_ICON_SIZE_DP);
 		}
 		return smallCircleBitmap;
 	}
