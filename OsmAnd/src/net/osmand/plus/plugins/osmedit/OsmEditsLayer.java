@@ -13,6 +13,7 @@ import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.os.AsyncTask;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -193,21 +194,28 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 
 	private void drawPoint(@NonNull Canvas canvas, @NonNull OsmPoint osmPoint, float x, float y) {
 		float textScale = getTextScale();
-		PointImageDrawable pointImageDrawable = createDrawableForOsmPoint(osmPoint);
+		PointImageDrawable pointImageDrawable = createOsmPointIcon(osmPoint);
 		int offsetY = pointImageDrawable.getBackgroundType().getOffsetY(ctx, textScale);
 		pointImageDrawable.drawPoint(canvas, x, y - offsetY, textScale, false);
 	}
 
 	@NonNull
-	public PointImageDrawable createDrawableForOsmPoint(@NonNull OsmPoint osmPoint) {
+	public PointImageDrawable createOsmNoteIcon() {
+		return createOsmPointIcon(getBugIconId(), true);
+	}
+
+	@NonNull
+	public PointImageDrawable createOsmPointIcon(@NonNull OsmPoint osmPoint) {
 		int iconId = getIconId(osmPoint);
-		BackgroundType backgroundType = DEFAULT_BACKGROUND_TYPE;
-		if (osmPoint.getGroup() == BUG) {
-			backgroundType = BackgroundType.COMMENT;
-		}
-		int color = ColorUtilities.getColor(ctx, R.color.created_poi_icon_color);
-		PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx, color,
-				true, false, iconId, backgroundType);
+		return createOsmPointIcon(iconId, osmPoint.getGroup() == BUG);
+	}
+
+	@NonNull
+	public PointImageDrawable createOsmPointIcon(@DrawableRes int iconId, boolean isBug) {
+		BackgroundType backgroundType = isBug ? BackgroundType.COMMENT : DEFAULT_BACKGROUND_TYPE;
+		int pointColor = ColorUtilities.getColor(ctx, R.color.created_poi_icon_color);
+		PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(
+				ctx, pointColor, true, false, iconId, backgroundType);
 		pointImageDrawable.setAlpha(0.8f);
 		return pointImageDrawable;
 	}
@@ -237,10 +245,14 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 			}
 			return iconResId;
 		} else if (osmPoint.getGroup() == BUG) {
-			return R.drawable.mm_special_symbol_plus;
+			return getBugIconId();
 		} else {
 			return 0;
 		}
+	}
+
+	public int getBugIconId() {
+		return R.drawable.mm_special_symbol_plus;
 	}
 
 	@Override
@@ -414,7 +426,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 		int y = MapUtils.get31TileNumberY(osmPoint.getLatitude());
 		PointI position = new PointI(x, y);
 
-		PointImageDrawable pointImageDrawable = createDrawableForOsmPoint(osmPoint); //TODO bug with detect icon in getIcon()
+		PointImageDrawable pointImageDrawable = createOsmPointIcon(osmPoint); //TODO bug with detect icon in getIcon()
 		Bitmap bitmap = pointImageDrawable.getBigMergedBitmap(textScale, false);
 		if (bitmap == null) {
 			return;

@@ -66,7 +66,7 @@ public class AddOSMBugAction extends SelectMapLocationAction {
 	protected Object getLocationIcon(@NonNull MapActivity mapActivity) {
 		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		OsmEditsLayer layer = plugin != null ? plugin.getOsmEditsLayer() : null;
-		return layer != null ? layer.createDrawableForOsmPoint(new OsmNotesPoint()) : null;
+		return layer != null ? layer.createOsmNoteIcon() : null;
 	}
 
 	@NonNull
