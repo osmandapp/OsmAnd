@@ -2573,7 +2573,7 @@
 \n
 \nSelle vaate saad tagasi lülitada, aktiveerides selle siin uuesti või muutes vastavalt vajadusele jaotises „Kaardi seadistamine“ „Kaardistiil“.</string>
     <string name="plugin_nautical_descr">See lisamoodul rikastab OsmAndi kaardirakendust meresõiduks vajaliku teabega, nagu laevateed, meremärgid, ohutsoonid, sildumisjuhendid ja muu oluline. Kasutamiseks lülita alajaotuses „Seadista kaarti“ sisse valik „Merekaardid“ ning laadi alla soovitud piirkonna kaart. \n \nLisateave: %1$s.</string>
-    <string name="plugin_ski_descr">See OsmAnd laiendus toob sõrmeulatusse üksikasjad globaalsete mäesuusatamise nõlvade, murdmaasuusaradade, mäesuusaradade, köisraudteede ja suusaliftide kohta. Teekonnad ja suusaradade raskusastmed on tähistatud värvikoodidega ning kujutatud spetsiaalses talvises kaardistiilis, mis sulab ühte lumivalge talvemaastikuga. \n \nSelle vaate aktiveerimine muudab kaardi stiili väärtuseks \'Talv ja suusk\', mis näitab kõiki maastikuomadusi talvetingimustes. Selle vaate saab tagasi lülitada, aktiveerides selle siin uuesti või muutes vastavalt vajadusele jaotises \'Kaardi seadistamine\' \'Kaardistiil\'.</string>
+    <string name="plugin_ski_descr">Mõeldud liikumiseks talipordipiirkonnas: vaata mäesuusatamise nõlvade, murdmaasuusaradade, mäesuusaradade ja suusaliftide teavet, sealhulgas värviliste joontega märgitud radade raskusastmeid. Kasutamiseks lülita lisamoodul sisse, ava „Kaardi seadistamine“ ja vali kaardi stiiliks „Talv ja suusk“.</string>
     <string name="audionotes_plugin_description">Tee reisi ajal heli-, pildi- või videomärkmeid, kasutades kas nuppu kaardil või asukoha kontekstimenüüd.</string>
     <string name="osmand_parking_plugin_description">Jäta meelde oma auto parkimiskoht ja teavita oma kalendrirakendust, kui parkimise aeg hakkab lõppema. Parkimismarkeri lisamiseks vali vajalik koht kaardil, ava „Tegevused“ ja klõpsi „Lisa parkimine“.</string>
     <string name="unit_of_length_descr">Muuda vahemaa mõõtmiseks kasutatud ühikut.</string>
@@ -3924,7 +3924,7 @@
     <string name="contact_support">Võta ühendust tugiteenusega</string>
     <string name="troubleshooting">Veaotsing</string>
     <string name="troubleshooting_description">Ostudega seotud probleemide korral palun järgi seda linki.</string>
-    <string name="osmand_live">OsmAnd Live</string>
+    <string name="osmand_live">OsmAnd Reaalajas</string>
     <string name="annual_subscription">Aastatellimus</string>
     <string name="monthly_subscription">Igakuine tellimus</string>
     <string name="three_months_subscription">Kolme kuu tellimus</string>
@@ -4951,13 +4951,13 @@
     <string name="obd_fuel_type_hybrid_gasoline">Bensiinimootoriga hübriid</string>
     <string name="shared_string_no_internet_connection">Internetiühendus puudub</string>
     <string name="key_event_action_continuous_zoom_in">Järjepidev sissesuumimine</string>
-    <string name="new_trip_segment">Teekonna uus lõik</string>
+    <string name="new_trip_segment">Reisi uus lõik</string>
     <string name="obd_fuel_type_hybrid_diesel">Diiselmootoriga hübriid</string>
     <string name="sort_size_ascending">Esmalt väiksem suurus</string>
     <string name="map_is_up_to_date">Kaart on uuendatud: %1$s.</string>
     <string name="sensor_temperature_desc">Näitab temperatuuri sensori aluselt</string>
     <string name="quick_action_new_trip_segment">Nupp GPX-raja salvestamisel uue lõigu alguse märkimiseks.</string>
-    <string name="quick_action_verb_start_pause">Käivita / Peata</string>
+    <string name="quick_action_verb_start_pause">Alusta / peata</string>
     <string name="wikimedia">Vikimeedia</string>
     <string name="sort_country_name_descending">Riigi nimi: Z – A</string>
     <string name="shared_string_default_view">Vaikimisi vaade</string>
@@ -5048,4 +5048,7 @@
     <string name="pressure_layer">Õhurõhu andmekiht</string>
     <string name="temperature_layer">Temperatuuri andmekiht</string>
     <string name="precipitation_layer">Sademete andmekiht</string>
+    <string name="depth_contours">Sügavuste samakõrgusjooned</string>
+    <string name="map_3d_mode_description">Kahe sõrme vajutusega kaardil saad teda kaardi kalde muutmiseks nihutada üles-alla.</string>
+    <string name="map_3d_mode_hint">Pika vajutusega nupul saad tema asukohta muuta.</string>
 </resources>
