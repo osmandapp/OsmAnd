@@ -21,7 +21,6 @@ import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.actions.SelectMapLocationAction;
-import net.osmand.plus.views.PointImageDrawable;
 
 import java.util.Objects;
 
@@ -62,9 +61,9 @@ public class AddOSMBugAction extends SelectMapLocationAction {
 		}
 	}
 
-	@Nullable
 	@Override
-	protected PointImageDrawable getLocationIcon(@NonNull MapActivity mapActivity) {
+	@Nullable
+	protected Object getLocationIcon(@NonNull MapActivity mapActivity) {
 		OsmEditingPlugin plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 		OsmEditsLayer layer = plugin != null ? plugin.getOsmEditsLayer() : null;
 		return layer != null ? layer.createDrawableForOsmPoint(new OsmNotesPoint()) : null;
