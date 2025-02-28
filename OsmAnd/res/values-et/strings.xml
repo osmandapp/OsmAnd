@@ -5042,4 +5042,10 @@
     <string name="avg_sensor_heartrate">Südame keskmine löögisagedus</string>
     <string name="max_sensor_bycicle_power">Jalgratta maksimaalne võimsus</string>
     <string name="avg_sensor_cadence">Jalgratta keskmine väntamissagedus</string>
+    <string name="wind_layer">Tuule andmekiht</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Salvesta lõik ja jätka</string>
+    <string name="cloud_layer">Pilvede andmekiht</string>
+    <string name="pressure_layer">Õhurõhu andmekiht</string>
+    <string name="temperature_layer">Temperatuuri andmekiht</string>
+    <string name="precipitation_layer">Sademete andmekiht</string>
 </resources>
