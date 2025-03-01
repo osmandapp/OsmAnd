@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.backend.preferences;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class BooleanStringPreference extends BooleanPreference {
@@ -9,7 +11,7 @@ public class BooleanStringPreference extends BooleanPreference {
 	}
 
 	@Override
-	public Boolean getValue(Object prefs, Boolean defaultValue) {
+	public Boolean getValue(@NonNull Object prefs, Boolean defaultValue) {
 		Boolean value;
 		try {
 			value = parseString(getSettingsAPI().getString(prefs, getId(), defaultValue.toString()));

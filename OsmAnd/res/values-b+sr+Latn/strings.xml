@@ -2619,7 +2619,7 @@
     <string name="shared_string_recorded">Snimljeno</string>
     <string name="shared_string_trip">#Putovanje</string>
     <string name="shared_string_paused">Pauzirano</string>
-    <string name="shared_string_pause">&amp;Pauziraj</string>
+    <string name="shared_string_pause">Pauza</string>
     <string name="shared_string_continue">Nastavi</string>
     <string name="shared_string_resume">Nastavi</string>
     <string name="shared_string_notifications">Obaveštenja</string>
@@ -5515,7 +5515,7 @@
     <string name="track_does_not_contain_data_to_save">Putanja ne sadrži podatke za čuvanje.</string>
     <string name="quick_action_finish_trip_recording_summary">Dugme za čuvanje GPX staze i završetak snimanja putovanja.</string>
     <string name="start_trip_recording_first_m">Prvo započni snimanje putovanja.</string>
-    <string name="quick_action_save_recorded_trip_and_continue">Snimljeno putovanje i nastavi</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Snimi putovanje i nastavi</string>
     <string name="help_article_personal_color_palette_schemes_name">Šeme boja</string>
     <string name="quick_action_new_trip_segment">Dugme za pokretanje novog segmenta u tekućem GPX snimanju staze.</string>
     <string name="new_segment_started_m">Počelo je snimanje novog segmenta putanje.</string>

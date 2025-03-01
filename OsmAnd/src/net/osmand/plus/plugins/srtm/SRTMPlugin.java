@@ -54,6 +54,7 @@ import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
+import net.osmand.shared.settings.enums.MetricsConstants;
 import net.osmand.util.Algorithms;
 
 import org.jetbrains.annotations.NotNull;
@@ -94,6 +95,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	private final StateChangedListener<Boolean> terrainListener;
 	private final StateChangedListener<String> terrainModeListener;
 	private final StateChangedListener<Float> verticalExaggerationListener;
+	private final StateChangedListener<MetricsConstants> metricSystemListener;
 
 	private TerrainLayer terrainLayer;
 
@@ -104,7 +106,6 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	public SRTMPlugin(OsmandApplication app) {
 		super(app);
-
 
 		TERRAIN = registerBooleanPreference("terrain_layer", true).makeProfile();
 		TerrainMode[] tms = TerrainMode.values(app);
@@ -142,6 +143,9 @@ public class SRTMPlugin extends OsmandPlugin {
 			}
 		};
 		app.getSettings().VERTICAL_EXAGGERATION_SCALE.addListener(verticalExaggerationListener);
+
+		metricSystemListener = constants -> app.getOsmandMap().getMapView().refreshMapComplete();
+		app.getSettings().METRIC_SYSTEM.addListener(metricSystemListener);
 	}
 
 	@Override

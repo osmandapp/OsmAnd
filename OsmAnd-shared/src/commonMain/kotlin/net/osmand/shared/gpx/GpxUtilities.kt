@@ -645,6 +645,9 @@ object GpxUtilities {
 			if (i > 0) {
 				newPath = newPath.substring(0, i)
 			}
+			if (path.contains(XML_COLON)) {
+				newPath = newPath.replace(XML_COLON, ":");
+			}
 		}
 		return newPath
 	}

@@ -191,8 +191,7 @@ public class QuickSearchListItem {
 				return "";
 			case POI_TYPE:
 				String res = "";
-				if (searchResult.object instanceof AbstractPoiType) {
-					AbstractPoiType abstractPoiType = (AbstractPoiType) searchResult.object;
+				if (searchResult.object instanceof AbstractPoiType abstractPoiType) {
 					if (abstractPoiType instanceof PoiCategory) {
 						res = "";
 					} else if (abstractPoiType instanceof PoiFilter) {
@@ -211,11 +210,13 @@ public class QuickSearchListItem {
 					} else {
 						res = "";
 					}
-				} else if (searchResult.object instanceof CustomSearchPoiFilter) {
-					res = ((CustomSearchPoiFilter) searchResult.object).getName();
-				} else if (searchResult.object instanceof SearchPoiAdditionalFilter) {
-					String name = ((SearchPoiAdditionalFilter) searchResult.object).getName();
-					res = name;
+				} else if (searchResult.object instanceof CustomSearchPoiFilter customSearchPoiFilter) {
+					res = customSearchPoiFilter.getName();
+				} else if (searchResult.object instanceof SearchPoiAdditionalFilter searchPoiAdditionalFilter) {
+					res = searchPoiAdditionalFilter.getName();
+				}
+				if (Algorithms.isEmpty(res) && searchResult.object instanceof PoiUIFilter poiUIFilter) {
+					res = poiUIFilter.getTypesName();
 				}
 				return res;
 			case POI:

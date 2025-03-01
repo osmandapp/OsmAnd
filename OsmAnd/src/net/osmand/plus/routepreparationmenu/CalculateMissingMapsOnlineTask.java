@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -59,16 +60,16 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 		List<LatLon> routePoints = previousResult.getMissingMapsPoints();
 
 		TargetPointsHelper pointsHelper = app.getTargetPointsHelper();
-		TargetPointsHelper.TargetPoint start = pointsHelper.getPointToStart();
-		TargetPointsHelper.TargetPoint end = pointsHelper.getPointToNavigate();
+		TargetPoint start = pointsHelper.getPointToStart();
+		TargetPoint end = pointsHelper.getPointToNavigate();
 		Location lastKnownLocation = app.getLocationProvider().getLastStaleKnownLocation();
 		if ((start != null || lastKnownLocation != null) && end != null) {
-			LatLon startPoint = start != null ? start.point
+			LatLon startPoint = start != null ? start.getLatLon()
 					: new LatLon(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
 			routePoints = CollectionUtils.asOneList(
 					Collections.singletonList(startPoint),
 					pointsHelper.getIntermediatePointsLatLon(),
-					Collections.singletonList(end.point)
+					Collections.singletonList(end.getLatLon())
 			);
 		}
 

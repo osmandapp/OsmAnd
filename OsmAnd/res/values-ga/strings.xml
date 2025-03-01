@@ -5499,7 +5499,7 @@
     <string name="ais_cpa_warning_time">Am rabhaidh chun an Pointe Cur Chuige Is gaire (CPA) a bhaint amach</string>
     <string name="ais_cpa_warning_time_description">Má tá an TCPA (am chun an CPA a bhaint amach le soitheach eile) níos lú ná an luach seo, tá an soitheach marcáilte le dath dearg.</string>
     <string name="show_grids">Taispeáin greille léarscáil</string>
-    <string name="show_utm_grids_description">Taispeáin an eangach i méadair UTM in ionad céimeanna WGS84</string>
+    <string name="show_utm_grids_description">Taispeáin an eangach i méadair UTM in ionad WGS84</string>
     <string name="map_grid">Greillí léarscáileanna</string>
     <string name="show_grids_description">Ceadaigh greille a thaispeáint ar an léarscáil</string>
     <string name="show_utm_grids">Úsáid UTM in ionad WGS84</string>
@@ -5508,4 +5508,15 @@
     <string name="hmd_promo">Promo HMD ar feadh %1$s mí</string>
     <string name="hmd_promo_description">Rochtain saor in aisce ar ghnéithe lena n-áirítear íoslódálacha neamhtheoranta léarscáileanna, faoiseamh 3D srl. ar feadh %1$s mí</string>
     <string name="shared_string_road_exit">Scoir</string>
+    <string name="show_mercator_grids">Bain úsáid as Mercator in ionad WGS84 nó UTM</string>
+    <string name="show_mercator_grids_description">Taispeáin an eangach i Mercator km in ionad WGS84 nó UTM</string>
+    <string name="show_dms_grids">Úsáid DMS in ionad céimeanna</string>
+    <string name="show_dms_grids_description">Taispeáin an eangach i gcéimeanna, nóiméid, soicindí in ionad céimeanna</string>
+    <string name="show_dm_grids">Úsáid DM in ionad céimeanna nó DMS</string>
+    <string name="show_dm_grids_description">Taispeáin an eangach i gcéimeanna agus i nóiméid in ionad céimeanna nó DMS</string>
+    <string name="apply_to_all_points">Cuir i bhfeidhm ar gach pointe</string>
+    <string name="original_color_description">Choimeádfadh gach pointe a dhath féin.</string>
+    <string name="original_icon_description">Choimeádfadh gach pointe a dheilbhín féin.</string>
+    <string name="original_shape_description">Choimeádfadh gach pointe a chruth féin.</string>
+    <string name="save_favorite_default_appearance">An bhfuil fonn ort athruithe a chur i bhfeidhm ar na pointí reatha san fhillteán nó ar na pointí nua amháin?</string>
 </resources>

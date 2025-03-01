@@ -226,8 +226,9 @@ public class SideWidgetsPanel extends FrameLayout implements WidgetsContainer, V
 			List<View> views = visiblePages.getWidgetsViews(viewPager.getCurrentItem());
 			if (!Algorithms.isEmpty(views)) {
 				for (View view : views) {
+					View emptyBanner = view.findViewById(R.id.empty_banner);
 					if (view.findViewById(R.id.container).getVisibility() == VISIBLE
-							|| view.findViewById(R.id.empty_banner).getVisibility() == VISIBLE) {
+							|| (emptyBanner != null &&  emptyBanner.getVisibility() == VISIBLE)) {
 						return true;
 					}
 				}

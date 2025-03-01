@@ -41,7 +41,7 @@ import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.CurrentPositionHelper;
 import net.osmand.plus.helpers.LocationCallback;
 import net.osmand.plus.helpers.LocationServiceHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.NavigationInfo;
 import net.osmand.plus.routing.RoutingHelper;
@@ -732,7 +732,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public String getNavigationHint(TargetPoint point) {
-		String hint = navigationInfo.getDirectionString(point == null ? null : point.point, getHeading());
+		String hint = navigationInfo.getDirectionString(point == null ? null : point.getLatLon(), getHeading());
 		if (hint == null)
 			hint = app.getString(R.string.no_info);
 		return hint;

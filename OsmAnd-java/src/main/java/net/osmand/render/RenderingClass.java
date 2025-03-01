@@ -1,5 +1,7 @@
 package net.osmand.render;
 
+import net.osmand.util.Algorithms;
+
 public class RenderingClass {
 
 	private final String title;
@@ -72,6 +74,10 @@ public class RenderingClass {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getParentName() {
+		return Algorithms.getFileNameWithoutExtension(name);
 	}
 
 	@Override

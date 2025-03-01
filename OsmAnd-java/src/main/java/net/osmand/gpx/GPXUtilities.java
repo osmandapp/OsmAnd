@@ -1202,6 +1202,9 @@ public class GPXUtilities {
 			if (i > 0) {
 				path = path.substring(0, i);
 			}
+			if (path.contains(XML_COLON)) {
+				path = path.replaceAll(XML_COLON, ":");
+			}
 		}
 		return path;
 	}

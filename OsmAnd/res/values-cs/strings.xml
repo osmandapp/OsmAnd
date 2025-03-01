@@ -5473,7 +5473,7 @@
     <string name="no_photos_available_descr">K této lokalitě zatím nebyly přidány žádné uživatelské fotografie</string>
     <string name="no_photos_available">Nejsou dostupné žádné fotografie</string>
     <string name="quick_action_finish_trip_recording_summary">Tlačítko pro uložení GPX stopy a ukončení záznamu cesty.</string>
-    <string name="quick_action_save_recorded_trip_and_continue">Zaznamenaná cesta a pokračování</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Zaznamenaný výlet a pokračovat</string>
     <string name="track_does_not_contain_data_to_save">Stopa neobsahuje data, která by bylo možné uložit.</string>
     <string name="start_trip_recording_first_m">Nejprve spusťte záznam cesty.</string>
     <string name="new_segment_started_m">Zahájení nahrávání nového segmentu stopy.</string>
@@ -5495,7 +5495,7 @@
     <string name="obd_support">Podpora OBD</string>
     <string name="obd_ambient_air_temp">Teplota okolí</string>
     <string name="obd_battery_voltage">Napětí baterie</string>
-    <string name="new_trip_segment">Nový úsek cesty</string>
+    <string name="new_trip_segment">Nový segment výletu</string>
     <string name="quick_action_verb_start_pause">Spustit / Pozastavit</string>
     <string name="help_article_personal_color_palette_schemes_name">Barevná schémata</string>
     <string name="movies_list">Seznam filmů</string>
