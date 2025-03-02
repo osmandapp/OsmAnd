@@ -5078,4 +5078,5 @@
     <string name="approximate_bearing">Umbkaudne kurss</string>
     <string name="movement_speed">Liikumise kiirus</string>
     <string name="approximate_bearing_descr">Tuleta kurss järgitavast tee juhatamise teekonnast.</string>
+    <string name="weather_forecast_is_outdated">Ilmaennustus on aegunud.</string>
 </resources>
