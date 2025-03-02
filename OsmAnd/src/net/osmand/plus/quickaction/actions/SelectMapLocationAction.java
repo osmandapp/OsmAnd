@@ -15,6 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
+import net.osmand.plus.dialogs.LocationSelectionHandler;
 import net.osmand.plus.dialogs.SelectLocationController;
 import net.osmand.plus.quickaction.PointLocationCardController;
 import net.osmand.plus.quickaction.QuickAction;
@@ -42,11 +43,33 @@ public abstract class SelectMapLocationAction extends QuickAction {
 	private void requestLocation(@NonNull MapActivity mapActivity,
 	                             @NonNull OnResultCallback<LatLon> callback) {
 		if (isManualLocationSelection()) {
-			SelectLocationController.showDialog(mapActivity, () -> getLocationIcon(mapActivity), callback);
+			SelectLocationController.showDialog(mapActivity, createHandler(mapActivity));
 		} else {
 			OsmandApplication app = mapActivity.getMyApplication();
 			callback.onResult(SelectLocationController.getMapCenterCoordinates(app));
 		}
+	}
+
+	@NonNull
+	private LocationSelectionHandler createHandler(@NonNull MapActivity mapActivity) {
+		return new LocationSelectionHandler() {
+			@Nullable
+			@Override
+			public Object getCenterPointIcon() {
+				return getLocationIcon(mapActivity);
+			}
+
+			@Override
+			public void onLocationSelected(@NonNull LatLon latLon) {
+				SelectMapLocationAction.this.onLocationSelected(mapActivity, latLon);
+			}
+
+			@NonNull
+			@Override
+			public String getDialogTitle() {
+				return mapActivity.getString(R.string.choose_location);
+			}
+		};
 	}
 
 	protected abstract void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon);

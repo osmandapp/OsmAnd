@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.OnResultCallback;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
@@ -22,13 +21,12 @@ public class SelectLocationController extends BaseDialogController implements IM
 
 	private static final String PROCESS_ID = "select_location_on_map";
 
-	private final CenterIconProvider centerIconProvider;
-	private OnResultCallback<LatLon> onResultCallback;
+	private LocationSelectionHandler handler;
 
 	public SelectLocationController(@NonNull OsmandApplication app,
-	                                @NonNull CenterIconProvider centerIconProvider) {
+	                                @NonNull LocationSelectionHandler handler) {
 		super(app);
-		this.centerIconProvider = centerIconProvider;
+		setLocationSelectionHandler(handler);
 	}
 
 	@NonNull
@@ -37,14 +35,13 @@ public class SelectLocationController extends BaseDialogController implements IM
 		return PROCESS_ID;
 	}
 
-	public void setOnResultCallback(@NonNull OnResultCallback<LatLon> onResultCallback) {
-		this.onResultCallback = onResultCallback;
+	public void setLocationSelectionHandler(@NonNull LocationSelectionHandler handler) {
+		this.handler = handler;
 	}
 
 	@NonNull
 	public String getDialogTitle() {
-		//TODO: return suitable title dependent on purpose for which dialog is displayed
-		return "Choose a location";
+		return handler.getDialogTitle();
 	}
 
 	@NonNull
@@ -55,7 +52,7 @@ public class SelectLocationController extends BaseDialogController implements IM
 	}
 
 	public void onApplySelection() {
-		onResultCallback.onResult(getMapCenterCoordinates(app));
+		handler.onLocationSelected(getMapCenterCoordinates(app));
 	}
 
 	public void onResume() {
@@ -83,7 +80,7 @@ public class SelectLocationController extends BaseDialogController implements IM
 
 	@Nullable
 	public Object getCenterPointIcon() {
-		return centerIconProvider != null ? centerIconProvider.getCenterPointIcon() : null;
+		return handler != null ? handler.getCenterPointIcon() : null;
 	}
 
 	@NonNull
@@ -103,11 +100,9 @@ public class SelectLocationController extends BaseDialogController implements IM
 	}
 
 	public static void showDialog(@NonNull FragmentActivity activity,
-								  @NonNull CenterIconProvider centerIconProvider,
-	                              @NonNull OnResultCallback<LatLon> onResultCallback) {
+								  @NonNull LocationSelectionHandler handler) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-		SelectLocationController controller = new SelectLocationController(app, centerIconProvider);
-		controller.setOnResultCallback(onResultCallback);
+		SelectLocationController controller = new SelectLocationController(app, handler);
 
 		DialogManager dialogManager = app.getDialogManager();
 		dialogManager.register(PROCESS_ID, controller);
