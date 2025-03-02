@@ -41,6 +41,12 @@ public class NavAddFirstIntermediateAction extends SelectMapLocationAction {
 
 	@NonNull
 	@Override
+	protected String getDialogTitle(@NonNull Context context) {
+		return context.getString(R.string.add_intermediate_point);
+	}
+
+	@NonNull
+	@Override
 	protected CharSequence getQuickActionDescription(@NonNull Context context) {
 		return context.getString(R.string.quick_action_add_first_intermediate_desc);
 	}

@@ -67,7 +67,7 @@ public abstract class SelectMapLocationAction extends QuickAction {
 			@NonNull
 			@Override
 			public String getDialogTitle() {
-				return mapActivity.getString(R.string.choose_location);
+				return SelectMapLocationAction.this.getDialogTitle(mapActivity);
 			}
 		};
 	}
@@ -76,6 +76,11 @@ public abstract class SelectMapLocationAction extends QuickAction {
 
 	@Nullable
 	protected abstract Object getLocationIcon(@NonNull MapActivity mapActivity);
+
+	@NonNull
+	protected String getDialogTitle(@NonNull Context context) {
+		return context.getString(R.string.choose_location);
+	}
 
 	public boolean isManualLocationSelection() {
 		return Boolean.parseBoolean(getParameter(KEY_SELECT_LOCATION_MANUALLY, "true"));

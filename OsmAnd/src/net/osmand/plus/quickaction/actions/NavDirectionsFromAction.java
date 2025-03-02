@@ -41,6 +41,12 @@ public class NavDirectionsFromAction extends SelectMapLocationAction {
 
 	@NonNull
 	@Override
+	protected String getDialogTitle(@NonNull Context context) {
+		return context.getString(R.string.add_start_point);
+	}
+
+	@NonNull
+	@Override
 	protected CharSequence getQuickActionDescription(@NonNull Context context) {
 		return context.getString(R.string.quick_action_directions_from_desc);
 	}
