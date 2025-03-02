@@ -5683,11 +5683,16 @@
     <string name="show_grids_description">Leyfa birtingu hnitanets yfir landakortinu</string>
     <string name="show_utm_grids">Nota UTM í stað WGS84</string>
     <string name="map_grid">Hnitanet korts</string>
-    <string name="show_utm_grids_description">Birta hnitanet í UTM-metum í staðinn fyrir WGS84-gráður</string>
+    <string name="show_utm_grids_description">Birta hnitanet í UTM-metum í staðinn fyrir WGS84</string>
     <string name="show_grids">Birta hnitanet á korti</string>
     <string name="no_places_available">Engir staðir tiltækir</string>
     <string name="no_photo_for_location_desc">Engum notendamyndum hefur ennþá verið bætt við þessa staðsetningu</string>
     <string name="hmd_promo_description">Ókeypis aðgangur að eiginleikum á borð við ótakmörkuð niðurhöl korta, þrívíddarlandslag, o.fl. fyrir %1$s á mánuði</string>
     <string name="shared_string_road_exit">Útkeyrsla</string>
     <string name="hmd_promo">HMD-kynning í %1$s mánuði</string>
+    <string name="original_shape_description">Hver punktur myndi halda sinni lögun.</string>
+    <string name="apply_to_all_points">Beita á alla punkta</string>
+    <string name="original_color_description">Hver punktur myndi halda sínum lit.</string>
+    <string name="original_icon_description">Hver punktur myndi halda sinni táknmynd.</string>
+    <string name="save_favorite_default_appearance">Virkja breytingar á fyrirliggjandi punkta í möppunni eða aðeins á nýja punkta?</string>
 </resources>
