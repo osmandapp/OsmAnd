@@ -213,7 +213,7 @@ android {
 		}
 		def generateResources= "generate${taskName}Resources"
 		tasks.named(generateResources).configure { osmandTask ->
-			println(osmandTask.getName() + " merge resources")
+			println(osmandTask.getName() + " generate resources")
 			osmandTask.dependsOn(collectExternalResources)
 		}
 	}
