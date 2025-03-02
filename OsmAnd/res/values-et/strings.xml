@@ -5079,4 +5079,10 @@
     <string name="movement_speed">Liikumise kiirus</string>
     <string name="approximate_bearing_descr">Tuleta kurss järgitavast tee juhatamise teekonnast.</string>
     <string name="weather_forecast_is_outdated">Ilmaennustus on aegunud.</string>
+    <string name="y_axis">Y-telg</string>
+    <string name="x_axis">X-telg</string>
+    <string name="last_synchronized">Viimati sünkroniseeritud</string>
+    <string name="share_as_file">Jaga failina</string>
+    <string name="share_link">Jaga linki</string>
+    <string name="res_unknown">Teadmata</string>
 </resources>
