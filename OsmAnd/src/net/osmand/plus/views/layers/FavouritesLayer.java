@@ -242,12 +242,12 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	                          @Nullable MapMarker marker, float textScale) {
 		int pointColor = favouritesHelper.getColorWithCategory(favoritePoint, defaultColor);
 		int iconId = favoritePoint.getOverlayIconId(getContext());
-		BackgroundType bgType = favoritePoint.getBackgroundType();
+		BackgroundType backgroundType = favoritePoint.getBackgroundType();
 		boolean synced = marker != null;
 
-		PointImageDrawable icon = createFavoriteIcon(pointColor, iconId, bgType, synced);
+		PointImageDrawable drawable = createFavoriteIcon(pointColor, iconId, backgroundType, synced);
 		boolean history = marker != null && marker.history;
-		icon.drawPoint(canvas, x, y, textScale, history);
+		drawable.drawPoint(canvas, x, y, textScale, history);
 	}
 
 	@NonNull

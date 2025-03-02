@@ -1106,22 +1106,28 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return g.getColor() == 0 ? defPointColor : g.getColor();
 	}
 
-	private void drawBigPoint(Canvas canvas, WptPt wpt, int pointColor, float x, float y, @Nullable MapMarker marker, float textScale) {
-		PointImageDrawable pointImageDrawable;
-		boolean history = false;
-		if (marker != null) {
-			pointImageDrawable = PointImageUtils.getOrCreateSyncedIcon(getContext(), pointColor, wpt);
-			history = marker.history;
-		} else {
-			pointImageDrawable = PointImageUtils.getFromPoint(getContext(), pointColor, true, wpt);
-		}
-		pointImageDrawable.drawPoint(canvas, x, y, textScale, history);
+	private void drawBigPoint(@NonNull Canvas canvas, @Nullable WptPt wpt, int pointColor,
+	                          float x, float y, @Nullable MapMarker marker, float textScale) {
+		PointImageDrawable drawable = createWaypointIcon(pointColor, wpt, marker != null);
+		boolean history = marker != null && marker.history;
+		drawable.drawPoint(canvas, x, y, textScale, history);
+	}
+
+	@NonNull
+	public PointImageDrawable createWaypointIcon(@ColorInt int pointColor, @Nullable WptPt wpt, boolean synced) {
+		return PointImageUtils.getFromPoint(getContext(), pointColor, true, synced, wpt);
+	}
+
+	@NonNull
+	public PointImageDrawable createWaypointIcon(@ColorInt int pointColor, boolean synced,
+	                                             @NonNull String iconName, @Nullable String bgTypeName) {
+		return PointImageUtils.getFromPoint(getContext(), pointColor, true, synced, iconName, bgTypeName);
 	}
 
 	@ColorInt
-	private int getPointColor(WptPt o, @ColorInt int fileColor) {
+	private int getPointColor(@NonNull WptPt o, @ColorInt int fileColor) {
 		boolean visit = isPointVisited(o);
-		return visit ? visitedColor : o.getColor(fileColor);
+		return visit ? visitedColor : Objects.requireNonNull(o.getColor(fileColor));
 	}
 
 	private void drawSelectedFilesSegments(Canvas canvas, RotatedTileBox tileBox,
