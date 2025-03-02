@@ -2699,7 +2699,7 @@
     <string name="network_provider">Võrk</string>
     <string name="gps_provider">GPS</string>
     <string name="int_seconds">sekundit</string>
-    <string name="int_min">min</string>
+    <string name="int_min">min.</string>
     <string name="background_service_provider_descr">Taustateenuse kasutatav asukoha määramise meetod:</string>
     <string name="background_service_provider">Asukoha pakkuja</string>
     <string name="background_router_service_descr">Jälgib sinu asukohta kui ekraan on välja lülitatud.</string>
@@ -5056,4 +5056,26 @@
     <string name="depth_contour_lines">Sügavuse samakõrgusjooned</string>
     <string name="kg">kg</string>
     <string name="coordinates_widget_current_location">Koordinaadid:praegune asukoht</string>
+    <string name="shutter_sound">Katikuheli</string>
+    <string name="ant_plus_bluetooth_off">Bluetooth on väljalülitatud</string>
+    <string name="camera_app">Kaamerarakendus</string>
+    <string name="bluetooth_not_supported">Bluetooth pole toetatud</string>
+    <string name="check_for_updates">Kontrolli uuendusi</string>
+    <string name="cloud_version_confirm_delete">Kas kustutame „%1$s“ OsmAnd Cloudist?</string>
+    <string name="sort_distance_ascending">Esmalt lühim vahemaa</string>
+    <string name="sort_distance_descending">Esmalt pikim vahemaa</string>
+    <string name="ble_search_again">Otsi uuesti</string>
+    <string name="sort_date_ascending">Esmalt varaseim kuupäev</string>
+    <string name="ant_plus_nothing_found_text">Andureid ei õnnestu leida</string>
+    <string name="sort_date_descending">Esmalt hiliseim kuupäev</string>
+    <string name="delete_cloud_version">Kustuta pilves asuv variant</string>
+    <string name="sort_duration_descending">Esmalt pikim kestus</string>
+    <string name="switch_folder">Vaheta kausta</string>
+    <string name="speak_route_deviation">Teata kõrvalekaldest teekonnal</string>
+    <string name="selected_value">Valitud väärtus</string>
+    <string name="sort_duration_ascending">Esmalt lühim kestus</string>
+    <string name="learn_more_about_sensors_link">Lisateave andurite kohta.</string>
+    <string name="approximate_bearing">Umbkaudne kurss</string>
+    <string name="movement_speed">Liikumise kiirus</string>
+    <string name="approximate_bearing_descr">Tuleta kurss järgitavast tee juhatamise teekonnast.</string>
 </resources>
