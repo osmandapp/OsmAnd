@@ -276,18 +276,18 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
 		List<ExploreTopPlacePoint> points = places;
 		if (points != null) {
-			ArrayList<ExploreTopPlacePoint> foundPoints = new ArrayList<>();
-			getNearbyPlaceFromPoint(tileBox, point, foundPoints, points);
-			MapActivity activity = getMapActivity();
-			if(activity != null) {
-				for(ExploreTopPlacePoint foundPoint: foundPoints) {
-					Amenity amenity = getMapActivity().getMyApplication().getExplorePlacesProvider().getAmenity(
-							new LatLon(foundPoint.getLatitude(), foundPoint.getLongitude()), foundPoint.getId());
-					if(amenity == null) {
-						res.add(foundPoint);
-					}
-				}
-			}
+			getNearbyPlaceFromPoint(tileBox, point, res, points);
+		}
+	}
+
+	@Override
+	public boolean runExclusiveAction(@Nullable Object o, boolean unknownLocation) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && (o instanceof ExploreTopPlacePoint)) {
+			getApplication().getExplorePlacesProvider().showPointInContextMenu(mapActivity, (ExploreTopPlacePoint) o);
+			return true;
+		} else {
+			return IContextMenuProvider.super.runExclusiveAction(o, unknownLocation);
 		}
 	}
 
