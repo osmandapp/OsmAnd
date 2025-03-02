@@ -5695,4 +5695,10 @@
     <string name="original_color_description">Hver punktur myndi halda sínum lit.</string>
     <string name="original_icon_description">Hver punktur myndi halda sinni táknmynd.</string>
     <string name="save_favorite_default_appearance">Virkja breytingar á fyrirliggjandi punkta í möppunni eða aðeins á nýja punkta?</string>
+    <string name="show_mercator_grids">Nota Mercator í staðinn fyrir WGS84 eða UTM</string>
+    <string name="show_dms_grids">Nota DMS í staðinn fyrir gráður</string>
+    <string name="show_dm_grids_description">Birta hnitanet í gráðum og mínútum í staðinn fyrir gráður eða DMS</string>
+    <string name="show_mercator_grids_description">Birta hnitanet í Mercator-km í staðinn fyrir WGS84 eða UTM</string>
+    <string name="show_dms_grids_description">Birta hnitanet í gráður, mínútur, sekúndur í staðinn fyrir gráður</string>
+    <string name="show_dm_grids">Nota DM í staðinn fyrir gráður eða DMS</string>
 </resources>
