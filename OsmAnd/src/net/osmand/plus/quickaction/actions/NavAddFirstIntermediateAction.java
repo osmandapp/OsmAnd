@@ -2,10 +2,7 @@ package net.osmand.plus.quickaction.actions;
 
 import static net.osmand.plus.quickaction.QuickActionIds.NAV_ADD_FIRST_INTERMEDIATE_ACTION_ID;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,13 +39,9 @@ public class NavAddFirstIntermediateAction extends SelectMapLocationAction {
 		return mapActivity.getMapLayers().getNavigationLayer().getIntermediatePointIcon();
 	}
 
+	@NonNull
 	@Override
-	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-		View view = LayoutInflater.from(parent.getContext())
-				.inflate(R.layout.quick_action_with_text, parent, false);
-
-		((TextView) view.findViewById(R.id.text)).setText(
-				R.string.quick_action_add_first_intermediate_desc);
-		parent.addView(view);
+	protected CharSequence getQuickActionDescription(@NonNull Context context) {
+		return context.getString(R.string.quick_action_add_first_intermediate_desc);
 	}
 }

@@ -2,10 +2,7 @@ package net.osmand.plus.plugins.audionotes;
 
 import static net.osmand.plus.quickaction.QuickActionIds.TAKE_VIDEO_NOTE_ACTION_ID;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -58,12 +55,10 @@ public class TakeVideoNoteAction extends SelectMapLocationAction {
 		return layer != null ? layer.getVideoNoteIcon() : null;
 	}
 
+	@NonNull
 	@Override
-	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
-		View view = LayoutInflater.from(parent.getContext())
-				.inflate(R.layout.quick_action_with_text, parent, false);
-		((TextView) view.findViewById(R.id.text)).setText(
-				R.string.quick_action_take_video_note_descr);
-		parent.addView(view);
+	protected CharSequence getQuickActionDescription(@NonNull Context context) {
+		return context.getString(R.string.quick_action_take_video_note_descr);
 	}
+
 }

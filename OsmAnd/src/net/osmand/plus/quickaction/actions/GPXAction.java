@@ -179,6 +179,7 @@ public class GPXAction extends SelectMapLocationAction implements FileSelected {
 	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 		View root = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_add_gpx, parent, false);
+		setupPointLocationView(root.findViewById(R.id.point_location_container), mapActivity);
 		parent.addView(root);
 
 		unselectGpxFileIfMissing();
@@ -524,25 +525,25 @@ public class GPXAction extends SelectMapLocationAction implements FileSelected {
 	@Override
 	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
 		boolean useSelectedGpxFile = trackToggleButton.getSelectedItemIndex() == 1;
-		getParams().put(KEY_USE_SELECTED_GPX_FILE, String.valueOf(useSelectedGpxFile));
+		setParameter(KEY_USE_SELECTED_GPX_FILE, String.valueOf(useSelectedGpxFile));
 		if (selectedGpxFilePath != null) {
-			getParams().put(KEY_GPX_FILE_PATH, selectedGpxFilePath);
+			setParameter(KEY_GPX_FILE_PATH, selectedGpxFilePath);
 		}
 
 		boolean usePredefinedTemplate = appearanceToggleButton.getSelectedItemIndex() == 1;
-		getParams().put(KEY_USE_PREDEFINED_WPT_APPEARANCE, String.valueOf(usePredefinedTemplate));
+		setParameter(KEY_USE_PREDEFINED_WPT_APPEARANCE, String.valueOf(usePredefinedTemplate));
 		if (predefinedWaypoint != null) {
-			getParams().put(KEY_WPT_NAME, predefinedWaypoint.getName());
-			getParams().put(KEY_WPT_ADDRESS, predefinedWaypoint.getAddress());
-			getParams().put(KEY_WPT_DESCRIPTION, predefinedWaypoint.getDesc());
-			getParams().put(KEY_WPT_COLOR, String.valueOf(predefinedWaypoint.getColor()));
-			getParams().put(KEY_WPT_ICON, predefinedWaypoint.getIconName());
-			getParams().put(KEY_WPT_BACKGROUND_TYPE, predefinedWaypoint.getBackgroundType());
-			getParams().put(KEY_CATEGORY_NAME, predefinedWaypoint.getCategory());
-			getParams().put(KEY_CATEGORY_COLOR, String.valueOf(predefinedCategoryColor));
+			setParameter(KEY_WPT_NAME, predefinedWaypoint.getName());
+			setParameter(KEY_WPT_ADDRESS, predefinedWaypoint.getAddress());
+			setParameter(KEY_WPT_DESCRIPTION, predefinedWaypoint.getDesc());
+			setParameter(KEY_WPT_COLOR, String.valueOf(predefinedWaypoint.getColor()));
+			setParameter(KEY_WPT_ICON, predefinedWaypoint.getIconName());
+			setParameter(KEY_WPT_BACKGROUND_TYPE, predefinedWaypoint.getBackgroundType());
+			setParameter(KEY_CATEGORY_NAME, predefinedWaypoint.getCategory());
+			setParameter(KEY_CATEGORY_COLOR, String.valueOf(predefinedCategoryColor));
 		}
 
-		return true;
+		return super.fillParams(root, mapActivity);
 	}
 
 	private String getSelectedGpxFilePath(boolean paramsOnly) {
@@ -553,7 +554,7 @@ public class GPXAction extends SelectMapLocationAction implements FileSelected {
 		String gpxFilePath = getSelectedGpxFilePath(true);
 		boolean gpxFileMissing = !Algorithms.isEmpty(gpxFilePath) && !new File(gpxFilePath).exists();
 		if (gpxFileMissing) {
-			getParams().put(KEY_USE_SELECTED_GPX_FILE, String.valueOf(false));
+			setParameter(KEY_USE_SELECTED_GPX_FILE, String.valueOf(false));
 			getParams().remove(KEY_GPX_FILE_PATH);
 		}
 	}

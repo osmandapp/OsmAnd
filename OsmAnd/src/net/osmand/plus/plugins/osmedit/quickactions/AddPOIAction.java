@@ -229,6 +229,7 @@ public class AddPOIAction extends SelectMapLocationAction {
 	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_add_poi_layout, parent, false);
+		setupPointLocationView(view.findViewById(R.id.point_location_container), mapActivity);
 
 		OsmandApplication application = mapActivity.getMyApplication();
 		boolean isLightTheme = application.getSettings().isLightContent();
@@ -487,7 +488,8 @@ public class AddPOIAction extends SelectMapLocationAction {
 
 	@Override
 	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
-		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
+		super.fillParams(root, mapActivity);
+		setParameter(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
 		return !getParams().isEmpty() && (getParams().get(KEY_TAG) != null || !getTagsFromParams().isEmpty());
 	}
 

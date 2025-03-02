@@ -17,7 +17,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.OsmEditsLayer;
-import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.actions.SelectMapLocationAction;
@@ -82,6 +81,8 @@ public class AddOSMBugAction extends SelectMapLocationAction {
 	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_add_bug, parent, false);
+		setupPointLocationView(view.findViewById(R.id.point_location_container), mapActivity);
+
 		SwitchCompat swShowDialog = view.findViewById(R.id.dialogSwitch);
 		EditText etMessage = view.findViewById(R.id.message_edit);
 
@@ -98,6 +99,6 @@ public class AddOSMBugAction extends SelectMapLocationAction {
 		EditText etMessage = root.findViewById(R.id.message_edit);
 		getParams().put(KEY_SHO_DIALOG, String.valueOf(swShowDialog.isChecked()));
 		getParams().put(KEY_MESSAGE, etMessage.getText().toString());
-		return true;
+		return super.fillParams(root, mapActivity);
 	}
 }

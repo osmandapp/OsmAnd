@@ -128,6 +128,7 @@ public class FavoriteAction extends SelectMapLocationAction {
 	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 		View root = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_add_favorite, parent, false);
+		setupPointLocationView(root.findViewById(R.id.point_location_container), mapActivity);
 		parent.addView(root);
 
 		AutoCompleteTextViewEx categoryEdit = root.findViewById(R.id.category_edit);
@@ -192,9 +193,9 @@ public class FavoriteAction extends SelectMapLocationAction {
 
 	@Override
 	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
-		getParams().put(KEY_NAME, ((EditText) root.findViewById(R.id.name_edit)).getText().toString());
-		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
-		return true;
+		setParameter(KEY_NAME, ((EditText) root.findViewById(R.id.name_edit)).getText().toString());
+		setParameter(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
+		return super.fillParams(root, mapActivity);
 	}
 
 	private void fillGroupParams(View root, String name, int color) {
