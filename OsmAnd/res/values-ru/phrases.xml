@@ -4433,4 +4433,6 @@
     <string name="poi_route_activity_type_parachuting_skydiving">Парашютный спорт (прыжки с парашютом)</string>
     <string name="poi_route_activity_type_inline_skates">Роликовые коньки</string>
     <string name="poi_route_activity_type_golfing">Гольф</string>
+    <string name="poi_climbing_bolt">Анкерный болт</string>
+    <string name="poi_hiking_filter">Подходит для хайкинга</string>
 </resources>
