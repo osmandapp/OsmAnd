@@ -42,17 +42,18 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 
 	private val HIDE_LIST_DURATION = 150L
 	private val SHOW_LIST_DURATION = 150L
+	private val COMPASS_UPDATE_PERIOD = 300
 	private lateinit var visiblePlacesRect: QuadRect
 	private val log: Log = PlatformUtil.getLog(
 		ExplorePlacesFragment::class.java)
 
 	private lateinit var verticalNearbyAdapter: NearbyPlacesAdapter
 	private var location: Location? = null
-	private var heading: Float? = null
 	private var mainContent: LinearLayout? = null
 	private var showListContainer: View? = null
 	private var frameLayout: FrameLayout? = null
 	private var rulerWidget: RulerWidget? = null
+	private var lastCompassUpdate = 0L
 
 	override fun getContentStatusBarNightMode(): Boolean {
 		return nightMode
@@ -135,7 +136,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		val app = requireActivity().application as OsmandApplication
 		app.locationProvider.addLocationListener(this)
 		app.locationProvider.addCompassListener(this)
-		mapActivity?.let { activity -> updateWidgetsVisibility(activity, View.GONE)}
+		mapActivity?.let { activity -> updateWidgetsVisibility(activity, View.GONE) }
 	}
 
 	override fun onPause() {
@@ -143,17 +144,20 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		val app = requireActivity().application as OsmandApplication
 		app.locationProvider.removeLocationListener(this)
 		app.locationProvider.removeCompassListener(this)
-		mapActivity?.let { activity -> updateWidgetsVisibility(activity, View.VISIBLE)}
+		mapActivity?.let { activity -> updateWidgetsVisibility(activity, View.VISIBLE) }
 	}
 
 	override fun updateLocation(location: Location?) {
 		this.location = location
-		verticalNearbyAdapter.updateLocation(location, heading)
+		verticalNearbyAdapter.updateLocation(location)
 	}
 
 	override fun updateCompassValue(value: Float) {
-		this.heading = value
-		verticalNearbyAdapter.updateLocation(location, heading)
+		val now = System.currentTimeMillis()
+		if (now - lastCompassUpdate > COMPASS_UPDATE_PERIOD) {
+			lastCompassUpdate = now
+			updateLocation(location)
+		}
 	}
 
 	private fun setupShowAll(view: View) {

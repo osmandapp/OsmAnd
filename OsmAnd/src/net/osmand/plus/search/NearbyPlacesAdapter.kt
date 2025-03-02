@@ -1,10 +1,8 @@
 package net.osmand.plus.search
 
 import android.app.Activity
-import android.util.Log
-import android.view.MotionEvent
 import android.view.View
-import android.view.View.OnTouchListener
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -38,7 +36,6 @@ class NearbyPlacesAdapter(
 	// Initialize the UpdateLocationViewCache
 	private val updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(activity)
 	private var location: Location? = null
-	private var heading: Float? = null
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NearbyViewHolder {
 		val inflater = UiUtilities.getInflater(parent.context, isNightMode())
@@ -57,14 +54,13 @@ class NearbyPlacesAdapter(
 
 	override fun onBindViewHolder(holder: NearbyViewHolder, position: Int) {
 		val item = items[position]
-		holder.bind(item, onItemClickListener, position, location)
+		holder.bind(item, position)
 	}
 
 	override fun getItemCount(): Int = items.size
 
-	fun updateLocation(location: Location?, heading: Float?) {
+	fun updateLocation(location: Location?) {
 		this.location = location
-		this.heading = heading
 		notifyDataSetChanged()
 	}
 
@@ -72,6 +68,7 @@ class NearbyPlacesAdapter(
 		itemView: View,
 		private val updateLocationViewCache: UpdateLocationUtils.UpdateLocationViewCache
 	) : RecyclerView.ViewHolder(itemView) {
+		private var item: ExploreTopPlacePoint? = null
 		private val imageView: ImageView = itemView.findViewById(R.id.item_image)
 		private val iconImageView: ImageView = itemView.findViewById(R.id.item_icon)
 		private val titleTextView: TextView = itemView.findViewById(R.id.item_title)
@@ -80,12 +77,8 @@ class NearbyPlacesAdapter(
 		private val distanceTextView: TextView? = itemView.findViewById(R.id.distance)
 		private val arrowImageView: ImageView? = itemView.findViewById(R.id.direction)
 
-		fun bind(
-			item: ExploreTopPlacePoint,
-			onItemClickListener: NearbyItemClickListener,
-			position: Int,
-			location: Location?
-		) {
+		fun bind(item: ExploreTopPlacePoint, position: Int) {
+			this.item = item
 			val app = imageView.context.applicationContext as OsmandApplication
 			val poiTypes = app.poiTypes
 			val subType = poiTypes.getPoiTypeByKey(item.poisubtype)
@@ -155,11 +148,13 @@ class NearbyPlacesAdapter(
 					arrowImageView.visibility = View.GONE
 				}
 			}
-
-			itemView.setOnClickListener {
-				onItemClickListener.onNearbyItemClicked(item)
+			if (!itemView.hasOnClickListeners()) {
+				itemView.setOnClickListener(clickListener)
 			}
 		}
+
+		private val clickListener =
+			OnClickListener { item?.let { onItemClickListener.onNearbyItemClicked(it) } }
 
 		private fun calculateDistance(
 			app: OsmandApplication,
