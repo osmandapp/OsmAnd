@@ -22,10 +22,9 @@
 			android:gravity="center_vertical"
 			android:visibility="visible"
 			app:title="@string/popular_places_nearby" />
-		
 	</com.google.android.material.appbar.AppBarLayout>
 
-	<FrameLayout
+	<androidx.coordinatorlayout.widget.CoordinatorLayout
 		android:id="@+id/frame_layout"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
@@ -36,9 +35,12 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="bottom"
 			android:background="?attr/activity_background_color"
-			android:orientation="vertical">
+			android:orientation="vertical"
+			app:behavior_peekHeight="@dimen/bottom_sheet_menu_peek_height"
+			app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
 			<LinearLayout
+				android:id="@+id/show_on_map_container"
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/context_menu_buttons_bottom_height"
 				android:background="?attr/activity_background_color"
@@ -96,19 +98,12 @@
 			android:orientation="vertical"
 			android:visibility="gone">
 
-			<FrameLayout
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="@dimen/toolbar_height">
-
-				<include
-					layout="@layout/map_compass_button"
-					android:layout_width="@dimen/map_small_button_size"
-					android:layout_height="@dimen/map_small_button_size"
-					android:layout_marginStart="@dimen/map_button_margin"
-					android:layout_marginTop="@dimen/map_small_button_margin" />
-
-			</FrameLayout>
+			<include
+				layout="@layout/map_compass_button"
+				android:layout_width="@dimen/map_small_button_size"
+				android:layout_height="@dimen/map_small_button_size"
+				android:layout_marginStart="@dimen/map_button_margin"
+				android:layout_marginTop="@dimen/map_small_button_margin" />
 
 			<androidx.legacy.widget.Space
 				android:layout_width="1dp"
@@ -162,6 +157,6 @@
 
 		</LinearLayout>
 
-	</FrameLayout>
+	</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </LinearLayout>
