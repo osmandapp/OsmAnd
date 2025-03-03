@@ -5085,4 +5085,22 @@
     <string name="share_as_file">Jaga failina</string>
     <string name="share_link">Jaga linki</string>
     <string name="res_unknown">Teadmata</string>
+    <string name="rendering_attr_weatherWindSpeedContours_name">Tuulekiiruse samajooned</string>
+    <string name="mtb_imba_full">Rahvusvaheline Mägirattasõidu Liit</string>
+    <string name="mtb_segment_classification">Segmendi klassifikatsioon</string>
+    <string name="rendering_attr_showMtbScale_description">Näita radu vastavalt nende MTB raskusastmele.</string>
+    <string name="map_widget_sunset_desc">Näitab järgmise päikeseloojangu kellaaega või aega päikeseloojanguni.</string>
+    <string name="measurement_units">Mõõtühikud</string>
+    <string name="weather_offline_forecast">Puhverdatud ilmaennustus</string>
+    <string name="mtb_scale">MTB raskusaste</string>
+    <string name="mtb_imba">IMBA</string>
+    <string name="rendering_attr_showMtbScale_name">Näita MTB raskusastet</string>
+    <string name="map_widget_group_sunrise_sunset_desc">Need vidinad näitavad järgmise päikesetõusu ja -loojangu teavet.</string>
+    <string name="quick_action_air_pressure_layer">Nupp, mis võimaldab kaardil lülitada sisse/välja õhurõhu andmekihti.</string>
+    <string name="quick_action_wind_layer">Nupp, mis võimaldab kaardil lülitada sisse/välja tuule andmekihti.</string>
+    <string name="map_widget_sunrise_desc">Näitab järgmise päikesetõusu kellaaega või aega päikesetõusuni.</string>
+    <string name="quick_action_precipitation_layer">Nupp, mis võimaldab kaardil lülitada sisse/välja sademete andmekihti.</string>
+    <string name="quick_action_cloud_layer">Nupp, mis võimaldab kaardil lülitada sisse/välja pilvisuse andmekihti.</string>
+    <string name="rendering_attr_weatherPrecipitationContours_name">Sademete samajooned</string>
+    <string name="quick_action_temperature_layer">Nupp, mis võimaldab kaardil lülitada sisse/välja temperatuuri andmekihti.</string>
 </resources>
