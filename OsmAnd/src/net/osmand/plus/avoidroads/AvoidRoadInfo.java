@@ -20,7 +20,8 @@ public class AvoidRoadInfo implements Serializable {
 	private final String name;
 	private final String appModeKey;
 
-	public AvoidRoadInfo(long id, double direction, double latitude, double longitude, String name, String appModeKey) {
+	public AvoidRoadInfo(long id, double direction, double latitude, double longitude, String name,
+			String appModeKey) {
 		this.id = id;
 		this.direction = direction;
 		this.latitude = latitude;
@@ -82,5 +83,18 @@ public class AvoidRoadInfo implements Serializable {
 				&& Algorithms.objectEquals(name, other.name)
 				&& Algorithms.objectEquals(appModeKey, other.appModeKey)
 				&& id == other.id;
+	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return "AvoidRoadInfo{" +
+				"id=" + id +
+				", name=" + name +
+				", lat=" + latitude +
+				", lon=" + longitude +
+				", appMode=" + appModeKey +
+				", direction=" + direction +
+				"}";
 	}
 }
