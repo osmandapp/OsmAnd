@@ -271,54 +271,54 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					MapActivity activity = (MapActivity) getActivity();
 					if (activity != null) {
 						// TODO: -------------------------------------------------------------------
-						OsmandApplication app = activity.getMyApplication();
-						MapRouteInfoMenu menu = activity.getMapRouteInfoMenu();
-						PointNavigationLayer layer = activity.getMapLayers().getNavigationLayer();
-						menu.selectOnScreen(pointType);
-						DialogListener listener = getListener();
-						if (listener != null) {
-							listener.onSelectOnMap(AddPointBottomSheetDialog.this);
-						}
-						dismiss();
-
-						SelectLocationController.showDialog(activity, new ILocationSelectionHandler() {
-							@Nullable
-							@Override
-							public Object getCenterPointIcon() {
-								return switch (pointType) {
-									case START -> layer.getStartPointIcon();
-									case INTERMEDIATE -> layer.getIntermediatePointIcon();
-									case TARGET -> layer.getPointToNavigateIcon();
-									default -> null;
-								};
-							}
-
-							@Override
-							public void onLocationSelected(@NonNull LatLon latLon) {
-								RotatedTileBox tileBox = app.getOsmandMap().getMapView().getRotatedTileBox();
-								PointF pointF = new PointF(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-								app.runInUIThread(() -> menu.onSingleTap(pointF, tileBox), 50);
-							}
-
-							@NonNull
-							@Override
-							public String getDialogTitle() {
-								return switch (pointType) {
-									case START -> app.getString(R.string.add_start_point);
-									case INTERMEDIATE -> app.getString(R.string.add_intermediate_point);
-									case TARGET -> app.getString(R.string.add_destination_point);
-									default -> app.getString(R.string.choose_location);
-								};
-							}
-						});
+//						OsmandApplication app = activity.getMyApplication();
 //						MapRouteInfoMenu menu = activity.getMapRouteInfoMenu();
+//						PointNavigationLayer layer = activity.getMapLayers().getNavigationLayer();
 //						menu.selectOnScreen(pointType);
 //						DialogListener listener = getListener();
 //						if (listener != null) {
 //							listener.onSelectOnMap(AddPointBottomSheetDialog.this);
 //						}
+//						dismiss();
+//
+//						SelectLocationController.showDialog(activity, new ILocationSelectionHandler() {
+//							@Nullable
+//							@Override
+//							public Object getCenterPointIcon() {
+//								return switch (pointType) {
+//									case START -> layer.getStartPointIcon();
+//									case INTERMEDIATE -> layer.getIntermediatePointIcon();
+//									case TARGET -> layer.getPointToNavigateIcon();
+//									default -> null;
+//								};
+//							}
+//
+//							@Override
+//							public void onLocationSelected(@NonNull LatLon latLon) {
+//								RotatedTileBox tileBox = app.getOsmandMap().getMapView().getRotatedTileBox();
+//								PointF pointF = new PointF(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+//								app.runInUIThread(() -> menu.onSingleTap(pointF, tileBox), 50);
+//							}
+//
+//							@NonNull
+//							@Override
+//							public String getDialogTitle() {
+//								return switch (pointType) {
+//									case START -> app.getString(R.string.add_start_point);
+//									case INTERMEDIATE -> app.getString(R.string.add_intermediate_point);
+//									case TARGET -> app.getString(R.string.add_destination_point);
+//									default -> app.getString(R.string.choose_location);
+//								};
+//							}
+//						});
+						MapRouteInfoMenu menu = activity.getMapRouteInfoMenu();
+						menu.selectOnScreen(pointType);
+						DialogListener listener = getListener();
+						if (listener != null) {
+							listener.onSelectOnMap(AddPointBottomSheetDialog.this);
+						}
 					}
-//					dismiss();
+					dismiss();
 					// TODO: -------------------------------------------------------------------
 				})
 				.create();
