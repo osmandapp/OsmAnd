@@ -21,10 +21,10 @@ public class SelectLocationController extends BaseDialogController implements IM
 
 	private static final String PROCESS_ID = "select_location_on_map";
 
-	private LocationSelectionHandler handler;
+	private ILocationSelectionHandler handler;
 
 	public SelectLocationController(@NonNull OsmandApplication app,
-	                                @NonNull LocationSelectionHandler handler) {
+	                                @NonNull ILocationSelectionHandler handler) {
 		super(app);
 		setLocationSelectionHandler(handler);
 	}
@@ -35,7 +35,7 @@ public class SelectLocationController extends BaseDialogController implements IM
 		return PROCESS_ID;
 	}
 
-	public void setLocationSelectionHandler(@NonNull LocationSelectionHandler handler) {
+	public void setLocationSelectionHandler(@NonNull ILocationSelectionHandler handler) {
 		this.handler = handler;
 	}
 
@@ -100,7 +100,7 @@ public class SelectLocationController extends BaseDialogController implements IM
 	}
 
 	public static void showDialog(@NonNull FragmentActivity activity,
-								  @NonNull LocationSelectionHandler handler) {
+								  @NonNull ILocationSelectionHandler handler) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		SelectLocationController controller = new SelectLocationController(app, handler);
 

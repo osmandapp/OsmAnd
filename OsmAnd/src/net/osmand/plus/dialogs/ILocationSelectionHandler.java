@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.data.LatLon;
 
-public interface LocationSelectionHandler {
+public interface ILocationSelectionHandler {
 	@Nullable
 	Object getCenterPointIcon();
 

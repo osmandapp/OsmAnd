@@ -15,7 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
-import net.osmand.plus.dialogs.LocationSelectionHandler;
+import net.osmand.plus.dialogs.ILocationSelectionHandler;
 import net.osmand.plus.dialogs.SelectLocationController;
 import net.osmand.plus.quickaction.PointLocationCardController;
 import net.osmand.plus.quickaction.QuickAction;
@@ -51,8 +51,8 @@ public abstract class SelectMapLocationAction extends QuickAction {
 	}
 
 	@NonNull
-	private LocationSelectionHandler createHandler(@NonNull MapActivity mapActivity) {
-		return new LocationSelectionHandler() {
+	private ILocationSelectionHandler createHandler(@NonNull MapActivity mapActivity) {
+		return new ILocationSelectionHandler() {
 			@Nullable
 			@Override
 			public Object getCenterPointIcon() {

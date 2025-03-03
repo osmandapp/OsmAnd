@@ -41,7 +41,7 @@ import net.osmand.plus.base.bottomsheetmenu.HorizontalRecyclerBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.dialogs.LocationSelectionHandler;
+import net.osmand.plus.dialogs.ILocationSelectionHandler;
 import net.osmand.plus.dialogs.SelectLocationController;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
@@ -281,7 +281,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 						}
 						dismiss();
 
-						SelectLocationController.showDialog(activity, new LocationSelectionHandler() {
+						SelectLocationController.showDialog(activity, new ILocationSelectionHandler() {
 							@Nullable
 							@Override
 							public Object getCenterPointIcon() {
