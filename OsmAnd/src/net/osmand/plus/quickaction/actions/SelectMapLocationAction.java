@@ -25,7 +25,7 @@ public abstract class SelectMapLocationAction extends QuickAction {
 
 	private static final String KEY_SELECT_LOCATION_MANUALLY = "select_location_manually";
 
-	private boolean useManualSelection;
+	private Boolean useManualSelection;
 
 	public SelectMapLocationAction(@NonNull QuickActionType type) {
 		super(type);
@@ -83,6 +83,9 @@ public abstract class SelectMapLocationAction extends QuickAction {
 	}
 
 	public boolean isManualLocationSelection() {
+		if (useManualSelection != null) {
+			return useManualSelection;
+		}
 		return Boolean.parseBoolean(getParameter(KEY_SELECT_LOCATION_MANUALLY, "true"));
 	}
 
@@ -92,7 +95,7 @@ public abstract class SelectMapLocationAction extends QuickAction {
 
 	@Override
 	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
-		setParameter(KEY_SELECT_LOCATION_MANUALLY, Boolean.toString(useManualSelection));
+		setParameter(KEY_SELECT_LOCATION_MANUALLY, Boolean.toString(isManualLocationSelection()));
 		return true;
 	}
 
