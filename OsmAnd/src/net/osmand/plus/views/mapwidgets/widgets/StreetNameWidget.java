@@ -2,6 +2,7 @@ package net.osmand.plus.views.mapwidgets.widgets;
 
 import static net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import static net.osmand.plus.views.mapwidgets.WidgetType.STREET_NAME;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 import static net.osmand.plus.views.mapwidgets.widgets.NextTurnBaseWidget.SHIELD_HEIGHT_DP;
 import static java.lang.Math.min;
 
@@ -43,8 +44,8 @@ import net.osmand.plus.render.TextRenderer;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.ShowAlongTheRouteBottomSheet;
 import net.osmand.plus.routing.CurrentStreetName;
-import net.osmand.plus.routing.RoadShield;
 import net.osmand.plus.routing.NextDirectionInfo;
+import net.osmand.plus.routing.RoadShield;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -87,8 +88,9 @@ public class StreetNameWidget extends MapWidget {
 		return R.layout.street_name_widget;
 	}
 
-	public StreetNameWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity, STREET_NAME);
+	public StreetNameWidget(@NonNull MapActivity mapActivity, @Nullable String customId,
+			@Nullable WidgetsPanel panel) {
+		super(mapActivity, STREET_NAME, customId, panel);
 
 		waypointHelper = app.getWaypointHelper();
 		rendererRegistry = app.getRendererRegistry();
@@ -116,10 +118,8 @@ public class StreetNameWidget extends MapWidget {
 			turnDrawable.setRouteDirectionColor(turnArrowColorId);
 		}
 
-		boolean hideStreetName = MapRouteInfoMenu.chooseRoutesVisible
-				|| MapRouteInfoMenu.waypointsVisible
-				|| mapActivity.getWidgetsVisibilityHelper().shouldHideVerticalWidgets();
-		if (hideStreetName) {
+		boolean shouldHide = shouldHide();
+		if (shouldHide) {
 			updateVisibility(false);
 		} else if (showClosestWaypointFirstInAddress && updateWaypoint()) {
 			updateVisibility(true);
@@ -184,6 +184,12 @@ public class StreetNameWidget extends MapWidget {
 		}
 	}
 
+	protected boolean shouldHide() {
+		return MapRouteInfoMenu.chooseRoutesVisible || MapRouteInfoMenu.waypointsVisible
+				|| visibilityHelper.shouldHideVerticalWidgets()
+				|| panel == BOTTOM && visibilityHelper.shouldHideBottomWidgets();
+	}
+
 	public boolean updateWaypoint() {
 		LocationPointWrapper point = waypointHelper.getMostImportantLocationPoint(null);
 		boolean changed = lastPoint != point;
@@ -234,8 +240,9 @@ public class StreetNameWidget extends MapWidget {
 		return false;
 	}
 
-	public static boolean setShieldImage(@NonNull RoadShield shield, @NonNull MapActivity mapActivity,
-	                                     @NonNull LinearLayout shieldImagesContainer, boolean nightMode) {
+	public static boolean setShieldImage(@NonNull RoadShield shield,
+			@NonNull MapActivity mapActivity,
+			@NonNull LinearLayout shieldImagesContainer, boolean nightMode) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		RouteDataObject object = shield.getRdo();
 		StringBuilder additional = shield.getAdditional();
@@ -290,7 +297,8 @@ public class StreetNameWidget extends MapWidget {
 
 		int viewHeightPx = AndroidUtils.dpToPx(app, SHIELD_HEIGHT_DP);
 		int viewWidthPx = (int) (viewHeightPx * xyRatio);
-		float scaleCoefficient = viewWidthPx / xSize;;
+		float scaleCoefficient = viewWidthPx / xSize;
+		;
 
 		Bitmap bitmap = Bitmap.createBitmap(viewWidthPx, viewHeightPx, Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmap);
@@ -319,7 +327,7 @@ public class StreetNameWidget extends MapWidget {
 
 	@NonNull
 	public static Paint setupTextPaint(@NonNull OsmandApplication app, @NonNull Paint paint,
-	                                   @NonNull RenderingRuleSearchRequest request) {
+			@NonNull RenderingRuleSearchRequest request) {
 		paint.setTypeface(Typeface.create(TextRenderer.DROID_SERIF, Typeface.BOLD));
 
 		if (request.isSpecified(request.ALL.R_TEXT_COLOR)) {
@@ -378,13 +386,14 @@ public class StreetNameWidget extends MapWidget {
 	}
 
 	@Override
-	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel, @NonNull List<MapWidget> followingWidgets) {
+	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel,
+			@NonNull List<MapWidget> followingWidgets) {
 		ViewGroup specialContainer = getSpecialContainer();
 		boolean useSpecialPosition = panel == WidgetsPanel.TOP && specialContainer != null;
 		if (useSpecialPosition) {
 			specialContainer.removeAllViews();
 
-			boolean showTopCoordinates = mapActivity.getWidgetsVisibilityHelper().shouldShowTopCoordinatesWidget();
+			boolean showTopCoordinates = visibilityHelper.shouldShowTopCoordinatesWidget();
 			if (!followingWidgets.isEmpty() && showTopCoordinates) {
 				useSpecialPosition = false;
 			}
@@ -464,7 +473,7 @@ public class StreetNameWidget extends MapWidget {
 		}
 
 		private void updateParamsByLastKnown(@NonNull RouteDataObject lastKnownSegment,
-		                                     @NonNull Location lastKnownLocation) {
+				@NonNull Location lastKnownLocation) {
 			String preferredLocale = settings.MAP_PREFERRED_LOCALE.get();
 			boolean transliterateNames = settings.MAP_TRANSLITERATE_NAMES.get();
 			boolean direction = lastKnownSegment.bearingVsRouteDirection(lastKnownLocation);

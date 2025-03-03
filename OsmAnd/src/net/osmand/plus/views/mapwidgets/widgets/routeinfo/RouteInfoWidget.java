@@ -1,5 +1,7 @@
 package net.osmand.plus.views.mapwidgets.widgets.routeinfo;
 
+import static net.osmand.plus.views.mapwidgets.WidgetType.ROUTE_INFO;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 import static net.osmand.plus.views.mapwidgets.widgets.DistanceToPointWidget.DISTANCE_CHANGE_THRESHOLD;
 import static net.osmand.plus.views.mapwidgets.widgets.TimeToNavigationPointWidget.UPDATE_INTERVAL_SECONDS;
 
@@ -30,8 +32,8 @@ import net.osmand.plus.utils.OsmAndFormatterParams;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsContextMenu;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportMultiRow;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportVerticalPanel;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
@@ -49,8 +51,6 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 
 	private final RouteInfoWidgetState widgetState;
 
-	@Nullable
-	protected String customId;
 	private boolean isFullRow;
 	private TextState textState;
 	private final RouteInfoCalculator calculator;
@@ -72,9 +72,9 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	private TextView tvTertiaryValue2;
 	private View blocksDivider;
 
-	public RouteInfoWidget(@NonNull MapActivity mapActivity, @Nullable String customId) {
-		super(mapActivity, WidgetType.ROUTE_INFO);
-		this.customId = customId;
+	public RouteInfoWidget(@NonNull MapActivity mapActivity, @Nullable String customId,
+			@Nullable WidgetsPanel panel) {
+		super(mapActivity, ROUTE_INFO, customId, panel);
 		widgetState = new RouteInfoWidgetState(app, customId);
 		calculator = new RouteInfoCalculator(mapActivity);
 
@@ -93,8 +93,8 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		return switch (selectedSize) {
 			case SMALL -> isFullRow
 					? isSecondaryDataAvailable()
-							? R.layout.widget_route_information_small_duo
-							: R.layout.widget_route_information_small
+					? R.layout.widget_route_information_small_duo
+					: R.layout.widget_route_information_small
 					: R.layout.widget_route_information_small_half;
 			case MEDIUM -> isFullRow
 					? R.layout.widget_route_information_medium
@@ -181,13 +181,18 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 			recreateView();
 			return;
 		}
-		boolean shouldHideTopWidgets = mapActivity.getWidgetsVisibilityHelper().shouldHideVerticalWidgets();
+		boolean shouldHide = shouldHide();
 		boolean typeAllowed = widgetType != null && widgetType.isAllowed();
-		if (typeAllowed && !shouldHideTopWidgets) {
+		if (typeAllowed && !shouldHide) {
 			updateRouteInformation();
 		} else {
 			updateVisibility(false);
 		}
+	}
+
+	protected boolean shouldHide() {
+		return visibilityHelper.shouldHideVerticalWidgets()
+				|| panel == BOTTOM && visibilityHelper.shouldHideBottomWidgets();
 	}
 
 	private void updateRouteInformation() {
@@ -220,7 +225,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	}
 
 	private void updatePrimaryBlock(@NonNull DestinationInfo destinationInfo,
-	                                @NonNull RouteInfoDisplayMode[] modes) {
+			@NonNull RouteInfoDisplayMode[] modes) {
 		Map<RouteInfoDisplayMode, String> displayData = prepareDisplayData(destinationInfo);
 
 		tvPrimaryValue1.setText(displayData.get(modes[0]));
@@ -229,7 +234,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 	}
 
 	private void updateSecondaryBlock(@NonNull DestinationInfo destinationInfo,
-	                                  @NonNull RouteInfoDisplayMode[] modes) {
+			@NonNull RouteInfoDisplayMode[] modes) {
 		Map<RouteInfoDisplayMode, String> displayData = prepareDisplayData(destinationInfo);
 
 		tvPrimaryValue2.setText(displayData.get(modes[0]));
@@ -317,7 +322,8 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		return widgetState.getDisplayMode(appMode);
 	}
 
-	public void setDisplayMode(@NonNull ApplicationMode appMode, @NonNull RouteInfoDisplayMode displayMode) {
+	public void setDisplayMode(@NonNull ApplicationMode appMode,
+			@NonNull RouteInfoDisplayMode displayMode) {
 		widgetState.setDisplayMode(appMode, displayMode);
 	}
 
