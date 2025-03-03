@@ -375,7 +375,7 @@
     <string name="coordinate_input">Koordinaatide sisestamine</string>
     <string name="move_to_history">Teisalda ajalukku</string>
     <string name="shared_string_markers">Markerid</string>
-    <string name="coordinates_format">Koordinaatide formaat</string>
+    <string name="coordinates_format">Koordinaatide vorming</string>
     <string name="use_system_keyboard">Kasuta süsteemi klaviatuuri</string>
     <string name="fast_coordinates_input_descr">Vali koordinaatide sisestusformaat. Selle muutmiseks puuduta valikut \"Valikud\".</string>
     <string name="fast_coordinates_input">Kiire koordinaatide sisestamine</string>
@@ -4191,7 +4191,7 @@
     <string name="wikipedia_and_travel_maps">Vikipeedia ja reisikaardid</string>
     <string name="offline_weather_forecast">Ilmaennustus, mis ei vaja võrguühendust</string>
     <string name="shared_string_weather">Ilmateade</string>
-    <string name="map_rendering_engine_descr">Kaardimootori version 2 (OpenGL) on kiire ning sisaldab ka 2.5-mõõtmelise vaate. Kaardimootori versioon 1 oli esmase valikuna kasutusel kuni OsmAnd\'i versioonini 4.3 ning on jätkuvalt mõistlik eelistus vanemates seadmetes.</string>
+    <string name="map_rendering_engine_descr">Kaardimootori versioon 2 (OpenGL) on kiire ning sisaldab ka 2.5-mõõtmelise vaate. Kaardimootori versioon 1 oli esmase valikuna kasutusel kuni OsmAndi versioonini 4.3 ning on jätkuvalt mõistlik eelistus vanemates seadmetes.</string>
     <string name="rendering_styles">Esitusviisi stiilid</string>
     <string name="sort_subfolders">Sordi alamkaustad</string>
     <string name="empty_screen_view_selected_weather_data">Valitud ilmateate andmete kuvamiseks kaardil lülita see valik sisse.</string>
@@ -5052,10 +5052,10 @@
     <string name="map_3d_mode_description">Kahe sõrme vajutusega kaardil saad teda kaardi kalde muutmiseks nihutada üles-alla.</string>
     <string name="map_3d_mode_hint">Pika vajutusega nupul saad tema asukohta muuta.</string>
     <string name="nautical_depth_points">Merenduse samakõrguspunktid</string>
-    <string name="coordinates_widget_map_center">Koordinaadid:kaardi keskpaik</string>
+    <string name="coordinates_widget_map_center">Koordinaadid: kaardi keskpaik</string>
     <string name="depth_contour_lines">Sügavuse samakõrgusjooned</string>
     <string name="kg">kg</string>
-    <string name="coordinates_widget_current_location">Koordinaadid:praegune asukoht</string>
+    <string name="coordinates_widget_current_location">Koordinaadid: praegune asukoht</string>
     <string name="shutter_sound">Katikuheli</string>
     <string name="ant_plus_bluetooth_off">Bluetooth on väljalülitatud</string>
     <string name="camera_app">Kaamerarakendus</string>
@@ -5120,4 +5120,25 @@
     <string name="empty_screen_weather_clouds_layer">Pilvisuse andmekihi kuvamiseks kaardil lülita see valik sisse.</string>
     <string name="empty_screen_weather_wind_layer">Tuulte andmekihi kuvamiseks kaardil lülita see valik sisse.</string>
     <string name="weather_wind_meters_per_second">Meetrit sekundis</string>
+    <string name="current_location_widget">Koordinaadid: praegune asukoht</string>
+    <string name="weather_plugin_description">Lisamooduli võimalused:\n- viie andmekihiga 24 tunni ja 7 päeva ennustus\n- asukohapõhised vidinad\n- temperatuuri / õhurõhu samajooned\n\nAndmeallikas on Global Forecast System (GFS, %1$s).</string>
+    <string name="weather_pressure_inches_of_mercury">tolli elavhõbeda sammast</string>
+    <string name="weather_pressure_millimeters_of_mercury">torri</string>
+    <string name="coordinates_widget_current_location_desc">Näitab praeguse asukoha geograafilisi koordinaate</string>
+    <string name="weather_pressure_hectopascals">hektopaskalit</string>
+    <string name="map_center_widget">Koordinaadid: kaardi keskpaik</string>
+    <string name="weather_prefs_descr">24 tunni ja 7 päeva ennustus, mida uuendatakse iga kolme tunni järel</string>
+    <string name="weather_pressure_mmhg">mmHg</string>
+    <string name="action_not_supported_with_map_style">Valitud kaardistiilis pole see tegevus võimalik.</string>
+    <string name="weather_pressure_inhg">inHg</string>
+    <string name="weather_temperature_celsius">Celsius</string>
+    <string name="weather_temperature_fahrenheit">Fahrenheit</string>
+    <string name="external_sensors_plugin_name">Välised andurid</string>
+    <string name="weather_wind_kmh">km/t</string>
+    <string name="weather_wind_ms">m/s</string>
+    <string name="weather_pressure_hpa">hPa</string>
+    <string name="map_rendering_engine_v1">Versioon 1</string>
+    <string name="map_rendering_engine_v2">Versioon 2 (OpenGL)</string>
+    <string name="show_borders_of_downloaded_maps">Näita allalaaditud kaartide piirjooni</string>
+    <string name="coordinates_widget_map_center_desc">Näitab kaardivaate keskpunkti geograafilisi koordinaate</string>
 </resources>
