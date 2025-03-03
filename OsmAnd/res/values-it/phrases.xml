@@ -3101,7 +3101,7 @@
     <string name="poi_scooter_no">Scooter: no</string>
     <string name="poi_socket_nema_5_20">Presa: NEMA 5-20</string>
     <string name="poi_park_ride_tram">Tram</string>
-    <string name="poi_landuse_education">Educazione</string>
+    <string name="poi_landuse_education">Area educativa</string>
     <string name="poi_furniture_no">No</string>
     <string name="poi_faculty_biology">Biologia</string>
     <string name="poi_faculty_chemistry">Chimica</string>
@@ -4432,4 +4432,7 @@
     <string name="poi_atv_yes">ATV: sì</string>
     <string name="poi_atv_no">ATV: no</string>
     <string name="poi_access_notes">Note di accesso</string>
+    <string name="poi_glacier_type_hanging">Sospeso</string>
+    <string name="poi_substation_inspection_gauge">Misuratore di ispezione</string>
+    <string name="poi_volcano_type_maar">Maar</string>
 </resources>

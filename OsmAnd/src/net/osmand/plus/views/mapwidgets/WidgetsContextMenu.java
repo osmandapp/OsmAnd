@@ -23,6 +23,7 @@ import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFra
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportMultiRow;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData.CustomDropDown;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.util.Algorithms;
@@ -103,7 +104,7 @@ public class WidgetsContextMenu {
 			displayData.nightMode = nightMode;
 			displayData.widthMode = PopUpMenuWidthMode.STANDARD;
 			displayData.showCompound = false;
-			displayData.customDropDown = false;
+			displayData.customDropDown = CustomDropDown.NONE;
 			displayData.layoutId = R.layout.popup_menu_item_full_divider;
 			PopUpMenu.show(displayData);
 		}

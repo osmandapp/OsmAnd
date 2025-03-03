@@ -2218,7 +2218,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				}
 				TargetPoint point = points.get(i);
 				String description = point.getOnlyName();
-				via.append(point.getRoutePointDescription(mapActivity));
+				via.append(point.getRoutePointDescription(mapActivity, false));
 				boolean needAddress = new PointDescription(POINT_TYPE_LOCATION, description)
 						.isSearchingAddress(mapActivity)
 						&& !intermediateRequestsLatLon.contains(point.getLatLon());
@@ -2278,7 +2278,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			TargetPointsHelper targets = app.getTargetPointsHelper();
 			TargetPoint finish = targets.getPointToNavigate();
 			if (finish != null) {
-				toText.setText(finish.getRoutePointDescription(mapActivity));
+				toText.setText(finish.getRoutePointDescription(mapActivity, false));
 
 				PointDescription pointDescription = finish.getOriginalPointDescription();
 				boolean needAddress = pointDescription != null && pointDescription.isSearchingAddress(mapActivity);

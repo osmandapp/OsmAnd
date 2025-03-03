@@ -1,6 +1,7 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
 import static net.osmand.plus.views.mapwidgets.WidgetType.LANES;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -49,8 +50,9 @@ public class LanesWidget extends MapWidget {
 	private int shadowRadius;
 	boolean specialPosition;
 
-	public LanesWidget(@NonNull MapActivity mapActivity) {
-		super(mapActivity, LANES);
+	public LanesWidget(@NonNull MapActivity mapActivity, @Nullable String customId,
+			@Nullable WidgetsPanel panel) {
+		super(mapActivity, LANES, customId, panel);
 
 		routingHelper = mapActivity.getMyApplication().getRoutingHelper();
 		lanesImage = view.findViewById(R.id.map_lanes);
@@ -108,16 +110,18 @@ public class LanesWidget extends MapWidget {
 			}
 		}
 
-		boolean visible = lanes != null && lanes.length > 0
-				&& !MapRouteInfoMenu.chooseRoutesVisible
-				&& !MapRouteInfoMenu.waypointsVisible
-				&& !MapRouteInfoMenu.followTrackVisible
-				&& !mapActivity.getWidgetsVisibilityHelper().shouldHideVerticalWidgets();
+		boolean visible = lanes != null && lanes.length > 0 && !shouldHide();
 		if (visible) {
 			updateLanes(lanes, imminent, distance);
 		}
 
 		updateVisibility(visible);
+	}
+
+	protected boolean shouldHide() {
+		return MapRouteInfoMenu.chooseRoutesVisible || MapRouteInfoMenu.waypointsVisible ||
+				MapRouteInfoMenu.followTrackVisible || visibilityHelper.shouldHideVerticalWidgets()
+				|| panel == BOTTOM && visibilityHelper.shouldHideBottomWidgets();
 	}
 
 	@Override
@@ -174,7 +178,8 @@ public class LanesWidget extends MapWidget {
 	}
 
 	@Override
-	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel, @NonNull List<MapWidget> followingWidgets) {
+	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel,
+			@NonNull List<MapWidget> followingWidgets) {
 		ViewGroup specialContainer = getSpecialContainer();
 		specialPosition = panel == WidgetsPanel.TOP && followingWidgets.isEmpty();
 		if (specialPosition) {

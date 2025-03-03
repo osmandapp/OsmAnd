@@ -1,5 +1,7 @@
 package net.osmand.plus.exploreplaces;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.ExploreTopPlacePoint;
@@ -17,7 +19,7 @@ public interface ExplorePlacesProvider {
 
 	@NotNull List<ExploreTopPlacePoint> getDataCollection(QuadRect mapRect, int limit);
 
-	void showPointInContextMenu(@NotNull MapActivity it, @NotNull ExploreTopPlacePoint item);
+	void showPointInContextMenu(@NotNull MapActivity mapActivity, @NotNull ExploreTopPlacePoint item);
 
 	void addListener(ExplorePlacesListener listener);
 
@@ -29,6 +31,8 @@ public interface ExplorePlacesProvider {
 
 	// data version is increased once new data is downloaded
 	int getDataVersion();
+
+	boolean isLoadingRect(@NonNull QuadRect rect);
 
 	interface ExplorePlacesListener {
 		// once new data is downloaded data version is increased

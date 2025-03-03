@@ -10,6 +10,7 @@ import net.osmand.shared.xml.XmlParserException
 import net.osmand.shared.xml.XmlPullParser
 import net.osmand.shared.xml.XmlSerializer
 import java.io.IOException
+import java.util.Locale
 
 object ItineraryDataHelperKt {
 
@@ -51,7 +52,7 @@ object ItineraryDataHelperKt {
 					var tok: Int
 					while (parser.next().also { tok = it } != XmlPullParser.END_DOCUMENT) {
 						if (tok == XmlPullParser.START_TAG) {
-							val tagName = parser.getName()!!.toLowerCase()
+							val tagName = parser.getName()!!.lowercase()
 							if ("name" == tagName) {
 								groupInfo.name = readText(parser, tagName)
 							} else if ("type" == tagName) {
