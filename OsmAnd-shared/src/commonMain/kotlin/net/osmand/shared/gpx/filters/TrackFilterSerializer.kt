@@ -44,8 +44,18 @@ object TrackFilterSerializer : KSerializer<List<BaseTrackFilter>?> {
 				jsonObject["filterType"]?.jsonPrimitive?.content?.let { TrackFilterType.valueOf(it) }
 					?: throw SerializationException("Missing filterType")
 			when (filterType.filterType) {
-				FilterType.RANGE -> jsonDecoder.json.decodeFromJsonElement<RangeTrackFilter<Comparable<Any>>>(
-					jsonObject)
+				FilterType.RANGE -> {
+					when (filterType.property?.typeClass) {
+						Long::class -> jsonDecoder.json.decodeFromJsonElement<RangeTrackFilter<Long>>(
+			  jsonObject)
+						Double::class -> jsonDecoder.json.decodeFromJsonElement<RangeTrackFilter<Double>>(
+			  jsonObject)
+						Int::class -> jsonDecoder.json.decodeFromJsonElement<RangeTrackFilter<Int>>(
+			  jsonObject)
+						else -> jsonDecoder.json.decodeFromJsonElement<RangeTrackFilter<Comparable<Any>>>(
+			  jsonObject)
+					}
+				}
 
 				FilterType.DATE_RANGE -> jsonDecoder.json.decodeFromJsonElement<DateTrackFilter>(
 					jsonObject)
