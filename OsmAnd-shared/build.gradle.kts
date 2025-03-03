@@ -63,7 +63,6 @@ kotlin {
 			implementation("com.squareup.okio:okio:$okioVersion")
 			implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
 			implementation("co.touchlab:stately-concurrent-collections:$statelyVersion")
-			implementation("io.coil-kt.coil3:coil-core:$coilVersion")
 		}
 		jvmMain.dependencies {
 			//implementation(kotlin("stdlib-jdk8"))
@@ -75,6 +74,7 @@ kotlin {
 			implementation("androidx.sqlite:sqlite:$sqliteVersion")
 			implementation("androidx.sqlite:sqlite-framework:$sqliteVersion")
 			implementation("net.sf.kxml:kxml2:$kxml2Version")
+			implementation("io.coil-kt.coil3:coil-core:$coilVersion")
 			implementation("io.coil-kt.coil3:coil-network-okhttp:$coilVersion")
 		}
 		iosMain.dependencies {
