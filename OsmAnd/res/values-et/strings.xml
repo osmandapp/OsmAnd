@@ -5103,4 +5103,21 @@
     <string name="quick_action_cloud_layer">Nupp, mis võimaldab kaardil lülitada sisse/välja pilvisuse andmekihti.</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Sademete samajooned</string>
     <string name="quick_action_temperature_layer">Nupp, mis võimaldab kaardil lülitada sisse/välja temperatuuri andmekihti.</string>
+    <string name="empty_screen_weather_temperature_layer">Temperatuuri andmekihi kuvamiseks kaardil lülita see valik sisse.</string>
+    <string name="weather_precip_inches">Tolli</string>
+    <string name="weather_precip_milimeters">Millimeetrit</string>
+    <string name="empty_screen_weather_pressure_layer">Õhurõhu andmekihi kuvamiseks kaardil lülita see valik sisse.</string>
+    <string name="weather_wind_mph">mi/t</string>
+    <string name="weather_wind_miles_per_hour">Miili tunnis</string>
+    <string name="rendering_attr_depthContourColorScheme_name">Joonte värvid</string>
+    <string name="turn_on_nautical_depth_description">Meresügavuste andmekihi kuvamiseks kaardil lülita see valik sisse.</string>
+    <string name="rendering_attr_depthContourWidth_name">Joone laius</string>
+    <string name="weather_precip_in">tl</string>
+    <string name="weather_precip_mm">mm</string>
+    <string name="empty_screen_weather_precipitation_layer">Sademete andmekihi kuvamiseks kaardil lülita see valik sisse.</string>
+    <string name="weather_wind_knots">Sõlme</string>
+    <string name="weather_wind_kn">slm</string>
+    <string name="empty_screen_weather_clouds_layer">Pilvisuse andmekihi kuvamiseks kaardil lülita see valik sisse.</string>
+    <string name="empty_screen_weather_wind_layer">Tuulte andmekihi kuvamiseks kaardil lülita see valik sisse.</string>
+    <string name="weather_wind_meters_per_second">Meetrit sekundis</string>
 </resources>
