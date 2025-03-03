@@ -3508,7 +3508,7 @@
     <string name="gpx_monitoring_stop">Pausar grabación de viaje</string>
     <string name="gpx_monitoring_start">Reanudar grabación de viaje</string>
     <string name="follow_track_descr">Elige el archivo de la traza a seguir</string>
-    <string name="follow_track">Seguir traza</string>
+    <string name="follow_track">Navegar traza</string>
     <string name="empty_state_my_tracks_desc">Importa o graba archivos de trazas</string>
     <string name="empty_state_my_tracks">Añadir archivos de traza</string>
     <string name="disable_recording_once_app_killed_descrp">La grabación de la traza se pausará al cerrar la aplicación (mediante aplicaciones recientes). (La indicación de fondo de OsmAnd, desaparecerá de la barra de notificaciones de Android.)</string>
