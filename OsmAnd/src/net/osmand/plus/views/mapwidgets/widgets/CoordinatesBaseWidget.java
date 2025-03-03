@@ -64,8 +64,9 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 		return R.layout.coordinates_widget;
 	}
 
-	public CoordinatesBaseWidget(@NonNull MapActivity mapActivity, WidgetType widgetType) {
-		super(mapActivity, widgetType);
+	public CoordinatesBaseWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
+			@Nullable String customId, @Nullable WidgetsPanel panel) {
+		super(mapActivity, widgetType, customId, panel);
 
 		divider = view.findViewById(R.id.divider);
 		updateViewIds(isLayoutRtl());
@@ -148,9 +149,9 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 			showMgrsCoordinates(lat, lon);
 		} else if (format == PointDescription.OLC_FORMAT) {
 			showOlcCoordinates(lat, lon);
-		} else if(format == PointDescription.SWISS_GRID_FORMAT){
+		} else if (format == PointDescription.SWISS_GRID_FORMAT) {
 			showSwissGrid(lat, lon, false);
-		} else if (format == PointDescription.SWISS_GRID_PLUS_FORMAT){
+		} else if (format == PointDescription.SWISS_GRID_PLUS_FORMAT) {
 			showSwissGrid(lat, lon, true);
 		} else {
 			showStandardCoordinates(lat, lon, format);
@@ -182,7 +183,7 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 		setFirstCoordinateText(olcCoordinates);
 	}
 
-	private void showSwissGrid(double lat, double lon, boolean swissGridPlus){
+	private void showSwissGrid(double lat, double lon, boolean swissGridPlus) {
 		LatLon latLon = new LatLon(lat, lon);
 		double[] swissGrid = swissGridPlus
 				? SwissGridApproximation.convertWGS84ToLV95(latLon)
@@ -249,7 +250,7 @@ public abstract class CoordinatesBaseWidget extends MapWidget {
 	}
 
 	@NonNull
-	protected Drawable getUtmIcon(){
+	protected Drawable getUtmIcon() {
 		int utmIconId = isNightMode()
 				? R.drawable.widget_coordinates_utm_night
 				: R.drawable.widget_coordinates_utm_day;

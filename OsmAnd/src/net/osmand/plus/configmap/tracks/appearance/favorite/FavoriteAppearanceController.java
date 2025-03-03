@@ -22,6 +22,7 @@ import net.osmand.plus.mapcontextmenu.editors.icon.FavoriteEditorIconController;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData.CustomDropDown;
 import net.osmand.shared.routing.ColoringType;
 
 public class FavoriteAppearanceController implements IDialogController, IColorCardControllerListener, CardListener, OnIconsPaletteListener<String> {
@@ -61,6 +62,8 @@ public class FavoriteAppearanceController implements IDialogController, IColorCa
 		}
 		editorIconController.init();
 		editorIconController.setIconsPaletteListener(this);
+		editorIconController.getCardController().setCustomDropDownSelectorPopup(CustomDropDown.TOP_DROPDOWN);
+		editorIconController.getCardController().setLimitHeightSelectorPopup(true);
 
 		shapesCardController = new FavoriteShapesCardController(app, this, selectedBackgroundType != null ? selectedBackgroundType : null);
 	}

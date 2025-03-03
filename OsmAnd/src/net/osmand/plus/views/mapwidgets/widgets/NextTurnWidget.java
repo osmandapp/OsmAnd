@@ -22,7 +22,8 @@ public class NextTurnWidget extends NextTurnBaseWidget {
 
 	private final NextDirectionInfo nextDirectionInfo = new NextDirectionInfo();
 
-	public NextTurnWidget(@NonNull MapActivity mapActivity, @Nullable String customId, boolean horizontalMini, @Nullable WidgetsPanel panel) {
+	public NextTurnWidget(@NonNull MapActivity mapActivity, @Nullable String customId,
+			@Nullable WidgetsPanel panel, boolean horizontalMini) {
 		super(mapActivity, customId, horizontalMini ? SMALL_NEXT_TURN : NEXT_TURN, panel, horizontalMini);
 		setOnClickListener(getOnClickListener());
 	}

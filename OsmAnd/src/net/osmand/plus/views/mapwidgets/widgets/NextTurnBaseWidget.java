@@ -1,5 +1,6 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 import static net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget.MAX_SHIELDS_QUANTITY;
 import static net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget.setShieldImage;
 import static java.lang.Math.min;
@@ -75,9 +76,6 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	private LinearLayout shieldImagesContainer;
 	private LinearLayout bg;
 
-
-	@Nullable
-	protected String customId;
 	private List<RoadShield> cachedRoadShields;
 	private final ResizableWidgetState widgetState;
 	protected TextState textState;
@@ -85,10 +83,10 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 	protected boolean verticalWidget;
 
 	public NextTurnBaseWidget(@NonNull MapActivity mapActivity, @Nullable String customId,
-	                          @NonNull WidgetType widgetType, @Nullable WidgetsPanel panel, boolean horizontalMini) {
-		super(mapActivity, widgetType);
+			@NonNull WidgetType widgetType, @Nullable WidgetsPanel panel,
+			boolean horizontalMini) {
+		super(mapActivity, widgetType, customId, panel);
 		this.horizontalMini = horizontalMini;
-		this.customId = customId;
 		widgetState = new ResizableWidgetState(app, customId, widgetType, WidgetSize.MEDIUM);
 
 		WidgetsPanel selectedPanel = panel != null ? panel : widgetType.getPanel(customId != null ? customId : widgetType.id, settings);
@@ -415,14 +413,19 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			return;
 		}
 
-		boolean shouldHideTopWidgets = mapActivity.getWidgetsVisibilityHelper().shouldHideVerticalWidgets();
+		boolean shouldHide = shouldHide();
 		boolean typeAllowed = widgetType != null && widgetType.isAllowed();
 		boolean hasInfoToDisplay = (turnDrawable.getTurnType() != null || turnType != null || nextTurnDistance != 0);
-		boolean visible = typeAllowed && !shouldHideTopWidgets && hasInfoToDisplay;
+		boolean visible = typeAllowed && !shouldHide && hasInfoToDisplay;
 		updateVisibility(visible);
-		if (typeAllowed && !shouldHideTopWidgets) {
+		if (typeAllowed && !shouldHide) {
 			updateNavigationInfo(drawSettings);
 		}
+	}
+
+	protected boolean shouldHide() {
+		return visibilityHelper.shouldHideVerticalWidgets()
+				|| panel == BOTTOM && visibilityHelper.shouldHideBottomWidgets();
 	}
 
 	void updateNavigationInfo(@Nullable DrawSettings drawSettings) {

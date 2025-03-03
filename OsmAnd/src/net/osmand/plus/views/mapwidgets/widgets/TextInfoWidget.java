@@ -19,6 +19,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportSidePanel;
 
 public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
@@ -45,8 +46,9 @@ public class TextInfoWidget extends MapWidget implements ISupportSidePanel {
 	private Integer cachedAngularUnits;
 
 
-	public TextInfoWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType) {
-		super(mapActivity, widgetType);
+	public TextInfoWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType,
+			@Nullable String customId, @Nullable WidgetsPanel panel) {
+		super(mapActivity, widgetType, customId, panel);
 		container = view.findViewById(R.id.container);
 		emptyBanner = view.findViewById(R.id.empty_banner);
 		imageView = view.findViewById(R.id.widget_icon);
