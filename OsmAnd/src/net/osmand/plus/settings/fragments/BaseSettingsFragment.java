@@ -433,7 +433,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		ViewCompat.setElevation(appBarLayout, 5.0f);
 
 		View toolbarContainer = currentScreenType == null ? null :
-				UiUtilities.getInflater(getActivity(), isNightMode()).inflate(currentScreenType.toolbarResId, appBarLayout);
+				UiUtilities.getInflater(requireActivity(), isNightMode()).inflate(currentScreenType.toolbarResId, appBarLayout);
 
 		TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
 		if (toolbarTitle != null) {
@@ -587,8 +587,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	protected final void applyPreference(Preference pref, boolean applyToAllProfiles, Object newValue) {
-		if (pref instanceof MultiSelectBooleanPreference) {
-			MultiSelectBooleanPreference msp = (MultiSelectBooleanPreference) pref;
+		if (pref instanceof MultiSelectBooleanPreference msp) {
 			Set<String> values = (Set<String>) newValue;
 			String[] ids = msp.getPrefsIds();
 			for (String id : ids) {

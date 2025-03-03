@@ -40,7 +40,6 @@ public class SelectLocationFragment extends ConfigureMapOptionFragment implement
 			@Override
 			public void handleOnBackPressed() {
 				activity.getSupportFragmentManager().popBackStack();
-				//TODO: implement returning to previous screen if needed
 			}
 		});
 	}
@@ -113,7 +112,6 @@ public class SelectLocationFragment extends ConfigureMapOptionFragment implement
 
 	@Override
 	public int getStatusBarColorId() {
-		AndroidUiHelper.setStatusBarContentColor(getView(), !nightMode);
 		return ColorUtilities.getAppBarColorId(nightMode);
 	}
 
@@ -121,6 +119,7 @@ public class SelectLocationFragment extends ConfigureMapOptionFragment implement
 	public void onResume() {
 		super.onResume();
 		controller.onResume();
+		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
 	}
 
 	@Override
