@@ -574,6 +574,7 @@ public class BackupHelper {
 		String error;
 		String type = remoteFile.getType();
 		String fileName = remoteFile.getName();
+		StringBuilder builder = new StringBuilder(DOWNLOAD_FILE_URL);
 		try {
 			Map<String, String> params = new HashMap<>();
 			params.put("deviceid", getDeviceId());
@@ -582,7 +583,6 @@ public class BackupHelper {
 			params.put("type", type);
 			params.put("updatetime", String.valueOf(remoteFile.getUpdatetimems()));
 
-			StringBuilder builder = new StringBuilder(DOWNLOAD_FILE_URL);
 			boolean firstParam = true;
 			for (Entry<String, String> entry : params.entrySet()) {
 				builder.append(firstParam ? "?" : "&").append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
