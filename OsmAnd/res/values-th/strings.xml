@@ -482,7 +482,7 @@
     <string name="light_theme">ธีมสว่าง</string>
     <string name="lang_tl">ภาษาตากาล็อค</string>
     <string name="lang_la">ภาษาละติน</string>
-    <string name="route_roundabout_short">ออกวงเวียนทางออกที่ %1$d แล้วไปยัง</string>
+    <string name="route_roundabout_short">ออกวงเวียนทางออกที่ %1$d แล้วไปต่อ</string>
     <string name="shared_string_recorded">บันทึกแล้ว</string>
     <string name="shared_string_memory_used_mb_desc">ใช้ไป %1$s เมกะไบต์</string>
     <string name="shared_string_visible">มองเห็นได้</string>
@@ -784,4 +784,15 @@
     <string name="export_to_file">ส่งออกเป็นไฟล์</string>
     <string name="import_from_file">นำเข้าจากไฟล์</string>
     <string name="help_article_personal_import_export_name">นำเข้า / ส่งออก</string>
+    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="travel_route_types">ประเภทเส้นทาง</string>
+    <string name="poi_routes">เส้นทาง</string>
+    <string name="route_kl">ชิดซ้ายและไปต่อ</string>
+    <string name="weather_wind_kilimeters_per_hour">กิโลเมตรต่อชั่วโมง</string>
+    <string name="route_tshl">เลี้ยวซ้ายหักศอกและไปต่อ</string>
+    <string name="route_tl">เลี้ยวซ้ายและไปต่อ</string>
+    <string name="route_tsll">เบี่ยงซ้ายและไปต่อ</string>
+    <string name="map_widget_route_information">ข้อมูลเส้นทาง</string>
+    <string name="route_kr">ชิดขวาและไปต่อ</string>
+    <string name="turn_on_public_transport_description">เปิดเพื่อดูเส้นทางขนส่งสาธารณะบนแผนที่</string>
 </resources>
