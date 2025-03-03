@@ -2,6 +2,7 @@ package net.osmand.data;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.osm.edit.*;
+import net.osmand.osm.io.OsmBaseStorage;
 import net.osmand.util.JarvisAlgorithm;
 import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
@@ -124,19 +125,19 @@ public class MultipolygonBuilder {
 			do {
 				newWay = merge(multilineStartPoint, getLastId(changedWay), changedWay, 
 						multilineEndPoint, getFirstId(changedWay));
-				if(newWay == null) {
-					newWay = merge(multilineEndPoint, getFirstId(changedWay), changedWay, 
-							multilineStartPoint, getLastId(changedWay));
+				if (newWay == null) {
+					newWay = merge(multilineEndPoint, getFirstId(changedWay), changedWay, multilineStartPoint,
+							getLastId(changedWay));
 				}
-				if(newWay == null) {
-					newWay = merge(multilineStartPoint, getFirstId(changedWay), changedWay, 
-							multilineEndPoint, getLastId(changedWay));
+				if (newWay == null) {
+					newWay = merge(multilineStartPoint, getFirstId(changedWay), changedWay, multilineEndPoint,
+							getLastId(changedWay));
 				}
-				if(newWay == null) {
-					newWay = merge(multilineEndPoint, getLastId(changedWay), changedWay, 
-							multilineStartPoint, getFirstId(changedWay));
+				if (newWay == null) {
+					newWay = merge(multilineEndPoint, getLastId(changedWay), changedWay, multilineStartPoint,
+							getFirstId(changedWay));
 				}
-				if(newWay != null) {
+				if (newWay != null) {
 					changedWay = newWay;
 				}
 			} while (newWay != null);
@@ -147,8 +148,11 @@ public class MultipolygonBuilder {
 		}
 		
 		List<Way> multiLines = new ArrayList<Way>();
-		for(List<Way> lst : multilineStartPoint.valueCollection()) {
-			multiLines.addAll(lst);
+		for (List<Way> lst : multilineStartPoint.valueCollection()) {
+			if(lst.size() > 0) {
+				multiLines.addAll(lst);
+				
+			}
 		}
 		ArrayList<Ring> result = new ArrayList<Ring>();
 		for (Way multiLine : multiLines) {
@@ -253,6 +257,7 @@ public class MultipolygonBuilder {
 		}
 		if (combine) {
 			Way newWay = new Way(nextRandId());
+//			Way newWay = new Way(-Math.abs(w1.getId()));
 			boolean nodePresent = w1.getNodes() != null || w1.getNodes().size() != 0;
 			int w1size = nodePresent ? w1.getNodes().size() : w1.getNodeIds().size();
 			for (int i = 0; i < w1size; i++) {

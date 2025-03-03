@@ -70,6 +70,13 @@ android {
 			osmandTask.dependsOn(copyMapPOIIcons)
 			osmandTask.dependsOn(copyLargePOIIcons)
 		}
+		def generateResources= "generate${taskName}Resources"
+		tasks.named(generateResources).configure { osmandTask ->
+			println(osmandTask.getName() + " generate resources")
+			osmandTask.dependsOn(copyMapShaderIcons)
+			osmandTask.dependsOn(copyMapPOIIcons)
+			osmandTask.dependsOn(copyLargePOIIcons)
+		}
 	}
 }
 

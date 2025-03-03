@@ -123,4 +123,24 @@
     <string name="external_device_details_distance">Astar</string>
     <string name="external_device_details_connect">Ceangal</string>
     <string name="external_device_details_disconnect">Geàrr ceangal</string>
+    <string name="app_mode_climbing">A\' sreap</string>
+    <string name="shared_string_pounds">Puinnd</string>
+    <string name="metric_lbs">lbs</string>
+    <string name="shared_string_nearest">Nas fhaisge</string>
+    <string name="shared_string_inches">òirlich</string>
+    <string name="shared_string_kilograms">cileagram</string>
+    <string name="shared_string_yards">slat</string>
+    <string name="shared_string_on_map">Air a\' mhapa</string>
+    <string name="y_axis">Y-axis</string>
+    <string name="x_axis">X-axis</string>
+    <string name="cloud_sync_progress">Co-thímich… %1$s</string>
+    <string name="shared_string_cloud">Sgòth</string>
+    <string name="new_file">Faidhle ùr</string>
+    <string name="sync_now">Co-thìmich an-dràsta</string>
+    <string name="cloud_conflict">Còmhstri</string>
+    <string name="cloud_conflicts">Còmhstrithean</string>
+    <string name="upload_all">Luchdaich suas uile</string>
+    <string name="import_export">Steach-ghluais/mach-ghluais</string>
+    <string name="shared_string_open">Fosgail</string>
+    <string name="open_weather_action">Fosgail aimsir</string>
 </resources>
