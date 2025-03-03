@@ -96,8 +96,7 @@ public class FavoriteShapesCardController extends BaseMultiStateCardController {
 		} else {
 			BackgroundType type = (BackgroundType) selectedState.getTag();
 			if (type != null) {
-				MapActivity mapActivity = (MapActivity) activity;
-				shapesCard = new ShapesCard(mapActivity, type, centralController.requireColor()){
+				shapesCard = new ShapesCard(activity, type, centralController.requireColor()){
 
 					@Override
 					protected Drawable getOutlineDrawable(@DrawableRes int shapeIconId) {
