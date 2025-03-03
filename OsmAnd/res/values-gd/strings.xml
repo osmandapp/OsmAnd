@@ -169,4 +169,17 @@
     <string name="weather_wind_mph">msu</string>
     <string name="weather_wind_kmh">km/u</string>
     <string name="map_settings_weather_temp">Teòthachd</string>
+    <string name="weather_wind_ms">m/d</string>
+    <string name="weather_wind_knots">Mìltean-mara san uair</string>
+    <string name="weather_wind_miles_per_hour">Mìltean san uair</string>
+    <string name="weather_wind_kilimeters_per_hour">Cilemeatairan san uair</string>
+    <string name="weather_wind_meters_per_second">Meatairan/diog</string>
+    <string name="weather_pressure_hpa">hPa</string>
+    <string name="weather_pressure_inhg">inHg</string>
+    <string name="weather_pressure_mmhg">mmHg</string>
+    <string name="weather_temperature_celsius">Celsius</string>
+    <string name="weather_temperature_fahrenheit">Fahrenheit</string>
+    <string name="restart_now">Ath-thòisich an-dràsta</string>
+    <string name="map_rendering_engine_v1">Dreach 1</string>
+    <string name="map_rendering_engine_v2">Dreach 2 (OpenGL)</string>
 </resources>
