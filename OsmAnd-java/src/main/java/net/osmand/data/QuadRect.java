@@ -117,20 +117,4 @@ public class QuadRect {
 	public String toString() {
 		return "[" + (float) left + "," + (float) top + " - " + (float) right + "," + (float) bottom + "]";
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null || getClass() != obj.getClass()) {
-			return false;
-		}
-		QuadRect quadRect = (QuadRect) obj;
-		return Double.compare(quadRect.left, left) == 0 &&
-				Double.compare(quadRect.right, right) == 0 &&
-				Double.compare(quadRect.top, top) == 0 &&
-				Double.compare(quadRect.bottom, bottom) == 0;
-	}
-
 }

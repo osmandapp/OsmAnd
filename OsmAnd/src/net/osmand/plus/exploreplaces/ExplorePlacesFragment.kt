@@ -17,6 +17,7 @@ import net.osmand.Location
 import net.osmand.PlatformUtil
 import net.osmand.data.ExploreTopPlacePoint
 import net.osmand.data.QuadRect
+import net.osmand.data.RotatedTileBox
 import net.osmand.map.IMapLocationListener
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener
@@ -194,13 +195,17 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	private fun updatePointsList() {
 		mapActivity?.let {
 			val now = System.currentTimeMillis()
-			val rect = it.mapView.currentRotatedTileBox.latLonBounds
-			if (visiblePlacesRect != rect && now - lastPointListRectUpdate > 1000) {
+			val tileBox = it.mapView.currentRotatedTileBox
+			val rect = tileBox.latLonBounds
+			val extended: RotatedTileBox = tileBox.copy()
+			extended.increasePixelDimensions(tileBox.pixWidth / 4, tileBox.pixHeight / 4)
+			val extendedRect = extended.latLonBounds
+			if (!extendedRect.contains(visiblePlacesRect) && now - lastPointListRectUpdate > 1000) {
 				lastPointListRectUpdate = now
 				visiblePlacesRect = rect
 				val nearbyData = app.explorePlacesProvider.getDataCollection(visiblePlacesRect)
 				verticalNearbyAdapter.items = nearbyData
-				app.run {
+				app.runInUIThread {
 					verticalNearbyAdapter.notifyDataSetChanged()
 					updateShowListButton(bottomSheetBehavior.state)
 				}

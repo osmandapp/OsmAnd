@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.ExploreTopPlacePoint;
 import net.osmand.data.QuadRect;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -32,6 +33,8 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 
 	private boolean selectionMode;
 	private NearbyPlacesCard nearbyPlacesCard;
+	private QuadRect visiblePlacesRect = new QuadRect();
+	private long lastPointListRectUpdate = 0;
 
 	public void onNearbyItemClicked(@NonNull ExploreTopPlacePoint point) {
 		MapActivity mapActivity = getMapActivity();
@@ -144,15 +147,16 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 		updatePointsList();
 	}
 
-	private QuadRect visiblePlacesRect = null;
-	private long lastPointListRectUpdate = 0;
-
 	private void updatePointsList() {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null){
+		if (mapActivity != null) {
 			long now = System.currentTimeMillis();
-			QuadRect rect = mapActivity.getMapView().getCurrentRotatedTileBox().getLatLonBounds();
-			if (visiblePlacesRect != rect && now - lastPointListRectUpdate > 1000) {
+			RotatedTileBox tileBox = mapActivity.getMapView().getCurrentRotatedTileBox();
+			QuadRect rect = tileBox.getLatLonBounds();
+			RotatedTileBox extended = tileBox.copy();
+			extended.increasePixelDimensions(tileBox.getPixWidth() / 4, tileBox.getPixHeight() / 4);
+			QuadRect extendedRect = extended.getLatLonBounds();
+			if (!extendedRect.contains(visiblePlacesRect) && now - lastPointListRectUpdate > 1000) {
 				lastPointListRectUpdate = now;
 				visiblePlacesRect = rect;
 				nearbyPlacesCard.update();
