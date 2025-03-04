@@ -104,11 +104,13 @@ public class WidgetsAvailabilityHelper {
 		regWidgetAvailability(SMALL_NEXT_TURN, exceptDefault);
 		regWidgetAvailability(SECOND_NEXT_TURN, exceptDefault);
 
-		// right
-		regWidgetVisibility(INTERMEDIATE_DESTINATION, all);
-		regWidgetVisibility(DISTANCE_TO_DESTINATION, all);
-		regWidgetVisibility(TIME_TO_INTERMEDIATE, all);
-		regWidgetVisibility(TIME_TO_DESTINATION, all);
+		if (!enableRouteInfo) {
+			regWidgetVisibility(INTERMEDIATE_DESTINATION, all);
+			regWidgetVisibility(DISTANCE_TO_DESTINATION, all);
+			regWidgetVisibility(TIME_TO_INTERMEDIATE, all);
+			regWidgetVisibility(TIME_TO_DESTINATION, all);
+		}
+
 		regWidgetVisibility(CURRENT_SPEED, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT, HORSE, TRAIN);
 		regWidgetVisibility(MAX_SPEED, none);
 		regWidgetVisibility(ALTITUDE_MAP_CENTER, PEDESTRIAN, BICYCLE);
