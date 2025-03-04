@@ -182,4 +182,6 @@
     <string name="restart_now">Ath-thòisich an-dràsta</string>
     <string name="map_rendering_engine_v1">Dreach 1</string>
     <string name="map_rendering_engine_v2">Dreach 2 (OpenGL)</string>
+    <string name="coordinates_widget_map_center">Co-chomharran: meadhan a\' mhapa</string>
+    <string name="coordinates_widget_current_location">Co-chomharran: àite làithreach</string>
 </resources>
