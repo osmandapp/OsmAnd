@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.ExploreTopPlacePoint;
+import net.osmand.data.QuadRect;
+import net.osmand.map.IMapLocationListener;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
@@ -19,10 +21,12 @@ import net.osmand.plus.search.listitems.NearbyPlacesCard;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.fragments.HistoryItemsFragment;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.OsmandMapTileView;
 
 import java.util.List;
 
-public class QuickSearchHistoryListFragment extends QuickSearchListFragment implements NearbyPlacesAdapter.NearbyItemClickListener {
+public class QuickSearchHistoryListFragment extends QuickSearchListFragment implements NearbyPlacesAdapter.NearbyItemClickListener, IMapLocationListener,
+		OsmandMapTileView.ManualZoomListener {
 
 	public static final int TITLE = R.string.shared_string_explore;
 
@@ -118,11 +122,41 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	public void onResume() {
 		super.onResume();
 		nearbyPlacesCard.onResume();
+		app.getOsmandMap().getMapView().addMapLocationListener(this);
+		app.getOsmandMap().getMapView().addManualZoomChangeListener(this);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		nearbyPlacesCard.onPause();
+		app.getOsmandMap().getMapView().removeMapLocationListener(this);
+		app.getOsmandMap().getMapView().removeManualZoomListener(this);
+	}
+
+	@Override
+	public void locationChanged(double v, double v1, Object o) {
+		updatePointsList();
+	}
+
+	@Override
+	public void onManualZoomChange() {
+		updatePointsList();
+	}
+
+	private QuadRect visiblePlacesRect = null;
+	private long lastPointListRectUpdate = 0;
+
+	private void updatePointsList() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null){
+			long now = System.currentTimeMillis();
+			QuadRect rect = mapActivity.getMapView().getCurrentRotatedTileBox().getLatLonBounds();
+			if (visiblePlacesRect != rect && now - lastPointListRectUpdate > 1000) {
+				lastPointListRectUpdate = now;
+				visiblePlacesRect = rect;
+				nearbyPlacesCard.update();
+			}
+		}
 	}
 }

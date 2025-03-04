@@ -17,6 +17,7 @@ import net.osmand.Location
 import net.osmand.PlatformUtil
 import net.osmand.data.ExploreTopPlacePoint
 import net.osmand.data.QuadRect
+import net.osmand.map.IMapLocationListener
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener
 import net.osmand.plus.OsmandApplication
@@ -27,6 +28,7 @@ import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.search.NearbyPlacesAdapter
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
+import net.osmand.plus.views.OsmandMapTileView
 import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton
@@ -35,7 +37,8 @@ import net.osmand.plus.widgets.TextViewEx
 import org.apache.commons.logging.Log
 
 class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyItemClickListener,
-	OsmAndLocationListener, OsmAndCompassListener {
+	OsmAndLocationListener, OsmAndCompassListener, IMapLocationListener,
+	OsmandMapTileView.ManualZoomListener {
 
 	private val COMPASS_UPDATE_PERIOD = 300
 	private lateinit var visiblePlacesRect: QuadRect
@@ -178,7 +181,11 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		super.onResume()
 		app.locationProvider.addLocationListener(this)
 		app.locationProvider.addCompassListener(this)
-		mapActivity?.let { activity -> updateWidgetsVisibility(activity, View.GONE) }
+		app.osmandMap.mapView.addMapLocationListener(this)
+		app.osmandMap.mapView.addManualZoomChangeListener(this)
+		mapActivity?.let { activity ->
+			updateWidgetsVisibility(activity, View.GONE)
+		}
 	}
 
 	private fun updatePointsList() {
@@ -203,13 +210,14 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		val app = requireActivity().application as OsmandApplication
 		app.locationProvider.removeLocationListener(this)
 		app.locationProvider.removeCompassListener(this)
+		app.osmandMap.mapView.removeMapLocationListener(this)
+		app.osmandMap.mapView.removeManualZoomListener(this)
 		mapActivity?.let { activity -> updateWidgetsVisibility(activity, View.VISIBLE) }
 	}
 
 	override fun updateLocation(location: Location?) {
 		this.location = location
 		verticalNearbyAdapter.updateLocation(location)
-		updatePointsList()
 	}
 
 	override fun updateCompassValue(value: Float) {
@@ -309,5 +317,13 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		AndroidUiHelper.setVisibility(
 			activity, visibility, R.id.map_left_widgets_panel,
 			R.id.map_right_widgets_panel, R.id.map_center_info)
+	}
+
+	override fun locationChanged(p0: Double, p1: Double, p2: Any?) {
+		updatePointsList()
+	}
+
+	override fun onManualZoomChange() {
+		updatePointsList()
 	}
 }
