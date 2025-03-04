@@ -17,6 +17,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
 import net.osmand.plus.configmap.ConfigureMapOptionFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
@@ -113,7 +114,8 @@ public class SelectLocationFragment extends ConfigureMapOptionFragment implement
 
 	@Override
 	public int getStatusBarColorId() {
-		return ColorUtilities.getAppBarColorId(nightMode);
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(requireMapActivity());
+		return portrait ? ColorUtilities.getAppBarColorId(nightMode) : R.color.status_bar_transparent_light;
 	}
 
 	@Override
