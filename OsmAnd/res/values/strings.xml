@@ -80,7 +80,8 @@
         • Ability to select widget size for left and right panels
         • Added ability to change and set the default appearance for favorite groups
         • Android Auto: view ETA and distance to next waypoint; city names now appear in search results
-        • Geographical Grid Overlay: With customizable appearance and formats.
+        • Geographical grid overlay: with customizable appearance and formats.
+        • Prominent peaks are now discoverable via map and search
         • Mountain peak heights in feet
         • Added Hebrew TTS for navigation
         • AIS Vessel Tracking Plugin: for nautical navigation
