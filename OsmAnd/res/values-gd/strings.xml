@@ -184,4 +184,7 @@
     <string name="map_rendering_engine_v2">Dreach 2 (OpenGL)</string>
     <string name="coordinates_widget_map_center">Co-chomharran: meadhan a\' mhapa</string>
     <string name="coordinates_widget_current_location">Co-chomharran: àite làithreach</string>
+    <string name="shared_string_large">Mòr</string>
+    <string name="shared_string_normal">Àbhaisteach</string>
+    <string name="download_tiles">Luchdaich a-nuas leacan</string>
 </resources>
