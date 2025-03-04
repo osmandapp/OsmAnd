@@ -194,4 +194,15 @@
     <string name="compass_always_visible">An-còmhnaidh faicsinneach</string>
     <string name="download_complete">Luchdachadh a-nuas dèanta</string>
     <string name="marker_1st">A\' chiad comharraiche</string>
+    <string name="routing_attr_motor_type_electric_name">Dealain</string>
+    <string name="updated_map_time">Ùraichte: %1$s.</string>
+    <string name="next_live_update_date_and_time">An ath ùrachadh %1$s aig %2$s.</string>
+    <string name="next_live_update_time">An ath ùrachadh aig %1$s.</string>
+    <string name="co2_mission">Eimiseanan CO2</string>
+    <string name="kg">cg</string>
+    <string name="routing_attr_motor_type_diesel_name">Dìosal</string>
+    <string name="routing_attr_motor_type_petrol_name">Peatral</string>
+    <string name="routing_attr_motor_type_lpg_name">LPG</string>
+    <string name="routing_attr_motor_type_gas_name">CNG</string>
+    <string name="routing_attr_motor_type_hybrid_name">Haibrid</string>
 </resources>
