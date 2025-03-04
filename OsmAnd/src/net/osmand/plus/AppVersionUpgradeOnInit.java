@@ -19,6 +19,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.*;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState.DEFAULT_BUTTON_ID;
+import static net.osmand.plus.views.mapwidgets.widgetstates.ResizableWidgetState.SIMPLE_WIDGET_SIZE_ID;
 import static net.osmand.router.GeneralRouter.VEHICLE_HEIGHT;
 import static net.osmand.router.GeneralRouter.VEHICLE_LENGTH;
 import static net.osmand.router.GeneralRouter.VEHICLE_WEIGHT;
@@ -58,6 +59,7 @@ import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.preferences.*;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.LocalSortMode;
+import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -140,8 +142,9 @@ public class AppVersionUpgradeOnInit {
 	// 4803 - 4.8-03 (Merge asset files versions)
 	public static final int VERSION_4_8_03 = 4803;
 	public static final int VERSION_5_0_00 = 5000;
+	public static final int VERSION_5_0_01 = 5001;
 
-	public static final int LAST_APP_VERSION = VERSION_5_0_00;
+	public static final int LAST_APP_VERSION = VERSION_5_0_01;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -276,6 +279,9 @@ public class AppVersionUpgradeOnInit {
 					app.getAppInitializer().addOnFinishListener(
 							init -> MergeAssetFilesVersionAlgorithm.execute(app)
 					);
+				}
+				if (prevAppVersion < VERSION_5_0_01) {
+					migrateSideWidgetsSizePrefToSmall(settings);
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -949,6 +955,39 @@ public class AppVersionUpgradeOnInit {
 					if (oldDefaultTransparencyPref.isSetForMode(mode)) {
 						terrainMode.setTransparency(oldTransparencyZoom);
 					}
+				}
+			}
+		}
+	}
+
+	private void migrateSideWidgetsSizePrefToSmall(@NonNull OsmandSettings settings) {
+
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			List<String> leftPages = settings.LEFT_WIDGET_PANEL_ORDER.getStringsListForProfile(mode);
+			migrateSidePanelSizes(settings, mode, leftPages);
+
+			List<String> rightPages = settings.RIGHT_WIDGET_PANEL_ORDER.getStringsListForProfile(mode);
+			migrateSidePanelSizes(settings, mode, rightPages);
+		}
+	}
+
+	private void migrateSidePanelSizes(@NonNull OsmandSettings settings, @NonNull ApplicationMode mode, @Nullable List<String> pages) {
+		if (pages == null) {
+			return;
+		}
+		for (String page : pages) {
+			String[] widgetIds = page.split(WIDGET_SEPARATOR);
+			for (String widgetId : widgetIds) {
+				String sizePrefId;
+				if (WidgetType.isOriginalWidget(widgetId)) {
+					sizePrefId = SIMPLE_WIDGET_SIZE_ID + widgetId;
+				} else {
+					sizePrefId = SIMPLE_WIDGET_SIZE_ID + WidgetType.getDefaultWidgetId(widgetId) + widgetId;
+				}
+				if (settings.isSet(mode, sizePrefId)) {
+					CommonPreference<WidgetSize> pref = settings.registerEnumStringPreference(sizePrefId, WidgetSize.SMALL, WidgetSize.values(), WidgetSize.class)
+							.makeProfile();
+					pref.resetModeToDefault(mode);
 				}
 			}
 		}

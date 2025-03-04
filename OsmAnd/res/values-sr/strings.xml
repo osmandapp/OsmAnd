@@ -955,7 +955,7 @@
     <string name="trip_rec_notification_settings_desc">Приказуј обавештење које омогућава покретање снимања путовања.</string>
     <string name="shared_string_notifications">Обавештења</string>
     <string name="shared_string_continue">Настави</string>
-    <string name="shared_string_pause">Паузирај</string>
+    <string name="shared_string_pause">Пауза</string>
     <string name="shared_string_trip">Путовање</string>
     <string name="shared_string_recorded">Снимљено</string>
     <string name="shared_string_record">Снимај</string>
@@ -5520,14 +5520,14 @@
     <string name="new_segment_started_m">Почело је снимање новог дела путање.</string>
     <string name="new_trip_segment">Нови део путовања</string>
     <string name="quick_action_start_pause_recording">Дугме за покретање, застанак или наставак снимања стазе ГПКС-а.</string>
-    <string name="quick_action_verb_start_pause">Покрени / застани</string>
+    <string name="quick_action_verb_start_pause">Покрени / Паузирај</string>
     <string name="help_article_personal_color_palette_schemes_name">Шеме боја</string>
     <string name="track_does_not_contain_data_to_save">Траг не садржи податке за чување.</string>
     <string name="quick_action_finish_trip_recording_summary">Дугме за чување стазе ГПКС-а и завршетак снимања путовања.</string>
     <string name="start_trip_recording_first_m">Прво започните снимање путовања.</string>
     <string name="quick_action_new_trip_segment">Дугме за покретање новог дела у текућем снимању стазе ГПКС-а.</string>
     <string name="quick_action_save_recorded_trip_and_continue_summary">Дугме за чување тренутно снимљеног путовања као датотеке ГПКС-а и наставак непрекидног снимања новог трага.</string>
-    <string name="quick_action_save_recorded_trip_and_continue">Снимљено путовање и наставите</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Сними путовање и настави</string>
     <string name="movies_list">Списак филмова</string>
     <string name="third_links">Остале везе</string>
     <string name="lock_screen">Закључај екран</string>

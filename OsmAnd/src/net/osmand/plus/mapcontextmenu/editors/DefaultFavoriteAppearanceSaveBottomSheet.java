@@ -102,11 +102,9 @@ public class DefaultFavoriteAppearanceSaveBottomSheet extends SaveGroupConfirmat
 		return getResources().getDimensionPixelSize(R.dimen.horizontal_divider_height);
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target,
-	                                @NonNull String editorTag, int pointsSize) {
+	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target, int pointsSize) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			Bundle bundle = new Bundle();
-			bundle.putString(EDITOR_TAG_KEY, editorTag);
 			bundle.putInt(POINTS_SIZE_KEY, pointsSize);
 
 			DefaultFavoriteAppearanceSaveBottomSheet fragment = new DefaultFavoriteAppearanceSaveBottomSheet();

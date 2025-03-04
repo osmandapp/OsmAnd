@@ -10,8 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.view.menu.MenuBuilder;
-import androidx.appcompat.view.menu.MenuPopupHelper;
 import androidx.appcompat.widget.ListPopupWindow;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.view.MenuCompat;
@@ -73,15 +73,15 @@ public class PopUpMenu {
 		listPopupWindow.setContentWidth(totalWidth);
 		listPopupWindow.setModal(true);
 		listPopupWindow.setAdapter(adapter);
-		if (displayData.customDropDown) {
-			if (shouldShowAsDropDown(ctx)) {
-				listPopupWindow.setDropDownGravity(Gravity.START | Gravity.TOP);
-				listPopupWindow.setVerticalOffset(-anchorView.getHeight() + contentPaddingHalf);
-			} else {
-				listPopupWindow.setDropDownGravity(Gravity.START | Gravity.BOTTOM);
-				listPopupWindow.setVerticalOffset(anchorView.getHeight() - contentPaddingHalf);
+
+		setDropDown(listPopupWindow, anchorView, ctx);
+		if (displayData.limitHeight) {
+			Integer maxHeight = calculatePopupMaxHeight(anchorView, ctx);
+			if (maxHeight != null) {
+				listPopupWindow.setHeight(maxHeight);
 			}
 		}
+
 		if (displayData.bgColor != 0) {
 			listPopupWindow.setBackgroundDrawable(new ColorDrawable(displayData.bgColor));
 		}
@@ -92,6 +92,47 @@ public class PopUpMenu {
 			listPopupWindow.dismiss();
 		});
 		return listPopupWindow;
+	}
+
+	private void setDropDown(@NonNull ListPopupWindow listPopupWindow, @NonNull View anchorView, @NonNull Context ctx){
+		int contentPaddingHalf = getDimension(ctx, R.dimen.content_padding_half);
+
+		switch (displayData.customDropDown) {
+			case AUTO_DROP_DOWN -> {
+				if (shouldShowAsDropDown(ctx)) {
+					listPopupWindow.setDropDownGravity(Gravity.START | Gravity.TOP);
+					listPopupWindow.setVerticalOffset(-anchorView.getHeight() + contentPaddingHalf);
+				} else {
+					listPopupWindow.setDropDownGravity(Gravity.START | Gravity.BOTTOM);
+					listPopupWindow.setVerticalOffset(anchorView.getHeight() - contentPaddingHalf);
+				}
+			}
+			case TOP_DROPDOWN -> {
+				listPopupWindow.setDropDownGravity(Gravity.START | Gravity.TOP);
+				listPopupWindow.setVerticalOffset(-anchorView.getHeight() + contentPaddingHalf);
+			}
+			case BOTTOM_DROPDOWN -> {
+				listPopupWindow.setDropDownGravity(Gravity.START | Gravity.BOTTOM);
+				listPopupWindow.setVerticalOffset(anchorView.getHeight() - contentPaddingHalf);
+			}
+		}
+	}
+
+	@Nullable
+	private Integer calculatePopupMaxHeight(View anchorView, Context context) {
+		int totalHeightNeeded = calculateApproxPopupWindowHeight(context);
+		int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
+		int[] location = new int[2];
+		anchorView.getLocationOnScreen(location);
+		int availableSpaceBelow = screenHeight - location[1] - anchorView.getHeight();
+
+
+		if (totalHeightNeeded <= availableSpaceBelow) {
+			return null;
+		}
+
+		int contentPaddingHalf = context.getResources().getDimensionPixelSize(R.dimen.content_padding_half);
+		return availableSpaceBelow - contentPaddingHalf;
 	}
 
 	private boolean shouldShowAsDropDown(@NonNull Context ctx) {

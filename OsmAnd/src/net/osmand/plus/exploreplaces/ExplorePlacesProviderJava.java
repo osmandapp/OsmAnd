@@ -24,8 +24,10 @@ import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 // TODO use gzip in loading +
@@ -42,18 +44,18 @@ import java.util.Set;
 // Extra: display new categories from web
 public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 
-	private static final int DEFAULT_LIMIT_POINTS = 200;
+	public static final int DEFAULT_LIMIT_POINTS = 200;
 	private static final int NEARBY_MIN_RADIUS = 50;
 
 
 	private static final int MAX_TILES_PER_QUAD_RECT = 12;
 	private static final double LOAD_ALL_TINY_RECT = 0.5;
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 	private volatile int startedTasks = 0;
 	private volatile int finishedTasks = 0;
 
-	private final Set<String> loadingTiles = new HashSet<>(); // Track tiles being loaded
+	private final Map<String, QuadRect> loadingTiles = new HashMap<>(); // Track tiles being loaded
 
 	public ExplorePlacesProviderJava(OsmandApplication app) {
 		this.app = app;
@@ -99,11 +101,13 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 		return preferredLang;
 	}
 
+	@NonNull
 	public List<ExploreTopPlacePoint> getDataCollection(QuadRect rect) {
 		return getDataCollection(rect, DEFAULT_LIMIT_POINTS);
 	}
 
-	public List<ExploreTopPlacePoint> getDataCollection(QuadRect rect, int limit) {
+	@NonNull
+    public List<ExploreTopPlacePoint> getDataCollection(QuadRect rect, int limit) {
 		if (rect == null) {
 			return Collections.emptyList();
 		}
@@ -169,17 +173,22 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 
 	@SuppressLint("DefaultLocale")
 	private void loadTile(int zoom, int tileX, int tileY, String queryLang, PlacesDatabaseHelper dbHelper) {
+		double left;
+		double right;
+		double top;
+		double bottom;
+
 		synchronized (loadingTiles) {
 			String tileKey = zoom + "_" + tileX + "_" + tileY;
-			if (loadingTiles.contains(tileKey)) {
+			if (loadingTiles.containsKey(tileKey)) {
 				return;
 			}
-			loadingTiles.add(tileKey);
+			left = MapUtils.getLongitudeFromTile(zoom, tileX);
+			right = MapUtils.getLongitudeFromTile(zoom, tileX + 1);
+			top = MapUtils.getLatitudeFromTile(zoom, tileY);
+			bottom = MapUtils.getLatitudeFromTile(zoom, tileY + 1);
+			loadingTiles.put(tileKey, new QuadRect(left, top, right, bottom));
 		}
-		double left = MapUtils.getLongitudeFromTile(zoom, tileX);
-		double right = MapUtils.getLongitudeFromTile(zoom, tileX + 1);
-		double top = MapUtils.getLatitudeFromTile(zoom, tileY);
-		double bottom = MapUtils.getLatitudeFromTile(zoom, tileY + 1);
 
 		KQuadRect tileRect = new KQuadRect(left, top, right, bottom);
 		// Increment the task counter
@@ -203,11 +212,9 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 					finishedTasks++; // Increment the finished task counter
 					notifyListeners(startedTasks != finishedTasks);
 				}
-				if (result != null) {
-					// Store the data in the database for the current tile
-					dbHelper.insertPlaces(zoom, ftileX, ftileY, queryLang, result);
-				}
-				// Remove the tile from the loading set
+                // Store the data in the database for the current tile
+                dbHelper.insertPlaces(zoom, ftileX, ftileY, queryLang, result);
+                // Remove the tile from the loading set
 				String tileKey = zoom + "_" + ftileX + "_" + ftileY;
 				synchronized (loadingTiles) {
 					loadingTiles.remove(tileKey);
@@ -216,7 +223,7 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 		}).execute();
 	}
 
-	public void showPointInContextMenu(MapActivity mapActivity, ExploreTopPlacePoint point) {
+	public void showPointInContextMenu(@NonNull MapActivity mapActivity, @NonNull ExploreTopPlacePoint point) {
 		double latitude = point.getLatitude();
 		double longitude = point.getLongitude();
 		app.getSettings().setMapLocationToShow(
@@ -265,5 +272,16 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 	public int getDataVersion() {
 		// data version is increased once new data is downloaded
 		return finishedTasks;
+	}
+
+	public boolean isLoadingRect(@NonNull QuadRect rect) {
+		synchronized (loadingTiles) {
+			for (QuadRect loadingRect : loadingTiles.values()) {
+				if (loadingRect.contains(rect)) {
+					return true;
+				}
+			}
+			return false;
+		}
 	}
 }

@@ -1,7 +1,6 @@
 package net.osmand.plus.avoidroads;
 
 import android.text.TextUtils;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -132,7 +131,7 @@ public class AvoidRoadsHelper {
 	}
 
 	public void addImpassableRoad(@Nullable MapActivity mapActivity, @NonNull LatLon loc,
-	                              boolean showDialog, boolean skipWritingSettings, @Nullable String appModeKey) {
+			boolean showDialog, boolean skipWritingSettings, @Nullable String appModeKey) {
 		Location ll = new Location("");
 		ll.setLatitude(loc.getLatitude());
 		ll.setLongitude(loc.getLongitude());
@@ -240,7 +239,8 @@ public class AvoidRoadsHelper {
 		});
 	}
 
-	private void addImpassableRoadInternal(@NonNull AvoidRoadInfo roadInfo, boolean showDialog, @Nullable MapActivity activity) {
+	private void addImpassableRoadInternal(@NonNull AvoidRoadInfo roadInfo, boolean showDialog,
+			@Nullable MapActivity activity) {
 		boolean roadAdded = false;
 		for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
 			if (!builder.getImpassableRoadLocations().contains(roadInfo.getId())) {
@@ -250,7 +250,9 @@ public class AvoidRoadsHelper {
 		}
 		if (roadAdded) {
 			app.getSettings().updateImpassableRoadInfo(roadInfo);
-			impassableRoads.add(0, roadInfo);
+			if (!impassableRoads.contains(roadInfo)) {
+				impassableRoads.add(0, roadInfo);
+			}
 		} else {
 			LatLon location = getLocation(roadInfo);
 			if (location != null) {
@@ -281,7 +283,8 @@ public class AvoidRoadsHelper {
 	}
 
 	@NonNull
-	private AvoidRoadInfo getOrCreateAvoidRoadInfo(@Nullable RouteDataObject object, double lat, double lon, @NonNull String appModeKey) {
+	private AvoidRoadInfo getOrCreateAvoidRoadInfo(@Nullable RouteDataObject object, double lat,
+			double lon, @NonNull String appModeKey) {
 		AvoidRoadInfo roadInfo = getAvoidRoadInfo(new LatLon(lat, lon));
 		return roadInfo != null ? roadInfo : createAvoidRoadInfo(object, lat, lon, appModeKey);
 	}
@@ -297,7 +300,8 @@ public class AvoidRoadsHelper {
 	}
 
 	@NonNull
-	private AvoidRoadInfo createAvoidRoadInfo(@Nullable RouteDataObject object, double lat, double lon, @NonNull String appModeKey) {
+	private AvoidRoadInfo createAvoidRoadInfo(@Nullable RouteDataObject object, double lat,
+			double lon, @NonNull String appModeKey) {
 		long id = object != null ? object.getId() : 0;
 //		double direction = object != null ? object.directionRoute(0, true) : Double.NaN;
 		return new AvoidRoadInfo(id, Double.NaN, lat, lon, getRoadName(object), appModeKey);

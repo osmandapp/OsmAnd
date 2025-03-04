@@ -5645,10 +5645,10 @@
     <string name="obd_support">Supporto OBD</string>
     <string name="obd_fuel_level">Efficienza Carburante (%)</string>
     <string name="lock_screen_description">Abilita o disabilita il touch screen per evitare tocchi accidentali</string>
-    <string name="new_trip_segment">Nuovo tratto del percorso</string>
+    <string name="new_trip_segment">Nuovo segmento del percorso</string>
     <string name="quick_action_start_pause_recording">Un pulsante per avviare, mettere in pausa o riprendere la registrazione del percorso GPX.</string>
-    <string name="quick_action_save_recorded_trip_and_continue">Percorso registrato e proseguimento</string>
-    <string name="quick_action_verb_start_pause">Avvio / Pausa</string>
+    <string name="quick_action_save_recorded_trip_and_continue">Registra viaggio e continua</string>
+    <string name="quick_action_verb_start_pause">Inizio / Pausa</string>
     <string name="obd_vin_desc">Codice VIN tramite OBD</string>
     <string name="reset_average_speed">Azzeramento velocità media</string>
     <string name="unknown_bt_device">Dispositivo sconosciuto</string>

@@ -527,18 +527,6 @@ public class IntentHelper {
 				}
 				clearIntent(intent);
 			}
-			if (intent.hasExtra(EditFavoriteGroupDialogFragment.GROUP_NAME_KEY)) {
-				String groupName = intent.getStringExtra(EditFavoriteGroupDialogFragment.GROUP_NAME_KEY);
-				FavoriteGroup favoriteGroup = app.getFavoritesHelper().getGroup(FavoriteGroup.convertDisplayNameToGroupIdName(app, groupName));
-
-				PointsGroup pointsGroup = favoriteGroup != null ? favoriteGroup.toPointsGroup(app) : null;
-				FragmentManager manager = mapActivity.getSupportFragmentManager();
-				if (pointsGroup != null) {
-					FavoriteAppearanceFragment.showInstance(manager, pointsGroup, true);
-				}
-
-				clearIntent(intent);
-			}
 			if (intent.hasExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
 				switch (intent.getStringExtra(BaseSettingsFragment.OPEN_CONFIG_ON_MAP)) {
 					case BaseSettingsFragment.MAP_CONFIG:

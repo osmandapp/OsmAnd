@@ -72,6 +72,7 @@ import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
+import net.osmand.plus.views.controls.maphudbuttons.MapButton;
 import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -505,8 +506,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			MapLayers mapLayers = mapActivity.getMapLayers();
 			MapControlsLayer layer = mapLayers.getMapControlsLayer();
 
-			layer.addCustomMapButton(view.findViewById(R.id.map_zoom_in_button));
-			layer.addCustomMapButton(view.findViewById(R.id.map_zoom_out_button));
+			MapButton zoomInButton = view.findViewById(R.id.map_zoom_in_button);
+			MapButton zoomOutButton = view.findViewById(R.id.map_zoom_out_button);
+			layer.addCustomMapButton(zoomInButton);
+			layer.addCustomMapButton(zoomOutButton);
+			zoomInButton.setUseDefaultAppearance(false);
+			zoomOutButton.setUseDefaultAppearance(false);
 		}
 		AndroidUiHelper.updateVisibility(zoomButtonsView, zoomButtonsVisible);
 

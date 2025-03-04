@@ -1,6 +1,7 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
 import static net.osmand.plus.views.mapwidgets.WidgetType.MARKERS_TOP_BAR;
+import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,6 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper.CustomLatLonListener;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -39,7 +39,6 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 
 	private final MapMarkersHelper markersHelper;
 	private final boolean portraitMode;
-	private final String customId;
 
 	private final View markerContainer2nd;
 	private final ImageView arrowImg;
@@ -58,9 +57,9 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 		return R.layout.map_markers_widget;
 	}
 
-	public MapMarkersBarWidget(@NonNull MapActivity mapActivity, String customId) {
-		super(mapActivity, MARKERS_TOP_BAR);
-		this.customId = customId;
+	public MapMarkersBarWidget(@NonNull MapActivity mapActivity, String customId,
+			@Nullable WidgetsPanel panel) {
+		super(mapActivity, MARKERS_TOP_BAR, customId, panel);
 		markersHelper = app.getMapMarkersHelper();
 		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
 
@@ -132,13 +131,17 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 	public void updateInfo(@Nullable DrawSettings drawSettings) {
 		List<MapMarker> markers = markersHelper.getMapMarkers();
 		int zoom = mapActivity.getMapView().getZoom();
-		WidgetsVisibilityHelper widgetsVisibilityHelper = mapActivity.getWidgetsVisibilityHelper();
-		if (markers.size() == 0 || zoom < 3 || widgetsVisibilityHelper.shouldHideMapMarkersWidget()) {
+		if (markers.size() == 0 || zoom < 3 || shouldHide()) {
 			updateVisibility(false);
 			return;
 		}
 
 		showMarkers(markers);
+	}
+
+	protected boolean shouldHide() {
+		return visibilityHelper.shouldHideVerticalWidgets()
+				|| panel == BOTTOM && visibilityHelper.shouldHideBottomWidgets();
 	}
 
 	public void showMarkers(@NonNull List<MapMarker> markers) {
@@ -152,12 +155,12 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 	}
 
 	public void updateFirstMarker(@NonNull LatLon center, @NonNull MapMarker marker,
-	                              @Nullable Float heading, boolean customLocation) {
+			@Nullable Float heading, boolean customLocation) {
 		updateMarker(center, heading, marker, arrowImg, distText, okButton, addressText, true, customLocation);
 	}
 
 	public void updateSecondMarker(@NonNull LatLon center, @NonNull List<MapMarker> markers,
-	                               @Nullable Float heading, boolean customLocation) {
+			@Nullable Float heading, boolean customLocation) {
 		if (markers.size() > 1 && settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get() == 2) {
 			MapMarker secondMarker = markers.get(1);
 			if (!customLocation) {
@@ -177,10 +180,11 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 		}
 	}
 
-	private void updateMarker(@NonNull LatLon latlon, @Nullable Float heading, @NonNull MapMarker marker,
-	                          @NonNull ImageView arrowImg, @NonNull TextView distText,
-	                          @NonNull ImageButton okButton, @NonNull TextView addressText,
-	                          boolean firstMarker, boolean customLocation) {
+	private void updateMarker(@NonNull LatLon latlon, @Nullable Float heading,
+			@NonNull MapMarker marker,
+			@NonNull ImageView arrowImg, @NonNull TextView distText,
+			@NonNull ImageButton okButton, @NonNull TextView addressText,
+			boolean firstMarker, boolean customLocation) {
 		float[] distInfo = new float[2];
 		if (marker.point != null) {
 			Location.distanceBetween(marker.getLatitude(), marker.getLongitude(),
@@ -234,7 +238,7 @@ public class MapMarkersBarWidget extends MapWidget implements CustomLatLonListen
 
 	@Override
 	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel panel,
-	                       @NonNull List<MapWidget> followingWidgets) {
+			@NonNull List<MapWidget> followingWidgets) {
 		super.attachView(container, panel, followingWidgets);
 		View bottomShadow = view.findViewById(R.id.bottom_shadow);
 		AndroidUiHelper.updateVisibility(bottomShadow, followingWidgets.isEmpty());

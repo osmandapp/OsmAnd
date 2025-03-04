@@ -1,17 +1,7 @@
 package net.osmand.plus.views.mapwidgets;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
-import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleElements.BACK_TO_LOCATION_BUTTON;
-import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleElements.BOTTOM_MENU_BUTTONS;
-import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleElements.COMPASS;
-import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleElements.DOWNLOAD_MAP_WIDGET;
-import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleElements.ELEVATION_PROFILE_WIDGET;
-import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleElements.FAB_BUTTON;
-import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleElements.SPEEDOMETER;
-import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleElements.TOP_BUTTONS;
-import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleElements.TOP_COORDINATES_WIDGET;
-import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleElements.VERTICAL_WIDGETS;
-import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleElements.ZOOM_BUTTONS;
+import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleElements.*;
 
 import android.view.View;
 
@@ -104,8 +94,8 @@ public class WidgetsVisibilityHelper {
 				|| !shouldShowElementOnActiveScreen(VERTICAL_WIDGETS);
 	}
 
-	public boolean shouldHideMapMarkersWidget() {
-		return shouldHideVerticalWidgets();
+	public boolean shouldHideBottomWidgets() {
+		return shouldHideVerticalWidgets() || isContextMenuFragmentVisible();
 	}
 
 	public boolean shouldShowBottomMenuButtons() {
@@ -206,7 +196,8 @@ public class WidgetsVisibilityHelper {
 		return shouldShowElementOnActiveScreen(SPEEDOMETER);
 	}
 
-	public static boolean isWidgetEnabled(@NonNull MapActivity activity, @NonNull WidgetsPanel panel, @NonNull String... widgetsIds) {
+	public static boolean isWidgetEnabled(@NonNull MapActivity activity,
+			@NonNull WidgetsPanel panel, @NonNull String... widgetsIds) {
 		OsmandApplication app = activity.getMyApplication();
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
 
@@ -363,7 +354,8 @@ public class WidgetsVisibilityHelper {
 		updateWidgetsVisibility(true);
 	}
 
-	public void updateControlsVisibility(boolean topControlsVisible, boolean bottomControlsVisible) {
+	public void updateControlsVisibility(boolean topControlsVisible,
+			boolean bottomControlsVisible) {
 		updateWidgetsVisibility(topControlsVisible);
 		updateBottomControlsVisibility(bottomControlsVisible);
 	}
