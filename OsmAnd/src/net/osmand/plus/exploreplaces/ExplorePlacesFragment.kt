@@ -34,7 +34,9 @@ import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget
 import net.osmand.plus.widgets.TextViewEx
+import net.osmand.util.MapUtils
 import org.apache.commons.logging.Log
+import kotlin.math.abs
 
 class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyItemClickListener,
 	OsmAndLocationListener, OsmAndCompassListener, IMapLocationListener,
@@ -57,6 +59,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	private var lastPointListRectUpdate = 0L
 	private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
 	private var isMapVisible = false
+	private var lastHeading = 0f
 
 	override fun getContentStatusBarNightMode(): Boolean {
 		return nightMode
@@ -220,9 +223,13 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		verticalNearbyAdapter.updateLocation(location)
 	}
 
-	override fun updateCompassValue(value: Float) {
+	override fun updateCompassValue(heading: Float) {
 		val now = System.currentTimeMillis()
-		if (now - lastCompassUpdate > COMPASS_UPDATE_PERIOD) {
+		if (now - lastCompassUpdate > COMPASS_UPDATE_PERIOD && abs(
+				MapUtils.degreesDiff(
+					lastHeading.toDouble(),
+					heading.toDouble())) > 5) {
+			lastHeading = heading
 			lastCompassUpdate = now
 			updateLocation(location)
 		}
