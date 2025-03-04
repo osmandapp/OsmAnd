@@ -288,7 +288,7 @@ public class FavoriteAppearanceFragment extends BaseOsmAndDialogFragment {
 		if (targetFragment instanceof FavoritesTreeFragment treeFragment) {
 			treeFragment.reloadData();
 		}
-		dismiss();
+		super.dismiss();
 	}
 
 	@Override
