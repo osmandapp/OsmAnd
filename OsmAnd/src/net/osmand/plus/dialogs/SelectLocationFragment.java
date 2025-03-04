@@ -90,7 +90,7 @@ public class SelectLocationFragment extends ConfigureMapOptionFragment implement
 	@Override
 	public void onAskRefreshDialogCompletely(@NonNull String processId) {
 		View view = getView();
-		if (view != null) {
+		if (view != null && isAdded()) {
 			updateContent(view);
 		}
 	}
@@ -101,7 +101,9 @@ public class SelectLocationFragment extends ConfigureMapOptionFragment implement
 
 	private void updateCoordinatesView(@NonNull View view) {
 		TextView tvCoordinates = view.findViewById(R.id.coordinates);
-		tvCoordinates.setText(controller.getFormattedCoordinates());
+		if (tvCoordinates != null) {
+			tvCoordinates.setText(controller.getFormattedCoordinates());
+		}
 	}
 
 	@Override
