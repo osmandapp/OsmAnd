@@ -37,8 +37,6 @@ import org.apache.commons.logging.Log
 class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyItemClickListener,
 	OsmAndLocationListener, OsmAndCompassListener {
 
-	private val HIDE_LIST_DURATION = 150L
-	private val SHOW_LIST_DURATION = 150L
 	private val COMPASS_UPDATE_PERIOD = 300
 	private lateinit var visiblePlacesRect: QuadRect
 	private val log: Log = PlatformUtil.getLog(
@@ -47,11 +45,13 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	private lateinit var verticalNearbyAdapter: NearbyPlacesAdapter
 	private var location: Location? = null
 	private var mainContent: LinearLayout? = null
+	private var verticalNearbyList: RecyclerView? = null
 	private var showListContainer: View? = null
 	private var showOnMapContainer: View? = null
 	private var frameLayout: CoordinatorLayout? = null
 	private var rulerWidget: RulerWidget? = null
 	private var lastCompassUpdate = 0L
+	private var lastPointListRectUpdate = 0L
 	private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
 	private var isMapVisible = false
 
@@ -120,31 +120,37 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		bottomSheetBehavior.addBottomSheetCallback(object :
 			BottomSheetBehavior.BottomSheetCallback() {
 			override fun onStateChanged(bottomSheet: View, newState: Int) {
+				verticalNearbyList?.let { recyclerView ->
+					val minPeekHeight =
+						resources.getDimensionPixelSize(R.dimen.bottom_sheet_min_peek_height)
+					val defaultPeekHeight =
+						resources.getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height)
+					bottomSheetBehavior.peekHeight =
+						if (recyclerView.measuredHeight < defaultPeekHeight) {
+							minPeekHeight
+						} else {
+							defaultPeekHeight
+						}
+				}
+				isMapVisible = newState != BottomSheetBehavior.STATE_EXPANDED
+				app.osmandMap.mapLayers.explorePlacesLayer.enableLayer(isMapVisible)
 				AndroidUiHelper.updateVisibility(
 					showOnMapContainer,
-					newState == BottomSheetBehavior.STATE_EXPANDED && !isMapVisible)
-				when (newState) {
-					BottomSheetBehavior.STATE_EXPANDED -> {
-						showListContainer?.visibility = View.GONE
-					}
+					newState == BottomSheetBehavior.STATE_EXPANDED)
 
-					BottomSheetBehavior.STATE_COLLAPSED -> {
-						showListContainer?.visibility = View.GONE
-					}
+				updateShowListButton(newState)
 
-					BottomSheetBehavior.STATE_HIDDEN -> {
-						showListContainer?.visibility = View.VISIBLE
-					}
-
-					BottomSheetBehavior.STATE_SETTLING -> {
-						showListContainer?.visibility = View.GONE
-					}
-				}
 			}
 
 			override fun onSlide(bottomSheet: View, slideOffset: Float) {
 			}
 		})
+	}
+
+	fun updateShowListButton(state: Int) {
+		AndroidUiHelper.updateVisibility(
+			showListContainer,
+			state == BottomSheetBehavior.STATE_HIDDEN)
 	}
 
 	fun onBackPress(): Boolean {
@@ -175,6 +181,23 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		mapActivity?.let { activity -> updateWidgetsVisibility(activity, View.GONE) }
 	}
 
+	private fun updatePointsList() {
+		mapActivity?.let {
+			val now = System.currentTimeMillis()
+			val rect = it.mapView.currentRotatedTileBox.latLonBounds
+			if (visiblePlacesRect != rect && now - lastPointListRectUpdate > 1000) {
+				lastPointListRectUpdate = now
+				visiblePlacesRect = rect
+				val nearbyData = app.explorePlacesProvider.getDataCollection(visiblePlacesRect)
+				verticalNearbyAdapter.items = nearbyData
+				app.run {
+					verticalNearbyAdapter.notifyDataSetChanged()
+					updateShowListButton(bottomSheetBehavior.state)
+				}
+			}
+		}
+	}
+
 	override fun onPause() {
 		super.onPause()
 		val app = requireActivity().application as OsmandApplication
@@ -186,6 +209,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	override fun updateLocation(location: Location?) {
 		this.location = location
 		verticalNearbyAdapter.updateLocation(location)
+		updatePointsList()
 	}
 
 	override fun updateCompassValue(value: Float) {
@@ -202,8 +226,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 			.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_marker_dark, nightMode))
 		val showList = view.findViewById<TextViewEx>(R.id.show_list)
 		view.findViewById<View>(R.id.show_on_map).setOnClickListener {
-			isMapVisible = true
-			app.osmandMap.mapLayers.explorePlacesLayer.enableLayer(true)
 			hideList()
 		}
 		showList.setOnClickListener {
@@ -229,11 +251,11 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	}
 
 	private fun setupVerticalNearbyList(view: View) {
-		val verticalNearbyList = view.findViewById<RecyclerView>(R.id.vertical_nearby_list)
+		verticalNearbyList = view.findViewById(R.id.vertical_nearby_list)
 		val nearbyData = app.explorePlacesProvider.getDataCollection(visiblePlacesRect)
 		verticalNearbyAdapter = NearbyPlacesAdapter(requireActivity(), nearbyData, true, this)
-		verticalNearbyList.layoutManager = LinearLayoutManager(requireContext())
-		verticalNearbyList.adapter = verticalNearbyAdapter
+		verticalNearbyList?.layoutManager = LinearLayoutManager(requireContext())
+		verticalNearbyList?.adapter = verticalNearbyAdapter
 		verticalNearbyAdapter.notifyDataSetChanged()
 	}
 
