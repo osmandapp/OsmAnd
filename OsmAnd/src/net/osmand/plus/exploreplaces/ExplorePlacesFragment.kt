@@ -261,7 +261,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	private fun setupVerticalNearbyList(view: View) {
 		verticalNearbyList = view.findViewById(R.id.vertical_nearby_list)
 		val nearbyData = app.explorePlacesProvider.getDataCollection(visiblePlacesRect)
-		verticalNearbyAdapter = NearbyPlacesAdapter(requireActivity(), nearbyData, true, this)
+		verticalNearbyAdapter = NearbyPlacesAdapter(view.context, nearbyData, true, this)
 		verticalNearbyList?.layoutManager = LinearLayoutManager(requireContext())
 		verticalNearbyList?.adapter = verticalNearbyAdapter
 		verticalNearbyAdapter.notifyDataSetChanged()

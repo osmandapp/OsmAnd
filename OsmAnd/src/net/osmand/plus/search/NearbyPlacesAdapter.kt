@@ -1,11 +1,13 @@
 package net.osmand.plus.search
 
-import android.app.Activity
+import android.content.Context
+import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.UiContext
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -23,7 +25,7 @@ import net.osmand.plus.utils.UpdateLocationUtils
 import net.osmand.util.Algorithms
 
 class NearbyPlacesAdapter(
-	val activity: Activity,
+	@UiContext val activity: Context,
 	var items: List<ExploreTopPlacePoint>,
 	private var isVertical: Boolean,
 	private val onItemClickListener: NearbyItemClickListener
@@ -123,9 +125,7 @@ class NearbyPlacesAdapter(
 				AndroidUiHelper.updateVisibility(it, !Algorithms.isEmpty(item.wikiDesc))
 			}
 
-			if (subType != null) {
-				itemTypeTextView.text = subType.translation
-			}
+			itemTypeTextView.text = subType?.translation ?: ""
 
 			// Calculate distance and show arrow
 			if (distanceTextView != null && arrowImageView != null) {
