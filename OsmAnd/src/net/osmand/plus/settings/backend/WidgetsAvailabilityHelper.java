@@ -12,7 +12,6 @@ import static net.osmand.plus.settings.backend.ApplicationMode.PUBLIC_TRANSPORT;
 import static net.osmand.plus.settings.backend.ApplicationMode.SKI;
 import static net.osmand.plus.settings.backend.ApplicationMode.TRAIN;
 import static net.osmand.plus.settings.backend.ApplicationMode.TRUCK;
-import static net.osmand.plus.views.mapwidgets.WidgetGroup.ROUTE_GUIDANCE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE_MAP_CENTER;
 import static net.osmand.plus.views.mapwidgets.WidgetType.ALTITUDE_MY_LOCATION;
 import static net.osmand.plus.views.mapwidgets.WidgetType.AVERAGE_SPEED;
@@ -59,7 +58,7 @@ import java.util.Set;
 
 public class WidgetsAvailabilityHelper {
 
-	private static final long ROUTE_INFO_INTRODUCTION_TIME_MS = 1704096000000L; // Mon Jan 01 2024
+	private static final long ROUTE_WIDGETS_V2_INTRO_TIME_MS = 1704096000000L; // Mon Jan 01 2024
 	private static final Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
 	private static final Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
 
@@ -91,8 +90,8 @@ public class WidgetsAvailabilityHelper {
 		ApplicationMode[] smallNextTurnSet = {PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT, TRAIN};
 		ApplicationMode[] secondNextTurnSet = {CAR, BICYCLE, PEDESTRIAN, BOAT, SKI, TRUCK, MOTORCYCLE, HORSE, MOPED};
 
-		boolean enableRouteInfo = Version.getInstallTime(app) >= ROUTE_INFO_INTRODUCTION_TIME_MS;
-		if (enableRouteInfo) {
+		boolean enableWidgetsV2 = Version.getInstallTime(app) >= ROUTE_WIDGETS_V2_INTRO_TIME_MS;
+		if (enableWidgetsV2) {
 			regWidgetVisibility(ROUTE_INFO, exceptDefault);
 		}
 
@@ -104,7 +103,7 @@ public class WidgetsAvailabilityHelper {
 		regWidgetAvailability(SMALL_NEXT_TURN, exceptDefault);
 		regWidgetAvailability(SECOND_NEXT_TURN, exceptDefault);
 
-		if (!enableRouteInfo) {
+		if (!enableWidgetsV2) {
 			regWidgetVisibility(INTERMEDIATE_DESTINATION, all);
 			regWidgetVisibility(DISTANCE_TO_DESTINATION, all);
 			regWidgetVisibility(TIME_TO_INTERMEDIATE, all);
@@ -116,6 +115,7 @@ public class WidgetsAvailabilityHelper {
 		regWidgetVisibility(ALTITUDE_MAP_CENTER, PEDESTRIAN, BICYCLE);
 		regWidgetVisibility(ALTITUDE_MY_LOCATION, PEDESTRIAN, BICYCLE);
 
+		regWidgetAvailability(ROUTE_INFO, all);
 		regWidgetAvailability(INTERMEDIATE_DESTINATION, all);
 		regWidgetAvailability(DISTANCE_TO_DESTINATION, all);
 		regWidgetAvailability(TIME_TO_INTERMEDIATE, all);
