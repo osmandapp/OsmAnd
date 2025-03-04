@@ -460,9 +460,6 @@ class BackupImporter {
 				LOG.error("Error reading item info: " + task.file.getName() + " error " + task.error);
 			}
 		}
-		if (itemsJson.length() == 0) {
-			throw new IOException("Error downloading items info");
-		}
 	}
 
 	private boolean shouldDownloadOnCollecting(@NonNull RemoteFile remoteFile, boolean defValue) {
