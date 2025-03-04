@@ -4484,7 +4484,7 @@
     <string name="ant_heart_rate_write_gpx_desc">Pulzusszám belefoglalása a nyomvonalba</string>
     <string name="depth_contours">Mélységvonalak</string>
     <string name="worldwide_maps">Térképek világszerte</string>
-    <string name="map_widget_target_distance">Távolság a kamerától az úticélig</string>
+    <string name="map_widget_target_distance">Szemmagasság</string>
     <string name="favorites_backup">Kedvencek biztonsági mentése</string>
     <string name="shared_string_cross_buy">Több platformra érvényes vásárlás</string>
     <string name="purchases_feature_desc_cross_buy">Használja előfizetésének funkcióit különböző platformokon (Android/iOS/web) további költségek nélkül.</string>
