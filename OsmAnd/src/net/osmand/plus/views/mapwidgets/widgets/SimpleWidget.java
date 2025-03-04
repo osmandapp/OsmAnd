@@ -3,6 +3,7 @@ package net.osmand.plus.views.mapwidgets.widgets;
 import static net.osmand.plus.utils.AndroidUtils.dpToPx;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 
+import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
@@ -133,12 +134,13 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 		updateWidgetName();
 		if (isVerticalWidget()) {
 			app.getOsmandMap().getMapLayers().getMapInfoLayer().updateRow(this);
+		} else {
+			updateValueAlign(false);
 		}
 	}
 
 	public boolean shouldShowIcon() {
-		boolean hideIcon = !isVerticalWidget() && getWidgetSizePref().get() != WidgetSize.SMALL;
-		return widgetState.getShowIconPref().get() && !hideIcon;
+		return widgetState.getShowIconPref().get();
 	}
 
 	@NonNull
@@ -305,8 +307,14 @@ public abstract class SimpleWidget extends TextInfoWidget implements ISupportWid
 	@Override
 	public void updateColors(@NonNull MapInfoLayer.TextState textState) {
 		this.textState = textState;
-		if (isVerticalWidget() || widgetState.getWidgetSizePref().get() != WidgetSize.SMALL) {
+		if (isVerticalWidget()) {
 			updateVerticalWidgetColors(textState);
+		} else if (WidgetSize.SMALL != getWidgetSizePref().get() && widgetName != null) {
+			updateVerticalWidgetColors(textState);
+			int typefaceStyle = textState.textBold ? Typeface.BOLD : Typeface.NORMAL;
+			widgetName.setTypeface(Typeface.DEFAULT, typefaceStyle);
+			textView.setTypeface(Typeface.DEFAULT, typefaceStyle);
+			smallTextView.setTypeface(Typeface.DEFAULT, typefaceStyle);
 		} else {
 			super.updateColors(textState);
 		}
