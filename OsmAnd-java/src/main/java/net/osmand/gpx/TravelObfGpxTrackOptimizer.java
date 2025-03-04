@@ -10,7 +10,7 @@ import java.util.*;
 // Human-based version of OverlappedSegmentsMergerDS / OverlappedSegmentsMergerGPT (commit 17701568cb)
 
 public class TravelObfGpxTrackOptimizer {
-	private static final int MAX_JUMPS_OVER_UNIQUE_POINTS = 1;
+	private static final int MAX_JUMPS_OVER_UNIQUE_POINTS = 3;
 	private static final double EDGE_POINTS_MAX_ORTHOGONAL_DISTANCE = 10.0;
 	private static final double PRECISION_DUPES = KMapUtils.DEFAULT_LATLON_PRECISION;
 	private static final double PRECISION_EQUAL = KMapUtils.DEFAULT_LATLON_PRECISION; // ~1 meter
