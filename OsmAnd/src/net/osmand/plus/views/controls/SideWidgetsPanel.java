@@ -2,6 +2,7 @@ package net.osmand.plus.views.controls;
 
 import static androidx.viewpager2.widget.ViewPager2.SCROLL_STATE_IDLE;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -47,7 +48,7 @@ public class SideWidgetsPanel extends FrameLayout implements WidgetsContainer, V
 
 	private static final int BORDER_WIDTH_DP = 2;
 	private static final int BORDER_RADIUS_DP = 5;
-
+	private static final float SIDE_PANEL_WEIGHT_RATIO = 0.45f;
 	private final Paint borderPaint = new Paint();
 	private final Path borderPath = new Path();
 
@@ -62,6 +63,7 @@ public class SideWidgetsPanel extends FrameLayout implements WidgetsContainer, V
 
 	private SizeChangeListener sizeListener;
 	private VisibilityChangeListener visibilityListener;
+	private int screenWidth = -1;
 
 	public SideWidgetsPanel(@NonNull Context context) {
 		this(context, null);
@@ -281,6 +283,14 @@ public class SideWidgetsPanel extends FrameLayout implements WidgetsContainer, V
 			int measuredWidth = viewToWrap.getMeasuredWidth();
 			int measuredHeight = viewToWrap.getMeasuredHeight();
 
+			if (screenWidth != -1) {
+				int maxAllowedWidth = (int) (screenWidth * SIDE_PANEL_WEIGHT_RATIO);
+
+				if (measuredWidth > maxAllowedWidth) {
+					measuredWidth = maxAllowedWidth;
+				}
+			}
+
 			if (width != measuredWidth || height != measuredHeight) {
 				ViewGroup.LayoutParams pagerParams = viewPager.getLayoutParams();
 				pagerParams.width = measuredWidth;
@@ -335,5 +345,9 @@ public class SideWidgetsPanel extends FrameLayout implements WidgetsContainer, V
 		if (visibilityListener != null) {
 			visibilityListener.onVisibilityChanged(changedView, visibility);
 		}
+	}
+
+	public void setScreenWidth(@NonNull Activity activity) {
+		screenWidth = AndroidUtils.getScreenWidth(activity);
 	}
 }
