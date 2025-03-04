@@ -5586,4 +5586,5 @@
     <string name="show_dm_grids">Usar DM en lugar de grados o DMS</string>
     <string name="show_dm_grids_description">Muestra la cuadrícula en grados y minutos, en lugar de sólo grados o DMS</string>
     <string name="show_dms_grids_description">Muestra la cuadrícula en grados, minutos y segundos, en lugar de sólo grados</string>
+    <string name="show_list">Mostrar listado</string>
 </resources>
