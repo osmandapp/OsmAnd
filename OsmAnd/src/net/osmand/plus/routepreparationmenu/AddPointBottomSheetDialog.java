@@ -4,7 +4,6 @@ package net.osmand.plus.routepreparationmenu;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.PointF;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -19,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,7 +27,6 @@ import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.RotatedTileBox;
 import net.osmand.data.SpecialPointType;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
@@ -41,8 +38,6 @@ import net.osmand.plus.base.bottomsheetmenu.HorizontalRecyclerBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.dialogs.ILocationSelectionHandler;
-import net.osmand.plus.dialogs.SelectLocationController;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
@@ -60,7 +55,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FontCache;
 import net.osmand.plus.views.PointImageUtils;
-import net.osmand.plus.views.layers.PointNavigationLayer;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
@@ -270,47 +264,6 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				.setOnClickListener(v -> {
 					MapActivity activity = (MapActivity) getActivity();
 					if (activity != null) {
-						// TODO: -------------------------------------------------------------------
-//						OsmandApplication app = activity.getMyApplication();
-//						MapRouteInfoMenu menu = activity.getMapRouteInfoMenu();
-//						PointNavigationLayer layer = activity.getMapLayers().getNavigationLayer();
-//						menu.selectOnScreen(pointType);
-//						DialogListener listener = getListener();
-//						if (listener != null) {
-//							listener.onSelectOnMap(AddPointBottomSheetDialog.this);
-//						}
-//						dismiss();
-//
-//						SelectLocationController.showDialog(activity, new ILocationSelectionHandler() {
-//							@Nullable
-//							@Override
-//							public Object getCenterPointIcon() {
-//								return switch (pointType) {
-//									case START -> layer.getStartPointIcon();
-//									case INTERMEDIATE -> layer.getIntermediatePointIcon();
-//									case TARGET -> layer.getPointToNavigateIcon();
-//									default -> null;
-//								};
-//							}
-//
-//							@Override
-//							public void onLocationSelected(@NonNull LatLon latLon) {
-//								RotatedTileBox tileBox = app.getOsmandMap().getMapView().getRotatedTileBox();
-//								PointF pointF = new PointF(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-//								app.runInUIThread(() -> menu.onSingleTap(pointF, tileBox), 50);
-//							}
-//
-//							@NonNull
-//							@Override
-//							public String getDialogTitle() {
-//								return switch (pointType) {
-//									case START -> app.getString(R.string.add_start_point);
-//									case INTERMEDIATE -> app.getString(R.string.add_intermediate_point);
-//									case TARGET -> app.getString(R.string.add_destination_point);
-//									default -> app.getString(R.string.choose_location);
-//								};
-//							}
-//						});
 						MapRouteInfoMenu menu = activity.getMapRouteInfoMenu();
 						menu.selectOnScreen(pointType);
 						DialogListener listener = getListener();
@@ -319,7 +272,6 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 						}
 					}
 					dismiss();
-					// TODO: -------------------------------------------------------------------
 				})
 				.create();
 		items.add(selectOnTheMapItem);
