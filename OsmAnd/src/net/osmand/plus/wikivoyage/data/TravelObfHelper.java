@@ -7,6 +7,7 @@ import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 import static net.osmand.plus.wikivoyage.data.PopularArticles.ARTICLES_PER_PAGE;
+import static net.osmand.plus.wikivoyage.data.TravelArticle.TRAVEL_GPX_DEFAULT_SEARCH_RADIUS;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_ACTIVITY_TYPE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.AVERAGE_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELEVATION_DOWN;
@@ -15,6 +16,7 @@ import static net.osmand.plus.wikivoyage.data.TravelGpx.DISTANCE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.MAX_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.MIN_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_BBOX_RADIUS;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_SHORTLINK_TILES;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.USER;
 import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_FIRST_DIST;
 import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_FIRST_LETTER;
@@ -298,6 +300,12 @@ public class TravelObfHelper implements TravelHelper {
 		if (radius != null) {
 			travelGpx.routeRadius = MapUtils.convertCharToDist(radius.charAt(0), TRAVEL_GPX_CONVERT_FIRST_LETTER,
 					TRAVEL_GPX_CONVERT_FIRST_DIST, TRAVEL_GPX_CONVERT_MULT_1, TRAVEL_GPX_CONVERT_MULT_2);
+		} else if (!Algorithms.isEmpty(travelGpx.routeId)) {
+			travelGpx.routeRadius = TRAVEL_GPX_DEFAULT_SEARCH_RADIUS;
+		}
+		String shortLinkTiles = amenity.getTagContent(ROUTE_SHORTLINK_TILES);
+		if (shortLinkTiles != null) {
+			travelGpx.initShortLinkTiles(shortLinkTiles);
 		}
 		return travelGpx;
 	}

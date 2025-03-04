@@ -879,8 +879,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	@NonNull
-	protected Preference requirePreference(@NonNull CharSequence key) {
-		Preference preference = findPreference(key);
+	protected <T extends Preference> T requirePreference(@NonNull CharSequence key) {
+		T preference = findPreference(key);
 		if (preference == null) {
 			throw new IllegalArgumentException("Preference with key '" + key + "' not found.");
 		}

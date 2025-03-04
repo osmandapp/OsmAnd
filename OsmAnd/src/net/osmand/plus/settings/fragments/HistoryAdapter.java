@@ -19,7 +19,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.routepreparationmenu.cards.PreviousRouteCard;
 import net.osmand.plus.search.dialogs.QuickSearchListAdapter;
@@ -148,7 +148,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 				int colorId = selected ? activeColorId : defaultColorId;
 				viewHolder.title.setText(PreviousRouteCard.getPointName(app, targetPoint));
 				viewHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_marker_dark, colorId));
-				updateCompassVisibility(viewHolder.compassView, targetPoint.point);
+				updateCompassVisibility(viewHolder.compassView, targetPoint.getLatLon());
 			} else if (holder instanceof MarkerViewHolder) {
 				MapMarker mapMarker = (MapMarker) getItem(position);
 				int colorId = selected ? MapMarker.getColorId(mapMarker.colorIndex) : defaultColorId;

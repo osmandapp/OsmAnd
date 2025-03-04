@@ -3,6 +3,7 @@ package net.osmand.plus.render;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.core.android.MapRendererContext;
@@ -13,15 +14,15 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.render.RenderingRulesStorage;
 
-public class UpdateVectorRendererAsyncTask extends AsyncTask<Void, Void, Boolean> {
+public class UpdateRendererAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
 	private final OsmandApplication app;
 
 	private final boolean updateMapRenderer;
 	private final CallbackWithObject<Boolean> callback;
 
-	public UpdateVectorRendererAsyncTask(@NonNull OsmandApplication app, boolean updateMapRenderer,
-	                                     @NonNull CallbackWithObject<Boolean> callback) {
+	public UpdateRendererAsyncTask(@NonNull OsmandApplication app, boolean updateMapRenderer,
+			@Nullable CallbackWithObject<Boolean> callback) {
 		this.app = app;
 		this.callback = callback;
 		this.updateMapRenderer = updateMapRenderer;

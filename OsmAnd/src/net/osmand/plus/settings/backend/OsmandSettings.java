@@ -97,6 +97,7 @@ import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
+import net.osmand.render.RenderingClass;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.shared.gpx.ColoringPurpose;
@@ -195,8 +196,24 @@ public class OsmandSettings {
 				: appMode.getStringKey());
 	}
 
+	@NonNull
 	public Map<String, OsmandPreference<?>> getRegisteredPreferences() {
 		return Collections.unmodifiableMap(registeredPreferences);
+	}
+
+	@NonNull
+	public Map<String, OsmandPreference<?>> getSavedPreferences(@Nullable ApplicationMode mode) {
+		Map<String, OsmandPreference<?>> map = new HashMap<>(registeredPreferences.size());
+		for (Map.Entry<String, OsmandPreference<?>> entry : registeredPreferences.entrySet()) {
+			OsmandPreference<?> value = entry.getValue();
+			if (entry.getValue() instanceof CommonPreference<?> preference) {
+				if ((mode == null && preference.isGlobal() && preference.isSet()) ||
+						(mode != null && !preference.isGlobal() && preference.isSetForMode(mode))) {
+					map.put(entry.getKey(), preference);
+				}
+			}
+		}
+		return map;
 	}
 
 	public static boolean isRendererPreference(String key) {
@@ -230,12 +247,12 @@ public class OsmandSettings {
 		return new OsmAndPreferencesDataStore(this, appMode != null ? appMode : APPLICATION_MODE.get());
 	}
 
-	public static String getSharedPreferencesName(ApplicationMode mode) {
+	public static String getSharedPreferencesName(@Nullable ApplicationMode mode) {
 		String modeKey = mode != null ? mode.getStringKey() : null;
 		return getSharedPreferencesNameForKey(modeKey);
 	}
 
-	public static String getSharedPreferencesNameForKey(String modeKey) {
+	public static String getSharedPreferencesNameForKey(@Nullable String modeKey) {
 		String sharedPreferencesName = !Algorithms.isEmpty(CUSTOM_SHARED_PREFERENCES_NAME) ? CUSTOM_SHARED_PREFERENCES_NAME : SHARED_PREFERENCES_NAME;
 		if (modeKey == null) {
 			return sharedPreferencesName;
@@ -253,16 +270,16 @@ public class OsmandSettings {
 	}
 
 	// TODO doesn't look correct package visibility
-	public Object getProfilePreferences(ApplicationMode mode) {
+	public Object getProfilePreferences(@Nullable ApplicationMode mode) {
 		return settingsAPI.getPreferenceObject(getSharedPreferencesName(mode));
 	}
 
 	// TODO doesn't look correct package visibility
-	Object getProfilePreferences(String modeKey) {
+	Object getProfilePreferences(@Nullable String modeKey) {
 		return settingsAPI.getPreferenceObject(getSharedPreferencesNameForKey(modeKey));
 	}
 
-	public OsmandPreference<?> getPreference(String key) {
+	public OsmandPreference<?> getPreference(@NonNull String key) {
 		return registeredPreferences.get(key);
 	}
 
@@ -286,23 +303,20 @@ public class OsmandSettings {
 			return false;
 		}
 		if (preference == APPLICATION_MODE) {
-			if (value instanceof String) {
-				String appModeKey = (String) value;
+			if (value instanceof String appModeKey) {
 				ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, null);
 				if (appMode != null) {
 					return setApplicationMode(appMode);
 				}
 			}
 		} else if (preference == DEFAULT_APPLICATION_MODE) {
-			if (value instanceof String) {
-				String appModeKey = (String) value;
+			if (value instanceof String appModeKey) {
 				ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, null);
 				if (appMode != null) {
 					return DEFAULT_APPLICATION_MODE.set(appMode);
 				}
 			}
-		} else if (preference instanceof EnumStringPreference) {
-			EnumStringPreference enumPref = (EnumStringPreference) preference;
+		} else if (preference instanceof EnumStringPreference enumPref) {
 			if (value instanceof String) {
 				Enum<?> enumValue = enumPref.parseString((String) value);
 				if (enumValue != null) {
@@ -381,11 +395,14 @@ public class OsmandSettings {
 		}
 	}
 
-	public void copyPreferencesFromProfile(ApplicationMode modeFrom, ApplicationMode modeTo) {
-		copyProfilePreferences(modeFrom, modeTo, new ArrayList<>(registeredPreferences.values()));
+	public void copyPreferencesFromProfile(@NonNull ApplicationMode modeFrom,
+			@NonNull ApplicationMode modeTo, boolean onlySaved) {
+		Map<String, OsmandPreference<?>> preferences = onlySaved ? getSavedPreferences(modeFrom) : registeredPreferences;
+		copyProfilePreferences(modeFrom, modeTo, new ArrayList<>(preferences.values()));
 	}
 
-	public void copyProfilePreferences(ApplicationMode modeFrom, ApplicationMode modeTo, List<OsmandPreference> profilePreferences) {
+	public void copyProfilePreferences(@NonNull ApplicationMode modeFrom,
+			@NonNull ApplicationMode modeTo, @NonNull List<OsmandPreference> profilePreferences) {
 		for (OsmandPreference pref : profilePreferences) {
 			if (prefCanBeCopiedOrReset(pref) && !USER_PROFILE_NAME.getId().equals(pref.getId())) {
 				CommonPreference profilePref = (CommonPreference) pref;
@@ -655,8 +672,8 @@ public class OsmandSettings {
 		return settingsAPI.contains(getPreferences(global), id);
 	}
 
-	public boolean isSet(ApplicationMode m, String id) {
-		return settingsAPI.contains(getProfilePreferences(m), id);
+	public boolean isSet(ApplicationMode mode, String id) {
+		return settingsAPI.contains(getProfilePreferences(mode), id);
 	}
 
 	public Object getPreferences(boolean global) {
@@ -954,7 +971,7 @@ public class OsmandSettings {
 	public final OsmandPreference<ApplicationMode> DEFAULT_APPLICATION_MODE = new CommonPreference<ApplicationMode>(this, "default_application_mode_string", ApplicationMode.DEFAULT) {
 
 		@Override
-		public ApplicationMode getValue(Object prefs, ApplicationMode defaultValue) {
+		public ApplicationMode getValue(@NonNull Object prefs, ApplicationMode defaultValue) {
 			String key;
 			if (USE_LAST_APPLICATION_MODE_BY_DEFAULT.get()) {
 				key = LAST_USED_APPLICATION_MODE.get();
@@ -1006,7 +1023,7 @@ public class OsmandSettings {
 	public final OsmandPreference<ApplicationMode> LAST_ROUTE_APPLICATION_MODE = new CommonPreference<ApplicationMode>(this, "last_route_application_mode_backup_string", ApplicationMode.DEFAULT) {
 
 		@Override
-		public ApplicationMode getValue(Object prefs, ApplicationMode defaultValue) {
+		public ApplicationMode getValue(@NonNull Object prefs, ApplicationMode defaultValue) {
 			String key = settingsAPI.getString(prefs, getId(), defaultValue.getStringKey());
 			return ApplicationMode.valueOfStringKey(key, defaultValue);
 		}
@@ -3123,7 +3140,11 @@ public class OsmandSettings {
 	}
 
 	@NonNull
-	public CommonPreference<Boolean> getСustomBooleanRenderClassProperty(@NonNull String name, boolean defaultValue) {
+	public CommonPreference<Boolean> getBooleanRenderClassProperty(@NonNull RenderingClass renderingClass) {
+		return getBooleanRenderClassProperty(renderingClass.getName(), renderingClass.isEnabledByDefault());
+	}
+
+	public CommonPreference<Boolean> getBooleanRenderClassProperty(@NonNull String name, boolean defaultValue) {
 		if (!customBooleanRenderClassProps.containsKey(name)) {
 			CommonPreference<Boolean> preference = new BooleanPreference(this, name, defaultValue).makeProfile();
 			customBooleanRenderClassProps.put(name, preference);

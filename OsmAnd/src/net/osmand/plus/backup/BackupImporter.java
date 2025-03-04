@@ -409,26 +409,31 @@ class BackupImporter {
 
 	private void generateItemsJson(@NonNull JSONArray itemsJson, @NonNull List<RemoteFile> remoteInfoFiles) throws JSONException {
 		for (RemoteFile remoteFile : remoteInfoFiles) {
-			String fileName = remoteFile.getName();
-			fileName = fileName.substring(0, fileName.length() - INFO_EXT.length());
-			String type = remoteFile.getType();
-			JSONObject itemJson = new JSONObject();
-			itemJson.put("type", type);
-			if (SettingsItemType.GPX.name().equals(type)) {
-				fileName = FileSubtype.GPX.getSubtypeFolder() + fileName;
-			}
-			if (SettingsItemType.PROFILE.name().equals(type)) {
-				JSONObject appMode = new JSONObject();
-				String name = fileName.replaceFirst("profile_", "");
-				if (name.endsWith(".json")) {
-					name = name.substring(0, name.length() - 5);
-				}
-				appMode.put("stringKey", name);
-				itemJson.put("appMode", appMode);
-			}
-			itemJson.put("file", fileName);
-			itemsJson.put(itemJson);
+			itemsJson.put(generateItemJson(remoteFile));
 		}
+	}
+
+	@NonNull
+	private JSONObject generateItemJson(@NonNull RemoteFile remoteFile) throws JSONException {
+		String fileName = remoteFile.getName();
+		fileName = fileName.substring(0, fileName.length() - INFO_EXT.length());
+		String type = remoteFile.getType();
+		JSONObject itemJson = new JSONObject();
+		itemJson.put("type", type);
+		if (SettingsItemType.GPX.name().equals(type)) {
+			fileName = FileSubtype.GPX.getSubtypeFolder() + fileName;
+		}
+		if (SettingsItemType.PROFILE.name().equals(type)) {
+			JSONObject appMode = new JSONObject();
+			String name = fileName.replaceFirst("profile_", "");
+			if (name.endsWith(".json")) {
+				name = name.substring(0, name.length() - 5);
+			}
+			appMode.put("stringKey", name);
+			itemJson.put("appMode", appMode);
+		}
+		itemJson.put("file", fileName);
+		return itemJson;
 	}
 
 	private void generateItemsJson(@NonNull JSONArray itemsJson,
@@ -443,18 +448,17 @@ class BackupImporter {
 		ThreadPoolTaskExecutor<FileDownloadTask> executor = createExecutor();
 		executor.run(tasks);
 
-		boolean hasDownloadErrors = hasDownloadErrors(tasks);
-		if (!hasDownloadErrors) {
-			for (File file : remoteInfoFilesMap.keySet()) {
-				String jsonStr = Algorithms.getFileAsString(file);
+		for (FileDownloadTask task : tasks) {
+			if (Algorithms.isEmpty(task.error)) {
+				String jsonStr = Algorithms.getFileAsString(task.file);
 				if (!Algorithms.isEmpty(jsonStr)) {
 					itemsJson.put(new JSONObject(jsonStr));
 				} else {
-					throw new IOException("Error reading item info: " + file.getName());
+					throw new IOException("Error reading item info: " + task.file.getName());
 				}
+			} else {
+				LOG.error("Error reading item info: " + task.file.getName() + " error " + task.error);
 			}
-		} else {
-			throw new IOException("Error downloading items info");
 		}
 	}
 
@@ -684,6 +688,16 @@ class BackupImporter {
 		public Void call() throws Exception {
 			error = backupHelper.downloadFile(file, remoteFile, getOnDownloadFileListener());
 			return null;
+		}
+
+		@NonNull
+		@Override
+		public String toString() {
+			return "FileDownloadTask{" +
+					"file=" + file.getAbsolutePath() +
+					", remoteFile=" + remoteFile +
+					", error=" + error +
+					" }";
 		}
 	}
 

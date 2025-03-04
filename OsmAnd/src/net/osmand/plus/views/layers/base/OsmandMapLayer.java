@@ -527,6 +527,11 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		}
 	}
 
+	/** OpenGL */
+	public static boolean isMapRendererLost(@NonNull Context ctx) {
+		return !((OsmandApplication) ctx.getApplicationContext()).getOsmandMap().getMapView().hasMapRenderer();
+	}
+
 	public static class TileBoxRequest {
 		private final int left;
 		private final int top;

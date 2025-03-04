@@ -17,7 +17,7 @@ import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
 import net.osmand.plus.helpers.LocationPointWrapper;
 import net.osmand.plus.helpers.MapRouteCalculationProgressListener;
 import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 

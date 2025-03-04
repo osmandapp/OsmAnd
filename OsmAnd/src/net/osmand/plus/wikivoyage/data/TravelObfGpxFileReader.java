@@ -33,6 +33,7 @@ import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.HeightDataLoader;
 import net.osmand.data.Amenity;
+import net.osmand.gpx.TravelObfGpxTrackOptimizer;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseLoadAsyncTask;
@@ -180,7 +181,8 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                 track.getSegments().add(trkSegment);
             }
             gpxFile.setTracks(new ArrayList<>());
-            gpxFile.getTracks().add(track);
+            gpxFile.getTracks().add(TravelObfGpxTrackOptimizer.mergeOverlappedSegmentsAtEdges(track));
+
             if (!(article instanceof TravelGpx)) {
                 gpxFile.setRef(article.ref);
             }
@@ -235,7 +237,17 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                                            @NonNull List<String> pgColors,
                                            @NonNull List<String> pgBackgrounds,
                                            @NonNull HeightDataLoader.Cancellable isCancelled) {
-        boolean allowReadFromMultipleMaps = article.hasOsmRouteId() && article.routeRadius > 0;
+        int left = 0, right = Integer.MAX_VALUE, top = 0, bottom = Integer.MAX_VALUE;
+
+        if (article.hasBbox31()) {
+            left = (int) article.getBbox31().left;
+            right = (int) article.getBbox31().right;
+            top = (int) article.getBbox31().top;
+            bottom = (int) article.getBbox31().bottom;
+        }
+
+        boolean allowReadFromMultipleMaps = article.hasOsmRouteId();
+
         for (AmenityIndexRepository repo : repos) {
             try {
                 if (isCancelled.isCancelled()) {
@@ -246,20 +258,20 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                     continue; // speed up reading of Wikivoyage and User's GPX files in OBF
                 }
                 if (article instanceof TravelGpx) {
-                    BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> sr = BinaryMapIndexReader.buildSearchRequest(
-                            0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, 15, null,
-                            matchSegmentsByRefTitleRouteId(article, segmentList, isCancelled));
-                    if (article.routeRadius >= 0) {
+                    BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> sr = BinaryMapIndexReader
+                            .buildSearchRequest(left, right, top, bottom, 15, null,
+                                    matchSegmentsByRefTitleRouteId(article, segmentList, isCancelled));
+                    if (article.routeRadius > 0 && !article.hasBbox31()) {
                         sr.setBBoxRadius(article.lat, article.lon, article.routeRadius);
                     }
-                    repo.searchMapIndex(sr); // TODO radius is excessive; consider route_bbox_latlon
+                    repo.searchMapIndex(sr);
                 }
                 BinaryMapIndexReader.SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
-                        0, 0, Algorithms.emptyIfNull(article.title), 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE,
+                        0, 0, Algorithms.emptyIfNull(article.title), left, right, top, bottom,
                         getSearchFilter(article.getMainFilterString(), article.getPointFilterString()),
                         matchPointsAndTags(article, pointList, gpxFileExtensions, pgNames, pgIcons, pgColors, pgBackgrounds, isCancelled),
                         null);
-                if (article.routeRadius >= 0) {
+                if (article.routeRadius > 0 && !article.hasBbox31()) {
                     pointRequest.setBBoxRadius(article.lat, article.lon, article.routeRadius);
                 }
                 if (!Algorithms.isEmpty(article.title)) {

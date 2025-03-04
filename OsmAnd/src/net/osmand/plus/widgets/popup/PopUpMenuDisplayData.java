@@ -20,8 +20,9 @@ public class PopUpMenuDisplayData {
 	public PopUpMenuWidthMode widthMode = PopUpMenuWidthMode.AS_ANCHOR_VIEW;
 	public List<PopUpMenuItem> menuItems;
 	public OnPopUpMenuItemClickListener onItemClickListener;
-	public boolean customDropDown = true;
+	public CustomDropDown customDropDown = CustomDropDown.AUTO_DROP_DOWN;
 	public boolean showCompound = true;
+	public boolean limitHeight = false;
 
 	public boolean hasCustomizations() {
 		if (layoutId != DEFAULT_LAYOUT_ID) {
@@ -35,4 +36,10 @@ public class PopUpMenuDisplayData {
 		return false;
 	}
 
+	public enum CustomDropDown {
+		AUTO_DROP_DOWN,
+		TOP_DROPDOWN,
+		BOTTOM_DROPDOWN,
+		NONE
+	}
 }

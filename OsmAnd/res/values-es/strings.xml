@@ -3694,7 +3694,7 @@
     <string name="context_menu_item_add_waypoint">Añadir punto de referencia de la traza</string>
     <string name="map_widget_monitoring">Grabación de viaje</string>
     <string name="marker_save_as_track">Guardar como archivo de traza</string>
-    <string name="follow_track">Seguir traza</string>
+    <string name="follow_track">Navegar traza</string>
     <string name="follow_track_descr">Elige el archivo de la traza a seguir</string>
     <string name="import_track_descr">Elige el archivo de la traza a seguir o impórtala desde el dispositivo.</string>
     <string name="select_another_track">Elegir otra traza</string>
@@ -5348,14 +5348,14 @@
     <string name="delete_map_description">¿Borrar el mapa %1$s?</string>
     <string name="maps_and_resources">Mapas y recursos</string>
     <string name="shared_string_show_icon">Mostrar el icono</string>
-    <string name="smart_folder_name_present">Esta carpeta inteligente ya está presente</string>
+    <string name="smart_folder_name_present">La carpeta inteligente ya existe</string>
     <string name="smart_folder_saved">Carpeta inteligente guardada</string>
-    <string name="add_smart_folder">Agregar una carpeta inteligente</string>
+    <string name="add_smart_folder">Añadir carpeta inteligente</string>
     <string name="empty_name">Nombre vacío</string>
     <string name="edit_filter">Editar filtro</string>
-    <string name="save_as_smart_folder">Guardar como una carpeta inteligente</string>
+    <string name="save_as_smart_folder">Guardar como carpeta inteligente</string>
     <string name="delete_smart_folder_dialog_message">Esto eliminará la carpeta inteligente « %1$s ». (No se eliminará ninguna pista.)</string>
-    <string name="empty_smart_folder_title">No hay pista coincidente</string>
+    <string name="empty_smart_folder_title">No hay traza coincidente</string>
     <string name="empty_smart_folder_description">Las pistas coincidentes aparecen aquí</string>
     <string name="configure_filter">Configurar el filtro</string>
     <string name="no_config_smart_folder_title">Sin configurar</string>

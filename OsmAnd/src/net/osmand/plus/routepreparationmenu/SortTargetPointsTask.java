@@ -13,7 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.utils.AndroidUtils;
 
@@ -68,10 +68,10 @@ public class SortTargetPointsTask extends AsyncTask<Void, Void, int[]> {
 		TargetPoint end = lt.remove(lt.size() - 1);
 		ArrayList<LatLon> al = new ArrayList<>();
 		for (TargetPoint p : lt) {
-			al.add(p.point);
+			al.add(p.getLatLon());
 		}
 		try {
-			return new TspAnt().readGraph(al, start.point, end.point).solve();
+			return new TspAnt().readGraph(al, start.getLatLon(), end.getLatLon()).solve();
 		} catch (Exception e) {
 			return null;
 		}

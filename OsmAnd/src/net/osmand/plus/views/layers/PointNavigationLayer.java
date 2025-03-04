@@ -28,7 +28,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.containers.ShiftedBitmap;
 import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
@@ -286,7 +286,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 			int r = tileBox.getDefaultRadiusPoi();
 			for (int i = 0; i < intermediatePoints.size(); i++) {
 				TargetPoint tp = intermediatePoints.get(i);
-				LatLon latLon = tp.point;
+				LatLon latLon = tp.getLatLon();
 				if (latLon != null) {
 					int ex = (int) point.x;
 					int ey = (int) point.y;
@@ -306,7 +306,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	@Override
 	public LatLon getObjectLocation(Object o) {
 		if (o instanceof TargetPoint) {
-			return ((TargetPoint) o).point;
+			return ((TargetPoint) o).getLatLon();
 		}
 		return null;
 	}

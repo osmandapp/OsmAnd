@@ -113,8 +113,11 @@ public abstract class SettingsItem {
 	public abstract long getEstimatedSize();
 
 	public boolean applyFileName(@NonNull String fileName) {
+		// Case: this.fileName could be a folder so all remote files will be collected for it ?
+		// + Subfolder check correct
+		// - Where is type prefix ? filename same for different types
 		String n = getFileName();
-		return n != null && (n.endsWith(fileName) || fileName.startsWith(n + File.separator));
+		return n != null && (n.equals(fileName) || fileName.startsWith(n + File.separator));
 	}
 
 	public boolean shouldReadOnCollecting() {
@@ -244,18 +247,16 @@ public abstract class SettingsItem {
 			@Override
 			public void writeToStream(@NonNull OutputStream outputStream, @Nullable IProgress progress) throws IOException {
 				JSONObject json = writeItemsToJson(new JSONObject());
-				if (json.length() > 0) {
-					try {
-						int bytesDivisor = 1024;
-						byte[] bytes = json.toString(2).getBytes("UTF-8");
-						if (progress != null) {
-							progress.startWork(bytes.length / bytesDivisor);
-						}
-						Algorithms.streamCopy(new ByteArrayInputStream(bytes), outputStream, progress, bytesDivisor);
-					} catch (JSONException e) {
-						warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
-						SettingsHelper.LOG.error("Failed to write json to stream", e);
+				try {
+					int bytesDivisor = 1024;
+					byte[] bytes = json.toString(2).getBytes("UTF-8");
+					if (progress != null) {
+						progress.startWork(bytes.length / bytesDivisor);
 					}
+					Algorithms.streamCopy(new ByteArrayInputStream(bytes), outputStream, progress, bytesDivisor);
+				} catch (JSONException e) {
+					warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
+					SettingsHelper.LOG.error("Failed to write json to stream", e);
 				}
 				if (progress != null) {
 					progress.finishTask();

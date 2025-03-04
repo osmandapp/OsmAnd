@@ -1,12 +1,7 @@
 package net.osmand.plus.views.mapwidgets;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
-import static net.osmand.plus.views.mapwidgets.WidgetGroup.ANT_PLUS;
-import static net.osmand.plus.views.mapwidgets.WidgetGroup.GLIDE;
-import static net.osmand.plus.views.mapwidgets.WidgetGroup.NAVIGATION_POINTS;
-import static net.osmand.plus.views.mapwidgets.WidgetGroup.SUNRISE_SUNSET;
-import static net.osmand.plus.views.mapwidgets.WidgetGroup.VEHICLE_METRICS;
-import static net.osmand.plus.views.mapwidgets.WidgetGroup.WEATHER;
+import static net.osmand.plus.views.mapwidgets.WidgetGroup.*;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.BOTTOM;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.LEFT;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.RIGHT;
@@ -47,16 +42,16 @@ import java.util.List;
 public enum WidgetType {
 
 	// Left Panel
-	NEXT_TURN("next_turn", R.string.map_widget_next_turn, R.string.next_turn_widget_desc, R.drawable.widget_next_turn_day, R.drawable.widget_next_turn_night, 0, WidgetGroup.ROUTE_MANEUVERS, WidgetGroup.ROUTE_GUIDANCE, LEFT),
-	SMALL_NEXT_TURN("next_turn_small", R.string.map_widget_next_turn_small, R.string.next_turn_widget_desc, R.drawable.widget_next_turn_small_day, R.drawable.widget_next_turn_small_night, 0, WidgetGroup.ROUTE_MANEUVERS, LEFT),
-	SECOND_NEXT_TURN("next_next_turn", R.string.map_widget_next_next_turn, R.string.second_next_turn_widget_desc, R.drawable.widget_second_next_turn_day, R.drawable.widget_second_next_turn_night, 0, WidgetGroup.ROUTE_MANEUVERS, WidgetGroup.ROUTE_GUIDANCE, LEFT),
+	NEXT_TURN("next_turn", R.string.map_widget_next_turn, R.string.next_turn_widget_desc, R.drawable.widget_next_turn_day, R.drawable.widget_next_turn_night, 0, WidgetGroup.ROUTE_MANEUVERS, ROUTE_GUIDANCE, TOP),
+	SMALL_NEXT_TURN("next_turn_small", R.string.map_widget_next_turn_small, R.string.next_turn_widget_desc, R.drawable.widget_next_turn_small_day, R.drawable.widget_next_turn_small_night, 0, ROUTE_MANEUVERS, LEFT),
+	SECOND_NEXT_TURN("next_next_turn", R.string.map_widget_next_next_turn, R.string.second_next_turn_widget_desc, R.drawable.widget_second_next_turn_day, R.drawable.widget_second_next_turn_night, 0, ROUTE_MANEUVERS, ROUTE_GUIDANCE, LEFT),
 
 	// Top panel
 	COORDINATES_MAP_CENTER("coordinates_map_center", R.string.coordinates_widget_map_center, R.string.coordinates_widget_map_center_desc, R.drawable.widget_coordinates_map_center_day, R.drawable.widget_coordinates_map_center_night, R.string.docs_widget_coordinates, WidgetGroup.COORDINATES_WIDGET, TOP),
 	COORDINATES_CURRENT_LOCATION("coordinates_current_location", R.string.coordinates_widget_current_location, R.string.coordinates_widget_current_location_desc, R.drawable.widget_coordinates_location_day, R.drawable.widget_coordinates_location_night, R.string.docs_widget_coordinates, WidgetGroup.COORDINATES_WIDGET, TOP),
 	STREET_NAME("street_name", R.string.street_name, R.string.street_name_widget_desc, R.drawable.widget_street_name_day, R.drawable.widget_street_name_night, R.string.docs_widget_street_name, null, TOP),
 	MARKERS_TOP_BAR("map_markers_top", R.string.map_markers_bar, R.string.map_markers_bar_widget_desc, R.drawable.widget_markers_topbar_day, R.drawable.widget_markers_topbar_night, R.string.docs_widget_markers, null, TOP),
-	LANES("lanes", R.string.show_lanes, R.string.lanes_widgets_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, R.string.docs_widget_lanes, null, WidgetGroup.ROUTE_GUIDANCE, TOP),
+	LANES("lanes", R.string.show_lanes, R.string.lanes_widgets_desc, R.drawable.widget_lanes_day, R.drawable.widget_lanes_night, R.string.docs_widget_lanes, null, ROUTE_GUIDANCE, TOP),
 
 	// Right panel
 	DISTANCE_TO_DESTINATION("distance", R.string.map_widget_distance_to_destination, R.string.distance_to_destination_widget_desc, R.drawable.widget_target_day, R.drawable.widget_target_night, 0, WidgetGroup.NAVIGATION_POINTS, RIGHT),
@@ -382,16 +377,13 @@ public enum WidgetType {
 
 		if (widgetInfo instanceof SimpleWidgetInfo) {
 			WidgetSettingsBaseFragment OBDSettingFragment = getOBDWidgetSettings(ctx, widgetInfo);
-			if (OBDSettingFragment != null){
+			if (OBDSettingFragment != null) {
 				return OBDSettingFragment;
 			}
 
-			SimpleWidget simpleWidget = (SimpleWidget) widgetInfo.widget;
-			if (simpleWidget.isVerticalWidget()) {
-				BaseSimpleWidgetSettingsFragment settingsFragment = new BaseSimpleWidgetSettingsFragment();
-				settingsFragment.setWidgetType(this);
-				return settingsFragment;
-			}
+			BaseSimpleWidgetSettingsFragment settingsFragment = new BaseSimpleWidgetSettingsFragment();
+			settingsFragment.setWidgetType(this);
+			return settingsFragment;
 		} else if (widgetInfo != null && widgetInfo.widget instanceof ISupportWidgetResizing) {
 			if (widgetInfo.widgetPanel.isPanelVertical()) {
 				BaseResizableWidgetSettingFragment settingFragment = new BaseResizableWidgetSettingFragment();

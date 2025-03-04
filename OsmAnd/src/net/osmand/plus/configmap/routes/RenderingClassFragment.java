@@ -41,7 +41,7 @@ public class RenderingClassFragment extends MapRoutesFragment {
 		super.onCreate(savedInstanceState);
 
 		renderingClass = app.getRouteLayersHelper().getSelectedRenderingClass();
-		preference = settings.getСustomBooleanRenderClassProperty(renderingClass.getName(), renderingClass.isEnabledByDefault());
+		preference = settings.getBooleanRenderClassProperty(renderingClass);
 	}
 
 	protected void setupHeader(@NonNull View view) {

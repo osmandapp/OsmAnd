@@ -270,7 +270,7 @@ public class ProfileAppearanceController extends BaseDialogController {
 				.setViewAngle(changedProfile.viewAngleVisibility)
 				.setLocationRadius(changedProfile.locationRadiusVisibility);
 
-		app.getSettings().copyPreferencesFromProfile(changedProfile.parent, builder.getApplicationMode());
+		app.getSettings().copyPreferencesFromProfile(changedProfile.parent, builder.getApplicationMode(), true);
 		ApplicationMode mode = ApplicationMode.saveProfile(builder, app);
 		if (!ApplicationMode.values(app).contains(mode)) {
 			ApplicationMode.changeProfileAvailability(mode, true, app);

@@ -3,6 +3,7 @@ package net.osmand.plus.routepreparationmenu;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_APP_MODES_OPTIONS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_OPTIONS_MENU_ID;
+import static net.osmand.data.PointDescription.POINT_TYPE_LOCATION;
 import static net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.MapRouteMenuType.ROUTE_DETAILS;
 import static net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.MapRouteMenuType.ROUTE_INFO;
 
@@ -70,7 +71,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenuFragment;
@@ -2214,37 +2215,20 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				if (i > 0) {
 					via.append(" ");
 				}
-				TargetPoint p = points.get(i);
-				String description = p.getOnlyName();
-				via.append(getRoutePointDescription(p.point, description));
-				boolean needAddress = new PointDescription(PointDescription.POINT_TYPE_LOCATION, description).isSearchingAddress(mapActivity)
-						&& !intermediateRequestsLatLon.contains(p.point);
+				TargetPoint point = points.get(i);
+				String description = point.getOnlyName();
+				via.append(point.getRoutePointDescription(mapActivity, false));
+				boolean needAddress = new PointDescription(POINT_TYPE_LOCATION, description)
+						.isSearchingAddress(mapActivity)
+						&& !intermediateRequestsLatLon.contains(point.getLatLon());
 				if (needAddress) {
-					AddressLookupRequest lookupRequest = new AddressLookupRequest(p.point, address -> updateMenu(), null);
-					intermediateRequestsLatLon.add(p.point);
+					AddressLookupRequest lookupRequest = new AddressLookupRequest(point.getLatLon(),
+							address -> updateMenu(), null);
+					intermediateRequestsLatLon.add(point.getLatLon());
 					app.getGeocodingLookupService().lookupAddress(lookupRequest);
 				}
 			}
 			return via.toString();
-		}
-		return "";
-	}
-
-	public String getRoutePointDescription(double lat, double lon) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			return PointDescription.getLocationNamePlain(mapActivity, lat, lon);
-		}
-		return "";
-	}
-
-	public String getRoutePointDescription(LatLon l, String d) {
-		if (d != null && d.length() > 0) {
-			return d.replace(':', ' ');
-		}
-		MapActivity mapActivity = getMapActivity();
-		if (l != null && mapActivity != null) {
-			return getRoutePointDescription(l.getLatitude(), l.getLongitude());
 		}
 		return "";
 	}
@@ -2256,9 +2240,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			String name = null;
 			if (start != null) {
 				name = start.getOnlyName().length() > 0 ? start.getOnlyName() :
-						(mapActivity.getString(R.string.route_descr_map_location) + " " + getRoutePointDescription(start.getLatitude(), start.getLongitude()));
+						(mapActivity.getString(R.string.route_descr_map_location) + " "
+								+ PointDescription.getLocationNamePlain(mapActivity, start.getLatitude(), start.getLongitude()));
 
-				LatLon latLon = start.point;
+				LatLon latLon = start.getLatLon();
 				PointDescription pointDescription = start.getOriginalPointDescription();
 				boolean needAddress = pointDescription != null && pointDescription.isSearchingAddress(mapActivity);
 				cancelStartPointAddressRequest();
@@ -2292,13 +2277,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			TargetPointsHelper targets = app.getTargetPointsHelper();
 			TargetPoint finish = targets.getPointToNavigate();
 			if (finish != null) {
-				toText.setText(getRoutePointDescription(finish.point, finish.getOnlyName()));
+				toText.setText(finish.getRoutePointDescription(mapActivity, false));
 
 				PointDescription pointDescription = finish.getOriginalPointDescription();
 				boolean needAddress = pointDescription != null && pointDescription.isSearchingAddress(mapActivity);
 				cancelTargetPointAddressRequest();
 				if (needAddress) {
-					targetPointRequest = new AddressLookupRequest(finish.point, address -> {
+					targetPointRequest = new AddressLookupRequest(finish.getLatLon(), address -> {
 						targetPointRequest = null;
 						updateMenu();
 					}, null);

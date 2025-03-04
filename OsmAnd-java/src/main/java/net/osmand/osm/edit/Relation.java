@@ -108,8 +108,8 @@ public class Relation extends Entity {
 	@Override
 	public void initializeLinks(Map<EntityId, Entity> entities){
 		if (members != null) {
-			for(RelationMember rm : members) {
-				if(rm.entityId != null && entities.containsKey(rm.entityId)) {
+			for (RelationMember rm : members) {
+				if (rm.entityId != null && entities.containsKey(rm.entityId)) {
 					rm.entity = entities.get(rm.entityId);
 				}
 			}

@@ -16,6 +16,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.util.Algorithms;
 
@@ -248,11 +249,10 @@ public class PointDescription {
 		return results;
 	}
 
-	public static String getLocationNamePlain(Context ctx, double lat, double lon) {
-		OsmandSettings st = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
-		int f = st.COORDINATES_FORMAT.get();
-		return OsmAndFormatter.getFormattedCoordinates(lat, lon, f);
-
+	public static String getLocationNamePlain(@NonNull Context ctx, double lat, double lon) {
+		OsmandApplication app = AndroidUtils.getApp(ctx);
+		int format = app.getSettings().COORDINATES_FORMAT.get();
+		return OsmAndFormatter.getFormattedCoordinates(lat, lon, format);
 	}
 
 	public static String getLocationOlcName(double lat, double lon) {
