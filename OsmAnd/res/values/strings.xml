@@ -74,7 +74,17 @@
     <string name="av_audio_sample_rate">Audio sample rate</string>
     <string name="av_audio_sample_rate_descr">Select audio sample rate.</string>
     <string name="connect_new_scanner">Connect new scanner</string>
-    <string name="release_5_0" translatable="false"></string>
+    <string name="release_5_0" translatable="false">
+        • New navigation widget combines turn arrow and navigation instructions
+        • Current route info widget: displays ETA, arrival time, and distance
+        • Ability to select widget size for left and right panels
+        • Added ability to change and set the default appearance for favorite groups
+        • Android Auto: view ETA and distance to next waypoint; city names now appear in search results
+        • Geographical Grid Overlay: With customizable appearance and formats.
+        • Mountain peak heights in feet
+        • Added Hebrew TTS for navigation
+        • AIS Vessel Tracking Plugin: for nautical navigation
+    </string>
     <string name="preview_next_turn">Preview next turn</string>
     <string name="purchase_feature_desc_vehicle_metrics_obd_ii">Track vital vehicle data using the OBD-II protocol. Monitor key metrics like speed, engine RPM, fuel consumption, and more.</string>
     <string name="vehicle_metrics_obd_ii">Vehicle Metrics (OBD-II)</string>
