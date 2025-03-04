@@ -188,4 +188,6 @@
     <string name="shared_string_normal">Àbhaisteach</string>
     <string name="download_tiles">Luchdaich a-nuas leacan</string>
     <string name="auto_25_chars_route_tl_kl">Tionndaidh agus cùm gu do làimh chlì</string>
+    <string name="auto_backup_title">Lethbhreac-glèidhidh fèin-obrachail</string>
+    <string name="shared_string_duplicate">Lethbhreac</string>
 </resources>
