@@ -193,4 +193,5 @@
     <string name="compass_always_hidden">An-còmhnaidh falaichte</string>
     <string name="compass_always_visible">An-còmhnaidh faicsinneach</string>
     <string name="download_complete">Luchdachadh a-nuas dèanta</string>
+    <string name="marker_1st">A\' chiad comharraiche</string>
 </resources>
