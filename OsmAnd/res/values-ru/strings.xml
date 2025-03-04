@@ -5943,4 +5943,5 @@
     <string name="hmd_promo">HMD Промо на %1$s месяцев</string>
     <string name="hmd_promo_description">Полный доступ к таким возможностям как безлимитная загрузка карт, 3D-рельеф и прочим на %1$s месяцев</string>
     <string name="save_favorite_default_appearance">Применить изменения к существующим точкам в папке или только к новым?</string>
+    <string name="show_list">Показать список</string>
 </resources>
