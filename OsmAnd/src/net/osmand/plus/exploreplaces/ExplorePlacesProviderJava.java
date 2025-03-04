@@ -3,6 +3,7 @@ package net.osmand.plus.exploreplaces;
 import android.annotation.SuppressLint;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -29,17 +30,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-// TODO use gzip in loading
-// TODO errors shouldn'go with empty response "" into cache!
-// TODO remove checks poi type subtype null
+// TODO use gzip in loading +
+// TODO errors shouldn'go with empty response "" into cache! +
+// TODO remove checks poi type subtype null +
 // TODO display all data downloaded even if maps are not loaded
 // TODO: why recreate provider when new points are loaded? that causes blinking
 // TODO: scheduleImageRefreshes in layer is incorrect it starts downloading all images and stops interacting
 // TODO images shouldn't be queried if they are not visible in all lists! size doesn't matter !
-// TODO show on map close button is not visible
+// TODO show on map close button is not visible +
 // TODO layer sometimes becomes non-interactive - MAP FPS drops
-// TODO Context menu doesn't work correctly and duplicates actual POI
-// TODO compass is not rotating
+// TODO Context menu doesn't work correctly and duplicates actual POI +
+// TODO compass is not rotating +
 // Extra: display new categories from web
 public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 
@@ -143,9 +144,7 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 				if (!dbHelper.isDataExpired(zoom, tileX, tileY, queryLang)) {
 					List<OsmandApiFeatureData> places = dbHelper.getPlaces(zoom, tileX, tileY, queryLang);
 					for (OsmandApiFeatureData item : places) {
-						// TODO remove checks poi type subtype null
-						if (Algorithms.isEmpty(item.properties.photoTitle)
-								|| item.properties.poitype == null || item.properties.poisubtype == null) {
+						if (Algorithms.isEmpty(item.properties.photoTitle)) {
 							continue;
 						}
 						ExploreTopPlacePoint point = new ExploreTopPlacePoint(item);
@@ -208,7 +207,7 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 			}
 
 			@Override
-			public void onFinish(@NonNull List<? extends OsmandApiFeatureData> result) {
+			public void onFinish(@Nullable List<? extends OsmandApiFeatureData> result) {
 				synchronized (ExplorePlacesProviderJava.this) {
 					finishedTasks++; // Increment the finished task counter
 					notifyListeners(startedTasks != finishedTasks);
@@ -238,7 +237,7 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 	}
 
 	public Amenity getAmenity(LatLon latLon, long osmId) {
-		final Amenity[] foundAmenity = new Amenity[]{null};
+		final Amenity[] foundAmenity = new Amenity[] {null};
 		int radius = NEARBY_MIN_RADIUS;
 		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
 		app.getResourceManager().searchAmenities(

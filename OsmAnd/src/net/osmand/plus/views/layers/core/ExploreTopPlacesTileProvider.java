@@ -53,7 +53,7 @@ public class ExploreTopPlacesTileProvider extends interface_MapTiledCollectionPr
 	private static final int SMALL_ICON_BORDER_DP = 1;
 	private static final int BIG_ICON_BORDER_DP = 2;
 	private static final int SMALL_ICON_SIZE_DP = 20;
-	private static final int BIG_ICON_SIZE_DP = 40;
+	private static final int BIG_ICON_SIZE_DP = 50;
 	private static final int POINT_OUTER_COLOR = 0xffffffff;
 
 	private final int baseOrder;
@@ -61,6 +61,33 @@ public class ExploreTopPlacesTileProvider extends interface_MapTiledCollectionPr
 	private Bitmap cachedSmallBitmap;
 	private final PointI pinIconOffset;
 	private static Bitmap circleBitmap;
+
+	private static Bitmap smallCircleBitmap;
+	private static Bitmap bigCircleBitmap;
+
+	private static Bitmap getCircleBitmap(@NonNull Context ctx, int iconSizeDp){
+		int iconSizePx = AndroidUtils.dpToPxAuto(ctx, iconSizeDp);
+		Bitmap tmpBmp = RenderingIcons.getBitmapFromVectorDrawable(ctx, R.drawable.bg_point_circle);
+		Bitmap result = Bitmap.createBitmap(iconSizePx, iconSizePx, Bitmap.Config.ARGB_8888);
+		tmpBmp = Bitmap.createScaledBitmap(tmpBmp, iconSizePx, iconSizePx, true);
+		Canvas canvas = new Canvas(result);
+		canvas.drawBitmap(tmpBmp, 0, 0, new Paint());
+		return result;
+	}
+
+	private static Bitmap getBigCircle(@NonNull Context ctx) {
+		if (bigCircleBitmap == null) {
+			bigCircleBitmap = getCircleBitmap(ctx, BIG_ICON_SIZE_DP);
+		}
+		return bigCircleBitmap;
+	}
+
+	private static Bitmap getSmallCircle(@NonNull Context ctx) {
+		if (smallCircleBitmap == null) {
+			smallCircleBitmap = getCircleBitmap(ctx, SMALL_ICON_SIZE_DP);
+		}
+		return smallCircleBitmap;
+	}
 
 	private class TopPlaceCollectionPoint extends interface_MapTiledCollectionPoint {
 
@@ -247,7 +274,7 @@ public class ExploreTopPlacesTileProvider extends interface_MapTiledCollectionPr
 
 	public static Bitmap createSmallPointBitmap(@NonNull Context ctx) {
 		int borderWidth = AndroidUtils.dpToPx(ctx, SMALL_ICON_BORDER_DP);
-		Bitmap circle = getCircle(ctx);
+		Bitmap circle = getSmallCircle(ctx);
 		int smallIconSize = AndroidUtils.dpToPx(ctx, SMALL_ICON_SIZE_DP);
 		Bitmap bitmapResult = Bitmap.createBitmap(smallIconSize, smallIconSize, Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmapResult);
@@ -271,9 +298,10 @@ public class ExploreTopPlacesTileProvider extends interface_MapTiledCollectionPr
 	public static Bitmap createBigBitmap(@NonNull OsmandApplication app, Bitmap loadedBitmap, boolean isSelected) {
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		int borderWidth = AndroidUtils.dpToPxAuto(app, BIG_ICON_BORDER_DP);
-		Bitmap circle = getCircle(app);
-		int bigIconSize = getBigIconSize(app);
+		Bitmap circle = getBigCircle(app);
+		int bigIconSize = AndroidUtils.dpToPxAuto(app, BIG_ICON_SIZE_DP);
 		Bitmap bitmapResult = Bitmap.createBitmap(bigIconSize, bigIconSize, Bitmap.Config.ARGB_8888);
+		circle = Bitmap.createScaledBitmap(circle, bigIconSize, bigIconSize, true);
 		Canvas canvas = new Canvas(bitmapResult);
 		Paint bitmapPaint = createBitmapPaint();
 		bitmapPaint.setColorFilter(new PorterDuffColorFilter(isSelected ? app.getColor(ColorUtilities.getActiveColorId(nightMode)) : POINT_OUTER_COLOR, PorterDuff.Mode.SRC_IN));

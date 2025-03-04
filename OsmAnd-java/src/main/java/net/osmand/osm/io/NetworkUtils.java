@@ -13,6 +13,7 @@ import java.net.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 public class NetworkUtils {
@@ -20,25 +21,36 @@ public class NetworkUtils {
 	private static final String GPX_UPLOAD_USER_AGENT = "OsmGPXUploadAgent";
 	private static Proxy proxy = null;
 
-	public static String sendGetRequest(String urlText, String userNamePassword, StringBuilder responseBody){
+	public static String sendGetRequest(String urlText, String userNamePassword, StringBuilder responseBody) {
+		return sendGetRequest(urlText, userNamePassword, responseBody, false);
+	}
+
+	public static String sendGetRequest(String urlText, String userNamePassword, StringBuilder responseBody, boolean useGzip) {
 		try {
 			log.info("GET : " + urlText);
 			HttpURLConnection conn = getHttpURLConnection(urlText);
 			conn.setDoInput(true);
 			conn.setDoOutput(false);
 			conn.setRequestMethod("GET");
-			if(userNamePassword != null) {
-				conn.setRequestProperty("Authorization", "Basic " + Base64.encode(userNamePassword)); //$NON-NLS-1$ //$NON-NLS-2$
+			if (userNamePassword != null) {
+				conn.setRequestProperty("Authorization", "Basic " + Base64.encode(userNamePassword));
 			}
-			conn.setRequestProperty("User-Agent", "OsmAnd"); //$NON-NLS-1$ //$NON-NLS-2$
+			conn.setRequestProperty("User-Agent", "OsmAnd");
+			if (useGzip) {
+				conn.setRequestProperty("Accept-Encoding", "gzip");
+			}
 			log.info("Response code and message : " + conn.getResponseCode() + " " + conn.getResponseMessage());
-			if(conn.getResponseCode() != 200){
+			if (conn.getResponseCode() != 200) {
 				return conn.getResponseMessage();
 			}
-			InputStream is = conn.getInputStream();
+			String contentEncoding = conn.getHeaderField("Content-Encoding");
+			InputStream inputStream = conn.getInputStream();
+			if (useGzip && contentEncoding != null && contentEncoding.equalsIgnoreCase("gzip")) {
+				inputStream = new GZIPInputStream(inputStream);
+			}
 			responseBody.setLength(0);
-			if (is != null) {
-				BufferedReader in = new BufferedReader(new InputStreamReader(is, "UTF-8")); //$NON-NLS-1$
+			if (inputStream != null) {
+				BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8")); //$NON-NLS-1$
 				String s;
 				boolean first = true;
 				while ((s = in.readLine()) != null) {
@@ -49,7 +61,7 @@ public class NetworkUtils {
 					}
 					responseBody.append(s);
 				}
-				is.close();
+				inputStream.close();
 			}
 			return null;
 		} catch (IOException e) {

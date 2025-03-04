@@ -15,12 +15,12 @@ class GetNearbyPlacesImagesTask(
 	val zoom: Int,
 	val locale: String,
 	val listener: GetImageCardsListener) :
-	KAsyncTask<Unit, Unit, List<OsmandApiFeatureData>>(true) {
+	KAsyncTask<Unit, Unit, List<OsmandApiFeatureData>?>(true) {
 	private val LOG = LoggerFactory.getLogger("GetNearbyImagesTask")
 
 	private val GET_NEARBY_IMAGES_CARD_THREAD_ID = 10105
 
-	override suspend fun doInBackground(vararg params: Unit): List<OsmandApiFeatureData> {
+	override suspend fun doInBackground(vararg params: Unit): List<OsmandApiFeatureData>? {
 		TrafficStats.setThreadStatsTag(GET_NEARBY_IMAGES_CARD_THREAD_ID)
 		var wikimediaImageList = Collections.emptyList<OsmandApiFeatureData>()
 		LOG.debug("Start loading nearby places")
@@ -33,13 +33,13 @@ class GetNearbyPlacesImagesTask(
 		return wikimediaImageList
 	}
 
-	override fun onPostExecute(result: List<OsmandApiFeatureData>) {
+	override fun onPostExecute(result: List<OsmandApiFeatureData>?) {
 		super.onPostExecute(result)
 		listener.onFinish(result)
 	}
 
 	interface GetImageCardsListener {
 		fun onTaskStarted()
-		fun onFinish(result: List<OsmandApiFeatureData>)
+		fun onFinish(result: List<OsmandApiFeatureData>?)
 	}
 }

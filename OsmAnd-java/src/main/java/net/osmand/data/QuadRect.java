@@ -117,5 +117,4 @@ public class QuadRect {
 	public String toString() {
 		return "[" + (float) left + "," + (float) top + " - " + (float) right + "," + (float) bottom + "]";
 	}
-
 }

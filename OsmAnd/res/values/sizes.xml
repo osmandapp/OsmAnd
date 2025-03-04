@@ -396,6 +396,7 @@
     <dimen name="grid_menu_item_bottom_top_margin">16dp</dimen>
     <dimen name="grid_menu_item_sides_margin">40dp</dimen>
 
+	<dimen name="bottom_sheet_min_peek_height">50dp</dimen>
 	<dimen name="bottom_sheet_menu_peek_height">300dp</dimen>
 
 	<dimen name="side_of_the_world_button_size">36dp</dimen>
@@ -482,5 +483,6 @@
 
 	<dimen name="nearby_place_image_height">108dp</dimen>
 	<dimen name="nearby_place_image_width">144dp</dimen>
+	<dimen name="nearby_place_item_height">210dp</dimen>
 	<dimen name="nearby_place_image_vertical_size">66dp</dimen>
 </resources>
