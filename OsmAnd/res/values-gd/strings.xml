@@ -190,4 +190,7 @@
     <string name="auto_25_chars_route_tl_kl">Tionndaidh agus cùm gu do làimh chlì</string>
     <string name="auto_backup_title">Lethbhreac-glèidhidh fèin-obrachail</string>
     <string name="shared_string_duplicate">Lethbhreac</string>
+    <string name="compass_always_hidden">An-còmhnaidh falaichte</string>
+    <string name="compass_always_visible">An-còmhnaidh faicsinneach</string>
+    <string name="download_complete">Luchdachadh a-nuas dèanta</string>
 </resources>
