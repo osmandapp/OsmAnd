@@ -5479,12 +5479,12 @@
     <string name="rendering_attr_showDirtbikeTrails_description">Показати стежки для ґрунтових велосипедів</string>
     <string name="shared_string_decrease">Зменшити</string>
     <string name="shared_string_increase">Збільшити</string>
-    <string name="no_photos_available_descr">До цієї локації ще не додано жодної фотографії користувача</string>
-    <string name="no_photos_available">Фото відсутні</string>
+    <string name="no_photos_available_descr">До цього місця ще не додано жодної фотографії користувача</string>
+    <string name="no_photos_available">Фотографії відсутні</string>
     <string name="open_in_browser">Відкрити в браузері</string>
     <string name="shared_string_source">Джерело</string>
     <string name="shared_string_no_internet_connection">Зʼєднання з інтернетом відсутнє</string>
-    <string name="no_internet_descr">Будь ласка, перевірте з\'єднання та спробуйте ще раз.</string>
+    <string name="no_internet_descr">Перевірте підключення та повторіть спробу.</string>
     <string name="obd_fuel_type_gasoline">Бензин</string>
     <string name="obd_fuel_type_methanol">Метанол</string>
     <string name="obd_fuel_type_ethanol">Етанол</string>
@@ -5726,4 +5726,5 @@
     <string name="show_dm_grids">Використовувати DM замість градусів або DMS</string>
     <string name="show_dms_grids">Використовувати DMS замість градусів</string>
     <string name="show_mercator_grids">Використовувати Mercator замість WGS84 або UTM</string>
+    <string name="show_list">Показати список</string>
 </resources>

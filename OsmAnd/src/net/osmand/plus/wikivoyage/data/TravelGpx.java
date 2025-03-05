@@ -38,6 +38,7 @@ public class TravelGpx extends TravelArticle {
 	public static final String START_ELEVATION = "start_ele";
 	public static final String ELE_GRAPH = "ele_graph";
 	public static final String ROUTE_BBOX_RADIUS = "route_bbox_radius";
+	public static final String ROUTE_SHORTLINK_TILES = "route_shortlink_tiles";
 	public static final String USER = "user";
 	public static final String ROUTE_TYPE = "route_type";
 	public static final String ROUTE_ACTIVITY_TYPE = "route_activity_type";

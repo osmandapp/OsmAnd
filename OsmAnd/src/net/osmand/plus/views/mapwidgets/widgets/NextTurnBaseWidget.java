@@ -52,9 +52,6 @@ import java.util.List;
 public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget, ISupportVerticalPanel, ISupportWidgetResizing, ISupportMultiRow {
 
 	private static final int DISTANCE_CHANGE_THRESHOLD = 10;
-	private static final int EXIT_OUT_TEXT_SIZE_L = 22;
-	private static final int EXIT_OUT_TEXT_SIZE_M = 15;
-	private static final int EXIT_OUT_TEXT_SIZE_S = 11;
 	public static final int SHIELD_HEIGHT_DP = 40;
 
 	protected boolean horizontalMini;
@@ -230,19 +227,30 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 			cachedRoadShields = null;
 		}
 
-		if (Algorithms.isEmpty(streetName.exitRef)) {
-			AndroidUiHelper.updateVisibility(exitView, false);
-		} else {
-			String exit = app.getString(R.string.shared_string_road_exit);
-			String exitViewText = app.getString(R.string.ltr_or_rtl_combine_via_space, exit, streetName.exitRef);
-			exitView.setText(exitViewText);
-			AndroidUiHelper.updateVisibility(exitView, true);
-		}
+		setExit(streetName);
 
 		if (Algorithms.isEmpty(streetName.text)) {
 			streetView.setText("");
 		} else if (!streetName.text.equals(streetView.getText().toString())) {
 			streetView.setText(streetName.text);
+		}
+	}
+
+	private void setExit(@NonNull CurrentStreetName streetName) {
+		String exitNumber = null;
+		if (turnType != null && turnType.getExitOut() > 0) {
+			exitNumber = String.valueOf(turnType.getExitOut());
+		} else if (!Algorithms.isEmpty(streetName.exitRef)) {
+			exitNumber = streetName.exitRef;
+		}
+
+		if (!Algorithms.isEmpty(exitNumber)) {
+			String exit = app.getString(R.string.shared_string_road_exit);
+			String exitViewText = app.getString(R.string.ltr_or_rtl_combine_via_space, exit, exitNumber);
+			exitView.setText(exitViewText);
+			AndroidUiHelper.updateVisibility(exitView, true);
+		} else {
+			AndroidUiHelper.updateVisibility(exitView, false);
 		}
 	}
 
@@ -378,20 +386,8 @@ public class NextTurnBaseWidget extends TextInfoWidget implements IComplexWidget
 		distanceSubView.setTypeface(Typeface.DEFAULT, typefaceStyle);
 		streetView.setTypeface(Typeface.DEFAULT, typefaceStyle);
 
-		textPaint.setTypeface(Typeface.create(Typeface.DEFAULT, typefaceStyle));
-		textPaint.setTextSize(AndroidUtils.spToPx(app, getVerticalExitOutTextSize()));
-		textPaint.setColor(textState.textColor);
-		turnDrawable.updateTextPaint(textPaint, isNightMode());
 		turnDrawable.updateColors(isNightMode());
 		bg.setBackgroundResource(textState.widgetBackgroundId);
-	}
-
-	private int getVerticalExitOutTextSize() {
-		return switch (widgetState.getWidgetSizePref().get()) {
-			case SMALL -> EXIT_OUT_TEXT_SIZE_S;
-			case MEDIUM -> isFullRow ? EXIT_OUT_TEXT_SIZE_M : EXIT_OUT_TEXT_SIZE_S;
-			case LARGE -> isFullRow ? EXIT_OUT_TEXT_SIZE_L : EXIT_OUT_TEXT_SIZE_M;
-		};
 	}
 
 	@Override

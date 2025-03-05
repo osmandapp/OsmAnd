@@ -1,5 +1,6 @@
 package net.osmand.plus.wikivoyage.data;
 
+import net.osmand.data.QuadRect;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.primitives.Link;
@@ -24,6 +25,7 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 import net.osmand.wiki.WikivoyageOSMTags;
 
 import org.apache.commons.codec.binary.Hex;
@@ -53,7 +55,6 @@ public class TravelArticle {
 	String imageTitle;
 	GpxFile gpxFile;
 	String routeId;
-	int routeRadius = -1;
 	public String ref;
 	String routeSource = "";
 	long originalId;
@@ -65,6 +66,30 @@ public class TravelArticle {
 	long lastModified;
 	boolean gpxFileReading;
 	boolean gpxFileRead;
+
+	int routeRadius = -1;
+	private QuadRect bbox31;
+	public final static int TRAVEL_GPX_DEFAULT_SEARCH_RADIUS = 50 * 1000;
+
+	public void initShortLinkTiles(@NonNull String shortLinkTiles) {
+		this.bbox31 = new QuadRect();
+		for (String shortLink : shortLinkTiles.split(",")) {
+			QuadRect bbox = MapUtils.decodeShortLinkToQuadRect(shortLink);
+			int left = MapUtils.get31TileNumberX(bbox.left);
+			int top = MapUtils.get31TileNumberY(bbox.top);
+			int right = MapUtils.get31TileNumberX(bbox.right);
+			int bottom = MapUtils.get31TileNumberY(bbox.bottom);
+			this.bbox31.expand(left, top, right, bottom);
+		}
+	}
+
+	public QuadRect getBbox31() {
+		return bbox31;
+	}
+
+	public boolean hasBbox31() {
+		return bbox31 != null && !bbox31.hasInitialState();
+	}
 
 	@NonNull
 	public TravelArticleIdentifier generateIdentifier() {

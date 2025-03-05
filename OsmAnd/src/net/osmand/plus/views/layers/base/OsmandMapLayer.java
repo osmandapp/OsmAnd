@@ -356,8 +356,19 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		return new QuadTree<>(bounds, 4, 0.6f);
 	}
 
+	public static QuadTree<QuadRect> initBoundIntersections(double left, double top, double right, double bottom) {
+		QuadRect bounds = new QuadRect(left, top, right, bottom);
+		bounds.inset(-bounds.width() / 4, -bounds.height() / 4);
+		return new QuadTree<>(bounds, 4, 0.6f);
+	}
+
 	public static boolean intersects(@NonNull QuadTree<QuadRect> boundIntersections, float x, float y, float width, float height) {
 		QuadRect visibleRect = calculateRect(x, y, width, height);
+		return intersects(boundIntersections, visibleRect, true);
+	}
+
+	public static boolean intersectsD(@NonNull QuadTree<QuadRect> boundIntersections, double x, double y, double width, double height) {
+		QuadRect visibleRect = calculateRectD(x, y, width, height);
 		return intersects(boundIntersections, visibleRect, true);
 	}
 
@@ -390,6 +401,16 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 	}
 
 	public static QuadRect calculateRect(float x, float y, float width, float height) {
+		QuadRect rf;
+		double left = x - width / 2.0d;
+		double top = y - height / 2.0d;
+		double right = left + width;
+		double bottom = top + height;
+		rf = new QuadRect(left, top, right, bottom);
+		return rf;
+	}
+
+	public static QuadRect calculateRectD(double x, double y, double width, double height) {
 		QuadRect rf;
 		double left = x - width / 2.0d;
 		double top = y - height / 2.0d;

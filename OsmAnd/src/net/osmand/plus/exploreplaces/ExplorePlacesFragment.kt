@@ -26,6 +26,7 @@ import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseOsmAndFragment
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.search.NearbyPlacesAdapter
+import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.views.OsmandMapTileView

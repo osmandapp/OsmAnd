@@ -157,10 +157,9 @@ public class AppInitializer implements IProgress {
 		if (initSettings) {
 			return;
 		}
+		String name = getLocalClassName(app.getAppCustomization().getMapActivity().getName());
+		startPrefs = app.getSharedPreferences(name, Context.MODE_PRIVATE);
 		ApplicationMode.onApplicationStart(app);
-		startPrefs = app.getSharedPreferences(
-				getLocalClassName(app.getAppCustomization().getMapActivity().getName()),
-				Context.MODE_PRIVATE);
 		appVersionUpgrade.upgradeVersion(startPrefs, LAST_APP_VERSION);
 		initSettings = true;
 	}

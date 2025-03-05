@@ -480,10 +480,10 @@ public class ApplicationMode {
 		app.getSettings().APP_MODE_VERSION.setModeValue(this, version);
 	}
 
-	public static void onApplicationStart(OsmandApplication app) {
+	public static void onApplicationStart(@NonNull OsmandApplication app) {
 		initCustomModes(app);
 		initModesParams(app);
-		WidgetsAvailabilityHelper.initRegVisibility();
+		WidgetsAvailabilityHelper.initRegVisibility(app);
 		reorderAppModes();
 	}
 
@@ -585,7 +585,7 @@ public class ApplicationMode {
 			mode.setLocationRadius(builder.locationRadius);
 		} else {
 			mode = builder.customReg();
-			WidgetsAvailabilityHelper.initRegVisibility();
+			WidgetsAvailabilityHelper.initRegVisibility(app);
 		}
 		reorderAppModes();
 		saveCustomAppModesToSettings(app);
