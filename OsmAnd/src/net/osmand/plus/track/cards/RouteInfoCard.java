@@ -322,10 +322,16 @@ public class RouteInfoCard extends MapBaseCard {
 			if (poiType != null) {
 				return poiType.getTranslation();
 			} else {
-				String capitalizedKey = Algorithms.capitalizeFirstLetterAndLowercase(key);
 				String stringKey = key.toLowerCase().replace(":", "_");
-				String translatedTagName = AndroidUtils.getStringByProperty(app, "tag_" + stringKey);
-				return Algorithms.isEmpty(translatedTagName) ? capitalizedKey : translatedTagName;
+				String translatedAsTagName = AndroidUtils.getStringByProperty(app, "tag_" + stringKey);
+				if (!Algorithms.isEmpty(translatedAsTagName)) {
+					return translatedAsTagName;
+				}
+				String translatedAsPoiName = AndroidUtils.getStringByProperty(app, "poi_" + stringKey);
+				if (!Algorithms.isEmpty(translatedAsPoiName)) {
+					return translatedAsPoiName;
+				}
+				return Algorithms.capitalizeFirstLetterAndLowercase(key);
 			}
 		}
 
