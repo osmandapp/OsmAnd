@@ -113,6 +113,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		SAVE_HEADING_TO_GPX = registerBooleanPreference("save_heading_to_gpx", true).makeGlobal().makeShared().cache();
 		SHOW_SYMBOLS_DEBUG_INFO = registerBooleanPreference("show_symbols_debug_info", false).makeGlobal().makeShared().cache();
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP = registerBooleanPreference("allow_symbols_display_on_top", false).makeGlobal().makeShared().cache();
+
+		// TODO: delete outdated preferences
 		SHOW_GRID = registerBooleanPreference("show_grid", false).makeGlobal().makeShared().cache();
 		SHOW_UTM_GRID = registerBooleanPreference("show_utm_grid", false).makeGlobal().makeShared().cache();
 		SHOW_MERCATOR_GRID = registerBooleanPreference("show_mercator_grid", false).makeGlobal().makeShared().cache();

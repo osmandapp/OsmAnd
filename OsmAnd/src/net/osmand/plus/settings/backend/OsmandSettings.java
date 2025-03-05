@@ -3322,6 +3322,9 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> SHOW_BORDERS_OF_DOWNLOADED_MAPS =
 			new BooleanPreference(this, "show_borders_of_downloaded_maps", true).makeProfile();
 
+	public final CommonPreference<Boolean> SHOW_COORDINATES_GRID =
+			new BooleanPreference(this, "show_coordinates_grid", false).makeProfile();
+
 	public Set<String> getCustomAppModesKeys() {
 		String appModesKeys = CUSTOM_APP_MODES_KEYS.get();
 		StringTokenizer toks = new StringTokenizer(appModesKeys, ",");

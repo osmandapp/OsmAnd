@@ -2558,7 +2558,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
 		if (plugin != null) {
 			float textScale = app.getSettings().TEXT_SCALE.get() * getDensity();
-			boolean show = plugin.SHOW_GRID.get();
+			boolean show = settings.SHOW_COORDINATES_GRID.get();
 			boolean useUTM = plugin.SHOW_UTM_GRID.get();
 			boolean useMercator = plugin.SHOW_MERCATOR_GRID.get();
 			boolean useDMS = plugin.SHOW_DMS_GRID.get();

@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="layer_coordinates_grid">Coordinates Grid</string>
     <string name="show_list">Show list</string>
     <string name="save_favorite_default_appearance">Apply changes to the existing points in the folder or only to new ones?</string>
 	<string name="original_color_description">Each point would keep its own color.</string>
