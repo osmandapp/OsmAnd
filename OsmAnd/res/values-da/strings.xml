@@ -5500,7 +5500,7 @@
     <string name="shared_string_source">Kilde</string>
     <string name="shared_string_no_internet_connection">Ingen internetforbindelse</string>
     <string name="no_internet_descr">Tjek din forbindelse og prøv igen.</string>
-    <string name="no_photos_available_descr">Der er endnu ikke tilføjet nogen brugerbilleder til dette sted</string>
+    <string name="no_photos_available_descr">Der er endnu ikke tilføjet nogen brugerfotos til dette sted</string>
     <string name="no_photos_available">Ingen fotos tilgængelige</string>
     <string name="wikimedia">Wikimedia</string>
     <string name="unit_volt">V</string>
@@ -5732,7 +5732,7 @@
     <string name="show_grids">Vis gradnet på kort</string>
     <string name="show_grids_description">Tillad visning af gradnet over kortet</string>
     <string name="no_places_available">Ingen steder til rådighed</string>
-    <string name="no_photo_for_location_desc">Der er endnu ikke tilføjet nogen brugerbilleder til dette sted</string>
+    <string name="no_photo_for_location_desc">Der er endnu ikke tilføjet nogen brugerfotos til dette sted</string>
     <string name="hmd_promo_description">Gratis adgang til funktioner, herunder ubegrænsede kortdownloads, 3D-relief etc. i %1$s måneder</string>
     <string name="shared_string_road_exit">Afkørsel</string>
     <string name="hmd_promo">HMD Promo i %1$s måneder</string>
@@ -5747,4 +5747,5 @@
     <string name="show_dm_grids_description">Vis gradnet i grader og minutter i stedet for grader eller DMS</string>
     <string name="show_dms_grids">Vis DMS i stedet for grader</string>
     <string name="show_mercator_grids">Brug Mercator i stedet for WGS84 eller UTM</string>
+    <string name="show_list">Vis liste</string>
 </resources>
