@@ -205,4 +205,12 @@
     <string name="routing_attr_motor_type_lpg_name">LPG</string>
     <string name="routing_attr_motor_type_gas_name">CNG</string>
     <string name="routing_attr_motor_type_hybrid_name">Haibrid</string>
+    <string name="routing_attr_avoid_highway_name">Seachain mòr-rathaidean</string>
+    <string name="routing_attr_avoid_highway_description">Seachain mòr-rathaidean</string>
+    <string name="map_widget_trip_recording_duration">Ùine</string>
+    <string name="map_widget_distance">Astar</string>
+    <string name="routing_attr_avoid_fords_name">Seachain àthan</string>
+    <string name="routing_attr_avoid_fords_description">Seachain àthan</string>
+    <string name="colour_of_circles">Dath nan cearcaill</string>
+    <string name="compass_on_circles">Combaist air cearcaill</string>
 </resources>
