@@ -142,6 +142,8 @@ public class RouteInfoCard extends MapBaseCard {
 				if (routeKey.tags.stream().anyMatch((t) -> mainTag.equals(routeKey.getKeyFromTag(t)))) {
 					continue; // skip synthetic xxx:ref if ref exists (piste:ref, etc)
 				}
+			} else if ("network".equals(key) && "#".equals(value)) {
+				continue; // avoid synthetic empty network caused by MapRenderingTypesEncoder.getNetwork()
 			}
 
 			RouteTag routeTag = new RouteTag(key, value);

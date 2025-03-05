@@ -16,6 +16,7 @@
     <string name="tag_piste_oneway">Oneway</string>
     <string name="tag_piste_ref">Reference</string>
     <string name="tag_piste_difficulty">Difficulty</string>
+    <string name="tag_piste_grooming">Piste grooming</string>
     <string name="show_list">Show list</string>
     <string name="save_favorite_default_appearance">Apply changes to the existing points in the folder or only to new ones?</string>
 	<string name="original_color_description">Each point would keep its own color.</string>
