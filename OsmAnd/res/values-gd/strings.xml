@@ -215,4 +215,6 @@
     <string name="compass_on_circles">Combaist air cearcaill</string>
     <string name="circle_settings">Seatadh cearcaill</string>
     <string name="routing_attr_avoid_4wd_only_name">Seachain rathaidean 4x4</string>
+    <string name="av_notes_choose_action_widget_desc">Roghnaich gnìomh.</string>
+    <string name="navigation_points">Puingean seòladaireachd</string>
 </resources>
