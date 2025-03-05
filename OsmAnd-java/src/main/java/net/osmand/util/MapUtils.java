@@ -495,6 +495,29 @@ public class MapUtils {
 		return new GeoParsedPoint(lat, lon, z);
 	}
 
+	public static QuadRect decodeShortLinkToQuadRect(String shortLink) {
+		GeoParsedPoint point = decodeShortLinkString(shortLink);
+		double bottom = point.getLatitude();
+		double left = point.getLongitude();
+
+		int precision = 0;
+		String base64chars = new String(intToBase64);
+		for (int i = 0; i < shortLink.length(); i++) {
+			if (base64chars.indexOf(shortLink.charAt(i)) > 0) {
+				precision++;
+			}
+		}
+
+		double factor = Math.pow(2, 2 - 3 * precision);
+		double deltaLon = factor * 90;
+		double deltaLat = factor * 45;
+
+		double top = bottom + deltaLat;
+		double right = left + deltaLon;
+
+		return new QuadRect(left, top, right, bottom);
+	}
+
 	/**
 	 * interleaves the bits of two 32-bit numbers. the result is known as a Morton code.
 	 */

@@ -5713,4 +5713,5 @@
     <string name="show_dms_grids_description">Affiche la grille en degrés, minutes, secondes au lieu de degrés</string>
     <string name="show_dm_grids">Utiliser DM au lieu des degrés ou DMS</string>
     <string name="show_dm_grids_description">Afficher la grille en degrés et minutes au lieu de degrés ou DMS</string>
+    <string name="show_list">Afficher la liste</string>
 </resources>

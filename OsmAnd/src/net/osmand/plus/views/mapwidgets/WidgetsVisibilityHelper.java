@@ -72,7 +72,8 @@ public class WidgetsVisibilityHelper {
 	}
 
 	public boolean shouldShowTopCoordinatesWidget() {
-		return !mapActivity.shouldHideTopControls()
+		return !isExplorePLacesMode()&&
+				!mapActivity.shouldHideTopControls()
 				&& mapActivity.getMapRouteInfoMenu().shouldShowTopControls()
 				&& !mapActivity.isTopToolbarActive()
 				&& !isInRouteLineAppearanceMode()
@@ -85,6 +86,7 @@ public class WidgetsVisibilityHelper {
 
 	public boolean shouldHideVerticalWidgets() {
 		return isMapRouteInfoMenuVisible()
+				|| isExplorePLacesMode()
 				|| mapActivity.isTopToolbarActive()
 				|| mapActivity.shouldHideTopControls()
 				|| isInRouteLineAppearanceMode()
@@ -312,6 +314,10 @@ public class WidgetsVisibilityHelper {
 		return mapActivity.getFragmentsHelper().getGpsFilterFragment() != null;
 	}
 
+	private boolean isExplorePLacesMode() {
+		return mapActivity.getFragmentsHelper().getExplorePlacesFragment() != null;
+	}
+
 	public boolean isInConfigureMapOptionMode() {
 		return mapActivity.getFragmentsHelper().getConfigureMapOptionFragment() != null;
 	}
@@ -395,6 +401,7 @@ public class WidgetsVisibilityHelper {
 
 	public enum VisibilityScreens {
 
+		EXPLORE_PLACES(),
 		WEATHER_FORECAST(ZOOM_BUTTONS, BACK_TO_LOCATION_BUTTON),
 		MEASUREMENT_MODE(ZOOM_BUTTONS, BACK_TO_LOCATION_BUTTON, DOWNLOAD_MAP_WIDGET, TOP_BUTTONS, COMPASS),
 		PLAN_ROUTE_MODE(TOP_COORDINATES_WIDGET, DOWNLOAD_MAP_WIDGET),
@@ -423,6 +430,8 @@ public class WidgetsVisibilityHelper {
 					return helper.isSelectingTilesZone();
 				case GPS_FILTERING_MODE:
 					return helper.isInGpsFilteringMode();
+				case EXPLORE_PLACES:
+					return helper.isExplorePLacesMode();
 			}
 			return true;
 		}

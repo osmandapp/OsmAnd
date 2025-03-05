@@ -1214,10 +1214,10 @@
     <string name="edit_name">Промени име</string>
     <string name="animate_my_location">Оживи мој положај</string>
     <string name="shared_string_install">Угради</string>
-    <string name="online_photos">Мрежне слике</string>
+    <string name="online_photos">Фотографије са интернета</string>
     <string name="shared_string_add_photos">Додај слике</string>
     <string name="no_photos_descr">Нема слика овде.</string>
-    <string name="mapillary_action_descr">Поделите свој поглед са улице преко Мапилара.</string>
+    <string name="mapillary_action_descr">Поделите свој поглед на нивоу улице преко Мапилариј-а.</string>
     <string name="mapillary_widget">Мапиларијева справица</string>
     <string name="mapillary_widget_descr">Омогућава брзи допринос Мапиларију.</string>
     <string name="open_mapillary">Отвори Мапилијари</string>
@@ -1480,7 +1480,7 @@
     <string name="shared_string_to">До</string>
     <string name="mapillary_menu_date_from">Од</string>
     <string name="mapillary_menu_descr_dates">Прегледај само додате слике</string>
-    <string name="shared_string_date">Дан</string>
+    <string name="shared_string_date">Датум</string>
     <string name="mapillary_menu_edit_text_hint">Унесите корисничко име</string>
     <string name="mapillary_menu_descr_username">Прегледај само слике које је додао</string>
     <string name="mapillary_menu_title_username">Корисничко име</string>
@@ -3937,7 +3937,7 @@
     <string name="backup_delete_types_descr">Да ли желите да избришете податке за онеспособљене типове из облака\?</string>
     <string name="backup_delete_types">Избриши податке о онемогућеним типовима</string>
     <string name="shared_string_discussion">Дискусија</string>
-    <string name="shared_string_view_all">Погледати све</string>
+    <string name="shared_string_view_all">Погледај све</string>
     <string name="backup_error_user_is_already_registered">Ова адреса е-поште се користи на другом налогу</string>
     <string name="backup_error_subscription_was_expired">Истекла претплата</string>
     <string name="backup_error_subscription_was_used">Претплату или промоцију користи други налог %1$s</string>
@@ -5139,7 +5139,7 @@
     <string name="shared_string_delete_immediately">Обриши одмах</string>
     <string name="restore_from_trash">Поврати из канте отпада</string>
     <string name="shared_string_trash">Отпад</string>
-    <string name="shared_string_show_less">Прикажи мање</string>
+    <string name="shared_string_show_less">Приказати мање</string>
     <string name="empty_smart_folder_description">Подударајући трагови овде се јављају</string>
     <string name="discard_filter_changes">Одбаци промене филтера</string>
     <string name="maps_and_resources">Мапе &amp; Ресурси</string>
@@ -5457,13 +5457,13 @@
     <string name="change_activity">Промени дејство</string>
     <string name="shared_string_increase">Повећај</string>
     <string name="shared_string_decrease">Смањи</string>
-    <string name="open_in_browser">Отвори у прегледачу</string>
+    <string name="open_in_browser">Отворити у интернет претраживачу</string>
     <string name="shared_string_source">Извор</string>
     <string name="shared_string_no_internet_connection">Нема везе са Интернетом</string>
-    <string name="no_internet_descr">Проверите своју везу и покушајте поново.</string>
-    <string name="no_photos_available_descr">Још увек није додата ниједна корисничка фотографија на овај положај</string>
-    <string name="no_photos_available">Нема доступних слика</string>
-    <string name="wikimedia">Викимедиа</string>
+    <string name="no_internet_descr">Проверите интернет и покушајте поново.</string>
+    <string name="no_photos_available_descr">На овој локацији још увек нису додане фотографије корисника</string>
+    <string name="no_photos_available">Нема доступних фотографија</string>
+    <string name="wikimedia">Викимедија</string>
     <string name="unit_volt">V</string>
     <string name="obd_fuel_type_not_provided">Није наведена врста горива</string>
     <string name="obd_fuel_type_gasoline">Бензин</string>
@@ -5705,4 +5705,5 @@
     <string name="show_dms_grids_description">Прикажи мрежу у степенима, минутима, секундама уместо у степенима</string>
     <string name="show_dm_grids">Користи DM уместо степени или DMS</string>
     <string name="show_dm_grids_description">Прикажи мрежу у степенима и минутима уместо у степенима или DMS</string>
+    <string name="show_list">Приказати листу</string>
 </resources>

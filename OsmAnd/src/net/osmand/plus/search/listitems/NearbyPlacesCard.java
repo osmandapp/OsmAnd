@@ -86,6 +86,12 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvid
 		nearByList.setAdapter(adapter);
 	}
 
+	public void update() {
+		visiblePlacesRect = app.getOsmandMap().getMapView().getCurrentRotatedTileBox().getLatLonBounds();
+		adapter.setItems(app.getExplorePlacesProvider().getDataCollection(visiblePlacesRect, DISPLAY_ITEMS));
+		app.runInUIThread(() -> adapter.notifyDataSetChanged());
+	}
+
 	private void updateExpandState() {
 		int iconRes = collapsed ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up;
 		explicitIndicator.setImageDrawable(app.getUIUtilities().getIcon(iconRes, !app.getSettings().isLightContent()));

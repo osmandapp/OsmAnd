@@ -20,6 +20,8 @@ import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
+import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
 import net.osmand.core.jni.QListMapMarker;
 import net.osmand.data.ExploreTopPlacePoint;
 import net.osmand.data.LatLon;
@@ -472,6 +474,17 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 		List<ExploreTopPlacePoint> points = places;
 		if (points != null) {
 			getNearbyPlaceFromPoint(tileBox, point, res, points);
+		}
+	}
+
+	@Override
+	public boolean runExclusiveAction(@Nullable Object o, boolean unknownLocation) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && (o instanceof ExploreTopPlacePoint)) {
+			getApplication().getExplorePlacesProvider().showPointInContextMenu(mapActivity, (ExploreTopPlacePoint) o);
+			return true;
+		} else {
+			return IContextMenuProvider.super.runExclusiveAction(o, unknownLocation);
 		}
 	}
 
