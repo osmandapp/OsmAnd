@@ -217,4 +217,12 @@
     <string name="routing_attr_avoid_4wd_only_name">Seachain rathaidean 4x4</string>
     <string name="av_notes_choose_action_widget_desc">Roghnaich gnìomh.</string>
     <string name="navigation_points">Puingean seòladaireachd</string>
+    <string name="calculating_altitude">Ag obrachadh a-mach àrdachadh</string>
+    <string name="calculate_online">Obraich a-mach air-loidhne</string>
+    <string name="get_altitude_data">Faigh dàta àrdachadh</string>
+    <string name="calculate_altitude">Obraich a-mach àrdachadh</string>
+    <string name="no_altitude_data">Chan eil dàta àrdachadh ann</string>
+    <string name="shared_string_speed">Luaths</string>
+    <string name="app_mode_mountain_bicycle">Rothair-beinne</string>
+    <string name="route_maneuvers">Gluaiseachd slighe</string>
 </resources>
