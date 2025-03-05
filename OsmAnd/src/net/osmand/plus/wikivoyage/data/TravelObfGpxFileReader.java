@@ -56,11 +56,15 @@ import org.apache.commons.logging.Log;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
+
+import gnu.trove.list.array.TIntArrayList;
 
 public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFile> {
     private static final Log LOG = PlatformUtil.getLog(TravelObfGpxFileReader.class);
@@ -248,7 +252,21 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
 
         boolean allowReadFromMultipleMaps = article.hasOsmRouteId();
 
-        for (AmenityIndexRepository repo : repos) {
+        Map<Long, BinaryMapDataObject> binaryMapDataObjectMap = new HashMap<>();//live-updates
+        Map<Long, Amenity> amenityMap = new HashMap<>();//live-updates
+        BinaryMapIndexReader.SearchFilter searchFilter = null;
+        if (article instanceof TravelGpx travelGpx && !Algorithms.isEmpty(travelGpx.activityType)) {
+            searchFilter = new BinaryMapIndexReader.SearchFilter() {
+                @Override
+                public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex mapIndex) {
+                    Integer type = mapIndex.getRule("route", travelGpx.activityType);
+                    return type != null && types.contains(type);
+                }
+            };
+        }
+        ListIterator<AmenityIndexRepository> li = repos.listIterator(repos.size());
+        while (li.hasPrevious()) {
+            AmenityIndexRepository repo = li.previous();
             try {
                 if (isCancelled.isCancelled()) {
                     return false;
@@ -257,41 +275,48 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                         !Algorithms.objectEquals(repo.getFile(), article.file)) {
                     continue; // speed up reading of Wikivoyage and User's GPX files in OBF
                 }
+                if (repo.getFile().getName().contains("basemap")) {
+                    continue;
+                }
                 if (article instanceof TravelGpx) {
                     BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> sr = BinaryMapIndexReader
-                            .buildSearchRequest(left, right, top, bottom, 15, null,
-                                    matchSegmentsByRefTitleRouteId(article, segmentList, isCancelled));
+                            .buildSearchRequest(left, right, top, bottom, 15, searchFilter,
+                                    matchSegmentsByRefTitleRouteId(article, binaryMapDataObjectMap, isCancelled));
                     if (article.routeRadius > 0 && !article.hasBbox31()) {
                         sr.setBBoxRadius(article.lat, article.lon, article.routeRadius);
                     }
                     repo.searchMapIndex(sr);
                 }
+                // TODO make search request with filter by type for OSM routes
+                // TODO make ResultMatcher<Amenity> by relation id for OSM routes
                 BinaryMapIndexReader.SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
                         0, 0, Algorithms.emptyIfNull(article.title), left, right, top, bottom,
                         getSearchFilter(article.getMainFilterString(), article.getPointFilterString()),
-                        matchPointsAndTags(article, pointList, gpxFileExtensions, pgNames, pgIcons, pgColors, pgBackgrounds, isCancelled),
+                        matchPointsAndTags(article, amenityMap, gpxFileExtensions, pgNames, pgIcons, pgColors, pgBackgrounds, isCancelled),
                         null);
                 if (article.routeRadius > 0 && !article.hasBbox31()) {
                     pointRequest.setBBoxRadius(article.lat, article.lon, article.routeRadius);
                 }
-                if (!Algorithms.isEmpty(article.title)) {
-                    repo.searchPoiByName(pointRequest);
-                } else {
-                    repo.searchPoi(pointRequest);
-                }
-                if (!allowReadFromMultipleMaps && !Algorithms.isEmpty(segmentList)) {
+//                if (!Algorithms.isEmpty(article.title)) {
+//                    repo.searchPoiByName(pointRequest);
+//                } else {
+//                    repo.searchPoi(pointRequest);
+//                }
+                if (!allowReadFromMultipleMaps && !Algorithms.isEmpty(binaryMapDataObjectMap)) {
                     break; // speed up reading of User's GPX files
                 }
             } catch (Exception e) {
                 LOG.error(e.getMessage());
             }
         }
+        segmentList.addAll(binaryMapDataObjectMap.values());
+        pointList.addAll(amenityMap.values());
         return !isCancelled.isCancelled(); // might be partially succeed
     }
 
     @NonNull
     private ResultMatcher<Amenity> matchPointsAndTags(@NonNull TravelArticle article,
-                                                      @NonNull List<Amenity> pointList,
+                                                      @NonNull Map<Long, Amenity> amenityMap,
                                                       @NonNull Map<String, String> gpxFileExtensions,
                                                       @NonNull List<String> pgNames,
                                                       @NonNull List<String> pgIcons,
@@ -302,6 +327,10 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             boolean isAlreadyProcessed = false;
             @Override
             public boolean publish(Amenity amenity) {
+                if (amenity.isClosed()) {
+                    //live-updates
+                    amenityMap.remove(amenity.getId());
+                }
                 if (amenity.getRouteId().equals(article.getRouteId())) {
                     if (amenity.isRouteTrack()) {
                         if (!isAlreadyProcessed) {
@@ -330,11 +359,11 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                             }
                         }
                     } else if (ROUTE_TRACK_POINT.equals(amenity.getSubType())) {
-                        pointList.add(amenity);
+                        amenityMap.put(amenity.getId(), amenity);
                     } else {
                         String amenityLang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
                         if (Algorithms.stringsEqual(article.lang, amenityLang)) {
-                            pointList.add(amenity);
+                            amenityMap.put(amenity.getId(), amenity);
                         }
                     }
                 }
@@ -375,23 +404,27 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
     @NonNull
     private ResultMatcher<BinaryMapDataObject> matchSegmentsByRefTitleRouteId(
             @NonNull TravelArticle article,
-            @NonNull List<BinaryMapDataObject> segmentList,
+            @NonNull Map<Long, BinaryMapDataObject> binaryMapDataObjectMap,
             @NonNull HeightDataLoader.Cancellable isCancelled) {
         return new ResultMatcher<BinaryMapDataObject>() {
             @Override
             public boolean publish(BinaryMapDataObject object) {
+                if (isDeleted(object)) {
+                    // live-updates
+                    binaryMapDataObjectMap.remove(object.getId());
+                }
                 if (object.getPointsLength() > 1) {
                     String routeId = article.getRouteId();
                     boolean equalRouteId = !Algorithms.isEmpty(routeId) && routeId.equals(object.getTagValue(ROUTE_ID));
 
                     if (article instanceof TravelGpx && equalRouteId) {
-                        segmentList.add(object); // GPX-in-OBF requires mandatory route_id
+                        binaryMapDataObjectMap.put(object.getId(), object);// GPX-in-OBF requires mandatory route_id
                     } else {
                         String name = article.getTitle(), ref = article.ref;
                         boolean equalName = !Algorithms.isEmpty(name) && name.equals(object.getName());
                         boolean equalRef = !Algorithms.isEmpty(ref) && ref.equals(object.getTagValue(REF));
                         if ((equalRouteId && (equalRef || equalName) || (equalRef && equalName))) {
-                            segmentList.add(object); // Wikivoyage is allowed to match mixed tags
+                            binaryMapDataObjectMap.put(object.getId(), object);// Wikivoyage is allowed to match mixed tags
                         }
                     }
                 }
@@ -402,6 +435,17 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                 return isCancelled.isCancelled();
             }
         };
+    }
+
+    private boolean isDeleted(BinaryMapDataObject object) {
+        if (object.getTypes().length == 0) {
+            return false;
+        }
+        Integer delete = object.getMapIndex().getRule(Amenity.OSM_DELETE_TAG, Amenity.OSM_DELETE_VALUE);
+        if (delete == null) {
+            return false;
+        }
+        return object.getTypes()[0] == delete;
     }
 
     private void reconstructPointsGroups(@NonNull GpxFile gpxFile,
