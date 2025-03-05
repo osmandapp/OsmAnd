@@ -245,4 +245,9 @@
     <string name="rendering_attr_horse_scale_demanding_name">Iarratach</string>
     <string name="rendering_attr_horse_scale_difficult_name">Doirbh</string>
     <string name="rendering_attr_horse_scale_critical_name">Èiginneach</string>
+    <string name="rendering_attr_showMonorailRoutes_name">Slighean aona-rèile</string>
+    <string name="rendering_attr_showFunicularRoutes_name">Slighean rèile-bhruthaich</string>
+    <string name="rendering_attr_showBusRoutes_name">Slighean bus</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">Slighean bus-troilidh</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">Slighean spàl</string>
 </resources>
