@@ -1,12 +1,15 @@
 package net.osmand.plus.views.layers;
 
-import static net.osmand.plus.exploreplaces.ExplorePlacesProviderJava.DEFAULT_LIMIT_POINTS;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.PointF;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.Rect;
+import android.graphics.RectF;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,23 +27,31 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.exploreplaces.ExplorePlacesProvider;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
-import net.osmand.plus.views.layers.core.ExploreTopPlacesTileProvider;
 import net.osmand.shared.util.ImageLoaderCallback;
 import net.osmand.shared.util.LoadingImage;
 import net.osmand.shared.util.NetworkImageLoader;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -53,28 +64,28 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 	private ExploreTopPlacePoint selectedObject;
 	private static final int SELECTED_MARKER_ID = -1;
 
+	private static final int SMALL_ICON_BORDER_DP = 1;
+	private static final int BIG_ICON_BORDER_DP = 2;
+	private static final int SMALL_ICON_SIZE_DP = 20;
+	private static final int BIG_ICON_SIZE_DP = 40;
+	private static final int POINT_OUTER_COLOR = 0xffffffff;
+	private static Bitmap circleBitmap;
 	private Bitmap cachedSmallIconBitmap;
 
 	private QuadRect requestQuadRect = null; // null means disabled
 	private int requestZoom = 0; // null means disabled
 
-	private ExploreTopPlacesTileProvider topPlacesMapLayerProvider;
+	protected MapMarkersCollection otherPlacesCollection;
 	private ExplorePlacesProvider explorePlacesProvider;
 	private int cachedExploreDataVersion;
 	private List<ExploreTopPlacePoint> places;
-
+	private Map<Long, ExploreTopPlacePoint> visibleTopPlaces;
 
 	// To refresh images
 	private static final int TOP_LOAD_PHOTOS = 25;
-	private static final long DEBOUNCE_IMAGE_REFRESH = 1000;
-
-	private RotatedTileBox imagesDisplayedBox = null;
-	private int imagesUpdatedVersion;
-	private int imagesCachedVersion;
-	private long lastImageCacheRefreshed = 0;
 
 	private final NetworkImageLoader imageLoader;
-	private final List<LoadingImage> loadingImages = new ArrayList<>();
+	private final Map<String, LoadingImage> loadingImages = new HashMap<>();
 
 	private static class MapPoint {
 		private final PointI position;
@@ -82,7 +93,7 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 		@Nullable
 		private final Bitmap imageBitmap;
 
-		public MapPoint(PointI position, @Nullable Bitmap imageBitmap, boolean alreadyExists) {
+		public MapPoint(@NonNull PointI position, @Nullable Bitmap imageBitmap, boolean alreadyExists) {
 			this.position = position;
 			this.imageBitmap = imageBitmap;
 			this.alreadyExists = alreadyExists;
@@ -92,7 +103,7 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 	public ExploreTopPlacesLayer(@NonNull Context ctx) {
 		super(ctx);
 
-		imageLoader = new NetworkImageLoader(ctx, false);
+		imageLoader = new NetworkImageLoader(ctx, true);
 	}
 
 	@Override
@@ -112,7 +123,7 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 	}
 
 	private void recreateBitmaps() {
-		cachedSmallIconBitmap = ExploreTopPlacesTileProvider.createSmallPointBitmap(getApplication());
+		cachedSmallIconBitmap = createSmallPointBitmap();
 	}
 
 	@Override
@@ -124,8 +135,6 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 	@Override
 	protected void cleanupResources() {
 		super.cleanupResources();
-		deleteProvider(topPlacesMapLayerProvider);
-		topPlacesMapLayerProvider = null;
 		explorePlacesProvider.removeListener(this);
 	}
 
@@ -148,7 +157,7 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 					(requestZoom < tileBox.getZoom() && requestZoom < ExplorePlacesProvider.MAX_LEVEL_ZOOM_CACHE)) {
 				placesUpdated = true;
 				RotatedTileBox extended = tileBox.copy();
-				extended.increasePixelDimensions(tileBox.getPixWidth() / 2, tileBox.getPixHeight() / 2);
+				extended.increasePixelDimensions(tileBox.getPixWidth() / 4, tileBox.getPixHeight() / 4);
 				requestQuadRect = extended.getLatLonBounds();
 				requestZoom = tileBox.getZoom();
 				cachedExploreDataVersion = explorePlacesProvider.getDataVersion();
@@ -158,9 +167,9 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 			if (places != null) {
 				placesUpdated = true;
 				places = null;
+				visibleTopPlaces = null;
 			}
 		}
-		placesUpdated = placesUpdated || scheduleImageRefreshes(places, tileBox, placesUpdated);
 
 		ExploreTopPlacePoint selectedObject = getSelectedNearbyPlace();
 		long selectedObjectId = selectedObject == null ? 0 : selectedObject.getId();
@@ -169,8 +178,10 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 		this.selectedObject = selectedObject;
 		if (hasMapRenderer()) {
 			if ((mapActivityInvalidated || mapRendererChanged || nightModeChanged || placesUpdated)) {
-				updateTopPlacesTileProvider(places != null);
-				updateTopPlacesCollection(places, tileBox);
+				visibleTopPlaces = places != null ? getTopPlacesToDisplay(places, tileBox) : null;
+				fetchImages();
+				updateOtherPlacesCollection(tileBox);
+				updateTopPlacesCollection();
 				mapRendererChanged = false;
 			}
 			if (selectedObjectChanged) {
@@ -198,7 +209,7 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 		List<ExploreTopPlacePoint> fullObjects = new ArrayList<>();
 		Paint pointPaint = new Paint();
 		if (cachedSmallIconBitmap == null) {
-			cachedSmallIconBitmap = ExploreTopPlacesTileProvider.createSmallPointBitmap(getApplication());
+			cachedSmallIconBitmap = createSmallPointBitmap();
 		}
 		for (ExploreTopPlacePoint nearbyPoint : pointsToDraw) {
 			double lat = nearbyPoint.getLatitude();
@@ -219,7 +230,7 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 		for (ExploreTopPlacePoint point : fullObjects) {
 			Bitmap bitmap = point.getImageBitmap();
 			if (bitmap != null) {
-				Bitmap bigBitmap = ExploreTopPlacesTileProvider.createBigBitmap(getApplication(), bitmap, point.getId() == getSelectedObjectId());
+				Bitmap bigBitmap = createBigBitmap(bitmap, point.getId() == getSelectedObjectId());
 				float x = tileBox.getPixXFromLatLon(point.getLatitude(), point.getLongitude());
 				float y = tileBox.getPixYFromLatLon(point.getLatitude(), point.getLongitude());
 				canvas.drawBitmap(bigBitmap, x - bigBitmap.getWidth() / 2f, y - bigBitmap.getHeight() / 2f, pointPaint);
@@ -231,28 +242,43 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 		return selectedObject == null ? 0 : selectedObject.getId();
 	}
 
-	private void updateTopPlacesTileProvider(boolean show) {
-		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer == null) {
-			return;
-		}
-		if (show) {
-			if (topPlacesMapLayerProvider == null) {
-				topPlacesMapLayerProvider = new ExploreTopPlacesTileProvider(getApplication(),
-						getPointsOrder() + 100, DEFAULT_LIMIT_POINTS / 8);
-				topPlacesMapLayerProvider.initProvider(mapRenderer);
+	@NonNull
+	private Map<Long, ExploreTopPlacePoint> getTopPlacesToDisplay(@NonNull List<ExploreTopPlacePoint> points, @NonNull RotatedTileBox tileBox) {
+		Map<Long, ExploreTopPlacePoint> res = new HashMap<>();
+
+		long tileSize31 = (1L << (31 - tileBox.getZoom()));
+		double from31toPixelsScale = 256.0 / tileSize31;
+		double estimatedIconSize = BIG_ICON_SIZE_DP * getTextScale();
+		float iconSize31 = (float) (estimatedIconSize / from31toPixelsScale);
+
+		QuadRect latLonBounds = tileBox.getLatLonBounds();
+		int left = MapUtils.get31TileNumberX(latLonBounds.left);
+		int top = MapUtils.get31TileNumberY(latLonBounds.top);
+		int right = MapUtils.get31TileNumberX(latLonBounds.right);
+		int bottom = MapUtils.get31TileNumberY(latLonBounds.bottom);
+		QuadTree<QuadRect> boundIntersections = initBoundIntersections(left, top, right, bottom);
+		for (ExploreTopPlacePoint point : points) {
+			if (Algorithms.isEmpty(point.getIconUrl())) {
+				continue;
 			}
-		} else {
-			deleteProvider(topPlacesMapLayerProvider);
-			topPlacesMapLayerProvider = null;
+			int x31 = MapUtils.get31TileNumberX(point.getLongitude());
+			int y31 = MapUtils.get31TileNumberY(point.getLatitude());
+			if (!intersectsD(boundIntersections, x31, y31, iconSize31, iconSize31)) {
+				res.put(point.getId(), point);
+			}
+			if (res.size() >= TOP_LOAD_PHOTOS) {
+				break;
+			}
 		}
+		return res;
 	}
 
-	private void updateTopPlacesCollection(@Nullable List<ExploreTopPlacePoint> points, @NonNull RotatedTileBox tileBox) {
+	private void updateTopPlacesCollection() {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer == null) {
 			return;
 		}
+		Collection<ExploreTopPlacePoint> points = visibleTopPlaces != null ? visibleTopPlaces.values() : null;
 		if (points == null) {
 			clearMapMarkersCollections();
 			return;
@@ -270,20 +296,10 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 			existingY[i] = pos.getY();
 		}
 		List<MapPoint> newPoints = new ArrayList<>();
-		float iconSize = ExploreTopPlacesTileProvider.getBigIconSize(view.getApplication());
-		QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
-        for (int j = 0; j < Math.min(points.size(), TOP_LOAD_PHOTOS); j++) {
-            ExploreTopPlacePoint point = points.get(j);
-            double lat = point.getLatitude();
-            double lon = point.getLongitude();
-
-            PointI position = NativeUtilities.getPoint31FromLatLon(lat, lon);
+		for (ExploreTopPlacePoint point : points) {
+            PointI position = NativeUtilities.getPoint31FromLatLon(point.getLatitude(), point.getLongitude());
             int x = position.getX();
             int y = position.getY();
-            PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(mapRenderer, tileBox, lat, lon);
-            if (intersects(boundIntersections, pixel.x, pixel.y, iconSize, iconSize)) {
-                continue;
-            }
             boolean alreadyExists = false;
             for (int i = 0; i < existingX.length; i++) {
                 if (x == existingX[i] && y == existingY[i]) {
@@ -301,8 +317,7 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 				continue;
 			}
 
-			Bitmap imageMapBitmap = ExploreTopPlacesTileProvider
-					.createBigBitmap(getApplication(), imageBitmap, false);
+			Bitmap imageMapBitmap = createBigBitmap(imageBitmap, false);
 
 			MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
 			mapMarkerBuilder.setIsAccuracyCircleSupported(false)
@@ -319,6 +334,90 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 			}
 		}
 		mapRenderer.addSymbolsProvider(mapMarkersCollection);
+	}
+
+	private void updateOtherPlacesCollection(@NonNull RotatedTileBox tileBox) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer == null) {
+			return;
+		}
+		Collection<ExploreTopPlacePoint> points = places;
+		if (points == null) {
+			clearMapMarkersCollections();
+			return;
+		}
+		if (otherPlacesCollection == null) {
+			otherPlacesCollection = new MapMarkersCollection();
+		}
+		if (cachedSmallIconBitmap == null) {
+			cachedSmallIconBitmap = createSmallPointBitmap();
+		}
+		long tileSize31 = (1L << (31 - tileBox.getZoom()));
+		double from31toPixelsScale = 256f / tileSize31;
+		double estimatedIconSize = SMALL_ICON_SIZE_DP * getTextScale();
+		double iconSize31 = estimatedIconSize / from31toPixelsScale;
+
+		QListMapMarker existingMapPoints = otherPlacesCollection.getMarkers();
+		int[] existingX = new int[(int)existingMapPoints.size()];
+		int[] existingY = new int[(int)existingMapPoints.size()];
+		for (int i = 0; i < existingMapPoints.size(); i++) {
+			MapMarker mapPoint = existingMapPoints.get(i);
+			PointI pos = mapPoint.getPosition();
+			existingX[i] = pos.getX();
+			existingY[i] = pos.getY();
+		}
+		List<MapPoint> newPoints = new ArrayList<>();
+		QuadRect latLonBounds = tileBox.getLatLonBounds();
+		int left = MapUtils.get31TileNumberX(latLonBounds.left);
+		int top = MapUtils.get31TileNumberY(latLonBounds.top);
+		int right = MapUtils.get31TileNumberX(latLonBounds.right);
+		int bottom = MapUtils.get31TileNumberY(latLonBounds.bottom);
+		QuadTree<QuadRect> boundIntersections = initBoundIntersections(left, top, right, bottom);
+		for (ExploreTopPlacePoint point : points) {
+			int x31 = MapUtils.get31TileNumberX(point.getLongitude());
+			int y31 = MapUtils.get31TileNumberY(point.getLatitude());
+			if (intersectsD(boundIntersections, x31, y31, iconSize31, iconSize31)) {
+				continue;
+			}
+			PointI position = NativeUtilities.getPoint31FromLatLon(point.getLatitude(), point.getLongitude());
+			int x = position.getX();
+			int y = position.getY();
+			boolean alreadyExists = false;
+			for (int i = 0; i < existingX.length; i++) {
+				if (x == existingX[i] && y == existingY[i]) {
+					existingX[i] = 0;
+					existingY[i] = 0;
+					alreadyExists = true;
+				}
+			}
+			newPoints.add(new MapPoint(position, point.getImageBitmap(), alreadyExists));
+		}
+		for (MapPoint point : newPoints) {
+			MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
+			mapMarkerBuilder.setIsAccuracyCircleSupported(false)
+					.setBaseOrder(getPointsOrder() + 100)
+					.setPinIcon(NativeUtilities.createSkImageFromBitmap(cachedSmallIconBitmap))
+					.setPosition(point.position)
+					.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical)
+					.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
+					.buildAndAddToCollection(otherPlacesCollection);
+		}
+		for (int i = 0; i < existingX.length; i++) {
+			if (existingX[i] != 0 && existingY[i] != 0) {
+				otherPlacesCollection.removeMarker(existingMapPoints.get(i));
+			}
+		}
+		mapRenderer.addSymbolsProvider(otherPlacesCollection);
+	}
+
+	@Override
+	protected void clearMapMarkersCollections() {
+		super.clearMapMarkersCollections();
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && otherPlacesCollection != null) {
+			mapRenderer.removeSymbolsProvider(otherPlacesCollection);
+			otherPlacesCollection = null;
+		}
 	}
 
 	public synchronized void showSelectedNearbyPoint() {
@@ -341,8 +440,7 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 		}
 		Bitmap imageBitmap = selectedObject != null ? selectedObject.getImageBitmap() : null;
 		if (imageBitmap != null) {
-			Bitmap imageMapBitmap = ExploreTopPlacesTileProvider
-					.createBigBitmap(getApplication(), imageBitmap, true);
+			Bitmap imageMapBitmap = createBigBitmap(imageBitmap, true);
 
 			MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
 			mapMarkerBuilder.setIsAccuracyCircleSupported(false)
@@ -358,14 +456,6 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 		if (previousSelectedMarker != null) {
 			mapMarkersCollection.removeMarker(previousSelectedMarker);
 		}
-	}
-
-	public void deleteProvider(@Nullable ExploreTopPlacesTileProvider provider) {
-		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer == null || provider == null) {
-			return;
-		}
-		provider.deleteProvider(mapRenderer);
 	}
 
     @Override
@@ -429,72 +519,59 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 		return null;
 	}
 
-	private boolean scheduleImageRefreshes(List<ExploreTopPlacePoint> nearbyPlacePoints, RotatedTileBox tileBox, boolean forceRefresh) {
+	private void fetchImages() {
+		Collection<ExploreTopPlacePoint> places = visibleTopPlaces != null ? visibleTopPlaces.values() : null;
 		if (places == null) {
-			if (imagesDisplayedBox != null) {
-				cancelLoadingImages();
-				imagesDisplayedBox = null;
+			cancelLoadingImages();
+			return;
+		}
+		Set<String> imagesToLoad = places.stream()
+				.map(ExploreTopPlacePoint::getIconUrl).collect(Collectors.toSet());
+		loadingImages.entrySet().removeIf(entry -> {
+			if (!imagesToLoad.contains(entry.getKey())) {
+				entry.getValue().cancel();
+				return true;
 			}
 			return false;
-		}
-		if (forceRefresh || imagesDisplayedBox == null || imagesDisplayedBox.getZoom() != tileBox.getZoom()
-				|| !imagesDisplayedBox.containsTileBox(tileBox)) {
-			imagesDisplayedBox = tileBox.copy();
-			imagesDisplayedBox.increasePixelDimensions(tileBox.getPixWidth() / 2, tileBox.getPixHeight() / 2);
-			imagesUpdatedVersion++;
-			List<ExploreTopPlacePoint> placesToDisplayWithPhotos = new ArrayList<>();
+		});
 
-			boolean missingPhoto = false;
-			for (ExploreTopPlacePoint point : nearbyPlacePoints) {
-				if (imagesDisplayedBox.containsLatLon(point.getLatitude(), point.getLongitude()) &&
-						!Algorithms.isEmpty(point.getIconUrl())) {
-					placesToDisplayWithPhotos.add(point);
-					if (point.getImageBitmap() == null) {
-						missingPhoto = true;
-					}
-				}
+		for (ExploreTopPlacePoint point : places) {
+			String url = point.getIconUrl();
+			if (point.getImageBitmap() != null || loadingImages.containsKey(url)) {
+				continue;
 			}
-			if (missingPhoto) {
-				Set<String> imagesToLoad = placesToDisplayWithPhotos.stream()
-						.map(ExploreTopPlacePoint::getIconUrl).collect(Collectors.toSet());
-				loadingImages.removeIf(image -> !imagesToLoad.contains(image.getUrl()) && image.cancel());
+			loadingImages.put(url, imageLoader.loadImage(url, new ImageLoaderCallback() {
+				@Override
+				public void onStart(@Nullable Bitmap bitmap) {
+				}
 
-				for (ExploreTopPlacePoint point : placesToDisplayWithPhotos) {
-					if (point.getImageBitmap() != null) {
-						continue;
-					}
-
-					String url = point.getIconUrl();
-					loadingImages.add(imageLoader.loadImage(url, new ImageLoaderCallback() {
-						@Override
-						public void onStart(@Nullable Bitmap bitmap) {
-						}
-
-						@Override
-						public void onSuccess(@NonNull Bitmap bitmap) {
+				@Override
+				public void onSuccess(@NonNull Bitmap bitmap) {
+					loadingImages.remove(url);
+					if (visibleTopPlaces != null) {
+						ExploreTopPlacePoint place = visibleTopPlaces.get(point.getId());
+						if (place != null) {
 							point.setImageBitmap(bitmap);
-							imagesUpdatedVersion++;
+							updateTopVisiblePlaces();
 						}
-
-						@Override
-						public void onError() {
-							LOG.error(String.format("Coil failed to load %s", url));
-						}
-					}, false));
+					}
 				}
-			}
+
+				@Override
+				public void onError() {
+					loadingImages.remove(url);
+					LOG.error(String.format("Coil failed to load %s", url));
+				}
+			}, false));
 		}
-		if (imagesCachedVersion != imagesUpdatedVersion && System.currentTimeMillis() - lastImageCacheRefreshed >
-				DEBOUNCE_IMAGE_REFRESH) {
-			lastImageCacheRefreshed = System.currentTimeMillis();
-			imagesCachedVersion = imagesUpdatedVersion;
-			return true;
-		}
-		return false;
+	}
+
+	private void updateTopVisiblePlaces() {
+		updateTopPlacesCollection();
 	}
 
 	private void cancelLoadingImages() {
-		loadingImages.forEach(LoadingImage::cancel);
+		loadingImages.values().forEach(LoadingImage::cancel);
 		loadingImages.clear();
 	}
 
@@ -505,5 +582,76 @@ public class ExploreTopPlacesLayer extends OsmandMapLayer implements IContextMen
 	@Override
 	public void onNewExplorePlacesDownloaded() {
 		getApplication().getOsmandMap().refreshMap();
+	}
+
+	private Bitmap createSmallPointBitmap() {
+		Context ctx = getContext();
+		int borderWidth = AndroidUtils.dpToPx(ctx, SMALL_ICON_BORDER_DP);
+		Bitmap circle = getCircle();
+		int smallIconSize = AndroidUtils.dpToPx(ctx, SMALL_ICON_SIZE_DP);
+		Bitmap bitmapResult = Bitmap.createBitmap(smallIconSize, smallIconSize, Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(bitmapResult);
+		Paint bitmapPaint = createBitmapPaint();
+		bitmapPaint.setColorFilter(new PorterDuffColorFilter(POINT_OUTER_COLOR, PorterDuff.Mode.SRC_IN));
+		Rect srcRect = new Rect(0, 0, circle.getWidth(), circle.getHeight());
+		RectF dstRect = new RectF(0f, 0f, (float) smallIconSize, (float) smallIconSize);
+		canvas.drawBitmap(circle, srcRect, dstRect, bitmapPaint);
+		bitmapPaint.setColorFilter(new PorterDuffColorFilter(
+				ColorUtilities.getColor(ctx, R.color.poi_background), PorterDuff.Mode.SRC_IN));
+		dstRect = new RectF(
+				(float) borderWidth,
+				(float) borderWidth,
+				(float) (smallIconSize - borderWidth * 2),
+				(float) (smallIconSize - borderWidth * 2));
+		canvas.drawBitmap(circle, srcRect, dstRect, bitmapPaint);
+		bitmapResult = AndroidUtils.scaleBitmap(bitmapResult, smallIconSize, smallIconSize, false);
+		return bitmapResult;
+	}
+
+	private Bitmap createBigBitmap(Bitmap loadedBitmap, boolean isSelected) {
+		OsmandApplication app = getApplication();
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		int borderWidth = AndroidUtils.dpToPxAuto(app, BIG_ICON_BORDER_DP);
+		Bitmap circle = getCircle();
+		int bigIconSize = getBigIconSize();
+		Bitmap bitmapResult = Bitmap.createBitmap(bigIconSize, bigIconSize, Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(bitmapResult);
+		Paint bitmapPaint = createBitmapPaint();
+		bitmapPaint.setColorFilter(new PorterDuffColorFilter(isSelected ? app.getColor(ColorUtilities.getActiveColorId(nightMode)) : POINT_OUTER_COLOR, PorterDuff.Mode.SRC_IN));
+		canvas.drawBitmap(circle, 0f, 0f, bitmapPaint);
+		int cx = circle.getWidth() / 2;
+		int cy = circle.getHeight() / 2;
+		int radius = (Math.min(cx, cy) - borderWidth * 2);
+		canvas.save();
+		canvas.clipRect(0, 0, circle.getWidth(), circle.getHeight());
+		Path circularPath = new Path();
+		circularPath.addCircle((float) cx, (float) cy, (float) radius, Path.Direction.CW);
+		canvas.clipPath(circularPath);
+		Rect srcRect = new Rect(0, 0, loadedBitmap.getWidth(), loadedBitmap.getHeight());
+		RectF dstRect = new RectF(0f, 0f, (float) circle.getWidth(), (float) circle.getHeight());
+		bitmapPaint.setColorFilter(null);
+		canvas.drawBitmap(loadedBitmap, srcRect, dstRect, bitmapPaint);
+		canvas.restore();
+		bitmapResult = AndroidUtils.scaleBitmap(bitmapResult, bigIconSize, bigIconSize, false);
+		return bitmapResult;
+	}
+
+	private Bitmap getCircle() {
+		if (circleBitmap == null) {
+			circleBitmap = RenderingIcons.getBitmapFromVectorDrawable(getContext(), R.drawable.bg_point_circle);
+		}
+		return circleBitmap;
+	}
+
+	private Paint createBitmapPaint() {
+		Paint bitmapPaint = new Paint();
+		bitmapPaint.setAntiAlias(true);
+		bitmapPaint.setDither(true);
+		bitmapPaint.setFilterBitmap(true);
+		return bitmapPaint;
+	}
+
+	private int getBigIconSize() {
+		return AndroidUtils.dpToPxAuto(getContext(), BIG_ICON_SIZE_DP);
 	}
 }

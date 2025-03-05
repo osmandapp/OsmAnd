@@ -1,5 +1,6 @@
 package net.osmand.plus.search
 
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -21,7 +22,7 @@ import net.osmand.plus.utils.UpdateLocationUtils
 import net.osmand.util.Algorithms
 
 class NearbyPlacesAdapter(
-	val app: OsmandApplication,
+	val ctx: Context,
 	var items: List<ExploreTopPlacePoint>,
 	private var isVertical: Boolean,
 	private val onItemClickListener: NearbyItemClickListener
@@ -32,7 +33,7 @@ class NearbyPlacesAdapter(
 	}
 
 	// Initialize the UpdateLocationViewCache
-	private val updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app)
+	private val updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(ctx)
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NearbyViewHolder {
 		val inflater = UiUtilities.getInflater(parent.context, isNightMode())
@@ -45,7 +46,7 @@ class NearbyPlacesAdapter(
 	}
 
 	private fun isNightMode(): Boolean {
-		return !app.getSettings().isLightContent
+		return !(ctx.applicationContext as OsmandApplication).getSettings().isLightContent
 	}
 
 	override fun onBindViewHolder(holder: NearbyViewHolder, position: Int) {

@@ -18,11 +18,12 @@ import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseOsmAndFragment
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.search.NearbyPlacesAdapter
+import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import org.apache.commons.logging.Log
 
-class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyItemClickListener {
+class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyItemClickListener {
 	private lateinit var visiblePlacesRect: QuadRect
 	private val log: Log = PlatformUtil.getLog(
 		ExplorePlacesFragment::class.java)
@@ -114,7 +115,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	private fun setupVerticalNearbyList(view: View) {
 		val verticalNearbyList = view.findViewById<RecyclerView>(R.id.vertical_nearby_list)
 		val nearbyData = app.explorePlacesProvider.getDataCollection(visiblePlacesRect)
-		verticalNearbyAdapter = NearbyPlacesAdapter(app, nearbyData, true, this)
+		verticalNearbyAdapter = NearbyPlacesAdapter(view.context, nearbyData, true, this)
 		verticalNearbyList.layoutManager = LinearLayoutManager(requireContext())
 		verticalNearbyList.adapter = verticalNearbyAdapter
 		verticalNearbyAdapter.notifyDataSetChanged()

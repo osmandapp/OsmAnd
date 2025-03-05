@@ -8,8 +8,8 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
-import net.osmand.data.LatLon;
 import net.osmand.data.ExploreTopPlacePoint;
+import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
@@ -23,10 +23,14 @@ import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 
 // TODO use gzip in loading
@@ -46,15 +50,42 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 	public static final int DEFAULT_LIMIT_POINTS = 200;
 	private static final int NEARBY_MIN_RADIUS = 50;
 
-
 	private static final int MAX_TILES_PER_QUAD_RECT = 12;
+	private static final int MAX_TILES_PER_CACHE = MAX_TILES_PER_QUAD_RECT * 2;
 	private static final double LOAD_ALL_TINY_RECT = 0.5;
 
 	private final OsmandApplication app;
 	private volatile int startedTasks = 0;
 	private volatile int finishedTasks = 0;
 
-	private final Map<String, QuadRect> loadingTiles = new HashMap<>(); // Track tiles being loaded
+	private final Map<TileKey, QuadRect> loadingTiles = new HashMap<>(); // Track tiles being loaded
+	private final Map<TileKey, List<ExploreTopPlacePoint>> tilesCache = new HashMap<>(); // Memory cache for recent tiles
+
+	private static class TileKey {
+		int zoom;
+		int tileX;
+		int tileY;
+
+		public TileKey(int zoom, int tileX, int tileY) {
+			this.zoom = zoom;
+			this.tileX = tileX;
+			this.tileY = tileY;
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) return true;
+			if (!(o instanceof TileKey tileKey)) {
+				return false;
+			}
+            return zoom == tileKey.zoom && tileX == tileKey.tileX && tileY == tileKey.tileY;
+		}
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(zoom, tileX, tileY);
+		}
+	}
 
 	public ExplorePlacesProviderJava(OsmandApplication app) {
 		this.app = app;
@@ -141,25 +172,41 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 		for (int tileX = (int) minTileX; tileX <= (int) maxTileX; tileX++) {
 			for (int tileY = (int) minTileY; tileY <= (int) maxTileY; tileY++) {
 				if (!dbHelper.isDataExpired(zoom, tileX, tileY, queryLang)) {
-					List<OsmandApiFeatureData> places = dbHelper.getPlaces(zoom, tileX, tileY, queryLang);
-					for (OsmandApiFeatureData item : places) {
-						// TODO remove checks poi type subtype null
-						if (Algorithms.isEmpty(item.properties.photoTitle)
-								|| item.properties.poitype == null || item.properties.poisubtype == null) {
-							continue;
+					TileKey tileKey = new TileKey(zoom, tileX, tileY);
+					List<ExploreTopPlacePoint> cachedPlaces = tilesCache.get(tileKey);
+					if (cachedPlaces != null) {
+						for (ExploreTopPlacePoint place : cachedPlaces) {
+							double lat = place.getLatitude();
+							double lon = place.getLongitude();
+							if ((rect.contains(lon, lat, lon, lat) || loadAll) && uniqueIds.add(place.getId())) {
+								filteredPoints.add(place);
+							}
 						}
-						ExploreTopPlacePoint point = new ExploreTopPlacePoint(item);
-						double lat = point.getLatitude();
-						double lon = point.getLongitude();
-						if ((rect.contains(lon, lat, lon, lat) || loadAll) && uniqueIds.add(point.getId())) {
-							filteredPoints.add(point);
+					} else {
+						List<OsmandApiFeatureData> places = dbHelper.getPlaces(zoom, tileX, tileY, queryLang);
+						cachedPlaces = new ArrayList<>();
+						for (OsmandApiFeatureData item : places) {
+							// TODO remove checks poi type subtype null
+							if (Algorithms.isEmpty(item.properties.photoTitle)
+									|| item.properties.poitype == null || item.properties.poisubtype == null) {
+								continue;
+							}
+							ExploreTopPlacePoint point = new ExploreTopPlacePoint(item);
+							double lat = point.getLatitude();
+							double lon = point.getLongitude();
+							if ((rect.contains(lon, lat, lon, lat) || loadAll) && uniqueIds.add(point.getId())) {
+								filteredPoints.add(point);
+							}
+							cachedPlaces.add(point);
 						}
+						tilesCache.put(tileKey, cachedPlaces);
 					}
 				} else {
 					loadTile(zoom, tileX, tileY, queryLang, dbHelper);
 				}
 			}
 		}
+		clearCache(zoom, (int) minTileX, (int) maxTileX, (int) minTileY, (int) maxTileY);
 
 		// Sort the points by Elo in descending order
 		filteredPoints.sort((p1, p2) -> Double.compare(p2.getElo(), p1.getElo()));
@@ -172,6 +219,29 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 		return filteredPoints;
 	}
 
+	private void clearCache(int zoom, int minTileX, int maxTileX, int minTileY, int maxTileY) {
+		Iterator<Entry<TileKey, List<ExploreTopPlacePoint>>> iterator = tilesCache.entrySet().iterator();
+		while (iterator.hasNext()) {
+			TileKey key = iterator.next().getKey();
+			if (key.zoom != zoom) {
+				iterator.remove();
+			}
+		}
+		int numTiles = tilesCache.size();
+		if (numTiles > MAX_TILES_PER_CACHE) {
+			List<TileKey> currentZoomKeys = new ArrayList<>(tilesCache.keySet());
+			currentZoomKeys.sort(Comparator.comparingInt(key -> {
+				int dx = Math.max(0, Math.max(minTileX - key.tileX, key.tileX - maxTileX));
+				int dy = Math.max(0, Math.max(minTileY - key.tileY, key.tileY - maxTileY));
+				return dx + dy;
+			}));
+			for (int i = MAX_TILES_PER_CACHE; i < numTiles; i++) {
+				TileKey keyToRemove = currentZoomKeys.get(i);
+				tilesCache.remove(keyToRemove);
+			}
+		}
+	}
+
 	@SuppressLint("DefaultLocale")
 	private void loadTile(int zoom, int tileX, int tileY, String queryLang, PlacesDatabaseHelper dbHelper) {
 		double left;
@@ -179,8 +249,8 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 		double top;
 		double bottom;
 
+		TileKey tileKey = new TileKey(zoom, tileX, tileY);
 		synchronized (loadingTiles) {
-			String tileKey = zoom + "_" + tileX + "_" + tileY;
 			if (loadingTiles.containsKey(tileKey)) {
 				return;
 			}
@@ -197,9 +267,7 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 			startedTasks++;
 		}
 		// Create and execute a task for the current tile
-		int ftileX = tileX;
-		int ftileY = tileY;
-		new GetNearbyPlacesImagesTask(
+        new GetNearbyPlacesImagesTask(
 				app,
 				tileRect, zoom,
 				queryLang, new GetNearbyPlacesImagesTask.GetImageCardsListener() {
@@ -214,9 +282,8 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 					notifyListeners(startedTasks != finishedTasks);
 				}
                 // Store the data in the database for the current tile
-                dbHelper.insertPlaces(zoom, ftileX, ftileY, queryLang, result);
+                dbHelper.insertPlaces(zoom, tileX, tileY, queryLang, result);
                 // Remove the tile from the loading set
-				String tileKey = zoom + "_" + ftileX + "_" + ftileY;
 				synchronized (loadingTiles) {
 					loadingTiles.remove(tileKey);
 				}
