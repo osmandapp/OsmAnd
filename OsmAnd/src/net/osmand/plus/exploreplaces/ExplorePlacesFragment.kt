@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.annotation.ColorRes
 import androidx.appcompat.widget.Toolbar
@@ -33,8 +32,6 @@ import net.osmand.plus.views.OsmandMapTileView
 import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton
-import net.osmand.plus.views.mapwidgets.widgets.RulerWidget
-import net.osmand.plus.widgets.TextViewEx
 import net.osmand.util.MapUtils
 import org.apache.commons.logging.Log
 import kotlin.math.abs
@@ -44,7 +41,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	OsmandMapTileView.ManualZoomListener {
 
 	private val COMPASS_UPDATE_PERIOD = 300
-	private lateinit var visiblePlacesRect: QuadRect
+	private var visiblePlacesRect = QuadRect()
 	private val log: Log = PlatformUtil.getLog(
 		ExplorePlacesFragment::class.java)
 
@@ -53,9 +50,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	private var mainContent: LinearLayout? = null
 	private var verticalNearbyList: RecyclerView? = null
 	private var showListContainer: View? = null
-	private var showOnMapContainer: View? = null
 	private var frameLayout: CoordinatorLayout? = null
-	private var rulerWidget: RulerWidget? = null
 	private var lastCompassUpdate = 0L
 	private var lastPointListRectUpdate = 0L
 	private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
@@ -93,9 +88,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 				layer.addCustomMapButton(myLocationBtn)
 			}
 			AndroidUiHelper.updateVisibility(zoomButtonsView, true)
-			val mapInfoLayer = mapLayers.mapInfoLayer
-			rulerWidget =
-				mapInfoLayer.setupRulerWidget(view.findViewById(R.id.map_ruler_layout))
 			activity.mapLayers.mapControlsLayer.addCustomMapButton(view.findViewById(R.id.map_compass_button))
 		}
 	}
@@ -103,20 +95,13 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		AndroidUtils.addStatusBarPadding21v(requireActivity(), view)
-		arguments?.let {
-			val left = it.getDouble("left")
-			val right = it.getDouble("right")
-			val top = it.getDouble("top")
-			val bottom = it.getDouble("bottom")
-			visiblePlacesRect = QuadRect(left, top, right, bottom) // Create QuadRect
-		}
 		mainContent = view.findViewById(R.id.main_content)
 		showListContainer = view.findViewById(R.id.show_list_container)
 		frameLayout = view.findViewById(R.id.frame_layout)
-		setupShowAll(view)
 		setupToolBar(view)
 		setupVerticalNearbyList(view)
 		buildZoomButtons(view)
+		updatePointsList()
 		val dialogFragment = mapActivity?.fragmentsHelper?.quickSearchDialogFragment
 		dialogFragment?.hide()
 		bottomSheetBehavior = BottomSheetBehavior.from(mainContent!!)
@@ -124,6 +109,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		bottomSheetBehavior.peekHeight =
 			resources.getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height)
 		bottomSheetBehavior.isHideable = true
+		bottomSheetBehavior.isDraggable = true
 		bottomSheetBehavior.addBottomSheetCallback(object :
 			BottomSheetBehavior.BottomSheetCallback() {
 			override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -141,12 +127,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 				}
 				isMapVisible = newState != BottomSheetBehavior.STATE_EXPANDED
 				app.osmandMap.mapLayers.explorePlacesLayer.enableLayer(isMapVisible)
-				AndroidUiHelper.updateVisibility(
-					showOnMapContainer,
-					newState == BottomSheetBehavior.STATE_EXPANDED)
-
 				updateShowListButton(newState)
-
 			}
 
 			override fun onSlide(bottomSheet: View, slideOffset: Float) {
@@ -158,27 +139,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		AndroidUiHelper.updateVisibility(
 			showListContainer,
 			state == BottomSheetBehavior.STATE_HIDDEN)
-	}
-
-	fun onBackPress(): Boolean {
-		if (isMapVisible) {
-			if (mapActivity?.contextMenu?.isVisible == true) {
-				mapActivity?.contextMenu?.hideMenus()
-			} else if (bottomSheetBehavior.state != BottomSheetBehavior.STATE_HIDDEN) {
-				hideList()
-			} else {
-				isMapVisible = false
-				mainContent?.visibility = View.VISIBLE
-				bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-			}
-		} else {
-			val quickSearchFragment = mapActivity?.fragmentsHelper?.quickSearchDialogFragment
-			quickSearchFragment?.show()
-			activity?.supportFragmentManager?.beginTransaction()
-				?.remove(this@ExplorePlacesFragment)
-				?.commit()
-		}
-		return true
 	}
 
 	override fun onResume() {
@@ -240,19 +200,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		}
 	}
 
-	private fun setupShowAll(view: View) {
-		showOnMapContainer = view.findViewById(R.id.show_on_map_container)
-		view.findViewById<ImageView>(R.id.location_icon)
-			.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_marker_dark, nightMode))
-		val showList = view.findViewById<TextViewEx>(R.id.show_list)
-		view.findViewById<View>(R.id.show_on_map).setOnClickListener {
-			hideList()
-		}
-		showList.setOnClickListener {
-			showList()
-		}
-	}
-
 	@ColorRes
 	override fun getStatusBarColorId(): Int {
 		AndroidUiHelper.setStatusBarContentColor(view, nightMode)
@@ -291,16 +238,11 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 
 	companion object {
 		val TAG: String = ExplorePlacesFragment::class.java.simpleName
-		fun showInstance(manager: FragmentManager, visiblePlacesRect: QuadRect) {
+		fun showInstance(manager: FragmentManager) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 				val fragment = ExplorePlacesFragment()
-				val bundle = Bundle()
-				bundle.putDouble("left", visiblePlacesRect.left)
-				bundle.putDouble("right", visiblePlacesRect.right)
-				bundle.putDouble("top", visiblePlacesRect.top)
-				bundle.putDouble("bottom", visiblePlacesRect.bottom)
-				fragment.arguments = bundle
 				manager.beginTransaction()
+					.addToBackStack(null)
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.commitAllowingStateLoss()
 			}

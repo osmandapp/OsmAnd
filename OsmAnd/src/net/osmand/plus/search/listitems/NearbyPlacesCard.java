@@ -1,5 +1,7 @@
 package net.osmand.plus.search.listitems;
 
+import static net.osmand.plus.search.ShowQuickSearchMode.CURRENT;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -18,6 +20,9 @@ import net.osmand.plus.exploreplaces.ExplorePlacesProvider;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.search.NearbyPlacesAdapter;
+import net.osmand.plus.search.dialogs.ExplorePlacesNearbyToolbarController;
+import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
+import net.osmand.plus.views.mapwidgets.TopToolbarController;
 
 import java.util.List;
 
@@ -40,6 +45,7 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvid
 	private View cardContent;
 	private boolean isLoadingItems;
 	private QuadRect visiblePlacesRect;
+	private ExplorePlacesNearbyToolbarController explorePlacesToolbarController;
 
 	public NearbyPlacesCard(@NonNull MapActivity mapActivity, @NonNull NearbyPlacesAdapter.NearbyItemClickListener clickListener) {
 		super(mapActivity);
@@ -73,7 +79,7 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvid
 
 	private void setupShowAllNearbyPlacesBtn() {
 		findViewById(R.id.show_all_btn).setOnClickListener(v -> {
-			ExplorePlacesFragment.Companion.showInstance(mapActivity.getSupportFragmentManager(), visiblePlacesRect);
+			showToolbar();
 		});
 	}
 
@@ -153,5 +159,27 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvid
 			onNearbyPlacesCollapseChanged();
 		});
 		onNearbyPlacesCollapseChanged();
+	}
+
+	private void showToolbar() {
+		explorePlacesToolbarController = new ExplorePlacesNearbyToolbarController(mapActivity.getSupportFragmentManager());
+		explorePlacesToolbarController.setTitle(app.getString(R.string.popular_places_nearby));
+		explorePlacesToolbarController.setOnBackButtonClickListener(v -> {
+			mapActivity.getFragmentsHelper().showQuickSearch(CURRENT, false);
+			mapActivity.hideTopToolbar(TopToolbarController.TopToolbarControllerType.EXPLORE_PLACES_NEARBY);
+			ExplorePlacesFragment nearbyPlacesFragment = mapActivity.getFragmentsHelper().getExplorePlacesFragment();
+			if (nearbyPlacesFragment != null) {
+				mapActivity.getFragmentsHelper().dismissFragment(null);
+			}
+		});
+		explorePlacesToolbarController.setOnTitleClickListener(v -> mapActivity.getFragmentsHelper().showQuickSearch(CURRENT, false));
+		explorePlacesToolbarController.setOnCloseButtonClickListener(v -> mapActivity.getFragmentsHelper().closeQuickSearch());
+		mapActivity.showTopToolbar(explorePlacesToolbarController);
+		mapActivity.updateStatusBarColor();
+		mapActivity.refreshMap();
+		QuickSearchDialogFragment dialogFragment = mapActivity.getFragmentsHelper().getQuickSearchDialogFragment();
+		if (dialogFragment != null) {
+			dialogFragment.hide();
+		}
 	}
 }

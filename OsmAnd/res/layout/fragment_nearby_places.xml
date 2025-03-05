@@ -4,6 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:paddingTop="@dimen/toolbar_height"
 	android:orientation="vertical">
 
 	<com.google.android.material.appbar.AppBarLayout
@@ -11,6 +12,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="?attr/app_bar_secondary_color"
+		android:visibility="gone"
 		app:elevation="2dp">
 
 		<androidx.appcompat.widget.Toolbar
@@ -26,7 +28,8 @@
 	<androidx.coordinatorlayout.widget.CoordinatorLayout
 		android:id="@+id/frame_layout"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent">
+		android:layout_height="match_parent"
+		android:layout_marginTop="@dimen/toolbar_height">
 
 		<LinearLayout
 			android:id="@+id/main_content"
@@ -37,38 +40,6 @@
 			android:orientation="vertical"
 			app:behavior_peekHeight="@dimen/bottom_sheet_menu_peek_height"
 			app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
-
-			<LinearLayout
-				android:id="@+id/show_on_map_container"
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/context_menu_buttons_bottom_height"
-				android:background="?attr/activity_background_color"
-				android:orientation="horizontal">
-
-				<ImageView
-					android:id="@+id/location_icon"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="center_vertical"
-					android:layout_marginStart="@dimen/content_padding"
-					android:src="@drawable/ic_action_marker_dark" />
-
-				<net.osmand.plus.widgets.TextViewEx
-					android:id="@+id/show_on_map"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="center_vertical|start"
-					android:layout_marginStart="@dimen/content_padding"
-					android:paddingTop="@dimen/list_header_padding"
-					android:paddingBottom="@dimen/list_header_padding"
-					android:text="@string/shared_string_show_on_map"
-					android:textAllCaps="true"
-					android:textColor="?attr/active_color_basic"
-					android:textSize="@dimen/default_desc_text_size"
-					app:typefaceWeight="medium"
-					tools:text="SHOW ALL"
-					tools:visibility="visible" />
-			</LinearLayout>
 
 			<LinearLayout
 				android:id="@+id/main_view"
@@ -114,12 +85,6 @@
 				android:layout_height="wrap_content">
 
 				<include
-					layout="@layout/map_ruler"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_gravity="start|bottom" />
-
-				<include
 					layout="@layout/map_hud_controls"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -131,28 +96,6 @@
 				android:layout_width="match_parent"
 				android:layout_height="10dp"
 				android:background="@drawable/bg_contextmenu_shadow_top_light" />
-
-			<FrameLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:background="?attr/list_background_color">
-
-				<net.osmand.plus.widgets.TextViewEx
-					android:id="@+id/show_list"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:layout_marginStart="@dimen/text_margin_small"
-					android:layout_marginTop="@dimen/content_padding_small_half"
-					android:layout_marginBottom="@dimen/content_padding_small_half"
-					android:background="?attr/list_background_color"
-					android:padding="@dimen/content_padding_half"
-					android:text="@string/show_list"
-					android:textColor="?attr/active_color_basic"
-					android:textSize="@dimen/default_desc_text_size"
-					app:typefaceWeight="medium"
-					tools:text="Show list" />
-
-			</FrameLayout>
 
 		</LinearLayout>
 
