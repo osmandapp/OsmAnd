@@ -152,22 +152,6 @@ public abstract class GeometryWayStyle<T extends CommonGeometryWayContext> {
 				&& o.elevationMeters == ((GeometryWayStyle<?>) other).elevationMeters;
 	}
 
-	public boolean equalsExceptColor(Object other) {
-		if (this == other) {
-			return true;
-		}
-		if (!(other instanceof GeometryWayStyle)) {
-			return false;
-		}
-		GeometryWayStyle<?> o = (GeometryWayStyle<?>) other;
-		return	Algorithms.objectEquals(width, o.width)
-				&& Arrays.equals(dashPattern, o.dashPattern)
-				&& o.trackVisualizationType == ((GeometryWayStyle<?>) other).trackVisualizationType
-				&& o.trackLinePositionType == ((GeometryWayStyle<?>) other).trackLinePositionType
-				&& o.additionalExaggeration == ((GeometryWayStyle<?>) other).additionalExaggeration
-				&& o.elevationMeters == ((GeometryWayStyle<?>) other).elevationMeters;
-	}
-
 	public int getColorizationScheme() {
 		return COLORIZATION_NONE;
 	}
