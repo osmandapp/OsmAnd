@@ -132,13 +132,15 @@ public class RouteInfoCard extends MapBaseCard {
 			String key = routeKey.getKeyFromTag(tag);
 			String value = routeKey.getValue(key);
 
-			if (routeKey.type != OsmRouteType.UNKNOWN) {
-				if (key.equals("name") || key.equals("type") || key.contains("osmc")) {
-					continue;
-				}
-			} else {
-				if (HIDDEN_GPX_TAGS.contains(key) || GpxAppearanceInfo.isGpxAppearanceTag(key)) {
-					continue;
+			if (routeKey.type != OsmRouteType.UNKNOWN &&
+					(key.equals("name") || key.equals("type") || key.contains("osmc"))) {
+				continue;
+			} else if (HIDDEN_GPX_TAGS.contains(key) || GpxAppearanceInfo.isGpxAppearanceTag(key)) {
+				continue;
+			} else if (key.contains(":") && !key.startsWith("name:") && !key.startsWith("ref:")) {
+				String mainTag = key.split(":")[1];
+				if (routeKey.tags.stream().anyMatch((t) -> mainTag.equals(routeKey.getKeyFromTag(t)))) {
+					continue; // skip synthetic xxx:ref if ref exists (piste:ref, etc)
 				}
 			}
 
@@ -315,7 +317,14 @@ public class RouteInfoCard extends MapBaseCard {
 					return app.getString(translatableKey.getValue());
 				}
 			}
-			return poiType != null ? poiType.getTranslation() : Algorithms.capitalizeFirstLetterAndLowercase(key);
+			if (poiType != null) {
+				return poiType.getTranslation();
+			} else {
+				String capitalizedKey = Algorithms.capitalizeFirstLetterAndLowercase(key);
+				String stringKey = key.toLowerCase().replace(":", "_");
+				String translatedTagName = AndroidUtils.getStringByProperty(app, "tag_" + stringKey);
+				return Algorithms.isEmpty(translatedTagName) ? capitalizedKey : translatedTagName;
+			}
 		}
 
 		@NonNull
