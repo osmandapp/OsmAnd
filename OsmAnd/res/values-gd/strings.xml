@@ -213,4 +213,6 @@
     <string name="routing_attr_avoid_fords_description">Seachain àthan</string>
     <string name="colour_of_circles">Dath nan cearcaill</string>
     <string name="compass_on_circles">Combaist air cearcaill</string>
+    <string name="circle_settings">Seatadh cearcaill</string>
+    <string name="routing_attr_avoid_4wd_only_name">Seachain rathaidean 4x4</string>
 </resources>
