@@ -5672,4 +5672,5 @@
     <string name="show_dm_grids">Használjon fok-percet a csak fok vagy fok-perc-mp helyett</string>
     <string name="show_mercator_grids">Használjon Mercatort a WGS84 vagy az UTM helyett</string>
     <string name="show_mercator_grids_description">WGS84 vagy UTM helyett Mercatorban mutatja a rácsot</string>
+    <string name="show_list">Lista mutatása</string>
 </resources>
