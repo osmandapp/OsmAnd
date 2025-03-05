@@ -13,7 +13,5 @@ class ExplorePlacesNearbyToolbarController(val fragmentManager: FragmentManager)
 		setOnSaveViewClickListener {
 			ExplorePlacesFragment.showInstance(fragmentManager)
 		}
-		setOnBackButtonClickListener {
-		}
 	}
 }
