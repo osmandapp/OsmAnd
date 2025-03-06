@@ -641,7 +641,6 @@ public class ConfigureMapMenu {
 	public static int getCoordinatesGridIcon(boolean selected) {
 		return selected
 				? R.drawable.ic_action_world_globe
-				// TODO: use ic_action_coordinates_grid_disabled
-				: R.drawable.ic_action_offline;
+				: R.drawable.ic_action_coordinates_grid_disabled;
 	}
 }
