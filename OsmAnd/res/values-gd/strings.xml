@@ -259,4 +259,5 @@
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Tagaichean nòta</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Seall tagaichean nòta</string>
+    <string name="shared_string_used">Air a\' chleachdadh</string>
 </resources>
