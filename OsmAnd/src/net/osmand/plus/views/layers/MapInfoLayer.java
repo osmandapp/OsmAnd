@@ -382,6 +382,10 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		}
 	}
 
+	public void updateTopToolbar() {
+		updateTopToolbar(topToolbarView.isNightMode());
+	}
+
 	private void updateTopToolbar(boolean nightMode) {
 		topToolbarView.updateColors(nightMode);
 	}

@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="popular_places">Popular places</string>
     <string name="tag_lit">Lighting</string>
     <string name="tag_piste_name">Name</string>
     <string name="tag_piste_type">Type</string>
