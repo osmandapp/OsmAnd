@@ -327,10 +327,6 @@ public class RouteInfoCard extends MapBaseCard {
 				return poiType.getTranslation();
 			} else {
 				String stringKey = key.toLowerCase().replace(":", "_");
-				String translatedAsTagName = AndroidUtils.getStringByProperty(app, "tag_" + stringKey);
-				if (!Algorithms.isEmpty(translatedAsTagName)) {
-					return translatedAsTagName;
-				}
 				String translatedAsPoiName = AndroidUtils.getStringByProperty(app, "poi_" + stringKey);
 				if (!Algorithms.isEmpty(translatedAsPoiName)) {
 					return translatedAsPoiName;
