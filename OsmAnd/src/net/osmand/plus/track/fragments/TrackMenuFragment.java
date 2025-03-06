@@ -222,6 +222,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private TrackChartPoints trackChartPoints;
 	private RouteActivitySelectionHelper routeActivitySelectionHelper;
 	private RouteKey routeKey;
+	private RouteKey tagsAsRouteKey;
 	private boolean temporarySelected;
 
 	private Float heading;
@@ -512,7 +513,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		AndroidUiHelper.updateVisibility(displayGroupsButton, hasPointsGroups());
 		AndroidUiHelper.updateVisibility(headerIcon, menuType != TrackMenuTab.OPTIONS);
 
-		Drawable icon = routeKey != null ? new NetworkRouteDrawable(app, routeKey, isNightMode())
+		RouteKey rk = routeKey != null ? routeKey : tagsAsRouteKey;
+		Drawable icon = rk != null ? new NetworkRouteDrawable(app, rk, isNightMode())
 				: uiUtilities.getThemedIcon(R.drawable.ic_action_polygom_dark);
 		headerIcon.setImageDrawable(icon);
 	}
@@ -818,12 +820,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (shouldReattachCards && trackExtensionsCard != null && trackExtensionsCard.getView() != null) {
 			reattachCard(cardsContainer, trackExtensionsCard);
 		} else {
-			Map<String, String> combinedExtensionsTags = new LinkedHashMap<>();
-			combinedExtensionsTags.putAll(metadata.getExtensionsToRead());
-			combinedExtensionsTags.putAll(gpxFile.getExtensionsToRead());
-			if (!combinedExtensionsTags.isEmpty()) {
-				RouteKey tagsAsRouteKey = new RouteKey(OsmRouteType.UNKNOWN);
-				combinedExtensionsTags.forEach(tagsAsRouteKey::addTag);
+			setupTagsAsRouteKey();
+			if (tagsAsRouteKey != null) {
 				trackExtensionsCard = new RouteInfoCard(mapActivity, tagsAsRouteKey, gpxFile);
 				cardsContainer.addView(trackExtensionsCard.build(mapActivity));
 			}
@@ -831,6 +829,37 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 		View cardBottomSpace = inflate(R.layout.list_item_divider, cardsContainer, true);
 		cardBottomSpace.findViewById(R.id.topShadowView).setVisibility(View.INVISIBLE);
+	}
+
+	private static final Map<String, String> SHIELD_TO_OSMC = Map.ofEntries(
+			Map.entry("shield_bg", "osmc_background"),
+			Map.entry("shield_fg", "osmc_foreground"),
+			Map.entry("shield_fg_2", "osmc_foreground2"),
+			Map.entry("shield_textcolor", "osmc_textcolor"),
+			Map.entry("shield_text", "osmc_text")
+	);
+
+	private void setupTagsAsRouteKey() {
+		GpxFile gpxFile = selectedGpxFile.getGpxFile();
+		Metadata metadata = gpxFile.getMetadata();
+		Map<String, String> combinedExtensionsTags = new LinkedHashMap<>();
+		combinedExtensionsTags.putAll(metadata.getExtensionsToRead());
+		combinedExtensionsTags.putAll(gpxFile.getExtensionsToRead());
+		if (!combinedExtensionsTags.isEmpty()) {
+			for (Map.Entry<String, String> entry : SHIELD_TO_OSMC.entrySet()) {
+				String shield = entry.getKey();
+				String osmc = entry.getValue();
+				String value = combinedExtensionsTags.get(shield);
+				if (value != null) {
+					combinedExtensionsTags.put(osmc, value
+							.replaceFirst("^osmc_", "")
+							.replaceFirst("_bg$", "")
+					);
+				}
+			}
+			tagsAsRouteKey = new RouteKey(OsmRouteType.UNKNOWN);
+			combinedExtensionsTags.forEach(tagsAsRouteKey::addTag);
+		}
 	}
 
 	private void reattachCard(@NonNull ViewGroup cardsContainer, @NonNull BaseCard card) {
