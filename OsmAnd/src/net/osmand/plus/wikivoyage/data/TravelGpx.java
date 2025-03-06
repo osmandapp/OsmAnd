@@ -58,11 +58,15 @@ public class TravelGpx extends TravelArticle {
 	public double minElevation = Double.NaN;
 	public double avgElevation;
 
+	public Amenity amenity;
+
+	public String routeType;
+
 	public TravelGpx() {
 	}
 
 	public TravelGpx(Amenity amenity) {
-		//this.file = file;
+		this.amenity = amenity;
 		String enTitle = amenity.getName("en");
 		title = Algorithms.isEmpty(title) ? amenity.getName() : enTitle;
 		lat = amenity.getLocation().getLatitude();
@@ -96,6 +100,8 @@ public class TravelGpx extends TravelArticle {
 				}
 			}
 		}
+		String subtype = amenity.getSubType();
+		routeType = subtype.startsWith("routes_") ? subtype.replace("routes_", "") : null;
 	}
 
 	@Nullable

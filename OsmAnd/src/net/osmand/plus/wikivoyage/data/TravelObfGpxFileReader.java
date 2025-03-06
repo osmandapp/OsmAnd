@@ -31,9 +31,15 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.binary.HeightDataLoader;
 import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
 import net.osmand.gpx.TravelObfGpxTrackOptimizer;
+import net.osmand.map.WorldRegion;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseLoadAsyncTask;
@@ -56,7 +62,10 @@ import org.apache.commons.logging.Log;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
@@ -241,90 +250,270 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                                            @NonNull List<String> pgColors,
                                            @NonNull List<String> pgBackgrounds,
                                            @NonNull HeightDataLoader.Cancellable isCancelled) {
-        int left = 0, right = Integer.MAX_VALUE, top = 0, bottom = Integer.MAX_VALUE;
-
-        if (article.hasBbox31()) {
-            left = (int) article.getBbox31().left;
-            right = (int) article.getBbox31().right;
-            top = (int) article.getBbox31().top;
-            bottom = (int) article.getBbox31().bottom;
+        if (article instanceof TravelGpx travelGpx) {
+            // user's GPX, OSM routes
+            return fetchTravelGpx(repos, travelGpx, segmentList, pointList, gpxFileExtensions, pgNames, pgIcons, pgColors, pgBackgrounds, isCancelled);
+        } else {
+            // Wikivoyage
+            return fetchTravelArticle(repos, article, pointList, gpxFileExtensions, pgNames, pgIcons, pgColors, pgBackgrounds, isCancelled);
         }
+    }
 
-        boolean allowReadFromMultipleMaps = article.hasOsmRouteId();
-
-        Map<Long, BinaryMapDataObject> binaryMapDataObjectMap = new HashMap<>();//live-updates
-        Map<Long, Amenity> amenityMap = new HashMap<>();//live-updates
+    private boolean fetchTravelGpx(@NonNull List<AmenityIndexRepository> repos,
+                                       @NonNull TravelGpx travelGpx,
+                                       @NonNull List<BinaryMapDataObject> segmentList,
+                                       @NonNull List<Amenity> pointList,
+                                       @NonNull Map<String, String> gpxFileExtensions,
+                                       @NonNull List<String> pgNames,
+                                       @NonNull List<String> pgIcons,
+                                       @NonNull List<String> pgColors,
+                                       @NonNull List<String> pgBackgrounds,
+                                       @NonNull HeightDataLoader.Cancellable isCancelled) {
+        int left = 0, right = Integer.MAX_VALUE, top = 0, bottom = Integer.MAX_VALUE;
+        if (travelGpx.hasBbox31()) {
+            left = (int) travelGpx.getBbox31().left;
+            right = (int) travelGpx.getBbox31().right;
+            top = (int) travelGpx.getBbox31().top;
+            bottom = (int) travelGpx.getBbox31().bottom;
+        }
+        boolean isUserGPX = !travelGpx.hasOsmRouteId();
         BinaryMapIndexReader.SearchFilter searchFilter = null;
-        if (article instanceof TravelGpx travelGpx && !Algorithms.isEmpty(travelGpx.activityType)) {
+        BinaryMapIndexReader.SearchPoiTypeFilter poiTypeFilter = null;
+        if (travelGpx.routeType != null) {
             searchFilter = new BinaryMapIndexReader.SearchFilter() {
                 @Override
                 public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex mapIndex) {
-                    Integer type = mapIndex.getRule("route", travelGpx.activityType);
+                    Integer type = mapIndex.getRule("route_type", travelGpx.routeType);
                     return type != null && types.contains(type);
                 }
             };
         }
+        Amenity amenity = travelGpx.amenity;
+        if (amenity != null && !Algorithms.isEmpty(amenity.getSubType())) {
+            final String subtype = amenity.getSubType();
+            poiTypeFilter = new BinaryMapIndexReader.SearchPoiTypeFilter() {
+                @Override
+                public boolean accept(PoiCategory poiCategory, String s) {
+                    return subtype.equals(s);
+                }
+
+                @Override
+                public boolean isEmpty() {
+                    return false;
+                }
+            };
+        } else {
+            // users GPX
+            poiTypeFilter = getSearchFilter(travelGpx.getMainFilterString(), travelGpx.getPointFilterString());
+        }
+
+
+        Map<Long, BinaryMapDataObject> binaryMapDataObjectMap = new HashMap<>(); // live-updates
+        Map<Long, Amenity> amenityMap = new HashMap<>(); // live-updates
+        HashSet<Long> processedAmenity = new HashSet<>();
+        SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
+                0, 0, Algorithms.emptyIfNull(travelGpx.title), left, right, top, bottom,
+                poiTypeFilter,
+                getAmenityMatcher(travelGpx, amenityMap, isCancelled),
+                null);
+
+        SearchRequest<BinaryMapDataObject> sr = BinaryMapIndexReader
+                .buildSearchRequest(left, right, top, bottom, 15, searchFilter,
+                        matchSegmentsByRefTitleRouteId(travelGpx, binaryMapDataObjectMap, isCancelled));
+
+        long time = System.currentTimeMillis();
         ListIterator<AmenityIndexRepository> li = repos.listIterator(repos.size());
         while (li.hasPrevious()) {
             AmenityIndexRepository repo = li.previous();
+            if (isCancelled.isCancelled()) {
+                return false;
+            }
+            if (isUserGPX && !Algorithms.objectEquals(repo.getFile(), travelGpx.file)) {
+                continue;
+            }
+            if (repo.getFile().getName().toLowerCase().startsWith(WorldRegion.WORLD + "_")) {
+                continue;
+            }
+            int mapCnt = 0;
+            processedAmenity.clear();
+
             try {
-                if (isCancelled.isCancelled()) {
-                    return false;
+                if (travelGpx.routeRadius > 0 && !travelGpx.hasBbox31()) {
+                    pointRequest.setBBoxRadius(travelGpx.lat, travelGpx.lon, travelGpx.routeRadius);
                 }
-                if (!allowReadFromMultipleMaps &&
-                        !Algorithms.objectEquals(repo.getFile(), article.file)) {
-                    continue; // speed up reading of Wikivoyage and User's GPX files in OBF
-                }
-                if (repo.getFile().getName().contains("basemap")) {
-                    continue;
-                }
-                if (article instanceof TravelGpx) {
-                    BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> sr = BinaryMapIndexReader
-                            .buildSearchRequest(left, right, top, bottom, 15, searchFilter,
-                                    matchSegmentsByRefTitleRouteId(article, binaryMapDataObjectMap, isCancelled));
-                    if (article.routeRadius > 0 && !article.hasBbox31()) {
-                        sr.setBBoxRadius(article.lat, article.lon, article.routeRadius);
+
+                if (isPoiSectionIntersect(repo, pointRequest)) {
+                    repo.searchPoi(pointRequest);
+                    for (Map.Entry<Long, Amenity> pair : amenityMap.entrySet()) {
+                        Amenity am = pair.getValue();
+                        Long key = pair.getKey();
+                        if (!processedAmenity.contains(key)) {
+                            if (!isPoiSectionIntersect(repo, am)) {
+                                continue;
+                            }
+                            sr.setBBoxRadius(am.getLocation().getLatitude(), am.getLocation().getLongitude(), 100);
+                            repo.searchMapIndex(sr);
+                            mapCnt++;
+                            findAmenityOutOfGeometry(amenityMap.values(), binaryMapDataObjectMap.values(), processedAmenity);
+                            processedAmenity.add(key);
+                        }
                     }
-                    repo.searchMapIndex(sr);
                 }
-                // TODO make search request with filter by type for OSM routes
-                // TODO make ResultMatcher<Amenity> by relation id for OSM routes
-                BinaryMapIndexReader.SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
-                        0, 0, Algorithms.emptyIfNull(article.title), left, right, top, bottom,
-                        getSearchFilter(article.getMainFilterString(), article.getPointFilterString()),
-                        matchPointsAndTags(article, amenityMap, gpxFileExtensions, pgNames, pgIcons, pgColors, pgBackgrounds, isCancelled),
-                        null);
-                if (article.routeRadius > 0 && !article.hasBbox31()) {
-                    pointRequest.setBBoxRadius(article.lat, article.lon, article.routeRadius);
-                }
-//                if (!Algorithms.isEmpty(article.title)) {
-//                    repo.searchPoiByName(pointRequest);
-//                } else {
-//                    repo.searchPoi(pointRequest);
-//                }
-                if (!allowReadFromMultipleMaps && !Algorithms.isEmpty(binaryMapDataObjectMap)) {
+                if (isUserGPX && !Algorithms.isEmpty(binaryMapDataObjectMap)) {
                     break; // speed up reading of User's GPX files
                 }
             } catch (Exception e) {
                 LOG.error(e.getMessage());
             }
+            System.out.println(repo.getFile().getName() + " : " + (System.currentTimeMillis() - time) + "ms" + ", map requests:" + mapCnt);
+            time = System.currentTimeMillis();
         }
+
+        pointList.addAll(getPointList(amenityMap, gpxFileExtensions, pgNames, pgIcons, pgColors, pgBackgrounds));
         segmentList.addAll(binaryMapDataObjectMap.values());
-        pointList.addAll(amenityMap.values());
-        return !isCancelled.isCancelled(); // might be partially succeed
+        return !isCancelled.isCancelled();
+    }
+
+    private void findAmenityOutOfGeometry(final Collection<Amenity> amenities, Collection<BinaryMapDataObject> objects, HashSet<Long> proccesedAmenity) {
+        for (BinaryMapDataObject object : objects) {
+            for (int i = 1; i < object.getPointsLength() - 1; i++) {
+                LatLon latLon = new LatLon(MapUtils.get31LatitudeY(object.getPoint31YTile(i)), MapUtils.get31LongitudeX(object.getPoint31XTile(i)));
+                for (Amenity am : amenities) {
+                    if (!proccesedAmenity.contains(am.getId())) {
+                        if (MapUtils.areLatLonEqual(latLon, am.getLocation(), 0.0001)) {
+                            proccesedAmenity.add(am.getId());
+                        }
+                    }
+                }
+                if (proccesedAmenity.size() == amenities.size()) {
+                    break;
+                }
+            }
+        }
+    }
+
+    private boolean isPoiSectionIntersect(AmenityIndexRepository repo, BinaryMapIndexReader.SearchRequest<Amenity> pointRequest) {
+        boolean intersect = false;
+        for (BinaryMapPoiReaderAdapter.PoiRegion poiIndex : repo.getReaderPoiIndexes()) {
+            if (pointRequest.intersects(poiIndex.getLeft31(), poiIndex.getTop31(), poiIndex.getRight31(), poiIndex.getBottom31())) {
+                intersect = true;
+                break;
+            }
+        }
+        return intersect;
+    }
+
+    private boolean isPoiSectionIntersect(AmenityIndexRepository repo, Amenity amenity) {
+        boolean intersect = false;
+        int x31 = MapUtils.get31TileNumberX(amenity.getLocation().getLongitude());
+        int y31 = MapUtils.get31TileNumberY(amenity.getLocation().getLatitude());
+        QuadRect amenityBox = new QuadRect(x31, y31, x31, y31);
+        for (BinaryMapPoiReaderAdapter.PoiRegion poiIndex : repo.getReaderPoiIndexes()) {
+            QuadRect rect = new QuadRect(poiIndex.getLeft31(), poiIndex.getTop31(), poiIndex.getRight31(), poiIndex.getBottom31());
+            if (rect.contains(amenityBox)) {
+                intersect = true;
+                break;
+            }
+        }
+        return intersect;
+    }
+
+    private boolean fetchTravelArticle(@NonNull List<AmenityIndexRepository> repos,
+                                           @NonNull TravelArticle article,
+                                           @NonNull List<Amenity> pointList,
+                                           @NonNull Map<String, String> gpxFileExtensions,
+                                           @NonNull List<String> pgNames,
+                                           @NonNull List<String> pgIcons,
+                                           @NonNull List<String> pgColors,
+                                           @NonNull List<String> pgBackgrounds,
+                                           @NonNull HeightDataLoader.Cancellable isCancelled) {
+        int left = 0, right = Integer.MAX_VALUE, top = 0, bottom = Integer.MAX_VALUE;
+        Map<Long, Amenity> amenityMap = new HashMap<>();
+        for (AmenityIndexRepository repo : repos) {
+            try {
+                if (isCancelled.isCancelled()) {
+                    return false;
+                }
+                if (!Algorithms.objectEquals(repo.getFile(), article.file)) {
+                    continue; // speed up reading of Wikivoyage and User's GPX files in OBF
+                }
+                if (repo.getFile().getName().toLowerCase().startsWith(WorldRegion.WORLD + "_")) {
+                    continue;
+                }
+                BinaryMapIndexReader.SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
+                        0, 0, Algorithms.emptyIfNull(article.title), left, right, top, bottom,
+                        getSearchFilter(article.getMainFilterString(), article.getPointFilterString()),
+                        getAmenityMatcher(article, amenityMap, isCancelled),
+                        null);
+                if (article.routeRadius > 0 && !article.hasBbox31()) {
+                    pointRequest.setBBoxRadius(article.lat, article.lon, article.routeRadius);
+                }
+                if (!Algorithms.isEmpty(article.title)) {
+                    repo.searchPoiByName(pointRequest);
+                } else {
+                    repo.searchPoi(pointRequest);
+                }
+            } catch (Exception e) {
+                LOG.error(e.getMessage());
+            }
+        }
+        List<Amenity> amenities = getPointList(amenityMap, gpxFileExtensions, pgNames, pgIcons, pgColors, pgBackgrounds);
+        pointList.addAll(amenities);
+        return !isCancelled.isCancelled();
+    }
+
+    private List<Amenity> getPointList(Map<Long, Amenity> amenityMap,
+                                       Map<String, String> gpxFileExtensions,
+                                       @NonNull List<String> pgNames,
+                                       @NonNull List<String> pgIcons,
+                                       @NonNull List<String> pgColors,
+                                       @NonNull List<String> pgBackgrounds) {
+        boolean isAlreadyProcessed = false;
+        List<Amenity> result = new ArrayList<>();
+        for (Amenity amenity : amenityMap.values()) {
+            if (amenity.isRouteTrack()) {
+                if (!isAlreadyProcessed) {
+                    isAlreadyProcessed = true;
+                    reconstructActivityFromAmenity(amenity, gpxFileExtensions);
+                    amenity.getNamesMap(true).forEach((lang, value) ->
+                            {
+                                if (!"ref".equals(lang) && !"sym".equals(lang)) {
+                                    gpxFileExtensions.put("name:" + lang, value);
+                                }
+                            }
+                    );
+                    for (String tag : amenity.getAdditionalInfoKeys()) {
+                        String value = amenity.getAdditionalInfo(tag);
+                        if (tag.startsWith(OBF_POINTS_GROUPS_PREFIX)) {
+                            List<String> values = Arrays.asList(value.split(OBF_POINTS_GROUPS_DELIMITER));
+                            switch (tag) {
+                                case OBF_POINTS_GROUPS_NAMES -> pgNames.addAll(values);
+                                case OBF_POINTS_GROUPS_ICONS -> pgIcons.addAll(values);
+                                case OBF_POINTS_GROUPS_COLORS -> pgColors.addAll(values);
+                                case OBF_POINTS_GROUPS_BACKGROUNDS -> pgBackgrounds.addAll(values);
+                            }
+                        } else if (!doNotSaveAmenityGpxTags.contains(tag)) {
+                            gpxFileExtensions.put(tag, value);
+                        }
+                    }
+                }
+            } else if (ROUTE_TRACK_POINT.equals(amenity.getSubType())) {
+                result.add(amenity);
+            } else {
+                String amenityLang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
+                if (Algorithms.stringsEqual(article.lang, amenityLang)) {
+                    result.add(amenity);
+                }
+            }
+        }
+        return result;
     }
 
     @NonNull
-    private ResultMatcher<Amenity> matchPointsAndTags(@NonNull TravelArticle article,
-                                                      @NonNull Map<Long, Amenity> amenityMap,
-                                                      @NonNull Map<String, String> gpxFileExtensions,
-                                                      @NonNull List<String> pgNames,
-                                                      @NonNull List<String> pgIcons,
-                                                      @NonNull List<String> pgColors,
-                                                      @NonNull List<String> pgBackgrounds,
-                                                      @NonNull HeightDataLoader.Cancellable isCancelled) {
+    private ResultMatcher<Amenity> getAmenityMatcher(@NonNull TravelArticle article,
+                                                     @NonNull Map<Long, Amenity> amenityMap,
+                                                     @NonNull HeightDataLoader.Cancellable isCancelled) {
         return new ResultMatcher<Amenity>() {
-            boolean isAlreadyProcessed = false;
             @Override
             public boolean publish(Amenity amenity) {
                 if (amenity.isClosed()) {
@@ -332,40 +521,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                     amenityMap.remove(amenity.getId());
                 }
                 if (amenity.getRouteId().equals(article.getRouteId())) {
-                    if (amenity.isRouteTrack()) {
-                        if (!isAlreadyProcessed) {
-                            isAlreadyProcessed = true;
-                            reconstructActivityFromAmenity(amenity, gpxFileExtensions);
-                            amenity.getNamesMap(true).forEach((lang, value) ->
-                                    {
-                                        if (!"ref".equals(lang) && !"sym".equals(lang)) {
-                                            gpxFileExtensions.put("name:" + lang, value);
-                                        }
-                                    }
-                            );
-                            for (String tag : amenity.getAdditionalInfoKeys()) {
-                                String value = amenity.getAdditionalInfo(tag);
-                                if (tag.startsWith(OBF_POINTS_GROUPS_PREFIX)) {
-                                    List<String> values = Arrays.asList(value.split(OBF_POINTS_GROUPS_DELIMITER));
-                                    switch (tag) {
-                                        case OBF_POINTS_GROUPS_NAMES -> pgNames.addAll(values);
-                                        case OBF_POINTS_GROUPS_ICONS -> pgIcons.addAll(values);
-                                        case OBF_POINTS_GROUPS_COLORS -> pgColors.addAll(values);
-                                        case OBF_POINTS_GROUPS_BACKGROUNDS -> pgBackgrounds.addAll(values);
-                                    }
-                                } else if (!doNotSaveAmenityGpxTags.contains(tag)) {
-                                    gpxFileExtensions.put(tag, value);
-                                }
-                            }
-                        }
-                    } else if (ROUTE_TRACK_POINT.equals(amenity.getSubType())) {
-                        amenityMap.put(amenity.getId(), amenity);
-                    } else {
-                        String amenityLang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
-                        if (Algorithms.stringsEqual(article.lang, amenityLang)) {
-                            amenityMap.put(amenity.getId(), amenity);
-                        }
-                    }
+                    amenityMap.put(amenity.getId(), amenity);
                 }
                 return false;
             }
