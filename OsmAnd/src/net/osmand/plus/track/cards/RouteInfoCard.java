@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
 import net.osmand.binary.ObfConstants;
-import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
 import net.osmand.shared.gpx.GpxFile;
@@ -52,12 +51,16 @@ import androidx.annotation.StringRes;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 import static net.osmand.data.Amenity.DESCRIPTION;
 import static net.osmand.data.Amenity.NAME;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_BBOX_RADIUS;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_SHORTLINK_TILES;
 import static net.osmand.shared.gpx.GpxUtilities.ACTIVITY_TYPE;
 
 import org.apache.commons.logging.Log;
 
 public class RouteInfoCard extends MapBaseCard {
-	public static final Set<String> HIDDEN_GPX_TAGS = Set.of(ACTIVITY_TYPE, NAME, DESCRIPTION);
+	public static final Set<String> HIDDEN_GPX_TAGS = Set.of(ACTIVITY_TYPE, NAME, DESCRIPTION,
+			ROUTE_BBOX_RADIUS, ROUTE_SHORTLINK_TILES, "translucent_line_colors");
+	private static final String HIDDEN_SHIELD_TAGS_PREFIX = "shield_";
 	public static final String OSM_RELATION_URL = "https://www.openstreetmap.org/relation/";
 	public static final String OSM_WAY_URL = "https://www.openstreetmap.org/way/";
 	private static final Map<String, Integer> TRANSLATABLE_KEYS = new HashMap<>();
@@ -135,7 +138,8 @@ public class RouteInfoCard extends MapBaseCard {
 			if (routeKey.type != OsmRouteType.UNKNOWN &&
 					(key.equals("name") || key.equals("type") || key.contains("osmc"))) {
 				continue;
-			} else if (HIDDEN_GPX_TAGS.contains(key) || GpxAppearanceInfo.isGpxAppearanceTag(key)) {
+			} else if (HIDDEN_GPX_TAGS.contains(key) || key.startsWith(HIDDEN_SHIELD_TAGS_PREFIX) ||
+					GpxAppearanceInfo.isGpxAppearanceTag(key)) {
 				continue;
 			} else if (key.contains(":") && !key.startsWith("name:") && !key.startsWith("ref:")) {
 				String mainTag = key.split(":")[1];
