@@ -250,4 +250,13 @@
     <string name="rendering_attr_showBusRoutes_name">Slighean bus</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">Slighean bus-troilidh</string>
     <string name="rendering_attr_showShareTaxiRoutes_name">Slighean spàl</string>
+    <string name="gpx_no_routes_title">Chan eil slighean ann</string>
+    <string name="rendering_value_category_name">Roinn-seòrsa</string>
+    <string name="rendering_value_all_name">Uile</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Seall tagaichean fixme</string>
+    <string name="rendering_value_omit_name">Fàg às</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Tagaichean fixme</string>
+    <string name="shared_string_open_street_map">OpenStreetMap</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_name">Tagaichean nòta</string>
+    <string name="rendering_attr_OSMMapperAssistantNote_description">Seall tagaichean nòta</string>
 </resources>
