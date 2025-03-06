@@ -151,6 +151,7 @@ import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.RouteActivityHelper;
 import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.shared.gpx.primitives.RouteActivity;
+import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
@@ -400,6 +401,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	public LatLon getLatLon() {
 		return latLon;
+	}
+
+	public GpxFile getGpxCopy() {
+		return new GpxFile(getGpx());
 	}
 
 	public GpxFile getGpx() {
@@ -1644,7 +1649,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public void openPlanRoute(int segmentIndex, @MeasurementToolMode int mode) {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
-			GpxFile gpxFile = getGpx();
+			GpxFile gpxFile = getGpxCopy();
 			MeasurementToolFragment.showInstance(activity, gpxFile, segmentIndex, mode);
 		}
 		hide();
