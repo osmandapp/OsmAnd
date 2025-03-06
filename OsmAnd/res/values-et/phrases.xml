@@ -975,7 +975,7 @@
     <string name="poi_village_green">Külaplats</string>
     <string name="poi_sailing">Purjetamine</string>
     <string name="poi_piste_downhill">Allasõidunõlv</string>
-    <string name="poi_piste_nordic">Murdmaanõlv</string>
+    <string name="poi_piste_nordic">Murdmaarada</string>
     <string name="poi_piste_skitour">Suusamatkanõlv</string>
     <string name="poi_piste_hike">Matkanõlv</string>
     <string name="poi_piste_sleigh">Kelgunõlv</string>
@@ -1381,7 +1381,7 @@
     <string name="poi_piste_difficulty_freeride">Vabasõit</string>
     <string name="poi_piste_grooming_classic">Klassikaline</string>
     <string name="poi_piste_grooming_classic_skating">Klassikaline+uisutamine</string>
-    <string name="poi_piste_grooming_backcountry">Tagamaa</string>
+    <string name="poi_piste_grooming_backcountry">Kõnnumaa</string>
     <string name="poi_piste_grooming_scooter">Tõukeratas</string>
     <string name="poi_piste_grooming_skating">Uisutamine</string>
     <string name="poi_piste_grooming_no">Ei</string>
@@ -4991,4 +4991,7 @@
     <string name="poi_barrier_bar">Staatiline tõkkepuu</string>
     <string name="poi_barrier_board">Lühike piirdetõke</string>
     <string name="poi_contact_website">Veebisait</string>
+    <string name="poi_lit">Valgustatud</string>
+    <string name="poi_piste_type">Nõlva tüüp</string>
+    <string name="poi_piste_oneway">Ühesuunaline rada/nõlv</string>
 </resources>
