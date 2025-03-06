@@ -301,7 +301,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 				val toolbar =
 					ExplorePlacesNearbyToolbarController(activity.supportFragmentManager)
 				toolbar.title =
-					app.getString(R.string.popular_places_nearby)
+					app.getString(R.string.popular_places)
 				toolbar.setRefreshBtnIconIds(
 					R.drawable.ic_flat_list_dark,
 					R.drawable.ic_flat_list_dark)
@@ -351,6 +351,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	}
 
 	private fun closeFragment() {
+		app.osmandMap.mapLayers.explorePlacesLayer.enableLayer(false)
 		mapActivity?.let { activity ->
 			val nearbyPlacesFragment = activity.fragmentsHelper.explorePlacesFragment
 			if (nearbyPlacesFragment != null) {
