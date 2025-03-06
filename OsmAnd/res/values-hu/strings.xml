@@ -5673,4 +5673,5 @@
     <string name="show_mercator_grids">Használjon Mercatort a WGS84 vagy az UTM helyett</string>
     <string name="show_mercator_grids_description">WGS84 vagy UTM helyett Mercatorban mutatja a rácsot</string>
     <string name="show_list">Lista mutatása</string>
+    <string name="popular_places">Népszerű helyek</string>
 </resources>
