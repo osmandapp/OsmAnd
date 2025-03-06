@@ -4,8 +4,8 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:paddingTop="@dimen/toolbar_height"
-	android:orientation="vertical">
+	android:orientation="vertical"
+	android:paddingTop="@dimen/toolbar_height">
 
 	<com.google.android.material.appbar.AppBarLayout
 		android:id="@+id/appbar"
@@ -40,6 +40,39 @@
 			android:orientation="vertical"
 			app:behavior_peekHeight="@dimen/bottom_sheet_menu_peek_height"
 			app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+			<LinearLayout
+				android:id="@+id/show_on_map_container"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/context_menu_buttons_bottom_height"
+				android:background="?attr/activity_background_color"
+				android:orientation="horizontal"
+				android:visibility="visible">
+
+				<ImageView
+					android:id="@+id/location_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical"
+					android:layout_marginStart="@dimen/content_padding"
+					android:src="@drawable/ic_action_marker_dark" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/show_on_map"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical|start"
+					android:layout_marginStart="@dimen/content_padding"
+					android:paddingTop="@dimen/list_header_padding"
+					android:paddingBottom="@dimen/list_header_padding"
+					android:text="@string/shared_string_show_on_map"
+					android:textAllCaps="true"
+					android:textColor="?attr/active_color_basic"
+					android:textSize="@dimen/default_desc_text_size"
+					app:typefaceWeight="medium"
+					tools:text="SHOW ALL"
+					tools:visibility="visible" />
+			</LinearLayout>
 
 			<LinearLayout
 				android:id="@+id/main_view"
