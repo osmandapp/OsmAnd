@@ -5702,4 +5702,5 @@
     <string name="show_dm_grids_description">Prikaži mrežu u stepenima i minutima umesto u stepenima ili DMS</string>
     <string name="show_dm_grids">Koristi DM umesto stepeni ili DMS</string>
     <string name="show_list">Prikaži listu</string>
+    <string name="popular_places">Popularna mesta</string>
 </resources>
