@@ -132,14 +132,18 @@ public class RouteInfoCard extends MapBaseCard {
 			String key = routeKey.getKeyFromTag(tag);
 			String value = routeKey.getValue(key);
 
-			if (routeKey.type != OsmRouteType.UNKNOWN) {
-				if (key.equals("name") || key.equals("type") || key.contains("osmc")) {
-					continue;
+			if (routeKey.type != OsmRouteType.UNKNOWN &&
+					(key.equals("name") || key.equals("type") || key.contains("osmc"))) {
+				continue;
+			} else if (HIDDEN_GPX_TAGS.contains(key) || GpxAppearanceInfo.isGpxAppearanceTag(key)) {
+				continue;
+			} else if (key.contains(":") && !key.startsWith("name:") && !key.startsWith("ref:")) {
+				String mainTag = key.split(":")[1];
+				if (routeKey.tags.stream().anyMatch((t) -> mainTag.equals(routeKey.getKeyFromTag(t)))) {
+					continue; // skip synthetic xxx:ref if ref exists (piste:ref, etc)
 				}
-			} else {
-				if (HIDDEN_GPX_TAGS.contains(key) || GpxAppearanceInfo.isGpxAppearanceTag(key)) {
-					continue;
-				}
+			} else if ("network".equals(key) && "#".equals(value)) {
+				continue; // avoid synthetic empty network caused by MapRenderingTypesEncoder.getNetwork()
 			}
 
 			RouteTag routeTag = new RouteTag(key, value);
@@ -315,7 +319,16 @@ public class RouteInfoCard extends MapBaseCard {
 					return app.getString(translatableKey.getValue());
 				}
 			}
-			return poiType != null ? poiType.getTranslation() : Algorithms.capitalizeFirstLetterAndLowercase(key);
+			if (poiType != null) {
+				return poiType.getTranslation();
+			} else {
+				String stringKey = key.toLowerCase().replace(":", "_");
+				String translatedAsPoiName = AndroidUtils.getStringByProperty(app, "poi_" + stringKey);
+				if (!Algorithms.isEmpty(translatedAsPoiName)) {
+					return translatedAsPoiName;
+				}
+				return Algorithms.capitalizeFirstLetterAndLowercase(key);
+			}
 		}
 
 		@NonNull

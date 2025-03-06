@@ -117,7 +117,7 @@ public abstract class SettingsItem {
 		// + Subfolder check correct
 		// - Where is type prefix ? filename same for different types
 		String n = getFileName();
-		return n != null && (n.equals(fileName) || fileName.startsWith(n + File.separator));
+		return n != null && (n.endsWith(fileName) || fileName.startsWith(n + File.separator));
 	}
 
 	public boolean shouldReadOnCollecting() {

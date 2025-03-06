@@ -97,6 +97,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private net.osmand.core.jni.MapMarker highlightedPointMarker;
 	private LatLon highlightedPointLocationCached;
 	private List<LatLon> xAxisPointsCached = new ArrayList<>();
+	private MapMarkersCollection projectionPointCollection;
+	private net.osmand.core.jni.MapMarker projectedPointMarker;
 
 	private interface ConditionMatcher {
 		boolean match();
@@ -295,7 +297,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		}
 	}
 
-	private void setHighlightedPointMarkerLocation(LatLon latLon) {
+	private void setHighlightedPointMarkerLocation(@NonNull LatLon latLon) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null && highlightedPointMarker != null) {
 			highlightedPointMarker.setPosition(new PointI(MapUtils.get31TileNumberX(latLon.getLongitude()),
@@ -332,6 +334,46 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 					chartPointsHelper.createHighlightedPointBitmap()));
 			highlightedPointMarker = builder.buildAndAddToCollection(highlightedPointCollection);
 			mapRenderer.addSymbolsProvider(highlightedPointCollection);
+		}
+	}
+
+	private void setProjectedPointMarkerLocation(double lat, double lon) {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && projectedPointMarker != null) {
+			projectedPointMarker.setPosition(new PointI(MapUtils.get31TileNumberX(lon),
+					MapUtils.get31TileNumberY(lat)));
+		}
+	}
+
+	private void setProjectedPointMarkerVisibility(boolean visible) {
+		if (projectedPointMarker != null) {
+			projectedPointMarker.setIsHidden(!visible);
+		}
+	}
+
+	private void recreateProjectedPointCollection() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			if (projectionPointCollection != null) {
+				mapRenderer.removeSymbolsProvider(projectionPointCollection);
+			}
+			projectionPointCollection = new MapMarkersCollection();
+			MapMarkerBuilder builder = new MapMarkerBuilder();
+			builder.setBaseOrder(getPointsOrder() - 2110);
+			builder.setIsAccuracyCircleSupported(false);
+			builder.setIsHidden(true);
+			builder.setPinIcon(NativeUtilities.createSkImageFromBitmap(
+					chartPointsHelper.createHighlightedPointBitmap()));
+			projectedPointMarker = builder.buildAndAddToCollection(projectionPointCollection);
+			mapRenderer.addSymbolsProvider(projectionPointCollection);
+		}
+	}
+
+	private void removeProjectedPointCollection() {
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null && projectionPointCollection != null) {
+			mapRenderer.removeSymbolsProvider(projectionPointCollection);
+			projectedPointMarker = null;
 		}
 	}
 
@@ -567,16 +609,32 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				}
 			}
 			if (directTo) {
-				//add projection point on original route
-				double[] projectionOnRoute = calculateProjectionOnRoutePoint(helper, tb);
-				if (projectionOnRoute != null && canvas != null) {
-					drawProjectionPoint(canvas, projectionOnRoute);
+				MapRendererView mapRenderer = getMapRenderer();
+				if (mapRenderer != null) {
+					if (projectionPointCollection == null || mapActivityInvalidated || mapRendererChanged) {
+						recreateProjectedPointCollection();
+					}
+					double[] projectionOnRoute = calculateProjectionOnRoutePoint(helper, tb, false);
+					//double[] projectionOnRoute = calculateProjectionOnRoutePoint(helper);
+					if (projectionOnRoute != null) {
+						setProjectedPointMarkerLocation(projectionOnRoute[0], projectionOnRoute[1]);
+					}
+					setProjectedPointMarkerVisibility(projectionOnRoute != null);
+				} else {
+					//add projection point on original route
+					double[] projectionOnRoute = calculateProjectionOnRoutePoint(helper, tb, true);
+					if (projectionOnRoute != null && canvas != null) {
+						drawProjectionPoint(canvas, projectionOnRoute);
+					}
 				}
+			} else {
+				removeProjectedPointCollection();
 			}
 		}
 	}
-	
-	private double[] calculateProjectionOnRoutePoint(RoutingHelper helper, RotatedTileBox box) {
+
+	@Nullable
+	private double[] calculateProjectionOnRoutePoint(RoutingHelper helper, RotatedTileBox box, boolean outPixel) {
 		double[] projectionXY = null;
 		Location ll = helper.getLastFixedLocation();
 		RouteCalculationResult route = helper.getRoute();
@@ -593,15 +651,30 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			double baDist = route.getDistanceFromPoint(cr - 1) - route.getDistanceFromPoint(cr);
 			Location target = locs.get(locIndex);
 			double dTarget = ll.distanceTo(target);
-			int aX = box.getPixXFromLonNoRot(loc1.getLongitude());
-			int aY = box.getPixYFromLatNoRot(loc1.getLatitude());
-			int bX = box.getPixXFromLonNoRot(loc2.getLongitude());
-			int bY = box.getPixYFromLatNoRot(loc2.getLatitude());
-			if (baDist != 0) {
-				double CF = (dTarget - distLeft) / baDist;
-				double rX = bX - CF * (bX - aX);
-				double rY = bY - CF * (bY - aY);
-				projectionXY = new double[] {rX, rY};
+			if (outPixel) {
+				int aX = box.getPixXFromLonNoRot(loc1.getLongitude());
+				int aY = box.getPixYFromLatNoRot(loc1.getLatitude());
+				int bX = box.getPixXFromLonNoRot(loc2.getLongitude());
+				int bY = box.getPixYFromLatNoRot(loc2.getLatitude());
+				if (baDist != 0) {
+					double CF = (dTarget - distLeft) / baDist;
+					double rX = bX - CF * (bX - aX);
+					double rY = bY - CF * (bY - aY);
+					projectionXY = new double[]{rX, rY};
+				}
+			} else {
+				double l1Lon = loc1.getLongitude();
+				double l1Lat = loc1.getLatitude();
+				double l2Lon = loc2.getLongitude();
+				double l2Lat = loc2.getLatitude();
+				if (baDist != 0) {
+					double CF = (dTarget - distLeft) / baDist;
+					double lon = l2Lon - CF * (l2Lon - l1Lon);
+					double lat = l2Lat - CF * (l2Lat - l1Lat);
+					return new double[]{l2Lat, l2Lon};
+				} else {
+					return null;
+				}
 			}
 		}
 		if (projectionXY != null) {

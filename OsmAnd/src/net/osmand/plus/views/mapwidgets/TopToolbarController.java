@@ -23,6 +23,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 public class TopToolbarController {
 
 	public enum TopToolbarControllerType {
+		EXPLORE_PLACES_NEARBY,
 		QUICK_SEARCH,
 		CONTEXT_MENU,
 		TRACK_DETAILS,

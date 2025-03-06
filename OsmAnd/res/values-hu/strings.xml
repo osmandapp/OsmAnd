@@ -4484,7 +4484,7 @@
     <string name="ant_heart_rate_write_gpx_desc">Pulzusszám belefoglalása a nyomvonalba</string>
     <string name="depth_contours">Mélységvonalak</string>
     <string name="worldwide_maps">Térképek világszerte</string>
-    <string name="map_widget_target_distance">Szemmagasság</string>
+    <string name="map_widget_target_distance">Távolság a kamerától az úticélig</string>
     <string name="favorites_backup">Kedvencek biztonsági mentése</string>
     <string name="shared_string_cross_buy">Több platformra érvényes vásárlás</string>
     <string name="purchases_feature_desc_cross_buy">Használja előfizetésének funkcióit különböző platformokon (Android/iOS/web) további költségek nélkül.</string>
@@ -5672,4 +5672,6 @@
     <string name="show_dm_grids">Használjon fok-percet a csak fok vagy fok-perc-mp helyett</string>
     <string name="show_mercator_grids">Használjon Mercatort a WGS84 vagy az UTM helyett</string>
     <string name="show_mercator_grids_description">WGS84 vagy UTM helyett Mercatorban mutatja a rácsot</string>
+    <string name="show_list">Lista mutatása</string>
+    <string name="popular_places">Népszerű helyek</string>
 </resources>

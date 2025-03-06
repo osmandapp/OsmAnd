@@ -18,6 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.search.NearbyPlacesAdapter;
+import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener;
 import net.osmand.plus.search.listitems.NearbyPlacesCard;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.fragments.HistoryItemsFragment;

@@ -1974,10 +1974,10 @@
     <string name="mapillary_descr">Internet slike ulica za sve. Otkrij mesta, sarađujte, osvojite svet.</string>
     <string name="mapillary_widget_descr">Omogućava brzi doprinos Mapilariju.</string>
     <string name="mapillary_widget">Mapillary vidžet</string>
-    <string name="mapillary_action_descr">Podeli svoj pogled sa ulice preko Mapilara.</string>
+    <string name="mapillary_action_descr">Podelite svoj pogled na nivou ulice putem Mapillary.</string>
     <string name="no_photos_descr">Nema slika ovde.</string>
     <string name="shared_string_add_photos">Dodaj slike</string>
-    <string name="online_photos">Slike sa interneta</string>
+    <string name="online_photos">Fotografije sa interneta</string>
     <string name="improve_coverage_install_mapillary_desc">Instaliraj Mapillary da doda slike za ovu lokaciju.</string>
     <string name="improve_coverage_mapillary">Poboljšaj pokrivenost slika koristeći Mapilari</string>
     <string name="shared_string_install">Instaliraj</string>
@@ -3893,7 +3893,7 @@
     <string name="online_maps_searching_descr">Traži na mreži…</string>
     <string name="shared_string_relation">Relacija</string>
     <string name="attribute">Atributi</string>
-    <string name="shared_string_view_all">Pogledati sve</string>
+    <string name="shared_string_view_all">Pogledaj sve</string>
     <string name="purchases_feature_desc_nautical">Pristupi informacijama o nautičkoj dubini</string>
     <string name="backup_delete_all_data">Obriši sve moje podatke</string>
     <string name="loading_list_of_routing_services">Učitava se lista dostupnih usluga rutiranja</string>
@@ -5115,7 +5115,7 @@
     <string name="trash_is_empty">Kanta otpada je prazna</string>
     <string name="shared_string_trash">Otpad</string>
     <string name="all_folders">Svi folderi</string>
-    <string name="shared_string_show_less">Prikazati manje</string>
+    <string name="shared_string_show_less">Prikaži manje</string>
     <string name="root_folder">Rut folder</string>
     <string name="shared_string_loading">Učitavanje</string>
     <string name="searching_matching_tracks">Pretraži sve podudarne trase</string>
@@ -5453,13 +5453,13 @@
     <string name="change_activity">Promeni aktivnost</string>
     <string name="shared_string_increase">Povećanje</string>
     <string name="shared_string_decrease">Smanjenje</string>
-    <string name="open_in_browser">Otvori u pretraživaču</string>
+    <string name="open_in_browser">Otvori u internet pretraživaču</string>
     <string name="shared_string_source">Izvor</string>
     <string name="shared_string_no_internet_connection">Nema interneta</string>
-    <string name="no_internet_descr">Proveri svoju vezu i pokušaj ponovo.</string>
-    <string name="no_photos_available_descr">Još uvek nije dodata nijedna korisnička fotografija na ovu lokaciju</string>
+    <string name="no_internet_descr">Proverite internet i pokušajte ponovo.</string>
+    <string name="no_photos_available_descr">Za ovu lokaciju još nisu dodate fotografije korisnika</string>
     <string name="no_photos_available">Nema dostupnih fotografija</string>
-    <string name="wikimedia">Vikimedia</string>
+    <string name="wikimedia">Vikimedija</string>
     <string name="unit_volt">V</string>
     <string name="obd_fuel_type_not_provided">Nije navedena vrsta goriva</string>
     <string name="obd_fuel_type_gasoline">Benzin</string>
@@ -5701,4 +5701,6 @@
     <string name="show_dms_grids_description">Prikaži mrežu u stepenima, minutima, sekundama umesto u stepenima</string>
     <string name="show_dm_grids_description">Prikaži mrežu u stepenima i minutima umesto u stepenima ili DMS</string>
     <string name="show_dm_grids">Koristi DM umesto stepeni ili DMS</string>
+    <string name="show_list">Prikaži listu</string>
+    <string name="popular_places">Popularna mesta</string>
 </resources>

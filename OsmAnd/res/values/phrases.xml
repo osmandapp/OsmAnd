@@ -5554,4 +5554,8 @@
 
 	<string name="poi_contact_website">Website</string>
 
+	<string name="poi_lit">Lighting</string>
+	<string name="poi_piste_type">Piste type</string>
+	<string name="poi_piste_oneway">Piste oneway</string>
+
 </resources>

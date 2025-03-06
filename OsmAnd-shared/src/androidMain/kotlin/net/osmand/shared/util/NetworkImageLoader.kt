@@ -14,7 +14,7 @@ import coil3.toBitmap
 class NetworkImageLoader(private val context: Context, useDiskCache: Boolean = false) {
 
     companion object {
-        private const val DISK_CACHE_SIZE = 1024 * 1024 * 100L // 100MB
+        private const val DISK_CACHE_SIZE = 1024 * 1024 * 300L // 300MB
         private const val DISK_IMAGES_CACHE_DIR = "net_images_cache"
     }
 
@@ -69,8 +69,7 @@ interface ImageLoaderCallback {
 
 class LoadingImage(val url: String, private val disposable: Disposable) {
 
-    fun cancel(): Boolean {
+    fun cancel() {
         disposable.dispose()
-        return true
     }
 }

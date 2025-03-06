@@ -6110,4 +6110,5 @@
     <string name="hmd_promo">Promo HMD selama %1$s bulan</string>
     <string name="hmd_promo_description">Akses fitur secara gratis termasuk pengunduhan peta tidak terbatas, relief 3D, dll. selama %1$s bulan</string>
     <string name="shared_string_road_exit">Keluar</string>
+    <string name="show_list">Tampilkan daftar</string>
 </resources>

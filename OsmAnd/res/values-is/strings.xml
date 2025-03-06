@@ -5393,7 +5393,7 @@
     <string name="track_vertical_exaggeration_description">Með því að breyta gildi kvarðans geturðu breytt hæð þrívíddarferilsins.</string>
     <string name="shared_string_source">Uppruni</string>
     <string name="shared_string_no_internet_connection">Engin internettenging</string>
-    <string name="no_internet_descr">Athugaðu hvort það sé allt í lagi með nettenginguna og reyndu aftur.</string>
+    <string name="no_internet_descr">Athugaðu nettenginguna þína og reyndu aftur.</string>
     <string name="no_photos_available_descr">Engum notendamyndum hefur ennþá verið bætt við þessa staðsetningu</string>
     <string name="no_photos_available">Engar ljósmyndir tiltækar</string>
     <string name="contour_layers_action_descr">Breyta hæðarlínuþekjum</string>
@@ -5701,4 +5701,5 @@
     <string name="show_mercator_grids_description">Birta hnitanet í Mercator-km í staðinn fyrir WGS84 eða UTM</string>
     <string name="show_dms_grids_description">Birta hnitanet í gráður, mínútur, sekúndur í staðinn fyrir gráður</string>
     <string name="show_dm_grids">Nota DM í staðinn fyrir gráður eða DMS</string>
+    <string name="show_list">Birta lista</string>
 </resources>

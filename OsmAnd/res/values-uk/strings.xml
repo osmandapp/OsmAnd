@@ -5727,4 +5727,5 @@
     <string name="show_dms_grids">Використовувати DMS замість градусів</string>
     <string name="show_mercator_grids">Використовувати Mercator замість WGS84 або UTM</string>
     <string name="show_list">Показати список</string>
+    <string name="popular_places">Популярні місця</string>
 </resources>

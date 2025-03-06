@@ -461,7 +461,7 @@ public class Amenity extends MapObject {
 	public String getGpxFileName(String lang) {
 		final String gpxFileName = lang != null ? getName(lang) : getEnName(true);
 		if (!Algorithms.isEmpty(gpxFileName)) {
-			return gpxFileName;
+			return Algorithms.sanitizeFileName(gpxFileName);
 		}
 		if (!Algorithms.isEmpty(getRouteId())) {
 			return getRouteId();
