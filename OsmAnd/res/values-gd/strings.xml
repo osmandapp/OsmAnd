@@ -260,4 +260,11 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Tagaichean nòta</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Seall tagaichean nòta</string>
     <string name="shared_string_used">Air a\' chleachdadh</string>
+    <string name="shared_string_size">Meud</string>
+    <string name="created_on">Chruthaich air</string>
+    <string name="shared_string_statistics">Staitistigean</string>
+    <string name="distance_between_points">Astar eadar puingean</string>
+    <string name="gps_filter_smoothing">A\' rèidheachadh</string>
+    <string name="save_as_copy">Sàbhail mar lethbhreac</string>
+    <string name="shared_string_gps_filter">Sìolachan GPS</string>
 </resources>
