@@ -1,5 +1,6 @@
 package net.osmand.plus.card.base.multistate;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -28,6 +29,14 @@ public class MultiStateCard extends BaseCard implements IMultiStateCard {
 	@Override
 	public int getCardLayoutId() {
 		return R.layout.card_multi_state;
+	}
+
+	@NonNull
+	@Override
+	public View build(@NonNull Context ctx) {
+		View view = super.build(ctx);
+		controller.onCardViewBuilt(view);
+		return view;
 	}
 
 	@Override
@@ -73,6 +82,13 @@ public class MultiStateCard extends BaseCard implements IMultiStateCard {
 	}
 
 	@Override
+	@NonNull
+	public TextView getCardTitleView() {
+		return view.findViewById(R.id.card_title);
+	}
+
+	@Override
+	@NonNull
 	public View getSelectorView() {
 		return view.findViewById(R.id.card_selector);
 	}
@@ -80,5 +96,10 @@ public class MultiStateCard extends BaseCard implements IMultiStateCard {
 	@Override
 	public FragmentActivity getActivity() {
 		return activity;
+	}
+
+	@NonNull
+	public IMultiStateCardController getController() {
+		return controller;
 	}
 }

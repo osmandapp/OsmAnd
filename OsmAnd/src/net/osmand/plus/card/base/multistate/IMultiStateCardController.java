@@ -21,6 +21,9 @@ public interface IMultiStateCardController {
 	void onBindCardContent(@NonNull FragmentActivity activity,
 	                       @NonNull ViewGroup container, boolean nightMode, boolean usedOnMap);
 
+	default void onCardViewBuilt(@NonNull View view) {
+	}
+
 	default boolean shouldShowCardHeader() {
 		return true;
 	}
