@@ -10,13 +10,6 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-    <string name="tag_lit">Lighting</string>
-    <string name="tag_piste_name">Name</string>
-    <string name="tag_piste_type">Type</string>
-    <string name="tag_piste_oneway">Oneway</string>
-    <string name="tag_piste_ref">Reference</string>
-    <string name="tag_piste_difficulty">Difficulty</string>
-    <string name="tag_piste_grooming">Piste grooming</string>
     <string name="show_list">Show list</string>
     <string name="save_favorite_default_appearance">Apply changes to the existing points in the folder or only to new ones?</string>
 	<string name="original_color_description">Each point would keep its own color.</string>
