@@ -43,7 +43,7 @@ public class WikiCoreHelper {
 	public static final String WIKIMEDIA_CATEGORY = "Category:";
 	private static final int THUMB_SIZE = 480;
 	private static final int ICON_SIZE = 64;
-	public static final String OSMAND_API_ENDPOINT = "http://10.0.2.2:8080/api/";
+	public static final String OSMAND_API_ENDPOINT = "https://osmand.net/api/";
 	public static final String OSMAND_SEARCH_ENDPOINT = "https://osmand.net/search/";
 	private static final String WIKI_PLACE_ACTION = "wiki_place?";
 	private static final String GET_WIKI_DATA_ACTION = "get-wiki-data?";
