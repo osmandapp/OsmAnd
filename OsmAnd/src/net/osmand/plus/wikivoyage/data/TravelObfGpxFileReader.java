@@ -88,6 +88,9 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
     private final TravelArticle article;
     private final TravelHelper.GpxReadCallback callback;
     private final List<AmenityIndexRepository> repos;
+    private final double MIN_COMPLEXITY = 4.0; // POI each 4 km, if less - more complex route
+    private final int MAP_SEARCH_RADIUS = 100; // meters
+    private final double GEOMETRY_PRECISION = 0.0005d; // ~50 meters
 
     public TravelObfGpxFileReader(@NonNull MapActivity mapActivity,
                                   @NonNull TravelArticle article,
@@ -289,6 +292,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             };
         }
         Amenity amenity = travelGpx.amenity;
+        double distance = -1;
         if (amenity != null && !Algorithms.isEmpty(amenity.getSubType())) {
             final String subtype = amenity.getSubType();
             poiTypeFilter = new BinaryMapIndexReader.SearchPoiTypeFilter() {
@@ -302,7 +306,14 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                     return false;
                 }
             };
-            String tiles = amenity.getAdditionalInfo("route_shortlink_tiles");
+            String dist = amenity.getAdditionalInfo("distance");
+            if (!Algorithms.isEmpty(dist)) {
+                try {
+                    distance = Double.parseDouble(dist);
+                } catch (NumberFormatException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
         } else {
             // users GPX
             poiTypeFilter = getSearchFilter(travelGpx.getMainFilterString(), travelGpx.getPointFilterString());
@@ -344,22 +355,35 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                     pointRequest.setBBoxRadius(travelGpx.lat, travelGpx.lon, travelGpx.routeRadius);
                 }
 
-                if (isPoiSectionIntersect(repo, pointRequest)) {
-                    repo.searchPoi(pointRequest);
+                if (!isPoiSectionIntersect(repo, pointRequest)) {
+                    continue;
+                }
+
+                repo.searchPoi(pointRequest);
+                if (currentList.isEmpty()) {
+                    continue;
+                }
+                if (getComplexity(distance, currentList.size()) < MIN_COMPLEXITY) {
+                    sr = BinaryMapIndexReader.buildSearchRequest(left, right, top, bottom, 15, searchFilter,
+                            matchSegmentsByRefTitleRouteId(travelGpx, binaryMapDataObjectMap, isCancelled));
+                    System.out.println(repo.getFile().getName() + " BIG BBOX");
                     repo.searchMapIndex(sr);
-                    /*for (Amenity am : currentList) {
+                    mapCnt++;
+                } else {
+                    for (Amenity am : currentList) {
                         if (!processedAmenity.contains(am.getId())) {
                             if (!isPoiSectionIntersect(repo, am)) {
                                 continue;
                             }
-                            sr.setBBoxRadius(am.getLocation().getLatitude(), am.getLocation().getLongitude(), 50);
+                            sr.setBBoxRadius(am.getLocation().getLatitude(), am.getLocation().getLongitude(), MAP_SEARCH_RADIUS);
                             repo.searchMapIndex(sr);
                             mapCnt++;
                             findAmenityOutOfGeometry(currentList, binaryMapDataObjectMap.values(), processedAmenity);
                             processedAmenity.add(am.getId());
                         }
-                    }*/
+                    }
                 }
+
                 if (isUserGPX && !Algorithms.isEmpty(binaryMapDataObjectMap)) {
                     break; // speed up reading of User's GPX files
                 }
@@ -375,13 +399,22 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
         return !isCancelled.isCancelled();
     }
 
+    private double getComplexity(double dist, int pointsSize) {
+        if (dist < 1) {
+            return MIN_COMPLEXITY;
+        }
+        double c = dist /  pointsSize;
+        boolean isMeters = c > 100;
+        return isMeters ? c / 1000 : c;
+    }
+
     private void findAmenityOutOfGeometry(final Collection<Amenity> amenities, Collection<BinaryMapDataObject> objects, HashSet<Long> proccesedAmenity) {
         for (BinaryMapDataObject object : objects) {
-            for (int i = 1; i < object.getPointsLength() - 1; i++) {
+            for (int i = 0; i < object.getPointsLength(); i++) {
                 LatLon latLon = new LatLon(MapUtils.get31LatitudeY(object.getPoint31YTile(i)), MapUtils.get31LongitudeX(object.getPoint31XTile(i)));
                 for (Amenity am : amenities) {
                     if (!proccesedAmenity.contains(am.getId())) {
-                        if (MapUtils.areLatLonEqual(latLon, am.getLocation(), 0.0002)) {
+                        if (MapUtils.areLatLonEqual(latLon, am.getLocation(), GEOMETRY_PRECISION)) {
                             proccesedAmenity.add(am.getId());
                         }
                     }
