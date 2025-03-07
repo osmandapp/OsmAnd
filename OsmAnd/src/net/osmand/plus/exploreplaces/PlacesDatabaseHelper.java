@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 public class PlacesDatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "places-1.db";
+    private static final String DATABASE_NAME = "places.db";
 
     private static final long DATA_EXPIRATION_TIME = TimeUnit.DAYS.toMillis(30); // 1 month
 
@@ -43,7 +43,12 @@ public class PlacesDatabaseHelper extends SQLiteOpenHelper {
     private Gson gson = new Gson();
 
     public PlacesDatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, context.getCacheDir() + File.separator + DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    @Override
+    public SQLiteDatabase getWritableDatabase() {
+        return super.getWritableDatabase();
     }
 
     @Override
