@@ -61,7 +61,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.auto.views.CarSurfaceView;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.card.color.palette.migration.ColorsMigrationAlgorithmV2;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.TwoFingerTapDetector;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
@@ -127,6 +126,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private boolean DISABLE_MAP_LAYERS;
 	private StateChangedListener<Boolean> disableMapLayersListener;
+
+	private StateChangedListener<Boolean> showCoordinatesGridListener;
+	private StateChangedListener<Object> gridFormatListener;
 
 	private View view;
 	private final Context ctx;
@@ -314,6 +316,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		DISABLE_MAP_LAYERS = settings.DISABLE_MAP_LAYERS.get();
 		disableMapLayersListener = change -> DISABLE_MAP_LAYERS = change;
 		settings.DISABLE_MAP_LAYERS.addListener(disableMapLayersListener);
+
+		// Grid settings listeners
+		showCoordinatesGridListener = change -> applyGridSettings();
+		gridFormatListener = change -> applyGridSettings();
+
+		// Register Grid settings listeners
+		settings.SHOW_COORDINATES_GRID.addListener(showCoordinatesGridListener);
+//		settings.COORDINATE_GRID_FORMAT.addListener(gridFormatListener);
 	}
 
 	public void updateDisplayMetrics(DisplayMetrics dm, int width, int height) {
@@ -2551,6 +2561,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			mapRenderer.enableBatterySavingMode();
 		} else {
 			mapRenderer.disableBatterySavingMode();
+		}
+	}
+
+	public void applyGridSettings() {
+		if (mapRenderer != null) {
+			applyGridSettings(mapRenderer);
 		}
 	}
 

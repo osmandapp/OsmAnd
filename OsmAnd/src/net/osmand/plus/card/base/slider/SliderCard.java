@@ -41,8 +41,8 @@ public class SliderCard extends BaseCard implements ISliderCard {
 
 	private void setupSlider() {
 		Limits sliderLimits = controller.getSliderLimits();
-		int min = (int) sliderLimits.getMin();
-		int max = (int) sliderLimits.getMax();
+		int min = (int) sliderLimits.min();
+		int max = (int) sliderLimits.max();
 		int selected = controller.getSelectedSliderValue();
 
 		slider.setValueFrom(min);

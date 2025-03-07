@@ -67,6 +67,7 @@ import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
+import net.osmand.plus.configmap.GridZoomLevelsController;
 import net.osmand.plus.configmap.routes.MtbClassification;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.feedback.RateUsState;
@@ -3324,6 +3325,12 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> SHOW_COORDINATES_GRID =
 			new BooleanPreference(this, "show_coordinates_grid", false).makeProfile();
+
+	public final CommonPreference<Integer> COORDINATE_GRID_MIN_ZOOM =
+			new IntPreference(this, "coordinate_grid_min_zoom", GridZoomLevelsController.MIN_LIMIT).makeProfile();
+
+	public final CommonPreference<Integer> COORDINATE_GRID_MAX_ZOOM =
+			new IntPreference(this, "coordinate_grid_max_zoom", GridZoomLevelsController.MAX_LIMIT).makeProfile();
 
 	public Set<String> getCustomAppModesKeys() {
 		String appModesKeys = CUSTOM_APP_MODES_KEYS.get();

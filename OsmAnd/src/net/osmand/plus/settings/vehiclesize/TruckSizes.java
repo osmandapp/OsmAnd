@@ -48,7 +48,7 @@ public class TruckSizes extends VehicleSizes {
 			SizeData data = getSizeData(type);
 			Limits limits = VehicleAlgorithms.convertWeightLimitsByMetricSystem(
 					data.getLimits(), metric.getWeightMetric(), useKilogramsInsteadOfTons());
-			float min = limits.getMin();
+			float min = limits.min();
 			if (value < min) {
 				String errorMessagePattern = ctx.getString(R.string.common_weight_limit_error);
 				String minWeightFormatted = formatValue(min);
