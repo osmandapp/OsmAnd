@@ -298,4 +298,7 @@
     <string name="shared_string_feet">troigh</string>
     <string name="progress_complete">%1$s dèanta</string>
     <string name="reading_files">A\' leughadh faidhleachan…</string>
+    <string name="obd_fuel_type_lpg">LPG</string>
+    <string name="storage_copying_files_size">A\' dèanamh lethbhreac de %1$s faidhle(achan) %2$s</string>
+    <string name="shared_string_migration">Imrich</string>
 </resources>
