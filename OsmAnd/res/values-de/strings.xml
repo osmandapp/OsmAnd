@@ -5732,4 +5732,5 @@
     <string name="show_dm_grids_description">Zeige Gitter in Grad und Minuten statt in Grad oder DMS</string>
     <string name="show_dms_grids_description">Gitter in Grad, Minuten, Sekunden anzeigen statt in Grad</string>
     <string name="show_list">Liste anzeigen</string>
+    <string name="choose_location">Wählen Sie einen Standort</string>
 </resources>
