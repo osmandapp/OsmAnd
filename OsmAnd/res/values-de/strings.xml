@@ -2139,7 +2139,7 @@
     <string name="add_new_folder">Neuen Ordner hinzufügen</string>
     <string name="shared_string_slope">Hangneigung</string>
     <string name="relief_smoothness_factor_descr">Bevorzugte Geländeform: flach oder bergig.</string>
-    <string name="lang_ber">Berber</string>
+    <string name="lang_ber">Berberisch</string>
     <string name="do_not_send_anonymous_app_usage">Keine anonymen App-Nutzungsdaten versenden</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd sammelt Informationen über durch Sie geöffnete App-Teile. Ihr Standort wird niemals gesendet, ebenso wenig wie Ihre App-Eingaben oder Einzelheiten zu den von Ihnen betrachteten, gesuchten oder heruntergeladenen Gebieten.</string>
     <string name="do_not_show_startup_messages">Keine Startmeldungen anzeigen</string>
@@ -5122,7 +5122,7 @@
     <string name="root_folder">Root-Verzeichnis</string>
     <string name="shared_string_rows">Zeilen</string>
     <string name="all_folders">Alle Verzeichnisse</string>
-    <string name="shared_string_show_less">Weniger anzeigen</string>
+    <string name="shared_string_show_less">Weniger zeigen</string>
     <string name="folder">Verzeichnis</string>
     <string name="not_specified">Nicht spezifiziert</string>
     <string name="key_event_action_zoom_in">Hineinzoomen</string>
@@ -5539,7 +5539,7 @@
     <string name="obd_vin_desc">VIN-Code über OBD</string>
     <string name="vehicle_metrics_plugin_settings">Fahrzeugdaten-Einstellungen</string>
     <string name="reset_average_speed">Durchschnittliche Geschwindigkeit zurücksetzen</string>
-    <string name="quick_action_verb_start_pause">Start / Pause</string>
+    <string name="quick_action_verb_start_pause">Start/Pause</string>
     <string name="help_article_personal_color_palette_schemes_name">Farbschemen</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="movies_list">Filmliste</string>
