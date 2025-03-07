@@ -758,7 +758,7 @@ public class MapMarkersHelper {
 	public void addMapMarkers(@NonNull List<LatLon> points,
 	                          @NonNull List<PointDescription> historyNames,
 	                          @Nullable List<String> mapObjNames) {
-		if (points.size() > 0) {
+		if (!points.isEmpty()) {
 			ctx.getSettings().SHOW_MAP_MARKERS.set(true);
 			int colorIndex = -1;
 			List<MapMarker> addedMarkers = new ArrayList<>();
@@ -771,15 +771,7 @@ public class MapMarkersHelper {
 				if (pointDescription.isLocation() && Algorithms.isEmpty(pointDescription.getName())) {
 					pointDescription.setName(PointDescription.getSearchAddressStr(ctx));
 				}
-				if (colorIndex == -1) {
-					if (mapMarkers.size() > 0) {
-						colorIndex = (mapMarkers.get(0).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
-					} else {
-						colorIndex = 0;
-					}
-				} else {
-					colorIndex = (colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
-				}
+				colorIndex = getNextMarkerColorIndex(colorIndex);
 
 				MapMarker marker = new MapMarker(point, pointDescription, colorIndex);
 				marker.mapObjectName = mapObjName;
@@ -796,6 +788,19 @@ public class MapMarkersHelper {
 			}
 			addMarkersToGroups(addedMarkers);
 		}
+	}
+
+	public int getNextMarkerColorIndex(int colorIndex) {
+		if (colorIndex == -1) {
+			if (!mapMarkers.isEmpty()) {
+				colorIndex = (mapMarkers.get(0).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
+			} else {
+				colorIndex = 0;
+			}
+		} else {
+			colorIndex = (colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
+		}
+		return colorIndex;
 	}
 
 	public void updateMapMarker(MapMarker marker, boolean save) {

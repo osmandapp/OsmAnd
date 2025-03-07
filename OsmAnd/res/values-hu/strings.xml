@@ -5673,4 +5673,10 @@
     <string name="show_mercator_grids">Használjon Mercatort a WGS84 vagy az UTM helyett</string>
     <string name="show_mercator_grids_description">WGS84 vagy UTM helyett Mercatorban mutatja a rácsot</string>
     <string name="show_list">Lista mutatása</string>
+    <string name="popular_places">Népszerű helyek</string>
+    <string name="point_location">Helypont</string>
+    <string name="shared_string_manual">Kézi</string>
+    <string name="choose_location_on_map">Válasszon egy helyet a térképen.</string>
+    <string name="choose_location">Válasszon egy helyet</string>
+    <string name="shared_string_map_center">Térkép közepe</string>
 </resources>

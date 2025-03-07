@@ -539,7 +539,7 @@
     <string name="poi_monitoring_station">Seirejaam</string>
     <string name="poi_capital">Jah;pealinn</string>
     <string name="poi_recycling_centre">Taaskasutuskeskus</string>
-    <string name="poi_recycling_container">Konteiner</string>
+    <string name="poi_recycling_container">Prügikonteiner</string>
     <string name="poi_recycling_glass">Klaas</string>
     <string name="poi_recycling_paper">Paber</string>
     <string name="poi_recycling_clothes">Riided</string>
@@ -549,7 +549,7 @@
     <string name="poi_recycling_scrap_metal">Vanametall</string>
     <string name="poi_recycling_batteries">Patareid</string>
     <string name="poi_recycling_plastic_bottles">Plastpudelid</string>
-    <string name="poi_recycling_green_waste">Rohelised jäätmed</string>
+    <string name="poi_recycling_green_waste">Komposteeritavad jäätmed</string>
     <string name="poi_recycling_waste">Jäätmed (mustad kotid)</string>
     <string name="poi_recycling_plastic_packaging">Plastpakendid</string>
     <string name="poi_recycling_newspaper">Ajalehed</string>
@@ -575,13 +575,13 @@
     <string name="poi_recycling_plastic_bags">Kilekotid</string>
     <string name="poi_recycling_hazardous_waste">Ohtlikud jäätmed</string>
     <string name="poi_recycling_mobile_phones">Mobiiltelefonid</string>
-    <string name="poi_recycling_hydrargyrum">Hüdrargum</string>
+    <string name="poi_recycling_hydrargyrum">Elavhõbe</string>
     <string name="poi_recycling_computers">Arvutid</string>
     <string name="poi_recycling_tyres">Rehvid</string>
-    <string name="poi_recycling_tv_monitor">TV, monitorid</string>
+    <string name="poi_recycling_tv_monitor">Telerid ja monitorid</string>
     <string name="poi_recycling_tetrapak">Tetrapakk</string>
     <string name="poi_recycling_rubble">Killustik</string>
-    <string name="poi_recycling_cds">CD plaadid</string>
+    <string name="poi_recycling_cds">CD-plaadid</string>
     <string name="poi_recycling_waste_oil">Õlijäätmed</string>
     <string name="poi_recycling_bottles">Pudelid</string>
     <string name="poi_recycling_cork">Kork</string>
@@ -599,7 +599,7 @@
     <string name="poi_recycling_polyester">Polüester</string>
     <string name="poi_recycling_plasterboard">Kipsplaat</string>
     <string name="poi_recycling_animal_waste">Loomsed jäätmed</string>
-    <string name="poi_recycling_fridge_and_freezer">Külmkapp ja sügavkülmik</string>
+    <string name="poi_recycling_fridge_and_freezer">Külmkapid ja sügavkülmikud</string>
     <string name="poi_recycling_furniture">Mööbel</string>
     <string name="poi_recycling_diapers">Mähkmed</string>
     <string name="poi_recycling_car_batteries">Autoakud</string>
@@ -975,7 +975,7 @@
     <string name="poi_village_green">Külaplats</string>
     <string name="poi_sailing">Purjetamine</string>
     <string name="poi_piste_downhill">Allasõidunõlv</string>
-    <string name="poi_piste_nordic">Murdmaanõlv</string>
+    <string name="poi_piste_nordic">Murdmaarada</string>
     <string name="poi_piste_skitour">Suusamatkanõlv</string>
     <string name="poi_piste_hike">Matkanõlv</string>
     <string name="poi_piste_sleigh">Kelgunõlv</string>
@@ -1381,7 +1381,7 @@
     <string name="poi_piste_difficulty_freeride">Vabasõit</string>
     <string name="poi_piste_grooming_classic">Klassikaline</string>
     <string name="poi_piste_grooming_classic_skating">Klassikaline+uisutamine</string>
-    <string name="poi_piste_grooming_backcountry">Tagamaa</string>
+    <string name="poi_piste_grooming_backcountry">Kõnnumaa</string>
     <string name="poi_piste_grooming_scooter">Tõukeratas</string>
     <string name="poi_piste_grooming_skating">Uisutamine</string>
     <string name="poi_piste_grooming_no">Ei</string>
@@ -4991,4 +4991,17 @@
     <string name="poi_barrier_bar">Staatiline tõkkepuu</string>
     <string name="poi_barrier_board">Lühike piirdetõke</string>
     <string name="poi_contact_website">Veebisait</string>
+    <string name="poi_lit">Valgustatud</string>
+    <string name="poi_piste_type">Nõlva tüüp</string>
+    <string name="poi_piste_oneway">Ühesuunaline rada/nõlv</string>
+    <string name="poi_network_iwn">Rahvusvaheline matkatee</string>
+    <string name="poi_network_ncn">Riiklik rattamarsruut</string>
+    <string name="poi_network_rcn">Piirkondlik rattamarsruut</string>
+    <string name="poi_network_lcn">Kohalik rattamarsruut</string>
+    <string name="poi_network_icn">Rahvusvaheline rattamarsruut</string>
+    <string name="poi_network_foot">Võrgustik</string>
+    <string name="poi_network_cycling">Rattateede võrgustik</string>
+    <string name="poi_network_nwn">Riiklik matkatee</string>
+    <string name="poi_network_rwn">Piirkondlik matkatee</string>
+    <string name="poi_network_lwn">Kohalik matkatee</string>
 </resources>

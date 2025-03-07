@@ -5748,4 +5748,10 @@
     <string name="show_dms_grids">Vis DMS i stedet for grader</string>
     <string name="show_mercator_grids">Brug Mercator i stedet for WGS84 eller UTM</string>
     <string name="show_list">Vis liste</string>
+    <string name="point_location">Punktplacering</string>
+    <string name="shared_string_manual">Manuel</string>
+    <string name="shared_string_map_center">Kortcentrum</string>
+    <string name="choose_location_on_map">Vælg en placering på kortet.</string>
+    <string name="popular_places">Populære steder</string>
+    <string name="choose_location">Vælg en placering</string>
 </resources>
