@@ -5733,4 +5733,8 @@
     <string name="show_dms_grids_description">Gitter in Grad, Minuten, Sekunden anzeigen statt in Grad</string>
     <string name="show_list">Liste anzeigen</string>
     <string name="choose_location">Wählen Sie einen Standort</string>
+    <string name="shared_string_manual">Manuell</string>
+    <string name="shared_string_map_center">Kartenmitte</string>
+    <string name="choose_location_on_map">Wählen Sie einen Standort auf der Karte.</string>
+    <string name="popular_places">Beliebte Orte</string>
 </resources>
