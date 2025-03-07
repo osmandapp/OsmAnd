@@ -17,6 +17,7 @@ import org.apache.commons.logging.Log;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -104,23 +105,17 @@ public class WikiCoreHelper {
 			// article // category
 			String url = "";
 			String baseApiActionUrl = OSMAND_API_ENDPOINT + WIKI_PLACE_ACTION;
-			try {
-				if (!Algorithms.isEmpty(wikidataId)) {
-					url += (url.isEmpty() ? baseApiActionUrl : "&") + "article=" + URLEncoder.encode(wikidataId, "UTF-8");
-				}
-				if (!Algorithms.isEmpty(wikiCategory)) {
-					url += (url.isEmpty() ? baseApiActionUrl : "&") + "category=" + URLEncoder.encode(wikiCategory, "UTF-8");
-				}
-				if (!Algorithms.isEmpty(wikiTitle)) {
-					url += (url.isEmpty() ? baseApiActionUrl : "&") + "wiki=" + URLEncoder.encode(wikiTitle, "UTF-8");
-				}
-				if (!Algorithms.isEmpty(wikidataId)) {
-					url += (url.isEmpty() ? baseApiActionUrl : "&") + "addMetaData=" + URLEncoder.encode("true", "UTF-8");
-				}
-			} catch (UnsupportedEncodingException e) {
-				throw new RuntimeException(e);
+			if (!Algorithms.isEmpty(wikidataId)) {
+				url += baseApiActionUrl + "article=" + URLEncoder.encode(wikidataId, StandardCharsets.UTF_8);
+			}
+			if (!Algorithms.isEmpty(wikiCategory)) {
+				url += (url.isEmpty() ? baseApiActionUrl : "&") + "category=" + URLEncoder.encode(wikiCategory, StandardCharsets.UTF_8);
+			}
+			if (!Algorithms.isEmpty(wikiTitle)) {
+				url += (url.isEmpty() ? baseApiActionUrl : "&") + "wiki=" + URLEncoder.encode(wikiTitle, StandardCharsets.UTF_8);
 			}
 			if (!url.isEmpty()) {
+				url += "&" + "addMetaData=" + URLEncoder.encode("true", StandardCharsets.UTF_8);
 				getImagesOsmAndAPIRequestV2(url, wikiImages);
 			}
 		} else {
