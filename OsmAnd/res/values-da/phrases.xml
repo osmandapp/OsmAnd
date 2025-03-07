@@ -4225,4 +4225,12 @@
     <string name="poi_atv_no">ATV: nej</string>
     <string name="poi_contact_website">Websted</string>
     <string name="poi_lit">Belysning</string>
+    <string name="poi_network_nwn">National vandrerute</string>
+    <string name="poi_network_iwn">International vandrerute</string>
+    <string name="poi_network_lcn">Lokal cykelrute</string>
+    <string name="poi_network_rwn">Regional vandrerute</string>
+    <string name="poi_network_lwn">Lokal vandrerute</string>
+    <string name="poi_network_icn">International cykelrute</string>
+    <string name="poi_network_ncn">National cykelrute</string>
+    <string name="poi_network_rcn">Regional cykelrute</string>
 </resources>
