@@ -302,6 +302,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                     return false;
                 }
             };
+            String tiles = amenity.getAdditionalInfo("route_shortlink_tiles");
         } else {
             // users GPX
             poiTypeFilter = getSearchFilter(travelGpx.getMainFilterString(), travelGpx.getPointFilterString());
@@ -311,10 +312,11 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
         Map<Long, BinaryMapDataObject> binaryMapDataObjectMap = new HashMap<>(); // live-updates
         Map<Long, Amenity> amenityMap = new HashMap<>(); // live-updates
         HashSet<Long> processedAmenity = new HashSet<>();
+        List<Amenity> currentList = new ArrayList<>();
         SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
                 0, 0, Algorithms.emptyIfNull(travelGpx.title), left, right, top, bottom,
                 poiTypeFilter,
-                getAmenityMatcher(travelGpx, amenityMap, isCancelled),
+                getAmenityMatcher(travelGpx, amenityMap, currentList, isCancelled),
                 null);
 
         SearchRequest<BinaryMapDataObject> sr = BinaryMapIndexReader
@@ -335,7 +337,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                 continue;
             }
             int mapCnt = 0;
-            processedAmenity.clear();
+            currentList.clear();
 
             try {
                 if (travelGpx.routeRadius > 0 && !travelGpx.hasBbox31()) {
@@ -344,20 +346,19 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
 
                 if (isPoiSectionIntersect(repo, pointRequest)) {
                     repo.searchPoi(pointRequest);
-                    for (Map.Entry<Long, Amenity> pair : amenityMap.entrySet()) {
-                        Amenity am = pair.getValue();
-                        Long key = pair.getKey();
-                        if (!processedAmenity.contains(key)) {
+                    repo.searchMapIndex(sr);
+                    /*for (Amenity am : currentList) {
+                        if (!processedAmenity.contains(am.getId())) {
                             if (!isPoiSectionIntersect(repo, am)) {
                                 continue;
                             }
-                            sr.setBBoxRadius(am.getLocation().getLatitude(), am.getLocation().getLongitude(), 100);
+                            sr.setBBoxRadius(am.getLocation().getLatitude(), am.getLocation().getLongitude(), 50);
                             repo.searchMapIndex(sr);
                             mapCnt++;
-                            findAmenityOutOfGeometry(amenityMap.values(), binaryMapDataObjectMap.values(), processedAmenity);
-                            processedAmenity.add(key);
+                            findAmenityOutOfGeometry(currentList, binaryMapDataObjectMap.values(), processedAmenity);
+                            processedAmenity.add(am.getId());
                         }
-                    }
+                    }*/
                 }
                 if (isUserGPX && !Algorithms.isEmpty(binaryMapDataObjectMap)) {
                     break; // speed up reading of User's GPX files
@@ -365,7 +366,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             } catch (Exception e) {
                 LOG.error(e.getMessage());
             }
-            System.out.println(repo.getFile().getName() + " : " + (System.currentTimeMillis() - time) + "ms" + ", map requests:" + mapCnt);
+            System.out.println(repo.getFile().getName() + " : " + (System.currentTimeMillis() - time) + "ms" + ", map requests:" + mapCnt + ", poi " + amenityMap.size());
             time = System.currentTimeMillis();
         }
 
@@ -380,7 +381,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                 LatLon latLon = new LatLon(MapUtils.get31LatitudeY(object.getPoint31YTile(i)), MapUtils.get31LongitudeX(object.getPoint31XTile(i)));
                 for (Amenity am : amenities) {
                     if (!proccesedAmenity.contains(am.getId())) {
-                        if (MapUtils.areLatLonEqual(latLon, am.getLocation(), 0.0001)) {
+                        if (MapUtils.areLatLonEqual(latLon, am.getLocation(), 0.0002)) {
                             proccesedAmenity.add(am.getId());
                         }
                     }
@@ -443,7 +444,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                 BinaryMapIndexReader.SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
                         0, 0, Algorithms.emptyIfNull(article.title), left, right, top, bottom,
                         getSearchFilter(article.getMainFilterString(), article.getPointFilterString()),
-                        getAmenityMatcher(article, amenityMap, isCancelled),
+                        getAmenityMatcher(article, amenityMap, new ArrayList<>(), isCancelled),
                         null);
                 if (article.routeRadius > 0 && !article.hasBbox31()) {
                     pointRequest.setBBoxRadius(article.lat, article.lon, article.routeRadius);
@@ -511,17 +512,19 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
 
     @NonNull
     private ResultMatcher<Amenity> getAmenityMatcher(@NonNull TravelArticle article,
-                                                     @NonNull Map<Long, Amenity> amenityMap,
+                                                     @NonNull Map<Long, Amenity> commonMap,
+                                                     @NonNull List<Amenity> currentList,
                                                      @NonNull HeightDataLoader.Cancellable isCancelled) {
         return new ResultMatcher<Amenity>() {
             @Override
             public boolean publish(Amenity amenity) {
                 if (amenity.isClosed()) {
                     //live-updates
-                    amenityMap.remove(amenity.getId());
+                    commonMap.remove(amenity.getId());
                 }
                 if (amenity.getRouteId().equals(article.getRouteId())) {
-                    amenityMap.put(amenity.getId(), amenity);
+                    commonMap.put(amenity.getId(), amenity);
+                    currentList.add(amenity);
                 }
                 return false;
             }
