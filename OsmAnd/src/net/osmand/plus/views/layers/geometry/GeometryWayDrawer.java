@@ -398,7 +398,8 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		List<DrawPathData31> dataArr = new ArrayList<>();
 		int lineId = LINE_ID;
 		for (DrawPathData31 data : pathsData) {
-			if (!dataArr.isEmpty() && prevStyle != null && (!Algorithms.objectEquals(data.style, prevStyle) || data.style.isUnique()
+			if (!dataArr.isEmpty() && prevStyle != null && (data != null &&
+					!data.style.equalsExceptColor(prevStyle) || data.style.isUnique()
 					|| prevStyle.hasPathLine() != data.style.hasPathLine())) {
 				drawVectorLine(collection, lineId++, baseOrder, shouldDrawArrows, true, prevStyle, dataArr);
 				dataArr.clear();
