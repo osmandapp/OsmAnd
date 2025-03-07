@@ -5728,4 +5728,9 @@
     <string name="show_mercator_grids">Використовувати Mercator замість WGS84 або UTM</string>
     <string name="show_list">Показати список</string>
     <string name="popular_places">Популярні місця</string>
+    <string name="choose_location">Виберіть локацію</string>
+    <string name="point_location">Розташування точки</string>
+    <string name="shared_string_map_center">Центр карти</string>
+    <string name="shared_string_manual">Інструкція</string>
+    <string name="choose_location_on_map">Виберіть місце на карті.</string>
 </resources>
