@@ -5714,4 +5714,10 @@
     <string name="show_dm_grids">Utiliser DM au lieu des degrés ou DMS</string>
     <string name="show_dm_grids_description">Afficher la grille en degrés et minutes au lieu de degrés ou DMS</string>
     <string name="show_list">Afficher la liste</string>
+    <string name="shared_string_map_center">Centre de la carte</string>
+    <string name="choose_location_on_map">Choisissez un emplacement sur la carte.</string>
+    <string name="popular_places">Lieux populaires</string>
+    <string name="point_location">Emplacement du point</string>
+    <string name="choose_location">Sélectionnez un emplacement</string>
+    <string name="shared_string_manual">Manuel</string>
 </resources>
