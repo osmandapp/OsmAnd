@@ -11,6 +11,7 @@ import com.google.gson.reflect.TypeToken;
 import net.osmand.wiki.WikiCoreHelper;
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
