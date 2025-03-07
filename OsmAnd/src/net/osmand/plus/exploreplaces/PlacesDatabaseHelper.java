@@ -49,21 +49,84 @@ public class PlacesDatabaseHelper extends SQLiteOpenHelper {
         this.context = context;
     }
 
-    @Override
-    public SQLiteDatabase getWritableDatabase() {
-        // Override to place the database in the cache directory
-        File cacheDir = context.getCacheDir();
-        File dbFile = new File(cacheDir, DATABASE_NAME);
-        return SQLiteDatabase.openOrCreateDatabase(dbFile, null);
-    }
+	@Override
+	public SQLiteDatabase getWritableDatabase() {
+		// Open or create the database in writable mode
+		SQLiteDatabase db = openOrCreateDatabase(SQLiteDatabase.OPEN_READWRITE);
+		ensureTableExists(db); // Ensure the table exists
+		return db;
+	}
 
-    @Override
-    public SQLiteDatabase getReadableDatabase() {
-        // Override to place the database in the cache directory
-        File cacheDir = context.getCacheDir();
-        File dbFile = new File(cacheDir, DATABASE_NAME);
-        return SQLiteDatabase.openDatabase(dbFile.getPath(), null, SQLiteDatabase.OPEN_READONLY);
-    }
+	@Override
+	public SQLiteDatabase getReadableDatabase() {
+		// Open the database in read-only mode
+		SQLiteDatabase db = openOrCreateDatabase(SQLiteDatabase.OPEN_READONLY);
+
+		// Check if the table exists, and if not, switch to writable mode to create it
+		if (!isTableExists(db, TABLE_PLACES)) {
+			db.close(); // Close the read-only database
+			db = getWritableDatabase(); // Open in writable mode to create the table
+		}
+		return db;
+	}
+
+	/**
+	 * Helper method to open or create the database file in the cache directory.
+	 *
+	 * @param mode The mode to open the database (e.g., SQLiteDatabase.OPEN_READWRITE or SQLiteDatabase.OPEN_READONLY).
+	 * @return The opened SQLiteDatabase instance.
+	 */
+	private SQLiteDatabase openOrCreateDatabase(int mode) {
+		// Ensure the database file exists in the cache directory
+		File cacheDir = context.getCacheDir();
+		File dbFile = new File(cacheDir, DATABASE_NAME);
+
+		// Create the database file if it doesn't exist
+		if (!dbFile.exists()) {
+			try {
+				dbFile.createNewFile();
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("Failed to create database file in cache directory.");
+			}
+		}
+
+		// Open or create the database based on the mode
+		if (mode == SQLiteDatabase.OPEN_READWRITE) {
+			return SQLiteDatabase.openOrCreateDatabase(dbFile, null);
+		} else {
+			return SQLiteDatabase.openDatabase(dbFile.getPath(), null, mode);
+		}
+	}
+
+	/**
+	 * Ensures that the "places" table exists in the database.
+	 * If the table does not exist, it creates it.
+	 *
+	 * @param db The SQLiteDatabase instance.
+	 */
+	private void ensureTableExists(SQLiteDatabase db) {
+		if (!isTableExists(db, TABLE_PLACES)) {
+			db.execSQL(CREATE_TABLE_PLACES);
+		}
+	}
+
+	/**
+	 * Checks if a table exists in the database.
+	 *
+	 * @param db        The SQLiteDatabase instance.
+	 * @param tableName The name of the table to check.
+	 * @return True if the table exists, false otherwise.
+	 */
+	private boolean isTableExists(SQLiteDatabase db, String tableName) {
+		Cursor cursor = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name=?", new String[]{tableName});
+		if (cursor != null) {
+			boolean exists = cursor.moveToFirst();
+			cursor.close();
+			return exists;
+		}
+		return false;
+	}
 
     @Override
     public void onCreate(SQLiteDatabase db) {
