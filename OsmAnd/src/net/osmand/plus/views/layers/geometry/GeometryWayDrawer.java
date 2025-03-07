@@ -394,7 +394,6 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 
 	public void drawPath(@NonNull VectorLinesCollection collection, int baseOrder, boolean shouldDrawArrows,
 	                     @NonNull List<DrawPathData31> pathsData) {
-
 		GeometryWayStyle<?> prevStyle = null;
 		List<DrawPathData31> dataArr = new ArrayList<>();
 		int lineId = LINE_ID;
