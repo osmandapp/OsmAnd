@@ -11,6 +11,7 @@ import com.google.gson.reflect.TypeToken;
 import net.osmand.wiki.WikiCoreHelper;
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -41,9 +42,27 @@ public class PlacesDatabaseHelper extends SQLiteOpenHelper {
             + ")";
 
     private Gson gson = new Gson();
+    private Context context;
 
     public PlacesDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
+    }
+
+    @Override
+    public SQLiteDatabase getWritableDatabase() {
+        // Override to place the database in the cache directory
+        File cacheDir = context.getCacheDir();
+        File dbFile = new File(cacheDir, DATABASE_NAME);
+        return SQLiteDatabase.openOrCreateDatabase(dbFile, null);
+    }
+
+    @Override
+    public SQLiteDatabase getReadableDatabase() {
+        // Override to place the database in the cache directory
+        File cacheDir = context.getCacheDir();
+        File dbFile = new File(cacheDir, DATABASE_NAME);
+        return SQLiteDatabase.openDatabase(dbFile.getPath(), null, SQLiteDatabase.OPEN_READONLY);
     }
 
     @Override
