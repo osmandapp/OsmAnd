@@ -1,5 +1,6 @@
 package net.osmand.plus.configmap;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DETAILS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
 
 import android.content.Context;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
@@ -24,10 +26,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.dialogs.DetailsBottomSheet;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
+import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandler;
+import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandlerProvider;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
@@ -40,6 +45,7 @@ import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
+import net.osmand.render.RenderingRuleProperty;
 
 import org.threeten.bp.Duration;
 
@@ -70,6 +76,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	private final Map<Integer, View> views = new HashMap<>();
 
 	private boolean useAnimation;
+	private List<RenderingRuleProperty> propertiesOfDetailsBottomSheet;
 
 	@Override
 	protected boolean isUsedOnMap() {
@@ -156,6 +163,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	private void updateItemsData() {
 		ConfigureMapMenu menu = new ConfigureMapMenu(app);
 		adapter = menu.createListAdapter(mapActivity);
+		propertiesOfDetailsBottomSheet = menu.propertiesOfDetailsBottomSheet;
 		ContextMenuUtils.removeHiddenItems(adapter);
 		ContextMenuUtils.hideExtraDividers(adapter);
 		items = ContextMenuUtils.collectItemsByCategories(adapter.getItems());
@@ -360,12 +368,14 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 				Duration.ofSeconds(1));
 	}
 
-	public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<ConfigureMapFragment> {
+	public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<ConfigureMapFragment>, PreferenceFragmentHandlerProvider {
 
+		private List<RenderingRuleProperty> propertiesOfDetailsBottomSheet;
 		private List<ContextMenuItem> items;
 
 		@Override
 		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final ConfigureMapFragment configureMapFragment) {
+			propertiesOfDetailsBottomSheet = configureMapFragment.propertiesOfDetailsBottomSheet;
 			items = configureMapFragment.adapter.getItems();
 		}
 
@@ -394,6 +404,33 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 			preference.setTitle(contextMenuItem.getTitle());
 			preference.setSummary(contextMenuItem.getDescription());
 			return preference;
+		}
+
+		@Override
+		public Optional<PreferenceFragmentHandler> getPreferenceFragmentHandler(final Preference preference) {
+			if (DETAILS_ID.equals(preference.getKey())) {
+				return Optional.of(
+						new PreferenceFragmentHandler() {
+
+							@Override
+							public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
+								return DetailsBottomSheet.PreferenceFragment.class;
+							}
+
+							@Override
+							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
+								final DetailsBottomSheet.PreferenceFragment preferenceFragment = new DetailsBottomSheet.PreferenceFragment();
+								preferenceFragment.setProperties(propertiesOfDetailsBottomSheet);
+								return preferenceFragment;
+							}
+
+							@Override
+							public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
+								return false;
+							}
+						});
+			}
+			return Optional.empty();
 		}
 	}
 }

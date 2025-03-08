@@ -5,6 +5,7 @@ import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAI
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -15,6 +16,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -35,6 +39,9 @@ import net.osmand.render.RenderingRuleProperty;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
 
 public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 
@@ -54,18 +61,21 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 	private int paddingSmall;
 	private int paddingHalf;
 
-	public static void showInstance(@NonNull FragmentManager fm,
-									List<RenderingRuleProperty> properties,
-									List<CommonPreference<Boolean>> preferences,
-									OnDataChangeUiAdapter uiAdapter,
-	                                ContextMenuItem item) {
-		if (!fm.isStateSaved()) {
-			DetailsBottomSheet bottomSheet = new DetailsBottomSheet();
-			bottomSheet.setProperties(properties);
-			bottomSheet.setPreferences(preferences);
-			bottomSheet.setUiAdapter(uiAdapter);
-			bottomSheet.setMenuItem(item);
-			bottomSheet.show(fm, TAG);
+	public static DetailsBottomSheet createInstance(final List<RenderingRuleProperty> properties,
+													final List<CommonPreference<Boolean>> preferences,
+													final OnDataChangeUiAdapter uiAdapter,
+													final ContextMenuItem item) {
+		final DetailsBottomSheet detailsBottomSheet = new DetailsBottomSheet();
+		detailsBottomSheet.setProperties(properties);
+		detailsBottomSheet.setPreferences(preferences);
+		detailsBottomSheet.setUiAdapter(uiAdapter);
+		detailsBottomSheet.setMenuItem(item);
+		return detailsBottomSheet;
+	}
+
+	public void show(final FragmentManager fragmentManager) {
+		if (!fragmentManager.isStateSaved()) {
+			show(fragmentManager, TAG);
 		}
 	}
 
@@ -212,8 +222,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 			uiAdapter.onDataSetInvalidated();
 		}
 		Activity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			MapActivity mapActivity = (MapActivity) activity;
+		if (activity instanceof final MapActivity mapActivity) {
 			mapActivity.refreshMapComplete();
 			mapActivity.getMapLayers().updateLayers(mapActivity);
 		}
@@ -234,5 +243,46 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 
 	public void setMenuItem(ContextMenuItem item) {
 		this.item = item;
+	}
+
+	public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<DetailsBottomSheet> {
+
+		private List<RenderingRuleProperty> properties;
+
+		@Override
+		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final DetailsBottomSheet detailsBottomSheet) {
+			setProperties(detailsBottomSheet.properties);
+		}
+
+		public void setProperties(final List<RenderingRuleProperty> properties) {
+			this.properties = properties;
+		}
+
+		@Override
+		public void onCreatePreferences(@Nullable final Bundle savedInstanceState, @Nullable final String rootKey) {
+			final Context context = getPreferenceManager().getContext();
+			final PreferenceScreen screen = getPreferenceManager().createPreferenceScreen(context);
+			screen.setTitle("screen title");
+			screen.setSummary("screen summary");
+			PreferenceFragment
+					.asPreferences(properties, context)
+					.forEach(screen::addPreference);
+			setPreferenceScreen(screen);
+		}
+
+		private static List<Preference> asPreferences(final List<RenderingRuleProperty> properties, final Context context) {
+			return properties
+					.stream()
+					.map(property -> asPreference(property, context))
+					.collect(Collectors.toList());
+		}
+
+		private static Preference asPreference(final RenderingRuleProperty property, final Context context) {
+			final Preference preference = new Preference(context);
+			preference.setKey(property.getAttrName());
+			preference.setTitle(property.getName());
+			preference.setSummary(property.getDescription());
+			return preference;
+		}
 	}
 }

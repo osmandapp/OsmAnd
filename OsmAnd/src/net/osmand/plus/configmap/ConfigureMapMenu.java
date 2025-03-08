@@ -88,6 +88,8 @@ public class ConfigureMapMenu {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
+	// FK-TODO: make Optional<> and provide public getter method
+	public List<RenderingRuleProperty> propertiesOfDetailsBottomSheet;
 
 	public ConfigureMapMenu(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -594,10 +596,15 @@ public class ConfigureMapMenu {
 				it.remove();
 			}
 		}
-		if (preferences.size() > 0) {
+		if (UI_CATEGORY_DETAILS.equals(category)) {
+			propertiesOfDetailsBottomSheet = properties;
+		}
+		if (!preferences.isEmpty()) {
 			ItemClickListener clickListener = (uiAdapter, view, item, isChecked) -> {
 				if (UI_CATEGORY_DETAILS.equals(category)) {
-					DetailsBottomSheet.showInstance(activity.getSupportFragmentManager(), properties, preferences, uiAdapter, item);
+					DetailsBottomSheet
+							.createInstance(properties, preferences, uiAdapter, item)
+							.show(activity.getSupportFragmentManager());
 				} else {
 					ConfigureMapDialogs.showPreferencesDialog(uiAdapter, item, activity,
 							activity.getString(strId), properties, preferences, nightMode);

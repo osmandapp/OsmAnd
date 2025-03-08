@@ -38,6 +38,7 @@ class ShowConfigureMapDashboardAndHighlightSetting {
 		configureMapFragment
 				.getSettingHighlighter()
 				.highlightSetting(configureMapFragment, setting);
+		// showDialog(setting);
 	}
 
 	private void scrollToSetting(final Setting setting) {
@@ -58,5 +59,11 @@ class ShowConfigureMapDashboardAndHighlightSetting {
 		return child == container ?
 				0 :
 				child.getTop() + getYOffsetOfChildWithinContainer((View) child.getParent(), container);
+	}
+
+	private void showDialog(final Setting setting) {
+		if (setting.hasPreferenceMatchWithinSearchableInfo()) {
+			getView(setting).performClick();
+		}
 	}
 }
