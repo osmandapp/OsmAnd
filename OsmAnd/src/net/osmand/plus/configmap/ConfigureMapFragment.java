@@ -362,8 +362,8 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 
 	@Override
 	public SettingHighlighter getSettingHighlighter() {
-		return new ItemOfLinearLayoutHighlighter(
-				views,
+		return new ViewHighlighter(
+				views::get,
 				this,
 				Duration.ofSeconds(1));
 	}

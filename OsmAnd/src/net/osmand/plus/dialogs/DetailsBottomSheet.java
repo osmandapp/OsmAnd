@@ -29,7 +29,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTwoChoicesButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.configmap.ConfigureMapUtils;
-import net.osmand.plus.configmap.ItemOfLinearLayoutHighlighter2;
+import net.osmand.plus.configmap.ViewHighlighter;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
@@ -263,8 +263,8 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet implements Set
 
 	@Override
 	public SettingHighlighter getSettingHighlighter() {
-		return new ItemOfLinearLayoutHighlighter2(
-				itemsContainer,
+		return new ViewHighlighter(
+				itemsContainer::getChildAt,
 				this,
 				Duration.ofSeconds(1));
 	}

@@ -7,23 +7,22 @@ import androidx.fragment.app.Fragment;
 
 import org.threeten.bp.Duration;
 
-import java.util.Map;
+import java.util.function.Function;
 
 import de.KnollFrank.lib.settingssearch.results.PositionOfSettingProvider;
 import de.KnollFrank.lib.settingssearch.results.Setting;
 import de.KnollFrank.lib.settingssearch.results.SettingHighlighter;
-import de.KnollFrank.lib.settingssearch.results.ViewHighlighter;
 
-public class ItemOfLinearLayoutHighlighter implements SettingHighlighter {
+public class ViewHighlighter implements SettingHighlighter {
 
-	private final Map<Integer, View> views;
+	private final Function<Integer, View> getViewAtPosition;
 	private final PositionOfSettingProvider positionOfSettingProvider;
 	private final Duration highlightDuration;
 
-	public ItemOfLinearLayoutHighlighter(final Map<Integer, View> views,
-										 final PositionOfSettingProvider positionOfSettingProvider,
-										 final Duration highlightDuration) {
-		this.views = views;
+	public ViewHighlighter(final Function<Integer, View> getViewAtPosition,
+						   final PositionOfSettingProvider positionOfSettingProvider,
+						   final Duration highlightDuration) {
+		this.getViewAtPosition = getViewAtPosition;
 		this.positionOfSettingProvider = positionOfSettingProvider;
 		this.highlightDuration = highlightDuration;
 	}
@@ -39,10 +38,10 @@ public class ItemOfLinearLayoutHighlighter implements SettingHighlighter {
 
 	private void _highlightItem(final int itemPosition) {
 		// itemsContainer.scrollToPosition(itemPosition);
-		final View view = views.get(itemPosition);
+		final View view = getViewAtPosition.apply(itemPosition);
 		if (view != null) {
 			view.postDelayed(
-					() -> ViewHighlighter.highlightView(view, highlightDuration),
+					() -> de.KnollFrank.lib.settingssearch.results.ViewHighlighter.highlightView(view, highlightDuration),
 					200);
 		}
 	}
