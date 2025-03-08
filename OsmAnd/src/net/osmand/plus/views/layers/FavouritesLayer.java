@@ -1,11 +1,15 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.util.Pair;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -14,12 +18,14 @@ import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.TextRasterizer;
+import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.data.SpecialPointType;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
@@ -232,19 +238,34 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		return markersGroup != null && !markersGroup.isDisabled();
 	}
 
-	private void drawBigPoint(Canvas canvas, FavouritePoint favoritePoint, float x, float y, @Nullable MapMarker marker,
-							  float textScale) {
-		PointImageDrawable pointImageDrawable;
-		boolean history = false;
-		if (marker != null) {
-			pointImageDrawable = PointImageUtils.getOrCreateSyncedIcon(getContext(),
-					favouritesHelper.getColorWithCategory(favoritePoint, defaultColor), favoritePoint);
-			history = marker.history;
-		} else {
-			pointImageDrawable = PointImageUtils.getFromPoint(getContext(),
-					favouritesHelper.getColorWithCategory(favoritePoint, defaultColor), true, favoritePoint);
-		}
-		pointImageDrawable.drawPoint(canvas, x, y, textScale, history);
+	private void drawBigPoint(Canvas canvas, FavouritePoint favoritePoint, float x, float y,
+	                          @Nullable MapMarker marker, float textScale) {
+		int pointColor = favouritesHelper.getColorWithCategory(favoritePoint, defaultColor);
+		int iconId = favoritePoint.getOverlayIconId(getContext());
+		BackgroundType backgroundType = favoritePoint.getBackgroundType();
+		boolean synced = marker != null;
+
+		PointImageDrawable drawable = createFavoriteIcon(pointColor, iconId, backgroundType, synced);
+		boolean history = marker != null && marker.history;
+		drawable.drawPoint(canvas, x, y, textScale, history);
+	}
+
+	@NonNull
+	public PointImageDrawable createParkingIcon() {
+		int pointColor = favouritesHelper.getParkingIconColor();
+		int iconId = SpecialPointType.PARKING.getIconId(getContext());
+		return createFavoriteIcon(pointColor, iconId, DEFAULT_BACKGROUND_TYPE, false);
+	}
+
+	@NonNull
+	public PointImageDrawable createDefaultFavoriteIcon(@ColorInt int pointColor) {
+		return createFavoriteIcon(pointColor, DEFAULT_UI_ICON_ID, DEFAULT_BACKGROUND_TYPE, false);
+	}
+
+	@NonNull
+	public PointImageDrawable createFavoriteIcon(@ColorInt int pointColor, @DrawableRes int iconId,
+	                                             @NonNull BackgroundType bgType, boolean synced) {
+		return PointImageUtils.getOrCreate(getContext(), pointColor, true, synced, iconId, bgType);
 	}
 
 	private List<FavoriteGroup> getFavoriteGroups() {

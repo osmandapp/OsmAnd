@@ -13,9 +13,9 @@ import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.os.AsyncTask;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapMarker;
@@ -43,6 +43,7 @@ import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.helpers.OpenstreetmapLocalUtil;
 import net.osmand.plus.plugins.osmedit.helpers.OsmBugsLocalUtil;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
@@ -142,7 +143,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 				List<LatLon> fullObjectsLatLon = new ArrayList<>();
 				showOsmPoints(notesPoints, fullObjectsLatLon);
 				showOsmPoints(osmPoints, fullObjectsLatLon);
-				if (fullObjectsLatLon.size() > 0) {
+				if (!fullObjectsLatLon.isEmpty()) {
 					mapRenderer.addSymbolsProvider(mapMarkersCollection);
 					this.fullObjectsLatLon = fullObjectsLatLon;
 				}
@@ -191,22 +192,35 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 		return fullObjects;
 	}
 
-	private void drawPoint(Canvas canvas, OsmPoint osmPoint, float x, float y) {
+	private void drawPoint(@NonNull Canvas canvas, @NonNull OsmPoint osmPoint, float x, float y) {
 		float textScale = getTextScale();
-		int iconId = getIconId(osmPoint);
-		BackgroundType backgroundType = DEFAULT_BACKGROUND_TYPE;
-		if (osmPoint.getGroup() == BUG) {
-			backgroundType = BackgroundType.COMMENT;
-		}
-		PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
-				ContextCompat.getColor(ctx, R.color.created_poi_icon_color), true, false,
-				iconId, backgroundType);
-		pointImageDrawable.setAlpha(0.8f);
-		int offsetY = backgroundType.getOffsetY(ctx, textScale);
+		PointImageDrawable pointImageDrawable = createOsmPointIcon(osmPoint);
+		int offsetY = pointImageDrawable.getBackgroundType().getOffsetY(ctx, textScale);
 		pointImageDrawable.drawPoint(canvas, x, y - offsetY, textScale, false);
 	}
 
-	public int getIconId(OsmPoint osmPoint) {
+	@NonNull
+	public PointImageDrawable createOsmNoteIcon() {
+		return createOsmPointIcon(getBugIconId(), true);
+	}
+
+	@NonNull
+	public PointImageDrawable createOsmPointIcon(@NonNull OsmPoint osmPoint) {
+		int iconId = getIconId(osmPoint);
+		return createOsmPointIcon(iconId, osmPoint.getGroup() == BUG);
+	}
+
+	@NonNull
+	public PointImageDrawable createOsmPointIcon(@DrawableRes int iconId, boolean isBug) {
+		BackgroundType backgroundType = isBug ? BackgroundType.COMMENT : DEFAULT_BACKGROUND_TYPE;
+		int pointColor = ColorUtilities.getColor(ctx, R.color.created_poi_icon_color);
+		PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(
+				ctx, pointColor, true, false, iconId, backgroundType);
+		pointImageDrawable.setAlpha(0.8f);
+		return pointImageDrawable;
+	}
+
+	public int getIconId(@NonNull OsmPoint osmPoint) {
 		if (osmPoint.getGroup() == POI) {
 			OpenstreetmapPoint osmP = (OpenstreetmapPoint) osmPoint;
 			int iconResId = 0;
@@ -231,10 +245,14 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 			}
 			return iconResId;
 		} else if (osmPoint.getGroup() == BUG) {
-			return R.drawable.mm_special_symbol_plus;
+			return getBugIconId();
 		} else {
 			return 0;
 		}
+	}
+
+	public int getBugIconId() {
+		return R.drawable.mm_special_symbol_plus;
 	}
 
 	@Override
@@ -346,14 +364,12 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 	@Override
 	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position, @Nullable ApplyMovedObjectCallback callback) {
 		if (o instanceof OsmPoint) {
-			if (o instanceof OpenstreetmapPoint) {
-				OpenstreetmapPoint objectInMotion = (OpenstreetmapPoint) o;
+			if (o instanceof OpenstreetmapPoint objectInMotion) {
 				Entity entity = objectInMotion.getEntity();
 				entity.setLatitude(position.getLatitude());
 				entity.setLongitude(position.getLongitude());
 				new SaveOsmChangeAsyncTask(mOsmChangeUtil, objectInMotion, callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-			} else if (o instanceof OsmNotesPoint) {
-				OsmNotesPoint objectInMotion = (OsmNotesPoint) o;
+			} else if (o instanceof OsmNotesPoint objectInMotion) {
 				objectInMotion.setLatitude(position.getLatitude());
 				objectInMotion.setLongitude(position.getLongitude());
 				new SaveOsmNoteAsyncTask(getApplication(), mOsmBugsUtil, objectInMotion.getText(), callback)
@@ -406,18 +422,11 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 			return;
 		}
 		float textScale = getTextScale();
-		int iconId = getIconId(osmPoint);//TODO bug with detect icon
-		BackgroundType backgroundType = DEFAULT_BACKGROUND_TYPE;
-		if (osmPoint.getGroup() == BUG) {
-			backgroundType = BackgroundType.COMMENT;
-		}
 		int x = MapUtils.get31TileNumberX(osmPoint.getLongitude());
 		int y = MapUtils.get31TileNumberY(osmPoint.getLatitude());
 		PointI position = new PointI(x, y);
-		PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
-				ContextCompat.getColor(ctx, R.color.created_poi_icon_color), true, false,
-				iconId, backgroundType);
-		pointImageDrawable.setAlpha(0.8f);
+
+		PointImageDrawable pointImageDrawable = createOsmPointIcon(osmPoint); //TODO bug with detect icon in getIcon()
 		Bitmap bitmap = pointImageDrawable.getBigMergedBitmap(textScale, false);
 		if (bitmap == null) {
 			return;
@@ -432,7 +441,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 				.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal);
 
 		mapMarkerBuilder.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.CenterVertical);
-		mapMarkerBuilder.setPinIconOffset(new PointI(0, -backgroundType.getOffsetY(ctx, textScale)));
+		mapMarkerBuilder.setPinIconOffset(new PointI(0, -pointImageDrawable.getBackgroundType().getOffsetY(ctx, textScale)));
 
 		if (isTextVisible() && osmPoint instanceof OpenstreetmapPoint) {
 			mapMarkerBuilder

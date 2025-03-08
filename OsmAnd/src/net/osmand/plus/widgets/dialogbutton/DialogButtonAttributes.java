@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 
 import androidx.annotation.DimenRes;
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -23,7 +22,7 @@ public class DialogButtonAttributes {
 	private int iconId = INVALID_ID;
 
 	private int titleId = INVALID_ID;
-	private String title;
+	private CharSequence title;
 	private boolean useUppercase;
 
 	private DialogButtonType buttonType = DialogButtonType.PRIMARY;
@@ -75,7 +74,7 @@ public class DialogButtonAttributes {
 		this.title = null;
 	}
 
-	public void setTitle(String title) {
+	public void setTitle(@Nullable CharSequence title) {
 		this.title = title;
 		this.titleId = INVALID_ID;
 	}
@@ -97,11 +96,11 @@ public class DialogButtonAttributes {
 	}
 
 	@Nullable
-	public String getTitle() {
+	public CharSequence getTitle() {
 		return title;
 	}
 
-	@LayoutRes
+	@NonNull
 	public DialogButtonType getButtonType() {
 		return buttonType;
 	}

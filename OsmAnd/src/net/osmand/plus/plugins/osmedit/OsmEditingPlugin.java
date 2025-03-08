@@ -396,6 +396,16 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		osmBugsLayer.modifyBug(mapActivity, point);
 	}
 
+	@NonNull
+	public OsmBugsLayer getOsmBugsLayer() {
+		return osmBugsLayer;
+	}
+
+	@NonNull
+	public OsmEditsLayer getOsmEditsLayer() {
+		return osmEditsLayer;
+	}
+
 	@Override
 	public void addMyPlacesTab(MyPlacesActivity myPlacesActivity, List<TabActivity.TabItem> mTabs, Intent intent) {
 		mTabs.add(myPlacesActivity.getTabIndicator(OSM_EDIT_TAB, OsmEditsFragment.class));
