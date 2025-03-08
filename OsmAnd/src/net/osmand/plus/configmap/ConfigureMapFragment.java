@@ -53,13 +53,12 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
-import de.KnollFrank.lib.settingssearch.results.PositionOfSettingProvider;
 import de.KnollFrank.lib.settingssearch.results.Setting;
 import de.KnollFrank.lib.settingssearch.results.SettingHighlighter;
 import de.KnollFrank.lib.settingssearch.results.SettingHighlighterProvider;
 
 public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataChangeUiAdapter,
-		InAppPurchaseListener, SelectGpxTaskListener, SettingHighlighterProvider, PositionOfSettingProvider {
+		InAppPurchaseListener, SelectGpxTaskListener, SettingHighlighterProvider {
 
 	public static final String TAG = ConfigureMapFragment.class.getSimpleName();
 
@@ -332,40 +331,30 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 		}
 	}
 
-	public Optional<View> getViewAtPosition(final int position) {
-		return views.containsKey(position) ?
-				Optional.of(views.get(position)) :
-				Optional.empty();
-	}
-
 	@Override
-	public OptionalInt getPositionOfSetting(final Setting setting) {
-		return asOptionalInt(
-				this
-						.getContextMenuItemById(setting.getKey())
-						.map(ContextMenuItem::getTitleId));
+	public SettingHighlighter getSettingHighlighter() {
+		return new ViewOfSettingHighlighter(
+				this::getView,
+				Duration.ofSeconds(1));
 	}
 
-	private Optional<ContextMenuItem> getContextMenuItemById(final String id) {
+	public View getView(final Setting setting) {
+		return views.get(getPositionOfSetting(setting));
+	}
+
+	private int getPositionOfSetting(final Setting setting) {
+		return this
+				.getContextMenuItemById(setting.getKey())
+				.getTitleId();
+	}
+
+	private ContextMenuItem getContextMenuItemById(final String id) {
 		return adapter
 				.getItems()
 				.stream()
 				.filter(contextMenuItem -> Objects.equals(contextMenuItem.getId(), id))
-				.findFirst();
-	}
-
-	private static OptionalInt asOptionalInt(final Optional<Integer> optionalInteger) {
-		return optionalInteger
-				.map(OptionalInt::of)
-				.orElseGet(OptionalInt::empty);
-	}
-
-	@Override
-	public SettingHighlighter getSettingHighlighter() {
-		return new ViewHighlighter(
-				views::get,
-				this,
-				Duration.ofSeconds(1));
+				.findFirst()
+				.orElseThrow();
 	}
 
 	public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<ConfigureMapFragment>, PreferenceFragmentHandlerProvider {

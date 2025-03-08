@@ -45,14 +45,8 @@ class ShowConfigureMapDashboardAndHighlightSetting {
 		dashboardOnMap.applyScrollPosition(
 				dashboardOnMap.getMainScrollView(),
 				getYOffsetOfChildWithinContainer(
-						getView(setting),
+						configureMapFragment.getView(setting),
 						dashboardOnMap.getMainScrollView()));
-	}
-
-	private View getView(final Setting setting) {
-		return configureMapFragment
-				.getViewAtPosition(configureMapFragment.getPositionOfSetting(setting).orElseThrow())
-				.orElseThrow();
 	}
 
 	// FK-TODO: create class having field container
@@ -64,7 +58,7 @@ class ShowConfigureMapDashboardAndHighlightSetting {
 
 	private void showDialog(final Setting setting) {
 		if (setting.hasPreferenceMatchWithinSearchableInfo()) {
-			getView(setting).performClick();
+			configureMapFragment.getView(setting).performClick();
 		}
 	}
 }

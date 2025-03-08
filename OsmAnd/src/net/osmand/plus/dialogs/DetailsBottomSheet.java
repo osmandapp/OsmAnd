@@ -29,7 +29,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTwoChoicesButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.configmap.ConfigureMapUtils;
-import net.osmand.plus.configmap.ViewHighlighter;
+import net.osmand.plus.configmap.ViewOfSettingHighlighter;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
@@ -46,12 +46,11 @@ import java.util.stream.Collectors;
 
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
 import de.KnollFrank.lib.settingssearch.common.IndexSearchResultConverter;
-import de.KnollFrank.lib.settingssearch.results.PositionOfSettingProvider;
 import de.KnollFrank.lib.settingssearch.results.Setting;
 import de.KnollFrank.lib.settingssearch.results.SettingHighlighter;
 import de.KnollFrank.lib.settingssearch.results.SettingHighlighterProvider;
 
-public class DetailsBottomSheet extends BasePreferenceBottomSheet implements SettingHighlighterProvider, PositionOfSettingProvider {
+public class DetailsBottomSheet extends BasePreferenceBottomSheet implements SettingHighlighterProvider {
 
 	public static final String TAG = DetailsBottomSheet.class.getName();
 	public static final String STREET_LIGHTING = "streetLighting";
@@ -263,14 +262,16 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet implements Set
 
 	@Override
 	public SettingHighlighter getSettingHighlighter() {
-		return new ViewHighlighter(
-				itemsContainer::getChildAt,
-				this,
+		return new ViewOfSettingHighlighter(
+				this::getView,
 				Duration.ofSeconds(1));
 	}
 
-	@Override
-	public OptionalInt getPositionOfSetting(final Setting setting) {
+	public View getView(final Setting setting) {
+		return itemsContainer.getChildAt(getPositionOfSetting(setting).orElseThrow());
+	}
+
+	private OptionalInt getPositionOfSetting(final Setting setting) {
 		return Optional
 				.<View>ofNullable(itemsContainer.findViewWithTag(setting.getKey()))
 				.map(view -> IndexSearchResultConverter.minusOne2Empty(itemsContainer.indexOfChild(view)))
