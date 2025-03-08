@@ -44,6 +44,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapFragment;
+import net.osmand.plus.configmap.CoordinatesGridFragment;
 import net.osmand.plus.configmap.routes.MapRoutesFragment;
 import net.osmand.plus.configmap.routes.RenderingClassFragment;
 import net.osmand.plus.configmap.routes.RouteLayersHelper;
@@ -331,6 +332,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			if (renderingClass != null) {
 				tv.setText(renderingClass.getTitle());
 			}
+		} else if (isCurrentType(COORDINATE_GRID)) {
+			tv.setText(R.string.layer_coordinates_grid);
 		}
 		ImageView edit = dashboardView.findViewById(R.id.toolbar_edit);
 		edit.setVisibility(View.GONE);
@@ -580,6 +583,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					if (renderingClass != null) {
 						RenderingClassFragment.showInstance(mapActivity, renderingClass);
 					}
+				} else if (isCurrentType(COORDINATE_GRID)) {
+					CoordinatesGridFragment.showInstance(mapActivity.getSupportFragmentManager());
 				}
 				scrollView.setVisibility(View.VISIBLE);
 				listViewLayout.setVisibility(View.GONE);

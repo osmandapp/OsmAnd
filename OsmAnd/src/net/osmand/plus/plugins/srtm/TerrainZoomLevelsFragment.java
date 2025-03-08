@@ -87,7 +87,7 @@ public class TerrainZoomLevelsFragment extends ConfigureMapOptionFragment {
 
 	@Override
 	protected void setupMainContent(@NonNull ViewGroup container) {
-		View view = themedInflater.inflate(R.layout.terrain_zoom_levels_fragment, container, false);
+		View view = themedInflater.inflate(R.layout.zoom_levels_fragment, container, false);
 		zoomSlider = view.findViewById(R.id.zoom_slider);
 		minZoomTv = view.findViewById(R.id.zoom_value_min);
 		maxZoomTv = view.findViewById(R.id.zoom_value_max);

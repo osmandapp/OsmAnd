@@ -135,8 +135,8 @@ public class TrackWidthController implements IHeadedCardController, IDialogContr
 			widthComponentController = new WidthComponentController(widthMode, customValue, this::onWidthValueSelected) {
 				@NonNull
 				@Override
-				public Limits getSliderLimits() {
-					return new Limits(CUSTOM_WIDTH_MIN, CUSTOM_WIDTH_MAX);
+				public Limits<Integer> getSliderLimits() {
+					return new Limits<>(CUSTOM_WIDTH_MIN, CUSTOM_WIDTH_MAX);
 				}
 			};
 		}

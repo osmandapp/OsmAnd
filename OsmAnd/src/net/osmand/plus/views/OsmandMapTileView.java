@@ -61,7 +61,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.auto.views.CarSurfaceView;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.card.color.palette.migration.ColorsMigrationAlgorithmV2;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.TwoFingerTapDetector;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
@@ -127,6 +126,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private boolean DISABLE_MAP_LAYERS;
 	private StateChangedListener<Boolean> disableMapLayersListener;
+
+	private StateChangedListener<Boolean> showCoordinatesGridListener;
+	private StateChangedListener<Object> gridFormatListener;
 
 	private View view;
 	private final Context ctx;
@@ -314,6 +316,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		DISABLE_MAP_LAYERS = settings.DISABLE_MAP_LAYERS.get();
 		disableMapLayersListener = change -> DISABLE_MAP_LAYERS = change;
 		settings.DISABLE_MAP_LAYERS.addListener(disableMapLayersListener);
+
+		// Grid settings listeners
+		showCoordinatesGridListener = change -> applyGridSettings();
+		gridFormatListener = change -> applyGridSettings();
+
+		// Register Grid settings listeners
+		settings.SHOW_COORDINATES_GRID.addListener(showCoordinatesGridListener);
+//		settings.COORDINATE_GRID_FORMAT.addListener(gridFormatListener);
 	}
 
 	public void updateDisplayMetrics(DisplayMetrics dm, int width, int height) {
@@ -2554,11 +2564,17 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
+	public void applyGridSettings() {
+		if (mapRenderer != null) {
+			applyGridSettings(mapRenderer);
+		}
+	}
+
 	public void applyGridSettings(MapRendererView mapRenderer) {
 		OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
 		if (plugin != null) {
 			float textScale = app.getSettings().TEXT_SCALE.get() * getDensity();
-			boolean show = plugin.SHOW_GRID.get();
+			boolean show = settings.SHOW_COORDINATES_GRID.get();
 			boolean useUTM = plugin.SHOW_UTM_GRID.get();
 			boolean useMercator = plugin.SHOW_MERCATOR_GRID.get();
 			boolean useDMS = plugin.SHOW_DMS_GRID.get();

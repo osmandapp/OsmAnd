@@ -145,8 +145,8 @@ public class WidthCardController extends BaseMultiStateCardController {
 			widthComponentController = new WidthComponentController(widthMode, customValue, this::widthValueSelected) {
 				@NonNull
 				@Override
-				public Limits getSliderLimits() {
-					return new Limits(CUSTOM_WIDTH_MIN, CUSTOM_WIDTH_MAX);
+				public Limits<Integer> getSliderLimits() {
+					return new Limits<>(CUSTOM_WIDTH_MIN, CUSTOM_WIDTH_MAX);
 				}
 			};
 		}
