@@ -27,16 +27,18 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 				ShowConfigureMapDashboardAndHighlightSetting
 						.from(mapActivity)
 						.showConfigureMapDashboardAndHighlightSetting(asSetting(setting2Highlight));
-			} else if (settingsFragment instanceof final DetailsBottomSheet detailsBottomSheet) {
+				return;
+			}
+			if (settingsFragment instanceof final DetailsBottomSheet detailsBottomSheet) {
 				IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
 				detailsBottomSheet.showNow(mapActivity.getSupportFragmentManager());
 				detailsBottomSheet
 						.getSettingHighlighter()
 						.highlightSetting(detailsBottomSheet, asSetting(setting2Highlight));
+				return;
 			}
-		} else {
-			delegate.showSettingsFragmentAndHighlightSetting(activity, settingsFragment, setting2Highlight);
 		}
+		delegate.showSettingsFragmentAndHighlightSetting(activity, settingsFragment, setting2Highlight);
 	}
 
 	private static Setting asSetting(final SearchablePreference preference) {
