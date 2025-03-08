@@ -1,3 +1,3 @@
 package net.osmand.plus.base.containers;
 
-public record Limits(float min, float max) { }
+public record Limits<T extends Number>(T min, T max) { }

@@ -16,9 +16,9 @@ import java.util.List;
 
 public class VehicleAlgorithms {
 
-	public static Limits convertWeightLimitsByMetricSystem(@NonNull Limits limits,
-	                                                       @NonNull WeightMetric weightMetricSystem,
-	                                                       boolean useKilogramsInsteadOfTons) {
+	public static Limits<Float> convertWeightLimitsByMetricSystem(@NonNull Limits<Float> limits,
+	                                                              @NonNull WeightMetric weightMetricSystem,
+	                                                              boolean useKilogramsInsteadOfTons) {
 		if (weightMetricSystem != WeightMetric.TONES || useKilogramsInsteadOfTons) {
 			float min = limits.min();
 			float max = limits.max();
@@ -28,14 +28,14 @@ public class VehicleAlgorithms {
 			// Round min / max
 			min = roundToSecondSignificantDigit(min, true);
 			max = roundToSecondSignificantDigit(max, false);
-			limits = new Limits(min, max);
+			limits = new Limits<>(min, max);
 		}
 		return limits;
 	}
 
-	public static Limits convertLengthLimitsByMetricSystem(@NonNull Limits limits,
-	                                                       @NonNull MetricsConstants lengthMetricSystem,
-	                                                       boolean useInchesInsteadOfFeet, boolean useInchesInsteadOfYards) {
+	public static Limits<Float> convertLengthLimitsByMetricSystem(@NonNull Limits<Float> limits,
+	                                                              @NonNull MetricsConstants lengthMetricSystem,
+	                                                              boolean useInchesInsteadOfFeet, boolean useInchesInsteadOfYards) {
 		if (lengthMetricSystem != MetricsConstants.KILOMETERS_AND_METERS) {
 			float min = limits.min();
 			float max = limits.max();
@@ -45,12 +45,12 @@ public class VehicleAlgorithms {
 			// Round min / max
 			min = roundToSecondSignificantDigit(min, true);
 			max = roundToSecondSignificantDigit(max, false);
-			limits = new Limits(min, max);
+			limits = new Limits<>(min, max);
 		}
 		return limits;
 	}
 
-	public static List<Float> collectProposedValues(@NonNull Limits limits, int upscale,
+	public static List<Float> collectProposedValues(@NonNull Limits<Float> limits, int upscale,
 	                                                int minValuesCount) {
 		int multiplier = (int) Math.pow(10, upscale);
 		int scaledMin = (int) (limits.min() * multiplier);

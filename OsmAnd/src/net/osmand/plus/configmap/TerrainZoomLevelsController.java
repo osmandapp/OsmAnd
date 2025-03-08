@@ -53,13 +53,13 @@ public class TerrainZoomLevelsController extends ZoomLevelsController {
 	}
 
 	@NonNull
-	private static Limits createInitialLimits(@NonNull SRTMPlugin plugin) {
-		return new Limits(plugin.getTerrainMinZoom(), plugin.getTerrainMaxZoom());
+	private static Limits<Integer> createInitialLimits(@NonNull SRTMPlugin plugin) {
+		return new Limits<>(plugin.getTerrainMinZoom(), plugin.getTerrainMaxZoom());
 	}
 
 	@NonNull
-	private static Limits createSupportedLimits() {
-		return new Limits(SRTMPlugin.TERRAIN_MIN_SUPPORTED_ZOOM, SRTMPlugin.TERRAIN_MAX_SUPPORTED_ZOOM);
+	private static Limits<Integer> createSupportedLimits() {
+		return new Limits<>(SRTMPlugin.TERRAIN_MIN_SUPPORTED_ZOOM, SRTMPlugin.TERRAIN_MAX_SUPPORTED_ZOOM);
 	}
 
 	private static int index = 0;

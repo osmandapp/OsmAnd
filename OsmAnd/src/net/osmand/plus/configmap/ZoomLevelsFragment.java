@@ -14,6 +14,7 @@ import com.google.android.material.slider.RangeSlider;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -62,9 +63,12 @@ public class ZoomLevelsFragment extends ConfigureMapOptionFragment {
 	}
 
 	private void setupSlider() {
-		slider.setValueFrom(controller.getSupportedLimits().min());
-		slider.setValueTo(controller.getSupportedLimits().max());
-		slider.setValues(controller.getSelectedLimits().min(), controller.getSelectedLimits().max());
+		Limits<Integer> supportedLimits = controller.getSupportedLimits();
+		Limits<Integer> selectedLimits = controller.getSelectedLimits();
+		slider.setValueFrom(supportedLimits.min());
+		slider.setValueTo(supportedLimits.max());
+		slider.setValues((float) selectedLimits.min(), (float) selectedLimits.max());
+
 		int profileColor = settings.getApplicationMode().getProfileColor(nightMode);
 		UiUtilities.setupSlider(slider, nightMode, profileColor, true);
 		updateLabels();
@@ -81,8 +85,9 @@ public class ZoomLevelsFragment extends ConfigureMapOptionFragment {
 	}
 
 	private void updateLabels() {
-		minText.setText(getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_min), String.valueOf(controller.getSelectedLimits().min())));
-		maxText.setText(getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_max), String.valueOf(controller.getSelectedLimits().max())));
+		Limits<Integer> selectedLimits = controller.getSelectedLimits();
+		minText.setText(getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_min), String.valueOf(selectedLimits.min())));
+		maxText.setText(getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_max), String.valueOf(selectedLimits.max())));
 	}
 
 	@Override

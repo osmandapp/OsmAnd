@@ -60,9 +60,9 @@ public class GridZoomLevelsController extends ZoomLevelsController {
 	}
 
 	@NonNull
-	private static Limits createInitialLimits(@NonNull OsmandApplication app) {
+	private static Limits<Integer> createInitialLimits(@NonNull OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
-		return new Limits(settings.COORDINATE_GRID_MIN_ZOOM.get(), settings.COORDINATE_GRID_MAX_ZOOM.get());
+		return new Limits<>(settings.COORDINATE_GRID_MIN_ZOOM.get(), settings.COORDINATE_GRID_MAX_ZOOM.get());
 	}
 
 	public static void showDialog(@NonNull FragmentActivity activity) {

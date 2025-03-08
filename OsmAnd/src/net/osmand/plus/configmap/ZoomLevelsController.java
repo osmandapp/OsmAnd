@@ -13,21 +13,21 @@ public abstract class ZoomLevelsController extends BaseDialogController {
 
 	private static final String PROCESS_ID = "select_zoom_levels";
 
-	protected Limits selectedLimits;
-	protected final Limits initialLimits;
-	protected final Limits supportedLimits;
+	protected Limits<Integer> selectedLimits;
+	protected final Limits<Integer> initialLimits;
+	protected final Limits<Integer> supportedLimits;
 
 	public ZoomLevelsController(@NonNull OsmandApplication app,
-	                            @NonNull Limits initialLimits) {
+	                            @NonNull Limits<Integer> initialLimits) {
 		this(app, initialLimits, initialLimits);
 	}
 
 	public ZoomLevelsController(@NonNull OsmandApplication app,
-	                            @NonNull Limits initialLimits,
-	                            @NonNull Limits supportedLimits) {
+	                            @NonNull Limits<Integer> initialLimits,
+	                            @NonNull Limits<Integer> supportedLimits) {
 		super(app);
 		this.initialLimits = initialLimits;
-		this.selectedLimits = new Limits(initialLimits.min(), initialLimits.max());
+		this.selectedLimits = new Limits<>(initialLimits.min(), initialLimits.max());
 		this.supportedLimits = supportedLimits;
 	}
 
@@ -54,19 +54,19 @@ public abstract class ZoomLevelsController extends BaseDialogController {
 	}
 
 	@NonNull
-	public Limits getSupportedLimits() {
+	public Limits<Integer> getSupportedLimits() {
 		return supportedLimits;
 	}
 
 	@NonNull
-	public Limits getSelectedLimits() {
+	public Limits<Integer> getSelectedLimits() {
 		return selectedLimits;
 	}
 
 	public void setSelectedLimits(float min, float max) {
-		float clampedMin = Math.max(supportedLimits.min(), Math.min(supportedLimits.max(), min));
-		float clampedMax = Math.max(supportedLimits.min(), Math.min(supportedLimits.max(), max));
-		selectedLimits = new Limits(clampedMin, clampedMax);
+		int clampedMin = (int) Math.max(supportedLimits.min(), Math.min(supportedLimits.max(), min));
+		int clampedMax = (int) Math.max(supportedLimits.min(), Math.min(supportedLimits.max(), max));
+		selectedLimits = new Limits<>(clampedMin, clampedMax);
 	}
 
 	@Nullable

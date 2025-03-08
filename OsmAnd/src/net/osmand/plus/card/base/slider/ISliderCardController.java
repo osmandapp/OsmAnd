@@ -13,8 +13,8 @@ public interface ISliderCardController {
 	void bindComponent(@NonNull ISliderCard cardInstance);
 
 	@NonNull
-	default Limits getSliderLimits() {
-		return new Limits(0, 100);
+	default Limits<Integer> getSliderLimits() {
+		return new Limits<>(0, 100);
 	}
 
 	@ColorInt
