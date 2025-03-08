@@ -1,6 +1,6 @@
 package net.osmand.plus.settings.fragments.search;
 
-import android.view.View;
+import static net.osmand.plus.settings.fragments.search.YOffsetOfChildWithinContainerProvider.getYOffsetOfChildWithinContainer;
 
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapFragment;
@@ -47,13 +47,6 @@ class ShowConfigureMapDashboardAndHighlightSetting {
 				getYOffsetOfChildWithinContainer(
 						configureMapFragment.getView(setting),
 						dashboardOnMap.getMainScrollView()));
-	}
-
-	// FK-TODO: create class having field container
-	private static int getYOffsetOfChildWithinContainer(final View child, final View container) {
-		return child == container ?
-				0 :
-				child.getTop() + getYOffsetOfChildWithinContainer((View) child.getParent(), container);
 	}
 
 	private void showDialog(final Setting setting) {

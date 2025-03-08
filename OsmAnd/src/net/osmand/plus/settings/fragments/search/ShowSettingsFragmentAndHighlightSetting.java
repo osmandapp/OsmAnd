@@ -17,11 +17,13 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 	private final de.KnollFrank.lib.settingssearch.results.ShowSettingsFragmentAndHighlightSetting delegate;
 
 	public ShowSettingsFragmentAndHighlightSetting(final @IdRes int fragmentContainerViewId) {
-		this.delegate = new DefaultShowSettingsFragmentAndHighlightSetting(fragmentContainerViewId);
+		delegate = new DefaultShowSettingsFragmentAndHighlightSetting(fragmentContainerViewId);
 	}
 
 	@Override
-	public void showSettingsFragmentAndHighlightSetting(final FragmentActivity activity, final Fragment settingsFragment, final SearchablePreference setting2Highlight) {
+	public void showSettingsFragmentAndHighlightSetting(final FragmentActivity activity,
+														final Fragment settingsFragment,
+														final SearchablePreference setting2Highlight) {
 		if (activity instanceof final MapActivity mapActivity) {
 			if (settingsFragment instanceof ConfigureMapFragment) {
 				ShowConfigureMapDashboardAndHighlightSetting
