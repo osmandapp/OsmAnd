@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTwoChoicesButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.configmap.ConfigureMapUtils;
+import net.osmand.plus.configmap.ItemOfLinearLayoutHighlighter2;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
@@ -37,13 +39,19 @@ import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.threeten.bp.Duration;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
+import de.KnollFrank.lib.settingssearch.common.IndexSearchResultConverter;
+import de.KnollFrank.lib.settingssearch.results.PositionOfSettingProvider;
+import de.KnollFrank.lib.settingssearch.results.Setting;
+import de.KnollFrank.lib.settingssearch.results.SettingHighlighter;
+import de.KnollFrank.lib.settingssearch.results.SettingHighlighterProvider;
 
-public class DetailsBottomSheet extends BasePreferenceBottomSheet {
+public class DetailsBottomSheet extends BasePreferenceBottomSheet implements SettingHighlighterProvider, PositionOfSettingProvider {
 
 	public static final String TAG = DetailsBottomSheet.class.getName();
 	public static final String STREET_LIGHTING = "streetLighting";
@@ -76,6 +84,12 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 	public void show(final FragmentManager fragmentManager) {
 		if (!fragmentManager.isStateSaved()) {
 			show(fragmentManager, TAG);
+		}
+	}
+
+	public void showNow(final FragmentManager fragmentManager) {
+		if (!fragmentManager.isStateSaved()) {
+			showNow(fragmentManager, TAG);
 		}
 	}
 
@@ -153,6 +167,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 								item[0].setIsLeftBtnSelected(true);
 								setupHeightAndBackground(getView());
 							})
+							.setTag(property.getAttrName())
 							.create();
 					items.add(item[0]);
 				} else if (!STREET_LIGHTING_NIGHT.equals(property.getAttrName())) {
@@ -168,6 +183,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 								pref.set(checked);
 								item[0].setChecked(checked);
 							})
+							.setTag(property.getAttrName())
 							.create();
 					items.add(item[0]);
 				}
@@ -243,6 +259,22 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 
 	public void setMenuItem(ContextMenuItem item) {
 		this.item = item;
+	}
+
+	@Override
+	public SettingHighlighter getSettingHighlighter() {
+		return new ItemOfLinearLayoutHighlighter2(
+				itemsContainer,
+				this,
+				Duration.ofSeconds(1));
+	}
+
+	@Override
+	public OptionalInt getPositionOfSetting(final Setting setting) {
+		return Optional
+				.<View>ofNullable(itemsContainer.findViewWithTag(setting.getKey()))
+				.map(view -> IndexSearchResultConverter.minusOne2Empty(itemsContainer.indexOfChild(view)))
+				.orElse(OptionalInt.empty());
 	}
 
 	public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<DetailsBottomSheet> {

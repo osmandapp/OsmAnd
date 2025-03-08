@@ -55,6 +55,7 @@ class ShowConfigureMapDashboardAndHighlightSetting {
 				.orElseThrow();
 	}
 
+	// FK-TODO: create class having field container
 	private static int getYOffsetOfChildWithinContainer(final View child, final View container) {
 		return child == container ?
 				0 :

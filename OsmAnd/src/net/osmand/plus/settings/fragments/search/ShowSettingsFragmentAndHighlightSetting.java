@@ -24,11 +24,15 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 	public void showSettingsFragmentAndHighlightSetting(final FragmentActivity activity, final Fragment settingsFragment, final SearchablePreference setting2Highlight) {
 		if (activity instanceof final MapActivity mapActivity) {
 			if (settingsFragment instanceof ConfigureMapFragment) {
-				ShowConfigureMapDashboardAndHighlightSetting.from(mapActivity).showConfigureMapDashboardAndHighlightSetting(asSetting(setting2Highlight));
+				ShowConfigureMapDashboardAndHighlightSetting
+						.from(mapActivity)
+						.showConfigureMapDashboardAndHighlightSetting(asSetting(setting2Highlight));
 			} else if (settingsFragment instanceof final DetailsBottomSheet detailsBottomSheet) {
 				IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
-				detailsBottomSheet.show(mapActivity.getSupportFragmentManager());
-				// FK-TODO: highlightSetting()
+				detailsBottomSheet.showNow(mapActivity.getSupportFragmentManager());
+				detailsBottomSheet
+						.getSettingHighlighter()
+						.highlightSetting(detailsBottomSheet, asSetting(setting2Highlight));
 			}
 		} else {
 			delegate.showSettingsFragmentAndHighlightSetting(activity, settingsFragment, setting2Highlight);
