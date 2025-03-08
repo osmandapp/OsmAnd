@@ -959,6 +959,21 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
+						{
+								"shouldSearchAndFind_ConfigureScreenFragment_ConfigureMap_DetailsBottomSheet_WaterWayTunnels",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return "Waterway tunnels";
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
 				});
 	}
 
