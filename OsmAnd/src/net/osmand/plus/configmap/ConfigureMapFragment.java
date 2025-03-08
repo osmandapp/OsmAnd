@@ -163,7 +163,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	private void updateItemsData() {
 		ConfigureMapMenu menu = new ConfigureMapMenu(app);
 		adapter = menu.createListAdapter(mapActivity);
-		propertiesOfDetailsBottomSheet = menu.propertiesOfDetailsBottomSheet;
+		propertiesOfDetailsBottomSheet = menu.getPropertiesOfDetailsBottomSheet().orElseThrow();
 		ContextMenuUtils.removeHiddenItems(adapter);
 		ContextMenuUtils.hideExtraDividers(adapter);
 		items = ContextMenuUtils.collectItemsByCategories(adapter.getItems());

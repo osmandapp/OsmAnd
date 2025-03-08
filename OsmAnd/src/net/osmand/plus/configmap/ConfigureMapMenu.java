@@ -69,10 +69,7 @@ import org.apache.commons.logging.Log;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 public class ConfigureMapMenu {
 
@@ -88,8 +85,11 @@ public class ConfigureMapMenu {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
-	// FK-TODO: make Optional<> and provide public getter method
-	public List<RenderingRuleProperty> propertiesOfDetailsBottomSheet;
+	private Optional<List<RenderingRuleProperty>> propertiesOfDetailsBottomSheet = Optional.empty();
+
+	public Optional<List<RenderingRuleProperty>> getPropertiesOfDetailsBottomSheet() {
+		return propertiesOfDetailsBottomSheet;
+	}
 
 	public ConfigureMapMenu(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -597,7 +597,7 @@ public class ConfigureMapMenu {
 			}
 		}
 		if (UI_CATEGORY_DETAILS.equals(category)) {
-			propertiesOfDetailsBottomSheet = properties;
+			propertiesOfDetailsBottomSheet = Optional.of(properties);
 		}
 		if (!preferences.isEmpty()) {
 			ItemClickListener clickListener = (uiAdapter, view, item, isChecked) -> {
