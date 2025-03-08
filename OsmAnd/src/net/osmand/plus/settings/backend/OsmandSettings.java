@@ -3327,10 +3327,10 @@ public class OsmandSettings {
 			new BooleanPreference(this, "show_coordinates_grid", false).makeProfile();
 
 	public final CommonPreference<Integer> COORDINATE_GRID_MIN_ZOOM =
-			new IntPreference(this, "coordinate_grid_min_zoom", GridZoomLevelsController.MIN_LIMIT).makeProfile();
+			new IntPreference(this, "coordinate_grid_min_zoom", GridZoomLevelsController.MIN_ZOOM).makeProfile();
 
 	public final CommonPreference<Integer> COORDINATE_GRID_MAX_ZOOM =
-			new IntPreference(this, "coordinate_grid_max_zoom", GridZoomLevelsController.MAX_LIMIT).makeProfile();
+			new IntPreference(this, "coordinate_grid_max_zoom", GridZoomLevelsController.MAX_ZOOM).makeProfile();
 
 	public Set<String> getCustomAppModesKeys() {
 		String appModesKeys = CUSTOM_APP_MODES_KEYS.get();

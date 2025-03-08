@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.base.dialog.BaseDialogController;
@@ -13,9 +14,9 @@ public abstract class ZoomLevelsController extends BaseDialogController {
 
 	private static final String PROCESS_ID = "select_zoom_levels";
 
-	protected Limits<Integer> selectedLimits;
-	protected final Limits<Integer> initialLimits;
 	protected final Limits<Integer> supportedLimits;
+	protected final Limits<Integer> initialLimits;
+	protected Limits<Integer> selectedLimits;
 
 	public ZoomLevelsController(@NonNull OsmandApplication app,
 	                            @NonNull Limits<Integer> initialLimits) {
@@ -27,8 +28,8 @@ public abstract class ZoomLevelsController extends BaseDialogController {
 	                            @NonNull Limits<Integer> supportedLimits) {
 		super(app);
 		this.initialLimits = initialLimits;
-		this.selectedLimits = new Limits<>(initialLimits.min(), initialLimits.max());
 		this.supportedLimits = supportedLimits;
+		this.selectedLimits = new Limits<>(initialLimits.min(), initialLimits.max());
 	}
 
 	@NonNull
@@ -37,13 +38,17 @@ public abstract class ZoomLevelsController extends BaseDialogController {
 		return PROCESS_ID;
 	}
 
-	public abstract void onBackPressed(@NonNull MapActivity mapActivity);
+	public abstract void onCloseScreen(@NonNull MapActivity activity);
 
 	@NonNull
-	public abstract String getDialogTitle();
+	public String getDialogTitle() {
+		return getString(R.string.shared_string_zoom_levels);
+	}
 
 	@NonNull
-	public abstract String getDialogSummary();
+	public String getDialogSummary() {
+		return app.getString(R.string.terrain_slider_description);
+	}
 
 	public abstract void onApplyChanges();
 

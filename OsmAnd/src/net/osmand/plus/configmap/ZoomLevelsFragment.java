@@ -36,7 +36,7 @@ public class ZoomLevelsFragment extends ConfigureMapOptionFragment {
 			activity.getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 				@Override
 				public void handleOnBackPressed() {
-					controller.onBackPressed(activity);
+					controller.onCloseScreen(activity);
 				}
 			});
 		} else {
@@ -52,8 +52,7 @@ public class ZoomLevelsFragment extends ConfigureMapOptionFragment {
 
 	@Override
 	protected void setupMainContent(@NonNull ViewGroup container) {
-		View view = themedInflater.inflate(R.layout.zoom_levels_fragment, container, false);
-
+		View view = inflate(R.layout.zoom_levels_fragment, container);
 		slider = view.findViewById(R.id.zoom_slider);
 		minText = view.findViewById(R.id.zoom_value_min);
 		maxText = view.findViewById(R.id.zoom_value_max);
@@ -68,20 +67,20 @@ public class ZoomLevelsFragment extends ConfigureMapOptionFragment {
 		slider.setValueFrom(supportedLimits.min());
 		slider.setValueTo(supportedLimits.max());
 		slider.setValues((float) selectedLimits.min(), (float) selectedLimits.max());
-
-		int profileColor = settings.getApplicationMode().getProfileColor(nightMode);
-		UiUtilities.setupSlider(slider, nightMode, profileColor, true);
 		updateLabels();
 
 		slider.addOnChangeListener((slider, value, fromUser) -> {
 			List<Float> values = slider.getValues();
 			if (values.size() > 1) {
 				controller.setSelectedLimits(values.get(0), values.get(1));
-				updateLabels();
 				updateApplyButton(controller.hasChanges());
+				updateLabels();
 				refreshMap();
 			}
 		});
+
+		int profileColor = settings.getApplicationMode().getProfileColor(nightMode);
+		UiUtilities.setupSlider(slider, nightMode, profileColor, true);
 	}
 
 	private void updateLabels() {

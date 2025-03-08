@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.base.dialog.DialogManager;
@@ -16,8 +15,8 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 
 public class GridZoomLevelsController extends ZoomLevelsController {
 
-	public static final int MIN_LIMIT = 4;
-	public static final int MAX_LIMIT = 19;
+	public static final int MIN_ZOOM = 4;
+	public static final int MAX_ZOOM = 19;
 
 	private final CommonPreference<Integer> minZoomPreference;
 	private final CommonPreference<Integer> maxZoomPreference;
@@ -30,27 +29,15 @@ public class GridZoomLevelsController extends ZoomLevelsController {
 	}
 
 	@Override
-	public void onBackPressed(@NonNull MapActivity mapActivity) {
-		mapActivity.getSupportFragmentManager().popBackStack();
-		mapActivity.getDashboard().setDashboardVisibility(true, COORDINATE_GRID, false);
-	}
-
-	@Override
-	@NonNull
-	public String getDialogTitle() {
-		return getString(R.string.shared_string_zoom_levels);
-	}
-
-	@NonNull
-	@Override
-	public String getDialogSummary() {
-		return getString(R.string.terrain_slider_description);
+	public void onCloseScreen(@NonNull MapActivity activity) {
+		activity.getSupportFragmentManager().popBackStack();
+		activity.getDashboard().setDashboardVisibility(true, COORDINATE_GRID, false);
 	}
 
 	@Override
 	public void onApplyChanges() {
-		minZoomPreference.set((int) selectedLimits.min());
-		maxZoomPreference.set((int) selectedLimits.max());
+		minZoomPreference.set(selectedLimits.min());
+		maxZoomPreference.set(selectedLimits.max());
 	}
 
 	@Override
