@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_fuel_type">Seòrsa chonnaidh</string>
+    <string name="poi_netball">Ball-lìn</string>
+    <string name="poi_museum_transport">Còmhdhail</string>
+    <string name="poi_fuel_lpg">LPG</string>
+    <string name="poi_migration">Imrich</string>
 </resources>

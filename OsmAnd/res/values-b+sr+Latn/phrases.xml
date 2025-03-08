@@ -4739,7 +4739,7 @@
     <string name="poi_healthcare_speciality_physical_therapy">Fizikalna terapija</string>
     <string name="poi_healthcare_speciality_microbiology">Mikrobiologija</string>
     <string name="poi_us_maps_recreation_area_activity_beachcombing">Pretraživanje plaže</string>
-    <string name="poi_us_maps_recreation_area_activity_bicycling">Biciklizam</string>
+    <string name="poi_us_maps_recreation_area_activity_bicycling">Duo-biciklizam</string>
     <string name="poi_us_maps_recreation_area_activity_boating_non_motorized">Čamac bez motora</string>
     <string name="poi_healthcare_speciality_cardiac_surgery">Operacija srca</string>
     <string name="poi_healthcare_speciality_allergology">Alergologija</string>
@@ -4979,4 +4979,14 @@
     <string name="poi_piste_type">Tip staze</string>
     <string name="poi_piste_oneway">Staza je jednosmerna</string>
     <string name="poi_lit">Osvetljenje</string>
+    <string name="poi_network_cycling">Biciklizam</string>
+    <string name="poi_network_nwn">Nacionalna pešačka ruta</string>
+    <string name="poi_network_lwn">Lokalna pešačka ruta</string>
+    <string name="poi_network_icn">Međunarodna biciklistička ruta</string>
+    <string name="poi_network_ncn">Nacionalna biciklistička ruta</string>
+    <string name="poi_network_rcn">Regionalna biciklistička ruta</string>
+    <string name="poi_network_rwn">Regionalna pešačka ruta</string>
+    <string name="poi_network_foot">Mreža</string>
+    <string name="poi_network_iwn">Međunarodna pešačka ruta</string>
+    <string name="poi_network_lcn">Lokalna biciklistička ruta</string>
 </resources>

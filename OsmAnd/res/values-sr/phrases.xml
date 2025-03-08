@@ -4740,7 +4740,7 @@
     <string name="poi_state_detour">Стање: обилазно</string>
     <string name="poi_us_maps_recreation_area_activity_backpacking">Пешачење са ранцем</string>
     <string name="poi_us_maps_recreation_area_activity_beachcombing">Прочешљање плаже</string>
-    <string name="poi_us_maps_recreation_area_activity_bicycling">Бициклизам</string>
+    <string name="poi_us_maps_recreation_area_activity_bicycling">Дуо-бициклизам</string>
     <string name="poi_us_maps_recreation_area_activity_big_game_hunting">Лов на крупно</string>
     <string name="poi_us_maps_recreation_area_activity_boating_motorized">Моторизована вожња чамцем</string>
     <string name="poi_us_maps_recreation_area_activity_boating_non_motorized">Немоторизована вожња чамцем</string>
@@ -4979,4 +4979,17 @@
     <string name="poi_atv_no">АТВ: не</string>
     <string name="poi_access_notes">Приступ белешкама</string>
     <string name="poi_contact_website">Веб сајт</string>
+    <string name="poi_piste_type">Тип писте</string>
+    <string name="poi_lit">Осветљење</string>
+    <string name="poi_piste_oneway">Једносмерна писта</string>
+    <string name="poi_network_lwn">Локална пешачка рута</string>
+    <string name="poi_network_icn">Међународна бициклистичка рута</string>
+    <string name="poi_network_ncn">Национална бициклистичка рута</string>
+    <string name="poi_network_lcn">Локална бициклистичка рута</string>
+    <string name="poi_network_iwn">Међународна пешачка рута</string>
+    <string name="poi_network_cycling">Бициклизам</string>
+    <string name="poi_network_rwn">Регионална пешачка рута</string>
+    <string name="poi_network_rcn">Регионална бициклистичка рута</string>
+    <string name="poi_network_nwn">Национална пешачка рута</string>
+    <string name="poi_network_foot">Мрежа</string>
 </resources>

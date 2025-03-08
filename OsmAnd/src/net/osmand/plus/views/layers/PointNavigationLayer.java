@@ -26,6 +26,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.base.containers.ShiftedBitmap;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPoint;
 import net.osmand.plus.utils.NativeUtilities;
@@ -104,9 +105,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		updateBitmaps(false);
 		if (getMapView().hasMapRenderer()) {
 			Object movableObject = contextMenuLayer.getMoveableObject();
-			if (movableObject instanceof TargetPoint) {
+			if (movableObject instanceof TargetPoint targetPoint) {
 				//draw movable object on canvas
-				TargetPoint targetPoint = (TargetPoint) movableObject;
 				if (targetPoints.getPointToStart() == targetPoint) {
 					drawStartPoint(canvas, tb, targetPoint);
 				} else if (targetPoints.getPointToNavigate() == targetPoint) {
@@ -333,9 +333,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	                                   @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback) {
 		boolean result = false;
 		TargetPoint newTargetPoint = null;
-		if (o instanceof TargetPoint) {
+		if (o instanceof TargetPoint oldPoint) {
 			TargetPointsHelper targetPointsHelper = getApplication().getTargetPointsHelper();
-			TargetPoint oldPoint = (TargetPoint) o;
 			if (oldPoint.start) {
 				targetPointsHelper.setStartPoint(position, true, null);
 				newTargetPoint = targetPointsHelper.getPointToStart();
@@ -401,35 +400,62 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		captionStyle.setColor(NativeUtilities.createColorARGB(captionColor));
 	}
 
-	private void drawStartPoint(Canvas canvas, RotatedTileBox tb, TargetPoint pointToStart) {
-		int marginX = mStartPoint.getWidth() / 6;
-		int marginY = mStartPoint.getHeight();
-		float locationX = getPointX(tb, pointToStart);
-		float locationY = getPointY(tb, pointToStart);
-		canvas.rotate(-tb.getRotate(), locationX, locationY);
-		canvas.drawBitmap(mStartPoint, locationX - marginX, locationY - marginY, mBitmapPaint);
-		canvas.rotate(tb.getRotate(), locationX, locationY);
+	private void drawStartPoint(@NonNull Canvas canvas, @NonNull RotatedTileBox tb,
+	                            @NonNull TargetPoint pointToStart) {
+		drawPointImpl(canvas, tb, pointToStart, getStartPointIcon(), null);
 	}
 
-	private void drawIntermediatePoint(Canvas canvas, RotatedTileBox tb, TargetPoint ip, int index) {
-		float marginX = mIntermediatePoint.getWidth() / 6f;
-		float marginY = mIntermediatePoint.getHeight();
-		float locationX = getPointX(tb, ip);
-		float locationY = getPointY(tb, ip);
-		canvas.rotate(-tb.getRotate(), locationX, locationY);
-		canvas.drawBitmap(mIntermediatePoint, locationX - marginX, locationY - marginY, mBitmapPaint);
-		marginX = mIntermediatePoint.getWidth() / 3f;
-		canvas.drawText(index + "", locationX + marginX, locationY - 3 * marginY / 5f, mTextPaint);
-		canvas.rotate(tb.getRotate(), locationX, locationY);
+	private void drawIntermediatePoint(@NonNull Canvas canvas, @NonNull RotatedTileBox tb,
+	                                   @NonNull TargetPoint ip, int index) {
+		drawPointImpl(canvas, tb, ip, getIntermediatePointIcon(), index + "");
 	}
 
-	private void drawPointToNavigate(Canvas canvas, RotatedTileBox tb, TargetPoint pointToNavigate) {
-		int marginX = mTargetPoint.getWidth() / 6;
-		int marginY = mTargetPoint.getHeight();
-		float locationX = getPointX(tb, pointToNavigate);
-		float locationY = getPointY(tb, pointToNavigate);
-		canvas.rotate(-tb.getRotate(), locationX, locationY);
-		canvas.drawBitmap(mTargetPoint, locationX - marginX, locationY - marginY, mBitmapPaint);
-		canvas.rotate(tb.getRotate(), locationX, locationY);
+	private void drawPointToNavigate(@NonNull Canvas canvas, @NonNull RotatedTileBox tb,
+	                                 @NonNull TargetPoint pointToNavigate) {
+		drawPointImpl(canvas, tb, pointToNavigate, getPointToNavigateIcon(), null);
+	}
+
+	@NonNull
+	public ShiftedBitmap getStartPointIcon() {
+		return getShiftedBitmap(mStartPoint);
+	}
+
+	@NonNull
+	public ShiftedBitmap getIntermediatePointIcon() {
+		return getShiftedBitmap(mIntermediatePoint);
+	}
+
+	@NonNull
+	public ShiftedBitmap getPointToNavigateIcon() {
+		return getShiftedBitmap(mTargetPoint);
+	}
+
+	@NonNull
+	private ShiftedBitmap getShiftedBitmap(@NonNull Bitmap bitmap) {
+		return new ShiftedBitmap(bitmap, bitmap.getWidth() / 6f, bitmap.getHeight());
+	}
+
+	private void drawPointImpl(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
+	                           @NonNull TargetPoint point, @NonNull ShiftedBitmap shiftedBitmap,
+	                           @Nullable String label) {
+		float locationX = getPointX(tileBox, point);
+		float locationY = getPointY(tileBox, point);
+
+		float marginX = shiftedBitmap.getMarginX();
+		float marginY = shiftedBitmap.getMarginY();
+
+		float x = locationX - marginX;
+		float y = locationY - marginY;
+
+		Bitmap bitmap = shiftedBitmap.getBitmap();
+		canvas.rotate(-tileBox.getRotate(), locationX, locationY);
+		canvas.drawBitmap(bitmap, x, y, mBitmapPaint);
+
+		if (label != null) {
+			marginX = bitmap.getWidth() / 3f;
+			canvas.drawText(label, locationX + marginX, locationY - 3 * marginY / 5f, mTextPaint);
+		}
+
+		canvas.rotate(tileBox.getRotate(), locationX, locationY);
 	}
 }

@@ -38,7 +38,7 @@ public class NavRemoveNextDestination extends QuickAction {
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
 		TargetPointsHelper targetsHelper = mapActivity.getMyApplication().getTargetPointsHelper();
-		if (targetsHelper.getIntermediatePoints().size() > 0) {
+		if (!targetsHelper.getIntermediatePoints().isEmpty()) {
 			targetsHelper.removeWayPoint(true, 0);
 		} else {
 			DestinationReachedFragment.show(mapActivity);

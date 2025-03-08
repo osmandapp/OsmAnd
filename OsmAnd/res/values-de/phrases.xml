@@ -4975,4 +4975,15 @@
     <string name="poi_atv_yes">ATV: ja</string>
     <string name="poi_atv_no">ATV: nein</string>
     <string name="poi_contact_website">Webseite</string>
+    <string name="poi_network_foot">Netzwerk</string>
+    <string name="poi_network_cycling">Radfahren</string>
+    <string name="poi_network_nwn">Nationaler Wanderweg</string>
+    <string name="poi_network_icn">Internationale Fahrradroute</string>
+    <string name="poi_network_ncn">Nationale Fahrradroute</string>
+    <string name="poi_network_lcn">Lokale Fahrradroute</string>
+    <string name="poi_network_rwn">Regionaler Wanderweg</string>
+    <string name="poi_network_iwn">Internationaler Wanderweg</string>
+    <string name="poi_network_lwn">Lokaler Wanderweg</string>
+    <string name="poi_network_rcn">Regionale Fahrradroute</string>
+    <string name="poi_lit">Beleuchtung</string>
 </resources>

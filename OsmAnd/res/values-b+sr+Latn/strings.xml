@@ -5703,4 +5703,9 @@
     <string name="show_dm_grids">Koristi DM umesto stepeni ili DMS</string>
     <string name="show_list">Prikaži listu</string>
     <string name="popular_places">Popularna mesta</string>
+    <string name="choose_location">Izaberite lokaciju</string>
+    <string name="point_location">Tačka lokacije</string>
+    <string name="shared_string_manual">Uputstvo</string>
+    <string name="shared_string_map_center">Centar mape</string>
+    <string name="choose_location_on_map">Izaberite lokaciju na mapi.</string>
 </resources>

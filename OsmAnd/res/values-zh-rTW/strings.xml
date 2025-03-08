@@ -5703,4 +5703,5 @@
     <string name="show_dm_grids">使用 DM 代替角度或 DMS</string>
     <string name="show_dm_grids_description">以度和分而不是度數或 DMS 顯示網格</string>
     <string name="show_list">顯示清單</string>
+    <string name="popular_places">熱門地點</string>
 </resources>

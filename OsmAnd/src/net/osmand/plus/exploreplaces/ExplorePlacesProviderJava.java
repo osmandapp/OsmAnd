@@ -34,18 +34,6 @@ import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
 
-// TODO use gzip in loading +
-// TODO errors shouldn'go with empty response "" into cache! +
-// TODO remove checks poi type subtype null +
-// TODO display all data downloaded even if maps are not loaded
-// TODO: why recreate provider when new points are loaded? that causes blinking
-// TODO: scheduleImageRefreshes in layer is incorrect it starts downloading all images and stops interacting
-// TODO images shouldn't be queried if they are not visible in all lists! size doesn't matter !
-// TODO show on map close button is not visible +
-// TODO layer sometimes becomes non-interactive - MAP FPS drops
-// TODO Context menu doesn't work correctly and duplicates actual POI +
-// TODO compass is not rotating +
-// Extra: display new categories from web
 public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 
 	public static final int DEFAULT_LIMIT_POINTS = 200;
@@ -56,6 +44,7 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 	private static final double LOAD_ALL_TINY_RECT = 0.5;
 
 	private final OsmandApplication app;
+	private final PlacesDatabaseHelper dbHelper;
 	private volatile int startedTasks = 0;
 	private volatile int finishedTasks = 0;
 
@@ -90,6 +79,7 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 
 	public ExplorePlacesProviderJava(OsmandApplication app) {
 		this.app = app;
+		dbHelper = new PlacesDatabaseHelper(app);
 	}
 
 	private List<ExplorePlacesListener> listeners = Collections.emptyList();
@@ -164,7 +154,7 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 				Math.abs(maxTileX - minTileX) <= LOAD_ALL_TINY_RECT || Math.abs(maxTileY - minTileY) <= LOAD_ALL_TINY_RECT;
 
 		// Fetch data for all tiles within the bounds
-		PlacesDatabaseHelper dbHelper = new PlacesDatabaseHelper(app);
+
 		List<ExploreTopPlacePoint> filteredPoints = new ArrayList<>();
 		Set<Long> uniqueIds = new HashSet<>(); // Use a Set to track unique IDs
 		final String queryLang = getLang();

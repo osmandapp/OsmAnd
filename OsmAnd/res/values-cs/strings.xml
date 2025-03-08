@@ -5716,4 +5716,10 @@
     <string name="show_dm_grids">Použít DM namísto stupňů nebo DMS</string>
     <string name="show_dm_grids_description">Zobrazit mřížku ve stupních a minutách namísto stupňů nebo DMS</string>
     <string name="show_list">Zobrazit seznam</string>
+    <string name="popular_places">Populární místa</string>
+    <string name="point_location">Bod z mapy</string>
+    <string name="shared_string_manual">Ručně</string>
+    <string name="shared_string_map_center">Střed mapy</string>
+    <string name="choose_location_on_map">Vyberte polohu na mapě.</string>
+    <string name="choose_location">Vybrat polohu</string>
 </resources>

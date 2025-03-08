@@ -27,6 +27,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
+import net.osmand.plus.views.layers.GPXLayer;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxUtilities;
@@ -60,7 +61,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 
-public class GPXAction extends QuickAction implements FileSelected {
+public class GPXAction extends SelectMapLocationAction implements FileSelected {
 
 	public static final QuickActionType TYPE = new QuickActionType(GPX_ACTION_ID, "gpx.add", GPXAction.class)
 			.nameRes(R.string.quick_action_track_waypoint)
@@ -102,21 +103,30 @@ public class GPXAction extends QuickAction implements FileSelected {
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
 		unselectGpxFileIfMissing();
+		super.execute(mapActivity);
+	}
 
+	@Override
+	protected void onLocationSelected(@NonNull MapActivity mapActivity, @NonNull LatLon latLon) {
 		if (!shouldUseSelectedGpxFile()) {
-			addWaypoint(null, mapActivity);
+			addWaypoint(null, mapActivity, latLon);
 		} else {
 			getGpxFile(getSelectedGpxFilePath(true), mapActivity, gpxFile -> {
-				addWaypoint(gpxFile, mapActivity);
+				addWaypoint(gpxFile, mapActivity, latLon);
 				return true;
 			});
 		}
 	}
 
-	private void addWaypoint(@Nullable GpxFile gpxFile, @NonNull MapActivity mapActivity) {
-		LatLon latLon = getMapLocation(mapActivity);
-		boolean usePredefinedWaypoint = Boolean.parseBoolean(getParams().get(KEY_USE_PREDEFINED_WPT_APPEARANCE));
-		if (usePredefinedWaypoint) {
+	@Override
+	@Nullable
+	protected Object getLocationIcon(@NonNull MapActivity mapActivity) {
+		GPXLayer layer = mapActivity.getMapLayers().getGpxLayer();
+		return layer.createWaypointIcon(getWaypointColor(), false, getIconName(), getBackgroundType());
+	}
+
+	private void addWaypoint(@Nullable GpxFile gpxFile, @NonNull MapActivity mapActivity, @NonNull LatLon latLon) {
+		if (shouldUsePredefinedAppearance()) {
 			WptPt wptPt = createWaypoint();
 			wptPt.setLat(latLon.getLatitude());
 			wptPt.setLon(latLon.getLongitude());
@@ -146,6 +156,10 @@ public class GPXAction extends QuickAction implements FileSelected {
 		}
 	}
 
+	private boolean shouldUsePredefinedAppearance() {
+		return Boolean.parseBoolean(getParams().get(KEY_USE_PREDEFINED_WPT_APPEARANCE));
+	}
+
 	private void lookupAddress(@NonNull LatLon latLon,
 	                           @NonNull MapActivity mapActivity,
 	                           @NonNull CallbackWithObject<String> onAddressDetermined) {
@@ -165,6 +179,7 @@ public class GPXAction extends QuickAction implements FileSelected {
 	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 		View root = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_add_gpx, parent, false);
+		setupPointLocationView(root.findViewById(R.id.point_location_container), mapActivity);
 		parent.addView(root);
 
 		unselectGpxFileIfMissing();
@@ -306,8 +321,7 @@ public class GPXAction extends QuickAction implements FileSelected {
 	private void setupWaypointAppearanceToggle(@NonNull View container, @NonNull MapActivity mapActivity) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		boolean night = isNightMode(mapActivity);
-		boolean usePredefinedAppearance = predefinedWaypoint != null
-				|| Boolean.parseBoolean(getParams().get(KEY_USE_PREDEFINED_WPT_APPEARANCE));
+		boolean usePredefinedAppearance = predefinedWaypoint != null || shouldUsePredefinedAppearance();
 		LinearLayout appearanceToggle = container.findViewById(R.id.appearance_toggle);
 		appearanceToggleButton = new TextToggleButton(app, appearanceToggle, night);
 
@@ -448,10 +462,15 @@ public class GPXAction extends QuickAction implements FileSelected {
 		waypoint.setAddress(predefinedWaypoint != null ? predefinedWaypoint.getAddress() : getParams().get(KEY_WPT_ADDRESS));
 		waypoint.setDesc(predefinedWaypoint != null ? predefinedWaypoint.getDesc() : getParams().get(KEY_WPT_DESCRIPTION));
 		waypoint.setCategory(predefinedWaypoint != null ? predefinedWaypoint.getCategory() : getParams().get(KEY_CATEGORY_NAME));
-		waypoint.setColor(predefinedWaypoint != null ? predefinedWaypoint.getColor() : getWaypointColorFromParams());
-		waypoint.setIconName(predefinedWaypoint != null ? predefinedWaypoint.getIconName() : getIconNameFromParams());
-		waypoint.setBackgroundType(predefinedWaypoint != null ? predefinedWaypoint.getBackgroundType() : getBackgroundTypeFromParams());
+		waypoint.setColor(getWaypointColor());
+		waypoint.setIconName(getIconName());
+		waypoint.setBackgroundType(getBackgroundType());
 		return waypoint;
+	}
+
+	@ColorInt
+	private int getWaypointColor() {
+		return predefinedWaypoint != null ? predefinedWaypoint.getColor() : getWaypointColorFromParams();
 	}
 
 	@ColorInt
@@ -460,11 +479,21 @@ public class GPXAction extends QuickAction implements FileSelected {
 	}
 
 	@NonNull
+	private String getIconName() {
+		return predefinedWaypoint != null ? predefinedWaypoint.getIconNameOrDefault() : getIconNameFromParams();
+	}
+
+	@NonNull
 	private String getIconNameFromParams() {
 		String iconName = getParams().get(KEY_WPT_ICON);
 		return Algorithms.isEmpty(iconName) || !RenderingIcons.containsBigIcon(iconName)
 				? GpxUtilities.DEFAULT_ICON_NAME
 				: iconName;
+	}
+
+	@Nullable
+	private String getBackgroundType() {
+		return predefinedWaypoint != null ? predefinedWaypoint.getBackgroundType() : getBackgroundTypeFromParams();
 	}
 
 	@NonNull
@@ -496,25 +525,25 @@ public class GPXAction extends QuickAction implements FileSelected {
 	@Override
 	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
 		boolean useSelectedGpxFile = trackToggleButton.getSelectedItemIndex() == 1;
-		getParams().put(KEY_USE_SELECTED_GPX_FILE, String.valueOf(useSelectedGpxFile));
+		setParameter(KEY_USE_SELECTED_GPX_FILE, String.valueOf(useSelectedGpxFile));
 		if (selectedGpxFilePath != null) {
-			getParams().put(KEY_GPX_FILE_PATH, selectedGpxFilePath);
+			setParameter(KEY_GPX_FILE_PATH, selectedGpxFilePath);
 		}
 
 		boolean usePredefinedTemplate = appearanceToggleButton.getSelectedItemIndex() == 1;
-		getParams().put(KEY_USE_PREDEFINED_WPT_APPEARANCE, String.valueOf(usePredefinedTemplate));
+		setParameter(KEY_USE_PREDEFINED_WPT_APPEARANCE, String.valueOf(usePredefinedTemplate));
 		if (predefinedWaypoint != null) {
-			getParams().put(KEY_WPT_NAME, predefinedWaypoint.getName());
-			getParams().put(KEY_WPT_ADDRESS, predefinedWaypoint.getAddress());
-			getParams().put(KEY_WPT_DESCRIPTION, predefinedWaypoint.getDesc());
-			getParams().put(KEY_WPT_COLOR, String.valueOf(predefinedWaypoint.getColor()));
-			getParams().put(KEY_WPT_ICON, predefinedWaypoint.getIconName());
-			getParams().put(KEY_WPT_BACKGROUND_TYPE, predefinedWaypoint.getBackgroundType());
-			getParams().put(KEY_CATEGORY_NAME, predefinedWaypoint.getCategory());
-			getParams().put(KEY_CATEGORY_COLOR, String.valueOf(predefinedCategoryColor));
+			setParameter(KEY_WPT_NAME, predefinedWaypoint.getName());
+			setParameter(KEY_WPT_ADDRESS, predefinedWaypoint.getAddress());
+			setParameter(KEY_WPT_DESCRIPTION, predefinedWaypoint.getDesc());
+			setParameter(KEY_WPT_COLOR, String.valueOf(predefinedWaypoint.getColor()));
+			setParameter(KEY_WPT_ICON, predefinedWaypoint.getIconName());
+			setParameter(KEY_WPT_BACKGROUND_TYPE, predefinedWaypoint.getBackgroundType());
+			setParameter(KEY_CATEGORY_NAME, predefinedWaypoint.getCategory());
+			setParameter(KEY_CATEGORY_COLOR, String.valueOf(predefinedCategoryColor));
 		}
 
-		return true;
+		return super.fillParams(root, mapActivity);
 	}
 
 	private String getSelectedGpxFilePath(boolean paramsOnly) {
@@ -525,7 +554,7 @@ public class GPXAction extends QuickAction implements FileSelected {
 		String gpxFilePath = getSelectedGpxFilePath(true);
 		boolean gpxFileMissing = !Algorithms.isEmpty(gpxFilePath) && !new File(gpxFilePath).exists();
 		if (gpxFileMissing) {
-			getParams().put(KEY_USE_SELECTED_GPX_FILE, String.valueOf(false));
+			setParameter(KEY_USE_SELECTED_GPX_FILE, String.valueOf(false));
 			getParams().remove(KEY_GPX_FILE_PATH);
 		}
 	}
