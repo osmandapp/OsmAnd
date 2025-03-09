@@ -57,6 +57,7 @@ import de.KnollFrank.lib.settingssearch.results.Setting;
 import de.KnollFrank.lib.settingssearch.results.SettingHighlighter;
 import de.KnollFrank.lib.settingssearch.results.SettingHighlighterProvider;
 
+// FK-TODO: make all items and dependent Fragments of ConfigureMapFragment searchable
 public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataChangeUiAdapter,
 		InAppPurchaseListener, SelectGpxTaskListener, SettingHighlighterProvider {
 
