@@ -144,7 +144,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet implements Set
 			for (int i = 0; i < properties.size(); i++) {
 				RenderingRuleProperty property = properties.get(i);
 				CommonPreference<Boolean> pref = preferences.get(i);
-				String propertyName = AndroidUtils.getRenderingStringPropertyName(app, property.getAttrName(), property.getName());
+				String propertyName = getRenderingStringPropertyName(property, app);
 				if (STREET_LIGHTING.equals(property.getAttrName()) && streetLightNightProp != null) {
 					CommonPreference<Boolean> streetLightsNightPref = preferences.get(properties.indexOf(streetLightNightProp));
 					BottomSheetItemTwoChoicesButton[] item = new BottomSheetItemTwoChoicesButton[1];
@@ -195,6 +195,10 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet implements Set
 				}
 			}
 		}
+	}
+
+	private static String getRenderingStringPropertyName(final RenderingRuleProperty property, final Context context) {
+		return AndroidUtils.getRenderingStringPropertyName(context, property.getAttrName(), property.getName());
 	}
 
 	@Nullable
@@ -313,8 +317,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet implements Set
 		private static Preference asPreference(final RenderingRuleProperty property, final Context context) {
 			final Preference preference = new Preference(context);
 			preference.setKey(property.getAttrName());
-			preference.setTitle(property.getName());
-			preference.setSummary(property.getDescription());
+			preference.setTitle(getRenderingStringPropertyName(property, context));
 			return preference;
 		}
 	}

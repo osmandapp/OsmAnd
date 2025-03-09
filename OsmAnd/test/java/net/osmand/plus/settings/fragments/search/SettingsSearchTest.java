@@ -965,7 +965,7 @@ public class SettingsSearchTest extends AndroidTest {
 
 									@Override
 									protected String getSearchQuery(final Context context) {
-										return "Waterway tunnels";
+										return context.getString(R.string.rendering_attr_showWaterwayTunnels_name);
 									}
 
 									@Override
