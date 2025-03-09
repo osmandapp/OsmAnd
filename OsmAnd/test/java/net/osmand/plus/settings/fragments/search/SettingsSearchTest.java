@@ -974,6 +974,21 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
+						{
+								"shouldSearchAndFind_ConfigureScreenFragment_ConfigureMap_Transport_TransportStops",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.rendering_attr_transportStops_name);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
 				});
 	}
 
