@@ -320,9 +320,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		settings.DISABLE_MAP_LAYERS.addListener(disableMapLayersListener);
 
 		// Grid settings listeners
-		showCoordinatesGridListener = change -> applyGridSettings();
-		gridFormatListener = change -> applyGridSettings();
-		gridZoomListener = change -> applyGridSettings();
+		showCoordinatesGridListener = change -> askUpdateGridSettings();
+		gridFormatListener = change -> askUpdateGridSettings();
+		gridZoomListener = change -> askUpdateGridSettings();
 
 		// Register Grid settings listeners
 		settings.SHOW_COORDINATES_GRID.addListener(showCoordinatesGridListener);
@@ -662,7 +662,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (app.accessibilityEnabled()) {
 			app.showShortToastMessage(app.getString(R.string.zoomIs) + " " + zoom.getBaseZoom());
 		}
-		applyGridSettings(); // todo
+		askUpdateGridSettings(); // todo
 
 		for (ManualZoomListener listener : manualZoomListeners) {
 			listener.onManualZoomChange();
@@ -2570,7 +2570,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	public void applyGridSettings() {
+	public void askUpdateGridSettings() {
 		if (mapRenderer != null) {
 			applyGridSettings(mapRenderer);
 		}
