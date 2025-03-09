@@ -49,7 +49,7 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 
 	protected void updateNightMode() {
 		nightMode = isNightMode(isUsedOnMap());
-		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
+		themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
 	}
 
 	public boolean isNightMode() {

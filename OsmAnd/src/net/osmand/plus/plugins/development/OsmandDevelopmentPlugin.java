@@ -78,14 +78,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public final OsmandPreference<Boolean> SAVE_HEADING_TO_GPX;
 	public final OsmandPreference<Boolean> SHOW_SYMBOLS_DEBUG_INFO;
 	public final OsmandPreference<Boolean> ALLOW_SYMBOLS_DISPLAY_ON_TOP;
-	public final OsmandPreference<Boolean> SHOW_GRID;
-	public final OsmandPreference<Boolean> SHOW_UTM_GRID;
-	public final OsmandPreference<Boolean> SHOW_MERCATOR_GRID;
-	public final OsmandPreference<Boolean> SHOW_DMS_GRID;
-	public final OsmandPreference<Boolean> SHOW_DM_GRID;
 	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
 	private final StateChangedListener<Boolean> symbolsDebugInfoListener;
-	private final StateChangedListener<Boolean> gridListener;
 	private final StateChangedListener<Boolean> batterySavingModeListener;
 
 	public OsmandDevelopmentPlugin(@NonNull OsmandApplication app) {
@@ -113,11 +107,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		SAVE_HEADING_TO_GPX = registerBooleanPreference("save_heading_to_gpx", true).makeGlobal().makeShared().cache();
 		SHOW_SYMBOLS_DEBUG_INFO = registerBooleanPreference("show_symbols_debug_info", false).makeGlobal().makeShared().cache();
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP = registerBooleanPreference("allow_symbols_display_on_top", false).makeGlobal().makeShared().cache();
-		SHOW_GRID = registerBooleanPreference("show_grid", false).makeGlobal().makeShared().cache();
-		SHOW_UTM_GRID = registerBooleanPreference("show_utm_grid", false).makeGlobal().makeShared().cache();
-		SHOW_MERCATOR_GRID = registerBooleanPreference("show_mercator_grid", false).makeGlobal().makeShared().cache();
-		SHOW_DMS_GRID = registerBooleanPreference("show_dms_grid", false).makeGlobal().makeShared().cache();
-		SHOW_DM_GRID = registerBooleanPreference("show_dm_grid", false).makeGlobal().makeShared().cache();
 
 		useRasterSQLiteDbListener = change -> {
 			SRTMPlugin plugin = getSrtmPlugin();
@@ -136,19 +125,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		};
 		SHOW_SYMBOLS_DEBUG_INFO.addListener(symbolsDebugInfoListener);
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP.addListener(symbolsDebugInfoListener);
-
-		gridListener = change -> {
-			OsmandMapTileView mapView = app.getOsmandMap().getMapView();
-			MapRendererView mapRenderer = mapView.getMapRenderer();
-			if (mapRenderer != null) {
-				mapView.applyGridSettings(mapRenderer);
-			}
-		};
-		SHOW_GRID.addListener(gridListener);
-		SHOW_UTM_GRID.addListener(gridListener);
-		SHOW_MERCATOR_GRID.addListener(gridListener);
-		SHOW_DMS_GRID.addListener(gridListener);
-		SHOW_DM_GRID.addListener(gridListener);
 
 		batterySavingModeListener = change -> {
 			OsmandMapTileView mapView = app.getOsmandMap().getMapView();

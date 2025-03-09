@@ -389,6 +389,7 @@ public class MapButtonsHelper {
 		allTypes.add(ShowHideWhitewaterSportsAction.TYPE);
 		allTypes.add(ShowHideFitnessTrailsAction.TYPE);
 		allTypes.add(ShowHideRunningRoutesAction.TYPE);
+		allTypes.add(ShowHideCoordinatesGridAction.TYPE);
 		// navigation
 		allTypes.add(NavVoiceAction.TYPE);
 		allTypes.add(NavDirectionsFromAction.TYPE);

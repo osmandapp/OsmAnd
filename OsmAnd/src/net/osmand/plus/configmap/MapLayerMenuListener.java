@@ -10,6 +10,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.tracks.TracksTabsFragment;
+import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.dashboard.DashboardType;
 import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
@@ -45,6 +47,10 @@ final class MapLayerMenuListener extends OnRowItemClick {
 			return false;
 		} else if (itemId == R.string.rendering_category_transport) {
 			TransportLinesMenu.showTransportsDialog(mapActivity);
+			return false;
+		} else if (itemId == R.string.layer_coordinates_grid) {
+			DashboardOnMap dashboard = mapActivity.getDashboard();
+			dashboard.setDashboardVisibility(true, DashboardType.COORDINATE_GRID);
 			return false;
 		} else {
 			CompoundButton btn = view.findViewById(R.id.toggle_item);
@@ -103,6 +109,10 @@ final class MapLayerMenuListener extends OnRowItemClick {
 			return false;
 		} else if (itemId == R.string.show_borders_of_downloaded_maps) {
 			settings.SHOW_BORDERS_OF_DOWNLOADED_MAPS.set(isChecked);
+		} else if (itemId == R.string.layer_coordinates_grid) {
+			settings.SHOW_COORDINATES_GRID.set(isChecked);
+			item.setIcon(CoordinatesGridController.getStateIcon(isChecked));
+			item.setColor(app, isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 		}
 		if (uiAdapter != null) {
 			uiAdapter.onDataSetChanged();
