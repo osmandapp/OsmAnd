@@ -50,12 +50,16 @@ public class CoordinatesGridFragment extends BaseOsmAndFragment implements ICoor
 	                         @Nullable Bundle savedInstanceState) {
 		updateNightMode();
 		view = inflate(R.layout.fragment_coordinates_grid, container);
-		profileColor = settings.getApplicationMode().getProfileColor(nightMode);
-		showHideTopShadow();
+		if (controller != null) {
+			profileColor = settings.getApplicationMode().getProfileColor(nightMode);
+			showHideTopShadow();
 
-		setupMainToggle();
-		setupFormatButton();
-		setupZoomLevelsButton();
+			setupMainToggle();
+			setupFormatButton();
+			setupZoomLevelsButton();
+		} else {
+			dismiss();
+		}
 		return view;
 	}
 
@@ -108,7 +112,8 @@ public class CoordinatesGridFragment extends BaseOsmAndFragment implements ICoor
 	private void setupFormatButton() {
 		View button = view.findViewById(R.id.format_button);
 		View selector = button.findViewById(R.id.format_selector);
-		selector.setOnClickListener(v -> controller.onFormatSelectorClicked(selector, profileColor, nightMode));
+		button.setOnClickListener(v -> controller.onFormatSelectorClicked(selector, profileColor, nightMode));
+		setupSelectableBackground(button);
 		updateFormatButton();
 	}
 
@@ -125,7 +130,7 @@ public class CoordinatesGridFragment extends BaseOsmAndFragment implements ICoor
 		button.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity instanceof MapActivity mapActivity) {
-				mapActivity.getDashboard().hideDashboard(); // todo
+				mapActivity.getDashboard().hideDashboard(); //todo: implement hide and restore
 				controller.onZoomLevelsClicked(mapActivity);
 			}
 		});
@@ -151,7 +156,9 @@ public class CoordinatesGridFragment extends BaseOsmAndFragment implements ICoor
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		controller.finishProcessIfNeeded(getActivity());
+		if (controller != null) {
+			controller.finishProcessIfNeeded(getActivity());
+		}
 	}
 
 	private void dismiss() {

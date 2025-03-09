@@ -12,13 +12,13 @@
 -->
 
     <string name="quick_action_showhide_coordinates_grid_descr">Action to control the visibility of the Coordinates grid on the map.</string>
+    <string name="layer_coordinates_grid">Coordinates grid</string>
     <string name="choose_location">Choose a location</string>
     <string name="point_location">Point location</string>
     <string name="shared_string_manual">Manual</string>
     <string name="shared_string_map_center">Map center</string>
     <string name="choose_location_on_map">Choose a location on the map.</string>
     <string name="popular_places">Popular places</string>
-    <string name="layer_coordinates_grid">Coordinates grid</string>
     <string name="show_list">Show list</string>
     <string name="save_favorite_default_appearance">Apply changes to the existing points in the folder or only to new ones?</string>
     <string name="original_color_description">Each point would keep its own color.</string>

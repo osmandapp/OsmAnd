@@ -76,6 +76,7 @@
                             android:layout_height="@dimen/bottom_sheet_list_item_height"
                             android:layout_gravity="center_vertical"
                             android:layout_marginEnd="@dimen/text_margin_small"
+                            android:duplicateParentState="true"
                             android:orientation="horizontal"
                             android:paddingHorizontal="@dimen/content_padding_small">
 

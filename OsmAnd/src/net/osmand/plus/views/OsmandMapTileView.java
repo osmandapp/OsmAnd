@@ -329,6 +329,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		settings.COORDINATE_GRID_FORMAT.addListener(gridFormatListener);
 		settings.COORDINATE_GRID_MIN_ZOOM.addListener(gridZoomListener);
 		settings.COORDINATE_GRID_MAX_ZOOM.addListener(gridZoomListener);
+		if (!settings.COORDINATE_GRID_FORMAT.isSet()) {
+			// Registering a listener to track changes in the base coordinates format setting
+			// when grid-specific format isn't set
+			settings.COORDINATES_FORMAT.addListener(gridZoomListener);
+		}
 	}
 
 	public void updateDisplayMetrics(DisplayMetrics dm, int width, int height) {
@@ -662,7 +667,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (app.accessibilityEnabled()) {
 			app.showShortToastMessage(app.getString(R.string.zoomIs) + " " + zoom.getBaseZoom());
 		}
-		askUpdateGridSettings(); // todo
+		askUpdateGridSettings(); // todo: implement an approach to react on zoom level change correctly
 
 		for (ManualZoomListener listener : manualZoomListeners) {
 			listener.onManualZoomChange();
@@ -2576,13 +2581,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	public void applyGridSettings(MapRendererView mapRenderer) {
-		float textScale = app.getSettings().TEXT_SCALE.get() * getDensity();
+	public void applyGridSettings(@NonNull MapRendererView mapRenderer) {
 		int zoom = getZoom();
 		int minZoom = settings.COORDINATE_GRID_MIN_ZOOM.get();
 		int maxZoom = settings.COORDINATE_GRID_MAX_ZOOM.get();
 		boolean zoomPassed = zoom >= minZoom && zoom <= maxZoom;
-		boolean show = settings.SHOW_COORDINATES_GRID.get() && zoomPassed;
+		boolean show = zoomPassed && settings.SHOW_COORDINATES_GRID.get();
+
 		GridFormat gridFormat = settings.COORDINATE_GRID_FORMAT.get();
 		FColorARGB color = new FColorARGB(1.0f, 0.1f, 0.0f, 0.8f);
 		GridConfiguration gridConfiguration = new GridConfiguration();
@@ -2599,6 +2604,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			gridMarksProvider = null;
 		}
 		if (show) {
+			float textScale = settings.TEXT_SCALE.get() * getDensity();
 			gridMarksProvider = new GridMarksProvider();
 			FColorARGB haloColor = new FColorARGB(0.5f, 1.0f, 1.0f, 1.0f);
 			TextRasterizer.Style primaryMarksStyle = new TextRasterizer.Style();
@@ -2617,9 +2623,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			secondaryMarksStyle.setSize(16.0f * textScale);
 			secondaryMarksStyle.setBold(true);
 			gridMarksProvider.setSecondaryStyle(secondaryMarksStyle, 2.0f * textScale);
-//			if (useMercator) {
-//				gridMarksProvider.setSecondary(true, "km", "km", "km", "km");
-//			} else
 			if (gridFormat.getProjection() == Projection.UTM) {
 				gridMarksProvider.setSecondary(true, "", "", "", "");
 			} else {

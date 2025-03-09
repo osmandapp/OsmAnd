@@ -636,11 +636,4 @@ public class ConfigureMapMenu {
 					return false;
 				});
 	}
-
-	@DrawableRes
-	public static int getCoordinatesGridIcon(boolean selected) {
-		return selected
-				? R.drawable.ic_action_world_globe
-				: R.drawable.ic_action_coordinates_grid_disabled;
-	}
 }

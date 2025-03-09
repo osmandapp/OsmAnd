@@ -25,8 +25,8 @@ public class GridZoomLevelsController extends ZoomLevelsController {
 	public GridZoomLevelsController(@NonNull OsmandApplication app) {
 		super(app, createInitialLimits(app), new Limits<>(MIN_ZOOM, MAX_ZOOM));
 		OsmandSettings settings = app.getSettings();
-		this.minZoomPreference = settings.COORDINATE_GRID_MIN_ZOOM;
-		this.maxZoomPreference = settings.COORDINATE_GRID_MAX_ZOOM;
+		minZoomPreference = settings.COORDINATE_GRID_MIN_ZOOM;
+		maxZoomPreference = settings.COORDINATE_GRID_MAX_ZOOM;
 	}
 
 	@Override
