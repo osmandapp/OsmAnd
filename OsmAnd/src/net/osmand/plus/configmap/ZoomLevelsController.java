@@ -19,11 +19,6 @@ public abstract class ZoomLevelsController extends BaseDialogController {
 	protected Limits<Integer> selectedLimits;
 
 	public ZoomLevelsController(@NonNull OsmandApplication app,
-	                            @NonNull Limits<Integer> initialLimits) {
-		this(app, initialLimits, initialLimits);
-	}
-
-	public ZoomLevelsController(@NonNull OsmandApplication app,
 	                            @NonNull Limits<Integer> initialLimits,
 	                            @NonNull Limits<Integer> supportedLimits) {
 		super(app);
@@ -43,11 +38,6 @@ public abstract class ZoomLevelsController extends BaseDialogController {
 	@NonNull
 	public String getDialogTitle() {
 		return getString(R.string.shared_string_zoom_levels);
-	}
-
-	@NonNull
-	public String getDialogSummary() {
-		return app.getString(R.string.terrain_slider_description);
 	}
 
 	public abstract void onApplyChanges();
@@ -72,7 +62,13 @@ public abstract class ZoomLevelsController extends BaseDialogController {
 		int clampedMin = (int) Math.max(supportedLimits.min(), Math.min(supportedLimits.max(), min));
 		int clampedMax = (int) Math.max(supportedLimits.min(), Math.min(supportedLimits.max(), max));
 		selectedLimits = new Limits<>(clampedMin, clampedMax);
+		setSavedZoomLimits(selectedLimits);
 	}
+
+	protected abstract void setSavedZoomLimits(@NonNull Limits<Integer> limits);
+
+	@NonNull
+	protected abstract Limits<Integer> getSavedZoomLimits();
 
 	@Nullable
 	public static ZoomLevelsController getExistedInstance(@NonNull OsmandApplication app) {

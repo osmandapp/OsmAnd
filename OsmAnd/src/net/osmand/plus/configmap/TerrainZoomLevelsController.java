@@ -25,7 +25,7 @@ public class TerrainZoomLevelsController extends ZoomLevelsController {
 
 	@Override
 	public void onCloseScreen(@NonNull MapActivity activity) {
-		setTerrainZoomLimits(applyChanges ? selectedLimits : initialLimits);
+		setSavedZoomLimits(applyChanges ? selectedLimits : initialLimits);
 
 		activity.getSupportFragmentManager().popBackStack();
 		activity.getDashboard().setDashboardVisibility(true, TERRAIN, false);
@@ -34,27 +34,23 @@ public class TerrainZoomLevelsController extends ZoomLevelsController {
 	@Override
 	public void onResetToDefault() {
 		plugin.resetZoomLevelsToDefault();
-		selectedLimits = getSavedTerrainZoomLimits();
+		selectedLimits = getSavedZoomLimits();
 	}
 
 	@Override
 	public void onApplyChanges() {
 		applyChanges = true;
-		selectedLimits = getSavedTerrainZoomLimits();
+		selectedLimits = getSavedZoomLimits();
 	}
 
 	@Override
-	public void setSelectedLimits(float min, float max) {
-		super.setSelectedLimits(min, max);
-		setTerrainZoomLimits(selectedLimits);
-	}
-
-	private void setTerrainZoomLimits(@NonNull Limits<Integer> limits) {
+	protected void setSavedZoomLimits(@NonNull Limits<Integer> limits) {
 		plugin.setTerrainZoomValues(limits.min(), limits.max(), plugin.getTerrainMode());
 	}
 
+	@Override
 	@NonNull
-	private Limits<Integer> getSavedTerrainZoomLimits() {
+	protected Limits<Integer> getSavedZoomLimits() {
 		return new Limits<>(plugin.getTerrainMinZoom(), plugin.getTerrainMaxZoom());
 	}
 

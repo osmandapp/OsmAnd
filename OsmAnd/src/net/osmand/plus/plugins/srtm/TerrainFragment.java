@@ -109,7 +109,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
+		srtmPlugin = PluginsHelper.requirePlugin(SRTMPlugin.class);
 		terrainEnabled = srtmPlugin.isTerrainLayerEnabled();
 	}
 

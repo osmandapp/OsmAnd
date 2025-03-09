@@ -20,9 +20,10 @@ public class GridZoomLevelsController extends ZoomLevelsController {
 
 	private final CommonPreference<Integer> minZoomPreference;
 	private final CommonPreference<Integer> maxZoomPreference;
+	private boolean applyChanges = false;
 
 	public GridZoomLevelsController(@NonNull OsmandApplication app) {
-		super(app, createInitialLimits(app));
+		super(app, createInitialLimits(app), new Limits<>(MIN_ZOOM, MAX_ZOOM));
 		OsmandSettings settings = app.getSettings();
 		this.minZoomPreference = settings.COORDINATE_GRID_MIN_ZOOM;
 		this.maxZoomPreference = settings.COORDINATE_GRID_MAX_ZOOM;
@@ -30,20 +31,34 @@ public class GridZoomLevelsController extends ZoomLevelsController {
 
 	@Override
 	public void onCloseScreen(@NonNull MapActivity activity) {
+		setSavedZoomLimits(applyChanges ? selectedLimits : initialLimits);
+
 		activity.getSupportFragmentManager().popBackStack();
 		activity.getDashboard().setDashboardVisibility(true, COORDINATE_GRID, false);
-	}
-
-	@Override
-	public void onApplyChanges() {
-		minZoomPreference.set(selectedLimits.min());
-		maxZoomPreference.set(selectedLimits.max());
 	}
 
 	@Override
 	public void onResetToDefault() {
 		minZoomPreference.resetToDefault();
 		maxZoomPreference.resetToDefault();
+		selectedLimits = getSavedZoomLimits();
+	}
+
+	@Override
+	public void onApplyChanges() {
+		applyChanges = true;
+		selectedLimits = getSavedZoomLimits();
+	}
+
+	protected void setSavedZoomLimits(@NonNull Limits<Integer> limits) {
+		minZoomPreference.set(limits.min());
+		maxZoomPreference.set(limits.max());
+	}
+
+	@Override
+	@NonNull
+	protected Limits<Integer> getSavedZoomLimits() {
+		return new Limits<>(minZoomPreference.get(), maxZoomPreference.get());
 	}
 
 	@NonNull

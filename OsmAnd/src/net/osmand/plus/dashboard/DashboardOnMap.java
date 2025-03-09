@@ -44,7 +44,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapFragment;
-import net.osmand.plus.configmap.CoordinatesGridFragment;
+import net.osmand.plus.configmap.CoordinatesGridController;
 import net.osmand.plus.configmap.routes.MapRoutesFragment;
 import net.osmand.plus.configmap.routes.RenderingClassFragment;
 import net.osmand.plus.configmap.routes.RouteLayersHelper;
@@ -584,7 +584,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 						RenderingClassFragment.showInstance(mapActivity, renderingClass);
 					}
 				} else if (isCurrentType(COORDINATE_GRID)) {
-					CoordinatesGridFragment.showInstance(mapActivity.getSupportFragmentManager());
+					CoordinatesGridController.showDialog(mapActivity);
 				}
 				scrollView.setVisibility(View.VISIBLE);
 				listViewLayout.setVisibility(View.GONE);
@@ -650,7 +650,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			listView.setBackgroundColor(backgroundColor);
 		}
 		if (isNoCurrentType(CONFIGURE_MAP, CONTOUR_LINES, TERRAIN, MAP_ROUTES, RENDERING_CLASS, TRAVEL_ROUTES,
-				OSM_NOTES, WIKIPEDIA, TRANSPORT_LINES, WEATHER, WEATHER_LAYER, WEATHER_CONTOURS, NAUTICAL_DEPTH)) {
+				OSM_NOTES, WIKIPEDIA, TRANSPORT_LINES, WEATHER, WEATHER_LAYER, WEATHER_CONTOURS, NAUTICAL_DEPTH,
+				COORDINATE_GRID)) {
 			listView.setDivider(dividerDrawable);
 			listView.setDividerHeight(AndroidUtils.dpToPx(mapActivity, 1f));
 		} else {
@@ -988,7 +989,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	public boolean isCurrentTypeHasIndividualFragment() {
 		return isCurrentType(
 				CONFIGURE_MAP, MAPILLARY, TERRAIN, RELIEF_3D, MAP_ROUTES, RENDERING_CLASS,
-				TRAVEL_ROUTES, TRANSPORT_LINES, WEATHER, WEATHER_LAYER, WEATHER_CONTOURS, NAUTICAL_DEPTH
+				TRAVEL_ROUTES, TRANSPORT_LINES, WEATHER, WEATHER_LAYER, WEATHER_CONTOURS,
+				NAUTICAL_DEPTH, COORDINATE_GRID
 		);
 	}
 

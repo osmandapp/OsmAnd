@@ -3326,6 +3326,15 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> SHOW_COORDINATES_GRID =
 			new BooleanPreference(this, "show_coordinates_grid", false).makeProfile();
 
+	public final OsmandPreference<GridFormat> COORDINATE_GRID_FORMAT =
+			new EnumStringPreference<>(this, "coordinates_grid_format", GridFormat.DMS, GridFormat.values()) {
+				@Override
+				public GridFormat getProfileDefaultValue(@Nullable ApplicationMode mode) {
+					int formatId = COORDINATES_FORMAT.getModeValue(mode);
+					return GridFormat.valueOf(formatId);
+				}
+			}.makeProfile();
+
 	public final CommonPreference<Integer> COORDINATE_GRID_MIN_ZOOM =
 			new IntPreference(this, "coordinate_grid_min_zoom", GridZoomLevelsController.MIN_ZOOM).makeProfile();
 

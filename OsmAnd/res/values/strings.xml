@@ -17,7 +17,7 @@
     <string name="shared_string_map_center">Map center</string>
     <string name="choose_location_on_map">Choose a location on the map.</string>
     <string name="popular_places">Popular places</string>
-    <string name="layer_coordinates_grid">Coordinates Grid</string>
+    <string name="layer_coordinates_grid">Coordinates grid</string>
     <string name="show_list">Show list</string>
     <string name="save_favorite_default_appearance">Apply changes to the existing points in the folder or only to new ones?</string>
     <string name="original_color_description">Each point would keep its own color.</string>

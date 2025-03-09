@@ -215,7 +215,7 @@ public class ConfigureMapMenu {
 				.setTitleId(R.string.layer_coordinates_grid, activity)
 				.setSelected(selected)
 				.setColor(app, selected ? R.color.osmand_orange : INVALID_ID)
-				.setIcon(getCoordinatesGridIcon(selected))
+				.setIcon(CoordinatesGridController.getStateIcon(selected))
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setItemDeleteAction(settings.SHOW_COORDINATES_GRID)
 				.setListener(listener));

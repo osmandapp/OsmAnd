@@ -102,6 +102,12 @@ public class ZoomLevelsFragment extends ConfigureMapOptionFragment {
 		controller.onApplyChanges();
 	}
 
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		controller.finishProcessIfNeeded(getActivity());
+	}
+
 	public static void showInstance(@NonNull FragmentManager manager) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			manager.beginTransaction()

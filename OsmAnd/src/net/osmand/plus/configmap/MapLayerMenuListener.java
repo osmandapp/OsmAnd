@@ -111,7 +111,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 			settings.SHOW_BORDERS_OF_DOWNLOADED_MAPS.set(isChecked);
 		} else if (itemId == R.string.layer_coordinates_grid) {
 			settings.SHOW_COORDINATES_GRID.set(isChecked);
-			item.setIcon(ConfigureMapMenu.getCoordinatesGridIcon(isChecked));
+			item.setIcon(CoordinatesGridController.getStateIcon(isChecked));
 			item.setColor(app, isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 		}
 		if (uiAdapter != null) {
