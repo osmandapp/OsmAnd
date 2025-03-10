@@ -11,8 +11,8 @@ import androidx.annotation.NonNull;
 import net.osmand.data.LatLon;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.wikipedia.WikiImageCard;
+import net.osmand.shared.wiki.WikiMetadata;
 import net.osmand.util.Algorithms;
-import net.osmand.wiki.Metadata;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -89,25 +89,9 @@ public class ImageCardsHolder {
 		}
 		for (String key : metadataMap.keySet()) {
 			ImageCard card = wikiImages.get(key);
-			Map<String, String> details = metadataMap.get(key);
-			if (card instanceof WikiImageCard wikiImageCard && details != null) {
-				Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
-				String date = details.get("date");
-				if (!Algorithms.isEmpty(date) && (Algorithms.isEmpty(metadata.getDate()) || metadata.getDate().equals("Unknown"))) {
-					metadata.setDate(date);
-				}
-				String license = details.get("license");
-				if (!Algorithms.isEmpty(license) && (Algorithms.isEmpty(metadata.getLicense()) || metadata.getLicense().equals("Unknown"))) {
-					metadata.setLicense(license);
-				}
-				String author = details.get("author");
-				if (!Algorithms.isEmpty(author) && (Algorithms.isEmpty(metadata.getAuthor()) || metadata.getAuthor().equals("Unknown"))) {
-					metadata.setAuthor(author);
-				}
-				String description = details.get("description");
-				if (!Algorithms.isEmpty(description) && (Algorithms.isEmpty(metadata.getDescription()) || metadata.getDescription().equals("Unknown"))) {
-					metadata.setDescription(description);
-				}
+			if (card instanceof WikiImageCard wikiImageCard) {
+				WikiMetadata.Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
+				WikiMetadata.INSTANCE.updateMetadata(metadataMap, metadata);
 				wikiImageCard.setMetaDataDownloaded(true);
 			}
 		}

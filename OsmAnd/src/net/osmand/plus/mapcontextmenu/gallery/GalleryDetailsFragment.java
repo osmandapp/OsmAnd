@@ -29,8 +29,8 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.DistanceByTapFragment;
 import net.osmand.plus.wikipedia.WikiAlgorithms;
 import net.osmand.plus.wikipedia.WikiImageCard;
+import net.osmand.shared.wiki.WikiMetadata;
 import net.osmand.util.Algorithms;
-import net.osmand.wiki.Metadata;
 
 import java.util.Set;
 
@@ -111,7 +111,7 @@ public class GalleryDetailsFragment extends BaseOsmAndFragment implements Downlo
 		container.removeAllViews();
 
 		ImageCard card = getSelectedCard();
-		Metadata metadata = card instanceof WikiImageCard ? ((WikiImageCard) card).getWikiImage().getMetadata() : null;
+		WikiMetadata.Metadata metadata = card instanceof WikiImageCard ? ((WikiImageCard) card).getWikiImage().getMetadata() : null;
 
 		String author = metadata != null ? metadata.getAuthor() : null;
 		if (!Algorithms.isEmpty(author)) {
