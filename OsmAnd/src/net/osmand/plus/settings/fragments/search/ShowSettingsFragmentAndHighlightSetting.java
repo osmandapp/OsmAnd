@@ -77,10 +77,6 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 		return false;
 	}
 
-	private static ConfigureMapFragment getConfigureMapFragment(final MapActivity mapActivity) {
-		return (ConfigureMapFragment) Objects.requireNonNull(mapActivity.getSupportFragmentManager().findFragmentByTag(ConfigureMapFragment.TAG));
-	}
-
 	private static Setting asSetting(final SearchablePreference preference) {
 		return new Setting() {
 
@@ -94,6 +90,10 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 				return preference.hasPreferenceMatchWithinSearchableInfo();
 			}
 		};
+	}
+
+	private static ConfigureMapFragment getConfigureMapFragment(final MapActivity mapActivity) {
+		return (ConfigureMapFragment) Objects.requireNonNull(mapActivity.getSupportFragmentManager().findFragmentByTag(ConfigureMapFragment.TAG));
 	}
 
 	private static void scrollDashboardOnMapToSettingOfConfigureMapFragment(final DashboardOnMap dashboardOnMap,
