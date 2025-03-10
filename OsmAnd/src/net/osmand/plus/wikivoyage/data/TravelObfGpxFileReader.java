@@ -320,7 +320,8 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
 
         long time = System.currentTimeMillis();
 
-        // ResourceManager.getAmenityRepositories() returns TODO clarify why reversed iterator is used
+        // ResourceManager.getAmenityRepositories() returns OBF files list in Z-A order.
+        // Live updates require A-Z order, so use reverted iterator as the easiest way.
         ListIterator<AmenityIndexRepository> li = repos.listIterator(repos.size());
         while (li.hasPrevious()) {
             AmenityIndexRepository repo = li.previous();
