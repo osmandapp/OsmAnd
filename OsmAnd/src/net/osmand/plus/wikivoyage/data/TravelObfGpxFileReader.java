@@ -35,7 +35,6 @@ import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.binary.HeightDataLoader;
 import net.osmand.data.Amenity;
-import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.gpx.TravelObfGpxTrackOptimizer;
 import net.osmand.map.WorldRegion;
@@ -62,10 +61,8 @@ import org.apache.commons.logging.Log;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
@@ -88,9 +85,6 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
     private final TravelArticle article;
     private final TravelHelper.GpxReadCallback callback;
     private final List<AmenityIndexRepository> repos;
-    private final double MIN_COMPLEXITY = 4.0; // POI each 4 km, if less - more complex route
-    private final int MAP_SEARCH_RADIUS = 100; // meters
-    private final double GEOMETRY_PRECISION = 0.0005d; // ~50 meters
 
     public TravelObfGpxFileReader(@NonNull MapActivity mapActivity,
                                   @NonNull TravelArticle article,
@@ -347,9 +341,10 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             if (repo.getFile().getName().toLowerCase().startsWith(WorldRegion.WORLD + "_")) {
                 continue;
             }
-            int mapCnt = 0;
             currentList.clear();
 
+            long poiTime = 0;
+            long mapTime = 0;
             try {
                 if (travelGpx.routeRadius > 0 && !travelGpx.hasBbox31()) {
                     pointRequest.setBBoxRadius(travelGpx.lat, travelGpx.lon, travelGpx.routeRadius);
@@ -360,70 +355,31 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                 }
 
                 repo.searchPoi(pointRequest);
+                poiTime = System.currentTimeMillis() - time;
+                time = System.currentTimeMillis();
                 if (currentList.isEmpty()) {
                     continue;
                 }
-                if (getComplexity(distance, currentList.size()) < MIN_COMPLEXITY) {
-                    sr = BinaryMapIndexReader.buildSearchRequest(left, right, top, bottom, 15, searchFilter,
-                            matchSegmentsByRefTitleRouteId(travelGpx, binaryMapDataObjectMap, isCancelled));
-                    System.out.println(repo.getFile().getName() + " BIG BBOX");
-                    repo.searchMapIndex(sr);
-                    mapCnt++;
-                } else {
-                    for (Amenity am : currentList) {
-                        if (!processedAmenity.contains(am.getId())) {
-                            if (!isPoiSectionIntersect(repo, am)) {
-                                continue;
-                            }
-                            sr.setBBoxRadius(am.getLocation().getLatitude(), am.getLocation().getLongitude(), MAP_SEARCH_RADIUS);
-                            repo.searchMapIndex(sr);
-                            mapCnt++;
-                            findAmenityOutOfGeometry(currentList, binaryMapDataObjectMap.values(), processedAmenity);
-                            processedAmenity.add(am.getId());
-                        }
-                    }
+                for (Amenity am : currentList) {
+                    int y31 = MapUtils.get31TileNumberY(am.getLocation().getLatitude());
+                    int x31 = MapUtils.get31TileNumberX(am.getLocation().getLongitude());
+                    sr.addBBoxPoint(x31, y31);
                 }
-
+                repo.searchMapIndex(sr);
+                mapTime = System.currentTimeMillis() - time;
                 if (isUserGPX && !Algorithms.isEmpty(binaryMapDataObjectMap)) {
                     break; // speed up reading of User's GPX files
                 }
             } catch (Exception e) {
                 LOG.error(e.getMessage());
             }
-            System.out.println(repo.getFile().getName() + " : " + (System.currentTimeMillis() - time) + "ms" + ", map requests:" + mapCnt + ", poi " + amenityMap.size());
+            System.out.println(repo.getFile().getName() + " : poi time:" + poiTime + "ms, map time:" + mapTime + "ms, poi size:" + amenityMap.size());
             time = System.currentTimeMillis();
         }
 
         pointList.addAll(getPointList(amenityMap, gpxFileExtensions, pgNames, pgIcons, pgColors, pgBackgrounds));
         segmentList.addAll(binaryMapDataObjectMap.values());
         return !isCancelled.isCancelled();
-    }
-
-    private double getComplexity(double dist, int pointsSize) {
-        if (dist < 1) {
-            return MIN_COMPLEXITY;
-        }
-        double c = dist /  pointsSize;
-        boolean isMeters = c > 100;
-        return isMeters ? c / 1000 : c;
-    }
-
-    private void findAmenityOutOfGeometry(final Collection<Amenity> amenities, Collection<BinaryMapDataObject> objects, HashSet<Long> proccesedAmenity) {
-        for (BinaryMapDataObject object : objects) {
-            for (int i = 0; i < object.getPointsLength(); i++) {
-                LatLon latLon = new LatLon(MapUtils.get31LatitudeY(object.getPoint31YTile(i)), MapUtils.get31LongitudeX(object.getPoint31XTile(i)));
-                for (Amenity am : amenities) {
-                    if (!proccesedAmenity.contains(am.getId())) {
-                        if (MapUtils.areLatLonEqual(latLon, am.getLocation(), GEOMETRY_PRECISION)) {
-                            proccesedAmenity.add(am.getId());
-                        }
-                    }
-                }
-                if (proccesedAmenity.size() == amenities.size()) {
-                    break;
-                }
-            }
-        }
     }
 
     private boolean isPoiSectionIntersect(AmenityIndexRepository repo, BinaryMapIndexReader.SearchRequest<Amenity> pointRequest) {

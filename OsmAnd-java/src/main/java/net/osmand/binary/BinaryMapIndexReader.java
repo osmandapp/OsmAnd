@@ -974,7 +974,9 @@ public class BinaryMapIndexReader {
 					if (index.right < req.left || index.left > req.right || index.top > req.bottom || index.bottom < req.top) {
 						continue;
 					}
-
+					if (req.hasPoints() && !req.containPoints(index.left, index.top, index.right, index.bottom)) {
+						continue;
+					}
 
 
 					// lazy initializing trees
@@ -988,6 +990,9 @@ public class BinaryMapIndexReader {
 
 					for (MapTree tree : index.trees) {
 						if (tree.right < req.left || tree.left > req.right || tree.top > req.bottom || tree.bottom < req.top) {
+							continue;
+						}
+						if (req.hasPoints() && !req.containPoints(tree.left, tree.top, tree.right, tree.bottom)) {
 							continue;
 						}
 						codedIS.seek(tree.filePointer);
@@ -1114,9 +1119,11 @@ public class BinaryMapIndexReader {
 				// coordinates are init
 				if (current.right < req.left || current.left > req.right || current.top > req.bottom || current.bottom < req.top) {
 					return;
-				} else {
-					req.numberOfAcceptedSubtrees++;
 				}
+				if (req.hasPoints() && !req.containPoints(current.left, current.top, current.right, current.bottom)) {
+					return;
+				}
+				req.numberOfAcceptedSubtrees++;
 			}
 			switch (tag) {
 			case 0:
@@ -1791,6 +1798,9 @@ public class BinaryMapIndexReader {
 		int top = 0;
 		int bottom = 0;
 
+		List<Integer> pointsX;
+		List<Integer> pointsY;
+
 		int zoom = 15;
 		int limit = -1;
 
@@ -1953,6 +1963,30 @@ public class BinaryMapIndexReader {
 
 		public boolean isBboxSpecified() {
 			return left != 0 || right != 0;
+		}
+
+		public void addBBoxPoint(int x31, int y31) {
+			if (pointsX == null || pointsY == null) {
+				pointsX = new ArrayList<>();
+				pointsY = new ArrayList<>();
+			}
+			pointsX.add(x31);
+			pointsY.add(y31);
+		}
+
+		public boolean hasPoints() {
+			return pointsX != null;
+		}
+
+		public boolean containPoints(int left, int top, int right, int bottom) {
+			for (int i = 0; i < pointsX.size(); i++) {
+				int x31 = pointsX.get(i);
+				int y31 = pointsY.get(i);
+				if (left <= x31 && right >= x31 && top <= y31 && bottom >= y31) {
+					return true;
+				}
+			}
+			return false;
 		}
 	}
 
