@@ -1103,7 +1103,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		updateNavigationBarColor();
 		//mapView.setComplexZoom(mapView.getZoom(), mapView.getSettingsMapDensity());
 		mapView.setMapDensity(mapView.getSettingsMapDensity());
-		mapView.askUpdateGridSettings();
+		mapView.updateGridSettings();
 		app.getDaynightHelper().startSensorIfNeeded(change -> app.runInUIThread(() -> getMapView().refreshMap(true)));
 		getMapView().refreshMap(true);
 		applyScreenOrientation();

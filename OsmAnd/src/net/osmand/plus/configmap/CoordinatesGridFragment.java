@@ -130,7 +130,7 @@ public class CoordinatesGridFragment extends BaseOsmAndFragment implements ICoor
 		button.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity instanceof MapActivity mapActivity) {
-				mapActivity.getDashboard().hideDashboard(); //todo: implement hide and restore
+				mapActivity.getDashboard().hideDashboard();
 				controller.onZoomLevelsClicked(mapActivity);
 			}
 		});

@@ -128,9 +128,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private boolean DISABLE_MAP_LAYERS;
 	private StateChangedListener<Boolean> disableMapLayersListener;
 
-	private StateChangedListener<Boolean> showCoordinatesGridListener;
-	private StateChangedListener<GridFormat> gridFormatListener;
-	private StateChangedListener<Integer> gridZoomListener;
+	private StateChangedListener gridSettingsListener;
 
 	private View view;
 	private final Context ctx;
@@ -319,21 +317,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		disableMapLayersListener = change -> DISABLE_MAP_LAYERS = change;
 		settings.DISABLE_MAP_LAYERS.addListener(disableMapLayersListener);
 
-		// Grid settings listeners
-		showCoordinatesGridListener = change -> askUpdateGridSettings();
-		gridFormatListener = change -> askUpdateGridSettings();
-		gridZoomListener = change -> askUpdateGridSettings();
-
-		// Register Grid settings listeners
-		settings.SHOW_COORDINATES_GRID.addListener(showCoordinatesGridListener);
-		settings.COORDINATE_GRID_FORMAT.addListener(gridFormatListener);
-		settings.COORDINATE_GRID_MIN_ZOOM.addListener(gridZoomListener);
-		settings.COORDINATE_GRID_MAX_ZOOM.addListener(gridZoomListener);
-		if (!settings.COORDINATE_GRID_FORMAT.isSet()) {
-			// Registering a listener to track changes in the base coordinates format setting
-			// when grid-specific format isn't set
-			settings.COORDINATES_FORMAT.addListener(gridZoomListener);
-		}
+		gridSettingsListener = this::onUpdateGridSettings;
+		settings.SHOW_COORDINATES_GRID.addListener(gridSettingsListener);
+		settings.COORDINATE_GRID_FORMAT.addListener(gridSettingsListener);
+		settings.COORDINATE_GRID_MIN_ZOOM.addListener(gridSettingsListener);
+		settings.COORDINATE_GRID_MAX_ZOOM.addListener(gridSettingsListener);
+		settings.COORDINATES_FORMAT.addListener(gridSettingsListener);
 	}
 
 	public void updateDisplayMetrics(DisplayMetrics dm, int width, int height) {
@@ -667,7 +656,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (app.accessibilityEnabled()) {
 			app.showShortToastMessage(app.getString(R.string.zoomIs) + " " + zoom.getBaseZoom());
 		}
-		askUpdateGridSettings(); // todo: implement an approach to react on zoom level change correctly
+		updateGridSettings();
 
 		for (ManualZoomListener listener : manualZoomListeners) {
 			listener.onManualZoomChange();
@@ -2575,7 +2564,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	public void askUpdateGridSettings() {
+	public <T> void onUpdateGridSettings(@NonNull T changed) {
+		updateGridSettings();
+	}
+
+	public void updateGridSettings() {
 		if (mapRenderer != null) {
 			applyGridSettings(mapRenderer);
 		}
@@ -2585,8 +2578,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		int zoom = getZoom();
 		int minZoom = settings.COORDINATE_GRID_MIN_ZOOM.get();
 		int maxZoom = settings.COORDINATE_GRID_MAX_ZOOM.get();
-		boolean zoomPassed = zoom >= minZoom && zoom <= maxZoom;
-		boolean show = zoomPassed && settings.SHOW_COORDINATES_GRID.get();
+		boolean isAvailableZoom = zoom >= minZoom && zoom <= maxZoom;
+		boolean show = isAvailableZoom && settings.SHOW_COORDINATES_GRID.get();
 
 		GridFormat gridFormat = settings.COORDINATE_GRID_FORMAT.get();
 		FColorARGB color = new FColorARGB(1.0f, 0.1f, 0.0f, 0.8f);

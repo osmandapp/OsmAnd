@@ -38,7 +38,7 @@ public class ShowHideCoordinatesGridAction extends QuickAction {
 		boolean enabled = settings.SHOW_COORDINATES_GRID.get();
 		settings.SHOW_COORDINATES_GRID.set(!enabled);
 
-		mapActivity.getMapView().askUpdateGridSettings();
+		mapActivity.getMapView().updateGridSettings();
 		mapActivity.refreshMap();
 	}
 
