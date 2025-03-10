@@ -37,7 +37,6 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 	private TransportLinesMenu menu;
 
 	private View view;
-	private LayoutInflater themedInflater;
 	private boolean isShowAnyTransport;
 
 	@Override
@@ -53,8 +52,7 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 		isShowAnyTransport = menu.isShowAnyTransport();
 
 		updateNightMode();
-		themedInflater = UiUtilities.getInflater(getContext(), nightMode);
-		view = themedInflater.inflate(R.layout.fragment_transport_lines, container, false);
+		view = inflate(R.layout.fragment_transport_lines, container);
 
 		setupMainToggle();
 		setupTransportStopsToggle();

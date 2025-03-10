@@ -209,6 +209,16 @@ public class ConfigureMapMenu {
 				.setIcon(R.drawable.ic_action_map_download)
 				.setItemDeleteAction(settings.SHOW_BORDERS_OF_DOWNLOADED_MAPS)
 				.setListener(listener));
+
+		selected = settings.SHOW_COORDINATES_GRID.get();
+		adapter.addItem(new ContextMenuItem(COORDINATES_GRID_ID)
+				.setTitleId(R.string.layer_coordinates_grid, activity)
+				.setSelected(selected)
+				.setColor(app, selected ? R.color.osmand_orange : INVALID_ID)
+				.setIcon(CoordinatesGridController.getStateIcon(selected))
+				.setSecondaryIcon(R.drawable.ic_action_additional_option)
+				.setItemDeleteAction(settings.SHOW_COORDINATES_GRID)
+				.setListener(listener));
 	}
 
 	private void createRouteAttributeItems(@NonNull List<RenderingRuleProperty> customRules,
@@ -469,7 +479,7 @@ public class ConfigureMapMenu {
 				it.remove();
 			}
 		}
-		if (preferences.size() > 0) {
+		if (!preferences.isEmpty()) {
 			ItemClickListener clickListener = (uiAdapter, view, item, isChecked) -> {
 				if (UI_CATEGORY_DETAILS.equals(category)) {
 					DetailsBottomSheet.showInstance(activity.getSupportFragmentManager(), properties, preferences, uiAdapter, item);
