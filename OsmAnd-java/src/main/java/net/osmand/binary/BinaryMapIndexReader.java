@@ -974,8 +974,10 @@ public class BinaryMapIndexReader {
 					if (index.right < req.left || index.left > req.right || index.top > req.bottom || index.bottom < req.top) {
 						continue;
 					}
-
-
+					if (req.hasSearchPoints() &&
+							!req.bboxContainsSearchPoints(index.left, index.top, index.right, index.bottom)) {
+						continue;
+					}
 
 					// lazy initializing trees
 					if (index.trees == null) {
@@ -988,6 +990,10 @@ public class BinaryMapIndexReader {
 
 					for (MapTree tree : index.trees) {
 						if (tree.right < req.left || tree.left > req.right || tree.top > req.bottom || tree.bottom < req.top) {
+							continue;
+						}
+						if (req.hasSearchPoints() &&
+								!req.bboxContainsSearchPoints(tree.left, tree.top, tree.right, tree.bottom)) {
 							continue;
 						}
 						codedIS.seek(tree.filePointer);
@@ -1114,9 +1120,12 @@ public class BinaryMapIndexReader {
 				// coordinates are init
 				if (current.right < req.left || current.left > req.right || current.top > req.bottom || current.bottom < req.top) {
 					return;
-				} else {
-					req.numberOfAcceptedSubtrees++;
 				}
+				if (req.hasSearchPoints() &&
+						!req.bboxContainsSearchPoints(current.left, current.top, current.right, current.bottom)) {
+					return;
+				}
+				req.numberOfAcceptedSubtrees++;
 			}
 			switch (tag) {
 			case 0:
@@ -1791,6 +1800,9 @@ public class BinaryMapIndexReader {
 		int top = 0;
 		int bottom = 0;
 
+		List<Integer> searchPointsX;
+		List<Integer> searchPointsY;
+
 		int zoom = 15;
 		int limit = -1;
 
@@ -1953,6 +1965,35 @@ public class BinaryMapIndexReader {
 
 		public boolean isBboxSpecified() {
 			return left != 0 || right != 0;
+		}
+
+		public void clearSearchPoints() {
+			searchPointsX = null;
+			searchPointsY = null;
+		}
+
+		public void addSearchPoint(int x31, int y31) {
+			if (searchPointsX == null || searchPointsY == null) {
+				searchPointsX = new ArrayList<>();
+				searchPointsY = new ArrayList<>();
+			}
+			searchPointsX.add(x31);
+			searchPointsY.add(y31);
+		}
+
+		private boolean hasSearchPoints() {
+			return searchPointsX != null;
+		}
+
+		private boolean bboxContainsSearchPoints(int left, int top, int right, int bottom) {
+			for (int i = 0; i < searchPointsX.size(); i++) {
+				int x31 = searchPointsX.get(i);
+				int y31 = searchPointsY.get(i);
+				if (left <= x31 && right >= x31 && top <= y31 && bottom >= y31) {
+					return true;
+				}
+			}
+			return false;
 		}
 	}
 
