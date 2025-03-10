@@ -1,5 +1,6 @@
 package net.osmand.plus.wikivoyage.data;
 
+import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 import static net.osmand.plus.wikivoyage.data.TravelObfHelper.TAG_URL;
 import static net.osmand.plus.wikivoyage.data.TravelObfHelper.TAG_URL_TEXT;
@@ -58,15 +59,13 @@ public class TravelGpx extends TravelArticle {
 	public double minElevation = Double.NaN;
 	public double avgElevation;
 
-	public Amenity amenity;
-
-	public String routeType;
+	private String amenitySubType;
 
 	public TravelGpx() {
 	}
 
 	public TravelGpx(Amenity amenity) {
-		this.amenity = amenity;
+		amenitySubType = amenity.getSubType();
 		String enTitle = amenity.getName("en");
 		title = Algorithms.isEmpty(title) ? amenity.getName() : enTitle;
 		lat = amenity.getLocation().getLatitude();
@@ -100,8 +99,6 @@ public class TravelGpx extends TravelArticle {
 				}
 			}
 		}
-		String subtype = amenity.getSubType();
-		routeType = subtype.startsWith("routes_") ? subtype.replace("routes_", "") : null;
 	}
 
 	@Nullable
@@ -185,5 +182,18 @@ public class TravelGpx extends TravelArticle {
 	@Override
 	public String getMainFilterString() {
 		return ROUTE_TRACK; // considered together with ROUTES_PREFIX
+	}
+
+	@Nullable
+	public String getAmenitySubType() {
+		return amenitySubType;
+	}
+
+	@Nullable
+	public String getRouteType() {
+		if (amenitySubType != null && amenitySubType.startsWith(ROUTES_PREFIX)) {
+			return amenitySubType.replace(ROUTES_PREFIX, "").split(";")[0];
+		}
+		return null;
 	}
 }

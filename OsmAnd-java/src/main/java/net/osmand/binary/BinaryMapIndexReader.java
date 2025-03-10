@@ -1967,6 +1967,11 @@ public class BinaryMapIndexReader {
 			return left != 0 || right != 0;
 		}
 
+		public void clearSearchPoints() {
+			searchPointsX = null;
+			searchPointsY = null;
+		}
+
 		public void addSearchPoint(int x31, int y31) {
 			if (searchPointsX == null || searchPointsY == null) {
 				searchPointsX = new ArrayList<>();
