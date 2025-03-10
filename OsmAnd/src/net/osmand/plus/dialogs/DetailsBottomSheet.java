@@ -271,7 +271,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet implements Set
 				Duration.ofSeconds(1));
 	}
 
-	public View getView(final Setting setting) {
+	private View getView(final Setting setting) {
 		return itemsContainer.getChildAt(getPositionOfSetting(setting).orElseThrow());
 	}
 

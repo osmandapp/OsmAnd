@@ -30,7 +30,7 @@ public class ViewOfSettingHighlighter implements SettingHighlighter {
 	}
 
 	private void highlightView(final View view) {
-		// FK-TODO: too much post() becaused postDelayed() in _highlightView() is enough?
+		// FK-TODO: too much post() because postDelayed() in _highlightView() is enough?
 		new Handler().post(() -> _highlightView(view));
 	}
 

@@ -33,6 +33,7 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 				return;
 			}
 			if (settingsFragment instanceof final DetailsBottomSheet detailsBottomSheet) {
+				// FK-TODO: refactor
 				IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
 				detailsBottomSheet.showNow(mapActivity.getSupportFragmentManager());
 				detailsBottomSheet
@@ -41,12 +42,12 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 				return;
 			}
 			if (settingsFragment instanceof final TransportLinesFragment transportLinesFragment) {
+				// FK-TODO: refactor
 				IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
 				transportLinesFragment.showNow(mapActivity.getSupportFragmentManager());
-				// FK-TODO:
-				//				transportLinesFragment
-//						.getSettingHighlighter()
-//						.highlightSetting(transportLinesFragment, asSetting(setting2Highlight));
+				transportLinesFragment
+						.getSettingHighlighter()
+						.highlightSetting(transportLinesFragment, asSetting(setting2Highlight));
 				return;
 			}
 		}

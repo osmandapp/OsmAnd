@@ -1,5 +1,7 @@
 package net.osmand.plus.transport;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -95,7 +97,13 @@ public final class TransportLinesMenu {
 	}
 
 	public String getTransportName(@NonNull String attrName, @Nullable String defValue) {
-		return AndroidUtils.getRenderingStringPropertyName(app, attrName, defValue);
+		return getTransportName(attrName, defValue, app);
+	}
+
+	public static String getTransportName(final @NonNull String attrName,
+										  final @Nullable String defValue,
+										  final Context context) {
+		return AndroidUtils.getRenderingStringPropertyName(context, attrName, defValue);
 	}
 
 	private void showEnabledTransport(@NonNull MapActivity mapActivity, @NonNull List<String> enabledIds) {
@@ -145,7 +153,7 @@ public final class TransportLinesMenu {
 		return settings.getCustomRenderBooleanProperty(attrName);
 	}
 
-	public List<String> getAllAttributes() {
+	private List<String> getAllAttributes() {
 		Set<String> attrNames = new TreeSet<>();
 		attrNames.addAll(getKnownAttributes());
 		attrNames.addAll(getSupportedAttributes());

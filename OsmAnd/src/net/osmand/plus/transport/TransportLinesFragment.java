@@ -1,5 +1,6 @@
 package net.osmand.plus.transport;
 
+import static net.osmand.plus.transport.TransportLinesMenu.getTransportName;
 import static net.osmand.plus.transport.TransportLinesMenu.getTransportRules;
 
 import android.content.Context;
@@ -24,6 +25,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.configmap.ViewOfSettingHighlighter;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -31,12 +33,17 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
-import java.util.List;
+import org.threeten.bp.Duration;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
+import de.KnollFrank.lib.settingssearch.results.Setting;
+import de.KnollFrank.lib.settingssearch.results.SettingHighlighter;
+import de.KnollFrank.lib.settingssearch.results.SettingHighlighterProvider;
 
-public class TransportLinesFragment extends BaseOsmAndFragment {
+public class TransportLinesFragment extends BaseOsmAndFragment implements SettingHighlighterProvider {
 
 	public static final String TAG = TransportLinesFragment.class.getSimpleName();
 
@@ -46,6 +53,7 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 	private View view;
 	private LayoutInflater themedInflater;
 	private boolean isShowAnyTransport;
+	private final Map<String, View> viewByAttrName = new HashMap<>();
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -89,6 +97,7 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 		TransportType type = TransportType.TRANSPORT_STOPS;
 		setupButton(
 				view.findViewById(R.id.transport_stops_toggle),
+				type.getAttrName(),
 				type.getIconId(),
 				menu.getTransportName(type.getAttrName()),
 				menu.isTransportEnabled(type.getAttrName()),
@@ -116,6 +125,7 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 				boolean showDivider = i < rules.size() - 1;
 				setupButton(
 						view,
+						attrName,
 						menu.getTransportIcon(attrName),
 						menu.getTransportName(attrName, property.getName()),
 						menu.isTransportEnabled(attrName),
@@ -140,8 +150,19 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 		return true;
 	}
 
+	private void setupButton(final @NonNull View view,
+							 final @NonNull String attrName,
+							 final int iconId,
+							 final @NonNull String title,
+							 final boolean enabled,
+							 final boolean showDivider,
+							 final @Nullable OnClickListener listener) {
+		setupButton(view, iconId, title, enabled, showDivider, listener);
+		viewByAttrName.put(attrName, view);
+	}
+
 	public static void setupButton(@NonNull View view, int iconId, @NonNull String title, boolean enabled,
-	                               boolean showDivider, @Nullable OnClickListener listener) {
+								   boolean showDivider, @Nullable OnClickListener listener) {
 		OsmandApplication app = (OsmandApplication) view.getContext().getApplicationContext();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		int activeColor = app.getSettings().getApplicationMode().getProfileColor(nightMode);
@@ -206,13 +227,24 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 		return new TransportLinesFragment();
 	}
 
+	@Override
+	public SettingHighlighter getSettingHighlighter() {
+		return new ViewOfSettingHighlighter(
+				this::getView,
+				Duration.ofSeconds(1));
+	}
+
+	private View getView(final Setting setting) {
+		return viewByAttrName.get(setting.getKey());
+	}
+
 	public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<TransportLinesFragment> {
 
-		private TransportLinesMenu menu;
+		private Set<String> attrNames;
 
 		@Override
 		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final TransportLinesFragment transportLinesFragment) {
-			this.menu = transportLinesFragment.menu;
+			attrNames = transportLinesFragment.viewByAttrName.keySet();
 		}
 
 		@Override
@@ -222,22 +254,22 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 			screen.setTitle("screen title");
 			screen.setSummary("screen summary");
 			this
-					.asPreferences(menu.getAllAttributes(), context)
+					.asPreferences(attrNames, context)
 					.forEach(screen::addPreference);
 			setPreferenceScreen(screen);
 		}
 
-		private List<Preference> asPreferences(final List<String> attributes, final Context context) {
+		private Set<Preference> asPreferences(final Set<String> attributes, final Context context) {
 			return attributes
 					.stream()
 					.map(attribute -> asPreference(attribute, context))
-					.collect(Collectors.toList());
+					.collect(Collectors.toUnmodifiableSet());
 		}
 
 		private Preference asPreference(final String attribute, final Context context) {
 			final Preference preference = new Preference(context);
 			preference.setKey(attribute);
-			preference.setTitle(menu.getTransportName(attribute));
+			preference.setTitle(getTransportName(attribute, null, context));
 			return preference;
 		}
 	}
