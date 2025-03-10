@@ -273,10 +273,9 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             top = (int) travelGpx.getBbox31().top;
             bottom = (int) travelGpx.getBbox31().bottom;
         }
-        boolean shouldReadSingleMap = !travelGpx.hasOsmRouteId();
 
         BinaryMapIndexReader.SearchFilter mapRequestFilter = null;
-        String routeType = travelGpx.getRouteType();
+        String routeType = travelGpx.getRouteType(); // TODO allow route=segment to read
         if (routeType != null) {
             mapRequestFilter = new BinaryMapIndexReader.SearchFilter() {
                 @Override
@@ -328,11 +327,8 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             if (isCancelled.isCancelled()) {
                 return false;
             }
-            if (shouldReadSingleMap && !Algorithms.objectEquals(repo.getFile(), travelGpx.file)) {
-                continue;
-            }
-            if (repo.getFile().getName().toLowerCase().startsWith(WorldRegion.WORLD + "_")) {
-                continue;
+            if (shouldSkipRepository(repo, travelGpx)) {
+                continue; // speed up reading (skip inappropriate obf files)
             }
             currentAmenities.clear();
 
@@ -365,9 +361,6 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             repo.searchMapIndex(mapRequest);
 
             mapTime = System.currentTimeMillis() - time;
-            if (shouldReadSingleMap && !Algorithms.isEmpty(geometryMap)) {
-                break; // speed up reading User's GPX files
-            }
 
             System.out.println("XXX " + repo.getFile().getName() + " : poi time:" + poiTime + "ms, map time:" + mapTime + "ms, poi size:" + amenityMap.size());
             time = System.currentTimeMillis();
@@ -376,6 +369,25 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
         pointList.addAll(getPointList(amenityMap, gpxFileExtensions, pgNames, pgIcons, pgColors, pgBackgrounds));
         segmentList.addAll(geometryMap.values());
         return !isCancelled.isCancelled();
+    }
+
+    private boolean shouldSkipRepository(AmenityIndexRepository repo, TravelArticle article) {
+        if (repo.getFile().getName().toLowerCase().startsWith(WorldRegion.WORLD + "_")) {
+            return true; // World (basemap) files have huge bbox but never contain GPX data
+        }
+        if (article.hasOsmRouteId()) {
+            return false; // OSM routes are always supposed to read from multiple files
+        }
+        if (article.file != null && !Algorithms.objectEquals(repo.getFile(), article.file)) {
+            return true; // skip inappropriate File
+        }
+        if (article instanceof TravelGpx that) {
+            if (!repo.getReaderPoiIndexes().isEmpty() && !Algorithms.objectEquals(
+                    repo.getReaderPoiIndexes().get(0).getName(), that.getAmenityRegionName())) {
+                return true; // skip inappropriate RegionName
+            }
+        }
+        return false;
     }
 
     private boolean isPoiSectionIntersects(AmenityIndexRepository repo,
@@ -405,10 +417,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                 if (isCancelled.isCancelled()) {
                     return false;
                 }
-                if (!Algorithms.objectEquals(repo.getFile(), article.file)) {
-                    continue; // speed up reading of Wikivoyage and User's GPX files in OBF
-                }
-                if (repo.getFile().getName().toLowerCase().startsWith(WorldRegion.WORLD + "_")) {
+                if (shouldSkipRepository(repo, article)) {
                     continue;
                 }
                 BinaryMapIndexReader.SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(

@@ -60,12 +60,14 @@ public class TravelGpx extends TravelArticle {
 	public double avgElevation;
 
 	private String amenitySubType;
+	private String amenityRegionName;
 
 	public TravelGpx() {
 	}
 
 	public TravelGpx(Amenity amenity) {
 		amenitySubType = amenity.getSubType();
+		amenityRegionName = amenity.getRegionName();
 		String enTitle = amenity.getName("en");
 		title = Algorithms.isEmpty(title) ? amenity.getName() : enTitle;
 		lat = amenity.getLocation().getLatitude();
@@ -187,6 +189,11 @@ public class TravelGpx extends TravelArticle {
 	@Nullable
 	public String getAmenitySubType() {
 		return amenitySubType;
+	}
+
+	@Nullable
+	public String getAmenityRegionName() {
+		return amenityRegionName;
 	}
 
 	@Nullable
