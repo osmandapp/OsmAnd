@@ -8,7 +8,7 @@ import java.util.Optional;
 class PreferenceFragmentConnected2PreferenceProvider implements de.KnollFrank.lib.settingssearch.provider.PreferenceFragmentConnected2PreferenceProvider {
 
 	@Override
-	public Optional<Class<? extends PreferenceFragmentCompat>> getPreferenceFragmentConnected2Preference(Preference preference, final PreferenceFragmentCompat hostOfPreference) {
+	public Optional<Class<? extends PreferenceFragmentCompat>> getPreferenceFragmentConnected2Preference(final Preference preference, final PreferenceFragmentCompat hostOfPreference) {
 		return hostOfPreference instanceof final PreferenceFragmentHandlerProvider preferenceFragmentHandlerProvider ?
 				preferenceFragmentHandlerProvider
 						.getPreferenceFragmentHandler(preference)

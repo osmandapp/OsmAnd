@@ -2,6 +2,7 @@ package net.osmand.plus.configmap;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DETAILS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -35,6 +36,7 @@ import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandler;
 import net.osmand.plus.settings.fragments.search.PreferenceFragmentHandlerProvider;
 import net.osmand.plus.track.helpers.SelectGpxTask.SelectGpxTaskListener;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -412,6 +414,26 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 								final DetailsBottomSheet.PreferenceFragment preferenceFragment = new DetailsBottomSheet.PreferenceFragment();
 								preferenceFragment.setProperties(propertiesOfDetailsBottomSheet);
 								return preferenceFragment;
+							}
+
+							@Override
+							public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
+								return false;
+							}
+						});
+			}
+			if (TRANSPORT_ID.equals(preference.getKey())) {
+				return Optional.of(
+						new PreferenceFragmentHandler() {
+
+							@Override
+							public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
+								return TransportLinesFragment.PreferenceFragment.class;
+							}
+
+							@Override
+							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
+								return new TransportLinesFragment.PreferenceFragment();
 							}
 
 							@Override

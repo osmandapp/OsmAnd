@@ -2,6 +2,7 @@ package net.osmand.plus.transport;
 
 import static net.osmand.plus.transport.TransportLinesMenu.getTransportRules;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +16,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -28,6 +32,9 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
 
 public class TransportLinesFragment extends BaseOsmAndFragment {
 
@@ -173,10 +180,65 @@ public class TransportLinesFragment extends BaseOsmAndFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		TransportLinesFragment
+				.createInstance()
+				.show(fragmentManager);
+	}
+
+	public void show(final @NonNull FragmentManager fragmentManager) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			fragmentManager.beginTransaction()
-					.replace(R.id.content, new TransportLinesFragment(), TAG)
+					.replace(R.id.content, this, TAG)
 					.commitAllowingStateLoss();
+		}
+	}
+
+	// FK-TODO: DRY with show()
+	public void showNow(final @NonNull FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			fragmentManager.beginTransaction()
+					.replace(R.id.content, this, TAG)
+					.commitNowAllowingStateLoss();
+		}
+	}
+
+	private static TransportLinesFragment createInstance() {
+		return new TransportLinesFragment();
+	}
+
+	public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<TransportLinesFragment> {
+
+		private TransportLinesMenu menu;
+
+		@Override
+		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final TransportLinesFragment transportLinesFragment) {
+			this.menu = transportLinesFragment.menu;
+		}
+
+		@Override
+		public void onCreatePreferences(@Nullable final Bundle savedInstanceState, @Nullable final String rootKey) {
+			final Context context = getPreferenceManager().getContext();
+			final PreferenceScreen screen = getPreferenceManager().createPreferenceScreen(context);
+			screen.setTitle("screen title");
+			screen.setSummary("screen summary");
+			this
+					.asPreferences(menu.getAllAttributes(), context)
+					.forEach(screen::addPreference);
+			setPreferenceScreen(screen);
+		}
+
+		private List<Preference> asPreferences(final List<String> attributes, final Context context) {
+			return attributes
+					.stream()
+					.map(attribute -> asPreference(attribute, context))
+					.collect(Collectors.toList());
+		}
+
+		private Preference asPreference(final String attribute, final Context context) {
+			final Preference preference = new Preference(context);
+			preference.setKey(attribute);
+			preference.setTitle(menu.getTransportName(attribute));
+			return preference;
 		}
 	}
 }

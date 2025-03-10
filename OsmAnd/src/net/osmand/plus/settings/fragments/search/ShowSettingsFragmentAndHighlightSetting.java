@@ -8,6 +8,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.dialogs.DetailsBottomSheet;
 import net.osmand.plus.helpers.IntentHelper;
+import net.osmand.plus.transport.TransportLinesFragment;
 
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreference;
 import de.KnollFrank.lib.settingssearch.results.*;
@@ -37,6 +38,15 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 				detailsBottomSheet
 						.getSettingHighlighter()
 						.highlightSetting(detailsBottomSheet, asSetting(setting2Highlight));
+				return;
+			}
+			if (settingsFragment instanceof final TransportLinesFragment transportLinesFragment) {
+				IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
+				transportLinesFragment.showNow(mapActivity.getSupportFragmentManager());
+				// FK-TODO:
+				//				transportLinesFragment
+//						.getSettingHighlighter()
+//						.highlightSetting(transportLinesFragment, asSetting(setting2Highlight));
 				return;
 			}
 		}

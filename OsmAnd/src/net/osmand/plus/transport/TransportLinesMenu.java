@@ -145,7 +145,7 @@ public final class TransportLinesMenu {
 		return settings.getCustomRenderBooleanProperty(attrName);
 	}
 
-	private List<String> getAllAttributes() {
+	public List<String> getAllAttributes() {
 		Set<String> attrNames = new TreeSet<>();
 		attrNames.addAll(getKnownAttributes());
 		attrNames.addAll(getSupportedAttributes());
