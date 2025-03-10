@@ -274,11 +274,11 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             bottom = (int) travelGpx.getBbox31().bottom;
         }
         boolean shouldReadSingleMap = !travelGpx.hasOsmRouteId();
-        BinaryMapIndexReader.SearchFilter searchFilter = null;
-        BinaryMapIndexReader.SearchPoiTypeFilter poiTypeFilter = null;
+
+        BinaryMapIndexReader.SearchFilter mapRequestFilter = null;
         String routeType = travelGpx.getRouteType();
         if (routeType != null) {
-            searchFilter = new BinaryMapIndexReader.SearchFilter() {
+            mapRequestFilter = new BinaryMapIndexReader.SearchFilter() {
                 @Override
                 public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex mapIndex) {
                     Integer type = mapIndex.getRule("route_type", routeType);
@@ -286,6 +286,8 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                 }
             };
         }
+
+        BinaryMapIndexReader.SearchPoiTypeFilter poiTypeFilter = null;
         String subType = travelGpx.getAmenitySubType();
         if (!Algorithms.isEmpty(subType)) {
             poiTypeFilter = new BinaryMapIndexReader.SearchPoiTypeFilter() {
@@ -304,16 +306,16 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             poiTypeFilter = getSearchFilter(travelGpx.getMainFilterString(), travelGpx.getPointFilterString());
         }
 
-
         Map<Long, BinaryMapDataObject> geometryMap = new HashMap<>(); // live-updates
         Map<Long, Amenity> amenityMap = new HashMap<>(); // live-updates
         List<Amenity> currentAmenities = new ArrayList<>();
+
         SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
                 0, 0, Algorithms.emptyIfNull(travelGpx.title), left, right, top, bottom, poiTypeFilter,
                 getAmenityMatcher(travelGpx, amenityMap, currentAmenities, isCancelled), null);
 
         SearchRequest<BinaryMapDataObject> mapRequest = BinaryMapIndexReader
-                .buildSearchRequest(left, right, top, bottom, 15, searchFilter,
+                .buildSearchRequest(left, right, top, bottom, 15, mapRequestFilter,
                         matchSegmentsByRefTitleRouteId(travelGpx, geometryMap, isCancelled));
 
         long time = System.currentTimeMillis();
@@ -335,40 +337,38 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
 
             long poiTime = 0;
             long mapTime = 0;
-            try {
-                if (travelGpx.routeRadius > 0 && !travelGpx.hasBbox31()) {
-                    mapRequest.setBBoxRadius(travelGpx.lat, travelGpx.lon, travelGpx.routeRadius);
-                    pointRequest.setBBoxRadius(travelGpx.lat, travelGpx.lon, travelGpx.routeRadius);
-                }
-
-                if (!isPoiSectionIntersects(repo, pointRequest)) {
-                    continue;
-                }
-
-                repo.searchPoi(pointRequest);
-                poiTime = System.currentTimeMillis() - time;
-                time = System.currentTimeMillis();
-                if (currentAmenities.isEmpty()) {
-                    continue;
-                }
-
-                mapRequest.clearSearchPoints();
-                for (Amenity am : currentAmenities) {
-                    int y31 = MapUtils.get31TileNumberY(am.getLocation().getLatitude());
-                    int x31 = MapUtils.get31TileNumberX(am.getLocation().getLongitude());
-                    mapRequest.addSearchPoint(x31, y31);
-                }
-
-                repo.searchMapIndex(mapRequest);
-
-                mapTime = System.currentTimeMillis() - time;
-                if (shouldReadSingleMap && !Algorithms.isEmpty(geometryMap)) {
-                    break; // speed up reading of User's GPX files
-                }
-            } catch (Exception e) {
-                LOG.error(e.getMessage());
+            if (travelGpx.routeRadius > 0 && !travelGpx.hasBbox31()) {
+                mapRequest.setBBoxRadius(travelGpx.lat, travelGpx.lon, travelGpx.routeRadius);
+                pointRequest.setBBoxRadius(travelGpx.lat, travelGpx.lon, travelGpx.routeRadius);
             }
-            System.out.println(repo.getFile().getName() + " : poi time:" + poiTime + "ms, map time:" + mapTime + "ms, poi size:" + amenityMap.size());
+
+            if (!isPoiSectionIntersects(repo, pointRequest)) {
+                continue;
+            }
+
+            repo.searchPoi(pointRequest);
+
+            poiTime = System.currentTimeMillis() - time;
+            time = System.currentTimeMillis();
+            if (currentAmenities.isEmpty()) {
+                continue;
+            }
+
+            mapRequest.clearSearchPoints();
+            for (Amenity am : currentAmenities) {
+                int y31 = MapUtils.get31TileNumberY(am.getLocation().getLatitude());
+                int x31 = MapUtils.get31TileNumberX(am.getLocation().getLongitude());
+                mapRequest.addSearchPoint(x31, y31);
+            }
+
+            repo.searchMapIndex(mapRequest);
+
+            mapTime = System.currentTimeMillis() - time;
+            if (shouldReadSingleMap && !Algorithms.isEmpty(geometryMap)) {
+                break; // speed up reading User's GPX files
+            }
+
+            System.out.println("XXX " + repo.getFile().getName() + " : poi time:" + poiTime + "ms, map time:" + mapTime + "ms, poi size:" + amenityMap.size());
             time = System.currentTimeMillis();
         }
 
