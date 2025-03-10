@@ -1,14 +1,19 @@
 package net.osmand.plus.settings.fragments.search;
 
+import static net.osmand.plus.settings.fragments.search.YOffsetOfChildWithinContainerProvider.getYOffsetOfChildWithinContainer;
+
 import androidx.annotation.IdRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapFragment;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.DetailsBottomSheet;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.transport.TransportLinesFragment;
+
+import java.util.Objects;
 
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreference;
 import de.KnollFrank.lib.settingssearch.results.*;
@@ -26,32 +31,52 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 														final Fragment settingsFragment,
 														final SearchablePreference setting2Highlight) {
 		if (activity instanceof final MapActivity mapActivity) {
-			if (settingsFragment instanceof ConfigureMapFragment) {
-				ShowConfigureMapDashboardAndHighlightSetting
-						.from(mapActivity)
-						.showConfigureMapDashboardAndHighlightSetting(asSetting(setting2Highlight));
-				return;
-			}
-			if (settingsFragment instanceof final DetailsBottomSheet detailsBottomSheet) {
-				// FK-TODO: refactor
-				IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
-				detailsBottomSheet.showNow(mapActivity.getSupportFragmentManager());
-				detailsBottomSheet
-						.getSettingHighlighter()
-						.highlightSetting(detailsBottomSheet, asSetting(setting2Highlight));
-				return;
-			}
-			if (settingsFragment instanceof final TransportLinesFragment transportLinesFragment) {
-				// FK-TODO: refactor
-				IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
-				transportLinesFragment.showNow(mapActivity.getSupportFragmentManager());
-				transportLinesFragment
-						.getSettingHighlighter()
-						.highlightSetting(transportLinesFragment, asSetting(setting2Highlight));
+			final boolean handled =
+					showSettingsFragmentOfMapActivityAndHighlightSetting(
+							mapActivity,
+							settingsFragment,
+							asSetting(setting2Highlight));
+			if (handled) {
 				return;
 			}
 		}
 		delegate.showSettingsFragmentAndHighlightSetting(activity, settingsFragment, setting2Highlight);
+	}
+
+	private static boolean showSettingsFragmentOfMapActivityAndHighlightSetting(final MapActivity mapActivity,
+																				final Fragment settingsFragment,
+																				final Setting setting) {
+		if (settingsFragment instanceof ConfigureMapFragment) {
+			final ConfigureMapFragment configureMapFragment = (ConfigureMapFragment) Objects.requireNonNull(mapActivity.getSupportFragmentManager().findFragmentByTag(ConfigureMapFragment.TAG));
+			IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
+			scrollDashboardOnMapToSettingOfConfigureMapFragment(
+					mapActivity.getDashboard(),
+					setting,
+					configureMapFragment);
+			configureMapFragment
+					.getSettingHighlighter()
+					.highlightSetting(configureMapFragment, setting);
+			return true;
+		}
+		if (settingsFragment instanceof final DetailsBottomSheet detailsBottomSheet) {
+			// FK-TODO: refactor
+			IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
+			detailsBottomSheet.showNow(mapActivity.getSupportFragmentManager());
+			detailsBottomSheet
+					.getSettingHighlighter()
+					.highlightSetting(detailsBottomSheet, setting);
+			return true;
+		}
+		if (settingsFragment instanceof final TransportLinesFragment transportLinesFragment) {
+			// FK-TODO: refactor
+			IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
+			transportLinesFragment.showNow(mapActivity.getSupportFragmentManager());
+			transportLinesFragment
+					.getSettingHighlighter()
+					.highlightSetting(transportLinesFragment, setting);
+			return true;
+		}
+		return false;
 	}
 
 	private static Setting asSetting(final SearchablePreference preference) {
@@ -67,5 +92,15 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 				return preference.hasPreferenceMatchWithinSearchableInfo();
 			}
 		};
+	}
+
+	private static void scrollDashboardOnMapToSettingOfConfigureMapFragment(final DashboardOnMap dashboardOnMap,
+																			final Setting setting,
+																			final ConfigureMapFragment configureMapFragment) {
+		dashboardOnMap.applyScrollPosition(
+				dashboardOnMap.getMainScrollView(),
+				getYOffsetOfChildWithinContainer(
+						configureMapFragment.getView(setting),
+						dashboardOnMap.getMainScrollView()));
 	}
 }
