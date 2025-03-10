@@ -5706,4 +5706,5 @@
     <string name="show_dm_grids">Користи DM уместо степени или DMS</string>
     <string name="show_dm_grids_description">Прикажи мрежу у степенима и минутима уместо у степенима или DMS</string>
     <string name="show_list">Приказати листу</string>
+    <string name="popular_places">Популарна места</string>
 </resources>

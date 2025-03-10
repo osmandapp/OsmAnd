@@ -197,7 +197,7 @@ public class KeyAssignmentsFragment extends BaseOsmAndFragment
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		controller.unregisterDialogIfNeeded(getActivity());
+		controller.finishProcessIfNeeded(getActivity());
 	}
 
 	private void dismiss() {

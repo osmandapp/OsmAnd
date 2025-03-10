@@ -5735,4 +5735,11 @@
     <string name="original_icon_description">Ogni punto manterrebbe la propria icona.</string>
     <string name="show_dm_grids_description">Mostra la griglia in gradi e minuti invece che in gradi o DMS</string>
     <string name="save_favorite_default_appearance">Applicare le modifiche ai punti esistenti nella cartella o solo a quelli nuovi?</string>
+    <string name="popular_places">Luoghi popolari</string>
+    <string name="show_list">Mostra lista</string>
+    <string name="point_location">Posizione del punto</string>
+    <string name="choose_location_on_map">Scegli posizione sulla mappa.</string>
+    <string name="choose_location">Scegli un luogo</string>
+    <string name="shared_string_map_center">Centro della mappa</string>
+    <string name="shared_string_manual">Manuale</string>
 </resources>

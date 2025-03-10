@@ -95,7 +95,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		setupTripRecordingPrefs();
 
 		setupMapTextsPrefs();
-		setupGridPrefs();
 		setupAisTrackerPrefs();
 
 		Preference info = findPreference("info");
@@ -227,31 +226,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		SwitchPreferenceEx symtopPref = findPreference(plugin.ALLOW_SYMBOLS_DISPLAY_ON_TOP.getId());
 		symtopPref.setIconSpaceReserved(false);
 		symtopPref.setDescription(R.string.allow_display_on_top_description);
-	}
-
-	private void setupGridPrefs() {
-		Preference gridCategory = findPreference("grids");
-		gridCategory.setIconSpaceReserved(false);
-
-		SwitchPreferenceEx syminfoPref = findPreference(plugin.SHOW_GRID.getId());
-		syminfoPref.setIconSpaceReserved(false);
-		syminfoPref.setDescription(R.string.show_grids_description);
-
-		SwitchPreferenceEx symtopPref = findPreference(plugin.SHOW_UTM_GRID.getId());
-		symtopPref.setIconSpaceReserved(false);
-		symtopPref.setDescription(R.string.show_utm_grids_description);
-
-		SwitchPreferenceEx symtopPref2 = findPreference(plugin.SHOW_MERCATOR_GRID.getId());
-		symtopPref2.setIconSpaceReserved(false);
-		symtopPref2.setDescription(R.string.show_mercator_grids_description);
-
-		SwitchPreferenceEx symtopPref3 = findPreference(plugin.SHOW_DMS_GRID.getId());
-		symtopPref3.setIconSpaceReserved(false);
-		symtopPref3.setDescription(R.string.show_dms_grids_description);
-
-		SwitchPreferenceEx symtopPref4 = findPreference(plugin.SHOW_DM_GRID.getId());
-		symtopPref4.setIconSpaceReserved(false);
-		symtopPref4.setDescription(R.string.show_dm_grids_description);
 	}
 
 	private void setupMemoryAllocatedForRoutingPref() {

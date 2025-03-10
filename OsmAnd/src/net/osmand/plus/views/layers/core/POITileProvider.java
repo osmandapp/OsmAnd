@@ -262,7 +262,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 
 	@Override
 	public ZoomLevel getMinZoom() {
-		return ZoomLevel.ZoomLevel9;
+		return ZoomLevel.ZoomLevel5;
 	}
 
 	@Override

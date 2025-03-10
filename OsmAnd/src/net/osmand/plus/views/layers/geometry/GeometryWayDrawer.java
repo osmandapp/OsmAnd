@@ -394,35 +394,21 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 
 	public void drawPath(@NonNull VectorLinesCollection collection, int baseOrder, boolean shouldDrawArrows,
 	                     @NonNull List<DrawPathData31> pathsData) {
-
-		if (pathsData.isEmpty()) {
-			return;
-		}
-
+		GeometryWayStyle<?> prevStyle = null;
 		List<DrawPathData31> dataArr = new ArrayList<>();
-		dataArr.add(pathsData.get(0));
-
-		GeometryWayStyle<?> prevStyle = pathsData.get(0).style;
 		int lineId = LINE_ID;
-
-		for (int i = 1; i < pathsData.size(); ++i) {
-			DrawPathData31 data = pathsData.get(i);
-
-			if (!prevStyle.hasPathLine()) {
-				prevStyle = data.style;
-			}
-
-			if (!prevStyle.equalsExceptColor(data.style)) {
-				drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, true, prevStyle, dataArr);
-				++lineId;
+		for (DrawPathData31 data : pathsData) {
+			if (!dataArr.isEmpty() && prevStyle != null && (data != null &&
+					!data.style.equalsExceptColor(prevStyle) || data.style.isUnique()
+					|| prevStyle.hasPathLine() != data.style.hasPathLine())) {
+				drawVectorLine(collection, lineId++, baseOrder, shouldDrawArrows, true, prevStyle, dataArr);
 				dataArr.clear();
-				prevStyle = data.style;
 			}
-
+			prevStyle = data.style;
+			data.lineId = lineId;
 			dataArr.add(data);
 		}
-
-		if (!dataArr.isEmpty()) {
+		if (!dataArr.isEmpty() && prevStyle != null) {
 			drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, true, prevStyle, dataArr);
 		}
 	}

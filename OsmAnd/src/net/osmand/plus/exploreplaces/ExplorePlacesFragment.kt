@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import net.osmand.Location
 import net.osmand.PlatformUtil
-import net.osmand.data.ExploreTopPlacePoint
+import net.osmand.data.Amenity
 import net.osmand.data.QuadRect
 import net.osmand.data.RotatedTileBox
 import net.osmand.map.IMapLocationListener
@@ -26,16 +26,17 @@ import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseOsmAndFragment
 import net.osmand.plus.helpers.AndroidUiHelper
+import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.search.NearbyPlacesAdapter
-import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener
+import net.osmand.plus.search.ShowQuickSearchMode
+import net.osmand.plus.search.dialogs.ExplorePlacesNearbyToolbarController
 import net.osmand.plus.utils.AndroidUtils
 import net.osmand.plus.utils.ColorUtilities
 import net.osmand.plus.views.OsmandMapTileView
 import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton
-import net.osmand.plus.views.mapwidgets.widgets.RulerWidget
-import net.osmand.plus.widgets.TextViewEx
+import net.osmand.plus.wikipedia.WikipediaPlugin
 import net.osmand.util.MapUtils
 import org.apache.commons.logging.Log
 import kotlin.math.abs
@@ -45,7 +46,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	OsmandMapTileView.ManualZoomListener {
 
 	private val COMPASS_UPDATE_PERIOD = 300
-	private lateinit var visiblePlacesRect: QuadRect
+	private var visiblePlacesRect = QuadRect()
 	private val log: Log = PlatformUtil.getLog(
 		ExplorePlacesFragment::class.java)
 
@@ -54,14 +55,14 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	private var mainContent: LinearLayout? = null
 	private var verticalNearbyList: RecyclerView? = null
 	private var showListContainer: View? = null
-	private var showOnMapContainer: View? = null
 	private var frameLayout: CoordinatorLayout? = null
-	private var rulerWidget: RulerWidget? = null
 	private var lastCompassUpdate = 0L
 	private var lastPointListRectUpdate = 0L
 	private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
 	private var isMapVisible = false
 	private var lastHeading = 0f
+	private var explorePlacesToolbarController: ExplorePlacesNearbyToolbarController? = null
+	private var showOnMapContainer: View? = null
 
 	override fun getContentStatusBarNightMode(): Boolean {
 		return nightMode
@@ -94,9 +95,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 				layer.addCustomMapButton(myLocationBtn)
 			}
 			AndroidUiHelper.updateVisibility(zoomButtonsView, true)
-			val mapInfoLayer = mapLayers.mapInfoLayer
-			rulerWidget =
-				mapInfoLayer.setupRulerWidget(view.findViewById(R.id.map_ruler_layout))
 			activity.mapLayers.mapControlsLayer.addCustomMapButton(view.findViewById(R.id.map_compass_button))
 		}
 	}
@@ -104,13 +102,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		AndroidUtils.addStatusBarPadding21v(requireActivity(), view)
-		arguments?.let {
-			val left = it.getDouble("left")
-			val right = it.getDouble("right")
-			val top = it.getDouble("top")
-			val bottom = it.getDouble("bottom")
-			visiblePlacesRect = QuadRect(left, top, right, bottom) // Create QuadRect
-		}
 		mainContent = view.findViewById(R.id.main_content)
 		showListContainer = view.findViewById(R.id.show_list_container)
 		frameLayout = view.findViewById(R.id.frame_layout)
@@ -118,6 +109,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		setupToolBar(view)
 		setupVerticalNearbyList(view)
 		buildZoomButtons(view)
+		updatePointsList()
 		val dialogFragment = mapActivity?.fragmentsHelper?.quickSearchDialogFragment
 		dialogFragment?.hide()
 		bottomSheetBehavior = BottomSheetBehavior.from(mainContent!!)
@@ -125,6 +117,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		bottomSheetBehavior.peekHeight =
 			resources.getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height)
 		bottomSheetBehavior.isHideable = true
+		bottomSheetBehavior.isDraggable = false
 		bottomSheetBehavior.addBottomSheetCallback(object :
 			BottomSheetBehavior.BottomSheetCallback() {
 			override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -141,45 +134,47 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 						}
 				}
 				isMapVisible = newState != BottomSheetBehavior.STATE_EXPANDED
-				app.osmandMap.mapLayers.explorePlacesLayer.enableLayer(isMapVisible)
+				toggleWikipediaLayer(isMapVisible)
+				updateMapControls(newState)
 				AndroidUiHelper.updateVisibility(
 					showOnMapContainer,
 					newState == BottomSheetBehavior.STATE_EXPANDED)
-
-				updateShowListButton(newState)
-
+				bottomSheetBehavior.isDraggable = isMapVisible
+				updateShowListButton()
 			}
 
 			override fun onSlide(bottomSheet: View, slideOffset: Float) {
 			}
 		})
+		updateShowListButton()
 	}
 
-	fun updateShowListButton(state: Int) {
+	private fun toggleWikipediaLayer(enable: Boolean) {
+		val wikiPlugin: WikipediaPlugin? = PluginsHelper.getPlugin(WikipediaPlugin::class.java)
+		wikiPlugin?.toggleWikipediaPoi(enable, null)
+	}
+
+	private fun updateShowListButton() {
+		getToolbar()?.let {
+			it.setRefreshBtnVisible(isMapVisible)
+			val mapInfoLayer = mapActivity?.mapLayers?.mapInfoLayer
+			mapInfoLayer?.updateTopToolbar()
+		}
+	}
+
+	private fun setupShowAll(view: View) {
+		showOnMapContainer = view.findViewById(R.id.show_on_map_container)
+		view.findViewById<ImageView>(R.id.location_icon)
+			.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_marker_dark, nightMode))
+		view.findViewById<View>(R.id.show_on_map).setOnClickListener {
+			hideList()
+		}
+	}
+
+	fun updateMapControls(state: Int) {
 		AndroidUiHelper.updateVisibility(
 			showListContainer,
 			state == BottomSheetBehavior.STATE_HIDDEN)
-	}
-
-	fun onBackPress(): Boolean {
-		if (isMapVisible) {
-			if (mapActivity?.contextMenu?.isVisible == true) {
-				mapActivity?.contextMenu?.hideMenus()
-			} else if (bottomSheetBehavior.state != BottomSheetBehavior.STATE_HIDDEN) {
-				hideList()
-			} else {
-				isMapVisible = false
-				mainContent?.visibility = View.VISIBLE
-				bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-			}
-		} else {
-			val quickSearchFragment = mapActivity?.fragmentsHelper?.quickSearchDialogFragment
-			quickSearchFragment?.show()
-			activity?.supportFragmentManager?.beginTransaction()
-				?.remove(this@ExplorePlacesFragment)
-				?.commit()
-		}
-		return true
 	}
 
 	override fun onResume() {
@@ -188,9 +183,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		app.locationProvider.addCompassListener(this)
 		app.osmandMap.mapView.addMapLocationListener(this)
 		app.osmandMap.mapView.addManualZoomChangeListener(this)
-		mapActivity?.let { activity ->
-			updateWidgetsVisibility(activity, View.GONE)
-		}
+		showToolbar()
 	}
 
 	private fun updatePointsList() {
@@ -208,7 +201,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 				verticalNearbyAdapter.items = nearbyData
 				app.runInUIThread {
 					verticalNearbyAdapter.notifyDataSetChanged()
-					updateShowListButton(bottomSheetBehavior.state)
+					updateMapControls(bottomSheetBehavior.state)
 				}
 			}
 		}
@@ -221,7 +214,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		app.locationProvider.removeCompassListener(this)
 		app.osmandMap.mapView.removeMapLocationListener(this)
 		app.osmandMap.mapView.removeManualZoomListener(this)
-		mapActivity?.let { activity -> updateWidgetsVisibility(activity, View.VISIBLE) }
 	}
 
 	override fun updateLocation(location: Location?) {
@@ -238,19 +230,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 			lastHeading = heading
 			lastCompassUpdate = now
 			updateLocation(location)
-		}
-	}
-
-	private fun setupShowAll(view: View) {
-		showOnMapContainer = view.findViewById(R.id.show_on_map_container)
-		view.findViewById<ImageView>(R.id.location_icon)
-			.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_marker_dark, nightMode))
-		val showList = view.findViewById<TextViewEx>(R.id.show_list)
-		view.findViewById<View>(R.id.show_on_map).setOnClickListener {
-			hideList()
-		}
-		showList.setOnClickListener {
-			showList()
 		}
 	}
 
@@ -292,44 +271,28 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 
 	companion object {
 		val TAG: String = ExplorePlacesFragment::class.java.simpleName
-		fun showInstance(manager: FragmentManager, visiblePlacesRect: QuadRect) {
+		fun showInstance(manager: FragmentManager) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 				val fragment = ExplorePlacesFragment()
-				val bundle = Bundle()
-				bundle.putDouble("left", visiblePlacesRect.left)
-				bundle.putDouble("right", visiblePlacesRect.right)
-				bundle.putDouble("top", visiblePlacesRect.top)
-				bundle.putDouble("bottom", visiblePlacesRect.bottom)
-				fragment.arguments = bundle
 				manager.beginTransaction()
+					.addToBackStack(null)
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.commitAllowingStateLoss()
 			}
 		}
 	}
 
-	override fun onNearbyItemClicked(item: ExploreTopPlacePoint) {
+	override fun onNearbyItemClicked(amenity: Amenity) {
 		mapActivity?.let {
 			isMapVisible = true
-			app.explorePlacesProvider.showPointInContextMenu(it, item)
+			// TODO: Fix
+			//app.explorePlacesProvider.showPointInContextMenu(it, amenity)
 			hideList()
 		}
 	}
 
 	private fun hideList() {
 		bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-		mainContent?.visibility = View.GONE
-	}
-
-	private fun showList() {
-		mainContent?.visibility = View.VISIBLE
-		bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-	}
-
-	private fun updateWidgetsVisibility(activity: MapActivity, visibility: Int) {
-		AndroidUiHelper.setVisibility(
-			activity, visibility, R.id.map_left_widgets_panel,
-			R.id.map_right_widgets_panel, R.id.map_center_info)
 	}
 
 	override fun locationChanged(p0: Double, p1: Double, p2: Any?) {
@@ -338,5 +301,83 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 
 	override fun onManualZoomChange() {
 		updatePointsList()
+	}
+
+	private fun getToolbar(): ExplorePlacesNearbyToolbarController? {
+		if (explorePlacesToolbarController == null) {
+			mapActivity?.let { activity ->
+				val toolbar =
+					ExplorePlacesNearbyToolbarController(activity.supportFragmentManager)
+				toolbar.title =
+					app.getString(R.string.popular_places)
+				toolbar.setRefreshBtnIconIds(
+					R.drawable.ic_flat_list_dark,
+					R.drawable.ic_flat_list_dark)
+				toolbar.setOnBackButtonClickListener { _: View? ->
+					onBackPressed()
+				}
+				toolbar.setOnTitleClickListener { _: View? ->
+					onBackPressed()
+				}
+				toolbar.setOnCloseButtonClickListener { _: View? ->
+					closeFragment()
+				}
+				toolbar.setOnRefreshButtonClickListener { onShowListClicked() }
+				toolbar.setOnCloseToolbarListener {
+					bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+				}
+				explorePlacesToolbarController = toolbar
+			}
+		}
+		return explorePlacesToolbarController
+	}
+
+	private fun onShowListClicked() {
+		when (bottomSheetBehavior.state) {
+			BottomSheetBehavior.STATE_HIDDEN -> bottomSheetBehavior.state =
+				BottomSheetBehavior.STATE_COLLAPSED
+
+			BottomSheetBehavior.STATE_COLLAPSED -> bottomSheetBehavior.state =
+				BottomSheetBehavior.STATE_HIDDEN
+		}
+	}
+
+	private fun hideToolbar() {
+		mapActivity?.let { activity ->
+			getToolbar()?.let { toolbar ->
+				activity.hideTopToolbar(toolbar)
+				activity.updateStatusBarColor()
+			}
+		}
+	}
+
+	fun onBackPressed() {
+		mapActivity?.let { activity ->
+			activity.fragmentsHelper.showQuickSearch(ShowQuickSearchMode.CURRENT, false)
+			closeFragment()
+		}
+	}
+
+	private fun closeFragment() {
+		toggleWikipediaLayer(false)
+		mapActivity?.let { activity ->
+			val nearbyPlacesFragment = activity.fragmentsHelper.explorePlacesFragment
+			if (nearbyPlacesFragment != null) {
+				activity.fragmentsHelper.dismissFragment(null)
+			}
+			hideToolbar()
+		}
+	}
+
+	private fun showToolbar() {
+		mapActivity?.let { activity ->
+			getToolbar()?.let { toolbar ->
+				activity.showTopToolbar(toolbar)
+				activity.updateStatusBarColor()
+				activity.refreshMap()
+				val dialogFragment = activity.fragmentsHelper.quickSearchDialogFragment
+				dialogFragment?.hide()
+			}
+		}
 	}
 }

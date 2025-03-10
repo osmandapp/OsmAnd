@@ -15,6 +15,8 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.wiki.WikiCoreHelper;
+import net.osmand.wiki.WikiImage;
 
 import org.json.JSONObject;
 
@@ -55,6 +57,11 @@ public class Amenity extends MapObject {
 	public static final String ROUTE_ID_OSM_PREFIX = "OSM";
 	public static final String ROUTE_SOURCE = "route_source";
 	public static final String ROUTE_NAME = "route_name";
+	public static final String WIKI_PHOTO = "wiki_photo";
+	public static final String WIKI_CATEGORY = "wiki_category";
+	public static final String TRAVEL_TOPIC = "travel_topic";
+	public static final String TRAVEL_ELO = "travel_elo";
+	public static final String OSMAND_POI_KEY = "osmand_poi_key";
 	public static final String COLOR = "color";
 	public static final String LANG_YES = "lang_yes";
 	public static final String GPX_ICON = "gpx_icon";
@@ -65,6 +72,7 @@ public class Amenity extends MapObject {
 	public static final String ALT_NAME_WITH_LANG_PREFIX = "alt_name:";
 	public static final String COLLAPSABLE_PREFIX = "collapsable_";
 	public static final List<String> HIDING_EXTENSIONS_AMENITY_TAGS = Arrays.asList(PHONE, WEBSITE);
+	public static final int DEFAULT_ELO = 900;
 
 	private String subType;
 	private PoiCategory type;
@@ -79,6 +87,10 @@ public class Amenity extends MapObject {
 	private int order;
 	private Map<Integer, List<TagValuePair>> tagGroups;
 	private String regionName;
+
+	private String wikiIconUrl;
+	private String wikiImageStubUrl;
+	private int travelElo = 0;
 
 	public int getOrder() {
 		return order;
@@ -453,6 +465,86 @@ public class Amenity extends MapObject {
 		return getAdditionalInfo(ROUTE_ID);
 	}
 
+	public String getWikiPhoto() {
+		return getAdditionalInfo(WIKI_PHOTO);
+	}
+
+	public void setWikiPhoto(String wikiPhoto) {
+		setAdditionalInfo(WIKI_PHOTO, wikiPhoto);
+	}
+
+	public String getWikiCategory() {
+		return getAdditionalInfo(WIKI_CATEGORY);
+	}
+
+	public void setWikiCategory(String wikiCategory) {
+		setAdditionalInfo(WIKI_CATEGORY, wikiCategory);
+	}
+
+	public String getTravelTopic() {
+		return getAdditionalInfo(TRAVEL_TOPIC);
+	}
+
+	public void setTravelTopic(String travelTopic) {
+		setAdditionalInfo(TRAVEL_TOPIC, travelTopic);
+	}
+
+	public String getTravelElo() {
+		return getAdditionalInfo(TRAVEL_ELO);
+	}
+
+	public int getTravelEloNumber() {
+		if (travelElo > 0) {
+			return travelElo;
+		}
+		String travelEloStr = getTravelElo();
+		try {
+			travelElo = Integer.parseInt(travelEloStr);
+		} catch (NumberFormatException e) {
+			travelElo = DEFAULT_ELO;
+		}
+		return travelElo;
+	}
+
+	public void setTravelEloNumber(int elo) {
+		travelElo = elo;
+	}
+
+	public String getWikiIconUrl() {
+		if (wikiIconUrl == null) {
+			obtainWikiUrls();
+		}
+		return wikiIconUrl;
+	}
+
+	public void setWikiIconUrl(String wikiIconUrl) {
+		this.wikiIconUrl = wikiIconUrl;
+	}
+
+	public String getWikiImageStubUrl() {
+		if (wikiImageStubUrl == null) {
+			obtainWikiUrls();
+		}
+		return wikiImageStubUrl;
+	}
+
+	public void setWikiImageStubUrl(String wikiImageStubUrl) {
+		this.wikiImageStubUrl = wikiImageStubUrl;
+	}
+
+	public String getOsmandPoiKey() {
+		return getAdditionalInfo(OSMAND_POI_KEY);
+	}
+
+	private void obtainWikiUrls() {
+		String wikiPhoto = getWikiPhoto();
+		if (!Algorithms.isEmpty(wikiPhoto)) {
+			WikiImage wikiIMage = WikiCoreHelper.getImageData(wikiPhoto);
+			setWikiIconUrl(wikiIMage == null ? "" : wikiIMage.getImageIconUrl());
+			setWikiImageStubUrl(wikiIMage == null ? "" : wikiIMage.getImageStubUrl());
+		}
+	}
+
 	public boolean hasOsmRouteId() {
 		String routeId = getRouteId();
 		return routeId != null && routeId.startsWith(ROUTE_ID_OSM_PREFIX);
@@ -461,7 +553,7 @@ public class Amenity extends MapObject {
 	public String getGpxFileName(String lang) {
 		final String gpxFileName = lang != null ? getName(lang) : getEnName(true);
 		if (!Algorithms.isEmpty(gpxFileName)) {
-			return gpxFileName;
+			return Algorithms.sanitizeFileName(gpxFileName);
 		}
 		if (!Algorithms.isEmpty(getRouteId())) {
 			return getRouteId();

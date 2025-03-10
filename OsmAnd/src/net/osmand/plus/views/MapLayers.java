@@ -76,12 +76,12 @@ public class MapLayers {
 	private PreviewRouteLineLayer previewRouteLineLayer;
 	private POIMapLayer poiMapLayer;
 	private FavouritesLayer mFavouritesLayer;
-	private ExploreTopPlacesLayer explorePlacesLayer;
 	private TransportStopsLayer transportStopsLayer;
 	private PointLocationLayer locationLayer;
 	private RadiusRulerControlLayer radiusRulerControlLayer;
 	private DistanceRulerControlLayer distanceRulerControlLayer;
 	private PointNavigationLayer navigationLayer;
+	private SelectLocationLayer selectLocationLayer;
 	private MapMarkersLayer mapMarkersLayer;
 	private ImpassableRoadsLayer impassableRoadsLayer;
 	private MapInfoLayer mapInfoLayer;
@@ -168,6 +168,9 @@ public class MapLayers {
 		// 7. point navigation layer
 		navigationLayer = new PointNavigationLayer(app);
 		mapView.addLayer(navigationLayer, 7);
+		// 7.2 select location layer
+		selectLocationLayer = new SelectLocationLayer(app);
+		mapView.addLayer(selectLocationLayer, 7.2f);
 		// 7.3 map markers layer
 		mapMarkersLayer = new MapMarkersLayer(app);
 		mapView.addLayer(mapMarkersLayer, 7.3f);
@@ -185,8 +188,6 @@ public class MapLayers {
 		mapInfoLayer = new MapInfoLayer(app, routeLayer);
 		mapView.addLayer(mapInfoLayer, 9);
 
-		explorePlacesLayer = new ExploreTopPlacesLayer(app);
-		mapView.addLayer(explorePlacesLayer, 4.1f);
 		// 11. route info layer
 		mapControlsLayer = new MapControlsLayer(app);
 		mapView.addLayer(mapControlsLayer, 11);
@@ -599,6 +600,10 @@ public class MapLayers {
 		return navigationLayer;
 	}
 
+	public SelectLocationLayer getSelectLocationLayer() {
+		return selectLocationLayer;
+	}
+
 	public ImpassableRoadsLayer getImpassableRoadsLayer() {
 		return impassableRoadsLayer;
 	}
@@ -621,10 +626,6 @@ public class MapLayers {
 
 	public FavouritesLayer getFavouritesLayer() {
 		return mFavouritesLayer;
-	}
-
-	public ExploreTopPlacesLayer getExplorePlacesLayer() {
-		return explorePlacesLayer;
 	}
 
 	public MeasurementToolLayer getMeasurementToolLayer() {

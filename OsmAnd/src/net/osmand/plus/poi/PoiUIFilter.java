@@ -53,11 +53,13 @@ import java.util.TreeSet;
 public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilter {
 
 	public static final String STD_PREFIX = "std_";
+	public static final String ONLINE_PREFIX = "online_";
 	public static final String USER_PREFIX = "user_";
 	public static final String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id";
 	public static final String BY_NAME_FILTER_ID = USER_PREFIX + "by_name";
 	public static final String TOP_WIKI_FILTER_ID = STD_PREFIX + OSM_WIKI_CATEGORY;
 	public static final int INVALID_ORDER = -1;
+	public static final int TOP_PLACES_LIMIT = 25;
 
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<>();
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypesOrigin = new LinkedHashMap<>();
@@ -188,6 +190,10 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 
 	public boolean isTopWikiFilter() {
 		return filterId.equals(TOP_WIKI_FILTER_ID);
+	}
+
+	public boolean isTopImagesFilter() {
+		return isTopWikiFilter();
 	}
 
 	public boolean isRoutesFilter() {

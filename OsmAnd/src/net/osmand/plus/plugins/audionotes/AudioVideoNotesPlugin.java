@@ -1285,6 +1285,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		currentRecording = null;
 	}
 
+	@NonNull
+	public AudioNotesLayer getAudioNotesLayer() {
+		return audioNotesLayer;
+	}
+
 	@Override
 	public void addMyPlacesTab(MyPlacesActivity myPlacesActivity, List<TabItem> mTabs, Intent intent) {
 		mTabs.add(myPlacesActivity.getTabIndicator(NOTES_TAB, NotesFragment.class));

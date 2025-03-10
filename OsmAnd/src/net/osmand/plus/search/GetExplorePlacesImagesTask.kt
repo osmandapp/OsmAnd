@@ -9,7 +9,7 @@ import net.osmand.wiki.WikiCoreHelper
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData
 import java.util.Collections
 
-class GetNearbyPlacesImagesTask(
+class GetExplorePlacesImagesTask(
 	val app: OsmandApplication,
 	val mapRect: KQuadRect,
 	val zoom: Int,

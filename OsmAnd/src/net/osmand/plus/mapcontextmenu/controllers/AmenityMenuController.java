@@ -16,6 +16,7 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -30,12 +31,15 @@ import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
+import net.osmand.router.network.NetworkRouteSelector.RouteKey;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
 import org.apache.commons.logging.Log;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AmenityMenuController extends MenuController {
 	private static final Log LOG = PlatformUtil.getLog(AmenityMenuController.class);
@@ -275,6 +279,21 @@ public class AmenityMenuController extends MenuController {
 		String region = amenity.getAdditionalInfo("subway_region");
 		if (region != null) {
 			return RenderingIcons.getBigIcon(getMapActivity(), "subway_" + region);
+		}
+		if (amenity.isRouteTrack() && amenity.hasOsmRouteId()) {
+			Map<String, String> shieldTags = new HashMap<>();
+			for (String tag : amenity.getAdditionalInfoKeys()) {
+				String value = amenity.getAdditionalInfo(tag);
+				shieldTags.put(tag, value);
+			}
+			RouteKey shieldRouteKey = RouteKey.fromShieldTags(shieldTags);
+			if (shieldRouteKey != null && getMapActivity() != null) {
+				OsmandApplication app = getMapActivity().getMyApplication();
+				NetworkRouteDrawable icon = new NetworkRouteDrawable(app, shieldRouteKey, !isLight());
+				if (icon.hasBackgroundIcon()) {
+					return icon;
+				}
+			}
 		}
 		return null;
 	}

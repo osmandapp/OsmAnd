@@ -5538,7 +5538,7 @@
     <string name="obd_fuel_type_unknown">Невідомий тип пального</string>
     <string name="obd_fuel_level_desc">Віджет показує рівень пального в машині за датчиком OBD</string>
     <string name="obd_fuel_consumption_rate_desc">Віджет показує споживання пального машиною на основі даних OBD про розташування</string>
-    <string name="lock_screen">Екран блокування</string>
+    <string name="lock_screen">Блокування екрану</string>
     <string name="quick_action_verb_start_pause">Пуск / Пауза</string>
     <string name="help_article_personal_color_palette_schemes_name">Кольорові схеми</string>
     <string name="quick_action_finish_trip_recording_summary">Кнопка для збереження GPX-треку і завершення запису подорожі.</string>
@@ -5727,4 +5727,10 @@
     <string name="show_dms_grids">Використовувати DMS замість градусів</string>
     <string name="show_mercator_grids">Використовувати Mercator замість WGS84 або UTM</string>
     <string name="show_list">Показати список</string>
+    <string name="popular_places">Популярні місця</string>
+    <string name="choose_location">Виберіть локацію</string>
+    <string name="point_location">Розташування точки</string>
+    <string name="shared_string_map_center">Центр карти</string>
+    <string name="shared_string_manual">Інструкція</string>
+    <string name="choose_location_on_map">Виберіть місце на карті.</string>
 </resources>

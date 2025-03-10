@@ -10,17 +10,26 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="quick_action_showhide_coordinates_grid_descr">Action to control the visibility of the Coordinates grid on the map.</string>
+    <string name="layer_coordinates_grid">Coordinates grid</string>
+    <string name="choose_location">Choose a location</string>
+    <string name="point_location">Point location</string>
+    <string name="shared_string_manual">Manual</string>
+    <string name="shared_string_map_center">Map center</string>
+    <string name="choose_location_on_map">Choose a location on the map.</string>
+    <string name="popular_places">Popular places</string>
     <string name="show_list">Show list</string>
     <string name="save_favorite_default_appearance">Apply changes to the existing points in the folder or only to new ones?</string>
-	<string name="original_color_description">Each point would keep its own color.</string>
-	<string name="original_icon_description">Each point would keep its own icon.</string>
-	<string name="original_shape_description">Each point would keep its own shape.</string>
-	<string name="apply_to_all_points">Apply to all points</string>
+    <string name="original_color_description">Each point would keep its own color.</string>
+    <string name="original_icon_description">Each point would keep its own icon.</string>
+    <string name="original_shape_description">Each point would keep its own shape.</string>
+    <string name="apply_to_all_points">Apply to all points</string>
     <string name="hmd_promo">HMD Promo for %1$s months</string>
     <string name="hmd_promo_description">Free access to features including unlimited map downloads, 3D relief etc. for %1$s month</string>
-	<string name="shared_string_road_exit">Exit</string>
-	<string name="popular_places_nearby">Popular places nearby</string>
-	<string name="recently_visited">Recently visited</string>
+    <string name="shared_string_road_exit">Exit</string>
+    <string name="popular_places_nearby">Popular places nearby</string>
+    <string name="recently_visited">Recently visited</string>
     <string name="ais_load_data">Load AIS data from file</string>
     <string name="ais_address_settings">IP address settings</string>
     <string name="ais_address_settings_description">Choose NMEA protocol (UDP/TCP) and define addresses</string>

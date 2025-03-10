@@ -6,18 +6,20 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.data.ExploreTopPlacePoint;
+import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.exploreplaces.ExplorePlacesProvider;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.search.NearbyPlacesAdapter;
+import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 
 import java.util.List;
 
@@ -73,8 +75,23 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvid
 
 	private void setupShowAllNearbyPlacesBtn() {
 		findViewById(R.id.show_all_btn).setOnClickListener(v -> {
-			ExplorePlacesFragment.Companion.showInstance(mapActivity.getSupportFragmentManager(), visiblePlacesRect);
+			MapActivity activity = getMapActivity();
+			if (activity != null) {
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					ExplorePlacesFragment.Companion.showInstance(activity.getSupportFragmentManager());
+					QuickSearchDialogFragment dialogFragment = mapActivity.getFragmentsHelper().getQuickSearchDialogFragment();
+					if (dialogFragment != null) {
+						dialogFragment.hide();
+					}
+				}
+			}
 		});
+	}
+
+	@Nullable
+	private MapActivity getMapActivity() {
+		return app.getOsmandMap().getMapView().getMapActivity();
 	}
 
 	private void setupRecyclerView() {
@@ -104,7 +121,7 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvid
 
 	private NearbyPlacesAdapter getNearbyAdapter() {
 		if (adapter == null) {
-			List<ExploreTopPlacePoint> nearbyData = app.getExplorePlacesProvider().getDataCollection(visiblePlacesRect, DISPLAY_ITEMS);
+			List<Amenity> nearbyData = app.getExplorePlacesProvider().getDataCollection(visiblePlacesRect, DISPLAY_ITEMS);
 			adapter = new NearbyPlacesAdapter(getContext(), nearbyData, false, clickListener);
 		}
 		return adapter;
@@ -154,4 +171,5 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvid
 		});
 		onNearbyPlacesCollapseChanged();
 	}
+
 }

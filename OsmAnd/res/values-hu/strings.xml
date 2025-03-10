@@ -4484,7 +4484,7 @@
     <string name="ant_heart_rate_write_gpx_desc">Pulzusszám belefoglalása a nyomvonalba</string>
     <string name="depth_contours">Mélységvonalak</string>
     <string name="worldwide_maps">Térképek világszerte</string>
-    <string name="map_widget_target_distance">Szemmagasság</string>
+    <string name="map_widget_target_distance">Távolság a kamerától az úticélig</string>
     <string name="favorites_backup">Kedvencek biztonsági mentése</string>
     <string name="shared_string_cross_buy">Több platformra érvényes vásárlás</string>
     <string name="purchases_feature_desc_cross_buy">Használja előfizetésének funkcióit különböző platformokon (Android/iOS/web) további költségek nélkül.</string>
@@ -5618,7 +5618,7 @@
     <string name="display_distance_to_first_intermediate_summary">Először a következő megállásig tartó időt és távolságot mutatja. Kapcsolja ki, hogy mindig az úticél részleteit mutassa.</string>
     <string name="display_distance_to_first_intermediate">A következő megállásig tartó útvonal részleteinek mutatása</string>
     <string name="popular_places_nearby">Népszerű helyek a közelben</string>
-    <string name="recently_visited">Nemrég látogatott</string>
+    <string name="recently_visited">Nemrég meglátogatott</string>
     <string name="shared_string_avg_altitude">Átlagos magasság</string>
     <string name="shared_string_avg_speed">Legkisebb sebesség</string>
     <string name="shared_string_length">Hosszúság</string>
@@ -5627,8 +5627,8 @@
     <string name="map_widget_route_information_desc">Megjeleníti a becsült érkezési időt, a fennmaradó utazási időt és az aktuális navigációs útvonal távolságát.</string>
     <string name="ais_cpa_warning_distance_description">A hajók piros színnel vannak jelölve, ha a CPA kisebb, mint ez az érték, és a CPA-t a közeljövőben elérik (lásd a figyelmeztetési idő beállítása a CPA eléréséhez).</string>
     <string name="ais_object_lost_timeout_description">Állítsa be az AIS objektumok láthatóságának időtúllépését: a jel vétele nélkül ennyi idő után kerül az AIS objektum eltávolításra a képernyőről.</string>
-    <string name="ais_load_data">AIS adat betöltése fájlból</string>
-    <string name="ais_port_nmea_local_description">Határozza meg az UPD portot, amelyen az OsmAnd NMEA adatokat kap</string>
+    <string name="ais_load_data">AIS adatok betöltése fájlból</string>
+    <string name="ais_port_nmea_local_description">Határozza meg azt az UPD portot, amelyen az OsmAnd NMEA adatokat kaphat</string>
     <string name="ais_object_lost_timeouts_description">Állítsa be az időtúllépési értékeket az elveszett AIS objektumok azonosításához, ha egy adott ideig nem érkezett jel.</string>
     <string name="ais_object_lost_timeout">A láthatóság időtúllépése az objektum elvesztésekor</string>
     <string name="ais_ship_lost_timeout_description">Állítsa be a hajó láthatóságának időtúllépését: a jel vétele nélkül ennyi idő után kerül megváltozásra a hajó szimbólum állapota a képernyőn, kihúzásra kerül.</string>
@@ -5658,11 +5658,11 @@
     <string name="show_utm_grids_description">WGS84 helyett UTM méterben mutatja a rácsot</string>
     <string name="no_photo_for_location_desc">Még nem adtak hozzá felhasználói fotókat ehhez a helyhez</string>
     <string name="no_places_available">Nincsenek helyek</string>
-    <string name="hmd_promo_description">Ingyenes hozzáférés %1$s hónapig a funkciókhoz, beleértve a korlátlan térképletöltést, a 3D domborzatot stb</string>
+    <string name="hmd_promo_description">%1$s hónapig ingyenes hozzáférés a funkciókhoz, többek között korlátlan térképletöltés, 3D domborzat stb.</string>
     <string name="shared_string_road_exit">Kijárat</string>
     <string name="hmd_promo">%1$s hónapos HMD promóció</string>
     <string name="original_color_description">Minden pont megtartja a saját színét.</string>
-    <string name="save_favorite_default_appearance">Alkalmazza a változtatásokat a mappában lévő meglévő pontokra, vagy csak az újakra?</string>
+    <string name="save_favorite_default_appearance">Alkalmazza a változtatásokat a mappában már meglévő pontokra is, vagy csak az újakra?</string>
     <string name="original_icon_description">Minden pont megtartja a saját ikonját.</string>
     <string name="original_shape_description">Minden pont megtartja a saját alakját.</string>
     <string name="apply_to_all_points">Alkalmazza az összes pontra</string>
@@ -5672,4 +5672,11 @@
     <string name="show_dm_grids">Használjon fok-percet a csak fok vagy fok-perc-mp helyett</string>
     <string name="show_mercator_grids">Használjon Mercatort a WGS84 vagy az UTM helyett</string>
     <string name="show_mercator_grids_description">WGS84 vagy UTM helyett Mercatorban mutatja a rácsot</string>
+    <string name="show_list">Lista megjelenítése</string>
+    <string name="popular_places">Népszerű helyek</string>
+    <string name="point_location">Pont helye</string>
+    <string name="shared_string_manual">Kézi</string>
+    <string name="choose_location_on_map">Válasszon egy helyet a térképen.</string>
+    <string name="choose_location">Válasszon egy helyet</string>
+    <string name="shared_string_map_center">Térkép közepe</string>
 </resources>

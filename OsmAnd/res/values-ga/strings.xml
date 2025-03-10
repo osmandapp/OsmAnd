@@ -5519,4 +5519,11 @@
     <string name="original_icon_description">Choimeádfadh gach pointe a dheilbhín féin.</string>
     <string name="original_shape_description">Choimeádfadh gach pointe a chruth féin.</string>
     <string name="save_favorite_default_appearance">An bhfuil fonn ort athruithe a chur i bhfeidhm ar na pointí reatha san fhillteán nó ar na pointí nua amháin?</string>
+    <string name="shared_string_manual">Lámhleabhar</string>
+    <string name="shared_string_map_center">Ionad léarscáil</string>
+    <string name="choose_location_on_map">Roghnaigh suíomh ar an léarscáil.</string>
+    <string name="show_list">Taispeáin liosta</string>
+    <string name="choose_location">Roghnaigh suíomh</string>
+    <string name="popular_places">Áiteanna coitianta</string>
+    <string name="point_location">Suíomh pointe</string>
 </resources>

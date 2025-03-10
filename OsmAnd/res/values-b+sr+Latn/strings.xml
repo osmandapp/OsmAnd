@@ -5454,7 +5454,7 @@
     <string name="shared_string_increase">Povećanje</string>
     <string name="shared_string_decrease">Smanjenje</string>
     <string name="open_in_browser">Otvori u internet pretraživaču</string>
-    <string name="shared_string_source">Poreklo</string>
+    <string name="shared_string_source">Izvor</string>
     <string name="shared_string_no_internet_connection">Nema interneta</string>
     <string name="no_internet_descr">Proverite internet i pokušajte ponovo.</string>
     <string name="no_photos_available_descr">Za ovu lokaciju još nisu dodate fotografije korisnika</string>
@@ -5702,4 +5702,10 @@
     <string name="show_dm_grids_description">Prikaži mrežu u stepenima i minutima umesto u stepenima ili DMS</string>
     <string name="show_dm_grids">Koristi DM umesto stepeni ili DMS</string>
     <string name="show_list">Prikaži listu</string>
+    <string name="popular_places">Popularna mesta</string>
+    <string name="choose_location">Izaberite lokaciju</string>
+    <string name="point_location">Tačka lokacije</string>
+    <string name="shared_string_manual">Uputstvo</string>
+    <string name="shared_string_map_center">Centar mape</string>
+    <string name="choose_location_on_map">Izaberite lokaciju na mapi.</string>
 </resources>
