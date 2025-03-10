@@ -553,7 +553,7 @@
     <string name="fav_file_to_load_not_found">GPX-Datei mit Favoriten, die bei {0} nicht gefunden wurden</string>
     <string name="fav_saved_sucessfully">Favoriten unter {0} gespeichert</string>
     <string name="no_fav_to_save">Keine Favoritenpunkte zum Speichern</string>
-    <string name="shared_string_import">Import</string>
+    <string name="shared_string_import">Importieren</string>
     <string name="error_occurred_loading_gpx">GPX konnte nicht geladen werden.</string>
     <string name="send_report">Bericht senden</string>
     <string name="none_region_found">Es konnten keine heruntergeladenen Karten auf der Speicherkarte gefunden werden.</string>
@@ -1553,7 +1553,7 @@
     <string name="lang_ml">Malayalam</string>
     <string name="lang_lb">Luxemburgisch</string>
     <string name="lang_os">Ossetisch</string>
-    <string name="lang_eo">Esperanto</string>
+    <string name="lang_eo">Esparanto</string>
     <string name="lang_nb">Norwegisch (Bokmål)</string>
     <string name="lang_nn">Norwegisch (Neunorwegisch)</string>
     <string name="rendering_value_default13_name">Standard (13)</string>
@@ -1582,7 +1582,7 @@
     <string name="lang_nv">Navajo</string>
     <string name="lang_vo">Volapük</string>
     <string name="lang_new">Newari / Nepal Bhasa</string>
-    <string name="lang_ceb">Cebuano</string>
+    <string name="lang_ceb">Cenuano</string>
     <string name="local_recordings_delete_all_confirm">%1$d Notizen löschen\?</string>
     <string name="lang_te">Telugu</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Netzwerkzugehörigkeit</string>
@@ -5434,8 +5434,8 @@
     <string name="hugerock_promo">Hugerock-Promo für %1$s Monate</string>
     <string name="shared_string_automatically">Automatisch</string>
     <string name="ask_every_time">Jedes Mal fragen</string>
-    <string name="detailed_track_guidance">Detaillierte Streckenführung</string>
-    <string name="detailed_track_guidance_description">OsmAnd gleicht Ihren Track mit nahe gelegenen Straßen ab, um die Abbiegehinweise zu verbessern.</string>
+    <string name="detailed_track_guidance">Detaillierte Spurführung</string>
+    <string name="detailed_track_guidance_description">OsmAnd gleicht Ihren Weg mit nahegelegenen Straßen ab, um die Abbiegehinweise zu verbessern.</string>
     <string name="quick_action_routes_summary">Ein Schalter, um %1$s auf der Karte anzuzeigen oder auszublenden.</string>
     <string name="compass_click_north_is_up">Um den Ausrichtungsmodus zu ändern, klicken und halten Sie</string>
     <string name="help_article_map_tracks_name">Tracks</string>
