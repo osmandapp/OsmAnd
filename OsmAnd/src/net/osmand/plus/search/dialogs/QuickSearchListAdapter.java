@@ -25,6 +25,10 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
+
 import net.osmand.StringMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -46,12 +50,14 @@ import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchSelectAllListItem;
+import net.osmand.plus.search.listitems.QuickSearchWikiItem;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatterParams;
+import net.osmand.plus.utils.PicassoUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
@@ -241,6 +247,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			return bindTopShadowItem(convertView);
 		} else if (type == QuickSearchListItemType.BOTTOM_SHADOW) {
 			return bindBottomShadowItem(convertView);
+		} else if (type == QuickSearchListItemType.SEARCH_RESULT &&
+				listItem instanceof QuickSearchWikiItem) {
+			return bindWikiItem(position, convertView, listItem);
 		} else if (type == QuickSearchListItemType.DISABLED_HISTORY) {
 			view = bindDisabledHistoryItem(listItem, convertView);
 		} else {
@@ -435,7 +444,63 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		return getLinearLayout(convertView, R.layout.list_shadow_footer);
 	}
 
-	private LinearLayout bindSearchResultItem(int position, @Nullable View convertView, @NonNull QuickSearchListItem listItem) {
+	private LinearLayout bindWikiItem(int position, @Nullable View convertView, @NonNull QuickSearchListItem listItem) {
+		QuickSearchWikiItem wikiItem = (QuickSearchWikiItem) listItem;
+		LinearLayout view = getLinearLayout(convertView, R.layout.search_nearby_item_vertical);
+		TextView title = view.findViewById(R.id.item_title);
+		TextView description = view.findViewById(R.id.item_description);
+		TextView type = view.findViewById(R.id.item_type);
+		ImageView icon = view.findViewById(R.id.item_icon);
+		ImageView image = view.findViewById(R.id.item_image);
+		LinearLayout compassLayout = view.findViewById(R.id.compass_layout);
+		title.setText(wikiItem.getTitle());
+		description.setText(wikiItem.getDescription());
+		type.setText(wikiItem.getTypeName());
+		Drawable wikiIcon = wikiItem.getIcon();
+		icon.setImageDrawable(wikiIcon);
+		String wikiImageUrl = wikiItem.getImage();
+		if (wikiImageUrl != null) {
+			RequestCreator creator = Picasso.get().load(wikiImageUrl);
+			if (wikiIcon != null) {
+				creator.error(wikiIcon);
+			}
+			creator.into(image, new Callback() {
+				@Override
+				public void onSuccess() {
+					PicassoUtils.getPicasso(app).setResultLoaded(wikiImageUrl, true);
+				}
+
+				@Override
+				public void onError(Exception e) {
+					PicassoUtils.getPicasso(app).setResultLoaded(wikiImageUrl, true);
+				}
+			});
+		}
+		if (wikiItem.getLocation() != null) {
+			compassLayout.setVisibility(View.VISIBLE);
+			updateWikiDistanceDirection(view, listItem);
+		} else {
+			compassLayout.setVisibility(View.GONE);
+		}
+
+		return view;
+	}
+
+	private void updateWikiDistanceDirection(View view, QuickSearchListItem listItem) {
+		TextView distanceText = view.findViewById(R.id.distance);
+		ImageView direction = view.findViewById(R.id.direction);
+		updateLocationViewCache.specialFrom = null;
+		LatLon toloc = null;
+		if (listItem instanceof QuickSearchWikiItem) {
+			toloc = ((QuickSearchWikiItem) listItem).getLocation();
+		} else if (listItem.getSearchResult() != null) {
+			toloc = listItem.getSearchResult().location;
+		}
+		UpdateLocationUtils.updateLocationView(app, updateLocationViewCache, direction, distanceText, toloc);
+	}
+
+	private LinearLayout bindSearchResultItem(int position, @Nullable View convertView,
+	                                          @NonNull QuickSearchListItem listItem) {
 		LinearLayout view;
 		SearchResult searchResult = listItem.getSearchResult();
 		if (searchResult != null && searchResult.objectType == ObjectType.INDEX_ITEM) {

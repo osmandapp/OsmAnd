@@ -332,7 +332,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	public void updateListAdapter(List<QuickSearchListItem> listItems, boolean append, boolean addShadows) {
 		if (listAdapter != null) {
 			List<QuickSearchListItem> list = new ArrayList<>(listItems);
-			if (list.size() > 0) {
+			if (!list.isEmpty()) {
 				showResult = false;
 				if (addShadows) {
 					list.add(0, new QuickSearchTopShadowListItem(app));

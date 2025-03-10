@@ -449,6 +449,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			textPrefix = app.getString(R.string.poi_cuisine);
 			vl = sb.toString();
 		} else if (key.contains(Amenity.ROUTE)
+				|| key.equals(Amenity.WIKI_PHOTO)
 				|| key.equals(Amenity.WIKIDATA)
 				|| key.equals(Amenity.WIKIMEDIA_COMMONS)) {
 			return null;
@@ -589,7 +590,7 @@ public class AmenityUIHelper extends MenuBuilder {
 				Locale locale = new Locale(key);
 				String name = mapNames.get(key);
 
-				View amenitiesRow = createRowContainer(app, null);
+				View amenitiesRow = createRowContainer(mapActivity, null);
 				buildDetailsRow(amenitiesRow, null, name,
 						app.getString(R.string.ltr_or_rtl_combine_via_colon, hint, locale.getDisplayLanguage()),
 						null, null, false, null);

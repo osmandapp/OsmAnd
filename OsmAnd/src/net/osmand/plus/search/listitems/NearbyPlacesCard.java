@@ -15,7 +15,6 @@ import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.exploreplaces.ExplorePlacesProvider;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.search.NearbyPlacesAdapter;
@@ -79,10 +78,9 @@ public class NearbyPlacesCard extends FrameLayout implements ExplorePlacesProvid
 			if (activity != null) {
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
-					ExplorePlacesFragment.Companion.showInstance(activity.getSupportFragmentManager());
 					QuickSearchDialogFragment dialogFragment = mapActivity.getFragmentsHelper().getQuickSearchDialogFragment();
 					if (dialogFragment != null) {
-						dialogFragment.hide();
+						dialogFragment.showAmenityPoints(app.getExplorePlacesProvider().getDataCollection(visiblePlacesRect));
 					}
 				}
 			}

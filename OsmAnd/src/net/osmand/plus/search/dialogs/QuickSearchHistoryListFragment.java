@@ -39,10 +39,9 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	public void onNearbyItemClicked(@NonNull Amenity point) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			// TODO: Fix
-			//getMyApplication().getExplorePlacesProvider().showPointInContextMenu(mapActivity, point);
-			getDialogFragment().hideToolbar();
-			getDialogFragment().hide();
+			QuickSearchDialogFragment dialogFragment = getDialogFragment();
+			dialogFragment.createAmenitySearchResult(point);
+			showResult(dialogFragment.createAmenitySearchResult(point));
 		}
 	}
 

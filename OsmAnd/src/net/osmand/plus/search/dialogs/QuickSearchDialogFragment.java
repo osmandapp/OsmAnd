@@ -88,6 +88,7 @@ import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem.SearchMoreItemOnClickListener;
+import net.osmand.plus.search.listitems.QuickSearchWikiItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.HistorySource;
@@ -102,6 +103,7 @@ import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreAPI;
+import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
@@ -118,6 +120,7 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class QuickSearchDialogFragment extends DialogFragment implements OsmAndCompassListener,
 		OsmAndLocationListener, DownloadEvents, OnPreferenceChanged {
@@ -1018,6 +1021,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void updateClearButtonAndHint() {
+		searchEditText.setEnabled(true);
 		if (useMapCenter && location != null && searchEditText.length() == 0) {
 			LatLon latLon = searchUICore.getSearchSettings().getOriginalLocation();
 			double d = MapUtils.getDistance(latLon, location.getLatitude(), location.getLongitude());
@@ -2159,5 +2163,39 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 		processTopIndexAfterLoad = processAfter;
 		return null;
+	}
+
+	public void showAmenityPoints(List<Amenity> amenities) {
+		List<QuickSearchListItem> items = amenities.stream().map(this::convertAmenityToQuickSearchListItem).collect(Collectors.toList());
+		mainSearchFragment.updateListAdapter(items, false);
+		updateTabBarVisibility(false);
+		toolbarEdit.setVisibility(View.GONE);
+		searchEditText.setHint("Explore places nearby");
+		searchEditText.setEnabled(false);
+		toolbar.setVisibility(View.VISIBLE);
+	}
+
+	private QuickSearchListItem convertAmenityToQuickSearchListItem(Amenity amenity) {
+		return new QuickSearchWikiItem(app, createAmenitySearchResult(amenity));
+	}
+
+	public SearchResult createAmenitySearchResult(Amenity amenity) {
+		SearchResult sr = new SearchResult();
+		sr.otherNames = amenity.getOtherNames(true);
+		sr.object = amenity;
+		sr.preferredZoom = SearchCoreFactory.PREFERRED_POI_ZOOM;
+		sr.location = amenity.getLocation();
+		if (amenity.getSubType().equals("city") || amenity.getSubType().equals("country")) {
+			sr.priorityDistance = SearchCoreFactory.SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE;
+			sr.preferredZoom = amenity.getSubType().equals("country") ? SearchCoreFactory.PREFERRED_COUNTRY_ZOOM : SearchCoreFactory.PREFERRED_CITY_ZOOM;
+		} else if (amenity.getSubType().equals("town")) {
+			sr.priorityDistance = SearchCoreFactory.SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE;
+		} else {
+			sr.priorityDistance = 1;
+		}
+		sr.priority = SearchCoreFactory.SEARCH_AMENITY_BY_NAME_PRIORITY;
+		sr.alternateName = amenity.getCityFromTagGroups("");
+		sr.objectType = ObjectType.POI;
+		return sr;
 	}
 }
