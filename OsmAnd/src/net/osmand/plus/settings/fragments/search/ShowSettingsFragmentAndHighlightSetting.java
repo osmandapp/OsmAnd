@@ -47,7 +47,7 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 																				final Fragment settingsFragment,
 																				final Setting setting) {
 		if (settingsFragment instanceof ConfigureMapFragment) {
-			final ConfigureMapFragment configureMapFragment = (ConfigureMapFragment) Objects.requireNonNull(mapActivity.getSupportFragmentManager().findFragmentByTag(ConfigureMapFragment.TAG));
+			final ConfigureMapFragment configureMapFragment = getConfigureMapFragment(mapActivity);
 			IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
 			scrollDashboardOnMapToSettingOfConfigureMapFragment(
 					mapActivity.getDashboard(),
@@ -59,7 +59,6 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 			return true;
 		}
 		if (settingsFragment instanceof final DetailsBottomSheet detailsBottomSheet) {
-			// FK-TODO: refactor
 			IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
 			detailsBottomSheet.showNow(mapActivity.getSupportFragmentManager());
 			detailsBottomSheet
@@ -68,7 +67,6 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 			return true;
 		}
 		if (settingsFragment instanceof final TransportLinesFragment transportLinesFragment) {
-			// FK-TODO: refactor
 			IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
 			transportLinesFragment.showNow(mapActivity.getSupportFragmentManager());
 			transportLinesFragment
@@ -77,6 +75,10 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 			return true;
 		}
 		return false;
+	}
+
+	private static ConfigureMapFragment getConfigureMapFragment(final MapActivity mapActivity) {
+		return (ConfigureMapFragment) Objects.requireNonNull(mapActivity.getSupportFragmentManager().findFragmentByTag(ConfigureMapFragment.TAG));
 	}
 
 	private static Setting asSetting(final SearchablePreference preference) {
