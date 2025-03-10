@@ -363,7 +363,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                 for (Amenity am : currentList) {
                     int y31 = MapUtils.get31TileNumberY(am.getLocation().getLatitude());
                     int x31 = MapUtils.get31TileNumberX(am.getLocation().getLongitude());
-                    sr.addBBoxPoint(x31, y31);
+                    sr.addSearchPoint(x31, y31);
                 }
                 repo.searchMapIndex(sr);
                 mapTime = System.currentTimeMillis() - time;
