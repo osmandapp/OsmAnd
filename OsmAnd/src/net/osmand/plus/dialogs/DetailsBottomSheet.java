@@ -42,6 +42,7 @@ import net.osmand.render.RenderingRuleProperty;
 import org.threeten.bp.Duration;
 
 import java.util.*;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
@@ -81,14 +82,17 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet implements Set
 	}
 
 	public void show(final FragmentManager fragmentManager) {
-		if (!fragmentManager.isStateSaved()) {
-			show(fragmentManager, TAG);
-		}
+		showIfStateNotSaved(fragmentManager, this::show);
 	}
 
 	public void showNow(final FragmentManager fragmentManager) {
+		showIfStateNotSaved(fragmentManager, this::showNow);
+	}
+
+	private void showIfStateNotSaved(final FragmentManager fragmentManager,
+									 final BiConsumer<FragmentManager, String> show) {
 		if (!fragmentManager.isStateSaved()) {
-			showNow(fragmentManager, TAG);
+			show.accept(fragmentManager, TAG);
 		}
 	}
 

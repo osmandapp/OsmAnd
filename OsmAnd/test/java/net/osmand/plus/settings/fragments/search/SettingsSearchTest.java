@@ -975,7 +975,7 @@ public class SettingsSearchTest extends AndroidTest {
 								}
 						},
 						{
-								"shouldSearchAndFind_ConfigureScreenFragment_ConfigureMap_Transport_TransportStops",
+								"shouldSearchAndFind_ConfigureScreenFragment_ConfigureMap_TransportLinesFragment_TransportStops",
 								new SettingsSearchTestTemplate() {
 
 									@Override

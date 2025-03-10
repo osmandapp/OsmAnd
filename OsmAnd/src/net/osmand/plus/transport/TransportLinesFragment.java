@@ -17,6 +17,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
@@ -36,6 +37,7 @@ import net.osmand.util.Algorithms;
 import org.threeten.bp.Duration;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
@@ -207,19 +209,19 @@ public class TransportLinesFragment extends BaseOsmAndFragment implements Settin
 	}
 
 	public void show(final @NonNull FragmentManager fragmentManager) {
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			fragmentManager.beginTransaction()
-					.replace(R.id.content, this, TAG)
-					.commitAllowingStateLoss();
-		}
+		showIfFragmentCanBeAdded(fragmentManager, FragmentTransaction::commitAllowingStateLoss);
 	}
 
-	// FK-TODO: DRY with show()
 	public void showNow(final @NonNull FragmentManager fragmentManager) {
+		showIfFragmentCanBeAdded(fragmentManager, FragmentTransaction::commitNowAllowingStateLoss);
+	}
+
+	private void showIfFragmentCanBeAdded(final FragmentManager fragmentManager,
+										  final Consumer<FragmentTransaction> commitFragmentTransaction) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			fragmentManager.beginTransaction()
-					.replace(R.id.content, this, TAG)
-					.commitNowAllowingStateLoss();
+			final FragmentTransaction transaction = fragmentManager.beginTransaction();
+			transaction.replace(R.id.content, this, TAG);
+			commitFragmentTransaction.accept(transaction);
 		}
 	}
 
