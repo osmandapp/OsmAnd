@@ -309,7 +309,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                 }
             }
         } else {
-            // users GPX
+            // Non-POI-based GPX (to keep compatibility with legacy data)
             poiTypeFilter = getSearchFilter(travelGpx.getMainFilterString(), travelGpx.getPointFilterString());
         }
 
