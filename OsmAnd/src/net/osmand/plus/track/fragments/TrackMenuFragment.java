@@ -63,7 +63,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
-import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.shared.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -158,9 +157,7 @@ import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class TrackMenuFragment extends ContextMenuScrollFragment implements CardListener,
 		SegmentActionsListener, RenameCallback, OnTrackFileMoveListener, OnPointsDeleteListener,
@@ -817,16 +814,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 		if (shouldReattachCards && trackExtensionsCard != null && trackExtensionsCard.getView() != null) {
 			reattachCard(cardsContainer, trackExtensionsCard);
-		} else {
-			Map<String, String> combinedExtensionsTags = new LinkedHashMap<>();
-			combinedExtensionsTags.putAll(metadata.getExtensionsToRead());
-			combinedExtensionsTags.putAll(gpxFile.getExtensionsToRead());
-			if (!combinedExtensionsTags.isEmpty()) {
-				RouteKey tagsAsRouteKey = new RouteKey(OsmRouteType.UNKNOWN);
-				combinedExtensionsTags.forEach(tagsAsRouteKey::addTag);
-				trackExtensionsCard = new RouteInfoCard(mapActivity, tagsAsRouteKey, gpxFile);
-				cardsContainer.addView(trackExtensionsCard.build(mapActivity));
-			}
 		}
 
 		View cardBottomSpace = inflate(R.layout.list_item_divider, cardsContainer, true);
@@ -1853,7 +1840,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			fragment.setRetainInstance(true);
 			fragment.setAnalysis(analyses);
 			fragment.setSelectedGpxFile(selectedGpxFile);
-			routeKey = routeKey == null ? RouteKey.fromGpx(selectedGpxFile.getGpxFile().getRouteKeyTags()) : routeKey;
+			routeKey = routeKey == null ? RouteKey.fromGpxFile(selectedGpxFile.getGpxFile()) : routeKey;
 			fragment.setRouteKey(routeKey);
 
 			if (params != null) {
