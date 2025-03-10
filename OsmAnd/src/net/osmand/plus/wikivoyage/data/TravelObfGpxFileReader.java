@@ -248,7 +248,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                                            @NonNull List<String> pgBackgrounds,
                                            @NonNull HeightDataLoader.Cancellable isCancelled) {
         if (article instanceof TravelGpx travelGpx) {
-            // user's GPX, OSM routes
+            // GPX files in OBF (track collections, OSM routes, etc)
             return fetchTravelGpx(repos, travelGpx, segmentList, pointList, gpxFileExtensions, pgNames, pgIcons, pgColors, pgBackgrounds, isCancelled);
         } else {
             // Wikivoyage
