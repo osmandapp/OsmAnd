@@ -989,6 +989,21 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
+						{
+								"shouldSearchAndFind_ConfigureScreenFragment_ConfigureMap_MapStyles_WinterAndSki",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.winter_and_ski_renderer);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
 				});
 	}
 
