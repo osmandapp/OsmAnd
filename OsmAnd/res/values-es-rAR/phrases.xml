@@ -94,7 +94,7 @@
     <string name="poi_hearing_aids">Audífonos</string>
     <string name="poi_herbalist">Herboristería</string>
     <string name="poi_hifi">Equipos de audio</string>
-    <string name="poi_houseware">Bazar del hogar</string>
+    <string name="poi_houseware">Artículos del hogar</string>
     <string name="poi_hunting">Equipo de caza</string>
     <string name="poi_interior_decoration">Decoración de interiores</string>
     <string name="poi_jewelry">Joyería</string>
@@ -311,7 +311,7 @@
     <string name="poi_prosecutor">Fiscal</string>
     <string name="poi_pension_fund">Seguridad social;Fondo de pensiones</string>
     <string name="poi_migration">Migración</string>
-    <string name="poi_tax_inspection">Inspección fiscal;Fiscalización (AFIP);Centro de impuestos</string>
+    <string name="poi_tax_inspection">Inspección fiscal;Fiscalización (AFIP,ARCA);Centro de impuestos;Ingresos públicos</string>
     <string name="poi_customs">Aduana</string>
     <string name="poi_city">Ciudad</string>
     <string name="poi_town">Ciudad pequeña</string>
@@ -559,7 +559,7 @@
     <string name="poi_stripclub">Club de striptease</string>
     <string name="poi_ski_resort">Estación de esquí</string>
     <string name="poi_beach_resort">Balneario;Complejo turístico de playa</string>
-    <string name="poi_dog_park">Parque canino</string>
+    <string name="poi_dog_park">Parque canino;Canil</string>
     <string name="poi_leisure_fishing">Lugar de pesca</string>
     <string name="poi_hunting_stand">Choza de caza</string>
     <string name="poi_harbour">Puerto marítimo</string>
@@ -794,7 +794,7 @@
     <string name="poi_stile">Escalera de paso</string>
     <string name="poi_height_restrictor">Limitador de altura</string>
     <string name="poi_horse_stile">Portilla equina</string>
-    <string name="poi_kissing_gate">Portilla en V</string>
+    <string name="poi_kissing_gate">Portilla en V;Puerta anti-ganado</string>
     <string name="poi_sally_port">Poterna</string>
     <string name="poi_swing_gate">Barrera giratoria;Puerta de oscilación</string>
     <string name="poi_turnstile">Molinete</string>
@@ -805,7 +805,7 @@
     <string name="poi_highway_crossing">Cruce peatonal;Paso de peatones</string>
     <string name="poi_cheese">Quesería</string>
     <string name="poi_chocolate">Chocolatería</string>
-    <string name="poi_coffee">Venta de café en granos</string>
+    <string name="poi_coffee">Tienda de café en granos</string>
     <string name="poi_pasta">Fábrica de pastas</string>
     <string name="poi_pastry">Pastelería</string>
     <string name="poi_garden_furniture">Muebles de jardín</string>
@@ -4979,4 +4979,14 @@
     <string name="poi_piste_type">Tipo de pista</string>
     <string name="poi_lit">Iluminación</string>
     <string name="poi_piste_oneway">Pista de sentido único</string>
+    <string name="poi_network_cycling">Ciclismo</string>
+    <string name="poi_network_nwn">Ruta nacional de senderismo</string>
+    <string name="poi_network_icn">Ruta internacional de ciclismo</string>
+    <string name="poi_network_ncn">Ruta nacional de ciclismo</string>
+    <string name="poi_network_foot">Red</string>
+    <string name="poi_network_iwn">Ruta internacional de senderismo</string>
+    <string name="poi_network_rwn">Ruta regional de senderismo</string>
+    <string name="poi_network_lwn">Ruta local de senderismo</string>
+    <string name="poi_network_rcn">Ruta regional de ciclismo</string>
+    <string name="poi_network_lcn">Ruta local de ciclismo</string>
 </resources>

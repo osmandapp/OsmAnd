@@ -7,7 +7,6 @@ import com.google.gson.annotations.SerializedName;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
-import net.osmand.data.QuadRect;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.shared.data.KQuadRect;
 import net.osmand.util.Algorithms;
@@ -106,7 +105,7 @@ public class WikiCoreHelper {
 			String baseApiActionUrl = OSMAND_API_ENDPOINT + WIKI_PLACE_ACTION;
 			try {
 				if (!Algorithms.isEmpty(wikidataId)) {
-					url += (url.isEmpty() ? baseApiActionUrl : "&") + "article=" + URLEncoder.encode(wikidataId, "UTF-8");
+					url += baseApiActionUrl + "article=" + URLEncoder.encode(wikidataId, "UTF-8");
 				}
 				if (!Algorithms.isEmpty(wikiCategory)) {
 					url += (url.isEmpty() ? baseApiActionUrl : "&") + "category=" + URLEncoder.encode(wikiCategory, "UTF-8");
@@ -114,14 +113,12 @@ public class WikiCoreHelper {
 				if (!Algorithms.isEmpty(wikiTitle)) {
 					url += (url.isEmpty() ? baseApiActionUrl : "&") + "wiki=" + URLEncoder.encode(wikiTitle, "UTF-8");
 				}
-				if (!Algorithms.isEmpty(wikidataId)) {
-					url += (url.isEmpty() ? baseApiActionUrl : "&") + "addMetaData=" + URLEncoder.encode("true", "UTF-8");
+				if (!url.isEmpty()) {
+					url += "&" + "addMetaData=" + URLEncoder.encode("true", "UTF-8");
+					getImagesOsmAndAPIRequestV2(url, wikiImages);
 				}
 			} catch (UnsupportedEncodingException e) {
-				throw new RuntimeException(e);
-			}
-			if (!url.isEmpty()) {
-				getImagesOsmAndAPIRequestV2(url, wikiImages);
+				LOG.error(e);
 			}
 		} else {
 			if (!Algorithms.isEmpty(wikidataId)) {

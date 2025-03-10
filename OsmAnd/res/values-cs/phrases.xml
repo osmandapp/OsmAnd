@@ -4979,4 +4979,14 @@
     <string name="poi_piste_type">Typ sjezdovky</string>
     <string name="poi_lit">Osvětlení</string>
     <string name="poi_piste_oneway">Jednosměrná sjezdovka</string>
+    <string name="poi_network_rcn">Regionální cyklotrasa</string>
+    <string name="poi_network_ncn">Národní cyklotrasa</string>
+    <string name="poi_network_lcn">Místní cyklotrasa</string>
+    <string name="poi_network_lwn">Místní turistická trasa</string>
+    <string name="poi_network_icn">Mezinárodní cyklotrasa</string>
+    <string name="poi_network_nwn">Národní turistická trasa</string>
+    <string name="poi_network_cycling">Cyklistika</string>
+    <string name="poi_network_rwn">Regionální turistická trasa</string>
+    <string name="poi_network_foot">Síť</string>
+    <string name="poi_network_iwn">Mezinárodní turistická trasa</string>
 </resources>

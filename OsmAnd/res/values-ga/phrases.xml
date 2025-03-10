@@ -489,7 +489,7 @@
     <string name="poi_recycling_styrofoam">Styrofoam</string>
     <string name="poi_recycling_drugs">Drugaí</string>
     <string name="poi_recycling_compost">Múirín</string>
-    <string name="poi_recycling_hardcore">Hardcore</string>
+    <string name="poi_recycling_hardcore">Crua lárnach</string>
     <string name="poi_recycling_chipboard">Slischlár</string>
     <string name="poi_recycling_polyester">poileistear</string>
     <string name="poi_recycling_plasterboard">Plástarchlár</string>
@@ -505,7 +505,7 @@
     <string name="poi_monitoring_station">Stáisiún monatóireachta</string>
     <string name="poi_adit">AditName</string>
     <string name="poi_driving_school">Ag tiomáint na scoile</string>
-    <string name="poi_kindergarten">Kindergarten</string>
+    <string name="poi_kindergarten">Naíonra</string>
     <string name="poi_training">Saoráid oiliúna</string>
     <string name="poi_prison">Príosún</string>
     <string name="poi_bailiff">Báille</string>
@@ -1643,7 +1643,7 @@
     <string name="poi_recycling_engine_oil">Ola innill</string>
     <string name="poi_recycling_hazardous_waste">Dramhaíl ghuaiseach</string>
     <string name="poi_recycling_mobile_phones">Fóin phóca</string>
-    <string name="poi_recycling_hydrargyrum">Hydrargyrum</string>
+    <string name="poi_recycling_hydrargyrum">Hiodrairgirum</string>
     <string name="poi_recycling_cars">Carranna</string>
     <string name="poi_landuse_railway">Limistéar iarnróid</string>
     <string name="poi_commercial">Úsáid talún tráchtála</string>
@@ -1655,7 +1655,7 @@
     <string name="poi_pier">Céibh</string>
     <string name="poi_surveillance">Faireachas</string>
     <string name="poi_observatory">Faireachlann</string>
-    <string name="poi_mineshaft">Mineshaft</string>
+    <string name="poi_mineshaft">Seafta Mianach</string>
     <string name="poi_gasometer">Gásmhéadar</string>
     <string name="poi_bunker_silo">Silo buncair</string>
     <string name="poi_storage_tank">Umar stórála</string>
@@ -4973,4 +4973,17 @@
     <string name="poi_atv_no">ATV: níl</string>
     <string name="poi_access_notes">Nótaí rochtana</string>
     <string name="poi_contact_website">Suíomh Gréasáin</string>
+    <string name="poi_piste_type">Cineál piste</string>
+    <string name="poi_lit">Soilsiú</string>
+    <string name="poi_network_foot">Líonra</string>
+    <string name="poi_network_cycling">Rothaíocht</string>
+    <string name="poi_piste_oneway">Piste ar aon nós</string>
+    <string name="poi_network_iwn">Bealach siúlóide idirnáisiúnta</string>
+    <string name="poi_network_icn">Bealach rothaíochta idirnáisiúnta</string>
+    <string name="poi_network_lcn">Bealach rothaíochta áitiúil</string>
+    <string name="poi_network_rcn">Bealach rothaíochta réigiúnach</string>
+    <string name="poi_network_ncn">Bealach náisiúnta rothaíochta</string>
+    <string name="poi_network_nwn">Bealach náisiúnta siúlóide</string>
+    <string name="poi_network_lwn">Bealach fánaíochta áitiúil</string>
+    <string name="poi_network_rwn">Bealach siúlóide réigiúnach</string>
 </resources>
