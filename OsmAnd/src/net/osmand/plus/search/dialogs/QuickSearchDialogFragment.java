@@ -972,7 +972,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				fragmentManager.popBackStack();
 			}
 		}
-		app.getOsmandMap().getMapLayers().getExplorePlacesLayer().enableLayer(false);
 		super.onDismiss(dialog);
 	}
 

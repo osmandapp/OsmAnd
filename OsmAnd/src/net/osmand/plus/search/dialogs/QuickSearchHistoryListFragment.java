@@ -10,7 +10,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.data.ExploreTopPlacePoint;
+import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
@@ -18,7 +18,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.search.NearbyPlacesAdapter;
-import net.osmand.plus.search.NearbyPlacesAdapter.NearbyItemClickListener;
 import net.osmand.plus.search.listitems.NearbyPlacesCard;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.fragments.HistoryItemsFragment;
@@ -37,10 +36,11 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	private QuadRect visiblePlacesRect = new QuadRect();
 	private long lastPointListRectUpdate = 0;
 
-	public void onNearbyItemClicked(@NonNull ExploreTopPlacePoint point) {
+	public void onNearbyItemClicked(@NonNull Amenity point) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			getMyApplication().getExplorePlacesProvider().showPointInContextMenu(mapActivity, point);
+			// TODO: Fix
+			//getMyApplication().getExplorePlacesProvider().showPointInContextMenu(mapActivity, point);
 			getDialogFragment().hideToolbar();
 			getDialogFragment().hide();
 		}

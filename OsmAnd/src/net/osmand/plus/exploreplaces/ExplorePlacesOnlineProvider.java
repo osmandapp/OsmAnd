@@ -5,22 +5,27 @@ import android.annotation.SuppressLint;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
-import net.osmand.data.ExploreTopPlacePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.search.GetNearbyPlacesImagesTask;
-import net.osmand.search.core.SearchCoreFactory;
+import net.osmand.plus.search.GetExplorePlacesImagesTask;
+import net.osmand.plus.search.GetExplorePlacesImagesTask.GetImageCardsListener;
 import net.osmand.shared.data.KQuadRect;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
+import net.osmand.util.TransliterationHelper;
+import net.osmand.wiki.WikiCoreHelper;
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData;
+import net.osmand.wiki.WikiImage;
+
+import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,7 +51,9 @@ import java.util.Set;
 // TODO Context menu doesn't work correctly and duplicates actual POI +
 // TODO compass is not rotating +
 // Extra: display new categories from web
-public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
+public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
+
+	private static final Log LOG = PlatformUtil.getLog(ExplorePlacesOnlineProvider.class);
 
 	public static final int DEFAULT_LIMIT_POINTS = 200;
 	private static final int NEARBY_MIN_RADIUS = 50;
@@ -60,7 +67,7 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 	private volatile int finishedTasks = 0;
 
 	private final Map<TileKey, QuadRect> loadingTiles = new HashMap<>(); // Track tiles being loaded
-	private final Map<TileKey, List<ExploreTopPlacePoint>> tilesCache = new HashMap<>(); // Memory cache for recent tiles
+	private final Map<TileKey, List<Amenity>> tilesCache = new HashMap<>(); // Memory cache for recent tiles
 
 	private static class TileKey {
 		int zoom;
@@ -88,7 +95,7 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 		}
 	}
 
-	public ExplorePlacesProviderJava(OsmandApplication app) {
+	public ExplorePlacesOnlineProvider(OsmandApplication app) {
 		this.app = app;
 	}
 
@@ -110,18 +117,17 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 	 * @param isPartial Whether the notification is for a partial update or a full update.
 	 */
 	public void notifyListeners(boolean isPartial) {
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				for (ExplorePlacesListener listener : listeners) {
-					if (isPartial) {
-						listener.onPartialExplorePlacesDownloaded(); // Notify for partial updates
-					} else {
-						listener.onNewExplorePlacesDownloaded(); // Notify for full updates
-					}
-				}
-			}
-		});
+		app.runInUIThread(() -> {
+            for (ExplorePlacesListener listener : listeners) {
+                if (isPartial) {
+                    listener.onPartialExplorePlacesDownloaded(); // Notify for partial updates
+                    //LOG.info(">>>> onPartialExplorePlacesDownloaded");
+                } else {
+                    listener.onNewExplorePlacesDownloaded(); // Notify for full updates
+                    //LOG.info(">>>> onNewExplorePlacesDownloaded");
+                }
+            }
+        });
 	}
 
 	private String getLang() {
@@ -133,17 +139,22 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 	}
 
 	@NonNull
-	public List<ExploreTopPlacePoint> getDataCollection(QuadRect rect) {
+	public List<Amenity> getDataCollection(QuadRect rect) {
 		return getDataCollection(rect, DEFAULT_LIMIT_POINTS);
 	}
 
 	@NonNull
-    public List<ExploreTopPlacePoint> getDataCollection(QuadRect rect, int limit) {
+    public List<Amenity> getDataCollection(QuadRect rect, int limit) {
+		return getDataCollection(rect, limit, MAX_LEVEL_ZOOM_CACHE);
+	}
+
+	@NonNull
+    public List<Amenity> getDataCollection(QuadRect rect, int limit, int zoom) {
 		if (rect == null) {
 			return Collections.emptyList();
 		}
 		// Calculate the initial zoom level
-		int zoom = MAX_LEVEL_ZOOM_CACHE;
+		zoom = Math.min(zoom, MAX_LEVEL_ZOOM_CACHE);
 		while (zoom >= 0) {
 			int tileWidth = (int) (MapUtils.getTileNumberX(zoom, rect.right)) -
 					((int) MapUtils.getTileNumberX(zoom, rect.left)) + 1;
@@ -165,7 +176,7 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 
 		// Fetch data for all tiles within the bounds
 		PlacesDatabaseHelper dbHelper = new PlacesDatabaseHelper(app);
-		List<ExploreTopPlacePoint> filteredPoints = new ArrayList<>();
+		List<Amenity> filteredAmenities = new ArrayList<>();
 		Set<Long> uniqueIds = new HashSet<>(); // Use a Set to track unique IDs
 		final String queryLang = getLang();
 
@@ -174,13 +185,13 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 			for (int tileY = (int) minTileY; tileY <= (int) maxTileY; tileY++) {
 				if (!dbHelper.isDataExpired(zoom, tileX, tileY, queryLang)) {
 					TileKey tileKey = new TileKey(zoom, tileX, tileY);
-					List<ExploreTopPlacePoint> cachedPlaces = tilesCache.get(tileKey);
+					List<Amenity> cachedPlaces = tilesCache.get(tileKey);
 					if (cachedPlaces != null) {
-						for (ExploreTopPlacePoint place : cachedPlaces) {
-							double lat = place.getLatitude();
-							double lon = place.getLongitude();
-							if ((rect.contains(lon, lat, lon, lat) || loadAll) && uniqueIds.add(place.getId())) {
-								filteredPoints.add(place);
+						for (Amenity amenity : cachedPlaces) {
+							double lat = amenity.getLocation().getLatitude();
+							double lon = amenity.getLocation().getLongitude();
+							if ((rect.contains(lon, lat, lon, lat) || loadAll) && uniqueIds.add(amenity.getId())) {
+								filteredAmenities.add(amenity);
 							}
 						}
 					} else {
@@ -190,13 +201,15 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 							if (Algorithms.isEmpty(item.properties.photoTitle)) {
 								continue;
 							}
-							ExploreTopPlacePoint point = new ExploreTopPlacePoint(item);
-							double lat = point.getLatitude();
-							double lon = point.getLongitude();
-							if ((rect.contains(lon, lat, lon, lat) || loadAll) && uniqueIds.add(point.getId())) {
-								filteredPoints.add(point);
+							Amenity amenity = createAmenity(item);
+							if (amenity != null) {
+								double lat = amenity.getLocation().getLatitude();
+								double lon = amenity.getLocation().getLongitude();
+								if ((rect.contains(lon, lat, lon, lat) || loadAll) && uniqueIds.add(amenity.getId())) {
+									filteredAmenities.add(amenity);
+								}
+								cachedPlaces.add(amenity);
 							}
-							cachedPlaces.add(point);
 						}
 						tilesCache.put(tileKey, cachedPlaces);
 					}
@@ -208,18 +221,18 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 		clearCache(zoom, (int) minTileX, (int) maxTileX, (int) minTileY, (int) maxTileY);
 
 		// Sort the points by Elo in descending order
-		filteredPoints.sort((p1, p2) -> Double.compare(p2.getElo(), p1.getElo()));
+		filteredAmenities.sort((a1, a2) -> Integer.compare(a2.getTravelEloNumber(), a1.getTravelEloNumber()));
 
 		// Limit the number of points
-		if (filteredPoints.size() > limit) {
-			filteredPoints = filteredPoints.subList(0, limit);
+		if (filteredAmenities.size() > limit) {
+			filteredAmenities = filteredAmenities.subList(0, limit);
 		}
 
-		return filteredPoints;
+		return filteredAmenities;
 	}
 
 	private void clearCache(int zoom, int minTileX, int maxTileX, int minTileY, int maxTileY) {
-		Iterator<Entry<TileKey, List<ExploreTopPlacePoint>>> iterator = tilesCache.entrySet().iterator();
+		Iterator<Entry<TileKey, List<Amenity>>> iterator = tilesCache.entrySet().iterator();
 		while (iterator.hasNext()) {
 			TileKey key = iterator.next().getKey();
 			if (key.zoom != zoom) {
@@ -241,12 +254,38 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 		}
 	}
 
+	@Nullable
+	private Amenity createAmenity(@NonNull OsmandApiFeatureData featureData) {
+		Amenity a = new Amenity();
+		a.setId(featureData.properties.osmid);
+		a.setName(featureData.properties.wikiTitle);
+		a.setEnName(TransliterationHelper.transliterate(a.getName()));
+		a.setDescription(featureData.properties.wikiDesc);
+		a.setWikiPhoto(featureData.properties.photoTitle);
+		WikiImage wikiIMage = WikiCoreHelper.getImageData(featureData.properties.photoTitle);
+		a.setWikiIconUrl(wikiIMage == null ? "" : wikiIMage.getImageIconUrl());
+		a.setWikiImageStubUrl(wikiIMage == null ? "" : wikiIMage.getImageStubUrl());
+		a.setLocation(featureData.geometry.coordinates[1], featureData.geometry.coordinates[0]);
+		String poitype = featureData.properties.poitype;
+		if (!Algorithms.isEmpty(poitype)) {
+			PoiCategory category = app.getPoiTypes().getPoiCategoryByName(poitype);
+			a.setType(category != null ? category : app.getPoiTypes().getOtherPoiCategory());
+		}
+		a.setSubType(featureData.properties.poisubtype);
+		//a.setTravelTopic(featureData.properties.wikiTitle);
+		//a.setWikiCategory(featureData.properties.wikiDesc);
+		a.setTravelEloNumber(featureData.properties.elo != null ? featureData.properties.elo.intValue() : Amenity.DEFAULT_ELO);
+		return a.getType() != null ? a : null;
+	}
+
 	@SuppressLint("DefaultLocale")
 	private void loadTile(int zoom, int tileX, int tileY, String queryLang, PlacesDatabaseHelper dbHelper) {
 		double left;
 		double right;
 		double top;
 		double bottom;
+
+		//LOG.info(">>>> loadTile zoom=" + zoom + " tileX=" + tileX + " tileY=" + tileY);
 
 		TileKey tileKey = new TileKey(zoom, tileX, tileY);
 		synchronized (loadingTiles) {
@@ -266,68 +305,25 @@ public class ExplorePlacesProviderJava implements ExplorePlacesProvider {
 			startedTasks++;
 		}
 		// Create and execute a task for the current tile
-        new GetNearbyPlacesImagesTask(
-				app,
-				tileRect, zoom,
-				queryLang, new GetNearbyPlacesImagesTask.GetImageCardsListener() {
+        new GetExplorePlacesImagesTask(app, tileRect, zoom, queryLang, new GetImageCardsListener() {
 			@Override
 			public void onTaskStarted() {
 			}
 
 			@Override
 			public void onFinish(@Nullable List<? extends OsmandApiFeatureData> result) {
-				synchronized (ExplorePlacesProviderJava.this) {
+				synchronized (ExplorePlacesOnlineProvider.this) {
 					finishedTasks++; // Increment the finished task counter
 					notifyListeners(startedTasks != finishedTasks);
 				}
-                // Store the data in the database for the current tile
-                dbHelper.insertPlaces(zoom, tileX, tileY, queryLang, result);
-                // Remove the tile from the loading set
+				// Store the data in the database for the current tile
+				dbHelper.insertPlaces(zoom, tileX, tileY, queryLang, result);
+				// Remove the tile from the loading set
 				synchronized (loadingTiles) {
 					loadingTiles.remove(tileKey);
 				}
 			}
 		}).execute();
-	}
-
-	public void showPointInContextMenu(@NonNull MapActivity mapActivity, @NonNull ExploreTopPlacePoint point) {
-		double latitude = point.getLatitude();
-		double longitude = point.getLongitude();
-		app.getSettings().setMapLocationToShow(
-				latitude,
-				longitude,
-				SearchCoreFactory.PREFERRED_NEARBY_POINT_ZOOM,
-				point.getPointDescription(app),
-				true,
-				point);
-		MapActivity.launchMapActivityMoveToTop(mapActivity);
-	}
-
-	public Amenity getAmenity(LatLon latLon, long osmId) {
-		final Amenity[] foundAmenity = new Amenity[] {null};
-		int radius = NEARBY_MIN_RADIUS;
-		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
-		app.getResourceManager().searchAmenities(
-				BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER,
-				rect.top, rect.left, rect.bottom, rect.right,
-				-1, true,
-				new ResultMatcher<Amenity>() {
-					@Override
-					public boolean publish(Amenity amenity) {
-						long id = ObfConstants.getOsmObjectId(amenity);
-						if (osmId == id) {
-							foundAmenity[0] = amenity;
-							return true;
-						}
-						return false;
-					}
-
-					@Override
-					public boolean isCancelled() {
-						return foundAmenity[0] != null;
-					}
-				});
-		return foundAmenity[0];
 	}
 
 	@Override

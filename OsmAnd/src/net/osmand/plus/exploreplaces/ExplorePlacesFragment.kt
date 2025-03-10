@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import net.osmand.Location
 import net.osmand.PlatformUtil
-import net.osmand.data.ExploreTopPlacePoint
+import net.osmand.data.Amenity
 import net.osmand.data.QuadRect
 import net.osmand.data.RotatedTileBox
 import net.osmand.map.IMapLocationListener
@@ -26,6 +26,7 @@ import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseOsmAndFragment
 import net.osmand.plus.helpers.AndroidUiHelper
+import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.search.NearbyPlacesAdapter
 import net.osmand.plus.search.ShowQuickSearchMode
 import net.osmand.plus.search.dialogs.ExplorePlacesNearbyToolbarController
@@ -35,6 +36,7 @@ import net.osmand.plus.views.OsmandMapTileView
 import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton
+import net.osmand.plus.wikipedia.WikipediaPlugin
 import net.osmand.util.MapUtils
 import org.apache.commons.logging.Log
 import kotlin.math.abs
@@ -132,7 +134,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 						}
 				}
 				isMapVisible = newState != BottomSheetBehavior.STATE_EXPANDED
-				app.osmandMap.mapLayers.explorePlacesLayer.enableLayer(isMapVisible)
+				toggleWikipediaLayer(isMapVisible)
 				updateMapControls(newState)
 				AndroidUiHelper.updateVisibility(
 					showOnMapContainer,
@@ -145,6 +147,11 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 			}
 		})
 		updateShowListButton()
+	}
+
+	private fun toggleWikipediaLayer(enable: Boolean) {
+		val wikiPlugin: WikipediaPlugin? = PluginsHelper.getPlugin(WikipediaPlugin::class.java)
+		wikiPlugin?.toggleWikipediaPoi(enable, null)
 	}
 
 	private fun updateShowListButton() {
@@ -275,10 +282,11 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		}
 	}
 
-	override fun onNearbyItemClicked(item: ExploreTopPlacePoint) {
+	override fun onNearbyItemClicked(amenity: Amenity) {
 		mapActivity?.let {
 			isMapVisible = true
-			app.explorePlacesProvider.showPointInContextMenu(it, item)
+			// TODO: Fix
+			//app.explorePlacesProvider.showPointInContextMenu(it, amenity)
 			hideList()
 		}
 	}
@@ -351,7 +359,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	}
 
 	private fun closeFragment() {
-		app.osmandMap.mapLayers.explorePlacesLayer.enableLayer(false)
+		toggleWikipediaLayer(false)
 		mapActivity?.let { activity ->
 			val nearbyPlacesFragment = activity.fragmentsHelper.explorePlacesFragment
 			if (nearbyPlacesFragment != null) {

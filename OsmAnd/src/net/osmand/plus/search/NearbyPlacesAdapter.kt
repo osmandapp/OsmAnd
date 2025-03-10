@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import net.osmand.Location
-import net.osmand.data.ExploreTopPlacePoint
+import net.osmand.data.Amenity
 import net.osmand.data.LatLon
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
@@ -25,13 +25,13 @@ import net.osmand.util.Algorithms
 
 class NearbyPlacesAdapter(
 	@UiContext val context: Context,
-	var items: List<ExploreTopPlacePoint>,
+	var items: List<Amenity>,
 	private var isVertical: Boolean,
 	private val onItemClickListener: NearbyItemClickListener
 ) : RecyclerView.Adapter<NearbyPlacesAdapter.NearbyViewHolder>() {
 
 	interface NearbyItemClickListener {
-		fun onNearbyItemClicked(item: ExploreTopPlacePoint)
+		fun onNearbyItemClicked(amenity: Amenity)
 	}
 
 	// Initialize the UpdateLocationViewCache
@@ -69,7 +69,7 @@ class NearbyPlacesAdapter(
 		itemView: View,
 		private val updateLocationViewCache: UpdateLocationUtils.UpdateLocationViewCache
 	) : RecyclerView.ViewHolder(itemView) {
-		private var item: ExploreTopPlacePoint? = null
+		private var item: Amenity? = null
 		private val imageView: ImageView = itemView.findViewById(R.id.item_image)
 		private val iconImageView: ImageView = itemView.findViewById(R.id.item_icon)
 		private val titleTextView: TextView = itemView.findViewById(R.id.item_title)
@@ -78,11 +78,11 @@ class NearbyPlacesAdapter(
 		private val distanceTextView: TextView? = itemView.findViewById(R.id.distance)
 		private val arrowImageView: ImageView? = itemView.findViewById(R.id.direction)
 
-		fun bind(item: ExploreTopPlacePoint, position: Int) {
+		fun bind(item: Amenity, position: Int) {
 			this.item = item
 			val app = imageView.context.applicationContext as OsmandApplication
 			val poiTypes = app.poiTypes
-			val subType = poiTypes.getPoiTypeByKey(item.poisubtype)
+			val subType = poiTypes.getPoiTypeByKey(item.subType)
 			val poiIcon =
 				if (subType == null) null else RenderingIcons.getBigIcon(app, subType.keyName)
 			val uiUtilities = app.uiUtilities
@@ -99,7 +99,7 @@ class NearbyPlacesAdapter(
 			iconImageView.setImageDrawable(coloredIcon)
 			val picasso = PicassoUtils.getPicasso(app)
 
-			item.imageStubUrl?.let {
+			item.wikiImageStubUrl?.let {
 				val creator = Picasso.get()
 					.load(it)
 				if (coloredIcon != null) {
@@ -117,11 +117,11 @@ class NearbyPlacesAdapter(
 			}
 
 			// Add row number to the title
-			titleTextView.text = "${position + 1}. ${item.wikiTitle}"
+			titleTextView.text = "${position + 1}. ${item.name}"
 
-			descriptionTextView?.text = item.wikiDesc
+			descriptionTextView?.text = item.getDescription(null)
 			descriptionTextView?.let {
-				AndroidUiHelper.updateVisibility(it, !Algorithms.isEmpty(item.wikiDesc))
+				AndroidUiHelper.updateVisibility(it, !Algorithms.isEmpty(item.getDescription(null)))
 			}
 
 			itemTypeTextView.text = subType?.translation ?: ""
@@ -135,7 +135,7 @@ class NearbyPlacesAdapter(
 					arrowImageView.visibility = View.VISIBLE
 
 					// Update compass icon rotation
-					val latLon = LatLon(item.latitude, item.longitude)
+					val latLon = LatLon(item.location.latitude, item.location.longitude)
 					UpdateLocationUtils.updateLocationView(
 						app,
 						updateLocationViewCache,
@@ -157,15 +157,15 @@ class NearbyPlacesAdapter(
 
 		private fun calculateDistance(
 			app: OsmandApplication,
-			item: ExploreTopPlacePoint,
+			item: Amenity,
 			location: Location?): Float? {
 			if (location != null) {
 				val results = FloatArray(1)
 				Location.distanceBetween(
 					location.latitude,
 					location.longitude,
-					item.latitude,
-					item.longitude,
+					item.location.latitude,
+					item.location.longitude,
 					results
 				)
 				return results[0]
