@@ -450,7 +450,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			vl = sb.toString();
 		} else if (key.contains(Amenity.ROUTE)
 				|| key.equals(Amenity.WIKI_PHOTO)
-				|| key.equals(Amenity.WIKIDATA)
+//				|| key.equals(Amenity.WIKIDATA)  //todo approve if it is correct
 				|| key.equals(Amenity.WIKIMEDIA_COMMONS)) {
 			return null;
 		} else {
@@ -644,6 +644,7 @@ public class AmenityUIHelper extends MenuBuilder {
 		urls.put("ok", "https://ok.ru/%s");
 		urls.put("telegram", "https://t.me/%s");
 		urls.put("flickr", "https://flickr.com/%s");
+		urls.put("wikidata", "https://www.wikidata.org/wiki/%s");
 
 		String url = urls.get(key);
 		if (url != null) {

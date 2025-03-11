@@ -23,6 +23,7 @@ import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.fragments.HistoryItemsFragment;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.search.core.SearchCoreFactory;
 
 import java.util.List;
 
@@ -36,13 +37,8 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	private QuadRect visiblePlacesRect = new QuadRect();
 	private long lastPointListRectUpdate = 0;
 
-	public void onNearbyItemClicked(@NonNull Amenity point) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			QuickSearchDialogFragment dialogFragment = getDialogFragment();
-			dialogFragment.createAmenitySearchResult(point);
-			showResult(dialogFragment.createAmenitySearchResult(point));
-		}
+	public void onNearbyItemClicked(@NonNull Amenity amenity) {
+		showResult(SearchCoreFactory.createAmenitySearchResult(amenity));
 	}
 
 	@Override

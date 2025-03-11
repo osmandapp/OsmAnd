@@ -109,8 +109,8 @@ public class SearchCoreFactory {
 	public static final int SEARCH_AMENITY_BY_NAME_PRIORITY = 700;
 	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_POI_TYPE = 700;
 	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR = 700;
-	public static final double SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE = 0.001;
-	public static final double SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE = 0.005;
+	private static final double SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE = 0.001;
+	private static final double SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE = 0.005;
 	
 	public static final int SEARCH_OLC_WITH_CITY_PRIORITY = 8;
 	public static final int SEARCH_OLC_WITH_CITY_TOTAL_LIMIT = 500;
@@ -1950,6 +1950,26 @@ public class SearchCoreFactory {
 	public static boolean isLastWordCityGroup(SearchPhrase p ) {
 		return p.isLastWord(ObjectType.CITY) || p.isLastWord(ObjectType.POSTCODE) ||
 				p.isLastWord(ObjectType.VILLAGE);
+	}
+
+	public static SearchResult createAmenitySearchResult(Amenity amenity) {
+		SearchResult sr = new SearchResult();
+		sr.otherNames = amenity.getOtherNames(true);
+		sr.object = amenity;
+		sr.preferredZoom = SearchCoreFactory.PREFERRED_POI_ZOOM;
+		sr.location = amenity.getLocation();
+		if (amenity.getSubType().equals("city") || amenity.getSubType().equals("country")) {
+			sr.priorityDistance = SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE;
+			sr.preferredZoom = amenity.getSubType().equals("country") ? SearchCoreFactory.PREFERRED_COUNTRY_ZOOM : SearchCoreFactory.PREFERRED_CITY_ZOOM;
+		} else if (amenity.getSubType().equals("town")) {
+			sr.priorityDistance = SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE;
+		} else {
+			sr.priorityDistance = 1;
+		}
+		sr.priority = SearchCoreFactory.SEARCH_AMENITY_BY_NAME_PRIORITY;
+		sr.alternateName = amenity.getCityFromTagGroups("");
+		sr.objectType = ObjectType.POI;
+		return sr;
 	}
 
 	private static class TopIndexMatch {

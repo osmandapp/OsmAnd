@@ -67,6 +67,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.exploreplaces.ExplorePlacesFragment;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -99,6 +100,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
+import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.ObjectType;
@@ -191,6 +193,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private String toolbarTitle;
 	private boolean toolbarVisible;
 	private boolean tabBarHidden;
+	private boolean showWiki;
 
 	private boolean newSearch;
 	private boolean interruptedSearch;
@@ -351,7 +354,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		buttonToolbarMap.setOnClickListener(v -> {
 					cancelSearch();
 					SearchPhrase searchPhrase = searchUICore.getPhrase();
-					if (foundPartialLocation) {
+					if(showWiki) {
+						ExplorePlacesFragment.Companion.showInstance(mapActivity.getSupportFragmentManager());
+					} else if (foundPartialLocation) {
 						QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, searchPhrase.getFirstUnknownSearchWord());
 					} else if (searchPhrase.isNoSelectedType() || searchPhrase.isLastWord(POI_TYPE)) {
 						PoiUIFilter filter;
@@ -646,6 +651,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			hideKeyboard();
 			searchEditText.setText("");
 			updateTabBarVisibility(true);
+			showWiki = false;
 		} else if (!processBackAction()) {
 			Dialog dialog = getDialog();
 			if (dialog != null) {
@@ -942,6 +948,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	@Override
 	public void onResume() {
 		super.onResume();
+		showWiki = false;
 		if (!useMapCenter) {
 			startLocationUpdate();
 		}
@@ -2166,36 +2173,22 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void showAmenityPoints(List<Amenity> amenities) {
-		List<QuickSearchListItem> items = amenities.stream().map(this::convertAmenityToQuickSearchListItem).collect(Collectors.toList());
-		mainSearchFragment.updateListAdapter(items, false);
-		updateTabBarVisibility(false);
-		toolbarEdit.setVisibility(View.GONE);
-		searchEditText.setHint("Explore places nearby");
-		searchEditText.setEnabled(false);
-		toolbar.setVisibility(View.VISIBLE);
+		WikipediaPlugin wikiPlugin = PluginsHelper.getPlugin(WikipediaPlugin.class);
+		if(wikiPlugin != null) {
+			showWiki = true;
+			buttonToolbarText.setText(R.string.shared_string_show_on_map);
+			List<QuickSearchListItem> items = amenities.stream().map(this::convertAmenityToQuickSearchListItem).collect(Collectors.toList());
+			mainSearchFragment.updateListAdapter(items, false);
+			updateTabBarVisibility(false);
+			toolbarEdit.setVisibility(View.GONE);
+			searchEditText.setHint("Explore places nearby");
+			searchEditText.setEnabled(false);
+			toolbar.setVisibility(View.VISIBLE);
+		}
 	}
 
 	private QuickSearchListItem convertAmenityToQuickSearchListItem(Amenity amenity) {
-		return new QuickSearchWikiItem(app, createAmenitySearchResult(amenity));
+		return new QuickSearchWikiItem(app, SearchCoreFactory.createAmenitySearchResult(amenity));
 	}
 
-	public SearchResult createAmenitySearchResult(Amenity amenity) {
-		SearchResult sr = new SearchResult();
-		sr.otherNames = amenity.getOtherNames(true);
-		sr.object = amenity;
-		sr.preferredZoom = SearchCoreFactory.PREFERRED_POI_ZOOM;
-		sr.location = amenity.getLocation();
-		if (amenity.getSubType().equals("city") || amenity.getSubType().equals("country")) {
-			sr.priorityDistance = SearchCoreFactory.SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE;
-			sr.preferredZoom = amenity.getSubType().equals("country") ? SearchCoreFactory.PREFERRED_COUNTRY_ZOOM : SearchCoreFactory.PREFERRED_CITY_ZOOM;
-		} else if (amenity.getSubType().equals("town")) {
-			sr.priorityDistance = SearchCoreFactory.SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE;
-		} else {
-			sr.priorityDistance = 1;
-		}
-		sr.priority = SearchCoreFactory.SEARCH_AMENITY_BY_NAME_PRIORITY;
-		sr.alternateName = amenity.getCityFromTagGroups("");
-		sr.objectType = ObjectType.POI;
-		return sr;
-	}
 }
