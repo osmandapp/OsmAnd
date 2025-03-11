@@ -55,10 +55,10 @@ object WikiHelper {
     }
 
     fun addFile(wikiImages: MutableList<WikiImage>, imageFileName: String) {
-        getImageData(imageFileName)?.let { wikiImages.add(it) }
+        getImageData(imageFileName).let { wikiImages.add(it) }
     }
 
-    fun getImageData(imageFileName: String): WikiImage? {
+    fun getImageData(imageFileName: String): WikiImage {
         return WikiImage(
             wikiMediaTag = imageFileName,
             imageName = imageFileName,
@@ -67,4 +67,20 @@ object WikiHelper {
             imageIconUrl = "$WIKIMEDIA_FILE_URL$imageFileName?width=$IMAGE_ICON_SIZE"
         )
     }
+
+    fun getImageData(
+        imageFileName: String,
+        baseUrl: String,
+        thumbSize: Int,
+        iconSize: Int
+    ): WikiImage {
+        return WikiImage(
+            wikiMediaTag = imageFileName,
+            imageName = imageFileName,
+            imageStubUrl = "$baseUrl$imageFileName?width=$thumbSize",
+            imageHiResUrl = "$baseUrl$imageFileName",
+            imageIconUrl = "$baseUrl$imageFileName?width=$iconSize"
+        )
+    }
+
 }
