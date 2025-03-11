@@ -73,6 +73,9 @@ import net.osmand.data.City;
 import net.osmand.data.IncompleteTransportRoute;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
+import net.osmand.data.QuadPoint;
+import net.osmand.data.QuadRect;
+import net.osmand.data.QuadTree;
 import net.osmand.data.Street;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
@@ -1800,6 +1803,7 @@ public class BinaryMapIndexReader {
 		int top = 0;
 		int bottom = 0;
 
+		private QuadTree<QuadPoint> quadTreePoints;
 		List<Integer> searchPointsX;
 		List<Integer> searchPointsY;
 
@@ -1968,32 +1972,32 @@ public class BinaryMapIndexReader {
 		}
 
 		public void clearSearchPoints() {
-			searchPointsX = null;
-			searchPointsY = null;
+			quadTreePoints = null;
 		}
 
 		public void addSearchPoint(int x31, int y31) {
-			if (searchPointsX == null || searchPointsY == null) {
-				searchPointsX = new ArrayList<>();
-				searchPointsY = new ArrayList<>();
+			if (quadTreePoints == null) {
+				quadTreePoints = new QuadTree<QuadPoint>(
+						new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),8, 0.55f);
 			}
-			searchPointsX.add(x31);
-			searchPointsY.add(y31);
+			quadTreePoints.insert(new QuadPoint(x31, y31), x31, y31);
 		}
 
 		private boolean hasSearchPoints() {
-			return searchPointsX != null;
+			return quadTreePoints != null;
 		}
 
 		private boolean bboxContainsSearchPoints(int left, int top, int right, int bottom) {
-			for (int i = 0; i < searchPointsX.size(); i++) {
-				int x31 = searchPointsX.get(i);
-				int y31 = searchPointsY.get(i);
-				if (left <= x31 && right >= x31 && top <= y31 && bottom >= y31) {
-					return true;
-				}
+			if (quadTreePoints == null) {
+				return false;
 			}
-			return false;
+			QuadRect searchRect = new QuadRect(left, top, right, bottom);
+			return quadTreePoints.checkIntersection(searchRect, -1, new QuadTree.QuadTreeItemInQuadRect<QuadPoint>() {
+				@Override
+				public boolean contains(QuadRect rect, QuadPoint item) {
+					return rect.contains(new QuadRect(item.x, item.y, item.x, item.y));
+				}
+			});
 		}
 	}
 
