@@ -80,17 +80,15 @@ public class AvoidRoadsHelper {
 	public void initRouteObjects(boolean force) {
 		for (AvoidRoadInfo roadInfo : impassableRoads) {
 			long id = roadInfo.getId();
-			if (id != 0) {
+			if (id != 0 && !force) {
 				for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
-					if (force) {
-						builder.removeImpassableRoad(id);
-					} else {
-						builder.addImpassableRoad(id);
-					}
+					builder.addImpassableRoad(id);
 				}
 			}
-			if (force || id == 0) {
+			if (id == 0) {
 				addImpassableRoad(null, roadInfo.getLatLon(), false, true, roadInfo.getAppModeKey());
+			} else if (force) {
+				replaceImpassableRoad(null, roadInfo, roadInfo.getLatLon(), false, null);
 			}
 		}
 	}
@@ -163,7 +161,7 @@ public class AvoidRoadsHelper {
 				return;
 			}
 		}
-		app.getLocationProvider().getRouteSegment(ll, appMode, false, new ResultMatcher<RouteDataObject>() {
+		app.getLocationProvider().getRouteSegment(ll, appMode, false, new ResultMatcher<>() {
 
 			@Override
 			public boolean publish(RouteDataObject object) {
@@ -202,7 +200,7 @@ public class AvoidRoadsHelper {
 		ApplicationMode defaultAppMode = app.getRoutingHelper().getAppMode();
 		ApplicationMode appMode = ApplicationMode.valueOfStringKey(currentObject.getAppModeKey(), defaultAppMode);
 
-		app.getLocationProvider().getRouteSegment(ll, appMode, false, new ResultMatcher<RouteDataObject>() {
+		app.getLocationProvider().getRouteSegment(ll, appMode, false, new ResultMatcher<>() {
 
 			@Override
 			public boolean publish(RouteDataObject object) {
