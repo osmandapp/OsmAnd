@@ -4930,7 +4930,7 @@
 \n
 \nMolim, unesite adresu e-pošte kojom ste se upisali. Lozinka za jednokratnu upotrebu će Vam biti poslata.</string>
     <string name="verify_account">Potvrdite svoj nalog</string>
-    <string name="terrain_map">Mapa terena (3D)</string>
+    <string name="terrain_map">Terenska mapa (3D)</string>
     <string name="slope_legend_description">Padine koriste boje za prikaz nagiba tla. Možeš čitati više o nagibu u %1$s.</string>
     <string name="power_watts_unit">Vati</string>
     <string name="calculate_offline">Izračunaj bez interneta</string>
