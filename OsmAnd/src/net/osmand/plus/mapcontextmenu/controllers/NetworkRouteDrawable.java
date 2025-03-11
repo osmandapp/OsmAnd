@@ -73,6 +73,10 @@ public class NetworkRouteDrawable extends Drawable {
 		}
 	}
 
+	public boolean hasBackgroundIcon() {
+		return backgroundDrawable != null;
+	}
+
 	private void setupTextPaint(boolean nightMode) {
 		paint.setStrokeWidth(1);
 		paint.setAntiAlias(true);

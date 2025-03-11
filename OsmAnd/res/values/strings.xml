@@ -12,6 +12,8 @@
 -->
 
     <string name="show_image_previews">Show image previews</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Action to control the visibility of the Coordinates grid on the map.</string>
+    <string name="layer_coordinates_grid">Coordinates grid</string>
     <string name="choose_location">Choose a location</string>
     <string name="point_location">Point location</string>
     <string name="shared_string_manual">Manual</string>
