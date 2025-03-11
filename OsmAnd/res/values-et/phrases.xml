@@ -5000,7 +5000,7 @@
     <string name="poi_network_lcn">Kohalik rattamarsruut</string>
     <string name="poi_network_icn">Rahvusvaheline rattamarsruut</string>
     <string name="poi_network_foot">Võrgustik</string>
-    <string name="poi_network_cycling">Rattateede võrgustik</string>
+    <string name="poi_network_cycling">Võrgustik</string>
     <string name="poi_network_nwn">Riiklik matkatee</string>
     <string name="poi_network_rwn">Piirkondlik matkatee</string>
     <string name="poi_network_lwn">Kohalik matkatee</string>
