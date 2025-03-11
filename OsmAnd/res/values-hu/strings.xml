@@ -5681,5 +5681,5 @@
     <string name="shared_string_map_center">Térkép közepe</string>
     <string name="layer_coordinates_grid">Koordinátarács</string>
     <string name="show_image_previews">Képelőnézetek megjelenítése</string>
-    <string name="quick_action_showhide_coordinates_grid_descr">Művelet a térkép koordinátarács láthatóságának szabályozásához.</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">A koordinátarács láthatóságának beállítása a térképen.</string>
 </resources>
