@@ -10,6 +10,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.DetailsBottomSheet;
+import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.transport.TransportLinesFragment;
 
@@ -72,6 +73,14 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 			transportLinesFragment
 					.getSettingHighlighter()
 					.highlightSetting(transportLinesFragment, setting);
+			return true;
+		}
+		if (settingsFragment instanceof final SelectMapStyleBottomSheetDialogFragment selectMapStyleBottomSheetDialogFragment) {
+			IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
+			selectMapStyleBottomSheetDialogFragment.showNow(mapActivity.getSupportFragmentManager());
+			selectMapStyleBottomSheetDialogFragment
+					.getSettingHighlighter()
+					.highlightSetting(selectMapStyleBottomSheetDialogFragment, setting);
 			return true;
 		}
 		return false;

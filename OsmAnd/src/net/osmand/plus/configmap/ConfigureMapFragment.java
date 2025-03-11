@@ -2,6 +2,7 @@ package net.osmand.plus.configmap;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DETAILS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
 
 import android.content.Context;
@@ -28,6 +29,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.DetailsBottomSheet;
+import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -400,8 +402,8 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 
 		@Override
 		public Optional<PreferenceFragmentHandler> getPreferenceFragmentHandler(final Preference preference) {
-			if (DETAILS_ID.equals(preference.getKey())) {
-				return Optional.of(
+			return switch (preference.getKey()) {
+				case DETAILS_ID -> Optional.of(
 						new PreferenceFragmentHandler() {
 
 							@Override
@@ -421,9 +423,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 								return false;
 							}
 						});
-			}
-			if (TRANSPORT_ID.equals(preference.getKey())) {
-				return Optional.of(
+				case TRANSPORT_ID -> Optional.of(
 						new PreferenceFragmentHandler() {
 
 							@Override
@@ -441,8 +441,26 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 								return false;
 							}
 						});
-			}
-			return Optional.empty();
+				case MAP_STYLE_ID -> Optional.of(
+						new PreferenceFragmentHandler() {
+
+							@Override
+							public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
+								return SelectMapStyleBottomSheetDialogFragment.PreferenceFragment.class;
+							}
+
+							@Override
+							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
+								return new SelectMapStyleBottomSheetDialogFragment.PreferenceFragment();
+							}
+
+							@Override
+							public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
+								return false;
+							}
+						});
+				default -> Optional.empty();
+			};
 		}
 	}
 }

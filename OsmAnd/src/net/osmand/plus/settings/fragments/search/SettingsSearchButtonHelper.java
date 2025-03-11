@@ -14,6 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.dialogs.DetailsBottomSheet;
+import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.transport.TransportLinesFragment;
@@ -106,7 +107,8 @@ public class SettingsSearchButtonHelper {
 				Set.of(
 						new PrincipalAndProxy<>(ConfigureMapFragment.class, ConfigureMapFragment.PreferenceFragment.class),
 						new PrincipalAndProxy<>(DetailsBottomSheet.class, DetailsBottomSheet.PreferenceFragment.class),
-						new PrincipalAndProxy<>(TransportLinesFragment.class, TransportLinesFragment.PreferenceFragment.class)));
+						new PrincipalAndProxy<>(TransportLinesFragment.class, TransportLinesFragment.PreferenceFragment.class),
+						new PrincipalAndProxy<>(SelectMapStyleBottomSheetDialogFragment.class, SelectMapStyleBottomSheetDialogFragment.PreferenceFragment.class)));
 	}
 
 	private static Map<Class<? extends Activity>, ActivityInitializer<?>> getActivityInitializerByActivity(final FragmentManager fragmentManager) {

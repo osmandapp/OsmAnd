@@ -2,6 +2,7 @@ package net.osmand.plus.dialogs;
 
 import static net.osmand.osm.OsmRouteType.SKI;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -19,6 +20,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
 
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
@@ -30,6 +34,7 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTitleWithDescrAndButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.configmap.ViewOfSettingHighlighter;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.render.RendererRegistry;
@@ -42,14 +47,17 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import org.threeten.bp.Duration;
 
-public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
+import java.util.*;
+import java.util.stream.Collectors;
+
+import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
+import de.KnollFrank.lib.settingssearch.results.Setting;
+import de.KnollFrank.lib.settingssearch.results.SettingHighlighter;
+import de.KnollFrank.lib.settingssearch.results.SettingHighlighterProvider;
+
+public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDialogFragment implements SettingHighlighterProvider {
 
 	public static final String TAG = SelectMapStyleBottomSheetDialogFragment.class.getSimpleName();
 
@@ -269,6 +277,67 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			SelectMapStyleBottomSheetDialogFragment fragment = new SelectMapStyleBottomSheetDialogFragment();
 			fragment.show(fragmentManager, TAG);
+		}
+	}
+
+	public void showNow(final FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			showNow(fragmentManager, TAG);
+		}
+	}
+
+	@Override
+	public SettingHighlighter getSettingHighlighter() {
+		return new ViewOfSettingHighlighter(
+				this::getView,
+				Duration.ofSeconds(1));
+	}
+
+	private View getView(final Setting setting) {
+		return stylesContainer.findViewWithTag(setting.getKey());
+	}
+
+	public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<SelectMapStyleBottomSheetDialogFragment> {
+
+		private Map<String, String> mapStyleByTranslation;
+
+		@Override
+		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final SelectMapStyleBottomSheetDialogFragment selectMapStyleBottomSheetDialogFragment) {
+			mapStyleByTranslation = selectMapStyleBottomSheetDialogFragment.stylesMap;
+		}
+
+		@Override
+		public void onCreatePreferences(@Nullable final Bundle savedInstanceState, @Nullable final String rootKey) {
+			final Context context = getPreferenceManager().getContext();
+			final PreferenceScreen screen = getPreferenceManager().createPreferenceScreen(context);
+			screen.setTitle("screen title");
+			screen.setSummary("screen summary");
+			PreferenceFragment
+					.asPreferences(mapStyleByTranslation, context)
+					.forEach(screen::addPreference);
+			setPreferenceScreen(screen);
+		}
+
+		private static Collection<Preference> asPreferences(final Map<String, String> mapStyleByTranslation,
+															final Context context) {
+			return mapStyleByTranslation
+					.entrySet()
+					.stream()
+					.map(translation_mapStyle ->
+							asPreference(
+									translation_mapStyle.getValue(),
+									translation_mapStyle.getKey(),
+									context))
+					.collect(Collectors.toUnmodifiableList());
+		}
+
+		private static Preference asPreference(final String mapStyle,
+											   final String translation,
+											   final Context context) {
+			final Preference preference = new Preference(context);
+			preference.setKey(mapStyle);
+			preference.setTitle(translation);
+			return preference;
 		}
 	}
 }
