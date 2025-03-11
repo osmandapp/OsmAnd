@@ -5679,4 +5679,7 @@
     <string name="choose_location_on_map">Válasszon egy helyet a térképen.</string>
     <string name="choose_location">Válasszon egy helyet</string>
     <string name="shared_string_map_center">Térkép közepe</string>
+    <string name="layer_coordinates_grid">Koordinátarács</string>
+    <string name="show_image_previews">Kép előnézetek megjelenítése</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Művelet a térkép koordinátarács láthatóságának szabályozásához.</string>
 </resources>
