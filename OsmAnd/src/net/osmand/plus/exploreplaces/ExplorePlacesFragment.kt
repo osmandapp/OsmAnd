@@ -294,7 +294,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 			latitude,
 			longitude,
 			SearchCoreFactory.PREFERRED_NEARBY_POINT_ZOOM,
-			pair.second as PointDescription,
+			pair.first as PointDescription,
 			true,
 			point)
 		MapActivity.launchMapActivityMoveToTop(mapActivity)
@@ -349,7 +349,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 			BottomSheetBehavior.STATE_HIDDEN -> bottomSheetBehavior.state =
 				BottomSheetBehavior.STATE_COLLAPSED
 
-			BottomSheetBehavior.STATE_COLLAPSED -> bottomSheetBehavior.state =
+			BottomSheetBehavior.STATE_COLLAPSED, BottomSheetBehavior.STATE_EXPANDED -> bottomSheetBehavior.state =
 				BottomSheetBehavior.STATE_HIDDEN
 		}
 	}
