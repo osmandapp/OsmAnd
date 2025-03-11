@@ -20,11 +20,14 @@ import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
+import net.osmand.data.Amenity;
 
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 
@@ -73,8 +76,22 @@ public class NetworkRouteDrawable extends Drawable {
 		}
 	}
 
-	public boolean hasBackgroundIcon() {
-		return backgroundDrawable != null;
+	@Nullable
+	public static Drawable getIconByAmenityShieldTags(@NonNull Amenity amenity,
+	                                                  @NonNull OsmandApplication app, boolean nightMode) {
+		Map<String, String> shieldTags = new HashMap<>();
+		for (String tag : amenity.getAdditionalInfoKeys()) {
+			String value = amenity.getAdditionalInfo(tag);
+			shieldTags.put(tag, value);
+		}
+		RouteKey shieldRouteKey = RouteKey.fromShieldTags(shieldTags);
+		if (shieldRouteKey != null) {
+			NetworkRouteDrawable iconDrawable = new NetworkRouteDrawable(app, shieldRouteKey, nightMode);
+			if (iconDrawable.backgroundDrawable != null) {
+				return iconDrawable;
+			}
+		}
+		return null;
 	}
 
 	private void setupTextPaint(boolean nightMode) {
