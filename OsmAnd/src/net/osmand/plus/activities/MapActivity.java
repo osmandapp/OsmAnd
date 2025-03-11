@@ -848,7 +848,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				mapContextMenu.setMapCenter(latLonToShow);
 				mapContextMenu.setCenterMarker(true);
 
-				RotatedTileBox tb = mapView.getCurrentRotatedTileBox().copy();
+				RotatedTileBox tb = mapView.getRotatedTileBox();
 				LatLon prevCenter = tb.getCenterLatLon();
 
 				double border = 0.8;
@@ -1103,6 +1103,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		updateNavigationBarColor();
 		//mapView.setComplexZoom(mapView.getZoom(), mapView.getSettingsMapDensity());
 		mapView.setMapDensity(mapView.getSettingsMapDensity());
+		mapView.updateGridSettings();
 		app.getDaynightHelper().startSensorIfNeeded(change -> app.runInUIThread(() -> getMapView().refreshMap(true)));
 		getMapView().refreshMap(true);
 		applyScreenOrientation();

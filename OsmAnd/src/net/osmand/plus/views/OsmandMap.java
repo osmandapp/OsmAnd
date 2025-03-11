@@ -190,7 +190,7 @@ public class OsmandMap {
 				top = Math.max(top, l.getLatitude());
 				bottom = Math.min(bottom, l.getLatitude());
 			}
-			RotatedTileBox tb = getMapView().getCurrentRotatedTileBox().copy();
+			RotatedTileBox tb = getMapView().getRotatedTileBox();
 			int tileBoxWidthPx = 0;
 			int tileBoxHeightPx = 0;
 			if (!portrait) {

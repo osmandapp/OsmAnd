@@ -67,6 +67,7 @@ import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
+import net.osmand.plus.configmap.GridZoomLevelsController;
 import net.osmand.plus.configmap.routes.MtbClassification;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.feedback.RateUsState;
@@ -97,7 +98,7 @@ import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
-import net.osmand.plus.wikipedia.WikiDataSource;
+import net.osmand.data.DataSourceType;
 import net.osmand.render.RenderingClass;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
@@ -922,8 +923,14 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> WIKI_ARTICLE_SHOW_IMAGES_ASKED = new BooleanPreference(this, "wikivoyage_show_images_asked", false).makeGlobal();
 	public final CommonPreference<WikiArticleShowImages> WIKI_ARTICLE_SHOW_IMAGES = new EnumStringPreference<>(this, "wikivoyage_show_imgs", WikiArticleShowImages.OFF, WikiArticleShowImages.values()).makeGlobal().makeShared();
 
-	public final CommonPreference<Boolean> WIKI_SHOW_IMAGE_PREVIEW = new BooleanPreference(this, "wiki_show_image_preview", false).makeGlobal();
-	public final CommonPreference<WikiDataSource> WIKI_DATA_SOURCE = new EnumStringPreference<>(this, "wiki_data_source", WikiDataSource.OFFLINE, WikiDataSource.values()).makeGlobal().makeShared();
+	public final CommonPreference<Boolean> WIKI_SHOW_IMAGE_PREVIEWS = new BooleanPreference(this, "wiki_show_image_previews", true).makeGlobal();
+	public final CommonPreference<DataSourceType> WIKI_DATA_SOURCE_TYPE = new EnumStringPreference<>(this, "wiki_data_source_type", DataSourceType.ONLINE, DataSourceType.values()) {
+		@Override
+		public DataSourceType getProfileDefaultValue(@Nullable ApplicationMode mode) {
+			boolean paidVersion = Version.isPaidVersion(getContext());
+			return paidVersion ? DataSourceType.OFFLINE : DataSourceType.ONLINE;
+		}
+	}.makeGlobal().makeShared();
 
 	public final CommonPreference<Boolean> SELECT_MARKER_ON_SINGLE_TAP = new BooleanPreference(this, "select_marker_on_single_tap", false).makeProfile();
 	public final CommonPreference<Boolean> KEEP_PASSED_MARKERS_ON_MAP = new BooleanPreference(this, "keep_passed_markers_on_map", true).makeProfile();
@@ -3325,6 +3332,24 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> SHOW_BORDERS_OF_DOWNLOADED_MAPS =
 			new BooleanPreference(this, "show_borders_of_downloaded_maps", true).makeProfile();
+
+	public final CommonPreference<Boolean> SHOW_COORDINATES_GRID =
+			new BooleanPreference(this, "show_coordinates_grid", false).makeProfile();
+
+	public final OsmandPreference<GridFormat> COORDINATE_GRID_FORMAT =
+			new EnumStringPreference<>(this, "coordinates_grid_format", GridFormat.DMS, GridFormat.values()) {
+				@Override
+				public GridFormat getProfileDefaultValue(@Nullable ApplicationMode mode) {
+					int formatId = COORDINATES_FORMAT.getModeValue(mode);
+					return GridFormat.valueOf(formatId);
+				}
+			}.makeProfile();
+
+	public final CommonPreference<Integer> COORDINATE_GRID_MIN_ZOOM =
+			new IntPreference(this, "coordinate_grid_min_zoom", GridZoomLevelsController.MIN_ZOOM).makeProfile();
+
+	public final CommonPreference<Integer> COORDINATE_GRID_MAX_ZOOM =
+			new IntPreference(this, "coordinate_grid_max_zoom", GridZoomLevelsController.MAX_ZOOM).makeProfile();
 
 	public Set<String> getCustomAppModesKeys() {
 		String appModesKeys = CUSTOM_APP_MODES_KEYS.get();

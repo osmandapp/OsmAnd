@@ -57,7 +57,6 @@ public class ShowHideFavoritesAction extends QuickAction {
 
 	@Override
 	public boolean isActionWithSlash(@NonNull OsmandApplication app) {
-
 		return app.getSettings().SHOW_FAVORITES.get();
 	}
 }

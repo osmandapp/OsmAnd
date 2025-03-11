@@ -4,6 +4,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import net.osmand.data.DataSourceType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -16,6 +17,8 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
@@ -59,6 +62,32 @@ public class WikipediaPoiMenu {
 					app.runInUIThread(() -> wikiPlugin.toggleWikipediaPoi(!enabled, null));
 				} else if (itemId == languageActionStringId) {
 					SelectWikiLanguagesBottomSheet.showInstance(mapActivity, true);
+				} else if (itemId == R.string.data_source) {
+					String[] txtNames = new String[] {app.getString(R.string.shared_string_online),
+							app.getString(R.string.shared_string_offline)};
+					int selected = app.getSettings().WIKI_DATA_SOURCE_TYPE.get() == DataSourceType.ONLINE ? 0 : 1;
+					AlertDialogData dialogData = new AlertDialogData(mapActivity, nightMode)
+							.setTitle(R.string.data_source)
+							.setNegativeButton(R.string.shared_string_dismiss, null);
+					CustomAlert.showSingleSelection(dialogData, txtNames, selected, v -> {
+						int which = (int) v.getTag();
+						app.getSettings().WIKI_DATA_SOURCE_TYPE.set(which == 0 ? DataSourceType.ONLINE : DataSourceType.OFFLINE);
+						item.setDescription(txtNames[which]);
+						if (uiAdapter != null) {
+							uiAdapter.onDataSetChanged();
+						}
+						mapActivity.refreshMap();
+						mapActivity.updateLayers();
+					});
+				} else if (itemId == R.string.show_image_previews) {
+					app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.set(isChecked);
+					item.setSelected(isChecked);
+					item.setColor(app, isChecked ? ColorUtilities.getActiveColorId(nightMode) : ContextMenuItem.INVALID_ID);
+					if (uiAdapter != null) {
+						uiAdapter.onDataSetChanged();
+					}
+					mapActivity.refreshMap();
+					mapActivity.updateLayers();
 				}
 				return false;
 			}
@@ -91,6 +120,28 @@ public class WikipediaPoiMenu {
 					.setDescription(summary)
 					.hideCompoundButton(true)
 					.setListener(l));
+
+			adapter.addItem(new ContextMenuItem(null)
+					.setLayout(R.layout.list_item_divider));
+
+			boolean onlineDataSource = app.getSettings().WIKI_DATA_SOURCE_TYPE.get() == DataSourceType.ONLINE;
+			summary = onlineDataSource
+					? mapActivity.getString(R.string.shared_string_online)
+					: mapActivity.getString(R.string.shared_string_offline);
+			adapter.addItem(new ContextMenuItem(null)
+					.setTitleId(R.string.data_source, mapActivity)
+					.setLayout(R.layout.list_item_single_line_descrition_narrow)
+					.setIcon(R.drawable.ic_world_globe_dark)
+					.setColor(app, onlineDataSource ? ColorUtilities.getActiveColorId(nightMode) : ContextMenuItem.INVALID_ID)
+					.setDescription(summary)
+					.setListener(l));
+			Boolean showImagePreviews = app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.get();
+			adapter.addItem(new ContextMenuItem(null)
+					.setTitleId(R.string.show_image_previews, mapActivity)
+					.setIcon(R.drawable.ic_type_img)
+					.setColor(app, showImagePreviews ? ColorUtilities.getActiveColorId(nightMode) : ContextMenuItem.INVALID_ID)
+					.setListener(l)
+					.setSelected(showImagePreviews));
 		}
 
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
@@ -190,5 +241,4 @@ public class WikipediaPoiMenu {
 		WikipediaPoiMenu menu = new WikipediaPoiMenu(mapActivity);
 		return menu.createLayersItems();
 	}
-
 }

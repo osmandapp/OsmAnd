@@ -17,8 +17,6 @@ public interface ExplorePlacesProvider {
 
 	@NotNull List<Amenity> getDataCollection(QuadRect mapRect, int limit);
 
-	@NotNull List<Amenity> getDataCollection(QuadRect rect, int limit, int zoom);
-
 	void addListener(ExplorePlacesListener listener);
 
 	void removeListener(ExplorePlacesListener listener);

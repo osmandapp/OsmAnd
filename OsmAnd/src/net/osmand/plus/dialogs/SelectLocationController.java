@@ -87,7 +87,7 @@ public class SelectLocationController extends BaseDialogController implements IM
 	public static LatLon getMapCenterCoordinates(@NonNull OsmandApplication app) {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		MapRendererView mapRenderer = mapView.getMapRenderer();
-		RotatedTileBox tb = mapView.getCurrentRotatedTileBox().copy();
+		RotatedTileBox tb = mapView.getRotatedTileBox();
 		int centerPixX = tb.getCenterPixelX();
 		int centerPixY = tb.getCenterPixelY();
 		return NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tb, centerPixX, centerPixY);

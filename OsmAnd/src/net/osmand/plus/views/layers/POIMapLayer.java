@@ -75,6 +75,7 @@ import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.POITileProvider;
 import net.osmand.plus.widgets.WebViewEx;
+import net.osmand.data.DataSourceType;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
@@ -135,6 +136,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private Map<String, LoadingImage> loadingImages;
 	private Map<Long, Amenity> topPlaces;
 	private Map<Long, Bitmap> topPlacesBitmaps;
+	private DataSourceType wikiDataSource;
+	private boolean showTopPlacesPreviews;
 
 	/// cache for displayed POI
 	// Work with cache (for map copied from AmenityIndexRepositoryOdb)
@@ -177,7 +180,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
             @Override
             public void layerOnPreExecute() {
                 calculatedFilters = collectFilters();
-				showImagePreview = true;//app.getSettings().WIKI_SHOW_IMAGE_PREVIEW.get();
+				showImagePreview = app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.get();
             }
 
             @Override
@@ -582,8 +585,12 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		PoiUIFilter routeArticlePointsFilter = travelRendererHelper.getRouteArticlePointsFilter();
 		Set<PoiUIFilter> routeTrackFilters = travelRendererHelper.getRouteTrackFilters();
 		String routeArticlePointsFilterByName = routeArticlePointsFilter != null ? routeArticlePointsFilter.getFilterByName() : null;
+		DataSourceType wikiDataSource = app.getSettings().WIKI_DATA_SOURCE_TYPE.get();
+		boolean showTopPlacesPreviews = app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.get();
 		boolean dataChanged = false;
 		if (this.filters != selectedPoiFilters
+				|| this.wikiDataSource != wikiDataSource
+				|| this.showTopPlacesPreviews != showTopPlacesPreviews
 				|| this.showTravel != showTravel
 				|| this.routeArticleFilterEnabled != routeArticleFilterEnabled
 				|| this.routeArticlePointsFilterEnabled != routeArticlePointsFilterEnabled
@@ -595,6 +602,8 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				|| this.fileVisibilityChanged
 				|| !Algorithms.stringsEqual(this.routeArticlePointsFilterByName, routeArticlePointsFilterByName)) {
 			this.filters = selectedPoiFilters;
+			this.wikiDataSource = wikiDataSource;
+			this.showTopPlacesPreviews = showTopPlacesPreviews;
 			this.showTravel = showTravel;
 			this.routeArticleFilterEnabled = routeArticleFilterEnabled;
 			this.routeArticlePointsFilterEnabled = routeArticlePointsFilterEnabled;

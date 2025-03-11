@@ -533,7 +533,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			GpxFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 			KQuadRect r = gpxFile.getRect();
 
-			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
+			RotatedTileBox tb = mapActivity.getMapView().getRotatedTileBox();
 			int tileBoxWidthPx = 0;
 			int tileBoxHeightPx = 0;
 			int marginLeftPx = 0;
