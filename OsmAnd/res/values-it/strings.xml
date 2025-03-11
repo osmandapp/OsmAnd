@@ -4077,7 +4077,7 @@
     <string name="routing_attr_prefer_horse_routes_description">Preferisci i percorsi per cavalli</string>
     <string name="shared_app_storage_description">La memoria condivisa non è più disponibile a causa delle modifiche alle regole di accesso all\'archiviazione in Android.</string>
     <string name="internal_app_storage_description">Memorizzazione interna, nascosto all\'utilizzatore e alle altre app, così solo OsmAnd può accedere ai tuoi dati.</string>
-    <string name="rendering_attr_natureReserves_name">Riserva naturale</string>
+    <string name="rendering_attr_natureReserves_name">Riserve naturali</string>
     <string name="shared_string_details">Dettagli</string>
     <string name="shared_string_articles">Articoli</string>
     <string name="included_categories">Categorie incluse</string>
