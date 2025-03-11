@@ -5754,4 +5754,7 @@
     <string name="choose_location_on_map">Vælg en placering på kortet.</string>
     <string name="popular_places">Populære steder</string>
     <string name="choose_location">Vælg en placering</string>
+    <string name="show_image_previews">Vis forhåndsvisninger af billeder</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Handling til at styre synligheden af koordinatnettet på kortet.</string>
+    <string name="layer_coordinates_grid">Koordinatnet</string>
 </resources>
