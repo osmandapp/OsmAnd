@@ -782,7 +782,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 				}
 			}
 
-			RotatedTileBox tb = mapView.getCurrentRotatedTileBox().copy();
+			RotatedTileBox tb = mapView.getRotatedTileBox();
 			int tileBoxWidthPx = 0;
 			int tileBoxHeightPx = 0;
 

@@ -17,7 +17,6 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.OverScroller;
-import android.widget.Toast;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
@@ -1054,7 +1053,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	public void fitRectOnMap(QuadRect rect) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
+			RotatedTileBox tb = mapActivity.getMapView().getRotatedTileBox();
 			int tileBoxWidthPx = 0;
 			int tileBoxHeightPx = 0;
 			if (!portrait) {

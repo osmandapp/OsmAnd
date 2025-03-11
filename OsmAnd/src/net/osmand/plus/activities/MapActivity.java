@@ -848,7 +848,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				mapContextMenu.setMapCenter(latLonToShow);
 				mapContextMenu.setCenterMarker(true);
 
-				RotatedTileBox tb = mapView.getCurrentRotatedTileBox().copy();
+				RotatedTileBox tb = mapView.getRotatedTileBox();
 				LatLon prevCenter = tb.getCenterLatLon();
 
 				double border = 0.8;

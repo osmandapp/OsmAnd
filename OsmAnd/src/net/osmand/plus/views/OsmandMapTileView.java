@@ -32,17 +32,8 @@ import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.ColorARGB;
-import net.osmand.core.jni.FColorARGB;
-import net.osmand.core.jni.GridConfiguration;
+import net.osmand.core.jni.*;
 import net.osmand.core.jni.GridConfiguration.Projection;
-import net.osmand.core.jni.GridMarksProvider;
-import net.osmand.core.jni.MapAnimator;
-import net.osmand.core.jni.MapRendererDebugSettings;
-import net.osmand.core.jni.PointD;
-import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.TextRasterizer;
-import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadPointDouble;
@@ -2259,7 +2250,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		@Override
 		public void onZoomStarted(PointF centerPoint) {
 			initialMultiTouchCenterPoint = centerPoint;
-			initialViewport = getCurrentRotatedTileBox().copy();
+			initialViewport = getRotatedTileBox();
 			MapRendererView mapRenderer = getMapRenderer();
 			initialCenterLatLon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, initialViewport,
 					initialMultiTouchCenterPoint.x, initialMultiTouchCenterPoint.y);

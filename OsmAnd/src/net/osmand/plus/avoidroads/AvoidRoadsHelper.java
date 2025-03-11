@@ -144,7 +144,7 @@ public class AvoidRoadsHelper {
 				: app.getRoutingHelper().getRoute().getOriginalRoute();
 
 		if (mapActivity != null && roads != null) {
-			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
+			RotatedTileBox tb = mapActivity.getMapView().getRotatedTileBox();
 			float maxDistPx = MAX_AVOID_ROUTE_SEARCH_RADIUS_DP * tb.getDensity();
 			RouteSegmentSearchResult searchResult = RouteSegmentSearchResult.searchRouteSegment(
 					loc.getLatitude(), loc.getLongitude(), maxDistPx / tb.getPixDensity(), roads);

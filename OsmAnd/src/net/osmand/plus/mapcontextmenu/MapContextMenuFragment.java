@@ -234,7 +234,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		backButton.setImageResource(AndroidUtils.getNavigationIconResId(mapActivity));
 		updateVisibility(topButtonContainer, 0);
 
-		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
+		RotatedTileBox box = map.getRotatedTileBox();
 		customMapCenter = menu.getMapCenter() != null;
 		if (!customMapCenter) {
 			mapCenter = box.getCenterLatLon();
@@ -905,7 +905,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private void setCustomMapRatio() {
 		LatLon latLon = menu.getLatLon();
-		RotatedTileBox tb = map.getCurrentRotatedTileBox().copy();
+		RotatedTileBox tb = map.getRotatedTileBox();
 		PointF pixel = NativeUtilities.getElevatedPixelFromLatLon(map.getMapRenderer(), tb, latLon);
 		float ratioX = pixel.x / tb.getPixWidth();
 		float ratioY = pixel.y / tb.getPixHeight();
@@ -916,7 +916,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	public void doZoomIn() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			RotatedTileBox tb = map.getCurrentRotatedTileBox().copy();
+			RotatedTileBox tb = map.getRotatedTileBox();
 			boolean containsLatLon = NativeUtilities.containsLatLon(map.getMapRenderer(), tb, menu.getLatLon());
 			if (containsLatLon) {
 				setCustomMapRatio();
@@ -930,7 +930,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	public void doZoomOut() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			RotatedTileBox tb = map.getCurrentRotatedTileBox().copy();
+			RotatedTileBox tb = map.getRotatedTileBox();
 			boolean containsLatLon = NativeUtilities.containsLatLon(map.getMapRenderer(), tb, menu.getLatLon());
 			if (containsLatLon) {
 				setCustomMapRatio();
@@ -1029,7 +1029,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 		this.mapCenter = mapCenter;
 		if (map != null) {
-			RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
+			RotatedTileBox box = map.getRotatedTileBox();
 			origMarkerX = box.getCenterPixelX();
 			origMarkerY = box.getCenterPixelY();
 		}
@@ -1683,7 +1683,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		double flat = latLon.getLatitude();
 		double flon = latLon.getLongitude();
 
-		RotatedTileBox cp = map.getCurrentRotatedTileBox().copy();
+		RotatedTileBox cp = map.getRotatedTileBox();
 		cp.setCenterLocation(0.5f, displayPositionManager.getNavigationMapPosition() == MapPosition.BOTTOM ? 0.15f : 0.5f);
 		cp.setLatLonCenter(flat, flon);
 		cp.setZoom(zoom);
@@ -2036,7 +2036,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private LatLon getAdjustedMarkerLocation(int y, LatLon reqMarkerLocation, boolean center, int zoom) {
 		double markerLat = reqMarkerLocation.getLatitude();
 		double markerLon = reqMarkerLocation.getLongitude();
-		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
+		RotatedTileBox box = map.getRotatedTileBox();
 		box.setCenterLocation(0.5f, displayPositionManager.getNavigationMapPosition() == MapPosition.BOTTOM ? 0.15f : 0.5f);
 		box.setZoom(zoom);
 		boolean hasMapCenter = mapCenter != null;
@@ -2294,7 +2294,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				return false;
 			}
 			getMapActivity().getMapView();
-			RotatedTileBox tb = getMapActivity().getMapView().getCurrentRotatedTileBox().copy();
+			RotatedTileBox tb = getMapActivity().getMapView().getRotatedTileBox();
 			int tileBoxWidthPx = 0;
 			int tileBoxHeightPx = 0;
 			int marginStartPx = 0;

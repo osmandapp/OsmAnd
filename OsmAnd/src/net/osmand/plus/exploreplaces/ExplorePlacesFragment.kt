@@ -189,7 +189,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	private fun updatePointsList() {
 		mapActivity?.let {
 			val now = System.currentTimeMillis()
-			val tileBox = it.mapView.currentRotatedTileBox
+			val tileBox = it.mapView.rotatedTileBox
 			val rect = tileBox.latLonBounds
 			val extended: RotatedTileBox = tileBox.copy()
 			extended.increasePixelDimensions(tileBox.pixWidth / 4, tileBox.pixHeight / 4)
