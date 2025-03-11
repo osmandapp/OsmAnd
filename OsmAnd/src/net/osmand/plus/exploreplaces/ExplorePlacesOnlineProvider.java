@@ -145,16 +145,11 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 
 	@NonNull
     public List<Amenity> getDataCollection(QuadRect rect, int limit) {
-		return getDataCollection(rect, limit, MAX_LEVEL_ZOOM_CACHE);
-	}
-
-	@NonNull
-    public List<Amenity> getDataCollection(QuadRect rect, int limit, int zoom) {
 		if (rect == null) {
 			return Collections.emptyList();
 		}
 		// Calculate the initial zoom level
-		zoom = Math.min(zoom, MAX_LEVEL_ZOOM_CACHE);
+		int zoom = MAX_LEVEL_ZOOM_CACHE;
 		while (zoom >= 0) {
 			int tileWidth = (int) (MapUtils.getTileNumberX(zoom, rect.right)) -
 					((int) MapUtils.getTileNumberX(zoom, rect.left)) + 1;
@@ -224,7 +219,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		filteredAmenities.sort((a1, a2) -> Integer.compare(a2.getTravelEloNumber(), a1.getTravelEloNumber()));
 
 		// Limit the number of points
-		if (filteredAmenities.size() > limit) {
+		if (limit > 0 && filteredAmenities.size() > limit) {
 			filteredAmenities = filteredAmenities.subList(0, limit);
 		}
 

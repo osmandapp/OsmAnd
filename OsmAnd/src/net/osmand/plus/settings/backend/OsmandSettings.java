@@ -97,7 +97,7 @@ import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
-import net.osmand.plus.wikipedia.WikiDataSource;
+import net.osmand.data.DataSourceType;
 import net.osmand.render.RenderingClass;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
@@ -922,8 +922,14 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> WIKI_ARTICLE_SHOW_IMAGES_ASKED = new BooleanPreference(this, "wikivoyage_show_images_asked", false).makeGlobal();
 	public final CommonPreference<WikiArticleShowImages> WIKI_ARTICLE_SHOW_IMAGES = new EnumStringPreference<>(this, "wikivoyage_show_imgs", WikiArticleShowImages.OFF, WikiArticleShowImages.values()).makeGlobal().makeShared();
 
-	public final CommonPreference<Boolean> WIKI_SHOW_IMAGE_PREVIEW = new BooleanPreference(this, "wiki_show_image_preview", false).makeGlobal();
-	public final CommonPreference<WikiDataSource> WIKI_DATA_SOURCE = new EnumStringPreference<>(this, "wiki_data_source", WikiDataSource.OFFLINE, WikiDataSource.values()).makeGlobal().makeShared();
+	public final CommonPreference<Boolean> WIKI_SHOW_IMAGE_PREVIEWS = new BooleanPreference(this, "wiki_show_image_previews", true).makeGlobal();
+	public final CommonPreference<DataSourceType> WIKI_DATA_SOURCE_TYPE = new EnumStringPreference<>(this, "wiki_data_source_type", DataSourceType.ONLINE, DataSourceType.values()) {
+		@Override
+		public DataSourceType getProfileDefaultValue(@Nullable ApplicationMode mode) {
+			boolean paidVersion = Version.isPaidVersion(getContext());
+			return paidVersion ? DataSourceType.OFFLINE : DataSourceType.ONLINE;
+		}
+	}.makeGlobal().makeShared();
 
 	public final CommonPreference<Boolean> SELECT_MARKER_ON_SINGLE_TAP = new BooleanPreference(this, "select_marker_on_single_tap", false).makeProfile();
 	public final CommonPreference<Boolean> KEEP_PASSED_MARKERS_ON_MAP = new BooleanPreference(this, "keep_passed_markers_on_map", true).makeProfile();

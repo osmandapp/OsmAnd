@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="show_image_previews">Show image previews</string>
     <string name="choose_location">Choose a location</string>
     <string name="point_location">Point location</string>
     <string name="shared_string_manual">Manual</string>

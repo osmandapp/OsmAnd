@@ -38,7 +38,6 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.exploreplaces.ExplorePlacesOnlineFilter;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.gallery.ImageCardsHolder;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -265,23 +264,12 @@ public class WikipediaPlugin extends OsmandPlugin {
 
 	@Nullable
 	public PoiUIFilter getTopWikiPoiFilter() {
-		WikiDataSource dataSource = settings.WIKI_DATA_SOURCE.get();
-		return switch (dataSource) {
-			case OFFLINE -> {
-				MapPoiTypes poiTypes = app.getPoiTypes();
-				if (topWikiPoiFilter == null && poiTypes.isInit()) {
-					AbstractPoiType poiType = poiTypes.getOsmwiki();
-					topWikiPoiFilter = new PoiUIFilter(poiType, app, "");
-				}
-				yield topWikiPoiFilter;
-			}
-			case ONLINE -> {
-				if (topWikiOnlinePoiFilter == null) {
-					topWikiOnlinePoiFilter = new ExplorePlacesOnlineFilter(app);
-				}
-				yield topWikiOnlinePoiFilter;
-			}
-		};
+		MapPoiTypes poiTypes = app.getPoiTypes();
+		if (topWikiPoiFilter == null && poiTypes.isInit()) {
+			AbstractPoiType poiType = poiTypes.getOsmwiki();
+			topWikiPoiFilter = new PoiUIFilter(poiType, app, "");
+		}
+		return topWikiPoiFilter;
 	}
 
 	@Override
