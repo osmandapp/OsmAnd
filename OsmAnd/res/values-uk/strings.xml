@@ -5733,4 +5733,7 @@
     <string name="shared_string_map_center">Центр карти</string>
     <string name="shared_string_manual">Інструкція</string>
     <string name="choose_location_on_map">Виберіть місце на карті.</string>
+    <string name="show_image_previews">Показати попередній перегляд зображення</string>
+    <string name="layer_coordinates_grid">Координатна сітка</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Дія для керування видимістю сітки координат на карті.</string>
 </resources>
