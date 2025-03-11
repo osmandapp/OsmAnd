@@ -431,7 +431,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 			return;
 		}
 		DrawSettings drawSettings = new DrawSettings(carContext.isDarkMode(), false);
-		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox().copy();
+		RotatedTileBox tileBox = mapView.getRotatedTileBox();
 		try {
 			renderFrame(tileBox, drawSettings);
 		} catch (Exception ignored) {

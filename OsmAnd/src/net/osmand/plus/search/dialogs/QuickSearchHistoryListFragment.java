@@ -152,11 +152,10 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			long now = System.currentTimeMillis();
-			RotatedTileBox tileBox = mapActivity.getMapView().getCurrentRotatedTileBox();
+			RotatedTileBox tileBox = mapActivity.getMapView().getRotatedTileBox();
 			QuadRect rect = tileBox.getLatLonBounds();
-			RotatedTileBox extended = tileBox.copy();
-			extended.increasePixelDimensions(tileBox.getPixWidth() / 4, tileBox.getPixHeight() / 4);
-			QuadRect extendedRect = extended.getLatLonBounds();
+			tileBox.increasePixelDimensions(tileBox.getPixWidth() / 4, tileBox.getPixHeight() / 4);
+			QuadRect extendedRect = tileBox.getLatLonBounds();
 			if (!extendedRect.contains(visiblePlacesRect) && now - lastPointListRectUpdate > 1000) {
 				lastPointListRectUpdate = now;
 				visiblePlacesRect = rect;

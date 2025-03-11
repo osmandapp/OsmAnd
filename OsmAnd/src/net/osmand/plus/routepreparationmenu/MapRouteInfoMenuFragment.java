@@ -288,7 +288,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		if (rh.isRoutePlanningMode()) {
 			mapActivity.getMapView();
 			QuadRect r = menu.getRouteRect(mapActivity);
-			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
+			RotatedTileBox tb = mapActivity.getMapView().getRotatedTileBox();
 			int tileBoxWidthPx = 0;
 			int tileBoxHeightPx = 0;
 
