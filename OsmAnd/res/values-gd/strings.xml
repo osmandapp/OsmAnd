@@ -301,4 +301,24 @@
     <string name="obd_fuel_type_lpg">LPG</string>
     <string name="storage_copying_files_size">A\' dèanamh lethbhreac de %1$s faidhle(achan) %2$s</string>
     <string name="shared_string_migration">Imrich</string>
+    <string name="map_widget_trip_recording_downhill">Le bruthach</string>
+    <string name="map_widget_trip_recording_uphill">Ri bruthach</string>
+    <string name="get_altitude_information">Faigh fiosrachadh àrdachadh</string>
+    <string name="shared_string_details">Mion-fhiosrachadh</string>
+    <string name="shared_string_downhill">Le bruthach</string>
+    <string name="altitude_descent">Le bruthach</string>
+    <string name="rendering_category_details">Mion-fhiosrachadh</string>
+    <string name="nautical_renderer">Seòlaidh</string>
+    <string name="duration">Ùine</string>
+    <string name="distance">Astar</string>
+    <string name="map_widget_average_speed">Astar cuibheasach</string>
+    <string name="shared_string_mode">Modh</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (Gun bacadh)</string>
+    <string name="icon_group_nautical">Seòlaidh</string>
+    <string name="backup_error_file_not_available">Faidhle do-fhaotainn</string>
+    <string name="shared_string_uphill">Ri bruthach</string>
+    <string name="rendering_attr_piste_type_downhill_name">Le bruthach</string>
+    <string name="average_speed">Astar cuibheasach</string>
+    <string name="routing_attr_hazmat_category_name">Roinn-seòrsa Hazmat</string>
+    <string name="altitude_ascent">Ri bruthach</string>
 </resources>
