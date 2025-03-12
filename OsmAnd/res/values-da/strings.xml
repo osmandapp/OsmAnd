@@ -3431,7 +3431,7 @@
     <string name="vessel_height_warning_link">Indstil fartøjets højde</string>
     <string name="vessel_width_limit_description">Indstil fartøjets bredde for at undgå smalle broer</string>
     <string name="plugin_wikipedia_description">Få oplysninger om interessepunkter fra Wikipedia, en offline lommeguide med artikler om steder og destinationer.</string>
-    <string name="add_hidden_group_info">Det tilføjede punkt kan findes i \"%s\". Fjern skjul for den valgte gruppe for at vise den på kortet.</string>
+    <string name="add_hidden_group_info">Det tilføjede punkt kan findes i \"%s\". Fjern skjulning for den valgte gruppe for at vise den på kortet.</string>
     <string name="app_mode_wheelchair_forward">Kørestol fremad</string>
     <string name="set_working_days_to_continue">Angiv arbejdsdage for at fortsætte</string>
     <string name="route_between_points">Rute mellem punkter</string>
