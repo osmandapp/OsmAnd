@@ -1411,6 +1411,7 @@ public class BinaryMapIndexReader {
 		if (req.nameQuery == null || req.nameQuery.length() == 0) {
 			throw new IllegalArgumentException();
 		}
+		long tm = System.currentTimeMillis();
 		for (PoiRegion poiIndex : poiIndexes) {
 			poiAdapter.initCategories(poiIndex);
 			codedIS.seek(poiIndex.filePointer);
@@ -1418,6 +1419,7 @@ public class BinaryMapIndexReader {
 			poiAdapter.searchPoiByName(poiIndex, req);
 			codedIS.popLimit(old);
 		}
+		System.out.println((System.currentTimeMillis() - tm) + " ms");
 		return req.getSearchResults();
 	}
 
@@ -2279,7 +2281,7 @@ public class BinaryMapIndexReader {
 	private static boolean testPoiSearchOnPath = false;
 	private static boolean testTransportSearch = false;
 	private static boolean testPoiRouteByName = true;
-	private static boolean testPoiRouteByType = true;
+	private static boolean testPoiRouteByType = false;
 
 	private static int sleft = MapUtils.get31TileNumberX(27.55079);
 	private static int sright = MapUtils.get31TileNumberX(27.55317);
@@ -2293,7 +2295,7 @@ public class BinaryMapIndexReader {
 
 	public static void main(String[] args) throws IOException {
 		File fl = new File(System.getProperty("maps") + "/Synthetic_test_rendering.obf");
-		fl = new File(System.getProperty("maps") +"/Wikivoyage.obf__");
+		fl = new File(System.getProperty("maps") +"/Map.obf");
 		
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 
@@ -2329,10 +2331,10 @@ public class BinaryMapIndexReader {
 		}
 
 		if (testPoiRouteByName || testPoiRouteByType) {
-			int y = MapUtils.get31TileNumberY(36.023431);
-			int x = MapUtils.get31TileNumberX(14.298406);
+			int y = MapUtils.get31TileNumberY(50.07648);
+			int x = MapUtils.get31TileNumberX(14.46652);
 			if (testPoiRouteByName) {
-				testPoiSearchByName(reader, "Gozo Coastal Walk", x, y); // Malta - Gozo Island - osm_hiking track
+				testPoiSearchByName(reader, "OSM2672330", x, y); // Malta - Gozo Island - osm_hiking track
 			}
 			if (testPoiRouteByType) {
 				testPoiSearchByType(reader, "routes", "osm_hiking", x, y);
@@ -2569,7 +2571,6 @@ public class BinaryMapIndexReader {
 					if (query == null) {
 						continue;
 					}
-					
 					// check query is part of key (the best matching)
 					if (CollatorStringMatcher.cmatches(instance, key, query, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
 						if (query.length() >= charMatches) {
@@ -2577,6 +2578,7 @@ public class BinaryMapIndexReader {
 								matchedCharacters.set(i, query.length());
 								listOffsets.get(i).clear();
 							}
+							System.out.println(query + " " + key);
 							matched[i] = true;
 						}
 						// check key is part of query
@@ -2586,6 +2588,7 @@ public class BinaryMapIndexReader {
 								matchedCharacters.set(i, key.length());
 								listOffsets.get(i).clear();
 							}
+							System.out.println(query + " " + key);
 							matched[i] = true;
 						}
 					}
