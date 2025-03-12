@@ -143,16 +143,15 @@ public class QuickSearchListItem {
 	@Nullable
 	public static String getAmenityDistanceFormatted(Amenity amenity, OsmandApplication app) {
 		String distanceTag = amenity.getAdditionalInfo(TravelGpx.DISTANCE);
-		float distance = Algorithms.parseFloatSilently(distanceTag, 0);
+		float km = Algorithms.parseFloatSilently(distanceTag, 0);
 
-		if (distance > 0) {
+		if (km > 0) {
 			if (!distanceTag.contains(".")) {
-				// previously, distance format was MMMMM (no decimal point)
-				// since 1 Apr 2025 distance format will be fixed in KM.D
-				// TODO remove this if() after 1 Apr 2025
-				distance /= 1000;
+				// Before 1 Apr 2025 distance format was MMMMM (meters, no fractional part).
+				// Since 1 Apr 2025 format has been fixed to KM.D (km, with 1 fractional digit).
+				km /= 1000;
 			}
-			return OsmAndFormatter.getFormattedDistance(distance * 1000, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
+			return OsmAndFormatter.getFormattedDistance(km * 1000, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
 		}
 
 		return null;
