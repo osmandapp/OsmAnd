@@ -5490,7 +5490,7 @@
     <string name="open_in_browser">Apri nel browser</string>
     <string name="shared_string_source">Sorgente</string>
     <string name="no_internet_descr">Per favore controlla nuovamente la connessione a internet</string>
-    <string name="no_photos_available_descr">Nessuna foto è stata caricata in questa località</string>
+    <string name="no_photos_available_descr">Nessuna foto utente è stata ancora aggiunta per questa posizione</string>
     <string name="no_photos_available">Nessuna foto disponibile</string>
     <string name="shared_string_no_internet_connection">Nessuna connessione</string>
     <string name="unit_volt">V</string>
