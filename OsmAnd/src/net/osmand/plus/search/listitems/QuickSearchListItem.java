@@ -133,11 +133,20 @@ public class QuickSearchListItem {
 			if (amenity.isRouteTrack()) {
 				String distance = getAmenityDistanceFormatted(amenity, app);
 				if (distance != null) {
-					alternateName = distance + (alternateName == null ? "" : " • " + alternateName);
+					if (alternateName == null) {
+						alternateName = distance;
+					} else {
+						alternateName = app.
+								getString(R.string.ltr_or_rtl_combine_via_bold_point, distance, alternateName);
+					}
 				}
 			}
 		}
-		return alternateName != null ? typeName + " • " + alternateName : typeName;
+		if (alternateName == null) {
+			return typeName;
+		} else {
+			return app.getString(R.string.ltr_or_rtl_combine_via_bold_point, typeName, alternateName);
+		}
 	}
 
 	@Nullable
