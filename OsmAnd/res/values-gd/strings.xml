@@ -321,4 +321,14 @@
     <string name="average_speed">Astar cuibheasach</string>
     <string name="routing_attr_hazmat_category_name">Roinn-seòrsa Hazmat</string>
     <string name="altitude_ascent">Ri bruthach</string>
+    <string name="complete_purchase">Crìochnaich ceannachd</string>
+    <string name="shared_string_learn_more">Ionnsaich tuilleadh</string>
+    <string name="regular_price">Prìs àbhaisteach</string>
+    <string name="from_with_param">Bho %1$s</string>
+    <string name="not_available_with">Chan e ri làimh le %1$s</string>
+    <string name="shared_string_discussion">Deasbad</string>
+    <string name="shared_string_includes">A\' gabhail a-steach</string>
+    <string name="shared_string_not_included">Nach eil seo a\' gabhail a-steach</string>
+    <string name="continue_with">Lean air %1$s</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s no %2$s</string>
 </resources>
