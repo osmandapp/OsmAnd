@@ -20,6 +20,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.Street;
 import net.osmand.data.WptLocationPoint;
+import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteDrawable;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.osm.AbstractPoiType;
@@ -357,6 +358,13 @@ public class QuickSearchListItem {
 				}
 			case POI:
 				Amenity amenity = (Amenity) searchResult.object;
+				if (amenity.isRouteTrack()) {
+					boolean isNightMode = !app.getSettings().isLightContent();
+					Drawable shieldIcon = NetworkRouteDrawable.getIconByAmenityShieldTags(amenity, app, isNightMode);
+					if (shieldIcon != null) {
+						return shieldIcon;
+					}
+				}
 				String id = getAmenityIconName(amenity);
 				Drawable icon = null;
 				if (id != null) {
