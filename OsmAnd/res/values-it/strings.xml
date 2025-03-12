@@ -3942,7 +3942,7 @@
     <string name="backup_delete_types_descr">Cancella tutti i dati di tipo deprecato da OsmAnd Cloud\?</string>
     <string name="backup_delete_types">Cancella i tipi di dati disabilitati</string>
     <string name="shared_string_discussion">Discussione</string>
-    <string name="shared_string_view_all">Visualizza tutti</string>
+    <string name="shared_string_view_all">Mostra tutto</string>
     <string name="backup_error_user_is_already_registered">Questo indirizzo email è in uso a un altro account</string>
     <string name="backup_error_subscription_was_expired">Sottoscrizione scaduta</string>
     <string name="backup_error_subscription_was_expired_descr">La tua sottoscrizione a OsmAnd Pro è scaduta, rinnovala per utilizzare il backup. Puoi ancora ripristinare i dati dal Cloud.</string>
@@ -4615,7 +4615,7 @@
     <string name="precipitation_widget_desc">Mostra le precipitazioni del centro attuale della mappa.</string>
     <string name="temperature_widget_desc">Mostra la temperatura del centro attuale della mappa.</string>
     <string name="weather_pressure_hpa">hPa</string>
-    <string name="weather_pressure_inhg">mmHg</string>
+    <string name="weather_pressure_inhg">inHg</string>
     <string name="weather_pressure_mmhg">mmHg</string>
     <string name="location_simulation_speedup">Accelerazione della simulazione</string>
     <string name="map_widget_sunset_desc">Mostra l\'ora del prossimo tramonto o il tempo che manca al prossimo tramonto.</string>
@@ -4905,7 +4905,7 @@
     <string name="shared_string_deleting">Elimina</string>
     <string name="delete_account">Elimina l\'account</string>
     <string name="shared_string_close_the_dialog">Chiudi la finestra di dialogo</string>
-    <string name="terrain_map">Mappa del terreno (3D)</string>
+    <string name="terrain_map">Mappa terreno (3D)</string>
     <string name="relief_3d">Rilievo 3D</string>
     <string name="relief_3d_description">Possiedi e osserva il modello in scala del tuo quartiere o dell\'intero continente.</string>
     <string name="power_watts_unit">Watt</string>
@@ -5489,7 +5489,7 @@
     <string name="wikimedia">Wikimedia</string>
     <string name="open_in_browser">Apri nel browser</string>
     <string name="shared_string_source">Sorgente</string>
-    <string name="no_internet_descr">Controlla la tua connessione e riprova.</string>
+    <string name="no_internet_descr">Per favore controlla nuovamente la connessione a internet</string>
     <string name="no_photos_available_descr">Nessuna foto è stata caricata in questa località</string>
     <string name="no_photos_available">Nessuna foto disponibile</string>
     <string name="shared_string_no_internet_connection">Nessuna connessione</string>
@@ -5707,8 +5707,8 @@
     <string name="ais_nmea_protocol">Protocollo per la ricezione dei dati NMEA</string>
     <string name="shared_string_avg_altitude">Media altitudine</string>
     <string name="shared_string_avg_speed">Velocità minima</string>
-    <string name="ais_cpa_warning_time">Tempo di avviso per raggiungere il punto di avvicinamento più vicino (PAV)</string>
-    <string name="ais_cpa_warning_distance">Distanza di avviso per il punto di avvicinamento più vicino (PAV)</string>
+    <string name="ais_cpa_warning_time">Tempo di avviso per raggiungere il Punto di Avvicinamento più Vicino (PAV)</string>
+    <string name="ais_cpa_warning_distance">Distanza di avviso per il Punto di Avvicinamento più Vicino (PAV)</string>
     <string name="ais_cpa_warning_distance_description">Le imbarcazioni sono contrassegnate in rosso se il PAV è inferiore a questo valore e viene raggiunto nel prossimo futuro (vedere l\'impostazione Tempo di avviso per il raggiungimento del PAV).</string>
     <string name="plugin_ais_tracker_name">Localizzatore di imbarcazioni AIS</string>
     <string name="plugin_ais_tracker_description">Visualizza le posizioni AIS e le informazioni sulle imbarcazioni circostanti. I dati AIS vengono ricevuti tramite rete da un ricevitore AIS esterno.</string>
@@ -5742,4 +5742,7 @@
     <string name="choose_location">Scegli un luogo</string>
     <string name="shared_string_map_center">Centro della mappa</string>
     <string name="shared_string_manual">Manuale</string>
+    <string name="show_image_previews">Mostra l\' immagine precedente</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Azione per il controllo della visibilità della Griglia delle coordinate sulla mappa.</string>
+    <string name="layer_coordinates_grid">Griglia delle coordinate</string>
 </resources>
