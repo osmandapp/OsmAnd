@@ -2295,7 +2295,8 @@ public class BinaryMapIndexReader {
 
 	public static void main(String[] args) throws IOException {
 		File fl = new File(System.getProperty("maps") + "/Synthetic_test_rendering.obf");
-		fl = new File(System.getProperty("maps") +"/Map.obf");
+		fl = new File(System.getProperty("maps") +"/Slovakia_europe_2.obf");
+//		fl = new File(System.getProperty("maps") +"/Map.obf");
 		
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 
@@ -2331,10 +2332,13 @@ public class BinaryMapIndexReader {
 		}
 
 		if (testPoiRouteByName || testPoiRouteByType) {
-			int y = MapUtils.get31TileNumberY(50.07648);
-			int x = MapUtils.get31TileNumberX(14.46652);
+			int y = MapUtils.get31TileNumberY(48.7534);
+			int x = MapUtils.get31TileNumberX(19.1780);
 			if (testPoiRouteByName) {
-				testPoiSearchByName(reader, "OSM2672330", x, y); // Malta - Gozo Island - osm_hiking track
+//				testPoiSearchByName(reader, "Q3512223", x, y); // Malta - Gozo Island - osm_hiking track
+				testPoiSearchByName(reader, "OSM770", x, y); // Malta - Gozo Island - osm_hiking track
+//				testPoiSearchByName(reader, "OSM2672330", x, y); // Malta - Gozo Island - osm_hiking track
+				
 			}
 			if (testPoiRouteByType) {
 				testPoiSearchByType(reader, "routes", "osm_hiking", x, y);
@@ -2616,6 +2620,7 @@ public class BinaryMapIndexReader {
 					}
 					readIndexedStringTable(instance, subqueries, key, listOffsets, matchedCharacters);
 				} else {
+					System.out.println("Skipped " + codedIS.getBytesUntilLimit());
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				}
 				codedIS.popLimit(oldLim);
