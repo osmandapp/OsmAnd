@@ -258,9 +258,9 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 						destination.setLatitude(point.getLatitude());
 						destination.setLongitude(point.getLongitude());
 						if (lastDirection.update(destination) || !settings.ACCESSIBILITY_SMART_AUTOANNOUNCE.get()) {
-							String notification = distanceString(destination) + " " + lastDirection.getString(); //$NON-NLS-1$
+							String notification = distanceString(destination) + " " + lastDirection.getString();
 							lastNotificationTime = now;
-							app.runInUIThread(() -> app.showToastMessage(notification));
+							app.showToastMessage(notification);
 						}
 					}
 				} else {
