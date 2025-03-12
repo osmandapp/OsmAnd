@@ -2232,9 +2232,9 @@
     <string name="mapillary_widget_descr">Permette di contribuire facilmente a Mapillary.</string>
     <string name="mapillary_descr">Foto a livello stradale per tutti. Scopri luoghi, collabora, fotografa il mondo.</string>
     <string name="shared_string_add_photos">Aggiungi foto</string>
-    <string name="mapillary_action_descr">Contribuisci le tue foto stradali con Mapillary.</string>
+    <string name="mapillary_action_descr">Condividi le tue immagini stradali attraverso Mapillary.</string>
     <string name="plugin_mapillary_descr">Immagini a livello stradale. Puoi contribuire anche tu. Per visualizzare i dati esistenti come livello, attiva \"Immagini a livello stradale\" nel menu \"Configura mappa\".</string>
-    <string name="online_photos">Foto online</string>
+    <string name="online_photos">Fotografie online</string>
     <string name="no_photos_descr">Non ci sono foto qui.</string>
     <string name="open_mapillary">Apri Mapillary</string>
     <string name="shared_string_install">Installa</string>
@@ -3032,7 +3032,7 @@
     <string name="rendering_attr_piste_type_sled_name">Slitta</string>
     <string name="rendering_attr_piste_type_hike_name">Escursione</string>
     <string name="rendering_attr_piste_type_connection_name">Connessione</string>
-    <string name="rendering_attr_piste_type_downhill_name">Downhill</string>
+    <string name="rendering_attr_piste_type_downhill_name">Discesa</string>
     <string name="rendering_attr_piste_type_nordic_name">Sci nordico</string>
     <string name="routeInfo_piste_type_name">Tipo di pista</string>
     <string name="rendering_attr_piste_difficulty_novice_name">Novizi</string>
@@ -4367,7 +4367,7 @@
     <string name="routing_attr_avoid_fords_name">Evita i guadi</string>
     <string name="routing_attr_avoid_fords_description">Evita i guadi</string>
     <string name="map_widget_trip_recording_downhill">Downhill</string>
-    <string name="map_widget_trip_recording_uphill">Uphill</string>
+    <string name="map_widget_trip_recording_uphill">Salita</string>
     <string name="map_widget_trip_recording_duration">Durata</string>
     <string name="map_widget_distance">Distanza</string>
     <string name="routing_attr_hazmat_category_description">Categoria materiali pericolosi / Considera i permessi di accesso per i materiali pericolosi</string>
@@ -5248,7 +5248,7 @@
     <string name="routing_type_a_star_classic">A* classic</string>
     <string name="java_safe">Java (Sicuro)</string>
     <string name="routing_type_a_star_2_phase">A* 2-phase</string>
-    <string name="auto_zoom">Autozoom</string>
+    <string name="auto_zoom">Zoom automatico</string>
     <string name="gpx_approximation">Approssimazione GPX</string>
     <string name="shared_sting_all_colors">Tutti i colori</string>
     <string name="routing_type">Tipo di percorso</string>
@@ -5490,7 +5490,7 @@
     <string name="open_in_browser">Apri nel browser</string>
     <string name="shared_string_source">Sorgente</string>
     <string name="no_internet_descr">Per favore controlla nuovamente la connessione a internet</string>
-    <string name="no_photos_available_descr">Nessuna foto utente è stata ancora aggiunta per questa posizione</string>
+    <string name="no_photos_available_descr">Nessuna foto è stata ancora aggiunta per questa posizione</string>
     <string name="no_photos_available">Nessuna foto disponibile</string>
     <string name="shared_string_no_internet_connection">Nessuna connessione</string>
     <string name="unit_volt">V</string>
