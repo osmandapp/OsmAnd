@@ -38,7 +38,8 @@ public class ShowHideCoordinatesGridAction extends QuickAction {
 		boolean enabled = settings.SHOW_COORDINATES_GRID.get();
 		settings.SHOW_COORDINATES_GRID.set(!enabled);
 
-		mapActivity.getMapView().updateGridSettings();
+		OsmandApplication app = mapActivity.getMyApplication();
+		app.getCoordinatesGridHelper().updateGridSettings();
 		mapActivity.refreshMap();
 	}
 

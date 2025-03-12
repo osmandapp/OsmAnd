@@ -31,6 +31,7 @@ import androidx.annotation.Nullable;
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
+import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.*;
 import net.osmand.core.jni.GridConfiguration.Projection;
@@ -119,8 +120,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private boolean DISABLE_MAP_LAYERS;
 	private StateChangedListener<Boolean> disableMapLayersListener;
 
-	private StateChangedListener gridSettingsListener;
-
 	private View view;
 	private final Context ctx;
 	private MapActivity mapActivity;
@@ -132,8 +131,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private Boolean nightMode;
 
 	private float minAllowedElevationAngle = MIN_ALLOWED_ELEVATION_ANGLE;
-
-	GridMarksProvider gridMarksProvider;
 
 	private static class CanvasColors {
 		int colorDay = MAP_DEFAULT_COLOR;
@@ -307,13 +304,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		DISABLE_MAP_LAYERS = settings.DISABLE_MAP_LAYERS.get();
 		disableMapLayersListener = change -> DISABLE_MAP_LAYERS = change;
 		settings.DISABLE_MAP_LAYERS.addListener(disableMapLayersListener);
-
-		gridSettingsListener = this::onUpdateGridSettings;
-		settings.SHOW_COORDINATES_GRID.addListener(gridSettingsListener);
-		settings.COORDINATE_GRID_FORMAT.addListener(gridSettingsListener);
-		settings.COORDINATE_GRID_MIN_ZOOM.addListener(gridSettingsListener);
-		settings.COORDINATE_GRID_MAX_ZOOM.addListener(gridSettingsListener);
-		settings.COORDINATES_FORMAT.addListener(gridSettingsListener);
 	}
 
 	public void updateDisplayMetrics(DisplayMetrics dm, int width, int height) {
@@ -647,7 +637,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (app.accessibilityEnabled()) {
 			app.showShortToastMessage(app.getString(R.string.zoomIs) + " " + zoom.getBaseZoom());
 		}
-		updateGridSettings();
+		app.getCoordinatesGridHelper().updateGridSettings();
 
 		for (ManualZoomListener listener : manualZoomListeners) {
 			listener.onManualZoomChange();
@@ -2555,65 +2545,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	public <T> void onUpdateGridSettings(@NonNull T changed) {
-		updateGridSettings();
-	}
-
-	public void updateGridSettings() {
-		if (mapRenderer != null) {
-			applyGridSettings(mapRenderer);
-		}
-	}
-
-	public void applyGridSettings(@NonNull MapRendererView mapRenderer) {
-		int zoom = getZoom();
-		int minZoom = settings.COORDINATE_GRID_MIN_ZOOM.get();
-		int maxZoom = settings.COORDINATE_GRID_MAX_ZOOM.get();
-		boolean isAvailableZoom = zoom >= minZoom && zoom <= maxZoom;
-		boolean show = isAvailableZoom && settings.SHOW_COORDINATES_GRID.get();
-
-		GridFormat gridFormat = settings.COORDINATE_GRID_FORMAT.get();
-		FColorARGB color = new FColorARGB(1.0f, 0.1f, 0.0f, 0.8f);
-		GridConfiguration gridConfiguration = new GridConfiguration();
-		gridConfiguration.setPrimaryGrid(show);
-		gridConfiguration.setPrimaryProjection(Projection.WGS84);
-		gridConfiguration.setPrimaryColor(color);
-		gridConfiguration.setSecondaryGrid(show);
-		gridConfiguration.setSecondaryProjection(gridFormat.getProjection());
-		gridConfiguration.setSecondaryFormat(gridFormat.getFormat());
-		gridConfiguration.setSecondaryColor(color);
-		mapRenderer.setGridConfiguration(gridConfiguration);
-		if (gridMarksProvider != null) {
-			mapRenderer.removeSymbolsProvider(gridMarksProvider);
-			gridMarksProvider = null;
-		}
-		if (show) {
-			float textScale = settings.TEXT_SCALE.get() * getDensity();
-			gridMarksProvider = new GridMarksProvider();
-			FColorARGB haloColor = new FColorARGB(0.5f, 1.0f, 1.0f, 1.0f);
-			TextRasterizer.Style primaryMarksStyle = new TextRasterizer.Style();
-			primaryMarksStyle.setColor(new ColorARGB(color));
-			primaryMarksStyle.setHaloColor(new ColorARGB(haloColor));
-			primaryMarksStyle.setHaloRadius((int) (3.0f * textScale));
-			primaryMarksStyle.setSize(16.0f * textScale);
-			primaryMarksStyle.setBold(true);
-			primaryMarksStyle.setTextAlignment(TextRasterizer.Style.TextAlignment.Under);
-			gridMarksProvider.setPrimaryStyle(primaryMarksStyle, 2.0f * textScale);
-			gridMarksProvider.setPrimary(false, "Equator", "", "Prime meridian", "180th meridian");
-			TextRasterizer.Style secondaryMarksStyle = new TextRasterizer.Style();
-			secondaryMarksStyle.setColor(new ColorARGB(color));
-			secondaryMarksStyle.setHaloColor(new ColorARGB(haloColor));
-			secondaryMarksStyle.setHaloRadius((int) (3.0f * textScale));
-			secondaryMarksStyle.setSize(16.0f * textScale);
-			secondaryMarksStyle.setBold(true);
-			gridMarksProvider.setSecondaryStyle(secondaryMarksStyle, 2.0f * textScale);
-			if (gridFormat.getProjection() == Projection.UTM) {
-				gridMarksProvider.setSecondary(true, "", "", "", "");
-			} else {
-				gridMarksProvider.setSecondary(true, "N", "S", "E", "W");
-			}
-			mapRenderer.addSymbolsProvider(gridMarksProvider);
-		}
+	public void applyGridSettings(AtlasMapRendererView mapRenderer) {
+		app.getCoordinatesGridHelper().applyGridSettings(mapRenderer);
 	}
 
 	public void applyDebugSettings(MapRendererView mapRenderer) {

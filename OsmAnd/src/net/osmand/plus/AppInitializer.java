@@ -337,6 +337,7 @@ public class AppInitializer implements IProgress {
 		app.model3dHelper = startupInit(new Model3dHelper(app), Model3dHelper.class);
 		app.trackSortModesHelper = startupInit(new TrackSortModesHelper(app), TrackSortModesHelper.class);
 		app.explorePlacesProvider = startupInit(new ExplorePlacesOnlineProvider(app), ExplorePlacesOnlineProvider.class);
+		app.coordinatesGridHelper = startupInit(new CoordinatesGridHelper(app), CoordinatesGridHelper.class);
 		initOpeningHoursParser();
 	}
 
