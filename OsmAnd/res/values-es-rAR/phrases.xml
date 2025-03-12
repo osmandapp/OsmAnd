@@ -4979,7 +4979,7 @@
     <string name="poi_piste_type">Tipo de pista</string>
     <string name="poi_lit">Iluminación</string>
     <string name="poi_piste_oneway">Pista de sentido único</string>
-    <string name="poi_network_cycling">Ciclismo</string>
+    <string name="poi_network_cycling">Red</string>
     <string name="poi_network_nwn">Ruta nacional de senderismo</string>
     <string name="poi_network_icn">Ruta internacional de ciclismo</string>
     <string name="poi_network_ncn">Ruta nacional de ciclismo</string>
