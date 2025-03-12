@@ -224,8 +224,7 @@ class RouteRecalculationHelper {
 		}
 		try {
 			if (PlatformUtil.getOsmandRegions() == null || !app.getAppInitializer().isRoutingConfigInitialized()) {
-				String awaitInitializationMessage = app.getString(R.string.waiting_for_route_calculation);
-				app.runInUIThread(() -> app.showToastMessage(awaitInitializationMessage));
+				app.showToastMessage(R.string.waiting_for_route_calculation);
 				LOG.warn("recalculateRouteInBackground is waiting for initialization");
 				return; // will be retried automatically
 			}
@@ -373,11 +372,6 @@ class RouteRecalculationHelper {
 			return routingHelper.getSettings();
 		}
 
-		private void showMessage(String msg) {
-			OsmandApplication app = routingHelper.getApplication();
-			app.runInUIThread(() -> app.showToastMessage(msg));
-		}
-
 		@Override
 		public void run() {
 			if (!updateProgress) {
@@ -411,7 +405,7 @@ class RouteRecalculationHelper {
 					routeCalcError = app.getString(R.string.error_calculating_route)
 							+ ":\n" + app.getString(R.string.internet_connection_required_for_online_route);
 					routeCalcErrorShort = app.getString(R.string.error_calculating_route);
-					showMessage(routeCalcError);
+					app.showToastMessage(routeCalcError);
 				} else {
 					if (res.getErrorMessage() != null) {
 						routeCalcError = app.getString(R.string.error_calculating_route) + ":\n" + res.getErrorMessage();
@@ -421,7 +415,7 @@ class RouteRecalculationHelper {
 						routeCalcErrorShort = app.getString(R.string.empty_route_calculated);
 					}
 					app.getSettings().IGNORE_MISSING_MAPS = false; // reset on routing error
-					showMessage(routeCalcError);
+					app.showToastMessage(routeCalcError);
 				}
 			}
 			if (!updateProgress) {
