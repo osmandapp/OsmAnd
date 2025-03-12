@@ -99,6 +99,35 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		}
 	}
 
+	private val bottomSheetCallback = object :
+		BottomSheetBehavior.BottomSheetCallback() {
+		override fun onStateChanged(bottomSheet: View, newState: Int) {
+			verticalNearbyList?.let { recyclerView ->
+				val minPeekHeight =
+					resources.getDimensionPixelSize(R.dimen.bottom_sheet_min_peek_height)
+				val defaultPeekHeight =
+					resources.getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height)
+				bottomSheetBehavior.peekHeight =
+					if (recyclerView.measuredHeight < defaultPeekHeight) {
+						minPeekHeight
+					} else {
+						defaultPeekHeight
+					}
+			}
+			isMapVisible = newState != BottomSheetBehavior.STATE_EXPANDED
+			toggleWikipediaLayer(isMapVisible)
+			updateMapControls(newState)
+			AndroidUiHelper.updateVisibility(
+				showOnMapContainer,
+				newState == BottomSheetBehavior.STATE_EXPANDED)
+			bottomSheetBehavior.isDraggable = isMapVisible
+			updateShowListButton()
+		}
+
+		override fun onSlide(bottomSheet: View, slideOffset: Float) {
+		}
+	}
+
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		AndroidUtils.addStatusBarPadding21v(requireActivity(), view)
@@ -118,34 +147,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 			resources.getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height)
 		bottomSheetBehavior.isHideable = true
 		bottomSheetBehavior.isDraggable = false
-		bottomSheetBehavior.addBottomSheetCallback(object :
-			BottomSheetBehavior.BottomSheetCallback() {
-			override fun onStateChanged(bottomSheet: View, newState: Int) {
-				verticalNearbyList?.let { recyclerView ->
-					val minPeekHeight =
-						resources.getDimensionPixelSize(R.dimen.bottom_sheet_min_peek_height)
-					val defaultPeekHeight =
-						resources.getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height)
-					bottomSheetBehavior.peekHeight =
-						if (recyclerView.measuredHeight < defaultPeekHeight) {
-							minPeekHeight
-						} else {
-							defaultPeekHeight
-						}
-				}
-				isMapVisible = newState != BottomSheetBehavior.STATE_EXPANDED
-				toggleWikipediaLayer(isMapVisible)
-				updateMapControls(newState)
-				AndroidUiHelper.updateVisibility(
-					showOnMapContainer,
-					newState == BottomSheetBehavior.STATE_EXPANDED)
-				bottomSheetBehavior.isDraggable = isMapVisible
-				updateShowListButton()
-			}
-
-			override fun onSlide(bottomSheet: View, slideOffset: Float) {
-			}
-		})
 		updateShowListButton()
 	}
 
@@ -179,6 +180,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 
 	override fun onResume() {
 		super.onResume()
+		bottomSheetBehavior.addBottomSheetCallback(bottomSheetCallback)
 		app.locationProvider.addLocationListener(this)
 		app.locationProvider.addCompassListener(this)
 		app.osmandMap.mapView.addMapLocationListener(this)
@@ -209,7 +211,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 
 	override fun onPause() {
 		super.onPause()
-		val app = requireActivity().application as OsmandApplication
+		bottomSheetBehavior.removeBottomSheetCallback(bottomSheetCallback)
 		app.locationProvider.removeLocationListener(this)
 		app.locationProvider.removeCompassListener(this)
 		app.osmandMap.mapView.removeMapLocationListener(this)
