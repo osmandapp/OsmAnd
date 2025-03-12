@@ -476,27 +476,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				}
 			});
 		}
-		if (wikiItem.getLocation() != null) {
-			compassLayout.setVisibility(View.VISIBLE);
-			updateWikiDistanceDirection(view, listItem);
-		} else {
-			compassLayout.setVisibility(View.GONE);
-		}
-
+		AndroidUiHelper.updateVisibility(compassLayout, true);
+		updateDistanceDirection(view, listItem);
 		return view;
-	}
-
-	private void updateWikiDistanceDirection(View view, QuickSearchListItem listItem) {
-		TextView distanceText = view.findViewById(R.id.distance);
-		ImageView direction = view.findViewById(R.id.direction);
-		updateLocationViewCache.specialFrom = null;
-		LatLon toloc = null;
-		if (listItem instanceof QuickSearchWikiItem) {
-			toloc = ((QuickSearchWikiItem) listItem).getLocation();
-		} else if (listItem.getSearchResult() != null) {
-			toloc = listItem.getSearchResult().location;
-		}
-		UpdateLocationUtils.updateLocationView(app, updateLocationViewCache, direction, distanceText, toloc);
 	}
 
 	private LinearLayout bindSearchResultItem(int position, @Nullable View convertView,
@@ -784,7 +766,12 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		if (phrase != null && useMapCenter) {
 			updateLocationViewCache.specialFrom = phrase.getSettings().getOriginalLocation();
 		}
-		LatLon toloc = listItem.getSearchResult().location;
+		LatLon toloc = null;
+		if (listItem instanceof QuickSearchWikiItem) {
+			toloc = ((QuickSearchWikiItem) listItem).getLocation();
+		} else if (listItem.getSearchResult() != null) {
+			toloc = listItem.getSearchResult().location;
+		}
 		UpdateLocationUtils.updateLocationView(app, updateLocationViewCache, direction, distanceText, toloc);
 	}
 

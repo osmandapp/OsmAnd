@@ -354,7 +354,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		buttonToolbarMap.setOnClickListener(v -> {
 					cancelSearch();
 					SearchPhrase searchPhrase = searchUICore.getPhrase();
-					if(showWiki) {
+					if (showWiki) {
 						ExplorePlacesFragment.Companion.showInstance(mapActivity.getSupportFragmentManager());
 					} else if (foundPartialLocation) {
 						QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, searchPhrase.getFirstUnknownSearchWord());
@@ -2173,22 +2173,19 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void showAmenityPoints(List<Amenity> amenities) {
-		WikipediaPlugin wikiPlugin = PluginsHelper.getPlugin(WikipediaPlugin.class);
-		if(wikiPlugin != null) {
-			showWiki = true;
-			buttonToolbarText.setText(R.string.shared_string_show_on_map);
-			List<QuickSearchListItem> items = amenities.stream().map(this::convertAmenityToQuickSearchListItem).collect(Collectors.toList());
-			mainSearchFragment.updateListAdapter(items, false);
-			updateTabBarVisibility(false);
-			toolbarEdit.setVisibility(View.GONE);
-			searchEditText.setHint("Explore places nearby");
-			searchEditText.setEnabled(false);
-			toolbar.setVisibility(View.VISIBLE);
-		}
+		showWiki = true;
+		buttonToolbarText.setText(R.string.shared_string_show_on_map);
+		List<QuickSearchListItem> items = amenities.stream().map(this::convertAmenityToQuickSearchListItem).collect(Collectors.toList());
+		mainSearchFragment.updateListAdapter(items, false);
+		updateTabBarVisibility(false);
+		toolbarEdit.setVisibility(View.GONE);
+		searchEditText.setHint(R.string.popular_places);
+		searchEditText.setEnabled(false);
+		toolbar.setVisibility(View.VISIBLE);
 	}
 
 	private QuickSearchListItem convertAmenityToQuickSearchListItem(Amenity amenity) {
-		return new QuickSearchWikiItem(app, SearchCoreFactory.createAmenitySearchResult(amenity));
+		return new QuickSearchWikiItem(app, SearchCoreFactory.createAmenitySearchResult(SearchPhrase.emptyPhrase(), amenity));
 	}
 
 }

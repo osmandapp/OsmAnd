@@ -24,6 +24,7 @@ import net.osmand.plus.settings.fragments.HistoryItemsFragment;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.search.core.SearchCoreFactory;
+import net.osmand.search.core.SearchPhrase;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class QuickSearchHistoryListFragment extends QuickSearchListFragment impl
 	private long lastPointListRectUpdate = 0;
 
 	public void onNearbyItemClicked(@NonNull Amenity amenity) {
-		showResult(SearchCoreFactory.createAmenitySearchResult(amenity));
+		showResult(SearchCoreFactory.createAmenitySearchResult(SearchPhrase.emptyPhrase(), amenity));
 	}
 
 	@Override

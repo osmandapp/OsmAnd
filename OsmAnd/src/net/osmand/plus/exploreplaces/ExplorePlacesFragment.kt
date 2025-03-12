@@ -40,6 +40,7 @@ import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton
 import net.osmand.plus.wikipedia.WikipediaPlugin
 import net.osmand.search.core.SearchCoreFactory
+import net.osmand.search.core.SearchPhrase
 import net.osmand.util.MapUtils
 import org.apache.commons.logging.Log
 import java.util.Collections
@@ -288,7 +289,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	private fun showPointInContextMenu(mapActivity: MapActivity, point: Amenity) {
 		val latitude = point.location.latitude
 		val longitude = point.location.longitude
-		val sr = SearchCoreFactory.createAmenitySearchResult(point)
+		val sr = SearchCoreFactory.createAmenitySearchResult(SearchPhrase.emptyPhrase(), point)
 		val pair = QuickSearchListItem.getPointDescriptionObject(app, sr)
 		app.settings.setMapLocationToShow(
 			latitude,

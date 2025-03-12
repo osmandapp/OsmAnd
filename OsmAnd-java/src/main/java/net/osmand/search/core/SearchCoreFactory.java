@@ -1952,23 +1952,13 @@ public class SearchCoreFactory {
 				p.isLastWord(ObjectType.VILLAGE);
 	}
 
-	public static SearchResult createAmenitySearchResult(Amenity amenity) {
-		SearchResult sr = new SearchResult();
-		sr.otherNames = amenity.getOtherNames(true);
+	public static SearchResult createAmenitySearchResult(SearchPhrase phrase, Amenity amenity) {
+		SearchResult sr = new SearchResult(phrase);
+		sr.localeName = amenity.getName();
 		sr.object = amenity;
-		sr.preferredZoom = SearchCoreFactory.PREFERRED_POI_ZOOM;
-		sr.location = amenity.getLocation();
-		if (amenity.getSubType().equals("city") || amenity.getSubType().equals("country")) {
-			sr.priorityDistance = SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE;
-			sr.preferredZoom = amenity.getSubType().equals("country") ? SearchCoreFactory.PREFERRED_COUNTRY_ZOOM : SearchCoreFactory.PREFERRED_CITY_ZOOM;
-		} else if (amenity.getSubType().equals("town")) {
-			sr.priorityDistance = SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE;
-		} else {
-			sr.priorityDistance = 1;
-		}
-		sr.priority = SearchCoreFactory.SEARCH_AMENITY_BY_NAME_PRIORITY;
-		sr.alternateName = amenity.getCityFromTagGroups("");
 		sr.objectType = ObjectType.POI;
+		sr.location = amenity.getLocation();
+		sr.preferredZoom = SearchCoreFactory.PREFERRED_POI_ZOOM;
 		return sr;
 	}
 
