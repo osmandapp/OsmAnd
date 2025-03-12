@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 
+import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.render.MapRenderRepositories;
@@ -115,7 +116,8 @@ public class NetworkRouteDrawable extends Drawable {
 			RenderingRuleSearchRequest request = renderer.getSearchRequestWithAppliedCustomRules(storage, nightMode);
 			request.saveState();
 
-			String tag = "route_" + routeKey.type.getName();
+			String tag = "route_" +
+					(routeKey.type == OsmRouteType.UNKNOWN ? OsmRouteType.HIKING.getName() : routeKey.type.getName());
 			String color = routeKey.getValue("osmc_textcolor");
 
 			request.setInitialTagValueZoom(tag, null, 14, null);
