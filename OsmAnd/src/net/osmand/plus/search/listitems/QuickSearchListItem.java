@@ -21,6 +21,8 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.Street;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteDrawable;
+import net.osmand.plus.utils.OsmAndFormatterParams;
+import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.osm.AbstractPoiType;
@@ -127,9 +129,41 @@ public class QuickSearchListItem {
 		String typeName = getTypeName(app, searchResult);
 		String alternateName = searchResult.alternateName;
 		if (searchResult.object instanceof Amenity amenity) {
-            alternateName = amenity.getTranslation(app.getPoiTypes(), searchResult.alternateName);
+			alternateName = amenity.getTranslation(app.getPoiTypes(), searchResult.alternateName);
+			if (amenity.isRouteTrack()) {
+				String distance = getAmenityDistanceFormatted(amenity, app);
+				if (distance != null) {
+					if (alternateName == null) {
+						alternateName = distance;
+					} else {
+						alternateName = app.
+								getString(R.string.ltr_or_rtl_combine_via_bold_point, distance, alternateName);
+					}
+				}
+			}
 		}
-		return alternateName != null ? typeName + " • " + alternateName : typeName;
+		if (alternateName == null) {
+			return typeName;
+		} else {
+			return app.getString(R.string.ltr_or_rtl_combine_via_bold_point, typeName, alternateName);
+		}
+	}
+
+	@Nullable
+	public static String getAmenityDistanceFormatted(Amenity amenity, OsmandApplication app) {
+		String distanceTag = amenity.getAdditionalInfo(TravelGpx.DISTANCE);
+		float km = Algorithms.parseFloatSilently(distanceTag, 0);
+
+		if (km > 0) {
+			if (!distanceTag.contains(".")) {
+				// Before 1 Apr 2025 distance format was MMMMM (meters, no fractional part).
+				// Since 1 Apr 2025 format has been fixed to KM.D (km, with 1 fractional digit).
+				km /= 1000;
+			}
+			return OsmAndFormatter.getFormattedDistance(km * 1000, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
+		}
+
+		return null;
 	}
 
 	public static String getTypeName(OsmandApplication app, SearchResult searchResult) {
