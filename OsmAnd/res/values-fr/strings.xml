@@ -5720,4 +5720,7 @@
     <string name="point_location">Emplacement du point</string>
     <string name="choose_location">Sélectionnez un emplacement</string>
     <string name="shared_string_manual">Manuel</string>
+    <string name="show_image_previews">Afficher les aperçus des images</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Action permettant de contrôler la visibilité de la grille de coordonnées sur la carte.</string>
+    <string name="layer_coordinates_grid">Grille de coordonnées</string>
 </resources>
