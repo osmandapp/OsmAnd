@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -73,9 +74,7 @@ import net.osmand.data.City;
 import net.osmand.data.IncompleteTransportRoute;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
-import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
-import net.osmand.data.QuadTree;
 import net.osmand.data.Street;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
@@ -977,8 +976,8 @@ public class BinaryMapIndexReader {
 					if (index.right < req.left || index.left > req.right || index.top > req.bottom || index.bottom < req.top) {
 						continue;
 					}
-					if (req.hasSearchPoints() &&
-							!req.bboxContainsSearchPoints(index.left, index.top, index.right, index.bottom)) {
+					if (req.hasSearchBoxes() &&
+							!req.containsSearchBox(index.left, index.top, index.right, index.bottom)) {
 						continue;
 					}
 
@@ -995,8 +994,8 @@ public class BinaryMapIndexReader {
 						if (tree.right < req.left || tree.left > req.right || tree.top > req.bottom || tree.bottom < req.top) {
 							continue;
 						}
-						if (req.hasSearchPoints() &&
-								!req.bboxContainsSearchPoints(tree.left, tree.top, tree.right, tree.bottom)) {
+						if (req.hasSearchBoxes() &&
+								!req.containsSearchBox(tree.left, tree.top, tree.right, tree.bottom)) {
 							continue;
 						}
 						codedIS.seek(tree.filePointer);
@@ -1124,8 +1123,8 @@ public class BinaryMapIndexReader {
 				if (current.right < req.left || current.left > req.right || current.top > req.bottom || current.bottom < req.top) {
 					return;
 				}
-				if (req.hasSearchPoints() &&
-						!req.bboxContainsSearchPoints(current.left, current.top, current.right, current.bottom)) {
+				if (req.hasSearchBoxes() &&
+						!req.containsSearchBox(current.left, current.top, current.right, current.bottom)) {
 					return;
 				}
 				req.numberOfAcceptedSubtrees++;
@@ -1803,9 +1802,7 @@ public class BinaryMapIndexReader {
 		int top = 0;
 		int bottom = 0;
 
-		private QuadTree<QuadPoint> quadTreePoints;
-		List<Integer> searchPointsX;
-		List<Integer> searchPointsY;
+		private Collection<QuadRect> searchBoxes;
 
 		int zoom = 15;
 		int limit = -1;
@@ -1971,35 +1968,31 @@ public class BinaryMapIndexReader {
 			return left != 0 || right != 0;
 		}
 
-		public void clearSearchPoints() {
-			quadTreePoints = null;
+		private boolean hasSearchBoxes() {
+			return searchBoxes != null;
 		}
 
-		public void addSearchPoint(int x31, int y31) {
-			if (quadTreePoints == null) {
-				quadTreePoints = new QuadTree<QuadPoint>(
-						new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),8, 0.55f);
-			}
-			quadTreePoints.insert(new QuadPoint(x31, y31), x31, y31);
-		}
-
-		private boolean hasSearchPoints() {
-			return quadTreePoints != null;
-		}
-
-		private boolean bboxContainsSearchPoints(int left, int top, int right, int bottom) {
-			if (quadTreePoints == null) {
+		private boolean containsSearchBox(int left, int top, int right, int bottom) {
+			if (Algorithms.isEmpty(searchBoxes)) {
 				return false;
 			}
 			QuadRect searchRect = new QuadRect(left, top, right, bottom);
-			return quadTreePoints.checkIntersection(searchRect, -1, new QuadTree.QuadTreeItemInQuadRect<QuadPoint>() {
-				@Override
-				public boolean contains(QuadRect rect, QuadPoint item) {
-					return rect.contains(new QuadRect(item.x, item.y, item.x, item.y));
+			for (QuadRect box : searchBoxes) {
+				if (searchRect.contains(box)) {
+					return true;
 				}
-			});
+			}
+			return false;
 		}
-	}
+
+        public Collection<QuadRect> clearSearchBoxes() {
+            return searchBoxes = null;
+        }
+
+        public void setSearchBoxes(Collection<QuadRect> searchBboxes) {
+            this.searchBoxes = searchBboxes;
+        }
+    }
 
 
 	public static class MapIndex extends BinaryIndexPart {

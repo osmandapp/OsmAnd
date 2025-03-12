@@ -35,6 +35,7 @@ import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapPoiReaderAdapter;
 import net.osmand.binary.HeightDataLoader;
 import net.osmand.data.Amenity;
+import net.osmand.data.QuadRect;
 import net.osmand.gpx.TravelObfGpxTrackOptimizer;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.PoiCategory;
@@ -83,6 +84,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
     private final TravelArticle article;
     private final TravelHelper.GpxReadCallback callback;
     private final List<AmenityIndexRepository> repos;
+    private final String SEGMENT_INDEX_TAG = "route_segment_index";
 
     public TravelObfGpxFileReader(@NonNull MapActivity mapActivity,
                                   @NonNull TravelArticle article,
@@ -323,8 +325,6 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                 .buildSearchRequest(left, right, top, bottom, 15, mapRequestFilter,
                         matchSegmentsByRefTitleRouteId(travelGpx, geometryMap, isCancelled));
 
-        long time = System.currentTimeMillis();
-
         // ResourceManager.getAmenityRepositories() returns OBF files list in Z-A order.
         // Live updates require A-Z order, so use reverted iterator as the easiest way.
         ListIterator<AmenityIndexRepository> li = repos.listIterator(repos.size());
@@ -338,8 +338,6 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             }
             currentAmenities.clear();
 
-            long poiTime = 0;
-            long mapTime = 0;
             if (travelGpx.routeRadius > 0 && !travelGpx.hasBbox31()) {
                 mapRequest.setBBoxRadius(travelGpx.lat, travelGpx.lon, travelGpx.routeRadius);
                 pointRequest.setBBoxRadius(travelGpx.lat, travelGpx.lon, travelGpx.routeRadius);
@@ -350,31 +348,42 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             }
 
             repo.searchPoi(pointRequest);
-
-            poiTime = System.currentTimeMillis() - time;
-            time = System.currentTimeMillis();
             if (currentAmenities.isEmpty()) {
                 continue;
             }
 
-            mapRequest.clearSearchPoints();
-            for (Amenity am : currentAmenities) {
-                int y31 = MapUtils.get31TileNumberY(am.getLocation().getLatitude());
-                int x31 = MapUtils.get31TileNumberX(am.getLocation().getLongitude());
-                mapRequest.addSearchPoint(x31, y31);
-            }
-
+            mapRequest.clearSearchBoxes();
+            mapRequest.setSearchBoxes(getGroupedPoints(currentAmenities));
             repo.searchMapIndex(mapRequest);
-
-            mapTime = System.currentTimeMillis() - time;
-
-            System.out.println("XXX " + repo.getFile().getName() + " : poi time:" + poiTime + "ms, map time:" + mapTime + "ms, poi size:" + amenityMap.size());
-            time = System.currentTimeMillis();
         }
 
         pointList.addAll(getPointList(amenityMap, gpxFileExtensions, pgNames, pgIcons, pgColors, pgBackgrounds));
         segmentList.addAll(geometryMap.values());
         return !isCancelled.isCancelled();
+    }
+
+    private List<QuadRect> getGroupedPoints(List<Amenity> amenities) {
+        if (Algorithms.isEmpty(amenities)) {
+            return null;
+        }
+        Map<String, QuadRect> groups = new HashMap<>();
+        List<QuadRect> result = new ArrayList<>();
+        for (Amenity am : amenities) {
+            if (!am.isRouteTrack()) {
+                continue;
+            }
+            int x31 = MapUtils.get31TileNumberX(am.getLocation().getLongitude());
+            int y31 = MapUtils.get31TileNumberY(am.getLocation().getLatitude());
+            String group = am.getAdditionalInfo(SEGMENT_INDEX_TAG);
+            if (group == null) {
+                result.add(new QuadRect(x31, y31, x31, y31));
+            } else {
+                QuadRect qr = groups.computeIfAbsent(group, s -> new QuadRect(x31, y31, x31, y31));
+                qr.expand(x31, y31, x31, y31);
+            }
+        }
+        result.addAll(groups.values());
+        return result;
     }
 
     private boolean shouldSkipRepository(AmenityIndexRepository repo, TravelArticle article) {
