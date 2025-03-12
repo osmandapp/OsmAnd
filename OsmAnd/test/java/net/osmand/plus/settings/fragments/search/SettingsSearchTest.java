@@ -1004,13 +1004,28 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-						{
+						{ // not yet implemented
 								"shouldSearchAndFind_ConfigureScreenFragment_ConfigureMap_RoadStyles_highContrastRoads",
 								new SettingsSearchTestTemplate() {
 
 									@Override
 									protected String getSearchQuery(final Context context) {
 										return context.getString(R.string.rendering_value_highContrastRoads_name);
+									}
+
+									@Override
+									protected List<String> getExpectedSearchResults(final Context context) {
+										return List.of(getSearchQuery(context));
+									}
+								}
+						},
+						{ // not yet implemented
+								"shouldSearchAndFind_ConfigureScreenFragment_ConfigureMap_MapLanguage_Afrikaans",
+								new SettingsSearchTestTemplate() {
+
+									@Override
+									protected String getSearchQuery(final Context context) {
+										return context.getString(R.string.lang_af);
 									}
 
 									@Override
