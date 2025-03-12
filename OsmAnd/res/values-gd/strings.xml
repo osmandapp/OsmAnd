@@ -331,4 +331,15 @@
     <string name="shared_string_not_included">Nach eil seo a\' gabhail a-steach</string>
     <string name="continue_with">Lean air %1$s</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s no %2$s</string>
+    <string name="routing_attr_avoid_tunnels_description">Seachain tunailean</string>
+    <string name="routing_attr_avoid_tunnels_name">Seachain tunailean</string>
+    <string name="restore_complete">Aisigte</string>
+    <string name="restore_selected_data">Aisig air ais dàta taghta</string>
+    <string name="send_logcat_log">Cuir loga logcat</string>
+    <string name="send_crash_log">Cuir loga tuislidh</string>
+    <string name="backup_promocode">Còd àrdachaidh</string>
+    <string name="backup_version_history">Eachdraidh an dreucha</string>
+    <string name="delete_version_history">Dubh às eachdraidh an dreucha</string>
+    <string name="restore_from_osmand_cloud">Aisig air ais bho sgòth OsmAnd</string>
+    <string name="backup_restore_data">Aisig dàta air ais</string>
 </resources>
