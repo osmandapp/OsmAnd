@@ -116,9 +116,7 @@ public class NetworkRouteDrawable extends Drawable {
 			RenderingRuleSearchRequest request = renderer.getSearchRequestWithAppliedCustomRules(storage, nightMode);
 			request.saveState();
 
-			// OsmRouteType.UNKNOWN has no own Rules in rendering_types, so use HIKING to fetch osmc_textcolor.
-			String tag = "route_" +
-					(routeKey.type == OsmRouteType.UNKNOWN ? OsmRouteType.HIKING.getName() : routeKey.type.getName());
+			String tag = "route_" + routeKey.type.getNameToSearchRules();
 			String color = routeKey.getValue("osmc_textcolor");
 
 			request.setInitialTagValueZoom(tag, null, 14, null);

@@ -83,6 +83,11 @@ public class OsmRouteType {
 		return name;
 	}
 
+	public String getNameToSearchRules() {
+		// Use HIKING as default rendering rules source for UNKNOWN.
+		return this == UNKNOWN ? OsmRouteType.HIKING.getName() : name;
+	}
+
 	public String getColor() {
 		return color;
 	}
