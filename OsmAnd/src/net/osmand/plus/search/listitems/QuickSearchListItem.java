@@ -21,6 +21,8 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.Street;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteDrawable;
+import net.osmand.plus.utils.OsmAndFormatterParams;
+import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.osm.AbstractPoiType;
@@ -127,9 +129,33 @@ public class QuickSearchListItem {
 		String typeName = getTypeName(app, searchResult);
 		String alternateName = searchResult.alternateName;
 		if (searchResult.object instanceof Amenity amenity) {
-            alternateName = amenity.getTranslation(app.getPoiTypes(), searchResult.alternateName);
+			alternateName = amenity.getTranslation(app.getPoiTypes(), searchResult.alternateName);
+			if (amenity.isRouteTrack()) {
+				String distance = getAmenityDistanceFormatted(amenity, app);
+				if (distance != null) {
+					alternateName = distance + (alternateName == null ? "" : " • " + alternateName);
+				}
+			}
 		}
 		return alternateName != null ? typeName + " • " + alternateName : typeName;
+	}
+
+	@Nullable
+	public static String getAmenityDistanceFormatted(Amenity amenity, OsmandApplication app) {
+		String distanceTag = amenity.getAdditionalInfo(TravelGpx.DISTANCE);
+		float distance = Algorithms.parseFloatSilently(distanceTag, 0);
+
+		if (distance > 0) {
+			if (!distanceTag.contains(".")) {
+				// previously, distance format was MMMMM (no decimal point)
+				// since 1 Apr 2025 distance format will be fixed in KM.D
+				// TODO remove this if() after 1 Apr 2025
+				distance /= 1000;
+			}
+			return OsmAndFormatter.getFormattedDistance(distance * 1000, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
+		}
+
+		return null;
 	}
 
 	public static String getTypeName(OsmandApplication app, SearchResult searchResult) {
