@@ -277,7 +277,7 @@ public class AmenityMenuController extends MenuController {
 		if (region != null) {
 			return RenderingIcons.getBigIcon(getMapActivity(), "subway_" + region);
 		}
-		if (getMapActivity() != null && amenity.isRouteTrack() && amenity.hasOsmRouteId()) {
+		if (getMapActivity() != null && amenity.isRouteTrack()) {
 			OsmandApplication app = getMapActivity().getMyApplication();
 			return NetworkRouteDrawable.getIconByAmenityShieldTags(amenity, app, !isLight());
 		}

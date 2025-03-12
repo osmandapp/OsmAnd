@@ -358,7 +358,7 @@ public class QuickSearchListItem {
 				}
 			case POI:
 				Amenity amenity = (Amenity) searchResult.object;
-				if (amenity.isRouteTrack() && amenity.hasOsmRouteId()) {
+				if (amenity.isRouteTrack()) {
 					boolean isNightMode = !app.getSettings().isLightContent();
 					Drawable shieldIcon = NetworkRouteDrawable.getIconByAmenityShieldTags(amenity, app, isNightMode);
 					if (shieldIcon != null) {
