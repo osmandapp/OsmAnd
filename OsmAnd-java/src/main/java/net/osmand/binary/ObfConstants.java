@@ -40,8 +40,10 @@ public class ObfConstants {
 
 	public static long getOsmIdFromPrefixedRouteId(String routeId) {
 		long osmId = 0;
-		if (routeId.startsWith(Amenity.ROUTE_ID_OSM_PREFIX)) {
-			osmId = Algorithms.parseLongSilently(routeId.replace(Amenity.ROUTE_ID_OSM_PREFIX, ""), 0);
+		if (routeId.startsWith(Amenity.ROUTE_ID_OSM_PREFIX_LEGACY)) {
+			osmId = Algorithms.parseLongSilently(routeId.replace(Amenity.ROUTE_ID_OSM_PREFIX_LEGACY, ""), 0); // ^OSM
+		} else if (routeId.startsWith(Amenity.ROUTE_ID_OSM_PREFIX)) {
+			osmId = Algorithms.parseLongSilently(routeId.replace(Amenity.ROUTE_ID_OSM_PREFIX, ""), 0); // ^O
 		}
 		return osmId;
 	}
