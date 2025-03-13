@@ -300,7 +300,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             poiTypeFilter = new BinaryMapIndexReader.SearchPoiTypeFilter() {
                 @Override
                 public boolean accept(PoiCategory poiCategory, String s) {
-                    return subType.equals(s);
+                    return subType.equals(s) || ROUTE_TRACK_POINT.equals(s);
                 }
 
                 @Override
@@ -318,12 +318,17 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
         List<Amenity> currentAmenities = new ArrayList<>();
 
         SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
-                0, 0, Algorithms.emptyIfNull(travelGpx.title), left, right, top, bottom, poiTypeFilter,
+                0, 0, Algorithms.emptyIfNull(travelGpx.routeId), left, right, top, bottom, poiTypeFilter,
                 getAmenityMatcher(travelGpx, amenityMap, currentAmenities, isCancelled), null);
 
         SearchRequest<BinaryMapDataObject> mapRequest = BinaryMapIndexReader
                 .buildSearchRequest(left, right, top, bottom, 15, mapRequestFilter,
                         matchSegmentsByRefTitleRouteId(travelGpx, geometryMap, isCancelled));
+
+        if (travelGpx.routeRadius > 0 && !travelGpx.hasBbox31()) {
+            mapRequest.setBBoxRadius(travelGpx.lat, travelGpx.lon, travelGpx.routeRadius);
+            pointRequest.setBBoxRadius(travelGpx.lat, travelGpx.lon, travelGpx.routeRadius);
+        }
 
         // ResourceManager.getAmenityRepositories() returns OBF files list in Z-A order.
         // Live updates require A-Z order, so use reverted iterator as the easiest way.
@@ -338,16 +343,15 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             }
             currentAmenities.clear();
 
-            if (travelGpx.routeRadius > 0 && !travelGpx.hasBbox31()) {
-                mapRequest.setBBoxRadius(travelGpx.lat, travelGpx.lon, travelGpx.routeRadius);
-                pointRequest.setBBoxRadius(travelGpx.lat, travelGpx.lon, travelGpx.routeRadius);
-            }
-
             if (!isPoiSectionIntersects(repo, pointRequest)) {
                 continue;
             }
 
-            repo.searchPoi(pointRequest);
+            if (travelGpx.hasNonIndexedOsmRouteId()) {
+                repo.searchPoi(pointRequest);
+            } else {
+                repo.searchPoiByName(pointRequest);
+            }
             if (currentAmenities.isEmpty()) {
                 continue;
             }
@@ -515,7 +519,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                 if (amenity.isClosed()) {
                     commonMap.remove(amenity.getId()); // live-updates
                 }
-                if (amenity.getRouteId().equals(article.getRouteId())) {
+                if (article.getRouteId() != null && article.getRouteId().equals(amenity.getRouteId())) {
                     commonMap.put(amenity.getId(), amenity);
                     currentList.add(amenity);
                 }

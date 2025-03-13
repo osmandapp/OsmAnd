@@ -55,7 +55,8 @@ public class Amenity extends MapObject {
 	public static final String IS_AGGR_PART = "is_aggr_part";
 	public static final String CONTENT_JSON = "content_json";
 	public static final String ROUTE_ID = "route_id";
-	public static final String ROUTE_ID_OSM_PREFIX = "OSM";
+	public static final String ROUTE_ID_OSM_PREFIX_LEGACY = "OSM"; // non-indexed
+	public static final String ROUTE_ID_OSM_PREFIX = "O"; // indexed in POI-section
 	public static final String ROUTE_SOURCE = "route_source";
 	public static final String ROUTE_NAME = "route_name";
 	public static final String WIKI_PHOTO = "wiki_photo";
@@ -548,7 +549,9 @@ public class Amenity extends MapObject {
 
 	public boolean hasOsmRouteId() {
 		String routeId = getRouteId();
-		return routeId != null && routeId.startsWith(ROUTE_ID_OSM_PREFIX);
+		return routeId != null &&
+				(routeId.startsWith(Amenity.ROUTE_ID_OSM_PREFIX_LEGACY)
+						|| routeId.startsWith(Amenity.ROUTE_ID_OSM_PREFIX));
 	}
 
 	public String getGpxFileName(String lang) {
