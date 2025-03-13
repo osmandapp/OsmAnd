@@ -120,6 +120,4 @@ public class AmenityExtensionsHelper {
 
 		return null;
 	}
-
-
 }

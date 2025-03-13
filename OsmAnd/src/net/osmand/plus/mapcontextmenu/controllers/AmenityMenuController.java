@@ -19,6 +19,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.TitleButtonController;
@@ -222,7 +223,21 @@ public class AmenityMenuController extends MenuController {
 	@NonNull
 	@Override
 	public String getTypeStr() {
+		if (getMapActivity() != null && amenity.isRouteTrack()) {
+			return getTypeWithDistanceStr(amenity, getMapActivity().getMyApplication());
+		}
 		return getTypeStr(amenity);
+	}
+
+	@NonNull
+	private String getTypeWithDistanceStr(@NonNull Amenity amenity, @NonNull OsmandApplication app) {
+		String type = getTypeStr(amenity);
+		String distance = AmenityExtensionsHelper.getAmenityDistanceFormatted(amenity, app);
+		if (distance != null) {
+			return app.getString(R.string.ltr_or_rtl_combine_via_comma, type, distance);
+		} else {
+			return type;
+		}
 	}
 
 	public static String getTypeStr(Amenity amenity) {
