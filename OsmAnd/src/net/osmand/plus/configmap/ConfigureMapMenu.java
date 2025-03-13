@@ -697,14 +697,23 @@ public class ConfigureMapMenu {
 														  final RenderingRuleProperty property,
 														  final String id,
 														  final boolean nightMode) {
-		final OsmandApplication app = activity.getMyApplication();
 		if (property.isBoolean()) {
-			String name = AndroidUtils.getRenderingStringPropertyName(activity, property.getAttrName(), property.getName());
-			return createBooleanRenderingProperty(activity, property.getAttrName(), name, id, property, icon, nightMode, null);
+			return createBooleanRenderingProperty(
+					activity,
+					property.getAttrName(),
+					AndroidUtils.getRenderingStringPropertyName(activity, property.getAttrName(), property.getName()),
+					id,
+					property,
+					icon,
+					nightMode,
+					null);
 		} else {
 			final ContextMenuItem item =
 					new ContextMenuItem(id)
-							.setTitle(getPropertyName(property, app))
+							.setTitle(getPropertyName(property, activity))
+							.setDescription(getDescription(property, activity.getMyApplication()))
+							.setItemDeleteAction(activity.getMyApplication().getSettings().getCustomRenderProperty(property.getAttrName()))
+							.setLayout(R.layout.list_item_single_line_descrition_narrow)
 							.setListener((uiAdapter, view, _item, isChecked) -> {
 								if (AndroidUtils.isActivityNotDestroyed(activity)) {
 									ConfigureMapDialogs
@@ -717,10 +726,7 @@ public class ConfigureMapMenu {
 											.show(activity.getSupportFragmentManager());
 								}
 								return false;
-							})
-							.setDescription(getDescription(property, activity.getMyApplication()))
-							.setItemDeleteAction(app.getSettings().getCustomRenderProperty(property.getAttrName()))
-							.setLayout(R.layout.list_item_single_line_descrition_narrow);
+							});
 			if (icon != INVALID_ID) {
 				item.setIcon(icon);
 			}
