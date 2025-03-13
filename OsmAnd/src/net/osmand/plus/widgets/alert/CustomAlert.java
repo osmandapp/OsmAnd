@@ -105,11 +105,11 @@ public class CustomAlert {
 		adapter.setDialog(dialog);
 	}
 
-	public static void showSingleSelection(final @NonNull AlertDialogData data,
-										   final LinkedHashMap<String, CharSequence> itemByKey,
-										   final int selectedEntryIndex,
-										   final @Nullable View.OnClickListener itemClickListener,
-										   final FragmentManager fragmentManager) {
+	public static SingleSelectionDialogFragment createSingleSelectionDialogFragment(
+			final @NonNull AlertDialogData data,
+			final LinkedHashMap<String, CharSequence> itemByKey,
+			final int selectedEntryIndex,
+			final View.OnClickListener itemClickListener) {
 		final SelectionDialogAdapter adapter =
 				new SelectionDialogAdapter(
 						data.getContext(),
@@ -126,12 +126,10 @@ public class CustomAlert {
 						.setAdapter(adapter, null)
 						.create();
 		adapter.setDialog(alertDialog);
-		final SingleSelectionDialogFragment singleSelectionDialogFragment =
-				new SingleSelectionDialogFragment(
-						alertDialog,
-						data,
-						itemByKey);
-		singleSelectionDialogFragment.show(fragmentManager);
+		return new SingleSelectionDialogFragment(
+				alertDialog,
+				data,
+				itemByKey);
 	}
 
 	public static class SingleSelectionDialogFragment extends DialogFragment {

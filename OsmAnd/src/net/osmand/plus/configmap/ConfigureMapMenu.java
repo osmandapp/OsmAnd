@@ -29,6 +29,7 @@ import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAI
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDE;
 
+import android.content.Context;
 import android.view.View;
 
 import androidx.annotation.DrawableRes;
@@ -701,24 +702,35 @@ public class ConfigureMapMenu {
 			String name = AndroidUtils.getRenderingStringPropertyName(activity, property.getAttrName(), property.getName());
 			return createBooleanRenderingProperty(activity, property.getAttrName(), name, id, property, icon, nightMode, null);
 		} else {
-			CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(property.getAttrName());
-			String propertyName = AndroidUtils.getRenderingStringPropertyName(app, property.getAttrName(), property.getName());
-			ContextMenuItem item = new ContextMenuItem(id)
-					.setTitle(propertyName)
-					.setListener((uiAdapter, view, _item, isChecked) -> {
-						if (AndroidUtils.isActivityNotDestroyed(activity)) {
-							ConfigureMapDialogs.showRenderingPropertyDialog(activity, property, pref, _item, uiAdapter, nightMode);
-						}
-						return false;
-					})
-					.setDescription(getDescription(property, activity.getMyApplication()))
-					.setItemDeleteAction(pref)
-					.setLayout(R.layout.list_item_single_line_descrition_narrow);
+			final ContextMenuItem item =
+					new ContextMenuItem(id)
+							.setTitle(getPropertyName(property, app))
+							.setListener((uiAdapter, view, _item, isChecked) -> {
+								if (AndroidUtils.isActivityNotDestroyed(activity)) {
+									ConfigureMapDialogs
+											.createRenderingPropertyDialog(
+													activity,
+													property,
+													app.getSettings().getCustomRenderProperty(property.getAttrName()),
+													_item,
+													uiAdapter,
+													nightMode)
+											.show(activity.getSupportFragmentManager());
+								}
+								return false;
+							})
+							.setDescription(getDescription(property, activity.getMyApplication()))
+							.setItemDeleteAction(app.getSettings().getCustomRenderProperty(property.getAttrName()))
+							.setLayout(R.layout.list_item_single_line_descrition_narrow);
 			if (icon != INVALID_ID) {
 				item.setIcon(icon);
 			}
 			return item;
 		}
+	}
+
+	private static String getPropertyName(final RenderingRuleProperty property, final Context context) {
+		return AndroidUtils.getRenderingStringPropertyName(context, property.getAttrName(), property.getName());
 	}
 
 	public static CommonPreference<String> getCustomRenderProperty(final RenderingRuleProperty property, final OsmandSettings osmandSettings) {

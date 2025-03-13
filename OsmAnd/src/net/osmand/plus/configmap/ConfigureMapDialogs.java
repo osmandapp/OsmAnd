@@ -31,11 +31,7 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 import gnu.trove.list.array.TIntArrayList;
 
@@ -251,35 +247,33 @@ public class ConfigureMapDialogs {
 		b.show();
 	}
 
-	protected static void showRenderingPropertyDialog(
+	public static CustomAlert.SingleSelectionDialogFragment createRenderingPropertyDialog(
 			final @NonNull MapActivity activity,
 			final @NonNull RenderingRuleProperty property,
 			final @NonNull CommonPreference<String> pref,
 			final @NonNull ContextMenuItem item,
 			final @NonNull OnDataChangeUiAdapter uiAdapter,
 			final boolean nightMode) {
-		final AlertDialogData dialogData =
-				new AlertDialogData(activity, nightMode)
-						.setTitle(AndroidUtils.getRenderingStringPropertyDescription(activity.getMyApplication(), property.getAttrName(), property.getName()))
-						.setControlsColor(ColorUtilities.getAppModeColor(activity.getMyApplication(), nightMode))
-						.setNegativeButton(R.string.shared_string_dismiss, null);
-		CustomAlert.showSingleSelection(
-				dialogData,
-				ConfigureMapUtils.getItemByKey(property, activity.getMyApplication()),
-				getSelectedIndex(Arrays.asList(property.getPossibleValues()), pref.get()),
-				v -> {
-					final int which = (int) v.getTag();
-					pref.set(which == 0 ? "" : property.getPossibleValues()[which - 1]);
-					activity.refreshMapComplete();
-					item.setDescription(AndroidUtils.getRenderingStringPropertyValue(activity, pref.get()));
-					final String id = item.getId();
-					if (!Algorithms.isEmpty(id)) {
-						uiAdapter.onRefreshItem(id);
-					} else {
-						uiAdapter.onDataSetChanged();
-					}
-				},
-				activity.getSupportFragmentManager());
+		return CustomAlert
+				.createSingleSelectionDialogFragment(
+						new AlertDialogData(activity, nightMode)
+								.setTitle(AndroidUtils.getRenderingStringPropertyDescription(activity.getMyApplication(), property.getAttrName(), property.getName()))
+								.setControlsColor(ColorUtilities.getAppModeColor(activity.getMyApplication(), nightMode))
+								.setNegativeButton(R.string.shared_string_dismiss, null),
+						ConfigureMapUtils.getItemByKey(property, activity.getMyApplication()),
+						getSelectedIndex(Arrays.asList(property.getPossibleValues()), pref.get()),
+						v -> {
+							final int which = (int) v.getTag();
+							pref.set(which == 0 ? "" : property.getPossibleValues()[which - 1]);
+							activity.refreshMapComplete();
+							item.setDescription(AndroidUtils.getRenderingStringPropertyValue(activity, pref.get()));
+							final String id = item.getId();
+							if (!Algorithms.isEmpty(id)) {
+								uiAdapter.onRefreshItem(id);
+							} else {
+								uiAdapter.onDataSetChanged();
+							}
+						});
 	}
 
 	private static int getSelectedIndex(final List<String> haystack, final String needle) {
