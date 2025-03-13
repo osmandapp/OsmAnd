@@ -5950,4 +5950,5 @@
     <string name="shared_string_map_center">Центр карты</string>
     <string name="point_location">Местоположение точки</string>
     <string name="shared_string_manual">Руководство</string>
+    <string name="layer_coordinates_grid">Координатная сетка</string>
 </resources>
