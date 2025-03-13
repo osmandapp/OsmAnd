@@ -6,38 +6,25 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.ObfConstants;
 import net.osmand.data.Amenity;
-import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.search.GetExplorePlacesImagesTask;
 import net.osmand.plus.search.GetExplorePlacesImagesTask.GetImageCardsListener;
 import net.osmand.shared.data.KQuadRect;
+import net.osmand.shared.wiki.WikiHelper;
+import net.osmand.shared.wiki.WikiImage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
-import net.osmand.wiki.WikiCoreHelper;
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData;
-import net.osmand.wiki.WikiImage;
 
 import org.apache.commons.logging.Log;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Objects;
-import java.util.Set;
 
 // TODO use gzip in loading +
 // TODO errors shouldn'go with empty response "" into cache! +
@@ -257,7 +244,7 @@ public class ExplorePlacesOnlineProvider implements ExplorePlacesProvider {
 		a.setEnName(TransliterationHelper.transliterate(a.getName()));
 		a.setDescription(featureData.properties.wikiDesc);
 		a.setWikiPhoto(featureData.properties.photoTitle);
-		WikiImage wikiIMage = WikiCoreHelper.getImageData(featureData.properties.photoTitle);
+		WikiImage wikiIMage = WikiHelper.INSTANCE.getImageData(featureData.properties.photoTitle);
 		a.setWikiIconUrl(wikiIMage == null ? "" : wikiIMage.getImageIconUrl());
 		a.setWikiImageStubUrl(wikiIMage == null ? "" : wikiIMage.getImageStubUrl());
 		a.setLocation(featureData.geometry.coordinates[1], featureData.geometry.coordinates[0]);
