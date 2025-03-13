@@ -319,6 +319,7 @@ public class BinaryMapPoiReaderAdapter {
 		TIntLongHashMap offsetsMap = new TIntLongHashMap();
 		List<Integer> nameIndexCoordinates = new ArrayList<>();
 		QuadTree<Void> nameIndexTree = null;
+		long time = System.currentTimeMillis();
 		while (true) {
 			if (req.isCancelled()) {
 				return;
@@ -331,12 +332,17 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiIndex.NAMEINDEX_FIELD_NUMBER:
 				long length = readInt();
 				long oldLimit = codedIS.pushLimitLong((long) length);
+				System.out.println("Name index length " + length);
 				// here offsets are sorted by distance
 				offsets = readPoiNameIndex(matcher.getCollator(), query, req, region, nameIndexCoordinates);
 				codedIS.popLimit(oldLimit);
+				LOG.info("Searched name index in " + (System.currentTimeMillis() - time) +
+						"ms. Found " + offsets.size() + " possible tiles");
 				break;
 			case OsmandOdb.OsmAndPoiIndex.BOXES_FIELD_NUMBER:
 				length = readInt();
+				// TODO why do we read subboxes ? to get name groups - but we don't check if nameIndexCoordinates empty
+				System.out.println("Top quadtiles length " + length);
 				oldLimit = codedIS.pushLimitLong((long) length);
 				if (nameIndexCoordinates.size() > 0 && nameIndexTree == null) {
 					nameIndexTree = new QuadTree<Void>(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
@@ -382,20 +388,22 @@ public class BinaryMapPoiReaderAdapter {
 					}
 				}
 
-//				LOG.info("Searched poi structure in " + (System.currentTimeMillis() - time) +
-//						"ms. Found " + offKeys.length + " subtrees");
+				LOG.info("Searched poi structure in " + (System.currentTimeMillis() - time) +
+						"ms. Found " + offKeys.length + " poi tiles (read " + req.numberOfReadSubtrees + " subtrees");
+				// offkeys are sorted by distance first and by bucket size 2nd  
 				for (int j = 0; j < offKeys.length; j++) {
 					codedIS.seek(offKeys[j] + indexOffset);
 					long len = readInt();
 					long oldLim = codedIS.pushLimitLong((long) len);
+
 					readPoiData(matcher, req, region);
 					codedIS.popLimit(oldLim);
 					if (req.isCancelled() || req.limitExceeded()) {
 						return;
 					}
 				}
-//				LOG.info("Whole poi by name search is done in " + (System.currentTimeMillis() - time) +
-//						"ms. Found " + req.getSearchResults().size());
+				LOG.info("Whole poi by name search is done in " + (System.currentTimeMillis() - time) +
+						"ms. Found " + req.getSearchResults().size());
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				return;
 			default:
@@ -462,6 +470,7 @@ public class BinaryMapPoiReaderAdapter {
 						}
 					}
 				}
+				System.out.println("Skipped " + codedIS.getBytesUntilLimit());
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				return offsets;
 			}
@@ -646,7 +655,8 @@ public class BinaryMapPoiReaderAdapter {
 						}
 						if (!matches) {
 							for (String key : am.getAdditionalInfoKeys()) {
-								if (!key.contains("_name") && !key.equals("brand")) {
+								if (!key.contains("_name") && !key.equals("brand") && 
+										!key.contains("wikidata") && !key.equals("route_id")) {
 									continue;
 								}
 								matches = matcher.matches(am.getAdditionalInfo(key));
