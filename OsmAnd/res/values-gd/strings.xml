@@ -352,4 +352,21 @@
     <string name="backup_delete_all_data">Dubh às an dàta agam air fad</string>
     <string name="shared_string_logout">Log a-mach</string>
     <string name="backup_pause_all">Sòr uile</string>
+    <string name="shared_string_online">Air-loidhne</string>
+    <string name="restore_from_file">Aisig air ais bho faidhle</string>
+    <string name="search_more">Lorg tuilleadh…</string>
+    <string name="backup_into_file">Dèan lethbhreac-gleidhidh mar faidhle</string>
+    <string name="local_backup">Lethbhreac-glèidhidh ionadail</string>
+    <string name="shared_string_show_slope">Seall leathad</string>
+    <string name="shared_string_hide_slope">Falaich leathad</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="elevation_profile">Pròifil àrdachaidh</string>
+    <string name="shared_string_external">A-muigh</string>
+    <string name="shared_string_offline">Far-loidhne</string>
+    <string name="osmand_cloud">Sgòth OsmAnd</string>
+    <string name="duration_ago">O chionn %1$s</string>
+    <string name="last_backup">Lethbhreac mu dheireadh</string>
+    <string name="backup_and_restore">Dèan lethbhreac-glèidhidh agus aisig air ais</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Seachain sgìrean beag-eimisein</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Seachain sgìrean beag-eimisein</string>
 </resources>
