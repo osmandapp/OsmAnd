@@ -57,6 +57,7 @@ import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
@@ -71,6 +72,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.text.DateFormat;
 import java.util.*;
+import java.util.function.Function;
 
 public class ConfigureMapMenu {
 
@@ -728,25 +730,34 @@ public class ConfigureMapMenu {
 							.setDescription(getDescription(property, activity.getMyApplication()))
 							.setItemDeleteAction(activity.getMyApplication().getSettings().getCustomRenderProperty(property.getAttrName()))
 							.setLayout(R.layout.list_item_single_line_descrition_narrow);
+			final Function<OnDataChangeUiAdapter, CustomAlert.SingleSelectionDialogFragment> createRenderingPropertyDialog =
+					_uiAdapter ->
+							ConfigureMapDialogs
+									.createRenderingPropertyDialog(
+											activity,
+											property,
+											item,
+											_uiAdapter,
+											nightMode);
+			final Optional<CustomAlert.SingleSelectionDialogFragment> singleSelectionDialogFragment = uiAdapter.map(createRenderingPropertyDialog);
 			item.setListener(
 					new ItemClickListener() {
 
 						@Override
-						public boolean onContextMenuClick(final OnDataChangeUiAdapter _uiAdapter,
+						public boolean onContextMenuClick(final OnDataChangeUiAdapter uiAdapter,
 														  final View view,
 														  final ContextMenuItem _item,
 														  final boolean isChecked) {
 							if (AndroidUtils.isActivityNotDestroyed(activity)) {
-								ConfigureMapDialogs
-										.createRenderingPropertyDialog(
-												activity,
-												property,
-												item,
-												uiAdapter.orElse(_uiAdapter),
-												nightMode)
+								this
+										.getSingleSelectionDialogFragment(uiAdapter)
 										.show(activity.getSupportFragmentManager());
 							}
 							return false;
+						}
+
+						private CustomAlert.SingleSelectionDialogFragment getSingleSelectionDialogFragment(final OnDataChangeUiAdapter uiAdapter) {
+							return singleSelectionDialogFragment.orElseGet(() -> createRenderingPropertyDialog.apply(uiAdapter));
 						}
 					});
 			if (icon != INVALID_ID) {
