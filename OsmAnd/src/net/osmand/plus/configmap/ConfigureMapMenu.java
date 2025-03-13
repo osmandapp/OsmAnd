@@ -713,20 +713,28 @@ public class ConfigureMapMenu {
 							.setTitle(getPropertyName(property, activity))
 							.setDescription(getDescription(property, activity.getMyApplication()))
 							.setItemDeleteAction(activity.getMyApplication().getSettings().getCustomRenderProperty(property.getAttrName()))
-							.setLayout(R.layout.list_item_single_line_descrition_narrow)
-							.setListener((uiAdapter, view, _item, isChecked) -> {
-								if (AndroidUtils.isActivityNotDestroyed(activity)) {
-									ConfigureMapDialogs
-											.createRenderingPropertyDialog(
-													activity,
-													property,
-													_item,
-													uiAdapter,
-													nightMode)
-											.show(activity.getSupportFragmentManager());
-								}
-								return false;
-							});
+							.setLayout(R.layout.list_item_single_line_descrition_narrow);
+			item.setListener(
+					new ItemClickListener() {
+
+						@Override
+						public boolean onContextMenuClick(final OnDataChangeUiAdapter uiAdapter,
+														  final View view,
+														  final ContextMenuItem _item,
+														  final boolean isChecked) {
+							if (AndroidUtils.isActivityNotDestroyed(activity)) {
+								ConfigureMapDialogs
+										.createRenderingPropertyDialog(
+												activity,
+												property,
+												item,
+												uiAdapter,
+												nightMode)
+										.show(activity.getSupportFragmentManager());
+							}
+							return false;
+						}
+					});
 			if (icon != INVALID_ID) {
 				item.setIcon(icon);
 			}
