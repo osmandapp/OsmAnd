@@ -250,10 +250,10 @@ public class ConfigureMapDialogs {
 	public static CustomAlert.SingleSelectionDialogFragment createRenderingPropertyDialog(
 			final @NonNull MapActivity activity,
 			final @NonNull RenderingRuleProperty property,
-			final @NonNull CommonPreference<String> pref,
 			final @NonNull ContextMenuItem item,
 			final @NonNull OnDataChangeUiAdapter uiAdapter,
 			final boolean nightMode) {
+		final CommonPreference<String> pref = ConfigureMapMenu.getCustomRenderProperty(property, activity.getMyApplication().getSettings());
 		return CustomAlert
 				.createSingleSelectionDialogFragment(
 						new AlertDialogData(activity, nightMode)

@@ -697,7 +697,7 @@ public class ConfigureMapMenu {
 														  final RenderingRuleProperty property,
 														  final String id,
 														  final boolean nightMode) {
-		OsmandApplication app = activity.getMyApplication();
+		final OsmandApplication app = activity.getMyApplication();
 		if (property.isBoolean()) {
 			String name = AndroidUtils.getRenderingStringPropertyName(activity, property.getAttrName(), property.getName());
 			return createBooleanRenderingProperty(activity, property.getAttrName(), name, id, property, icon, nightMode, null);
@@ -711,7 +711,6 @@ public class ConfigureMapMenu {
 											.createRenderingPropertyDialog(
 													activity,
 													property,
-													app.getSettings().getCustomRenderProperty(property.getAttrName()),
 													_item,
 													uiAdapter,
 													nightMode)
