@@ -646,7 +646,8 @@ public class BinaryMapPoiReaderAdapter {
 						}
 						if (!matches) {
 							for (String key : am.getAdditionalInfoKeys()) {
-								if (!key.contains("_name") && !key.equals("brand")) {
+								if (!key.contains("_name") && !key.equals("brand") &&
+										!key.contains("wikidata") && !key.equals("route_id")) {
 									continue;
 								}
 								matches = matcher.matches(am.getAdditionalInfo(key));
