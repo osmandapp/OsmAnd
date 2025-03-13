@@ -15,6 +15,9 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.plus.utils.OsmAndFormatterParams;
+import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -100,4 +103,23 @@ public class AmenityExtensionsHelper {
 		}
 		return value;
 	}
+
+	@Nullable
+	public static String getAmenityDistanceFormatted(Amenity amenity, OsmandApplication app) {
+		String distanceTag = amenity.getAdditionalInfo(TravelGpx.DISTANCE);
+		float km = Algorithms.parseFloatSilently(distanceTag, 0);
+
+		if (km > 0) {
+			if (!distanceTag.contains(".")) {
+				// Before 1 Apr 2025 distance format was MMMMM (meters, no fractional part).
+				// Since 1 Apr 2025 format has been fixed to KM.D (km, 1 fractional digit).
+				km /= 1000;
+			}
+			return OsmAndFormatter.getFormattedDistance(km * 1000, app, OsmAndFormatterParams.NO_TRAILING_ZEROS);
+		}
+
+		return null;
+	}
+
+
 }
