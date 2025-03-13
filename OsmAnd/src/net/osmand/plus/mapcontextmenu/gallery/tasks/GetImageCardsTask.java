@@ -27,9 +27,9 @@ import net.osmand.plus.plugins.mapillary.MapillaryImageCard;
 import net.osmand.plus.plugins.mapillary.MapillaryOsmTagHelper;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.wikipedia.WikiImageCard;
+import net.osmand.shared.wiki.WikiImage;
 import net.osmand.util.Algorithms;
 import net.osmand.wiki.WikiCoreHelper;
-import net.osmand.wiki.WikiImage;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;

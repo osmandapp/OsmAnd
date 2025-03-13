@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
-import net.osmand.wiki.WikiImage;
+import net.osmand.shared.wiki.WikiImage;
 
 public class WikiImageCard extends ImageCard {
 

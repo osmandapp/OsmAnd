@@ -6,10 +6,10 @@ import android.graphics.Bitmap;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.shared.wiki.WikiHelper;
+import net.osmand.shared.wiki.WikiImage;
 import net.osmand.util.Algorithms;
-import net.osmand.wiki.WikiCoreHelper;
 import net.osmand.wiki.WikiCoreHelper.OsmandApiFeatureData;
-import net.osmand.wiki.WikiImage;
 
 import java.io.Serializable;
 
@@ -37,7 +37,7 @@ public class ExploreTopPlacePoint implements Serializable, LocationPoint {
 
 	public ExploreTopPlacePoint(OsmandApiFeatureData featureData) {
 		this.id = featureData.properties.osmid;
-		WikiImage wikiIMage = WikiCoreHelper.getImageData(featureData.properties.photoTitle);
+		WikiImage wikiIMage = WikiHelper.INSTANCE.getImageData(featureData.properties.photoTitle);
 		this.iconUrl = wikiIMage == null ? "" : wikiIMage.getImageIconUrl();
 		this.imageStubUrl = wikiIMage == null ? "" : wikiIMage.getImageStubUrl();
 		this.latitude = featureData.geometry.coordinates[1];
