@@ -87,10 +87,7 @@ import org.apache.commons.logging.Log;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 public class OsmEditingPlugin extends OsmandPlugin {
@@ -472,7 +469,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			if (RENDERING_CATEGORY_OSM_ASSISTANT.equals(property.getCategory())) {
 				iterator.remove();
 				String id = OPEN_STREET_MAP_ITEMS_ID_SCHEME + property.getAttrName();
-				adapter.addItem(ConfigureMapMenu.createRenderingProperty(mapActivity, INVALID_ID, property, id, nightMode));
+				adapter.addItem(ConfigureMapMenu.createRenderingProperty(mapActivity, INVALID_ID, property, id, nightMode, Optional.empty()));
 			}
 		}
 	}

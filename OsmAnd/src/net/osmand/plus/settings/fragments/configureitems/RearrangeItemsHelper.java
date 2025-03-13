@@ -32,11 +32,7 @@ import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuUtils;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class RearrangeItemsHelper implements CopyAppModePrefsListener {
 
@@ -182,7 +178,7 @@ public class RearrangeItemsHelper implements CopyAppModePrefsListener {
 				break;
 			case CONFIGURE_MAP:
 				ConfigureMapMenu configureMapMenu = new ConfigureMapMenu(app);
-				menuAdapter = configureMapMenu.createListAdapter(mapActivity);
+				menuAdapter = configureMapMenu.createListAdapter(mapActivity, Optional.empty());
 				break;
 			case CONTEXT_MENU_ACTIONS:
 				MapContextMenu contextMenu = mapActivity.getContextMenu();

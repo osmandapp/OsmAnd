@@ -98,7 +98,8 @@ public class ConfigureMapMenu {
 	}
 
 	@NonNull
-	public ContextMenuAdapter createListAdapter(@NonNull MapActivity mapActivity) {
+	public ContextMenuAdapter createListAdapter(final @NonNull MapActivity mapActivity,
+												final Optional<OnDataChangeUiAdapter> uiAdapter) {
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 
 		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
@@ -112,7 +113,7 @@ public class ConfigureMapMenu {
 		createLayersItems(customRules, adapter, mapActivity, nightMode);
 		PluginsHelper.registerConfigureMapCategory(adapter, mapActivity, customRules);
 		createRouteAttributeItems(customRules, adapter, mapActivity, nightMode);
-		createRenderingAttributeItems(customRules, adapter, mapActivity, nightMode);
+		createRenderingAttributeItems(customRules, adapter, mapActivity, nightMode, uiAdapter);
 		return adapter;
 	}
 
@@ -456,9 +457,11 @@ public class ConfigureMapMenu {
 				});
 	}
 
-	private void createRenderingAttributeItems(List<RenderingRuleProperty> customRules,
-											   ContextMenuAdapter adapter, MapActivity activity,
-											   boolean nightMode) {
+	private void createRenderingAttributeItems(final List<RenderingRuleProperty> customRules,
+											   final ContextMenuAdapter adapter,
+											   final MapActivity activity,
+											   final boolean nightMode,
+											   final Optional<OnDataChangeUiAdapter> uiAdapter) {
 		adapter.addItem(new ContextMenuItem(MAP_RENDERING_CATEGORY_ID)
 				.setCategory(true)
 				.setLayout(R.layout.list_group_title_with_switch)
@@ -468,7 +471,7 @@ public class ConfigureMapMenu {
 				.setTitleId(R.string.map_widget_renderer, activity)
 				.setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.setIcon(R.drawable.ic_map)
-				.setListener((uiAdapter, view, item, isChecked) -> {
+				.setListener((_uiAdapter, view, item, isChecked) -> {
 					SelectMapStyleBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager());
 					return false;
 				})
@@ -502,7 +505,7 @@ public class ConfigureMapMenu {
 				.setTitleId(R.string.map_mode, activity)
 				.setDescription(description)
 				.setIcon(ConfigureMapUtils.getDayNightIcon(activity))
-				.setListener((uiAdapter, view, item, isChecked) -> {
+				.setListener((_uiAdapter, view, item, isChecked) -> {
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
 						MapModeController.showDialog(activity);
 					}
@@ -516,16 +519,23 @@ public class ConfigureMapMenu {
 				.setDescription(magnifierDesc)
 				.setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.setIcon(R.drawable.ic_action_map_magnifier)
-				.setListener((uiAdapter, view, item, isChecked) -> {
+				.setListener((_uiAdapter, view, item, isChecked) -> {
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
-						ConfigureMapDialogs.showMapMagnifierDialog(activity, nightMode, item, uiAdapter);
+						ConfigureMapDialogs.showMapMagnifierDialog(activity, nightMode, item, _uiAdapter);
 					}
 					return false;
 				})
 				.setItemDeleteAction(settings.MAP_DENSITY));
 
-		ContextMenuItem props = createRenderingProperty(customRules, activity,
-				R.drawable.ic_action_intersection, ROAD_STYLE_ATTR, ROAD_STYLE_ID, nightMode);
+		ContextMenuItem props =
+				createRenderingProperty(
+						customRules,
+						activity,
+						R.drawable.ic_action_intersection,
+						ROAD_STYLE_ATTR,
+						ROAD_STYLE_ID,
+						nightMode,
+						uiAdapter);
 		if (props != null) {
 			adapter.addItem(props);
 		}
@@ -535,9 +545,9 @@ public class ConfigureMapMenu {
 				.setDescription(ConfigureMapUtils.getScale(activity))
 				.setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.setIcon(R.drawable.ic_action_map_text_size)
-				.setListener((uiAdapter, view, item, isChecked) -> {
+				.setListener((_uiAdapter, view, item, isChecked) -> {
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
-						ConfigureMapDialogs.showTextSizeDialog(activity, nightMode, item, uiAdapter);
+						ConfigureMapDialogs.showTextSizeDialog(activity, nightMode, item, _uiAdapter);
 					}
 					return false;
 				})
@@ -550,9 +560,9 @@ public class ConfigureMapMenu {
 				.setTitleId(R.string.map_locale, activity)
 				.setDescription(localeDescr).setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.setIcon(R.drawable.ic_action_map_language)
-				.setListener((uiAdapter, view, item, isChecked) -> {
+				.setListener((_uiAdapter, view, item, isChecked) -> {
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
-						ConfigureMapDialogs.showMapLanguageDialog(activity, nightMode, item, uiAdapter);
+						ConfigureMapDialogs.showMapLanguageDialog(activity, nightMode, item, _uiAdapter);
 					}
 					return false;
 				})
@@ -665,7 +675,7 @@ public class ConfigureMapMenu {
 												 boolean nightMode) {
 		for (RenderingRuleProperty p : customRules) {
 			if (isPropertyAccepted(p)) {
-				adapter.addItem(createRenderingProperty(activity, INVALID_ID, p, CUSTOM_RENDERING_ITEMS_ID_SCHEME + p.getName(), nightMode));
+				adapter.addItem(createRenderingProperty(activity, INVALID_ID, p, CUSTOM_RENDERING_ITEMS_ID_SCHEME + p.getName(), nightMode, Optional.empty()));
 			}
 		}
 	}
@@ -680,13 +690,16 @@ public class ConfigureMapMenu {
 		return size;
 	}
 
-	private ContextMenuItem createRenderingProperty(List<RenderingRuleProperty> customRules,
-													MapActivity activity,
-													@DrawableRes int icon, String attrName, String id,
-													boolean nightMode) {
+	private ContextMenuItem createRenderingProperty(final List<RenderingRuleProperty> customRules,
+													final MapActivity activity,
+													final @DrawableRes int icon,
+													final String attrName,
+													final String id,
+													final boolean nightMode,
+													final Optional<OnDataChangeUiAdapter> uiAdapter) {
 		for (RenderingRuleProperty p : customRules) {
 			if (p.getAttrName().equals(attrName)) {
-				return createRenderingProperty(activity, icon, p, id, nightMode);
+				return createRenderingProperty(activity, icon, p, id, nightMode, uiAdapter);
 			}
 		}
 		return null;
@@ -696,7 +709,8 @@ public class ConfigureMapMenu {
 														  final @DrawableRes int icon,
 														  final RenderingRuleProperty property,
 														  final String id,
-														  final boolean nightMode) {
+														  final boolean nightMode,
+														  final Optional<OnDataChangeUiAdapter> uiAdapter) {
 		if (property.isBoolean()) {
 			return createBooleanRenderingProperty(
 					activity,
@@ -718,7 +732,7 @@ public class ConfigureMapMenu {
 					new ItemClickListener() {
 
 						@Override
-						public boolean onContextMenuClick(final OnDataChangeUiAdapter uiAdapter,
+						public boolean onContextMenuClick(final OnDataChangeUiAdapter _uiAdapter,
 														  final View view,
 														  final ContextMenuItem _item,
 														  final boolean isChecked) {
@@ -728,7 +742,7 @@ public class ConfigureMapMenu {
 												activity,
 												property,
 												item,
-												uiAdapter,
+												uiAdapter.orElse(_uiAdapter),
 												nightMode)
 										.show(activity.getSupportFragmentManager());
 							}
