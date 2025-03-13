@@ -1,9 +1,6 @@
 package net.osmand.plus.configmap;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DETAILS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.*;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -42,6 +39,7 @@ import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.alert.CustomAlert;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuUtils;
 import net.osmand.plus.widgets.ctxmenu.ViewCreator;
@@ -414,6 +412,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 							@Override
 							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
 								final DetailsBottomSheet.PreferenceFragment preferenceFragment = new DetailsBottomSheet.PreferenceFragment();
+								// FK-TODO: remove the following setProperties() because preferenceFragment.initializePreferenceFragmentWithFragmentBeforeOnCreate() will be automatically called?
 								preferenceFragment.setProperties(propertiesOfDetailsBottomSheet);
 								return preferenceFragment;
 							}
@@ -452,6 +451,24 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 							@Override
 							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
 								return new SelectMapStyleBottomSheetDialogFragment.PreferenceFragment();
+							}
+
+							@Override
+							public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
+								return false;
+							}
+						});
+				case ROAD_STYLE_ID -> Optional.of(
+						new PreferenceFragmentHandler() {
+
+							@Override
+							public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
+								return CustomAlert.SingleSelectionDialogFragment.PreferenceFragment.class;
+							}
+
+							@Override
+							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
+								return new CustomAlert.SingleSelectionDialogFragment.PreferenceFragment();
 							}
 
 							@Override

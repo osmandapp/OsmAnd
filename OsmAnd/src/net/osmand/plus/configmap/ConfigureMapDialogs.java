@@ -265,7 +265,7 @@ public class ConfigureMapDialogs {
 						.setNegativeButton(R.string.shared_string_dismiss, null);
 		CustomAlert.showSingleSelection(
 				dialogData,
-				ConfigureMapUtils.getRenderingPropertyPossibleValues(activity.getMyApplication(), property),
+				ConfigureMapUtils.getItemByKey(property, activity.getMyApplication()),
 				getSelectedIndex(Arrays.asList(property.getPossibleValues()), pref.get()),
 				v -> {
 					final int which = (int) v.getTag();

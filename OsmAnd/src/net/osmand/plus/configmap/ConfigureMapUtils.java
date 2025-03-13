@@ -4,6 +4,8 @@ import static net.osmand.plus.dialogs.DetailsBottomSheet.STREET_LIGHTING;
 import static net.osmand.plus.dialogs.DetailsBottomSheet.STREET_LIGHTING_NIGHT;
 import static net.osmand.plus.settings.backend.OsmandSettings.RENDERER_PREFERENCE_PREFIX;
 
+import android.content.Context;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,12 +21,7 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class ConfigureMapUtils {
 
@@ -103,14 +100,14 @@ public class ConfigureMapUtils {
 		return customRules;
 	}
 
-	protected static String[] getRenderingPropertyPossibleValues(OsmandApplication app, RenderingRuleProperty p) {
-		String[] possibleValuesString = new String[p.getPossibleValues().length + 1];
-		possibleValuesString[0] = AndroidUtils.getRenderingStringPropertyValue(app, p.getDefaultValueDescription());
-
-		for (int j = 0; j < p.getPossibleValues().length; j++) {
-			possibleValuesString[j + 1] = AndroidUtils.getRenderingStringPropertyValue(app, p.getPossibleValues()[j]);
+	protected static LinkedHashMap<String, CharSequence> getItemByKey(final RenderingRuleProperty property,
+																	  final Context context) {
+		final LinkedHashMap<String, CharSequence> itemByKey = new LinkedHashMap<>();
+		itemByKey.put(property.getDefaultValueDescription(), AndroidUtils.getRenderingStringPropertyValue(context, property.getDefaultValueDescription()));
+		for (final String possibleValue : property.getPossibleValues()) {
+			itemByKey.put(possibleValue, AndroidUtils.getRenderingStringPropertyValue(context, possibleValue));
 		}
-		return possibleValuesString;
+		return itemByKey;
 	}
 
 	protected static String getDescription(@NonNull OsmandSettings settings,

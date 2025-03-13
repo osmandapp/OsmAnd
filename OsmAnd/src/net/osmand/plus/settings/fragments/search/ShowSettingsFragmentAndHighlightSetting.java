@@ -13,6 +13,7 @@ import net.osmand.plus.dialogs.DetailsBottomSheet;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.transport.TransportLinesFragment;
+import net.osmand.plus.widgets.alert.CustomAlert;
 
 import java.util.Objects;
 
@@ -81,6 +82,16 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 			selectMapStyleBottomSheetDialogFragment
 					.getSettingHighlighter()
 					.highlightSetting(selectMapStyleBottomSheetDialogFragment, setting);
+			return true;
+		}
+		if (settingsFragment instanceof final CustomAlert.SingleSelectionDialogFragment singleSelectionDialogFragment) {
+			// FK-FIXME: singleSelectionDialogFragment.alertDialog ist null und singleSelectionDialogFragment.alertDialogData auch
+			IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
+			singleSelectionDialogFragment.showNow(mapActivity.getSupportFragmentManager());
+			// FK-TODO: implement highlightSetting()
+//			singleSelectionDialogFragment
+//					.getSettingHighlighter()
+//					.highlightSetting(singleSelectionDialogFragment, setting);
 			return true;
 		}
 		return false;

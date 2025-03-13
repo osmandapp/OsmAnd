@@ -691,31 +691,27 @@ public class ConfigureMapMenu {
 		return null;
 	}
 
-	public static ContextMenuItem createRenderingProperty(MapActivity activity,
-														  @DrawableRes int icon, RenderingRuleProperty p, String id,
-														  boolean nightMode) {
+	public static ContextMenuItem createRenderingProperty(final MapActivity activity,
+														  final @DrawableRes int icon,
+														  final RenderingRuleProperty property,
+														  final String id,
+														  final boolean nightMode) {
 		OsmandApplication app = activity.getMyApplication();
-		if (p.isBoolean()) {
-			String name = AndroidUtils.getRenderingStringPropertyName(activity, p.getAttrName(), p.getName());
-			return createBooleanRenderingProperty(activity, p.getAttrName(), name, id, p, icon, nightMode, null);
+		if (property.isBoolean()) {
+			String name = AndroidUtils.getRenderingStringPropertyName(activity, property.getAttrName(), property.getName());
+			return createBooleanRenderingProperty(activity, property.getAttrName(), name, id, property, icon, nightMode, null);
 		} else {
-			CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(p.getAttrName());
-			String descr;
-			if (!Algorithms.isEmpty(pref.get())) {
-				descr = AndroidUtils.getRenderingStringPropertyValue(activity, pref.get());
-			} else {
-				descr = AndroidUtils.getRenderingStringPropertyValue(app, p.getDefaultValueDescription());
-			}
-			String propertyName = AndroidUtils.getRenderingStringPropertyName(app, p.getAttrName(), p.getName());
+			CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(property.getAttrName());
+			String propertyName = AndroidUtils.getRenderingStringPropertyName(app, property.getAttrName(), property.getName());
 			ContextMenuItem item = new ContextMenuItem(id)
 					.setTitle(propertyName)
 					.setListener((uiAdapter, view, _item, isChecked) -> {
 						if (AndroidUtils.isActivityNotDestroyed(activity)) {
-							ConfigureMapDialogs.showRenderingPropertyDialog(activity, p, pref, _item, uiAdapter, nightMode);
+							ConfigureMapDialogs.showRenderingPropertyDialog(activity, property, pref, _item, uiAdapter, nightMode);
 						}
 						return false;
 					})
-					.setDescription(descr)
+					.setDescription(getDescription(property, activity.getMyApplication()))
 					.setItemDeleteAction(pref)
 					.setLayout(R.layout.list_item_single_line_descrition_narrow);
 			if (icon != INVALID_ID) {
@@ -723,6 +719,22 @@ public class ConfigureMapMenu {
 			}
 			return item;
 		}
+	}
+
+	public static CommonPreference<String> getCustomRenderProperty(final RenderingRuleProperty property, final OsmandSettings osmandSettings) {
+		return osmandSettings.getCustomRenderProperty(property.getAttrName());
+	}
+
+	private static String getDescription(final RenderingRuleProperty property, final OsmandApplication application) {
+		return AndroidUtils.getRenderingStringPropertyValue(
+				application,
+				getNonEmptyValueOrDefault(
+						getCustomRenderProperty(property, application.getSettings()),
+						property.getDefaultValueDescription()));
+	}
+
+	private static String getNonEmptyValueOrDefault(final CommonPreference<String> preference, final String defaultValue) {
+		return !Algorithms.isEmpty(preference.get()) ? preference.get() : defaultValue;
 	}
 
 	@NonNull

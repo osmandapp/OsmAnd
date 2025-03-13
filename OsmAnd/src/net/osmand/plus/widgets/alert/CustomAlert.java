@@ -19,6 +19,11 @@ import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
+
+import com.google.common.collect.ImmutableMap;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -27,6 +32,12 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
 public class CustomAlert {
@@ -95,48 +106,116 @@ public class CustomAlert {
 	}
 
 	public static void showSingleSelection(final @NonNull AlertDialogData data,
-										   final @NonNull CharSequence[] items,
+										   final LinkedHashMap<String, CharSequence> itemByKey,
 										   final int selectedEntryIndex,
 										   final @Nullable View.OnClickListener itemClickListener,
 										   final FragmentManager fragmentManager) {
-		final AlertDialog.Builder builder = createAlertDialogBuilder(data);
 		final SelectionDialogAdapter adapter =
 				new SelectionDialogAdapter(
 						data.getContext(),
-						items,
+						itemByKey.values().toArray(new CharSequence[0]),
 						selectedEntryIndex,
 						null,
 						data.getControlsColor(),
 						data.isNightMode(),
 						itemClickListener,
 						false);
-		builder.setAdapter(adapter, null);
-		final AlertDialog dialog = builder.create();
-		adapter.setDialog(dialog);
-		final SingleSelectionDialogFragment singleSelectionDialogFragment = new SingleSelectionDialogFragment(dialog, data);
+		final AlertDialog alertDialog =
+				CustomAlert
+						.createAlertDialogBuilder(data)
+						.setAdapter(adapter, null)
+						.create();
+		adapter.setDialog(alertDialog);
+		final SingleSelectionDialogFragment singleSelectionDialogFragment =
+				new SingleSelectionDialogFragment(
+						alertDialog,
+						data,
+						itemByKey);
 		singleSelectionDialogFragment.show(fragmentManager);
 	}
 
 	public static class SingleSelectionDialogFragment extends DialogFragment {
 
-		private final AlertDialog dialog;
+		private final AlertDialog alertDialog;
 		private final AlertDialogData alertDialogData;
+		private final Map<String, CharSequence> itemByKey;
 
-		public SingleSelectionDialogFragment(final AlertDialog dialog,
-											 final AlertDialogData alertDialogData) {
-			this.dialog = dialog;
+		public SingleSelectionDialogFragment() {
+			this(
+					null,
+					null,
+					// FK-TODO: replace hard coded values with computed values
+					ImmutableMap
+							.<String, CharSequence>builder()
+							.put("default", "Default")
+							.put("germanRoadAtlas", "German road atlas")
+							.put("americanRoadAtlas", "American road atlas")
+							.put("highContrastRoads", "High contrast roads")
+							.put("boldOutline", "Bold outline")
+							.put("pale", "Pale")
+							.build());
+		}
+
+		public SingleSelectionDialogFragment(final AlertDialog alertDialog,
+											 final AlertDialogData alertDialogData,
+											 final Map<String, CharSequence> itemByKey) {
+			this.alertDialog = alertDialog;
 			this.alertDialogData = alertDialogData;
+			this.itemByKey = itemByKey;
 		}
 
 		public void show(final FragmentManager fragmentManager) {
 			show(fragmentManager, null);
-			applyAdditionalParameters(dialog, alertDialogData);
+			applyAdditionalParameters(alertDialog, alertDialogData);
+		}
+
+		public void showNow(final FragmentManager fragmentManager) {
+			showNow(fragmentManager, null);
+			applyAdditionalParameters(alertDialog, alertDialogData);
 		}
 
 		@NonNull
 		@Override
 		public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-			return dialog;
+			return alertDialog;
+		}
+
+		public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<SingleSelectionDialogFragment> {
+
+			private Map<String, CharSequence> itemByKey;
+
+			@Override
+			public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final SingleSelectionDialogFragment singleSelectionDialogFragment) {
+				itemByKey = singleSelectionDialogFragment.itemByKey;
+			}
+
+			@Override
+			public void onCreatePreferences(@Nullable final Bundle savedInstanceState, @Nullable final String rootKey) {
+				final Context context = getPreferenceManager().getContext();
+				final PreferenceScreen screen = getPreferenceManager().createPreferenceScreen(context);
+				screen.setTitle("screen title");
+				screen.setSummary("screen summary");
+				PreferenceFragment
+						.asPreferences(itemByKey, context)
+						.forEach(screen::addPreference);
+				setPreferenceScreen(screen);
+			}
+
+			private static Collection<Preference> asPreferences(final Map<String, CharSequence> itemByKey,
+																final Context context) {
+				return itemByKey
+						.entrySet()
+						.stream()
+						.map(key_item_entry -> asPreference(key_item_entry.getKey(), key_item_entry.getValue(), context))
+						.collect(Collectors.toUnmodifiableList());
+			}
+
+			private static Preference asPreference(final String key, final CharSequence item, final Context context) {
+				final Preference preference = new Preference(context);
+				preference.setKey(key);
+				preference.setTitle(item);
+				return preference;
+			}
 		}
 	}
 
