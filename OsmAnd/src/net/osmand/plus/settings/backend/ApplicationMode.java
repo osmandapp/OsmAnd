@@ -145,10 +145,11 @@ public class ApplicationMode {
 		return customModes;
 	}
 
-	public static ApplicationMode valueOfStringKey(String key, ApplicationMode def) {
-		for (ApplicationMode p : values) {
-			if (p.getStringKey().equals(key)) {
-				return p;
+	@Nullable
+	public static ApplicationMode valueOfStringKey(@Nullable String key, @Nullable ApplicationMode def) {
+		for (ApplicationMode mode : values) {
+			if (Algorithms.stringsEqual(mode.getStringKey(), key)) {
+				return mode;
 			}
 		}
 		return def;
