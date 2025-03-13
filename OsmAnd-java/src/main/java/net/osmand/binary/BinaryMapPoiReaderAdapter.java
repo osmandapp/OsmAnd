@@ -349,6 +349,7 @@ public class BinaryMapPoiReaderAdapter {
 				}
 				BinaryMapIndexReader.SearchPoiTypeFilter filter = req.poiTypeFilter;
 				req.poiTypeFilter = null;//init for all categories
+				// if nameIndexTree is empty, then skip by zero bbox 0,0,0,0
 				readBoxField(0, 0, 0, 0, 0, 0, 0, offsetsMap, null, req, region, nameIndexTree);
 				req.poiTypeFilter = filter;
 				codedIS.popLimit(oldLimit);

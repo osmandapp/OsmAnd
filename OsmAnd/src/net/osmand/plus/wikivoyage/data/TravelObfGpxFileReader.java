@@ -318,7 +318,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
         List<Amenity> currentAmenities = new ArrayList<>();
 
         SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
-                0, 0, Algorithms.emptyIfNull(travelGpx.title), left, right, top, bottom, poiTypeFilter,
+                0, 0, Algorithms.emptyIfNull(travelGpx.routeId), left, right, top, bottom, poiTypeFilter,
                 getAmenityMatcher(travelGpx, amenityMap, currentAmenities, isCancelled), null);
 
         SearchRequest<BinaryMapDataObject> mapRequest = BinaryMapIndexReader
@@ -347,7 +347,11 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                 continue;
             }
 
-            repo.searchPoi(pointRequest);
+            if (travelGpx.hasNonIndexedOsmRouteId()) {
+                repo.searchPoi(pointRequest);
+            } else {
+                repo.searchPoiByName(pointRequest);
+            }
             if (currentAmenities.isEmpty()) {
                 continue;
             }
