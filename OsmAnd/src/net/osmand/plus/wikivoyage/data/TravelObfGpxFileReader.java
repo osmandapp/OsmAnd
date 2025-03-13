@@ -515,7 +515,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                 if (amenity.isClosed()) {
                     commonMap.remove(amenity.getId()); // live-updates
                 }
-                if (amenity.getRouteId().equals(article.getRouteId())) {
+                if (article.getRouteId() != null && article.getRouteId().equals(amenity.getRouteId())) {
                     commonMap.put(amenity.getId(), amenity);
                     currentList.add(amenity);
                 }
