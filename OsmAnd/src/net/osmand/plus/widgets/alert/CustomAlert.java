@@ -3,8 +3,10 @@ package net.osmand.plus.widgets.alert;
 import static android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE;
 import static net.osmand.plus.widgets.alert.AlertDialogData.INVALID_ID;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +16,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AlertDialog.Builder;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -40,7 +44,7 @@ public class CustomAlert {
 	}
 
 	public static void showInput(@NonNull AlertDialogData data, @NonNull FragmentActivity activity,
-	                             @Nullable String initialText, @Nullable String caption) {
+								 @Nullable String initialText, @Nullable String caption) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		LayoutInflater inflater = LayoutInflater.from(data.getContext());
 		UiUtilities iconsCache = app.getUIUtilities();
@@ -77,7 +81,7 @@ public class CustomAlert {
 	}
 
 	public static void showSingleSelection(@NonNull AlertDialogData data, @NonNull CharSequence[] items,
-	                                       int selectedEntryIndex, @Nullable View.OnClickListener itemClickListener) {
+										   int selectedEntryIndex, @Nullable View.OnClickListener itemClickListener) {
 		AlertDialog.Builder builder = createAlertDialogBuilder(data);
 		SelectionDialogAdapter adapter = new SelectionDialogAdapter(
 				data.getContext(), items, selectedEntryIndex, null,
@@ -90,8 +94,54 @@ public class CustomAlert {
 		adapter.setDialog(dialog);
 	}
 
+	public static void showSingleSelection(final @NonNull AlertDialogData data,
+										   final @NonNull CharSequence[] items,
+										   final int selectedEntryIndex,
+										   final @Nullable View.OnClickListener itemClickListener,
+										   final FragmentManager fragmentManager) {
+		final AlertDialog.Builder builder = createAlertDialogBuilder(data);
+		final SelectionDialogAdapter adapter =
+				new SelectionDialogAdapter(
+						data.getContext(),
+						items,
+						selectedEntryIndex,
+						null,
+						data.getControlsColor(),
+						data.isNightMode(),
+						itemClickListener,
+						false);
+		builder.setAdapter(adapter, null);
+		final AlertDialog dialog = builder.create();
+		adapter.setDialog(dialog);
+		final SingleSelectionDialogFragment singleSelectionDialogFragment = new SingleSelectionDialogFragment(dialog, data);
+		singleSelectionDialogFragment.show(fragmentManager);
+	}
+
+	public static class SingleSelectionDialogFragment extends DialogFragment {
+
+		private final AlertDialog dialog;
+		private final AlertDialogData alertDialogData;
+
+		public SingleSelectionDialogFragment(final AlertDialog dialog,
+											 final AlertDialogData alertDialogData) {
+			this.dialog = dialog;
+			this.alertDialogData = alertDialogData;
+		}
+
+		public void show(final FragmentManager fragmentManager) {
+			show(fragmentManager, null);
+			applyAdditionalParameters(dialog, alertDialogData);
+		}
+
+		@NonNull
+		@Override
+		public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+			return dialog;
+		}
+	}
+
 	public static void showMultiSelection(@NonNull AlertDialogData data, @NonNull CharSequence[] items,
-	                                      @Nullable boolean[] checkedItems, @Nullable View.OnClickListener itemClickListener) {
+										  @Nullable boolean[] checkedItems, @Nullable View.OnClickListener itemClickListener) {
 		AlertDialog.Builder builder = createAlertDialogBuilder(data);
 		SelectionDialogAdapter adapter = new SelectionDialogAdapter(
 				data.getContext(), items, INVALID_ID, checkedItems,

@@ -44,7 +44,7 @@ public class ConfigureMapDialogs {
 	public static void showMapMagnifierDialog(@NonNull OsmandMapTileView view) {
 		OsmandPreference<Float> density = view.getSettings().MAP_DENSITY;
 		int p = (int) (density.get() * 100);
-		TIntArrayList tlist = new TIntArrayList(new int[] {25, 33, 50, 75, 100, 125, 150, 200, 300, 400});
+		TIntArrayList tlist = new TIntArrayList(new int[]{25, 33, 50, 75, 100, 125, 150, 200, 300, 400});
 		List<String> values = new ArrayList<>();
 		int i = -1;
 		for (int k = 0; k <= tlist.size(); k++) {
@@ -81,7 +81,7 @@ public class ConfigureMapDialogs {
 	}
 
 	protected static void showMapMagnifierDialog(@NonNull MapActivity activity, boolean nightMode,
-	                                             @NonNull ContextMenuItem item, @NonNull OnDataChangeUiAdapter adapter) {
+												 @NonNull ContextMenuItem item, @NonNull OnDataChangeUiAdapter adapter) {
 		OsmandApplication app = activity.getMyApplication();
 		int profileColor = ColorUtilities.getAppModeColor(app, nightMode);
 		OsmandSettings settings = app.getSettings();
@@ -89,7 +89,7 @@ public class ConfigureMapDialogs {
 		OsmandMapTileView view = activity.getMapView();
 		OsmandPreference<Float> mapDensity = settings.MAP_DENSITY;
 		int p = (int) (mapDensity.get() * 100);
-		TIntArrayList tlist = new TIntArrayList(new int[] {25, 33, 50, 75, 100, 125, 150, 200, 300, 400});
+		TIntArrayList tlist = new TIntArrayList(new int[]{25, 33, 50, 75, 100, 125, 150, 200, 300, 400});
 		List<String> values = new ArrayList<>();
 		int i = -1;
 		for (int k = 0; k <= tlist.size(); k++) {
@@ -194,7 +194,7 @@ public class ConfigureMapDialogs {
 
 		OnCheckedChangeListener translitChangdListener = (buttonView, isChecked) -> transliterateNames[0] = isChecked;
 
-		ArrayAdapter<CharSequence> singleChoiceAdapter = new ArrayAdapter<CharSequence>(
+		ArrayAdapter<CharSequence> singleChoiceAdapter = new ArrayAdapter<>(
 				ctx, R.layout.single_choice_switch_item, R.id.text1, mapLanguagesNames) {
 			@NonNull
 			@Override
@@ -252,41 +252,45 @@ public class ConfigureMapDialogs {
 	}
 
 	protected static void showRenderingPropertyDialog(
-			@NonNull MapActivity activity, @NonNull RenderingRuleProperty p,
-			@NonNull CommonPreference<String> pref, @NonNull ContextMenuItem item,
-			@NonNull OnDataChangeUiAdapter uiAdapter, boolean nightMode
-	) {
-		OsmandApplication app = activity.getMyApplication();
-		String title = AndroidUtils.getRenderingStringPropertyDescription(app, p.getAttrName(), p.getName());
-		String[] possibleValuesString = ConfigureMapUtils.getRenderingPropertyPossibleValues(app, p);
-		int selectedIndex = Arrays.asList(p.getPossibleValues()).indexOf(pref.get());
+			final @NonNull MapActivity activity,
+			final @NonNull RenderingRuleProperty property,
+			final @NonNull CommonPreference<String> pref,
+			final @NonNull ContextMenuItem item,
+			final @NonNull OnDataChangeUiAdapter uiAdapter,
+			final boolean nightMode) {
+		final AlertDialogData dialogData =
+				new AlertDialogData(activity, nightMode)
+						.setTitle(AndroidUtils.getRenderingStringPropertyDescription(activity.getMyApplication(), property.getAttrName(), property.getName()))
+						.setControlsColor(ColorUtilities.getAppModeColor(activity.getMyApplication(), nightMode))
+						.setNegativeButton(R.string.shared_string_dismiss, null);
+		CustomAlert.showSingleSelection(
+				dialogData,
+				ConfigureMapUtils.getRenderingPropertyPossibleValues(activity.getMyApplication(), property),
+				getSelectedIndex(Arrays.asList(property.getPossibleValues()), pref.get()),
+				v -> {
+					final int which = (int) v.getTag();
+					pref.set(which == 0 ? "" : property.getPossibleValues()[which - 1]);
+					activity.refreshMapComplete();
+					item.setDescription(AndroidUtils.getRenderingStringPropertyValue(activity, pref.get()));
+					final String id = item.getId();
+					if (!Algorithms.isEmpty(id)) {
+						uiAdapter.onRefreshItem(id);
+					} else {
+						uiAdapter.onDataSetChanged();
+					}
+				},
+				activity.getSupportFragmentManager());
+	}
+
+	private static int getSelectedIndex(final List<String> haystack, final String needle) {
+		final int selectedIndex = haystack.indexOf(needle);
 		if (selectedIndex >= 0) {
-			selectedIndex++;
-		} else if (Algorithms.isEmpty(pref.get())) {
-			selectedIndex = 0;
+			return selectedIndex + 1;
+		} else if (Algorithms.isEmpty(needle)) {
+			return 0;
+		} else {
+			return selectedIndex;
 		}
-
-		AlertDialogData dialogData = new AlertDialogData(activity, nightMode)
-				.setTitle(title)
-				.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode))
-				.setNegativeButton(R.string.shared_string_dismiss, null);
-
-		CustomAlert.showSingleSelection(dialogData, possibleValuesString, selectedIndex, v -> {
-			int which = (int) v.getTag();
-			if (which == 0) {
-				pref.set("");
-			} else {
-				pref.set(p.getPossibleValues()[which - 1]);
-			}
-			activity.refreshMapComplete();
-			item.setDescription(AndroidUtils.getRenderingStringPropertyValue(activity, pref.get()));
-			String id = item.getId();
-			if (!Algorithms.isEmpty(id)) {
-				uiAdapter.onRefreshItem(id);
-			} else {
-				uiAdapter.onDataSetChanged();
-			}
-		});
 	}
 
 	protected static void showPreferencesDialog(
