@@ -342,4 +342,14 @@
     <string name="delete_version_history">Dubh às eachdraidh an dreucha</string>
     <string name="restore_from_osmand_cloud">Aisig air ais bho sgòth OsmAnd</string>
     <string name="backup_restore_data">Aisig dàta air ais</string>
+    <string name="backup_complete">Lethbhreac-glèidhidh dèanta</string>
+    <string name="delete_all_confirmation">Tha, dubh às uile</string>
+    <string name="backup_danger_zone">Sòn cunnartach</string>
+    <string name="backup_conflicts">Còmhstrithean</string>
+    <string name="make_backup">Dèan lethbhreac-glèidhidh</string>
+    <string name="backup_now">Dèan lethbhreac-glèidhidh an-dràsta</string>
+    <string name="backup_data">Dèan lethbhreac-glèidhidh dàta</string>
+    <string name="backup_delete_all_data">Dubh às an dàta agam air fad</string>
+    <string name="shared_string_logout">Log a-mach</string>
+    <string name="backup_pause_all">Sòr uile</string>
 </resources>
