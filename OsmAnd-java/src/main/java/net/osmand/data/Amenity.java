@@ -13,10 +13,11 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
+import net.osmand.shared.wiki.WikiHelper;
+import net.osmand.shared.wiki.WikiImage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.wiki.WikiCoreHelper;
-import net.osmand.wiki.WikiImage;
 
 import org.json.JSONObject;
 
@@ -539,7 +540,7 @@ public class Amenity extends MapObject {
 	private void obtainWikiUrls() {
 		String wikiPhoto = getWikiPhoto();
 		if (!Algorithms.isEmpty(wikiPhoto)) {
-			WikiImage wikiIMage = WikiCoreHelper.getImageData(wikiPhoto);
+			WikiImage wikiIMage = WikiHelper.INSTANCE.getImageData(wikiPhoto);
 			setWikiIconUrl(wikiIMage == null ? "" : wikiIMage.getImageIconUrl());
 			setWikiImageStubUrl(wikiIMage == null ? "" : wikiIMage.getImageStubUrl());
 		}
