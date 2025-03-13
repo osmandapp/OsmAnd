@@ -1,5 +1,6 @@
 package net.osmand.data;
 
+import net.osmand.Location;
 import net.osmand.util.MapUtils;
 
 import java.io.Serializable;
@@ -21,6 +22,13 @@ public class LatLon implements Serializable {
 
 	public double getLongitude() {
 		return longitude;
+	}
+
+	public Location toLocation() {
+		Location location = new Location("");
+		location.setLatitude(latitude);
+		location.setLongitude(longitude);
+		return location;
 	}
 
 	@Override

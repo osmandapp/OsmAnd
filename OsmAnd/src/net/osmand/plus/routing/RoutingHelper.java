@@ -306,11 +306,12 @@ public class RoutingHelper {
 		return route.getImmutableAllLocations();
 	}
 
-	public void setAppMode(ApplicationMode mode) {
+	public void setAppMode(@NonNull ApplicationMode mode) {
 		this.mode = mode;
 		voiceRouter.updateAppMode();
 	}
 
+	@NonNull
 	public ApplicationMode getAppMode() {
 		return mode;
 	}
