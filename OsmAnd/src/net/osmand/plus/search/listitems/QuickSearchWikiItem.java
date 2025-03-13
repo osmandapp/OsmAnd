@@ -19,6 +19,10 @@ public class QuickSearchWikiItem extends QuickSearchListItem {
 	private final String imageUrl;
 	private final LatLon location;
 
+	public QuickSearchWikiItem(@NonNull OsmandApplication app, @NonNull QuickSearchListItem quickSearchListItem) {
+		this(app, quickSearchListItem.getSearchResult());
+	}
+
 	public QuickSearchWikiItem(@NonNull OsmandApplication app, @NonNull SearchResult searchResult) {
 		super(app, searchResult);
 		Amenity amenity = (Amenity) searchResult.object;

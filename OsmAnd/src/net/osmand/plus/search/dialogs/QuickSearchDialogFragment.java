@@ -2172,11 +2172,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		return null;
 	}
 
-	public void showAmenityPoints(List<Amenity> amenities) {
-		showWiki = true;
+	public void showResult(PoiUIFilter filter) {
 		buttonToolbarText.setText(R.string.shared_string_show_on_map);
-		List<QuickSearchListItem> items = amenities.stream().map(this::convertAmenityToQuickSearchListItem).collect(Collectors.toList());
-		mainSearchFragment.updateListAdapter(items, false);
+		mainSearchFragment.getAdapter().clear();
+		updateSearchResult(createSearchResultCollection(filter), true);
+		((QuickSearchListAdapter)mainSearchFragment.getAdapter()).setPoiUIFilter(filter);
 		updateTabBarVisibility(false);
 		toolbarEdit.setVisibility(View.GONE);
 		searchEditText.setHint(R.string.popular_places);
@@ -2184,8 +2184,20 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		toolbar.setVisibility(View.VISIBLE);
 	}
 
-	private QuickSearchListItem convertAmenityToQuickSearchListItem(Amenity amenity) {
-		return new QuickSearchWikiItem(app, SearchCoreFactory.createAmenitySearchResult(SearchPhrase.emptyPhrase(), amenity));
+	private SearchResultCollection createSearchResultCollection(@NonNull PoiUIFilter filter) {
+		SearchUICore core = app.getSearchUICore().getCore();
+		SearchPhrase phrase = SearchPhrase.emptyPhrase(core.getSearchSettings());
+		SearchUICore.SearchResultCollection resCollection = new SearchUICore.SearchResultCollection(phrase);
+		List<SearchResult> results = new ArrayList<>();
+		for (Amenity pt : filter.getCurrentSearchResult()) {
+			SearchResult res = new SearchResult(phrase);
+			res.localeName = pt.getName();
+			res.object = pt;
+			res.objectType = ObjectType.POI;
+			res.location = pt.getLocation();
+			results.add(res);
+		}
+		resCollection.addSearchResults(results, false, false);
+		return resCollection;
 	}
-
 }

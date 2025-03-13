@@ -184,6 +184,11 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		updateAcceptedTypeOrigins();
 	}
 
+	@NonNull
+	public List<Amenity> getCurrentSearchResult() {
+		return currentSearchResult == null ? Collections.emptyList() : new ArrayList<>(currentSearchResult);
+	}
+
 	public DataSourceType getDataSourceType() {
 		return dataProvider.getDataSourceType();
 	}
@@ -395,7 +400,11 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		}
 		List<Amenity> amenities = searchAmenitiesInternal(top / 2 + bottom / 2, left / 2 + right / 2,
 				top, bottom, left, right, zoom, matcher);
-		results.addAll(amenities);
+		for(Amenity amenity: amenities) {
+			if(!results.contains(amenity)) {
+				results.add(amenity);
+			}
+		}
 		return results;
 	}
 
@@ -407,7 +416,8 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	                                                double bottomLatitude, double leftLongitude,
 	                                                double rightLongitude, int zoom,
 	                                                ResultMatcher<Amenity> matcher) {
-		return dataProvider.searchAmenities(lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude, zoom, matcher);
+		currentSearchResult = dataProvider.searchAmenities(lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude, zoom, matcher);
+		return currentSearchResult;
 	}
 
 	public PoiFilterUtils.AmenityNameFilter getNameFilter() {

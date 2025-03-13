@@ -42,6 +42,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.plugins.accessibility.AccessibilityAssistant;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.search.listitems.QuickSearchBannerListItem;
 import net.osmand.plus.search.listitems.QuickSearchDisabledHistoryItem;
@@ -83,6 +84,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	private final FragmentActivity activity;
 	private AccessibilityAssistant accessibilityAssistant;
 	private final LayoutInflater inflater;
+	@Nullable
+	private PoiUIFilter poiUIFilter;
 
 	private boolean useMapCenter;
 
@@ -248,7 +251,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		} else if (type == QuickSearchListItemType.BOTTOM_SHADOW) {
 			return bindBottomShadowItem(convertView);
 		} else if (type == QuickSearchListItemType.SEARCH_RESULT &&
-				listItem instanceof QuickSearchWikiItem) {
+				poiUIFilter != null && poiUIFilter.isWikiFilter()) {
 			return bindWikiItem(position, convertView, listItem);
 		} else if (type == QuickSearchListItemType.DISABLED_HISTORY) {
 			view = bindDisabledHistoryItem(listItem, convertView);
@@ -445,7 +448,6 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	}
 
 	private LinearLayout bindWikiItem(int position, @Nullable View convertView, @NonNull QuickSearchListItem listItem) {
-		QuickSearchWikiItem wikiItem = (QuickSearchWikiItem) listItem;
 		LinearLayout view = getLinearLayout(convertView, R.layout.search_nearby_item_vertical);
 		TextView title = view.findViewById(R.id.item_title);
 		TextView description = view.findViewById(R.id.item_description);
@@ -453,7 +455,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		ImageView icon = view.findViewById(R.id.item_icon);
 		ImageView image = view.findViewById(R.id.item_image);
 		LinearLayout compassLayout = view.findViewById(R.id.compass_layout);
-		title.setText(wikiItem.getTitle());
+		QuickSearchWikiItem wikiItem = new QuickSearchWikiItem(app, listItem);
+		title.setText(listItem.getName());
 		description.setText(wikiItem.getDescription());
 		type.setText(wikiItem.getTypeName());
 		Drawable wikiIcon = wikiItem.getIcon();
@@ -477,7 +480,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			});
 		}
 		AndroidUiHelper.updateVisibility(compassLayout, true);
-		updateDistanceDirection(view, listItem);
+		updateCompassVisibility(view, wikiItem);
+		updateDistanceDirection(view, wikiItem);
 		return view;
 	}
 
@@ -767,9 +771,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			updateLocationViewCache.specialFrom = phrase.getSettings().getOriginalLocation();
 		}
 		LatLon toloc = null;
-		if (listItem instanceof QuickSearchWikiItem) {
-			toloc = ((QuickSearchWikiItem) listItem).getLocation();
-		} else if (listItem.getSearchResult() != null) {
+		if (listItem.getSearchResult() != null) {
 			toloc = listItem.getSearchResult().location;
 		}
 		UpdateLocationUtils.updateLocationView(app, updateLocationViewCache, direction, distanceText, toloc);
@@ -777,5 +779,15 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	private boolean isNightMode() {
 		return !app.getSettings().isLightContent();
+	}
+
+	public void setPoiUIFilter(@Nullable PoiUIFilter poiUIFilter) {
+		this.poiUIFilter = poiUIFilter;
+	}
+
+	@Override
+	public void clear() {
+		super.clear();
+		setPoiUIFilter(null);
 	}
 }
