@@ -223,10 +223,9 @@ public class AmenityMenuController extends MenuController {
 	@NonNull
 	@Override
 	public String getTypeStr() {
-		if (getMapActivity() != null && amenity.isRouteTrack()) {
-			return getTypeWithDistanceStr(amenity, getMapActivity().getMyApplication());
-		}
-		return getTypeStr(amenity);
+		return amenity.isRouteTrack()
+				? getTypeWithDistanceStr(amenity, getApplication())
+				: getTypeStr(amenity);
 	}
 
 	@NonNull
@@ -292,10 +291,8 @@ public class AmenityMenuController extends MenuController {
 		if (region != null) {
 			return RenderingIcons.getBigIcon(getMapActivity(), "subway_" + region);
 		}
-		if (getMapActivity() != null && amenity.isRouteTrack()) {
-			OsmandApplication app = getMapActivity().getMyApplication();
-			return NetworkRouteDrawable.getIconByAmenityShieldTags(amenity, app, !isLight());
-		}
-		return null;
+		return amenity.isRouteTrack()
+				? NetworkRouteDrawable.getIconByAmenityShieldTags(amenity, getApplication(), !isLight())
+				: null;
 	}
 }
