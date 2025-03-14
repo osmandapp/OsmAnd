@@ -253,7 +253,6 @@ public class ConfigureMapDialogs {
 			final @NonNull ContextMenuItem item,
 			final @NonNull OnDataChangeUiAdapter uiAdapter,
 			final boolean nightMode) {
-		final CommonPreference<String> pref = ConfigureMapMenu.getCustomRenderProperty(property, activity.getMyApplication().getSettings());
 		return CustomAlert
 				.createSingleSelectionDialogFragment(
 						new AlertDialogData(activity, nightMode)
@@ -261,12 +260,13 @@ public class ConfigureMapDialogs {
 								.setControlsColor(ColorUtilities.getAppModeColor(activity.getMyApplication(), nightMode))
 								.setNegativeButton(R.string.shared_string_dismiss, null),
 						ConfigureMapUtils.getItemByKey(property, activity.getMyApplication()),
-						getSelectedIndex(Arrays.asList(property.getPossibleValues()), pref.get()),
+						getSelectedIndex(activity, property),
 						v -> {
 							final int which = (int) v.getTag();
-							pref.set(which == 0 ? "" : property.getPossibleValues()[which - 1]);
+							final CommonPreference<String> preference = getCustomRenderProperty(activity, property);
+							preference.set(which == 0 ? "" : property.getPossibleValues()[which - 1]);
 							activity.refreshMapComplete();
-							item.setDescription(AndroidUtils.getRenderingStringPropertyValue(activity, pref.get()));
+							item.setDescription(AndroidUtils.getRenderingStringPropertyValue(activity, preference.get()));
 							final String id = item.getId();
 							if (!Algorithms.isEmpty(id)) {
 								uiAdapter.onRefreshItem(id);
@@ -274,6 +274,15 @@ public class ConfigureMapDialogs {
 								uiAdapter.onDataSetChanged();
 							}
 						});
+	}
+
+	public static int getSelectedIndex(final MapActivity activity, final RenderingRuleProperty property) {
+		return getSelectedIndex(Arrays.asList(property.getPossibleValues()), getCustomRenderProperty(activity, property).get());
+	}
+
+	private static CommonPreference<String> getCustomRenderProperty(final MapActivity activity,
+																	final RenderingRuleProperty property) {
+		return ConfigureMapMenu.getCustomRenderProperty(property, activity.getMyApplication().getSettings());
 	}
 
 	private static int getSelectedIndex(final List<String> haystack, final String needle) {

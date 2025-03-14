@@ -129,7 +129,8 @@ public class CustomAlert {
 		return new SingleSelectionDialogFragment(
 				alertDialog,
 				data,
-				itemByKey);
+				itemByKey,
+				adapter);
 	}
 
 	public static class SingleSelectionDialogFragment extends DialogFragment {
@@ -137,6 +138,7 @@ public class CustomAlert {
 		private final AlertDialog alertDialog;
 		private final AlertDialogData alertDialogData;
 		private final Map<String, CharSequence> itemByKey;
+		private final SelectionDialogAdapter adapter;
 
 		public SingleSelectionDialogFragment() {
 			this(
@@ -151,15 +153,18 @@ public class CustomAlert {
 							.put("highContrastRoads", "High contrast roads")
 							.put("boldOutline", "Bold outline")
 							.put("pale", "Pale")
-							.build());
+							.build(),
+					null);
 		}
 
 		public SingleSelectionDialogFragment(final AlertDialog alertDialog,
 											 final AlertDialogData alertDialogData,
-											 final Map<String, CharSequence> itemByKey) {
+											 final Map<String, CharSequence> itemByKey,
+											 final SelectionDialogAdapter adapter) {
 			this.alertDialog = alertDialog;
 			this.alertDialogData = alertDialogData;
 			this.itemByKey = itemByKey;
+			this.adapter = adapter;
 		}
 
 		public void show(final FragmentManager fragmentManager) {
@@ -170,6 +175,10 @@ public class CustomAlert {
 		public void showNow(final FragmentManager fragmentManager) {
 			showNow(fragmentManager, null);
 			applyAdditionalParameters(alertDialog, alertDialogData);
+		}
+
+		public void setSelectedIndex(final int selectedIndex) {
+			adapter.setSelectedIndex(selectedIndex);
 		}
 
 		@NonNull

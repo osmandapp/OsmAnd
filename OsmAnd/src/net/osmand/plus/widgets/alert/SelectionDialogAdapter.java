@@ -70,6 +70,10 @@ class SelectionDialogAdapter extends BaseAdapter {
 		this.dialog = dialog;
 	}
 
+	public void setSelectedIndex(final int selectedIndex) {
+		this.selectedIndex = selectedIndex;
+	}
+
 	@NonNull
 	@Override
 	public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

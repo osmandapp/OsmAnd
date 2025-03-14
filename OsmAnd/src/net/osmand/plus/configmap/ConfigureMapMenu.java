@@ -730,7 +730,7 @@ public class ConfigureMapMenu {
 							.setDescription(getDescription(property, activity.getMyApplication()))
 							.setItemDeleteAction(activity.getMyApplication().getSettings().getCustomRenderProperty(property.getAttrName()))
 							.setLayout(R.layout.list_item_single_line_descrition_narrow);
-			final Function<OnDataChangeUiAdapter, CustomAlert.SingleSelectionDialogFragment> createRenderingPropertyDialog =
+			final Function<OnDataChangeUiAdapter, CustomAlert.SingleSelectionDialogFragment> createDialog =
 					_uiAdapter ->
 							ConfigureMapDialogs
 									.createRenderingPropertyDialog(
@@ -739,7 +739,7 @@ public class ConfigureMapMenu {
 											item,
 											_uiAdapter,
 											nightMode);
-			final Optional<CustomAlert.SingleSelectionDialogFragment> singleSelectionDialogFragment = uiAdapter.map(createRenderingPropertyDialog);
+			final Optional<CustomAlert.SingleSelectionDialogFragment> dialog = uiAdapter.map(createDialog);
 			item.setListener(
 					new ItemClickListener() {
 
@@ -749,15 +749,19 @@ public class ConfigureMapMenu {
 														  final ContextMenuItem _item,
 														  final boolean isChecked) {
 							if (AndroidUtils.isActivityNotDestroyed(activity)) {
-								this
-										.getSingleSelectionDialogFragment(uiAdapter)
-										.show(activity.getSupportFragmentManager());
+								showDialog(uiAdapter);
 							}
 							return false;
 						}
 
-						private CustomAlert.SingleSelectionDialogFragment getSingleSelectionDialogFragment(final OnDataChangeUiAdapter uiAdapter) {
-							return singleSelectionDialogFragment.orElseGet(() -> createRenderingPropertyDialog.apply(uiAdapter));
+						private void showDialog(final OnDataChangeUiAdapter uiAdapter) {
+							final CustomAlert.SingleSelectionDialogFragment dialog = getDialog(uiAdapter);
+							dialog.setSelectedIndex(ConfigureMapDialogs.getSelectedIndex(activity, property));
+							dialog.show(activity.getSupportFragmentManager());
+						}
+
+						private CustomAlert.SingleSelectionDialogFragment getDialog(final OnDataChangeUiAdapter uiAdapter) {
+							return dialog.orElseGet(() -> createDialog.apply(uiAdapter));
 						}
 					});
 			if (icon != INVALID_ID) {
