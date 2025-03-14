@@ -5,11 +5,15 @@ import android.graphics.drawable.Drawable;
 import androidx.annotation.NonNull;
 
 import net.osmand.data.Amenity;
+import net.osmand.data.DataSourceType;
 import net.osmand.data.LatLon;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.search.core.SearchResult;
+import net.osmand.util.Algorithms;
 
 public class QuickSearchWikiItem extends QuickSearchListItem {
 	private final String title;
@@ -26,8 +30,16 @@ public class QuickSearchWikiItem extends QuickSearchListItem {
 	public QuickSearchWikiItem(@NonNull OsmandApplication app, @NonNull SearchResult searchResult) {
 		super(app, searchResult);
 		Amenity amenity = (Amenity) searchResult.object;
+		String preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+		if (Algorithms.isEmpty(preferredMapLang)) {
+			preferredMapLang = app.getLanguage();
+		}
+		String articleLang = PluginsHelper.onGetMapObjectsLocale(amenity, preferredMapLang);
+		String lng = amenity.getContentLanguage("content", articleLang, "en");
+		boolean onlineDataSource = app.getSettings().WIKI_DATA_SOURCE_TYPE.get() == DataSourceType.ONLINE;
 		this.title = amenity.getName();
-		this.description = amenity.getDescription(null);
+		String descriptionText = amenity.getDescription(lng);
+		this.description = onlineDataSource ? descriptionText : WikiArticleHelper.getPartialContent(descriptionText);
 		this.type = getPoiTypeTranslation(app, amenity);
 		this.icon = getPoiTypeIcon(app, amenity);
 		this.imageUrl = amenity.getWikiImageStubUrl();

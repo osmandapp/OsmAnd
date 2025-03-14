@@ -461,23 +461,27 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		type.setText(wikiItem.getTypeName());
 		Drawable wikiIcon = wikiItem.getIcon();
 		icon.setImageDrawable(wikiIcon);
-		String wikiImageUrl = wikiItem.getImage();
-		if (wikiImageUrl != null) {
-			RequestCreator creator = Picasso.get().load(wikiImageUrl);
-			if (wikiIcon != null) {
-				creator.error(wikiIcon);
-			}
-			creator.into(image, new Callback() {
-				@Override
-				public void onSuccess() {
-					PicassoUtils.getPicasso(app).setResultLoaded(wikiImageUrl, true);
+		boolean shouldLayoutWithImages = poiUIFilter != null && poiUIFilter.showLayoutWithImages();
+		AndroidUiHelper.updateVisibility(image, shouldLayoutWithImages);
+		if (shouldLayoutWithImages) {
+			String wikiImageUrl = wikiItem.getImage();
+			if (wikiImageUrl != null) {
+				RequestCreator creator = Picasso.get().load(wikiImageUrl);
+				if (wikiIcon != null) {
+					creator.error(wikiIcon);
 				}
+				creator.into(image, new Callback() {
+					@Override
+					public void onSuccess() {
+						PicassoUtils.getPicasso(app).setResultLoaded(wikiImageUrl, true);
+					}
 
-				@Override
-				public void onError(Exception e) {
-					PicassoUtils.getPicasso(app).setResultLoaded(wikiImageUrl, true);
-				}
-			});
+					@Override
+					public void onError(Exception e) {
+						PicassoUtils.getPicasso(app).setResultLoaded(wikiImageUrl, true);
+					}
+				});
+			}
 		}
 		AndroidUiHelper.updateVisibility(compassLayout, true);
 		updateCompassVisibility(view, wikiItem);
