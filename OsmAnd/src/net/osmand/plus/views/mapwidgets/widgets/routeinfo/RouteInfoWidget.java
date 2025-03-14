@@ -121,7 +121,7 @@ public class RouteInfoWidget extends MapWidget implements ISupportVerticalPanel,
 		buttonTappableArea.setOnClickListener(v -> mapActivity.getMapActions().doRoute());
 
 		view.setOnLongClickListener(v -> {
-			WidgetsContextMenu.showMenu(view, mapActivity, widgetType, customId, null, true, nightMode);
+			WidgetsContextMenu.showMenu(view, mapActivity, widgetType, customId, null, panel, nightMode);
 			return true;
 		});
 	}

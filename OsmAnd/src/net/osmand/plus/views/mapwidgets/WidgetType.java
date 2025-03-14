@@ -33,7 +33,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.mapwidgets.configure.settings.*;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
-import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
@@ -342,21 +341,21 @@ public enum WidgetType {
 	}
 
 	@Nullable
-	public WidgetSettingsBaseFragment getSettingsFragment(@NonNull Context ctx, @Nullable MapWidgetInfo widgetInfo) {
+	public WidgetInfoBaseFragment getSettingsFragment(@NonNull Context ctx, @Nullable MapWidgetInfo widgetInfo) {
 		if (this == ELEVATION_PROFILE) {
-			return isPurchased(ctx) ? new ElevationProfileWidgetSettingsFragment() : null;
+			return isPurchased(ctx) ? new ElevationProfileWidgetInfoFragment() : null;
 		} else if (this == MARKERS_TOP_BAR) {
 			return new MapMarkersBarWidgetSettingFragment();
 		} else if (this == RADIUS_RULER) {
-			return new RadiusRulerWidgetSettingsFragment();
+			return new RadiusRulerWidgetInfoFragment();
 		} else if (this == TIME_TO_INTERMEDIATE || this == TIME_TO_DESTINATION) {
-			return new TimeToNavigationPointSettingsFragment();
+			return new TimeToNavigationPointInfoFragment();
 		} else if (this == SIDE_MARKER_1 || this == SIDE_MARKER_2) {
-			return new MapMarkerSideWidgetSettingsFragment();
+			return new MapMarkerSideWidgetInfoFragment();
 		} else if (this == AVERAGE_SPEED) {
 			return new AverageSpeedWidgetSettingFragment();
 		} else if (this == SUNRISE || this == SUNSET || this == SUN_POSITION) {
-			return new SunriseSunsetSettingsFragment();
+			return new SunriseSunsetInfoFragment();
 		} else if (this == HEART_RATE ||
 				this == BICYCLE_POWER ||
 				this == BICYCLE_CADENCE ||
@@ -366,22 +365,22 @@ public enum WidgetType {
 				this == TEMPERATURE) {
 			return new SensorWidgetSettingFragment();
 		} else if (this == GLIDE_AVERAGE) {
-			return new AverageGlideWidgetSettingsFragment();
+			return new AverageGlideWidgetInfoFragment();
 		} else if (this == DEV_ZOOM_LEVEL) {
-			return new ZoomLevelSettingsFragment();
+			return new ZoomLevelInfoFragment();
 		} else if (this == LANES) {
-			return new LanesWidgetSettingsFragment();
+			return new LanesWidgetInfoFragment();
 		} else if (this == ROUTE_INFO) {
-			return new RouteInfoWidgetSettingsFragment();
+			return new RouteInfoWidgetInfoFragment();
 		}
 
 		if (widgetInfo instanceof SimpleWidgetInfo) {
-			WidgetSettingsBaseFragment OBDSettingFragment = getOBDWidgetSettings(ctx, widgetInfo);
+			WidgetInfoBaseFragment OBDSettingFragment = getOBDWidgetSettings(ctx, widgetInfo);
 			if (OBDSettingFragment != null) {
 				return OBDSettingFragment;
 			}
 
-			BaseSimpleWidgetSettingsFragment settingsFragment = new BaseSimpleWidgetSettingsFragment();
+			BaseSimpleWidgetInfoFragment settingsFragment = new BaseSimpleWidgetInfoFragment();
 			settingsFragment.setWidgetType(this);
 			return settingsFragment;
 		} else if (widgetInfo != null && widgetInfo.widget instanceof ISupportWidgetResizing) {
@@ -391,12 +390,12 @@ public enum WidgetType {
 				return settingFragment;
 			}
 		}
-		return null;
+		return new WidgetInfoBaseFragment();
 	}
 
 	@Nullable
-	private WidgetSettingsBaseFragment getOBDWidgetSettings(@NonNull Context ctx,
-	                                                        @Nullable MapWidgetInfo widgetInfo) {
+	private WidgetInfoBaseFragment getOBDWidgetSettings(@NonNull Context ctx,
+	                                                    @Nullable MapWidgetInfo widgetInfo) {
 		if (widgetInfo == null || !isPurchased(ctx)) {
 			return null;
 		}

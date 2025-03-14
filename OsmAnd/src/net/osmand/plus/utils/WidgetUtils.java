@@ -32,51 +32,30 @@ import java.util.TreeMap;
 
 public class WidgetUtils {
 
-	public static void createNewWidgets(@NonNull MapActivity activity, @NonNull List<String> widgetsIds,
-										@NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode,
-										boolean recreateControls) {
-		createNewWidgets(activity, widgetsIds, panel, appMode, recreateControls, null, null);
+	public static void createNewWidget(@NonNull MapActivity activity, @NonNull MapWidgetInfo widgetInfo,
+	                                   @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode,
+	                                   boolean recreateControls) {
+		createNewWidget(activity, widgetInfo, panel, appMode, recreateControls, null, null);
 	}
 
-	public static void createNewWidgets(@NonNull MapActivity activity, @NonNull List<String> widgetsIds,
-	                                    @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode,
-	                                    boolean recreateControls, @Nullable String selectedWidget, @Nullable Boolean addToNext) {
+	public static void createNewWidget(@NonNull MapActivity activity, @NonNull MapWidgetInfo widgetInfo,
+	                                   @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode,
+	                                   boolean recreateControls, @Nullable String selectedWidget, @Nullable Boolean addToNext) {
 		OsmandApplication app = activity.getMyApplication();
-		MapWidgetsFactory widgetsFactory = new MapWidgetsFactory(activity);
 		MapLayers mapLayers = app.getOsmandMap().getMapLayers();
 		MapWidgetRegistry widgetRegistry = mapLayers.getMapWidgetRegistry();
-		for (String widgetId : widgetsIds) {
-			MapWidgetInfo widgetInfo = createDuplicateWidget(activity, widgetId, panel, widgetsFactory, appMode);
-			if (widgetInfo != null) {
-				if (addToNext != null && selectedWidget != null && widgetInfo.widget instanceof ISupportMultiRow) {
-					addWidgetToSpecificPlace(activity, widgetInfo, panel, appMode, selectedWidget, addToNext);
-				} else {
-					addWidgetToEnd(activity, widgetInfo, panel, appMode);
-				}
-				widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, true, false);
-			}
+
+		app.getSettings().CUSTOM_WIDGETS_KEYS.addValue(widgetInfo.key);
+		if (addToNext != null && selectedWidget != null && widgetInfo.widget instanceof ISupportMultiRow) {
+			addWidgetToSpecificPlace(activity, widgetInfo, panel, appMode, selectedWidget, addToNext);
+		} else {
+			addWidgetToEnd(activity, widgetInfo, panel, appMode);
 		}
+		widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, true, false);
 		MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
 		if (mapInfoLayer != null && recreateControls) {
 			mapInfoLayer.recreateControls();
 		}
-	}
-
-	@Nullable
-	public static MapWidgetInfo createDuplicateWidget(@NonNull MapActivity mapActivity, @NonNull String widgetId, @NonNull WidgetsPanel panel,
-													  @NonNull MapWidgetsFactory widgetsFactory, @NonNull ApplicationMode selectedAppMode) {
-		OsmandApplication app = mapActivity.getMyApplication();
-		WidgetType widgetType = WidgetType.getById(widgetId);
-		if (widgetType != null) {
-			String id = widgetId.contains(DELIMITER) ? widgetId : WidgetType.getDuplicateWidgetId(widgetId);
-			MapWidget widget = widgetsFactory.createMapWidget(id, widgetType, panel);
-			if (widget != null) {
-				app.getSettings().CUSTOM_WIDGETS_KEYS.addValue(id);
-				WidgetInfoCreator creator = new WidgetInfoCreator(app, selectedAppMode);
-				return creator.askCreateWidgetInfo(id, widget, widgetType, panel);
-			}
-		}
-		return null;
 	}
 
 	private static void addWidgetToSpecificPlace(@NonNull MapActivity mapActivity, @NonNull MapWidgetInfo targetWidget,

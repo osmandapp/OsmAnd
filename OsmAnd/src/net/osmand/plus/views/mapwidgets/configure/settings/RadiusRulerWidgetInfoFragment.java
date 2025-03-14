@@ -22,7 +22,7 @@ import java.util.List;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
-public class RadiusRulerWidgetSettingsFragment extends WidgetSettingsBaseFragment {
+public class RadiusRulerWidgetInfoFragment extends WidgetInfoBaseFragment {
 
 	private static final String KEY_RADIUS_RULER_MODE = "radius_ruler_mode";
 	private static final String KEY_SHOW_COMPASS = "show_compass";
@@ -49,7 +49,7 @@ public class RadiusRulerWidgetSettingsFragment extends WidgetSettingsBaseFragmen
 	}
 
 	@Override
-	protected void setupContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
+	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
 		themedInflater.inflate(R.layout.radius_ruler_widget_settings_fragment, container);
 
 		setupRadiusRulerModeSetting();

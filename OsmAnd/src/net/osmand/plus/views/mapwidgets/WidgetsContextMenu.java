@@ -1,7 +1,7 @@
 package net.osmand.plus.views.mapwidgets;
 
-import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_APP_MODE;
-import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_WIDGET_ID;
+import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetInfoBaseFragment.KEY_APP_MODE;
+import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetInfoBaseFragment.KEY_WIDGET_ID;
 
 import android.os.Bundle;
 import android.view.View;
@@ -19,7 +19,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment;
-import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.WidgetInfoBaseFragment;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportMultiRow;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
@@ -35,7 +35,8 @@ public class WidgetsContextMenu {
 
 	static public void showMenu(@NonNull View view, @NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
 	                            @Nullable String customId, @Nullable List<PopUpMenuItem> widgetActions,
-	                            boolean verticalWidget, boolean nightMode) {
+	                            WidgetsPanel widgetsPanel, boolean nightMode) {
+		boolean verticalWidget = widgetsPanel.isPanelVertical();
 		OsmandApplication app = mapActivity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		List<PopUpMenuItem> items = new ArrayList<>();
@@ -66,7 +67,7 @@ public class WidgetsContextMenu {
 				items.addAll(widgetActions);
 			}
 
-			WidgetSettingsBaseFragment fragment = widgetType.getSettingsFragment(app, widgetInfo);
+			WidgetInfoBaseFragment fragment = widgetType.getSettingsFragment(app, widgetInfo);
 			if (fragment != null) {
 				items.add(new PopUpMenuItem.Builder(app)
 						.setTitleId(R.string.shared_string_settings)
@@ -75,7 +76,7 @@ public class WidgetsContextMenu {
 							args.putString(KEY_WIDGET_ID, widgetInfo.key);
 							args.putString(KEY_APP_MODE, appMode.getStringKey());
 							FragmentManager manager = mapActivity.getSupportFragmentManager();
-							WidgetSettingsBaseFragment.showFragment(manager, args, fragment, null);
+							WidgetInfoBaseFragment.showFragment(manager, fragment, null, appMode, widgetInfo.key, widgetsPanel);
 						})
 						.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_settings_outlined, iconColor))
 						.showTopDivider(Algorithms.isEmpty(widgetActions))

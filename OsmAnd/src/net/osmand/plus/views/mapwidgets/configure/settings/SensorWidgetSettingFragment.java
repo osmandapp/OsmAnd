@@ -18,10 +18,9 @@ import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorTextWidget;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
 import net.osmand.plus.plugins.externalsensors.dialogs.SelectExternalDeviceFragment;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 
-public class SensorWidgetSettingFragment extends BaseSimpleWidgetSettingsFragment implements SelectExternalDeviceFragment.SelectDeviceListener {
+public class SensorWidgetSettingFragment extends BaseSimpleWidgetInfoFragment implements SelectExternalDeviceFragment.SelectDeviceListener {
 
 	private SensorTextWidget sensorWidget;
 	protected ExternalSensorsPlugin plugin;
@@ -30,7 +29,6 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetSettingsFragmen
 	private WidgetType widgetType;
 	private String sourceDeviceId;
 	private AppCompatImageView deviceIcon;
-	private MapWidgetInfo widgetInfo;
 
 	@NonNull
 	@Override
@@ -53,13 +51,13 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetSettingsFragmen
 		super.initParams(bundle);
 		if (widgetInfo == null) {
 			widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
-			if (widgetInfo != null) {
-				widgetType = widgetInfo.getWidgetType();
-				sensorWidget = ((SensorTextWidget) widgetInfo.widget);
-				setupDataSource();
-			} else {
-				dismiss();
-			}
+		}
+		if (widgetInfo != null) {
+			widgetType = widgetInfo.getWidgetType();
+			sensorWidget = ((SensorTextWidget) widgetInfo.widget);
+			setupDataSource();
+		} else {
+			dismiss();
 		}
 	}
 
@@ -70,7 +68,7 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetSettingsFragmen
 	}
 
 	@Override
-	protected void setupContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
+	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
 		themedInflater.inflate(R.layout.sensor_widget_settings_fragment, container);
 		deviceIcon = view.findViewById(R.id.device_icon);
 		view.findViewById(R.id.widget_source_card).setOnClickListener((v) ->
@@ -78,7 +76,6 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetSettingsFragmen
 						this, sensorWidget.getFieldType(), getSourceDeviceId(), false));
 		themedInflater.inflate(R.layout.divider, container);
 		updateSourceDeviceUI();
-		super.setupContent(themedInflater, container);
 	}
 
 	@NonNull

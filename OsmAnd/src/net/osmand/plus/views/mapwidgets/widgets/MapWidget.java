@@ -50,7 +50,7 @@ public abstract class MapWidget {
 
 	protected final View view;
 
-	public MapWidget(@NonNull MapActivity mapActivity, @Nullable WidgetType widgetType,
+	public MapWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType,
 			@Nullable String customId, @Nullable WidgetsPanel panel) {
 		this.app = mapActivity.getMyApplication();
 		this.settings = app.getSettings();
@@ -117,7 +117,7 @@ public abstract class MapWidget {
 		return null;
 	}
 
-	@Nullable
+	@NonNull
 	public WidgetType getWidgetType() {
 		return widgetType;
 	}

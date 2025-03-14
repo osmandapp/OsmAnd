@@ -8,33 +8,29 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.WidgetSize;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgetinterfaces.ISupportWidgetResizing;
-import net.osmand.plus.widgets.alert.AlertDialogData;
-import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.plus.widgets.multistatetoggle.IconToggleButton;
 
 import java.util.List;
 import java.util.Set;
 
-public class BaseResizableWidgetSettingFragment extends WidgetSettingsBaseFragment {
+public class BaseResizableWidgetSettingFragment extends WidgetInfoBaseFragment {
 	private static final String SELECTED_WIDGET_SIZE_ID_KEY = "selected_widget_id_size";
 	protected static final String WIDGET_TYPE_KEY = "widget_type_key";
 
 	protected OsmandPreference<WidgetSize> widgetSizePref;
 	protected WidgetType widgetType;
-	@Nullable
-	private MapWidgetInfo widgetInfo;
 
 	private WidgetSize selectedWidgetSize;
 
@@ -45,7 +41,6 @@ public class BaseResizableWidgetSettingFragment extends WidgetSettingsBaseFragme
 	@Override
 	protected void initParams(@NonNull Bundle bundle) {
 		super.initParams(bundle);
-		widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
 		if (widgetInfo != null && widgetInfo.widget instanceof ISupportWidgetResizing resizableWidget) {
 			widgetSizePref = resizableWidget.getWidgetSizePref();
 			selectedWidgetSize = bundle.containsKey(SELECTED_WIDGET_SIZE_ID_KEY) ? WidgetSize.values()[bundle.getInt(SELECTED_WIDGET_SIZE_ID_KEY)] : widgetSizePref.get();
@@ -70,34 +65,45 @@ public class BaseResizableWidgetSettingFragment extends WidgetSettingsBaseFragme
 	}
 
 	@Override
-	protected void setupContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
+	protected void setupTopContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
 		if (widgetInfo != null && widgetInfo.widget instanceof ISupportWidgetResizing resizableWidget && resizableWidget.allowResize()) {
 			themedInflater.inflate(R.layout.resizable_widget_setting, container);
 
-			View widgetSizeContainer = container.findViewById(R.id.widget_size_container);
-			widgetSizeContainer.setOnClickListener(v -> showPreferenceDialog(container));
-			widgetSizeContainer.setBackground(getPressedStateDrawable());
-			TextView widgetSizeDescription = container.findViewById(R.id.widget_size_description);
-			widgetSizeDescription.setText(selectedWidgetSize.titleId);
+			TextView height = container.findViewById(R.id.height);
+			height.setText(isVerticalPanel ? R.string.row_height : R.string.shared_string_height);
+			setupToggleButtons(view);
 		}
 	}
 
-	private void showPreferenceDialog(ViewGroup container) {
-		int selected = selectedWidgetSize.ordinal();
-		String[] items = new String[WidgetSize.values().length];
-		for (int i = 0; i < items.length; i++) {
-			items[i] = app.getString(WidgetSize.values()[i].getTitleId());
-		}
+	private void setupToggleButtons(@NonNull View view) {
+		IconToggleButton.IconRadioItem large = createToggleButton(view, WidgetSize.LARGE);
+		IconToggleButton.IconRadioItem medium = createToggleButton(view, WidgetSize.MEDIUM);
+		IconToggleButton.IconRadioItem small = createToggleButton(view, WidgetSize.SMALL);
 
-		AlertDialogData dialogData = new AlertDialogData(requireContext(), nightMode)
-				.setTitle(R.string.shared_string_size)
-				.setControlsColor(ColorUtilities.getAppModeColor(app, nightMode));
+		LinearLayout container = view.findViewById(R.id.custom_radio_buttons);
+		IconToggleButton toggleButton = new IconToggleButton(app, container, nightMode);
+		toggleButton.setItems(small, medium, large);
+		toggleButton.setSelectedItem(isMediumHeight() ? medium : isSmallHeight() ? small : large);
+	}
 
-		CustomAlert.showSingleSelection(dialogData, items, selected, v -> {
-			int which = (int) v.getTag();
-			selectedWidgetSize = WidgetSize.values()[which];
-			((TextView) container.findViewById(R.id.widget_size_description)).setText(selectedWidgetSize.getTitleId());
+	@NonNull
+	private IconToggleButton.IconRadioItem createToggleButton(@NonNull View view, @NonNull WidgetSize widgetSize) {
+		IconToggleButton.IconRadioItem item = new IconToggleButton.IconRadioItem(widgetSize.iconId);
+		item.setOnClickListener((radioItem, v) -> {
+			selectedWidgetSize = widgetSize;
+
+			setupToggleButtons(view);
+			return true;
 		});
+		return item;
+	}
+
+	private boolean isMediumHeight() {
+		return selectedWidgetSize == WidgetSize.MEDIUM;
+	}
+
+	private boolean isSmallHeight() {
+		return selectedWidgetSize == WidgetSize.SMALL;
 	}
 
 	@Override
