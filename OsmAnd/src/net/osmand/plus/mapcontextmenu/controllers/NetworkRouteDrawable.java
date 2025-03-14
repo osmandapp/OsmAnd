@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 
+import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.render.MapRenderRepositories;
@@ -20,11 +21,14 @@ import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
+import net.osmand.data.Amenity;
 
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 
@@ -73,6 +77,24 @@ public class NetworkRouteDrawable extends Drawable {
 		}
 	}
 
+	@Nullable
+	public static Drawable getIconByAmenityShieldTags(@NonNull Amenity amenity,
+	                                                  @NonNull OsmandApplication app, boolean nightMode) {
+		Map<String, String> shieldTags = new HashMap<>();
+		for (String tag : amenity.getAdditionalInfoKeys()) {
+			String value = amenity.getAdditionalInfo(tag);
+			shieldTags.put(tag, value);
+		}
+		RouteKey shieldRouteKey = RouteKey.fromShieldTags(shieldTags);
+		if (shieldRouteKey != null) {
+			NetworkRouteDrawable iconDrawable = new NetworkRouteDrawable(app, shieldRouteKey, nightMode);
+			if (iconDrawable.backgroundDrawable != null) {
+				return iconDrawable;
+			}
+		}
+		return null;
+	}
+
 	private void setupTextPaint(boolean nightMode) {
 		paint.setStrokeWidth(1);
 		paint.setAntiAlias(true);
@@ -94,7 +116,7 @@ public class NetworkRouteDrawable extends Drawable {
 			RenderingRuleSearchRequest request = renderer.getSearchRequestWithAppliedCustomRules(storage, nightMode);
 			request.saveState();
 
-			String tag = "route_" + routeKey.type.getName();
+			String tag = "route_" + routeKey.type.getNameToSearchRules();
 			String color = routeKey.getValue("osmc_textcolor");
 
 			request.setInitialTagValueZoom(tag, null, 14, null);

@@ -423,7 +423,7 @@ public class TrackDetailsMenu {
 		QuadRect rect = getRect(chart, chart.getLowestVisibleX(), chart.getHighestVisibleX());
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && rect.left != 0 && rect.right != 0) {
-			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
+			RotatedTileBox tb = mapActivity.getMapView().getRotatedTileBox();
 			int tileBoxWidthPx = 0;
 			int tileBoxHeightPx = 0;
 

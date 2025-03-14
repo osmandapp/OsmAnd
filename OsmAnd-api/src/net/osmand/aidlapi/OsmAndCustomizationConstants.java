@@ -49,6 +49,7 @@ public interface OsmAndCustomizationConstants {
 	String MAP_MARKERS_ID = SHOW_ITEMS_ID_SCHEME + "map_markers";
 	String MAP_SOURCE_ID = SHOW_ITEMS_ID_SCHEME + "map_source";
 	String MAP_BORDERS_ID = SHOW_ITEMS_ID_SCHEME + "map_borders";
+	String COORDINATES_GRID_ID = SHOW_ITEMS_ID_SCHEME + "coordinates_grid";
 	String RECORDING_LAYER = SHOW_ITEMS_ID_SCHEME + "recording_layer";
 	String SHOW_DEPTH_CONTOURS = SHOW_ITEMS_ID_SCHEME + "depth_contours";
 	String MAPILLARY = SHOW_ITEMS_ID_SCHEME + "mapillary";

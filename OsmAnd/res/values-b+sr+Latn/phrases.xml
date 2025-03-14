@@ -2926,7 +2926,7 @@
     <string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Plotun eksplozija: druga ili kasnija detonacija plotun testa</string>
     <string name="poi_nuclear_explosion_salvo_first_detonation">Plotun eksplozija: prva detonacija plotun testa</string>
     <string name="poi_shuffleboard">Kuglanje</string>
-    <string name="poi_netball">Mreža</string>
+    <string name="poi_netball">Netbol</string>
     <string name="poi_motorcycle_sales_used">Prodaja: polovna</string>
     <string name="poi_motorcycle_sales_yes_used">Prodaja: da, polovna</string>
     <string name="poi_motorcycle_sales_no">Prodaja: ne</string>
@@ -4979,7 +4979,7 @@
     <string name="poi_piste_type">Tip staze</string>
     <string name="poi_piste_oneway">Staza je jednosmerna</string>
     <string name="poi_lit">Osvetljenje</string>
-    <string name="poi_network_cycling">Biciklizam</string>
+    <string name="poi_network_cycling">Mreža</string>
     <string name="poi_network_nwn">Nacionalna pešačka ruta</string>
     <string name="poi_network_lwn">Lokalna pešačka ruta</string>
     <string name="poi_network_icn">Međunarodna biciklistička ruta</string>

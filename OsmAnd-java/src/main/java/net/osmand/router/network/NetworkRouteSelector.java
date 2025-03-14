@@ -9,6 +9,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.osm.OsmRouteType;
 import net.osmand.router.network.NetworkRouteContext.NetworkRouteSegment;
 import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -827,7 +828,8 @@ public class NetworkRouteSelector {
 			return "";
 		}
 
-		public static RouteKey fromGpx(Map<String, String> networkRouteKeyTags) {
+		public static RouteKey fromGpxFile(GpxFile gpxFile) {
+			Map<String, String> networkRouteKeyTags = gpxFile.getNetworkRouteKeyTags();
 			String type = networkRouteKeyTags.get(NETWORK_ROUTE_TYPE);
 			if (!Algorithms.isEmpty(type)) {
 				OsmRouteType routeType = OsmRouteType.getByTag(type);
@@ -838,6 +840,38 @@ public class NetworkRouteSelector {
 					}
 					return routeKey;
 				}
+			}
+			Metadata metadata = gpxFile.getMetadata();
+			Map<String, String> combinedExtensionsTags = new LinkedHashMap<>();
+			combinedExtensionsTags.putAll(metadata.getExtensionsToRead());
+			combinedExtensionsTags.putAll(gpxFile.getExtensionsToRead());
+			return fromShieldTags(combinedExtensionsTags);
+		}
+
+		private static final Map<String, String> SHIELD_TO_OSMC = Map.ofEntries(
+				Map.entry("shield_bg", "osmc_background"),
+				Map.entry("shield_fg", "osmc_foreground"),
+				Map.entry("shield_fg_2", "osmc_foreground2"),
+				Map.entry("shield_textcolor", "osmc_textcolor"),
+				Map.entry("shield_text", "osmc_text")
+		);
+
+		public static RouteKey fromShieldTags(Map<String, String> shieldTags) {
+			if (!shieldTags.isEmpty()) {
+				for (Map.Entry<String, String> entry : SHIELD_TO_OSMC.entrySet()) {
+					String shield = entry.getKey();
+					String osmc = entry.getValue();
+					String value = shieldTags.get(shield);
+					if (value != null) {
+						shieldTags.put(osmc, value
+								.replaceFirst("^osmc_", "")
+								.replaceFirst("_bg$", "")
+						);
+					}
+				}
+				RouteKey tagsAsRouteKey = new RouteKey(OsmRouteType.UNKNOWN);
+				shieldTags.forEach(tagsAsRouteKey::addTag);
+				return tagsAsRouteKey;
 			}
 			return null;
 		}

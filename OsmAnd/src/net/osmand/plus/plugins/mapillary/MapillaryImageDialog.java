@@ -412,7 +412,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	}
 
 	public void fetchTiles() {
-		RotatedTileBox tileBox = getMapActivity().getMapView().getCurrentRotatedTileBox().copy();
+		RotatedTileBox tileBox = getMapActivity().getMapView().getRotatedTileBox();
 		if (fetchedTileLat == tileBox.getLatitude() && fetchedTileLon == tileBox.getLongitude()) {
 			return;
 		}

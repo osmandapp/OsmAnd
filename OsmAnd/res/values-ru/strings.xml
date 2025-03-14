@@ -5944,4 +5944,12 @@
     <string name="hmd_promo_description">Полный доступ к таким возможностям как безлимитная загрузка карт, 3D-рельеф и прочим на %1$s месяцев</string>
     <string name="save_favorite_default_appearance">Применить изменения к существующим точкам в папке или только к новым?</string>
     <string name="show_list">Показать список</string>
+    <string name="popular_places">Популярные места</string>
+    <string name="choose_location_on_map">Выберите местоположение на карте.</string>
+    <string name="choose_location">Выберите местоположение</string>
+    <string name="shared_string_map_center">Центр карты</string>
+    <string name="point_location">Местоположение точки</string>
+    <string name="shared_string_manual">Руководство</string>
+    <string name="layer_coordinates_grid">Координатная сетка</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Действие управляет видимостью сетки координат на карте.</string>
 </resources>

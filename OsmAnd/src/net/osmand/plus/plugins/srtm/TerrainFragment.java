@@ -40,6 +40,7 @@ import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.button.PurchasingUtils;
+import net.osmand.plus.configmap.TerrainZoomLevelsController;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.local.LocalItemType;
@@ -108,7 +109,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
+		srtmPlugin = PluginsHelper.requirePlugin(SRTMPlugin.class);
 		terrainEnabled = srtmPlugin.isTerrainLayerEnabled();
 	}
 
@@ -260,7 +261,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				mapActivity.getDashboard().hideDashboard();
-				TerrainZoomLevelsFragment.showInstance(mapActivity.getSupportFragmentManager());
+				TerrainZoomLevelsController.showDialog(mapActivity, srtmPlugin);
 			}
 		});
 	}

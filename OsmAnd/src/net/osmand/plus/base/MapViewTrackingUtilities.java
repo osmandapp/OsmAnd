@@ -266,7 +266,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}
 		if (mapView != null) {
 			MapRendererView mapRenderer = mapView.getMapRenderer();
-			RotatedTileBox tb = mapView.getCurrentRotatedTileBox().copy();
+			RotatedTileBox tb = mapView.getRotatedTileBox();
 			if (isMapLinkedToLocation() && location != null) {
 				Float rotation = null;
 				boolean pendingRotation = false;

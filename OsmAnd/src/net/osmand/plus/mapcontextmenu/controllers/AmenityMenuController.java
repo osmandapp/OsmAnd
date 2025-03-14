@@ -16,6 +16,7 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -275,6 +276,10 @@ public class AmenityMenuController extends MenuController {
 		String region = amenity.getAdditionalInfo("subway_region");
 		if (region != null) {
 			return RenderingIcons.getBigIcon(getMapActivity(), "subway_" + region);
+		}
+		if (getMapActivity() != null && amenity.isRouteTrack()) {
+			OsmandApplication app = getMapActivity().getMyApplication();
+			return NetworkRouteDrawable.getIconByAmenityShieldTags(amenity, app, !isLight());
 		}
 		return null;
 	}

@@ -62,10 +62,10 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
+import net.osmand.shared.wiki.WikiHelper;
+import net.osmand.shared.wiki.WikiImage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
-import net.osmand.wiki.WikiCoreHelper;
-import net.osmand.wiki.WikiImage;
 
 import org.apache.commons.logging.Log;
 import org.jetbrains.annotations.NotNull;
@@ -90,6 +90,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 	private MapActivity mapActivity;
 
 	private PoiUIFilter topWikiPoiFilter;
+	private PoiUIFilter topWikiOnlinePoiFilter;
 
 	public WikipediaPlugin(OsmandApplication app) {
 		super(app);
@@ -283,7 +284,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 						int colonIdx = url.lastIndexOf(":");
 						if (url.contains(ORG_WIKI_SUFFIX) && colonIdx > 0) {
 							String fileName = url.substring(colonIdx + 1);
-							WikiImage wikiImage = WikiCoreHelper.getImageData(fileName);
+							WikiImage wikiImage = WikiHelper.INSTANCE.getImageData(fileName);
 							if (wikiImage != null) {
 								imageCard = new WikiImageCard(mapActivity, wikiImage);
 							}

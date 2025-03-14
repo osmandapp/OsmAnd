@@ -2174,7 +2174,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	public static void showLocationOnMap(MapActivity mapActivity, double latitude, double longitude) {
-		RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
+		RotatedTileBox tb = mapActivity.getMapView().getRotatedTileBox();
 		int tileBoxWidthPx = 0;
 		int tileBoxHeightPx = 0;
 

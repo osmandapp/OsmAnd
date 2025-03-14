@@ -27,6 +27,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.poi.PoiFilterUtils.AmenityNameFilter;
+import net.osmand.data.DataSourceType;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -53,11 +54,13 @@ import java.util.TreeSet;
 public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilter {
 
 	public static final String STD_PREFIX = "std_";
+	public static final String ONLINE_PREFIX = "online_";
 	public static final String USER_PREFIX = "user_";
 	public static final String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id";
 	public static final String BY_NAME_FILTER_ID = USER_PREFIX + "by_name";
 	public static final String TOP_WIKI_FILTER_ID = STD_PREFIX + OSM_WIKI_CATEGORY;
 	public static final int INVALID_ORDER = -1;
+	public static final int TOP_PLACES_LIMIT = 25;
 
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<>();
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypesOrigin = new LinkedHashMap<>();
@@ -85,11 +88,14 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 
 	private boolean deleted;
 
-	private SearchPoiAdditionalFilter additionalFilter;
+	SearchPoiAdditionalFilter additionalFilter;
+
+	private final PoiUIFilterDataProvider dataProvider;
 
 	// constructor for standard filters
 	public PoiUIFilter(@Nullable AbstractPoiType type, @NonNull OsmandApplication app, @NonNull String idSuffix) {
 		this.app = app;
+		this.dataProvider = new PoiUIFilterDataProvider(app, this);
 		isStandardFilter = true;
 		standardIconId = type == null ? null : type.getKeyName();
 		filterId = STD_PREFIX + standardIconId + idSuffix;
@@ -109,6 +115,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 
 	public PoiUIFilter(TopIndexFilter topIndexFilter, @Nullable Map<PoiCategory, LinkedHashSet<String>> acceptedTypes, @NonNull OsmandApplication app) {
 		this.app = app;
+		this.dataProvider = new PoiUIFilterDataProvider(app, this);
 		isStandardFilter = true;
 		standardIconId = topIndexFilter.getIconResource();
 		filterId = topIndexFilter.getFilterId();
@@ -128,6 +135,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	// search by name standard
 	protected PoiUIFilter(@NonNull OsmandApplication app) {
 		this.app = app;
+		this.dataProvider = new PoiUIFilterDataProvider(app, this);
 		isStandardFilter = true;
 		filterId = STD_PREFIX; // overridden
 		poiTypes = app.getPoiTypes();
@@ -138,6 +146,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	                   @Nullable Map<PoiCategory, LinkedHashSet<String>> acceptedTypes,
 	                   @NonNull OsmandApplication app) {
 		this.app = app;
+		this.dataProvider = new PoiUIFilterDataProvider(app, this);
 		isStandardFilter = false;
 		poiTypes = app.getPoiTypes();
 		if (filterId == null) {
@@ -163,6 +172,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 
 	public PoiUIFilter(@NonNull PoiUIFilter filter, @NonNull String name, @NonNull String filterId) {
 		this.app = filter.app;
+		this.dataProvider = new PoiUIFilterDataProvider(app, this);
 		this.name = name;
 		this.filterId = filterId;
 		isStandardFilter = false;
@@ -172,6 +182,10 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 		filterByName = filter.filterByName;
 		savedFilterByName = filter.savedFilterByName;
 		updateAcceptedTypeOrigins();
+	}
+
+	public DataSourceType getDataSourceType() {
+		return dataProvider.getDataSourceType();
 	}
 
 	public boolean isDeleted() {
@@ -188,6 +202,10 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 
 	public boolean isTopWikiFilter() {
 		return filterId.equals(TOP_WIKI_FILTER_ID);
+	}
+
+	public boolean isTopImagesFilter() {
+		return isTopWikiFilter();
 	}
 
 	public boolean isRoutesFilter() {
@@ -389,8 +407,7 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	                                                double bottomLatitude, double leftLongitude,
 	                                                double rightLongitude, int zoom,
 	                                                ResultMatcher<Amenity> matcher) {
-		return app.getResourceManager().searchAmenities(this, additionalFilter, topLatitude, leftLongitude,
-				bottomLatitude, rightLongitude, zoom, true, wrapResultMatcher(matcher));
+		return dataProvider.searchAmenities(lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude, zoom, matcher);
 	}
 
 	public PoiFilterUtils.AmenityNameFilter getNameFilter() {

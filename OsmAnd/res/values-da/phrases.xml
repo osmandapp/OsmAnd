@@ -1555,15 +1555,15 @@
     <string name="poi_vending_toys">Legetøj</string>
     <string name="poi_vending_ice_cream">Is</string>
     <string name="poi_vending_sim_cards">SIM-kort</string>
-    <string name="poi_branch">Branche</string>
+    <string name="poi_branch">Filial</string>
     <string name="poi_memorial_war">Krigsmindesmærke</string>
-    <string name="poi_memorial_plaque">Plakette</string>
+    <string name="poi_memorial_plaque">Mindetavle</string>
     <string name="poi_memorial_statue">Statue</string>
     <string name="poi_memorial_stone">Sten</string>
     <string name="poi_memorial_stele">Stele</string>
     <string name="poi_memorial_bust">Buste</string>
     <string name="poi_memorial_koshinto">Koshinto</string>
-    <string name="poi_memorial_blue_plaque">Blå plakette</string>
+    <string name="poi_memorial_blue_plaque">Blå mindetavle</string>
     <string name="poi_memorial_jizo">Jizo</string>
     <string name="poi_memorial_cross">Korsform</string>
     <string name="poi_memorial_vehicle">Køretøj</string>
@@ -2026,7 +2026,7 @@
     <string name="poi_step_condition_uneven">Trintilstand: ujævn</string>
     <string name="poi_step_condition_rough">Trintilstand: dårlig</string>
     <string name="poi_cairn">Varde</string>
-    <string name="poi_memorial_fassade_decoration">Facade dekoration</string>
+    <string name="poi_memorial_fassade_decoration">Facadedekoration</string>
     <string name="poi_defibrillator">Hjertestarter;AED</string>
     <string name="poi_defibrillator_yes">Hjertestarter: Ja</string>
     <string name="poi_tomb_war_grave">Type: krigsgrav</string>

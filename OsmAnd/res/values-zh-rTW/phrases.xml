@@ -4976,4 +4976,17 @@
     <string name="poi_atv_no">ATV：否</string>
     <string name="poi_access_notes">通行權說明</string>
     <string name="poi_contact_website">網站</string>
+    <string name="poi_lit">照明</string>
+    <string name="poi_piste_type">軌道類型</string>
+    <string name="poi_piste_oneway">單向軌道</string>
+    <string name="poi_network_foot">網路</string>
+    <string name="poi_network_cycling">網路</string>
+    <string name="poi_network_rwn">區域登山路線</string>
+    <string name="poi_network_lwn">在地登山路線</string>
+    <string name="poi_network_ncn">國家單車路線</string>
+    <string name="poi_network_rcn">區域單車路線</string>
+    <string name="poi_network_lcn">在地單車路線</string>
+    <string name="poi_network_nwn">國家登山路線</string>
+    <string name="poi_network_iwn">國際登山路線</string>
+    <string name="poi_network_icn">國際單車路線</string>
 </resources>

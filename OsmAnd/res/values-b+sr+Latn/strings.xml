@@ -4930,7 +4930,7 @@
 \n
 \nMolim, unesite adresu e-pošte kojom ste se upisali. Lozinka za jednokratnu upotrebu će Vam biti poslata.</string>
     <string name="verify_account">Potvrdite svoj nalog</string>
-    <string name="terrain_map">Mapa terena (3D)</string>
+    <string name="terrain_map">Terenska mapa (3D)</string>
     <string name="slope_legend_description">Padine koriste boje za prikaz nagiba tla. Možeš čitati više o nagibu u %1$s.</string>
     <string name="power_watts_unit">Vati</string>
     <string name="calculate_offline">Izračunaj bez interneta</string>
@@ -5708,4 +5708,7 @@
     <string name="shared_string_manual">Uputstvo</string>
     <string name="shared_string_map_center">Centar mape</string>
     <string name="choose_location_on_map">Izaberite lokaciju na mapi.</string>
+    <string name="layer_coordinates_grid">Mreža koordinata</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Akcija za kontrolu vidljivosti mreže koordinata na mapi.</string>
+    <string name="show_image_previews">Prikaži pretpregled slika</string>
 </resources>

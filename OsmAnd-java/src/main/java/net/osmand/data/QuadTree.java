@@ -115,4 +115,46 @@ public class QuadTree<T> {
 		n[3] = new QuadRect(lx + (hx - lx) * (1 - ratio), ly + (hy - ly) * (1 - ratio), hx, hy);
 	}
 
+	public interface QuadTreeItemInQuadRect<T> {
+		public boolean contains(QuadRect rect, T item);
+	}
+
+	public boolean checkIntersection(QuadRect bbox, int hintDepth, QuadTreeItemInQuadRect<T> contains) {
+		// Adjust hintDepth if it exceeds the tree's maxDepth
+		if (hintDepth != -1 && hintDepth > maxDepth) {
+			hintDepth = -1;
+		}
+		return checkIntersectionRecursive(bbox, root, 0, hintDepth, contains);
+	}
+
+	private boolean checkIntersectionRecursive(QuadRect bbox, Node<T> node, int currentDepth, int targetDepth,
+											   QuadTreeItemInQuadRect<T> contains) {
+		if (node == null || !QuadRect.intersects(bbox, node.bounds)) {
+			return false;
+		}
+		if (targetDepth != -1) {
+			// Check for intersection at the specified depth
+			if (currentDepth == targetDepth) {
+				return true; // Node's bounds intersect at target depth
+			} else if (currentDepth > targetDepth) {
+				return false; // Current depth exceeds target (adjusted) depth
+			}
+		}
+		// Precise check: look for data intersecting the bbox
+		if (node.data != null) {
+			for (T item : node.data) {
+				if (contains.contains(bbox, item)) {
+					return true;
+				}
+			}
+		}
+		// Recurse into children to check all relevant nodes
+		for (int i = 0; i < 4; i++) {
+			if (checkIntersectionRecursive(bbox, node.children[i], currentDepth + 1, targetDepth, contains)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

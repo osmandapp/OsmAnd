@@ -51,10 +51,10 @@ public class VehicleParametersBottomSheet extends BaseTextFieldBottomSheet {
 
 		title.setText(sizePreference.getTitle().toString());
 
-		Drawable icon = getIcon(data.getAssets().getIconId(nightMode));
+		Drawable icon = getIcon(data.assets().getIconId(nightMode));
 		ivImage.setImageDrawable(icon);
 
-		String description = getString(data.getAssets().getDescriptionId());
+		String description = getString(data.assets().getDescriptionId());
 		tvDescription.setText(description);
 
 		int metricStringId = vehicleSizes.getMetricStringId(sizeType, metric);

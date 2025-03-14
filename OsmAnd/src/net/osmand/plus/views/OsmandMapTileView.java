@@ -32,17 +32,8 @@ import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.ColorARGB;
-import net.osmand.core.jni.FColorARGB;
-import net.osmand.core.jni.GridConfiguration;
+import net.osmand.core.jni.*;
 import net.osmand.core.jni.GridConfiguration.Projection;
-import net.osmand.core.jni.GridMarksProvider;
-import net.osmand.core.jni.MapAnimator;
-import net.osmand.core.jni.MapRendererDebugSettings;
-import net.osmand.core.jni.PointD;
-import net.osmand.core.jni.PointI;
-import net.osmand.core.jni.TextRasterizer;
-import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadPointDouble;
@@ -61,7 +52,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.auto.views.CarSurfaceView;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.card.color.palette.migration.ColorsMigrationAlgorithmV2;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.TwoFingerTapDetector;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
@@ -71,6 +61,7 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.render.UpdateRendererAsyncTask;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
+import net.osmand.plus.settings.enums.GridFormat;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -127,6 +118,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private boolean DISABLE_MAP_LAYERS;
 	private StateChangedListener<Boolean> disableMapLayersListener;
+
+	private StateChangedListener gridSettingsListener;
 
 	private View view;
 	private final Context ctx;
@@ -314,6 +307,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		DISABLE_MAP_LAYERS = settings.DISABLE_MAP_LAYERS.get();
 		disableMapLayersListener = change -> DISABLE_MAP_LAYERS = change;
 		settings.DISABLE_MAP_LAYERS.addListener(disableMapLayersListener);
+
+		gridSettingsListener = this::onUpdateGridSettings;
+		settings.SHOW_COORDINATES_GRID.addListener(gridSettingsListener);
+		settings.COORDINATE_GRID_FORMAT.addListener(gridSettingsListener);
+		settings.COORDINATE_GRID_MIN_ZOOM.addListener(gridSettingsListener);
+		settings.COORDINATE_GRID_MAX_ZOOM.addListener(gridSettingsListener);
+		settings.COORDINATES_FORMAT.addListener(gridSettingsListener);
 	}
 
 	public void updateDisplayMetrics(DisplayMetrics dm, int width, int height) {
@@ -647,6 +647,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (app.accessibilityEnabled()) {
 			app.showShortToastMessage(app.getString(R.string.zoomIs) + " " + zoom.getBaseZoom());
 		}
+		updateGridSettings();
 
 		for (ManualZoomListener listener : manualZoomListeners) {
 			listener.onManualZoomChange();
@@ -2249,7 +2250,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		@Override
 		public void onZoomStarted(PointF centerPoint) {
 			initialMultiTouchCenterPoint = centerPoint;
-			initialViewport = getCurrentRotatedTileBox().copy();
+			initialViewport = getRotatedTileBox();
 			MapRendererView mapRenderer = getMapRenderer();
 			initialCenterLatLon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, initialViewport,
 					initialMultiTouchCenterPoint.x, initialMultiTouchCenterPoint.y);
@@ -2554,59 +2555,64 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	public void applyGridSettings(MapRendererView mapRenderer) {
-		OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-		if (plugin != null) {
-			float textScale = app.getSettings().TEXT_SCALE.get() * getDensity();
-			boolean show = plugin.SHOW_GRID.get();
-			boolean useUTM = plugin.SHOW_UTM_GRID.get();
-			boolean useMercator = plugin.SHOW_MERCATOR_GRID.get();
-			boolean useDMS = plugin.SHOW_DMS_GRID.get();
-			boolean useDM = plugin.SHOW_DM_GRID.get();
-			FColorARGB color = new FColorARGB(1.0f, 0.1f, 0.0f, 0.8f);
-			GridConfiguration gridConfiguration = new GridConfiguration();
-			gridConfiguration.setPrimaryGrid(show);
-			gridConfiguration.setPrimaryProjection(Projection.WGS84);
-			gridConfiguration.setPrimaryColor(color);
-			gridConfiguration.setSecondaryGrid(show);
-			gridConfiguration.setSecondaryProjection(useMercator ? Projection.Mercator
-					: (useUTM ? Projection.UTM : Projection.WGS84));
-			gridConfiguration.setSecondaryFormat(useDM ? GridConfiguration.Format.DM
-					: (useDMS ? GridConfiguration.Format.DMS : GridConfiguration.Format.Decimal));
-			gridConfiguration.setSecondaryColor(color);
-			mapRenderer.setGridConfiguration(gridConfiguration);
-			if (gridMarksProvider != null) {
-				mapRenderer.removeSymbolsProvider(gridMarksProvider);
-				gridMarksProvider = null;
+	public <T> void onUpdateGridSettings(@NonNull T changed) {
+		updateGridSettings();
+	}
+
+	public void updateGridSettings() {
+		if (mapRenderer != null) {
+			applyGridSettings(mapRenderer);
+		}
+	}
+
+	public void applyGridSettings(@NonNull MapRendererView mapRenderer) {
+		int zoom = getZoom();
+		int minZoom = settings.COORDINATE_GRID_MIN_ZOOM.get();
+		int maxZoom = settings.COORDINATE_GRID_MAX_ZOOM.get();
+		boolean isAvailableZoom = zoom >= minZoom && zoom <= maxZoom;
+		boolean show = isAvailableZoom && settings.SHOW_COORDINATES_GRID.get();
+
+		GridFormat gridFormat = settings.COORDINATE_GRID_FORMAT.get();
+		FColorARGB color = new FColorARGB(1.0f, 0.1f, 0.0f, 0.8f);
+		GridConfiguration gridConfiguration = new GridConfiguration();
+		gridConfiguration.setPrimaryGrid(show);
+		gridConfiguration.setPrimaryProjection(Projection.WGS84);
+		gridConfiguration.setPrimaryColor(color);
+		gridConfiguration.setSecondaryGrid(show);
+		gridConfiguration.setSecondaryProjection(gridFormat.getProjection());
+		gridConfiguration.setSecondaryFormat(gridFormat.getFormat());
+		gridConfiguration.setSecondaryColor(color);
+		mapRenderer.setGridConfiguration(gridConfiguration);
+		if (gridMarksProvider != null) {
+			mapRenderer.removeSymbolsProvider(gridMarksProvider);
+			gridMarksProvider = null;
+		}
+		if (show) {
+			float textScale = settings.TEXT_SCALE.get() * getDensity();
+			gridMarksProvider = new GridMarksProvider();
+			FColorARGB haloColor = new FColorARGB(0.5f, 1.0f, 1.0f, 1.0f);
+			TextRasterizer.Style primaryMarksStyle = new TextRasterizer.Style();
+			primaryMarksStyle.setColor(new ColorARGB(color));
+			primaryMarksStyle.setHaloColor(new ColorARGB(haloColor));
+			primaryMarksStyle.setHaloRadius((int) (3.0f * textScale));
+			primaryMarksStyle.setSize(16.0f * textScale);
+			primaryMarksStyle.setBold(true);
+			primaryMarksStyle.setTextAlignment(TextRasterizer.Style.TextAlignment.Under);
+			gridMarksProvider.setPrimaryStyle(primaryMarksStyle, 2.0f * textScale);
+			gridMarksProvider.setPrimary(false, "Equator", "", "Prime meridian", "180th meridian");
+			TextRasterizer.Style secondaryMarksStyle = new TextRasterizer.Style();
+			secondaryMarksStyle.setColor(new ColorARGB(color));
+			secondaryMarksStyle.setHaloColor(new ColorARGB(haloColor));
+			secondaryMarksStyle.setHaloRadius((int) (3.0f * textScale));
+			secondaryMarksStyle.setSize(16.0f * textScale);
+			secondaryMarksStyle.setBold(true);
+			gridMarksProvider.setSecondaryStyle(secondaryMarksStyle, 2.0f * textScale);
+			if (gridFormat.getProjection() == Projection.UTM) {
+				gridMarksProvider.setSecondary(true, "", "", "", "");
+			} else {
+				gridMarksProvider.setSecondary(true, "N", "S", "E", "W");
 			}
-			if (show) {
-				gridMarksProvider = new GridMarksProvider();
-				FColorARGB haloColor = new FColorARGB(0.5f, 1.0f, 1.0f, 1.0f);
-				TextRasterizer.Style primaryMarksStyle = new TextRasterizer.Style();
-				primaryMarksStyle.setColor(new ColorARGB(color));
-				primaryMarksStyle.setHaloColor(new ColorARGB(haloColor));
-				primaryMarksStyle.setHaloRadius((int) (3.0f * textScale));
-				primaryMarksStyle.setSize(16.0f * textScale);
-				primaryMarksStyle.setBold(true);
-				primaryMarksStyle.setTextAlignment(TextRasterizer.Style.TextAlignment.Under);
-				gridMarksProvider.setPrimaryStyle(primaryMarksStyle, 2.0f * textScale);
-				gridMarksProvider.setPrimary(false, "Equator", "", "Prime meridian", "180th meridian");
-				TextRasterizer.Style secondaryMarksStyle = new TextRasterizer.Style();
-				secondaryMarksStyle.setColor(new ColorARGB(color));
-				secondaryMarksStyle.setHaloColor(new ColorARGB(haloColor));
-				secondaryMarksStyle.setHaloRadius((int) (3.0f * textScale));
-				secondaryMarksStyle.setSize(16.0f * textScale);
-				secondaryMarksStyle.setBold(true);
-				gridMarksProvider.setSecondaryStyle(secondaryMarksStyle, 2.0f * textScale);
-				if (useMercator) {
-					gridMarksProvider.setSecondary(true, "km", "km", "km", "km");
-				} else if (useUTM) {
-					gridMarksProvider.setSecondary(true, "", "", "", "");
-				} else {
-					gridMarksProvider.setSecondary(true, "N", "S", "E", "W");
-				}
-				mapRenderer.addSymbolsProvider(gridMarksProvider);
-			}
+			mapRenderer.addSymbolsProvider(gridMarksProvider);
 		}
 	}
 

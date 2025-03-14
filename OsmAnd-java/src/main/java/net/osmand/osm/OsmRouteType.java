@@ -61,6 +61,9 @@ public class OsmRouteType {
 	public static final OsmRouteType TRAM = createType("tram").reg();
 	public static final OsmRouteType TROLLEYBUS = createType("trolleybus").reg();
 	public static final OsmRouteType CLIMBING = createType("climbing").renderingPropertyAttr(CLIMBING_ROUTES).reg();
+
+	// OsmRouteType.UNKNOWN is used for TravelGpx OSM routes.
+	// It allows us to reuse code of RouteInfoCard, RouteKey icons, etc.
 	public static final OsmRouteType UNKNOWN = createType("unknown").reg();
 
 	// less specific bottom order
@@ -78,6 +81,11 @@ public class OsmRouteType {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getNameToSearchRules() {
+		// Use HIKING as default rendering rules source for UNKNOWN.
+		return this == UNKNOWN ? OsmRouteType.HIKING.getName() : name;
 	}
 
 	public String getColor() {

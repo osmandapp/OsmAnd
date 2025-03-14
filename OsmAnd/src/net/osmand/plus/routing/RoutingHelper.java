@@ -306,11 +306,12 @@ public class RoutingHelper {
 		return route.getImmutableAllLocations();
 	}
 
-	public void setAppMode(ApplicationMode mode) {
+	public void setAppMode(@NonNull ApplicationMode mode) {
 		this.mode = mode;
 		voiceRouter.updateAppMode();
 	}
 
+	@NonNull
 	public ApplicationMode getAppMode() {
 		return mode;
 	}
@@ -525,7 +526,7 @@ public class RoutingHelper {
 		// 2. check if intermediate found
 		if (route.getIntermediatePointsToPass() > 0
 				&& route.getDistanceToNextIntermediate(lastFixedLocation) < voiceRouter.getArrivalDistance() && !isRoutePlanningMode) {
-			showMessage(app.getString(R.string.arrived_at_intermediate_point));
+			app.showToastMessage(R.string.arrived_at_intermediate_point);
 			route.passIntermediatePoint();
 			TargetPointsHelper targets = app.getTargetPointsHelper();
 			String name = "";
@@ -899,10 +900,6 @@ public class RoutingHelper {
 
 	public boolean isRouteBeingCalculated() {
 		return routeRecalculationHelper.isRouteBeingCalculated();
-	}
-
-	private void showMessage(String msg) {
-		app.runInUIThread(() -> app.showToastMessage(msg));
 	}
 
 	@NonNull

@@ -209,15 +209,14 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		dialogFragment.hideToolbar();
 		dialogFragment.hide();
 
-		if (pair.second instanceof Amenity && ((Amenity) pair.second).isRouteTrack()) {
-			Amenity amenity = (Amenity) pair.second;
+		if (getMapActivity() == null) {
+			return;
+		}
+
+		if (pair.second instanceof Amenity amenity) {
 			TravelHelper travelHelper = app.getTravelHelper();
-			TravelGpx travelGpx = travelHelper.searchTravelGpx(amenity.getLocation(), amenity.getRouteId());
-			if (travelGpx != null) {
-				travelHelper.openTrackMenu(travelGpx, getMapActivity(), amenity.getGpxFileName(null), amenity.getLocation(), true);
-			} else {
-				LOG.error("showResultWithLocation() searchTravelGpx() travelGpx is null");
-			}
+			TravelGpx travelGpx = new TravelGpx(amenity);
+			travelHelper.openTrackMenu(travelGpx, getMapActivity(), amenity.getGpxFileName(null), amenity.getLocation(), true);
 		} else {
 			showOnMap(getMapActivity(), dialogFragment,
 					searchResult.location.getLatitude(), searchResult.location.getLongitude(),

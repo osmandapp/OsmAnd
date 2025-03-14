@@ -4,9 +4,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
-import net.osmand.data.ExploreTopPlacePoint;
 import net.osmand.data.QuadRect;
-import net.osmand.plus.activities.MapActivity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -15,17 +13,13 @@ import java.util.List;
 public interface ExplorePlacesProvider {
 
 	public final int MAX_LEVEL_ZOOM_CACHE = 13;
-	@NotNull List<ExploreTopPlacePoint> getDataCollection(QuadRect mapRect);
+	@NotNull List<Amenity> getDataCollection(QuadRect mapRect);
 
-	@NotNull List<ExploreTopPlacePoint> getDataCollection(QuadRect mapRect, int limit);
-
-	void showPointInContextMenu(@NotNull MapActivity mapActivity, @NotNull ExploreTopPlacePoint item);
+	@NotNull List<Amenity> getDataCollection(QuadRect mapRect, int limit);
 
 	void addListener(ExplorePlacesListener listener);
 
 	void removeListener(ExplorePlacesListener listener);
-
-	Amenity getAmenity(LatLon latLon, long id);
 
 	boolean isLoading();
 

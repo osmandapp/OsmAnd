@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import net.osmand.Location
 import net.osmand.PlatformUtil
-import net.osmand.data.ExploreTopPlacePoint
+import net.osmand.data.Amenity
 import net.osmand.data.QuadRect
 import net.osmand.data.RotatedTileBox
 import net.osmand.map.IMapLocationListener
@@ -26,6 +26,7 @@ import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.base.BaseOsmAndFragment
 import net.osmand.plus.helpers.AndroidUiHelper
+import net.osmand.plus.plugins.PluginsHelper
 import net.osmand.plus.search.NearbyPlacesAdapter
 import net.osmand.plus.search.ShowQuickSearchMode
 import net.osmand.plus.search.dialogs.ExplorePlacesNearbyToolbarController
@@ -35,6 +36,7 @@ import net.osmand.plus.views.OsmandMapTileView
 import net.osmand.plus.views.controls.maphudbuttons.MyLocationButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomInButton
 import net.osmand.plus.views.controls.maphudbuttons.ZoomOutButton
+import net.osmand.plus.wikipedia.WikipediaPlugin
 import net.osmand.util.MapUtils
 import org.apache.commons.logging.Log
 import kotlin.math.abs
@@ -97,6 +99,35 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		}
 	}
 
+	private val bottomSheetCallback = object :
+		BottomSheetBehavior.BottomSheetCallback() {
+		override fun onStateChanged(bottomSheet: View, newState: Int) {
+			verticalNearbyList?.let { recyclerView ->
+				val minPeekHeight =
+					resources.getDimensionPixelSize(R.dimen.bottom_sheet_min_peek_height)
+				val defaultPeekHeight =
+					resources.getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height)
+				bottomSheetBehavior.peekHeight =
+					if (recyclerView.measuredHeight < defaultPeekHeight) {
+						minPeekHeight
+					} else {
+						defaultPeekHeight
+					}
+			}
+			isMapVisible = newState != BottomSheetBehavior.STATE_EXPANDED
+			toggleWikipediaLayer(isMapVisible)
+			updateMapControls(newState)
+			AndroidUiHelper.updateVisibility(
+				showOnMapContainer,
+				newState == BottomSheetBehavior.STATE_EXPANDED)
+			bottomSheetBehavior.isDraggable = isMapVisible
+			updateShowListButton()
+		}
+
+		override fun onSlide(bottomSheet: View, slideOffset: Float) {
+		}
+	}
+
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		AndroidUtils.addStatusBarPadding21v(requireActivity(), view)
@@ -116,35 +147,12 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 			resources.getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height)
 		bottomSheetBehavior.isHideable = true
 		bottomSheetBehavior.isDraggable = false
-		bottomSheetBehavior.addBottomSheetCallback(object :
-			BottomSheetBehavior.BottomSheetCallback() {
-			override fun onStateChanged(bottomSheet: View, newState: Int) {
-				verticalNearbyList?.let { recyclerView ->
-					val minPeekHeight =
-						resources.getDimensionPixelSize(R.dimen.bottom_sheet_min_peek_height)
-					val defaultPeekHeight =
-						resources.getDimensionPixelSize(R.dimen.bottom_sheet_menu_peek_height)
-					bottomSheetBehavior.peekHeight =
-						if (recyclerView.measuredHeight < defaultPeekHeight) {
-							minPeekHeight
-						} else {
-							defaultPeekHeight
-						}
-				}
-				isMapVisible = newState != BottomSheetBehavior.STATE_EXPANDED
-				app.osmandMap.mapLayers.explorePlacesLayer.enableLayer(isMapVisible)
-				updateMapControls(newState)
-				AndroidUiHelper.updateVisibility(
-					showOnMapContainer,
-					newState == BottomSheetBehavior.STATE_EXPANDED)
-				bottomSheetBehavior.isDraggable = isMapVisible
-				updateShowListButton()
-			}
-
-			override fun onSlide(bottomSheet: View, slideOffset: Float) {
-			}
-		})
 		updateShowListButton()
+	}
+
+	private fun toggleWikipediaLayer(enable: Boolean) {
+		val wikiPlugin: WikipediaPlugin? = PluginsHelper.getPlugin(WikipediaPlugin::class.java)
+		wikiPlugin?.toggleWikipediaPoi(enable, null)
 	}
 
 	private fun updateShowListButton() {
@@ -172,6 +180,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 
 	override fun onResume() {
 		super.onResume()
+		bottomSheetBehavior.addBottomSheetCallback(bottomSheetCallback)
 		app.locationProvider.addLocationListener(this)
 		app.locationProvider.addCompassListener(this)
 		app.osmandMap.mapView.addMapLocationListener(this)
@@ -182,7 +191,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	private fun updatePointsList() {
 		mapActivity?.let {
 			val now = System.currentTimeMillis()
-			val tileBox = it.mapView.currentRotatedTileBox
+			val tileBox = it.mapView.rotatedTileBox
 			val rect = tileBox.latLonBounds
 			val extended: RotatedTileBox = tileBox.copy()
 			extended.increasePixelDimensions(tileBox.pixWidth / 4, tileBox.pixHeight / 4)
@@ -202,7 +211,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 
 	override fun onPause() {
 		super.onPause()
-		val app = requireActivity().application as OsmandApplication
+		bottomSheetBehavior.removeBottomSheetCallback(bottomSheetCallback)
 		app.locationProvider.removeLocationListener(this)
 		app.locationProvider.removeCompassListener(this)
 		app.osmandMap.mapView.removeMapLocationListener(this)
@@ -275,10 +284,11 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		}
 	}
 
-	override fun onNearbyItemClicked(item: ExploreTopPlacePoint) {
+	override fun onNearbyItemClicked(amenity: Amenity) {
 		mapActivity?.let {
 			isMapVisible = true
-			app.explorePlacesProvider.showPointInContextMenu(it, item)
+			// TODO: Fix
+			//app.explorePlacesProvider.showPointInContextMenu(it, amenity)
 			hideList()
 		}
 	}
@@ -351,7 +361,7 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 	}
 
 	private fun closeFragment() {
-		app.osmandMap.mapLayers.explorePlacesLayer.enableLayer(false)
+		toggleWikipediaLayer(false)
 		mapActivity?.let { activity ->
 			val nearbyPlacesFragment = activity.fragmentsHelper.explorePlacesFragment
 			if (nearbyPlacesFragment != null) {

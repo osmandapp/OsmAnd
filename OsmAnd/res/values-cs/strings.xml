@@ -5722,4 +5722,7 @@
     <string name="shared_string_map_center">Střed mapy</string>
     <string name="choose_location_on_map">Vyberte polohu na mapě.</string>
     <string name="choose_location">Vybrat polohu</string>
+    <string name="show_image_previews">Zobrazit náhledy obrázků</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Akce pro ovládání viditelnosti souřadnicové sítě na mapě.</string>
+    <string name="layer_coordinates_grid">Souřadnicová síť</string>
 </resources>

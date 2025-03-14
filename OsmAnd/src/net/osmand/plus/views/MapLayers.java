@@ -76,7 +76,6 @@ public class MapLayers {
 	private PreviewRouteLineLayer previewRouteLineLayer;
 	private POIMapLayer poiMapLayer;
 	private FavouritesLayer mFavouritesLayer;
-	private ExploreTopPlacesLayer explorePlacesLayer;
 	private TransportStopsLayer transportStopsLayer;
 	private PointLocationLayer locationLayer;
 	private RadiusRulerControlLayer radiusRulerControlLayer;
@@ -189,8 +188,6 @@ public class MapLayers {
 		mapInfoLayer = new MapInfoLayer(app, routeLayer);
 		mapView.addLayer(mapInfoLayer, 9);
 
-		explorePlacesLayer = new ExploreTopPlacesLayer(app);
-		mapView.addLayer(explorePlacesLayer, 4.1f);
 		// 11. route info layer
 		mapControlsLayer = new MapControlsLayer(app);
 		mapView.addLayer(mapControlsLayer, 11);
@@ -629,10 +626,6 @@ public class MapLayers {
 
 	public FavouritesLayer getFavouritesLayer() {
 		return mFavouritesLayer;
-	}
-
-	public ExploreTopPlacesLayer getExplorePlacesLayer() {
-		return explorePlacesLayer;
 	}
 
 	public MeasurementToolLayer getMeasurementToolLayer() {
