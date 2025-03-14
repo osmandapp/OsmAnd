@@ -15,7 +15,7 @@ public class WidgetsTabAdapter extends FragmentStateAdapter {
 	@NonNull
 	@Override
 	public Fragment createFragment(int position) {
-		WidgetsListFragment fragment = new WidgetsListFragment();
+		WidgetsListFragmentV2 fragment = new WidgetsListFragmentV2();
 		fragment.setSelectedPanel(WidgetsPanel.values()[position]);
 		return fragment;
 	}
