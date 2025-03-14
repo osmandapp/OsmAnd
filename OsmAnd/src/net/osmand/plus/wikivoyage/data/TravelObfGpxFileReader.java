@@ -347,10 +347,11 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                 continue;
             }
 
-            if (travelGpx.hasNonIndexedOsmRouteId()) {
-                repo.searchPoi(pointRequest);
-            } else {
-                repo.searchPoiByName(pointRequest);
+            if (!Algorithms.isEmpty(travelGpx.routeId)) {
+                repo.searchPoiByName(pointRequest); // indexed route_id
+            }
+            if (currentAmenities.isEmpty()) {
+                repo.searchPoi(pointRequest); // try non-indexed route_id
             }
             if (currentAmenities.isEmpty()) {
                 continue;
