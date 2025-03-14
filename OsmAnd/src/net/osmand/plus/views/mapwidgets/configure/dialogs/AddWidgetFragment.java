@@ -37,13 +37,10 @@ import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.banner.WidgetPromoBanner;
-import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment;
-import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment;
 import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -259,11 +256,6 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 		return TAG;
 	}
 
-	/**
-	 * @param alreadySelectedWidgetsIds If in edit mode ({@link ReorderWidgetsFragment}), non-null list
-	 *                                  of added widgets ids of this group; null if in view mode
-	 *                                  ({@link WidgetsListFragment})
-	 */
 	public static void showGroupDialog(@NonNull FragmentManager manager,
 	                                   @Nullable Fragment target,
 	                                   @NonNull ApplicationMode appMode,
