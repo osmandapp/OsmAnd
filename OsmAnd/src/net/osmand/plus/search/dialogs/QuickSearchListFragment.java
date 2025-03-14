@@ -214,14 +214,17 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		}
 
 		if (pair.second instanceof Amenity amenity) {
-			TravelHelper travelHelper = app.getTravelHelper();
-			TravelGpx travelGpx = new TravelGpx(amenity);
-			travelHelper.openTrackMenu(travelGpx, getMapActivity(), amenity.getGpxFileName(null), amenity.getLocation(), true);
-		} else {
-			showOnMap(getMapActivity(), dialogFragment,
-					searchResult.location.getLatitude(), searchResult.location.getLongitude(),
-					searchResult.preferredZoom, pair.first, pair.second);
+			if (amenity.isRouteTrack()) {
+				TravelHelper travelHelper = app.getTravelHelper();
+				TravelGpx travelGpx = new TravelGpx(amenity);
+				travelHelper.openTrackMenu(travelGpx, getMapActivity(), amenity.getGpxFileName(null), amenity.getLocation(), true);
+				return; // TravelGpx
+			}
 		}
+
+		showOnMap(getMapActivity(), dialogFragment,
+				searchResult.location.getLatitude(), searchResult.location.getLongitude(),
+				searchResult.preferredZoom, pair.first, pair.second);
 	}
 
 	private void showGpxTrackResult(SearchResult searchResult) {
