@@ -89,9 +89,14 @@ public class ConfigureMapMenu {
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private Optional<List<RenderingRuleProperty>> propertiesOfDetailsBottomSheet = Optional.empty();
+	private Optional<CustomAlert.SingleSelectionDialogFragment> roadStyleDialog = Optional.empty();
 
 	public Optional<List<RenderingRuleProperty>> getPropertiesOfDetailsBottomSheet() {
 		return propertiesOfDetailsBottomSheet;
+	}
+
+	public Optional<CustomAlert.SingleSelectionDialogFragment> getRoadStyleDialog() {
+		return roadStyleDialog;
 	}
 
 	public ConfigureMapMenu(@NonNull OsmandApplication app) {
@@ -529,7 +534,7 @@ public class ConfigureMapMenu {
 				})
 				.setItemDeleteAction(settings.MAP_DENSITY));
 
-		ContextMenuItem props =
+		final Optional<ItemAndDialog> roadStyleItemAndDialog =
 				createRenderingProperty(
 						customRules,
 						activity,
@@ -538,6 +543,11 @@ public class ConfigureMapMenu {
 						ROAD_STYLE_ID,
 						nightMode,
 						uiAdapter);
+		roadStyleDialog = roadStyleItemAndDialog.flatMap(ItemAndDialog::dialog);
+		ContextMenuItem props =
+				roadStyleItemAndDialog
+						.map(ItemAndDialog::item)
+						.orElse(null);
 		if (props != null) {
 			adapter.addItem(props);
 		}
@@ -677,7 +687,10 @@ public class ConfigureMapMenu {
 												 boolean nightMode) {
 		for (RenderingRuleProperty p : customRules) {
 			if (isPropertyAccepted(p)) {
-				adapter.addItem(createRenderingProperty(activity, INVALID_ID, p, CUSTOM_RENDERING_ITEMS_ID_SCHEME + p.getName(), nightMode, Optional.empty()));
+				adapter.addItem(
+						ConfigureMapMenu
+								.createRenderingProperty(activity, INVALID_ID, p, CUSTOM_RENDERING_ITEMS_ID_SCHEME + p.getName(), nightMode, Optional.empty())
+								.item());
 			}
 		}
 	}
@@ -692,37 +705,39 @@ public class ConfigureMapMenu {
 		return size;
 	}
 
-	private ContextMenuItem createRenderingProperty(final List<RenderingRuleProperty> customRules,
-													final MapActivity activity,
-													final @DrawableRes int icon,
-													final String attrName,
-													final String id,
-													final boolean nightMode,
-													final Optional<OnDataChangeUiAdapter> uiAdapter) {
-		for (RenderingRuleProperty p : customRules) {
-			if (p.getAttrName().equals(attrName)) {
-				return createRenderingProperty(activity, icon, p, id, nightMode, uiAdapter);
+	private Optional<ItemAndDialog> createRenderingProperty(final List<RenderingRuleProperty> customRules,
+															final MapActivity activity,
+															final @DrawableRes int icon,
+															final String attrName,
+															final String id,
+															final boolean nightMode,
+															final Optional<OnDataChangeUiAdapter> uiAdapter) {
+		for (final RenderingRuleProperty property : customRules) {
+			if (property.getAttrName().equals(attrName)) {
+				return Optional.of(ConfigureMapMenu.createRenderingProperty(activity, icon, property, id, nightMode, uiAdapter));
 			}
 		}
-		return null;
+		return Optional.empty();
 	}
 
-	public static ContextMenuItem createRenderingProperty(final MapActivity activity,
-														  final @DrawableRes int icon,
-														  final RenderingRuleProperty property,
-														  final String id,
-														  final boolean nightMode,
-														  final Optional<OnDataChangeUiAdapter> uiAdapter) {
+	public static ItemAndDialog createRenderingProperty(final MapActivity activity,
+														final @DrawableRes int icon,
+														final RenderingRuleProperty property,
+														final String id,
+														final boolean nightMode,
+														final Optional<OnDataChangeUiAdapter> uiAdapter) {
 		if (property.isBoolean()) {
-			return createBooleanRenderingProperty(
-					activity,
-					property.getAttrName(),
-					AndroidUtils.getRenderingStringPropertyName(activity, property.getAttrName(), property.getName()),
-					id,
-					property,
-					icon,
-					nightMode,
-					null);
+			return new ItemAndDialog(
+					createBooleanRenderingProperty(
+							activity,
+							property.getAttrName(),
+							AndroidUtils.getRenderingStringPropertyName(activity, property.getAttrName(), property.getName()),
+							id,
+							property,
+							icon,
+							nightMode,
+							null),
+					Optional.empty());
 		} else {
 			final ContextMenuItem item =
 					new ContextMenuItem(id)
@@ -767,8 +782,12 @@ public class ConfigureMapMenu {
 			if (icon != INVALID_ID) {
 				item.setIcon(icon);
 			}
-			return item;
+			return new ItemAndDialog(item, dialog);
 		}
+	}
+
+	public record ItemAndDialog(ContextMenuItem item,
+								Optional<CustomAlert.SingleSelectionDialogFragment> dialog) {
 	}
 
 	private static String getPropertyName(final RenderingRuleProperty property, final Context context) {

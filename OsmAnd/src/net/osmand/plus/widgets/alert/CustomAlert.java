@@ -23,8 +23,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
-import com.google.common.collect.ImmutableMap;
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
@@ -140,23 +138,6 @@ public class CustomAlert {
 		private final Map<String, CharSequence> itemByKey;
 		private final SelectionDialogAdapter adapter;
 
-		public SingleSelectionDialogFragment() {
-			this(
-					null,
-					null,
-					// FK-TODO: replace hard coded values with computed values
-					ImmutableMap
-							.<String, CharSequence>builder()
-							.put("default", "Default")
-							.put("germanRoadAtlas", "German road atlas")
-							.put("americanRoadAtlas", "American road atlas")
-							.put("highContrastRoads", "High contrast roads")
-							.put("boldOutline", "Bold outline")
-							.put("pale", "Pale")
-							.build(),
-					null);
-		}
-
 		public SingleSelectionDialogFragment(final AlertDialog alertDialog,
 											 final AlertDialogData alertDialogData,
 											 final Map<String, CharSequence> itemByKey,
@@ -189,11 +170,17 @@ public class CustomAlert {
 
 		public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<SingleSelectionDialogFragment> {
 
+			private SingleSelectionDialogFragment singleSelectionDialogFragment;
 			private Map<String, CharSequence> itemByKey;
 
 			@Override
 			public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final SingleSelectionDialogFragment singleSelectionDialogFragment) {
+				this.singleSelectionDialogFragment = singleSelectionDialogFragment;
 				itemByKey = singleSelectionDialogFragment.itemByKey;
+			}
+
+			public SingleSelectionDialogFragment getPrincipal() {
+				return singleSelectionDialogFragment;
 			}
 
 			@Override

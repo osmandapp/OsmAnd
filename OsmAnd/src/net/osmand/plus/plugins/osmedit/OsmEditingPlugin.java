@@ -469,7 +469,10 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			if (RENDERING_CATEGORY_OSM_ASSISTANT.equals(property.getCategory())) {
 				iterator.remove();
 				String id = OPEN_STREET_MAP_ITEMS_ID_SCHEME + property.getAttrName();
-				adapter.addItem(ConfigureMapMenu.createRenderingProperty(mapActivity, INVALID_ID, property, id, nightMode, Optional.empty()));
+				adapter.addItem(
+						ConfigureMapMenu
+								.createRenderingProperty(mapActivity, INVALID_ID, property, id, nightMode, Optional.empty())
+								.item());
 			}
 		}
 	}

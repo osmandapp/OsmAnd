@@ -79,6 +79,11 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 
 	private boolean useAnimation;
 	private List<RenderingRuleProperty> propertiesOfDetailsBottomSheet;
+	private CustomAlert.SingleSelectionDialogFragment roadStyleDialog;
+
+	public CustomAlert.SingleSelectionDialogFragment getRoadStyleDialog() {
+		return roadStyleDialog;
+	}
 
 	@Override
 	protected boolean isUsedOnMap() {
@@ -166,6 +171,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 		ConfigureMapMenu menu = new ConfigureMapMenu(app);
 		adapter = menu.createListAdapter(mapActivity, Optional.of(this));
 		propertiesOfDetailsBottomSheet = menu.getPropertiesOfDetailsBottomSheet().orElseThrow();
+		roadStyleDialog = menu.getRoadStyleDialog().orElseThrow();
 		ContextMenuUtils.removeHiddenItems(adapter);
 		ContextMenuUtils.hideExtraDividers(adapter);
 		items = ContextMenuUtils.collectItemsByCategories(adapter.getItems());
@@ -362,13 +368,15 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 
 	public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<ConfigureMapFragment>, PreferenceFragmentHandlerProvider {
 
-		private List<RenderingRuleProperty> propertiesOfDetailsBottomSheet;
-		private List<ContextMenuItem> items;
+		private ConfigureMapFragment configureMapFragment;
 
 		@Override
 		public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final ConfigureMapFragment configureMapFragment) {
-			propertiesOfDetailsBottomSheet = configureMapFragment.propertiesOfDetailsBottomSheet;
-			items = configureMapFragment.adapter.getItems();
+			this.configureMapFragment = configureMapFragment;
+		}
+
+		public ConfigureMapFragment getPrincipal() {
+			return configureMapFragment;
 		}
 
 		@Override
@@ -378,9 +386,13 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 			screen.setTitle("screen title");
 			screen.setSummary("screen summary");
 			PreferenceFragment
-					.asPreferences(items, context)
+					.asPreferences(getItems(), context)
 					.forEach(screen::addPreference);
 			setPreferenceScreen(screen);
+		}
+
+		private List<ContextMenuItem> getItems() {
+			return configureMapFragment.adapter.getItems();
 		}
 
 		private static List<Preference> asPreferences(final List<ContextMenuItem> contextMenuItems, final Context context) {
@@ -413,7 +425,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
 								final DetailsBottomSheet.PreferenceFragment preferenceFragment = new DetailsBottomSheet.PreferenceFragment();
 								// FK-TODO: remove the following setProperties() because preferenceFragment.initializePreferenceFragmentWithFragmentBeforeOnCreate() will be automatically called?
-								preferenceFragment.setProperties(propertiesOfDetailsBottomSheet);
+								preferenceFragment.setProperties(configureMapFragment.propertiesOfDetailsBottomSheet);
 								return preferenceFragment;
 							}
 

@@ -5,8 +5,11 @@ import static net.osmand.plus.settings.fragments.search.SettingsSearchConfigurer
 import android.content.Context;
 
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceFragmentCompat;
 
+import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
+import net.osmand.plus.widgets.alert.CustomAlert;
 
 import java.util.Optional;
 
@@ -31,13 +34,29 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 													   final Context context,
 													   final InstantiateAndInitializeFragment instantiateAndInitializeFragment) {
 		return FragmentFactory
-				.instantiate(fragmentClass, src, context)
+				.getExistingInstance(fragmentClass, src)
+				.or(() -> instantiateFromPreferenceFragmentHandlerProvider(fragmentClass, src, context))
 				.orElseGet(() -> createDefaultInstance(fragmentClass, src, context, instantiateAndInitializeFragment));
 	}
 
-	private static <T extends Fragment> Optional<T> instantiate(final Class<T> fragmentClass,
-																final Optional<PreferenceWithHost> src,
-																final Context context) {
+	private static <T extends Fragment> Optional<T> getExistingInstance(final Class<T> fragmentClass, final Optional<PreferenceWithHost> src) {
+		// FK-TODO: folgendes ist absolut unklar programmiert!!!
+		// FK-TODO: CustomAlert.SingleSelectionDialogFragment umbenennen in CustomAlert.RoadStyleDialog?
+		if (CustomAlert.SingleSelectionDialogFragment.class.equals(fragmentClass) && src.isPresent()) {
+			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
+			if (srcProxy instanceof final ConfigureMapFragment.PreferenceFragment _srcProxy) {
+				return Optional.of((T) _srcProxy.getPrincipal().getRoadStyleDialog());
+			} else if (srcProxy instanceof final CustomAlert.SingleSelectionDialogFragment.PreferenceFragment _srcProxy) {
+				return Optional.of((T) _srcProxy.getPrincipal());
+			}
+		}
+		return Optional.empty();
+	}
+
+	private static <T extends Fragment> Optional<T> instantiateFromPreferenceFragmentHandlerProvider(
+			final Class<T> fragmentClass,
+			final Optional<PreferenceWithHost> src,
+			final Context context) {
 		return src
 				.filter(preferenceWithHost -> preferenceWithHost.host() instanceof PreferenceFragmentHandlerProvider)
 				.flatMap(preferenceWithHost -> ((PreferenceFragmentHandlerProvider) preferenceWithHost.host()).getPreferenceFragmentHandler(preferenceWithHost.preference()))
