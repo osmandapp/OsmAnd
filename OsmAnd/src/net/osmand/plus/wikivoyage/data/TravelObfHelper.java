@@ -17,6 +17,7 @@ import static net.osmand.plus.wikivoyage.data.TravelGpx.MAX_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.MIN_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_BBOX_RADIUS;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_SHORTLINK_TILES;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_TYPE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.USER;
 import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_FIRST_DIST;
 import static net.osmand.shared.gpx.GpxUtilities.TRAVEL_GPX_CONVERT_FIRST_LETTER;
@@ -197,7 +198,8 @@ public class TravelObfHelper implements TravelHelper {
 
 	@Override
 	public boolean isTravelGpxTags(@NonNull Map<String, String> tags) {
-		return tags.containsKey(ROUTE_ID) && "segment".equals(tags.get(ROUTE));
+		return tags.containsKey(ROUTE_ID)
+				&& ( "segment".equals(tags.get(ROUTE)) || tags.containsKey(ROUTE_TYPE));
 	}
 
 	@Nullable
@@ -212,7 +214,8 @@ public class TravelObfHelper implements TravelHelper {
 		TravelGpx travelGpx = null;
 		do {
 			for (AmenityIndexRepository repo : getTravelGpxRepositories()) {
-				searchAmenity(foundAmenities, location, repo, searchRadius, 15, ROUTE_TRACK, null);
+				searchAmenityByRouteId(foundAmenities, location, repo, routeId);
+				//searchAmenity(foundAmenities, location, repo, searchRadius, 15, ROUTE_TRACK, null);
 			}
 			for (Pair<File, Amenity> foundGpx : foundAmenities) {
 				Amenity amenity = foundGpx.second;
@@ -229,6 +232,42 @@ public class TravelObfHelper implements TravelHelper {
 			LOG.error(String.format("searchTravelGpx(%s, %s) failed", location, routeId));
 		}
 		return travelGpx;
+	}
+
+	private void searchAmenityByRouteId(@NonNull List<Pair<File, Amenity>> amenitiesList, @NonNull LatLon location, @NonNull AmenityIndexRepository repo, @NonNull String routeId) {
+		if (!isPoiSectionIntersects(repo, location)) {
+			return;
+		}
+		int left = 0, right = Integer.MAX_VALUE, top = 0, bottom = Integer.MAX_VALUE;
+		SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
+				0, 0, routeId, left, right, top, bottom, null,
+				new ResultMatcher<Amenity>() {
+					@Override
+					public boolean publish(Amenity amenity) {
+						if (amenity.getRouteId() != null && amenity.getRouteId().equals(routeId)) {
+							amenitiesList.add(new Pair<>(repo.getFile(), amenity));
+						}
+						return false;
+					}
+
+					@Override
+					public boolean isCancelled() {
+						return false;
+					}
+				}, null);
+		repo.searchPoiByName(pointRequest);
+	}
+
+	private boolean isPoiSectionIntersects(AmenityIndexRepository repo, @NonNull LatLon location) {
+		int x31 = MapUtils.get31TileNumberX(location.getLongitude());
+		int y31 = MapUtils.get31TileNumberX(location.getLatitude());
+		for (BinaryMapPoiReaderAdapter.PoiRegion poiIndex : repo.getReaderPoiIndexes()) {
+			QuadRect bbox = new QuadRect(poiIndex.getLeft31(), poiIndex.getTop31(), poiIndex.getRight31(), poiIndex.getBottom31());
+			if (bbox.contains(x31, y31, x31, y31)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void searchAmenity(@NonNull List<Pair<File, Amenity>> amenitiesList, @NonNull LatLon location,
