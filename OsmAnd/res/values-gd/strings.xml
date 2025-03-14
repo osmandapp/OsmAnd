@@ -369,4 +369,13 @@
     <string name="backup_and_restore">Dèan lethbhreac-glèidhidh agus aisig air ais</string>
     <string name="routing_attr_avoid_low_emission_zone_name">Seachain sgìrean beag-eimisein</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Seachain sgìrean beag-eimisein</string>
+    <string name="new_device_account">Inneal ùr / cunntas ùr</string>
+    <string name="troubleshooting">Fuasgladh dhuilgheadasan</string>
+    <string name="contact_support">Cuir fios gu \'taic\'</string>
+    <string name="trip_recording_save_and_continue">Sàbhail agus lean air</string>
+    <string name="annual_subscription">Fo-sgrìobhadh bliadhnail</string>
+    <string name="osmand_live">OsmAnd Beò</string>
+    <string name="shared_string_route_line">Loidhne slighe</string>
+    <string name="customize_route_line">Gnàthaich loidhne slighe</string>
+    <string name="rendering_attr_natureReserves_name">Tèarmann nàdair</string>
 </resources>
