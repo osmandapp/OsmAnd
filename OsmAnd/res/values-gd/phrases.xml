@@ -8,4 +8,7 @@
     <string name="poi_distance">Astar</string>
     <string name="poi_seamark">Seòlaidh</string>
     <string name="poi_nature_reserve">Tèarmann nàdair</string>
+    <string name="poi_education">Foghlam</string>
+    <string name="poi_substation_industrial">Gnìomhachail</string>
+    <string name="poi_faculty_education">Foghlam</string>
 </resources>
