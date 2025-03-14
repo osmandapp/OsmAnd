@@ -3,6 +3,7 @@ package net.osmand.plus.wikivoyage.data;
 import static net.osmand.data.Amenity.REF;
 import static net.osmand.data.Amenity.ROUTE_ID;
 import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
+import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ELE_GRAPH;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_ACTIVITY_TYPE;
@@ -300,7 +301,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             poiTypeFilter = new BinaryMapIndexReader.SearchPoiTypeFilter() {
                 @Override
                 public boolean accept(PoiCategory poiCategory, String s) {
-                    return subType.equals(s) || ROUTE_TRACK_POINT.equals(s);
+                    return subType.equals(s) || ROUTE_TRACK.equals(s) || ROUTE_TRACK_POINT.equals(s);
                 }
 
                 @Override
