@@ -6,7 +6,6 @@ import static net.osmand.data.Amenity.ROUTE_ID;
 import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
 import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
-import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
 import static net.osmand.plus.wikivoyage.data.PopularArticles.ARTICLES_PER_PAGE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_TYPE;
 
@@ -204,7 +203,7 @@ public class TravelObfHelper implements TravelHelper {
 				if (repo.getFile().getName().toLowerCase().startsWith(WorldRegion.WORLD + "_")) {
 					continue;
 				}
-				if (!isPoiSectionIntersects(repo, location)) {
+				if (!isLocationIntersectsWithRepo(repo, location)) {
 					continue;
 				}
 				int previousFoundSize = foundAmenities.size();
@@ -269,7 +268,7 @@ public class TravelObfHelper implements TravelHelper {
 		repo.searchPoiByName(pointRequest);
 	}
 
-	private boolean isPoiSectionIntersects(AmenityIndexRepository repo, @NonNull LatLon location) {
+	private boolean isLocationIntersectsWithRepo(AmenityIndexRepository repo, @NonNull LatLon location) {
 		int x31 = MapUtils.get31TileNumberX(location.getLongitude());
 		int y31 = MapUtils.get31TileNumberY(location.getLatitude());
 		for (BinaryMapPoiReaderAdapter.PoiRegion poiIndex : repo.getReaderPoiIndexes()) {
