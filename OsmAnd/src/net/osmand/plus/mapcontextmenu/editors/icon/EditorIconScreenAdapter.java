@@ -10,12 +10,12 @@ import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.containers.ScreenItem;
 import net.osmand.plus.card.icon.IconsPaletteElements;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -46,14 +46,14 @@ public class EditorIconScreenAdapter extends RecyclerView.Adapter<RecyclerView.V
 	private final boolean usedOnMap;
 	private final EditorIconScreenController controller;
 
-	public EditorIconScreenAdapter(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
+	public EditorIconScreenAdapter(@NonNull OsmandApplication app, @NonNull FragmentActivity activity, @NonNull ApplicationMode appMode,
 	                               @NonNull EditorIconScreenController controller, boolean usedOnMap) {
-		this.app = mapActivity.getMyApplication();
-		this.iconsCache = app.getUIUtilities();
+		this.app = app;
+		this.iconsCache = this.app.getUIUtilities();
 		this.appMode = appMode;
 		this.usedOnMap = usedOnMap;
 		this.controller = controller;
-		this.paletteElements = controller.getPaletteElements(mapActivity, isNightMode());
+		this.paletteElements = controller.getPaletteElements(activity, isNightMode());
 	}
 
 	@NonNull
