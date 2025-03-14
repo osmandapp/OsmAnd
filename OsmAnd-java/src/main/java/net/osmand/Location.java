@@ -16,6 +16,8 @@ package net.osmand;
  */
 
 
+import net.osmand.data.LatLon;
+
 /**
  * A class representing a geographic location sensed at a particular
  * time (a "fix").  A location consists of a latitude and longitude, a
@@ -536,7 +538,12 @@ public class Location {
         mHasVerticalAccuracy = false;
     }
 
-    @Override public String toString() {
+    public LatLon toLatlon() {
+        return new LatLon(mLatitude, mLongitude);
+    }
+
+    @Override
+    public String toString() {
         return "Location[mProvider=" + mProvider +
             ",mTime=" + mTime +
             ",mLatitude=" + mLatitude +
@@ -552,8 +559,4 @@ public class Location {
             ",mHasVerticalAccuracy=" + mHasVerticalAccuracy +
             ",mVerticalAccuracy=" + mVerticalAccuracy;
     }
-
-    
-
-    
 }

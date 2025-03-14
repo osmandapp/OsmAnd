@@ -5951,4 +5951,5 @@
     <string name="point_location">Местоположение точки</string>
     <string name="shared_string_manual">Руководство</string>
     <string name="layer_coordinates_grid">Координатная сетка</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Действие управляет видимостью сетки координат на карте.</string>
 </resources>

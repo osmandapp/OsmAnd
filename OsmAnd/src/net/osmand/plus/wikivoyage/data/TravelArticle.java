@@ -160,11 +160,6 @@ public class TravelArticle {
 						|| routeId.startsWith(Amenity.ROUTE_ID_OSM_PREFIX));
 	}
 
-	public boolean hasNonIndexedOsmRouteId() {
-		String routeId = getRouteId();
-		return routeId != null && routeId.startsWith(Amenity.ROUTE_ID_OSM_PREFIX_LEGACY);
-	}
-
 	@NonNull
 	public String getGpxFileName() {
 		String gpxFileName = !Algorithms.isEmpty(title) ? title : routeId;
