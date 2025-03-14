@@ -23,6 +23,7 @@ import net.osmand.plus.helpers.RequestMapThemeParams;
 import net.osmand.plus.mapcontextmenu.editors.icon.data.IconSearchResult;
 import net.osmand.plus.mapcontextmenu.editors.icon.data.IconsCategory;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.FlowLayout;
 
@@ -46,9 +47,9 @@ public class EditorIconScreenAdapter extends RecyclerView.Adapter<RecyclerView.V
 	private final boolean usedOnMap;
 	private final EditorIconScreenController controller;
 
-	public EditorIconScreenAdapter(@NonNull OsmandApplication app, @NonNull FragmentActivity activity, @NonNull ApplicationMode appMode,
+	public EditorIconScreenAdapter(@NonNull FragmentActivity activity, @NonNull ApplicationMode appMode,
 	                               @NonNull EditorIconScreenController controller, boolean usedOnMap) {
-		this.app = app;
+		this.app = AndroidUtils.getApp(activity);;
 		this.iconsCache = this.app.getUIUtilities();
 		this.appMode = appMode;
 		this.usedOnMap = usedOnMap;

@@ -206,7 +206,7 @@ public class EditorIconPaletteFragment extends BaseOsmAndDialogFragment implemen
 		OsmandSettings settings = app.getSettings();
 		ApplicationMode appMode = settings.getApplicationMode();
 		FragmentActivity activity = requireActivity();
-		adapter = new EditorIconScreenAdapter(app, activity, appMode, controller, isUsedOnMap());
+		adapter = new EditorIconScreenAdapter(activity, appMode, controller, isUsedOnMap());
 		recyclerView = view.findViewById(R.id.icon_categories);
 		recyclerView.setLayoutManager(new LinearLayoutManager(activity));
 		recyclerView.setAdapter(adapter);
