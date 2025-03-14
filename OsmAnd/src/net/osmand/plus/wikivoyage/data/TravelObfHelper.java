@@ -241,7 +241,7 @@ public class TravelObfHelper implements TravelHelper {
 		SearchPoiTypeFilter poiTypeFilter = new BinaryMapIndexReader.SearchPoiTypeFilter() {
 			@Override
 			public boolean accept(PoiCategory poiCategory, String subType) {
-				return subType.startsWith(ROUTES_PREFIX) || ROUTE_TRACK.equals(subType) || ROUTE_TRACK_POINT.equals(subType);
+				return subType.startsWith(ROUTES_PREFIX) || ROUTE_TRACK.equals(subType);
 			}
 
 			@Override
