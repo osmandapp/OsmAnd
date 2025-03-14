@@ -6,6 +6,7 @@ import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ELE_GRAPH;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_ACTIVITY_TYPE;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_SEGMENT_INDEX;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_TYPE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.START_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelObfHelper.EXTENSIONS_EXTRA_TAGS;
@@ -84,7 +85,6 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
     private final TravelArticle article;
     private final TravelHelper.GpxReadCallback callback;
     private final List<AmenityIndexRepository> repos;
-    private final String SEGMENT_INDEX_TAG = "route_segment_index";
 
     public TravelObfGpxFileReader(@NonNull MapActivity mapActivity,
                                   @NonNull TravelArticle article,
@@ -378,7 +378,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             }
             int x31 = MapUtils.get31TileNumberX(am.getLocation().getLongitude());
             int y31 = MapUtils.get31TileNumberY(am.getLocation().getLatitude());
-            String group = am.getAdditionalInfo(SEGMENT_INDEX_TAG);
+            String group = am.getAdditionalInfo(ROUTE_SEGMENT_INDEX);
             if (group == null) {
                 result.add(new QuadRect(x31, y31, x31, y31));
             } else {
