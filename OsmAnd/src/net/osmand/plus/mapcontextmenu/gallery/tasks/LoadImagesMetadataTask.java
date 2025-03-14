@@ -46,6 +46,7 @@ public class LoadImagesMetadataTask extends AsyncTask<Void, Void, Map<String, Ma
 	public record WikiImageInfo(String title, Long pageId, String data) {
 	}
 
+	// parse-images-list-info api call
 	@Override
 	protected Map<String, Map<String, String>> doInBackground(Void... voids) {
 		List<WikiImageInfo> data = getData();
@@ -64,7 +65,7 @@ public class LoadImagesMetadataTask extends AsyncTask<Void, Void, Map<String, Ma
 
 		try {
 			if (!Algorithms.isEmpty(lang)) {
-				url += (url.isEmpty() ? OSMAND_PARSE_URL : "&") + "lang=" + URLEncoder.encode(lang, "UTF-8");
+				url += OSMAND_PARSE_URL + "lang=" + URLEncoder.encode(lang, "UTF-8");
 			}
 			if (!Algorithms.isEmpty(deviceId)) {
 				url += (url.isEmpty() ? OSMAND_PARSE_URL : "&") + "deviceId=" + URLEncoder.encode(deviceId, "UTF-8");

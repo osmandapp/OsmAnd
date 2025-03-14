@@ -50,8 +50,8 @@ import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 import net.osmand.plus.wikipedia.WikiAlgorithms;
 import net.osmand.plus.wikipedia.WikiImageCard;
+import net.osmand.shared.wiki.WikiMetadata;
 import net.osmand.util.Algorithms;
-import net.osmand.wiki.Metadata;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -98,7 +98,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 	public void onMetadataUpdated(@NonNull Set<String> updatedMediaTagImages) {
 		ImageCard card = getSelectedImageCard();
 		if (card instanceof WikiImageCard wikiImageCard && updatedMediaTagImages.contains(wikiImageCard.getWikiImage().getWikiMediaTag())) {
-			Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
+			WikiMetadata.Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
 			setMetaData(metadata.getAuthor(), metadata.getDate(), metadata.getLicense());
 		}
 	}
@@ -218,7 +218,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 	}
 
 	private boolean shouldDownloadMetadata(@NonNull WikiImageCard wikiImageCard) {
-		Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
+		WikiMetadata.Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
 		String date = metadata.getDate();
 		String author = metadata.getAuthor();
 		String license = metadata.getLicense();
@@ -237,7 +237,7 @@ public class GalleryPhotoPagerFragment extends BaseOsmAndFragment implements Dow
 			controller.addMetaDataListener(this);
 			controller.downloadWikiMetaData(getImagesToDownloadMetadata(wikiImageCard, initialLoad, preloadNext));
 
-			Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
+			WikiMetadata.Metadata metadata = wikiImageCard.getWikiImage().getMetadata();
 			setMetaData(metadata.getAuthor(), metadata.getDate(), metadata.getLicense());
 		} else {
 			dateView.setVisibility(View.INVISIBLE);

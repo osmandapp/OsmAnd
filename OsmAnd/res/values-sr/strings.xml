@@ -5707,4 +5707,12 @@
     <string name="show_dm_grids_description">Прикажи мрежу у степенима и минутима уместо у степенима или DMS</string>
     <string name="show_list">Приказати листу</string>
     <string name="popular_places">Популарна места</string>
+    <string name="show_image_previews">Прикажи прегледе слика</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Радња за контролу видљивости мреже координата на мапи.</string>
+    <string name="layer_coordinates_grid">Координатна мрежа</string>
+    <string name="choose_location">Изабери локацију</string>
+    <string name="point_location">Локација тачке</string>
+    <string name="shared_string_manual">Упутство</string>
+    <string name="shared_string_map_center">Центар мапе</string>
+    <string name="choose_location_on_map">Изабери локацију на мапи.</string>
 </resources>

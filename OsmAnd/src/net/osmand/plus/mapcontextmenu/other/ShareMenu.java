@@ -59,7 +59,7 @@ public class ShareMenu extends BaseMenuController {
 	private String geoUrl;
 	private String sms;
 
-	private ShareMenu(MapActivity mapActivity) {
+	private ShareMenu(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
 	}
 

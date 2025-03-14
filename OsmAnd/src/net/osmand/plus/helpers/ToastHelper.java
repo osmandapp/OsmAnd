@@ -17,6 +17,10 @@ public class ToastHelper {
 		void showSimpleToast(@NonNull String text, boolean isLong);
 
 		void showCarToast(@NonNull String text, boolean isLong);
+
+		void showSimpleToast(@StringRes int textId, boolean isLong, Object... args);
+
+		void showCarToast(@StringRes int textId, boolean isLong, Object... args);
 	}
 
 	private final OsmandApplication app;
@@ -41,7 +45,12 @@ public class ToastHelper {
 	}
 
 	public void showToast(@StringRes int textId, boolean isLong, Object... args) {
-		showToast(app.getString(textId, args), isLong);
+		if (textId > 0) {
+			app.runInUIThread(() -> {
+				displayHandler.showSimpleToast(textId, isLong, args);
+				displayHandler.showCarToast(textId, isLong, args);
+			});
+		}
 	}
 
 	public void showSimpleToast(@Nullable String text, boolean isLong) {
@@ -71,6 +80,16 @@ public class ToastHelper {
 					int duration = isLong ? CarToast.LENGTH_LONG : CarToast.LENGTH_SHORT;
 					CarToast.makeText(navigationSession.getCarContext(), text, duration).show();
 				}
+			}
+
+			@Override
+			public void showSimpleToast(int textId, boolean isLong, Object... args) {
+				showSimpleToast(app.getString(textId, args), isLong);
+			}
+
+			@Override
+			public void showCarToast(int textId, boolean isLong, Object... args) {
+				showCarToast(app.getString(textId, args), isLong);
 			}
 		};
 	}

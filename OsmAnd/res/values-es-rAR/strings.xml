@@ -5593,4 +5593,7 @@
     <string name="choose_location_on_map">Elegí una ubicación en el mapa.</string>
     <string name="popular_places">Lugares populares</string>
     <string name="choose_location">Elegí una ubicación</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Acción para controlar la visibilidad de la red de coordenadas en el mapa.</string>
+    <string name="show_image_previews">Mostrar vistas previas de imagen</string>
+    <string name="layer_coordinates_grid">Cuadrícula de coordenadas</string>
 </resources>

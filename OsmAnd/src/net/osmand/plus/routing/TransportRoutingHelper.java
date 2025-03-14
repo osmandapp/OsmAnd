@@ -705,11 +705,6 @@ public class TransportRoutingHelper {
 			}
 		}
 
-		private void showMessage(String msg) {
-			OsmandApplication app = routingHelper.getApplication();
-			app.runInUIThread(() -> app.showToastMessage(msg));
-		}
-
 		@Override
 		public void run() {
 			List<TransportRouteResult> res = null;
@@ -741,11 +736,11 @@ public class TransportRoutingHelper {
 			} else if (error != null) {
 				routeCalcError = app.getString(R.string.error_calculating_route) + ":\n" + error;
 				routeCalcErrorShort = app.getString(R.string.error_calculating_route);
-				showMessage(routeCalcError);
+				app.showToastMessage(routeCalcError);
 			} else {
 				routeCalcError = app.getString(R.string.empty_route_calculated);
 				routeCalcErrorShort = app.getString(R.string.empty_route_calculated);
-				showMessage(routeCalcError);
+				app.showToastMessage(routeCalcError);
 			}
 			app.getNotificationHelper().refreshNotification(NAVIGATION);
 		}

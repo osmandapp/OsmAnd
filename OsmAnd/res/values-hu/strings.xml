@@ -4190,7 +4190,7 @@
     <string name="import_tracks_descr">„%1$s” %2$s különálló nyomvonalat tartalmaz. Válassza ki az importálandókat.</string>
     <string name="quick_action_add_route_descr">Gomb, amellyel a képernyő közepéről lehet útvonalat indítani.</string>
     <string name="location_source_descr">Alapértelmezés szerint a Google Playről telepített OsmAnd a következő segítségével határozza meg a pozíciót: %1$s\n \nHa ez pontatlan, vagy az eszközt %2$s nélkül használja, próbáljon meg átváltani erre: \"%3$s\"</string>
-    <string name="location_source">Helyadatok forrása</string>
+    <string name="location_source">Helymeghatározás forrása</string>
     <string name="shared_string_shape">Alak</string>
     <string name="default_appearance_desc">Az alapértelmezett szín, ikon és alak a csoporthoz hozzáadott kedvenc pontokra lesz érvényes.</string>
     <string name="default_appearance">Alapértelmezett megjelenés</string>
@@ -5679,4 +5679,7 @@
     <string name="choose_location_on_map">Válasszon egy helyet a térképen.</string>
     <string name="choose_location">Válasszon egy helyet</string>
     <string name="shared_string_map_center">Térkép közepe</string>
+    <string name="layer_coordinates_grid">Koordinátarács</string>
+    <string name="show_image_previews">Képelőnézetek megjelenítése</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">A koordinátarács láthatóságának beállítása a térképen.</string>
 </resources>

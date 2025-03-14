@@ -5704,4 +5704,12 @@
     <string name="show_dm_grids_description">以度和分而不是度數或 DMS 顯示網格</string>
     <string name="show_list">顯示清單</string>
     <string name="popular_places">熱門地點</string>
+    <string name="choose_location">選擇位置</string>
+    <string name="point_location">點位置</string>
+    <string name="show_image_previews">顯示影像預覽</string>
+    <string name="layer_coordinates_grid">座標網格</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">動作可控制地圖上座標網格的能見度。</string>
+    <string name="shared_string_manual">手動</string>
+    <string name="shared_string_map_center">地圖中心</string>
+    <string name="choose_location_on_map">選擇地圖上的位置。</string>
 </resources>

@@ -2232,9 +2232,9 @@
     <string name="mapillary_widget_descr">Permette di contribuire facilmente a Mapillary.</string>
     <string name="mapillary_descr">Foto a livello stradale per tutti. Scopri luoghi, collabora, fotografa il mondo.</string>
     <string name="shared_string_add_photos">Aggiungi foto</string>
-    <string name="mapillary_action_descr">Contribuisci le tue foto stradali con Mapillary.</string>
+    <string name="mapillary_action_descr">Condividi le tue immagini stradali attraverso Mapillary.</string>
     <string name="plugin_mapillary_descr">Immagini a livello stradale. Puoi contribuire anche tu. Per visualizzare i dati esistenti come livello, attiva \"Immagini a livello stradale\" nel menu \"Configura mappa\".</string>
-    <string name="online_photos">Foto online</string>
+    <string name="online_photos">Fotografie online</string>
     <string name="no_photos_descr">Non ci sono foto qui.</string>
     <string name="open_mapillary">Apri Mapillary</string>
     <string name="shared_string_install">Installa</string>
@@ -3032,7 +3032,7 @@
     <string name="rendering_attr_piste_type_sled_name">Slitta</string>
     <string name="rendering_attr_piste_type_hike_name">Escursione</string>
     <string name="rendering_attr_piste_type_connection_name">Connessione</string>
-    <string name="rendering_attr_piste_type_downhill_name">Downhill</string>
+    <string name="rendering_attr_piste_type_downhill_name">Discesa</string>
     <string name="rendering_attr_piste_type_nordic_name">Sci nordico</string>
     <string name="routeInfo_piste_type_name">Tipo di pista</string>
     <string name="rendering_attr_piste_difficulty_novice_name">Novizi</string>
@@ -3942,7 +3942,7 @@
     <string name="backup_delete_types_descr">Cancella tutti i dati di tipo deprecato da OsmAnd Cloud\?</string>
     <string name="backup_delete_types">Cancella i tipi di dati disabilitati</string>
     <string name="shared_string_discussion">Discussione</string>
-    <string name="shared_string_view_all">Visualizza tutti</string>
+    <string name="shared_string_view_all">Mostra tutto</string>
     <string name="backup_error_user_is_already_registered">Questo indirizzo email è in uso a un altro account</string>
     <string name="backup_error_subscription_was_expired">Sottoscrizione scaduta</string>
     <string name="backup_error_subscription_was_expired_descr">La tua sottoscrizione a OsmAnd Pro è scaduta, rinnovala per utilizzare il backup. Puoi ancora ripristinare i dati dal Cloud.</string>
@@ -4077,7 +4077,7 @@
     <string name="routing_attr_prefer_horse_routes_description">Preferisci i percorsi per cavalli</string>
     <string name="shared_app_storage_description">La memoria condivisa non è più disponibile a causa delle modifiche alle regole di accesso all\'archiviazione in Android.</string>
     <string name="internal_app_storage_description">Memorizzazione interna, nascosto all\'utilizzatore e alle altre app, così solo OsmAnd può accedere ai tuoi dati.</string>
-    <string name="rendering_attr_natureReserves_name">Riserva naturale</string>
+    <string name="rendering_attr_natureReserves_name">Riserve naturali</string>
     <string name="shared_string_details">Dettagli</string>
     <string name="shared_string_articles">Articoli</string>
     <string name="included_categories">Categorie incluse</string>
@@ -4367,7 +4367,7 @@
     <string name="routing_attr_avoid_fords_name">Evita i guadi</string>
     <string name="routing_attr_avoid_fords_description">Evita i guadi</string>
     <string name="map_widget_trip_recording_downhill">Downhill</string>
-    <string name="map_widget_trip_recording_uphill">Uphill</string>
+    <string name="map_widget_trip_recording_uphill">Salita</string>
     <string name="map_widget_trip_recording_duration">Durata</string>
     <string name="map_widget_distance">Distanza</string>
     <string name="routing_attr_hazmat_category_description">Categoria materiali pericolosi / Considera i permessi di accesso per i materiali pericolosi</string>
@@ -4615,7 +4615,7 @@
     <string name="precipitation_widget_desc">Mostra le precipitazioni del centro attuale della mappa.</string>
     <string name="temperature_widget_desc">Mostra la temperatura del centro attuale della mappa.</string>
     <string name="weather_pressure_hpa">hPa</string>
-    <string name="weather_pressure_inhg">mmHg</string>
+    <string name="weather_pressure_inhg">inHg</string>
     <string name="weather_pressure_mmhg">mmHg</string>
     <string name="location_simulation_speedup">Accelerazione della simulazione</string>
     <string name="map_widget_sunset_desc">Mostra l\'ora del prossimo tramonto o il tempo che manca al prossimo tramonto.</string>
@@ -4905,7 +4905,7 @@
     <string name="shared_string_deleting">Elimina</string>
     <string name="delete_account">Elimina l\'account</string>
     <string name="shared_string_close_the_dialog">Chiudi la finestra di dialogo</string>
-    <string name="terrain_map">Mappa del terreno (3D)</string>
+    <string name="terrain_map">Mappa terreno (3D)</string>
     <string name="relief_3d">Rilievo 3D</string>
     <string name="relief_3d_description">Possiedi e osserva il modello in scala del tuo quartiere o dell\'intero continente.</string>
     <string name="power_watts_unit">Watt</string>
@@ -5248,7 +5248,7 @@
     <string name="routing_type_a_star_classic">A* classic</string>
     <string name="java_safe">Java (Sicuro)</string>
     <string name="routing_type_a_star_2_phase">A* 2-phase</string>
-    <string name="auto_zoom">Autozoom</string>
+    <string name="auto_zoom">Zoom automatico</string>
     <string name="gpx_approximation">Approssimazione GPX</string>
     <string name="shared_sting_all_colors">Tutti i colori</string>
     <string name="routing_type">Tipo di percorso</string>
@@ -5489,8 +5489,8 @@
     <string name="wikimedia">Wikimedia</string>
     <string name="open_in_browser">Apri nel browser</string>
     <string name="shared_string_source">Sorgente</string>
-    <string name="no_internet_descr">Controlla la tua connessione e riprova.</string>
-    <string name="no_photos_available_descr">Nessuna foto è stata caricata in questa località</string>
+    <string name="no_internet_descr">Per favore controlla nuovamente la connessione a internet</string>
+    <string name="no_photos_available_descr">Nessuna foto è stata ancora aggiunta dagli utenti per questa posizione</string>
     <string name="no_photos_available">Nessuna foto disponibile</string>
     <string name="shared_string_no_internet_connection">Nessuna connessione</string>
     <string name="unit_volt">V</string>
@@ -5707,8 +5707,8 @@
     <string name="ais_nmea_protocol">Protocollo per la ricezione dei dati NMEA</string>
     <string name="shared_string_avg_altitude">Media altitudine</string>
     <string name="shared_string_avg_speed">Velocità minima</string>
-    <string name="ais_cpa_warning_time">Tempo di avviso per raggiungere il punto di avvicinamento più vicino (PAV)</string>
-    <string name="ais_cpa_warning_distance">Distanza di avviso per il punto di avvicinamento più vicino (PAV)</string>
+    <string name="ais_cpa_warning_time">Tempo di avviso per raggiungere il Punto di Avvicinamento più Vicino (PAV)</string>
+    <string name="ais_cpa_warning_distance">Distanza di avviso per il Punto di Avvicinamento più Vicino (PAV)</string>
     <string name="ais_cpa_warning_distance_description">Le imbarcazioni sono contrassegnate in rosso se il PAV è inferiore a questo valore e viene raggiunto nel prossimo futuro (vedere l\'impostazione Tempo di avviso per il raggiungimento del PAV).</string>
     <string name="plugin_ais_tracker_name">Localizzatore di imbarcazioni AIS</string>
     <string name="plugin_ais_tracker_description">Visualizza le posizioni AIS e le informazioni sulle imbarcazioni circostanti. I dati AIS vengono ricevuti tramite rete da un ricevitore AIS esterno.</string>
@@ -5742,4 +5742,7 @@
     <string name="choose_location">Scegli un luogo</string>
     <string name="shared_string_map_center">Centro della mappa</string>
     <string name="shared_string_manual">Manuale</string>
+    <string name="show_image_previews">Mostra l\' immagine precedente</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Azione per il controllo della visibilità della griglia delle coordinate sulla mappa.</string>
+    <string name="layer_coordinates_grid">Griglia delle coordinate</string>
 </resources>

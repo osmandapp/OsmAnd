@@ -279,34 +279,8 @@ public class TravelObfHelper implements TravelHelper {
 
 	@NonNull
 	private TravelGpx getTravelGpx(@NonNull File file, @NonNull Amenity amenity) {
-		TravelGpx travelGpx = new TravelGpx();
+		TravelGpx travelGpx = new TravelGpx(amenity);
 		travelGpx.file = file;
-		String title = amenity.getName("en");
-		travelGpx.title = Algorithms.isEmpty(title) ? amenity.getName() : title;
-		travelGpx.lat = amenity.getLocation().getLatitude();
-		travelGpx.lon = amenity.getLocation().getLongitude();
-		travelGpx.description = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.DESCRIPTION));
-		travelGpx.routeId = Algorithms.emptyIfNull(amenity.getTagContent(Amenity.ROUTE_ID));
-		travelGpx.user = Algorithms.emptyIfNull(amenity.getTagContent(USER));
-		travelGpx.activityType = Algorithms.emptyIfNull(amenity.getTagContent(ROUTE_ACTIVITY_TYPE));
-		travelGpx.ref = Algorithms.emptyIfNull(amenity.getRef());
-		travelGpx.totalDistance = Algorithms.parseFloatSilently(amenity.getTagContent(DISTANCE), 0);
-		travelGpx.diffElevationUp = Algorithms.parseDoubleSilently(amenity.getTagContent(DIFF_ELEVATION_UP), 0);
-		travelGpx.diffElevationDown = Algorithms.parseDoubleSilently(amenity.getTagContent(DIFF_ELEVATION_DOWN), 0);
-		travelGpx.minElevation = Algorithms.parseDoubleSilently(amenity.getTagContent(MIN_ELEVATION), 0);
-		travelGpx.avgElevation = Algorithms.parseDoubleSilently(amenity.getTagContent(AVERAGE_ELEVATION), 0);
-		travelGpx.maxElevation = Algorithms.parseDoubleSilently(amenity.getTagContent(MAX_ELEVATION), 0);
-		String radius = amenity.getTagContent(ROUTE_BBOX_RADIUS);
-		if (radius != null) {
-			travelGpx.routeRadius = MapUtils.convertCharToDist(radius.charAt(0), TRAVEL_GPX_CONVERT_FIRST_LETTER,
-					TRAVEL_GPX_CONVERT_FIRST_DIST, TRAVEL_GPX_CONVERT_MULT_1, TRAVEL_GPX_CONVERT_MULT_2);
-		} else if (!Algorithms.isEmpty(travelGpx.routeId)) {
-			travelGpx.routeRadius = TRAVEL_GPX_DEFAULT_SEARCH_RADIUS;
-		}
-		String shortLinkTiles = amenity.getTagContent(ROUTE_SHORTLINK_TILES);
-		if (shortLinkTiles != null) {
-			travelGpx.initShortLinkTiles(shortLinkTiles);
-		}
 		return travelGpx;
 	}
 

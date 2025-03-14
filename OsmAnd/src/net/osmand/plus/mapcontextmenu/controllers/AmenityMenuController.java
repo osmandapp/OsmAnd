@@ -19,6 +19,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.TitleButtonController;
@@ -31,15 +32,12 @@ import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
-import net.osmand.router.network.NetworkRouteSelector.RouteKey;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
 import org.apache.commons.logging.Log;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class AmenityMenuController extends MenuController {
 	private static final Log LOG = PlatformUtil.getLog(AmenityMenuController.class);
@@ -225,7 +223,20 @@ public class AmenityMenuController extends MenuController {
 	@NonNull
 	@Override
 	public String getTypeStr() {
-		return getTypeStr(amenity);
+		return amenity.isRouteTrack()
+				? getTypeWithDistanceStr(amenity, getApplication())
+				: getTypeStr(amenity);
+	}
+
+	@NonNull
+	private String getTypeWithDistanceStr(@NonNull Amenity amenity, @NonNull OsmandApplication app) {
+		String type = getTypeStr(amenity);
+		String distance = AmenityExtensionsHelper.getAmenityDistanceFormatted(amenity, app);
+		if (distance != null) {
+			return app.getString(R.string.ltr_or_rtl_combine_via_comma, type, distance);
+		} else {
+			return type;
+		}
 	}
 
 	public static String getTypeStr(Amenity amenity) {
@@ -280,21 +291,8 @@ public class AmenityMenuController extends MenuController {
 		if (region != null) {
 			return RenderingIcons.getBigIcon(getMapActivity(), "subway_" + region);
 		}
-		if (amenity.isRouteTrack() && amenity.hasOsmRouteId()) {
-			Map<String, String> shieldTags = new HashMap<>();
-			for (String tag : amenity.getAdditionalInfoKeys()) {
-				String value = amenity.getAdditionalInfo(tag);
-				shieldTags.put(tag, value);
-			}
-			RouteKey shieldRouteKey = RouteKey.fromShieldTags(shieldTags);
-			if (shieldRouteKey != null && getMapActivity() != null) {
-				OsmandApplication app = getMapActivity().getMyApplication();
-				NetworkRouteDrawable icon = new NetworkRouteDrawable(app, shieldRouteKey, !isLight());
-				if (icon.hasBackgroundIcon()) {
-					return icon;
-				}
-			}
-		}
-		return null;
+		return amenity.isRouteTrack()
+				? NetworkRouteDrawable.getIconByAmenityShieldTags(amenity, getApplication(), !isLight())
+				: null;
 	}
 }
