@@ -21,7 +21,10 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelObfHelper;
@@ -334,7 +337,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	public void updateListAdapter(List<QuickSearchListItem> listItems, boolean append, boolean addShadows) {
 		if (listAdapter != null) {
 			List<QuickSearchListItem> list = new ArrayList<>(listItems);
-			if (list.size() > 0) {
+			if (!list.isEmpty()) {
 				showResult = false;
 				if (addShadows) {
 					list.add(0, new QuickSearchTopShadowListItem(app));

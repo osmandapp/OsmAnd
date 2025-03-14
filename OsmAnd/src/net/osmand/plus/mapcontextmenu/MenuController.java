@@ -188,8 +188,6 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				}
 			} else if (object instanceof SearchHistoryHelper.HistoryEntry) {
 				menuController = new HistoryMenuController(mapActivity, pointDescription, (SearchHistoryHelper.HistoryEntry) object);
-			} else if (object instanceof ExploreTopPlacePoint point) {
-				menuController = new ExplorePlacesMenuController(mapActivity, pointDescription, (ExploreTopPlacePoint) object);
 			} else if (object instanceof TargetPoint) {
 				menuController = new TargetPointMenuController(mapActivity, pointDescription, (TargetPoint) object);
 			} else if (object instanceof Recording) {

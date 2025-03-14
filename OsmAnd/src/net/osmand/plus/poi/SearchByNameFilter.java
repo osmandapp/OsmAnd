@@ -43,7 +43,7 @@ public class SearchByNameFilter extends PoiUIFilter {
 							if (limit != -1 && currentSearchResult.size() > limit) {
 								elimit = true;
 							}
-							if (matcher.publish(object)) {
+							if (matcher != null && matcher.publish(object)) {
 								// Causes concurrent modification exception (below)
 //								currentSearchResult.add(object);
 								return true;
@@ -53,7 +53,7 @@ public class SearchByNameFilter extends PoiUIFilter {
 
 						@Override
 						public boolean isCancelled() {
-							return matcher.isCancelled() || elimit;
+							return matcher != null && matcher.isCancelled() || elimit;
 						}
 					});
 			MapUtils.sortListOfMapObject(result, lat, lon);

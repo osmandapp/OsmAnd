@@ -109,8 +109,8 @@ public class SearchCoreFactory {
 	public static final int SEARCH_AMENITY_BY_NAME_PRIORITY = 700;
 	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_POI_TYPE = 700;
 	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR = 700;
-	protected static final double SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE = 0.001;
-	protected static final double SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE = 0.005;
+	private static final double SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE = 0.001;
+	private static final double SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE = 0.005;
 	
 	public static final int SEARCH_OLC_WITH_CITY_PRIORITY = 8;
 	public static final int SEARCH_OLC_WITH_CITY_TOTAL_LIMIT = 500;
@@ -1950,6 +1950,16 @@ public class SearchCoreFactory {
 	public static boolean isLastWordCityGroup(SearchPhrase p ) {
 		return p.isLastWord(ObjectType.CITY) || p.isLastWord(ObjectType.POSTCODE) ||
 				p.isLastWord(ObjectType.VILLAGE);
+	}
+
+	public static SearchResult createAmenitySearchResult(SearchPhrase phrase, Amenity amenity) {
+		SearchResult sr = new SearchResult(phrase);
+		sr.localeName = amenity.getName();
+		sr.object = amenity;
+		sr.objectType = ObjectType.POI;
+		sr.location = amenity.getLocation();
+		sr.preferredZoom = SearchCoreFactory.PREFERRED_POI_ZOOM;
+		return sr;
 	}
 
 	private static class TopIndexMatch {
