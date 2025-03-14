@@ -81,7 +81,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 
 	private WidgetsPanel selectedPanel;
 	private ApplicationMode selectedAppMode;
-	private WidgetsListFragmentV2 selectedFragment;
+	private WidgetsListFragment selectedFragment;
 
 	private Toolbar toolbar;
 	private AppBarLayout appBar;
@@ -104,7 +104,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		this.selectedAppMode = appMode;
 	}
 
-	public void setSelectedFragment(@Nullable WidgetsListFragmentV2 fragment) {
+	public void setSelectedFragment(@Nullable WidgetsListFragment fragment) {
 		this.selectedFragment = fragment;
 	}
 

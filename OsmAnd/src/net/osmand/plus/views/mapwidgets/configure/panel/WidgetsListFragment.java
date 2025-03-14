@@ -40,7 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class WidgetsListFragmentV2 extends Fragment implements ConfirmationBottomSheet.ConfirmationDialogListener,
+public class WidgetsListFragment extends Fragment implements ConfirmationBottomSheet.ConfirmationDialogListener,
 		SelectCopyAppModeBottomSheet.CopyAppModePrefsListener, WidgetsListAdapter.WidgetsAdapterListener, AddWidgetFragment.AddWidgetListener {
 
 	private static final String SELECTED_PANEL_KEY = "selected_panel_key";
@@ -83,7 +83,7 @@ public class WidgetsListFragmentV2 extends Fragment implements ConfirmationBotto
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		inflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View view = inflater.inflate(R.layout.fragment_widgets_list_v2, container, false);
+		View view = inflater.inflate(R.layout.fragment_widgets_list, container, false);
 
 		recyclerView = view.findViewById(R.id.recycler_view);
 		setupRecyclerView();
