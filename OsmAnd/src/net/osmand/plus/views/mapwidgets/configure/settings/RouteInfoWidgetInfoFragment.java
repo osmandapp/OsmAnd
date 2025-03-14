@@ -20,7 +20,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
-import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.routeinfo.RouteInfoDisplayMode;
 import net.osmand.plus.views.mapwidgets.widgets.routeinfo.RouteInfoWidget;
@@ -33,7 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class RouteInfoWidgetSettingsFragment extends BaseResizableWidgetSettingFragment {
+public class RouteInfoWidgetInfoFragment extends BaseResizableWidgetSettingFragment {
 
 	private static final String KEY_PRIMARY_VALUE = "primary_display_value";
 
@@ -53,7 +52,6 @@ public class RouteInfoWidgetSettingsFragment extends BaseResizableWidgetSettingF
 	@Override
 	protected void initParams(@NonNull Bundle bundle) {
 		super.initParams(bundle);
-		MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
 		if (widgetInfo != null) {
 			widget = ((RouteInfoWidget) widgetInfo.widget);
 			String displayModeKey = bundle.getString(KEY_PRIMARY_VALUE);
@@ -66,7 +64,7 @@ public class RouteInfoWidgetSettingsFragment extends BaseResizableWidgetSettingF
 	}
 
 	@Override
-	protected void setupContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
+	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
 		themedInflater.inflate(R.layout.fragment_widget_settings_route_info, container);
 
 		View defViewContainer = container.findViewById(R.id.default_view_container);
@@ -75,7 +73,6 @@ public class RouteInfoWidgetSettingsFragment extends BaseResizableWidgetSettingF
 		TextView defViewDesc = container.findViewById(R.id.default_view_description);
 		defViewDesc.setText(getString(selectedDisplayMode.getTitleId()));
 
-		super.setupContent(themedInflater, container);
 	}
 
 	private void showDefaultValueDialog(@NonNull View container) {

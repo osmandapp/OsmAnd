@@ -11,14 +11,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
-import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.ElevationProfileWidget;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 
-public class ElevationProfileWidgetSettingsFragment extends WidgetSettingsBaseFragment {
+public class ElevationProfileWidgetInfoFragment extends WidgetInfoBaseFragment {
 
 	private static final String KEY_SHOW_SLOPE = "show_slope";
 	private ElevationProfileWidget elevationWidget;
@@ -35,7 +34,6 @@ public class ElevationProfileWidgetSettingsFragment extends WidgetSettingsBaseFr
 	@Override
 	protected void initParams(@NonNull Bundle bundle) {
 		super.initParams(bundle);
-		MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
 
 		if (bundle.containsKey(KEY_SHOW_SLOPE)) {
 			showSlope = bundle.getBoolean(KEY_SHOW_SLOPE);
@@ -46,7 +44,7 @@ public class ElevationProfileWidgetSettingsFragment extends WidgetSettingsBaseFr
 	}
 
 	@Override
-	protected void setupContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
+	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
 		View content = themedInflater.inflate(R.layout.elevation_profile_widget_settings, container, false);
 		container.addView(content);
 

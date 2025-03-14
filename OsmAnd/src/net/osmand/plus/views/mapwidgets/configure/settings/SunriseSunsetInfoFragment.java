@@ -20,13 +20,12 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.SunPositionMode;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.widgets.SunriseSunsetWidget;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
 
-public class SunriseSunsetSettingsFragment extends BaseSimpleWidgetSettingsFragment {
+public class SunriseSunsetInfoFragment extends BaseSimpleWidgetInfoFragment {
 
 	private static final String SHOW_TIME_TO_LEFT = "show_time_to_left";
 	private static final String SUN_POSITION_MODE = "sun_position_mode";
@@ -57,7 +56,6 @@ public class SunriseSunsetSettingsFragment extends BaseSimpleWidgetSettingsFragm
 	@Override
 	protected void initParams(@NonNull Bundle bundle) {
 		super.initParams(bundle);
-		MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
 		if (widgetInfo != null) {
 			widget = (SunriseSunsetWidget) widgetInfo.widget;
 			widgetType = widget.getWidgetType();
@@ -71,7 +69,7 @@ public class SunriseSunsetSettingsFragment extends BaseSimpleWidgetSettingsFragm
 	}
 
 	@Override
-	protected void setupContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
+	protected void setupMainContent(@NonNull LayoutInflater themedInflater, @NonNull ViewGroup container) {
 		themedInflater.inflate(R.layout.fragment_widget_settings_sunrise_sunset, container);
 		timeDescription = container.findViewById(R.id.preference_description);
 		sunPositionDescription = container.findViewById(R.id.sun_position_description);
@@ -84,7 +82,6 @@ public class SunriseSunsetSettingsFragment extends BaseSimpleWidgetSettingsFragm
 			setupSunPositionMode();
 		}
 
-		super.setupContent(themedInflater, container);
 	}
 
 	private void setupSunPositionMode() {
