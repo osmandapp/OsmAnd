@@ -1,6 +1,8 @@
 package net.osmand.plus.views.mapwidgets.configure.panel;
 
-import static net.osmand.plus.utils.WidgetUtils.createNewWidgets;
+import static net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.showResetSettingsDialog;
+import static net.osmand.plus.utils.AndroidUtils.dpToPx;
+import static net.osmand.plus.utils.WidgetUtils.createNewWidget;
 
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -10,12 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -23,7 +28,8 @@ import androidx.viewpager2.widget.ViewPager2;
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback;
 
 import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener;
 import com.google.android.material.tabs.TabLayout.Tab;
@@ -32,46 +38,63 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
+import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.MapLayers;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
+import net.osmand.plus.views.layers.MapInfoLayer;
+import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.configure.WidgetsSettingsHelper;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.AddWidgetFragment.AddWidgetListener;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.widgets.popup.PopUpMenu;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements WidgetsConfigurationChangeListener,
-		OnOffsetChangedListener, InAppPurchaseListener, AddWidgetListener {
+		InAppPurchaseListener, AddWidgetListener, CopyAppModePrefsListener, ConfirmationDialogListener {
 
 	public static final String TAG = ConfigureWidgetsFragment.class.getSimpleName();
 
 	private static final String APP_MODE_ATTR = "app_mode_key";
 	private static final String SELECTED_GROUP_ATTR = "selected_group_key";
-	private static final String SCROLL_TO_AVAILABLE = "scroll_to_available";
 	private static final String CONTEXT_SELECTED_WIDGET = "context_widget_page";
 	private static final String CONTEXT_SELECTED_PANEL = "context_selected_panel";
 	private static final String ADD_TO_NEXT = "widget_order";
+	private static final String EDIT_MODE_KEY = "edit_mode_key";
+	private static final int ANIMATION_DURATION = 300;
 
-	private MapLayers mapLayers;
-	private MapWidgetRegistry widgetRegistry;
-	private MapWidgetsFactory widgetsFactory;
+	private DialogManager dialogManager;
+	private ConfigureWidgetsController controller;
 
 	private WidgetsPanel selectedPanel;
 	private ApplicationMode selectedAppMode;
-	private WidgetsListFragment selectedFragment;
+	private WidgetsListFragmentV2 selectedFragment;
 
 	private Toolbar toolbar;
+	private AppBarLayout appBar;
+	private CollapsingToolbarLayout collapsingToolbarLayout;
 	private TabLayout tabLayout;
 	private ViewPager2 viewPager;
-	private WidgetsTabAdapter widgetsTabAdapter;
-	private View compensationView;
+	private View bottomButtons;
+	private View bottomButtonsShadow;
+	private FloatingActionButton fabNewWidget;
+	private TextView toolbarTitleView;
+	private View view;
+
+	public boolean isEditMode = false;
 
 	public void setSelectedPanel(@NonNull WidgetsPanel panel) {
 		this.selectedPanel = panel;
@@ -81,28 +104,20 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		this.selectedAppMode = appMode;
 	}
 
-	public void setSelectedFragment(@Nullable WidgetsListFragment fragment) {
+	public void setSelectedFragment(@Nullable WidgetsListFragmentV2 fragment) {
 		this.selectedFragment = fragment;
-		Bundle args = getArguments();
-		if (fragment != null && args != null && args.containsKey(SCROLL_TO_AVAILABLE)) {
-			int contextPanelIndex = args.getInt(CONTEXT_SELECTED_PANEL, -1);
-			if (contextPanelIndex != -1 && WidgetsPanel.values()[contextPanelIndex] == fragment.getSelectedPanel()) {
-				selectedFragment.scrollToAvailable();
-			}
-		}
 	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mapLayers = app.getOsmandMap().getMapLayers();
-		widgetRegistry = mapLayers.getMapWidgetRegistry();
-		widgetsFactory = new MapWidgetsFactory((MapActivity) requireMyActivity());
-
+		dialogManager = app.getDialogManager();
+		setupController();
 		if (savedInstanceState != null) {
 			String appModeKey = savedInstanceState.getString(APP_MODE_ATTR);
 			selectedAppMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
 			selectedPanel = WidgetsPanel.valueOf(savedInstanceState.getString(SELECTED_GROUP_ATTR));
+			isEditMode = savedInstanceState.getBoolean(EDIT_MODE_KEY, false);
 		}
 	}
 
@@ -110,51 +125,217 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		updateNightMode();
-		View view = themedInflater.inflate(R.layout.fragment_configure_widgets, container, false);
+		view = themedInflater.inflate(R.layout.fragment_configure_widgets, container, false);
 		if (Build.VERSION.SDK_INT < 30) {
 			AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		}
-		AppBarLayout appBar = view.findViewById(R.id.appbar);
-		appBar.addOnOffsetChangedListener(this);
+		appBar = view.findViewById(R.id.appbar);
 
 		toolbar = view.findViewById(R.id.toolbar);
 		tabLayout = view.findViewById(R.id.tab_layout);
 		viewPager = view.findViewById(R.id.view_pager);
-		compensationView = view.findViewById(R.id.compensation_view);
+		collapsingToolbarLayout = view.findViewById(R.id.toolbar_layout);
+		fabNewWidget = view.findViewById(R.id.new_entry_fab);
+		bottomButtonsShadow = view.findViewById(R.id.buttons_shadow);
+		toolbarTitleView = toolbar.findViewById(R.id.toolbar_title);
+		bottomButtons = view.findViewById(R.id.buttons_container);
 
 		setupToolbar();
 		setupTabLayout();
+		toggleEditMode(isEditMode);
+		setupApplyButton();
 
 		return view;
+	}
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+			@Override
+			public void handleOnBackPressed() {
+				closeFragment();
+			}
+		});
+
+		if (savedInstanceState != null && (savedInstanceState.containsKey(CONTEXT_SELECTED_WIDGET)
+				|| savedInstanceState.containsKey(CONTEXT_SELECTED_PANEL)
+				|| savedInstanceState.containsKey(ADD_TO_NEXT))) {
+			addNewWidget();
+		}
+	}
+
+	private void closeFragment() {
+		if (isEditMode) {
+			toggleEditMode(false);
+		} else {
+			requireActivity().getSupportFragmentManager().popBackStack();
+		}
 	}
 
 	private void setupToolbar() {
 		ImageButton backButton = toolbar.findViewById(R.id.back_button);
 		backButton.setOnClickListener(view -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				activity.onBackPressed();
-			}
+			closeFragment();
 		});
-		UiUtilities.rotateImageByLayoutDirection(backButton);
 
-		View infoButton = toolbar.findViewById(R.id.info_button);
+		AppCompatImageButton infoButton = toolbar.findViewById(R.id.info_button);
 		infoButton.setOnClickListener(v -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				AndroidUtils.openUrl(activity, R.string.docs_widgets, nightMode);
+			if (!isEditMode) {
+				toggleEditMode(true);
+			} else if (selectedFragment != null) {
+				selectedFragment.updateAdapter();
 			}
 		});
 
-		View actionsButton = toolbar.findViewById(R.id.actions_button);
-		actionsButton.setOnClickListener(v -> {
-			if (selectedFragment != null) {
-				selectedFragment.scrollToActions();
+		AppCompatImageButton actionButton = view.findViewById(R.id.actions_button);
+		actionButton.setOnClickListener(view -> {
+			if (isEditMode) {
+				copyFromProfile();
+			} else {
+				openActionMenu(actionButton);
 			}
 		});
 
-		TextView tvSubtitle = toolbar.findViewById(R.id.toolbar_subtitle);
-		tvSubtitle.setText(selectedAppMode.toHumanString());
+		fabNewWidget.setOnClickListener(view -> {
+			addNewWidget();
+		});
+	}
+
+	private void openActionMenu(@NonNull AppCompatImageButton actionButton) {
+		List<PopUpMenuItem> items = new ArrayList<>();
+
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitle(getString(R.string.copy_from_other_profile))
+				.setIcon(getContentIcon(R.drawable.ic_action_copy))
+				.setOnClickListener(v -> {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						FragmentManager fragmentManager = activity.getSupportFragmentManager();
+						ApplicationMode appMode = settings.getApplicationMode();
+						SelectCopyAppModeBottomSheet.showInstance(fragmentManager, ConfigureWidgetsFragment.this, appMode);
+					}
+				}).create());
+
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitle(getString(R.string.reset_to_default))
+				.setIcon(getContentIcon(R.drawable.ic_action_reset))
+				.setOnClickListener(v -> {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						FragmentManager fragmentManager = activity.getSupportFragmentManager();
+						int panelTitleId = selectedPanel.getTitleId(AndroidUtils.isLayoutRtl(app));
+						showResetSettingsDialog(fragmentManager, ConfigureWidgetsFragment.this, panelTitleId);
+					}
+				}).create());
+
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitle(getString(R.string.shared_string_help))
+				.setIcon(getContentIcon(R.drawable.ic_action_help))
+				.setOnClickListener(v -> {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						AndroidUtils.openUrl(activity, R.string.docs_widgets, nightMode);
+					}
+				}).create());
+
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = actionButton;
+		displayData.menuItems = items;
+		displayData.nightMode = nightMode;
+		PopUpMenu.show(displayData);
+	}
+
+	private void setupApplyButton() {
+		bottomButtons.setBackgroundColor(ColorUtilities.getListBgColor(requireMapActivity(), nightMode));
+
+		DialogButton applyButton = view.findViewById(R.id.dismiss_button);
+		applyButton.setButtonType(DialogButtonType.PRIMARY);
+		applyButton.setTitleId(R.string.shared_string_apply);
+		applyButton.setOnClickListener(view -> {
+			if (isEditMode && selectedFragment != null) {
+				selectedFragment.onApplyChanges();
+				toggleEditMode(false);
+				selectedFragment.updateContent();
+			}
+		});
+		AndroidUiHelper.updateVisibility(applyButton, true);
+	}
+
+	private void setupController() {
+		controller = (ConfigureWidgetsController) dialogManager.findController(ConfigureWidgetsController.PROCESS_ID);
+		if (controller == null) {
+			dialogManager.register(ConfigureWidgetsController.PROCESS_ID, new ConfigureWidgetsController());
+			controller = (ConfigureWidgetsController) dialogManager.findController(ConfigureWidgetsController.PROCESS_ID);
+		}
+	}
+
+	private void updateToolbar() {
+		ImageButton backButton = toolbar.findViewById(R.id.back_button);
+		backButton.setImageDrawable(getContentIcon(isEditMode ? R.drawable.ic_action_close : AndroidUtils.getNavigationIconResId(app)));
+		backButton.setContentDescription(app.getString(isEditMode ? R.string.shared_string_close : R.string.access_shared_string_navigate_up));
+		AppCompatImageButton infoButton = toolbar.findViewById(R.id.info_button);
+		infoButton.setImageDrawable(getContentIcon(isEditMode ? R.drawable.ic_action_reset : R.drawable.ic_action_edit_outlined));
+
+		AppCompatImageButton actionButton = view.findViewById(R.id.actions_button);
+		actionButton.setImageDrawable(getContentIcon(isEditMode ? R.drawable.ic_action_copy : R.drawable.ic_overflow_menu_white));
+		actionButton.setContentDescription(getString(isEditMode ? R.string.copy_from_other_profile : R.string.shared_string_menu));
+
+		updateToolbarName();
+	}
+
+	private void updateToolbarName() {
+		boolean rtl = AndroidUtils.isLayoutRtl(app);
+		toolbarTitleView.setText(selectedPanel.getTitleId(rtl));
+	}
+
+	private void copyFromProfile() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			SelectCopyAppModeBottomSheet.showInstance(activity.getSupportFragmentManager(), this, selectedAppMode);
+		}
+	}
+
+	public void addNewWidget() {
+		SearchWidgetsFragment.showInstance(requireMapActivity(), selectedPanel, ConfigureWidgetsFragment.this);
+	}
+
+	private void toggleEditMode(boolean editMode) {
+		isEditMode = editMode;
+
+		AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) collapsingToolbarLayout.getLayoutParams();
+		params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_NO_SCROLL);
+		if (isEditMode) {
+			params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_NO_SCROLL);
+			appBar.setExpanded(true, true);
+			tabLayout.setVisibility(View.GONE);
+		} else {
+			params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);
+			tabLayout.setVisibility(View.VISIBLE);
+		}
+		if (selectedFragment != null) {
+			selectedFragment.updateAdapter();
+		}
+
+		AndroidUiHelper.updateVisibility(bottomButtons, isEditMode);
+		AndroidUiHelper.updateVisibility(bottomButtonsShadow, isEditMode);
+		updateCompensationView();
+		updateFabPosition(isEditMode);
+		viewPager.setUserInputEnabled(!isEditMode);
+		updateToolbar();
+	}
+
+	private void updateFabPosition(boolean isEditing) {
+		int translationY = isEditing ? -dpToPx(requireMapActivity(), 60) : 0;
+		if (isDisableAnimations()) {
+			fabNewWidget.setTranslationY(translationY);
+		} else {
+			fabNewWidget.animate()
+					.translationY(translationY)
+					.setDuration(ANIMATION_DURATION)
+					.setInterpolator(new DecelerateInterpolator())
+					.start();
+		}
 	}
 
 	@Override
@@ -162,15 +343,17 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		super.onSaveInstanceState(outState);
 		outState.putString(APP_MODE_ATTR, selectedAppMode.getStringKey());
 		outState.putString(SELECTED_GROUP_ATTR, selectedPanel.name());
+		outState.putBoolean(EDIT_MODE_KEY, isEditMode);
 	}
 
 	private void setupTabLayout() {
-		widgetsTabAdapter = new WidgetsTabAdapter(this);
+		WidgetsTabAdapter widgetsTabAdapter = new WidgetsTabAdapter(this);
 		viewPager.setAdapter(widgetsTabAdapter);
 		viewPager.registerOnPageChangeCallback(new OnPageChangeCallback() {
 			@Override
 			public void onPageSelected(int position) {
 				selectedPanel = WidgetsPanel.values()[position];
+				updateToolbarName();
 			}
 		});
 
@@ -227,36 +410,69 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		}
 	}
 
-	@Override
-	public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-		int height = toolbar.getHeight() - Math.abs(verticalOffset);
+	private void updateCompensationView() {
+		int height = getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_height);
+		View compensationView = view.findViewById(R.id.compensation_view);
 		compensationView.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, height));
+		AndroidUiHelper.updateVisibility(compensationView, isEditMode);
 	}
 
 	@Override
 	public void onWidgetsConfigurationChanged() {
-		if (selectedFragment != null) {
+		if (selectedFragment != null && !isEditMode) {
 			selectedFragment.updateContent();
 		}
 	}
 
 	@Override
-	public void onWidgetsSelectedToAdd(@NonNull List<String> widgetsIds, @NonNull WidgetsPanel panel, boolean recreateControls) {
-		Bundle args = getArguments();
-		if (args != null) {
-			int contextPanelIndex = args.getInt(CONTEXT_SELECTED_PANEL, -1);
-			if (contextPanelIndex != -1 && WidgetsPanel.values()[contextPanelIndex] == panel) {
-				String selectedWidget = args.getString(CONTEXT_SELECTED_WIDGET);
-				boolean addToNext = args.getBoolean(ADD_TO_NEXT);
-				if (selectedWidget != null) {
-					createNewWidgets(requireMapActivity(), widgetsIds, panel, selectedAppMode, recreateControls, selectedWidget, addToNext);
-					onWidgetsConfigurationChanged();
-					return;
+	public void onWidgetAdded(@NonNull MapWidgetInfo widgetInfo) {
+		if (isEditMode && selectedFragment != null) {
+			selectedFragment.addWidget(widgetInfo);
+		} else {
+			createWidgets(Collections.singletonList(widgetInfo));
+		}
+	}
+
+	@Override
+	public void onWidgetSelectedToAdd(@NonNull String widgetsId, @NonNull WidgetsPanel panel, boolean recreateControls) {
+		controller.openAddNewWidgetScreen(requireMapActivity(), selectedPanel, widgetsId, selectedAppMode, this);
+	}
+
+	public void createWidgets(@NonNull List<MapWidgetInfo> newWidgetInfos) {
+		for (MapWidgetInfo widgetInfo : newWidgetInfos) {
+			Bundle args = getArguments();
+			if (args != null) {
+				int contextPanelIndex = args.getInt(CONTEXT_SELECTED_PANEL, -1);
+				if (contextPanelIndex != -1 && WidgetsPanel.values()[contextPanelIndex] == selectedPanel) {
+					String selectedWidget = args.getString(CONTEXT_SELECTED_WIDGET);
+					boolean addToNext = args.getBoolean(ADD_TO_NEXT);
+					if (selectedWidget != null) {
+						createNewWidget(requireMapActivity(), widgetInfo, selectedPanel, selectedAppMode, true, selectedWidget, addToNext);
+						onWidgetsConfigurationChanged();
+						return;
+					}
 				}
 			}
+			createNewWidget(requireMapActivity(), widgetInfo, selectedPanel, selectedAppMode, true);
+			onWidgetsConfigurationChanged();
 		}
-		createNewWidgets(requireMapActivity(), widgetsIds, panel, selectedAppMode, recreateControls);
-		onWidgetsConfigurationChanged();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		setupController();
+		updateStatusBar();
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+
+		FragmentActivity activity = getActivity();
+		if (activity != null && !activity.isChangingConfigurations()) {
+			dialogManager.unregister(ConfigureWidgetsController.PROCESS_ID);
+		}
 	}
 
 	@Override
@@ -283,6 +499,43 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 		onWidgetsConfigurationChanged();
 	}
 
+	private boolean isDisableAnimations() {
+		return app.getSettings().DO_NOT_USE_ANIMATIONS.getModeValue(selectedAppMode);
+	}
+
+	@Override
+	public void onActionConfirmed(int actionId) {
+		WidgetsSettingsHelper helper = new WidgetsSettingsHelper(requireMapActivity(), selectedAppMode);
+		helper.resetWidgetsForPanel(selectedPanel);
+
+		if (selectedFragment != null) {
+			selectedFragment.updateContent();
+		}
+		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
+		if (mapInfoLayer != null) {
+			mapInfoLayer.recreateAllControls(requireMapActivity());
+		}
+	}
+
+	@Override
+	public void copyAppModePrefs(@NonNull ApplicationMode appMode) {
+		if (isEditMode && selectedFragment != null) {
+			selectedFragment.copyAppModePrefs(appMode);
+		} else {
+			WidgetsSettingsHelper helper = new WidgetsSettingsHelper(requireMapActivity(), selectedAppMode);
+
+			helper.copyWidgetsForPanel(appMode, selectedPanel);
+
+			MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
+			if (settings.getApplicationMode().equals(selectedAppMode) && mapInfoLayer != null) {
+				mapInfoLayer.recreateAllControls(requireMapActivity());
+			}
+			if (selectedFragment != null) {
+				selectedFragment.updateContent();
+			}
+		}
+	}
+
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
@@ -295,6 +548,7 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 					.commitAllowingStateLoss();
 		}
 	}
+
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull WidgetsPanel panel, @NonNull ApplicationMode appMode, @NonNull String selectedWidget, boolean addNext) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
@@ -302,7 +556,6 @@ public class ConfigureWidgetsFragment extends BaseOsmAndFragment implements Widg
 			fragment.setSelectedPanel(panel);
 			fragment.setSelectedAppMode(appMode);
 			Bundle args = new Bundle();
-			args.putBoolean(SCROLL_TO_AVAILABLE, true);
 			args.putString(CONTEXT_SELECTED_WIDGET, selectedWidget);
 			args.putInt(CONTEXT_SELECTED_PANEL, panel.ordinal());
 			args.putBoolean(ADD_TO_NEXT, addNext);

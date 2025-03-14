@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/list_background_color"
+	android:clickable="true"
+	android:focusable="true"
+	android:orientation="vertical">
+
+	<androidx.appcompat.widget.Toolbar
+		android:id="@+id/toolbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<ImageButton
+				android:id="@+id/back_button"
+				style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+				android:layout_width="@dimen/toolbar_height"
+				android:layout_height="@dimen/toolbar_height"
+				android:layout_gravity="center"
+				android:contentDescription="@string/back"
+				app:srcCompat="@drawable/ic_arrow_back" />
+
+			<FrameLayout
+				android:layout_width="0dp"
+				android:layout_height="@dimen/toolbar_height"
+				android:layout_weight="1">
+
+				<TextView
+					android:id="@+id/toolbar_title"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:gravity="center_vertical"
+					android:letterSpacing="@dimen/text_button_letter_spacing"
+					android:text="@string/add_widget"
+					android:textSize="@dimen/dialog_header_text_size"
+					app:typefaceWeight="medium" />
+
+				<include
+					layout="@layout/search_text_layout"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent" />
+
+			</FrameLayout>
+
+		</LinearLayout>
+
+	</androidx.appcompat.widget.Toolbar>
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/abp__shadow_height"
+		android:scaleType="fitXY"
+		app:srcCompat="@drawable/bg_shadow_list_bottom" />
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/recycler_view"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:padding="8dp" />
+
+</LinearLayout>
