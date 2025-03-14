@@ -785,6 +785,11 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		this.poiUIFilter = poiUIFilter;
 	}
 
+	@Nullable
+	public PoiUIFilter getPoiUIFilter() {
+		return poiUIFilter;
+	}
+
 	@Override
 	public void clear() {
 		super.clear();

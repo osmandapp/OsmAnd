@@ -193,7 +193,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private String toolbarTitle;
 	private boolean toolbarVisible;
 	private boolean tabBarHidden;
-	private boolean showWiki;
 
 	private boolean newSearch;
 	private boolean interruptedSearch;
@@ -354,7 +353,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		buttonToolbarMap.setOnClickListener(v -> {
 					cancelSearch();
 					SearchPhrase searchPhrase = searchUICore.getPhrase();
-					if (showWiki) {
+					PoiUIFilter searchListFilter = ((QuickSearchListAdapter)mainSearchFragment.getAdapter()).getPoiUIFilter();
+					if (searchListFilter != null) {
 						ExplorePlacesFragment.Companion.showInstance(mapActivity.getSupportFragmentManager());
 					} else if (foundPartialLocation) {
 						QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, searchPhrase.getFirstUnknownSearchWord());
@@ -651,7 +651,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			hideKeyboard();
 			searchEditText.setText("");
 			updateTabBarVisibility(true);
-			showWiki = false;
 		} else if (!processBackAction()) {
 			Dialog dialog = getDialog();
 			if (dialog != null) {
@@ -948,7 +947,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	@Override
 	public void onResume() {
 		super.onResume();
-		showWiki = false;
 		if (!useMapCenter) {
 			startLocationUpdate();
 		}
