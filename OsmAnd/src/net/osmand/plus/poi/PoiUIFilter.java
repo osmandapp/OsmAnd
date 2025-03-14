@@ -998,4 +998,8 @@ public class PoiUIFilter implements Comparable<PoiUIFilter>, CustomSearchPoiFilt
 	public String toString() {
 		return getFilterId();
 	}
+
+	public boolean showLayoutWithImages() {
+		return app.getSettings().WIKI_SHOW_IMAGE_PREVIEWS.get();
+	}
 }
