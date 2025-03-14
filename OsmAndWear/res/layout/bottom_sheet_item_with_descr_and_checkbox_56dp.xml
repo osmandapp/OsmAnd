@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/selectableItemBackground"
+	android:layout_marginStart="0dp"
+	android:layout_marginTop="0dp"
+	android:layout_marginEnd="0dp"
+	android:gravity="center_vertical"
+	android:paddingLeft="@dimen/content_padding"
+	android:paddingRight="@dimen/content_padding"
+	android:paddingEnd="@dimen/content_padding"
+	android:paddingStart="@dimen/content_padding"
+	android:paddingTop="@dimen/context_menu_padding_margin_medium"
+	android:paddingBottom="@dimen/context_menu_padding_margin_medium">
+
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/icon"
+		android:layout_width="@dimen/standard_icon_size"
+		android:layout_height="@dimen/standard_icon_size"
+		android:layout_gravity="center_vertical"
+		android:layout_marginStart="@dimen/content_padding"
+		android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+		android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
+		android:translationX="20dp"
+		tools:src="@drawable/list_destination" />
+
+	<include layout="@layout/bottom_sheet_item_with_descr_and_checkbox_content_56dp" />
+
+</LinearLayout>
