@@ -80,6 +80,10 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 		savedInstanceState: Bundle?): View? {
 		location = app.locationProvider.lastKnownLocation
 		updateNightMode()
+		AndroidUiHelper.updateVisibility(
+			showOnMapContainer,
+			false)
+
 		return themedInflater.inflate(R.layout.fragment_nearby_places, container, false)
 	}
 
@@ -122,10 +126,6 @@ class ExplorePlacesFragment : BaseOsmAndFragment(), NearbyPlacesAdapter.NearbyIt
 			}
 			isMapVisible = newState != BottomSheetBehavior.STATE_EXPANDED
 			toggleWikipediaLayer(isMapVisible)
-			AndroidUiHelper.updateVisibility(
-				showOnMapContainer,
-				newState == BottomSheetBehavior.STATE_EXPANDED)
-			bottomSheetBehavior.isDraggable = isMapVisible
 			updateMapControls()
 		}
 
