@@ -20,6 +20,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.Street;
 import net.osmand.data.WptLocationPoint;
+import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.mapcontextmenu.controllers.NetworkRouteDrawable;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.primitives.WptPt;
@@ -127,9 +128,24 @@ public class QuickSearchListItem {
 		String typeName = getTypeName(app, searchResult);
 		String alternateName = searchResult.alternateName;
 		if (searchResult.object instanceof Amenity amenity) {
-            alternateName = amenity.getTranslation(app.getPoiTypes(), searchResult.alternateName);
+			alternateName = amenity.getTranslation(app.getPoiTypes(), searchResult.alternateName);
+			if (amenity.isRouteTrack()) {
+				String distance = AmenityExtensionsHelper.getAmenityDistanceFormatted(amenity, app);
+				if (distance != null) {
+					if (alternateName == null) {
+						alternateName = distance;
+					} else {
+						alternateName = app.
+								getString(R.string.ltr_or_rtl_combine_via_bold_point, distance, alternateName);
+					}
+				}
+			}
 		}
-		return alternateName != null ? typeName + " • " + alternateName : typeName;
+		if (alternateName == null) {
+			return typeName;
+		} else {
+			return app.getString(R.string.ltr_or_rtl_combine_via_bold_point, typeName, alternateName);
+		}
 	}
 
 	public static String getTypeName(OsmandApplication app, SearchResult searchResult) {

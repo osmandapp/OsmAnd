@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 
+import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.render.MapRenderRepositories;
@@ -115,13 +116,23 @@ public class NetworkRouteDrawable extends Drawable {
 			RenderingRuleSearchRequest request = renderer.getSearchRequestWithAppliedCustomRules(storage, nightMode);
 			request.saveState();
 
-			String tag = "route_" + routeKey.type.getName();
-			String color = routeKey.getValue("osmc_textcolor");
+			String shieldTextColor = routeKey.getValue("shield_textcolor");
 
-			request.setInitialTagValueZoom(tag, null, 14, null);
-			request.setIntFilter(request.ALL.R_TEXT_LENGTH, osmcText.length());
-			request.setStringFilter(request.ALL.R_NAME_TAG, tag + "_1_osmc_text");
-			request.setStringFilter(request.ALL.R_ADDITIONAL, tag + "_1_osmc_textcolor=" + color);
+			if (Algorithms.isEmpty(shieldTextColor)) {
+				String tag = "route_" + routeKey.type.getName();
+				String color = routeKey.getValue("osmc_textcolor");
+				request.setInitialTagValueZoom(tag, null, 14, null);
+				request.setIntFilter(request.ALL.R_TEXT_LENGTH, osmcText.length());
+				request.setStringFilter(request.ALL.R_NAME_TAG, tag + "_1_osmc_text");
+				request.setStringFilter(request.ALL.R_ADDITIONAL, tag + "_1_osmc_textcolor=" + color);
+			} else {
+				// Search rules for TravelGpx shields that were encapsulated into RouteKey.
+				request.setInitialTagValueZoom("route", "segment", 14, null);
+				request.setStringFilter(request.ALL.R_NAME_TAG, ""); // empty nameTag for route=segment
+				request.setStringFilter(request.ALL.R_ADDITIONAL, "shield_textcolor=" + shieldTextColor);
+				request.setIntFilter(request.ALL.R_TEXT_LENGTH, osmcText.length());
+			}
+
 			request.search(RenderingRulesStorage.TEXT_RULES);
 
 			StreetNameWidget.setupTextPaint(app, paint, request);

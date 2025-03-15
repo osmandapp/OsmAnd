@@ -5526,4 +5526,7 @@
     <string name="choose_location">Roghnaigh suíomh</string>
     <string name="popular_places">Áiteanna coitianta</string>
     <string name="point_location">Suíomh pointe</string>
+    <string name="show_image_previews">Taispeáin réamhamhairc íomhá</string>
+    <string name="layer_coordinates_grid">Greille comhordanáidí</string>
+    <string name="quick_action_showhide_coordinates_grid_descr">Gníomh chun infheictheacht na heangaí Comhordanáidí ar an léarscáil a rialú.</string>
 </resources>

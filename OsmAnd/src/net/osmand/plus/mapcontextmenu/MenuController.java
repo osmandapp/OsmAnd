@@ -113,7 +113,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	protected List<OpeningHours.Info> openingHoursInfo;
 
-	public MenuController(MenuBuilder builder, PointDescription pointDescription, MapActivity mapActivity) {
+	public MenuController(MenuBuilder builder, PointDescription pointDescription, @NonNull MapActivity mapActivity) {
 		super(mapActivity);
 		this.pointDescription = pointDescription;
 		this.builder = builder;

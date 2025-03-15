@@ -349,6 +349,7 @@ public class BinaryMapPoiReaderAdapter {
 				}
 				BinaryMapIndexReader.SearchPoiTypeFilter filter = req.poiTypeFilter;
 				req.poiTypeFilter = null;//init for all categories
+				// if nameIndexTree is empty, then skip by zero bbox 0,0,0,0
 				readBoxField(0, 0, 0, 0, 0, 0, 0, offsetsMap, null, req, region, nameIndexTree);
 				req.poiTypeFilter = filter;
 				codedIS.popLimit(oldLimit);
@@ -646,7 +647,8 @@ public class BinaryMapPoiReaderAdapter {
 						}
 						if (!matches) {
 							for (String key : am.getAdditionalInfoKeys()) {
-								if (!key.contains("_name") && !key.equals("brand")) {
+								if (!key.contains("_name") && !key.equals("brand") &&
+										!key.contains("wikidata") && !key.equals("route_id")) {
 									continue;
 								}
 								matches = matcher.matches(am.getAdditionalInfo(key));

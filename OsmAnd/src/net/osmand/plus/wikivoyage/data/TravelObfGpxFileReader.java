@@ -6,6 +6,7 @@ import static net.osmand.osm.MapPoiTypes.ROUTES_PREFIX;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ELE_GRAPH;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_ACTIVITY_TYPE;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_SEGMENT_INDEX;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_TYPE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.START_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelObfHelper.EXTENSIONS_EXTRA_TAGS;
@@ -84,7 +85,6 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
     private final TravelArticle article;
     private final TravelHelper.GpxReadCallback callback;
     private final List<AmenityIndexRepository> repos;
-    private final String SEGMENT_INDEX_TAG = "route_segment_index";
 
     public TravelObfGpxFileReader(@NonNull MapActivity mapActivity,
                                   @NonNull TravelArticle article,
@@ -300,7 +300,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             poiTypeFilter = new BinaryMapIndexReader.SearchPoiTypeFilter() {
                 @Override
                 public boolean accept(PoiCategory poiCategory, String s) {
-                    return subType.equals(s);
+                    return subType.equals(s) || ROUTE_TRACK_POINT.equals(s);
                 }
 
                 @Override
@@ -318,12 +318,17 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
         List<Amenity> currentAmenities = new ArrayList<>();
 
         SearchRequest<Amenity> pointRequest = BinaryMapIndexReader.buildSearchPoiRequest(
-                0, 0, Algorithms.emptyIfNull(travelGpx.title), left, right, top, bottom, poiTypeFilter,
+                0, 0, Algorithms.emptyIfNull(travelGpx.routeId), left, right, top, bottom, poiTypeFilter,
                 getAmenityMatcher(travelGpx, amenityMap, currentAmenities, isCancelled), null);
 
         SearchRequest<BinaryMapDataObject> mapRequest = BinaryMapIndexReader
                 .buildSearchRequest(left, right, top, bottom, 15, mapRequestFilter,
                         matchSegmentsByRefTitleRouteId(travelGpx, geometryMap, isCancelled));
+
+        if (travelGpx.routeRadius > 0 && !travelGpx.hasBbox31()) {
+            mapRequest.setBBoxRadius(travelGpx.lat, travelGpx.lon, travelGpx.routeRadius);
+            pointRequest.setBBoxRadius(travelGpx.lat, travelGpx.lon, travelGpx.routeRadius);
+        }
 
         // ResourceManager.getAmenityRepositories() returns OBF files list in Z-A order.
         // Live updates require A-Z order, so use reverted iterator as the easiest way.
@@ -338,16 +343,16 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             }
             currentAmenities.clear();
 
-            if (travelGpx.routeRadius > 0 && !travelGpx.hasBbox31()) {
-                mapRequest.setBBoxRadius(travelGpx.lat, travelGpx.lon, travelGpx.routeRadius);
-                pointRequest.setBBoxRadius(travelGpx.lat, travelGpx.lon, travelGpx.routeRadius);
-            }
-
             if (!isPoiSectionIntersects(repo, pointRequest)) {
                 continue;
             }
 
-            repo.searchPoi(pointRequest);
+            if (!Algorithms.isEmpty(travelGpx.routeId)) {
+                repo.searchPoiByName(pointRequest); // indexed route_id
+            }
+            if (currentAmenities.isEmpty()) {
+                repo.searchPoi(pointRequest); // try non-indexed route_id
+            }
             if (currentAmenities.isEmpty()) {
                 continue;
             }
@@ -374,7 +379,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
             }
             int x31 = MapUtils.get31TileNumberX(am.getLocation().getLongitude());
             int y31 = MapUtils.get31TileNumberY(am.getLocation().getLatitude());
-            String group = am.getAdditionalInfo(SEGMENT_INDEX_TAG);
+            String group = am.getAdditionalInfo(ROUTE_SEGMENT_INDEX);
             if (group == null) {
                 result.add(new QuadRect(x31, y31, x31, y31));
             } else {
@@ -515,7 +520,7 @@ public class TravelObfGpxFileReader extends BaseLoadAsyncTask<Void, Void, GpxFil
                 if (amenity.isClosed()) {
                     commonMap.remove(amenity.getId()); // live-updates
                 }
-                if (amenity.getRouteId().equals(article.getRouteId())) {
+                if (article.getRouteId() != null && article.getRouteId().equals(amenity.getRouteId())) {
                     commonMap.put(amenity.getId(), amenity);
                     currentList.add(amenity);
                 }
