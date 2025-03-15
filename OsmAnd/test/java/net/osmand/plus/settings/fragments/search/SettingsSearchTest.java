@@ -1004,7 +1004,7 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-						{ // not yet implemented
+						{
 								"shouldSearchAndFind_ConfigureScreenFragment_ConfigureMap_RoadStyles_highContrastRoads",
 								new SettingsSearchTestTemplate() {
 
