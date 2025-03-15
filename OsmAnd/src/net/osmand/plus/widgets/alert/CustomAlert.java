@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,17 +26,21 @@ import androidx.preference.PreferenceScreen;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.configmap.ViewOfSettingHighlighter;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import org.threeten.bp.Duration;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
+import de.KnollFrank.lib.settingssearch.results.Setting;
+import de.KnollFrank.lib.settingssearch.results.SettingHighlighter;
+import de.KnollFrank.lib.settingssearch.results.SettingHighlighterProvider;
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
 public class CustomAlert {
@@ -124,14 +129,10 @@ public class CustomAlert {
 						.setAdapter(adapter, null)
 						.create();
 		adapter.setDialog(alertDialog);
-		return new SingleSelectionDialogFragment(
-				alertDialog,
-				data,
-				itemByKey,
-				adapter);
+		return new SingleSelectionDialogFragment(alertDialog, data, itemByKey, adapter);
 	}
 
-	public static class SingleSelectionDialogFragment extends DialogFragment {
+	public static class SingleSelectionDialogFragment extends DialogFragment implements SettingHighlighterProvider {
 
 		private final AlertDialog alertDialog;
 		private final AlertDialogData alertDialogData;
@@ -166,6 +167,37 @@ public class CustomAlert {
 		@Override
 		public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
 			return alertDialog;
+		}
+
+		@Override
+		public SettingHighlighter getSettingHighlighter() {
+			return new ViewOfSettingHighlighter(
+					this::getView,
+					Duration.ofSeconds(1));
+		}
+
+		public void executeOnShown(final Runnable runnable) {
+			getListView().post(runnable);
+		}
+
+		public void scrollToSetting(final Setting setting) {
+			getListView().setSelection(getIndexedOf(setting));
+		}
+
+		private View getView(final Setting setting) {
+			return getListView().getChildAt(getIndexedOf(setting));
+		}
+
+		private ListView getListView() {
+			return ((AlertDialog) getDialog()).getListView();
+		}
+
+		private int getIndexedOf(final Setting setting) {
+			return getKeys().indexOf(setting.getKey());
+		}
+
+		private List<String> getKeys() {
+			return new ArrayList<>(itemByKey.keySet());
 		}
 
 		public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<SingleSelectionDialogFragment> {

@@ -85,13 +85,14 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 			return true;
 		}
 		if (settingsFragment instanceof final CustomAlert.SingleSelectionDialogFragment singleSelectionDialogFragment) {
-			// FK-FIXME: singleSelectionDialogFragment.alertDialog ist null und singleSelectionDialogFragment.alertDialogData auch
 			IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
 			singleSelectionDialogFragment.showNow(mapActivity.getSupportFragmentManager());
-			// FK-TODO: implement highlightSetting()
-//			singleSelectionDialogFragment
-//					.getSettingHighlighter()
-//					.highlightSetting(singleSelectionDialogFragment, setting);
+			singleSelectionDialogFragment.executeOnShown(() -> {
+				singleSelectionDialogFragment.scrollToSetting(setting);
+				singleSelectionDialogFragment
+						.getSettingHighlighter()
+						.highlightSetting(singleSelectionDialogFragment, setting);
+			});
 			return true;
 		}
 		return false;
