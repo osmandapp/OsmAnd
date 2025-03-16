@@ -627,7 +627,7 @@ public class ConfigureMapMenu {
 															  final boolean isChecked) {
 								if (AndroidUtils.isActivityNotDestroyed(activity)) {
 									final ConfigureMapDialogs.MapLanguageDialog dialog = getDialog(uiAdapter);
-									dialog.updateSelectedIndexFromActualPreferredLocale();
+									dialog.updateDialogStateFromPreferences();
 									dialog.show(activity.getSupportFragmentManager(), null);
 								}
 								return false;
