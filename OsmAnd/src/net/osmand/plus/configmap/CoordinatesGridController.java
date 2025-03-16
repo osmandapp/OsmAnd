@@ -35,11 +35,6 @@ public class CoordinatesGridController extends BaseDialogController {
 	private final CoordinatesGridHelper gridHelper;
 	private ICoordinatesGridScreen screen;
 
-	/**
-	 * If true, the controller remains active when the zoom levels screen opens
-	 */
-	private boolean keepActive;
-
 	public CoordinatesGridController(@NonNull OsmandApplication app) {
 		super(app);
 		gridHelper = app.getGridHelper();
@@ -47,7 +42,6 @@ public class CoordinatesGridController extends BaseDialogController {
 
 	public void bindScreen(@NonNull ICoordinatesGridScreen screen) {
 		this.screen = screen;
-		keepActive = false;
 	}
 
 	@NonNull
@@ -102,7 +96,6 @@ public class CoordinatesGridController extends BaseDialogController {
 	}
 
 	public void onZoomLevelsClicked(@NonNull MapActivity activity) {
-		keepActive = true;
 		GridZoomLevelsController.showDialog(activity);
 	}
 
@@ -126,14 +119,6 @@ public class CoordinatesGridController extends BaseDialogController {
 	@NonNull
 	public Limits<Integer> getZoomLevels() {
 		return gridHelper.getZoomLevelsWithRestrictions(getSelectedAppMode());
-	}
-
-	@Override
-	public void finishProcessIfNeeded(@Nullable FragmentActivity activity) {
-		if (!keepActive) {
-			super.finishProcessIfNeeded(activity);
-		}
-		screen = null;
 	}
 
 	@NonNull
