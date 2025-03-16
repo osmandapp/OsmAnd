@@ -183,11 +183,9 @@ public class ConfigureMapDialogs {
 		final Context ctx = UiUtilities.getThemedContext(activity, nightMode);
 		final AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 		builder.setTitle(activity.getString(R.string.map_locale));
-		final Map<String, String> mapLanguages = ConfigureMapUtils.getSorterMapLanguages(app);
-		// FK-TODO: replace with List<String>
-		final String[] mapLanguagesIds = mapLanguages.keySet().toArray(new String[0]);
-		// FK-TODO: replace with List<String>
-		final String[] mapLanguagesNames = mapLanguages.values().toArray(new String[0]);
+		final Map<String, String> mapLanguageNameById = ConfigureMapUtils.getSortedMapLanguageNameById(app);
+		final List<String> mapLanguagesIds = new ArrayList<>(mapLanguageNameById.keySet());
+		final List<String> mapLanguagesNames = new ArrayList<>(mapLanguageNameById.values());
 		final MapLanguageDialog.DialogState dialogState =
 				new MapLanguageDialog.DialogState(
 						getSelected(mapLanguagesIds, settings.MAP_PREFERRED_LOCALE.get()),
@@ -209,7 +207,7 @@ public class ConfigureMapDialogs {
 							view.findViewById(R.id.bottomDivider).setVisibility(View.VISIBLE);
 							view.findViewById(R.id.switchLayout).setVisibility(View.VISIBLE);
 							final TextView switchText = view.findViewById(R.id.switchText);
-							switchText.setText(app.getString(R.string.use_latin_name_if_missing, mapLanguagesNames[position]));
+							switchText.setText(app.getString(R.string.use_latin_name_if_missing, mapLanguagesNames.get(position)));
 							final SwitchCompat check = view.findViewById(R.id.check);
 							check.setChecked(dialogState.transliterateNames);
 							check.setOnCheckedChangeListener(translitChangeListener);
@@ -225,7 +223,7 @@ public class ConfigureMapDialogs {
 				};
 		builder.setAdapter(singleChoiceAdapter, null);
 		builder.setSingleChoiceItems(
-				mapLanguagesNames,
+				mapLanguagesNames.toArray(new String[0]),
 				dialogState.selectedLanguageIndex,
 				new DialogInterface.OnClickListener() {
 
@@ -235,7 +233,7 @@ public class ConfigureMapDialogs {
 						dialogState.transliterateNames =
 								settings.MAP_TRANSLITERATE_NAMES.isSet() ?
 										dialogState.transliterateNames :
-										mapLanguagesIds[which].equals("en");
+										mapLanguagesIds.get(which).equals("en");
 						((AlertDialog) dialog).getListView().setSelection(which);
 						singleChoiceAdapter.notifyDataSetChanged();
 					}
@@ -249,27 +247,27 @@ public class ConfigureMapDialogs {
 					public void onClick(final DialogInterface dialog, final int which) {
 						view.getSettings().MAP_TRANSLITERATE_NAMES.set(dialogState.selectedLanguageIndex > 0 && dialogState.transliterateNames);
 						final int index = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
-						view.getSettings().MAP_PREFERRED_LOCALE.set(mapLanguagesIds[index]);
+						view.getSettings().MAP_PREFERRED_LOCALE.set(mapLanguagesIds.get(index));
 						activity.refreshMapComplete();
 						item.setDescription(getLocaleDescr(index));
 						uiAdapter.onDataSetInvalidated();
 					}
 
 					private String getLocaleDescr(final int index) {
-						return nonEmptyStringOrDefault(mapLanguagesIds[index], () -> activity.getString(R.string.local_map_names));
+						return nonEmptyStringOrDefault(mapLanguagesIds.get(index), () -> activity.getString(R.string.local_map_names));
 					}
 				});
 		return new MapLanguageDialog(
 				builder.create(),
-				mapLanguages,
+				mapLanguageNameById,
 				dialogState,
 				settings.MAP_TRANSLITERATE_NAMES,
 				settings.MAP_PREFERRED_LOCALE);
 	}
 
-	private static int getSelected(final String[] haystack, final String needle) {
-		for (int i = 0; i < haystack.length; i++) {
-			if (Objects.equals(needle, haystack[i])) {
+	private static int getSelected(final List<String> haystack, final String needle) {
+		for (int i = 0; i < haystack.size(); i++) {
+			if (Objects.equals(needle, haystack.get(i))) {
 				return i;
 			}
 		}
@@ -315,7 +313,7 @@ public class ConfigureMapDialogs {
 		}
 
 		public void updateDialogStateFromPreferences() {
-			dialogState.selectedLanguageIndex = getSelected(mapLanguageNameById.keySet().toArray(new String[0]), MAP_PREFERRED_LOCALE.get());
+			dialogState.selectedLanguageIndex = getSelected(getKeys(), MAP_PREFERRED_LOCALE.get());
 			dialogState.transliterateNames = MAP_TRANSLITERATE_NAMES.get();
 		}
 

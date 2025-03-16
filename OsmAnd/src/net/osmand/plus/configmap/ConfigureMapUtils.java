@@ -22,26 +22,29 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ConfigureMapUtils {
 
 	public static final String[] MAP_LANGUAGES_IDS = {"", "en", "af", "als", "ar", "az", "be", "ber", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "ckb", "cs", "cy", "da", "de", "el", "eo", "es", "et", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hsb", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "kab", "kk", "kn", "ko", "ku", "la", "lb", "lo", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "oc", "os", "pl", "pms", "pt", "ro", "ru", "sat", "sc", "sh", "sk", "sl", "sq", "sr", "sr-latn", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh", "zh-Hans", "zh-Hant"};
 
 	@NonNull
-	public static Map<String, String> getSorterMapLanguages(@NonNull OsmandApplication app) {
-		Map<String, String> mapLanguages = new HashMap<>();
-		for (String mapLanguageId : MAP_LANGUAGES_IDS) {
-			boolean localNames = Algorithms.isEmpty(mapLanguageId);
-			String mapLanguageName = localNames
-					? app.getString(R.string.local_map_names)
-					: AndroidUtils.getLangTranslation(app, mapLanguageId);
-
-			mapLanguages.put(mapLanguageId, mapLanguageName);
-		}
-
-		Map<String, String> sortedMapLanguages = new TreeMap<>(getLanguagesComparator(mapLanguages));
-		sortedMapLanguages.putAll(mapLanguages);
-		return sortedMapLanguages;
+	public static Map<String, String> getSortedMapLanguageNameById(@NonNull OsmandApplication app) {
+		final Map<String, String> mapLanguageNameById =
+				Arrays
+						.stream(MAP_LANGUAGES_IDS)
+						.collect(
+								Collectors.toMap(
+										mapLanguageId -> mapLanguageId,
+										mapLanguageId -> {
+											final boolean localNames = Algorithms.isEmpty(mapLanguageId);
+											return localNames
+													? app.getString(R.string.local_map_names)
+													: AndroidUtils.getLangTranslation(app, mapLanguageId);
+										}));
+		final Map<String, String> sortedMapLanguageNameById = new TreeMap<>(getLanguagesComparator(mapLanguageNameById));
+		sortedMapLanguageNameById.putAll(mapLanguageNameById);
+		return sortedMapLanguageNameById;
 	}
 
 	/**
