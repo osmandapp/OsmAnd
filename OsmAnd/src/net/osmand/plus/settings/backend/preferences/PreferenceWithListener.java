@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.backend.preferences;
 
+import net.osmand.IStateChangeListener;
+import net.osmand.SimpleStateChangeListener;
 import net.osmand.StateChangedListener;
 
 import java.lang.ref.WeakReference;
@@ -8,42 +10,47 @@ import java.util.LinkedList;
 import java.util.List;
 
 public abstract class PreferenceWithListener<T> implements OsmandPreference<T> {
-	private List<WeakReference<StateChangedListener<T>>> l;
+	private List<WeakReference<IStateChangeListener>> listeners;
 
 	@Override
 	public synchronized void addListener(StateChangedListener<T> listener) {
-		if (l == null) {
-			l = new LinkedList<>();
+		addListenerInternal(listener);
+	}
+
+	@Override
+	public synchronized void addListener(SimpleStateChangeListener listener) {
+		addListenerInternal(listener);
+	}
+
+	private synchronized void addListenerInternal(IStateChangeListener listener) {
+		if (listeners == null) {
+			listeners = new LinkedList<>();
 		}
-		if (!l.contains(new WeakReference<>(listener))) {
-			l.add(new WeakReference<>(listener));
-		}
+		listeners.add(new WeakReference<>(listener));
 	}
 
 	public synchronized void fireEvent(T value) {
-		if (l != null) {
-			Iterator<WeakReference<StateChangedListener<T>>> it = l.iterator();
+		if (listeners != null) {
+			Iterator<WeakReference<IStateChangeListener>> it = listeners.iterator();
 			while (it.hasNext()) {
-				StateChangedListener<T> t = it.next().get();
-				if (t == null) {
+				IStateChangeListener listener = it.next().get();
+				if (listener == null) {
 					it.remove();
 				} else {
-					t.stateChanged(value);
+					if (listener instanceof StateChangedListener l) {
+						l.stateChanged(value);
+					} else if (listener instanceof SimpleStateChangeListener l) {
+						l.onStateChanged();
+					}
 				}
 			}
 		}
 	}
 
 	@Override
-	public synchronized void removeListener(StateChangedListener<T> listener) {
-		if (l != null) {
-			Iterator<WeakReference<StateChangedListener<T>>> it = l.iterator();
-			while (it.hasNext()) {
-				StateChangedListener<T> t = it.next().get();
-				if (t == listener) {
-					it.remove();
-				}
-			}
+	public synchronized void removeListener(IStateChangeListener listener) {
+		if (listeners != null) {
+			listeners.removeIf(ref -> ref.get() == listener);
 		}
 	}
 }

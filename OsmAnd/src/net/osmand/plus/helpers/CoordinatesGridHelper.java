@@ -6,7 +6,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.StateChangedListener;
+import net.osmand.SimpleStateChangeListener;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.ColorARGB;
 import net.osmand.core.jni.FColorARGB;
@@ -42,23 +42,19 @@ public class CoordinatesGridHelper {
 	private int cachedHaloColor;
 	private Float cachedTextScale;
 	private Boolean cachedGridShow;
-	private StateChangedListener settingsListener;
+	private SimpleStateChangeListener settingsListener;
 
 	public CoordinatesGridHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
 
-		settingsListener = this::onUpdateGridSettings;
+		settingsListener = this::updateGridSettings;
 		settings.SHOW_COORDINATES_GRID.addListener(settingsListener);
 		settings.COORDINATE_GRID_FORMAT.addListener(settingsListener);
 		settings.COORDINATE_GRID_MIN_ZOOM.addListener(settingsListener);
 		settings.COORDINATE_GRID_MAX_ZOOM.addListener(settingsListener);
 		settings.COORDINATES_FORMAT.addListener(settingsListener);
 		settings.TEXT_SCALE.addListener(settingsListener);
-	}
-
-	public <T> void onUpdateGridSettings(@NonNull T changed) {
-		updateGridSettings();
 	}
 
 	public void updateGridSettings() {

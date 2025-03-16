@@ -502,7 +502,7 @@ public class OsmandSettings {
 		return valueSaved;
 	}
 
-	public final OsmandPreference<ApplicationMode> APPLICATION_MODE = new PreferenceWithListener<ApplicationMode>() {
+	public final OsmandPreference<ApplicationMode> APPLICATION_MODE = new PreferenceWithListener<>() {
 
 		@Override
 		public String getId() {
