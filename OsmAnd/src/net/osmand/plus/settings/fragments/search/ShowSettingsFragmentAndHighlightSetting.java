@@ -2,6 +2,9 @@ package net.osmand.plus.settings.fragments.search;
 
 import static net.osmand.plus.settings.fragments.search.YOffsetOfChildWithinContainerProvider.getYOffsetOfChildWithinContainer;
 
+import android.view.View;
+import android.widget.ListView;
+
 import androidx.annotation.IdRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -17,6 +20,7 @@ import net.osmand.plus.transport.TransportLinesFragment;
 import net.osmand.plus.widgets.alert.CustomAlert;
 
 import java.util.Objects;
+import java.util.function.Consumer;
 
 import de.KnollFrank.lib.settingssearch.db.preference.pojo.SearchablePreference;
 import de.KnollFrank.lib.settingssearch.results.*;
@@ -88,27 +92,38 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 		if (settingsFragment instanceof final CustomAlert.SingleSelectionDialogFragment singleSelectionDialogFragment) {
 			IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
 			singleSelectionDialogFragment.showNow(mapActivity.getSupportFragmentManager());
-			singleSelectionDialogFragment.executeOnShown(() -> {
-				singleSelectionDialogFragment.scrollToSetting(setting);
-				singleSelectionDialogFragment
-						.getSettingHighlighter()
-						.highlightSetting(singleSelectionDialogFragment, setting);
-			});
+			execute(
+					singleSelectionDialogFragment.getListView(),
+					listView -> listView.setSelection(singleSelectionDialogFragment.getIndexedOf(setting)),
+					listView -> singleSelectionDialogFragment.getSettingHighlighter().highlightSetting(singleSelectionDialogFragment, setting));
 			return true;
 		}
 		if (settingsFragment instanceof final ConfigureMapDialogs.MapLanguageDialog mapLanguageDialog) {
 			IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
 			mapLanguageDialog.showNow(mapActivity.getSupportFragmentManager(), null);
-			mapLanguageDialog.executeOnShown(() -> {
-				mapLanguageDialog.scrollToSetting(setting);
-				// FK-FIXME: language is sometimes not highlighted
-				mapLanguageDialog
-						.getSettingHighlighter()
-						.highlightSetting(mapLanguageDialog, setting);
-			});
+			execute(
+					mapLanguageDialog.getListView(),
+					listView -> listView.setSelection(mapLanguageDialog.getIndexedOf(setting)),
+					listView -> mapLanguageDialog.getSettingHighlighter().highlightSetting(mapLanguageDialog, setting));
 			return true;
 		}
 		return false;
+	}
+
+	private static void execute(final ListView listView,
+								final Consumer<ListView> doWithListView1,
+								final Consumer<ListView> doWithListView2) {
+		listView.addOnLayoutChangeListener(
+				new View.OnLayoutChangeListener() {
+
+					@Override
+					public void onLayoutChange(final View v, final int left, final int top, final int right, final int bottom, final int oldLeft, final int oldTop, final int oldRight, final int oldBottom) {
+						listView.removeOnLayoutChangeListener(this);
+						doWithListView2.accept(listView);
+					}
+				});
+		doWithListView1.accept(listView);
+		listView.requestLayout();
 	}
 
 	private static Setting asSetting(final SearchablePreference preference) {

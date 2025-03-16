@@ -285,14 +285,6 @@ public class ConfigureMapDialogs {
 					Duration.ofSeconds(1));
 		}
 
-		public void executeOnShown(final Runnable runnable) {
-			getListView().post(runnable);
-		}
-
-		public void scrollToSetting(final Setting setting) {
-			getListView().setSelection(getIndexedOf(setting));
-		}
-
 		private View getView(final Setting setting) {
 			return getViewByPosition(getListView(), getIndexedOf(setting));
 		}
@@ -306,11 +298,11 @@ public class ConfigureMapDialogs {
 					listView.getAdapter().getView(pos, null, listView);
 		}
 
-		private ListView getListView() {
+		public ListView getListView() {
 			return ((AlertDialog) getDialog()).getListView();
 		}
 
-		private int getIndexedOf(final Setting setting) {
+		public int getIndexedOf(final Setting setting) {
 			return getKeys().indexOf(setting.getKey());
 		}
 
