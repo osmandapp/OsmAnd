@@ -47,7 +47,6 @@ import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
-import net.osmand.render.RenderingRuleProperty;
 
 import org.threeten.bp.Duration;
 
@@ -78,7 +77,6 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	private final Map<Integer, View> views = new HashMap<>();
 
 	private boolean useAnimation;
-	private List<RenderingRuleProperty> propertiesOfDetailsBottomSheet;
 	private CustomAlert.SingleSelectionDialogFragment roadStyleDialog;
 
 	public CustomAlert.SingleSelectionDialogFragment getRoadStyleDialog() {
@@ -170,7 +168,6 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 	private void updateItemsData() {
 		ConfigureMapMenu menu = new ConfigureMapMenu(app);
 		adapter = menu.createListAdapter(mapActivity, Optional.of(this));
-		propertiesOfDetailsBottomSheet = menu.getPropertiesOfDetailsBottomSheet().orElseThrow();
 		roadStyleDialog = menu.getRoadStyleDialog().orElseThrow();
 		ContextMenuUtils.removeHiddenItems(adapter);
 		ContextMenuUtils.hideExtraDividers(adapter);
@@ -423,10 +420,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 
 							@Override
 							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
-								final DetailsBottomSheet.PreferenceFragment preferenceFragment = new DetailsBottomSheet.PreferenceFragment();
-								// FK-TODO: remove the following setProperties() because preferenceFragment.initializePreferenceFragmentWithFragmentBeforeOnCreate() will be automatically called?
-								preferenceFragment.setProperties(configureMapFragment.propertiesOfDetailsBottomSheet);
-								return preferenceFragment;
+								return new DetailsBottomSheet.PreferenceFragment();
 							}
 
 							@Override
