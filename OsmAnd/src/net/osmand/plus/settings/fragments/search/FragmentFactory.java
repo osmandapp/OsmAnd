@@ -42,7 +42,6 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 
 	private static <T extends Fragment> Optional<T> getExistingInstance(final Class<T> fragmentClass, final Optional<PreferenceWithHost> src) {
 		// FK-TODO: folgendes ist absolut unklar programmiert!!!
-		// FK-TODO: CustomAlert.SingleSelectionDialogFragment umbenennen in CustomAlert.RoadStyleDialog?
 		if (CustomAlert.SingleSelectionDialogFragment.class.equals(fragmentClass) && src.isPresent()) {
 			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
 			if (srcProxy instanceof final ConfigureMapFragment.PreferenceFragment _srcProxy) {
