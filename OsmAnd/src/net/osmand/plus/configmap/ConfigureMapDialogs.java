@@ -184,7 +184,9 @@ public class ConfigureMapDialogs {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 		builder.setTitle(activity.getString(R.string.map_locale));
 		final Map<String, String> mapLanguages = ConfigureMapUtils.getSorterMapLanguages(app);
+		// FK-TODO: replace with List<String>
 		final String[] mapLanguagesIds = mapLanguages.keySet().toArray(new String[0]);
+		// FK-TODO: replace with List<String>
 		final String[] mapLanguagesNames = mapLanguages.values().toArray(new String[0]);
 		final MapLanguageDialog.DialogState dialogState =
 				new MapLanguageDialog.DialogState(
@@ -265,16 +267,13 @@ public class ConfigureMapDialogs {
 				settings.MAP_PREFERRED_LOCALE);
 	}
 
-	// FK-TODO: refactor
 	private static int getSelected(final String[] haystack, final String needle) {
-		int selected = -1;
 		for (int i = 0; i < haystack.length; i++) {
-			if (needle.equals(haystack[i])) {
-				selected = i;
-				break;
+			if (Objects.equals(needle, haystack[i])) {
+				return i;
 			}
 		}
-		return selected;
+		return -1;
 	}
 
 	// FK-TODO: DRY with CustomAlert.SingleSelectionDialogFragment
