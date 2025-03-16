@@ -160,11 +160,10 @@ public class ConfigureMapDialogs {
 		});
 	}
 
-	protected static void showMapLanguageDialog(final @NonNull MapActivity activity,
-												final boolean nightMode,
-												final @NonNull ContextMenuItem item,
-												final @NonNull OnDataChangeUiAdapter uiAdapter) {
-
+	public static MapLanguageDialog createMapLanguageDialog(final @NonNull MapActivity activity,
+															final boolean nightMode,
+															final @NonNull ContextMenuItem item,
+															final @NonNull OnDataChangeUiAdapter uiAdapter) {
 		int[] selectedLanguageIndex = new int[1];
 		boolean[] transliterateNames = new boolean[1];
 
@@ -248,17 +247,15 @@ public class ConfigureMapDialogs {
 			item.setDescription(localeDescr);
 			uiAdapter.onDataSetInvalidated();
 		});
-		final AlertDialog dialog = b.create();
-		final SingleSelectionDialogFragment singleSelectionDialogFragment = new SingleSelectionDialogFragment(dialog);
-		singleSelectionDialogFragment.show(activity.getSupportFragmentManager(), null);
+		return new MapLanguageDialog(b.create());
 	}
 
 	// FK-TODO: DRY with CustomAlert.SingleSelectionDialogFragment
-	public static class SingleSelectionDialogFragment extends DialogFragment {
+	public static class MapLanguageDialog extends DialogFragment {
 
 		private final AlertDialog alertDialog;
 
-		public SingleSelectionDialogFragment(final AlertDialog alertDialog) {
+		public MapLanguageDialog(final AlertDialog alertDialog) {
 			this.alertDialog = alertDialog;
 		}
 

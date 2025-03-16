@@ -574,7 +574,9 @@ public class ConfigureMapMenu {
 				.setIcon(R.drawable.ic_action_map_language)
 				.setListener((_uiAdapter, view, item, isChecked) -> {
 					if (AndroidUtils.isActivityNotDestroyed(activity)) {
-						ConfigureMapDialogs.showMapLanguageDialog(activity, nightMode, item, _uiAdapter);
+						ConfigureMapDialogs
+								.createMapLanguageDialog(activity, nightMode, item, _uiAdapter)
+								.show(activity.getSupportFragmentManager(), null);
 					}
 					return false;
 				})
