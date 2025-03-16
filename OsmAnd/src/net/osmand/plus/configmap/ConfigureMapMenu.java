@@ -73,6 +73,7 @@ import org.jetbrains.annotations.NotNull;
 import java.text.DateFormat;
 import java.util.*;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class ConfigureMapMenu {
 
@@ -565,10 +566,7 @@ public class ConfigureMapMenu {
 				})
 				.setItemDeleteAction(settings.TEXT_SCALE));
 
-		String localeDescr = settings.MAP_PREFERRED_LOCALE.get();
-		localeDescr = localeDescr == null || localeDescr.isEmpty() ? activity.getString(R.string.local_map_names)
-				: localeDescr;
-		final MapLanguageItemAndDialog mapLanguageItemAndDialog = createMapLanguageItemAndDialog(activity, nightMode, localeDescr, uiAdapter);
+		final MapLanguageItemAndDialog mapLanguageItemAndDialog = createMapLanguageItemAndDialog(activity, nightMode, uiAdapter);
 		adapter.addItem(mapLanguageItemAndDialog.item);
 		mapLanguageDialog = mapLanguageItemAndDialog.dialog;
 
@@ -592,14 +590,21 @@ public class ConfigureMapMenu {
 		}
 	}
 
+	private String getLocaleDescr(final Context context) {
+		return nonEmptyStringOrDefault(settings.MAP_PREFERRED_LOCALE.get(), () -> context.getString(R.string.local_map_names));
+	}
+
+	public static String nonEmptyStringOrDefault(final String str, final Supplier<String> defaultSupplier) {
+		return str != null && !str.isEmpty() ? str : defaultSupplier.get();
+	}
+
 	private MapLanguageItemAndDialog createMapLanguageItemAndDialog(final MapActivity activity,
 																	final boolean nightMode,
-																	final String localeDescr,
 																	final Optional<OnDataChangeUiAdapter> uiAdapter) {
 		final ContextMenuItem mapLanguageItem =
 				new ContextMenuItem(MAP_LANGUAGE_ID)
 						.setTitleId(R.string.map_locale, activity)
-						.setDescription(localeDescr)
+						.setDescription(getLocaleDescr(activity))
 						.setLayout(R.layout.list_item_single_line_descrition_narrow)
 						.setIcon(R.drawable.ic_action_map_language)
 						.setItemDeleteAction(settings.MAP_PREFERRED_LOCALE);
@@ -621,9 +626,9 @@ public class ConfigureMapMenu {
 															  final ContextMenuItem item,
 															  final boolean isChecked) {
 								if (AndroidUtils.isActivityNotDestroyed(activity)) {
-									this
-											.getDialog(uiAdapter)
-											.show(activity.getSupportFragmentManager(), null);
+									final ConfigureMapDialogs.MapLanguageDialog dialog = getDialog(uiAdapter);
+									dialog.updateSelectedIndexFromActualPreferredLocale();
+									dialog.show(activity.getSupportFragmentManager(), null);
 								}
 								return false;
 							}

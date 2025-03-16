@@ -1,14 +1,15 @@
 package net.osmand.plus.configmap;
 
+import static net.osmand.plus.configmap.ConfigureMapMenu.nonEmptyStringOrDefault;
+
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.*;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -175,90 +176,122 @@ public class ConfigureMapDialogs {
 															final boolean nightMode,
 															final @NonNull ContextMenuItem item,
 															final @NonNull OnDataChangeUiAdapter uiAdapter) {
-		int[] selectedLanguageIndex = new int[1];
-		boolean[] transliterateNames = new boolean[1];
+		final int[] selectedLanguageIndexes = new int[1];
+		final boolean[] transliterateNames = new boolean[1];
 
-		OsmandApplication app = activity.getMyApplication();
-		OsmandSettings settings = app.getSettings();
-		int profileColor = ColorUtilities.getAppModeColor(app, nightMode);
+		final OsmandApplication app = activity.getMyApplication();
+		final OsmandSettings settings = app.getSettings();
+		final int profileColor = ColorUtilities.getAppModeColor(app, nightMode);
+		final OsmandMapTileView view = activity.getMapView();
+		final Context ctx = UiUtilities.getThemedContext(activity, nightMode);
+		final AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+		builder.setTitle(activity.getString(R.string.map_locale));
+		final Map<String, String> mapLanguages = ConfigureMapUtils.getSorterMapLanguages(app);
+		final String[] mapLanguagesIds = mapLanguages.keySet().toArray(new String[0]);
+		final String[] mapLanguagesNames = mapLanguages.values().toArray(new String[0]);
+		final int selected = getSelected(mapLanguagesIds, settings.MAP_PREFERRED_LOCALE.get());
+		set(
+				selectedLanguageIndexes,
+				selected,
+				transliterateNames,
+				settings.MAP_TRANSLITERATE_NAMES.get());
+		final OnCheckedChangeListener translitChangeListener = (buttonView, isChecked) -> transliterateNames[0] = isChecked;
+		final BaseAdapter singleChoiceAdapter =
+				new ArrayAdapter<>(ctx, R.layout.single_choice_switch_item, R.id.text1, mapLanguagesNames) {
 
+					@NonNull
+					@Override
+					public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+						final View view = super.getView(position, convertView, parent);
+						final AppCompatCheckedTextView checkedTextView = view.findViewById(R.id.text1);
+						UiUtilities.setupCompoundButtonDrawable(app, nightMode, profileColor, checkedTextView.getCheckMarkDrawable());
 
-		OsmandMapTileView view = activity.getMapView();
-		Context ctx = UiUtilities.getThemedContext(activity, nightMode);
-		AlertDialog.Builder b = new AlertDialog.Builder(ctx);
-		b.setTitle(activity.getString(R.string.map_locale));
+						if (position == selectedLanguageIndexes[0] && position > 0) {
+							checkedTextView.setChecked(true);
+							view.findViewById(R.id.topDivider).setVisibility(View.VISIBLE);
+							view.findViewById(R.id.bottomDivider).setVisibility(View.VISIBLE);
+							view.findViewById(R.id.switchLayout).setVisibility(View.VISIBLE);
+							final TextView switchText = view.findViewById(R.id.switchText);
+							switchText.setText(app.getString(R.string.use_latin_name_if_missing, mapLanguagesNames[position]));
+							final SwitchCompat check = view.findViewById(R.id.check);
+							check.setChecked(transliterateNames[0]);
+							check.setOnCheckedChangeListener(translitChangeListener);
+							UiUtilities.setupCompoundButton(nightMode, profileColor, check);
+						} else {
+							checkedTextView.setChecked(position == selectedLanguageIndexes[0]);
+							view.findViewById(R.id.topDivider).setVisibility(View.GONE);
+							view.findViewById(R.id.bottomDivider).setVisibility(View.GONE);
+							view.findViewById(R.id.switchLayout).setVisibility(View.GONE);
+						}
+						return view;
+					}
+				};
+		builder.setAdapter(singleChoiceAdapter, null);
+		builder.setSingleChoiceItems(
+				mapLanguagesNames,
+				selected,
+				new DialogInterface.OnClickListener() {
 
-		Map<String, String> mapLanguages = ConfigureMapUtils.getSorterMapLanguages(app);
-		String[] mapLanguagesIds = mapLanguages.keySet().toArray(new String[0]);
-		String[] mapLanguagesNames = mapLanguages.values().toArray(new String[0]);
+					@Override
+					public void onClick(final DialogInterface dialog, final int which) {
+						set(
+								selectedLanguageIndexes,
+								which,
+								transliterateNames,
+								settings.MAP_TRANSLITERATE_NAMES.isSet()
+										? transliterateNames[0]
+										: mapLanguagesIds[which].equals("en"));
+						((AlertDialog) dialog).getListView().setSelection(which);
+						singleChoiceAdapter.notifyDataSetChanged();
+					}
+				});
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.setPositiveButton(
+				R.string.shared_string_apply,
+				new DialogInterface.OnClickListener() {
 
+					@Override
+					public void onClick(final DialogInterface dialog, final int which) {
+						view.getSettings().MAP_TRANSLITERATE_NAMES.set(selectedLanguageIndexes[0] > 0 && transliterateNames[0]);
+						final int index = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
+						view.getSettings().MAP_PREFERRED_LOCALE.set(mapLanguagesIds[index]);
+						activity.refreshMapComplete();
+						item.setDescription(getLocaleDescr(index));
+						uiAdapter.onDataSetInvalidated();
+					}
+
+					private String getLocaleDescr(final int index) {
+						return nonEmptyStringOrDefault(mapLanguagesIds[index], () -> activity.getString(R.string.local_map_names));
+					}
+				});
+		return new MapLanguageDialog(
+				builder.create(),
+				mapLanguages,
+				selectedLanguageIndexes,
+				transliterateNames,
+				settings.MAP_TRANSLITERATE_NAMES,
+				settings.MAP_PREFERRED_LOCALE);
+	}
+
+	// FK-TODO: refactor
+	private static void set(final int[] selectedLanguageIndexes,
+							final int selectedLanguageIndex,
+							final boolean[] transliterateNames,
+							final boolean transliterateName) {
+		selectedLanguageIndexes[0] = selectedLanguageIndex;
+		transliterateNames[0] = transliterateName;
+	}
+
+	// FK-TODO: refactor
+	private static int getSelected(final String[] haystack, final String needle) {
 		int selected = -1;
-		for (int i = 0; i < mapLanguagesIds.length; i++) {
-			if (settings.MAP_PREFERRED_LOCALE.get().equals(mapLanguagesIds[i])) {
+		for (int i = 0; i < haystack.length; i++) {
+			if (needle.equals(haystack[i])) {
 				selected = i;
 				break;
 			}
 		}
-		selectedLanguageIndex[0] = selected;
-		transliterateNames[0] = settings.MAP_TRANSLITERATE_NAMES.get();
-
-		OnCheckedChangeListener translitChangdListener = (buttonView, isChecked) -> transliterateNames[0] = isChecked;
-
-		ArrayAdapter<CharSequence> singleChoiceAdapter = new ArrayAdapter<>(
-				ctx, R.layout.single_choice_switch_item, R.id.text1, mapLanguagesNames) {
-			@NonNull
-			@Override
-			public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-				View v = super.getView(position, convertView, parent);
-				AppCompatCheckedTextView checkedTextView = v.findViewById(R.id.text1);
-				UiUtilities.setupCompoundButtonDrawable(app, nightMode, profileColor, checkedTextView.getCheckMarkDrawable());
-
-				if (position == selectedLanguageIndex[0] && position > 0) {
-					checkedTextView.setChecked(true);
-					v.findViewById(R.id.topDivider).setVisibility(View.VISIBLE);
-					v.findViewById(R.id.bottomDivider).setVisibility(View.VISIBLE);
-					v.findViewById(R.id.switchLayout).setVisibility(View.VISIBLE);
-					TextView switchText = v.findViewById(R.id.switchText);
-					switchText.setText(app.getString(R.string.use_latin_name_if_missing, mapLanguagesNames[position]));
-					SwitchCompat check = v.findViewById(R.id.check);
-					check.setChecked(transliterateNames[0]);
-					check.setOnCheckedChangeListener(translitChangdListener);
-					UiUtilities.setupCompoundButton(nightMode, profileColor, check);
-				} else {
-					checkedTextView.setChecked(position == selectedLanguageIndex[0]);
-					v.findViewById(R.id.topDivider).setVisibility(View.GONE);
-					v.findViewById(R.id.bottomDivider).setVisibility(View.GONE);
-					v.findViewById(R.id.switchLayout).setVisibility(View.GONE);
-				}
-				return v;
-			}
-		};
-
-		b.setAdapter(singleChoiceAdapter, null);
-		b.setSingleChoiceItems(mapLanguagesNames, selected, (dialog, which) -> {
-			selectedLanguageIndex[0] = which;
-			transliterateNames[0] = settings.MAP_TRANSLITERATE_NAMES.isSet()
-					? transliterateNames[0]
-					: mapLanguagesIds[which].equals("en");
-			((AlertDialog) dialog).getListView().setSelection(which);
-			singleChoiceAdapter.notifyDataSetChanged();
-		});
-
-		b.setNegativeButton(R.string.shared_string_cancel, null);
-		b.setPositiveButton(R.string.shared_string_apply, (dialog, which) -> {
-			view.getSettings().MAP_TRANSLITERATE_NAMES.set(selectedLanguageIndex[0] > 0 && transliterateNames[0]);
-			AlertDialog dlg = (AlertDialog) dialog;
-			int index = dlg.getListView().getCheckedItemPosition();
-			view.getSettings().MAP_PREFERRED_LOCALE.set(
-					mapLanguagesIds[index]);
-			activity.refreshMapComplete();
-			String localeDescr = mapLanguagesIds[index];
-			localeDescr = localeDescr == null || localeDescr.isEmpty() ? activity
-					.getString(R.string.local_map_names) : localeDescr;
-			item.setDescription(localeDescr);
-			uiAdapter.onDataSetInvalidated();
-		});
-		return new MapLanguageDialog(b.create(), mapLanguages);
+		return selected;
 	}
 
 	// FK-TODO: DRY with CustomAlert.SingleSelectionDialogFragment
@@ -266,16 +299,37 @@ public class ConfigureMapDialogs {
 
 		private final AlertDialog alertDialog;
 		private final Map<String, String> mapLanguageNameById;
+		private final int[] selectedLanguageIndexes;
+		private final boolean[] transliterateNames;
+		private final OsmandPreference<Boolean> MAP_TRANSLITERATE_NAMES;
+		private final OsmandPreference<String> MAP_PREFERRED_LOCALE;
 
-		public MapLanguageDialog(final AlertDialog alertDialog, final Map<String, String> mapLanguageNameById) {
+		public MapLanguageDialog(final AlertDialog alertDialog,
+								 final Map<String, String> mapLanguageNameById,
+								 final int[] selectedLanguageIndexes,
+								 final boolean[] transliterateNames,
+								 final OsmandPreference<Boolean> MAP_TRANSLITERATE_NAMES,
+								 final OsmandPreference<String> MAP_PREFERRED_LOCALE) {
 			this.alertDialog = alertDialog;
 			this.mapLanguageNameById = mapLanguageNameById;
+			this.selectedLanguageIndexes = selectedLanguageIndexes;
+			this.transliterateNames = transliterateNames;
+			this.MAP_TRANSLITERATE_NAMES = MAP_TRANSLITERATE_NAMES;
+			this.MAP_PREFERRED_LOCALE = MAP_PREFERRED_LOCALE;
 		}
 
 		@NonNull
 		@Override
 		public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
 			return alertDialog;
+		}
+
+		public void updateSelectedIndexFromActualPreferredLocale() {
+			set(
+					selectedLanguageIndexes,
+					getSelected(mapLanguageNameById.keySet().toArray(new String[0]), MAP_PREFERRED_LOCALE.get()),
+					transliterateNames,
+					MAP_TRANSLITERATE_NAMES.get());
 		}
 
 		@Override
