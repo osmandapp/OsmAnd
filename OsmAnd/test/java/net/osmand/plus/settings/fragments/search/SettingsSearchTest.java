@@ -1019,7 +1019,7 @@ public class SettingsSearchTest extends AndroidTest {
 									}
 								}
 						},
-						{ // not yet implemented
+						{
 								"shouldSearchAndFind_ConfigureScreenFragment_ConfigureMap_MapLanguage_Afrikaans",
 								new SettingsSearchTestTemplate() {
 

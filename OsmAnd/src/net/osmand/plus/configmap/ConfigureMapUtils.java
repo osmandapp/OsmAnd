@@ -100,9 +100,9 @@ public class ConfigureMapUtils {
 		return customRules;
 	}
 
-	protected static LinkedHashMap<String, CharSequence> getItemByKey(final RenderingRuleProperty property,
-																	  final Context context) {
-		final LinkedHashMap<String, CharSequence> itemByKey = new LinkedHashMap<>();
+	protected static Map<String, CharSequence> getSortedItemByKey(final RenderingRuleProperty property,
+																  final Context context) {
+		final Map<String, CharSequence> itemByKey = new LinkedHashMap<>();
 		itemByKey.put(property.getDefaultValueDescription(), AndroidUtils.getRenderingStringPropertyValue(context, property.getDefaultValueDescription()));
 		for (final String possibleValue : property.getPossibleValues()) {
 			itemByKey.put(possibleValue, AndroidUtils.getRenderingStringPropertyValue(context, possibleValue));

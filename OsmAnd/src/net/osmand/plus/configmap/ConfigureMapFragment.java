@@ -482,6 +482,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 								return false;
 							}
 						});
+				// FK-TODO: case MAP_LANGUAGE_ID ->
 				default -> Optional.empty();
 			};
 		}

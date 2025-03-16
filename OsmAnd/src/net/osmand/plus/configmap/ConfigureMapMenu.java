@@ -747,13 +747,12 @@ public class ConfigureMapMenu {
 							.setLayout(R.layout.list_item_single_line_descrition_narrow);
 			final Function<OnDataChangeUiAdapter, CustomAlert.SingleSelectionDialogFragment> createDialog =
 					_uiAdapter ->
-							ConfigureMapDialogs
-									.createRenderingPropertyDialog(
-											activity,
-											property,
-											item,
-											_uiAdapter,
-											nightMode);
+							ConfigureMapDialogs.createRenderingPropertyDialog(
+									activity,
+									property,
+									item,
+									_uiAdapter,
+									nightMode);
 			final Optional<CustomAlert.SingleSelectionDialogFragment> dialog = uiAdapter.map(createDialog);
 			item.setListener(
 					new ItemClickListener() {

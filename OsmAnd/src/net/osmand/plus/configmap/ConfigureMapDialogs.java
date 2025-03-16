@@ -259,7 +259,7 @@ public class ConfigureMapDialogs {
 								.setTitle(AndroidUtils.getRenderingStringPropertyDescription(activity.getMyApplication(), property.getAttrName(), property.getName()))
 								.setControlsColor(ColorUtilities.getAppModeColor(activity.getMyApplication(), nightMode))
 								.setNegativeButton(R.string.shared_string_dismiss, null),
-						ConfigureMapUtils.getItemByKey(property, activity.getMyApplication()),
+						ConfigureMapUtils.getSortedItemByKey(property, activity.getMyApplication()),
 						getSelectedIndex(activity, property),
 						v -> {
 							final int which = (int) v.getTag();

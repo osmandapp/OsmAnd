@@ -110,7 +110,7 @@ public class CustomAlert {
 
 	public static SingleSelectionDialogFragment createSingleSelectionDialogFragment(
 			final @NonNull AlertDialogData data,
-			final LinkedHashMap<String, CharSequence> itemByKey,
+			final Map<String, CharSequence> itemByKey,
 			final int selectedEntryIndex,
 			final View.OnClickListener itemClickListener) {
 		final SelectionDialogAdapter adapter =
