@@ -1111,7 +1111,7 @@
     <string name="calculate_osmand_route_without_internet">Cálculo sin Internet del segmento de ruta OsmAnd</string>
     <string name="gpx_option_calculate_first_last_segment">Calcular la ruta OsmAnd para el primer y último segmento de ruta</string>
     <string name="lang_en">Inglés</string>
-    <string name="lang_af">Africaans</string>
+    <string name="lang_af">Afrikáans</string>
     <string name="lang_hy">Armenio</string>
     <string name="lang_eu">Vasco</string>
     <string name="lang_be">Bielorruso</string>
@@ -1956,9 +1956,9 @@
     <string name="app_mode_train">Tren</string>
     <string name="lang_es_us">Español (Estados Unidos)</string>
     <string name="lang_ast">Asturiano</string>
-    <string name="lang_hsb">Sorabo (Alto)</string>
+    <string name="lang_hsb">Sorabo (alto)</string>
     <string name="lang_en_gb">Inglés (Reino Unido)</string>
-    <string name="lang_be_by">Bielorruso (Latino)</string>
+    <string name="lang_be_by">Bielorruso (latino)</string>
     <string name="lang_kn">Canarés</string>
     <string name="share_history_subject">compartido vía OsmAnd</string>
     <string name="coords_search">Buscar coordenadas</string>
@@ -2622,7 +2622,7 @@
     <string name="images_cache">Almacén de imágenes</string>
     <string name="delete_search_history">Borrar historial de búsquedas</string>
     <string name="download_maps_travel">Guías turísticas</string>
-    <string name="shared_string_wikivoyage">Wikivoyage</string>
+    <string name="shared_string_wikivoyage">Wikiviajes</string>
     <string name="article_removed">Artículo borrado</string>
     <string name="wikivoyage_search_hint">Buscar por país, ciudad o provincia</string>
     <string name="shared_string_read">Leer</string>
@@ -3515,7 +3515,7 @@
     <string name="download_unsupported_action">Acción «%1$s» no admitida</string>
     <string name="index_item_world_basemap_detailed">Mapa mundial general (detallado)</string>
     <string name="unsupported_type_error">Tipo no admitido</string>
-    <string name="width_limit_description">Proporciona el ancho del vehículo, pueden aplicarse algunas restricciones de ruta para vehículos anchos.</string>
+    <string name="width_limit_description">Indique la anchura del vehículo; pueden aplicarse algunas restricciones de ruta para vehículos anchos.</string>
     <string name="height_limit_description">Proporciona la altura del vehículo, pueden aplicarse algunas restricciones de ruta para vehículos altos.</string>
     <string name="weight_limit_description">Proporciona el peso del vehículo, pueden aplicarse algunas restricciones de ruta para vehículos pesados.</string>
     <string name="gpx_parse_error">Problemas encontrados con un archivo GPX.
@@ -4635,10 +4635,10 @@
     <string name="duplacate_widget_added_snackbar">Se ha añadido a la lista un widget duplicado.</string>
     <string name="first_marker_widget_desc">Puedes configurar el widget para que muestre la distancia o la hora estimada de llegada que queda hasta el primer marcador del mapa.</string>
     <string name="widget_with_dot">Widget.</string>
-    <string name="auto_25_chars_route_tl_kl">Gira a la izquierda y mantente a la izquierda</string>
-    <string name="auto_25_chars_route_tl_kr">Gira a la izquierda y mantente a la derecha</string>
-    <string name="auto_25_chars_route_tr_kl">Gira a la derecha y mantente a la izquierda</string>
-    <string name="auto_25_chars_route_tr_kr">Gira a la derecha y mantente a la derecha</string>
+    <string name="auto_25_chars_route_tl_kl">Gire a la izquierda y manténgase a la izquierda</string>
+    <string name="auto_25_chars_route_tl_kr">Gire a la izquierda y manténgase a la derecha</string>
+    <string name="auto_25_chars_route_tr_kl">Gire a la derecha y manténgase a la izquierda</string>
+    <string name="auto_25_chars_route_tr_kr">Gire a la derecha y manténgase a la derecha</string>
     <string name="true_bearing_wdiget_desc">Ángulo entre el norte verdadero y el punto objetivo observado desde tu ubicación.</string>
     <string name="relative_bearing_widget_desc">Muestra el ángulo entre la dirección de tu movimiento hacia delante y el punto objetivo.</string>
     <string name="time_to_destination_widget_desc">El widget muestra la \"Hora de llegada\" o el \"Tiempo que falta\" hasta el último punto del destino. El tiempo se actualiza constantemente durante la navegación y es igual al tiempo de ruta desde la ubicación actual.</string>
@@ -5728,10 +5728,10 @@
     <string name="auto_25_chars_route_tshr">Gire bruscamente a la derecha</string>
     <string name="auto_25_chars_route_tl">Gire a la izquierda</string>
     <string name="auto_25_chars_route_tshl">Gire bruscamente a la izquierda</string>
-    <string name="auto_25_chars_route_kl">Mantengase a la izquierda</string>
+    <string name="auto_25_chars_route_kl">Manténgase a la izquierda</string>
     <string name="auto_25_chars_route_tr">Gire a la derecha</string>
     <string name="auto_25_chars_route_tslr">Gire ligeramente a la derecha</string>
-    <string name="auto_25_chars_route_kr">Mantengase a la derecha</string>
+    <string name="auto_25_chars_route_kr">Manténgase a la derecha</string>
     <string name="driving_region_uk">Reino Unido y similares</string>
     <string name="driving_region_india">India</string>
     <string name="hugerock_promo_description">Acceso gratuito a funciones que incluyen descargas ilimitadas de mapas, relieves en 3D, etc. Durante %1$s mes(es)</string>
@@ -5787,7 +5787,7 @@
     <string name="open_in_browser">Abrir en el navegador</string>
     <string name="shared_string_source">Fuente</string>
     <string name="shared_string_no_internet_connection">Sin conexión a Internet</string>
-    <string name="no_internet_descr">Por favor, compruebe su conexión e inténtelo de nuevo.</string>
+    <string name="no_internet_descr">Compruebe la conexión y vuelva a intentarlo.</string>
     <string name="no_photos_available_descr">Aún no se han añadido fotos de usuarios a esta ubicación</string>
     <string name="no_photos_available">No hay fotos</string>
     <string name="wikimedia">Wikimedia</string>
@@ -5851,7 +5851,7 @@
     <string name="quick_action_save_recorded_trip_and_continue_summary">Un botón para guardar el viaje actual grabado como un archivo GPX y continuar grabando una nueva pista sin interrupciones.</string>
     <string name="new_trip_segment">Nuevo tramo del viaje</string>
     <string name="quick_action_start_pause_recording">Un botón para iniciar, pausar o reanudar la grabación de la pista GPX.</string>
-    <string name="quick_action_verb_start_pause">Iniciar / Pausar</string>
+    <string name="quick_action_verb_start_pause">Iniciar/pausar</string>
     <string name="help_article_personal_color_palette_schemes_name">Esquemas de colores</string>
     <string name="movies_list">Lista de vídeos</string>
     <string name="quick_action_save_recorded_trip_and_continue">Viaje grabado y continuación</string>
@@ -5993,4 +5993,7 @@
     <string name="choose_location_on_map">Elija una ubicación en el mapa.</string>
     <string name="popular_places">Lugares populares</string>
     <string name="show_list">Mostrar lista</string>
+    <string name="shared_string_length">Longitud</string>
+    <string name="shared_string_avg_altitude">Alt. promedio</string>
+    <string name="shared_string_avg_speed">Vel. mínima</string>
 </resources>
