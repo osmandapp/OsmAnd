@@ -210,7 +210,7 @@ public class ConfigureMapMenu {
 				.setItemDeleteAction(settings.SHOW_BORDERS_OF_DOWNLOADED_MAPS)
 				.setListener(listener));
 
-		selected = settings.SHOW_COORDINATES_GRID.get();
+		selected = app.getGridHelper().isEnabled();
 		adapter.addItem(new ContextMenuItem(COORDINATES_GRID_ID)
 				.setTitleId(R.string.layer_coordinates_grid, activity)
 				.setSelected(selected)

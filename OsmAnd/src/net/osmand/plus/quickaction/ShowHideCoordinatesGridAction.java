@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class ShowHideCoordinatesGridAction extends QuickAction {
 
@@ -34,12 +33,7 @@ public class ShowHideCoordinatesGridAction extends QuickAction {
 
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
-		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
-		boolean enabled = settings.SHOW_COORDINATES_GRID.get();
-		settings.SHOW_COORDINATES_GRID.set(!enabled);
-
-		OsmandApplication app = mapActivity.getMyApplication();
-		app.getCoordinatesGridHelper().updateGridSettings();
+		mapActivity.getMyApplication().getGridHelper().toggleEnable();
 		mapActivity.refreshMap();
 	}
 
@@ -63,6 +57,6 @@ public class ShowHideCoordinatesGridAction extends QuickAction {
 
 	@Override
 	public boolean isActionWithSlash(@NonNull OsmandApplication app) {
-		return app.getSettings().SHOW_COORDINATES_GRID.get();
+		return app.getGridHelper().isEnabled();
 	}
 }

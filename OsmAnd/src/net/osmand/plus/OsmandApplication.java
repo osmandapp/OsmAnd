@@ -672,7 +672,7 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	@NonNull
-	public CoordinatesGridHelper getCoordinatesGridHelper() {
+	public CoordinatesGridHelper getGridHelper() {
 		return coordinatesGridHelper;
 	}
 

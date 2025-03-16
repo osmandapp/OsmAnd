@@ -17,7 +17,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.helpers.CoordinatesGridHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.GridFormat;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
@@ -31,7 +32,7 @@ public class CoordinatesGridController extends BaseDialogController {
 
 	private static final String PROCESS_ID = "configure_coordinates_grid";
 
-	private final OsmandSettings settings;
+	private final CoordinatesGridHelper gridHelper;
 	private ICoordinatesGridScreen screen;
 
 	/**
@@ -39,14 +40,14 @@ public class CoordinatesGridController extends BaseDialogController {
 	 */
 	private boolean keepActive;
 
+	public CoordinatesGridController(@NonNull OsmandApplication app) {
+		super(app);
+		gridHelper = app.getGridHelper();
+	}
+
 	public void bindScreen(@NonNull ICoordinatesGridScreen screen) {
 		this.screen = screen;
 		keepActive = false;
-	}
-
-	public CoordinatesGridController(@NonNull OsmandApplication app) {
-		super(app);
-		settings = app.getSettings();
 	}
 
 	@NonNull
@@ -106,27 +107,25 @@ public class CoordinatesGridController extends BaseDialogController {
 	}
 
 	public boolean isEnabled() {
-		return settings.SHOW_COORDINATES_GRID.get();
+		return gridHelper.isEnabled(getSelectedAppMode());
 	}
 
 	public void setEnabled(boolean enabled) {
-		settings.SHOW_COORDINATES_GRID.set(enabled);
+		gridHelper.setEnabled(getSelectedAppMode(), enabled);
 	}
 
 	@NonNull
 	public GridFormat getGridFormat() {
-		return settings.COORDINATE_GRID_FORMAT.get();
+		return gridHelper.getGridFormat(getSelectedAppMode());
 	}
 
-	public void setGridFormat(@Nullable GridFormat format) {
-		settings.COORDINATE_GRID_FORMAT.set(format);
+	public void setGridFormat(@NonNull GridFormat format) {
+		gridHelper.setGridFormat(getSelectedAppMode(), format);
 	}
 
 	@NonNull
 	public Limits<Integer> getZoomLevels() {
-		int min = settings.COORDINATE_GRID_MIN_ZOOM.get();
-		int max = settings.COORDINATE_GRID_MAX_ZOOM.get();
-		return new Limits<>(min, max);
+		return gridHelper.getZoomLevelsWithRestrictions(getSelectedAppMode());
 	}
 
 	@Override
@@ -135,6 +134,11 @@ public class CoordinatesGridController extends BaseDialogController {
 			super.finishProcessIfNeeded(activity);
 		}
 		screen = null;
+	}
+
+	@NonNull
+	private ApplicationMode getSelectedAppMode() {
+		return app.getSettings().getApplicationMode();
 	}
 
 	@DrawableRes

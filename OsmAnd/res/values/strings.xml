@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="meridian_180">180th meridian</string>
+    <string name="prime_meridian">Prime meridian</string>
+    <string name="equator">Equator</string>
     <string name="show_image_previews">Show image previews</string>
     <string name="quick_action_showhide_coordinates_grid_descr">Action to control the visibility of the Coordinates grid on the map.</string>
     <string name="layer_coordinates_grid">Coordinates grid</string>

@@ -34,7 +34,6 @@ import net.osmand.StateChangedListener;
 import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.*;
-import net.osmand.core.jni.GridConfiguration.Projection;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadPointDouble;
@@ -62,7 +61,6 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.render.UpdateRendererAsyncTask;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
-import net.osmand.plus.settings.enums.GridFormat;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -637,7 +635,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (app.accessibilityEnabled()) {
 			app.showShortToastMessage(app.getString(R.string.zoomIs) + " " + zoom.getBaseZoom());
 		}
-		app.getCoordinatesGridHelper().updateGridSettings();
+		app.getGridHelper().updateGridSettings();
 
 		for (ManualZoomListener listener : manualZoomListeners) {
 			listener.onManualZoomChange();
@@ -2546,7 +2544,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void applyGridSettings(AtlasMapRendererView mapRenderer) {
-		app.getCoordinatesGridHelper().applyGridSettings(mapRenderer);
+		app.getGridHelper().updateGridSettings(mapRenderer);
 	}
 
 	public void applyDebugSettings(MapRendererView mapRenderer) {

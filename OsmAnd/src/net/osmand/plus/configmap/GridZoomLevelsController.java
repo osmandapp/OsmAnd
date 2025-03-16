@@ -10,23 +10,19 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.helpers.CoordinatesGridHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
 
 public class GridZoomLevelsController extends ZoomLevelsController {
 
-	public static final int MIN_ZOOM = 4;
-	public static final int MAX_ZOOM = 19;
-
-	private final CommonPreference<Integer> minZoomPreference;
-	private final CommonPreference<Integer> maxZoomPreference;
+	private final CoordinatesGridHelper gridHelper;
+	private final ApplicationMode appMode;
 	private boolean applyChanges = false;
 
 	public GridZoomLevelsController(@NonNull OsmandApplication app) {
-		super(app, createInitialLimits(app), new Limits<>(MIN_ZOOM, MAX_ZOOM));
-		OsmandSettings settings = app.getSettings();
-		minZoomPreference = settings.COORDINATE_GRID_MIN_ZOOM;
-		maxZoomPreference = settings.COORDINATE_GRID_MAX_ZOOM;
+		super(app, createInitialLimits(app), createAvailableLimits(app));
+		appMode = app.getSettings().getApplicationMode();
+		gridHelper = app.getGridHelper();
 	}
 
 	@Override
@@ -39,8 +35,7 @@ public class GridZoomLevelsController extends ZoomLevelsController {
 
 	@Override
 	public void onResetToDefault() {
-		minZoomPreference.resetToDefault();
-		maxZoomPreference.resetToDefault();
+		gridHelper.resetZoomLevels(appMode);
 		selectedLimits = getSavedZoomLimits();
 	}
 
@@ -51,20 +46,23 @@ public class GridZoomLevelsController extends ZoomLevelsController {
 	}
 
 	protected void setSavedZoomLimits(@NonNull Limits<Integer> limits) {
-		minZoomPreference.set(limits.min());
-		maxZoomPreference.set(limits.max());
+		gridHelper.setZoomLevels(appMode, limits);
 	}
 
 	@Override
 	@NonNull
 	protected Limits<Integer> getSavedZoomLimits() {
-		return new Limits<>(minZoomPreference.get(), maxZoomPreference.get());
+		return gridHelper.getZoomLevelsWithRestrictions(appMode);
 	}
 
 	@NonNull
 	private static Limits<Integer> createInitialLimits(@NonNull OsmandApplication app) {
-		OsmandSettings settings = app.getSettings();
-		return new Limits<>(settings.COORDINATE_GRID_MIN_ZOOM.get(), settings.COORDINATE_GRID_MAX_ZOOM.get());
+		return app.getGridHelper().getZoomLevelsWithRestrictions();
+	}
+
+	@NonNull
+	private static Limits<Integer> createAvailableLimits(@NonNull OsmandApplication app) {
+		return app.getGridHelper().getSupportedZoomLevels();
 	}
 
 	public static void showDialog(@NonNull FragmentActivity activity) {
