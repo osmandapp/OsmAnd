@@ -88,15 +88,15 @@ public class ConfigureMapMenu {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
-	private Optional<List<RenderingRuleProperty>> propertiesOfDetailsBottomSheet = Optional.empty();
 	private Optional<CustomAlert.SingleSelectionDialogFragment> roadStyleDialog = Optional.empty();
-
-	public Optional<List<RenderingRuleProperty>> getPropertiesOfDetailsBottomSheet() {
-		return propertiesOfDetailsBottomSheet;
-	}
+	private Optional<ConfigureMapDialogs.MapLanguageDialog> mapLanguageDialog = Optional.empty();
 
 	public Optional<CustomAlert.SingleSelectionDialogFragment> getRoadStyleDialog() {
 		return roadStyleDialog;
+	}
+
+	public Optional<ConfigureMapDialogs.MapLanguageDialog> getMapLanguageDialog() {
+		return mapLanguageDialog;
 	}
 
 	public ConfigureMapMenu(@NonNull OsmandApplication app) {
@@ -568,19 +568,9 @@ public class ConfigureMapMenu {
 		String localeDescr = settings.MAP_PREFERRED_LOCALE.get();
 		localeDescr = localeDescr == null || localeDescr.isEmpty() ? activity.getString(R.string.local_map_names)
 				: localeDescr;
-		adapter.addItem(new ContextMenuItem(MAP_LANGUAGE_ID)
-				.setTitleId(R.string.map_locale, activity)
-				.setDescription(localeDescr).setLayout(R.layout.list_item_single_line_descrition_narrow)
-				.setIcon(R.drawable.ic_action_map_language)
-				.setListener((_uiAdapter, view, item, isChecked) -> {
-					if (AndroidUtils.isActivityNotDestroyed(activity)) {
-						ConfigureMapDialogs
-								.createMapLanguageDialog(activity, nightMode, item, _uiAdapter)
-								.show(activity.getSupportFragmentManager(), null);
-					}
-					return false;
-				})
-				.setItemDeleteAction(settings.MAP_PREFERRED_LOCALE));
+		final MapLanguageItemAndDialog mapLanguageItemAndDialog = createMapLanguageItemAndDialog(activity, nightMode, localeDescr, uiAdapter);
+		adapter.addItem(mapLanguageItemAndDialog.item);
+		mapLanguageDialog = mapLanguageItemAndDialog.dialog;
 
 		props = createProperties(customRules, R.string.rendering_category_details, R.drawable.ic_action_layers,
 				UI_CATEGORY_DETAILS, activity, DETAILS_ID, nightMode);
@@ -602,6 +592,53 @@ public class ConfigureMapMenu {
 		}
 	}
 
+	private MapLanguageItemAndDialog createMapLanguageItemAndDialog(final MapActivity activity,
+																	final boolean nightMode,
+																	final String localeDescr,
+																	final Optional<OnDataChangeUiAdapter> uiAdapter) {
+		final ContextMenuItem mapLanguageItem =
+				new ContextMenuItem(MAP_LANGUAGE_ID)
+						.setTitleId(R.string.map_locale, activity)
+						.setDescription(localeDescr)
+						.setLayout(R.layout.list_item_single_line_descrition_narrow)
+						.setIcon(R.drawable.ic_action_map_language)
+						.setItemDeleteAction(settings.MAP_PREFERRED_LOCALE);
+		final Function<OnDataChangeUiAdapter, ConfigureMapDialogs.MapLanguageDialog> createDialog =
+				_uiAdapter ->
+						ConfigureMapDialogs.createMapLanguageDialog(
+								activity,
+								nightMode,
+								mapLanguageItem,
+								_uiAdapter);
+		final Optional<ConfigureMapDialogs.MapLanguageDialog> dialog = uiAdapter.map(createDialog);
+		mapLanguageItem
+				.setListener(
+						new ItemClickListener() {
+
+							@Override
+							public boolean onContextMenuClick(final OnDataChangeUiAdapter uiAdapter,
+															  final View view,
+															  final ContextMenuItem item,
+															  final boolean isChecked) {
+								if (AndroidUtils.isActivityNotDestroyed(activity)) {
+									this
+											.getDialog(uiAdapter)
+											.show(activity.getSupportFragmentManager(), null);
+								}
+								return false;
+							}
+
+							private ConfigureMapDialogs.MapLanguageDialog getDialog(final OnDataChangeUiAdapter uiAdapter) {
+								return dialog.orElseGet(() -> createDialog.apply(uiAdapter));
+							}
+						});
+		return new MapLanguageItemAndDialog(mapLanguageItem, dialog);
+	}
+
+	public record MapLanguageItemAndDialog(ContextMenuItem item,
+										   Optional<ConfigureMapDialogs.MapLanguageDialog> dialog) {
+	}
+
 	private ContextMenuItem createProperties(List<RenderingRuleProperty> customRules,
 											 @StringRes int strId,
 											 @DrawableRes int icon,
@@ -620,9 +657,6 @@ public class ConfigureMapMenu {
 				preferences.add(settings.getCustomRenderBooleanProperty(p.getAttrName()));
 				it.remove();
 			}
-		}
-		if (UI_CATEGORY_DETAILS.equals(category)) {
-			propertiesOfDetailsBottomSheet = Optional.of(properties);
 		}
 		if (!preferences.isEmpty()) {
 			ItemClickListener clickListener = (uiAdapter, view, item, isChecked) -> {

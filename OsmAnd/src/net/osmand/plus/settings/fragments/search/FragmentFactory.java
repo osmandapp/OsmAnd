@@ -7,6 +7,7 @@ import android.content.Context;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceFragmentCompat;
 
+import net.osmand.plus.configmap.ConfigureMapDialogs;
 import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.widgets.alert.CustomAlert;
@@ -47,6 +48,14 @@ class FragmentFactory implements de.KnollFrank.lib.settingssearch.fragment.Fragm
 			if (srcProxy instanceof final ConfigureMapFragment.PreferenceFragment _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal().getRoadStyleDialog());
 			} else if (srcProxy instanceof final CustomAlert.SingleSelectionDialogFragment.PreferenceFragment _srcProxy) {
+				return Optional.of((T) _srcProxy.getPrincipal());
+			}
+		}
+		if (ConfigureMapDialogs.MapLanguageDialog.class.equals(fragmentClass) && src.isPresent()) {
+			final PreferenceFragmentCompat srcProxy = src.orElseThrow().host();
+			if (srcProxy instanceof final ConfigureMapFragment.PreferenceFragment _srcProxy) {
+				return Optional.of((T) _srcProxy.getPrincipal().getMapLanguageDialog());
+			} else if (srcProxy instanceof final ConfigureMapDialogs.MapLanguageDialog.PreferenceFragment _srcProxy) {
 				return Optional.of((T) _srcProxy.getPrincipal());
 			}
 		}

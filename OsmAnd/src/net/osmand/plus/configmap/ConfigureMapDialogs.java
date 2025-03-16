@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.DialogFragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
 
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.plus.OsmandApplication;
@@ -35,8 +39,15 @@ import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
-import java.util.*;
+import org.threeten.bp.Duration;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
+import de.KnollFrank.lib.settingssearch.client.searchDatabaseConfig.InitializePreferenceFragmentWithFragmentBeforeOnCreate;
+import de.KnollFrank.lib.settingssearch.results.Setting;
+import de.KnollFrank.lib.settingssearch.results.SettingHighlighter;
+import de.KnollFrank.lib.settingssearch.results.SettingHighlighterProvider;
 import gnu.trove.list.array.TIntArrayList;
 
 public class ConfigureMapDialogs {
@@ -247,22 +258,99 @@ public class ConfigureMapDialogs {
 			item.setDescription(localeDescr);
 			uiAdapter.onDataSetInvalidated();
 		});
-		return new MapLanguageDialog(b.create());
+		return new MapLanguageDialog(b.create(), mapLanguages);
 	}
 
 	// FK-TODO: DRY with CustomAlert.SingleSelectionDialogFragment
-	public static class MapLanguageDialog extends DialogFragment {
+	public static class MapLanguageDialog extends DialogFragment implements SettingHighlighterProvider  {
 
 		private final AlertDialog alertDialog;
+		private final Map<String, String> mapLanguageNameById;
 
-		public MapLanguageDialog(final AlertDialog alertDialog) {
+		public MapLanguageDialog(final AlertDialog alertDialog, final Map<String, String> mapLanguageNameById) {
 			this.alertDialog = alertDialog;
+			this.mapLanguageNameById = mapLanguageNameById;
 		}
 
 		@NonNull
 		@Override
 		public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
 			return alertDialog;
+		}
+
+		@Override
+		public SettingHighlighter getSettingHighlighter() {
+			return new ViewOfSettingHighlighter(
+					this::getView,
+					Duration.ofSeconds(1));
+		}
+
+		public void executeOnShown(final Runnable runnable) {
+			getListView().post(runnable);
+		}
+
+		public void scrollToSetting(final Setting setting) {
+			getListView().setSelection(getIndexedOf(setting));
+		}
+
+		private View getView(final Setting setting) {
+			return getListView().getChildAt(getIndexedOf(setting));
+		}
+
+		private ListView getListView() {
+			return ((AlertDialog) getDialog()).getListView();
+		}
+
+		private int getIndexedOf(final Setting setting) {
+			return getKeys().indexOf(setting.getKey());
+		}
+
+		private List<String> getKeys() {
+			return new ArrayList<>(mapLanguageNameById.keySet());
+		}
+
+		public static class PreferenceFragment extends PreferenceFragmentCompat implements InitializePreferenceFragmentWithFragmentBeforeOnCreate<MapLanguageDialog> {
+
+			private MapLanguageDialog mapLanguageDialog;
+			private Map<String, String> mapLanguageNameById;
+
+			@Override
+			public void initializePreferenceFragmentWithFragmentBeforeOnCreate(final MapLanguageDialog mapLanguageDialog) {
+				this.mapLanguageDialog = mapLanguageDialog;
+				mapLanguageNameById = mapLanguageDialog.mapLanguageNameById;
+			}
+
+			public MapLanguageDialog getPrincipal() {
+				return mapLanguageDialog;
+			}
+
+			@Override
+			public void onCreatePreferences(@Nullable final Bundle savedInstanceState, @Nullable final String rootKey) {
+				final Context context = getPreferenceManager().getContext();
+				final PreferenceScreen screen = getPreferenceManager().createPreferenceScreen(context);
+				screen.setTitle("screen title");
+				screen.setSummary("screen summary");
+				PreferenceFragment
+						.asPreferences(mapLanguageNameById, context)
+						.forEach(screen::addPreference);
+				setPreferenceScreen(screen);
+			}
+
+			private static Collection<Preference> asPreferences(final Map<String, String> mapLanguageNameById,
+																final Context context) {
+				return mapLanguageNameById
+						.entrySet()
+						.stream()
+						.map(id_mapLanguageName_entry -> asPreference(id_mapLanguageName_entry.getKey(), id_mapLanguageName_entry.getValue(), context))
+						.collect(Collectors.toUnmodifiableList());
+			}
+
+			private static Preference asPreference(final String id, final String mapLanguageName, final Context context) {
+				final Preference preference = new Preference(context);
+				preference.setKey(id);
+				preference.setTitle(mapLanguageName);
+				return preference;
+			}
 		}
 	}
 

@@ -12,6 +12,7 @@ import androidx.preference.Preference;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.configmap.ConfigureMapDialogs;
 import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.dialogs.DetailsBottomSheet;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
@@ -110,7 +111,8 @@ public class SettingsSearchButtonHelper {
 						new PrincipalAndProxy<>(DetailsBottomSheet.class, DetailsBottomSheet.PreferenceFragment.class),
 						new PrincipalAndProxy<>(TransportLinesFragment.class, TransportLinesFragment.PreferenceFragment.class),
 						new PrincipalAndProxy<>(SelectMapStyleBottomSheetDialogFragment.class, SelectMapStyleBottomSheetDialogFragment.PreferenceFragment.class),
-						new PrincipalAndProxy<>(CustomAlert.SingleSelectionDialogFragment.class, CustomAlert.SingleSelectionDialogFragment.PreferenceFragment.class)));
+						new PrincipalAndProxy<>(CustomAlert.SingleSelectionDialogFragment.class, CustomAlert.SingleSelectionDialogFragment.PreferenceFragment.class),
+						new PrincipalAndProxy<>(ConfigureMapDialogs.MapLanguageDialog.class, ConfigureMapDialogs.MapLanguageDialog.PreferenceFragment.class)));
 	}
 
 	private static Map<Class<? extends Activity>, ActivityInitializer<?>> getActivityInitializerByActivity(final FragmentManager fragmentManager) {

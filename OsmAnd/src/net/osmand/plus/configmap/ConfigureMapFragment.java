@@ -78,9 +78,14 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 
 	private boolean useAnimation;
 	private CustomAlert.SingleSelectionDialogFragment roadStyleDialog;
+	private ConfigureMapDialogs.MapLanguageDialog mapLanguageDialog;
 
 	public CustomAlert.SingleSelectionDialogFragment getRoadStyleDialog() {
 		return roadStyleDialog;
+	}
+
+	public ConfigureMapDialogs.MapLanguageDialog getMapLanguageDialog() {
+		return mapLanguageDialog;
 	}
 
 	@Override
@@ -169,6 +174,7 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 		ConfigureMapMenu menu = new ConfigureMapMenu(app);
 		adapter = menu.createListAdapter(mapActivity, Optional.of(this));
 		roadStyleDialog = menu.getRoadStyleDialog().orElseThrow();
+		mapLanguageDialog = menu.getMapLanguageDialog().orElseThrow();
 		ContextMenuUtils.removeHiddenItems(adapter);
 		ContextMenuUtils.hideExtraDividers(adapter);
 		items = ContextMenuUtils.collectItemsByCategories(adapter.getItems());
@@ -482,7 +488,24 @@ public class ConfigureMapFragment extends BaseOsmAndFragment implements OnDataCh
 								return false;
 							}
 						});
-				// FK-TODO: case MAP_LANGUAGE_ID ->
+				case MAP_LANGUAGE_ID -> Optional.of(
+						new PreferenceFragmentHandler() {
+
+							@Override
+							public Class<? extends PreferenceFragmentCompat> getClassOfPreferenceFragment() {
+								return ConfigureMapDialogs.MapLanguageDialog.PreferenceFragment.class;
+							}
+
+							@Override
+							public PreferenceFragmentCompat createPreferenceFragment(final Context context, final Optional<Fragment> target) {
+								return new ConfigureMapDialogs.MapLanguageDialog.PreferenceFragment();
+							}
+
+							@Override
+							public boolean showPreferenceFragment(final PreferenceFragmentCompat preferenceFragment) {
+								return false;
+							}
+						});
 				default -> Optional.empty();
 			};
 		}

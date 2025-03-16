@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.configmap.ConfigureMapDialogs;
 import net.osmand.plus.configmap.ConfigureMapFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.DetailsBottomSheet;
@@ -92,6 +93,17 @@ class ShowSettingsFragmentAndHighlightSetting implements de.KnollFrank.lib.setti
 				singleSelectionDialogFragment
 						.getSettingHighlighter()
 						.highlightSetting(singleSelectionDialogFragment, setting);
+			});
+			return true;
+		}
+		if (settingsFragment instanceof final ConfigureMapDialogs.MapLanguageDialog mapLanguageDialog) {
+			IntentHelper.showConfigureMapDashboard(mapActivity.getDashboard());
+			mapLanguageDialog.showNow(mapActivity.getSupportFragmentManager(), null);
+			mapLanguageDialog.executeOnShown(() -> {
+				mapLanguageDialog.scrollToSetting(setting);
+				mapLanguageDialog
+						.getSettingHighlighter()
+						.highlightSetting(mapLanguageDialog, setting);
 			});
 			return true;
 		}
